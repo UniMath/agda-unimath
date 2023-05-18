@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 
 A square of identifications
 
-```md
+```text
           top
       x ------- y
       |         |

@@ -59,7 +59,7 @@ module _
 
   power-add-Ring :
     (m n : ℕ) {x : type-Ring R} →
-    power-Ring R (add-ℕ m n) x ＝
+    power-Ring R (m +ℕ n) x ＝
     mul-Ring R (power-Ring R m x) (power-Ring R n x)
   power-add-Ring = power-add-Semiring (semiring-Ring R)
 ```

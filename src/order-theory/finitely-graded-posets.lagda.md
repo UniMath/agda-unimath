@@ -26,10 +26,10 @@ open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import order-theory.largest-elements-posets
-open import order-theory.least-elements-posets
+open import order-theory.bottom-elements-posets
 open import order-theory.posets
 open import order-theory.preorders
+open import order-theory.top-elements-posets
 open import order-theory.total-orders
 
 open import univalent-combinatorics.standard-finite-types
@@ -39,7 +39,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A finitely graded poset consists of a family of types indexed by
+A **finitely graded poset** consists of a family of types indexed by
 `Fin (succ-ℕ k)` equipped with an ordering relation from `Fin (inl i)` to
 `Fin (succ-Fin (inl i))` for each `i : Fin k`.
 
@@ -350,117 +350,119 @@ module _
     (x : face-Finitely-Graded-Poset X (zero-Fin k))
     where
 
-    is-least-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
-    is-least-element-Finitely-Graded-Poset-Prop =
-      is-least-element-Poset-Prop
+    is-bottom-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
+    is-bottom-element-Finitely-Graded-Poset-Prop =
+      is-bottom-element-Poset-Prop
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
-    is-least-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
-    is-least-element-Finitely-Graded-Poset =
-      is-least-element-Poset
+    is-bottom-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+    is-bottom-element-Finitely-Graded-Poset =
+      is-bottom-element-Poset
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
-    is-prop-is-least-element-Finitely-Graded-Poset :
-      is-prop is-least-element-Finitely-Graded-Poset
-    is-prop-is-least-element-Finitely-Graded-Poset =
-      is-prop-is-least-element-Poset
+    is-prop-is-bottom-element-Finitely-Graded-Poset :
+      is-prop is-bottom-element-Finitely-Graded-Poset
+    is-prop-is-bottom-element-Finitely-Graded-Poset =
+      is-prop-is-bottom-element-Poset
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
-  least-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
-  least-element-Finitely-Graded-Poset =
+  has-bottom-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+  has-bottom-element-Finitely-Graded-Poset =
     Σ ( face-Finitely-Graded-Poset X (zero-Fin k))
-      ( is-least-element-Finitely-Graded-Poset)
+      ( is-bottom-element-Finitely-Graded-Poset)
 
-  all-elements-equal-least-element-Finitely-Graded-Poset :
-    all-elements-equal least-element-Finitely-Graded-Poset
-  all-elements-equal-least-element-Finitely-Graded-Poset (pair x H) (pair y K) =
+  all-elements-equal-has-bottom-element-Finitely-Graded-Poset :
+    all-elements-equal has-bottom-element-Finitely-Graded-Poset
+  all-elements-equal-has-bottom-element-Finitely-Graded-Poset
+    ( pair x H)
+    ( pair y K) =
     eq-type-subtype
-      ( is-least-element-Finitely-Graded-Poset-Prop)
+      ( is-bottom-element-Finitely-Graded-Poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( H (element-face-Finitely-Graded-Poset X y))
         ( Id-Prop (face-Finitely-Graded-Poset-Set X (zero-Fin k)) x y)
         ( eq-path-faces-Finitely-Graded-Poset X x y))
 
-  is-prop-least-element-Finitely-Graded-Poset :
-    is-prop least-element-Finitely-Graded-Poset
-  is-prop-least-element-Finitely-Graded-Poset =
+  is-prop-has-bottom-element-Finitely-Graded-Poset :
+    is-prop has-bottom-element-Finitely-Graded-Poset
+  is-prop-has-bottom-element-Finitely-Graded-Poset =
     is-prop-all-elements-equal
-      all-elements-equal-least-element-Finitely-Graded-Poset
+      all-elements-equal-has-bottom-element-Finitely-Graded-Poset
 
-  least-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
-  pr1 least-element-Finitely-Graded-Poset-Prop =
-    least-element-Finitely-Graded-Poset
-  pr2 least-element-Finitely-Graded-Poset-Prop =
-    is-prop-least-element-Finitely-Graded-Poset
+  has-bottom-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
+  pr1 has-bottom-element-Finitely-Graded-Poset-Prop =
+    has-bottom-element-Finitely-Graded-Poset
+  pr2 has-bottom-element-Finitely-Graded-Poset-Prop =
+    is-prop-has-bottom-element-Finitely-Graded-Poset
 
   module _
     (x : face-Finitely-Graded-Poset X (neg-one-Fin k))
     where
 
-    is-largest-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
-    is-largest-element-Finitely-Graded-Poset-Prop =
-      is-largest-element-Poset-Prop
+    is-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
+    is-top-element-Finitely-Graded-Poset-Prop =
+      is-top-element-Poset-Prop
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
-    is-largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
-    is-largest-element-Finitely-Graded-Poset =
-      is-largest-element-Poset
+    is-top-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+    is-top-element-Finitely-Graded-Poset =
+      is-top-element-Poset
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
-    is-prop-is-largest-element-Finitely-Graded-Poset :
-      is-prop is-largest-element-Finitely-Graded-Poset
-    is-prop-is-largest-element-Finitely-Graded-Poset =
-      is-prop-is-largest-element-Poset
+    is-prop-is-top-element-Finitely-Graded-Poset :
+      is-prop is-top-element-Finitely-Graded-Poset
+    is-prop-is-top-element-Finitely-Graded-Poset =
+      is-prop-is-top-element-Poset
         ( poset-Finitely-Graded-Poset X)
         ( element-face-Finitely-Graded-Poset X x)
 
-  largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
-  largest-element-Finitely-Graded-Poset =
+  has-top-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+  has-top-element-Finitely-Graded-Poset =
     Σ ( face-Finitely-Graded-Poset X (neg-one-Fin k))
-      ( is-largest-element-Finitely-Graded-Poset)
+      ( is-top-element-Finitely-Graded-Poset)
 
-  all-elements-equal-largest-element-Finitely-Graded-Poset :
-    all-elements-equal largest-element-Finitely-Graded-Poset
-  all-elements-equal-largest-element-Finitely-Graded-Poset
+  all-elements-equal-has-top-element-Finitely-Graded-Poset :
+    all-elements-equal has-top-element-Finitely-Graded-Poset
+  all-elements-equal-has-top-element-Finitely-Graded-Poset
     (pair x H) (pair y K) =
     eq-type-subtype
-      ( is-largest-element-Finitely-Graded-Poset-Prop)
+      ( is-top-element-Finitely-Graded-Poset-Prop)
       ( apply-universal-property-trunc-Prop
         ( K (element-face-Finitely-Graded-Poset X x))
         ( Id-Prop (face-Finitely-Graded-Poset-Set X (neg-one-Fin k)) x y)
         ( eq-path-faces-Finitely-Graded-Poset X x y))
 
-  is-prop-largest-element-Finitely-Graded-Poset :
-    is-prop largest-element-Finitely-Graded-Poset
-  is-prop-largest-element-Finitely-Graded-Poset =
+  is-prop-has-top-element-Finitely-Graded-Poset :
+    is-prop has-top-element-Finitely-Graded-Poset
+  is-prop-has-top-element-Finitely-Graded-Poset =
     is-prop-all-elements-equal
-      all-elements-equal-largest-element-Finitely-Graded-Poset
+      all-elements-equal-has-top-element-Finitely-Graded-Poset
 
-  largest-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
-  pr1 largest-element-Finitely-Graded-Poset-Prop =
-    largest-element-Finitely-Graded-Poset
-  pr2 largest-element-Finitely-Graded-Poset-Prop =
-    is-prop-largest-element-Finitely-Graded-Poset
+  has-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
+  pr1 has-top-element-Finitely-Graded-Poset-Prop =
+    has-top-element-Finitely-Graded-Poset
+  pr2 has-top-element-Finitely-Graded-Poset-Prop =
+    is-prop-has-top-element-Finitely-Graded-Poset
 
-  least-and-largest-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
-  least-and-largest-element-Finitely-Graded-Poset-Prop =
+  has-bottom-and-top-element-Finitely-Graded-Poset-Prop : Prop (l1 ⊔ l2)
+  has-bottom-and-top-element-Finitely-Graded-Poset-Prop =
     prod-Prop
-      least-element-Finitely-Graded-Poset-Prop
-      largest-element-Finitely-Graded-Poset-Prop
+      has-bottom-element-Finitely-Graded-Poset-Prop
+      has-top-element-Finitely-Graded-Poset-Prop
 
-  least-and-largest-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
-  least-and-largest-element-Finitely-Graded-Poset =
-    type-Prop least-and-largest-element-Finitely-Graded-Poset-Prop
+  has-bottom-and-top-element-Finitely-Graded-Poset : UU (l1 ⊔ l2)
+  has-bottom-and-top-element-Finitely-Graded-Poset =
+    type-Prop has-bottom-and-top-element-Finitely-Graded-Poset-Prop
 
-  is-prop-least-and-largest-element-Finitely-Graded-Poset :
-    is-prop least-and-largest-element-Finitely-Graded-Poset
-  is-prop-least-and-largest-element-Finitely-Graded-Poset =
-    is-prop-type-Prop least-and-largest-element-Finitely-Graded-Poset-Prop
+  is-prop-has-bottom-and-top-element-Finitely-Graded-Poset :
+    is-prop has-bottom-and-top-element-Finitely-Graded-Poset
+  is-prop-has-bottom-and-top-element-Finitely-Graded-Poset =
+    is-prop-type-Prop has-bottom-and-top-element-Finitely-Graded-Poset-Prop
 ```
 
 ## Finitely graded subposets

@@ -52,8 +52,8 @@ succ-ℕ+ℕ : ℕ + ℕ → ℕ + ℕ
 succ-ℕ+ℕ = map-coprod succ-ℕ succ-ℕ
 
 map-ℕ+ℕ-to-ℕ : ℕ + ℕ → ℕ
-map-ℕ+ℕ-to-ℕ (inl x) = mul-ℕ 2 x
-map-ℕ+ℕ-to-ℕ (inr x) = succ-ℕ (mul-ℕ 2 x)
+map-ℕ+ℕ-to-ℕ (inl x) = 2 *ℕ x
+map-ℕ+ℕ-to-ℕ (inr x) = succ-ℕ (2 *ℕ x)
 
 action-map-ℕ+ℕ-to-ℕ-on-succ-ℕ+ℕ :
   (x : ℕ + ℕ) →
@@ -79,29 +79,29 @@ is-split-surjective-map-ℕ+ℕ-to-ℕ (succ-ℕ (succ-ℕ b)) =
 
 is-injective-map-ℕ+ℕ-to-ℕ : is-injective map-ℕ+ℕ-to-ℕ
 is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inl y} p =
-  ( ap inl (is-injective-mul-succ-ℕ 1 p))
+  ( ap inl (is-injective-left-mul-succ-ℕ 1 p))
 is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inr y} p = ex-falso (t s)
   where
-    s : (div-ℕ 2 (succ-ℕ (mul-ℕ 2 y)))
+    s : (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
     s = concatenate-div-eq-ℕ (x , commutative-mul-ℕ x 2) p
 
-    t : ¬ (div-ℕ 2 (succ-ℕ (mul-ℕ 2 y)))
+    t : ¬ (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
     t =
       ( is-odd-succ-is-even-ℕ
-        ( mul-ℕ 2 y)
+        ( 2 *ℕ y)
         ( y , commutative-mul-ℕ y 2))
 is-injective-map-ℕ+ℕ-to-ℕ {inr x} {inl y} p = ex-falso (t s)
   where
-    s : (div-ℕ 2 (succ-ℕ (mul-ℕ 2 x)))
+    s : (div-ℕ 2 (succ-ℕ (2 *ℕ x)))
     s = concatenate-div-eq-ℕ (y , commutative-mul-ℕ y 2) (inv p)
 
-    t : ¬ (div-ℕ 2 (succ-ℕ (mul-ℕ 2 x)))
+    t : ¬ (div-ℕ 2 (succ-ℕ (2 *ℕ x)))
     t =
       ( is-odd-succ-is-even-ℕ
-        ( mul-ℕ 2 x)
+        ( 2 *ℕ x)
         ( x , commutative-mul-ℕ x 2))
 is-injective-map-ℕ+ℕ-to-ℕ {inr x} {inr y} p =
-  ( ap inr (is-injective-mul-succ-ℕ 1 (is-injective-succ-ℕ p)))
+  ( ap inr (is-injective-left-mul-succ-ℕ 1 (is-injective-succ-ℕ p)))
 
 is-equiv-map-ℕ+ℕ-to-ℕ : is-equiv map-ℕ+ℕ-to-ℕ
 is-equiv-map-ℕ+ℕ-to-ℕ =

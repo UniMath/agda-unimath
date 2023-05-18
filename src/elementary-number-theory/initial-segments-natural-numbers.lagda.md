@@ -25,7 +25,7 @@ open import foundation.universe-levels
 An **initial segment** of the natural numbers is a subtype `P : ℕ → Prop` such
 that the implication
 
-```md
+```text
   P (n + 1) → P n
 ```
 

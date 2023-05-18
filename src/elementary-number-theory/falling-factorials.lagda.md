@@ -25,7 +25,7 @@ falling-factorial-ℕ zero-ℕ zero-ℕ = 1
 falling-factorial-ℕ zero-ℕ (succ-ℕ m) = 0
 falling-factorial-ℕ (succ-ℕ n) zero-ℕ = 1
 falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
-  mul-ℕ (succ-ℕ n) (falling-factorial-ℕ n m)
+  (succ-ℕ n) *ℕ (falling-factorial-ℕ n m)
 
 {-
 Fin-falling-factorial-ℕ :

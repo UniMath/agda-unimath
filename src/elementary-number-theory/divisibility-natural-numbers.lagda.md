@@ -35,8 +35,8 @@ a natural number `k` equipped with an identification `km ＝ n`. Using the
 Curry-Howard interpretation of logic into type theory, we express divisibility
 as follows:
 
-```md
-  div-ℕ m n := Σ (k : ℕ), mul-ℕ k m ＝ n.
+```text
+  div-ℕ m n := Σ (k : ℕ), k *ℕ m ＝ n.
 ```
 
 If `n` is a nonzero natural number, then `div-ℕ m n` is always a proposition in
@@ -46,17 +46,17 @@ the sense that the type `div-ℕ m n` contains at most one element.
 
 ```agda
 div-ℕ : ℕ → ℕ → UU lzero
-div-ℕ m n = Σ ℕ (λ k → mul-ℕ k m ＝ n)
+div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
 
 quotient-div-ℕ : (x y : ℕ) → div-ℕ x y → ℕ
 quotient-div-ℕ x y H = pr1 H
 
 eq-quotient-div-ℕ :
-  (x y : ℕ) (H : div-ℕ x y) → mul-ℕ (quotient-div-ℕ x y H) x ＝ y
+  (x y : ℕ) (H : div-ℕ x y) → (quotient-div-ℕ x y H) *ℕ x ＝ y
 eq-quotient-div-ℕ x y H = pr2 H
 
 eq-quotient-div-ℕ' :
-  (x y : ℕ) (H : div-ℕ x y) → mul-ℕ x (quotient-div-ℕ x y H) ＝ y
+  (x y : ℕ) (H : div-ℕ x y) → x *ℕ (quotient-div-ℕ x y H) ＝ y
 eq-quotient-div-ℕ' x y H =
   commutative-mul-ℕ x (quotient-div-ℕ x y H) ∙ eq-quotient-div-ℕ x y H
 
@@ -84,11 +84,33 @@ concatenate-eq-div-eq-ℕ refl p refl = p
 
 ## Properties
 
+### The quotients of a natural number `n` by two natural numbers `p` and `q` are equal if `p` and `q` are equal
+
+```agda
+eq-quotient-div-eq-div-ℕ :
+  (x y z : ℕ) → is-nonzero-ℕ x → x ＝ y →
+  (H : div-ℕ x z) → (I : div-ℕ y z) →
+  quotient-div-ℕ x z H ＝ quotient-div-ℕ y z I
+eq-quotient-div-eq-div-ℕ x y z n e H I =
+  is-injective-left-mul-ℕ
+    ( x)
+    ( n)
+  ( tr
+    ( λ p →
+      x *ℕ (quotient-div-ℕ x z H) ＝
+      p *ℕ (quotient-div-ℕ y z I))
+    ( inv e)
+    ( commutative-mul-ℕ x (quotient-div-ℕ x z H) ∙
+      ( eq-quotient-div-ℕ x z H ∙
+        ( inv (eq-quotient-div-ℕ y z I) ∙
+           commutative-mul-ℕ (quotient-div-ℕ y z I) y))))
+```
+
 ### Divisibility by a nonzero natural number is a property
 
 ```agda
 is-prop-div-ℕ : (k x : ℕ) → is-nonzero-ℕ k → is-prop (div-ℕ k x)
-is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-mul-ℕ' k f) x
+is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-right-mul-ℕ k f) x
 ```
 
 ### The divisibility relation is a partial order on the natural numbers
@@ -110,19 +132,19 @@ antisymmetric-div-ℕ (succ-ℕ x) zero-ℕ H (pair l q) =
   inv q ∙ right-zero-law-mul-ℕ l
 antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
   ( inv (left-unit-law-mul-ℕ (succ-ℕ x))) ∙
-  ( ( ap ( mul-ℕ' (succ-ℕ x))
+  ( ( ap ( _*ℕ (succ-ℕ x))
          ( inv
            ( is-one-right-is-one-mul-ℕ l k
-             ( is-one-is-left-unit-mul-ℕ (mul-ℕ l k) x
+             ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
                ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
-                 ( ap (mul-ℕ l) p ∙ q)))))) ∙
+                 ( ap (l *ℕ_) p ∙ q)))))) ∙
     ( p))
 
 transitive-div-ℕ :
   (x y z : ℕ) → div-ℕ x y → div-ℕ y z → div-ℕ x z
-pr1 (transitive-div-ℕ x y z (pair k p) (pair l q)) = mul-ℕ l k
+pr1 (transitive-div-ℕ x y z (pair k p) (pair l q)) = l *ℕ k
 pr2 (transitive-div-ℕ x y z (pair k p) (pair l q)) =
-  associative-mul-ℕ l k x ∙ (ap (mul-ℕ l) p ∙ q)
+  associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
 ```
 
 ### If `x` is nonzero and `d | x`, then `d ≤ x`
@@ -232,19 +254,19 @@ is-zero-div-ℕ d (succ-ℕ x) H (pair (succ-ℕ k) p) =
     ( contradiction-le-ℕ
       ( succ-ℕ x) d H
       ( concatenate-leq-eq-ℕ d
-        ( leq-add-ℕ' d (mul-ℕ k d)) p))
+        ( leq-add-ℕ' d (k *ℕ d)) p))
 ```
 
 ### If `x` divides `y` then `x` divides any multiple of `y`
 
 ```agda
 div-mul-ℕ :
-  (k x y : ℕ) → div-ℕ x y → div-ℕ x (mul-ℕ k y)
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
 div-mul-ℕ k x y H =
-  transitive-div-ℕ x y (mul-ℕ k y) H (pair k refl)
+  transitive-div-ℕ x y (k *ℕ y) H (pair k refl)
 
 div-mul-ℕ' :
-  (k x y : ℕ) → div-ℕ x y → div-ℕ x (mul-ℕ y k)
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)
 div-mul-ℕ' k x y H =
   tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
 ```
@@ -253,37 +275,37 @@ div-mul-ℕ' k x y H =
 
 ```agda
 div-add-ℕ :
-  (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (add-ℕ x y)
-pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = add-ℕ n m
+  (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (x +ℕ y)
+pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = n +ℕ m
 pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
   ( right-distributive-mul-add-ℕ n m d) ∙
   ( ap-add-ℕ p q)
 
 div-left-summand-ℕ :
-  (d x y : ℕ) → div-ℕ d y → div-ℕ d (add-ℕ x y) → div-ℕ d x
+  (d x y : ℕ) → div-ℕ d y → div-ℕ d (x +ℕ y) → div-ℕ d x
 div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
   pair zero-ℕ
     ( ( inv (right-zero-law-mul-ℕ n)) ∙
-      ( p ∙ (ap (add-ℕ x) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
+      ( p ∙ (ap (x +ℕ_) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
 pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
 pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
-  is-injective-add-ℕ' (mul-ℕ m (succ-ℕ d))
+  is-injective-right-add-ℕ (m *ℕ (succ-ℕ d))
     ( ( inv
         ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
           ( commutative-add-ℕ
-            ( mul-ℕ m (succ-ℕ d))
-            ( mul-ℕ (dist-ℕ m n) (succ-ℕ d))))) ∙
+            ( m *ℕ (succ-ℕ d))
+            ( (dist-ℕ m n) *ℕ (succ-ℕ d))))) ∙
       ( ( ap
-          ( mul-ℕ' (succ-ℕ d))
+          ( _*ℕ (succ-ℕ d))
           ( is-additive-right-inverse-dist-ℕ m n
             ( reflects-order-mul-ℕ d m n
               ( concatenate-eq-leq-eq-ℕ q
                 ( leq-add-ℕ' y x)
                 ( inv p))))) ∙
-        ( p ∙ (ap (add-ℕ x) (inv q)))))
+        ( p ∙ (ap (x +ℕ_) (inv q)))))
 
 div-right-summand-ℕ :
-  (d x y : ℕ) → div-ℕ d x → div-ℕ d (add-ℕ x y) → div-ℕ d y
+  (d x y : ℕ) → div-ℕ d x → div-ℕ d (x +ℕ y) → div-ℕ d y
 div-right-summand-ℕ d x y H1 H2 =
   div-left-summand-ℕ d y x H1 (concatenate-div-eq-ℕ H2 (commutative-add-ℕ x y))
 ```
@@ -299,25 +321,25 @@ is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
 
 ```agda
 preserves-div-mul-ℕ :
-  (k x y : ℕ) → div-ℕ x y → div-ℕ (mul-ℕ k x) (mul-ℕ k y)
+  (k x y : ℕ) → div-ℕ x y → div-ℕ (k *ℕ x) (k *ℕ y)
 pr1 (preserves-div-mul-ℕ k x y (pair q p)) = q
 pr2 (preserves-div-mul-ℕ k x y (pair q p)) =
   ( inv (associative-mul-ℕ q k x)) ∙
-    ( ( ap (mul-ℕ' x) (commutative-mul-ℕ q k)) ∙
+    ( ( ap (_*ℕ x) (commutative-mul-ℕ q k)) ∙
       ( ( associative-mul-ℕ k q x) ∙
-        ( ap (mul-ℕ k) p)))
+        ( ap (k *ℕ_) p)))
 ```
 
 ### Multiplication by a nonzero number reflects divisibility
 
 ```agda
 reflects-div-mul-ℕ :
-  (k x y : ℕ) → is-nonzero-ℕ k → div-ℕ (mul-ℕ k x) (mul-ℕ k y) → div-ℕ x y
+  (k x y : ℕ) → is-nonzero-ℕ k → div-ℕ (k *ℕ x) (k *ℕ y) → div-ℕ x y
 pr1 (reflects-div-mul-ℕ k x y H (pair q p)) = q
 pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
-  is-injective-mul-ℕ k H
+  is-injective-left-mul-ℕ k H
     ( ( inv (associative-mul-ℕ k q x)) ∙
-      ( ( ap (mul-ℕ' x) (commutative-mul-ℕ k q)) ∙
+      ( ( ap (_*ℕ x) (commutative-mul-ℕ k q)) ∙
         ( ( associative-mul-ℕ q k x) ∙
           ( p))))
 ```
@@ -327,18 +349,18 @@ pr2 (reflects-div-mul-ℕ k x y H (pair q p)) =
 ```agda
 div-quotient-div-div-ℕ :
   (x y d : ℕ) (H : div-ℕ d y) → is-nonzero-ℕ d →
-  div-ℕ (mul-ℕ d x) y → div-ℕ x (quotient-div-ℕ d y H)
+  div-ℕ (d *ℕ x) y → div-ℕ x (quotient-div-ℕ d y H)
 div-quotient-div-div-ℕ x y d H f K =
   reflects-div-mul-ℕ d x
     ( quotient-div-ℕ d y H)
     ( f)
-    ( tr (div-ℕ (mul-ℕ d x)) (inv (eq-quotient-div-ℕ' d y H)) K)
+    ( tr (div-ℕ (d *ℕ x)) (inv (eq-quotient-div-ℕ' d y H)) K)
 
 div-div-quotient-div-ℕ :
   (x y d : ℕ) (H : div-ℕ d y) →
-  div-ℕ x (quotient-div-ℕ d y H) → div-ℕ (mul-ℕ d x) y
+  div-ℕ x (quotient-div-ℕ d y H) → div-ℕ (d *ℕ x) y
 div-div-quotient-div-ℕ x y d H K =
-  tr ( div-ℕ (mul-ℕ d x))
+  tr ( div-ℕ (d *ℕ x))
      ( eq-quotient-div-ℕ' d y H)
      ( preserves-div-mul-ℕ d x (quotient-div-ℕ d y H) K)
 ```
@@ -349,7 +371,7 @@ div-div-quotient-div-ℕ x y d H K =
 is-nonzero-quotient-div-ℕ :
   {d x : ℕ} (H : div-ℕ d x) →
   is-nonzero-ℕ x → is-nonzero-ℕ (quotient-div-ℕ d x H)
-is-nonzero-quotient-div-ℕ {d} {.(mul-ℕ k d)} (pair k refl) =
+is-nonzero-quotient-div-ℕ {d} {.(k *ℕ d)} (pair k refl) =
   is-nonzero-left-factor-mul-ℕ k d
 ```
 
@@ -382,19 +404,19 @@ is-idempotent-quotient-div-ℕ (succ-ℕ a) nz (u , p) =
 simplify-mul-quotient-div-ℕ :
   {a b c : ℕ} → is-nonzero-ℕ c →
   (H : div-ℕ b a) (K : div-ℕ c b) (L : div-ℕ c a) →
-  ( mul-ℕ (quotient-div-ℕ b a H) (quotient-div-ℕ c b K)) ＝
+  ( (quotient-div-ℕ b a H) *ℕ (quotient-div-ℕ c b K)) ＝
   ( quotient-div-ℕ c a L)
 simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
-  is-injective-mul-ℕ' c nz
+  is-injective-right-mul-ℕ c nz
     ( equational-reasoning
-      mul-ℕ (mul-ℕ a/b b/c) c
-      ＝ mul-ℕ a/b (mul-ℕ b/c c)
+      (a/b *ℕ b/c) *ℕ c
+      ＝ a/b *ℕ (b/c *ℕ c)
         by associative-mul-ℕ a/b b/c c
-      ＝ mul-ℕ a/b b
-        by ap (mul-ℕ a/b) (eq-quotient-div-ℕ c b K)
+      ＝ a/b *ℕ b
+        by ap (a/b *ℕ_) (eq-quotient-div-ℕ c b K)
       ＝ a
         by eq-quotient-div-ℕ b a H
-      ＝ mul-ℕ a/c c
+      ＝ a/c *ℕ c
         by inv (eq-quotient-div-ℕ c a L))
   where
   a/b : ℕ
@@ -410,27 +432,27 @@ simplify-mul-quotient-div-ℕ {a} {b} {c} nz H K L =
 ```agda
 simplify-div-quotient-div-ℕ :
   {a d x : ℕ} → is-nonzero-ℕ d → (H : div-ℕ d a) →
-  (div-ℕ x (quotient-div-ℕ d a H)) ↔ (div-ℕ (mul-ℕ x d) a)
+  (div-ℕ x (quotient-div-ℕ d a H)) ↔ (div-ℕ (x *ℕ d) a)
 pr1 (pr1 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr1 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
   equational-reasoning
-    mul-ℕ u (mul-ℕ x d)
-    ＝ mul-ℕ (mul-ℕ u x) d
+    u *ℕ (x *ℕ d)
+    ＝ (u *ℕ x) *ℕ d
       by inv (associative-mul-ℕ u x d)
-    ＝ mul-ℕ (quotient-div-ℕ d a H) d
-      by ap (mul-ℕ' d) p
+    ＝ (quotient-div-ℕ d a H) *ℕ d
+      by ap (_*ℕ d) p
     ＝ a
       by eq-quotient-div-ℕ d a H
 pr1 (pr2 (simplify-div-quotient-div-ℕ nz H) (u , p)) = u
 pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
-  is-injective-mul-ℕ' d nz
+  is-injective-right-mul-ℕ d nz
     ( equational-reasoning
-        mul-ℕ (mul-ℕ u x) d
-        ＝ mul-ℕ u (mul-ℕ x d)
+        (u *ℕ x) *ℕ d
+        ＝ u *ℕ (x *ℕ d)
           by associative-mul-ℕ u x d
         ＝ a
           by p
-        ＝ mul-ℕ (quotient-div-ℕ d a H) d
+        ＝ (quotient-div-ℕ d a H) *ℕ d
           by inv (eq-quotient-div-ℕ d a H))
 ```
 
@@ -478,7 +500,7 @@ is-one-divisor-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
   quotient-div-ℕ d x H ＝ x → is-one-ℕ d
 is-one-divisor-ℕ d x f (.x , q) refl =
-  is-injective-mul-ℕ x f (q ∙ inv (right-unit-law-mul-ℕ x))
+  is-injective-left-mul-ℕ x f (q ∙ inv (right-unit-law-mul-ℕ x))
 ```
 
 ### If `x` is nonzero and `d | x` is a nontrivial divisor, then `x/d < x`

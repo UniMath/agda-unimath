@@ -44,7 +44,7 @@ constant-ℕ : (k : ℕ) → Fin k → ℕ
 constant-ℕ k x = nat-Fin k x
 
 unary-op-ℕ : (k : ℕ) → Fin k → ℕ → ℕ
-unary-op-ℕ k x n = add-ℕ (mul-ℕ k (succ-ℕ n)) (nat-Fin k x)
+unary-op-ℕ k x n = (k *ℕ (succ-ℕ n)) +ℕ (nat-Fin k x)
 
 convert-based-ℕ : (k : ℕ) → based-ℕ k → ℕ
 convert-based-ℕ k (constant-based-ℕ .k x) =
@@ -73,7 +73,7 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
     { unary-op-ℕ (succ-ℕ k) x n}
     ( translation-invariant-cong-ℕ'
       ( succ-ℕ k)
-      ( mul-ℕ (succ-ℕ k) (succ-ℕ n))
+      ( (succ-ℕ k) *ℕ (succ-ℕ n))
       ( zero-ℕ)
       ( nat-Fin (succ-ℕ k) x)
       ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (succ-ℕ k))))
@@ -90,9 +90,9 @@ le-constant-unary-op-ℕ k x y m =
     ( strict-upper-bound-nat-Fin k x)
     ( transitive-leq-ℕ
       ( k)
-      ( mul-ℕ k (succ-ℕ m))
+      ( k *ℕ (succ-ℕ m))
       ( unary-op-ℕ k y m)
-      ( leq-add-ℕ (mul-ℕ k (succ-ℕ m)) (nat-Fin k y))
+      ( leq-add-ℕ (k *ℕ (succ-ℕ m)) (nat-Fin k y))
       ( leq-mul-ℕ m k))
 
 is-injective-convert-based-ℕ :
@@ -146,8 +146,8 @@ is-injective-convert-based-ℕ
   ap ( unary-op-based-ℕ (succ-ℕ k) x)
      ( is-injective-convert-based-ℕ (succ-ℕ k)
        ( is-injective-succ-ℕ
-         ( is-injective-mul-succ-ℕ k
-           ( is-injective-add-ℕ' (nat-Fin (succ-ℕ k) x) p))))
+         ( is-injective-left-mul-succ-ℕ k
+           ( is-injective-right-add-ℕ (nat-Fin (succ-ℕ k) x) p))))
 ```
 
 ### The zero-element of the `k+1`-ary natural numbers
@@ -189,27 +189,26 @@ convert-based-succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl
 convert-based-succ-based-ℕ
   ( succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
   ( ap
-    ( λ t → add-ℕ (mul-ℕ (succ-ℕ k) (succ-ℕ t)) t)
+    ( λ t → ((succ-ℕ k) *ℕ (succ-ℕ t)) +ℕ t)
     ( is-zero-nat-zero-Fin {k})) ∙
   ( right-unit-law-mul-ℕ (succ-ℕ k))
 convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
-  ap ( add-ℕ (mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))
+  ap ( ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) +ℕ_)
      ( nat-succ-Fin k x)
 convert-based-succ-based-ℕ
   (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr star) n) =
-  ( ap ( add-ℕ
-         ( mul-ℕ
-           ( succ-ℕ k)
-           ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n)))))
+  ( ap ( ( ( succ-ℕ k) *ℕ
+           ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
+          +ℕ_)
        ( is-zero-nat-zero-Fin {k})) ∙
-  ( ( ap ( (mul-ℕ (succ-ℕ k)) ∘ succ-ℕ)
+  ( ( ap ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
          ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
     ( ( right-successor-law-mul-ℕ
         ( succ-ℕ k)
         ( succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) ∙
       ( commutative-add-ℕ
         ( succ-ℕ k)
-        ( mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
+        ( (succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
 
 issec-inv-convert-based-ℕ :
   (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n

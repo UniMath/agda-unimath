@@ -48,7 +48,7 @@ sum-list-ℕ = fold-list 0 add-ℕ
 ```agda
 sum-Fin-ℕ : (k : ℕ) → (Fin k → ℕ) → ℕ
 sum-Fin-ℕ zero-ℕ f = zero-ℕ
-sum-Fin-ℕ (succ-ℕ k) f = add-ℕ (sum-Fin-ℕ k (λ x → f (inl x))) (f (inr star))
+sum-Fin-ℕ (succ-ℕ k) f = (sum-Fin-ℕ k (λ x → f (inl x))) +ℕ (f (inr star))
 ```
 
 ### Sums of natural numbers indexed by a type equipped with a counting
@@ -95,14 +95,14 @@ abstract
 ```agda
 abstract
   constant-sum-Fin-ℕ :
-    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ mul-ℕ m n
+    (m n : ℕ) → sum-Fin-ℕ m (const (Fin m) ℕ n) ＝ m *ℕ n
   constant-sum-Fin-ℕ zero-ℕ n = refl
-  constant-sum-Fin-ℕ (succ-ℕ m) n = ap (add-ℕ' n) (constant-sum-Fin-ℕ m n)
+  constant-sum-Fin-ℕ (succ-ℕ m) n = ap (_+ℕ n) (constant-sum-Fin-ℕ m n)
 
 abstract
   constant-sum-count-ℕ :
     {l : Level} {A : UU l} (e : count A) (n : ℕ) →
-    sum-count-ℕ e (const A ℕ n) ＝ mul-ℕ (number-of-elements-count e) n
+    sum-count-ℕ e (const A ℕ n) ＝ (number-of-elements-count e) *ℕ n
   constant-sum-count-ℕ (pair m e) n = constant-sum-Fin-ℕ m n
 ```
 

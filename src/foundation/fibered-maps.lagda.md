@@ -34,7 +34,7 @@ open import foundation-core.universe-levels
 
 Consider a diagram of the form
 
-```md
+```text
   A         B
   |         |
  f|         |g

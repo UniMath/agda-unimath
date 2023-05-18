@@ -17,6 +17,11 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **maximal chain** in a preorder `P` is a chain `C` in `P` such that for every
+chain `D` in `P` we have `C ⊆ D ⇒ D ⊆ C`.
+
 ## Definition
 
 ```agda
@@ -27,7 +32,12 @@ module _
   is-maximal-chain-Preorder-Prop :
     {l3 : Level} → chain-Preorder l3 X → Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-maximal-chain-Preorder-Prop {l3} C =
-    Π-Prop (chain-Preorder l3 X) (inclusion-chain-Preorder-Prop X C)
+    Π-Prop
+      ( chain-Preorder l3 X)
+      ( λ D →
+        function-Prop
+          ( inclusion-chain-Preorder X C D)
+          ( inclusion-chain-Preorder-Prop X D C))
 
   is-maximal-chain-Preorder :
     {l3 : Level} → chain-Preorder l3 X → UU (l1 ⊔ l2 ⊔ lsuc l3)

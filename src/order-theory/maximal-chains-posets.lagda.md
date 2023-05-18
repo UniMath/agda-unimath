@@ -17,6 +17,11 @@ open import order-theory.posets
 
 </details>
 
+## Idea
+
+A **maximal chain** in a poset `P` is a chain `C` in `P` such that for any chain
+`D` we have `C ⊆ D ⇒ C ＝ D`.
+
 ## Definition
 
 ```agda

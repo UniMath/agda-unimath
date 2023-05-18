@@ -9,7 +9,7 @@ module foundation.unions-subtypes where
 ```agda
 open import foundation.decidable-subtypes
 open import foundation.disjunction
-open import foundation.existential-quantification
+open import foundation.large-locale-of-subtypes
 
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
@@ -51,7 +51,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1}
   where
 
-  union-fam-subtype :
+  union-family-of-subtypes :
     {I : UU l2} (A : I → subtype l3 X) → subtype (l2 ⊔ l3) X
-  union-fam-subtype {I} A x = exists-Prop I (λ i → A i x)
+  union-family-of-subtypes = sup-power-set-Large-Locale
 ```

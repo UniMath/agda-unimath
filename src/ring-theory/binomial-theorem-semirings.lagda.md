@@ -35,7 +35,7 @@ The binomial theorem in semirings asserts that for any two elements `x` and `y`
 of a commutative ring `R` and any natural number `n`, if `xy = yx` holds then we
 have
 
-```md
+```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
@@ -609,14 +609,14 @@ binomial-theorem-Semiring R (succ-ℕ (succ-ℕ n)) x y H =
 is-linear-combination-power-add-Semiring :
   {l : Level} (R : Semiring l) (n m : ℕ) (x y : type-Semiring R) →
   mul-Semiring R x y ＝ mul-Semiring R y x →
-  power-Semiring R (add-ℕ n m) (add-Semiring R x y) ＝
+  power-Semiring R (n +ℕ m) (add-Semiring R x y) ＝
   add-Semiring R
     ( mul-Semiring R
       ( power-Semiring R m y)
       ( sum-Semiring R n
         ( λ i →
           mul-nat-scalar-Semiring R
-            ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+            ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
             ( mul-Semiring R
               ( power-Semiring R (nat-Fin n i) x)
               ( power-Semiring R (dist-ℕ (nat-Fin n i) n) y)))))
@@ -627,28 +627,28 @@ is-linear-combination-power-add-Semiring :
         ( λ i →
           mul-nat-scalar-Semiring R
             ( binomial-coefficient-ℕ
-              ( add-ℕ n m)
-              ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+              ( n +ℕ m)
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
             ( mul-Semiring R
               ( power-Semiring R (nat-Fin (succ-ℕ m) i) x)
               ( power-Semiring R (dist-ℕ (nat-Fin (succ-ℕ m) i) m) y)))))
 is-linear-combination-power-add-Semiring R n m x y H =
-  ( binomial-theorem-Semiring R (add-ℕ n m) x y H) ∙
+  ( binomial-theorem-Semiring R (n +ℕ m) x y H) ∙
   ( ( split-sum-Semiring R n
       ( succ-ℕ m)
       ( λ i →
         mul-nat-scalar-Semiring R
           ( binomial-coefficient-ℕ
-            ( add-ℕ n m)
-            ( nat-Fin (add-ℕ n (succ-ℕ m)) i))
+            ( n +ℕ m)
+            ( nat-Fin (n +ℕ (succ-ℕ m)) i))
           ( mul-Semiring R
             ( power-Semiring R
-              ( nat-Fin (add-ℕ n (succ-ℕ m)) i)
+              ( nat-Fin (n +ℕ (succ-ℕ m)) i)
               ( x))
             ( power-Semiring R
               ( dist-ℕ
-                ( nat-Fin (add-ℕ n (succ-ℕ m)) i)
-                ( add-ℕ n m))
+                ( nat-Fin (n +ℕ (succ-ℕ m)) i)
+                ( n +ℕ m))
               ( y))))) ∙
     ( ( ap-add-Semiring R
         ( ( htpy-sum-Semiring R n
@@ -656,17 +656,17 @@ is-linear-combination-power-add-Semiring R n m x y H =
               ( ap
                 ( λ u →
                   mul-nat-scalar-Semiring R
-                    ( binomial-coefficient-ℕ (add-ℕ n m) u)
+                    ( binomial-coefficient-ℕ (n +ℕ m) u)
                     ( mul-Semiring R
                       ( power-Semiring R u x)
                       ( power-Semiring R
-                        ( dist-ℕ u (add-ℕ n m))
+                        ( dist-ℕ u (n +ℕ m))
                         ( y))))
                 ( nat-inl-coprod-Fin n m i)) ∙
               ( ( ( ap
                     ( mul-nat-scalar-Semiring R
                       ( binomial-coefficient-ℕ
-                        ( add-ℕ n m)
+                        ( n +ℕ m)
                         ( nat-Fin n i)))
                     ( ( ap
                         ( mul-Semiring R
@@ -679,11 +679,11 @@ is-linear-combination-power-add-Semiring R n m x y H =
                                 ( triangle-equality-dist-ℕ
                                   ( nat-Fin n i)
                                   ( n)
-                                  ( add-ℕ n m)
+                                  ( n +ℕ m)
                                   ( upper-bound-nat-Fin' n i)
                                   ( leq-add-ℕ n m)) ∙
                                 ( ap
-                                  ( add-ℕ (dist-ℕ (nat-Fin n i) n))
+                                  ( (dist-ℕ (nat-Fin n i) n) +ℕ_)
                                   ( dist-add-ℕ n m))) ∙
                               ( commutative-add-ℕ
                                 ( dist-ℕ (nat-Fin n i) n)
@@ -708,7 +708,7 @@ is-linear-combination-power-add-Semiring R n m x y H =
                   ( inv
                     ( right-nat-scalar-law-mul-Semiring R
                       ( binomial-coefficient-ℕ
-                        ( add-ℕ n m)
+                        ( n +ℕ m)
                         ( nat-Fin n i))
                       ( power-Semiring R m y)
                       ( mul-Semiring R
@@ -721,7 +721,7 @@ is-linear-combination-power-add-Semiring R n m x y H =
                 ( power-Semiring R m y)
                 ( λ i →
                   mul-nat-scalar-Semiring R
-                    ( binomial-coefficient-ℕ (add-ℕ n m) (nat-Fin n i))
+                    ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
                     ( mul-Semiring R
                       ( power-Semiring R (nat-Fin n i) x)
                       ( power-Semiring R (dist-ℕ (nat-Fin n i) n) y)))))))
@@ -731,18 +731,18 @@ is-linear-combination-power-add-Semiring R n m x y H =
               ( ap
                 ( λ u →
                   mul-nat-scalar-Semiring R
-                    ( binomial-coefficient-ℕ (add-ℕ n m) u)
+                    ( binomial-coefficient-ℕ (n +ℕ m) u)
                     ( mul-Semiring R
                       ( power-Semiring R u x)
                       ( power-Semiring R
-                        ( dist-ℕ u (add-ℕ n m))
+                        ( dist-ℕ u (n +ℕ m))
                         ( y))))
                 ( nat-inr-coprod-Fin n (succ-ℕ m) i)) ∙
               ( ( ap
                   ( mul-nat-scalar-Semiring R
                     ( binomial-coefficient-ℕ
-                      ( add-ℕ n m)
-                      ( add-ℕ n (nat-Fin (succ-ℕ m) i))))
+                      ( n +ℕ m)
+                      ( n +ℕ (nat-Fin (succ-ℕ m) i))))
                   ( ap-mul-Semiring R
                     ( power-add-Semiring R n (nat-Fin (succ-ℕ m) i))
                     ( ap
@@ -760,8 +760,8 @@ is-linear-combination-power-add-Semiring R n m x y H =
                 ( inv
                   ( right-nat-scalar-law-mul-Semiring R
                     ( binomial-coefficient-ℕ
-                      ( add-ℕ n m)
-                      ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+                      ( n +ℕ m)
+                      ( n +ℕ (nat-Fin (succ-ℕ m) i)))
                     ( power-Semiring R n x)
                     ( mul-Semiring R
                       ( power-Semiring R (nat-Fin (succ-ℕ m) i) x)
@@ -775,8 +775,8 @@ is-linear-combination-power-add-Semiring R n m x y H =
               ( λ i →
                 mul-nat-scalar-Semiring R
                   ( binomial-coefficient-ℕ
-                    ( add-ℕ n m)
-                    ( add-ℕ n (nat-Fin (succ-ℕ m) i)))
+                    ( n +ℕ m)
+                    ( n +ℕ (nat-Fin (succ-ℕ m) i)))
                   ( mul-Semiring R
                     ( power-Semiring R (nat-Fin (succ-ℕ m) i) x)
                     ( power-Semiring R

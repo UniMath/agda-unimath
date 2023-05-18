@@ -84,9 +84,14 @@ leq-right-leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
 is-least-upper-bound-max-ℕ :
   (m n : ℕ) → is-least-binary-upper-bound-Poset ℕ-Poset m n (max-ℕ m n)
 is-least-upper-bound-max-ℕ m n =
-  ( leq-left-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)),
-    leq-right-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n))),
-  λ x (m≤x , n≤x) → leq-max-ℕ x m n m≤x n≤x
+  prove-is-least-binary-upper-bound-Poset
+    ( ℕ-Poset)
+    { m}
+    { n}
+    { max-ℕ m n}
+    ( leq-left-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)),
+      leq-right-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n)))
+    ( λ x (H , K) → leq-max-ℕ x m n H K)
 ```
 
 ### Associativity of `max-ℕ`
@@ -149,7 +154,7 @@ right-successor-diagonal-law-max-ℕ (succ-ℕ x) =
 
 ```agda
 left-distributive-add-max-ℕ :
-  (x y z : ℕ) → add-ℕ x (max-ℕ y z) ＝ max-ℕ (add-ℕ x y) (add-ℕ x z)
+  (x y z : ℕ) → x +ℕ (max-ℕ y z) ＝ max-ℕ (x +ℕ y) (x +ℕ z)
 left-distributive-add-max-ℕ zero-ℕ y z =
   ( left-unit-law-add-ℕ (max-ℕ y z)) ∙
   ( ap-max-ℕ (inv (left-unit-law-add-ℕ y)) (inv (left-unit-law-add-ℕ z)))
@@ -161,7 +166,7 @@ left-distributive-add-max-ℕ (succ-ℕ x) y z =
       ( inv (left-successor-law-add-ℕ x z))))
 
 right-distributive-add-max-ℕ :
-  (x y z : ℕ) → add-ℕ (max-ℕ x y) z ＝ max-ℕ (add-ℕ x z) (add-ℕ y z)
+  (x y z : ℕ) → (max-ℕ x y) +ℕ z ＝ max-ℕ (x +ℕ z) (y +ℕ z)
 right-distributive-add-max-ℕ x y z =
   ( commutative-add-ℕ (max-ℕ x y) z) ∙
   ( ( left-distributive-add-max-ℕ z x y) ∙

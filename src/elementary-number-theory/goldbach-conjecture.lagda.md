@@ -27,5 +27,5 @@ open import foundation.universe-levels
 Goldbach-conjecture : UU lzero
 Goldbach-conjecture =
   ( n : ℕ) → (le-ℕ 2 n) → (is-even-ℕ n) →
-    Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × (add-ℕ p q ＝ n))))
+    Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × (p +ℕ q ＝ n))))
 ```

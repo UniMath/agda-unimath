@@ -581,7 +581,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Integral-Domain :
     (m n : ℕ) (x : type-Integral-Domain) →
-    mul-nat-scalar-Integral-Domain (add-ℕ m n) x ＝
+    mul-nat-scalar-Integral-Domain (m +ℕ n) x ＝
     add-Integral-Domain
       ( mul-nat-scalar-Integral-Domain m x)
       ( mul-nat-scalar-Integral-Domain n x)

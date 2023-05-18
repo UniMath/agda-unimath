@@ -17,7 +17,7 @@ module univalent-combinatorics.finite-presentations where
 Finitely presented types are types A equipped with a map f : Fin k → A such that
 the composite
 
-```md
+```text
   Fin k → A → type-trunc-Set A
 ```
 

@@ -1,4 +1,4 @@
-# Homomorphisms of sup lattices
+# Homomorphisms of suplattices
 
 ```agda
 module order-theory.homomorphisms-sup-lattices where
@@ -21,8 +21,8 @@ open import order-theory.suplattices
 
 ## Idea
 
-A sup lattice homomorphism is a order preserving map between the underlying
-posets that additionally preserves sups (or arbitrary joins of subsets).
+A **homomorphism of suplattices** is a order preserving map between the
+underlying posets that preserves least upper bounds.
 
 ## Definitions
 
@@ -40,7 +40,7 @@ module _
     is-least-upper-bound-family-of-elements-Poset
       ( poset-Suplattice B)
       ( f ∘ b)
-      ( f (sup-Suplattice A I b))
+      ( f (sup-Suplattice A b))
 
   hom-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
   hom-Suplattice =

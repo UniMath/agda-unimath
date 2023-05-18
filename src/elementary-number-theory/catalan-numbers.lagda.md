@@ -49,6 +49,6 @@ catalan-numbers =
 catalan-numbers-binomial : ℕ → ℕ
 catalan-numbers-binomial n =
   dist-ℕ
-    ( binomial-coefficient-ℕ (mul-ℕ 2 n) n)
-    ( binomial-coefficient-ℕ (mul-ℕ 2 n) (succ-ℕ n))
+    ( binomial-coefficient-ℕ (2 *ℕ n) n)
+    ( binomial-coefficient-ℕ (2 *ℕ n) (succ-ℕ n))
 ```

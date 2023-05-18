@@ -78,9 +78,11 @@ leq-right-leq-min-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
 is-greatest-lower-bound-min-ℕ :
   (l m : ℕ) → is-greatest-binary-lower-bound-Poset ℕ-Poset l m (min-ℕ l m)
 is-greatest-lower-bound-min-ℕ l m =
-  ( leq-left-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m)),
-    leq-right-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m))),
-  λ x (x≤l , x≤m) → leq-min-ℕ x l m x≤l x≤m
+  prove-is-greatest-binary-lower-bound-Poset
+    ( ℕ-Poset)
+    ( leq-left-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m)) ,
+      leq-right-leq-min-ℕ (min-ℕ l m) l m (refl-leq-ℕ (min-ℕ l m)))
+    ( λ x (H , K) → leq-min-ℕ x l m H K)
 ```
 
 ### Associativity of `min-ℕ`
@@ -129,7 +131,7 @@ idempotent-min-ℕ (succ-ℕ x) = ap succ-ℕ (idempotent-min-ℕ x)
 
 ```agda
 left-distributive-add-min-ℕ :
-  (x y z : ℕ) → add-ℕ x (min-ℕ y z) ＝ min-ℕ (add-ℕ x y) (add-ℕ x z)
+  (x y z : ℕ) → x +ℕ (min-ℕ y z) ＝ min-ℕ (x +ℕ y) (x +ℕ z)
 left-distributive-add-min-ℕ zero-ℕ y z =
   ( left-unit-law-add-ℕ (min-ℕ y z)) ∙
   ( ap-min-ℕ (inv (left-unit-law-add-ℕ y)) (inv (left-unit-law-add-ℕ z)))
@@ -141,7 +143,7 @@ left-distributive-add-min-ℕ (succ-ℕ x) y z =
       ( inv (left-successor-law-add-ℕ x z))))
 
 right-distributive-add-min-ℕ :
-  (x y z : ℕ) → add-ℕ (min-ℕ x y) z ＝ min-ℕ (add-ℕ x z) (add-ℕ y z)
+  (x y z : ℕ) → (min-ℕ x y) +ℕ z ＝ min-ℕ (x +ℕ z) (y +ℕ z)
 right-distributive-add-min-ℕ x y z =
   ( commutative-add-ℕ (min-ℕ x y) z) ∙
   ( ( left-distributive-add-min-ℕ z x y) ∙

@@ -32,8 +32,11 @@ open import foundation.subtype-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import group-theory.concrete-groups
 open import group-theory.groups
 open import group-theory.isomorphisms-groups
+
+open import higher-group-theory.higher-groups
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms
@@ -353,6 +356,11 @@ is-0-connected-Cyclic-Type k =
     ( ℤ-Mod-Cyclic-Type k)
     ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))
 
+∞-group-Cyclic-Type :
+  (k : ℕ) → ∞-Group (lsuc lzero)
+pr1 (∞-group-Cyclic-Type k) = Cyclic-Type-Pointed-Type k
+pr2 (∞-group-Cyclic-Type k) = is-0-connected-Cyclic-Type k
+
 Eq-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero k → UU lzero
 Eq-Cyclic-Type k X = type-Cyclic-Type k X
 
@@ -393,7 +401,7 @@ compute-map-preserves-succ-map-ℤ-Mod' :
   (x : ℤ) → Id (add-ℤ-Mod k (mod-ℤ k x) (f (zero-ℤ-Mod k))) (f (mod-ℤ k x))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inl zero-ℕ) =
   ( ap (add-ℤ-Mod' k (f (zero-ℤ-Mod k))) (mod-neg-one-ℤ k)) ∙
-  ( ( inv (is-add-neg-one-pred-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
+  ( ( inv (is-left-add-neg-one-pred-ℤ-Mod k (f (zero-ℤ-Mod k)))) ∙
     ( ( ap (pred-ℤ-Mod k) (ap f (inv (mod-zero-ℤ k)))) ∙
       ( ( inv
           ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k zero-ℤ))) ∙
@@ -415,7 +423,7 @@ compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl star)) =
     ( ap f (inv (mod-zero-ℤ k))))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr zero-ℕ)) =
   ( ap-add-ℤ-Mod k (mod-one-ℤ k) (ap f (inv (mod-zero-ℤ k)))) ∙
-  ( ( inv (is-add-one-succ-ℤ-Mod k (f (mod-ℤ k zero-ℤ)))) ∙
+  ( ( inv (is-left-add-one-succ-ℤ-Mod k (f (mod-ℤ k zero-ℤ)))) ∙
     ( ( inv (H (mod-ℤ k zero-ℤ))) ∙
       ( ap f (inv (preserves-successor-mod-ℤ k zero-ℤ)))))
 compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inr (succ-ℕ x))) =
@@ -548,6 +556,11 @@ is-set-type-Ω-Cyclic-Type k =
     ( ℤ-Mod k)
     ( equiv-compute-Ω-Cyclic-Type k)
     ( is-set-ℤ-Mod k)
+
+concrete-group-Cyclic-Type :
+  (k : ℕ) → Concrete-Group (lsuc lzero)
+pr1 (concrete-group-Cyclic-Type k) = ∞-group-Cyclic-Type k
+pr2 (concrete-group-Cyclic-Type k) = is-set-type-Ω-Cyclic-Type k
 
 Ω-Cyclic-Type-Group : (k : ℕ) → Group (lsuc lzero)
 Ω-Cyclic-Type-Group k =

@@ -54,7 +54,7 @@ module _
 We prove here only that any contractible type is a proposition. The fact that
 the empty type and the unit type are propositions can be found in
 
-```md
+```text
 foundation.empty-types
 foundation.unit-type
 ```

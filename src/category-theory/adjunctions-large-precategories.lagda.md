@@ -29,7 +29,7 @@ Let `C` and `D` be two large precategories. Two functors `F : C → D` and
 - for every pair of morhpisms `f : X₂ → X₁` and `g : Y₁ → Y₂` the following
   square commutes:
 
-```md
+```text
                        ϕ X₁ Y₁
        hom X₁ (G Y₁) --------> hom (F X₁) Y₁
             |                        |

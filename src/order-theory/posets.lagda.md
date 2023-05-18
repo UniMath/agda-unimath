@@ -21,8 +21,8 @@ open import order-theory.preorders
 
 ## Idea
 
-A poset is a set equipped with a reflexive, antisymmetric, transitive relation
-that takes values in propositions.
+A **poset** is a set equipped with a reflexive, antisymmetric, transitive
+relation that takes values in propositions.
 
 ## Definition
 
@@ -95,4 +95,44 @@ module _
   set-Poset : Set l1
   pr1 set-Poset = type-Poset
   pr2 set-Poset = is-set-type-Poset
+```
+
+## Reasoning with inequalities in posets
+
+Inequalities in preorders can be constructed by equational reasoning as follows:
+
+```text
+calculate-in-Poset X
+  chain-of-inequalities
+  x ≤ y
+      by ineq-1
+      in-Poset X
+    ≤ z
+      by ineq-2
+      in-Poset X
+    ≤ v
+      by ineq-3
+      in-Poset X
+```
+
+Note, however, that in our setup of equational reasoning with inequalities it is
+not possible to mix inequalities with equalities or strict inequalities.
+
+```agda
+infixl 1 calculate-in-Poset_chain-of-inequalities_
+infixl 0 step-calculate-in-Poset
+
+calculate-in-Poset_chain-of-inequalities_ :
+  {l1 l2 : Level} (X : Poset l1 l2)
+  (x : type-Poset X) → leq-Poset X x x
+calculate-in-Poset_chain-of-inequalities_ = refl-leq-Poset
+
+step-calculate-in-Poset :
+  {l1 l2 : Level} (X : Poset l1 l2)
+  {x y : type-Poset X} → leq-Poset X x y →
+  (z : type-Poset X) → leq-Poset X y z → leq-Poset X x z
+step-calculate-in-Poset X {x} {y} u z v =
+  transitive-leq-Poset X x y z v u
+
+syntax step-calculate-in-Poset X u z v = u ≤ z by v in-Poset X
 ```

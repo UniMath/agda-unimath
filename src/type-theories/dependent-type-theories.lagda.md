@@ -31,7 +31,7 @@ algebraic theories.
 (Dependency) systems are the structure around which a dependent type theory is
 built.
 
-```md
+```text
     Ã₀       Ã₁       Ã₂
     |        |        |
     |        |        |
@@ -582,7 +582,7 @@ preserve generic elements.
 For example, the rule that states that weakening preserves weakening (on types)
 can be displayed as follows:
 
-```md
+```text
         Γ ⊢ A type          Γ,Δ ⊢ B type          Γ,Δ,Ε ⊢ C type
   ------------------------------------------------------------------------
   Γ,A,W(A,Δ),W(A,B),W(W(A,B),W(A,E)) ⊢ W(W(A,B),W(A,C))=W(A,W(B,C)) type

@@ -25,7 +25,7 @@ open import orthogonal-factorization-systems.lifts-of-maps
 
 A _lifting square_ is a commuting square
 
-```md
+```text
        h
   A ------> B
   |         |
@@ -38,7 +38,7 @@ A _lifting square_ is a commuting square
 
 together with a diagonal map `j : X → B` such that the complete diagram
 
-```md
+```text
        h
   A ------> B
   |       ^ |
@@ -175,7 +175,7 @@ module _
 
 The diagram
 
-```md
+```text
   A         B
   |       ^ |
  f|   j  /  |g
@@ -186,7 +186,7 @@ The diagram
 
 gives rise to a lifting square
 
-```md
+```text
      j ∘ f
   A ------> B
   |       ^ |

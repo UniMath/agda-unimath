@@ -19,6 +19,11 @@ open import order-theory.subpreorders
 
 </details>
 
+## Idea
+
+A **subposet** of a poset `P` is a subtype of `P`. By restriction of the
+ordering on `P`, subposets have again the structure of a poset.
+
 ## Definitions
 
 ### Subposets

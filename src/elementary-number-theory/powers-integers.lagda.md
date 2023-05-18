@@ -36,6 +36,6 @@ power-ℤ = power-Commutative-Ring ℤ-Commutative-Ring
 ### `xⁿ⁺¹ = xⁿx`
 
 ```agda
-power-succ-ℤ : (n : ℕ) (x : ℤ) → power-ℤ (succ-ℕ n) x ＝ mul-ℤ (power-ℤ n x) x
+power-succ-ℤ : (n : ℕ) (x : ℤ) → power-ℤ (succ-ℕ n) x ＝ (power-ℤ n x) *ℤ x
 power-succ-ℤ = power-succ-Commutative-Ring ℤ-Commutative-Ring
 ```

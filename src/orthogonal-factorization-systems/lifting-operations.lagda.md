@@ -23,7 +23,7 @@ open import orthogonal-factorization-systems.pullback-hom
 Given two maps, `f : A → X` and `g : B → Y`, a _lifting operation between `f`
 and `g`_ is a choice of lifting square for every commuting square
 
-```md
+```text
   A ------> B
   |         |
  f|         |g

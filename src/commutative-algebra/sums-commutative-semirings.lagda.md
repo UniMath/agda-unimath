@@ -205,8 +205,8 @@ module _
 ```agda
 split-sum-Commutative-Semiring :
   {l : Level} (A : Commutative-Semiring l)
-  (n m : ℕ) (f : functional-vec-Commutative-Semiring A (add-ℕ n m)) →
-  sum-Commutative-Semiring A (add-ℕ n m) f ＝
+  (n m : ℕ) (f : functional-vec-Commutative-Semiring A (n +ℕ m)) →
+  sum-Commutative-Semiring A (n +ℕ m) f ＝
   add-Commutative-Semiring A
     ( sum-Commutative-Semiring A n (f ∘ inl-coprod-Fin n m))
     ( sum-Commutative-Semiring A m (f ∘ inr-coprod-Fin n m))

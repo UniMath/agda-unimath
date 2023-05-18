@@ -25,7 +25,7 @@ open import foundation.identity-types
 ```agda
 factorial-ℕ : ℕ → ℕ
 factorial-ℕ 0 = 1
-factorial-ℕ (succ-ℕ m) = mul-ℕ (factorial-ℕ m) (succ-ℕ m)
+factorial-ℕ (succ-ℕ m) = (factorial-ℕ m) *ℕ (succ-ℕ m)
 ```
 
 ```agda

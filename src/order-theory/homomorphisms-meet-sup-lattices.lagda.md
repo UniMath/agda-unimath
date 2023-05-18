@@ -14,7 +14,7 @@ open import foundation.universe-levels
 
 open import order-theory.homomorphisms-meet-semilattices
 open import order-theory.homomorphisms-sup-lattices
-open import order-theory.infinite-distributive-law
+open import order-theory.meet-suplattices
 open import order-theory.order-preserving-maps-posets
 ```
 
@@ -22,26 +22,23 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-A meet sup lattice homomorphism is an order preserving map between the
-underlying posets that preserves meets and sup. In fact any sup lattice
-neccesarily has binary meets but we have yet to give a proof of this fact in the
-library. Thus, we opt (for now) to treat the two structures as existing
-independently.
+A **homomorphism of meet-suplattices** is a homomorphism of meet-semilattices
+that in addition preserves least upper bounds.
 
 ## Definitions
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  (A : Meet-Suplattice l1 l2 l3)
-  (B : Meet-Suplattice l4 l5 l6)
+  {l1 l2 l3 l4 : Level}
+  (A : Meet-Suplattice l1 l2)
+  (B : Meet-Suplattice l3 l4)
   where
 
   preserves-meets-sups :
     (type-Meet-Suplattice A → type-Meet-Suplattice B) →
-    UU (l1 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+    UU (l1 ⊔ lsuc l2 ⊔ l3)
   preserves-meets-sups f =
-    preserves-meets
+    preserves-meet
       ( meet-semilattice-Meet-Suplattice A)
       ( meet-semilattice-Meet-Suplattice B)
       ( f) ×
@@ -50,7 +47,7 @@ module _
       ( suplattice-Meet-Suplattice B)
       ( f)
 
-  hom-Meet-Suplattice : UU (l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+  hom-Meet-Suplattice : UU (l1 ⊔ lsuc l2 ⊔ l3)
   hom-Meet-Suplattice =
     Σ ( type-Meet-Suplattice A → type-Meet-Suplattice B)
       ( λ f →
@@ -80,7 +77,7 @@ module _
 
   preserves-meets-Meet-Suplattice :
     (H : hom-Meet-Suplattice) →
-    preserves-meets
+    preserves-meet
       ( meet-semilattice-Meet-Suplattice A)
       ( meet-semilattice-Meet-Suplattice B)
       ( map-hom-Meet-Suplattice H)

@@ -37,7 +37,7 @@ open import species.species-of-types-in-subuniverses
 The **Cauchy product** of two species `S` and `T` from `P` to `Q` of types in a
 subuniverse is defined by
 
-```md
+```text
   X ↦ Σ (k : P), Σ (k' : P), Σ (e : k + k' ≃ X), S(k) × T(k')
 ```
 

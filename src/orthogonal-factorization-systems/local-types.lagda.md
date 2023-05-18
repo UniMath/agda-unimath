@@ -34,7 +34,7 @@ open import foundation-core.universe-levels
 A type family `A` over `X` is said to be **local at** `f : Y → X`, or
 **`f`-local**, if the precomposition map
 
-```md
+```text
   _∘ f : ((x : X) → A x) → ((y : Y) → A (f y))
 ```
 
@@ -102,7 +102,7 @@ module _
   is-equiv-is-local-type = is-equiv-is-equiv-precomp f
 ```
 
-### If the domain and codomain of ´f´ is ´f´-local then ´f´ is an equivalence
+### If the domain and codomain of `f` is `f`-local then `f` is an equivalence
 
 ```agda
   retraction-sec-precomp-domain : sec (precomp f Y) → retr f
@@ -173,7 +173,10 @@ is-contr-is-local-type A is-local-type-A =
   is-contr-is-equiv
     ( empty → A)
     ( λ a _ → a)
-    ( is-equiv-comp _ _
+    ( is-equiv-comp
+      ( λ a' _ → a' star)
+      ( λ a _ →
+        map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)) a star)
       ( is-equiv-map-inv-is-equiv (is-equiv-map-left-unit-law-Π λ _ → A))
       ( is-local-type-A))
     ( universal-property-empty' A)

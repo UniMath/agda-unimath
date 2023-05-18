@@ -101,7 +101,7 @@ Prepolytope : (l1 l2 : Level) (k : ℕ) → UU (lsuc l1 ⊔ lsuc l2)
 Prepolytope l1 l2 k =
   Σ ( Finitely-Graded-Poset l1 l2 k)
     ( λ X →
-      least-and-largest-element-Finitely-Graded-Poset X ×
+      has-bottom-and-top-element-Finitely-Graded-Poset X ×
       diamond-condition-Finitely-Graded-Poset X)
 ```
 
@@ -117,18 +117,18 @@ module _
   finitely-graded-poset-Prepolytope : Finitely-Graded-Poset l1 l2 k
   finitely-graded-poset-Prepolytope = pr1 X
 
-  least-and-largest-element-Prepolytope :
-    least-and-largest-element-Finitely-Graded-Poset
+  has-bottom-and-top-element-Prepolytope :
+    has-bottom-and-top-element-Finitely-Graded-Poset
       finitely-graded-poset-Prepolytope
-  least-and-largest-element-Prepolytope = pr1 (pr2 X)
+  has-bottom-and-top-element-Prepolytope = pr1 (pr2 X)
 
-  least-element-Prepolytope :
-    least-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
-  least-element-Prepolytope = pr1 least-and-largest-element-Prepolytope
+  has-bottom-element-Prepolytope :
+    has-bottom-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  has-bottom-element-Prepolytope = pr1 has-bottom-and-top-element-Prepolytope
 
-  largest-element-Prepolytope :
-    largest-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
-  largest-element-Prepolytope = pr2 least-and-largest-element-Prepolytope
+  has-top-element-Prepolytope :
+    has-top-element-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
+  has-top-element-Prepolytope = pr2 has-bottom-and-top-element-Prepolytope
 
   diamond-condition-Prepolytope :
     diamond-condition-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
@@ -339,59 +339,60 @@ module _
   face-flag-Prepolytope F i =
     Σ (face-Prepolytope i) (type-subtype-flag-Prepolytope F)
 
-  face-least-element-Prepolytope : face-Prepolytope (zero-Fin k)
-  face-least-element-Prepolytope = pr1 least-element-Prepolytope
+  face-bottom-element-Prepolytope : face-Prepolytope (zero-Fin k)
+  face-bottom-element-Prepolytope = pr1 has-bottom-element-Prepolytope
 
-  element-least-element-Prepolytope : type-Prepolytope
-  element-least-element-Prepolytope =
-    element-face-Prepolytope face-least-element-Prepolytope
+  element-bottom-element-Prepolytope : type-Prepolytope
+  element-bottom-element-Prepolytope =
+    element-face-Prepolytope face-bottom-element-Prepolytope
 
-  is-least-element-least-element-Prepolytope :
+  is-bottom-element-bottom-element-Prepolytope :
     (x : type-Prepolytope) →
-    leq-Prepolytope element-least-element-Prepolytope x
-  is-least-element-least-element-Prepolytope =
-    pr2 least-element-Prepolytope
+    leq-Prepolytope element-bottom-element-Prepolytope x
+  is-bottom-element-bottom-element-Prepolytope =
+    pr2 has-bottom-element-Prepolytope
 
-  face-largest-element-Prepolytope : face-Prepolytope (neg-one-Fin k)
-  face-largest-element-Prepolytope = pr1 largest-element-Prepolytope
+  face-has-top-element-Prepolytope : face-Prepolytope (neg-one-Fin k)
+  face-has-top-element-Prepolytope = pr1 has-top-element-Prepolytope
 
-  element-largest-element-Prepolytope : type-Prepolytope
-  element-largest-element-Prepolytope =
-    element-face-Prepolytope face-largest-element-Prepolytope
+  element-has-top-element-Prepolytope : type-Prepolytope
+  element-has-top-element-Prepolytope =
+    element-face-Prepolytope face-has-top-element-Prepolytope
 
-  is-largest-element-largest-element-Prepolytope :
+  is-has-top-element-has-top-element-Prepolytope :
     (x : type-Prepolytope) →
-    leq-Prepolytope x element-largest-element-Prepolytope
-  is-largest-element-largest-element-Prepolytope =
-    pr2 largest-element-Prepolytope
+    leq-Prepolytope x element-has-top-element-Prepolytope
+  is-has-top-element-has-top-element-Prepolytope =
+    pr2 has-top-element-Prepolytope
 
   is-contr-face-bottom-dimension-Prepolytope :
     is-contr (face-Prepolytope (zero-Fin k))
   pr1 is-contr-face-bottom-dimension-Prepolytope =
-    face-least-element-Prepolytope
+    face-bottom-element-Prepolytope
   pr2 is-contr-face-bottom-dimension-Prepolytope x =
     apply-universal-property-trunc-Prop
-      ( is-least-element-least-element-Prepolytope (element-face-Prepolytope x))
+      ( is-bottom-element-bottom-element-Prepolytope
+        ( element-face-Prepolytope x))
       ( Id-Prop
         ( face-prepolytope-Set (zero-Fin k))
-        ( face-least-element-Prepolytope)
+        ( face-bottom-element-Prepolytope)
         ( x))
-      ( λ p → eq-path-faces-Prepolytope face-least-element-Prepolytope x p)
+      ( λ p → eq-path-faces-Prepolytope face-bottom-element-Prepolytope x p)
 
   is-contr-face-top-dimension-Prepolytope :
     is-contr (face-Prepolytope (neg-one-Fin k))
   pr1 is-contr-face-top-dimension-Prepolytope =
-    face-largest-element-Prepolytope
+    face-has-top-element-Prepolytope
   pr2 is-contr-face-top-dimension-Prepolytope x =
     apply-universal-property-trunc-Prop
-      ( is-largest-element-largest-element-Prepolytope
+      ( is-has-top-element-has-top-element-Prepolytope
         ( element-face-Prepolytope x))
       ( Id-Prop
         ( face-prepolytope-Set (neg-one-Fin k))
-        ( face-largest-element-Prepolytope)
+        ( face-has-top-element-Prepolytope)
         ( x))
       ( λ p →
-        inv (eq-path-faces-Prepolytope x face-largest-element-Prepolytope p))
+        inv (eq-path-faces-Prepolytope x face-has-top-element-Prepolytope p))
 ```
 
 ### Flags are equivalently described as paths from the least to the largest element

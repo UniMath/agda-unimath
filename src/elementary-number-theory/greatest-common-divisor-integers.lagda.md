@@ -187,6 +187,20 @@ pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
     ( refl-sim-unit-ℤ (gcd-ℤ x y)))
 ```
 
+### The gcd in `ℕ` of `x` and `y` is equal to the gcd in `ℤ` of `int-ℕ x` and `int-ℕ y`
+
+```agda
+eq-gcd-gcd-int-ℕ :
+  (x y : ℕ) → gcd-ℤ (int-ℕ x) (int-ℕ y) ＝ int-ℕ (gcd-ℕ x y)
+eq-gcd-gcd-int-ℕ x y =
+  ( ( ap
+      ( λ x → int-ℕ (gcd-ℕ x (abs-ℤ (int-ℕ y))))
+      ( abs-int-ℕ x)) ∙
+    ( ap
+      ( λ y → int-ℕ (gcd-ℕ x y))
+      ( abs-int-ℕ y)))
+```
+
 ### The gcd of `x` and `y` divides both `x` and `y`
 
 ```agda
@@ -224,7 +238,7 @@ is-positive-gcd-is-positive-left-ℤ x y H =
       ( abs-ℤ y)
       ( λ p → is-nonzero-abs-ℤ x H (f p)))
   where
-  f : is-zero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y)) → is-zero-ℕ (abs-ℤ x)
+  f : is-zero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y)) → is-zero-ℕ (abs-ℤ x)
   f = is-zero-left-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y)
 
 is-positive-gcd-is-positive-right-ℤ :
@@ -237,7 +251,7 @@ is-positive-gcd-is-positive-right-ℤ x y H =
       ( abs-ℤ y)
       ( λ p → is-nonzero-abs-ℤ y H (f p)))
   where
-  f : is-zero-ℕ (add-ℕ (abs-ℤ x) (abs-ℤ y)) → is-zero-ℕ (abs-ℤ y)
+  f : is-zero-ℕ ((abs-ℤ x) +ℕ (abs-ℤ y)) → is-zero-ℕ (abs-ℤ y)
   f = is-zero-right-is-zero-add-ℕ (abs-ℤ x) (abs-ℤ y)
 
 is-positive-gcd-ℤ :

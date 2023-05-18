@@ -9,20 +9,16 @@ module lists.arrays where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unit-type
-open import foundation.universal-property-coproduct-types
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -51,8 +47,8 @@ module _
   length-array : array A → ℕ
   length-array = pr1
 
-  map-array : (t : array A) → Fin (length-array t) → A
-  map-array = pr2
+  functional-vec-array : (t : array A) → Fin (length-array t) → A
+  functional-vec-array = pr2
 
   empty-array : array A
   pr1 (empty-array) = zero-ℕ
@@ -81,7 +77,7 @@ module _
   cons-array : A → array A → array A
   cons-array a t =
     ( succ-ℕ (length-array t) ,
-      ind-coprod (λ _ → A) (map-array t) λ _ → a)
+      ind-coprod (λ _ → A) (functional-vec-array t) λ _ → a)
 
   revert-array : array A → array A
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
@@ -152,4 +148,22 @@ module _
       list-array
       isretr-array-list
       issec-array-list
+```
+
+### Computational rules of the equivalence between arrays and lists
+
+```agda
+  compute-length-list-list-vec :
+    (n : ℕ) (v : vec A n) →
+    length-list (list-vec n v) ＝ n
+  compute-length-list-list-vec zero-ℕ v = refl
+  compute-length-list-list-vec (succ-ℕ n) (x ∷ v) =
+    ap succ-ℕ (compute-length-list-list-vec n v)
+
+  compute-length-list-list-array :
+    (t : array A) → length-list (list-array t) ＝ length-array t
+  compute-length-list-list-array t =
+    compute-length-list-list-vec
+      ( length-array t)
+      ( listed-vec-functional-vec (length-array t) (functional-vec-array t))
 ```

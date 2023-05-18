@@ -9,6 +9,7 @@ module foundation.intersections-subtypes where
 ```agda
 open import foundation.conjunction
 open import foundation.decidable-subtypes
+open import foundation.large-locale-of-subtypes
 
 open import foundation-core.propositions
 open import foundation-core.subtypes
@@ -32,7 +33,7 @@ module _
   where
 
   intersection-subtype : subtype l1 X → subtype l2 X → subtype (l1 ⊔ l2) X
-  intersection-subtype P Q x = conj-Prop (P x) (Q x)
+  intersection-subtype = meet-power-set-Large-Locale
 ```
 
 ### The intersection of two decidable subtypes

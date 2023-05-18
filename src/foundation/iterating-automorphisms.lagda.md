@@ -272,16 +272,16 @@ module _
   iterate-automorphism-add-ℤ :
     (k l : ℤ) (e : Aut X) →
     htpy-equiv
-      ( iterate-automorphism-ℤ (add-ℤ k l) e)
+      ( iterate-automorphism-ℤ (k +ℤ l) e)
       ( iterate-automorphism-ℤ k e ∘e iterate-automorphism-ℤ l e)
   iterate-automorphism-add-ℤ (inl zero-ℕ) l e = iterate-automorphism-pred-ℤ' l e
   iterate-automorphism-add-ℤ (inl (succ-ℕ k)) l e =
-    ( iterate-automorphism-pred-ℤ' (add-ℤ (inl k) l) e) ∙h
+    ( iterate-automorphism-pred-ℤ' ((inl k) +ℤ l) e) ∙h
     ( map-inv-equiv e ·l iterate-automorphism-add-ℤ (inl k) l e)
   iterate-automorphism-add-ℤ (inr (inl star)) l e = refl-htpy
   iterate-automorphism-add-ℤ (inr (inr zero-ℕ)) l e =
     iterate-automorphism-succ-ℤ' l e
   iterate-automorphism-add-ℤ (inr (inr (succ-ℕ x))) l e =
-    ( iterate-automorphism-succ-ℤ' (add-ℤ (inr (inr x)) l) e) ∙h
+    ( iterate-automorphism-succ-ℤ' ((inr (inr x)) +ℤ l) e) ∙h
     ( map-equiv e ·l iterate-automorphism-add-ℤ (inr (inr x)) l e)
 ```
