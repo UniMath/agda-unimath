@@ -71,6 +71,7 @@ website: agda-html \
 		SUMMARY.md
 	@cp $(METAFILES) docs/
 	@mdbook build
+	@cp theme/images/agda-unimath-logo.svg  docs/
 
 .PHONY: serve-website
 serve-website:
@@ -82,8 +83,7 @@ graph:
 
 .PHONY: clean
 clean:
-	rm -Rf _build/
-	find docs -name '*.html' -and -name '*.md' -delete -print0
+	@rm -Rf _build/ book/ docs/
 
 .PHONY: pre-commit
 pre-commit:
@@ -97,3 +97,4 @@ install-website-dev:
 	@cargo install mdbook-linkcheck
 	@cargo install mdbook-katex
 	@cargo install mdbook-pagetoc
+	@cargo install mdbook-catppuccin
