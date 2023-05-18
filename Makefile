@@ -70,8 +70,8 @@ SUMMARY.md: ${AGDAFILES}
 website: agda-html \
 		SUMMARY.md
 	@cp $(METAFILES) docs/
-	@mdbook build
 	@cp theme/images/agda-unimath-logo.svg  docs/
+	@mdbook build
 
 .PHONY: serve-website
 serve-website:
