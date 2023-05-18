@@ -23,8 +23,6 @@ macros = "theme/latex-macros.txt"
 [preprocessor.catppuccin]
 assets_version = "0.1.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
-[output.katex]
-
 [output.linkcheck]
 follow-web-links = false
 
