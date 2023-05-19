@@ -51,9 +51,9 @@ of this formula then becomes
   ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
-We have picked the concrete group `cycle-prime-decomposition-ℕ (n)`
-because it is closed under cartesian product and also because its groupoid
-cardinality is equal to `1/n`.
+We have picked the concrete group `cycle-prime-decomposition-ℕ (n)` because it
+is closed under cartesian product and also because its groupoid cardinality is
+equal to `1/n`.
 
 ## Definition
 

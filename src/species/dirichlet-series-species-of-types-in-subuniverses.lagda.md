@@ -46,11 +46,11 @@ of this formula then becomes
   ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
-We can generalize the two notions to species of types in
-subuniverses. Let `P` and `Q` two subuniverse such that `P` is closed by
-cartesian product. Let `H : P → UU` be a species such that for every `X , Y : P`
-the following equality is satisfied `H (X × Y) ≃ H X × H Y`. Then we can define
-the `H`-Dirichlet series to any species of subuniverse `T` by
+We can generalize the two notions to species of types in subuniverses. Let `P`
+and `Q` two subuniverse such that `P` is closed by cartesian product. Let
+`H : P → UU` be a species such that for every `X , Y : P` the following equality
+is satisfied `H (X × Y) ≃ H X × H Y`. Then we can define the `H`-Dirichlet
+series to any species of subuniverse `T` by
 
 ```text
 Σ (X : P) (T (X) × (S → H (X)))
