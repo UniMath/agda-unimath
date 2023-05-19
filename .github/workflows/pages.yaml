@@ -76,6 +76,11 @@ jobs:
         with:
           crate: mdbook-linkcheck
 
+      - name: Install mdbook-catppuccin
+        uses: baptiste0928/cargo-install@v1
+        with:
+          crate: mdbook-catppuccin
+
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
