@@ -35,6 +35,8 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.inhabited-types
+open import foundation.coproduct-types
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
@@ -518,6 +520,19 @@ is-inhabited-or-empty-is-finite {l1} {A} f =
   apply-universal-property-trunc-Prop f
     ( is-inhabited-or-empty-Prop A)
     ( is-inhabited-or-empty-count)
+```
+
+### Finite types of cardinality greater than one are inhabited
+
+```agda
+is-inhabited-type-UU-Fin-succ-ℕ :
+  {l1 : Level} (n : ℕ) (A : UU-Fin l1 (succ-ℕ n)) →
+  is-inhabited (type-UU-Fin (succ-ℕ n) A)
+is-inhabited-type-UU-Fin-succ-ℕ n A =
+   apply-universal-property-trunc-Prop
+    ( pr2 A)
+    ( is-inhabited-Prop (type-UU-Fin (succ-ℕ n) A))
+    ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin n)))
 ```
 
 ### If `X` is finite, then its propositional truncation is decidable

@@ -50,7 +50,7 @@ module _
       P (subuniverse-global-subuniverse Q l4) T X)
 ```
 
-## Property
+## Properties
 
 ### Equivalent with species of types
 
