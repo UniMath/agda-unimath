@@ -1,4 +1,4 @@
-# Dirichlet series of species of finite inhabited types.
+# Dirichlet series of species of finite inhabited types
 
 ```agda
 module species.dirichlet-series-species-of-finite-inhabited-types where
@@ -37,23 +37,23 @@ If `s` is a negative integer, the categorified version of this formula is
 Σ (F : 𝔽 ∖ {∅}), T (F) × (S → F)
 ```
 
-Remarks that we can generalize it to species of types
+We can generalize it to species of types as
 
 ```text
 Σ (U : UU) (T (U) × (S → U))
 ```
 
-The interisting case is when `s` is a positive number. The categorified version
-of this formula is
+The interesting case is when `s` is a positive number. The categorified version
+of this formula then becomes
 
 ```text
 Σ ( n : ℕ ∖ {0}),
   ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
-Remarks that we have picked the concrete group `cycle-prime-decomposition-ℕ (n)`
-because it is closed by cartesian product and also because its groupoid
-cardinality is equal to `1/n`
+We have picked the concrete group `cycle-prime-decomposition-ℕ (n)`
+because it is closed under cartesian product and also because its groupoid
+cardinality is equal to `1/n`.
 
 ## Definition
 

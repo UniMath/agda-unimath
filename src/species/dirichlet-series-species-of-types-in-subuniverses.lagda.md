@@ -32,21 +32,21 @@ If `s` is a negative integer, the categorified version of this formula is
 Σ (F : 𝔽 ∖ {∅}), T (F) × (S → F)
 ```
 
-Remarks that we can generalize it to species of types
+We can generalize it to species of types as
 
 ```text
 Σ (U : UU) (T (U) × (S → U))
 ```
 
-The interisting case is when `s` is a positive number. The categorified version
-of this formula is
+The interesting case is when `s` is a positive number. The categorified version
+of this formula then becomes
 
 ```text
 Σ ( n : ℕ ∖ {0}),
   ( Σ (F : UU-Fin n) , T (F) × (S → cycle-prime-decomposition-ℕ (n))
 ```
 
-Remarks that we can generalize the two notions to species of types in
+We can generalize the two notions to species of types in
 subuniverses. Let `P` and `Q` two subuniverse such that `P` is closed by
 cartesian product. Let `H : P → UU` be a species such that for every `X , Y : P`
 the following equality is satisfied `H (X × Y) ≃ H X × H Y`. Then we can define
