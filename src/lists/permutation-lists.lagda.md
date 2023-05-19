@@ -168,7 +168,7 @@ module _
           ( is-in-vec-list-is-in-list l x I)))
 ```
 
-### If `(μ : A → (B → B))` satisfies a property of commutativity, then for `b : B` the function `fold-list b μ` is invariant by permutation
+### If `μ : A → (B → B)` satisfies a commutativity property, then `fold-list b μ` is invariant under permutation for every `b : B`
 
 ```agda
 module _
@@ -266,14 +266,6 @@ compute-list-vec-map-vec-permute-vec-vec-list f p t =
       ( inv (length-permute-list p t))
       ( ( helper-compute-list-vec-map-vec-permute-vec-vec-list f p t)))
 
-private
-  -- I think that this lemma is already in the library, but I didn't find it
-  lemma-tr :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-    (x y : A) (p : x ＝ y) (b : B y) →
-    tr B p (tr B (inv p) b) ＝ b
-  lemma-tr x y refl b = refl
-
 eq-map-list-permute-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   (f : A → B) (p : list A) (t : Permutation (length-list p)) →
@@ -300,9 +292,8 @@ eq-map-list-permute-list {B = B} f p t =
               ( t)) ∙
             ( ap
               ( λ v → permute-vec (length-list p) v t)
-              ( lemma-tr
-                ( length-list (map-list f p))
-                ( length-list p)
+              ( issec-inv-tr
+                ( vec B)
                 ( length-map-list f p)
                 ( map-vec f (vec-list p)))))))) ∙
     ( ( ap

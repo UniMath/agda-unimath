@@ -50,7 +50,7 @@ these two elements.
 ### Transpositions on `Fin n`
 
 This definition uses the `standard-transposition` in
-[`finite-group-theory.transposition`](finite-group-theory.transposition.lagda.md)
+[`finite-group-theory.transposition`](finite-group-theory.transposition.lagda.md).
 
 ```agda
 module _
@@ -83,9 +83,9 @@ module _
     is-fixed-point-standard-transposition (has-decidable-equality-Fin n) neq
 ```
 
-### The transposition which swap the two last element of `Fin (succ-ℕ (succ-ℕ n))`
+### The transposition that swaps the two last elements of `Fin (succ-ℕ (succ-ℕ n))`
 
-We define directly the transposition of `Fin (succ-ℕ (succ-ℕ n))` which exchange
+We define directly the transposition of `Fin (succ-ℕ (succ-ℕ n))` that exchanges
 the two elements associated to `n` and `succ-ℕ n`.
 
 ```agda
@@ -190,7 +190,7 @@ We show that this definiton is an instance of the previous one.
         ( neg-two-Fin (succ-ℕ n)))
 ```
 
-### Transpositions of a pair of adjacent element in `Fin (succ-ℕ n)`
+### Transpositions of a pair of adjacent elements in `Fin (succ-ℕ n)`
 
 #### Definition using `swap-two-last-elements-transposition-Fin`
 
@@ -524,7 +524,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' n x neq =
           htpy-same-transposition-Fin))))
 ```
 
-### Every transpositions is the composition of a list of adjacent transpositions
+### Every transposition is the composition of a list of adjacent transpositions
 
 ```agda
 list-adjacent-transpositions-transposition-Fin :

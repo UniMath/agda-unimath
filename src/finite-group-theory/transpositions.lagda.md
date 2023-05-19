@@ -457,10 +457,10 @@ module _
   other-element-two-elements-transposition =
     pr1 (pr2 two-elements-transposition)
 
-  unequal-elements-two-elements-transposition :
+  neq-elements-two-elements-transposition :
     ¬ ( element-two-elements-transposition ＝
         other-element-two-elements-transposition)
-  unequal-elements-two-elements-transposition =
+  neq-elements-two-elements-transposition =
     pr1 (pr2 (pr2 two-elements-transposition))
 
   abstract
@@ -612,16 +612,16 @@ module _
   other-element-two-elements-transposition-Fin =
     pr1 (pr2 two-elements-transposition-Fin)
 
-  unequal-elements-two-elements-transposition-Fin :
+  neq-elements-two-elements-transposition-Fin :
     ¬ ( element-two-elements-transposition-Fin ＝
         other-element-two-elements-transposition-Fin)
-  unequal-elements-two-elements-transposition-Fin =
+  neq-elements-two-elements-transposition-Fin =
     pr1 (pr2 (pr2 two-elements-transposition-Fin))
 
   eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin :
     standard-2-Element-Decidable-Subtype
       ( has-decidable-equality-Fin n)
-      ( unequal-elements-two-elements-transposition-Fin) ＝
+      ( neq-elements-two-elements-transposition-Fin) ＝
     Y
   eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin =
     pr2 (pr2 (pr2 two-elements-transposition-Fin))
@@ -630,7 +630,7 @@ module _
     htpy-equiv
       ( standard-transposition
         ( has-decidable-equality-Fin n)
-        ( unequal-elements-two-elements-transposition-Fin))
+        ( neq-elements-two-elements-transposition-Fin))
       ( transposition Y)
   htpy-two-elements-transpositon-Fin =
     htpy-eq

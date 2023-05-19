@@ -54,7 +54,7 @@ length-map-list f (cons x l) =
   ap succ-ℕ (length-map-list f l)
 ```
 
-## Link between `map-list` and `map-vec`
+### Link between `map-list` and `map-vec`
 
 ```agda
 module _

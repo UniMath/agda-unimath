@@ -461,7 +461,7 @@ list-standard-transpositions-permutation-Fin n f =
     ( λ P →
       ( element-two-elements-transposition-Fin P ,
         other-element-two-elements-transposition-Fin P) ,
-      unequal-elements-two-elements-transposition-Fin P)
+      neq-elements-two-elements-transposition-Fin P)
     ( list-transpositions-permutation-Fin n f)
 
 private
@@ -476,7 +476,7 @@ private
           ( λ P →
             ( element-two-elements-transposition-Fin P ,
               other-element-two-elements-transposition-Fin P) ,
-            unequal-elements-two-elements-transposition-Fin P)
+            neq-elements-two-elements-transposition-Fin P)
           ( l)))
       ( permutation-list-transpositions l)
   htpy-permutation-list n nil = refl-htpy
@@ -489,7 +489,7 @@ private
             ( λ P →
               ( element-two-elements-transposition-Fin P ,
                 other-element-two-elements-transposition-Fin P) ,
-              unequal-elements-two-elements-transposition-Fin P)
+              neq-elements-two-elements-transposition-Fin P)
            ( l)))) ∙h
     ( map-transposition P ·l
       htpy-permutation-list n l)

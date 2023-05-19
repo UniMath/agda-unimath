@@ -385,12 +385,12 @@ preserves-order-mul-ℕ' k m n H =
 
 ```agda
 preserves-leq-mul-ℕ :
-  (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (mul-ℕ m n) ≤-ℕ (mul-ℕ m' n')
+  (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (m *ℕ n) ≤-ℕ (m' *ℕ n')
 preserves-leq-mul-ℕ m m' n n' H K =
   transitive-leq-ℕ
-    ( mul-ℕ m n)
-    ( mul-ℕ m' n)
-    ( mul-ℕ m' n')
+    ( m *ℕ n)
+    ( m' *ℕ n)
+    ( m' *ℕ n')
     ( preserves-order-mul-ℕ' m' n n' K)
     ( preserves-order-mul-ℕ n m m' H)
 ```

@@ -941,7 +941,7 @@ pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
        ( pr2 d))
 ```
 
-### The sorted list associated with the concatenation of the prime decomposition of `n` and the prime decomposition of `m` is the prime decomposition of `mul-ℕ n m`
+### The sorted list associated with the concatenation of the prime decomposition of `n` and the prime decomposition of `m` is the prime decomposition of `n *ℕ m`
 
 ```agda
 is-prime-list-concat-list-ℕ :
@@ -999,11 +999,11 @@ is-prime-list-permute-list-ℕ p t P =
 is-decomposition-list-concat-list-ℕ :
   (n m : ℕ) (p q : list ℕ) →
   is-decomposition-list-ℕ n p → is-decomposition-list-ℕ m q →
-  is-decomposition-list-ℕ (mul-ℕ n m) (concat-list p q)
+  is-decomposition-list-ℕ (n *ℕ m) (concat-list p q)
 is-decomposition-list-concat-list-ℕ n m p q Dp Dq =
   ( eq-mul-list-concat-list-ℕ p q ∙
     ( ap (mul-ℕ (mul-list-ℕ p)) Dq ∙
-      ap (λ n → mul-ℕ n m) Dp))
+      ap (λ n → n *ℕ m) Dp))
 
 is-decomposition-list-permute-list-ℕ :
   (n : ℕ) (p : list ℕ) (t : Permutation (length-list p)) →
@@ -1017,7 +1017,7 @@ is-prime-decomposition-list-sort-concatenation-ℕ :
   is-prime-decomposition-list-ℕ x p →
   is-prime-decomposition-list-ℕ y q →
   is-prime-decomposition-list-ℕ
-    ( mul-ℕ x y)
+    (x *ℕ y)
     ( insertion-sort-list
       ( ℕ-Decidable-Total-Order)
       ( concat-list p q))
@@ -1046,13 +1046,13 @@ pr2
   ( pr2
     ( is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq)) =
   tr
-    ( λ p → is-decomposition-list-ℕ (mul-ℕ x y) p)
+    ( λ p → is-decomposition-list-ℕ (x *ℕ y) p)
     ( inv
       ( eq-permute-list-permutation-insertion-sort-list
         ( ℕ-Decidable-Total-Order)
         ( concat-list p q)))
     ( is-decomposition-list-permute-list-ℕ
-      ( mul-ℕ x y)
+      ( x *ℕ y)
       ( concat-list p q)
       ( permutation-insertion-sort-list
         ( ℕ-Decidable-Total-Order)
@@ -1069,7 +1069,7 @@ prime-decomposition-list-sort-concatenation-ℕ :
   (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
   is-prime-decomposition-list-ℕ x p →
   is-prime-decomposition-list-ℕ y q →
-  prime-decomposition-list-ℕ (mul-ℕ x y) (preserves-leq-mul-ℕ 1 x 1 y H I)
+  prime-decomposition-list-ℕ (x *ℕ y) (preserves-leq-mul-ℕ 1 x 1 y H I)
 pr1 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
   insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
 pr2 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =

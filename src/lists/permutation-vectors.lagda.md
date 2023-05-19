@@ -207,7 +207,7 @@ module _
           ( is-in-functional-vec-is-in-vec n v x I)))
 ```
 
-### If `(μ : A → (B → B))` satisfies a property of commutativity, then for `b : B` the function `fold-vec b μ` is invariant by permutation
+### If `μ : A → (B → B)` satisfies a commutativity property, then `fold-vec b μ` is invariant under permutation for every `b : B`
 
 ```agda
 module _

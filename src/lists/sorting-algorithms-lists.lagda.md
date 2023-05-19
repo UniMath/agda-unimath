@@ -33,7 +33,7 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-In these file we define the notion of sorting algorithms.
+In this file we define the notion of sorting algorithms for lists.
 
 ## Definition
 

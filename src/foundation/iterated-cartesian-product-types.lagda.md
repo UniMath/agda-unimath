@@ -120,7 +120,7 @@ equiv-iterated-product-Fin-recursive-lists (cons x l) =
   equiv-prod id-equiv (equiv-iterated-product-Fin-recursive-lists l)
 ```
 
-### The cartesian product of two iterated cartesian product (via list) is the iterated cartesian product of the concatenation of the corresponding lists
+### The cartesian product of two iterated cartesian products (via list) is the iterated cartesian product of the concatenation of the corresponding lists
 
 ```agda
 equiv-product-iterated-product-lists :

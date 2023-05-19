@@ -72,16 +72,16 @@ cycle-prime-decomposition-ℕ n H =
 
 ## Properties
 
-### Cycle prime decomposition is closed by cartesian product
+### Cycle prime decomposition are closed under cartesian products
 
 The cartesian product of the cycle prime decomposition of `n` and `m` is equal
-to the cycle prime decomposition of `mul-ℕ n m`
+to the cycle prime decomposition of `n *ℕ m`.
 
 ```agda
 equiv-product-cycle-prime-decomposition-ℕ :
   (n m : ℕ) → (H : leq-ℕ 1 n) → (I : leq-ℕ 1 m) →
   ( cycle-prime-decomposition-ℕ n H × cycle-prime-decomposition-ℕ m I) ≃
-  cycle-prime-decomposition-ℕ (mul-ℕ n m) (preserves-leq-mul-ℕ 1 n 1 m H I)
+  cycle-prime-decomposition-ℕ (n *ℕ m) (preserves-leq-mul-ℕ 1 n 1 m H I)
 equiv-product-cycle-prime-decomposition-ℕ n m H I =
   ( ( equiv-eq
       ( ap
@@ -96,7 +96,7 @@ equiv-product-cycle-prime-decomposition-ℕ n m H I =
             ( pr1)
             ( eq-is-contr'
               ( fundamental-theorem-arithmetic-list-ℕ
-                ( mul-ℕ n m)
+                ( n *ℕ m)
                 ( preserves-leq-mul-ℕ 1 n 1 m H I))
               ( prime-decomposition-list-sort-concatenation-ℕ
                 ( n)
@@ -112,7 +112,7 @@ equiv-product-cycle-prime-decomposition-ℕ n m H I =
                   m
                   I))
               ( prime-decomposition-fundamental-theorem-arithmetic-list-ℕ
-                ( mul-ℕ n m)
+                (n *ℕ m)
                 ( preserves-leq-mul-ℕ 1 n 1 m H I))))))) ∘e
     ( equiv-eq
       ( ap
