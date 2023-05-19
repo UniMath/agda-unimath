@@ -7,6 +7,7 @@ module species.species-of-types-in-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -15,7 +16,6 @@ open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.cartesian-product-types
 
 open import species.species-of-types
 ```

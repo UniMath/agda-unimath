@@ -1,4 +1,4 @@
-# Dirichlet series of species of finite inhabited types.
+# Dirichlet series of species of types in subuniverses
 
 ```agda
 module species.dirichlet-series-species-of-types-in-subuniverses where
@@ -7,10 +7,10 @@ module species.dirichlet-series-species-of-types-in-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.subuniverses
+open import foundation.universe-levels
 
 open import species.species-of-types-in-subuniverses
 ```
@@ -38,8 +38,8 @@ Remarks that we can generalize it to species of types
 Σ (U : UU) (T (U) × (S → U))
 ```
 
-The interisting case is when `s` is a positive number. The categorified
-version of this formula is
+The interisting case is when `s` is a positive number. The categorified version
+of this formula is
 
 ```text
 Σ ( n : ℕ ∖ {0}),
@@ -49,8 +49,8 @@ version of this formula is
 Remarks that we can generalize the two notions to species of types in
 subuniverses. Let `P` and `Q` two subuniverse such that `P` is closed by
 cartesian product. Let `H : P → UU` be a species such that for every `X , Y : P`
-the following equality is satisfied `H (X × Y) ≃ H X × H Y`.
-Then we can define the `H`-Dirichlet series to any species of subuniverse `T` by
+the following equality is satisfied `H (X × Y) ≃ H X × H Y`. Then we can define
+the `H`-Dirichlet series to any species of subuniverse `T` by
 
 ```text
 Σ (X : P) (T (X) × (S → H (X)))

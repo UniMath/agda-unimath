@@ -8,9 +8,9 @@ module species.products-dirichlet-series-species-of-types-in-subuniverses where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.universe-levels
-open import foundation.subuniverses
 open import foundation.functions
+open import foundation.subuniverses
+open import foundation.universe-levels
 
 open import species.dirichlet-series-species-of-types-in-subuniverses
 open import species.species-of-types-in-subuniverses

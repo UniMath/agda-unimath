@@ -9,16 +9,15 @@ module species.dirichlet-series-species-of-finite-inhabited-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import species.species-of-finite-inhabited-types
 
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.cycle-prime-decomposition-natural-numbers
+open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
-
 ```
 
 </details>
@@ -44,8 +43,8 @@ Remarks that we can generalize it to species of types
 Σ (U : UU) (T (U) × (S → U))
 ```
 
-The interisting case is when `s` is a positive number. The categorified
-version of this formula is
+The interisting case is when `s` is a positive number. The categorified version
+of this formula is
 
 ```text
 Σ ( n : ℕ ∖ {0}),
