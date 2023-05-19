@@ -1,4 +1,4 @@
-# Product of Dirichlet series of species of finite inhabited types
+# Products of Dirichlet series of species of finite inhabited types
 
 ```agda
 module species.products-dirichlet-series-species-of-finite-inhabited-types where
