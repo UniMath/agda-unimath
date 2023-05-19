@@ -78,7 +78,7 @@ module _
 
 ### Strong induction for W-types
 
-#### We define an operation □-𝕎 that acts on families over 𝕎 A B
+#### We define an operation `□-𝕎` that acts on families over `𝕎 A B`
 
 ```agda
 module _
