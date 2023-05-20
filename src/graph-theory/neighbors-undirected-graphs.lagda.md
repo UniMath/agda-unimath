@@ -25,10 +25,12 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-The type of neighbors a vertex `x` of an undirected graph `G` is the type of all
+The type of **neighbors** of a vertex `x` of an [undirected graph](graph-theory.undirected-graphs.md) `G` is the type of all
 vertices `y` in `G` equipped with an edge from `x` to `y`.
 
-## Definition
+## Definitions
+
+### The type of neighbors of an element in an undirected graph
 
 ```agda
 module _

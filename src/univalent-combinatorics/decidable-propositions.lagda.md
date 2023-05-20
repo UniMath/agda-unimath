@@ -26,6 +26,12 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
+## Idea
+
+We prove several properties of [decidable propositions](foundation.decidable-propositions.md) and the type of all decidable propositions involving [countings](univalent-combinatorics.counting.md) and [finiteness](univalent-combinatorics.finite-types.md).
+
+## Properties
+
 ### Propositions have countings if and only if they are decidable
 
 ```agda
@@ -42,12 +48,12 @@ count-is-decidable-is-prop H (inl x) =
   count-is-contr (is-proof-irrelevant-is-prop H x)
 count-is-decidable-is-prop H (inr f) = count-is-empty f
 
-count-Decidable-Prop :
+count-is-decidable-type-Prop :
   {l1 : Level} (P : Prop l1) →
   is-decidable (type-Prop P) → count (type-Prop P)
-count-Decidable-Prop P (inl p) =
+count-is-decidable-type-Prop P (inl p) =
   count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) p)
-count-Decidable-Prop P (inr f) = count-is-empty f
+count-is-decidable-type-Prop P (inr f) = count-is-empty f
 ```
 
 ### We can count the elements of an identity type of a type that has decidable equality
@@ -55,7 +61,7 @@ count-Decidable-Prop P (inr f) = count-is-empty f
 ```agda
 cases-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
-  (e : is-decidable (Id x y)) → count (Id x y)
+  (e : is-decidable (x ＝ y)) → count (x ＝ y)
 cases-count-eq d {x} {y} (inl p) =
   count-is-contr
     ( is-proof-irrelevant-is-prop (is-set-has-decidable-equality d x y) p)
@@ -63,12 +69,12 @@ cases-count-eq d (inr f) =
   count-is-empty f
 
 count-eq :
-  {l : Level} {X : UU l} → has-decidable-equality X → (x y : X) → count (Id x y)
+  {l : Level} {X : UU l} → has-decidable-equality X → (x y : X) → count (x ＝ y)
 count-eq d x y = cases-count-eq d (d x y)
 
 cases-number-of-elements-count-eq' :
   {l : Level} {X : UU l} {x y : X} →
-  is-decidable (Id x y) → ℕ
+  is-decidable (x ＝ y) → ℕ
 cases-number-of-elements-count-eq' (inl p) = 1
 cases-number-of-elements-count-eq' (inr f) = 0
 
@@ -79,17 +85,16 @@ number-of-elements-count-eq' d x y =
 
 cases-number-of-elements-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
-  (e : is-decidable (Id x y)) →
+  (e : is-decidable (x ＝ y)) →
   Id ( number-of-elements-count (cases-count-eq d e))
      ( cases-number-of-elements-count-eq' e)
 cases-number-of-elements-count-eq d (inl p) = refl
 cases-number-of-elements-count-eq d (inr f) = refl
 
-abstract
-  number-of-elements-count-eq :
-    {l : Level} {X : UU l} (d : has-decidable-equality X) (x y : X) →
-    Id ( number-of-elements-count (count-eq d x y))
-      ( number-of-elements-count-eq' d x y)
-  number-of-elements-count-eq d x y =
-    cases-number-of-elements-count-eq d (d x y)
+number-of-elements-count-eq :
+  {l : Level} {X : UU l} (d : has-decidable-equality X) (x y : X) →
+  number-of-elements-count (count-eq d x y) ＝
+  number-of-elements-count-eq' d x y
+number-of-elements-count-eq d x y =
+  cases-number-of-elements-count-eq d (d x y)
 ```

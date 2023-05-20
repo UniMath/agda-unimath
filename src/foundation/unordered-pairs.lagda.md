@@ -14,6 +14,7 @@ open import foundation.homotopies
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.unit-type
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
@@ -344,5 +345,29 @@ id-equiv-standard-unordered-pair x y =
 
 unordered-distinct-pair :
   {l : Level} (A : UU l) → UU (lsuc lzero ⊔ l)
-unordered-distinct-pair A = Σ (UU-Fin lzero 2) (λ X → pr1 X ↪ A)
+unordered-distinct-pair A =
+  Σ (UU-Fin lzero 2) (λ X → pr1 X ↪ A)
+```
+
+### Every unordered pair is merely equal to a standard unordered pair
+
+```agda
+is-surjective-standard-unordered-pair :
+  {l : Level} {A : UU l} (p : unordered-pair A) →
+  type-trunc-Prop
+    ( Σ A (λ x → Σ A (λ y → standard-unordered-pair x y ＝ p)))
+is-surjective-standard-unordered-pair (I , a) =
+  apply-universal-property-trunc-Prop
+    ( has-two-elements-type-2-Element-Type I)
+    ( trunc-Prop
+      ( Σ _ (λ x → Σ _ (λ y → standard-unordered-pair x y ＝ (I , a)))))
+    ( λ e →
+      unit-trunc-Prop
+        ( a (map-equiv e (zero-Fin 1)) ,
+          a (map-equiv e (one-Fin 1)) ,
+          eq-Eq-unordered-pair
+            ( standard-unordered-pair _ _)
+            ( I , a)
+            ( e)
+            ( λ { (inl (inr star)) → refl ; (inr star) → refl})))
 ```

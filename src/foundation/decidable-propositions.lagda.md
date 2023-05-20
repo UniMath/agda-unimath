@@ -168,6 +168,10 @@ pr2 (iff-universes-Decidable-Prop l l' P) p =
 is-set-Decidable-Prop : {l : Level} → is-set (Decidable-Prop l)
 is-set-Decidable-Prop {l} =
   is-set-equiv bool equiv-bool-Decidable-Prop is-set-bool
+
+Decidable-Prop-Set : (l : Level) → Set (lsuc l)
+pr1 (Decidable-Prop-Set l) = Decidable-Prop l
+pr2 (Decidable-Prop-Set l) = is-set-Decidable-Prop
 ```
 
 ### Extensionality of decidable propositions

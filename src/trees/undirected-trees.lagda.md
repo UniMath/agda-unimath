@@ -37,6 +37,17 @@ x to y is contractible for any two vertices x and y.
 ## Definition
 
 ```agda
+is-tree-Undirected-Graph-Prop :
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) → Prop (lsuc lzero ⊔ l1 ⊔ l2)
+is-tree-Undirected-Graph-Prop G =
+  Π-Prop
+    ( vertex-Undirected-Graph G)
+    ( λ x →
+      Π-Prop
+        ( vertex-Undirected-Graph G)
+        ( λ y →
+          is-contr-Prop (trail-Undirected-Graph G x y)))
+
 is-tree-Undirected-Graph :
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) → UU (lsuc lzero ⊔ l1 ⊔ l2)
 is-tree-Undirected-Graph G =

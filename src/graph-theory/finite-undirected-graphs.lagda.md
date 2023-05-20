@@ -1,7 +1,7 @@
 # Finite graphs
 
 ```agda
-module graph-theory.finite-graphs where
+module graph-theory.finite-undirected-graphs where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +11,11 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.propositions
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -24,10 +28,35 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A finite undirected graph consists of a finite set of vertices and a family of
-finite types of edges indexed by unordered pairs of vertices.
+A **finite undirected graph** consists of a [finite type](univalent-combinatorics.finite-types.md) of vertices and a family of
+finite types of edges indexed by [unordered pairs](foundation.unordered-pairs.md) of vertices.
 
 ## Definitions
+
+### The predicate of being a finite undirected graph
+
+```agda
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2)
+  where
+  
+  is-finite-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
+  is-finite-Undirected-Graph-Prop =
+    prod-Prop
+      ( is-finite-Prop (vertex-Undirected-Graph G))
+      ( Π-Prop
+        ( unordered-pair-vertices-Undirected-Graph G)
+        ( λ p → is-finite-Prop (edge-Undirected-Graph G p)))
+
+  is-finite-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  is-finite-Undirected-Graph =
+    type-Prop is-finite-Undirected-Graph-Prop
+
+  is-prop-is-finite-Undirected-Graph :
+    is-prop is-finite-Undirected-Graph
+  is-prop-is-finite-Undirected-Graph =
+    is-prop-type-Prop is-finite-Undirected-Graph-Prop
+```
 
 ### Finite undirected graphs
 
@@ -65,6 +94,19 @@ module _
   undirected-graph-Undirected-Graph-𝔽 : Undirected-Graph l1 l2
   pr1 undirected-graph-Undirected-Graph-𝔽 = vertex-Undirected-Graph-𝔽
   pr2 undirected-graph-Undirected-Graph-𝔽 = edge-Undirected-Graph-𝔽
+
+  is-finite-Undirected-Graph-𝔽 :
+    is-finite-Undirected-Graph undirected-graph-Undirected-Graph-𝔽
+  pr1 is-finite-Undirected-Graph-𝔽 = is-finite-vertex-Undirected-Graph-𝔽
+  pr2 is-finite-Undirected-Graph-𝔽 = is-finite-edge-Undirected-Graph-𝔽
+
+compute-Undirected-Graph-𝔽 :
+  {l1 l2 : Level} →
+  Σ (Undirected-Graph l1 l2) is-finite-Undirected-Graph ≃
+  Undirected-Graph-𝔽 l1 l2
+compute-Undirected-Graph-𝔽 =
+  ( equiv-tot (λ V → inv-distributive-Π-Σ)) ∘e
+  ( interchange-Σ-Σ _)
 ```
 
 ### The following type is expected to be equivalent to Undirected-Graph-𝔽
