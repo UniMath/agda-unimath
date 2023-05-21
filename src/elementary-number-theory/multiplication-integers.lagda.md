@@ -30,8 +30,6 @@ open import foundation.universe-levels
 
 </details>
 
-## Idea
-
 ## Definitions
 
 ### The standard definition of multiplication on ℤ

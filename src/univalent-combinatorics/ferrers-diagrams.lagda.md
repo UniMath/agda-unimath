@@ -260,6 +260,8 @@ module _
 
 ### The type of Ferrers diagrams of any finite type is π-finite
 
+It remains to show this.
+
 ## See also
 
 - Integer partitions in

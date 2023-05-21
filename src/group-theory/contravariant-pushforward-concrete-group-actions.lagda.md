@@ -15,8 +15,6 @@ open import group-theory.homomorphisms-concrete-groups
 
 </details>
 
-## Idea
-
 ## Definition
 
 ```agda
