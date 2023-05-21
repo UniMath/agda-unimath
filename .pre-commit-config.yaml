@@ -42,25 +42,25 @@ repos:
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: spaces-convention-simple
+      - id: spaces-conventions-simple
         name: Simple Agda space conventions
-        entry: scripts/spaces_convention_simple.py
+        entry: scripts/spaces_conventions_simple.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: easily-fixable-long-lines
-        name: Easily fixable long lines of Agda code
-        entry: scripts/easily_fixable_long_lines.py
+      - id: simply-wrappable-long-lines
+        name: Fix simply wrappable long lines of Agda code
+        entry: scripts/simply_wrappable_long_lines.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: max-line-length
-        name: Check the maximum line length is respected
-        entry: scripts/max_line_length.py
+      - id: max-line-length-conventions
+        name: Check the maximum line length conventions
+        entry: scripts/max_line_length_conventions.py
         language: python
         files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
         types_or: [markdown, text]

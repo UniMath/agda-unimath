@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# python3 scripts/spaces_convention_simple.py fileName.lagda.md
+# python3 scripts/spaces_conventions_simple.py fileName.lagda.md
 # Some simply enforcable space conventions
 
 import sys
@@ -29,6 +29,8 @@ def no_whitespace_before_closing_curly_brace(line):
 
 
 if __name__ == '__main__':
+
+    status = 0
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
 
@@ -67,4 +69,4 @@ if __name__ == '__main__':
             with open(fpath, 'w') as f:
                 f.write(new_contents)
 
-    sys.exit(0)
+    sys.exit(status)
