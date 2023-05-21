@@ -17,6 +17,14 @@ repos:
 
   - repo: local
     hooks:
+      - id: markdown-conventions
+        name: Markdown conventions
+        entry: scripts/markdown_conventions.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.md$
+        types_or: [markdown, text]
+
       - id: blank-line-conventions
         name: Blank line conventions in literate Agda Markdown files
         entry: scripts/blank_line_conventions.py
@@ -24,6 +32,7 @@ repos:
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
+        #depends_on: markdown-conventions #TODO: find the correct way to express this
 
       - id: fix-imports
         name: Format Agda imports
