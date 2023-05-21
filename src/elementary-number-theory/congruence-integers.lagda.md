@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 </details>
 
-# The congruence relations on the integers
+## Definitions
 
 ```agda
 cong-ℤ : ℤ → ℤ → ℤ → UU lzero
@@ -32,7 +32,11 @@ cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
 
 is-cong-zero-ℤ : ℤ → ℤ → UU lzero
 is-cong-zero-ℤ k x = cong-ℤ k x zero-ℤ
+```
 
+## Properties
+
+```agda
 is-cong-zero-div-ℤ : (k x : ℤ) → div-ℤ k x → is-cong-zero-ℤ k x
 pr1 (is-cong-zero-div-ℤ k x (pair d p)) = d
 pr2 (is-cong-zero-div-ℤ k x (pair d p)) = p ∙ inv (right-unit-law-add-ℤ x)

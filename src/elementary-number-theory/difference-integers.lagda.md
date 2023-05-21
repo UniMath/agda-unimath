@@ -16,17 +16,26 @@ open import foundation.interchange-law
 
 </details>
 
-# The difference between integers
+## Idea
 
 Since integers of the form `x - y` occur often, we introduce them here and
 derive their basic properties relative to `succ-ℤ`, `neg-ℤ`, and `add-ℤ`. The
 file `multiplication-integers` imports `difference-integers` and more properties
 are derived there.
 
+## Definition
+
 ```agda
 diff-ℤ : ℤ → ℤ → ℤ
 diff-ℤ x y = x +ℤ (neg-ℤ y)
 
+_-ℤ_ = diff-ℤ
+infix 30 _-ℤ_
+```
+
+## Properties
+
+```agda
 ap-diff-ℤ : {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → diff-ℤ x y ＝ diff-ℤ x' y'
 ap-diff-ℤ p q = ap-binary diff-ℤ p q
 
@@ -39,7 +48,7 @@ eq-diff-ℤ {x} {y} H =
         ( left-unit-law-add-ℤ y))))
 
 is-zero-diff-ℤ' : (x : ℤ) → is-zero-ℤ (diff-ℤ x x)
-is-zero-diff-ℤ' x = right-inverse-law-add-ℤ x
+is-zero-diff-ℤ' = right-inverse-law-add-ℤ
 
 is-zero-diff-ℤ :
   {x y : ℤ} → x ＝ y → is-zero-ℤ (diff-ℤ x y)
