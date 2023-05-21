@@ -17,9 +17,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: remove-extra-blank-lines
-        name: Remove extra blank lines in Agda files
-        entry: scripts/remove_extra_blank_lines.py
+      - id: blank-line-conventions
+        name: Blank line conventions in literate Agda Markdown files
+        entry: scripts/blank_line_conventions.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
