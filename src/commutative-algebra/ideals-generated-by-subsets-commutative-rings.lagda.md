@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 open import lists.concatenation-lists
 
 open import ring-theory.ideals-generated-by-subsets-rings
+open import ring-theory.subsets-rings
 ```
 
 </details>
@@ -62,10 +64,10 @@ module _
 
   preserves-concat-ev-formal-combination-subset-Commutative-Ring :
     (u v : formal-combination-subset-Commutative-Ring) →
-    Id ( ev-formal-combination-subset-Commutative-Ring (concat-list u v))
-       ( add-Commutative-Ring R
-         ( ev-formal-combination-subset-Commutative-Ring u)
-         ( ev-formal-combination-subset-Commutative-Ring v))
+    ( ev-formal-combination-subset-Commutative-Ring (concat-list u v)) ＝
+    ( add-Commutative-Ring R
+      ( ev-formal-combination-subset-Commutative-Ring u)
+      ( ev-formal-combination-subset-Commutative-Ring v))
   preserves-concat-ev-formal-combination-subset-Commutative-Ring =
     preserves-concat-ev-formal-combination-subset-Ring
       ( ring-Commutative-Ring R)
@@ -74,17 +76,21 @@ module _
   mul-formal-combination-subset-Commutative-Ring :
     type-Commutative-Ring R →
     formal-combination-subset-Commutative-Ring →
+    type-Commutative-Ring R →
     formal-combination-subset-Commutative-Ring
   mul-formal-combination-subset-Commutative-Ring =
     mul-formal-combination-subset-Ring (ring-Commutative-Ring R) S
 
   preserves-mul-ev-formal-combination-subset-Commutative-Ring :
     (r : type-Commutative-Ring R)
-    (u : formal-combination-subset-Commutative-Ring) →
+    (u : formal-combination-subset-Commutative-Ring)
+    (t : type-Commutative-Ring R) →
     Id ( ev-formal-combination-subset-Commutative-Ring
-         ( mul-formal-combination-subset-Commutative-Ring r u))
-       ( mul-Commutative-Ring R r
-         ( ev-formal-combination-subset-Commutative-Ring u))
+         ( mul-formal-combination-subset-Commutative-Ring r u t))
+       ( mul-Commutative-Ring R
+         ( mul-Commutative-Ring R r
+           ( ev-formal-combination-subset-Commutative-Ring u))
+         ( t))
   preserves-mul-ev-formal-combination-subset-Commutative-Ring =
     preserves-mul-ev-formal-combination-subset-Ring
       ( ring-Commutative-Ring R)
@@ -98,18 +104,18 @@ module _
 
   subset-ideal-subset-Commutative-Ring : subset-Commutative-Ring (l1 ⊔ l2) R
   subset-ideal-subset-Commutative-Ring =
-    subset-left-ideal-subset-Ring (ring-Commutative-Ring R) S
+    subset-ideal-subset-Ring (ring-Commutative-Ring R) S
 
   contains-zero-ideal-subset-Commutative-Ring :
     contains-zero-subset-Commutative-Ring R subset-ideal-subset-Commutative-Ring
   contains-zero-ideal-subset-Commutative-Ring =
-    contains-zero-left-ideal-subset-Ring (ring-Commutative-Ring R) S
+    contains-zero-ideal-subset-Ring (ring-Commutative-Ring R) S
 
   is-closed-under-addition-ideal-subset-Commutative-Ring :
     is-closed-under-addition-subset-Commutative-Ring R
       subset-ideal-subset-Commutative-Ring
   is-closed-under-addition-ideal-subset-Commutative-Ring =
-    is-closed-under-addition-left-ideal-subset-Ring
+    is-closed-under-addition-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)
 
@@ -121,11 +127,19 @@ module _
       ( ring-Commutative-Ring R)
       ( S)
 
+  is-closed-under-right-multiplication-ideal-subset-Commutative-Ring :
+    is-closed-under-right-multiplication-subset-Commutative-Ring R
+      subset-ideal-subset-Commutative-Ring
+  is-closed-under-right-multiplication-ideal-subset-Commutative-Ring =
+    is-closed-under-right-multiplication-ideal-subset-Ring
+      ( ring-Commutative-Ring R)
+      ( S)
+
   is-closed-under-negatives-ideal-subset-Commutative-Ring :
     is-closed-under-negatives-subset-Commutative-Ring R
       subset-ideal-subset-Commutative-Ring
   is-closed-under-negatives-ideal-subset-Commutative-Ring =
-    is-closed-under-negatives-left-ideal-subset-Ring
+    is-closed-under-negatives-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)
 
@@ -141,7 +155,7 @@ module _
   contains-subset-ideal-subset-Commutative-Ring :
     S ⊆ subset-ideal-subset-Commutative-Ring
   contains-subset-ideal-subset-Commutative-Ring =
-    contains-subset-left-ideal-subset-Ring
+    contains-subset-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)
 
@@ -152,10 +166,10 @@ module _
     is-in-ideal-Commutative-Ring R I
       ( ev-formal-combination-subset-Commutative-Ring x)
   contains-formal-combinations-ideal-subset-Commutative-Ring I =
-    contains-formal-combinations-left-ideal-subset-Ring
+    contains-formal-combinations-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)
-      ( left-ideal-ideal-Commutative-Ring R I)
+      ( I)
 
   is-ideal-generated-by-subset-ideal-subset-Commutative-Ring :
     (l : Level) →
@@ -164,9 +178,9 @@ module _
       ( contains-subset-ideal-subset-Commutative-Ring)
       ( l)
   is-ideal-generated-by-subset-ideal-subset-Commutative-Ring l I =
-    is-left-ideal-generated-by-subset-left-ideal-subset-Ring
+    is-ideal-generated-by-subset-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)
       ( l)
-      ( left-ideal-ideal-Commutative-Ring R I)
+      ( I)
 ```

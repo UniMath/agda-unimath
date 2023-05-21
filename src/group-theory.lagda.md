@@ -72,6 +72,8 @@ open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.intersections-subgroups-abelian-groups public
+open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
@@ -82,7 +84,6 @@ open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels public
 open import group-theory.kernels-homomorphisms-concrete-groups public
-open import group-theory.large-locale-of-subgroups-groups public
 open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
@@ -130,6 +131,7 @@ open import group-theory.subgroups-generated-by-subsets-groups public
 open import group-theory.submonoids public
 open import group-theory.submonoids-commutative-monoids public
 open import group-theory.subsemigroups public
+open import group-theory.subsets-abelian-groups public
 open import group-theory.subsets-commutative-monoids public
 open import group-theory.subsets-groups public
 open import group-theory.subsets-monoids public

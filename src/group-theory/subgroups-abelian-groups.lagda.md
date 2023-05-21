@@ -25,6 +25,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.semigroups
 open import group-theory.subgroups
+open import group-theory.subsets-abelian-groups
 open import group-theory.subsets-groups
 
 open import order-theory.large-posets
@@ -36,18 +37,6 @@ open import order-theory.preorders
 </details>
 
 ## Definitions
-
-### Subsets of abelian groups
-
-```agda
-subset-Ab :
-  (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
-subset-Ab l A = subset-Group l (group-Ab A)
-
-is-set-subset-Ab :
-  (l : Level) {l1 : Level} (A : Ab l1) → is-set (subset-Ab l A)
-is-set-subset-Ab l A = is-set-subset-Group (group-Ab A)
-```
 
 ### Subgroups of abelian groups
 

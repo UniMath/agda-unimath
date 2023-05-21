@@ -23,7 +23,8 @@ open import order-theory.greatest-lower-bounds-large-posets
 
 ## Idea
 
-The **intersection** of two subgroups `H, K ≤ G` is again closed under the group operations, and is therefore a subgroup of `G`.
+The **intersection** of two subgroups `H, K ≤ G` is again closed under the group
+operations, and is therefore a subgroup of `G`.
 
 ## Definitions
 
