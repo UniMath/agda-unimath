@@ -10,6 +10,7 @@ module commutative-algebra.radicals-of-ideals-commutative-rings where
 open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
@@ -18,11 +19,11 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.identity-types
 ```
 
 </details>
@@ -154,15 +155,72 @@ module _
   (I : ideal-Commutative-Ring l2 A) (J : ideal-Commutative-Ring l3 A)
   where
 
-  preserves-intersection-radical-of-ideal-commutative-ring :
-    intersection-ideal-Commutative-Ring A
-    ( radical-of-ideal-Commutative-Ring A I)
-    ( radical-of-ideal-Commutative-Ring A J) ＝
-    radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J)
-  preserves-intersection-radical-of-ideal-commutative-ring =
-    eq-has-same-elements-ideal-Commutative-Ring A
-    (intersection-ideal-Commutative-Ring A (radical-of-ideal-Commutative-Ring A I) (radical-of-ideal-Commutative-Ring A J))
-    (radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J))
-    {!  !}
+  forward-inclusion-intersection-radical-of-ideal-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( intersection-ideal-Commutative-Ring A
+        ( radical-of-ideal-Commutative-Ring A I)
+        ( radical-of-ideal-Commutative-Ring A J))
+      ( radical-of-ideal-Commutative-Ring A
+        ( intersection-ideal-Commutative-Ring A I J))
+  forward-inclusion-intersection-radical-of-ideal-Commutative-Ring x (H , K) =
+    apply-universal-property-trunc-Prop H
+      ( subset-radical-of-ideal-Commutative-Ring A
+        ( intersection-ideal-Commutative-Ring A I J)
+        ( x))
+      ( λ (n , H') →
+        apply-universal-property-trunc-Prop K
+          ( subset-radical-of-ideal-Commutative-Ring A
+            ( intersection-ideal-Commutative-Ring A I J)
+            ( x))
+          ( λ (m , K') →
+            intro-∃
+              ( add-ℕ n m)
+              ( ( is-closed-under-eq-ideal-Commutative-Ring A I
+                  ( is-closed-under-right-multiplication-ideal-Commutative-Ring
+                    ( A)
+                    ( I)
+                    ( power-Commutative-Ring A n x)
+                    ( power-Commutative-Ring A m x)
+                    ( H'))
+                  ( inv ( power-add-Commutative-Ring A n m))) ,
+                ( is-closed-under-eq-ideal-Commutative-Ring A J
+                  ( is-closed-under-left-multiplication-ideal-Commutative-Ring
+                    ( A)
+                    ( J)
+                    ( power-Commutative-Ring A n x)
+                    ( power-Commutative-Ring A m x)
+                    ( K'))
+                  ( inv ( power-add-Commutative-Ring A n m))))))
 
+  backward-inclusion-intersection-radical-of-ideal-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( radical-of-ideal-Commutative-Ring A
+        ( intersection-ideal-Commutative-Ring A I J))
+      ( intersection-ideal-Commutative-Ring A
+        ( radical-of-ideal-Commutative-Ring A I)
+        ( radical-of-ideal-Commutative-Ring A J))
+  backward-inclusion-intersection-radical-of-ideal-Commutative-Ring x H =
+    apply-universal-property-trunc-Prop H
+      ( subset-intersection-ideal-Commutative-Ring A
+        ( radical-of-ideal-Commutative-Ring A I)
+        ( radical-of-ideal-Commutative-Ring A J)
+        ( x))
+      ( λ (n , H' , K') → (intro-∃ n H' , intro-∃ n K'))
+
+  preserves-intersection-radical-of-ideal-Commutative-Ring :
+    ( intersection-ideal-Commutative-Ring A
+      ( radical-of-ideal-Commutative-Ring A I)
+      ( radical-of-ideal-Commutative-Ring A J)) ＝
+    ( radical-of-ideal-Commutative-Ring A
+      ( intersection-ideal-Commutative-Ring A I J))
+  preserves-intersection-radical-of-ideal-Commutative-Ring =
+    eq-has-same-elements-ideal-Commutative-Ring A
+      ( intersection-ideal-Commutative-Ring A
+        ( radical-of-ideal-Commutative-Ring A I)
+        ( radical-of-ideal-Commutative-Ring A J))
+      ( radical-of-ideal-Commutative-Ring A
+        ( intersection-ideal-Commutative-Ring A I J))
+      ( λ x →
+        forward-inclusion-intersection-radical-of-ideal-Commutative-Ring x ,
+        backward-inclusion-intersection-radical-of-ideal-Commutative-Ring x)
 ```

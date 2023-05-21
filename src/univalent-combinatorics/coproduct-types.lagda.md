@@ -23,7 +23,6 @@ open import foundation.propositional-truncations
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
-open import foundation.homotopies
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.counting-decidable-subtypes

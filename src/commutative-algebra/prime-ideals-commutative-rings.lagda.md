@@ -9,18 +9,18 @@ module commutative-algebra.prime-ideals-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.disjunction
+open import foundation.functions
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.functions
 
 open import ring-theory.subsets-rings
 ```
@@ -91,13 +91,15 @@ module _
     {x y : type-Commutative-Ring R} → is-in-prime-ideal-Commutative-Ring x →
     (x ＝ y) → is-in-prime-ideal-Commutative-Ring y
   is-closed-under-eq-prime-ideal-Commutative-Ring =
-    is-closed-under-eq-subset-Commutative-Ring R subset-prime-ideal-Commutative-Ring
+    is-closed-under-eq-subset-Commutative-Ring R
+      subset-prime-ideal-Commutative-Ring
 
   is-closed-under-eq-prime-ideal-Commutative-Ring' :
     {x y : type-Commutative-Ring R} → is-in-prime-ideal-Commutative-Ring y →
     (x ＝ y) → is-in-prime-ideal-Commutative-Ring x
   is-closed-under-eq-prime-ideal-Commutative-Ring' =
-    is-closed-under-eq-subset-Commutative-Ring' R subset-prime-ideal-Commutative-Ring
+    is-closed-under-eq-subset-Commutative-Ring' R
+      subset-prime-ideal-Commutative-Ring
 
   type-prime-ideal-Commutative-Ring : UU (l1 ⊔ l2)
   type-prime-ideal-Commutative-Ring =
@@ -161,10 +163,14 @@ is-radical-prime-ideal-Commutative-Ring R P x zero-ℕ p =
     ( p)
     ( x)
 is-radical-prime-ideal-Commutative-Ring R P x (succ-ℕ n) p =
-  elim-disj-Prop (subset-prime-ideal-Commutative-Ring R P (power-Commutative-Ring R n x))
-  ( subset-prime-ideal-Commutative-Ring R P x)
-  ( subset-prime-ideal-Commutative-Ring R P x)
-  ( ( is-radical-prime-ideal-Commutative-Ring R P x n) , id)
- (is-prime-ideal-ideal-prime-ideal-Commutative-Ring R P (power-Commutative-Ring R n x) x
-    ( is-closed-under-eq-prime-ideal-Commutative-Ring R P p (power-succ-Commutative-Ring R n x)))
+  elim-disj-Prop
+    ( subset-prime-ideal-Commutative-Ring R P (power-Commutative-Ring R n x))
+    ( subset-prime-ideal-Commutative-Ring R P x)
+    ( subset-prime-ideal-Commutative-Ring R P x)
+    ( is-radical-prime-ideal-Commutative-Ring R P x n , id)
+    ( is-prime-ideal-ideal-prime-ideal-Commutative-Ring R P
+      ( power-Commutative-Ring R n x)
+      ( x)
+      ( is-closed-under-eq-prime-ideal-Commutative-Ring R P p
+        ( power-succ-Commutative-Ring R n x)))
 ```

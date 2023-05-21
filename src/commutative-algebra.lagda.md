@@ -30,6 +30,7 @@ open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
+open import commutative-algebra.poset-of-ideals-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-semirings public
 open import commutative-algebra.precategory-of-commutative-rings public

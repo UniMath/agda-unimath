@@ -9,22 +9,21 @@ module commutative-algebra.nilradical-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
-open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.existential-quantification
+open import foundation.functions
 open import foundation.identity-types
-open import foundation.universe-levels
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.disjunction
-open import foundation.functions
+open import foundation.universe-levels
 
 open import ring-theory.nilpotent-elements-rings
 ```
@@ -128,7 +127,6 @@ nilradical-Commutative-Ring A =
 ### The nilradical is contained in every prime ideal
 
 ```agda
-
 is-in-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l) → type-Commutative-Ring R → UU l
 is-in-nilradical-Commutative-Ring R =
@@ -146,8 +144,8 @@ is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
       is-radical-prime-ideal-Commutative-Ring R P x n
       (is-closed-under-eq-prime-ideal-Commutative-Ring' R P
       (contains-zero-prime-ideal-Commutative-Ring R P) p))
-
 ```
+
 ### Nilradical is contained in every radical ideal
 
 ```agda
@@ -162,5 +160,4 @@ is-contained-in-radical-ideal-nilradical-Commutative-Ring R I x p =
     ( λ (n , p) → is-radical-radical-ideal-Commutative-Ring R I x n
     (is-closed-under-eq-radical-ideal-Commutative-Ring' R I
     (contains-zero-radical-ideal-Commutative-Ring R I) p))
-
 ```
