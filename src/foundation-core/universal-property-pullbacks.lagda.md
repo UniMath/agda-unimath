@@ -38,7 +38,7 @@ module _
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
 ```
 
-### Properties
+## Properties
 
 ### 3-for-2 property of pullbacks
 

@@ -67,4 +67,4 @@ sim-congruence-ideal-Ring R I x y =
 
 ### The quotient ring
 
-### The universal property of the quotient ring
+#### The universal property of the quotient ring

@@ -614,6 +614,8 @@ module _
 
 ### The type `Surjection-Into-Truncated-Type l2 (succ-𝕋 k) A` is `k`-truncated
 
+This remains to be shown.
+
 ### Characterization of the identity type of `Surjection-Into-Set l2 A`
 
 ```agda

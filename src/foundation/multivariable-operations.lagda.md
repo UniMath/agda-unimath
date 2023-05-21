@@ -88,7 +88,7 @@ multivariable-operation n A X =
  (multivariable-input n A → X)
 ```
 
-### Properties
+## Properties
 
 ### For the case of constant families, multivariable inputs and vectors coincide
 

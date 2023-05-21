@@ -260,7 +260,7 @@ module _
 
 ### The type of Ferrers diagrams of any finite type is π-finite
 
-It remains to show this.
+This remains to be shown.
 
 ## See also
 
