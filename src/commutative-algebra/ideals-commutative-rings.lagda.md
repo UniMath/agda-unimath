@@ -9,6 +9,7 @@ module commutative-algebra.ideals-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.subsets-commutative-rings
+open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -16,8 +17,11 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
+open import foundation.intersections-subtypes
+open import foundation.subtypes
 
 open import ring-theory.ideals-rings
+open import ring-theory.subsets-rings
 open import ring-theory.subsets-rings
 ```
 
@@ -129,6 +133,13 @@ module _
   is-closed-under-addition-ideal-Commutative-Ring =
     is-closed-under-addition-ideal-Ring (ring-Commutative-Ring R) I
 
+  is-closed-under-negatives-ideal-Commutative-Ring :
+    {x : type-Commutative-Ring R} →
+    is-in-ideal-Commutative-Ring x →
+    is-in-ideal-Commutative-Ring (neg-Commutative-Ring R x)
+  is-closed-under-negatives-ideal-Commutative-Ring =
+    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring) _
+
   is-closed-under-left-multiplication-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring R
       subset-ideal-Commutative-Ring
@@ -186,6 +197,85 @@ pr1 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) x y H =
     ( m y x H)
     ( commutative-mul-Commutative-Ring R y x)
 pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
+```
+
+### Intersection of ideals
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Commutative-Ring l1)
+  (I : ideal-Commutative-Ring l2 R) (J : ideal-Commutative-Ring l3 R)
+  where
+
+  subset-intersection-ideal-Commutative-Ring : subset-Commutative-Ring (l2 ⊔ l3) R
+  subset-intersection-ideal-Commutative-Ring =
+    intersection-subtype
+      (subset-ideal-Commutative-Ring R I)
+      (subset-ideal-Commutative-Ring R J)
+
+  is-in-intersection-ideal-Commutative-Ring : type-Commutative-Ring R → UU (l2 ⊔ l3)
+  is-in-intersection-ideal-Commutative-Ring =
+    is-in-subtype subset-intersection-ideal-Commutative-Ring
+
+  contains-zero-intersection-ideal-Commutative-Ring :
+    is-in-intersection-ideal-Commutative-Ring (zero-Commutative-Ring R)
+  pr1 contains-zero-intersection-ideal-Commutative-Ring = contains-zero-ideal-Commutative-Ring R I
+  pr2 contains-zero-intersection-ideal-Commutative-Ring = contains-zero-ideal-Commutative-Ring R J
+
+  is-closed-under-addition-intersection-ideal-Commutative-Ring :
+    is-closed-under-addition-subset-Commutative-Ring R
+      ( subset-intersection-ideal-Commutative-Ring)
+  pr1 (is-closed-under-addition-intersection-ideal-Commutative-Ring x y (H1 , H2) (K1 , K2)) =
+    is-closed-under-addition-ideal-Commutative-Ring R I x y H1 K1
+  pr2 (is-closed-under-addition-intersection-ideal-Commutative-Ring x y (H1 , H2) (K1 , K2)) =
+    is-closed-under-addition-ideal-Commutative-Ring R J x y H2 K2
+
+  is-closed-under-negatives-intersection-ideal-Commutative-Ring :
+    is-closed-under-negatives-subset-Commutative-Ring R
+      ( subset-intersection-ideal-Commutative-Ring)
+  pr1 (is-closed-under-negatives-intersection-ideal-Commutative-Ring x (H1 , H2)) =
+    is-closed-under-negatives-ideal-Commutative-Ring R I H1
+  pr2 (is-closed-under-negatives-intersection-ideal-Commutative-Ring x (H1 , H2)) =
+    is-closed-under-negatives-ideal-Commutative-Ring R J H2
+
+  is-additive-subgroup-intersection-ideal-Commutative-Ring :
+    is-additive-subgroup-subset-Commutative-Ring R
+      ( subset-intersection-ideal-Commutative-Ring)
+  pr1 is-additive-subgroup-intersection-ideal-Commutative-Ring = contains-zero-intersection-ideal-Commutative-Ring
+  pr1 (pr2 is-additive-subgroup-intersection-ideal-Commutative-Ring) = is-closed-under-addition-intersection-ideal-Commutative-Ring
+  pr2 (pr2 is-additive-subgroup-intersection-ideal-Commutative-Ring) = is-closed-under-negatives-intersection-ideal-Commutative-Ring
+
+  is-closed-under-left-multiplication-intersection-ideal-Commutative-Ring :
+    is-closed-under-left-multiplication-subset-Commutative-Ring R
+      ( subset-intersection-ideal-Commutative-Ring)
+  pr1 (is-closed-under-left-multiplication-intersection-ideal-Commutative-Ring x y (H1 , H2)) = is-closed-under-left-multiplication-ideal-Commutative-Ring R I x y H1
+  pr2 (is-closed-under-left-multiplication-intersection-ideal-Commutative-Ring x y (H1 , H2)) = is-closed-under-left-multiplication-ideal-Commutative-Ring R J x y H2
+
+  intersection-ideal-Commutative-Ring : ideal-Commutative-Ring (l2 ⊔ l3) R
+  intersection-ideal-Commutative-Ring =
+    ideal-left-ideal-Commutative-Ring R
+      subset-intersection-ideal-Commutative-Ring
+      contains-zero-intersection-ideal-Commutative-Ring
+      is-closed-under-addition-intersection-ideal-Commutative-Ring
+      is-closed-under-negatives-intersection-ideal-Commutative-Ring
+      is-closed-under-left-multiplication-intersection-ideal-Commutative-Ring
+```
+
+## Properties
+
+### If 1 is in the ideal, every element is in the ideal
+
+```agda
+is-in-ideal-is-in-ideal-one-Commutative-Ring :
+  {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R) →
+  is-in-ideal-Commutative-Ring R I (one-Commutative-Ring R) →
+  (x : type-Commutative-Ring R) →
+  is-in-ideal-Commutative-Ring R I x
+is-in-ideal-is-in-ideal-one-Commutative-Ring R I p x =
+  is-closed-under-eq-ideal-Commutative-Ring R I
+    ( is-closed-under-left-multiplication-ideal-Commutative-Ring R I x
+      ( one-Commutative-Ring R) p)
+    ( right-unit-law-mul-Commutative-Ring R x)
 ```
 
 ### Characterizing equality of ideals in commutative rings

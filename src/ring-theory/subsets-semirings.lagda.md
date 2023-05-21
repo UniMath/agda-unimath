@@ -8,6 +8,7 @@ module ring-theory.subsets-semirings where
 
 ```agda
 open import foundation.identity-types
+open import foundation.identity-types
 open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets

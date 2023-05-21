@@ -22,6 +22,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+open import foundation.identity-types
 ```
 
 </details>
@@ -141,4 +142,27 @@ module _
       is-closed-under-addition-radical-of-ideal-Commutative-Ring
       is-closed-under-negatives-radical-of-ideal-Commutative-Ring
       is-closed-under-right-multiplication-radical-of-ideal-Commutative-Ring
+```
+
+## Properties
+
+### The radical ideal of an intersection is the intersection of the radicals of the ideals
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Commutative-Ring l1)
+  (I : ideal-Commutative-Ring l2 A) (J : ideal-Commutative-Ring l3 A)
+  where
+
+  preserves-intersection-radical-of-ideal-commutative-ring :
+    intersection-ideal-Commutative-Ring A
+    ( radical-of-ideal-Commutative-Ring A I)
+    ( radical-of-ideal-Commutative-Ring A J) ＝
+    radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J)
+  preserves-intersection-radical-of-ideal-commutative-ring =
+    eq-has-same-elements-ideal-Commutative-Ring A
+    (intersection-ideal-Commutative-Ring A (radical-of-ideal-Commutative-Ring A I) (radical-of-ideal-Commutative-Ring A J))
+    (radical-of-ideal-Commutative-Ring A (intersection-ideal-Commutative-Ring A I J))
+    {!  !}
+
 ```
