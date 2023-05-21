@@ -1,0 +1,99 @@
+# The poset of ideals in a ring
+
+```agda
+module ring-theory.posets-of-ideals-rings where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.subtypes
+open import foundation.universe-levels
+
+open import order-theory.large-posets
+open import order-theory.large-preorders
+
+open import ring-theory.ideals-rings
+open import ring-theory.rings
+```
+
+</details>
+
+## Idea
+
+The [ideals](ring-theory.ideals-rings.md) of a [ring](ring-theory.rings.md) form
+a [large poset](order-theory.large-posets.md) ordered by inclusion.
+
+## Definition
+
+### The inclusion relation on ideals
+
+```agda
+module _
+  {l1 : Level} (R : Ring l1)
+  where
+
+  leq-ideal-Ring-Prop :
+    {l2 l3 : Level} → ideal-Ring l2 R → ideal-Ring l3 R → Prop (l1 ⊔ l2 ⊔ l3)
+  leq-ideal-Ring-Prop I J =
+    leq-subtype-Prop
+      ( subset-ideal-Ring R I)
+      ( subset-ideal-Ring R J)
+
+  leq-ideal-Ring :
+    {l2 l3 : Level} → ideal-Ring l2 R → ideal-Ring l3 R → UU (l1 ⊔ l2 ⊔ l3)
+  leq-ideal-Ring I J =
+    subset-ideal-Ring R I ⊆ subset-ideal-Ring R J
+
+  is-prop-leq-ideal-Ring :
+    {l2 l3 : Level} (I : ideal-Ring l2 R) (J : ideal-Ring l3 R) →
+    is-prop (leq-ideal-Ring I J)
+  is-prop-leq-ideal-Ring I J =
+    is-prop-leq-subtype (subset-ideal-Ring R I) (subset-ideal-Ring R J)
+
+  refl-leq-ideal-Ring :
+    {l2 : Level} (I : ideal-Ring l2 R) → leq-ideal-Ring I I
+  refl-leq-ideal-Ring I =
+    refl-leq-subtype (subset-ideal-Ring R I)
+
+  transitive-leq-ideal-Ring :
+    {l2 l3 l4 : Level}
+    (I : ideal-Ring l2 R) (J : ideal-Ring l3 R) (K : ideal-Ring l4 R) →
+    leq-ideal-Ring J K → leq-ideal-Ring I J → leq-ideal-Ring I K
+  transitive-leq-ideal-Ring I J K =
+    transitive-leq-subtype
+      ( subset-ideal-Ring R I)
+      ( subset-ideal-Ring R J)
+      ( subset-ideal-Ring R K)
+
+  antisymmetric-leq-ideal-Ring :
+    {l2 : Level} (I J : ideal-Ring l2 R) →
+    leq-ideal-Ring I J → leq-ideal-Ring J I → I ＝ J
+  antisymmetric-leq-ideal-Ring I J U V =
+    eq-has-same-elements-ideal-Ring R I J (λ x → U x , V x)
+```
+
+### The large poset of ideals
+
+```agda
+module _
+  {l1 : Level} (R : Ring l1)
+  where
+
+  ideal-Ring-Large-Preorder :
+    Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  type-Large-Preorder ideal-Ring-Large-Preorder l = ideal-Ring l R
+  leq-Large-Preorder-Prop ideal-Ring-Large-Preorder = leq-ideal-Ring-Prop R
+  refl-leq-Large-Preorder ideal-Ring-Large-Preorder = refl-leq-ideal-Ring R
+  transitive-leq-Large-Preorder ideal-Ring-Large-Preorder =
+    transitive-leq-ideal-Ring R
+
+  ideal-Ring-Large-Poset :
+    Large-Poset (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  large-preorder-Large-Poset ideal-Ring-Large-Poset = ideal-Ring-Large-Preorder
+  antisymmetric-leq-Large-Poset ideal-Ring-Large-Poset =
+    antisymmetric-leq-ideal-Ring R
+```
