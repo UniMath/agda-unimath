@@ -21,6 +21,11 @@ if __name__ == '__main__':
         output = re.sub(r'[ \t]+$', '', inputText, flags=re.MULTILINE)
         output = re.sub(r'\n(\s*\n){2,}', '\n\n', output)
 
+        # # Add blank line after `module ... where`
+        # output = re.sub(r'(^([ \t]*)module[\s({][^\n]*\n(\2\s[^\n]*\n)*\2\s([^\n]*[\s)}])?where)\s*\n(?=\s*[^\n\s])', r'\1\n\n',
+        #                 output, flags=re.MULTILINE)
+        # # TODO: must match the first `where` after `module`
+
         # Remove blank lines after a code block starts, and blank lines before a code block ends
         # This only work properly in the absence of unspecified code blocks
         output = re.sub(
