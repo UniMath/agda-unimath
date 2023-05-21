@@ -85,7 +85,7 @@ multivariable-operation :
   ( X : UU l) →
   UU l
 multivariable-operation n A X =
- (multivariable-input n A → X)
+  multivariable-input n A → X
 ```
 
 ## Properties

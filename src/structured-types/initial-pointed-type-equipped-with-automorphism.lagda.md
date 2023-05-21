@@ -106,14 +106,16 @@ htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inl star)) =
   inv
     ( preserves-point-map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X h)
 htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr zero-ℕ)) =
-  ( ap ( map-aut-Pointed-Type-With-Aut X)
-       ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inl star)))) ∙
+  ( ap
+    ( map-aut-Pointed-Type-With-Aut X)
+    ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inl star)))) ∙
   ( inv
     ( preserves-aut-map-hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut
       X h (inr (inl star))))
 htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))) =
-  ( ap ( map-aut-Pointed-Type-With-Aut X)
-       ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr k)))) ∙
+  ( ap
+    ( map-aut-Pointed-Type-With-Aut X)
+    ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr k)))) ∙
   ( inv
     ( preserves-aut-map-hom-Pointed-Type-With-Aut
       ℤ-Pointed-Type-With-Aut X h (inr (inr k))))
@@ -136,8 +138,9 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut :
   (h : hom-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut X)
   (k : ℤ) →
   ( ( preserves-aut-map-ℤ-Pointed-Type-With-Aut X k) ∙
-    ( ap ( map-aut-Pointed-Type-With-Aut X)
-         ( htpy-map-ℤ-Pointed-Type-With-Aut X h k))) ＝
+    ( ap
+      ( map-aut-Pointed-Type-With-Aut X)
+      ( htpy-map-ℤ-Pointed-Type-With-Aut X h k))) ＝
   ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (succ-ℤ k)) ∙
     ( preserves-aut-map-hom-Pointed-Type-With-Aut
       ℤ-Pointed-Type-With-Aut X h k))
@@ -150,8 +153,9 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
       ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
         ( preserves-aut-map-hom-Pointed-Type-With-Aut
           ℤ-Pointed-Type-With-Aut X h neg-one-ℤ))
-      ( ap ( map-equiv (aut-Pointed-Type-With-Aut X))
-           ( htpy-map-ℤ-Pointed-Type-With-Aut X h neg-one-ℤ))
+      ( ap
+        ( map-equiv (aut-Pointed-Type-With-Aut X))
+        ( htpy-map-ℤ-Pointed-Type-With-Aut X h neg-one-ℤ))
       ( triangle-eq-transpose-equiv'
         ( aut-Pointed-Type-With-Aut X)
         ( ( inv
@@ -168,8 +172,9 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k)) =
       ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl k)) ∙
         ( preserves-aut-map-hom-Pointed-Type-With-Aut
           ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k))))
-      ( ap ( map-equiv (aut-Pointed-Type-With-Aut X))
-           ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k))))
+      ( ap
+        ( map-equiv (aut-Pointed-Type-With-Aut X))
+        ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k))))
       ( triangle-eq-transpose-equiv'
         ( aut-Pointed-Type-With-Aut X)
         ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl k)) ∙
@@ -177,16 +182,17 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k)) =
             ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k))))))
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inl star)) =
   ( inv right-unit) ∙
-  ( ( ap ( concat
-           ( ap
-             ( map-aut-Pointed-Type-With-Aut X)
-             ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ))
-           ( map-aut-Pointed-Type-With-Aut X
-             ( map-hom-Pointed-Type-With-Aut
-               ℤ-Pointed-Type-With-Aut X h zero-ℤ)))
-         ( inv (left-inv
-           ( preserves-aut-map-hom-Pointed-Type-With-Aut
-             ℤ-Pointed-Type-With-Aut X h zero-ℤ)))) ∙
+  ( ( ap
+      ( concat
+        ( ap
+          ( map-aut-Pointed-Type-With-Aut X)
+          ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ))
+        ( map-aut-Pointed-Type-With-Aut X
+          ( map-hom-Pointed-Type-With-Aut
+            ℤ-Pointed-Type-With-Aut X h zero-ℤ)))
+      ( inv (left-inv
+        ( preserves-aut-map-hom-Pointed-Type-With-Aut
+          ℤ-Pointed-Type-With-Aut X h zero-ℤ)))) ∙
     ( inv
       ( assoc
         ( ap
@@ -199,16 +205,17 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inl star)) =
           ℤ-Pointed-Type-With-Aut X h zero-ℤ))))
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr zero-ℕ)) =
   ( inv right-unit) ∙
-  ( ( ap ( concat
-           ( ap
-             ( map-aut-Pointed-Type-With-Aut X)
-             ( htpy-map-ℤ-Pointed-Type-With-Aut X h one-ℤ))
-           ( map-aut-Pointed-Type-With-Aut X
-             ( map-hom-Pointed-Type-With-Aut
-               ℤ-Pointed-Type-With-Aut X h one-ℤ)))
-         ( inv (left-inv
-           ( preserves-aut-map-hom-Pointed-Type-With-Aut
-             ℤ-Pointed-Type-With-Aut X h one-ℤ)))) ∙
+  ( ( ap
+      ( concat
+        ( ap
+          ( map-aut-Pointed-Type-With-Aut X)
+          ( htpy-map-ℤ-Pointed-Type-With-Aut X h one-ℤ))
+        ( map-aut-Pointed-Type-With-Aut X
+          ( map-hom-Pointed-Type-With-Aut
+            ℤ-Pointed-Type-With-Aut X h one-ℤ)))
+      ( inv (left-inv
+        ( preserves-aut-map-hom-Pointed-Type-With-Aut
+          ℤ-Pointed-Type-With-Aut X h one-ℤ)))) ∙
     ( inv
       ( assoc
         ( ap
@@ -221,16 +228,17 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr zero-ℕ)) =
           ℤ-Pointed-Type-With-Aut X h one-ℤ))))
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))) =
   ( inv right-unit) ∙
-  ( ( ap ( concat
-           ( ap
-             ( map-aut-Pointed-Type-With-Aut X)
-             ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k)))))
-           ( map-aut-Pointed-Type-With-Aut X
-             ( map-hom-Pointed-Type-With-Aut
-               ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))))))
-         ( inv (left-inv
-           ( preserves-aut-map-hom-Pointed-Type-With-Aut
-             ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))))))) ∙
+  ( ( ap
+      ( concat
+        ( ap
+          ( map-aut-Pointed-Type-With-Aut X)
+          ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k)))))
+        ( map-aut-Pointed-Type-With-Aut X
+          ( map-hom-Pointed-Type-With-Aut
+            ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))))))
+      ( inv (left-inv
+        ( preserves-aut-map-hom-Pointed-Type-With-Aut
+          ℤ-Pointed-Type-With-Aut X h (inr (inr (succ-ℕ k))))))) ∙
     ( inv
       ( assoc
         ( ap

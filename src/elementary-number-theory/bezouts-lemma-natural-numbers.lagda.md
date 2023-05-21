@@ -657,21 +657,26 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
         ＝ dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
           (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
-        by ap (λ p → dist-ℤ (p *ℤ (int-ℕ (succ-ℕ x)))
-             (int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
-               (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)))
+        by
+          ap
+            ( λ p →
+              dist-ℤ
+                ( p *ℤ (int-ℕ (succ-ℕ x)))
+                ( int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
+                  (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)))
           (inv (add-int-ℕ (abs-ℤ a) y))
         ＝ dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (mul-ℤ (int-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
           (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))))) (int-ℕ y))
-        by ap (dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
-             (int-ℕ (succ-ℕ x))))
-          (inv (mul-int-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
-            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
+        by
+          ap
+            ( dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x))))
+            ( inv (mul-int-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
+              (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
         ＝ dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (mul-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))
-        by ap (λ p → dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
+          by ap (λ p → dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
              (int-ℕ (succ-ℕ x))) (p *ℤ (int-ℕ y)))
           (int-abs-is-nonnegative-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u))
@@ -940,7 +945,7 @@ minimal-positive-distance-div-succ-x-eqn x y =
                   ( minimal-positive-distance (succ-ℕ x) y)
                   ( succ-ℕ x))
                 ( minimal-positive-distance (succ-ℕ x) y)))
-       ＝ int-ℕ
+      ＝ int-ℕ
             ( add-ℕ
               ( mul-ℕ
                 ( quotient-euclidean-division-ℕ
@@ -960,7 +965,7 @@ minimal-positive-distance-div-succ-x-eqn x y =
               ( remainder-euclidean-division-ℕ
                 ( minimal-positive-distance (succ-ℕ x) y)
                 ( succ-ℕ x)))
-       ＝ int-ℕ (succ-ℕ x)
+      ＝ int-ℕ (succ-ℕ x)
           by
             ap
               ( int-ℕ)
@@ -1186,7 +1191,7 @@ remainder-min-dist-succ-x-is-distance x y =
                 ( ((int-ℕ q) *ℤ ((int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x))))
         ＝ (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))) +ℤ
            ((((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))) +ℤ
-             (int-ℕ (succ-ℕ x)))
+            (int-ℕ (succ-ℕ x)))
           by associative-add-ℤ
             (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
             (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))
