@@ -123,7 +123,8 @@ fibered-Σ-Decomposition-𝔽 :
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
 fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
   Σ ( Σ-Decomposition-𝔽 l2 l3 A)
-    ( λ D → Σ-Decomposition-𝔽 l4 l5 (finite-indexing-type-Σ-Decomposition-𝔽 A D))
+    ( λ D →
+      Σ-Decomposition-𝔽 l4 l5 (finite-indexing-type-Σ-Decomposition-𝔽 A D))
 ```
 
 ### Displayed double Σ-decompositions

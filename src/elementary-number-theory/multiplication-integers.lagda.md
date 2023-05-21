@@ -407,13 +407,13 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
 
 ```agda
 linear-diff-left-mul-ℤ :
-  (z x y : ℤ) → diff-ℤ (z *ℤ x) (z *ℤ y) ＝ z *ℤ (diff-ℤ x y)
+  (z x y : ℤ) → (z *ℤ x) -ℤ (z *ℤ y) ＝ z *ℤ (x -ℤ y)
 linear-diff-left-mul-ℤ z x y =
   ( ap ((z *ℤ x) +ℤ_) (inv (right-negative-law-mul-ℤ z y))) ∙
   ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
 
 linear-diff-right-mul-ℤ :
-  (x y z : ℤ) → diff-ℤ (x *ℤ z) (y *ℤ z) ＝ (diff-ℤ x y) *ℤ z
+  (x y z : ℤ) → (x *ℤ z) -ℤ (y *ℤ z) ＝ (x -ℤ y) *ℤ z
 linear-diff-right-mul-ℤ x y z =
   ( ap ((x *ℤ z) +ℤ_) (inv (left-negative-law-mul-ℤ y z))) ∙
   ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
@@ -444,10 +444,10 @@ is-injective-left-mul-ℤ x f {y} {z} p =
   eq-diff-ℤ
     ( map-left-unit-law-coprod-is-empty
       ( is-zero-ℤ x)
-      ( is-zero-ℤ (diff-ℤ y z))
+      ( is-zero-ℤ (y -ℤ z))
       ( f)
       ( is-zero-is-zero-mul-ℤ x
-        ( diff-ℤ y z)
+        ( y -ℤ z)
         ( inv (linear-diff-left-mul-ℤ x y z) ∙ is-zero-diff-ℤ p)))
 
 is-injective-right-mul-ℤ :

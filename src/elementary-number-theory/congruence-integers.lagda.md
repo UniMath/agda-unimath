@@ -28,7 +28,7 @@ open import foundation.universe-levels
 
 ```agda
 cong-ℤ : ℤ → ℤ → ℤ → UU lzero
-cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
+cong-ℤ k x y = div-ℤ k (x -ℤ y)
 
 is-cong-zero-ℤ : ℤ → ℤ → UU lzero
 is-cong-zero-ℤ k x = cong-ℤ k x zero-ℤ
@@ -46,11 +46,11 @@ pr1 (div-is-cong-zero-ℤ k x (pair d p)) = d
 pr2 (div-is-cong-zero-ℤ k x (pair d p)) = p ∙ right-unit-law-add-ℤ x
 
 is-indiscrete-cong-ℤ : (k : ℤ) → is-unit-ℤ k → (x y : ℤ) → cong-ℤ k x y
-is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (diff-ℤ x y) H
+is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (x -ℤ y) H
 
 is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ k x y → x ＝ y
 is-discrete-cong-ℤ .zero-ℤ refl x y K =
-  eq-diff-ℤ (is-zero-div-zero-ℤ (diff-ℤ x y) K)
+  eq-diff-ℤ (is-zero-div-zero-ℤ (x -ℤ y) K)
 
 is-unit-cong-succ-ℤ : (k x : ℤ) → cong-ℤ k x (succ-ℤ x) → is-unit-ℤ k
 pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
@@ -134,7 +134,7 @@ cong-int-cong-ℕ :
 cong-int-cong-ℕ k x y H =
   div-sim-unit-ℤ
     ( refl-sim-unit-ℤ (int-ℕ k))
-    ( sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y)))
+    ( sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y)))
     ( tr
       ( div-ℤ (int-ℕ k))
       ( inv (ap int-ℕ (dist-int-ℕ x y)))
@@ -149,6 +149,6 @@ cong-cong-int-ℕ k x y H =
       ( ap int-ℕ (dist-int-ℕ x y))
       ( div-sim-unit-ℤ
         ( refl-sim-unit-ℤ (int-ℕ k))
-        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y))))
+        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
         ( H)))
 ```
