@@ -181,6 +181,5 @@ module _
     is-ideal-generated-by-subset-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)
-      ( l)
       ( I)
 ```

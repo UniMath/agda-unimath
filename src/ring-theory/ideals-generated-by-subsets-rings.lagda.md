@@ -652,12 +652,12 @@ module _
       ( contains-formal-combinations-ideal-subset-Ring I H c)
 
   is-ideal-generated-by-subset-ideal-subset-Ring :
-    (l : Level) →
+    {l : Level} →
     is-ideal-generated-by-subset-Ring R S
       ( ideal-subset-Ring)
       ( contains-subset-ideal-subset-Ring)
       ( l)
-  is-ideal-generated-by-subset-ideal-subset-Ring l J K x H =
+  is-ideal-generated-by-subset-ideal-subset-Ring J K x H =
     apply-universal-property-trunc-Prop H (subset-ideal-Ring R J x) P
     where
     P : subset-ideal-subset-Ring' x → is-in-ideal-Ring R J x

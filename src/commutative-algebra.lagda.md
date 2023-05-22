@@ -24,6 +24,8 @@ open import commutative-algebra.ideals-commutative-rings public
 open import commutative-algebra.ideals-commutative-semirings public
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings public
 open import commutative-algebra.integral-domains public
+open import commutative-algebra.intersections-ideals-commutative-rings public
+open import commutative-algebra.intersections-radical-ideals public
 open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
@@ -31,12 +33,14 @@ open import commutative-algebra.maximal-ideals-commutative-rings public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
 open import commutative-algebra.poset-of-ideals-commutative-rings public
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-rings public
 open import commutative-algebra.powers-of-elements-commutative-semirings public
 open import commutative-algebra.precategory-of-commutative-rings public
 open import commutative-algebra.precategory-of-commutative-semirings public
 open import commutative-algebra.prime-ideals-commutative-rings public
 open import commutative-algebra.products-of-ideals-commutative-rings public
+open import commutative-algebra.products-of-radical-ideals-commutative-rings public
 open import commutative-algebra.radical-ideals-commutative-rings public
 open import commutative-algebra.radicals-of-ideals-commutative-rings public
 open import commutative-algebra.subsets-commutative-rings public

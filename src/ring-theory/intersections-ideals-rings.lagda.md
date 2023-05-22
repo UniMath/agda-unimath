@@ -11,7 +11,10 @@ open import foundation.dependent-pair-types
 open import foundation.intersections-subtypes
 open import foundation.universe-levels
 
+open import order-theory.greatest-lower-bounds-large-posets
+
 open import ring-theory.ideals-rings
+open import ring-theory.posets-of-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```
@@ -24,7 +27,28 @@ The **intersection** of two [ideals](ring-theory.ideals-rings.md) of a
 [ring](ring-theory.rings.md) `R` consists of the elements contained in both of
 them.
 
-## Definition
+## Definitions
+
+### The universal property of intersections of ideals in rings
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Ring l1)
+  (I : ideal-Ring l2 A)
+  (J : ideal-Ring l3 A)
+  where
+
+  is-intersection-ideal-Ring :
+    {l4 : Level} (K : ideal-Ring l4 A) → UUω
+  is-intersection-ideal-Ring K =
+    is-greatest-binary-lower-bound-Large-Poset
+      ( ideal-Ring-Large-Poset A)
+      ( I)
+      ( J)
+      ( K)
+```
+
+### Intersections of ideals in rings
 
 ```agda
 module _
@@ -95,4 +119,12 @@ module _
   intersection-ideal-Ring : ideal-Ring (l2 ⊔ l3) R
   pr1 intersection-ideal-Ring = subset-intersection-ideal-Ring
   pr2 intersection-ideal-Ring = is-ideal-intersection-ideal-Ring
+
+  is-intersection-intersection-ideal-Ring :
+    is-intersection-ideal-Ring R I J intersection-ideal-Ring
+  is-intersection-intersection-ideal-Ring K =
+    is-greatest-binary-lower-bound-intersection-subtype
+      ( subset-ideal-Ring R I)
+      ( subset-ideal-Ring R J)
+      ( subset-ideal-Ring R K)
 ```
