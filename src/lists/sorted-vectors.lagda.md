@@ -95,7 +95,7 @@ module _
   is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
 ```
 
-### If a vector `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the vector.
+### If a vector `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the vector
 
 ```agda
   is-least-element-vec-is-leq-head-sorted-vec :

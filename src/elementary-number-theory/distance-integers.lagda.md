@@ -27,7 +27,7 @@ The distance function between integers measures how far two integers are apart.
 
 ```agda
 dist-ℤ : ℤ → ℤ → ℕ
-dist-ℤ x y = abs-ℤ (diff-ℤ x y)
+dist-ℤ x y = abs-ℤ (x -ℤ y)
 
 ap-dist-ℤ :
   {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → dist-ℤ x y ＝ dist-ℤ x' y'

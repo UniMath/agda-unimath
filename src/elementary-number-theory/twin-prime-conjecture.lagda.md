@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 </details>
 
-# The twin prime conjecture
+## Statement
 
 The twin prime conjecture asserts that there are infinitely many twin primes. We
 assert that there are infinitely twin primes by asserting that for every n : ℕ

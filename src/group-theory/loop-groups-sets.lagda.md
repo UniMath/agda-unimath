@@ -35,8 +35,6 @@ open import group-theory.symmetric-groups
 
 </details>
 
-## Idea
-
 ## Definitions
 
 ```agda

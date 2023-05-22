@@ -17,13 +17,22 @@ repos:
 
   - repo: local
     hooks:
-      - id: remove-extra-blank-lines
-        name: Remove extra blank lines in Agda files
-        entry: scripts/remove_extra_blank_lines.py
+      - id: markdown-conventions
+        name: Markdown conventions
+        entry: scripts/markdown_conventions.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.md$
+        types_or: [markdown, text]
+
+      - id: blank-line-conventions
+        name: Blank line conventions in literate Agda Markdown files
+        entry: scripts/blank_line_conventions.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
+        #depends_on: markdown-conventions #TODO: find the correct way to express this
 
       - id: fix-imports
         name: Format Agda imports
@@ -33,25 +42,34 @@ repos:
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: spaces-convention-simple
+      - id: spaces-conventions-simple
         name: Simple Agda space conventions
-        entry: scripts/spaces_convention_simple.py
+        entry: scripts/spaces_conventions_simple.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: easily-fixable-long-lines
-        name: Easily fixable long lines of Agda code
-        entry: scripts/easily_fixable_long_lines.py
+      # - id: indentation-conventions
+      #   name: Agda indentation conventions
+      #   entry: scripts/indentation_conventions.py
+      #   language: python
+      #   always_run: true
+      #   files: ^src\/.+\.lagda\.md$
+      #   types_or: [markdown, text]
+      #   require_serial: true
+
+      - id: simply-wrappable-long-lines
+        name: Fix simply wrappable long lines of Agda code
+        entry: scripts/simply_wrappable_long_lines.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: max-line-length
-        name: Check the maximum line length is respected
-        entry: scripts/max_line_length.py
+      - id: max-line-length-conventions
+        name: Check the maximum line length conventions
+        entry: scripts/max_line_length_conventions.py
         language: python
         files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
         types_or: [markdown, text]

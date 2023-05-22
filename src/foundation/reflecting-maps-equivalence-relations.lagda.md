@@ -69,8 +69,6 @@ module _
   pr2 (reflects-Eq-Rel-Prop B f) = is-prop-reflects-Eq-Rel B f
 ```
 
-### Binary maps reflecting equivalence relations
-
 ## Properties
 
 ### Any surjective and effective map reflects the equivalence relation

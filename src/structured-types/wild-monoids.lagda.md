@@ -24,6 +24,73 @@ open import structured-types.pointed-types
 
 ## Idea
 
+A **wild monoid** is a first–order approximation to an ∞-monoid, i.e. a
+∞-monoid-like structure whose laws hold at least up to the first homotopy level,
+but may fail at higher levels.
+
+A wild monoid consists of
+
+- an underlying type `A`
+- a unit, say `e : A`
+- a binary operation on `A`, say `_*_`
+- left and right unit laws `e * x ＝ x` and `x * e ＝ x`
+- a coherence between the left and right unit laws at the unit
+- an associator `(x y z : A) → (x * y) * z ＝ x * (y * z)`
+- coherences between the associator and the left and right unit laws
+
+We call such an associator **unital**. It may be described as a coherence of the
+following diagram
+
+```text
+          map-associative-prod
+     (A × A) × A ----> A × (A × A)
+             |           |
+  (_*_ , id) |           | (id, _*_)
+             v           v
+           A × A       A × A
+               \       /
+          (_*_) \     / (_*_)
+                 v   v
+                   A
+```
+
+such that the three diagrams below cohere
+
+```text
+            associator
+  (e * x) * y ===== e * (x * y)
+          \\         //
+     left  \\       //  left
+   unit law \\     // unit law
+              y * z,
+```
+
+```text
+            associator
+  (x * e) * y ===== x * (e * y)
+          \\         //
+    right  \\       //  left
+   unit law \\     // unit law
+              x * y,
+```
+
+and
+
+```text
+            associator
+  (x * y) * e ===== x * (y * e)
+          \\         //
+    right  \\       //  right
+   unit law \\     // unit law
+              x * y
+```
+
+for all `x y : A`.
+
+Concretely, we define wild monoids to be
+[coherent H-spaces](structured-types.coherent-h-spaces.md) equipped with a
+unital associator.
+
 ## Definition
 
 ### Unital associators on wild unital magmas
@@ -36,35 +103,39 @@ module _
   associator-Coherent-H-Space : UU l
   associator-Coherent-H-Space =
     (x y z : type-Coherent-H-Space M) →
-    Id ( mul-Coherent-H-Space M (mul-Coherent-H-Space M x y) z)
+    Id
+      ( mul-Coherent-H-Space M (mul-Coherent-H-Space M x y) z)
       ( mul-Coherent-H-Space M x (mul-Coherent-H-Space M y z))
 
   is-unital-associator : (α : associator-Coherent-H-Space) → UU l
   is-unital-associator α111 =
     Σ ( (y z : type-Coherent-H-Space M) →
-        Id ( ( α111 (unit-Coherent-H-Space M) y z) ∙
-             ( left-unit-law-mul-Coherent-H-Space M
-           ( mul-Coherent-H-Space M y z)))
-             ( ap
-               ( mul-Coherent-H-Space' M z)
-               ( left-unit-law-mul-Coherent-H-Space M y)))
+        Id
+          ( ( α111 (unit-Coherent-H-Space M) y z) ∙
+            ( left-unit-law-mul-Coherent-H-Space M
+              ( mul-Coherent-H-Space M y z)))
+            ( ap
+              ( mul-Coherent-H-Space' M z)
+              ( left-unit-law-mul-Coherent-H-Space M y)))
       ( λ α011 →
         Σ ( (x z : type-Coherent-H-Space M) →
-            Id ( ( α111 x (unit-Coherent-H-Space M) z) ∙
-                 ( ap
-                   ( mul-Coherent-H-Space M x)
-                   ( left-unit-law-mul-Coherent-H-Space M z)))
-               ( ap
-                 ( mul-Coherent-H-Space' M z)
-                 ( right-unit-law-mul-Coherent-H-Space M x)))
+            Id
+              ( ( α111 x (unit-Coherent-H-Space M) z) ∙
+                ( ap
+                  ( mul-Coherent-H-Space M x)
+                  ( left-unit-law-mul-Coherent-H-Space M z)))
+              ( ap
+                ( mul-Coherent-H-Space' M z)
+                ( right-unit-law-mul-Coherent-H-Space M x)))
           ( λ α101 →
             Σ ( (x y : type-Coherent-H-Space M) →
-                Id ( ( α111 x y (unit-Coherent-H-Space M)) ∙
-                     ( ap
-                       ( mul-Coherent-H-Space M x)
-                       ( right-unit-law-mul-Coherent-H-Space M y)))
-                   ( right-unit-law-mul-Coherent-H-Space M
-                     ( mul-Coherent-H-Space M x y)))
+                Id
+                  ( ( α111 x y (unit-Coherent-H-Space M)) ∙
+                    ( ap
+                      ( mul-Coherent-H-Space M x)
+                      ( right-unit-law-mul-Coherent-H-Space M y)))
+                  ( right-unit-law-mul-Coherent-H-Space M
+                    ( mul-Coherent-H-Space M x y)))
               ( λ α110 → unit)))
 
   unital-associator : UU l
@@ -108,22 +179,23 @@ module _
 
   ap-mul-Wild-Monoid :
     {a b c d : type-Wild-Monoid} →
-    Id a b → Id c d → Id (mul-Wild-Monoid a c) (mul-Wild-Monoid b d)
+    a ＝ b → c ＝ d → mul-Wild-Monoid a c ＝ mul-Wild-Monoid b d
   ap-mul-Wild-Monoid = ap-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   left-unit-law-mul-Wild-Monoid :
-    (x : type-Wild-Monoid) → Id (mul-Wild-Monoid unit-Wild-Monoid x) x
+    (x : type-Wild-Monoid) → mul-Wild-Monoid unit-Wild-Monoid x ＝ x
   left-unit-law-mul-Wild-Monoid =
     left-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   right-unit-law-mul-Wild-Monoid :
-    (x : type-Wild-Monoid) → Id (mul-Wild-Monoid x unit-Wild-Monoid) x
+    (x : type-Wild-Monoid) → mul-Wild-Monoid x unit-Wild-Monoid ＝ x
   right-unit-law-mul-Wild-Monoid =
     right-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
   coh-unit-laws-mul-Wild-Monoid :
-    Id ( left-unit-law-mul-Wild-Monoid unit-Wild-Monoid)
-       ( right-unit-law-mul-Wild-Monoid unit-Wild-Monoid)
+    Id
+      ( left-unit-law-mul-Wild-Monoid unit-Wild-Monoid)
+      ( right-unit-law-mul-Wild-Monoid unit-Wild-Monoid)
   coh-unit-laws-mul-Wild-Monoid =
     coh-unit-laws-mul-Coherent-H-Space wild-unital-magma-Wild-Monoid
 
@@ -133,15 +205,17 @@ module _
 
   associative-mul-Wild-Monoid :
     (x y z : type-Wild-Monoid) →
-    Id ( mul-Wild-Monoid (mul-Wild-Monoid x y) z)
-       ( mul-Wild-Monoid x (mul-Wild-Monoid y z))
+    Id
+      ( mul-Wild-Monoid (mul-Wild-Monoid x y) z)
+      ( mul-Wild-Monoid x (mul-Wild-Monoid y z))
   associative-mul-Wild-Monoid = pr1 unital-associator-Wild-Monoid
 
   unit-law-110-associative-Wild-Monoid :
     (x y : type-Wild-Monoid) →
-    Id ( ( associative-mul-Wild-Monoid x y unit-Wild-Monoid) ∙
-         ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
-       ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
+    Id
+      ( ( associative-mul-Wild-Monoid x y unit-Wild-Monoid) ∙
+        ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
+      ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
   unit-law-110-associative-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
 ```
 
@@ -171,7 +245,7 @@ module _
 
   preserves-unit-map-hom-Wild-Monoid :
     (f : hom-Wild-Monoid) →
-    Id (map-hom-Wild-Monoid f (unit-Wild-Monoid M)) (unit-Wild-Monoid N)
+    (map-hom-Wild-Monoid f (unit-Wild-Monoid M)) ＝ (unit-Wild-Monoid N)
   preserves-unit-map-hom-Wild-Monoid f = pr2 (pr1 f)
 
   preserves-unital-mul-map-hom-Wild-Monoid :

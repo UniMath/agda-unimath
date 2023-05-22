@@ -38,7 +38,7 @@ module _
 
 ## Properties
 
-### The commutator of x and y is unit if and only x and y commutes
+### The commutator of `x` and `y` is unit if and only `x` and `y` commutes
 
 ```agda
 module _

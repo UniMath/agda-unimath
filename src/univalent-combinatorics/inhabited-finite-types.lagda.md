@@ -29,13 +29,19 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
+An **inhabited finite type** is a
+[finite type](univalent-combinatorics.finite-types.md) that is
+[inhabited](foundation.inhabited-types.md), meaning it is a type that is merely
+equivalent to a standard finite type, and that comes equipped with a term of its
+propositional truncation.
+
 ## Definitions
 
 ### Inhabited finite types
 
 ```agda
 Inhabited-𝔽 : (l : Level) → UU (lsuc l)
-Inhabited-𝔽 l = Σ ( 𝔽 l) ( λ X → is-inhabited (type-𝔽 X))
+Inhabited-𝔽 l = Σ (𝔽 l) (λ X → is-inhabited (type-𝔽 X))
 
 module _
   {l : Level} (X : Inhabited-𝔽 l)

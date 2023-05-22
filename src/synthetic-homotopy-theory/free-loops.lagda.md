@@ -67,7 +67,7 @@ module _
 
 ## Properties
 
-## Characterization of the identity type of the type of free loops
+### Characterization of the identity type of the type of free loops
 
 ```agda
 module _

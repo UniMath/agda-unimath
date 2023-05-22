@@ -424,7 +424,7 @@ is-binary-emb-add-ℤ =
   is-binary-emb-is-binary-equiv is-binary-equiv-left-add-ℤ
 ```
 
-### Addition by x is injective
+### Addition by `x` is injective
 
 ```agda
 is-injective-right-add-ℤ : (x : ℤ) → is-injective (_+ℤ x)

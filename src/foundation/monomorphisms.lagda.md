@@ -79,11 +79,11 @@ module _
   is-mono-is-emb f-is-emb X =
     is-emb-is-prop-map
       ( is-trunc-map-postcomp-is-trunc-map neg-one-𝕋 X f
-         ( is-prop-map-is-emb f-is-emb))
+        ( is-prop-map-is-emb f-is-emb))
 
   is-emb-is-mono : ({l3 : Level} → is-mono l3 f) → is-emb f
   is-emb-is-mono f-is-mono =
     is-emb-is-prop-map
       ( is-trunc-map-is-trunc-map-postcomp neg-one-𝕋 f
-         ( λ X → is-prop-map-is-emb (f-is-mono X)))
+        ( λ X → is-prop-map-is-emb (f-is-mono X)))
 ```

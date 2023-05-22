@@ -59,7 +59,7 @@ module _
 
 ## Properties
 
-### If A is a retraction of B, then the identity types of A are retractions of the identity types of B
+### If `A` is a retraction of `B`, then the identity types of `A` are retractions of the identity types of `B`
 
 ```agda
 module _

@@ -24,8 +24,6 @@ open import species.species-of-types
 
 </details>
 
-## Idea
-
 ## Definition
 
 ```agda
