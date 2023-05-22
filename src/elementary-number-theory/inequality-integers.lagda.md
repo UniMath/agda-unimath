@@ -28,7 +28,7 @@ open import foundation.universe-levels
 
 ```agda
 leq-ℤ-Prop : ℤ → ℤ → Prop lzero
-leq-ℤ-Prop x y = is-nonnegative-ℤ-Prop (diff-ℤ y x)
+leq-ℤ-Prop x y = is-nonnegative-ℤ-Prop (y -ℤ x)
 
 leq-ℤ : ℤ → ℤ → UU lzero
 leq-ℤ x y = type-Prop (leq-ℤ-Prop x y)
@@ -65,7 +65,7 @@ decide-leq-ℤ {x} {y} =
   map-coprod
     ( id)
     ( is-nonnegative-eq-ℤ (distributive-neg-diff-ℤ y x))
-    ( decide-is-nonnegative-ℤ {diff-ℤ y x})
+    ( decide-is-nonnegative-ℤ {y -ℤ x})
 
 succ-leq-ℤ : (k : ℤ) → leq-ℤ k (succ-ℤ k)
 succ-leq-ℤ k =
@@ -95,7 +95,7 @@ concatenate-eq-leq-ℤ y refl H = H
 
 ```agda
 le-ℤ-Prop : ℤ → ℤ → Prop lzero
-le-ℤ-Prop x y = is-positive-ℤ-Prop (diff-ℤ x y)
+le-ℤ-Prop x y = is-positive-ℤ-Prop (x -ℤ y)
 
 le-ℤ : ℤ → ℤ → UU lzero
 le-ℤ x y = type-Prop (le-ℤ-Prop x y)
@@ -149,7 +149,7 @@ leq-int-ℕ zero-ℕ y H =
     ( is-nonnegative-int-ℕ y)
 leq-int-ℕ (succ-ℕ x) (succ-ℕ y) H = tr (is-nonnegative-ℤ)
   ( inv (diff-succ-ℤ (int-ℕ y) (int-ℕ x)) ∙
-    ( ap (λ H → diff-ℤ H (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
-      ap (λ H → diff-ℤ (int-ℕ (succ-ℕ y)) H) (succ-int-ℕ x)))
+    ( ap (_-ℤ (succ-ℤ (int-ℕ x))) (succ-int-ℕ y) ∙
+      ap ((int-ℕ (succ-ℕ y)) -ℤ_) (succ-int-ℕ x)))
   (leq-int-ℕ x y H)
 ```

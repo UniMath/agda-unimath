@@ -1,4 +1,4 @@
-# Structured duality
+# Structured type duality
 
 ```agda
 module foundation.structured-type-duality where
@@ -24,8 +24,6 @@ open import foundation-core.universe-levels
 
 </details>
 
-## Idea
-
 ## Theorem
 
 ### Structured type duality
@@ -50,8 +48,6 @@ equiv-Fib-structure {l1} {l3} l P B =
     ( λ A → A → B)
     ( λ f → structure-map P (pr2 f)))
 ```
-
-###
 
 ```agda
 equiv-fixed-Slice-structure :

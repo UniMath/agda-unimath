@@ -77,7 +77,7 @@ module _
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 
-### If a reflexive binary relation maps into the identity type of A, then A is a set
+### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set
 
 ```agda
 module _

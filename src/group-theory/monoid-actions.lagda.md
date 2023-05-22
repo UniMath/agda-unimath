@@ -61,8 +61,9 @@ module _
 
   associative-mul-Monoid-Action :
     (x y : type-Monoid M) (z : type-Monoid-Action) →
-    Id ( mul-Monoid-Action (mul-Monoid M x y) z)
-       ( mul-Monoid-Action x (mul-Monoid-Action y z))
+    Id
+      ( mul-Monoid-Action (mul-Monoid M x y) z)
+      ( mul-Monoid-Action x (mul-Monoid-Action y z))
   associative-mul-Monoid-Action x y = htpy-eq (pr2 (pr1 (pr2 X)) x y)
 
   unit-law-mul-Monoid-Action :

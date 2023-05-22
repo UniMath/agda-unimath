@@ -62,8 +62,9 @@ module _
 
   preserves-id-subst-Abstract-Group-Action :
     {l3 : Level} (X : Abstract-Group-Action H l3) →
-    Id ( hom-subst-Abstract-Group-Action X X (id-hom-Abstract-Group-Action H X))
-       ( id-hom-Abstract-Group-Action G (obj-subst-Abstract-Group-Action X))
+    Id
+      ( hom-subst-Abstract-Group-Action X X (id-hom-Abstract-Group-Action H X))
+      ( id-hom-Abstract-Group-Action G (obj-subst-Abstract-Group-Action X))
   preserves-id-subst-Abstract-Group-Action X = refl
 
   preserves-comp-subst-Abstract-Group-Action :
@@ -71,14 +72,15 @@ module _
     (Y : Abstract-Group-Action H l4) (Z : Abstract-Group-Action H l5)
     (g : type-hom-Abstract-Group-Action H Y Z)
     (f : type-hom-Abstract-Group-Action H X Y) →
-    Id ( hom-subst-Abstract-Group-Action X Z
-         ( comp-hom-Abstract-Group-Action H X Y Z g f))
-       ( comp-hom-Abstract-Group-Action G
-         ( obj-subst-Abstract-Group-Action X)
-         ( obj-subst-Abstract-Group-Action Y)
-         ( obj-subst-Abstract-Group-Action Z)
-         ( hom-subst-Abstract-Group-Action Y Z g)
-         ( hom-subst-Abstract-Group-Action X Y f))
+    Id
+      ( hom-subst-Abstract-Group-Action X Z
+        ( comp-hom-Abstract-Group-Action H X Y Z g f))
+      ( comp-hom-Abstract-Group-Action G
+        ( obj-subst-Abstract-Group-Action X)
+        ( obj-subst-Abstract-Group-Action Y)
+        ( obj-subst-Abstract-Group-Action Z)
+        ( hom-subst-Abstract-Group-Action Y Z g)
+        ( hom-subst-Abstract-Group-Action X Y f))
   preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :

@@ -183,15 +183,15 @@ div-Fibonacci-div-ℕ d zero-ℕ .(k *ℕ zero-ℕ) (succ-ℕ k , refl) H =
     ( ap Fibonacci-ℕ (inv (right-zero-law-mul-ℕ (succ-ℕ k))))
     ( div-zero-ℕ d)
 div-Fibonacci-div-ℕ d (succ-ℕ m) ._ (succ-ℕ k , refl) H =
-   div-Fibonacci-add-ℕ d
-     ( k *ℕ (succ-ℕ m))
-     ( succ-ℕ m)
-     ( div-Fibonacci-div-ℕ d
-       ( succ-ℕ m)
-       ( k *ℕ (succ-ℕ m))
-       ( pair k refl)
-       ( H))
-     ( H)
+  div-Fibonacci-add-ℕ d
+    ( k *ℕ (succ-ℕ m))
+    ( succ-ℕ m)
+    ( div-Fibonacci-div-ℕ d
+      ( succ-ℕ m)
+      ( k *ℕ (succ-ℕ m))
+      ( pair k refl)
+      ( H))
+    ( H)
 ```
 
 ### Fibonacci-ℕ is an order preserving map on ℕ ordered by divisibility

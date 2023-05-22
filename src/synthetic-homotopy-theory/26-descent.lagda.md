@@ -309,9 +309,9 @@ dependent-pullback-property-pushout l {S} {A} {B} f g {X}
     4. dependent-universal-property-pushout
     5. Ind-pushout
 
-We have already shown that (1) ↔ (2). Therefore we will first show that (3) ↔
-(4) ↔ (5). Finally, we will show that (2) ↔ (3). Here are the precise references
-to the proofs of those parts:
+We have already shown (1) ↔ (2). Therefore we will first show (3) ↔ (4) ↔ (5).
+Finally, we will show (2) ↔ (3). Here are the precise references to the proofs
+of those parts:
 
 - Proof of (1) → (2): `pullback-property-pushout-universal-property-pushout`
 - Proof of (2) → (1): `universal-property-pushout-pullback-property-pushout`

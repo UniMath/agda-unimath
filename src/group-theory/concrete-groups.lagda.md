@@ -118,8 +118,9 @@ module _
 
   associative-mul-Concrete-Group :
     (x y z : type-Concrete-Group) →
-    Id (mul-Concrete-Group (mul-Concrete-Group x y) z)
-       (mul-Concrete-Group x (mul-Concrete-Group y z))
+    Id
+      ( mul-Concrete-Group (mul-Concrete-Group x y) z)
+      ( mul-Concrete-Group x (mul-Concrete-Group y z))
   associative-mul-Concrete-Group =
     associative-mul-∞-Group ∞-group-Concrete-Group
 
@@ -134,8 +135,9 @@ module _
     right-unit-law-mul-∞-Group ∞-group-Concrete-Group
 
   coherence-unit-laws-mul-Concrete-Group :
-    Id ( left-unit-law-mul-Concrete-Group unit-Concrete-Group)
-       ( right-unit-law-mul-Concrete-Group unit-Concrete-Group)
+    Id
+      ( left-unit-law-mul-Concrete-Group unit-Concrete-Group)
+      ( right-unit-law-mul-Concrete-Group unit-Concrete-Group)
   coherence-unit-laws-mul-Concrete-Group =
     coherence-unit-laws-mul-∞-Group ∞-group-Concrete-Group
 
@@ -196,8 +198,8 @@ trivial-Concrete-Group : {l : Level} → Concrete-Group l
 trivial-Concrete-Group =
   trivial-∞-Group ,
   is-trunc-is-contr
-     (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
-     is-contr-raise-unit
-     raise-star
-     raise-star
+    (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
+    is-contr-raise-unit
+    raise-star
+    raise-star
 ```

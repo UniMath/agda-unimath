@@ -26,8 +26,13 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Inhabited types are types equipped with an element of its propositional
+**Inhabited types** are types equipped with an element of its propositional
 truncation.
+
+**Remark:** This contrasts with the definition of
+[pointed types](structured-types.pointed-types.md) in that we do not discern
+between proofs of inhabitedness, so that it is merely a property of the type to
+be inhabited.
 
 ## Definitions
 

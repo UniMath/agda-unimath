@@ -43,10 +43,11 @@ preserves-mul-hom-Ab :
   type-hom-Ab (ab-Ring R) (ab-Ring S) → UU (l1 ⊔ l2)
 preserves-mul-hom-Ab R S f =
   (x y : type-Ring R) →
-  Id ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))
-     ( mul-Ring S
-       ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
-       ( map-hom-Ab (ab-Ring R) (ab-Ring S) f y))
+  Id
+    ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))
+    ( mul-Ring S
+      ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
+      ( map-hom-Ab (ab-Ring R) (ab-Ring S) f y))
 
 is-prop-preserves-mul-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
@@ -382,13 +383,14 @@ id-law-ab-Ring R =
 comp-law-ab-Ring :
   { l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3) →
   ( g : type-hom-Ring S T) (f : type-hom-Ring R S) →
-  Id ( hom-ab-hom-Ring R T (comp-hom-Ring R S T g f))
-     ( comp-hom-Ab
-       ( ab-Ring R)
-       ( ab-Ring S)
-       ( ab-Ring T)
-       ( hom-ab-hom-Ring S T g)
-       ( hom-ab-hom-Ring R S f))
+  Id
+    ( hom-ab-hom-Ring R T (comp-hom-Ring R S T g f))
+    ( comp-hom-Ab
+      ( ab-Ring R)
+      ( ab-Ring S)
+      ( ab-Ring T)
+      ( hom-ab-hom-Ring S T g)
+      ( hom-ab-hom-Ring R S f))
 comp-law-ab-Ring R S T g f =
   eq-htpy-hom-Ab
     ( ab-Ring R)
