@@ -381,6 +381,20 @@ preserves-order-mul-ℕ' k m n H =
     ( commutative-mul-ℕ n k)
 ```
 
+### Multiplication preserves inequality
+
+```agda
+preserves-leq-mul-ℕ :
+  (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (m *ℕ n) ≤-ℕ (m' *ℕ n')
+preserves-leq-mul-ℕ m m' n n' H K =
+  transitive-leq-ℕ
+    ( m *ℕ n)
+    ( m' *ℕ n)
+    ( m' *ℕ n')
+    ( preserves-order-mul-ℕ' m' n n' K)
+    ( preserves-order-mul-ℕ n m m' H)
+```
+
 ### Multiplication by a nonzero element reflects the ordering on ℕ
 
 ```agda

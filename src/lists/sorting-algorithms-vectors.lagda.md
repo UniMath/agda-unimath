@@ -9,7 +9,11 @@ module lists.sorting-algorithms-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import linear-algebra.vectors
@@ -31,17 +35,41 @@ vector `v`, `f v` is sorted.
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Decidable-Total-Order l1 l2)
+  {l1 l2 : Level}
+  (X : Decidable-Total-Order l1 l2)
+  (f :
+      {n : ℕ} →
+      vec (type-Decidable-Total-Order X) n →
+      vec (type-Decidable-Total-Order X) n)
   where
 
   is-sort-vec :
-    (f :
-      {n : ℕ} →
-      vec (type-Decidable-Total-Order X) n →
-      vec (type-Decidable-Total-Order X) n) →
     UU (l1 ⊔ l2)
-  is-sort-vec f =
+  is-sort-vec =
     (n : ℕ) →
     is-permutation-vec n f ×
     ((v : vec (type-Decidable-Total-Order X) n) → is-sorted-vec X (f v))
+
+  is-permutation-vec-is-sort-vec :
+    is-sort-vec → (n : ℕ) → is-permutation-vec n f
+  is-permutation-vec-is-sort-vec S n = pr1 (S n)
+
+  permutation-vec-is-sort-vec :
+    is-sort-vec → (n : ℕ) → vec (type-Decidable-Total-Order X) n → Permutation n
+  permutation-vec-is-sort-vec S n v =
+    permutation-is-permutation-vec n f (is-permutation-vec-is-sort-vec S n) v
+
+  eq-permute-vec-permutation-is-sort-vec :
+    (S : is-sort-vec) (n : ℕ) (v : vec (type-Decidable-Total-Order X) n) →
+    f v ＝ permute-vec n v (permutation-vec-is-sort-vec S n v)
+  eq-permute-vec-permutation-is-sort-vec S n v =
+    eq-permute-vec-permutation-is-permutation-vec
+      ( n)
+      ( f)
+      ( is-permutation-vec-is-sort-vec S n) v
+
+  is-sorting-vec-is-sort-vec :
+    is-sort-vec → (n : ℕ) →
+    (v : vec (type-Decidable-Total-Order X) n) → is-sorted-vec X (f v)
+  is-sorting-vec-is-sort-vec S n = pr2 (S n)
 ```
