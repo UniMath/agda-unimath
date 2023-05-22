@@ -88,6 +88,18 @@ is-neg-one-is-not-inl-Fin k (inr star) H = refl
 inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inr-Fin (succ-ℕ k) (inl x) = inl (inr-Fin k x)
 inr-Fin (succ-ℕ k) (inr star) = inr star
+
+neq-inl-Fin-inr-Fin :
+  (n : ℕ) → (k : Fin n) → ¬ (inl-Fin n k ＝ inr-Fin n k)
+neq-inl-Fin-inr-Fin (succ-ℕ n) (inl k) =
+  neq-inl-Fin-inr-Fin n k ∘ is-injective-inl
+neq-inl-Fin-inr-Fin (succ-ℕ n) (inr star) = neq-inl-inr
+
+neq-inr-Fin-inl-Fin :
+  (n : ℕ) → (k : Fin n) → ¬ (inr-Fin n k ＝ inl-Fin n k)
+neq-inr-Fin-inl-Fin (succ-ℕ n) (inl k) =
+  neq-inr-Fin-inl-Fin n k ∘ is-injective-inl
+neq-inr-Fin-inl-Fin (succ-ℕ n) (inr k) = neq-inr-inl
 ```
 
 ### The standard finite types in an arbitrary universe
@@ -165,6 +177,10 @@ is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
 nat-Fin : (k : ℕ) → Fin k → ℕ
 nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
+
+nat-Fin-reverse : (k : ℕ) → Fin k → ℕ
+nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin k x)
+nat-Fin-reverse (succ-ℕ k) (inr x) = 0
 
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
 strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
@@ -288,6 +304,12 @@ is-injective-inl-Fin k refl = refl
 ### Exercise 7.5 (c)
 
 ```agda
+neq-zero-skip-zero-Fin :
+  {k : ℕ} {x : Fin k} →
+  is-nonzero-Fin (succ-ℕ k) (skip-zero-Fin k x)
+neq-zero-skip-zero-Fin {succ-ℕ k} {inl x} p =
+  neq-zero-skip-zero-Fin {k = k} {x = x} (is-injective-inl-Fin (succ-ℕ k) p)
+
 neq-zero-succ-Fin :
   {k : ℕ} {x : Fin k} →
   is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
