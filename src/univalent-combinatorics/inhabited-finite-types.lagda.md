@@ -7,6 +7,8 @@ module univalent-combinatorics.inhabited-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-function-types
@@ -145,4 +147,16 @@ eq-equiv-Inhabited-𝔽 X Y e =
       ( finite-type-Inhabited-𝔽 X)
       ( finite-type-Inhabited-𝔽 Y)
       ( e))
+```
+
+### Every type in `UU-Fin (succ-ℕ n)` is a inhabited finite type
+
+```agda
+is-finite-and-inhabited-type-UU-Fin-succ-ℕ :
+  {l : Level} → (n : ℕ) → (F : UU-Fin l (succ-ℕ n)) →
+  is-finite-and-inhabited (type-UU-Fin (succ-ℕ n) F)
+pr1 (is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F) =
+  is-finite-type-UU-Fin (succ-ℕ n) F
+pr2 (is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F) =
+  is-inhabited-type-UU-Fin-succ-ℕ n F
 ```
