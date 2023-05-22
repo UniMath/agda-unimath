@@ -66,10 +66,11 @@ Main-Class-Latin-Hypercube-of-Order n m =
           Decidable-Prop lzero)
         ( λ R →
           (i : type-unordered-tuple (succ-ℕ n) A)
-          (f : product-unordered-tuple-types n
-               ( unordered-tuple-complement-point-type-unordered-tuple n
-                 ( map-unordered-tuple (succ-ℕ n) (type-UU-Fin m) A)
-                 ( i))) →
+          (f :
+            product-unordered-tuple-types n
+              ( unordered-tuple-complement-point-type-unordered-tuple n
+                ( map-unordered-tuple (succ-ℕ n) (type-UU-Fin m) A)
+                ( i))) →
           is-contr
             ( Σ ( type-UU-Fin m (element-unordered-tuple (succ-ℕ n) A i))
                 ( λ a →

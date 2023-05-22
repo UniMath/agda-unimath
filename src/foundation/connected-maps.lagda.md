@@ -353,4 +353,8 @@ module _
 
 ### The type `Connected-Map-Into-Truncated-Type l2 k k A` is contractible
 
+This remains to be shown.
+
 ### The type `Connected-Map-Into-Truncated-Type l2 k l A` is `k - l - 2` truncated
+
+This remains to be shown.

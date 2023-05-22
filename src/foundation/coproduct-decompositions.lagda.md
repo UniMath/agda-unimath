@@ -277,7 +277,7 @@ module _
                     ( λ x → fib f x)
                     ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
-        ( eq-pair-Σ p ( tr-identification p (inv p) ∙ left-inv p))
+        ( eq-pair-Σ p ( tr-Id p (inv p) ∙ left-inv p))
         ( ( ( x , (inv p)) ,
             ( ap
               ( inl)
@@ -340,7 +340,7 @@ module _
                       ( λ x → fib f x)
                       ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
-        ( eq-pair-Σ p ( tr-identification p (inv p) ∙ left-inv p))
+        ( eq-pair-Σ p ( tr-Id p (inv p) ∙ left-inv p))
         ( ( ( x , (inv p)) ,
             ( ap
               ( inr)

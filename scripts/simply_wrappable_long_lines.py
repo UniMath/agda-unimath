@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # Run this script:
-# python3 scripts/easily_fixable_long_lines.py fileName.lagda.md
+# python3 scripts/simply_wrappable_long_lines.py fileName.lagda.md
 # Fix some easily fixable long lines
 
 import sys
 import utils
 import re
 import os
-import max_line_length
+import max_line_length_conventions
 
 INDENT = '  '
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
                 if block_comment_level == 0 and \
                         len(line) > MAX_LINE_LENGTH and\
-                        not max_line_length.can_forgive_line(line):
+                        not max_line_length_conventions.can_forgive_line(line):
 
                     line = check_wrap_line_type_signature(line)
                     line = check_wrap_line_definition(line)

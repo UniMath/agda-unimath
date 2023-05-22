@@ -118,7 +118,7 @@ abstract
   number-of-elements-count-Σ (pair k e) f = number-of-elements-count-Σ' k e f
 ```
 
-### If A and Σ A B can be counted, then each B x can be counted
+### If `A` and `Σ A B` can be counted, then each `B x` can be counted
 
 ```agda
 count-fiber-count-Σ :
@@ -137,7 +137,7 @@ count-fiber-count-Σ-count-base e f x =
   count-fiber-count-Σ (has-decidable-equality-count e) f x
 ```
 
-### If Σ A B and each B x can be counted, and if B has a section, then A can be counted
+### If `Σ A B` and each `B x` can be counted, and if `B` has a section, then `A` can be counted
 
 ```agda
 count-fib-map-section :

@@ -495,8 +495,9 @@ module _
 
   preserves-concat-mul-list-Group :
     (l1 l2 : list (type-Group G)) →
-    Id ( mul-list-Group (concat-list l1 l2))
-       ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
+    Id
+      ( mul-list-Group (concat-list l1 l2))
+      ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
   preserves-concat-mul-list-Group =
     distributive-mul-concat-list-Monoid (monoid-Group G)
 ```

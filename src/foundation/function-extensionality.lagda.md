@@ -39,7 +39,7 @@ module _
   postulate funext : (f : (x : A) → B x) → FUNEXT f
 ```
 
-## Properties
+### Components of `funext`
 
 ```agda
   equiv-funext : {f g : (x : A) → B x} → (f ＝ g) ≃ (f ~ g)
@@ -59,7 +59,7 @@ module _
     isretr-eq-htpy {f} {g} = isretr-map-inv-is-equiv (funext f g)
 
     is-equiv-eq-htpy :
-      (f g : (x : A) → B x) → is-equiv (eq-htpy {f = f} {g = g})
+      (f g : (x : A) → B x) → is-equiv (eq-htpy {f} {g})
     is-equiv-eq-htpy f g = is-equiv-map-inv-is-equiv (funext f g)
 
     eq-htpy-refl-htpy :

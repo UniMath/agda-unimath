@@ -104,11 +104,9 @@ module _
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
 
-### The equivalence classes of iterative orbits of an automorphism on a finite set
-
 ## Properties
 
-### For type equipped with a counting, orbits of permutations are finite
+### For types equipped with a counting, orbits of permutations are finite
 
 The map `i ↦ eⁱ a` repeats itself.
 

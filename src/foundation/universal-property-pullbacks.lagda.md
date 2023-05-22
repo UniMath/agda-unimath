@@ -45,8 +45,6 @@ V        V
 A -----> X
 ```
 
-## Definitions
-
 ## Properties
 
 ### The universal property is a property

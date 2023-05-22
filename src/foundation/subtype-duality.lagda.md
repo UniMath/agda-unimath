@@ -22,8 +22,6 @@ open import foundation-core.universe-levels
 
 </details>
 
-## Idea
-
 ## Theorem
 
 ### Subtype duality

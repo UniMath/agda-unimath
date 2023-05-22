@@ -29,7 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-# Inequality on the standard finite types
+## Definitions
 
 ```agda
 leq-Fin : (k : ℕ) → Fin k → Fin k → UU lzero

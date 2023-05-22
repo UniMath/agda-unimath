@@ -1,4 +1,4 @@
-# Wedges of types
+# Wedges of pointed types
 
 ```agda
 module synthetic-homotopy-theory.wedges-of-pointed-types where
@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.wedges-of-pointed-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -27,17 +28,17 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types
 ## Idea
 
 The **wedge** or **wedge sum** of two pointed types `a : A` and `b : B` is
-defined by the following pushout.
+defined by the following pointed pushout:
 
 ```text
   unit ------> A
     |          |
     |          |
     v       ⌜  v
-    B -----> A ∨∗ B
+    B -----> A ∨∗ B,
 ```
 
-The wedge sum is canonically pointed at the (identified) images of `a` and `b`.
+and is thus canonically pointed at the identified image of `a` and `b`.
 
 ## Definition
 
@@ -68,38 +69,37 @@ pr2 (indexed-wedge I A) = point-cofiber (λ i → i , point-Pointed-Type (A i))
 
 ## Properties
 
-### The canonical inclusion of the wedge sum `A ∨∗ B` into the pointed product `A ×∗ B`
+### The inclusion of the wedge sum `A ∨∗ B` into the pointed product `A ×∗ B`
 
 There is a canonical inclusion of the wedge sum into the pointed product that is
 defined by the cogap map induced by the canonical inclusions `A → A ×∗ B ← B`.
 
 ```agda
-cocone-prod-wedge-Pointed-Type :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  type-cocone-Pointed-Type
-    ( inclusion-point-Pointed-Type A)
-    ( inclusion-point-Pointed-Type B)
-    ( A ×∗ B)
-pr1 (cocone-prod-wedge-Pointed-Type A B) = inl-prod-Pointed-Type A B
-pr1 (pr2 (cocone-prod-wedge-Pointed-Type A B)) = inr-prod-Pointed-Type A B
-pr1 (pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B))) = refl-htpy
-pr2 (pr2 (pr2 (cocone-prod-wedge-Pointed-Type A B))) = refl
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
 
-pointed-map-prod-wedge-Pointed-Type :
-  {l1 l2 : Level}
-  (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  (A ∨∗ B) →∗ (A ×∗ B)
-pointed-map-prod-wedge-Pointed-Type A B =
-  cogap-Pointed-Type
-    ( inclusion-point-Pointed-Type A)
-    ( inclusion-point-Pointed-Type B)
-    ( cocone-prod-wedge-Pointed-Type A B)
+  cocone-prod-wedge-Pointed-Type :
+    type-cocone-Pointed-Type
+      ( inclusion-point-Pointed-Type A)
+      ( inclusion-point-Pointed-Type B)
+      ( A ×∗ B)
+  pr1 cocone-prod-wedge-Pointed-Type = inl-prod-Pointed-Type A B
+  pr1 (pr2 cocone-prod-wedge-Pointed-Type) = inr-prod-Pointed-Type A B
+  pr1 (pr2 (pr2 cocone-prod-wedge-Pointed-Type)) = refl-htpy
+  pr2 (pr2 (pr2 cocone-prod-wedge-Pointed-Type)) = refl
 
-map-prod-wedge-Pointed-Type :
-  {l1 l2 : Level}
-  (A : Pointed-Type l1) (B : Pointed-Type l2) →
-  type-Pointed-Type (A ∨∗ B) → type-Pointed-Type (A ×∗ B)
-map-prod-wedge-Pointed-Type A B = pr1 (pointed-map-prod-wedge-Pointed-Type A B)
+  pointed-map-prod-wedge-Pointed-Type :
+    (A ∨∗ B) →∗ (A ×∗ B)
+  pointed-map-prod-wedge-Pointed-Type =
+    cogap-Pointed-Type
+      ( inclusion-point-Pointed-Type A)
+      ( inclusion-point-Pointed-Type B)
+      ( cocone-prod-wedge-Pointed-Type)
+
+  map-prod-wedge-Pointed-Type :
+    type-Pointed-Type (A ∨∗ B) → type-Pointed-Type (A ×∗ B)
+  map-prod-wedge-Pointed-Type = pr1 pointed-map-prod-wedge-Pointed-Type
 ```
 
 ## See also
