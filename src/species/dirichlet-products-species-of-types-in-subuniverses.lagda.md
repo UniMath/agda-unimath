@@ -40,86 +40,97 @@ dirichlet product is also a species of subuniverse from `P` to `Q`
 
 ## Definition
 
+### The underlying type of the Dirichlet product of species in a subuniverse
+
 ```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   where
 
-  dirichlet-product-species-subuniverse' :
-    (S : species-subuniverse P ( subuniverse-global-subuniverse Q l2))
-    (T : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
-    (X : type-subuniverse P) → UU (lsuc l1 ⊔ l2 ⊔ l3)
-  dirichlet-product-species-subuniverse' S T X =
-    Σ ( binary-product-Decomposition-subuniverse P X)
+  type-dirichlet-product-species-subuniverse :
+    (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
+    (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
+    (X : type-subuniverse P) → UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  type-dirichlet-product-species-subuniverse S T X =
+    Σ ( binary-product-Decomposition P X)
       ( λ d →
-        inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-          ( S (left-summand-binary-product-Decomposition-subuniverse P X d)) ×
         inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-          ( T (right-summand-binary-product-Decomposition-subuniverse P X d)))
+          ( S (left-summand-binary-product-Decomposition P X d)) ×
+        inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
+          ( T (right-summand-binary-product-Decomposition P X d)))
 
+### Subuniverses closed under the Dirichlet product of species in a subuniverse
+
+```agda
+is-closed-under-dirichlet-product-species-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  UUω
+is-closed-under-dirichlet-product-species-subuniverse {l1} {l2} P Q =
+  {l3 l4 : Level}
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : type-subuniverse P) →
+  is-in-subuniverse
+    ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+    ( type-dirichlet-product-species-subuniverse P Q S T X)
+```
+
+### The Dirichlet product of species of types in a subuniverse
+
+```agda
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
-  ( C1 :
-    ( (l4 l5 : Level)
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l4 ⊔ l5))
-        ( dirichlet-product-species-subuniverse' P Q S T X)))
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  ( C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   where
 
   dirichlet-product-species-subuniverse :
-    species-subuniverse P ( subuniverse-global-subuniverse Q l2) →
     species-subuniverse P ( subuniverse-global-subuniverse Q l3) →
+    species-subuniverse P ( subuniverse-global-subuniverse Q l4) →
     species-subuniverse P
-      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
   pr1 (dirichlet-product-species-subuniverse S T X) =
-    dirichlet-product-species-subuniverse' P Q S T X
-  pr2 (dirichlet-product-species-subuniverse S T X) = C1 l2 l3 S T X
+    type-dirichlet-product-species-subuniverse P Q S T X
+  pr2 (dirichlet-product-species-subuniverse S T X) = C1 S T X
+```
 
+## Properties
+
+```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
-  ( C1 :
-    (l5 l6 : Level)
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l6))
-    (X : type-subuniverse P) →
-    is-in-subuniverse
-      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l5 ⊔ l6))
-      ( dirichlet-product-species-subuniverse' P Q S T X))
+  {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  ( C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   ( C2 : is-closed-under-products-subuniverse P)
   where
 
   module _
-    (S : species-subuniverse P ( subuniverse-global-subuniverse Q l2))
-    (T : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
-    (U : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
+    (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
+    (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
+    (U : species-subuniverse P ( subuniverse-global-subuniverse Q l5))
     (X : type-subuniverse P)
     where
 
     equiv-left-iterated-dirichlet-product-species-subuniverse :
-      dirichlet-product-species-subuniverse' P Q
+      type-dirichlet-product-species-subuniverse P Q
         ( dirichlet-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
       Σ ( ternary-product-Decomposition-subuniverse P X)
         ( λ d →
-          inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-            ( S (first-summand-ternary-product-Decomposition-subuniverse P X d)) ×
-            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-              ( T (second-summand-ternary-product-Decomposition-subuniverse P X d)) ×
-              inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( U (third-summand-ternary-product-Decomposition-subuniverse P X d))))
+          inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
+            ( S (first-summand-ternary-product-Decomposition P X d)) ×
+            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
+              ( T (second-summand-ternary-product-Decomposition P X d)) ×
+              inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
+              ( U (third-summand-ternary-product-Decomposition P X d))))
     equiv-left-iterated-dirichlet-product-species-subuniverse =
       ( ( equiv-Σ
           ( λ d →
-            inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-            ( S (first-summand-ternary-product-Decomposition-subuniverse P X d)) ×
-            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-              ( T (second-summand-ternary-product-Decomposition-subuniverse P X d)) ×
-              inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( U (third-summand-ternary-product-Decomposition-subuniverse P X d)))))
+            inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
+            ( S (first-summand-ternary-product-Decomposition P X d)) ×
+            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
+              ( T (second-summand-ternary-product-Decomposition P X d)) ×
+              inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
+              ( U (third-summand-ternary-product-Decomposition P X d)))))
           ( ( equiv-Σ
               ( _)
               ( associative-prod _ _ _ ∘e commutative-prod)
@@ -137,18 +148,18 @@ module _
           ( ( equiv-tot λ d → right-distributive-prod-Σ))))
 
     equiv-right-iterated-dirichlet-product-species-subuniverse :
-      dirichlet-product-species-subuniverse' P Q
+      type-dirichlet-product-species-subuniverse P Q
         ( S)
         ( dirichlet-product-species-subuniverse P Q C1 T U)
         ( X) ≃
       Σ ( ternary-product-Decomposition-subuniverse P X)
         ( λ d →
-          inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-            ( S (first-summand-ternary-product-Decomposition-subuniverse P X d)) ×
-            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-              ( T (second-summand-ternary-product-Decomposition-subuniverse P X d)) ×
-                inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( U (third-summand-ternary-product-Decomposition-subuniverse P X d))))
+          inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
+            ( S (first-summand-ternary-product-Decomposition P X d)) ×
+            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
+              ( T (second-summand-ternary-product-Decomposition P X d)) ×
+                inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
+              ( U (third-summand-ternary-product-Decomposition P X d))))
     equiv-right-iterated-dirichlet-product-species-subuniverse =
       ( ( equiv-Σ-equiv-base
           ( _)
@@ -160,11 +171,11 @@ module _
           ( ( equiv-tot (λ d → left-distributive-prod-Σ)))))
 
     equiv-associative-dirichlet-product-species-subuniverse :
-      dirichlet-product-species-subuniverse' P Q
+      type-dirichlet-product-species-subuniverse P Q
         ( dirichlet-product-species-subuniverse P Q C1 S T)
         ( U)
         ( X) ≃
-      dirichlet-product-species-subuniverse' P Q
+      type-dirichlet-product-species-subuniverse P Q
         ( S)
         ( dirichlet-product-species-subuniverse P Q C1 T U)
         ( X)
@@ -173,9 +184,9 @@ module _
       equiv-left-iterated-dirichlet-product-species-subuniverse
 
   module _
-    (S : species-subuniverse P ( subuniverse-global-subuniverse Q l2))
-    (T : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
-    (U : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
+    (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
+    (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
+    (U : species-subuniverse P ( subuniverse-global-subuniverse Q l5))
     where
 
     associative-dirichlet-product-species-subuniverse :
@@ -187,7 +198,7 @@ module _
         ( dirichlet-product-species-subuniverse P Q C1 T U)
     associative-dirichlet-product-species-subuniverse =
       eq-equiv-fam-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5))
         ( dirichlet-product-species-subuniverse P Q C1
           ( dirichlet-product-species-subuniverse P Q C1 S T)
           ( U))
@@ -201,33 +212,26 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level}
-  (P : subuniverse l1 l1)
+  {l1 l2 l3 l4 : Level}
+  (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
-  ( C1 :
-    ( (l4 l5 : Level)
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l4 ⊔ l5))
-        ( dirichlet-product-species-subuniverse' P Q S T X)))
-  (S : species-subuniverse P ( subuniverse-global-subuniverse Q l2))
-  (T : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
+  (C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
+  (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
   where
 
   equiv-commutative-dirichlet-product-species-subuniverse :
     (X : type-subuniverse P) →
-    dirichlet-product-species-subuniverse' P Q S T X ≃
-    dirichlet-product-species-subuniverse' P Q T S X
+    type-dirichlet-product-species-subuniverse P Q S T X ≃
+    type-dirichlet-product-species-subuniverse P Q T S X
   equiv-commutative-dirichlet-product-species-subuniverse X =
     equiv-Σ
       ( λ d →
+        inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
+          ( T (left-summand-binary-product-Decomposition P X d)) ×
         inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-          ( T (left-summand-binary-product-Decomposition-subuniverse P X d)) ×
-        inclusion-subuniverse ( subuniverse-global-subuniverse Q l2)
-          ( S (right-summand-binary-product-Decomposition-subuniverse P X d)))
-      ( equiv-commutative-binary-product-Decomposition-subuniverse P X)
+          ( S (right-summand-binary-product-Decomposition P X d)))
+      ( equiv-commutative-binary-product-Decomposition P X)
       ( λ _ → commutative-prod)
 
   commutative-dirichlet-product-species-subuniverse :
@@ -235,7 +239,7 @@ module _
     dirichlet-product-species-subuniverse P Q C1 T S
   commutative-dirichlet-product-species-subuniverse =
     eq-equiv-fam-subuniverse
-      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3))
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
       ( dirichlet-product-species-subuniverse P Q C1 S T)
       ( dirichlet-product-species-subuniverse P Q C1 T S)
       ( equiv-commutative-dirichlet-product-species-subuniverse)
@@ -245,8 +249,8 @@ module _
 
 ```agda
 unit-dirichlet-product-species-subuniverse :
-  {l1 : Level} →
-  (P Q : subuniverse l1 l1) →
+  {l1 l2 l3 : Level} →
+  (P : subuniverse l1 l2) (Q : subuniverse l1 l3) →
   ( (X : type-subuniverse P) →
     is-in-subuniverse Q ( is-contr (inclusion-subuniverse P X))) →
   species-subuniverse P Q
@@ -254,44 +258,35 @@ unit-dirichlet-product-species-subuniverse P Q C X =
   is-contr (inclusion-subuniverse P X) , C X
 
 module _
-  {l1 l2 : Level} (P : subuniverse l1 l1) (Q : global-subuniverse id)
-  (C1 :
-    ( (l4 l5 : Level)
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l4 ⊔ l5))
-        ( dirichlet-product-species-subuniverse' P Q S T X)))
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  (C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   (C2 : is-in-subuniverse P (raise-unit l1))
   (C3 :
     (X : type-subuniverse P) →
     is-in-subuniverse
       ( subuniverse-global-subuniverse Q l1)
       ( is-contr (inclusion-subuniverse P X)))
-  (S : species-subuniverse P ( subuniverse-global-subuniverse Q l2))
+  (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
   where
 
   equiv-right-unit-law-dirichlet-product-species-subuniverse :
-    {l : Level} →
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l)) →
     (X : type-subuniverse P) →
-    dirichlet-product-species-subuniverse' P Q
+    type-dirichlet-product-species-subuniverse P Q
       ( S)
       ( unit-dirichlet-product-species-subuniverse
         ( P)
         ( subuniverse-global-subuniverse Q l1)
         ( C3))
       ( X) ≃
-    inclusion-subuniverse (subuniverse-global-subuniverse Q l) (S X)
-  equiv-right-unit-law-dirichlet-product-species-subuniverse {l} S X =
+    inclusion-subuniverse (subuniverse-global-subuniverse Q l3) (S X)
+  equiv-right-unit-law-dirichlet-product-species-subuniverse X =
     ( ( left-unit-law-Σ-is-contr
         ( is-contr-total-equiv-subuniverse P X)
         ( X , id-equiv)) ∘e
       ( ( equiv-Σ-equiv-base
           ( λ p →
             inclusion-subuniverse
-              ( subuniverse-global-subuniverse Q l)
+              ( subuniverse-global-subuniverse Q l3)
               ( S (pr1 (p))))
           ( equiv-is-contr-right-summand-binary-product-Decomposition-subuniverse
             P
@@ -309,7 +304,7 @@ module _
                   ( right-summand-binary-product-Decomposition-subuniverse P X d)))
             ( λ z →
               inclusion-subuniverse
-                ( subuniverse-global-subuniverse Q l)
+                ( subuniverse-global-subuniverse Q l3)
                 ( S
                   ( left-summand-binary-product-Decomposition-subuniverse
                     P
@@ -318,19 +313,17 @@ module _
           ( ( equiv-tot (λ _ → commutative-prod))))))
 
   equiv-left-unit-law-dirichlet-product-species-subuniverse :
-    {l : Level} →
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l)) →
     (X : type-subuniverse P) →
-    dirichlet-product-species-subuniverse' P Q
+    type-dirichlet-product-species-subuniverse P Q
       ( unit-dirichlet-product-species-subuniverse
         ( P)
         ( subuniverse-global-subuniverse Q l1)
         ( C3))
       ( S)
       ( X) ≃
-    inclusion-subuniverse (subuniverse-global-subuniverse Q l) (S X)
-  equiv-left-unit-law-dirichlet-product-species-subuniverse {l} S X =
-    equiv-right-unit-law-dirichlet-product-species-subuniverse S X ∘e
+    inclusion-subuniverse (subuniverse-global-subuniverse Q l3) (S X)
+  equiv-left-unit-law-dirichlet-product-species-subuniverse X =
+    equiv-right-unit-law-dirichlet-product-species-subuniverse X ∘e
     equiv-commutative-dirichlet-product-species-subuniverse
       ( P)
       ( Q)
