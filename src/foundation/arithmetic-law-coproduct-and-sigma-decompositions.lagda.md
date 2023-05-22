@@ -33,12 +33,12 @@ open import foundation-core.universe-levels
 
 Let `X` be a type, we have the following equivalence :
 
-```md
- Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
-   ( binary-coproduct-Decomposition U) ≃
- Σ ( (A , B , e) : binary-coproduct-Decomposition X)
-   ( Relaxed-Σ-Decomposition A ×
-     Relaxed-Σ-Decomposition B )
+```text
+  Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
+    ( binary-coproduct-Decomposition U) ≃
+  Σ ( (A , B , e) : binary-coproduct-Decomposition X)
+    ( Relaxed-Σ-Decomposition A ×
+      Relaxed-Σ-Decomposition B )
 ```
 
 We also show a computational rule to simplify the use of this equivalence.
@@ -59,10 +59,10 @@ module _
           ( indexing-type-Relaxed-Σ-Decomposition d)) ≃
         Σ ( UU l)
           ( λ A →
-             Σ ( UU l)
-               ( λ B →
-                 Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
-                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Σ (pr1 U) Y))))
+            Σ ( UU l)
+              ( λ B →
+                Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
+                  ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Σ (pr1 U) Y))))
     pr1 reassociate ((U , V , f) , A , B , e) = (A , B , (U , e) , V , f)
     pr2 reassociate =
       is-equiv-has-inverse
@@ -100,7 +100,7 @@ module _
     Σ ( Relaxed-Σ-Decomposition l l X)
       ( λ d →
         binary-coproduct-Decomposition l l
-         ( indexing-type-Relaxed-Σ-Decomposition d)) ≃
+          ( indexing-type-Relaxed-Σ-Decomposition d)) ≃
     Σ ( binary-coproduct-Decomposition l l X)
       ( λ d →
         Relaxed-Σ-Decomposition l l

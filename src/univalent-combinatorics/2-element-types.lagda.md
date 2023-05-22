@@ -838,13 +838,23 @@ module _
 
 ### A map between 2-element types is an equivalence if and only if its image is the full subtype of the codomain
 
+This remains to be shown.
+
 ```agda
 
 ```
 
 ### A map between 2-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
 
+This remains to be shown.
+
+```agda
+
+```
+
 ### Any map between 2-element types that is not an equivalence is constant
+
+This remains to be shown.
 
 ```agda
 {-
@@ -858,6 +868,8 @@ module _
 ```
 
 ### Any map between 2-element types is either an equivalence or it is constant
+
+This remains to be shown.
 
 ### Coinhabited 2-element types are equivalent
 

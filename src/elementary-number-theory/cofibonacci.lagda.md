@@ -31,7 +31,7 @@ open import foundation.universe-levels
 The [**cofibonacci sequence**][1] is the unique function G : ℕ → ℕ satisfying
 the property that
 
-```md
+```text
   div-ℕ (G m) n ↔ div-ℕ m (Fibonacci-ℕ n).
 ```
 

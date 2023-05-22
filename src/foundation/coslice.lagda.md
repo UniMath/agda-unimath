@@ -22,6 +22,28 @@ open import foundation-core.universe-levels
 
 ## Idea
 
+Given a span of maps
+
+```text
+      X
+     / \
+  f /   \ g
+   v     v
+  A       B,
+```
+
+we define a morphism between the maps in the coslice category of types to be a
+map `h : A → B` together with a coherence triangle `(h ∘ f) ~ g`:
+
+```text
+      X
+     / \
+  f /   \ g
+   v     v
+  A ----> B.
+      h
+```
+
 ## Definition
 
 ```agda

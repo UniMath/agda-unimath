@@ -29,7 +29,7 @@ open import trees.rooted-morphisms-directed-trees
 Given a family of rooted morphisms `fᵢ : Sᵢ → Tᵢ` of directed trees, we obtain a
 morphism
 
-```md
+```text
   combinator f : combinator S → combinator T
 ```
 

@@ -120,7 +120,7 @@ module _
 Logical equivalences can be constructed by equational reasoning in the following
 way:
 
-```md
+```text
 logical-equivalence-reasoning
   X ↔ Y by equiv-1
     ↔ Z by equiv-2

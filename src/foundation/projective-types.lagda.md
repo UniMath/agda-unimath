@@ -26,14 +26,14 @@ open import foundation-core.universe-levels
 A type `X` is said to be **set-projective** if for every surjective map
 `f : A → B` into a set `B` the postcomposition function
 
-```md
+```text
   (X → A) → (X → B)
 ```
 
 is surjective. This is equivalent to the condition that for every equivalence
 relation `R` on a type `A` the natural map
 
-```md
+```text
   (X → A)/~ → (X → A/R)
 ```
 

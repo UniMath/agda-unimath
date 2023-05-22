@@ -123,8 +123,9 @@ module _
 
   associative-add-vec-Ring :
     {n : ℕ} (v1 v2 v3 : vec-Ring R n) →
-    Id ( add-vec-Ring (add-vec-Ring v1 v2) v3)
-       ( add-vec-Ring v1 (add-vec-Ring v2 v3))
+    Id
+      ( add-vec-Ring (add-vec-Ring v1 v2) v3)
+      ( add-vec-Ring v1 (add-vec-Ring v2 v3))
   associative-add-vec-Ring empty-vec empty-vec empty-vec = refl
   associative-add-vec-Ring (x ∷ v1) (y ∷ v2) (z ∷ v3) =
     ap-binary _∷_

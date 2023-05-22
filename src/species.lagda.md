@@ -22,6 +22,8 @@ open import species.coproducts-species-of-types-in-subuniverses public
 open import species.cycle-index-series-species-of-types public
 open import species.derivatives-species-of-types public
 open import species.dirichlet-products-species-of-types-in-subuniverses public
+open import species.dirichlet-series-species-of-finite-inhabited-types public
+open import species.dirichlet-series-species-of-types-in-subuniverses public
 open import species.equivalences-species-of-types public
 open import species.equivalences-species-of-types-in-subuniverses public
 open import species.exponentials-cauchy-series-of-types public
@@ -32,6 +34,8 @@ open import species.pointing-species-of-types public
 open import species.precategory-of-finite-species public
 open import species.products-cauchy-series-species-of-types public
 open import species.products-cauchy-series-species-of-types-in-subuniverses public
+open import species.products-dirichlet-series-species-of-finite-inhabited-types public
+open import species.products-dirichlet-series-species-of-types-in-subuniverses public
 open import species.small-cauchy-composition-species-of-finite-inhabited-types public
 open import species.small-cauchy-composition-species-of-types-in-subuniverses public
 open import species.species-of-finite-inhabited-types public

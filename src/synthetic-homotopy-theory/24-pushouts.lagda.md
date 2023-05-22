@@ -24,6 +24,8 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ### Exercise 13.1
 
+This exercise remains to be formalized.
+
 ### Exercise 13.2
 
 ```agda

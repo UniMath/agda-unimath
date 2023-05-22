@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 
 A type family `B` over `A` is said to be univalent if the map
 
-```md
+```text
   equiv-tr : (Id x y) → (B x ≃ B y)
 ```
 

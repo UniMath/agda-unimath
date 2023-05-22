@@ -51,8 +51,8 @@ module _
         ( is-contr-equiv'
           ( fib f (f x))
           ( equiv-fib f (f x))
-          ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (pair x refl)))
-        ( λ y → ap f)
+          ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (x , refl)))
+        ( λ _ → ap f)
 
   abstract
     is-prop-map-is-emb : is-emb f → is-prop-map f
@@ -60,13 +60,11 @@ module _
       is-prop-is-proof-irrelevant α
       where
       α : (t : fib f y) → is-contr (fib f y)
-      α (pair x refl) =
+      α (x , refl) =
         is-contr-equiv
           ( fib' f (f x))
           ( equiv-fib f (f x))
-          ( fundamental-theorem-id'
-            ( λ y → ap f)
-            ( λ y → is-emb-f x y))
+          ( fundamental-theorem-id' (λ _ → ap f) (is-emb-f x))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

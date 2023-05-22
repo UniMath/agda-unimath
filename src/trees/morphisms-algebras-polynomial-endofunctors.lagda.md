@@ -30,7 +30,7 @@ A **morphism** of algebras of a polynomial endofunctor `P A B` consists of a map
 `f : X → Y$ between the underlying types, equipped with a homotopy witnessing
 that the square
 
-```md
+```text
            P A B f
   P A B X ---------> P A B Y
       |                |

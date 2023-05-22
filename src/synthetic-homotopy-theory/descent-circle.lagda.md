@@ -179,7 +179,7 @@ module _
     ( up-circle : universal-property-circle (lsuc l2) l) →
     is-equiv ev-descent-data-circle
   is-equiv-ev-descent-data-circle-universal-property-circle up-circle =
-     is-equiv-comp-htpy
+    is-equiv-comp-htpy
       ( ev-descent-data-circle)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))

@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 </details>
 
-# We state the collatz conjecture
+## Statement
 
 ```agda
 collatz : ℕ → ℕ

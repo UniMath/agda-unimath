@@ -30,7 +30,7 @@ A **morphism** of coalgebras of a polynomial endofunctor `P A B` consists of a
 function `f : X → Y` between their underlying types, equipped with a homotopy
 witnessing that the square
 
-```md
+```text
               f
       X -------------> Y
       |                |

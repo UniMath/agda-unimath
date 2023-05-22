@@ -24,7 +24,7 @@ open import foundation-core.universe-levels
 We specify the type of the homotopy witnessing that a cube commutes. Imagine
 that the cube is presented as a lattice
 
-```md
+```text
             *
           / | \
          /  |  \

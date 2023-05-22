@@ -287,7 +287,7 @@ embedding. The total space `Σ (y : B x), node-element-coalgebra' (α y)` embeds
 into `node-element-coalgebra' (tree-coalgebra x α)`, and this implies that the
 node inclusion has the same truncation level as the fiber inclusions
 
-```md
+```text
   node-element-coalgebra' (α b) → Σ (y : B x), node-element-coalgebra' (α y)
 ```
 

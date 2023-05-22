@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 
 A commuting 3-simplex of homotopies is a commuting diagram of the form
 
-```md
+```text
   f ----------> g
   |  \       ^  |
   |    \   /    |

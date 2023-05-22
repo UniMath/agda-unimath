@@ -36,7 +36,7 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 A group `F` equipped with an element `x : F` is said to satisfy the universal
 property of the free group with one generator if for every group `G` the map
 
-```md
+```text
   type-hom-Group F G → type-Group G
 ```
 

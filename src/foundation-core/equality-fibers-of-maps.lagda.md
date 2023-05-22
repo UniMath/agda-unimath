@@ -34,7 +34,7 @@ action on identifications of `f`.
 For any map `f : A → B` any `b : B` and any `x y : fib f b`, there is an
 equivalence
 
-```md
+```text
 (x ＝ y) ≃ fib (ap f) ((pr2 x) ∙ (inv (pr2 y)))
 ```
 

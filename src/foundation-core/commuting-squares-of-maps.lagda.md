@@ -23,7 +23,7 @@ open import foundation-core.universe-levels
 
 A square of maps
 
-```md
+```text
   A ------> X
   |         |
   |         |

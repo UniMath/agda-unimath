@@ -469,7 +469,7 @@ ap-binary-concat f refl refl refl refl = refl
 
 Identifications can be constructed by equational reasoning in the following way:
 
-```md
+```text
 equational-reasoning
   x ＝ y by eq-1
     ＝ z by eq-2

@@ -42,7 +42,7 @@ The fibers of maps between finite types are finite.
 
 ## Properties
 
-### If A and B can be counted, then the fibers of a map f : A → B can be counted
+### If `A` and `B` can be counted, then the fibers of a map `f : A → B` can be counted
 
 ```agda
 count-fib :
@@ -134,7 +134,7 @@ is-decidable-fib-Fin {k} {l} f y =
   is-decidable-fib-count f (count-Fin k) (count-Fin l) y
 ```
 
-### If `f : A → B` and `B` is finite, then `A` is finite if and only if the fibers of f are finite
+### If `f : A → B` and `B` is finite, then `A` is finite if and only if the fibers of `f` are finite
 
 ```agda
 equiv-is-finite-domain-is-finite-fib :

@@ -65,7 +65,7 @@ is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
 
 ## Properties
 
-### The unit laws for an operation μ with unit e can be upgraded to coherent unit laws
+### The unit laws for an operation `μ` with unit `e` can be upgraded to coherent unit laws
 
 ```agda
 module _

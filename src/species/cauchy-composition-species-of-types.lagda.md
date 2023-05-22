@@ -39,7 +39,7 @@ open import species.unit-cauchy-composition-species-of-types
 A species of types `S : UU l1 → UU l2` can be thought of as the polynomial
 endofunctor
 
-```md
+```text
   X ↦ Σ (A : UU l1) (S A) × (A → X)
 ```
 

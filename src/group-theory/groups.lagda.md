@@ -43,7 +43,7 @@ An **abstract group** is a group in the usual algebraic sense, i.e., it consists
 of a set equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and
 an inverse operation `x ↦ x⁻¹` satisfying the group laws
 
-```md
+```text
   (xy)z = x(yz)      (associativity)
      ex = x          (left unit law)
      xe = x          (right unit law)
@@ -495,8 +495,9 @@ module _
 
   preserves-concat-mul-list-Group :
     (l1 l2 : list (type-Group G)) →
-    Id ( mul-list-Group (concat-list l1 l2))
-       ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
+    Id
+      ( mul-list-Group (concat-list l1 l2))
+      ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
   preserves-concat-mul-list-Group =
     distributive-mul-concat-list-Monoid (monoid-Group G)
 ```
