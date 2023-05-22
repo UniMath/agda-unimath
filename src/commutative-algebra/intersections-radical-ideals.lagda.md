@@ -212,7 +212,7 @@ Note that any product of elements in `I` and `J` is in the intersection `I ∩ J
 This settles the first inclusion. For the second inclusion, note that if
 `x ∈ I ∩ J`, then `x² ∈ IJ` so it follows that `x ∈ √ IJ`.
 
-````agda
+```agda
 module _
   {l1 l2 l3 : Level} (A : Commutative-Ring l1)
   (I : radical-ideal-Commutative-Ring l2 A)

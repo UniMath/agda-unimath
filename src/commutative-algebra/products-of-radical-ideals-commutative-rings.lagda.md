@@ -32,8 +32,6 @@ least radical ideal that contains the products of elements in `I` and in `J`.
 
 ## Definitions
 
-### The universal property of products of radical ideals
-
 ### The universal property of the product of two ideals in a commutative ring
 
 ```agda
