@@ -35,8 +35,8 @@ module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
-  binary-product-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
-  binary-product-Decomposition-subuniverse =
+  binary-product-Decomposition-Subuniverse : UU (lsuc l1 ⊔ l2)
+  binary-product-Decomposition-Subuniverse =
     Σ ( type-subuniverse P)
         ( λ k1 →
           Σ ( type-subuniverse P)
@@ -47,28 +47,28 @@ module _
 
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
-  (d : binary-product-Decomposition-subuniverse P X)
+  (d : binary-product-Decomposition-Subuniverse P X)
   where
 
-  left-summand-binary-product-Decomposition-subuniverse : type-subuniverse P
-  left-summand-binary-product-Decomposition-subuniverse = pr1 d
+  left-summand-binary-product-Decomposition-Subuniverse : type-subuniverse P
+  left-summand-binary-product-Decomposition-Subuniverse = pr1 d
 
-  type-left-summand-binary-product-Decomposition-subuniverse : UU l1
-  type-left-summand-binary-product-Decomposition-subuniverse =
-    inclusion-subuniverse P left-summand-binary-product-Decomposition-subuniverse
+  type-left-summand-binary-product-Decomposition-Subuniverse : UU l1
+  type-left-summand-binary-product-Decomposition-Subuniverse =
+    inclusion-subuniverse P left-summand-binary-product-Decomposition-Subuniverse
 
-  right-summand-binary-product-Decomposition-subuniverse : type-subuniverse P
-  right-summand-binary-product-Decomposition-subuniverse = pr1 (pr2 d)
+  right-summand-binary-product-Decomposition-Subuniverse : type-subuniverse P
+  right-summand-binary-product-Decomposition-Subuniverse = pr1 (pr2 d)
 
-  type-right-summand-binary-product-Decomposition-subuniverse : UU l1
-  type-right-summand-binary-product-Decomposition-subuniverse =
-    inclusion-subuniverse P right-summand-binary-product-Decomposition-subuniverse
+  type-right-summand-binary-product-Decomposition-Subuniverse : UU l1
+  type-right-summand-binary-product-Decomposition-Subuniverse =
+    inclusion-subuniverse P right-summand-binary-product-Decomposition-Subuniverse
 
-  matching-correspondence-binary-product-Decomposition-subuniverse :
+  matching-correspondence-binary-product-Decomposition-Subuniverse :
     inclusion-subuniverse P X ≃
-    ( type-left-summand-binary-product-Decomposition-subuniverse ×
-      type-right-summand-binary-product-Decomposition-subuniverse)
-  matching-correspondence-binary-product-Decomposition-subuniverse = pr2 (pr2 d)
+    ( type-left-summand-binary-product-Decomposition-Subuniverse ×
+      type-right-summand-binary-product-Decomposition-Subuniverse)
+  matching-correspondence-binary-product-Decomposition-Subuniverse = pr2 (pr2 d)
 ```
 
 ### Iterated binary product decompositions
@@ -78,21 +78,21 @@ module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
-  left-iterated-binary-product-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
-  left-iterated-binary-product-Decomposition-subuniverse =
-    Σ ( binary-product-Decomposition-subuniverse P X)
+  left-iterated-binary-product-Decomposition-Subuniverse : UU (lsuc l1 ⊔ l2)
+  left-iterated-binary-product-Decomposition-Subuniverse =
+    Σ ( binary-product-Decomposition-Subuniverse P X)
       ( λ d →
-        binary-product-Decomposition-subuniverse
+        binary-product-Decomposition-Subuniverse
           ( P)
-          ( left-summand-binary-product-Decomposition-subuniverse P X d))
+          ( left-summand-binary-product-Decomposition-Subuniverse P X d))
 
-  right-iterated-binary-product-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
-  right-iterated-binary-product-Decomposition-subuniverse =
-    Σ ( binary-product-Decomposition-subuniverse P X)
+  right-iterated-binary-product-Decomposition-Subuniverse : UU (lsuc l1 ⊔ l2)
+  right-iterated-binary-product-Decomposition-Subuniverse =
+    Σ ( binary-product-Decomposition-Subuniverse P X)
        ( λ d →
-         binary-product-Decomposition-subuniverse
+         binary-product-Decomposition-Subuniverse
            ( P)
-           ( right-summand-binary-product-Decomposition-subuniverse P X d))
+           ( right-summand-binary-product-Decomposition-Subuniverse P X d))
 ```
 
 ### Ternary product Decomposition-subuniverses
@@ -102,8 +102,8 @@ module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
-  ternary-product-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
-  ternary-product-Decomposition-subuniverse =
+  ternary-product-Decomposition-Subuniverse : UU (lsuc l1 ⊔ l2)
+  ternary-product-Decomposition-Subuniverse =
     Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
        ( λ x →
          inclusion-subuniverse P X ≃
@@ -112,45 +112,45 @@ module _
              inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
-    (d : ternary-product-Decomposition-subuniverse)
+    (d : ternary-product-Decomposition-Subuniverse)
     where
 
-    types-ternary-product-Decomposition-subuniverse :
+    types-ternary-product-Decomposition-Subuniverse :
       type-subuniverse P × (type-subuniverse P × type-subuniverse P)
-    types-ternary-product-Decomposition-subuniverse = pr1 d
+    types-ternary-product-Decomposition-Subuniverse = pr1 d
 
-    first-summand-ternary-product-Decomposition-subuniverse : type-subuniverse P
-    first-summand-ternary-product-Decomposition-subuniverse =
-      (pr1 types-ternary-product-Decomposition-subuniverse)
+    first-summand-ternary-product-Decomposition-Subuniverse : type-subuniverse P
+    first-summand-ternary-product-Decomposition-Subuniverse =
+      (pr1 types-ternary-product-Decomposition-Subuniverse)
 
-    second-summand-ternary-product-Decomposition-subuniverse : type-subuniverse P
-    second-summand-ternary-product-Decomposition-subuniverse =
-      (pr1 (pr2 types-ternary-product-Decomposition-subuniverse))
+    second-summand-ternary-product-Decomposition-Subuniverse : type-subuniverse P
+    second-summand-ternary-product-Decomposition-Subuniverse =
+      (pr1 (pr2 types-ternary-product-Decomposition-Subuniverse))
 
-    third-summand-ternary-product-Decomposition-subuniverse : type-subuniverse P
-    third-summand-ternary-product-Decomposition-subuniverse =
-      (pr2 (pr2 types-ternary-product-Decomposition-subuniverse))
+    third-summand-ternary-product-Decomposition-Subuniverse : type-subuniverse P
+    third-summand-ternary-product-Decomposition-Subuniverse =
+      (pr2 (pr2 types-ternary-product-Decomposition-Subuniverse))
 
-    matching-correspondence-ternary-productuct-Decomposition-subuniverse :
+    matching-correspondence-ternary-productuct-Decomposition-Subuniverse :
       inclusion-subuniverse P X ≃
-      ( inclusion-subuniverse P first-summand-ternary-product-Decomposition-subuniverse ×
-        ( inclusion-subuniverse P second-summand-ternary-product-Decomposition-subuniverse ×
-          inclusion-subuniverse P third-summand-ternary-product-Decomposition-subuniverse))
-    matching-correspondence-ternary-productuct-Decomposition-subuniverse = pr2 d
+      ( inclusion-subuniverse P first-summand-ternary-product-Decomposition-Subuniverse ×
+        ( inclusion-subuniverse P second-summand-ternary-product-Decomposition-Subuniverse ×
+          inclusion-subuniverse P third-summand-ternary-product-Decomposition-Subuniverse))
+    matching-correspondence-ternary-productuct-Decomposition-Subuniverse = pr2 d
 ```
 
 ## Propositions
 
-### Equivalence between binary product Decomposition-subuniverse induce by commutativiy of product
+### Equivalence between binary product Decomposition-Subuniverse induce by commutativiy of product
 
 ```agda
 module _
   {l1 l2 : Level} (P : subuniverse l1 l2) (X : type-subuniverse P)
   where
 
-  equiv-commutative-binary-product-Decomposition-subuniverse :
-    binary-product-Decomposition-subuniverse P X ≃ binary-product-Decomposition-subuniverse P X
-  equiv-commutative-binary-product-Decomposition-subuniverse =
+  equiv-commutative-binary-product-Decomposition-Subuniverse :
+    binary-product-Decomposition-Subuniverse P X ≃ binary-product-Decomposition-Subuniverse P X
+  equiv-commutative-binary-product-Decomposition-Subuniverse =
     ( ( associative-Σ
         ( type-subuniverse P)
         ( λ _ → type-subuniverse P)
@@ -177,8 +177,8 @@ module _
   where
 
   private
-    map-reassociate-left-iterated-product-Decomposition-subuniverse :
-      left-iterated-binary-product-Decomposition-subuniverse P X →
+    map-reassociate-left-iterated-product-Decomposition-Subuniverse :
+      left-iterated-binary-product-Decomposition-Subuniverse P X →
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
@@ -190,11 +190,11 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x))))
-    map-reassociate-left-iterated-product-Decomposition-subuniverse
+    map-reassociate-left-iterated-product-Decomposition-Subuniverse
       ( (A , B , e) , C , D , f) =
       ( (B , C , D) , (A , f) , e)
 
-    map-inv-reassociate-left-iterated-product-Decomposition-subuniverse :
+    map-inv-reassociate-left-iterated-product-Decomposition-Subuniverse :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
@@ -206,13 +206,13 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x)))) →
-      left-iterated-binary-product-Decomposition-subuniverse P X
-    map-inv-reassociate-left-iterated-product-Decomposition-subuniverse
+      left-iterated-binary-product-Decomposition-Subuniverse P X
+    map-inv-reassociate-left-iterated-product-Decomposition-Subuniverse
       ( (B , C , D) , (A , f) , e) =
       ( (A , B , e) , C , D , f)
 
-    equiv-reassociate-left-iterated-product-Decomposition-subuniverse :
-      left-iterated-binary-product-Decomposition-subuniverse P X ≃
+    equiv-reassociate-left-iterated-product-Decomposition-Subuniverse :
+      left-iterated-binary-product-Decomposition-Subuniverse P X ≃
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
@@ -224,18 +224,18 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 A) ×
                 inclusion-subuniverse P (pr1 x))))
-    pr1 equiv-reassociate-left-iterated-product-Decomposition-subuniverse =
-      map-reassociate-left-iterated-product-Decomposition-subuniverse
-    pr2 equiv-reassociate-left-iterated-product-Decomposition-subuniverse =
+    pr1 equiv-reassociate-left-iterated-product-Decomposition-Subuniverse =
+      map-reassociate-left-iterated-product-Decomposition-Subuniverse
+    pr2 equiv-reassociate-left-iterated-product-Decomposition-Subuniverse =
       is-equiv-has-inverse
-        map-inv-reassociate-left-iterated-product-Decomposition-subuniverse
+        map-inv-reassociate-left-iterated-product-Decomposition-Subuniverse
         refl-htpy
         refl-htpy
 
-  equiv-ternary-left-iterated-product-Decomposition-subuniverse :
-    left-iterated-binary-product-Decomposition-subuniverse P X ≃
-    ternary-product-Decomposition-subuniverse P X
-  equiv-ternary-left-iterated-product-Decomposition-subuniverse =
+  equiv-ternary-left-iterated-product-Decomposition-Subuniverse :
+    left-iterated-binary-product-Decomposition-Subuniverse P X ≃
+    ternary-product-Decomposition-Subuniverse P X
+  equiv-ternary-left-iterated-product-Decomposition-Subuniverse =
     ( ( equiv-tot
         ( λ x →
           ( ( equiv-postcomp-equiv
@@ -251,11 +251,11 @@ module _
                       inclusion-subuniverse P (pr2 (pr2 x))) ,
                     C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x)))) ,
                   id-equiv))))) ∘e
-      ( ( equiv-reassociate-left-iterated-product-Decomposition-subuniverse)))
+      ( ( equiv-reassociate-left-iterated-product-Decomposition-Subuniverse)))
 
   private
-    map-reassociate-right-iterated-product-Decomposition-subuniverse :
-      right-iterated-binary-product-Decomposition-subuniverse P X →
+    map-reassociate-right-iterated-product-Decomposition-Subuniverse :
+      right-iterated-binary-product-Decomposition-Subuniverse P X →
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
@@ -267,11 +267,11 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B))))
-    map-reassociate-right-iterated-product-Decomposition-subuniverse
+    map-reassociate-right-iterated-product-Decomposition-Subuniverse
       ( (A , B , e) , C , D , f) =
       ( (A , C , D) , (B , f) , e)
 
-    map-inv-reassociate-right-iterated-product-Decomposition-subuniverse :
+    map-inv-reassociate-right-iterated-product-Decomposition-Subuniverse :
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
@@ -283,13 +283,13 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B)))) →
-      right-iterated-binary-product-Decomposition-subuniverse P X
-    map-inv-reassociate-right-iterated-product-Decomposition-subuniverse
+      right-iterated-binary-product-Decomposition-Subuniverse P X
+    map-inv-reassociate-right-iterated-product-Decomposition-Subuniverse
       ( (A , C , D) , (B , f) , e) =
       ( (A , B , e) , C , D , f)
 
-    equiv-reassociate-right-iterated-product-Decomposition-subuniverse :
-      right-iterated-binary-product-Decomposition-subuniverse P X ≃
+    equiv-reassociate-right-iterated-product-Decomposition-Subuniverse :
+      right-iterated-binary-product-Decomposition-Subuniverse P X ≃
       Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
         ( λ x →
           Σ ( Σ ( type-subuniverse P)
@@ -301,18 +301,18 @@ module _
               inclusion-subuniverse P X ≃
               ( inclusion-subuniverse P (pr1 x) ×
                 inclusion-subuniverse P (pr1 B))))
-    pr1 equiv-reassociate-right-iterated-product-Decomposition-subuniverse =
-      map-reassociate-right-iterated-product-Decomposition-subuniverse
-    pr2 equiv-reassociate-right-iterated-product-Decomposition-subuniverse =
+    pr1 equiv-reassociate-right-iterated-product-Decomposition-Subuniverse =
+      map-reassociate-right-iterated-product-Decomposition-Subuniverse
+    pr2 equiv-reassociate-right-iterated-product-Decomposition-Subuniverse =
       is-equiv-has-inverse
-        map-inv-reassociate-right-iterated-product-Decomposition-subuniverse
+        map-inv-reassociate-right-iterated-product-Decomposition-Subuniverse
         refl-htpy
         refl-htpy
 
-  equiv-ternary-right-iterated-product-Decomposition-subuniverse :
-    right-iterated-binary-product-Decomposition-subuniverse P X ≃
-    ternary-product-Decomposition-subuniverse P X
-  equiv-ternary-right-iterated-product-Decomposition-subuniverse =
+  equiv-ternary-right-iterated-product-Decomposition-Subuniverse :
+    right-iterated-binary-product-Decomposition-Subuniverse P X ≃
+    ternary-product-Decomposition-Subuniverse P X
+  equiv-ternary-right-iterated-product-Decomposition-Subuniverse =
     ( ( equiv-tot
         ( λ x →
           left-unit-law-Σ-is-contr
@@ -325,7 +325,7 @@ module _
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
                 ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))) ,
               id-equiv))) ∘e
-      ( ( equiv-reassociate-right-iterated-product-Decomposition-subuniverse)))
+      ( ( equiv-reassociate-right-iterated-product-Decomposition-Subuniverse)))
 ```
 
 ### Product-decomposition with contractible right summand
@@ -336,15 +336,15 @@ module _
   (C1 : is-in-subuniverse P (raise-unit l1))
   where
 
-  equiv-is-contr-right-summand-binary-product-Decomposition-subuniverse :
-    ( Σ ( binary-product-Decomposition-subuniverse P X)
+  equiv-is-contr-right-summand-binary-product-Decomposition-Subuniverse :
+    ( Σ ( binary-product-Decomposition-Subuniverse P X)
         ( λ d →
           is-contr
             ( inclusion-subuniverse P
-              ( right-summand-binary-product-Decomposition-subuniverse P X d)))) ≃
+              ( right-summand-binary-product-Decomposition-Subuniverse P X d)))) ≃
     Σ ( type-subuniverse P)
       ( λ Y → inclusion-subuniverse P X ≃ pr1 Y)
-  equiv-is-contr-right-summand-binary-product-Decomposition-subuniverse =
+  equiv-is-contr-right-summand-binary-product-Decomposition-Subuniverse =
     ( ( equiv-tot
           ( λ x →
             ( ( equiv-postcomp-equiv
