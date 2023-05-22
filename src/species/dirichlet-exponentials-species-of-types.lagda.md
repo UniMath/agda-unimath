@@ -10,7 +10,6 @@ module species.dirichlet-exponentials-species-of-types where
 open import foundation.arithmetic-law-product-and-pi-decompositions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-decompositions
-open import foundation.product-decompositions
 open import foundation.dependent-binomial-theorem
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -20,14 +19,15 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pi-decompositions
+open import foundation.product-decompositions
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import species.dirichlet-products-species-of-types
 open import species.coproducts-species-of-types
+open import species.dirichlet-products-species-of-types
 open import species.equivalences-species-of-types
 open import species.species-of-types
 ```

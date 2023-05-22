@@ -13,20 +13,20 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.product-decompositions-subuniverse
 open import foundation.product-decompositions
+open import foundation.product-decompositions-subuniverse
+open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
-open import foundation.universe-levels
-open import foundation.homotopies
-open import foundation.propositions
 open import foundation.univalence
+open import foundation.universe-levels
 
-open import species.species-of-types-in-subuniverses
 open import species.dirichlet-products-species-of-types
+open import species.species-of-types-in-subuniverses
 ```
 
 </details>
@@ -124,21 +124,51 @@ module _
         ( X) ≃
       Σ ( ternary-product-Decomposition-Subuniverse P X)
         ( λ d →
-          inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-            ( S (first-summand-ternary-product-Decomposition-Subuniverse P X d)) ×
-            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( T (second-summand-ternary-product-Decomposition-Subuniverse P X d)) ×
-              inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
-              ( U (third-summand-ternary-product-Decomposition-Subuniverse P X d))))
+          inclusion-subuniverse
+            ( subuniverse-global-subuniverse Q l3)
+            ( S
+              ( first-summand-ternary-product-Decomposition-Subuniverse
+                P
+                X
+                d)) ×
+            ( inclusion-subuniverse
+              ( subuniverse-global-subuniverse Q l4)
+              ( T
+                ( second-summand-ternary-product-Decomposition-Subuniverse
+                  P
+                  X
+                  d)) ×
+              inclusion-subuniverse
+                ( subuniverse-global-subuniverse Q l5)
+                ( U
+                  ( third-summand-ternary-product-Decomposition-Subuniverse
+                    P
+                    X
+                    d))))
     equiv-left-iterated-dirichlet-product-species-subuniverse =
       ( ( equiv-Σ
           ( λ d →
-            inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-            ( S (first-summand-ternary-product-Decomposition-Subuniverse P X d)) ×
-            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( T (second-summand-ternary-product-Decomposition-Subuniverse P X d)) ×
-              inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
-              ( U (third-summand-ternary-product-Decomposition-Subuniverse P X d)))))
+            inclusion-subuniverse
+              ( subuniverse-global-subuniverse Q l3)
+              ( S
+                ( first-summand-ternary-product-Decomposition-Subuniverse
+                  P
+                  X
+                  d)) ×
+            ( inclusion-subuniverse
+              ( subuniverse-global-subuniverse Q l4)
+              ( T
+                ( second-summand-ternary-product-Decomposition-Subuniverse
+                  P
+                  X
+                  d)) ×
+              inclusion-subuniverse
+                ( subuniverse-global-subuniverse Q l5)
+                ( U
+                  ( third-summand-ternary-product-Decomposition-Subuniverse
+                    P
+                    X
+                    d)))))
           ( ( equiv-Σ
               ( _)
               ( associative-prod _ _ _ ∘e commutative-prod)
@@ -147,7 +177,10 @@ module _
                   ( ( associative-prod _ _ _ ∘e
                     ( commutative-prod)))
                   ( inclusion-subuniverse P X)) ∘e
-              equiv-ternary-left-iterated-product-Decomposition-Subuniverse P X C2))
+              equiv-ternary-left-iterated-product-Decomposition-Subuniverse
+                P
+                X
+                C2))
           ( λ d → associative-prod _ _ _) ∘e
         ( ( inv-associative-Σ
             ( binary-product-Decomposition-Subuniverse P X)
@@ -162,16 +195,34 @@ module _
         ( X) ≃
       Σ ( ternary-product-Decomposition-Subuniverse P X)
         ( λ d →
-          inclusion-subuniverse ( subuniverse-global-subuniverse Q l3)
-            ( S (first-summand-ternary-product-Decomposition-Subuniverse P X d)) ×
-            ( inclusion-subuniverse ( subuniverse-global-subuniverse Q l4)
-              ( T (second-summand-ternary-product-Decomposition-Subuniverse P X d)) ×
-                inclusion-subuniverse ( subuniverse-global-subuniverse Q l5)
-              ( U (third-summand-ternary-product-Decomposition-Subuniverse P X d))))
+          inclusion-subuniverse
+            ( subuniverse-global-subuniverse Q l3)
+            ( S
+              ( first-summand-ternary-product-Decomposition-Subuniverse
+                P
+                X
+                d)) ×
+            ( inclusion-subuniverse
+              ( subuniverse-global-subuniverse Q l4)
+              ( T
+                ( second-summand-ternary-product-Decomposition-Subuniverse
+                  P
+                  X
+                  d)) ×
+                inclusion-subuniverse
+                  ( subuniverse-global-subuniverse Q l5)
+                  ( U
+                    ( third-summand-ternary-product-Decomposition-Subuniverse
+                      P
+                      X
+                      d))))
     equiv-right-iterated-dirichlet-product-species-subuniverse =
       ( ( equiv-Σ-equiv-base
           ( _)
-          ( equiv-ternary-right-iterated-product-Decomposition-Subuniverse P X C2)) ∘e
+          ( equiv-ternary-right-iterated-product-Decomposition-Subuniverse
+            P
+            X
+            C2)) ∘e
         ( ( inv-associative-Σ
             ( binary-product-Decomposition-Subuniverse P X)
             ( λ z → binary-product-Decomposition-Subuniverse P (pr1 (pr2 z)))
@@ -296,7 +347,7 @@ module _
             inclusion-subuniverse
               ( subuniverse-global-subuniverse Q l3)
               ( S (pr1 (p))))
-          ( equiv-is-contr-right-summand-binary-product-Decomposition-Subuniverse
+          (equiv-is-contr-right-summand-binary-product-Decomposition-Subuniverse
             P
             X
             C2)) ∘e
@@ -309,7 +360,10 @@ module _
                   ( P)
                   ( subuniverse-global-subuniverse Q l1)
                   ( C3)
-                  ( right-summand-binary-product-Decomposition-Subuniverse P X d)))
+                  ( right-summand-binary-product-Decomposition-Subuniverse
+                    P
+                    X
+                    d)))
             ( λ z →
               inclusion-subuniverse
                 ( subuniverse-global-subuniverse Q l3)
@@ -421,34 +475,34 @@ module _
   equiv-dirichlet-product-Σ-extension-species-subuniverse =
     ( ( reassociate') ∘e
       ( ( equiv-tot
-            ( λ d →
-              equiv-Σ-equiv-base
-                (λ p →
-                    ( inclusion-subuniverse
-                        ( subuniverse-global-subuniverse Q l3)
-                        ( S
-                          ( left-summand-binary-product-Decomposition d ,
-                            pr1 p))) ×
-                    ( inclusion-subuniverse
-                        ( subuniverse-global-subuniverse Q l4)
-                        ( T
-                          ( right-summand-binary-product-Decomposition d ,
-                            pr2 p))))
-                ( inv-equiv
-                  ( equiv-add-redundant-prop
-                    ( is-prop-type-Prop (P X))
-                    ( λ p →
-                      tr
-                        ( is-in-subuniverse P)
-                        ( inv
-                          ( eq-equiv
-                            ( X)
-                            ( left-summand-binary-product-Decomposition d ×
-                              right-summand-binary-product-Decomposition d)
-                            ( matching-correspondence-binary-product-Decomposition
-                                d)))
-                        ( C2
-                          ( pr1 p)
-                          ( pr2 p))))))) ∘e
+          ( λ d →
+            equiv-Σ-equiv-base
+              (λ p →
+                  ( inclusion-subuniverse
+                    ( subuniverse-global-subuniverse Q l3)
+                    ( S
+                      ( left-summand-binary-product-Decomposition d ,
+                        pr1 p))) ×
+                  ( inclusion-subuniverse
+                    ( subuniverse-global-subuniverse Q l4)
+                    ( T
+                      ( right-summand-binary-product-Decomposition d ,
+                        pr2 p))))
+              ( inv-equiv
+                ( equiv-add-redundant-prop
+                  ( is-prop-type-Prop (P X))
+                  ( λ p →
+                    tr
+                      ( is-in-subuniverse P)
+                      ( inv
+                        ( eq-equiv
+                          ( X)
+                          ( left-summand-binary-product-Decomposition d ×
+                            right-summand-binary-product-Decomposition d)
+                          ( matching-correspondence-binary-product-Decomposition
+                              d)))
+                      ( C2
+                        ( pr1 p)
+                        ( pr2 p))))))) ∘e
         ( reassociate)))
 ```

@@ -55,14 +55,18 @@ module _
 
   type-left-summand-binary-product-Decomposition-Subuniverse : UU l1
   type-left-summand-binary-product-Decomposition-Subuniverse =
-    inclusion-subuniverse P left-summand-binary-product-Decomposition-Subuniverse
+    inclusion-subuniverse
+      P
+      left-summand-binary-product-Decomposition-Subuniverse
 
   right-summand-binary-product-Decomposition-Subuniverse : type-subuniverse P
   right-summand-binary-product-Decomposition-Subuniverse = pr1 (pr2 d)
 
   type-right-summand-binary-product-Decomposition-Subuniverse : UU l1
   type-right-summand-binary-product-Decomposition-Subuniverse =
-    inclusion-subuniverse P right-summand-binary-product-Decomposition-Subuniverse
+    inclusion-subuniverse
+      P
+      right-summand-binary-product-Decomposition-Subuniverse
 
   matching-correspondence-binary-product-Decomposition-Subuniverse :
     inclusion-subuniverse P X ≃
@@ -123,7 +127,8 @@ module _
     first-summand-ternary-product-Decomposition-Subuniverse =
       (pr1 types-ternary-product-Decomposition-Subuniverse)
 
-    second-summand-ternary-product-Decomposition-Subuniverse : type-subuniverse P
+    second-summand-ternary-product-Decomposition-Subuniverse :
+      type-subuniverse P
     second-summand-ternary-product-Decomposition-Subuniverse =
       (pr1 (pr2 types-ternary-product-Decomposition-Subuniverse))
 
@@ -133,15 +138,23 @@ module _
 
     matching-correspondence-ternary-productuct-Decomposition-Subuniverse :
       inclusion-subuniverse P X ≃
-      ( inclusion-subuniverse P first-summand-ternary-product-Decomposition-Subuniverse ×
-        ( inclusion-subuniverse P second-summand-ternary-product-Decomposition-Subuniverse ×
-          inclusion-subuniverse P third-summand-ternary-product-Decomposition-Subuniverse))
+      ( inclusion-subuniverse
+        P
+        first-summand-ternary-product-Decomposition-Subuniverse ×
+        ( ( inclusion-subuniverse
+            P
+            second-summand-ternary-product-Decomposition-Subuniverse) ×
+          inclusion-subuniverse
+            P
+            third-summand-ternary-product-Decomposition-Subuniverse))
     matching-correspondence-ternary-productuct-Decomposition-Subuniverse = pr2 d
 ```
 
 ## Propositions
 
-### Equivalence between binary product Decomposition-Subuniverse induce by commutativiy of product
+### Equivalence between binary product Decomposition-Subuniverse induce by
+
+commutativiy of product
 
 ```agda
 module _
@@ -149,7 +162,8 @@ module _
   where
 
   equiv-commutative-binary-product-Decomposition-Subuniverse :
-    binary-product-Decomposition-Subuniverse P X ≃ binary-product-Decomposition-Subuniverse P X
+    binary-product-Decomposition-Subuniverse P X ≃
+    binary-product-Decomposition-Subuniverse P X
   equiv-commutative-binary-product-Decomposition-Subuniverse =
     ( ( associative-Σ
         ( type-subuniverse P)
@@ -341,7 +355,10 @@ module _
         ( λ d →
           is-contr
             ( inclusion-subuniverse P
-              ( right-summand-binary-product-Decomposition-Subuniverse P X d)))) ≃
+              ( right-summand-binary-product-Decomposition-Subuniverse
+                P
+                X
+                d)))) ≃
     Σ ( type-subuniverse P)
       ( λ Y → inclusion-subuniverse P X ≃ pr1 Y)
   equiv-is-contr-right-summand-binary-product-Decomposition-Subuniverse =

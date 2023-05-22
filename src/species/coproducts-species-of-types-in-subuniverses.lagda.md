@@ -68,7 +68,6 @@ is-closed-under-coproduct-species-subuniverse P Q =
 
 ### The coproduct of two species of types in a subuniverse
 
-
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)

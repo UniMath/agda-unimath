@@ -10,6 +10,8 @@ module foundation.pi-decompositions where
 ```agda
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
@@ -19,8 +21,6 @@ open import foundation.univalence
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -33,10 +33,10 @@ open import foundation-core.universe-levels
 ## Idea
 
 A Π-decomposition of a type `A` consists of a type `X` and a family of types
-`Y x` indexed by `x : X` equipped with an equivalence `A ≃ Π X Y`. The
-type `X` is called the indexing type of the Π-decomposition, the elements of
-`Y x` are called the cotypes of the Π-decomposition, and the equivalence
-`A ≃ Π X Y` is the matching correspondence of the Π-decomposition
+`Y x` indexed by `x : X` equipped with an equivalence `A ≃ Π X Y`. The type `X`
+is called the indexing type of the Π-decomposition, the elements of `Y x` are
+called the cotypes of the Π-decomposition, and the equivalence `A ≃ Π X Y` is
+the matching correspondence of the Π-decomposition
 
 ## Definitions
 

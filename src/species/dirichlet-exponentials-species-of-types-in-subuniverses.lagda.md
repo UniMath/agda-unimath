@@ -18,10 +18,10 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
-open import foundation.product-decompositions
 open import foundation.pi-decompositions
 open import foundation.pi-decompositions-subuniverse
+open import foundation.product-decompositions
+open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
@@ -29,10 +29,10 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import species.cauchy-composition-species-of-types-in-subuniverses
-open import species.dirichlet-exponentials-species-of-types
-open import species.dirichlet-products-species-of-types-in-subuniverses
 open import species.coproducts-species-of-types
 open import species.coproducts-species-of-types-in-subuniverses
+open import species.dirichlet-exponentials-species-of-types
+open import species.dirichlet-products-species-of-types-in-subuniverses
 open import species.species-of-types-in-subuniverses
 ```
 
@@ -40,8 +40,8 @@ open import species.species-of-types-in-subuniverses
 
 ## Idea
 
-The **Dirichlet exponential** of a species `S : P → Q` of types in subuniverse is
-defined by
+The **Dirichlet exponential** of a species `S : P → Q` of types in subuniverse
+is defined by
 
 ```text
   X ↦ Σ ((U , V , e) : Π-Decomposition-subuniverse P X),  Π (u : U) → S (V u).

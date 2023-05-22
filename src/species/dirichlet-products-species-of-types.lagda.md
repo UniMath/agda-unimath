@@ -8,8 +8,8 @@ module species.dirichlet-products-species-of-types where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.product-decompositions
 open import foundation.dependent-pair-types
+open import foundation.product-decompositions
 open import foundation.universe-levels
 
 open import species.species-of-types

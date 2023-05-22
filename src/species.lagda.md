@@ -21,6 +21,9 @@ open import species.coproducts-species-of-types public
 open import species.coproducts-species-of-types-in-subuniverses public
 open import species.cycle-index-series-species-of-types public
 open import species.derivatives-species-of-types public
+open import species.dirichlet-exponentials-species-of-types public
+open import species.dirichlet-exponentials-species-of-types-in-subuniverses public
+open import species.dirichlet-products-species-of-types public
 open import species.dirichlet-products-species-of-types-in-subuniverses public
 open import species.dirichlet-series-species-of-finite-inhabited-types public
 open import species.dirichlet-series-species-of-types-in-subuniverses public

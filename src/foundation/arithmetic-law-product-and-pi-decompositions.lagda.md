@@ -7,12 +7,16 @@ module foundation.arithmetic-law-product-and-pi-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.product-decompositions
 open import foundation.coproduct-decompositions
 open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.pi-decompositions
+open import foundation.product-decompositions
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 
@@ -21,12 +25,8 @@ open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
-open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 
@@ -140,7 +140,7 @@ module _
                       ( ( equiv-tot
                             ( λ Y →
                               equiv-postcomp-equiv
-                                ( equiv-dependent-universal-property-coprod Y )
+                                ( equiv-dependent-universal-property-coprod Y)
                                 ( X))) ∘e
                           ( left-unit-law-Σ-is-contr
                               ( is-contr-total-equiv' (A + B))
