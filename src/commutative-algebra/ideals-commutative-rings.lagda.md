@@ -8,7 +8,10 @@ module commutative-algebra.ideals-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
+
+open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -153,6 +156,17 @@ module _
     is-closed-under-right-multiplication-ideal-Ring
       ( ring-Commutative-Ring R)
       ( I)
+
+  is-closed-under-powers-ideal-Commutative-Ring :
+    (n : ℕ) (x : type-Commutative-Ring R) →
+    is-in-ideal-Commutative-Ring x →
+    is-in-ideal-Commutative-Ring (power-Commutative-Ring R (succ-ℕ n) x)
+  is-closed-under-powers-ideal-Commutative-Ring zero-ℕ x H = H
+  is-closed-under-powers-ideal-Commutative-Ring (succ-ℕ n) x H =
+    is-closed-under-left-multiplication-ideal-Commutative-Ring
+      ( power-Commutative-Ring R (succ-ℕ n) x)
+      ( x)
+      ( H)
 
   left-ideal-ideal-Commutative-Ring : left-ideal-Commutative-Ring l2 R
   left-ideal-ideal-Commutative-Ring =
