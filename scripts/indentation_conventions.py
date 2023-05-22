@@ -1,34 +1,29 @@
 #!/usr/bin/env python3
 # Run this script:
-# python3 scripts/spaces_convention_simple.py fileName.lagda.md
+# python3 scripts/indentation_conventions.py fileName.lagda.md
 # Some simply enforcable space conventions
 
 import sys
 import utils
 import re
+import collections
+
+AGDA_INDENT = '  '
+
+even_indentation_pattern = re.compile(fr'({AGDA_INDENT})*(\S|$)')
 
 
-def no_repeat_whitespace_inside_line(line):
-    return re.sub(r'(?<=\S)\s{2,}', ' ', line)
-
-
-def space_before_semicolon(line):
-    return re.sub(r'(?<=\S);', ' ;', line)
-
-
-def space_after_semicolon(line):
-    return re.sub(r';(?=\S)', '; ', line)
-
-
-def no_whitespace_before_closing_parenthesis(line):
-    return re.sub(r'(?<=\S)\s+\)', ')', line)
-
-
-def no_whitespace_before_closing_curly_brace(line):
-    return re.sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
+def is_even_indentation(line):
+    return even_indentation_pattern.match(line)
 
 
 if __name__ == '__main__':
+
+    STATUS_UNEVEN_INDENTATION = 1
+
+    status = 0
+
+    offender_files: collections.Counter = collections.Counter()
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
 
@@ -50,13 +45,17 @@ if __name__ == '__main__':
                 block_comment_level += block_comment_delta_pos
 
                 if block_comment_level == 0:
-                    line = no_repeat_whitespace_inside_line(
-                        line)
-                    line = space_before_semicolon(line)
-                    line = space_after_semicolon(line)
-                    line = no_whitespace_before_closing_parenthesis(line)
-                    line = no_whitespace_before_closing_curly_brace(line)
                     # line = space_after_opening_parenthesis_on_new_line(line)
+
+                    # Check even indentation
+                    if not is_even_indentation(line):
+                        if (status == 0):
+                            print('Error! Uneven indentation found')
+
+                        print(f'{fpath}:line {i}')
+
+                        offender_files[fpath] += 1
+                        status |= STATUS_UNEVEN_INDENTATION
 
                 block_comment_level -= block_comment_delta_neg
 
@@ -67,4 +66,12 @@ if __name__ == '__main__':
             with open(fpath, 'w') as f:
                 f.write(new_contents)
 
-    sys.exit(0)
+    if status & STATUS_UNEVEN_INDENTATION != 0:  # There were offending lines
+
+        print('\nTop offending files:')
+        print(*map(lambda kv: f'  {kv[0]}: {kv[1]} lines',
+                   sorted(offender_files.items(), key=lambda kv: kv[1])), sep='\n')
+        print(
+            f'\nTotal number of lines in library unevenly indented: {sum(offender_files.values())}.')
+
+    sys.exit(status)

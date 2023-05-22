@@ -80,10 +80,7 @@ eq-id-id-𝕊¹-Pointed-Type =
     ( htpy-id-id-𝕊¹)
     ( inv htpy-id-id-base-𝕊¹ ∙ inv right-unit)
 
-mul-Π-𝕊¹ :
-  Π-𝕊¹ ( Mul-Π-𝕊¹)
-       ( id-pointed-map)
-       ( eq-id-id-𝕊¹-Pointed-Type)
+mul-Π-𝕊¹ : Π-𝕊¹ (Mul-Π-𝕊¹) (id-pointed-map) (eq-id-id-𝕊¹-Pointed-Type)
 mul-Π-𝕊¹ =
   apply-dependent-universal-property-𝕊¹
     ( Mul-Π-𝕊¹)

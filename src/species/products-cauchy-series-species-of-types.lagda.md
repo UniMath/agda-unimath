@@ -1,4 +1,4 @@
-# Product of Cauchy series of species of types
+# Products of Cauchy series of species of types
 
 ```agda
 module species.products-cauchy-series-species-of-types where
@@ -40,7 +40,7 @@ product-cauchy-series-species-types S T X =
   cauchy-series-species-types S X × cauchy-series-species-types T X
 ```
 
-## Property
+## Properties
 
 ### The Cauchy series associated to the Cauchy product of `S` and `T` is equal to the product of theirs Cauchy series
 

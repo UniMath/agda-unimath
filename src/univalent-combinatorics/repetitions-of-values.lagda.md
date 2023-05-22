@@ -109,7 +109,9 @@ repetition-of-values-is-not-injective-Fin k l f N =
 --         ( has-decidable-equality-Fin l (f x) (f y)))
 ```
 
-### We define the predicate that `f` maps two different elements to the same value
+### The predicate that `f` maps two different elements to the same value
+
+This remains to be defined.
 
 ### On the standard finite sets, `has-repetition-of-values f` is decidable
 

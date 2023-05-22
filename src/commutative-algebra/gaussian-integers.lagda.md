@@ -130,7 +130,7 @@ pr2 (neg-ℤ[i] (a , b)) = neg-ℤ b
 
 ```agda
 mul-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
-pr1 (mul-ℤ[i] (a , b) (a' , b')) = diff-ℤ (a *ℤ a') (b *ℤ b')
+pr1 (mul-ℤ[i] (a , b) (a' , b')) = (a *ℤ a') -ℤ (b *ℤ b')
 pr2 (mul-ℤ[i] (a , b) (a' , b')) = (a *ℤ b') +ℤ (a' *ℤ b)
 
 infix 30 _*ℤ[i]_

@@ -1,4 +1,4 @@
-# Product of Cauchy series of species of types in subuniverses
+# Products of Cauchy series of species of types in subuniverses
 
 ```agda
 module species.products-cauchy-series-species-of-types-in-subuniverses where
@@ -50,7 +50,7 @@ module _
       P (subuniverse-global-subuniverse Q l4) T X)
 ```
 
-## Property
+## Properties
 
 ### Equivalent with species of types
 

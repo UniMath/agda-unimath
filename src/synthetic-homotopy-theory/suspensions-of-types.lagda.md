@@ -517,6 +517,8 @@ module _
 
 #### The equivalence in the suspension-loop space adjunction is pointed
 
+This remains to be shown.
+
 ### The suspension of a contractible type is contractible
 
 ```agda

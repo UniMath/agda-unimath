@@ -62,7 +62,7 @@ module _
 
 ## Properties
 
-### The fiber inclusions are truncated maps for any type family B if and only if A is truncated
+### The fiber inclusions are truncated maps for any type family `B` if and only if `A` is truncated
 
 ```agda
 module _

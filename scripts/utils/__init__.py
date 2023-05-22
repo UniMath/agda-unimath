@@ -63,7 +63,7 @@ def extract_agda_code(lagda_filepath):
 def has_no_definitions(lagda_filepath):
     """
     Determines if a literate agda markdown file doesn't have any definitions.
-    This is done by checking if the agda code contains an equals sign '=' or a colon ':'.
+    This is done naively by checking if the agda code contains an equals sign '=' or a colon ':'.
     """
     agda_code = extract_agda_code(lagda_filepath)
     return '=' not in agda_code and ':' not in agda_code
@@ -152,7 +152,7 @@ agda_block_tag_regex = re.compile(r'^```(agda)?((?=\s)|$)')
 def is_agda_opening_or_closing_tag(line):
     """
     Returns two booleans.
-    The first one signifies that the line is a opening or closing tag.
+    The first one signifies that the line is an opening or closing tag.
     The second boolean signifies whether it is an opening tag.
     """
     tag_match = agda_block_tag_regex.match(line)

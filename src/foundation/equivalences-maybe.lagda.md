@@ -94,7 +94,7 @@ abstract
     is-not-exception-injective-map-exception-Maybe (is-injective-emb e)
 ```
 
-### If f is injective and f (inl x) is an exception, then f exception is a value
+### If `f` is injective and `f (inl x)` is an exception, then `f exception` is a value
 
 ```agda
 is-value-injective-map-exception-Maybe :

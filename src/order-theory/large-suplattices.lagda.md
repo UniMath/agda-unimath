@@ -171,8 +171,8 @@ module _
     is-least-upper-bound-family-of-elements-Large-Suplattice x
       ( sup-Large-Suplattice x)
   is-least-upper-bound-sup-Large-Suplattice x =
-     is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
-       ( is-large-suplattice-Large-Suplattice L x)
+    is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
+      ( is-large-suplattice-Large-Suplattice L x)
 
   is-upper-bound-sup-Large-Suplattice :
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Suplattice l2) →
