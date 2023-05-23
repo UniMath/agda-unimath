@@ -50,7 +50,7 @@ these two elements.
 ### Transpositions on `Fin n`
 
 This definition uses the `standard-transposition` in
-[`finite-group-theory.transposition`](finite-group-theory.transposition.lagda.md).
+[`finite-group-theory.transposition`](finite-group-theory.transpositions.md).
 
 ```agda
 module _
