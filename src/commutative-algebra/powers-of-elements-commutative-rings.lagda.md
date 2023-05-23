@@ -38,7 +38,7 @@ power-Commutative-Ring A = power-Ring (ring-Commutative-Ring A)
 
 ## Properties
 
-### `xⁿ⁺¹ = xⁿx`
+### `xⁿ⁺¹ = xⁿx` and `xⁿ⁺¹ ＝ xxⁿ`
 
 ```agda
 module _
@@ -51,6 +51,13 @@ module _
     mul-Commutative-Ring A (power-Commutative-Ring A n x) x
   power-succ-Commutative-Ring =
     power-succ-Ring (ring-Commutative-Ring A)
+
+  power-succ-Commutative-Ring' :
+    (n : ℕ) (x : type-Commutative-Ring A) →
+    power-Commutative-Ring A (succ-ℕ n) x ＝
+    mul-Commutative-Ring A x (power-Commutative-Ring A n x)
+  power-succ-Commutative-Ring' =
+    power-succ-Ring' (ring-Commutative-Ring A)
 ```
 
 ### Powers by sums of natural numbers are products of powers

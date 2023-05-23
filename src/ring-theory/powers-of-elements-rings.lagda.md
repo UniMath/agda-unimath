@@ -38,7 +38,7 @@ power-Ring R = power-Semiring (semiring-Ring R)
 
 ## Properties
 
-### `xⁿ⁺¹ = xⁿx`
+### `xⁿ⁺¹ = xⁿx` and `xⁿ⁺¹ ＝ xxⁿ`
 
 ```agda
 module _
@@ -49,6 +49,11 @@ module _
     (n : ℕ) (x : type-Ring R) →
     power-Ring R (succ-ℕ n) x ＝ mul-Ring R (power-Ring R n x) x
   power-succ-Ring = power-succ-Semiring (semiring-Ring R)
+
+  power-succ-Ring' :
+    (n : ℕ) (x : type-Ring R) →
+    power-Ring R (succ-ℕ n) x ＝ mul-Ring R x (power-Ring R n x)
+  power-succ-Ring' = power-succ-Semiring' (semiring-Ring R)
 ```
 
 ### Powers by sums of natural numbers are products of powers

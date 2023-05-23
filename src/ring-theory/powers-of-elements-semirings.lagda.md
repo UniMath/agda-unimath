@@ -67,6 +67,23 @@ module _
   power-succ-Semiring (succ-ℕ n) x = refl
 ```
 
+### `xⁿ⁺¹ ＝ xxⁿ`
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-succ-Semiring' :
+    (n : ℕ) (x : type-Semiring R) →
+    power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R x (power-Semiring R n x)
+  power-succ-Semiring' zero-ℕ x = inv (right-unit-law-mul-Semiring R x)
+  power-succ-Semiring' (succ-ℕ zero-ℕ) x = refl
+  power-succ-Semiring' (succ-ℕ (succ-ℕ n)) x =
+    ( ap (mul-Semiring' R x) (power-succ-Semiring' (succ-ℕ n) x)) ∙
+    ( associative-mul-Semiring R x (power-Semiring R (succ-ℕ n) x) x)
+```
+
 ### Powers by sums of natural numbers are products of powers
 
 ```agda

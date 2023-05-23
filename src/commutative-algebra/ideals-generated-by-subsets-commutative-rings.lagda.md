@@ -172,12 +172,12 @@ module _
       ( I)
 
   is-ideal-generated-by-subset-ideal-subset-Commutative-Ring :
-    (l : Level) →
+    {l : Level} →
     is-ideal-generated-by-subset-Commutative-Ring R S
       ( ideal-subset-Commutative-Ring)
       ( contains-subset-ideal-subset-Commutative-Ring)
       ( l)
-  is-ideal-generated-by-subset-ideal-subset-Commutative-Ring l I =
+  is-ideal-generated-by-subset-ideal-subset-Commutative-Ring I =
     is-ideal-generated-by-subset-ideal-subset-Ring
       ( ring-Commutative-Ring R)
       ( S)

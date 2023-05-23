@@ -7,6 +7,9 @@ module ring-theory.joins-ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.existential-quantification
+open import foundation.propositional-truncations
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
@@ -16,6 +19,7 @@ open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
 open import ring-theory.posets-of-ideals-rings
 open import ring-theory.rings
+open import ring-theory.subsets-rings
 ```
 
 </details>
@@ -34,7 +38,7 @@ of the underlying subsets of the ideals in the family of ideals.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Ring l1) (I : UU l2) (J : I → ideal-Ring l3 R)
+  {l1 l2 l3 : Level} (R : Ring l1) {I : UU l2} (J : I → ideal-Ring l3 R)
   where
 
   is-join-family-of-ideals-Ring :
@@ -49,12 +53,47 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Ring l1) (I : UU l2) (J : I → ideal-Ring l3 R)
+  {l1 l2 l3 : Level} (R : Ring l1) {I : UU l2} (J : I → ideal-Ring l3 R)
   where
+
+  generating-subset-join-family-of-ideals-Ring :
+    subset-Ring (l2 ⊔ l3) R
+  generating-subset-join-family-of-ideals-Ring =
+    union-family-of-subtypes (λ i → subset-ideal-Ring R (J i))
 
   join-family-of-ideals-Ring :
     ideal-Ring (l1 ⊔ l2 ⊔ l3) R
   join-family-of-ideals-Ring =
-    ideal-subset-Ring R
-      ( union-family-of-subtypes (λ i → subset-ideal-Ring R (J i)))
+    ideal-subset-Ring R generating-subset-join-family-of-ideals-Ring
+
+  forward-implication-is-join-join-family-of-ideals-Ring :
+    {l4 : Level} (K : ideal-Ring l4 R) →
+    ((i : I) → leq-ideal-Ring R (J i) K) →
+    leq-ideal-Ring R join-family-of-ideals-Ring K
+  forward-implication-is-join-join-family-of-ideals-Ring K H =
+    is-ideal-generated-by-subset-ideal-subset-Ring R
+      ( generating-subset-join-family-of-ideals-Ring)
+      ( K)
+      ( λ x p →
+        apply-universal-property-trunc-Prop p
+          ( subset-ideal-Ring R K x)
+          ( λ (i , q) → H i x q))
+
+  backward-implication-is-join-join-family-of-ideals-Ring :
+    {l4 : Level} (K : ideal-Ring l4 R) →
+    leq-ideal-Ring R join-family-of-ideals-Ring K →
+    (i : I) → leq-ideal-Ring R (J i) K
+  backward-implication-is-join-join-family-of-ideals-Ring K H i x p =
+    H ( x)
+      ( contains-subset-ideal-subset-Ring R
+        ( generating-subset-join-family-of-ideals-Ring)
+        ( x)
+        ( intro-∃ i p))
+
+  is-join-join-family-of-ideals-Ring :
+    is-join-family-of-ideals-Ring R J join-family-of-ideals-Ring
+  pr1 (is-join-join-family-of-ideals-Ring K) =
+    forward-implication-is-join-join-family-of-ideals-Ring K
+  pr2 (is-join-join-family-of-ideals-Ring K) =
+    backward-implication-is-join-join-family-of-ideals-Ring K
 ```
