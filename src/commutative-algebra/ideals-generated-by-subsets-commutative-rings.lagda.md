@@ -106,6 +106,10 @@ module _
   subset-ideal-subset-Commutative-Ring =
     subset-ideal-subset-Ring (ring-Commutative-Ring R) S
 
+  is-in-ideal-subset-Commutative-Ring : type-Commutative-Ring R → UU (l1 ⊔ l2)
+  is-in-ideal-subset-Commutative-Ring =
+    is-in-ideal-subset-Ring (ring-Commutative-Ring R) S
+
   contains-zero-ideal-subset-Commutative-Ring :
     contains-zero-subset-Commutative-Ring R subset-ideal-subset-Commutative-Ring
   contains-zero-ideal-subset-Commutative-Ring =
