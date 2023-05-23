@@ -50,6 +50,7 @@ open import lists.lists
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.counting
+open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -448,6 +449,20 @@ module _
             ( refl)
             ( refl))
 
+  element-two-elements-transposition : X
+  element-two-elements-transposition =
+    pr1 (two-elements-transposition)
+
+  other-element-two-elements-transposition : X
+  other-element-two-elements-transposition =
+    pr1 (pr2 two-elements-transposition)
+
+  neq-elements-two-elements-transposition :
+    ¬ ( element-two-elements-transposition ＝
+        other-element-two-elements-transposition)
+  neq-elements-two-elements-transposition =
+    pr1 (pr2 (pr2 two-elements-transposition))
+
   abstract
     cases-eq-two-elements-transposition :
       (x y : X) (np : ¬ (Id x y)) →
@@ -551,6 +566,77 @@ module _
           ( eX)
           ( pr1 (pr2 two-elements-transposition))
           ( y))
+```
+
+#### The case of `Fin n`
+
+```agda
+module _
+  {n : ℕ}
+  (Y : 2-Element-Decidable-Subtype (lzero) (Fin n))
+  where
+
+  two-elements-transposition-Fin :
+    Σ ( Fin n)
+      ( λ x →
+        Σ ( Fin n)
+          ( λ y →
+            Σ ( ¬ (Id x y))
+              ( λ np →
+                Id ( standard-2-Element-Decidable-Subtype
+                     ( has-decidable-equality-Fin n)
+                     ( np))
+                   ( Y))))
+  two-elements-transposition-Fin =
+    tr
+      ( λ p →
+        Σ ( Fin n)
+          ( λ x →
+            Σ ( Fin n)
+              ( λ y →
+                Σ ( ¬ (Id x y))
+                  ( λ np →
+                    Id
+                      ( standard-2-Element-Decidable-Subtype
+                        ( p)
+                        ( np))
+                     ( Y)))))
+      ( eq-is-prop (is-prop-has-decidable-equality))
+      ( two-elements-transposition (count-Fin n) Y)
+
+  element-two-elements-transposition-Fin : Fin n
+  element-two-elements-transposition-Fin =
+    pr1 (two-elements-transposition-Fin)
+
+  other-element-two-elements-transposition-Fin : Fin n
+  other-element-two-elements-transposition-Fin =
+    pr1 (pr2 two-elements-transposition-Fin)
+
+  neq-elements-two-elements-transposition-Fin :
+    ¬ ( element-two-elements-transposition-Fin ＝
+        other-element-two-elements-transposition-Fin)
+  neq-elements-two-elements-transposition-Fin =
+    pr1 (pr2 (pr2 two-elements-transposition-Fin))
+
+  eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin :
+    standard-2-Element-Decidable-Subtype
+      ( has-decidable-equality-Fin n)
+      ( neq-elements-two-elements-transposition-Fin) ＝
+    Y
+  eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin =
+    pr2 (pr2 (pr2 two-elements-transposition-Fin))
+
+  htpy-two-elements-transpositon-Fin :
+    htpy-equiv
+      ( standard-transposition
+        ( has-decidable-equality-Fin n)
+        ( neq-elements-two-elements-transposition-Fin))
+      ( transposition Y)
+  htpy-two-elements-transpositon-Fin =
+    htpy-eq
+      ( ap
+        map-transposition
+        eq-standard-2-element-decidable-subtype-two-elements-transposition-Fin)
 ```
 
 ### Transpositions can be transported along equivalences
@@ -1126,4 +1212,124 @@ module _
       ( _∘e_)
       ( eq-equiv-universes-transposition P)
       ( eq-equiv-universes-transposition-list li)
+```
+
+### Conjugate of a transposition is also a transposition
+
+```agda
+module _
+  {l1 : Level}
+  {X : UU l1}
+  (H : has-decidable-equality X)
+  {x y z : X}
+  (npxy : ¬ (x ＝ y))
+  (npyz : ¬ (y ＝ z))
+  (npxz : ¬ (x ＝ z))
+  where
+
+  cases-htpy-conjugate-transposition :
+    (w : X) →
+    ((w ＝ x) + ¬ (w ＝ x)) →
+    ((w ＝ y) + ¬ (w ＝ y)) →
+    ((w ＝ z) + ¬ (w ＝ z)) →
+    Id
+      ( map-equiv
+        ( standard-transposition H npyz ∘e
+          ( standard-transposition H npxy ∘e standard-transposition H npyz))
+        w)
+      ( map-equiv ( standard-transposition H npxz) w)
+  cases-htpy-conjugate-transposition x (inl refl) _ _ =
+    ( ( ap
+        ( λ w →
+          map-equiv
+            ( standard-transposition H npyz ∘e standard-transposition H npxy)
+            ( w))
+        ( is-fixed-point-standard-transposition
+          ( H)
+          ( npyz)
+          ( x)
+          ( npxy ∘ inv)
+          ( npxz ∘ inv))) ∙
+      ( ( ap
+          ( λ w → map-equiv (standard-transposition H npyz) w)
+          ( left-computation-standard-transposition H npxy)) ∙
+        ( ( left-computation-standard-transposition H npyz) ∙
+          ( ( inv (left-computation-standard-transposition H npxz))))))
+  cases-htpy-conjugate-transposition y (inr neqx) (inl refl) _ =
+    ( ( ap
+        ( λ w →
+          map-equiv
+            ( standard-transposition H npyz ∘e standard-transposition H npxy)
+            ( w))
+        ( left-computation-standard-transposition H npyz)) ∙
+      ( ( ap
+          ( λ w → map-equiv (standard-transposition H npyz) w)
+          ( is-fixed-point-standard-transposition H npxy z npxz npyz)) ∙
+        ( ( right-computation-standard-transposition H npyz) ∙
+          ( inv
+            ( is-fixed-point-standard-transposition
+              ( H)
+              ( npxz)
+              ( y)
+              ( npxy)
+              ( npyz ∘ inv))))))
+  cases-htpy-conjugate-transposition z (inr neqx) (inr neqy) (inl refl) =
+    ( ( ap
+        ( λ w →
+          map-equiv
+            ( standard-transposition H npyz ∘e standard-transposition H npxy)
+            ( w))
+        ( right-computation-standard-transposition H npyz)) ∙
+      ( ( ap
+          ( λ w → map-equiv (standard-transposition H npyz) w)
+          ( right-computation-standard-transposition H npxy)) ∙
+        ( ( is-fixed-point-standard-transposition
+            ( H)
+            ( npyz)
+            ( x)
+            ( npxy ∘ inv)
+            ( npxz ∘ inv)) ∙
+          ( inv (right-computation-standard-transposition H npxz)))))
+  cases-htpy-conjugate-transposition w (inr neqx) (inr neqy) (inr neqz) =
+    ( ( ap
+        ( λ w →
+          map-equiv
+            ( standard-transposition H npyz ∘e standard-transposition H npxy)
+            ( w))
+        ( is-fixed-point-standard-transposition
+          ( H)
+          ( npyz)
+          ( w)
+          ( neqy ∘ inv)
+          ( neqz ∘ inv))) ∙
+      ( ( ap
+          ( λ w → map-equiv (standard-transposition H npyz) w)
+          ( is-fixed-point-standard-transposition
+            ( H)
+            ( npxy)
+            ( w)
+            ( neqx ∘ inv)
+            ( neqy ∘ inv))) ∙
+        ( ( is-fixed-point-standard-transposition
+            ( H)
+            ( npyz)
+            ( w)
+            ( neqy ∘ inv)
+            ( neqz ∘ inv)) ∙
+          ( inv
+            ( is-fixed-point-standard-transposition
+              ( H)
+              ( npxz)
+              ( w)
+              ( neqx ∘ inv)
+              ( neqz ∘ inv))))))
+
+  htpy-conjugate-transposition :
+    htpy-equiv
+      ( standard-transposition H npyz ∘e
+        ( standard-transposition H npxy ∘e
+          standard-transposition H npyz))
+      ( standard-transposition H npxz)
+  htpy-conjugate-transposition w =
+    cases-htpy-conjugate-transposition w ( H w x) ( H w y) ( H w z)
 ```
