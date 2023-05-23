@@ -55,7 +55,7 @@ module _
             ( join-family-of-radical-ideals-Commutative-Ring A
               ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
             ( λ r s p →
-              ?)
+              {!!})
             ( x)) ,
         ( λ H →
           {!!}))

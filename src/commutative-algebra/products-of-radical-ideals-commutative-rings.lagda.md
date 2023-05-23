@@ -145,10 +145,10 @@ module _
 For the forward inclusion, assume that `x ∈ I` and `y ∈ √ J`. Then there exists an `n` such that `yⁿ ∈ J`. It follows that
 
 ```text
-  (xy)ⁿ⁺¹ ＝ xⁿ⁺¹yⁿ⁺¹ = (xxⁿ)(yⁿy) ＝ (xyⁿ)(xⁿy) ∈ IJ.
+  (xy)ⁿ⁺¹ ＝ xⁿ⁺¹yⁿ⁺¹ = (xxⁿ)(yⁿy) ＝ (xyⁿ)(xⁿy) ∈ IJ,
 ```
 
-The backwards inclusion is clear, since `J ⊆ √ J`.
+and hence `xy ∈ √ IJ`. The backwards inclusion is clear, since `J ⊆ √ J`.
 
 ```agda
 module _
