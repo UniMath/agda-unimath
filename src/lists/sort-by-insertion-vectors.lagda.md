@@ -117,7 +117,7 @@ module _
       ( tail-vec (insertion-sort-vec (y ∷ l)))
       ( is-leq-or-strict-greater-Decidable-Total-Order X _ _)
 
-  helper-is-permutation-insertion-sort-vec :
+  helper-eq-permute-vec-permutation-insertion-sort-vec :
     {n : ℕ}
     (x y : type-Decidable-Total-Order X)
     (v : vec (type-Decidable-Total-Order X) n)
@@ -127,11 +127,21 @@ module _
       ( succ-ℕ (succ-ℕ n))
       ( x ∷ y ∷ v)
       ( helper-permutation-insertion-sort-vec x y v p)
-  helper-is-permutation-insertion-sort-vec x y v (inl _) =
+  helper-eq-permute-vec-permutation-insertion-sort-vec x y v (inl _) =
     inv (compute-permute-vec-id-equiv (succ-ℕ (succ-ℕ _)) (x ∷ y ∷ v))
-  helper-is-permutation-insertion-sort-vec {zero-ℕ} x y empty-vec (inr _) =
+  helper-eq-permute-vec-permutation-insertion-sort-vec
+    {0}
+    ( x)
+    ( y)
+    ( empty-vec)
+    ( inr _) =
     refl
-  helper-is-permutation-insertion-sort-vec {succ-ℕ n} x y (z ∷ v) (inr p) =
+  helper-eq-permute-vec-permutation-insertion-sort-vec
+    {succ-ℕ n}
+    ( x)
+    ( y)
+    ( z ∷ v)
+    ( inr p) =
     eq-Eq-vec
       ( succ-ℕ (succ-ℕ (succ-ℕ n)))
       ( helper-insertion-sort-vec x y (z ∷ v) (inr p))
@@ -152,7 +162,7 @@ module _
               ( succ-ℕ (succ-ℕ (succ-ℕ n)))
               ( x ∷ y ∷ z ∷ v)
               ( helper-permutation-insertion-sort-vec x y (z ∷ v) (inr p))))
-          ( ( helper-is-permutation-insertion-sort-vec
+          ( ( helper-eq-permute-vec-permutation-insertion-sort-vec
               ( x)
               ( z)
               ( v)
@@ -192,14 +202,16 @@ module _
                           ( z)))
                         ( id-equiv))))))))
 
-  is-permutation-insertion-sort-vec :
+  eq-permute-vec-permutation-insertion-sort-vec :
     {n : ℕ}
     (v : vec (type-Decidable-Total-Order X) n) →
     insertion-sort-vec v ＝ permute-vec n v (permutation-insertion-sort-vec v)
-  is-permutation-insertion-sort-vec {0} empty-vec = refl
-  is-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
-  is-permutation-insertion-sort-vec {succ-ℕ (succ-ℕ n)} (x ∷ y ∷ v) =
-    ( ( helper-is-permutation-insertion-sort-vec
+  eq-permute-vec-permutation-insertion-sort-vec {0} empty-vec = refl
+  eq-permute-vec-permutation-insertion-sort-vec {1} (x ∷ empty-vec) = refl
+  eq-permute-vec-permutation-insertion-sort-vec
+    {succ-ℕ (succ-ℕ n)}
+    ( x ∷ y ∷ v) =
+    ( ( helper-eq-permute-vec-permutation-insertion-sort-vec
         ( x)
         ( head-vec (insertion-sort-vec (y ∷ v)))
         ( tail-vec (insertion-sort-vec (y ∷ v)))
@@ -213,7 +225,7 @@ module _
           ( ap
             ( λ l → x ∷ l)
             ( cons-head-tail-vec n (insertion-sort-vec (y ∷ v)) ∙
-              is-permutation-insertion-sort-vec (y ∷ v)))) ∙
+              eq-permute-vec-permutation-insertion-sort-vec (y ∷ v)))) ∙
         ( ( inv
             ( compute-composition-permute-vec
               (succ-ℕ (succ-ℕ n))
@@ -251,7 +263,7 @@ module _
       ( tr
         ( λ l → is-least-element-vec X y l)
         ( inv
-          ( helper-is-permutation-insertion-sort-vec
+          ( helper-eq-permute-vec-permutation-insertion-sort-vec
             ( x)
             ( z)
             ( v)
@@ -308,7 +320,8 @@ module _
 ```agda
   is-sort-insertion-sort-vec :
     is-sort-vec X (insertion-sort-vec)
-  pr1 (pr1 (is-sort-insertion-sort-vec n)) = permutation-insertion-sort-vec
-  pr2 (pr1 (is-sort-insertion-sort-vec n)) = is-permutation-insertion-sort-vec
+  pr1 (pr1 (is-sort-insertion-sort-vec n) v) = permutation-insertion-sort-vec v
+  pr2 (pr1 (is-sort-insertion-sort-vec n) v) =
+    eq-permute-vec-permutation-insertion-sort-vec v
   pr2 (is-sort-insertion-sort-vec n) = is-sorting-insertion-sort-vec
 ```
