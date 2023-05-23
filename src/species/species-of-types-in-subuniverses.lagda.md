@@ -102,6 +102,31 @@ module _
       ( pr2 X)
 ```
 
+### Σ-extension to species with domain in a subuniverse
+
+```agda
+module _
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2)
+  (F : species-subuniverse-domain l3 P)
+  where
+
+  Σ-extension-species-subuniverse-domain :
+    species-types l1 (l2 ⊔ l3)
+  Σ-extension-species-subuniverse-domain X =
+    Σ (is-in-subuniverse P X) (λ p → (F (X , p)))
+
+  equiv-Σ-extension-species-subuniverse-domain :
+    ( X : type-subuniverse P) →
+    F X ≃
+    Σ-extension-species-subuniverse-domain (inclusion-subuniverse P X)
+  equiv-Σ-extension-species-subuniverse-domain X =
+    inv-left-unit-law-Σ-is-contr
+      ( is-proof-irrelevant-is-prop
+        ( is-subtype-subuniverse P (inclusion-subuniverse P X))
+        ( pr2 X))
+      ( pr2 X)
+```
+
 ### Π-extension to species of types in subuniverses
 
 ```agda

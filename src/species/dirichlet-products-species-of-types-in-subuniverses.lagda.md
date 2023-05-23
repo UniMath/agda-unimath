@@ -14,7 +14,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.product-decompositions
+open import foundation.product-decomposition-subuniverse
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
