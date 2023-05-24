@@ -82,6 +82,13 @@ module _
   type-Ring-𝔽 : UU l
   type-Ring-𝔽 = type-Ring ring-Ring-𝔽
 
+  is-finite-type-Ring-𝔽 : is-finite (type-Ring-𝔽)
+  is-finite-type-Ring-𝔽 = pr2 R
+
+  finite-type-Ring-𝔽 : 𝔽 l
+  pr1 finite-type-Ring-𝔽 = type-Ring-𝔽
+  pr2 finite-type-Ring-𝔽 = is-finite-type-Ring-𝔽
+
   is-set-type-Ring-𝔽 : is-set type-Ring-𝔽
   is-set-type-Ring-𝔽 = is-set-type-Ring ring-Ring-𝔽
 ```
