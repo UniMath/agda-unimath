@@ -9,6 +9,7 @@ module univalent-combinatorics.products-finite-rings where
 ```agda
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.finite-rings
+open import univalent-combinatorics.finite-types
 
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -46,6 +47,13 @@ module _
 
   is-set-type-prod-Ring-𝔽 : is-set type-prod-Ring-𝔽
   is-set-type-prod-Ring-𝔽 = is-set-type-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+
+  is-finite-type-prod-Ring-𝔽 : is-finite type-prod-Ring-𝔽
+  is-finite-type-prod-Ring-𝔽 = is-finite-prod (is-finite-type-Ring-𝔽 R1) (is-finite-type-Ring-𝔽 R2)
+
+  finite-type-prod-Ring-𝔽 : 𝔽 (l1 ⊔ l2)
+  pr1 finite-type-prod-Ring-𝔽 = type-prod-Ring-𝔽
+  pr2 finite-type-prod-Ring-𝔽 = is-finite-type-prod-Ring-𝔽
 
   add-prod-Ring-𝔽 : type-prod-Ring-𝔽 → type-prod-Ring-𝔽 → type-prod-Ring-𝔽
   add-prod-Ring-𝔽 = add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
@@ -139,5 +147,5 @@ module _
 
   prod-Ring-𝔽 : Ring-𝔽 (l1 ⊔ l2)
   pr1 prod-Ring-𝔽 = ring-prod-Ring-𝔽
-  pr2 prod-Ring-𝔽 = is-finite-prod (is-finite-type-Ring-𝔽 R1) (is-finite-type-Ring-𝔽 R2)
+  pr2 prod-Ring-𝔽 = is-finite-type-prod-Ring-𝔽
 ```
