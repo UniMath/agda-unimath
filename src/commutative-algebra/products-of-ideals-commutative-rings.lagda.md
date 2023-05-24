@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import lists.lists
 
+open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.products-of-ideals-rings
 ```
 
@@ -80,6 +81,18 @@ module _
     type-Commutative-Ring A → UU (l1 ⊔ l2 ⊔ l3)
   is-in-product-ideal-Commutative-Ring =
     is-in-ideal-Commutative-Ring A product-ideal-Commutative-Ring
+
+  is-closed-under-eq-product-ideal-Commutative-Ring :
+    {x y : type-Commutative-Ring A} → is-in-product-ideal-Commutative-Ring x →
+    (x ＝ y) → is-in-product-ideal-Commutative-Ring y
+  is-closed-under-eq-product-ideal-Commutative-Ring =
+    is-closed-under-eq-ideal-Commutative-Ring A product-ideal-Commutative-Ring
+
+  is-closed-under-eq-product-ideal-Commutative-Ring' :
+    {x y : type-Commutative-Ring A} → is-in-product-ideal-Commutative-Ring y →
+    (x ＝ y) → is-in-product-ideal-Commutative-Ring x
+  is-closed-under-eq-product-ideal-Commutative-Ring' =
+    is-closed-under-eq-ideal-Commutative-Ring' A product-ideal-Commutative-Ring
 
   contains-product-product-ideal-Commutative-Ring :
     contains-product-ideal-Commutative-Ring A I J product-ideal-Commutative-Ring
@@ -144,7 +157,50 @@ module _
     is-in-ideal-subset-Commutative-Ring A
       ( product-subset-Commutative-Ring A S T)
       ( mul-Commutative-Ring A s t)
-  backward-inclusion-preserves-product-ideal-subset-Commutative-Ring' = {!!}
+  backward-inclusion-preserves-product-ideal-subset-Commutative-Ring' ._ t
+    ( nil , refl) l =
+    is-closed-under-eq-ideal-subset-Commutative-Ring' A
+      ( product-subset-Commutative-Ring A S T)
+      ( contains-zero-ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A S T))
+      ( left-zero-law-mul-Commutative-Ring A t)
+  backward-inclusion-preserves-product-ideal-subset-Commutative-Ring' ._ ._
+    ( cons x k , refl) (nil , refl) =
+    is-closed-under-eq-ideal-subset-Commutative-Ring' A
+      ( product-subset-Commutative-Ring A S T)
+      ( contains-zero-ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A S T))
+      ( right-zero-law-mul-Commutative-Ring A _)
+  backward-inclusion-preserves-product-ideal-subset-Commutative-Ring' ._ ._
+    ( cons x k , refl) (cons y l , refl) =
+    is-closed-under-eq-ideal-subset-Commutative-Ring' A
+      ( product-subset-Commutative-Ring A S T)
+      ( is-closed-under-addition-ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A S T)
+        ( add-Commutative-Ring A _ _)
+        ( add-Commutative-Ring A _ _)
+        ( is-closed-under-addition-ideal-subset-Commutative-Ring A
+          ( product-subset-Commutative-Ring A S T)
+          ( mul-Commutative-Ring A
+            ( mul-Commutative-Ring A
+              ( mul-Commutative-Ring A (pr1 x) (pr1 (pr1 (pr2 x))))
+              ( pr2 (pr2 x)))
+            ( mul-Commutative-Ring A
+              ( mul-Commutative-Ring A
+                ( pr1 y)
+                ( pr1 (pr1 (pr2 y))))
+              ( pr2 (pr2 y))))
+          ( mul-Commutative-Ring A
+            ( mul-Commutative-Ring A
+              ( mul-Commutative-Ring A
+                ( pr1 x)
+                ( pr1 (pr1 (pr2 x))))
+              ( pr2 (pr2 x)))
+            ( ev-formal-combination-subset-Ring (pr1 A) T l))
+          {!!}
+          {!!})
+        {!!})
+      ( bidistributive-mul-add-Commutative-Ring A _ _ _ _)
 
   backward-inclusion-preserves-product-ideal-subset-Commutative-Ring :
     leq-ideal-Commutative-Ring A
@@ -162,9 +218,8 @@ module _
           ( subset-ideal-subset-Commutative-Ring A
             ( product-subset-Commutative-Ring A S T)
             ( mul-Commutative-Ring A s t))
-          ( λ k l →
-            backward-inclusion-preserves-product-ideal-subset-Commutative-Ring'
-              s t {!k!} {!!}))
+          ( backward-inclusion-preserves-product-ideal-subset-Commutative-Ring'
+            s t))
   
   preserves-product-ideal-subset-Commutative-Ring :
     ideal-subset-Commutative-Ring A (product-subset-Commutative-Ring A S T) ＝

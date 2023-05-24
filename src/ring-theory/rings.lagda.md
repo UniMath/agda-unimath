@@ -438,6 +438,23 @@ module _
       ( neg-neg-Ring R (mul-Ring R x y)))
 ```
 
+### Bidistributivity for multiplication over addition
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  bidistributive-mul-add-Ring :
+    (u v x y : type-Ring R) →
+    mul-Ring R (add-Ring R u v) (add-Ring R x y) ＝
+    add-Ring R
+      ( add-Ring R (mul-Ring R u x) (mul-Ring R u y))
+      ( add-Ring R (mul-Ring R v x) (mul-Ring R v y))
+  bidistributive-mul-add-Ring =
+    bidistributive-mul-add-Semiring (semiring-Ring R)
+```
+
 ### Scalar multiplication of ring elements by a natural number
 
 ```agda

@@ -98,7 +98,7 @@ module _
 
   subset-ideal-subset-Commutative-Ring' : type-Commutative-Ring R → UU (l1 ⊔ l2)
   subset-ideal-subset-Commutative-Ring' =
-    subset-left-ideal-subset-Ring'
+    subset-ideal-subset-Ring'
       ( ring-Commutative-Ring R)
       ( S)
 
@@ -149,12 +149,7 @@ module _
 
   ideal-subset-Commutative-Ring : ideal-Commutative-Ring (l1 ⊔ l2) R
   ideal-subset-Commutative-Ring =
-    ideal-left-ideal-Commutative-Ring R
-      subset-ideal-subset-Commutative-Ring
-      contains-zero-ideal-subset-Commutative-Ring
-      is-closed-under-addition-ideal-subset-Commutative-Ring
-      is-closed-under-negatives-ideal-subset-Commutative-Ring
-      is-closed-under-left-multiplication-ideal-subset-Commutative-Ring
+    ideal-subset-Ring (ring-Commutative-Ring R) S
 
   contains-subset-ideal-subset-Commutative-Ring :
     S ⊆ subset-ideal-subset-Commutative-Ring
@@ -186,4 +181,16 @@ module _
       ( ring-Commutative-Ring R)
       ( S)
       ( I)
+
+  is-closed-under-eq-ideal-subset-Commutative-Ring :
+    {x y : type-Commutative-Ring R} → is-in-ideal-subset-Commutative-Ring x →
+    (x ＝ y) → is-in-ideal-subset-Commutative-Ring y
+  is-closed-under-eq-ideal-subset-Commutative-Ring =
+    is-closed-under-eq-ideal-Commutative-Ring R ideal-subset-Commutative-Ring
+
+  is-closed-under-eq-ideal-subset-Commutative-Ring' :
+    {x y : type-Commutative-Ring R} → is-in-ideal-subset-Commutative-Ring y →
+    (x ＝ y) → is-in-ideal-subset-Commutative-Ring x
+  is-closed-under-eq-ideal-subset-Commutative-Ring' =
+    is-closed-under-eq-ideal-Commutative-Ring' R ideal-subset-Commutative-Ring  
 ```
