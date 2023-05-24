@@ -41,6 +41,7 @@ open import lists.lists
 
 open import ring-theory.rings
 open import ring-theory.semirings
+open import commutative-algebra.commutative-rings
 
 open import ring-theory.division-rings
 ```
@@ -69,6 +70,10 @@ module _
 
   commutative-ring-𝔽-Field-𝔽 : Commutative-Ring-𝔽 l
   commutative-ring-𝔽-Field-𝔽 = pr1 A
+
+  commutative-ring-Field-𝔽 : Commutative-Ring l
+  commutative-ring-Field-𝔽 =
+    commutative-ring-Commutative-Ring-𝔽 commutative-ring-𝔽-Field-𝔽
 
   ring-𝔽-Field-𝔽 : Ring-𝔽 l
   ring-𝔽-Field-𝔽 = ring-𝔽-Commutative-Ring-𝔽 commutative-ring-𝔽-Field-𝔽

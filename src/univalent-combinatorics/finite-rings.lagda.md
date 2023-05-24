@@ -180,11 +180,11 @@ module _
   is-nonzero-Ring-𝔽 : type-Ring-𝔽 R → UU l
   is-nonzero-Ring-𝔽 = is-nonzero-Ring (ring-Ring-𝔽 R)
 
-  is-zero-ring-𝔽-Prop : type-Ring-𝔽 R → Prop l
-  is-zero-ring-𝔽-Prop = is-zero-ring-Prop (ring-Ring-𝔽 R)
+  is-zero-finite-ring-Prop : type-Ring-𝔽 R → Prop l
+  is-zero-finite-ring-Prop = is-zero-ring-Prop (ring-Ring-𝔽 R)
 
-  is-nonzero-ring-𝔽-Prop : type-Ring-𝔽 R → Prop l
-  is-nonzero-ring-𝔽-Prop = is-nonzero-ring-Prop (ring-Ring-𝔽 R)
+  is-nonzero-finite-ring-Prop : type-Ring-𝔽 R → Prop l
+  is-nonzero-finite-ring-Prop = is-nonzero-ring-Prop (ring-Ring-𝔽 R)
 
   left-unit-law-add-Ring-𝔽 : (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R zero-Ring-𝔽 x) x
   left-unit-law-add-Ring-𝔽 = left-unit-law-add-Ring (ring-Ring-𝔽 R)
