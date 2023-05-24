@@ -1,6 +1,8 @@
 # Joins of ideals in commutative rings
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module commutative-algebra.joins-ideals-commutative-rings where
 ```
 

@@ -1,6 +1,8 @@
 # Products of ideals in commutative rings
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module commutative-algebra.products-of-ideals-commutative-rings where
 ```
 
@@ -199,7 +201,7 @@ module _
         ( left-backward-inclusion-preserves-product-ideal-subset-Commutative-Ring
           Hs l))
       ( left-distributive-mul-add-Commutative-Ring A _ _ _)
-    
+
   right-backward-inclusion-preserves-product-ideal-subset-Commutative-Ring :
     {u t v : type-Commutative-Ring A} →
     is-in-subset-Commutative-Ring A T t →
@@ -337,7 +339,7 @@ module _
             ( mul-Commutative-Ring A s t))
           ( backward-inclusion-preserves-product-ideal-subset-Commutative-Ring'
             s t))
-  
+
   preserves-product-ideal-subset-Commutative-Ring :
     ideal-subset-Commutative-Ring A (product-subset-Commutative-Ring A S T) ＝
     product-ideal-Commutative-Ring A
@@ -352,6 +354,18 @@ module _
       ( λ x →
         forward-inclusion-preserves-product-ideal-subset-Commutative-Ring x ,
         backward-inclusion-preserves-product-ideal-subset-Commutative-Ring x)
+
+module _
+  {l1 l2 l3 : Level} (A : Commutative-Ring l1)
+  (S : subset-Commutative-Ring l2 A) (I : ideal-Commutative-Ring l3 A)
+  where
+  
+  left-preserves-product-ideal-subset-Commutative-Ring :
+    ideal-subset-Commutative-Ring A
+      ( product-subset-Commutative-Ring A S
+        ( subset-ideal-Commutative-Ring A I)) ＝
+    product-ideal-Commutative-Ring A (ideal-subset-Commutative-Ring A S) I
+  left-preserves-product-ideal-subset-Commutative-Ring = ?
 ```
 
 ### The product of ideals is assiciative
@@ -379,7 +393,7 @@ module _
       ( product-ideal-Commutative-Ring A I
         ( product-ideal-Commutative-Ring A J K))
       ( λ u z pq r →
-        {!backward-inclusion-preserves-product-ideal-subset-Commutative-Ring!})
+        {! backward-inclusion-preserves-product-ideal-subset-Commutative-Ring!})
 
   associative-product-ideal-Commutative-Ring :
     product-ideal-Commutative-Ring A (product-ideal-Commutative-Ring A I J) K ＝

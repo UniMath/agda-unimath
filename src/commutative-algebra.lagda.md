@@ -28,7 +28,7 @@ open import commutative-algebra.intersections-ideals-commutative-rings public
 open import commutative-algebra.intersections-radical-ideals public
 open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
-open import commutative-algebra.joins-of-ideals-commutative-rings public
+open import commutative-algebra.joins-ideals-commutative-rings public
 open import commutative-algebra.joins-radical-ideals-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.maximal-ideals-commutative-rings public
@@ -43,6 +43,7 @@ open import commutative-algebra.precategory-of-commutative-semirings public
 open import commutative-algebra.prime-ideals-commutative-rings public
 open import commutative-algebra.products-of-ideals-commutative-rings public
 open import commutative-algebra.products-of-radical-ideals-commutative-rings public
+open import commutative-algebra.products-subsets-commutative-rings public
 open import commutative-algebra.radical-ideals-commutative-rings public
 open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings public
 open import commutative-algebra.radicals-of-ideals-commutative-rings public
@@ -51,5 +52,6 @@ open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-commutative-rings public
 open import commutative-algebra.sums-commutative-semirings public
 open import commutative-algebra.trivial-commutative-rings public
+open import commutative-algebra.zariski-locale public
 open import commutative-algebra.zariski-topology public
 ```

@@ -142,7 +142,8 @@ module _
 
 #### `√ (I · √ J) ＝ √ IJ`
 
-For the forward inclusion, assume that `x ∈ I` and `y ∈ √ J`. Then there exists an `n` such that `yⁿ ∈ J`. It follows that
+For the forward inclusion, assume that `x ∈ I` and `y ∈ √ J`. Then there exists
+an `n` such that `yⁿ ∈ J`. It follows that
 
 ```text
   (xy)ⁿ⁺¹ ＝ xⁿ⁺¹yⁿ⁺¹ = (xxⁿ)(yⁿy) ＝ (xyⁿ)(xⁿy) ∈ IJ,

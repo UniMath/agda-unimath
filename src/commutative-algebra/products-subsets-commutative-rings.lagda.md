@@ -21,7 +21,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **product** of two [subsets](commutative-algebra.subsets-commutative-rings.md) `S` and `T` of a [commutative ring](commutative-algebra.commutative-rings.md) `A` is the subset consistng of products `xy` where `x ∈ S` and `y ∈ T`.
+The **product** of two
+[subsets](commutative-algebra.subsets-commutative-rings.md) `S` and `T` of a
+[commutative ring](commutative-algebra.commutative-rings.md) `A` is the subset
+consistng of products `xy` where `x ∈ S` and `y ∈ T`.
 
 ## Definition
 

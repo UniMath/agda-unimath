@@ -1,6 +1,8 @@
 # Intersections of radical ideals
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module commutative-algebra.intersections-radical-ideals where
 ```
 
@@ -252,7 +254,7 @@ module _
         ( ideal-radical-ideal-Commutative-Ring A I)
         ( ideal-radical-ideal-Commutative-Ring A J))
       ( intersection-radical-ideal-Commutative-Ring A I J)
-      ( is-product-ideal-product-ideal-Commutative-Ring A
+      ( is-product-product-ideal-Commutative-Ring A
         ( ideal-radical-ideal-Commutative-Ring A I)
         ( ideal-radical-ideal-Commutative-Ring A J)
         ( ideal-intersection-radical-ideal-Commutative-Ring A I J)
@@ -267,12 +269,12 @@ module _
   pr2 (has-same-elements-intersection-radical-ideal-Commutative-Ring x) =
     backward-inclusion-intersection-radical-ideal-Commutative-Ring x
 
-  is-product-radical-ideal-intersection-radical-ideal-Commutative-Ring :
+  is-product-intersection-radical-ideal-Commutative-Ring :
     is-product-radical-ideal-Commutative-Ring A I J
       ( intersection-radical-ideal-Commutative-Ring A I J)
       ( contains-product-intersection-radical-ideal-Commutative-Ring)
-  is-product-radical-ideal-intersection-radical-ideal-Commutative-Ring K H x p =
-    is-product-radical-ideal-product-radical-ideal-Commutative-Ring A I J K H x
+  is-product-intersection-radical-ideal-Commutative-Ring K H x p =
+    is-product-product-radical-ideal-Commutative-Ring A I J K H x
       ( forward-inclusion-intersection-radical-ideal-Commutative-Ring x p)
 
   is-intersection-product-radical-ideal-Commutative-Ring :

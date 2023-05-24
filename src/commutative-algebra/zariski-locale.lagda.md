@@ -1,6 +1,8 @@
 # The Zariski locale
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module commutative-algebra.zariski-locale where
 ```
 
@@ -23,7 +25,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **Zariski locale** of a [commutative ring](commutative-algebra.commutative-rings.md) `A` is the [large locale](order-theory.large-locales.md) consisting of [radical ideals](commutative-algebra.radical-ideals-commutative-rings.md) of `A`. Our proof of the fact that meets distribute over arbitrary joins uses the fact that the intersection `I ∩ J` of radical ideals is equivalently described as the radical ideal `√ IJ` of the [product ideal](commutative-algebra.products-of-ideals-commutative-rings.md).
+The **Zariski locale** of a
+[commutative ring](commutative-algebra.commutative-rings.md) `A` is the
+[large locale](order-theory.large-locales.md) consisting of
+[radical ideals](commutative-algebra.radical-ideals-commutative-rings.md) of
+`A`. Our proof of the fact that meets distribute over arbitrary joins uses the
+fact that the intersection `I ∩ J` of radical ideals is equivalently described
+as the radical ideal `√ IJ` of the
+[product ideal](commutative-algebra.products-of-ideals-commutative-rings.md).
 
 ## Preliminary properties
 
