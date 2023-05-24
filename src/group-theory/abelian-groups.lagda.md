@@ -609,3 +609,17 @@ module _
     is-abelian-Group G → ((x : type-Group G) → is-central-element-Group G x)
   every-element-central-is-abelian-Group = id
 ```
+
+### Equip a type with a structure of abelian groups
+
+```agda
+structure-abelian-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-abelian-group X =
+  Σ (structure-group X) (λ p → is-abelian-Group (compute-structure-group X p))
+
+compute-structure-abelian-group :
+  {l1 : Level} → (X : UU l1) → structure-abelian-group X →  Ab l1
+pr1 (compute-structure-abelian-group X (p , q)) = compute-structure-group X p
+pr2 (compute-structure-abelian-group X (p , q)) = q
+```

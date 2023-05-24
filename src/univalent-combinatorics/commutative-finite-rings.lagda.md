@@ -8,6 +8,7 @@ module univalent-combinatorics.commutative-finite-rings where
 
 ```agda
 open import univalent-combinatorics.finite-rings
+open import univalent-combinatorics.finite-types
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.commutative-rings
 
@@ -556,4 +557,21 @@ module _
          ( add-list-Commutative-Ring-𝔽 l2))
   preserves-concat-add-list-Commutative-Ring-𝔽 =
     preserves-concat-add-list-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+```
+
+### Equip a finite type with a structure of commutative finite ring
+
+```agda
+structure-commutative-ring-𝔽 :
+  {l1 : Level} → 𝔽 l1 → UU l1
+structure-commutative-ring-𝔽 X =
+  Σ ( structure-ring-𝔽 X)
+    ( λ r → is-commutative-Ring-𝔽 (compute-structure-ring-𝔽 X r))
+
+compute-structure-commutative-ring-𝔽 :
+  {l1 : Level} → (X : 𝔽 l1) → structure-commutative-ring-𝔽 X →
+  Commutative-Ring-𝔽 l1
+pr1 (compute-structure-commutative-ring-𝔽 X (r , c)) =
+  compute-structure-ring-𝔽 X r
+pr2 (compute-structure-commutative-ring-𝔽 X (r , c)) = c
 ```

@@ -468,3 +468,16 @@ module _
   preserves-concat-add-list-Ring-𝔽 =
     preserves-concat-add-list-Ring (ring-Ring-𝔽 R)
 ```
+
+### Equip a finite type with a structure of finite ring
+
+```agda
+structure-ring-𝔽 :
+  {l1 : Level} → 𝔽 l1 → UU l1
+structure-ring-𝔽 X = structure-ring (type-𝔽 X)
+
+compute-structure-ring-𝔽 :
+  {l1 : Level} → (X : 𝔽 l1) → structure-ring-𝔽 X →  Ring-𝔽 l1
+pr1 (compute-structure-ring-𝔽 X r) = compute-structure-ring (type-𝔽 X) r
+pr2 (compute-structure-ring-𝔽 X r) = is-finite-type-𝔽 X
+```
