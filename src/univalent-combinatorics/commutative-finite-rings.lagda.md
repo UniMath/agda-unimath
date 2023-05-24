@@ -98,6 +98,12 @@ module _
 
   is-set-type-Commutative-Ring-𝔽 : is-set type-Commutative-Ring-𝔽
   is-set-type-Commutative-Ring-𝔽 = is-set-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+
+  finite-type-Commutative-Ring-𝔽 : 𝔽 l
+  finite-type-Commutative-Ring-𝔽 = finite-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+
+  is-finite-type-Commutative-Ring-𝔽 : is-finite (type-Commutative-Ring-𝔽)
+  is-finite-type-Commutative-Ring-𝔽 = is-finite-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 ```
 
 ### Addition in a commutative finite ring
