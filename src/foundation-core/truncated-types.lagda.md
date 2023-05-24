@@ -75,7 +75,7 @@ pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
 ```
 
-### Any (-1)-truncated type is (k+1)-truncated
+### A (-1)-truncated type is (k+1)-truncated
 
 ```agda
 is-trunc-is-neg-one-trunc :

@@ -63,7 +63,7 @@ abstract
     is-trunc-succ-is-trunc k (is-trunc-f b)
 ```
 
-### Any contractible map is k-truncated
+### A contractible map is k-truncated
 
 ```agda
 is-trunc-map-is-contr-map :
@@ -74,7 +74,7 @@ is-trunc-map-is-contr-map (succ-𝕋 k) H =
   is-trunc-map-succ-is-trunc-map k (is-trunc-map-is-contr-map k H)
 ```
 
-### Any equivalence is k-truncated
+### An equivalence is k-truncated
 
 ```agda
 is-trunc-map-is-equiv :
@@ -84,7 +84,7 @@ is-trunc-map-is-equiv k H =
   is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
 ```
 
-### Any (-1)-truncated map is (k+1)-truncated
+### A (-1)-truncated map is (k+1)-truncated
 
 ```agda
 is-trunc-map-neg-one-trunc-map :
@@ -120,6 +120,23 @@ module _
         ( eq-fib-fib-ap f x y p)
         ( is-equiv-eq-fib-fib-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
+```
+
+### The domain of any k-truncated map into a k+1-truncated type is k+1-truncated
+
+```agda
+is-trunc-is-trunc-map-into-is-trunc :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
+  is-trunc (succ-𝕋 k) B → is-trunc-map k f →
+  is-trunc (succ-𝕋 k) A
+is-trunc-is-trunc-map-into-is-trunc neg-two-𝕋 f is-trunc-B is-trunc-map-f =
+  is-trunc-is-equiv _ _ f (is-equiv-is-contr-map is-trunc-map-f) is-trunc-B
+is-trunc-is-trunc-map-into-is-trunc (succ-𝕋 k) f is-trunc-B is-trunc-map-f a a' =
+  is-trunc-is-trunc-map-into-is-trunc
+    ( k)
+    ( ap f)
+    ( is-trunc-B (f a) (f a'))
+    ( is-trunc-map-ap-is-trunc-map k f is-trunc-map-f a a')
 ```
 
 ### A family of types is a family of k-truncated types if and only of the projection map is k-truncated
