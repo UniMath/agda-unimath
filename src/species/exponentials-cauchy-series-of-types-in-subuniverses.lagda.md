@@ -81,13 +81,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
   (Q : global-subuniverse id)
-  (C1 :
-    ( {l4 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l4))
-        ( cauchy-exponential-species-subuniverse' P Q S X)))
+  (C1 : is-closed-under-cauchy-exponential-species-subuniverse P Q)
   (C2 : is-in-subuniverse (subuniverse-global-subuniverse Q lzero) unit)
   (C3 : is-closed-under-cauchy-composition-species-subuniverse P Q)
   (C4 : is-closed-under-Σ-subuniverse P)
