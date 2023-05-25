@@ -1,18 +1,20 @@
 # Semisimple commutative finite rings
 
 ```agda
-module univalent-combinatorics.semisimple-commutative-finite-rings where
+module finite-algebra.semisimple-commutative-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.commutative-finite-rings
+open import finite-algebra.commutative-finite-rings
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-pair-types
 
-open import univalent-combinatorics.finite-fields
-open import univalent-combinatorics.homomorphisms-commutative-finite-rings
-open import univalent-combinatorics.dependent-products-commutative-finite-rings
+open import finite-algebra.finite-fields
+open import finite-algebra.homomorphisms-commutative-finite-rings
+open import finite-algebra.dependent-products-commutative-finite-rings
+
 
 open import commutative-algebra.commutative-semirings
 
@@ -84,26 +86,39 @@ Semisimple-Commutative-Ring-𝔽 :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
 Semisimple-Commutative-Ring-𝔽 l1 l2 l3 =
   Σ (Commutative-Ring-𝔽 l1) (is-semisimple-Commutative-Ring-𝔽 l2 l3)
+
+module _
+  {l1 l2 l3 : Level} (A : Semisimple-Commutative-Ring-𝔽 l1 l2 l3)
+  where
+
+  commutative-finite-ring-Semisimple-Commutative-Ring-𝔽 :
+    Commutative-Ring-𝔽 l1
+  commutative-finite-ring-Semisimple-Commutative-Ring-𝔽 = pr1 A
 ```
 
 ### Equip a finite type with a structure of semisimple commutative finite ring
 
 ```agda
-structure-semisimple-commutative-ring-𝔽 :
-  {l1 : Level} (l2 l3 : Level) → 𝔽 l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-structure-semisimple-commutative-ring-𝔽 l2 l3 X =
-  Σ ( structure-commutative-ring-𝔽 X)
-    ( λ r →
-      is-semisimple-Commutative-Ring-𝔽
-        ( l2)
-        ( l3)
-        ( compute-structure-commutative-ring-𝔽 X r))
+module _
+  {l1 : Level}
+  (l2 l3 : Level)
+  (X : 𝔽 l1)
+  where
 
-compute-structure-semisimple-commutative-ring-𝔽 :
-  {l1 : Level} (l2 l3 : Level) → (X : 𝔽 l1) →
-  structure-semisimple-commutative-ring-𝔽 l2 l3 X →
-  Semisimple-Commutative-Ring-𝔽 l1 l2 l3
-pr1 (compute-structure-semisimple-commutative-ring-𝔽 l2 l3 X (p , s)) =
-  compute-structure-commutative-ring-𝔽 X p
-pr2 (compute-structure-semisimple-commutative-ring-𝔽 l2 l3 X (p , s)) = s
+  structure-semisimple-commutative-ring-𝔽 :
+    UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+  structure-semisimple-commutative-ring-𝔽 =
+    Σ ( structure-commutative-ring-𝔽 X)
+      ( λ r →
+        is-semisimple-Commutative-Ring-𝔽
+          ( l2)
+          ( l3)
+          ( compute-structure-commutative-ring-𝔽 X r))
+
+  compute-structure-semisimple-commutative-ring-𝔽 :
+    structure-semisimple-commutative-ring-𝔽 →
+    Semisimple-Commutative-Ring-𝔽 l1 l2 l3
+  pr1 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) =
+    compute-structure-commutative-ring-𝔽 X p
+  pr2 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) = s
 ```

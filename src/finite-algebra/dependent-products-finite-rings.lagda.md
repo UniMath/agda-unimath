@@ -1,14 +1,14 @@
 # Dependent products of finite rings
 
 ```agda
-module univalent-combinatorics.dependent-products-finite-rings where
+module finite-algebra.dependent-products-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.finite-rings
+open import finite-algebra.finite-rings
 open import univalent-combinatorics.finite-types
 
 open import foundation.dependent-pair-types

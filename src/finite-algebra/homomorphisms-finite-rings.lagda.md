@@ -1,7 +1,7 @@
 # Homomorphisms of finite rings
 
 ```agda
-module univalent-combinatorics.homomorphisms-finite-rings where
+module finite-algebra.homomorphisms-finite-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -27,7 +27,7 @@ open import ring-theory.homomorphisms-semirings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 
-open import univalent-combinatorics.finite-rings
+open import finite-algebra.finite-rings
 ```
 
 </details>

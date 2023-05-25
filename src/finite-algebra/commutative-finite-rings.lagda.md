@@ -1,13 +1,13 @@
 # Commutative finite rings
 
 ```agda
-module univalent-combinatorics.commutative-finite-rings where
+module finite-algebra.commutative-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.finite-rings
+open import finite-algebra.finite-rings
 open import univalent-combinatorics.finite-types
 open import commutative-algebra.commutative-semirings
 open import commutative-algebra.commutative-rings

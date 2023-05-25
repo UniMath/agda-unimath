@@ -1,13 +1,13 @@
 # Homomorphisms of commutative finite rings
 
 ```agda
-module univalent-combinatorics.homomorphisms-commutative-finite-rings where
+module finite-algebra.homomorphisms-commutative-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.commutative-finite-rings
+open import finite-algebra.commutative-finite-rings
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
 

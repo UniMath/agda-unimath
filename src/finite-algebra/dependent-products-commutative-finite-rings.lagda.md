@@ -1,15 +1,15 @@
 # Dependent products of commutative finit rings
 
 ```agda
-module univalent-combinatorics.dependent-products-commutative-finite-rings where
+module finite-algebra.dependent-products-commutative-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.commutative-finite-rings
-open import univalent-combinatorics.finite-rings
-open import univalent-combinatorics.dependent-products-finite-rings
+open import finite-algebra.commutative-finite-rings
+open import finite-algebra.finite-rings
+open import finite-algebra.dependent-products-finite-rings
 open import univalent-combinatorics.finite-types
 open import foundation.functions
 
@@ -77,8 +77,8 @@ module _
   finite-type-Π-Commutative-Ring-𝔽 =
     finite-type-Π-Ring-𝔽 I (finite-ring-Commutative-Ring-𝔽 ∘ A)
 
-  is-finite-type-Commutative-Ring-𝔽 : is-finite type-Π-Commutative-Ring-𝔽
-  is-finite-type-Commutative-Ring-𝔽 =
+  is-finite-type-Π-Commutative-Ring-𝔽 : is-finite type-Π-Commutative-Ring-𝔽
+  is-finite-type-Π-Commutative-Ring-𝔽 =
     is-finite-type-Π-Ring-𝔽 I (finite-ring-Commutative-Ring-𝔽 ∘ A)
 
   is-set-type-Π-Commutative-Ring-𝔽 : is-set type-Π-Commutative-Ring-𝔽

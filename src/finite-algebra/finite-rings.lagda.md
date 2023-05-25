@@ -1,7 +1,7 @@
 # Finite rings
 
 ```agda
-module univalent-combinatorics.finite-rings where
+module finite-algebra.finite-rings where
 ```
 
 <details><summary>Imports</summary>

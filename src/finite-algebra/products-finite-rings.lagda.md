@@ -1,14 +1,14 @@
 # Products of finite rings
 
 ```agda
-module univalent-combinatorics.products-finite-rings where
+module finite-algebra.products-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.finite-rings
+open import finite-algebra.finite-rings
 open import univalent-combinatorics.finite-types
 
 open import foundation.dependent-pair-types

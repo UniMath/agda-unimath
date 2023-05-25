@@ -1,16 +1,16 @@
 # Products of commutative finite rings
 
 ```agda
-module univalent-combinatorics.products-commutative-finite-rings where
+module finite-algebra.products-commutative-finite-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.commutative-finite-rings
+open import finite-algebra.commutative-finite-rings
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.cartesian-product-types
-open import univalent-combinatorics.products-finite-rings
+open import finite-algebra.products-finite-rings
 
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types

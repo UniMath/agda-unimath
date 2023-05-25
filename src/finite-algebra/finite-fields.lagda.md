@@ -1,15 +1,15 @@
 # Finite fields
 
 ```agda
-module univalent-combinatorics.finite-fields where
+module finite-algebra.finite-fields where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.commutative-finite-rings
+open import finite-algebra.commutative-finite-rings
 
-open import univalent-combinatorics.finite-rings
+open import finite-algebra.finite-rings
 open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
