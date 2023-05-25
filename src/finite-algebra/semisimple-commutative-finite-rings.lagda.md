@@ -10,6 +10,7 @@ module finite-algebra.semisimple-commutative-finite-rings where
 open import finite-algebra.commutative-finite-rings
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.standard-finite-types
 
 open import finite-algebra.finite-fields
 open import finite-algebra.homomorphisms-commutative-finite-rings
@@ -66,29 +67,29 @@ A **semisimple commutative finite rings** is a commutative finie rings wich is m
 
 ```agda
 is-semisimple-Commutative-Ring-𝔽 :
-  {l1 : Level} (l2 l3 : Level) → Commutative-Ring-𝔽 l1 →
-  UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-is-semisimple-Commutative-Ring-𝔽 l2 l3 R =
+  {l1 : Level} (l2 : Level) → Commutative-Ring-𝔽 l1 →
+  UU (l1 ⊔ lsuc l2)
+is-semisimple-Commutative-Ring-𝔽 l2 R =
   exists
-    ( 𝔽 l2)
-    ( λ I →
+    ( ℕ)
+    ( λ n →
       exists-Prop
-        ( type-𝔽 I → Field-𝔽 l3)
+        ( Fin n → Field-𝔽 l2)
         ( λ A →
           trunc-Prop
             ( type-hom-Commutative-Ring-𝔽
               ( R)
               ( Π-Commutative-Ring-𝔽
-                ( I)
+                ( Fin n , is-finite-Fin n)
                 ( commutative-finite-ring-Field-𝔽 ∘ A)))))
 
 Semisimple-Commutative-Ring-𝔽 :
-  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Semisimple-Commutative-Ring-𝔽 l1 l2 l3 =
-  Σ (Commutative-Ring-𝔽 l1) (is-semisimple-Commutative-Ring-𝔽 l2 l3)
+  (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Semisimple-Commutative-Ring-𝔽 l1 l2 =
+  Σ (Commutative-Ring-𝔽 l1) (is-semisimple-Commutative-Ring-𝔽 l2)
 
 module _
-  {l1 l2 l3 : Level} (A : Semisimple-Commutative-Ring-𝔽 l1 l2 l3)
+  {l1 l2 : Level} (A : Semisimple-Commutative-Ring-𝔽 l1 l2)
   where
 
   commutative-finite-ring-Semisimple-Commutative-Ring-𝔽 :
@@ -96,29 +97,37 @@ module _
   commutative-finite-ring-Semisimple-Commutative-Ring-𝔽 = pr1 A
 ```
 
-### Equip a finite type with a structure of semisimple commutative finite ring
+## Properties
+
+### The number of ways to equip a finite type with a structure of semisimple commutative finite ring is finite
 
 ```agda
 module _
   {l1 : Level}
-  (l2 l3 : Level)
+  (l2 : Level)
   (X : 𝔽 l1)
   where
 
   structure-semisimple-commutative-ring-𝔽 :
-    UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+    UU (l1 ⊔ lsuc l2)
   structure-semisimple-commutative-ring-𝔽 =
     Σ ( structure-commutative-ring-𝔽 X)
       ( λ r →
         is-semisimple-Commutative-Ring-𝔽
           ( l2)
-          ( l3)
           ( compute-structure-commutative-ring-𝔽 X r))
 
   compute-structure-semisimple-commutative-ring-𝔽 :
     structure-semisimple-commutative-ring-𝔽 →
-    Semisimple-Commutative-Ring-𝔽 l1 l2 l3
+    Semisimple-Commutative-Ring-𝔽 l1 l2
   pr1 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) =
     compute-structure-commutative-ring-𝔽 X p
   pr2 (compute-structure-semisimple-commutative-ring-𝔽 (p , s)) = s
+
+--   is-finite-structure-semisimple-commutative-ring-𝔽 :
+--     is-finite structure-semisimple-commutative-ring-𝔽
+--   is-finite-structure-semisimple-commutative-ring-𝔽 =
+--     is-finite-Σ
+--       ( is-finite-structure-commutative-ring-𝔽 X)
+--       ( λ c → {!!})
 ```

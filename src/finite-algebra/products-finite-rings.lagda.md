@@ -146,6 +146,5 @@ module _
   ring-prod-Ring-𝔽 = prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   prod-Ring-𝔽 : Ring-𝔽 (l1 ⊔ l2)
-  pr1 prod-Ring-𝔽 = ring-prod-Ring-𝔽
-  pr2 prod-Ring-𝔽 = is-finite-type-prod-Ring-𝔽
+  prod-Ring-𝔽 = compute-ring-𝔽 ring-prod-Ring-𝔽 is-finite-type-prod-Ring-𝔽
 ```

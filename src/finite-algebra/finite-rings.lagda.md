@@ -27,6 +27,10 @@ open import foundation.injective-maps
 open import foundation.unital-binary-operations
 open import foundation.involutions
 
+open import finite-algebra.finite-abelian-groups
+open import finite-algebra.finite-groups
+open import finite-algebra.finite-monoids
+
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.commutative-monoids
@@ -37,6 +41,10 @@ open import lists.lists
 open import lists.concatenation-lists
 
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.cartesian-product-types
 ```
 
 </details>
@@ -50,47 +58,61 @@ A **finite ring** is a ring where the underlying type is finite.
 ### Finite Rings
 
 ```agda
+has-mul-Ab-𝔽 : {l1 : Level} (A : Ab-𝔽 l1) → UU l1
+has-mul-Ab-𝔽 A = has-mul-Ab (ab-Ab-𝔽 A)
+
 Ring-𝔽 : (l1 : Level) → UU (lsuc l1)
-Ring-𝔽 l1 = Σ (Ring l1) (λ R → is-finite (type-Ring R))
+Ring-𝔽 l1 = Σ (Ab-𝔽 l1) (λ A → has-mul-Ab-𝔽 A)
+
+compute-ring-𝔽 :
+  {l : Level} → (R : Ring l) → is-finite (type-Ring R) → Ring-𝔽 l
+pr1 (compute-ring-𝔽 R f) = compute-abelian-group-𝔽 (ab-Ring R) f
+pr2 (compute-ring-𝔽 R f) = pr2 R
 
 module _
   {l : Level} (R : Ring-𝔽 l)
   where
 
-  ring-Ring-𝔽 : Ring l
-  ring-Ring-𝔽 = pr1 R
+  finite-ab-Ring-𝔽 : Ab-𝔽 l
+  finite-ab-Ring-𝔽 = pr1 R
 
   ab-Ring-𝔽 : Ab l
-  ab-Ring-𝔽 = ab-Ring ring-Ring-𝔽
+  ab-Ring-𝔽 = ab-Ab-𝔽 finite-ab-Ring-𝔽
+
+  ring-Ring-𝔽 : Ring l
+  pr1 ring-Ring-𝔽 = ab-Ring-𝔽
+  pr2 ring-Ring-𝔽 = pr2 R
+
+  finite-type-Ring-𝔽 : 𝔽 l
+  finite-type-Ring-𝔽 = finite-type-Ab-𝔽 finite-ab-Ring-𝔽
+
+  type-Ring-𝔽 : UU l
+  type-Ring-𝔽 = type-Ab-𝔽 finite-ab-Ring-𝔽
+
+  is-finite-type-Ring-𝔽 : is-finite type-Ring-𝔽
+  is-finite-type-Ring-𝔽 = is-finite-type-Ab-𝔽 finite-ab-Ring-𝔽
+
+  finite-group-Ring-𝔽 : Group-𝔽 l
+  finite-group-Ring-𝔽 = finite-group-Ab-𝔽 finite-ab-Ring-𝔽
 
   group-Ring-𝔽 : Group l
-  group-Ring-𝔽 = group-Ring ring-Ring-𝔽
+  group-Ring-𝔽 = group-Ab ab-Ring-𝔽
 
   additive-commutative-monoid-Ring-𝔽 : Commutative-Monoid l
   additive-commutative-monoid-Ring-𝔽 =
-    additive-commutative-monoid-Ring ring-Ring-𝔽
+    commutative-monoid-Ab ab-Ring-𝔽
 
   additive-monoid-Ring-𝔽 : Monoid l
-  additive-monoid-Ring-𝔽 = additive-monoid-Ring ring-Ring-𝔽
+  additive-monoid-Ring-𝔽 = monoid-Ab ab-Ring-𝔽
 
   additive-semigroup-Ring-𝔽 : Semigroup l
-  additive-semigroup-Ring-𝔽 = additive-semigroup-Ring ring-Ring-𝔽
+  additive-semigroup-Ring-𝔽 = semigroup-Ab ab-Ring-𝔽
 
   set-Ring-𝔽 : Set l
-  set-Ring-𝔽 = set-Ring ring-Ring-𝔽
-
-  type-Ring-𝔽 : UU l
-  type-Ring-𝔽 = type-Ring ring-Ring-𝔽
-
-  is-finite-type-Ring-𝔽 : is-finite (type-Ring-𝔽)
-  is-finite-type-Ring-𝔽 = pr2 R
-
-  finite-type-Ring-𝔽 : 𝔽 l
-  pr1 finite-type-Ring-𝔽 = type-Ring-𝔽
-  pr2 finite-type-Ring-𝔽 = is-finite-type-Ring-𝔽
+  set-Ring-𝔽 = set-Ab ab-Ring-𝔽
 
   is-set-type-Ring-𝔽 : is-set type-Ring-𝔽
-  is-set-type-Ring-𝔽 = is-set-type-Ring ring-Ring-𝔽
+  is-set-type-Ring-𝔽 = is-set-type-Ab ab-Ring-𝔽
 ```
 
 ### Addition in a ring
@@ -469,15 +491,71 @@ module _
     preserves-concat-add-list-Ring (ring-Ring-𝔽 R)
 ```
 
-### Equip a finite type with a structure of finite ring
+## Properties
+
+### There is a finite number of ways to equip a finite type with a structure of ring
 
 ```agda
-structure-ring-𝔽 :
-  {l1 : Level} → 𝔽 l1 → UU l1
-structure-ring-𝔽 X = structure-ring (type-𝔽 X)
+module _
+  {l : Level}
+  (X : 𝔽 l)
+  where
 
-compute-structure-ring-𝔽 :
-  {l1 : Level} → (X : 𝔽 l1) → structure-ring-𝔽 X →  Ring-𝔽 l1
-pr1 (compute-structure-ring-𝔽 X r) = compute-structure-ring (type-𝔽 X) r
-pr2 (compute-structure-ring-𝔽 X r) = is-finite-type-𝔽 X
+  structure-ring-𝔽 : UU l
+  structure-ring-𝔽 =
+    Σ ( structure-abelian-group-𝔽 X)
+      ( λ m → has-mul-Ab-𝔽 (compute-structure-abelian-group-𝔽 X m))
+
+  compute-structure-ring-𝔽 :
+    structure-ring-𝔽 → Ring-𝔽 l
+  pr1 (compute-structure-ring-𝔽 (m , c)) =
+    compute-structure-abelian-group-𝔽 X m
+  pr2 (compute-structure-ring-𝔽 (m , c)) = c
+
+  is-finite-structure-ring-𝔽 :
+    is-finite structure-ring-𝔽
+  is-finite-structure-ring-𝔽 =
+    is-finite-Σ
+      ( is-finite-structure-abelian-group-𝔽 X)
+      ( λ a →
+        is-finite-Σ
+          ( is-finite-Σ
+            ( is-finite-Π
+              ( is-finite-type-𝔽 X)
+              ( λ _ →
+                is-finite-Π
+                  ( is-finite-type-𝔽 X)
+                  ( λ _ → is-finite-type-𝔽 X)))
+            ( λ m →
+              is-finite-Π
+                ( is-finite-type-𝔽 X)
+                ( λ x →
+                  is-finite-Π
+                    ( is-finite-type-𝔽 X)
+                    ( λ y →
+                      is-finite-Π
+                        ( is-finite-type-𝔽 X)
+                        ( λ z → is-finite-eq-𝔽 X)))))
+          ( λ a →
+            is-finite-prod
+              ( is-finite-is-unital-Semigroup-𝔽 (X , a))
+              ( is-finite-prod
+                ( is-finite-Π
+                  ( is-finite-type-𝔽 X)
+                  ( λ _ →
+                    is-finite-Π
+                      ( is-finite-type-𝔽 X)
+                      ( λ _ →
+                        is-finite-Π
+                          ( is-finite-type-𝔽 X)
+                          ( λ _ → is-finite-eq-𝔽 X))))
+                ( is-finite-Π
+                  ( is-finite-type-𝔽 X)
+                  ( λ _ →
+                    is-finite-Π
+                      ( is-finite-type-𝔽 X)
+                      ( λ _ →
+                        is-finite-Π
+                          ( is-finite-type-𝔽 X)
+                          ( λ _ → is-finite-eq-𝔽 X)))))))
 ```

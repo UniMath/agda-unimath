@@ -37,21 +37,30 @@ Semigroup-𝔽 :
   (l : Level) → UU (lsuc l)
 Semigroup-𝔽 l = Σ (𝔽 l) has-associative-mul-𝔽
 
+compute-semigroup-𝔽 :
+  {l : Level} → (G : Semigroup l) → is-finite (type-Semigroup G) → Semigroup-𝔽 l
+pr1 (pr1 (compute-semigroup-𝔽 G f)) = type-Semigroup G
+pr2 (pr1 (compute-semigroup-𝔽 G f)) = f
+pr2 (compute-semigroup-𝔽 G f) = has-associative-mul-Semigroup G
+
 module _
   {l : Level} (G : Semigroup-𝔽 l)
   where
 
-  finite-set-Semigroup-𝔽 : 𝔽 l
-  finite-set-Semigroup-𝔽 = pr1 G
+  finite-type-Semigroup-𝔽 : 𝔽 l
+  finite-type-Semigroup-𝔽 = pr1 G
 
   type-Semigroup-𝔽 : UU l
-  type-Semigroup-𝔽 = type-𝔽 finite-set-Semigroup-𝔽
+  type-Semigroup-𝔽 = type-𝔽 finite-type-Semigroup-𝔽
+
+  is-finite-type-Semigroup-𝔽 : is-finite type-Semigroup-𝔽
+  is-finite-type-Semigroup-𝔽 = is-finite-type-𝔽 finite-type-Semigroup-𝔽
 
   has-associative-mul-Semigroup-𝔽 : has-associative-mul type-Semigroup-𝔽
   has-associative-mul-Semigroup-𝔽 = pr2 G
 
   semigroup-Semigroup-𝔽 : Semigroup l
-  pr1 semigroup-Semigroup-𝔽 = set-𝔽 finite-set-Semigroup-𝔽
+  pr1 semigroup-Semigroup-𝔽 = set-𝔽 finite-type-Semigroup-𝔽
   pr2 semigroup-Semigroup-𝔽 = has-associative-mul-Semigroup-𝔽
 
   set-Semigroup-𝔽 : Set l
@@ -79,7 +88,9 @@ module _
   associative-mul-Semigroup-𝔽 = associative-mul-Semigroup semigroup-Semigroup-𝔽
 ```
 
-### Equip a finite type with a structure of semigroup
+## Properties
+
+### There is a finite number of ways to equip a finite type with a structure of semigroup
 
 ```agda
 structure-semigroup-𝔽 :
