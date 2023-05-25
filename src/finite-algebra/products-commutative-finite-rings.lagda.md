@@ -7,9 +7,10 @@ module finite-algebra.products-commutative-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-rings
+open import commutative-algebra.products-commutative-rings
+
 open import finite-algebra.commutative-finite-rings
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.cartesian-product-types
 open import finite-algebra.products-finite-rings
 
 open import foundation.dependent-pair-types
@@ -22,11 +23,11 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 
-open import commutative-algebra.commutative-rings
-open import commutative-algebra.products-commutative-rings
-
-open import ring-theory.rings
 open import ring-theory.products-rings
+open import ring-theory.rings
+
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -98,7 +99,7 @@ module _
   left-unit-law-add-prod-Commutative-Ring-𝔽 :
     (x : type-prod-Commutative-Ring-𝔽) →
     Id (add-prod-Commutative-Ring-𝔽 zero-prod-Commutative-Ring-𝔽 x) x
-  left-unit-law-add-prod-Commutative-Ring-𝔽  =
+  left-unit-law-add-prod-Commutative-Ring-𝔽 =
     left-unit-law-add-prod-Commutative-Ring
       ( commutative-ring-Commutative-Ring-𝔽 R1)
       ( commutative-ring-Commutative-Ring-𝔽 R2)
@@ -194,7 +195,7 @@ module _
        ( add-prod-Commutative-Ring-𝔽
          ( mul-prod-Commutative-Ring-𝔽 x y)
          ( mul-prod-Commutative-Ring-𝔽 x z))
-  left-distributive-mul-add-prod-Commutative-Ring-𝔽  =
+  left-distributive-mul-add-prod-Commutative-Ring-𝔽 =
     left-distributive-mul-add-prod-Commutative-Ring
       ( commutative-ring-Commutative-Ring-𝔽 R1)
       ( commutative-ring-Commutative-Ring-𝔽 R2)
@@ -237,7 +238,7 @@ module _
   commutative-mul-prod-Commutative-Ring-𝔽 :
     (x y : type-prod-Commutative-Ring-𝔽) →
     mul-prod-Commutative-Ring-𝔽 x y ＝ mul-prod-Commutative-Ring-𝔽 y x
-  commutative-mul-prod-Commutative-Ring-𝔽  =
+  commutative-mul-prod-Commutative-Ring-𝔽 =
     commutative-mul-prod-Commutative-Ring
       ( commutative-ring-Commutative-Ring-𝔽 R1)
       ( commutative-ring-Commutative-Ring-𝔽 R2)

@@ -7,16 +7,15 @@ module finite-algebra.dependent-products-commutative-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.commutative-finite-rings
-open import finite-algebra.finite-rings
-open import finite-algebra.dependent-products-finite-rings
-open import univalent-combinatorics.finite-types
-open import foundation.functions
-
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.dependent-products-commutative-rings
 
+open import finite-algebra.commutative-finite-rings
+open import finite-algebra.dependent-products-finite-rings
+open import finite-algebra.finite-rings
+
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -27,6 +26,8 @@ open import group-theory.dependent-products-commutative-monoids
 
 open import ring-theory.dependent-products-rings
 open import ring-theory.rings
+
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

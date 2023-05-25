@@ -7,6 +7,9 @@ module finite-algebra.finite-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-algebra.finite-monoids
+open import finite-algebra.finite-semigroups
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.interchange-law
@@ -15,24 +18,22 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
+open import group-theory.commutative-monoids
 open import group-theory.monoids
 open import group-theory.semigroups
-open import group-theory.commutative-monoids
 
-open import finite-algebra.finite-monoids
-open import finite-algebra.finite-semigroups
-
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-A finite commutative monoid is a finite monoid `M` in which `xy = yx` holds for all `x y : M`.
+A finite commutative monoid is a finite monoid `M` in which `xy = yx` holds for
+all `x y : M`.
 
 ## Definition
 

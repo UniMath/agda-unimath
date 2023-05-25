@@ -7,6 +7,9 @@ module finite-algebra.finite-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-algebra.finite-monoids
+open import finite-algebra.finite-semigroups
+
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -24,9 +27,6 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import finite-algebra.finite-monoids
-open import finite-algebra.finite-semigroups
-
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.products-of-elements-monoids
@@ -38,20 +38,21 @@ open import lists.lists
 open import structured-types.pointed-types
 open import structured-types.pointed-types-equipped-with-automorphisms
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-An **abstract finite group** is a finite group in the usual algebraic sense, i.e., it consists
-of a finite type equipped with a unit element `e`, a binary operation `x, y ↦ xy`, and
-an inverse operation `x ↦ x⁻¹` satisfying the group laws
+An **abstract finite group** is a finite group in the usual algebraic sense,
+i.e., it consists of a finite type equipped with a unit element `e`, a binary
+operation `x, y ↦ xy`, and an inverse operation `x ↦ x⁻¹` satisfying the group
+laws
 
 ```text
   (xy)z = x(yz)      (associativity)

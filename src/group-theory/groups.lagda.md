@@ -523,7 +523,7 @@ structure-group X =
   Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
 
 compute-structure-group :
-  {l1 : Level} → (X : UU l1) → structure-group X →  Group l1
+  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
 pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
 pr2 (compute-structure-group X (p , q)) = q
 ```

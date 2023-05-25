@@ -7,9 +7,7 @@ module finite-algebra.products-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.cartesian-product-types
 open import finite-algebra.finite-rings
-open import univalent-combinatorics.finite-types
 
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -21,16 +19,19 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 
-open import ring-theory.rings
 open import ring-theory.products-rings
+open import ring-theory.rings
+
+open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-Given two finite rings R1 and R2, we define a ring structure on the product of R1 and
-R2.
+Given two finite rings R1 and R2, we define a ring structure on the product of
+R1 and R2.
 
 ## Definition
 
@@ -46,10 +47,12 @@ module _
   type-prod-Ring-𝔽 = type-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   is-set-type-prod-Ring-𝔽 : is-set type-prod-Ring-𝔽
-  is-set-type-prod-Ring-𝔽 = is-set-type-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
+  is-set-type-prod-Ring-𝔽 =
+    is-set-type-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   is-finite-type-prod-Ring-𝔽 : is-finite type-prod-Ring-𝔽
-  is-finite-type-prod-Ring-𝔽 = is-finite-prod (is-finite-type-Ring-𝔽 R1) (is-finite-type-Ring-𝔽 R2)
+  is-finite-type-prod-Ring-𝔽 =
+    is-finite-prod (is-finite-type-Ring-𝔽 R1) (is-finite-type-Ring-𝔽 R2)
 
   finite-type-prod-Ring-𝔽 : 𝔽 (l1 ⊔ l2)
   pr1 finite-type-prod-Ring-𝔽 = type-prod-Ring-𝔽
@@ -75,12 +78,14 @@ module _
     right-unit-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   left-inverse-law-add-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) → Id (add-prod-Ring-𝔽 (neg-prod-Ring-𝔽 x) x) zero-prod-Ring-𝔽
+    (x : type-prod-Ring-𝔽) →
+    Id (add-prod-Ring-𝔽 (neg-prod-Ring-𝔽 x) x) zero-prod-Ring-𝔽
   left-inverse-law-add-prod-Ring-𝔽 =
     left-inverse-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   right-inverse-law-add-prod-Ring-𝔽 :
-    (x : type-prod-Ring-𝔽) → Id (add-prod-Ring-𝔽 x (neg-prod-Ring-𝔽 x)) zero-prod-Ring-𝔽
+    (x : type-prod-Ring-𝔽) →
+    Id (add-prod-Ring-𝔽 x (neg-prod-Ring-𝔽 x)) zero-prod-Ring-𝔽
   right-inverse-law-add-prod-Ring-𝔽 =
     right-inverse-law-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
@@ -106,7 +111,7 @@ module _
     (x y z : type-prod-Ring-𝔽) →
     Id ( mul-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) z)
        ( mul-prod-Ring-𝔽 x (mul-prod-Ring-𝔽 y z))
-  associative-mul-prod-Ring-𝔽  =
+  associative-mul-prod-Ring-𝔽 =
     associative-mul-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   left-unit-law-mul-prod-Ring-𝔽 :
@@ -123,7 +128,7 @@ module _
     (x y z : type-prod-Ring-𝔽) →
     Id ( mul-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
        ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) (mul-prod-Ring-𝔽 x z))
-  left-distributive-mul-add-prod-Ring-𝔽  =
+  left-distributive-mul-add-prod-Ring-𝔽 =
     left-distributive-mul-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   right-distributive-mul-add-prod-Ring-𝔽 :

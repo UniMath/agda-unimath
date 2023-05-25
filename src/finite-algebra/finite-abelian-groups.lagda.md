@@ -7,6 +7,11 @@ module finite-algebra.finite-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-algebra.finite-commutative-monoids
+open import finite-algebra.finite-groups
+open import finite-algebra.finite-monoids
+open import finite-algebra.finite-semigroups
+
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
@@ -29,15 +34,10 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import finite-algebra.finite-groups
-open import finite-algebra.finite-monoids
-open import finite-algebra.finite-semigroups
-open import finite-algebra.finite-commutative-monoids
-
-open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -95,7 +95,6 @@ module _
 
   set-Ab-𝔽 : Set l
   set-Ab-𝔽 = set-Group group-Ab-𝔽
-
 
   is-set-type-Ab-𝔽 : is-set type-Ab-𝔽
   is-set-type-Ab-𝔽 = is-set-type-Group group-Ab-𝔽
@@ -167,7 +166,8 @@ module _
 
   interchange-add-add-Ab-𝔽 :
     (a b c d : type-Ab-𝔽) →
-    add-Ab-𝔽 (add-Ab-𝔽 a b) (add-Ab-𝔽 c d) ＝ add-Ab-𝔽 (add-Ab-𝔽 a c) (add-Ab-𝔽 b d)
+    add-Ab-𝔽 (add-Ab-𝔽 a b) (add-Ab-𝔽 c d) ＝
+    add-Ab-𝔽 (add-Ab-𝔽 a c) (add-Ab-𝔽 b d)
   interchange-add-add-Ab-𝔽 =
     interchange-law-commutative-and-associative
       add-Ab-𝔽

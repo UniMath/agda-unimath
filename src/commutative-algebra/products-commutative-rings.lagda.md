@@ -7,6 +7,8 @@ module commutative-algebra.products-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-rings
+
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
@@ -17,10 +19,8 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 
-open import commutative-algebra.commutative-rings
-
-open import ring-theory.rings
 open import ring-theory.products-rings
+open import ring-theory.rings
 ```
 
 </details>
@@ -70,20 +70,24 @@ module _
   left-unit-law-add-prod-Commutative-Ring :
     (x : type-prod-Commutative-Ring) →
     Id (add-prod-Commutative-Ring zero-prod-Commutative-Ring x) x
-  left-unit-law-add-prod-Commutative-Ring  =
+  left-unit-law-add-prod-Commutative-Ring =
     left-unit-law-add-prod-Ring
       ( ring-Commutative-Ring R1)
       ( ring-Commutative-Ring R2)
 
   right-unit-law-add-prod-Commutative-Ring :
-    (x : type-prod-Commutative-Ring) → Id (add-prod-Commutative-Ring x zero-prod-Commutative-Ring) x
+    (x : type-prod-Commutative-Ring) →
+    Id (add-prod-Commutative-Ring x zero-prod-Commutative-Ring) x
   right-unit-law-add-prod-Commutative-Ring =
     right-unit-law-add-prod-Ring
       ( ring-Commutative-Ring R1)
       ( ring-Commutative-Ring R2)
 
   left-inverse-law-add-prod-Commutative-Ring :
-    (x : type-prod-Commutative-Ring) → Id (add-prod-Commutative-Ring (neg-prod-Commutative-Ring x) x) zero-prod-Commutative-Ring
+    (x : type-prod-Commutative-Ring) →
+    Id
+      ( add-prod-Commutative-Ring (neg-prod-Commutative-Ring x) x)
+      zero-prod-Commutative-Ring
   left-inverse-law-add-prod-Commutative-Ring =
     left-inverse-law-add-prod-Ring
       ( ring-Commutative-Ring R1)
@@ -141,7 +145,8 @@ module _
       ( ring-Commutative-Ring R2)
 
   left-unit-law-mul-prod-Commutative-Ring :
-    (x : type-prod-Commutative-Ring) → Id (mul-prod-Commutative-Ring one-prod-Commutative-Ring x) x
+    (x : type-prod-Commutative-Ring) →
+    Id (mul-prod-Commutative-Ring one-prod-Commutative-Ring x) x
   left-unit-law-mul-prod-Commutative-Ring =
     left-unit-law-mul-prod-Ring
       ( ring-Commutative-Ring R1)
@@ -161,7 +166,7 @@ module _
        ( add-prod-Commutative-Ring
          ( mul-prod-Commutative-Ring x y)
          ( mul-prod-Commutative-Ring x z))
-  left-distributive-mul-add-prod-Commutative-Ring  =
+  left-distributive-mul-add-prod-Commutative-Ring =
     left-distributive-mul-add-prod-Ring
       ( ring-Commutative-Ring R1)
       ( ring-Commutative-Ring R2)

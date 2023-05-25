@@ -7,6 +7,8 @@ module finite-algebra.homomorphisms-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-algebra.finite-rings
+
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -23,11 +25,9 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-monoids
 
-open import ring-theory.homomorphisms-semirings
 open import ring-theory.homomorphisms-rings
+open import ring-theory.homomorphisms-semirings
 open import ring-theory.rings
-
-open import finite-algebra.finite-rings
 ```
 
 </details>

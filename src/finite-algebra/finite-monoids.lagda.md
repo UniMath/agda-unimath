@@ -7,6 +7,8 @@ module finite-algebra.finite-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import finite-algebra.finite-semigroups
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -15,15 +17,14 @@ open import foundation.subtypes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
-open import finite-algebra.finite-semigroups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -94,10 +95,12 @@ module _
   unit-Monoid-𝔽 : type-Monoid-𝔽
   unit-Monoid-𝔽 = unit-Monoid monoid-Monoid-𝔽
 
-  left-unit-law-mul-Monoid-𝔽 : (x : type-Monoid-𝔽) → mul-Monoid-𝔽 unit-Monoid-𝔽 x ＝ x
+  left-unit-law-mul-Monoid-𝔽 :
+    (x : type-Monoid-𝔽) → mul-Monoid-𝔽 unit-Monoid-𝔽 x ＝ x
   left-unit-law-mul-Monoid-𝔽 = left-unit-law-mul-Monoid monoid-Monoid-𝔽
 
-  right-unit-law-mul-Monoid-𝔽 : (x : type-Monoid-𝔽) → mul-Monoid-𝔽 x unit-Monoid-𝔽 ＝ x
+  right-unit-law-mul-Monoid-𝔽 :
+    (x : type-Monoid-𝔽) → mul-Monoid-𝔽 x unit-Monoid-𝔽 ＝ x
   right-unit-law-mul-Monoid-𝔽 = right-unit-law-mul-Monoid monoid-Monoid-𝔽
 ```
 

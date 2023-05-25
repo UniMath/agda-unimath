@@ -7,9 +7,10 @@ module finite-algebra.homomorphisms-commutative-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.commutative-finite-rings
 open import commutative-algebra.homomorphisms-commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
+
+open import finite-algebra.commutative-finite-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -42,14 +43,16 @@ module _
   where
 
   is-commutative-finite-ring-homomorphism-hom-Ab-Prop :
-    type-hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B) → Prop (l1 ⊔ l2)
+    type-hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B) →
+    Prop (l1 ⊔ l2)
   is-commutative-finite-ring-homomorphism-hom-Ab-Prop =
     is-ring-homomorphism-hom-Ab-Prop
       ( ring-Commutative-Ring-𝔽 A)
       ( ring-Commutative-Ring-𝔽 B)
 
   is-commutative-finite-ring-homomorphism-hom-Ab :
-    type-hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B) → UU (l1 ⊔ l2)
+    type-hom-Ab (ab-Commutative-Ring-𝔽 A) (ab-Commutative-Ring-𝔽 B) →
+    UU (l1 ⊔ l2)
   is-commutative-finite-ring-homomorphism-hom-Ab =
     is-ring-homomorphism-hom-Ab
       ( ring-Commutative-Ring-𝔽 A)
@@ -104,7 +107,8 @@ module _
         ( ring-Commutative-Ring-𝔽 B)
         ( f)
 
-    map-hom-Commutative-Ring-𝔽 : type-Commutative-Ring-𝔽 A → type-Commutative-Ring-𝔽 B
+    map-hom-Commutative-Ring-𝔽 :
+      type-Commutative-Ring-𝔽 A → type-Commutative-Ring-𝔽 B
     map-hom-Commutative-Ring-𝔽 =
       map-hom-Ring
         ( ring-Commutative-Ring-𝔽 A)
@@ -228,8 +232,11 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (A : Commutative-Ring-𝔽 l1) (B : Commutative-Ring-𝔽 l2) (C : Commutative-Ring-𝔽 l3)
-  (g : type-hom-Commutative-Ring-𝔽 B C) (f : type-hom-Commutative-Ring-𝔽 A B)
+  (A : Commutative-Ring-𝔽 l1)
+  (B : Commutative-Ring-𝔽 l2)
+  (C : Commutative-Ring-𝔽 l3)
+  (g : type-hom-Commutative-Ring-𝔽 B C)
+  (f : type-hom-Commutative-Ring-𝔽 A B)
   where
 
   hom-ab-comp-hom-Commutative-Ring-𝔽 :
@@ -311,7 +318,8 @@ module _
   where
 
   htpy-hom-Commutative-Ring-𝔽 :
-    type-hom-Commutative-Ring-𝔽 A B → type-hom-Commutative-Ring-𝔽 A B → UU (l1 ⊔ l2)
+    type-hom-Commutative-Ring-𝔽 A B → type-hom-Commutative-Ring-𝔽 A B →
+    UU (l1 ⊔ l2)
   htpy-hom-Commutative-Ring-𝔽 =
     htpy-hom-Ring
       ( ring-Commutative-Ring-𝔽 A)

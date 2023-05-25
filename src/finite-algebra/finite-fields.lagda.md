@@ -7,13 +7,14 @@ module finite-algebra.finite-fields where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.commutative-finite-rings
-
-open import finite-algebra.finite-rings
+open import commutative-algebra.commutative-rings
 open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
+
+open import finite-algebra.commutative-finite-rings
+open import finite-algebra.finite-rings
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -39,11 +40,9 @@ open import group-theory.semigroups
 open import lists.concatenation-lists
 open import lists.lists
 
+open import ring-theory.division-rings
 open import ring-theory.rings
 open import ring-theory.semirings
-open import commutative-algebra.commutative-rings
-
-open import ring-theory.division-rings
 ```
 
 </details>
@@ -76,7 +75,8 @@ module _
     commutative-ring-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
 
   finite-ring-Field-𝔽 : Ring-𝔽 l
-  finite-ring-Field-𝔽 = finite-ring-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
+  finite-ring-Field-𝔽 =
+    finite-ring-Commutative-Ring-𝔽 commutative-finite-ring-Field-𝔽
 
   ring-Field-𝔽 : Ring l
   ring-Field-𝔽 = ring-Ring-𝔽 (finite-ring-Field-𝔽)

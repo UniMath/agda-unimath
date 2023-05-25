@@ -7,38 +7,33 @@ module finite-algebra.semisimple-commutative-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.commutative-finite-rings
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.standard-finite-types
-
-open import finite-algebra.finite-fields
-open import finite-algebra.homomorphisms-commutative-finite-rings
-open import finite-algebra.dependent-products-commutative-finite-rings
-
-
 open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
+
+open import finite-algebra.commutative-finite-rings
+open import finite-algebra.dependent-products-commutative-finite-rings
+open import finite-algebra.finite-fields
+open import finite-algebra.homomorphisms-commutative-finite-rings
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.existential-quantification
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.involutions
 open import foundation.negation
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-open import foundation.existential-quantification
-open import foundation.propositional-truncations
-open import foundation.functions
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
@@ -49,17 +44,21 @@ open import group-theory.semigroups
 open import lists.concatenation-lists
 open import lists.lists
 
+open import ring-theory.division-rings
 open import ring-theory.rings
 open import ring-theory.semirings
 
-open import ring-theory.division-rings
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
 
 ## Idea
 
-A **semisimple commutative finite rings** is a commutative finie rings wich is merely equivalent to an iterated cartesian product of finite fields.
+A **semisimple commutative finite rings** is a commutative finie rings wich is
+merely equivalent to an iterated cartesian product of finite fields.
 
 ## Definitions
 

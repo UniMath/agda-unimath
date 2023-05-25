@@ -7,18 +7,18 @@ module finite-algebra.finite-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import group-theory.semigroups
-
+open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-pair-types
+open import group-theory.semigroups
+
 open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.equality-finite-types
-open import foundation.decidable-propositions
+open import univalent-combinatorics.finite-types
 ```
 
 </details>

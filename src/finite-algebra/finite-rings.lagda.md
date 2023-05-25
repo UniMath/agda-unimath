@@ -7,44 +7,44 @@ module finite-algebra.finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.addition-natural-numbers
-
-open import ring-theory.rings
-open import ring-theory.semirings
-
-open import foundation.negation
-open import foundation.propositions
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
-open import foundation.sets
-open import foundation.identity-types
-open import foundation.equivalences
-open import foundation.binary-equivalences
-open import foundation.binary-embeddings
-open import foundation.embeddings
-open import foundation.injective-maps
-open import foundation.unital-binary-operations
-open import foundation.involutions
+open import elementary-number-theory.natural-numbers
 
 open import finite-algebra.finite-abelian-groups
 open import finite-algebra.finite-groups
 open import finite-algebra.finite-monoids
 
+open import foundation.binary-embeddings
+open import foundation.binary-equivalences
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.injective-maps
+open import foundation.involutions
+open import foundation.negation
+open import foundation.propositions
+open import foundation.sets
+open import foundation.unital-binary-operations
+open import foundation.universe-levels
+
 open import group-theory.abelian-groups
-open import group-theory.groups
 open import group-theory.commutative-monoids
+open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import lists.lists
 open import lists.concatenation-lists
+open import lists.lists
 
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.equality-finite-types
+open import ring-theory.rings
+open import ring-theory.semirings
+
 open import univalent-combinatorics.cartesian-product-types
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -145,7 +145,8 @@ module _
   is-group-additive-semigroup-Ring-𝔽 =
     is-group-additive-semigroup-Ring (ring-Ring-𝔽 R)
 
-  commutative-add-Ring-𝔽 : (x y : type-Ring-𝔽 R) → Id (add-Ring-𝔽 x y) (add-Ring-𝔽 y x)
+  commutative-add-Ring-𝔽 :
+    (x y : type-Ring-𝔽 R) → Id (add-Ring-𝔽 x y) (add-Ring-𝔽 y x)
   commutative-add-Ring-𝔽 = commutative-add-Ring (ring-Ring-𝔽 R)
 
   interchange-add-add-Ring-𝔽 :
@@ -215,10 +216,12 @@ module _
   is-nonzero-finite-ring-Prop : type-Ring-𝔽 R → Prop l
   is-nonzero-finite-ring-Prop = is-nonzero-ring-Prop (ring-Ring-𝔽 R)
 
-  left-unit-law-add-Ring-𝔽 : (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R zero-Ring-𝔽 x) x
+  left-unit-law-add-Ring-𝔽 :
+    (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R zero-Ring-𝔽 x) x
   left-unit-law-add-Ring-𝔽 = left-unit-law-add-Ring (ring-Ring-𝔽 R)
 
-  right-unit-law-add-Ring-𝔽 : (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R x zero-Ring-𝔽) x
+  right-unit-law-add-Ring-𝔽 :
+    (x : type-Ring-𝔽 R) → Id (add-Ring-𝔽 R x zero-Ring-𝔽) x
   right-unit-law-add-Ring-𝔽 = right-unit-law-add-Ring (ring-Ring-𝔽 R)
 ```
 
@@ -229,7 +232,8 @@ module _
   {l : Level} (R : Ring-𝔽 l)
   where
 
-  has-negatives-Ring-𝔽 : is-group' (additive-semigroup-Ring-𝔽 R) (has-zero-Ring-𝔽 R)
+  has-negatives-Ring-𝔽 :
+    is-group' (additive-semigroup-Ring-𝔽 R) (has-zero-Ring-𝔽 R)
   has-negatives-Ring-𝔽 = has-negatives-Ring (ring-Ring-𝔽 R)
 
   neg-Ring-𝔽 : type-Ring-𝔽 R → type-Ring-𝔽 R
@@ -284,13 +288,15 @@ module _
 
   left-distributive-mul-add-Ring-𝔽 :
     (x y z : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 x (add-Ring-𝔽 R y z) ＝ add-Ring-𝔽 R (mul-Ring-𝔽 x y) (mul-Ring-𝔽 x z)
+    mul-Ring-𝔽 x (add-Ring-𝔽 R y z) ＝
+    add-Ring-𝔽 R (mul-Ring-𝔽 x y) (mul-Ring-𝔽 x z)
   left-distributive-mul-add-Ring-𝔽 =
     left-distributive-mul-add-Ring (ring-Ring-𝔽 R)
 
   right-distributive-mul-add-Ring-𝔽 :
     (x y z : type-Ring-𝔽 R) →
-    mul-Ring-𝔽 (add-Ring-𝔽 R x y) z ＝ add-Ring-𝔽 R (mul-Ring-𝔽 x z) (mul-Ring-𝔽 y z)
+    mul-Ring-𝔽 (add-Ring-𝔽 R x y) z ＝
+    add-Ring-𝔽 R (mul-Ring-𝔽 x z) (mul-Ring-𝔽 y z)
   right-distributive-mul-add-Ring-𝔽 =
     right-distributive-mul-add-Ring (ring-Ring-𝔽 R)
 ```
@@ -311,10 +317,12 @@ module _
   one-Ring-𝔽 : type-Ring-𝔽 R
   one-Ring-𝔽 = one-Ring (ring-Ring-𝔽 R)
 
-  left-unit-law-mul-Ring-𝔽 : (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R one-Ring-𝔽 x) x
+  left-unit-law-mul-Ring-𝔽 :
+    (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R one-Ring-𝔽 x) x
   left-unit-law-mul-Ring-𝔽 = left-unit-law-mul-Ring (ring-Ring-𝔽 R)
 
-  right-unit-law-mul-Ring-𝔽 : (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R x one-Ring-𝔽) x
+  right-unit-law-mul-Ring-𝔽 :
+    (x : type-Ring-𝔽 R) → Id (mul-Ring-𝔽 R x one-Ring-𝔽) x
   right-unit-law-mul-Ring-𝔽 = right-unit-law-mul-Ring (ring-Ring-𝔽 R)
 ```
 

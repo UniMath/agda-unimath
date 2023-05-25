@@ -7,16 +7,13 @@ module finite-algebra.commutative-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.finite-rings
-open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.equality-finite-types
-open import commutative-algebra.commutative-semirings
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.commutative-semirings
 
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
+
+open import finite-algebra.finite-rings
 
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
@@ -44,14 +41,19 @@ open import lists.lists
 
 open import ring-theory.rings
 open import ring-theory.semirings
+
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.dependent-pair-types
+open import univalent-combinatorics.equality-finite-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
 
 ## Idea
 
-A finite ring `A` is said to be **commutative** if its multiplicative operation is
-commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
+A finite ring `A` is said to be **commutative** if its multiplicative operation
+is commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
 
 ## Definition
 
@@ -100,13 +102,16 @@ module _
   type-Commutative-Ring-𝔽 = type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   is-set-type-Commutative-Ring-𝔽 : is-set type-Commutative-Ring-𝔽
-  is-set-type-Commutative-Ring-𝔽 = is-set-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+  is-set-type-Commutative-Ring-𝔽 =
+    is-set-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   finite-type-Commutative-Ring-𝔽 : 𝔽 l
-  finite-type-Commutative-Ring-𝔽 = finite-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+  finite-type-Commutative-Ring-𝔽 =
+    finite-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   is-finite-type-Commutative-Ring-𝔽 : is-finite (type-Commutative-Ring-𝔽)
-  is-finite-type-Commutative-Ring-𝔽 = is-finite-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+  is-finite-type-Commutative-Ring-𝔽 =
+    is-finite-type-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 ```
 
 ### Addition in a commutative finite ring
@@ -184,12 +189,14 @@ module _
     (x : type-Commutative-Ring-𝔽) → is-equiv (add-Commutative-Ring-𝔽' x)
   is-equiv-add-Commutative-Ring-𝔽' = is-equiv-add-Ab' ab-Commutative-Ring-𝔽
 
-  is-binary-equiv-add-Commutative-Ring-𝔽 : is-binary-equiv add-Commutative-Ring-𝔽
+  is-binary-equiv-add-Commutative-Ring-𝔽 :
+    is-binary-equiv add-Commutative-Ring-𝔽
   pr1 is-binary-equiv-add-Commutative-Ring-𝔽 = is-equiv-add-Commutative-Ring-𝔽'
   pr2 is-binary-equiv-add-Commutative-Ring-𝔽 = is-equiv-add-Commutative-Ring-𝔽
 
   is-binary-emb-add-Commutative-Ring-𝔽 : is-binary-emb add-Commutative-Ring-𝔽
-  is-binary-emb-add-Commutative-Ring-𝔽 = is-binary-emb-add-Ab ab-Commutative-Ring-𝔽
+  is-binary-emb-add-Commutative-Ring-𝔽 =
+    is-binary-emb-add-Ab ab-Commutative-Ring-𝔽
 
   is-emb-add-Commutative-Ring-𝔽 :
     (x : type-Commutative-Ring-𝔽) → is-emb (add-Commutative-Ring-𝔽 x)
@@ -201,11 +208,13 @@ module _
 
   is-injective-add-Commutative-Ring-𝔽 :
     (x : type-Commutative-Ring-𝔽) → is-injective (add-Commutative-Ring-𝔽 x)
-  is-injective-add-Commutative-Ring-𝔽 = is-injective-add-Ab ab-Commutative-Ring-𝔽
+  is-injective-add-Commutative-Ring-𝔽 =
+    is-injective-add-Ab ab-Commutative-Ring-𝔽
 
   is-injective-add-Commutative-Ring-𝔽' :
     (x : type-Commutative-Ring-𝔽) → is-injective (add-Commutative-Ring-𝔽' x)
-  is-injective-add-Commutative-Ring-𝔽' = is-injective-add-Ab' ab-Commutative-Ring-𝔽
+  is-injective-add-Commutative-Ring-𝔽' =
+    is-injective-add-Ab' ab-Commutative-Ring-𝔽
 ```
 
 ### The zero element of a commutative finite ring
@@ -221,7 +230,8 @@ module _
   is-zero-Commutative-Ring-𝔽 = is-zero-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   is-nonzero-Commutative-Ring-𝔽 : type-Commutative-Ring-𝔽 → UU l
-  is-nonzero-Commutative-Ring-𝔽 = is-nonzero-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+  is-nonzero-Commutative-Ring-𝔽 =
+    is-nonzero-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   is-zero-commutative-finite-ring-Prop : type-Commutative-Ring-𝔽 → Prop l
   is-zero-commutative-finite-ring-Prop =
@@ -256,13 +266,15 @@ module _
 
   left-inverse-law-add-Commutative-Ring-𝔽 :
     (x : type-Commutative-Ring-𝔽) →
-    add-Commutative-Ring-𝔽 (neg-Commutative-Ring-𝔽 x) x ＝ zero-Commutative-Ring-𝔽
+    add-Commutative-Ring-𝔽 (neg-Commutative-Ring-𝔽 x) x ＝
+    zero-Commutative-Ring-𝔽
   left-inverse-law-add-Commutative-Ring-𝔽 =
     left-inverse-law-add-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   right-inverse-law-add-Commutative-Ring-𝔽 :
     (x : type-Commutative-Ring-𝔽) →
-    add-Commutative-Ring-𝔽 x (neg-Commutative-Ring-𝔽 x) ＝ zero-Commutative-Ring-𝔽
+    add-Commutative-Ring-𝔽 x (neg-Commutative-Ring-𝔽 x) ＝
+    zero-Commutative-Ring-𝔽
   right-inverse-law-add-Commutative-Ring-𝔽 =
     right-inverse-law-add-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
@@ -287,10 +299,12 @@ module _
   has-associative-mul-Commutative-Ring-𝔽 =
     has-associative-mul-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
-  mul-Commutative-Ring-𝔽 : (x y : type-Commutative-Ring-𝔽) → type-Commutative-Ring-𝔽
+  mul-Commutative-Ring-𝔽 :
+    (x y : type-Commutative-Ring-𝔽) → type-Commutative-Ring-𝔽
   mul-Commutative-Ring-𝔽 = mul-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
-  mul-Commutative-Ring-𝔽' : (x y : type-Commutative-Ring-𝔽) → type-Commutative-Ring-𝔽
+  mul-Commutative-Ring-𝔽' :
+    (x y : type-Commutative-Ring-𝔽) → type-Commutative-Ring-𝔽
   mul-Commutative-Ring-𝔽' = mul-Ring-𝔽' finite-ring-Commutative-Ring-𝔽
 
   ap-mul-Commutative-Ring-𝔽 :
@@ -424,11 +438,14 @@ module _
     commutative-mul-Commutative-Ring-𝔽
 
   semifinite-ring-Commutative-Ring-𝔽 : Semiring l
-  semifinite-ring-Commutative-Ring-𝔽 = semiring-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+  semifinite-ring-Commutative-Ring-𝔽 =
+    semiring-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   commutative-semiring-Commutative-Ring-𝔽 : Commutative-Semiring l
-  pr1 commutative-semiring-Commutative-Ring-𝔽 = semifinite-ring-Commutative-Ring-𝔽
-  pr2 commutative-semiring-Commutative-Ring-𝔽 = commutative-mul-Commutative-Ring-𝔽
+  pr1 commutative-semiring-Commutative-Ring-𝔽 =
+    semifinite-ring-Commutative-Ring-𝔽
+  pr2 commutative-semiring-Commutative-Ring-𝔽 =
+    commutative-mul-Commutative-Ring-𝔽
 ```
 
 ### Computing multiplication with minus one in a ring
@@ -441,13 +458,15 @@ module _
     (x : type-Commutative-Ring-𝔽) →
     mul-Commutative-Ring-𝔽 neg-one-Commutative-Ring-𝔽 x ＝
     neg-Commutative-Ring-𝔽 x
-  mul-neg-one-Commutative-Ring-𝔽 = mul-neg-one-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
+  mul-neg-one-Commutative-Ring-𝔽 =
+    mul-neg-one-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   mul-neg-one-Commutative-Ring-𝔽' :
     (x : type-Commutative-Ring-𝔽) →
     mul-Commutative-Ring-𝔽 x neg-one-Commutative-Ring-𝔽 ＝
     neg-Commutative-Ring-𝔽 x
-  mul-neg-one-Commutative-Ring-𝔽' = mul-neg-one-Ring-𝔽' finite-ring-Commutative-Ring-𝔽
+  mul-neg-one-Commutative-Ring-𝔽' =
+    mul-neg-one-Ring-𝔽' finite-ring-Commutative-Ring-𝔽
 
   is-involution-mul-neg-one-Commutative-Ring-𝔽 :
     is-involution (mul-Commutative-Ring-𝔽 neg-one-Commutative-Ring-𝔽)
@@ -479,7 +498,9 @@ module _
 
   mul-neg-Commutative-Ring-𝔽 :
     (x y : type-Commutative-Ring-𝔽) →
-    mul-Commutative-Ring-𝔽 (neg-Commutative-Ring-𝔽 x) (neg-Commutative-Ring-𝔽 y) ＝
+    mul-Commutative-Ring-𝔽
+      ( neg-Commutative-Ring-𝔽 x)
+      ( neg-Commutative-Ring-𝔽 y) ＝
     mul-Commutative-Ring-𝔽 x y
   mul-neg-Commutative-Ring-𝔽 = mul-neg-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 ```
@@ -555,7 +576,8 @@ module _
 ### Addition of a list of elements in a commutative finite ring
 
 ```agda
-  add-list-Commutative-Ring-𝔽 : list type-Commutative-Ring-𝔽 → type-Commutative-Ring-𝔽
+  add-list-Commutative-Ring-𝔽 :
+    list type-Commutative-Ring-𝔽 → type-Commutative-Ring-𝔽
   add-list-Commutative-Ring-𝔽 = add-list-Ring-𝔽 finite-ring-Commutative-Ring-𝔽
 
   preserves-concat-add-list-Commutative-Ring-𝔽 :

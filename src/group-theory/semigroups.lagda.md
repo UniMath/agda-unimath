@@ -76,7 +76,7 @@ module _
 structure-semigroup :
   {l1 : Level} → UU l1 → UU l1
 structure-semigroup X =
-  Σ (is-set X) (λ p → has-associative-mul-Set (X , p) )
+  Σ (is-set X) (λ p → has-associative-mul-Set (X , p))
 
 compute-structure-semigroup :
   {l1 : Level} → (X : UU l1) → structure-semigroup X → Semigroup l1

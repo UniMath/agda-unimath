@@ -7,26 +7,27 @@ module finite-algebra.dependent-products-finite-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import univalent-combinatorics.dependent-function-types
 open import finite-algebra.finite-rings
-open import univalent-combinatorics.finite-types
 
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-open import foundation.functions
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.dependent-products-commutative-monoids
 open import group-theory.groups
-open import group-theory.semigroups
 open import group-theory.monoids
+open import group-theory.semigroups
 
 open import ring-theory.dependent-products-rings
 open import ring-theory.rings
 open import ring-theory.semirings
+
+open import univalent-combinatorics.dependent-function-types
+open import univalent-combinatorics.finite-types
 ```
 
 </details>
@@ -66,7 +67,8 @@ module _
   type-Π-Ring-𝔽 = type-Π-Ring (type-𝔽 I) (ring-Ring-𝔽 ∘ A)
 
   is-finite-type-Π-Ring-𝔽 : is-finite (type-Π-Ring-𝔽)
-  is-finite-type-Π-Ring-𝔽 = is-finite-Π (is-finite-type-𝔽 I) (λ i → is-finite-type-Ring-𝔽 (A i))
+  is-finite-type-Π-Ring-𝔽 =
+    is-finite-Π (is-finite-type-𝔽 I) (λ i → is-finite-type-Ring-𝔽 (A i))
 
   finite-type-Π-Ring-𝔽 : 𝔽 (l1 ⊔ l2)
   pr1 finite-type-Π-Ring-𝔽 = type-Π-Ring-𝔽
