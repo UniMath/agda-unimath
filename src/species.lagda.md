@@ -31,6 +31,7 @@ open import species.equivalences-species-of-types public
 open import species.equivalences-species-of-types-in-subuniverses public
 open import species.exponentials-cauchy-series-of-types public
 open import species.exponentials-cauchy-series-of-types-in-subuniverses public
+open import species.hasse-weil-species public
 open import species.morphisms-finite-species public
 open import species.morphisms-species-of-types public
 open import species.pointing-species-of-types public

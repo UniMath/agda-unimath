@@ -69,3 +69,17 @@ module _
       ( mul-Semigroup x (mul-Semigroup y z))
   associative-mul-Semigroup = pr2 has-associative-mul-Semigroup
 ```
+
+### Equip a type with a structure of semigroup
+
+```agda
+structure-semigroup :
+  {l1 : Level} → UU l1 → UU l1
+structure-semigroup X =
+  Σ (is-set X) (λ p → has-associative-mul-Set (X , p))
+
+compute-structure-semigroup :
+  {l1 : Level} → (X : UU l1) → structure-semigroup X → Semigroup l1
+pr1 (compute-structure-semigroup X (s , g)) = X , s
+pr2 (compute-structure-semigroup X (s , g)) = g
+```
