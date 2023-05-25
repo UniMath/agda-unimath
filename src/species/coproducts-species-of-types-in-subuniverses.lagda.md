@@ -28,35 +28,50 @@ The coproduct of two species of types of subuniverse `F` and `G` is the
 pointwise coproduct provided that the domain subuniverse of `F` and `G` is
 stable by coproduct.
 
-## Definition
+## Definitions
+
+### The underlying type of the coproduct of species of types in a subuniverse
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
   where
 
-  coproduct-species-subuniverse' :
+  type-coproduct-species-subuniverse :
     (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
     (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
     (X : type-subuniverse P) → UU (l3 ⊔ l4)
-  coproduct-species-subuniverse' S T X =
+  type-coproduct-species-subuniverse S T X =
     inclusion-subuniverse
       ( subuniverse-global-subuniverse Q l3)
       ( S X) +
     inclusion-subuniverse
       ( subuniverse-global-subuniverse Q l4)
       ( T X)
+```
 
+### Subuniverses closed under the coproduct of two species of types in a subuniverse
+
+```agda
+is-closed-under-coproduct-species-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  UUω
+is-closed-under-coproduct-species-subuniverse P Q =
+  {l3 l4 : Level}
+  (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
+  (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
+  (X : type-subuniverse P) →
+  is-in-subuniverse
+    ( subuniverse-global-subuniverse Q (l3 ⊔ l4))
+    ( type-coproduct-species-subuniverse P Q S T X)
+```
+
+### The coproduct of two species of types in a subuniverse
+
+```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
-  ( C1 :
-    ( {l4 l5 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-    is-in-subuniverse
-      ( subuniverse-global-subuniverse Q (l4 ⊔ l5))
-      ( coproduct-species-subuniverse' P Q S T X)))
+  ( C1 : is-closed-under-coproduct-species-subuniverse P Q)
   where
 
   coproduct-species-subuniverse :
@@ -64,7 +79,7 @@ module _
     species-subuniverse P (subuniverse-global-subuniverse Q l4) →
     species-subuniverse P (subuniverse-global-subuniverse Q (l3 ⊔ l4))
   pr1 (coproduct-species-subuniverse S T X) =
-    coproduct-species-subuniverse' P Q S T X
+    type-coproduct-species-subuniverse P Q S T X
   pr2 (coproduct-species-subuniverse S T X) = C1 S T X
 ```
 
@@ -75,14 +90,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
-  ( C1 :
-    ( {l4 l5 : Level}
-    (S : species-subuniverse P (subuniverse-global-subuniverse Q l4))
-    (T : species-subuniverse P (subuniverse-global-subuniverse Q l5))
-    (X : type-subuniverse P) →
-      is-in-subuniverse
-        ( subuniverse-global-subuniverse Q (l4 ⊔ l5))
-        ( coproduct-species-subuniverse' P Q S T X)))
+  ( C1 : is-closed-under-coproduct-species-subuniverse P Q)
   ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   ( X : UU l1)
