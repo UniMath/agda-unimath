@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
 open import ring-theory.posets-of-ideals-rings
+open import ring-theory.products-subsets-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```
@@ -59,15 +60,10 @@ module _
   where
 
   generating-subset-product-ideal-Ring : subset-Ring (l1 ⊔ l2 ⊔ l3) R
-  generating-subset-product-ideal-Ring r =
-    trunc-Prop
-      ( Σ ( type-ideal-Ring R I)
-          ( λ x →
-            Σ ( type-ideal-Ring R J)
-              ( λ y →
-                mul-Ring R
-                  ( inclusion-ideal-Ring R I x)
-                  ( inclusion-ideal-Ring R J y) ＝ r)))
+  generating-subset-product-ideal-Ring =
+    product-subset-Ring R
+      ( subset-ideal-Ring R I)
+      ( subset-ideal-Ring R J)
 
   product-ideal-Ring : ideal-Ring (l1 ⊔ l2 ⊔ l3) R
   product-ideal-Ring = ideal-subset-Ring R generating-subset-product-ideal-Ring
@@ -100,5 +96,5 @@ module _
         apply-universal-property-trunc-Prop p
           ( subset-ideal-Ring R K x)
           ( λ ((r , p) , ((s , q) , z)) →
-            is-closed-under-eq-ideal-Ring R K (H r s p q) z))
+            is-closed-under-eq-ideal-Ring R K (H r s p q) (inv z)))
 ```

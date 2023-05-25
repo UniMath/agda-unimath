@@ -15,6 +15,8 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import ring-theory.products-subsets-rings
 ```
 
 </details>
@@ -35,10 +37,57 @@ module _
   where
 
   product-subset-Commutative-Ring : subset-Commutative-Ring (l1 ⊔ l2 ⊔ l3) A
-  product-subset-Commutative-Ring x =
-    trunc-Prop
-      ( Σ ( type-subtype S)
-          ( λ s →
-            Σ ( type-subtype T)
-              ( λ t → x ＝ mul-Commutative-Ring A (pr1 s) (pr1 t))))
+  product-subset-Commutative-Ring =
+    product-subset-Ring (ring-Commutative-Ring A) S T
+```
+
+## Properties
+
+### The product of subsets of commutative rings is associative
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Commutative-Ring l1)
+  (R : subset-Commutative-Ring l2 A)
+  (S : subset-Commutative-Ring l3 A)
+  (T : subset-Commutative-Ring l4 A)
+  where
+
+  forward-inclusion-associative-product-subset-Commutative-Ring :
+    ( product-subset-Commutative-Ring A
+      ( product-subset-Commutative-Ring A R S)
+      ( T)) ⊆
+    ( product-subset-Commutative-Ring A
+      ( R)
+      ( product-subset-Commutative-Ring A S T))
+  forward-inclusion-associative-product-subset-Commutative-Ring =
+    forward-inclusion-associative-product-subset-Ring
+      ( ring-Commutative-Ring A)
+      ( R)
+      ( S)
+      ( T)
+
+  backward-inclusion-associative-product-subset-Commutative-Ring :
+    ( product-subset-Commutative-Ring A
+      ( R)
+      ( product-subset-Commutative-Ring A S T)) ⊆
+    ( product-subset-Commutative-Ring A
+      ( product-subset-Commutative-Ring A R S)
+      ( T))
+  backward-inclusion-associative-product-subset-Commutative-Ring =
+    backward-inclusion-associative-product-subset-Ring
+      ( ring-Commutative-Ring A)
+      ( R)
+      ( S)
+      ( T)
+
+  associative-product-subset-Commutative-Ring :
+    product-subset-Commutative-Ring A
+      ( product-subset-Commutative-Ring A R S)
+      ( T) ＝
+    product-subset-Commutative-Ring A
+      ( R)
+      ( product-subset-Commutative-Ring A S T)
+  associative-product-subset-Commutative-Ring =
+    associative-product-subset-Ring (ring-Commutative-Ring A) R S T
 ```

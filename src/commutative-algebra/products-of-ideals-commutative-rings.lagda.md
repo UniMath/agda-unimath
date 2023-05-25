@@ -1,8 +1,6 @@
 # Products of ideals in commutative rings
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module commutative-algebra.products-of-ideals-commutative-rings where
 ```
 
@@ -479,7 +477,95 @@ module _
           x)
 ```
 
+### `(IT) ＝ I(T)`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Commutative-Ring l1)
+  (I : ideal-Commutative-Ring l2 A) (T : subset-Commutative-Ring l3 A)
+  where
+
+  forward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( T)))
+      ( product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T))
+  forward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring =
+    transitive-leq-ideal-Commutative-Ring A
+      ( ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( T)))
+      ( product-ideal-Commutative-Ring A
+        ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
+        ( ideal-subset-Commutative-Ring A T))
+      ( product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T))
+      ( preserves-leq-left-product-ideal-Commutative-Ring A
+        ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
+        ( I)
+        ( ideal-subset-Commutative-Ring A T)
+        ( forward-inclusion-idempotent-ideal-subset-Commutative-Ring A I))
+      ( forward-inclusion-preserves-product-ideal-subset-Commutative-Ring A
+        ( subset-ideal-Commutative-Ring A I)
+        ( T))
+
+  backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T))
+      ( ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( T)))
+  backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring =
+    transitive-leq-ideal-Commutative-Ring A
+      ( product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T))
+      ( product-ideal-Commutative-Ring A
+        ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
+        ( ideal-subset-Commutative-Ring A T))
+      ( ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( T)))
+      ( backward-inclusion-preserves-product-ideal-subset-Commutative-Ring A
+        ( subset-ideal-Commutative-Ring A I)
+        ( T))
+      ( preserves-leq-left-product-ideal-Commutative-Ring A
+        ( I)
+        ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
+        ( ideal-subset-Commutative-Ring A T)
+        ( backward-inclusion-idempotent-ideal-subset-Commutative-Ring A I))
+
+  right-preserves-product-ideal-subset-Commutative-Ring :
+    ideal-subset-Commutative-Ring A
+      ( product-subset-Commutative-Ring A
+        ( subset-ideal-Commutative-Ring A I)
+        ( T)) ＝
+    product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T)
+  right-preserves-product-ideal-subset-Commutative-Ring =
+    eq-has-same-elements-ideal-Commutative-Ring A
+      ( ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( T)))
+      ( product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T))
+      ( λ x →
+        forward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring
+          x ,
+        backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring
+          x)
+```
+
 ### The product of ideals is assiciative
+
+Given three ideals `I`, `J`, and `K`, we have that
+
+```text
+  (IJ)K ＝ ((generating-subset-product-ideal-Commutative-Ring I J)K)
+        ＝ (I(generating-subset-product-ideal-Commutative-Ring J K))
+        ＝ I(JK).
+```
 
 ```agda
 module _
@@ -497,17 +583,79 @@ module _
       ( product-ideal-Commutative-Ring A
         ( I)
         ( product-ideal-Commutative-Ring A J K))
-  forward-inclusion-associative-product-ideal-Commutative-Ring =
-    is-product-product-ideal-Commutative-Ring A
-      ( product-ideal-Commutative-Ring A I J)
-      ( K)
+  forward-inclusion-associative-product-ideal-Commutative-Ring x H =
+    forward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring A I
+      ( generating-subset-product-ideal-Commutative-Ring A J K)
+      ( x)
+      ( preserves-order-ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( product-subset-Commutative-Ring A
+            ( subset-ideal-Commutative-Ring A I)
+            ( subset-ideal-Commutative-Ring A J))
+          ( subset-ideal-Commutative-Ring A K))
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( product-subset-Commutative-Ring A
+            ( subset-ideal-Commutative-Ring A J)
+            ( subset-ideal-Commutative-Ring A K)))
+        ( forward-inclusion-associative-product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( subset-ideal-Commutative-Ring A J)
+          ( subset-ideal-Commutative-Ring A K))
+        ( x)
+        ( backward-inclusion-left-preserves-product-ideal-subset-Commutative-Ring
+          ( A)
+          ( generating-subset-product-ideal-Commutative-Ring A I J)
+          ( K)
+          ( x)
+          ( H)))
+
+  backward-inclusion-associative-product-ideal-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
       ( product-ideal-Commutative-Ring A I
         ( product-ideal-Commutative-Ring A J K))
-      ( λ u z pq r →
-        {!!})
+      ( product-ideal-Commutative-Ring A
+        ( product-ideal-Commutative-Ring A I J)
+        ( K))
+  backward-inclusion-associative-product-ideal-Commutative-Ring x H =
+    forward-inclusion-left-preserves-product-ideal-subset-Commutative-Ring A
+      ( generating-subset-product-ideal-Commutative-Ring A I J)
+      ( K)
+      ( x)
+      ( preserves-order-ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( product-subset-Commutative-Ring A
+            ( subset-ideal-Commutative-Ring A J)
+            ( subset-ideal-Commutative-Ring A K)))
+        ( product-subset-Commutative-Ring A
+          ( product-subset-Commutative-Ring A
+            ( subset-ideal-Commutative-Ring A I)
+            ( subset-ideal-Commutative-Ring A J))
+          ( subset-ideal-Commutative-Ring A K))
+        ( backward-inclusion-associative-product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( subset-ideal-Commutative-Ring A J)
+          ( subset-ideal-Commutative-Ring A K))
+        ( x)
+        ( backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring
+          ( A)
+          ( I)
+          ( generating-subset-product-ideal-Commutative-Ring A J K)
+          ( x)
+          ( H)))
 
   associative-product-ideal-Commutative-Ring :
     product-ideal-Commutative-Ring A (product-ideal-Commutative-Ring A I J) K ＝
     product-ideal-Commutative-Ring A I (product-ideal-Commutative-Ring A J K)
-  associative-product-ideal-Commutative-Ring = {!!}
+  associative-product-ideal-Commutative-Ring =
+    eq-has-same-elements-ideal-Commutative-Ring A
+      ( product-ideal-Commutative-Ring A
+        ( product-ideal-Commutative-Ring A I J)
+        ( K))
+      ( product-ideal-Commutative-Ring A I
+        ( product-ideal-Commutative-Ring A J K))
+      ( λ x →
+        forward-inclusion-associative-product-ideal-Commutative-Ring x ,
+        backward-inclusion-associative-product-ideal-Commutative-Ring x)
 ```

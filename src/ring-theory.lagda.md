@@ -44,6 +44,7 @@ open import ring-theory.precategory-of-rings public
 open import ring-theory.precategory-of-semirings public
 open import ring-theory.products-of-ideals-rings public
 open import ring-theory.products-rings public
+open import ring-theory.products-subsets-rings public
 open import ring-theory.quotient-rings public
 open import ring-theory.radical-ideals-rings public
 open import ring-theory.rings public
