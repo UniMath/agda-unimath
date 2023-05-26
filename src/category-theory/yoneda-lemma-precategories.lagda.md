@@ -12,6 +12,11 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 open import category-theory.representable-functors-precategories
 
+open import foundation.dependent-pair-types
+open import foundation.function-extensionality
+open import foundation.sets
+open import foundation.universe-levels
+
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
@@ -19,11 +24,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
-
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.sets
-open import foundation.universe-levels
 ```
 
 </details>
@@ -67,7 +67,7 @@ module _
         htpy-eq
           ( inv
             ( preserves-comp-functor-Precategory C (Set-Precategory _) F g f))
-          u )
+          u)
 
   sec-yoneda-evid-Precategory :
     sec yoneda-evid-Precategory
@@ -86,7 +86,7 @@ module _
                 eq-htpy
                   ( λ f →
                     htpy-eq ((pr2 α) f) ((id-hom-Precategory C {c})) ∙
-                    ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f) )))
+                    ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f))))
             ( eq-is-prop'
               ( is-prop-is-natural-transformation-Precategory
                 C (Set-Precategory _)

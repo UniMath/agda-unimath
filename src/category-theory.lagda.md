@@ -67,7 +67,9 @@ open import category-theory.pregroupoids public
 open import category-theory.products-of-precategories public
 open import category-theory.products-precategories public
 open import category-theory.pullbacks-precategories public
+open import category-theory.representable-functors-precategories public
 open import category-theory.sieves-categories public
 open import category-theory.slice-precategories public
 open import category-theory.terminal-objects-precategories public
+open import category-theory.yoneda-lemma-precategories public
 ```

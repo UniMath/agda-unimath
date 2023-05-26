@@ -11,11 +11,11 @@ open import category-theory.functors-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
-open import foundation-core.homotopies
-
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.universe-levels
+
+open import foundation-core.homotopies
 ```
 
 </details>
