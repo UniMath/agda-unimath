@@ -12,6 +12,7 @@ module commutative-algebra.joins-ideals-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
+open import commutative-algebra.products-of-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.universe-levels
@@ -87,4 +88,27 @@ module _
       join-family-of-ideals-Commutative-Ring
   is-join-join-family-of-ideals-Commutative-Ring =
     is-join-join-family-of-ideals-Ring (ring-Commutative-Ring A) J
+```
+
+## Properties
+
+### Products distribute over joins of families of ideals
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Commutative-Ring l1)
+  (I : ideal-Commutative-Ring l2 A)
+  {U : UU l3} (J : U → ideal-Commutative-Ring l4 A)
+  where
+
+  forward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( product-ideal-Commutative-Ring A
+        ( I)
+        ( join-family-of-ideals-Commutative-Ring A J))
+      ( join-family-of-ideals-Commutative-Ring A
+        ( λ α →
+          product-ideal-Commutative-Ring A I (J α)))
+  forward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring =
+    {!backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring!}
 ```
