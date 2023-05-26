@@ -82,15 +82,15 @@ module _
   pr2 retr-yoneda-evid-Precategory =
     λ α → eq-pair-Σ
             ( eq-htpy
-              (λ x →
+              ( λ x →
                 eq-htpy
-                  (λ f →
+                  ( λ f →
                     htpy-eq ((pr2 α) f) ((id-hom-Precategory C {c})) ∙
                     ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f) )))
-            (eq-is-prop'
-              (is-prop-is-natural-transformation-Precategory
+            ( eq-is-prop'
+              ( is-prop-is-natural-transformation-Precategory
                 C (Set-Precategory _)
-                ((rep-functor-Precategory C c)) F
+                (( rep-functor-Precategory C c)) F
                 ( pr1 α)) _ (pr2 α))
 
   yoneda-lemma-Precategory : is-equiv yoneda-evid-Precategory

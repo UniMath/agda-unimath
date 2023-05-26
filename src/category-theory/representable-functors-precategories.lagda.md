@@ -43,7 +43,7 @@ pr1 (pr2 (rep-functor-Precategory C c)) g = postcomp-hom-Precategory C g c
 pr1 (pr2 (pr2 (rep-functor-Precategory C c))) h g =
   eq-htpy λ f → associative-comp-hom-Precategory C h g f
 pr2 (pr2 (pr2 (rep-functor-Precategory C c))) x =
-  eq-htpy (λ f → left-unit-law-comp-hom-Precategory C f)
+  eq-htpy ( λ f → left-unit-law-comp-hom-Precategory C f)
 ```
 
 ## Natural transformations between representable functors
@@ -61,5 +61,5 @@ rep-natural-transformation-Precategory :
 pr1 (rep-natural-transformation-Precategory C b c f) x =
   precomp-hom-Precategory C f x
 pr2 (rep-natural-transformation-Precategory C b c f) =
-  λ h → eq-htpy (inv-htpy (λ g → associative-comp-hom-Precategory C h g f))
+  λ h → eq-htpy ( inv-htpy ( λ g → associative-comp-hom-Precategory C h g f))
 ```
