@@ -13,17 +13,16 @@ open import category-theory.precategories
 open import category-theory.representable-functors-precategories
 
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.sets
 open import foundation.universe-levels
-
-open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalences
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>
@@ -48,52 +47,64 @@ module _
   where
 
   yoneda-evid-Precategory :
-    natural-transformation-Precategory C (Set-Precategory l1)
-    (rep-functor-Precategory C c) F →
+    natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l1)
+      ( rep-functor-Precategory C c)
+      ( F) →
     type-Set (obj-functor-Precategory C (Set-Precategory l1) F c)
   yoneda-evid-Precategory α =
-    ( components-natural-transformation-Precategory C (Set-Precategory _)
-    ( rep-functor-Precategory C c) F α c) (id-hom-Precategory C)
+    components-natural-transformation-Precategory
+      ( C)
+      ( Set-Precategory l1)
+      ( rep-functor-Precategory C c)
+      ( F)
+      ( α)
+      ( c)
+      ( id-hom-Precategory C)
 
   yoneda-extension-Precategory :
     type-Set (obj-functor-Precategory C (Set-Precategory l1) F c) →
-    natural-transformation-Precategory C (Set-Precategory l1)
-    (rep-functor-Precategory C c) F
+    natural-transformation-Precategory
+      C (Set-Precategory l1) (rep-functor-Precategory C c) F
   pr1 (yoneda-extension-Precategory u) x f =
-    hom-functor-Precategory C (Set-Precategory _) F f u
+    hom-functor-Precategory C (Set-Precategory l1) F f u
   pr2 (yoneda-extension-Precategory u) g =
     eq-htpy
       ( λ f →
         htpy-eq
           ( inv
-            ( preserves-comp-functor-Precategory C (Set-Precategory _) F g f))
-          u)
+            ( preserves-comp-functor-Precategory C (Set-Precategory l1) F g f))
+          ( u))
 
   sec-yoneda-evid-Precategory :
     sec yoneda-evid-Precategory
   pr1 sec-yoneda-evid-Precategory = yoneda-extension-Precategory
   pr2 sec-yoneda-evid-Precategory =
-    λ u →
-      htpy-eq (preserves-id-functor-Precategory C (Set-Precategory _) F c) u
+    htpy-eq (preserves-id-functor-Precategory C (Set-Precategory _) F c)
 
   retr-yoneda-evid-Precategory :
     retr yoneda-evid-Precategory
   pr1 retr-yoneda-evid-Precategory = yoneda-extension-Precategory
-  pr2 retr-yoneda-evid-Precategory =
-    λ α → eq-pair-Σ
-            ( eq-htpy
-              ( λ x →
-                eq-htpy
-                  ( λ f →
-                    htpy-eq ((pr2 α) f) ((id-hom-Precategory C {c})) ∙
-                    ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f))))
-            ( eq-is-prop'
-              ( is-prop-is-natural-transformation-Precategory
-                C (Set-Precategory _)
-                (( rep-functor-Precategory C c)) F
-                ( pr1 α)) _ (pr2 α))
+  pr2 retr-yoneda-evid-Precategory α =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ x →
+          eq-htpy
+            ( λ f →
+              htpy-eq ((pr2 α) f) ((id-hom-Precategory C {c})) ∙
+              ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f))))
+      ( eq-is-prop'
+        ( is-prop-is-natural-transformation-Precategory
+          ( C)
+          ( Set-Precategory l1)
+          ( rep-functor-Precategory C c)
+          ( F)
+          ( pr1 α))
+        ( _)
+        ( pr2 α))
 
   yoneda-lemma-Precategory : is-equiv yoneda-evid-Precategory
-  yoneda-lemma-Precategory =
-    sec-yoneda-evid-Precategory , retr-yoneda-evid-Precategory
+  pr1 yoneda-lemma-Precategory = sec-yoneda-evid-Precategory
+  pr2 yoneda-lemma-Precategory = retr-yoneda-evid-Precategory
 ```

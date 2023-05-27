@@ -55,8 +55,11 @@ components `hom c x → hom b x` are defined by precomposition with `f`.
 rep-natural-transformation-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) (b c : obj-Precategory C)
   (f : type-hom-Precategory C b c) →
-  natural-transformation-Precategory C (Set-Precategory l2)
-  (rep-functor-Precategory C c) (rep-functor-Precategory C b)
+  natural-transformation-Precategory
+    ( C)
+    ( Set-Precategory l2)
+    ( rep-functor-Precategory C c)
+    ( rep-functor-Precategory C b)
 pr1 (rep-natural-transformation-Precategory C b c f) =
   precomp-hom-Precategory C f
 pr2 (rep-natural-transformation-Precategory C b c f) h =
