@@ -9,12 +9,17 @@ module species.hasse-weil-species where
 ```agda
 open import finite-algebra.commutative-finite-rings
 open import finite-algebra.products-commutative-finite-rings
+open import finite-algebra.semisimple-commutative-finite-rings
 
 open import foundation.cartesian-product-types
 open import foundation.equivalences
 open import foundation.universe-levels
 
+open import species.species-of-finite-inhabited-types
+
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.inhabited-finite-types
 ```
 
 </details>
