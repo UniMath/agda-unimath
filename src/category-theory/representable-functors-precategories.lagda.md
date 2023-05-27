@@ -13,9 +13,8 @@ open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.universe-levels
-
-open import foundation-core.homotopies
 ```
 
 </details>
@@ -30,7 +29,7 @@ precategory of Sets represented by `c` that:
   defined by postcomposition with `g`.
 
 The functoriality axioms follow, by function extensionality, from associativity
-and the left unit law for the precategory C.
+and the left unit law for the precategory `C`.
 
 ## Definition
 
@@ -38,12 +37,12 @@ and the left unit law for the precategory C.
 rep-functor-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) (c : obj-Precategory C) →
   functor-Precategory C (Set-Precategory l2)
-pr1 (rep-functor-Precategory C c) x = hom-Precategory C c x
+pr1 (rep-functor-Precategory C c) = hom-Precategory C c
 pr1 (pr2 (rep-functor-Precategory C c)) g = postcomp-hom-Precategory C g c
 pr1 (pr2 (pr2 (rep-functor-Precategory C c))) h g =
-  eq-htpy λ f → associative-comp-hom-Precategory C h g f
-pr2 (pr2 (pr2 (rep-functor-Precategory C c))) x =
-  eq-htpy ( λ f → left-unit-law-comp-hom-Precategory C f)
+  eq-htpy (associative-comp-hom-Precategory C h g)
+pr2 (pr2 (pr2 (rep-functor-Precategory C c))) _ =
+  eq-htpy (left-unit-law-comp-hom-Precategory C)
 ```
 
 ## Natural transformations between representable functors
@@ -58,8 +57,8 @@ rep-natural-transformation-Precategory :
   (f : type-hom-Precategory C b c) →
   natural-transformation-Precategory C (Set-Precategory l2)
   (rep-functor-Precategory C c) (rep-functor-Precategory C b)
-pr1 (rep-natural-transformation-Precategory C b c f) x =
-  precomp-hom-Precategory C f x
-pr2 (rep-natural-transformation-Precategory C b c f) =
-  λ h → eq-htpy ( inv-htpy ( λ g → associative-comp-hom-Precategory C h g f))
+pr1 (rep-natural-transformation-Precategory C b c f) =
+  precomp-hom-Precategory C f
+pr2 (rep-natural-transformation-Precategory C b c f) h =
+  eq-htpy (inv-htpy (λ g → associative-comp-hom-Precategory C h g f))
 ```
