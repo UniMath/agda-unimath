@@ -2,6 +2,7 @@ import re
 import pathlib
 import os
 import subprocess
+from typing import List
 
 
 def get_files_recursive(startpath):
@@ -18,7 +19,7 @@ def get_subdirectories_recursive(startpath):
         yield from dirs
 
 
-def find_index(s: str, t: str) -> list[int]:
+def find_index(s: str, t: str) -> List[int]:
     return [p for p, c in enumerate(s) if c == t]
 
 
@@ -28,7 +29,7 @@ def is_agda_file(f: pathlib.Path) -> bool:
             f.is_file())
 
 
-def get_agda_files(files: list[str]) -> list[pathlib.Path]:
+def get_agda_files(files: List[str]) -> List[pathlib.Path]:
     return list(filter(is_agda_file,
                        map(pathlib.Path, files)))
 
