@@ -105,7 +105,7 @@ module _
       product-ideal-Commutative-Ring
       contains-product-product-ideal-Commutative-Ring
   is-product-product-ideal-Commutative-Ring =
-    is-product-ideal-product-ideal-Ring (ring-Commutative-Ring A) I J
+    is-product-product-ideal-Ring (ring-Commutative-Ring A) I J
 ```
 
 ## Properties

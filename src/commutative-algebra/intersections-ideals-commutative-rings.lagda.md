@@ -50,7 +50,7 @@ module _
       ( K)
 ```
 
-### Intersection of ideals in commutative rings
+### Intersections of ideals in commutative rings
 
 ```agda
 module _

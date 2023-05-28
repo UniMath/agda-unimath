@@ -217,7 +217,7 @@ pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
 
 ## Properties
 
-### If 1 is in the ideal, every element is in the ideal
+### If `1` is in the ideal, every element is in the ideal
 
 ```agda
 is-in-ideal-is-in-ideal-one-Commutative-Ring :

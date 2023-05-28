@@ -12,6 +12,8 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
+open import lists.lists
+
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
 open import ring-theory.posets-of-ideals-rings
@@ -84,11 +86,11 @@ module _
       ( mul-Ring R x y)
       ( unit-trunc-Prop ((x , H) , (y , K) , refl))
 
-  is-product-ideal-product-ideal-Ring :
+  is-product-product-ideal-Ring :
     is-product-ideal-Ring R I J
       ( product-ideal-Ring)
       ( contains-product-product-ideal-Ring)
-  is-product-ideal-product-ideal-Ring K H =
+  is-product-product-ideal-Ring K H =
     is-ideal-generated-by-subset-ideal-subset-Ring R
       ( generating-subset-product-ideal-Ring)
       ( K)
@@ -97,4 +99,57 @@ module _
           ( subset-ideal-Ring R K x)
           ( λ ((r , p) , ((s , q) , z)) →
             is-closed-under-eq-ideal-Ring R K (H r s p q) (inv z)))
+```
+
+## Properties
+
+### The product of ideals preserves inequality of ideals
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 : Level} (A : Ring l1)
+  (I : ideal-Ring l2 A)
+  (J : ideal-Ring l3 A)
+  (K : ideal-Ring l4 A)
+  (L : ideal-Ring l5 A)
+  where
+
+  preserves-leq-product-ideal-Ring :
+    leq-ideal-Ring A I J →
+    leq-ideal-Ring A K L →
+    leq-ideal-Ring A
+      ( product-ideal-Ring A I K)
+      ( product-ideal-Ring A J L)
+  preserves-leq-product-ideal-Ring p q =
+    is-product-product-ideal-Ring A I K
+      ( product-ideal-Ring A J L)
+      ( λ x y u v →
+        contains-product-product-ideal-Ring A J L _ _
+          ( p x u)
+          ( q y v))
+
+module _
+  {l1 l2 l3 l4 : Level} (A : Ring l1)
+  (I : ideal-Ring l2 A)
+  (J : ideal-Ring l3 A)
+  (K : ideal-Ring l4 A)
+  where
+
+  preserves-leq-left-product-ideal-Ring :
+    leq-ideal-Ring A I J →
+    leq-ideal-Ring A
+      ( product-ideal-Ring A I K)
+      ( product-ideal-Ring A J K)
+  preserves-leq-left-product-ideal-Ring p =
+    preserves-leq-product-ideal-Ring A I J K K p
+      ( refl-leq-ideal-Ring A K)
+
+  preserves-leq-right-product-ideal-Ring :
+    leq-ideal-Ring A J K →
+    leq-ideal-Ring A
+      ( product-ideal-Ring A I J)
+      ( product-ideal-Ring A I K)
+  preserves-leq-right-product-ideal-Ring =
+    preserves-leq-product-ideal-Ring A I I J K
+      ( refl-leq-ideal-Ring A I)
 ```

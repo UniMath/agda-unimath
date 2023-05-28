@@ -8,8 +8,10 @@ module foundation.unions-subtypes where
 
 ```agda
 open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.large-locale-of-subtypes
+open import foundation.propositional-truncations
 
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
@@ -54,4 +56,23 @@ module _
   union-family-of-subtypes :
     {I : UU l2} (A : I → subtype l3 X) → subtype (l2 ⊔ l3) X
   union-family-of-subtypes = sup-power-set-Large-Locale
+```
+
+## Properties
+
+### The union of families of subtypes preserves indexed inclusion
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {X : UU l1} {I : UU l2}
+  (A : I → subtype l3 X) (B : I → subtype l4 X)
+  where
+
+  preserves-order-union-of-subtypes :
+    ((i : I) → A i ⊆ B i) →
+    union-family-of-subtypes A ⊆ union-family-of-subtypes B
+  preserves-order-union-of-subtypes H x p =
+    apply-universal-property-trunc-Prop p
+      ( union-family-of-subtypes B x)
+      ( λ (i , q) → unit-trunc-Prop (i , H i x q))
 ```

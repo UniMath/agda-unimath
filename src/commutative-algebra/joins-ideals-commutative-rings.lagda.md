@@ -11,10 +11,14 @@ module commutative-algebra.joins-ideals-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
+open import commutative-algebra.ideals-generated-by-subsets-commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.products-of-ideals-commutative-rings
+open import commutative-algebra.products-subsets-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
+open import foundation.subtypes
+open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import order-theory.least-upper-bounds-large-posets
@@ -58,7 +62,9 @@ module _
   generating-subset-join-family-of-ideals-Commutative-Ring :
     subset-Commutative-Ring (l2 ⊔ l3) A
   generating-subset-join-family-of-ideals-Commutative-Ring =
-    generating-subset-join-family-of-ideals-Ring (ring-Commutative-Ring A) J
+    generating-subset-join-family-of-ideals-Ring
+      ( ring-Commutative-Ring A)
+      ( J)
 
   join-family-of-ideals-Commutative-Ring :
     ideal-Commutative-Ring (l1 ⊔ l2 ⊔ l3) A
@@ -109,6 +115,38 @@ module _
       ( join-family-of-ideals-Commutative-Ring A
         ( λ α →
           product-ideal-Commutative-Ring A I (J α)))
-  forward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring =
-    {!!}
+  forward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring x p =
+    preserves-order-ideal-subset-Commutative-Ring A
+      ( product-subset-Commutative-Ring A
+        ( subset-ideal-Commutative-Ring A I)
+        ( union-family-of-subtypes
+          ( λ α → subset-ideal-Commutative-Ring A (J α))))
+      ( generating-subset-join-family-of-ideals-Commutative-Ring A
+        ( λ α → product-ideal-Commutative-Ring A I (J α)))
+      ( transitive-leq-subtype
+        ( product-subset-Commutative-Ring A
+          ( subset-ideal-Commutative-Ring A I)
+          ( union-family-of-subtypes
+            ( λ α → subset-ideal-Commutative-Ring A (J α))))
+        ( union-family-of-subtypes
+          ( λ α →
+            generating-subset-product-ideal-Commutative-Ring A I (J α)))
+        ( generating-subset-join-family-of-ideals-Commutative-Ring A
+          ( λ α → product-ideal-Commutative-Ring A I (J α)))
+        ( transitive-leq-subtype
+          ( union-family-of-subtypes
+            ( λ α →
+              generating-subset-product-ideal-Commutative-Ring A I (J α)))
+          ( union-family-of-subtypes
+            ( λ α → {!!}))
+          ( generating-subset-join-family-of-ideals-Commutative-Ring A
+            ( λ α → product-ideal-Commutative-Ring A I (J α)))
+          {!!}
+          {!!})
+        ( forward-inclusion-distributive-product-union-family-of-subsets-Commutative-Ring
+          ( A)
+          ( subset-ideal-Commutative-Ring A I)
+          ( λ α → subset-ideal-Commutative-Ring A (J α))))
+      {!!}
+      {!!}
 ```
