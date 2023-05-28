@@ -10,7 +10,7 @@ import collections
 
 AGDA_INDENT = '  '
 
-even_indentation_pattern = re.compile(fr'({AGDA_INDENT})*(\S|$)')
+even_indentation_pattern = re.compile(fr'^({AGDA_INDENT})*(\S|$)')
 
 
 def is_even_indentation(line):
