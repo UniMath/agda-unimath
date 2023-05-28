@@ -337,8 +337,9 @@ abstract
     is-injective-unit-Maybe
       ( ( compute-map-inv-equiv-equiv-is-exception-Maybe e
           ( map-equiv-equiv-Maybe e x)
-          ( ( ap ( map-inv-equiv e)
-                 ( compute-map-equiv-equiv-is-exception-Maybe e x p)) ∙
+          ( ( ap
+              ( map-inv-equiv e)
+              ( compute-map-equiv-equiv-is-exception-Maybe e x p)) ∙
             ( isretr-map-inv-equiv e exception-Maybe))) ∙
         ( ( ap (map-inv-equiv e) (inv p)) ∙
           ( isretr-map-inv-equiv e (inl x))))
@@ -350,12 +351,14 @@ abstract
             ( map-inv-equiv e (inl (map-equiv-equiv-Maybe e x)))
             ( pair x
               ( inv
-                ( ( ap (map-inv-equiv e)
-                       ( compute-map-equiv-equiv-is-not-exception-Maybe
-                          e x f)) ∙
+                ( ( ap
+                    ( map-inv-equiv e)
+                    ( compute-map-equiv-equiv-is-not-exception-Maybe
+                        e x f)) ∙
                   ( isretr-map-inv-equiv e (inl x))))))) ∙
-        ( ( ap ( map-inv-equiv e)
-               ( compute-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
+        ( ( ap
+            ( map-inv-equiv e)
+            ( compute-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
           ( isretr-map-inv-equiv e (inl x))))
 ```
 

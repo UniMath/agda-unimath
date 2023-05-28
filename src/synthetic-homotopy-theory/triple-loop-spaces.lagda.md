@@ -138,20 +138,23 @@ right-unit-law-z-concat-Ω³ α =
 ```agda
 interchange-x-y-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω³ a) →
-  Id ( y-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
-     ( x-concat-Ω³ (y-concat-Ω³ α γ) (y-concat-Ω³ β δ))
+  Id
+    ( y-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
+    ( x-concat-Ω³ (y-concat-Ω³ α γ) (y-concat-Ω³ β δ))
 interchange-x-y-concat-Ω³ = interchange-x-y-concat-Id³
 
 interchange-x-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω³ a) →
-  Id ( z-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
-     ( x-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
+  Id
+    ( z-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
+    ( x-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
 interchange-x-z-concat-Ω³ = interchange-x-z-concat-Id³
 
 interchange-y-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω³ a) →
-  Id ( z-concat-Ω³ (y-concat-Ω³ α β) (y-concat-Ω³ γ δ))
-     ( y-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
+  Id
+    ( z-concat-Ω³ (y-concat-Ω³ α β) (y-concat-Ω³ γ δ))
+    ( y-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
 interchange-y-z-concat-Ω³ α β γ δ =
   inv right-unit ∙ interchange-y-z-concat-Id³ α β γ δ
 ```

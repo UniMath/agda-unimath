@@ -78,8 +78,9 @@ module _
 
   preserves-mul-Abstract-Group-Action :
     (g : type-Group G) (h : type-Group G) (x : type-Abstract-Group-Action) →
-    Id ( mul-Abstract-Group-Action (mul-Group G g h) x)
-       ( mul-Abstract-Group-Action g (mul-Abstract-Group-Action h x))
+    Id
+      ( mul-Abstract-Group-Action (mul-Group G g h) x)
+      ( mul-Abstract-Group-Action g (mul-Abstract-Group-Action h x))
   preserves-mul-Abstract-Group-Action g h =
     htpy-eq
       ( ap pr1

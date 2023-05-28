@@ -66,15 +66,15 @@ module _
 
   equiv-product-cauchy-series-Σ-extension-species-subuniverse :
     ( product-cauchy-series-species-types
-       ( Σ-extension-species-subuniverse
-           ( P)
-           ( subuniverse-global-subuniverse Q l3)
-           ( S))
-       ( Σ-extension-species-subuniverse
-           ( P)
-           ( subuniverse-global-subuniverse Q l4)
-           ( T))
-       X)
+      ( Σ-extension-species-subuniverse
+          ( P)
+          ( subuniverse-global-subuniverse Q l3)
+          ( S))
+      ( Σ-extension-species-subuniverse
+          ( P)
+          ( subuniverse-global-subuniverse Q l4)
+          ( T))
+      X)
       ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-product-cauchy-series-Σ-extension-species-subuniverse =

@@ -208,11 +208,12 @@ module _
     (h : type-hom-Abstract-Group-Action G X3 X4)
     (g : type-hom-Abstract-Group-Action G X2 X3)
     (f : type-hom-Abstract-Group-Action G X1 X2) →
-    Id ( comp-hom-Abstract-Group-Action G X1 X2 X4
-         ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
-         ( f))
-       ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
-         ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
+    Id
+      ( comp-hom-Abstract-Group-Action G X1 X2 X4
+        ( comp-hom-Abstract-Group-Action G X2 X3 X4 h g)
+        ( f))
+      ( comp-hom-Abstract-Group-Action G X1 X3 X4 h
+        ( comp-hom-Abstract-Group-Action G X1 X2 X3 g f))
   associative-comp-hom-Abstract-Group-Action h g f =
     eq-htpy-hom-Abstract-Group-Action G X1 X4
       ( comp-hom-Abstract-Group-Action G X1 X2 X4
@@ -233,10 +234,11 @@ module _
 
   left-unit-law-comp-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) →
-    Id ( comp-hom-Abstract-Group-Action G X Y Y
-         ( id-hom-Abstract-Group-Action G Y)
-         ( f))
-       ( f)
+    Id
+      ( comp-hom-Abstract-Group-Action G X Y Y
+        ( id-hom-Abstract-Group-Action G Y)
+        ( f))
+      ( f)
   left-unit-law-comp-hom-Abstract-Group-Action f =
     eq-htpy-hom-Abstract-Group-Action G X Y
       ( comp-hom-Abstract-Group-Action G X Y Y
@@ -247,9 +249,10 @@ module _
 
   right-unit-law-comp-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) →
-    Id ( comp-hom-Abstract-Group-Action G X X Y f
-         ( id-hom-Abstract-Group-Action G X))
-       ( f)
+    Id
+      ( comp-hom-Abstract-Group-Action G X X Y f
+        ( id-hom-Abstract-Group-Action G X))
+      ( f)
   right-unit-law-comp-hom-Abstract-Group-Action f =
     eq-htpy-hom-Abstract-Group-Action G X Y
       ( comp-hom-Abstract-Group-Action G X X Y f

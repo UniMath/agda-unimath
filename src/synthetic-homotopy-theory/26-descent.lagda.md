@@ -99,8 +99,9 @@ coherence-htpy-dep-cocone :
 coherence-htpy-dep-cocone {S = S} f g c P
   h h' K L =
   (s : S) →
-  Id ( ((pr2 (pr2 h)) s) ∙ (L (g s)))
-     ( (ap (tr P (pr2 (pr2 c) s)) (K (f s))) ∙ ((pr2 (pr2 h')) s))
+  Id
+    ( ((pr2 (pr2 h)) s) ∙ (L (g s)))
+    ( (ap (tr P (pr2 (pr2 c) s)) (K (f s))) ∙ ((pr2 (pr2 h')) s))
 
 htpy-dep-cocone :
   {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}

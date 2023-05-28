@@ -233,9 +233,10 @@ is-one-right-is-one-mul-ℕ zero-ℕ (succ-ℕ y) ()
 is-one-right-is-one-mul-ℕ (succ-ℕ x) zero-ℕ p =
   is-one-right-is-one-mul-ℕ x zero-ℕ p
 is-one-right-is-one-mul-ℕ (succ-ℕ x) (succ-ℕ y) p =
-  ap ( succ-ℕ)
-     ( is-zero-right-is-zero-add-ℕ (x *ℕ (succ-ℕ y)) y
-       ( is-injective-succ-ℕ p))
+  ap
+    ( succ-ℕ)
+    ( is-zero-right-is-zero-add-ℕ (x *ℕ (succ-ℕ y)) y
+      ( is-injective-succ-ℕ p))
 
 is-one-left-is-one-mul-ℕ :
   (x y : ℕ) → is-one-ℕ (x *ℕ y) → is-one-ℕ x

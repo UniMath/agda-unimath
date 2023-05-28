@@ -136,18 +136,20 @@ module fibered where
     bifibered-system l7 l8 B (Eq-fibered-system' α f f')
   bifibered-system.type
     ( Eq-bifibered-system' D .D refl refl f f' g g') {X} Y p =
-    Id ( tr (bifibered-system.type D Y) p (section-fibered-system.type g Y))
-       ( section-fibered-system.type g' Y)
+    Id
+      ( tr (bifibered-system.type D Y) p (section-fibered-system.type g Y))
+      ( section-fibered-system.type g' Y)
   bifibered-system.element
     ( Eq-bifibered-system' {A = A} {C = C} D .D refl refl f f' g g')
     {X} {Y} {p} {x} α y q =
-      Id ( double-tr
-           ( λ Z u → bifibered-system.element D {Z = Z} u y)
-           ( p)
-           ( α)
-           ( q)
-           ( section-fibered-system.element g y))
-         ( section-fibered-system.element g' y)
+      Id
+        ( double-tr
+          ( λ Z u → bifibered-system.element D {Z = Z} u y)
+          ( p)
+          ( α)
+          ( q)
+          ( section-fibered-system.element g y))
+        ( section-fibered-system.element g' y)
   bifibered-system.slice
     ( Eq-bifibered-system' {C = C} D .D refl refl f f' g g') {X} {Y} {α} β =
     Eq-bifibered-system'

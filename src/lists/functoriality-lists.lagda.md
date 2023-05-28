@@ -118,7 +118,7 @@ module _
                 ( vec B)
                 ( p)
                 ( vec-list (map-list f (list-vec n v))) ＝
-               map-vec f v)
+              map-vec f v)
             ( eq-is-prop
               ( is-set-ℕ
                 ( length-list (map-list f (list-vec n v)))
@@ -215,8 +215,9 @@ module _
 
   preserves-concat-map-list :
     (l k : list A) →
-    Id ( map-list f (concat-list l k))
-       ( concat-list (map-list f l) (map-list f k))
+    Id
+      ( map-list f (concat-list l k))
+      ( concat-list (map-list f l) (map-list f k))
   preserves-concat-map-list nil k = refl
   preserves-concat-map-list (cons x l) k =
     ap (cons (f x)) (preserves-concat-map-list l k)

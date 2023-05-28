@@ -83,9 +83,10 @@ homotopies of sections of fibered systems.
   tr-fibered-system-slice :
     {l1 l2 l3 l4 : Level} {A : system l1 l2} {B B' : fibered-system l3 l4 A}
     (α : Id B B') (f : section-system B) (X : system.type A) →
-    Id ( fibered-system.slice B (section-system.type f X))
-       ( fibered-system.slice B'
-         ( section-system.type (tr section-system α f) X))
+    Id
+      ( fibered-system.slice B (section-system.type f X))
+      ( fibered-system.slice B'
+        ( section-system.type (tr section-system α f) X))
   tr-fibered-system-slice refl f X = refl
 
   Eq-fibered-system' :
@@ -93,13 +94,16 @@ homotopies of sections of fibered systems.
     (α : Id B B') (f : section-system B) (g : section-system B') →
     fibered-system l3 l4 A
   fibered-system.type (Eq-fibered-system' {A = A} α f g) X =
-    Id ( section-system.type (tr section-system α f) X)
-       ( section-system.type g X)
+    Id
+      ( section-system.type (tr section-system α f) X)
+      ( section-system.type g X)
   fibered-system.element (Eq-fibered-system' {A = A} {B} {B'} α f g) p x =
-    Id ( tr (λ t → fibered-system.element B' t x)
-            ( p)
-            ( section-system.element (tr section-system α f) x))
-       ( section-system.element g x)
+    Id
+      ( tr
+        ( λ t → fibered-system.element B' t x)
+        ( p)
+        ( section-system.element (tr section-system α f) x))
+      ( section-system.element g x)
   fibered-system.slice (Eq-fibered-system' {A = A} {B} {B'} α f g) {X} p =
     Eq-fibered-system'
       ( tr-fibered-system-slice α f X ∙ ap (fibered-system.slice B') p)
@@ -131,15 +135,18 @@ homotopies of sections of fibered systems.
       ( section-system.type G X)
       ( section-system.type H X)
       ( section-system.element f x)) ∙
-    ( ( ap ( tr ( λ t → fibered-system.element B t x)
-                ( section-system.type H X))
-           ( section-system.element G x)) ∙
+    ( ( ap
+        ( tr
+          ( λ t → fibered-system.element B t x)
+          ( section-system.type H X))
+        ( section-system.element G x)) ∙
       ( section-system.element H x))
   section-system.slice
     ( concat-htpy-section-system' {B = B} {α = refl} {refl} refl refl G H) X =
     concat-htpy-section-system'
-      ( ap ( fibered-system.slice B)
-           ( section-system.type G X ∙ section-system.type H X))
+      ( ap
+        ( fibered-system.slice B)
+        ( section-system.type G X ∙ section-system.type H X))
       ( inv
         ( ap-concat
           ( fibered-system.slice B)
@@ -358,11 +365,12 @@ We show that systems form a category.
           ( system.slice B)
           ( section-system.type H X)))
       ( ap (system.slice C ∘ section-system.type g) (section-system.type H X))
-      ( ( ap ( ap (constant-fibered-system (system.slice A X)))
-             ( ap-comp
-               ( system.slice C)
-               ( section-system.type g)
-               ( section-system.type H X))) ∙
+      ( ( ap
+          ( ap (constant-fibered-system (system.slice A X)))
+          ( ap-comp
+            ( system.slice C)
+            ( section-system.type g)
+            ( section-system.type H X))) ∙
         ( inv
           ( ap-comp
             ( constant-fibered-system (system.slice A X))
@@ -372,12 +380,14 @@ We show that systems form a category.
       ( section-system.slice H X)
       where
       γ : {Y Y' : system.type B} (p : Id Y Y') →
-          Id ( tr ( λ t → t)
-                  ( ap-binary hom-system
-                    ( ap (system.slice B) p)
-                    ( ap (system.slice C ∘ section-system.type g) p))
-                  ( section-system.slice g Y))
-             ( section-system.slice g Y')
+          Id
+            ( tr
+              ( λ t → t)
+              ( ap-binary hom-system
+                ( ap (system.slice B) p)
+                ( ap (system.slice C ∘ section-system.type g) p))
+              ( section-system.slice g Y))
+            ( section-system.slice g Y')
       γ refl = refl
 
   left-whisker-htpy-hom-system :
@@ -1035,12 +1045,13 @@ We introduce the slice of a dependent type theory.
       {A = A} {B} {C} {g} {f} {WA} {WB} {WC} {δA} {δB} {δC} {Wg} {Wf} δg δf) X =
     ( ap
       ( λ t →
-        tr ( system.element
-             ( system.slice C (section-system.type (comp-hom-system g f) X)))
-           ( t)
-           ( section-system.element
-             ( section-system.slice (comp-hom-system g f) X)
-             ( generic-element.type δA X)))
+        tr
+          ( system.element
+            ( system.slice C (section-system.type (comp-hom-system g f) X)))
+          ( t)
+          ( section-system.element
+            ( section-system.slice (comp-hom-system g f) X)
+            ( generic-element.type δA X)))
       ( ap (α ∙_) (right-unit))) ∙
     ( ( tr-concat
         { B =
@@ -1097,15 +1108,15 @@ We introduce the slice of a dependent type theory.
               ( section-system.type
                 ( section-system.slice g (section-system.type f X)))
               ( p))
-             ( section-system.element
-               ( section-system.slice g (section-system.type f X))
-               ( u)))
-           ( section-system.element
-             ( section-system.slice g (section-system.type f X))
-             ( tr
-               ( system.element (system.slice B (section-system.type f X)))
-               ( p)
-               ( u)))
+            ( section-system.element
+              ( section-system.slice g (section-system.type f X))
+              ( u)))
+          ( section-system.element
+            ( section-system.slice g (section-system.type f X))
+            ( tr
+              ( system.element (system.slice B (section-system.type f X)))
+              ( p)
+              ( u)))
     γ refl u = refl
   preserves-generic-element.slice
     ( preserves-generic-element-comp-hom-system {f = f} δg δf) X =

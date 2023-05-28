@@ -49,5 +49,3 @@ equiv-universal-property-product-tuple-types A i =
   {!!}
   -}
 ```
-
-## Properties

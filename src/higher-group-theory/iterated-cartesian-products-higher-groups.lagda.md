@@ -112,41 +112,45 @@ module _
 
   assoc-mul-iterated-product-∞-Group :
     (x y z : type-iterated-product-∞-Group) →
-    Id (mul-iterated-product-∞-Group
-          ( mul-iterated-product-∞-Group x y)
-          ( z))
-       (mul-iterated-product-∞-Group
-          ( x)
-          ( mul-iterated-product-∞-Group y z))
+    Id
+      ( mul-iterated-product-∞-Group
+        ( mul-iterated-product-∞-Group x y)
+        ( z))
+      ( mul-iterated-product-∞-Group
+        ( x)
+        ( mul-iterated-product-∞-Group y z))
   assoc-mul-iterated-product-∞-Group =
     associative-mul-Ω
       classifying-pointed-type-iterated-product-∞-Group
 
   left-unit-law-mul-iterated-product-∞-Group :
     (x : type-iterated-product-∞-Group) →
-    Id (mul-iterated-product-∞-Group
-          unit-iterated-product-∞-Group
-          x)
-       x
+    Id
+      ( mul-iterated-product-∞-Group
+        ( unit-iterated-product-∞-Group)
+        ( x))
+      ( x)
   left-unit-law-mul-iterated-product-∞-Group =
     left-unit-law-mul-Ω
       classifying-pointed-type-iterated-product-∞-Group
 
   right-unit-law-mul-iterated-product-∞-Group :
     (y : type-iterated-product-∞-Group) →
-    Id (mul-iterated-product-∞-Group
-          y
-          unit-iterated-product-∞-Group)
-       y
+    Id
+      ( mul-iterated-product-∞-Group
+        ( y)
+        ( unit-iterated-product-∞-Group))
+      ( y)
   right-unit-law-mul-iterated-product-∞-Group =
     right-unit-law-mul-Ω
       classifying-pointed-type-iterated-product-∞-Group
 
   coherence-unit-laws-mul-iterated-product-∞-Group :
-    Id ( left-unit-law-mul-iterated-product-∞-Group
-           unit-iterated-product-∞-Group)
-       ( right-unit-law-mul-iterated-product-∞-Group
-           unit-iterated-product-∞-Group)
+    Id
+      ( left-unit-law-mul-iterated-product-∞-Group
+          unit-iterated-product-∞-Group)
+      ( right-unit-law-mul-iterated-product-∞-Group
+          unit-iterated-product-∞-Group)
   coherence-unit-laws-mul-iterated-product-∞-Group = refl
 
   inv-iterated-product-∞-Group :
@@ -156,20 +160,22 @@ module _
 
   left-inverse-law-mul-iterated-product-∞-Group :
     (x : type-iterated-product-∞-Group) →
-    Id (mul-iterated-product-∞-Group
-          ( inv-iterated-product-∞-Group x)
-          ( x))
-       unit-iterated-product-∞-Group
+    Id
+      ( mul-iterated-product-∞-Group
+        ( inv-iterated-product-∞-Group x)
+        ( x))
+      ( unit-iterated-product-∞-Group)
   left-inverse-law-mul-iterated-product-∞-Group =
     left-inverse-law-mul-Ω
       classifying-pointed-type-iterated-product-∞-Group
 
   right-inverse-law-mul-iterated-product-∞-Group :
     (x : type-iterated-product-∞-Group) →
-    Id (mul-iterated-product-∞-Group
-          ( x)
-          ( inv-iterated-product-∞-Group x))
-       unit-iterated-product-∞-Group
+    Id
+      ( mul-iterated-product-∞-Group
+        ( x)
+        ( inv-iterated-product-∞-Group x))
+      ( unit-iterated-product-∞-Group)
   right-inverse-law-mul-iterated-product-∞-Group =
     right-inverse-law-mul-Ω
       classifying-pointed-type-iterated-product-∞-Group

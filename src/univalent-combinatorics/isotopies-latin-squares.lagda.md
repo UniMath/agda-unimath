@@ -39,8 +39,9 @@ module _
             Σ ( symbol-Latin-Square L ≃ symbol-Latin-Square K)
               ( λ e-symbol →
                 ( x : row-Latin-Square L) (y : column-Latin-Square L) →
-                 Id ( map-equiv e-symbol (mul-Latin-Square L x y))
-                    ( mul-Latin-Square K
-                      ( map-equiv e-row x)
-                      ( map-equiv e-column y)))))
+                Id
+                  ( map-equiv e-symbol (mul-Latin-Square L x y))
+                  ( mul-Latin-Square K
+                    ( map-equiv e-row x)
+                    ( map-equiv e-column y)))))
 ```

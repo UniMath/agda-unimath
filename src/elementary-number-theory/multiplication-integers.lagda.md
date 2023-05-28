@@ -142,10 +142,10 @@ left-predecessor-law-mul-ℤ (inr (inl star)) l =
 left-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l =
   inv (left-inverse-law-add-ℤ l)
 left-predecessor-law-mul-ℤ (inr (inr (succ-ℕ x))) l =
-   ( ap
-     ( _+ℤ ((in-pos x) *ℤ l))
-     ( inv (left-inverse-law-add-ℤ l))) ∙
-   ( associative-add-ℤ (neg-ℤ l) l ((in-pos x) *ℤ l))
+  ( ap
+    ( _+ℤ ((in-pos x) *ℤ l))
+    ( inv (left-inverse-law-add-ℤ l))) ∙
+  ( associative-add-ℤ (neg-ℤ l) l ((in-pos x) *ℤ l))
 
 right-successor-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (succ-ℤ l) ＝ k +ℤ (k *ℤ l)
@@ -393,10 +393,11 @@ compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inl star)) = refl
 compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inl star)) =
   right-zero-law-mul-ℤ (inr (inr (succ-ℕ x)))
 compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inr y)) =
-  ap ( inr ∘ inr)
-     ( inv
-       ( ( ap (_+ℕ y) (left-zero-law-mul-ℕ (succ-ℕ y))) ∙
-         ( left-unit-law-add-ℕ y)))
+  ap
+    ( inr ∘ inr)
+    ( inv
+      ( ( ap (_+ℕ y) (left-zero-law-mul-ℕ (succ-ℕ y))) ∙
+        ( left-unit-law-add-ℕ y)))
 compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
   ( ap ((inr (inr y)) +ℤ_) (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) ∙
   ( ( add-int-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y))) ∙

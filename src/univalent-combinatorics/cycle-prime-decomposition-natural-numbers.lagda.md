@@ -128,25 +128,25 @@ equiv-product-cycle-prime-decomposition-ℕ n m H I =
               ( list-fundamental-theorem-arithmetic-ℕ n H)
               ( list-fundamental-theorem-arithmetic-ℕ m I))))) ∘e
       ( ( inv-equiv
-           ( equiv-permutation-iterated-product-lists
-             ( map-list
-               ( Cyclic-Type lzero)
-               ( concat-list
-                 ( list-fundamental-theorem-arithmetic-ℕ n H)
-                 ( list-fundamental-theorem-arithmetic-ℕ m I)))
-             ( tr
-               ( Permutation)
-               ( inv
-                 ( length-map-list
-                   ( Cyclic-Type lzero)
-                   ( concat-list
-                     ( list-fundamental-theorem-arithmetic-ℕ n H)
-                     ( list-fundamental-theorem-arithmetic-ℕ m I))))
-               ( permutation-insertion-sort-list
-                 ( ℕ-Decidable-Total-Order)
-                 ( concat-list
-                   ( list-fundamental-theorem-arithmetic-ℕ n H)
-                   ( list-fundamental-theorem-arithmetic-ℕ m I)))))) ∘e
+          ( equiv-permutation-iterated-product-lists
+            ( map-list
+              ( Cyclic-Type lzero)
+              ( concat-list
+                ( list-fundamental-theorem-arithmetic-ℕ n H)
+                ( list-fundamental-theorem-arithmetic-ℕ m I)))
+            ( tr
+              ( Permutation)
+              ( inv
+                ( length-map-list
+                  ( Cyclic-Type lzero)
+                  ( concat-list
+                    ( list-fundamental-theorem-arithmetic-ℕ n H)
+                    ( list-fundamental-theorem-arithmetic-ℕ m I))))
+              ( permutation-insertion-sort-list
+                ( ℕ-Decidable-Total-Order)
+                ( concat-list
+                  ( list-fundamental-theorem-arithmetic-ℕ n H)
+                  ( list-fundamental-theorem-arithmetic-ℕ m I)))))) ∘e
         ( ( equiv-eq
             ( ap
               ( iterated-product-lists)

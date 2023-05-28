@@ -80,7 +80,7 @@ module _
     sec yoneda-evid-Precategory
   pr1 sec-yoneda-evid-Precategory = yoneda-extension-Precategory
   pr2 sec-yoneda-evid-Precategory =
-    htpy-eq (preserves-id-functor-Precategory C (Set-Precategory _) F c)
+    htpy-eq (preserves-id-functor-Precategory C (Set-Precategory l1) F c)
 
   retr-yoneda-evid-Precategory :
     retr yoneda-evid-Precategory

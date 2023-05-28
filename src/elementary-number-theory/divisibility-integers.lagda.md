@@ -176,7 +176,7 @@ is-zero-div-zero-ℤ x (pair d p) = inv p ∙ right-zero-law-mul-ℤ d
 
 ```agda
 eq-quotient-div-is-one-ℤ :
- (k x : ℤ) → is-one-ℤ k → (H : div-ℤ k x) → quotient-div-ℤ k x H ＝ x
+  (k x : ℤ) → is-one-ℤ k → (H : div-ℤ k x) → quotient-div-ℤ k x H ＝ x
 eq-quotient-div-is-one-ℤ .one-ℤ x refl H =
   ap
     ( quotient-div-ℤ one-ℤ x)
@@ -266,7 +266,7 @@ pr2 (reflects-div-mul-ℤ k x y H (pair q p)) =
           ( p))))
 ```
 
-### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`.
+### If a nonzero number `d` divides `y`, then `dx` divides `y` if and only if `x` divides the quotient `y/d`
 
 ```agda
 div-quotient-div-div-ℤ :
@@ -282,9 +282,10 @@ div-div-quotient-div-ℤ :
   (x y d : ℤ) (H : div-ℤ d y) →
   div-ℤ x (quotient-div-ℤ d y H) → div-ℤ (d *ℤ x) y
 div-div-quotient-div-ℤ x y d H K =
-  tr ( div-ℤ (d *ℤ x))
-     ( eq-quotient-div-ℤ' d y H)
-     ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
+  tr
+    ( div-ℤ (d *ℤ x))
+    ( eq-quotient-div-ℤ' d y H)
+    ( preserves-div-mul-ℤ d x (quotient-div-ℤ d y H) K)
 ```
 
 ### Comparison of divisibility on `ℕ` and on `ℤ`
@@ -317,7 +318,7 @@ pr2 (div-div-int-ℕ {succ-ℕ x} {y} (pair d p)) =
         ( p)))
 ```
 
-### An integer is a unit if and only if it is `1` or `-1`.
+### An integer is a unit if and only if it is `1` or `-1`
 
 ```agda
 is-one-or-neg-one-ℤ : ℤ → UU lzero
@@ -668,6 +669,8 @@ eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inl z =
     ＝ b
       by neg
 eq-sim-unit-is-nonnegative-ℤ {a} {b} H H' K | inr neg | inr nz =
-  ex-falso ( nz ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
-   a H (tr is-nonnegative-ℤ (inv neg) H')))
+  ex-falso
+    ( nz
+      ( is-zero-is-nonnegative-neg-is-nonnegative-ℤ
+          a H (tr is-nonnegative-ℤ (inv neg) H')))
 ```

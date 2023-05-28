@@ -115,10 +115,10 @@ module _
   is-finite-relation-Decidable-Relation-𝔽 :
     (x : type-𝔽 A) → (y : type-𝔽 A) → is-finite (rel-Decidable-Relation R x y)
   is-finite-relation-Decidable-Relation-𝔽 x y =
-     unit-trunc-Prop
-       ( count-Decidable-Prop
-         ( relation-Decidable-Relation R x y)
-         ( is-decidable-Decidable-Relation R x y))
+    unit-trunc-Prop
+      ( count-Decidable-Prop
+        ( relation-Decidable-Relation R x y)
+        ( is-decidable-Decidable-Relation R x y))
 
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 :
     is-finite (is-reflexive-Rel-Prop (relation-Decidable-Relation R))
@@ -133,12 +133,12 @@ module _
     is-finite-Π'
       ( is-finite-type-𝔽 A)
       ( λ x →
-         is-finite-Π'
-           ( is-finite-type-𝔽 A)
-           ( λ y →
-             is-finite-function-type
-               ( is-finite-relation-Decidable-Relation-𝔽 x y)
-               ( is-finite-relation-Decidable-Relation-𝔽 y x)))
+        is-finite-Π'
+          ( is-finite-type-𝔽 A)
+          ( λ y →
+            is-finite-function-type
+              ( is-finite-relation-Decidable-Relation-𝔽 x y)
+              ( is-finite-relation-Decidable-Relation-𝔽 y x)))
 
   is-finite-is-transitive-Dec-Rel-Prop-𝔽 :
     is-finite (is-transitive-Rel-Prop (relation-Decidable-Relation R))
@@ -155,8 +155,8 @@ module _
                 is-finite-function-type
                   ( is-finite-relation-Decidable-Relation-𝔽 x y)
                   ( is-finite-function-type
-                     ( is-finite-relation-Decidable-Relation-𝔽 y z)
-                     ( is-finite-relation-Decidable-Relation-𝔽 x z)))))
+                    ( is-finite-relation-Decidable-Relation-𝔽 y z)
+                    ( is-finite-relation-Decidable-Relation-𝔽 x z)))))
 
   is-finite-is-equivalence-Dec-Rel-Prop-𝔽 :
     is-finite (is-equivalence-relation (relation-Decidable-Relation R))
@@ -212,17 +212,17 @@ equiv-Surjection-𝔽-Decidable-Equivalence-Relation-𝔽 {l1} A =
                     ( ( equiv-add-redundant-prop
                         ( is-prop-type-trunc-Prop)
                         ( λ x →
-                           apply-universal-property-trunc-Prop
-                             ( is-finite-type-𝔽 A)
-                             ( trunc-Prop ( Σ ℕ (λ n → Fin n ↠ X)))
-                             ( λ count-A →
-                               unit-trunc-Prop
-                                 ( number-of-elements-count count-A ,
-                                   ( ( map-surjection (pr1 x) ∘
-                                       map-equiv-count count-A) ,
-                                     is-surjective-precomp-equiv
-                                       ( is-surjective-map-surjection (pr1 x))
-                                       ( equiv-count count-A)))))))))))) ∘e
+                          apply-universal-property-trunc-Prop
+                            ( is-finite-type-𝔽 A)
+                            ( trunc-Prop ( Σ ℕ (λ n → Fin n ↠ X)))
+                            ( λ count-A →
+                              unit-trunc-Prop
+                                ( number-of-elements-count count-A ,
+                                  ( ( map-surjection (pr1 x) ∘
+                                      map-equiv-count count-A) ,
+                                    is-surjective-precomp-equiv
+                                      ( is-surjective-map-surjection (pr1 x))
+                                      ( equiv-count count-A)))))))))))) ∘e
         ( equiv-Surjection-Into-Set-Decidable-Equivalence-Relation
           ( type-𝔽 A))))))
 ```
@@ -247,7 +247,9 @@ is-finite-Decidable-Equivalence-Relation-𝔽 :
 is-finite-Decidable-Equivalence-Relation-𝔽 A =
   is-finite-Σ
     ( is-finite-Decidable-Relation-𝔽 A)
-    ( λ R → is-finite-is-equivalence-Dec-Rel-Prop-𝔽 A R)
+    ( is-finite-is-equivalence-Dec-Rel-Prop-𝔽 A)
 ```
 
 ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind
+
+This remains to be characterized.

@@ -37,18 +37,18 @@ open import foundation-core.universe-levels
 Let `X` be a type, we have the following equivalence :
 
 ```text
- Σ ( (U , V , e) : Π-Decomposition X)
-   ( binary-product-Decomposition U) ≃
- Σ ( (A , B , e) : binary-product-Decomposition X)
-   ( Π-Decomposition A ×
-     Π-Decomposition B )
+  Σ ( (U , V , e) : Π-Decomposition X)
+    ( binary-product-Decomposition U) ≃
+  Σ ( (A , B , e) : binary-product-Decomposition X)
+    ( Π-Decomposition A ×
+      Π-Decomposition B )
 ```
 
 We also show a computational rule to simplify the use of this equivalence.
 
 ## Propositions
 
-### Product decompositions of the indexing type of a Π-decomposition are equivalent to Π-decomposition of the left and right summand of a product decomposition.
+### Product decompositions of the indexing type of a Π-decomposition are equivalent to Π-decomposition of the left and right summand of a product decomposition
 
 ```agda
 module _
@@ -62,10 +62,10 @@ module _
           ( indexing-type-Π-Decomposition d)) ≃
         Σ ( UU l)
           ( λ A →
-             Σ ( UU l)
-               ( λ B →
-                 Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
-                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Π (pr1 U) Y))))
+            Σ ( UU l)
+              ( λ B →
+                Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
+                  ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Π (pr1 U) Y))))
     pr1 reassociate ((U , V , f) , A , B , e) = (A , B , (U , e) , V , f)
     pr2 reassociate =
       is-equiv-has-inverse
@@ -103,7 +103,7 @@ module _
     Σ ( Π-Decomposition l l X)
       ( λ d →
         binary-coproduct-Decomposition l l
-         ( indexing-type-Π-Decomposition d)) ≃
+          ( indexing-type-Π-Decomposition d)) ≃
     Σ ( binary-product-Decomposition l l X)
       ( λ d →
         Π-Decomposition l l

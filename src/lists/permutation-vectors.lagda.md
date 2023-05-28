@@ -57,7 +57,7 @@ module _
     listed-vec-functional-vec n (functional-vec-vec n v ∘ (map-equiv s))
 ```
 
-### The predicate that a function from `vec` to `vec` is just permuting vectors.
+### The predicate that a function from `vec` to `vec` is just permuting vectors
 
 ```agda
   is-permutation-vec : (n : ℕ) → (vec A n → vec A n) → UU l
@@ -249,17 +249,17 @@ module _
     fold-vec b μ v ＝
     fold-vec b μ (permute-vec (succ-ℕ n) v (adjacent-transposition-Fin n k))
   invariant-adjacent-transposition-fold-vec {succ-ℕ n} (x ∷ v) (inl k) =
-     ap
-       ( μ x)
-       ( invariant-adjacent-transposition-fold-vec v k) ∙
-     inv
-       ( ap
-         ( fold-vec b μ)
-         ( compute-equiv-coprod-permutation-id-equiv-permute-vec
-           ( succ-ℕ n)
-           ( v)
-           ( x)
-           ( adjacent-transposition-Fin n k)))
+    ap
+      ( μ x)
+      ( invariant-adjacent-transposition-fold-vec v k) ∙
+    inv
+      ( ap
+        ( fold-vec b μ)
+        ( compute-equiv-coprod-permutation-id-equiv-permute-vec
+          ( succ-ℕ n)
+          ( v)
+          ( x)
+          ( adjacent-transposition-Fin n k)))
   invariant-adjacent-transposition-fold-vec {succ-ℕ n} (x ∷ v) (inr _) =
     invariant-swap-two-last-elements-transposition-fold-vec (x ∷ v)
 
@@ -303,10 +303,11 @@ module _
       ( ap
         ( λ t → fold-vec b μ (permute-vec (succ-ℕ n) v t))
         ( eq-htpy-equiv
-          {e = permutation-list-adjacent-transpositions
-                 ( n)
-                 ( list-adjacent-transpositions-transposition-Fin n i j)}
-          {e' = transposition-Fin (succ-ℕ n) i j neq}
+          { e =
+            permutation-list-adjacent-transpositions
+              ( n)
+              ( list-adjacent-transpositions-transposition-Fin n i j)}
+          { e' = transposition-Fin (succ-ℕ n) i j neq}
           ( htpy-permutation-list-adjacent-transpositions-transposition-Fin
             ( n)
             ( i)
@@ -316,8 +317,7 @@ module _
   invariant-list-transpositions-fold-vec :
     {n : ℕ}
     (v : vec A n)
-    (l : list (Σ (Fin n × Fin n)
-                 ( λ (i , j) → ¬ (i ＝ j)))) →
+    (l : list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j)))) →
     fold-vec b μ v ＝
     fold-vec
       ( b)

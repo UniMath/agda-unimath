@@ -54,9 +54,10 @@ is-small-universal-multiset-𝕍 l {l1} (pair (pair U e) H) =
         ( λ u → type-is-small (H (map-inv-equiv e u)))
         ( e)
         ( λ X →
-          tr ( λ t → X ≃ pr1 (H t))
-             ( inv (isretr-map-inv-equiv e X))
-             ( pr2 (H X)))))
+          tr
+            ( λ t → X ≃ pr1 (H t))
+            ( inv (isretr-map-inv-equiv e X))
+            ( pr2 (H X)))))
     ( f)
     where
     f :

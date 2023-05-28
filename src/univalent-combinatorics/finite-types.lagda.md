@@ -529,7 +529,7 @@ is-inhabited-type-UU-Fin-succ-ℕ :
   {l1 : Level} (n : ℕ) (A : UU-Fin l1 (succ-ℕ n)) →
   is-inhabited (type-UU-Fin (succ-ℕ n) A)
 is-inhabited-type-UU-Fin-succ-ℕ n A =
-   apply-universal-property-trunc-Prop
+  apply-universal-property-trunc-Prop
     ( pr2 A)
     ( is-inhabited-Prop (type-UU-Fin (succ-ℕ n) A))
     ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin n)))
@@ -694,7 +694,8 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →
-        tr ( λ m → has-cardinality m X)
-           ( p)
-           ( pr2 (has-finite-cardinality-is-finite H)))
+        tr
+          ( λ m → has-cardinality m X)
+          ( p)
+          ( pr2 (has-finite-cardinality-is-finite H)))
 ```

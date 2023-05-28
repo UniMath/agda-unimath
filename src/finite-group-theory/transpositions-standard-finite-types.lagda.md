@@ -151,7 +151,7 @@ We show that this definiton is an instance of the previous one.
     ( inl (inl x))
     ( inr p)
     ( inr q) =
-     inv
+    inv
       ( is-fixed-point-transposition-Fin
         ( succ-ℕ (succ-ℕ n))
         ( neg-two-Fin (succ-ℕ n))
@@ -246,11 +246,11 @@ cases-htpy-map-coprod-map-transposition-id-Fin
       ( inl-Fin n)
       ( right-computation-transposition-Fin n k l neq)) ∙
     ( inv
-       ( right-computation-transposition-Fin
-         ( succ-ℕ n)
-         ( inl-Fin n k)
-         ( inl-Fin n l)
-         ( neq ∘ is-injective-inl-Fin n))))
+      ( right-computation-transposition-Fin
+        ( succ-ℕ n)
+        ( inl-Fin n k)
+        ( inl-Fin n l)
+        ( neq ∘ is-injective-inl-Fin n))))
 cases-htpy-map-coprod-map-transposition-id-Fin
   ( n)
   ( k)
@@ -439,10 +439,10 @@ htpy-conjugate-transposition-Fin :
     ( transposition-Fin n x z neqxz)
 htpy-conjugate-transposition-Fin n x y z neqxy neqyz neqxz =
   htpy-conjugate-transposition
-   ( has-decidable-equality-Fin n)
-   ( neqxy)
-   ( neqyz)
-   ( neqxz)
+    ( has-decidable-equality-Fin n)
+    ( neqxy)
+    ( neqyz)
+    ( neqxz)
 
 private
   htpy-whisk-conjugate :
@@ -594,14 +594,14 @@ htpy-permutation-inl-list-adjacent-transpositions :
 htpy-permutation-inl-list-adjacent-transpositions n nil =
   inv-htpy (id-map-coprod (Fin (succ-ℕ n)) unit)
 htpy-permutation-inl-list-adjacent-transpositions n (cons x l) =
-   ( ( map-coprod (map-adjacent-transposition-Fin n x) id ·l
-       htpy-permutation-inl-list-adjacent-transpositions n l) ∙h
-     ( ( inv-htpy
-         ( preserves-comp-map-coprod
-           ( map-permutation-list-adjacent-transpositions n l)
-           ( map-adjacent-transposition-Fin n x)
-           ( id)
-           ( id)))))
+  ( map-coprod (map-adjacent-transposition-Fin n x) id ·l
+    htpy-permutation-inl-list-adjacent-transpositions n l) ∙h
+  ( inv-htpy
+      ( preserves-comp-map-coprod
+        ( map-permutation-list-adjacent-transpositions n l)
+        ( map-adjacent-transposition-Fin n x)
+        ( id)
+        ( id)))
 
 htpy-permutation-snoc-list-adjacent-transpositions :
   (n : ℕ) (l : list (Fin n)) (x : Fin n) →

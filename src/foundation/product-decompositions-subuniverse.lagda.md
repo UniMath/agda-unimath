@@ -92,11 +92,11 @@ module _
 
   right-iterated-binary-product-Decomposition-Subuniverse : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-product-Decomposition-Subuniverse =
-    Σ ( binary-product-Decomposition-Subuniverse P X)
-       ( λ d →
-         binary-product-Decomposition-Subuniverse
-           ( P)
-           ( right-summand-binary-product-Decomposition-Subuniverse P X d))
+    Σ ( binary-product-Decomposition-Subuniverse P X)
+      ( λ d →
+        binary-product-Decomposition-Subuniverse
+          ( P)
+          ( right-summand-binary-product-Decomposition-Subuniverse P X d))
 ```
 
 ### Ternary product Decomposition-subuniverses
@@ -109,11 +109,11 @@ module _
   ternary-product-Decomposition-Subuniverse : UU (lsuc l1 ⊔ l2)
   ternary-product-Decomposition-Subuniverse =
     Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
-       ( λ x →
-         inclusion-subuniverse P X ≃
-         ( inclusion-subuniverse P (pr1 x) ×
-           ( inclusion-subuniverse P (pr1 (pr2 x)) ×
-             inclusion-subuniverse P (pr2 (pr2 x)))))
+      ( λ x →
+        inclusion-subuniverse P X ≃
+        ( inclusion-subuniverse P (pr1 x) ×
+          ( inclusion-subuniverse P (pr1 (pr2 x)) ×
+            inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
     (d : ternary-product-Decomposition-Subuniverse)
@@ -368,22 +368,22 @@ module _
                 ( right-unit-law-prod-is-contr is-contr-raise-unit)
                 ( inclusion-subuniverse P X)) ∘e
               ( ( left-unit-law-Σ-is-contr
-                     ( ( ( ( raise-unit l1) ,
-                           C1) ,
-                         is-contr-raise-unit) ,
-                       ( λ x →
-                         eq-pair-Σ
-                           ( eq-pair-Σ
-                             ( eq-equiv
-                               ( raise-unit l1)
-                               ( inclusion-subuniverse P (pr1 x))
-                               ( equiv-is-contr
-                                 is-contr-raise-unit
-                                 ( ( pr2 x))))
-                             ( eq-is-prop (is-prop-type-Prop (P _))))
-                           ( eq-is-prop is-property-is-contr)))
-                     ( ( raise-unit l1 , C1) ,
-                       is-contr-raise-unit)) ∘e
+                  ( ( ( ( raise-unit l1) ,
+                        C1) ,
+                      is-contr-raise-unit) ,
+                    ( λ x →
+                      eq-pair-Σ
+                        ( eq-pair-Σ
+                          ( eq-equiv
+                            ( raise-unit l1)
+                            ( inclusion-subuniverse P (pr1 x))
+                            ( equiv-is-contr
+                              is-contr-raise-unit
+                              ( ( pr2 x))))
+                          ( eq-is-prop (is-prop-type-Prop (P (pr1 (pr1 x))))))
+                        ( eq-is-prop is-property-is-contr)))
+                  ( ( raise-unit l1 , C1) ,
+                    is-contr-raise-unit)) ∘e
                 ( ( inv-associative-Σ _ _ _) ∘e
                   ( ( equiv-tot (λ _ → commutative-prod)) ∘e
                     ( ( associative-Σ _ _ _)))))))) ∘e

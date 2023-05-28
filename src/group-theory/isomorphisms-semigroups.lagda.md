@@ -66,19 +66,21 @@ module _
 
   issec-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
-    Id ( comp-hom-Semigroup H G H
-         ( hom-iso-Semigroup f)
-         ( hom-inv-iso-Semigroup f))
-       ( id-hom-Semigroup H)
+    Id
+      ( comp-hom-Semigroup H G H
+        ( hom-iso-Semigroup f)
+        ( hom-inv-iso-Semigroup f))
+      ( id-hom-Semigroup H)
   issec-hom-inv-iso-Semigroup =
     is-sec-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 
   isretr-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
-    Id ( comp-hom-Semigroup G H G
-         ( hom-inv-iso-Semigroup f)
-         ( hom-iso-Semigroup f))
-       ( id-hom-Semigroup G)
+    Id
+      ( comp-hom-Semigroup G H G
+        ( hom-inv-iso-Semigroup f)
+        ( hom-iso-Semigroup f))
+      ( id-hom-Semigroup G)
   isretr-hom-inv-iso-Semigroup =
     is-retr-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 ```
@@ -119,8 +121,9 @@ module _
             ( map-inv-is-equiv is-equiv-f x)
             ( map-inv-is-equiv is-equiv-f y)))
         ( ( ( issec-map-inv-is-equiv is-equiv-f (mul-Semigroup H x y)) ∙
-            ( ( ap ( λ t → mul-Semigroup H t y)
-                   ( inv (issec-map-inv-is-equiv is-equiv-f x))) ∙
+            ( ( ap
+                ( λ t → mul-Semigroup H t y)
+                ( inv (issec-map-inv-is-equiv is-equiv-f x))) ∙
               ( ap
                 ( mul-Semigroup H (f (map-inv-is-equiv is-equiv-f x)))
                 ( inv (issec-map-inv-is-equiv is-equiv-f y))))) ∙

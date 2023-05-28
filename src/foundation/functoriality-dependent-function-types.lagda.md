@@ -64,9 +64,10 @@ module _
   compute-map-equiv-Π h a' =
     ( ap
       ( λ t →
-        tr B t ( map-equiv
-                 ( f (map-inv-equiv e (map-equiv e a')))
-                 ( h (map-inv-equiv e (map-equiv e a')))))
+        tr B t
+          ( map-equiv
+            ( f (map-inv-equiv e (map-equiv e a')))
+            ( h (map-inv-equiv e (map-equiv e a')))))
       ( coherence-map-inv-equiv e a')) ∙
     ( ( tr-ap
         ( map-equiv e)

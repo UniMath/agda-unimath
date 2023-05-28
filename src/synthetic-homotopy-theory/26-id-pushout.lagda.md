@@ -214,14 +214,16 @@ coherence-naturality-fam-maps :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
   (P : B → UU l3) (Q : B → UU l4) →
   { f f' : A → B} (H : f ~ f') (h : (b : B) → P b → Q b) (a : A) →
-  Id ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
-     ( naturality-fam-maps h (H a))
+  Id
+    ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
+    ( naturality-fam-maps h (H a))
 coherence-naturality-fam-maps {A = A} {B} P Q {f} {f'} H =
   ind-htpy f
     ( λ f' H →
       ( h : (b : B) → P b → Q b) (a : A) →
-      Id ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
-         ( naturality-fam-maps h (H a)))
+      Id
+        ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
+        ( naturality-fam-maps h (H a)))
     ( λ h a → refl)
     ( H)
 

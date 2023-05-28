@@ -6,8 +6,11 @@ import sys
 import utils
 import re
 
-open_tag_pattern = re.compile(r'^```\S+\n', flags=re.MULTILINE)
+open_tag_pattern = re.compile(r'^```\S+.*\n', flags=re.MULTILINE)
 close_tag_pattern = re.compile(r'\n```$', flags=re.MULTILINE)
+
+empty_block_pattern = re.compile(
+    r'^```\S+.*\n(\s*\n)*\n```\s*$(?!\n(\s*\n)*</details>)', flags=re.MULTILINE)
 
 
 def has_well_formed_blocks(mdcode, pos=0):
@@ -50,13 +53,16 @@ def has_well_formed_blocks(mdcode, pos=0):
 top_level_header_after_first_line = re.compile(r'\n#\s', flags=re.MULTILINE)
 
 empty_section_nonincreasing_level = re.compile(
-    r'^((#{2}\s([^\n]*)\n(\s*\n)*#{1,2})|(#{3}\s([^\n]*)\n(\s*\n)*#{1,3})|(#{4}\s([^\n]*)\n(\s*\n)*#{1,4})|(#{5}\s([^\n]*)\n(\s*\n)*#{1,5}))(?!#)', flags=re.MULTILINE)
+    r'^((#{2}\s([^\n]*)\n(\s*\n)*#{1,2})|(#{3}\s([^\n]*)\n(\s*\n)*#{1,3})|(#{4}\s([^\n]*)\n(\s*\n)*#{1,4})|(#{5}\s([^\n]*)\n(\s*\n)*#{1,5})|(#{6}\s([^\n]*)\n(\s*\n)*#{1,6})|(#{7}\s([^\n]*)\n(\s*\n)*#{1,7}))(?!#)', flags=re.MULTILINE)
+
+empty_section_eof = re.compile(
+    r'^(.*\n)*#+\s([^\n]*)\n(\s*\n)*$', flags=re.MULTILINE)
 
 if __name__ == '__main__':
 
     STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK = 1
     STATUS_TOP_LEVEL_HEADER_AFTER_FIRST_LINE = 2
-    STATUS_EMPTY_SECTION_NONINCREASING_LEVEL = 4
+    STATUS_EMPTY_SECTION = 4
 
     status = 0
 
@@ -75,13 +81,25 @@ if __name__ == '__main__':
         if top_level_header_after_first_line.search(output):
             print(
                 f"Error! File '{fpath}' has a top level header after the first line. Please increase it.")
+            status |= STATUS_TOP_LEVEL_HEADER_AFTER_FIRST_LINE
 
         # TODO: print line numbers
         if empty_section_nonincreasing_level.search(output):
             print(
-                f"Error! File '{fpath}' has an empty section. This may be caused by having a header with the wrong header level. If this was not by mistake, consider including a sentence explaining why the section is empty. For instance, depending on the context, you may write 'This remains to be shown.'")
+                f"Error! File '{fpath}' has an empty section. This may be caused by having a header with the wrong header level. If this was not by mistake, consider removing the section or including a sentence explaining why it is empty. For instance, depending on context, you may write 'This remains to be shown.'")
 
-            status |= STATUS_EMPTY_SECTION_NONINCREASING_LEVEL
+            status |= STATUS_EMPTY_SECTION
+
+        if empty_section_eof.fullmatch(output):
+            print(
+                f"Error! File '{fpath}' has an empty section at the end of the file. Please consider removing the section or adding  a sentence explaining why it is empty. For instance, depending on context, you may write 'This remains to be shown.'")
+
+            status |= STATUS_EMPTY_SECTION
+
+        output = empty_block_pattern.sub('', output)
+
+        output = re.sub(
+            r'(^|\n)(#+\s.*)[\.,:;!?¡¿]\s*($|\n)', r'\1\2\3', output)
 
         if output != inputText:
             with open(fpath, 'w') as f:

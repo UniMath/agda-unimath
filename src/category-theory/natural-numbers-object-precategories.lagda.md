@@ -42,9 +42,11 @@ module _
     (x : obj-Precategory C)
     (q : type-hom-Precategory C t x)
     (f : type-hom-Precategory C x x) →
-    ∃! (type-hom-Precategory C n x) λ u →
-       (comp-hom-Precategory C u z ＝ q) ×
-       (comp-hom-Precategory C u s ＝ comp-hom-Precategory C f u)
+    ∃!
+      ( type-hom-Precategory C n x)
+      ( λ u →
+        ( comp-hom-Precategory C u z ＝ q) ×
+        ( comp-hom-Precategory C u s ＝ comp-hom-Precategory C f u))
 
   natural-numbers-object-Precategory : UU (l1 ⊔ l2)
   natural-numbers-object-Precategory =

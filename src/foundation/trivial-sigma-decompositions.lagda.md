@@ -124,13 +124,12 @@ is-contr-type-trivial-Σ-Decomposition :
 pr1 ( is-contr-type-trivial-Σ-Decomposition {l1} {l2} {A} p) =
   ( trivial-inhabited-Σ-Decomposition l2 A p ,
     is-trivial-trivial-inhabited-Σ-Decomposition p)
-pr2 ( is-contr-type-trivial-Σ-Decomposition {l1} {l2} {A} p) =
-   ( λ x →
-     eq-type-subtype
-       ( is-trivial-Prop-Σ-Decomposition)
-       ( inv
-         ( eq-equiv-Σ-Decomposition
-           ( pr1 x)
-           ( trivial-inhabited-Σ-Decomposition l2 A p)
-           ( equiv-trivial-is-trivial-Σ-Decomposition (pr1 x) (pr2 x)))))
+pr2 ( is-contr-type-trivial-Σ-Decomposition {l1} {l2} {A} p) x =
+  eq-type-subtype
+    ( is-trivial-Prop-Σ-Decomposition)
+    ( inv
+      ( eq-equiv-Σ-Decomposition
+        ( pr1 x)
+        ( trivial-inhabited-Σ-Decomposition l2 A p)
+        ( equiv-trivial-is-trivial-Σ-Decomposition (pr1 x) (pr2 x))))
 ```
