@@ -217,7 +217,7 @@ module _
       ( mul-iterated-product-Concrete-Group
         ( x)
         ( inv-iterated-product-Concrete-Group x))
-      ( unit-iterated-product-Concrete-Group)z
+      ( unit-iterated-product-Concrete-Group)
   right-inverse-law-mul-iterated-product-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 

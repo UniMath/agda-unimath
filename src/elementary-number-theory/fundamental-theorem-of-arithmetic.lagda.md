@@ -140,8 +140,7 @@ module _
         ( is-prop-is-prime-list-ℕ l)
         ( is-prop-is-decomposition-list-ℕ))
 
-  is-prime-decomposition-list-ℕ-Prop :
-    Prop lzero
+  is-prime-decomposition-list-ℕ-Prop : Prop lzero
   pr1 is-prime-decomposition-list-ℕ-Prop = is-prime-decomposition-list-ℕ
   pr2 is-prime-decomposition-list-ℕ-Prop = is-prop-is-prime-decomposition-list-ℕ
 ```
