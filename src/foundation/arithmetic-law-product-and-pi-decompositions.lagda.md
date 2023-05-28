@@ -62,10 +62,10 @@ module _
           ( indexing-type-Π-Decomposition d)) ≃
         Σ ( UU l)
           ( λ A →
-             Σ ( UU l)
-               ( λ B →
-                 Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
-                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Π (pr1 U) Y))))
+            Σ ( UU l)
+              ( λ B →
+                Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
+                  ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Π (pr1 U) Y))))
     pr1 reassociate ((U , V , f) , A , B , e) = (A , B , (U , e) , V , f)
     pr2 reassociate =
       is-equiv-has-inverse
@@ -103,7 +103,7 @@ module _
     Σ ( Π-Decomposition l l X)
       ( λ d →
         binary-coproduct-Decomposition l l
-         ( indexing-type-Π-Decomposition d)) ≃
+          ( indexing-type-Π-Decomposition d)) ≃
     Σ ( binary-product-Decomposition l l X)
       ( λ d →
         Π-Decomposition l l

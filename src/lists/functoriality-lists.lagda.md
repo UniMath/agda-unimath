@@ -118,7 +118,7 @@ module _
                 ( vec B)
                 ( p)
                 ( vec-list (map-list f (list-vec n v))) ＝
-               map-vec f v)
+              map-vec f v)
             ( eq-is-prop
               ( is-set-ℕ
                 ( length-list (map-list f (list-vec n v)))

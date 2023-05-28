@@ -491,7 +491,7 @@ private
               ( element-two-elements-transposition-Fin P ,
                 other-element-two-elements-transposition-Fin P) ,
               neq-elements-two-elements-transposition-Fin P)
-           ( l)))) ∙h
+            ( l)))) ∙h
     ( map-transposition P ·l
       htpy-permutation-list n l)
 

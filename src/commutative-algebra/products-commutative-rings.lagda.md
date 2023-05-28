@@ -105,8 +105,9 @@ module _
 
   associative-add-prod-Commutative-Ring :
     (x y z : type-prod-Commutative-Ring) →
-    Id ( add-prod-Commutative-Ring (add-prod-Commutative-Ring x y) z)
-       ( add-prod-Commutative-Ring x (add-prod-Commutative-Ring y z))
+    Id
+      ( add-prod-Commutative-Ring (add-prod-Commutative-Ring x y) z)
+      ( add-prod-Commutative-Ring x (add-prod-Commutative-Ring y z))
   associative-add-prod-Commutative-Ring =
     associative-add-prod-Ring
       ( ring-Commutative-Ring R1)
@@ -137,8 +138,9 @@ module _
 
   associative-mul-prod-Commutative-Ring :
     (x y z : type-prod-Commutative-Ring) →
-    Id ( mul-prod-Commutative-Ring (mul-prod-Commutative-Ring x y) z)
-       ( mul-prod-Commutative-Ring x (mul-prod-Commutative-Ring y z))
+    Id
+      ( mul-prod-Commutative-Ring (mul-prod-Commutative-Ring x y) z)
+      ( mul-prod-Commutative-Ring x (mul-prod-Commutative-Ring y z))
   associative-mul-prod-Commutative-Ring =
     associative-mul-prod-Ring
       ( ring-Commutative-Ring R1)
@@ -162,10 +164,11 @@ module _
 
   left-distributive-mul-add-prod-Commutative-Ring :
     (x y z : type-prod-Commutative-Ring) →
-    Id ( mul-prod-Commutative-Ring x (add-prod-Commutative-Ring y z))
-       ( add-prod-Commutative-Ring
-         ( mul-prod-Commutative-Ring x y)
-         ( mul-prod-Commutative-Ring x z))
+    Id
+      ( mul-prod-Commutative-Ring x (add-prod-Commutative-Ring y z))
+      ( add-prod-Commutative-Ring
+        ( mul-prod-Commutative-Ring x y)
+        ( mul-prod-Commutative-Ring x z))
   left-distributive-mul-add-prod-Commutative-Ring =
     left-distributive-mul-add-prod-Ring
       ( ring-Commutative-Ring R1)
@@ -173,10 +176,11 @@ module _
 
   right-distributive-mul-add-prod-Commutative-Ring :
     (x y z : type-prod-Commutative-Ring) →
-    Id ( mul-prod-Commutative-Ring (add-prod-Commutative-Ring x y) z)
-       ( add-prod-Commutative-Ring
-         ( mul-prod-Commutative-Ring x z)
-         ( mul-prod-Commutative-Ring y z))
+    Id
+      ( mul-prod-Commutative-Ring (add-prod-Commutative-Ring x y) z)
+      ( add-prod-Commutative-Ring
+        ( mul-prod-Commutative-Ring x z)
+        ( mul-prod-Commutative-Ring y z))
   right-distributive-mul-add-prod-Commutative-Ring =
     right-distributive-mul-add-prod-Ring
       ( ring-Commutative-Ring R1)

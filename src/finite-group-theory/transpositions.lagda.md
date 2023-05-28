@@ -588,10 +588,11 @@ module _
           ( λ y →
             Σ ( ¬ (Id x y))
               ( λ np →
-                Id ( standard-2-Element-Decidable-Subtype
-                     ( has-decidable-equality-Fin n)
-                     ( np))
-                   ( Y))))
+                Id
+                  ( standard-2-Element-Decidable-Subtype
+                    ( has-decidable-equality-Fin n)
+                    ( np))
+                  ( Y))))
   two-elements-transposition-Fin =
     tr
       ( λ p →
@@ -605,7 +606,7 @@ module _
                       ( standard-2-Element-Decidable-Subtype
                         ( p)
                         ( np))
-                     ( Y)))))
+                      ( Y)))))
       ( eq-is-prop (is-prop-has-decidable-equality))
       ( two-elements-transposition (count-Fin n) Y)
 

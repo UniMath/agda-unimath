@@ -532,10 +532,11 @@ module _
 
   preserves-concat-add-list-Field-𝔽 :
     (l1 l2 : list type-Field-𝔽) →
-    Id ( add-list-Field-𝔽 (concat-list l1 l2))
-       ( add-Field-𝔽
-         ( add-list-Field-𝔽 l1)
-         ( add-list-Field-𝔽 l2))
+    Id
+      ( add-list-Field-𝔽 (concat-list l1 l2))
+      ( add-Field-𝔽
+        ( add-list-Field-𝔽 l1)
+        ( add-list-Field-𝔽 l2))
   preserves-concat-add-list-Field-𝔽 =
     preserves-concat-add-list-Ring-𝔽 finite-ring-Field-𝔽
 ```

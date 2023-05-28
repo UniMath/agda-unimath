@@ -144,13 +144,13 @@ module _
     reassociate' :
       Σ ( Π-Decomposition l1 l1 (inclusion-subuniverse P X))
         ( λ d →
-           Σ ( ( u : (indexing-type-Π-Decomposition d)) →
-               is-in-subuniverse P (cotype-Π-Decomposition d u))
-             ( λ p →
-               ( ( u : indexing-type-Π-Decomposition d) →
-                 inclusion-subuniverse
-                   ( subuniverse-global-subuniverse Q l3)
-                   ( S (cotype-Π-Decomposition d u , p u)))))
+          Σ ( ( u : (indexing-type-Π-Decomposition d)) →
+              is-in-subuniverse P (cotype-Π-Decomposition d u))
+            ( λ p →
+              ( ( u : indexing-type-Π-Decomposition d) →
+                inclusion-subuniverse
+                  ( subuniverse-global-subuniverse Q l3)
+                  ( S (cotype-Π-Decomposition d u , p u)))))
         ≃
         dirichlet-exponential-species-types
           ( Σ-extension-species-subuniverse
