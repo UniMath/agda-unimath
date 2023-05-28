@@ -52,7 +52,7 @@ if __name__ == '__main__':
                         if (status == 0):
                             print('Error! Uneven indentation found')
 
-                        print(f'{fpath}:line {i}')
+                        print(f'{fpath}:line {i+1}')
 
                         offender_files[fpath] += 1
                         status |= STATUS_UNEVEN_INDENTATION
