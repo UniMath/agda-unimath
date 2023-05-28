@@ -50,14 +50,14 @@ repos:
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      # - id: indentation-conventions
-      #   name: Agda indentation conventions
-      #   entry: scripts/indentation_conventions.py
-      #   language: python
-      #   always_run: true
-      #   files: ^src\/.+\.lagda\.md$
-      #   types_or: [markdown, text]
-      #   require_serial: true
+      - id: indentation-conventions
+        name: Agda indentation conventions
+        entry: scripts/indentation_conventions.py
+        language: python
+        always_run: true
+        files: ^src\/.+\.lagda\.md$
+        types_or: [markdown, text]
+        require_serial: true
 
       - id: simply-wrappable-long-lines
         name: Fix simply wrappable long lines of Agda code

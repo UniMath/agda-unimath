@@ -237,8 +237,9 @@ module _
 
   associative-mul-Decidable-Subgroup :
     (x y z : type-group-Decidable-Subgroup) →
-    Id (mul-Decidable-Subgroup (mul-Decidable-Subgroup x y) z)
-       (mul-Decidable-Subgroup x (mul-Decidable-Subgroup y z))
+    Id
+      ( mul-Decidable-Subgroup (mul-Decidable-Subgroup x y) z)
+      ( mul-Decidable-Subgroup x (mul-Decidable-Subgroup y z))
   associative-mul-Decidable-Subgroup =
     associative-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
 
@@ -263,15 +264,17 @@ module _
 
   left-inverse-law-mul-Decidable-Subgroup :
     ( x : type-group-Decidable-Subgroup) →
-    Id ( mul-Decidable-Subgroup (inv-Decidable-Subgroup x) x)
-       ( unit-Decidable-Subgroup)
+    Id
+      ( mul-Decidable-Subgroup (inv-Decidable-Subgroup x) x)
+      ( unit-Decidable-Subgroup)
   left-inverse-law-mul-Decidable-Subgroup =
     left-inverse-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   right-inverse-law-mul-Decidable-Subgroup :
     (x : type-group-Decidable-Subgroup) →
-    Id ( mul-Decidable-Subgroup x (inv-Decidable-Subgroup x))
-       ( unit-Decidable-Subgroup)
+    Id
+      ( mul-Decidable-Subgroup x (inv-Decidable-Subgroup x))
+      ( unit-Decidable-Subgroup)
   right-inverse-law-mul-Decidable-Subgroup =
     right-inverse-law-mul-Subgroup G (subgroup-Decidable-Subgroup G H)
 

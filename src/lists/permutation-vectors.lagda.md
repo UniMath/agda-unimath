@@ -57,7 +57,7 @@ module _
     listed-vec-functional-vec n (functional-vec-vec n v ∘ (map-equiv s))
 ```
 
-### The predicate that a function from `vec` to `vec` is just permuting vectors.
+### The predicate that a function from `vec` to `vec` is just permuting vectors
 
 ```agda
   is-permutation-vec : (n : ℕ) → (vec A n → vec A n) → UU l

@@ -168,8 +168,9 @@ eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
 
 square-eq-Eq-list :
   {l1 : Level} {A : UU l1} {x : A} {l l' : list A} (p : Id l l') →
-  Id (Eq-eq-list (cons x l) (cons x l') (ap (cons x) p))
-     (pair refl (Eq-eq-list l l' p))
+  Id
+    ( Eq-eq-list (cons x l) (cons x l') (ap (cons x) p))
+    ( pair refl (Eq-eq-list l l' p))
 square-eq-Eq-list refl = refl
 
 issec-eq-Eq-list :

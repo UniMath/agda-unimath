@@ -83,7 +83,7 @@ module _
     is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 x)
 
   is-inhabited-cotype-Σ-Decomposition-𝔽 :
-   (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
+    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
     is-inhabited (cotype-Σ-Decomposition-𝔽 x)
   is-inhabited-cotype-Σ-Decomposition-𝔽 x =
     is-inhabited-type-Inhabited-𝔽

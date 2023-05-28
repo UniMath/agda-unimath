@@ -43,10 +43,12 @@ F H) × (hom-species-types G H)).
 
 ```agda
 equiv-universal-property-coproduct-species-types :
- {l1 l2 l3 l4 : Level}
- (F : species-types l1 l2) (G : species-types l1 l3) (H : species-types l1 l4) →
- hom-species-types (coproduct-species-types F G) H ≃
- ((hom-species-types F H) × (hom-species-types G H))
+  {l1 l2 l3 l4 : Level}
+  (F : species-types l1 l2)
+  (G : species-types l1 l3)
+  (H : species-types l1 l4) →
+  hom-species-types (coproduct-species-types F G) H ≃
+  ((hom-species-types F H) × (hom-species-types G H))
 equiv-universal-property-coproduct-species-types F G H =
   ( distributive-Π-Σ) ∘e
   ( equiv-map-Π (λ X → equiv-universal-property-coprod (H X)))

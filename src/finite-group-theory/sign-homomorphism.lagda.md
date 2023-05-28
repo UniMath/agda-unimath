@@ -65,8 +65,9 @@ module _
 
   preserves-add-sign-homomorphism-Fin-two :
     (f g : (type-UU-Fin n X) ≃ (type-UU-Fin n X)) →
-    Id ( sign-homomorphism-Fin-two (f ∘e g))
-       ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
+    Id
+      ( sign-homomorphism-Fin-two (f ∘e g))
+      ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
   preserves-add-sign-homomorphism-Fin-two f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-UU-Fin n X)
@@ -156,9 +157,10 @@ module _
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
-      Id ( f ∘e g)
-         ( permutation-list-transpositions
-           ( list-comp-f-g h))
+      Id
+        ( f ∘e g)
+        ( permutation-list-transpositions
+          ( list-comp-f-g h))
     eq-list-comp-f-g h =
       eq-htpy-equiv
         ( λ x →
@@ -209,8 +211,9 @@ module _
   preserves-conjugation-sign-homomorphism-Fin-two :
     (f : (type-UU-Fin n X) ≃ (type-UU-Fin n X)) →
     (g : (type-UU-Fin n X) ≃ (type-UU-Fin n Y)) →
-    Id ( sign-homomorphism-Fin-two n Y (g ∘e (f ∘e inv-equiv g)))
-       ( sign-homomorphism-Fin-two n X f)
+    Id
+      ( sign-homomorphism-Fin-two n Y (g ∘e (f ∘e inv-equiv g)))
+      ( sign-homomorphism-Fin-two n X f)
   preserves-conjugation-sign-homomorphism-Fin-two f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-UU-Fin n X)

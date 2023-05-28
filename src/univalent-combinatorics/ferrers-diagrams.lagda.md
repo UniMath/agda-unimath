@@ -165,9 +165,9 @@ module _
       ( is-contr-total-Eq-subtype
         ( is-contr-total-equiv-fam (dot-ferrers-diagram D))
         ( λ Y →
-           is-prop-prod
-             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
-             ( is-prop-mere-equiv A (Σ (row-ferrers-diagram D) Y)))
+          is-prop-prod
+            ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
+            ( is-prop-mere-equiv A (Σ (row-ferrers-diagram D) Y)))
         ( dot-ferrers-diagram D)
         ( λ x → id-equiv)
         ( pair

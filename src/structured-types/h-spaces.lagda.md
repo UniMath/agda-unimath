@@ -81,5 +81,3 @@ module _
     (x : type-H-Space) → Id (mul-H-Space x point-H-Space) x
   right-unit-law-mul-H-Space = pr2 unit-laws-mul-H-Space
 ```
-
-## Properties

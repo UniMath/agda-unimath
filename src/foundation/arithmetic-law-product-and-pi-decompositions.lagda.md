@@ -37,18 +37,18 @@ open import foundation-core.universe-levels
 Let `X` be a type, we have the following equivalence :
 
 ```text
- Σ ( (U , V , e) : Π-Decomposition X)
-   ( binary-product-Decomposition U) ≃
- Σ ( (A , B , e) : binary-product-Decomposition X)
-   ( Π-Decomposition A ×
-     Π-Decomposition B )
+  Σ ( (U , V , e) : Π-Decomposition X)
+    ( binary-product-Decomposition U) ≃
+  Σ ( (A , B , e) : binary-product-Decomposition X)
+    ( Π-Decomposition A ×
+      Π-Decomposition B )
 ```
 
 We also show a computational rule to simplify the use of this equivalence.
 
 ## Propositions
 
-### Product decompositions of the indexing type of a Π-decomposition are equivalent to Π-decomposition of the left and right summand of a product decomposition.
+### Product decompositions of the indexing type of a Π-decomposition are equivalent to Π-decomposition of the left and right summand of a product decomposition
 
 ```agda
 module _

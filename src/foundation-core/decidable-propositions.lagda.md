@@ -149,9 +149,9 @@ is-merely-decidable-is-decidable-trunc-Prop :
   {l : Level} (A : UU l) →
   is-decidable (type-trunc-Prop A) → is-merely-decidable A
 is-merely-decidable-is-decidable-trunc-Prop A (inl x) =
-   apply-universal-property-trunc-Prop x
-     ( is-merely-Decidable-Prop A)
-     ( unit-trunc-Prop ∘ inl)
+  apply-universal-property-trunc-Prop x
+    ( is-merely-Decidable-Prop A)
+    ( unit-trunc-Prop ∘ inl)
 is-merely-decidable-is-decidable-trunc-Prop A (inr f) =
   unit-trunc-Prop (inr (f ∘ unit-trunc-Prop))
 ```

@@ -70,8 +70,9 @@ abstract
   is-prop-condition-ind-trunc-Prop' {P = P} H x =
     is-prop-all-elements-equal
       ( λ u v →
-        ( ap ( λ γ → tr P γ u)
-             ( eq-is-contr (is-prop-type-trunc-Prop x x))) ∙
+        ( ap
+          ( λ γ → tr P γ u)
+          ( eq-is-contr (is-prop-type-trunc-Prop x x))) ∙
         ( H x x u v))
 ```
 
@@ -81,8 +82,9 @@ abstract
 ind-trunc-Prop' :
   {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → UU l)
   (f : (x : A) → P (unit-trunc-Prop x))
-  (H : (x y : type-trunc-Prop A) (u : P x) (v : P y) →
-       tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
+  (H :
+    (x y : type-trunc-Prop A) (u : P x) (v : P y) →
+    tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
   (x : type-trunc-Prop A) → P x
 ind-trunc-Prop' P f H =
   function-dependent-universal-property-trunc

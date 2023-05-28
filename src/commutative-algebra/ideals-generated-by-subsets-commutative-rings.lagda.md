@@ -62,10 +62,11 @@ module _
 
   preserves-concat-ev-formal-combination-subset-Commutative-Ring :
     (u v : formal-combination-subset-Commutative-Ring) →
-    Id ( ev-formal-combination-subset-Commutative-Ring (concat-list u v))
-       ( add-Commutative-Ring R
-         ( ev-formal-combination-subset-Commutative-Ring u)
-         ( ev-formal-combination-subset-Commutative-Ring v))
+    Id
+      ( ev-formal-combination-subset-Commutative-Ring (concat-list u v))
+      ( add-Commutative-Ring R
+        ( ev-formal-combination-subset-Commutative-Ring u)
+        ( ev-formal-combination-subset-Commutative-Ring v))
   preserves-concat-ev-formal-combination-subset-Commutative-Ring =
     preserves-concat-ev-formal-combination-subset-Ring
       ( ring-Commutative-Ring R)
@@ -81,10 +82,11 @@ module _
   preserves-mul-ev-formal-combination-subset-Commutative-Ring :
     (r : type-Commutative-Ring R)
     (u : formal-combination-subset-Commutative-Ring) →
-    Id ( ev-formal-combination-subset-Commutative-Ring
-         ( mul-formal-combination-subset-Commutative-Ring r u))
-       ( mul-Commutative-Ring R r
-         ( ev-formal-combination-subset-Commutative-Ring u))
+    Id
+      ( ev-formal-combination-subset-Commutative-Ring
+        ( mul-formal-combination-subset-Commutative-Ring r u))
+      ( mul-Commutative-Ring R r
+        ( ev-formal-combination-subset-Commutative-Ring u))
   preserves-mul-ev-formal-combination-subset-Commutative-Ring =
     preserves-mul-ev-formal-combination-subset-Ring
       ( ring-Commutative-Ring R)

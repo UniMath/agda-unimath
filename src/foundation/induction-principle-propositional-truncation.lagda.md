@@ -43,7 +43,7 @@ induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
 
 ## Properties
 
-### A type family over the propositional truncation comes equipped with the structure to satisfy the path clause of the induction principle if and only if it is a family of propositions.
+### A type family over the propositional truncation comes equipped with the structure to satisfy the path clause of the induction principle if and only if it is a family of propositions
 
 ```agda
 abstract

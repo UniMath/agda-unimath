@@ -110,8 +110,9 @@ module _
     pr1 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 
   coh-unit-laws-mul-Coherent-H-Space :
-    Id ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
-       ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
+    Id
+      ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
+      ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
   coh-unit-laws-mul-Coherent-H-Space =
     pr2 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 ```

@@ -57,8 +57,9 @@ module _
     {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
     UU l1
   htpy-hom-orbit-Monoid-Action {x} {y} f g =
-    Id ( element-hom-orbit-Monoid-Action f)
-       ( element-hom-orbit-Monoid-Action g)
+    Id
+      ( element-hom-orbit-Monoid-Action f)
+      ( element-hom-orbit-Monoid-Action g)
 
   refl-htpy-hom-orbit-Monoid-Action :
     {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →

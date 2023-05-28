@@ -68,8 +68,8 @@ module _
   is-prop-is-perfect-image-is-emb :
     (a : A) → is-prop (is-perfect-image f g a)
   is-prop-is-perfect-image-is-emb a =
-     is-prop-Π (λ a₀ → (is-prop-Π λ n →
-        is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
+    is-prop-Π (λ a₀ → (is-prop-Π λ n →
+      is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
 
   is-perfect-image-Prop : A → Prop (l1 ⊔ l2)
   pr1 (is-perfect-image-Prop a) = is-perfect-image f g a
@@ -126,9 +126,9 @@ module _
     (b : B) (ρ : is-perfect-image f g (g b)) →
     inverse-of-perfect-image (g b) ρ ＝ b
   is-retr-inverse-of-perfect-image b ρ =
-     is-injective-is-emb
-       is-emb-g
-       (is-sec-inverse-of-perfect-image (g b) ρ)
+    is-injective-is-emb
+      is-emb-g
+      (is-sec-inverse-of-perfect-image (g b) ρ)
 ```
 
 If `g (f (a))` is a perfect image for `g`, so is `a`.

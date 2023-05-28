@@ -105,9 +105,9 @@ module _
   right-iterated-binary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-coproduct-Decomposition-subuniverse =
     Σ ( binary-coproduct-Decomposition-subuniverse P X)
-       ( λ d →
-         binary-coproduct-Decomposition-subuniverse P
-           ( right-summand-binary-coproduct-Decomposition-subuniverse P X d))
+      ( λ d →
+        binary-coproduct-Decomposition-subuniverse P
+          ( right-summand-binary-coproduct-Decomposition-subuniverse P X d))
 ```
 
 ### Ternary coproduct Decomposition-subuniverses
@@ -120,11 +120,11 @@ module _
   ternary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   ternary-coproduct-Decomposition-subuniverse =
     Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
-       ( λ x →
-         inclusion-subuniverse P X ≃
-         ( inclusion-subuniverse P (pr1 x) +
-           ( inclusion-subuniverse P (pr1 (pr2 x)) +
-             inclusion-subuniverse P (pr2 (pr2 x)))))
+      ( λ x →
+        inclusion-subuniverse P X ≃
+        ( inclusion-subuniverse P (pr1 x) +
+          ( inclusion-subuniverse P (pr1 (pr2 x)) +
+            inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
     (d : ternary-coproduct-Decomposition-subuniverse)

@@ -84,7 +84,7 @@ pr2 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
   ( ap (mul-Fin (succ-ℕ k) (pr1 v)) p ∙ q)
 ```
 
-### A natural number `x` is congruent to `1` modulo `k+1` if and only if `[x]_{k+1}` is unit similar to `1`.
+### A natural number `x` is congruent to `1` modulo `k+1` if and only if `[x]_{k+1}` is unit similar to `1`
 
 ```agda
 is-unit-similar-one-sim-unit-mod-succ-ℕ :

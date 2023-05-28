@@ -140,8 +140,9 @@ comp-hom-Ab A B C =
 associative-comp-hom-Ab :
   { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
   ( h : type-hom-Ab C D) (g : type-hom-Ab B C) (f : type-hom-Ab A B) →
-  Id (comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
-     (comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
+  Id
+    ( comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
+    ( comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
 associative-comp-hom-Ab A B C D =
   associative-comp-hom-Semigroup
     ( semigroup-Ab A)

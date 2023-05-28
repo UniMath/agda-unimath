@@ -92,8 +92,9 @@ abstract
                           ( equiv-concat'
                             ( map-𝕎 D f e
                               ( α (map-inv-equiv (e a) d)))
-                            ( ap ( γ ∘ (tr D p))
-                                 ( inv (issec-map-inv-equiv (e a) d)))) ∘e
+                            ( ap
+                              ( γ ∘ (tr D p))
+                              ( inv (issec-map-inv-equiv (e a) d)))) ∘e
                           ( inv-equiv
                             ( equiv-Eq-𝕎-eq
                               ( map-𝕎 D f e

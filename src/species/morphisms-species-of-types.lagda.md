@@ -106,8 +106,9 @@ associative-comp-hom-species-types :
   {H : species-types l1 l4} {K : species-types l1 l5}
   (h : hom-species-types H K) (g : hom-species-types G H)
   (f : hom-species-types F G) →
-  Id ( comp-hom-species-types (comp-hom-species-types h g) f)
-     ( comp-hom-species-types h (comp-hom-species-types g f))
+  Id
+    ( comp-hom-species-types (comp-hom-species-types h g) f)
+    ( comp-hom-species-types h (comp-hom-species-types g f))
 associative-comp-hom-species-types h g f = refl
 ```
 

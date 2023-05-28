@@ -59,14 +59,15 @@ module _
   isretr-map-inv-is-contr-map :
     (H : is-contr-map f) → ((map-inv-is-contr-map H) ∘ f) ~ id
   isretr-map-inv-is-contr-map H x =
-    ap ( pr1 {B = λ z → (f z) ＝ (f x)})
-       ( ( inv
-           ( contraction
-             ( H (f x))
-             ( pair
-               ( map-inv-is-contr-map H (f x))
-               ( issec-map-inv-is-contr-map H (f x))))) ∙
-         ( contraction (H (f x)) (pair x refl)))
+    ap
+      ( pr1 {B = λ z → (f z) ＝ (f x)})
+      ( ( inv
+          ( contraction
+            ( H (f x))
+            ( pair
+              ( map-inv-is-contr-map H (f x))
+              ( issec-map-inv-is-contr-map H (f x))))) ∙
+        ( contraction (H (f x)) (pair x refl)))
 
   abstract
     is-equiv-is-contr-map : is-contr-map f → is-equiv f

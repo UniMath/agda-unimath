@@ -76,18 +76,19 @@ abstract
   is-surjective-is-epimorphism-Set {l1} {l2} {A} {B} {f} H b =
     map-equiv
       ( equiv-eq
-        ( ap ( pr1)
-             ( htpy-eq
-               ( is-injective-is-emb
-                 ( H (Prop-Set (l1 ⊔ l2)))
-                 { g}
-                 { h}
-                 ( eq-htpy
-                   ( λ a →
-                     eq-iff
-                       ( λ _ → unit-trunc-Prop (pair a refl))
-                       ( λ _ → raise-star))))
-               ( b))))
+        ( ap
+          ( pr1)
+          ( htpy-eq
+            ( is-injective-is-emb
+              ( H (Prop-Set (l1 ⊔ l2)))
+              { g}
+              { h}
+              ( eq-htpy
+                ( λ a →
+                  eq-iff
+                    ( λ _ → unit-trunc-Prop (pair a refl))
+                    ( λ _ → raise-star))))
+            ( b))))
       ( raise-star)
     where
     g : B → Prop (l1 ⊔ l2)

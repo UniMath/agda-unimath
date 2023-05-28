@@ -694,7 +694,8 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →
-        tr ( λ m → has-cardinality m X)
-           ( p)
-           ( pr2 (has-finite-cardinality-is-finite H)))
+        tr
+          ( λ m → has-cardinality m X)
+          ( p)
+          ( pr2 (has-finite-cardinality-is-finite H)))
 ```

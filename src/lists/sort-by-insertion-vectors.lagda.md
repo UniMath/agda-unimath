@@ -270,32 +270,17 @@ module _
             ( is-leq-or-strict-greater-Decidable-Total-Order X x z)))
         ( is-least-element-permute-vec
           ( X)
-          ( y)
-          ( x ∷ z ∷ v)
-          ( helper-permutation-insertion-sort-vec
+          ( helper-insertion-sort-vec
             ( x)
             ( z)
             ( v)
             ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
-          ( pr2 p ,
-            pr1
-              ( is-sorted-least-element-vec-is-sorted-vec
-                ( X)
-                ( y ∷ z ∷ v)
-                ( s)))) ,
-         is-sorted-least-element-vec-is-sorted-vec
-           ( X)
-           ( helper-insertion-sort-vec
-             ( x)
-             ( z)
-             ( v)
-             ( is-leq-or-strict-greater-Decidable-Total-Order X x z))
-           ( helper-is-sorting-insertion-sort-vec
-             ( x)
-             ( z)
-             ( v)
-             ( is-leq-or-strict-greater-Decidable-Total-Order X x z)
-             ( is-sorted-tail-is-sorted-vec X (y ∷ z ∷ v) s)))
+          ( helper-is-sorting-insertion-sort-vec
+            ( x)
+            ( z)
+            ( v)
+            ( is-leq-or-strict-greater-Decidable-Total-Order X x z)
+            ( is-sorted-tail-is-sorted-vec X (y ∷ z ∷ v) s))))
 
   is-sorting-insertion-sort-vec :
     {n : ℕ}

@@ -51,8 +51,9 @@ postulate
   compute-path-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) →
-    Id ( apd (ind-𝕀 P u v q) path-𝕀 ∙ compute-target-𝕀 u v q)
-       ( ap (tr P path-𝕀) (compute-source-𝕀 u v q) ∙ q)
+    Id
+      ( apd (ind-𝕀 P u v q) path-𝕀 ∙ compute-target-𝕀 u v q)
+      ( ap (tr P path-𝕀) (compute-source-𝕀 u v q) ∙ q)
 ```
 
 ## Properties

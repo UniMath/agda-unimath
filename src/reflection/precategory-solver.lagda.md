@@ -206,17 +206,17 @@ build-Precategory-Expr
           nil)) =
   con (quote id-hom-Precategory-Expr) nil
 build-Precategory-Expr
-   ( apply-pr1
-     ( visible-Arg
-       ( apply-pr1
-         ( visible-Arg
-           ( apply-pr2
-             ( visible-Arg
-               ( apply-pr2
-                 (visible-Arg C ∷ nil)) ∷ nil))
-              ∷ nil)) ∷
-       hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
-       visible-Arg g ∷ visible-Arg f ∷ nil)) =
+  ( apply-pr1
+    ( visible-Arg
+      ( apply-pr1
+        ( visible-Arg
+          ( apply-pr2
+            ( visible-Arg
+              ( apply-pr2
+                (visible-Arg C ∷ nil)) ∷ nil))
+            ∷ nil)) ∷
+      hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
+      visible-Arg g ∷ visible-Arg f ∷ nil)) =
   con
     ( quote comp-hom-Precategory-Expr)
     ( visible-Arg (build-Precategory-Expr g) ∷

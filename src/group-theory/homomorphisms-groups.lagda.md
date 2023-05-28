@@ -145,8 +145,9 @@ associative-comp-hom-Group :
   {l1 l2 l3 l4 : Level}
   (G : Group l1) (H : Group l2) (K : Group l3) (L : Group l4)
   (h : type-hom-Group K L) (g : type-hom-Group H K) (f : type-hom-Group G H) →
-  Id ( comp-hom-Group G H L (comp-hom-Group H K L h g) f)
-     ( comp-hom-Group G K L h (comp-hom-Group G H K g f))
+  Id
+    ( comp-hom-Group G H L (comp-hom-Group H K L h g) f)
+    ( comp-hom-Group G K L h (comp-hom-Group G H K g f))
 associative-comp-hom-Group G H K L =
   associative-comp-hom-Semigroup
     ( semigroup-Group G)
@@ -190,10 +191,11 @@ module _
       ( f : type-hom-Group G H) → preserves-unit-Group (map-hom-Group G H f)
     preserves-unit-hom-Group f =
       ( inv (left-unit-law-mul-Group H (map-hom-Group G H f (unit-Group G)))) ∙
-      ( ( ap ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
-             ( inv
-               ( left-inverse-law-mul-Group H
-                 ( map-hom-Group G H f (unit-Group G))))) ∙
+      ( ( ap
+          ( λ x → mul-Group H x (map-hom-Group G H f (unit-Group G)))
+          ( inv
+            ( left-inverse-law-mul-Group H
+              ( map-hom-Group G H f (unit-Group G))))) ∙
         ( ( associative-mul-Group H
             ( inv-Group H (map-hom-Group G H f (unit-Group G)))
             ( map-hom-Group G H f (unit-Group G))

@@ -37,10 +37,11 @@ module _
     (z : obj-Precategory C)
     (f : type-hom-Precategory C x z) →
     (g : type-hom-Precategory C y z) →
-    ∃! ( type-hom-Precategory C p z)
-       ( λ h →
-         ( comp-hom-Precategory C h l ＝ f) ×
-         ( comp-hom-Precategory C h r ＝ g))
+    ∃!
+      ( type-hom-Precategory C p z)
+      ( λ h →
+        ( comp-hom-Precategory C h l ＝ f) ×
+        ( comp-hom-Precategory C h r ＝ g))
 
   coproduct-Precategory : obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
   coproduct-Precategory x y =

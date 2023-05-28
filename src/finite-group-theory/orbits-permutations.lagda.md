@@ -284,13 +284,15 @@ module _
                 ( f)
                 ( tr
                   ( λ x →
-                    Id ( iterate x (map-equiv f) a)
-                       ( iterate (succ-ℕ pred-second) (map-equiv f) a))
+                    Id
+                      ( iterate x (map-equiv f) a)
+                      ( iterate (succ-ℕ pred-second) (map-equiv f) a))
                   ( equality-pred-first)
                   ( tr
                     ( λ x →
-                      Id ( iterate first-point-min-repeating (map-equiv f) a)
-                         ( iterate x (map-equiv f) a))
+                      Id
+                        ( iterate first-point-min-repeating (map-equiv f) a)
+                        ( iterate x (map-equiv f) a))
                     ( equality-pred-second)
                     ( same-image-iterate-min-reporting)))))))
       where
@@ -326,8 +328,9 @@ module _
   pr2 (pr2 (has-finite-orbits-permutation' (inl p))) =
     tr
       ( λ x →
-        Id ( iterate first-point-min-repeating (map-equiv f) a)
-           ( iterate x (map-equiv f) a))
+        Id
+          ( iterate first-point-min-repeating (map-equiv f) a)
+          ( iterate x (map-equiv f) a))
       ( p)
       ( same-image-iterate-min-reporting)
   has-finite-orbits-permutation' (inr np) =
@@ -714,8 +717,9 @@ module _
       ( Ind :
         (n : ℕ) → C (succ-ℕ n) → is-nonzero-ℕ n → C n) →
       (k : ℕ) → (is-zero-ℕ k + C k) →
-      Id ( iterate k (map-equiv (composition-transposition-a-b g)) x)
-         ( iterate k (map-equiv g) x)
+      Id
+        ( iterate k (map-equiv (composition-transposition-a-b g)) x)
+        ( iterate k (map-equiv g) x)
     equal-iterate-transposition x g C F Ind zero-ℕ p = refl
     equal-iterate-transposition x g C F Ind (succ-ℕ k) (inl p) =
       ex-falso (is-nonzero-succ-ℕ k p)
@@ -730,8 +734,9 @@ module _
       where
       induction-cases-equal-iterate-transposition :
         is-decidable (Id k zero-ℕ) →
-        Id ( iterate k (map-equiv (composition-transposition-a-b g)) x)
-           ( iterate k (map-equiv g) x)
+        Id
+          ( iterate k (map-equiv (composition-transposition-a-b g)) x)
+          ( iterate k (map-equiv g) x)
       induction-cases-equal-iterate-transposition (inl s) =
         tr
           ( λ k →
@@ -1535,7 +1540,7 @@ module _
                     ( pr1 T))
                 { x =
                   composition-transposition-a-b
-                     (composition-transposition-a-b g)}
+                    (composition-transposition-a-b g)}
                 {y = g}
                 ( eq-htpy-equiv (composition-transposition-a-b-involution g))
                 ( pr2

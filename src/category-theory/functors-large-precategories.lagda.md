@@ -110,7 +110,8 @@ preserves-comp-functor-Large-Precategory
     ( hom-functor-Large-Precategory F g)
     ( hom-functor-Large-Precategory F f))
 preserves-id-functor-Large-Precategory (comp-functor-Large-Precategory G F) =
-  ( ap ( hom-functor-Large-Precategory G)
-       ( preserves-id-functor-Large-Precategory F)) ∙
+  ( ap
+    ( hom-functor-Large-Precategory G)
+    ( preserves-id-functor-Large-Precategory F)) ∙
   ( preserves-id-functor-Large-Precategory G)
 ```

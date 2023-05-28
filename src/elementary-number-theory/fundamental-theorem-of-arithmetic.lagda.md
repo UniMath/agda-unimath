@@ -141,7 +141,7 @@ module _
         ( is-prop-is-decomposition-list-ℕ))
 
   is-prime-decomposition-list-ℕ-Prop :
-     Prop lzero
+    Prop lzero
   pr1 is-prime-decomposition-list-ℕ-Prop = is-prime-decomposition-list-ℕ
   pr2 is-prime-decomposition-list-ℕ-Prop = is-prop-is-prime-decomposition-list-ℕ
 ```
@@ -225,16 +225,16 @@ is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
   ( D)
   ( P) =
   ( is-nontrivial-divisor-head-is-decomposition-is-prime-list-ℕ x y l D P ,
-   is-nontrivial-divisors-div-list-ℕ
-    ( mul-list-ℕ l)
-    ( x)
-    ( y , D)
-    ( l)
-    ( is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
+    is-nontrivial-divisors-div-list-ℕ
       ( mul-list-ℕ l)
+      ( x)
+      ( y , D)
       ( l)
-      ( refl)
-      ( pr2 P)))
+      ( is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
+        ( mul-list-ℕ l)
+        ( l)
+        ( refl)
+        ( pr2 P)))
 
 is-divisor-head-prime-decomposition-list-ℕ :
   (x : ℕ) (y : ℕ) (l : list ℕ) →
@@ -930,15 +930,15 @@ fundamental-theorem-arithmetic-list-ℕ :
 pr1 (fundamental-theorem-arithmetic-list-ℕ x H) =
   prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H
 pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
-   eq-type-subtype
-     ( is-prime-decomposition-list-ℕ-Prop x)
-     ( eq-prime-decomposition-list-ℕ
-       ( x)
-       ( H)
-       ( list-fundamental-theorem-arithmetic-ℕ x H)
-       ( pr1 d)
-       ( is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H)
-       ( pr2 d))
+  eq-type-subtype
+    ( is-prime-decomposition-list-ℕ-Prop x)
+    ( eq-prime-decomposition-list-ℕ
+      ( x)
+      ( H)
+      ( list-fundamental-theorem-arithmetic-ℕ x H)
+      ( pr1 d)
+      ( is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H)
+      ( pr2 d))
 ```
 
 ### The sorted list associated with the concatenation of the prime decomposition of `n` and the prime decomposition of `m` is the prime decomposition of `n *ℕ m`

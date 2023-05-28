@@ -42,3 +42,5 @@ pr2 (unit-partial-element x) y = x
 ## Properties
 
 ### The type of partial elements is a directed complete poset
+
+This remains to be shown.

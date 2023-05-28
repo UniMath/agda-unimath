@@ -207,21 +207,21 @@ module _
       ( is-decidable-standard-edge-ethane c c')
 
   abstract
-   number-of-elements-count-standard-edge-ethane-leq-3 :
-     (c c' : vertex-ethane) →
-     number-of-elements-count (count-standard-edge-ethane c c') ≤-ℕ 3
-   number-of-elements-count-standard-edge-ethane-leq-3
-     (inl (inr star)) (inl (inr star)) =
-     star
-   number-of-elements-count-standard-edge-ethane-leq-3
-     (inl (inr star)) (inr star) =
-     star
-   number-of-elements-count-standard-edge-ethane-leq-3
-     (inr star) (inl (inr star)) =
-     star
-   number-of-elements-count-standard-edge-ethane-leq-3
-     (inr star) (inr star) =
-     star
+    number-of-elements-count-standard-edge-ethane-leq-3 :
+      (c c' : vertex-ethane) →
+      number-of-elements-count (count-standard-edge-ethane c c') ≤-ℕ 3
+    number-of-elements-count-standard-edge-ethane-leq-3
+      (inl (inr star)) (inl (inr star)) =
+      star
+    number-of-elements-count-standard-edge-ethane-leq-3
+      (inl (inr star)) (inr star) =
+      star
+    number-of-elements-count-standard-edge-ethane-leq-3
+      (inr star) (inl (inr star)) =
+      star
+    number-of-elements-count-standard-edge-ethane-leq-3
+      (inr star) (inr star) =
+      star
 
   ethane : hydrocarbon lzero lzero
   pr1 ethane = finite-graph-ethane

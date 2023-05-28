@@ -144,8 +144,8 @@ module _
           ( Relaxed-Σ-Decomposition l1 l1 X)
           ( λ D →
               is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
-              ((x : indexing-type-Relaxed-Σ-Decomposition D) →
-               is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
+              ( (x : indexing-type-Relaxed-Σ-Decomposition D) →
+                is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
           ( _)) ∘e
         ( ( equiv-Σ-equiv-base
             ( _)

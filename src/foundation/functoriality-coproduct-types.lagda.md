@@ -243,7 +243,7 @@ module _
         ( λ {(a , p) → unit-trunc-Prop (inr a , ap inr p)})
 ```
 
-### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`.
+### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`
 
 ```agda
 is-contr-fib-map-coprod :
@@ -466,10 +466,10 @@ module _
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
     is-equiv-has-inverse
-      (tr is-left (isretr-map-inv-equiv e u) ∘
-       left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
-      (λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
-      (λ _ → eq-is-prop (is-prop-is-left u))
+      ( tr is-left (isretr-map-inv-equiv e u) ∘
+        left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
+      ( λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
+      ( λ _ → eq-is-prop (is-prop-is-left u))
 
   equiv-right-to-right :
     (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
@@ -477,8 +477,8 @@ module _
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
     is-equiv-has-inverse
-      (tr is-right (isretr-map-inv-equiv e u) ∘
-       right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
+      ( tr is-right (isretr-map-inv-equiv e u) ∘
+        right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-right u))
 
