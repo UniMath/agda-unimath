@@ -28,6 +28,23 @@ This file records interactions between transport (`tr`) and other constructions.
 
 ## Properties
 
+### Transport forward and back
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
+  where
+  tr-concat-inv :
+    ( p : x ＝ y) (b : B y) →
+    tr B p (tr B (inv p) b) ＝ b
+  tr-concat-inv refl b = refl
+
+  tr-concat-inv' :
+    ( p : x ＝ y) (b : B x) →
+    tr B (inv p) (tr B p b) ＝ b
+  tr-concat-inv' refl b = refl
+```
+
 ### Transport
 
 ```agda
@@ -154,6 +171,21 @@ module _
       A B p (f i0) (f i1)) (apd f p) a) ＝
     inv-htpy (preserves-tr f p) a
   preserves-tr-apd-function refl = refl-htpy
+```
+
+### Transport in a family of dependent functions
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {x y : A}
+  ( B : A → UU l2) (C : (a : A) → (B a) → UU l3)
+  where
+
+  tr-Π :
+    (p : x ＝ y) (f : (b : B x) → C x b) →
+    tr (λ a → (b : B a) → C a b) p f ~
+    (tr (ind-Σ C) (inv (eq-pair-Σ (inv p) refl)) ∘ (f ∘ tr B (inv p)))
+  tr-Π refl f = refl-htpy
 ```
 
 ### Transport in identity types
