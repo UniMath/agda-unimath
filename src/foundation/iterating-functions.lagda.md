@@ -12,9 +12,9 @@ open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.commuting-squares-of-maps
 open import foundation.function-extensionality
 
-open import foundation-core.commuting-squares-of-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.endomorphisms
 open import foundation-core.homotopies
@@ -158,4 +158,20 @@ module _
   pr2 (pr1 (pr2 iterative-Monoid-Action)) k l =
     eq-htpy (λ f → eq-htpy (λ x → iterate-mul-ℕ k l f x))
   pr2 (pr2 iterative-Monoid-Action) = refl
+```
+
+### Iterating compatible commuting squares
+
+```agda
+module _
+  { l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  iterate-square-ℕ :
+    ( n : ℕ) (f : X → X) (g : Y → Y) (i : X → Y)
+    ( H : coherence-square-maps i f g i) →
+    coherence-square-maps i (iterate n f) (iterate n g) i
+  iterate-square-ℕ zero-ℕ f g i H = refl-htpy
+  iterate-square-ℕ (succ-ℕ n) f g i H x =
+    H (iterate n f x) ∙ ap g (iterate-square-ℕ n f g i H x)
 ```
