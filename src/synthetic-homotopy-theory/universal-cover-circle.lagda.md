@@ -139,17 +139,13 @@ abstract
   Fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
     ( {l2 : Level} → dependent-universal-property-circle l2 l) →
-    Σ ( X → UU lzero)
-      ( λ P →
-        Eq-descent-data-circle
-        ( pair ℤ equiv-succ-ℤ)
-        ( ev-descent-data-circle l P))
+    family-descent-data-circle l (ℤ , equiv-succ-ℤ)
   Fundamental-cover-circle {l1} l dup-circle =
     center
       ( unique-family-property-universal-property-circle l
         ( universal-property-dependent-universal-property-circle l
           ( dup-circle))
-        ( pair ℤ equiv-succ-ℤ))
+        ( ℤ , equiv-succ-ℤ))
 
   fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →

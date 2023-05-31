@@ -187,14 +187,16 @@ module _
       ( up-circle (UU l2))
       ( is-equiv-comparison-descent-data-circle l2)
 
+  family-descent-data-circle : descent-data-circle l2 → UU (l1 ⊔ lsuc l2)
+  family-descent-data-circle Q =
+    Σ ( X → UU l2)
+      ( λ P → Eq-descent-data-circle Q (ev-descent-data-circle P))
+
 unique-family-property-circle :
   { l1 : Level} (l2 : Level) {X : UU l1} (l : free-loop X) →
   UU (l1 ⊔ lsuc l2)
 unique-family-property-circle l2 {X} l =
-  ( Q : descent-data-circle l2) →
-    is-contr
-    ( Σ (X → UU l2)
-        (λ P → Eq-descent-data-circle Q (ev-descent-data-circle l P)))
+  ( Q : descent-data-circle l2) → is-contr (family-descent-data-circle l Q)
 
 module _
   { l1 l2 : Level} {X : UU l1} (l : free-loop X)
