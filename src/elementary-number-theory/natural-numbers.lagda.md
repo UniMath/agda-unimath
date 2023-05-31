@@ -129,14 +129,17 @@ has-no-fixed-points-succ-ℕ x ()
 is-nonzero-one-ℕ : is-nonzero-ℕ 1
 is-nonzero-one-ℕ ()
 
-is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
-is-not-one-zero-ℕ ()
-
 is-nonzero-two-ℕ : is-nonzero-ℕ 2
 is-nonzero-two-ℕ = is-nonzero-succ-ℕ 1
 
+is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
+is-not-one-zero-ℕ ()
+
+is-not-one-succ-succ-ℕ : (n : ℕ) → is-not-one-ℕ (succ-ℕ (succ-ℕ n))
+is-not-one-succ-succ-ℕ n ()
+
 is-not-one-two-ℕ : is-not-one-ℕ 2
-is-not-one-two-ℕ ()
+is-not-one-two-ℕ = is-not-one-succ-succ-ℕ zero-ℕ
 ```
 
 ### The type of natural numbers is a set
