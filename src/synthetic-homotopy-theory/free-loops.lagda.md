@@ -107,6 +107,9 @@ module _
       fundamental-theorem-id
         ( is-contr-total-Eq-free-loop α)
         ( Eq-eq-free-loop α)
+
+  eq-Eq-free-loop : (α α' : free-loop X) → Eq-free-loop α α' → α ＝ α'
+  eq-Eq-free-loop α α' = map-inv-is-equiv (is-equiv-Eq-eq-free-loop α α')
 ```
 
 ### Characterization of the identity type of free dependent loops
