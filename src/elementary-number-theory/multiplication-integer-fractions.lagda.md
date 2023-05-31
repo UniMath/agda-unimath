@@ -10,6 +10,7 @@ module elementary-number-theory.multiplication-integer-fractions where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.integers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -56,114 +57,72 @@ sim-fraction-mul-fraction-ℤ
   {(ny , dy , dyp)} {(ny' , dy' , dy'p)} p q =
   equational-reasoning
     (nx *ℤ ny) *ℤ (dx' *ℤ dy')
-    ＝ nx *ℤ (ny *ℤ (dx' *ℤ dy'))
-      by  associative-mul-ℤ  nx ny (mul-ℤ dx' dy')
-    ＝ nx *ℤ ((ny *ℤ dx') *ℤ dy')
-      by  ap-mul-ℤ (refl {x = nx}) (inv (associative-mul-ℤ ny dx' dy'))
-    ＝ nx *ℤ ((dx' *ℤ ny) *ℤ dy')
-      by ap (λ x → nx *ℤ (x *ℤ dy')) (commutative-mul-ℤ ny dx')
-    ＝ nx *ℤ (dx' *ℤ (ny *ℤ dy'))
-      by  ap-mul-ℤ (refl {x = nx}) (associative-mul-ℤ dx' ny dy')
     ＝ (nx *ℤ dx') *ℤ (ny *ℤ dy')
-      by  inv (associative-mul-ℤ  nx dx' (mul-ℤ ny dy'))
+      by helper {nx} {ny} {dx'} {dy'}
     ＝ (nx' *ℤ dx) *ℤ (ny' *ℤ dy)
       by ap-mul-ℤ  p q
     ＝ (nx' *ℤ ny') *ℤ (dx *ℤ dy)
-      by {!!}
-{-
-  equational-reasoning
-    =
-      by ?
--}
+      by helper {nx'} {dx} {ny'} {dy} where
+      helper : {a b c d : ℤ} → (a *ℤ b) *ℤ (c *ℤ d) ＝ (a *ℤ c) *ℤ (b *ℤ d)
+      helper {a} {b} {c} {d} =
+        equational-reasoning
+          (a *ℤ b) *ℤ (c *ℤ d)
+          ＝ a *ℤ (b *ℤ (c *ℤ d))
+            by  associative-mul-ℤ  a b (mul-ℤ c d)
+          ＝ a *ℤ ((b *ℤ c) *ℤ d)
+            by  ap-mul-ℤ (refl {x = a}) (inv (associative-mul-ℤ b c d))
+          ＝ a *ℤ ((c *ℤ b) *ℤ d)
+            by ap (λ x → a *ℤ (x *ℤ d)) (commutative-mul-ℤ b c)
+          ＝ a *ℤ (c *ℤ (b *ℤ d))
+            by  ap-mul-ℤ (refl {x = a}) (associative-mul-ℤ c b d)
+          ＝ (a *ℤ c) *ℤ (b *ℤ d)
+            by  inv (associative-mul-ℤ  a c (mul-ℤ b d))
+
 ```
 
 ### Unit laws
 
 ```agda
-{-
-left-unit-law-add-fraction-ℤ :
+left-unit-law-mul-fraction-ℤ :
   (k : fraction-ℤ) →
-  sim-fraction-ℤ (zero-fraction-ℤ +fraction-ℤ k) k
-left-unit-law-add-fraction-ℤ (m , n , p) =
-  ap-mul-ℤ (right-unit-law-mul-ℤ m) refl
+  sim-fraction-ℤ (mul-fraction-ℤ one-fraction-ℤ  k) k
+left-unit-law-mul-fraction-ℤ k = refl
 
-right-unit-law-add-fraction-ℤ :
+right-unit-law-mul-fraction-ℤ :
   (k : fraction-ℤ) →
-  sim-fraction-ℤ (k +fraction-ℤ zero-fraction-ℤ) k
-right-unit-law-add-fraction-ℤ (m , n , p) =
- ap-mul-ℤ
-   ( ap-add-ℤ (right-unit-law-mul-ℤ m) refl ∙ right-unit-law-add-ℤ m)
-   ( inv (right-unit-law-mul-ℤ n))
--}
+  sim-fraction-ℤ (mul-fraction-ℤ k one-fraction-ℤ) k
+right-unit-law-mul-fraction-ℤ (n , d , p) =
+  equational-reasoning
+    (n *ℤ one-ℤ) *ℤ d
+    ＝ n *ℤ d
+    by ap-mul-ℤ (right-unit-law-mul-ℤ n) refl
+    ＝ n *ℤ (d *ℤ one-ℤ)
+    by ap-mul-ℤ {n} refl (inv (right-unit-law-mul-ℤ d))
 ```
 
-### Addition is associative
+### multiplication is associative
 
 ```agda
-{-
 associative-add-fraction-ℤ :
   (x y z : fraction-ℤ) →
   sim-fraction-ℤ
-    ((x +fraction-ℤ y) +fraction-ℤ z)
-    (x +fraction-ℤ (y +fraction-ℤ z))
+    (mul-fraction-ℤ (mul-fraction-ℤ x y) z)
+    (mul-fraction-ℤ x (mul-fraction-ℤ y z))
 associative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
-  ap-mul-ℤ
-    eq-num
-    (inv (associative-mul-ℤ dx dy dz))
-  where
-    eq-num :
-      (((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)) ＝
-      (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx)
-    eq-num =
-      equational-reasoning
-        (((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy))
-        ＝ (((nx *ℤ dy) *ℤ dz) +ℤ ((ny *ℤ dx) *ℤ dz)) +ℤ
-            (nz *ℤ (dx *ℤ dy))
-          by ap-add-ℤ
-            (right-distributive-mul-add-ℤ (nx *ℤ dy) (ny *ℤ dx) dz) refl
-        ＝ ((nx *ℤ dy) *ℤ dz) +ℤ
-            (((ny *ℤ dx) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)))
-          by associative-add-ℤ
-            ((nx *ℤ dy) *ℤ dz) ((ny *ℤ dx) *ℤ dz) _
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
-            (((ny *ℤ dx) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)))
-          by ap-add-ℤ (associative-mul-ℤ nx dy dz) refl
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
-            ((ny *ℤ (dz *ℤ dx)) +ℤ (nz *ℤ (dy *ℤ dx)))
-          by ap-add-ℤ
-            (refl {x = nx *ℤ (dy *ℤ dz)})
-            (ap-add-ℤ
-              (associative-mul-ℤ ny dx dz ∙ ap-mul-ℤ (refl {x = ny})
-                (commutative-mul-ℤ dx dz))
-              (ap-mul-ℤ (refl {x = nz}) (commutative-mul-ℤ dx dy)))
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
-            (((ny *ℤ dz) *ℤ dx) +ℤ ((nz *ℤ dy) *ℤ dx))
-          by ap-add-ℤ
-            (refl {x = nx *ℤ (dy *ℤ dz)})
-            (inv
-              (ap-add-ℤ
-                ( associative-mul-ℤ ny dz dx)
-                ( associative-mul-ℤ nz dy dx)))
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx)
-          by ap-add-ℤ
-            (refl {x = nx *ℤ (dy *ℤ dz)})
-            (inv (right-distributive-mul-add-ℤ (ny *ℤ dz) (nz *ℤ dy) dx))
--}
-```
+  equational-reasoning
+  ((nx *ℤ ny) *ℤ nz) *ℤ (dx *ℤ (dy *ℤ dz)) 
+  ＝ (nx *ℤ (ny *ℤ nz)) *ℤ ((dx *ℤ dy) *ℤ dz)
+  by  ap-mul-ℤ (associative-mul-ℤ nx ny nz) (inv (associative-mul-ℤ dx dy dz))
+ ```
 
 ### Addition is commutative
 
 ```agda
-{-
-commutative-add-fraction-ℤ :
+commutative-mul-fraction-ℤ :
   (x y : fraction-ℤ) →
   sim-fraction-ℤ
-    (x +fraction-ℤ y)
-    (y +fraction-ℤ x)
-commutative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
-  ap-mul-ℤ
-    ( commutative-add-ℤ (nx *ℤ dy) (ny *ℤ dx))
-    ( commutative-mul-ℤ dy dx)
--}
+    (x *fraction-ℤ y)
+    (y *fraction-ℤ x)
+commutative-mul-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) =
+  ap-mul-ℤ (commutative-mul-ℤ nx ny) (commutative-mul-ℤ dy dx)
 ```
-
