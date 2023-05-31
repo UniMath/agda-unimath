@@ -10,6 +10,7 @@ module synthetic-homotopy-theory.universal-property-circle where
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
@@ -17,8 +18,11 @@ open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.mere-equality
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sections
+open import foundation.transport
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.free-loops
@@ -48,6 +52,12 @@ module _
 
   universal-property-circle : UU (l1 ⊔ lsuc l2)
   universal-property-circle = (Y : UU l2) → is-equiv (ev-free-loop α Y)
+
+  eq-universal-property-circle :
+    (Y : UU l2) → universal-property-circle →
+    (X → Y) ≃ free-loop Y
+  pr1 (eq-universal-property-circle Y up-circle) = ev-free-loop α Y
+  pr2 (eq-universal-property-circle Y up-circle) = up-circle Y
 ```
 
 ### Evaluating a dependent function at a free loop
@@ -86,6 +96,49 @@ module _
   compute-induction-principle-circle = pr2 (H P) β
 ```
 
+### The recursion principle of the circle
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X)
+  (up-circle : {l : Level} → universal-property-circle l α)
+  {Y : UU l2} (β : free-loop Y)
+  where
+
+  function-recursion-principle-circle : X → Y
+  function-recursion-principle-circle =
+    map-inv-is-equiv (up-circle Y) β
+
+  compute-recursion-principle-circle :
+    (ev-free-loop α Y function-recursion-principle-circle) ＝ β
+  compute-recursion-principle-circle =
+    issec-map-inv-is-equiv (up-circle Y) β
+
+  compute-base-recursion-principle-circle :
+    function-recursion-principle-circle (base-free-loop α) ＝ pr1 β
+  compute-base-recursion-principle-circle =
+    pr1
+      ( Eq-eq-free-loop
+        ( ev-free-loop α Y function-recursion-principle-circle)
+        ( β)
+        ( compute-recursion-principle-circle))
+
+  compute-loop-recursion-principle-circle :
+    ap function-recursion-principle-circle (loop-free-loop α) ＝
+    (compute-base-recursion-principle-circle ∙ (pr2 β ∙ (inv compute-base-recursion-principle-circle)))
+  compute-loop-recursion-principle-circle =
+    ( con-inv
+      ( ap function-recursion-principle-circle (loop-free-loop α))
+      ( compute-base-recursion-principle-circle)
+      ( compute-base-recursion-principle-circle ∙ (pr2 β))
+      ( pr2
+        ( Eq-eq-free-loop
+          ( ev-free-loop α Y function-recursion-principle-circle)
+          ( β)
+          ( compute-recursion-principle-circle)))) ∙
+    ( assoc _ (pr2 β) (inv compute-base-recursion-principle-circle))
+```
+
 ### The dependent universal property of the circle
 
 ```agda
@@ -96,6 +149,12 @@ module _
   dependent-universal-property-circle : UU ((lsuc l2) ⊔ l1)
   dependent-universal-property-circle =
     (P : X → UU l2) → is-equiv (ev-free-loop-Π α P)
+
+  eq-dependent-universal-property-circle :
+    (P : X → UU l2) → dependent-universal-property-circle →
+    ((x : X) → P x) ≃ free-dependent-loop α P
+  pr1 (eq-dependent-universal-property-circle P dup-circle) = ev-free-loop-Π α P
+  pr2 (eq-dependent-universal-property-circle P dup-circle) = dup-circle P
 ```
 
 ## Properties
@@ -259,3 +318,20 @@ abstract
       ( dup-circle P)
       ( pair p (center (is-prop-P _ (tr P (pr2 l) p) p)))
 ```
+
+### Every point on the circle is merely equal to the basepoint
+
+```agda
+merely-equal-base-point-circle :
+  { l1 : Level} {X : UU l1} (l : free-loop X) →
+  ( dup-circle : dependent-universal-property-circle l1 l) →
+  ( x : X) → (mere-eq (base-free-loop l) x)
+merely-equal-base-point-circle l dup-circle =
+  is-connected-circle'
+    ( l)
+    ( dup-circle)
+    ( mere-eq (base-free-loop l))
+    ( is-prop-mere-eq (base-free-loop l))
+    ( refl-mere-eq)
+```
+
