@@ -18,6 +18,7 @@ open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types publi
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.descent-circle public
 open import synthetic-homotopy-theory.double-loop-spaces public
+open import synthetic-homotopy-theory.finite-cover-circle public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
