@@ -317,6 +317,50 @@ module _
   pr2 emb-map-equiv = is-emb-map-equiv
 ```
 
+### Being an equivalence is closed under pre- and post- composition by equivalences
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  equiv-is-equiv-postcomp-is-equiv :
+    (f : A → B) (e : B ≃ C) →
+    is-equiv f ≃ is-equiv (map-equiv e ∘ f)
+  equiv-is-equiv-postcomp-is-equiv f e =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv (map-equiv e ∘ f))
+      ( λ is-equiv-f →
+          is-equiv-comp
+            ( map-equiv e)
+            ( f)
+            ( is-equiv-f)
+            ( is-equiv-map-equiv e))
+      ( is-equiv-right-factor
+        ( map-equiv e)
+        ( f)
+        ( is-equiv-map-equiv e))
+
+  equiv-is-equiv-precomp-is-equiv :
+    (e : A ≃ B) (f : B → C) →
+    is-equiv f ≃ is-equiv (f ∘ map-equiv e)
+  equiv-is-equiv-precomp-is-equiv e f =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv (f ∘ map-equiv e))
+      ( is-equiv-comp
+          ( f)
+          ( map-equiv e)
+          ( is-equiv-map-equiv e))
+      ( λ is-equiv-f-e →
+          is-equiv-left-factor
+            ( f)
+            ( map-equiv e)
+            ( is-equiv-f-e)
+            ( is-equiv-map-equiv e))
+```
+
 ### Homotopy induction for homotopies between equivalences
 
 ```agda

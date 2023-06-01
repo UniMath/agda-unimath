@@ -84,13 +84,16 @@ module _
   bool-descent-data-circle : descent-data-circle lzero
   bool-descent-data-circle = (bool , equiv-neg-bool)
 
-  double-cover-circle : family-descent-data-circle l bool-descent-data-circle
+  double-cover-circle : family-for-descent-data-circle l bool-descent-data-circle
   double-cover-circle =
     center
       ( unique-family-property-universal-property-circle
         ( l)
         ( up-circle)
         ( bool-descent-data-circle))
+
+  double-cover-circle' : family-with-descent-data-circle l lzero
+  double-cover-circle' = family-with-descent-data-circle-descent-data l bool-descent-data-circle up-circle
 ```
 
 ### Finite cover of the circle
@@ -100,13 +103,17 @@ module _
   Fin-descent-data-circle n = (Fin n , equiv-succ-Fin n)
 
   finite-cover-circle :
-    (n : ℕ) → family-descent-data-circle l (Fin-descent-data-circle n)
+    (n : ℕ) → family-for-descent-data-circle l (Fin-descent-data-circle n)
   finite-cover-circle n =
     center
       ( unique-family-property-universal-property-circle
         ( l)
         ( up-circle)
         ( Fin-descent-data-circle n))
+
+  finite-cover-circle' :
+    (n : ℕ) → family-with-descent-data-circle l lzero
+  finite-cover-circle' n = family-with-descent-data-circle-descent-data l (Fin-descent-data-circle n) up-circle
 ```
 
 ## Properties
@@ -119,15 +126,15 @@ module _
   eq-type-double-cover-finite-cover-circle =
     map-inv-equiv
       ( foo l
-        ( pr1 double-cover-circle)
-        ( bool-descent-data-circle)
-        ( pr2 double-cover-circle)
-        ( pr1 (finite-cover-circle 2))
-        ( Fin-descent-data-circle 2)
-        ( pr2 (finite-cover-circle 2))
+        double-cover-circle'
+        -- ( pr1 double-cover-circle)
+        -- ( descent-data-family-circle l double-cover-circle')
+        ( finite-cover-circle' 2)
+        -- ( pr1 (finite-cover-circle 2))
+        -- ( descent-data-family-circle l (finite-cover-circle' 2))
         ( dup-circle))
-      ( ( inv-equiv equiv-bool-Fin-two-ℕ) ,
-        ( λ { true → refl ; false → refl }))
+      ( (inv-equiv equiv-bool-Fin-two-ℕ) ,
+        (λ { true → refl ; false → {!!} }))
 ```
 
 ### Evaluation of the finite degree maps
@@ -162,13 +169,11 @@ module _
       ((x : Fin n) → ¬ (succ-Fin n x ＝ x))
     sufficient-condition n = equivalence-reasoning
       ¬ ((t : X) → pr1 (finite-cover-circle n) t)
-        ≃ ¬ (fixpoint-descent-data-circle l (Fin-descent-data-circle n))
+        ≃ ¬ (fixpoint-descent-data-circle (Fin-descent-data-circle n))
           by equiv-neg
                ( equiv-ev-fixpoint-descent-data-circle
                  ( l)
-                 ( pr1 (finite-cover-circle n))
-                 ( Fin-descent-data-circle n)
-                 ( pr2 (finite-cover-circle n))
+                 ( finite-cover-circle' n)
                  ( dup-circle))
         ≃ ((x : Fin n) → ¬ (succ-Fin n x ＝ x))
           by equiv-ev-pair
