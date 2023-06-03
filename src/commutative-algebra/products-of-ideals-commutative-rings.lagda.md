@@ -356,7 +356,7 @@ module _
                 ( mul-Commutative-Ring' A _)
                 ( interchange-mul-mul-Commutative-Ring A _ _ _ _))))
           ( left-backward-inclusion-preserves-product-ideal-subset-Commutative-Ring
-             Hs l))
+            Hs l))
         ( is-closed-under-addition-ideal-subset-Commutative-Ring A
           ( product-subset-Commutative-Ring A S T)
           ( _)

@@ -147,11 +147,11 @@ module _
           ( λ α → subset-ideal-Commutative-Ring A (J α))))
       ( x)
       ( backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring
-         ( A)
-         ( I)
-         ( generating-subset-join-family-of-ideals-Commutative-Ring A J)
-         ( x)
-         ( p))
+        ( A)
+        ( I)
+        ( generating-subset-join-family-of-ideals-Commutative-Ring A J)
+        ( x)
+        ( p))
 
   backward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring :
     leq-ideal-Commutative-Ring A

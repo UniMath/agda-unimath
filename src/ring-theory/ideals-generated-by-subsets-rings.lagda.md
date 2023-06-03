@@ -259,12 +259,13 @@ module _
   is-closed-under-negatives-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-ideal-subset-Ring
   is-closed-under-negatives-ideal-subset-Ring x H =
-    tr ( is-in-ideal-subset-Ring)
-       ( mul-neg-one-Ring R x)
-       ( is-closed-under-left-multiplication-ideal-subset-Ring
-         ( neg-one-Ring R)
-         ( x)
-         ( H))
+    tr
+      ( is-in-ideal-subset-Ring)
+      ( mul-neg-one-Ring R x)
+      ( is-closed-under-left-multiplication-ideal-subset-Ring
+        ( neg-one-Ring R)
+        ( x)
+        ( H))
 
   ideal-subset-Ring : ideal-Ring (l1 ⊔ l2) R
   pr1 ideal-subset-Ring =

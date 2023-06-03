@@ -104,7 +104,7 @@ module _
     symmetric-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
 
-### For any universe level `l`, any element `x` is similar to at most one element of universe level `l`.
+### For any universe level `l`, any element `x` is similar to at most one element of universe level `l`
 
 ```agda
 module _

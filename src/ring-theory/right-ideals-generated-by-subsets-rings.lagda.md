@@ -128,9 +128,9 @@ module _
 
   preserves-mul-ev-right-formal-combination-subset-Ring :
     (u : right-formal-combination-subset-Ring) (r : type-Ring R) →
-    Id ( ev-right-formal-combination-subset-Ring
-         ( mul-right-formal-combination-subset-Ring u r))
-       ( mul-Ring R (ev-right-formal-combination-subset-Ring u) r)
+    ev-right-formal-combination-subset-Ring
+      ( mul-right-formal-combination-subset-Ring u r) ＝
+    mul-Ring R (ev-right-formal-combination-subset-Ring u) r
   preserves-mul-ev-right-formal-combination-subset-Ring nil r =
     inv (left-zero-law-mul-Ring R r)
   preserves-mul-ev-right-formal-combination-subset-Ring (cons (x , s) u) r =
@@ -206,12 +206,13 @@ module _
   is-closed-under-negatives-right-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-right-ideal-subset-Ring
   is-closed-under-negatives-right-ideal-subset-Ring x H =
-    tr ( type-Prop ∘ subset-right-ideal-subset-Ring)
-       ( mul-neg-one-Ring' R x)
-       ( is-closed-under-right-multiplication-right-ideal-subset-Ring
-         ( x)
-         ( neg-one-Ring R)
-         ( H))
+    tr
+      ( type-Prop ∘ subset-right-ideal-subset-Ring)
+      ( mul-neg-one-Ring' R x)
+      ( is-closed-under-right-multiplication-right-ideal-subset-Ring
+        ( x)
+        ( neg-one-Ring R)
+        ( H))
 
   right-ideal-subset-Ring : right-ideal-Ring (l1 ⊔ l2) R
   pr1 right-ideal-subset-Ring =

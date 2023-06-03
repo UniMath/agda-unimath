@@ -104,10 +104,10 @@ module _
 
   preserves-concat-ev-left-formal-combination-subset-Ring :
     (u v : left-formal-combination-subset-Ring) →
-    Id ( ev-left-formal-combination-subset-Ring (concat-list u v))
-       ( add-Ring R
-         ( ev-left-formal-combination-subset-Ring u)
-         ( ev-left-formal-combination-subset-Ring v))
+    ev-left-formal-combination-subset-Ring (concat-list u v) ＝
+    add-Ring R
+      ( ev-left-formal-combination-subset-Ring u)
+      ( ev-left-formal-combination-subset-Ring v)
   preserves-concat-ev-left-formal-combination-subset-Ring nil v =
     inv (left-unit-law-add-Ring R (ev-left-formal-combination-subset-Ring v))
   preserves-concat-ev-left-formal-combination-subset-Ring
@@ -129,9 +129,9 @@ module _
 
   preserves-mul-ev-left-formal-combination-subset-Ring :
     (r : type-Ring R) (u : left-formal-combination-subset-Ring) →
-    Id ( ev-left-formal-combination-subset-Ring
-         ( mul-left-formal-combination-subset-Ring r u))
-       ( mul-Ring R r (ev-left-formal-combination-subset-Ring u))
+    ev-left-formal-combination-subset-Ring
+      ( mul-left-formal-combination-subset-Ring r u) ＝
+    mul-Ring R r (ev-left-formal-combination-subset-Ring u)
   preserves-mul-ev-left-formal-combination-subset-Ring r nil =
     inv (right-zero-law-mul-Ring R r)
   preserves-mul-ev-left-formal-combination-subset-Ring r (cons x u) =
@@ -207,12 +207,13 @@ module _
   is-closed-under-negatives-left-ideal-subset-Ring :
     is-closed-under-negatives-subset-Ring R subset-left-ideal-subset-Ring
   is-closed-under-negatives-left-ideal-subset-Ring x H =
-    tr ( type-Prop ∘ subset-left-ideal-subset-Ring)
-       ( mul-neg-one-Ring R x)
-       ( is-closed-under-left-multiplication-left-ideal-subset-Ring
-         ( neg-one-Ring R)
-         ( x)
-         ( H))
+    tr
+      ( type-Prop ∘ subset-left-ideal-subset-Ring)
+      ( mul-neg-one-Ring R x)
+      ( is-closed-under-left-multiplication-left-ideal-subset-Ring
+        ( neg-one-Ring R)
+        ( x)
+        ( H))
 
   left-ideal-subset-Ring : left-ideal-Ring (l1 ⊔ l2) R
   pr1 left-ideal-subset-Ring = subset-left-ideal-subset-Ring

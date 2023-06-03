@@ -62,8 +62,8 @@ module _
     subset-Commutative-Ring (l2 ⊔ l3) R
   subset-intersection-ideal-Commutative-Ring =
     intersection-subtype
-      (subset-ideal-Commutative-Ring R I)
-      (subset-ideal-Commutative-Ring R J)
+      ( subset-ideal-Commutative-Ring R I)
+      ( subset-ideal-Commutative-Ring R J)
 
   is-in-intersection-ideal-Commutative-Ring :
     type-Commutative-Ring R → UU (l2 ⊔ l3)
@@ -95,8 +95,8 @@ module _
     is-closed-under-negatives-subset-Commutative-Ring R
       ( subset-intersection-ideal-Commutative-Ring)
   pr1
-     ( is-closed-under-negatives-intersection-ideal-Commutative-Ring x
-       ( H1 , H2)) =
+    ( is-closed-under-negatives-intersection-ideal-Commutative-Ring x
+      ( H1 , H2)) =
     is-closed-under-negatives-ideal-Commutative-Ring R I H1
   pr2
     ( is-closed-under-negatives-intersection-ideal-Commutative-Ring x
