@@ -71,37 +71,37 @@ module _
     radical-ideal-subset-Commutative-Ring A
       generating-subset-join-family-of-radical-ideals-Commutative-Ring
 
-  forward-implication-is-join-join-family-of-radical-ideals-Commutative-Ring :
+  forward-inclusion-is-join-join-family-of-radical-ideals-Commutative-Ring :
     {l4 : Level} (K : radical-ideal-Commutative-Ring l4 A) →
     ((i : I) → leq-radical-ideal-Commutative-Ring A (J i) K) →
     leq-radical-ideal-Commutative-Ring A
       ( join-family-of-radical-ideals-Commutative-Ring)
       ( K)
-  forward-implication-is-join-join-family-of-radical-ideals-Commutative-Ring
+  forward-inclusion-is-join-join-family-of-radical-ideals-Commutative-Ring
     K H =
     is-radical-of-ideal-radical-of-ideal-Commutative-Ring A
       ( join-family-of-ideals-Commutative-Ring A
         ( λ α → ideal-radical-ideal-Commutative-Ring A (J α)))
       ( K)
-      ( forward-implication-is-join-join-family-of-ideals-Commutative-Ring A
+      ( forward-inclusion-is-join-join-family-of-ideals-Commutative-Ring A
         ( λ α → ideal-radical-ideal-Commutative-Ring A (J α))
         ( ideal-radical-ideal-Commutative-Ring A K)
         ( H))
 
-  backward-implication-is-join-join-family-of-radical-ideals-Commutative-Ring :
+  backward-inclusion-is-join-join-family-of-radical-ideals-Commutative-Ring :
     {l4 : Level} (K : radical-ideal-Commutative-Ring l4 A) →
     leq-radical-ideal-Commutative-Ring A
       ( join-family-of-radical-ideals-Commutative-Ring)
       ( K) →
     (i : I) → leq-radical-ideal-Commutative-Ring A (J i) K
-  backward-implication-is-join-join-family-of-radical-ideals-Commutative-Ring
+  backward-inclusion-is-join-join-family-of-radical-ideals-Commutative-Ring
     K H i x p =
     H ( x)
       ( contains-ideal-radical-of-ideal-Commutative-Ring A
         ( join-family-of-ideals-Commutative-Ring A
           ( λ α → ideal-radical-ideal-Commutative-Ring A (J α)))
         ( x)
-        ( backward-implication-is-join-join-family-of-ideals-Commutative-Ring A
+        ( backward-inclusion-is-join-join-family-of-ideals-Commutative-Ring A
           ( λ α → ideal-radical-ideal-Commutative-Ring A (J α))
           ( join-family-of-ideals-Commutative-Ring A
             ( λ α → ideal-radical-ideal-Commutative-Ring A (J α)))
@@ -114,8 +114,8 @@ module _
     is-join-family-of-radical-ideals-Commutative-Ring A J
       join-family-of-radical-ideals-Commutative-Ring
   pr1 (is-join-join-family-of-radical-ideals-Commutative-Ring K) =
-    forward-implication-is-join-join-family-of-radical-ideals-Commutative-Ring K
+    forward-inclusion-is-join-join-family-of-radical-ideals-Commutative-Ring K
   pr2 (is-join-join-family-of-radical-ideals-Commutative-Ring K) =
-    backward-implication-is-join-join-family-of-radical-ideals-Commutative-Ring
+    backward-inclusion-is-join-join-family-of-radical-ideals-Commutative-Ring
       K
 ```

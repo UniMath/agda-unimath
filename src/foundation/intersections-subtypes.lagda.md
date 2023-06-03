@@ -37,7 +37,7 @@ module _
   where
 
   intersection-subtype : subtype (l2 ⊔ l3) X
-  intersection-subtype = meet-power-set-Large-Locale P Q
+  intersection-subtype = meet-powerset-Large-Locale P Q
 
   is-greatest-binary-lower-bound-intersection-subtype :
     is-greatest-binary-lower-bound-Large-Poset

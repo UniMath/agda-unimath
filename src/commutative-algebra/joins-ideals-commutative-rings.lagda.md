@@ -17,6 +17,7 @@ open import commutative-algebra.products-of-ideals-commutative-rings
 open import commutative-algebra.products-subsets-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
+open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
@@ -71,21 +72,21 @@ module _
   join-family-of-ideals-Commutative-Ring =
     join-family-of-ideals-Ring (ring-Commutative-Ring A) J
 
-  forward-implication-is-join-join-family-of-ideals-Commutative-Ring :
+  forward-inclusion-is-join-join-family-of-ideals-Commutative-Ring :
     {l4 : Level} (K : ideal-Commutative-Ring l4 A) →
     ((i : I) → leq-ideal-Commutative-Ring A (J i) K) →
     leq-ideal-Commutative-Ring A join-family-of-ideals-Commutative-Ring K
-  forward-implication-is-join-join-family-of-ideals-Commutative-Ring =
-    forward-implication-is-join-join-family-of-ideals-Ring
+  forward-inclusion-is-join-join-family-of-ideals-Commutative-Ring =
+    forward-inclusion-is-join-join-family-of-ideals-Ring
       ( ring-Commutative-Ring A)
       ( J)
 
-  backward-implication-is-join-join-family-of-ideals-Commutative-Ring :
+  backward-inclusion-is-join-join-family-of-ideals-Commutative-Ring :
     {l4 : Level} (K : ideal-Commutative-Ring l4 A) →
     leq-ideal-Commutative-Ring A join-family-of-ideals-Commutative-Ring K →
     (i : I) → leq-ideal-Commutative-Ring A (J i) K
-  backward-implication-is-join-join-family-of-ideals-Commutative-Ring =
-    backward-implication-is-join-join-family-of-ideals-Ring
+  backward-inclusion-is-join-join-family-of-ideals-Commutative-Ring =
+    backward-inclusion-is-join-join-family-of-ideals-Ring
       ( ring-Commutative-Ring A)
       ( J)
 
@@ -115,7 +116,8 @@ module _
       ( join-family-of-ideals-Commutative-Ring A
         ( λ α →
           product-ideal-Commutative-Ring A I (J α)))
-  forward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring x p =
+  forward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring
+    x p =
     preserves-order-ideal-subset-Commutative-Ring A
       ( product-subset-Commutative-Ring A
         ( subset-ideal-Commutative-Ring A I)
@@ -133,20 +135,46 @@ module _
             generating-subset-product-ideal-Commutative-Ring A I (J α)))
         ( generating-subset-join-family-of-ideals-Commutative-Ring A
           ( λ α → product-ideal-Commutative-Ring A I (J α)))
-        ( transitive-leq-subtype
-          ( union-family-of-subtypes
-            ( λ α →
-              generating-subset-product-ideal-Commutative-Ring A I (J α)))
-          ( union-family-of-subtypes
-            ( λ α → {!!}))
-          ( generating-subset-join-family-of-ideals-Commutative-Ring A
-            ( λ α → product-ideal-Commutative-Ring A I (J α)))
-          {!!}
-          {!!})
+        ( preserves-order-union-family-of-subtypes
+          ( λ α → generating-subset-product-ideal-Commutative-Ring A I (J α))
+          ( λ α → subset-product-ideal-Commutative-Ring A I (J α))
+          ( λ α →
+            contains-subset-ideal-subset-Commutative-Ring A
+              ( generating-subset-product-ideal-Commutative-Ring A I (J α))))
         ( forward-inclusion-distributive-product-union-family-of-subsets-Commutative-Ring
           ( A)
           ( subset-ideal-Commutative-Ring A I)
           ( λ α → subset-ideal-Commutative-Ring A (J α))))
-      {!!}
-      {!!}
+      ( x)
+      ( backward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring
+         ( A)
+         ( I)
+         ( generating-subset-join-family-of-ideals-Commutative-Ring A J)
+         ( x)
+         ( p))
+
+  backward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( join-family-of-ideals-Commutative-Ring A
+        ( λ α →
+          product-ideal-Commutative-Ring A I (J α)))
+      ( product-ideal-Commutative-Ring A
+        ( I)
+        ( join-family-of-ideals-Commutative-Ring A J))
+  backward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring
+    x p =
+    forward-inclusion-right-preserves-product-ideal-subset-Commutative-Ring A I
+      ( generating-subset-join-family-of-ideals-Commutative-Ring A J)
+      ( x)
+      ( transitive-leq-subtype
+        ( generating-subset-join-family-of-ideals-Commutative-Ring A
+          ( λ α → product-ideal-Commutative-Ring A I (J α)))
+        ( union-family-of-subtypes
+          ( λ α →
+            generating-subset-product-ideal-Commutative-Ring A I (J α)))
+        {!!}
+        {!!}
+        {!!}
+        {!!}
+        {!!})
 ```

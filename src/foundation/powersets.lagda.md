@@ -25,7 +25,9 @@ open import order-theory.preorders
 
 </details>
 
-## Definition
+## Definitions
+
+### Powersets
 
 ```agda
 powerset :
@@ -33,9 +35,7 @@ powerset :
 powerset = subtype
 ```
 
-## Properties
-
-### The powerset preorder and poset
+### The powerset large preorder
 
 ```agda
 module _
@@ -48,16 +48,40 @@ module _
   leq-Large-Preorder-Prop powerset-Large-Preorder = leq-subtype-Prop
   refl-leq-Large-Preorder powerset-Large-Preorder = refl-leq-subtype
   transitive-leq-Large-Preorder powerset-Large-Preorder = transitive-leq-subtype
+```
 
-  powerset-Preorder : (l2 : Level) → Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
-  powerset-Preorder = preorder-Large-Preorder powerset-Large-Preorder
+### The powerset large poset
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
 
   powerset-Large-Poset :
     Large-Poset (λ l → l1 ⊔ lsuc l) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
-  large-preorder-Large-Poset powerset-Large-Poset = powerset-Large-Preorder
+  large-preorder-Large-Poset powerset-Large-Poset = powerset-Large-Preorder A
   antisymmetric-leq-Large-Poset powerset-Large-Poset P Q =
     antisymmetric-leq-subtype P Q
+```
+
+### The powerset preorder at a universe level
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
+
+  powerset-Preorder : (l2 : Level) → Preorder (l1 ⊔ lsuc l2) (l1 ⊔ l2)
+  powerset-Preorder = preorder-Large-Preorder (powerset-Large-Preorder A)
+```
+
+### The powerset poset at a universe level
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
 
   powerset-Poset : (l2 : Level) → Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
-  powerset-Poset = poset-Large-Poset powerset-Large-Poset
+  powerset-Poset = poset-Large-Poset (powerset-Large-Poset A)
 ```

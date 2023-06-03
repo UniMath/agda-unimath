@@ -8,13 +8,18 @@ module ring-theory.posets-of-ideals-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.identity-types
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-elements-large-posets
 
 open import ring-theory.ideals-rings
 open import ring-theory.rings
@@ -96,4 +101,54 @@ module _
   large-preorder-Large-Poset ideal-Ring-Large-Poset = ideal-Ring-Large-Preorder
   antisymmetric-leq-Large-Poset ideal-Ring-Large-Poset =
     antisymmetric-leq-ideal-Ring R
+```
+
+### The similarity relation on ideals in a ring
+
+```agda
+module _
+  {l1 : Level} (R : Ring l1)
+  where
+
+  sim-prop-ideal-Ring :
+    {l2 l3 : Level} (I : ideal-Ring l2 R) (J : ideal-Ring l3 R) →
+    Prop (l1 ⊔ l2 ⊔ l3)
+  sim-prop-ideal-Ring =
+    sim-prop-Large-Poset (ideal-Ring-Large-Poset R)
+
+  sim-ideal-Ring :
+    {l2 l3 : Level} (I : ideal-Ring l2 R) (J : ideal-Ring l3 R) →
+    UU (l1 ⊔ l2 ⊔ l3)
+  sim-ideal-Ring = sim-Large-Poset (ideal-Ring-Large-Poset R)
+
+  is-prop-sim-ideal-Ring :
+    {l2 l3 : Level} (I : ideal-Ring l2 R) (J : ideal-Ring l3 R) →
+    is-prop (sim-ideal-Ring I J)
+  is-prop-sim-ideal-Ring =
+    is-prop-sim-Large-Poset (ideal-Ring-Large-Poset R)
+```
+
+## Properties
+
+### The forgetful function from ideals to subsets preserves inclusions
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  preserves-order-subset-ideal-Ring :
+    {l1 l2 : Level} (I : ideal-Ring l1 R) (J : ideal-Ring l2 R) →
+    leq-ideal-Ring R I J → subset-ideal-Ring R I ⊆ subset-ideal-Ring R J
+  preserves-order-subset-ideal-Ring I J H = H
+
+  subset-ideal-hom-large-poset-Ring :
+    hom-Large-Poset
+      ( id)
+      ( ideal-Ring-Large-Poset R)
+      ( powerset-Large-Poset (type-Ring R))
+  map-hom-Large-Preorder subset-ideal-hom-large-poset-Ring =
+    subset-ideal-Ring R
+  preserves-order-hom-Large-Preorder subset-ideal-hom-large-poset-Ring =
+    preserves-order-subset-ideal-Ring
 ```

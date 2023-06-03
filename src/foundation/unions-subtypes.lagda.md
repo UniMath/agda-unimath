@@ -11,10 +11,13 @@ open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.large-locale-of-subtypes
+open import foundation.powersets
 open import foundation.propositional-truncations
 
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
+
+open import order-theory.least-upper-bounds-large-posets
 ```
 
 </details>
@@ -55,7 +58,16 @@ module _
 
   union-family-of-subtypes :
     {I : UU l2} (A : I → subtype l3 X) → subtype (l2 ⊔ l3) X
-  union-family-of-subtypes = sup-power-set-Large-Locale
+  union-family-of-subtypes = sup-powerset-Large-Locale
+
+  is-least-upper-bound-union-family-of-subtypes :
+    {I : UU l2} (A : I → subtype l3 X) →
+    is-least-upper-bound-family-of-elements-Large-Poset
+      ( powerset-Large-Poset X)
+      ( A)
+      ( union-family-of-subtypes A)
+  is-least-upper-bound-union-family-of-subtypes =
+    is-least-upper-bound-sup-powerset-Large-Locale
 ```
 
 ## Properties
@@ -68,10 +80,10 @@ module _
   (A : I → subtype l3 X) (B : I → subtype l4 X)
   where
 
-  preserves-order-union-of-subtypes :
+  preserves-order-union-family-of-subtypes :
     ((i : I) → A i ⊆ B i) →
     union-family-of-subtypes A ⊆ union-family-of-subtypes B
-  preserves-order-union-of-subtypes H x p =
+  preserves-order-union-family-of-subtypes H x p =
     apply-universal-property-trunc-Prop p
       ( union-family-of-subtypes B x)
       ( λ (i , q) → unit-trunc-Prop (i , H i x q))
