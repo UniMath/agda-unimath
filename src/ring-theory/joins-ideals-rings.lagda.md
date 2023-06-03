@@ -113,6 +113,22 @@ module _
     forward-inclusion-is-join-join-family-of-ideals-Ring K
   pr2 (is-join-join-family-of-ideals-Ring K) =
     backward-inclusion-is-join-join-family-of-ideals-Ring K
+
+  inclusion-join-family-of-ideals-Ring :
+    {l4 : Level} (J : ideal-Ring l4 R) →
+    ((α : U) → leq-ideal-Ring R (I α) J) →
+    leq-ideal-Ring R join-family-of-ideals-Ring J
+  inclusion-join-family-of-ideals-Ring =
+    inclusion-is-join-family-of-ideals-Ring R I
+      ( join-family-of-ideals-Ring)
+      ( is-join-join-family-of-ideals-Ring)
+
+  contains-ideal-join-family-of-ideals-Ring :
+    {α : U} → leq-ideal-Ring R (I α) join-family-of-ideals-Ring
+  contains-ideal-join-family-of-ideals-Ring =
+    contains-ideal-is-join-family-of-ideals-Ring R I
+      ( join-family-of-ideals-Ring)
+      ( is-join-join-family-of-ideals-Ring)
 ```
 
 ## Properties

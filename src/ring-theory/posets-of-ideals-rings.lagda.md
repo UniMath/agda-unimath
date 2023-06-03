@@ -126,6 +126,10 @@ module _
     is-prop (sim-ideal-Ring I J)
   is-prop-sim-ideal-Ring =
     is-prop-sim-Large-Poset (ideal-Ring-Large-Poset R)
+
+  eq-sim-ideal-Ring :
+    {l2 : Level} (I J : ideal-Ring l2 R) → sim-ideal-Ring I J → I ＝ J
+  eq-sim-ideal-Ring = eq-sim-Large-Poset (ideal-Ring-Large-Poset R)
 ```
 
 ## Properties

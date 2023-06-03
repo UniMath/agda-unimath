@@ -121,13 +121,13 @@ module _
   (L : ideal-Commutative-Ring l5 A)
   where
 
-  preserves-leq-product-ideal-Commutative-Ring :
+  preserves-order-product-ideal-Commutative-Ring :
     leq-ideal-Commutative-Ring A I J →
     leq-ideal-Commutative-Ring A K L →
     leq-ideal-Commutative-Ring A
       ( product-ideal-Commutative-Ring A I K)
       ( product-ideal-Commutative-Ring A J L)
-  preserves-leq-product-ideal-Commutative-Ring p q =
+  preserves-order-product-ideal-Commutative-Ring p q =
     is-product-product-ideal-Commutative-Ring A I K
       ( product-ideal-Commutative-Ring A J L)
       ( λ x y u v →
@@ -142,22 +142,22 @@ module _
   (K : ideal-Commutative-Ring l4 A)
   where
 
-  preserves-leq-left-product-ideal-Commutative-Ring :
+  preserves-order-left-product-ideal-Commutative-Ring :
     leq-ideal-Commutative-Ring A I J →
     leq-ideal-Commutative-Ring A
       ( product-ideal-Commutative-Ring A I K)
       ( product-ideal-Commutative-Ring A J K)
-  preserves-leq-left-product-ideal-Commutative-Ring p =
-    preserves-leq-product-ideal-Commutative-Ring A I J K K p
+  preserves-order-left-product-ideal-Commutative-Ring p =
+    preserves-order-product-ideal-Commutative-Ring A I J K K p
       ( refl-leq-ideal-Commutative-Ring A K)
 
-  preserves-leq-right-product-ideal-Commutative-Ring :
+  preserves-order-right-product-ideal-Commutative-Ring :
     leq-ideal-Commutative-Ring A J K →
     leq-ideal-Commutative-Ring A
       ( product-ideal-Commutative-Ring A I J)
       ( product-ideal-Commutative-Ring A I K)
-  preserves-leq-right-product-ideal-Commutative-Ring =
-    preserves-leq-product-ideal-Commutative-Ring A I I J K
+  preserves-order-right-product-ideal-Commutative-Ring =
+    preserves-order-product-ideal-Commutative-Ring A I I J K
       ( refl-leq-ideal-Commutative-Ring A I)
 ```
 
@@ -428,7 +428,7 @@ module _
         ( ideal-subset-Commutative-Ring A S)
         ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I)))
       ( product-ideal-Commutative-Ring A (ideal-subset-Commutative-Ring A S) I)
-      ( preserves-leq-right-product-ideal-Commutative-Ring A
+      ( preserves-order-right-product-ideal-Commutative-Ring A
         ( ideal-subset-Commutative-Ring A S)
         ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
         ( I)
@@ -453,7 +453,7 @@ module _
           ( subset-ideal-Commutative-Ring A I)))
       ( backward-inclusion-preserves-product-ideal-subset-Commutative-Ring A S
         ( subset-ideal-Commutative-Ring A I))
-      ( preserves-leq-right-product-ideal-Commutative-Ring A
+      ( preserves-order-right-product-ideal-Commutative-Ring A
         ( ideal-subset-Commutative-Ring A S)
         ( I)
         ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
@@ -502,7 +502,7 @@ module _
         ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
         ( ideal-subset-Commutative-Ring A T))
       ( product-ideal-Commutative-Ring A I (ideal-subset-Commutative-Ring A T))
-      ( preserves-leq-left-product-ideal-Commutative-Ring A
+      ( preserves-order-left-product-ideal-Commutative-Ring A
         ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
         ( I)
         ( ideal-subset-Commutative-Ring A T)
@@ -531,7 +531,7 @@ module _
       ( backward-inclusion-preserves-product-ideal-subset-Commutative-Ring A
         ( subset-ideal-Commutative-Ring A I)
         ( T))
-      ( preserves-leq-left-product-ideal-Commutative-Ring A
+      ( preserves-order-left-product-ideal-Commutative-Ring A
         ( I)
         ( ideal-subset-Commutative-Ring A (subset-ideal-Commutative-Ring A I))
         ( ideal-subset-Commutative-Ring A T)

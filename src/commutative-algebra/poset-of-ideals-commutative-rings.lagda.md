@@ -16,6 +16,7 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.similarity-of-elements-large-posets
 
 open import ring-theory.posets-of-ideals-rings
 ```
@@ -114,4 +115,39 @@ module _
     ideal-Commutative-Ring-Large-Preorder A
   antisymmetric-leq-Large-Poset ideal-Commutative-Ring-Large-Poset =
     antisymmetric-leq-ideal-Commutative-Ring A
+```
+
+### The similarity relation on ideals in a commutative ring
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  sim-prop-ideal-Commutative-Ring :
+    {l1 l2 : Level}
+    (I : ideal-Commutative-Ring l1 A) (J : ideal-Commutative-Ring l2 A) →
+    Prop (l ⊔ l1 ⊔ l2)
+  sim-prop-ideal-Commutative-Ring =
+    sim-prop-ideal-Ring (ring-Commutative-Ring A)
+
+  sim-ideal-Commutative-Ring :
+    {l1 l2 : Level}
+    (I : ideal-Commutative-Ring l1 A) (J : ideal-Commutative-Ring l2 A) →
+    UU (l ⊔ l1 ⊔ l2)
+  sim-ideal-Commutative-Ring =
+    sim-ideal-Ring (ring-Commutative-Ring A)
+
+  is-prop-sim-ideal-Commutative-Ring :
+    {l1 l2 : Level}
+    (I : ideal-Commutative-Ring l1 A) (J : ideal-Commutative-Ring l2 A) →
+    is-prop (sim-ideal-Commutative-Ring I J)
+  is-prop-sim-ideal-Commutative-Ring =
+    is-prop-sim-ideal-Ring (ring-Commutative-Ring A)
+
+  eq-sim-ideal-Commutative-Ring :
+    {l1 : Level} (I J : ideal-Commutative-Ring l1 A) →
+    sim-ideal-Commutative-Ring I J → I ＝ J
+  eq-sim-ideal-Commutative-Ring =
+    eq-sim-ideal-Ring (ring-Commutative-Ring A)
 ```
