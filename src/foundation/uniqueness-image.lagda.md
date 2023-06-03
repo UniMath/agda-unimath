@@ -64,8 +64,9 @@ module _
                 ( map-emb i')
                 ( map-hom-slice (map-emb i) (map-emb i') h)
                 ( triangle-hom-slice (map-emb i) (map-emb i') h)
-                ( pair ( map-inv-is-equiv is-equiv-h)
-                       ( issec-map-inv-is-equiv is-equiv-h)))))
+                ( pair
+                  ( map-inv-is-equiv is-equiv-h)
+                  ( issec-map-inv-is-equiv is-equiv-h)))))
 
   abstract
     is-image-is-equiv-is-image :

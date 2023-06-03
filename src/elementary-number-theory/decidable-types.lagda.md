@@ -33,7 +33,7 @@ decidable.
 
 ## Properties
 
-### Given a family of decidable types and a number `m` such that `Σ (m ≤ x), P x` is decidable, then `Σ ℕ P` is decidable.
+### Given a family of decidable types and a number `m` such that `Σ (m ≤ x), P x` is decidable, then `Σ ℕ P` is decidable
 
 ```agda
 is-decidable-Σ-ℕ :

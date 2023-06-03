@@ -157,38 +157,42 @@ module _
 
   associative-mul-iterated-product-Concrete-Group :
     (x y z : type-iterated-product-Concrete-Group) →
-    Id (mul-iterated-product-Concrete-Group
-          ( mul-iterated-product-Concrete-Group x y)
-          ( z))
-       (mul-iterated-product-Concrete-Group
-          ( x)
-          ( mul-iterated-product-Concrete-Group y z))
+    Id
+      ( mul-iterated-product-Concrete-Group
+        ( mul-iterated-product-Concrete-Group x y)
+        ( z))
+      ( mul-iterated-product-Concrete-Group
+        ( x)
+        ( mul-iterated-product-Concrete-Group y z))
   associative-mul-iterated-product-Concrete-Group =
     associative-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   left-unit-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
-    Id (mul-iterated-product-Concrete-Group
-          unit-iterated-product-Concrete-Group
-          x)
-       x
+    Id
+      ( mul-iterated-product-Concrete-Group
+        ( unit-iterated-product-Concrete-Group)
+        ( x))
+      ( x)
   left-unit-law-mul-iterated-product-Concrete-Group =
     left-unit-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   right-unit-law-mul-iterated-product-Concrete-Group :
     (y : type-iterated-product-Concrete-Group) →
-    Id (mul-iterated-product-Concrete-Group
-          y
-          unit-iterated-product-Concrete-Group)
-       y
+    Id
+      ( mul-iterated-product-Concrete-Group
+        ( y)
+        ( unit-iterated-product-Concrete-Group))
+      ( y)
   right-unit-law-mul-iterated-product-Concrete-Group =
     right-unit-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   coherence-unit-laws-mul-iterated-product-Concrete-Group :
-    Id ( left-unit-law-mul-iterated-product-Concrete-Group
-           unit-iterated-product-Concrete-Group)
-       ( right-unit-law-mul-iterated-product-Concrete-Group
-           unit-iterated-product-Concrete-Group)
+    Id
+      ( left-unit-law-mul-iterated-product-Concrete-Group
+          unit-iterated-product-Concrete-Group)
+      ( right-unit-law-mul-iterated-product-Concrete-Group
+          unit-iterated-product-Concrete-Group)
   coherence-unit-laws-mul-iterated-product-Concrete-Group =
     coherence-unit-laws-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
@@ -199,19 +203,21 @@ module _
 
   left-inverse-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
-    Id (mul-iterated-product-Concrete-Group
-          (inv-iterated-product-Concrete-Group x)
-          x)
-       unit-iterated-product-Concrete-Group
+    Id
+      ( mul-iterated-product-Concrete-Group
+        ( inv-iterated-product-Concrete-Group x)
+        ( x))
+      ( unit-iterated-product-Concrete-Group)
   left-inverse-law-mul-iterated-product-Concrete-Group =
     left-inverse-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 
   right-inverse-law-mul-iterated-product-Concrete-Group :
     (x : type-iterated-product-Concrete-Group) →
-    Id (mul-iterated-product-Concrete-Group
-          x
-          (inv-iterated-product-Concrete-Group x))
-       unit-iterated-product-Concrete-Group
+    Id
+      ( mul-iterated-product-Concrete-Group
+        ( x)
+        ( inv-iterated-product-Concrete-Group x))
+      ( unit-iterated-product-Concrete-Group)
   right-inverse-law-mul-iterated-product-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-iterated-product-Concrete-Group
 

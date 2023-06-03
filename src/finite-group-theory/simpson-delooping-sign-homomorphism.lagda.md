@@ -631,7 +631,7 @@ module _
           ( inv-equiv ( map-simpson-comp-equiv X X' e f) ∘e
             map-simpson-comp-equiv X X' e f'))
     lemma-sign-comp X X' e f f' =
-       ap
+      ap
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
         ( ap
           ( inv-equiv f ∘e_)

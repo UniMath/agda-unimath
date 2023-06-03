@@ -170,13 +170,13 @@ module _
     reassociate' :
       Σ ( Relaxed-Σ-Decomposition l1 l1 (inclusion-subuniverse P X))
         ( λ d →
-           Σ ( ( u : (indexing-type-Relaxed-Σ-Decomposition d)) →
-               is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition d u))
-             ( λ p →
-               ( ( u : indexing-type-Relaxed-Σ-Decomposition d) →
-                 inclusion-subuniverse
-                   ( subuniverse-global-subuniverse Q l3)
-                   ( S (cotype-Relaxed-Σ-Decomposition d u , p u)))))
+          Σ ( ( u : (indexing-type-Relaxed-Σ-Decomposition d)) →
+              is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition d u))
+            ( λ p →
+              ( ( u : indexing-type-Relaxed-Σ-Decomposition d) →
+                inclusion-subuniverse
+                  ( subuniverse-global-subuniverse Q l3)
+                  ( S (cotype-Relaxed-Σ-Decomposition d u , p u)))))
         ≃
         cauchy-exponential-species-types
           ( Σ-extension-species-subuniverse

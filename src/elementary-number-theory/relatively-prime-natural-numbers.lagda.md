@@ -157,7 +157,7 @@ module _
         ( pr1 c))
 
   is-relatively-prime-is-prime-ℕ :
-     is-relatively-prime-ℕ a b
+    is-relatively-prime-ℕ a b
   is-relatively-prime-is-prime-ℕ =
     is-relatively-prime-is-one-is-common-divisor-ℕ
       ( a)

@@ -86,12 +86,12 @@ module _
     (r : type-Commutative-Ring R)
     (u : formal-combination-subset-Commutative-Ring)
     (t : type-Commutative-Ring R) →
-    Id ( ev-formal-combination-subset-Commutative-Ring
-         ( mul-formal-combination-subset-Commutative-Ring r u t))
-       ( mul-Commutative-Ring R
-         ( mul-Commutative-Ring R r
-           ( ev-formal-combination-subset-Commutative-Ring u))
-         ( t))
+    ev-formal-combination-subset-Commutative-Ring
+      ( mul-formal-combination-subset-Commutative-Ring r u t) ＝
+    mul-Commutative-Ring R
+      ( mul-Commutative-Ring R r
+        ( ev-formal-combination-subset-Commutative-Ring u))
+      ( t)
   preserves-mul-ev-formal-combination-subset-Commutative-Ring =
     preserves-mul-ev-formal-combination-subset-Ring
       ( ring-Commutative-Ring R)

@@ -105,10 +105,10 @@ mere-equiv-standard-cube {k} (pair (pair X H) Y) =
 face-cube :
   (k : ℕ) (X : cube (succ-ℕ k)) (d : dim-cube (succ-ℕ k) X)
   (a : axis-cube (succ-ℕ k) X d) → cube k
-face-cube k X d a =
-  pair ( complement-point-UU-Fin k (pair (dim-cube-UU-Fin (succ-ℕ k) X) d))
-       ( λ d' →
-         axis-cube-UU-2 (succ-ℕ k) X
-           ( inclusion-complement-point-UU-Fin k
-             ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d) d'))
+pr1 (face-cube k X d a) =
+  complement-point-UU-Fin k (pair (dim-cube-UU-Fin (succ-ℕ k) X) d)
+pr2 (face-cube k X d a) d' =
+  axis-cube-UU-2 (succ-ℕ k) X
+    ( inclusion-complement-point-UU-Fin k
+      ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d) d')
 ```

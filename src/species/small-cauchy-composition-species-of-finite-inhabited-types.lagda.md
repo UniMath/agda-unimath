@@ -115,7 +115,7 @@ module _
                   ( is-finite-and-inhabited-Prop)
                   ( map-compute-Inhabited-𝔽' X)
                   ( D)
-                   ( x)))))
+                  ( x)))))
 
   private
     C1 :

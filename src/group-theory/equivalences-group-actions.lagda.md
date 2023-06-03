@@ -288,11 +288,12 @@ module _
     (h : equiv-Abstract-Group-Action G X3 X4)
     (g : equiv-Abstract-Group-Action G X2 X3)
     (f : equiv-Abstract-Group-Action G X1 X2) →
-    Id ( comp-equiv-Abstract-Group-Action G X1 X2 X4
-         ( comp-equiv-Abstract-Group-Action G X2 X3 X4 h g)
-         ( f))
-       ( comp-equiv-Abstract-Group-Action G X1 X3 X4 h
-         ( comp-equiv-Abstract-Group-Action G X1 X2 X3 g f))
+    Id
+      ( comp-equiv-Abstract-Group-Action G X1 X2 X4
+        ( comp-equiv-Abstract-Group-Action G X2 X3 X4 h g)
+        ( f))
+      ( comp-equiv-Abstract-Group-Action G X1 X3 X4 h
+        ( comp-equiv-Abstract-Group-Action G X1 X2 X3 g f))
   associative-comp-equiv-Abstract-Group-Action h g f =
     eq-htpy-equiv-Abstract-Group-Action G X1 X4
       ( comp-equiv-Abstract-Group-Action G X1 X2 X4
@@ -309,10 +310,11 @@ module _
 
   left-unit-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G X Y Y
-         ( id-equiv-Abstract-Group-Action G Y)
-         ( f))
-       ( f)
+    Id
+      ( comp-equiv-Abstract-Group-Action G X Y Y
+        ( id-equiv-Abstract-Group-Action G Y)
+        ( f))
+      ( f)
   left-unit-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X Y
       ( comp-equiv-Abstract-Group-Action G X Y Y
@@ -323,9 +325,10 @@ module _
 
   right-unit-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G X X Y f
-         ( id-equiv-Abstract-Group-Action G X))
-       ( f)
+    Id
+      ( comp-equiv-Abstract-Group-Action G X X Y f
+        ( id-equiv-Abstract-Group-Action G X))
+      ( f)
   right-unit-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X Y
       ( comp-equiv-Abstract-Group-Action G X X Y f
@@ -335,10 +338,11 @@ module _
 
   left-inverse-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G X Y X
-         ( inv-equiv-Abstract-Group-Action G X Y f)
-         ( f))
-       ( id-equiv-Abstract-Group-Action G X)
+    Id
+      ( comp-equiv-Abstract-Group-Action G X Y X
+        ( inv-equiv-Abstract-Group-Action G X Y f)
+        ( f))
+      ( id-equiv-Abstract-Group-Action G X)
   left-inverse-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G X X
       ( comp-equiv-Abstract-Group-Action G X Y X
@@ -349,9 +353,10 @@ module _
 
   right-inverse-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
-    Id ( comp-equiv-Abstract-Group-Action G Y X Y f
-         ( inv-equiv-Abstract-Group-Action G X Y f))
-       ( id-equiv-Abstract-Group-Action G Y)
+    Id
+      ( comp-equiv-Abstract-Group-Action G Y X Y f
+        ( inv-equiv-Abstract-Group-Action G X Y f))
+      ( id-equiv-Abstract-Group-Action G Y)
   right-inverse-law-comp-equiv-Abstract-Group-Action f =
     eq-htpy-equiv-Abstract-Group-Action G Y Y
       ( comp-equiv-Abstract-Group-Action G Y X Y f

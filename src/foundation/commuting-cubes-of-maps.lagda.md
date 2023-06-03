@@ -36,8 +36,9 @@ coherence-htpy-parallel-cone-coherence-cube-maps :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-       top back-left back-right front-left front-right bottom) →
+  (c :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+    top back-left back-right front-left front-right bottom) →
   coherence-htpy-parallel-cone
     ( front-left)
     ( refl-htpy' k)

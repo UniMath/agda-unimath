@@ -108,8 +108,9 @@ cases-eq-function-converse-weak-funext :
   (H : is-contr ((i : I) → A i)) (i : I) (x : A i) (e : is-decidable (i ＝ i)) →
   cases-function-converse-weak-funext d H i x i e ＝ x
 cases-eq-function-converse-weak-funext d H i x (inl p) =
-  ap ( λ t → cases-function-converse-weak-funext d H i x i (inl t))
-     ( eq-is-prop (is-set-has-decidable-equality d i i) {p} {refl})
+  ap
+    ( λ t → cases-function-converse-weak-funext d H i x i (inl t))
+    ( eq-is-prop (is-set-has-decidable-equality d i i) {p} {refl})
 cases-eq-function-converse-weak-funext d H i x (inr f) = ex-falso (f refl)
 
 eq-function-converse-weak-funext :

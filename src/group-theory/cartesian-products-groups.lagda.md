@@ -54,8 +54,9 @@ module _
 
   associative-mul-prod-Group :
     (x y z : type-prod-Group) →
-    Id ( mul-prod-Group (mul-prod-Group x y) z)
-       ( mul-prod-Group x (mul-prod-Group y z))
+    Id
+      ( mul-prod-Group (mul-prod-Group x y) z)
+      ( mul-prod-Group x (mul-prod-Group y z))
   associative-mul-prod-Group = associative-mul-Semigroup semigroup-prod-Group
 
   unit-prod-Group : type-prod-Group

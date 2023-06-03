@@ -45,8 +45,9 @@ module _
     sim-Eq-Rel R x y ↔ sim-Eq-Rel R (h x) (h y))
   (h' : type-Set QR → type-Set QR)
   (x : A)
-  (P : h' (map-reflecting-map-Eq-Rel R f x) ＝
-       map-reflecting-map-Eq-Rel R f (h x))
+  (P :
+    h' (map-reflecting-map-Eq-Rel R f x) ＝
+    map-reflecting-map-Eq-Rel R f (h x))
   where
 
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient :
@@ -65,8 +66,9 @@ module _
             ( map-equiv
               ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
-                ( H' ( map-reflecting-map-Eq-Rel R f x)
-                     ( map-reflecting-map-Eq-Rel R f y))
+                ( H'
+                  ( map-reflecting-map-Eq-Rel R f x)
+                  ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inr star) (inl (inr star)) p q r =
@@ -109,8 +111,9 @@ module _
             ( map-equiv
               ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
-                ( H' ( map-reflecting-map-Eq-Rel R f x)
-                     ( map-reflecting-map-Eq-Rel R f y))
+                ( H'
+                  ( map-reflecting-map-Eq-Rel R f x)
+                  ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
 
   coherence-square-maps-eq-one-value-emb-is-set-quotient :

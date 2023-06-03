@@ -81,10 +81,10 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
- binary-map-functional-vec :
-   (n : ℕ) → (A → B → C) →
-   functional-vec A n → functional-vec B n → functional-vec C n
- binary-map-functional-vec n f v w i = f (v i) (w i)
+  binary-map-functional-vec :
+    (n : ℕ) → (A → B → C) →
+    functional-vec A n → functional-vec B n → functional-vec C n
+  binary-map-functional-vec n f v w i = f (v i) (w i)
 ```
 
 ### Link between functoriality of the type of vectors and of the type of functional vectors

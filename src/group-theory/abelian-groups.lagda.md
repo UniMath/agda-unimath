@@ -588,8 +588,9 @@ module _
 
   preserves-concat-add-list-Ab :
     (l1 l2 : list (type-Ab A)) →
-    Id ( add-list-Ab (concat-list l1 l2))
-       ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+    Id
+      ( add-list-Ab (concat-list l1 l2))
+      ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
   preserves-concat-add-list-Ab =
     preserves-concat-mul-list-Group (group-Ab A)
 ```

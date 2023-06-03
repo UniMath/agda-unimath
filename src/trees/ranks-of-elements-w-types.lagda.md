@@ -203,9 +203,10 @@ module _
     intro-exists
       ( λ z → α u ≼-𝕎-Prop β z)
       ( v)
-      ( tr ( λ t → α u ≼-𝕎 t)
-           ( inv p)
-           ( ≼-∈-𝕎 {α u} {tree-𝕎 x α} (pair u refl)))
+      ( tr
+        ( λ t → α u ≼-𝕎 t)
+        ( inv p)
+        ( ≼-∈-𝕎 {α u} {tree-𝕎 x α} (pair u refl)))
 ```
 
 ### If `x ∈ y` then the rank of `x` is strictly lower than the rank of `y`

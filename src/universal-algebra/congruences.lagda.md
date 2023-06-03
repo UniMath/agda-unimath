@@ -48,7 +48,7 @@ module _
     UU l4
   relation-holds-all-vec {l4} R {.zero-ℕ} empty-vec empty-vec = raise-unit l4
   relation-holds-all-vec {l4} R {.(succ-ℕ _)} (x ∷ v) (x' ∷ v') =
-     type-Prop (prop-Eq-Rel R x x') × (relation-holds-all-vec R v v')
+    type-Prop (prop-Eq-Rel R x x') × (relation-holds-all-vec R v v')
 
   preserves-operations :
     { l4 : Level} →

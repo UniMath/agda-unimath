@@ -121,8 +121,8 @@ module _
           ( Relaxed-Σ-Decomposition l1 l1 X)
           ( λ D →
               is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
-              ((x : indexing-type-Relaxed-Σ-Decomposition D) →
-               is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
+              ( (x : indexing-type-Relaxed-Σ-Decomposition D) →
+                is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
           ( _)) ∘e
         ( ( equiv-Σ-equiv-base
             ( _)
@@ -338,14 +338,14 @@ module _
             ( U)
             ( inclusion-subuniverse P X))) ∘e
         ( ( equiv-tot
-            λ D →
+            ( λ D →
               equiv-prod
-               ( inv-equiv
-                 ( equiv-small-cauchy-composition-Σ-extension-species-subuniverse
-                   ( S)
-                   ( T)
-                   ( indexing-type-Relaxed-Σ-Decomposition D)))
-               ( id-equiv)) ∘e
+                ( inv-equiv
+                  ( equiv-small-cauchy-composition-Σ-extension-species-subuniverse
+                    ( S)
+                    ( T)
+                    ( indexing-type-Relaxed-Σ-Decomposition D)))
+                ( id-equiv))) ∘e
           ( ( equiv-associative-cauchy-composition-species-types
               ( Σ-extension-species-subuniverse P Q S)
               ( Σ-extension-species-subuniverse P Q T)

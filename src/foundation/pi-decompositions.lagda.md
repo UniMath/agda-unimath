@@ -383,8 +383,7 @@ module _
     equiv-tot
       ( λ X →
         equiv-tot
-          ( λ Y →
-             equiv-precomp-equiv (inv-equiv e) (Π X Y)))
+          ( λ Y → equiv-precomp-equiv (inv-equiv e) (Π X Y)))
 
   map-equiv-tr-Π-Decomposition :
     {l3 l4 : Level} →
@@ -464,10 +463,10 @@ module _
         ( λ U Vs e →
           ( Σ ( ( u : indexing-type-Π-Decomposition Y) →
                 cotype-Π-Decomposition Y u ≃ pr1 Vs (map-equiv e u))
-             ( λ f →
-               ( ( ( map-equiv-Π (λ u → pr1 Vs u) e f) ∘
-                   ( map-matching-correspondence-Π-Decomposition Y)) ~
-                 ( map-equiv (pr2 Vs))))))
+              ( λ f →
+                ( ( ( map-equiv-Π (λ u → pr1 Vs u) e f) ∘
+                    ( map-matching-correspondence-Π-Decomposition Y)) ~
+                  ( map-equiv (pr2 Vs))))))
         ( is-contr-total-equiv (indexing-type-Π-Decomposition Y))
         ( pair (indexing-type-Π-Decomposition Y) id-equiv)
         ( is-contr-total-Eq-structure

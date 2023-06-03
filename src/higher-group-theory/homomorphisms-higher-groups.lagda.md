@@ -66,8 +66,9 @@ module _
 
   preserves-mul-map-hom-∞-Group :
     (f : hom-∞-Group) (x y : type-∞-Group G) →
-    Id ( map-hom-∞-Group f (mul-∞-Group G x y))
-       ( mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y))
+    Id
+      ( map-hom-∞-Group f (mul-∞-Group G x y))
+      ( mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y))
   preserves-mul-map-hom-∞-Group =
     preserves-mul-map-Ω
       ( classifying-pointed-type-∞-Group G)
@@ -75,8 +76,9 @@ module _
 
   preserves-inv-map-hom-∞-Group :
     (f : hom-∞-Group) (x : type-∞-Group G) →
-    Id ( map-hom-∞-Group f (inv-∞-Group G x))
-       ( inv-∞-Group H (map-hom-∞-Group f x))
+    Id
+      ( map-hom-∞-Group f (inv-∞-Group G x))
+      ( inv-∞-Group H (map-hom-∞-Group f x))
   preserves-inv-map-hom-∞-Group =
     preserves-inv-map-Ω
       ( classifying-pointed-type-∞-Group G)

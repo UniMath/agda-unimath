@@ -69,8 +69,9 @@ module _
 
   associative-add-matrix-Ring :
     {m n : ℕ} (A B C : matrix-Ring R m n) →
-    Id ( add-matrix-Ring R (add-matrix-Ring R A B) C)
-       ( add-matrix-Ring R A (add-matrix-Ring R B C))
+    Id
+      ( add-matrix-Ring R (add-matrix-Ring R A B) C)
+      ( add-matrix-Ring R A (add-matrix-Ring R B C))
   associative-add-matrix-Ring empty-vec empty-vec empty-vec = refl
   associative-add-matrix-Ring (v ∷ A) (w ∷ B) (z ∷ C) =
     ap-binary _∷_

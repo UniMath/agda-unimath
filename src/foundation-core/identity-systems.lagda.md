@@ -50,15 +50,17 @@ module _
       (is-contr-AB : is-contr (Σ A B)) →
       {l : Level} → IND-identity-system l B a b
     pr1 (Ind-identity-system is-contr-AB P) p x y =
-      tr ( fam-Σ P)
-         ( eq-is-contr is-contr-AB)
-         ( p)
+      tr
+        ( fam-Σ P)
+        ( eq-is-contr is-contr-AB)
+        ( p)
     pr2 (Ind-identity-system is-contr-AB P) p =
-      ap ( λ t → tr (fam-Σ P) t p)
-         ( eq-is-contr'
-           ( is-prop-is-contr is-contr-AB (pair a b) (pair a b))
-           ( eq-is-contr is-contr-AB)
-           ( refl))
+      ap
+        ( λ t → tr (fam-Σ P) t p)
+        ( eq-is-contr'
+          ( is-prop-is-contr is-contr-AB (pair a b) (pair a b))
+          ( eq-is-contr is-contr-AB)
+          ( refl))
 
   abstract
     is-contr-total-space-IND-identity-system :

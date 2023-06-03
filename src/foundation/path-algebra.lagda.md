@@ -576,16 +576,17 @@ module _
   cube
     p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
     p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
-    Id ( ( ap (concat' x000 p0̂11) p00̂0̂) ∙
-         ( ( assoc p00̂0 p010̂ p0̂11) ∙
-           ( ( ap (concat p00̂0 x111) p0̂10̂) ∙
-             ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
-               ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
-                 ( assoc p0̂00 p10̂0 p110̂))))))
-       ( ( assoc p000̂ p00̂1 p0̂11) ∙
-         ( ( ap (concat p000̂ x111) p0̂0̂1) ∙
-           ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
-             ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
-               ( ( assoc p0̂00 p100̂ p10̂1) ∙
-                 ( ( ap (concat p0̂00 x111) p10̂0̂)))))))
+    Id
+      ( ( ap (concat' x000 p0̂11) p00̂0̂) ∙
+        ( ( assoc p00̂0 p010̂ p0̂11) ∙
+          ( ( ap (concat p00̂0 x111) p0̂10̂) ∙
+            ( ( inv (assoc p00̂0 p0̂10 p110̂)) ∙
+              ( ( ap (concat' x000 p110̂) p0̂0̂0) ∙
+                ( assoc p0̂00 p10̂0 p110̂))))))
+      ( ( assoc p000̂ p00̂1 p0̂11) ∙
+        ( ( ap (concat p000̂ x111) p0̂0̂1) ∙
+          ( ( inv (assoc p000̂ p0̂01 p10̂1)) ∙
+            ( ( ap (concat' x000 p10̂1) p0̂00̂) ∙
+              ( ( assoc p0̂00 p100̂ p10̂1) ∙
+                ( ( ap (concat p0̂00 x111) p10̂0̂)))))))
 ```

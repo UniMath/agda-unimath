@@ -692,10 +692,10 @@ needed.
       ( λ f IH →
         h (set-pseudo-cumulative-hierarchy V f)
           ( λ y m →
-             map-universal-property-trunc-Prop
-               ( P y , P-prop y)
-               ( λ (a , p) → tr P p (IH a))
-               ( ∈-cumulative-hierarchy-mere-preimage m)))
+            map-universal-property-trunc-Prop
+              ( P y , P-prop y)
+              ( λ (a , p) → tr P p (IH a))
+              ( ∈-cumulative-hierarchy-mere-preimage m)))
 ```
 
 ### Cumulative hierarchies satisfy the replacement axiom

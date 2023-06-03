@@ -67,8 +67,9 @@ Nat-𝕎-ℕ (succ-ℕ x) = succ-Nat-𝕎 (Nat-𝕎-ℕ x)
 
 issec-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
 issec-ℕ-Nat-𝕎 (tree-𝕎 true α) =
-  ap ( tree-𝕎 true)
-     ( eq-htpy H)
+  ap
+    ( tree-𝕎 true)
+    ( eq-htpy H)
   where
   H : (z : unit) → Nat-𝕎-ℕ (ℕ-Nat-𝕎 (α star)) ＝ α z
   H star = issec-ℕ-Nat-𝕎 (α star)

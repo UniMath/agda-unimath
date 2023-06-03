@@ -156,11 +156,12 @@ is-contr-total-htpy-hom-Pointed-Type-With-Aut :
 is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
   is-contr-total-Eq-structure
     ( λ ( map-h2 : type-Pointed-Type-With-Aut X → type-Pointed-Type-With-Aut Y)
-        ( str-h2 : ( ( map-h2 (point-Pointed-Type-With-Aut X)) ＝
-                     ( point-Pointed-Type-With-Aut Y)) ×
-                   ( ( x : type-Pointed-Type-With-Aut X) →
-                     ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
-                     ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
+        ( str-h2 :
+          ( ( map-h2 (point-Pointed-Type-With-Aut X)) ＝
+            ( point-Pointed-Type-With-Aut Y)) ×
+          ( ( x : type-Pointed-Type-With-Aut X) →
+            ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
+            ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
         ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2) →
         ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
           ( ( H (point-Pointed-Type-With-Aut X)) ∙

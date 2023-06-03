@@ -113,9 +113,9 @@ right-unit-law-add-fraction-ℤ :
   (k : fraction-ℤ) →
   sim-fraction-ℤ (k +fraction-ℤ zero-fraction-ℤ) k
 right-unit-law-add-fraction-ℤ (m , n , p) =
- ap-mul-ℤ
-   ( ap-add-ℤ (right-unit-law-mul-ℤ m) refl ∙ right-unit-law-add-ℤ m)
-   ( inv (right-unit-law-mul-ℤ n))
+  ap-mul-ℤ
+    ( ap-add-ℤ (right-unit-law-mul-ℤ m) refl ∙ right-unit-law-add-ℤ m)
+    ( inv (right-unit-law-mul-ℤ n))
 ```
 
 ### Addition is associative

@@ -193,11 +193,12 @@ module _
       ( λ gV gE α →
         ( p : unordered-pair-vertices-Undirected-Graph G) →
           ( e : edge-Undirected-Graph G p) →
-          Id ( tr
-               ( edge-Undirected-Graph H)
-               ( htpy-unordered-pair α p)
-               ( edge-equiv-Undirected-Graph G H f p e))
-             ( map-equiv (gE p) e))
+          Id
+            ( tr
+              ( edge-Undirected-Graph H)
+              ( htpy-unordered-pair α p)
+              ( edge-equiv-Undirected-Graph G H f p e))
+            ( map-equiv (gE p) e))
       ( is-contr-total-htpy-equiv (equiv-vertex-equiv-Undirected-Graph G H f))
       ( pair (equiv-vertex-equiv-Undirected-Graph G H f) refl-htpy)
       ( is-contr-equiv'

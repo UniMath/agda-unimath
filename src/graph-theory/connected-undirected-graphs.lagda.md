@@ -43,5 +43,5 @@ module _
   is-prop-is-connected-Undirected-Graph
     : is-prop is-connected-Undirected-Graph
   is-prop-is-connected-Undirected-Graph =
-     is-prop-Π (λ _ → is-prop-Π (λ _ → is-prop-type-trunc-Prop))
+    is-prop-Π (λ _ → is-prop-Π (λ _ → is-prop-type-trunc-Prop))
 ```

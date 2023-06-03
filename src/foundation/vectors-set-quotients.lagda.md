@@ -178,9 +178,9 @@ equiv-set-quotient-vector (succ-ℕ n) A R =
           (all-sim-Eq-Rel n
           ( tail-functional-vec n A)
           ( λ x → R (inl x))))
-       by lemma
+      by lemma
     ≃ set-quotient (all-sim-Eq-Rel (succ-ℕ n) A R)
-       by (equiv-quotient-prod-prod-set-quotient _ _)
+      by (equiv-quotient-prod-prod-set-quotient _ _)
   where
   lemma :
     ( set-quotient (R (inr star)) ×
@@ -290,7 +290,7 @@ pr2 (issec-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
               ( all-sim-Eq-Rel n
               ( tail-functional-vec n A)
               ( λ x → R (inl x))) X f))
-           ( a0 , a)))))
+          ( a0 , a)))))
     ( eq-is-prop
       ( is-prop-reflects-Eq-Rel
         ( all-sim-Eq-Rel (succ-ℕ n) A R)
@@ -423,7 +423,7 @@ is-set-quotient-vector-set-quotient :
     ( set-quotient-vector-Set n A R)
     ( reflecting-map-quotient-vector-map n A R))
 pr1 (is-set-quotient-vector-set-quotient n A R X) =
-   issec-inv-precomp-vector-set-quotient n A R X
+  issec-inv-precomp-vector-set-quotient n A R X
 pr2 (is-set-quotient-vector-set-quotient n A R X) =
-   isretr-inv-precomp-vector-set-quotient n A R X
+  isretr-inv-precomp-vector-set-quotient n A R X
 ```

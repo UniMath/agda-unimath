@@ -178,16 +178,16 @@ module _
     ( equiv-coprod
       ( equiv-tot
         ( λ p →
-           ( ( equiv-map-Π
-               ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
-             ( left-unit-law-prod-is-contr
-               ( is-contr-Π
-                 ( λ p' →
-                   is-contr-equiv'
-                     ( p ＝ p')
-                     ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
-                     ( is-prop-type-Prop P p p'))))) ∘e
-           ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
+          ( ( equiv-map-Π
+              ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
+            ( left-unit-law-prod-is-contr
+              ( is-contr-Π
+                ( λ p' →
+                  is-contr-equiv'
+                    ( p ＝ p')
+                    ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
+                    ( is-prop-type-Prop P p p'))))) ∘e
+          ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
       ( equiv-tot
         ( λ q →
           ( ( equiv-map-Π

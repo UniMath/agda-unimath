@@ -634,10 +634,10 @@ module _
           ( Σ ( ( u : indexing-type-Σ-Decomposition Y) →
                 cotype-Σ-Decomposition Y u ≃
                 type-Inhabited-Type (pr1 Vs (map-equiv e u)))
-             ( λ f →
-               ( ( ( map-equiv-Σ (λ u → type-Inhabited-Type (pr1 Vs u)) e f) ∘
-                   ( map-matching-correspondence-Σ-Decomposition Y)) ~
-                 ( map-equiv (pr2 Vs))))))
+              ( λ f →
+                ( ( ( map-equiv-Σ (λ u → type-Inhabited-Type (pr1 Vs u)) e f) ∘
+                    ( map-matching-correspondence-Σ-Decomposition Y)) ~
+                  ( map-equiv (pr2 Vs))))))
         ( is-contr-total-equiv (indexing-type-Σ-Decomposition Y))
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv)
         ( is-contr-total-Eq-structure
@@ -827,7 +827,7 @@ module _
       ( snd-fibered-Σ-Decomposition fib-D)
 
   matching-correspondence-displayed-fibered-Σ-Decomposition :
-     A ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
+    A ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
   matching-correspondence-displayed-fibered-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ X Y by e
@@ -931,7 +931,7 @@ module _
         ( map-equiv e a)
 
   isretr-map-inv-displayed-fibered-Σ-Decomposition :
-     map-inv-displayed-fibered-Σ-Decomposition
+    map-inv-displayed-fibered-Σ-Decomposition
       ( map-displayed-fibered-Σ-Decomposition fib-D) ＝ fib-D
   isretr-map-inv-displayed-fibered-Σ-Decomposition =
     eq-equiv-fibered-Σ-Decomposition
@@ -1002,7 +1002,7 @@ module _
       {l1} {l} {l} {l} {l} {A} fib-D) ＝
     disp-D
   issec-map-inv-displayed-fibered-Σ-Decomposition =
-     eq-equiv-displayed-Σ-Decomposition
+    eq-equiv-displayed-Σ-Decomposition
       ( map-displayed-fibered-Σ-Decomposition fib-D)
       ( disp-D)
       ( ( ( id-equiv) ,

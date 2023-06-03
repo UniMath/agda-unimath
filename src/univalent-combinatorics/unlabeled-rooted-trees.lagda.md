@@ -18,6 +18,4 @@ An unlabelled rooted tree is an unlabelled tree equipped with a vertex.
 
 ## Definition
 
-```agda
-
-```
+This remains to be defined.

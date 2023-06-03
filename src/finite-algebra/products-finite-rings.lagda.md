@@ -91,8 +91,9 @@ module _
 
   associative-add-prod-Ring-𝔽 :
     (x y z : type-prod-Ring-𝔽) →
-    Id ( add-prod-Ring-𝔽 (add-prod-Ring-𝔽 x y) z)
-       ( add-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
+    Id
+      ( add-prod-Ring-𝔽 (add-prod-Ring-𝔽 x y) z)
+      ( add-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
   associative-add-prod-Ring-𝔽 =
     associative-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
@@ -109,8 +110,9 @@ module _
 
   associative-mul-prod-Ring-𝔽 :
     (x y z : type-prod-Ring-𝔽) →
-    Id ( mul-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) z)
-       ( mul-prod-Ring-𝔽 x (mul-prod-Ring-𝔽 y z))
+    Id
+      ( mul-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) z)
+      ( mul-prod-Ring-𝔽 x (mul-prod-Ring-𝔽 y z))
   associative-mul-prod-Ring-𝔽 =
     associative-mul-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
@@ -126,15 +128,17 @@ module _
 
   left-distributive-mul-add-prod-Ring-𝔽 :
     (x y z : type-prod-Ring-𝔽) →
-    Id ( mul-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
-       ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) (mul-prod-Ring-𝔽 x z))
+    Id
+      ( mul-prod-Ring-𝔽 x (add-prod-Ring-𝔽 y z))
+      ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x y) (mul-prod-Ring-𝔽 x z))
   left-distributive-mul-add-prod-Ring-𝔽 =
     left-distributive-mul-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 
   right-distributive-mul-add-prod-Ring-𝔽 :
     (x y z : type-prod-Ring-𝔽) →
-    Id ( mul-prod-Ring-𝔽 (add-prod-Ring-𝔽 x y) z)
-       ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x z) (mul-prod-Ring-𝔽 y z))
+    Id
+      ( mul-prod-Ring-𝔽 (add-prod-Ring-𝔽 x y) z)
+      ( add-prod-Ring-𝔽 (mul-prod-Ring-𝔽 x z) (mul-prod-Ring-𝔽 y z))
   right-distributive-mul-add-prod-Ring-𝔽 =
     right-distributive-mul-add-prod-Ring (ring-Ring-𝔽 R1) (ring-Ring-𝔽 R2)
 

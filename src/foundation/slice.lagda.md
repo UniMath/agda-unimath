@@ -265,7 +265,7 @@ module _
 
   abstract
     is-prop-hom-slice :
-     (f : A → X) (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
+      (f : A → X) (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
     is-prop-hom-slice f i =
       is-prop-is-equiv
         ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))
