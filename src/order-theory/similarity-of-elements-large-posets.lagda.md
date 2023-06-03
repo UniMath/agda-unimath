@@ -24,7 +24,10 @@ open import order-theory.similarity-of-elements-large-preorders
 
 ## Idea
 
-Two elements `x` and `y` of a [large poset](order-theory.large-posets.md) `P` are said to be **similar** if both `x ≤ y` and `y ≤ x` hold. Note that the similarity relation is defined across universe levels, and that only similar elements of the same universe level are equal.
+Two elements `x` and `y` of a [large poset](order-theory.large-posets.md) `P`
+are said to be **similar** if both `x ≤ y` and `y ≤ x` hold. Note that the
+similarity relation is defined across universe levels, and that only similar
+elements of the same universe level are equal.
 
 ## Definition
 

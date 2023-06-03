@@ -151,7 +151,7 @@ module _
       ( is-least-upper-bound-join-ideal-subset-Ring)
       ( is-join-join-family-of-ideals-Ring R
         ( λ α → ideal-subset-Ring R (S α)))
-    
+
   preserves-join-ideal-subset-Ring :
     ideal-subset-Ring R (union-family-of-subtypes S) ＝
     join-family-of-ideals-Ring R (λ α → ideal-subset-Ring R (S α))

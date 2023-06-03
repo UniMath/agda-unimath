@@ -22,7 +22,10 @@ open import order-theory.order-preserving-maps-large-posets
 
 ## Idea
 
-A **reflective galois connection** between [large posets](order-theory.large-posets.md) `P` and `Q` is a [Galois connection](order-theory.galois-connections-large-posets.md) `f : P ⇆ Q : g` such that `f ∘ g : Q → P` is the identity map.
+A **reflective galois connection** between
+[large posets](order-theory.large-posets.md) `P` and `Q` is a
+[Galois connection](order-theory.galois-connections-large-posets.md)
+`f : P ⇆ Q : g` such that `f ∘ g : Q → P` is the identity map.
 
 ## Definitions
 
@@ -65,7 +68,7 @@ module _
           galois-connection-reflective-galois-connection-Large-Poset
 
   open reflective-galois-connection-Large-Poset public
-  
+
   module _
     (G : reflective-galois-connection-Large-Poset)
     where

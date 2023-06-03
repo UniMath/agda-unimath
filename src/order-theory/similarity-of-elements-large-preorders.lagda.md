@@ -18,7 +18,8 @@ open import order-theory.large-preorders
 
 ## Idea
 
-Two elements `x` and `y` of a [large preorder](order-theory.large-preorders.md) `P` are said to be **similar** if both `x ≤ y` and `y ≤ x` hold.
+Two elements `x` and `y` of a [large preorder](order-theory.large-preorders.md)
+`P` are said to be **similar** if both `x ≤ y` and `y ≤ x` hold.
 
 ## Definition
 

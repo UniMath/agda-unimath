@@ -77,6 +77,9 @@ open import order-theory.order-preserving-maps-preorders public
 open import order-theory.posets public
 open import order-theory.powers-of-large-locales public
 open import order-theory.preorders public
+open import order-theory.reflective-galois-connections-large-posets public
+open import order-theory.similarity-of-elements-large-posets public
+open import order-theory.similarity-of-elements-large-preorders public
 open import order-theory.subposets public
 open import order-theory.subpreorders public
 open import order-theory.suplattices public
