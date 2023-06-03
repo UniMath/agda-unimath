@@ -11,6 +11,7 @@ open import commutative-algebra.binomial-theorem-commutative-rings
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
@@ -21,19 +22,34 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
+open import foundation.functions
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
+
+open import order-theory.galois-connections-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.reflective-galois-connections-large-posets
 ```
 
 </details>
 
 ## Idea
 
-The **radical** of an ideal `I` in a commutative ring `A` is the ideal
-consisting of all elements `f` for which there exists an `n` such that `fⁿ ∈ I`.
+The **radical** `√ I` of an ideal `I` in a commutative ring `A` is the least
+[radical ideal](commutative-algebra.radical-ideals-commutative-rings.md) of `A`
+containing `I`. The radical `√ I` is constructed as the ideal consisting of all
+elements `f` for which there exists an `n` such that `fⁿ ∈ I`.
+
+The operation `I ↦ √ I` is a
+[reflective Galois connection](order-theory.reflective-galois-connections-large-posets.md)
+from the [large poset](order-theory.large-posets.md) of
+[ideals](commutative-algebra.ideals-commutative-rings.md) in `A` into the large
+poset of radical ideals in `A`.
 
 ## Definitions
 
@@ -57,7 +73,9 @@ module _
       ( ideal-radical-ideal-Commutative-Ring A K)
 ```
 
-### The radical of an ideal
+### The radical Galois connection on ideals of a commutative ring
+
+#### The radical of an ideal
 
 ```agda
 module _
@@ -196,4 +214,112 @@ module _
       ( λ (n , L) →
         is-radical-radical-ideal-Commutative-Ring A J x n
           ( H (power-Commutative-Ring A n x) L))
+```
+
+#### The operation `I ↦ √ I` as an order preserving map
+
+```agda
+module _
+  {l1 : Level} (A : Commutative-Ring l1)
+  where
+
+  preserves-order-radical-of-ideal-Commutative-Ring :
+    {l2 l3 : Level}
+    (I : ideal-Commutative-Ring l2 A) (J : ideal-Commutative-Ring l3 A) →
+    leq-ideal-Commutative-Ring A I J →
+    leq-radical-ideal-Commutative-Ring A
+      ( radical-of-ideal-Commutative-Ring A I)
+      ( radical-of-ideal-Commutative-Ring A J)
+  preserves-order-radical-of-ideal-Commutative-Ring I J H =
+    is-radical-of-ideal-radical-of-ideal-Commutative-Ring A I
+      ( radical-of-ideal-Commutative-Ring A J)
+      ( transitive-leq-ideal-Commutative-Ring A I J
+        ( ideal-radical-of-ideal-Commutative-Ring A J)
+        ( contains-ideal-radical-of-ideal-Commutative-Ring A J)
+        ( H))
+
+  radical-of-ideal-hom-large-poset-Commutative-Ring :
+    hom-Large-Poset id
+      ( ideal-Commutative-Ring-Large-Poset A)
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+  map-hom-Large-Preorder
+    radical-of-ideal-hom-large-poset-Commutative-Ring =
+    radical-of-ideal-Commutative-Ring A
+  preserves-order-hom-Large-Preorder
+    radical-of-ideal-hom-large-poset-Commutative-Ring =
+    preserves-order-radical-of-ideal-Commutative-Ring
+```
+
+#### The radical Galois connection
+
+```agda
+module _
+  {l1 : Level} (A : Commutative-Ring l1)
+  where
+
+  adjoint-relation-radical-of-ideal-Commutative-Ring :
+    {l2 l3 : Level}
+    (I : ideal-Commutative-Ring l2 A)
+    (J : radical-ideal-Commutative-Ring l3 A) →
+    leq-radical-ideal-Commutative-Ring A
+      ( radical-of-ideal-Commutative-Ring A I)
+      ( J) ↔
+    leq-ideal-Commutative-Ring A
+      ( I)
+      ( ideal-radical-ideal-Commutative-Ring A J)
+  pr1 (adjoint-relation-radical-of-ideal-Commutative-Ring I J) H =
+    transitive-leq-ideal-Commutative-Ring A I
+      ( ideal-radical-of-ideal-Commutative-Ring A I)
+      ( ideal-radical-ideal-Commutative-Ring A J)
+      ( H)
+      ( contains-ideal-radical-of-ideal-Commutative-Ring A I)
+  pr2 (adjoint-relation-radical-of-ideal-Commutative-Ring I J) =
+    is-radical-of-ideal-radical-of-ideal-Commutative-Ring A I J
+
+  radical-of-ideal-galois-connection-Commutative-Ring :
+    galois-connection-Large-Poset id id
+      ( ideal-Commutative-Ring-Large-Poset A)
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+  lower-adjoint-galois-connection-Large-Poset
+    radical-of-ideal-galois-connection-Commutative-Ring =
+    radical-of-ideal-hom-large-poset-Commutative-Ring A
+  upper-adjoint-galois-connection-Large-Poset
+    radical-of-ideal-galois-connection-Commutative-Ring =
+    ideal-radical-ideal-hom-large-poset-Commutative-Ring A
+  adjoint-relation-galois-connection-Large-Poset
+    radical-of-ideal-galois-connection-Commutative-Ring =
+    adjoint-relation-radical-of-ideal-Commutative-Ring
+```
+
+#### The radical reflective Galois connection
+
+```agda
+module _
+  {l1 : Level} (A : Commutative-Ring l1)
+  where
+
+  is-reflective-radical-of-ideal-Commutative-Ring :
+    is-reflective-galois-connection-Large-Poset
+      ( ideal-Commutative-Ring-Large-Poset A)
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+      ( radical-of-ideal-galois-connection-Commutative-Ring A)
+  pr1 (is-reflective-radical-of-ideal-Commutative-Ring I) =
+    is-radical-of-ideal-radical-of-ideal-Commutative-Ring A
+      ( ideal-radical-ideal-Commutative-Ring A I)
+      ( I)
+      ( refl-leq-radical-ideal-Commutative-Ring A I)
+  pr2 (is-reflective-radical-of-ideal-Commutative-Ring I) =
+    contains-ideal-radical-of-ideal-Commutative-Ring A
+      ( ideal-radical-ideal-Commutative-Ring A I)
+
+  radical-of-ideal-reflective-galois-connection-Commutative-Ring :
+    reflective-galois-connection-Large-Poset
+      ( ideal-Commutative-Ring-Large-Poset A)
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+  galois-connection-reflective-galois-connection-Large-Poset
+    radical-of-ideal-reflective-galois-connection-Commutative-Ring =
+    radical-of-ideal-galois-connection-Commutative-Ring A
+  is-reflective-reflective-galois-connection-Large-Poset
+    radical-of-ideal-reflective-galois-connection-Commutative-Ring =
+    is-reflective-radical-of-ideal-Commutative-Ring
 ```

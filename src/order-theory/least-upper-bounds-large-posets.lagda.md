@@ -46,6 +46,15 @@ module _
   is-least-upper-bound-family-of-elements-Large-Poset y =
     {l4 : Level} (z : type-Large-Poset P l4) →
     is-upper-bound-family-of-elements-Large-Poset P x z ↔ leq-Large-Poset P y z
+
+  leq-is-least-upper-bound-family-of-elements-Large-Poset :
+    (y : type-Large-Poset P l3) →
+    is-least-upper-bound-family-of-elements-Large-Poset y →
+    {l4 : Level} (z : type-Large-Poset P l4) →
+    is-upper-bound-family-of-elements-Large-Poset P x z →
+    leq-Large-Poset P y z
+  leq-is-least-upper-bound-family-of-elements-Large-Poset y H z K =
+    forward-implication (H z) K
 ```
 
 ### The predicate on families of elements in large posets of having least upper bounds

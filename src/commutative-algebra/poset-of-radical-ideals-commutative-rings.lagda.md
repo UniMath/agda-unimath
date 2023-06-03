@@ -11,6 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -18,6 +19,8 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>
@@ -133,4 +136,33 @@ module _
     radical-ideal-Commutative-Ring-Large-Preorder A
   antisymmetric-leq-Large-Poset radical-ideal-Commutative-Ring-Large-Poset =
     antisymmetric-leq-radical-ideal-Commutative-Ring A
+```
+
+### The inclusion of radical ideals into ideals of a commutative ring
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  preserves-order-ideal-radical-ideal-Commutative-Ring :
+    {l1 l2 : Level}
+    (I : radical-ideal-Commutative-Ring l1 A)
+    (J : radical-ideal-Commutative-Ring l2 A) →
+    leq-radical-ideal-Commutative-Ring A I J →
+    leq-ideal-Commutative-Ring A
+      ( ideal-radical-ideal-Commutative-Ring A I)
+      ( ideal-radical-ideal-Commutative-Ring A J)
+  preserves-order-ideal-radical-ideal-Commutative-Ring I J H = H
+
+  ideal-radical-ideal-hom-large-poset-Commutative-Ring :
+    hom-Large-Poset id
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+      ( ideal-Commutative-Ring-Large-Poset A)
+  map-hom-Large-Preorder
+    ideal-radical-ideal-hom-large-poset-Commutative-Ring =
+    ideal-radical-ideal-Commutative-Ring A
+  preserves-order-hom-Large-Preorder
+    ideal-radical-ideal-hom-large-poset-Commutative-Ring =
+    preserves-order-ideal-radical-ideal-Commutative-Ring
 ```

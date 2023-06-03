@@ -1,8 +1,6 @@
 # Joins of radical ideals in commutative rings
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module commutative-algebra.joins-radical-ideals-commutative-rings where
 ```
 
@@ -40,7 +38,7 @@ the least radical ideal containing each `J α`.
 ```agda
 module _
   {l1 l2 l3 : Level} (A : Commutative-Ring l1)
-  {I : UU l2} (J : I → radical-ideal-Commutative-Ring l3 A)
+  {U : UU l2} (I : U → radical-ideal-Commutative-Ring l3 A)
   where
 
   is-join-family-of-radical-ideals-Commutative-Ring :
@@ -48,7 +46,30 @@ module _
   is-join-family-of-radical-ideals-Commutative-Ring =
     is-least-upper-bound-family-of-elements-Large-Poset
       ( radical-ideal-Commutative-Ring-Large-Poset A)
-      ( J)
+      ( I)
+
+  inclusion-is-join-family-of-radical-ideals-Commutative-Ring :
+    {l4 : Level} (J : radical-ideal-Commutative-Ring l4 A) →
+    is-join-family-of-radical-ideals-Commutative-Ring J →
+    {l5 : Level} (K : radical-ideal-Commutative-Ring l5 A) →
+    ((α : U) → leq-radical-ideal-Commutative-Ring A (I α) K) →
+    leq-radical-ideal-Commutative-Ring A J K
+  inclusion-is-join-family-of-radical-ideals-Commutative-Ring =
+    leq-is-least-upper-bound-family-of-elements-Large-Poset
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+      ( I)
+
+  contains-ideal-is-join-family-of-radical-ideals-Commutative-Ring :
+    {l4 : Level} (J : radical-ideal-Commutative-Ring l4 A) →
+    is-join-family-of-radical-ideals-Commutative-Ring J →
+    {α : U} → leq-radical-ideal-Commutative-Ring A (I α) J
+  contains-ideal-is-join-family-of-radical-ideals-Commutative-Ring J H {α} =
+    is-upper-bound-is-least-upper-bound-family-of-elements-Large-Poset
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+      { x = I}
+      { y = J}
+      ( H)
+      ( α)
 ```
 
 ### The join of a family of radical ideals
