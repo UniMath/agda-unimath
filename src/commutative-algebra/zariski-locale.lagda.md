@@ -83,3 +83,5 @@ module _
 ## Definition
 
 ### The Zariski locale
+
+To do.
