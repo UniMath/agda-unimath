@@ -36,9 +36,9 @@ to `X`, preserving the structure of the integers (zero and the successor
 equivalence), is contractible.
 
 The dependent universal property of the integers asserts a similar statement for
-sections of any type family `P` over the integers, equipped with a point `p0 : P
-zero-ℤ` and a family of equivalneces `(P k) ≃ (P (succ-ℤ k))` for every integer
-`k`.
+sections of any type family `P` over the integers, equipped with a point
+`p0 : P zero-ℤ` and a family of equivalneces `(P k) ≃ (P (succ-ℤ k))` for every
+integer `k`.
 
 ## Definitions
 
@@ -65,23 +65,23 @@ module _
         ( pS (inr (inr x)))
         ( elim-ℤ (inr (inr x)))
 
-    comp-zero-elim-ℤ : (elim-ℤ zero-ℤ) ＝ p0
-    comp-zero-elim-ℤ = refl
+    compute-zero-elim-ℤ : (elim-ℤ zero-ℤ) ＝ p0
+    compute-zero-elim-ℤ = refl
 
-    comp-succ-elim-ℤ :
+    compute-succ-elim-ℤ :
       (k : ℤ) → (elim-ℤ (succ-ℤ k)) ＝ (map-equiv (pS k) (elim-ℤ k))
-    comp-succ-elim-ℤ (inl zero-ℕ) =
+    compute-succ-elim-ℤ (inl zero-ℕ) =
       inv
         ( issec-map-inv-is-equiv
           ( is-equiv-map-equiv (pS (inl zero-ℕ)))
           ( elim-ℤ (succ-ℤ (inl zero-ℕ))))
-    comp-succ-elim-ℤ (inl (succ-ℕ x)) =
+    compute-succ-elim-ℤ (inl (succ-ℕ x)) =
       inv
         ( issec-map-inv-is-equiv
           ( is-equiv-map-equiv (pS (inl (succ-ℕ x))))
           ( elim-ℤ (succ-ℤ (inl (succ-ℕ x)))))
-    comp-succ-elim-ℤ (inr (inl star)) = refl
-    comp-succ-elim-ℤ (inr (inr x)) = refl
+    compute-succ-elim-ℤ (inr (inl star)) = refl
+    compute-succ-elim-ℤ (inr (inr x)) = refl
 ```
 
 ### Structure preserving dependent maps from the integers
@@ -96,7 +96,7 @@ module _
 
   Elim-ℤ : ELIM-ℤ
   pr1 Elim-ℤ = elim-ℤ
-  pr2 Elim-ℤ = ( comp-zero-elim-ℤ , comp-succ-elim-ℤ )
+  pr2 Elim-ℤ = ( compute-zero-elim-ℤ , compute-succ-elim-ℤ)
 
   equiv-comparison-map-Eq-ELIM-ℤ :
     ( s t : ELIM-ℤ) (k : ℤ) →
@@ -212,7 +212,8 @@ module _
 
 ### The universal property of the integers
 
-The universal property is just a special case of the dependent universal property.
+The universal property is just a special case of the dependent universal
+property.
 
 ```agda
 module _

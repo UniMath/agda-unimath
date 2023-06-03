@@ -37,9 +37,12 @@ module _
   iterate-identity-ℤ p (inl (succ-ℕ n)) = inv p ∙ (iterate-identity-ℤ p (inl n))
   iterate-identity-ℤ p (inr (inl star)) = refl
   iterate-identity-ℤ p (inr (inr zero-ℕ)) = p
-  iterate-identity-ℤ p (inr (inr (succ-ℕ n))) = p ∙ (iterate-identity-ℤ p (inr (inr n)))
+  iterate-identity-ℤ p (inr (inr (succ-ℕ n))) =
+    p ∙ (iterate-identity-ℤ p (inr (inr n)))
 
-  iterate-pos : (n : ℕ) → (p : x ＝ x) → iterate-identity-ℤ p (int-ℕ n) ＝ iterate-identity-ℕ p n
+  iterate-pos :
+    (n : ℕ) → (p : x ＝ x) →
+    iterate-identity-ℤ p (int-ℕ n) ＝ iterate-identity-ℕ p n
   iterate-pos zero-ℕ = refl-htpy
   iterate-pos (succ-ℕ zero-ℕ) p = inv right-unit
   iterate-pos (succ-ℕ (succ-ℕ n)) p = ap (p ∙_) (iterate-pos (succ-ℕ n) p)
@@ -59,5 +62,7 @@ module _
         ~ tr B (iterate-identity-ℕ p n) ∘ (tr B p)
           by tr-concat p _
         ~ iterate (succ-ℕ n) (tr B p)
-          by (tr-iterate-identity-ℕ p n ∘ (tr B p)) ∙h (inv-htpy (iterate-succ-ℕ n (tr B p)))
+          by
+            ( tr-iterate-identity-ℕ p n ∘ (tr B p)) ∙h
+            ( inv-htpy (iterate-succ-ℕ n (tr B p)))
 ```

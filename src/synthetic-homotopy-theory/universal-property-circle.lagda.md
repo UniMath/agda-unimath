@@ -125,7 +125,8 @@ module _
 
   compute-loop-recursion-principle-circle :
     ap function-recursion-principle-circle (loop-free-loop α) ＝
-    (compute-base-recursion-principle-circle ∙ (pr2 β ∙ (inv compute-base-recursion-principle-circle)))
+    ( compute-base-recursion-principle-circle ∙
+      ( pr2 β ∙ (inv compute-base-recursion-principle-circle)))
   compute-loop-recursion-principle-circle =
     ( con-inv
       ( ap function-recursion-principle-circle (loop-free-loop α))
@@ -334,4 +335,3 @@ merely-equal-base-point-circle l dup-circle =
     ( is-prop-mere-eq (base-free-loop l))
     ( refl-mere-eq)
 ```
-

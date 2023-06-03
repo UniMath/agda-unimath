@@ -21,8 +21,8 @@ open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
-open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -49,9 +49,8 @@ The descent property uniquely characterizes type families over the circle.
 
 By the universal property of the circle and univalence, a type family
 `A : 𝕊¹ → U` is equivalent to a type `X : U` equipped with an automorphism
-`e : X ≃ X`, in a way made precise in further sections of this file.
-The pair `(X, e)` is called descent data for the circle.
-Σ (X : U) (X ≃ X)
+`e : X ≃ X`, in a way made precise in further sections of this file. The pair
+`(X, e)` is called descent data for the circle. Σ (X : U) (X ≃ X)
 
 ```agda
 descent-data-circle :
@@ -74,10 +73,10 @@ module _
 The equivalence extends to the dependent case, where given a type family `A`
 over the circle with descent data `(X, e)`, a type family
 `Q : (t : 𝕊¹) → A t → U` is equivalent to a type family `R : X → U` equipped
-with a family of equivalences `K : (x : X) → R(x) ≃ R(e(x))`.
-The pair `(R, K)` is called dependent descent data for the circle.
-Intuitively, this states that the types over points of `X` belonging to the same
-connected component in the total space `Σ 𝕊¹ A` are equivalent.
+with a family of equivalences `K : (x : X) → R(x) ≃ R(e(x))`. The pair `(R, K)`
+is called dependent descent data for the circle. Intuitively, this states that
+the types over points of `X` belonging to the same connected component in the
+total space `Σ 𝕊¹ A` are equivalent.
 
 ```agda
 dependent-descent-data-circle :
@@ -138,8 +137,8 @@ hom-descent-data-circle P Q =
 
 ### Canonical descent data for a family over the circle
 
-A type family over the circle gives rise to its canonical descent data,
-given by evaluation at `base` and transport along `loop`.
+A type family over the circle gives rise to its canonical descent data, given by
+evaluation at `base` and transport along `loop`.
 
 ```agda
 ev-descent-data-circle :
@@ -187,8 +186,8 @@ module _
 
 ### A family over the circle equipped with corresponding descent data
 
-A family for descent data `(X, e)` is a family over the circle, along with
-a proof that they are equivalent.
+A family for descent data `(X, e)` is a family over the circle, along with a
+proof that they are equivalent.
 
 Descent data for a family `A` is descent data with a proof that it's equivalent
 to `A`.
@@ -197,8 +196,8 @@ A family with descent data is a family `A` over the circle, equipped with
 descent data `(X, e)`, and a proof of their equivalence.
 
 Ideally, every section characterizing descent data of a particular type family
-should include a term of type `family-with-descent-data-circle`, whose
-type family is the one being described.
+should include a term of type `family-with-descent-data-circle`, whose type
+family is the one being described.
 
 Note on naming: a `-for-` in a name indicates that the particular term contains
 a proof that it's somehow equivalent to the structure it's "for".
@@ -563,42 +562,43 @@ module _
           ＝ {!!}
             by {!!}
           ＝ map-equiv
-               ( map-inv-equiv
-                 ( equiv-Π
-                   ( λ x → Id (A (pr1 l) x) (A (pr1 l) (tr Q (pr2 l) x))) (pr1 αH)
-                 ( λ a' →
-                   equiv-comp
-                     ( equiv-concat' (A (pr1 l) (pr1 (pr1 αH) a'))
-                     ( ap (A (pr1 l)) (pr2 αH a')))
-                     ( inv-equiv equiv-univalence)))
-                 (λ y →
-                   ( inv (tr-const (pr2 l) (A (pr1 l) y))) ∙
-                   ( map-inv-equiv
-                     ( compute-path-over-function-type Q (λ _ → UU l3) (pr2 l)
-                         ( A (pr1 l)) (A (pr1 l)))
-                     ( apd A (pr2 l)))
-                     ( y))
-               x)
-               a
+              ( map-inv-equiv
+                ( equiv-Π
+                  ( λ x →
+                    Id (A (pr1 l) x) (A (pr1 l) (tr Q (pr2 l) x))) (pr1 αH)
+                ( λ a' →
+                  equiv-comp
+                    ( equiv-concat' (A (pr1 l) (pr1 (pr1 αH) a'))
+                    ( ap (A (pr1 l)) (pr2 αH a')))
+                    ( inv-equiv equiv-univalence)))
+                (λ y →
+                  ( inv (tr-const (pr2 l) (A (pr1 l) y))) ∙
+                  ( map-inv-equiv
+                    ( compute-path-over-function-type Q (λ _ → UU l3) (pr2 l)
+                        ( A (pr1 l)) (A (pr1 l)))
+                    ( apd A (pr2 l)))
+                    ( y))
+              x)
+              a
             by {!!}
           ＝ map-equiv
-                (map-inv-equiv
-                  (equiv-Π
-                  (λ x → Id (A (pr1 l) x) (A (pr1 l) (tr Q (pr2 l) x))) (pr1 αH)
-                  (λ a' →
-                      equiv-comp
-                      (equiv-concat' (A (pr1 l) (pr1 (pr1 αH) a'))
-                      (ap (A (pr1 l)) (pr2 αH a')))
-                      (inv-equiv equiv-univalence)))
-                  (λ y →
-                    ( inv (tr-const (pr2 l) (A (pr1 l) y))) ∙
-                    ( map-inv-equiv
-                      ( compute-path-over-function-type Q (λ _ → UU l3) (pr2 l)
-                          ( A (pr1 l)) (A (pr1 l)))
-                      ( apd A (pr2 l)))
-                      ( y))
-                x)
-                a
+              (map-inv-equiv
+                (equiv-Π
+                (λ x → Id (A (pr1 l) x) (A (pr1 l) (tr Q (pr2 l) x))) (pr1 αH)
+                (λ a' →
+                    equiv-comp
+                    (equiv-concat' (A (pr1 l) (pr1 (pr1 αH) a'))
+                    (ap (A (pr1 l)) (pr2 αH a')))
+                    (inv-equiv equiv-univalence)))
+                (λ y →
+                  ( inv (tr-const (pr2 l) (A (pr1 l) y))) ∙
+                  ( map-inv-equiv
+                    ( compute-path-over-function-type Q (λ _ → UU l3) (pr2 l)
+                        ( A (pr1 l)) (A (pr1 l)))
+                    ( apd A (pr2 l)))
+                    ( y))
+              x)
+              a
             by {!!})
 
   is-equiv-ev-dependent-descent-data-circle-dependent-universal-property-circle :
@@ -927,7 +927,7 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level } {X : UU l1} (l : free-loop X)
+  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
   ( A : UU l2)
   where
 
@@ -995,7 +995,6 @@ module _
     f : (x : Y) → (Z x) ≃ (Z (map-equiv e x))
     f = equiv-dependent-descent-data-circle P Q
 
-
   descent-data-circle-dependent-pair-type : descent-data-circle (l2 ⊔ l3)
   pr1 descent-data-circle-dependent-pair-type = Σ Y Z
   pr2 descent-data-circle-dependent-pair-type = equiv-Σ Z e f
@@ -1049,7 +1048,6 @@ module _
 ### Characterization of equivalences between families over the circle
 
 ```agda
-
 baz : {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
       (f : B → C) (g : C → D) (h : A → D) (e : B ≃ A) →
       ((g ∘ (f ∘ (map-inv-equiv e))) ~ h) ≃ ((g ∘ f) ~ (h ∘ (map-equiv e)))
@@ -1101,7 +1099,6 @@ module _
     ( equiv-is-equiv-precomp-is-equiv
       ( inv-equiv (aut-descent-data-circle P))
       ( h))
-
 
   foo :
     ( {k : Level} → dependent-universal-property-circle k l) →
