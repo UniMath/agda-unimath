@@ -9,6 +9,7 @@
     "github.vscode-pull-request-github",
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "oderwat.indent-rainbow"
+    "oderwat.indent-rainbow",
+    "brunnerh.insert-unicode"
   ]
 }
