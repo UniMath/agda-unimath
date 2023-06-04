@@ -34,16 +34,14 @@ makes use of several postulates.
 
 Note that there is some redundancy in the postulates we assume. For example, the
 [univalence axiom implies function extensionality](https://unimath.github.io/agda-unimath/foundation.univalence-implies-function-extensionality.html),
-but we still assume function extensionality separately. Furthermore, The
-interval type is contractible, so there is no need at all to postulate it. The
-circle can be constructed as the type of `ℤ`-torsors, and the replacement axiom
-can be used to prove there is a circle in `UU lzero`. Additionally, the
-replacement axiom can be proven by the join construction, which only uses
-pushouts. Finally, the Agda built-in types do not change the semantics of the
-theory, they only give convenience to the user of the library.
-
-We also note that the higher inductive types in the `agda-unimath` library only
-have computation rules up to identification.
+but we still assume function extensionality separately. Furthermore,
+[the interval type is contractible](synthetic-homotopy-theory.interval-type.md),
+and the higher inductive types in the `agda-unimath` library only have
+computation rules up to identification, so there is no need at all to postulate
+it. The circle can be constructed as the type of `ℤ`-torsors, and the
+replacement axiom can be used to prove there is a circle in `UU lzero`.
+Additionally, the replacement axiom can be proven by the join construction,
+which only uses pushouts.
 
 With these postulates, the `agda-unimath` library is a library for constructive
 univalent mathematics. Mathematics for which the law of excluded middle or the
