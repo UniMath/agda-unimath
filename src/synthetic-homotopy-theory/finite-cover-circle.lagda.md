@@ -26,7 +26,6 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-functions
-open import foundation.iterating-identities
 open import foundation.negation
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -34,8 +33,11 @@ open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.powers-of-loops
 open import synthetic-homotopy-theory.universal-property-circle
 
 open import univalent-combinatorics.standard-finite-types
@@ -67,13 +69,15 @@ module _
     up-circle : {k : Level} → universal-property-circle k l
     up-circle =
       universal-property-dependent-universal-property-circle l dup-circle
+    X-Pointed-Type : Pointed-Type l1
+    X-Pointed-Type = ( X , base-free-loop l )
 
   finite-degree-map : ℤ → (X → X)
   finite-degree-map k =
     function-recursion-principle-circle
       ( l)
       ( up-circle)
-      ( base-free-loop l , iterate-identity-ℤ (loop-free-loop l) k)
+      ( base-free-loop l , power-int-Ω k X-Pointed-Type (loop-free-loop l))
 
   double-degree-map : X → X
   double-degree-map = finite-degree-map (int-ℕ 2)
@@ -130,15 +134,11 @@ module _
   eq-type-double-cover-finite-cover-circle =
     map-inv-equiv
       ( foo l
-        double-cover-circle'
-        -- ( pr1 double-cover-circle)
-        -- ( descent-data-family-circle l double-cover-circle')
+        ( double-cover-circle')
         ( finite-cover-circle' 2)
-        -- ( pr1 (finite-cover-circle 2))
-        -- ( descent-data-family-circle l (finite-cover-circle' 2))
         ( dup-circle))
       ( (inv-equiv equiv-bool-Fin-two-ℕ) ,
-        (λ { true → refl ; false → {!!} }))
+        (λ { true → refl ; false → refl }))
 ```
 
 ### Evaluation of the finite degree maps
@@ -147,12 +147,12 @@ module _
   ev-finite-degree-map :
     (k : ℤ) →
     ev-free-loop l X (finite-degree-map k) ＝
-    ( base-free-loop l , iterate-identity-ℤ (loop-free-loop l) k)
+    ( base-free-loop l , power-int-Ω k X-Pointed-Type (loop-free-loop l))
   ev-finite-degree-map k =
     compute-recursion-principle-circle
       ( l)
       ( up-circle)
-      ( base-free-loop l , iterate-identity-ℤ (loop-free-loop l) k)
+      ( base-free-loop l , power-int-Ω k X-Pointed-Type (loop-free-loop l))
 ```
 
 ### There are no sections of the finite covers with two and more twists
@@ -202,10 +202,31 @@ module _
   double-cover-map-loop-Σ =
     ( ( (loop-free-loop l) ∙ (loop-free-loop l)) ,
       ( equational-reasoning
-        tr (pr1 double-cover-circle) ((loop-free-loop l) ∙ (loop-free-loop l)) (pr2 double-cover-map-base)
-          ＝ tr (pr1 double-cover-circle) (iterate-identity-ℕ (loop-free-loop l) 2) (pr2 double-cover-map-base) by ap (λ p → tr (pr1 double-cover-circle) (loop-free-loop l ∙ p) (pr2 double-cover-map-base)) (inv right-unit)
-          ＝ iterate 2 (tr (pr1 double-cover-circle) (loop-free-loop l)) (pr2 double-cover-map-base) by tr-iterate-identity-ℕ (loop-free-loop l) 2 _
-          ＝ map-equiv (pr1 (pr2 double-cover-circle)) (iterate 2 neg-bool true) by inv (iterate-square-ℕ 2 neg-bool (tr (pr1 double-cover-circle) (loop-free-loop l)) (map-equiv (pr1 (pr2 double-cover-circle))) (pr2 (pr2 double-cover-circle)) true)
+        tr
+          ( pr1 double-cover-circle)
+          ( (loop-free-loop l) ∙ (loop-free-loop l))
+          ( pr2 double-cover-map-base)
+          ＝ iterate
+              ( 2)
+              ( tr (pr1 double-cover-circle) (loop-free-loop l))
+              ( pr2 double-cover-map-base)
+            by
+              tr-power-nat-Ω
+                ( 2)
+                ( X-Pointed-Type)
+                ( pr1 double-cover-circle)
+                ( loop-free-loop l)
+                ( pr2 double-cover-map-base)
+          ＝ map-equiv (pr1 (pr2 double-cover-circle)) (iterate 2 neg-bool true)
+            by
+              inv
+              ( iterate-square-ℕ
+                ( 2)
+                ( neg-bool)
+                ( tr (pr1 double-cover-circle) (loop-free-loop l))
+                ( map-equiv (pr1 (pr2 double-cover-circle)))
+                ( pr2 (pr2 double-cover-circle))
+                ( true))
           ＝ pr2 double-cover-map-base by refl))
 
   double-cover-map-loop : double-cover-map-base ＝ double-cover-map-base
@@ -224,12 +245,21 @@ module _
     (n : ℕ) →
     Eq-Σ (finite-cover-map-base n) (finite-cover-map-base n)
   pr1 (finite-cover-map-loop-Σ n) =
-    iterate-identity-ℕ (loop-free-loop l) (succ-ℕ n)
+    power-nat-Ω (succ-ℕ n) X-Pointed-Type (loop-free-loop l)
   pr2 (finite-cover-map-loop-Σ n) = equational-reasoning
     tr (pr1 (finite-cover-circle (succ-ℕ n)))
       (pr1 (finite-cover-map-loop-Σ n)) (pr2 (finite-cover-map-base n))
-      ＝ iterate (succ-ℕ n) (tr (pr1 (finite-cover-circle (succ-ℕ n))) (loop-free-loop l)) (pr2 (finite-cover-map-base n))
-        by tr-iterate-identity-ℕ (loop-free-loop l) (succ-ℕ n) (pr2 (finite-cover-map-base n))
+      ＝ iterate
+          ( succ-ℕ n)
+          ( tr (pr1 (finite-cover-circle (succ-ℕ n))) (loop-free-loop l))
+          ( pr2 (finite-cover-map-base n))
+        by
+          tr-power-nat-Ω
+            ( succ-ℕ n)
+            ( X-Pointed-Type)
+            ( pr1 (finite-cover-circle (succ-ℕ n)))
+            ( loop-free-loop l)
+            ( pr2 (finite-cover-map-base n))
       ＝ map-equiv (pr1 (pr2 (finite-cover-circle (succ-ℕ n)))) (iterate (succ-ℕ n) (succ-Fin (succ-ℕ n)) (zero-Fin n))
         by inv (iterate-square-ℕ (succ-ℕ n) (succ-Fin (succ-ℕ n)) (tr (pr1 (finite-cover-circle (succ-ℕ n))) (loop-free-loop l)) (map-equiv (pr1 (pr2 (finite-cover-circle (succ-ℕ n))))) (pr2 (pr2 (finite-cover-circle (succ-ℕ n)))) (zero-Fin n))
       ＝ map-equiv (pr1 (pr2 (finite-cover-circle (succ-ℕ n)))) (mod-succ-ℕ n (succ-ℕ n))
@@ -301,11 +331,11 @@ module _
 
   ev-comp-finite-cover-map-circle :
     (n : ℕ) →
-    ev-free-loop l X (pr1 ∘ (finite-cover-map-circle n)) ＝ (base-free-loop l , iterate-identity-ℕ (loop-free-loop l) (succ-ℕ n))
+    ev-free-loop l X (pr1 ∘ (finite-cover-map-circle n)) ＝ (base-free-loop l , power-nat-Ω (succ-ℕ n) X-Pointed-Type (loop-free-loop l))
   ev-comp-finite-cover-map-circle n =
     eq-Eq-free-loop
       ( ev-free-loop l X (pr1 ∘ finite-cover-map-circle n))
-      ( base-free-loop l , iterate-identity-ℕ (loop-free-loop l) (succ-ℕ n))
+      ( base-free-loop l , power-nat-Ω (succ-ℕ n) X-Pointed-Type (loop-free-loop l))
       ( ap pr1 cbr ,
         ( equational-reasoning
           ap (pr1 ∘ (finite-cover-map-circle n)) (loop-free-loop l) ∙ ap pr1 cbr
@@ -327,7 +357,7 @@ module _
               by ap (λ p → ap pr1 cbr ∙ (ap pr1 (finite-cover-map-loop n) ∙ (ap pr1 p))) (left-inv cbr)
             ＝ ap pr1 cbr ∙ (ap pr1 (finite-cover-map-loop n))
               by ap (ap pr1 cbr ∙_) right-unit
-            ＝ ap pr1 cbr ∙ iterate-identity-ℕ (pr2 l) (succ-ℕ n)
+            ＝ ap pr1 cbr ∙ power-nat-Ω (succ-ℕ n) X-Pointed-Type (pr2 l)
               by ap (ap pr1 cbr ∙_) [i]))
     where
     cbr : finite-cover-map-circle n (base-free-loop l) ＝ finite-cover-map-base n
@@ -338,7 +368,7 @@ module _
     cbl =
       compute-loop-recursion-principle-circle l up-circle (finite-cover-map-free-loop n)
     [i] :
-      ap pr1 (finite-cover-map-loop n) ＝ iterate-identity-ℕ (loop-free-loop l) (succ-ℕ n)
+      ap pr1 (finite-cover-map-loop n) ＝ power-nat-Ω (succ-ℕ n) X-Pointed-Type (loop-free-loop l)
     [i] =
       inv (ap-pair-eq-Σ (Σ X (pr1 (finite-cover-circle (succ-ℕ n)))) id (finite-cover-map-base n) (finite-cover-map-base n) (finite-cover-map-loop n)) ∙ (ap (λ p → pr1 (pair-eq-Σ p)) (ap-id (finite-cover-map-loop n)) ∙ ap pr1 (isretr-pair-eq-Σ (finite-cover-map-base n) (finite-cover-map-base n) (finite-cover-map-loop-Σ n)))
 
@@ -351,7 +381,15 @@ module _
     (n : ℕ) →
     ev-free-loop l X (pr1 ∘ finite-cover-map-circle n) ＝ ev-free-loop l X (finite-degree-map (in-pos n))
   ev-compare-finite-maps n =
-    ev-comp-finite-cover-map-circle n ∙ (ap (λ p → (base-free-loop l , p)) (inv (iterate-pos (succ-ℕ n) (loop-free-loop l))) ∙ inv (ev-finite-degree-map (in-pos n)))
+    ev-comp-finite-cover-map-circle n ∙
+    ( ap
+      ( λ p → (base-free-loop l , p))
+      ( inv
+        ( compute-power-int-Ω-int-ℕ
+          ( succ-ℕ n)
+          ( X-Pointed-Type)
+          ( loop-free-loop l))) ∙
+      inv (ev-finite-degree-map (in-pos n)))
 
   triangle-double-map-circle : (pr1 ∘ double-map-circle) ~ double-degree-map
   triangle-double-map-circle =

@@ -149,7 +149,6 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
-open import foundation.iterating-identities public
 open import foundation.iterating-involutions public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public

@@ -13,6 +13,8 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.equivalences
+open import foundation.functions
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.iterating-functions
@@ -131,4 +133,29 @@ map-power-nat-Ω (succ-ℕ n) A B f ω =
   ( ap
     ( concat' (point-Pointed-Type B) (map-Ω A B f ω))
     ( map-power-nat-Ω n A B f ω))
+```
+
+### Positive integral powers are the same as natural powers
+
+```agda
+compute-power-int-Ω-int-ℕ :
+  {l1 : Level} (n : ℕ) (A : Pointed-Type l1)
+  (ω : type-Ω A) →
+  power-int-Ω (int-ℕ n) A ω ＝ power-nat-Ω n A ω
+compute-power-int-Ω-int-ℕ zero-ℕ A ω = refl
+compute-power-int-Ω-int-ℕ (succ-ℕ zero-ℕ) A ω = refl
+compute-power-int-Ω-int-ℕ (succ-ℕ (succ-ℕ n)) A ω =
+  ap (_∙ ω) (compute-power-int-Ω-int-ℕ (succ-ℕ n) A ω)
+```
+
+### Transporting along powers of loops
+
+```agda
+tr-power-nat-Ω :
+  {l1 l2 : Level} (n : ℕ) (A : Pointed-Type l1)
+  (B : type-Pointed-Type A → UU l2) (ω : type-Ω A) →
+  tr B (power-nat-Ω n A ω) ~ iterate n (tr B ω)
+tr-power-nat-Ω zero-ℕ A B ω = refl-htpy
+tr-power-nat-Ω (succ-ℕ n) A B ω =
+  tr-concat (power-nat-Ω n A ω) ω ∙h ((tr B ω) ·l (tr-power-nat-Ω n A B ω))
 ```
