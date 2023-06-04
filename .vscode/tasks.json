@@ -18,11 +18,23 @@
       "problemMatcher": []
     },
     {
+      "label": "remove-unused-imports",
+      "detail": "Search for and remove unused imports",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/scripts/remove_unused_imports.py"],
+      "problemMatcher": [],
+      "hide": true
+    },
+    {
       "label": "unused-imports",
       "detail": "Search for and remove unused imports. Very slow!",
       "type": "shell",
-      "command": "python scripts/remove_unused_imports.py && python scripts/demote_foundation_imports.py",
-      "problemMatcher": []
+      "command": "python",
+      "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
+      "problemMatcher": [],
+      "dependsOn": "remove-unused-imports"
     }
-  ]
+  ],
+  "statusbar.default.hide": false
 }
