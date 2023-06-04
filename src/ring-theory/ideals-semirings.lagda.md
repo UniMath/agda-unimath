@@ -32,7 +32,7 @@ the left/right).
 This is the standard definition of ideals in semirings. However, such two-sided
 ideals do not correspond uniquely to congruences on `R`. If we ask in addition
 that the underlying additive submodule is normal, then we get unique
-correspondence to congruences. We will call such ideals _normal_.
+correspondence to congruences. We will call such ideals **normal**.
 
 ## Definitions
 

@@ -37,7 +37,7 @@ Note that there is some redundancy in the postulates we assume. For example, the
 but we still assume function extensionality separately. Furthermore, The
 interval type is contractible, so there is no need at all to postulate it. The
 circle can be constructed as the type of `ℤ`-torsors, and the replacement axiom
-can be used to prove there is a circle in `UU lzero`. Adittionally, the
+can be used to prove there is a circle in `UU lzero`. Additionally, the
 replacement axiom can be proven by the join construction, which only uses
 pushouts. Finally, the Agda built-in types do not change the semantics of the
 theory, they only give convenience to the user of the library.
