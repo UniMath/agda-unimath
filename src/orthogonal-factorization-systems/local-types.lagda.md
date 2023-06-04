@@ -40,8 +40,11 @@ A type family `A` over `X` is said to be **local at** `f : Y → X`, or
 
 is an equivalence.
 
-Likewise a type `A` is said to be `f`-local if the precomposition map
+Likewise, a type `A` is said to be `f`-local if the precomposition map
 `_∘ f : (X → A) → (Y → A)` is an equivalence.
+
+We reserve the name `is-local` for local types, and specify `is-local-family`
+when the type may vary over the base.
 
 ## Definition
 
@@ -53,8 +56,8 @@ module _
   is-local-family : {l : Level} → (X → UU l) → UU (l1 ⊔ l2 ⊔ l)
   is-local-family A = is-equiv (precomp-Π f A)
 
-  is-local-type : {l : Level} → UU l → UU (l1 ⊔ l2 ⊔ l)
-  is-local-type A = is-local-family (λ _ → A)
+  is-local : {l : Level} → UU l → UU (l1 ⊔ l2 ⊔ l)
+  is-local A = is-local-family (λ _ → A)
 ```
 
 ## Properties
@@ -71,17 +74,16 @@ module _
   pr1 (is-local-family-Prop A) = is-local-family A
   pr2 (is-local-family-Prop A) = is-property-is-local-family A
 
-  is-property-is-local-type :
-    {l : Level} (A : UU l) → is-prop (is-local-type A)
-  is-property-is-local-type A = is-property-is-equiv (precomp f A)
+  is-property-is-local :
+    {l : Level} (A : UU l) → is-prop (is-local A)
+  is-property-is-local A = is-property-is-local-family (λ _ → A)
 
-  is-local-type-Prop :
+  is-local-Prop :
     {l : Level} → UU l → Prop (l1 ⊔ l2 ⊔ l)
-  pr1 (is-local-type-Prop A) = is-local-type A
-  pr2 (is-local-type-Prop A) = is-property-is-local-type A
+  is-local-Prop A = is-local-family-Prop (λ _ → A)
 ```
 
-### Locality distributes over Π-types
+### Being local distributes over Π-types
 
 ```agda
   map-distributive-Π-is-local-family :
@@ -97,12 +99,12 @@ module _
 ### If every type is `f`-local, then `f` is an equivalence
 
 ```agda
-  is-equiv-is-local-type :
-    ((l : Level) (A : UU l) → is-local-type A) → is-equiv f
-  is-equiv-is-local-type = is-equiv-is-equiv-precomp f
+  is-equiv-is-local :
+    ((l : Level) (A : UU l) → is-local A) → is-equiv f
+  is-equiv-is-local = is-equiv-is-equiv-precomp f
 ```
 
-### If the domain and codomain of `f` is `f`-local then `f` is an equivalence
+### If the domain and codomain of `f` is `f`-local, then `f` is an equivalence
 
 ```agda
   retraction-sec-precomp-domain : sec (precomp f Y) → retr f
@@ -110,24 +112,25 @@ module _
   pr2 (retraction-sec-precomp-domain sec-precomp-Y) =
     htpy-eq (pr2 sec-precomp-Y id)
 
-  section-is-local-domains' : sec (precomp f Y) → is-local-type X → sec f
+  section-is-local-domains' : sec (precomp f Y) → is-local X → sec f
   pr1 (section-is-local-domains' sec-precomp-Y is-local-X) =
     pr1 sec-precomp-Y id
   pr2 (section-is-local-domains' sec-precomp-Y is-local-X) =
     htpy-eq
       ( ap
         ( pr1)
-        { pair
-          ( f ∘ pr1 (section-is-local-domains' sec-precomp-Y is-local-X))
+        { ( f ∘ pr1 (section-is-local-domains' sec-precomp-Y is-local-X)) ,
           ( ap (postcomp Y f) (pr2 sec-precomp-Y id))}
-        { pair id refl}
+        { id , refl}
         ( eq-is-contr (is-contr-map-is-equiv is-local-X f)))
-  is-equiv-is-local-domains' : sec (precomp f Y) → is-local-type X → is-equiv f
+
+  is-equiv-is-local-domains' : sec (precomp f Y) → is-local X → is-equiv f
   pr1 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
     section-is-local-domains' sec-precomp-Y is-local-X
   pr2 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
     retraction-sec-precomp-domain sec-precomp-Y
-  is-equiv-is-local-domains : is-local-type Y → is-local-type X → is-equiv f
+
+  is-equiv-is-local-domains : is-local Y → is-local X → is-equiv f
   is-equiv-is-local-domains is-local-Y =
     is-equiv-is-local-domains' (pr1 is-local-Y)
 ```
@@ -141,9 +144,9 @@ module _
     is-equiv f → {l : Level} (A : X → UU l) → is-local-family A
   is-local-family-is-equiv is-equiv-f = is-equiv-precomp-Π-is-equiv f is-equiv-f
 
-  is-local-type-is-equiv :
-    is-equiv f → {l : Level} (A : UU l) → is-local-type A
-  is-local-type-is-equiv is-equiv-f = is-equiv-precomp-is-equiv f is-equiv-f
+  is-local-is-equiv :
+    is-equiv f → {l : Level} (A : UU l) → is-local A
+  is-local-is-equiv is-equiv-f = is-equiv-precomp-is-equiv f is-equiv-f
 ```
 
 ### Families of contractible types are local at any map
@@ -158,18 +161,18 @@ module _
       ( is-contr-Π is-contr-A)
       ( is-contr-Π (is-contr-A ∘ f))
 
-  is-local-type-is-contr :
-    {l : Level} (A : UU l) → is-contr A → is-local-type A
-  is-local-type-is-contr A is-contr-A =
+  is-local-is-contr :
+    {l : Level} (A : UU l) → is-contr A → is-local A
+  is-local-is-contr A is-contr-A =
     is-local-family-is-contr (λ _ → A) (λ _ → is-contr-A)
 ```
 
 ### A type that is local at the unique map `empty → unit` is contractible
 
 ```agda
-is-contr-is-local-type :
-  {l : Level} (A : UU l) → is-local-type (λ (_ : empty) → star) A → is-contr A
-is-contr-is-local-type A is-local-type-A =
+is-contr-is-local :
+  {l : Level} (A : UU l) → is-local (λ (_ : empty) → star) A → is-contr A
+is-contr-is-local A is-local-A =
   is-contr-is-equiv
     ( empty → A)
     ( λ a _ → a)
@@ -178,6 +181,6 @@ is-contr-is-local-type A is-local-type-A =
       ( λ a _ →
         map-inv-is-equiv (is-equiv-map-left-unit-law-Π (λ _ → A)) a star)
       ( is-equiv-map-inv-is-equiv (is-equiv-map-left-unit-law-Π λ _ → A))
-      ( is-local-type-A))
+      ( is-local-A))
     ( universal-property-empty' A)
 ```
