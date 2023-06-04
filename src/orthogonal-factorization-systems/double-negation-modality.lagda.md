@@ -28,11 +28,11 @@ The double negation operation `¬¬` is a higher modality.
 
 ```agda
 double-negation-operator-modality :
-  {l : Level} → operator-modality l l
-double-negation-operator-modality = ¬¬
+  (l : Level) → operator-modality l l
+double-negation-operator-modality _ = ¬¬
 
 double-negation-unit-modality :
-  {l : Level} → unit-modality (double-negation-operator-modality {l})
+  {l : Level} → unit-modality (double-negation-operator-modality l)
 double-negation-unit-modality = intro-double-negation
 ```
 
@@ -44,10 +44,10 @@ double-negation-unit-modality = intro-double-negation
 is-uniquely-eliminating-modality-double-negation :
   {l : Level} →
   is-uniquely-eliminating-modality (double-negation-unit-modality {l})
-is-uniquely-eliminating-modality-double-negation A P =
+is-uniquely-eliminating-modality-double-negation {l} A P =
   is-local-family-is-prop
     ( double-negation-unit-modality)
-    ( double-negation-operator-modality ∘ P)
+    ( double-negation-operator-modality l ∘ P)
     ( λ _ → is-prop-double-negation)
     ( λ f z g →
       double-negation-extend

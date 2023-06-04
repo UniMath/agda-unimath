@@ -28,10 +28,10 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-We say that a map `f : A → B` into a `k`-truncated type `B` is a `k`-truncation
-of `A` -- or that it satisfies the universal property of the `k`-truncation of
-`A` -- if any map `g : A → C` into a `k`-truncated type `C` extends uniquely
-along `f` to a map `B → C`.
+We say that a map `f : A → B` into a `k`-truncated type `B` is a
+**`k`-truncation** of `A` -- or that it **satisfies the universal property of
+the `k`-truncation** of `A` -- if any map `g : A → C` into a `k`-truncated type
+`C` extends uniquely along `f` to a map `B → C`.
 
 ## Definition
 
@@ -99,7 +99,7 @@ dependent-universal-property-truncation l {k} B f =
 abstract
   is-truncation-id :
     {l1 : Level} {k : 𝕋} {A : UU l1} (H : is-trunc k A) →
-    {l : Level} → is-truncation l (pair A H) id
+    {l : Level} → is-truncation l (A , H) id
   is-truncation-id H B =
     is-equiv-precomp-is-equiv id is-equiv-id (type-Truncated-Type B)
 
@@ -204,5 +204,5 @@ module _
       ( map-inv-is-equiv
         ( dependent-universal-property-truncation-is-truncation H
           ( fib-Truncated-Type C B g))
-        ( λ a → pair (h a) (inv (K a))))
+        ( λ a → h a , inv (K a)))
 ```

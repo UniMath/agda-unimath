@@ -26,6 +26,7 @@ open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.separated-types public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
+open import orthogonal-factorization-systems.truncation-modalities public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.zero-modality public

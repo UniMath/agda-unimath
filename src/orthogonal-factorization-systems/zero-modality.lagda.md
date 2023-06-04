@@ -51,4 +51,4 @@ is-uniquely-eliminating-modality-zero {l2 = l2} A P =
 
 ### The zero modality is equivalent to `-2`-truncation
 
-This remains to be formalized.
+This remains to be made formal.
