@@ -99,7 +99,7 @@ module _
   eq-has-same-elements-subtype Q = map-inv-equiv (extensionality-subtype Q)
 
   refl-extensionality-subtype :
-    map-equiv (extensionality-subtype P) refl ＝ (λ x → pair id id)
+    map-equiv (extensionality-subtype P) refl ＝ (λ _ → id , id)
   refl-extensionality-subtype = refl
 ```
 
@@ -108,12 +108,12 @@ module _
 ```agda
 is-set-subtype :
   {l1 l2 : Level} {A : UU l1} → is-set (subtype l2 A)
-is-set-subtype {l1} {l2} {A} P Q =
+is-set-subtype P Q =
   is-prop-equiv
     ( extensionality-subtype P Q)
     ( is-prop-Π (λ x → is-prop-iff-Prop (P x) (Q x)))
 
 subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
-pr1 (subtype-Set {l1} l2 A) = subtype l2 A
-pr2 (subtype-Set {l1} l2 A) = is-set-subtype
+pr1 (subtype-Set l2 A) = subtype l2 A
+pr2 (subtype-Set l2 A) = is-set-subtype
 ```

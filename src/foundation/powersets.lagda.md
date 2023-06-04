@@ -9,12 +9,13 @@ module foundation.powersets where
 ```agda
 open import foundation.function-extensionality
 open import foundation.propositional-extensionality
+open import foundation.subtypes
 
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtypes
+open import foundation-core.sets
 open import foundation-core.universe-levels
 
 open import order-theory.large-posets
@@ -24,6 +25,11 @@ open import order-theory.preorders
 ```
 
 </details>
+
+## Idea
+
+The **powerset** of a type is the set of all
+[subtypes](foundation-core.subtypes.md) with respect to a given universe level.
 
 ## Definition
 
@@ -80,6 +86,20 @@ module _
   antisymmetric-⊆ :
     {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
   antisymmetric-⊆ P Q H K = eq-htpy (λ x → eq-iff (H x) (K x))
+```
+
+### The powerset is a set
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
+
+  is-set-powerset : {l2 : Level} → is-set (powerset l2 A)
+  is-set-powerset = is-set-subtype
+
+  powerset-Set : (l2 : Level) → Set (l1 ⊔ lsuc l2)
+  powerset-Set l2 = subtype-Set l2 A
 ```
 
 ### The powerset preorder and poset
