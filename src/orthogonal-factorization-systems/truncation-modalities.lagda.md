@@ -20,7 +20,8 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-The truncation operation is a higher modality for every truncation level.
+The [truncation operations](foundation.truncations.md) are
+[higher modalities](orthogonal-factorization-systems.higher-modalities.md).
 
 ## Definition
 
@@ -36,7 +37,7 @@ trunc-unit-modality = unit-trunc
 
 ## Properties
 
-### The truncation modality is a uniquely eliminating modality
+### The truncation modalities are uniquely eliminating modalities
 
 ```agda
 is-uniquely-eliminating-modality-trunc :

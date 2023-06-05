@@ -22,7 +22,8 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-The double negation operation `¬¬` is a higher modality.
+The [double negation operation](foundation.double-negation.md) `¬¬` is a
+[modality](orthogonal-factorization-systems.higher-modalities.md).
 
 ## Definition
 
