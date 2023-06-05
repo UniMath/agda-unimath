@@ -25,6 +25,7 @@ open import lists.functoriality-lists
 open import lists.lists
 
 open import order-theory.galois-connections-large-posets
+open import order-theory.least-upper-bounds-large-posets
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
 
@@ -536,4 +537,31 @@ module _
     forward-inclusion-idempotent-ideal-subset-Ring x
   pr2 (idempotent-ideal-subset-Ring x) =
     backward-inclusion-idempotent-ideal-subset-Ring x
+```
+
+### The operation `S ↦ (S)` preserves least upper bounds
+
+In [`ring-theory.joins-ideals-rings`](ring-theory.joins-ideals-rings.md) we will convert this fact to the fact that `S ↦ (S)` preserves joins.
+
+```agda
+module _
+  {l1 l2 l3 : Level} (R : Ring l1) {U : UU l2} (S : U → subset-Ring l3 R)
+  where
+
+  preserves-least-upper-bounds-ideal-subset-Ring :
+    {l4 : Level} (T : subset-Ring l4 R) →
+    is-least-upper-bound-family-of-elements-Large-Poset
+      ( powerset-Large-Poset (type-Ring R))
+      ( S)
+      ( T) →
+    is-least-upper-bound-family-of-elements-Large-Poset
+      ( ideal-Ring-Large-Poset R)
+      ( λ α → ideal-subset-Ring R (S α))
+      ( ideal-subset-Ring R T)
+  preserves-least-upper-bounds-ideal-subset-Ring =
+    preserves-join-lower-adjoint-galois-connection-Large-Poset
+      ( powerset-Large-Poset (type-Ring R))
+      ( ideal-Ring-Large-Poset R)
+      ( ideal-subset-galois-connection-Ring R)
+      ( S)
 ```

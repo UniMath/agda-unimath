@@ -146,11 +146,7 @@ module _
       ( λ α → ideal-subset-Ring R (S α))
       ( ideal-subset-Ring R (union-family-of-subtypes S))
   is-least-upper-bound-join-ideal-subset-Ring =
-    preserves-join-lower-adjoint-galois-connection-Large-Poset
-      ( powerset-Large-Poset (type-Ring R))
-      ( ideal-Ring-Large-Poset R)
-      ( ideal-subset-galois-connection-Ring R)
-      ( S)
+    preserves-least-upper-bounds-ideal-subset-Ring R S
       ( union-family-of-subtypes S)
       ( is-least-upper-bound-union-family-of-subtypes S)
 
