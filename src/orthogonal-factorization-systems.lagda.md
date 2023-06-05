@@ -6,8 +6,8 @@
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | Double negation modality          | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                             |
 | Identity / trivial modality       | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md) |
-| Truncation modalities             | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                   |
 | Raising universe level modalities | [`orthogonal-factorization-systems.raise-modalities`](orthogonal-factorization-systems.raise-modalities.md) |
+| Truncation modalities             | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                   |
 | Zero modality                     | [`orthogonal-factorization-systems.zero-modality`](orthogonal-factorization-systems.zero-modality.md)       |
 
 ## Files in the orthogonal factorization systems folder
