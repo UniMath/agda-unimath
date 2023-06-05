@@ -19,7 +19,7 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-The **zero modality** is a
+The **zero modality** is the
 [modality](orthogonal-factorization-systems.higher-modalities.md) that maps
 every type to the [unit type](foundation.unit-type.md).
 

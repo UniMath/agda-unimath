@@ -1,11 +1,20 @@
 # Orthogonal factorization systems
 
+## Examples of higher modalities
+
+| Modality                          | File                                                                                                        |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Double negation modality          | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                             |
+| Identity / trivial modality       | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md) |
+| Truncation modalities             | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                   |
+| Raising universe level modalities | [`orthogonal-factorization-systems.raise-modalities`](orthogonal-factorization-systems.raise-modalities.md) |
+| Zero modality                     | [`orthogonal-factorization-systems.zero-modality`](orthogonal-factorization-systems.zero-modality.md)       |
+
 ## Files in the orthogonal factorization systems folder
 
 ```agda
 module orthogonal-factorization-systems where
 
-open import orthogonal-factorization-systems.double-negation-modality public
 open import orthogonal-factorization-systems.extensions-of-maps public
 open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public
@@ -22,11 +31,12 @@ open import orthogonal-factorization-systems.null-types public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.orthogonal-maps public
 open import orthogonal-factorization-systems.pullback-hom public
+open import orthogonal-factorization-systems.raise-modalities public
 open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.separated-types public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
-open import orthogonal-factorization-systems.truncation-modalities public
+open import orthogonal-factorization-systems.trivial-modality public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.zero-modality public

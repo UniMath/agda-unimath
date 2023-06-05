@@ -1,17 +1,18 @@
 # The double negation modality
 
 ```agda
-module orthogonal-factorization-systems.double-negation-modality where
+module foundation.double-negation-modality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.double-negation
-open import foundation.functions
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.universe-levels
+
+open import foundation-core.functions
+open import foundation-core.identity-types
+open import foundation-core.propositions
+open import foundation-core.universe-levels
 
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
@@ -22,7 +23,7 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-The [double negation operation](foundation.double-negation.md) `¬¬` is a
+The [double negation](foundation.double-negation.md) operation `¬¬` is a
 [modality](orthogonal-factorization-systems.higher-modalities.md).
 
 ## Definition
@@ -61,7 +62,7 @@ is-uniquely-eliminating-modality-double-negation {l} A P =
         ( g))
 ```
 
-This proof follows Example 1.9 in [RSS].
+This proof follows Example 1.9 in _Modalities in homotopy type theory_.
 
 ## References
 
