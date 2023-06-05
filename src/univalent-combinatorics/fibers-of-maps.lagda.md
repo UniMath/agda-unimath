@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.fibers-of-maps where
+
+open import foundation.fibers-of-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.fibers-of-maps public
-
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 

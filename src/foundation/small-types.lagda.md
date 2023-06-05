@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.small-types where
+
+open import foundation-core.small-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.small-types public
-
 open import foundation.images
 open import foundation.locally-small-types
 open import foundation.replacement

@@ -2,12 +2,14 @@
 
 ```agda
 module foundation.equality-fibers-of-maps where
+
+open import foundation-core.equality-fibers-of-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equality-fibers-of-maps public
+
 ```
 
 </details>

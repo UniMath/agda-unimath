@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.endomorphisms where
+
+open import foundation-core.endomorphisms public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.endomorphisms public
-
 open import foundation.unit-type
 
 open import foundation-core.dependent-pair-types

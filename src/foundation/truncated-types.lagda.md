@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.truncated-types where
+
+open import foundation-core.truncated-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.truncated-types public
-
 open import foundation.univalence
 
 open import foundation-core.contractible-types

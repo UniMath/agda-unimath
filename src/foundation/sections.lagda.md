@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.sections where
+
+open import foundation-core.sections public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.sections public
-
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice

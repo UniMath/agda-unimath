@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.equivalence-induction where
+
+open import foundation-core.equivalence-induction public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalence-induction public
-
 open import foundation.univalence
 
 open import foundation-core.dependent-pair-types

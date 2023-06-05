@@ -2,12 +2,14 @@
 
 ```agda
 module foundation.type-arithmetic-dependent-pair-types where
+
+open import foundation-core.type-arithmetic-dependent-pair-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.type-arithmetic-dependent-pair-types public
+
 ```
 
 </details>
