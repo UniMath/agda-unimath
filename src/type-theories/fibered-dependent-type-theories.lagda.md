@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
-```
 
-```agda
 module type-theories.fibered-dependent-type-theories where
 ```
 

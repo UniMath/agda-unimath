@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module foundation.pi-decompositions where
 ```
 

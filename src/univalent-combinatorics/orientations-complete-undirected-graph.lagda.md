@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module univalent-combinatorics.orientations-complete-undirected-graph where
 ```
 

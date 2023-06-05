@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
+
 module type-theories.unityped-type-theories where
 ```
 

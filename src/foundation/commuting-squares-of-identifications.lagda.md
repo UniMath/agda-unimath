@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --safe #-}
+
 module foundation.commuting-squares-of-identifications where
 ```
 
