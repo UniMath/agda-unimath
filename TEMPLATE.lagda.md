@@ -1,7 +1,11 @@
 # File title
 
 ```agda
-module template where
+{-# OPTIONS --safe #-}
+
+module foundation.template where
+
+open import foundation-core.template public
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +18,7 @@ open import ...
 
 ## Idea
 
-A **concept** $C$ is a _insert abstract idea of concept_, and is defined as
+A **concept** `C` is a _insert abstract idea of concept_, and is defined as
 _insert definition using words_.
 
 ## Definition
@@ -26,16 +30,16 @@ concept = ...
 
 ## Properties
 
-### Concept satisfies specific property
+### Concepts satisfy a property
 
 ```agda
-has-specific-property-concept : ...
-has-specific-property-concept = ...
+satisfies-property-concept : ...
+satisfies-property-concept = ...
 ```
 
 ## Examples
 
-### A subconcept is a concept
+### The following subconcept is a concept
 
 ```agda
 concept-subconcept : ...

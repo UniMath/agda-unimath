@@ -35,8 +35,18 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
-and immediately after this, the module declaration and any option pragmas should
-be declared.
+and immediately after this, any option pragmas, then the module declaration then
+any public imports should be declared. E.g.
+
+````md
+```agda
+{-# OPTIONS --safe #-}
+
+module foundation.dependent-pair-types where
+
+open import foundation-core.dependent-pair-types public
+```
+````
 
 ### Imports block
 
@@ -78,7 +88,7 @@ contents of the file.
   `[The univalence axiom](foundation.univalence.md)`, which will be displayed as
   [The univalence axiom](foundation.univalence.md).
 - You can reference another module by module name using
-  ``[`foundation.univalence`](foundation.univalence.md)``, which will be
+  `` [`foundation.univalence`](foundation.univalence.md) ``, which will be
   displayed as [`foundation.univalence`](foundation.univalence.md).
 - If you just want to add a clickable link, use the pattern
   `<https://unimath.github.io/agda-unimath/>`. This will be displayed as
