@@ -36,7 +36,7 @@ Every file should begin with a header in the following format:
 ```
 
 and immediately after this, any option pragmas, then the module declaration then
-any public imports should be declared. E.g.
+public imports, if any, should be declared. E.g.
 
 ````md
 ```agda
