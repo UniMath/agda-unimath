@@ -59,10 +59,10 @@ module _
       cauchy-series-species-types (cauchy-composition-species-types S T) X ≃
       Σ ( UU l1)
         ( λ U →
-           Σ ( U → UU l1)
-             ( λ V →
-               Σ ( Σ ( UU l1) (λ F → F ≃ Σ U V))
-                 ( λ F → (S U) × (((y : U) → T (V y)) × (pr1 F → X)))))
+          Σ ( U → UU l1)
+            ( λ V →
+              Σ ( Σ ( UU l1) (λ F → F ≃ Σ U V))
+                ( λ F → (S U) × (((y : U) → T (V y)) × (pr1 F → X)))))
     pr1 reassociate (F , ((U , V , e) , s , fs) , ft) =
       (U , V , (F , e) , s , fs , ft)
     pr2 reassociate =

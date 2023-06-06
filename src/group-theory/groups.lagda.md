@@ -513,3 +513,17 @@ module _
   pr1 pointed-type-with-aut-Group = pointed-type-Group G
   pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
 ```
+
+### Equip a type with a structure of group
+
+```agda
+structure-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-group X =
+  Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
+
+compute-structure-group :
+  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
+pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
+pr2 (compute-structure-group X (p , q)) = q
+```

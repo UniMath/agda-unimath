@@ -229,26 +229,26 @@ helper-compute-list-vec-map-vec-permute-vec-vec-list :
     ( vec B)
     ( inv (length-permute-list p t))
     ( map-vec f (permute-vec (length-list p) (vec-list p) t)) ＝
-   map-vec f (vec-list (permute-list p t))
+  map-vec f (vec-list (permute-list p t))
 helper-compute-list-vec-map-vec-permute-vec-vec-list f p t =
-   ( ( compute-tr-map-vec
-       ( f)
-       ( inv (length-permute-list p t))
-       ( permute-vec (length-list p) (vec-list p) t)) ∙
-     ( ( ap
-         ( λ P →
-           map-vec
-             ( f)
-             ( tr (vec _) P (permute-vec (length-list p) (vec-list p) t)))
-         ( eq-is-prop (is-set-ℕ _ _))) ∙
-       ( ap
-         ( map-vec f)
-         ( pr2
-           ( pair-eq-Σ
-             ( inv
-               ( isretr-vec-list
-                 ( length-list p ,
-                   permute-vec (length-list p) (vec-list p) t))))))))
+  ( ( compute-tr-map-vec
+      ( f)
+      ( inv (length-permute-list p t))
+      ( permute-vec (length-list p) (vec-list p) t)) ∙
+    ( ( ap
+        ( λ P →
+          map-vec
+            ( f)
+            ( tr (vec _) P (permute-vec (length-list p) (vec-list p) t)))
+        ( eq-is-prop (is-set-ℕ _ _))) ∙
+      ( ap
+        ( map-vec f)
+        ( pr2
+          ( pair-eq-Σ
+            ( inv
+              ( isretr-vec-list
+                ( length-list p ,
+                  permute-vec (length-list p) (vec-list p) t))))))))
 
 compute-list-vec-map-vec-permute-vec-vec-list :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

@@ -461,7 +461,7 @@ bezouts-lemma-ℤ (inr (inr x)) (inr (inr y)) =
 Now that Bezout's Lemma has been established, we establish a few corollaries of
 Bezout.
 
-### If `x | y z` and `gcd-Z x y ＝ 1`, then `x | z`.
+### If `x | y z` and `gcd-Z x y ＝ 1`, then `x | z`
 
 ```agda
 div-right-factor-coprime-ℤ :

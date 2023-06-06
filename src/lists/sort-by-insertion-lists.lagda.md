@@ -29,8 +29,8 @@ open import order-theory.decidable-total-orders
 ## Idea
 
 We use the definition of sort by insertion for vectors
-([`lists.sort-by-insertion-vectors`](lists.sort-by-insertion-vectors.lagda.md))
-and we adapt it for lists.
+([`lists.sort-by-insertion-vectors`](lists.sort-by-insertion-vectors.md)) and we
+adapt it for lists.
 
 ## Definition
 

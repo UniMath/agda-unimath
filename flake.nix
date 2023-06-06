@@ -13,7 +13,7 @@
         let
           pkgs = nixpkgs.legacyPackages."${system}";
           agda = pkgs.agda;
-          python = pkgs.python3.withPackages (p: with p; [
+          python = pkgs.python38.withPackages (p: with p; [
             # Keep in sync with scripts/requirements.txt
             requests
           ]);

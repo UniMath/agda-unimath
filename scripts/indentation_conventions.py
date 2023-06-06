@@ -10,7 +10,7 @@ import collections
 
 AGDA_INDENT = '  '
 
-even_indentation_pattern = re.compile(fr'({AGDA_INDENT})*(\S|$)')
+even_indentation_pattern = re.compile(fr'^({AGDA_INDENT})*(\S|$)')
 
 
 def is_even_indentation(line):
@@ -52,7 +52,7 @@ if __name__ == '__main__':
                         if (status == 0):
                             print('Error! Uneven indentation found')
 
-                        print(f'{fpath}:line {i}')
+                        print(f'{fpath}:line {i+1}')
 
                         offender_files[fpath] += 1
                         status |= STATUS_UNEVEN_INDENTATION
@@ -72,6 +72,6 @@ if __name__ == '__main__':
         print(*map(lambda kv: f'  {kv[0]}: {kv[1]} lines',
                    sorted(offender_files.items(), key=lambda kv: kv[1])), sep='\n')
         print(
-            f'\nTotal number of lines in library unevenly indented: {sum(offender_files.values())}.')
+            f'\nTotal number of lines in library unevenly indented: {sum(offender_files.values())}.\n\nUneven indentation means that there is code indented by a non-multiple of the base indentation (2 spaces). If you haven\'t already, we suggest you set up your environment to more easily spot uneven indentation. For instance using VSCode\'s indent-rainbow extension.')
 
     sys.exit(status)

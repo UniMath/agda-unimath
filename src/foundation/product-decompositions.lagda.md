@@ -36,7 +36,7 @@ module _
 
   binary-product-Decomposition : UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
   binary-product-Decomposition =
-    Σ ( UU l2) ( λ k1 → Σ ( UU l3) ( λ k2 → ( X ≃ (k1 × k2))))
+    Σ (UU l2) (λ A → Σ (UU l3) (λ B → X ≃ (A × B)))
 
 module _
   {l1 l2 l3 : Level} {X : UU l1}
@@ -49,9 +49,9 @@ module _
   right-summand-binary-product-Decomposition : UU l3
   right-summand-binary-product-Decomposition = pr1 (pr2 d)
 
-  matching-correspondence-productuct-decomposition :
+  matching-correspondence-binary-product-Decomposition :
     X ≃
     ( left-summand-binary-product-Decomposition ×
       right-summand-binary-product-Decomposition)
-  matching-correspondence-productuct-decomposition = pr2 (pr2 d)
+  matching-correspondence-binary-product-Decomposition = pr2 (pr2 d)
 ```

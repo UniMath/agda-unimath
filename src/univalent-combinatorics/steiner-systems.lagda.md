@@ -43,9 +43,9 @@ Steiner-System t k n =
           ( Q : decidable-subtype lzero (type-UU-Fin n X)) →
           has-cardinality t (type-decidable-subtype Q) →
           is-contr
-            (Σ ( type-decidable-subtype P)
-               ( λ U →
-                 (x : type-UU-Fin n X) →
-                 is-in-decidable-subtype Q x →
-                 is-in-decidable-subtype (pr1 (pr1 U)) x))))
+            ( Σ ( type-decidable-subtype P)
+                ( λ U →
+                  (x : type-UU-Fin n X) →
+                  is-in-decidable-subtype Q x →
+                  is-in-decidable-subtype (pr1 (pr1 U)) x))))
 ```

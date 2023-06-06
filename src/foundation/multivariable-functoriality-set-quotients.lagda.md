@@ -67,7 +67,7 @@ module _
     ( quotient-map S ∘
       map-hom-Eq-Rel (all-sim-Eq-Rel n A R) S h)
   compute-multivariable-map-set-quotient =
-     coherence-square-map-is-set-quotient
+    coherence-square-map-is-set-quotient
       ( all-sim-Eq-Rel n A R)
       ( set-quotient-vector-Set n A R)
       ( reflecting-map-quotient-vector-map n A R)

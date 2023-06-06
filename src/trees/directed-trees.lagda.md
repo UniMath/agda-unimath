@@ -526,10 +526,11 @@ module _
       ( walk-to-root-Directed-Tree T x)
 
   contraction-walk-unique-direct-successor-Directed-Tree :
-    (x : node-Directed-Tree T)
-    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
-    (p : is-root-Directed-Tree T x +
-         Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    ( x : node-Directed-Tree T)
+    ( w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+    ( p :
+      is-root-Directed-Tree T x +
+      Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
     center-walk-unique-direct-successor-Directed-Tree x w ＝ p
   contraction-walk-unique-direct-successor-Directed-Tree ._
     ( refl-walk-Directed-Graph)
@@ -558,9 +559,10 @@ module _
         ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
 
   contraction-unique-direct-successor-Directed-Tree :
-    (x : node-Directed-Tree T) →
-    (p : is-root-Directed-Tree T x +
-         Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    ( x : node-Directed-Tree T) →
+    ( p :
+      is-root-Directed-Tree T x +
+      Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
     center-unique-direct-successor-Directed-Tree x ＝ p
   contraction-unique-direct-successor-Directed-Tree x =
     contraction-walk-unique-direct-successor-Directed-Tree x

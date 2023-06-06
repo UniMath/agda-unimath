@@ -207,7 +207,8 @@ hooks' Python dependencies. The easiest way to accomplish this is by using the
 Python package manager `pip`.
 
 First, make sure that you have the latest version of Python installed on your
-computer. Then run the following command from the repository's main folder:
+computer; the hooks require Python 3.8 or newer. Then run the following command
+from the repository's main folder:
 
 ```shell
 pip install -r scripts/requirements.txt

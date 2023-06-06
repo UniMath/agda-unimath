@@ -600,10 +600,11 @@ module _
 
   preserves-concat-add-list-Integral-Domain :
     (l1 l2 : list type-Integral-Domain) →
-    Id ( add-list-Integral-Domain (concat-list l1 l2))
-       ( add-Integral-Domain
-         ( add-list-Integral-Domain l1)
-         ( add-list-Integral-Domain l2))
+    Id
+      ( add-list-Integral-Domain (concat-list l1 l2))
+      ( add-Integral-Domain
+        ( add-list-Integral-Domain l1)
+        ( add-list-Integral-Domain l2))
   preserves-concat-add-list-Integral-Domain =
     preserves-concat-add-list-Commutative-Ring
       commutative-ring-Integral-Domain

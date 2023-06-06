@@ -183,8 +183,8 @@ cocone-comp-horizontal :
   ( f : A → X) (i : A → B) (k : B → C) ( c : cocone f i Y) →
   cocone (vertical-map-cocone f i c) k Z → cocone f (k ∘ i) Z
 pr1 (cocone-comp-horizontal f i k c d) =
-   ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ∘
-   ( horizontal-map-cocone f i c)
+  ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ∘
+  ( horizontal-map-cocone f i c)
 pr1 (pr2 (cocone-comp-horizontal f i k c d)) =
   vertical-map-cocone (vertical-map-cocone f i c) k d
 pr2 (pr2 (cocone-comp-horizontal f i k c d)) =

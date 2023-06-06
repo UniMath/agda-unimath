@@ -333,15 +333,16 @@ module _
             ( comp-hom-Precategory C p₂ k' ＝ p₂')) →
             k ＝ k'
         σ k' (γ₁ , γ₂) =
-          ap ( pr1 ∘ pr1)
-             ( pr2
-               ( ψ (W' , comp-hom-Precategory C f p₁') (p₁' , refl) (p₂' , α'))
-               ( ( ( k') ,
-                   ( ( ap (comp-hom-Precategory C f) (inv γ₁)) ∙
-                     ( ( inv (associative-comp-hom-Precategory C f p₁ k')) ∙
-                       ( ap (λ l → comp-hom-Precategory C l k') (inv α₁))))) ,
-                 ( eq-hom-Slice-Precategory C A _ _ γ₁) ,
-                 ( eq-hom-Slice-Precategory C A _ _ γ₂)))
+          ap
+            ( pr1 ∘ pr1)
+            ( pr2
+              ( ψ (W' , comp-hom-Precategory C f p₁') (p₁' , refl) (p₂' , α'))
+              ( ( ( k') ,
+                  ( ( ap (comp-hom-Precategory C f) (inv γ₁)) ∙
+                    ( ( inv (associative-comp-hom-Precategory C f p₁ k')) ∙
+                      ( ap (λ l → comp-hom-Precategory C l k') (inv α₁))))) ,
+                ( eq-hom-Slice-Precategory C A _ _ γ₁) ,
+                ( eq-hom-Slice-Precategory C A _ _ γ₂)))
 
     equiv-is-pullback-is-product-Slice-Precategory :
       is-pullback-Precategory C A X Y f g W p₁ p₂ α ≃
@@ -393,21 +394,21 @@ module _
     ( map-pullback-product-Slice-Precategory ∘
       map-inv-pullback-product-Slice-Precategory) ~ id
   issec-map-inv-pullback-product-Slice-Precategory
-     ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
+    ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
     eq-pair-Σ
       ( refl)
       ( eq-pair-Σ
-         ( refl)
-         ( eq-type-subtype
-            ( λ _ →
-              is-product-Precategory-Prop
-                ( Slice-Precategory C A)
-                ( X , f)
-                ( Y , g)
-                ( _)
-                ( _)
-                ( _))
-            ( refl)))
+        ( refl)
+        ( eq-type-subtype
+          ( λ _ →
+            is-product-Precategory-Prop
+              ( Slice-Precategory C A)
+              ( X , f)
+              ( Y , g)
+              ( _)
+              ( _)
+              ( _))
+          ( refl)))
 
   isretr-map-inv-pullback-product-Slice-Precategory :
     ( map-inv-pullback-product-Slice-Precategory ∘

@@ -66,7 +66,7 @@ pr2 (equiv-universal-property-trunc A B) = is-truncation-trunc B
 
 ## Properties
 
-### The n-truncations satisfy the universal property
+### The `n`-truncations satisfy the universal property
 
 ```agda
 universal-property-trunc :
@@ -108,7 +108,7 @@ module _
     pr2 (apply-universal-property-trunc B f)
 ```
 
-### The n-truncations satisfy the dependent universal property
+### The `n`-truncations satisfy the dependent universal property
 
 ```agda
 module _
@@ -233,22 +233,24 @@ module _
 
   dependent-universal-property-total-truncated-fam-trunc :
     is-contr
-     ( Σ ( (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t))
-         ( λ h →
-           (x : A) (y : type-Truncated-Type (B x)) →
-           Id ( h (pair (unit-trunc x) (map-compute-truncated-fam-trunc B x y)))
+      ( Σ ( (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t))
+          ( λ h →
+            (x : A) (y : type-Truncated-Type (B x)) →
+            Id
+              ( h (pair (unit-trunc x) (map-compute-truncated-fam-trunc B x y)))
               ( f x y)))
   dependent-universal-property-total-truncated-fam-trunc =
     is-contr-equiv _
       ( equiv-Σ
         ( λ g →
           (x : A) →
-          Id ( g (unit-trunc x))
-             ( map-equiv-Π
-               ( λ u → type-Truncated-Type (C (pair (unit-trunc x) u)))
-               ( compute-truncated-fam-trunc B x)
-               ( λ u → id-equiv)
-               ( f x)))
+          Id
+            ( g (unit-trunc x))
+            ( map-equiv-Π
+              ( λ u → type-Truncated-Type (C (pair (unit-trunc x) u)))
+              ( compute-truncated-fam-trunc B x)
+              ( λ u → id-equiv)
+              ( f x)))
         ( equiv-ev-pair)
         ( λ g →
           equiv-map-Π
@@ -256,14 +258,15 @@ module _
                 ( inv-equiv equiv-funext) ∘e
                 ( equiv-Π
                   ( λ y →
-                    Id ( g (pair (unit-trunc x) y))
-                       ( map-equiv-Π
-                         ( λ u →
-                           type-Truncated-Type (C (pair (unit-trunc x) u)))
-                         ( compute-truncated-fam-trunc B x)
-                         ( λ u → id-equiv)
-                         ( f x)
-                         ( y)))
+                    Id
+                      ( g (pair (unit-trunc x) y))
+                      ( map-equiv-Π
+                        ( λ u →
+                          type-Truncated-Type (C (pair (unit-trunc x) u)))
+                        ( compute-truncated-fam-trunc B x)
+                        ( λ u → id-equiv)
+                        ( f x)
+                        ( y)))
                   ( compute-truncated-fam-trunc B x)
                   ( λ y →
                     equiv-concat'
@@ -298,14 +301,15 @@ module _
 
   htpy-dependent-universal-property-total-truncated-fam-trunc :
     (x : A) (y : type-Truncated-Type (B x)) →
-    Id ( function-dependent-universal-property-total-truncated-fam-trunc
-         ( pair (unit-trunc x) (map-compute-truncated-fam-trunc B x y)))
-       ( f x y)
+    Id
+      ( function-dependent-universal-property-total-truncated-fam-trunc
+        ( pair (unit-trunc x) (map-compute-truncated-fam-trunc B x y)))
+      ( f x y)
   htpy-dependent-universal-property-total-truncated-fam-trunc =
     pr2 (center dependent-universal-property-total-truncated-fam-trunc)
 ```
 
-### An n-truncated type is equivalent to its n-truncation
+### An n-truncated type is equivalent to its `n`-truncation
 
 ```agda
 module _
@@ -494,11 +498,12 @@ module _
           ( map-inv-trunc-Σ (map-trunc-Σ |ab|))
           ( |ab|))
       ( λ (pair a b) →
-        ap map-inv-trunc-Σ
-           ( triangle-universal-property-trunc _
-             ( λ (pair a' b') → unit-trunc (pair a' (unit-trunc b')))
-             ( pair a b)) ∙
-        (triangle-universal-property-trunc _
+        ( ap
+          ( map-inv-trunc-Σ)
+          ( triangle-universal-property-trunc _
+            ( λ (pair a' b') → unit-trunc (pair a' (unit-trunc b')))
+            ( pair a b))) ∙
+        ( triangle-universal-property-trunc _
           ( λ (pair a' |b'|) →
             map-universal-property-trunc
               ( trunc k (Σ A B))

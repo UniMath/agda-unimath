@@ -58,7 +58,7 @@ module _
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
-   {X : UU l3} {f : X → B}
+  {X : UU l3} {f : X → B}
   where
 
   map-lift : lift i f → X → A

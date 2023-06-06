@@ -52,9 +52,10 @@ Eq-classical-Fin k x y = Id (nat-classical-Fin k x) (nat-classical-Fin k y)
 
 eq-succ-classical-Fin :
   (k : ℕ) (x y : classical-Fin k) → Id {A = classical-Fin k} x y →
-  Id {A = classical-Fin (succ-ℕ k)}
-     ( pair (succ-ℕ (pr1 x)) (pr2 x))
-     ( pair (succ-ℕ (pr1 y)) (pr2 y))
+  Id
+    { A = classical-Fin (succ-ℕ k)}
+    ( pair (succ-ℕ (pr1 x)) (pr2 x))
+    ( pair (succ-ℕ (pr1 y)) (pr2 y))
 eq-succ-classical-Fin k x .x refl = refl
 
 eq-Eq-classical-Fin :

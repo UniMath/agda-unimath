@@ -101,7 +101,7 @@ module _
   equiv-equivalence-class-representatives :
     {P : A → UU l3} (H : is-choice-of-representatives P) →
     representatives H ≃ equivalence-class R
-  equiv-equivalence-class-representatives H =
-    pair ( class-representatives H)
-         ( is-equiv-class-representatives H)
+  pr1 (equiv-equivalence-class-representatives H) = class-representatives H
+  pr2 (equiv-equivalence-class-representatives H) =
+    is-equiv-class-representatives H
 ```

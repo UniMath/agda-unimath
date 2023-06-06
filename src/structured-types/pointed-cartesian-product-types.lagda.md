@@ -114,7 +114,7 @@ module _
   pr1 (gap-prod-Pointed-Type S f g) =
     map-gap-prod-Pointed-Type S f g
   pr2 (gap-prod-Pointed-Type S f g) =
-     eq-pair
+    eq-pair
       ( preserves-point-pointed-map S A f)
       ( preserves-point-pointed-map S B g)
 ```

@@ -230,8 +230,9 @@ module _
 
   preserves-concat-equiv-eq-Endo :
     (p : Id X Y) (q : Id Y Z) →
-    Id ( equiv-eq-Endo X Z (p ∙ q))
-       ( comp-equiv-Endo X Y Z (equiv-eq-Endo Y Z q) (equiv-eq-Endo X Y p))
+    Id
+      ( equiv-eq-Endo X Z (p ∙ q))
+      ( comp-equiv-Endo X Y Z (equiv-eq-Endo Y Z q) (equiv-eq-Endo X Y p))
   preserves-concat-equiv-eq-Endo refl q =
     inv (right-unit-law-comp-equiv-Endo X Z (equiv-eq-Endo X Z q))
 ```

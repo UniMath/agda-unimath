@@ -215,10 +215,11 @@ abstract
           neq-inr-inl
             ( is-injective-map-equiv f (p ∙ (r ∙ inv q))))
     lemma :
-      Id ( map-equiv
-           ( pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F'))
-           ( inl y))
-         ( inl z)
+      Id
+        ( map-equiv
+          ( pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F'))
+          ( inl y))
+        ( inl z)
     lemma =
       ( ap
         ( λ e → map-equiv (pr1 (map-equiv e P)) (inl y))
@@ -490,7 +491,7 @@ private
               ( element-two-elements-transposition-Fin P ,
                 other-element-two-elements-transposition-Fin P) ,
               neq-elements-two-elements-transposition-Fin P)
-           ( l)))) ∙h
+            ( l)))) ∙h
     ( map-transposition P ·l
       htpy-permutation-list n l)
 

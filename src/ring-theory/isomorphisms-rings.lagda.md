@@ -59,15 +59,17 @@ inv-is-iso-hom-Ring R1 R2 f = pr1
 is-sec-inv-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   ( is-iso-f : is-iso-hom-Ring R1 R2 f) →
-  Id (comp-hom-Ring R2 R1 R2 f (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
-     (id-hom-Ring R2)
+  Id
+    ( comp-hom-Ring R2 R1 R2 f (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
+    ( id-hom-Ring R2)
 is-sec-inv-is-iso-hom-Ring R1 R2 f is-iso-f = pr1 (pr2 is-iso-f)
 
 is-retr-inv-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   ( is-iso-f : is-iso-hom-Ring R1 R2 f) →
-  Id (comp-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
-     (id-hom-Ring R1)
+  Id
+    ( comp-hom-Ring R1 R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f) f)
+    ( id-hom-Ring R1)
 is-retr-inv-is-iso-hom-Ring R1 R2 f is-iso-f = pr2 (pr2 is-iso-f)
 
 inv-map-is-iso-hom-Ring :
@@ -122,8 +124,9 @@ all-elements-equal-is-iso-hom-Ring R1 R2 f inv-f inv-f' =
       ( inv-is-iso-hom-Ring R1 R2 f inv-f')
       ( λ x →
         ( inv
-          ( ap ( map-hom-Ring R2 R1 (pr1 inv-f))
-               ( is-sec-inv-map-is-iso-hom-Ring R1 R2 f inv-f' x))) ∙
+          ( ap
+            ( map-hom-Ring R2 R1 (pr1 inv-f))
+            ( is-sec-inv-map-is-iso-hom-Ring R1 R2 f inv-f' x))) ∙
         ( is-retr-inv-map-is-iso-hom-Ring R1 R2 f inv-f
           ( map-hom-Ring R2 R1 (pr1 inv-f') x))))
 
@@ -157,15 +160,16 @@ inv-hom-iso-Ring R1 R2 f =
 
 is-iso-id-hom-Ring :
   { l1 : Level} (R1 : Ring l1) → is-iso-hom-Ring R1 R1 (id-hom-Ring R1)
-is-iso-id-hom-Ring R1 =
-  pair ( id-hom-Ring R1)
-       ( pair
-         ( left-unit-law-comp-hom-Ring R1 R1 (id-hom-Ring R1))
-         ( left-unit-law-comp-hom-Ring R1 R1 (id-hom-Ring R1)))
+pr1 (is-iso-id-hom-Ring R1) = id-hom-Ring R1
+pr1 (pr2 (is-iso-id-hom-Ring R1)) =
+  left-unit-law-comp-hom-Ring R1 R1 (id-hom-Ring R1)
+pr2 (pr2 (is-iso-id-hom-Ring R1)) =
+  left-unit-law-comp-hom-Ring R1 R1 (id-hom-Ring R1)
 
 id-iso-Ring :
   { l1 : Level} (R1 : Ring l1) → iso-Ring R1 R1
-id-iso-Ring R1 = pair (id-hom-Ring R1) (is-iso-id-hom-Ring R1)
+pr1 (id-iso-Ring R1) = id-hom-Ring R1
+pr2 (id-iso-Ring R1) = is-iso-id-hom-Ring R1
 
 iso-eq-Ring :
   { l : Level} (R1 R2 : Ring l) → Id R1 R2 → iso-Ring R1 R2
@@ -186,13 +190,16 @@ is-iso-hom-Ab-is-iso-hom-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
   is-iso-hom-Ring R1 R2 f →
   is-iso-hom-Ab-hom-Ring R1 R2 f
-is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f =
-  pair ( hom-ab-hom-Ring R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f))
-       ( pair
-         ( ap ( hom-ab-hom-Ring R2 R2)
-              ( is-sec-inv-is-iso-hom-Ring R1 R2 f is-iso-f))
-         ( ap ( hom-ab-hom-Ring R1 R1)
-              ( is-retr-inv-is-iso-hom-Ring R1 R2 f is-iso-f)))
+pr1 (is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f) =
+  hom-ab-hom-Ring R2 R1 (inv-is-iso-hom-Ring R1 R2 f is-iso-f)
+pr1 (pr2 (is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f)) =
+  ap
+    ( hom-ab-hom-Ring R2 R2)
+    ( is-sec-inv-is-iso-hom-Ring R1 R2 f is-iso-f)
+pr2 (pr2 (is-iso-hom-Ab-is-iso-hom-Ring R1 R2 f is-iso-f)) =
+  ap
+    ( hom-ab-hom-Ring R1 R1)
+    ( is-retr-inv-is-iso-hom-Ring R1 R2 f is-iso-f)
 
 abstract
   preserves-mul-inv-is-iso-hom-Ab :
@@ -209,25 +216,29 @@ abstract
         ( ( pres-mul-f
             ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f x)
             ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f y)) ∙
-          ( ( ap ( mul-Ring R2
-                   ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f
-                     ( map-inv-is-iso-hom-Ab
-                       ( ab-Ring R1)
-                       ( ab-Ring R2)
-                       f is-iso-f x)))
-                 ( is-sec-map-inv-is-iso-hom-Ab
-                   ( ab-Ring R1)
-                   ( ab-Ring R2)
-                   ( f)
-                   ( is-iso-f)
-                   ( y))) ∙
-            ( ap ( λ z → mul-Ring R2 z y)
-                 ( is-sec-map-inv-is-iso-hom-Ab
-                   ( ab-Ring R1)
-                   ( ab-Ring R2)
-                   ( f)
-                   ( is-iso-f)
-                   ( x))))))) ∙
+          ( ( ap
+              ( mul-Ring R2
+                ( map-hom-Ab (ab-Ring R1) (ab-Ring R2) f
+                  ( map-inv-is-iso-hom-Ab
+                    ( ab-Ring R1)
+                    ( ab-Ring R2)
+                    ( f)
+                    ( is-iso-f)
+                    ( x))))
+              ( is-sec-map-inv-is-iso-hom-Ab
+                ( ab-Ring R1)
+                ( ab-Ring R2)
+                ( f)
+                ( is-iso-f)
+                ( y))) ∙
+            ( ap
+              ( λ z → mul-Ring R2 z y)
+              ( is-sec-map-inv-is-iso-hom-Ab
+                ( ab-Ring R1)
+                ( ab-Ring R2)
+                ( f)
+                ( is-iso-f)
+                ( x))))))) ∙
     ( is-retr-map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f
       ( mul-Ring R1
         ( map-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f x)
@@ -255,30 +266,34 @@ is-ring-homomorphism-inv-is-iso-hom-Ab :
   ( is-ring-hom-f : is-ring-homomorphism-hom-Ab R1 R2 f) →
   is-ring-homomorphism-hom-Ab R2 R1
     ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
-is-ring-homomorphism-inv-is-iso-hom-Ab
-  R1 R2 f is-iso-f (pair pres-mul-f pres-unit-f) =
-  pair
-    ( preserves-mul-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-mul-f)
-    ( preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f)
+pr1
+  ( is-ring-homomorphism-inv-is-iso-hom-Ab
+      R1 R2 f is-iso-f (pres-mul-f , pres-unit-f)) =
+    preserves-mul-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-mul-f
+pr2
+  ( is-ring-homomorphism-inv-is-iso-hom-Ab
+      R1 R2 f is-iso-f (pres-mul-f , pres-unit-f)) =
+    preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f
 
 inv-hom-Ring-is-iso-hom-Ab :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) (f : type-hom-Ring R1 R2) →
-  ( is-iso-f : is-iso-hom-Ab
-                 ( ab-Ring R1)
-                 ( ab-Ring R2)
-                 ( hom-ab-hom-Ring R1 R2 f)) →
-  type-hom-Ring R2 R1
-inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f =
-  pair
-    ( inv-is-iso-hom-Ab
+  ( is-iso-f :
+    is-iso-hom-Ab
       ( ab-Ring R1)
       ( ab-Ring R2)
-      ( hom-ab-hom-Ring R1 R2 f)
-      ( is-iso-f))
-    ( is-ring-homomorphism-inv-is-iso-hom-Ab R1 R2
-      ( hom-ab-hom-Ring R1 R2 f)
-      ( is-iso-f)
-      ( is-ring-homomorphism-hom-Ring R1 R2 f))
+      ( hom-ab-hom-Ring R1 R2 f)) →
+  type-hom-Ring R2 R1
+pr1 (inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f) =
+  inv-is-iso-hom-Ab
+    ( ab-Ring R1)
+    ( ab-Ring R2)
+    ( hom-ab-hom-Ring R1 R2 f)
+    ( is-iso-f)
+pr2 (inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f) =
+  is-ring-homomorphism-inv-is-iso-hom-Ab R1 R2
+    ( hom-ab-hom-Ring R1 R2 f)
+    ( is-iso-f)
+    ( is-ring-homomorphism-hom-Ring R1 R2 f)
 
 abstract
   is-iso-hom-Ring-is-iso-hom-Ab :
@@ -286,40 +301,40 @@ abstract
     ( f : type-hom-Ring R1 R2) →
     is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) (hom-ab-hom-Ring R1 R2 f) →
     is-iso-hom-Ring R1 R2 f
-  is-iso-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f =
-    pair
-      ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
-      ( pair
-        ( eq-htpy-hom-Ring R2 R2
+  pr1 (is-iso-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f) =
+    inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f
+  pr1 (pr2 (is-iso-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)) =
+    eq-htpy-hom-Ring R2 R2
+      ( comp-hom-Ring R2 R1 R2 f
+        ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f))
+      ( id-hom-Ring R2)
+      ( htpy-eq-hom-Ab (ab-Ring R2) (ab-Ring R2)
+        ( hom-ab-hom-Ring R2 R2
           ( comp-hom-Ring R2 R1 R2 f
-            ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f))
-          ( id-hom-Ring R2)
-          ( htpy-eq-hom-Ab (ab-Ring R2) (ab-Ring R2)
-            ( hom-ab-hom-Ring R2 R2
-              ( comp-hom-Ring R2 R1 R2 f
-                ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)))
-            ( id-hom-Ab (ab-Ring R2))
-            ( is-sec-inv-is-iso-hom-Ab
-              ( ab-Ring R1)
-              ( ab-Ring R2)
-              ( hom-ab-hom-Ring R1 R2 f)
-              ( is-iso-f))))
-        ( eq-htpy-hom-Ring R1 R1
+            ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)))
+        ( id-hom-Ab (ab-Ring R2))
+        ( is-sec-inv-is-iso-hom-Ab
+          ( ab-Ring R1)
+          ( ab-Ring R2)
+          ( hom-ab-hom-Ring R1 R2 f)
+          ( is-iso-f)))
+  pr2 (pr2 (is-iso-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)) =
+    eq-htpy-hom-Ring R1 R1
+      ( comp-hom-Ring R1 R2 R1
+        ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
+        ( f))
+      ( id-hom-Ring R1)
+      ( htpy-eq-hom-Ab (ab-Ring R1) (ab-Ring R1)
+        ( hom-ab-hom-Ring R1 R1
           ( comp-hom-Ring R1 R2 R1
             ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
-            ( f))
-          ( id-hom-Ring R1)
-          ( htpy-eq-hom-Ab (ab-Ring R1) (ab-Ring R1)
-            ( hom-ab-hom-Ring R1 R1
-              ( comp-hom-Ring R1 R2 R1
-                ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
-                ( f)))
-            ( id-hom-Ab (ab-Ring R1))
-            ( is-retr-inv-is-iso-hom-Ab
-              ( ab-Ring R1)
-              ( ab-Ring R2)
-              ( hom-ab-hom-Ring R1 R2 f)
-              ( is-iso-f)))))
+            ( f)))
+        ( id-hom-Ab (ab-Ring R1))
+        ( is-retr-inv-is-iso-hom-Ab
+          ( ab-Ring R1)
+          ( ab-Ring R2)
+          ( hom-ab-hom-Ring R1 R2 f)
+          ( is-iso-f)))
 
 iso-Ab-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → UU (l1 ⊔ l2)
@@ -337,11 +352,11 @@ iso-Ab-iso-Ab-Ring R1 R2 = pr1
 iso-Ab-iso-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
   iso-Ring R1 R2 → iso-Ab (ab-Ring R1) (ab-Ring R2)
-iso-Ab-iso-Ring R1 R2 f =
-  pair ( hom-ab-hom-Ring R1 R2 (hom-iso-Ring R1 R2 f))
-       ( is-iso-hom-Ab-is-iso-hom-Ring R1 R2
-         ( hom-iso-Ring R1 R2 f)
-         ( is-iso-hom-iso-Ring R1 R2 f))
+pr1 (iso-Ab-iso-Ring R1 R2 f) = hom-ab-hom-Ring R1 R2 (hom-iso-Ring R1 R2 f)
+pr2 (iso-Ab-iso-Ring R1 R2 f) =
+  is-iso-hom-Ab-is-iso-hom-Ring R1 R2
+    ( hom-iso-Ring R1 R2 f)
+    ( is-iso-hom-iso-Ring R1 R2 f)
 
 equiv-iso-Ab-iso-Ring :
   { l1 : Level} (R1 : Ring l1) (R2 : Ring l1) →

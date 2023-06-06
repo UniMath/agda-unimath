@@ -79,8 +79,9 @@ right-unit-law-horizontal-concat-Ω² {α = α} =
 
 interchange-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
-  Id ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
-     ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
+  Id
+    ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
+    ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
 interchange-Ω² α β γ δ = interchange-Id² α β γ δ
 
 outer-eckmann-hilton-connection-Ω² :

@@ -45,7 +45,7 @@ We also show a computational rule to simplify the use of this equivalence.
 
 ## Propositions
 
-### Coproduct decomposition of the indexing type of a relaxed Σ-decomposition are equivalent to relaxed Σ-decomposition of the left and right summand of a coproduct decomposition.
+### Coproduct decomposition of the indexing type of a relaxed Σ-decomposition are equivalent to relaxed Σ-decomposition of the left and right summand of a coproduct decomposition
 
 ```agda
 module _

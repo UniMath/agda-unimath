@@ -125,11 +125,11 @@ compute-Fam-Inhabited-𝔽 :
     Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
       ( λ Y → ((x : (type-𝔽 X)) → is-finite (type-Inhabited-Type (Y x))))
 compute-Fam-Inhabited-𝔽 X =
-   ( distributive-Π-Σ ∘e
-    ( equiv-Π
-      ( λ _ → Σ (Inhabited-Type _) ( is-finite ∘ type-Inhabited-Type))
-      ( id-equiv)
-      ( λ _ → compute-Inhabited-𝔽)))
+  ( distributive-Π-Σ) ∘e
+  ( equiv-Π
+    ( λ _ → Σ (Inhabited-Type _) (is-finite ∘ type-Inhabited-Type))
+    ( id-equiv)
+    ( λ _ → compute-Inhabited-𝔽))
 ```
 
 ## Proposition

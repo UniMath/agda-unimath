@@ -43,8 +43,9 @@ module _
     pointed-Π A
       ( pair
         ( λ x →
-          Id ( function-pointed-Π A B f x)
-             ( function-pointed-Π A B g x))
+          Id
+            ( function-pointed-Π A B f x)
+            ( function-pointed-Π A B g x))
         ( ( preserves-point-function-pointed-Π A B f) ∙
           ( inv (preserves-point-function-pointed-Π A B g))))
 

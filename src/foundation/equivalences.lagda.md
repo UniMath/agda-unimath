@@ -90,10 +90,11 @@ module _
       ( issec-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
-    ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-         ( issec-map-inv-equiv
-           ( equiv-ap e x (map-inv-equiv e y))
-           ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
+    ( ap
+      ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+      ( issec-map-inv-equiv
+        ( equiv-ap e x (map-inv-equiv e y))
+        ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
     ( ( assoc
         ( p)
         ( inv (issec-map-inv-equiv e y))
@@ -125,13 +126,15 @@ module _
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
               ( issec-map-inv-equiv e y)
               ( inv p)
-              ( ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-                     ( ap ( ap (map-equiv e))
-                          ( inv-inv
-                            ( map-inv-equiv
-                              ( equiv-ap e x (map-inv-equiv e y))
-                              ( ( inv p) ∙
-                                ( inv (issec-map-inv-equiv e y))))))) ∙
+              ( ( ap
+                  ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+                  ( ap
+                    ( ap (map-equiv e))
+                    ( inv-inv
+                      ( map-inv-equiv
+                        ( equiv-ap e x (map-inv-equiv e y))
+                        ( ( inv p) ∙
+                          ( inv (issec-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
 ```
@@ -186,13 +189,14 @@ abstract
     is-equiv-has-inverse
       ( pr1 retr-f)
       ( htpy-eq
-        ( ap ( pr1)
-             ( eq-is-contr'
-               ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
-                 ( pair
-                   ( f ∘ (pr1 retr-f))
-                   ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retr-f)))
-                 ( pair id refl))))
+        ( ap
+          ( pr1)
+          ( eq-is-contr'
+            ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
+            ( pair
+              ( f ∘ (pr1 retr-f))
+              ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retr-f)))
+            ( pair id refl))))
       ( htpy-eq (pr2 retr-f))
 ```
 

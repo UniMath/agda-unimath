@@ -223,9 +223,10 @@ module _
         ( unique-direct-successor-is-proper-node-Directed-Tree (T i) x f))
 
   contraction-unique-direct-successor-combinator-Directed-Tree :
-    (x : node-combinator-Directed-Tree) →
-    (p : is-root-combinator-Directed-Tree x +
-         Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)) →
+    ( x : node-combinator-Directed-Tree) →
+    ( p :
+      is-root-combinator-Directed-Tree x +
+      Σ node-combinator-Directed-Tree (edge-combinator-Directed-Tree x)) →
     center-unique-direct-successor-combinator-Directed-Tree x ＝ p
   contraction-unique-direct-successor-combinator-Directed-Tree ._ (inl refl) =
     refl

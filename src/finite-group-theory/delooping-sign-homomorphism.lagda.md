@@ -475,7 +475,7 @@ module _
     type-Group (symmetric-Group (quotient-set-Fin (n +ℕ 2)))
   cases-map-quotient-aut-Fin n h (inl D) = id-equiv
   cases-map-quotient-aut-Fin n h (inr ND) =
-     that-thing n ∘e (equiv-succ-Fin 2 ∘e (inv-equiv (that-thing n)))
+    that-thing n ∘e (equiv-succ-Fin 2 ∘e (inv-equiv (that-thing n)))
 
   map-quotient-aut-Fin :
     (n : ℕ) →

@@ -840,17 +840,9 @@ module _
 
 This remains to be shown.
 
-```agda
-
-```
-
 ### A map between 2-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
 
 This remains to be shown.
-
-```agda
-
-```
 
 ### Any map between 2-element types that is not an equivalence is constant
 

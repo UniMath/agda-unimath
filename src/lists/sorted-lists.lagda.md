@@ -75,7 +75,7 @@ module _
 
 ## Properties
 
-### If a list is sorted, then its tail is also sorted.
+### If a list is sorted, then its tail is also sorted
 
 ```agda
   is-sorted-tail-is-sorted-list :
