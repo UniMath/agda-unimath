@@ -42,3 +42,10 @@ replacement-UU :
   is-locally-small l1 B → is-small l1 (im f)
 replacement-UU f = replacement f is-small'
 ```
+
+## References
+
+- Marc Bezem, Ulrik Buchholtz, Pierre Cagne, Bjørn Ian Dundas, and Daniel R.
+  Grayson, Section 2.19 of _Symmetry_
+  ([draft](https://unimath.github.io/SymmetryBook/book.pdf),
+  [GitHub](https://github.com/UniMath/SymmetryBook))

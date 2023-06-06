@@ -27,13 +27,13 @@ The [truncation](foundation.truncations.md) operations are
 ## Definition
 
 ```agda
-trunc-operator-modality :
+operator-trunc-modality :
   (l : Level) (k : 𝕋) → operator-modality l l
-trunc-operator-modality _ = type-trunc
+operator-trunc-modality _ = type-trunc
 
-trunc-unit-modality :
-  {l : Level} {k : 𝕋} → unit-modality (trunc-operator-modality l k)
-trunc-unit-modality = unit-trunc
+unit-trunc-modality :
+  {l : Level} {k : 𝕋} → unit-modality (operator-trunc-modality l k)
+unit-trunc-modality = unit-trunc
 ```
 
 ## Properties
@@ -41,10 +41,10 @@ trunc-unit-modality = unit-trunc
 ### The truncation modalities are uniquely eliminating modalities
 
 ```agda
-is-uniquely-eliminating-modality-trunc :
+is-uniquely-eliminating-modality-trunc-modality :
   {l : Level} {k : 𝕋} →
-  is-uniquely-eliminating-modality (trunc-unit-modality {l} {k})
-is-uniquely-eliminating-modality-trunc {k = k} A P =
+  is-uniquely-eliminating-modality (unit-trunc-modality {l} {k})
+is-uniquely-eliminating-modality-trunc-modality {k = k} A P =
   dependent-universal-property-trunc
     ( λ z → (type-trunc k (P z) , is-trunc-type-trunc))
 ```

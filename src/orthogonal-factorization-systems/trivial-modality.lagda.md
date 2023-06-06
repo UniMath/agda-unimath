@@ -27,13 +27,13 @@ we call the **trivial modality**.
 ## Definition
 
 ```agda
-id-operator-modality :
+operator-id-modality :
   (l : Level) → operator-modality l l
-id-operator-modality l = id
+operator-id-modality l = id
 
-id-unit-modality :
-  {l : Level} → unit-modality (id-operator-modality l)
-id-unit-modality = id
+unit-id-modality :
+  {l : Level} → unit-modality (operator-id-modality l)
+unit-id-modality = id
 ```
 
 ## Properties
@@ -41,11 +41,11 @@ id-unit-modality = id
 ### The trivial modality is a uniquely eliminating modality
 
 ```agda
-is-uniquely-eliminating-modality-id :
-  {l : Level} → is-uniquely-eliminating-modality (id-unit-modality {l})
-is-uniquely-eliminating-modality-id {l} _ P =
+is-uniquely-eliminating-modality-id-modality :
+  {l : Level} → is-uniquely-eliminating-modality (unit-id-modality {l})
+is-uniquely-eliminating-modality-id-modality {l} _ P =
   is-local-family-is-equiv
-    ( id-unit-modality)
+    ( unit-id-modality)
     ( is-equiv-id)
-    ( id-operator-modality l ∘ P)
+    ( operator-id-modality l ∘ P)
 ```

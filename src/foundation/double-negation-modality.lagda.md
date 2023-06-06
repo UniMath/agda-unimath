@@ -29,13 +29,13 @@ The [double negation](foundation.double-negation.md) operation `¬¬` is a
 ## Definition
 
 ```agda
-double-negation-operator-modality :
+operator-double-negation-modality :
   (l : Level) → operator-modality l l
-double-negation-operator-modality _ = ¬¬
+operator-double-negation-modality _ = ¬¬
 
-double-negation-unit-modality :
-  {l : Level} → unit-modality (double-negation-operator-modality l)
-double-negation-unit-modality = intro-double-negation
+unit-double-negation-modality :
+  {l : Level} → unit-modality (operator-double-negation-modality l)
+unit-double-negation-modality = intro-double-negation
 ```
 
 ## Properties
@@ -43,13 +43,13 @@ double-negation-unit-modality = intro-double-negation
 ### The double negation modality is a uniquely eliminating modality
 
 ```agda
-is-uniquely-eliminating-modality-double-negation :
+is-uniquely-eliminating-modality-double-negation-modality :
   {l : Level} →
-  is-uniquely-eliminating-modality (double-negation-unit-modality {l})
-is-uniquely-eliminating-modality-double-negation {l} A P =
+  is-uniquely-eliminating-modality (unit-double-negation-modality {l})
+is-uniquely-eliminating-modality-double-negation-modality {l} A P =
   is-local-family-is-prop
-    ( double-negation-unit-modality)
-    ( double-negation-operator-modality l ∘ P)
+    ( unit-double-negation-modality)
+    ( operator-double-negation-modality l ∘ P)
     ( λ _ → is-prop-double-negation)
     ( λ f z g →
       double-negation-extend

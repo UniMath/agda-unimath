@@ -26,13 +26,13 @@ every type to the [unit type](foundation.unit-type.md).
 ## Definition
 
 ```agda
-zero-operator-modality :
+operator-zero-modality :
   (l1 l2 : Level) → operator-modality l1 l2
-zero-operator-modality l1 l2 _ = raise-unit l2
+operator-zero-modality l1 l2 _ = raise-unit l2
 
-zero-unit-modality :
-  {l1 l2 : Level} → unit-modality (zero-operator-modality l1 l2)
-zero-unit-modality _ = raise-star
+unit-zero-modality :
+  {l1 l2 : Level} → unit-modality (operator-zero-modality l1 l2)
+unit-zero-modality _ = raise-star
 ```
 
 ## Properties
@@ -40,12 +40,12 @@ zero-unit-modality _ = raise-star
 ### The zero modality is a uniquely eliminating modality
 
 ```agda
-is-uniquely-eliminating-modality-zero :
+is-uniquely-eliminating-modality-zero-modality :
   {l1 l2 : Level} →
-  is-uniquely-eliminating-modality (zero-unit-modality {l1} {l2})
-is-uniquely-eliminating-modality-zero {l2 = l2} A P =
+  is-uniquely-eliminating-modality (unit-zero-modality {l1} {l2})
+is-uniquely-eliminating-modality-zero-modality {l2 = l2} A P =
   is-local-is-contr
-    ( zero-unit-modality)
+    ( unit-zero-modality)
     ( raise-unit l2)
     ( is-contr-raise-unit)
 ```

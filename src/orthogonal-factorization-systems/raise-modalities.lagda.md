@@ -29,13 +29,13 @@ in the case that `l1 ⊔ l2 = l1`, we recover the
 ## Definition
 
 ```agda
-raise-operator-modality :
+operator-raise-modality :
   (l1 l2 : Level) → operator-modality l1 (l1 ⊔ l2)
-raise-operator-modality l1 l2 = raise l2
+operator-raise-modality l1 l2 = raise l2
 
-raise-unit-modality :
-  {l1 l2 : Level} → unit-modality (raise-operator-modality l1 l2)
-raise-unit-modality = map-raise
+unit-raise-modality :
+  {l1 l2 : Level} → unit-modality (operator-raise-modality l1 l2)
+unit-raise-modality = map-raise
 ```
 
 ## Properties
@@ -43,14 +43,14 @@ raise-unit-modality = map-raise
 ### The raise modality is a uniquely eliminating modality
 
 ```agda
-is-uniquely-eliminating-modality-raise :
+is-uniquely-eliminating-modality-raise-modality :
   {l1 l2 : Level} →
-  is-uniquely-eliminating-modality (raise-unit-modality {l1} {l2})
-is-uniquely-eliminating-modality-raise {l1} {l2} _ P =
+  is-uniquely-eliminating-modality (unit-raise-modality {l1} {l2})
+is-uniquely-eliminating-modality-raise-modality {l1} {l2} _ P =
   is-local-family-is-equiv
-    ( raise-unit-modality)
+    ( unit-raise-modality)
     ( is-equiv-map-raise)
-    ( raise-operator-modality l1 l2 ∘ P)
+    ( operator-raise-modality l1 l2 ∘ P)
 ```
 
 ### In the case that `l1 ⊔ l2 = l1` we recover the trivial modality

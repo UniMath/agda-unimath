@@ -68,8 +68,8 @@ module _
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
 
-  modal-universal-property : UU (lsuc l1 ⊔ l2)
-  modal-universal-property =
+  dependent-universal-property-modality : UU (lsuc l1 ⊔ l2)
+  dependent-universal-property-modality =
     Σ ind-modality compute-ind-modality
 
   rec-modality-ind-modality : ind-modality → rec-modality
@@ -100,7 +100,7 @@ module _
 ```agda
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
-    modal-universal-property (unit-○) × is-modal-identity-types
+    dependent-universal-property-modality (unit-○) × is-modal-identity-types
 ```
 
 ### Components of a `is-higher-modality` proof
