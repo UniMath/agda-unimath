@@ -1,4 +1,4 @@
-# Products of Dirichlet series of species of types in subuniverses
+# Products of Dirichlet series of species of types
 
 ```agda
 module species.products-dirichlet-series-species-of-types where
@@ -8,22 +8,21 @@ module species.products-dirichlet-series-species-of-types where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.functions
-open import foundation.subuniverses
-open import foundation.universe-levels
-open import foundation.equivalences
 open import foundation.dependent-pair-types
-open import foundation.cartesian-product-types
-open import foundation.homotopies
-open import foundation.functoriality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
+open import foundation.homotopies
+open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universal-property-cartesian-product-types
-open import foundation.functoriality-function-types
+open import foundation.universe-levels
 
-open import species.dirichlet-series-species-of-types
 open import species.dirichlet-products-species-of-types
+open import species.dirichlet-series-species-of-types
 open import species.species-of-types
 ```
 
@@ -105,17 +104,17 @@ module _
       ( X) ≃
     product-dirichlet-series-species-types H C1 S T X
   equiv-dirichlet-series-dirichlet-product-species-types =
-     ( reassociate') ∘e
-     ( ( equiv-tot
-         ( λ A →
-           equiv-tot
-             ( λ B →
-               ( equiv-prod
-                 ( id-equiv)
-                 ( universal-property-product ∘e
-                   equiv-postcomp X (C1 A B))) ∘e
-               ( left-unit-law-Σ-is-contr
-                 ( is-contr-total-equiv' (A × B))
-                 ( A × B , id-equiv))))) ∘e
-       ( reassociate))
+    ( reassociate') ∘e
+    ( ( equiv-tot
+        ( λ A →
+          equiv-tot
+            ( λ B →
+              ( equiv-prod
+                ( id-equiv)
+                ( universal-property-product ∘e
+                  equiv-postcomp X (C1 A B))) ∘e
+              ( left-unit-law-Σ-is-contr
+                ( is-contr-total-equiv' (A × B))
+                ( A × B , id-equiv))))) ∘e
+      ( reassociate))
 ```

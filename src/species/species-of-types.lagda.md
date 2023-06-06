@@ -7,11 +7,11 @@ module species.species-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.cartesian-product-types
 ```
 
 </details>

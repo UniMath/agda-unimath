@@ -8,19 +8,24 @@ module species.products-dirichlet-series-species-of-types-in-subuniverses where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.functions
-open import foundation.subuniverses
-open import foundation.universe-levels
-open import foundation.equivalences
-open import foundation.functoriality-cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.functions
+open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.homotopies
+open import foundation.subuniverses
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.univalence
+open import foundation.universal-property-cartesian-product-types
+open import foundation.universe-levels
 
+open import species.dirichlet-products-species-of-types-in-subuniverses
 open import species.dirichlet-series-species-of-types-in-subuniverses
 open import species.products-dirichlet-series-species-of-types
 open import species.species-of-types-in-subuniverses
-open import species.dirichlet-products-species-of-types-in-subuniverses
 ```
 
 </details>
@@ -44,7 +49,8 @@ module _
   (X : UU l6)
   where
 
-  product-dirichlet-series-species-subuniverse : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
+  product-dirichlet-series-species-subuniverse :
+    UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6)
   product-dirichlet-series-species-subuniverse =
     dirichlet-series-species-subuniverse
       ( P)
@@ -83,60 +89,91 @@ module _
   (X : UU l5)
   where
 
---   private
---     reassociate :
---       dirichlet-series-species-subuniverse
---         ( P)
---         ( Q)
---         ( C1)
---         ( H)
---         ( C2)
---         ( dirichlet-product-species-subuniverse S T) X ≃
---       Σ ( UU l1)
---         ( λ A →
---           Σ ( UU l1)
---             ( λ B →
---               Σ ( Σ ( UU l1) (λ F → F ≃ (A × B)))
---                 ( λ F → ((S A) × (T B)) × (X → H (pr1 F)))))
---     pr1 reassociate (F , ((A , B , e) , x) , y) = (A , B , (F , e) , x , y)
---     pr2 reassociate =
---       is-equiv-has-inverse
---         ( λ (A , B , (F , e) , x , y) → (F , ((A , B , e) , x) , y))
---         ( refl-htpy)
---         ( refl-htpy)
+  private
+    reassociate :
+      dirichlet-series-species-subuniverse
+        ( P)
+        ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+        ( C1)
+        ( H)
+        ( C2)
+        ( dirichlet-product-species-subuniverse P Q C3 S T) X ≃
+      Σ ( type-subuniverse P)
+        ( λ A →
+          Σ ( type-subuniverse P)
+            ( λ B →
+              Σ ( Σ ( type-subuniverse P)
+                    ( λ F →
+                      inclusion-subuniverse P F ≃
+                      ( inclusion-subuniverse P A × inclusion-subuniverse P B)))
+                ( λ F →
+                  ( ( inclusion-subuniverse
+                      ( subuniverse-global-subuniverse Q l3)
+                      ( S A)) ×
+                    ( inclusion-subuniverse
+                      ( subuniverse-global-subuniverse Q l4)
+                      ( T B))) × (X → H (pr1 F)))))
+    pr1 reassociate (F , ((A , B , e) , x) , y) = (A , B , (F , e), x , y)
+    pr2 reassociate =
+      is-equiv-has-inverse
+        ( λ (A , B , (F , e), x , y) → (F , ((A , B , e) , x) , y))
+        ( refl-htpy)
+        ( refl-htpy)
 
--- --     reassociate' :
--- --       Σ ( UU l1)
--- --         ( λ A → Σ (UU l1) (λ B → (S A × T B) × ((X → H A) × (X → H B)))) ≃
--- --       product-dirichlet-series-species-types H C1 S T X
--- --     pr1 reassociate' (A , B , (s , t) , (fs , ft)) =
--- --       ((A , (s , fs)) , (B , (t , ft)))
--- --     pr2 reassociate' =
--- --       is-equiv-has-inverse
--- --         ( λ ((A , (s , fs)) , (B , (t , ft))) →
--- --           (A , B , (s , t) , (fs , ft)))
--- --         ( refl-htpy)
--- --         ( refl-htpy)
+    reassociate' :
+      Σ ( type-subuniverse P)
+        ( λ A →
+          Σ ( type-subuniverse P)
+            ( λ B →
+              ( ( inclusion-subuniverse
+                  ( subuniverse-global-subuniverse Q l3)
+                  ( S A)) ×
+                inclusion-subuniverse
+                  ( subuniverse-global-subuniverse Q l4)
+                  ( T B)) ×
+              ( (X → H A) × (X → H B)))) ≃
+      product-dirichlet-series-species-subuniverse P Q C1 H C2 S T X
+    pr1 reassociate' (A , B , (s , t) , (fs , ft)) =
+      ((A , (s , fs)) , (B , (t , ft)))
+    pr2 reassociate' =
+      is-equiv-has-inverse
+        ( λ ((A , (s , fs)) , (B , (t , ft))) →
+          (A , B , (s , t) , (fs , ft)))
+        ( refl-htpy)
+        ( refl-htpy)
 
--- --   equiv-dirichlet-series-dirichlet-product-species-types :
--- --     dirichlet-series-species-types
--- --       ( H)
--- --       ( C1)
--- --       ( dirichlet-product-species-types S T)
--- --       ( X) ≃
--- --     product-dirichlet-series-species-types H C1 S T X
--- --   equiv-dirichlet-series-dirichlet-product-species-types =
--- --      ( reassociate') ∘e
--- --      ( ( equiv-tot
--- --          ( λ A →
--- --            equiv-tot
--- --              ( λ B →
--- --                ( equiv-prod
--- --                  ( id-equiv)
--- --                  ( universal-property-product ∘e
--- --                    equiv-postcomp X (C1 A B))) ∘e
--- --                ( left-unit-law-Σ-is-contr
--- --                  ( is-contr-total-equiv' (A × B))
--- --                  ( A × B , id-equiv))))) ∘e
--- --        ( reassociate))
--- -- ```
+  equiv-dirichlet-series-dirichlet-product-species-subuniverse :
+    dirichlet-series-species-subuniverse
+      ( P)
+      ( subuniverse-global-subuniverse Q (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4))
+      ( C1)
+      ( H)
+      ( C2)
+      ( dirichlet-product-species-subuniverse P Q C3 S T)
+      ( X) ≃
+    product-dirichlet-series-species-subuniverse P Q C1 H C2 S T X
+  equiv-dirichlet-series-dirichlet-product-species-subuniverse =
+    ( reassociate') ∘e
+    ( ( equiv-tot
+        ( λ A →
+          equiv-tot
+            ( λ B →
+              ( equiv-prod
+                ( id-equiv)
+                ( universal-property-product ∘e
+                  equiv-postcomp X (C2 A B))) ∘e
+              left-unit-law-Σ-is-contr
+                ( is-contr-total-equiv-subuniverse'
+                  ( P)
+                  ( inclusion-subuniverse P A ×
+                    inclusion-subuniverse P B ,
+                    C1
+                      ( is-in-subuniverse-inclusion-subuniverse P A)
+                      ( is-in-subuniverse-inclusion-subuniverse P B)))
+                ( ( inclusion-subuniverse P A × inclusion-subuniverse P B ,
+                    C1
+                      ( is-in-subuniverse-inclusion-subuniverse P A)
+                      ( is-in-subuniverse-inclusion-subuniverse P B)),
+                  id-equiv)))) ∘e
+      ( reassociate))
+```
