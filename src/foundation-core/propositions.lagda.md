@@ -93,12 +93,12 @@ module _
     pr2 (is-prop-all-elements-equal H x .x) refl = left-inv (H x x)
 
   abstract
-    eq-is-prop' : is-prop A → all-elements-equal A
-    eq-is-prop' H x y = pr1 (H x y)
+    all-elements-equal-is-prop : is-prop A → all-elements-equal A
+    all-elements-equal-is-prop H x y = pr1 (H x y)
 
   abstract
     eq-is-prop : is-prop A → {x y : A} → x ＝ y
-    eq-is-prop H {x} {y} = eq-is-prop' H x y
+    eq-is-prop H {x} {y} = all-elements-equal-is-prop H x y
 
   abstract
     is-proof-irrelevant-all-elements-equal :
@@ -109,15 +109,19 @@ module _
   abstract
     is-proof-irrelevant-is-prop : is-prop A → is-proof-irrelevant A
     is-proof-irrelevant-is-prop =
-      is-proof-irrelevant-all-elements-equal ∘ eq-is-prop'
+      is-proof-irrelevant-all-elements-equal ∘ all-elements-equal-is-prop
 
   abstract
     is-prop-is-proof-irrelevant : is-proof-irrelevant A → is-prop A
     is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y
 
   abstract
-    eq-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
-    eq-is-proof-irrelevant = eq-is-prop' ∘ is-prop-is-proof-irrelevant
+    all-elements-equal-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
+    all-elements-equal-is-proof-irrelevant =
+      all-elements-equal-is-prop ∘ is-prop-is-proof-irrelevant
+
+eq-Prop' : {l : Level} (A : Prop l) {x y : type-Prop A} → x ＝ y
+eq-Prop' A = eq-is-prop (is-prop-type-Prop A)
 ```
 
 ### A map between propositions is an equivalence if there is a map in the reverse direction

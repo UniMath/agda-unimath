@@ -132,7 +132,7 @@ cases-eq-succ-based-strong-ind-ℕ k P pS n N f M (inl H) =
 cases-eq-succ-based-strong-ind-ℕ k P pS n N f M (inr α) =
   ap
     ( (cases-succ-based-strong-ind-ℕ k P pS n N f (succ-ℕ n) M) ∘ inr)
-    ( eq-is-prop' (is-set-ℕ (succ-ℕ n) (succ-ℕ n)) α refl)
+    ( all-elements-equal-is-prop (is-set-ℕ (succ-ℕ n) (succ-ℕ n)) α refl)
 
 eq-succ-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l)

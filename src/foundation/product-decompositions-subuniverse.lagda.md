@@ -380,7 +380,7 @@ module _
                             ( equiv-is-contr
                               is-contr-raise-unit
                               ( ( pr2 x))))
-                          ( eq-is-prop (is-prop-type-Prop (P (pr1 (pr1 x))))))
+                          ( eq-Prop' (P (pr1 (pr1 x)))))
                         ( eq-is-prop is-property-is-contr)))
                   ( ( raise-unit l1 , C1) ,
                     is-contr-raise-unit)) ∘e

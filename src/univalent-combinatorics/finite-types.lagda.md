@@ -377,7 +377,7 @@ module _
         ( λ g →
           ( is-injective-Fin ((inv-equiv (equiv-count g)) ∘e (equiv-count e))) ∙
           ( ap pr1
-            ( eq-is-prop' is-prop-has-finite-cardinality
+            ( all-elements-equal-is-prop is-prop-has-finite-cardinality
               ( has-finite-cardinality-count g)
               ( has-finite-cardinality-is-finite (unit-trunc-Prop g)))))
         ( f)

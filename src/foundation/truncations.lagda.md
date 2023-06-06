@@ -327,7 +327,7 @@ module _
     htpy-eq
       ( pr1
         ( pair-eq-Σ
-          ( eq-is-prop'
+          ( all-elements-equal-is-prop
             ( is-trunc-succ-is-trunc
               ( neg-two-𝕋)
               ( universal-property-trunc

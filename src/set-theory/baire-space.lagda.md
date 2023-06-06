@@ -52,7 +52,7 @@ is-set-baire-space f g =
           ( eq-htpy)
             ( eq-htpy
               ( λ n →
-                eq-is-prop'
+                all-elements-equal-is-prop
                   ( is-set-ℕ (f n) (g n))
                   ( htpy-eq p n)
                   ( htpy-eq q n)))) ∙

@@ -204,8 +204,8 @@ module _
     is-prop-coprod f is-prop-P is-prop-Q =
       is-prop-all-elements-equal
         ( all-elements-equal-coprod f
-          ( eq-is-prop' is-prop-P)
-          ( eq-is-prop' is-prop-Q))
+          ( all-elements-equal-is-prop is-prop-P)
+          ( all-elements-equal-is-prop is-prop-Q))
 
 coprod-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →

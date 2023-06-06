@@ -608,7 +608,7 @@ module _
     {x : node-Directed-Tree T}
     (u v : Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) → u ＝ v
   eq-direct-successor-Directed-Tree {x} =
-    eq-is-prop' (is-prop-direct-successor-Directed-Tree x)
+    all-elements-equal-is-prop (is-prop-direct-successor-Directed-Tree x)
 
   direct-successor-is-proper-node-Directed-Tree :
     (x : node-Directed-Tree T) → is-proper-node-Directed-Tree T x →
