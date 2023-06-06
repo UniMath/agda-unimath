@@ -116,7 +116,8 @@ module _
     is-prop-is-proof-irrelevant H x y = is-prop-is-contr (H x) x y
 
   abstract
-    all-elements-equal-is-proof-irrelevant : is-proof-irrelevant A → all-elements-equal A
+    all-elements-equal-is-proof-irrelevant :
+      is-proof-irrelevant A → all-elements-equal A
     all-elements-equal-is-proof-irrelevant =
       all-elements-equal-is-prop ∘ is-prop-is-proof-irrelevant
 
