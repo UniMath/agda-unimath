@@ -103,7 +103,7 @@ cases-eq-succ-strong-ind-ℕ P pS k H (inl p) = ex-falso (neg-succ-leq-ℕ k p)
 cases-eq-succ-strong-ind-ℕ P pS k H (inr α) =
   ap
     ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k)) ∘ inr)
-    ( all-elements-equal-is-prop (is-set-ℕ (succ-ℕ k) (succ-ℕ k)) α refl)
+    ( eq-is-prop' (is-set-ℕ (succ-ℕ k) (succ-ℕ k)) α refl)
 
 eq-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →

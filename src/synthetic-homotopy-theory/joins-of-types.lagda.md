@@ -291,7 +291,7 @@ module _
   pr1 cocone-disj = inl-disj-Prop A B
   pr1 (pr2 cocone-disj) = inr-disj-Prop A B
   pr2 (pr2 cocone-disj) (a , b) =
-    all-elements-equal-is-prop
+    eq-is-prop'
       ( is-prop-type-disj-Prop A B)
       ( inl-disj-Prop A B a)
       ( inr-disj-Prop A B b)

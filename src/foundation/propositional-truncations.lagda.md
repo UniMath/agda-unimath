@@ -50,7 +50,7 @@ is-prop-type-trunc-Prop = is-trunc-type-trunc
 all-elements-equal-type-trunc-Prop :
   {l : Level} {A : UU l} → all-elements-equal (type-trunc-Prop A)
 all-elements-equal-type-trunc-Prop {l} {A} =
-  all-elements-equal-is-prop (is-prop-type-trunc-Prop {l} {A})
+  eq-is-prop' (is-prop-type-trunc-Prop {l} {A})
 
 trunc-Prop : {l : Level} → UU l → Prop l
 trunc-Prop = trunc neg-one-𝕋
@@ -102,7 +102,7 @@ abstract
     (( y : type-trunc-Prop A) → type-Prop (P y))
   ind-trunc-Prop P f =
     ind-trunc-Prop' (type-Prop ∘ P) f
-      ( λ x y u v → eq-Prop' (P y))
+      ( λ x y u v → eq-is-prop (is-prop-type-Prop (P y)))
 
   compute-ind-trunc-Prop :
     {l l1 : Level} {A : UU l1} (P : type-trunc-Prop A → Prop l) →

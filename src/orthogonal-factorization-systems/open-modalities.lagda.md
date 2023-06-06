@@ -31,12 +31,12 @@ call these the **open modalities**.
 
 ```agda
 operator-open-modality :
-  (l : Level) {lQ : Level} (Q : Prop lQ) → operator-modality l (l ⊔ lQ)
+  (l : Level) {lQ : Level} (Q : Prop lQ) → operator-modality l (lQ ⊔ l)
 operator-open-modality l Q X = type-Prop Q → X
 
 locally-small-operator-open-modality :
   (l : Level) {lQ : Level} (Q : Prop lQ) →
-  locally-small-operator-modality l (l ⊔ lQ) (l ⊔ lQ)
+  locally-small-operator-modality l (lQ ⊔ l) (lQ ⊔ l)
 pr1 (locally-small-operator-open-modality l Q) = operator-open-modality l Q
 pr2 (locally-small-operator-open-modality l Q) X = is-locally-small'
 
@@ -56,7 +56,7 @@ module _
 
   ind-open-modality : ind-modality {l} (unit-open-modality Q)
   ind-open-modality X P f z q =
-    tr P (eq-htpy λ q' → ap z (eq-Prop' Q)) (f (z q) q)
+    tr P (eq-htpy λ q' → ap z (eq-is-prop (is-prop-type-Prop Q))) (f (z q) q)
 
   compute-ind-open-modality :
     compute-ind-modality {l} (unit-open-modality Q) (ind-open-modality)
@@ -68,7 +68,7 @@ module _
         ( ( ap
             ( eq-htpy)
             ( eq-htpy
-              ( λ _ → ap-const a (eq-Prop' Q)))) ∙
+              ( λ _ → ap-const a (eq-is-prop (is-prop-type-Prop Q))))) ∙
           ( eq-htpy-refl-htpy (λ _ → a))))
 
   dependent-universal-property-open-modality :
@@ -99,7 +99,10 @@ module _
             ( ap
               ( eq-htpy)
               ( eq-htpy
-                ( λ q' → ap (λ q'' → htpy-eq (z q'') q') (eq-Prop' Q)))) ∙
+                ( λ q' →
+                  ap
+                    ( λ q'' → htpy-eq (z q'') q')
+                    ( eq-is-prop (is-prop-type-Prop Q))))) ∙
             ( isretr-eq-htpy (z q))))
       ( isretr-eq-htpy)
 
@@ -117,10 +120,3 @@ module _
   pr1 (pr2 open-higher-modality) = unit-open-modality Q
   pr2 (pr2 open-higher-modality) = is-higher-modality-open-modality
 ```
-
-## References
-
-- Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type
-  theory_, Logical Methods in Computer Science, Volume 16, Issue 1, 2020
-  ([arXiv:1706.07526](https://arxiv.org/abs/1706.07526),
-  [doi:10.23638](https://doi.org/10.23638/LMCS-16%281%3A2%292020))

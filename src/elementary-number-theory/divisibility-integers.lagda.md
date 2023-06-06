@@ -181,7 +181,7 @@ eq-quotient-div-is-one-ℤ .one-ℤ x refl H =
   ap
     ( quotient-div-ℤ one-ℤ x)
     ( inv
-      ( all-elements-equal-is-prop
+      ( eq-is-prop'
         ( is-prop-div-ℤ one-ℤ x (λ ()))
         ( div-one-ℤ x)
         ( H)))

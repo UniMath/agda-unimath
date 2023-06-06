@@ -93,7 +93,7 @@ module _
             ( λ f →
               htpy-eq ((pr2 α) f) ((id-hom-Precategory C {c})) ∙
               ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f))))
-      ( all-elements-equal-is-prop
+      ( eq-is-prop'
         ( is-prop-is-natural-transformation-Precategory
           ( C)
           ( Set-Precategory l1)

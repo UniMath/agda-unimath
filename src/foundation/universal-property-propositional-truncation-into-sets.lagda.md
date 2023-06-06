@@ -117,7 +117,7 @@ abstract
     (map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop) ~ f
   htpy-universal-property-set-quotient-trunc-Prop B f H a =
     ap ( pr1)
-      ( all-elements-equal-is-prop
+      ( eq-is-prop'
         ( is-prop-image-is-weakly-constant-map B f H)
         ( map-universal-property-trunc-Prop
           ( image-weakly-constant-map-Prop B f H)
