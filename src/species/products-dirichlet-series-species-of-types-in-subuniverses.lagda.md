@@ -72,7 +72,7 @@ module _
 
 ## Properties
 
-### The Dirichlet series associated to the Dirichlet product of `S` and `T` is equal to the product of theirs Dirichlet series
+### The Dirichlet series associated to the Dirichlet product of `S` and `T` is equal to the product of their Dirichlet series
 
 ```agda
 module _
