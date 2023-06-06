@@ -7,20 +7,20 @@ module orthogonal-factorization-systems.open-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.homotopies
-open import foundation.propositions
 open import foundation.equivalences
-open import foundation.path-split-maps
-open import foundation.locally-small-types
 open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.locally-small-types
+open import foundation.path-split-maps
+open import foundation.propositions
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.higher-modalities
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.higher-modalities
 ```
 
 </details>
