@@ -10,16 +10,12 @@ module orthogonal-factorization-systems.open-modalities where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.locally-small-types
-open import foundation.path-split-maps
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.higher-modalities
-open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
 ```
 

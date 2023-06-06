@@ -2,20 +2,22 @@
 
 ## Examples of higher modalities
 
-| Modality                          | File                                                                                                        |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| The double negation modality      | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                             |
-| The identity / trivial modality   | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md) |
-| The open modalities               | [`orthogonal-factorization-systems.open-modalities`](orthogonal-factorization-systems.open-modalities.md)   |
-| Raising universe level modalities | [`orthogonal-factorization-systems.raise-modalities`](orthogonal-factorization-systems.raise-modalities.md) |
-| The truncation modalities         | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                   |
-| The zero modality                 | [`orthogonal-factorization-systems.zero-modality`](orthogonal-factorization-systems.zero-modality.md)       |
+| Modality                          | File                                                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| The closed modalities             | [`orthogonal-factorization-systems.closed-modalities`](orthogonal-factorization-systems.closed-modalities.md) |
+| The double negation modality      | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                               |
+| The identity / trivial modality   | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md)   |
+| The open modalities               | [`orthogonal-factorization-systems.open-modalities`](orthogonal-factorization-systems.open-modalities.md)     |
+| Raising universe level modalities | [`orthogonal-factorization-systems.raise-modalities`](orthogonal-factorization-systems.raise-modalities.md)   |
+| The truncation modalities         | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                     |
+| The zero modality                 | [`orthogonal-factorization-systems.zero-modality`](orthogonal-factorization-systems.zero-modality.md)         |
 
 ## Files in the orthogonal factorization systems folder
 
 ```agda
 module orthogonal-factorization-systems where
 
+open import orthogonal-factorization-systems.closed-modalities public
 open import orthogonal-factorization-systems.extensions-of-maps public
 open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public
