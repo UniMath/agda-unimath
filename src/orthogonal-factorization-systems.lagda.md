@@ -4,11 +4,12 @@
 
 | Modality                          | File                                                                                                        |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Double negation modality          | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                             |
-| Identity / trivial modality       | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md) |
+| The double negation modality      | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                             |
+| The identity / trivial modality   | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md) |
+| The open modalities               | [`orthogonal-factorization-systems.open-modalities`](orthogonal-factorization-systems.open-modalities.md)   |
 | Raising universe level modalities | [`orthogonal-factorization-systems.raise-modalities`](orthogonal-factorization-systems.raise-modalities.md) |
-| Truncation modalities             | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                   |
-| Zero modality                     | [`orthogonal-factorization-systems.zero-modality`](orthogonal-factorization-systems.zero-modality.md)       |
+| The truncation modalities         | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                   |
+| The zero modality                 | [`orthogonal-factorization-systems.zero-modality`](orthogonal-factorization-systems.zero-modality.md)       |
 
 ## Files in the orthogonal factorization systems folder
 
@@ -28,6 +29,7 @@ open import orthogonal-factorization-systems.local-types public
 open import orthogonal-factorization-systems.mere-lifting-properties public
 open import orthogonal-factorization-systems.modal-operators public
 open import orthogonal-factorization-systems.null-types public
+open import orthogonal-factorization-systems.open-modalities public
 open import orthogonal-factorization-systems.orthogonal-factorization-systems public
 open import orthogonal-factorization-systems.orthogonal-maps public
 open import orthogonal-factorization-systems.pullback-hom public
