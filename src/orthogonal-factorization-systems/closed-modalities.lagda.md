@@ -7,15 +7,16 @@ module orthogonal-factorization-systems.closed-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.joins-of-types
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.reflective-subuniverses
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses
+
+open import synthetic-homotopy-theory.joins-of-types
 ```
 
 </details>
@@ -64,7 +65,7 @@ module _
       ( A)
       ( is-proof-irrelevant-is-prop (is-prop-type-Prop Q) q)
   pr2 is-reflective-subuniverse-closed-modality X x Y =
-    {!  !}
+    {! !}
 
   reflective-subuniverse-closed-modality :
     reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)
