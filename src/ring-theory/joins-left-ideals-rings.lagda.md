@@ -173,7 +173,7 @@ module _
   (J : U → left-ideal-Ring l4 A)
   (H : (α : U) → leq-left-ideal-Ring A (I α) (J α))
   where
-  
+
   preserves-order-join-family-of-left-ideals-Ring :
     leq-left-ideal-Ring A
       ( join-family-of-left-ideals-Ring A I)

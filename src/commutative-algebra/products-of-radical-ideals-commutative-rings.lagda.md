@@ -39,7 +39,7 @@ least radical ideal that contains the products of elements in `I` and in `J`.
 
 ## Definitions
 
-### The universal property of the product of two ideals in a commutative ring
+### The universal property of the product of two radical ideals in a commutative ring
 
 ```agda
 module _
@@ -66,7 +66,7 @@ module _
     leq-radical-ideal-Commutative-Ring A K L
 ```
 
-### The product of two ideals in a commutative ring
+### The product of two radical ideals in a commutative ring
 
 ```agda
 module _

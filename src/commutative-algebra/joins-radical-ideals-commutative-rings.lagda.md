@@ -198,7 +198,7 @@ module _
         ( I)
         ( λ α → ideal-radical-of-ideal-Commutative-Ring A (I α))
         ( λ α → contains-ideal-radical-of-ideal-Commutative-Ring A (I α)))
-    
+
   radical-law-join-family-of-radical-ideals-Commutative-Ring :
     join-family-of-radical-ideals-Commutative-Ring A
       ( λ α → radical-of-ideal-Commutative-Ring A (I α)) ＝

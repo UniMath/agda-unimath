@@ -139,7 +139,7 @@ module _
   (J : U → ideal-Commutative-Ring l4 A)
   (H : (α : U) → leq-ideal-Commutative-Ring A (I α) (J α))
   where
-  
+
   preserves-order-join-family-of-ideals-Commutative-Ring :
     leq-ideal-Commutative-Ring A
       ( join-family-of-ideals-Commutative-Ring A I)

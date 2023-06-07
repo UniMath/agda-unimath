@@ -170,7 +170,7 @@ module _
   (J : U → ideal-Ring l4 A)
   (H : (α : U) → leq-ideal-Ring A (I α) (J α))
   where
-  
+
   preserves-order-join-family-of-ideals-Ring :
     leq-ideal-Ring A
       ( join-family-of-ideals-Ring A I)
