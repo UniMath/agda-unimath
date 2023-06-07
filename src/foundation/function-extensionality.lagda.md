@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.function-extensionality where
+
+open import foundation-core.function-extensionality public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.function-extensionality public
-
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

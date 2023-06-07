@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.subtypes where
+
+open import foundation-core.subtypes public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.subtypes public
-
 open import foundation.equality-dependent-function-types
 open import foundation.propositional-extensionality
 

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.discrete-sigma-decompositions where
+
+open import foundation.discrete-sigma-decompositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.discrete-sigma-decompositions public
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types

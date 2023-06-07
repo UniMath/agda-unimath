@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.retractions where
+
+open import foundation-core.retractions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.retractions public
-
 open import foundation.coslice
 
 open import foundation-core.dependent-pair-types

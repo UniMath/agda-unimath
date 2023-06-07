@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.decidable-propositions where
+
+open import foundation.decidable-propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types

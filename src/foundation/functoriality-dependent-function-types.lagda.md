@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.functoriality-dependent-function-types where
+
+open import foundation-core.functoriality-dependent-function-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functoriality-dependent-function-types public
-
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality

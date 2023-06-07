@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.path-split-maps where
+
+open import foundation-core.path-split-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.path-split-maps public
-
 open import foundation.equivalences
 
 open import foundation-core.contractible-types

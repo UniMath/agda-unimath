@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.unions-subtypes where
+
+open import foundation.unions-subtypes public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.unions-subtypes public
-
 open import foundation.decidable-equality
 open import foundation.propositional-truncations
 open import foundation.subtypes

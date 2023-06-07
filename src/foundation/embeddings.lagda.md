@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.embeddings where
+
+open import foundation-core.embeddings public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.embeddings public
-
 open import foundation.commuting-squares-of-maps
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types

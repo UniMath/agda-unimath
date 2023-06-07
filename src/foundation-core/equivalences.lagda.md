@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --safe #-}
-```
 
-```agda
 module foundation-core.equivalences where
 ```
 

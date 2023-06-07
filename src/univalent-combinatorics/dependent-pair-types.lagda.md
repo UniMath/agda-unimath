@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.dependent-pair-types where
+
+open import foundation.dependent-pair-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types public
-
 open import foundation.complements
 open import foundation.contractible-types
 open import foundation.decidable-types

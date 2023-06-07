@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.equality-dependent-pair-types where
+
+open import foundation-core.equality-dependent-pair-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equality-dependent-pair-types public
-
 open import foundation.identity-types
 
 open import foundation-core.dependent-pair-types

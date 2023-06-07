@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.maybe where
+
+open import foundation.maybe public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.maybe public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels

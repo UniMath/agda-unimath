@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.sigma-decompositions where
+
+open import foundation.sigma-decompositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.sigma-decompositions public
-
 open import foundation.cartesian-product-types
 open import foundation.embeddings
 open import foundation.equivalences
