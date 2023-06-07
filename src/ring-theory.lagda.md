@@ -29,6 +29,8 @@ open import ring-theory.invariant-basis-property-rings public
 open import ring-theory.invertible-elements-rings public
 open import ring-theory.isomorphisms-rings public
 open import ring-theory.joins-ideals-rings public
+open import ring-theory.joins-left-ideals-rings public
+open import ring-theory.joins-right-ideals-rings public
 open import ring-theory.left-ideals-generated-by-subsets-rings public
 open import ring-theory.left-ideals-rings public
 open import ring-theory.local-rings public
@@ -47,6 +49,8 @@ open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.precategory-of-rings public
 open import ring-theory.precategory-of-semirings public
 open import ring-theory.products-of-ideals-rings public
+open import ring-theory.products-of-left-ideals-rings public
+open import ring-theory.products-of-right-ideals-rings public
 open import ring-theory.products-rings public
 open import ring-theory.products-subsets-rings public
 open import ring-theory.quotient-rings public
