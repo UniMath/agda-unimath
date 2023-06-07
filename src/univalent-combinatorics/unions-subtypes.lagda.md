@@ -1,4 +1,4 @@
-# Union of finite subtypes
+# Unions of finite subtypes
 
 ```agda
 module univalent-combinatorics.unions-subtypes where

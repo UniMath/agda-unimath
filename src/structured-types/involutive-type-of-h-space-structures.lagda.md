@@ -1,4 +1,4 @@
-# The involutive type of H-Space structures on a pointed type
+# The involutive type of H-space structures on a pointed type
 
 ```agda
 module structured-types.involutive-type-of-h-space-structures where
@@ -30,7 +30,7 @@ open import univalent-combinatorics.2-element-types
 
 ## Idea
 
-We construct the involutive type of H-Space structures on a pointed type
+We construct the **involutive type of H-space structures** on a pointed type.
 
 ## Definition
 

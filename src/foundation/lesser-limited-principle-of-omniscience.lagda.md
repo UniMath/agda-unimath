@@ -22,13 +22,11 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-## Idea
+## Statement
 
-The lesser limited principle of omniscience asserts that for any sequence
+The **lesser limited principle of omniscience** asserts that for any sequence
 `f : ℕ → Fin 2` containing at most one `1`, either `f n ＝ 0` for all even `n`
 or `f n ＝ 0` for all odd `n`.
-
-## Definition
 
 ```agda
 LLPO : UU lzero
@@ -42,3 +40,9 @@ LLPO =
       ( λ n →
         function-Prop (is-odd-ℕ n) (Id-Prop (Fin-Set 2) (f n) (zero-Fin 1))))
 ```
+
+## See also
+
+- [The principle of omniscience](foundation.principle-of-omniscience.md)
+- [The limited principle of omniscience](foundation.limited-principle-of-omniscience.md)
+- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)

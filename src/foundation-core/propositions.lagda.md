@@ -276,7 +276,7 @@ abstract
   is-prop-function-type :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop B → is-prop (A → B)
-  is-prop-function-type H = is-prop-Π (λ x → H)
+  is-prop-function-type H = is-prop-Π (λ _ → H)
 
 type-function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)

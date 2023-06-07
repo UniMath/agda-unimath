@@ -1,4 +1,4 @@
-# Ferrers diagrams (unlabeled partitions)
+# Ferrers diagrams (unlabelled partitions)
 
 ```agda
 module univalent-combinatorics.ferrers-diagrams where
@@ -29,7 +29,7 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Unlabeled partitions, also known as Ferrers diagrams, of a type `A` record the
+Unlabelled partitions, also known as Ferrers diagrams, of a type `A` record the
 number of ways in which `A` can be decomposed as the dependent pair type of a
 family of inhabited types. More precisely, a Ferrers diagram of a type `A`
 consists of a type `X` and a family `Y` of inhabited types over `X` such that

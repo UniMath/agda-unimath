@@ -232,7 +232,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of Relaxed-Σ-Decompositions
+### Characterization of equality of relaxed-Σ-decompositions
 
 ```agda
 equiv-Relaxed-Σ-Decomposition :
@@ -622,7 +622,7 @@ module _
       (extensionality-displayed-Relaxed-Σ-Decomposition D)
 ```
 
-#### Equivalence between fibered double Relaxed-Σ-Decompositions and displayed double Relaxed-Σ-Decompositions
+#### Equivalence between fibered double relaxed Σ-recompositions and displayed double relaxed Σ-decompositions
 
 ```agda
 module _

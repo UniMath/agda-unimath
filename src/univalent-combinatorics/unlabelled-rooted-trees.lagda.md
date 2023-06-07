@@ -1,7 +1,7 @@
 # Unlabelled rooted trees
 
 ```agda
-module univalent-combinatorics.unlabeled-rooted-trees where
+module univalent-combinatorics.unlabelled-rooted-trees where
 ```
 
 <details><summary>Imports</summary>

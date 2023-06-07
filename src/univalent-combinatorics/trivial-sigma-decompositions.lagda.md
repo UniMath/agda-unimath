@@ -1,4 +1,4 @@
-# Finite trivial Σ-Decompositions
+# Finite trivial Σ-decompositions
 
 ```agda
 module univalent-combinatorics.trivial-sigma-decompositions where

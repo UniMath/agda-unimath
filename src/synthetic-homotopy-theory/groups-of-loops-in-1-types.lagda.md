@@ -1,4 +1,4 @@
-# Groups of loops in 1-types
+# Groups of loops in $1$-types
 
 ```agda
 module synthetic-homotopy-theory.groups-of-loops-in-1-types where

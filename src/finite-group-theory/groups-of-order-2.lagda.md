@@ -1,4 +1,4 @@
-# Groups of order 2
+# Groups of order $2$
 
 ```agda
 {-# OPTIONS --lossy-unification #-}

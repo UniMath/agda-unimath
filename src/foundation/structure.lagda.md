@@ -1,4 +1,4 @@
-# Structure
+# $P$-structured types
 
 ```agda
 module foundation.structure where
@@ -20,7 +20,7 @@ open import foundation-core.universe-levels
 
 ## Idea
 
-Given a type family `P` on the universe, a `P`-structured type consists of a
+Given a type family `P` on the universe, a **`P`-structured type** consists of a
 type `A` equipped with an element of type `P A`.
 
 ## Definition

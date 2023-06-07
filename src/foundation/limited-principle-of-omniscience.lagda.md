@@ -1,4 +1,4 @@
-# The limited principle of omniscience (LPO)
+# The limited principle of omniscience
 
 ```agda
 module foundation.limited-principle-of-omniscience where
@@ -22,13 +22,11 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-## Idea
+## Statement
 
-The **Limited Principle of Omniscience** asserts that for every sequence
-`f : ℕ → Fin 2` either there exists an `n` such that `f n ＝ 1` or for all `n`
+The **limited principle of omniscience** (LPO) asserts that for every sequence
+`f : ℕ → Fin 2` there either exists an `n` such that `f n ＝ 1` or for all `n`
 we have `f n ＝ 0`.
-
-## Definition
 
 ```agda
 LPO : UU lzero
@@ -38,3 +36,9 @@ LPO =
     ( ∃-Prop ℕ (λ n → f n ＝ one-Fin 1))
     ( Π-Prop ℕ (λ n → Id-Prop (Fin-Set 2) (f n) (zero-Fin 1)))
 ```
+
+## See also
+
+- [The principle of omniscience](foundation.principle-of-omniscience.md)
+- [The lesser limited principle of omniscience](foundation.lesser-limited-principle-of-omniscience.md)
+- [The weak limited principle of omniscience](foundation.weak-limited-principle-of-omniscience.md)

@@ -1,4 +1,4 @@
-# 2-element decidable subtypes
+# $2$-element decidable subtypes
 
 ```agda
 module univalent-combinatorics.2-element-decidable-subtypes where

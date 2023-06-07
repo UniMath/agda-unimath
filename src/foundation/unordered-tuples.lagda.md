@@ -1,4 +1,4 @@
-# Unordered n-tuples of elements in a type
+# Unordered $n$-tuples of elements in a type
 
 ```agda
 module foundation.unordered-tuples where
@@ -34,8 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An unordered n-tuple of elements of a type `A` consists of an n-element set `X`
-equipped with a map `X → A`.
+An **unordered `n`-tuple** of elements of a type `A` consists of an `n`-element
+set `X` equipped with a map `X → A`.
 
 ## Definition
 

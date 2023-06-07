@@ -1,4 +1,4 @@
-# Morphisms of the slice category of types
+# Morphisms in the slice category of types
 
 ```agda
 module foundation.slice where
@@ -50,7 +50,7 @@ Slice : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
 Slice l = type-polynomial-endofunctor (UU l) (λ X → X)
 ```
 
-### The morphisms of the slice category of types
+### The morphisms in the slice category of types
 
 ```agda
 module _

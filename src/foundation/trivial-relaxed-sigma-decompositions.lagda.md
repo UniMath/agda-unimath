@@ -1,4 +1,4 @@
-# Trivial relaxed Σ-Decompositions
+# Trivial relaxed Σ-decompositions
 
 ```agda
 module foundation.trivial-relaxed-sigma-decompositions where

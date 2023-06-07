@@ -1,7 +1,7 @@
 # Unlabelled trees
 
 ```agda
-module univalent-combinatorics.unlabeled-trees where
+module univalent-combinatorics.unlabelled-trees where
 ```
 
 <details><summary>Imports</summary>

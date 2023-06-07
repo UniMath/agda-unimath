@@ -1,4 +1,4 @@
-# 0-Maps
+# $0$-Maps
 
 ```agda
 module foundation-core.0-maps where

@@ -115,7 +115,7 @@ module _
     matching-correspondence-Σ-Decomposition-𝔽
 ```
 
-### Fibered double finite Σ-Decompositions
+### Fibered double finite Σ-decompositions
 
 ```agda
 fibered-Σ-Decomposition-𝔽 :
@@ -210,7 +210,7 @@ module _
       ( is-finite-Decidable-Equivalence-Relation-𝔽 A)
 ```
 
-### Characterization of the equality of finite Σ-Decompositions
+### Characterization of the equality of finite Σ-decompositions
 
 ```agda
 module _

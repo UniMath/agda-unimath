@@ -1,4 +1,4 @@
-# Trivial Σ-Decompositions
+# Trivial Σ-decompositions
 
 ```agda
 module foundation.trivial-sigma-decompositions where

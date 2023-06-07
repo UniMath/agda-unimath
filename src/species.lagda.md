@@ -49,5 +49,5 @@ open import species.species-of-types public
 open import species.species-of-types-in-subuniverses public
 open import species.unit-cauchy-composition-species-of-types public
 open import species.unit-cauchy-composition-species-of-types-in-subuniverses public
-open import species.unlabeled-structures-species public
+open import species.unlabelled-structures-species public
 ```

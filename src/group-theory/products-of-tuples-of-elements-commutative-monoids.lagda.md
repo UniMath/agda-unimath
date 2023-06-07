@@ -24,8 +24,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given an unordered n-tuple of elements in a commutative monoid, we can define
-their product
+Given an unordered `n`-tuple of elements in a commutative monoid, we can define
+their product.
 
 ## Definition
 

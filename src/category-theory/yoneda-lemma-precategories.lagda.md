@@ -1,4 +1,4 @@
-# Yoneda lemma for precategories
+# The Yoneda lemma for precategories
 
 ```agda
 module category-theory.yoneda-lemma-precategories where
