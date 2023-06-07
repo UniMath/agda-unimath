@@ -12,6 +12,7 @@ module foundation.pi-decompositions where
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -24,7 +25,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```

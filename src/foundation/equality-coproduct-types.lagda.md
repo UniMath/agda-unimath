@@ -8,6 +8,7 @@ module foundation.equality-coproduct-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
@@ -16,7 +17,6 @@ open import foundation-core.coproduct-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

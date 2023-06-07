@@ -10,6 +10,7 @@ module foundation.arithmetic-law-coproduct-and-sigma-decompositions where
 open import foundation.coproduct-decompositions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.relaxed-sigma-decompositions
 open import foundation.type-arithmetic-coproduct-types
@@ -21,7 +22,6 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

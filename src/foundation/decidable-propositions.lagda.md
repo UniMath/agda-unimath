@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
@@ -25,7 +26,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences

@@ -9,13 +9,13 @@ module foundation.multivariable-functoriality-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.functions
 open import foundation.functoriality-set-quotients
 open import foundation.set-quotients
 open import foundation.universe-levels
 open import foundation.vectors-set-quotients
 
 open import foundation-core.equivalence-relations
-open import foundation-core.functions
 open import foundation-core.homotopies
 
 open import linear-algebra.vectors

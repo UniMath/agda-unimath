@@ -10,6 +10,7 @@ module foundation-core.pullbacks where
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
@@ -24,7 +25,6 @@ open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.universal-property-pullbacks

@@ -11,13 +11,13 @@ open import foundation-core.subtypes public
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.functions
 open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps

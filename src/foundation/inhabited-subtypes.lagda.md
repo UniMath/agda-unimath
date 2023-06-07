@@ -8,6 +8,7 @@ module foundation.inhabited-subtypes where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.subtype-identity-principle
@@ -16,7 +17,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```

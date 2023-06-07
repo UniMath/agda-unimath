@@ -8,11 +8,11 @@ module foundation.set-presented-types where
 
 ```agda
 open import foundation.existential-quantification
+open import foundation.functions
 open import foundation.set-truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.sets
 ```

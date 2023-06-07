@@ -8,13 +8,13 @@ module foundation-core.contractible-maps where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```

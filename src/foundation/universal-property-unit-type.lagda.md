@@ -10,11 +10,11 @@ module foundation.universal-property-unit-type where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
-open import foundation-core.functions
 open import foundation-core.homotopies
 ```
 

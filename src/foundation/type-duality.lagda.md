@@ -10,6 +10,7 @@ module foundation.type-duality where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
 open import foundation.slice
@@ -22,7 +23,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

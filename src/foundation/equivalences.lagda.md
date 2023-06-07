@@ -13,6 +13,7 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-systems
 open import foundation.identity-types
@@ -24,7 +25,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions

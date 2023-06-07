@@ -8,11 +8,11 @@ module foundation.powersets where
 
 ```agda
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.propositional-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes

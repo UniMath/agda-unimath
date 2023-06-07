@@ -9,6 +9,7 @@ module foundation.uniqueness-image where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.images
 open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
@@ -17,7 +18,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions

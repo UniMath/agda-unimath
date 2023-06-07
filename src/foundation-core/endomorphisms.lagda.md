@@ -8,10 +8,10 @@ module foundation-core.endomorphisms where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.sets
 open import foundation.universe-levels
 
-open import foundation-core.functions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 

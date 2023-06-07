@@ -9,9 +9,9 @@ module foundation.commuting-triangles-of-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.functions
 open import foundation.universe-levels
 
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```

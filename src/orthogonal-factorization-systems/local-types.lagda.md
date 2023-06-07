@@ -9,6 +9,7 @@ module orthogonal-factorization-systems.local-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -19,7 +20,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.function-extensionality
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions

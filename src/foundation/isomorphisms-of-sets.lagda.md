@@ -10,11 +10,11 @@ module foundation.isomorphisms-of-sets where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes

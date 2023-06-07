@@ -9,10 +9,10 @@ module foundation.descent-equivalences where
 ```agda
 open import foundation.cones-over-cospans
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-fibers-of-maps
 open import foundation.universe-levels
 
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.pullbacks
 ```

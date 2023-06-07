@@ -10,12 +10,12 @@ open import foundation-core.functoriality-function-types public
 
 ```agda
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels

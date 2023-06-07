@@ -9,10 +9,10 @@ module foundation-core.commuting-squares-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.functions
 open import foundation-core.homotopies
 ```
 

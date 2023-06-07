@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.type-arithmetic-cartesian-product-types
@@ -26,7 +27,6 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.identity-types
 
 open import lists.arrays

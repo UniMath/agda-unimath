@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -27,7 +28,6 @@ open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
 ```

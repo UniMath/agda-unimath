@@ -13,6 +13,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
+open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -30,7 +31,6 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
