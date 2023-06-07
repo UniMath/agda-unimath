@@ -13,6 +13,7 @@ open import foundation.binary-homotopies
 open import foundation.exponents-set-quotients
 open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.reflecting-maps-equivalence-relations
@@ -28,7 +29,6 @@ open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
 open import foundation-core.subtype-identity-principle
 open import foundation-core.subtypes

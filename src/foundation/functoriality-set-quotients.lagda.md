@@ -10,6 +10,7 @@ module foundation.functoriality-set-quotients where
 
 ```agda
 open import foundation.equivalence-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
@@ -23,7 +24,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.functions
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions

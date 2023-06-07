@@ -13,6 +13,7 @@ open import foundation.decidable-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-maps
@@ -29,7 +30,6 @@ open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
 open import foundation-core.subtype-identity-principle
 open import foundation-core.type-arithmetic-dependent-pair-types

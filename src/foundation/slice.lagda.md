@@ -9,6 +9,7 @@ module foundation.slice where
 ```agda
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
 open import foundation.type-theoretic-principle-of-choice
@@ -21,7 +22,6 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps

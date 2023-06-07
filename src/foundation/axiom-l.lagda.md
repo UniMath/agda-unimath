@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.sets
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-identity-types
@@ -21,7 +22,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions

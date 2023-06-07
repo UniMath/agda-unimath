@@ -9,10 +9,10 @@ open import foundation-core.fibers-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 
-open import foundation-core.cones-over-cospans
 open import foundation-core.constant-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

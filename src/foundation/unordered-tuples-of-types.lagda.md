@@ -9,6 +9,7 @@ module foundation.unordered-tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.unordered-tuples
@@ -16,7 +17,6 @@ open import foundation.unordered-tuples
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.universe-levels
 

@@ -7,7 +7,8 @@ module foundation-core.involutions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.automorphisms
+open import foundation.automorphisms
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

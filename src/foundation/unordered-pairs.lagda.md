@@ -10,6 +10,7 @@ module foundation.unordered-pairs where
 open import foundation.decidable-equality
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
@@ -23,7 +24,6 @@ open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets

@@ -7,10 +7,10 @@ module foundation.universal-property-cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-over-cospans
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

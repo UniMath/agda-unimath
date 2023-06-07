@@ -12,6 +12,7 @@ module foundation.vectors-set-quotients where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-products-set-quotients
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
@@ -25,7 +26,6 @@ open import foundation.universal-property-set-quotients
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences

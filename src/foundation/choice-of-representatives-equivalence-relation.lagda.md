@@ -8,6 +8,7 @@ module foundation.choice-of-representatives-equivalence-relation where
 
 ```agda
 open import foundation.equivalence-classes
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
 
@@ -19,7 +20,6 @@ open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.type-arithmetic-dependent-pair-types

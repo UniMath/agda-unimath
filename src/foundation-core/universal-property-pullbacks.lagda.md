@@ -7,7 +7,8 @@ module foundation-core.universal-property-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cones-over-cospans
+open import foundation.cones-over-cospans
+
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types

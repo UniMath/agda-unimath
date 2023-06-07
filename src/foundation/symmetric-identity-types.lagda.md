@@ -9,6 +9,7 @@ module foundation.symmetric-identity-types where
 ```agda
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
@@ -21,7 +22,6 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types

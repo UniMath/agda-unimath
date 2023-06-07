@@ -9,9 +9,9 @@ open import foundation-core.universal-property-pullbacks public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.equivalences
 
-open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.identity-types

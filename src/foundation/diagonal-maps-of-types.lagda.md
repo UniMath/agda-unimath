@@ -9,13 +9,14 @@ open import foundation-core.diagonal-maps-of-types public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.0-maps
+open import foundation.0-maps
+open import foundation.faithful-maps
+
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
-open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps

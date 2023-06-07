@@ -13,6 +13,7 @@ open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
 open import foundation.embeddings
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.maybe
 open import foundation.negation
@@ -27,7 +28,6 @@ open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositions

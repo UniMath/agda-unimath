@@ -9,6 +9,7 @@ module foundation.connected-maps where
 ```agda
 open import foundation.connected-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
 open import foundation.truncated-types
@@ -22,7 +23,6 @@ open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtype-identity-principle

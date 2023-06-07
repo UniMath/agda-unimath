@@ -7,9 +7,9 @@ module foundation-core.commuting-cubes-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.hexagons-of-identifications
 
-open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies

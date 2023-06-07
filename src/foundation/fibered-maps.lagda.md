@@ -7,20 +7,20 @@ module foundation.fibered-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.slice
 open import foundation.structure-identity-principle
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.small-types
 open import foundation-core.truncated-types

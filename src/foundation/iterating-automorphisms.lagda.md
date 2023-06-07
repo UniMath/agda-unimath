@@ -11,10 +11,10 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.automorphisms
 open import foundation.equivalence-extensionality
 open import foundation.iterating-functions
 
-open import foundation-core.automorphisms
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.functions
