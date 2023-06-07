@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.coherently-invertible-maps where
+
+open import foundation-core.coherently-invertible-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.coherently-invertible-maps public
-
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.type-theoretic-principle-of-choice

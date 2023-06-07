@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.truncation-levels where
+
+open import foundation-core.truncation-levels public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.truncation-levels public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation-core.functions

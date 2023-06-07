@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --safe #-}
+
 module foundation-core.cospans where
 ```
 

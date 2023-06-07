@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.embeddings where
+
+open import foundation.embeddings public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.embeddings public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types

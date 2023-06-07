@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.fibers-of-maps where
+
+open import foundation-core.fibers-of-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.fibers-of-maps public
-
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 

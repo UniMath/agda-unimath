@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module foundation.binary-functoriality-set-quotients where
 ```
 

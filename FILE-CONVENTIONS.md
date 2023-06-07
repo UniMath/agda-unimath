@@ -35,8 +35,18 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
-and immediately after this, the module declaration and any option pragmas should
-be declared.
+and immediately after this, any option pragmas, then the module declaration then
+public imports, if any, should be declared. E.g.
+
+````md
+```agda
+{-# OPTIONS --safe #-}
+
+module foundation.dependent-pair-types where
+
+open import foundation-core.dependent-pair-types public
+```
+````
 
 ### Imports block
 

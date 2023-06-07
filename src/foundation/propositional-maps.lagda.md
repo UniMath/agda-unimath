@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.propositional-maps where
+
+open import foundation-core.propositional-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.propositional-maps public
-
 open import foundation.embeddings
 open import foundation.truncated-maps
 

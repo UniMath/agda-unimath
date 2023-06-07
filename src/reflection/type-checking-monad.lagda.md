@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --no-exact-split #-}
+
 module reflection.type-checking-monad where
 ```
 

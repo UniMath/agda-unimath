@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.surjective-maps where
+
+open import foundation.surjective-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.surjective-maps public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types

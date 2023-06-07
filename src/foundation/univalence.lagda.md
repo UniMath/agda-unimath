@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.univalence where
+
+open import foundation-core.univalence public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.univalence public
-
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 

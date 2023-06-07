@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.equivalences where
+
+open import foundation-core.equivalences public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalences public
-
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.identity-types

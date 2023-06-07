@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.commuting-cubes-of-maps where
+
+open import foundation-core.commuting-cubes-of-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.commuting-cubes-of-maps public
-
 open import foundation-core.cones-over-cospans
 open import foundation-core.dependent-pair-types
 open import foundation-core.functions

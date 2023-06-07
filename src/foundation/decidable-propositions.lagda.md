@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.decidable-propositions where
+
+open import foundation-core.decidable-propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.decidable-propositions public
-
 open import foundation.booleans
 open import foundation.decidable-types
 open import foundation.embeddings
