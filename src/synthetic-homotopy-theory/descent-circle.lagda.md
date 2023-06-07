@@ -555,51 +555,7 @@ module _
       ( map-equiv comparison-dependent-descent-data-circle
         ( ev-free-loop-Π l (λ t → A t → UU l3) B))
       ( id-equiv-fam _ ,
-        λ x a →
-        -- REWRITE & REFORMAT
-        equational-reasoning
-          tr (ind-Σ A) (eq-pair-Σ (loop-free-loop l) (inv (pr2 αH x))) a
-          ＝ {!!}
-            by {!!}
-          ＝ map-equiv
-              ( map-inv-equiv
-                ( equiv-Π
-                  ( λ x →
-                    Id (A (pr1 l) x) (A (pr1 l) (tr Q (pr2 l) x))) (pr1 αH)
-                ( λ a' →
-                  equiv-comp
-                    ( equiv-concat' (A (pr1 l) (pr1 (pr1 αH) a'))
-                    ( ap (A (pr1 l)) (pr2 αH a')))
-                    ( inv-equiv equiv-univalence)))
-                (λ y →
-                  ( inv (tr-const (pr2 l) (A (pr1 l) y))) ∙
-                  ( map-inv-equiv
-                    ( compute-path-over-function-type Q (λ _ → UU l3) (pr2 l)
-                        ( A (pr1 l)) (A (pr1 l)))
-                    ( apd A (pr2 l)))
-                    ( y))
-              x)
-              a
-            by {!!}
-          ＝ map-equiv
-              (map-inv-equiv
-                (equiv-Π
-                (λ x → Id (A (pr1 l) x) (A (pr1 l) (tr Q (pr2 l) x))) (pr1 αH)
-                (λ a' →
-                    equiv-comp
-                    (equiv-concat' (A (pr1 l) (pr1 (pr1 αH) a'))
-                    (ap (A (pr1 l)) (pr2 αH a')))
-                    (inv-equiv equiv-univalence)))
-                (λ y →
-                  ( inv (tr-const (pr2 l) (A (pr1 l) y))) ∙
-                  ( map-inv-equiv
-                    ( compute-path-over-function-type Q (λ _ → UU l3) (pr2 l)
-                        ( A (pr1 l)) (A (pr1 l)))
-                    ( apd A (pr2 l)))
-                    ( y))
-              x)
-              a
-            by {!!})
+        {! !})
 
   is-equiv-ev-dependent-descent-data-circle-dependent-universal-property-circle :
     dependent-universal-property-circle (l2 ⊔ lsuc l3) l →
