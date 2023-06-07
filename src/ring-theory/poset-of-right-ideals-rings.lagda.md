@@ -8,13 +8,18 @@ module ring-theory.poset-of-right-ideals-rings where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.identity-types
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-elements-large-posets
 
 open import ring-theory.right-ideals-rings
 open import ring-theory.rings
@@ -109,4 +114,58 @@ module _
     right-ideal-Ring-Large-Preorder
   antisymmetric-leq-Large-Poset right-ideal-Ring-Large-Poset =
     antisymmetric-leq-right-ideal-Ring R
+```
+
+### The similarity relation on right ideals in a ring
+
+```agda
+module _
+  {l1 : Level} (R : Ring l1)
+  where
+
+  sim-prop-right-ideal-Ring :
+    {l2 l3 : Level} (I : right-ideal-Ring l2 R) (J : right-ideal-Ring l3 R) →
+    Prop (l1 ⊔ l2 ⊔ l3)
+  sim-prop-right-ideal-Ring =
+    sim-prop-Large-Poset (right-ideal-Ring-Large-Poset R)
+
+  sim-right-ideal-Ring :
+    {l2 l3 : Level} (I : right-ideal-Ring l2 R) (J : right-ideal-Ring l3 R) →
+    UU (l1 ⊔ l2 ⊔ l3)
+  sim-right-ideal-Ring = sim-Large-Poset (right-ideal-Ring-Large-Poset R)
+
+  is-prop-sim-right-ideal-Ring :
+    {l2 l3 : Level} (I : right-ideal-Ring l2 R) (J : right-ideal-Ring l3 R) →
+    is-prop (sim-right-ideal-Ring I J)
+  is-prop-sim-right-ideal-Ring =
+    is-prop-sim-Large-Poset (right-ideal-Ring-Large-Poset R)
+
+  eq-sim-right-ideal-Ring :
+    {l2 : Level} (I J : right-ideal-Ring l2 R) → sim-right-ideal-Ring I J → I ＝ J
+  eq-sim-right-ideal-Ring = eq-sim-Large-Poset (right-ideal-Ring-Large-Poset R)
+```
+
+## Properties
+
+### The forgetful function from right ideals to subsets preserves inclusions
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  preserves-order-subset-right-ideal-Ring :
+    {l1 l2 : Level} (I : right-ideal-Ring l1 R) (J : right-ideal-Ring l2 R) →
+    leq-right-ideal-Ring R I J → subset-right-ideal-Ring R I ⊆ subset-right-ideal-Ring R J
+  preserves-order-subset-right-ideal-Ring I J H = H
+
+  subset-right-ideal-hom-large-poset-Ring :
+    hom-Large-Poset
+      ( id)
+      ( right-ideal-Ring-Large-Poset R)
+      ( powerset-Large-Poset (type-Ring R))
+  map-hom-Large-Preorder subset-right-ideal-hom-large-poset-Ring =
+    subset-right-ideal-Ring R
+  preserves-order-hom-Large-Preorder subset-right-ideal-hom-large-poset-Ring =
+    preserves-order-subset-right-ideal-Ring
 ```
