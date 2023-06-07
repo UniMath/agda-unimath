@@ -24,7 +24,7 @@ The operations of
 [raising universe levels](foundation.raising-universe-levels.md) are trivially
 [higher modalities](orthogonal-factorization-systems.higher-modalities.md), and
 in the case that `l1 ⊔ l2 = l1`, we recover the
-[trivial modality](orthogonal-factorization-systems.trivial-modality.md).
+[identity modality](orthogonal-factorization-systems.identity-modality.md).
 
 ## Definition
 

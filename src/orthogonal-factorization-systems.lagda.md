@@ -6,7 +6,7 @@
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | The closed modalities             | [`orthogonal-factorization-systems.closed-modalities`](orthogonal-factorization-systems.closed-modalities.md) |
 | The double negation modality      | [`foundation.double-negation-modality`](foundation.double-negation-modality.md)                               |
-| The identity / trivial modality   | [`orthogonal-factorization-systems.trivial-modality`](orthogonal-factorization-systems.trivial-modality.md)   |
+| The identity modality             | [`orthogonal-factorization-systems.identity-modality`](orthogonal-factorization-systems.identity-modality.md) |
 | The open modalities               | [`orthogonal-factorization-systems.open-modalities`](orthogonal-factorization-systems.open-modalities.md)     |
 | Raising universe level modalities | [`orthogonal-factorization-systems.raise-modalities`](orthogonal-factorization-systems.raise-modalities.md)   |
 | The truncation modalities         | [`foundation.truncation-modalities`](foundation.truncation-modalities.md)                                     |
@@ -24,6 +24,7 @@ open import orthogonal-factorization-systems.factorization-operations-function-c
 open import orthogonal-factorization-systems.factorizations-of-maps public
 open import orthogonal-factorization-systems.function-classes public
 open import orthogonal-factorization-systems.higher-modalities public
+open import orthogonal-factorization-systems.identity-modality public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-squares public
 open import orthogonal-factorization-systems.lifts-of-maps public
@@ -40,7 +41,6 @@ open import orthogonal-factorization-systems.reflective-subuniverses public
 open import orthogonal-factorization-systems.separated-types public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
-open import orthogonal-factorization-systems.trivial-modality public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.zero-modality public

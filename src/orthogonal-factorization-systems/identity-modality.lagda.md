@@ -1,7 +1,7 @@
-# The trivial modality
+# The identity modality
 
 ```agda
-module orthogonal-factorization-systems.trivial-modality where
+module orthogonal-factorization-systems.identity-modality where
 ```
 
 <details><summary>Imports</summary>
@@ -21,8 +21,7 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ## Idea
 
 The identity operation on types is trivially a
-[higher modality](orthogonal-factorization-systems.higher-modalities.md), which
-we call the **trivial modality**.
+[higher modality](orthogonal-factorization-systems.higher-modalities.md).
 
 ## Definition
 
@@ -38,7 +37,7 @@ unit-id-modality = id
 
 ## Properties
 
-### The trivial modality is a uniquely eliminating modality
+### The identity modality is a uniquely eliminating modality
 
 ```agda
 is-uniquely-eliminating-modality-id-modality :
