@@ -255,7 +255,7 @@ module _
         ( ideal-radical-ideal-Commutative-Ring A I)
         ( J))
   right-radical-law-product-radical-ideal-Commutative-Ring =
-    eq-has-same-elements-radical-ideal-Commutative-Ring A
+    antisymmetric-leq-radical-ideal-Commutative-Ring A
       ( product-radical-ideal-Commutative-Ring A
         ( I)
         ( radical-of-ideal-Commutative-Ring A J))
@@ -263,9 +263,6 @@ module _
         ( product-ideal-Commutative-Ring A
           ( ideal-radical-ideal-Commutative-Ring A I)
           ( J)))
-      ( λ x →
-        forward-inclusion-right-radical-law-product-radical-ideal-Commutative-Ring
-          x ,
-        backward-inclusion-right-radical-law-product-radical-ideal-Commutative-Ring
-          x)
+      ( forward-inclusion-right-radical-law-product-radical-ideal-Commutative-Ring)
+      ( backward-inclusion-right-radical-law-product-radical-ideal-Commutative-Ring)
 ```
