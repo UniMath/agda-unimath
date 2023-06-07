@@ -17,6 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
@@ -32,7 +33,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels

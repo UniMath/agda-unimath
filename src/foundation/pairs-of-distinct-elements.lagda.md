@@ -12,13 +12,13 @@ open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.negation
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 

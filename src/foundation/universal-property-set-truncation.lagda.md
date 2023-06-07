@@ -12,6 +12,7 @@ open import foundation.function-extensionality
 open import foundation.mere-equality
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-set-quotients
 
@@ -23,7 +24,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

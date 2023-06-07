@@ -12,6 +12,7 @@ open import foundation.cones-over-cospans
 open import foundation.faithful-maps
 open import foundation.fibers-of-maps
 open import foundation.identity-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 
 open import foundation-core.1-types
@@ -29,7 +30,6 @@ open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

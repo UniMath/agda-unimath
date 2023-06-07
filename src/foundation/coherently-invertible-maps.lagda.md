@@ -11,6 +11,7 @@ open import foundation-core.coherently-invertible-maps public
 ```agda
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.contractible-maps
@@ -22,7 +23,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

@@ -9,6 +9,7 @@ module foundation.structured-type-duality where
 ```agda
 open import foundation.equivalences
 open import foundation.structure
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-duality
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -18,7 +19,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

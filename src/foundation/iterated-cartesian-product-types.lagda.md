@@ -13,6 +13,7 @@ open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
 open import foundation.univalence
@@ -26,7 +27,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.universe-levels
 
 open import lists.arrays

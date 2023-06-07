@@ -11,13 +11,13 @@ open import foundation.contractible-types
 open import foundation.equality-dependent-function-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.subtype-identity-principle
 open import foundation.univalence
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
 ```

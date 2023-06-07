@@ -12,7 +12,9 @@ open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-fibers-of-maps
 open import foundation.identity-types
+open import foundation.morphisms-cospans
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.cartesian-product-types
@@ -24,8 +26,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.morphisms-cospans
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universal-property-pullbacks
 open import foundation-core.universe-levels
 ```

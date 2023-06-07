@@ -15,7 +15,9 @@ open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
 open import foundation.subuniverses
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.univalence
 
@@ -28,8 +30,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

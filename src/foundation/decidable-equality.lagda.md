@@ -12,6 +12,7 @@ open import foundation.decidable-types
 open import foundation.double-negation
 open import foundation.negation
 open import foundation.sections
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
@@ -25,7 +26,6 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

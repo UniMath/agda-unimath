@@ -14,6 +14,8 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.raising-universe-levels
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.univalent-type-families
@@ -25,8 +27,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
-open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.universe-levels
 ```
 

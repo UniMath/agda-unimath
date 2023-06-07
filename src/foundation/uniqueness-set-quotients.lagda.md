@@ -10,6 +10,7 @@ module foundation.uniqueness-set-quotients where
 open import foundation.equivalences
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.universal-property-set-quotients
 
 open import foundation-core.contractible-types
@@ -20,7 +21,6 @@ open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 

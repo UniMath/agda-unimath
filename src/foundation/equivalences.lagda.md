@@ -13,6 +13,7 @@ open import foundation.cones-over-cospans
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
+open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
@@ -25,7 +26,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.identity-systems
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions

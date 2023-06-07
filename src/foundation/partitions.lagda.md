@@ -21,8 +21,10 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.sigma-decompositions
 open import foundation.small-types
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.dependent-pair-types
@@ -33,8 +35,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

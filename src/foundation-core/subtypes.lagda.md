@@ -7,6 +7,8 @@ module foundation-core.subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.subtype-identity-principle
+
 open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -18,7 +20,6 @@ open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.universe-levels

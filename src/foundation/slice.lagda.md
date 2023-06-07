@@ -12,6 +12,7 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 
@@ -26,7 +27,6 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
 open import trees.polynomial-endofunctors

@@ -12,6 +12,7 @@ open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
 open import foundation.slice
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
 
@@ -27,7 +28,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.small-types
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
 open import trees.polynomial-endofunctors

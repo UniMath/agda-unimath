@@ -9,6 +9,7 @@ module foundation.equivalence-extensionality where
 ```agda
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 
 open import foundation-core.contractible-maps
@@ -22,7 +23,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 

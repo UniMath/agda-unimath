@@ -11,6 +11,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
+open import foundation.subtype-identity-principle
 open import foundation.univalence
 
 open import foundation-core.contractible-types
@@ -18,7 +19,6 @@ open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
 open import foundation-core.universe-levels
 ```
 

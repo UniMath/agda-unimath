@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
 
@@ -30,7 +31,6 @@ open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
 open import foundation-core.subtypes
 open import foundation-core.universe-levels
 ```

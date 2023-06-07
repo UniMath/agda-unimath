@@ -11,6 +11,7 @@ open import foundation.equivalence-classes
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
@@ -22,7 +23,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 ```
 

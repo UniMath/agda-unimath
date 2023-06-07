@@ -18,6 +18,7 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 
 open import foundation-core.contractible-types
@@ -31,7 +32,6 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-dependent-pair-types
 open import foundation-core.universe-levels
 
 open import univalent-combinatorics.counting

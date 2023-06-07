@@ -16,6 +16,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.universal-property-coproduct-types
 open import foundation.unordered-pairs
@@ -31,7 +32,6 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-cartesian-product-types
 open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
