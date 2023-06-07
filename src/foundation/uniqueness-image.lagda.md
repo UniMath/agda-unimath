@@ -14,7 +14,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types

@@ -15,7 +15,7 @@ open import foundation.propositional-truncations
 open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types

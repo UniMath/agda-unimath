@@ -12,7 +12,7 @@ open import foundation.decidable-types
 open import foundation.law-of-excluded-middle
 open import foundation.tight-apartness-relations
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.negation

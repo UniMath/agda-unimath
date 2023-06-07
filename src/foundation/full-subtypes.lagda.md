@@ -11,7 +11,7 @@ open import foundation.decidable-subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions

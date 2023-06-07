@@ -11,7 +11,7 @@ open import foundation.conjunction
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences

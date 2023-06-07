@@ -23,7 +23,7 @@ open import foundation.unit-type
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functions

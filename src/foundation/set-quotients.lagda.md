@@ -21,7 +21,7 @@ open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.function-extensionality
 open import foundation-core.functions

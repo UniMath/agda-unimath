@@ -12,7 +12,7 @@ open import foundation-core.functoriality-dependent-pair-types public
 open import foundation.cones-over-cospans
 open import foundation.type-arithmetic-dependent-pair-types
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

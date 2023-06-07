@@ -18,7 +18,7 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 
 open import lists.lists
 

@@ -16,7 +16,7 @@ open import foundation.unit-type
 
 open import foundation-core.1-types
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

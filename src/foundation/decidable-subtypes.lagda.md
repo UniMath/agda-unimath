@@ -16,7 +16,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.sets
 open import foundation.subtypes
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions

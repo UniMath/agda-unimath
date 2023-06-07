@@ -10,7 +10,7 @@ module foundation.law-of-excluded-middle where
 open import foundation.decidable-types
 
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.universe-levels

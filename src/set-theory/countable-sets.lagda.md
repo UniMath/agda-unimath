@@ -32,7 +32,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.identity-types

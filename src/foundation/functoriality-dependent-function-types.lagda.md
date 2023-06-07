@@ -19,7 +19,7 @@ open import foundation.universal-property-unit-type
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions

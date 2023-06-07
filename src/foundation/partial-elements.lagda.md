@@ -9,7 +9,7 @@ module foundation.partial-elements where
 ```agda
 open import foundation.unit-type
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.universe-levels
 ```

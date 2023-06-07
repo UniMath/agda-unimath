@@ -10,7 +10,7 @@ module foundation.global-choice where
 open import foundation.functoriality-propositional-truncation
 open import foundation.hilberts-epsilon-operators
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.negation
 open import foundation-core.universe-levels

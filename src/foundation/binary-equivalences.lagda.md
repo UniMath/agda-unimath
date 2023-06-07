@@ -8,7 +8,7 @@ module foundation.binary-equivalences where
 
 ```agda
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.universe-levels
 ```

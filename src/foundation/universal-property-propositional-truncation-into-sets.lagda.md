@@ -11,7 +11,7 @@ open import foundation.function-extensionality
 open import foundation.propositional-truncations
 open import foundation.weakly-constant-maps
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions

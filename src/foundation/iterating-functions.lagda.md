@@ -15,7 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.function-extensionality
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.endomorphisms
 open import foundation-core.homotopies
 open import foundation-core.identity-types

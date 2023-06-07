@@ -16,7 +16,7 @@ open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps

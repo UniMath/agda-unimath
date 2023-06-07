@@ -12,7 +12,7 @@ open import foundation.propositional-maps
 open import foundation.structured-type-duality
 open import foundation.surjective-maps
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types

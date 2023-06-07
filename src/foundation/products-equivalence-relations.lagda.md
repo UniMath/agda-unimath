@@ -11,7 +11,7 @@ open import foundation.binary-relations
 open import foundation.products-binary-relations
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.universe-levels
 ```

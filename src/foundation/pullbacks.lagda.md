@@ -23,7 +23,7 @@ open import foundation.unit-type
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functions

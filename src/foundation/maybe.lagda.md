@@ -13,7 +13,7 @@ open import foundation.equality-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences

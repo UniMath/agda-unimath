@@ -10,7 +10,7 @@ module foundation.type-theoretic-principle-of-choice where
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions

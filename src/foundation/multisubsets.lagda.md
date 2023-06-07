@@ -11,7 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.images
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.negation

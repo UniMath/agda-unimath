@@ -12,7 +12,7 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types

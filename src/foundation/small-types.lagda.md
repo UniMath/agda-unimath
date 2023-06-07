@@ -16,7 +16,7 @@ open import foundation.surjective-maps
 open import foundation.uniqueness-image
 open import foundation.universal-property-image
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.homotopies
 open import foundation-core.universe-levels

@@ -13,7 +13,7 @@ open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.unordered-pairs
 
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets

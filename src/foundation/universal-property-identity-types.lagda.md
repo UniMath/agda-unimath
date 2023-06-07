@@ -10,7 +10,7 @@ module foundation.universal-property-identity-types where
 open import foundation.function-extensionality
 open import foundation.identity-types
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.universe-levels

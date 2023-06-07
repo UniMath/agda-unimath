@@ -9,7 +9,7 @@ module foundation-core.subtypes where
 ```agda
 open import foundation.subtype-identity-principle
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

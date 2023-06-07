@@ -12,7 +12,7 @@ open import foundation-core.truncated-maps public
 open import foundation.cones-over-cospans
 open import foundation.functoriality-fibers-of-maps
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks

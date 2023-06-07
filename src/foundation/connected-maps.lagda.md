@@ -19,7 +19,7 @@ open import foundation.univalence
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

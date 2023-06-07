@@ -13,7 +13,7 @@ open import foundation.function-extensionality
 open import foundation.propositional-truncations
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositions

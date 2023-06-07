@@ -22,7 +22,7 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functions

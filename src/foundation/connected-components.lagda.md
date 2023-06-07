@@ -11,7 +11,7 @@ open import foundation.0-connected-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.truncated-types

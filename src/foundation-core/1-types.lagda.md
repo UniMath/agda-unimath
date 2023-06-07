@@ -7,7 +7,7 @@ module foundation-core.1-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets

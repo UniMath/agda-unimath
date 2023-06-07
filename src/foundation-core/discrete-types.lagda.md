@@ -9,7 +9,7 @@ module foundation-core.discrete-types where
 ```agda
 open import foundation.decidable-equality
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.sets
 open import foundation-core.universe-levels
 ```

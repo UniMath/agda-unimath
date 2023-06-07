@@ -25,7 +25,7 @@ open import foundation.universal-property-set-quotients
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences

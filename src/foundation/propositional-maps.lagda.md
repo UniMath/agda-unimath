@@ -12,7 +12,7 @@ open import foundation-core.propositional-maps public
 open import foundation.embeddings
 open import foundation.truncated-maps
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions

@@ -15,7 +15,7 @@ open import foundation.intersections-subtypes
 
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.propositions

@@ -9,7 +9,7 @@ module foundation.equality-fibers-of-maps where
 ```agda
 open import foundation.identity-types
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

@@ -10,7 +10,7 @@ module foundation.type-arithmetic-dependent-pair-types where
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps

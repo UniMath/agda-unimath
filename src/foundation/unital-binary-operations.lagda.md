@@ -8,7 +8,7 @@ module foundation.unital-binary-operations where
 
 ```agda
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.universe-levels

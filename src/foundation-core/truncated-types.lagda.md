@@ -12,7 +12,7 @@ open import foundation.function-extensionality
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences

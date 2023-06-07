@@ -11,7 +11,7 @@ open import foundation.existential-quantification
 open import foundation.powersets
 open import foundation.propositional-truncations
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.universe-levels

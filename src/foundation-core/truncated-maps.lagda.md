@@ -11,7 +11,7 @@ open import foundation.equality-fibers-of-maps
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions

@@ -27,7 +27,7 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types

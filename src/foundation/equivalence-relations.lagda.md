@@ -29,7 +29,7 @@ open import foundation.universal-property-set-quotients
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types

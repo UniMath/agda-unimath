@@ -9,7 +9,7 @@ module foundation.truncation-images-of-maps where
 ```agda
 open import foundation.truncations
 
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.truncation-levels
