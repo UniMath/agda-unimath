@@ -9,6 +9,7 @@ module foundation.surjective-maps where
 ```agda
 open import foundation.connected-maps
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
@@ -21,10 +22,10 @@ open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
+open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -35,7 +36,6 @@ open import foundation-core.sections
 open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```

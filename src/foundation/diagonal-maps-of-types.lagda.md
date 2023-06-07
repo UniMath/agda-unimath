@@ -10,12 +10,13 @@ open import foundation-core.diagonal-maps-of-types public
 
 ```agda
 open import foundation.0-maps
+open import foundation.dependent-pair-types
 open import foundation.faithful-maps
+open import foundation.universe-levels
 
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
@@ -25,7 +26,6 @@ open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

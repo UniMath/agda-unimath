@@ -8,18 +8,18 @@ module foundation.descent-coproduct-types where
 
 ```agda
 open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-fibers-of-maps
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
-open import foundation-core.universe-levels
 ```
 
 </details>

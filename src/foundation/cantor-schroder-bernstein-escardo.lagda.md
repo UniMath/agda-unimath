@@ -8,12 +8,13 @@ module foundation.cantor-schroder-bernstein-escardo where
 
 ```agda
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.law-of-excluded-middle
 open import foundation.perfect-images
 open import foundation.split-surjective-maps
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
@@ -21,7 +22,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>

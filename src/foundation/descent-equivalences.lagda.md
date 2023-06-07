@@ -10,11 +10,11 @@ module foundation.descent-equivalences where
 open import foundation.cones-over-cospans
 open import foundation.equivalences
 open import foundation.functoriality-fibers-of-maps
+open import foundation.universe-levels
 
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.pullbacks
-open import foundation-core.universe-levels
 ```
 
 </details>

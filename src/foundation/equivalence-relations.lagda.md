@@ -10,6 +10,7 @@ open import foundation-core.equivalence-relations public
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.full-subtypes
@@ -26,10 +27,10 @@ open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
@@ -37,7 +38,6 @@ open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>

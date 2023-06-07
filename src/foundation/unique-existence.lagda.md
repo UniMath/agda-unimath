@@ -7,9 +7,10 @@ module foundation.unique-existence where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.contractible-types
 open import foundation.dependent-pair-types
-open import foundation-core.universe-levels
+open import foundation.universe-levels
+
+open import foundation-core.contractible-types
 ```
 
 </details>

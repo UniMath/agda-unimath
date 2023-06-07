@@ -12,12 +12,12 @@ open import foundation-core.involutions public
 open import foundation.automorphisms
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.universe-levels
 
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.universe-levels
 ```
 
 </details>

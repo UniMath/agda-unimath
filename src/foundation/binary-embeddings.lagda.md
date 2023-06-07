@@ -8,12 +8,12 @@ module foundation.binary-embeddings where
 
 ```agda
 open import foundation.binary-equivalences
-open import foundation.identity-types
-
 open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.universe-levels
+
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.universe-levels
 ```
 
 </details>

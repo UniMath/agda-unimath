@@ -9,19 +9,19 @@ module foundation-core.decidable-propositions where
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

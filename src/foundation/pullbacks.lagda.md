@@ -11,6 +11,7 @@ open import foundation-core.pullbacks public
 ```agda
 open import foundation.commuting-cubes-of-maps
 open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -19,17 +20,16 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

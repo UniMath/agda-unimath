@@ -7,16 +7,17 @@ module foundation.universal-property-image where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -28,7 +29,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

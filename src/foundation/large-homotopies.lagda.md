@@ -10,8 +10,7 @@ module foundation.large-homotopies where
 
 ```agda
 open import foundation.large-identity-types
-
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>

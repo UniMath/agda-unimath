@@ -11,10 +11,10 @@ open import foundation-core.commuting-squares-of-maps public
 ```agda
 open import foundation.equivalences
 open import foundation.functoriality-function-types
+open import foundation.universe-levels
 
 open import foundation-core.functions
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>

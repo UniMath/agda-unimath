@@ -8,12 +8,12 @@ module foundation.discrete-reflexive-relations where
 
 ```agda
 open import foundation.contractible-types
-open import foundation.reflexive-relations
-
 open import foundation.dependent-pair-types
+open import foundation.reflexive-relations
+open import foundation.universe-levels
+
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

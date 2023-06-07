@@ -8,10 +8,11 @@ module foundation.binary-transport where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>

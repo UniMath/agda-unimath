@@ -8,10 +8,10 @@ module foundation.images-subtypes where
 
 ```agda
 open import foundation.images
+open import foundation.universe-levels
 
 open import foundation-core.functions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

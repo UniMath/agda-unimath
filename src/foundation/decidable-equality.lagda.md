@@ -9,14 +9,15 @@ module foundation.decidable-equality where
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.negation
 open import foundation.sections
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -26,7 +27,6 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>

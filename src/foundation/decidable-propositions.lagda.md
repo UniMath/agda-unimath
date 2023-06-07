@@ -11,6 +11,7 @@ open import foundation-core.decidable-propositions public
 ```agda
 open import foundation.booleans
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -20,10 +21,10 @@ open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -32,7 +33,6 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types

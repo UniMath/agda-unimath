@@ -16,7 +16,6 @@ open import foundation-core.contractible-maps public
 open import foundation-core.contractible-types public
 open import foundation-core.coproduct-types public
 open import foundation-core.decidable-propositions public
-open import foundation.dependent-pair-types public
 open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.discrete-types public
 open import foundation-core.embeddings public
@@ -54,5 +53,4 @@ open import foundation-core.truncation-levels public
 open import foundation-core.univalence public
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.universal-property-truncation public
-open import foundation-core.universe-levels public
 ```

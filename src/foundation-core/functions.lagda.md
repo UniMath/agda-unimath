@@ -9,7 +9,7 @@ module foundation-core.functions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>

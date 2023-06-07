@@ -14,12 +14,12 @@ open import elementary-number-theory.natural-numbers
 open import foundation.automorphisms
 open import foundation.equivalence-extensionality
 open import foundation.iterating-functions
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 ```
 
 </details>

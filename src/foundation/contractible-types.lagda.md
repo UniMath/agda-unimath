@@ -9,13 +9,14 @@ open import foundation-core.contractible-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.subuniverses
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
@@ -25,7 +26,6 @@ open import foundation-core.singleton-induction
 open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

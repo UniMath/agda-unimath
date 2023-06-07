@@ -11,11 +11,11 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.iterating-functions
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.identity-types
 open import foundation-core.involutions
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```

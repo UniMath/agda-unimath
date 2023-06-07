@@ -7,19 +7,19 @@ module foundation.repetitions-of-values where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.pairs-of-distinct-elements
+open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>

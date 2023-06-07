@@ -8,12 +8,12 @@ module foundation.law-of-excluded-middle where
 
 ```agda
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation.dependent-pair-types
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 ```

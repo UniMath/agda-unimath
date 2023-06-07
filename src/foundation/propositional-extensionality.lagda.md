@@ -8,6 +8,7 @@ module foundation.propositional-extensionality where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -20,14 +21,13 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.univalent-type-families
 open import foundation.universal-property-empty-type
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>

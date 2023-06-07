@@ -9,18 +9,18 @@ open import foundation-core.univalence public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.universe-levels
 ```
 
 </details>

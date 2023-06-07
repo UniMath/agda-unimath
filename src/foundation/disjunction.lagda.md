@@ -9,15 +9,15 @@ module foundation.disjunction where
 ```agda
 open import foundation.conjunction
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

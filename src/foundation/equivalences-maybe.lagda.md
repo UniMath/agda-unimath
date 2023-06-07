@@ -7,6 +7,7 @@ module foundation.equivalences-maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
@@ -14,9 +15,9 @@ open import foundation.functoriality-coproduct-types
 open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universal-property-maybe
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
@@ -26,7 +27,6 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>

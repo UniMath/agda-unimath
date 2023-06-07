@@ -7,11 +7,12 @@ module foundation.universal-property-propositional-truncation-into-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -20,7 +21,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

@@ -9,8 +9,9 @@ module foundation.sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.universe-levels
+
 open import foundation-core.functions
-open import foundation-core.universe-levels
 ```
 
 </details>

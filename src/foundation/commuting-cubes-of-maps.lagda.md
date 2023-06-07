@@ -10,11 +10,11 @@ open import foundation-core.commuting-cubes-of-maps public
 
 ```agda
 open import foundation.cones-over-cospans
-
 open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 ```
 
 </details>

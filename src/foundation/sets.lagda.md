@@ -10,12 +10,13 @@ open import foundation-core.sets public
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.truncated-types
+open import foundation.universe-levels
 
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -23,7 +24,6 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

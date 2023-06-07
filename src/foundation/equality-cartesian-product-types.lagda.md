@@ -9,13 +9,14 @@ module foundation.equality-cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>

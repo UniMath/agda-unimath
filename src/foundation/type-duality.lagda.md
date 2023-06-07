@@ -7,6 +7,7 @@ module foundation.type-duality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
@@ -15,10 +16,10 @@ open import foundation.slice
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -28,7 +29,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.small-types
-open import foundation-core.universe-levels
 
 open import trees.polynomial-endofunctors
 ```

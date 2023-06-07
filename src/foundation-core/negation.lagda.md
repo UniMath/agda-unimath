@@ -7,8 +7,9 @@ module foundation-core.negation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import foundation-core.empty-types
-open import foundation-core.universe-levels
 ```
 
 </details>

@@ -11,11 +11,11 @@ open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.commuting-squares-of-identifications
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 ```
 
 </details>

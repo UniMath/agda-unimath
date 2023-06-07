@@ -8,9 +8,10 @@ module foundation.induction-principle-propositional-truncation where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

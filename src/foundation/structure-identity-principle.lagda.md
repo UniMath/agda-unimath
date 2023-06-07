@@ -7,14 +7,14 @@ module foundation.structure-identity-principle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>

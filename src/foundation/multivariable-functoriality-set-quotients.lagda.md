@@ -11,12 +11,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.functoriality-set-quotients
 open import foundation.set-quotients
+open import foundation.universe-levels
 open import foundation.vectors-set-quotients
 
 open import foundation-core.equivalence-relations
 open import foundation-core.functions
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 
 open import linear-algebra.vectors
 

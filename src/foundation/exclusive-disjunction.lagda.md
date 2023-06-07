@@ -11,6 +11,7 @@ open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.functoriality-coproduct-types
 open import foundation.negation
@@ -19,11 +20,11 @@ open import foundation.symmetric-operations
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
@@ -32,7 +33,6 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-finite-types

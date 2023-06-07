@@ -7,9 +7,10 @@ module foundation.epimorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import foundation-core.embeddings
 open import foundation-core.functions
-open import foundation-core.universe-levels
 ```
 
 </details>

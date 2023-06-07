@@ -7,16 +7,16 @@ module foundation-core.sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

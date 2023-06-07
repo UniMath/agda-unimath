@@ -11,9 +11,9 @@ open import foundation-core.commuting-triangles-of-maps public
 ```agda
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.universe-levels
 ```
 
 </details>

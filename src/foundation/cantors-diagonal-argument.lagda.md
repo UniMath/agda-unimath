@@ -7,17 +7,17 @@ module foundation.cantors-diagonal-argument where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-extensionality
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

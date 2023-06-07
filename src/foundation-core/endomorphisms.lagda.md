@@ -7,13 +7,13 @@ module foundation-core.endomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.sets
-
 open import foundation.dependent-pair-types
+open import foundation.sets
+open import foundation.universe-levels
+
 open import foundation-core.functions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import structured-types.pointed-types
 ```

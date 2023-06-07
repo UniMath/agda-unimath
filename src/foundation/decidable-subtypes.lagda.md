@@ -11,12 +11,13 @@ open import foundation.1-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.universe-levels
 
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.functions
@@ -26,7 +27,6 @@ open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

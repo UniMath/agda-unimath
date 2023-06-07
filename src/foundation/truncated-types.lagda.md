@@ -9,17 +9,17 @@ open import foundation-core.truncated-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.subtype-identity-principle
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.subtypes
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

@@ -8,9 +8,10 @@ module foundation.2-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

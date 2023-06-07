@@ -9,6 +9,7 @@ module foundation.russells-paradox where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
@@ -19,12 +20,11 @@ open import foundation.small-universes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.universe-levels
 
 open import trees.multisets
 open import trees.small-multisets

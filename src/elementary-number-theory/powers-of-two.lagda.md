@@ -16,13 +16,13 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.split-surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.functions

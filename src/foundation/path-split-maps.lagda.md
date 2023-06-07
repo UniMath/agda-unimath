@@ -9,12 +9,12 @@ open import foundation-core.path-split-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation.dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

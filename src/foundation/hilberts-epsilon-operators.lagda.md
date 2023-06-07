@@ -9,10 +9,10 @@ module foundation.hilberts-epsilon-operators where
 ```agda
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.functions
-open import foundation-core.universe-levels
 ```
 
 </details>

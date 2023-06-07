@@ -8,6 +8,7 @@ module foundation.coproduct-decompositions where
 
 ```agda
 open import foundation.coproduct-decompositions-subuniverse
+open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -20,10 +21,10 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.functions
@@ -31,7 +32,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
