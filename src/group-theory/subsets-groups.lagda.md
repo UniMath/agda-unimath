@@ -35,7 +35,7 @@ module _
   where
 
   powerset-large-locale-Group :
-    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3))
+    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3)) lzero
   powerset-large-locale-Group = powerset-Large-Locale (type-Group G)
 ```
 

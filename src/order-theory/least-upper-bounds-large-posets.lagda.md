@@ -62,6 +62,7 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
+  (γ : Level)
   (P : Large-Poset α β)
   {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
   where
@@ -71,7 +72,7 @@ module _
     where
     field
       sup-has-least-upper-bound-family-of-elements-Large-Poset :
-        type-Large-Poset P (l1 ⊔ l2)
+        type-Large-Poset P (γ ⊔ l1 ⊔ l2)
       is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset :
         is-least-upper-bound-family-of-elements-Large-Poset P x
           sup-has-least-upper-bound-family-of-elements-Large-Poset

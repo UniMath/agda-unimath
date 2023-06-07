@@ -38,7 +38,7 @@ module _
   where
 
   powerset-Large-Locale :
-    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3))
+    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3)) lzero
   powerset-Large-Locale = power-Large-Locale A Prop-Large-Locale
 
   large-poset-powerset-Large-Locale :
@@ -65,7 +65,7 @@ module _
     large-meet-semilattice-Large-Locale powerset-Large-Locale
 
   large-suplattice-powerset-Large-Locale :
-    Large-Suplattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3))
+    Large-Suplattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ (l2 ⊔ l3)) lzero
   large-suplattice-powerset-Large-Locale =
     large-suplattice-Large-Locale powerset-Large-Locale
 
@@ -143,7 +143,7 @@ module _
     is-greatest-binary-lower-bound-meet-Large-Locale (powerset-Large-Locale A)
 
   is-large-suplattice-powerset-Large-Locale :
-    is-large-suplattice-Large-Poset (large-poset-powerset-Large-Locale A)
+    is-large-suplattice-Large-Poset lzero (large-poset-powerset-Large-Locale A)
   is-large-suplattice-powerset-Large-Locale =
     is-large-suplattice-Large-Locale (powerset-Large-Locale A)
 

@@ -129,6 +129,29 @@ module _
 
 ## Properties
 
+### If `I α ⊆ J α` for each `α`, then `⋁ I ⊆ ⋁ J`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Commutative-Ring l1)
+  {U : UU l2}
+  (I : U → ideal-Commutative-Ring l3 A)
+  (J : U → ideal-Commutative-Ring l4 A)
+  (H : (α : U) → leq-ideal-Commutative-Ring A (I α) (J α))
+  where
+  
+  preserves-order-join-family-of-ideals-Commutative-Ring :
+    leq-ideal-Commutative-Ring A
+      ( join-family-of-ideals-Commutative-Ring A I)
+      ( join-family-of-ideals-Commutative-Ring A J)
+  preserves-order-join-family-of-ideals-Commutative-Ring =
+    preserves-order-join-family-of-ideals-Ring
+      ( ring-Commutative-Ring A)
+      ( I)
+      ( J)
+      ( H)
+```
+
 ### Products distribute over joins of families of ideals
 
 ```agda

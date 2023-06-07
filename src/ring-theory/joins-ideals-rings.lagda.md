@@ -16,6 +16,7 @@ open import foundation.unions-subtypes
 open import foundation.universe-levels
 
 open import order-theory.galois-connections-large-posets
+open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.similarity-of-elements-large-posets
 
@@ -131,7 +132,56 @@ module _
       ( is-join-join-family-of-ideals-Ring)
 ```
 
+### The large suplattice of ideals in a ring
+
+```agda
+module _
+  {l1 : Level} (R : Ring l1)
+  where
+
+  is-large-suplattice-ideal-Ring-Large-Poset :
+    is-large-suplattice-Large-Poset l1 (ideal-Ring-Large-Poset R)
+  sup-has-least-upper-bound-family-of-elements-Large-Poset
+    ( is-large-suplattice-ideal-Ring-Large-Poset I) =
+    join-family-of-ideals-Ring R I
+  is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
+    ( is-large-suplattice-ideal-Ring-Large-Poset I) =
+    is-join-join-family-of-ideals-Ring R I
+
+  ideal-Ring-Large-Suplattice :
+    Large-Suplattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) l1
+  large-poset-Large-Suplattice
+    ideal-Ring-Large-Suplattice =
+    ideal-Ring-Large-Poset R
+  is-large-suplattice-Large-Suplattice
+    ideal-Ring-Large-Suplattice =
+    is-large-suplattice-ideal-Ring-Large-Poset
+```
+
 ## Properties
+
+### If `I α ⊆ J α` for each `α`, then `⋁ I ⊆ ⋁ J`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (A : Ring l1)
+  {U : UU l2}
+  (I : U → ideal-Ring l3 A)
+  (J : U → ideal-Ring l4 A)
+  (H : (α : U) → leq-ideal-Ring A (I α) (J α))
+  where
+  
+  preserves-order-join-family-of-ideals-Ring :
+    leq-ideal-Ring A
+      ( join-family-of-ideals-Ring A I)
+      ( join-family-of-ideals-Ring A J)
+  preserves-order-join-family-of-ideals-Ring =
+    preserves-order-sup-Large-Suplattice
+      ( ideal-Ring-Large-Suplattice A)
+      { x = I}
+      { y = J}
+      ( H)
+```
 
 ### The operation `S ↦ (S)` preserves joins
 

@@ -41,13 +41,13 @@ contains the top element, and is closed under suprema.
 ```agda
 record
   Large-Subframe
-    {α : Level → Level} {β : Level → Level → Level} (γ : Level → Level)
-    (F : Large-Frame α β) :
+    {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+    (δ : Level → Level) (F : Large-Frame α β γ) :
   UUω
   where
   field
     large-subposet-Large-Subframe :
-      Large-Subposet γ (large-poset-Large-Frame F)
+      Large-Subposet δ (large-poset-Large-Frame F)
     is-closed-under-meets-Large-Subframe :
       is-closed-under-meets-Large-Subposet
         ( large-meet-semilattice-Large-Frame F)
@@ -64,37 +64,37 @@ record
 open Large-Subframe public
 
 module _
-  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (F : Large-Frame α β) (S : Large-Subframe γ F)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  {δ : Level → Level} (F : Large-Frame α β γ) (S : Large-Subframe δ F)
   where
 
   large-poset-Large-Subframe :
-    Large-Poset (λ l → α l ⊔ γ l) β
+    Large-Poset (λ l → α l ⊔ δ l) β
   large-poset-Large-Subframe =
     large-poset-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   large-subpreorder-Large-Subframe :
-    Large-Subpreorder γ (large-preorder-Large-Frame F)
+    Large-Subpreorder δ (large-preorder-Large-Frame F)
   large-subpreorder-Large-Subframe =
     large-subpreorder-Large-Subposet (large-subposet-Large-Subframe S)
 
   large-preorder-Large-Subframe :
-    Large-Preorder (λ l → α l ⊔ γ l) (λ l1 l2 → β l1 l2)
+    Large-Preorder (λ l → α l ⊔ δ l) (λ l1 l2 → β l1 l2)
   large-preorder-Large-Subframe =
     large-preorder-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   is-in-Large-Subframe :
-    {l1 : Level} → type-Large-Frame F l1 → UU (γ l1)
+    {l1 : Level} → type-Large-Frame F l1 → UU (δ l1)
   is-in-Large-Subframe =
     is-in-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
-  type-Large-Subframe : (l1 : Level) → UU (α l1 ⊔ γ l1)
+  type-Large-Subframe : (l1 : Level) → UU (α l1 ⊔ δ l1)
   type-Large-Subframe =
     type-Large-Subposet
       ( large-poset-Large-Frame F)
@@ -239,7 +239,7 @@ module _
     has-top-element-Large-Subframe
 
   large-meet-semilattice-Large-Subframe :
-    Large-Meet-Semilattice (λ l → α l ⊔ γ l) β
+    Large-Meet-Semilattice (λ l → α l ⊔ δ l) β
   large-poset-Large-Meet-Semilattice
     large-meet-semilattice-Large-Subframe =
     large-poset-Large-Subframe
@@ -249,7 +249,7 @@ module _
 
   sup-Large-Subframe :
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Subframe l2) →
-    type-Large-Subframe (l1 ⊔ l2)
+    type-Large-Subframe (γ ⊔ l1 ⊔ l2)
   pr1 (sup-Large-Subframe x) = sup-Large-Frame F (pr1 ∘ x)
   pr2 (sup-Large-Subframe x) =
     is-closed-under-sup-Large-Subframe S
@@ -266,7 +266,7 @@ module _
     is-least-upper-bound-sup-Large-Frame F (pr1 ∘ x) (pr1 y)
 
   is-large-suplattice-Large-Subframe :
-    is-large-suplattice-Large-Poset (large-poset-Large-Subframe)
+    is-large-suplattice-Large-Poset γ (large-poset-Large-Subframe)
   sup-has-least-upper-bound-family-of-elements-Large-Poset
     ( is-large-suplattice-Large-Subframe x) =
     sup-Large-Subframe x
@@ -275,7 +275,7 @@ module _
     is-least-upper-bound-sup-Large-Subframe x
 
   large-suplattice-Large-Subframe :
-    Large-Suplattice (λ l → α l ⊔ γ l) β
+    Large-Suplattice (λ l → α l ⊔ δ l) β γ
   large-poset-Large-Suplattice
     large-suplattice-Large-Subframe =
     large-poset-Large-Subframe
@@ -294,7 +294,7 @@ module _
       ( distributive-meet-sup-Large-Frame F (pr1 x) (pr1 ∘ y))
 
   large-frame-Large-Subframe :
-    Large-Frame (λ l → α l ⊔ γ l) β
+    Large-Frame (λ l → α l ⊔ δ l) β γ
   large-poset-Large-Frame
     large-frame-Large-Subframe =
     large-poset-Large-Subframe

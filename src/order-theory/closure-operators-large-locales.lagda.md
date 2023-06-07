@@ -50,8 +50,8 @@ operator is a [nucleus](order-theory.nuclei-large-locales.md).
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ)
   where
 
   closure-operator-Large-Locale : UUω
@@ -111,8 +111,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β) (j : closure-operator-Large-Locale L)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ) (j : closure-operator-Large-Locale L)
   where
 
   large-subpreorder-closure-operator-Large-Locale :
@@ -311,7 +311,7 @@ module _
   sup-closed-element-closure-operator-Large-Locale :
     {l1 l2 : Level} {I : UU l1}
     (x : I → closed-element-closure-operator-Large-Locale l2) →
-    closed-element-closure-operator-Large-Locale (l1 ⊔ l2)
+    closed-element-closure-operator-Large-Locale (γ ⊔ l1 ⊔ l2)
   pr1 (sup-closed-element-closure-operator-Large-Locale x) =
     map-closure-operator-Large-Locale L j (sup-Large-Locale L (pr1 ∘ x))
   pr2 (sup-closed-element-closure-operator-Large-Locale x) =
@@ -341,7 +341,7 @@ module _
       ( backward-implication-adjoint-relation-closure-operator-Large-Locale H)
 
   is-large-suplattice-large-poset-closure-operator-Large-Locale :
-    is-large-suplattice-Large-Poset
+    is-large-suplattice-Large-Poset γ
       ( large-poset-closure-operator-Large-Locale)
   sup-has-least-upper-bound-family-of-elements-Large-Poset
     ( is-large-suplattice-large-poset-closure-operator-Large-Locale x) =
@@ -351,7 +351,7 @@ module _
     is-least-upper-bound-sup-closed-element-closure-operator-Large-Locale x
 
   large-suplattice-closure-operator-Large-Locale :
-    Large-Suplattice (λ l → α l ⊔ α l) β
+    Large-Suplattice (λ l → α l ⊔ α l) β γ
   large-poset-Large-Suplattice
     large-suplattice-closure-operator-Large-Locale =
     large-poset-closure-operator-Large-Locale
@@ -364,8 +364,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β) (j : closure-operator-Large-Locale L)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ) (j : closure-operator-Large-Locale L)
   where
 
   is-closed-under-meets-closure-operator-Large-Locale : UUω
@@ -384,8 +384,8 @@ locales with exponentials it seems that we can omit this extra hypothesis.
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β) (j : closure-operator-Large-Locale L)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ) (j : closure-operator-Large-Locale L)
   (H : is-closed-under-meets-closure-operator-Large-Locale L j)
   (K :
     {l1 l2 : Level} (x : type-Large-Locale L l1) (y : type-Large-Locale L l2) →
@@ -447,7 +447,7 @@ module _
           ( distributive-meet-sup-Large-Locale L x _)))
 
   large-frame-closure-operator-Large-Locale :
-    Large-Frame (λ l → α l ⊔ α l) β
+    Large-Frame (λ l → α l ⊔ α l) β γ
   large-poset-Large-Frame
     large-frame-closure-operator-Large-Locale =
     large-poset-closure-operator-Large-Locale L j
@@ -462,7 +462,7 @@ module _
     distributive-meet-sup-closure-operator-Large-Locale x y
 
   large-locale-closure-operator-Large-Locale :
-    Large-Locale (λ l → α l ⊔ α l) β
+    Large-Locale (λ l → α l ⊔ α l) β γ
   large-locale-closure-operator-Large-Locale =
     large-frame-closure-operator-Large-Locale
 ```

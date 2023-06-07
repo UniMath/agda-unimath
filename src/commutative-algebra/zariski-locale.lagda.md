@@ -34,52 +34,6 @@ fact that the intersection `I ∩ J` of radical ideals is equivalently described
 as the radical ideal `√ IJ` of the
 [product ideal](commutative-algebra.products-of-ideals-commutative-rings.md).
 
-## Preliminary properties
-
-### Products of radical ideals distribute over joins
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (A : Commutative-Ring l1)
-  (I : radical-ideal-Commutative-Ring l2 A)
-  {U : UU l3} (J : U → radical-ideal-Commutative-Ring l4 A)
-  where
-
-  distributive-product-join-family-of-radical-ideals-Commutative-Ring :
-    product-radical-ideal-Commutative-Ring A
-      ( I)
-      ( join-family-of-radical-ideals-Commutative-Ring A J) ＝
-    join-family-of-radical-ideals-Commutative-Ring A
-      ( λ α → product-radical-ideal-Commutative-Ring A I (J α))
-  distributive-product-join-family-of-radical-ideals-Commutative-Ring =
-    eq-has-same-elements-radical-ideal-Commutative-Ring A
-      ( product-radical-ideal-Commutative-Ring A
-        ( I)
-        ( join-family-of-radical-ideals-Commutative-Ring A J))
-      ( join-family-of-radical-ideals-Commutative-Ring A
-        ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
-      ( λ x →
-        ( is-product-product-radical-ideal-Commutative-Ring A I
-            ( join-family-of-radical-ideals-Commutative-Ring A J)
-            ( join-family-of-radical-ideals-Commutative-Ring A
-              ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
-            ( λ r s p →
-              {!!})
-            ( x)) ,
-        ( λ H →
-          {!!}))
-```
-
-### Intersections of radical ideals distribute over joins
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (A : Commutative-Ring l1)
-  (I : radical-ideal-Commutative-Ring l2 A)
-  {U : UU l3} (J : U → radical-ideal-Commutative-Ring l4 A)
-  where
-```
-
 ## Definition
 
 ### The Zariski locale

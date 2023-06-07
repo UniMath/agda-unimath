@@ -26,8 +26,8 @@ A **homomorphism of large locales** from `K` to `L` is a
 
 ```agda
 module _
-  {αK αL : Level → Level} {βK βL : Level → Level → Level}
-  (K : Large-Locale αK βK) (L : Large-Locale αL βL)
+  {αK αL : Level → Level} {βK βL : Level → Level → Level} {γ : Level}
+  (K : Large-Locale αK βK γ) (L : Large-Locale αL βL γ)
   where
 
   hom-Large-Locale : UUω
