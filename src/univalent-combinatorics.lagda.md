@@ -105,7 +105,7 @@ open import univalent-combinatorics.trivial-sigma-decompositions public
 open import univalent-combinatorics.type-duality public
 open import univalent-combinatorics.unions-subtypes public
 open import univalent-combinatorics.universal-property-standard-finite-types public
-open import univalent-combinatorics.unlabelled-partitions public
-open import univalent-combinatorics.unlabelled-rooted-trees public
-open import univalent-combinatorics.unlabelled-trees public
+open import univalent-combinatorics.unlabeled-partitions public
+open import univalent-combinatorics.unlabeled-rooted-trees public
+open import univalent-combinatorics.unlabeled-trees public
 ```

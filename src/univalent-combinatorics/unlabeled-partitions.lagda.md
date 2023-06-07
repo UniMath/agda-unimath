@@ -1,7 +1,7 @@
-# Unlabelled partitions
+# Unlabeled partitions
 
 ```agda
-module univalent-combinatorics.unlabelled-partitions where
+module univalent-combinatorics.unlabeled-partitions where
 ```
 
 <details><summary>Imports</summary>
@@ -14,5 +14,5 @@ module univalent-combinatorics.unlabelled-partitions where
 
 ## Idea
 
-Unlabelled partitions are
+Unlabeled partitions are
 [Ferrers diagrams](univalent-combinatorics.ferrers-diagrams.md).

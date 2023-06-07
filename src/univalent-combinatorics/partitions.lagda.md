@@ -43,7 +43,7 @@ A partition of a finite type `X` can be defined in several equivalent ways:
   `A` is finite and `B` is a family of inhabited finite types, i.e., it consists
   of such `A` and `B` and an equivalence `X ≃ Σ A B`.
 
-Note that the last description is subtly different from the notion of unlabelled
+Note that the last description is subtly different from the notion of unlabeled
 partition (i.e., Ferrers diagram), because it only uses mere equivalences.
 
 ## Definition
