@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.constant-maps where
+
+open import foundation-core.constant-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.constant-maps public
-
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 

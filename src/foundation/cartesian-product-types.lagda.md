@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.cartesian-product-types where
+
+open import foundation-core.cartesian-product-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cartesian-product-types public
-
 open import foundation.subuniverses
 
 open import foundation-core.universe-levels

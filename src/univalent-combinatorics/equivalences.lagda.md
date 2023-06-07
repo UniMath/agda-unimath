@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.equivalences where
+
+open import foundation.equivalences public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences public
-
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.universe-levels

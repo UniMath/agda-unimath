@@ -2,12 +2,14 @@
 
 ```agda
 module foundation.automorphisms where
+
+open import foundation-core.automorphisms public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.automorphisms public
+
 ```
 
 </details>

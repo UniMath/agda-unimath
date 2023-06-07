@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.universal-property-pullbacks where
+
+open import foundation-core.universal-property-pullbacks public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universal-property-pullbacks public
-
 open import foundation.equivalences
 
 open import foundation-core.cones-over-cospans

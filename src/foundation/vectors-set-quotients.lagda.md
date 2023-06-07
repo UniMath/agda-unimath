@@ -2,17 +2,13 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module foundation.vectors-set-quotients where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.identity-types public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-products-set-quotients
@@ -35,6 +31,7 @@ open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.functions
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections

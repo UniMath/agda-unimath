@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.contractible-maps where
+
+open import foundation-core.contractible-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.contractible-maps public
-
 open import foundation.equivalences
 open import foundation.truncated-maps
 

@@ -44,8 +44,8 @@ def categorize_imports(block):
         elif 'open' in l:
             openStatements.append(l)
         else:
-            print('Error: unknown statement in details import block:\n\t' +
-                  str(fpath), file=sys.stderr)
+            raise ValueError('Unknown statement in details import block:\n\t' +
+                             str(fpath))
     if len(openStatements) > 0:
         print(
             'Warning: Please review the imports block, it contains non-import statements:\n\t' + str(fpath), file=sys.stderr)
@@ -119,6 +119,9 @@ def prettify_imports_block(block):
 
 if __name__ == '__main__':
 
+    FLAG_NO_IMPORT_BLOCK = 1
+    FLAG_IMPORT_BLOCK_HAS_PUBLIC = 2
+
     status = 0
 
     for fpath in utils.get_agda_files(sys.argv[1:]):
@@ -130,12 +133,19 @@ if __name__ == '__main__':
         if block is None:
             agdaBlockStart = utils.find_index(contents, '```agda')
             if len(agdaBlockStart) > 1:
-                print(
-                    'Warning: No Agda import block found inside <details> block in:\n\t' + str(fpath), file=sys.stderr)
-                status |= 1  # Flag
+                print('Warning: No Agda import block found inside <details> block in:\n\t' +
+                      str(fpath), file=sys.stderr)
+                status |= FLAG_NO_IMPORT_BLOCK
             continue
 
-        pretty_imports_block = prettify_imports_block(block)
+        public, nonpublic, openstatements = categorize_imports(block)
+        pretty_imports_block = prettify_imports_to_block(
+            public, nonpublic, openstatements)
+
+        if public:
+            print('Error: Import block contains public imports. These should be declared before the imports block:\n\t', str(
+                fpath), file=sys.stderr)
+            status |= FLAG_IMPORT_BLOCK_HAS_PUBLIC
 
         new_content = contents[:start] + \
             pretty_imports_block + \

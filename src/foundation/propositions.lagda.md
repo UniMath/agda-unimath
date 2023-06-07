@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.propositions where
+
+open import foundation-core.propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.propositions public
-
 open import foundation.contractible-types
 
 open import foundation-core.retractions

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.type-duality where
+
+open import foundation.type-duality public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.type-duality public
-
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

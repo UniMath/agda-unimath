@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.universal-property-truncation where
+
+open import foundation-core.universal-property-truncation public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universal-property-truncation public
-
 open import foundation.contractible-types
 open import foundation.function-extensionality
 open import foundation.identity-types

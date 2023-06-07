@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.pullbacks where
+
+open import foundation-core.pullbacks public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.pullbacks public
-
 open import foundation.commuting-cubes-of-maps
 open import foundation.descent-equivalences
 open import foundation.equivalences

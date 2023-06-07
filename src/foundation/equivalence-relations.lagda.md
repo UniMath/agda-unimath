@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.equivalence-relations where
+
+open import foundation-core.equivalence-relations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalence-relations public
-
 open import foundation.binary-relations
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
