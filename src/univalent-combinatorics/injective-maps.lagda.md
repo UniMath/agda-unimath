@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.injective-maps where
+
+open import foundation.injective-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.injective-maps public
-
 open import foundation.decidable-types
 open import foundation.identity-types
 open import foundation.universe-levels

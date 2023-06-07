@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --no-exact-split #-}
+
 module reflection.precategory-solver where
 ```
 

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.repetitions-of-values where
+
+open import foundation.repetitions-of-values public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.repetitions-of-values public
-
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 

@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --safe #-}
+
 module foundation-core.commuting-3-simplices-of-maps where
 ```
 

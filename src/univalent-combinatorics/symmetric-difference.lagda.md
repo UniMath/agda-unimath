@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.symmetric-difference where
+
+open import foundation.symmetric-difference public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.symmetric-difference public
-
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers

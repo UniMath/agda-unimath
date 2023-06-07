@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
+
 module type-theories.sections-dependent-type-theories where
 ```
 

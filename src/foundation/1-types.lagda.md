@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.1-types where
+
+open import foundation-core.1-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.1-types public
-
 open import foundation.subuniverses
 
 open import foundation-core.contractible-types

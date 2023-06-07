@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.decidable-dependent-function-types where
+
+open import elementary-number-theory.decidable-dependent-function-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.decidable-dependent-function-types public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types

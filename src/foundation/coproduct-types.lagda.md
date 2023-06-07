@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.coproduct-types where
+
+open import foundation-core.coproduct-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.coproduct-types public
-
 open import foundation.noncontractible-types
 open import foundation.subuniverses
 open import foundation.unit-type

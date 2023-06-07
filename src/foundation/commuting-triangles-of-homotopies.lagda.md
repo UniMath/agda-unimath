@@ -2,12 +2,14 @@
 
 ```agda
 module foundation.commuting-triangles-of-homotopies where
+
+open import foundation-core.commuting-triangles-of-homotopies public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.commuting-triangles-of-homotopies public
+
 ```
 
 </details>

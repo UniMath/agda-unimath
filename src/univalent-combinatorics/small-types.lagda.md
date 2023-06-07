@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.small-types where
+
+open import foundation.small-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.small-types public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types

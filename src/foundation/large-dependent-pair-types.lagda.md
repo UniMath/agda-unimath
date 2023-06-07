@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --safe #-}
+
 module foundation.large-dependent-pair-types where
 ```
 

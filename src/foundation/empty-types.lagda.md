@@ -2,13 +2,13 @@
 
 ```agda
 module foundation.empty-types where
+
+open import foundation-core.empty-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.empty-types public
-
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
