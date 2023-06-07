@@ -365,7 +365,7 @@ module _
     leq-left-ideal-Ring A
       ( left-ideal-subset-Ring A (subset-left-ideal-Ring A I))
       ( I)
-  forward-inclusion-is-reflective-left-ideal-subset-galois-connection-Ring I = 
+  forward-inclusion-is-reflective-left-ideal-subset-galois-connection-Ring I =
     is-left-ideal-generated-by-subset-left-ideal-subset-Ring A
       ( subset-left-ideal-Ring A I)
       ( I)
@@ -549,7 +549,9 @@ module _
 
 ### The operation `S ↦ (S)` preserves least upper bounds
 
-In [`ring-theory.joins-left-ideals-rings`](ring-theory.joins-left-ideals-rings.md) we will convert this fact to the fact that `S ↦ (S)` preserves joins.
+In
+[`ring-theory.joins-left-ideals-rings`](ring-theory.joins-left-ideals-rings.md)
+we will convert this fact to the fact that `S ↦ (S)` preserves joins.
 
 ```agda
 module _

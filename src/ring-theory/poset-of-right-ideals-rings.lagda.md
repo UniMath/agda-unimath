@@ -141,7 +141,8 @@ module _
     is-prop-sim-Large-Poset (right-ideal-Ring-Large-Poset R)
 
   eq-sim-right-ideal-Ring :
-    {l2 : Level} (I J : right-ideal-Ring l2 R) → sim-right-ideal-Ring I J → I ＝ J
+    {l2 : Level} (I J : right-ideal-Ring l2 R) →
+    sim-right-ideal-Ring I J → I ＝ J
   eq-sim-right-ideal-Ring = eq-sim-Large-Poset (right-ideal-Ring-Large-Poset R)
 ```
 
@@ -156,7 +157,8 @@ module _
 
   preserves-order-subset-right-ideal-Ring :
     {l1 l2 : Level} (I : right-ideal-Ring l1 R) (J : right-ideal-Ring l2 R) →
-    leq-right-ideal-Ring R I J → subset-right-ideal-Ring R I ⊆ subset-right-ideal-Ring R J
+    leq-right-ideal-Ring R I J →
+    subset-right-ideal-Ring R I ⊆ subset-right-ideal-Ring R J
   preserves-order-subset-right-ideal-Ring I J H = H
 
   subset-right-ideal-hom-large-poset-Ring :

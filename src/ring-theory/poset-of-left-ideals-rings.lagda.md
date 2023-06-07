@@ -154,7 +154,8 @@ module _
 
   preserves-order-subset-left-ideal-Ring :
     {l1 l2 : Level} (I : left-ideal-Ring l1 R) (J : left-ideal-Ring l2 R) →
-    leq-left-ideal-Ring R I J → subset-left-ideal-Ring R I ⊆ subset-left-ideal-Ring R J
+    leq-left-ideal-Ring R I J →
+    subset-left-ideal-Ring R I ⊆ subset-left-ideal-Ring R J
   preserves-order-subset-left-ideal-Ring I J H = H
 
   subset-left-ideal-hom-large-poset-Ring :

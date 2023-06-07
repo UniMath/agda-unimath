@@ -410,7 +410,7 @@ module _
   forward-inclusion-is-reflective-ideal-subset-galois-connection-Ring :
     {l2 : Level} (I : ideal-Ring l2 A) →
     leq-ideal-Ring A (ideal-subset-Ring A (subset-ideal-Ring A I)) I
-  forward-inclusion-is-reflective-ideal-subset-galois-connection-Ring I = 
+  forward-inclusion-is-reflective-ideal-subset-galois-connection-Ring I =
     is-ideal-generated-by-subset-ideal-subset-Ring A
       ( subset-ideal-Ring A I)
       ( I)
@@ -586,7 +586,8 @@ module _
 
 ### The operation `S ↦ (S)` preserves least upper bounds
 
-In [`ring-theory.joins-ideals-rings`](ring-theory.joins-ideals-rings.md) we will convert this fact to the fact that `S ↦ (S)` preserves joins.
+In [`ring-theory.joins-ideals-rings`](ring-theory.joins-ideals-rings.md) we will
+convert this fact to the fact that `S ↦ (S)` preserves joins.
 
 ```agda
 module _
