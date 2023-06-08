@@ -11,10 +11,8 @@ open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.type-arithmetic-dependent-pair-types
@@ -24,9 +22,7 @@ open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.reflective-subuniverses
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses
 
-open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
-open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -93,7 +89,7 @@ module _
                           ( f' a)
                           ( center (is-modal-B q))))) ∘e
                 ( equiv-up-join A (type-Prop Q) B))
-              λ _ → id-equiv)
+              ( λ _ → id-equiv))
             ( is-contr-total-path' f))
 
   reflective-subuniverse-closed-modality :
