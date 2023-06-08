@@ -41,35 +41,6 @@ powerset = subtype
 
 ## Properties
 
-```agda
-module _
-  {l1 : Level} {A : UU l1}
-  where
-
-  refl-⊆ : {l2 : Level} (P : subtype l2 A) → P ⊆ P
-  refl-⊆ P x = id
-
-  trans-⊆ :
-    {l2 l3 l4 : Level}
-    (P : subtype l2 A) (Q : subtype l3 A) (R : subtype l4 A) →
-    Q ⊆ R → P ⊆ Q → P ⊆ R
-  trans-⊆ P Q R H K x = H x ∘ K x
-
-  equiv-antisymmetric-⊆ :
-    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
-    (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
-  equiv-antisymmetric-⊆ P Q H K x =
-    equiv-prop
-      ( is-prop-is-in-subtype P x)
-      ( is-prop-is-in-subtype Q x)
-      ( H x)
-      ( K x)
-
-  antisymmetric-⊆ :
-    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
-  antisymmetric-⊆ P Q H K = eq-htpy (λ x → eq-iff (H x) (K x))
-```
-
 ### The powerset is a set
 
 ```agda

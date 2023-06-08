@@ -8,6 +8,7 @@ module foundation.truncation-modalities where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.truncations
 open import foundation.universe-levels
 
@@ -45,6 +46,5 @@ is-uniquely-eliminating-modality-trunc-modality :
   {l : Level} {k : 𝕋} →
   is-uniquely-eliminating-modality (unit-trunc-modality {l} {k})
 is-uniquely-eliminating-modality-trunc-modality {k = k} A P =
-  dependent-universal-property-trunc
-    ( λ z → (type-trunc k (P z) , is-trunc-type-trunc))
+  dependent-universal-property-trunc (trunc k ∘ P)
 ```
