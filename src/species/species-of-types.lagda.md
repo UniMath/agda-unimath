@@ -7,6 +7,7 @@ module species.species-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.univalence
@@ -26,6 +27,16 @@ A **species of types** is defined to be a map from a universe to a universe.
 ```agda
 species-types : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 species-types l1 l2 = UU l1 → UU l2
+```
+
+### The predicate that a species preserves cartesian products
+
+```agda
+preserves-product-species-types :
+  {l1 l2 : Level}
+  (S : species-types l1 l2) →
+  UU (lsuc l1 ⊔ l2)
+preserves-product-species-types {l1} S = (X Y : UU l1) → S (X × Y) ≃ (S X × S Y)
 ```
 
 ### Transport in species
