@@ -20,7 +20,6 @@ open import foundation.universe-levels
 
 open import group-theory.subgroups-abelian-groups
 
-open import ring-theory.ideals-semirings
 open import ring-theory.left-ideals-rings
 open import ring-theory.right-ideals-rings
 open import ring-theory.rings

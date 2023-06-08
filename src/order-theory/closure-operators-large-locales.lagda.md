@@ -27,8 +27,6 @@ open import order-theory.large-subpreorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.order-preserving-maps-large-posets
-open import order-theory.order-preserving-maps-large-preorders
-open import order-theory.top-elements-large-posets
 ```
 
 </details>

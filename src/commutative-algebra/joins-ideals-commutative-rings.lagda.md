@@ -18,12 +18,9 @@ open import commutative-algebra.subsets-commutative-rings
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
-
-open import order-theory.least-upper-bounds-large-posets
 
 open import ring-theory.joins-ideals-rings
 ```

@@ -7,28 +7,16 @@ module finite-algebra.finite-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import finite-algebra.finite-commutative-monoids
 open import finite-algebra.finite-groups
-open import finite-algebra.finite-monoids
-open import finite-algebra.finite-semigroups
 
-open import foundation.binary-embeddings
-open import foundation.binary-equivalences
-open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.central-elements-groups
-open import group-theory.commutative-monoids
 open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.monoids

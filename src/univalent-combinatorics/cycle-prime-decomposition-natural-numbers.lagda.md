@@ -30,7 +30,6 @@ open import group-theory.iterated-cartesian-products-concrete-groups
 open import lists.arrays
 open import lists.concatenation-lists
 open import lists.functoriality-lists
-open import lists.lists
 open import lists.permutation-lists
 open import lists.sort-by-insertion-lists
 

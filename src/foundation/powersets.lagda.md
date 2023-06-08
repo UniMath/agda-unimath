@@ -7,15 +7,9 @@ module foundation.powersets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.propositional-extensionality
 open import foundation.subtypes
 open import foundation.universe-levels
 
-open import foundation-core.equivalences
-open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.sets
 
 open import order-theory.large-posets

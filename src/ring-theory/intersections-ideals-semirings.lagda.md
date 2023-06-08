@@ -9,7 +9,6 @@ module ring-theory.intersections-ideals-semirings where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.intersections-subtypes
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import ring-theory.ideals-semirings

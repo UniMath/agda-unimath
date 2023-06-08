@@ -23,9 +23,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.interchange-law
 open import foundation.involutions
-open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations

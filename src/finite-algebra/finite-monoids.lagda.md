@@ -9,11 +9,9 @@ module finite-algebra.finite-monoids where
 ```agda
 open import finite-algebra.finite-semigroups
 
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 

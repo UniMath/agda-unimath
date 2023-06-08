@@ -7,7 +7,6 @@ module elementary-number-theory.fundamental-theorem-of-arithmetic where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.based-strong-induction-natural-numbers
 open import elementary-number-theory.bezouts-lemma-integers
 open import elementary-number-theory.decidable-total-order-natural-numbers

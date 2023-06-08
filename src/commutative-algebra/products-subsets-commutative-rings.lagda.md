@@ -10,9 +10,7 @@ module commutative-algebra.products-subsets-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
-open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositional-truncations
 open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels

@@ -12,22 +12,15 @@ open import finite-algebra.finite-rings
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
-open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-monoids
 
 open import ring-theory.homomorphisms-rings
-open import ring-theory.homomorphisms-semirings
-open import ring-theory.rings
 ```
 
 </details>

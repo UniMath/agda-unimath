@@ -25,8 +25,6 @@ open import lists.sorted-lists
 open import lists.sorting-algorithms-vectors
 
 open import order-theory.decidable-total-orders
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

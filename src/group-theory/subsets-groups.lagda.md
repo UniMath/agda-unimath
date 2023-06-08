@@ -8,9 +8,7 @@ module group-theory.subsets-groups where
 
 ```agda
 open import foundation.large-locale-of-subtypes
-open import foundation.propositional-extensionality
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.groups

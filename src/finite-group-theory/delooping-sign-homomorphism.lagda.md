@@ -63,7 +63,6 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 
 open import synthetic-homotopy-theory.loop-spaces

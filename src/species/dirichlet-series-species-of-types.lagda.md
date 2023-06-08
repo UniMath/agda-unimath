@@ -9,7 +9,6 @@ module species.dirichlet-series-species-of-types where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import species.species-of-types
