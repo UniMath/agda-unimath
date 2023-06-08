@@ -21,6 +21,7 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.order-preserving-maps-large-posets
 open import order-theory.order-preserving-maps-large-preorders
+open import order-theory.similarity-of-elements-large-posets
 ```
 
 </details>
@@ -136,6 +137,29 @@ module _
     radical-ideal-Commutative-Ring-Large-Preorder A
   antisymmetric-leq-Large-Poset radical-ideal-Commutative-Ring-Large-Poset =
     antisymmetric-leq-radical-ideal-Commutative-Ring A
+```
+
+### Similarity of radical ideals in a commutative ring
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Commutative-Ring l1)
+  (I : radical-ideal-Commutative-Ring l2 A)
+  (J : radical-ideal-Commutative-Ring l3 A)
+  where
+
+  sim-prop-radical-ideal-Commutative-Ring : Prop (l1 ⊔ l2 ⊔ l3)
+  sim-prop-radical-ideal-Commutative-Ring =
+    sim-prop-Large-Poset (radical-ideal-Commutative-Ring-Large-Poset A) I J
+
+  sim-radical-ideal-Commutative-Ring : UU (l1 ⊔ l2 ⊔ l3)
+  sim-radical-ideal-Commutative-Ring =
+    sim-Large-Poset (radical-ideal-Commutative-Ring-Large-Poset A) I J
+ 
+  is-prop-sim-radical-ideal-Commutative-Ring :
+    is-prop sim-radical-ideal-Commutative-Ring
+  is-prop-sim-radical-ideal-Commutative-Ring =
+    is-prop-sim-Large-Poset (radical-ideal-Commutative-Ring-Large-Poset A) I J
 ```
 
 ### The inclusion of radical ideals into ideals of a commutative ring

@@ -281,6 +281,79 @@ module _
         ( join-family-of-ideals-Commutative-Ring A
           ( λ α → ideal-radical-ideal-Commutative-Ring A (J α))))
 
+  backward-inclusion-distributive-product-join-family-of-radical-ideals-Commutative-Ring :
+    leq-radical-ideal-Commutative-Ring A
+      ( join-family-of-radical-ideals-Commutative-Ring A
+        ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
+      ( product-radical-ideal-Commutative-Ring A
+        ( I)
+        ( join-family-of-radical-ideals-Commutative-Ring A J))
+  backward-inclusion-distributive-product-join-family-of-radical-ideals-Commutative-Ring =
+    transitive-leq-radical-ideal-Commutative-Ring A
+      ( join-family-of-radical-ideals-Commutative-Ring A
+        ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
+      ( radical-of-ideal-Commutative-Ring A
+        ( join-family-of-ideals-Commutative-Ring A
+          ( λ α →
+            product-ideal-Commutative-Ring A
+              ( ideal-radical-ideal-Commutative-Ring A I)
+              ( ideal-radical-ideal-Commutative-Ring A (J α)))))
+      ( product-radical-ideal-Commutative-Ring A
+        ( I)
+        ( join-family-of-radical-ideals-Commutative-Ring A J))
+      ( transitive-leq-radical-ideal-Commutative-Ring A
+        ( radical-of-ideal-Commutative-Ring A
+          ( join-family-of-ideals-Commutative-Ring A
+            ( λ α →
+              product-ideal-Commutative-Ring A
+                ( ideal-radical-ideal-Commutative-Ring A I)
+                ( ideal-radical-ideal-Commutative-Ring A (J α)))))
+        ( radical-of-ideal-Commutative-Ring A
+          ( product-ideal-Commutative-Ring A
+            ( ideal-radical-ideal-Commutative-Ring A I)
+            ( join-family-of-ideals-Commutative-Ring A
+              ( λ α → ideal-radical-ideal-Commutative-Ring A (J α)))))
+        ( product-radical-ideal-Commutative-Ring A
+          ( I)
+          ( join-family-of-radical-ideals-Commutative-Ring A J))
+        ( backward-inclusion-right-radical-law-product-radical-ideal-Commutative-Ring
+          ( A)
+          ( I)
+          ( join-family-of-ideals-Commutative-Ring A
+            ( λ α → ideal-radical-ideal-Commutative-Ring A (J α))))
+        ( preserves-order-radical-of-ideal-Commutative-Ring A
+          ( join-family-of-ideals-Commutative-Ring A
+            ( λ α →
+              product-ideal-Commutative-Ring A
+                ( ideal-radical-ideal-Commutative-Ring A I)
+                ( ideal-radical-ideal-Commutative-Ring A (J α))))
+          ( product-ideal-Commutative-Ring A
+            ( ideal-radical-ideal-Commutative-Ring A I)
+            ( join-family-of-ideals-Commutative-Ring A
+              ( λ α → ideal-radical-ideal-Commutative-Ring A (J α))))
+          ( backward-inclusion-distributive-product-join-family-of-ideals-Commutative-Ring
+            ( A)
+            ( ideal-radical-ideal-Commutative-Ring A I)
+            ( λ α → ideal-radical-ideal-Commutative-Ring A (J α)))))
+      ( forward-inclusion-radical-law-join-family-of-radical-ideals-Commutative-Ring
+        ( A)
+        ( λ α →
+          product-ideal-Commutative-Ring A
+            ( ideal-radical-ideal-Commutative-Ring A I)
+            ( ideal-radical-ideal-Commutative-Ring A (J α))))
+
+  sim-distributive-product-join-family-of-radical-ideals-Commutative-Ring :
+    sim-radical-ideal-Commutative-Ring A
+      ( product-radical-ideal-Commutative-Ring A
+        ( I)
+        ( join-family-of-radical-ideals-Commutative-Ring A J))
+      ( join-family-of-radical-ideals-Commutative-Ring A
+        ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
+  pr1 sim-distributive-product-join-family-of-radical-ideals-Commutative-Ring =
+    forward-inclusion-distributive-product-join-family-of-radical-ideals-Commutative-Ring
+  pr2 sim-distributive-product-join-family-of-radical-ideals-Commutative-Ring =
+    backward-inclusion-distributive-product-join-family-of-radical-ideals-Commutative-Ring
+
   distributive-product-join-family-of-radical-ideals-Commutative-Ring :
     product-radical-ideal-Commutative-Ring A
       ( I)
@@ -294,14 +367,8 @@ module _
         ( join-family-of-radical-ideals-Commutative-Ring A J))
       ( join-family-of-radical-ideals-Commutative-Ring A
         ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
-      ( is-product-product-radical-ideal-Commutative-Ring A I
-        ( join-family-of-radical-ideals-Commutative-Ring A J)
-        ( join-family-of-radical-ideals-Commutative-Ring A
-          ( λ α → product-radical-ideal-Commutative-Ring A I (J α)))
-        ( λ r s p →
-          {!!}))
-      ( λ H →
-        {!!})
+      ( forward-inclusion-distributive-product-join-family-of-radical-ideals-Commutative-Ring)
+      ( backward-inclusion-distributive-product-join-family-of-radical-ideals-Commutative-Ring)
 ```
 
 ### Intersections of radical ideals distribute over joins
