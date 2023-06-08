@@ -17,9 +17,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.intersections-subtypes
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import ring-theory.ideals-rings

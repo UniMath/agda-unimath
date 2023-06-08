@@ -12,7 +12,6 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.intersections-subgroups-groups
-open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
 ```
 

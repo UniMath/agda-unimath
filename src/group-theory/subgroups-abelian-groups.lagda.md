@@ -26,7 +26,6 @@ open import group-theory.normal-subgroups
 open import group-theory.semigroups
 open import group-theory.subgroups
 open import group-theory.subsets-abelian-groups
-open import group-theory.subsets-groups
 
 open import order-theory.large-posets
 open import order-theory.large-preorders

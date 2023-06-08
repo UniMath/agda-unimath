@@ -15,14 +15,12 @@ open import commutative-algebra.products-subsets-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import lists.lists
 
-open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.products-ideals-rings
 ```
 

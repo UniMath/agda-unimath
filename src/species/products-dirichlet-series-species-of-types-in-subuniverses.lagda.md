@@ -18,13 +18,11 @@ open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.univalence
 open import foundation.universal-property-cartesian-product-types
 open import foundation.universe-levels
 
 open import species.dirichlet-products-species-of-types-in-subuniverses
 open import species.dirichlet-series-species-of-types-in-subuniverses
-open import species.products-dirichlet-series-species-of-types
 open import species.species-of-types-in-subuniverses
 ```
 

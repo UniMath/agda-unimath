@@ -16,8 +16,6 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.commutative-monoids
-open import group-theory.dependent-products-commutative-monoids
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups

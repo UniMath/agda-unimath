@@ -22,7 +22,6 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
-open import group-theory.dependent-products-commutative-monoids
 
 open import ring-theory.dependent-products-rings
 open import ring-theory.rings

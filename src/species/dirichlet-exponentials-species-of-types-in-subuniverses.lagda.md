@@ -8,8 +8,6 @@ module species.dirichlet-exponentials-species-of-types-in-subuniverses where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.coproduct-decompositions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
@@ -24,11 +22,9 @@ open import foundation.product-decompositions
 open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
-open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import species.cauchy-composition-species-of-types-in-subuniverses
 open import species.coproducts-species-of-types
 open import species.coproducts-species-of-types-in-subuniverses
 open import species.dirichlet-exponentials-species-of-types

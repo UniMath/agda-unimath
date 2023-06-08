@@ -8,7 +8,6 @@ module finite-algebra.finite-semigroups where
 
 ```agda
 open import foundation.decidable-propositions
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
