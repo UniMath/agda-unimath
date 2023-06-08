@@ -23,6 +23,21 @@ such that `x ≤ t` holds for every `x : P`
 
 ## Definition
 
+### The predicate on elements of posets of being a top element
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Poset α β)
+  where
+
+  is-top-element-Large-Poset :
+    {l1 : Level} → type-Large-Poset P l1 → UUω
+  is-top-element-Large-Poset x =
+    {l : Level} (y : type-Large-Poset P l) → leq-Large-Poset P y x
+```
+
+### The predicate on posets of having a top element
+
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
@@ -36,8 +51,7 @@ module _
       top-has-top-element-Large-Poset :
         type-Large-Poset P lzero
       is-top-element-top-has-top-element-Large-Poset :
-        {l1 : Level} (x : type-Large-Poset P l1) →
-        leq-Large-Poset P x top-has-top-element-Large-Poset
+        is-top-element-Large-Poset P top-has-top-element-Large-Poset
 
   open has-top-element-Large-Poset public
 ```

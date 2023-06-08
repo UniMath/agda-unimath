@@ -1,4 +1,4 @@
-# Ideals in semirings
+# Ideals of semirings
 
 ```agda
 module ring-theory.ideals-semirings where
