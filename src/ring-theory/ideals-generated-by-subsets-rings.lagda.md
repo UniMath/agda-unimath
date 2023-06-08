@@ -32,7 +32,7 @@ open import order-theory.reflective-galois-connections-large-posets
 
 open import ring-theory.ideals-rings
 open import ring-theory.left-ideals-rings
-open import ring-theory.posets-of-ideals-rings
+open import ring-theory.poset-of-ideals-rings
 open import ring-theory.right-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings

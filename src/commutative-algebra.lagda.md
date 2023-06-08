@@ -15,6 +15,7 @@ open import commutative-algebra.dependent-products-commutative-semirings public
 open import commutative-algebra.discrete-fields public
 open import commutative-algebra.eisenstein-integers public
 open import commutative-algebra.euclidean-domains public
+open import commutative-algebra.full-ideals-commutative-rings public
 open import commutative-algebra.function-commutative-rings public
 open import commutative-algebra.function-commutative-semirings public
 open import commutative-algebra.gaussian-integers public
@@ -25,7 +26,7 @@ open import commutative-algebra.ideals-commutative-semirings public
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings public
 open import commutative-algebra.integral-domains public
 open import commutative-algebra.intersections-ideals-commutative-rings public
-open import commutative-algebra.intersections-radical-ideals public
+open import commutative-algebra.intersections-radical-ideals-commutative-rings public
 open import commutative-algebra.invertible-elements-commutative-rings public
 open import commutative-algebra.isomorphisms-commutative-rings public
 open import commutative-algebra.joins-ideals-commutative-rings public

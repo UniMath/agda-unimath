@@ -14,7 +14,7 @@ open import foundation.universe-levels
 open import order-theory.greatest-lower-bounds-large-posets
 
 open import ring-theory.ideals-rings
-open import ring-theory.posets-of-ideals-rings
+open import ring-theory.poset-of-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```

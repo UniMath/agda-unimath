@@ -1,8 +1,6 @@
 # The Zariski locale
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module commutative-algebra.zariski-locale where
 ```
 
@@ -10,8 +8,10 @@ module commutative-algebra.zariski-locale where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.intersections-radical-ideals-commutative-rings
 open import commutative-algebra.joins-ideals-commutative-rings
 open import commutative-algebra.joins-radical-ideals-commutative-rings
+open import commutative-algebra.poset-of-radical-ideals-commutative-rings
 open import commutative-algebra.products-of-radical-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.radicals-of-ideals-commutative-rings
@@ -19,6 +19,9 @@ open import commutative-algebra.radicals-of-ideals-commutative-rings
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
+
+open import order-theory.large-frames
+open import order-theory.large-locales
 ```
 
 </details>
@@ -36,6 +39,35 @@ as the radical ideal `√ IJ` of the
 
 ## Definition
 
+### The Zariski frame
+
+```agda
+module _
+  {l1 : Level} (A : Commutative-Ring l1)
+  where
+
+  zariski-frame-Commutative-Ring :
+    Large-Frame (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) l1
+  large-poset-Large-Frame
+    zariski-frame-Commutative-Ring =
+    radical-ideal-Commutative-Ring-Large-Poset A
+  is-large-meet-semilattice-Large-Frame
+    zariski-frame-Commutative-Ring =
+    is-large-meet-semilattice-radical-ideal-Commutative-Ring A
+  is-large-suplattice-Large-Frame zariski-frame-Commutative-Ring =
+    is-large-suplattice-radical-ideal-Commutative-Ring A
+  distributive-meet-sup-Large-Frame zariski-frame-Commutative-Ring =
+    distributive-intersection-join-family-of-radical-ideals-Commutative-Ring A
+```
+
 ### The Zariski locale
 
-To do.
+```agda
+module _
+  {l1 : Level} (A : Commutative-Ring l1)
+  where
+
+  zariski-locale-Commutative-Ring :
+    Large-Locale (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3) l1
+  zariski-locale-Commutative-Ring = zariski-frame-Commutative-Ring A
+```

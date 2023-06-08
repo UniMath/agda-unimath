@@ -1,7 +1,7 @@
 # The poset of ideals in a ring
 
 ```agda
-module ring-theory.posets-of-ideals-rings where
+module ring-theory.poset-of-ideals-rings where
 ```
 
 <details><summary>Imports</summary>

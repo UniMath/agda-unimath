@@ -16,7 +16,7 @@ open import lists.lists
 
 open import ring-theory.ideals-generated-by-subsets-rings
 open import ring-theory.ideals-rings
-open import ring-theory.posets-of-ideals-rings
+open import ring-theory.poset-of-ideals-rings
 open import ring-theory.products-subsets-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings

@@ -15,6 +15,7 @@ open import ring-theory.congruence-relations-semirings public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
 open import ring-theory.division-rings public
+open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
 open import ring-theory.homomorphisms-rings public
@@ -41,9 +42,9 @@ open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
 open import ring-theory.opposite-rings public
+open import ring-theory.poset-of-ideals-rings public
 open import ring-theory.poset-of-left-ideals-rings public
 open import ring-theory.poset-of-right-ideals-rings public
-open import ring-theory.posets-of-ideals-rings public
 open import ring-theory.powers-of-elements-rings public
 open import ring-theory.powers-of-elements-semirings public
 open import ring-theory.precategory-of-rings public

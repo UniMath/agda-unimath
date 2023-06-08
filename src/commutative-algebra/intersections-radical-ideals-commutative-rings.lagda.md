@@ -1,15 +1,14 @@
 # Intersections of radical ideals
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
-module commutative-algebra.intersections-radical-ideals where
+module commutative-algebra.intersections-radical-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.full-ideals-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings
 open import commutative-algebra.intersections-ideals-commutative-rings
@@ -30,6 +29,7 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
+open import order-theory.large-meet-semilattices
 ```
 
 </details>
@@ -112,6 +112,42 @@ module _
       ( ideal-radical-ideal-Commutative-Ring A I)
       ( ideal-radical-ideal-Commutative-Ring A J)
       ( ideal-radical-ideal-Commutative-Ring A K)
+```
+
+### The large meet-semilattice of radical ideals in a commutative ring
+
+```agda
+module _
+  {l1 : Level} (A : Commutative-Ring l1)
+  where
+
+  has-meets-radical-ideal-Commutative-Ring :
+    has-meets-Large-Poset (radical-ideal-Commutative-Ring-Large-Poset A)
+  meet-has-meets-Large-Poset
+    has-meets-radical-ideal-Commutative-Ring =
+    intersection-radical-ideal-Commutative-Ring A
+  is-greatest-binary-lower-bound-meet-has-meets-Large-Poset
+    has-meets-radical-ideal-Commutative-Ring =
+    is-intersection-intersection-radical-ideal-Commutative-Ring A
+
+  is-large-meet-semilattice-radical-ideal-Commutative-Ring :
+    is-large-meet-semilattice-Large-Poset
+      ( radical-ideal-Commutative-Ring-Large-Poset A)
+  has-meets-is-large-meet-semilattice-Large-Poset
+    is-large-meet-semilattice-radical-ideal-Commutative-Ring =
+    has-meets-radical-ideal-Commutative-Ring
+  has-top-element-is-large-meet-semilattice-Large-Poset
+    is-large-meet-semilattice-radical-ideal-Commutative-Ring =
+    has-top-element-radical-ideal-Commutative-Ring A
+
+  radical-ideal-Commutative-Ring-Large-Meet-Semilattice :
+    Large-Meet-Semilattice (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+  large-poset-Large-Meet-Semilattice
+    radical-ideal-Commutative-Ring-Large-Meet-Semilattice =
+    radical-ideal-Commutative-Ring-Large-Poset A
+  is-large-meet-semilattice-Large-Meet-Semilattice
+    radical-ideal-Commutative-Ring-Large-Meet-Semilattice =
+    is-large-meet-semilattice-radical-ideal-Commutative-Ring
 ```
 
 ## Properties
