@@ -10,7 +10,6 @@ module commutative-algebra.intersections-radical-ideals-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.full-ideals-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.ideals-generated-by-subsets-commutative-rings
 open import commutative-algebra.intersections-ideals-commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings

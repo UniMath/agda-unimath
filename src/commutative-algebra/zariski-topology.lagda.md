@@ -12,7 +12,6 @@ open import commutative-algebra.prime-ideals-commutative-rings
 
 open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels

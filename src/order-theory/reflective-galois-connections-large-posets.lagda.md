@@ -8,12 +8,9 @@ module order-theory.reflective-galois-connections-large-posets where
 
 ```agda
 open import foundation.cartesian-product-types
-open import foundation.functions
-open import foundation.identity-types
 open import foundation.universe-levels
 
 open import order-theory.galois-connections-large-posets
-open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-posets
 open import order-theory.order-preserving-maps-large-posets
 ```

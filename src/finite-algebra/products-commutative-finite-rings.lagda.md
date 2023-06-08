@@ -14,7 +14,6 @@ open import finite-algebra.commutative-finite-rings
 open import finite-algebra.products-finite-rings
 
 open import foundation.dependent-pair-types
-open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -23,10 +22,6 @@ open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 
-open import ring-theory.products-rings
-open import ring-theory.rings
-
-open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.finite-types
 ```
 

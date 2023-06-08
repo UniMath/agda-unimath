@@ -12,7 +12,6 @@ open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -20,7 +19,6 @@ open import foundation.universe-levels
 open import lists.concatenation-lists
 
 open import ring-theory.ideals-generated-by-subsets-rings
-open import ring-theory.subsets-rings
 ```
 
 </details>

@@ -13,17 +13,13 @@ open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.functions
 open import foundation.identity-types
-open import foundation.intersections-subtypes
-open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.full-subgroups
 open import group-theory.groups
-open import group-theory.intersections-subgroups-groups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 

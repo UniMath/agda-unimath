@@ -18,7 +18,6 @@ open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.logical-equivalences
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.truncated-types

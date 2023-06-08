@@ -10,33 +10,16 @@ module finite-algebra.finite-groups where
 open import finite-algebra.finite-monoids
 open import finite-algebra.finite-semigroups
 
-open import foundation.binary-embeddings
-open import foundation.binary-equivalences
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functions
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
-open import foundation.involutions
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.monoids
-open import group-theory.products-of-elements-monoids
 open import group-theory.semigroups
 
-open import lists.concatenation-lists
-open import lists.lists
-
 open import structured-types.pointed-types
-open import structured-types.pointed-types-equipped-with-automorphisms
 
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.dependent-function-types

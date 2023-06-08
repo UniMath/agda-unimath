@@ -15,7 +15,6 @@ open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.subtypes
 open import foundation.unions-subtypes
 open import foundation.universe-levels
@@ -31,9 +30,7 @@ open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.reflective-galois-connections-large-posets
 
 open import ring-theory.ideals-rings
-open import ring-theory.left-ideals-rings
 open import ring-theory.poset-of-ideals-rings
-open import ring-theory.right-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```

@@ -9,20 +9,14 @@ module commutative-algebra.nilradical-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
-open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.prime-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
-open import elementary-number-theory.natural-numbers
-
 open import foundation.dependent-pair-types
-open import foundation.disjunction
 open import foundation.existential-quantification
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositional-truncations
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import ring-theory.nilpotent-elements-rings

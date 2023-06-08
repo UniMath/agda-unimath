@@ -10,7 +10,6 @@ module lists.sort-by-insertion-lists where
 open import finite-group-theory.permutations-standard-finite-types
 
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels
 

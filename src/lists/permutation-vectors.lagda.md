@@ -10,11 +10,9 @@ module lists.permutation-vectors where
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
-open import finite-group-theory.transpositions
 open import finite-group-theory.transpositions-standard-finite-types
 
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -23,7 +21,6 @@ open import foundation.functions
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import linear-algebra.functoriality-vectors
@@ -32,7 +29,6 @@ open import linear-algebra.vectors
 open import lists.arrays
 open import lists.lists
 
-open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.standard-finite-types
 ```
 

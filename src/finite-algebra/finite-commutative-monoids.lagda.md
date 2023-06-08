@@ -8,12 +8,8 @@ module finite-algebra.finite-commutative-monoids where
 
 ```agda
 open import finite-algebra.finite-monoids
-open import finite-algebra.finite-semigroups
 
-open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.interchange-law
-open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels

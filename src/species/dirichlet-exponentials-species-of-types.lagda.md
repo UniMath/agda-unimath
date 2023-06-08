@@ -20,9 +20,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pi-decompositions
 open import foundation.product-decompositions
-open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 

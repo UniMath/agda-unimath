@@ -14,8 +14,6 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.powersets
-open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle

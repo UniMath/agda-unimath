@@ -15,9 +15,7 @@ open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.full-subtypes
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 

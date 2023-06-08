@@ -12,8 +12,6 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
-open import lists.lists
-
 open import ring-theory.poset-of-right-ideals-rings
 open import ring-theory.products-subsets-rings
 open import ring-theory.right-ideals-generated-by-subsets-rings

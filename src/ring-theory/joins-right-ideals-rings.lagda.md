@@ -8,20 +8,15 @@ module ring-theory.joins-right-ideals-rings where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.powersets
-open import foundation.propositional-truncations
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
-open import order-theory.galois-connections-large-posets
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.similarity-of-elements-large-posets
 
 open import ring-theory.poset-of-right-ideals-rings
-open import ring-theory.products-right-ideals-rings
 open import ring-theory.right-ideals-generated-by-subsets-rings
 open import ring-theory.right-ideals-rings
 open import ring-theory.rings

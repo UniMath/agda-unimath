@@ -9,14 +9,9 @@ module species.dirichlet-series-species-of-types-in-subuniverses where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import species.dirichlet-series-species-of-types
 open import species.species-of-types-in-subuniverses
 ```
 

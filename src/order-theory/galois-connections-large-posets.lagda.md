@@ -7,7 +7,6 @@ module order-theory.galois-connections-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
 open import foundation.logical-equivalences
 open import foundation.universe-levels
 

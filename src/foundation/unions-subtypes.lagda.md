@@ -13,8 +13,9 @@ open import foundation.disjunction
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
 open import foundation.propositional-truncations
-open import foundation.subtypes
 open import foundation.universe-levels
+
+open import foundation-core.subtypes
 
 open import order-theory.least-upper-bounds-large-posets
 ```

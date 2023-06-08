@@ -14,7 +14,6 @@ open import foundation.0-connected-types
 open import foundation.1-types
 open import foundation.connected-components-universes
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
