@@ -7,16 +7,26 @@ module orthogonal-factorization-systems.closed-modalities where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.functoriality-dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.propositions
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.reflective-subuniverses
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.joins-of-types
+open import synthetic-homotopy-theory.pushouts
 ```
 
 </details>
@@ -24,7 +34,7 @@ open import synthetic-homotopy-theory.joins-of-types
 ## Idea
 
 Given any proposition `Q`, the
-[join](synthetic-homotopy-theory.joins-of-types.md) operation `Q *_` defines a
+[join](synthetic-homotopy-theory.joins-of-types.md) operation `_* Q` defines a
 [higher modality](orthogonal-factorization-systems.higher-modalities.md). We
 call these the **closed modalities**.
 
@@ -33,16 +43,16 @@ call these the **closed modalities**.
 ```agda
 operator-closed-modality :
   (l : Level) {lQ : Level} (Q : Prop lQ) → operator-modality l (l ⊔ lQ)
-operator-closed-modality l Q A = type-Prop Q * A
+operator-closed-modality l Q A = A * type-Prop Q
 
 unit-closed-modality :
   {l lQ : Level} (Q : Prop lQ) → unit-modality (operator-closed-modality l Q)
-unit-closed-modality Q {A} = inr-join (type-Prop Q) A
+unit-closed-modality Q {A} = inl-join A (type-Prop Q)
 
 is-closed-modal :
   {l lQ : Level} (Q : Prop lQ) → UU l → Prop (l ⊔ lQ)
-pr1 (is-closed-modal Q A) = type-Prop Q → is-contr A
-pr2 (is-closed-modal Q A) = is-prop-function-type is-property-is-contr
+pr1 (is-closed-modal Q B) = type-Prop Q → is-contr B
+pr2 (is-closed-modal Q B) = is-prop-function-type is-property-is-contr
 ```
 
 ## Properties
@@ -60,12 +70,31 @@ module _
       ( unit-closed-modality Q)
       ( is-closed-modal Q)
   pr1 is-reflective-subuniverse-closed-modality A q =
-    left-zero-law-join-is-contr
-      ( type-Prop Q)
+    right-zero-law-join-is-contr
       ( A)
+      ( type-Prop Q)
       ( is-proof-irrelevant-is-prop (is-prop-type-Prop Q) q)
-  pr2 is-reflective-subuniverse-closed-modality X x Y =
-    {! !}
+  pr2 is-reflective-subuniverse-closed-modality B is-modal-B A =
+      is-equiv-is-contr-map
+        ( λ f →
+          is-contr-equiv
+            ( Σ (A → B) (_＝ f))
+            ( equiv-Σ
+              ( _＝ f)
+              ( right-unit-law-Σ-is-contr
+                ( λ f' →
+                  is-contr-Σ
+                    ( is-contr-Π is-modal-B)
+                    ( center ∘ is-modal-B)
+                    ( is-contr-Π
+                      ( λ (a , q) →
+                        is-prop-is-contr
+                          ( is-modal-B q)
+                          ( f' a)
+                          ( center (is-modal-B q))))) ∘e
+                ( equiv-up-join A (type-Prop Q) B))
+              λ _ → id-equiv)
+            ( is-contr-total-path' f))
 
   reflective-subuniverse-closed-modality :
     reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)

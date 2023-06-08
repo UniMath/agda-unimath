@@ -50,10 +50,14 @@ cocone-join :
 cocone-join A B = cocone-pushout pr1 pr2
 
 up-join :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  ( {l : Level} → universal-property-pushout l
-    ( pr1 {A = A} {B = λ x → B}) pr2 (cocone-join A B))
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l : Level} → universal-property-pushout l pr1 pr2 (cocone-join A B)
 up-join A B = up-pushout pr1 pr2
+
+equiv-up-join :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l : Level} (X : UU l) → (A * B → X) ≃ cocone pr1 pr2 X
+equiv-up-join A B = equiv-up-pushout pr1 pr2
 
 inl-join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → A * B
