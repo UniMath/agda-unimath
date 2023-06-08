@@ -10,10 +10,10 @@ module foundation.intersections-subtypes where
 open import foundation.conjunction
 open import foundation.decidable-subtypes
 open import foundation.large-locale-of-subtypes
+open import foundation.universe-levels
 
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

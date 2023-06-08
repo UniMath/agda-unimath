@@ -8,7 +8,9 @@ module foundation.0-connected-types where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.fiber-inclusions
+open import foundation.functions
 open import foundation.functoriality-set-truncation
 open import foundation.inhabited-types
 open import foundation.mere-equality
@@ -18,18 +20,16 @@ open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

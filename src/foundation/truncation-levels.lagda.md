@@ -11,7 +11,8 @@ open import foundation-core.truncation-levels public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation-core.functions
+open import foundation.functions
+
 open import foundation-core.identity-types
 ```
 

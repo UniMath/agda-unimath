@@ -10,13 +10,13 @@ module foundation.projective-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.connected-maps
+open import foundation.functions
 open import foundation.surjective-maps
 open import foundation.truncation-levels
+open import foundation.universe-levels
 
-open import foundation-core.functions
 open import foundation-core.sets
 open import foundation-core.truncated-types
-open import foundation-core.universe-levels
 ```
 
 </details>

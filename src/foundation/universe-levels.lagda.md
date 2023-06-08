@@ -5,13 +5,14 @@
 
 module foundation.universe-levels where
 
-open import foundation-core.universe-levels public
+open import Agda.Primitive
+  using (Level ; lzero ; lsuc ; _⊔_)
+  renaming (Set to UU ; Setω to UUω)
+  public
 ```
 
-<details><summary>Imports</summary>
+## Idea
 
-```agda
-
-```
-
-</details>
+We import Agda's built in mechanism of universe levels. The universes are called
+`UU`, which stands for _univalent universe_, although we will not immediately
+assume that universes are univalent.

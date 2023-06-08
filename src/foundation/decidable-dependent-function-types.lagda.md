@@ -12,10 +12,10 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.maybe
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-maybe
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.equivalences
-open import foundation-core.universe-levels
 ```
 
 </details>

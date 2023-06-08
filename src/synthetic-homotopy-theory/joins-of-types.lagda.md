@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
@@ -21,8 +22,6 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.functions
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts

@@ -35,27 +35,42 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
-and immediately after this, any option pragmas, then the module declaration then
-public imports, if any, should be declared. E.g.
+Directly after the header, include an Agda code block containing
+
+- any option pragmas,
+- the main module declaration,
+- any public import statements
+
+in this order. E.g.
 
 ````md
 ```agda
-{-# OPTIONS --safe #-}
+{-# OPTIONS ... #-}
 
-module foundation.dependent-pair-types where
+module ... where
 
-open import foundation-core.dependent-pair-types public
+open import ... public
 ```
 ````
 
 ### Imports block
 
-After the module declaration, include an Agda code block of all module imports
-starting with `<details><summary>Imports</summary>` and ending with
-`</details>`. This Agda block should only contain module imports. Do not import
-further modules later in the file. On the documentation pages, this Agda imports
-block will be hidden by default, but it can be revealed by clicking on the
-_Imports_ link.
+After the module declaration, include an Agda code block of all non-public
+module imports starting with `<details><summary>Imports</summary>` and ending
+with `</details>`. This block should only contain module imports and there
+should have no further import statements after it. In the rendered markdown, the
+contents of this block will be hidden by default, but can be revealed by
+clicking on _Imports_.
+
+````md
+<details><summary>Imports</summary>
+
+```agda
+open import ...
+```
+
+</details>
+````
 
 ### Sections and headings
 
@@ -65,10 +80,10 @@ subsubsections. Use `##` headings for the main sections of the file and reserve
 `## Definitions`, and `## Properties`. Occasionally, you might include a section
 like `## Examples` or `## Theorem`, based on the purpose of the file.
 
-Ideally, the first section of a file explains the idea, the second section
-proceeds to give the main definition that is the focus of the file, then the
-third section proceeds possibly with examples or by deriving basic properties of
-the defined concept.
+Ideally, depending on the purpose of the file, the first section explains the
+main idea, the second section proceeds to give the main definition that is the
+focus of the file, then the third section proceeds possibly with examples or by
+deriving basic properties of the defined concept.
 
 #### Subsections
 
@@ -105,6 +120,6 @@ contents of the file.
 - An instructive example of a file with the expected structure is
   [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
 
-Please note that some conventions above are enforced by our `pre-commit` hooks.
-You can read more about them in our
+Please note that some of the conventions above are enforced by our `pre-commit`
+hooks. You can read more about them in our
 [installation guide](HOWTO-INSTALL.md#pre-commit-hooks).

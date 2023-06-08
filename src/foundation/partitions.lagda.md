@@ -8,10 +8,13 @@ module foundation.partitions where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
+open import foundation.functions
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
@@ -20,22 +23,19 @@ open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.sigma-decompositions
 open import foundation.small-types
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>

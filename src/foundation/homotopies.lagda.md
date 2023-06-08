@@ -9,18 +9,18 @@ open import foundation-core.homotopies public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.functions
+open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.identity-systems
 open import foundation-core.sections
-open import foundation-core.universe-levels
 ```
 
 </details>

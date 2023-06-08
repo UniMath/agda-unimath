@@ -10,13 +10,13 @@ module foundation.complements-subtypes where
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.full-subtypes
+open import foundation.functions
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unions-subtypes
+open import foundation.universe-levels
 
-open import foundation-core.functions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

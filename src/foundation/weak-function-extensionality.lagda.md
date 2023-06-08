@@ -9,18 +9,18 @@ module foundation.weak-function-extensionality where
 ```agda
 open import foundation.decidable-equality
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

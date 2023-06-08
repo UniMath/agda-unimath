@@ -9,9 +9,10 @@ open import foundation-core.injective-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import foundation-core.empty-types
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>
