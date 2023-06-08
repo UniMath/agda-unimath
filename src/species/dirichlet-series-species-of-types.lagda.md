@@ -1,7 +1,7 @@
-# Dirichlet series of species of types in subuniverses
+# Dirichlet series of species of types
 
 ```agda
-module species.dirichlet-series-species-of-types-in-subuniverses where
+module species.dirichlet-series-species-of-types where
 ```
 
 <details><summary>Imports</summary>
@@ -9,15 +9,10 @@ module species.dirichlet-series-species-of-types-in-subuniverses where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
-open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import species.dirichlet-series-species-of-types
-open import species.species-of-types-in-subuniverses
+open import species.species-of-types
 ```
 
 </details>
@@ -68,17 +63,13 @@ series are satisfied.
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 l6 : Level}
-  (P : subuniverse l1 l2)
-  (Q : subuniverse l3 l4)
-  (C1 : is-closed-under-products-subuniverse P)
-  (H : species-subuniverse-domain l5 P)
-  (C2 : preserves-product-species-subuniverse-domain P C1 H)
-  (T : species-subuniverse P Q)
-  (S : UU l6)
+  {l1 l2 l3 l4 : Level}
+  (H : species-types l1 l2)
+  (C1 : preserves-product-species-types H)
+  (T : species-types l1 l3)
+  (S : UU l4)
   where
 
-  dirichlet-series-species-subuniverse : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l5 ⊔ l6)
-  dirichlet-series-species-subuniverse =
-    Σ (type-subuniverse P) (λ X → inclusion-subuniverse Q (T X) × (S → H (X)))
+  dirichlet-series-species-types : UU (lsuc l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  dirichlet-series-species-types = Σ (UU l1) (λ X → (T X) × (S → H (X)))
 ```
