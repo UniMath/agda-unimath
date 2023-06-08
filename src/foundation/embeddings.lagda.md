@@ -10,24 +10,24 @@ open import foundation-core.embeddings public
 
 ```agda
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.truncated-maps
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-over-cospans
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.sections
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

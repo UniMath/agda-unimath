@@ -8,9 +8,8 @@ module foundation.binary-operations-unordered-pairs-of-types where
 
 ```agda
 open import foundation.products-unordered-pairs-of-types
+open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import foundation-core.universe-levels
 ```
 
 </details>

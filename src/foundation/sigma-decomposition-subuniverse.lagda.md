@@ -7,15 +7,15 @@ module foundation.sigma-decomposition-subuniverse where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.relaxed-sigma-decompositions
 open import foundation.subuniverses
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

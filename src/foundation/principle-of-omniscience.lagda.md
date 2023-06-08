@@ -9,10 +9,10 @@ module foundation.principle-of-omniscience where
 ```agda
 open import foundation.decidable-subtypes
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

@@ -9,11 +9,11 @@ module foundation.category-of-sets where
 ```agda
 open import category-theory.large-precategories
 
+open import foundation.functions
 open import foundation.sets
+open import foundation.universe-levels
 
-open import foundation-core.functions
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>

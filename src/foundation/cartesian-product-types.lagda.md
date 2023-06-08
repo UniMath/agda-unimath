@@ -10,8 +10,7 @@ open import foundation-core.cartesian-product-types public
 
 ```agda
 open import foundation.subuniverses
-
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>

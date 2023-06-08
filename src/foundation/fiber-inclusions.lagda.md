@@ -7,19 +7,21 @@ module foundation.fiber-inclusions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-maps
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
+open import foundation.faithful-maps
 open import foundation.fibers-of-maps
 open import foundation.identity-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.0-maps
 open import foundation-core.1-types
-open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.faithful-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
@@ -29,8 +31,6 @@ open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>

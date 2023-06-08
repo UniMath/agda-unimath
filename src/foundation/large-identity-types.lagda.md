@@ -9,7 +9,7 @@ module foundation.large-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>
