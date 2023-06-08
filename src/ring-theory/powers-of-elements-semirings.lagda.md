@@ -8,6 +8,7 @@ module ring-theory.powers-of-elements-semirings where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
@@ -36,6 +37,22 @@ power-Semiring R (succ-ℕ (succ-ℕ n)) x =
 
 ## Properties
 
+### `1ⁿ ＝ 1`
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-one-Semiring :
+    (n : ℕ) →
+    power-Semiring R n (one-Semiring R) ＝ one-Semiring R
+  power-one-Semiring zero-ℕ = refl
+  power-one-Semiring (succ-ℕ zero-ℕ) = refl
+  power-one-Semiring (succ-ℕ (succ-ℕ n)) =
+    right-unit-law-mul-Semiring R _ ∙ power-one-Semiring (succ-ℕ n)
+```
+
 ### `xⁿ⁺¹ = xⁿx`
 
 ```agda
@@ -48,6 +65,23 @@ module _
     power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R (power-Semiring R n x) x
   power-succ-Semiring zero-ℕ x = inv (left-unit-law-mul-Semiring R x)
   power-succ-Semiring (succ-ℕ n) x = refl
+```
+
+### `xⁿ⁺¹ ＝ xxⁿ`
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-succ-Semiring' :
+    (n : ℕ) (x : type-Semiring R) →
+    power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R x (power-Semiring R n x)
+  power-succ-Semiring' zero-ℕ x = inv (right-unit-law-mul-Semiring R x)
+  power-succ-Semiring' (succ-ℕ zero-ℕ) x = refl
+  power-succ-Semiring' (succ-ℕ (succ-ℕ n)) x =
+    ( ap (mul-Semiring' R x) (power-succ-Semiring' (succ-ℕ n) x)) ∙
+    ( associative-mul-Semiring R x (power-Semiring R (succ-ℕ n) x) x)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -221,4 +255,29 @@ module _
             ( ap-mul-Semiring R
               ( inv (power-succ-Semiring R n x))
               ( inv (power-succ-Semiring R n y)))))))
+```
+
+### Powers by products of natural numbers are iterated powers
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  power-mul-Semiring :
+    (m n : ℕ) {x : type-Semiring R} →
+    power-Semiring R (m *ℕ n) x ＝
+    power-Semiring R n (power-Semiring R m x)
+  power-mul-Semiring zero-ℕ n {x} =
+    inv (power-one-Semiring R n)
+  power-mul-Semiring (succ-ℕ zero-ℕ) n {x} =
+    ap (λ t → power-Semiring R t x) (left-unit-law-add-ℕ n)
+  power-mul-Semiring (succ-ℕ (succ-ℕ m)) n {x} =
+    ( ( power-add-Semiring R (succ-ℕ m *ℕ n) n) ∙
+      ( ap
+        ( mul-Semiring' R (power-Semiring R n x))
+        ( power-mul-Semiring (succ-ℕ m) n))) ∙
+    ( inv
+      ( distributive-power-mul-Semiring R n
+        ( commute-powers-Semiring' R (succ-ℕ m) refl)))
 ```

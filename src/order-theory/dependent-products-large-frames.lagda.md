@@ -32,8 +32,8 @@ Given a family `L : I → Large-Frame α β` of large frames indexed by a type
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  {l1 : Level} {I : UU l1} (L : I → Large-Frame α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  {l1 : Level} {I : UU l1} (L : I → Large-Frame α β γ)
   where
 
   large-poset-Π-Large-Frame :
@@ -54,12 +54,12 @@ module _
       ( λ i → has-meets-Large-Frame (L i))
 
   large-suplattice-Π-Large-Frame :
-    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   large-suplattice-Π-Large-Frame =
     Π-Large-Suplattice (λ i → large-suplattice-Large-Frame (L i))
 
   is-large-suplattice-Π-Large-Frame :
-    is-large-suplattice-Large-Poset large-poset-Π-Large-Frame
+    is-large-suplattice-Large-Poset γ large-poset-Π-Large-Frame
   is-large-suplattice-Π-Large-Frame =
     is-large-suplattice-Π-Large-Suplattice
       ( λ i → large-suplattice-Large-Frame (L i))
@@ -155,9 +155,9 @@ module _
 
   sup-Π-Large-Frame :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Frame l3) →
-    type-Π-Large-Frame (l2 ⊔ l3)
+    type-Π-Large-Frame (γ ⊔ l2 ⊔ l3)
   sup-Π-Large-Frame =
-    sup-is-large-suplattice-Large-Poset
+    sup-is-large-suplattice-Large-Poset γ
       ( large-poset-Π-Large-Frame)
       ( is-large-suplattice-Π-Large-Frame)
 
@@ -168,7 +168,7 @@ module _
       ( x)
       ( sup-Π-Large-Frame x)
   is-least-upper-bound-sup-Π-Large-Frame =
-    is-least-upper-bound-sup-is-large-suplattice-Large-Poset
+    is-least-upper-bound-sup-is-large-suplattice-Large-Poset γ
       ( large-poset-Π-Large-Frame)
       ( is-large-suplattice-Π-Large-Frame)
 
@@ -182,7 +182,7 @@ module _
     eq-htpy
       ( λ i → distributive-meet-sup-Large-Frame (L i) (x i) (λ j → y j i))
 
-  Π-Large-Frame : Large-Frame (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  Π-Large-Frame : Large-Frame (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   large-poset-Large-Frame Π-Large-Frame =
     large-poset-Π-Large-Frame
   is-large-meet-semilattice-Large-Frame Π-Large-Frame =

@@ -30,8 +30,8 @@ products of large suplattices are again large suplattices.
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  {l1 : Level} {I : UU l1} (L : I → Large-Suplattice α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  {l1 : Level} {I : UU l1} (L : I → Large-Suplattice α β γ)
   where
 
   large-poset-Π-Large-Suplattice :
@@ -40,7 +40,7 @@ module _
     Π-Large-Poset (λ i → large-poset-Large-Suplattice (L i))
 
   is-large-suplattice-Π-Large-Suplattice :
-    is-large-suplattice-Large-Poset large-poset-Π-Large-Suplattice
+    is-large-suplattice-Large-Poset γ large-poset-Π-Large-Suplattice
   sup-has-least-upper-bound-family-of-elements-Large-Poset
     ( is-large-suplattice-Π-Large-Suplattice {l2} {l3} {J} a) i =
     sup-Large-Suplattice (L i) (λ j → a j i)
@@ -54,7 +54,7 @@ module _
         is-least-upper-bound-sup-Large-Suplattice (L i) (λ j → a j i))
 
   Π-Large-Suplattice :
-    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   large-poset-Large-Suplattice Π-Large-Suplattice =
     large-poset-Π-Large-Suplattice
   is-large-suplattice-Large-Suplattice Π-Large-Suplattice =
@@ -119,7 +119,7 @@ module _
 
   sup-Π-Large-Suplattice :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Suplattice l3) →
-    type-Π-Large-Suplattice (l2 ⊔ l3)
+    type-Π-Large-Suplattice (γ ⊔ l2 ⊔ l3)
   sup-Π-Large-Suplattice =
     sup-Large-Suplattice Π-Large-Suplattice
 

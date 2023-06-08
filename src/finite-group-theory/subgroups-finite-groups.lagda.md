@@ -25,6 +25,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
+open import group-theory.subsets-groups
 
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types

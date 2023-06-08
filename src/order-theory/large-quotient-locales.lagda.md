@@ -38,20 +38,22 @@ A **large quotient locale** of a [large locale](order-theory.large-locales.md)
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} (γ : Level → Level)
-  (L : Large-Locale α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (δ : Level → Level)
+  (L : Large-Locale α β γ)
   where
 
   Large-Quotient-Locale : UUω
-  Large-Quotient-Locale = Large-Subframe γ L
+  Large-Quotient-Locale = Large-Subframe δ L
 
 module _
-  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (L : Large-Locale α β) (Q : Large-Quotient-Locale γ L)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  {δ : Level → Level}
+  (L : Large-Locale α β γ) (Q : Large-Quotient-Locale δ L)
   where
 
   large-subposet-Large-Quotient-Locale :
-    Large-Subposet γ (large-poset-Large-Locale L)
+    Large-Subposet δ (large-poset-Large-Locale L)
   large-subposet-Large-Quotient-Locale =
     large-subposet-Large-Subframe Q
 
@@ -77,26 +79,26 @@ module _
     is-closed-under-sup-Large-Subframe Q
 
   large-poset-Large-Quotient-Locale :
-    Large-Poset (λ l → α l ⊔ γ l) β
+    Large-Poset (λ l → α l ⊔ δ l) β
   large-poset-Large-Quotient-Locale =
     large-poset-Large-Subframe L Q
 
   large-subpreorder-Large-Quotient-Locale :
-    Large-Subpreorder γ (large-preorder-Large-Locale L)
+    Large-Subpreorder δ (large-preorder-Large-Locale L)
   large-subpreorder-Large-Quotient-Locale =
     large-subpreorder-Large-Subframe L Q
 
   large-preorder-Large-Quotient-Locale :
-    Large-Preorder (λ l → α l ⊔ γ l) (λ l1 l2 → β l1 l2)
+    Large-Preorder (λ l → α l ⊔ δ l) (λ l1 l2 → β l1 l2)
   large-preorder-Large-Quotient-Locale =
     large-preorder-Large-Subframe L Q
 
   is-in-Large-Quotient-Locale :
-    {l1 : Level} → type-Large-Locale L l1 → UU (γ l1)
+    {l1 : Level} → type-Large-Locale L l1 → UU (δ l1)
   is-in-Large-Quotient-Locale =
     is-in-Large-Subframe L Q
 
-  type-Large-Quotient-Locale : (l1 : Level) → UU (α l1 ⊔ γ l1)
+  type-Large-Quotient-Locale : (l1 : Level) → UU (α l1 ⊔ δ l1)
   type-Large-Quotient-Locale =
     type-Large-Subframe L Q
 
@@ -211,13 +213,13 @@ module _
     is-large-meet-semilattice-Large-Subframe L Q
 
   large-meet-semilattice-Large-Quotient-Locale :
-    Large-Meet-Semilattice (λ l → α l ⊔ γ l) β
+    Large-Meet-Semilattice (λ l → α l ⊔ δ l) β
   large-meet-semilattice-Large-Quotient-Locale =
     large-meet-semilattice-Large-Subframe L Q
 
   sup-Large-Quotient-Locale :
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Quotient-Locale l2) →
-    type-Large-Quotient-Locale (l1 ⊔ l2)
+    type-Large-Quotient-Locale (γ ⊔ l1 ⊔ l2)
   sup-Large-Quotient-Locale =
     sup-Large-Subframe L Q
 
@@ -231,12 +233,12 @@ module _
     is-least-upper-bound-sup-Large-Subframe L Q
 
   is-large-suplattice-Large-Quotient-Locale :
-    is-large-suplattice-Large-Poset (large-poset-Large-Quotient-Locale)
+    is-large-suplattice-Large-Poset γ (large-poset-Large-Quotient-Locale)
   is-large-suplattice-Large-Quotient-Locale =
     is-large-suplattice-Large-Subframe L Q
 
   large-suplattice-Large-Quotient-Locale :
-    Large-Suplattice (λ l → α l ⊔ γ l) β
+    Large-Suplattice (λ l → α l ⊔ δ l) β γ
   large-suplattice-Large-Quotient-Locale =
     large-suplattice-Large-Subframe L Q
 
@@ -249,7 +251,7 @@ module _
     distributive-meet-sup-Large-Subframe L Q
 
   large-locale-Large-Quotient-Locale :
-    Large-Locale (λ l → α l ⊔ γ l) β
+    Large-Locale (λ l → α l ⊔ δ l) β γ
   large-locale-Large-Quotient-Locale =
     large-frame-Large-Subframe L Q
 ```

@@ -309,6 +309,21 @@ module _
   right-distributive-mul-add-Commutative-Ring =
     right-distributive-mul-add-Ring ring-Commutative-Ring
 
+  bidistributive-mul-add-Commutative-Ring :
+    (u v x y : type-Commutative-Ring) →
+    mul-Commutative-Ring
+      ( add-Commutative-Ring u v)
+      ( add-Commutative-Ring x y) ＝
+    add-Commutative-Ring
+      ( add-Commutative-Ring
+        ( mul-Commutative-Ring u x)
+        ( mul-Commutative-Ring u y))
+      ( add-Commutative-Ring
+        ( mul-Commutative-Ring v x)
+        ( mul-Commutative-Ring v y))
+  bidistributive-mul-add-Commutative-Ring =
+    bidistributive-mul-add-Ring ring-Commutative-Ring
+
   commutative-mul-Commutative-Ring :
     (x y : type-Commutative-Ring) →
     mul-Commutative-Ring x y ＝ mul-Commutative-Ring y x

@@ -17,6 +17,8 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.subgroups-abelian-groups
+
+open import ring-theory.subsets-rings
 ```
 
 </details>
@@ -107,9 +109,7 @@ module _
 ```agda
   is-closed-under-addition-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-addition-subset-Commutative-Ring =
-    (x y : type-Commutative-Ring A) →
-    is-in-subset-Commutative-Ring A S x → is-in-subset-Commutative-Ring A S y →
-    is-in-subset-Commutative-Ring A S (add-Commutative-Ring A x y)
+    is-closed-under-addition-subset-Ring (ring-Commutative-Ring A) S
 ```
 
 ### The condition that a subset is closed under negatives
@@ -117,9 +117,7 @@ module _
 ```agda
   is-closed-under-negatives-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-negatives-subset-Commutative-Ring =
-    (x : type-Commutative-Ring A) →
-    is-in-subset-Commutative-Ring A S x →
-    is-in-subset-Commutative-Ring A S (neg-Commutative-Ring A x)
+    is-closed-under-negatives-subset-Ring (ring-Commutative-Ring A) S
 ```
 
 ### The condition that a subset is closed under multiplication
@@ -127,9 +125,7 @@ module _
 ```agda
   is-closed-under-multiplication-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-multiplication-subset-Commutative-Ring =
-    (x y : type-Commutative-Ring A) →
-    is-in-subset-Commutative-Ring A S x → is-in-subset-Commutative-Ring A S y →
-    is-in-subset-Commutative-Ring A S (mul-Commutative-Ring A x y)
+    is-closed-under-multiplication-subset-Ring (ring-Commutative-Ring A) S
 ```
 
 ### The condition that a subset is closed under multiplication from the left by an arbitrary element
@@ -137,8 +133,9 @@ module _
 ```agda
   is-closed-under-left-multiplication-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-left-multiplication-subset-Commutative-Ring =
-    (x y : type-Commutative-Ring A) → is-in-subset-Commutative-Ring A S y →
-    is-in-subset-Commutative-Ring A S (mul-Commutative-Ring A x y)
+    is-closed-under-left-multiplication-subset-Ring
+      ( ring-Commutative-Ring A)
+      ( S)
 ```
 
 ### The condition that a subset is closed under multiplication from the right by an arbitrary element
@@ -146,8 +143,9 @@ module _
 ```agda
   is-closed-under-right-multiplication-subset-Commutative-Ring : UU (l1 ⊔ l2)
   is-closed-under-right-multiplication-subset-Commutative-Ring =
-    (x y : type-Commutative-Ring A) → is-in-subset-Commutative-Ring A S x →
-    is-in-subset-Commutative-Ring A S (mul-Commutative-Ring A x y)
+    is-closed-under-right-multiplication-subset-Ring
+      ( ring-Commutative-Ring A)
+      ( S)
 ```
 
 ### The condition that a subset is an additive subgroup

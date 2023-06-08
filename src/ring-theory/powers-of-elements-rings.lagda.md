@@ -8,6 +8,7 @@ module ring-theory.powers-of-elements-rings where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
@@ -37,7 +38,7 @@ power-Ring R = power-Semiring (semiring-Ring R)
 
 ## Properties
 
-### `xⁿ⁺¹ = xⁿx`
+### `xⁿ⁺¹ = xⁿx` and `xⁿ⁺¹ ＝ xxⁿ`
 
 ```agda
 module _
@@ -48,6 +49,11 @@ module _
     (n : ℕ) (x : type-Ring R) →
     power-Ring R (succ-ℕ n) x ＝ mul-Ring R (power-Ring R n x) x
   power-succ-Ring = power-succ-Semiring (semiring-Ring R)
+
+  power-succ-Ring' :
+    (n : ℕ) (x : type-Ring R) →
+    power-Ring R (succ-ℕ n) x ＝ mul-Ring R x (power-Ring R n x)
+  power-succ-Ring' = power-succ-Semiring' (semiring-Ring R)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -62,6 +68,19 @@ module _
     power-Ring R (m +ℕ n) x ＝
     mul-Ring R (power-Ring R m x) (power-Ring R n x)
   power-add-Ring = power-add-Semiring (semiring-Ring R)
+```
+
+### Powers by products of natural numbers are iterated powers
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  power-mul-Ring :
+    (m n : ℕ) {x : type-Ring R} →
+    power-Ring R (m *ℕ n) x ＝ power-Ring R n (power-Ring R m x)
+  power-mul-Ring = power-mul-Semiring (semiring-Ring R)
 ```
 
 ### If `x` commutes with `y` then so do their powers

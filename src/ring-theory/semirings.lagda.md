@@ -234,10 +234,22 @@ module _
 
   right-distributive-mul-add-Semiring :
     (x y z : type-Semiring R) →
-    Id ( mul-Semiring (add-Semiring R x y) z)
-      ( add-Semiring R (mul-Semiring x z) (mul-Semiring y z))
+    mul-Semiring (add-Semiring R x y) z ＝
+    add-Semiring R (mul-Semiring x z) (mul-Semiring y z)
   right-distributive-mul-add-Semiring =
     pr2 (pr2 (pr2 (pr1 (pr2 R))))
+
+  bidistributive-mul-add-Semiring :
+    (u v x y : type-Semiring R) →
+    mul-Semiring (add-Semiring R u v) (add-Semiring R x y) ＝
+    add-Semiring R
+      ( add-Semiring R (mul-Semiring u x) (mul-Semiring u y))
+      ( add-Semiring R (mul-Semiring v x) (mul-Semiring v y))
+  bidistributive-mul-add-Semiring u v x y =
+    ( right-distributive-mul-add-Semiring u v (add-Semiring R x y)) ∙
+    ( ap-add-Semiring R
+      ( left-distributive-mul-add-Semiring u x y)
+      ( left-distributive-mul-add-Semiring v x y))
 
   left-zero-law-mul-Semiring :
     (x : type-Semiring R) → mul-Semiring (zero-Semiring R) x ＝ zero-Semiring R
