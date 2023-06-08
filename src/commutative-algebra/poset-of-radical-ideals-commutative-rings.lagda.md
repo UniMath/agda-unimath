@@ -155,7 +155,7 @@ module _
   sim-radical-ideal-Commutative-Ring : UU (l1 ⊔ l2 ⊔ l3)
   sim-radical-ideal-Commutative-Ring =
     sim-Large-Poset (radical-ideal-Commutative-Ring-Large-Poset A) I J
- 
+
   is-prop-sim-radical-ideal-Commutative-Ring :
     is-prop sim-radical-ideal-Commutative-Ring
   is-prop-sim-radical-ideal-Commutative-Ring =
