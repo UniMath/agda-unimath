@@ -8,10 +8,13 @@ module foundation.functoriality-coproduct-types where
 
 ```agda
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopies
 open import foundation.propositional-truncations
@@ -19,21 +22,18 @@ open import foundation.structure-identity-principle
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

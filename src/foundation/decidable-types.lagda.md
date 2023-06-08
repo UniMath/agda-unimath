@@ -8,22 +8,22 @@ module foundation.decidable-types where
 
 ```agda
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.empty-types
+open import foundation.functions
 open import foundation.hilberts-epsilon-operators
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.propositions
 open import foundation-core.retractions
-open import foundation-core.universe-levels
 ```
 
 </details>

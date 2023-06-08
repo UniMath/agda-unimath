@@ -9,21 +9,21 @@ open import foundation-core.coproduct-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.functions
 open import foundation.noncontractible-types
 open import foundation.subuniverses
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

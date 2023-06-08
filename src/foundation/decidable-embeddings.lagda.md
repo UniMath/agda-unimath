@@ -10,30 +10,30 @@ module foundation.decidable-embeddings where
 open import foundation.decidable-maps
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-maps
 open import foundation.structured-type-duality
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>

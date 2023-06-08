@@ -9,13 +9,13 @@ module foundation.intersections-subtypes where
 ```agda
 open import foundation.conjunction
 open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
 open import foundation.large-locale-of-subtypes
 open import foundation.powersets
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 ```

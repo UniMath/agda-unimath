@@ -8,19 +8,19 @@ module foundation.discrete-sigma-decompositions where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functions
 open import foundation.propositional-truncations
 open import foundation.sigma-decompositions
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>

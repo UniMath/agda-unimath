@@ -7,7 +7,7 @@ module structured-types.commuting-squares-of-pointed-maps where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 
 open import structured-types.pointed-homotopies
 open import structured-types.pointed-maps
