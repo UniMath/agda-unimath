@@ -21,7 +21,7 @@ open import order-theory.least-upper-bounds-large-posets
 open import order-theory.similarity-of-elements-large-posets
 
 open import ring-theory.poset-of-right-ideals-rings
-open import ring-theory.products-of-right-ideals-rings
+open import ring-theory.products-right-ideals-rings
 open import ring-theory.right-ideals-generated-by-subsets-rings
 open import ring-theory.right-ideals-rings
 open import ring-theory.rings

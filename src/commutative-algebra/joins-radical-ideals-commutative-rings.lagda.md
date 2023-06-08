@@ -12,8 +12,8 @@ open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.intersections-radical-ideals-commutative-rings
 open import commutative-algebra.joins-ideals-commutative-rings
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings
-open import commutative-algebra.products-of-ideals-commutative-rings
-open import commutative-algebra.products-of-radical-ideals-commutative-rings
+open import commutative-algebra.products-ideals-commutative-rings
+open import commutative-algebra.products-radical-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings
 open import commutative-algebra.radicals-of-ideals-commutative-rings

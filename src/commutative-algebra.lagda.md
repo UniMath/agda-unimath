@@ -43,8 +43,8 @@ open import commutative-algebra.precategory-of-commutative-rings public
 open import commutative-algebra.precategory-of-commutative-semirings public
 open import commutative-algebra.prime-ideals-commutative-rings public
 open import commutative-algebra.products-commutative-rings public
-open import commutative-algebra.products-of-ideals-commutative-rings public
-open import commutative-algebra.products-of-radical-ideals-commutative-rings public
+open import commutative-algebra.products-ideals-commutative-rings public
+open import commutative-algebra.products-radical-ideals-commutative-rings public
 open import commutative-algebra.products-subsets-commutative-rings public
 open import commutative-algebra.radical-ideals-commutative-rings public
 open import commutative-algebra.radical-ideals-generated-by-subsets-commutative-rings public

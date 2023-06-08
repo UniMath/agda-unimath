@@ -1,7 +1,7 @@
 # Products of ideals in commutative rings
 
 ```agda
-module commutative-algebra.products-of-ideals-commutative-rings where
+module commutative-algebra.products-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -23,7 +23,7 @@ open import foundation.universe-levels
 open import lists.lists
 
 open import ring-theory.ideals-generated-by-subsets-rings
-open import ring-theory.products-of-ideals-rings
+open import ring-theory.products-ideals-rings
 ```
 
 </details>

@@ -23,7 +23,7 @@ open import order-theory.similarity-of-elements-large-posets
 open import ring-theory.left-ideals-generated-by-subsets-rings
 open import ring-theory.left-ideals-rings
 open import ring-theory.poset-of-left-ideals-rings
-open import ring-theory.products-of-left-ideals-rings
+open import ring-theory.products-left-ideals-rings
 open import ring-theory.rings
 open import ring-theory.subsets-rings
 ```

@@ -11,7 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings
 open import commutative-algebra.poset-of-ideals-commutative-rings
-open import commutative-algebra.products-of-ideals-commutative-rings
+open import commutative-algebra.products-ideals-commutative-rings
 open import commutative-algebra.products-subsets-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 

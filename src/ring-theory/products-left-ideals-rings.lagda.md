@@ -1,7 +1,7 @@
 # Products of left ideals in rings
 
 ```agda
-module ring-theory.products-of-left-ideals-rings where
+module ring-theory.products-left-ideals-rings where
 ```
 
 <details><summary>Imports</summary>

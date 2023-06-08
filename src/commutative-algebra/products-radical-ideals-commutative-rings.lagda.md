@@ -1,7 +1,7 @@
 # Products of radical ideals in a commutative ring
 
 ```agda
-module commutative-algebra.products-of-radical-ideals-commutative-rings where
+module commutative-algebra.products-radical-ideals-commutative-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -11,7 +11,7 @@ open import commutative-algebra.commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.poset-of-radical-ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
-open import commutative-algebra.products-of-ideals-commutative-rings
+open import commutative-algebra.products-ideals-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
 open import commutative-algebra.radicals-of-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings

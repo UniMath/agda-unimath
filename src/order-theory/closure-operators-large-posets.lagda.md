@@ -29,6 +29,8 @@ consists of an order preserving map `cl : P → P` such that
 1. `cl` is increasing, i.e., `x ≤ cl x` for each `x : P`, and
 2. `cl` is idempotent, i.e., `cl (cl x) ＝ cl x` for each `x : P`.
 
+In other words, closure operators are idempotent monads on (large) posets.
+
 ## Definitions
 
 ### Closure operators on large posets
