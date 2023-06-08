@@ -32,8 +32,10 @@ open import ring-theory.nilpotent-elements-rings
 
 ## Idea
 
-The **nilradical** of a [commutative ring](commutative-algebra.commutative-rings.md) is the [ideal](commutative-algebra.ideals-commutative-rings.md) consisting of all
-[nilpotent elements](commutative-algebra.nilpotent-elements-commutative-rings.md).
+The **nilradical** of a
+[commutative ring](commutative-algebra.commutative-rings.md) is the
+[ideal](commutative-algebra.ideals-commutative-rings.md) consisting of all
+[nilpotent elements](ring-theory.nilpotent-elements-rings.md).
 
 ## Definitions
 

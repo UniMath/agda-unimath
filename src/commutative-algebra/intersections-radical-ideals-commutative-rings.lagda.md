@@ -46,8 +46,8 @@ and `J`, their intersection can be computed as
 ```
 
 where `IJ` is the
-[product](commutative-algebra.products-of-ideals-commutative-rings.md) of `I`
-and `J`.
+[product](commutative-algebra.products-ideals-commutative-rings.md) of `I` and
+`J`.
 
 ## Definition
 
@@ -239,7 +239,7 @@ Given two radical ideals `I` and `J`, we claim that
 ```
 
 where `IJ` is the
-[product](commutative-algebra.products-of-ideals-commutative-rings.md) of the
+[product](commutative-algebra.products-ideals-commutative-rings.md) of the
 ideals `I` and `J`. To prove this, it suffices to prove the inclusions
 
 ```text

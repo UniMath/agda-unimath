@@ -150,7 +150,7 @@ module _
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 A)
   where
-  
+
   is-full-contains-one-ideal-Commutative-Ring :
     is-in-ideal-Commutative-Ring A I (one-Commutative-Ring A) →
     is-full-ideal-Commutative-Ring A I

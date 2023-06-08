@@ -35,7 +35,7 @@ The **Zariski locale** of a
 `A`. Our proof of the fact that meets distribute over arbitrary joins uses the
 fact that the intersection `I ∩ J` of radical ideals is equivalently described
 as the radical ideal `√ IJ` of the
-[product ideal](commutative-algebra.products-of-ideals-commutative-rings.md).
+[product ideal](commutative-algebra.products-ideals-commutative-rings.md).
 
 ## Definition
 

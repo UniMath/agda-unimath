@@ -8,6 +8,7 @@ module commutative-algebra.prime-ideals-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.full-ideals-commutative-rings
 open import commutative-algebra.ideals-commutative-rings
 open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.radical-ideals-commutative-rings
@@ -158,7 +159,7 @@ is-radical-prime-ideal-Commutative-Ring :
   (P : prime-ideal-Commutative-Ring l R) →
   is-radical-ideal-Commutative-Ring R (ideal-prime-ideal-Commutative-Ring R P)
 is-radical-prime-ideal-Commutative-Ring R P x zero-ℕ p =
-  is-in-ideal-is-in-ideal-one-Commutative-Ring R
+  is-full-contains-one-ideal-Commutative-Ring R
     ( ideal-prime-ideal-Commutative-Ring R P)
     ( p)
     ( x)

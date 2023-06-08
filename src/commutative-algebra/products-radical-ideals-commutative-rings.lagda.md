@@ -33,9 +33,9 @@ The **product** of two
 [radical ideals](commutative-algebra.radical-ideals-commutative-rings.md) `I`
 and `J` is the
 [radical](commutative-algebra.radicals-of-ideals-commutative-rings.md) of the
-[product](commutative-algebra.products-of-ideals-commutative-rings.md) of `I`
-and `J`. In other words, the product of two radical ideals `I` and `J` is the
-least radical ideal that contains the products of elements in `I` and in `J`.
+[product](commutative-algebra.products-ideals-commutative-rings.md) of `I` and
+`J`. In other words, the product of two radical ideals `I` and `J` is the least
+radical ideal that contains the products of elements in `I` and in `J`.
 
 ## Definitions
 
