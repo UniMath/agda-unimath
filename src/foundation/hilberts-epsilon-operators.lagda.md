@@ -1,4 +1,4 @@
-# Hilbert's ε-operators
+# Hilbert's `ε`-operators
 
 ```agda
 module foundation.hilberts-epsilon-operators where
@@ -19,8 +19,8 @@ open import foundation-core.equivalences
 
 ## Idea
 
-Hilbert's ε-operator at a type `A` is a map `type-trunc-Prop A → A`. Contrary to
-Hilbert, we will not assume that such an operator exists for each type `A`.
+Hilbert's $ε$-operator at a type `A` is a map `type-trunc-Prop A → A`. Contrary
+to Hilbert, we will not assume that such an operator exists for each type `A`.
 
 ## Definition
 
@@ -31,7 +31,7 @@ Hilbert, we will not assume that such an operator exists for each type `A`.
 
 ## Properties
 
-### The existence of Hilbert's ε-operators is invariant under equivalences
+### The existence of Hilbert's `ε`-operators is invariant under equivalences
 
 ```agda
 ε-operator-equiv :

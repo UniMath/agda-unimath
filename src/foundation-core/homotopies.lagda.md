@@ -31,6 +31,7 @@ module _
 
   eq-value : X → UU l2
   eq-value x = (f x ＝ g x)
+  {-# INLINE eq-value #-}
 
   map-compute-path-over-eq-value :
     {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →

@@ -33,13 +33,13 @@ open import foundation-core.identity-types
 
 ## Idea
 
-A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited
-types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The
-type `X` is called the indexing type of the Σ-decomposition, the elements of
-`Y x` are called the cotypes of the Σ-decomposition, and the equivalence
-`A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
+A **Σ-decomposition** of a type `A` consists of a type `X` and a family of
+inhabited types `Y x` indexed by `x : A` equipped with an equivalence
+`A ≃ Σ X Y`. The type `X` is called the indexing type of the Σ-decomposition,
+the elements of `Y x` are called the cotypes of the Σ-decomposition, and the
+equivalence `A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition.
 
-Note that types may have many Σ-decomposition. The type of Σ-decompositions of
+Note that types may have many Σ-decompositions. The type of Σ-decompositions of
 the unit type, for instance, is equivalent to the type of all pointed connected
 types. Alternatively, we may think of the type of Σ-decompositions of the unit
 type as the type of higher groupoid structures on a point, i.e., the type of
@@ -47,9 +47,8 @@ higher group structures.
 
 We may restrict to Σ-decompositions where the indexing type is in a given
 subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
-
-The type of set-indexed Σ-decompositions of a type `A` is equivalent to the type
-of equivalence relations on `A`.
+For instance, the type of set-indexed Σ-decompositions of a type `A` is
+equivalent to the type of equivalence relations on `A`.
 
 ## Definitions
 
@@ -347,7 +346,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of Σ-Decompositions
+### Characterization of equality of Σ-decompositions
 
 ```agda
 equiv-Σ-Decomposition :
@@ -473,7 +472,7 @@ module _
   map-equiv-tr-Σ-Decomposition = map-equiv equiv-tr-Σ-Decomposition
 ```
 
-### Characterization of equality of set-indexed Σ-Decompositions
+### Characterization of equality of set-indexed Σ-decompositions
 
 ```agda
 equiv-Set-Indexed-Σ-Decomposition :
@@ -807,7 +806,7 @@ module _
       (extensionality-displayed-Σ-Decomposition D)
 ```
 
-#### Equivalence between fibered double Σ-Decompositions and displayed double Σ-Decompositions
+#### Equivalence between fibered double Σ-decompositions and displayed double Σ-decompositions
 
 ```agda
 module _

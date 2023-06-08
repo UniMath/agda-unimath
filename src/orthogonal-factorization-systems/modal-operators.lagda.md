@@ -126,7 +126,7 @@ module _
 
 ### Locally small modal operators
 
-We say a modal operator is _locally small_ if it maps small types to locally
+We say a modal operator is **locally small** if it maps small types to locally
 small types.
 
 ```agda

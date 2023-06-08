@@ -172,6 +172,14 @@ module _
     is-prop-is-orthogonal-factorization-system
 ```
 
+### An orthogonal factorization system is uniquely determined by its right class
+
+This remains to be shown.
+
+### The right class of an orthogonal factorization system is pullback-stable
+
+This remains to be shown.
+
 ## References
 
 - Egbert Rijke, Michael Shulman, Bas Spitters, _Modalities in homotopy type

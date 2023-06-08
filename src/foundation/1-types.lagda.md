@@ -1,4 +1,4 @@
-# 1-Types
+# `1`-Types
 
 ```agda
 module foundation.1-types where

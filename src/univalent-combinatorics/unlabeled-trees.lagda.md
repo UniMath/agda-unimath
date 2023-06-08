@@ -1,4 +1,4 @@
-# Unlabelled trees
+# Unlabeled trees
 
 ```agda
 module univalent-combinatorics.unlabeled-trees where
@@ -14,5 +14,5 @@ module univalent-combinatorics.unlabeled-trees where
 
 ## Idea
 
-An unlabelled tree is an undirected graph `G` such that any cycle in `G` must
+An unlabeled tree is an undirected graph `G` such that any cycle in `G` must
 have length 1.

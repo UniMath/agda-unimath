@@ -1,4 +1,4 @@
-# Finite discrete Σ-Decompositions
+# Finite discrete Σ-decompositions
 
 ```agda
 module univalent-combinatorics.discrete-sigma-decompositions where

@@ -31,9 +31,9 @@ A square of identifications
          bottom
 ```
 
-is said to _commute_ if there is an identification
-`left ∙ bottom ＝ top ∙ right`. Such an identification may be called a
-_coherence_ of the square.
+is said to **commute** if there is an identification
+`left ∙ bottom ＝ top ∙ right`. Such an identification is called a **coherence**
+of the square.
 
 ## Definition
 

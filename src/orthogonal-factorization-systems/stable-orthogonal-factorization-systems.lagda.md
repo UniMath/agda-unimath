@@ -17,8 +17,9 @@ open import orthogonal-factorization-systems.orthogonal-factorization-systems
 
 ## Idea
 
-A **stable orthogonal factorization system** is an orthogonal factorization
-system whose left class is stable under pullbacks.
+A **stable orthogonal factorization system**, or **stable factorization system**
+for short, is an orthogonal factorization system whose left class is stable
+under pullbacks.
 
 The right class of an orthogonal factorization system is always stable under
 pullbacks.

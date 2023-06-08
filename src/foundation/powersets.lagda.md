@@ -16,6 +16,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.sets
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
@@ -25,14 +26,33 @@ open import order-theory.preorders
 
 </details>
 
-## Definitions
+## Idea
 
-### Powersets
+The **powerset** of a type is the set of all
+[subtypes](foundation-core.subtypes.md) with respect to a given universe level.
+
+## Definition
 
 ```agda
 powerset :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
 powerset = subtype
+```
+
+## Properties
+
+### The powerset is a set
+
+```agda
+module _
+  {l1 : Level} (A : UU l1)
+  where
+
+  is-set-powerset : {l2 : Level} → is-set (powerset l2 A)
+  is-set-powerset = is-set-subtype
+
+  powerset-Set : (l2 : Level) → Set (l1 ⊔ lsuc l2)
+  powerset-Set l2 = subtype-Set l2 A
 ```
 
 ### The powerset large preorder

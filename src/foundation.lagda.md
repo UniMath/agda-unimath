@@ -82,6 +82,7 @@ open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjunction public
 open import foundation.double-negation public
+open import foundation.double-negation-modality public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
@@ -252,6 +253,7 @@ open import foundation.truncated-types public
 open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
+open import foundation.truncation-modalities public
 open import foundation.truncations public
 open import foundation.tuples-of-types public
 open import foundation.type-arithmetic-booleans public

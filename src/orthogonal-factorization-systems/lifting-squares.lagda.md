@@ -23,7 +23,7 @@ open import orthogonal-factorization-systems.lifts-of-maps
 
 ## Idea
 
-A _lifting square_ is a commuting square
+A **lifting square** is a commuting square
 
 ```text
        h
@@ -170,6 +170,9 @@ module _
                 ( is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
 ```
+
+It remans to show that `coherence-htpy-lifting-square` indeed is a
+characterization of identifications of lifting squares.
 
 ### Diagonal maps give lifting squares
 

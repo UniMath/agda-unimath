@@ -1,7 +1,20 @@
 {
+  "json.schemaDownload.enable": true,
+
   // UI settings
   "breadcrumbs.enabled": false,
 
+  "indentRainbow.indicatorStyle": "light",
+  "indentRainbow.updateDelay": 0,
+
+  "task.problemMatchers.neverPrompt": {
+    "shell": true
+  },
+
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.unicodeHighlight.invisibleCharacters": true,
+
+  // File nesting for agda auxillary files
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
@@ -11,6 +24,8 @@
   },
 
   // Snippet setup
+  "editor.inlineSuggest.enabled": true,
+  "editor.acceptSuggestionOnEnter": "off",
   "editor.snippetSuggestions": "top",
   "editor.wordBasedSuggestions": false,
   "javascript.suggest.names": false,
@@ -23,6 +38,8 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+
+  // File specific
   "files.associations": {
     "*.agda": "agda",
     "*.lagda.md": "literate agda markdown"
@@ -32,10 +49,11 @@
     "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
-      "other": "inline"
+      "other": "on"
     },
     "editor.autoClosingBrackets": "never"
   },
+
   "[css]": {
     "editor.quickSuggestions": {
       "other": true
@@ -44,10 +62,12 @@
     "gitlens.codeLens.scopes": ["document"],
     "editor.tabSize": 2
   },
+
   "[javascript]": {
     "editor.maxTokenizationLineLength": 2500,
     "editor.tabSize": 2
   },
+
   "[json][jsonc]": {
     "editor.quickSuggestions": {
       "strings": true
@@ -55,14 +75,25 @@
     "editor.suggest.insertMode": "replace",
     "gitlens.codeLens.scopes": ["document"]
   },
-  "[markdown][literate agda markdown]": {
+
+  "[literate agda markdown]": {
     "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
-      "other": "inline"
+      "other": "on"
     },
     "editor.autoClosingBrackets": "never"
   },
+
+  "[markdown]": {
+    "editor.tabSize": 2,
+    "editor.rulers": [80],
+    "editor.quickSuggestions": {
+      "other": "on"
+    },
+    "editor.autoClosingBrackets": "never"
+  },
+
   "[python]": {
     "editor.tabSize": 4,
     "editor.defaultFormatter": "ms-python.python"

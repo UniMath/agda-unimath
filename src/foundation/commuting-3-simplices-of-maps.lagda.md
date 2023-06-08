@@ -1,4 +1,4 @@
-# Commuting 3-simplices of maps
+# Commuting `3`-simplices of maps
 
 ```agda
 {-# OPTIONS --safe #-}

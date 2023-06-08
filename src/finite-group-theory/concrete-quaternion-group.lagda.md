@@ -82,53 +82,53 @@ equiv-face-cube k X Y e d a =
         ( inclusion-complement-point-UU-Fin k
           ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d) d')))
 
-cube-with-labelled-faces :
+cube-with-labeled-faces :
   (k : ℕ) → UU (lsuc lzero)
-cube-with-labelled-faces k =
+cube-with-labeled-faces k =
   Σ ( cube (succ-ℕ k))
     ( λ X →
       (d : dim-cube (succ-ℕ k) X) (a : axis-cube (succ-ℕ k) X d) →
       labelling-cube k (face-cube k X d a))
 
-cube-cube-with-labelled-faces :
-  (k : ℕ) → cube-with-labelled-faces k → cube (succ-ℕ k)
-cube-cube-with-labelled-faces k X = pr1 X
+cube-cube-with-labeled-faces :
+  (k : ℕ) → cube-with-labeled-faces k → cube (succ-ℕ k)
+cube-cube-with-labeled-faces k X = pr1 X
 
-labelling-faces-cube-with-labelled-faces :
-  (k : ℕ) (X : cube-with-labelled-faces k)
-  (d : dim-cube (succ-ℕ k) (cube-cube-with-labelled-faces k X))
-  (a : axis-cube (succ-ℕ k) (cube-cube-with-labelled-faces k X) d) →
-  labelling-cube k (face-cube k (cube-cube-with-labelled-faces k X) d a)
-labelling-faces-cube-with-labelled-faces k X = pr2 X
+labelling-faces-cube-with-labeled-faces :
+  (k : ℕ) (X : cube-with-labeled-faces k)
+  (d : dim-cube (succ-ℕ k) (cube-cube-with-labeled-faces k X))
+  (a : axis-cube (succ-ℕ k) (cube-cube-with-labeled-faces k X) d) →
+  labelling-cube k (face-cube k (cube-cube-with-labeled-faces k X) d a)
+labelling-faces-cube-with-labeled-faces k X = pr2 X
 
 {-
-standard-cube-with-labelled-faces :
-  (k : ℕ) → cube-with-labelled-faces k
-standard-cube-with-labelled-faces k =
+standard-cube-with-labeled-faces :
+  (k : ℕ) → cube-with-labeled-faces k
+standard-cube-with-labeled-faces k =
   pair ( standard-cube (succ-ℕ k))
        ( λ d a → {!!})
 -}
 
-equiv-cube-with-labelled-faces :
-  {k : ℕ} (X Y : cube-with-labelled-faces k) → UU lzero
-equiv-cube-with-labelled-faces {k} X Y =
+equiv-cube-with-labeled-faces :
+  {k : ℕ} (X Y : cube-with-labeled-faces k) → UU lzero
+equiv-cube-with-labeled-faces {k} X Y =
   Σ ( equiv-cube (succ-ℕ k)
-      ( cube-cube-with-labelled-faces k X)
-      ( cube-cube-with-labelled-faces k Y))
-    ( λ e → ( d : dim-cube (succ-ℕ k) (cube-cube-with-labelled-faces k X))
-            ( a : axis-cube (succ-ℕ k) (cube-cube-with-labelled-faces k X) d) →
+      ( cube-cube-with-labeled-faces k X)
+      ( cube-cube-with-labeled-faces k Y))
+    ( λ e → ( d : dim-cube (succ-ℕ k) (cube-cube-with-labeled-faces k X))
+            ( a : axis-cube (succ-ℕ k) (cube-cube-with-labeled-faces k X) d) →
             htpy-equiv-cube k
               ( standard-cube k)
               ( face-cube k
-                ( cube-cube-with-labelled-faces k Y)
+                ( cube-cube-with-labeled-faces k Y)
                 ( map-dim-equiv-cube (succ-ℕ k)
-                  ( cube-cube-with-labelled-faces k X)
-                  ( cube-cube-with-labelled-faces k Y)
+                  ( cube-cube-with-labeled-faces k X)
+                  ( cube-cube-with-labeled-faces k Y)
                   ( e)
                   ( d))
                 ( map-axis-equiv-cube (succ-ℕ k)
-                  ( cube-cube-with-labelled-faces k X)
-                  ( cube-cube-with-labelled-faces k Y)
+                  ( cube-cube-with-labeled-faces k X)
+                  ( cube-cube-with-labeled-faces k Y)
                   e d a))
               ( comp-equiv-cube k
                 ( standard-cube k)
@@ -137,14 +137,14 @@ equiv-cube-with-labelled-faces {k} X Y =
                   ( map-dim-equiv-cube (succ-ℕ k) (pr1 X) (pr1 Y) e d)
                   ( map-axis-equiv-cube (succ-ℕ k) (pr1 X) (pr1 Y) e d a))
                 ( equiv-face-cube k (pr1 X) (pr1 Y) e d a)
-                ( labelling-faces-cube-with-labelled-faces k X d a))
-              ( labelling-faces-cube-with-labelled-faces k Y
+                ( labelling-faces-cube-with-labeled-faces k X d a))
+              ( labelling-faces-cube-with-labeled-faces k Y
                 ( map-dim-equiv-cube (succ-ℕ k)
-                  ( cube-cube-with-labelled-faces k X)
-                  ( cube-cube-with-labelled-faces k Y)
+                  ( cube-cube-with-labeled-faces k X)
+                  ( cube-cube-with-labeled-faces k Y)
                   e d)
                 ( map-axis-equiv-cube (succ-ℕ k)
-                  ( cube-cube-with-labelled-faces k X)
-                  ( cube-cube-with-labelled-faces k Y)
+                  ( cube-cube-with-labeled-faces k X)
+                  ( cube-cube-with-labeled-faces k Y)
                   e d a)))
 ```

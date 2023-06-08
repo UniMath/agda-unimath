@@ -245,7 +245,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of Π-Decompositions
+### Characterization of equality of Π-decompositions
 
 ```agda
 equiv-Π-Decomposition :

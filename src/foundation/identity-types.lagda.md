@@ -184,5 +184,5 @@ module _
 equiv-tr-refl :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} →
   equiv-tr B refl ＝ id-equiv {A = B x}
-equiv-tr-refl B = eq-htpy-equiv λ x → refl
+equiv-tr-refl B = eq-htpy-equiv (λ _ → refl)
 ```

@@ -93,19 +93,19 @@ which states that the above square is a pullback.
 cone-pullback-property-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (Y : UU l) →
-  cone (λ (h : A → Y) → h ∘ f) (λ (h : B → Y) → h ∘ g) (X → Y)
-pr1 (cone-pullback-property-pushout f g {X} c Y) =
+  cone (_∘ f) (_∘ g) (X → Y)
+pr1 (cone-pullback-property-pushout f g c Y) =
   precomp (horizontal-map-cocone f g c) Y
-pr1 (pr2 (cone-pullback-property-pushout f g {X} c Y)) =
+pr1 (pr2 (cone-pullback-property-pushout f g c Y)) =
   precomp (vertical-map-cocone f g c) Y
-pr2 (pr2 (cone-pullback-property-pushout f g {X} c Y)) =
+pr2 (pr2 (cone-pullback-property-pushout f g c Y)) =
   htpy-precomp (coherence-square-cocone f g c) Y
 
 pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-pullback-property-pushout l {S} {A} {B} f g {X} c =
+pullback-property-pushout l f g c =
   (Y : UU l) →
   is-pullback
     ( precomp f Y)
@@ -127,7 +127,7 @@ module _
 
   triangle-map-cocone :
     { l6 : Level} (Z : UU l6) →
-    ( cocone-map f g d) ~ ((cocone-map f g c) ∘ (λ (k : Y → Z) → k ∘ h))
+    ( cocone-map f g d) ~ (cocone-map f g c ∘ precomp h Z)
   triangle-map-cocone Z k =
     inv
       ( ( cocone-map-comp f g c h k) ∙
@@ -214,10 +214,9 @@ triangle-pullback-property-pushout-universal-property-pushout :
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   {l : Level} (Y : UU l) →
   ( cocone-map f g c) ~
-  ( ( tot (λ i' → tot (λ j' p → htpy-eq p))) ∘
-    ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y)))
-triangle-pullback-property-pushout-universal-property-pushout
-  {S = S} {A = A} {B = B} f g c Y h =
+  ( ( tot (λ i' → tot (λ j' → htpy-eq))) ∘
+    ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y)))
+triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
     eq-pair-Σ refl
       ( eq-pair-Σ refl
         ( inv (issec-eq-htpy (h ·l coherence-square-cocone f g c))))
@@ -226,12 +225,11 @@ pullback-property-pushout-universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   universal-property-pushout l f g c → pullback-property-pushout l f g c
-pullback-property-pushout-universal-property-pushout
-  l f g c up-c Y =
+pullback-property-pushout-universal-property-pushout l f g c up-c Y =
   is-equiv-right-factor-htpy
     ( cocone-map f g c)
-    ( tot (λ i' → tot (λ j' p → htpy-eq p)))
-    ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y))
+    ( tot (λ i' → tot (λ j' → htpy-eq)))
+    ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y))
     ( triangle-pullback-property-pushout-universal-property-pushout f g c Y)
     ( is-equiv-tot-is-fiberwise-equiv
       ( λ i' → is-equiv-tot-is-fiberwise-equiv
@@ -242,12 +240,11 @@ universal-property-pushout-pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2}
   {B : UU l3} (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
   pullback-property-pushout l f g c → universal-property-pushout l f g c
-universal-property-pushout-pullback-property-pushout
-  l f g c pb-c Y =
+universal-property-pushout-pullback-property-pushout l f g c pb-c Y =
   is-equiv-comp-htpy
     ( cocone-map f g c)
-    ( tot (λ i' → tot (λ j' p → htpy-eq p)))
-    ( gap (λ h → h ∘ f) (λ h → h ∘ g) (cone-pullback-property-pushout f g c Y))
+    ( tot (λ i' → tot (λ j' → htpy-eq)))
+    ( gap (_∘ f) (_∘ g) (cone-pullback-property-pushout f g c Y))
     ( triangle-pullback-property-pushout-universal-property-pushout f g c Y)
     ( pb-c Y)
     ( is-equiv-tot-is-fiberwise-equiv
@@ -263,17 +260,16 @@ is-equiv-universal-property-pushout :
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv f →
   ({l : Level} → universal-property-pushout l f g c) → is-equiv (pr1 (pr2 c))
-is-equiv-universal-property-pushout
-  {A = A} {B} f g (pair i (pair j H)) is-equiv-f up-c =
+is-equiv-universal-property-pushout f g (i , j , H) is-equiv-f up-c =
   is-equiv-is-equiv-precomp j
     ( λ l T →
       is-equiv-is-pullback'
-        ( λ (h : A → T) → h ∘ f)
-        ( λ (h : B → T) → h ∘ g)
-        ( cone-pullback-property-pushout f g (pair i (pair j H)) T)
+        ( _∘ f)
+        ( _∘ g)
+        ( cone-pullback-property-pushout f g (i , j , H) T)
         ( is-equiv-precomp-is-equiv f is-equiv-f T)
         ( pullback-property-pushout-universal-property-pushout
-          l f g (pair i (pair j H)) up-c T))
+          l f g (i , j , H) up-c T))
 
 equiv-universal-property-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
@@ -296,12 +292,12 @@ universal-property-pushout-is-equiv :
   is-equiv f → is-equiv (pr1 (pr2 c)) →
   ({l : Level} → universal-property-pushout l f g c)
 universal-property-pushout-is-equiv
-  f g (pair i (pair j H)) is-equiv-f is-equiv-j {l} =
-  let c = (pair i (pair j H)) in
+  f g (i , j , H) is-equiv-f is-equiv-j {l} =
+  let c = (i , j , H) in
   universal-property-pushout-pullback-property-pushout l f g c
     ( λ T → is-pullback-is-equiv'
-      ( λ h → h ∘ f)
-      ( λ h → h ∘ g)
+      ( _∘ f)
+      ( _∘ g)
       ( cone-pullback-property-pushout f g c T)
       ( is-equiv-precomp-is-equiv f is-equiv-f T)
       ( is-equiv-precomp-is-equiv j is-equiv-j T))
@@ -333,24 +329,22 @@ equiv-universal-property-pushout' :
   (f : S → A) (e : S ≃ B) (c : cocone f (map-equiv e) C) →
   ({l : Level} → universal-property-pushout l f (map-equiv e) c) →
   A ≃ C
-equiv-universal-property-pushout' f e c up-c =
-  pair
-    ( pr1 c)
-    ( is-equiv-universal-property-pushout'
-      ( f)
-      ( map-equiv e)
-      ( c)
-      ( is-equiv-map-equiv e)
-      ( up-c))
+pr1 (equiv-universal-property-pushout' f e c up-c) = pr1 c
+pr2 (equiv-universal-property-pushout' f e c up-c) =
+  is-equiv-universal-property-pushout'
+    ( f)
+    ( map-equiv e)
+    ( c)
+    ( is-equiv-map-equiv e)
+    ( up-c)
 
 universal-property-pushout-is-equiv' :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {C : UU l4}
   (f : S → A) (g : S → B) (c : cocone f g C) →
   is-equiv g → is-equiv (pr1 c) →
   ({l : Level} → universal-property-pushout l f g c)
-universal-property-pushout-is-equiv'
-  f g (pair i (pair j H)) is-equiv-g is-equiv-i {l} =
-  let c = (pair i (pair j H)) in
+universal-property-pushout-is-equiv' f g (i , j , H) is-equiv-g is-equiv-i {l} =
+  let c = (i , j , H) in
   universal-property-pushout-pullback-property-pushout l f g c
     ( λ T → is-pullback-is-equiv
       ( precomp f T)

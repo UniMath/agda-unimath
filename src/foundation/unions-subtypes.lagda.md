@@ -1,4 +1,4 @@
-# Union of subtypes
+# Unions of subtypes
 
 ```agda
 module foundation.unions-subtypes where

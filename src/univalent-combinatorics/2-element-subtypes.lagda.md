@@ -1,4 +1,4 @@
-# 2-element subtypes
+# `2`-element subtypes
 
 ```agda
 module univalent-combinatorics.2-element-subtypes where

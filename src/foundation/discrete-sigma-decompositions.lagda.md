@@ -1,4 +1,4 @@
-# Discrete Σ-Decompositions
+# Discrete Σ-decompositions
 
 ```agda
 module foundation.discrete-sigma-decompositions where

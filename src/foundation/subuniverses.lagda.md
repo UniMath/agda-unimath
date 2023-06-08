@@ -1,4 +1,4 @@
-# Subuniverse
+# Subuniverses
 
 ```agda
 module foundation.subuniverses where
@@ -26,7 +26,7 @@ open import foundation-core.subtypes
 
 ## Idea
 
-Subuniverses are subtypes of the universe.
+**Subuniverses** are [subtypes](foundation-core.subtypes.md) of the universe.
 
 ## Definitions
 

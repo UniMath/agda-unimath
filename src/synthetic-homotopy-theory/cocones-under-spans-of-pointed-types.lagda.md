@@ -23,8 +23,8 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 ## Idea
 
-A cocone under a span of pointed types is _pointed_ if it consists of pointed
-maps such that the proofs of point-preservation cohere.
+A cocone under a span of pointed types is a **pointed cocone** if it consists of
+pointed maps such that the proofs of point-preservation cohere.
 
 The type of pointed cocones under a span of pointed types is again canonically
 pointed at the constant cocone, with `refl` as coherence proof.

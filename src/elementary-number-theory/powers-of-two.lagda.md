@@ -1,4 +1,4 @@
-# Powers of Two
+# Powers of two
 
 ```agda
 module elementary-number-theory.powers-of-two where
