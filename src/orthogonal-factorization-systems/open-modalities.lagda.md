@@ -17,6 +17,7 @@ open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.higher-modalities
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>
@@ -78,12 +79,12 @@ module _
 ```
 
 For local smallness with respect to the appropriate universe level, we must take
-the maximum of `l` and `lQ`. In practice, this allows us only to choose `lQ`
+the maximum of `l` and `lQ` as our domain. In practice, this allows `lQ` to be
 smaller than `l`.
 
 ```agda
 module _
-  {l lQ : Level} (Q : Prop lQ)
+  (l : Level) {lQ : Level} (Q : Prop lQ)
   where
 
   is-modal-identity-types-open-modality :
@@ -119,4 +120,14 @@ module _
   pr1 open-higher-modality = locally-small-operator-open-modality (l ⊔ lQ) Q
   pr1 (pr2 open-higher-modality) = unit-open-modality Q
   pr2 (pr2 open-higher-modality) = is-higher-modality-open-modality
+```
+
+### The open modalities are uniquely eliminating modalities
+
+```agda
+is-uniquely-eliminating-modality-open-modality :
+  (l : Level) {lQ : Level} (Q : Prop lQ) →
+  is-uniquely-eliminating-modality {l ⊔ lQ} (unit-open-modality Q)
+is-uniquely-eliminating-modality-open-modality l Q =
+  is-uniquely-eliminating-modality-higher-modality (open-higher-modality l Q)
 ```
