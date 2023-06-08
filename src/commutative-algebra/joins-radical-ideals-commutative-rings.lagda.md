@@ -216,6 +216,19 @@ module _
 
 ### Products of radical ideals distribute over joins
 
+Consider a radical ideal `I` and a family of radical ideals `J_α` indexed by
+`α : U`. To prove distributivity, we make the following calculation where we
+will write `·r` for the product of radical ideals and `⋁r` for the join of a
+family of radical ideals.
+
+```text
+  I ·r ⋁r_α J_α ＝ √ (I · √ (⋁_α J_α))
+                ＝ √ (I · ⋁_α J_α)
+                ＝ √ (⋁_α (I · J_α))
+                ＝ √ (⋁_α √ (I · J_α))
+                ＝ ⋁r_α (I ·r J_α)
+```
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (A : Commutative-Ring l1)
