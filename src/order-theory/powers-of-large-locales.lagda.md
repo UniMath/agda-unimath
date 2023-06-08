@@ -33,12 +33,12 @@ the locale `X → L` of functions from `X` to `L`.
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} {l1 : Level}
-  (X : UU l1) (L : Large-Locale α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level} {l1 : Level}
+  (X : UU l1) (L : Large-Locale α β γ)
   where
 
   power-Large-Locale :
-    Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+    Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   power-Large-Locale = Π-Large-Locale (λ (x : X) → L)
 
   large-poset-power-Large-Locale :
@@ -143,18 +143,18 @@ module _
     is-top-element-top-Large-Locale power-Large-Locale
 
   large-suplattice-power-Large-Locale :
-    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   large-suplattice-power-Large-Locale =
     large-suplattice-Large-Locale power-Large-Locale
 
   is-large-suplattice-power-Large-Locale :
-    is-large-suplattice-Large-Poset large-poset-power-Large-Locale
+    is-large-suplattice-Large-Poset γ large-poset-power-Large-Locale
   is-large-suplattice-power-Large-Locale =
     is-large-suplattice-Large-Locale power-Large-Locale
 
   sup-power-Large-Locale :
     {l2 l3 : Level} {J : UU l2} (x : J → type-power-Large-Locale l3) →
-    type-power-Large-Locale (l2 ⊔ l3)
+    type-power-Large-Locale (γ ⊔ l2 ⊔ l3)
   sup-power-Large-Locale =
     sup-Large-Locale power-Large-Locale
 

@@ -30,7 +30,8 @@ preserves least upper bounds.
 ```agda
 module _
   {αK αL : Level → Level} {βK βL : Level → Level → Level}
-  (K : Large-Suplattice αK βK) (L : Large-Suplattice αL βL)
+  {γ : Level}
+  (K : Large-Suplattice αK βK γ) (L : Large-Suplattice αL βL γ)
   where
 
   preserves-sup-hom-Large-Poset :

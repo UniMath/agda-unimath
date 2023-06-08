@@ -116,8 +116,8 @@ module _
 
   refl-has-same-elements-inhabited-subtype :
     has-same-elements-inhabited-subtype P P
-  pr1 (refl-has-same-elements-inhabited-subtype x) = id
-  pr2 (refl-has-same-elements-inhabited-subtype x) = id
+  refl-has-same-elements-inhabited-subtype =
+    refl-has-same-elements-subtype (subtype-inhabited-subtype P)
 
   is-contr-total-has-same-elements-inhabited-subtype :
     is-contr
@@ -153,6 +153,7 @@ module _
     map-inv-equiv (extensionality-inhabited-subtype Q)
 
   refl-extensionality-inhabited-subtype :
-    map-equiv (extensionality-inhabited-subtype P) refl ＝ (λ x → pair id id)
+    map-equiv (extensionality-inhabited-subtype P) refl ＝
+    refl-has-same-elements-inhabited-subtype
   refl-extensionality-inhabited-subtype = refl
 ```

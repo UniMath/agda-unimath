@@ -23,6 +23,8 @@ open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
+open import group-theory.subsets-abelian-groups
+open import group-theory.subsets-groups
 ```
 
 </details>

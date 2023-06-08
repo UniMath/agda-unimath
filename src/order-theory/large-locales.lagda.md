@@ -36,12 +36,12 @@ for meets over suprema.
 
 ```agda
 Large-Locale :
-  (α : Level → Level) (β : Level → Level → Level) → UUω
-Large-Locale α β = Large-Frame α β
+  (α : Level → Level) (β : Level → Level → Level) (γ : Level) → UUω
+Large-Locale = Large-Frame
 
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ)
   where
 
   large-poset-Large-Locale : Large-Poset α β
@@ -146,16 +146,16 @@ module _
   is-top-element-top-Large-Locale =
     is-top-element-top-Large-Frame L
 
-  large-suplattice-Large-Locale : Large-Suplattice α β
+  large-suplattice-Large-Locale : Large-Suplattice α β γ
   large-suplattice-Large-Locale = large-suplattice-Large-Frame L
 
   is-large-suplattice-Large-Locale :
-    is-large-suplattice-Large-Poset large-poset-Large-Locale
+    is-large-suplattice-Large-Poset γ large-poset-Large-Locale
   is-large-suplattice-Large-Locale = is-large-suplattice-Large-Frame L
 
   sup-Large-Locale :
     {l1 l2 : Level} {I : UU l1} →
-    (I → type-Large-Locale l2) → type-Large-Locale (l1 ⊔ l2)
+    (I → type-Large-Locale l2) → type-Large-Locale (γ ⊔ l1 ⊔ l2)
   sup-Large-Locale = sup-Large-Frame L
 
   is-least-upper-bound-sup-Large-Locale :

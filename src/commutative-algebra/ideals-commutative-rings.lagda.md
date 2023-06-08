@@ -1,4 +1,4 @@
-# Ideals in commutative rings
+# Ideals of commutative rings
 
 ```agda
 module commutative-algebra.ideals-commutative-rings where
@@ -8,16 +8,23 @@ module commutative-algebra.ideals-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.powers-of-elements-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
+
+open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.intersections-subtypes
 open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
+open import ring-theory.left-ideals-rings
+open import ring-theory.right-ideals-rings
 open import ring-theory.subsets-rings
 ```
 
@@ -129,6 +136,13 @@ module _
   is-closed-under-addition-ideal-Commutative-Ring =
     is-closed-under-addition-ideal-Ring (ring-Commutative-Ring R) I
 
+  is-closed-under-negatives-ideal-Commutative-Ring :
+    {x : type-Commutative-Ring R} →
+    is-in-ideal-Commutative-Ring x →
+    is-in-ideal-Commutative-Ring (neg-Commutative-Ring R x)
+  is-closed-under-negatives-ideal-Commutative-Ring =
+    pr2 (pr2 is-additive-subgroup-ideal-Commutative-Ring) _
+
   is-closed-under-left-multiplication-ideal-Commutative-Ring :
     is-closed-under-left-multiplication-subset-Commutative-Ring R
       subset-ideal-Commutative-Ring
@@ -145,6 +159,17 @@ module _
       ( ring-Commutative-Ring R)
       ( I)
 
+  is-closed-under-powers-ideal-Commutative-Ring :
+    (n : ℕ) (x : type-Commutative-Ring R) →
+    is-in-ideal-Commutative-Ring x →
+    is-in-ideal-Commutative-Ring (power-Commutative-Ring R (succ-ℕ n) x)
+  is-closed-under-powers-ideal-Commutative-Ring zero-ℕ x H = H
+  is-closed-under-powers-ideal-Commutative-Ring (succ-ℕ n) x H =
+    is-closed-under-left-multiplication-ideal-Commutative-Ring
+      ( power-Commutative-Ring R (succ-ℕ n) x)
+      ( x)
+      ( H)
+
   left-ideal-ideal-Commutative-Ring : left-ideal-Commutative-Ring l2 R
   left-ideal-ideal-Commutative-Ring =
     left-ideal-ideal-Ring (ring-Commutative-Ring R) I
@@ -154,7 +179,8 @@ module _
     right-ideal-ideal-Ring (ring-Commutative-Ring R) I
 
 ideal-left-ideal-Commutative-Ring :
-  {l1 l2 : Level} (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
   contains-zero-subset-Commutative-Ring R S →
   is-closed-under-addition-subset-Commutative-Ring R S →
   is-closed-under-negatives-subset-Commutative-Ring R S →
@@ -171,7 +197,8 @@ pr2 (pr2 (pr2 (ideal-left-ideal-Commutative-Ring R S z a n m))) x y H =
     ( commutative-mul-Commutative-Ring R y x)
 
 ideal-right-ideal-Commutative-Ring :
-  {l1 l2 : Level} (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
+  {l1 l2 : Level}
+  (R : Commutative-Ring l1) (S : subset-Commutative-Ring l2 R) →
   contains-zero-subset-Commutative-Ring R S →
   is-closed-under-addition-subset-Commutative-Ring R S →
   is-closed-under-negatives-subset-Commutative-Ring R S →
@@ -188,11 +215,14 @@ pr1 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) x y H =
 pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
 ```
 
+## Properties
+
 ### Characterizing equality of ideals in commutative rings
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
+  {l1 l2 l3 : Level}
+  (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R)
   where
 
   has-same-elements-ideal-Commutative-Ring :

@@ -1,4 +1,4 @@
-# Ideals in commutative semirings
+# Ideals of commutative semirings
 
 ```agda
 module commutative-algebra.ideals-commutative-semirings where

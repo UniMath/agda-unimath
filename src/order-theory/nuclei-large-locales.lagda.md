@@ -34,7 +34,7 @@ open import order-theory.least-upper-bounds-large-posets
 
 A **nucleus** on a [large locale](order-theory.large-locales.md) `L` is an order
 preserving map `j : hom-Large-Poset id L L` such that `j` preserves meets and is
-idempotent.
+inflationary and idempotent.
 
 ## Definitions
 
@@ -42,8 +42,8 @@ idempotent.
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ)
   where
 
   record
@@ -54,7 +54,7 @@ module _
         hom-Large-Meet-Semilattice
           ( large-meet-semilattice-Large-Locale L)
           ( large-meet-semilattice-Large-Locale L)
-      is-increasing-nucleus-Large-Locale :
+      is-inflationary-nucleus-Large-Locale :
         {l1 : Level} (x : type-Large-Locale L l1) →
         leq-Large-Locale L x
           ( map-hom-Large-Meet-Semilattice
@@ -130,8 +130,8 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Locale α β) (j : nucleus-Large-Locale L)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ) (j : nucleus-Large-Locale L)
   where
 
   large-subpreorder-nucleus-Large-Locale :
@@ -163,7 +163,7 @@ module _
       ( map-nucleus-Large-Locale L j x)
       ( x)
       ( H)
-      (is-increasing-nucleus-Large-Locale j x)
+      (is-inflationary-nucleus-Large-Locale j x)
 
   closed-element-nucleus-Large-Locale :
     (l1 : Level) → UU (α l1)
@@ -353,7 +353,7 @@ module _
       ( map-nucleus-Large-Locale L j x)
       ( y)
       ( H)
-      ( is-increasing-nucleus-Large-Locale j x)
+      ( is-inflationary-nucleus-Large-Locale j x)
 
   adjoint-relation-nucleus-Large-Locale :
     {l1 l2 : Level}
@@ -370,7 +370,7 @@ module _
   sup-closed-element-nucleus-Large-Locale :
     {l1 l2 : Level} {I : UU l1}
     (x : I → closed-element-nucleus-Large-Locale l2) →
-    closed-element-nucleus-Large-Locale (l1 ⊔ l2)
+    closed-element-nucleus-Large-Locale (γ ⊔ l1 ⊔ l2)
   pr1 (sup-closed-element-nucleus-Large-Locale x) =
     map-nucleus-Large-Locale L j (sup-Large-Locale L (pr1 ∘ x))
   pr2 (sup-closed-element-nucleus-Large-Locale x) =
@@ -395,7 +395,7 @@ module _
       ( backward-implication-adjoint-relation-nucleus-Large-Locale H)
 
   is-large-suplattice-large-poset-nucleus-Large-Locale :
-    is-large-suplattice-Large-Poset
+    is-large-suplattice-Large-Poset γ
       ( large-poset-nucleus-Large-Locale)
   sup-has-least-upper-bound-family-of-elements-Large-Poset
     ( is-large-suplattice-large-poset-nucleus-Large-Locale x) =
@@ -405,7 +405,7 @@ module _
     is-least-upper-bound-sup-closed-element-nucleus-Large-Locale x
 
   large-suplattice-nucleus-Large-Locale :
-    Large-Suplattice (λ l → α l ⊔ α l) β
+    Large-Suplattice (λ l → α l ⊔ α l) β γ
   large-poset-Large-Suplattice
     large-suplattice-nucleus-Large-Locale =
     large-poset-nucleus-Large-Locale
@@ -432,7 +432,7 @@ module _
             ( distributive-meet-sup-Large-Locale L x (pr1 ∘ y)))))
 
   large-frame-nucleus-Large-Locale :
-    Large-Frame (λ l → α l ⊔ α l) β
+    Large-Frame (λ l → α l ⊔ α l) β γ
   large-poset-Large-Frame
     large-frame-nucleus-Large-Locale =
     large-poset-nucleus-Large-Locale
@@ -447,6 +447,6 @@ module _
     distributive-meet-sup-nucleus-Large-Locale
 
   large-locale-nucleus-Large-Locale :
-    Large-Locale (λ l → α l ⊔ α l) β
+    Large-Locale (λ l → α l ⊔ α l) β γ
   large-locale-nucleus-Large-Locale = large-frame-nucleus-Large-Locale
 ```

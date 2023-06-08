@@ -69,7 +69,7 @@ module _
 
   left-unit-law-add-prod-Commutative-Ring :
     (x : type-prod-Commutative-Ring) →
-    Id (add-prod-Commutative-Ring zero-prod-Commutative-Ring x) x
+    add-prod-Commutative-Ring zero-prod-Commutative-Ring x ＝ x
   left-unit-law-add-prod-Commutative-Ring =
     left-unit-law-add-prod-Ring
       ( ring-Commutative-Ring R1)
@@ -77,7 +77,7 @@ module _
 
   right-unit-law-add-prod-Commutative-Ring :
     (x : type-prod-Commutative-Ring) →
-    Id (add-prod-Commutative-Ring x zero-prod-Commutative-Ring) x
+    add-prod-Commutative-Ring x zero-prod-Commutative-Ring ＝ x
   right-unit-law-add-prod-Commutative-Ring =
     right-unit-law-add-prod-Ring
       ( ring-Commutative-Ring R1)
