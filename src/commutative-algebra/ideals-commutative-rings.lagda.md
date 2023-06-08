@@ -1,4 +1,4 @@
-# Ideals in commutative rings
+# Ideals of commutative rings
 
 ```agda
 module commutative-algebra.ideals-commutative-rings where
@@ -216,21 +216,6 @@ pr2 (pr2 (pr2 (ideal-right-ideal-Commutative-Ring R S z a n m))) = m
 ```
 
 ## Properties
-
-### If `1` is in the ideal, every element is in the ideal
-
-```agda
-is-in-ideal-is-in-ideal-one-Commutative-Ring :
-  {l1 l2 : Level} (R : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 R) →
-  is-in-ideal-Commutative-Ring R I (one-Commutative-Ring R) →
-  (x : type-Commutative-Ring R) →
-  is-in-ideal-Commutative-Ring R I x
-is-in-ideal-is-in-ideal-one-Commutative-Ring R I p x =
-  is-closed-under-eq-ideal-Commutative-Ring R I
-    ( is-closed-under-left-multiplication-ideal-Commutative-Ring R I x
-      ( one-Commutative-Ring R) p)
-    ( right-unit-law-mul-Commutative-Ring R x)
-```
 
 ### Characterizing equality of ideals in commutative rings
 

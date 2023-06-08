@@ -1,4 +1,4 @@
-# Products of subsets in commutative rings
+# Products of subsets of commutative rings
 
 ```agda
 module commutative-algebra.products-subsets-commutative-rings where

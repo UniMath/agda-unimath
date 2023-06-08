@@ -184,7 +184,7 @@ module _
     is-closed-under-sim-closure-operator-Large-Locale
 
   large-poset-closure-operator-Large-Locale :
-    Large-Poset (λ l → α l ⊔ α l) β
+    Large-Poset α β
   large-poset-closure-operator-Large-Locale =
     large-poset-Large-Subposet
       ( large-poset-Large-Locale L)
@@ -351,7 +351,7 @@ module _
     is-least-upper-bound-sup-closed-element-closure-operator-Large-Locale x
 
   large-suplattice-closure-operator-Large-Locale :
-    Large-Suplattice (λ l → α l ⊔ α l) β γ
+    Large-Suplattice α β γ
   large-poset-Large-Suplattice
     large-suplattice-closure-operator-Large-Locale =
     large-poset-closure-operator-Large-Locale
@@ -447,7 +447,7 @@ module _
           ( distributive-meet-sup-Large-Locale L x _)))
 
   large-frame-closure-operator-Large-Locale :
-    Large-Frame (λ l → α l ⊔ α l) β γ
+    Large-Frame α β γ
   large-poset-Large-Frame
     large-frame-closure-operator-Large-Locale =
     large-poset-closure-operator-Large-Locale L j
@@ -462,7 +462,7 @@ module _
     distributive-meet-sup-closure-operator-Large-Locale x y
 
   large-locale-closure-operator-Large-Locale :
-    Large-Locale (λ l → α l ⊔ α l) β γ
+    Large-Locale α β γ
   large-locale-closure-operator-Large-Locale =
     large-frame-closure-operator-Large-Locale
 ```

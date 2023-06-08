@@ -1,4 +1,4 @@
-# Full ideals in rings
+# Full ideals of rings
 
 ```agda
 module ring-theory.full-ideals-rings where
@@ -133,6 +133,25 @@ module _
 ```
 
 ## Properties
+
+### Any ideal is full if and only if it contains `1`
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
+  where
+
+  is-full-contains-one-ideal-Ring :
+    is-in-ideal-Ring R I (one-Ring R) → is-full-ideal-Ring R I
+  is-full-contains-one-ideal-Ring H x =
+    is-closed-under-eq-ideal-Ring R I
+      ( is-closed-under-left-multiplication-ideal-Ring R I x (one-Ring R) H)
+      ( right-unit-law-mul-Ring R x)
+
+  contains-one-is-full-ideal-Ring :
+    is-full-ideal-Ring R I → is-in-ideal-Ring R I (one-Ring R)
+  contains-one-is-full-ideal-Ring H = H (one-Ring R)
+```
 
 ### Any ideal is full if and only if it is a top element in the large poset of ideals
 

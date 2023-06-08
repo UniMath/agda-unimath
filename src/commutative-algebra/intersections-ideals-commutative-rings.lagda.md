@@ -1,4 +1,4 @@
-# Intersections of ideals in commutative rings
+# Intersections of ideals of commutative rings
 
 ```agda
 module commutative-algebra.intersections-ideals-commutative-rings where

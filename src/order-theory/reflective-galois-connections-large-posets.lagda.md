@@ -1,4 +1,4 @@
-# Idempotent Galois connections between large posets
+# Reflective Galois connections between large posets
 
 ```agda
 module order-theory.reflective-galois-connections-large-posets where
@@ -29,7 +29,7 @@ A **reflective galois connection** between
 
 ## Definitions
 
-### The predicate of being an reflective Galois connection
+### The predicate of being a reflective Galois connection
 
 ```agda
 module _

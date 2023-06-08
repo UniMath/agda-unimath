@@ -193,7 +193,7 @@ module _
 
   contains-zero-ideal-subset-Ring :
     contains-zero-subset-Ring R subset-ideal-subset-Ring
-  contains-zero-ideal-subset-Ring = unit-trunc-Prop (pair nil refl)
+  contains-zero-ideal-subset-Ring = unit-trunc-Prop (nil , refl)
 
   is-closed-under-addition-ideal-subset-Ring' :
     (x y : type-Ring R) →
@@ -220,9 +220,9 @@ module _
   is-closed-under-multiplication-ideal-subset-Ring' :
     (r s t : type-Ring R) → subset-ideal-subset-Ring' s →
     subset-ideal-subset-Ring' (mul-Ring R (mul-Ring R r s) t)
-  pr1 (is-closed-under-multiplication-ideal-subset-Ring' r s t (pair l p)) =
+  pr1 (is-closed-under-multiplication-ideal-subset-Ring' r s t (l , p)) =
     mul-formal-combination-subset-Ring r l t
-  pr2 (is-closed-under-multiplication-ideal-subset-Ring' r s t (pair l p)) =
+  pr2 (is-closed-under-multiplication-ideal-subset-Ring' r s t (l , p)) =
     ( preserves-mul-ev-formal-combination-subset-Ring r l t) ∙
     ( ap (λ u → mul-Ring R (mul-Ring R r u) t) p)
 
@@ -298,7 +298,7 @@ module _
   contains-formal-combinations-ideal-subset-Ring I H nil =
     contains-zero-ideal-Ring R I
   contains-formal-combinations-ideal-subset-Ring I H
-    ( cons (r , (pair s K) , t) c) =
+    ( cons (r , (s , K) , t) c) =
     is-closed-under-addition-ideal-Ring R I
       ( mul-Ring R (mul-Ring R r s) t)
       ( ev-formal-combination-subset-Ring c)
@@ -316,7 +316,7 @@ module _
     apply-universal-property-trunc-Prop H (subset-ideal-Ring R J x) P
     where
     P : subset-ideal-subset-Ring' x → is-in-ideal-Ring R J x
-    P (pair c refl) =
+    P (c , refl) =
       contains-formal-combinations-ideal-subset-Ring J K c
 
   is-closed-under-eq-ideal-subset-Ring :
@@ -332,7 +332,7 @@ module _
     is-closed-under-eq-ideal-Ring' R ideal-subset-Ring
 ```
 
-#### Generating ideals by subsets preserves inclusion of subsets
+#### The subset relation is preserved by generating ideals
 
 ```agda
 module _

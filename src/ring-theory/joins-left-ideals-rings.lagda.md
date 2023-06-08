@@ -40,7 +40,7 @@ left ideals is the
 the union of the underlying subsets of the left ideals in the family of left
 ideals.
 
-## Definition
+## Definitions
 
 ### The predicate of being the join of a family of left ideals
 

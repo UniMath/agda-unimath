@@ -1,4 +1,4 @@
-# The poset of radical ideals in commutative rings
+# The poset of radical ideals of a commutative ring
 
 ```agda
 module commutative-algebra.poset-of-radical-ideals-commutative-rings where

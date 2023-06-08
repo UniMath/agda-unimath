@@ -40,7 +40,7 @@ right ideals is the
 the union of the underlying subsets of the right ideals in the family of right
 ideals.
 
-## Definition
+## Definitions
 
 ### The predicate of being the join of a family of right ideals
 

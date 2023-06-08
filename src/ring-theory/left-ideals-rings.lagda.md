@@ -1,4 +1,4 @@
-# Left ideals in rings
+# Left ideals of rings
 
 ```agda
 module ring-theory.left-ideals-rings where

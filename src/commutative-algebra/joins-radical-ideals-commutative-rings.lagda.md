@@ -1,4 +1,4 @@
-# Joins of radical ideals in commutative rings
+# Joins of radical ideals of commutative rings
 
 ```agda
 module commutative-algebra.joins-radical-ideals-commutative-rings where

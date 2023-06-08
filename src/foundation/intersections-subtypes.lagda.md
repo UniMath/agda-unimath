@@ -1,4 +1,4 @@
-# Intersection of subtypes
+# Intersections of subtypes
 
 ```agda
 module foundation.intersections-subtypes where
@@ -45,8 +45,15 @@ module _
       ( P)
       ( Q)
       ( intersection-subtype)
-  pr1 (is-greatest-binary-lower-bound-intersection-subtype R) (p , q) x r =
-    ( p x r , q x r)
+  pr1
+    ( pr1
+      ( is-greatest-binary-lower-bound-intersection-subtype R)
+      ( p , q) x r) =
+    p x r
+  pr2
+    ( pr1
+      ( is-greatest-binary-lower-bound-intersection-subtype R)
+      ( p , q) x r) = q x r
   pr1 (pr2 (is-greatest-binary-lower-bound-intersection-subtype R) p) x r =
     pr1 (p x r)
   pr2 (pr2 (is-greatest-binary-lower-bound-intersection-subtype R) p) x r =

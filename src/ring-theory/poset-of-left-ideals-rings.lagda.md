@@ -1,4 +1,4 @@
-# The poset of left ideals in a ring
+# The poset of left ideals of a ring
 
 ```agda
 module ring-theory.poset-of-left-ideals-rings where

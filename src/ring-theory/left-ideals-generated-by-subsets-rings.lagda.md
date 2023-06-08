@@ -285,7 +285,7 @@ module _
     is-closed-under-eq-left-ideal-Ring' R left-ideal-subset-Ring
 ```
 
-#### Generating left ideals by subsets preserves inclusion of subsets
+#### The subset relation is preserved by generating left ideals
 
 ```agda
 module _
@@ -510,8 +510,7 @@ module _
   cases-forward-inclusion-idempotent-left-ideal-subset-Ring :
     (l : left-formal-combination-subset-Ring R (subset-left-ideal-Ring R I)) →
     is-in-left-ideal-Ring R I
-      ( ev-left-formal-combination-subset-Ring R (subset-left-ideal-Ring R I)
-      ( l))
+      ( ev-left-formal-combination-subset-Ring R (subset-left-ideal-Ring R I) l)
   cases-forward-inclusion-idempotent-left-ideal-subset-Ring nil =
     contains-zero-left-ideal-Ring R I
   cases-forward-inclusion-idempotent-left-ideal-subset-Ring

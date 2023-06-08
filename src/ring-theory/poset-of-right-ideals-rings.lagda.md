@@ -1,4 +1,4 @@
-# The poset of right ideals in a ring
+# The poset of right ideals of a ring
 
 ```agda
 module ring-theory.poset-of-right-ideals-rings where

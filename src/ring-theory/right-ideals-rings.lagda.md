@@ -1,4 +1,4 @@
-# Right ideals in rings
+# Right ideals of rings
 
 ```agda
 module ring-theory.right-ideals-rings where

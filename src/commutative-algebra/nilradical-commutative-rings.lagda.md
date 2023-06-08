@@ -32,8 +32,8 @@ open import ring-theory.nilpotent-elements-rings
 
 ## Idea
 
-The **nilradical** of a commutative ring is the ideal consisting of all
-nilpotent elements.
+The **nilradical** of a [commutative ring](commutative-algebra.commutative-rings.md) is the [ideal](commutative-algebra.ideals-commutative-rings.md) consisting of all
+[nilpotent elements](commutative-algebra.nilpotent-elements-commutative-rings.md).
 
 ## Definitions
 
@@ -146,7 +146,7 @@ is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
       (contains-zero-prime-ideal-Commutative-Ring R P) p))
 ```
 
-### Nilradical is contained in every radical ideal
+### The nilradical is contained in every radical ideal
 
 ```agda
 is-contained-in-radical-ideal-nilradical-Commutative-Ring :

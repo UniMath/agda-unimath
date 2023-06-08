@@ -1,4 +1,4 @@
-# Radicals of ideals in commutative rings
+# Radicals of ideals of commutative rings
 
 ```agda
 module commutative-algebra.radicals-of-ideals-commutative-rings where

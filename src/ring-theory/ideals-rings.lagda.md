@@ -1,4 +1,4 @@
-# Ideals in rings
+# Ideals of rings
 
 ```agda
 module ring-theory.ideals-rings where
@@ -31,7 +31,7 @@ open import ring-theory.subsets-rings
 
 ## Idea
 
-An **ideal** of a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
+An **ideal** in a [ring](ring-theory.rings.md) `R` is a submodule of `R`.
 
 ## Definitions
 

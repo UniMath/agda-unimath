@@ -283,7 +283,7 @@ module _
     is-closed-under-eq-right-ideal-Ring' R right-ideal-subset-Ring
 ```
 
-#### Generating right ideals by subsets preserves inclusion of subsets
+#### The subset relation is preserved by generating right ideals
 
 ```agda
 module _

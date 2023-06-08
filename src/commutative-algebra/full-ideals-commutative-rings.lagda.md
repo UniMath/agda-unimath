@@ -144,6 +144,26 @@ module _
 
 ## Properties
 
+### Any ideal is full if and only if it contains `1`
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1) (I : ideal-Commutative-Ring l2 A)
+  where
+  
+  is-full-contains-one-ideal-Commutative-Ring :
+    is-in-ideal-Commutative-Ring A I (one-Commutative-Ring A) →
+    is-full-ideal-Commutative-Ring A I
+  is-full-contains-one-ideal-Commutative-Ring =
+    is-full-contains-one-ideal-Ring (ring-Commutative-Ring A) I
+
+  contains-one-is-full-ideal-Commutative-Ring :
+    is-full-ideal-Commutative-Ring A I →
+    is-in-ideal-Commutative-Ring A I (one-Commutative-Ring A)
+  contains-one-is-full-ideal-Commutative-Ring =
+    contains-one-is-full-ideal-Ring (ring-Commutative-Ring A) I
+```
+
 ### Any ideal is full if and only if it is a top element in the large poset of ideals
 
 ```agda
