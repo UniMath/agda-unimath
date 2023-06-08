@@ -444,8 +444,8 @@ module _
 Since the
 [intersection](commutative-algebra.intersections-radical-ideals-commutative-rings.md)
 `I ∩ J` of two radical ideals is the
-[product](commutative-algebra.products-of-radical-ideals-commutative-rings.md) `IJ`
-of radical ideals, it follows that intersections distribute over joins of
+[product](commutative-algebra.products-of-radical-ideals-commutative-rings.md)
+`IJ` of radical ideals, it follows that intersections distribute over joins of
 radical ideals.
 
 ```agda
