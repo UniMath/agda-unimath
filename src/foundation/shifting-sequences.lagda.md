@@ -9,7 +9,7 @@ module foundation.shifting-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>

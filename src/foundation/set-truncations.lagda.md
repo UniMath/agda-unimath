@@ -9,8 +9,10 @@ module foundation.set-truncations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equality-coproduct-types
+open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.mere-equality
@@ -26,15 +28,14 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universal-property-set-truncation
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
@@ -42,7 +43,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

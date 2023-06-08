@@ -7,14 +7,15 @@ module foundation-core.involutions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.automorphisms
-open import foundation-core.dependent-pair-types
+open import foundation.automorphisms
+open import foundation.dependent-pair-types
+open import foundation.functions
+open import foundation.universe-levels
+
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import structured-types.pointed-types
 ```

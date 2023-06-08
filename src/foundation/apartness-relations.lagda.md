@@ -8,18 +8,18 @@ module foundation.apartness-relations where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

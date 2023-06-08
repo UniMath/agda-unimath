@@ -2,17 +2,15 @@
 
 ```agda
 module structured-types.types-equipped-with-automorphisms where
-
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.automorphisms
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-
+open import foundation.automorphisms
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.universe-levels
 ```
 
 </details>

@@ -7,20 +7,21 @@ module foundation.universal-property-fiber-products where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.functions
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-over-cospans
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
 open import foundation-core.universal-property-pullbacks
-open import foundation-core.universe-levels
 ```
 
 </details>

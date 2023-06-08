@@ -8,12 +8,12 @@ module foundation.binary-equivalences-unordered-pairs-of-types where
 
 ```agda
 open import foundation.binary-operations-unordered-pairs-of-types
+open import foundation.functions
 open import foundation.products-unordered-pairs-of-types
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.universe-levels
 ```
 
 </details>
