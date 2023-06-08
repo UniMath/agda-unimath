@@ -1,4 +1,4 @@
-# $k$-Equivalences
+# `k`-Equivalences
 
 ```agda
 module foundation.truncation-equivalences where

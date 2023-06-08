@@ -187,7 +187,7 @@ well-ordering-principle-∃-Fin k P H =
       ( is-decidable-decidable-subtype P))
 ```
 
-### Hilbert's $ε$-operator for decidable subtypes of standard finite types
+### Hilbert's `ε`-operator for decidable subtypes of standard finite types
 
 ```agda
 ε-operator-decidable-subtype-Fin :

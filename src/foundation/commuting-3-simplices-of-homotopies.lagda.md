@@ -1,4 +1,4 @@
-# Commuting $3$-simplices of homotopies
+# Commuting `3`-simplices of homotopies
 
 ```agda
 {-# OPTIONS --safe #-}

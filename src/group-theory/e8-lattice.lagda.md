@@ -1,4 +1,4 @@
-# The $E₈$-lattice
+# The `E₈`-lattice
 
 ```agda
 module group-theory.e8-lattice where

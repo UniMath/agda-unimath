@@ -1,4 +1,4 @@
-# $P$-structured types
+# `P`-structured types
 
 ```agda
 module foundation.structure where
