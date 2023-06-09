@@ -20,6 +20,7 @@ open import foundation.embeddings
 open import foundation.equality-dependent-function-types
 open import foundation.equality-dependent-function-types
 open import foundation.equational-reasoning
+open import foundation.equivalences
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.propositional-extensionality
@@ -116,5 +117,48 @@ is-set-subtype {l1} {l2} {A} P Q =
 subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
 pr1 (subtype-Set {l1} l2 A) = subtype l2 A
 pr2 (subtype-Set {l1} l2 A) = is-set-subtype
+```
+
+### Characterisation of embeddings into subtypes
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (B : subtype l2 A) {X : UU l3}
+  where
+
+  inv-emb-into-subtype :
+    (g : X ↪ type-subtype B) →
+    Σ (X ↪ A) (λ f → (x : X) → is-in-subtype B (map-emb f x))
+  pr1 (pr1 (inv-emb-into-subtype g)) =
+    inclusion-subtype B ∘ map-emb g
+  pr2 (pr1 (inv-emb-into-subtype g)) =
+    is-emb-comp _ _ (is-emb-inclusion-subtype B) (is-emb-map-emb g)
+  pr2 (inv-emb-into-subtype g) x =
+    pr2 (map-emb g x)
+
+  issec-map-inv-emb-into-subtype :
+    ( ind-Σ (emb-into-subtype B) ∘ inv-emb-into-subtype) ~ id
+  issec-map-inv-emb-into-subtype g =
+    eq-type-subtype
+      is-emb-Prop
+      refl
+
+  isretr-map-inv-emb-into-subtype :
+    ( inv-emb-into-subtype ∘ ind-Σ (emb-into-subtype B)) ~ id
+  isretr-map-inv-emb-into-subtype (f , b) =
+    eq-type-subtype
+      (λ f → Π-Prop X (λ x → B (map-emb f x)))
+      (eq-type-subtype
+        is-emb-Prop
+        refl)
+
+  equiv-emb-into-subtype :
+    Σ (X ↪ A) (λ f → (x : X) → is-in-subtype B (map-emb f x)) ≃ (X ↪ type-subtype B)
+  pr1 equiv-emb-into-subtype = ind-Σ (emb-into-subtype B)
+  pr2 equiv-emb-into-subtype =
+    is-equiv-has-inverse
+      inv-emb-into-subtype
+      issec-map-inv-emb-into-subtype
+      isretr-map-inv-emb-into-subtype
 ```
 
