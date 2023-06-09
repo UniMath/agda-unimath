@@ -29,7 +29,9 @@ Consider a span `𝒮` of types
   A <--- S ---> B.
 ```
 
-A **pushout** of `𝒮` is an initial type `X` equipped with a cocone structure of `𝒮` in `X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone structure `(i , j , H)` where
+A **pushout** of `𝒮` is an initial type `X` equipped with a cocone structure of
+`𝒮` in `X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone
+structure `(i , j , H)` where
 
 ```text
       g
@@ -47,9 +49,16 @@ such that for any type `Y`, the following evaluation map is an equivalence
   (X → Y) → cocone 𝒮 Y.
 ```
 
-The idea is that the pushout of `𝒮` is the universal type that contains the elements of the types `A` and `B` via the 'inclusions' `i : A → X` and `j : B → X`, and furthermore an identification `i a ＝ j b` for every `s : S` such that `f s ＝ a` and `g s ＝ b`.
+The idea is that the pushout of `𝒮` is the universal type that contains the
+elements of the types `A` and `B` via the 'inclusions' `i : A → X` and
+`j : B → X`, and furthermore an identification `i a ＝ j b` for every `s : S`
+such that `f s ＝ a` and `g s ＝ b`.
 
-Examples of pushouts include [suspensions](synthetic-homotopy-theory.suspensions-of-types.md), [spheres](synthetic-homotopy-theory.spheres.md), [joins](synthetic-homotopy-theory.joins-of-types.md), the [smash product](synthetic-homotopy-theory.smash-products-of-pointed-types.md).
+Examples of pushouts include
+[suspensions](synthetic-homotopy-theory.suspensions-of-types.md),
+[spheres](synthetic-homotopy-theory.spheres.md),
+[joins](synthetic-homotopy-theory.joins-of-types.md), the
+[smash product](synthetic-homotopy-theory.smash-products-of-pointed-types.md).
 
 ## Postulates
 
@@ -60,7 +69,8 @@ We will assume that for any span
   A <--- S ---> B,
 ```
 
-where `S : UU l1`, `A : UU l2`, and `B : UU l3` there is a pushout in `UU (l1 ⊔ l2 ⊔ l3)`.
+where `S : UU l1`, `A : UU l2`, and `B : UU l3` there is a pushout in
+`UU (l1 ⊔ l2 ⊔ l3)`.
 
 ```agda
 postulate
