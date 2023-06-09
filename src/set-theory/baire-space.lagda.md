@@ -9,6 +9,7 @@ module set-theory.baire-space where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.lawveres-fixed-point-theorem

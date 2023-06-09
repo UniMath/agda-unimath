@@ -14,6 +14,7 @@ open import commutative-algebra.poset-of-ideals-commutative-rings
 open import commutative-algebra.products-subsets-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-truncations

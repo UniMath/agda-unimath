@@ -12,6 +12,7 @@ open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import trees.enriched-directed-trees

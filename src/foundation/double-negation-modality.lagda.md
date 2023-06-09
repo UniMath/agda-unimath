@@ -11,8 +11,8 @@ open import foundation.double-negation
 open import foundation.functions
 open import foundation.universe-levels
 
-open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.transport
 
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators

@@ -1,8 +1,6 @@
 # Constant maps
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.constant-maps where
 ```
 

@@ -7,6 +7,7 @@ module foundation.functoriality-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
@@ -34,6 +35,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.transport
 ```
 
 </details>

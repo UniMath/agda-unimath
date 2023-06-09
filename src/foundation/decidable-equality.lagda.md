@@ -7,6 +7,7 @@ module foundation.decidable-equality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -27,6 +28,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
+open import foundation-core.transport
 ```
 
 </details>

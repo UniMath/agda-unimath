@@ -7,6 +7,7 @@ module foundation.isolated-points where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.decidable-embeddings
 open import foundation.decidable-equality
@@ -34,6 +35,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.transport
 ```
 
 </details>
@@ -129,7 +131,8 @@ module _
   abstract
     refl-Eq-isolated-point : (d : is-isolated a) → Eq-isolated-point d a
     refl-Eq-isolated-point d =
-      tr ( cases-Eq-isolated-point d a)
+      tr
+        ( cases-Eq-isolated-point d a)
         ( pr2 (decide-reflexivity (d a)))
         ( star)
 

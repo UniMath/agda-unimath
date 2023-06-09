@@ -7,7 +7,7 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,7 +17,6 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
@@ -25,9 +24,50 @@ open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.pullback-property-pushouts
 ```
 
 </details>
+
+## Idea
+
+Consider a span `𝒮` of types
+
+```text
+      f     g
+  A <--- S ---> B.
+```
+
+and a type `X` equipped with a
+[cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) of `S` into
+`X`. The **universal property of the pushout** of `𝒮` asserts that `X` is the
+_initial_ type equipped with such cocone structure. In other words, the
+universal property of the pushout of `𝒮` asserts that the following evaluation
+map is an equivalence:
+
+```text
+  (X → Y) → cocone 𝒮 Y.
+```
+
+There are several ways of asserting a condition equivalent to the universal
+property of pushouts:
+
+1. The universal property of pushouts
+2. The
+   [pullback property of pushouts](synthetic-homotopy-theory.pullback-property-pushouts.md).
+   This is a restatement of the universal property of pushouts in terms of
+   pullbacks.
+3. The
+   [dependent universal property of pushouts](synthetic-homotopy-theory.dependent-universal-property-pushouts.md).
+   This property characterizes _dependent_ functions out of a pushout
+4. The
+   [dependent pullback property of pushouts](synthetic-homotopy-theory.dependent-pullback-property-pushouts.md).
+   This is a restatement of the dependent universal property of pushouts in
+   terms of pullbacks
+5. The
+   [induction principle of pushouts](synthetic-homotopy-theory.induction-principle-pushouts.md).
+   This weaker form of the dependent universal property of pushouts expresses
+   the induction principle of pushouts seen as higher inductive types.
 
 ## Definition
 
@@ -69,48 +109,6 @@ module _
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ h → is-equiv-htpy-cocone-eq f g (cocone-map f g c h) d))
       ( is-contr-map-is-equiv (up-c Y) d)
-```
-
-### The pullback property of pushouts
-
-The universal property of the pushout of a span `S` can also be stated as a
-pullback-property: a cocone `c ≐ pair i (pair j H)` with vertex `X` satisfies
-the universal property of the pushout of `S` if and only if the square
-
-```text
-  Y^X -----> Y^B
-   |          |
-   |          |
-   V          V
-  Y^A -----> Y^S
-```
-
-is a pullback square for every type `Y`. Below, we first define the cone of this
-commuting square, and then we introduce the type pullback-property-pushout,
-which states that the above square is a pullback.
-
-```agda
-cone-pullback-property-pushout :
-  {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (Y : UU l) →
-  cone (_∘ f) (_∘ g) (X → Y)
-pr1 (cone-pullback-property-pushout f g c Y) =
-  precomp (horizontal-map-cocone f g c) Y
-pr1 (pr2 (cone-pullback-property-pushout f g c Y)) =
-  precomp (vertical-map-cocone f g c) Y
-pr2 (pr2 (cone-pullback-property-pushout f g c Y)) =
-  htpy-precomp (coherence-square-cocone f g c) Y
-
-pullback-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-pullback-property-pushout l f g c =
-  (Y : UU l) →
-  is-pullback
-    ( precomp f Y)
-    ( precomp g Y)
-    ( cone-pullback-property-pushout f g c Y)
 ```
 
 ## Properties

@@ -18,6 +18,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.groups

@@ -17,6 +17,7 @@ open import finite-group-theory.finite-type-groups
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
@@ -26,6 +27,7 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.univalence-action-on-equivalences
 open import foundation.universe-levels

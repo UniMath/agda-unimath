@@ -1,14 +1,13 @@
 # Function extensionality
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.function-extensionality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.functions
 open import foundation.universe-levels
 

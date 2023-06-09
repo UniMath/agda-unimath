@@ -1,8 +1,6 @@
 # Truncation levels
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.truncation-levels where
 ```
 

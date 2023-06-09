@@ -7,6 +7,7 @@ module foundation.truncation-images-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.truncations
 open import foundation.universe-levels

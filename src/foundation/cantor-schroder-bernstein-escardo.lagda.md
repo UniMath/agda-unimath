@@ -7,6 +7,7 @@ module foundation.cantor-schroder-bernstein-escardo where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.law-of-excluded-middle

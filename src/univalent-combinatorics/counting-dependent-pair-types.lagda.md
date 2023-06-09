@@ -12,6 +12,7 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
@@ -25,6 +26,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.sections
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type

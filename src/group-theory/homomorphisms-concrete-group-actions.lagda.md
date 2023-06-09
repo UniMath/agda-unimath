@@ -16,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions

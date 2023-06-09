@@ -1,8 +1,6 @@
 # Commuting squares of maps
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.commuting-squares-of-maps where
 ```
 

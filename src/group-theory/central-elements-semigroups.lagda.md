@@ -7,6 +7,7 @@ module group-theory.central-elements-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

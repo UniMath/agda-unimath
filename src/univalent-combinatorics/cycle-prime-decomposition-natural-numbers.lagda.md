@@ -15,12 +15,14 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.iterated-cartesian-product-types
+open import foundation.transport
 open import foundation.univalence
 open import foundation.universe-levels
 

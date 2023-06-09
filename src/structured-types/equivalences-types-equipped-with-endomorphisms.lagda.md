@@ -7,6 +7,7 @@ module structured-types.equivalences-types-equipped-with-endomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

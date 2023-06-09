@@ -1,8 +1,6 @@
 # Equality of dependent pair types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.equality-dependent-pair-types where
 ```
 
@@ -16,6 +14,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.transport
 ```
 
 </details>

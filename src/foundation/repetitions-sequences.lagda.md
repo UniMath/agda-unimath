@@ -10,6 +10,7 @@ module foundation.repetitions-sequences where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.pairs-of-distinct-elements

@@ -16,6 +16,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-algebra.commutative-finite-rings
 open import finite-algebra.finite-rings
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types

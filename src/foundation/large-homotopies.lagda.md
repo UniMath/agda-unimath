@@ -1,8 +1,6 @@
 # Large homotopies
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.large-homotopies where
 ```
 

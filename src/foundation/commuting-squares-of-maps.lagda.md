@@ -9,6 +9,7 @@ open import foundation-core.commuting-squares-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-function-types

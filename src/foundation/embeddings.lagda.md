@@ -9,6 +9,7 @@ open import foundation-core.embeddings public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types

@@ -7,6 +7,7 @@ module foundation-core.contractible-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
@@ -17,6 +18,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.retractions
+open import foundation-core.transport
 ```
 
 </details>

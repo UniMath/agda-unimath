@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
 open import foundation.1-types
+open import foundation.action-on-identifications-functions
 open import foundation.connected-components-universes
 open import foundation.contractible-types
 open import foundation.decidable-types
@@ -31,6 +32,7 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type

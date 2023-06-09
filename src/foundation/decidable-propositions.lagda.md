@@ -9,6 +9,7 @@ open import foundation-core.decidable-propositions public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -33,6 +34,7 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
+open import foundation-core.transport
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types

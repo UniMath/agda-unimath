@@ -7,6 +7,7 @@ module trees.functoriality-w-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
@@ -18,6 +19,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-maps
+open import foundation.transport
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels

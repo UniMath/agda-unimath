@@ -9,6 +9,7 @@ open import foundation-core.equivalence-relations public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
@@ -38,6 +39,7 @@ open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.transport
 ```
 
 </details>

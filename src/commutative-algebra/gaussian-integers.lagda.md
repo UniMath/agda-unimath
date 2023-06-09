@@ -14,6 +14,8 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types

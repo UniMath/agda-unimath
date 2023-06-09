@@ -7,6 +7,7 @@ module structured-types.pointed-types-equipped-with-automorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.contractible-types

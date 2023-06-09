@@ -9,6 +9,7 @@ module group-theory.substitution-functor-group-actions where
 ```agda
 open import category-theory.functors-large-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes

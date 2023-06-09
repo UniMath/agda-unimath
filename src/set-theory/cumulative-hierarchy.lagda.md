@@ -9,8 +9,10 @@ module set-theory.cumulative-hierarchy where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
+open import foundation.constant-type-families
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -25,6 +27,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -268,7 +271,7 @@ module _
       equational-reasoning
         tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
         ＝ ρ f IH₁
-          by tr-const path-f-g (ρ f IH₁)
+          by tr-constant-type-family path-f-g (ρ f IH₁)
         ＝ ρ g IH₂
           by τ f g e IH₁ IH₂ hIH₁' hIH₂'
       where
@@ -277,11 +280,17 @@ module _
           ＝ set-pseudo-cumulative-hierarchy V g
       path-f-g = set-ext-pseudo-cumulative-hierarchy V f g e
       hIH₁' : (a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
-      hIH₁' a = map-trunc-Prop
-        (λ (b , p , q) → (b , p , (inv (tr-const p _) ∙ q))) (hIH₁ a)
+      hIH₁' a =
+        map-trunc-Prop
+          ( λ (b , p , q) →
+            ( b , p , (inv (tr-constant-type-family p _) ∙ q)))
+          ( hIH₁ a)
       hIH₂' : (b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
-      hIH₂' b = map-trunc-Prop
-        (λ (a , p , q) → (a , p , (inv (tr-const p _) ∙ q))) (hIH₂ b)
+      hIH₂' b =
+        map-trunc-Prop
+          ( λ (a , p , q) →
+            ( a , p , (inv (tr-constant-type-family p _) ∙ q)))
+          ( hIH₂ b)
 
   compute-recursion-principle-cumulative-hierarchy :
     { l2 : Level} ( X : UU l2) (σ : is-set X)
@@ -315,7 +324,7 @@ module _
       equational-reasoning
         tr (λ _ → X) (pr2 (pr2 (pr2 V)) f g e) (ρ f IH₁)
         ＝ ρ f IH₁
-          by tr-const path-f-g (ρ f IH₁)
+          by tr-constant-type-family path-f-g (ρ f IH₁)
         ＝ ρ g IH₂
           by τ f g e IH₁ IH₂ hIH₁' hIH₂'
       where
@@ -324,11 +333,17 @@ module _
           ＝ set-pseudo-cumulative-hierarchy V g
       path-f-g = set-ext-pseudo-cumulative-hierarchy V f g e
       hIH₁' : (a : A) → ∃ B (λ b → Σ (f a ＝ g b) (λ _ → IH₁ a ＝ IH₂ b))
-      hIH₁' a = map-trunc-Prop
-        ( λ (b , p , q) → (b , p , (inv (tr-const p _) ∙ q))) (hIH₁ a)
+      hIH₁' a =
+        map-trunc-Prop
+          ( λ (b , p , q) →
+            ( b , p , (inv (tr-constant-type-family p _) ∙ q)))
+          ( hIH₁ a)
       hIH₂' : (b : B) → ∃ A (λ a → Σ (g b ＝ f a) (λ _ → IH₂ b ＝ IH₁ a))
-      hIH₂' b = map-trunc-Prop
-        ( λ (a , p , q) → (a , p , (inv (tr-const p _) ∙ q))) (hIH₂ b)
+      hIH₂' b =
+        map-trunc-Prop
+          ( λ (a , p , q) →
+            ( a , p , (inv (tr-constant-type-family p _) ∙ q)))
+          ( hIH₂ b)
 ```
 
 A simplification of the recursion principle, when the codomain is `Prop l2`.

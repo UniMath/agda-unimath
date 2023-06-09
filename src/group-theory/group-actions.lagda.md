@@ -7,15 +7,15 @@ module group-theory.group-actions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
-open import foundation-core.function-extensionality
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups

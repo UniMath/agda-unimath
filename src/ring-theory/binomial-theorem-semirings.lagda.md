@@ -13,6 +13,8 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels

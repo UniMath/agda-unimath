@@ -7,6 +7,7 @@ module foundation.univalence-action-on-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
@@ -21,6 +22,7 @@ open import foundation-core.equivalences
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.transport
 ```
 
 </details>

@@ -7,6 +7,7 @@ module order-theory.large-meet-semilattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels

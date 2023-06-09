@@ -11,6 +11,7 @@ open import commutative-algebra.euclidean-domains
 
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types

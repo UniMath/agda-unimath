@@ -9,6 +9,7 @@ open import foundation-core.retractions public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coslice
 open import foundation.dependent-pair-types
 open import foundation.functions

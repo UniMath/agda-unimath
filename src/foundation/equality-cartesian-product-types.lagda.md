@@ -1,14 +1,13 @@
 # Equality of cartesian product types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.equality-cartesian-product-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.universe-levels

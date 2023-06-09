@@ -1,8 +1,6 @@
 # Functions
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.functions where
 ```
 

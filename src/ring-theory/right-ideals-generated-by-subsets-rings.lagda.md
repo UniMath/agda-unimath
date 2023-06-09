@@ -7,6 +7,7 @@ module ring-theory.right-ideals-generated-by-subsets-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
@@ -17,6 +18,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 

@@ -7,6 +7,7 @@ module foundation-core.truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
@@ -21,6 +22,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
+open import foundation-core.transport
 open import foundation-core.truncation-levels
 ```
 

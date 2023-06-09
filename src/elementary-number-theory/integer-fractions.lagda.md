@@ -11,6 +11,7 @@ open import elementary-number-theory.greatest-common-divisor-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations

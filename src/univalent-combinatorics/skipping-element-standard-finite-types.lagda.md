@@ -9,6 +9,7 @@ module univalent-combinatorics.skipping-element-standard-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings

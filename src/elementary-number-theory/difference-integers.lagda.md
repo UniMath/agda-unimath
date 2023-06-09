@@ -10,6 +10,8 @@ module elementary-number-theory.difference-integers where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.interchange-law
 ```

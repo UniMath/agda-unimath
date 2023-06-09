@@ -24,6 +24,7 @@ open import foundation.propositions
 open import foundation.sections
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels

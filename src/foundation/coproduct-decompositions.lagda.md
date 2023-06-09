@@ -7,6 +7,7 @@ module foundation.coproduct-decompositions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-decompositions-subuniverse
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality

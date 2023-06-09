@@ -9,6 +9,7 @@ open import foundation-core.universal-property-truncation public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality

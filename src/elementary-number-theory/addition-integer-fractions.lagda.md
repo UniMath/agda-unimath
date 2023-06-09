@@ -11,6 +11,7 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.multiplication-integers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```

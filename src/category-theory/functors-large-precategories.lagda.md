@@ -9,6 +9,7 @@ module category-theory.functors-large-precategories where
 ```agda
 open import category-theory.large-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels

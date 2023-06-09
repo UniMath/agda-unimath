@@ -25,6 +25,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
+open import foundation-core.transport
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

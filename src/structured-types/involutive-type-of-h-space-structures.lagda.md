@@ -7,6 +7,7 @@ module structured-types.involutive-type-of-h-space-structures where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

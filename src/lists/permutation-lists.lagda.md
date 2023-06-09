@@ -11,10 +11,12 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import linear-algebra.functoriality-vectors

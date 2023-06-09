@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.26-id-pushout where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -21,11 +22,13 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -178,13 +181,13 @@ square-path-over-fam-maps :
   ( y : B x) → Id (f' (tr B p y)) (tr C p (f y))
 square-path-over-fam-maps refl f f' = htpy-eq ∘ inv
 
-hom-Fam-pushout-dep-cocone :
+hom-Fam-pushout-dependent-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
-  dep-cocone f g c (λ x → P x → Q x) →
+  dependent-cocone f g c (λ x → P x → Q x) →
   hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
+hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   tot (λ hA → tot (λ hB →
     map-Π (λ s →
       square-path-over-fam-maps (pr2 (pr2 c) s) (hA (f s)) (hB (g s)))))
@@ -196,12 +199,12 @@ is-equiv-square-path-over-fam-maps :
 is-equiv-square-path-over-fam-maps refl f f' =
   is-equiv-comp htpy-eq inv (is-equiv-inv f f') (funext f' f)
 
-is-equiv-hom-Fam-pushout-dep-cocone :
+is-equiv-hom-Fam-pushout-dependent-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
-  is-equiv (hom-Fam-pushout-dep-cocone c P Q)
-is-equiv-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
+  is-equiv (hom-Fam-pushout-dependent-cocone c P Q)
+is-equiv-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   is-equiv-tot-is-fiberwise-equiv (λ hA →
     is-equiv-tot-is-fiberwise-equiv (λ hB →
       is-equiv-map-Π _
@@ -227,20 +230,20 @@ coherence-naturality-fam-maps {A = A} {B} P Q {f} {f'} H =
     ( λ h a → refl)
     ( H)
 
-triangle-hom-Fam-pushout-dep-cocone :
+triangle-hom-Fam-pushout-dependent-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
   ( hom-Fam-pushout-map c P Q) ~
-  ( ( hom-Fam-pushout-dep-cocone c P Q) ∘
-    ( dep-cocone-map f g c (λ x → P x → Q x)))
-triangle-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q h =
+  ( ( hom-Fam-pushout-dependent-cocone c P Q) ∘
+    ( dependent-cocone-map f g c (λ x → P x → Q x)))
+triangle-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q h =
   eq-htpy-hom-Fam-pushout
     ( desc-fam c P)
     ( desc-fam c Q)
     ( hom-Fam-pushout-map c P Q h)
-    ( hom-Fam-pushout-dep-cocone c P Q
-      ( dep-cocone-map f g c (λ x → P x → Q x) h))
+    ( hom-Fam-pushout-dependent-cocone c P Q
+      ( dependent-cocone-map f g c (λ x → P x → Q x) h))
     ( pair
       ( λ a → refl-htpy)
       ( pair
@@ -259,12 +262,12 @@ is-equiv-hom-Fam-pushout-map :
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
   is-equiv-comp-htpy
     ( hom-Fam-pushout-map c P Q)
-    ( hom-Fam-pushout-dep-cocone c P Q)
-    ( dep-cocone-map f g c (λ x → P x → Q x))
-    ( triangle-hom-Fam-pushout-dep-cocone c P Q)
+    ( hom-Fam-pushout-dependent-cocone c P Q)
+    ( dependent-cocone-map f g c (λ x → P x → Q x))
+    ( triangle-hom-Fam-pushout-dependent-cocone c P Q)
     ( dependent-universal-property-universal-property-pushout
       f g c up-X (l5 ⊔ l6) (λ x → P x → Q x))
-    ( is-equiv-hom-Fam-pushout-dep-cocone c P Q)
+    ( is-equiv-hom-Fam-pushout-dependent-cocone c P Q)
 
 equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}

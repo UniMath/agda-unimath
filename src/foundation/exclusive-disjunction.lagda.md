@@ -33,6 +33,7 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.transport
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-finite-types

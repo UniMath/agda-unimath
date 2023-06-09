@@ -12,6 +12,7 @@ open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.transport
 ```
 
 </details>

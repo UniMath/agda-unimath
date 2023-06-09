@@ -11,6 +11,7 @@ module reflection.precategory-solver where
 ```agda
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types

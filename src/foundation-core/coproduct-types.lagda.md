@@ -1,8 +1,6 @@
 # Coproduct types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.coproduct-types where
 ```
 

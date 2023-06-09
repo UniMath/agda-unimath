@@ -15,6 +15,7 @@ open import elementary-number-theory.greatest-common-divisor-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -23,6 +24,7 @@ open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

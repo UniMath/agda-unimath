@@ -9,6 +9,7 @@ open import foundation-core.pullbacks public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
@@ -30,6 +31,7 @@ open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
+open import foundation-core.transport
 ```
 
 </details>

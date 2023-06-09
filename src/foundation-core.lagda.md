@@ -16,6 +16,7 @@ open import foundation-core.contractible-maps public
 open import foundation-core.contractible-types public
 open import foundation-core.coproduct-types public
 open import foundation-core.decidable-propositions public
+open import foundation-core.dependent-paths public
 open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.discrete-types public
 open import foundation-core.embeddings public
@@ -46,6 +47,7 @@ open import foundation-core.sets public
 open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
+open import foundation-core.transport public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public
 open import foundation-core.truncation-levels public

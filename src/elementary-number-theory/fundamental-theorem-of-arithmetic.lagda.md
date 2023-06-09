@@ -25,6 +25,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -34,6 +35,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels

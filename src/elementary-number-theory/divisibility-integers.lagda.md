@@ -15,6 +15,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -25,6 +26,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 ```

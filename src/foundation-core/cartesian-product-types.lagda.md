@@ -1,8 +1,6 @@
 # Cartesian product types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.cartesian-product-types where
 ```
 

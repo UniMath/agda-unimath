@@ -7,6 +7,7 @@ module foundation.subterminal-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.functions
 open import foundation.unit-type
 open import foundation.universe-levels

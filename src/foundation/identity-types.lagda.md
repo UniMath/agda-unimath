@@ -9,6 +9,7 @@ open import foundation-core.identity-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -18,6 +19,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.transport
 ```
 
 </details>
@@ -30,7 +32,49 @@ theory, we introduce the identity type as an inductive family of types, where
 the induction principle can be understood as expressing that the identity type
 is the least reflexive relation.
 
+## List of files directly related to identity types
+
+The following table lists files that are about identity types and operations on
+identifications in arbitrary types.
+
+| Concept                                          | File                                                                                                                      |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
+| Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
+| Action on identifications of functions           | [`foundation.action-on-identifications-functions](foundation.action-on-identifications-functions.md)                      |
+| Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
+| Commuting squares of identifications             | [`foundation.commuting-squares-identifications`](foundation.commuting-squares-identifications.md)                         |
+| Dependent paths (foundation)                     | [`foundation.dependent-paths`](foundation.dependent-paths.md)                                                             |
+| Dependent paths (foundation-core)                | [`foundation-core.dependent-paths`](foundation-core.dependent-paths.md)                                                   |
+| The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
+| Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
+| Identity systems                                 | [`foundation.identity-sytsemts`](foundation.identity-systems.md)                                                          |
+| The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
+| The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
+| Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
+| Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
+| Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
+| Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
+| The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
+
 ## Properties
+
+### The Mac Lane pentagon for identity types
+
+```agda
+Mac-Lane-pentagon :
+  {l : Level} {A : UU l} {a b c d e : A}
+  (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
+  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
+      α₂ = (assoc p (q ∙ r) s)
+      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
+      α₄ = (assoc (p ∙ q) r s)
+      α₅ = (assoc p q (r ∙ s))
+  in
+  ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
+Mac-Lane-pentagon refl refl refl refl = refl
+```
 
 ### The groupoidal operations on identity types are equivalences
 
@@ -117,6 +161,48 @@ convert-eq-values :
   (x y : A) → (f x ＝ f y) ≃ (g x ＝ g y)
 convert-eq-values {f = f} {g} H x y =
   ( equiv-concat' (g x) (H y)) ∘e (equiv-concat (inv (H x)) (f y))
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  issec-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : (p ∙ q) ＝ (p ∙ r)) →
+    ap (concat p z) (is-injective-concat p s) ＝ s
+  issec-is-injective-concat refl refl = refl
+
+  cases-issec-is-injective-concat' :
+    {x y : A} {p q : x ＝ y} (s : p ＝ q) →
+    ( ap
+      ( concat' x refl)
+      ( is-injective-concat' refl (right-unit ∙ (s ∙ inv right-unit)))) ＝
+    ( right-unit ∙ (s ∙ inv right-unit))
+  cases-issec-is-injective-concat' {p = refl} refl = refl
+
+  issec-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} (s : (p ∙ r) ＝ (q ∙ r)) →
+    ap (concat' x r) (is-injective-concat' r s) ＝ s
+  issec-is-injective-concat' refl s =
+    ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α) ∙
+    ( ( cases-issec-is-injective-concat' (inv right-unit ∙ (s ∙ right-unit))) ∙
+      α)
+    where
+    α :
+      ( ( right-unit) ∙
+        ( ( inv right-unit ∙ (s ∙ right-unit)) ∙
+          ( inv right-unit))) ＝
+      ( s)
+    α =
+      ( ap
+        ( concat right-unit _)
+        ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
+          ( ( ap
+              ( concat (inv right-unit) _)
+              ( ( assoc s right-unit (inv right-unit)) ∙
+                ( ( ap (concat s _) (right-inv right-unit)) ∙
+                  ( right-unit))))))) ∙
+      ( ( inv (assoc right-unit (inv right-unit) s)) ∙
+        ( ( ap (concat' _ s) (right-inv right-unit))))
 ```
 
 ## Transposing inverses is an equivalence

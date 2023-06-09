@@ -7,6 +7,7 @@ module ring-theory.nilpotent-elements-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
