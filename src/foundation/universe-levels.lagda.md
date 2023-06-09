@@ -1,7 +1,7 @@
 # Universe levels
 
 ```agda
-{-# OPTIONS --safe --no-import-sorts #-}
+{-# OPTIONS --no-import-sorts #-}
 
 module foundation.universe-levels where
 

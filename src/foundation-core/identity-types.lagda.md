@@ -1,8 +1,6 @@
 # Identity types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.identity-types where
 ```
 

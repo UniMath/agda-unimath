@@ -1,8 +1,6 @@
 # Cospans
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.cospans where
 ```
 

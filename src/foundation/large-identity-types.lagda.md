@@ -1,8 +1,6 @@
 # Large identity types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.large-identity-types where
 ```
 

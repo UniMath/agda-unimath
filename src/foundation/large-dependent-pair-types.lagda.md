@@ -1,8 +1,6 @@
 # Large dependent pair types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.large-dependent-pair-types where
 ```
 

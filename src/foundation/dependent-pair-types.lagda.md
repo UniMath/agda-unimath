@@ -1,8 +1,6 @@
 # Dependent pair types
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.dependent-pair-types where
 ```
 
