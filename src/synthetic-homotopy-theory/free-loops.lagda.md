@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.free-loops where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.constant-type-families
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -175,7 +176,8 @@ module _
   compute-free-dependent-loop-const :
     free-loop Y ≃ free-dependent-loop α (λ x → Y)
   compute-free-dependent-loop-const =
-    equiv-tot (λ y → equiv-concat (tr-const (loop-free-loop α) y) y)
+    equiv-tot
+      ( λ y → equiv-concat (tr-constant-type-family (loop-free-loop α) y) y)
 
   map-compute-free-dependent-loop-const :
     free-loop Y → free-dependent-loop α (λ x → Y)

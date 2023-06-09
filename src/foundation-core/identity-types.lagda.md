@@ -290,11 +290,6 @@ tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
   tr (a ＝_) q p ＝ (p ∙ q)
 tr-Id-right refl refl = refl
-
-tr-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : x ＝ y) (b : B) →
-  tr (λ (a : A) → B) p b ＝ b
-tr-const refl b = refl
 ```
 
 ### Functorial action of dependent functions on identity types
@@ -304,11 +299,6 @@ apd :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) {x y : A}
   (p : x ＝ y) → tr B p (f x) ＝ f y
 apd f refl = refl
-
-apd-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : x ＝ y) → apd f p ＝ ((tr-const p (f x)) ∙ (ap f p))
-apd-const f refl = refl
 ```
 
 ### Concatenation is injective

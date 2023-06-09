@@ -72,6 +72,43 @@ module _
     pr2 (equiv-eq-htpy {f} {g}) = is-equiv-eq-htpy f g
 ```
 
+## Properties
+
+### `htpy-eq` preserves concatenation of identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  htpy-eq-concat :
+    (p : f ＝ g) (q : g ＝ h) → htpy-eq (p ∙ q) ＝ (htpy-eq p ∙h htpy-eq q)
+  htpy-eq-concat refl refl = refl
+```
+
+### `eq-htpy` preserves concatenation of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  eq-htpy-concat-htpy :
+    (H : f ~ g) (K : g ~ h) → eq-htpy (H ∙h K) ＝ ((eq-htpy H) ∙ (eq-htpy K))
+  eq-htpy-concat-htpy H K =
+    equational-reasoning
+      eq-htpy (H ∙h K)
+      ＝ eq-htpy (htpy-eq (eq-htpy H) ∙h htpy-eq (eq-htpy K))
+        by
+        inv (ap eq-htpy (ap-binary _∙h_ (issec-eq-htpy H) (issec-eq-htpy K)))
+      ＝ eq-htpy (htpy-eq (eq-htpy H ∙ eq-htpy K))
+        by
+        ap eq-htpy (inv (htpy-eq-concat (eq-htpy H) (eq-htpy K)))
+      ＝ eq-htpy H ∙ eq-htpy K
+        by
+        isretr-eq-htpy (eq-htpy H ∙ eq-htpy K)
+```
+
 ## See also
 
 - That the univalence axiom implies function extensionality is proven in
