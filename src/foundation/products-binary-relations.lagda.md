@@ -1,4 +1,4 @@
-# Products of binary relataions
+# Products of binary relations
 
 ```agda
 module foundation.products-binary-relations where

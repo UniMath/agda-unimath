@@ -32,6 +32,32 @@ theory, we introduce the identity type as an inductive family of types, where
 the induction principle can be understood as expressing that the identity type
 is the least reflexive relation.
 
+## List of files directly related to identity types
+
+The following table lists files that are about identity types and operations on
+identifications in arbitrary types.
+
+| Concept                                          | File                                                                                                                      |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
+| Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
+| Action on identifications of functions           | [`foundation.action-on-identifications-functions](foundation.action-on-identifications-functions.md)                      |
+| Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
+| Commuting squares of identifications             | [`foundation.commuting-squares-identifications`](foundation.commuting-squares-identifications.md)                         |
+| Dependent paths (foundation)                     | [`foundation.dependent-paths`](foundation.dependent-paths.md)                                                             |
+| Dependent paths (foundation-core)                | [`foundation-core.dependent-paths`](foundation-core.dependent-paths.md)                                                   |
+| The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
+| Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
+| Identity systems                                 | [`foundation.identity-sytsemts`](foundation.identity-systems.md)                                                          |
+| The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
+| The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
+| Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
+| Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
+| Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
+| Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
+| The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
+
 ## Properties
 
 ### The Mac Lane pentagon for identity types
