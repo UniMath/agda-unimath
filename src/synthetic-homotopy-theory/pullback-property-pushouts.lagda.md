@@ -21,9 +21,12 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 ## Idea
 
-The universal property of the pushout of a span `S` can also be stated as a
-pullback property: a cocone `c ≐ pair i (pair j H)` with vertex `X` satisfies
-the universal property of the pushout of `S` if and only if the square
+The
+[universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md)
+of a span `S` can also be stated as a
+[pullback property](foundation-core.universal-property-pullbacks.md): a cocone
+`c ≐ (i , j , H)` with vertex `X` satisfies the universal property of the
+pushout of `S` if and only if the square
 
 ```text
   Y^X -----> Y^B

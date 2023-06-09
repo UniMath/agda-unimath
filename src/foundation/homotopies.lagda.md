@@ -270,7 +270,7 @@ module _
     is-equiv-map-compute-path-over-eq-value-function p q q'
 ```
 
-Relation between between `compute-path-over-eq-value-function` and `nat-htpy`
+### Relation between between `compute-path-over-eq-value-function` and `nat-htpy`
 
 ```agda
 module _

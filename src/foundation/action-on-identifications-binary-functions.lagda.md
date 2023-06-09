@@ -17,8 +17,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Give a binary operation `f : A → B → C` and identifications `p : x ＝ x'` in `A`
-and `q : y ＝ y'` in `B`, we obtain an identification
+Given a binary operation `f : A → B → C` and identifications `p : x ＝ x'` in
+`A` and `q : y ＝ y'` in `B`, we obtain an identification
 
 ```text
   ap-binary f p q : f x y ＝ f x' y'

@@ -33,53 +33,50 @@ The **cofiber** of a map `f : A → B` is the
 ### The cofiber of a map
 
 ```agda
-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-cofiber {A = A} f = pushout f (const A unit star)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+    where
+  cofiber : (A → B) → UU (l1 ⊔ l2)
+  cofiber f = pushout f (const A unit star)
 
-cocone-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  cocone f (const A unit star) (cofiber f)
-cocone-cofiber {A = A} f = cocone-pushout f (const A unit star)
+  cocone-cofiber :
+    (f : A → B) → cocone f (const A unit star) (cofiber f)
+  cocone-cofiber f = cocone-pushout f (const A unit star)
 
-inl-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → B → cofiber f
-inl-cofiber {A = A} f = pr1 (cocone-cofiber f)
+  inl-cofiber : (f : A → B) → B → cofiber f
+  inl-cofiber f = pr1 (cocone-cofiber f)
 
-inr-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → unit → cofiber f
-inr-cofiber f = pr1 (pr2 (cocone-cofiber f))
+  inr-cofiber : (f : A → B) → unit → cofiber f
+  inr-cofiber f = pr1 (pr2 (cocone-cofiber f))
 
-point-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → cofiber f
-point-cofiber {A = A} f = inr-cofiber f star
+  point-cofiber : (f : A → B) → cofiber f
+  point-cofiber f = inr-cofiber f star
 
-cofiber-Pointed-Type :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → Pointed-Type (l1 ⊔ l2)
-pr1 (cofiber-Pointed-Type f) = cofiber f
-pr2 (cofiber-Pointed-Type f) = point-cofiber f
+  cofiber-Pointed-Type : (f : A → B) → Pointed-Type (l1 ⊔ l2)
+  pr1 (cofiber-Pointed-Type f) = cofiber f
+  pr2 (cofiber-Pointed-Type f) = point-cofiber f
 
-universal-property-cofiber :
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  ( {l : Level} →
-    universal-property-pushout l f (const A unit star) (cocone-cofiber f))
-universal-property-cofiber {A = A} f = up-pushout f (const A unit star)
+  universal-property-cofiber :
+    (f : A → B) {l : Level} →
+    universal-property-pushout l f (const A unit star) (cocone-cofiber f)
+  universal-property-cofiber f = up-pushout f (const A unit star)
 ```
 
 ## Properties
 
 ### The cofiber of an equivalence is contractible
 
-Note that this is not a logical equivalence. The cofiber of `X → 1` where `X` is
-an [acyclic type](synthetic-homotopy-theory.acyclic-types.md) is by definition
-contractible. Examples of noncontractible acyclic types include
+Note that this is not a logical equivalence. Not every map whose cofibers are
+all contractible is an equivalence. For instance The cofiber of `X → 1` where
+`X` is an [acyclic type](synthetic-homotopy-theory.acyclic-types.md) is by
+definition contractible. Examples of noncontractible acyclic types include
 [Hatcher's acyclic type](synthetic-homotopy-theory.hatchers-acyclic-type.md).
 
 ```agda
 is-contr-cofiber-is-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   is-equiv f → is-contr (cofiber f)
-is-contr-cofiber-is-equiv {A = A} {B} f is-equiv-f =
+is-contr-cofiber-is-equiv {A = A} f is-equiv-f =
   is-contr-is-equiv'
     ( unit)
     ( pr1 (pr2 (cocone-cofiber f)))
@@ -97,7 +94,7 @@ is-contr-cofiber-is-equiv {A = A} {B} f is-equiv-f =
 ```agda
 is-equiv-inl-cofiber-point :
   {l : Level} {B : UU l} (b : B) → is-equiv (inl-cofiber (point b))
-is-equiv-inl-cofiber-point {l} {B} b =
+is-equiv-inl-cofiber-point {B = B} b =
   is-equiv-universal-property-pushout'
     ( const unit B b)
     ( const unit unit star)

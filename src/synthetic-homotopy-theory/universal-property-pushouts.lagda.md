@@ -42,7 +42,7 @@ and a type `X` equipped with a
 [cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) of `S` into
 `X`. The **universal property of the pushout** of `𝒮` asserts that `X` is the
 _initial_ type equipped with such cocone structure. In other words, the
-universal property of the pushouot of `𝒮` asserts that the following evaluation
+universal property of the pushout of `𝒮` asserts that the following evaluation
 map is an equivalence:
 
 ```text
