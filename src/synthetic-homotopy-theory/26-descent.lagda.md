@@ -34,217 +34,15 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts
+open import synthetic-homotopy-theory.induction-principle-pushouts
+open import synthetic-homotopy-theory.pullback-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
 
-## Section 18.1 Five equivalent characterizations of pushouts
-
-### Definition 18.1.1 The induction principle of pushouts
-
-```agda
-Ind-pushout :
-  { l1 l2 l3 l4 : Level} (l : Level) →
-  { S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
-Ind-pushout l {X = X} f g c =
-  (P : X → UU l) → sec (dependent-cocone-map f g c P)
-```
-
-### Definition 18.1.2 The dependent universal property of pushouts
-
-```agda
-dependent-universal-property-pushout :
-  {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
-  UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-dependent-universal-property-pushout l f g {X} c =
-  (P : X → UU l) → is-equiv (dependent-cocone-map f g c P)
-```
-
 ### Remark 18.1.3 Computation of the identity type of `dependent-cocone`
-
-We compute the identity type of `dependent-cocone` in order to express the
-computation rules of the induction principle for pushouts.
-
-```agda
-coherence-htpy-dependent-cocone :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
-  (P : X → UU l5) (c' c'' : dependent-cocone f g c P)
-  (K : (pr1 c') ~ (pr1 c'')) (L : (pr1 (pr2 c')) ~ (pr1 (pr2 c''))) →
-  UU (l1 ⊔ l5)
-coherence-htpy-dependent-cocone {S = S} f g c P
-  h h' K L =
-  (s : S) →
-  Id
-    ( ((pr2 (pr2 h)) s) ∙ (L (g s)))
-    ( (ap (tr P (pr2 (pr2 c) s)) (K (f s))) ∙ ((pr2 (pr2 h')) s))
-
-htpy-dependent-cocone :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  (s t : dependent-cocone f g c P) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l5)
-htpy-dependent-cocone {S = S} f g c P h h' =
-  Σ ( (pr1 h) ~ (pr1 h')) (λ K →
-    Σ ( (pr1 (pr2 h)) ~ (pr1 (pr2 h')))
-      ( coherence-htpy-dependent-cocone f g c P h h' K))
-
-reflexive-htpy-dependent-cocone :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  (s : dependent-cocone f g c P) →
-  htpy-dependent-cocone f g c P s s
-reflexive-htpy-dependent-cocone f g (pair i (pair j H)) P
-  (pair hA (pair hB hS)) =
-  pair refl-htpy (pair refl-htpy right-unit-htpy)
-
-htpy-dependent-cocone-eq :
-  {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-  {s t : dependent-cocone f g c P} →
-  Id s t → htpy-dependent-cocone f g c P s t
-htpy-dependent-cocone-eq f g c P {s} {.s} refl =
-  reflexive-htpy-dependent-cocone f g c P s
-
-abstract
-  is-contr-total-htpy-dependent-cocone :
-    {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-    (s : dependent-cocone f g c P) →
-    is-contr
-      ( Σ (dependent-cocone f g c P)
-        ( htpy-dependent-cocone f g c P s))
-  is-contr-total-htpy-dependent-cocone
-    {S = S} {A} {B} f g {X} (pair i (pair j H)) P (pair hA (pair hB hS)) =
-    is-contr-total-Eq-structure
-      ( λ α βγ K →
-          Σ (hB ~ (pr1 βγ)) (λ L →
-          coherence-htpy-dependent-cocone f g
-            ( pair i (pair j H)) P (pair hA (pair hB hS)) (pair α βγ) K L))
-      ( is-contr-total-htpy hA)
-      ( pair hA refl-htpy)
-      ( is-contr-total-Eq-structure
-        ( λ β γ L →
-          coherence-htpy-dependent-cocone f g
-            ( pair i (pair j H))
-            ( P)
-            ( pair hA (pair hB hS))
-            ( pair hA (pair β γ))
-            ( refl-htpy)
-            ( L))
-        ( is-contr-total-htpy hB)
-        ( pair hB refl-htpy)
-        ( is-contr-equiv
-          ( Σ ((s : S) → Id (tr P (H s) (hA (f s))) (hB (g s))) (λ γ → hS ~ γ))
-          ( equiv-tot (equiv-concat-htpy inv-htpy-right-unit-htpy))
-          ( is-contr-total-htpy hS)))
-
-abstract
-  is-equiv-htpy-dependent-cocone-eq :
-    {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-    (s t : dependent-cocone f g c P) →
-    is-equiv (htpy-dependent-cocone-eq f g c P {s} {t})
-  is-equiv-htpy-dependent-cocone-eq f g c P s =
-    fundamental-theorem-id
-      ( is-contr-total-htpy-dependent-cocone f g c P s)
-      ( λ t → htpy-dependent-cocone-eq f g c P {s} {t})
-
-  eq-htpy-dependent-cocone :
-    {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-    (s t : dependent-cocone f g c P) →
-      htpy-dependent-cocone f g c P s t → Id s t
-  eq-htpy-dependent-cocone f g c P s t =
-    map-inv-is-equiv (is-equiv-htpy-dependent-cocone-eq f g c P s t)
-
-  issec-eq-htpy-dependent-cocone :
-    {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-      (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-    (s t : dependent-cocone f g c P) →
-    ( ( htpy-dependent-cocone-eq f g c P {s} {t}) ∘
-      ( eq-htpy-dependent-cocone f g c P s t)) ~ id
-  issec-eq-htpy-dependent-cocone f g c P s t =
-    issec-map-inv-is-equiv
-    ( is-equiv-htpy-dependent-cocone-eq f g c P s t)
-
-  isretr-eq-htpy-dependent-cocone :
-    {l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) (P : X → UU l5) →
-    (s t : dependent-cocone f g c P) →
-    ( ( eq-htpy-dependent-cocone f g c P s t) ∘
-      ( htpy-dependent-cocone-eq f g c P {s} {t})) ~ id
-  isretr-eq-htpy-dependent-cocone f g c P s t =
-    isretr-map-inv-is-equiv
-      ( is-equiv-htpy-dependent-cocone-eq f g c P s t)
-
-ind-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  Ind-pushout l f g c → (P : X → UU l) →
-  dependent-cocone f g c P → (x : X) → P x
-ind-pushout f g c ind-c P =
-  pr1 (ind-c P)
-
-compute-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dependent-cocone f g c P) →
-  htpy-dependent-cocone f g c P
-    ( dependent-cocone-map f g c P (ind-pushout f g c ind-c P h))
-    ( h)
-compute-pushout f g c ind-c P h =
-  htpy-dependent-cocone-eq f g c P (pr2 (ind-c P) h)
-
-left-compute-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dependent-cocone f g c P) →
-  ( a : A) → Id (ind-pushout f g c ind-c P h (pr1 c a)) (pr1 h a)
-left-compute-pushout f g c ind-c P h =
-  pr1 (compute-pushout f g c ind-c P h)
-
-right-compute-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dependent-cocone f g c P) →
-  ( b : B) → Id (ind-pushout f g c ind-c P h (pr1 (pr2 c) b)) (pr1 (pr2 h) b)
-right-compute-pushout f g c ind-c P h =
-  pr1 (pr2 (compute-pushout f g c ind-c P h))
-
-path-compute-pushout :
-  { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-  ( f : S → A) (g : S → B) (c : cocone f g X) →
-  ( ind-c : Ind-pushout l f g c) (P : X → UU l) (h : dependent-cocone f g c P) →
-  coherence-htpy-dependent-cocone f g c P
-    ( dependent-cocone-map f g c P (ind-pushout f g c ind-c P h))
-    ( h)
-    ( left-compute-pushout f g c ind-c P h)
-    ( right-compute-pushout f g c ind-c P h)
-path-compute-pushout f g c ind-c P h =
-  pr2 (pr2 (compute-pushout f g c ind-c P h))
-
-abstract
-  uniqueness-dependent-universal-property-pushout :
-    { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4} →
-    ( f : S → A) (g : S → B) (c : cocone f g X)
-    ( dup-c : dependent-universal-property-pushout l f g c) →
-    ( P : X → UU l) ( h : dependent-cocone f g c P) →
-    is-contr
-      ( Σ ((x : X) → P x) (λ k →
-          htpy-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
-  uniqueness-dependent-universal-property-pushout f g c dup-c P h =
-    is-contr-is-equiv'
-      ( fib (dependent-cocone-map f g c P) h)
-      ( tot (λ k → htpy-dependent-cocone-eq f g c P))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ k → is-equiv-htpy-dependent-cocone-eq f g c P
-          ( dependent-cocone-map f g c P k) h))
-      ( is-contr-map-is-equiv (dup-c P) h)
-```
 
 Before we state the main theorem of this section, we also state a dependent
 version of the pullback property of pushouts.
@@ -309,14 +107,6 @@ of those parts:
 ### Proof of Theorem 18.1.4, (5) implies (4)
 
 ```agda
-dependent-naturality-square :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f f' : (x : A) → B x)
-  {x x' : A} (p : Id x x') {q : Id (f x) (f' x)} {q' : Id (f x') (f' x')} →
-  Id ((apd f p) ∙ q') ((ap (tr B p) q) ∙ (apd f' p)) →
-  Id (tr (λ y → Id (f y) (f' y)) p q) q'
-dependent-naturality-square f f' refl {q} {q'} s =
-  inv (s ∙ (right-unit ∙ (ap-id q)))
-
 htpy-eq-dependent-cocone-map :
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   ( f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X) →
@@ -326,12 +116,33 @@ htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
   ind-pushout f g c ind-c
     ( λ x → Id (h x) (h' x))
     ( pair
-      ( pr1 (htpy-dependent-cocone-eq f g c P p))
+      ( horizontal-htpy-eq-dependent-cocone f g c P
+        ( dependent-cocone-map f g c P h)
+        ( dependent-cocone-map f g c P h')
+        ( p))
       ( pair
-        ( pr1 (pr2 (htpy-dependent-cocone-eq f g c P p)))
+        ( vertical-htpy-eq-dependent-cocone f g c P
+          ( dependent-cocone-map f g c P h)
+          ( dependent-cocone-map f g c P h')
+          ( p))
         ( λ s →
-          dependent-naturality-square h h' (pr2 (pr2 c) s)
-            ( pr2 (pr2 (htpy-dependent-cocone-eq f g c P p)) s))))
+          map-compute-path-over-eq-value h h'
+            ( coherence-square-cocone f g c s)
+            ( horizontal-htpy-eq-dependent-cocone f g c P
+              ( dependent-cocone-map f g c P h)
+              ( dependent-cocone-map f g c P h')
+              ( p)
+              ( f s))
+            ( vertical-htpy-eq-dependent-cocone f g c P
+              ( dependent-cocone-map f g c P h)
+              ( dependent-cocone-map f g c P h')
+              ( p)
+              ( g s))
+            ( coherence-square-htpy-eq-dependent-cocone f g c P
+              ( dependent-cocone-map f g c P h)
+              ( dependent-cocone-map f g c P h')
+              ( p)
+              ( s)))))
 
 dependent-universal-property-pushout-Ind-pushout :
   {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}

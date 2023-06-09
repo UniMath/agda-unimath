@@ -248,26 +248,26 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
   where
 
-  is-equiv-map-compute-path-over-eq-value' :
+  is-equiv-map-compute-path-over-eq-value-function :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (q' : eq-value f g y) →
-    is-equiv (map-compute-path-over-eq-value' f g p q q')
-  is-equiv-map-compute-path-over-eq-value' refl q q' =
+    is-equiv (map-compute-path-over-eq-value-function f g p q q')
+  is-equiv-map-compute-path-over-eq-value-function refl q q' =
     is-equiv-comp
       ( inv)
       ( concat' q' right-unit)
       ( is-equiv-concat' q' right-unit)
       ( is-equiv-inv q' q)
 
-  compute-path-over-eq-value' :
+  compute-path-over-eq-value-function :
     {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
     (((ap f p) ∙ q') ＝ (q ∙ (ap g p))) ≃ ((tr (eq-value f g) p q) ＝ q')
-  pr1 (compute-path-over-eq-value' p q q') =
-    map-compute-path-over-eq-value' f g p q q'
-  pr2 (compute-path-over-eq-value' p q q') =
-    is-equiv-map-compute-path-over-eq-value' p q q'
+  pr1 (compute-path-over-eq-value-function p q q') =
+    map-compute-path-over-eq-value-function f g p q q'
+  pr2 (compute-path-over-eq-value-function p q q') =
+    is-equiv-map-compute-path-over-eq-value-function p q q'
 ```
 
-Relation between between `compute-path-over-eq-value'` and `nat-htpy`
+Relation between between `compute-path-over-eq-value-function` and `nat-htpy`
 
 ```agda
 module _
@@ -277,15 +277,17 @@ module _
 
   nat-htpy-apd-htpy :
     (p : a0 ＝ a1) →
-    (map-inv-equiv (compute-path-over-eq-value'
+    (map-inv-equiv (compute-path-over-eq-value-function
       f g p (H a0) (H a1))) (apd H p) ＝ inv (nat-htpy H p)
   nat-htpy-apd-htpy refl =
     inv
       ( ap
-        ( map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a0)))
+        ( map-inv-equiv
+          ( compute-path-over-eq-value-function f g refl (H a0) (H a0)))
         ( ap inv (left-inv right-unit))) ∙
       ( isretr-map-inv-equiv
-        ( compute-path-over-eq-value' f g refl (H a0) (H a1)) (inv right-unit))
+        ( compute-path-over-eq-value-function f g refl (H a0) (H a1))
+        ( inv right-unit))
 ```
 
 ## See also
