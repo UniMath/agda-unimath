@@ -42,10 +42,10 @@ functions
   j' : (b : B) → P (j b)
 ```
 
-and a family of identifications
+and a family of dependent identifications
 
 ```text
-  (s : S) → tr P (H s) (i' (f s)) ＝ j' (g s).
+  (s : S) → path-over P (H s) (i' (f s)) (j' (g s)).
 ```
 
 ## Definitions
