@@ -29,6 +29,40 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 </details>
 
+## Idea
+
+Consider a span `𝒮` of types
+
+```text
+      f     g
+  A <--- S ---> B.
+```
+
+and a type `X` equipped with a
+[cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) of `S` into
+`X`. The **universal property of the pushout** of `𝒮` asserts that `X` is the
+_initial_ type equipped with such cocone structure. In other words, the
+universal property of the pushouot of `𝒮` asserts that the following evaluation
+map is an equivalence:
+
+```text
+  (X → Y) → cocone 𝒮 Y.
+```
+
+There are several ways of asserting a condition equivalent to the universal
+property of pushouts:
+
+1. The universal property of pushouts
+2. The pullback property of pushouts. This is a restatement of the universal
+   property of pushouts in terms of pullbacks.
+3. The dependent universal property of pushouts. This property characterizes
+   _dependent_ functions out of a pushout
+4. The dependent pullback property of pushouts. This is a restatement of the
+   dependent universal property of pushouts in terms of pullbacks
+5. The induction principle of pushouts. This weaker form of the dependent
+   universal property of pushouts expresses the induction principle of pushouts
+   seen as higher inductive types.
+
 ## Definition
 
 ### The universal property of pushouts

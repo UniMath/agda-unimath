@@ -29,18 +29,19 @@ Consider a span `𝒮` of types
   A <--- S ---> B.
 ```
 
-A **pushout** of `𝒮` is an initial type `X` equipped with a cocone structure of
-`𝒮` in `X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone
-structure `(i , j , H)` where
+A **pushout** of `𝒮` is an initial type `X` equipped with a
+[cocone structure](synthetic-homotopy-theory.cocones-under-spans.md) of `𝒮` in
+`X`. In other words, a pushout `X` of `𝒮` comes equipped with a cocone structure
+`(i , j , H)` where
 
 ```text
-      g
-  S -----> B
-  |        |
- f|   H    | j
-  V        V
-  A -----> X,
-      i
+        g
+    S -----> B
+    |        |
+  f |   H    | j
+    V        V
+    A -----> X,
+        i
 ```
 
 such that for any type `Y`, the following evaluation map is an equivalence
@@ -48,6 +49,10 @@ such that for any type `Y`, the following evaluation map is an equivalence
 ```text
   (X → Y) → cocone 𝒮 Y.
 ```
+
+This condition is the
+[universal property of the pushout](synthetic-homotopy-theory.universal-property-pushouts.md)
+of `𝒮`.
 
 The idea is that the pushout of `𝒮` is the universal type that contains the
 elements of the types `A` and `B` via the 'inclusions' `i : A → X` and
