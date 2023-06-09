@@ -7,6 +7,7 @@ module ring-theory.localizations-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

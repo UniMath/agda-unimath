@@ -7,6 +7,7 @@ module foundation.diagonals-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-fibers-of-maps
 open import foundation.functions

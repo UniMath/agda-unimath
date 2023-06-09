@@ -9,6 +9,7 @@ module group-theory.isomorphisms-semigroups where
 ```agda
 open import category-theory.isomorphisms-large-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

@@ -9,6 +9,8 @@ module elementary-number-theory.addition-natural-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings

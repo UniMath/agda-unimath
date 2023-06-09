@@ -7,6 +7,8 @@ module foundation.binary-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.identity-types

@@ -7,6 +7,7 @@ module foundation.equivalences-maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalence-extensionality

@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.26-id-pushout where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -21,6 +22,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 

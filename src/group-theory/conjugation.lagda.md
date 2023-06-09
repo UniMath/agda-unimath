@@ -7,6 +7,7 @@ module group-theory.conjugation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences

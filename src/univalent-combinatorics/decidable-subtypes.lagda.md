@@ -22,6 +22,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.decidable-dependent-pair-types

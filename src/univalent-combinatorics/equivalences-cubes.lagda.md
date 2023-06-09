@@ -19,6 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cubes
@@ -102,9 +103,10 @@ htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) → UU lzero
 htpy-equiv-cube k X Y e f =
   Σ ( map-dim-equiv-cube k X Y e ~ map-dim-equiv-cube k X Y f)
-    ( λ H → (d : dim-cube k X) →
-            ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
-            ( map-axis-equiv-cube k X Y f d))
+    ( λ H →
+      ( d : dim-cube k X) →
+      ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
+      ( map-axis-equiv-cube k X Y f d))
 
 refl-htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e : equiv-cube k X Y) → htpy-equiv-cube k X Y e e

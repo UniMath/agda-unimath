@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.hatchers-acyclic-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-identifications
 open import foundation.contractible-types

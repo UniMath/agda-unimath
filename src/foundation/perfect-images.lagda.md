@@ -9,6 +9,7 @@ module foundation.perfect-images where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.double-negation
@@ -27,6 +28,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.transport
 ```
 
 </details>

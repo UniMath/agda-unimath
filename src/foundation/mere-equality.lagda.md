@@ -7,6 +7,7 @@ module foundation.mere-equality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations

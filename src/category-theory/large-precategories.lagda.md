@@ -9,6 +9,7 @@ module category-theory.large-precategories where
 ```agda
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets

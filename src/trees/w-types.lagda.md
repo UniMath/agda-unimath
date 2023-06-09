@@ -7,6 +7,7 @@ module trees.w-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -18,11 +19,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
+open import foundation.transport
 open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
-
-open import foundation-core.truncation-levels
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.coalgebras-polynomial-endofunctors

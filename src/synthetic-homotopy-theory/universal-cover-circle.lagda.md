@@ -10,10 +10,13 @@ module synthetic-homotopy-theory.universal-cover-circle where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-paths
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -27,6 +30,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels

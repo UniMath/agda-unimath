@@ -10,6 +10,8 @@ module category-theory.isomorphisms-categories where
 open import category-theory.categories
 open import category-theory.isomorphisms-precategories
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

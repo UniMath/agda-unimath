@@ -7,6 +7,7 @@ module trees.combinator-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types

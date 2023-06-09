@@ -1,14 +1,13 @@
 # Commuting squares of identifications
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.commuting-squares-of-identifications where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
 open import foundation.functions
 open import foundation.universe-levels
 

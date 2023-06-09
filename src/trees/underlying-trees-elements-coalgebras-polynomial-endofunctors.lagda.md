@@ -7,6 +7,7 @@ module trees.underlying-trees-elements-coalgebras-polynomial-endofunctors where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.coproduct-types

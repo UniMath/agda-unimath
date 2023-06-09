@@ -9,6 +9,8 @@ open import foundation-core.homotopies public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions
@@ -21,6 +23,7 @@ open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.sections
+open import foundation-core.transport
 ```
 
 </details>

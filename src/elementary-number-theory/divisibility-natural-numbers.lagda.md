@@ -14,6 +14,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -21,6 +22,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.transport
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels

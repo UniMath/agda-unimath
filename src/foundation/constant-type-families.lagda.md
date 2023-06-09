@@ -7,10 +7,14 @@ module foundation.constant-type-families where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.identity-types
 open import foundation.universe-levels
+
+open import foundation-core.dependent-paths
+open import foundation-core.equivalences
+open import foundation-core.identity-types
 ```
 
 </details>

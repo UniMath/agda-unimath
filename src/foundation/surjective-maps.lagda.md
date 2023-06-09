@@ -7,6 +7,7 @@ module foundation.surjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

@@ -19,6 +19,8 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-equivalence-relations
@@ -46,6 +48,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 

@@ -7,6 +7,7 @@ module orthogonal-factorization-systems.higher-modalities where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

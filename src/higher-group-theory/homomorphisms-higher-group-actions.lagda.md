@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-group-actions

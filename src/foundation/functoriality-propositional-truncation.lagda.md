@@ -7,6 +7,7 @@ module foundation.functoriality-propositional-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.propositional-truncations
@@ -16,7 +17,6 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 

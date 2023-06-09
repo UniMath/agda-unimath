@@ -7,11 +7,12 @@ module synthetic-homotopy-theory.dependent-pullback-property-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.identity-types
 open import foundation.pullbacks
+open import foundation.transport
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans

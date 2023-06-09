@@ -1,8 +1,6 @@
 # Commuting triangles of maps
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.commuting-triangles-of-maps where
 ```
 

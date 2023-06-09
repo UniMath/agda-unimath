@@ -9,6 +9,7 @@ open import foundation-core.functoriality-dependent-function-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
@@ -27,6 +28,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
+open import foundation-core.transport
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

@@ -9,6 +9,7 @@ open import foundation-core.sections public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions

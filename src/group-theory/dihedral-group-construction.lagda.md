@@ -7,6 +7,7 @@ module group-theory.dihedral-group-construction where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types

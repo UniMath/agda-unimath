@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.double-loop-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.path-algebra

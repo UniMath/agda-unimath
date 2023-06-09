@@ -10,6 +10,7 @@ module lists.concatenation-lists where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types

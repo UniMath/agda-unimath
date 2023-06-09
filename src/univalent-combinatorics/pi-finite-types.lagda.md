@@ -10,6 +10,7 @@ module univalent-combinatorics.pi-finite-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -45,6 +46,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types

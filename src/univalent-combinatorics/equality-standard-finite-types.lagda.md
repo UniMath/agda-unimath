@@ -10,6 +10,7 @@ module univalent-combinatorics.equality-standard-finite-types where
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.apartness-relations
 open import foundation.contractible-types
 open import foundation.coproduct-types

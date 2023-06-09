@@ -10,6 +10,8 @@ module finite-group-theory.transpositions where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -38,6 +40,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.transport
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence

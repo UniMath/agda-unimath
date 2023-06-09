@@ -8,6 +8,7 @@ module foundation.faithful-maps where
 
 ```agda
 open import foundation.0-maps
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.universe-levels

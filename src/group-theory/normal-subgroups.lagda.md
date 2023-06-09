@@ -7,6 +7,7 @@ module group-theory.normal-subgroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.dependent-pair-types
@@ -18,6 +19,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-groups

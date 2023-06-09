@@ -9,6 +9,7 @@ open import foundation-core.univalence public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences

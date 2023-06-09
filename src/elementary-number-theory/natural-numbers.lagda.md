@@ -7,6 +7,7 @@ module elementary-number-theory.natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences

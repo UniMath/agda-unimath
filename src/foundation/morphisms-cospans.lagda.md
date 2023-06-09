@@ -1,8 +1,6 @@
 # Morphisms of cospans
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.morphisms-cospans where
 ```
 

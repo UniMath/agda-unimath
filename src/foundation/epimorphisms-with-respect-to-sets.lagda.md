@@ -7,6 +7,7 @@ module foundation.epimorphisms-with-respect-to-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.existential-quantification

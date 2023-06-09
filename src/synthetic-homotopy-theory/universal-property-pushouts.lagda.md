@@ -7,7 +7,7 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.cones-over-cospans
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -17,16 +17,13 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
-open import foundation.sections
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
 ```
 

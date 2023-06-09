@@ -10,6 +10,9 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.action-on-identifications-binary-functions public
+open import foundation.action-on-identifications-dependent-functions public
+open import foundation.action-on-identifications-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public

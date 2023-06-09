@@ -7,6 +7,7 @@ module foundation.axiom-l where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences

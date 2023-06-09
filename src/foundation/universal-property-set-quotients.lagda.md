@@ -9,6 +9,7 @@ module foundation.universal-property-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.epimorphisms-with-respect-to-sets
@@ -42,6 +43,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
+open import foundation-core.transport
 open import foundation-core.univalence
 ```
 

@@ -10,6 +10,7 @@ module univalent-combinatorics.2-element-types where
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.connected-components-universes
 open import foundation.contractible-maps
@@ -36,6 +37,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type

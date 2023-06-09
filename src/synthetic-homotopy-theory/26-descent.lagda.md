@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.26-descent where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.constant-type-families
@@ -27,17 +29,15 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
-open import foundation.sections
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
-open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
-open import synthetic-homotopy-theory.induction-principle-pushouts
 open import synthetic-homotopy-theory.pullback-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```

@@ -11,9 +11,9 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functions
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

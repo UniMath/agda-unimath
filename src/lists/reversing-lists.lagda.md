@@ -9,6 +9,7 @@ module lists.reversing-lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.universe-levels

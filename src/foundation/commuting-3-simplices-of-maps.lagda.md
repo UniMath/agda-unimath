@@ -1,8 +1,6 @@
 # Commuting `3`-simplices of maps
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation.commuting-3-simplices-of-maps where
 ```
 

@@ -22,6 +22,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -47,6 +48,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.repetitions-of-values
 open import foundation.sets
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 

@@ -16,6 +16,7 @@ open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations-standard-finite-types
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types

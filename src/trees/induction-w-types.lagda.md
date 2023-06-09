@@ -9,11 +9,13 @@ module trees.induction-w-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functions
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.transport
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types

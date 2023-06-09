@@ -7,8 +7,11 @@ module synthetic-homotopy-theory.dependent-cocones-under-spans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.dependent-paths
 open import foundation.equivalences
 open import foundation.functions
 open import foundation.functoriality-dependent-pair-types
@@ -16,6 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans

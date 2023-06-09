@@ -10,6 +10,7 @@ module univalent-combinatorics.embeddings-standard-finite-types where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types

@@ -9,6 +9,7 @@ module set-theory.cumulative-hierarchy where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.cartesian-product-types
 open import foundation.constant-type-families
@@ -26,6 +27,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -7,6 +7,7 @@ module species.dirichlet-exponentials-species-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.arithmetic-law-product-and-pi-decompositions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-decompositions

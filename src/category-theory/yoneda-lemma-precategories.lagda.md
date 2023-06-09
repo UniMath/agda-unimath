@@ -12,6 +12,7 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 open import category-theory.representable-functors-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences

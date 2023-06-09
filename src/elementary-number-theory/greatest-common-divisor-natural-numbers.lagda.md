@@ -21,6 +21,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -29,6 +30,7 @@ open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.transport
 open import foundation.universe-levels
 ```
 

@@ -7,6 +7,8 @@ module graph-theory.equivalences-directed-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.contractible-types

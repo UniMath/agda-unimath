@@ -14,6 +14,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

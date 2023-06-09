@@ -7,6 +7,7 @@ module foundation.equality-fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.identity-types
@@ -17,6 +18,7 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.transport
 ```
 
 </details>

@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types

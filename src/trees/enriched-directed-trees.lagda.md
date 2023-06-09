@@ -9,6 +9,7 @@ module trees.enriched-directed-trees where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -19,6 +20,7 @@ open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

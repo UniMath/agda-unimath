@@ -11,6 +11,7 @@ module foundation.vectors-set-quotients where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-products-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types

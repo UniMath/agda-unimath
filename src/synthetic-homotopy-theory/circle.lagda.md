@@ -8,12 +8,15 @@ module synthetic-homotopy-theory.circle where
 
 ```agda
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import structured-types.pointed-types

@@ -11,6 +11,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.functoriality-cartesian-product-types

@@ -9,6 +9,7 @@ open import foundation-core.commuting-triangles-of-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.universe-levels

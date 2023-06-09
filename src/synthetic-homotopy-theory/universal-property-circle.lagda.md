@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.universal-property-circle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.constant-type-families
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -20,6 +22,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sections
+open import foundation.transport
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.free-loops

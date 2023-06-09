@@ -10,6 +10,7 @@ module foundation.iterating-involutions where
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.iterating-functions
 open import foundation.universe-levels
 

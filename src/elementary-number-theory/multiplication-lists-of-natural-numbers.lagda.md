@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 
 open import lists.concatenation-lists

@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sections
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

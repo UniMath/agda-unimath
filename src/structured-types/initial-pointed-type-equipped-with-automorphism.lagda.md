@@ -10,6 +10,7 @@ module structured-types.initial-pointed-type-equipped-with-automorphism where
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types

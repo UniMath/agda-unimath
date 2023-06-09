@@ -7,6 +7,7 @@ module foundation.set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.embeddings

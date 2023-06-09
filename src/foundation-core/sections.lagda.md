@@ -1,8 +1,6 @@
 # Sections
 
 ```agda
-{-# OPTIONS --safe #-}
-
 module foundation-core.sections where
 ```
 

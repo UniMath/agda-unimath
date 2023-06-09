@@ -15,6 +15,7 @@ open import univalent-combinatorics.equality-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.universe-levels
 open import foundation.dependent-pair-types

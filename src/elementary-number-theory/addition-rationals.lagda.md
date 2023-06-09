@@ -14,6 +14,7 @@ open import elementary-number-theory.integer-fractions
 open import elementary-number-theory.rational-numbers
 open import elementary-number-theory.reduced-integer-fractions
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 ```
