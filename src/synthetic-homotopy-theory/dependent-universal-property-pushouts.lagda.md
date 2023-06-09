@@ -190,7 +190,7 @@ dependent-pullback-property-dependent-universal-property-pushout
   let c = (pair i (pair j H)) in
   is-equiv-right-factor-htpy
     ( dependent-cocone-map f g c P)
-    ( tot (λ h → tot λ h' → htpy-eq))
+    ( tot (λ h → tot (λ h' → htpy-eq)))
     ( gap
       ( λ h x → tr P (H x) (h (f x)))
       ( _∘ g)
@@ -215,7 +215,7 @@ dependent-universal-property-dependent-pullback-property-pushout
   let c = (pair i (pair j H)) in
   is-equiv-comp-htpy
     ( dependent-cocone-map f g c P)
-    ( tot (λ h → tot λ h' → htpy-eq))
+    ( tot (λ h → tot (λ h' → htpy-eq)))
     ( gap
       ( λ h x → tr P (H x) (h (f x)))
       ( _∘ g)

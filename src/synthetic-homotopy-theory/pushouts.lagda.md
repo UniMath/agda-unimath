@@ -63,7 +63,7 @@ such that `f s ＝ a` and `g s ＝ b`.
 Examples of pushouts include
 [suspensions](synthetic-homotopy-theory.suspensions-of-types.md),
 [spheres](synthetic-homotopy-theory.spheres.md),
-[joins](synthetic-homotopy-theory.joins-of-types.md), the
+[joins](synthetic-homotopy-theory.joins-of-types.md), and the
 [smash product](synthetic-homotopy-theory.smash-products-of-pointed-types.md).
 
 ## Postulates
