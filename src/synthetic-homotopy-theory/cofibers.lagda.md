@@ -35,7 +35,8 @@ The **cofiber** of a map `f : A → B` is the
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
-    where
+  where
+
   cofiber : (A → B) → UU (l1 ⊔ l2)
   cofiber f = pushout f (const A unit star)
 
