@@ -1,4 +1,5 @@
 fail_fast: false
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
@@ -26,13 +27,13 @@ repos:
         types_or: [markdown, text]
 
       - id: blank-line-conventions
+        # Depends on `markdown-conventions`
         name: Blank line conventions in literate Agda Markdown files
         entry: scripts/blank_line_conventions.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
-        #depends_on: markdown-conventions #TODO: find the correct way to express this
 
       - id: fix-imports
         name: Format Agda imports
@@ -68,6 +69,7 @@ repos:
         types_or: [markdown, text]
 
       - id: max-line-length-conventions
+        # Should run after `simply-wrappable-long-lines`
         name: Check the maximum line length conventions
         entry: scripts/max_line_length_conventions.py
         language: python
