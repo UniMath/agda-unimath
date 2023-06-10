@@ -9,6 +9,7 @@ open import foundation-core.transport public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.universe-levels
 
 open import foundation-core.dependent-pair-types
@@ -22,7 +23,27 @@ open import foundation-core.identity-types
 
 ## Idea
 
-This file records interactions between transport (`tr`) and other constructions.
+Given a type family `B` over `A`, an
+[identification](foundation-core.identity-types.md) `p : x ＝ y` in `A` and an
+element `b : B x`, we can [**transport**](foundation-core.transport.md) the
+element `b` along the identification `p` to obtain an element `tr B p b : B y`.
+
+The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
+recorded in this file.
+
+## Definitions
+
+### The action on identifications of transport
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
+  (B : A → UU l2)
+  where
+
+  tr² : (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
+  tr² α b0 = ap (λ t → tr B t b0) α
+```
 
 ## Properties
 
