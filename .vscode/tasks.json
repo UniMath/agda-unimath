@@ -27,13 +27,20 @@
       "hide": true
     },
     {
-      "label": "unused-imports",
-      "detail": "Search for and remove unused imports. Very slow!",
+      "label": "demote-foundation-imports",
+      "detail": "Search for and demote imports",
       "type": "shell",
       "command": "python",
       "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
       "problemMatcher": [],
-      "dependsOn": "remove-unused-imports"
+      "hide": true
+    },
+    {
+      "label": "unused-imports",
+      "detail": "Search for and remove unused imports. Very slow!",
+      "problemMatcher": [],
+      "dependsOn": ["remove-unused-imports", "demote-foundation-imports"],
+      "dependsOrder": "sequence"
     }
   ],
   "statusbar.default.hide": false
