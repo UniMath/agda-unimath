@@ -16,7 +16,7 @@ open import foundation-core.contractible-maps public
 open import foundation-core.contractible-types public
 open import foundation-core.coproduct-types public
 open import foundation-core.decidable-propositions public
-open import foundation-core.dependent-paths public
+open import foundation-core.dependent-identifications public
 open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.discrete-types public
 open import foundation-core.embeddings public

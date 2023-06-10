@@ -26,6 +26,7 @@ open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -43,7 +44,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.transport
 open import foundation-core.univalence
 ```
 

@@ -15,6 +15,7 @@ open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps

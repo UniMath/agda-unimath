@@ -13,6 +13,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -22,7 +23,6 @@ open import foundation-core.equivalences
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.transport
 ```
 
 </details>

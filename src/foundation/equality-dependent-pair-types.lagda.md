@@ -12,9 +12,8 @@ open import foundation-core.equality-dependent-pair-types public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
-
-open import foundation-core.transport
 ```
 
 </details>

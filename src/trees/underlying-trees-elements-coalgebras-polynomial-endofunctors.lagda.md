@@ -23,6 +23,7 @@ open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 

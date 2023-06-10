@@ -14,8 +14,8 @@ open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-maps
 open import foundation.contractible-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.dependent-paths
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
@@ -243,17 +243,20 @@ module _
     α : type-descent-data-circle P ≃ Q (base-free-loop l)
     α = pr1 αH
 
-  map-compute-path-over-loop-circle :
+  map-compute-dependent-identification-loop-circle :
     ( x y : type-descent-data-circle P) →
-    ( map-equiv (aut-descent-data-circle P) x ＝ y) →
-    ( path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
-  map-compute-path-over-loop-circle x y q =
+    map-equiv (aut-descent-data-circle P) x ＝ y →
+    dependent-identification Q
+      ( loop-free-loop l)
+      ( map-equiv α x)
+      ( map-equiv α y)
+  map-compute-dependent-identification-loop-circle x y q =
     inv (pr2 αH x) ∙ (ap (map-equiv α) q)
 
-  is-equiv-map-compute-path-over-loop-circle :
+  is-equiv-map-compute-dependent-identification-loop-circle :
     ( x y : type-descent-data-circle P) →
-    is-equiv (map-compute-path-over-loop-circle x y)
-  is-equiv-map-compute-path-over-loop-circle x y =
+    is-equiv (map-compute-dependent-identification-loop-circle x y)
+  is-equiv-map-compute-dependent-identification-loop-circle x y =
     fundamental-theorem-id
       ( is-contr-equiv'
         ( fib (map-equiv α) (tr Q (loop-free-loop l) (map-equiv α x)))
@@ -261,17 +264,20 @@ module _
         ( is-contr-map-is-equiv
           ( is-equiv-map-equiv α)
           ( tr Q (loop-free-loop l) (map-equiv α x))))
-      ( map-compute-path-over-loop-circle x)
+      ( map-compute-dependent-identification-loop-circle x)
       ( y)
 
-  compute-path-over-loop-circle :
+  compute-dependent-identification-loop-circle :
     ( x y : type-descent-data-circle P) →
     ( map-equiv (aut-descent-data-circle P) x ＝ y) ≃
-    ( path-over Q (loop-free-loop l) (map-equiv α x) (map-equiv α y))
-  pr1 (compute-path-over-loop-circle x y) =
-    map-compute-path-over-loop-circle x y
-  pr2 (compute-path-over-loop-circle x y) =
-    is-equiv-map-compute-path-over-loop-circle x y
+    ( dependent-identification Q
+      ( loop-free-loop l)
+      ( map-equiv α x)
+      ( map-equiv α y))
+  pr1 (compute-dependent-identification-loop-circle x y) =
+    map-compute-dependent-identification-loop-circle x y
+  pr2 (compute-dependent-identification-loop-circle x y) =
+    is-equiv-map-compute-dependent-identification-loop-circle x y
 ```
 
 ```agda
@@ -293,7 +299,7 @@ module _
       ( s (base-free-loop l))
   pr2 (ev-fixpoint-descent-data-circle s) =
     map-inv-is-equiv
-      ( is-equiv-map-compute-path-over-loop-circle
+      ( is-equiv-map-compute-dependent-identification-loop-circle
         ( l)
         ( Q)
         ( P)
@@ -310,10 +316,10 @@ module _
     fixpoint-descent-data-circle l P ≃ free-dependent-loop l Q
   equiv-fixpoint-descent-data-circle-free-dependent-loop =
     equiv-Σ
-      ( λ x → path-over Q (loop-free-loop l) x x)
+      ( λ x → dependent-identification Q (loop-free-loop l) x x)
       ( α)
       ( λ x →
-        compute-path-over-loop-circle l Q P αH x x)
+        compute-dependent-identification-loop-circle l Q P αH x x)
 
   comparison-fixpoint-descent-data-circle :
     fixpoint-descent-data-circle l P → free-dependent-loop l Q
@@ -336,7 +342,7 @@ module _
         ( ( horizontal-concat-Id²
             ( refl {x = ap (tr Q (loop-free-loop l)) (inv issec-inv-α)})
             ( issec-map-inv-is-equiv
-              ( is-equiv-map-compute-path-over-loop-circle
+              ( is-equiv-map-compute-dependent-identification-loop-circle
                 ( l)
                 ( Q)
                 ( P)

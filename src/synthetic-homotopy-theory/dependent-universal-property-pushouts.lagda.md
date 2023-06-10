@@ -107,7 +107,7 @@ htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
           ( dependent-cocone-map f g c P h')
           ( p))
         ( λ s →
-          map-compute-path-over-eq-value h h'
+          map-compute-dependent-identification-eq-value h h'
             ( coherence-square-cocone f g c s)
             ( horizontal-htpy-eq-dependent-cocone f g c P
               ( dependent-cocone-map f g c P h)

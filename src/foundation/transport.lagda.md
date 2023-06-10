@@ -18,7 +18,7 @@ open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-paths
+open import foundation-core.dependent-identifications
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
@@ -33,17 +33,41 @@ This file records interactions between transport (`tr`) and other constructions.
 
 ## Properties
 
-### Transport
+### Transport is an equivalence
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2}
-  {x0 x1 : X} (p : x0 ＝ x1)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where
 
-  preserves-tr-id :
-    (p : x0 ＝ x1) → preserves-tr (λ x → id {A = A x}) p ~ refl-htpy
-  preserves-tr-id refl = refl-htpy
+  inv-tr : x ＝ y → B y → B x
+  inv-tr p = tr B (inv p)
+
+  isretr-inv-tr : (p : x ＝ y) → ((inv-tr p) ∘ (tr B p)) ~ id
+  isretr-inv-tr refl b = refl
+
+  issec-inv-tr : (p : x ＝ y) → ((tr B p) ∘ (inv-tr p)) ~ id
+  issec-inv-tr refl b = refl
+
+  is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
+  is-equiv-tr p =
+    is-equiv-has-inverse
+      ( inv-tr p)
+      ( issec-inv-tr p)
+      ( isretr-inv-tr p)
+
+  equiv-tr : x ＝ y → (B x) ≃ (B y)
+  pr1 (equiv-tr p) = tr B p
+  pr2 (equiv-tr p) = is-equiv-tr p
+```
+
+### Transporting along `refl` is the identity equivalence
+
+```agda
+equiv-tr-refl :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} →
+  equiv-tr B refl ＝ id-equiv {A = B x}
+equiv-tr-refl B = refl
 ```
 
 ### Transport in a family of cartesian products
@@ -113,7 +137,7 @@ tr-Σ C refl z = refl
 tr-eq-pair-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}
   {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : (Σ A B) → UU l3)
-  (p : a0 ＝ a1) (q : path-over B p b0 b1) (u : C (a0 , b0)) →
+  (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) (u : C (a0 , b0)) →
   tr C (eq-pair-Σ p q) u ＝
   tr (λ x → C (a1 , x)) q (tr C (eq-pair-Σ p refl) u)
 tr-eq-pair-Σ C refl refl u = refl
@@ -131,21 +155,23 @@ module _
     tr (λ a → B a → C a) p f ＝ (tr C p ∘ (f ∘ tr B (inv p)))
   tr-function-type refl f = refl
 
-  compute-path-over-function-type :
+  compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) ≃
     (tr (λ a → B a → C a) p f ＝ g)
-  compute-path-over-function-type refl f g = inv-equiv equiv-funext
+  compute-dependent-identification-function-type refl f g =
+    inv-equiv equiv-funext
 
-  map-compute-path-over-function-type :
+  map-compute-dependent-identification-function-type :
     (p : x ＝ y) (f : B x → C x) (g : B y → C y) →
     ((b : B x) → tr C p (f b) ＝ g (tr B p b)) →
     (tr (λ a → B a → C a) p f ＝ g)
-  map-compute-path-over-function-type p f g =
-    map-equiv (compute-path-over-function-type p f g)
+  map-compute-dependent-identification-function-type p f g =
+    map-equiv (compute-dependent-identification-function-type p f g)
 ```
 
-Relation between`compute-path-over-function-type` and `preserves-tr`
+Relation between`compute-dependent-identification-function-type` and
+`preserves-tr`
 
 ```agda
 module _
@@ -155,7 +181,7 @@ module _
 
   preserves-tr-apd-function :
     (p : i0 ＝ i1) (a : A i0) →
-    (map-inv-equiv (compute-path-over-function-type
+    (map-inv-equiv (compute-dependent-identification-function-type
       A B p (f i0) (f i1)) (apd f p) a) ＝
     inv-htpy (preserves-tr f p) a
   preserves-tr-apd-function refl = refl-htpy

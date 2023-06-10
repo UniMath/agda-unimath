@@ -8,6 +8,7 @@ module foundation.univalent-type-families where
 
 ```agda
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

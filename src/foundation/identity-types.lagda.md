@@ -19,7 +19,6 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
-open import foundation-core.transport
 ```
 
 </details>
@@ -41,14 +40,14 @@ identifications in arbitrary types.
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
 | Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
-| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                      |
+| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
 | Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
 | Commuting squares of identifications             | [`foundation.commuting-squares-identifications`](foundation.commuting-squares-identifications.md)                         |
-| Dependent paths (foundation)                     | [`foundation.dependent-paths`](foundation.dependent-paths.md)                                                             |
-| Dependent paths (foundation-core)                | [`foundation-core.dependent-paths`](foundation-core.dependent-paths.md)                                                   |
+| Dependent identifications (foundation)                     | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                                             |
+| Dependent identifications (foundation-core)                | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                                                   |
 | The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
 | Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
-| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                          |
+| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
 | The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
 | The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
 | Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
@@ -238,37 +237,4 @@ module _
     ((p ∙ q) ＝ r) ≃ (p ＝ (r ∙ (inv q)))
   pr1 (equiv-con-inv p q r) = con-inv p q r
   pr2 (equiv-con-inv p q r) = is-equiv-con-inv p q r
-```
-
-### Transport is an equivalence
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
-  where
-
-  inv-tr : x ＝ y → B y → B x
-  inv-tr p = tr B (inv p)
-
-  isretr-inv-tr : (p : x ＝ y) → ((inv-tr p) ∘ (tr B p)) ~ id
-  isretr-inv-tr refl b = refl
-
-  issec-inv-tr : (p : x ＝ y) → ((tr B p) ∘ (inv-tr p)) ~ id
-  issec-inv-tr refl b = refl
-
-  is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
-  is-equiv-tr p =
-    is-equiv-has-inverse
-      ( inv-tr p)
-      ( issec-inv-tr p)
-      ( isretr-inv-tr p)
-
-  equiv-tr : x ＝ y → (B x) ≃ (B y)
-  pr1 (equiv-tr p) = tr B p
-  pr2 (equiv-tr p) = is-equiv-tr p
-
-equiv-tr-refl :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} →
-  equiv-tr B refl ＝ id-equiv {A = B x}
-equiv-tr-refl B = eq-htpy-equiv (λ _ → refl)
 ```

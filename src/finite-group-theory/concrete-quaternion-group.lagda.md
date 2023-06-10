@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.isolated-points
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.complements-isolated-points
@@ -26,18 +27,6 @@ open import univalent-combinatorics.equivalences-cubes
 ## Definition
 
 ```agda
-{-
-equiv-face-standard-cube :
-  {k : ℕ} (d : dim-standard-cube (succ-ℕ k))
-  (a : axis-standard-cube (succ-ℕ k) d) →
-  equiv-cube (face-cube (standard-cube (succ-ℕ k)) d a) (standard-cube k)
-equiv-face-standard-cube {zero-ℕ} d a =
-  pair
-    {! is-equiv-is-empty!}
-    {!!}
-equiv-face-standard-cube {succ-ℕ k} d a = {!!}
--}
-
 equiv-face-cube :
   (k : ℕ) (X Y : cube (succ-ℕ k)) (e : equiv-cube (succ-ℕ k) X Y)
   (d : dim-cube (succ-ℕ k) X) (a : axis-cube (succ-ℕ k) X d) →
@@ -100,14 +89,6 @@ labelling-faces-cube-with-labeled-faces :
   (a : axis-cube (succ-ℕ k) (cube-cube-with-labeled-faces k X) d) →
   labelling-cube k (face-cube k (cube-cube-with-labeled-faces k X) d a)
 labelling-faces-cube-with-labeled-faces k X = pr2 X
-
-{-
-standard-cube-with-labeled-faces :
-  (k : ℕ) → cube-with-labeled-faces k
-standard-cube-with-labeled-faces k =
-  pair ( standard-cube (succ-ℕ k))
-       ( λ d a → {!!})
--}
 
 equiv-cube-with-labeled-faces :
   {k : ℕ} (X Y : cube-with-labeled-faces k) → UU lzero

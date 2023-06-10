@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.slice
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalent-type-families
 open import foundation.universe-levels

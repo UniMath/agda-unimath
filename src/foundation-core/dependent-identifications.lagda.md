@@ -1,7 +1,7 @@
-# Dependent paths
+# Dependent identifications
 
 ```agda
-module foundation-core.dependent-paths where
+module foundation-core.dependent-identifications where
 ```
 
 <details><summary>Imports</summary>
@@ -31,13 +31,13 @@ where `tr` is the [transport](foundation-core.transport.md) function.
 ## Definition
 
 ```agda
-path-over :
+dependent-identification :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
   B x → B x' → UU l2
-path-over B p u v = (tr B p u ＝ v)
+dependent-identification B p u v = (tr B p u ＝ v)
 
-refl-path-over :
+refl-dependent-identification :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} {y : B x} →
-  path-over B refl y y
-refl-path-over B = refl
+  dependent-identification B refl y y
+refl-dependent-identification B = refl
 ```
