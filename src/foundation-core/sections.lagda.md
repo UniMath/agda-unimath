@@ -7,10 +7,10 @@ module foundation-core.sections where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
 open import foundation.functions
 open import foundation.universe-levels
 
+open import foundation-core.dependent-pair-types
 open import foundation-core.homotopies
 ```
 

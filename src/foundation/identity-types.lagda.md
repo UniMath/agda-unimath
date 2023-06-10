@@ -19,6 +19,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.homotopies
+open import foundation-core.transport
 ```
 
 </details>
@@ -42,7 +43,7 @@ identifications in arbitrary types.
 | Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
 | Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
 | Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
-| Commuting squares of identifications             | [`foundation.commuting-squares-identifications`](foundation.commuting-squares-identifications.md)                         |
+| Commuting squares of identifications             | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
 | Dependent identifications (foundation)           | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
 | Dependent identifications (foundation-core)      | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
 | The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
@@ -237,4 +238,22 @@ module _
     ((p ∙ q) ＝ r) ≃ (p ＝ (r ∙ (inv q)))
   pr1 (equiv-con-inv p q r) = con-inv p q r
   pr2 (equiv-con-inv p q r) = is-equiv-con-inv p q r
+```
+
+### Computing transport in the type family of identifications with a fixed target
+
+```agda
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
+```
+
+### Computing transport in the type family of identifications with a fixed source
+
+```agda
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
 ```

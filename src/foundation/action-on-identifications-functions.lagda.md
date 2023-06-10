@@ -12,6 +12,7 @@ open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.identity-types
+open import foundation-core.transport
 ```
 
 </details>
@@ -94,6 +95,17 @@ ap-const :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A}
   (p : x ＝ y) → (ap (const A B b) p) ＝ refl
 ap-const b refl = refl
+```
+
+### Transporting along the action on identifications of a function
+
+```agda
+tr-ap :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  (f : A → C) (g : (x : A) → B x → D (f x))
+  {x y : A} (p : x ＝ y) (z : B x) →
+  tr D (ap f p) (g x z) ＝ g y (tr B p z)
+tr-ap f g refl z = refl
 ```
 
 ### The action on identifications of concatenating by `refl` on the right
