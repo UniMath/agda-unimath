@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
@@ -31,7 +32,6 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.propositions
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -278,7 +278,7 @@ module _
                   ( λ x → fib f x)
                   ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
-        ( eq-pair-Σ p ( tr-Id p (inv p) ∙ left-inv p))
+        ( eq-pair-Σ p ( tr-Id-right p (inv p) ∙ left-inv p))
         ( ( ( x , (inv p)) ,
             ( ap
               ( inl)
@@ -341,7 +341,7 @@ module _
                     ( λ x → fib f x)
                     ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
-        ( eq-pair-Σ p ( tr-Id p (inv p) ∙ left-inv p))
+        ( eq-pair-Σ p ( tr-Id-right p (inv p) ∙ left-inv p))
         ( ( ( x , (inv p)) ,
             ( ap
               ( inr)

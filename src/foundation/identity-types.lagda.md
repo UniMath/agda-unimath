@@ -12,6 +12,7 @@ open import foundation-core.identity-types public
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.universe-levels
@@ -256,4 +257,13 @@ tr-Id-right :
   {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
   tr (a ＝_) q p ＝ (p ∙ q)
 tr-Id-right refl refl = refl
+```
+
+### Computing transport of loops
+
+```agda
+tr-loop :
+  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
+  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
+tr-loop refl l = inv right-unit
 ```

@@ -68,39 +68,3 @@ equiv-tr-refl :
   equiv-tr B refl ＝ id-equiv {A = B x}
 equiv-tr-refl B = refl
 ```
-
-### Transport in identity types
-
-```agda
-tr-fx＝gy :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {a0 a1 : A} {b0 b1 : B} (f : A → C) (g : B → C)
-  (p : a0 ＝ a1) (q : b0 ＝ b1) (s : f a0 ＝ g b0) →
-  (tr (λ z → (f (pr1 z)) ＝ (g (pr2 z))) (eq-pair p q) s) ＝
-  (((inv (ap f p)) ∙ s) ∙ (ap g q))
-tr-fx＝gy f g refl refl s = inv right-unit
-
-tr-x＝y :
-  {l1 : Level} {A : UU l1} {a0 a1 a2 a3 : A}
-  (p : a0 ＝ a1) (q : a2 ＝ a3) (s : a0 ＝ a2) →
-  (tr (λ z → (pr1 z) ＝ (pr2 z)) (eq-pair p q) s) ＝ ((inv p) ∙ (s ∙ q))
-tr-x＝y refl refl s = inv right-unit
-```
-
-### Transport in the family of loops
-
-```agda
-tr-loop :
-  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
-  (tr (λ y → y ＝ y) p l) ＝ (((inv p) ∙ l) ∙ p)
-tr-loop refl l = inv right-unit
-```
-
-### Transport of identifications
-
-```agda
-tr-Id :
-  {l1 : Level} {A : UU l1} {a0 a1 a2 : A} (p : a1 ＝ a2) (l : a0 ＝ a1) →
-  (tr (a0 ＝_) p l) ＝ (l ∙ p)
-tr-Id refl refl = refl
-```
