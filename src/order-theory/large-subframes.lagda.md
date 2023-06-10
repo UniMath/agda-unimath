@@ -28,7 +28,7 @@ open import order-theory.least-upper-bounds-large-posets
 open import order-theory.top-elements-large-posets
 ```
 
-</detail>
+</details>
 
 ## Idea
 

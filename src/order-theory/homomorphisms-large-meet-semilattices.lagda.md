@@ -15,7 +15,7 @@ open import order-theory.large-meet-semilattices
 open import order-theory.order-preserving-maps-large-posets
 ```
 
-<details>
+</details>
 
 ## Idea
 

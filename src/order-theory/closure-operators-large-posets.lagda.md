@@ -19,7 +19,7 @@ open import order-theory.large-subpreorders
 open import order-theory.order-preserving-maps-large-posets
 ```
 
-<details>
+</details>
 
 ## Idea
 

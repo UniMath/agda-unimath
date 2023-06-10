@@ -21,7 +21,7 @@ open import order-theory.similarity-of-elements-large-posets
 open import ring-theory.poset-of-ideals-rings
 ```
 
-<details>
+</details>
 
 ## Idea
 

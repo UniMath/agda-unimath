@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
 ```
 
-</summary>
+</details>
 
 ## Idea
 

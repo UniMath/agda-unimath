@@ -39,6 +39,8 @@ open import finite-group-theory.permutations-standard-finite-types
 open import finite-group-theory.transpositions
 ```
 
+</details>
+
 ## Idea
 
 Given `i` and `j` in `Fin n`, the transposition associated to `i` and `j` swap
