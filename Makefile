@@ -98,3 +98,8 @@ install-website-dev:
 	@cargo install mdbook-katex
 	@cargo install mdbook-pagetoc
 	@cargo install mdbook-catppuccin
+
+.PHONY: unused-imports
+unused-imports:
+	python ./scripts/remove_unused_imports.py
+	python ./scripts/demote_foundation_imports.py
