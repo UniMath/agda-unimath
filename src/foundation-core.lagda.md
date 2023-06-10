@@ -29,6 +29,7 @@ open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
 open import foundation-core.fibers-of-maps public
 open import foundation-core.function-extensionality public
+open import foundation-core.function-types public
 open import foundation-core.functoriality-dependent-function-types public
 open import foundation-core.functoriality-dependent-pair-types public
 open import foundation-core.functoriality-function-types public

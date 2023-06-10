@@ -118,8 +118,8 @@ open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
+open import foundation.function-types public
 open import foundation.functional-correspondences public
-open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-function-types public

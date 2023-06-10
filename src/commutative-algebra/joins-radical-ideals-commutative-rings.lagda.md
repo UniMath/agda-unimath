@@ -20,7 +20,7 @@ open import commutative-algebra.radicals-of-ideals-commutative-rings
 open import commutative-algebra.subsets-commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 

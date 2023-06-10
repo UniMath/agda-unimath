@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.function-classes where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.pullback-squares
 open import foundation.universe-levels

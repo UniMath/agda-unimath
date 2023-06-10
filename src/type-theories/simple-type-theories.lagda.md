@@ -10,7 +10,7 @@ module type-theories.simple-type-theories where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.transport

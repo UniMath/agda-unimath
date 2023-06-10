@@ -7,11 +7,11 @@ module foundation-core.equality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport

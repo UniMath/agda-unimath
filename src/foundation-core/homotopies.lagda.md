@@ -10,10 +10,10 @@ module foundation-core.homotopies where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.transport
 ```

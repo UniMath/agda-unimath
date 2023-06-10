@@ -10,7 +10,7 @@ module elementary-number-theory.based-induction-natural-numbers where
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```

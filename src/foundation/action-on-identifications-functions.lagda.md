@@ -7,10 +7,10 @@ module foundation.action-on-identifications-functions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.transport
 ```

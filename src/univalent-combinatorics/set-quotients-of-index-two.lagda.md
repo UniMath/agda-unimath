@@ -18,7 +18,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.injective-maps

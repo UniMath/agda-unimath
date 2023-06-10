@@ -8,7 +8,7 @@ module orthogonal-factorization-systems.lifting-operations where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.sections
 open import foundation.universe-levels

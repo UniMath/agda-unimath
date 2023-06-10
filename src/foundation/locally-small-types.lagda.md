@@ -9,7 +9,6 @@ module foundation.locally-small-types where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.inhabited-subtypes
 open import foundation.subuniverses
 open import foundation.univalence
@@ -17,6 +16,7 @@ open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions

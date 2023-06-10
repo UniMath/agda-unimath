@@ -8,9 +8,9 @@ module foundation.commuting-squares-of-identifications where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
-open import foundation.functions
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.identity-types
 ```
 

@@ -10,7 +10,7 @@ module category-theory.functors-large-precategories where
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```

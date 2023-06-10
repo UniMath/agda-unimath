@@ -10,7 +10,6 @@ module foundation.universal-property-propositional-truncation where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
@@ -20,6 +19,7 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

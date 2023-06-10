@@ -8,24 +8,23 @@ module orthogonal-factorization-systems.local-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
-
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.empty-types
-open import foundation-core.function-extensionality
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.identity-types
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>

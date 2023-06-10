@@ -12,7 +12,7 @@ module species.small-cauchy-composition-species-of-finite-inhabited-types where
 open import foundation.contractible-types
 open import foundation.decidable-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types

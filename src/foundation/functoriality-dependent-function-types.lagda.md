@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.transport
 open import foundation.type-theoretic-principle-of-choice
@@ -26,6 +25,7 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps

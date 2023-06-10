@@ -7,10 +7,10 @@ module foundation.truncation-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
 open import foundation.truncations
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.truncation-levels
 
 open import orthogonal-factorization-systems.modal-operators

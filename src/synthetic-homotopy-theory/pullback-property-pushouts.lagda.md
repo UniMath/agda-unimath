@@ -9,7 +9,7 @@ module synthetic-homotopy-theory.pullback-property-pushouts where
 ```agda
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-function-types
 open import foundation.pullbacks
 open import foundation.universe-levels

@@ -8,7 +8,6 @@ module foundation.double-negation where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.universe-levels
@@ -16,6 +15,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
+open import foundation-core.function-types
 open import foundation-core.propositions
 ```
 

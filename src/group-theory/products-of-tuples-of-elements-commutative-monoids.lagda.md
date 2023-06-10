@@ -10,7 +10,7 @@ module group-theory.products-of-tuples-of-elements-commutative-monoids where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.unit-type
 open import foundation.universe-levels
 

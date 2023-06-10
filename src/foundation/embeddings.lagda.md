@@ -14,7 +14,6 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -22,6 +21,7 @@ open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps

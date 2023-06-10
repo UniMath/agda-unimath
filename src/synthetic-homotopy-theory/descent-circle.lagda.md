@@ -20,7 +20,7 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types

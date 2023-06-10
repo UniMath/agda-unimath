@@ -9,13 +9,13 @@ module foundation.epimorphisms-with-respect-to-truncated-types where
 ```agda
 open import foundation.commuting-squares-of-maps
 open import foundation.embeddings
-open import foundation.functions
 open import foundation.functoriality-truncation
 open import foundation.truncation-equivalences
 open import foundation.truncations
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.truncated-types

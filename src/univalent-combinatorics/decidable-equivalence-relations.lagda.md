@@ -17,7 +17,7 @@ open import foundation.decidable-relations
 open import foundation.decidable-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.propositional-truncations
