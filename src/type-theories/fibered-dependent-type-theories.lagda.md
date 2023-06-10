@@ -11,7 +11,7 @@ module type-theories.fibered-dependent-type-theories where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.transport
 open import foundation.universe-levels

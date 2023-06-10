@@ -8,9 +8,9 @@ module foundation.double-negation-modality where
 
 ```agda
 open import foundation.double-negation
-open import foundation.functions
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.propositions
 open import foundation-core.transport
 

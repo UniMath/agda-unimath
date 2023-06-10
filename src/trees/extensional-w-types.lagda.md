@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -22,6 +22,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.slice
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalent-type-families
 open import foundation.universe-levels

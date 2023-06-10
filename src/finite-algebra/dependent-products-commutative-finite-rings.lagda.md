@@ -15,7 +15,7 @@ open import finite-algebra.dependent-products-finite-rings
 open import finite-algebra.finite-rings
 
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels

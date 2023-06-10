@@ -9,7 +9,7 @@ module trees.multisets where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types

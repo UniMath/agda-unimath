@@ -16,7 +16,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.unit-type

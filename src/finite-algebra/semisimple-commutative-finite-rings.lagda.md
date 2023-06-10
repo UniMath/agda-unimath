@@ -16,7 +16,7 @@ open import finite-algebra.homomorphisms-commutative-finite-rings
 
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 

@@ -17,7 +17,7 @@ open import elementary-number-theory.powers-of-two
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.iterating-functions

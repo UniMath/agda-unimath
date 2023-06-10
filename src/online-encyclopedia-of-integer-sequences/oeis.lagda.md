@@ -21,7 +21,7 @@ open import elementary-number-theory.pisano-periods
 
 open import finite-group-theory.finite-groups
 
-open import foundation.functions
+open import foundation.function-types
 ```
 
 </details>

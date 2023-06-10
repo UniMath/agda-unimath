@@ -7,7 +7,7 @@ module order-theory.closure-operators-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

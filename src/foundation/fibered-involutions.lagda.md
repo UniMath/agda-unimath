@@ -9,11 +9,11 @@ module foundation.fibered-involutions where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fibered-maps
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.involutions
 ```

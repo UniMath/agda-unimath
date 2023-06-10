@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions

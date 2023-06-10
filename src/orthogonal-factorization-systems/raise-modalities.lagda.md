@@ -7,7 +7,7 @@ module orthogonal-factorization-systems.raise-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
+open import foundation.function-types
 open import foundation.raising-universe-levels
 open import foundation.universe-levels
 

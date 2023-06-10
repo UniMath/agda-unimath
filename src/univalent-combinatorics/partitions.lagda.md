@@ -14,7 +14,7 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types

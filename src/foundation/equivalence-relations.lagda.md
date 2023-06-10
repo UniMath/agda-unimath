@@ -15,7 +15,6 @@ open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.full-subtypes
-open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-subtypes
 open import foundation.partitions
@@ -34,6 +33,7 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences

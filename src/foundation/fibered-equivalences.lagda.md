@@ -11,13 +11,13 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
-open import foundation.functions
 open import foundation.pullbacks
 open import foundation.slice
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions

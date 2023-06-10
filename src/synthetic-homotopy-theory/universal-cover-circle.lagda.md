@@ -15,12 +15,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.dependent-paths
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -286,7 +286,7 @@ square-tr-contraction-total-space c refl f e e' H h y =
     ( h (map-equiv e' (map-equiv f y))))) ∙
   ( apd h (H y))
 
-path-over-contraction-total-space' :
+dependent-identification-contraction-total-space' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
   {x x' : A} (p : Id x x') →
   {F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
@@ -294,7 +294,8 @@ path-over-contraction-total-space' :
   (h : (y : F) → Id c (pair x (map-equiv e y))) →
   (h' : (y' : F') → Id c (pair x' (map-equiv e' y'))) →
   UU (l1 ⊔ l2 ⊔ l3)
-path-over-contraction-total-space' c {x} {x'} p {F} {F'} f e e' H h h' =
+dependent-identification-contraction-total-space'
+  c {x} {x'} p {F} {F'} f e e' H h h' =
   ( map-Π
     ( λ y → concat' c (segment-Σ p f e e' H y)) h) ~
   ( precomp-Π
@@ -302,18 +303,19 @@ path-over-contraction-total-space' c {x} {x'} p {F} {F'} f e e' H h h' =
     ( λ y' → Id c (pair x' (map-equiv e' y')))
     ( h'))
 
-map-path-over-contraction-total-space' :
+map-dependent-identification-contraction-total-space' :
     { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
     { x x' : A} (p : Id x x') →
     { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
     ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
     ( h : contraction-total-space' c x e) →
     ( h' : contraction-total-space' c x' e') →
-    ( path-over-contraction-total-space' c p f e e' H h h') →
-    ( path-over (contraction-total-space c) p
+    ( dependent-identification-contraction-total-space' c p f e e' H h h') →
+    ( dependent-identification (contraction-total-space c) p
       ( map-inv-equiv (equiv-contraction-total-space c x e) h)
       ( map-inv-equiv (equiv-contraction-total-space c x' e') h'))
-map-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' α =
+map-dependent-identification-contraction-total-space'
+  c {x} {.x} refl f e e' H h h' α =
   map-inv-equiv
     ( equiv-ap
       ( ( equiv-tr-contraction-total-space' c refl f e e' H) ∘e
@@ -342,18 +344,19 @@ map-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' α =
                 ( equiv-precomp-Π e' (λ y' → Id c (pair x y'))))
               ( h'))))))
 
-equiv-path-over-contraction-total-space' :
+equiv-dependent-identification-contraction-total-space' :
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
   { x x' : A} (p : Id x x') →
   { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
   ( h : contraction-total-space' c x e) →
   ( h' : contraction-total-space' c x' e') →
-  ( path-over (contraction-total-space c) p
+  ( dependent-identification (contraction-total-space c) p
     ( map-inv-equiv (equiv-contraction-total-space c x e) h)
     ( map-inv-equiv (equiv-contraction-total-space c x' e') h')) ≃
-  ( path-over-contraction-total-space' c p f e e' H h h')
-equiv-path-over-contraction-total-space' c {x} {.x} refl f e e' H h h' =
+  ( dependent-identification-contraction-total-space' c p f e e' H h h')
+equiv-dependent-identification-contraction-total-space'
+  c {x} {.x} refl f e e' H h h' =
   ( inv-equiv
     ( equiv-con-inv-htpy h
       ( segment-Σ refl f e e' H)
@@ -401,7 +404,7 @@ pr1 (center-total-fundamental-cover-circle l dup-circle) = base-free-loop l
 pr2 (center-total-fundamental-cover-circle l dup-circle) =
   map-equiv ( compute-fiber-fundamental-cover-circle l dup-circle) zero-ℤ
 
-path-over-loop-contraction-total-fundamental-cover-circle :
+dependent-identification-loop-contraction-total-fundamental-cover-circle :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
   ( h :
@@ -410,7 +413,7 @@ path-over-loop-contraction-total-fundamental-cover-circle :
       ( base-free-loop l)
       ( compute-fiber-fundamental-cover-circle l dup-circle)) →
   ( p :
-    path-over-contraction-total-space'
+    dependent-identification-contraction-total-space'
       ( center-total-fundamental-cover-circle l dup-circle)
       ( loop-free-loop l)
       ( equiv-succ-ℤ)
@@ -419,7 +422,7 @@ path-over-loop-contraction-total-fundamental-cover-circle :
       ( compute-tr-fundamental-cover-circle l dup-circle)
       ( h)
       ( h)) →
-  path-over
+  dependent-identification
     ( contraction-total-space
       ( center-total-fundamental-cover-circle l dup-circle))
     ( pr2 l)
@@ -435,8 +438,9 @@ path-over-loop-contraction-total-fundamental-cover-circle :
         ( base-free-loop l)
         ( compute-fiber-fundamental-cover-circle l dup-circle))
       ( h))
-path-over-loop-contraction-total-fundamental-cover-circle l dup-circle h p =
-  map-path-over-contraction-total-space'
+dependent-identification-loop-contraction-total-fundamental-cover-circle
+  l dup-circle h p =
+  map-dependent-identification-contraction-total-space'
     ( center-total-fundamental-cover-circle l dup-circle)
     ( loop-free-loop l)
     ( equiv-succ-ℤ)
@@ -456,7 +460,7 @@ contraction-total-fundamental-cover-circle-data :
       ( base-free-loop l)
       ( compute-fiber-fundamental-cover-circle l dup-circle)) →
   ( p :
-    path-over-contraction-total-space'
+    dependent-identification-contraction-total-space'
       ( center-total-fundamental-cover-circle l dup-circle)
       ( loop-free-loop l)
       ( equiv-succ-ℤ)
@@ -481,7 +485,7 @@ contraction-total-fundamental-cover-circle-data
           ( base-free-loop l)
           ( compute-fiber-fundamental-cover-circle l dup-circle))
         ( h))
-      ( path-over-loop-contraction-total-fundamental-cover-circle
+      ( dependent-identification-loop-contraction-total-fundamental-cover-circle
         l dup-circle h p))
     x y
 
@@ -494,7 +498,7 @@ is-contr-total-fundamental-cover-circle-data :
       ( base-free-loop l)
       ( compute-fiber-fundamental-cover-circle l dup-circle)) →
   ( p :
-    path-over-contraction-total-space'
+    dependent-identification-contraction-total-space'
       ( center-total-fundamental-cover-circle l dup-circle)
       ( loop-free-loop l)
       ( equiv-succ-ℤ)

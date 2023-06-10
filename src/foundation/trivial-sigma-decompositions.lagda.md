@@ -10,7 +10,6 @@ module foundation.trivial-sigma-decompositions where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.sigma-decompositions
@@ -21,6 +20,7 @@ open import foundation.universe-levels
 
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes

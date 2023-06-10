@@ -1,7 +1,7 @@
-# Functions
+# Function types
 
 ```agda
-module foundation.functions where
+module foundation-core.function-types where
 ```
 
 <details><summary>Imports</summary>

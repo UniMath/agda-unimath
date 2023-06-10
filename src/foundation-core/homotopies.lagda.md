@@ -10,10 +10,10 @@ module foundation-core.homotopies where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
-open import foundation.functions
 open import foundation.universe-levels
 
-open import foundation-core.dependent-paths
+open import foundation-core.dependent-identifications
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.transport
 ```
@@ -39,11 +39,11 @@ module _
 
   {-# INLINE eq-value #-}
 
-  map-compute-path-over-eq-value :
+  map-compute-dependent-identification-eq-value :
     {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
     coherence-square-identifications (apd f p) r (ap (tr P p) q) (apd g p) →
-    path-over eq-value p q r
-  map-compute-path-over-eq-value refl q r =
+    dependent-identification eq-value p q r
+  map-compute-dependent-identification-eq-value refl q r =
     inv ∘ (concat' r (right-unit ∙ ap-id q))
 ```
 
@@ -59,16 +59,19 @@ module _
 
   {-# INLINE eq-value-function #-}
 
-  map-compute-path-over-eq-value-function :
+  map-compute-dependent-identification-eq-value-function :
     {x y : X} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
     coherence-square-identifications (ap f p) r q (ap g p) →
-    path-over eq-value-function p q r
-  map-compute-path-over-eq-value-function refl q r = inv ∘ concat' r right-unit
+    dependent-identification eq-value-function p q r
+  map-compute-dependent-identification-eq-value-function refl q r =
+    inv ∘ concat' r right-unit
 
-map-compute-path-over-eq-value-id-id :
+map-compute-dependent-identification-eq-value-id-id :
   {l1 : Level} {A : UU l1} {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
-  coherence-square-identifications p r q p → path-over (eq-value id id) p q r
-map-compute-path-over-eq-value-id-id refl q r s = inv (s ∙ right-unit)
+  coherence-square-identifications p r q p →
+  dependent-identification (eq-value id id) p q r
+map-compute-dependent-identification-eq-value-id-id refl q r s =
+  inv (s ∙ right-unit)
 ```
 
 ### Homotopies

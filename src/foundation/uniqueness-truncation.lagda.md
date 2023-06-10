@@ -7,9 +7,9 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

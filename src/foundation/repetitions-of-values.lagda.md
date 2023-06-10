@@ -11,12 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
 open import foundation.identity-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps

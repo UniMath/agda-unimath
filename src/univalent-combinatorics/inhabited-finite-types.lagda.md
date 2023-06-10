@@ -10,7 +10,7 @@ module univalent-combinatorics.inhabited-finite-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.inhabited-types

@@ -13,7 +13,7 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 ```

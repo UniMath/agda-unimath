@@ -8,10 +8,10 @@ module foundation.complements where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.empty-types
+open import foundation-core.function-types
 ```
 
 </details>

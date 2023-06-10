@@ -8,17 +8,18 @@ module foundation.products-unordered-pairs-of-types where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.symmetric-operations
+open import foundation.transport
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 open import foundation.unordered-pairs-of-types
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.universal-property-standard-finite-types

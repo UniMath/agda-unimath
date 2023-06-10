@@ -16,7 +16,6 @@ open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equivalence-classes
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
@@ -26,6 +25,7 @@ open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -36,6 +36,7 @@ open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
@@ -43,7 +44,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.transport
 open import foundation-core.univalence
 ```
 

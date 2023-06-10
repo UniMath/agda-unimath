@@ -9,11 +9,11 @@ module foundation.large-locale-of-propositions where
 ```agda
 open import foundation.conjunction
 open import foundation.existential-quantification
-open import foundation.functions
 open import foundation.propositional-extensionality
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.propositions
 
 open import order-theory.large-frames

@@ -21,7 +21,7 @@ open import foundation.discrete-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions

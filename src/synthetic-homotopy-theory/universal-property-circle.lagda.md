@@ -16,7 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -124,7 +124,7 @@ module _
     ( free-dependent-loop α (λ x → Id (f x) (g x)))
   pr1 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) = p
   pr2 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) =
-    map-compute-path-over-eq-value f g (loop-free-loop α) p p q
+    map-compute-dependent-identification-eq-value f g (loop-free-loop α) p p q
 
   isretr-ind-circle :
     ( ind-circle : {l : Level} → induction-principle-circle l α)

@@ -9,12 +9,12 @@ module foundation.type-arithmetic-unit-type where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```

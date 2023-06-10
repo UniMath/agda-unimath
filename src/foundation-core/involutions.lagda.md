@@ -9,7 +9,7 @@ module foundation-core.involutions where
 ```agda
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
