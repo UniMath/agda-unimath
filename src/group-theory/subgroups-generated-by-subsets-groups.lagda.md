@@ -207,7 +207,8 @@ module _
           ( subset-subgroup-subset-Group (mul-Group G x y))
           ( λ K' →
             unit-trunc-Prop
-              ( is-closed-under-multiplication-subgroup-subset-Group' x y H' K')))
+              ( is-closed-under-multiplication-subgroup-subset-Group'
+                  x y H' K')))
 
   is-closed-under-inv-subgroup-subset-Group' :
     (x : type-Group G) →

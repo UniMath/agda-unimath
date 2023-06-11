@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.small-types
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.locally-small-modalities
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
@@ -232,7 +233,7 @@ module _
     {X : UU l1} {x' y' : ○ X} →
     ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
   elim-Id-higher-modality {X} {x'} {y'} =
-    map-inv-unit-is-modal-is-small unit-○
+    map-inv-unit-is-modal-small unit-○
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y')
@@ -250,7 +251,7 @@ module _
   map-inv-unit-id-higher-modality :
     {X : UU l} {x' y' : ○ X} → ○ (x' ＝ y') → x' ＝ y'
   map-inv-unit-id-higher-modality {X} {x'} {y'} =
-    map-inv-unit-is-modal-is-small unit-○
+    map-inv-unit-is-modal-small unit-○
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y') ∘

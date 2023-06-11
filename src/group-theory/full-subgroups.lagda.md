@@ -66,7 +66,8 @@ is-closed-under-inv-full-Subgroup G x _ =
 full-Subgroup : {l1 : Level} (l2 : Level) (G : Group l1) → Subgroup l2 G
 pr1 (full-Subgroup l2 G) = subset-full-Subgroup l2 G
 pr1 (pr2 (full-Subgroup l2 G)) = contains-unit-full-Subgroup G
-pr1 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-multiplication-full-Subgroup G
+pr1 (pr2 (pr2 (full-Subgroup l2 G))) =
+  is-closed-under-multiplication-full-Subgroup G
 pr2 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-inv-full-Subgroup G
 
 module _

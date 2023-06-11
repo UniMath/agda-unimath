@@ -10,8 +10,8 @@ module orthogonal-factorization-systems.sigma-closed-modalities where
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.propositions
-open import foundation.universe-levels
 open import foundation.sigma-closed-subuniverses
+open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.reflective-subuniverses
@@ -31,7 +31,8 @@ modal whenever `B` is a family of modal types over modal base `A`.
 ```agda
 is-closed-under-Σ-modality :
   {l : Level} {○ : operator-modality l l} → unit-modality ○ → UU (lsuc l)
-is-closed-under-Σ-modality = is-closed-under-Σ-subuniverse ∘ modality-subuniverse
+is-closed-under-Σ-modality =
+  is-closed-under-Σ-subuniverse ∘ modality-subuniverse
 
 closed-under-Σ-modality : (l : Level) → UU (lsuc l)
 closed-under-Σ-modality l =

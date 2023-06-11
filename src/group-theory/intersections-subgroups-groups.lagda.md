@@ -55,9 +55,13 @@ module _
     is-in-intersection-Subgroup x →
     is-in-intersection-Subgroup y →
     is-in-intersection-Subgroup (mul-Group G x y)
-  pr1 (is-closed-under-multiplication-intersection-Subgroup x y (pH , pK) (qH , qK)) =
+  pr1
+    ( is-closed-under-multiplication-intersection-Subgroup
+        x y (pH , pK) (qH , qK)) =
     is-closed-under-multiplication-Subgroup G H x y pH qH
-  pr2 (is-closed-under-multiplication-intersection-Subgroup x y (pH , pK) (qH , qK)) =
+  pr2
+    ( is-closed-under-multiplication-intersection-Subgroup
+        x y (pH , pK) (qH , qK)) =
     is-closed-under-multiplication-Subgroup G K x y pK qK
 
   is-closed-under-inv-intersection-Subgroup :

@@ -13,8 +13,8 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
-open import orthogonal-factorization-systems.reflective-subuniverses
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.reflective-subuniverses
 ```
 
 </details>

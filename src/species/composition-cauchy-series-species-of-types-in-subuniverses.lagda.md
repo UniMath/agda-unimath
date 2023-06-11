@@ -8,8 +8,8 @@ module species.composition-cauchy-series-species-of-types-in-subuniverses where
 
 ```agda
 open import foundation.equivalences
-open import foundation.sigma-closed-subuniverses
 open import foundation.function-types
+open import foundation.sigma-closed-subuniverses
 open import foundation.subuniverses
 open import foundation.universe-levels
 

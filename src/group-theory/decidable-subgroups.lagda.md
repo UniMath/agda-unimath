@@ -83,7 +83,8 @@ module _
 
   is-closed-under-multiplication-decidable-subset-Group : UU (l1 ⊔ l2)
   is-closed-under-multiplication-decidable-subset-Group =
-    is-closed-under-multiplication-subset-Group G (subset-decidable-subset-Group G P)
+    is-closed-under-multiplication-subset-Group G
+      ( subset-decidable-subset-Group G P)
 
   is-prop-is-closed-under-multiplication-decidable-subset-Group :
     is-prop is-closed-under-multiplication-decidable-subset-Group

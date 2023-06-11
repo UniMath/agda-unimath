@@ -92,7 +92,8 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-multiplication-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-decidable-subset-finite-group-Prop :
+    Prop (l1 ⊔ l2)
   is-closed-under-multiplication-decidable-subset-finite-group-Prop =
     is-closed-under-multiplication-decidable-subset-group-Prop
       ( group-Group-𝔽 G)
@@ -213,7 +214,9 @@ module _
     contains-unit-Decidable-Subgroup (group-Group-𝔽 G) H
 
   is-closed-under-multiplication-Subgroup-𝔽 :
-    is-closed-under-multiplication-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+    is-closed-under-multiplication-subset-Group
+      ( group-Group-𝔽 G)
+      ( subset-Subgroup-𝔽)
   is-closed-under-multiplication-Subgroup-𝔽 =
     is-closed-under-multiplication-Decidable-Subgroup (group-Group-𝔽 G) H
 
