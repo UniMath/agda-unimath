@@ -60,9 +60,9 @@ repos:
         types_or: [markdown, text]
         require_serial: true
 
-      - id: simply-wrappable-long-lines
-        name: Fix simply wrappable long lines of Agda code
-        entry: scripts/simply_wrappable_long_lines.py
+      - id: wrap-long-lines-simple
+        name: Wrap easily fixable long lines of Agda code
+        entry: scripts/wrap_long_lines_simple.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
