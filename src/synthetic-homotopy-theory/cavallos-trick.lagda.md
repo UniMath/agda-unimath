@@ -24,10 +24,13 @@ open import structured-types.pointed-types
 
 ## Idea
 
-Cavallo's trick is a way of upgrading an unpointed homotopy between pointed maps
-to a pointed homotopy. Originally, this trick was formulated by Evan Cavallo for
-homogeneous spaces, but it works as soon as the evaluation map `(id ~ id) → Ω B`
-has a section.
+Cavallo's trick is a way of upgrading an unpointed
+[homotopy](foundation.homotopies.md) between
+[pointed maps](structured-types.pointed-maps.md) to a
+[pointed homotopy](structured-types.pointed-homotopies.md).
+
+Originally, this trick was formulated by Evan Cavallo for homogeneous spaces,
+but it works as soon as the evaluation map `(id ~ id) → Ω B` has a section.
 
 ## Theorem
 

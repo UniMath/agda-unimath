@@ -24,8 +24,9 @@ open import synthetic-homotopy-theory.wedges-of-pointed-types
 
 ## Idea
 
-Given two pointed types `a : A` and `b : B` we may form their **smash product**
-as the following pushout
+Given two [pointed types](structured-types.pointed-types.md) `a : A` and `b : B`
+we may form their **smash product** as the following
+[pushout](synthetic-homotopy-theory.pushouts.md)
 
 ```text
  A ∨∗ B ----> A ×∗ B
@@ -36,7 +37,9 @@ as the following pushout
 ```
 
 where the map `A ∨∗ B → A ×∗ B` is the canonical inclusion
-`map-wedge-prod-Pointed-Type`.
+`map-wedge-prod-Pointed-Type` from the
+[wedge](synthetic-homotopy-theory.wedges-of-pointed-types.md) into the
+[pointed cartesian product](structured-types.pointed-cartesian-product-types.md).
 
 ## Definition
 

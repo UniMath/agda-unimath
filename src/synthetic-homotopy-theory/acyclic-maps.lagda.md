@@ -18,7 +18,9 @@ open import synthetic-homotopy-theory.acyclic-types
 
 ## Idea
 
-A map `f : A → B` is said to be **acyclic** if its fibers are acyclic types.
+A map `f : A → B` is said to be **acyclic** if its
+[fibers](foundation.fibers-of-maps.md) are
+[acyclic types](synthetic-homotopy-theory.acyclic-types.md).
 
 ## Definition
 

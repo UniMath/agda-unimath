@@ -42,7 +42,8 @@ functions
   j' : (b : B) → P (j b)
 ```
 
-and a family of dependent identifications
+and a family of
+[dependent identifications](foundation.dependent-identifications.md)
 
 ```text
   (s : S) → dependent-identification P (H s) (i' (f s)) (j' (g s)).

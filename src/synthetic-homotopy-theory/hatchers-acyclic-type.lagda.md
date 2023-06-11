@@ -36,9 +36,13 @@ open import synthetic-homotopy-theory.powers-of-loops
 
 ## Idea
 
-**Hatcher's** example of an acyclic type is a higher inductive type equipped
-with a point and two loops `a` and `b`, and identifications witnessing that
-`a⁵ ＝ b³` and `b³ = (ab)²`.
+**Hatcher's** example of an
+[acyclic type](synthetic-homotopy-theory.acyclic-types.md) is a higher inductive
+type equipped with a point and two
+[loops](synthetic-homotopy-theory.loop-spaces.md) `a` and `b`, and
+[identifications](foundation.identity-types.md) witnessing that `a⁵ ＝ b³` and
+`b³ = (ab)²`. This type is acyclic, because the structure on Hatcher's acyclic
+type on any loop space is [contractible](foundation.contractible-types.md).
 
 ## Definitions
 

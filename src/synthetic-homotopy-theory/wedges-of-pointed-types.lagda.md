@@ -26,8 +26,10 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types
 
 ## Idea
 
-The **wedge** or **wedge sum** of two pointed types `a : A` and `b : B` is
-defined by the following pointed pushout:
+The **wedge** or **wedge sum** of two
+[pointed types](structured-types.pointed-types.md) `a : A` and `b : B` is
+defined by the following pointed
+[pushout](synthetic-homotopy-theory.pushouts.md):
 
 ```text
   unit ------> A

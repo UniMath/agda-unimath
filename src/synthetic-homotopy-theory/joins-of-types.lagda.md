@@ -32,7 +32,8 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The join of `A` and `B` is the pushout of the span `A ← A × B → B`.
+The **join** of `A` and `B` is the
+[pushout](synthetic-homotopy-theory.pushouts.md) of the span `A ← A × B → B`.
 
 ## Definition
 

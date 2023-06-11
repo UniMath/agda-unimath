@@ -22,8 +22,9 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-A prespectrum is a sequence of pointed types `A n` equipped with pointed maps
-`ε : A n →∗ Ω (A (n+1))`.
+A **prespectrum** is a sequence of
+[pointed types](structured-types.pointed-types.md) `A n` equipped with
+[pointed maps](structured-types.pointed-maps.md) `ε : A n →∗ Ω (A (n+1))`.
 
 ## Definition
 

@@ -36,6 +36,12 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 </details>
 
+## Idea
+
+The **suspension** of a type `A` is the initial type equipped with two points
+`N` and `S` and an [identification](foundation.identity-types.md) `N ＝ S` for
+each element of `A`.
+
 ## Definition
 
 ### Suspension structure

@@ -27,6 +27,11 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 </details>
 
+## Idea
+
+The circle is the initial type equipped with a point and a
+[loop](synthetic-homotopy-theory.loop-spaces.md).
+
 ## Postulates
 
 ```agda

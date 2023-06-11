@@ -43,6 +43,8 @@ open import univalent-combinatorics.cyclic-types
 
 </details>
 
+## Definitions
+
 ```agda
 Infinite-Cyclic-Type : (l : Level) → UU (lsuc l)
 Infinite-Cyclic-Type l = Cyclic-Type l zero-ℕ

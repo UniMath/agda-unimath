@@ -22,7 +22,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-A spectrum is an infinite sequence of pointed types `A` such that
+A **spectrum** is an infinite sequence of
+[pointed types](structured-types.pointed-types.md) `A` such that
 `A n ≃∗ Ω (A (n+1))` for each `n : ℕ`.
 
 ## Definition

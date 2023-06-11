@@ -22,6 +22,11 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 </details>
 
+## Idea
+
+A **triple loop space** is a three times
+[iterated loop space](synthetic-homotopy-theory.iterated-loop-spaces.md).
+
 ## Definition
 
 ```agda

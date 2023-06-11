@@ -22,6 +22,11 @@ open import synthetic-homotopy-theory.cocones-under-spans
 
 ## Idea
 
+The **dependent pullback property** of
+[pushouts](synthetic-homotopy-theory.pushouts.md) asserts that the type of
+sections of a type family over a pushout can be expressed as a
+[pullback](foundation.pullbacks.md).
+
 The fact that the dependent pullback property of pushouts is
 [logically equivalent](foundation.logical-equivalences.md) to the
 [dependent universal property](synthetic-homotopy-theory.dependent-universal-property-pushouts.md)

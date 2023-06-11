@@ -20,7 +20,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The spheres are defined as iterated suspensions of `Fin 2`.
+The **spheres** are defined as [iterated](foundation.iterating-functions.md)
+[suspensions](synthetic-homotopy-theory.suspensions-of-types.md) of the
+[standard finite type](univalent-combinatorics.standard-finite-types.md)
+`Fin 2`.
 
 ## Definition
 

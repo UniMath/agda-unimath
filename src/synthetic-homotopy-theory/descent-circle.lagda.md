@@ -40,7 +40,8 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-The descent property uniquely characterizes type families over the circle.
+The descent property uniquely characterizes type families over the
+[circle](synthetic-homotopy-theory.circle.md).
 
 ## Definitions
 

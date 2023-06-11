@@ -20,6 +20,12 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 
 </details>
 
+## Idea
+
+The **double loop space** of a [pointed type](structured-types.pointed-types.md)
+`A` is the [loop space](synthetic-homotopy-theory.loop-spaces.md) of the loop
+space of `A`.
+
 ## Definition
 
 ```agda

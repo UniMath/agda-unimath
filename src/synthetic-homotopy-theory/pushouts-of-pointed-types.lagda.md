@@ -23,8 +23,9 @@ open import synthetic-homotopy-theory.pushouts
 
 ## Idea
 
-Given a span of pointed maps, then the pushout is in fact a pushout diagram in
-the category of pointed types.
+Given a span of [pointed maps](structured-types.pointed-maps.md), then the
+[pushout](synthetic-homotopy-theory.pushouts.md) is in fact a pushout diagram in
+the (wild) category of [pointed types](structured-types.pointed-types.md).
 
 ## Definition
 
