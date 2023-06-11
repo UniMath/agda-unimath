@@ -20,7 +20,7 @@ indent_size = 2
 [*.javascript]
 indent_size = 2
 
-[*.json]
+[*.jsonc?]
 indent_size = 2
 
 [*.md]
@@ -28,3 +28,6 @@ indent_size = 2
 
 [*.py]
 indent_size = 4
+
+[*.{ya?ml,cff}]
+indent_size = 2
