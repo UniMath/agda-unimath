@@ -9,9 +9,7 @@ open import foundation-core.dependent-identifications public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.transport
 open import foundation.universe-levels
@@ -31,132 +29,73 @@ operators are equivalences.
 
 ## Properites
 
-### Transport in the type family of dependent identifications
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-  (B : A → UU l2) {b0 : B a0} {b1 : B a1} (α : p0 ＝ p1)
-  where
-
-  tr-dependent-identification :
-    (q01 : dependent-identification B p0 b0 b1) →
-    tr (λ t → dependent-identification B t b0 b1) α q01 ＝
-    (inv (tr² B α b0) ∙ q01)
-  tr-dependent-identification q01 = inv (tr-ap {D = (λ x → x ＝ b1)}
-    (λ t → tr B t b0) (λ x → id) α q01) ∙ tr-Id-left (tr² B α b0) q01
-
-  tr-inv-dependent-identification :
-    (q01 : dependent-identification B p1 b0 b1) →
-    tr (λ t → dependent-identification B t b0 b1) (inv α) q01 ＝
-    ((tr² B α b0) ∙ q01)
-  tr-inv-dependent-identification q01 =
-    ( inv
-      ( tr-ap
-        { D = λ x → x ＝ b1}
-        ( λ t → tr B t b0)
-        ( λ x → id)
-        ( inv α)
-        ( q01))) ∙
-    ( ( tr-Id-left (ap (λ t → tr B t b0) (inv α)) q01) ∙
-      ( ( ap (λ t → t ∙ q01) (inv (ap-inv (λ t → tr B t b0) (inv α)))) ∙
-        ( ap (λ x → ap (λ t → tr B t b0) x ∙ q01) (inv-inv α))))
-
-  tr-dependent-identification-eq-inv-tr²-concat :
-    tr (λ t → dependent-identification B t b0 b1) α ＝ (inv (tr² B α b0) ∙_)
-  tr-dependent-identification-eq-inv-tr²-concat =
-    map-inv-equiv
-      ( htpy-eq ,
-        funext
-          ( tr
-            ( λ t → dependent-identification B t b0 b1) α)
-          ( inv (tr² B α b0) ∙_))
-      ( tr-dependent-identification)
-
-  tr-inv-dependent-identification-eq-tr²-concat :
-    (tr (λ t → dependent-identification B t b0 b1) (inv α)) ＝ ((tr² B α b0) ∙_)
-  tr-inv-dependent-identification-eq-tr²-concat =
-    map-inv-equiv
-      ( htpy-eq ,
-        funext
-          ( tr
-            ( λ t → dependent-identification B t b0 b1)
-            ( inv α))
-          ( tr² B α b0 ∙_))
-      ( tr-inv-dependent-identification)
-```
-
-### Characterizing iterated types of dependent identifications
+### Computing twice iterated dependent identifications
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  dependent-identification² :
-    {a0 a1 : A} {p0 p1 : a0 ＝ a1} (α : p0 ＝ p1)
-    {b0 : B a0} {b1 : B a1}
-    (q0 : dependent-identification B p0 b0 b1)
-    (q1 : dependent-identification B p1 b0 b1) →
-    UU l2
-  dependent-identification² α q0 q1 =
-    q0 ＝ ((tr² B α _) ∙ q1)
-
-  tr-dependent-identification-dependent-identification² :
-    {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-    (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
-    (q0 : dependent-identification B p0 b0 b1)
-    (q1 : dependent-identification B p1 b0 b1) →
-    dependent-identification² α q0 q1 →
-    dependent-identification (λ t → dependent-identification B t b0 b1) α q0 q1
-  tr-dependent-identification-dependent-identification²
-    {p0 = refl} refl ._ refl refl =
+  map-compute-dependent-identification² :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q)
+    {x' : B x} {y' : B y}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q x' y') →
+    p' ＝ ((tr² B α _) ∙ q') → dependent-identification² B α p' q'
+  map-compute-dependent-identification² refl ._ refl refl =
     refl
 
-  dependent-identification²-tr-dependent-identification :
-    {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-    (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
-    (q0 : dependent-identification B p0 b0 b1)
-    (q1 : dependent-identification B p1 b0 b1) →
-    tr (λ t → dependent-identification B t b0 b1) α q0 ＝ q1 →
-    dependent-identification² α q0 q1
-  dependent-identification²-tr-dependent-identification
-    {p0 = refl} refl refl ._ refl =
+  map-inv-compute-dependent-identification² :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q)
+    {x' : B x} {y' : B y}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q x' y') →
+    dependent-identification² B α p' q' → p' ＝ ((tr² B α _) ∙ q')
+  map-inv-compute-dependent-identification² refl refl ._ refl =
     refl
 
-  issec-dependent-identification²-tr-dependent-identification :
-    {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-    (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
-    (q0 : dependent-identification B p0 b0 b1)
-    (q1 : dependent-identification B p1 b0 b1) →
-    ( tr-dependent-identification-dependent-identification² α q0 q1 ∘
-      dependent-identification²-tr-dependent-identification α q0 q1) ~ id
-  issec-dependent-identification²-tr-dependent-identification
-    {p0 = refl} refl refl ._ refl =
+  issec-map-inv-compute-dependent-identification² :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q)
+    {x' : B x} {y' : B y}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q x' y') →
+    ( map-compute-dependent-identification² α p' q' ∘
+      map-inv-compute-dependent-identification² α p' q') ~ id
+  issec-map-inv-compute-dependent-identification² refl refl ._ refl =
     refl
 
-  isretr-dependent-identification²-tr-dependent-identification :
-    {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-    (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
-    (q0 : dependent-identification B p0 b0 b1)
-    (q1 : dependent-identification B p1 b0 b1) →
-    ( dependent-identification²-tr-dependent-identification α q0 q1 ∘
-      tr-dependent-identification-dependent-identification² α q0 q1) ~ id
-  isretr-dependent-identification²-tr-dependent-identification
-    {p0 = refl} refl ._ refl refl =
+  isretr-map-inv-compute-dependent-identification² :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q)
+    {x' : B x} {y' : B y}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q x' y') →
+    ( map-inv-compute-dependent-identification² α p' q' ∘
+      map-compute-dependent-identification² α p' q') ~ id
+  isretr-map-inv-compute-dependent-identification² refl ._ refl refl =
     refl
 
-  is-equiv-tr-dependent-identification-dependent-identification² :
-    {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-    (α : p0 ＝ p1) {b0 : B a0} {b1 : B a1}
-    (q0 : dependent-identification B p0 b0 b1)
-    (q1 : dependent-identification B p1 b0 b1) →
-    is-equiv (tr-dependent-identification-dependent-identification² α q0 q1)
-  is-equiv-tr-dependent-identification-dependent-identification² α q0 q1 =
+  is-equiv-map-compute-dependent-identification² :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q)
+    {x' : B x} {y' : B y}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q x' y') →
+    is-equiv (map-compute-dependent-identification² α p' q')
+  is-equiv-map-compute-dependent-identification² α p' q' =
     is-equiv-has-inverse
-      ( dependent-identification²-tr-dependent-identification α q0 q1)
-      ( issec-dependent-identification²-tr-dependent-identification α q0 q1)
-      ( isretr-dependent-identification²-tr-dependent-identification α q0 q1)
+      ( map-inv-compute-dependent-identification² α p' q')
+      ( issec-map-inv-compute-dependent-identification² α p' q')
+      ( isretr-map-inv-compute-dependent-identification² α p' q')
+
+  compute-dependent-identification² :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q)
+    {x' : B x} {y' : B y}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q x' y') →
+    (p' ＝ ((tr² B α _) ∙ q')) ≃ dependent-identification² B α p' q'
+  pr1 (compute-dependent-identification² α p' q') =
+    map-compute-dependent-identification² α p' q'
+  pr2 (compute-dependent-identification² α p' q') =
+    is-equiv-map-compute-dependent-identification² α p' q'
 ```
 
 ### The groupoidal structure of dependent identifications
@@ -170,128 +109,78 @@ dependent nature of dependent identifications.
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
-  {a0 a1 a2 : A} (p01 : a0 ＝ a1) (p12 : a1 ＝ a2)
-  {b0 : B a0} {b1 : B a1} {b2 : B a2}
-  (q01 : dependent-identification B p01 b0 b1)
-  (q12 : dependent-identification B p12 b1 b2)
   where
 
   concat-dependent-identification :
-    dependent-identification B (p01 ∙ p12) b0 b2
-  concat-dependent-identification =
-    ( tr-concat {B = B} p01 p12 b0) ∙
-    ( ( ap (tr B p12) q01) ∙
-      ( q12))
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) {x' : B x} {y' : B y} {z' : B z} →
+    dependent-identification B p x' y' →
+    dependent-identification B q y' z' →
+    dependent-identification B (p ∙ q) x' z'
+  concat-dependent-identification refl q refl q' = q'
 ```
 
 #### Inverses of dependent identifications
 
 ```agda
 module _
-  {l1 l2 : Level}
-  {A : UU l1} {a0 a1 : A}
-  (B : A → UU l2) (p01 : a0 ＝ a1) {b0 : B a0} {b1 : B a1}
-  (q01 : dependent-identification B p01 b0 b1)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  inv-dependent-identification : dependent-identification B (inv p01) b1 b0
-  inv-dependent-identification =
-    ( inv (ap (tr B (inv p01)) q01)) ∙
-    ( ( inv (tr-concat {B = B} (p01) (inv p01) b0)) ∙
-      ( ap (λ t → tr B t b0) (right-inv p01)))
+  inv-dependent-identification :
+    {x y : A} (p : x ＝ y) {x' : B x} {y' : B y} →
+    dependent-identification B p x' y' →
+    dependent-identification B (inv p) y' x'
+  inv-dependent-identification refl refl = refl
 ```
 
 #### Associativity of concatenation of dependent identifications
 
 ```agda
 module _
-  {l1 l2 : Level}
-  {A : UU l1} {a0 a1 : A} (B : A → UU l2) {b0 : B a0} {b1 : B a1}
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  d-assoc :
-    {a2 a3 : A} {b2 : B a2} {b3 : B a3}
-    (p01 : a0 ＝ a1) (q01 : dependent-identification B p01 b0 b1)
-    (p12 : a1 ＝ a2) (q12 : dependent-identification B p12 b1 b2)
-    (p23 : a2 ＝ a3) (q23 : dependent-identification B p23 b2 b3) →
+  assoc-dependent-identification :
+    {x y z u : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ u)
+    {x' : B x} {y' : B y} {z' : B z} {u' : B u}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q y' z')
+    (r' : dependent-identification B r z' u') →
     dependent-identification² B
-      ( assoc p01 p12 p23)
+      ( assoc p q r)
       ( concat-dependent-identification B
-        ( p01 ∙ p12)
-        ( p23)
-        ( concat-dependent-identification B p01 p12 q01 q12)
-        ( q23))
+        ( p ∙ q)
+        ( r)
+        ( concat-dependent-identification B p q p' q')
+        ( r'))
       ( concat-dependent-identification B
-        ( p01)
-        ( p12 ∙ p23)
-        ( q01)
-        ( concat-dependent-identification B p12 p23 q12 q23))
-  d-assoc refl refl p12 q12 p23 q23 = refl
+        ( p)
+        ( q ∙ r)
+        ( p')
+        ( concat-dependent-identification B q r q' r'))
+  assoc-dependent-identification refl q r refl q' r' = refl
+```
 
-  d-assoc' :
-    {a2 a3 : A} {b2 : B a2} {b3 : B a3}
-    (p01 : a0 ＝ a1)
-    (q01 : dependent-identification B p01 b0 b1) (p12 : a1 ＝ a2)
-    (q12 : dependent-identification B p12 b1 b2) (p23 : a2 ＝ a3)
-    (q23 : dependent-identification B p23 b2 b3) →
-    dependent-identification
-      ( λ t → dependent-identification B t b0 b3)
-      ( assoc p01 p12 p23)
-      ( concat-dependent-identification B
-        ( p01 ∙ p12)
-        ( p23)
-        ( concat-dependent-identification B p01 p12 q01 q12)
-        ( q23))
-      ( concat-dependent-identification B
-        ( p01)
-        ( p12 ∙ p23)
-        ( q01)
-        ( concat-dependent-identification B p12 p23 q12 q23))
-  d-assoc' p01 q01 p12 q12 p23 q23 =
-    tr-dependent-identification-dependent-identification² B
-      ( assoc p01 p12 p23)
-      ( concat-dependent-identification B
-        ( p01 ∙ p12)
-        ( p23)
-        ( concat-dependent-identification B p01 p12 q01 q12)
-        ( q23))
-      ( concat-dependent-identification B
-        ( p01)
-        ( p12 ∙ p23)
-        ( q01)
-        ( concat-dependent-identification B p12 p23 q12 q23))
-      ( d-assoc p01 q01 p12 q12 p23 q23)
+### Unit laws for concatenation of dependent identifications
 
-  d-right-unit :
-    (p : a0 ＝ a1)
-    (q : dependent-identification B p b0 b1) →
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  right-unit-dependent-identification :
+    {x y : A} (p : x ＝ y) {x' : B x} {y' : B y}
+    (q : dependent-identification B p x' y') →
     dependent-identification²
       ( B)
       ( right-unit {p = p})
-      ( concat-dependent-identification B p refl q
-        ( refl-dependent-identification B))
+      ( concat-dependent-identification B p refl q refl)
       ( q)
-  d-right-unit refl refl = refl
+  right-unit-dependent-identification refl refl = refl
 
-  d-right-unit' :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
-    dependent-identification
-      ( λ t → dependent-identification B t b0 b1)
-      ( right-unit)
-      ( concat-dependent-identification B p refl q
-        ( refl-dependent-identification B))
-      ( q)
-  d-right-unit' p q =
-    tr-dependent-identification-dependent-identification² B
-      ( right-unit {p = p})
-      ( concat-dependent-identification B p refl q
-        ( refl-dependent-identification B))
-      ( q)
-      ( d-right-unit p q)
-
-  d-left-unit :
-    (p : a0 ＝ a1)
-    (q : dependent-identification B p b0 b1) →
+  left-unit-dependent-identification :
+    {x y : A} (p : x ＝ y) {x' : B x} {y' : B y}
+    (q : dependent-identification B p x' y') →
     dependent-identification²
       ( B)
       ( left-unit {p = p})
@@ -299,29 +188,19 @@ module _
         ( refl-dependent-identification B)
         ( q))
       ( q)
-  d-left-unit p q = refl
+  left-unit-dependent-identification p q = refl
+```
 
-  d-left-unit' :
-    (p : a0 ＝ a1)
-    (q : dependent-identification B p b0 b1) →
-    dependent-identification
-      ( λ t → dependent-identification B t b0 b1)
-      ( left-unit)
-      ( concat-dependent-identification B refl p
-        ( refl-dependent-identification B)
-        ( q))
-      ( q)
-  d-left-unit' p q =
-    tr-dependent-identification-dependent-identification² B
-      ( left-unit {p = p})
-      ( concat-dependent-identification B refl p
-        ( refl-dependent-identification B)
-        ( q))
-      ( q)
-      ( d-left-unit p q)
+### Inverse laws for dependent identifications
 
-  d-right-inv :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  right-inv-dependent-identification :
+    {x y : A} (p : x ＝ y) {x' : B x} {y' : B y}
+    (q : dependent-identification B p x' y') →
     dependent-identification² B
       ( right-inv p)
       ( concat-dependent-identification B
@@ -330,33 +209,11 @@ module _
         ( q)
         ( inv-dependent-identification B p q))
       ( refl-dependent-identification B)
-  d-right-inv refl refl = refl
+  right-inv-dependent-identification refl refl = refl
 
-  d-right-inv' :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
-    dependent-identification
-      ( λ t → dependent-identification B t b0 b0)
-      ( right-inv p)
-      ( concat-dependent-identification B
-        ( p)
-        ( inv p)
-        ( q)
-        ( inv-dependent-identification B p q))
-      ( refl-dependent-identification B)
-  d-right-inv' p q =
-    tr-dependent-identification-dependent-identification²
-      ( B)
-      ( right-inv p)
-      ( concat-dependent-identification B
-        ( p)
-        ( inv p)
-        ( q)
-        ( inv-dependent-identification B p q))
-      ( refl-dependent-identification B)
-      ( d-right-inv p q)
-
-  d-left-inv :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
+  left-inv-dependent-identification :
+    {x y : A} (p : x ＝ y) {x' : B x} {y' : B y}
+    (q : dependent-identification B p x' y') →
     dependent-identification²
       ( B)
       ( left-inv p)
@@ -366,33 +223,19 @@ module _
         ( inv-dependent-identification B p q)
         ( q))
       ( refl-dependent-identification B)
-  d-left-inv refl refl = refl
+  left-inv-dependent-identification refl refl = refl
+```
 
-  d-left-inv' :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
-    dependent-identification
-      ( λ t → dependent-identification B t b1 b1)
-      ( left-inv p)
-      ( concat-dependent-identification B
-        ( inv p)
-        ( p)
-        ( inv-dependent-identification B p q)
-        ( q))
-      ( refl-dependent-identification B)
-  d-left-inv' p q =
-    tr-dependent-identification-dependent-identification²
-      ( B)
-      ( left-inv p)
-      ( concat-dependent-identification B
-        ( inv p)
-        ( p)
-        ( inv-dependent-identification B p q)
-        ( q))
-      ( refl-dependent-identification B)
-      ( d-left-inv p q)
+### The inverse of dependent identifications is involutive
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
 
   inv-inv-dependent-identification :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
+    {x y : A} (p : x ＝ y) {x' : B x} {y' : B y}
+    (q : dependent-identification B p x' y') →
     dependent-identification² B
       ( inv-inv p)
       ( inv-dependent-identification B
@@ -400,67 +243,28 @@ module _
         ( inv-dependent-identification B p q))
       ( q)
   inv-inv-dependent-identification refl refl = refl
+```
 
-  inv-inv-dependent-identification' :
-    (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) →
-    dependent-identification
-      ( λ t → dependent-identification B t b0 b1)
-      ( inv-inv p)
-      ( inv-dependent-identification B
-        ( inv p)
-        ( inv-dependent-identification B p q))
-      ( q)
-  inv-inv-dependent-identification' p q =
-    tr-dependent-identification-dependent-identification² B
-      ( inv-inv p)
-      ( inv-dependent-identification B
-        ( inv p)
-        ( inv-dependent-identification B p q))
-      ( q)
-      ( inv-inv-dependent-identification p q)
+### The inverse distributes over concatenation of dependent identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
 
   distributive-inv-concat-dependent-identification :
-    {a2 : A} {b2 : B a2} (p01 : a0 ＝ a1)
-    (q01 : dependent-identification B p01 b0 b1)
-    (p12 : a1 ＝ a2) (q12 : dependent-identification B p12 b1 b2) →
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) {x' : B x} {y' : B y} {z' : B z}
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q y' z') →
     dependent-identification² B
-      ( distributive-inv-concat p01 p12)
+      ( distributive-inv-concat p q)
       ( inv-dependent-identification B
-        ( p01 ∙ p12)
-        ( concat-dependent-identification B p01 p12 q01 q12))
+        ( p ∙ q)
+        ( concat-dependent-identification B p q p' q'))
       ( concat-dependent-identification B
-        ( inv p12)
-        ( inv p01)
-        ( inv-dependent-identification B p12 q12)
-        ( inv-dependent-identification B p01 q01))
+        ( inv q)
+        ( inv p)
+        ( inv-dependent-identification B q q')
+        ( inv-dependent-identification B p p'))
   distributive-inv-concat-dependent-identification refl refl refl refl = refl
-
-  distributive-inv-concat-dependent-identification' :
-    {a2 : A} {b2 : B a2} (p01 : a0 ＝ a1)
-    (q01 : dependent-identification B p01 b0 b1)
-    (p12 : a1 ＝ a2) (q12 : dependent-identification B p12 b1 b2) →
-    dependent-identification
-      ( λ t → dependent-identification B t b2 b0)
-      ( distributive-inv-concat p01 p12)
-      ( inv-dependent-identification B
-        ( p01 ∙ p12)
-        ( concat-dependent-identification B p01 p12 q01 q12))
-      ( concat-dependent-identification B
-        ( inv p12)
-        ( inv p01)
-        ( inv-dependent-identification B p12 q12)
-        ( inv-dependent-identification B p01 q01))
-  distributive-inv-concat-dependent-identification' p01 q01 p12 q12 =
-    tr-dependent-identification-dependent-identification²
-      ( B)
-      ( distributive-inv-concat p01 p12)
-      ( inv-dependent-identification B
-        ( p01 ∙ p12)
-        ( concat-dependent-identification B p01 p12 q01 q12))
-      ( concat-dependent-identification B
-        ( inv p12)
-        ( inv p01)
-        ( inv-dependent-identification B p12 q12)
-        ( inv-dependent-identification B p01 q01))
-      ( distributive-inv-concat-dependent-identification p01 q01 p12 q12)
 ```

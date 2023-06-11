@@ -313,15 +313,11 @@ module _
           ( is-trunc-Id
             ( is-prop-type-trunc-Prop _
               ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))) ∙
-        ( inv
-          ( compute-eq-pair-Σ
-            ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( p)
-            ( q)
-            ( eq-is-prop is-prop-type-trunc-Prop)
-            ( eq-is-prop is-prop-type-trunc-Prop))))) ∙
+        ( interchange-concat-eq-pair-Σ
+          ( p)
+          ( q)
+          ( eq-is-prop is-prop-type-trunc-Prop)
+          ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
       ( ap-concat
         ( equivalence-class ∘ R (n +ℕ 2))
         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))
@@ -1195,42 +1191,25 @@ module _
                     ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
                     ( eq-counting-equivalence-class-R n))))
               ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
-              ( inv
-                ( compute-eq-pair-Σ
-                  ( pr2 (Fin-UU-Fin l4 2))
-                  ( mere-equiv-D/R-fin-2
-                    ( n +ℕ 2)
-                    ( Fin-UU-Fin l1 (n +ℕ 2))
-                    ( star))
-                  ( pr2 (Fin-UU-Fin l4 2))
-                  ( inv (eq-counting-equivalence-class-R n))
-                  ( ap
-                    ( equivalence-class ∘ R (n +ℕ 2))
-                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
-                    ( eq-counting-equivalence-class-R n))
-                  ( eq-is-prop is-prop-type-trunc-Prop)
-                  ( _)) ∙
+              ( interchange-concat-eq-pair-Σ
+                ( inv (eq-counting-equivalence-class-R n))
+                ( ap
+                  ( equivalence-class ∘ R (n +ℕ 2))
+                  ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
+                  ( eq-counting-equivalence-class-R n))
+                ( eq-is-prop is-prop-type-trunc-Prop)
+                ( _) ∙
                 ( ap
                   ( eq-pair-Σ
                     ( inv (eq-counting-equivalence-class-R n))
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
-                  ( inv
-                    ( compute-eq-pair-Σ
-                      ( mere-equiv-D/R-fin-2
-                        ( n +ℕ 2)
-                        ( Fin-UU-Fin l1 (n +ℕ 2))
-                        ( star))
-                      ( mere-equiv-D/R-fin-2
-                        ( n +ℕ 2)
-                        ( Fin-UU-Fin l1 (n +ℕ 2))
-                        ( star))
-                      ( pr2 (Fin-UU-Fin l4 2))
-                      ( ap
-                        ( equivalence-class ∘ R (n +ℕ 2))
-                        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
-                      ( eq-counting-equivalence-class-R n)
-                      ( eq-is-prop is-prop-type-trunc-Prop)
-                      ( eq-is-prop is-prop-type-trunc-Prop)) ∙
+                  ( interchange-concat-eq-pair-Σ
+                    ( ap
+                      ( equivalence-class ∘ R (n +ℕ 2))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
+                    ( eq-counting-equivalence-class-R n)
+                    ( eq-is-prop is-prop-type-trunc-Prop)
+                    ( eq-is-prop is-prop-type-trunc-Prop) ∙
                     ( ap
                       ( _∙
                         ( eq-pair-Σ
@@ -1251,11 +1230,7 @@ module _
                                 ( eq-is-prop is-prop-type-trunc-Prop)))}
                         ( eq-pair-Σ
                           ( inv
-                            ( ap-pair-eq-Σ
-                              ( UU-Fin l1 (n +ℕ 2))
-                              ( map-quotient-delooping-sign (n +ℕ 2))
-                              ( Fin-UU-Fin l1 (n +ℕ 2))
-                              ( Fin-UU-Fin l1 (n +ℕ 2))
+                            ( pr1-pair-eq-Σ-ap _
                               ( eq-pair-Σ p
                                 ( eq-is-prop is-prop-type-trunc-Prop))))
                           ( eq-is-prop
@@ -1283,12 +1258,7 @@ module _
                   ( eq-pair-Σ (inv (eq-counting-equivalence-class-R n)))
                   ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
                   ( inv
-                    ( inv-eq-pair-Σ
-                      ( mere-equiv-D/R-fin-2
-                        ( n +ℕ 2)
-                        ( Fin-UU-Fin l1 (n +ℕ 2))
-                        ( star))
-                      ( pr2 (Fin-UU-Fin l4 2))
+                    ( distributive-inv-eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
                 ( inv
