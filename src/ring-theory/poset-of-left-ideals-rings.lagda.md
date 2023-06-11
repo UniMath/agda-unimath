@@ -8,7 +8,7 @@ module ring-theory.poset-of-left-ideals-rings where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.powersets
 open import foundation.propositions

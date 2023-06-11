@@ -10,7 +10,7 @@ module graph-theory.finite-graphs where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.universe-levels
 open import foundation.unordered-pairs

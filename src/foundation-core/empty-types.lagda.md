@@ -8,12 +8,12 @@ module foundation-core.empty-types where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels

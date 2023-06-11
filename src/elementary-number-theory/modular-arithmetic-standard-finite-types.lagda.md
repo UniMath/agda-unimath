@@ -23,7 +23,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps

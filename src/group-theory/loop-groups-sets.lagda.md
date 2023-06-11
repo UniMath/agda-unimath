@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-truncated-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -217,15 +217,11 @@ module _
       ( ( ap
         ( λ w → eq-pair-Σ (p ∙ q) w)
         ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set X) _ _)))) ∙
-        ( inv
-          ( compute-eq-pair-Σ
-            ( pr2 X)
-            ( pr2 X)
-            ( pr2 X)
-            ( p)
-            ( q)
-            ( eq-is-prop (is-prop-is-set (type-Set X)))
-            ( eq-is-prop (is-prop-is-set (type-Set X))))))) ∙
+        ( interchange-concat-eq-pair-Σ
+          ( p)
+          ( q)
+          ( eq-is-prop (is-prop-is-set (type-Set X)))
+          ( eq-is-prop (is-prop-is-set (type-Set X)))))) ∙
       ( ( ap
         ( λ w →
           eq-pair-Σ
@@ -233,15 +229,11 @@ module _
               ( eq-pair-Σ q (eq-is-prop (is-prop-is-set (pr1 X)))))
             ( w)))
         ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
-        ( inv
-          ( compute-eq-pair-Σ
-            ( unit-trunc-Prop refl)
-            ( unit-trunc-Prop refl)
-            ( unit-trunc-Prop refl)
-            ( eq-pair-Σ p (eq-is-prop (is-prop-is-set (type-Set X))))
-            ( eq-pair-Σ q (eq-is-prop (is-prop-is-set (type-Set X))))
-            ( eq-is-prop is-prop-type-trunc-Prop)
-            ( eq-is-prop is-prop-type-trunc-Prop))))
+        ( interchange-concat-eq-pair-Σ
+          ( eq-pair-Σ p (eq-is-prop (is-prop-is-set (type-Set X))))
+          ( eq-pair-Σ q (eq-is-prop (is-prop-is-set (type-Set X))))
+          ( eq-is-prop is-prop-type-trunc-Prop)
+          ( eq-is-prop is-prop-type-trunc-Prop)))
 
   hom-inv-abstract-automorphism-group-loop-group-Set :
     type-hom-Group
@@ -253,8 +245,8 @@ module _
   pr2 hom-inv-abstract-automorphism-group-loop-group-Set p q =
     ( ap
       ( λ r → pr1 (pair-eq-Σ r))
-      ( inv (compute-pair-eq-Σ p q))) ∙
-      ( inv (compute-pair-eq-Σ (pr1 (pair-eq-Σ p)) (pr1 (pair-eq-Σ q))))
+      ( pr1-interchange-concat-pair-eq-Σ p q)) ∙
+    ( pr1-interchange-concat-pair-eq-Σ (pr1 (pair-eq-Σ p)) (pr1 (pair-eq-Σ q)))
 
   is-sec-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id

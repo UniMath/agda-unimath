@@ -15,7 +15,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -107,7 +107,7 @@ htpy-eq-dependent-cocone-map f g c ind-c {P} h h' p =
           ( dependent-cocone-map f g c P h')
           ( p))
         ( λ s →
-          map-compute-path-over-eq-value h h'
+          map-compute-dependent-identification-eq-value h h'
             ( coherence-square-cocone f g c s)
             ( horizontal-htpy-eq-dependent-cocone f g c P
               ( dependent-cocone-map f g c P h)

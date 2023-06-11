@@ -10,10 +10,10 @@ module synthetic-homotopy-theory.dependent-cocones-under-spans where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.dependent-paths
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -45,7 +45,7 @@ functions
 and a family of dependent identifications
 
 ```text
-  (s : S) → path-over P (H s) (i' (f s)) (j' (g s)).
+  (s : S) → dependent-identification P (H s) (i' (f s)) (j' (g s)).
 ```
 
 ## Definitions
@@ -65,7 +65,7 @@ module _
         Σ ( (b : B) → P (vertical-map-cocone f g c b))
           ( λ hB →
             (s : S) →
-            path-over P
+            dependent-identification P
               ( coherence-square-cocone f g c s)
               ( hA (f s))
               ( hB (g s))))
@@ -84,7 +84,7 @@ module _
 
     coherence-square-dependent-cocone :
       (s : S) →
-      path-over P
+      dependent-identification P
         ( coherence-square-cocone f g c s)
         ( horizontal-map-dependent-cocone (f s))
         ( vertical-map-dependent-cocone (g s))
@@ -194,7 +194,7 @@ module _
           ( vertical-map-dependent-cocone f g c P d , refl-htpy)
           ( is-contr-equiv
             ( Σ ( (s : S) →
-                  path-over P
+                  dependent-identification P
                     ( coherence-square-cocone f g c s)
                     ( horizontal-map-dependent-cocone f g c P d (f s))
                     ( vertical-map-dependent-cocone f g c P d (g s)))

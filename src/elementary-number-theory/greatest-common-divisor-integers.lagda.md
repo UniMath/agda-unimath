@@ -20,7 +20,7 @@ open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences

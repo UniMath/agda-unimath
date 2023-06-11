@@ -8,13 +8,13 @@ module foundation.subtype-identity-principle where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```

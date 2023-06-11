@@ -8,7 +8,7 @@ module orthogonal-factorization-systems.identity-modality where
 
 ```agda
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types

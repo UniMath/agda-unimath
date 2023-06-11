@@ -7,11 +7,12 @@ module foundation-core.equality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
+open import foundation-core.dependent-identifications
+open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.transport
@@ -33,7 +34,8 @@ module _
   where
 
   Eq-Σ : (s t : Σ A B) → UU (l1 ⊔ l2)
-  Eq-Σ s t = Σ (pr1 s ＝ pr1 t) (λ α → tr B α (pr2 s) ＝ pr2 t)
+  Eq-Σ s t =
+    Σ (pr1 s ＝ pr1 t) (λ α → dependent-identification B α (pr2 s) (pr2 t))
 ```
 
 ## Properties
@@ -49,8 +51,8 @@ module _
   pair-eq-Σ {s} refl = refl-Eq-Σ s
 
   eq-pair-Σ :
-    {s t : Σ A B} →
-    (α : pr1 s ＝ pr1 t) → tr B α (pr2 s) ＝ pr2 t → s ＝ t
+    {s t : Σ A B} (α : pr1 s ＝ pr1 t) →
+    dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
   eq-pair-Σ {pair x y} {pair .x .y} refl refl = refl
 
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t

@@ -12,12 +12,13 @@ open import foundation-core.identity-types public
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.transport
 ```
@@ -41,14 +42,14 @@ identifications in arbitrary types.
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
 | Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
-| Action on identifications of functions           | [`foundation.action-on-identifications-functions](foundation.action-on-identifications-functions.md)                      |
+| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
 | Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
-| Commuting squares of identifications             | [`foundation.commuting-squares-identifications`](foundation.commuting-squares-identifications.md)                         |
-| Dependent paths (foundation)                     | [`foundation.dependent-paths`](foundation.dependent-paths.md)                                                             |
-| Dependent paths (foundation-core)                | [`foundation-core.dependent-paths`](foundation-core.dependent-paths.md)                                                   |
+| Commuting squares of identifications             | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
+| Dependent identifications (foundation)           | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
+| Dependent identifications (foundation-core)      | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
 | The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
 | Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
-| Identity systems                                 | [`foundation.identity-sytsemts`](foundation.identity-systems.md)                                                          |
+| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
 | The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
 | The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
 | Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
@@ -240,35 +241,29 @@ module _
   pr2 (equiv-con-inv p q r) = is-equiv-con-inv p q r
 ```
 
-### Transport is an equivalence
+### Computing transport in the type family of identifications with a fixed target
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
-  where
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
+```
 
-  inv-tr : x ＝ y → B y → B x
-  inv-tr p = tr B (inv p)
+### Computing transport in the type family of identifications with a fixed source
 
-  isretr-inv-tr : (p : x ＝ y) → ((inv-tr p) ∘ (tr B p)) ~ id
-  isretr-inv-tr refl b = refl
+```agda
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
+```
 
-  issec-inv-tr : (p : x ＝ y) → ((tr B p) ∘ (inv-tr p)) ~ id
-  issec-inv-tr refl b = refl
+### Computing transport of loops
 
-  is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
-  is-equiv-tr p =
-    is-equiv-has-inverse
-      ( inv-tr p)
-      ( issec-inv-tr p)
-      ( isretr-inv-tr p)
-
-  equiv-tr : x ＝ y → (B x) ≃ (B y)
-  pr1 (equiv-tr p) = tr B p
-  pr2 (equiv-tr p) = is-equiv-tr p
-
-equiv-tr-refl :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} →
-  equiv-tr B refl ＝ id-equiv {A = B x}
-equiv-tr-refl B = eq-htpy-equiv (λ _ → refl)
+```agda
+tr-loop :
+  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
+  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
+tr-loop refl l = inv right-unit
 ```

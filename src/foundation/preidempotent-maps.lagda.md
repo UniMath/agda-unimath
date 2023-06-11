@@ -8,9 +8,9 @@ module foundation.preidempotent-maps where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sets

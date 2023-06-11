@@ -53,14 +53,14 @@ identifications in arbitrary types.
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
 | Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
-| Action on identifications of functions           | [`foundation.action-on-identifications-functions](foundation.action-on-identifications-functions.md)                      |
+| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
 | Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
-| Commuting squares of identifications             | [`foundation.commuting-squares-identifications`](foundation.commuting-squares-identifications.md)                         |
-| Dependent paths (foundation)                     | [`foundation.dependent-paths`](foundation.dependent-paths.md)                                                             |
-| Dependent paths (foundation-core)                | [`foundation-core.dependent-paths`](foundation-core.dependent-paths.md)                                                   |
+| Commuting squares of identifications             | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
+| Dependent identifications (foundation)           | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
+| Dependent identifications (foundation-core)      | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
 | The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
 | Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
-| Identity systems                                 | [`foundation.identity-sytsemts`](foundation.identity-systems.md)                                                          |
+| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
 | The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
 | The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
 | Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |

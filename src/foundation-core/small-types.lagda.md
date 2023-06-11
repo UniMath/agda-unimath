@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence

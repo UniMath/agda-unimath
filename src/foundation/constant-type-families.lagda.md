@@ -12,7 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.dependent-paths
+open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 ```
@@ -70,7 +70,7 @@ pr2 (is-constant-type-family-constant-type-family A B) a = id-equiv
 ```agda
 tr-constant-type-family :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : x ＝ y) (b : B) →
-  path-over (constant-type-family A B) p b b
+  dependent-identification (constant-type-family A B) p b b
 tr-constant-type-family refl b = refl
 ```
 

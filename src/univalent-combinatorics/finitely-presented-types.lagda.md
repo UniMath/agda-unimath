@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-presented-types

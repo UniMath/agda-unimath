@@ -9,13 +9,14 @@ module foundation.equality-cartesian-product-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.transport
 ```
 
 </details>
@@ -89,8 +90,6 @@ module _
   pr2 (equiv-pair-eq s t) = is-equiv-pair-eq s t
 ```
 
-## Properties
-
 ### Commuting triangles for `eq-pair`
 
 ```agda
@@ -135,6 +134,44 @@ ap-pr2-eq-pair :
   {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
   ap pr2 (eq-pair {s = pair x y} {pair x' y'} p q) ＝ q
 ap-pr2-eq-pair refl refl = refl
+```
+
+#### Computing transport along a path of the form `eq-pair`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A} {b0 b1 : B}
+  where
+
+  tr-eq-pair :
+    (C : A × B → UU l3) (p : a0 ＝ a1) (q : b0 ＝ b1) (u : C (a0 , b0)) →
+    tr C (eq-pair p q) u ＝
+    tr (λ x → C (a1 , x)) q (tr (λ x → C (x , b0)) p u)
+  tr-eq-pair C refl refl u = refl
+```
+
+#### Computing transport along a path of the form `eq-pair` When one of the paths is `refl`
+
+```agda
+  left-unit-law-tr-eq-pair :
+    (C : A × B → UU l3) (q : b0 ＝ b1) (u : C (a0 , b0)) →
+    (tr C (eq-pair refl q) u) ＝ tr (λ x → C (a0 , x)) q u
+  left-unit-law-tr-eq-pair C refl u = refl
+
+  right-unit-law-tr-eq-pair :
+    (C : A × B → UU l3) (p : a0 ＝ a1) (u : C (a0 , b0)) →
+    (tr C (eq-pair p refl) u) ＝ tr (λ x → C (x , b0)) p u
+  right-unit-law-tr-eq-pair C refl u = refl
+```
+
+#### Computing transport along a path of the form `eq-pair` when both paths are identical
+
+```agda
+tr-eq-pair-diagonal :
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} (C : A × A → UU l2)
+  (p : a0 ＝ a1) (u : C (a0 , a0)) →
+  tr C (eq-pair p p) u ＝ tr (λ a → C (a , a)) p u
+tr-eq-pair-diagonal C refl u = refl
 ```
 
 ## See also

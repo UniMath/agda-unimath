@@ -8,7 +8,6 @@ module foundation.booleans where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -17,6 +16,7 @@ open import foundation-core.constant-maps
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps

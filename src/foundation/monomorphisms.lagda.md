@@ -10,11 +10,11 @@ module foundation.monomorphisms where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.functions
 open import foundation.functoriality-function-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions

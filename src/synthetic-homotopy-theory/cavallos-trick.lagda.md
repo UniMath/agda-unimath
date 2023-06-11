@@ -9,7 +9,7 @@ module synthetic-homotopy-theory.cavallos-trick where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sections

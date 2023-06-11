@@ -10,11 +10,11 @@ module foundation.functoriality-fibers-of-maps where
 open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

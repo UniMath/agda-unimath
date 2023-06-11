@@ -14,7 +14,7 @@ open import elementary-number-theory.parity-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 

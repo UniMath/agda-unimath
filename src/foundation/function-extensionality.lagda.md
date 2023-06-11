@@ -12,10 +12,10 @@ open import foundation-core.function-extensionality public
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```

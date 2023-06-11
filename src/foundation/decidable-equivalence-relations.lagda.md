@@ -18,7 +18,6 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.images
@@ -38,6 +37,7 @@ open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

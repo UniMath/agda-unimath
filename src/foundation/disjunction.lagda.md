@@ -10,13 +10,13 @@ module foundation.disjunction where
 open import foundation.conjunction
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.propositions
 ```
 

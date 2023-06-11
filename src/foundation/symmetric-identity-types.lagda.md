@@ -10,7 +10,6 @@ module foundation.symmetric-identity-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -23,6 +22,7 @@ open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 
 open import univalent-combinatorics.standard-finite-types

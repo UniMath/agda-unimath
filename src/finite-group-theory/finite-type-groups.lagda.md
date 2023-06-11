@@ -15,7 +15,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -60,7 +60,7 @@ module _
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
   pr2 hom-loop-group-fin-UU-Fin-Group p q =
-    inv (compute-pair-eq-Σ p q)
+    pr1-interchange-concat-pair-eq-Σ p q
 
   hom-inv-loop-group-fin-UU-Fin-Group :
     type-hom-Group
@@ -72,15 +72,11 @@ module _
     ( ap
       ( λ r → eq-pair-Σ (p ∙ q) r)
       ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
-      ( inv
-        ( compute-eq-pair-Σ
-          ( pr2 (Fin-UU-Fin l n))
-          ( pr2 (Fin-UU-Fin l n))
-          ( pr2 (Fin-UU-Fin l n))
-          ( p)
-          ( q)
-          ( eq-is-prop is-prop-type-trunc-Prop)
-          ( eq-is-prop is-prop-type-trunc-Prop)))
+      ( interchange-concat-eq-pair-Σ
+        ( p)
+        ( q)
+        ( eq-is-prop is-prop-type-trunc-Prop)
+        ( eq-is-prop is-prop-type-trunc-Prop))
 
   is-sec-hom-inv-loop-group-fin-UU-Fin-Group :
     Id

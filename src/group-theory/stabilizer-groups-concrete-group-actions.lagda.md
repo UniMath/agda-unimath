@@ -9,7 +9,7 @@ module group-theory.stabilizer-groups-concrete-group-actions where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.sets

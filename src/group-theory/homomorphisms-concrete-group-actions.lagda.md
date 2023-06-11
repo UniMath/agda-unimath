@@ -11,7 +11,7 @@ open import foundation.0-connected-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions

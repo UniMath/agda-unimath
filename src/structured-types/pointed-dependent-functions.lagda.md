@@ -9,7 +9,7 @@ module structured-types.pointed-dependent-functions where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 

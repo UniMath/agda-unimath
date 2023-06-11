@@ -12,8 +12,8 @@ open import foundation-core.truncation-levels public
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.functions
 
+open import foundation-core.function-types
 open import foundation-core.identity-types
 ```
 
