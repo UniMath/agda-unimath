@@ -58,10 +58,10 @@ postulate
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : dependent-identification P path-𝕀 u v) →
     coherence-square-identifications
-      ( apd (ind-𝕀 P u v q) path-𝕀)
-      ( compute-target-𝕀 u v q)
       ( ap (tr P path-𝕀) (compute-source-𝕀 u v q))
+      ( apd (ind-𝕀 P u v q) path-𝕀)
       ( q)
+      ( compute-target-𝕀 u v q)
 ```
 
 ## Properties
@@ -73,7 +73,7 @@ Data-𝕀 : {l : Level} → (𝕀 → UU l) → UU l
 Data-𝕀 P =
   Σ ( P source-𝕀)
     ( λ u →
-      Σ (P target-𝕀) (dependent-identification P path-𝕀 u))
+      Σ ( P target-𝕀) (dependent-identification P path-𝕀 u))
 
 ev-𝕀 : {l : Level} {P : 𝕀 → UU l} → ((x : 𝕀) → P x) → Data-𝕀 P
 ev-𝕀 f = triple (f source-𝕀) (f target-𝕀) (apd f path-𝕀)
@@ -89,10 +89,10 @@ module _
         Σ ( pr1 (pr2 x) ＝ pr1 (pr2 y))
           ( λ β →
             coherence-square-identifications
-              ( pr2 (pr2 x))
-              ( β)
               ( ap (tr P path-𝕀) α)
-              ( pr2 (pr2 y))))
+              ( pr2 (pr2 x))
+              ( pr2 (pr2 y))
+              ( β)))
 
   extensionality-Data-𝕀 : (x y : Data-𝕀 P) → Id x y ≃ Eq-Data-𝕀 x y
   extensionality-Data-𝕀 (pair u (pair v α)) =
@@ -101,10 +101,10 @@ module _
         Σ ( v ＝ pr1 vα')
           ( λ q →
             coherence-square-identifications
-              ( α)
-              ( q)
               ( ap (tr P path-𝕀) p)
-              ( pr2 vα')))
+              ( α)
+              ( pr2 vα')
+              ( q)))
       ( refl)
       ( pair refl right-unit)
       ( λ u' → id-equiv)
@@ -125,14 +125,13 @@ module _
   eq-Eq-Data-𝕀' {x} {y} = map-inv-equiv (extensionality-Data-𝕀 x y)
 
   eq-Eq-Data-𝕀 :
-    {x y : Data-𝕀 P} (α : Id (pr1 x) (pr1 y))
-    (β : pr1 (pr2 x) ＝ pr1 (pr2 y))
+    {x y : Data-𝕀 P} (α : pr1 x ＝ pr1 y) (β : pr1 (pr2 x) ＝ pr1 (pr2 y))
     (γ :
       coherence-square-identifications
-        ( pr2 (pr2 x))
-        ( β)
         ( ap (tr P path-𝕀) α)
-        ( pr2 (pr2 y))) →
+        ( pr2 (pr2 x))
+        ( pr2 (pr2 y))
+        ( β)) →
     x ＝ y
   eq-Eq-Data-𝕀 α β γ = eq-Eq-Data-𝕀' (triple α β γ)
 ```
@@ -154,7 +153,7 @@ issec-inv-ev-𝕀 (pair u (pair v q)) =
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
   (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
-  coherence-square-identifications (apd f p) r (ap (tr B p) q) (apd g p) →
+  coherence-square-identifications (ap (tr B p) q) (apd f p) (apd g p) r →
   dependent-identification (eq-value f g) p q r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 

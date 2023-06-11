@@ -42,9 +42,8 @@ module _
   where
 
   coherence-square-identifications :
-    (left : x ＝ z) (bottom : z ＝ w)
-    (top : x ＝ y) (right : y ＝ w) → UU l
-  coherence-square-identifications left bottom top right =
+    (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w) → UU l
+  coherence-square-identifications top left right bottom =
     (left ∙ bottom) ＝ (top ∙ right)
 ```
 
@@ -65,10 +64,10 @@ module _
   where
 
   coherence-square-identifications-comp-horizontal :
-    coherence-square-identifications p-left p-bottom p-top middle →
-    coherence-square-identifications middle q-bottom q-top q-right →
+    coherence-square-identifications p-top p-left middle p-bottom →
+    coherence-square-identifications q-top middle q-right q-bottom →
     coherence-square-identifications
-      p-left (p-bottom ∙ q-bottom) (p-top ∙ q-top) q-right
+      (p-top ∙ q-top) p-left q-right (p-bottom ∙ q-bottom)
   coherence-square-identifications-comp-horizontal p q =
     ( ( ( inv (assoc p-left p-bottom q-bottom) ∙
           ap-binary (_∙_) p (refl {x = q-bottom})) ∙
@@ -85,10 +84,10 @@ module _
   where
 
   coherence-square-identifications-comp-vertical :
-    coherence-square-identifications p-left middle p-top p-right →
-    coherence-square-identifications q-left q-bottom middle q-right →
+    coherence-square-identifications p-top p-left p-right middle →
+    coherence-square-identifications middle q-left q-right q-bottom →
     coherence-square-identifications
-      (p-left ∙ q-left) q-bottom p-top (p-right ∙ q-right)
+      p-top (p-left ∙ q-left) (p-right ∙ q-right) q-bottom
   coherence-square-identifications-comp-vertical p q =
     ( assoc p-left q-left q-bottom ∙
       ( ( ap-binary (_∙_) (refl {x = p-left}) q ∙
@@ -111,26 +110,26 @@ module _
 
   coherence-square-identifications-left-paste :
     {left' : x ＝ z} (s : left ＝ left') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications left' bottom top right
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left' right bottom
   coherence-square-identifications-left-paste refl sq = sq
 
   coherence-square-identifications-bottom-paste :
     {bottom' : z ＝ w} (s : bottom ＝ bottom') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications left bottom' top right
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left right bottom'
   coherence-square-identifications-bottom-paste refl sq = sq
 
   coherence-square-identifications-top-paste :
     {top' : x ＝ y} (s : top ＝ top') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications left bottom top' right
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top' left right bottom
   coherence-square-identifications-top-paste refl sq = sq
 
   coherence-square-identifications-right-paste :
     {right' : y ＝ w} (s : right ＝ right') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications left bottom top right'
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left right' bottom
   coherence-square-identifications-right-paste refl sq = sq
 ```
 
@@ -147,36 +146,36 @@ module _
 
   coherence-square-identifications-top-left-whisk' :
     {x' : A} (p : x' ＝ x) →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications (p ∙ left) bottom (p ∙ top) right
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications (p ∙ top) (p ∙ left) right bottom
   coherence-square-identifications-top-left-whisk' refl sq = sq
 
   coherence-square-identifications-top-left-whisk :
     {x' : A} (p : x ＝ x') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications (inv p ∙ left) bottom (inv p ∙ top) right
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications (inv p ∙ top) (inv p ∙ left) right bottom
   coherence-square-identifications-top-left-whisk refl sq = sq
 
   coherence-square-identifications-top-right-whisk :
     {y' : A} (p : y ＝ y') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications left bottom (top ∙ p) (inv p ∙ right)
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications (top ∙ p) left (inv p ∙ right) bottom
   coherence-square-identifications-top-right-whisk refl =
     coherence-square-identifications-top-paste
       left bottom top right (inv right-unit)
 
   coherence-square-identifications-bottom-left-whisk :
     {z' : A} (p : z ＝ z') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications (left ∙ p) (inv p ∙ bottom) top right
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top (left ∙ p) right (inv p ∙ bottom)
   coherence-square-identifications-bottom-left-whisk refl =
     coherence-square-identifications-left-paste
       left bottom top right (inv right-unit)
 
   coherence-square-identifications-bottom-right-whisk :
     {w' : A} (p : w ＝ w') →
-    coherence-square-identifications left bottom top right →
-    coherence-square-identifications left (bottom ∙ p) top (right ∙ p)
+    coherence-square-identifications top left right bottom →
+    coherence-square-identifications top left (right ∙ p) (bottom ∙ p)
   coherence-square-identifications-bottom-right-whisk refl =
     ( coherence-square-identifications-bottom-paste
       left bottom top (right ∙ refl) (inv right-unit)) ∘

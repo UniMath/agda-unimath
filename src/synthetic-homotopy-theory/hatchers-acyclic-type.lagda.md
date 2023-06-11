@@ -82,19 +82,19 @@ hom-algebra-Hatcher-Acyclic-Type
           Σ ( map-Ω A B f a2 ＝ b2)
             ( λ v →
               ( coherence-square-identifications
-                ( map-power-nat-Ω 5 A B f a1 ∙ ap (power-nat-Ω 5 B) u)
-                ( s1)
                 ( ap (map-Ω A B f) r1)
-                ( map-power-nat-Ω 3 A B f a2 ∙ ap (power-nat-Ω 3 B) v)) ×
-              coherence-square-identifications
+                ( map-power-nat-Ω 5 A B f a1 ∙ ap (power-nat-Ω 5 B) u)
                 ( map-power-nat-Ω 3 A B f a2 ∙ ap (power-nat-Ω 3 B) v)
-                ( s2)
+                ( s1)) ×
+              coherence-square-identifications
                 ( ap (map-Ω A B f) r2)
+                ( map-power-nat-Ω 3 A B f a2 ∙ ap (power-nat-Ω 3 B) v)
                 ( ( map-power-nat-Ω 2 A B f (a1 ∙ a2)) ∙
                   ( ap
                     ( power-nat-Ω 2 B)
                     ( ( preserves-mul-map-Ω A B f a1 a2) ∙
-                      ( ap-binary _∙_ u v)))))))
+                      ( ap-binary _∙_ u v))))
+                ( s2))))
 ```
 
 ### The Hatcher acyclic type is the initial Hatcher acyclic algebra

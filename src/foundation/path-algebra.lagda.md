@@ -66,11 +66,11 @@ horizontal-concat-square :
   {l : Level} {A : UU l} {a b c d e f : A}
   (p-lleft : a ＝ b) (p-lbottom : b ＝ d) (p-rbottom : d ＝ f)
   (p-middle : c ＝ d) (p-ltop : a ＝ c) (p-rtop : c ＝ e) (p-rright : e ＝ f)
-  (s-left : coherence-square-identifications p-lleft p-lbottom p-ltop p-middle)
+  (s-left : coherence-square-identifications p-ltop p-lleft p-middle p-lbottom)
   (s-right :
-    coherence-square-identifications p-middle p-rbottom p-rtop p-rright) →
+    coherence-square-identifications p-rtop p-middle p-rright p-rbottom) →
   coherence-square-identifications
-    p-lleft (p-lbottom ∙ p-rbottom) (p-ltop ∙ p-rtop) p-rright
+    (p-ltop ∙ p-rtop) p-lleft p-rright (p-lbottom ∙ p-rbottom)
 horizontal-concat-square {a = a} {f = f}
   p-lleft p-lbottom p-rbottom p-middle p-ltop p-rtop p-rright s-left s-right =
   ( inv (assoc p-lleft p-lbottom p-rbottom)) ∙
@@ -81,13 +81,13 @@ horizontal-concat-square {a = a} {f = f}
 
 horizontal-unit-square :
   {l : Level} {A : UU l} {a b : A} (p : a ＝ b) →
-  coherence-square-identifications p refl refl p
+  coherence-square-identifications refl p p refl
 horizontal-unit-square p = right-unit
 
 left-unit-law-horizontal-concat-square :
   {l : Level} {A : UU l} {a b c d : A}
   (p-left : a ＝ b) (p-bottom : b ＝ d) (p-top : a ＝ c) (p-right : c ＝ d) →
-  (s : coherence-square-identifications p-left p-bottom p-top p-right) →
+  (s : coherence-square-identifications p-top p-left p-right p-bottom) →
   ( horizontal-concat-square
     p-left refl p-bottom p-left refl p-top p-right
     ( horizontal-unit-square p-left)
@@ -100,11 +100,11 @@ vertical-concat-square :
   {l : Level} {A : UU l} {a b c d e f : A}
   (p-tleft : a ＝ b) (p-bleft : b ＝ c) (p-bbottom : c ＝ f)
   (p-middle : b ＝ e) (p-ttop : a ＝ d) (p-tright : d ＝ e) (p-bright : e ＝ f)
-  (s-top : coherence-square-identifications p-tleft p-middle p-ttop p-tright)
+  (s-top : coherence-square-identifications p-ttop p-tleft p-tright p-middle)
   (s-bottom :
-    coherence-square-identifications p-bleft p-bbottom p-middle p-bright) →
+    coherence-square-identifications p-middle p-bleft p-bright p-bbottom) →
   coherence-square-identifications
-    (p-tleft ∙ p-bleft) p-bbottom p-ttop (p-tright ∙ p-bright)
+    p-ttop (p-tleft ∙ p-bleft) (p-tright ∙ p-bright) p-bbottom
 vertical-concat-square {a = a} {f = f}
   p-tleft p-bleft p-bbottom p-middle p-ttop p-tright p-bright s-top s-bottom =
   ( assoc p-tleft p-bleft p-bbottom) ∙
@@ -207,7 +207,10 @@ module _
 
   nat-sq-right-unit-Id² :
     coherence-square-identifications
-      right-unit α (horizontal-concat-Id² α refl) right-unit
+      ( horizontal-concat-Id² α refl)
+      ( right-unit)
+      ( right-unit)
+      ( α)
   nat-sq-right-unit-Id² =
     ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
       ( nat-htpy htpy-right-unit α)) ∙
@@ -215,7 +218,10 @@ module _
 
   nat-sq-left-unit-Id² :
     coherence-square-identifications
-      left-unit α (horizontal-concat-Id² (refl {x = refl}) α) left-unit
+      ( horizontal-concat-Id² (refl {x = refl}) α)
+      ( left-unit)
+      ( left-unit)
+      ( α)
   nat-sq-left-unit-Id² =
     ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
     ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
@@ -244,10 +250,10 @@ module _
 
   nat-sq-right-inv-Id² :
     coherence-square-identifications
-      ( right-inv p)
-      ( refl)
       ( horizontal-concat-Id² α (horizontal-inv-Id² α))
+      ( right-inv p)
       ( right-inv p')
+      ( refl)
   nat-sq-right-inv-Id² =
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy right-inv α)) ∙
@@ -260,10 +266,10 @@ module _
 
   nat-sq-left-inv-Id² :
     coherence-square-identifications
-      ( left-inv p)
-      ( refl)
       ( horizontal-concat-Id² (horizontal-inv-Id² α) α)
+      ( left-inv p)
       ( left-inv p')
+      ( refl)
   nat-sq-left-inv-Id² =
     ( ( ( horizontal-concat-Id² refl (inv (ap-const refl α))) ∙
         ( nat-htpy left-inv α)) ∙
@@ -343,10 +349,10 @@ module _
 
   nat-sq-ap-inv-Id² :
     coherence-square-identifications
-      ( ap-inv f p)
-      ( horizontal-inv-Id² (ap² f α))
       ( ap² f (horizontal-inv-Id² α))
+      ( ap-inv f p)
       ( ap-inv f p')
+      ( horizontal-inv-Id² (ap² f α))
   nat-sq-ap-inv-Id² =
     (inv (horizontal-concat-Id² refl (ap-comp inv (ap f) α)) ∙
       (nat-htpy (ap-inv f) α)) ∙
@@ -362,17 +368,17 @@ module _
   where
 
   nat-sq-ap-id-Id² :
-    coherence-square-identifications (ap-id p) α (ap² id α) (ap-id p')
+    coherence-square-identifications (ap² id α) (ap-id p) (ap-id p') α
   nat-sq-ap-id-Id² =
     ((horizontal-concat-Id² refl (inv (ap-id α))) ∙ (nat-htpy ap-id α))
 
   nat-sq-ap-const-Id² :
     (b : B) →
     coherence-square-identifications
-      ( ap-const b p)
-      ( refl)
       ( ap² (const A B b) α)
+      ( ap-const b p)
       ( ap-const b p')
+      ( refl)
   nat-sq-ap-const-Id² b =
     ( inv (horizontal-concat-Id² refl (ap-const refl α))) ∙
     ( nat-htpy (ap-const b) α)
@@ -388,10 +394,10 @@ module _
 
   nat-sq-ap-comp-Id² :
     coherence-square-identifications
-      ( ap-comp g f p)
-      ( (ap² g ∘ ap² f) α)
       ( ap² (g ∘ f) α)
+      ( ap-comp g f p)
       ( ap-comp g f p')
+      ( (ap² g ∘ ap² f) α)
   nat-sq-ap-comp-Id² =
     (horizontal-concat-Id² refl (inv (ap-comp (ap g) (ap f) α)) ∙
       (nat-htpy (ap-comp g f) α))
@@ -569,12 +575,12 @@ module _
     (p00̂1 : x001 ＝ x011) (p0̂01 : x001 ＝ x101) (p010̂ : x010 ＝ x011)
     (p0̂10 : x010 ＝ x110) (p100̂ : x100 ＝ x101) (p10̂0 : x100 ＝ x110)
     (p0̂11 : x011 ＝ x111) (p10̂1 : x101 ＝ x111) (p110̂ : x110 ＝ x111)
-    (p00̂0̂ : coherence-square-identifications p000̂ p00̂1 p00̂0 p010̂)
-    (p0̂00̂ : coherence-square-identifications p000̂ p0̂01 p0̂00 p100̂)
-    (p0̂0̂0 : coherence-square-identifications p00̂0 p0̂10 p0̂00 p10̂0)
-    (p0̂0̂1 : coherence-square-identifications p00̂1 p0̂11 p0̂01 p10̂1)
-    (p0̂10̂ : coherence-square-identifications p010̂ p0̂11 p0̂10 p110̂)
-    (p10̂0̂ : coherence-square-identifications p100̂ p10̂1 p10̂0 p110̂) → UU l
+    (p00̂0̂ : coherence-square-identifications p00̂0 p000̂ p010̂ p00̂1)
+    (p0̂00̂ : coherence-square-identifications p0̂00 p000̂ p100̂ p0̂01)
+    (p0̂0̂0 : coherence-square-identifications p0̂00 p00̂0 p10̂0 p0̂10)
+    (p0̂0̂1 : coherence-square-identifications p0̂01 p00̂1 p10̂1 p0̂11)
+    (p0̂10̂ : coherence-square-identifications p0̂10 p010̂ p110̂ p0̂11)
+    (p10̂0̂ : coherence-square-identifications p10̂0 p100̂ p110̂ p10̂1) → UU l
   cube
     p000̂ p00̂0 p0̂00 p00̂1 p0̂01 p010̂ p0̂10 p100̂ p10̂0 p0̂11 p10̂1 p110̂
     p00̂0̂ p0̂00̂ p0̂0̂0 p0̂0̂1 p0̂10̂ p10̂0̂ =
