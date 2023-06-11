@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
                     # Check even indentation
                     if not is_even_indentation(line):
-                        if (status == 0):
+                        if status == 0:
                             print('Error! Uneven indentation found')
 
                         print(f'{fpath}:line {i+1}')
