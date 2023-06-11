@@ -32,6 +32,7 @@
 
   // Autoformatting and file type specific settings
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc.json",
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
 
