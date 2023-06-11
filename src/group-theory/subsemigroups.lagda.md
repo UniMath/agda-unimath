@@ -145,11 +145,11 @@ module _
   is-in-subsemigroup-inclusion-Subsemigroup =
     is-in-subtype-inclusion-subtype subset-Subsemigroup
 
-  is-closed-under-mul-Subsemigroup :
+  is-closed-under-multiplication-Subsemigroup :
     {x y : type-Semigroup G} →
     is-in-Subsemigroup x → is-in-Subsemigroup y →
     is-in-Subsemigroup (mul-Semigroup G x y)
-  is-closed-under-mul-Subsemigroup {x} {y} = pr2 P x y
+  is-closed-under-multiplication-Subsemigroup {x} {y} = pr2 P x y
 
   mul-Subsemigroup :
     (x y : type-Subsemigroup) → type-Subsemigroup
@@ -158,7 +158,7 @@ module _
       ( inclusion-Subsemigroup x)
       ( inclusion-Subsemigroup y)
   pr2 (mul-Subsemigroup x y) =
-    is-closed-under-mul-Subsemigroup
+    is-closed-under-multiplication-Subsemigroup
       ( is-in-subsemigroup-inclusion-Subsemigroup x)
       ( is-in-subsemigroup-inclusion-Subsemigroup y)
 

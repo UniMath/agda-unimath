@@ -168,13 +168,13 @@ module _
   unit-Normal-Commutative-Submonoid =
     unit-Commutative-Submonoid M submonoid-Normal-Commutative-Submonoid
 
-  is-closed-under-mul-Normal-Commutative-Submonoid :
+  is-closed-under-multiplication-Normal-Commutative-Submonoid :
     {x y : type-Commutative-Monoid M} →
     is-in-Normal-Commutative-Submonoid x →
     is-in-Normal-Commutative-Submonoid y →
     is-in-Normal-Commutative-Submonoid (mul-Commutative-Monoid M x y)
-  is-closed-under-mul-Normal-Commutative-Submonoid =
-    is-closed-under-mul-Commutative-Submonoid M
+  is-closed-under-multiplication-Normal-Commutative-Submonoid =
+    is-closed-under-multiplication-Commutative-Submonoid M
       submonoid-Normal-Commutative-Submonoid
 
   mul-Normal-Commutative-Submonoid :
@@ -460,7 +460,7 @@ module _
       ( H)
       ( u))
     ( K) =
-    is-closed-under-mul-Normal-Commutative-Submonoid M N
+    is-closed-under-multiplication-Normal-Commutative-Submonoid M N
       ( is-closed-under-eq-Normal-Commutative-Submonoid M N K
         ( right-unit-law-mul-Commutative-Monoid M u))
       ( H)

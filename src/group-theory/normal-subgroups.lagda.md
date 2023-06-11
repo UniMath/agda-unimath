@@ -158,10 +158,10 @@ module _
   unit-Normal-Subgroup : type-Normal-Subgroup
   unit-Normal-Subgroup = unit-Subgroup G subgroup-Normal-Subgroup
 
-  is-closed-under-mul-Normal-Subgroup :
-    is-closed-under-mul-subset-Group G subset-Normal-Subgroup
-  is-closed-under-mul-Normal-Subgroup =
-    is-closed-under-mul-Subgroup G subgroup-Normal-Subgroup
+  is-closed-under-multiplication-Normal-Subgroup :
+    is-closed-under-multiplication-subset-Group G subset-Normal-Subgroup
+  is-closed-under-multiplication-Normal-Subgroup =
+    is-closed-under-multiplication-Subgroup G subgroup-Normal-Subgroup
 
   mul-Normal-Subgroup :
     type-Normal-Subgroup → type-Normal-Subgroup → type-Normal-Subgroup
@@ -220,7 +220,7 @@ module _
     is-in-Normal-Subgroup (mul-Group G (mul-Group G x y) z)
   closure-property-Normal-Subgroup {x} {y} {z} p q =
     is-closed-under-eq-Normal-Subgroup
-      ( is-closed-under-mul-Normal-Subgroup
+      ( is-closed-under-multiplication-Normal-Subgroup
         ( conjugation-Group G x y)
         ( mul-Group G x z)
         ( is-normal-subgroup-Normal-Subgroup x y p)
@@ -521,9 +521,9 @@ module _
     contains-unit-subset-Group G subset-congruence-Group
   contains-unit-subset-congruence-Group = refl-congruence-Group G R
 
-  is-closed-under-mul-subset-congruence-Group :
-    is-closed-under-mul-subset-Group G subset-congruence-Group
-  is-closed-under-mul-subset-congruence-Group x y H K =
+  is-closed-under-multiplication-subset-congruence-Group :
+    is-closed-under-multiplication-subset-Group G subset-congruence-Group
+  is-closed-under-multiplication-subset-congruence-Group x y H K =
     concatenate-eq-sim-congruence-Group G R
       ( inv (left-unit-law-mul-Group G (unit-Group G)))
       ( mul-congruence-Group G R H K)
@@ -540,7 +540,7 @@ module _
   pr1 (pr2 subgroup-congruence-Group) =
     contains-unit-subset-congruence-Group
   pr1 (pr2 (pr2 subgroup-congruence-Group)) =
-    is-closed-under-mul-subset-congruence-Group
+    is-closed-under-multiplication-subset-congruence-Group
   pr2 (pr2 (pr2 subgroup-congruence-Group)) =
     is-closed-under-inv-subset-congruence-Group
 

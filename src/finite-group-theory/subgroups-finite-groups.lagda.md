@@ -92,22 +92,22 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-mul-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-mul-decidable-subset-finite-group-Prop =
-    is-closed-under-mul-decidable-subset-group-Prop
+  is-closed-under-multiplication-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-decidable-subset-finite-group-Prop =
+    is-closed-under-multiplication-decidable-subset-group-Prop
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-mul-decidable-subset-Group-𝔽 : UU (l1 ⊔ l2)
-  is-closed-under-mul-decidable-subset-Group-𝔽 =
-    is-closed-under-mul-decidable-subset-Group
+  is-closed-under-multiplication-decidable-subset-Group-𝔽 : UU (l1 ⊔ l2)
+  is-closed-under-multiplication-decidable-subset-Group-𝔽 =
+    is-closed-under-multiplication-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
-  is-prop-is-closed-under-mul-decidable-subset-Group-𝔽 :
-    is-prop is-closed-under-mul-decidable-subset-Group-𝔽
-  is-prop-is-closed-under-mul-decidable-subset-Group-𝔽 =
-    is-prop-is-closed-under-mul-decidable-subset-Group
+  is-prop-is-closed-under-multiplication-decidable-subset-Group-𝔽 :
+    is-prop is-closed-under-multiplication-decidable-subset-Group-𝔽
+  is-prop-is-closed-under-multiplication-decidable-subset-Group-𝔽 =
+    is-prop-is-closed-under-multiplication-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
@@ -212,10 +212,10 @@ module _
   contains-unit-Subgroup-𝔽 =
     contains-unit-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  is-closed-under-mul-Subgroup-𝔽 :
-    is-closed-under-mul-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
-  is-closed-under-mul-Subgroup-𝔽 =
-    is-closed-under-mul-Decidable-Subgroup (group-Group-𝔽 G) H
+  is-closed-under-multiplication-Subgroup-𝔽 :
+    is-closed-under-multiplication-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+  is-closed-under-multiplication-Subgroup-𝔽 =
+    is-closed-under-multiplication-Decidable-Subgroup (group-Group-𝔽 G) H
 
   is-closed-under-inv-Subgroup-𝔽 :
     is-closed-under-inv-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽

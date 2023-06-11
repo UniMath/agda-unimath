@@ -180,26 +180,26 @@ module _
     type-Prop (subset-subgroup-subset-Group (unit-Group G))
   contains-unit-subgroup-subset-Group = unit-trunc-Prop (pair nil refl)
 
-  is-closed-under-mul-subgroup-subset-Group' :
+  is-closed-under-multiplication-subgroup-subset-Group' :
     (x y : type-Group G) →
     subset-subgroup-subset-Group' x → subset-subgroup-subset-Group' y →
     subset-subgroup-subset-Group' (mul-Group G x y)
   pr1
-    ( is-closed-under-mul-subgroup-subset-Group' x y
+    ( is-closed-under-multiplication-subgroup-subset-Group' x y
       ( pair l p) (pair k q)) =
     concat-list l k
   pr2
-    ( is-closed-under-mul-subgroup-subset-Group' x y
+    ( is-closed-under-multiplication-subgroup-subset-Group' x y
       ( pair l p) (pair k q)) =
     ( preserves-concat-ev-formal-combination-subset-Group l k) ∙
       ( ap-mul-Group G p q)
 
-  is-closed-under-mul-subgroup-subset-Group :
+  is-closed-under-multiplication-subgroup-subset-Group :
     (x y : type-Group G) →
     type-Prop (subset-subgroup-subset-Group x) →
     type-Prop (subset-subgroup-subset-Group y) →
     type-Prop (subset-subgroup-subset-Group (mul-Group G x y))
-  is-closed-under-mul-subgroup-subset-Group x y H K =
+  is-closed-under-multiplication-subgroup-subset-Group x y H K =
     apply-universal-property-trunc-Prop H
       ( subset-subgroup-subset-Group (mul-Group G x y))
       ( λ H' →
@@ -207,7 +207,7 @@ module _
           ( subset-subgroup-subset-Group (mul-Group G x y))
           ( λ K' →
             unit-trunc-Prop
-              ( is-closed-under-mul-subgroup-subset-Group' x y H' K')))
+              ( is-closed-under-multiplication-subgroup-subset-Group' x y H' K')))
 
   is-closed-under-inv-subgroup-subset-Group' :
     (x : type-Group G) →
@@ -232,7 +232,7 @@ module _
   pr1 subgroup-subset-Group = subset-subgroup-subset-Group
   pr1 (pr2 subgroup-subset-Group) = contains-unit-subgroup-subset-Group
   pr1 (pr2 (pr2 subgroup-subset-Group)) =
-    is-closed-under-mul-subgroup-subset-Group
+    is-closed-under-multiplication-subgroup-subset-Group
   pr2 (pr2 (pr2 subgroup-subset-Group)) =
     is-closed-under-inv-subgroup-subset-Group
 
@@ -252,7 +252,7 @@ module _
     contains-unit-Subgroup G U
   contains-formal-combinations-Subgroup U H
     ( cons (pair (inl (inr star)) (pair s K)) c) =
-    is-closed-under-mul-Subgroup G U
+    is-closed-under-multiplication-Subgroup G U
       ( inv-Group G (inclusion-subtype S (pair s K)))
       ( ev-formal-combination-subset-Group c)
       ( is-closed-under-inv-Subgroup G U s (H s K))
@@ -261,7 +261,7 @@ module _
     ( U)
     ( H)
     ( cons (pair (inr star) (pair s K)) c) =
-    is-closed-under-mul-Subgroup G U
+    is-closed-under-multiplication-Subgroup G U
       ( inclusion-subtype S (pair s K))
       ( ev-formal-combination-subset-Group c)
       ( H s K)

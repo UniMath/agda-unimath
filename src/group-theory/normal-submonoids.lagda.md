@@ -155,12 +155,12 @@ module _
   unit-Normal-Submonoid : type-Normal-Submonoid
   unit-Normal-Submonoid = unit-Submonoid M submonoid-Normal-Submonoid
 
-  is-closed-under-mul-Normal-Submonoid :
+  is-closed-under-multiplication-Normal-Submonoid :
     {x y : type-Monoid M} →
     is-in-Normal-Submonoid x → is-in-Normal-Submonoid y →
     is-in-Normal-Submonoid (mul-Monoid M x y)
-  is-closed-under-mul-Normal-Submonoid =
-    is-closed-under-mul-Submonoid M submonoid-Normal-Submonoid
+  is-closed-under-multiplication-Normal-Submonoid =
+    is-closed-under-multiplication-Submonoid M submonoid-Normal-Submonoid
 
   mul-Normal-Submonoid : (x y : type-Normal-Submonoid) → type-Normal-Submonoid
   mul-Normal-Submonoid = mul-Submonoid M submonoid-Normal-Submonoid
