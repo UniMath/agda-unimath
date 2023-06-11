@@ -1,0 +1,45 @@
+# Reflective modalities
+
+```agda
+module orthogonal-factorization-systems.reflective-modalities where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
+open import foundation.propositions
+open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.local-types
+open import orthogonal-factorization-systems.reflective-subuniverses
+open import orthogonal-factorization-systems.modal-operators
+```
+
+</details>
+
+## Idea
+
+A [modal operator](foundation.modal-operators.md) with unit is **reflective** if
+its [subuniverse](foundation.subuniverses.md) of modal types is
+[reflective](orthogonal-factorization-systems.reflective-subuniverses.md).
+
+## Definitions
+
+### Reflective subuniverses
+
+```agda
+is-reflective-modality :
+  {l : Level} {○ : operator-modality l l} → unit-modality ○ → UU (lsuc l)
+is-reflective-modality unit-○ =
+  is-reflective-subuniverse (modality-subuniverse unit-○)
+
+reflective-modality : (l : Level) → UU (lsuc l)
+reflective-modality l =
+  Σ (operator-modality l l) (λ ○ → Σ (unit-modality ○) (is-reflective-modality))
+```
+
+## See also
+
+- [Localizations](orthogonal-factorization-systems.localizations.md)

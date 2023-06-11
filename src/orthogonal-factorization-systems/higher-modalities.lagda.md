@@ -339,6 +339,7 @@ module _
 The equivalent notions of
 
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
+- [Σ-closed reflective modalities](orthogonal-factorization-systems.sigma-closed-reflective-modalities.md)
 - [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
 - [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
 

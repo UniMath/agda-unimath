@@ -25,19 +25,30 @@ over a type `A` in `P`.
 
 ## Definition
 
-```agda
-is-Σ-closed-subuniverse :
-  {l lP : Level} → subuniverse l lP → UU (lsuc l ⊔ lP)
-is-Σ-closed-subuniverse {l} P =
-  (A : UU l) → type-Prop (P A) →
-  (B : A → UU l) → ((x : A) → type-Prop (P (B x))) →
-  type-Prop (P (Σ A B))
+We state a general form involving three universes, and a more traditional form
+using a single universe
 
-Σ-closed-subuniverse :
+```agda
+is-closed-under-Σ-subuniverses :
+  {l1 l2 lP lQ lR : Level}
+  (P : subuniverse l1 lP)
+  (Q : subuniverse l2 lQ)
+  (R : subuniverse (l1 ⊔ l2) lR) →
+  UU (lsuc l1 ⊔ lsuc l2 ⊔ lP ⊔ lQ ⊔ lR)
+is-closed-under-Σ-subuniverses P Q R =
+  (X : type-subuniverse P)
+  (Y : inclusion-subuniverse P X → type-subuniverse Q) →
+  is-in-subuniverse R
+    ( Σ (inclusion-subuniverse P X) (inclusion-subuniverse Q ∘ Y))
+
+is-closed-under-Σ-subuniverse :
+  {l lP : Level} → subuniverse l lP → UU (lsuc l ⊔ lP)
+is-closed-under-Σ-subuniverse P = is-closed-under-Σ-subuniverses P P P
+
+closed-under-Σ-subuniverse :
   (l lP : Level) → UU (lsuc l ⊔ lsuc lP)
-Σ-closed-subuniverse l lP =
-  Σ ( subuniverse l lP)
-    ( is-Σ-closed-subuniverse)
+closed-under-Σ-subuniverse l lP =
+  Σ (subuniverse l lP) (is-closed-under-Σ-subuniverse)
 ```
 
 ## See also

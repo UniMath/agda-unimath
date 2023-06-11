@@ -12,6 +12,7 @@ open import foundation.equivalences
 open import foundation.functions
 open import foundation.locally-small-types
 open import foundation.propositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.small-types
 open import foundation.subuniverses
 open import foundation.universe-levels
@@ -48,8 +49,8 @@ module _
   is-modal : (X : UU l1) → UU (l1 ⊔ l2)
   is-modal X = is-equiv (unit-○ {X})
 
-  modal-types : UU (lsuc l1 ⊔ l2)
-  modal-types = Σ (UU l1) (is-modal)
+  modal-type : UU (lsuc l1 ⊔ l2)
+  modal-type = Σ (UU l1) (is-modal)
 
   is-property-is-modal : (X : UU l1) → is-prop (is-modal X)
   is-property-is-modal X = is-property-is-equiv (unit-○ {X})
@@ -61,8 +62,8 @@ module _
   is-subuniverse-is-modal : is-subuniverse is-modal
   is-subuniverse-is-modal = is-property-is-modal
 
-  modal-types-subuniverse : subuniverse l1 (l1 ⊔ l2)
-  modal-types-subuniverse = is-modal-Prop
+  modality-subuniverse : subuniverse l1 (l1 ⊔ l2)
+  modality-subuniverse = is-modal-Prop
 ```
 
 ### Modal small types

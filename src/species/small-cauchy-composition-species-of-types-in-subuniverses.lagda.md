@@ -18,6 +18,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.small-types
 open import foundation.subuniverses

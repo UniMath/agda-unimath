@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types

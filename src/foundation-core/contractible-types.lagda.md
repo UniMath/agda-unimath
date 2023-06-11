@@ -224,13 +224,20 @@ module _
 
   abstract
     is-contr-Σ :
-      (C : is-contr A) (a : A) → is-contr (B a) → is-contr (Σ A B)
+      is-contr A → (a : A) → is-contr (B a) → is-contr (Σ A B)
     pr1 (pr1 (is-contr-Σ H a K)) = a
     pr2 (pr1 (is-contr-Σ H a K)) = center K
     pr2 (is-contr-Σ H a K) (pair x y) =
       eq-pair-Σ
         ( inv (eq-is-contr H))
         ( eq-transpose-tr (eq-is-contr H) (eq-is-contr K))
+
+  abstract
+    is-contr-Σ-center :
+      (is-contr-A : is-contr A) → is-contr (B (center is-contr-A)) →
+      is-contr (Σ A B)
+    is-contr-Σ-center is-contr-A is-contr-B =
+      is-contr-Σ (is-contr-A) (center is-contr-A) (is-contr-B)
 ```
 
 ### Contractible types are propositions

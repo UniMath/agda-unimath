@@ -8,24 +8,23 @@ module orthogonal-factorization-systems.local-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.functions
+open import foundation.functoriality-dependent-function-types
+open import foundation.identity-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
-
-open import foundation-core.contractible-maps
-open import foundation-core.contractible-types
-open import foundation-core.empty-types
-open import foundation-core.function-extensionality
-open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.identity-types
-open import foundation-core.propositions
-open import foundation-core.retractions
-open import foundation-core.sections
 ```
 
 </details>
@@ -41,7 +40,7 @@ A type family `A` over `X` is said to be **local at** `f : Y → X`, or
 
 is an equivalence.
 
-Likewise, a type `A` is said to be `f`-local if the precomposition map
+Likewise, a _type_ `A` is said to be `f`-local if the precomposition map
 `_∘ f : (X → A) → (Y → A)` is an equivalence.
 
 We reserve the name `is-local` for local types, and specify `is-local-family`
@@ -234,3 +233,7 @@ is-contr-is-local A is-local-A =
       ( is-local-A))
     ( universal-property-empty' A)
 ```
+
+## See also
+
+- [Localizations](orthogonal-factorization-systems.localizations)
