@@ -150,13 +150,6 @@ issec-inv-ev-𝕀 (pair u (pair v q)) =
     ( compute-target-𝕀 u v q)
     ( compute-path-𝕀 u v q)
 
-tr-value :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
-  (p : x ＝ y) (q : f x ＝ g x) (r : f y ＝ g y) →
-  coherence-square-identifications (ap (tr B p) q) (apd f p) (apd g p) r →
-  dependent-identification (eq-value f g) p q r
-tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
-
 isretr-inv-ev-𝕀 :
   {l : Level} {P : 𝕀 → UU l} (f : (x : 𝕀) → P x) → inv-ev-𝕀 (ev-𝕀 f) ＝ f
 isretr-inv-ev-𝕀 {l} {P} f =
@@ -165,7 +158,10 @@ isretr-inv-ev-𝕀 {l} {P} f =
       ( eq-value (inv-ev-𝕀 (ev-𝕀 f)) f)
       ( compute-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
       ( compute-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-      ( tr-value (inv-ev-𝕀 (ev-𝕀 f)) f path-𝕀
+      ( map-compute-dependent-identification-eq-value
+        ( inv-ev-𝕀 (ev-𝕀 f))
+        ( f)
+        ( path-𝕀)
         ( compute-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
         ( compute-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
         ( compute-path-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))))
@@ -176,18 +172,13 @@ abstract
   is-equiv-ev-𝕀 P =
     is-equiv-has-inverse inv-ev-𝕀 issec-inv-ev-𝕀 isretr-inv-ev-𝕀
 
-tr-eq :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) →
-  dependent-identification (Id x) p refl p
-tr-eq refl = refl
-
 contraction-𝕀 : (x : 𝕀) → Id source-𝕀 x
 contraction-𝕀 =
   ind-𝕀
     ( Id source-𝕀)
     ( refl)
     ( path-𝕀)
-    ( tr-eq path-𝕀)
+    ( tr-Id-right path-𝕀 refl)
 
 abstract
   is-contr-𝕀 : is-contr 𝕀
