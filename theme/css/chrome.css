@@ -1,6 +1,6 @@
 /* CSS for UI elements (a.k.a. chrome) */
 
-@import "variables.css";
+@import 'variables.css';
 
 html {
   scrollbar-color: var(--scrollbar) var(--bg);
@@ -559,7 +559,7 @@ ul#searchresults span.teaser em {
 
 .theme-selected::before {
   display: inline-block;
-  content: "✓";
+  content: '✓';
   margin-left: -14px;
   width: 14px;
 }
