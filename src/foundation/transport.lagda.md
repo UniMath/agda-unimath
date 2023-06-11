@@ -83,3 +83,13 @@ equiv-tr-refl :
   equiv-tr B refl ＝ id-equiv {A = B x}
 equiv-tr-refl B = refl
 ```
+
+### Substitution law for transport
+
+```agda
+tr-subst :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
+  {x y : X} (p : x ＝ y) {x' : B (f x)} →
+  tr B (ap f p) x' ＝ tr (B ∘ f) p x'
+tr-subst B f refl = refl
+```
