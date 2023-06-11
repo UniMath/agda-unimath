@@ -153,7 +153,7 @@ module _
       ( locally-small-operator-higher-modality)
 
   is-locally-small-operator-higher-modality :
-    is-locally-small-operator-modality (operator-higher-modality)
+    is-locally-small-operator-modality l1 (operator-higher-modality)
   is-locally-small-operator-higher-modality =
     is-locally-small-locally-small-operator-modality
       ( locally-small-operator-higher-modality)
