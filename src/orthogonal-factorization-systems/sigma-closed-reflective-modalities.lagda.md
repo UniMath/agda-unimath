@@ -8,7 +8,7 @@ module orthogonal-factorization-systems.sigma-closed-reflective-modalities where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.cartesian-product-types
 open import foundation.propositions
 open import foundation.universe-levels

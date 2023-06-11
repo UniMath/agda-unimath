@@ -8,7 +8,7 @@ module foundation.sigma-closed-subuniverses where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.subuniverses
 open import foundation.universe-levels

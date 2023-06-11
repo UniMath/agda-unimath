@@ -37,6 +37,9 @@ operator-modality l1 l2 = UU l1 → UU l2
 
 unit-modality : {l1 l2 : Level} → operator-modality l1 l2 → UU (lsuc l1 ⊔ l2)
 unit-modality {l1} ○ = {X : UU l1} → X → ○ X
+
+modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+modality l1 l2 = Σ (operator-modality l1 l2) (unit-modality)
 ```
 
 ### The subuniverse of modal types
