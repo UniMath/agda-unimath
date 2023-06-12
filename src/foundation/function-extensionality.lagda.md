@@ -18,6 +18,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.transport
 ```
 
 </details>
@@ -109,6 +110,33 @@ module _
       ＝ eq-htpy H ∙ eq-htpy K
         by
         isretr-eq-htpy (eq-htpy H ∙ eq-htpy K)
+```
+
+### Transporting along identifications of the form `eq-htpy H`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  where
+
+  tr-htpy-eq :
+    {f g : (x : A) → B x} (p : f ＝ g) (h : (x : A) → C x (f x)) →
+    tr (λ u → (x : A) → C x (u x)) p h ~ tr-htpy C (htpy-eq p) h
+  tr-htpy-eq refl h = refl-htpy
+
+  tr-eq-htpy :
+    {f g : (x : A) → B x} (H : f ~ g) (h : (x : A) → C x (f x)) →
+    tr (λ u → (x : A) → C x (u x)) (eq-htpy H) h ~ tr-htpy C H h
+  tr-eq-htpy H h =
+    ( tr-htpy-eq (eq-htpy H) h) ∙h
+    ( htpy-eq (ap (λ K → tr-htpy C K h) (issec-eq-htpy H)))
+
+  tr-eq-htpy-refl-htpy :
+    {f : (x : A) → B x} (h : (x : A) → C x (f x)) →
+    tr-eq-htpy (refl-htpy {f = f}) h ~
+    htpy-eq
+      ( ap (λ p → tr (λ u → (x : A) → C x (u x)) p h) (eq-htpy-refl-htpy f))
+  tr-eq-htpy-refl-htpy h = {!!}
 ```
 
 ## See also

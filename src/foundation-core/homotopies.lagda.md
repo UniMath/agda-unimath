@@ -157,6 +157,19 @@ htpy-right-whisk H f x = H (f x)
 _·r_ = htpy-right-whisk
 ```
 
+### Transporting along homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
+  {f g : (x : A) → B x} (H : f ~ g)
+  where
+
+  tr-htpy :
+    ((x : A) → C x (f x)) → ((x : A) → C x (g x))
+  tr-htpy h x = tr (C x) (H x) (h x)
+```
+
 **Note**: The infix whiskering operators `_·l_` and `_·r_` use the
 [middle dot](https://codepoints.net/U+00B7) `·` (agda-input: `\cdot`
 `\centerdot`), as opposed to the infix homotopy concatenation operator `_∙h_`
