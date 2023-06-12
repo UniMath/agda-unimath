@@ -23,23 +23,6 @@
     "*.lagda.md": "${capture}.agdai, ${capture}.agda~"
   },
 
-  // Snippet setup
-  "editor.inlineSuggest.enabled": true,
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.snippetSuggestions": "top",
-  "editor.wordBasedSuggestions": false,
-  "javascript.suggest.names": false,
-
-  // Autoformatting and file type specific settings
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.configPath": ".prettierrc.json",
-  "editor.formatOnType": true,
-  "editor.formatOnSave": true,
-
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-
   // Declutter explorer view
   "files.exclude": {
     "MAlonzo/": true,
@@ -50,14 +33,35 @@
     "src/temp/": true
   },
 
+  // Snippet setup
+  "editor.inlineSuggest.enabled": true,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.snippetSuggestions": "top",
+  "editor.wordBasedSuggestions": false,
+  "javascript.suggest.names": false,
+
+  // Autoformatting
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc.json",
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  "editor.tabSize": 2,
+
   // File type specific
   "files.associations": {
     "*.agda": "agda",
-    "*.lagda.md": "literate agda markdown"
+    "*.lagda.md": "literate agda markdown",
+    "*.lock": "json"
   },
 
   "[agda]": {
-    "editor.indentSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
       "other": "on"
@@ -70,13 +74,11 @@
       "other": true
     },
     "editor.suggest.insertMode": "replace",
-    "gitlens.codeLens.scopes": ["document"],
-    "editor.indentSize": 2
+    "gitlens.codeLens.scopes": ["document"]
   },
 
   "[javascript]": {
-    "editor.maxTokenizationLineLength": 2500,
-    "editor.indentSize": 2
+    "editor.maxTokenizationLineLength": 2500
   },
 
   "[json][jsonc]": {
@@ -88,7 +90,6 @@
   },
 
   "[literate agda markdown]": {
-    "editor.indentSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
       "other": "on"
@@ -97,7 +98,6 @@
   },
 
   "[markdown]": {
-    "editor.indentSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
       "other": "on"
@@ -106,7 +106,7 @@
   },
 
   "[python]": {
-    "editor.indentSize": 4,
+    "editor.tabSize": 4,
     "editor.defaultFormatter": "ms-python.python"
   }
 }
