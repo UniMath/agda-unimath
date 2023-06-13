@@ -59,3 +59,9 @@ axiom-L-axiom-K K K-UU A B =
       ( is-set-axiom-K (K A))
       ( is-set-axiom-K (K B)))
 ```
+
+## See also
+
+- Axiom L is sufficient to prove that `Id : A → (A → 𝒰)` is an embedding. This
+  fact is proven in
+  [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)

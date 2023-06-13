@@ -26,7 +26,6 @@ open import foundation-core.contractible-types
 open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 ```
@@ -76,11 +75,39 @@ equiv-ev-refl' a {B} =
 
 ### `Id : A → (A → 𝒰)` is an embedding
 
-We first show that [axiom L](foundation.axiom-l.md) implies that the map `Id : A → (A → 𝒰)` is an [embedding](foundation.embeddings.md). Since the [univalence axiom](foundation.univalence.md) implies axiom L, it follows that `Id : A → (A → 𝒰)` is an embedding under the postulates of agda-unimath.
+We first show that [axiom L](foundation.axiom-l.md) implies that the map
+`Id : A → (A → 𝒰)` is an [embedding](foundation.embeddings.md). Since the
+[univalence axiom](foundation.univalence.md) implies axiom L, it follows that
+`Id : A → (A → 𝒰)` is an embedding under the postulates of agda-unimath.
 
 #### Axiom L implies that `Id : A → (A → 𝒰)` is an embedding
 
-The proof that axiom L implies that `Id : A → (A → 𝒰)` is an embedding proceeds via the [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md) by showing that the [fiber](foundation.fibers-of-maps.md) of `Id` at `Id x` is [contractible](foundation.contractible-types.md) for each `x : A`. 
+The proof that axiom L implies that `Id : A → (A → 𝒰)` is an embedding proceeds
+via the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
+by showing that the [fiber](foundation.fibers-of-maps.md) of `Id` at `Id a` is
+[contractible](foundation.contractible-types.md) for each `a : A`. To see this,
+we first note that this fiber has an element `(a , refl)`. Therefore it suffices
+to show that thsi fiber is a proposition. We do this by constructing an
+embedding
+
+```text
+  fib Id (Id a) ↪ Σ A (Id a).
+```
+
+Since the codomain of this embedding is contractible, the claim follows. The
+above embedding is constructed as the composite of the following embeddings
+
+```text
+  Σ (x : A), Id x ＝ Id a
+    ↪ Σ (x : A), (y : A) → (x ＝ y) ＝ (a ＝ y)
+    ↪ Σ (x : A), (y : A) → (x ＝ y) ≃ (a ＝ y)
+    ↪ Σ (x : A), Σ (e : (y : A) → (x ＝ y) → (a ＝ y)), (y : A) → is-equiv (e y)
+    ↪ Σ (x : A), (y : A) → (x ＝ y) → (a ＝ y)
+    ↪ Σ (x : A), a ＝ x.
+```
+
+In this composite, we used axiom L at the second step.
 
 ```agda
 module _
@@ -88,36 +115,36 @@ module _
   where
 
   is-emb-Id-axiom-L : is-emb (Id {A = A})
-  is-emb-Id-axiom-L x =
+  is-emb-Id-axiom-L a =
     fundamental-theorem-id
       ( pair
-        ( pair x refl)
+        ( pair a refl)
         ( λ _ →
           is-injective-emb
-            ( emb-fib x)
-            ( eq-is-contr (is-contr-total-path x))))
+            ( emb-fib a)
+            ( eq-is-contr (is-contr-total-path a))))
       ( λ _ → ap Id)
     where
-    emb-fib : (x : A) → fib' Id (Id x) ↪ Σ A (Id x)
-    emb-fib x =
+    emb-fib : (a : A) → fib' Id (Id a) ↪ Σ A (Id a)
+    emb-fib a =
       comp-emb
         ( comp-emb
           ( emb-equiv
             ( equiv-tot
-              ( λ y →
-                ( equiv-ev-refl y) ∘e
+              ( λ x →
+                ( equiv-ev-refl x) ∘e
                 ( ( equiv-inclusion-is-full-subtype
                     ( Π-Prop A ∘ (is-equiv-Prop ∘_))
-                    ( fundamental-theorem-id (is-contr-total-path x))) ∘e
+                    ( fundamental-theorem-id (is-contr-total-path a))) ∘e
                   ( distributive-Π-Σ)))))
           ( emb-Σ
-            ( λ y → (z : A) → Id y z ≃ Id x z)
+            ( λ x → (y : A) → Id x y ≃ Id a y)
             ( id-emb)
-            ( λ y →
+            ( λ x →
               comp-emb
-                ( emb-Π (λ z → emb-L L (Id y z) (Id x z)))
+                ( emb-Π (λ y → emb-L L (Id x y) (Id a y)))
                 ( emb-equiv equiv-funext))))
-        ( emb-equiv (inv-equiv (equiv-fib Id (Id x))))
+        ( emb-equiv (inv-equiv (equiv-fib Id (Id a))))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding
@@ -131,7 +158,7 @@ module _
   is-emb-Id = is-emb-Id-axiom-L (axiom-L-univalence univalence) A
 ```
 
-#### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition.
+#### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition
 
 ```agda
 module _
@@ -161,3 +188,16 @@ module _
     is-prop-is-proof-irrelevant
       ( is-proof-irrelevant-total-family-of-equivalences-Id)
 ```
+
+## See also
+
+- In
+  [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)
+  we will show that the fiber of `Id : A → (A → 𝒰)`at`B : A → 𝒰`is equivalent
+  to`is-contr (Σ A B)`.
+
+## References
+
+- The fact that axiom L is sufficient to prove that `Id : A → (A → 𝒰)` is an
+  embedding was first observed and formalized by Martín Escardó,
+  [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).

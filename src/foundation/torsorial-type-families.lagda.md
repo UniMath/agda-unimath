@@ -72,13 +72,20 @@ module _
 
 #### `fib Id B ≃ is-contr (Σ A B)` for any type family `B` over `A`
 
-In other words, a type family `B` over `A` is in the [image](foundation.images.md) of `Id : A → (A → 𝒰)` if and only if `B` is torsorial. Since being contractible is a [proposition](foundation.propositions.md), this observation leads to an alternative proof of the above claim that `Id : A → (A → 𝒰)` is an [embedding](foundation.embeddings.md). Our previous proof of the fact that `Id : A → (A → 𝒰)` is an embedding can be found in [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md).
+In other words, a type family `B` over `A` is in the
+[image](foundation.images.md) of `Id : A → (A → 𝒰)` if and only if `B` is
+torsorial. Since being contractible is a
+[proposition](foundation.propositions.md), this observation leads to an
+alternative proof of the above claim that `Id : A → (A → 𝒰)` is an
+[embedding](foundation.embeddings.md). Our previous proof of the fact that
+`Id : A → (A → 𝒰)` is an embedding can be found in
+[`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md).
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
-  
+
   is-torsorial-fib-Id :
     {a : A} → ((x : A) → (a ＝ x) ≃ B x) → is-torsorial B
   is-torsorial-fib-Id H =
