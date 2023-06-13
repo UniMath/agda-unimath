@@ -20,7 +20,9 @@ open import synthetic-homotopy-theory.joins-of-types
 
 ## Idea
 
-The `n`-th **join power** of a type `A` is defined by taking the [`n`-fold](foundation.interating-functions.md) [join](synthetic-homotopy-theory.joins-of-types.md) of `A` with itself.
+The `n`-th **join power** of a type `A` is defined by taking the
+[`n`-fold](foundation.interating-functions.md)
+[join](synthetic-homotopy-theory.joins-of-types.md) of `A` with itself.
 
 ## Definitions
 
