@@ -53,6 +53,10 @@ equiv-is-small :
   {l l1 : Level} {A : UU l1} (H : is-small l A) → A ≃ type-is-small H
 equiv-is-small = pr2
 
+inv-equiv-is-small :
+  {l l1 : Level} {A : UU l1} (H : is-small l A) → type-is-small H ≃ A
+inv-equiv-is-small H = inv-equiv (equiv-is-small H)
+
 map-equiv-is-small :
   {l l1 : Level} {A : UU l1} (H : is-small l A) → A → type-is-small H
 map-equiv-is-small H = map-equiv (equiv-is-small H)
