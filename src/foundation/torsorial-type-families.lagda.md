@@ -17,7 +17,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type family `E` over `B` is said to be **torsorial** if its [total space](foundation.dependent-pair-types.md) is [contractible](foundation.contractible-types.md). By the [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md) it follows that a type family `E` is torsorial if and only if it is in the [image](foundation.images.md) of `Id : B → (B → 𝒰)`.
+A type family `E` over `B` is said to be **torsorial** if its
+[total space](foundation.dependent-pair-types.md) is
+[contractible](foundation.contractible-types.md). By the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
+it follows that a type family `E` is torsorial if and only if it is in the
+[image](foundation.images.md) of `Id : B → (B → 𝒰)`.
 
 ## Definition
 
@@ -47,7 +52,7 @@ torsorial-family-of-types l2 B = Σ (B → UU l2) is-torsorial
 module _
   {l1 l2 : Level} {B : UU l1} (T : torsorial-family-of-types l2 B)
   where
-  
+
   type-torsorial-family-of-types : B → UU l2
   type-torsorial-family-of-types = pr1 T
 

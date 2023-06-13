@@ -32,19 +32,28 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A type family `E` over a [pointed type](structured-types.pointed-types.md) `B` is said to be **pointed torsorial** if it comes equipped with a family of equivalences
+A type family `E` over a [pointed type](structured-types.pointed-types.md) `B`
+is said to be **pointed torsorial** if it comes equipped with a family of
+equivalences
 
 ```text
   E x ≃ (pt ＝ x)
 ```
 
-indexed by `x : B`. Note that the type of such a **torsorial structure** on the type family `E` is [equivalent](foundation.equivalences.md) to the type
+indexed by `x : B`. Note that the type of such a **torsorial structure** on the
+type family `E` is [equivalent](foundation.equivalences.md) to the type
 
 ```text
   E pt × is-contr (Σ B E)
 ```
 
-Indeed, if `E` is pointed torsorial, then `refl : pt ＝ pt` induces an element in `E pt`, and the [total space](foundation.dependent-pair-types.md) of `E` is [contractible](foundation.contractible-types.md) by the [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md). Conversely, if we are given an element `y : E pt` and the total space of `E` is contractible, then the unique family of maps `(pt ＝ x) → E x` mapping `refl` to `y` is a family of equivalences.
+Indeed, if `E` is pointed torsorial, then `refl : pt ＝ pt` induces an element
+in `E pt`, and the [total space](foundation.dependent-pair-types.md) of `E` is
+[contractible](foundation.contractible-types.md) by the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md).
+Conversely, if we are given an element `y : E pt` and the total space of `E` is
+contractible, then the unique family of maps `(pt ＝ x) → E x` mapping `refl` to
+`y` is a family of equivalences.
 
 ## Definitions
 
