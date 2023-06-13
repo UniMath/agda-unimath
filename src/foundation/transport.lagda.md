@@ -31,20 +31,6 @@ element `b` along the identification `p` to obtain an element `tr B p b : B y`.
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in this file.
 
-## Definitions
-
-### The action on identifications of transport
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-  (B : A → UU l2)
-  where
-
-  tr² : (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
-  tr² α b0 = ap (λ t → tr B t b0) α
-```
-
 ## Properties
 
 ### Transport is an equivalence

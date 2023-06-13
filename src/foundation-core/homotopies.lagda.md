@@ -162,12 +162,17 @@ _·r_ = htpy-right-whisk
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3)
-  {f g : (x : A) → B x} (H : f ~ g)
+  {f g : (x : A) → B x}
   where
 
   tr-htpy :
-    ((x : A) → C x (f x)) → ((x : A) → C x (g x))
-  tr-htpy h x = tr (C x) (H x) (h x)
+     (f ~ g) → ((x : A) → C x (f x)) → ((x : A) → C x (g x))
+  tr-htpy H f' x = tr (C x) (H x) (f' x)
+
+  tr-htpy² :
+    {H K : f ~ g} (L : H ~ K) (f' : (x : A) → C x (f x)) →
+    tr-htpy H f' ~ tr-htpy K f'
+  tr-htpy² L f' x = tr² (C x) (L x) (f' x)
 ```
 
 **Note**: The infix whiskering operators `_·l_` and `_·r_` use the
