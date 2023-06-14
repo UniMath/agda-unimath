@@ -15,7 +15,7 @@ open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
-open import orthogonal-factorization-systems.localizations
+open import orthogonal-factorization-systems.localizations-subuniverses
 open import orthogonal-factorization-systems.modal-operators
 ```
 
@@ -146,7 +146,7 @@ module _
   where
 
   has-all-localizations-is-reflective-subuniverse :
-    (A : UU l) → localization P A
+    (A : UU l) → subuniverse-localization P A
   pr1 (has-all-localizations-is-reflective-subuniverse A) =
     operator-modality-is-reflective-subuniverse P is-reflective-P A
   pr1 (pr2 (has-all-localizations-is-reflective-subuniverse A)) =
@@ -161,27 +161,27 @@ module _
 
 module _
   {l lP : Level} (P : subuniverse l lP)
-  (L : (A : UU l) → localization P A)
+  (L : (A : UU l) → subuniverse-localization P A)
   where
 
   is-reflective-has-all-localizations-subuniverse :
     is-reflective-subuniverse P
   pr1 is-reflective-has-all-localizations-subuniverse A =
-    type-localization P (L A)
+    type-subuniverse-localization P (L A)
   pr1 (pr2 is-reflective-has-all-localizations-subuniverse) {A} =
-    unit-localization P (L A)
+    unit-subuniverse-localization P (L A)
   pr1 (pr2 (pr2 is-reflective-has-all-localizations-subuniverse)) A =
-    is-in-subuniverse-localization P (L A)
+    is-in-subuniverse-subuniverse-localization P (L A)
   pr2 (pr2 (pr2 is-reflective-has-all-localizations-subuniverse))
     A B is-in-subuniverse-A =
-      is-local-at-unit-is-in-subuniverse-localization
+      is-local-at-unit-is-in-subuniverse-subuniverse-localization
         P (L B) A is-in-subuniverse-A
 ```
 
 ## See also
 
 - [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
-- [Localizations](orthogonal-factorization-systems.localizations.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
 
 ## References
 

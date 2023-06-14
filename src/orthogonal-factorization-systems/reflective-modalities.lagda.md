@@ -42,4 +42,4 @@ reflective-modality l =
 
 ## See also
 
-- [Localizations](orthogonal-factorization-systems.localizations.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)
