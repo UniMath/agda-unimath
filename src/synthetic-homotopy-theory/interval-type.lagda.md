@@ -7,12 +7,15 @@ module synthetic-homotopy-theory.interval-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -51,8 +54,9 @@ postulate
   compute-path-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) →
-    Id ( apd (ind-𝕀 P u v q) path-𝕀 ∙ compute-target-𝕀 u v q)
-       ( ap (tr P path-𝕀) (compute-source-𝕀 u v q) ∙ q)
+    Id
+      ( apd (ind-𝕀 P u v q) path-𝕀 ∙ compute-target-𝕀 u v q)
+      ( ap (tr P path-𝕀) (compute-source-𝕀 u v q) ∙ q)
 ```
 
 ## Properties

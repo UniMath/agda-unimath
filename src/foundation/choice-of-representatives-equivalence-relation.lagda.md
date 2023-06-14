@@ -7,23 +7,24 @@ module foundation.choice-of-representatives-equivalence-relation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -101,7 +102,7 @@ module _
   equiv-equivalence-class-representatives :
     {P : A → UU l3} (H : is-choice-of-representatives P) →
     representatives H ≃ equivalence-class R
-  equiv-equivalence-class-representatives H =
-    pair ( class-representatives H)
-         ( is-equiv-class-representatives H)
+  pr1 (equiv-equivalence-class-representatives H) = class-representatives H
+  pr2 (equiv-equivalence-class-representatives H) =
+    is-equiv-class-representatives H
 ```

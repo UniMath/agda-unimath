@@ -79,8 +79,9 @@ module _
     right-unit-law-mul-Coherent-H-Space wild-unital-magma-Wild-Loop
 
   coh-unit-laws-mul-Wild-Loop :
-    Id ( left-unit-law-mul-Wild-Loop unit-Wild-Loop)
-       ( right-unit-law-mul-Wild-Loop unit-Wild-Loop)
+    Id
+      ( left-unit-law-mul-Wild-Loop unit-Wild-Loop)
+      ( right-unit-law-mul-Wild-Loop unit-Wild-Loop)
   coh-unit-laws-mul-Wild-Loop =
     coh-unit-laws-mul-Coherent-H-Space wild-unital-magma-Wild-Loop
 

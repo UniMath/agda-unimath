@@ -10,10 +10,11 @@ module univalent-combinatorics.coproduct-types where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.homotopies
@@ -150,8 +151,9 @@ abstract
   double-counting-coprod :
     { l1 l2 : Level} {A : UU l1} {B : UU l2}
     ( count-A : count A) (count-B : count B) (count-C : count (A + B)) →
-    Id ( number-of-elements-count count-C)
-       ( number-of-elements-count count-A +ℕ number-of-elements-count count-B)
+    Id
+      ( number-of-elements-count count-C)
+      ( number-of-elements-count count-A +ℕ number-of-elements-count count-B)
   double-counting-coprod count-A count-B count-C =
     ( double-counting count-C (count-coprod count-A count-B)) ∙
     ( number-of-elements-count-coprod count-A count-B)
@@ -159,9 +161,10 @@ abstract
 abstract
   sum-number-of-elements-coprod :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count (A + B)) →
-    Id ( ( number-of-elements-count (count-left-summand e)) +ℕ
-               ( number-of-elements-count (count-right-summand e)))
-       ( number-of-elements-count e)
+    Id
+      ( ( number-of-elements-count (count-left-summand e)) +ℕ
+        ( number-of-elements-count (count-right-summand e)))
+      ( number-of-elements-count e)
   sum-number-of-elements-coprod e =
     ( inv
       ( number-of-elements-count-coprod

@@ -1,14 +1,13 @@
 # Large dependent pair types
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation.large-dependent-pair-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>

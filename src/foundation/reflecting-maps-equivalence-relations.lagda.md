@@ -7,19 +7,19 @@ module foundation.reflecting-maps-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -68,8 +68,6 @@ module _
   pr1 (reflects-Eq-Rel-Prop B f) = reflects-Eq-Rel f
   pr2 (reflects-Eq-Rel-Prop B f) = is-prop-reflects-Eq-Rel B f
 ```
-
-### Binary maps reflecting equivalence relations
 
 ## Properties
 

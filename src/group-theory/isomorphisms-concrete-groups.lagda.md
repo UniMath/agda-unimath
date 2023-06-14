@@ -34,6 +34,4 @@ iso-Concrete-Group = iso-Large-Precategory Concrete-Group-Large-Precategory
 
 ### Equivalences of concrete groups are isomorphisms of concrete groups
 
-```agda
-
-```
+This remains to be shown.

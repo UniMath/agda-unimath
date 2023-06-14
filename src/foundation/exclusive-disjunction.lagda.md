@@ -11,18 +11,20 @@ open import foundation.conjunction
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.functoriality-coproduct-types
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.symmetric-operations
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
@@ -31,8 +33,7 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-finite-types
@@ -178,16 +179,16 @@ module _
     ( equiv-coprod
       ( equiv-tot
         ( λ p →
-           ( ( equiv-map-Π
-               ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
-             ( left-unit-law-prod-is-contr
-               ( is-contr-Π
-                 ( λ p' →
-                   is-contr-equiv'
-                     ( p ＝ p')
-                     ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
-                     ( is-prop-type-Prop P p p'))))) ∘e
-           ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
+          ( ( equiv-map-Π
+              ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
+            ( left-unit-law-prod-is-contr
+              ( is-contr-Π
+                ( λ p' →
+                  is-contr-equiv'
+                    ( p ＝ p')
+                    ( equiv-ap-emb (emb-inl (type-Prop P) (type-Prop Q)))
+                    ( is-prop-type-Prop P p p'))))) ∘e
+          ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
       ( equiv-tot
         ( λ q →
           ( ( equiv-map-Π

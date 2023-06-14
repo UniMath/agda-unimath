@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types
@@ -203,9 +204,10 @@ module _
     intro-exists
       ( λ z → α u ≼-𝕎-Prop β z)
       ( v)
-      ( tr ( λ t → α u ≼-𝕎 t)
-           ( inv p)
-           ( ≼-∈-𝕎 {α u} {tree-𝕎 x α} (pair u refl)))
+      ( tr
+        ( λ t → α u ≼-𝕎 t)
+        ( inv p)
+        ( ≼-∈-𝕎 {α u} {tree-𝕎 x α} (pair u refl)))
 ```
 
 ### If `x ∈ y` then the rank of `x` is strictly lower than the rank of `y`

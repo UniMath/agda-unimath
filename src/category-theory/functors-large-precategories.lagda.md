@@ -9,7 +9,8 @@ module category-theory.functors-large-precategories where
 ```agda
 open import category-theory.large-precategories
 
-open import foundation.functions
+open import foundation.action-on-identifications-functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -110,7 +111,8 @@ preserves-comp-functor-Large-Precategory
     ( hom-functor-Large-Precategory F g)
     ( hom-functor-Large-Precategory F f))
 preserves-id-functor-Large-Precategory (comp-functor-Large-Precategory G F) =
-  ( ap ( hom-functor-Large-Precategory G)
-       ( preserves-id-functor-Large-Precategory F)) ∙
+  ( ap
+    ( hom-functor-Large-Precategory G)
+    ( preserves-id-functor-Large-Precategory F)) ∙
   ( preserves-id-functor-Large-Precategory G)
 ```

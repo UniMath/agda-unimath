@@ -1,16 +1,15 @@
-# Set quotients of index 2
+# Set quotients of index `2`
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module univalent-combinatorics.set-quotients-of-index-two where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -19,7 +18,7 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -45,8 +44,9 @@ module _
     sim-Eq-Rel R x y ↔ sim-Eq-Rel R (h x) (h y))
   (h' : type-Set QR → type-Set QR)
   (x : A)
-  (P : h' (map-reflecting-map-Eq-Rel R f x) ＝
-       map-reflecting-map-Eq-Rel R f (h x))
+  (P :
+    h' (map-reflecting-map-Eq-Rel R f x) ＝
+    map-reflecting-map-Eq-Rel R f (h x))
   where
 
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient :
@@ -65,8 +65,9 @@ module _
             ( map-equiv
               ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
-                ( H' ( map-reflecting-map-Eq-Rel R f x)
-                     ( map-reflecting-map-Eq-Rel R f y))
+                ( H'
+                  ( map-reflecting-map-Eq-Rel R f x)
+                  ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inr star) (inl (inr star)) p q r =
@@ -109,8 +110,9 @@ module _
             ( map-equiv
               ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
-                ( H' ( map-reflecting-map-Eq-Rel R f x)
-                     ( map-reflecting-map-Eq-Rel R f y))
+                ( H'
+                  ( map-reflecting-map-Eq-Rel R f x)
+                  ( map-reflecting-map-Eq-Rel R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
 
   coherence-square-maps-eq-one-value-emb-is-set-quotient :

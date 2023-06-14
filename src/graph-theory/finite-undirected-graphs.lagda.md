@@ -7,13 +7,15 @@ module graph-theory.finite-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.propositions
+open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -21,6 +23,7 @@ open import foundation.unordered-pairs
 
 open import graph-theory.undirected-graphs
 
+open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 ```
 
@@ -28,8 +31,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A **finite undirected graph** consists of a [finite type](univalent-combinatorics.finite-types.md) of vertices and a family of
-finite types of edges indexed by [unordered pairs](foundation.unordered-pairs.md) of vertices.
+A **finite undirected graph** consists of a
+[finite type](univalent-combinatorics.finite-types.md) of vertices and a family
+of finite types of edges indexed by
+[unordered pairs](foundation.unordered-pairs.md) of vertices.
 
 ## Definitions
 
@@ -39,7 +44,7 @@ finite types of edges indexed by [unordered pairs](foundation.unordered-pairs.md
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
-  
+
   is-finite-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
   is-finite-Undirected-Graph-Prop =
     prod-Prop
@@ -78,6 +83,15 @@ module _
   is-finite-vertex-Undirected-Graph-𝔽 : is-finite vertex-Undirected-Graph-𝔽
   is-finite-vertex-Undirected-Graph-𝔽 = is-finite-type-𝔽 (pr1 G)
 
+  is-set-vertex-Undirected-Graph-𝔽 : is-set vertex-Undirected-Graph-𝔽
+  is-set-vertex-Undirected-Graph-𝔽 =
+    is-set-is-finite is-finite-vertex-Undirected-Graph-𝔽
+
+  has-decidable-equality-vertex-Undirected-Graph-𝔽 :
+    has-decidable-equality vertex-Undirected-Graph-𝔽
+  has-decidable-equality-vertex-Undirected-Graph-𝔽 =
+    has-decidable-equality-is-finite is-finite-vertex-Undirected-Graph-𝔽
+
   edge-Undirected-Graph-𝔽 :
     (p : unordered-pair-vertices-Undirected-Graph-𝔽) → UU l2
   edge-Undirected-Graph-𝔽 p = type-𝔽 (pr2 G p)
@@ -86,6 +100,18 @@ module _
     (p : unordered-pair-vertices-Undirected-Graph-𝔽) →
     is-finite (edge-Undirected-Graph-𝔽 p)
   is-finite-edge-Undirected-Graph-𝔽 p = is-finite-type-𝔽 (pr2 G p)
+
+  is-set-edge-Undirected-Graph-𝔽 :
+    (p : unordered-pair-vertices-Undirected-Graph-𝔽) →
+    is-set (edge-Undirected-Graph-𝔽 p)
+  is-set-edge-Undirected-Graph-𝔽 p =
+    is-set-is-finite (is-finite-edge-Undirected-Graph-𝔽 p)
+
+  has-decidable-equality-edge-Undirected-Graph-𝔽 :
+    (p : unordered-pair-vertices-Undirected-Graph-𝔽) →
+    has-decidable-equality (edge-Undirected-Graph-𝔽 p)
+  has-decidable-equality-edge-Undirected-Graph-𝔽 p =
+    has-decidable-equality-is-finite (is-finite-edge-Undirected-Graph-𝔽 p)
 
   total-edge-Undirected-Graph-𝔽 : UU (lsuc lzero ⊔ l1 ⊔ l2)
   total-edge-Undirected-Graph-𝔽 =

@@ -1,4 +1,4 @@
-# Product of Cauchy series of species of types
+# Products of Cauchy series of species of types
 
 ```agda
 module species.products-cauchy-series-species-of-types where
@@ -40,7 +40,7 @@ product-cauchy-series-species-types S T X =
   cauchy-series-species-types S X × cauchy-series-species-types T X
 ```
 
-## Property
+## Properties
 
 ### The Cauchy series associated to the Cauchy product of `S` and `T` is equal to the product of theirs Cauchy series
 
@@ -85,16 +85,16 @@ module _
     cauchy-series-species-types (cauchy-product-species-types S T) X ≃
     product-cauchy-series-species-types S T X
   equiv-cauchy-series-cauchy-product-species-types =
-     ( reassociate') ∘e
-     ( ( equiv-tot
-         ( λ A →
-           equiv-tot
-             ( λ B →
-               ( equiv-prod
-                 ( id-equiv)
-                 ( equiv-universal-property-coprod X)) ∘e
-               ( left-unit-law-Σ-is-contr
-                 ( is-contr-total-equiv' (A + B))
-                 ( A + B , id-equiv))))) ∘e
-       ( reassociate))
+    ( reassociate') ∘e
+    ( ( equiv-tot
+        ( λ A →
+          equiv-tot
+            ( λ B →
+              ( equiv-prod
+                ( id-equiv)
+                ( equiv-universal-property-coprod X)) ∘e
+              ( left-unit-law-Σ-is-contr
+                ( is-contr-total-equiv' (A + B))
+                ( A + B , id-equiv))))) ∘e
+      ( reassociate))
 ```

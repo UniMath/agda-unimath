@@ -16,6 +16,8 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -56,9 +58,10 @@ inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 
 issec-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
-  Id ( generating-map-fibonacci-pair-Fin k
-       ( inv-generating-map-fibonacci-pair-Fin k p))
-     ( p)
+  Id
+    ( generating-map-fibonacci-pair-Fin k
+      ( inv-generating-map-fibonacci-pair-Fin k p))
+    ( p)
 issec-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair refl
     ( ( commutative-add-Fin
@@ -71,9 +74,10 @@ issec-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 
 isretr-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
-  Id ( inv-generating-map-fibonacci-pair-Fin k
-       ( generating-map-fibonacci-pair-Fin k p))
-     ( p)
+  Id
+    ( inv-generating-map-fibonacci-pair-Fin k
+      ( generating-map-fibonacci-pair-Fin k p))
+    ( p)
 isretr-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair
     ( ( commutative-add-Fin
@@ -101,9 +105,9 @@ fibonacci-pair-Fin k (succ-ℕ n) =
 
 compute-fibonacci-pair-Fin :
   (k : ℕ) (n : ℕ) →
-  Id ( fibonacci-pair-Fin k n)
-     ( pair ( mod-succ-ℕ k (Fibonacci-ℕ n))
-            ( mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n))))
+  Id
+    ( fibonacci-pair-Fin k n)
+    ( mod-succ-ℕ k (Fibonacci-ℕ n) , mod-succ-ℕ k (Fibonacci-ℕ (succ-ℕ n)))
 compute-fibonacci-pair-Fin k zero-ℕ = refl
 compute-fibonacci-pair-Fin k (succ-ℕ zero-ℕ) =
   ap-binary pair refl (right-unit-law-add-Fin k (one-Fin k))
@@ -166,11 +170,11 @@ cases-is-repetition-of-zero-pisano-period :
   Id (pisano-period k) y → is-zero-ℕ x
 cases-is-repetition-of-zero-pisano-period k zero-ℕ y p q = refl
 cases-is-repetition-of-zero-pisano-period k (succ-ℕ x) zero-ℕ p q =
-   ex-falso
-     ( concatenate-eq-le-eq-ℕ
-       ( inv p)
-       ( pr1 (pr2 (is-ordered-repetition-pisano-period k)))
-       ( q))
+  ex-falso
+    ( concatenate-eq-le-eq-ℕ
+      ( inv p)
+      ( pr1 (pr2 (is-ordered-repetition-pisano-period k)))
+      ( q))
 cases-is-repetition-of-zero-pisano-period k (succ-ℕ x) (succ-ℕ y) p q =
   ex-falso
     ( contradiction-leq-ℕ y y (refl-leq-ℕ y)
@@ -239,7 +243,8 @@ div-fibonacci-pisano-period k =
         ( ap pr1
           { x = fibonacci-pair-Fin k zero-ℕ}
           { y = fibonacci-pair-Fin k (pisano-period k)}
-          ( ( ap ( fibonacci-pair-Fin k)
-                 ( inv (is-repetition-of-zero-pisano-period k))) ∙
+          ( ( ap
+              ( fibonacci-pair-Fin k)
+              ( inv (is-repetition-of-zero-pisano-period k))) ∙
             ( pr2 (pr2 (is-ordered-repetition-pisano-period k)))))))
 ```

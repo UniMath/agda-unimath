@@ -7,16 +7,18 @@ module trees.rooted-morphisms-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-transport
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 
 open import trees.bases-directed-trees

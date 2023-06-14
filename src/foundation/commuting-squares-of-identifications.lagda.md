@@ -1,16 +1,17 @@
 # Commuting squares of identifications
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation.commuting-squares-of-identifications where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functions
+open import foundation.action-on-identifications-binary-functions
+open import foundation.universe-levels
+
+open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -29,9 +30,9 @@ A square of identifications
          bottom
 ```
 
-is said to _commute_ if there is an identification
-`left ∙ bottom ＝ top ∙ right`. Such an identification may be called a
-_coherence_ of the square.
+is said to **commute** if there is an identification
+`left ∙ bottom ＝ top ∙ right`. Such an identification is called a **coherence**
+of the square.
 
 ## Definition
 

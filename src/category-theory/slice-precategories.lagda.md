@@ -12,12 +12,13 @@ open import category-theory.products-precategories
 open import category-theory.pullbacks-precategories
 open import category-theory.terminal-objects-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -333,15 +334,16 @@ module _
             ( comp-hom-Precategory C p₂ k' ＝ p₂')) →
             k ＝ k'
         σ k' (γ₁ , γ₂) =
-          ap ( pr1 ∘ pr1)
-             ( pr2
-               ( ψ (W' , comp-hom-Precategory C f p₁') (p₁' , refl) (p₂' , α'))
-               ( ( ( k') ,
-                   ( ( ap (comp-hom-Precategory C f) (inv γ₁)) ∙
-                     ( ( inv (associative-comp-hom-Precategory C f p₁ k')) ∙
-                       ( ap (λ l → comp-hom-Precategory C l k') (inv α₁))))) ,
-                 ( eq-hom-Slice-Precategory C A _ _ γ₁) ,
-                 ( eq-hom-Slice-Precategory C A _ _ γ₂)))
+          ap
+            ( pr1 ∘ pr1)
+            ( pr2
+              ( ψ (W' , comp-hom-Precategory C f p₁') (p₁' , refl) (p₂' , α'))
+              ( ( ( k') ,
+                  ( ( ap (comp-hom-Precategory C f) (inv γ₁)) ∙
+                    ( ( inv (associative-comp-hom-Precategory C f p₁ k')) ∙
+                      ( ap (λ l → comp-hom-Precategory C l k') (inv α₁))))) ,
+                ( eq-hom-Slice-Precategory C A _ _ γ₁) ,
+                ( eq-hom-Slice-Precategory C A _ _ γ₂)))
 
     equiv-is-pullback-is-product-Slice-Precategory :
       is-pullback-Precategory C A X Y f g W p₁ p₂ α ≃
@@ -393,21 +395,21 @@ module _
     ( map-pullback-product-Slice-Precategory ∘
       map-inv-pullback-product-Slice-Precategory) ~ id
   issec-map-inv-pullback-product-Slice-Precategory
-     ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
+    ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
     eq-pair-Σ
       ( refl)
       ( eq-pair-Σ
-         ( refl)
-         ( eq-type-subtype
-            ( λ _ →
-              is-product-Precategory-Prop
-                ( Slice-Precategory C A)
-                ( X , f)
-                ( Y , g)
-                ( _)
-                ( _)
-                ( _))
-            ( refl)))
+        ( refl)
+        ( eq-type-subtype
+          ( λ _ →
+            is-product-Precategory-Prop
+              ( Slice-Precategory C A)
+              ( X , f)
+              ( Y , g)
+              ( _)
+              ( _)
+              ( _))
+          ( refl)))
 
   isretr-map-inv-pullback-product-Slice-Precategory :
     ( map-inv-pullback-product-Slice-Precategory ∘

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.decidable-propositions where
+
+open import foundation.decidable-propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
@@ -28,7 +28,11 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We prove several properties of [decidable propositions](foundation.decidable-propositions.md) and the type of all decidable propositions involving [countings](univalent-combinatorics.counting.md) and [finiteness](univalent-combinatorics.finite-types.md).
+We prove several properties of
+[decidable propositions](foundation.decidable-propositions.md) and the type of
+all decidable propositions involving
+[countings](univalent-combinatorics.counting.md) and
+[finiteness](univalent-combinatorics.finite-types.md).
 
 ## Properties
 
@@ -86,8 +90,8 @@ number-of-elements-count-eq' d x y =
 cases-number-of-elements-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
   (e : is-decidable (x ＝ y)) →
-  Id ( number-of-elements-count (cases-count-eq d e))
-     ( cases-number-of-elements-count-eq' e)
+  number-of-elements-count (cases-count-eq d e) ＝
+  cases-number-of-elements-count-eq' e
 cases-number-of-elements-count-eq d (inl p) = refl
 cases-number-of-elements-count-eq d (inr f) = refl
 

@@ -1,4 +1,4 @@
-# Morphisms of the slice category of types
+# Morphisms in the slice category of types
 
 ```agda
 module foundation.slice where
@@ -7,27 +7,27 @@ module foundation.slice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 
 open import trees.polynomial-endofunctors
 ```
@@ -50,7 +50,7 @@ Slice : (l : Level) {l1 : Level} (A : UU l1) → UU (l1 ⊔ lsuc l)
 Slice l = type-polynomial-endofunctor (UU l) (λ X → X)
 ```
 
-### The morphisms of the slice category of types
+### The morphisms in the slice category of types
 
 ```agda
 module _
@@ -265,7 +265,7 @@ module _
 
   abstract
     is-prop-hom-slice :
-     (f : A → X) (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
+      (f : A → X) (i : B ↪ X) → is-prop (hom-slice f (map-emb i))
     is-prop-hom-slice f i =
       is-prop-is-equiv
         ( is-equiv-fiberwise-hom-hom-slice f (map-emb i))

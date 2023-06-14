@@ -1,16 +1,16 @@
 # Commuting triangles of maps
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation-core.commuting-triangles-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functions
+open import foundation.universe-levels
+
+open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 ```
 
 </details>

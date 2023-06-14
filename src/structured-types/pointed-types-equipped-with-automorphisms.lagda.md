@@ -7,12 +7,13 @@ module structured-types.pointed-types-equipped-with-automorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -156,11 +157,12 @@ is-contr-total-htpy-hom-Pointed-Type-With-Aut :
 is-contr-total-htpy-hom-Pointed-Type-With-Aut X Y h1 =
   is-contr-total-Eq-structure
     ( λ ( map-h2 : type-Pointed-Type-With-Aut X → type-Pointed-Type-With-Aut Y)
-        ( str-h2 : ( ( map-h2 (point-Pointed-Type-With-Aut X)) ＝
-                     ( point-Pointed-Type-With-Aut Y)) ×
-                   ( ( x : type-Pointed-Type-With-Aut X) →
-                     ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
-                     ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
+        ( str-h2 :
+          ( ( map-h2 (point-Pointed-Type-With-Aut X)) ＝
+            ( point-Pointed-Type-With-Aut Y)) ×
+          ( ( x : type-Pointed-Type-With-Aut X) →
+            ( map-h2 (map-aut-Pointed-Type-With-Aut X x)) ＝
+            ( map-aut-Pointed-Type-With-Aut Y (map-h2 x))))
         ( H : map-hom-Pointed-Type-With-Aut X Y h1 ~ map-h2) →
         ( ( preserves-point-map-hom-Pointed-Type-With-Aut X Y h1) ＝
           ( ( H (point-Pointed-Type-With-Aut X)) ∙

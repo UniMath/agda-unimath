@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.free-loops where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.constant-type-families
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -14,6 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -67,7 +70,7 @@ module _
 
 ## Properties
 
-## Characterization of the identity type of the type of free loops
+### Characterization of the identity type of the type of free loops
 
 ```agda
 module _
@@ -175,7 +178,8 @@ module _
   compute-free-dependent-loop-const :
     free-loop Y ≃ free-dependent-loop α (λ x → Y)
   compute-free-dependent-loop-const =
-    equiv-tot (λ y → equiv-concat (tr-const (loop-free-loop α) y) y)
+    equiv-tot
+      ( λ y → equiv-concat (tr-constant-type-family (loop-free-loop α) y) y)
 
   map-compute-free-dependent-loop-const :
     free-loop Y → free-dependent-loop α (λ x → Y)

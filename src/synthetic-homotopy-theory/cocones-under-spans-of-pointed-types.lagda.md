@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.cocones-under-spans-of-pointed-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -22,6 +23,12 @@ open import synthetic-homotopy-theory.cocones-under-spans
 </details>
 
 ## Idea
+
+A cocone under a span of pointed types is a **pointed cocone** if it consists of
+pointed maps such that the proofs of point-preservation cohere.
+
+The type of pointed cocones under a span of pointed types is again canonically
+pointed at the constant cocone, with `refl` as coherence proof.
 
 ## Definition
 

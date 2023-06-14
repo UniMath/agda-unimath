@@ -9,17 +9,19 @@ module trees.bases-directed-trees where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels

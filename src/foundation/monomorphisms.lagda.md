@@ -7,17 +7,18 @@ module foundation.monomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functoriality-function-types
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -79,11 +80,11 @@ module _
   is-mono-is-emb f-is-emb X =
     is-emb-is-prop-map
       ( is-trunc-map-postcomp-is-trunc-map neg-one-𝕋 X f
-         ( is-prop-map-is-emb f-is-emb))
+        ( is-prop-map-is-emb f-is-emb))
 
   is-emb-is-mono : ({l3 : Level} → is-mono l3 f) → is-emb f
   is-emb-is-mono f-is-mono =
     is-emb-is-prop-map
       ( is-trunc-map-is-trunc-map-postcomp neg-one-𝕋 f
-         ( λ X → is-prop-map-is-emb (f-is-mono X)))
+        ( λ X → is-prop-map-is-emb (f-is-mono X)))
 ```

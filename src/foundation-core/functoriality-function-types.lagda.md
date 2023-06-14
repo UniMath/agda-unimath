@@ -7,16 +7,17 @@ module foundation-core.functoriality-function-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -78,11 +79,12 @@ is-equiv-is-equiv-postcomp'
     ( pr1 sec-f)
     ( htpy-eq (pr2 sec-f))
     ( htpy-eq
-      ( ap ( pr1)
-           ( eq-is-contr'
-             ( is-contr-map-is-equiv (is-equiv-postcomp-f X) f)
-             ( pair ((pr1 sec-f) ∘ f) (ap (λ t → t ∘ f) (pr2 sec-f)))
-             ( pair id refl))))
+      ( ap
+        ( pr1)
+        ( eq-is-contr'
+          ( is-contr-map-is-equiv (is-equiv-postcomp-f X) f)
+          ( pair ((pr1 sec-f) ∘ f) (ap (λ t → t ∘ f) (pr2 sec-f)))
+          ( pair id refl))))
 
 abstract
   is-equiv-postcomp-is-equiv :

@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module finite-group-theory.permutations where
 ```
 
@@ -18,6 +16,7 @@ open import finite-group-theory.orbits-permutations
 open import finite-group-theory.permutations-standard-finite-types
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -27,7 +26,7 @@ open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.iterating-involutions
@@ -39,6 +38,7 @@ open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.generating-sets-groups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 
@@ -117,7 +117,7 @@ module _
   where
 
   is-generated-transposition-symmetric-Fin-Level :
-    is-generating-subset-Group
+    is-generating-set-Group
       ( symmetric-Group (set-UU-Fin n X))
       ( is-transposition-permutation-Prop)
   is-generated-transposition-symmetric-Fin-Level f =

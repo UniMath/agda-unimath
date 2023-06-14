@@ -11,25 +11,27 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-empty-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.universe-levels
 
 open import lists.arrays
+open import lists.concatenation-lists
 open import lists.lists
 open import lists.permutation-lists
 
@@ -117,6 +119,22 @@ equiv-iterated-product-Fin-recursive-lists :
 equiv-iterated-product-Fin-recursive-lists nil = id-equiv
 equiv-iterated-product-Fin-recursive-lists (cons x l) =
   equiv-prod id-equiv (equiv-iterated-product-Fin-recursive-lists l)
+```
+
+### The cartesian product of two iterated cartesian products (via list) is the iterated cartesian product of the concatenation of the corresponding lists
+
+```agda
+equiv-product-iterated-product-lists :
+  {l : Level} (p q : list (UU l)) →
+  (iterated-product-lists p × iterated-product-lists q) ≃
+  iterated-product-lists (concat-list p q)
+equiv-product-iterated-product-lists nil q =
+  left-unit-law-prod-is-contr (is-contr-raise-unit)
+equiv-product-iterated-product-lists (cons x p) q =
+  ( ( equiv-prod
+      ( id-equiv)
+      ( equiv-product-iterated-product-lists p q)) ∘e
+    ( associative-prod x (iterated-product-lists p) (iterated-product-lists q)))
 ```
 
 ### Iterated cartesian product is closed under permutations

@@ -2,15 +2,18 @@
 
 ```agda
 {-# OPTIONS --guardedness --allow-unsolved-metas #-}
+
 module type-theories.simple-type-theories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.functions
+open import foundation.action-on-identifications-functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 ```
 

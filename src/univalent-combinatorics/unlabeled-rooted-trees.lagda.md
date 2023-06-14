@@ -1,4 +1,4 @@
-# Unlabelled rooted trees
+# Unlabeled rooted trees
 
 ```agda
 module univalent-combinatorics.unlabeled-rooted-trees where
@@ -14,10 +14,8 @@ module univalent-combinatorics.unlabeled-rooted-trees where
 
 ## Idea
 
-An unlabelled rooted tree is an unlabelled tree equipped with a vertex.
+An unlabeled rooted tree is an unlabeled tree equipped with a vertex.
 
 ## Definition
 
-```agda
-
-```
+This remains to be defined.

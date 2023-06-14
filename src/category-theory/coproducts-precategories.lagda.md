@@ -9,6 +9,7 @@ module category-theory.coproducts-precategories where
 ```agda
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -37,10 +38,11 @@ module _
     (z : obj-Precategory C)
     (f : type-hom-Precategory C x z) →
     (g : type-hom-Precategory C y z) →
-    ∃! ( type-hom-Precategory C p z)
-       ( λ h →
-         ( comp-hom-Precategory C h l ＝ f) ×
-         ( comp-hom-Precategory C h r ＝ g))
+    ∃!
+      ( type-hom-Precategory C p z)
+      ( λ h →
+        ( comp-hom-Precategory C h l ＝ f) ×
+        ( comp-hom-Precategory C h r ＝ g))
 
   coproduct-Precategory : obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)
   coproduct-Precategory x y =

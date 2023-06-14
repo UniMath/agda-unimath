@@ -10,10 +10,10 @@ module foundation.category-of-sets where
 open import category-theory.large-precategories
 
 open import foundation.sets
+open import foundation.universe-levels
 
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>

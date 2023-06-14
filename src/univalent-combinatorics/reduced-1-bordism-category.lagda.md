@@ -7,6 +7,7 @@ module univalent-combinatorics.reduced-1-bordism-category where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.contractible-types
@@ -14,9 +15,10 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.universe-levels
 
@@ -30,7 +32,8 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-The reduced `1`-bordism category is the category of 1-bordisms where cycles are ignored.
+The reduced `1`-bordism category is the category of 1-bordisms where cycles are
+ignored.
 
 ## Definition
 
@@ -81,17 +84,20 @@ id-hom-Reduced-1-Bordism X = id-equiv
 
 ### Composition of morphisms in the reduced `1`-bordism category
 
-Composition of morphisms `g : (B⁺, B⁻) → (C⁺ , C⁻)` and `f : (A⁺ , A⁻) → (B⁺, B⁻)` of reduced `1`-bordisms is defined via the sequence of equivalences
+Composition of morphisms `g : (B⁺, B⁻) → (C⁺ , C⁻)` and
+`f : (A⁺ , A⁻) → (B⁺, B⁻)` of reduced `1`-bordisms is defined via the sequence
+of equivalences
 
 ```text
-  (A⁺ ⊔ C⁻) ⊔ B⁻ ≃ (A⁺ ⊔ B⁻) ⊔ C⁻ 
+  (A⁺ ⊔ C⁻) ⊔ B⁻ ≃ (A⁺ ⊔ B⁻) ⊔ C⁻
                  ≃ (B⁺ ⊔ A⁻) ⊔ C⁻
                  ≃ (B⁺ ⊔ C⁻) ⊔ A⁻
                  ≃ (C⁺ ⊔ B⁻) ⊔ A⁻
                  ≃ (C⁺ ⊔ A⁻) ⊔ B⁻
 ```
 
-Call the composite equivalence `φ`. Then `φ` induces a directed graph on the nods `(A⁺ ⊔ C⁻) ⊔ ((C⁺ ⊔ A⁻) ⊔ B⁻)` with the edge relation defined by
+Call the composite equivalence `φ`. Then `φ` induces a directed graph on the
+nods `(A⁺ ⊔ C⁻) ⊔ ((C⁺ ⊔ A⁻) ⊔ B⁻)` with the edge relation defined by
 
 ```text
   e₁ x : edge (inl x) (φ (inl x))
@@ -162,7 +168,8 @@ module _
     direct-predecessor-Directed-Graph
       ( directed-graph-equiv-left-equiv-coprod)
       ( inr (inl y))
-  pr1 (cases-direct-predecessor-equiv-left-equiv-coprod y (inl (x , p))) = inl x
+  pr1 (cases-direct-predecessor-equiv-left-equiv-coprod y (inl (x , p))) =
+    inl x
   pr2 (cases-direct-predecessor-equiv-left-equiv-coprod y (inl (x , p))) =
     tr
       ( edge-equiv-left-equiv-coprod (inl x))
@@ -198,9 +205,21 @@ module _
         ( directed-graph-equiv-left-equiv-coprod)
         ( inr (inl y))) →
     cases-direct-predecessor-equiv-left-equiv-coprod y d ＝ p
-  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y (inl (x , q)) (inl x' , e) = {!ap pr1 ((eq-is-contr (is-contr-map-is-equiv (is-equiv-map-equiv φ) (inl y))) {inl x , q} {inl x' , ?})!}
-  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y (inl (x , q)) (inr n , e) = {!!}
-  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y (inr (z , q)) p = {!!}
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y
+    ( inl (x , q)) (inl x' , e) =
+    {!!}
+    {-
+    ap
+      ( pr1)
+      ( ( eq-is-contr (is-contr-map-is-equiv (is-equiv-map-equiv φ) (inl y)))
+        { inl x , q}
+        { inl x' , ?}) -}
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y
+    ( inl (x , q)) (inr n , e) =
+    {!!}
+  cases-contraction-direct-predecessor-equiv-left-equiv-coprod y
+    ( inr (z , q)) p =
+    {!!}
 
   unique-direct-predecessor-equiv-left-equiv-coprod :
     (y : Y) →
@@ -221,7 +240,9 @@ module _
   walk-across-equiv-left-equiv-coprod x = {!!}
 ```
 
-In this graph, there is for each `x : A⁺ ⊔ C⁻` a unique element `y : C⁺ ⊔ A⁻` equipped with a walk from `inl x` to `inl (inr y)`. This determines an equivalence `A⁺ ⊔ C⁻ ≃ C⁺ ⊔ A⁻` which we use to define the composite `g ∘ f`.
+In this graph, there is for each `x : A⁺ ⊔ C⁻` a unique element `y : C⁺ ⊔ A⁻`
+equipped with a walk from `inl x` to `inl (inr y)`. This determines an
+equivalence `A⁺ ⊔ C⁻ ≃ C⁺ ⊔ A⁻` which we use to define the composite `g ∘ f`.
 
 ```agda
 comp-hom-Reduced-1-Bordism :

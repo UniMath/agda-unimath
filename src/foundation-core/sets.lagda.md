@@ -7,15 +7,16 @@ module foundation-core.sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -77,7 +78,7 @@ module _
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 
-### If a reflexive binary relation maps into the identity type of A, then A is a set
+### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set
 
 ```agda
 module _

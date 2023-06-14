@@ -16,12 +16,13 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -52,9 +53,11 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-A cyclic type is a [type `X` equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md) `f : X → X` such that
-the pair `(X, f)` is [merely equivalent](structured-types.mere-equivalences-types-equipped-with-endomorphisms.md) to the pair `(ℤ-Mod k, +1)` for some
-`k : ℕ`.
+A cyclic type is a
+[type `X` equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
+`f : X → X` such that the pair `(X, f)` is
+[merely equivalent](structured-types.mere-equivalences-types-equipped-with-endomorphisms.md)
+to the pair `(ℤ-Mod k, +1)` for some `k : ℕ`.
 
 ## Definitions
 
@@ -148,7 +151,7 @@ module _
     map-equiv-Endo (endo-Cyclic-Type k X) (endo-Cyclic-Type k Y) e
 
   coherence-square-equiv-Cyclic-Type :
-    (e : equiv-Cyclic-Type) →
+    ( e : equiv-Cyclic-Type) →
     coherence-square-maps
       ( map-equiv-Cyclic-Type e)
       ( endomorphism-Cyclic-Type k X)
@@ -345,8 +348,9 @@ module _
   where
 
   left-inverse-law-comp-equiv-Cyclic-Type :
-    Id ( comp-equiv-Cyclic-Type k X Y X (inv-equiv-Cyclic-Type k X Y e) e)
-       ( id-equiv-Cyclic-Type k X)
+    Id
+      ( comp-equiv-Cyclic-Type k X Y X (inv-equiv-Cyclic-Type k X Y e) e)
+      ( id-equiv-Cyclic-Type k X)
   left-inverse-law-comp-equiv-Cyclic-Type =
     eq-htpy-equiv-Cyclic-Type k X X
       ( comp-equiv-Cyclic-Type k X Y X (inv-equiv-Cyclic-Type k X Y e) e)
@@ -354,8 +358,9 @@ module _
       ( isretr-map-inv-equiv (equiv-equiv-Cyclic-Type k X Y e))
 
   right-inverse-law-comp-equiv-Cyclic-Type :
-    Id ( comp-equiv-Cyclic-Type k Y X Y e (inv-equiv-Cyclic-Type k X Y e))
-       ( id-equiv-Cyclic-Type k Y)
+    Id
+      ( comp-equiv-Cyclic-Type k Y X Y e (inv-equiv-Cyclic-Type k X Y e))
+      ( id-equiv-Cyclic-Type k Y)
   right-inverse-law-comp-equiv-Cyclic-Type =
     eq-htpy-equiv-Cyclic-Type k Y Y
       ( comp-equiv-Cyclic-Type k Y X Y e (inv-equiv-Cyclic-Type k X Y e))
@@ -404,7 +409,8 @@ pr2 (∞-group-Cyclic-Type k) = is-0-connected-Cyclic-Type k
 
 ### Characterization of equality of cyclic types
 
-To show that a cyclic type `X` is equal to a standard cyclic type, it suffices to construct a point in `X`.
+To show that a cyclic type `X` is equal to a standard cyclic type, it suffices
+to construct a point in `X`.
 
 ```agda
 Eq-Cyclic-Type : (k : ℕ) → Cyclic-Type lzero k → UU lzero
@@ -537,10 +543,11 @@ map-equiv-compute-Ω-Cyclic-Type k = map-equiv (equiv-compute-Ω-Cyclic-Type k)
 
 preserves-concat-equiv-eq-Cyclic-Type :
   (k : ℕ) (X Y Z : Cyclic-Type lzero k) (p : Id X Y) (q : Id Y Z) →
-  Id ( equiv-eq-Cyclic-Type k X Z (p ∙ q))
-     ( comp-equiv-Cyclic-Type k X Y Z
-       ( equiv-eq-Cyclic-Type k Y Z q)
-       ( equiv-eq-Cyclic-Type k X Y p))
+  Id
+    ( equiv-eq-Cyclic-Type k X Z (p ∙ q))
+    ( comp-equiv-Cyclic-Type k X Y Z
+      ( equiv-eq-Cyclic-Type k Y Z q)
+      ( equiv-eq-Cyclic-Type k X Y p))
 preserves-concat-equiv-eq-Cyclic-Type k X .X Z refl q =
   inv
     ( right-unit-law-comp-equiv-Cyclic-Type
@@ -549,17 +556,18 @@ preserves-concat-equiv-eq-Cyclic-Type k X .X Z refl q =
 preserves-comp-Eq-equiv-Cyclic-Type :
   (k : ℕ)
   (e f : equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) (ℤ-Mod-Cyclic-Type k)) →
-  Id ( Eq-equiv-Cyclic-Type k
-       ( ℤ-Mod-Cyclic-Type k)
-       ( comp-equiv-Cyclic-Type k
-         ( ℤ-Mod-Cyclic-Type k)
-         ( ℤ-Mod-Cyclic-Type k)
-         ( ℤ-Mod-Cyclic-Type k)
-         ( f)
-         ( e)))
-     ( add-ℤ-Mod k
-       ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) e)
-       ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) f))
+  Id
+    ( Eq-equiv-Cyclic-Type k
+      ( ℤ-Mod-Cyclic-Type k)
+      ( comp-equiv-Cyclic-Type k
+        ( ℤ-Mod-Cyclic-Type k)
+        ( ℤ-Mod-Cyclic-Type k)
+        ( ℤ-Mod-Cyclic-Type k)
+        ( f)
+        ( e)))
+    ( add-ℤ-Mod k
+      ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) e)
+      ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) f))
 preserves-comp-Eq-equiv-Cyclic-Type k e f =
   inv
   ( compute-map-preserves-succ-map-ℤ-Mod k
@@ -576,10 +584,11 @@ preserves-comp-Eq-equiv-Cyclic-Type k e f =
 
 preserves-concat-equiv-compute-Ω-Cyclic-Type :
   (k : ℕ) (p q : type-Ω (Cyclic-Type-Pointed-Type k)) →
-  Id ( map-equiv (equiv-compute-Ω-Cyclic-Type k) (p ∙ q))
-     ( add-ℤ-Mod k
-       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) p)
-       ( map-equiv (equiv-compute-Ω-Cyclic-Type k) q))
+  Id
+    ( map-equiv (equiv-compute-Ω-Cyclic-Type k) (p ∙ q))
+    ( add-ℤ-Mod k
+      ( map-equiv (equiv-compute-Ω-Cyclic-Type k) p)
+      ( map-equiv (equiv-compute-Ω-Cyclic-Type k) q))
 preserves-concat-equiv-compute-Ω-Cyclic-Type k p q =
   ( ap
     ( Eq-equiv-Cyclic-Type k (ℤ-Mod-Cyclic-Type k))

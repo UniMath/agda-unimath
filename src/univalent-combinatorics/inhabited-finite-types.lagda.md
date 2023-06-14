@@ -7,8 +7,10 @@ module univalent-combinatorics.inhabited-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
@@ -27,13 +29,19 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
+An **inhabited finite type** is a
+[finite type](univalent-combinatorics.finite-types.md) that is
+[inhabited](foundation.inhabited-types.md), meaning it is a type that is merely
+equivalent to a standard finite type, and that comes equipped with a term of its
+propositional truncation.
+
 ## Definitions
 
 ### Inhabited finite types
 
 ```agda
 Inhabited-𝔽 : (l : Level) → UU (lsuc l)
-Inhabited-𝔽 l = Σ ( 𝔽 l) ( λ X → is-inhabited (type-𝔽 X))
+Inhabited-𝔽 l = Σ (𝔽 l) (λ X → is-inhabited (type-𝔽 X))
 
 module _
   {l : Level} (X : Inhabited-𝔽 l)
@@ -117,11 +125,11 @@ compute-Fam-Inhabited-𝔽 :
     Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
       ( λ Y → ((x : (type-𝔽 X)) → is-finite (type-Inhabited-Type (Y x))))
 compute-Fam-Inhabited-𝔽 X =
-   ( distributive-Π-Σ ∘e
-    ( equiv-Π
-      ( λ _ → Σ (Inhabited-Type _) ( is-finite ∘ type-Inhabited-Type))
-      ( id-equiv)
-      ( λ _ → compute-Inhabited-𝔽)))
+  ( distributive-Π-Σ) ∘e
+  ( equiv-Π
+    ( λ _ → Σ (Inhabited-Type _) (is-finite ∘ type-Inhabited-Type))
+    ( id-equiv)
+    ( λ _ → compute-Inhabited-𝔽))
 ```
 
 ## Proposition
@@ -139,4 +147,16 @@ eq-equiv-Inhabited-𝔽 X Y e =
       ( finite-type-Inhabited-𝔽 X)
       ( finite-type-Inhabited-𝔽 Y)
       ( e))
+```
+
+### Every type in `UU-Fin (succ-ℕ n)` is a inhabited finite type
+
+```agda
+is-finite-and-inhabited-type-UU-Fin-succ-ℕ :
+  {l : Level} → (n : ℕ) → (F : UU-Fin l (succ-ℕ n)) →
+  is-finite-and-inhabited (type-UU-Fin (succ-ℕ n) F)
+pr1 (is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F) =
+  is-finite-type-UU-Fin (succ-ℕ n) F
+pr2 (is-finite-and-inhabited-type-UU-Fin-succ-ℕ n F) =
+  is-inhabited-type-UU-Fin-succ-ℕ n F
 ```

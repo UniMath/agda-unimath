@@ -7,21 +7,24 @@ module foundation-core.subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.dependent-pair-types
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
+
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
+open import foundation-core.transport
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -31,7 +34,9 @@ open import foundation-core.universe-levels
 A subtype of a type `A` is a family of propositions over `A`. The underlying
 type of a subtype `P` of `A` is the total space `Σ A B`.
 
-## Definition
+## Definitions
+
+### Subtypes
 
 ```agda
 module _
@@ -81,7 +86,46 @@ module _
   is-closed-under-eq-subtype' p refl = p
 ```
 
+### The containment relation on subtypes
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  leq-subtype-Prop :
+    {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+  leq-subtype-Prop P Q =
+    Π-Prop A (λ x → hom-Prop (P x) (Q x))
+
+  _⊆_ :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
+  P ⊆ Q = type-Prop (leq-subtype-Prop P Q)
+
+  is-prop-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
+  is-prop-leq-subtype P Q =
+    is-prop-type-Prop (leq-subtype-Prop P Q)
+```
+
 ## Properties
+
+### The containment relation on subtypes is a preordering
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  refl-leq-subtype : {l2 : Level} (P : subtype l2 A) → P ⊆ P
+  refl-leq-subtype P x = id
+
+  transitive-leq-subtype :
+    {l2 l3 l4 : Level}
+    (P : subtype l2 A) (Q : subtype l3 A) (R : subtype l4 A) →
+    Q ⊆ R → P ⊆ Q → P ⊆ R
+  transitive-leq-subtype P Q R H K x = H x ∘ K x
+```
 
 ### Equality in subtypes
 

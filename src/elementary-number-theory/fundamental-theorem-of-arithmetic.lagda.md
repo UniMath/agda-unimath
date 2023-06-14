@@ -23,6 +23,9 @@ open import elementary-number-theory.relatively-prime-natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
+open import finite-group-theory.permutations-standard-finite-types
+
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -32,13 +35,17 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import lists.concatenation-lists
 open import lists.functoriality-lists
 open import lists.lists
+open import lists.permutation-lists
 open import lists.predicates-on-lists
+open import lists.sort-by-insertion-lists
 open import lists.sorted-lists
 ```
 
@@ -134,8 +141,7 @@ module _
         ( is-prop-is-prime-list-ℕ l)
         ( is-prop-is-decomposition-list-ℕ))
 
-  is-prime-decomposition-list-ℕ-Prop :
-     Prop lzero
+  is-prime-decomposition-list-ℕ-Prop : Prop lzero
   pr1 is-prime-decomposition-list-ℕ-Prop = is-prime-decomposition-list-ℕ
   pr2 is-prime-decomposition-list-ℕ-Prop = is-prop-is-prime-decomposition-list-ℕ
 ```
@@ -219,16 +225,16 @@ is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
   ( D)
   ( P) =
   ( is-nontrivial-divisor-head-is-decomposition-is-prime-list-ℕ x y l D P ,
-   is-nontrivial-divisors-div-list-ℕ
-    ( mul-list-ℕ l)
-    ( x)
-    ( y , D)
-    ( l)
-    ( is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
+    is-nontrivial-divisors-div-list-ℕ
       ( mul-list-ℕ l)
+      ( x)
+      ( y , D)
       ( l)
-      ( refl)
-      ( pr2 P)))
+      ( is-list-of-nontrivial-divisors-is-decomposition-is-prime-list-ℕ
+        ( mul-list-ℕ l)
+        ( l)
+        ( refl)
+        ( pr2 P)))
 
 is-divisor-head-prime-decomposition-list-ℕ :
   (x : ℕ) (y : ℕ) (l : list ℕ) →
@@ -924,13 +930,148 @@ fundamental-theorem-arithmetic-list-ℕ :
 pr1 (fundamental-theorem-arithmetic-list-ℕ x H) =
   prime-decomposition-fundamental-theorem-arithmetic-list-ℕ x H
 pr2 (fundamental-theorem-arithmetic-list-ℕ x H) d =
-   eq-type-subtype
-     ( is-prime-decomposition-list-ℕ-Prop x)
-     ( eq-prime-decomposition-list-ℕ
-       ( x)
-       ( H)
-       ( list-fundamental-theorem-arithmetic-ℕ x H)
-       ( pr1 d)
-       ( is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H)
-       ( pr2 d))
+  eq-type-subtype
+    ( is-prime-decomposition-list-ℕ-Prop x)
+    ( eq-prime-decomposition-list-ℕ
+      ( x)
+      ( H)
+      ( list-fundamental-theorem-arithmetic-ℕ x H)
+      ( pr1 d)
+      ( is-prime-decomposition-list-fundamental-theorem-arithmetic-ℕ x H)
+      ( pr2 d))
+```
+
+### The sorted list associated with the concatenation of the prime decomposition of `n` and the prime decomposition of `m` is the prime decomposition of `n *ℕ m`
+
+```agda
+is-prime-list-concat-list-ℕ :
+  (p q : list ℕ) → is-prime-list-ℕ p → is-prime-list-ℕ q →
+  is-prime-list-ℕ (concat-list p q)
+is-prime-list-concat-list-ℕ nil q Pp Pq = Pq
+is-prime-list-concat-list-ℕ (cons x p) q Pp Pq =
+  pr1 Pp , is-prime-list-concat-list-ℕ p q (pr2 Pp) Pq
+
+all-elements-is-prime-list-ℕ :
+  (p : list ℕ) → UU lzero
+all-elements-is-prime-list-ℕ p = (x : ℕ) → x ∈-list p → is-prime-ℕ x
+
+all-elements-is-prime-list-tail-ℕ :
+  (p : list ℕ) (x : ℕ) (P : all-elements-is-prime-list-ℕ (cons x p)) →
+  all-elements-is-prime-list-ℕ p
+all-elements-is-prime-list-tail-ℕ p x P y I = P y (is-in-tail y x p I)
+
+all-elements-is-prime-list-is-prime-list-ℕ :
+  (p : list ℕ) → is-prime-list-ℕ p → all-elements-is-prime-list-ℕ p
+all-elements-is-prime-list-is-prime-list-ℕ (cons x p) P .x (is-head .x .p) =
+  pr1 P
+all-elements-is-prime-list-is-prime-list-ℕ
+  ( cons x p)
+  ( P)
+  ( y)
+  ( is-in-tail .y .x .p I) =
+  all-elements-is-prime-list-is-prime-list-ℕ p (pr2 P) y I
+
+is-prime-list-all-elements-is-prime-list-ℕ :
+  (p : list ℕ) → all-elements-is-prime-list-ℕ p → is-prime-list-ℕ p
+is-prime-list-all-elements-is-prime-list-ℕ nil P = raise-star
+is-prime-list-all-elements-is-prime-list-ℕ (cons x p) P =
+  P x (is-head x p) ,
+  is-prime-list-all-elements-is-prime-list-ℕ
+    ( p)
+    ( all-elements-is-prime-list-tail-ℕ p x P)
+
+is-prime-list-permute-list-ℕ :
+  (p : list ℕ) (t : Permutation (length-list p)) → is-prime-list-ℕ p →
+  is-prime-list-ℕ (permute-list p t)
+is-prime-list-permute-list-ℕ p t P =
+  is-prime-list-all-elements-is-prime-list-ℕ
+    ( permute-list p t)
+    ( λ x I → all-elements-is-prime-list-is-prime-list-ℕ
+      ( p)
+      ( P)
+      ( x)
+      ( is-in-list-is-in-permute-list
+        ( p)
+        ( t)
+        ( x)
+        ( I)))
+
+is-decomposition-list-concat-list-ℕ :
+  (n m : ℕ) (p q : list ℕ) →
+  is-decomposition-list-ℕ n p → is-decomposition-list-ℕ m q →
+  is-decomposition-list-ℕ (n *ℕ m) (concat-list p q)
+is-decomposition-list-concat-list-ℕ n m p q Dp Dq =
+  ( eq-mul-list-concat-list-ℕ p q ∙
+    ( ap (mul-ℕ (mul-list-ℕ p)) Dq ∙
+      ap (λ n → n *ℕ m) Dp))
+
+is-decomposition-list-permute-list-ℕ :
+  (n : ℕ) (p : list ℕ) (t : Permutation (length-list p)) →
+  is-decomposition-list-ℕ n p →
+  is-decomposition-list-ℕ n (permute-list p t)
+is-decomposition-list-permute-list-ℕ n p t D =
+  inv (invariant-permutation-mul-list-ℕ p t) ∙ D
+
+is-prime-decomposition-list-sort-concatenation-ℕ :
+  (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
+  is-prime-decomposition-list-ℕ x p →
+  is-prime-decomposition-list-ℕ y q →
+  is-prime-decomposition-list-ℕ
+    (x *ℕ y)
+    ( insertion-sort-list
+      ( ℕ-Decidable-Total-Order)
+      ( concat-list p q))
+pr1 (is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
+  is-sorting-insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
+pr1
+  ( pr2
+    ( is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq)) =
+  tr
+    ( λ p → is-prime-list-ℕ p)
+    ( inv
+      ( eq-permute-list-permutation-insertion-sort-list
+        ( ℕ-Decidable-Total-Order)
+        ( concat-list p q)))
+    ( is-prime-list-permute-list-ℕ
+      ( concat-list p q)
+      ( permutation-insertion-sort-list
+        ( ℕ-Decidable-Total-Order)
+        ( concat-list p q))
+      ( is-prime-list-concat-list-ℕ
+        ( p)
+        ( q)
+        ( is-prime-list-is-prime-decomposition-list-ℕ x p Dp)
+        ( is-prime-list-is-prime-decomposition-list-ℕ y q Dq)))
+pr2
+  ( pr2
+    ( is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq)) =
+  tr
+    ( λ p → is-decomposition-list-ℕ (x *ℕ y) p)
+    ( inv
+      ( eq-permute-list-permutation-insertion-sort-list
+        ( ℕ-Decidable-Total-Order)
+        ( concat-list p q)))
+    ( is-decomposition-list-permute-list-ℕ
+      ( x *ℕ y)
+      ( concat-list p q)
+      ( permutation-insertion-sort-list
+        ( ℕ-Decidable-Total-Order)
+        ( concat-list p q))
+      ( is-decomposition-list-concat-list-ℕ
+        ( x)
+        ( y)
+        ( p)
+        ( q)
+        ( is-decomposition-list-is-prime-decomposition-list-ℕ x p Dp)
+        ( is-decomposition-list-is-prime-decomposition-list-ℕ y q Dq)))
+
+prime-decomposition-list-sort-concatenation-ℕ :
+  (x y : ℕ) (H : leq-ℕ 1 x) (I : leq-ℕ 1 y) (p q : list ℕ) →
+  is-prime-decomposition-list-ℕ x p →
+  is-prime-decomposition-list-ℕ y q →
+  prime-decomposition-list-ℕ (x *ℕ y) (preserves-leq-mul-ℕ 1 x 1 y H I)
+pr1 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
+  insertion-sort-list ℕ-Decidable-Total-Order (concat-list p q)
+pr2 (prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq) =
+  is-prime-decomposition-list-sort-concatenation-ℕ x y H I p q Dp Dq
 ```

@@ -12,6 +12,7 @@ open import category-theory.functors-precategories
 open import category-theory.isomorphisms-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types

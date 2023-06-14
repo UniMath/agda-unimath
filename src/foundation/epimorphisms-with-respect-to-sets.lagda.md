@@ -7,6 +7,8 @@ module foundation.epimorphisms-with-respect-to-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.epimorphisms-with-respect-to-truncated-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
@@ -15,15 +17,14 @@ open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
 open import foundation-core.univalence
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -76,18 +77,19 @@ abstract
   is-surjective-is-epimorphism-Set {l1} {l2} {A} {B} {f} H b =
     map-equiv
       ( equiv-eq
-        ( ap ( pr1)
-             ( htpy-eq
-               ( is-injective-is-emb
-                 ( H (Prop-Set (l1 ⊔ l2)))
-                 { g}
-                 { h}
-                 ( eq-htpy
-                   ( λ a →
-                     eq-iff
-                       ( λ _ → unit-trunc-Prop (pair a refl))
-                       ( λ _ → raise-star))))
-               ( b))))
+        ( ap
+          ( pr1)
+          ( htpy-eq
+            ( is-injective-is-emb
+              ( H (Prop-Set (l1 ⊔ l2)))
+              { g}
+              { h}
+              ( eq-htpy
+                ( λ a →
+                  eq-iff
+                    ( λ _ → unit-trunc-Prop (pair a refl))
+                    ( λ _ → raise-star))))
+            ( b))))
       ( raise-star)
     where
     g : B → Prop (l1 ⊔ l2)

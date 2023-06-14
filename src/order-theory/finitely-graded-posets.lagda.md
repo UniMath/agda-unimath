@@ -16,13 +16,14 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -185,13 +186,13 @@ If chains with jumps are never used, we'd like to call the following chains.
     refl-path-faces-Finitely-Graded-Poset = refl-leq-Fin (succ-ℕ k) i1
   leq-type-path-faces-Finitely-Graded-Poset {i1} x y
     ( cons-path-faces-Finitely-Graded-Poset {i3} {z} H K) =
-     transitive-leq-Fin
-       ( succ-ℕ k)
-       ( i1)
-       ( inl-Fin k i3)
-       ( succ-Fin (succ-ℕ k) (inl-Fin k i3))
-       ( leq-succ-Fin k i3)
-       ( leq-type-path-faces-Finitely-Graded-Poset x z K)
+    transitive-leq-Fin
+      ( succ-ℕ k)
+      ( i1)
+      ( inl-Fin k i3)
+      ( succ-Fin (succ-ℕ k) (inl-Fin k i3))
+      ( leq-succ-Fin k i3)
+      ( leq-type-path-faces-Finitely-Graded-Poset x z K)
 ```
 
 ### Antisymmetry of path-elements-Finitely-Graded-Poset

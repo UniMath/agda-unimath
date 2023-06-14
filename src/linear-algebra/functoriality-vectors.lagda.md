@@ -9,8 +9,10 @@ module linear-algebra.functoriality-vectors where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -80,8 +82,43 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
- binary-map-functional-vec :
-   (n : ℕ) → (A → B → C) →
-   functional-vec A n → functional-vec B n → functional-vec C n
- binary-map-functional-vec n f v w i = f (v i) (w i)
+  binary-map-functional-vec :
+    (n : ℕ) → (A → B → C) →
+    functional-vec A n → functional-vec B n → functional-vec C n
+  binary-map-functional-vec n f v w i = f (v i) (w i)
+```
+
+### Link between functoriality of the type of vectors and of the type of functional vectors
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B)
+  where
+
+  map-vec-map-functional-vec :
+    (n : ℕ) (v : vec A n) →
+    listed-vec-functional-vec
+      ( n)
+      ( map-functional-vec n f (functional-vec-vec n v)) ＝
+    map-vec f v
+  map-vec-map-functional-vec zero-ℕ empty-vec = refl
+  map-vec-map-functional-vec (succ-ℕ n) (x ∷ v) =
+    eq-Eq-vec
+      ( succ-ℕ n)
+      ( listed-vec-functional-vec
+        ( succ-ℕ n)
+        ( map-functional-vec
+          ( succ-ℕ n)
+          ( f)
+          ( functional-vec-vec (succ-ℕ n) (x ∷ v))))
+      ( map-vec f (x ∷ v))
+      ( refl ,
+        Eq-eq-vec
+          ( n)
+          ( listed-vec-functional-vec
+            ( n)
+            ( map-functional-vec n f (functional-vec-vec n v)))
+          ( map-vec f v)
+          ( map-vec-map-functional-vec n v))
 ```

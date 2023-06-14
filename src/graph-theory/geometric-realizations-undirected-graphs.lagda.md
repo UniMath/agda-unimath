@@ -9,7 +9,7 @@ module graph-theory.geometric-realizations-undirected-graphs where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.symmetric-identity-types
 open import foundation.universe-levels
 

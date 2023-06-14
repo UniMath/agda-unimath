@@ -1,4 +1,4 @@
-# The Well-Ordering Principle of the standard finite types
+# The well-ordering principle of the standard finite types
 
 ```agda
 module elementary-number-theory.well-ordering-principle-standard-finite-types where
@@ -21,7 +21,7 @@ open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
@@ -31,6 +31,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
@@ -47,7 +48,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The standard finite types inherit a well-ordering principle from the natural
-numbers
+numbers.
 
 ## Properties
 
@@ -187,7 +188,7 @@ well-ordering-principle-∃-Fin k P H =
       ( is-decidable-decidable-subtype P))
 ```
 
-### Hilbert's epsilon operator for decidable subtypes of standard finite types
+### Hilbert's `ε`-operator for decidable subtypes of standard finite types
 
 ```agda
 ε-operator-decidable-subtype-Fin :

@@ -16,10 +16,12 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -29,8 +31,6 @@ open import foundation.universe-levels
 ```
 
 </details>
-
-## Idea
 
 ## Definitions
 
@@ -144,10 +144,10 @@ left-predecessor-law-mul-ℤ (inr (inl star)) l =
 left-predecessor-law-mul-ℤ (inr (inr zero-ℕ)) l =
   inv (left-inverse-law-add-ℤ l)
 left-predecessor-law-mul-ℤ (inr (inr (succ-ℕ x))) l =
-   ( ap
-     ( _+ℤ ((in-pos x) *ℤ l))
-     ( inv (left-inverse-law-add-ℤ l))) ∙
-   ( associative-add-ℤ (neg-ℤ l) l ((in-pos x) *ℤ l))
+  ( ap
+    ( _+ℤ ((in-pos x) *ℤ l))
+    ( inv (left-inverse-law-add-ℤ l))) ∙
+  ( associative-add-ℤ (neg-ℤ l) l ((in-pos x) *ℤ l))
 
 right-successor-law-mul-ℤ :
   (k l : ℤ) → k *ℤ (succ-ℤ l) ＝ k +ℤ (k *ℤ l)
@@ -395,10 +395,11 @@ compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inl star)) = refl
 compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inl star)) =
   right-zero-law-mul-ℤ (inr (inr (succ-ℕ x)))
 compute-mul-ℤ (inr (inr zero-ℕ)) (inr (inr y)) =
-  ap ( inr ∘ inr)
-     ( inv
-       ( ( ap (_+ℕ y) (left-zero-law-mul-ℕ (succ-ℕ y))) ∙
-         ( left-unit-law-add-ℕ y)))
+  ap
+    ( inr ∘ inr)
+    ( inv
+      ( ( ap (_+ℕ y) (left-zero-law-mul-ℕ (succ-ℕ y))) ∙
+        ( left-unit-law-add-ℕ y)))
 compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
   ( ap ((inr (inr y)) +ℤ_) (compute-mul-ℤ (inr (inr x)) (inr (inr y)))) ∙
   ( ( add-int-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y))) ∙
@@ -409,13 +410,13 @@ compute-mul-ℤ (inr (inr (succ-ℕ x))) (inr (inr y)) =
 
 ```agda
 linear-diff-left-mul-ℤ :
-  (z x y : ℤ) → diff-ℤ (z *ℤ x) (z *ℤ y) ＝ z *ℤ (diff-ℤ x y)
+  (z x y : ℤ) → (z *ℤ x) -ℤ (z *ℤ y) ＝ z *ℤ (x -ℤ y)
 linear-diff-left-mul-ℤ z x y =
   ( ap ((z *ℤ x) +ℤ_) (inv (right-negative-law-mul-ℤ z y))) ∙
   ( inv (left-distributive-mul-add-ℤ z x (neg-ℤ y)))
 
 linear-diff-right-mul-ℤ :
-  (x y z : ℤ) → diff-ℤ (x *ℤ z) (y *ℤ z) ＝ (diff-ℤ x y) *ℤ z
+  (x y z : ℤ) → (x *ℤ z) -ℤ (y *ℤ z) ＝ (x -ℤ y) *ℤ z
 linear-diff-right-mul-ℤ x y z =
   ( ap ((x *ℤ z) +ℤ_) (inv (left-negative-law-mul-ℤ y z))) ∙
   ( inv (right-distributive-mul-add-ℤ x (neg-ℤ y) z))
@@ -446,10 +447,10 @@ is-injective-left-mul-ℤ x f {y} {z} p =
   eq-diff-ℤ
     ( map-left-unit-law-coprod-is-empty
       ( is-zero-ℤ x)
-      ( is-zero-ℤ (diff-ℤ y z))
+      ( is-zero-ℤ (y -ℤ z))
       ( f)
       ( is-zero-is-zero-mul-ℤ x
-        ( diff-ℤ y z)
+        ( y -ℤ z)
         ( inv (linear-diff-left-mul-ℤ x y z) ∙ is-zero-diff-ℤ p)))
 
 is-injective-right-mul-ℤ :

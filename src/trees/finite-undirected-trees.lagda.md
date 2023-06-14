@@ -10,8 +10,9 @@ module trees.finite-undirected-trees where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-propositions
+open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -20,6 +21,8 @@ open import graph-theory.finite-undirected-graphs
 
 open import trees.undirected-trees
 
+open import univalent-combinatorics.decidable-dependent-function-types
+open import univalent-combinatorics.decidable-propositions
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.pi-finite-types
 open import univalent-combinatorics.symmetric-operations
@@ -29,7 +32,8 @@ open import univalent-combinatorics.symmetric-operations
 
 ## Idea
 
-A **finite undirected tree** is a finite undirected graph such that between any two nodes there is a unique trail.
+A **finite undirected tree** is a finite undirected graph such that between any
+two nodes there is a unique trail.
 
 ## Definitions
 
@@ -54,7 +58,8 @@ module _
 
 ```agda
 Undirected-Tree-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Undirected-Tree-𝔽 l1 l2 = Σ (Undirected-Graph-𝔽 l1 l2) is-tree-Undirected-Graph-𝔽
+Undirected-Tree-𝔽 l1 l2 =
+  Σ (Undirected-Graph-𝔽 l1 l2) is-tree-Undirected-Graph-𝔽
 ```
 
 ### Finite trees of cardinality `n`
@@ -117,17 +122,36 @@ module _
     (p : unordered-pair-nodes-Undirected-Tree-Of-Size) →
     is-finite (edge-Undirected-Tree-Of-Size p)
   is-finite-edge-Undirected-Tree-Of-Size p =
-    is-finite-type-Decidable-Prop ?
+    is-finite-type-Decidable-Prop
+      ( edge-decidable-prop-Undirected-Tree-Of-Size p)
 ```
 
 ## Properties
 
+### The predicate of being a tree on finite undirected graphs is decidable
+
+```agda
+module _
+  {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2)
+  where
+
+  is-decidable-is-tree-Undirected-Graph-𝔽 :
+    is-decidable (is-tree-Undirected-Graph-𝔽 G)
+  is-decidable-is-tree-Undirected-Graph-𝔽 =
+    is-decidable-Π-is-finite
+      ( is-finite-vertex-Undirected-Graph-𝔽 G)
+      ( λ x →
+        is-decidable-Π-is-finite
+          ( is-finite-vertex-Undirected-Graph-𝔽 G)
+          ( λ y → {!!}))
+```
+
 ### The type of finite undirected trees of cardinality `n` is π-finite
 
 ```agda
-is-π-finite-Undirected-Tree-of-cardinality :
+is-π-finite-Undirected-Tree-Of-Size :
   (k n : ℕ) → is-π-finite k (Undirected-Tree-Of-Size lzero lzero n)
-is-π-finite-Undirected-Tree-of-cardinality k n =
+is-π-finite-Undirected-Tree-Of-Size k n =
   is-π-finite-Σ k
     ( is-π-finite-UU-Fin (succ-ℕ k) n)
     ( λ (X , H) →
@@ -138,5 +162,5 @@ is-π-finite-Undirected-Tree-of-cardinality k n =
             ( is-finite-has-cardinality n H)
             ( is-finite-Decidable-Prop)))
         ( λ E →
-          {!!}))
+          is-π-finite-is-finite k {!!}))
 ```

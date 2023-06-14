@@ -7,18 +7,22 @@ module synthetic-homotopy-theory.universal-property-circle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
+open import foundation.constant-type-families
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sections
+open import foundation.transport
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.free-loops
@@ -36,7 +40,8 @@ module _
   where
 
   ev-free-loop : (X → Y) → free-loop Y
-  ev-free-loop f = pair (f (base-free-loop α)) (ap f (loop-free-loop α))
+  pr1 (ev-free-loop f) = f (base-free-loop α)
+  pr2 (ev-free-loop f) = ap f (loop-free-loop α)
 ```
 
 ### The universal property of the circle
@@ -119,7 +124,7 @@ module _
     ( free-dependent-loop α (λ x → Id (f x) (g x)))
   pr1 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) = p
   pr2 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) =
-    map-compute-path-over-eq-value f g (loop-free-loop α) p p q
+    map-compute-dependent-identification-eq-value f g (loop-free-loop α) p p q
 
   isretr-ind-circle :
     ( ind-circle : {l : Level} → induction-principle-circle l α)
@@ -209,7 +214,8 @@ module _
       ( map-compute-free-dependent-loop-const α Y
         ( ev-free-loop α Y f))
       ( ev-free-loop-Π α (λ x → Y) f)
-      ( pair refl (right-unit ∙ (inv (apd-const f (loop-free-loop α)))))
+      ( refl ,
+        right-unit ∙ (inv (apd-constant-type-family f (loop-free-loop α))))
 
 module _
   {l1 : Level} {X : UU l1} (α : free-loop X)

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.repetitions-of-values where
+
+open import foundation.repetitions-of-values public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.repetitions-of-values public
-
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.well-ordering-principle-standard-finite-types
 
@@ -109,7 +109,9 @@ repetition-of-values-is-not-injective-Fin k l f N =
 --         ( has-decidable-equality-Fin l (f x) (f y)))
 ```
 
-### We define the predicate that `f` maps two different elements to the same value
+### The predicate that `f` maps two different elements to the same value
+
+This remains to be defined.
 
 ### On the standard finite sets, `has-repetition-of-values f` is decidable
 

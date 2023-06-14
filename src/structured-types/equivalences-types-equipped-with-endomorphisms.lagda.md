@@ -7,11 +7,12 @@ module structured-types.equivalences-types-equipped-with-endomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -230,8 +231,9 @@ module _
 
   preserves-concat-equiv-eq-Endo :
     (p : Id X Y) (q : Id Y Z) →
-    Id ( equiv-eq-Endo X Z (p ∙ q))
-       ( comp-equiv-Endo X Y Z (equiv-eq-Endo Y Z q) (equiv-eq-Endo X Y p))
+    Id
+      ( equiv-eq-Endo X Z (p ∙ q))
+      ( comp-equiv-Endo X Y Z (equiv-eq-Endo Y Z q) (equiv-eq-Endo X Y p))
   preserves-concat-equiv-eq-Endo refl q =
     inv (right-unit-law-comp-equiv-Endo X Z (equiv-eq-Endo X Z q))
 ```

@@ -7,21 +7,21 @@ module foundation.uniqueness-image where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.images
 open import foundation.slice
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -64,8 +64,9 @@ module _
                 ( map-emb i')
                 ( map-hom-slice (map-emb i) (map-emb i') h)
                 ( triangle-hom-slice (map-emb i) (map-emb i') h)
-                ( pair ( map-inv-is-equiv is-equiv-h)
-                       ( issec-map-inv-is-equiv is-equiv-h)))))
+                ( pair
+                  ( map-inv-is-equiv is-equiv-h)
+                  ( issec-map-inv-is-equiv is-equiv-h)))))
 
   abstract
     is-image-is-equiv-is-image :

@@ -9,13 +9,14 @@ module graph-theory.walks-directed-graphs where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -23,6 +24,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.raising-universe-levels
+open import foundation.transport
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

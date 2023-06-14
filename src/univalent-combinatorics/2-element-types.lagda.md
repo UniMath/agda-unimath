@@ -1,4 +1,4 @@
-# 2-element types
+# `2`-element types
 
 ```agda
 module univalent-combinatorics.2-element-types where
@@ -10,6 +10,7 @@ module univalent-combinatorics.2-element-types where
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.connected-components-universes
 open import foundation.contractible-maps
@@ -21,7 +22,7 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -36,6 +37,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -838,13 +840,15 @@ module _
 
 ### A map between 2-element types is an equivalence if and only if its image is the full subtype of the codomain
 
-```agda
-
-```
+This remains to be shown.
 
 ### A map between 2-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
 
+This remains to be shown.
+
 ### Any map between 2-element types that is not an equivalence is constant
+
+This remains to be shown.
 
 ```agda
 {-
@@ -858,6 +862,8 @@ module _
 ```
 
 ### Any map between 2-element types is either an equivalence or it is constant
+
+This remains to be shown.
 
 ### Coinhabited 2-element types are equivalent
 

@@ -2,20 +2,21 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module foundation.universal-property-set-quotients where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.epimorphisms-with-respect-to-sets
 open import foundation.equivalence-classes
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.locally-small-types
@@ -24,19 +25,19 @@ open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.universal-property-image
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
@@ -44,7 +45,6 @@ open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
 open import foundation-core.univalence
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -292,9 +292,10 @@ module _
   emb-is-surjective-and-effective :
     (H : is-surjective-and-effective R q) →
     type-Set B ↪ (A → Prop l2)
-  emb-is-surjective-and-effective H =
-    pair ( map-emb-is-surjective-and-effective H)
-         ( is-emb-map-emb-is-surjective-and-effective H)
+  pr1 (emb-is-surjective-and-effective H) =
+    map-emb-is-surjective-and-effective H
+  pr2 (emb-is-surjective-and-effective H) =
+    is-emb-map-emb-is-surjective-and-effective H
 
   is-emb-large-map-emb-is-surjective-and-effective :
     (e : is-surjective-and-effective R q) →
@@ -319,12 +320,13 @@ module _
 
   large-emb-is-surjective-and-effective :
     is-surjective-and-effective R q → type-Set B ↪ (A → Prop l3)
-  large-emb-is-surjective-and-effective e =
-    pair ( large-map-emb-is-surjective-and-effective e)
-         ( is-emb-large-map-emb-is-surjective-and-effective e)
+  pr1 (large-emb-is-surjective-and-effective e) =
+    large-map-emb-is-surjective-and-effective e
+  pr2 (large-emb-is-surjective-and-effective e) =
+    is-emb-large-map-emb-is-surjective-and-effective e
 
   is-image-is-surjective-and-effective :
-    (H : is-surjective-and-effective R q) →
+    ( H : is-surjective-and-effective R q) →
     ( {l : Level} →
       is-image l
         ( prop-Eq-Rel R)
@@ -350,15 +352,16 @@ module _
     ({l : Level} → is-set-quotient l R B q) →
     is-surjective (map-reflecting-map-Eq-Rel R q)
   is-surjective-is-set-quotient q Q b =
-    tr ( λ y → type-trunc-Prop (fib (map-reflecting-map-Eq-Rel R q) y))
-       ( htpy-eq
-         ( ap pr1
-           ( eq-is-contr
-             ( universal-property-set-quotient-is-set-quotient R B q Q B q)
-             { pair (inclusion-im (map-reflecting-map-Eq-Rel R q) ∘ β) δ}
-             { pair id refl-htpy}))
-         ( b))
-       ( pr2 (β b))
+    tr
+      ( λ y → type-trunc-Prop (fib (map-reflecting-map-Eq-Rel R q) y))
+      ( htpy-eq
+        ( ap pr1
+          ( eq-is-contr
+            ( universal-property-set-quotient-is-set-quotient R B q Q B q)
+            { pair (inclusion-im (map-reflecting-map-Eq-Rel R q) ∘ β) δ}
+            { pair id refl-htpy}))
+        ( b))
+      ( pr2 (β b))
     where
     α : reflects-Eq-Rel R (map-unit-im (map-reflecting-map-Eq-Rel R q))
     α {x} {y} r =
@@ -381,15 +384,17 @@ module _
     γ :
       ( β ∘ (map-reflecting-map-Eq-Rel R q)) ~
       ( map-unit-im (map-reflecting-map-Eq-Rel R q))
-    γ = htpy-eq
-        ( ap pr1
-             ( issec-map-inv-is-equiv
-               ( Q ( pair
-                     ( im (map-reflecting-map-Eq-Rel R q))
-                     ( is-set-im
-                       ( map-reflecting-map-Eq-Rel R q)
-                       ( is-set-type-Set B))))
-               ( pair (map-unit-im (map-reflecting-map-Eq-Rel R q)) α)))
+    γ =
+      htpy-eq
+        ( ap
+            ( pr1)
+            ( issec-map-inv-is-equiv
+              ( Q ( pair
+                    ( im (map-reflecting-map-Eq-Rel R q))
+                    ( is-set-im
+                      ( map-reflecting-map-Eq-Rel R q)
+                      ( is-set-type-Set B))))
+              ( pair (map-unit-im (map-reflecting-map-Eq-Rel R q)) α)))
     δ :
       ( ( inclusion-im (map-reflecting-map-Eq-Rel R q) ∘ β) ∘
         ( map-reflecting-map-Eq-Rel R q)) ~
@@ -662,9 +667,10 @@ module _
 
   is-injective-map-universal-property-set-quotient-is-set-quotient :
     {l4 : Level} (B : Set l4) (f : reflecting-map-Eq-Rel R (type-Set B))
-    ( H : (x y : A) →
-          map-reflecting-map-Eq-Rel R f x ＝ map-reflecting-map-Eq-Rel R f y →
-          sim-Eq-Rel R x y) →
+    ( H :
+      (x y : A) →
+      map-reflecting-map-Eq-Rel R f x ＝ map-reflecting-map-Eq-Rel R f y →
+      sim-Eq-Rel R x y) →
     is-injective
       ( map-universal-property-set-quotient-is-set-quotient R Q q U B f)
   is-injective-map-universal-property-set-quotient-is-set-quotient

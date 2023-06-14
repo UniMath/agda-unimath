@@ -7,6 +7,7 @@ module group-theory.homomorphisms-generated-subgroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
@@ -26,10 +27,12 @@ open import foundation.universe-levels
 
 open import group-theory.epimorphisms-groups
 open import group-theory.full-subgroups
+open import group-theory.generating-sets-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.subsets-groups
 
 open import lists.lists
 
@@ -306,7 +309,7 @@ module _
 
 module _
   {l1 l2 l3 : Level}
-  (G : Group l1) (S : subset-Group l2 G) (H : is-generating-subset-Group G S)
+  (G : Group l1) (S : subset-Group l2 G) (H : is-generating-set-Group G S)
   (G' : Group l3)
   where
 

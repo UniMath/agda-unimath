@@ -7,11 +7,12 @@ module foundation.pullback-squares where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.cones-over-cospans
-open import foundation-core.dependent-pair-types
 open import foundation-core.universal-property-pullbacks
-open import foundation-core.universe-levels
 ```
 
 </details>

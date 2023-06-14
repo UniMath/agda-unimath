@@ -61,25 +61,30 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
-      - name: Install mdbook-pagetoc
-        uses: baptiste0928/cargo-install@v1
-        with:
-          crate: mdbook-pagetoc
-
-      - name: Install mdbook-katex
-        uses: baptiste0928/cargo-install@v1
-        with:
-          crate: mdbook-katex
-
-      - name: Install mdbook-linkcheck
-        uses: baptiste0928/cargo-install@v1
-        with:
-          crate: mdbook-linkcheck
-
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: "latest"
+
+      - name: Install mdbook-pagetoc
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-pagetoc
+
+      - name: Install mdbook-katex
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-katex
+
+      - name: Install mdbook-linkcheck
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-linkcheck
+
+      - name: Install mdbook-catppuccin
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-catppuccin
 
       - uses: actions/setup-python@v4
         with:

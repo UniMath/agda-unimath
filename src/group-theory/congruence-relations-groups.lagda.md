@@ -7,6 +7,7 @@ module group-theory.congruence-relations-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.contractible-types

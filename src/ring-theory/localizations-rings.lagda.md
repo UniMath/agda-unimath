@@ -7,6 +7,7 @@ module ring-theory.localizations-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -56,19 +57,21 @@ inv-inverts-element-hom-Ring R S x f H = pr1 H
 is-left-inverse-inv-inverts-element-hom-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (x : type-Ring R)
   (f : type-hom-Ring R S) (H : inverts-element-hom-Ring R S x f) →
-  Id ( mul-Ring S
-       ( inv-inverts-element-hom-Ring R S x f H)
-       ( map-hom-Ring R S f x))
-     ( one-Ring S)
+  Id
+    ( mul-Ring S
+      ( inv-inverts-element-hom-Ring R S x f H)
+      ( map-hom-Ring R S f x))
+    ( one-Ring S)
 is-left-inverse-inv-inverts-element-hom-Ring R S x f H = pr1 (pr2 H)
 
 is-right-inverse-inv-inverts-element-hom-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (x : type-Ring R)
   (f : type-hom-Ring R S) (H : inverts-element-hom-Ring R S x f) →
-  Id ( mul-Ring S
-       ( map-hom-Ring R S f x)
-       ( inv-inverts-element-hom-Ring R S x f H))
-     ( one-Ring S)
+  Id
+    ( mul-Ring S
+      ( map-hom-Ring R S f x)
+      ( inv-inverts-element-hom-Ring R S x f H))
+    ( one-Ring S)
 is-right-inverse-inv-inverts-element-hom-Ring R S x f H = pr2 (pr2 H)
 ```
 
@@ -126,8 +129,8 @@ unique-extension-universal-property-localization-Ring :
   universal-property-localization-Ring l3 R S x f H →
   (h : type-hom-Ring R T) (K : inverts-element-hom-Ring R T x h) →
   is-contr
-    (Σ ( type-hom-Ring S T)
-       ( λ g → htpy-hom-Ring R T (comp-hom-Ring R S T g f) h))
+    ( Σ ( type-hom-Ring S T)
+        ( λ g → htpy-hom-Ring R T (comp-hom-Ring R S T g f) h))
 unique-extension-universal-property-localization-Ring R S T x f H up-f h K =
   is-contr-equiv'
     ( fib (precomp-universal-property-localization-Ring R S T x f H) (pair h K))

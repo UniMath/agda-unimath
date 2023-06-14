@@ -2,15 +2,14 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module group-theory.quotients-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations

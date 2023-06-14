@@ -12,6 +12,8 @@ open import commutative-algebra.commutative-semirings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
@@ -309,6 +311,21 @@ module _
   right-distributive-mul-add-Commutative-Ring =
     right-distributive-mul-add-Ring ring-Commutative-Ring
 
+  bidistributive-mul-add-Commutative-Ring :
+    (u v x y : type-Commutative-Ring) →
+    mul-Commutative-Ring
+      ( add-Commutative-Ring u v)
+      ( add-Commutative-Ring x y) ＝
+    add-Commutative-Ring
+      ( add-Commutative-Ring
+        ( mul-Commutative-Ring u x)
+        ( mul-Commutative-Ring u y))
+      ( add-Commutative-Ring
+        ( mul-Commutative-Ring v x)
+        ( mul-Commutative-Ring v y))
+  bidistributive-mul-add-Commutative-Ring =
+    bidistributive-mul-add-Ring ring-Commutative-Ring
+
   commutative-mul-Commutative-Ring :
     (x y : type-Commutative-Ring) →
     mul-Commutative-Ring x y ＝ mul-Commutative-Ring y x
@@ -541,10 +558,11 @@ module _
 
   preserves-concat-add-list-Commutative-Ring :
     (l1 l2 : list type-Commutative-Ring) →
-    Id ( add-list-Commutative-Ring (concat-list l1 l2))
-       ( add-Commutative-Ring
-         ( add-list-Commutative-Ring l1)
-         ( add-list-Commutative-Ring l2))
+    Id
+      ( add-list-Commutative-Ring (concat-list l1 l2))
+      ( add-Commutative-Ring
+        ( add-list-Commutative-Ring l1)
+        ( add-list-Commutative-Ring l2))
   preserves-concat-add-list-Commutative-Ring =
     preserves-concat-add-list-Ring ring-Commutative-Ring
 ```

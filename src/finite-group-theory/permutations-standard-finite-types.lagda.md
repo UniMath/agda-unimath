@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module finite-group-theory.permutations-standard-finite-types where
 ```
 
@@ -15,7 +13,9 @@ open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
+open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
@@ -24,9 +24,11 @@ open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.equivalences-maybe
-open import foundation.functions
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
@@ -212,10 +214,11 @@ abstract
           neq-inr-inl
             ( is-injective-map-equiv f (p ∙ (r ∙ inv q))))
     lemma :
-      Id ( map-equiv
-           ( pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F'))
-           ( inl y))
-         ( inl z)
+      Id
+        ( map-equiv
+          ( pr1 (map-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) F'))
+          ( inl y))
+        ( inl z)
     lemma =
       ( ap
         ( λ e → map-equiv (pr1 (map-equiv e P)) (inl y))
@@ -437,4 +440,69 @@ abstract
   retr-permutation-list-transpositions-Fin (succ-ℕ n) f y =
     retr-permutation-list-transpositions-Fin'
       n f (map-equiv f (inr star)) refl y (map-equiv f y) refl
+```
+
+```agda
+permutation-list-standard-transpositions-Fin :
+  (n : ℕ) →
+  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j))) →
+  Permutation n
+permutation-list-standard-transpositions-Fin n =
+  fold-list
+    ( id-equiv)
+    ( λ (_ , neq) p →
+      standard-transposition (has-decidable-equality-Fin n) neq ∘e p)
+
+list-standard-transpositions-permutation-Fin :
+  (n : ℕ) (f : Permutation n) →
+  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j)))
+list-standard-transpositions-permutation-Fin n f =
+  map-list
+    ( λ P →
+      ( element-two-elements-transposition-Fin P ,
+        other-element-two-elements-transposition-Fin P) ,
+      neq-elements-two-elements-transposition-Fin P)
+    ( list-transpositions-permutation-Fin n f)
+
+private
+  htpy-permutation-list :
+    (n : ℕ)
+    (l : list
+      (2-Element-Decidable-Subtype lzero (Fin (succ-ℕ n)))) →
+    htpy-equiv
+      ( permutation-list-standard-transpositions-Fin
+        ( succ-ℕ n)
+        ( map-list
+          ( λ P →
+            ( element-two-elements-transposition-Fin P ,
+              other-element-two-elements-transposition-Fin P) ,
+            neq-elements-two-elements-transposition-Fin P)
+          ( l)))
+      ( permutation-list-transpositions l)
+  htpy-permutation-list n nil = refl-htpy
+  htpy-permutation-list n (cons P l) =
+    ( htpy-two-elements-transpositon-Fin P ·r
+      map-equiv
+        ( permutation-list-standard-transpositions-Fin
+          ( succ-ℕ n)
+          ( map-list
+            ( λ P →
+              ( element-two-elements-transposition-Fin P ,
+                other-element-two-elements-transposition-Fin P) ,
+              neq-elements-two-elements-transposition-Fin P)
+            ( l)))) ∙h
+    ( map-transposition P ·l
+      htpy-permutation-list n l)
+
+retr-permutation-list-standard-transpositions-Fin :
+  (n : ℕ) (f : Permutation n) →
+  htpy-equiv
+    ( permutation-list-standard-transpositions-Fin
+      ( n)
+      ( list-standard-transpositions-permutation-Fin n f))
+    ( f)
+retr-permutation-list-standard-transpositions-Fin 0 f ()
+retr-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
+  htpy-permutation-list n (list-transpositions-permutation-Fin (succ-ℕ n) f) ∙h
+  retr-permutation-list-transpositions-Fin (succ-ℕ n) f
 ```

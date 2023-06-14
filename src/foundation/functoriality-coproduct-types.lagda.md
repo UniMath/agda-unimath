@@ -7,7 +7,10 @@ module foundation.functoriality-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
@@ -19,21 +22,20 @@ open import foundation.structure-identity-principle
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -243,7 +245,7 @@ module _
         ( λ {(a , p) → unit-trunc-Prop (inr a , ap inr p)})
 ```
 
-### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`.
+### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`
 
 ```agda
 is-contr-fib-map-coprod :
@@ -466,10 +468,10 @@ module _
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
     is-equiv-has-inverse
-      (tr is-left (isretr-map-inv-equiv e u) ∘
-       left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
-      (λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
-      (λ _ → eq-is-prop (is-prop-is-left u))
+      ( tr is-left (isretr-map-inv-equiv e u) ∘
+        left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
+      ( λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
+      ( λ _ → eq-is-prop (is-prop-is-left u))
 
   equiv-right-to-right :
     (e : (P + Q) ≃ (P' + Q')) (u : P + Q) →
@@ -477,8 +479,8 @@ module _
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
     is-equiv-has-inverse
-      (tr is-right (isretr-map-inv-equiv e u) ∘
-       right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
+      ( tr is-right (isretr-map-inv-equiv e u) ∘
+        right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
       (λ _ → eq-is-prop (is-prop-is-right u))
 

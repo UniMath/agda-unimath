@@ -10,11 +10,11 @@ module category-theory.exponential-objects-precategories where
 open import category-theory.precategories
 open import category-theory.products-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.unique-existence
 open import foundation.universe-levels
-
-open import foundation-core.identity-types
 ```
 
 </details>
@@ -47,11 +47,12 @@ module _
   is-exponential-Precategory x y e ev =
     (z : obj-Precategory C)
     (f : type-hom-Precategory C (object-product-Precategory C p z x) y) →
-    ∃! ( type-hom-Precategory C z e)
-       ( λ g →
-         comp-hom-Precategory C ev
-           ( map-product-Precategory C p g (id-hom-Precategory C)) ＝
-           ( f))
+    ∃!
+      ( type-hom-Precategory C z e)
+      ( λ g →
+        comp-hom-Precategory C ev
+          ( map-product-Precategory C p g (id-hom-Precategory C)) ＝
+          ( f))
 
   exponential-Precategory :
     obj-Precategory C → obj-Precategory C → UU (l1 ⊔ l2)

@@ -1,4 +1,4 @@
-# Powers of Two
+# Powers of two
 
 ```agda
 module elementary-number-theory.powers-of-two where
@@ -16,16 +16,18 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.strong-induction-natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.function-types
 open import foundation.split-surjective-maps
+open import foundation.transport
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 ```
@@ -76,21 +78,25 @@ has-pair-expansion-is-even-or-odd n =
 
               s : (pair-expansion (pr1 e))
               s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
-           in pair
-             ( (succ-ℕ (pr1 (pr1 s))) , pr2 (pr1 s))
-             ( ( ap (λ a → a *ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
-               ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
-             ( ( associative-mul-ℕ 2 (exp-ℕ 2 (pr1 (pr1 s)))
-               ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
-             ( ( ap (λ a → 2 *ℕ a) (pr2 s)) ∙
-             ( ( ap succ-ℕ
-               ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
-             ( ( ap (succ-ℕ ∘ succ-ℕ)
-               ( ap (λ a → a +ℕ (pr1 e))
-                 ( left-unit-law-add-ℕ (pr1 e)))) ∙
-             ( ( ap (succ-ℕ ∘ succ-ℕ)
-               ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
-             ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))}))
+          in
+            pair
+              ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
+              ( ( ap
+                  ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
+                  ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
+                ( ( associative-mul-ℕ 2
+                    ( exp-ℕ 2 (pr1 (pr1 s)))
+                    ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
+                  ( ( ap (2 *ℕ_) (pr2 s)) ∙
+                    ( ( ap succ-ℕ
+                        ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
+                      ( ( ap
+                          ( succ-ℕ ∘ succ-ℕ)
+                          ( ap (_+ℕ (pr1 e)) (left-unit-law-add-ℕ (pr1 e)))) ∙
+                        ( ( ap
+                            ( succ-ℕ ∘ succ-ℕ)
+                            ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
+                            ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))}))
   ( n)
 
 has-pair-expansion : (n : ℕ) → pair-expansion n
@@ -164,17 +170,17 @@ pairing-map (u , v) = pr1 p
 is-split-surjective-pairing-map : is-split-surjective pairing-map
 is-split-surjective-pairing-map n = (u , v) , is-injective-succ-ℕ (q ∙ s)
   where
-   u = pr1 (pr1 (has-pair-expansion n))
-   v = pr2 (pr1 (has-pair-expansion n))
+    u = pr1 (pr1 (has-pair-expansion n))
+    v = pr2 (pr1 (has-pair-expansion n))
 
-   s = pr2 (has-pair-expansion n)
+    s = pr2 (has-pair-expansion n)
 
-   r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
+    r = is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
 
-   q :
-     ( succ-ℕ (pairing-map (u , v))) ＝
-     ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
-   q = inv (pr2 r)
+    q :
+      ( succ-ℕ (pairing-map (u , v))) ＝
+      ( (exp-ℕ 2 u) *ℕ (succ-ℕ (v *ℕ 2)))
+    q = inv (pr2 r)
 ```
 
 ### Pairing function is injective

@@ -20,9 +20,13 @@ open import group-theory.powers-of-elements-commutative-monoids
 
 ## Idea
 
-A **rational commutative monoid** is a [commutative monoid](group-theory.commutative-monoids.md) `(M,0,+)` in which the map `x ↦ nx` is invertible for every natural number `n`.
+A **rational commutative monoid** is a
+[commutative monoid](group-theory.commutative-monoids.md) `(M,0,+)` in which the
+map `x ↦ nx` is invertible for every natural number `n`.
 
-Note: since we usually write commutative monoids multiplicatively, the condition that a commutative monoid is rational is that the map `x ↦ xⁿ` is invertible for every natural number `n`.
+Note: since we usually write commutative monoids multiplicatively, the condition
+that a commutative monoid is rational is that the map `x ↦ xⁿ` is invertible for
+every natural number `n`.
 
 ## Definition
 

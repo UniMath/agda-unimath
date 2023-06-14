@@ -1,4 +1,4 @@
-# 2-element subtypes
+# `2`-element subtypes
 
 ```agda
 module univalent-combinatorics.2-element-subtypes where
@@ -13,7 +13,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -24,6 +24,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels

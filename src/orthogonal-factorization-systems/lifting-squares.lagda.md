@@ -11,7 +11,7 @@ open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.universe-levels
 
@@ -23,7 +23,7 @@ open import orthogonal-factorization-systems.lifts-of-maps
 
 ## Idea
 
-A _lifting square_ is a commuting square
+A **lifting square** is a commuting square
 
 ```text
        h
@@ -170,6 +170,9 @@ module _
                 ( is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
 ```
+
+It remans to show that `coherence-htpy-lifting-square` indeed is a
+characterization of identifications of lifting squares.
 
 ### Diagonal maps give lifting squares
 

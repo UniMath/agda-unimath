@@ -2,6 +2,7 @@
 
 ```agda
 {-# OPTIONS --no-exact-split #-}
+
 module reflection.precategory-solver where
 ```
 
@@ -10,8 +11,9 @@ module reflection.precategory-solver where
 ```agda
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -206,17 +208,17 @@ build-Precategory-Expr
           nil)) =
   con (quote id-hom-Precategory-Expr) nil
 build-Precategory-Expr
-   ( apply-pr1
-     ( visible-Arg
-       ( apply-pr1
-         ( visible-Arg
-           ( apply-pr2
-             ( visible-Arg
-               ( apply-pr2
-                 (visible-Arg C ∷ nil)) ∷ nil))
-              ∷ nil)) ∷
-       hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
-       visible-Arg g ∷ visible-Arg f ∷ nil)) =
+  ( apply-pr1
+    ( visible-Arg
+      ( apply-pr1
+        ( visible-Arg
+          ( apply-pr2
+            ( visible-Arg
+              ( apply-pr2
+                (visible-Arg C ∷ nil)) ∷ nil))
+            ∷ nil)) ∷
+      hidden-Arg x ∷ hidden-Arg y ∷ hidden-Arg z ∷
+      visible-Arg g ∷ visible-Arg f ∷ nil)) =
   con
     ( quote comp-hom-Precategory-Expr)
     ( visible-Arg (build-Precategory-Expr g) ∷

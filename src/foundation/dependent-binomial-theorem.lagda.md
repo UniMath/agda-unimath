@@ -1,4 +1,4 @@
-# The dependent binomial theorem for types (Distributivity of dependent function types over coproduct types)
+# The dependent binomial theorem for types (distributivity of dependent function types over coproduct types)
 
 ```agda
 module foundation.dependent-binomial-theorem where
@@ -7,25 +7,27 @@ module foundation.dependent-binomial-theorem where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-decompositions
+open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.transport
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-coproduct-types
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.univalence
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types

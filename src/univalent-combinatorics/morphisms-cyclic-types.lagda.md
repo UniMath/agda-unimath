@@ -21,7 +21,11 @@ open import univalent-combinatorics.cyclic-types
 
 ## Idea
 
-A **morphism of [cyclic types](univalent-combinatorics.cyclic-types.md)** from a cyclic type `(X,f)` of order `n` to a cyclic type `(Y,g)` of order `m` consists of a map `h : X → Y` and a map `d : X → ℕ` where the value `d x : ℕ` is the number of times `h` winds around the cyclic type `(Y,g)` before stepping from the value `h x` to the value `h (f x)`.
+A **morphism of [cyclic types](univalent-combinatorics.cyclic-types.md)** from a
+cyclic type `(X,f)` of order `n` to a cyclic type `(Y,g)` of order `m` consists
+of a map `h : X → Y` and a map `d : X → ℕ` where the value `d x : ℕ` is the
+number of times `h` winds around the cyclic type `(Y,g)` before stepping from
+the value `h x` to the value `h (f x)`.
 
 ## Definitions
 

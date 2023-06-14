@@ -8,6 +8,8 @@
     "fredrikbakke.agda-syntax",
     "github.vscode-pull-request-github",
     "ms-python.python",
-    "ms-python.vscode-pylance"
+    "ms-python.vscode-pylance",
+    "oderwat.indent-rainbow",
+    "brunnerh.insert-unicode"
   ]
 }

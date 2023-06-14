@@ -10,6 +10,7 @@ module commutative-algebra.powers-of-elements-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 
@@ -37,7 +38,7 @@ power-Commutative-Ring A = power-Ring (ring-Commutative-Ring A)
 
 ## Properties
 
-### `xⁿ⁺¹ = xⁿx`
+### `xⁿ⁺¹ = xⁿx` and `xⁿ⁺¹ ＝ xxⁿ`
 
 ```agda
 module _
@@ -50,6 +51,13 @@ module _
     mul-Commutative-Ring A (power-Commutative-Ring A n x) x
   power-succ-Commutative-Ring =
     power-succ-Ring (ring-Commutative-Ring A)
+
+  power-succ-Commutative-Ring' :
+    (n : ℕ) (x : type-Commutative-Ring A) →
+    power-Commutative-Ring A (succ-ℕ n) x ＝
+    mul-Commutative-Ring A x (power-Commutative-Ring A n x)
+  power-succ-Commutative-Ring' =
+    power-succ-Ring' (ring-Commutative-Ring A)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -66,6 +74,21 @@ module _
       ( power-Commutative-Ring A m x)
       ( power-Commutative-Ring A n x)
   power-add-Commutative-Ring = power-add-Ring (ring-Commutative-Ring A)
+```
+
+### Powers by products of natural numbers are iterated powers
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  power-mul-Commutative-Ring :
+    (m n : ℕ) {x : type-Commutative-Ring A} →
+    power-Commutative-Ring A (m *ℕ n) x ＝
+    power-Commutative-Ring A n (power-Commutative-Ring A m x)
+  power-mul-Commutative-Ring =
+    power-mul-Ring (ring-Commutative-Ring A)
 ```
 
 ### Powers distribute over multiplication

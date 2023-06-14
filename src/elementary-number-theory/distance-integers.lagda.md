@@ -13,6 +13,8 @@ open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
 ```
@@ -27,7 +29,7 @@ The distance function between integers measures how far two integers are apart.
 
 ```agda
 dist-ℤ : ℤ → ℤ → ℕ
-dist-ℤ x y = abs-ℤ (diff-ℤ x y)
+dist-ℤ x y = abs-ℤ (x -ℤ y)
 
 ap-dist-ℤ :
   {x x' y y' : ℤ} → x ＝ x' → y ＝ y' → dist-ℤ x y ＝ dist-ℤ x' y'

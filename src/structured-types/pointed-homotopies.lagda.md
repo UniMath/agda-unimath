@@ -7,6 +7,8 @@ module structured-types.pointed-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -43,8 +45,9 @@ module _
     pointed-Π A
       ( pair
         ( λ x →
-          Id ( function-pointed-Π A B f x)
-             ( function-pointed-Π A B g x))
+          Id
+            ( function-pointed-Π A B f x)
+            ( function-pointed-Π A B g x))
         ( ( preserves-point-function-pointed-Π A B f) ∙
           ( inv (preserves-point-function-pointed-Π A B g))))
 

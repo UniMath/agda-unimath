@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module finite-group-theory.delooping-sign-homomorphism where
 ```
 
@@ -20,6 +18,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -34,7 +33,7 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
@@ -48,6 +47,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
@@ -57,6 +57,7 @@ open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
+open import group-theory.generating-sets-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-concrete-groups
 open import group-theory.homomorphisms-generated-subgroups
@@ -64,7 +65,6 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.isomorphisms-groups
 open import group-theory.loop-groups-sets
-open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.symmetric-groups
 
 open import synthetic-homotopy-theory.loop-spaces
@@ -313,15 +313,11 @@ module _
           ( is-trunc-Id
             ( is-prop-type-trunc-Prop _
               ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))))) ∙
-        ( inv
-          ( compute-eq-pair-Σ
-            ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( p)
-            ( q)
-            ( eq-is-prop is-prop-type-trunc-Prop)
-            ( eq-is-prop is-prop-type-trunc-Prop))))) ∙
+        ( interchange-concat-eq-pair-Σ
+          ( p)
+          ( q)
+          ( eq-is-prop is-prop-type-trunc-Prop)
+          ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
       ( ap-concat
         ( equivalence-class ∘ R (n +ℕ 2))
         ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop))
@@ -475,7 +471,7 @@ module _
     type-Group (symmetric-Group (quotient-set-Fin (n +ℕ 2)))
   cases-map-quotient-aut-Fin n h (inl D) = id-equiv
   cases-map-quotient-aut-Fin n h (inr ND) =
-     that-thing n ∘e (equiv-succ-Fin 2 ∘e (inv-equiv (that-thing n)))
+    that-thing n ∘e (equiv-succ-Fin 2 ∘e (inv-equiv (that-thing n)))
 
   map-quotient-aut-Fin :
     (n : ℕ) →
@@ -747,7 +743,7 @@ module _
           ( is-transposition-permutation-Prop {l2 = l1})
           ( tr
             ( λ s →
-              is-generating-subset-Group
+              is-generating-set-Group
                 ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s))
                 ( is-transposition-permutation-Prop))
             ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -766,7 +762,7 @@ module _
                   ( is-transposition-permutation-Prop)
                   ( tr
                     ( λ s₁ →
-                      is-generating-subset-Group
+                      is-generating-set-Group
                         ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                         ( is-transposition-permutation-Prop))
                     ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -789,7 +785,7 @@ module _
                   ( is-transposition-permutation-Prop)
                   ( tr
                     ( λ s₁ →
-                      is-generating-subset-Group
+                      is-generating-set-Group
                         ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                         ( is-transposition-permutation-Prop))
                     ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -829,7 +825,7 @@ module _
               ( is-transposition-permutation-Prop)
               ( tr
                 ( λ s₁ →
-                  is-generating-subset-Group
+                  is-generating-set-Group
                     ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s₁))
                     ( is-transposition-permutation-Prop))
                 ( eq-is-prop (is-prop-is-set (raise l1 (Fin (n +ℕ 2)))))
@@ -1019,7 +1015,7 @@ module _
                         ( is-transposition-permutation-Prop)
                         ( tr
                           ( λ s →
-                            is-generating-subset-Group
+                            is-generating-set-Group
                               ( symmetric-Group (raise l1 (Fin (n +ℕ 2)) , s))
                               ( is-transposition-permutation-Prop))
                           ( eq-is-prop
@@ -1195,42 +1191,25 @@ module _
                     ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
                     ( eq-counting-equivalence-class-R n))))
               ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
-              ( inv
-                ( compute-eq-pair-Σ
-                  ( pr2 (Fin-UU-Fin l4 2))
-                  ( mere-equiv-D/R-fin-2
-                    ( n +ℕ 2)
-                    ( Fin-UU-Fin l1 (n +ℕ 2))
-                    ( star))
-                  ( pr2 (Fin-UU-Fin l4 2))
-                  ( inv (eq-counting-equivalence-class-R n))
-                  ( ap
-                    ( equivalence-class ∘ R (n +ℕ 2))
-                    ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
-                    ( eq-counting-equivalence-class-R n))
-                  ( eq-is-prop is-prop-type-trunc-Prop)
-                  ( _)) ∙
+              ( interchange-concat-eq-pair-Σ
+                ( inv (eq-counting-equivalence-class-R n))
+                ( ap
+                  ( equivalence-class ∘ R (n +ℕ 2))
+                  ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)) ∙
+                  ( eq-counting-equivalence-class-R n))
+                ( eq-is-prop is-prop-type-trunc-Prop)
+                ( _) ∙
                 ( ap
                   ( eq-pair-Σ
                     ( inv (eq-counting-equivalence-class-R n))
                     ( eq-is-prop is-prop-type-trunc-Prop) ∙_)
-                  ( inv
-                    ( compute-eq-pair-Σ
-                      ( mere-equiv-D/R-fin-2
-                        ( n +ℕ 2)
-                        ( Fin-UU-Fin l1 (n +ℕ 2))
-                        ( star))
-                      ( mere-equiv-D/R-fin-2
-                        ( n +ℕ 2)
-                        ( Fin-UU-Fin l1 (n +ℕ 2))
-                        ( star))
-                      ( pr2 (Fin-UU-Fin l4 2))
-                      ( ap
-                        ( equivalence-class ∘ R (n +ℕ 2))
-                        ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
-                      ( eq-counting-equivalence-class-R n)
-                      ( eq-is-prop is-prop-type-trunc-Prop)
-                      ( eq-is-prop is-prop-type-trunc-Prop)) ∙
+                  ( interchange-concat-eq-pair-Σ
+                    ( ap
+                      ( equivalence-class ∘ R (n +ℕ 2))
+                      ( eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)))
+                    ( eq-counting-equivalence-class-R n)
+                    ( eq-is-prop is-prop-type-trunc-Prop)
+                    ( eq-is-prop is-prop-type-trunc-Prop) ∙
                     ( ap
                       ( _∙
                         ( eq-pair-Σ
@@ -1251,11 +1230,7 @@ module _
                                 ( eq-is-prop is-prop-type-trunc-Prop)))}
                         ( eq-pair-Σ
                           ( inv
-                            ( ap-pair-eq-Σ
-                              ( UU-Fin l1 (n +ℕ 2))
-                              ( map-quotient-delooping-sign (n +ℕ 2))
-                              ( Fin-UU-Fin l1 (n +ℕ 2))
-                              ( Fin-UU-Fin l1 (n +ℕ 2))
+                            ( pr1-pair-eq-Σ-ap _
                               ( eq-pair-Σ p
                                 ( eq-is-prop is-prop-type-trunc-Prop))))
                           ( eq-is-prop
@@ -1283,12 +1258,7 @@ module _
                   ( eq-pair-Σ (inv (eq-counting-equivalence-class-R n)))
                   ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _))) ∙
                   ( inv
-                    ( inv-eq-pair-Σ
-                      ( mere-equiv-D/R-fin-2
-                        ( n +ℕ 2)
-                        ( Fin-UU-Fin l1 (n +ℕ 2))
-                        ( star))
-                      ( pr2 (Fin-UU-Fin l4 2))
+                    ( distributive-inv-eq-pair-Σ
                       ( eq-counting-equivalence-class-R n)
                       ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
                 ( inv

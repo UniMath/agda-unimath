@@ -29,6 +29,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -36,6 +37,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -657,22 +659,27 @@ is-distance-between-multiples-div-mod-ℕ (succ-ℕ x) y z (u , p) =
         ＝ dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
           (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
-        by ap (λ p → dist-ℤ (p *ℤ (int-ℕ (succ-ℕ x)))
-             (int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
-               (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)))
+        by
+          ap
+            ( λ p →
+              dist-ℤ
+                ( p *ℤ (int-ℕ (succ-ℕ x)))
+                ( int-ℕ (mul-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
+                  (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y)))
           (inv (add-int-ℕ (abs-ℤ a) y))
         ＝ dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (mul-ℤ (int-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
           (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))))) (int-ℕ y))
-        by ap (dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
-             (int-ℕ (succ-ℕ x))))
-          (inv (mul-int-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
-            (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
+        by
+          ap
+            ( dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x))))
+            ( inv (mul-int-ℕ (abs-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
+              (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u)))) y))
         ＝ dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ (int-ℕ (succ-ℕ x)))
           (mul-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℕ y))
-        by ap (λ p → dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
-             (int-ℕ (succ-ℕ x))) (p *ℤ (int-ℕ y)))
+          by ap (λ p → dist-ℤ (((int-ℕ (abs-ℤ a)) +ℤ (int-ℕ y)) *ℤ
+              (int-ℕ (succ-ℕ x))) (p *ℤ (int-ℕ y)))
           (int-abs-is-nonnegative-ℤ ((int-ℕ (succ-ℕ x)) +ℤ
             (neg-ℤ (int-ℤ-Mod (succ-ℕ x) u))) (int-ℤ-Mod-bounded x u))
         ＝ dist-ℤ
@@ -742,7 +749,7 @@ is-decidable-is-distance-between-multiples-ℕ x y z =
       ¬ ( div-ℤ-Mod x (mod-ℕ x y) (mod-ℕ x z))) →
     is-decidable (is-distance-between-multiples-ℕ x y z)
   decidable-div-ℤ-case-split (inl div-Mod) =
-     inl (is-distance-between-multiples-div-mod-ℕ x y z div-Mod)
+    inl (is-distance-between-multiples-div-mod-ℕ x y z div-Mod)
   decidable-div-ℤ-case-split (inr neg-div-Mod) =
     inr (λ dist → neg-div-Mod
       (div-mod-is-distance-between-multiples-ℕ x y z dist))
@@ -940,7 +947,7 @@ minimal-positive-distance-div-succ-x-eqn x y =
                   ( minimal-positive-distance (succ-ℕ x) y)
                   ( succ-ℕ x))
                 ( minimal-positive-distance (succ-ℕ x) y)))
-       ＝ int-ℕ
+      ＝ int-ℕ
             ( add-ℕ
               ( mul-ℕ
                 ( quotient-euclidean-division-ℕ
@@ -960,7 +967,7 @@ minimal-positive-distance-div-succ-x-eqn x y =
               ( remainder-euclidean-division-ℕ
                 ( minimal-positive-distance (succ-ℕ x) y)
                 ( succ-ℕ x)))
-       ＝ int-ℕ (succ-ℕ x)
+      ＝ int-ℕ (succ-ℕ x)
           by
             ap
               ( int-ℕ)
@@ -1067,7 +1074,7 @@ remainder-min-dist-succ-x-is-distance x y =
       equational-reasoning
         int-ℕ r
         ＝ add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
-             ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
+            ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
           (add-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
               ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
           (int-ℕ r))
@@ -1076,7 +1083,7 @@ remainder-min-dist-succ-x-is-distance x y =
             ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))))
             (int-ℕ r))
         ＝ add-ℤ (neg-ℤ ((int-ℕ q) *ℤ (((int-ℕ t) *ℤ (int-ℕ y)) +ℤ
-             ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
+            ((neg-ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))))))
           (((int-ℕ q) *ℤ (int-ℕ d)) +ℤ (int-ℕ r))
           by
             ap
@@ -1185,8 +1192,8 @@ remainder-min-dist-succ-x-is-distance x y =
               ( neg-neg-ℤ
                 ( ((int-ℕ q) *ℤ ((int-ℕ s))) *ℤ (int-ℕ (succ-ℕ x))))
         ＝ (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y))) +ℤ
-           ((((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))) +ℤ
-             (int-ℕ (succ-ℕ x)))
+          ((((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x))) +ℤ
+            (int-ℕ (succ-ℕ x)))
           by associative-add-ℤ
             (neg-ℤ (((int-ℕ q) *ℤ (int-ℕ t)) *ℤ (int-ℕ y)))
             (((int-ℕ q) *ℤ (int-ℕ s)) *ℤ (int-ℕ (succ-ℕ x)))

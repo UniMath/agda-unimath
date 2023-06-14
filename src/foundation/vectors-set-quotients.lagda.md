@@ -2,20 +2,19 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module foundation.vectors-set-quotients where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.identity-types public
-
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-products-set-quotients
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
 open import foundation.multivariable-operations
 open import foundation.products-equivalence-relations
@@ -25,20 +24,19 @@ open import foundation.set-quotients
 open import foundation.sets
 open import foundation.unit-type
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.universe-levels
 
 open import linear-algebra.vectors
 
@@ -178,9 +176,9 @@ equiv-set-quotient-vector (succ-ℕ n) A R =
           (all-sim-Eq-Rel n
           ( tail-functional-vec n A)
           ( λ x → R (inl x))))
-       by lemma
+      by lemma
     ≃ set-quotient (all-sim-Eq-Rel (succ-ℕ n) A R)
-       by (equiv-quotient-prod-prod-set-quotient _ _)
+      by (equiv-quotient-prod-prod-set-quotient _ _)
   where
   lemma :
     ( set-quotient (R (inr star)) ×
@@ -290,7 +288,7 @@ pr2 (issec-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
               ( all-sim-Eq-Rel n
               ( tail-functional-vec n A)
               ( λ x → R (inl x))) X f))
-           ( a0 , a)))))
+          ( a0 , a)))))
     ( eq-is-prop
       ( is-prop-reflects-Eq-Rel
         ( all-sim-Eq-Rel (succ-ℕ n) A R)
@@ -423,7 +421,7 @@ is-set-quotient-vector-set-quotient :
     ( set-quotient-vector-Set n A R)
     ( reflecting-map-quotient-vector-map n A R))
 pr1 (is-set-quotient-vector-set-quotient n A R X) =
-   issec-inv-precomp-vector-set-quotient n A R X
+  issec-inv-precomp-vector-set-quotient n A R X
 pr2 (is-set-quotient-vector-set-quotient n A R X) =
-   isretr-inv-precomp-vector-set-quotient n A R X
+  isretr-inv-precomp-vector-set-quotient n A R X
 ```

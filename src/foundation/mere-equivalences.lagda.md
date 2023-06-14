@@ -12,13 +12,13 @@ open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -94,10 +94,10 @@ module _
 
   is-trunc-mere-equiv : (k : 𝕋) → mere-equiv X Y → is-trunc k Y → is-trunc k X
   is-trunc-mere-equiv k e H =
-     apply-universal-property-trunc-Prop
-       ( e)
-       ( is-trunc-Prop k X)
-       ( λ f → is-trunc-equiv k Y f H)
+    apply-universal-property-trunc-Prop
+      ( e)
+      ( is-trunc-Prop k X)
+      ( λ f → is-trunc-equiv k Y f H)
 
   is-trunc-mere-equiv' : (k : 𝕋) → mere-equiv X Y → is-trunc k X → is-trunc k Y
   is-trunc-mere-equiv' k e H =

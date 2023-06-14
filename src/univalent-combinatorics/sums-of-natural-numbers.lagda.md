@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.sums-of-natural-numbers where
+
+open import elementary-number-theory.sums-of-natural-numbers public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.sums-of-natural-numbers public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
@@ -35,8 +35,9 @@ abstract
   associative-sum-count-ℕ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
     (count-B : (x : A) → count (B x)) (f : (x : A) → B x → ℕ) →
-    Id ( sum-count-ℕ count-A (λ x → sum-count-ℕ (count-B x) (f x)))
-       ( sum-count-ℕ (count-Σ count-A count-B) (ind-Σ f))
+    Id
+      ( sum-count-ℕ count-A (λ x → sum-count-ℕ (count-B x) (f x)))
+      ( sum-count-ℕ (count-Σ count-A count-B) (ind-Σ f))
   associative-sum-count-ℕ {l1} {l2} {A} {B} count-A count-B f =
     ( ( htpy-sum-count-ℕ count-A
         ( λ x →

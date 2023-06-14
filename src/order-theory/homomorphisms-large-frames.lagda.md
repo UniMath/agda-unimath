@@ -28,8 +28,8 @@ from `K` to `L` which preserves meets, the top element, and suprema.
 
 ```agda
 module _
-  {αK αL : Level → Level} {βK βL : Level → Level → Level}
-  (K : Large-Frame αK βK) (L : Large-Frame αL βL)
+  {αK αL : Level → Level} {βK βL : Level → Level → Level} {γ : Level}
+  (K : Large-Frame αK βK γ) (L : Large-Frame αL βL γ)
   where
 
   record

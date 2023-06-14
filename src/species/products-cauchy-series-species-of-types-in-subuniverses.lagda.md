@@ -1,4 +1,4 @@
-# Product of Cauchy series of species of types in subuniverses
+# Products of Cauchy series of species of types in subuniverses
 
 ```agda
 module species.products-cauchy-series-species-of-types-in-subuniverses where
@@ -10,7 +10,7 @@ module species.products-cauchy-series-species-of-types-in-subuniverses where
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.subuniverses
 open import foundation.universe-levels
@@ -50,7 +50,7 @@ module _
       P (subuniverse-global-subuniverse Q l4) T X)
 ```
 
-## Property
+## Properties
 
 ### Equivalent with species of types
 
@@ -66,15 +66,15 @@ module _
 
   equiv-product-cauchy-series-Σ-extension-species-subuniverse :
     ( product-cauchy-series-species-types
-       ( Σ-extension-species-subuniverse
-           ( P)
-           ( subuniverse-global-subuniverse Q l3)
-           ( S))
-       ( Σ-extension-species-subuniverse
-           ( P)
-           ( subuniverse-global-subuniverse Q l4)
-           ( T))
-       X)
+      ( Σ-extension-species-subuniverse
+          ( P)
+          ( subuniverse-global-subuniverse Q l3)
+          ( S))
+      ( Σ-extension-species-subuniverse
+          ( P)
+          ( subuniverse-global-subuniverse Q l4)
+          ( T))
+      X)
       ≃
     product-cauchy-series-species-subuniverse P Q S T X
   equiv-product-cauchy-series-Σ-extension-species-subuniverse =

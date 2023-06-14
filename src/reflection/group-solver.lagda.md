@@ -9,6 +9,7 @@ module reflection.group-solver where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.identity-types

@@ -8,23 +8,24 @@ module foundation.arithmetic-law-coproduct-and-sigma-decompositions where
 
 ```agda
 open import foundation.coproduct-decompositions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.relaxed-sigma-decompositions
 open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universal-property-coproduct-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -34,18 +35,18 @@ open import foundation-core.universe-levels
 Let `X` be a type, we have the following equivalence :
 
 ```text
- Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
-   ( binary-coproduct-Decomposition U) ≃
- Σ ( (A , B , e) : binary-coproduct-Decomposition X)
-   ( Relaxed-Σ-Decomposition A ×
-     Relaxed-Σ-Decomposition B )
+  Σ ( (U , V , e) : Relaxed-Σ-Decomposition X)
+    ( binary-coproduct-Decomposition U) ≃
+  Σ ( (A , B , e) : binary-coproduct-Decomposition X)
+    ( Relaxed-Σ-Decomposition A ×
+      Relaxed-Σ-Decomposition B )
 ```
 
 We also show a computational rule to simplify the use of this equivalence.
 
 ## Propositions
 
-### Coproduct decomposition of the indexing type of a relaxed Σ-decomposition are equivalent to relaxed Σ-decomposition of the left and right summand of a coproduct decomposition.
+### Coproduct decomposition of the indexing type of a relaxed Σ-decomposition are equivalent to relaxed Σ-decomposition of the left and right summand of a coproduct decomposition
 
 ```agda
 module _
@@ -59,10 +60,10 @@ module _
           ( indexing-type-Relaxed-Σ-Decomposition d)) ≃
         Σ ( UU l)
           ( λ A →
-             Σ ( UU l)
-               ( λ B →
-                 Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
-                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Σ (pr1 U) Y))))
+            Σ ( UU l)
+              ( λ B →
+                Σ ( Σ ( UU l) λ U → ( U ≃ (A + B)))
+                  ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Σ (pr1 U) Y))))
     pr1 reassociate ((U , V , f) , A , B , e) = (A , B , (U , e) , V , f)
     pr2 reassociate =
       is-equiv-has-inverse
@@ -100,7 +101,7 @@ module _
     Σ ( Relaxed-Σ-Decomposition l l X)
       ( λ d →
         binary-coproduct-Decomposition l l
-         ( indexing-type-Relaxed-Σ-Decomposition d)) ≃
+          ( indexing-type-Relaxed-Σ-Decomposition d)) ≃
     Σ ( binary-coproduct-Decomposition l l X)
       ( λ d →
         Relaxed-Σ-Decomposition l l

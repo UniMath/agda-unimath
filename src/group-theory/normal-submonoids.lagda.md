@@ -7,11 +7,12 @@ module group-theory.normal-submonoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -33,12 +34,12 @@ open import group-theory.subsets-monoids
 
 ## Idea
 
-A normal submonoid `N` of `M` is a monoid for which there exists a congruence
-relation `~` on `M` such that the elements of `N` are precisely the elements
-`x ~ 1`. Such a congruence relation is rarely unique. However, one can show that
-the normal submonoids form a retract of the type of congruence relations on `M`,
-and that the normal submonoids correspond uniquely to _saturated_ congruence
-relations.
+A **normal submonoid** `N` of `M` is a monoid for which there exists a
+congruence relation `~` on `M` such that the elements of `N` are precisely the
+elements `x ~ 1`. Such a congruence relation is rarely unique. However, one can
+show that the normal submonoids form a retract of the type of congruence
+relations on `M`, and that the normal submonoids correspond uniquely to
+_saturated_ congruence relations.
 
 A submonoid `N` of `M` is normal if and only if for all `x y : M` and `u : N` we
 have

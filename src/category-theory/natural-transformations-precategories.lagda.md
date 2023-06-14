@@ -10,10 +10,11 @@ module category-theory.natural-transformations-precategories where
 open import category-theory.functors-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
@@ -89,10 +90,10 @@ module _
     inv (left-unit-law-comp-hom-Precategory D _)
 
   comp-natural-transformation-Precategory :
-     (F G H : functor-Precategory C D) →
-     natural-transformation-Precategory C D G H →
-     natural-transformation-Precategory C D F G →
-     natural-transformation-Precategory C D F H
+    (F G H : functor-Precategory C D) →
+    natural-transformation-Precategory C D G H →
+    natural-transformation-Precategory C D F G →
+    natural-transformation-Precategory C D F H
   pr1 (comp-natural-transformation-Precategory F G H β α) x =
     comp-hom-Precategory D
       ( components-natural-transformation-Precategory C D G H β x)

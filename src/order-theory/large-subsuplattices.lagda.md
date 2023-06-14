@@ -28,8 +28,8 @@ is closed under suprema.
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (L : Large-Suplattice α β)
+  {α γ : Level → Level} {β : Level → Level → Level} {δ : Level}
+  (L : Large-Suplattice α β δ)
   where
 
   is-closed-under-sup-Large-Subposet :
@@ -44,8 +44,9 @@ module _
 
 record
   Large-Subsuplattice
-  {α : Level → Level} {β : Level → Level → Level} (γ : Level → Level)
-  (L : Large-Suplattice α β) :
+  {α : Level → Level} {β : Level → Level → Level} {δ : Level}
+  (γ : Level → Level)
+  (L : Large-Suplattice α β δ) :
   UUω
   where
   field
@@ -57,8 +58,8 @@ record
 open Large-Subsuplattice public
 
 module _
-  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (P : Large-Suplattice α β) (S : Large-Subsuplattice γ P)
+  {α γ : Level → Level} {β : Level → Level → Level} {δ : Level}
+  (P : Large-Suplattice α β δ) (S : Large-Subsuplattice γ P)
   where
 
   large-poset-Large-Subsuplattice :

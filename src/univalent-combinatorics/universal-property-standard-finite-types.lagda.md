@@ -13,7 +13,7 @@ open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type

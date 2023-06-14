@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module finite-group-theory.orbits-permutations where
 ```
 
@@ -24,6 +22,7 @@ open import elementary-number-theory.well-ordering-principle-natural-numbers
 
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
@@ -39,7 +38,7 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
@@ -49,6 +48,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.repetitions-of-values
 open import foundation.sets
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -104,11 +104,9 @@ module _
     iterate-add-ℕ n m (map-equiv e) _ ∙ (ap (iterate n (map-equiv e)) p ∙ q)
 ```
 
-### The equivalence classes of iterative orbits of an automorphism on a finite set
-
 ## Properties
 
-### For type equipped with a counting, orbits of permutations are finite
+### For types equipped with a counting, orbits of permutations are finite
 
 The map `i ↦ eⁱ a` repeats itself.
 
@@ -286,13 +284,15 @@ module _
                 ( f)
                 ( tr
                   ( λ x →
-                    Id ( iterate x (map-equiv f) a)
-                       ( iterate (succ-ℕ pred-second) (map-equiv f) a))
+                    Id
+                      ( iterate x (map-equiv f) a)
+                      ( iterate (succ-ℕ pred-second) (map-equiv f) a))
                   ( equality-pred-first)
                   ( tr
                     ( λ x →
-                      Id ( iterate first-point-min-repeating (map-equiv f) a)
-                         ( iterate x (map-equiv f) a))
+                      Id
+                        ( iterate first-point-min-repeating (map-equiv f) a)
+                        ( iterate x (map-equiv f) a))
                     ( equality-pred-second)
                     ( same-image-iterate-min-reporting)))))))
       where
@@ -328,8 +328,9 @@ module _
   pr2 (pr2 (has-finite-orbits-permutation' (inl p))) =
     tr
       ( λ x →
-        Id ( iterate first-point-min-repeating (map-equiv f) a)
-           ( iterate x (map-equiv f) a))
+        Id
+          ( iterate first-point-min-repeating (map-equiv f) a)
+          ( iterate x (map-equiv f) a))
       ( p)
       ( same-image-iterate-min-reporting)
   has-finite-orbits-permutation' (inr np) =
@@ -716,8 +717,9 @@ module _
       ( Ind :
         (n : ℕ) → C (succ-ℕ n) → is-nonzero-ℕ n → C n) →
       (k : ℕ) → (is-zero-ℕ k + C k) →
-      Id ( iterate k (map-equiv (composition-transposition-a-b g)) x)
-         ( iterate k (map-equiv g) x)
+      Id
+        ( iterate k (map-equiv (composition-transposition-a-b g)) x)
+        ( iterate k (map-equiv g) x)
     equal-iterate-transposition x g C F Ind zero-ℕ p = refl
     equal-iterate-transposition x g C F Ind (succ-ℕ k) (inl p) =
       ex-falso (is-nonzero-succ-ℕ k p)
@@ -732,8 +734,9 @@ module _
       where
       induction-cases-equal-iterate-transposition :
         is-decidable (Id k zero-ℕ) →
-        Id ( iterate k (map-equiv (composition-transposition-a-b g)) x)
-           ( iterate k (map-equiv g) x)
+        Id
+          ( iterate k (map-equiv (composition-transposition-a-b g)) x)
+          ( iterate k (map-equiv g) x)
       induction-cases-equal-iterate-transposition (inl s) =
         tr
           ( λ k →
@@ -1537,7 +1540,7 @@ module _
                     ( pr1 T))
                 { x =
                   composition-transposition-a-b
-                     (composition-transposition-a-b g)}
+                    (composition-transposition-a-b g)}
                 {y = g}
                 ( eq-htpy-equiv (composition-transposition-a-b-involution g))
                 ( pr2

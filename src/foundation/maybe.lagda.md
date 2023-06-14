@@ -9,18 +9,18 @@ module foundation.maybe where
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>

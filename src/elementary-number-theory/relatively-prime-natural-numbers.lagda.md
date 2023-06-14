@@ -20,6 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -157,7 +158,7 @@ module _
         ( pr1 c))
 
   is-relatively-prime-is-prime-ℕ :
-     is-relatively-prime-ℕ a b
+    is-relatively-prime-ℕ a b
   is-relatively-prime-is-prime-ℕ =
     is-relatively-prime-is-one-is-common-divisor-ℕ
       ( a)

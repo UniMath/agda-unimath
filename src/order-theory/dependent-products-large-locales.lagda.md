@@ -29,11 +29,11 @@ Given a family `L : I → Large-Locale α β` of large locales indexed by a type
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  {l1 : Level} {I : UU l1} (L : I → Large-Locale α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  {l1 : Level} {I : UU l1} (L : I → Large-Locale α β γ)
   where
 
-  Π-Large-Locale : Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+  Π-Large-Locale : Large-Locale (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   Π-Large-Locale = Π-Large-Frame L
 
   large-poset-Π-Large-Locale :
@@ -50,11 +50,11 @@ module _
   has-meets-Π-Large-Locale = has-meets-Π-Large-Frame L
 
   large-suplattice-Π-Large-Locale :
-    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1)
+    Large-Suplattice (λ l2 → α l2 ⊔ l1) (λ l2 l3 → β l2 l3 ⊔ l1) γ
   large-suplattice-Π-Large-Locale = large-suplattice-Π-Large-Frame L
 
   is-large-suplattice-Π-Large-Locale :
-    is-large-suplattice-Large-Poset large-poset-Π-Large-Locale
+    is-large-suplattice-Large-Poset γ large-poset-Π-Large-Locale
   is-large-suplattice-Π-Large-Locale =
     is-large-suplattice-Π-Large-Frame L
 
@@ -138,7 +138,7 @@ module _
 
   sup-Π-Large-Locale :
     {l2 l3 : Level} {J : UU l2} (x : J → type-Π-Large-Locale l3) →
-    type-Π-Large-Locale (l2 ⊔ l3)
+    type-Π-Large-Locale (γ ⊔ l2 ⊔ l3)
   sup-Π-Large-Locale = sup-Π-Large-Frame L
 
   is-least-upper-bound-sup-Π-Large-Locale :

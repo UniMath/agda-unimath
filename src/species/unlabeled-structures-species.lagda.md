@@ -67,4 +67,6 @@ module _
   structure-unlabeled-structure-species-types = pr2 X
 ```
 
-### Equivalences of unlabeled structures of a speces
+### Equivalences of unlabeled structures of a species
+
+This remains to be defined.

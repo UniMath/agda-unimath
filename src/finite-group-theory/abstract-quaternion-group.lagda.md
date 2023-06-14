@@ -1,4 +1,4 @@
-# The abstract quaternion group of order 8
+# The abstract quaternion group of order `8`
 
 ```agda
 module finite-group-theory.abstract-quaternion-group where
@@ -13,7 +13,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation

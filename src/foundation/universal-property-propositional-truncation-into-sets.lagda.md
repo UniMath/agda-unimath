@@ -7,20 +7,21 @@ module foundation.universal-property-propositional-truncation-into-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 open import foundation.weakly-constant-maps
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -41,8 +42,9 @@ is-weakly-constant-map-precomp-unit-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : type-trunc-Prop A → B) →
   is-weakly-constant-map (g ∘ unit-trunc-Prop)
 is-weakly-constant-map-precomp-unit-trunc-Prop g x y =
-  ap ( g)
-     ( eq-is-prop (is-prop-type-trunc-Prop))
+  ap
+    ( g)
+    ( eq-is-prop (is-prop-type-trunc-Prop))
 
 precomp-universal-property-set-quotient-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) →

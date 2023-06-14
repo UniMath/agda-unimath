@@ -10,9 +10,10 @@ module elementary-number-theory.strictly-ordered-pairs-of-natural-numbers where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation

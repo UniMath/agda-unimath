@@ -8,10 +8,11 @@ module group-theory.torsors where
 
 ```agda
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -20,6 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -213,8 +215,9 @@ module _
     refl-htpy-equiv-Torsor-Abstract-Group
 
   is-contr-total-htpy-equiv-Torsor-Abstract-Group :
-    is-contr ( Σ ( equiv-Torsor-Abstract-Group G X Y)
-                 ( htpy-equiv-Torsor-Abstract-Group))
+    is-contr
+      ( Σ ( equiv-Torsor-Abstract-Group G X Y)
+          ( htpy-equiv-Torsor-Abstract-Group))
   is-contr-total-htpy-equiv-Torsor-Abstract-Group =
     is-contr-total-htpy-equiv-Abstract-Group-Action G
       ( action-Torsor-Abstract-Group G X)
@@ -306,11 +309,12 @@ module _
     (h : equiv-Torsor-Abstract-Group G X3 X4)
     (g : equiv-Torsor-Abstract-Group G X2 X3)
     (f : equiv-Torsor-Abstract-Group G X1 X2) →
-    Id ( comp-equiv-Torsor-Abstract-Group G X1 X2 X4
-         ( comp-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
-         ( f))
-       ( comp-equiv-Torsor-Abstract-Group G X1 X3 X4 h
-         ( comp-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
+    Id
+      ( comp-equiv-Torsor-Abstract-Group G X1 X2 X4
+        ( comp-equiv-Torsor-Abstract-Group G X2 X3 X4 h g)
+        ( f))
+      ( comp-equiv-Torsor-Abstract-Group G X1 X3 X4 h
+        ( comp-equiv-Torsor-Abstract-Group G X1 X2 X3 g f))
   associative-comp-equiv-Torsor-Abstract-Group h g f =
     eq-htpy-equiv-Torsor-Abstract-Group G X1 X4
       ( comp-equiv-Torsor-Abstract-Group G X1 X2 X4
@@ -327,10 +331,11 @@ module _
 
   left-unit-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( comp-equiv-Torsor-Abstract-Group G X Y Y
-         ( id-equiv-Torsor-Abstract-Group G Y)
-         ( f))
-       ( f)
+    Id
+      ( comp-equiv-Torsor-Abstract-Group G X Y Y
+        ( id-equiv-Torsor-Abstract-Group G Y)
+        ( f))
+      ( f)
   left-unit-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X Y
       ( comp-equiv-Torsor-Abstract-Group G X Y Y
@@ -341,9 +346,10 @@ module _
 
   right-unit-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( comp-equiv-Torsor-Abstract-Group G X X Y f
-         ( id-equiv-Torsor-Abstract-Group G X))
-       ( f)
+    Id
+      ( comp-equiv-Torsor-Abstract-Group G X X Y f
+        ( id-equiv-Torsor-Abstract-Group G X))
+      ( f)
   right-unit-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X Y
       ( comp-equiv-Torsor-Abstract-Group G X X Y f
@@ -353,10 +359,11 @@ module _
 
   left-inverse-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( comp-equiv-Torsor-Abstract-Group G X Y X
-         ( inv-equiv-Torsor-Abstract-Group G X Y f)
-         ( f))
-       ( id-equiv-Torsor-Abstract-Group G X)
+    Id
+      ( comp-equiv-Torsor-Abstract-Group G X Y X
+        ( inv-equiv-Torsor-Abstract-Group G X Y f)
+        ( f))
+      ( id-equiv-Torsor-Abstract-Group G X)
   left-inverse-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G X X
       ( comp-equiv-Torsor-Abstract-Group G X Y X
@@ -367,9 +374,10 @@ module _
 
   right-inverse-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
-    Id ( comp-equiv-Torsor-Abstract-Group G Y X Y f
-         ( inv-equiv-Torsor-Abstract-Group G X Y f))
-       ( id-equiv-Torsor-Abstract-Group G Y)
+    Id
+      ( comp-equiv-Torsor-Abstract-Group G Y X Y f
+        ( inv-equiv-Torsor-Abstract-Group G X Y f))
+      ( id-equiv-Torsor-Abstract-Group G Y)
   right-inverse-law-comp-equiv-Torsor-Abstract-Group f =
     eq-htpy-equiv-Torsor-Abstract-Group G Y Y
       ( comp-equiv-Torsor-Abstract-Group G Y X Y f
@@ -384,10 +392,11 @@ module _
   preserves-mul-equiv-eq-Torsor-Abstract-Group :
     {l2 : Level} (X Y Z : Torsor-Abstract-Group G l2)
     (p : Id X Y) (q : Id Y Z) →
-    Id ( equiv-eq-Torsor-Abstract-Group G X Z (p ∙ q))
-       ( comp-equiv-Torsor-Abstract-Group G X Y Z
-         ( equiv-eq-Torsor-Abstract-Group G Y Z q)
-         ( equiv-eq-Torsor-Abstract-Group G X Y p))
+    Id
+      ( equiv-eq-Torsor-Abstract-Group G X Z (p ∙ q))
+      ( comp-equiv-Torsor-Abstract-Group G X Y Z
+        ( equiv-eq-Torsor-Abstract-Group G Y Z q)
+        ( equiv-eq-Torsor-Abstract-Group G X Y p))
   preserves-mul-equiv-eq-Torsor-Abstract-Group X .X Z refl q =
     inv ( right-unit-law-comp-equiv-Torsor-Abstract-Group G X Z
           ( equiv-eq-Torsor-Abstract-Group G X Z q))
@@ -504,27 +513,30 @@ module _
   Eq-equiv-Torsor-Abstract-Group X (pair e H) = map-equiv e (unit-Group G)
 
   preserves-mul-Eq-equiv-Torsor-Abstract-Group :
-    (e f : equiv-Torsor-Abstract-Group G
-           ( principal-Torsor-Abstract-Group G)
-           ( principal-Torsor-Abstract-Group G)) →
-    Id ( Eq-equiv-Torsor-Abstract-Group
-         ( principal-Torsor-Abstract-Group G)
-         ( comp-equiv-Torsor-Abstract-Group G
-           ( principal-Torsor-Abstract-Group G)
-           ( principal-Torsor-Abstract-Group G)
-           ( principal-Torsor-Abstract-Group G)
-           ( f)
-           ( e)))
-       ( mul-Group G
-         ( Eq-equiv-Torsor-Abstract-Group
-           ( principal-Torsor-Abstract-Group G)
-           ( e))
-         ( Eq-equiv-Torsor-Abstract-Group
-           ( principal-Torsor-Abstract-Group G)
-           ( f)))
+    (e f :
+      equiv-Torsor-Abstract-Group G
+        ( principal-Torsor-Abstract-Group G)
+        ( principal-Torsor-Abstract-Group G)) →
+    Id
+      ( Eq-equiv-Torsor-Abstract-Group
+        ( principal-Torsor-Abstract-Group G)
+        ( comp-equiv-Torsor-Abstract-Group G
+          ( principal-Torsor-Abstract-Group G)
+          ( principal-Torsor-Abstract-Group G)
+          ( principal-Torsor-Abstract-Group G)
+          ( f)
+          ( e)))
+      ( mul-Group G
+        ( Eq-equiv-Torsor-Abstract-Group
+          ( principal-Torsor-Abstract-Group G)
+          ( e))
+        ( Eq-equiv-Torsor-Abstract-Group
+          ( principal-Torsor-Abstract-Group G)
+          ( f)))
   preserves-mul-Eq-equiv-Torsor-Abstract-Group (pair e H) (pair f K) =
-    ( ap ( map-equiv f)
-         ( inv (right-unit-law-mul-Group G (map-equiv e (unit-Group G))))) ∙
+    ( ap
+      ( map-equiv f)
+      ( inv (right-unit-law-mul-Group G (map-equiv e (unit-Group G))))) ∙
     ( K (map-equiv e (unit-Group G)) (unit-Group G))
 
   equiv-Eq-Torsor-Abstract-Group :
@@ -565,15 +577,16 @@ module _
         ( is-torsor-action-Torsor-Abstract-Group G X)
         ( is-equiv-Prop (Eq-equiv-Torsor-Abstract-Group X))
         ( λ e →
-          tr ( λ Y → is-equiv (Eq-equiv-Torsor-Abstract-Group Y))
-             ( eq-equiv-Torsor-Abstract-Group G
-               ( principal-Torsor-Abstract-Group G)
-               ( X)
-               ( e))
-             ( is-equiv-has-inverse
-                 equiv-Eq-Torsor-Abstract-Group
-                 issec-equiv-Eq-Torsor-Abstract-Group
-                 isretr-equiv-Eq-Torsor-Abstract-Group))
+          tr
+            ( λ Y → is-equiv (Eq-equiv-Torsor-Abstract-Group Y))
+            ( eq-equiv-Torsor-Abstract-Group G
+              ( principal-Torsor-Abstract-Group G)
+              ( X)
+              ( e))
+            ( is-equiv-has-inverse
+                equiv-Eq-Torsor-Abstract-Group
+                issec-equiv-Eq-Torsor-Abstract-Group
+                isretr-equiv-Eq-Torsor-Abstract-Group))
 
   equiv-Eq-equiv-Torsor-Abstract-Group :
     (X : Torsor-Abstract-Group G l1) →
@@ -587,29 +600,33 @@ module _
       ( X))
 
   preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group :
-    ( p q : Id ( principal-Torsor-Abstract-Group G)
-               ( principal-Torsor-Abstract-Group G)) →
-    Id ( map-equiv
-         ( equiv-Eq-equiv-Torsor-Abstract-Group
-           ( principal-Torsor-Abstract-Group G))
-         ( p ∙ q))
-       ( mul-Group G
-         ( map-equiv
-           ( equiv-Eq-equiv-Torsor-Abstract-Group
-             ( principal-Torsor-Abstract-Group G))
-           ( p))
-         ( map-equiv
-           ( equiv-Eq-equiv-Torsor-Abstract-Group
-             ( principal-Torsor-Abstract-Group G))
-           ( q)))
+    ( p q :
+      Id
+        ( principal-Torsor-Abstract-Group G)
+        ( principal-Torsor-Abstract-Group G)) →
+    Id
+      ( map-equiv
+        ( equiv-Eq-equiv-Torsor-Abstract-Group
+          ( principal-Torsor-Abstract-Group G))
+        ( p ∙ q))
+      ( mul-Group G
+        ( map-equiv
+          ( equiv-Eq-equiv-Torsor-Abstract-Group
+            ( principal-Torsor-Abstract-Group G))
+          ( p))
+        ( map-equiv
+          ( equiv-Eq-equiv-Torsor-Abstract-Group
+            ( principal-Torsor-Abstract-Group G))
+          ( q)))
   preserves-mul-equiv-Eq-equiv-Torsor-Abstract-Group p q =
-    ( ap ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G))
-         ( preserves-mul-equiv-eq-Torsor-Abstract-Group G
-           ( principal-Torsor-Abstract-Group G)
-           ( principal-Torsor-Abstract-Group G)
-           ( principal-Torsor-Abstract-Group G)
-           ( p)
-           ( q))) ∙
+    ( ap
+      ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G))
+      ( preserves-mul-equiv-eq-Torsor-Abstract-Group G
+        ( principal-Torsor-Abstract-Group G)
+        ( principal-Torsor-Abstract-Group G)
+        ( principal-Torsor-Abstract-Group G)
+        ( p)
+        ( q))) ∙
     ( preserves-mul-Eq-equiv-Torsor-Abstract-Group
       ( equiv-eq-Torsor-Abstract-Group G
         ( principal-Torsor-Abstract-Group G)

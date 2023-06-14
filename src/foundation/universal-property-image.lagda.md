@@ -7,19 +7,21 @@ module foundation.universal-property-image where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.transport
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -28,7 +30,6 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -202,9 +203,10 @@ abstract
       { A = (fib f x)}
       ( fib-emb-Prop m x)
       ( λ t →
-        pair ( map-hom-slice f (map-emb m) h (pr1 t))
-             ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
-               ( pr2 t)))
+        pair
+          ( map-hom-slice f (map-emb m) h (pr1 t))
+          ( ( inv (triangle-hom-slice f (map-emb m) h (pr1 t))) ∙
+            ( pr2 t)))
 
   map-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
@@ -226,8 +228,9 @@ abstract
     is-image-is-image'
       l f (emb-im f) (unit-im f)
       ( λ B m h →
-        pair ( map-is-image-im f m h)
-             ( triangle-is-image-im f m h))
+        pair
+          ( map-is-image-im f m h)
+          ( triangle-is-image-im f m h))
 ```
 
 ### A factorization of a map through an embedding is the image factorization if and only if the right factor is surjective
@@ -281,8 +284,9 @@ abstract
               ( pr1 q)
               ( H)
               ( λ b →
-                pair ( fib (map-emb m) (pr1 i b))
-                     ( is-prop-map-emb m (pr1 i b)))) ∘e
+                pair
+                  ( fib (map-emb m) (pr1 i b))
+                  ( is-prop-map-emb m (pr1 i b)))) ∘e
             ( ( equiv-map-Π (λ a → equiv-tr (fib (map-emb m)) (pr2 q a))) ∘e
               ( ( reduce-Π-fib f (fib (map-emb m))) ∘e
                 ( equiv-fiberwise-hom-hom-slice f (map-emb m)))))))

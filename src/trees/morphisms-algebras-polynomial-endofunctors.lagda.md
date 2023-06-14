@@ -7,10 +7,11 @@ module trees.morphisms-algebras-polynomial-endofunctors where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -109,15 +110,16 @@ module _
     htpy-hom-algebra-polynomial-endofunctor f
   pr1 refl-htpy-hom-algebra-polynomial-endofunctor = refl-htpy
   pr2 refl-htpy-hom-algebra-polynomial-endofunctor z =
-    ( ap ( λ t →
-           concat
-             ( structure-hom-algebra-polynomial-endofunctor X Y f z)
-             ( structure-algebra-polynomial-endofunctor Y
-               ( map-polynomial-endofunctor A B
-                 ( map-hom-algebra-polynomial-endofunctor X Y f) z))
-             ( ap (structure-algebra-polynomial-endofunctor Y) t))
-         ( coh-refl-htpy-polynomial-endofunctor A B
-           ( map-hom-algebra-polynomial-endofunctor X Y f) z)) ∙
+    ( ap
+      ( λ t →
+        concat
+          ( structure-hom-algebra-polynomial-endofunctor X Y f z)
+          ( structure-algebra-polynomial-endofunctor Y
+            ( map-polynomial-endofunctor A B
+              ( map-hom-algebra-polynomial-endofunctor X Y f) z))
+          ( ap (structure-algebra-polynomial-endofunctor Y) t))
+      ( coh-refl-htpy-polynomial-endofunctor A B
+        ( map-hom-algebra-polynomial-endofunctor X Y f) z)) ∙
     ( right-unit)
 
   htpy-eq-hom-algebra-polynomial-endofunctor :
@@ -149,12 +151,14 @@ module _
           ( λ H →
             ( equiv-concat-htpy
               ( λ x →
-                ap ( concat
-                     ( pr2 f x)
-                     ( structure-algebra-polynomial-endofunctor Y
-                       ( map-polynomial-endofunctor A B (pr1 f) x)))
-                   ( ap ( ap (pr2 Y))
-                        ( coh-refl-htpy-polynomial-endofunctor A B (pr1 f) x)))
+                ap
+                  ( concat
+                    ( pr2 f x)
+                    ( structure-algebra-polynomial-endofunctor Y
+                      ( map-polynomial-endofunctor A B (pr1 f) x)))
+                  ( ap
+                    ( ap (pr2 Y))
+                    ( coh-refl-htpy-polynomial-endofunctor A B (pr1 f) x)))
               ( H)) ∘e
             ( equiv-concat-htpy right-unit-htpy H)))
         ( is-contr-total-htpy (pr2 f)))

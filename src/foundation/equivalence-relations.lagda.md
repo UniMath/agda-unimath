@@ -2,42 +2,44 @@
 
 ```agda
 module foundation.equivalence-relations where
+
+open import foundation-core.equivalence-relations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalence-relations public
-
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
 open import foundation.full-subtypes
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-subtypes
 open import foundation.partitions
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sigma-decompositions
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.uniqueness-set-quotients
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>

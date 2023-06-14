@@ -7,15 +7,17 @@ module foundation-core.contractible-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -59,14 +61,15 @@ module _
   isretr-map-inv-is-contr-map :
     (H : is-contr-map f) → ((map-inv-is-contr-map H) ∘ f) ~ id
   isretr-map-inv-is-contr-map H x =
-    ap ( pr1 {B = λ z → (f z) ＝ (f x)})
-       ( ( inv
-           ( contraction
-             ( H (f x))
-             ( pair
-               ( map-inv-is-contr-map H (f x))
-               ( issec-map-inv-is-contr-map H (f x))))) ∙
-         ( contraction (H (f x)) (pair x refl)))
+    ap
+      ( pr1 {B = λ z → (f z) ＝ (f x)})
+      ( ( inv
+          ( contraction
+            ( H (f x))
+            ( pair
+              ( map-inv-is-contr-map H (f x))
+              ( issec-map-inv-is-contr-map H (f x))))) ∙
+        ( contraction (H (f x)) (pair x refl)))
 
   abstract
     is-equiv-is-contr-map : is-contr-map f → is-equiv f

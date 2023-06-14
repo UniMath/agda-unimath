@@ -10,15 +10,18 @@ module graph-theory.walks-undirected-graphs where
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.type-arithmetic-coproduct-types
@@ -151,6 +154,114 @@ module _
   length-walk-Undirected-Graph refl-walk-Undirected-Graph = 0
   length-walk-Undirected-Graph (cons-walk-Undirected-Graph p e w) =
     succ-ℕ (length-walk-Undirected-Graph w)
+```
+
+### Walks of a fixed length
+
+```agda
+module _
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G)
+  where
+
+  data walk-of-length-Undirected-Graph :
+    ℕ → vertex-Undirected-Graph G → UU (lsuc lzero ⊔ l1 ⊔ l2)
+    where
+    refl-walk-of-length-Undirected-Graph :
+      walk-of-length-Undirected-Graph 0 x
+    cons-walk-of-length-Undirected-Graph :
+      (n : ℕ) (p : unordered-pair-vertices-Undirected-Graph G)
+      (e : edge-Undirected-Graph G p) {i : type-unordered-pair p} →
+      walk-of-length-Undirected-Graph n (element-unordered-pair p i) →
+      walk-of-length-Undirected-Graph
+        ( succ-ℕ n)
+        ( other-element-unordered-pair p i)
+
+  map-compute-total-walk-of-length-Undirected-Graph :
+    (y : vertex-Undirected-Graph G) →
+    walk-Undirected-Graph G x y →
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph n y)
+  map-compute-total-walk-of-length-Undirected-Graph .x
+    refl-walk-Undirected-Graph =
+    ( 0 , refl-walk-of-length-Undirected-Graph)
+  map-compute-total-walk-of-length-Undirected-Graph ._
+    ( cons-walk-Undirected-Graph p e w) =
+    map-Σ
+      ( λ n →
+        walk-of-length-Undirected-Graph n (other-element-unordered-pair p _))
+      ( succ-ℕ)
+      ( λ n → cons-walk-of-length-Undirected-Graph n p e)
+      ( map-compute-total-walk-of-length-Undirected-Graph
+        ( element-unordered-pair p _)
+        ( w))
+
+  map-inv-compute-total-walk-of-length-Undirected-Graph :
+    (y : vertex-Undirected-Graph G) →
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph n y) →
+    walk-Undirected-Graph G x y
+  map-inv-compute-total-walk-of-length-Undirected-Graph y
+    ( .0 , refl-walk-of-length-Undirected-Graph) =
+    refl-walk-Undirected-Graph
+  map-inv-compute-total-walk-of-length-Undirected-Graph
+    .(other-element-unordered-pair p _)
+    (.(succ-ℕ n) , cons-walk-of-length-Undirected-Graph n p e w) =
+    cons-walk-Undirected-Graph p e
+      ( map-inv-compute-total-walk-of-length-Undirected-Graph
+        ( element-unordered-pair p _)
+        ( n , w))
+
+  issec-map-inv-compute-total-walk-of-length-Undirected-Graph :
+    (y : vertex-Undirected-Graph G) →
+    ( map-compute-total-walk-of-length-Undirected-Graph y ∘
+      map-inv-compute-total-walk-of-length-Undirected-Graph y) ~ id
+  issec-map-inv-compute-total-walk-of-length-Undirected-Graph y
+    ( .0 , refl-walk-of-length-Undirected-Graph) =
+    refl
+  issec-map-inv-compute-total-walk-of-length-Undirected-Graph
+    .(other-element-unordered-pair p _)
+    (.(succ-ℕ n) , cons-walk-of-length-Undirected-Graph n p e w) =
+    ap
+      ( map-Σ
+        ( λ n →
+          walk-of-length-Undirected-Graph n (other-element-unordered-pair p _))
+        ( succ-ℕ)
+        ( λ n → cons-walk-of-length-Undirected-Graph n p e))
+      ( issec-map-inv-compute-total-walk-of-length-Undirected-Graph
+        ( element-unordered-pair p _)
+        ( n , w))
+
+  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph :
+    (y : vertex-Undirected-Graph G) →
+    ( map-inv-compute-total-walk-of-length-Undirected-Graph y ∘
+      map-compute-total-walk-of-length-Undirected-Graph y) ~ id
+  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph y
+    refl-walk-Undirected-Graph =
+    refl
+  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph
+    .(other-element-unordered-pair p _)
+    (cons-walk-Undirected-Graph p e w) =
+    ap
+      ( cons-walk-Undirected-Graph p e)
+      ( isretr-map-inv-compute-total-walk-of-length-Undirected-Graph
+        ( element-unordered-pair p _)
+        ( w))
+
+  is-equiv-map-compute-total-walk-of-length-Undirected-Graph :
+    (y : vertex-Undirected-Graph G) →
+    is-equiv (map-compute-total-walk-of-length-Undirected-Graph y)
+  is-equiv-map-compute-total-walk-of-length-Undirected-Graph y =
+    is-equiv-has-inverse
+      ( map-inv-compute-total-walk-of-length-Undirected-Graph y)
+      ( issec-map-inv-compute-total-walk-of-length-Undirected-Graph y)
+      ( isretr-map-inv-compute-total-walk-of-length-Undirected-Graph y)
+
+  compute-total-walk-of-length-Undirected-Graph :
+    (y : vertex-Undirected-Graph G) →
+    walk-Undirected-Graph G x y ≃
+    Σ ℕ (λ n → walk-of-length-Undirected-Graph n y)
+  pr1 (compute-total-walk-of-length-Undirected-Graph y) =
+    map-compute-total-walk-of-length-Undirected-Graph y
+  pr2 (compute-total-walk-of-length-Undirected-Graph y) =
+    is-equiv-map-compute-total-walk-of-length-Undirected-Graph y
 ```
 
 ## Properties

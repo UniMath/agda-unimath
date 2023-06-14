@@ -10,6 +10,7 @@ module univalent-combinatorics.pi-finite-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -26,7 +27,7 @@ open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -45,6 +46,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types
@@ -472,7 +474,7 @@ pr2 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
 
 ### Proposition 1.5
 
-### Dependent product of locally finite types
+#### The dependent product of locally finite types
 
 ```agda
 is-locally-finite-prod :
@@ -515,7 +517,7 @@ is-locally-finite-Π {l1} {l2} {A} {B} f g =
     ( λ e → is-locally-finite-Π-count e g)
 ```
 
-### Finite products of π-finite types
+#### Finite products of π-finite types
 
 ```agda
 is-π-finite-Π :
@@ -664,20 +666,20 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                 ( mere-eq-Prop {A = Σ A B} (pair a y) (pair a y'))
             f t = apply-universal-property-trunc-Prop t
                     ( mere-eq-Prop (pair a y) (pair a y'))
-                     λ { (pair u v) →
-                         apply-dependent-universal-property-trunc-Set'
-                           ( λ u' →
-                             hom-Set
-                               ( set-Prop (P u'))
-                               ( set-Prop
-                                 ( mere-eq-Prop (pair a y) (pair a y'))))
-                           ( λ ω v' →
-                             apply-universal-property-trunc-Prop
-                               ( map-equiv (compute-P ω) v')
-                               ( mere-eq-Prop (pair a y) (pair a y'))
-                               ( λ p → unit-trunc-Prop (eq-pair-Σ ω p)))
-                           ( u)
-                           ( v)}
+                      λ { (pair u v) →
+                          apply-dependent-universal-property-trunc-Set'
+                            ( λ u' →
+                              hom-Set
+                                ( set-Prop (P u'))
+                                ( set-Prop
+                                  ( mere-eq-Prop (pair a y) (pair a y'))))
+                            ( λ ω v' →
+                              apply-universal-property-trunc-Prop
+                                ( map-equiv (compute-P ω) v')
+                                ( mere-eq-Prop (pair a y) (pair a y'))
+                                ( λ p → unit-trunc-Prop (eq-pair-Σ ω p)))
+                            ( u)
+                            ( v)}
             e : mere-eq {A = Σ A B} (pair a y) (pair a y') ≃
                 type-trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P))
             e = equiv-iff

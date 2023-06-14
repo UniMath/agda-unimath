@@ -7,24 +7,29 @@ module foundation-core.path-split-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.sections
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A map `f : A → B` is said to be path split if it has a section and its action on
-identity types `Id x y → Id (f x) (f y)` has a section for each `x y : A`. By
-the fundamental theorem for identity types, it follows that a map is path-split
-if and only if it is an equivalence.
+A map `f : A → B` is said to be **path split** if it has a
+[section](foundation-core.sections.md) and its action on
+[identity types](foundation-core.identity-types.md) `Id x y → Id (f x) (f y)`
+has a section for each `x y : A`. By the
+[fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md),
+it follows that a map is path-split if and only if it is an
+[equivalence](foundation-core.equivalences.md).
 
 ## Definition
 
@@ -89,3 +94,13 @@ module _
   [`foundation.coherently-invertible-maps`](foundation.coherently-invertible-maps.md).
 - For the notion of maps with contractible fibers see
   [`foundation.contractible-maps`](foundation.contractible-maps.md).
+
+## References
+
+- Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
+  of Mathematics_ (2013) (<https://homotopytypetheory.org/book/>,
+  [arXiv:1308.0729](https://arxiv.org/abs/1308.0729),
+  [DOI:10.48550](https://doi.org/10.48550/arXiv.1308.0729))
+- Mike Shulman, _Universal properties without function extensionality_
+  (November 2014)
+  ([HoTT Blog](https://homotopytypetheory.org/2014/11/02/universal-properties-without-function-extensionality/))

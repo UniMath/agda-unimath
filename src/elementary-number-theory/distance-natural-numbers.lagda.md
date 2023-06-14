@@ -13,10 +13,13 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -103,9 +106,10 @@ triangle-inequality-dist-ℕ :
 triangle-inequality-dist-ℕ zero-ℕ zero-ℕ zero-ℕ = star
 triangle-inequality-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) = star
 triangle-inequality-dist-ℕ zero-ℕ (succ-ℕ n) zero-ℕ =
-  tr ( leq-ℕ (succ-ℕ n))
-     ( inv (left-unit-law-add-ℕ (succ-ℕ n)))
-     ( refl-leq-ℕ (succ-ℕ n))
+  tr
+    ( leq-ℕ (succ-ℕ n))
+    ( inv (left-unit-law-add-ℕ (succ-ℕ n)))
+    ( refl-leq-ℕ (succ-ℕ n))
 triangle-inequality-dist-ℕ zero-ℕ (succ-ℕ n) (succ-ℕ k) =
   concatenate-eq-leq-eq-ℕ
     ( inv (ap succ-ℕ (left-unit-law-dist-ℕ n)))
@@ -132,8 +136,9 @@ triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ =
         ( succ-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n)))
         ( succ-leq-ℕ ((dist-ℕ m zero-ℕ) +ℕ (dist-ℕ zero-ℕ n)))
         ( triangle-inequality-dist-ℕ m n zero-ℕ)))
-    ( ( ap (succ-ℕ ∘ succ-ℕ)
-           ( ap-add-ℕ (right-unit-law-dist-ℕ m) (left-unit-law-dist-ℕ n))) ∙
+    ( ( ap
+        ( succ-ℕ ∘ succ-ℕ)
+        ( ap-add-ℕ (right-unit-law-dist-ℕ m) (left-unit-law-dist-ℕ n))) ∙
       ( inv (left-successor-law-add-ℕ m (succ-ℕ n))))
 triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
   triangle-inequality-dist-ℕ m n k
@@ -329,12 +334,14 @@ left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) =
   left-distributive-mul-dist-ℕ zero-ℕ zero-ℕ k
 left-distributive-mul-dist-ℕ zero-ℕ (succ-ℕ n) zero-ℕ = refl
 left-distributive-mul-dist-ℕ zero-ℕ (succ-ℕ n) (succ-ℕ k) =
-  ap ( dist-ℕ' ((succ-ℕ k) *ℕ (succ-ℕ n)))
-     ( inv (right-zero-law-mul-ℕ (succ-ℕ k)))
+  ap
+    ( dist-ℕ' ((succ-ℕ k) *ℕ (succ-ℕ n)))
+    ( inv (right-zero-law-mul-ℕ (succ-ℕ k)))
 left-distributive-mul-dist-ℕ (succ-ℕ m) zero-ℕ zero-ℕ = refl
 left-distributive-mul-dist-ℕ (succ-ℕ m) zero-ℕ (succ-ℕ k) =
-  ap ( dist-ℕ ((succ-ℕ k) *ℕ (succ-ℕ m)))
-     ( inv (right-zero-law-mul-ℕ (succ-ℕ k)))
+  ap
+    ( dist-ℕ ((succ-ℕ k) *ℕ (succ-ℕ m)))
+    ( inv (right-zero-law-mul-ℕ (succ-ℕ k)))
 left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) zero-ℕ = refl
 left-distributive-mul-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
   inv

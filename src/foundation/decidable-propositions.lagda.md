@@ -2,15 +2,17 @@
 
 ```agda
 module foundation.decidable-propositions where
+
+open import foundation-core.decidable-propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.decidable-propositions public
-
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
@@ -18,12 +20,13 @@ open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
 open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
@@ -31,8 +34,7 @@ open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
@@ -232,6 +234,13 @@ abstract
     is-decidable (type-Prop P) → is-finite (type-Prop P)
   is-finite-is-decidable-Prop P x =
     is-finite-count (count-is-decidable-Prop P x)
+
+is-finite-type-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) → is-finite (type-Decidable-Prop P)
+is-finite-type-Decidable-Prop P =
+  is-finite-is-decidable-Prop
+    ( prop-Decidable-Prop P)
+    ( is-decidable-Decidable-Prop P)
 ```
 
 ### The type of decidable propositions of any universe level is finite

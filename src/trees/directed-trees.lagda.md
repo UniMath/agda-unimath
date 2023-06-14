@@ -11,6 +11,7 @@ module trees.directed-trees where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -19,13 +20,14 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -526,10 +528,11 @@ module _
       ( walk-to-root-Directed-Tree T x)
 
   contraction-walk-unique-direct-successor-Directed-Tree :
-    (x : node-Directed-Tree T)
-    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
-    (p : is-root-Directed-Tree T x +
-         Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    ( x : node-Directed-Tree T)
+    ( w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+    ( p :
+      is-root-Directed-Tree T x +
+      Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
     center-walk-unique-direct-successor-Directed-Tree x w ＝ p
   contraction-walk-unique-direct-successor-Directed-Tree ._
     ( refl-walk-Directed-Graph)
@@ -558,9 +561,10 @@ module _
         ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
 
   contraction-unique-direct-successor-Directed-Tree :
-    (x : node-Directed-Tree T) →
-    (p : is-root-Directed-Tree T x +
-         Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
+    ( x : node-Directed-Tree T) →
+    ( p :
+      is-root-Directed-Tree T x +
+      Σ (node-Directed-Tree T) (edge-Directed-Tree T x)) →
     center-unique-direct-successor-Directed-Tree x ＝ p
   contraction-unique-direct-successor-Directed-Tree x =
     contraction-walk-unique-direct-successor-Directed-Tree x

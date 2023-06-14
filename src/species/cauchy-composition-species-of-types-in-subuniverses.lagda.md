@@ -12,16 +12,16 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
@@ -144,8 +144,8 @@ module _
           ( Relaxed-Σ-Decomposition l1 l1 X)
           ( λ D →
               is-in-subuniverse P (indexing-type-Relaxed-Σ-Decomposition D) ×
-              ((x : indexing-type-Relaxed-Σ-Decomposition D) →
-               is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
+              ( (x : indexing-type-Relaxed-Σ-Decomposition D) →
+                is-in-subuniverse P (cotype-Relaxed-Σ-Decomposition D x)))
           ( _)) ∘e
         ( ( equiv-Σ-equiv-base
             ( _)

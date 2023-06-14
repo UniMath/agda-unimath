@@ -9,17 +9,19 @@ module group-theory.transitive-concrete-group-actions where
 ```agda
 open import foundation.0-connected-types
 open import foundation.1-types
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions

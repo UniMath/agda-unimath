@@ -7,13 +7,14 @@ module synthetic-homotopy-theory.cocones-under-spans where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -86,7 +87,7 @@ htpy-cocone :
   (f : S → A) (g : S → B) {X : UU l4} →
   cocone f g X → cocone f g X → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 htpy-cocone f g c c' =
-  Σ ((horizontal-map-cocone f g c) ~ (horizontal-map-cocone f g c'))
+  Σ ( horizontal-map-cocone f g c ~ horizontal-map-cocone f g c')
     ( λ K →
       Σ ( vertical-map-cocone f g c ~ vertical-map-cocone f g c')
         ( coherence-htpy-cocone f g c c' K))
@@ -113,15 +114,15 @@ is-contr-total-htpy-cocone f g c =
   is-contr-total-Eq-structure
     ( λ i' jH' K →
       Σ ( vertical-map-cocone f g c ~ (pr1 jH'))
-        ( coherence-htpy-cocone f g c (pair i' jH') K))
+        ( coherence-htpy-cocone f g c (i' , jH') K))
     ( is-contr-total-htpy (horizontal-map-cocone f g c))
-    ( pair (horizontal-map-cocone f g c) refl-htpy)
+    ( horizontal-map-cocone f g c , refl-htpy)
     ( is-contr-total-Eq-structure
       ( λ j' H' → coherence-htpy-cocone f g c
-        ( pair (horizontal-map-cocone f g c) (pair j' H'))
+        ( horizontal-map-cocone f g c , j' , H')
         ( refl-htpy))
       ( is-contr-total-htpy (vertical-map-cocone f g c))
-      ( pair (vertical-map-cocone f g c) refl-htpy)
+      ( vertical-map-cocone f g c , refl-htpy)
       ( is-contr-is-equiv'
         ( Σ ( ( horizontal-map-cocone f g c ∘ f) ~
               ( vertical-map-cocone f g c ∘ g))
@@ -170,7 +171,7 @@ cocone-map-comp :
   (f : S → A) (g : S → B) {X : UU l4} (c : cocone f g X)
   {Y : UU l5} (h : X → Y) {Z : UU l6} (k : Y → Z) →
   Id (cocone-map f g c (k ∘ h)) (cocone-map f g (cocone-map f g c h) k)
-cocone-map-comp f g (pair i (pair j H)) h k =
+cocone-map-comp f g (i , j , H) h k =
   eq-pair-Σ refl (eq-pair-Σ refl (eq-htpy (ap-comp k h ∘ H)))
 ```
 
@@ -183,8 +184,8 @@ cocone-comp-horizontal :
   ( f : A → X) (i : A → B) (k : B → C) ( c : cocone f i Y) →
   cocone (vertical-map-cocone f i c) k Z → cocone f (k ∘ i) Z
 pr1 (cocone-comp-horizontal f i k c d) =
-   ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ∘
-   ( horizontal-map-cocone f i c)
+  ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ∘
+  ( horizontal-map-cocone f i c)
 pr1 (pr2 (cocone-comp-horizontal f i k c d)) =
   vertical-map-cocone (vertical-map-cocone f i c) k d
 pr2 (pr2 (cocone-comp-horizontal f i k c d)) =

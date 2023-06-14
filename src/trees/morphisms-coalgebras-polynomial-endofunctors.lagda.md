@@ -7,6 +7,7 @@ module trees.morphisms-coalgebras-polynomial-endofunctors where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -56,9 +57,9 @@ hom-coalgebra-polynomial-endofunctor {A = A} {B} X Y =
       type-coalgebra-polynomial-endofunctor Y)
     ( λ f →
       ( coherence-square-maps f
-         ( structure-coalgebra-polynomial-endofunctor X)
-         ( structure-coalgebra-polynomial-endofunctor Y)
-         ( map-polynomial-endofunctor A B f)))
+          ( structure-coalgebra-polynomial-endofunctor X)
+          ( structure-coalgebra-polynomial-endofunctor Y)
+          ( map-polynomial-endofunctor A B f)))
 
 map-hom-coalgebra-polynomial-endofunctor :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2}

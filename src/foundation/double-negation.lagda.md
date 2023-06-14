@@ -7,16 +7,16 @@ module foundation.double-negation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -57,22 +57,26 @@ double-negation-Prop' A = neg-Prop' (¬ A)
 double-negation-Prop :
   {l : Level} (P : Prop l) → Prop l
 double-negation-Prop P = double-negation-Prop' (type-Prop P)
+
+is-prop-double-negation :
+  {l : Level} {A : UU l} → is-prop (¬¬ A)
+is-prop-double-negation = is-prop-neg
 ```
 
 ### Double negations of classical laws
 
 ```agda
-double-negation-double-negation-elim : {l : Level} {P : UU l} → ¬¬ (¬¬ P → P)
+double-negation-double-negation-elim :
+  {l : Level} {P : UU l} → ¬¬ (¬¬ P → P)
 double-negation-double-negation-elim {P = P} f =
   ( λ (np : ¬ P) → f (λ (nnp : ¬¬ P) → ex-falso (nnp np)))
-    ( λ (p : P) → f (λ (nnp : ¬¬ P) → p))
+  ( λ (p : P) → f (λ (nnp : ¬¬ P) → p))
 
 double-negation-Peirces-law :
-  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
-  ¬¬ (((P → Q) → P) → P)
-double-negation-Peirces-law {P = P} {Q} f =
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → ¬¬ (((P → Q) → P) → P)
+double-negation-Peirces-law {P = P} f =
   ( λ (np : ¬ P) → f (λ h → h (λ p → ex-falso (np p))))
-  ( λ (p : P) → f (λ h → p))
+  ( λ (p : P) → f (λ _ → p))
 
 double-negation-linearity-implication :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
@@ -80,8 +84,7 @@ double-negation-linearity-implication :
 double-negation-linearity-implication {P = P} {Q = Q} f =
   ( λ (np : ¬ P) →
     map-neg (inl {A = P → Q} {B = Q → P}) f (λ p → ex-falso (np p)))
-    ( λ (p : P) →
-      map-neg (inr {A = P → Q} {B = Q → P}) f (λ q → p))
+  ( λ (p : P) → map-neg (inr {A = P → Q} {B = Q → P}) f (λ _ → p))
 ```
 
 ### Cases of double negation elimination
@@ -125,7 +128,7 @@ double-negation-extend {P = P} {Q = Q} f =
   double-negation-elim-neg (¬ Q) ∘ (map-double-negation f)
 ```
 
-### A double negation of a type is logially equivalent to the double negation of its propositional truncation
+### The double negation of a type is logically equivalent to the double negation of its propositional truncation
 
 ```agda
 abstract

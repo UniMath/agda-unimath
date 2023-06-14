@@ -13,12 +13,13 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

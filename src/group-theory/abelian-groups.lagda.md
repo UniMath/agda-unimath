@@ -7,12 +7,14 @@ module group-theory.abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -588,8 +590,9 @@ module _
 
   preserves-concat-add-list-Ab :
     (l1 l2 : list (type-Ab A)) →
-    Id ( add-list-Ab (concat-list l1 l2))
-       ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+    Id
+      ( add-list-Ab (concat-list l1 l2))
+      ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
   preserves-concat-add-list-Ab =
     preserves-concat-mul-list-Group (group-Ab A)
 ```
@@ -608,4 +611,18 @@ module _
   every-element-central-is-abelian-Group :
     is-abelian-Group G → ((x : type-Group G) → is-central-element-Group G x)
   every-element-central-is-abelian-Group = id
+```
+
+### Equip a type with a structure of abelian groups
+
+```agda
+structure-abelian-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-abelian-group X =
+  Σ (structure-group X) (λ p → is-abelian-Group (compute-structure-group X p))
+
+compute-structure-abelian-group :
+  {l1 : Level} → (X : UU l1) → structure-abelian-group X → Ab l1
+pr1 (compute-structure-abelian-group X (p , q)) = compute-structure-group X p
+pr2 (compute-structure-abelian-group X (p , q)) = q
 ```

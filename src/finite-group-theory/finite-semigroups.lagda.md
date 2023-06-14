@@ -10,7 +10,7 @@ module finite-group-theory.finite-semigroups where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equivalences

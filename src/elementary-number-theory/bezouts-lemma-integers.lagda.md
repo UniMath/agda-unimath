@@ -23,10 +23,12 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.unit-type
 ```
 
@@ -154,13 +156,13 @@ bezouts-lemma-refactor-hypotheses :
             ( abs-ℤ y)
             ( refactor-pos-cond x y H K)))
         ( x))
-    ( mul-ℤ
-      ( int-ℕ
-        ( minimal-positive-distance-y-coeff
-          ( abs-ℤ x)
-          ( abs-ℤ y)
-          ( refactor-pos-cond x y H K)))
-      ( y)))
+      ( mul-ℤ
+        ( int-ℕ
+          ( minimal-positive-distance-y-coeff
+            ( abs-ℤ x)
+            ( abs-ℤ y)
+            ( refactor-pos-cond x y H K)))
+        ( y)))
 bezouts-lemma-refactor-hypotheses x y H K =
   equational-reasoning
     nat-gcd-ℤ x y
@@ -210,7 +212,7 @@ bezouts-lemma-pos-ints :
   Σ ℤ (λ s → Σ ℤ (λ t → (s *ℤ x) +ℤ (t *ℤ y) ＝ gcd-ℤ x y))
 bezouts-lemma-pos-ints x y H K =
   sx-ty-nonneg-case-split
-    ( decide-is-nonnegative-ℤ {diff-ℤ (s *ℤ x) (t *ℤ y)})
+    ( decide-is-nonnegative-ℤ {(s *ℤ x) -ℤ (t *ℤ y)})
   where
   s : ℤ
   s = int-ℕ (minimal-positive-distance-x-coeff
@@ -220,8 +222,8 @@ bezouts-lemma-pos-ints x y H K =
     (abs-ℤ x) (abs-ℤ y) (refactor-pos-cond x y H K))
 
   sx-ty-nonneg-case-split :
-    ( is-nonnegative-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y)) +
-      is-nonnegative-ℤ (neg-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y)))) →
+    ( is-nonnegative-ℤ ((s *ℤ x) -ℤ (t *ℤ y)) +
+      is-nonnegative-ℤ (neg-ℤ ((s *ℤ x) -ℤ (t *ℤ y)))) →
     Σ ℤ (λ s → Σ ℤ (λ t → (s *ℤ x) +ℤ (t *ℤ y) ＝ gcd-ℤ x y))
   pr1 (sx-ty-nonneg-case-split (inl pos)) = s
   pr1 (pr2 (sx-ty-nonneg-case-split (inl pos))) = neg-ℤ t
@@ -229,10 +231,10 @@ bezouts-lemma-pos-ints x y H K =
     inv
     ( equational-reasoning
         gcd-ℤ x y
-        ＝ int-ℕ (abs-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y)))
+        ＝ int-ℕ (abs-ℤ ((s *ℤ x) -ℤ (t *ℤ y)))
           by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
-        ＝ diff-ℤ (s *ℤ x) (t *ℤ y)
-          by int-abs-is-nonnegative-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y)) pos
+        ＝ (s *ℤ x) -ℤ (t *ℤ y)
+          by int-abs-is-nonnegative-ℤ ((s *ℤ x) -ℤ (t *ℤ y)) pos
         ＝ (s *ℤ x) +ℤ ((neg-ℤ t) *ℤ y)
           by ap ((s *ℤ x) +ℤ_) (inv (left-negative-law-mul-ℤ t y)))
 
@@ -242,14 +244,14 @@ bezouts-lemma-pos-ints x y H K =
     inv
       ( equational-reasoning
           gcd-ℤ x y
-          ＝ int-ℕ (abs-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y)))
+          ＝ int-ℕ (abs-ℤ ((s *ℤ x) -ℤ (t *ℤ y)))
             by ap int-ℕ (bezouts-lemma-refactor-hypotheses x y H K)
-          ＝ int-ℕ (abs-ℤ (neg-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y))))
-            by ap (int-ℕ) (inv (abs-neg-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y))))
-          ＝ neg-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y))
+          ＝ int-ℕ (abs-ℤ (neg-ℤ ((s *ℤ x) -ℤ (t *ℤ y))))
+            by ap (int-ℕ) (inv (abs-neg-ℤ ((s *ℤ x) -ℤ (t *ℤ y))))
+          ＝ neg-ℤ ((s *ℤ x) -ℤ (t *ℤ y))
             by
               int-abs-is-nonnegative-ℤ
-                ( neg-ℤ (diff-ℤ (s *ℤ x) (t *ℤ y)))
+                ( neg-ℤ ((s *ℤ x) -ℤ (t *ℤ y)))
                 ( neg)
           ＝ (neg-ℤ (s *ℤ x)) +ℤ (neg-ℤ (neg-ℤ (t *ℤ y)))
             by distributive-neg-add-ℤ (s *ℤ x) (neg-ℤ (t *ℤ y))
@@ -461,7 +463,7 @@ bezouts-lemma-ℤ (inr (inr x)) (inr (inr y)) =
 Now that Bezout's Lemma has been established, we establish a few corollaries of
 Bezout.
 
-### If `x | y z` and `gcd-Z x y ＝ 1`, then `x | z`.
+### If `x | y z` and `gcd-Z x y ＝ 1`, then `x | z`
 
 ```agda
 div-right-factor-coprime-ℤ :

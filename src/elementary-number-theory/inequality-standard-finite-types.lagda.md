@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -29,7 +30,7 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-# Inequality on the standard finite types
+## Definitions
 
 ```agda
 leq-Fin : (k : ℕ) → Fin k → Fin k → UU lzero

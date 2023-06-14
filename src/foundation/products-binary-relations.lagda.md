@@ -1,4 +1,4 @@
-# Products of binary relataions
+# Products of binary relations
 
 ```agda
 module foundation.products-binary-relations where
@@ -8,11 +8,11 @@ module foundation.products-binary-relations where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

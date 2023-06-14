@@ -26,6 +26,7 @@ open import univalent-combinatorics.2-element-types public
 open import univalent-combinatorics.binomial-types public
 open import univalent-combinatorics.bracelets public
 open import univalent-combinatorics.cartesian-product-types public
+open import univalent-combinatorics.category-of-cyclically-ordered-types public
 open import univalent-combinatorics.classical-finite-types public
 open import univalent-combinatorics.complements-isolated-points public
 open import univalent-combinatorics.coproduct-types public
@@ -75,6 +76,7 @@ open import univalent-combinatorics.latin-squares public
 open import univalent-combinatorics.main-classes-of-latin-hypercubes public
 open import univalent-combinatorics.main-classes-of-latin-squares public
 open import univalent-combinatorics.maybe public
+open import univalent-combinatorics.morphisms-cyclic-types public
 open import univalent-combinatorics.necklaces public
 open import univalent-combinatorics.omega-finite-types public
 open import univalent-combinatorics.orientations-complete-undirected-graph public
@@ -86,6 +88,7 @@ open import univalent-combinatorics.pigeonhole-principle public
 open import univalent-combinatorics.presented-pi-finite-types public
 open import univalent-combinatorics.quotients-finite-types public
 open import univalent-combinatorics.ramsey-theory public
+open import univalent-combinatorics.reduced-1-bordism-category public
 open import univalent-combinatorics.repetitions-of-values public
 open import univalent-combinatorics.repetitions-of-values-sequences public
 open import univalent-combinatorics.retracts-of-finite-types public
@@ -102,6 +105,7 @@ open import univalent-combinatorics.steiner-triple-systems public
 open import univalent-combinatorics.sums-of-natural-numbers public
 open import univalent-combinatorics.surjective-maps public
 open import univalent-combinatorics.symmetric-difference public
+open import univalent-combinatorics.symmetric-operations public
 open import univalent-combinatorics.trivial-sigma-decompositions public
 open import univalent-combinatorics.type-duality public
 open import univalent-combinatorics.unions-subtypes public
@@ -109,4 +113,5 @@ open import univalent-combinatorics.universal-property-standard-finite-types pub
 open import univalent-combinatorics.unlabeled-partitions public
 open import univalent-combinatorics.unlabeled-rooted-trees public
 open import univalent-combinatorics.unlabeled-trees public
+open import univalent-combinatorics.unordered-pairs-of-elements-finite-types public
 ```

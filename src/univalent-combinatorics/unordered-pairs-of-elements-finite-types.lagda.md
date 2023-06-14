@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.unordered-pairs-of-elements-finite-types where
+
+open import foundation.unordered-pairs public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.unordered-pairs public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
@@ -22,13 +22,16 @@ open import univalent-combinatorics.pi-finite-types
 
 ## Idea
 
-The type of [unordered pairs](foundation.unordered-pairs.md) of elements in a [finite type](univalent-combinatorics.finite-types.md) is a [π-finite type](univalent-combinatorics.pi-finite-types.md).
+The type of [unordered pairs](foundation.unordered-pairs.md) of elements in a
+[finite type](univalent-combinatorics.finite-types.md) is a
+[π-finite type](univalent-combinatorics.pi-finite-types.md).
 
-Note: The type of unordered pairs in a π-finite type is also π-finite. However, we haven't shown yet that π-finite types are closed under dependent products.
+Note: The type of unordered pairs in a π-finite type is also π-finite. However,
+we haven't shown yet that π-finite types are closed under dependent products.
 
 ## Properties
 
-### The type of unordered pairs of elements in a finite type is π-finite.
+### The type of unordered pairs of elements in a finite type is π-finite
 
 ```agda
 module _

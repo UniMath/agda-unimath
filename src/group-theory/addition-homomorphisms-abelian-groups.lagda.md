@@ -7,6 +7,7 @@ module group-theory.addition-homomorphisms-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -65,8 +66,9 @@ module _
 
   associative-add-hom-Ab :
     (f g h : type-hom-Ab A B) →
-    Id ( add-hom-Ab A B (add-hom-Ab A B f g) h)
-       ( add-hom-Ab A B f (add-hom-Ab A B g h))
+    Id
+      ( add-hom-Ab A B (add-hom-Ab A B f g) h)
+      ( add-hom-Ab A B f (add-hom-Ab A B g h))
   associative-add-hom-Ab f g h =
     eq-htpy-hom-Ab A B
       ( λ x →
@@ -137,8 +139,9 @@ module _
 
   left-distributive-comp-add-hom-Ab :
     (h : type-hom-Ab B C) (f g : type-hom-Ab A B) →
-    Id ( comp-hom-Ab A B C h (add-hom-Ab A B f g))
-       ( add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g))
+    Id
+      ( comp-hom-Ab A B C h (add-hom-Ab A B f g))
+      ( add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g))
   left-distributive-comp-add-hom-Ab h f g =
     eq-htpy-hom-Ab A C
       ( λ x →
@@ -146,8 +149,9 @@ module _
 
   right-distributive-comp-add-hom-Ab :
     (g h : type-hom-Ab B C) (f : type-hom-Ab A B) →
-    Id ( comp-hom-Ab A B C (add-hom-Ab B C g h) f)
-       ( add-hom-Ab A C (comp-hom-Ab A B C g f) (comp-hom-Ab A B C h f))
+    Id
+      ( comp-hom-Ab A B C (add-hom-Ab B C g h) f)
+      ( add-hom-Ab A C (comp-hom-Ab A B C g f) (comp-hom-Ab A B C h f))
   right-distributive-comp-add-hom-Ab g h f =
     eq-htpy-hom-Ab A C (λ x → refl)
 ```

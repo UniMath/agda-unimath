@@ -14,6 +14,8 @@ open import commutative-algebra.trivial-commutative-rings
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -600,10 +602,11 @@ module _
 
   preserves-concat-add-list-Integral-Domain :
     (l1 l2 : list type-Integral-Domain) →
-    Id ( add-list-Integral-Domain (concat-list l1 l2))
-       ( add-Integral-Domain
-         ( add-list-Integral-Domain l1)
-         ( add-list-Integral-Domain l2))
+    Id
+      ( add-list-Integral-Domain (concat-list l1 l2))
+      ( add-Integral-Domain
+        ( add-list-Integral-Domain l1)
+        ( add-list-Integral-Domain l2))
   preserves-concat-add-list-Integral-Domain =
     preserves-concat-add-list-Commutative-Ring
       commutative-ring-Integral-Domain

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.sigma-decompositions where
+
+open import foundation.sigma-decompositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.sigma-decompositions public
-
 open import foundation.cartesian-product-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -33,8 +33,6 @@ open import univalent-combinatorics.type-duality
 ```
 
 </details>
-
-## Idea
 
 ## Definition
 
@@ -85,7 +83,7 @@ module _
     is-finite-type-𝔽 (finite-cotype-Σ-Decomposition-𝔽 x)
 
   is-inhabited-cotype-Σ-Decomposition-𝔽 :
-   (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
+    (x : type-𝔽 finite-indexing-type-Σ-Decomposition-𝔽) →
     is-inhabited (cotype-Σ-Decomposition-𝔽 x)
   is-inhabited-cotype-Σ-Decomposition-𝔽 x =
     is-inhabited-type-Inhabited-𝔽
@@ -117,15 +115,16 @@ module _
     matching-correspondence-Σ-Decomposition-𝔽
 ```
 
-### Fibered double finite Σ-Decompositions
+### Fibered double finite Σ-decompositions
 
 ```agda
 fibered-Σ-Decomposition-𝔽 :
   {l1 : Level} (l2 l3 l4 l5 : Level) (A : 𝔽 l1) →
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
 fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
-  Σ (Σ-Decomposition-𝔽 l2 l3 A)
-    (λ D → Σ-Decomposition-𝔽 l4 l5 (finite-indexing-type-Σ-Decomposition-𝔽 A D))
+  Σ ( Σ-Decomposition-𝔽 l2 l3 A)
+    ( λ D →
+      Σ-Decomposition-𝔽 l4 l5 (finite-indexing-type-Σ-Decomposition-𝔽 A D))
 ```
 
 ### Displayed double Σ-decompositions
@@ -135,9 +134,9 @@ displayed-Σ-Decomposition-𝔽 :
   {l1 : Level} (l2 l3 l4 l5 : Level) (A : 𝔽 l1) →
   UU (l1 ⊔ lsuc l2 ⊔ lsuc l3 ⊔ lsuc l4 ⊔ lsuc l5)
 displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A =
-  ( Σ (Σ-Decomposition-𝔽 l2 l3 A)
-  (λ D → (u : indexing-type-Σ-Decomposition-𝔽 A D) →
-  Σ-Decomposition-𝔽 l4 l5 (finite-cotype-Σ-Decomposition-𝔽 A D u)))
+  ( Σ ( Σ-Decomposition-𝔽 l2 l3 A)
+      ( λ D → (u : indexing-type-Σ-Decomposition-𝔽 A D) →
+        Σ-Decomposition-𝔽 l4 l5 (finite-cotype-Σ-Decomposition-𝔽 A D u)))
 ```
 
 ## Properties
@@ -164,13 +163,13 @@ pr1 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) D =
 pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) =
   is-equiv-has-inverse
     ( λ X →
-      ( ( pr1 (pr1 X)) ,
-        (pr1 (pr2 X))) ,
-        ((λ x → ((pr1 (pr2 (pr1 X)) x) , pr1 (pr2 (pr2 X) x)) ,
-                pr2 (pr2 (pr2 X) x)) ,
-      pr2 (pr2 (pr1 X))))
-    refl-htpy
-    refl-htpy
+      ( pr1 (pr1 X) , pr1 (pr2 X)) ,
+      ( ( λ x →
+          ( pr1 (pr2 (pr1 X)) x , pr1 (pr2 (pr2 X) x)) ,
+          ( pr2 (pr2 (pr2 X) x))) ,
+        ( pr2 (pr2 (pr1 X)))))
+    ( refl-htpy)
+    ( refl-htpy)
 ```
 
 ### Equivalence between finite surjection and finite Σ-decomposition
@@ -211,11 +210,11 @@ module _
       ( is-finite-Decidable-Equivalence-Relation-𝔽 A)
 ```
 
-### Characterization of the equality of finite Σ-Decompositions
+### Characterization of the equality of finite Σ-decompositions
 
 ```agda
 module _
-   {l1 l2 l3 : Level} (A : 𝔽 l1)
+  {l1 l2 l3 : Level} (A : 𝔽 l1)
   where
 
   is-finite-Σ-Decomposition :
@@ -328,24 +327,24 @@ module _
     fibered-Σ-Decomposition-𝔽 l2 l3 l4 l5 A
   equiv-fibered-Σ-Decomposition-𝔽-is-finite-subtype =
     equiv-Σ
-       ( λ D →
-         Σ-Decomposition-𝔽 l4 l5 ( finite-indexing-type-Σ-Decomposition-𝔽 A D))
-       ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
-       ( λ x →
-         equiv-Σ-Decomposition-𝔽-is-finite-subtype
-         ( indexing-type-Σ-Decomposition
-           ( inclusion-subtype (is-finite-Σ-Decomposition A) x) ,
-             pr1
-               ( is-in-subtype-inclusion-subtype
-                 ( is-finite-Σ-Decomposition A)
-                 (x))))∘e
-       interchange-Σ-Σ
-         ( λ D D' p →
-           type-Prop
-             ( is-finite-Σ-Decomposition
-               ( indexing-type-Σ-Decomposition D ,
-                 pr1 p)
-               ( D')))
+      ( λ D →
+        Σ-Decomposition-𝔽 l4 l5 ( finite-indexing-type-Σ-Decomposition-𝔽 A D))
+      ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
+      ( λ x →
+        equiv-Σ-Decomposition-𝔽-is-finite-subtype
+        ( indexing-type-Σ-Decomposition
+          ( inclusion-subtype (is-finite-Σ-Decomposition A) x) ,
+            pr1
+              ( is-in-subtype-inclusion-subtype
+                ( is-finite-Σ-Decomposition A)
+                (x))))∘e
+      interchange-Σ-Σ
+        ( λ D D' p →
+          type-Prop
+            ( is-finite-Σ-Decomposition
+              ( indexing-type-Σ-Decomposition D ,
+                pr1 p)
+              ( D')))
 ```
 
 #### Displayed finite Σ-Decomposition as a subtype
@@ -370,25 +369,25 @@ module _
     type-subtype is-finite-displayed-Σ-Decomposition ≃
     displayed-Σ-Decomposition-𝔽 l2 l3 l4 l5 A
   equiv-displayed-Σ-Decomposition-𝔽-is-finite-subtype =
-     equiv-Σ
-       ( λ D →
-         ( x : indexing-type-Σ-Decomposition-𝔽 A D) →
-         ( Σ-Decomposition-𝔽 l4 l5 ( finite-cotype-Σ-Decomposition-𝔽 A D x)))
-       ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
-       ( λ D1 →
-         equiv-Π
-           ( _)
-           ( id-equiv)
-           ( λ x →
-             equiv-Σ-Decomposition-𝔽-is-finite-subtype
-             ( ( cotype-Σ-Decomposition
-                 ( inclusion-subtype (is-finite-Σ-Decomposition A) D1)
-                 ( x)) ,
-               pr2
-                 ( is-in-subtype-inclusion-subtype
-                   ( is-finite-Σ-Decomposition A) D1) x)) ∘e
-           inv-distributive-Π-Σ) ∘e
-       interchange-Σ-Σ _
+    equiv-Σ
+      ( λ D →
+        ( x : indexing-type-Σ-Decomposition-𝔽 A D) →
+        ( Σ-Decomposition-𝔽 l4 l5 ( finite-cotype-Σ-Decomposition-𝔽 A D x)))
+      ( equiv-Σ-Decomposition-𝔽-is-finite-subtype A)
+      ( λ D1 →
+        equiv-Π
+          ( _)
+          ( id-equiv)
+          ( λ x →
+            equiv-Σ-Decomposition-𝔽-is-finite-subtype
+            ( ( cotype-Σ-Decomposition
+                ( inclusion-subtype (is-finite-Σ-Decomposition A) D1)
+                ( x)) ,
+              pr2
+                ( is-in-subtype-inclusion-subtype
+                  ( is-finite-Σ-Decomposition A) D1) x)) ∘e
+          inv-distributive-Π-Σ) ∘e
+      interchange-Σ-Σ _
 ```
 
 #### Fibered finite Σ-decompositions and displayed finite Σ-Decomposition are equivalent

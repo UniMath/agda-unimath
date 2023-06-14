@@ -11,11 +11,13 @@ open import elementary-number-theory.based-induction-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -130,8 +132,9 @@ cases-eq-succ-based-strong-ind-ℕ :
 cases-eq-succ-based-strong-ind-ℕ k P pS n N f M (inl H) =
   ex-falso (neg-succ-leq-ℕ n H)
 cases-eq-succ-based-strong-ind-ℕ k P pS n N f M (inr α) =
-  ap ( (cases-succ-based-strong-ind-ℕ k P pS n N f (succ-ℕ n) M) ∘ inr)
-     ( eq-is-prop' (is-set-ℕ (succ-ℕ n) (succ-ℕ n)) α refl)
+  ap
+    ( (cases-succ-based-strong-ind-ℕ k P pS n N f (succ-ℕ n) M) ∘ inr)
+    ( eq-is-prop' (is-set-ℕ (succ-ℕ n) (succ-ℕ n)) α refl)
 
 eq-succ-based-strong-ind-ℕ :
   {l : Level} (k : ℕ) (P : ℕ → UU l)
@@ -226,22 +229,22 @@ cases-eq-inductive-step-compute-succ-based-strong-ind-ℕ :
   ( c : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) →
   ( α :
     (I : k ≤-ℕ n) (J : m ≤-ℕ n) →
-     inductive-step-based-strong-ind-ℕ k P
-       ( base-based-strong-ind-ℕ k P p0)
-       ( succ-based-strong-ind-ℕ k P pS)
-       ( n)
-       ( I)
-       ( m)
-       ( M)
-       ( J) ＝
-     inductive-step-based-strong-ind-ℕ k P
-       ( base-based-strong-ind-ℕ k P p0)
-       ( succ-based-strong-ind-ℕ k P pS)
-       ( m)
-       ( M)
-       ( m)
-       ( M)
-       ( refl-leq-ℕ m)) →
+    inductive-step-based-strong-ind-ℕ k P
+      ( base-based-strong-ind-ℕ k P p0)
+      ( succ-based-strong-ind-ℕ k P pS)
+      ( n)
+      ( I)
+      ( m)
+      ( M)
+      ( J) ＝
+    inductive-step-based-strong-ind-ℕ k P
+      ( base-based-strong-ind-ℕ k P p0)
+      ( succ-based-strong-ind-ℕ k P pS)
+      ( m)
+      ( M)
+      ( m)
+      ( M)
+      ( refl-leq-ℕ m)) →
   inductive-step-based-strong-ind-ℕ k P
     ( base-based-strong-ind-ℕ k P p0)
     ( succ-based-strong-ind-ℕ k P pS)

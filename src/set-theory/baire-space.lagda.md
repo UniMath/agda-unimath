@@ -9,6 +9,7 @@ module set-theory.baire-space where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.lawveres-fixed-point-theorem
@@ -49,9 +50,9 @@ is-set-baire-space f g =
     ( λ p q →
       ( inv (isretr-eq-htpy p)) ∙
       ( ( ap
-         ( eq-htpy)
-           ( eq-htpy
-             ( λ n →
+          ( eq-htpy)
+            ( eq-htpy
+              ( λ n →
                 eq-is-prop'
                   ( is-set-ℕ (f n) (g n))
                   ( htpy-eq p n)

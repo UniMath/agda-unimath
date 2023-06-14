@@ -76,19 +76,21 @@ module _
 
   issec-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
-    Id ( comp-hom-Abstract-Group-Action G Y X Y
-         ( hom-iso-Abstract-Group-Action f)
-         ( hom-inv-iso-Abstract-Group-Action f))
-       ( id-hom-Abstract-Group-Action G Y)
+    Id
+      ( comp-hom-Abstract-Group-Action G Y X Y
+        ( hom-iso-Abstract-Group-Action f)
+        ( hom-inv-iso-Abstract-Group-Action f))
+      ( id-hom-Abstract-Group-Action G Y)
   issec-hom-inv-iso-Abstract-Group-Action =
     is-sec-hom-inv-iso-Large-Precategory C X Y
 
   isretr-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
-    Id ( comp-hom-Abstract-Group-Action G X Y X
-         ( hom-inv-iso-Abstract-Group-Action f)
-         ( hom-iso-Abstract-Group-Action f))
-       ( id-hom-Abstract-Group-Action G X)
+    Id
+      ( comp-hom-Abstract-Group-Action G X Y X
+        ( hom-inv-iso-Abstract-Group-Action f)
+        ( hom-iso-Abstract-Group-Action f))
+      ( id-hom-Abstract-Group-Action G X)
   isretr-hom-inv-iso-Abstract-Group-Action =
     is-retr-hom-inv-iso-Large-Precategory C X Y
 

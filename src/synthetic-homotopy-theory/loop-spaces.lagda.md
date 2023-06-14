@@ -144,14 +144,16 @@ module _
 
   preserves-mul-tr-Ω :
     (p : Id x y) (u v : type-Ω (pair A x)) →
-    Id ( tr-type-Ω p (mul-Ω (pair A x) u v))
-       ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
+    Id
+      ( tr-type-Ω p (mul-Ω (pair A x) u v))
+      ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
   preserves-mul-tr-Ω refl u v = refl
 
   preserves-inv-tr-Ω :
     (p : Id x y) (u : type-Ω (pair A x)) →
-    Id ( tr-type-Ω p (inv-Ω (pair A x) u))
-       ( inv-Ω (pair A y) (tr-type-Ω p u))
+    Id
+      ( tr-type-Ω p (inv-Ω (pair A x) u))
+      ( inv-Ω (pair A y) (tr-type-Ω p u))
   preserves-inv-tr-Ω refl u = refl
 
   eq-tr-type-Ω :

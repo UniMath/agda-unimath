@@ -20,7 +20,8 @@ open import univalent-combinatorics.function-types
 
 ## Idea
 
-The type of [symmetric operations](foundation.symmetric-operations.md) from one [finite type](univalent-combinatorics.finite-types.md) into another is finite.
+The type of [symmetric operations](foundation.symmetric-operations.md) from one
+[finite type](univalent-combinatorics.finite-types.md) into another is finite.
 
 ## Properties
 

@@ -7,15 +7,15 @@ module group-theory.group-actions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
-
-open import foundation-core.function-extensionality
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
@@ -78,8 +78,9 @@ module _
 
   preserves-mul-Abstract-Group-Action :
     (g : type-Group G) (h : type-Group G) (x : type-Abstract-Group-Action) →
-    Id ( mul-Abstract-Group-Action (mul-Group G g h) x)
-       ( mul-Abstract-Group-Action g (mul-Abstract-Group-Action h x))
+    Id
+      ( mul-Abstract-Group-Action (mul-Group G g h) x)
+      ( mul-Abstract-Group-Action g (mul-Abstract-Group-Action h x))
   preserves-mul-Abstract-Group-Action g h =
     htpy-eq
       ( ap pr1

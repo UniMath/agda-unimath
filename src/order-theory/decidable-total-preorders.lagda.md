@@ -13,7 +13,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -129,13 +129,13 @@ module _
   helper-is-leq-or-strict-greater-Decidable-Total-Preorder x y (inr p) =
     inr
       ( ( λ {refl → p (refl-leq-Decidable-Total-Preorder x)}) ,
-         apply-universal-property-trunc-Prop
-           ( is-total-Decidable-Total-Preorder y x)
-           ( leq-Decidable-Total-Preorder-Prop y x)
-           ( ind-coprod
-               ( λ _ → leq-Decidable-Total-Preorder y x)
-               ( id)
-               ( λ q → ex-falso (p q))))
+        ( apply-universal-property-trunc-Prop
+          ( is-total-Decidable-Total-Preorder y x)
+          ( leq-Decidable-Total-Preorder-Prop y x)
+          ( ind-coprod
+              ( λ _ → leq-Decidable-Total-Preorder y x)
+              ( id)
+              ( λ q → ex-falso (p q)))))
 
   is-leq-or-strict-greater-Decidable-Total-Preorder :
     (x y : type-Decidable-Total-Preorder) →

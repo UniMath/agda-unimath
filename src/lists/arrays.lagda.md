@@ -9,12 +9,13 @@ module lists.arrays where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -81,6 +82,16 @@ module _
 
   revert-array : array A → array A
   revert-array (n , t) = (n , λ k → t (opposite-Fin n k))
+```
+
+### The definition of `fold-vec`
+
+```agda
+fold-vec :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) (μ : A → (B → B)) →
+  {n : ℕ} → vec A n → B
+fold-vec b μ {0} _ = b
+fold-vec b μ (a ∷ l) = μ a (fold-vec b μ l)
 ```
 
 ## Properties
@@ -166,4 +177,40 @@ module _
     compute-length-list-list-vec
       ( length-array t)
       ( listed-vec-functional-vec (length-array t) (functional-vec-array t))
+```
+
+### An element `x` is in a vector `v` iff it is in `list-vec n v`
+
+```agda
+  is-in-list-is-in-vec-list :
+    (l : list A) (x : A) →
+    x ∈-vec (vec-list l) → x ∈-list l
+  is-in-list-is-in-vec-list (cons y l) .y (is-head .y .(vec-list l)) =
+    is-head y l
+  is-in-list-is-in-vec-list (cons y l) x (is-in-tail .x .y .(vec-list l) I) =
+    is-in-tail x y l (is-in-list-is-in-vec-list l x I)
+
+  is-in-vec-list-is-in-list :
+    (l : list A) (x : A) →
+    x ∈-list l → x ∈-vec (vec-list l)
+  is-in-vec-list-is-in-list (cons x l) x (is-head .x l) =
+    is-head x (vec-list l)
+  is-in-vec-list-is-in-list (cons y l) x (is-in-tail .x .y l I) =
+    is-in-tail x y (vec-list l) (is-in-vec-list-is-in-list l x I)
+```
+
+### Link between `fold-list` and `fold-vec`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (b : B)
+  (μ : A → (B → B))
+  where
+  htpy-fold-list-fold-vec :
+    (l : list A) →
+    fold-vec b μ (vec-list l) ＝ fold-list b μ l
+  htpy-fold-list-fold-vec nil = refl
+  htpy-fold-list-fold-vec (cons x l) =
+    ap (μ x) (htpy-fold-list-fold-vec l)
 ```

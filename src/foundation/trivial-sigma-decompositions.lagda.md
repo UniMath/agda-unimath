@@ -1,4 +1,4 @@
-# Trivial Σ-Decompositions
+# Trivial Σ-decompositions
 
 ```agda
 module foundation.trivial-sigma-decompositions where
@@ -8,22 +8,22 @@ module foundation.trivial-sigma-decompositions where
 
 ```agda
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-propositional-truncation
 open import foundation.inhabited-types
 open import foundation.sigma-decompositions
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -124,13 +124,12 @@ is-contr-type-trivial-Σ-Decomposition :
 pr1 ( is-contr-type-trivial-Σ-Decomposition {l1} {l2} {A} p) =
   ( trivial-inhabited-Σ-Decomposition l2 A p ,
     is-trivial-trivial-inhabited-Σ-Decomposition p)
-pr2 ( is-contr-type-trivial-Σ-Decomposition {l1} {l2} {A} p) =
-   ( λ x →
-     eq-type-subtype
-       ( is-trivial-Prop-Σ-Decomposition)
-       ( inv
-         ( eq-equiv-Σ-Decomposition
-           ( pr1 x)
-           ( trivial-inhabited-Σ-Decomposition l2 A p)
-           ( equiv-trivial-is-trivial-Σ-Decomposition (pr1 x) (pr2 x)))))
+pr2 ( is-contr-type-trivial-Σ-Decomposition {l1} {l2} {A} p) x =
+  eq-type-subtype
+    ( is-trivial-Prop-Σ-Decomposition)
+    ( inv
+      ( eq-equiv-Σ-Decomposition
+        ( pr1 x)
+        ( trivial-inhabited-Σ-Decomposition l2 A p)
+        ( equiv-trivial-is-trivial-Σ-Decomposition (pr1 x) (pr2 x))))
 ```

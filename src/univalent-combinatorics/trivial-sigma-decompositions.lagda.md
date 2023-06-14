@@ -1,14 +1,14 @@
-# Finite trivial Σ-Decompositions
+# Finite trivial Σ-decompositions
 
 ```agda
 module univalent-combinatorics.trivial-sigma-decompositions where
+
+open import foundation.trivial-sigma-decompositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.trivial-sigma-decompositions public
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -97,14 +97,13 @@ is-contr-type-trivial-Σ-Decomposition-𝔽 :
 pr1 ( is-contr-type-trivial-Σ-Decomposition-𝔽 {l1} {l2} A p) =
   ( trivial-inhabited-Σ-Decomposition-𝔽 l2 A p ,
     is-trivial-trivial-inhabited-Σ-Decomposition-𝔽 A p)
-pr2 ( is-contr-type-trivial-Σ-Decomposition-𝔽 {l1} {l2} A p) =
-   ( λ x →
-     eq-type-subtype
-       ( is-trivial-Prop-Σ-Decomposition-𝔽 A)
-       ( inv
-         ( eq-equiv-Σ-Decomposition-𝔽
-           ( A)
-           ( pr1 x)
-           ( trivial-inhabited-Σ-Decomposition-𝔽 l2 A p)
-           ( equiv-trivial-is-trivial-Σ-Decomposition-𝔽 A (pr1 x) (pr2 x)))))
+pr2 ( is-contr-type-trivial-Σ-Decomposition-𝔽 {l1} {l2} A p) x =
+  eq-type-subtype
+    ( is-trivial-Prop-Σ-Decomposition-𝔽 A)
+    ( inv
+      ( eq-equiv-Σ-Decomposition-𝔽
+        ( A)
+        ( pr1 x)
+        ( trivial-inhabited-Σ-Decomposition-𝔽 l2 A p)
+        ( equiv-trivial-is-trivial-Σ-Decomposition-𝔽 A (pr1 x) (pr2 x))))
 ```

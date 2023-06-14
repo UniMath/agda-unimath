@@ -9,6 +9,7 @@ module univalent-combinatorics.skipping-element-standard-finite-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -33,9 +34,10 @@ abstract
   is-injective-skip-Fin :
     (k : ℕ) (x : Fin (succ-ℕ k)) → is-injective (skip-Fin k x)
   is-injective-skip-Fin (succ-ℕ k) (inl x) {inl y} {inl z} p =
-    ap ( inl)
-       ( is-injective-skip-Fin k x
-         ( is-injective-is-emb (is-emb-inl (Fin (succ-ℕ k)) unit) p))
+    ap
+      ( inl)
+      ( is-injective-skip-Fin k x
+        ( is-injective-is-emb (is-emb-inl (Fin (succ-ℕ k)) unit) p))
   is-injective-skip-Fin (succ-ℕ k) (inl x) {inr star} {inr star} p = refl
   is-injective-skip-Fin (succ-ℕ k) (inr star) {y} {z} p =
     is-injective-is-emb (is-emb-inl (Fin (succ-ℕ k)) unit) p

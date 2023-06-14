@@ -10,6 +10,7 @@ module category-theory.natural-numbers-object-precategories where
 open import category-theory.precategories
 open import category-theory.terminal-objects-precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -42,9 +43,11 @@ module _
     (x : obj-Precategory C)
     (q : type-hom-Precategory C t x)
     (f : type-hom-Precategory C x x) →
-    ∃! (type-hom-Precategory C n x) λ u →
-       (comp-hom-Precategory C u z ＝ q) ×
-       (comp-hom-Precategory C u s ＝ comp-hom-Precategory C f u)
+    ∃!
+      ( type-hom-Precategory C n x)
+      ( λ u →
+        ( comp-hom-Precategory C u z ＝ q) ×
+        ( comp-hom-Precategory C u s ＝ comp-hom-Precategory C f u))
 
   natural-numbers-object-Precategory : UU (l1 ⊔ l2)
   natural-numbers-object-Precategory =

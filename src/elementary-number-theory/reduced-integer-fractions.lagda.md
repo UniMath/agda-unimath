@@ -17,6 +17,7 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.relatively-prime-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -25,6 +26,7 @@ open import foundation.equality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -124,10 +126,10 @@ reduce-fraction-ℤ x =
 is-reduced-reduce-fraction-ℤ :
   (x : fraction-ℤ) → is-reduced-fraction-ℤ (reduce-fraction-ℤ x)
 is-reduced-reduce-fraction-ℤ x =
-   is-zero-gcd-case-split
-     (is-decidable-is-zero-ℤ
-       (gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-         (denominator-fraction-ℤ (reduce-fraction-ℤ x))))
+  is-zero-gcd-case-split
+    (is-decidable-is-zero-ℤ
+      (gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+        (denominator-fraction-ℤ (reduce-fraction-ℤ x))))
   where
   is-zero-gcd-case-split :
     ( is-zero-ℤ
@@ -198,21 +200,24 @@ is-reduced-reduce-fraction-ℤ x =
     is-plus-or-minus-case-split (inr neg) =
       (ex-falso
         ( tr is-positive-ℤ {y = neg-ℤ one-ℤ}
-          (inv (neg-neg-ℤ ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
-            ( denominator-fraction-ℤ (reduce-fraction-ℤ x)))) ∙
-             ap neg-ℤ
-               ( is-injective-right-mul-ℤ d
-                 ( λ r →
-                   tr is-positive-ℤ r
-                     ( is-positive-gcd-is-positive-right-ℤ
-                       ( numerator-fraction-ℤ x)
-                       ( denominator-fraction-ℤ x)
-                       ( is-positive-denominator-fraction-ℤ x)))
-                 ( associative-mul-ℤ
+          ( inv
+            ( neg-neg-ℤ
+              ( gcd-ℤ
+                ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
+                ( denominator-fraction-ℤ (reduce-fraction-ℤ x)))) ∙
+            ( ap neg-ℤ
+              ( is-injective-right-mul-ℤ d
+                ( λ r →
+                  tr is-positive-ℤ r
+                    ( is-positive-gcd-is-positive-right-ℤ
+                      ( numerator-fraction-ℤ x)
+                      ( denominator-fraction-ℤ x)
+                      ( is-positive-denominator-fraction-ℤ x)))
+                ( associative-mul-ℤ
                   ( neg-one-ℤ)
                   ( gcd-ℤ ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
               ( denominator-fraction-ℤ (reduce-fraction-ℤ x)))
-              d ∙ neg)))
+              d ∙ neg))))
           ( is-positive-gcd-ℤ
             ( numerator-fraction-ℤ (reduce-fraction-ℤ x))
             ( denominator-fraction-ℤ (reduce-fraction-ℤ x))

@@ -18,7 +18,7 @@ open import foundation.1-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -106,7 +106,7 @@ module _
 
 ## Property
 
-### The type of groupoids with respect to universe levels `l1` and `l2` is equivalent to the type of 1-types in `l1`.
+### The type of groupoids with respect to universe levels `l1` and `l2` is equivalent to the type of 1-types in `l1`
 
 #### The groupoid associated to a 1-type
 

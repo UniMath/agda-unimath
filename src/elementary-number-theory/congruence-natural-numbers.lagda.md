@@ -14,9 +14,11 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types

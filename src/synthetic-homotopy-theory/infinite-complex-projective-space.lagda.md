@@ -30,4 +30,6 @@ pr1 point-ℂP∞ = 𝕊¹
 pr2 point-ℂP∞ = unit-trunc-Set id-equiv
 ```
 
-### ℂP∞ as the 2-truncation of the 2-sphere
+### `ℂP∞` as the 2-truncation of the 2-sphere
+
+This remains to be defined.

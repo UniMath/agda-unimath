@@ -9,7 +9,7 @@ module trees.planar-binary-trees where
 ```agda
 open import foundation.booleans
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import trees.w-types
@@ -19,9 +19,9 @@ open import trees.w-types
 
 ## Idea
 
-A planar binary tree is a binary tree in which the branchings are labelled by
-the booleans. The idea is that at any branching point in a planar binary tree,
-we know which branch goes to the left and which branch goes to the right.
+A planar binary tree is a binary tree in which the branchings are labeled by the
+booleans. The idea is that at any branching point in a planar binary tree, we
+know which branch goes to the left and which branch goes to the right.
 
 Planar binary trees are commonly called binary trees, but in univalent
 mathematics it makes sense to recognize that the branching points in a binary

@@ -10,8 +10,9 @@ module ring-theory.sums-semirings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type

@@ -10,9 +10,10 @@ module elementary-number-theory.finitely-cyclic-maps where
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.iterating-functions
@@ -23,7 +24,7 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-# Finitely cyclic maps
+## Definitions
 
 ```agda
 module _
@@ -41,7 +42,13 @@ module _
     {f : X → X} (H : is-finitely-cyclic-map f) (x y : X) →
     iterate (length-path-is-finitely-cyclic-map H x y) f x ＝ y
   eq-is-finitely-cyclic-map H x y = pr2 (H x y)
+```
 
+## Properties
+
+### Finitely cyclic maps are equivalences
+
+```agda
   map-inv-is-finitely-cyclic-map :
     (f : X → X) (H : is-finitely-cyclic-map f) → X → X
   map-inv-is-finitely-cyclic-map f H x =
@@ -58,15 +65,18 @@ module _
     (f : X → X) (H : is-finitely-cyclic-map f) →
     (map-inv-is-finitely-cyclic-map f H ∘ f) ~ id
   isretr-map-inv-is-finitely-cyclic-map f H x =
-    ( ap ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f ∘ f)
-         ( inv (eq-is-finitely-cyclic-map H (f x) x))) ∙
-    ( ( ap ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f)
-           ( iterate-succ-ℕ
-             ( length-path-is-finitely-cyclic-map H (f x) x) f (f x))) ∙
+    ( ap
+      ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f ∘ f)
+      ( inv (eq-is-finitely-cyclic-map H (f x) x))) ∙
+    ( ( ap
+        ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f)
+          ( iterate-succ-ℕ
+            ( length-path-is-finitely-cyclic-map H (f x) x) f (f x))) ∙
       ( ( iterate-iterate
           ( length-path-is-finitely-cyclic-map H (f (f x)) (f x))
           ( length-path-is-finitely-cyclic-map H (f x) x) f (f (f x))) ∙
-        ( ( ap ( iterate (length-path-is-finitely-cyclic-map H (f x) x) f)
+        ( ( ap
+            ( iterate (length-path-is-finitely-cyclic-map H (f x) x) f)
             ( eq-is-finitely-cyclic-map H (f (f x)) (f x))) ∙
           ( eq-is-finitely-cyclic-map H (f x) x))))
 
@@ -79,7 +89,7 @@ module _
       ( isretr-map-inv-is-finitely-cyclic-map f H)
 ```
 
-# The successor functions on the standard finite types are finitely cyclic
+### The successor functions on standard finite types are finitely cyclic
 
 ```agda
 compute-iterate-succ-Fin :

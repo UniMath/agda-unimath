@@ -10,8 +10,9 @@ module lists.concatenation-lists where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -112,24 +113,27 @@ eta-list' (cons a (cons b x)) = ap (cons a) (eta-list' (cons b x))
 ```agda
 head-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id ( head-list (concat-list x y))
-     ( head-list (concat-list (head-list x) (head-list y)))
+  Id
+    ( head-list (concat-list x y))
+    ( head-list (concat-list (head-list x) (head-list y)))
 head-concat-list nil nil = refl
 head-concat-list nil (cons x y) = refl
 head-concat-list (cons a x) y = refl
 
 tail-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id ( tail-list (concat-list x y))
-     ( concat-list (tail-list x) (tail-list (concat-list (head-list x) y)))
+  Id
+    ( tail-list (concat-list x y))
+    ( concat-list (tail-list x) (tail-list (concat-list (head-list x) y)))
 tail-concat-list nil y = refl
 tail-concat-list (cons a x) y = refl
 
 last-element-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id ( last-element-list (concat-list x y))
-     ( last-element-list
-       ( concat-list (last-element-list x) (last-element-list y)))
+  Id
+    ( last-element-list (concat-list x y))
+    ( last-element-list
+      ( concat-list (last-element-list x) (last-element-list y)))
 last-element-concat-list nil nil = refl
 last-element-concat-list nil (cons b nil) = refl
 last-element-concat-list nil (cons b (cons c y)) =
@@ -143,10 +147,11 @@ last-element-concat-list (cons a (cons b x)) y =
 
 remove-last-element-concat-list :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id ( remove-last-element-list (concat-list x y))
-     ( concat-list
-       ( remove-last-element-list (concat-list x (head-list y)))
-       ( remove-last-element-list y))
+  Id
+    ( remove-last-element-list (concat-list x y))
+    ( concat-list
+      ( remove-last-element-list (concat-list x (head-list y)))
+      ( remove-last-element-list y))
 remove-last-element-concat-list nil nil = refl
 remove-last-element-concat-list nil (cons a nil) = refl
 remove-last-element-concat-list nil (cons a (cons b y)) = refl
@@ -157,10 +162,11 @@ remove-last-element-concat-list (cons a (cons b x)) y =
 
 tail-concat-list' :
   {l1 : Level} {A : UU l1} (x y : list A) →
-  Id ( tail-list (concat-list x y))
-     ( concat-list
-       ( tail-list x)
-       ( tail-list (concat-list (last-element-list x) y)))
+  Id
+    ( tail-list (concat-list x y))
+    ( concat-list
+      ( tail-list x)
+      ( tail-list (concat-list (last-element-list x) y)))
 tail-concat-list' nil y = refl
 tail-concat-list' (cons a nil) y = refl
 tail-concat-list' (cons a (cons b x)) y =

@@ -78,8 +78,9 @@ module _
 
   associative-mul-∞-Group :
     (x y z : type-∞-Group) →
-    Id (mul-∞-Group (mul-∞-Group x y) z)
-       (mul-∞-Group x (mul-∞-Group y z))
+    Id
+      ( mul-∞-Group (mul-∞-Group x y) z)
+      ( mul-∞-Group x (mul-∞-Group y z))
   associative-mul-∞-Group = associative-mul-Ω classifying-pointed-type-∞-Group
 
   left-unit-law-mul-∞-Group :
@@ -93,8 +94,9 @@ module _
     right-unit-law-mul-Ω classifying-pointed-type-∞-Group
 
   coherence-unit-laws-mul-∞-Group :
-    Id ( left-unit-law-mul-∞-Group unit-∞-Group)
-       ( right-unit-law-mul-∞-Group unit-∞-Group)
+    Id
+      ( left-unit-law-mul-∞-Group unit-∞-Group)
+      ( right-unit-law-mul-∞-Group unit-∞-Group)
   coherence-unit-laws-mul-∞-Group = refl
 
   inv-∞-Group : type-∞-Group → type-∞-Group

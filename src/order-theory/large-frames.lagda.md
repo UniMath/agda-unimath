@@ -35,7 +35,7 @@ meets over suprema.
 
 ```agda
 record
-  Large-Frame (α : Level → Level) (β : Level → Level → Level) : UUω
+  Large-Frame (α : Level → Level) (β : Level → Level → Level) (γ : Level) : UUω
   where
   constructor
     make-Large-Frame
@@ -45,7 +45,7 @@ record
     is-large-meet-semilattice-Large-Frame :
       is-large-meet-semilattice-Large-Poset large-poset-Large-Frame
     is-large-suplattice-Large-Frame :
-      is-large-suplattice-Large-Poset large-poset-Large-Frame
+      is-large-suplattice-Large-Poset γ large-poset-Large-Frame
     distributive-meet-sup-Large-Frame :
       {l1 l2 l3 : Level}
       (x : type-Large-Poset large-poset-Large-Frame l1)
@@ -68,7 +68,8 @@ record
 open Large-Frame public
 
 module _
-  {α : Level → Level} {β : Level → Level → Level} (L : Large-Frame α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Frame α β γ)
   where
 
   large-preorder-Large-Frame : Large-Preorder α β
@@ -184,9 +185,9 @@ module _
 
   sup-Large-Frame :
     {l1 l2 : Level} {I : UU l1} →
-    (I → type-Large-Frame l2) → type-Large-Frame (l1 ⊔ l2)
+    (I → type-Large-Frame l2) → type-Large-Frame (γ ⊔ l1 ⊔ l2)
   sup-Large-Frame =
-    sup-is-large-suplattice-Large-Poset
+    sup-is-large-suplattice-Large-Poset γ
       ( large-poset-Large-Frame L)
       ( is-large-suplattice-Large-Frame L)
 
@@ -197,11 +198,11 @@ module _
       ( x)
       ( sup-Large-Frame x)
   is-least-upper-bound-sup-Large-Frame =
-    is-least-upper-bound-sup-is-large-suplattice-Large-Poset
+    is-least-upper-bound-sup-is-large-suplattice-Large-Poset γ
       ( large-poset-Large-Frame L)
       ( is-large-suplattice-Large-Frame L)
 
-  large-suplattice-Large-Frame : Large-Suplattice α β
+  large-suplattice-Large-Frame : Large-Suplattice α β γ
   large-poset-Large-Suplattice large-suplattice-Large-Frame =
     large-poset-Large-Frame L
   is-large-suplattice-Large-Suplattice large-suplattice-Large-Frame =

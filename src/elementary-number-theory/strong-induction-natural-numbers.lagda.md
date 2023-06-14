@@ -10,12 +10,13 @@ module elementary-number-theory.strong-induction-natural-numbers where
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -101,8 +102,9 @@ cases-eq-succ-strong-ind-ℕ :
   ( pS k H)
 cases-eq-succ-strong-ind-ℕ P pS k H (inl p) = ex-falso (neg-succ-leq-ℕ k p)
 cases-eq-succ-strong-ind-ℕ P pS k H (inr α) =
-  ap ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k)) ∘ inr)
-     ( eq-is-prop' (is-set-ℕ (succ-ℕ k) (succ-ℕ k)) α refl)
+  ap
+    ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k)) ∘ inr)
+    ( eq-is-prop' (is-set-ℕ (succ-ℕ k) (succ-ℕ k)) α refl)
 
 eq-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
@@ -220,8 +222,9 @@ compute-succ-strong-ind-ℕ P p0 pS n =
       ( succ-strong-ind-ℕ P pS)
       ( n))
     ( refl-leq-ℕ n)) ∙
-  ( ap ( pS n)
-       ( eq-htpy (eq-htpy ∘ eq-compute-succ-strong-ind-ℕ P p0 pS n)))
+  ( ap
+    ( pS n)
+    ( eq-htpy (eq-htpy ∘ eq-compute-succ-strong-ind-ℕ P p0 pS n)))
 
 total-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →

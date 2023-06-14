@@ -9,12 +9,13 @@ module trees.w-type-of-natural-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.booleans
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
@@ -67,8 +68,9 @@ Nat-𝕎-ℕ (succ-ℕ x) = succ-Nat-𝕎 (Nat-𝕎-ℕ x)
 
 issec-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
 issec-ℕ-Nat-𝕎 (tree-𝕎 true α) =
-  ap ( tree-𝕎 true)
-     ( eq-htpy H)
+  ap
+    ( tree-𝕎 true)
+    ( eq-htpy H)
   where
   H : (z : unit) → Nat-𝕎-ℕ (ℕ-Nat-𝕎 (α star)) ＝ α z
   H star = issec-ℕ-Nat-𝕎 (α star)

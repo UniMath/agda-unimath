@@ -2,30 +2,32 @@
 
 ```agda
 module foundation.equivalences where
+
+open import foundation-core.equivalences public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalences public
-
+open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
+open import foundation.functoriality-fibers-of-maps
+open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
-open import foundation-core.cones-over-cospans
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.functoriality-fibers-of-maps
-open import foundation-core.identity-systems
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
@@ -34,7 +36,6 @@ open import foundation-core.sets
 open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -90,10 +91,11 @@ module _
       ( issec-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
-    ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-         ( issec-map-inv-equiv
-           ( equiv-ap e x (map-inv-equiv e y))
-           ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
+    ( ap
+      ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+      ( issec-map-inv-equiv
+        ( equiv-ap e x (map-inv-equiv e y))
+        ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
     ( ( assoc
         ( p)
         ( inv (issec-map-inv-equiv e y))
@@ -125,13 +127,15 @@ module _
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
               ( issec-map-inv-equiv e y)
               ( inv p)
-              ( ( ap ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-                     ( ap ( ap (map-equiv e))
-                          ( inv-inv
-                            ( map-inv-equiv
-                              ( equiv-ap e x (map-inv-equiv e y))
-                              ( ( inv p) ∙
-                                ( inv (issec-map-inv-equiv e y))))))) ∙
+              ( ( ap
+                  ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+                  ( ap
+                    ( ap (map-equiv e))
+                    ( inv-inv
+                      ( map-inv-equiv
+                        ( equiv-ap e x (map-inv-equiv e y))
+                        ( ( inv p) ∙
+                          ( inv (issec-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
 ```
@@ -186,13 +190,14 @@ abstract
     is-equiv-has-inverse
       ( pr1 retr-f)
       ( htpy-eq
-        ( ap ( pr1)
-             ( eq-is-contr'
-               ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
-                 ( pair
-                   ( f ∘ (pr1 retr-f))
-                   ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retr-f)))
-                 ( pair id refl))))
+        ( ap
+          ( pr1)
+          ( eq-is-contr'
+            ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
+            ( pair
+              ( f ∘ (pr1 retr-f))
+              ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retr-f)))
+            ( pair id refl))))
       ( htpy-eq (pr2 retr-f))
 ```
 

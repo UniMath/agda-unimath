@@ -1,18 +1,19 @@
 # Retractions
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation-core.retractions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.universe-levels
+
 open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -59,7 +60,7 @@ module _
 
 ## Properties
 
-### If A is a retraction of B, then the identity types of A are retractions of the identity types of B
+### If `A` is a retraction of `B`, then the identity types of `A` are retractions of the identity types of `B`
 
 ```agda
 module _

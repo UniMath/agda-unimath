@@ -9,6 +9,7 @@ module category-theory.pullbacks-precategories where
 ```agda
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -57,9 +58,11 @@ module _
     (p₁' : type-hom-Precategory C w' y) →
     (p₂' : type-hom-Precategory C w' z) →
     comp-hom-Precategory C f p₁' ＝ comp-hom-Precategory C g p₂' →
-    ∃! (type-hom-Precategory C w' w) λ h →
-       (comp-hom-Precategory C p₁ h ＝ p₁') ×
-       (comp-hom-Precategory C p₂ h ＝ p₂')
+    ∃!
+      ( type-hom-Precategory C w' w)
+      ( λ h →
+        ( comp-hom-Precategory C p₁ h ＝ p₁') ×
+        ( comp-hom-Precategory C p₂ h ＝ p₂'))
 
   pullback-Precategory :
     (x y z : obj-Precategory C) →

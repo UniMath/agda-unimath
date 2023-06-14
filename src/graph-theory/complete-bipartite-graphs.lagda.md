@@ -30,18 +30,19 @@ complete-bipartite-Undirected-Graph-𝔽 :
   {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → Undirected-Graph-𝔽 (l1 ⊔ l2) (l1 ⊔ l2)
 pr1 (complete-bipartite-Undirected-Graph-𝔽 X Y) = coprod-𝔽 X Y
 pr2 (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
-  prod-𝔽 ( Σ-𝔽 X
-           ( λ x →
-             fib-𝔽
-               ( finite-type-2-Element-Type (pr1 p))
-               ( coprod-𝔽 X Y)
-               ( element-unordered-pair p)
-               ( inl x)))
-         ( Σ-𝔽 Y
-           ( λ y →
-             fib-𝔽
-               ( finite-type-2-Element-Type (pr1 p))
-               ( coprod-𝔽 X Y)
-               ( element-unordered-pair p)
-               ( inr y)))
+  prod-𝔽
+    ( Σ-𝔽 X
+      ( λ x →
+        fib-𝔽
+          ( finite-type-2-Element-Type (pr1 p))
+          ( coprod-𝔽 X Y)
+          ( element-unordered-pair p)
+          ( inl x)))
+    ( Σ-𝔽 Y
+      ( λ y →
+        fib-𝔽
+          ( finite-type-2-Element-Type (pr1 p))
+          ( coprod-𝔽 X Y)
+          ( element-unordered-pair p)
+          ( inr y)))
 ```

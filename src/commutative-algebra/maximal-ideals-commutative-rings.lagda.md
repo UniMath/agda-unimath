@@ -1,4 +1,4 @@
-# Maximal ideals in commutative rings
+# Maximal ideals of commutative rings
 
 ```agda
 module commutative-algebra.maximal-ideals-commutative-rings where
@@ -18,3 +18,5 @@ module commutative-algebra.maximal-ideals-commutative-rings where
 ideal `J` such that `I ⊆ J` satisfies `1 ∉ J ⇒ I ＝ J`.
 
 ## Definition
+
+This remains to be defined.

@@ -8,7 +8,7 @@ module orthogonal-factorization-systems.factorization-operations-function-classe
 
 ```agda
 open import foundation.contractible-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.universe-levels

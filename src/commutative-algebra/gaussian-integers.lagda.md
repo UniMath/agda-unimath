@@ -14,6 +14,8 @@ open import elementary-number-theory.difference-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -130,7 +132,7 @@ pr2 (neg-ℤ[i] (a , b)) = neg-ℤ b
 
 ```agda
 mul-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
-pr1 (mul-ℤ[i] (a , b) (a' , b')) = diff-ℤ (a *ℤ a') (b *ℤ b')
+pr1 (mul-ℤ[i] (a , b) (a' , b')) = (a *ℤ a') -ℤ (b *ℤ b')
 pr2 (mul-ℤ[i] (a , b) (a' , b')) = (a *ℤ b') +ℤ (a' *ℤ b)
 
 infix 30 _*ℤ[i]_

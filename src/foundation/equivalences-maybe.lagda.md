@@ -1,4 +1,4 @@
-# Equivalences on Maybe
+# Equivalences on `Maybe`
 
 ```agda
 module foundation.equivalences-maybe where
@@ -7,6 +7,8 @@ module foundation.equivalences-maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
@@ -14,19 +16,18 @@ open import foundation.functoriality-coproduct-types
 open import foundation.maybe
 open import foundation.unit-type
 open import foundation.universal-property-maybe
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -94,7 +95,7 @@ abstract
     is-not-exception-injective-map-exception-Maybe (is-injective-emb e)
 ```
 
-### If f is injective and f (inl x) is an exception, then f exception is a value
+### If `f` is injective and `f (inl x)` is an exception, then `f exception` is a value
 
 ```agda
 is-value-injective-map-exception-Maybe :
@@ -337,8 +338,9 @@ abstract
     is-injective-unit-Maybe
       ( ( compute-map-inv-equiv-equiv-is-exception-Maybe e
           ( map-equiv-equiv-Maybe e x)
-          ( ( ap ( map-inv-equiv e)
-                 ( compute-map-equiv-equiv-is-exception-Maybe e x p)) ∙
+          ( ( ap
+              ( map-inv-equiv e)
+              ( compute-map-equiv-equiv-is-exception-Maybe e x p)) ∙
             ( isretr-map-inv-equiv e exception-Maybe))) ∙
         ( ( ap (map-inv-equiv e) (inv p)) ∙
           ( isretr-map-inv-equiv e (inl x))))
@@ -350,12 +352,14 @@ abstract
             ( map-inv-equiv e (inl (map-equiv-equiv-Maybe e x)))
             ( pair x
               ( inv
-                ( ( ap (map-inv-equiv e)
-                       ( compute-map-equiv-equiv-is-not-exception-Maybe
-                          e x f)) ∙
+                ( ( ap
+                    ( map-inv-equiv e)
+                    ( compute-map-equiv-equiv-is-not-exception-Maybe
+                        e x f)) ∙
                   ( isretr-map-inv-equiv e (inl x))))))) ∙
-        ( ( ap ( map-inv-equiv e)
-               ( compute-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
+        ( ( ap
+            ( map-inv-equiv e)
+            ( compute-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
           ( isretr-map-inv-equiv e (inl x))))
 ```
 

@@ -2,27 +2,29 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module foundation.relaxed-sigma-decompositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -231,7 +233,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of Relaxed-Σ-Decompositions
+### Characterization of equality of relaxed-Σ-decompositions
 
 ```agda
 equiv-Relaxed-Σ-Decomposition :
@@ -445,10 +447,10 @@ module _
         ( λ U Vs e →
           ( Σ ( ( u : indexing-type-Relaxed-Σ-Decomposition Y) →
                 cotype-Relaxed-Σ-Decomposition Y u ≃ pr1 Vs (map-equiv e u))
-             ( λ f →
-               ( ( ( map-equiv-Σ (λ u → pr1 Vs u) e f) ∘
-                   ( map-matching-correspondence-Relaxed-Σ-Decomposition Y)) ~
-                 ( map-equiv (pr2 Vs))))))
+              ( λ f →
+                ( ( ( map-equiv-Σ (λ u → pr1 Vs u) e f) ∘
+                    ( map-matching-correspondence-Relaxed-Σ-Decomposition Y)) ~
+                  ( map-equiv (pr2 Vs))))))
         ( is-contr-total-equiv (indexing-type-Relaxed-Σ-Decomposition Y))
         ( pair (indexing-type-Relaxed-Σ-Decomposition Y) id-equiv)
         ( is-contr-total-Eq-structure
@@ -621,7 +623,7 @@ module _
       (extensionality-displayed-Relaxed-Σ-Decomposition D)
 ```
 
-#### Equivalence between fibered double Relaxed-Σ-Decompositions and displayed double Relaxed-Σ-Decompositions
+#### Equivalence between fibered double relaxed Σ-recompositions and displayed double relaxed Σ-decompositions
 
 ```agda
 module _
@@ -640,7 +642,7 @@ module _
       ( snd-fibered-Relaxed-Σ-Decomposition fib-D)
 
   matching-correspondence-displayed-fibered-Relaxed-Σ-Decomposition :
-     A ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
+    A ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
   matching-correspondence-displayed-fibered-Relaxed-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ X Y by e
@@ -733,7 +735,7 @@ module _
         ( map-equiv e a)
 
   isretr-map-inv-displayed-fibered-Relaxed-Σ-Decomposition :
-     map-inv-displayed-fibered-Relaxed-Σ-Decomposition
+    map-inv-displayed-fibered-Relaxed-Σ-Decomposition
       ( map-displayed-fibered-Relaxed-Σ-Decomposition fib-D) ＝ fib-D
   isretr-map-inv-displayed-fibered-Relaxed-Σ-Decomposition =
     eq-equiv-fibered-Relaxed-Σ-Decomposition
@@ -794,17 +796,17 @@ module _
           ( map-equiv ∘ t)
           ( map-inv-equiv ∘ t)
           ( map-equiv s x)) ∙
-      ( tot-htpy (λ z → isretr-map-inv-equiv (t z)) (map-equiv s x) ∙
-      ( tot-id
-        ( λ z → cotype-fst-displayed-Relaxed-Σ-Decomposition disp-D z)
-        ( map-equiv s x))))
+        ( ( tot-htpy (λ z → isretr-map-inv-equiv (t z)) (map-equiv s x)) ∙
+          ( tot-id
+            ( λ z → cotype-fst-displayed-Relaxed-Σ-Decomposition disp-D z)
+            ( map-equiv s x))))
 
   issec-map-inv-displayed-fibered-Relaxed-Σ-Decomposition :
     ( map-displayed-fibered-Relaxed-Σ-Decomposition
       {l1} {l} {l} {l} {l} {A} fib-D) ＝
     disp-D
   issec-map-inv-displayed-fibered-Relaxed-Σ-Decomposition =
-     eq-equiv-displayed-Relaxed-Σ-Decomposition
+    eq-equiv-displayed-Relaxed-Σ-Decomposition
       ( map-displayed-fibered-Relaxed-Σ-Decomposition fib-D)
       ( disp-D)
       ( ( ( id-equiv) ,

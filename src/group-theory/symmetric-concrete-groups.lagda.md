@@ -99,3 +99,5 @@ module _
 ```
 
 ### Equivalent sets have isomorphic symmetric concrete groups
+
+This remains to be shown.

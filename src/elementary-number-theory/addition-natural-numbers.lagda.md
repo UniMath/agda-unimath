@@ -9,11 +9,13 @@ module elementary-number-theory.addition-natural-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law

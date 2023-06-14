@@ -7,20 +7,42 @@ module foundation.coslice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
+
+Given a span of maps
+
+```text
+      X
+     / \
+  f /   \ g
+   v     v
+  A       B,
+```
+
+we define a morphism between the maps in the coslice category of types to be a
+map `h : A → B` together with a coherence triangle `(h ∘ f) ~ g`:
+
+```text
+      X
+     / \
+  f /   \ g
+   v     v
+  A ----> B.
+      h
+```
 
 ## Definition
 

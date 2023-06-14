@@ -9,6 +9,7 @@ module linear-algebra.matrices-on-rings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -69,8 +70,9 @@ module _
 
   associative-add-matrix-Ring :
     {m n : ℕ} (A B C : matrix-Ring R m n) →
-    Id ( add-matrix-Ring R (add-matrix-Ring R A B) C)
-       ( add-matrix-Ring R A (add-matrix-Ring R B C))
+    Id
+      ( add-matrix-Ring R (add-matrix-Ring R A B) C)
+      ( add-matrix-Ring R A (add-matrix-Ring R B C))
   associative-add-matrix-Ring empty-vec empty-vec empty-vec = refl
   associative-add-matrix-Ring (v ∷ A) (w ∷ B) (z ∷ C) =
     ap-binary _∷_

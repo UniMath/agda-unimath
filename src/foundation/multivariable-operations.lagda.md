@@ -9,18 +9,19 @@ module foundation.multivariable-operations where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.raising-universe-levels
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 
 open import linear-algebra.vectors
 ```
@@ -85,10 +86,10 @@ multivariable-operation :
   ( X : UU l) →
   UU l
 multivariable-operation n A X =
- (multivariable-input n A → X)
+  multivariable-input n A → X
 ```
 
-### Properties
+## Properties
 
 ### For the case of constant families, multivariable inputs and vectors coincide
 

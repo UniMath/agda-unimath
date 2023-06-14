@@ -10,7 +10,7 @@ module order-theory.order-preserving-maps-preorders where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -157,7 +157,7 @@ module _
     (g : type-hom-Preorder Q R) (f : type-hom-Preorder P Q) →
     type-hom-Preorder P R
   pr1 (comp-hom-Preorder g f) =
-     map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f
+    map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f
   pr2 (comp-hom-Preorder g f) =
     preserves-order-comp-Preorder g f
 ```
@@ -200,8 +200,9 @@ module _
   where
 
   associative-comp-hom-Preorder :
-    Id ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
-       ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
+    Id
+      ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)
+      ( comp-hom-Preorder P R S h (comp-hom-Preorder P Q R g f))
   associative-comp-hom-Preorder =
     eq-htpy-hom-Preorder P S
       ( comp-hom-Preorder P Q S (comp-hom-Preorder Q R S h g) f)

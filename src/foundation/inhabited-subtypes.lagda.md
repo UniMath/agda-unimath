@@ -7,18 +7,17 @@ module foundation.inhabited-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -116,8 +115,8 @@ module _
 
   refl-has-same-elements-inhabited-subtype :
     has-same-elements-inhabited-subtype P P
-  pr1 (refl-has-same-elements-inhabited-subtype x) = id
-  pr2 (refl-has-same-elements-inhabited-subtype x) = id
+  refl-has-same-elements-inhabited-subtype =
+    refl-has-same-elements-subtype (subtype-inhabited-subtype P)
 
   is-contr-total-has-same-elements-inhabited-subtype :
     is-contr
@@ -153,6 +152,7 @@ module _
     map-inv-equiv (extensionality-inhabited-subtype Q)
 
   refl-extensionality-inhabited-subtype :
-    map-equiv (extensionality-inhabited-subtype P) refl ＝ (λ x → pair id id)
+    map-equiv (extensionality-inhabited-subtype P) refl ＝
+    refl-has-same-elements-inhabited-subtype
   refl-extensionality-inhabited-subtype = refl
 ```

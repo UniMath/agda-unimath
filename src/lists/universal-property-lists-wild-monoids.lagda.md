@@ -7,6 +7,7 @@ module lists.universal-property-lists-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.unit-type
@@ -51,9 +52,10 @@ list-Coherent-H-Space X =
 ```agda
 unit-law-011-associative-concat-list :
   {l1 : Level} {X : UU l1} (y z : list X) →
-  Id ( ( associative-concat-list nil y z) ∙
-       ( left-unit-law-concat-list (concat-list y z)))
-     ( ap (λ t → concat-list t z) (left-unit-law-concat-list y))
+  Id
+    ( ( associative-concat-list nil y z) ∙
+      ( left-unit-law-concat-list (concat-list y z)))
+    ( ap (λ t → concat-list t z) (left-unit-law-concat-list y))
 unit-law-011-associative-concat-list y z = refl
 
 concat-list' : {l : Level} {A : UU l} → list A → list A → list A
@@ -61,9 +63,10 @@ concat-list' x y = concat-list y x
 
 unit-law-101-associative-concat-list :
   {l1 : Level} {X : UU l1} (x z : list X) →
-  Id ( ( associative-concat-list x nil z) ∙
-       ( ap (concat-list x) (left-unit-law-concat-list z)))
-     ( ap (λ t → concat-list t z) (right-unit-law-concat-list x))
+  Id
+    ( ( associative-concat-list x nil z) ∙
+      ( ap (concat-list x) (left-unit-law-concat-list z)))
+    ( ap (λ t → concat-list t z) (right-unit-law-concat-list x))
 unit-law-101-associative-concat-list nil z = refl
 unit-law-101-associative-concat-list (cons x l) z =
   ( ( ( inv
@@ -78,9 +81,10 @@ unit-law-101-associative-concat-list (cons x l) z =
 
 unit-law-110-associative-concat-list :
   {l1 : Level} {X : UU l1} (x y : list X) →
-  Id ( ( associative-concat-list x y nil) ∙
-       ( ap (concat-list x) (right-unit-law-concat-list y)))
-     ( right-unit-law-concat-list (concat-list x y))
+  Id
+    ( ( associative-concat-list x y nil) ∙
+      ( ap (concat-list x) (right-unit-law-concat-list y)))
+    ( right-unit-law-concat-list (concat-list x y))
 unit-law-110-associative-concat-list nil y =
   ap-id (right-unit-law-concat-list y)
 unit-law-110-associative-concat-list (cons a x) y =

@@ -2,34 +2,36 @@
 
 ```agda
 module foundation.pullbacks where
+
+open import foundation-core.pullbacks public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.pullbacks public
-
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-cubes-of-maps
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.descent-equivalences
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-over-cospans
 open import foundation-core.constant-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.diagonal-maps-of-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -469,11 +471,12 @@ abstract
     ind-htpy g
       ( λ g'' Hg' →
         ( c : cone f g C) (c' : cone f g'' C) →
-        Id ( tr
-             ( λ g'' → cone f g'' C)
-             ( eq-htpy Hg')
-             ( tr (λ f''' → cone f''' g C) (eq-htpy (refl-htpy' f)) c))
-           ( c') →
+        Id
+          ( tr
+            ( λ g'' → cone f g'' C)
+            ( eq-htpy Hg')
+            ( tr (λ f''' → cone f''' g C) (eq-htpy (refl-htpy' f)) c))
+          ( c') →
         htpy-parallel-cone refl-htpy Hg' c c')
       ( htpy-eq-square-refl-htpy f g)
 
@@ -525,8 +528,11 @@ abstract
       ( htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (htpy-eq (compute-ind-htpy f
         ( λ f'' Hf' →
           ( g g' : B → X) (Hg : g ~ g') (c : cone f g C) (c' : cone f'' g' C) →
-            ( Id ( tr (λ g'' → cone f'' g'' C) (eq-htpy Hg)
-                 ( tr (λ f''' → cone f''' g C) (eq-htpy Hf') c)) c') →
+            ( Id
+              ( tr
+                ( λ g'' → cone f'' g'' C)
+                ( eq-htpy Hg)
+                ( tr (λ f''' → cone f''' g C) (eq-htpy Hf') c)) c') →
             htpy-parallel-cone Hf' Hg c c')
         ( λ g g' → htpy-parallel-cone-eq' f {g = g} {g' = g'})) g) g)
         refl-htpy) c) c'))
@@ -815,8 +821,9 @@ is-pullback-bottom-is-pullback-top-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-       top back-left back-right front-left front-right bottom) →
+  (c :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom) →
   is-equiv hA → is-equiv hB → is-equiv hC → is-equiv hD →
   is-pullback h' k' (pair f' (pair g' top)) →
   is-pullback h k (pair f (pair g bottom))
@@ -842,7 +849,7 @@ is-pullback-bottom-is-pullback-top-cube-is-equiv
           ( rectangle-back-left-bottom-cube
             f g h k f' g' h' k' hA hB hC hD
             top back-left back-right front-left front-right bottom))}
-       ( pair
+      ( pair
         ( f')
         ( pair
           ( hC ∘ g')
@@ -881,8 +888,9 @@ is-pullback-top-is-pullback-bottom-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-       top back-left back-right front-left front-right bottom) →
+  (c :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom) →
   is-equiv hA → is-equiv hB → is-equiv hC → is-equiv hD →
   is-pullback h k (pair f (pair g bottom)) →
   is-pullback h' k' (pair f' (pair g' top))
@@ -941,8 +949,9 @@ is-pullback-front-left-is-pullback-back-right-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-       top back-left back-right front-left front-right bottom) →
+  (c :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom) →
   is-equiv f' → is-equiv f → is-equiv k' → is-equiv k →
   is-pullback g hC (pair hA (pair g' back-right)) →
   is-pullback h hD (pair hB (pair h' front-left))
@@ -970,8 +979,9 @@ is-pullback-front-right-is-pullback-back-left-cube-is-equiv :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-       top back-left back-right front-left front-right bottom) →
+  (c :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom) →
   is-equiv g' → is-equiv h' → is-equiv g → is-equiv h →
   is-pullback f hB (pair hA (pair f' back-left)) →
   is-pullback k hD (pair hC (pair k' front-right))

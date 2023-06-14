@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module finite-group-theory.simpson-delooping-sign-homomorphism where
 ```
 
@@ -23,6 +21,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equivalence-relations
@@ -33,7 +32,7 @@ open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.involutions
 open import foundation.logical-equivalences
@@ -42,6 +41,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.univalence-action-on-equivalences
 open import foundation.universe-levels
@@ -631,7 +631,7 @@ module _
           ( inv-equiv ( map-simpson-comp-equiv X X' e f) ∘e
             map-simpson-comp-equiv X X' e f'))
     lemma-sign-comp X X' e f f' =
-       ap
+      ap
         ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
         ( ap
           ( inv-equiv f ∘e_)

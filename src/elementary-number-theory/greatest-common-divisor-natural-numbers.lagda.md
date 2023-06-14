@@ -21,6 +21,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 open import elementary-number-theory.well-ordering-principle-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -29,6 +30,7 @@ open import foundation.empty-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -226,7 +228,7 @@ div-gcd-is-common-divisor-ℕ a b x H with
 ... | inr np = pr2 (is-multiple-of-gcd-gcd-ℕ a b np) x H
 ```
 
-### If every common divisor divides a number `r < gcd a b`, then `r = 0`.
+### If every common divisor divides a number `r < gcd a b`, then `r = 0`
 
 ```agda
 is-zero-is-common-divisor-le-gcd-ℕ :
@@ -253,20 +255,22 @@ div-left-factor-div-gcd-ℕ a b x d with
   transitive-div-ℕ x (gcd-ℕ a b) a d
     ( pair q
       ( ( ( α) ∙
-          ( ap ( dist-ℕ a)
-               ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
-                 ( λ x H →
-                   div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
-                     ( div-mul-ℕ q x (gcd-ℕ a b)
-                       ( div-gcd-is-common-divisor-ℕ a b x H))
-                     ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
+          ( ap
+            ( dist-ℕ a)
+            ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
+              ( λ x H →
+                div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
+                  ( div-mul-ℕ q x (gcd-ℕ a b)
+                    ( div-gcd-is-common-divisor-ℕ a b x H))
+                  ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
         ( right-unit-law-dist-ℕ a)))
   where
   r = remainder-euclidean-division-ℕ (gcd-ℕ a b) a
   q = quotient-euclidean-division-ℕ (gcd-ℕ a b) a
   α = eq-quotient-euclidean-division-ℕ (gcd-ℕ a b) a
-  B = strict-upper-bound-remainder-euclidean-division-ℕ (gcd-ℕ a b) a
-       ( is-nonzero-gcd-ℕ a b np)
+  B =
+    strict-upper-bound-remainder-euclidean-division-ℕ
+      (gcd-ℕ a b) a (is-nonzero-gcd-ℕ a b np)
   β = eq-euclidean-division-ℕ (gcd-ℕ a b) a
 
 div-right-factor-div-gcd-ℕ :
@@ -278,20 +282,23 @@ div-right-factor-div-gcd-ℕ a b x d with
 ... | inr np =
   transitive-div-ℕ x (gcd-ℕ a b) b d
     ( pair q
-      ( ( α ∙ ( ap ( dist-ℕ b)
-               ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
-                 ( λ x H →
-                   div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
-                     ( div-mul-ℕ q x (gcd-ℕ a b)
-                       ( div-gcd-is-common-divisor-ℕ a b x H))
-                     ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
+      ( ( α ∙
+          ( ap
+            ( dist-ℕ b)
+            ( is-zero-is-common-divisor-le-gcd-ℕ a b r B
+              ( λ x H →
+                div-right-summand-ℕ x (q *ℕ (gcd-ℕ a b)) r
+                  ( div-mul-ℕ q x (gcd-ℕ a b)
+                    ( div-gcd-is-common-divisor-ℕ a b x H))
+                  ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
         ( right-unit-law-dist-ℕ b)))
   where
   r = remainder-euclidean-division-ℕ (gcd-ℕ a b) b
   q = quotient-euclidean-division-ℕ (gcd-ℕ a b) b
   α = eq-quotient-euclidean-division-ℕ (gcd-ℕ a b) b
-  B = strict-upper-bound-remainder-euclidean-division-ℕ (gcd-ℕ a b) b
-       ( is-nonzero-gcd-ℕ a b np)
+  B =
+    strict-upper-bound-remainder-euclidean-division-ℕ
+      (gcd-ℕ a b) b (is-nonzero-gcd-ℕ a b np)
   β = eq-euclidean-division-ℕ (gcd-ℕ a b) b
 
 is-common-divisor-div-gcd-ℕ :
@@ -342,7 +349,7 @@ is-commutative-gcd-ℕ a b =
   pr2 (σ (pair x y)) = x
 ```
 
-### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`.
+### If `d` is a common divisor of `a` and `b`, then `kd` is a common divisor of `ka` and `kb`
 
 ```agda
 preserves-is-common-divisor-mul-ℕ :
@@ -405,7 +412,7 @@ is-id-is-gcd-zero-ℕ' {a} {x} H = is-id-is-gcd-zero-ℕ {a} {x}
   ((is-commutative-gcd-ℕ 0 a) ∙ H)
 ```
 
-### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`.
+### Consider a common divisor `d` of `a` and `b` and let `e` be a divisor of `d`. Then any divisor of `d/e` is a common divisor of `a/e` and `b/e`
 
 ```agda
 is-common-divisor-quotients-div-quotient-ℕ :

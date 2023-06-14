@@ -7,11 +7,11 @@ module foundation.partial-elements where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -42,3 +42,5 @@ pr2 (unit-partial-element x) y = x
 ## Properties
 
 ### The type of partial elements is a directed complete poset
+
+This remains to be shown.

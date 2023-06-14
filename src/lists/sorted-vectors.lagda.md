@@ -14,7 +14,7 @@ open import finite-group-theory.permutations-standard-finite-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -78,7 +78,7 @@ module _
 
 ## Properties
 
-### If a vector is sorted, then its tail is also sorted.
+### If a vector is sorted, then its tail is also sorted
 
 ```agda
   is-sorted-tail-is-sorted-vec :
@@ -95,7 +95,7 @@ module _
   is-leq-head-head-tail-is-sorted-vec (x ∷ y ∷ v) s = pr1 s
 ```
 
-### If a vector `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the vector.
+### If a vector `v' ＝ y ∷ v` is sorted then for all elements `x` less than or equal to `y`, `x` is less than or equal to every element in the vector
 
 ```agda
   is-least-element-vec-is-leq-head-sorted-vec :

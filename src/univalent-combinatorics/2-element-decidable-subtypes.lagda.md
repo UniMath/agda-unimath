@@ -1,4 +1,4 @@
-# 2-element decidable subtypes
+# `2`-element decidable subtypes
 
 ```agda
 module univalent-combinatorics.2-element-decidable-subtypes where
@@ -22,7 +22,7 @@ open import foundation.embeddings
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
@@ -34,6 +34,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -348,14 +349,14 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
         ( inv-equiv e)
         ( subtype-decidable-subtype P)
         ( subtype-decidable-subtype (P ∘ (map-equiv e)))
-         λ x →
+        ( λ x →
           iff-equiv
             ( tr
               ( λ g →
                 ( type-Decidable-Prop (P x)) ≃
                 ( type-Decidable-Prop (P (map-equiv g x))))
               ( inv (right-inverse-law-equiv e))
-              ( id-equiv))))
+              ( id-equiv)))))
 
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
   { l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} (e : X ≃ Y) →

@@ -9,6 +9,8 @@ module universal-algebra.kernels where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
@@ -78,11 +80,11 @@ module _
     where
     f = map-hom-Algebra Sg Th Alg1 Alg2 F
     map-hom-Algebra-lemma :
-     ( n : ℕ) →
-     ( v v' : vec (type-Algebra Sg Th Alg1) n) →
-     ( relation-holds-all-vec Sg Th Alg1 eq-rel-kernel-hom-Algebra v v') →
-     (map-vec f v) ＝ (map-vec f v')
+      ( n : ℕ) →
+      ( v v' : vec (type-Algebra Sg Th Alg1) n) →
+      ( relation-holds-all-vec Sg Th Alg1 eq-rel-kernel-hom-Algebra v v') →
+      (map-vec f v) ＝ (map-vec f v')
     map-hom-Algebra-lemma zero-ℕ empty-vec empty-vec p = refl
     map-hom-Algebra-lemma (succ-ℕ n) (x ∷ v) (x' ∷ v') (p , p') =
-     ap-binary (_∷_) p (map-hom-Algebra-lemma n v v' p')
+      ap-binary (_∷_) p (map-hom-Algebra-lemma n v v' p')
 ```

@@ -11,13 +11,16 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.type-arithmetic-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.maybe
@@ -32,9 +35,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
 open import foundation-core.identity-types
 
 open import univalent-combinatorics.standard-finite-types
@@ -135,12 +136,12 @@ module _
             ( f ∘ (pr1 P))
             ( is-surjective-comp is-surjective-f (pr2 P))))
     where
-     f : Maybe (type-Set X) → type-Set X
-     f (inl x) = x
-     f (inr star) = a
+      f : Maybe (type-Set X) → type-Set X
+      f (inl x) = x
+      f (inr star) = a
 
-     is-surjective-f : is-surjective f
-     is-surjective-f x = unit-trunc-Prop (pair (inl x) refl)
+      is-surjective-f : is-surjective f
+      is-surjective-f x = unit-trunc-Prop (pair (inl x) refl)
 
   is-countable-is-directly-countable :
     is-directly-countable X → is-countable X

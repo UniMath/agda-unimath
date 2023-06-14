@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
@@ -21,8 +22,6 @@ open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.functions
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
@@ -50,10 +49,14 @@ cocone-join :
 cocone-join A B = cocone-pushout pr1 pr2
 
 up-join :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
-  ( {l : Level} → universal-property-pushout l
-    ( pr1 {A = A} {B = λ x → B}) pr2 (cocone-join A B))
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l : Level} → universal-property-pushout l pr1 pr2 (cocone-join A B)
 up-join A B = up-pushout pr1 pr2
+
+equiv-up-join :
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  {l : Level} (X : UU l) → (A * B → X) ≃ cocone pr1 pr2 X
+equiv-up-join A B = equiv-up-pushout pr1 pr2
 
 inl-join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → A * B

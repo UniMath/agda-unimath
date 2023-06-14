@@ -10,20 +10,21 @@ module foundation.repetitions-sequences where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
 open import foundation.sequences
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>

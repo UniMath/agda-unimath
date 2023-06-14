@@ -9,10 +9,13 @@ module foundation.symmetric-operations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -20,14 +23,13 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
@@ -66,7 +68,8 @@ module _
   is-commutative f = (x y : A) → f x y ＝ f y x
 
 is-commutative-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : Set l2) → (A → A → type-Set B) → Prop (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+  (A → A → type-Set B) → Prop (l1 ⊔ l2)
 is-commutative-Prop B f =
   Π-Prop _ (λ x → Π-Prop _ (λ y → Id-Prop B (f x y) (f y x)))
 ```
@@ -77,7 +80,7 @@ is-commutative-Prop B f =
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
-  
+
   symmetric-operation : UU (lsuc lzero ⊔ l1 ⊔ l2)
   symmetric-operation = unordered-pair A → B
 
@@ -168,7 +171,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : Set l2) (f : symmetric-operation A (type-Set B))
+  {l1 l2 : Level} (A : UU l1) (B : Set l2)
+  (f : symmetric-operation A (type-Set B))
   where
 
   htpy-symmetric-operation-Set-Prop :
@@ -188,8 +192,8 @@ module _
     type-Prop (htpy-symmetric-operation-Set-Prop g)
 
   center-total-htpy-symmetric-operation-Set :
-     Σ ( symmetric-operation A (type-Set B))
-       ( htpy-symmetric-operation-Set)
+    Σ ( symmetric-operation A (type-Set B))
+      ( htpy-symmetric-operation-Set)
   pr1 center-total-htpy-symmetric-operation-Set = f
   pr2 center-total-htpy-symmetric-operation-Set x y = refl
 
@@ -229,7 +233,7 @@ module _
     fundamental-theorem-id
       is-contr-total-htpy-symmetric-operation-Set
       htpy-eq-symmetric-operation-Set
-      
+
   extensionality-symmetric-operation-Set :
     (g : symmetric-operation A (type-Set B)) →
     (f ＝ g) ≃ htpy-symmetric-operation-Set g
@@ -254,8 +258,10 @@ module _
 
   map-compute-symmetric-operation-Set :
     symmetric-operation A (type-Set B) → Σ (A → A → type-Set B) is-commutative
-  pr1 (map-compute-symmetric-operation-Set f) = map-symmetric-operation A (type-Set B) f
-  pr2 (map-compute-symmetric-operation-Set f) = is-commutative-symmetric-operation f
+  pr1 (map-compute-symmetric-operation-Set f) =
+    map-symmetric-operation A (type-Set B) f
+  pr2 (map-compute-symmetric-operation-Set f) =
+    is-commutative-symmetric-operation f
 
   map-inv-compute-symmetric-operation-Set :
     Σ (A → A → type-Set B) is-commutative → symmetric-operation A (type-Set B)

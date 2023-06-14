@@ -7,10 +7,11 @@ module group-theory.homomorphisms-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -183,8 +184,9 @@ comp-hom-Semigroup :
 pr1 (comp-hom-Semigroup G H K g f) =
   (map-hom-Semigroup H K g) ∘ (map-hom-Semigroup G H f)
 pr2 (comp-hom-Semigroup G H K g f) x y =
-  ( ap ( map-hom-Semigroup H K g)
-       ( preserves-mul-hom-Semigroup G H f x y)) ∙
+  ( ap
+    ( map-hom-Semigroup H K g)
+    ( preserves-mul-hom-Semigroup G H f x y)) ∙
   ( preserves-mul-hom-Semigroup H K g
     ( map-hom-Semigroup G H f x)
     ( map-hom-Semigroup G H f y))
@@ -197,10 +199,11 @@ associative-comp-hom-Semigroup :
   { l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( K : Semigroup l3) (L : Semigroup l4) (h : type-hom-Semigroup K L) →
   ( g : type-hom-Semigroup H K) (f : type-hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G H L
-       ( comp-hom-Semigroup H K L h g) f)
-     ( comp-hom-Semigroup G K L h
-       ( comp-hom-Semigroup G H K g f))
+  Id
+    ( comp-hom-Semigroup G H L
+      ( comp-hom-Semigroup H K L h g) f)
+    ( comp-hom-Semigroup G K L h
+      ( comp-hom-Semigroup G H K g f))
 associative-comp-hom-Semigroup
   G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
   eq-htpy-hom-Semigroup G L refl-htpy

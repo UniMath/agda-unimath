@@ -7,6 +7,8 @@ module group-theory.groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -14,7 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -495,8 +497,9 @@ module _
 
   preserves-concat-mul-list-Group :
     (l1 l2 : list (type-Group G)) →
-    Id ( mul-list-Group (concat-list l1 l2))
-       ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
+    Id
+      ( mul-list-Group (concat-list l1 l2))
+      ( mul-Group G (mul-list-Group l1) (mul-list-Group l2))
   preserves-concat-mul-list-Group =
     distributive-mul-concat-list-Monoid (monoid-Group G)
 ```
@@ -511,4 +514,18 @@ module _
   pointed-type-with-aut-Group : Pointed-Type-With-Aut l
   pr1 pointed-type-with-aut-Group = pointed-type-Group G
   pr2 pointed-type-with-aut-Group = equiv-mul-Group G g
+```
+
+### Equip a type with a structure of group
+
+```agda
+structure-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-group X =
+  Σ (structure-semigroup X) (λ p → is-group (compute-structure-semigroup X p))
+
+compute-structure-group :
+  {l1 : Level} → (X : UU l1) → structure-group X → Group l1
+pr1 (compute-structure-group X (p , q)) = compute-structure-semigroup X p
+pr2 (compute-structure-group X (p , q)) = q
 ```

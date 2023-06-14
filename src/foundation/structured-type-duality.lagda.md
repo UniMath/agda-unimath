@@ -1,4 +1,4 @@
-# Structured duality
+# Structured type duality
 
 ```agda
 module foundation.structured-type-duality where
@@ -7,24 +7,22 @@ module foundation.structured-type-duality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.structure
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-duality
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
-
-## Idea
 
 ## Theorem
 
@@ -50,8 +48,6 @@ equiv-Fib-structure {l1} {l3} l P B =
     ( λ A → A → B)
     ( λ f → structure-map P (pr2 f)))
 ```
-
-###
 
 ```agda
 equiv-fixed-Slice-structure :

@@ -6,7 +6,7 @@
 Welcome to the website of the `agda-unimath` formalization project!
 
 <a href="https://github.com/unimath/agda-unimath">
-<img align="right" width="300" alt="Agda-UniMath" src="./theme/images/agda-unimath-logo.svg" />
+<img align="right" width="300" alt="Agda-UniMath" src="agda-unimath-logo.svg" />
 </a>
 
 The `agda-unimath` library is a community formalisation project for univalent
@@ -45,7 +45,7 @@ Then we will review your contributions, and merge it when it is ready for the
 
 You can cite this library with the following BibTeX entry:
 
-```bib
+```text
 @software{agda-unimath,
   author = {Rijke, Egbert and Bonnevier, Elisabeth and Prieto-Cubides, Jonathan and Bakke, Fredrik and {others}},
   license = {MIT},

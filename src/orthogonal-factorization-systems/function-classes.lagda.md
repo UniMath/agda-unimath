@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.function-classes where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.pullback-squares
 open import foundation.universe-levels
@@ -81,9 +81,9 @@ is-pullback-stable-function-class :
   {l1 l2 l3 : Level} (l : Level) → function-class l1 l2 l3 →
   UU (lsuc l1 ⊔ lsuc l2 ⊔ l3 ⊔ lsuc l)
 is-pullback-stable-function-class {l1} {l2} l F =
-   (A : UU l1) (B C : UU l2) (f : A → C) (g : B → C)
-   (c : Σ (UU l1) (pullback-cone l f g)) →
-   type-Prop (F f) → type-Prop (F (horizontal-map-pullback-cone f g (pr2 c)))
+  (A : UU l1) (B C : UU l2) (f : A → C) (g : B → C)
+  (c : Σ (UU l1) (pullback-cone l f g)) →
+  type-Prop (F f) → type-Prop (F (horizontal-map-pullback-cone f g (pr2 c)))
 
 pullback-stable-function-class :
   (l1 l2 l3 l4 : Level) → UU (lsuc (l1 ⊔ l2 ⊔ l3 ⊔ l4))

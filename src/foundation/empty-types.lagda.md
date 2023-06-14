@@ -2,26 +2,26 @@
 
 ```agda
 module foundation.empty-types where
+
+open import foundation-core.empty-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.empty-types public
-
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.subuniverses
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>

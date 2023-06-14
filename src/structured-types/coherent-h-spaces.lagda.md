@@ -7,10 +7,12 @@ module structured-types.coherent-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -110,8 +112,9 @@ module _
     pr1 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 
   coh-unit-laws-mul-Coherent-H-Space :
-    Id ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
-       ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
+    Id
+      ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
+      ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
   coh-unit-laws-mul-Coherent-H-Space =
     pr2 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 ```

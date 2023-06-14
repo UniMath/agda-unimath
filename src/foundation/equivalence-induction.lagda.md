@@ -2,20 +2,20 @@
 
 ```agda
 module foundation.equivalence-induction where
+
+open import foundation-core.equivalence-induction public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalence-induction public
-
+open import foundation.dependent-pair-types
 open import foundation.univalence
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.sections
-open import foundation-core.universe-levels
 ```
 
 </details>

@@ -9,6 +9,7 @@ module elementary-number-theory.repeating-element-standard-finite-type where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -34,11 +35,12 @@ abstract
     ¬ (inl x ＝ y) → ¬ (inl x ＝ z) →
     repeat-Fin k x y ＝ repeat-Fin k x z → y ＝ z
   is-almost-injective-repeat-Fin (succ-ℕ k) (inl x) {inl y} {inl z} f g p =
-    ap ( inl)
-       ( is-almost-injective-repeat-Fin k x
-         ( λ q → f (ap inl q))
-         ( λ q → g (ap inl q))
-         ( is-injective-inl p))
+    ap
+      ( inl)
+      ( is-almost-injective-repeat-Fin k x
+        ( λ q → f (ap inl q))
+        ( λ q → g (ap inl q))
+        ( is-injective-inl p))
   is-almost-injective-repeat-Fin (succ-ℕ k) (inl x) {inl y} {inr star} f g p =
     ex-falso (Eq-Fin-eq (succ-ℕ k) p)
   is-almost-injective-repeat-Fin (succ-ℕ k) (inl x) {inr star} {inl z} f g p =

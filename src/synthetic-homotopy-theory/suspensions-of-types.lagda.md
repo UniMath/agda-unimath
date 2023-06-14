@@ -7,12 +7,13 @@ module synthetic-homotopy-theory.suspensions-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-systems
@@ -516,6 +517,8 @@ module _
 ```
 
 #### The equivalence in the suspension-loop space adjunction is pointed
+
+This remains to be shown.
 
 ### The suspension of a contractible type is contractible
 

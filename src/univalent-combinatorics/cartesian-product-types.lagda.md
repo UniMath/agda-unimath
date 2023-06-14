@@ -15,7 +15,7 @@ open import foundation.contractible-types
 open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
@@ -72,10 +72,11 @@ abstract
   number-of-elements-count-prod :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-A : count A)
     (count-B : count B) →
-    Id ( number-of-elements-count
-         ( count-prod count-A count-B))
-       ( ( number-of-elements-count count-A) *ℕ
-         ( number-of-elements-count count-B))
+    Id
+      ( number-of-elements-count
+        ( count-prod count-A count-B))
+      ( ( number-of-elements-count count-A) *ℕ
+        ( number-of-elements-count count-B))
   number-of-elements-count-prod (pair k e) (pair l f) = refl
 
 equiv-left-factor :
@@ -112,9 +113,10 @@ abstract
   product-number-of-elements-prod :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
     (a : A) (b : B) →
-    Id ( ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
-               ( number-of-elements-count (count-right-factor count-AB a)))
-       ( number-of-elements-count count-AB)
+    Id
+      ( ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
+        ( number-of-elements-count (count-right-factor count-AB a)))
+      ( number-of-elements-count count-AB)
   product-number-of-elements-prod count-AB a b =
     ( inv
       ( number-of-elements-count-prod

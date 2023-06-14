@@ -16,12 +16,14 @@ open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps
@@ -446,10 +448,11 @@ is-add-one-succ-Fin' :
 is-add-one-succ-Fin' zero-ℕ (inr star) = refl
 is-add-one-succ-Fin' (succ-ℕ k) x =
   ( ap (succ-Fin (succ-ℕ (succ-ℕ k))) (inv (issec-nat-Fin (succ-ℕ k) x))) ∙
-  ( ap ( mod-succ-ℕ (succ-ℕ k))
-       ( ap
-         ( (nat-Fin (succ-ℕ (succ-ℕ k)) x) +ℕ_)
-         ( inv (is-one-nat-one-Fin (succ-ℕ k)))))
+  ( ap
+    ( mod-succ-ℕ (succ-ℕ k))
+    ( ap
+      ( (nat-Fin (succ-ℕ (succ-ℕ k)) x) +ℕ_)
+      ( inv (is-one-nat-one-Fin (succ-ℕ k)))))
 
 is-add-one-succ-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
@@ -547,8 +550,9 @@ left-unit-law-mul-Fin (succ-ℕ k) x =
     ( nat-Fin (succ-ℕ (succ-ℕ k)) x)
     ( cong-identification-ℕ
       ( succ-ℕ (succ-ℕ k))
-      ( ( ap ( _*ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))
-             ( is-one-nat-one-Fin k)) ∙
+      ( ( ap
+          ( _*ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))
+          ( is-one-nat-one-Fin k)) ∙
         ( left-unit-law-mul-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))))) ∙
   ( issec-nat-Fin (succ-ℕ k) x)
 

@@ -60,6 +60,7 @@ open import group-theory.function-groups public
 open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
+open import group-theory.generating-sets-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public
 open import group-theory.homomorphisms-abelian-groups public
@@ -71,6 +72,8 @@ open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.intersections-subgroups-abelian-groups public
+open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
@@ -99,6 +102,7 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.powers-of-elements-commutative-monoids public
 open import group-theory.precategory-of-abelian-groups public
 open import group-theory.precategory-of-commutative-monoids public
 open import group-theory.precategory-of-concrete-groups public
@@ -113,6 +117,7 @@ open import group-theory.products-of-tuples-of-elements-commutative-monoids publ
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
+open import group-theory.rational-commutative-monoids public
 open import group-theory.representations-monoids public
 open import group-theory.saturated-congruence-relations-commutative-monoids public
 open import group-theory.saturated-congruence-relations-monoids public
@@ -128,7 +133,9 @@ open import group-theory.subgroups-generated-by-subsets-groups public
 open import group-theory.submonoids public
 open import group-theory.submonoids-commutative-monoids public
 open import group-theory.subsemigroups public
+open import group-theory.subsets-abelian-groups public
 open import group-theory.subsets-commutative-monoids public
+open import group-theory.subsets-groups public
 open import group-theory.subsets-monoids public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public

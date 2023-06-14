@@ -7,6 +7,7 @@ module order-theory.homomorphisms-meet-semilattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions

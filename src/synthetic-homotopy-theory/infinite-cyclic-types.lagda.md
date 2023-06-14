@@ -11,11 +11,12 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies

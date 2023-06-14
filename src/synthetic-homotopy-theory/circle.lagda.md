@@ -8,12 +8,15 @@ module synthetic-homotopy-theory.circle where
 
 ```agda
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.transport
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
@@ -91,9 +94,10 @@ module _
     pr1 (pr2 apply-dependent-universal-property-𝕊¹)
 
   loop-dependent-universal-property-𝕊¹ :
-    Id ( apd function-apply-dependent-universal-property-𝕊¹ loop-𝕊¹ ∙
-         base-dependent-universal-property-𝕊¹)
-       ( ap (tr P loop-𝕊¹) base-dependent-universal-property-𝕊¹ ∙ α)
+    Id
+      ( apd function-apply-dependent-universal-property-𝕊¹ loop-𝕊¹ ∙
+        base-dependent-universal-property-𝕊¹)
+      ( ap (tr P loop-𝕊¹) base-dependent-universal-property-𝕊¹ ∙ α)
   loop-dependent-universal-property-𝕊¹ =
     pr2 (pr2 apply-dependent-universal-property-𝕊¹)
 ```
@@ -139,9 +143,10 @@ module _
     pr1 (pr2 apply-universal-property-𝕊¹)
 
   loop-universal-property-𝕊¹ :
-    Id ( ap map-apply-universal-property-𝕊¹ loop-𝕊¹ ∙
-         base-universal-property-𝕊¹)
-       ( base-universal-property-𝕊¹ ∙ α)
+    Id
+      ( ap map-apply-universal-property-𝕊¹ loop-𝕊¹ ∙
+        base-universal-property-𝕊¹)
+      ( base-universal-property-𝕊¹ ∙ α)
   loop-universal-property-𝕊¹ =
     pr2 (pr2 apply-universal-property-𝕊¹)
 ```

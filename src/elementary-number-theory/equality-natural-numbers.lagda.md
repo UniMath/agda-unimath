@@ -9,13 +9,14 @@ module elementary-number-theory.equality-natural-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.set-truncations

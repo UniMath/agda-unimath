@@ -1,26 +1,33 @@
 # Homotopies
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation-core.homotopies where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functions
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
+open import foundation.universe-levels
+
+open import foundation-core.dependent-identifications
+open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
 
 ## Idea
 
-A homotopy of identifications is a pointwise equality between dependent
-functions.
+A **homotopy** between dependent functions `f` and `g` is a pointwise equality
+between them.
 
 ## Definitions
+
+### The type family of identifications between values of two dependent functions
 
 ```agda
 module _
@@ -30,24 +37,44 @@ module _
   eq-value : X → UU l2
   eq-value x = (f x ＝ g x)
 
-  map-compute-path-over-eq-value :
+  {-# INLINE eq-value #-}
+
+  map-compute-dependent-identification-eq-value :
     {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
-    ((apd f p) ∙ r) ＝ ((ap (tr P p) q) ∙ (apd g p)) → tr eq-value p q ＝ r
-  map-compute-path-over-eq-value refl q r =
+    coherence-square-identifications (apd f p) r (ap (tr P p) q) (apd g p) →
+    dependent-identification eq-value p q r
+  map-compute-dependent-identification-eq-value refl q r =
     inv ∘ (concat' r (right-unit ∙ ap-id q))
-
-map-compute-path-over-eq-value' :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f g : X → Y) →
-  {x y : X} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
-  (ap f p ∙ r) ＝ (q ∙ ap g p) → tr (eq-value f g) p q ＝ r
-map-compute-path-over-eq-value' f g refl q r = inv ∘ concat' r right-unit
-
-map-compute-path-over-eq-value-id-id :
-  {l1 : Level} {A : UU l1} →
-  {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
-  (p ∙ r) ＝ (q ∙ p) → (tr (eq-value id id) p q) ＝ r
-map-compute-path-over-eq-value-id-id refl q r s = inv (s ∙ right-unit)
 ```
+
+### The type family of identifications between values of two ordinary functions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f g : X → Y)
+  where
+
+  eq-value-function : X → UU l2
+  eq-value-function = eq-value f g
+
+  {-# INLINE eq-value-function #-}
+
+  map-compute-dependent-identification-eq-value-function :
+    {x y : X} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    coherence-square-identifications (ap f p) r q (ap g p) →
+    dependent-identification eq-value-function p q r
+  map-compute-dependent-identification-eq-value-function refl q r =
+    inv ∘ concat' r right-unit
+
+map-compute-dependent-identification-eq-value-id-id :
+  {l1 : Level} {A : UU l1} {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
+  coherence-square-identifications p r q p →
+  dependent-identification (eq-value id id) p q r
+map-compute-dependent-identification-eq-value-id-id refl q r s =
+  inv (s ∙ right-unit)
+```
+
+### Homotopies
 
 ```agda
 module _

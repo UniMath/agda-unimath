@@ -31,7 +31,7 @@ operation `x y ↦ xy : M → M → M` such that
   x(y+z) = xy+xz
 ```
 
-## Definition
+## Definitions
 
 ### Non-unital algebras over a ring
 
@@ -200,3 +200,5 @@ module _
 ```
 
 ### Unital algebras over a ring
+
+This remains to be defined.

@@ -59,8 +59,9 @@ leq-cardinality-Prop' {l1} {l2} X =
 
 compute-leq-cardinality-Prop' :
   {l1 l2 : Level} (X : Set l1) (Y : Set l2) →
-  Id ( leq-cardinality-Prop' X (cardinality Y))
-     ( mere-emb-Prop (type-Set X) (type-Set Y))
+  Id
+    ( leq-cardinality-Prop' X (cardinality Y))
+    ( mere-emb-Prop (type-Set X) (type-Set Y))
 compute-leq-cardinality-Prop' {l1} {l2} X =
   triangle-universal-property-trunc-Set
     ( Prop-Set (l1 ⊔ l2))

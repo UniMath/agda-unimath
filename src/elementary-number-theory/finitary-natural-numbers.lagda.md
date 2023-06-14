@@ -14,10 +14,11 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.universe-levels
@@ -143,11 +144,12 @@ is-injective-convert-based-ℕ
         ( p)
         ( cong-unary-op-ℕ (succ-ℕ k) y (convert-based-ℕ (succ-ℕ k) m))))
 ... | refl =
-  ap ( unary-op-based-ℕ (succ-ℕ k) x)
-     ( is-injective-convert-based-ℕ (succ-ℕ k)
-       ( is-injective-succ-ℕ
-         ( is-injective-left-mul-succ-ℕ k
-           ( is-injective-right-add-ℕ (nat-Fin (succ-ℕ k) x) p))))
+  ap
+    ( unary-op-based-ℕ (succ-ℕ k) x)
+    ( is-injective-convert-based-ℕ (succ-ℕ k)
+      ( is-injective-succ-ℕ
+        ( is-injective-left-mul-succ-ℕ k
+          ( is-injective-right-add-ℕ (nat-Fin (succ-ℕ k) x) p))))
 ```
 
 ### The zero-element of the `k+1`-ary natural numbers
@@ -193,16 +195,19 @@ convert-based-succ-based-ℕ
     ( is-zero-nat-zero-Fin {k})) ∙
   ( right-unit-law-mul-ℕ (succ-ℕ k))
 convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
-  ap ( ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) +ℕ_)
-     ( nat-succ-Fin k x)
+  ap
+    ( ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) +ℕ_)
+    ( nat-succ-Fin k x)
 convert-based-succ-based-ℕ
   (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr star) n) =
-  ( ap ( ( ( succ-ℕ k) *ℕ
-           ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
+  ( ap
+    ( ( ( succ-ℕ k) *ℕ
+        ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
           +ℕ_)
-       ( is-zero-nat-zero-Fin {k})) ∙
-  ( ( ap ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
-         ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
+    ( is-zero-nat-zero-Fin {k})) ∙
+  ( ( ap
+      ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
+      ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
     ( ( right-successor-law-mul-ℕ
         ( succ-ℕ k)
         ( succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) ∙

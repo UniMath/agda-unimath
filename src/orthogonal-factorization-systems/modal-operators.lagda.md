@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.modal-operators where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.locally-small-types
 open import foundation.propositions
 open import foundation.small-types
@@ -126,7 +126,7 @@ module _
 
 ### Locally small modal operators
 
-We say a modal operator is _locally small_ if it maps small types to locally
+We say a modal operator is **locally small** if it maps small types to locally
 small types.
 
 ```agda

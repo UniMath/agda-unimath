@@ -9,11 +9,13 @@ module trees.induction-w-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.transport
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types
@@ -78,7 +80,7 @@ module _
 
 ### Strong induction for W-types
 
-#### We define an operation □-𝕎 that acts on families over 𝕎 A B
+#### We define an operation `□-𝕎` that acts on families over `𝕎 A B`
 
 ```agda
 module _
@@ -164,11 +166,12 @@ no-infinite-descent-𝕎 {A = A} {B} f =
     ( λ x → (f : ℕ → 𝕎 A B) (p : f zero-ℕ ＝ x) →
             ¬ ((n : ℕ) → (f (succ-ℕ n)) <-𝕎 (f n)))
     ( λ x IH f p H →
-      IH ( f 1)
-         ( tr (λ t → (f 1) <-𝕎 t) p (H zero-ℕ))
-         ( f ∘ succ-ℕ)
-         ( refl)
-         ( λ n → H (succ-ℕ n)))
+      IH
+        ( f 1)
+        ( tr (λ t → (f 1) <-𝕎 t) p (H zero-ℕ))
+        ( f ∘ succ-ℕ)
+        ( refl)
+        ( λ n → H (succ-ℕ n)))
     ( f zero-ℕ)
     ( f)
     ( refl)

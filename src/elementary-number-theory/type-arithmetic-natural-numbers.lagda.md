@@ -15,6 +15,9 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.parity-natural-numbers
 open import elementary-number-theory.powers-of-two
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.iterating-functions
@@ -26,10 +29,8 @@ open import foundation.unit-type
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation

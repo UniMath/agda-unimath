@@ -2,9 +2,10 @@
 
 To use the `agda-unimath` library, you will need to have Agda and a code editor
 set up. This guide provides instructions for installing Agda as well as specific
-setup instructions for the editors Emacs and Visual Studio Code. By following
-theese step-by-step directions, you will create a tailored working environment
-for using the library. Additionally, we provide instructions for setting up your
+setup instructions for the editors [Emacs](https://www.gnu.org/software/emacs/)
+and [Visual Studio Code](https://code.visualstudio.com/). By following these
+step-by-step directions, you will create a tailored working environment for
+using the library. Additionally, we provide instructions for setting up your
 environment for making contributions to the library.
 
 ## Getting a copy of the library
@@ -21,10 +22,10 @@ manually downloading it.
 ## Installing Agda
 
 The `agda-unimath` library is built and verified with Agda 2.6.3, and we provide
-two methods for installation: with or without the package manager Nix. Nix
-streamlines the installation of Agda and its dependencies, providing a
-consistent and reproducible environment for the library across different
-systems.
+two methods for installation: with or without the package manager
+[Nix](https://nixos.org/). Nix streamlines the installation of Agda and its
+dependencies, providing a consistent and reproducible environment for the
+library across different systems.
 
 ### Without Nix
 
@@ -60,7 +61,7 @@ We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 when working with the `agda-unimath` library. Both editors offer support for
 Agda development, and the choice between them is largely a matter of personal
 preference. Below, you'll find setup instructions for each editor to help you
-configure your preferred environment for working with the library.
+configure your preferred environment.
 
 ### Emacs
 
@@ -182,14 +183,16 @@ different font.
 ## After the setup
 
 Congratulations! With Agda installed and your editor expertly configured, you're
-now ready to dive into using the library.
+now ready to dive into the library.
 
 ### Verifying the library
 
 To verify a file and its prerequisites with Agda, simply open and load it. If
 you want to compile the entire library, you can run `make check` from the
-repository's main folder. This generates the `everything.lagda.md` file, which
-imports and verifies all files in the library.
+repository's main folder. This requires the
+[GNU Make](https://www.gnu.org/software/make/) tool to be installed. The command
+generates the `everything.lagda.md` file, which imports and verifies all files
+in the library.
 
 ### Contributing
 
@@ -200,14 +203,15 @@ workflow.
 
 #### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
-The `agda-unimath` library includes pre-commit hooks that enforce basic
-formatting rules. To utilize these hooks, if you did not install your
-environment using Nix, you'll need to install the `pre-commit` tool and the
-hooks' Python dependencies. The easiest way to accomplish this is by using the
-Python package manager `pip`.
+The `agda-unimath` library includes [pre-commit](https://pre-commit.com/) hooks
+that enforce basic formatting rules. To utilize these hooks, if you did not
+install your environment using Nix, you'll need to install the `pre-commit` tool
+and the hooks' Python dependencies. The easiest way to accomplish this is by
+using the Python package manager `pip`.
 
 First, make sure that you have the latest version of Python installed on your
-computer. Then run the following command from the repository's main folder:
+computer; the hooks require Python 3.8 or newer. Then run the following command
+from the repository's main folder:
 
 ```shell
 pip install -r scripts/requirements.txt
@@ -227,7 +231,48 @@ pre-commit install
 After this, `pre-commit` will inform you of any rule violations in your
 subsequent commits. For most violations, it will also automatically apply the
 required changes. In such cases, simply stage the new changes and commit again.
+To disable this behaviour again, you can run `pre-commit uninstall`.
 
 Keep in mind that `pre-commit` is also a part of the Continuous Integration
 (CI), so any PR that violates the enforced conventions will be automatically
-blocked.
+blocked from merging.
+
+#### <a name="build-website"></a>Building and viewing the website locally
+
+The build process for the website uses the
+[Rust language](https://www.rust-lang.org/)'s package manager `cargo`. To
+install Rust and `cargo`, follow
+[their installation guide](https://doc.rust-lang.org/cargo/getting-started/installation.html).
+After installation, proceed with the following steps to build and view the
+website locally:
+
+1. **Install website dependencies**: We've provided a `make` target that
+   installs the website dependencies for you. In your terminal, run:
+
+   ```shell
+   make install-website-dev
+   ```
+
+   You only need to run this command once, unless the website's dependencies
+   change.
+
+2. **Build the website**: Once the dependencies are installed, you can build the
+   website by running the following command:
+
+   ```shell
+   make website
+   ```
+
+3. **View the website locally**: After building the website, you can start the
+   web server by running:
+
+   ```shell
+   make serve-website
+   ```
+
+   This may take a moment, but the website will be opened in your browser
+   automatically if it succeeds.
+
+You've now successfully set up the local environment for the website! As you
+make changes to the website's source files, you can repeat steps 2 and 3 to view
+the updates locally before pushing the changes to the repository.

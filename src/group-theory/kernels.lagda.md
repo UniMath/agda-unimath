@@ -7,6 +7,7 @@ module group-theory.kernels where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
@@ -23,6 +24,8 @@ open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
+open import group-theory.subsets-abelian-groups
+open import group-theory.subsets-groups
 ```
 
 </details>

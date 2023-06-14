@@ -7,33 +7,35 @@ module foundation.isolated-points where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.decidable-embeddings
 open import foundation.decidable-equality
 open import foundation.decidable-maps
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.maybe
 open import foundation.negation
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -129,7 +131,8 @@ module _
   abstract
     refl-Eq-isolated-point : (d : is-isolated a) → Eq-isolated-point d a
     refl-Eq-isolated-point d =
-      tr ( cases-Eq-isolated-point d a)
+      tr
+        ( cases-Eq-isolated-point d a)
         ( pr2 (decide-reflexivity (d a)))
         ( star)
 
@@ -249,7 +252,7 @@ decidable-emb-isolated-point {l1} {A} a =
         ( is-emb-inclusion-isolated-point A)
         ( is-emb-is-injective
           ( is-set-isolated-point A)
-           λ { {star} {star} p → refl}))
+          ( λ { {star} {star} p → refl})))
       ( λ x → is-decidable-prod is-decidable-unit (pr2 a x)))
 ```
 
@@ -299,13 +302,15 @@ isretr-map-inv-maybe-structure-isolated-point :
   ( map-inv-maybe-structure-isolated-point X x ∘
     map-maybe-structure-isolated-point X x) ~ id
 isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inl (pair y f)) =
-  ap ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) y)
-     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx y)))
+  ap
+    ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) y)
+    ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx y)))
 isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inr star) =
-  ap ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) x)
-     { x = dx (map-maybe-structure-isolated-point X (pair x dx) (inr star))}
-     { y = inl refl}
-     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx x)))
+  ap
+    ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) x)
+    { x = dx (map-maybe-structure-isolated-point X (pair x dx) (inr star))}
+    { y = inl refl}
+    ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx x)))
 
 is-equiv-map-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
@@ -319,15 +324,17 @@ is-equiv-map-maybe-structure-isolated-point X x =
 equiv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   Maybe (complement-isolated-point X x) ≃ X
-equiv-maybe-structure-isolated-point X x =
-  pair ( map-maybe-structure-isolated-point X x)
-       ( is-equiv-map-maybe-structure-isolated-point X x)
+pr1 (equiv-maybe-structure-isolated-point X x) =
+  map-maybe-structure-isolated-point X x
+pr2 (equiv-maybe-structure-isolated-point X x) =
+  is-equiv-map-maybe-structure-isolated-point X x
 
 maybe-structure-isolated-point :
   {l1 : Level} {X : UU l1} → isolated-point X → maybe-structure X
-maybe-structure-isolated-point {l1} {X} x =
-  pair ( complement-isolated-point X x)
-       ( equiv-maybe-structure-isolated-point X x)
+pr1 (maybe-structure-isolated-point {l1} {X} x) =
+  complement-isolated-point X x
+pr2 (maybe-structure-isolated-point {l1} {X} x) =
+  equiv-maybe-structure-isolated-point X x
 ```
 
 ```agda

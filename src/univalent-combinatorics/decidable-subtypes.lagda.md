@@ -2,26 +2,27 @@
 
 ```agda
 module univalent-combinatorics.decidable-subtypes where
+
+open import foundation.decidable-subtypes public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.embeddings
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.decidable-dependent-pair-types

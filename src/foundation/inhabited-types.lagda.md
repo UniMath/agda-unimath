@@ -7,27 +7,32 @@ module foundation.inhabited-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.propositional-truncations
+open import foundation.subtype-identity-principle
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Inhabited types are types equipped with an element of its propositional
+**Inhabited types** are types equipped with an element of its propositional
 truncation.
+
+**Remark:** This contrasts with the definition of
+[pointed types](structured-types.pointed-types.md) in that we do not discern
+between proofs of inhabitedness, so that it is merely a property of the type to
+be inhabited.
 
 ## Definitions
 

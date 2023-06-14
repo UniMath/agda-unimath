@@ -9,13 +9,14 @@ module univalent-combinatorics.distributivity-of-set-truncation-over-finite-prod
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -189,27 +190,29 @@ module _
             ( λ f →
               equiv-Π
                 ( λ h →
-                  Id ( map-equiv f
-                       ( map-equiv
-                         ( equiv-trunc-Set (equiv-precomp-Π e B))
-                         ( unit-trunc-Set h)))
-                     ( map-Π (λ x → unit-trunc-Set) (λ x → h (map-equiv e x))))
+                  Id
+                    ( map-equiv f
+                      ( map-equiv
+                        ( equiv-trunc-Set (equiv-precomp-Π e B))
+                        ( unit-trunc-Set h)))
+                    ( map-Π (λ x → unit-trunc-Set) (λ x → h (map-equiv e x))))
                 ( equiv-Π B e (λ x → id-equiv))
                 ( λ h →
                   ( ( inv-equiv equiv-funext) ∘e
                     ( equiv-Π
                       ( λ x →
-                        Id ( map-equiv f
-                             ( map-equiv-trunc-Set
-                               ( equiv-precomp-Π e B)
-                               ( unit-trunc-Set
-                                 ( map-equiv-Π B e (λ x → id-equiv) h)))
-                             ( x))
-                           ( unit-trunc-Set
-                             ( map-equiv-Π B e
-                               ( λ z → id-equiv)
-                               ( h)
-                               ( map-equiv e x))))
+                        Id
+                          ( map-equiv f
+                            ( map-equiv-trunc-Set
+                              ( equiv-precomp-Π e B)
+                              ( unit-trunc-Set
+                                ( map-equiv-Π B e (λ x → id-equiv) h)))
+                            ( x))
+                          ( unit-trunc-Set
+                            ( map-equiv-Π B e
+                              ( λ z → id-equiv)
+                              ( h)
+                              ( map-equiv e x))))
                       ( id-equiv)
                       ( λ x →
                         ( equiv-concat

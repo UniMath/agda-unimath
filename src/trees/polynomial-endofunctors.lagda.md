@@ -10,12 +10,13 @@ module trees.polynomial-endofunctors where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 ```
 

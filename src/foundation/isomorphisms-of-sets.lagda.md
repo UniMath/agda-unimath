@@ -7,17 +7,18 @@ module foundation.isomorphisms-of-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.sets
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>

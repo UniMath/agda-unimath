@@ -1,4 +1,4 @@
-# Radical ideals in rings
+# Radical ideals of rings
 
 ```agda
 module ring-theory.radical-ideals-rings where

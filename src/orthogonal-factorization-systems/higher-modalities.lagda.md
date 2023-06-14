@@ -7,11 +7,12 @@ module orthogonal-factorization-systems.higher-modalities where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.small-types
@@ -37,8 +38,10 @@ defining map (propositionally).
 
 Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
-`x' y' : ○ X`. Because of this, higher modalities in their most general form
-only make sense for locally small modal operators.
+`x' y' : ○ X`. In other words, `○ X` is
+[`○`-separated](orthogonal-factorization-systems.separated-types.md). Because of
+this, higher modalities in their most general form only make sense for locally
+small modal operators.
 
 ## Definition
 
@@ -66,8 +69,8 @@ module _
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
 
-  modal-universal-property : UU (lsuc l1 ⊔ l2)
-  modal-universal-property =
+  dependent-universal-property-modality : UU (lsuc l1 ⊔ l2)
+  dependent-universal-property-modality =
     Σ ind-modality compute-ind-modality
 
   rec-modality-ind-modality : ind-modality → rec-modality
@@ -98,7 +101,7 @@ module _
 ```agda
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
-    modal-universal-property (unit-○) × is-modal-identity-types
+    dependent-universal-property-modality (unit-○) × is-modal-identity-types
 ```
 
 ### Components of a `is-higher-modality` proof

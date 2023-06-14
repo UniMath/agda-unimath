@@ -9,13 +9,14 @@ module lists.lists where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -168,8 +169,9 @@ eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
 
 square-eq-Eq-list :
   {l1 : Level} {A : UU l1} {x : A} {l l' : list A} (p : Id l l') →
-  Id (Eq-eq-list (cons x l) (cons x l') (ap (cons x) p))
-     (pair refl (Eq-eq-list l l' p))
+  Id
+    ( Eq-eq-list (cons x l) (cons x l') (ap (cons x) p))
+    ( pair refl (Eq-eq-list l l' p))
 square-eq-Eq-list refl = refl
 
 issec-eq-Eq-list :

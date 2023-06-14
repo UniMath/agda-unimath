@@ -7,17 +7,19 @@ module trees.functoriality-w-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-maps
+open import foundation.transport
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -92,8 +94,9 @@ abstract
                           ( equiv-concat'
                             ( map-𝕎 D f e
                               ( α (map-inv-equiv (e a) d)))
-                            ( ap ( γ ∘ (tr D p))
-                                 ( inv (issec-map-inv-equiv (e a) d)))) ∘e
+                            ( ap
+                              ( γ ∘ (tr D p))
+                              ( inv (issec-map-inv-equiv (e a) d)))) ∘e
                           ( inv-equiv
                             ( equiv-Eq-𝕎-eq
                               ( map-𝕎 D f e

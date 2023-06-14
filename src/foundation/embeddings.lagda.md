@@ -2,31 +2,33 @@
 
 ```agda
 module foundation.embeddings where
+
+open import foundation-core.embeddings public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.embeddings public
-
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.truncated-maps
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-over-cospans
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.sections
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -237,11 +239,16 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  emb-× : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
-  emb-× f g = emb-Σ (λ _ → D) f (λ _ → g)
+  emb-prod : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
+  emb-prod f g = emb-Σ (λ _ → D) f (λ _ → g)
+
+  is-emb-map-prod :
+    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-prod f g))
+  is-emb-map-prod f g is-emb-f is-emb-g =
+    is-emb-map-emb (emb-prod (f , is-emb-f) (g , is-emb-g))
 ```
 
-### If the action on identifications has a section, then f is an embedding
+### If the action on identifications has a section, then `f` is an embedding
 
 ```agda
 module _
@@ -284,14 +291,16 @@ module _
   where
 
   abstract
-    is-emb-is-pullback : is-pullback f g c → is-emb g → is-emb (pr1 c)
-    is-emb-is-pullback pb is-emb-g =
+    is-emb-vertical-map-cone-is-pullback :
+      is-pullback f g c → is-emb g → is-emb (vertical-map-cone f g c)
+    is-emb-vertical-map-cone-is-pullback pb is-emb-g =
       is-emb-is-prop-map
         ( is-trunc-is-pullback neg-one-𝕋 f g c pb (is-prop-map-is-emb is-emb-g))
 
   abstract
-    is-emb-is-pullback' : is-pullback f g c → is-emb f → is-emb (pr1 (pr2 c))
-    is-emb-is-pullback' pb is-emb-f =
+    is-emb-horizontal-map-cone-is-pullback :
+      is-pullback f g c → is-emb f → is-emb (horizontal-map-cone f g c)
+    is-emb-horizontal-map-cone-is-pullback pb is-emb-f =
       is-emb-is-prop-map
         ( is-trunc-is-pullback' neg-one-𝕋 f g c pb
           ( is-prop-map-is-emb is-emb-f))

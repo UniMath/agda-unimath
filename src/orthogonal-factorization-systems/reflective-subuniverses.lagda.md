@@ -38,7 +38,7 @@ module _
   is-reflective-subuniverse =
     ( (X : UU l) → type-Prop (is-modal' (○ X))) ×
     ( (X : UU l) → type-Prop (is-modal' X) →
-      (Y : UU l) → is-local-type (unit-○ {Y}) X)
+      (Y : UU l) → is-local (unit-○ {Y}) X)
 
 reflective-subuniverse : (l lM : Level) → UU (lsuc l ⊔ lsuc lM)
 reflective-subuniverse l lM =

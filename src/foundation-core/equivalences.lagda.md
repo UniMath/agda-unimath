@@ -1,25 +1,24 @@
 # Equivalences
 
 ```agda
-{-# OPTIONS --safe #-}
-```
-
-```agda
 module foundation-core.equivalences where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
-open import foundation-core.universe-levels
 ```
 
 </details>

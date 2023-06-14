@@ -8,29 +8,29 @@ module foundation.coproduct-decompositions-subuniverse where
 
 ```agda
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
 open import foundation.subuniverses
+open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -105,9 +105,9 @@ module _
   right-iterated-binary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   right-iterated-binary-coproduct-Decomposition-subuniverse =
     Σ ( binary-coproduct-Decomposition-subuniverse P X)
-       ( λ d →
-         binary-coproduct-Decomposition-subuniverse P
-           ( right-summand-binary-coproduct-Decomposition-subuniverse P X d))
+      ( λ d →
+        binary-coproduct-Decomposition-subuniverse P
+          ( right-summand-binary-coproduct-Decomposition-subuniverse P X d))
 ```
 
 ### Ternary coproduct Decomposition-subuniverses
@@ -120,11 +120,11 @@ module _
   ternary-coproduct-Decomposition-subuniverse : UU (lsuc l1 ⊔ l2)
   ternary-coproduct-Decomposition-subuniverse =
     Σ ( type-subuniverse P × (type-subuniverse P × type-subuniverse P))
-       ( λ x →
-         inclusion-subuniverse P X ≃
-         ( inclusion-subuniverse P (pr1 x) +
-           ( inclusion-subuniverse P (pr1 (pr2 x)) +
-             inclusion-subuniverse P (pr2 (pr2 x)))))
+      ( λ x →
+        inclusion-subuniverse P X ≃
+        ( inclusion-subuniverse P (pr1 x) +
+          ( inclusion-subuniverse P (pr1 (pr2 x)) +
+            inclusion-subuniverse P (pr2 (pr2 x)))))
 
   module _
     (d : ternary-coproduct-Decomposition-subuniverse)

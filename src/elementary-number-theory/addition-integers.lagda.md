@@ -11,13 +11,15 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -424,7 +426,7 @@ is-binary-emb-add-ℤ =
   is-binary-emb-is-binary-equiv is-binary-equiv-left-add-ℤ
 ```
 
-### Addition by x is injective
+### Addition by `x` is injective
 
 ```agda
 is-injective-right-add-ℤ : (x : ℤ) → is-injective (_+ℤ x)

@@ -11,7 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -84,8 +84,9 @@ associative-comp-hom-species-𝔽 :
   (G : species-𝔽 l1 l3) (H : species-𝔽 l1 l4) (K : species-𝔽 l1 l5)
   (h : type-hom-species-𝔽 H K)
   (g : type-hom-species-𝔽 G H) (f : type-hom-species-𝔽 F G) →
-  Id ( comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f)
-     ( comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f))
+  Id
+    ( comp-hom-species-𝔽 F G K (comp-hom-species-𝔽 G H K h g) f)
+    ( comp-hom-species-𝔽 F H K h (comp-hom-species-𝔽 F G H g f))
 associative-comp-hom-species-𝔽 F G H K h g f = refl
 ```
 
@@ -124,7 +125,7 @@ is-contr-htpy-hom-species-𝔽 F G f =
 is-equiv-htpy-eq-hom-species-𝔽 :
   {l1 l2 l3 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)
   (f g : type-hom-species-𝔽 F G) →
-   is-equiv (htpy-eq-hom-species-𝔽 F G f g)
+    is-equiv (htpy-eq-hom-species-𝔽 F G f g)
 is-equiv-htpy-eq-hom-species-𝔽 F G f =
   fundamental-theorem-id
     ( is-contr-htpy-hom-species-𝔽 F G f)

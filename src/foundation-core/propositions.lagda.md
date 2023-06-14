@@ -7,16 +7,18 @@ module foundation-core.propositions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -276,7 +278,7 @@ abstract
   is-prop-function-type :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop B → is-prop (A → B)
-  is-prop-function-type H = is-prop-Π (λ x → H)
+  is-prop-function-type H = is-prop-Π (λ _ → H)
 
 type-function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)

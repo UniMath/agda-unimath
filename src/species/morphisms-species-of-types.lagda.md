@@ -11,7 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -106,8 +106,9 @@ associative-comp-hom-species-types :
   {H : species-types l1 l4} {K : species-types l1 l5}
   (h : hom-species-types H K) (g : hom-species-types G H)
   (f : hom-species-types F G) →
-  Id ( comp-hom-species-types (comp-hom-species-types h g) f)
-     ( comp-hom-species-types h (comp-hom-species-types g f))
+  Id
+    ( comp-hom-species-types (comp-hom-species-types h g) f)
+    ( comp-hom-species-types h (comp-hom-species-types g f))
 associative-comp-hom-species-types h g f = refl
 ```
 

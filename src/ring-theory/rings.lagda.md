@@ -10,6 +10,8 @@ module ring-theory.rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -438,6 +440,23 @@ module _
       ( neg-neg-Ring R (mul-Ring R x y)))
 ```
 
+### Bidistributivity for multiplication over addition
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  bidistributive-mul-add-Ring :
+    (u v x y : type-Ring R) →
+    mul-Ring R (add-Ring R u v) (add-Ring R x y) ＝
+    add-Ring R
+      ( add-Ring R (mul-Ring R u x) (mul-Ring R u y))
+      ( add-Ring R (mul-Ring R v x) (mul-Ring R v y))
+  bidistributive-mul-add-Ring =
+    bidistributive-mul-add-Semiring (semiring-Ring R)
+```
+
 ### Scalar multiplication of ring elements by a natural number
 
 ```agda
@@ -509,7 +528,23 @@ module _
 
   preserves-concat-add-list-Ring :
     (l1 l2 : list (type-Ring R)) →
-    Id ( add-list-Ring (concat-list l1 l2))
-       ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
+    Id
+      ( add-list-Ring (concat-list l1 l2))
+      ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
   preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
+```
+
+### Equip a type with a structure of a ring
+
+```agda
+structure-ring :
+  {l1 : Level} → UU l1 → UU l1
+structure-ring X =
+  Σ ( structure-abelian-group X)
+    ( λ p → has-mul-Ab (compute-structure-abelian-group X p))
+
+compute-structure-ring :
+  {l1 : Level} → (X : UU l1) → structure-ring X → Ring l1
+pr1 (compute-structure-ring X (p , q)) = compute-structure-abelian-group X p
+pr2 (compute-structure-ring X (p , q)) = q
 ```

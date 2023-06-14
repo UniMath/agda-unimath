@@ -7,17 +7,19 @@ module graph-theory.morphisms-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -110,20 +112,22 @@ module _
       ( λ α →
         ( p : unordered-pair-vertices-Undirected-Graph G) →
         ( e : edge-Undirected-Graph G p) →
-        Id ( tr
-             ( edge-Undirected-Graph H)
-             ( htpy-unordered-pair α p)
-             ( edge-hom-Undirected-Graph G H f p e))
-           ( edge-hom-Undirected-Graph G H g p e))
+        Id
+          ( tr
+            ( edge-Undirected-Graph H)
+            ( htpy-unordered-pair α p)
+            ( edge-hom-Undirected-Graph G H f p e))
+          ( edge-hom-Undirected-Graph G H g p e))
 
   refl-htpy-hom-Undirected-Graph :
     (f : hom-Undirected-Graph G H) → htpy-hom-Undirected-Graph f f
   pr1 (refl-htpy-hom-Undirected-Graph f) = refl-htpy
   pr2 (refl-htpy-hom-Undirected-Graph f) p e =
-    ap ( λ t →
-         tr (edge-Undirected-Graph H) t (edge-hom-Undirected-Graph G H f p e))
-       ( preserves-refl-htpy-unordered-pair
-         ( vertex-hom-Undirected-Graph G H f) p)
+    ap
+      ( λ t →
+        tr (edge-Undirected-Graph H) t (edge-hom-Undirected-Graph G H f p e))
+      ( preserves-refl-htpy-unordered-pair
+        ( vertex-hom-Undirected-Graph G H f) p)
 
   htpy-eq-hom-Undirected-Graph :
     (f g : hom-Undirected-Graph G H) → Id f g → htpy-hom-Undirected-Graph f g
@@ -138,11 +142,12 @@ module _
         ( λ gV gE α →
           ( p : unordered-pair-vertices-Undirected-Graph G) →
           ( e : edge-Undirected-Graph G p) →
-          Id ( tr
-               ( edge-Undirected-Graph H)
-               ( htpy-unordered-pair α p)
-               ( edge-hom-Undirected-Graph G H f p e))
-             ( gE p e))
+          Id
+            ( tr
+              ( edge-Undirected-Graph H)
+              ( htpy-unordered-pair α p)
+              ( edge-hom-Undirected-Graph G H f p e))
+            ( gE p e))
         ( is-contr-total-htpy (vertex-hom-Undirected-Graph G H f))
         ( pair (vertex-hom-Undirected-Graph G H f) refl-htpy)
         ( is-contr-equiv'

@@ -14,12 +14,13 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -408,14 +409,14 @@ module _
     reassociate' :
       Σ ( binary-coproduct-Decomposition l1 l1 X)
         ( λ d →
-           Σ ( Σ (pr1 (P (pr1 d))) (λ v → pr1 (P (pr1 (pr2 d)))))
-           (λ p → pr1 (S (pr1 d , pr1 p)) × pr1 (T (pr1 (pr2 d) , pr2 p))))
+          Σ ( Σ (pr1 (P (pr1 d))) (λ v → pr1 (P (pr1 (pr2 d)))))
+            ( λ p → pr1 (S (pr1 d , pr1 p)) × pr1 (T (pr1 (pr2 d) , pr2 p))))
       ≃
       cauchy-product-species-types
-      (Σ-extension-species-subuniverse P
-       (subuniverse-global-subuniverse Q l3) S)
-      (Σ-extension-species-subuniverse P
-       (subuniverse-global-subuniverse Q l4) T)
+      ( Σ-extension-species-subuniverse P
+        ( subuniverse-global-subuniverse Q l3) S)
+      ( Σ-extension-species-subuniverse P
+        ( subuniverse-global-subuniverse Q l4) T)
       X
     pr1 reassociate' (d , (pA , pB) , s , t) =
       d , (pA , s) , (pB , t)

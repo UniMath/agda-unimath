@@ -7,10 +7,11 @@ module orthogonal-factorization-systems.lifts-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -28,8 +29,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A _lift_ of a map `f : X → B` along a map `i : A → B` is a map `g : X → A` such
-that the composition `i ∘ g` is `f`.
+A **lift** of a map `f : X → B` along a map `i : A → B` is a map `g : X → A`
+such that the composition `i ∘ g` is `f`.
 
 ```text
            A
@@ -58,7 +59,7 @@ module _
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (i : A → B)
-   {X : UU l3} {f : X → B}
+  {X : UU l3} {f : X → B}
   where
 
   map-lift : lift i f → X → A

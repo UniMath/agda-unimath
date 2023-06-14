@@ -14,6 +14,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -21,6 +22,7 @@ open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
+open import foundation.transport
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -103,7 +105,7 @@ eq-quotient-div-eq-div-ℕ x y z n e H I =
     ( commutative-mul-ℕ x (quotient-div-ℕ x z H) ∙
       ( eq-quotient-div-ℕ x z H ∙
         ( inv (eq-quotient-div-ℕ y z I) ∙
-           commutative-mul-ℕ (quotient-div-ℕ y z I) y))))
+          commutative-mul-ℕ (quotient-div-ℕ y z I) y))))
 ```
 
 ### Divisibility by a nonzero natural number is a property
@@ -132,12 +134,13 @@ antisymmetric-div-ℕ (succ-ℕ x) zero-ℕ H (pair l q) =
   inv q ∙ right-zero-law-mul-ℕ l
 antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
   ( inv (left-unit-law-mul-ℕ (succ-ℕ x))) ∙
-  ( ( ap ( _*ℕ (succ-ℕ x))
-         ( inv
-           ( is-one-right-is-one-mul-ℕ l k
-             ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
-               ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
-                 ( ap (l *ℕ_) p ∙ q)))))) ∙
+  ( ( ap
+      ( _*ℕ (succ-ℕ x))
+      ( inv
+        ( is-one-right-is-one-mul-ℕ l k
+          ( is-one-is-left-unit-mul-ℕ (l *ℕ k) x
+            ( ( associative-mul-ℕ l k (succ-ℕ x)) ∙
+              ( ap (l *ℕ_) p ∙ q)))))) ∙
     ( p))
 
 transitive-div-ℕ :
@@ -360,9 +363,10 @@ div-div-quotient-div-ℕ :
   (x y d : ℕ) (H : div-ℕ d y) →
   div-ℕ x (quotient-div-ℕ d y H) → div-ℕ (d *ℕ x) y
 div-div-quotient-div-ℕ x y d H K =
-  tr ( div-ℕ (d *ℕ x))
-     ( eq-quotient-div-ℕ' d y H)
-     ( preserves-div-mul-ℕ d x (quotient-div-ℕ d y H) K)
+  tr
+    ( div-ℕ (d *ℕ x))
+    ( eq-quotient-div-ℕ' d y H)
+    ( preserves-div-mul-ℕ d x (quotient-div-ℕ d y H) K)
 ```
 
 ### If `d` divides a nonzero number `x`, then the quotient `x/d` is also nonzero
@@ -456,7 +460,7 @@ pr2 (pr2 (simplify-div-quotient-div-ℕ {a} {d} {x} nz H) (u , p)) =
           by inv (eq-quotient-div-ℕ d a H))
 ```
 
-### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero. If `d` divides `b/c` then `d` divides `a/c`.
+### Suppose `H : b | a` and `K : c | b`, where `c` is nonzero. If `d` divides `b/c` then `d` divides `a/c`
 
 ```agda
 div-quotient-div-div-quotient-div-ℕ :

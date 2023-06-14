@@ -99,5 +99,3 @@ module _
   is-emb-colouring-Edge-Coloured-Undirected-Graph =
     pr2 (pr2 G)
 ```
-
-## Properties

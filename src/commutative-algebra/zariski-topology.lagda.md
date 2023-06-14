@@ -1,4 +1,4 @@
-# The Zariski topology on the set of prime ideals in a commutative ring
+# The Zariski topology on the set of prime ideals of a commutative ring
 
 ```agda
 module commutative-algebra.zariski-topology where
@@ -12,7 +12,6 @@ open import commutative-algebra.prime-ideals-commutative-rings
 
 open import foundation.existential-quantification
 open import foundation.identity-types
-open import foundation.powersets
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -36,7 +35,7 @@ standard-closed-subset-zariski-topology-Commutative-Ring :
   subtype l3 (type-Commutative-Ring A) →
   subtype (l1 ⊔ l2 ⊔ l3) (prime-ideal-Commutative-Ring l2 A)
 standard-closed-subset-zariski-topology-Commutative-Ring A U P =
-  inclusion-rel-subtype-Prop U (subset-prime-ideal-Commutative-Ring A P)
+  leq-subtype-Prop U (subset-prime-ideal-Commutative-Ring A P)
 
 is-closed-subset-zariski-topology-Commutative-Ring :
   {l1 l2 l3 : Level} (A : Commutative-Ring l1)

@@ -11,10 +11,10 @@ open import foundation.conjunction
 open import foundation.existential-quantification
 open import foundation.propositional-extensionality
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 
 open import order-theory.large-frames
 open import order-theory.large-locales
@@ -93,7 +93,7 @@ has-top-element-is-large-meet-semilattice-Large-Poset
 
 ```agda
 is-large-suplattice-Prop-Large-Locale :
-  is-large-suplattice-Large-Poset Prop-Large-Poset
+  is-large-suplattice-Large-Poset lzero Prop-Large-Poset
 sup-has-least-upper-bound-family-of-elements-Large-Poset
   ( is-large-suplattice-Prop-Large-Locale {I = I} P) =
   exists-Prop I P
@@ -105,7 +105,7 @@ is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
 ### The large frame of propositions
 
 ```agda
-Prop-Large-Frame : Large-Frame lsuc _⊔_
+Prop-Large-Frame : Large-Frame lsuc _⊔_ lzero
 large-poset-Large-Frame Prop-Large-Frame =
   Prop-Large-Poset
 is-large-meet-semilattice-Large-Frame Prop-Large-Frame =
@@ -119,6 +119,6 @@ distributive-meet-sup-Large-Frame Prop-Large-Frame =
 ### The large locale of propositions
 
 ```agda
-Prop-Large-Locale : Large-Locale lsuc _⊔_
+Prop-Large-Locale : Large-Locale lsuc _⊔_ lzero
 Prop-Large-Locale = Prop-Large-Frame
 ```

@@ -2,43 +2,45 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
+
 module foundation.sigma-decompositions where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.inhabited-types
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A Σ-decomposition of a type `A` consists of a type `X` and a family of inhabited
-types `Y x` indexed by `x : A` equipped with an equivalence `A ≃ Σ X Y`. The
-type `X` is called the indexing type of the Σ-decomposition, the elements of
-`Y x` are called the cotypes of the Σ-decomposition, and the equivalence
-`A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition
+A **Σ-decomposition** of a type `A` consists of a type `X` and a family of
+inhabited types `Y x` indexed by `x : A` equipped with an equivalence
+`A ≃ Σ X Y`. The type `X` is called the indexing type of the Σ-decomposition,
+the elements of `Y x` are called the cotypes of the Σ-decomposition, and the
+equivalence `A ≃ Σ X Y` is the matching correspondence of the Σ-decomposition.
 
-Note that types may have many Σ-decomposition. The type of Σ-decompositions of
+Note that types may have many Σ-decompositions. The type of Σ-decompositions of
 the unit type, for instance, is equivalent to the type of all pointed connected
 types. Alternatively, we may think of the type of Σ-decompositions of the unit
 type as the type of higher groupoid structures on a point, i.e., the type of
@@ -46,9 +48,8 @@ higher group structures.
 
 We may restrict to Σ-decompositions where the indexing type is in a given
 subuniverse, such as the subuniverse of sets or the subuniverse of finite sets.
-
-The type of set-indexed Σ-decompositions of a type `A` is equivalent to the type
-of equivalence relations on `A`.
+For instance, the type of set-indexed Σ-decompositions of a type `A` is
+equivalent to the type of equivalence relations on `A`.
 
 ## Definitions
 
@@ -346,7 +347,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of Σ-Decompositions
+### Characterization of equality of Σ-decompositions
 
 ```agda
 equiv-Σ-Decomposition :
@@ -472,7 +473,7 @@ module _
   map-equiv-tr-Σ-Decomposition = map-equiv equiv-tr-Σ-Decomposition
 ```
 
-### Characterization of equality of set-indexed Σ-Decompositions
+### Characterization of equality of set-indexed Σ-decompositions
 
 ```agda
 equiv-Set-Indexed-Σ-Decomposition :
@@ -634,10 +635,10 @@ module _
           ( Σ ( ( u : indexing-type-Σ-Decomposition Y) →
                 cotype-Σ-Decomposition Y u ≃
                 type-Inhabited-Type (pr1 Vs (map-equiv e u)))
-             ( λ f →
-               ( ( ( map-equiv-Σ (λ u → type-Inhabited-Type (pr1 Vs u)) e f) ∘
-                   ( map-matching-correspondence-Σ-Decomposition Y)) ~
-                 ( map-equiv (pr2 Vs))))))
+              ( λ f →
+                ( ( ( map-equiv-Σ (λ u → type-Inhabited-Type (pr1 Vs u)) e f) ∘
+                    ( map-matching-correspondence-Σ-Decomposition Y)) ~
+                  ( map-equiv (pr2 Vs))))))
         ( is-contr-total-equiv (indexing-type-Σ-Decomposition Y))
         ( pair (indexing-type-Σ-Decomposition Y) id-equiv)
         ( is-contr-total-Eq-structure
@@ -806,7 +807,7 @@ module _
       (extensionality-displayed-Σ-Decomposition D)
 ```
 
-#### Equivalence between fibered double Σ-Decompositions and displayed double Σ-Decompositions
+#### Equivalence between fibered double Σ-decompositions and displayed double Σ-decompositions
 
 ```agda
 module _
@@ -827,7 +828,7 @@ module _
       ( snd-fibered-Σ-Decomposition fib-D)
 
   matching-correspondence-displayed-fibered-Σ-Decomposition :
-     A ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
+    A ≃ Σ U (λ u → Σ (V u) (λ v → Y (map-inv-equiv f (u , v))))
   matching-correspondence-displayed-fibered-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ X Y by e
@@ -931,7 +932,7 @@ module _
         ( map-equiv e a)
 
   isretr-map-inv-displayed-fibered-Σ-Decomposition :
-     map-inv-displayed-fibered-Σ-Decomposition
+    map-inv-displayed-fibered-Σ-Decomposition
       ( map-displayed-fibered-Σ-Decomposition fib-D) ＝ fib-D
   isretr-map-inv-displayed-fibered-Σ-Decomposition =
     eq-equiv-fibered-Σ-Decomposition
@@ -1002,7 +1003,7 @@ module _
       {l1} {l} {l} {l} {l} {A} fib-D) ＝
     disp-D
   issec-map-inv-displayed-fibered-Σ-Decomposition =
-     eq-equiv-displayed-Σ-Decomposition
+    eq-equiv-displayed-Σ-Decomposition
       ( map-displayed-fibered-Σ-Decomposition fib-D)
       ( disp-D)
       ( ( ( id-equiv) ,

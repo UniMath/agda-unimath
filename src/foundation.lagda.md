@@ -10,8 +10,12 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.action-on-identifications-binary-functions public
+open import foundation.action-on-identifications-dependent-functions public
+open import foundation.action-on-identifications-functions public
 open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
+open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
 open import foundation.axiom-l public
 open import foundation.axiom-of-choice public
@@ -49,6 +53,7 @@ open import foundation.connected-components-universes public
 open import foundation.connected-maps public
 open import foundation.connected-types public
 open import foundation.constant-maps public
+open import foundation.constant-type-families public
 open import foundation.contractible-maps public
 open import foundation.contractible-types public
 open import foundation.coproduct-decompositions public
@@ -67,8 +72,8 @@ open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
+open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
-open import foundation.dependent-paths public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
@@ -81,6 +86,7 @@ open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
 open import foundation.disjunction public
 open import foundation.double-negation public
+open import foundation.double-negation-modality public
 open import foundation.double-powersets public
 open import foundation.dubuc-penon-compact-types public
 open import foundation.effective-maps-equivalence-relations public
@@ -112,8 +118,8 @@ open import foundation.fibered-maps public
 open import foundation.fibers-of-maps public
 open import foundation.full-subtypes public
 open import foundation.function-extensionality public
+open import foundation.function-types public
 open import foundation.functional-correspondences public
-open import foundation.functions public
 open import foundation.functoriality-cartesian-product-types public
 open import foundation.functoriality-coproduct-types public
 open import foundation.functoriality-dependent-function-types public
@@ -180,11 +186,15 @@ open import foundation.partitions public
 open import foundation.path-algebra public
 open import foundation.path-split-maps public
 open import foundation.perfect-images public
+open import foundation.pi-decompositions public
+open import foundation.pi-decompositions-subuniverse public
+open import foundation.pointed-torsorial-type-families public
 open import foundation.powersets public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
 open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
+open import foundation.product-decompositions-subuniverse public
 open import foundation.products-binary-relations public
 open import foundation.products-equivalence-relations public
 open import foundation.products-of-tuples-of-types public
@@ -223,6 +233,7 @@ open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
+open import foundation.sorial-type-families public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
@@ -239,6 +250,7 @@ open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
+open import foundation.torsorial-type-families public
 open import foundation.transport public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
@@ -248,6 +260,7 @@ open import foundation.truncated-types public
 open import foundation.truncation-equivalences public
 open import foundation.truncation-images-of-maps public
 open import foundation.truncation-levels public
+open import foundation.truncation-modalities public
 open import foundation.truncations public
 open import foundation.tuples-of-types public
 open import foundation.type-arithmetic-booleans public

@@ -10,6 +10,7 @@ module univalent-combinatorics.embeddings-standard-finite-types where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -72,8 +73,9 @@ abstract
     (d : is-decidable (is-inl-Fin l (map-emb f (inr star))))
     (x : Fin k) (e : is-decidable (is-inl-Fin l (map-emb f (inl x))))
     (x' : Fin k) (e' : is-decidable (is-inl-Fin l (map-emb f (inl x')))) →
-    Id ( cases-map-reduce-emb-Fin k l f d x e)
-       ( cases-map-reduce-emb-Fin k l f d x' e') →
+    Id
+      ( cases-map-reduce-emb-Fin k l f d x e)
+      ( cases-map-reduce-emb-Fin k l f d x' e') →
     Id x x'
   is-injective-cases-map-reduce-emb-Fin k l f (inl (pair t q)) x e x' e' p =
     is-injective-inl

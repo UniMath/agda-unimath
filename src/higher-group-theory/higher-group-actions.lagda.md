@@ -8,6 +8,7 @@ module higher-group-theory.higher-group-actions where
 
 ```agda
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups

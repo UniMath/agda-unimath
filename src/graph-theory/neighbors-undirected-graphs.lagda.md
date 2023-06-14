@@ -10,7 +10,7 @@ module graph-theory.neighbors-undirected-graphs where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -25,7 +25,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-The type of **neighbors** of a vertex `x` of an [undirected graph](graph-theory.undirected-graphs.md) `G` is the type of all
+The type of **neighbors** of a vertex `x` of an
+[undirected graph](graph-theory.undirected-graphs.md) `G` is the type of all
 vertices `y` in `G` equipped with an edge from `x` to `y`.
 
 ## Definitions

@@ -7,22 +7,24 @@ module foundation.locally-small-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.inhabited-subtypes
 open import foundation.subuniverses
 open import foundation.univalence
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
+open import foundation-core.transport
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -73,14 +75,21 @@ pr1 (is-locally-small-Prop l A) = is-locally-small l A
 pr2 (is-locally-small-Prop l A) = is-prop-is-locally-small l A
 ```
 
+### Any type in `UU l` is `l`-locally small
+
+```agda
+is-locally-small' : {l : Level} {A : UU l} → is-locally-small l A
+is-locally-small' x y = is-small'
+```
+
 ### Any small type is locally small
 
 ```agda
 is-locally-small-is-small :
   {l l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
-pr1 (is-locally-small-is-small (pair X e) x y) =
+pr1 (is-locally-small-is-small (X , e) x y) =
   map-equiv e x ＝ map-equiv e y
-pr2 (is-locally-small-is-small (pair X e) x y) = equiv-ap e x y
+pr2 (is-locally-small-is-small (X , e) x y) = equiv-ap e x y
 ```
 
 ### Any proposition is locally small
@@ -107,24 +116,24 @@ is-locally-small-Σ :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   is-locally-small l3 A → ((x : A) → is-locally-small l4 (B x)) →
   is-locally-small (l3 ⊔ l4) (Σ A B)
-is-locally-small-Σ H K x y =
+is-locally-small-Σ {B = B} H K x y =
   is-small-equiv
     ( Eq-Σ x y)
     ( equiv-pair-eq-Σ x y)
     ( is-small-Σ
       ( H (pr1 x) (pr1 y))
-      ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
+      ( λ p → K (pr1 y) (tr B p (pr2 x)) (pr2 y)))
 
 Σ-Locally-Small-Type :
   {l1 l2 l3 l4 : Level} (A : Locally-Small-Type l1 l2) →
   (type-Locally-Small-Type A → Locally-Small-Type l3 l4) →
   Locally-Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
 pr1 (Σ-Locally-Small-Type A B) =
-  Σ (type-Locally-Small-Type A) (λ a → type-Locally-Small-Type (B a))
+  Σ (type-Locally-Small-Type A) (type-Locally-Small-Type ∘ B)
 pr2 (Σ-Locally-Small-Type A B) =
   is-locally-small-Σ
     ( is-locally-small-type-Locally-Small-Type A)
-    ( λ a → is-locally-small-type-Locally-Small-Type (B a))
+    ( is-locally-small-type-Locally-Small-Type ∘ B)
 ```
 
 ### The underlying type of a subtype of a locally small type is locally small
@@ -135,7 +144,7 @@ is-locally-small-type-subtype :
   is-locally-small l3 A → is-locally-small l3 (type-subtype P)
 is-locally-small-type-subtype {l3 = l3} P H =
   is-locally-small-Σ H
-    (λ a → is-locally-small-is-prop l3 (is-prop-is-in-subtype P a))
+    ( λ a → is-locally-small-is-prop l3 (is-prop-is-in-subtype P a))
 
 type-subtype-Locally-Small-Type :
   {l1 l2 l3 : Level} (A : Locally-Small-Type l1 l2) →
@@ -152,7 +161,7 @@ is-locally-small-Π :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
   is-small l3 A → ((x : A) → is-locally-small l4 (B x)) →
   is-locally-small (l3 ⊔ l4) ((x : A) → B x)
-is-locally-small-Π {l1} {l2} {l3} {l4} H K f g =
+is-locally-small-Π H K f g =
   is-small-equiv
     ( f ~ g)
     ( equiv-funext)
@@ -167,7 +176,7 @@ pr1 (Π-Locally-Small-Type A B) =
 pr2 (Π-Locally-Small-Type A B) =
   is-locally-small-Π
     ( is-small-type-Small-Type A)
-    ( λ a → is-locally-small-type-Locally-Small-Type (B a))
+    ( is-locally-small-type-Locally-Small-Type ∘ B)
 ```
 
 ### The type of types in any given subuniverse is locally small
@@ -185,8 +194,8 @@ is-locally-small-type-subuniverse P =
 ```agda
 is-locally-small-Locally-Small-Type :
   {l1 l2 : Level} → is-locally-small l2 (Locally-Small-Type l1 l2)
-is-locally-small-Locally-Small-Type {l1} {l2} =
-  is-locally-small-type-subuniverse ( is-locally-small-Prop l1)
+is-locally-small-Locally-Small-Type {l1} =
+  is-locally-small-type-subuniverse (is-locally-small-Prop l1)
 ```
 
 ### The type of truncated types is locally small
@@ -213,7 +222,7 @@ is-locally-small-subtype :
   {l1 l2 l3 : Level} {A : UU l1} →
   is-small l2 A → is-locally-small (l2 ⊔ l3) (subtype l3 A)
 is-locally-small-subtype H =
-  is-locally-small-Π H (λ a → is-locally-small-type-Prop)
+  is-locally-small-Π H (λ _ → is-locally-small-type-Prop)
 ```
 
 ### The type of inhabited subtypes of a small type is locally small
@@ -227,3 +236,17 @@ is-locally-small-inhabited-subtype H =
     ( is-inhabited-subtype-Prop)
     ( is-locally-small-subtype H)
 ```
+
+## See also
+
+- [The replacement axiom](foundation.replacement.md)
+
+## References
+
+- Egbert Rijke, Theorem 4.6 in _The join construction_, 2017
+  ([arXiv:1701.07538](https://arxiv.org/abs/1701.07538),
+  [DOI:10.48550](https://doi.org/10.48550/arXiv.1701.07538))
+- Marc Bezem, Ulrik Buchholtz, Pierre Cagne, Bjørn Ian Dundas, and Daniel R.
+  Grayson, Section 2.19 of _Symmetry_
+  ([draft](https://unimath.github.io/SymmetryBook/book.pdf),
+  [GitHub](https://github.com/UniMath/SymmetryBook))

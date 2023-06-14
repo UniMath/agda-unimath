@@ -7,6 +7,7 @@ module ring-theory.quotient-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -67,4 +68,6 @@ sim-congruence-ideal-Ring R I x y =
 
 ### The quotient ring
 
-### The universal property of the quotient ring
+#### The universal property of the quotient ring
+
+This remains to be defined.

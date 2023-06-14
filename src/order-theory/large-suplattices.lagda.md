@@ -44,21 +44,21 @@ holds for every element `y : type-Large-Poset P l3`.
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
+  {α : Level → Level} {β : Level → Level → Level} (γ : Level)
   (P : Large-Poset α β)
   where
 
   is-large-suplattice-Large-Poset : UUω
   is-large-suplattice-Large-Poset =
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2) →
-    has-least-upper-bound-family-of-elements-Large-Poset P x
+    has-least-upper-bound-family-of-elements-Large-Poset γ P x
 
   module _
     (H : is-large-suplattice-Large-Poset)
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
     where
 
-    sup-is-large-suplattice-Large-Poset : type-Large-Poset P (l1 ⊔ l2)
+    sup-is-large-suplattice-Large-Poset : type-Large-Poset P (γ ⊔ l1 ⊔ l2)
     sup-is-large-suplattice-Large-Poset =
       sup-has-least-upper-bound-family-of-elements-Large-Poset (H x)
 
@@ -74,20 +74,21 @@ module _
 
 ```agda
 record
-  Large-Suplattice (α : Level → Level) (β : Level → Level → Level) : UUω
+  Large-Suplattice
+    (α : Level → Level) (β : Level → Level → Level) (γ : Level) : UUω
   where
   constructor
     make-Large-Suplattice
   field
     large-poset-Large-Suplattice : Large-Poset α β
     is-large-suplattice-Large-Suplattice :
-      is-large-suplattice-Large-Poset large-poset-Large-Suplattice
+      is-large-suplattice-Large-Poset γ large-poset-Large-Suplattice
 
 open Large-Suplattice public
 
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Suplattice α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Suplattice α β γ)
   where
 
   set-Large-Suplattice : (l : Level) → Set (α l)
@@ -145,7 +146,7 @@ module _
 
   sup-Large-Suplattice :
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Suplattice l2) →
-    type-Large-Suplattice (l1 ⊔ l2)
+    type-Large-Suplattice (γ ⊔ l1 ⊔ l2)
   sup-Large-Suplattice x =
     sup-has-least-upper-bound-family-of-elements-Large-Poset
       ( is-large-suplattice-Large-Suplattice L x)
@@ -171,8 +172,8 @@ module _
     is-least-upper-bound-family-of-elements-Large-Suplattice x
       ( sup-Large-Suplattice x)
   is-least-upper-bound-sup-Large-Suplattice x =
-     is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
-       ( is-large-suplattice-Large-Suplattice L x)
+    is-least-upper-bound-sup-has-least-upper-bound-family-of-elements-Large-Poset
+      ( is-large-suplattice-Large-Suplattice L x)
 
   is-upper-bound-sup-Large-Suplattice :
     {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Suplattice l2) →
@@ -190,19 +191,19 @@ module _
 
 ```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (L : Large-Suplattice α β)
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Suplattice α β γ)
   where
 
-  preserves-order-sup-Large-Suplatice :
+  preserves-order-sup-Large-Suplattice :
     {l1 l2 l3 : Level} {I : UU l1}
-    {x : I → type-Large-Suplattice L l1}
+    {x : I → type-Large-Suplattice L l2}
     {y : I → type-Large-Suplattice L l3} →
     ((i : I) → leq-Large-Suplattice L (x i) (y i)) →
     leq-Large-Suplattice L
       ( sup-Large-Suplattice L x)
       ( sup-Large-Suplattice L y)
-  preserves-order-sup-Large-Suplatice {x = x} {y} H =
+  preserves-order-sup-Large-Suplattice {x = x} {y} H =
     forward-implication
       ( is-least-upper-bound-sup-Large-Suplattice L x
         ( sup-Large-Suplattice L y))

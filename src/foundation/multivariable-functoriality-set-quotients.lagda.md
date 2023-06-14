@@ -11,12 +11,12 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.functoriality-set-quotients
 open import foundation.set-quotients
+open import foundation.universe-levels
 open import foundation.vectors-set-quotients
 
 open import foundation-core.equivalence-relations
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 
 open import linear-algebra.vectors
 
@@ -67,7 +67,7 @@ module _
     ( quotient-map S ∘
       map-hom-Eq-Rel (all-sim-Eq-Rel n A R) S h)
   compute-multivariable-map-set-quotient =
-     coherence-square-map-is-set-quotient
+    coherence-square-map-is-set-quotient
       ( all-sim-Eq-Rel n A R)
       ( set-quotient-vector-Set n A R)
       ( reflecting-map-quotient-vector-map n A R)
