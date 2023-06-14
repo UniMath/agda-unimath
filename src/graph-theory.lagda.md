@@ -50,5 +50,6 @@ open import graph-theory.undirected-graphs public
 open import graph-theory.vertex-covers public
 open import graph-theory.voltage-graphs public
 open import graph-theory.walks-directed-graphs public
+open import graph-theory.walks-finite-undirected-graphs public
 open import graph-theory.walks-undirected-graphs public
 ```

@@ -35,9 +35,16 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A **walk** in a [finite undirected graph](graph-theory.finite-undirected-graphs.md) `G` is simply a [walk](graph-theory.walks-undirected-graphs.md) in its underlying [undirected graph](graph-theory.undirected-graphs.md).
+A **walk** in a
+[finite undirected graph](graph-theory.finite-undirected-graphs.md) `G` is
+simply a [walk](graph-theory.walks-undirected-graphs.md) in its underlying
+[undirected graph](graph-theory.undirected-graphs.md).
 
-Note that the type of walks in a finite undirected graph does not need to be [finite](univalent-combinatorics.finite-types.md), since edges can be repeated in walks. However, the type of walks from `x` to `y` in a finite undirected graph has [decidable equality](foundation.decidable-equality.md), and the type of walks of a given length `n` in a finite undirected graph is finite.
+Note that the type of walks in a finite undirected graph does not need to be
+[finite](univalent-combinatorics.finite-types.md), since edges can be repeated
+in walks. However, the type of walks from `x` to `y` in a finite undirected
+graph has [decidable equality](foundation.decidable-equality.md), and the type
+of walks of a given length `n` in a finite undirected graph is finite.
 
 ## Definition
 
@@ -47,7 +54,7 @@ Note that the type of walks in a finite undirected graph does not need to be [fi
 module _
   {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2)
   where
-  
+
   walk-Undirected-Graph-𝔽 :
     (x y : vertex-Undirected-Graph-𝔽 G) → UU (lsuc lzero ⊔ l1 ⊔ l2)
   walk-Undirected-Graph-𝔽 =
@@ -145,14 +152,15 @@ module _
   length-walk-Undirected-Graph-𝔽 :
     {y : vertex-Undirected-Graph-𝔽 G} → walk-Undirected-Graph-𝔽 G x y → ℕ
   length-walk-Undirected-Graph-𝔽 =
-    length-walk-Undirected-Graph (undirected-graph-Undirected-Graph-𝔽 G) 
+    length-walk-Undirected-Graph (undirected-graph-Undirected-Graph-𝔽 G)
 ```
 
 ### Walks of a fixed length
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2) (x : vertex-Undirected-Graph-𝔽 G)
+  {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2)
+  (x : vertex-Undirected-Graph-𝔽 G)
   where
 
   walk-of-length-Undirected-Graph-𝔽 :
@@ -358,7 +366,8 @@ is-vertex-on-walk-cons-walk-Undirected-Graph-𝔽 G =
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2) {x : vertex-Undirected-Graph-𝔽 G}
+  {l1 l2 : Level} (G : Undirected-Graph-𝔽 l1 l2)
+  {x : vertex-Undirected-Graph-𝔽 G}
   where
 
   is-vertex-on-first-segment-walk-Undirected-Graph-𝔽 :
@@ -437,7 +446,8 @@ module _
       ( undirected-graph-Undirected-Graph-𝔽 G)
 
   is-constant-walk-Undirected-Graph-𝔽 :
-    {y : vertex-Undirected-Graph-𝔽 G} → walk-Undirected-Graph-𝔽 G x y → UU lzero
+    {y : vertex-Undirected-Graph-𝔽 G} →
+    walk-Undirected-Graph-𝔽 G x y → UU lzero
   is-constant-walk-Undirected-Graph-𝔽 =
     is-constant-walk-Undirected-Graph (undirected-graph-Undirected-Graph-𝔽 G)
 
@@ -525,6 +535,11 @@ module _
   has-decidable-equality-walk-Undirected-Graph-𝔽 :
     {x y : vertex-Undirected-Graph-𝔽 G} →
     has-decidable-equality (walk-Undirected-Graph-𝔽 G x y)
-  has-decidable-equality-walk-Undirected-Graph-𝔽 {x} {.x} refl-walk-Undirected-Graph w = {!!}
-  has-decidable-equality-walk-Undirected-Graph-𝔽 {x} {._} (cons-walk-Undirected-Graph p e v) w = {!!}
+  has-decidable-equality-walk-Undirected-Graph-𝔽 {x} {.x}
+    refl-walk-Undirected-Graph w =
+
+    {!!}
+  has-decidable-equality-walk-Undirected-Graph-𝔽 {x} {._}
+    ( cons-walk-Undirected-Graph p e v) w =
+    {!!}
 ```

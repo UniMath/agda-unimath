@@ -143,7 +143,8 @@ module _
       ( λ x →
         is-decidable-Π-is-finite
           ( is-finite-vertex-Undirected-Graph-𝔽 G)
-          ( λ y → {!!}))
+          ( λ y →
+            {!!}))
 ```
 
 ### The type of finite undirected trees of cardinality `n` is π-finite
