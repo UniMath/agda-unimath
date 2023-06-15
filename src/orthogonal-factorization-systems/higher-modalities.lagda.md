@@ -272,25 +272,27 @@ module _
   map-inv-unit-higher-modality : ○ (○ X) → ○ X
   map-inv-unit-higher-modality = ind-○ (○ X) (λ _ → X) id
 
-  isretr-map-inv-unit-higher-modality :
+  is-retraction-map-inv-unit-higher-modality :
     (map-inv-unit-higher-modality ∘ unit-○) ~ id
-  isretr-map-inv-unit-higher-modality = compute-ind-○ (○ X) (λ _ → X) id
+  is-retraction-map-inv-unit-higher-modality = compute-ind-○ (○ X) (λ _ → X) id
 
-  issec-map-inv-unit-higher-modality :
+  is-section-map-inv-unit-higher-modality :
     (unit-○ ∘ map-inv-unit-higher-modality) ~ id
-  issec-map-inv-unit-higher-modality x'' =
+  is-section-map-inv-unit-higher-modality x'' =
     map-inv-unit-id-higher-modality
       ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○)
       ( ind-○ (○ X)
         ( λ x'' → unit-○ (map-inv-unit-higher-modality x'') ＝ x'')
-        ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-unit-higher-modality)) x'')
+        ( unit-○ ∘ (ap unit-○ ∘ is-retraction-map-inv-unit-higher-modality))
+        ( x''))
 
   is-modal-operator-modality-type : is-modal unit-○ (○ X)
   pr1 (pr1 is-modal-operator-modality-type) = map-inv-unit-higher-modality
-  pr2 (pr1 is-modal-operator-modality-type) = issec-map-inv-unit-higher-modality
+  pr2 (pr1 is-modal-operator-modality-type) =
+    is-section-map-inv-unit-higher-modality
   pr1 (pr2 is-modal-operator-modality-type) = map-inv-unit-higher-modality
   pr2 (pr2 is-modal-operator-modality-type) =
-    isretr-map-inv-unit-higher-modality
+    is-retraction-map-inv-unit-higher-modality
 ```
 
 ### Higher modalities are uniquely eliminating modalities
@@ -302,13 +304,13 @@ module _
       higher-modality l l)
   where
 
-  isretr-ind-modality :
+  is-retraction-ind-modality :
     {X : UU l} {P : ○ X → UU l} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ X P) ~ id
-  isretr-ind-modality {X} {P} = eq-htpy ∘ compute-ind-○ X P
+  is-retraction-ind-modality {X} {P} = eq-htpy ∘ compute-ind-○ X P
 
-  issec-ind-modality :
+  is-section-ind-modality :
     {X : UU l} {P : ○ X → UU l} → (ind-○ X P ∘ precomp-Π unit-○ (○ ∘ P)) ~ id
-  issec-ind-modality {X} {P} s =
+  is-section-ind-modality {X} {P} s =
     eq-htpy
       ( map-inv-unit-id-higher-modality
         ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) ∘
@@ -318,9 +320,9 @@ module _
 
   is-equiv-ind-modality : (X : UU l) (P : ○ X → UU l) → is-equiv (ind-○ X P)
   pr1 (pr1 (is-equiv-ind-modality X P)) = precomp-Π unit-○ (○ ∘ P)
-  pr2 (pr1 (is-equiv-ind-modality X P)) = issec-ind-modality
+  pr2 (pr1 (is-equiv-ind-modality X P)) = is-section-ind-modality
   pr1 (pr2 (is-equiv-ind-modality X P)) = precomp-Π unit-○ (○ ∘ P)
-  pr2 (pr2 (is-equiv-ind-modality X P)) = isretr-ind-modality
+  pr2 (pr2 (is-equiv-ind-modality X P)) = is-retraction-ind-modality
 
   equiv-ind-modality :
     (X : UU l) (P : ○ X → UU l) →

@@ -49,18 +49,18 @@ module _
   map-inv-raise : raise l A → A
   map-inv-raise (map-raise x) = x
 
-  issec-map-inv-raise : (map-raise ∘ map-inv-raise) ~ id
-  issec-map-inv-raise (map-raise x) = refl
+  is-section-map-inv-raise : (map-raise ∘ map-inv-raise) ~ id
+  is-section-map-inv-raise (map-raise x) = refl
 
-  isretr-map-inv-raise : (map-inv-raise ∘ map-raise) ~ id
-  isretr-map-inv-raise x = refl
+  is-retraction-map-inv-raise : (map-inv-raise ∘ map-raise) ~ id
+  is-retraction-map-inv-raise x = refl
 
   is-equiv-map-raise : is-equiv (map-raise {l} {l1} {A})
   is-equiv-map-raise =
     is-equiv-has-inverse
       map-inv-raise
-      issec-map-inv-raise
-      isretr-map-inv-raise
+      is-section-map-inv-raise
+      is-retraction-map-inv-raise
 
 compute-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
 pr1 (compute-raise l A) = map-raise
@@ -102,22 +102,22 @@ module _
   map-inv-equiv-raise : raise l4 B → raise l3 A
   map-inv-equiv-raise (map-raise y) = map-raise (map-inv-equiv e y)
 
-  issec-map-inv-equiv-raise :
+  is-section-map-inv-equiv-raise :
     ( map-equiv-raise ∘ map-inv-equiv-raise) ~ id
-  issec-map-inv-equiv-raise (map-raise y) =
-    ap map-raise (issec-map-inv-equiv e y)
+  is-section-map-inv-equiv-raise (map-raise y) =
+    ap map-raise (is-section-map-inv-equiv e y)
 
-  isretr-map-inv-equiv-raise :
+  is-retraction-map-inv-equiv-raise :
     ( map-inv-equiv-raise ∘ map-equiv-raise) ~ id
-  isretr-map-inv-equiv-raise (map-raise x) =
-    ap map-raise (isretr-map-inv-equiv e x)
+  is-retraction-map-inv-equiv-raise (map-raise x) =
+    ap map-raise (is-retraction-map-inv-equiv e x)
 
   is-equiv-map-equiv-raise : is-equiv map-equiv-raise
   is-equiv-map-equiv-raise =
     is-equiv-has-inverse
       map-inv-equiv-raise
-      issec-map-inv-equiv-raise
-      isretr-map-inv-equiv-raise
+      is-section-map-inv-equiv-raise
+      is-retraction-map-inv-equiv-raise
 
   equiv-raise : raise l3 A ≃ raise l4 B
   pr1 equiv-raise = map-equiv-raise

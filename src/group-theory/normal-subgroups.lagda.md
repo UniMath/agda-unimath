@@ -231,7 +231,7 @@ module _
           ( mul-Group G x z)) ∙
         ( ap
           ( mul-Group G (mul-Group G x y))
-          ( isretr-mul-inv-Group G x z)))
+          ( is-retraction-mul-inv-Group G x z)))
 
   closure-property-Normal-Subgroup' :
     {x y z : type-Group G} →
@@ -575,12 +575,12 @@ pr2 (has-same-elements-normal-subgroup-congruence-Group G N x) H =
     ( ( ap (mul-Group' G x) (inv-unit-Group G)) ∙
       ( left-unit-law-mul-Group G x))
 
-isretr-normal-subgroup-congruence-Group :
+is-retraction-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G) →
   ( normal-subgroup-congruence-Group G
     ( congruence-Normal-Subgroup G N)) ＝
   ( N)
-isretr-normal-subgroup-congruence-Group G N =
+is-retraction-normal-subgroup-congruence-Group G N =
   eq-has-same-elements-Normal-Subgroup G
     ( normal-subgroup-congruence-Group G
       ( congruence-Normal-Subgroup G N))
@@ -603,7 +603,7 @@ pr1
   binary-tr
     ( sim-congruence-Group G R)
     ( right-unit-law-mul-Group G x)
-    ( issec-mul-inv-Group G x y)
+    ( is-section-mul-inv-Group G x y)
     ( left-mul-congruence-Group G R x H)
 pr2
   ( relate-same-elements-congruence-normal-subgroup-congruence-Group
@@ -611,12 +611,12 @@ pr2
   symm-congruence-Group G R
     ( map-sim-left-div-unit-congruence-Group G R H)
 
-issec-normal-subgroup-congruence-Group :
+is-section-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G) →
   ( congruence-Normal-Subgroup G
     ( normal-subgroup-congruence-Group G R)) ＝
   ( R)
-issec-normal-subgroup-congruence-Group G R =
+is-section-normal-subgroup-congruence-Group G R =
   eq-relate-same-elements-congruence-Group G
     ( congruence-Normal-Subgroup G
       ( normal-subgroup-congruence-Group G R))
@@ -634,8 +634,8 @@ is-equiv-congruence-Normal-Subgroup :
 is-equiv-congruence-Normal-Subgroup G =
   is-equiv-has-inverse
     ( normal-subgroup-congruence-Group G)
-    ( issec-normal-subgroup-congruence-Group G)
-    ( isretr-normal-subgroup-congruence-Group G)
+    ( is-section-normal-subgroup-congruence-Group G)
+    ( is-retraction-normal-subgroup-congruence-Group G)
 
 equiv-congruence-Normal-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
@@ -651,8 +651,8 @@ is-equiv-normal-subgroup-congruence-Group :
 is-equiv-normal-subgroup-congruence-Group G =
   is-equiv-has-inverse
     ( congruence-Normal-Subgroup G)
-    ( isretr-normal-subgroup-congruence-Group G)
-    ( issec-normal-subgroup-congruence-Group G)
+    ( is-retraction-normal-subgroup-congruence-Group G)
+    ( is-section-normal-subgroup-congruence-Group G)
 
 equiv-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) →

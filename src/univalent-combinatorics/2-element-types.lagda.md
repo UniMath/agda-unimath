@@ -210,40 +210,40 @@ aut-point-Fin-two-ℕ (inl (inr star)) = id-equiv
 aut-point-Fin-two-ℕ (inr star) = equiv-succ-Fin 2
 
 abstract
-  issec-aut-point-Fin-two-ℕ :
+  is-section-aut-point-Fin-two-ℕ :
     (ev-zero-aut-Fin-two-ℕ ∘ aut-point-Fin-two-ℕ) ~ id
-  issec-aut-point-Fin-two-ℕ (inl (inr star)) = refl
-  issec-aut-point-Fin-two-ℕ (inr star) = refl
+  is-section-aut-point-Fin-two-ℕ (inl (inr star)) = refl
+  is-section-aut-point-Fin-two-ℕ (inr star) = refl
 
-  isretr-aut-point-Fin-two-ℕ' :
+  is-retraction-aut-point-Fin-two-ℕ' :
     (e : Fin 2 ≃ Fin 2) (x y : Fin 2) →
     map-equiv e (zero-Fin 1) ＝ x →
     map-equiv e (one-Fin 1) ＝ y → htpy-equiv (aut-point-Fin-two-ℕ x) e
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inr star) =
     ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inr star) = inv q
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inl (inr star)) p q (inl (inr star)) = inv p
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inl (inr star)) p q (inr star) = inv q
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inl (inr star)) =
     ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inr star) =
     ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
 
-  isretr-aut-point-Fin-two-ℕ :
+  is-retraction-aut-point-Fin-two-ℕ :
     (aut-point-Fin-two-ℕ ∘ ev-zero-aut-Fin-two-ℕ) ~ id
-  isretr-aut-point-Fin-two-ℕ e =
+  is-retraction-aut-point-Fin-two-ℕ e =
     eq-htpy-equiv
-      ( isretr-aut-point-Fin-two-ℕ' e
+      ( is-retraction-aut-point-Fin-two-ℕ' e
         ( map-equiv e (zero-Fin 1))
         ( map-equiv e (one-Fin 1))
         ( refl)
@@ -254,8 +254,8 @@ abstract
   is-equiv-ev-zero-aut-Fin-two-ℕ =
     is-equiv-has-inverse
       aut-point-Fin-two-ℕ
-      issec-aut-point-Fin-two-ℕ
-      isretr-aut-point-Fin-two-ℕ
+      is-section-aut-point-Fin-two-ℕ
+      is-retraction-aut-point-Fin-two-ℕ
 
 equiv-ev-zero-aut-Fin-two-ℕ : (Fin 2 ≃ Fin 2) ≃ Fin 2
 pr1 equiv-ev-zero-aut-Fin-two-ℕ = ev-zero-aut-Fin-two-ℕ
@@ -306,31 +306,31 @@ module _
   map-inv-equiv-point-2-Element-Type x =
     map-inv-equiv (equiv-point-2-Element-Type x)
 
-  issec-map-inv-equiv-point-2-Element-Type :
+  is-section-map-inv-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
     (map-equiv-point-2-Element-Type x ∘ map-inv-equiv-point-2-Element-Type x) ~
     id
-  issec-map-inv-equiv-point-2-Element-Type x =
-    issec-map-inv-equiv (equiv-point-2-Element-Type x)
+  is-section-map-inv-equiv-point-2-Element-Type x =
+    is-section-map-inv-equiv (equiv-point-2-Element-Type x)
 
-  isretr-map-inv-equiv-point-2-Element-Type :
+  is-retraction-map-inv-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
     (map-inv-equiv-point-2-Element-Type x ∘ map-equiv-point-2-Element-Type x) ~
     id
-  isretr-map-inv-equiv-point-2-Element-Type x =
-    isretr-map-inv-equiv (equiv-point-2-Element-Type x)
+  is-retraction-map-inv-equiv-point-2-Element-Type x =
+    is-retraction-map-inv-equiv (equiv-point-2-Element-Type x)
 
   compute-map-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
     map-equiv-point-2-Element-Type x (zero-Fin 1) ＝ x
   compute-map-equiv-point-2-Element-Type =
-    issec-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
+    is-section-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
 
   is-unique-equiv-point-2-Element-Type :
     (e : Fin 2 ≃ type-2-Element-Type X) →
     htpy-equiv (equiv-point-2-Element-Type (map-equiv e (zero-Fin 1))) e
   is-unique-equiv-point-2-Element-Type e =
-    htpy-eq-equiv (isretr-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
+    htpy-eq-equiv (is-retraction-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
 ```
 
 #### The type of pointed 2-element types of any universe level is contractible
@@ -538,13 +538,13 @@ module _
       ( has-two-elements-type-2-Element-Type X)
       ( Id-Prop (set-UU-Fin 2 X) (map-equiv (e ∘e e) x) x)
       ( λ h →
-        ( ap (map-equiv (e ∘e e)) (inv (issec-map-inv-equiv h x))) ∙
-        ( ( ap (map-equiv e) (inv (issec-map-inv-equiv h _))) ∙
-          ( inv (issec-map-inv-equiv h _) ∙
+        ( ap (map-equiv (e ∘e e)) (inv (is-section-map-inv-equiv h x))) ∙
+        ( ( ap (map-equiv e) (inv (is-section-map-inv-equiv h _))) ∙
+          ( inv (is-section-map-inv-equiv h _) ∙
             ( ( ap
                 ( map-equiv h)
                 ( is-involution-aut-Fin-two-ℕ (inv-equiv h ∘e (e ∘e h)) _)) ∙
-              ( issec-map-inv-equiv h x)))))
+              ( is-section-map-inv-equiv h x)))))
 ```
 
 ### The swapping equivalence on arbitrary 2-element types
@@ -572,10 +572,10 @@ module _
       ( f
         ( (inv (compute-map-equiv-point-2-Element-Type X x)) ∙
           ( ( ap (map-equiv-point-2-Element-Type X x) (inv q)) ∙
-            ( issec-map-inv-equiv-point-2-Element-Type X x y))))
+            ( is-section-map-inv-equiv-point-2-Element-Type X x y))))
   compute-swap-2-Element-Type' x y p (inr star) q =
     ( ap (map-equiv-point-2-Element-Type X x) (inv q)) ∙
-    ( issec-map-inv-equiv-point-2-Element-Type X x y)
+    ( is-section-map-inv-equiv-point-2-Element-Type X x y)
 
   compute-swap-2-Element-Type :
     (x y : type-2-Element-Type X) → ¬ (x ＝ y) →

@@ -63,8 +63,8 @@ module _
     is-prop-is-equiv-diagonal is-equiv-d =
       is-prop-all-elements-equal
         ( λ x y →
-          ( inv (ap pr1 (issec-map-inv-is-equiv is-equiv-d (pair x y)))) ∙
-          ( ap pr2 (issec-map-inv-is-equiv is-equiv-d (pair x y))))
+          ( inv (ap pr1 (is-section-map-inv-is-equiv is-equiv-d (pair x y)))) ∙
+          ( ap pr2 (is-section-map-inv-is-equiv is-equiv-d (pair x y))))
 
   equiv-diagonal-is-prop :
     is-prop A → A ≃ (A × A)
@@ -90,19 +90,19 @@ module _
   pr1 (fib-diagonal-eq (pair x y) β) = x
   pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
 
-  issec-fib-diagonal-eq :
+  is-section-fib-diagonal-eq :
     (t : A × A) → ((eq-fib-diagonal t) ∘ (fib-diagonal-eq t)) ~ id
-  issec-fib-diagonal-eq (pair x .x) refl = refl
+  is-section-fib-diagonal-eq (pair x .x) refl = refl
 
-  isretr-fib-diagonal-eq :
+  is-retraction-fib-diagonal-eq :
     (t : A × A) → ((fib-diagonal-eq t) ∘ (eq-fib-diagonal t)) ~ id
-  isretr-fib-diagonal-eq .(pair z z) (pair z refl) = refl
+  is-retraction-fib-diagonal-eq .(pair z z) (pair z refl) = refl
 
   abstract
     is-equiv-eq-fib-diagonal : (t : A × A) → is-equiv (eq-fib-diagonal t)
     is-equiv-eq-fib-diagonal t =
       is-equiv-has-inverse
         ( fib-diagonal-eq t)
-        ( issec-fib-diagonal-eq t)
-        ( isretr-fib-diagonal-eq t)
+        ( is-section-fib-diagonal-eq t)
+        ( is-retraction-fib-diagonal-eq t)
 ```

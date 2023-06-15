@@ -111,7 +111,7 @@ module _
                           ( refl)
                           ( inv
                             ( eq-htpy-equiv
-                              ( retr-permutation-list-transpositions-count
+                              ( retraction-permutation-list-transpositions-count
                                 ( type-UU-Fin n X)
                                 ( pair n h)
                                 ( f)))))))}
@@ -130,7 +130,7 @@ module _
                           ( refl)
                           ( inv
                             ( eq-htpy-equiv
-                              ( retr-permutation-list-transpositions-count
+                              ( retraction-permutation-list-transpositions-count
                                 ( type-UU-Fin n X)
                                 ( pair n h)
                                 ( g)))))))}
@@ -166,7 +166,7 @@ module _
       eq-htpy-equiv
         ( λ x →
           ( inv
-            ( retr-permutation-list-transpositions-count
+            ( retraction-permutation-list-transpositions-count
               ( type-UU-Fin n X)
               ( pair n h)
               ( f)
@@ -176,7 +176,7 @@ module _
               ( permutation-list-transpositions
                 ( list-trans f h)))
             ( inv
-              ( retr-permutation-list-transpositions-count
+              ( retraction-permutation-list-transpositions-count
                 ( type-UU-Fin n X)
                 ( pair n h)
                 ( g)
@@ -271,7 +271,7 @@ module _
                                 { e =
                                   permutation-list-transpositions
                                     ( list-trans h)}
-                                ( retr-permutation-list-transpositions-count
+                                ( retraction-permutation-list-transpositions-count
                                   ( type-UU-Fin n X)
                                   ( pair n h)
                                   ( f)))))) ∙
@@ -307,7 +307,7 @@ module _
                         ( refl)
                         ( inv
                           ( eq-htpy-equiv
-                            ( retr-permutation-list-transpositions-count
+                            ( retraction-permutation-list-transpositions-count
                               ( type-UU-Fin n X)
                               ( pair n h)
                               ( f)))))))}

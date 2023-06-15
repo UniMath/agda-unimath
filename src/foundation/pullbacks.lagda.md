@@ -97,7 +97,7 @@ triangle-map-canonical-pullback-exponent
   {A = A} {B} T f g c h =
   eq-pair-Σ refl
     ( eq-pair-Σ refl
-      ( inv (issec-eq-htpy (coherence-square-cone f g c ·r h))))
+      ( inv (is-section-eq-htpy (coherence-square-cone f g c ·r h))))
 
 abstract
   is-pullback-exponent-is-pullback :
@@ -152,18 +152,18 @@ inv-gap-cone-Id :
 inv-gap-cone-Id x y (pair star (pair star p)) = p
 
 abstract
-  issec-inv-gap-cone-Id :
+  is-section-inv-gap-cone-Id :
     {l : Level} {A : UU l} (x y : A) →
     ( ( gap (const unit A x) (const unit A y) (cone-Id x y)) ∘
       ( inv-gap-cone-Id x y)) ~ id
-  issec-inv-gap-cone-Id x y (pair star (pair star p)) = refl
+  is-section-inv-gap-cone-Id x y (pair star (pair star p)) = refl
 
 abstract
-  isretr-inv-gap-cone-Id :
+  is-retraction-inv-gap-cone-Id :
     {l : Level} {A : UU l} (x y : A) →
     ( ( inv-gap-cone-Id x y) ∘
       ( gap (const unit A x) (const unit A y) (cone-Id x y))) ~ id
-  isretr-inv-gap-cone-Id x y p = refl
+  is-retraction-inv-gap-cone-Id x y p = refl
 
 abstract
   is-pullback-cone-Id :
@@ -172,8 +172,8 @@ abstract
   is-pullback-cone-Id x y =
     is-equiv-has-inverse
       ( inv-gap-cone-Id x y)
-      ( issec-inv-gap-cone-Id x y)
-      ( isretr-inv-gap-cone-Id x y)
+      ( is-section-inv-gap-cone-Id x y)
+      ( is-retraction-inv-gap-cone-Id x y)
 
 cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →
@@ -191,18 +191,18 @@ inv-gap-cone-Id' t (pair star (pair z p)) =
   (ap pr1 p) ∙ (inv (ap pr2 p))
 
 abstract
-  issec-inv-gap-cone-Id' :
+  is-section-inv-gap-cone-Id' :
     {l : Level} {A : UU l} (t : A × A) →
     ( ( gap (const unit (A × A) t) (diagonal A) (cone-Id' t)) ∘
       ( inv-gap-cone-Id' t)) ~ id
-  issec-inv-gap-cone-Id' .(pair z z) (pair star (pair z refl)) = refl
+  is-section-inv-gap-cone-Id' .(pair z z) (pair star (pair z refl)) = refl
 
 abstract
-  isretr-inv-gap-cone-Id' :
+  is-retraction-inv-gap-cone-Id' :
     {l : Level} {A : UU l} (t : A × A) →
     ( ( inv-gap-cone-Id' t) ∘
       ( gap (const unit (A × A) t) (diagonal A) (cone-Id' t))) ~ id
-  isretr-inv-gap-cone-Id' (pair x .x) refl = refl
+  is-retraction-inv-gap-cone-Id' (pair x .x) refl = refl
 
 abstract
   is-pullback-cone-Id' :
@@ -211,8 +211,8 @@ abstract
   is-pullback-cone-Id' t =
     is-equiv-has-inverse
       ( inv-gap-cone-Id' t)
-      ( issec-inv-gap-cone-Id' t)
-      ( isretr-inv-gap-cone-Id' t)
+      ( is-section-inv-gap-cone-Id' t)
+      ( is-retraction-inv-gap-cone-Id' t)
 ```
 
 ### The equivalence on canonical pullbacks induced by parallel cospans
@@ -452,7 +452,7 @@ comp-htpy-eq-square-refl-htpy :
     (concat (tr-tr-refl-htpy-cone f g c) c')) ~
   ( htpy-eq-square f g c c')
 comp-htpy-eq-square-refl-htpy f g c c' =
-  issec-map-inv-is-equiv-precomp-Π-is-equiv
+  is-section-map-inv-is-equiv-precomp-Π-is-equiv
     ( λ (p : Id c c') → (tr-tr-refl-htpy-cone f g c) ∙ p)
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
@@ -623,31 +623,31 @@ inv-map-canonical-pullback-Π f g h =
     ( eq-htpy (λ i → (pr2 (pr2 (h i)))))
 
 abstract
-  issec-inv-map-canonical-pullback-Π :
+  is-section-inv-map-canonical-pullback-Π :
     {l1 l2 l3 l4 : Level} {I : UU l1}
     {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
     (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
     ((map-canonical-pullback-Π f g) ∘ (inv-map-canonical-pullback-Π f g)) ~ id
-  issec-inv-map-canonical-pullback-Π f g h =
+  is-section-inv-map-canonical-pullback-Π f g h =
     eq-htpy
       ( λ i → map-extensionality-canonical-pullback (f i) (g i) refl refl
         ( inv
           ( ( right-unit) ∙
-            ( htpy-eq (issec-eq-htpy (λ i → (pr2 (pr2 (h i))))) i))))
+            ( htpy-eq (is-section-eq-htpy (λ i → (pr2 (pr2 (h i))))) i))))
 
 abstract
-  isretr-inv-map-canonical-pullback-Π :
+  is-retraction-inv-map-canonical-pullback-Π :
     {l1 l2 l3 l4 : Level} {I : UU l1}
     {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
     (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
     ((inv-map-canonical-pullback-Π f g) ∘ (map-canonical-pullback-Π f g)) ~ id
-  isretr-inv-map-canonical-pullback-Π f g (pair α (pair β γ)) =
+  is-retraction-inv-map-canonical-pullback-Π f g (pair α (pair β γ)) =
     map-extensionality-canonical-pullback
       ( map-Π f)
       ( map-Π g)
       refl
       refl
-      ( inv (right-unit ∙ (isretr-eq-htpy γ)))
+      ( inv (right-unit ∙ (is-retraction-eq-htpy γ)))
 
 abstract
   is-equiv-map-canonical-pullback-Π :
@@ -658,8 +658,8 @@ abstract
   is-equiv-map-canonical-pullback-Π f g =
     is-equiv-has-inverse
       ( inv-map-canonical-pullback-Π f g)
-      ( issec-inv-map-canonical-pullback-Π f g)
-      ( isretr-inv-map-canonical-pullback-Π f g)
+      ( is-section-inv-map-canonical-pullback-Π f g)
+      ( is-retraction-inv-map-canonical-pullback-Π f g)
 
 triangle-map-canonical-pullback-Π :
   {l1 l2 l3 l4 l5 : Level} {I : UU l1}
@@ -675,7 +675,7 @@ triangle-map-canonical-pullback-Π f g c h =
       (f i)
       (g i)
       refl refl
-      ( (htpy-eq (issec-eq-htpy _) i) ∙ (inv right-unit)))
+      ( (htpy-eq (is-section-eq-htpy _) i) ∙ (inv right-unit)))
 
 abstract
   is-pullback-cone-Π :

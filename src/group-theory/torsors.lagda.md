@@ -370,7 +370,7 @@ module _
         ( inv-equiv-Torsor-Abstract-Group G X Y f)
         ( f))
       ( id-equiv-Torsor-Abstract-Group G X)
-      ( isretr-map-inv-equiv (pr1 f))
+      ( is-retraction-map-inv-equiv (pr1 f))
 
   right-inverse-law-comp-equiv-Torsor-Abstract-Group :
     (f : equiv-Torsor-Abstract-Group G X Y) →
@@ -383,7 +383,7 @@ module _
       ( comp-equiv-Torsor-Abstract-Group G Y X Y f
         ( inv-equiv-Torsor-Abstract-Group G X Y f))
       ( id-equiv-Torsor-Abstract-Group G Y)
-      ( issec-map-inv-equiv (pr1 f))
+      ( is-section-map-inv-equiv (pr1 f))
 
 module _
   {l1 : Level} (G : Group l1)
@@ -547,17 +547,17 @@ module _
   pr1 (equiv-Eq-Torsor-Abstract-Group u) = equiv-mul-Group' G u
   pr2 (equiv-Eq-Torsor-Abstract-Group u) g x = associative-mul-Group G g x u
 
-  issec-equiv-Eq-Torsor-Abstract-Group :
+  is-section-equiv-Eq-Torsor-Abstract-Group :
     ( Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G) ∘
       equiv-Eq-Torsor-Abstract-Group) ~
     ( id)
-  issec-equiv-Eq-Torsor-Abstract-Group u = left-unit-law-mul-Group G u
+  is-section-equiv-Eq-Torsor-Abstract-Group u = left-unit-law-mul-Group G u
 
-  isretr-equiv-Eq-Torsor-Abstract-Group :
+  is-retraction-equiv-Eq-Torsor-Abstract-Group :
     ( equiv-Eq-Torsor-Abstract-Group ∘
       Eq-equiv-Torsor-Abstract-Group (principal-Torsor-Abstract-Group G)) ~
     ( id)
-  isretr-equiv-Eq-Torsor-Abstract-Group e =
+  is-retraction-equiv-Eq-Torsor-Abstract-Group e =
     eq-htpy-equiv-Torsor-Abstract-Group G
       ( principal-Torsor-Abstract-Group G)
       ( principal-Torsor-Abstract-Group G)
@@ -585,8 +585,8 @@ module _
               ( e))
             ( is-equiv-has-inverse
                 equiv-Eq-Torsor-Abstract-Group
-                issec-equiv-Eq-Torsor-Abstract-Group
-                isretr-equiv-Eq-Torsor-Abstract-Group))
+                is-section-equiv-Eq-Torsor-Abstract-Group
+                is-retraction-equiv-Eq-Torsor-Abstract-Group))
 
   equiv-Eq-equiv-Torsor-Abstract-Group :
     (X : Torsor-Abstract-Group G l1) →

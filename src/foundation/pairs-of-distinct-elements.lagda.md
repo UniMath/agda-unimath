@@ -136,33 +136,33 @@ module _
     distinction-pair-of-distinct-elements q
       ( is-injective-is-equiv (is-equiv-map-inv-equiv e) p)
 
-  issec-map-inv-equiv-pair-of-distinct-elements :
+  is-section-map-inv-equiv-pair-of-distinct-elements :
     (q : pair-of-distinct-elements B) →
     ( map-equiv-pair-of-distinct-elements
       ( map-inv-equiv-pair-of-distinct-elements q)) ＝
     ( q)
-  issec-map-inv-equiv-pair-of-distinct-elements q =
+  is-section-map-inv-equiv-pair-of-distinct-elements q =
     eq-Eq-pair-of-distinct-elements
-      ( issec-map-inv-equiv e (first-pair-of-distinct-elements q))
-      ( issec-map-inv-equiv e (second-pair-of-distinct-elements q))
+      ( is-section-map-inv-equiv e (first-pair-of-distinct-elements q))
+      ( is-section-map-inv-equiv e (second-pair-of-distinct-elements q))
 
-  isretr-map-inv-equiv-pair-of-distinct-elements :
+  is-retraction-map-inv-equiv-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) →
     ( map-inv-equiv-pair-of-distinct-elements
       ( map-equiv-pair-of-distinct-elements p)) ＝
     ( p)
-  isretr-map-inv-equiv-pair-of-distinct-elements p =
+  is-retraction-map-inv-equiv-pair-of-distinct-elements p =
     eq-Eq-pair-of-distinct-elements
-      ( isretr-map-inv-equiv e (first-pair-of-distinct-elements p))
-      ( isretr-map-inv-equiv e (second-pair-of-distinct-elements p))
+      ( is-retraction-map-inv-equiv e (first-pair-of-distinct-elements p))
+      ( is-retraction-map-inv-equiv e (second-pair-of-distinct-elements p))
 
   is-equiv-map-equiv-pair-of-distinct-elements :
     is-equiv map-equiv-pair-of-distinct-elements
   is-equiv-map-equiv-pair-of-distinct-elements =
     is-equiv-has-inverse
       map-inv-equiv-pair-of-distinct-elements
-      issec-map-inv-equiv-pair-of-distinct-elements
-      isretr-map-inv-equiv-pair-of-distinct-elements
+      is-section-map-inv-equiv-pair-of-distinct-elements
+      is-retraction-map-inv-equiv-pair-of-distinct-elements
 
   equiv-pair-of-distinct-elements :
     pair-of-distinct-elements A ≃ pair-of-distinct-elements B

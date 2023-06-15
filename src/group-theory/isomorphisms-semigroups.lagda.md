@@ -65,25 +65,25 @@ module _
   hom-inv-iso-Semigroup =
     hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 
-  issec-hom-inv-iso-Semigroup :
+  is-section-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
     Id
       ( comp-hom-Semigroup H G H
         ( hom-iso-Semigroup f)
         ( hom-inv-iso-Semigroup f))
       ( id-hom-Semigroup H)
-  issec-hom-inv-iso-Semigroup =
-    is-sec-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+  is-section-hom-inv-iso-Semigroup =
+    is-section-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 
-  isretr-hom-inv-iso-Semigroup :
+  is-retraction-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
     Id
       ( comp-hom-Semigroup G H G
         ( hom-inv-iso-Semigroup f)
         ( hom-iso-Semigroup f))
       ( id-hom-Semigroup G)
-  isretr-hom-inv-iso-Semigroup =
-    is-retr-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+  is-retraction-hom-inv-iso-Semigroup =
+    is-retraction-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 ```
 
 ## Properties
@@ -121,13 +121,13 @@ module _
           ( mul-Semigroup G
             ( map-inv-is-equiv is-equiv-f x)
             ( map-inv-is-equiv is-equiv-f y)))
-        ( ( ( issec-map-inv-is-equiv is-equiv-f (mul-Semigroup H x y)) ∙
+        ( ( ( is-section-map-inv-is-equiv is-equiv-f (mul-Semigroup H x y)) ∙
             ( ( ap
                 ( λ t → mul-Semigroup H t y)
-                ( inv (issec-map-inv-is-equiv is-equiv-f x))) ∙
+                ( inv (is-section-map-inv-is-equiv is-equiv-f x))) ∙
               ( ap
                 ( mul-Semigroup H (f (map-inv-is-equiv is-equiv-f x)))
-                ( inv (issec-map-inv-is-equiv is-equiv-f y))))) ∙
+                ( inv (is-section-map-inv-is-equiv is-equiv-f y))))) ∙
           ( inv
             ( μ-f
               ( map-inv-is-equiv is-equiv-f x)
@@ -150,9 +150,9 @@ module _
     pr2 (pr1 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
       preserves-mul-map-inv-is-equiv-Semigroup G H (pair f μ-f) is-equiv-f
     pr1 (pr2 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
-      eq-htpy-hom-Semigroup H H (issec-map-inv-is-equiv is-equiv-f)
+      eq-htpy-hom-Semigroup H H (is-section-map-inv-is-equiv is-equiv-f)
     pr2 (pr2 (is-iso-is-equiv-hom-Semigroup (pair f μ-f) is-equiv-f)) =
-      eq-htpy-hom-Semigroup G G (isretr-map-inv-is-equiv is-equiv-f)
+      eq-htpy-hom-Semigroup G G (is-retraction-map-inv-is-equiv is-equiv-f)
 
   abstract
     is-equiv-is-iso-hom-Semigroup :
@@ -160,10 +160,10 @@ module _
       is-iso-hom-Semigroup G H f → is-equiv-hom-Semigroup G H f
     is-equiv-is-iso-hom-Semigroup
       ( pair f μ-f)
-      ( pair (pair g μ-g) (pair issec isretr)) =
+      ( pair (pair g μ-g) (pair is-section is-retraction)) =
       is-equiv-has-inverse g
-        ( htpy-eq (ap pr1 issec))
-        ( htpy-eq (ap pr1 isretr))
+        ( htpy-eq (ap pr1 is-section))
+        ( htpy-eq (ap pr1 is-retraction))
 
   equiv-iso-equiv-Semigroup : equiv-Semigroup G H ≃ type-iso-Semigroup G H
   equiv-iso-equiv-Semigroup =

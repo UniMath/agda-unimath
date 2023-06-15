@@ -91,16 +91,16 @@ module _
   map-inv-equiv-bool-Decidable-Prop' false =
     inr (pair (raise-empty-Prop l) is-empty-raise-empty)
 
-  issec-map-inv-equiv-bool-Decidable-Prop' :
+  is-section-map-inv-equiv-bool-Decidable-Prop' :
     (map-equiv-bool-Decidable-Prop' ∘ map-inv-equiv-bool-Decidable-Prop') ~ id
-  issec-map-inv-equiv-bool-Decidable-Prop' true = refl
-  issec-map-inv-equiv-bool-Decidable-Prop' false = refl
+  is-section-map-inv-equiv-bool-Decidable-Prop' true = refl
+  is-section-map-inv-equiv-bool-Decidable-Prop' false = refl
 
-  isretr-map-inv-equiv-bool-Decidable-Prop' :
+  is-retraction-map-inv-equiv-bool-Decidable-Prop' :
     (map-inv-equiv-bool-Decidable-Prop' ∘ map-equiv-bool-Decidable-Prop') ~ id
-  isretr-map-inv-equiv-bool-Decidable-Prop' (inl x) =
+  is-retraction-map-inv-equiv-bool-Decidable-Prop' (inl x) =
     ap inl (eq-is-contr is-contr-total-true-Prop)
-  isretr-map-inv-equiv-bool-Decidable-Prop' (inr x) =
+  is-retraction-map-inv-equiv-bool-Decidable-Prop' (inr x) =
     ap inr (eq-is-contr is-contr-total-false-Prop)
 
   is-equiv-map-equiv-bool-Decidable-Prop' :
@@ -108,8 +108,8 @@ module _
   is-equiv-map-equiv-bool-Decidable-Prop' =
     is-equiv-has-inverse
       map-inv-equiv-bool-Decidable-Prop'
-      issec-map-inv-equiv-bool-Decidable-Prop'
-      isretr-map-inv-equiv-bool-Decidable-Prop'
+      is-section-map-inv-equiv-bool-Decidable-Prop'
+      is-retraction-map-inv-equiv-bool-Decidable-Prop'
 
   equiv-bool-Decidable-Prop' :
     ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q)))) ≃

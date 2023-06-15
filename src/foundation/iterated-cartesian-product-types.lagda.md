@@ -205,7 +205,7 @@ equiv-permutation-iterated-product-lists L t =
             iterated-product-Fin-recursive
               ( length-array p)
               ( functional-vec-array p))
-          ( isretr-array-list
+          ( is-retraction-array-list
             ( length-list L ,
               ( functional-vec-array (array-list L) ∘ map-equiv t)))) ∘e
         ( inv-equiv

@@ -58,22 +58,22 @@ module _
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
-  isretr-pair-eq-Σ :
+  is-retraction-pair-eq-Σ :
     (s t : Σ A B) →
     ((pair-eq-Σ {s} {t}) ∘ (eq-pair-Σ' {s} {t})) ~ id {A = Eq-Σ s t}
-  isretr-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
+  is-retraction-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
 
-  issec-pair-eq-Σ :
+  is-section-pair-eq-Σ :
     (s t : Σ A B) → ((eq-pair-Σ' {s} {t}) ∘ (pair-eq-Σ {s} {t})) ~ id
-  issec-pair-eq-Σ (pair x y) .(pair x y) refl = refl
+  is-section-pair-eq-Σ (pair x y) .(pair x y) refl = refl
 
   abstract
     is-equiv-eq-pair-Σ : (s t : Σ A B) → is-equiv (eq-pair-Σ' {s} {t})
     is-equiv-eq-pair-Σ s t =
       is-equiv-has-inverse
         ( pair-eq-Σ)
-        ( issec-pair-eq-Σ s t)
-        ( isretr-pair-eq-Σ s t)
+        ( is-section-pair-eq-Σ s t)
+        ( is-retraction-pair-eq-Σ s t)
 
   equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ (s ＝ t)
   equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
@@ -83,8 +83,8 @@ module _
     is-equiv-pair-eq-Σ s t =
       is-equiv-has-inverse
         ( eq-pair-Σ')
-        ( isretr-pair-eq-Σ s t)
-        ( issec-pair-eq-Σ s t)
+        ( is-retraction-pair-eq-Σ s t)
+        ( is-section-pair-eq-Σ s t)
 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
   equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)

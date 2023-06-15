@@ -58,15 +58,15 @@ module _
   equivalence-class-set-quotient : set-quotient → equivalence-class R
   equivalence-class-set-quotient = map-inv-equiv compute-set-quotient
 
-  issec-equivalence-class-set-quotient :
+  is-section-equivalence-class-set-quotient :
     (set-quotient-equivalence-class ∘ equivalence-class-set-quotient) ~ id
-  issec-equivalence-class-set-quotient =
-    issec-map-inv-equiv compute-set-quotient
+  is-section-equivalence-class-set-quotient =
+    is-section-map-inv-equiv compute-set-quotient
 
-  isretr-equivalence-class-set-quotient :
+  is-retraction-equivalence-class-set-quotient :
     (equivalence-class-set-quotient ∘ set-quotient-equivalence-class) ~ id
-  isretr-equivalence-class-set-quotient =
-    isretr-map-inv-equiv compute-set-quotient
+  is-retraction-equivalence-class-set-quotient =
+    is-retraction-map-inv-equiv compute-set-quotient
 
   emb-equivalence-class-set-quotient : set-quotient ↪ equivalence-class R
   emb-equivalence-class-set-quotient =
@@ -135,7 +135,7 @@ module _
   pr1 unit-im-set-quotient = quotient-map
   pr2 unit-im-set-quotient =
     ( ( subtype-equivalence-class R) ·l
-      ( inv-htpy isretr-equivalence-class-set-quotient)) ·r
+      ( inv-htpy is-retraction-equivalence-class-set-quotient)) ·r
     ( class R)
 
   is-image-set-quotient :
@@ -166,13 +166,13 @@ module _
       ≃ ( class R x ＝ equivalence-class-set-quotient R (quotient-map R y))
         by
         ( equiv-concat
-          ( (inv ( isretr-equivalence-class-set-quotient R (class R x))))
+          ( (inv ( is-retraction-equivalence-class-set-quotient R (class R x))))
           ( equivalence-class-set-quotient R (quotient-map R y)))
       ≃ ( class R x ＝ class R y)
         by
         ( equiv-concat'
           ( class R x)
-          ( isretr-equivalence-class-set-quotient R (class R y)))
+          ( is-retraction-equivalence-class-set-quotient R (class R y)))
       ≃ ( sim-Eq-Rel R x y)
         by
         ( is-effective-class R x y)
@@ -222,22 +222,22 @@ module _
   inv-precomp-set-quotient X =
     pr1 (pr1 (is-set-quotient-set-quotient X))
 
-  issec-inv-precomp-set-quotient :
+  is-section-inv-precomp-set-quotient :
     {l : Level} →
     (X : Set l) →
     (f : reflecting-map-Eq-Rel R (type-Set X)) →
     (a : A) →
     inv-precomp-set-quotient X f (quotient-map R a) ＝
       map-reflecting-map-Eq-Rel R f a
-  issec-inv-precomp-set-quotient X f =
+  is-section-inv-precomp-set-quotient X f =
     htpy-eq
       ( ap
         ( map-reflecting-map-Eq-Rel R)
-        ( issec-map-inv-is-equiv
+        ( is-section-map-inv-is-equiv
           ( is-set-quotient-set-quotient X)
           ( f)))
 
-  isretr-inv-precomp-set-quotient :
+  is-retraction-inv-precomp-set-quotient :
     { l : Level} →
     ( X : Set l) →
     ( f : type-hom-Set (quotient-Set R) X) →
@@ -248,8 +248,8 @@ module _
         ( X)
         ( f)) ＝
       f
-  isretr-inv-precomp-set-quotient X f =
-      ( isretr-map-inv-is-equiv
+  is-retraction-inv-precomp-set-quotient X f =
+      ( is-retraction-map-inv-is-equiv
         ( is-set-quotient-set-quotient X)
         ( f))
 ```

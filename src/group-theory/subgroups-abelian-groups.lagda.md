@@ -620,9 +620,9 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  isretr-subgroup-congruence-Ab :
+  is-retraction-subgroup-congruence-Ab :
     subgroup-congruence-Ab A (congruence-Subgroup-Ab A B) ＝ B
-  isretr-subgroup-congruence-Ab =
+  is-retraction-subgroup-congruence-Ab =
     eq-has-same-elements-Subgroup-Ab A
       ( subgroup-congruence-Ab A (congruence-Subgroup-Ab A B))
       ( B)
@@ -645,9 +645,9 @@ module _
       ( group-Ab A)
       ( R)
 
-  issec-subgroup-congruence-Ab :
+  is-section-subgroup-congruence-Ab :
     congruence-Subgroup-Ab A (subgroup-congruence-Ab A R) ＝ R
-  issec-subgroup-congruence-Ab =
+  is-section-subgroup-congruence-Ab =
     eq-relate-same-elements-congruence-Ab A
       ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
       ( R)
@@ -666,8 +666,8 @@ module _
   is-equiv-congruence-Subgroup-Ab =
     is-equiv-has-inverse
       ( subgroup-congruence-Ab A)
-      ( issec-subgroup-congruence-Ab A)
-      ( isretr-subgroup-congruence-Ab A)
+      ( is-section-subgroup-congruence-Ab A)
+      ( is-retraction-subgroup-congruence-Ab A)
 
   equiv-congruence-Subgroup-Ab :
     Subgroup-Ab l2 A ≃ congruence-Ab l2 A
@@ -681,8 +681,8 @@ module _
   is-equiv-subgroup-congruence-Ab =
     is-equiv-has-inverse
       ( congruence-Subgroup-Ab A)
-      ( isretr-subgroup-congruence-Ab A)
-      ( issec-subgroup-congruence-Ab A)
+      ( is-retraction-subgroup-congruence-Ab A)
+      ( is-section-subgroup-congruence-Ab A)
 
   equiv-subgroup-congruence-Ab :
     congruence-Ab l2 A ≃ Subgroup-Ab l2 A

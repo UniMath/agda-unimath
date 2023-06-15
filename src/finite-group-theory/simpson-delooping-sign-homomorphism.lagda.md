@@ -125,7 +125,7 @@ module _
                 ( sign-homomorphism-Fin-two n
                   (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
             ( is-zero-nat-zero-Fin {k = 1}) ∙
-            ( issec-nat-Fin 1
+            ( is-section-nat-Fin 1
               ( sign-homomorphism-Fin-two n
                 (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))) ∙
               ( ap
@@ -320,7 +320,7 @@ module _
             ( T)
             ( equiv-count eX)))
       ( λ T →
-        retr-Fin-2-quotient-sign-comp-count T
+        retraction-Fin-2-quotient-sign-comp-count T
           ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
@@ -335,7 +335,7 @@ module _
             ( T)
             ( equiv-count eX)))
       ( λ k →
-        sec-Fin-2-quotient-sign-comp-count k
+        section-Fin-2-quotient-sign-comp-count k
           ( is-decidable-is-in-equivalence-class-is-decidable
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
@@ -350,7 +350,7 @@ module _
             ( pr1 equiv-Fin-2-quotient-sign-comp-count k)
             ( equiv-count eX)))
     where
-    cases-retr-Fin-2-quotient-sign-comp-count :
+    cases-retraction-Fin-2-quotient-sign-comp-count :
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX))) →
@@ -381,7 +381,8 @@ module _
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( T)
         ( equiv-count eX ∘e transposition-eX)
-    cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inl (inr star)) q =
+    cases-retraction-Fin-2-quotient-sign-comp-count
+      T NP f p (inl (inr star)) q =
       ex-falso
         ( NP
           ( tr
@@ -394,7 +395,7 @@ module _
                 ( equiv-count eX))
             ( p)
             ( q)))
-    cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inr star) q =
+    cases-retraction-Fin-2-quotient-sign-comp-count T NP f p (inr star) q =
       tr
         ( λ x →
           is-in-equivalence-class
@@ -433,7 +434,7 @@ module _
                         ( _∘e transposition-eX)
                         ( left-inverse-law-equiv (equiv-count eX)) ∙
                         ( left-unit-law-equiv transposition-eX)))))))))
-    retr-Fin-2-quotient-sign-comp-count :
+    retraction-Fin-2-quotient-sign-comp-count :
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX))) →
@@ -448,7 +449,7 @@ module _
         ( pr1 equiv-Fin-2-quotient-sign-comp-count
           ( inv-Fin-2-quotient-sign-comp-count T H))
         ( T)
-    retr-Fin-2-quotient-sign-comp-count T (inl P) =
+    retraction-Fin-2-quotient-sign-comp-count T (inl P) =
       eq-effective-quotient'
         ( sign-comp-Eq-Rel
           ( number-of-elements-count eX)
@@ -456,7 +457,7 @@ module _
         ( equiv-count eX)
         ( T)
         ( P)
-    retr-Fin-2-quotient-sign-comp-count T (inr NP) =
+    retraction-Fin-2-quotient-sign-comp-count T (inr NP) =
       eq-effective-quotient'
         ( sign-comp-Eq-Rel
           ( number-of-elements-count eX)
@@ -479,7 +480,7 @@ module _
               ( T)
               ( equiv-count eX ∘e transposition-eX)))
           ( λ (t , p) →
-            cases-retr-Fin-2-quotient-sign-comp-count T NP t
+            cases-retraction-Fin-2-quotient-sign-comp-count T NP t
               ( inv
                 ( eq-has-same-elements-equivalence-class
                   ( sign-comp-Eq-Rel
@@ -497,7 +498,7 @@ module _
                 ( Fin-UU-Fin' (number-of-elements-count eX))
                 ( inv-equiv t ∘e equiv-count eX))
               ( refl)))
-    sec-Fin-2-quotient-sign-comp-count :
+    section-Fin-2-quotient-sign-comp-count :
       ( k : Fin 2) →
       ( D : is-decidable
         ( is-in-equivalence-class
@@ -510,15 +511,15 @@ module _
         ( inv-Fin-2-quotient-sign-comp-count
           (pr1 equiv-Fin-2-quotient-sign-comp-count k) (D))
         ( k)
-    sec-Fin-2-quotient-sign-comp-count (inl (inr star)) (inl D) = refl
-    sec-Fin-2-quotient-sign-comp-count (inl (inr star)) (inr ND) =
+    section-Fin-2-quotient-sign-comp-count (inl (inr star)) (inl D) = refl
+    section-Fin-2-quotient-sign-comp-count (inl (inr star)) (inr ND) =
       ex-falso
         ( ND
           ( refl-Eq-Rel
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
               ( X , unit-trunc-Prop (equiv-count eX)))))
-    sec-Fin-2-quotient-sign-comp-count (inr star) (inl D) =
+    section-Fin-2-quotient-sign-comp-count (inr star) (inl D) =
       ex-falso
         ( neq-inr-inl
           ( lemma ∙
@@ -561,7 +562,7 @@ module _
                                   ( transposition-eX)
                                   ( equiv-count eX)
                                   ( inv-equiv (equiv-count eX)))))))))))))))
-    sec-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
+    section-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
 
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)

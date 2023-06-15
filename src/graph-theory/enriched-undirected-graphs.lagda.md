@@ -130,19 +130,19 @@ module _
   map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
     map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
-  issec-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
+  is-section-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
     ( map-equiv-neighbor-Enriched-Undirected-Graph v ∘
       map-inv-equiv-neighbor-Enriched-Undirected-Graph v) ~ id
-  issec-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
-    issec-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
+  is-section-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
+    is-section-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
-  isretr-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
+  is-retraction-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
     ( map-inv-equiv-neighbor-Enriched-Undirected-Graph v ∘
       map-equiv-neighbor-Enriched-Undirected-Graph v) ~ id
-  isretr-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
-    isretr-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
+  is-retraction-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
+    is-retraction-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
   action-∞-group-vertex-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
@@ -185,7 +185,7 @@ module _
             ( action-∞-group-vertex-Enriched-Undirected-Graph v)
             ( g))
           ( inv
-            ( isretr-map-inv-equiv-neighbor-Enriched-Undirected-Graph v
+            ( is-retraction-map-inv-equiv-neighbor-Enriched-Undirected-Graph v
               ( mul-action-∞-Group
                 ( ∞-group-vertex-Enriched-Undirected-Graph v)
                 ( action-∞-group-vertex-Enriched-Undirected-Graph v) h

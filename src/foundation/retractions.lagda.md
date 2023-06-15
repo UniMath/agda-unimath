@@ -25,39 +25,42 @@ open import foundation-core.injective-maps
 
 ## Properties
 
-### Characterizing the identity type of `retr f`
+### Characterizing the identity type of `retraction f`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  htpy-retr : retr f → retr f → UU (l1 ⊔ l2)
-  htpy-retr = htpy-hom-coslice
+  htpy-retraction : retraction f → retraction f → UU (l1 ⊔ l2)
+  htpy-retraction = htpy-hom-coslice
 
-  extensionality-retr : (g h : retr f) → Id g h ≃ htpy-retr g h
-  extensionality-retr g h = extensionality-hom-coslice g h
+  extensionality-retraction :
+    (g h : retraction f) → Id g h ≃ htpy-retraction g h
+  extensionality-retraction g h = extensionality-hom-coslice g h
 
-  eq-htpy-retr :
-    ( g h : retr f) (H : pr1 g ~ pr1 h) (K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
-    Id g h
-  eq-htpy-retr g h = eq-htpy-hom-coslice g h
+  eq-htpy-retraction :
+    ( g h : retraction f) (H : pr1 g ~ pr1 h)
+    ( K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
+    g ＝ h
+  eq-htpy-retraction g h = eq-htpy-hom-coslice g h
 ```
 
 ### If the left factor of a composite has a retraction, then the type of retractions of the right factor is a retract of the type of retractions of the composite
 
 ```agda
-isretr-retraction-comp-htpy :
+is-retraction-retraction-comp-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (retr-g : retr g) →
+  (f : A → X) (g : B → X) (h : A → B)
+  (H : f ~ (g ∘ h)) (rg : retraction g) →
   ( ( retraction-right-factor-htpy f g h H) ∘
-    ( retraction-comp-htpy f g h H retr-g)) ~ id
-isretr-retraction-comp-htpy f g h H (pair l L) (pair k K) =
-  eq-htpy-retr
+    ( retraction-comp-htpy f g h H rg)) ~ id
+is-retraction-retraction-comp-htpy f g h H (l , L) (k , K) =
+  eq-htpy-retraction
     ( ( retraction-right-factor-htpy f g h H
-        ( retraction-comp-htpy f g h H (pair l L) (pair k K)
+        ( retraction-comp-htpy f g h H (l , L) (k , K)
           )))
-    ( pair k K)
+    ( k , K)
     ( k ·l L)
     ( ( inv-htpy-assoc-htpy
         ( inv-htpy ((k ∘ l) ·l H))
@@ -69,22 +72,28 @@ isretr-retraction-comp-htpy f g h H (pair l L) (pair k K) =
         ( (k ·l (L ·r h)) ∙h K)
         ( left-inv-htpy ((k ∘ l) ·l H))))
 
-retr-right-factor-retract-of-retr-left-factor :
+retraction-right-factor-retract-of-retraction-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-  retr g → (retr h) retract-of (retr f)
-pr1 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g) =
-  retraction-comp-htpy f g h H retr-g
-pr1 (pr2 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g)) =
+  retraction g → (retraction h) retract-of (retraction f)
+pr1 (retraction-right-factor-retract-of-retraction-left-factor f g h H rg) =
+  retraction-comp-htpy f g h H rg
+pr1
+  ( pr2
+    ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
   retraction-right-factor-htpy f g h H
-pr2 (pr2 (retr-right-factor-retract-of-retr-left-factor f g h H retr-g)) =
-  isretr-retraction-comp-htpy f g h H retr-g
+pr2
+  ( pr2
+    ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
+  is-retraction-retraction-comp-htpy f g h H rg
 ```
+
+### If `f` has a retraction, then `f` is injective
 
 ```agda
 abstract
-  is-injective-retr :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → retr f →
+  is-injective-retraction :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → retraction f →
     is-injective f
-  is-injective-retr f (pair h H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
+  is-injective-retraction f (h , H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
 ```

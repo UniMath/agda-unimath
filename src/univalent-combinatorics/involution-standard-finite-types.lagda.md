@@ -39,6 +39,6 @@ opposite-Fin k x = pred-Fin k (neg-Fin k x)
 is-involution-opposite-Fin : (k : ℕ) → is-involution (opposite-Fin k)
 is-involution-opposite-Fin k x =
   ( ap (pred-Fin k) (neg-pred-Fin k (neg-Fin k x))) ∙
-  ( ( isretr-pred-Fin k (neg-Fin k (neg-Fin k x))) ∙
+  ( ( is-retraction-pred-Fin k (neg-Fin k (neg-Fin k x))) ∙
     ( neg-neg-Fin k x))
 ```

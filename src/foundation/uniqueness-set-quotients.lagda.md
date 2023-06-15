@@ -65,11 +65,11 @@ module _
   map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     map-universal-property-set-quotient-is-set-quotient R C g Ug B f
 
-  issec-map-inv-is-equiv-is-set-quotient-is-set-quotient :
+  is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient :
     ( Uf : {l : Level} → is-set-quotient l R B f) →
     ( Ug : {l : Level} → is-set-quotient l R C g) →
     ( h ∘ map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug) ~ id
-  issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
+  is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     htpy-eq
       ( is-injective-is-equiv
       ( Ug C)
@@ -91,11 +91,11 @@ module _
               ( precomp-Set-Quotient R B f C h) g H) ∙
             ( inv (precomp-id-Set-Quotient R C g))))))
 
-  isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient :
+  is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient :
     ( Uf : {l : Level} → is-set-quotient l R B f) →
     ( Ug : {l : Level} → is-set-quotient l R C g) →
     ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug ∘ h) ~ id
-  isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
+  is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     htpy-eq
       ( is-injective-is-equiv
       ( Uf B)
@@ -126,8 +126,8 @@ module _
   is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     is-equiv-has-inverse
       ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
-      ( issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
-      ( isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
+      ( is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
+      ( is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
 
   is-set-quotient-is-set-quotient-is-equiv :
     is-equiv h → ({l : Level} → is-set-quotient l R B f) →

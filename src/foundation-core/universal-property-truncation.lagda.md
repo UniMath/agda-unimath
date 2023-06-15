@@ -194,12 +194,12 @@ module _
     is-truncation-dependent-universal-property-truncation H X =
       H (λ b → X)
 
-  sec-is-truncation :
+  section-is-truncation :
     ({l : Level} → is-truncation l B f) →
     {l3 : Level} (C : Truncated-Type l3 k)
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
-    f ~ (g ∘ h) → sec g
-  sec-is-truncation H C h g K =
+    f ~ (g ∘ h) → section g
+  section-is-truncation H C h g K =
     map-distributive-Π-Σ
       ( map-inv-is-equiv
         ( dependent-universal-property-truncation-is-truncation H
