@@ -186,21 +186,21 @@ module _
       ( undirected-graph-Undirected-Graph-𝔽 G)
       ( x)
 
-  issec-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
     (y : vertex-Undirected-Graph-𝔽 G) →
     ( map-compute-total-walk-of-length-Undirected-Graph-𝔽 y ∘
       map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 y) ~ id
-  issec-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
-    issec-map-inv-compute-total-walk-of-length-Undirected-Graph
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
+    is-section-map-inv-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
       ( x)
 
-  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 :
     (y : vertex-Undirected-Graph-𝔽 G) →
     ( map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 y ∘
       map-compute-total-walk-of-length-Undirected-Graph-𝔽 y) ~ id
-  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
-    isretr-map-inv-compute-total-walk-of-length-Undirected-Graph
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph-𝔽 =
+    is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
       ( x)
 

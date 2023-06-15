@@ -209,14 +209,14 @@ module _
         ( element-unordered-pair p _)
         ( n , w))
 
-  issec-map-inv-compute-total-walk-of-length-Undirected-Graph :
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph :
     (y : vertex-Undirected-Graph G) →
     ( map-compute-total-walk-of-length-Undirected-Graph y ∘
       map-inv-compute-total-walk-of-length-Undirected-Graph y) ~ id
-  issec-map-inv-compute-total-walk-of-length-Undirected-Graph y
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph y
     ( .0 , refl-walk-of-length-Undirected-Graph) =
     refl
-  issec-map-inv-compute-total-walk-of-length-Undirected-Graph
+  is-section-map-inv-compute-total-walk-of-length-Undirected-Graph
     .(other-element-unordered-pair p _)
     (.(succ-ℕ n) , cons-walk-of-length-Undirected-Graph n p e w) =
     ap
@@ -225,23 +225,23 @@ module _
           walk-of-length-Undirected-Graph n (other-element-unordered-pair p _))
         ( succ-ℕ)
         ( λ n → cons-walk-of-length-Undirected-Graph n p e))
-      ( issec-map-inv-compute-total-walk-of-length-Undirected-Graph
+      ( is-section-map-inv-compute-total-walk-of-length-Undirected-Graph
         ( element-unordered-pair p _)
         ( n , w))
 
-  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph :
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph :
     (y : vertex-Undirected-Graph G) →
     ( map-inv-compute-total-walk-of-length-Undirected-Graph y ∘
       map-compute-total-walk-of-length-Undirected-Graph y) ~ id
-  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph y
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph y
     refl-walk-Undirected-Graph =
     refl
-  isretr-map-inv-compute-total-walk-of-length-Undirected-Graph
+  is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph
     .(other-element-unordered-pair p _)
     (cons-walk-Undirected-Graph p e w) =
     ap
       ( cons-walk-Undirected-Graph p e)
-      ( isretr-map-inv-compute-total-walk-of-length-Undirected-Graph
+      ( is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph
         ( element-unordered-pair p _)
         ( w))
 
@@ -251,8 +251,8 @@ module _
   is-equiv-map-compute-total-walk-of-length-Undirected-Graph y =
     is-equiv-has-inverse
       ( map-inv-compute-total-walk-of-length-Undirected-Graph y)
-      ( issec-map-inv-compute-total-walk-of-length-Undirected-Graph y)
-      ( isretr-map-inv-compute-total-walk-of-length-Undirected-Graph y)
+      ( is-section-map-inv-compute-total-walk-of-length-Undirected-Graph y)
+      ( is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph y)
 
   compute-total-walk-of-length-Undirected-Graph :
     (y : vertex-Undirected-Graph G) →

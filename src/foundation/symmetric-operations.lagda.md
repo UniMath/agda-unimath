@@ -268,10 +268,10 @@ module _
   map-inv-compute-symmetric-operation-Set (f , H) =
     symmetric-operation-is-commutative B f H
 
-  issec-map-inv-compute-symmetric-operation-Set :
+  is-section-map-inv-compute-symmetric-operation-Set :
     ( map-compute-symmetric-operation-Set ∘
       map-inv-compute-symmetric-operation-Set) ~ id
-  issec-map-inv-compute-symmetric-operation-Set (f , H) =
+  is-section-map-inv-compute-symmetric-operation-Set (f , H) =
     eq-type-subtype
       ( is-commutative-Prop B)
       ( eq-htpy
@@ -280,10 +280,10 @@ module _
             ( λ y →
               compute-symmetric-operation-is-commutative B f H x y)))
 
-  isretr-map-inv-compute-symmetric-operation-Set :
+  is-retraction-map-inv-compute-symmetric-operation-Set :
     ( map-inv-compute-symmetric-operation-Set ∘
       map-compute-symmetric-operation-Set) ~ id
-  isretr-map-inv-compute-symmetric-operation-Set g =
+  is-retraction-map-inv-compute-symmetric-operation-Set g =
     eq-htpy-symmetric-operation-Set A B
       ( map-inv-compute-symmetric-operation-Set
         ( map-compute-symmetric-operation-Set g))
@@ -297,8 +297,8 @@ module _
   is-equiv-map-compute-symmetric-operation-Set =
     is-equiv-has-inverse
       map-inv-compute-symmetric-operation-Set
-      issec-map-inv-compute-symmetric-operation-Set
-      isretr-map-inv-compute-symmetric-operation-Set
+      is-section-map-inv-compute-symmetric-operation-Set
+      is-retraction-map-inv-compute-symmetric-operation-Set
 
   compute-symmetric-operation-Set :
     symmetric-operation A (type-Set B) ≃ Σ (A → A → type-Set B) is-commutative
