@@ -75,7 +75,7 @@ module _
     ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
     ( equiv-concat'
       ( map-equiv e x)
-      ( inv (issec-map-inv-equiv e y)))
+      ( inv (is-section-map-inv-equiv e y)))
 
   map-eq-transpose-equiv :
     {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
@@ -88,19 +88,19 @@ module _
   triangle-eq-transpose-equiv :
     {x : A} {y : B} (p : map-equiv e x ＝ y) →
     ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
-      ( issec-map-inv-equiv e y)) ＝
+      ( is-section-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
     ( ap
-      ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-      ( issec-map-inv-equiv
+      ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
+      ( is-section-map-inv-equiv
         ( equiv-ap e x (map-inv-equiv e y))
-        ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
+        ( p ∙ inv (is-section-map-inv-equiv e y)))) ∙
     ( ( assoc
         ( p)
-        ( inv (issec-map-inv-equiv e y))
-        ( issec-map-inv-equiv e y)) ∙
-      ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
+        ( inv (is-section-map-inv-equiv e y))
+        ( is-section-map-inv-equiv e y)) ∙
+      ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙ right-unit))
 
   map-eq-transpose-equiv' :
     {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
@@ -113,29 +113,29 @@ module _
 
   triangle-eq-transpose-equiv' :
     {x : A} {y : B} (p : y ＝ map-equiv e x) →
-    ( (issec-map-inv-equiv e y) ∙ p) ＝
+    ( (is-section-map-inv-equiv e y) ∙ p) ＝
     ( ap (map-equiv e) (map-eq-transpose-equiv' p))
   triangle-eq-transpose-equiv' {x} {y} p =
     map-inv-equiv
       ( equiv-ap
         ( equiv-inv (map-equiv e (map-inv-equiv e y)) (map-equiv e x))
-        ( (issec-map-inv-equiv e y) ∙ p)
+        ( (is-section-map-inv-equiv e y) ∙ p)
         ( ap (map-equiv e) (map-eq-transpose-equiv' p)))
-      ( ( distributive-inv-concat (issec-map-inv-equiv e y) p) ∙
+      ( ( distributive-inv-concat (is-section-map-inv-equiv e y) p) ∙
         ( ( inv
             ( con-inv
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
-              ( issec-map-inv-equiv e y)
+              ( is-section-map-inv-equiv e y)
               ( inv p)
               ( ( ap
-                  ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+                  ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
                   ( ap
                     ( ap (map-equiv e))
                     ( inv-inv
                       ( map-inv-equiv
                         ( equiv-ap e x (map-inv-equiv e y))
                         ( ( inv p) ∙
-                          ( inv (issec-map-inv-equiv e y))))))) ∙
+                          ( inv (is-section-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
 ```
@@ -370,11 +370,11 @@ module _
 
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
-    eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
+    eq-htpy-equiv (is-retraction-map-inv-is-equiv (is-equiv-map-equiv e))
 
   right-inverse-law-equiv : (e : X ≃ Y) → (e ∘e (inv-equiv e)) ＝ id-equiv
   right-inverse-law-equiv e =
-    eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
+    eq-htpy-equiv (is-section-map-inv-is-equiv (is-equiv-map-equiv e))
 
   inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
   inv-inv-equiv e = eq-equiv-eq-map-equiv refl
@@ -420,14 +420,14 @@ comp-inv-equiv-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e
 comp-inv-equiv-comp-equiv f e =
-  eq-htpy-equiv (λ x → isretr-map-inv-equiv f (map-equiv e x))
+  eq-htpy-equiv (λ x → is-retraction-map-inv-equiv f (map-equiv e x))
 
 comp-equiv-comp-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ C) →
   (f ∘e (inv-equiv f ∘e e)) ＝ e
 comp-equiv-comp-inv-equiv f e =
-  eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
+  eq-htpy-equiv (λ x → is-section-map-inv-equiv f (map-equiv e x))
 
 is-equiv-comp-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}

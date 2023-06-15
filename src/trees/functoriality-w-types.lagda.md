@@ -96,7 +96,7 @@ abstract
                               ( α (map-inv-equiv (e a) d)))
                             ( ap
                               ( γ ∘ (tr D p))
-                              ( inv (issec-map-inv-equiv (e a) d)))) ∘e
+                              ( inv (is-section-map-inv-equiv (e a) d)))) ∘e
                           ( inv-equiv
                             ( equiv-Eq-𝕎-eq
                               ( map-𝕎 D f e
@@ -118,7 +118,7 @@ abstract
       ( inv-equiv-structure-𝕎-Alg)
       ( λ x →
         equiv-concat
-          ( ap (map-𝕎 D f e) (issec-map-inv-structure-𝕎-Alg x))
+          ( ap (map-𝕎 D f e) (is-section-map-inv-structure-𝕎-Alg x))
           ( tree-𝕎 c γ)))
 ```
 

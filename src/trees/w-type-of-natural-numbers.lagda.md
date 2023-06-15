@@ -66,27 +66,27 @@ Nat-𝕎-ℕ (succ-ℕ x) = succ-Nat-𝕎 (Nat-𝕎-ℕ x)
 ℕ-Nat-𝕎 (tree-𝕎 true α) = succ-ℕ (ℕ-Nat-𝕎 (α star))
 ℕ-Nat-𝕎 (tree-𝕎 false α) = zero-ℕ
 
-issec-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
-issec-ℕ-Nat-𝕎 (tree-𝕎 true α) =
+is-section-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
+is-section-ℕ-Nat-𝕎 (tree-𝕎 true α) =
   ap
     ( tree-𝕎 true)
     ( eq-htpy H)
   where
   H : (z : unit) → Nat-𝕎-ℕ (ℕ-Nat-𝕎 (α star)) ＝ α z
-  H star = issec-ℕ-Nat-𝕎 (α star)
-issec-ℕ-Nat-𝕎 (tree-𝕎 false α) =
+  H star = is-section-ℕ-Nat-𝕎 (α star)
+is-section-ℕ-Nat-𝕎 (tree-𝕎 false α) =
   ap (tree-𝕎 false) (eq-is-contr (universal-property-empty' Nat-𝕎))
 
-isretr-ℕ-Nat-𝕎 : (ℕ-Nat-𝕎 ∘ Nat-𝕎-ℕ) ~ id
-isretr-ℕ-Nat-𝕎 zero-ℕ = refl
-isretr-ℕ-Nat-𝕎 (succ-ℕ x) = ap succ-ℕ (isretr-ℕ-Nat-𝕎 x)
+is-retraction-ℕ-Nat-𝕎 : (ℕ-Nat-𝕎 ∘ Nat-𝕎-ℕ) ~ id
+is-retraction-ℕ-Nat-𝕎 zero-ℕ = refl
+is-retraction-ℕ-Nat-𝕎 (succ-ℕ x) = ap succ-ℕ (is-retraction-ℕ-Nat-𝕎 x)
 
 is-equiv-Nat-𝕎-ℕ : is-equiv Nat-𝕎-ℕ
 is-equiv-Nat-𝕎-ℕ =
   is-equiv-has-inverse
     ℕ-Nat-𝕎
-    issec-ℕ-Nat-𝕎
-    isretr-ℕ-Nat-𝕎
+    is-section-ℕ-Nat-𝕎
+    is-retraction-ℕ-Nat-𝕎
 
 equiv-Nat-𝕎-ℕ : ℕ ≃ Nat-𝕎
 equiv-Nat-𝕎-ℕ = pair Nat-𝕎-ℕ is-equiv-Nat-𝕎-ℕ
@@ -95,8 +95,8 @@ is-equiv-ℕ-Nat-𝕎 : is-equiv ℕ-Nat-𝕎
 is-equiv-ℕ-Nat-𝕎 =
   is-equiv-has-inverse
     Nat-𝕎-ℕ
-    isretr-ℕ-Nat-𝕎
-    issec-ℕ-Nat-𝕎
+    is-retraction-ℕ-Nat-𝕎
+    is-section-ℕ-Nat-𝕎
 
 equiv-ℕ-Nat-𝕎 : Nat-𝕎 ≃ ℕ
 equiv-ℕ-Nat-𝕎 = pair ℕ-Nat-𝕎 is-equiv-ℕ-Nat-𝕎

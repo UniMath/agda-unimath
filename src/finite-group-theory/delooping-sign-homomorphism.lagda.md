@@ -1235,7 +1235,7 @@ module _
                                 ( eq-is-prop is-prop-type-trunc-Prop))))
                           ( eq-is-prop
                             ( is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
-                          issec-pair-eq-Σ
+                          is-section-pair-eq-Σ
                           ( map-quotient-delooping-sign
                             ( n +ℕ 2)
                             ( Fin-UU-Fin l1 (n +ℕ 2)))

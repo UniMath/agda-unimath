@@ -65,15 +65,16 @@ map.
       ( inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl)))) = q
 
   abstract
-    issec-inv-gap-fiberwise-prod :
+    is-section-inv-gap-fiberwise-prod :
       (gap-fiberwise-prod ∘ inv-gap-fiberwise-prod) ~ id
-    issec-inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl)) =
+    is-section-inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl)) =
+
       eq-pair-Σ refl (eq-pair-Σ refl refl)
 
   abstract
-    isretr-inv-gap-fiberwise-prod :
+    is-retraction-inv-gap-fiberwise-prod :
       (inv-gap-fiberwise-prod ∘ gap-fiberwise-prod) ~ id
-    isretr-inv-gap-fiberwise-prod (pair x (pair p q)) = refl
+    is-retraction-inv-gap-fiberwise-prod (pair x (pair p q)) = refl
 
   abstract
     is-pullback-fiberwise-prod :
@@ -81,8 +82,8 @@ map.
     is-pullback-fiberwise-prod =
       is-equiv-has-inverse
         inv-gap-fiberwise-prod
-        issec-inv-gap-fiberwise-prod
-        isretr-inv-gap-fiberwise-prod
+        is-section-inv-gap-fiberwise-prod
+        is-retraction-inv-gap-fiberwise-prod
 
   abstract
     universal-property-pullback-fiberwise-prod :
@@ -120,16 +121,16 @@ module _
   pr2 (pr2 (pr2 (inv-gap-total-prod-fibers (pair a (pair b p))))) = refl
 
   abstract
-    issec-inv-gap-total-prod-fibers :
+    is-section-inv-gap-total-prod-fibers :
       (gap-total-prod-fibers ∘ inv-gap-total-prod-fibers) ~ id
-    issec-inv-gap-total-prod-fibers (pair a (pair b p)) =
+    is-section-inv-gap-total-prod-fibers (pair a (pair b p)) =
       map-extensionality-canonical-pullback f g refl refl
         ( inv right-unit ∙ inv right-unit)
 
   abstract
-    isretr-inv-gap-total-prod-fibers :
+    is-retraction-inv-gap-total-prod-fibers :
       (inv-gap-total-prod-fibers ∘ gap-total-prod-fibers) ~ id
-    isretr-inv-gap-total-prod-fibers
+    is-retraction-inv-gap-total-prod-fibers
       ( pair .(g b) (pair (pair a p) (pair b refl))) =
       eq-pair-Σ refl (eq-pair (eq-pair-Σ refl right-unit) refl)
 
@@ -139,6 +140,6 @@ module _
     is-pullback-total-prod-fibers =
       is-equiv-has-inverse
         inv-gap-total-prod-fibers
-        issec-inv-gap-total-prod-fibers
-        isretr-inv-gap-total-prod-fibers
+        is-section-inv-gap-total-prod-fibers
+        is-retraction-inv-gap-total-prod-fibers
 ```

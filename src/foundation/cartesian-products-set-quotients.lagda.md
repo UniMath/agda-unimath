@@ -102,7 +102,7 @@ module _
       ( qa)
       ( qb)
 
-  issec-inv-precomp-set-quotient-prod-set-quotient :
+  is-section-inv-precomp-set-quotient-prod-set-quotient :
     { l : Level}
     ( X : Set l) →
     ( precomp-Set-Quotient
@@ -112,19 +112,19 @@ module _
       ( X) ∘
       ( inv-precomp-set-quotient-prod-set-quotient X)) ~
     ( id)
-  issec-inv-precomp-set-quotient-prod-set-quotient X (f , H) =
+  is-section-inv-precomp-set-quotient-prod-set-quotient X (f , H) =
     eq-pair-Σ
       ( eq-htpy
         ( λ (a , b) →
           ( htpy-eq
-            ( issec-inv-precomp-set-quotient R
+            ( is-section-inv-precomp-set-quotient R
               ( hom-Set (quotient-Set S) X) _ a)
             ( quotient-map S b) ∙
-          ( issec-inv-precomp-set-quotient S X _ b))))
+          ( is-section-inv-precomp-set-quotient S X _ b))))
       ( eq-is-prop
         ( is-prop-reflects-Eq-Rel (prod-Eq-Rel R S) X f))
 
-  isretr-inv-precomp-set-quotient-prod-set-quotient :
+  is-retraction-inv-precomp-set-quotient-prod-set-quotient :
     { l : Level}
     ( X : Set l) →
     ( ( inv-precomp-set-quotient-prod-set-quotient X) ∘
@@ -134,7 +134,7 @@ module _
         ( reflecting-map-prod-quotient-map)
         ( X))) ~
     ( id)
-  isretr-inv-precomp-set-quotient-prod-set-quotient X f =
+  is-retraction-inv-precomp-set-quotient-prod-set-quotient X f =
     ( eq-htpy
       ( λ (qa , qb) →
         htpy-eq
@@ -150,11 +150,11 @@ module _
                     ( eq-pair-Σ refl
                       ( eq-is-prop
                         ( is-prop-reflects-Eq-Rel S X _)))) ∙
-                    ( isretr-inv-precomp-set-quotient S X _))
+                    ( is-retraction-inv-precomp-set-quotient S X _))
                 ( eq-is-prop
                   ( is-prop-reflects-Eq-Rel R
                     (hom-Set (quotient-Set S) X) _))) ∙
-            ( isretr-inv-precomp-set-quotient R
+            ( is-retraction-inv-precomp-set-quotient R
                 ( hom-Set (quotient-Set S) X)
                 ( λ qa qb → f (qa , qb))))
           ( qa))
@@ -169,11 +169,11 @@ module _
   pr1 (pr1 (is-set-quotient-prod-set-quotient X)) =
     inv-precomp-set-quotient-prod-set-quotient X
   pr2 (pr1 (is-set-quotient-prod-set-quotient X)) =
-    issec-inv-precomp-set-quotient-prod-set-quotient X
+    is-section-inv-precomp-set-quotient-prod-set-quotient X
   pr1 (pr2 (is-set-quotient-prod-set-quotient X)) =
     inv-precomp-set-quotient-prod-set-quotient X
   pr2 (pr2 (is-set-quotient-prod-set-quotient X)) =
-    isretr-inv-precomp-set-quotient-prod-set-quotient X
+    is-retraction-inv-precomp-set-quotient-prod-set-quotient X
 
   quotient-prod : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   quotient-prod = quotient-Set (prod-Eq-Rel R S)

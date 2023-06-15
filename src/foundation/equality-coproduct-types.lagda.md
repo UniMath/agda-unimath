@@ -111,21 +111,21 @@ module _
     map-compute-Eq-coprod-inl-inl : Eq-coprod {B = B} (inl x) (inl y) → (x ＝ y)
     map-compute-Eq-coprod-inl-inl (Eq-eq-coprod-inl p) = p
 
-    issec-Eq-eq-coprod-inl :
+    is-section-Eq-eq-coprod-inl :
       (map-compute-Eq-coprod-inl-inl ∘ Eq-eq-coprod-inl) ~ id
-    issec-Eq-eq-coprod-inl p = refl
+    is-section-Eq-eq-coprod-inl p = refl
 
-    isretr-Eq-eq-coprod-inl :
+    is-retraction-Eq-eq-coprod-inl :
       (Eq-eq-coprod-inl ∘ map-compute-Eq-coprod-inl-inl) ~ id
-    isretr-Eq-eq-coprod-inl (Eq-eq-coprod-inl p) = refl
+    is-retraction-Eq-eq-coprod-inl (Eq-eq-coprod-inl p) = refl
 
     is-equiv-map-compute-Eq-coprod-inl-inl :
       is-equiv map-compute-Eq-coprod-inl-inl
     is-equiv-map-compute-Eq-coprod-inl-inl =
       is-equiv-has-inverse
         ( Eq-eq-coprod-inl)
-        ( issec-Eq-eq-coprod-inl)
-        ( isretr-Eq-eq-coprod-inl)
+        ( is-section-Eq-eq-coprod-inl)
+        ( is-retraction-Eq-eq-coprod-inl)
 
     compute-Eq-coprod-inl-inl : Eq-coprod (inl x) (inl y) ≃ (x ＝ y)
     pr1 compute-Eq-coprod-inl-inl = map-compute-Eq-coprod-inl-inl
@@ -191,21 +191,21 @@ module _
     map-compute-Eq-coprod-inr-inr : Eq-coprod {A = A} (inr x) (inr y) → x ＝ y
     map-compute-Eq-coprod-inr-inr (Eq-eq-coprod-inr p) = p
 
-    issec-Eq-eq-coprod-inr :
+    is-section-Eq-eq-coprod-inr :
       (map-compute-Eq-coprod-inr-inr ∘ Eq-eq-coprod-inr) ~ id
-    issec-Eq-eq-coprod-inr p = refl
+    is-section-Eq-eq-coprod-inr p = refl
 
-    isretr-Eq-eq-coprod-inr :
+    is-retraction-Eq-eq-coprod-inr :
       (Eq-eq-coprod-inr ∘ map-compute-Eq-coprod-inr-inr) ~ id
-    isretr-Eq-eq-coprod-inr (Eq-eq-coprod-inr p) = refl
+    is-retraction-Eq-eq-coprod-inr (Eq-eq-coprod-inr p) = refl
 
     is-equiv-map-compute-Eq-coprod-inr-inr :
       is-equiv map-compute-Eq-coprod-inr-inr
     is-equiv-map-compute-Eq-coprod-inr-inr =
       is-equiv-has-inverse
         ( Eq-eq-coprod-inr)
-        ( issec-Eq-eq-coprod-inr)
-        ( isretr-Eq-eq-coprod-inr)
+        ( is-section-Eq-eq-coprod-inr)
+        ( is-retraction-Eq-eq-coprod-inr)
 
     compute-Eq-coprod-inr-inr : Eq-coprod (inr x) (inr y) ≃ (x ＝ y)
     pr1 compute-Eq-coprod-inr-inr = map-compute-Eq-coprod-inr-inr

@@ -313,17 +313,18 @@ module _
     ( ._ , edge-inclusion-combinator-Directed-Tree .i y .x e) =
     ( y , e)
 
-  issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+  is-section-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
     ( map-compute-direct-predecessor-combinator-Directed-Tree ∘
       map-inv-compute-direct-predecessor-combinator-Directed-Tree) ~ id
-  issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree
+  is-section-map-inv-compute-direct-predecessor-combinator-Directed-Tree
     ( ._ , edge-inclusion-combinator-Directed-Tree .i y .x e) =
     refl
 
-  isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
+  is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
     ( map-inv-compute-direct-predecessor-combinator-Directed-Tree ∘
       map-compute-direct-predecessor-combinator-Directed-Tree) ~ id
-  isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree (y , e) =
+  is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree (y , e) =
+
     refl
 
   is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree :
@@ -331,8 +332,8 @@ module _
   is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree =
     is-equiv-has-inverse
       map-inv-compute-direct-predecessor-combinator-Directed-Tree
-      issec-map-inv-compute-direct-predecessor-combinator-Directed-Tree
-      isretr-map-inv-compute-direct-predecessor-combinator-Directed-Tree
+      is-section-map-inv-compute-direct-predecessor-combinator-Directed-Tree
+      is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree
 
   compute-direct-predecessor-combinator-Directed-Tree :
     direct-predecessor-Directed-Tree (T i) x ≃
@@ -391,25 +392,25 @@ module _
     ( ._ , edge-to-root-combinator-Directed-Tree i) =
     i
 
-  issec-index-base-combinator-Directed-Tree :
+  is-section-index-base-combinator-Directed-Tree :
     ( base-index-combinator-Directed-Tree ∘
       index-base-combinator-Directed-Tree) ~ id
-  issec-index-base-combinator-Directed-Tree
+  is-section-index-base-combinator-Directed-Tree
     ( ._ , edge-to-root-combinator-Directed-Tree i) =
     refl
 
-  isretr-index-base-combinator-Directed-Tree :
+  is-retraction-index-base-combinator-Directed-Tree :
     ( index-base-combinator-Directed-Tree ∘
       base-index-combinator-Directed-Tree) ~ id
-  isretr-index-base-combinator-Directed-Tree i = refl
+  is-retraction-index-base-combinator-Directed-Tree i = refl
 
   is-equiv-base-index-combinator-Directed-Tree :
     is-equiv base-index-combinator-Directed-Tree
   is-equiv-base-index-combinator-Directed-Tree =
     is-equiv-has-inverse
       index-base-combinator-Directed-Tree
-      issec-index-base-combinator-Directed-Tree
-      isretr-index-base-combinator-Directed-Tree
+      is-section-index-base-combinator-Directed-Tree
+      is-retraction-index-base-combinator-Directed-Tree
 
   equiv-base-index-combinator-Directed-Tree :
     I ≃ base-combinator-Directed-Tree T
@@ -443,29 +444,30 @@ module _
     ( node-inclusion-combinator-Directed-Tree i x) =
     unit-Maybe (i , x)
 
-  issec-map-inv-compute-node-combinator-Directed-Tree :
+  is-section-map-inv-compute-node-combinator-Directed-Tree :
     ( map-compute-node-combinator-Directed-Tree ∘
       map-inv-compute-node-combinator-Directed-Tree) ~ id
-  issec-map-inv-compute-node-combinator-Directed-Tree
+  is-section-map-inv-compute-node-combinator-Directed-Tree
     root-combinator-Directed-Tree =
     refl
-  issec-map-inv-compute-node-combinator-Directed-Tree
+  is-section-map-inv-compute-node-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x) =
     refl
 
-  isretr-map-inv-compute-node-combinator-Directed-Tree :
+  is-retraction-map-inv-compute-node-combinator-Directed-Tree :
     ( map-inv-compute-node-combinator-Directed-Tree ∘
       map-compute-node-combinator-Directed-Tree) ~ id
-  isretr-map-inv-compute-node-combinator-Directed-Tree (inl (i , x)) = refl
-  isretr-map-inv-compute-node-combinator-Directed-Tree (inr star) = refl
+  is-retraction-map-inv-compute-node-combinator-Directed-Tree (inl (i , x)) =
+    refl
+  is-retraction-map-inv-compute-node-combinator-Directed-Tree (inr star) = refl
 
   is-equiv-map-compute-node-combinator-Directed-Tree :
     is-equiv map-compute-node-combinator-Directed-Tree
   is-equiv-map-compute-node-combinator-Directed-Tree =
     is-equiv-has-inverse
       map-inv-compute-node-combinator-Directed-Tree
-      issec-map-inv-compute-node-combinator-Directed-Tree
-      isretr-map-inv-compute-node-combinator-Directed-Tree
+      is-section-map-inv-compute-node-combinator-Directed-Tree
+      is-retraction-map-inv-compute-node-combinator-Directed-Tree
 
   compute-node-combinator-Directed-Tree :
     Maybe (Σ I (node-Directed-Tree ∘ T)) ≃ node-combinator-Directed-Tree T
@@ -498,13 +500,13 @@ module _
   map-inv-compute-proper-node-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x , H) = (i , x)
 
-  issec-map-inv-compute-proper-node-combinator-Directed-Tree :
+  is-section-map-inv-compute-proper-node-combinator-Directed-Tree :
     ( map-compute-proper-node-combinator-Directed-Tree ∘
       map-inv-compute-proper-node-combinator-Directed-Tree) ~ id
-  issec-map-inv-compute-proper-node-combinator-Directed-Tree
+  is-section-map-inv-compute-proper-node-combinator-Directed-Tree
     ( root-combinator-Directed-Tree , H) =
     ex-falso (H refl)
-  issec-map-inv-compute-proper-node-combinator-Directed-Tree
+  is-section-map-inv-compute-proper-node-combinator-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree i x , H) =
     eq-pair-Σ
       ( refl)
@@ -513,18 +515,19 @@ module _
           ( combinator-Directed-Tree T)
           ( node-inclusion-combinator-Directed-Tree i x)))
 
-  isretr-map-inv-compute-proper-node-combinator-Directed-Tree :
+  is-retraction-map-inv-compute-proper-node-combinator-Directed-Tree :
     ( map-inv-compute-proper-node-combinator-Directed-Tree ∘
       map-compute-proper-node-combinator-Directed-Tree) ~ id
-  isretr-map-inv-compute-proper-node-combinator-Directed-Tree (i , x) = refl
+  is-retraction-map-inv-compute-proper-node-combinator-Directed-Tree (i , x) =
+    refl
 
   is-equiv-map-compute-proper-node-combinator-Directed-Tree :
     is-equiv map-compute-proper-node-combinator-Directed-Tree
   is-equiv-map-compute-proper-node-combinator-Directed-Tree =
     is-equiv-has-inverse
       map-inv-compute-proper-node-combinator-Directed-Tree
-      issec-map-inv-compute-proper-node-combinator-Directed-Tree
-      isretr-map-inv-compute-proper-node-combinator-Directed-Tree
+      is-section-map-inv-compute-proper-node-combinator-Directed-Tree
+      is-retraction-map-inv-compute-proper-node-combinator-Directed-Tree
 
   compute-proper-node-combinator-Directed-Tree :
     Σ I (node-Directed-Tree ∘ T) ≃ proper-node-combinator-Directed-Tree T
@@ -705,7 +708,7 @@ module _
     cases-map-inv-node-combinator-fiber-base-Directed-Tree x
       ( is-root-or-walk-to-base-Directed-Tree T x)
 
-  cases-issec-map-inv-node-combinator-fiber-base-Directed-Tree :
+  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree :
     (x : node-Directed-Tree T) →
     (H :
       is-root-Directed-Tree T x +
@@ -713,29 +716,31 @@ module _
         ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T)) →
     node-combinator-fiber-base-Directed-Tree
       ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x H) ＝ x
-  cases-issec-map-inv-node-combinator-fiber-base-Directed-Tree ._ (inl refl) =
+  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree ._ (inl refl) =
+
     refl
-  cases-issec-map-inv-node-combinator-fiber-base-Directed-Tree x (inr (b , w)) =
+  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree x (inr (b , w)) =
+
     refl
 
-  issec-map-inv-node-combinator-fiber-base-Directed-Tree :
+  is-section-map-inv-node-combinator-fiber-base-Directed-Tree :
     ( node-combinator-fiber-base-Directed-Tree ∘
       map-inv-node-combinator-fiber-base-Directed-Tree) ~ id
-  issec-map-inv-node-combinator-fiber-base-Directed-Tree x =
-    cases-issec-map-inv-node-combinator-fiber-base-Directed-Tree x
+  is-section-map-inv-node-combinator-fiber-base-Directed-Tree x =
+    cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree x
       ( is-root-or-walk-to-base-Directed-Tree T x)
 
-  isretr-map-inv-node-combinator-fiber-base-Directed-Tree :
+  is-retraction-map-inv-node-combinator-fiber-base-Directed-Tree :
     ( map-inv-node-combinator-fiber-base-Directed-Tree ∘
       node-combinator-fiber-base-Directed-Tree) ~ id
-  isretr-map-inv-node-combinator-fiber-base-Directed-Tree
+  is-retraction-map-inv-node-combinator-fiber-base-Directed-Tree
     root-combinator-Directed-Tree =
     ap
       ( cases-map-inv-node-combinator-fiber-base-Directed-Tree
         ( root-Directed-Tree T))
       ( eq-is-contr
         ( unique-walk-to-base-Directed-Tree T (root-Directed-Tree T)))
-  isretr-map-inv-node-combinator-fiber-base-Directed-Tree
+  is-retraction-map-inv-node-combinator-fiber-base-Directed-Tree
     ( node-inclusion-combinator-Directed-Tree b (x , w)) =
     ap
       ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x)
@@ -746,8 +751,8 @@ module _
   is-equiv-node-combinator-fiber-base-Directed-Tree =
     is-equiv-has-inverse
       map-inv-node-combinator-fiber-base-Directed-Tree
-      issec-map-inv-node-combinator-fiber-base-Directed-Tree
-      isretr-map-inv-node-combinator-fiber-base-Directed-Tree
+      is-section-map-inv-node-combinator-fiber-base-Directed-Tree
+      is-retraction-map-inv-node-combinator-fiber-base-Directed-Tree
 
   equiv-node-combinator-fiber-base-Directed-Tree :
     node-combinator-Directed-Tree (fiber-base-Directed-Tree T) ≃

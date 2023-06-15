@@ -126,20 +126,20 @@ abstract
           ( unit-trunc-Prop a))
         ( pair (f a) (unit-trunc-Prop (pair a refl))))
 
-  issec-map-universal-property-set-quotient-trunc-Prop :
+  is-section-map-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     ( ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B) ∘
       ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
-  issec-map-universal-property-set-quotient-trunc-Prop B (pair f H) =
+  is-section-map-universal-property-set-quotient-trunc-Prop B (pair f H) =
     eq-type-subtype
       ( is-weakly-constant-map-Prop B)
       ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 
-  isretr-map-universal-property-set-quotient-trunc-Prop :
+  is-retraction-map-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     ( ( map-universal-property-set-quotient-trunc-Prop' B) ∘
       ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B)) ~ id
-  isretr-map-universal-property-set-quotient-trunc-Prop B g =
+  is-retraction-map-universal-property-set-quotient-trunc-Prop B g =
     eq-htpy
       ( ind-trunc-Prop
         ( λ x →
@@ -160,6 +160,6 @@ abstract
   universal-property-set-quotient-trunc-Prop {A = A} B =
     is-equiv-has-inverse
       ( map-universal-property-set-quotient-trunc-Prop' B)
-      ( issec-map-universal-property-set-quotient-trunc-Prop B)
-      ( isretr-map-universal-property-set-quotient-trunc-Prop B)
+      ( is-section-map-universal-property-set-quotient-trunc-Prop B)
+      ( is-retraction-map-universal-property-set-quotient-trunc-Prop B)
 ```

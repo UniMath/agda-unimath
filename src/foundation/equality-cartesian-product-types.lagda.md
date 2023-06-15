@@ -59,19 +59,19 @@ module _
   pr1 (pair-eq α) = ap pr1 α
   pr2 (pair-eq α) = ap pr2 α
 
-  isretr-pair-eq :
+  is-retraction-pair-eq :
     {s t : A × B} → ((pair-eq {s} {t}) ∘ (eq-pair' {s} {t})) ~ id
-  isretr-pair-eq {pair x y} {pair .x .y} (pair refl refl) = refl
+  is-retraction-pair-eq {pair x y} {pair .x .y} (pair refl refl) = refl
 
-  issec-pair-eq :
+  is-section-pair-eq :
     {s t : A × B} → ((eq-pair' {s} {t}) ∘ (pair-eq {s} {t})) ~ id
-  issec-pair-eq {pair x y} {pair .x .y} refl = refl
+  is-section-pair-eq {pair x y} {pair .x .y} refl = refl
 
   abstract
     is-equiv-eq-pair :
       (s t : A × B) → is-equiv (eq-pair' {s} {t})
     is-equiv-eq-pair s t =
-      is-equiv-has-inverse pair-eq issec-pair-eq isretr-pair-eq
+      is-equiv-has-inverse pair-eq is-section-pair-eq is-retraction-pair-eq
 
   equiv-eq-pair :
     (s t : A × B) → Eq-prod s t ≃ (s ＝ t)
@@ -82,7 +82,7 @@ module _
     is-equiv-pair-eq :
       (s t : A × B) → is-equiv (pair-eq {s} {t})
     is-equiv-pair-eq s t =
-      is-equiv-has-inverse eq-pair' isretr-pair-eq issec-pair-eq
+      is-equiv-has-inverse eq-pair' is-retraction-pair-eq is-section-pair-eq
 
   equiv-pair-eq :
     (s t : A × B) → (s ＝ t) ≃ Eq-prod s t

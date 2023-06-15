@@ -62,19 +62,21 @@ pr2 (fib-diagonal-map-fib-ap f
   ( pair refl refl)) = refl
 
 abstract
-  issec-fib-diagonal-map-fib-ap :
+  is-section-fib-diagonal-map-fib-ap :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
     (t : canonical-pullback f f) →
     ((fib-ap-fib-diagonal-map f t) ∘ (fib-diagonal-map-fib-ap f t)) ~ id
-  issec-fib-diagonal-map-fib-ap f (pair x (pair .x .refl)) (pair refl refl) =
+  is-section-fib-diagonal-map-fib-ap f (pair x (pair .x .refl)) (pair refl refl) =
+
     refl
 
 abstract
-  isretr-fib-diagonal-map-fib-ap :
+  is-retraction-fib-diagonal-map-fib-ap :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
     (t : canonical-pullback f f) →
     ((fib-diagonal-map-fib-ap f t) ∘ (fib-ap-fib-diagonal-map f t)) ~ id
-  isretr-fib-diagonal-map-fib-ap f .(pair x (pair x refl)) (pair x refl) =
+  is-retraction-fib-diagonal-map-fib-ap f .(pair x (pair x refl)) (pair x refl) =
+
     refl
 
 abstract
@@ -85,8 +87,8 @@ abstract
   is-equiv-fib-ap-fib-diagonal-map f t =
     is-equiv-has-inverse
       ( fib-diagonal-map-fib-ap f t)
-      ( issec-fib-diagonal-map-fib-ap f t)
-      ( isretr-fib-diagonal-map-fib-ap f t)
+      ( is-section-fib-diagonal-map-fib-ap f t)
+      ( is-retraction-fib-diagonal-map-fib-ap f t)
 ```
 
 ### A map is `k+1`-truncated if and only if its diagonal is `k`-truncated

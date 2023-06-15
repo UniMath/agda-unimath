@@ -170,7 +170,7 @@ module _
         ( triangle-section f g e H
           ( pair
             ( map-inv-is-equiv is-equiv-e)
-            ( issec-map-inv-is-equiv is-equiv-e)))
+            ( is-section-map-inv-is-equiv is-equiv-e)))
         ( is-equiv-map-inv-is-equiv is-equiv-e)
         ( is-emb-f)
 ```
@@ -278,7 +278,7 @@ module _
       is-equiv-htpy-equiv
         (inv-equiv (e x y))
         λ { refl →
-              inv (isretr-map-inv-equiv (e x x) refl) ∙
+              inv (is-retraction-map-inv-equiv (e x x) refl) ∙
               ap (map-equiv (inv-equiv (e x x))) (p x)}
 ```
 

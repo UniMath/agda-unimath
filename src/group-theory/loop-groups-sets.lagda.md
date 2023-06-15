@@ -271,11 +271,11 @@ module _
               ( eq-pair-Σ (pr1 (pair-eq-Σ (pr1 (pair-eq-Σ p)))))
               { y = pr2 (pair-eq-Σ (pr1 (pair-eq-Σ p)))}
               ( eq-is-prop (is-trunc-Id (is-prop-is-set (type-Set X) _ _)))) ∙
-              ( issec-pair-eq-Σ X X (pr1 (pair-eq-Σ p))))) ∙
+              ( is-section-pair-eq-Σ X X (pr1 (pair-eq-Σ p))))) ∙
             ( ( ap
               ( eq-pair-Σ (pr1 (pair-eq-Σ p)))
               ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
-              ( issec-pair-eq-Σ
+              ( is-section-pair-eq-Σ
                 ( pair X (unit-trunc-Prop refl))
                 ( pair X (unit-trunc-Prop refl))
                 ( p)))))
@@ -305,7 +305,7 @@ module _
         ( λ p →
           ( ap
             ( λ w → pr1 (pair-eq-Σ (pr1 w)))
-            ( isretr-pair-eq-Σ
+            ( is-retraction-pair-eq-Σ
               ( pair X (unit-trunc-Prop refl))
               ( pair X (unit-trunc-Prop refl))
               ( pair
@@ -314,7 +314,7 @@ module _
                   ( eq-is-prop (is-prop-is-set (type-Set X))))
                 ( eq-is-prop is-prop-type-trunc-Prop)))) ∙
             ( ap pr1
-              ( isretr-pair-eq-Σ X X
+              ( is-retraction-pair-eq-Σ X X
                 ( pair p (eq-is-prop (is-prop-is-set (type-Set X))))))))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup

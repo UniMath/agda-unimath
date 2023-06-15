@@ -198,15 +198,15 @@ module _
     inv-Group-𝔽 unit-Group-𝔽 ＝ unit-Group-𝔽
   inv-unit-Group-𝔽 = inv-unit-Group group-Group-𝔽
 
-  issec-mul-inv-Group-𝔽 :
+  is-section-mul-inv-Group-𝔽 :
     (x : type-Group-𝔽) →
     ( mul-Group-𝔽 x ∘ mul-Group-𝔽 (inv-Group-𝔽 x)) ~ id
-  issec-mul-inv-Group-𝔽 = issec-mul-inv-Group group-Group-𝔽
+  is-section-mul-inv-Group-𝔽 = is-section-mul-inv-Group group-Group-𝔽
 
-  isretr-mul-inv-Group-𝔽 :
+  is-retraction-mul-inv-Group-𝔽 :
     (x : type-Group-𝔽) →
     ( mul-Group-𝔽 (inv-Group-𝔽 x) ∘ mul-Group-𝔽 x) ~ id
-  isretr-mul-inv-Group-𝔽 = isretr-mul-inv-Group group-Group-𝔽
+  is-retraction-mul-inv-Group-𝔽 = is-retraction-mul-inv-Group group-Group-𝔽
 
   is-equiv-mul-Group-𝔽 :
     (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽 x)
@@ -216,15 +216,15 @@ module _
     (x : type-Group-𝔽) → type-Group-𝔽 ≃ type-Group-𝔽
   equiv-mul-Group-𝔽 = equiv-mul-Group group-Group-𝔽
 
-  issec-mul-inv-Group-𝔽' :
+  is-section-mul-inv-Group-𝔽' :
     (x : type-Group-𝔽) →
     (mul-Group-𝔽' x ∘ mul-Group-𝔽' (inv-Group-𝔽 x)) ~ id
-  issec-mul-inv-Group-𝔽' = issec-mul-inv-Group' group-Group-𝔽
+  is-section-mul-inv-Group-𝔽' = is-section-mul-inv-Group' group-Group-𝔽
 
-  isretr-mul-inv-Group-𝔽' :
+  is-retraction-mul-inv-Group-𝔽' :
     (x : type-Group-𝔽) →
     (mul-Group-𝔽' (inv-Group-𝔽 x) ∘ mul-Group-𝔽' x) ~ id
-  isretr-mul-inv-Group-𝔽' = isretr-mul-inv-Group' group-Group-𝔽
+  is-retraction-mul-inv-Group-𝔽' = is-retraction-mul-inv-Group' group-Group-𝔽
 
   is-equiv-mul-Group-𝔽' :
     (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽' x)

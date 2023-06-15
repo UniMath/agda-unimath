@@ -57,6 +57,6 @@ module _
       ( e)
       ( λ a →
         equiv-concat
-          ( ap left (isretr-map-inv-equiv e a))
+          ( ap left (is-retraction-map-inv-equiv e a))
           ( right (map-equiv e a)))
 ```

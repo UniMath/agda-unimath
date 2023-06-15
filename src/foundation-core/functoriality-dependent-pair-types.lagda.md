@@ -151,13 +151,14 @@ module _
   pr2 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = y
   pr2 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl)) = refl
 
-  issec-map-inv-compute-fib-tot :
+  is-section-map-inv-compute-fib-tot :
     (t : Σ A C) → (map-compute-fib-tot t ∘ map-inv-compute-fib-tot t) ~ id
-  issec-map-inv-compute-fib-tot (pair x .(f x y)) (pair y refl) = refl
+  is-section-map-inv-compute-fib-tot (pair x .(f x y)) (pair y refl) = refl
 
-  isretr-map-inv-compute-fib-tot :
+  is-retraction-map-inv-compute-fib-tot :
     (t : Σ A C) → (map-inv-compute-fib-tot t ∘ map-compute-fib-tot t) ~ id
-  isretr-map-inv-compute-fib-tot .(pair x (f x y)) (pair (pair x y) refl) = refl
+  is-retraction-map-inv-compute-fib-tot ._ (pair (pair x y) refl) =
+    refl
 
   abstract
     is-equiv-map-compute-fib-tot :
@@ -165,8 +166,8 @@ module _
     is-equiv-map-compute-fib-tot t =
       is-equiv-has-inverse
         ( map-inv-compute-fib-tot t)
-        ( issec-map-inv-compute-fib-tot t)
-        ( isretr-map-inv-compute-fib-tot t)
+        ( is-section-map-inv-compute-fib-tot t)
+        ( is-retraction-map-inv-compute-fib-tot t)
 
   compute-fib-tot : (t : Σ A C) → fib (tot f) t ≃ fib (f (pr1 t)) (pr2 t)
   pr1 (compute-fib-tot t) = map-compute-fib-tot t
@@ -178,8 +179,8 @@ module _
     is-equiv-map-inv-compute-fib-tot t =
       is-equiv-has-inverse
         ( map-compute-fib-tot t)
-        ( isretr-map-inv-compute-fib-tot t)
-        ( issec-map-inv-compute-fib-tot t)
+        ( is-retraction-map-inv-compute-fib-tot t)
+        ( is-section-map-inv-compute-fib-tot t)
 
   inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) ≃ fib (tot f) t
   pr1 (inv-compute-fib-tot t) = map-inv-compute-fib-tot t
@@ -252,13 +253,14 @@ module _
     ( fib-fib-map-Σ-map-base
       .(map-Σ-map-base f C (pair x z)) (pair (pair x z) refl)) = refl
 
-  issec-fib-fib-map-Σ-map-base :
+  is-section-fib-fib-map-Σ-map-base :
     (t : Σ B C) → (fib-map-Σ-map-base-fib t ∘ fib-fib-map-Σ-map-base t) ~ id
-  issec-fib-fib-map-Σ-map-base .(pair (f x) z) (pair (pair x z) refl) = refl
+  is-section-fib-fib-map-Σ-map-base .(pair (f x) z) (pair (pair x z) refl) =
+    refl
 
-  isretr-fib-fib-map-Σ-map-base :
+  is-retraction-fib-fib-map-Σ-map-base :
     (t : Σ B C) → (fib-fib-map-Σ-map-base t ∘ fib-map-Σ-map-base-fib t) ~ id
-  isretr-fib-fib-map-Σ-map-base (pair .(f x) z) (pair x refl) = refl
+  is-retraction-fib-fib-map-Σ-map-base (pair .(f x) z) (pair x refl) = refl
 
   abstract
     is-equiv-fib-map-Σ-map-base-fib :
@@ -266,8 +268,8 @@ module _
     is-equiv-fib-map-Σ-map-base-fib t =
       is-equiv-has-inverse
         ( fib-fib-map-Σ-map-base t)
-        ( issec-fib-fib-map-Σ-map-base t)
-        ( isretr-fib-fib-map-Σ-map-base t)
+        ( is-section-fib-fib-map-Σ-map-base t)
+        ( is-retraction-fib-fib-map-Σ-map-base t)
 
   equiv-fib-map-Σ-map-base-fib :
     (t : Σ B C) → fib f (pr1 t) ≃ fib (map-Σ-map-base f C) t

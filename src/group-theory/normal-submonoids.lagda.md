@@ -483,11 +483,11 @@ module _
 ### The type of normal submonoids of `M` is a retract of the type of congruence relations of `M`
 
 ```agda
-issec-congruence-Normal-Submonoid :
+is-section-congruence-Normal-Submonoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) (N : Normal-Submonoid (l1 ⊔ l2) M) →
   ( normal-submonoid-congruence-Monoid M (congruence-Normal-Submonoid M N)) ＝
   ( N)
-issec-congruence-Normal-Submonoid l2 M N =
+is-section-congruence-Normal-Submonoid l2 M N =
   eq-has-same-elements-Normal-Submonoid M
     ( normal-submonoid-congruence-Monoid M (congruence-Normal-Submonoid M N))
     ( N)
@@ -501,31 +501,31 @@ pr1 (normal-submonoid-retract-of-congruence-Monoid l2 M) =
 pr1 (pr2 (normal-submonoid-retract-of-congruence-Monoid l2 M)) =
   normal-submonoid-congruence-Monoid M
 pr2 (pr2 (normal-submonoid-retract-of-congruence-Monoid l2 M)) =
-  issec-congruence-Normal-Submonoid l2 M
+  is-section-congruence-Normal-Submonoid l2 M
 ```
 
 ### The type of normal submonoids of `M` is equivalent to the type of saturated congruence relations on `M`
 
 ```agda
-issec-saturated-congruence-Normal-Submonoid :
+is-section-saturated-congruence-Normal-Submonoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) (N : Normal-Submonoid (l1 ⊔ l2) M) →
   ( normal-submonoid-saturated-congruence-Monoid M
     ( saturated-congruence-Normal-Submonoid M N)) ＝
   ( N)
-issec-saturated-congruence-Normal-Submonoid l2 M N =
+is-section-saturated-congruence-Normal-Submonoid l2 M N =
   eq-has-same-elements-Normal-Submonoid M
     ( normal-submonoid-saturated-congruence-Monoid M
       ( saturated-congruence-Normal-Submonoid M N))
     ( N)
     ( has-same-elements-normal-submonoid-congruence-Normal-Submonoid M N)
 
-isretr-saturated-congruence-Normal-Submonoid :
+is-retraction-saturated-congruence-Normal-Submonoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1)
   (R : saturated-congruence-Monoid (l1 ⊔ l2) M) →
   ( saturated-congruence-Normal-Submonoid M
     ( normal-submonoid-saturated-congruence-Monoid M R)) ＝
   ( R)
-isretr-saturated-congruence-Normal-Submonoid l2 M R =
+is-retraction-saturated-congruence-Normal-Submonoid l2 M R =
   eq-relate-same-elements-saturated-congruence-Monoid M
     ( saturated-congruence-Normal-Submonoid M
       ( normal-submonoid-saturated-congruence-Monoid M R))
@@ -540,8 +540,8 @@ is-equiv-normal-submonoid-saturated-congruence-Monoid :
 is-equiv-normal-submonoid-saturated-congruence-Monoid l2 M =
   is-equiv-has-inverse
     ( saturated-congruence-Normal-Submonoid M)
-    ( issec-saturated-congruence-Normal-Submonoid l2 M)
-    ( isretr-saturated-congruence-Normal-Submonoid l2 M)
+    ( is-section-saturated-congruence-Normal-Submonoid l2 M)
+    ( is-retraction-saturated-congruence-Normal-Submonoid l2 M)
 
 equiv-normal-submonoid-saturated-congruence-Monoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) →

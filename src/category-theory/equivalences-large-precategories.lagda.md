@@ -41,13 +41,13 @@ module _
         functor-Large-Precategory C D γ-there
       functor-inv-equivalence-Large-Precategory :
         functor-Large-Precategory D C γ-back
-      issec-functor-inv-equivalence-Large-Precategory :
+      is-section-functor-inv-equivalence-Large-Precategory :
         natural-isomorphism-Large-Precategory
           ( comp-functor-Large-Precategory
             functor-equivalence-Large-Precategory
             functor-inv-equivalence-Large-Precategory)
           ( id-functor-Large-Precategory)
-      isretr-functor-inv-equivalence-Large-Precategory :
+      is-retraction-functor-inv-equivalence-Large-Precategory :
         natural-isomorphism-Large-Precategory
           ( comp-functor-Large-Precategory
             functor-inv-equivalence-Large-Precategory

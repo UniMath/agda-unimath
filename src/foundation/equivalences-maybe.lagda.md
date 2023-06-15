@@ -291,10 +291,10 @@ compute-map-inv-equiv-equiv-is-not-exception-Maybe e =
 
 ```agda
 abstract
-  issec-map-inv-equiv-equiv-Maybe :
+  is-section-map-inv-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
     (map-equiv-equiv-Maybe e ∘ map-inv-equiv-equiv-Maybe e) ~ id
-  issec-map-inv-equiv-equiv-Maybe e y with
+  is-section-map-inv-equiv-equiv-Maybe e y with
     is-decidable-is-exception-Maybe (map-inv-equiv e (inl y))
   ... | inl p =
     is-injective-unit-Maybe
@@ -303,9 +303,9 @@ abstract
           ( ( ap
               ( map-equiv e)
               ( compute-map-inv-equiv-equiv-is-exception-Maybe e y p)) ∙
-            ( issec-map-inv-equiv e exception-Maybe))) ∙
+            ( is-section-map-inv-equiv e exception-Maybe))) ∙
         ( ( ap (map-equiv e) (inv p)) ∙
-          ( issec-map-inv-equiv e (inl y))))
+          ( is-section-map-inv-equiv e (inl y))))
   ... | inr f =
     is-injective-unit-Maybe
       ( ( compute-map-equiv-equiv-is-not-exception-Maybe e
@@ -318,21 +318,21 @@ abstract
                     ( map-equiv e)
                     ( compute-map-inv-equiv-equiv-is-not-exception-Maybe
                         e y f)) ∙
-                  ( issec-map-inv-equiv e (inl y))))))) ∙
+                  ( is-section-map-inv-equiv e (inl y))))))) ∙
         ( ( ap
             ( map-equiv e)
             ( compute-map-inv-equiv-equiv-is-not-exception-Maybe e y f)) ∙
-          ( issec-map-inv-equiv e (inl y))))
+          ( is-section-map-inv-equiv e (inl y))))
 ```
 
 ### The map `map-inv-equiv-equiv-Maybe e` is a retraction of the map `map-equiv-equiv-Maybe e`
 
 ```agda
 abstract
-  isretr-map-inv-equiv-equiv-Maybe :
+  is-retraction-map-inv-equiv-equiv-Maybe :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
     (map-inv-equiv-equiv-Maybe e ∘ map-equiv-equiv-Maybe e) ~ id
-  isretr-map-inv-equiv-equiv-Maybe e x with
+  is-retraction-map-inv-equiv-equiv-Maybe e x with
     is-decidable-is-exception-Maybe (map-equiv e (inl x))
   ... | inl p =
     is-injective-unit-Maybe
@@ -341,9 +341,9 @@ abstract
           ( ( ap
               ( map-inv-equiv e)
               ( compute-map-equiv-equiv-is-exception-Maybe e x p)) ∙
-            ( isretr-map-inv-equiv e exception-Maybe))) ∙
+            ( is-retraction-map-inv-equiv e exception-Maybe))) ∙
         ( ( ap (map-inv-equiv e) (inv p)) ∙
-          ( isretr-map-inv-equiv e (inl x))))
+          ( is-retraction-map-inv-equiv e (inl x))))
   ... | inr f =
     is-injective-unit-Maybe
       ( ( compute-map-inv-equiv-equiv-is-not-exception-Maybe e
@@ -356,11 +356,11 @@ abstract
                     ( map-inv-equiv e)
                     ( compute-map-equiv-equiv-is-not-exception-Maybe
                         e x f)) ∙
-                  ( isretr-map-inv-equiv e (inl x))))))) ∙
+                  ( is-retraction-map-inv-equiv e (inl x))))))) ∙
         ( ( ap
             ( map-inv-equiv e)
             ( compute-map-equiv-equiv-is-not-exception-Maybe e x f)) ∙
-          ( isretr-map-inv-equiv e (inl x))))
+          ( is-retraction-map-inv-equiv e (inl x))))
 ```
 
 ### The function `map-equiv-equiv-Maybe` is an equivalence
@@ -373,8 +373,8 @@ abstract
   is-equiv-map-equiv-equiv-Maybe e =
     is-equiv-has-inverse
       ( map-inv-equiv-equiv-Maybe e)
-      ( issec-map-inv-equiv-equiv-Maybe e)
-      ( isretr-map-inv-equiv-equiv-Maybe e)
+      ( is-section-map-inv-equiv-equiv-Maybe e)
+      ( is-retraction-map-inv-equiv-equiv-Maybe e)
 
 equiv-equiv-Maybe :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (Maybe X ≃ Maybe Y) → (X ≃ Y)

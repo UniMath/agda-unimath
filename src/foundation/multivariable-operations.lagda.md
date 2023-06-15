@@ -115,25 +115,25 @@ multivariable-input-vector (succ-ℕ n) A (a0 ∷ a) =
   cons-multivariable-input n (λ _ → A) a0
     ( multivariable-input-vector n A a)
 
-issec-multivariable-input-vector :
+is-section-multivariable-input-vector :
   {l : Level}
   (n : ℕ)
   (A : UU l) →
   ( vector-multivariable-input n A ∘
     multivariable-input-vector n A) ~ id
-issec-multivariable-input-vector zero-ℕ A empty-vec = refl
-issec-multivariable-input-vector (succ-ℕ n) A (a0 ∷ a) =
-  ap (_∷_ a0) ( issec-multivariable-input-vector n A a)
+is-section-multivariable-input-vector zero-ℕ A empty-vec = refl
+is-section-multivariable-input-vector (succ-ℕ n) A (a0 ∷ a) =
+  ap (_∷_ a0) ( is-section-multivariable-input-vector n A a)
 
-isretr-multivariable-input-vector :
+is-retraction-multivariable-input-vector :
   {l : Level}
   (n : ℕ)
   (A : UU l) →
   ( multivariable-input-vector n A ∘
     vector-multivariable-input n A) ~ id
-isretr-multivariable-input-vector zero-ℕ A (map-raise star) = refl
-isretr-multivariable-input-vector (succ-ℕ n) A (a0 , a) =
-  eq-pair refl ( isretr-multivariable-input-vector n A a)
+is-retraction-multivariable-input-vector zero-ℕ A (map-raise star) = refl
+is-retraction-multivariable-input-vector (succ-ℕ n) A (a0 , a) =
+  eq-pair refl ( is-retraction-multivariable-input-vector n A a)
 
 is-equiv-vector-multivariable-input :
   {l : Level}
@@ -143,8 +143,8 @@ is-equiv-vector-multivariable-input :
 is-equiv-vector-multivariable-input n A =
   is-equiv-has-inverse
     ( multivariable-input-vector n A)
-    ( issec-multivariable-input-vector n A)
-    ( isretr-multivariable-input-vector n A)
+    ( is-section-multivariable-input-vector n A)
+    ( is-retraction-multivariable-input-vector n A)
 
 compute-vector-multivariable-input :
   {l : Level}

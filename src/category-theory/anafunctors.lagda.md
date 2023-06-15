@@ -136,7 +136,7 @@ module _
           ( comp-hom-Precategory D (hom-iso-Precategory D u))
           ( preserves-id-functor-Precategory C D F X)) ∙
         ( right-unit-law-comp-hom-Precategory D (hom-iso-Precategory D u)))) ∙
-    ( issec-hom-inv-iso-Precategory D u)
+    ( is-section-hom-inv-iso-Precategory D u)
   pr2 (pr2 (pr2 (pr2 (anafunctor-functor-Precategory F))))
     X Y Z U u V v W w g f =
     ( ap
@@ -161,7 +161,7 @@ module _
                       ( comp-hom-Precategory D
                         ( hom-iso-Precategory D w)
                         ( hom-functor-Precategory C D F g)))
-                      ( inv (isretr-hom-inv-iso-Precategory D v))) ∙
+                      ( inv (is-retraction-hom-inv-iso-Precategory D v))) ∙
                   ( inv
                     ( associative-comp-hom-Precategory D
                       ( comp-hom-Precategory D

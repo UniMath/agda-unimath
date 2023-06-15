@@ -45,24 +45,24 @@ module _
   ind-Maybe (pair h b) (inr star) = b
 
   abstract
-    issec-ind-Maybe : (ev-Maybe ∘ ind-Maybe) ~ id
-    issec-ind-Maybe (pair h b) = refl
+    is-section-ind-Maybe : (ev-Maybe ∘ ind-Maybe) ~ id
+    is-section-ind-Maybe (pair h b) = refl
 
-    isretr-ind-Maybe' :
+    is-retraction-ind-Maybe' :
       (h : (x : Maybe A) → B x) → (ind-Maybe (ev-Maybe h)) ~ h
-    isretr-ind-Maybe' h (inl x) = refl
-    isretr-ind-Maybe' h (inr star) = refl
+    is-retraction-ind-Maybe' h (inl x) = refl
+    is-retraction-ind-Maybe' h (inr star) = refl
 
-    isretr-ind-Maybe : (ind-Maybe ∘ ev-Maybe) ~ id
-    isretr-ind-Maybe h = eq-htpy (isretr-ind-Maybe' h)
+    is-retraction-ind-Maybe : (ind-Maybe ∘ ev-Maybe) ~ id
+    is-retraction-ind-Maybe h = eq-htpy (is-retraction-ind-Maybe' h)
 
     dependent-universal-property-Maybe :
       is-equiv ev-Maybe
     dependent-universal-property-Maybe =
       is-equiv-has-inverse
         ind-Maybe
-        issec-ind-Maybe
-        isretr-ind-Maybe
+        is-section-ind-Maybe
+        is-retraction-ind-Maybe
 
 equiv-dependent-universal-property-Maybe :
   {l1 l2 : Level} {A : UU l1} (B : Maybe A → UU l2) →

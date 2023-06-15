@@ -166,11 +166,11 @@ module _
   eq-Eq-unordered-tuple x y =
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
 
-  isretr-eq-Eq-unordered-tuple :
+  is-retraction-eq-Eq-unordered-tuple :
     (x y : unordered-tuple n A) →
     (eq-Eq-unordered-tuple x y ∘ Eq-eq-unordered-tuple x y) ~ id
-  isretr-eq-Eq-unordered-tuple x y =
-    isretr-map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
+  is-retraction-eq-Eq-unordered-tuple x y =
+    is-retraction-map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
 ```
 
 ### Functoriality of unordered tuples
@@ -207,7 +207,7 @@ preserves-refl-htpy-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} (f : A → B) →
   htpy-unordered-tuple n (refl-htpy {f = f}) ~ refl-htpy
 preserves-refl-htpy-unordered-tuple n f p =
-  isretr-eq-Eq-unordered-tuple n
+  is-retraction-eq-Eq-unordered-tuple n
     ( map-unordered-tuple n f p)
     ( map-unordered-tuple n f p)
     ( refl)

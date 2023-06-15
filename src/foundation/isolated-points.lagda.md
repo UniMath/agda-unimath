@@ -279,33 +279,36 @@ map-inv-maybe-structure-isolated-point :
 map-inv-maybe-structure-isolated-point X (pair x d) y =
   cases-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
 
-cases-issec-map-inv-maybe-structure-isolated-point :
+cases-is-section-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   (y : X) (d : is-decidable (pr1 x ＝ y)) →
   ( map-maybe-structure-isolated-point X x
     ( cases-map-inv-maybe-structure-isolated-point X x y d)) ＝
   ( y)
-cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) .x (inl refl) =
+cases-is-section-map-inv-maybe-structure-isolated-point X (pair x dx) .x (inl refl) =
+
   refl
-cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
+cases-is-section-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
+
   refl
 
-issec-map-inv-maybe-structure-isolated-point :
+is-section-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   ( map-maybe-structure-isolated-point X x ∘
     map-inv-maybe-structure-isolated-point X x) ~ id
-issec-map-inv-maybe-structure-isolated-point X (pair x d) y =
-  cases-issec-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
+is-section-map-inv-maybe-structure-isolated-point X (pair x d) y =
+  cases-is-section-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
 
-isretr-map-inv-maybe-structure-isolated-point :
+is-retraction-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   ( map-inv-maybe-structure-isolated-point X x ∘
     map-maybe-structure-isolated-point X x) ~ id
-isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inl (pair y f)) =
+is-retraction-map-inv-maybe-structure-isolated-point X (pair x dx) (inl (pair y f)) =
+
   ap
     ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) y)
     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx y)))
-isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inr star) =
+is-retraction-map-inv-maybe-structure-isolated-point X (pair x dx) (inr star) =
   ap
     ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) x)
     { x = dx (map-maybe-structure-isolated-point X (pair x dx) (inr star))}
@@ -318,8 +321,8 @@ is-equiv-map-maybe-structure-isolated-point :
 is-equiv-map-maybe-structure-isolated-point X x =
   is-equiv-has-inverse
     ( map-inv-maybe-structure-isolated-point X x)
-    ( issec-map-inv-maybe-structure-isolated-point X x)
-    ( isretr-map-inv-maybe-structure-isolated-point X x)
+    ( is-section-map-inv-maybe-structure-isolated-point X x)
+    ( is-retraction-map-inv-maybe-structure-isolated-point X x)
 
 equiv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →

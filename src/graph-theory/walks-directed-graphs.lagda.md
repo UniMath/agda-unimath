@@ -162,33 +162,33 @@ module _
       ( λ k u → (z , e , u))
       ( map-inv-compute-total-walk-of-length-Directed-Graph z y w)
 
-  issec-map-inv-compute-total-walk-of-length-Directed-Graph :
+  is-section-map-inv-compute-total-walk-of-length-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
     ( map-compute-total-walk-of-length-Directed-Graph x y ∘
       map-inv-compute-total-walk-of-length-Directed-Graph x y) ~ id
-  issec-map-inv-compute-total-walk-of-length-Directed-Graph
+  is-section-map-inv-compute-total-walk-of-length-Directed-Graph
     x .x refl-walk-Directed-Graph = refl
-  issec-map-inv-compute-total-walk-of-length-Directed-Graph
+  is-section-map-inv-compute-total-walk-of-length-Directed-Graph
     x y (cons-walk-Directed-Graph {y = z} e w) =
     ap
       ( cons-walk-Directed-Graph e)
-      ( issec-map-inv-compute-total-walk-of-length-Directed-Graph z y w)
+      ( is-section-map-inv-compute-total-walk-of-length-Directed-Graph z y w)
 
-  isretr-map-inv-compute-total-walk-of-length-Directed-Graph :
+  is-retraction-map-inv-compute-total-walk-of-length-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
     ( map-inv-compute-total-walk-of-length-Directed-Graph x y ∘
       map-compute-total-walk-of-length-Directed-Graph x y) ~ id
-  isretr-map-inv-compute-total-walk-of-length-Directed-Graph
+  is-retraction-map-inv-compute-total-walk-of-length-Directed-Graph
     x .x (zero-ℕ , map-raise refl) =
     refl
-  isretr-map-inv-compute-total-walk-of-length-Directed-Graph
+  is-retraction-map-inv-compute-total-walk-of-length-Directed-Graph
     x y (succ-ℕ n , (z , e , w)) =
     ap
       ( map-Σ
         ( λ n → walk-of-length-Directed-Graph n x y)
         ( succ-ℕ)
         ( λ k u → (z , e , u)))
-      ( isretr-map-inv-compute-total-walk-of-length-Directed-Graph z y (n , w))
+      ( is-retraction-map-inv-compute-total-walk-of-length-Directed-Graph z y (n , w))
 
   is-equiv-map-compute-total-walk-of-length-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
@@ -196,8 +196,8 @@ module _
   is-equiv-map-compute-total-walk-of-length-Directed-Graph x y =
     is-equiv-has-inverse
       ( map-inv-compute-total-walk-of-length-Directed-Graph x y)
-      ( issec-map-inv-compute-total-walk-of-length-Directed-Graph x y)
-      ( isretr-map-inv-compute-total-walk-of-length-Directed-Graph x y)
+      ( is-section-map-inv-compute-total-walk-of-length-Directed-Graph x y)
+      ( is-retraction-map-inv-compute-total-walk-of-length-Directed-Graph x y)
 
   compute-total-walk-of-length-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
@@ -275,30 +275,34 @@ module _
       ( λ v → snoc-walk-Directed-Graph G v f)
       ( compute-cons-map-inv-compute-walk-Directed-Graph e w)
 
-  issec-map-inv-compute-walk-Directed-Graph :
+  is-section-map-inv-compute-walk-Directed-Graph :
     {x y : vertex-Directed-Graph G} →
     ( map-compute-walk-Directed-Graph {x} {y} ∘
       map-inv-compute-walk-Directed-Graph {x} {y}) ~ id
-  issec-map-inv-compute-walk-Directed-Graph refl-walk-Directed-Graph' = refl
-  issec-map-inv-compute-walk-Directed-Graph (snoc-walk-Directed-Graph' w e) =
+  is-section-map-inv-compute-walk-Directed-Graph refl-walk-Directed-Graph' =
+    refl
+  is-section-map-inv-compute-walk-Directed-Graph (snoc-walk-Directed-Graph' w e) =
+
     ( compute-snoc-map-compute-walk-Directed-Graph
       ( map-inv-compute-walk-Directed-Graph w)
       ( e)) ∙
     ( ap
       ( λ v → snoc-walk-Directed-Graph' v e)
-      ( issec-map-inv-compute-walk-Directed-Graph w))
+      ( is-section-map-inv-compute-walk-Directed-Graph w))
 
-  isretr-map-inv-compute-walk-Directed-Graph :
+  is-retraction-map-inv-compute-walk-Directed-Graph :
     {x y : vertex-Directed-Graph G} →
     ( map-inv-compute-walk-Directed-Graph {x} {y} ∘
       map-compute-walk-Directed-Graph {x} {y}) ~ id
-  isretr-map-inv-compute-walk-Directed-Graph refl-walk-Directed-Graph = refl
-  isretr-map-inv-compute-walk-Directed-Graph (cons-walk-Directed-Graph e w) =
+  is-retraction-map-inv-compute-walk-Directed-Graph refl-walk-Directed-Graph =
+    refl
+  is-retraction-map-inv-compute-walk-Directed-Graph (cons-walk-Directed-Graph e w) =
+
     ( compute-cons-map-inv-compute-walk-Directed-Graph e
       ( map-compute-walk-Directed-Graph w)) ∙
     ( ap
       ( cons-walk-Directed-Graph e)
-      ( isretr-map-inv-compute-walk-Directed-Graph w))
+      ( is-retraction-map-inv-compute-walk-Directed-Graph w))
 
   is-equiv-map-compute-walk-Directed-Graph :
     {x y : vertex-Directed-Graph G} →
@@ -306,8 +310,8 @@ module _
   is-equiv-map-compute-walk-Directed-Graph =
     is-equiv-has-inverse
       map-inv-compute-walk-Directed-Graph
-      issec-map-inv-compute-walk-Directed-Graph
-      isretr-map-inv-compute-walk-Directed-Graph
+      is-section-map-inv-compute-walk-Directed-Graph
+      is-retraction-map-inv-compute-walk-Directed-Graph
 
   compute-walk-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
@@ -347,23 +351,24 @@ module _
   map-inv-compute-coproduct-walk-Directed-Graph x y (inr (z , e , w)) =
     cons-walk-Directed-Graph e w
 
-  issec-map-inv-compute-coproduct-walk-Directed-Graph :
+  is-section-map-inv-compute-coproduct-walk-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
     ( map-compute-coproduct-walk-Directed-Graph x y ∘
       map-inv-compute-coproduct-walk-Directed-Graph x y) ~ id
-  issec-map-inv-compute-coproduct-walk-Directed-Graph x .x (inl refl) =
+  is-section-map-inv-compute-coproduct-walk-Directed-Graph x .x (inl refl) =
     refl
-  issec-map-inv-compute-coproduct-walk-Directed-Graph x y (inr (z , e , w)) =
+  is-section-map-inv-compute-coproduct-walk-Directed-Graph x y (inr (z , e , w)) =
+
     refl
 
-  isretr-map-inv-compute-coproduct-walk-Directed-Graph :
+  is-retraction-map-inv-compute-coproduct-walk-Directed-Graph :
     (x y : vertex-Directed-Graph G) →
     ( map-inv-compute-coproduct-walk-Directed-Graph x y ∘
       map-compute-coproduct-walk-Directed-Graph x y) ~ id
-  isretr-map-inv-compute-coproduct-walk-Directed-Graph x .x
+  is-retraction-map-inv-compute-coproduct-walk-Directed-Graph x .x
     refl-walk-Directed-Graph =
     refl
-  isretr-map-inv-compute-coproduct-walk-Directed-Graph x y
+  is-retraction-map-inv-compute-coproduct-walk-Directed-Graph x y
     ( cons-walk-Directed-Graph e w) =
     refl
 
@@ -373,8 +378,8 @@ module _
   is-equiv-map-compute-coproduct-walk-Directed-Graph x y =
     is-equiv-has-inverse
       ( map-inv-compute-coproduct-walk-Directed-Graph x y)
-      ( issec-map-inv-compute-coproduct-walk-Directed-Graph x y)
-      ( isretr-map-inv-compute-coproduct-walk-Directed-Graph x y)
+      ( is-section-map-inv-compute-coproduct-walk-Directed-Graph x y)
+      ( is-retraction-map-inv-compute-coproduct-walk-Directed-Graph x y)
 
   compute-coproduct-walk-Directed-Graph :
     (x y : vertex-Directed-Graph G) →

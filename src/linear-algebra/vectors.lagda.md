@@ -172,12 +172,12 @@ module _
   eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , eqs) =
     ap (x ∷_) (eq-Eq-vec n xs ys eqs)
 
-  isretr-eq-Eq-vec :
+  is-retraction-eq-Eq-vec :
     (n : ℕ) → (u v : vec A n) →
     (p : u ＝ v) → eq-Eq-vec n u v (Eq-eq-vec n u v p) ＝ p
-  isretr-eq-Eq-vec zero-ℕ empty-vec empty-vec refl = refl
-  isretr-eq-Eq-vec (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
-    ap (ap (x ∷_)) (isretr-eq-Eq-vec n xs xs refl)
+  is-retraction-eq-Eq-vec zero-ℕ empty-vec empty-vec refl = refl
+  is-retraction-eq-Eq-vec (succ-ℕ n) (x ∷ xs) .(x ∷ xs) refl =
+    ap (ap (x ∷_)) (is-retraction-eq-Eq-vec n xs xs refl)
 
   square-Eq-eq-vec :
     (n : ℕ) (x : A) (u v : vec A n) (p : Id u v) →
@@ -185,21 +185,21 @@ module _
   square-Eq-eq-vec zero-ℕ x empty-vec empty-vec refl = refl
   square-Eq-eq-vec (succ-ℕ n) a (x ∷ xs) (.x ∷ .xs) refl = refl
 
-  issec-eq-Eq-vec :
+  is-section-eq-Eq-vec :
     (n : ℕ) (u v : vec A n) →
     (p : Eq-vec n u v) → Eq-eq-vec n u v (eq-Eq-vec n u v p) ＝ p
-  issec-eq-Eq-vec zero-ℕ empty-vec empty-vec (map-raise star) = refl
-  issec-eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
+  is-section-eq-Eq-vec zero-ℕ empty-vec empty-vec (map-raise star) = refl
+  is-section-eq-Eq-vec (succ-ℕ n) (x ∷ xs) (.x ∷ ys) (refl , ps) =
     ( square-Eq-eq-vec n x xs ys (eq-Eq-vec n xs ys ps)) ∙
-    ( ap (pair refl) (issec-eq-Eq-vec n xs ys ps))
+    ( ap (pair refl) (is-section-eq-Eq-vec n xs ys ps))
 
   is-equiv-Eq-eq-vec :
     (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
   is-equiv-Eq-eq-vec n u v =
     is-equiv-has-inverse
       ( eq-Eq-vec n u v)
-      ( issec-eq-Eq-vec n u v)
-      ( isretr-eq-Eq-vec n u v)
+      ( is-section-eq-Eq-vec n u v)
+      ( is-retraction-eq-Eq-vec n u v)
 
   extensionality-vec : (n : ℕ) → (u v : vec A n) → Id u v ≃ Eq-vec n u v
   extensionality-vec n u v = (Eq-eq-vec n u v , is-equiv-Eq-eq-vec n u v)
@@ -223,19 +223,19 @@ module _
   functional-vec-vec (succ-ℕ n) (a ∷ v) =
     cons-functional-vec n a (functional-vec-vec n v)
 
-  issec-functional-vec-vec :
+  is-section-functional-vec-vec :
     (n : ℕ) → (listed-vec-functional-vec n ∘ functional-vec-vec n) ~ id
-  issec-functional-vec-vec .zero-ℕ empty-vec = refl
-  issec-functional-vec-vec .(succ-ℕ _) (a ∷ v) =
-    ap (λ u → a ∷ u) (issec-functional-vec-vec _ v)
+  is-section-functional-vec-vec .zero-ℕ empty-vec = refl
+  is-section-functional-vec-vec .(succ-ℕ _) (a ∷ v) =
+    ap (λ u → a ∷ u) (is-section-functional-vec-vec _ v)
 
-  isretr-functional-vec-vec :
+  is-retraction-functional-vec-vec :
     (n : ℕ) → (functional-vec-vec n ∘ listed-vec-functional-vec n) ~ id
-  isretr-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
-  isretr-functional-vec-vec (succ-ℕ n) v =
+  is-retraction-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
+  is-retraction-functional-vec-vec (succ-ℕ n) v =
     eq-htpy
       ( λ { (inl x) →
-            htpy-eq (isretr-functional-vec-vec n (tail-functional-vec n v)) x ;
+            htpy-eq (is-retraction-functional-vec-vec n (tail-functional-vec n v)) x ;
             (inr star) → refl})
 
   is-equiv-listed-vec-functional-vec :
@@ -243,16 +243,16 @@ module _
   is-equiv-listed-vec-functional-vec n =
     is-equiv-has-inverse
       ( functional-vec-vec n)
-      ( issec-functional-vec-vec n)
-      ( isretr-functional-vec-vec n)
+      ( is-section-functional-vec-vec n)
+      ( is-retraction-functional-vec-vec n)
 
   is-equiv-functional-vec-vec :
     (n : ℕ) → is-equiv (functional-vec-vec n)
   is-equiv-functional-vec-vec n =
     is-equiv-has-inverse
       ( listed-vec-functional-vec n)
-      ( isretr-functional-vec-vec n)
-      ( issec-functional-vec-vec n)
+      ( is-retraction-functional-vec-vec n)
+      ( is-section-functional-vec-vec n)
 
   compute-vec : (n : ℕ) → functional-vec A n ≃ vec A n
   pr1 (compute-vec n) = listed-vec-functional-vec n

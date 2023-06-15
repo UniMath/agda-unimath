@@ -92,7 +92,7 @@ module _
       ( eq-htpy
         ( λ p →
           ap pr1
-            ( isretr-pair-eq-Σ
+            ( is-retraction-pair-eq-Σ
               ( Fin-UU-Fin l n)
               ( Fin-UU-Fin l n)
               ( pair p (eq-is-prop is-prop-type-trunc-Prop)))))
@@ -118,7 +118,7 @@ module _
           ( ap
             ( λ r → eq-pair-Σ (pr1 (pair-eq-Σ p)) r)
             ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
-            ( issec-pair-eq-Σ (Fin-UU-Fin l n) (Fin-UU-Fin l n) p)))
+            ( is-section-pair-eq-Σ (Fin-UU-Fin l n) (Fin-UU-Fin l n) p)))
       ( eq-is-prop
         ( is-prop-preserves-mul-Semigroup
           ( semigroup-Group (abstract-group-Concrete-Group (UU-Fin-Group l n)))

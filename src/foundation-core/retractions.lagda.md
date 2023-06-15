@@ -73,15 +73,15 @@ module _
   ap-retraction i r H x y p =
       ( inv (H x)) ∙ ((ap r p) ∙ (H y))
 
-  isretr-ap-retraction :
+  is-retraction-ap-retraction :
     (i : A → B) (r : B → A) (H : (r ∘ i) ~ id)
     (x y : A) → ((ap-retraction i r H x y) ∘ (ap i {x} {y})) ~ id
-  isretr-ap-retraction i r H x .x refl = left-inv (H x)
+  is-retraction-ap-retraction i r H x .x refl = left-inv (H x)
 
   retr-ap :
     (i : A → B) → retr i → (x y : A) → retr (ap i {x} {y})
   pr1 (retr-ap i (pair r H) x y) = ap-retraction i r H x y
-  pr2 (retr-ap i (pair r H) x y) = isretr-ap-retraction i r H x y
+  pr2 (retr-ap i (pair r H) x y) = is-retraction-ap-retraction i r H x y
 
   retract-eq :
     (R : A retract-of B) → (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)

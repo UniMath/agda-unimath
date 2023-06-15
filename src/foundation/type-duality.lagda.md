@@ -168,10 +168,10 @@ module _
       ( equiv-is-small
         ( is-small-Σ {l3 = l} {l4 = l} H (λ a → is-small' {l} {B a}))))
 
-  issec-map-inv-type-duality :
+  is-section-map-inv-type-duality :
     ( map-type-duality (is-locally-small-is-small H) ∘ map-inv-type-duality) ~
     id
-  issec-map-inv-type-duality B =
+  is-section-map-inv-type-duality B =
     eq-equiv-fam
       ( λ a →
         equivalence-reasoning
@@ -213,13 +213,13 @@ module _
             by
             equiv-fib-pr1 B a)
 
-  isretr-map-inv-type-duality :
+  is-retraction-map-inv-type-duality :
     ( map-inv-type-duality ∘ map-type-duality (is-locally-small-is-small H)) ~
     id
-  isretr-map-inv-type-duality X =
+  is-retraction-map-inv-type-duality X =
     is-injective-is-emb
       ( is-emb-map-type-duality (is-locally-small-is-small H))
-      ( issec-map-inv-type-duality
+      ( is-section-map-inv-type-duality
         ( map-type-duality (is-locally-small-is-small H) X))
 
   is-equiv-map-type-duality :
@@ -227,8 +227,8 @@ module _
   is-equiv-map-type-duality =
     is-equiv-has-inverse
       map-inv-type-duality
-      issec-map-inv-type-duality
-      isretr-map-inv-type-duality
+      is-section-map-inv-type-duality
+      is-retraction-map-inv-type-duality
 
   type-duality : type-polynomial-endofunctor-UU l A ≃ type-exp-UU l A
   pr1 type-duality = map-type-duality (is-locally-small-is-small H)
@@ -255,7 +255,7 @@ module _
             is-contr-equiv
               ( raise-unit l)
               ( ( equiv-eq-fam _ _
-                  ( issec-map-inv-is-equiv E (λ _ → raise-unit l))
+                  ( is-section-map-inv-is-equiv E (λ _ → raise-unit l))
                   ( a)) ∘e
                 ( equiv-tot
                   ( λ x →
@@ -275,13 +275,13 @@ Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → Slice (l1 ⊔ l) A
 pr1 (Pr1 A B) = Σ A B
 pr2 (Pr1 A B) = pr1
 
-issec-Pr1 :
+is-section-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
-issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
+is-section-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
 
-isretr-Pr1 :
+is-retraction-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
-isretr-Pr1 {A = A} (pair X f) =
+is-retraction-Pr1 {A = A} (pair X f) =
   eq-equiv-slice
     ( Pr1 A (Fib A (pair X f)))
     ( pair X f)
@@ -290,7 +290,7 @@ isretr-Pr1 {A = A} (pair X f) =
 is-equiv-Fib :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
 is-equiv-Fib l2 A =
-  is-equiv-has-inverse (Pr1 A) (issec-Pr1 {l2 = l2}) (isretr-Pr1 {l2 = l2})
+  is-equiv-has-inverse (Pr1 A) (is-section-Pr1 {l2 = l2}) (is-retraction-Pr1 {l2 = l2})
 
 equiv-Fib :
   {l1 : Level} (l2 : Level) (A : UU l1) → Slice (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
@@ -300,7 +300,7 @@ pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
 is-equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
 is-equiv-Pr1 {l1} l2 A =
-  is-equiv-has-inverse (Fib A) (isretr-Pr1 {l2 = l2}) (issec-Pr1 {l2 = l2})
+  is-equiv-has-inverse (Fib A) (is-retraction-Pr1 {l2 = l2}) (is-section-Pr1 {l2 = l2})
 
 equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → (A → UU (l1 ⊔ l2)) ≃ Slice (l1 ⊔ l2) A

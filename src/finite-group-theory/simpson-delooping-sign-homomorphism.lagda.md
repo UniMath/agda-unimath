@@ -125,7 +125,7 @@ module _
                 ( sign-homomorphism-Fin-two n
                   (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
             ( is-zero-nat-zero-Fin {k = 1}) ∙
-            ( issec-nat-Fin 1
+            ( is-section-nat-Fin 1
               ( sign-homomorphism-Fin-two n
                 (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))) ∙
               ( ap

@@ -675,10 +675,10 @@ module _
           ( λ a →
             ( ap
               ( concat' (g (i a)) (M (f a)))
-              ( issec-map-inv-is-equiv
+              ( is-section-map-inv-is-equiv
                 ( K (i a) ((j (f a))))
                 ( L a ∙ inv (M (f a))))) ∙
-            ( issec-inv-concat' (g (i a)) (M (f a)) (L a)))))
+            ( is-section-inv-concat' (g (i a)) (M (f a)) (L a)))))
     where
 
     J : (b : B) → fib g (h b)

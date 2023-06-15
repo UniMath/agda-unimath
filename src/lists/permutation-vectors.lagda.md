@@ -97,7 +97,7 @@ module _
     ap
       ( λ f → listed-vec-functional-vec n (f ∘ (map-equiv b)))
       ( inv
-        ( isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv a)))
+        ( is-retraction-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv a)))
 
   compute-swap-two-last-elements-transposition-Fin-permute-vec :
     (n : ℕ)
@@ -176,14 +176,14 @@ module _
         ( x)
         ( tr
           ( λ p → in-functional-vec n x p)
-          ( isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t))
+          ( is-retraction-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t))
           ( is-in-functional-vec-is-in-vec n (permute-vec n v t) x I)))
 
   is-in-permute-functional-vec-is-in-functional-vec :
     (n : ℕ) (v : Fin n → A) (t : Permutation n) (x : A) →
     in-functional-vec n x v → in-functional-vec n x (v ∘ map-equiv t)
   is-in-permute-functional-vec-is-in-functional-vec n v t x (k , refl) =
-    map-inv-equiv t k , ap v (inv (issec-map-inv-equiv t k))
+    map-inv-equiv t k , ap v (inv (is-section-map-inv-equiv t k))
 
   is-in-permute-vec-is-in-vec :
     (n : ℕ) (v : vec A n) (t : Permutation n) (x : A) →
@@ -196,7 +196,7 @@ module _
       ( tr
         ( λ p → in-functional-vec n x p)
         ( inv
-          ( isretr-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t)))
+          ( is-retraction-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t)))
         ( is-in-permute-functional-vec-is-in-functional-vec
           ( n)
           ( functional-vec-vec n v)
@@ -381,13 +381,13 @@ eq-map-vec-permute-vec f {n} v t =
           listed-vec-functional-vec
             ( n)
             ( p ∘ map-equiv t))
-        ( isretr-functional-vec-vec
+        ( is-retraction-functional-vec-vec
           ( n)
           ( map-functional-vec n f (functional-vec-vec n v)))) ∙
       ( ( ap
           ( listed-vec-functional-vec n ∘ map-functional-vec n f)
           ( inv
-            ( isretr-functional-vec-vec
+            ( is-retraction-functional-vec-vec
               ( n)
               ( λ z → functional-vec-vec n v (map-equiv t z))))) ∙
         ( map-vec-map-functional-vec f n (permute-vec n v t)))))

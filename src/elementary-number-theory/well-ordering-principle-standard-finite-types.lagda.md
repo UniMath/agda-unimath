@@ -206,7 +206,8 @@ well-ordering-principle-∃-Fin k P H =
         ( map-Σ
           ( type-Prop ∘ Q)
           ( nat-Fin (succ-ℕ k))
-          ( λ x → tr (is-in-decidable-subtype P) (inv (issec-nat-Fin k x))))
+          ( λ x →
+            tr (is-in-decidable-subtype P) (inv (is-section-nat-Fin k x))))
         ( t)))
   where
   Q : ℕ → Prop l

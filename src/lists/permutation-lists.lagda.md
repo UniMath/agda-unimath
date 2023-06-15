@@ -100,7 +100,7 @@ module _
     inv
       ( pr2
         ( pair-eq-Σ
-          ( isretr-vec-list
+          ( is-retraction-vec-list
             ( (length-list l , permute-vec (length-list l) (vec-list l) f)))))
 ```
 
@@ -135,7 +135,7 @@ module _
         ( x)
         ( tr
           ( λ p → x ∈-vec (pr2 p))
-          ( isretr-vec-list
+          ( is-retraction-vec-list
             ( length-list l ,
               permute-vec (length-list l) (vec-list l) t))
           ( is-in-vec-list-is-in-list
@@ -155,7 +155,7 @@ module _
       ( tr
         ( λ p → x ∈-vec (pr2 p))
         ( inv
-          ( isretr-vec-list
+          ( is-retraction-vec-list
             ( length-list l , permute-vec (length-list l) (vec-list l) t)))
         ( is-in-permute-vec-is-in-vec
           ( length-list l)
@@ -243,7 +243,7 @@ helper-compute-list-vec-map-vec-permute-vec-vec-list f p t =
         ( pr2
           ( pair-eq-Σ
             ( inv
-              ( isretr-vec-list
+              ( is-retraction-vec-list
                 ( length-list p ,
                   permute-vec (length-list p) (vec-list p) t))))))))
 
@@ -289,7 +289,7 @@ eq-map-list-permute-list {B = B} f p t =
               ( t)) ∙
             ( ap
               ( λ v → permute-vec (length-list p) v t)
-              ( issec-inv-tr
+              ( is-section-inv-tr
                 ( vec B)
                 ( length-map-list f p)
                 ( map-vec f (vec-list p)))))))) ∙

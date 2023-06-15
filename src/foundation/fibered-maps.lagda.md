@@ -241,20 +241,20 @@ module _
   pr1 (map-over-fiberwise-map-over α) a = pr1 (α (f a) (pair a refl))
   pr2 (map-over-fiberwise-map-over α) a = inv (pr2 (α (f a) (pair a refl)))
 
-  issec-map-over-fiberwise-map-over-eq-htpy :
+  is-section-map-over-fiberwise-map-over-eq-htpy :
     (α : fiberwise-map-over f g i) (x : X) →
     (fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x) ~ (α x)
-  issec-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
+  is-section-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
     eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
 
-  issec-map-over-fiberwise-map-over :
+  is-section-map-over-fiberwise-map-over :
     (fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over) ~ id
-  issec-map-over-fiberwise-map-over α =
-    eq-htpy (eq-htpy ∘ issec-map-over-fiberwise-map-over-eq-htpy α)
+  is-section-map-over-fiberwise-map-over α =
+    eq-htpy (eq-htpy ∘ is-section-map-over-fiberwise-map-over-eq-htpy α)
 
-  isretr-map-over-fiberwise-map-over :
+  is-retraction-map-over-fiberwise-map-over :
     (map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over) ~ id
-  isretr-map-over-fiberwise-map-over (pair h H) =
+  is-retraction-map-over-fiberwise-map-over (pair h H) =
     eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
 
   abstract
@@ -263,8 +263,8 @@ module _
     is-equiv-fiberwise-map-over-map-over =
       is-equiv-has-inverse
         ( map-over-fiberwise-map-over)
-        ( issec-map-over-fiberwise-map-over)
-        ( isretr-map-over-fiberwise-map-over)
+        ( is-section-map-over-fiberwise-map-over)
+        ( is-retraction-map-over-fiberwise-map-over)
 
   abstract
     is-equiv-map-over-fiberwise-map-over :
@@ -272,8 +272,8 @@ module _
     is-equiv-map-over-fiberwise-map-over =
       is-equiv-has-inverse
         ( fiberwise-map-over-map-over)
-        ( isretr-map-over-fiberwise-map-over)
-        ( issec-map-over-fiberwise-map-over)
+        ( is-retraction-map-over-fiberwise-map-over)
+        ( is-section-map-over-fiberwise-map-over)
 
   equiv-fiberwise-map-over-map-over :
     map-over f g i ≃ fiberwise-map-over f g i

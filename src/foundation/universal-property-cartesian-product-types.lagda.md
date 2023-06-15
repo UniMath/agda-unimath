@@ -72,8 +72,8 @@ Cartesian products are a special case of pullbacks.
   pr2 (inv-gap-prod (pair a (pair b p))) = b
 
   abstract
-    issec-inv-gap-prod : (gap-prod ∘ inv-gap-prod) ~ id
-    issec-inv-gap-prod (pair a (pair b p)) =
+    is-section-inv-gap-prod : (gap-prod ∘ inv-gap-prod) ~ id
+    is-section-inv-gap-prod (pair a (pair b p)) =
       map-extensionality-canonical-pullback
         ( const A unit star)
         ( const B unit star)
@@ -82,8 +82,8 @@ Cartesian products are a special case of pullbacks.
         ( eq-is-contr (is-prop-is-contr is-contr-unit star star))
 
   abstract
-    isretr-inv-gap-prod : (inv-gap-prod ∘ gap-prod) ~ id
-    isretr-inv-gap-prod (pair a b) = eq-pair-Σ refl refl
+    is-retraction-inv-gap-prod : (inv-gap-prod ∘ gap-prod) ~ id
+    is-retraction-inv-gap-prod (pair a b) = eq-pair-Σ refl refl
 
   abstract
     is-pullback-prod :
@@ -91,8 +91,8 @@ Cartesian products are a special case of pullbacks.
     is-pullback-prod =
       is-equiv-has-inverse
         inv-gap-prod
-        issec-inv-gap-prod
-        isretr-inv-gap-prod
+        is-section-inv-gap-prod
+        is-retraction-inv-gap-prod
 ```
 
 We conclude that cartesian products satisfy the universal property of pullbacks.

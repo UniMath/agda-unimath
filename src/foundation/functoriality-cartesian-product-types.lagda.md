@@ -92,19 +92,19 @@ module _
   pr1 (map-inv-map-prod f g H K (c , d)) = map-inv-is-equiv H c
   pr2 (map-inv-map-prod f g H K (c , d)) = map-inv-is-equiv K d
 
-  issec-map-inv-map-prod :
+  is-section-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     (map-prod f g ∘ map-inv-map-prod f g H K) ~ id
-  issec-map-inv-map-prod f g H K (c , d) =
-    htpy-map-prod (issec-map-inv-is-equiv H) (issec-map-inv-is-equiv K) (c , d)
+  is-section-map-inv-map-prod f g H K (c , d) =
+    htpy-map-prod (is-section-map-inv-is-equiv H) (is-section-map-inv-is-equiv K) (c , d)
 
-  isretr-map-inv-map-prod :
+  is-retraction-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     (map-inv-map-prod f g H K ∘ map-prod f g) ~ id
-  isretr-map-inv-map-prod f g H K (a , b) =
+  is-retraction-map-inv-map-prod f g H K (a , b) =
     htpy-map-prod
-      ( isretr-map-inv-is-equiv H)
-      ( isretr-map-inv-is-equiv K)
+      ( is-retraction-map-inv-is-equiv H)
+      ( is-retraction-map-inv-is-equiv K)
       ( a , b)
 
   is-equiv-map-prod :
@@ -113,8 +113,8 @@ module _
   is-equiv-map-prod f g H K =
     is-equiv-has-inverse
       ( map-inv-map-prod f g H K)
-      ( issec-map-inv-map-prod f g H K)
-      ( isretr-map-inv-map-prod f g H K)
+      ( is-section-map-inv-map-prod f g H K)
+      ( is-retraction-map-inv-map-prod f g H K)
 
   equiv-prod : (f : A ≃ C) (g : B ≃ D) → (A × B) ≃ (C × D)
   pr1 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) = map-prod f g
@@ -143,16 +143,16 @@ module _
   pr2 (pr1 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl))) = y
   pr2 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl)) = refl
 
-  issec-map-inv-compute-fib-map-prod :
+  is-section-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-compute-fib-map-prod t) ∘ (map-inv-compute-fib-map-prod t)) ~ id
-  issec-map-inv-compute-fib-map-prod (pair .(f x) .(g y))
+  is-section-map-inv-compute-fib-map-prod (pair .(f x) .(g y))
     (pair (pair x refl) (pair y refl)) = refl
 
-  isretr-map-inv-compute-fib-map-prod :
+  is-retraction-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-inv-compute-fib-map-prod t) ∘ (map-compute-fib-map-prod t)) ~ id
-  isretr-map-inv-compute-fib-map-prod .(map-prod f g (pair a b))
+  is-retraction-map-inv-compute-fib-map-prod .(map-prod f g (pair a b))
     (pair (pair a b) refl) = refl
 
   is-equiv-map-compute-fib-map-prod :
@@ -160,8 +160,8 @@ module _
   is-equiv-map-compute-fib-map-prod t =
     is-equiv-has-inverse
       ( map-inv-compute-fib-map-prod t)
-      ( issec-map-inv-compute-fib-map-prod t)
-      ( isretr-map-inv-compute-fib-map-prod t)
+      ( is-section-map-inv-compute-fib-map-prod t)
+      ( is-retraction-map-inv-compute-fib-map-prod t)
 
   compute-fib-map-prod :
     (t : C × D) → fib (map-prod f g) t ≃ ((fib f (pr1 t)) × (fib g (pr2 t)))

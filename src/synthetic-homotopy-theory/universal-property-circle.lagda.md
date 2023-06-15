@@ -126,13 +126,13 @@ module _
   pr2 (free-dependent-loop-htpy {l2} {P} {f} {g} (p , q)) =
     map-compute-dependent-identification-eq-value f g (loop-free-loop α) p p q
 
-  isretr-ind-circle :
+  is-retraction-ind-circle :
     ( ind-circle : {l : Level} → induction-principle-circle l α)
     { l2 : Level} (P : X → UU l2) →
     ( ( function-induction-principle-circle α ind-circle P) ∘
       ( ev-free-loop-Π α P)) ~
     ( id)
-  isretr-ind-circle ind-circle P f =
+  is-retraction-ind-circle ind-circle P f =
     eq-htpy
       ( function-induction-principle-circle α ind-circle
         ( eq-value
@@ -152,7 +152,7 @@ module _
       is-equiv-has-inverse
         ( function-induction-principle-circle α ind-circle P)
         ( compute-induction-principle-circle α ind-circle P)
-        ( isretr-ind-circle ind-circle P)
+        ( is-retraction-ind-circle ind-circle P)
 ```
 
 ### Uniqueness of the maps obtained from the universal property of the circle
