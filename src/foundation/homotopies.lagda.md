@@ -75,7 +75,7 @@ IND-HTPY :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → f ~ g → UU l3) → sec (ev-refl-htpy f C)
+  (C : (g : (x : A) → B x) → f ~ g → UU l3) → section (ev-refl-htpy f C)
 ```
 
 ```agda

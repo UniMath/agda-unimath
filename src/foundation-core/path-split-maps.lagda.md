@@ -39,7 +39,7 @@ module _
   where
 
   is-path-split : UU (l1 ⊔ l2)
-  is-path-split = sec f × ((x y : A) → sec (ap f {x = x} {y = y}))
+  is-path-split = section f × ((x y : A) → section (ap f {x = x} {y = y}))
 ```
 
 ## Properties

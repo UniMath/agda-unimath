@@ -102,7 +102,9 @@ module _
       eq-htpy (H ∙h K)
       ＝ eq-htpy (htpy-eq (eq-htpy H) ∙h htpy-eq (eq-htpy K))
         by
-        inv (ap eq-htpy (ap-binary _∙h_ (is-section-eq-htpy H) (is-section-eq-htpy K)))
+        inv
+          ( ap eq-htpy
+            ( ap-binary _∙h_ (is-section-eq-htpy H) (is-section-eq-htpy K)))
       ＝ eq-htpy (htpy-eq (eq-htpy H ∙ eq-htpy K))
         by
         ap eq-htpy (inv (htpy-eq-concat (eq-htpy H) (eq-htpy K)))

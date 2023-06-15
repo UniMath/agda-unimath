@@ -323,8 +323,8 @@ module _
   is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree :
     ( map-inv-compute-direct-predecessor-combinator-Directed-Tree ∘
       map-compute-direct-predecessor-combinator-Directed-Tree) ~ id
-  is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree (y , e) =
-
+  is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree
+    ( y , e) =
     refl
 
   is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree :
@@ -716,11 +716,11 @@ module _
         ( walk-Directed-Tree T x ∘ node-base-Directed-Tree T)) →
     node-combinator-fiber-base-Directed-Tree
       ( cases-map-inv-node-combinator-fiber-base-Directed-Tree x H) ＝ x
-  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree ._ (inl refl) =
-
+  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree ._
+    ( inl refl) =
     refl
-  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree x (inr (b , w)) =
-
+  cases-is-section-map-inv-node-combinator-fiber-base-Directed-Tree x
+    ( inr (b , w)) =
     refl
 
   is-section-map-inv-node-combinator-fiber-base-Directed-Tree :

@@ -256,10 +256,10 @@ module _
   where
 
   abstract
-    is-emb-sec-ap :
-      ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
-    is-emb-sec-ap sec-ap-f x y =
-      fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
+    is-emb-section-ap :
+      ((x y : A) → section (ap f {x = x} {y = y})) → is-emb f
+    is-emb-section-ap section-ap-f x y =
+      fundamental-theorem-id-section x (λ y → ap f {y = y}) (section-ap-f x) y
 ```
 
 ### If there is an equivalence `(f x = f y) ≃ (x = y)` that sends `refl` to `refl`, then f is an embedding

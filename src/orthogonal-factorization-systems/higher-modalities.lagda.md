@@ -283,7 +283,8 @@ module _
       ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○)
       ( ind-○ (○ X)
         ( λ x'' → unit-○ (map-inv-unit-higher-modality x'') ＝ x'')
-        ( unit-○ ∘ (ap unit-○ ∘ is-retraction-map-inv-unit-higher-modality)) x'')
+        ( unit-○ ∘ (ap unit-○ ∘ is-retraction-map-inv-unit-higher-modality))
+        ( x''))
 
   is-modal-operator-modality-type : is-modal unit-○ (○ X)
   pr1 (pr1 is-modal-operator-modality-type) = map-inv-unit-higher-modality

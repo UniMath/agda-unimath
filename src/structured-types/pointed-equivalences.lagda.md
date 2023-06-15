@@ -118,16 +118,16 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
   where
 
-  sec-pointed-map : UU (l1 ⊔ l2)
-  sec-pointed-map =
+  section-pointed-map : UU (l1 ⊔ l2)
+  section-pointed-map =
     Σ ( B →∗ A)
       ( λ g →
         htpy-pointed-map B B
           ( comp-pointed-map B A B f g)
           ( id-pointed-map))
 
-  retr-pointed-map : UU (l1 ⊔ l2)
-  retr-pointed-map =
+  retraction-pointed-map : UU (l1 ⊔ l2)
+  retraction-pointed-map =
     Σ ( B →∗ A)
       ( λ g →
         htpy-pointed-map A A
@@ -135,7 +135,7 @@ module _
           ( id-pointed-map))
 
   is-iso-pointed-map : UU (l1 ⊔ l2)
-  is-iso-pointed-map = sec-pointed-map × retr-pointed-map
+  is-iso-pointed-map = section-pointed-map × retraction-pointed-map
 ```
 
 ## Properties
@@ -176,9 +176,9 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
   where
 
-  is-contr-sec-is-equiv-pointed-map :
-    is-equiv-pointed-map A B f → is-contr (sec-pointed-map A B f)
-  is-contr-sec-is-equiv-pointed-map H =
+  is-contr-section-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f → is-contr (section-pointed-map A B f)
+  is-contr-section-is-equiv-pointed-map H =
     is-contr-total-Eq-structure
       ( λ g p (G : (map-pointed-map A B f ∘ g) ~ id) →
           Id
@@ -191,7 +191,7 @@ module _
             ( ( ( ap (map-pointed-map A B f) p) ∙
                 ( preserves-point-pointed-map A B f)) ∙
               ( refl)))
-      ( is-contr-sec-is-equiv H)
+      ( is-contr-section-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-section-map-inv-is-equiv H))
       ( is-contr-equiv
         ( fib
@@ -218,9 +218,9 @@ module _
           ( ( is-section-map-inv-is-equiv H (point-Pointed-Type B)) ∙
             ( inv (preserves-point-pointed-map A B f)))))
 
-  is-contr-retr-is-equiv-pointed-map :
-    is-equiv-pointed-map A B f → is-contr (retr-pointed-map A B f)
-  is-contr-retr-is-equiv-pointed-map H =
+  is-contr-retraction-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f → is-contr (retraction-pointed-map A B f)
+  is-contr-retraction-is-equiv-pointed-map H =
     is-contr-total-Eq-structure
       ( λ g p (G : (g ∘ map-pointed-map A B f) ~ id) →
         Id
@@ -233,7 +233,7 @@ module _
           ( ( ( ap g (preserves-point-pointed-map A B f)) ∙
               ( p)) ∙
             ( refl)))
-      ( is-contr-retr-is-equiv H)
+      ( is-contr-retraction-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-retraction-map-inv-is-equiv H))
       ( is-contr-equiv
         ( fib
@@ -269,8 +269,8 @@ module _
     is-equiv-pointed-map A B f → is-contr (is-iso-pointed-map A B f)
   is-contr-is-iso-is-equiv-pointed-map H =
     is-contr-prod
-      ( is-contr-sec-is-equiv-pointed-map H)
-      ( is-contr-retr-is-equiv-pointed-map H)
+      ( is-contr-section-is-equiv-pointed-map H)
+      ( is-contr-retraction-is-equiv-pointed-map H)
 
   is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map A B f → is-iso-pointed-map A B f

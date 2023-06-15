@@ -397,11 +397,11 @@ module _
   pr2 (pr1 extend-equiv-Maybe f) = refl
   pr2 extend-equiv-Maybe =
     is-equiv-has-inverse
-      ( λ f → pr1 (retr-equiv-coprod (pr1 f) id-equiv (p f)))
+      ( λ f → pr1 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))
       ( λ f →
         ( eq-pair-Σ
           ( inv
-            ( eq-htpy-equiv (pr2 (retr-equiv-coprod (pr1 f) id-equiv (p f)))))
+            ( eq-htpy-equiv (pr2 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))))
           ( eq-is-prop
             ( pr2
               ( Id-Prop

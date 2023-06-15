@@ -73,17 +73,17 @@ is-equiv-is-equiv-postcomp' :
   ((A : UU l) → is-equiv (postcomp A f)) → is-equiv f
 is-equiv-is-equiv-postcomp'
   {l} {X} {Y} f is-equiv-postcomp-f =
-  let sec-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
+  let section-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
   in
   is-equiv-has-inverse
-    ( pr1 sec-f)
-    ( htpy-eq (pr2 sec-f))
+    ( pr1 section-f)
+    ( htpy-eq (pr2 section-f))
     ( htpy-eq
       ( ap
         ( pr1)
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-equiv-postcomp-f X) f)
-          ( pair ((pr1 sec-f) ∘ f) (ap (λ t → t ∘ f) (pr2 sec-f)))
+          ( pair ((pr1 section-f) ∘ f) (ap (λ t → t ∘ f) (pr2 section-f)))
           ( pair id refl))))
 
 abstract

@@ -100,10 +100,8 @@ module _
 
   abstract
     is-contr-is-equiv-const : is-equiv (terminal-map {A = A}) → is-contr A
-    pr1 (is-contr-is-equiv-const (pair (pair g is-section) (pair h is-retraction))) =
-      h star
-    pr2 (is-contr-is-equiv-const (pair (pair g is-section) (pair h is-retraction))) =
-      is-retraction
+    pr1 (is-contr-is-equiv-const ((g , G) , (h , H))) = h star
+    pr2 (is-contr-is-equiv-const ((g , G) , (h , H))) = H
 ```
 
 ### The unit type is a proposition

@@ -135,7 +135,8 @@ module _
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-uem-○ (○ X) (λ _ → ○ X)) unit-○)
           ( unit-○ ∘ map-inv-unit-uniquely-eliminating-modality ,
-            eq-htpy (ap unit-○ ∘ (is-section-unit-uniquely-eliminating-modality)))
+            eq-htpy
+              ( ap unit-○ ∘ (is-section-unit-uniquely-eliminating-modality)))
           ( id , refl)))
 
   is-modal-uniquely-eliminating-modality : is-modal unit-○ (○ X)

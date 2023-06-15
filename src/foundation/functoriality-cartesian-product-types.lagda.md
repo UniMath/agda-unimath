@@ -96,7 +96,10 @@ module _
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     (map-prod f g ∘ map-inv-map-prod f g H K) ~ id
   is-section-map-inv-map-prod f g H K (c , d) =
-    htpy-map-prod (is-section-map-inv-is-equiv H) (is-section-map-inv-is-equiv K) (c , d)
+    htpy-map-prod
+      ( is-section-map-inv-is-equiv H)
+      ( is-section-map-inv-is-equiv K)
+      ( c , d)
 
   is-retraction-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
@@ -117,8 +120,8 @@ module _
       ( is-retraction-map-inv-map-prod f g H K)
 
   equiv-prod : (f : A ≃ C) (g : B ≃ D) → (A × B) ≃ (C × D)
-  pr1 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) = map-prod f g
-  pr2 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) =
+  pr1 (equiv-prod (f , is-equiv-f) (g , is-equiv-g)) = map-prod f g
+  pr2 (equiv-prod (f , is-equiv-f) (g , is-equiv-g)) =
     is-equiv-map-prod f g is-equiv-f is-equiv-g
 ```
 
@@ -146,14 +149,14 @@ module _
   is-section-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-compute-fib-map-prod t) ∘ (map-inv-compute-fib-map-prod t)) ~ id
-  is-section-map-inv-compute-fib-map-prod (pair .(f x) .(g y))
-    (pair (pair x refl) (pair y refl)) = refl
+  is-section-map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , (y , refl)) =
+    refl
 
   is-retraction-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-inv-compute-fib-map-prod t) ∘ (map-compute-fib-map-prod t)) ~ id
-  is-retraction-map-inv-compute-fib-map-prod .(map-prod f g (pair a b))
-    (pair (pair a b) refl) = refl
+  is-retraction-map-inv-compute-fib-map-prod ._ ((a , b) , refl) =
+    refl
 
   is-equiv-map-compute-fib-map-prod :
     (t : C × D) → is-equiv (map-compute-fib-map-prod t)
@@ -182,10 +185,10 @@ is-equiv-left-factor-is-equiv-map-prod f g d is-equiv-fg =
       ( fib f x)
       ( fib g d)
       ( is-contr-is-equiv'
-        ( fib (map-prod f g) (pair x d))
-        ( map-compute-fib-map-prod f g (pair x d))
-        ( is-equiv-map-compute-fib-map-prod f g (pair x d))
-        ( is-contr-map-is-equiv is-equiv-fg (pair x d))))
+        ( fib (map-prod f g) (x , d))
+        ( map-compute-fib-map-prod f g (x , d))
+        ( is-equiv-map-compute-fib-map-prod f g (x , d))
+        ( is-contr-map-is-equiv is-equiv-fg (x , d))))
 
 is-equiv-right-factor-is-equiv-map-prod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
@@ -197,10 +200,10 @@ is-equiv-right-factor-is-equiv-map-prod f g c is-equiv-fg =
       ( fib f c)
       ( fib g y)
       ( is-contr-is-equiv'
-        ( fib (map-prod f g) (pair c y))
-        ( map-compute-fib-map-prod f g (pair c y))
-        ( is-equiv-map-compute-fib-map-prod f g (pair c y))
-        ( is-contr-map-is-equiv is-equiv-fg (pair c y))))
+        ( fib (map-prod f g) (c , y))
+        ( map-compute-fib-map-prod f g (c , y))
+        ( is-equiv-map-compute-fib-map-prod f g (c , y))
+        ( is-contr-map-is-equiv is-equiv-fg (c , y))))
 ```
 
 ## See also

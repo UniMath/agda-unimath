@@ -56,25 +56,20 @@ map.
 
   inv-gap-fiberwise-prod :
     canonical-pullback (pr1 {B = P}) (pr1 {B = Q}) → Σ X (λ x → (P x) × (Q x))
-  pr1 (inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl))) = x
-  pr1
-    ( pr2
-      ( inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl)))) = p
-  pr2
-    ( pr2
-      ( inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl)))) = q
+  pr1 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl))) = x
+  pr1 (pr2 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)))) = p
+  pr2 (pr2 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)))) = q
 
   abstract
     is-section-inv-gap-fiberwise-prod :
       (gap-fiberwise-prod ∘ inv-gap-fiberwise-prod) ~ id
-    is-section-inv-gap-fiberwise-prod (pair (pair x p) (pair (pair .x q) refl)) =
-
+    is-section-inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)) =
       eq-pair-Σ refl (eq-pair-Σ refl refl)
 
   abstract
     is-retraction-inv-gap-fiberwise-prod :
       (inv-gap-fiberwise-prod ∘ gap-fiberwise-prod) ~ id
-    is-retraction-inv-gap-fiberwise-prod (pair x (pair p q)) = refl
+    is-retraction-inv-gap-fiberwise-prod (x , p , q) = refl
 
   abstract
     is-pullback-fiberwise-prod :
@@ -103,10 +98,9 @@ module _
   where
 
   cone-total-prod-fibers : cone f g (Σ X (λ x → (fib f x) × (fib g x)))
-  pr1 cone-total-prod-fibers (pair x (pair (pair a p) (pair b q))) = a
-  pr1 (pr2 cone-total-prod-fibers) (pair x (pair (pair a p) (pair b q))) = b
-  pr2 (pr2 cone-total-prod-fibers) (pair x (pair (pair a p) (pair b q))) =
-    p ∙ inv q
+  pr1 cone-total-prod-fibers (x , (a , p) , (b , q)) = a
+  pr1 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = b
+  pr2 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = p ∙ inv q
 
   gap-total-prod-fibers :
     Σ X (λ x → (fib f x) × (fib g x)) → canonical-pullback f g
@@ -114,24 +108,23 @@ module _
 
   inv-gap-total-prod-fibers :
     canonical-pullback f g → Σ X (λ x → (fib f x) × (fib g x))
-  pr1 (inv-gap-total-prod-fibers (pair a (pair b p))) = g b
-  pr1 (pr1 (pr2 (inv-gap-total-prod-fibers (pair a (pair b p))))) = a
-  pr2 (pr1 (pr2 (inv-gap-total-prod-fibers (pair a (pair b p))))) = p
-  pr1 (pr2 (pr2 (inv-gap-total-prod-fibers (pair a (pair b p))))) = b
-  pr2 (pr2 (pr2 (inv-gap-total-prod-fibers (pair a (pair b p))))) = refl
+  pr1 (inv-gap-total-prod-fibers (a , b , p)) = g b
+  pr1 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = a
+  pr2 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = p
+  pr1 (pr2 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = b
+  pr2 (pr2 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = refl
 
   abstract
     is-section-inv-gap-total-prod-fibers :
       (gap-total-prod-fibers ∘ inv-gap-total-prod-fibers) ~ id
-    is-section-inv-gap-total-prod-fibers (pair a (pair b p)) =
+    is-section-inv-gap-total-prod-fibers (a , b , p) =
       map-extensionality-canonical-pullback f g refl refl
         ( inv right-unit ∙ inv right-unit)
 
   abstract
     is-retraction-inv-gap-total-prod-fibers :
       (inv-gap-total-prod-fibers ∘ gap-total-prod-fibers) ~ id
-    is-retraction-inv-gap-total-prod-fibers
-      ( pair .(g b) (pair (pair a p) (pair b refl))) =
+    is-retraction-inv-gap-total-prod-fibers (.(g b) , (a , p) , (b , refl)) =
       eq-pair-Σ refl (eq-pair (eq-pair-Σ refl right-unit) refl)
 
   abstract

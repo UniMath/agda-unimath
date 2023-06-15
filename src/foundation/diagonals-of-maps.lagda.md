@@ -46,28 +46,22 @@ fib-ap-fib-diagonal-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   (t : canonical-pullback f f) →
   (fib (diagonal-map f) t) → (fib (ap f) (pr2 (pr2 t)))
-pr1 (fib-ap-fib-diagonal-map f .(diagonal-map f z) (pair z refl)) = refl
-pr2 (fib-ap-fib-diagonal-map f .(diagonal-map f z) (pair z refl)) = refl
+pr1 (fib-ap-fib-diagonal-map f .(diagonal-map f z) (z , refl)) = refl
+pr2 (fib-ap-fib-diagonal-map f .(diagonal-map f z) (z , refl)) = refl
 
 fib-diagonal-map-fib-ap :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   (t : canonical-pullback f f) →
   (fib (ap f) (pr2 (pr2 t))) → (fib (diagonal-map f) t)
-pr1
-  ( fib-diagonal-map-fib-ap f
-    ( pair x (pair .x .(ap f refl)))
-    ( pair refl refl)) = x
-pr2 (fib-diagonal-map-fib-ap f
-  ( pair x (pair .x .(ap f refl)))
-  ( pair refl refl)) = refl
+pr1 (fib-diagonal-map-fib-ap f (x , .x , .(ap f refl)) (refl , refl)) = x
+pr2 (fib-diagonal-map-fib-ap f (x , .x , .(ap f refl)) (refl , refl)) = refl
 
 abstract
   is-section-fib-diagonal-map-fib-ap :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
     (t : canonical-pullback f f) →
     ((fib-ap-fib-diagonal-map f t) ∘ (fib-diagonal-map-fib-ap f t)) ~ id
-  is-section-fib-diagonal-map-fib-ap f (pair x (pair .x .refl)) (pair refl refl) =
-
+  is-section-fib-diagonal-map-fib-ap f (x , .x , .refl) (refl , refl) =
     refl
 
 abstract
@@ -75,8 +69,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
     (t : canonical-pullback f f) →
     ((fib-diagonal-map-fib-ap f t) ∘ (fib-ap-fib-diagonal-map f t)) ~ id
-  is-retraction-fib-diagonal-map-fib-ap f .(pair x (pair x refl)) (pair x refl) =
-
+  is-retraction-fib-diagonal-map-fib-ap f .(x , x , refl) (x , refl) =
     refl
 
 abstract
@@ -98,7 +91,7 @@ abstract
   is-trunc-diagonal-map-is-trunc-map :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
     is-trunc-map (succ-𝕋 k) f → is-trunc-map k (diagonal-map f)
-  is-trunc-diagonal-map-is-trunc-map k f is-trunc-f (pair x (pair y p)) =
+  is-trunc-diagonal-map-is-trunc-map k f is-trunc-f (x , y , p) =
     is-trunc-is-equiv k (fib (ap f) p)
       ( fib-ap-fib-diagonal-map f (triple x y p))
       ( is-equiv-fib-ap-fib-diagonal-map f (triple x y p))
@@ -108,12 +101,11 @@ abstract
   is-trunc-map-is-trunc-diagonal-map :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B) →
     is-trunc-map k (diagonal-map f) → is-trunc-map (succ-𝕋 k) f
-  is-trunc-map-is-trunc-diagonal-map
-    k f is-trunc-δ b (pair x p) (pair x' p') =
+  is-trunc-map-is-trunc-diagonal-map k f is-trunc-δ b (x , p) (x' , p') =
     is-trunc-is-equiv k
       ( fib (ap f) (p ∙ (inv p')))
-      ( fib-ap-eq-fib f (pair x p) (pair x' p'))
-      ( is-equiv-fib-ap-eq-fib f (pair x p) (pair x' p'))
+      ( fib-ap-eq-fib f (x , p) (x' , p'))
+      ( is-equiv-fib-ap-eq-fib f (x , p) (x' , p'))
       ( is-trunc-is-equiv' k
         ( fib (diagonal-map f) (triple x x' (p ∙ (inv p'))))
         ( fib-ap-fib-diagonal-map f (triple x x' (p ∙ (inv p'))))

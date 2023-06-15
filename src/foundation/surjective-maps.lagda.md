@@ -208,7 +208,7 @@ module _
 abstract
   is-surjective-has-section :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    sec f → is-surjective f
+    section f → is-surjective f
   is-surjective-has-section (pair g G) b = unit-trunc-Prop (pair (g b) (G b))
 ```
 

@@ -97,7 +97,8 @@ module _
     ap
       ( λ f → listed-vec-functional-vec n (f ∘ (map-equiv b)))
       ( inv
-        ( is-retraction-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv a)))
+        ( is-retraction-functional-vec-vec n
+          ( functional-vec-vec n v ∘ map-equiv a)))
 
   compute-swap-two-last-elements-transposition-Fin-permute-vec :
     (n : ℕ)
@@ -176,7 +177,8 @@ module _
         ( x)
         ( tr
           ( λ p → in-functional-vec n x p)
-          ( is-retraction-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t))
+          ( is-retraction-functional-vec-vec n
+            ( functional-vec-vec n v ∘ map-equiv t))
           ( is-in-functional-vec-is-in-vec n (permute-vec n v t) x I)))
 
   is-in-permute-functional-vec-is-in-functional-vec :
@@ -196,7 +198,8 @@ module _
       ( tr
         ( λ p → in-functional-vec n x p)
         ( inv
-          ( is-retraction-functional-vec-vec n (functional-vec-vec n v ∘ map-equiv t)))
+          ( is-retraction-functional-vec-vec n
+            ( functional-vec-vec n v ∘ map-equiv t)))
         ( is-in-permute-functional-vec-is-in-functional-vec
           ( n)
           ( functional-vec-vec n v)
@@ -358,7 +361,7 @@ module _
               ( n)
               ( list-standard-transpositions-permutation-Fin n f)}
           {e' = f}
-          ( retr-permutation-list-standard-transpositions-Fin n f))))
+          ( retraction-permutation-list-standard-transpositions-Fin n f))))
 ```
 
 ### `map-vec` of the permutation of a vector

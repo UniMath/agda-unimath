@@ -43,7 +43,7 @@ module _
   where
 
   is-equiv : (A → B) → UU (l1 ⊔ l2)
-  is-equiv f = sec f × retr f
+  is-equiv f = section f × retraction f
 
 _≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = Σ (A → B) is-equiv
@@ -56,24 +56,24 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  sec-is-equiv : is-equiv f → sec f
-  sec-is-equiv = pr1
+  section-is-equiv : is-equiv f → section f
+  section-is-equiv = pr1
 
-  retr-is-equiv : is-equiv f → retr f
-  retr-is-equiv = pr2
+  retraction-is-equiv : is-equiv f → retraction f
+  retraction-is-equiv = pr2
 
-  map-sec-is-equiv : is-equiv f → B → A
-  map-sec-is-equiv = pr1 ∘ pr1
+  map-section-is-equiv : is-equiv f → B → A
+  map-section-is-equiv = pr1 ∘ pr1
 
-  map-retr-is-equiv : is-equiv f → B → A
-  map-retr-is-equiv = pr1 ∘ pr2
+  map-retraction-is-equiv : is-equiv f → B → A
+  map-retraction-is-equiv = pr1 ∘ pr2
 
   is-retraction-is-equiv :
-    (is-equiv-f : is-equiv f) → (f ∘ map-sec-is-equiv is-equiv-f) ~ id
+    (is-equiv-f : is-equiv f) → (f ∘ map-section-is-equiv is-equiv-f) ~ id
   is-retraction-is-equiv is-equiv-f = pr2 (pr1 is-equiv-f)
 
   is-section-is-equiv :
-    (is-equiv-f : is-equiv f) → (map-retr-is-equiv is-equiv-f ∘ f) ~ id
+    (is-equiv-f : is-equiv f) → (map-retraction-is-equiv is-equiv-f ∘ f) ~ id
   is-section-is-equiv is-equiv-f = pr2 (pr2 is-equiv-f)
 
 module _
@@ -86,18 +86,18 @@ module _
   is-equiv-map-equiv : (e : A ≃ B) → is-equiv (map-equiv e)
   is-equiv-map-equiv e = pr2 e
 
-  retr-map-equiv : (e : A ≃ B) → retr (map-equiv e)
-  retr-map-equiv = retr-is-equiv ∘ is-equiv-map-equiv
+  retraction-map-equiv : (e : A ≃ B) → retraction (map-equiv e)
+  retraction-map-equiv = retraction-is-equiv ∘ is-equiv-map-equiv
 
-  sec-map-equiv : (e : A ≃ B) → sec (map-equiv e)
-  sec-map-equiv = sec-is-equiv ∘ is-equiv-map-equiv
+  section-map-equiv : (e : A ≃ B) → section (map-equiv e)
+  section-map-equiv = section-is-equiv ∘ is-equiv-map-equiv
 
   is-retraction-map-equiv :
-    (e : A ≃ B) → (map-equiv e ∘ map-sec-is-equiv (is-equiv-map-equiv e)) ~ id
+    (e : A ≃ B) → (map-equiv e ∘ map-section-is-equiv (is-equiv-map-equiv e)) ~ id
   is-retraction-map-equiv = is-retraction-is-equiv ∘ is-equiv-map-equiv
 
   is-section-map-equiv :
-    (e : A ≃ B) → (map-retr-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
+    (e : A ≃ B) → (map-retraction-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
   is-section-map-equiv = is-section-is-equiv ∘ is-equiv-map-equiv
 ```
 
@@ -257,10 +257,10 @@ module _
 
   abstract
     is-equiv-comp-htpy : is-equiv h → is-equiv g → is-equiv f
-    pr1 (is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g)) =
-      section-comp-htpy f g h H sec-h sec-g
-    pr2 (is-equiv-comp-htpy (pair sec-h retr-h) (pair sec-g retr-g)) =
-      retraction-comp-htpy f g h H retr-g retr-h
+    pr1 (is-equiv-comp-htpy (pair section-h retraction-h) (pair section-g retraction-g)) =
+      section-comp-htpy f g h H section-h section-g
+    pr2 (is-equiv-comp-htpy (pair section-h retraction-h) (pair section-g retraction-g)) =
+      retraction-comp-htpy f g h H retraction-g retraction-h
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -269,10 +269,10 @@ module _
   abstract
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    pr1 (is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g)) =
-      section-comp g h sec-h sec-g
-    pr2 (is-equiv-comp g h (pair sec-h retr-h) (pair sec-g retr-g)) =
-      retraction-comp g h retr-g retr-h
+    pr1 (is-equiv-comp g h (pair section-h retraction-h) (pair section-g retraction-g)) =
+      section-comp g h section-h section-g
+    pr2 (is-equiv-comp g h (pair section-h retraction-h) (pair section-g retraction-g)) =
+      retraction-comp g h retraction-g retraction-h
 
   equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
@@ -294,13 +294,13 @@ module _
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-equiv f → is-equiv h → is-equiv g
     is-equiv-left-factor-htpy f g h H
-      ( pair sec-f retr-f)
-      ( pair (pair sh is-section-sh) retr-h) =
+      ( pair section-f retraction-f)
+      ( pair (pair sh is-section-sh) retraction-h) =
         ( pair
-          ( section-left-factor-htpy f g h H sec-f)
+          ( section-left-factor-htpy f g h H section-f)
           ( retraction-comp-htpy g f sh
             ( triangle-section f g h H (pair sh is-section-sh))
-            ( retr-f)
+            ( retraction-f)
             ( pair h is-section-sh)))
 
   is-equiv-left-factor :
@@ -322,14 +322,14 @@ module _
       (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
       is-equiv g → is-equiv f → is-equiv h
     is-equiv-right-factor-htpy f g h H
-        ( pair sec-g (pair rg is-retraction-rg))
-        ( pair sec-f retr-f) =
+        ( pair section-g (pair rg is-retraction-rg))
+        ( pair section-f retraction-f) =
           ( pair
             ( section-comp-htpy h rg f
               ( triangle-retraction f g h H (pair rg is-retraction-rg))
-              ( sec-f)
+              ( section-f)
               ( pair g is-retraction-rg))
-            ( retraction-right-factor-htpy f g h H retr-f))
+            ( retraction-right-factor-htpy f g h H retraction-f))
 
   is-equiv-right-factor :
     (g : B → X) (h : A → B) →
@@ -409,16 +409,16 @@ module _
   where
 
   abstract
-    is-equiv-sec-is-equiv :
-      ( sec-f : sec f) → is-equiv (pr1 sec-f) → is-equiv f
-    is-equiv-sec-is-equiv (pair g is-section-g) is-equiv-sec-f =
+    is-equiv-section-is-equiv :
+      ( section-f : section f) → is-equiv (pr1 section-f) → is-equiv f
+    is-equiv-section-is-equiv (pair g is-section-g) is-equiv-section-f =
       is-equiv-htpy h
-        ( ( f ·l (inv-htpy (is-section-map-inv-is-equiv is-equiv-sec-f))) ∙h
+        ( ( f ·l (inv-htpy (is-section-map-inv-is-equiv is-equiv-section-f))) ∙h
           ( htpy-right-whisk is-section-g h))
-        ( is-equiv-map-inv-is-equiv is-equiv-sec-f)
+        ( is-equiv-map-inv-is-equiv is-equiv-section-f)
       where
       h : A → B
-      h = map-inv-is-equiv is-equiv-sec-f
+      h = map-inv-is-equiv is-equiv-section-f
 ```
 
 ### Equivalences in commuting squares

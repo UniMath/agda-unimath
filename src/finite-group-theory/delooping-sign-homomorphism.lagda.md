@@ -855,7 +855,7 @@ module _
                 ( hom-symmetric-group-loop-group-Set
                   ( quotient-set-Fin (n +ℕ 2))))
               ( inv
-                ( is-retr-hom-inv-symmetric-group-loop-group-Set
+                ( is-retraction-hom-inv-symmetric-group-loop-group-Set
                   ( quotient-set-Fin (n +ℕ 2))))
               ( ap
                 ( equivalence-class ∘ R (n +ℕ 2))
@@ -930,7 +930,7 @@ module _
                               ( raise-Fin-Set l1 (n +ℕ 2))))
                           ( id-hom-Group
                             ( symmetric-Group (raise-Fin-Set l1 (n +ℕ 2))))
-                          ( is-sec-hom-inv-symmetric-group-loop-group-Set
+                          ( is-section-hom-inv-symmetric-group-loop-group-Set
                             ( raise-Fin-Set l1 (n +ℕ 2)))
                           ( inv-equiv f) ∙
                           ( ap inv-equiv (inv q) ∙

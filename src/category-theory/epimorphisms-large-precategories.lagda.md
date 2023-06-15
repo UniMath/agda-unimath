@@ -72,7 +72,7 @@ module _
           ( right-unit-law-comp-hom-Large-Precategory C g)) ∙
           ( ( ap
             ( λ h' → comp-hom-Large-Precategory C g h')
-            ( inv (is-sec-hom-inv-iso-Large-Precategory C X Y f))) ∙
+            ( inv (is-section-hom-inv-iso-Large-Precategory C X Y f))) ∙
             ( ( inv
               ( associative-comp-hom-Large-Precategory C
                 ( g)
@@ -91,7 +91,7 @@ module _
                   ( hom-inv-iso-Large-Precategory C X Y f)) ∙
                   ( ( ap
                     ( comp-hom-Large-Precategory C h)
-                    ( is-sec-hom-inv-iso-Large-Precategory C X Y f)) ∙
+                    ( is-section-hom-inv-iso-Large-Precategory C X Y f)) ∙
                     ( right-unit-law-comp-hom-Large-Precategory C h)))))))
       ( λ p →
         eq-is-prop

@@ -100,7 +100,8 @@ module _
         ( p)
         ( inv (is-section-map-inv-equiv e y))
         ( is-section-map-inv-equiv e y)) ∙
-      ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙ right-unit))
+      ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙
+        ( right-unit)))
 
   map-eq-transpose-equiv' :
     {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
@@ -186,19 +187,19 @@ abstract
       is-equiv (precomp f (pr1 C))) →
     is-equiv f
   is-equiv-is-equiv-precomp-subuniverse α P A B f is-equiv-precomp-f =
-    let retr-f = center (is-contr-map-is-equiv (is-equiv-precomp-f _ A) id) in
+    let retraction-f = center (is-contr-map-is-equiv (is-equiv-precomp-f _ A) id) in
     is-equiv-has-inverse
-      ( pr1 retr-f)
+      ( pr1 retraction-f)
       ( htpy-eq
         ( ap
           ( pr1)
           ( eq-is-contr'
             ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
             ( pair
-              ( f ∘ (pr1 retr-f))
-              ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retr-f)))
+              ( f ∘ (pr1 retraction-f))
+              ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retraction-f)))
             ( pair id refl))))
-      ( htpy-eq (pr2 retr-f))
+      ( htpy-eq (pr2 retraction-f))
 ```
 
 Now we prove the usual statement, without the subuniverse
@@ -257,8 +258,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-sec-is-equiv : {f : A → B} → is-equiv f → is-contr (sec f)
-  is-contr-sec-is-equiv {f} is-equiv-f =
+  is-contr-section-is-equiv : {f : A → B} → is-equiv f → is-contr (section f)
+  is-contr-section-is-equiv {f} is-equiv-f =
     is-contr-equiv'
       ( (b : B) → fib f b)
       ( distributive-Π-Σ)
@@ -272,8 +273,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-retr-is-equiv : {f : A → B} → is-equiv f → is-contr (retr f)
-  is-contr-retr-is-equiv {f} is-equiv-f =
+  is-contr-retraction-is-equiv : {f : A → B} → is-equiv f → is-contr (retraction f)
+  is-contr-retraction-is-equiv {f} is-equiv-f =
     is-contr-is-equiv'
       ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
       ( tot (λ h → htpy-eq))
@@ -292,8 +293,8 @@ module _
   is-contr-is-equiv-is-equiv : {f : A → B} → is-equiv f → is-contr (is-equiv f)
   is-contr-is-equiv-is-equiv is-equiv-f =
     is-contr-prod
-      ( is-contr-sec-is-equiv is-equiv-f)
-      ( is-contr-retr-is-equiv is-equiv-f)
+      ( is-contr-section-is-equiv is-equiv-f)
+      ( is-contr-retraction-is-equiv is-equiv-f)
 
   abstract
     is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (H ＝ K)

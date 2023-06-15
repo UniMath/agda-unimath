@@ -219,8 +219,8 @@ module _
   is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
     ( map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse ∘
       map-equiv-Σ-extension-cauchy-composition-unit-subuniverse) ~ id
-  is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse x =
-
+  is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
+    x =
     eq-pair
       ( eq-is-prop (is-prop-type-Prop (P X)))
       ( eq-is-prop is-property-is-contr)

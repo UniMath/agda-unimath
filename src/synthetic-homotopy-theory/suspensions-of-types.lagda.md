@@ -237,7 +237,9 @@ module _
       ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
       ( (ap
         ( ap pr1)
-        ( is-retraction-map-inv-equiv (extensionality-suspension-structure c c) refl)))
+        ( is-retraction-map-inv-equiv
+          ( extensionality-suspension-structure c c)
+          ( refl))))
 
   ap-pr1∘pr2-eq-htpy-suspension-structure :
     (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
@@ -248,7 +250,9 @@ module _
         ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
       ( ap
         ( ap (pr1 ∘ pr2))
-        ( is-retraction-map-inv-equiv (extensionality-suspension-structure c c) refl))
+        ( is-retraction-map-inv-equiv
+          ( extensionality-suspension-structure c c)
+          ( refl)))
 ```
 
 ### The universal property of the suspension as a pushout
@@ -380,7 +384,9 @@ module _
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
   up-suspension-S-susp Z c =
-    pr1 (pr2 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c)))
+    pr1
+      ( pr2
+        ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
 
   up-suspension-merid-susp :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
@@ -388,7 +394,9 @@ module _
       ( up-suspension-S-susp Z c)) ＝
     ( ( up-suspension-N-susp Z c) ∙ ( pr2 (pr2 c)) x)
   up-suspension-merid-susp Z c =
-    pr2 (pr2 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c)))
+    pr2
+      ( pr2
+        ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
 
   ev-suspension-up-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →

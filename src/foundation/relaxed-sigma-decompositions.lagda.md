@@ -796,7 +796,9 @@ module _
           ( map-equiv ∘ t)
           ( map-inv-equiv ∘ t)
           ( map-equiv s x)) ∙
-        ( ( tot-htpy (λ z → is-retraction-map-inv-equiv (t z)) (map-equiv s x)) ∙
+        ( ( tot-htpy
+            ( λ z → is-retraction-map-inv-equiv (t z))
+            ( map-equiv s x)) ∙
           ( tot-id
             ( λ z → cotype-fst-displayed-Relaxed-Σ-Decomposition disp-D z)
             ( map-equiv s x))))

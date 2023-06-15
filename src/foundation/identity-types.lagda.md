@@ -185,9 +185,10 @@ module _
     {x y z : A} (r : y ＝ z) {p q : x ＝ y} (s : (p ∙ r) ＝ (q ∙ r)) →
     ap (concat' x r) (is-injective-concat' r s) ＝ s
   is-section-is-injective-concat' refl s =
-    ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α) ∙
-    ( ( cases-is-section-is-injective-concat' (inv right-unit ∙ (s ∙ right-unit))) ∙
-      α)
+    ( ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α)) ∙
+    ( ( cases-is-section-is-injective-concat'
+        ( inv right-unit ∙ (s ∙ right-unit))) ∙
+      ( α))
     where
     α :
       ( ( right-unit) ∙

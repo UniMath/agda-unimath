@@ -201,7 +201,9 @@ equiv-set-quotient-vector (succ-ℕ n) A R =
   pr2 (pr1 (pr2 (pr2 lemma)) (qa0 , qa)) =
     map-inv-equiv (equiv-set-quotient-vector n _ _) qa
   pr2 (pr2 (pr2 lemma)) (qa0 , qa) =
-    eq-pair refl (is-retraction-map-inv-equiv (equiv-set-quotient-vector n _ _) qa)
+    eq-pair
+      ( refl)
+      ( is-retraction-map-inv-equiv (equiv-set-quotient-vector n _ _) qa)
 
 map-equiv-equiv-set-quotient-vector-quotient-map :
   { l1 l2 : Level}
@@ -301,7 +303,7 @@ is-retraction-inv-precomp-vector-set-quotient :
   ( A : functional-vec (UU l1) n)
   ( R : (i : Fin n) → Eq-Rel l2 (A i)) →
   ( X : Set l) →
-  ( retr
+  ( retraction
     ( precomp-Set-Quotient
       ( all-sim-Eq-Rel n A R)
       ( set-quotient-vector-Set n A R)

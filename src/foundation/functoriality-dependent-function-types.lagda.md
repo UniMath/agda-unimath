@@ -104,7 +104,8 @@ module _
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
             ( is-equiv-map-equiv
               ( f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
-            ( is-equiv-tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
+            ( is-equiv-tr B
+              ( is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
 
   equiv-Π : ((a' : A') → B' a') ≃ ((a : A) → B a)
   pr1 equiv-Π = map-equiv-Π

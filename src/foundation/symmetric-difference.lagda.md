@@ -96,7 +96,7 @@ module _
     right-cases-equiv-symmetric-difference P Q x q
       ( is-decidable-Decidable-Prop (P x))
   pr2 (equiv-symmetric-difference P Q) =
-    is-equiv-has-inverse inv retr sec
+    is-equiv-has-inverse inv retraction sec
     where
     inv :
       ( type-decidable-subtype (symmetric-difference-decidable-subtype P Q)) +
@@ -107,59 +107,59 @@ module _
     inv (inl (pair x (inr (pair q np)))) = inr (pair x q)
     inv (inr (inl (pair x (pair p q)))) = inl (pair x p)
     inv (inr (inr (pair x (pair p q)))) = inr (pair x q)
-    retr :
+    retraction :
       (C :
         ( type-decidable-subtype (symmetric-difference-decidable-subtype P Q)) +
         ( ( type-decidable-subtype (intersection-decidable-subtype P Q)) +
           ( type-decidable-subtype (intersection-decidable-subtype P Q)))) →
       ((pr1 (equiv-symmetric-difference P Q)) ∘ inv) C ＝ C
-    retr (inl (pair x (inl (pair p nq)))) =
+    retraction (inl (pair x (inl (pair p nq)))) =
       tr
         ( λ q' →
           ( left-cases-equiv-symmetric-difference P Q x p q') ＝
           ( inl (pair x (inl (pair p nq)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-Decidable-Prop (Q x))))
         ( refl)
-    retr (inl (pair x (inr (pair q np)))) =
+    retraction (inl (pair x (inr (pair q np)))) =
       tr
         ( λ p' →
           ( right-cases-equiv-symmetric-difference P Q x q p') ＝
           ( inl (pair x (inr (pair q np)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-Decidable-Prop (P x))))
         ( refl)
-    retr (inr (inl (pair x (pair p q)))) =
+    retraction (inr (inl (pair x (pair p q)))) =
       tr
         ( λ q' →
           (left-cases-equiv-symmetric-difference P Q x p q') ＝
           (inr (inl (pair x (pair p q)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-Decidable-Prop (Q x))))
         ( refl)
-    retr (inr (inr (pair x (pair p q)))) =
+    retraction (inr (inr (pair x (pair p q)))) =
       tr
         ( λ p' →
           (right-cases-equiv-symmetric-difference P Q x q p') ＝
           (inr (inr (pair x (pair p q)))))
         ( eq-is-prop (is-prop-is-decidable (is-prop-type-Decidable-Prop (P x))))
         ( refl)
-    left-cases-sec :
+    left-cases-section :
       (x : X)
       (p : type-Decidable-Prop (P x))
       (q : is-decidable (type-Decidable-Prop (Q x))) →
       inv (left-cases-equiv-symmetric-difference P Q x p q) ＝ inl (pair x p)
-    left-cases-sec x p (inl q) = refl
-    left-cases-sec x p (inr nq) = refl
-    right-cases-sec :
+    left-cases-section x p (inl q) = refl
+    left-cases-section x p (inr nq) = refl
+    right-cases-section :
       (x : X)
       (q : type-Decidable-Prop (Q x))
       (p : is-decidable (type-Decidable-Prop (P x))) →
       inv (right-cases-equiv-symmetric-difference P Q x q p) ＝ inr (pair x q)
-    right-cases-sec x q (inl p) = refl
-    right-cases-sec x q (inr np) = refl
-    sec :
+    right-cases-section x q (inl p) = refl
+    right-cases-section x q (inr np) = refl
+    section :
       (C : type-decidable-subtype P + type-decidable-subtype Q) →
       (inv ∘ pr1 (equiv-symmetric-difference P Q)) C ＝ C
-    sec (inl (pair x p)) =
-      left-cases-sec x p (is-decidable-Decidable-Prop (Q x))
-    sec (inr (pair x q)) =
-      right-cases-sec x q (is-decidable-Decidable-Prop (P x))
+    section (inl (pair x p)) =
+      left-cases-section x p (is-decidable-Decidable-Prop (Q x))
+    section (inr (pair x q)) =
+      right-cases-section x q (is-decidable-Decidable-Prop (P x))
 ```

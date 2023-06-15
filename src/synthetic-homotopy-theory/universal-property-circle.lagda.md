@@ -75,7 +75,7 @@ module _
   where
 
   induction-principle-circle : UU ((lsuc l2) ⊔ l1)
-  induction-principle-circle = (P : X → UU l2) → sec (ev-free-loop-Π α P)
+  induction-principle-circle = (P : X → UU l2) → section (ev-free-loop-Π α P)
 
 module _
   {l1 l2 : Level} {X : UU l1} (α : free-loop X)

@@ -125,7 +125,7 @@ module _
     is-injective-map-inv-equiv e =
       is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
-  is-equiv-is-injective : {f : A → B} → sec f → is-injective f → is-equiv f
+  is-equiv-is-injective : {f : A → B} → section f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =
     is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```

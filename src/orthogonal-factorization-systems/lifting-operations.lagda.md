@@ -55,7 +55,7 @@ module _
   where
 
   diagonal-lift : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  diagonal-lift = sec (pullback-hom f g)
+  diagonal-lift = section (pullback-hom f g)
 
   _⧄_ = diagonal-lift -- This symbol doesn't have an input sequence :(
 

@@ -22,8 +22,8 @@ open import foundation.universe-levels
 If `i : A → ℕ` has a retraction, then `i` is a decidable map.
 
 ```agda
-is-decidable-map-retr-ℕ :
-  {l1 : Level} {A : UU l1} (i : A → ℕ) → retr i → is-decidable-map i
-is-decidable-map-retr-ℕ =
-  is-decidable-map-retr has-decidable-equality-ℕ
+is-decidable-map-retraction-ℕ :
+  {l1 : Level} {A : UU l1} (i : A → ℕ) → retraction i → is-decidable-map i
+is-decidable-map-retraction-ℕ =
+  is-decidable-map-retraction has-decidable-equality-ℕ
 ```

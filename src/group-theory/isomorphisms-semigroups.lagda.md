@@ -73,7 +73,7 @@ module _
         ( hom-inv-iso-Semigroup f))
       ( id-hom-Semigroup H)
   is-section-hom-inv-iso-Semigroup =
-    is-sec-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+    is-section-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 
   is-retraction-hom-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
@@ -83,7 +83,7 @@ module _
         ( hom-iso-Semigroup f))
       ( id-hom-Semigroup G)
   is-retraction-hom-inv-iso-Semigroup =
-    is-retr-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+    is-retraction-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
 ```
 
 ## Properties

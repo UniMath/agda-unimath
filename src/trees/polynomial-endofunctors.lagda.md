@@ -99,7 +99,8 @@ module _
     ( ( eq-Eq-type-polynomial-endofunctor x y) ∘
       ( Eq-type-polynomial-endofunctor-eq x y)) ~ id
   is-retraction-eq-Eq-type-polynomial-endofunctor x y =
-    is-retraction-map-inv-is-equiv (is-equiv-Eq-type-polynomial-endofunctor-eq x y)
+    is-retraction-map-inv-is-equiv
+      ( is-equiv-Eq-type-polynomial-endofunctor-eq x y)
 
   coh-refl-eq-Eq-type-polynomial-endofunctor :
     (x : type-polynomial-endofunctor A B X) →

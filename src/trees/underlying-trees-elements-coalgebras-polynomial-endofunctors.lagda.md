@@ -620,7 +620,8 @@ module _
             ( node-inclusion-element-coalgebra H y))
         ( node-inclusion-element-coalgebra H)
         ( λ z → edge-inclusion-element-coalgebra H))
-      ( is-section-map-inv-enrichment-directed-tree-element-coalgebra u y (x , e))
+      ( is-section-map-inv-enrichment-directed-tree-element-coalgebra u y
+        ( x , e))
 
   is-retraction-map-inv-enrichment-directed-tree-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)

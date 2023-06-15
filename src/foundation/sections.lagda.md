@@ -47,9 +47,9 @@ module _
     (b : (x : A) → B x) → (pr1 ∘ map-section b) ~ id
   htpy-map-section b a = refl
 
-  sec-dependent-function : ((x : A) → B x) → sec (pr1 {B = B})
-  pr1 (sec-dependent-function b) = map-section b
-  pr2 (sec-dependent-function b) = htpy-map-section b
+  section-dependent-function : ((x : A) → B x) → section (pr1 {B = B})
+  pr1 (section-dependent-function b) = map-section b
+  pr2 (section-dependent-function b) = htpy-map-section b
 ```
 
 ### Any section of a type family is an equivalence if and only if each type in the family is contractible
@@ -106,8 +106,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  equiv-Π-sec-pr1 : sec (pr1 {B = B}) ≃ ((x : A) → B x)
-  equiv-Π-sec-pr1 =
+  equiv-Π-section-pr1 : section (pr1 {B = B}) ≃ ((x : A) → B x)
+  equiv-Π-section-pr1 =
     ( ( left-unit-law-Σ-is-contr
         ( is-contr-equiv
           ( Π-total-fam (λ x y → y ＝ x))
@@ -128,11 +128,11 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  htpy-sec : (s t : sec f) → UU (l1 ⊔ l2)
-  htpy-sec s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
+  htpy-section : (s t : section f) → UU (l1 ⊔ l2)
+  htpy-section s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
 
-  extensionality-sec : (s t : sec f) → (s ＝ t) ≃ htpy-sec s t
-  extensionality-sec (pair s H) =
+  extensionality-section : (s t : section f) → (s ＝ t) ≃ htpy-section s t
+  extensionality-section (pair s H) =
     extensionality-Σ
       ( λ {s'} H' K → H ~ ((f ·l K) ∙h H'))
       ( refl-htpy)
@@ -140,11 +140,11 @@ module _
       ( λ s' → equiv-funext)
       ( λ H' → equiv-funext)
 
-  eq-htpy-sec :
-    (s t : sec f)
+  eq-htpy-section :
+    (s t : section f)
     (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) → s ＝ t
-  eq-htpy-sec s t H K =
-    map-inv-equiv (extensionality-sec s t) (pair H K)
+  eq-htpy-section s t H K =
+    map-inv-equiv (extensionality-section s t) (pair H K)
 ```
 
 ### If the right factor of a composite has a section, then the type of sections of the left factor is a retract of the type of sections of the composite
@@ -152,8 +152,8 @@ module _
 ```agda
 is-retraction-section-comp-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (sec-h : sec h) →
-  (section-left-factor-htpy f g h H ∘ section-comp-htpy f g h H sec-h) ~ id
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (section-h : section h) →
+  (section-left-factor-htpy f g h H ∘ section-comp-htpy f g h H section-h) ~ id
 is-retraction-section-comp-htpy f g h H (pair k K) (pair l L) =
   eq-htpy-sec
     ( ( section-left-factor-htpy f g h H ∘
@@ -171,14 +171,14 @@ is-retraction-section-comp-htpy f g h H (pair k K) (pair l L) =
         ( (g ·l (K ·r l)) ∙h L)
         ( left-inv-htpy (H ·r (k ∘ l)))))
 
-sec-left-factor-retract-of-sec-composition :
+section-left-factor-retract-of-section-composition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-  sec h → (sec g) retract-of (sec f)
-pr1 (sec-left-factor-retract-of-sec-composition f g h H sec-h) =
-  section-comp-htpy f g h H sec-h
-pr1 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
+  section h → (section g) retract-of (section f)
+pr1 (section-left-factor-retract-of-section-composition f g h H section-h) =
+  section-comp-htpy f g h H section-h
+pr1 (pr2 (section-left-factor-retract-of-section-composition f g h H section-h)) =
   section-left-factor-htpy f g h H
-pr2 (pr2 (sec-left-factor-retract-of-sec-composition f g h H sec-h)) =
-  is-retraction-section-comp-htpy f g h H sec-h
+pr2 (pr2 (section-left-factor-retract-of-section-composition f g h H section-h)) =
+  is-retraction-section-comp-htpy f g h H section-h
 ```

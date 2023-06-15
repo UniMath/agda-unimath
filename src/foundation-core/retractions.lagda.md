@@ -32,12 +32,12 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  retr : (f : A → B) → UU (l1 ⊔ l2)
-  retr f = Σ (B → A) (λ r → (r ∘ f) ~ id)
+  retraction : (f : A → B) → UU (l1 ⊔ l2)
+  retraction f = Σ (B → A) (λ r → (r ∘ f) ~ id)
 
 _retract-of_ :
   {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
-A retract-of B = Σ (A → B) retr
+A retract-of B = Σ (A → B) retraction
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -46,16 +46,16 @@ module _
   section-retract-of : A retract-of B → A → B
   section-retract-of = pr1
 
-  retr-section-retract-of : (R : A retract-of B) → retr (section-retract-of R)
-  retr-section-retract-of = pr2
+  retraction-section-retract-of : (R : A retract-of B) → retraction (section-retract-of R)
+  retraction-section-retract-of = pr2
 
   retraction-retract-of : (A retract-of B) → B → A
-  retraction-retract-of R = pr1 (retr-section-retract-of R)
+  retraction-retract-of R = pr1 (retraction-section-retract-of R)
 
-  is-retr-retraction-retract-of :
+  is-retraction-retraction-retract-of :
     (R : A retract-of B) →
     (retraction-retract-of R ∘ section-retract-of R) ~ id
-  is-retr-retraction-retract-of R = pr2 (retr-section-retract-of R)
+  is-retraction-retraction-retract-of R = pr2 (retraction-section-retract-of R)
 ```
 
 ## Properties
@@ -78,15 +78,15 @@ module _
     (x y : A) → ((ap-retraction i r H x y) ∘ (ap i {x} {y})) ~ id
   is-retraction-ap-retraction i r H x .x refl = left-inv (H x)
 
-  retr-ap :
-    (i : A → B) → retr i → (x y : A) → retr (ap i {x} {y})
-  pr1 (retr-ap i (pair r H) x y) = ap-retraction i r H x y
-  pr2 (retr-ap i (pair r H) x y) = is-retraction-ap-retraction i r H x y
+  retraction-ap :
+    (i : A → B) → retraction i → (x y : A) → retraction (ap i {x} {y})
+  pr1 (retraction-ap i (pair r H) x y) = ap-retraction i r H x y
+  pr2 (retraction-ap i (pair r H) x y) = is-retraction-ap-retraction i r H x y
 
   retract-eq :
     (R : A retract-of B) → (x y : A) → (x ＝ y) retract-of (pr1 R x ＝ pr1 R y)
   pr1 (retract-eq (pair i (pair r H)) x y) = ap i
-  pr2 (retract-eq (pair i (pair r H)) x y) = retr-ap i (pair r H) x y
+  pr2 (retract-eq (pair i (pair r H)) x y) = retraction-ap i (pair r H) x y
 ```
 
 ### If `g ∘ f` has a retraction then `f` has a retraction
@@ -97,45 +97,45 @@ module _
   where
 
   retraction-right-factor :
-    (g : B → X) (h : A → B) → retr (g ∘ h) → retr h
-  pr1 (retraction-right-factor g h retr-gh) = pr1 retr-gh ∘ g
-  pr2 (retraction-right-factor g h retr-gh) = pr2 retr-gh
+    (g : B → X) (h : A → B) → retraction (g ∘ h) → retraction h
+  pr1 (retraction-right-factor g h retraction-gh) = pr1 retraction-gh ∘ g
+  pr2 (retraction-right-factor g h retraction-gh) = pr2 retraction-gh
 
   retraction-right-factor-htpy :
-    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) → retr f → retr h
-  pr1 (retraction-right-factor-htpy f g h H retr-f) =
-    pr1 retr-f ∘ g
-  pr2 (retraction-right-factor-htpy f g h H retr-f) =
-    (inv-htpy ((pr1 retr-f) ·l H)) ∙h (pr2 retr-f)
+    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) → retraction f → retraction h
+  pr1 (retraction-right-factor-htpy f g h H retraction-f) =
+    pr1 retraction-f ∘ g
+  pr2 (retraction-right-factor-htpy f g h H retraction-f) =
+    (inv-htpy ((pr1 retraction-f) ·l H)) ∙h (pr2 retraction-f)
 ```
 
 ### Composites of retractions are retractions
 
 ```agda
   retraction-comp :
-    (g : B → X) (h : A → B) → retr g → retr h → retr (g ∘ h)
-  pr1 (retraction-comp g h retr-g retr-h) = pr1 retr-h ∘ pr1 retr-g
-  pr2 (retraction-comp g h retr-g retr-h) =
-    ((pr1 retr-h) ·l (pr2 retr-g ·r h)) ∙h (pr2 retr-h)
+    (g : B → X) (h : A → B) → retraction g → retraction h → retraction (g ∘ h)
+  pr1 (retraction-comp g h retraction-g retraction-h) = pr1 retraction-h ∘ pr1 retraction-g
+  pr2 (retraction-comp g h retraction-g retraction-h) =
+    ((pr1 retraction-h) ·l (pr2 retraction-g ·r h)) ∙h (pr2 retraction-h)
 
   retraction-comp-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    retr g → retr h → retr f
-  pr1 (retraction-comp-htpy f g h H retr-g retr-h) =
-    pr1 (retraction-comp g h retr-g retr-h)
-  pr2 (retraction-comp-htpy f g h H retr-g retr-h) =
-    ( pr1 (retraction-comp g h retr-g retr-h) ·l H) ∙h
-    pr2 (retraction-comp g h retr-g retr-h)
+    retraction g → retraction h → retraction f
+  pr1 (retraction-comp-htpy f g h H retraction-g retraction-h) =
+    pr1 (retraction-comp g h retraction-g retraction-h)
+  pr2 (retraction-comp-htpy f g h H retraction-g retraction-h) =
+    ( pr1 (retraction-comp g h retraction-g retraction-h) ·l H) ∙h
+    pr2 (retraction-comp g h retraction-g retraction-h)
 
   inv-triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-    (retr-g : retr g) → ((pr1 retr-g) ∘ f) ~ h
-  inv-triangle-retraction f g h H retr-g =
-    (pr1 retr-g ·l H) ∙h (pr2 retr-g ·r h)
+    (retraction-g : retraction g) → ((pr1 retraction-g) ∘ f) ~ h
+  inv-triangle-retraction f g h H retraction-g =
+    (pr1 retraction-g ·l H) ∙h (pr2 retraction-g ·r h)
 
   triangle-retraction :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-    (retr-g : retr g) → h ~ ((pr1 retr-g) ∘ f)
-  triangle-retraction f g h H retr-g =
-    inv-htpy (inv-triangle-retraction f g h H retr-g)
+    (retraction-g : retraction g) → h ~ ((pr1 retraction-g) ∘ f)
+  triangle-retraction f g h H retraction-g =
+    inv-htpy (inv-triangle-retraction f g h H retraction-g)
 ```

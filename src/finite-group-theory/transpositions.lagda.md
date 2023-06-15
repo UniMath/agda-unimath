@@ -855,7 +855,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
         ( type-Decidable-Prop ∘ pr1 (Fin-succ-Fin-transposition n (pair P H)))))
     ( λ h →
       unit-trunc-Prop
-        ( ( pair f (is-equiv-has-inverse inv-f retr-f sec-f)) ∘e
+        ( ( pair f (is-equiv-has-inverse inv-f retraction-f section-f)) ∘e
           ( ( inv-right-unit-law-coprod-is-empty
               ( Σ
                 ( Fin n)
@@ -878,10 +878,10 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
         (pr1 (Fin-succ-Fin-transposition n (pair P H)) x)) →
     (Σ (Fin n) (type-Decidable-Prop ∘ P)) + (Σ unit (λ _ → empty))
   inv-f (pair (inl x) p) = inl (pair x p)
-  retr-f : (f ∘ inv-f) ~ id
-  retr-f (pair (inl x) p) = refl
-  sec-f : (inv-f ∘ f) ~ id
-  sec-f (inl (pair x p)) = refl
+  retraction-f : (f ∘ inv-f) ~ id
+  retraction-f (pair (inl x) p) = refl
+  section-f : (inv-f ∘ f) ~ id
+  section-f (inl (pair x p)) = refl
 
 correct-Fin-succ-Fin-transposition :
   (n : ℕ) →

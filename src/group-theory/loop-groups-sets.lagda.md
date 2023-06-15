@@ -134,7 +134,7 @@ module _
         ( eq-equiv (type-Set X) (type-Set X) g)
         ( eq-equiv (type-Set X) (type-Set X) f))
 
-  is-sec-hom-inv-symmetric-group-loop-group-Set :
+  is-section-hom-inv-symmetric-group-loop-group-Set :
     Id
       ( comp-hom-Group
         ( symmetric-Group X)
@@ -143,7 +143,7 @@ module _
         ( hom-symmetric-group-loop-group-Set)
         ( hom-inv-symmetric-group-loop-group-Set))
       ( id-hom-Group (symmetric-Group X))
-  is-sec-hom-inv-symmetric-group-loop-group-Set =
+  is-section-hom-inv-symmetric-group-loop-group-Set =
     eq-pair-Σ
       ( eq-htpy
         ( λ f →
@@ -157,7 +157,7 @@ module _
           ( semigroup-Group (symmetric-Group X))
           ( id)))
 
-  is-retr-hom-inv-symmetric-group-loop-group-Set :
+  is-retraction-hom-inv-symmetric-group-loop-group-Set :
     Id
       ( comp-hom-Group
         ( loop-group-Set X)
@@ -166,7 +166,7 @@ module _
         ( hom-inv-symmetric-group-loop-group-Set)
         ( hom-symmetric-group-loop-group-Set))
       ( id-hom-Group (loop-group-Set X))
-  is-retr-hom-inv-symmetric-group-loop-group-Set =
+  is-retraction-hom-inv-symmetric-group-loop-group-Set =
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
@@ -188,9 +188,9 @@ module _
   pr1 (pr2 iso-symmetric-group-loop-group-Set) =
     hom-inv-symmetric-group-loop-group-Set
   pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
-    is-sec-hom-inv-symmetric-group-loop-group-Set
+    is-section-hom-inv-symmetric-group-loop-group-Set
   pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
-    is-retr-hom-inv-symmetric-group-loop-group-Set
+    is-retraction-hom-inv-symmetric-group-loop-group-Set
 ```
 
 ### The abstacted automorphism group and the loop group of a set are isomorphic
@@ -248,7 +248,7 @@ module _
       ( pr1-interchange-concat-pair-eq-Σ p q)) ∙
     ( pr1-interchange-concat-pair-eq-Σ (pr1 (pair-eq-Σ p)) (pr1 (pair-eq-Σ q)))
 
-  is-sec-hom-inv-abstract-automorphism-group-loop-group-Set :
+  is-section-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id
       ( comp-hom-Group
         ( abstract-group-Concrete-Group
@@ -261,7 +261,7 @@ module _
       ( id-hom-Group
         ( abstract-group-Concrete-Group
           ( Automorphism-Group (Set-1-Type l) X)))
-  is-sec-hom-inv-abstract-automorphism-group-loop-group-Set =
+  is-section-hom-inv-abstract-automorphism-group-loop-group-Set =
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
@@ -289,7 +289,7 @@ module _
               ( Automorphism-Group (Set-1-Type l) X)))
           ( id)))
 
-  is-retr-hom-inv-abstract-automorphism-group-loop-group-Set :
+  is-retraction-hom-inv-abstract-automorphism-group-loop-group-Set :
     Id
       ( comp-hom-Group
         ( loop-group-Set X)
@@ -299,7 +299,7 @@ module _
         ( hom-inv-abstract-automorphism-group-loop-group-Set)
         ( hom-abstract-automorphism-group-loop-group-Set))
       ( id-hom-Group (loop-group-Set X))
-  is-retr-hom-inv-abstract-automorphism-group-loop-group-Set =
+  is-retraction-hom-inv-abstract-automorphism-group-loop-group-Set =
     eq-pair-Σ
       ( eq-htpy
         ( λ p →
@@ -332,9 +332,9 @@ module _
   pr1 (pr2 iso-abstract-automorphism-group-loop-group-Set) =
     hom-inv-abstract-automorphism-group-loop-group-Set
   pr1 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) =
-    is-sec-hom-inv-abstract-automorphism-group-loop-group-Set
+    is-section-hom-inv-abstract-automorphism-group-loop-group-Set
   pr2 (pr2 (pr2 iso-abstract-automorphism-group-loop-group-Set)) =
-    is-retr-hom-inv-abstract-automorphism-group-loop-group-Set
+    is-retraction-hom-inv-abstract-automorphism-group-loop-group-Set
 ```
 
 ### The loop groups of two equivalent sets are isomorphic
