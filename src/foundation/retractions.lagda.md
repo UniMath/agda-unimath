@@ -35,12 +35,14 @@ module _
   htpy-retraction : retraction f → retraction f → UU (l1 ⊔ l2)
   htpy-retraction = htpy-hom-coslice
 
-  extensionality-retraction : (g h : retraction f) → Id g h ≃ htpy-retraction g h
+  extensionality-retraction :
+    (g h : retraction f) → Id g h ≃ htpy-retraction g h
   extensionality-retraction g h = extensionality-hom-coslice g h
 
   eq-htpy-retraction :
-    ( g h : retraction f) (H : pr1 g ~ pr1 h) (K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
-    Id g h
+    ( g h : retraction f) (H : pr1 g ~ pr1 h)
+    ( K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
+    g ＝ h
   eq-htpy-retraction g h = eq-htpy-hom-coslice g h
 ```
 
@@ -49,15 +51,16 @@ module _
 ```agda
 is-retraction-retraction-comp-htpy :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) (retraction-g : retraction g) →
+  (f : A → X) (g : B → X) (h : A → B)
+  (H : f ~ (g ∘ h)) (rg : retraction g) →
   ( ( retraction-right-factor-htpy f g h H) ∘
-    ( retraction-comp-htpy f g h H retraction-g)) ~ id
-is-retraction-retraction-comp-htpy f g h H (pair l L) (pair k K) =
+    ( retraction-comp-htpy f g h H rg)) ~ id
+is-retraction-retraction-comp-htpy f g h H (l , L) (k , K) =
   eq-htpy-retraction
     ( ( retraction-right-factor-htpy f g h H
-        ( retraction-comp-htpy f g h H (pair l L) (pair k K)
+        ( retraction-comp-htpy f g h H (l , L) (k , K)
           )))
-    ( pair k K)
+    ( k , K)
     ( k ·l L)
     ( ( inv-htpy-assoc-htpy
         ( inv-htpy ((k ∘ l) ·l H))
@@ -73,18 +76,24 @@ retraction-right-factor-retract-of-retraction-left-factor :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
   retraction g → (retraction h) retract-of (retraction f)
-pr1 (retraction-right-factor-retract-of-retraction-left-factor f g h H retraction-g) =
-  retraction-comp-htpy f g h H retraction-g
-pr1 (pr2 (retraction-right-factor-retract-of-retraction-left-factor f g h H retraction-g)) =
+pr1 (retraction-right-factor-retract-of-retraction-left-factor f g h H rg) =
+  retraction-comp-htpy f g h H rg
+pr1
+  ( pr2
+    ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
   retraction-right-factor-htpy f g h H
-pr2 (pr2 (retraction-right-factor-retract-of-retraction-left-factor f g h H retraction-g)) =
-  is-retraction-retraction-comp-htpy f g h H retraction-g
+pr2
+  ( pr2
+    ( retraction-right-factor-retract-of-retraction-left-factor f g h H rg)) =
+  is-retraction-retraction-comp-htpy f g h H rg
 ```
+
+### If `f` has a retraction, then `f` is injective
 
 ```agda
 abstract
   is-injective-retraction :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → retraction f →
     is-injective f
-  is-injective-retraction f (pair h H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
+  is-injective-retraction f (h , H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
 ```

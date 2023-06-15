@@ -128,5 +128,6 @@ module _
         pr1 (retraction-i x) = f x
         pr2 (retraction-i x) = pr2 (section-f x)
         is-fiberwise-equiv-i : is-fiberwise-equiv i
-        is-fiberwise-equiv-i = fundamental-theorem-id-retraction a i retraction-i
+        is-fiberwise-equiv-i =
+          fundamental-theorem-id-retraction a i retraction-i
 ```

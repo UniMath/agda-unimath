@@ -125,7 +125,8 @@ module _
   where
 
   retraction-section-precomp-domain : section (precomp f Y) → retraction f
-  pr1 (retraction-section-precomp-domain section-precomp-Y) = pr1 section-precomp-Y id
+  pr1 (retraction-section-precomp-domain section-precomp-Y) =
+    pr1 section-precomp-Y id
   pr2 (retraction-section-precomp-domain section-precomp-Y) =
     htpy-eq (pr2 section-precomp-Y id)
 

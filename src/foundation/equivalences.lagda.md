@@ -28,6 +28,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
@@ -178,28 +179,44 @@ First, we prove this relative to a subuniverse, such that `f` is a map between
 two types in that subuniverse.
 
 ```agda
-abstract
-  is-equiv-is-equiv-precomp-subuniverse :
-    { l1 l2 : Level}
-    ( α : Level → Level) (P : (l : Level) → UU l → UU (α l))
-    ( A : Σ (UU l1) (P l1)) (B : Σ (UU l2) (P l2)) (f : pr1 A → pr1 B) →
-    ( (l : Level) (C : Σ (UU l) (P l)) →
-      is-equiv (precomp f (pr1 C))) →
-    is-equiv f
-  is-equiv-is-equiv-precomp-subuniverse α P A B f is-equiv-precomp-f =
-    let retraction-f = center (is-contr-map-is-equiv (is-equiv-precomp-f _ A) id) in
-    is-equiv-has-inverse
-      ( pr1 retraction-f)
-      ( htpy-eq
-        ( ap
-          ( pr1)
-          ( eq-is-contr'
-            ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
-            ( pair
-              ( f ∘ (pr1 retraction-f))
-              ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retraction-f)))
-            ( pair id refl))))
-      ( htpy-eq (pr2 retraction-f))
+module _
+  { l1 l2 : Level}
+  ( α : Level → Level) (P : (l : Level) → UU l → UU (α l))
+  ( A : Σ (UU l1) (P l1)) (B : Σ (UU l2) (P l2)) (f : pr1 A → pr1 B)
+  ( H : (l : Level) (C : Σ (UU l) (P l)) → is-equiv (precomp f (pr1 C)))
+  where
+
+  map-inv-is-equiv-precomp-subuniverse : pr1 B → pr1 A
+  map-inv-is-equiv-precomp-subuniverse =
+    pr1 (center (is-contr-map-is-equiv (H _ A) id))
+
+  is-section-map-inv-is-equiv-precomp-subuniverse :
+    ( f ∘ map-inv-is-equiv-precomp-subuniverse) ~ id
+  is-section-map-inv-is-equiv-precomp-subuniverse =
+    htpy-eq
+      ( ap
+        ( pr1)
+        ( eq-is-contr'
+          ( is-contr-map-is-equiv (H _ B) f)
+          ( ( f ∘ (pr1 (center (is-contr-map-is-equiv (H _ A) id)))) ,
+            ( ap
+              ( λ (g : pr1 A → pr1 A) → f ∘ g)
+              ( pr2 (center (is-contr-map-is-equiv (H _ A) id)))))
+          ( id , refl)))
+
+  is-retraction-map-inv-is-equiv-precomp-subuniverse :
+    ( map-inv-is-equiv-precomp-subuniverse ∘ f) ~ id
+  is-retraction-map-inv-is-equiv-precomp-subuniverse =
+    htpy-eq (pr2 (center (is-contr-map-is-equiv (H _ A) id)))
+
+  abstract
+    is-equiv-is-equiv-precomp-subuniverse :
+      is-equiv f
+    is-equiv-is-equiv-precomp-subuniverse =
+      is-equiv-has-inverse
+        ( map-inv-is-equiv-precomp-subuniverse)
+        ( is-section-map-inv-is-equiv-precomp-subuniverse)
+        ( is-retraction-map-inv-is-equiv-precomp-subuniverse)
 ```
 
 Now we prove the usual statement, without the subuniverse
@@ -273,7 +290,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-retraction-is-equiv : {f : A → B} → is-equiv f → is-contr (retraction f)
+  is-contr-retraction-is-equiv :
+    {f : A → B} → is-equiv f → is-contr (retraction f)
   is-contr-retraction-is-equiv {f} is-equiv-f =
     is-contr-is-equiv'
       ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
@@ -330,7 +348,7 @@ module _
     Ind-htpy-equiv :
       {l3 : Level} (e : A ≃ B)
       (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-      sec
+      section
         ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
           h e (refl-htpy-equiv e))
     Ind-htpy-equiv e =

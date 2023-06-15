@@ -111,7 +111,10 @@ module _
               ( is-perfect-image (map-emb f) (map-emb g) (map-emb g y))) →
           map-Cantor-Schröder-Bernstein-Escardó' (map-emb g y) d ＝ y
         ψ (inl v') =
-          is-retraction-inverse-of-perfect-image {is-emb-g = is-emb-map-emb g} y v'
+          is-retraction-inverse-of-perfect-image
+            { is-emb-g = is-emb-map-emb g}
+            ( y)
+            ( v')
         ψ (inr v) = ex-falso (v γ)
       a (inr γ) = pair x ψ
         where

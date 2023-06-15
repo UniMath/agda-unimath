@@ -35,7 +35,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ```agda
 is-decidable-map-retraction-Fin :
-  {l1 : Level} (k : ℕ) {A : UU l1} (i : A → Fin k) → retraction i → is-decidable-map i
+  {l1 : Level} (k : ℕ) {A : UU l1} (i : A → Fin k) →
+  retraction i → is-decidable-map i
 is-decidable-map-retraction-Fin k =
   is-decidable-map-retraction (has-decidable-equality-Fin k)
 ```
@@ -44,8 +45,8 @@ is-decidable-map-retraction-Fin k =
 
 ```agda
 is-decidable-map-retraction-count :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) → retraction i →
-  is-decidable-map i
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
+  retraction i → is-decidable-map i
 is-decidable-map-retraction-count e =
   is-decidable-map-retraction (has-decidable-equality-count e)
 

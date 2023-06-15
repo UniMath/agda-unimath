@@ -335,10 +335,11 @@ module _
       ( inv-commutative-square-inr f g p)
 
   retraction-cases-retraction-equiv-coprod :
-    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
-    (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y z : A + B) (q : map-equiv f (inl x) ＝ y)
-    (r : map-inv-equiv f (inl (cases-retraction-equiv-coprod f g p x y q)) ＝ z) →
+    ( f : (A + B) ≃ (A + B)) (g : B ≃ B)
+    ( p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
+    ( x : A) (y z : A + B) (q : map-equiv f (inl x) ＝ y)
+    ( r :
+      map-inv-equiv f (inl (cases-retraction-equiv-coprod f g p x y q)) ＝ z) →
     ( inv-cases-retraction-equiv-coprod f g p
       ( cases-retraction-equiv-coprod f g p x y q) z r) ＝
     ( x)
@@ -360,10 +361,11 @@ module _
     ex-falso (equiv-coproduct-induce-equiv-disjoint f g p x y q)
 
   section-cases-retraction-equiv-coprod :
-    (f : (A + B) ≃ (A + B)) (g : B ≃ B)
-    (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y z : A + B) (q : map-inv-equiv f (inl x) ＝ y)
-    (r : map-equiv f (inl (inv-cases-retraction-equiv-coprod f g p x y q)) ＝ z) →
+    ( f : (A + B) ≃ (A + B)) (g : B ≃ B)
+    ( p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
+    ( x : A) (y z : A + B) (q : map-inv-equiv f (inl x) ＝ y)
+    ( r :
+      map-equiv f (inl (inv-cases-retraction-equiv-coprod f g p x y q)) ＝ z) →
     ( cases-retraction-equiv-coprod f g p
       ( inv-cases-retraction-equiv-coprod f g p x y q) z r) ＝
     ( x)
@@ -393,7 +395,9 @@ module _
   pr2 (pr1 (retraction-equiv-coprod f g p)) =
     is-equiv-has-inverse
       ( λ x →
-        inv-cases-retraction-equiv-coprod f g p x (map-inv-equiv f (inl x)) refl)
+        inv-cases-retraction-equiv-coprod f g p x
+          ( map-inv-equiv f (inl x))
+          ( refl))
       ( λ x →
         section-cases-retraction-equiv-coprod f g p x
           ( map-inv-equiv f (inl x))

@@ -46,7 +46,8 @@ module _
   section-retract-of : A retract-of B → A → B
   section-retract-of = pr1
 
-  retraction-section-retract-of : (R : A retract-of B) → retraction (section-retract-of R)
+  retraction-section-retract-of :
+    (R : A retract-of B) → retraction (section-retract-of R)
   retraction-section-retract-of = pr2
 
   retraction-retract-of : (A retract-of B) → B → A
@@ -102,7 +103,8 @@ module _
   pr2 (retraction-right-factor g h retraction-gh) = pr2 retraction-gh
 
   retraction-right-factor-htpy :
-    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) → retraction f → retraction h
+    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+    retraction f → retraction h
   pr1 (retraction-right-factor-htpy f g h H retraction-f) =
     pr1 retraction-f ∘ g
   pr2 (retraction-right-factor-htpy f g h H retraction-f) =
@@ -114,7 +116,8 @@ module _
 ```agda
   retraction-comp :
     (g : B → X) (h : A → B) → retraction g → retraction h → retraction (g ∘ h)
-  pr1 (retraction-comp g h retraction-g retraction-h) = pr1 retraction-h ∘ pr1 retraction-g
+  pr1 (retraction-comp g h retraction-g retraction-h) =
+    pr1 retraction-h ∘ pr1 retraction-g
   pr2 (retraction-comp g h retraction-g retraction-h) =
     ((pr1 retraction-h) ·l (pr2 retraction-g ·r h)) ∙h (pr2 retraction-h)
 

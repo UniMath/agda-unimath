@@ -381,7 +381,8 @@ module _
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( T)
         ( equiv-count eX ∘e transposition-eX)
-    cases-retraction-Fin-2-quotient-sign-comp-count T NP f p (inl (inr star)) q =
+    cases-retraction-Fin-2-quotient-sign-comp-count
+      T NP f p (inl (inr star)) q =
       ex-falso
         ( NP
           ( tr

@@ -401,7 +401,8 @@ module _
       ( λ f →
         ( eq-pair-Σ
           ( inv
-            ( eq-htpy-equiv (pr2 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))))
+            ( eq-htpy-equiv
+              ( pr2 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))))
           ( eq-is-prop
             ( pr2
               ( Id-Prop

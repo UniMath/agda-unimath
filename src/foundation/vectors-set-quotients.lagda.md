@@ -254,7 +254,7 @@ is-section-inv-precomp-vector-set-quotient :
   ( A : functional-vec (UU l1) n)
   ( R : (i : Fin n) → Eq-Rel l2 (A i)) →
   ( X : Set l) →
-  ( sec
+  ( section
     ( precomp-Set-Quotient
       ( all-sim-Eq-Rel n A R)
       ( set-quotient-vector-Set n A R)

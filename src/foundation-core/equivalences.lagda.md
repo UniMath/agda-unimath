@@ -93,11 +93,13 @@ module _
   section-map-equiv = section-is-equiv ∘ is-equiv-map-equiv
 
   is-retraction-map-equiv :
-    (e : A ≃ B) → (map-equiv e ∘ map-section-is-equiv (is-equiv-map-equiv e)) ~ id
+    (e : A ≃ B) →
+    ( map-equiv e ∘ map-section-is-equiv (is-equiv-map-equiv e)) ~ id
   is-retraction-map-equiv = is-retraction-is-equiv ∘ is-equiv-map-equiv
 
   is-section-map-equiv :
-    (e : A ≃ B) → (map-retraction-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
+    (e : A ≃ B) →
+    ( map-retraction-is-equiv (is-equiv-map-equiv e) ∘ map-equiv e) ~ id
   is-section-map-equiv = is-section-is-equiv ∘ is-equiv-map-equiv
 ```
 
@@ -257,10 +259,10 @@ module _
 
   abstract
     is-equiv-comp-htpy : is-equiv h → is-equiv g → is-equiv f
-    pr1 (is-equiv-comp-htpy (pair section-h retraction-h) (pair section-g retraction-g)) =
-      section-comp-htpy f g h H section-h section-g
-    pr2 (is-equiv-comp-htpy (pair section-h retraction-h) (pair section-g retraction-g)) =
-      retraction-comp-htpy f g h H retraction-g retraction-h
+    pr1 (is-equiv-comp-htpy (sh , rh) (sg , rg)) =
+      section-comp-htpy f g h H sh sg
+    pr2 (is-equiv-comp-htpy (sh , rh) (sg , rg)) =
+      retraction-comp-htpy f g h H rg rh
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -269,10 +271,10 @@ module _
   abstract
     is-equiv-comp :
       (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
-    pr1 (is-equiv-comp g h (pair section-h retraction-h) (pair section-g retraction-g)) =
-      section-comp g h section-h section-g
-    pr2 (is-equiv-comp g h (pair section-h retraction-h) (pair section-g retraction-g)) =
-      retraction-comp g h retraction-g retraction-h
+    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) =
+      section-comp g h sh sg
+    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) =
+      retraction-comp g h rg rh
 
   equiv-comp : (B ≃ X) → (A ≃ B) → (A ≃ X)
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
