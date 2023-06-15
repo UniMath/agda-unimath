@@ -2802,7 +2802,7 @@ module _
       ( λ x → inr star)
       ( λ T →
         eq-pair-Σ
-          ( retr-fin-1-difference-orientation-two-elements-count
+          ( retraction-fin-1-difference-orientation-two-elements-count
             ( T)
             ( two-elements-transposition eX (pr1 T))
             ( refl)
@@ -2822,9 +2822,9 @@ module _
                 ( orientation-two-elements-count i j np)
                 ( orientation-two-elements-count j i (np ∘ inv))
                 ( pr1 T)))))
-      ( sec-fin-1-difference-orientation-two-elements-count)
+      ( section-fin-1-difference-orientation-two-elements-count)
     where
-    retr-fin-1-difference-orientation-two-elements-count :
+    retraction-fin-1-difference-orientation-two-elements-count :
       ( T :
         Σ ( 2-Element-Decidable-Subtype l X)
           ( λ Y →
@@ -2854,7 +2854,7 @@ module _
           ( has-decidable-equality-count eX)
           ( np))
         ( pr1 T)
-    retr-fin-1-difference-orientation-two-elements-count
+    retraction-fin-1-difference-orientation-two-elements-count
       T (pair x (pair y (pair np' P))) Q (inl q) r s (inl t) =
         ap
         ( λ w →
@@ -2881,7 +2881,7 @@ module _
               ( inv t)
               ( eq-is-prop is-prop-neg))) ∙
           ( P))
-    retr-fin-1-difference-orientation-two-elements-count
+    retraction-fin-1-difference-orientation-two-elements-count
       T (pair x (pair y (pair np' P))) Q (inl q) r s (inr nt) =
       ex-falso
         ( pr2 T
@@ -2927,7 +2927,7 @@ module _
                   ( pr1
                     ( orientation-two-elements-count
                         j i (np ∘ inv) (pr1 T))))))))
-    retr-fin-1-difference-orientation-two-elements-count
+    retraction-fin-1-difference-orientation-two-elements-count
       T (pair x (pair y (pair np' P))) Q (inr nq) (inl r) (inl s) t =
       ap
         ( λ w →
@@ -2958,7 +2958,7 @@ module _
               ( has-decidable-equality-count eX)
               ( np')) ∙
             ( P)))
-    retr-fin-1-difference-orientation-two-elements-count
+    retraction-fin-1-difference-orientation-two-elements-count
       T (pair x (pair y (pair np' P))) Q (inr nq) (inl r) (inr ns) t =
       ex-falso
         ( pr2 T
@@ -3004,7 +3004,7 @@ module _
                   ( pr1
                     ( orientation-two-elements-count
                         j i (np ∘ inv) (pr1 T))))))))
-    retr-fin-1-difference-orientation-two-elements-count
+    retraction-fin-1-difference-orientation-two-elements-count
       T (pair x (pair y (pair np' P))) Q (inr nq) (inr nr) s t =
       ex-falso
         ( pr2 T
@@ -3057,11 +3057,11 @@ module _
                       ( has-decidable-equality-count eX (pr1 w) i)
                       ( has-decidable-equality-count eX (pr1 (pr2 w)) j))
                   ( Q))))))
-    sec-fin-1-difference-orientation-two-elements-count :
+    section-fin-1-difference-orientation-two-elements-count :
       ( ( λ x → inr {A = empty} star) ∘
         pr1 (equiv-fin-1-difference-orientation-two-elements-count i j np)) ~
       ( id)
-    sec-fin-1-difference-orientation-two-elements-count (inr star) = refl
+    section-fin-1-difference-orientation-two-elements-count (inr star) = refl
 
   eq-orientation-pointwise-difference-two-elements-count :
     (i j : X) (np : ¬ (Id i j)) →
@@ -3295,7 +3295,7 @@ module _
             ( T)
             ( canonical-orientation-count)))
       ( λ T →
-        retr-orientation
+        retraction-orientation
           ( T)
           ( is-decidable-is-in-equivalence-class-is-decidable
             ( even-difference-orientation-Complete-Undirected-Graph
@@ -3307,7 +3307,7 @@ module _
             ( T)
             ( canonical-orientation-count)))
       ( λ k →
-        sec-orientation
+        section-orientation
           k
           ( is-decidable-is-in-equivalence-class-is-decidable
             ( even-difference-orientation-Complete-Undirected-Graph
@@ -3319,7 +3319,7 @@ module _
             ( pr1 equiv-fin-2-quotient-sign-count k)
             ( canonical-orientation-count)))
     where
-    cases-retr-orientation :
+    cases-retraction-orientation :
       (T :
         equivalence-class
           ( even-difference-orientation-Complete-Undirected-Graph
@@ -3356,7 +3356,7 @@ module _
           ( pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
         ( trans-canonical-orientation-count)
-    cases-retr-orientation T NH t q (inl (inr star)) r =
+    cases-retraction-orientation T NH t q (inl (inr star)) r =
       ex-falso
         ( NH
           ( tr
@@ -3369,7 +3369,7 @@ module _
                 ( canonical-orientation-count))
             ( q)
             ( r)))
-    cases-retr-orientation T NH t q (inr star) r =
+    cases-retraction-orientation T NH t q (inr star) r =
       tr
         (λ x →
           is-in-equivalence-class
@@ -3413,7 +3413,7 @@ module _
                     ( first-element-count)
                     ( second-element-count)
                     ( distinct-two-elements-count))))))
-    retr-orientation :
+    retraction-orientation :
       ( T :
         quotient-sign
           ( number-of-elements-count eX)
@@ -3427,7 +3427,7 @@ module _
             ( T)
             ( canonical-orientation-count))) →
       Id (pr1 equiv-fin-2-quotient-sign-count (inv-orientation T H)) T
-    retr-orientation T (inl H) =
+    retraction-orientation T (inl H) =
       eq-effective-quotient'
         ( even-difference-orientation-Complete-Undirected-Graph
           ( number-of-elements-count eX)
@@ -3435,7 +3435,7 @@ module _
         ( canonical-orientation-count)
         ( T)
         ( H)
-    retr-orientation T (inr NH) =
+    retraction-orientation T (inr NH) =
       eq-effective-quotient'
         ( even-difference-orientation-Complete-Undirected-Graph
           ( number-of-elements-count eX)
@@ -3458,7 +3458,7 @@ module _
               ( T)
               ( trans-canonical-orientation-count)))
           ( λ (pair t r) →
-            cases-retr-orientation
+            cases-retraction-orientation
               ( T)
               ( NH)
               ( t)
@@ -3484,7 +3484,7 @@ module _
                   ( t)
                   ( canonical-orientation-count))
               ( refl)))
-    sec-orientation :
+    section-orientation :
       (k : Fin 2)
       ( D : is-decidable
         ( is-in-equivalence-class
@@ -3498,15 +3498,15 @@ module _
           ( pr1 equiv-fin-2-quotient-sign-count k)
           ( D))
         ( k)
-    sec-orientation (inl (inr star)) (inl Q) = refl
-    sec-orientation (inl (inr star)) (inr NQ) =
+    section-orientation (inl (inr star)) (inl Q) = refl
+    section-orientation (inl (inr star)) (inr NQ) =
       ex-falso
         ( NQ
           ( refl-Eq-Rel
             ( even-difference-orientation-Complete-Undirected-Graph
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))))
-    sec-orientation (inr star) (inl Q) =
+    section-orientation (inr star) (inl Q) =
       ex-falso
         ( neq-inl-inr
           ( Q ∙
@@ -3522,7 +3522,7 @@ module _
                     ( first-element-count)
                     ( second-element-count)
                     ( distinct-two-elements-count))))))
-    sec-orientation (inr star) (inr NQ) = refl
+    section-orientation (inr star) (inr NQ) = refl
 
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)

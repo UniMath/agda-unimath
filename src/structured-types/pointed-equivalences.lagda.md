@@ -118,16 +118,16 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
   where
 
-  sec-pointed-map : UU (l1 ⊔ l2)
-  sec-pointed-map =
+  section-pointed-map : UU (l1 ⊔ l2)
+  section-pointed-map =
     Σ ( B →∗ A)
       ( λ g →
         htpy-pointed-map B B
           ( comp-pointed-map B A B f g)
           ( id-pointed-map))
 
-  retr-pointed-map : UU (l1 ⊔ l2)
-  retr-pointed-map =
+  retraction-pointed-map : UU (l1 ⊔ l2)
+  retraction-pointed-map =
     Σ ( B →∗ A)
       ( λ g →
         htpy-pointed-map A A
@@ -135,7 +135,7 @@ module _
           ( id-pointed-map))
 
   is-iso-pointed-map : UU (l1 ⊔ l2)
-  is-iso-pointed-map = sec-pointed-map × retr-pointed-map
+  is-iso-pointed-map = section-pointed-map × retraction-pointed-map
 ```
 
 ## Properties
@@ -176,9 +176,9 @@ module _
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
   where
 
-  is-contr-sec-is-equiv-pointed-map :
-    is-equiv-pointed-map A B f → is-contr (sec-pointed-map A B f)
-  is-contr-sec-is-equiv-pointed-map H =
+  is-contr-section-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f → is-contr (section-pointed-map A B f)
+  is-contr-section-is-equiv-pointed-map H =
     is-contr-total-Eq-structure
       ( λ g p (G : (map-pointed-map A B f ∘ g) ~ id) →
           Id
@@ -191,36 +191,36 @@ module _
             ( ( ( ap (map-pointed-map A B f) p) ∙
                 ( preserves-point-pointed-map A B f)) ∙
               ( refl)))
-      ( is-contr-sec-is-equiv H)
-      ( pair (map-inv-is-equiv H) (issec-map-inv-is-equiv H))
+      ( is-contr-section-is-equiv H)
+      ( pair (map-inv-is-equiv H) (is-section-map-inv-is-equiv H))
       ( is-contr-equiv
         ( fib
           ( ap (map-pointed-map A B f))
-          ( ( issec-map-inv-is-equiv H (point-Pointed-Type B)) ∙
+          ( ( is-section-map-inv-is-equiv H (point-Pointed-Type B)) ∙
             ( inv (preserves-point-pointed-map A B f))))
         ( equiv-tot
           ( λ p →
             ( ( equiv-con-inv
                 ( ap (map-pointed-map A B f) p)
                 ( preserves-point-pointed-map A B f)
-                ( issec-map-inv-is-equiv H (point-Pointed-Type B))) ∘e
+                ( is-section-map-inv-is-equiv H (point-Pointed-Type B))) ∘e
               ( equiv-inv
-                ( issec-map-inv-is-equiv H (point-Pointed-Type B))
+                ( is-section-map-inv-is-equiv H (point-Pointed-Type B))
                 ( ( ap (map-pointed-map A B f) p) ∙
                   ( preserves-point-pointed-map A B f)))) ∘e
             ( equiv-concat'
-              ( issec-map-inv-is-equiv H (point-Pointed-Type B))
+              ( is-section-map-inv-is-equiv H (point-Pointed-Type B))
               ( right-unit))))
         ( is-contr-map-is-equiv
           ( is-emb-is-equiv H
             ( map-inv-is-equiv H (point-Pointed-Type B))
             ( point-Pointed-Type A))
-          ( ( issec-map-inv-is-equiv H (point-Pointed-Type B)) ∙
+          ( ( is-section-map-inv-is-equiv H (point-Pointed-Type B)) ∙
             ( inv (preserves-point-pointed-map A B f)))))
 
-  is-contr-retr-is-equiv-pointed-map :
-    is-equiv-pointed-map A B f → is-contr (retr-pointed-map A B f)
-  is-contr-retr-is-equiv-pointed-map H =
+  is-contr-retraction-is-equiv-pointed-map :
+    is-equiv-pointed-map A B f → is-contr (retraction-pointed-map A B f)
+  is-contr-retraction-is-equiv-pointed-map H =
     is-contr-total-Eq-structure
       ( λ g p (G : (g ∘ map-pointed-map A B f) ~ id) →
         Id
@@ -233,8 +233,8 @@ module _
           ( ( ( ap g (preserves-point-pointed-map A B f)) ∙
               ( p)) ∙
             ( refl)))
-      ( is-contr-retr-is-equiv H)
-      ( pair (map-inv-is-equiv H) (isretr-map-inv-is-equiv H))
+      ( is-contr-retraction-is-equiv H)
+      ( pair (map-inv-is-equiv H) (is-retraction-map-inv-is-equiv H))
       ( is-contr-equiv
         ( fib
           ( λ p →
@@ -243,7 +243,7 @@ module _
                 ( preserves-point-pointed-map A B f)) ∙
               ( p)) ∙
             ( refl))
-          ( isretr-map-inv-is-equiv H (point-Pointed-Type A)))
+          ( is-retraction-map-inv-is-equiv H (point-Pointed-Type A)))
         ( equiv-tot (λ p → equiv-inv _ _))
         ( is-contr-map-is-equiv
           ( is-equiv-comp
@@ -263,14 +263,14 @@ module _
                 ( H)
                 ( map-pointed-map A B f (point-Pointed-Type A)))
               ( refl)))
-          ( isretr-map-inv-is-equiv H (point-Pointed-Type A))))
+          ( is-retraction-map-inv-is-equiv H (point-Pointed-Type A))))
 
   is-contr-is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map A B f → is-contr (is-iso-pointed-map A B f)
   is-contr-is-iso-is-equiv-pointed-map H =
     is-contr-prod
-      ( is-contr-sec-is-equiv-pointed-map H)
-      ( is-contr-retr-is-equiv-pointed-map H)
+      ( is-contr-section-is-equiv-pointed-map H)
+      ( is-contr-retraction-is-equiv-pointed-map H)
 
   is-iso-is-equiv-pointed-map :
     is-equiv-pointed-map A B f → is-iso-pointed-map A B f

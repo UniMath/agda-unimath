@@ -93,6 +93,6 @@ module _
   is-full-is-equiv-inclusion-subtype H x =
     tr
       ( is-in-subtype P)
-      ( issec-map-inv-is-equiv H x)
+      ( is-section-map-inv-is-equiv H x)
       ( pr2 (map-inv-is-equiv H x))
 ```

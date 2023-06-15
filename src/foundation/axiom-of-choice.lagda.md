@@ -78,7 +78,7 @@ AC-0-is-set-projective :
   AC-0 l1 l2
 AC-0-is-set-projective H A B K =
   map-trunc-Prop
-    ( map-equiv (equiv-Π-sec-pr1 {B = B}) ∘ tot (λ g → htpy-eq))
+    ( map-equiv (equiv-Π-section-pr1 {B = B}) ∘ tot (λ g → htpy-eq))
     ( H ( type-Set A)
         ( Σ (type-Set A) B)
         ( A)

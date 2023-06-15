@@ -34,10 +34,11 @@ module _
       is-prop-is-proof-irrelevant
         ( λ is-path-split-f →
           ( is-contr-prod
-            ( is-contr-sec-is-equiv (is-equiv-is-path-split f is-path-split-f))
+            ( is-contr-section-is-equiv
+              ( is-equiv-is-path-split f is-path-split-f))
             ( is-contr-Π
               ( λ x → is-contr-Π
-                ( λ y → is-contr-sec-is-equiv
+                ( λ y → is-contr-section-is-equiv
                   ( is-emb-is-equiv
                     ( is-equiv-is-path-split f is-path-split-f) x y))))))
 

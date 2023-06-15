@@ -54,24 +54,24 @@ module _
   map-inv-compute-dependent-identification² refl refl ._ refl =
     refl
 
-  issec-map-inv-compute-dependent-identification² :
+  is-section-map-inv-compute-dependent-identification² :
     {x y : A} {p q : x ＝ y} (α : p ＝ q)
     {x' : B x} {y' : B y}
     (p' : dependent-identification B p x' y')
     (q' : dependent-identification B q x' y') →
     ( map-compute-dependent-identification² α p' q' ∘
       map-inv-compute-dependent-identification² α p' q') ~ id
-  issec-map-inv-compute-dependent-identification² refl refl ._ refl =
+  is-section-map-inv-compute-dependent-identification² refl refl ._ refl =
     refl
 
-  isretr-map-inv-compute-dependent-identification² :
+  is-retraction-map-inv-compute-dependent-identification² :
     {x y : A} {p q : x ＝ y} (α : p ＝ q)
     {x' : B x} {y' : B y}
     (p' : dependent-identification B p x' y')
     (q' : dependent-identification B q x' y') →
     ( map-inv-compute-dependent-identification² α p' q' ∘
       map-compute-dependent-identification² α p' q') ~ id
-  isretr-map-inv-compute-dependent-identification² refl ._ refl refl =
+  is-retraction-map-inv-compute-dependent-identification² refl ._ refl refl =
     refl
 
   is-equiv-map-compute-dependent-identification² :
@@ -83,8 +83,8 @@ module _
   is-equiv-map-compute-dependent-identification² α p' q' =
     is-equiv-has-inverse
       ( map-inv-compute-dependent-identification² α p' q')
-      ( issec-map-inv-compute-dependent-identification² α p' q')
-      ( isretr-map-inv-compute-dependent-identification² α p' q')
+      ( is-section-map-inv-compute-dependent-identification² α p' q')
+      ( is-retraction-map-inv-compute-dependent-identification² α p' q')
 
   compute-dependent-identification² :
     {x y : A} {p q : x ＝ y} (α : p ＝ q)

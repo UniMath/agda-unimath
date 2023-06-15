@@ -39,7 +39,7 @@ module _
   where
 
   is-path-split : UU (l1 ⊔ l2)
-  is-path-split = sec f × ((x y : A) → sec (ap f {x = x} {y = y}))
+  is-path-split = section f × ((x y : A) → section (ap f {x = x} {y = y}))
 ```
 
 ## Properties
@@ -60,23 +60,14 @@ module _
   abstract
     is-coherently-invertible-is-path-split :
       is-path-split f → is-coherently-invertible f
-    pr1 (is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f)) = g
-    pr1
-      ( pr2
-        ( is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))) =
-      issec-g
-    pr1
-      ( pr2
-        ( pr2
-          ( is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))))
-      ( x) =
-      pr1 (sec-ap-f (g (f x)) x) (issec-g (f x))
-    pr2
-      ( pr2
-        ( pr2
-          ( is-coherently-invertible-is-path-split ((g , issec-g) , sec-ap-f))))
-      ( x) =
-      inv (pr2 (sec-ap-f (g (f x)) x) (issec-g (f x)))
+    pr1 (is-coherently-invertible-is-path-split ((g , G) , s)) =
+      g
+    pr1 (pr2 (is-coherently-invertible-is-path-split ((g , G) , s))) =
+      G
+    pr1 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , G) , s)))) x =
+      pr1 (s (g (f x)) x) (G (f x))
+    pr2 (pr2 (pr2 (is-coherently-invertible-is-path-split ((g , G) , s)))) x =
+      inv (pr2 (s (g (f x)) x) (G (f x)))
 
   abstract
     is-equiv-is-path-split : is-path-split f → is-equiv f

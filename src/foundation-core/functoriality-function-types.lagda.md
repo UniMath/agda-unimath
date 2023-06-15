@@ -35,14 +35,14 @@ module _
   map-inv-is-equiv-is-equiv-postcomp : Y → X
   map-inv-is-equiv-is-equiv-postcomp = map-inv-is-equiv (H Y) id
 
-  issec-map-inv-is-equiv-is-equiv-postcomp :
+  is-section-map-inv-is-equiv-is-equiv-postcomp :
     ( f ∘ map-inv-is-equiv-is-equiv-postcomp) ~ id
-  issec-map-inv-is-equiv-is-equiv-postcomp =
-    htpy-eq (issec-map-inv-is-equiv (H Y) id)
+  is-section-map-inv-is-equiv-is-equiv-postcomp =
+    htpy-eq (is-section-map-inv-is-equiv (H Y) id)
 
-  isretr-map-inv-is-equiv-is-equiv-postcomp :
+  is-retraction-map-inv-is-equiv-is-equiv-postcomp :
     ( map-inv-is-equiv-is-equiv-postcomp ∘ f) ~ id
-  isretr-map-inv-is-equiv-is-equiv-postcomp =
+  is-retraction-map-inv-is-equiv-is-equiv-postcomp =
     htpy-eq
       ( ap
         ( pr1)
@@ -51,7 +51,7 @@ module _
           { x =
             pair
               ( map-inv-is-equiv-is-equiv-postcomp ∘ f)
-              ( ap (λ u → u ∘ f) (issec-map-inv-is-equiv (H Y) id))}
+              ( ap (λ u → u ∘ f) (is-section-map-inv-is-equiv (H Y) id))}
           { y = pair id refl}))
 
   abstract
@@ -59,8 +59,8 @@ module _
     is-equiv-is-equiv-postcomp =
       is-equiv-has-inverse
         map-inv-is-equiv-is-equiv-postcomp
-        issec-map-inv-is-equiv-is-equiv-postcomp
-        isretr-map-inv-is-equiv-is-equiv-postcomp
+        is-section-map-inv-is-equiv-is-equiv-postcomp
+        is-retraction-map-inv-is-equiv-is-equiv-postcomp
 ```
 
 The following version of the same theorem works when X and Y are in the same
@@ -73,17 +73,17 @@ is-equiv-is-equiv-postcomp' :
   ((A : UU l) → is-equiv (postcomp A f)) → is-equiv f
 is-equiv-is-equiv-postcomp'
   {l} {X} {Y} f is-equiv-postcomp-f =
-  let sec-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
+  let section-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
   in
   is-equiv-has-inverse
-    ( pr1 sec-f)
-    ( htpy-eq (pr2 sec-f))
+    ( pr1 section-f)
+    ( htpy-eq (pr2 section-f))
     ( htpy-eq
       ( ap
         ( pr1)
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-equiv-postcomp-f X) f)
-          ( pair ((pr1 sec-f) ∘ f) (ap (λ t → t ∘ f) (pr2 sec-f)))
+          ( pair ((pr1 section-f) ∘ f) (ap (λ t → t ∘ f) (pr2 section-f)))
           ( pair id refl))))
 
 abstract
@@ -93,8 +93,12 @@ abstract
   is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
     is-equiv-has-inverse
       ( postcomp A (map-inv-is-equiv is-equiv-f))
-      ( λ g → eq-htpy (htpy-right-whisk (issec-map-inv-is-equiv is-equiv-f) g))
-      ( λ h → eq-htpy (htpy-right-whisk (isretr-map-inv-is-equiv is-equiv-f) h))
+      ( λ g →
+        eq-htpy
+          ( htpy-right-whisk (is-section-map-inv-is-equiv is-equiv-f) g))
+      ( λ h →
+        eq-htpy
+          ( htpy-right-whisk (is-retraction-map-inv-is-equiv is-equiv-f) h))
 
 equiv-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →

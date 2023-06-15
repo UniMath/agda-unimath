@@ -104,13 +104,13 @@ module _
     pr2 (map-inv-compute-symmetric-Id p) (inl (inr star)) = refl
     pr2 (map-inv-compute-symmetric-Id p) (inr star) = p
 
-    issec-map-inv-compute-symmetric-Id :
+    is-section-map-inv-compute-symmetric-Id :
       ( map-compute-symmetric-Id ∘ map-inv-compute-symmetric-Id) ~ id
-    issec-map-inv-compute-symmetric-Id refl = refl
+    is-section-map-inv-compute-symmetric-Id refl = refl
 
-    isretr-map-inv-compute-symmetric-Id :
+    is-retraction-map-inv-compute-symmetric-Id :
       ( map-inv-compute-symmetric-Id ∘ map-compute-symmetric-Id) ~ id
-    isretr-map-inv-compute-symmetric-Id (x , f) =
+    is-retraction-map-inv-compute-symmetric-Id (x , f) =
       eq-Eq-symmetric-Id
         ( standard-unordered-pair a b)
         ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
@@ -124,8 +124,8 @@ module _
     is-equiv-map-compute-symmetric-Id =
       is-equiv-has-inverse
         ( map-inv-compute-symmetric-Id)
-        ( issec-map-inv-compute-symmetric-Id)
-        ( isretr-map-inv-compute-symmetric-Id)
+        ( is-section-map-inv-compute-symmetric-Id)
+        ( is-retraction-map-inv-compute-symmetric-Id)
 
     compute-symmetric-Id :
       symmetric-Id (standard-unordered-pair a b) ≃ (a ＝ b)

@@ -93,10 +93,10 @@ module _
   where
 
   abstract
-    fundamental-theorem-id-retr :
-      (i : (x : A) → B x → a ＝ x) → (R : (x : A) → retr (i x)) →
+    fundamental-theorem-id-retraction :
+      (i : (x : A) → B x → a ＝ x) → (R : (x : A) → retraction (i x)) →
       is-fiberwise-equiv i
-    fundamental-theorem-id-retr i R =
+    fundamental-theorem-id-retraction i R =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr (tot i)
           ( is-contr-retract-of (Σ _ (λ y → a ＝ y))
@@ -116,17 +116,18 @@ module _
   where
 
   abstract
-    fundamental-theorem-id-sec :
-      (f : (x : A) → a ＝ x → B x) → ((x : A) → sec (f x)) →
+    fundamental-theorem-id-section :
+      (f : (x : A) → a ＝ x → B x) → ((x : A) → section (f x)) →
       is-fiberwise-equiv f
-    fundamental-theorem-id-sec f sec-f x =
-      is-equiv-sec-is-equiv (f x) (sec-f x) (is-fiberwise-equiv-i x)
+    fundamental-theorem-id-section f section-f x =
+      is-equiv-section-is-equiv (f x) (section-f x) (is-fiberwise-equiv-i x)
       where
         i : (x : A) → B x → a ＝ x
-        i = λ x → pr1 (sec-f x)
-        retr-i : (x : A) → retr (i x)
-        pr1 (retr-i x) = f x
-        pr2 (retr-i x) = pr2 (sec-f x)
+        i = λ x → pr1 (section-f x)
+        retraction-i : (x : A) → retraction (i x)
+        pr1 (retraction-i x) = f x
+        pr2 (retraction-i x) = pr2 (section-f x)
         is-fiberwise-equiv-i : is-fiberwise-equiv i
-        is-fiberwise-equiv-i = fundamental-theorem-id-retr a i retr-i
+        is-fiberwise-equiv-i =
+          fundamental-theorem-id-retraction a i retraction-i
 ```

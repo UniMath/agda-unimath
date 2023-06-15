@@ -130,7 +130,7 @@ module _
                           ( e)
                           ( λ y →
                             equiv-concat
-                              ( ap f (isretr-map-inv-equiv e y))
+                              ( ap f (is-retraction-map-inv-equiv e y))
                               ( g (map-equiv e y))))))) ∘e
               ( ( equiv-left-swap-Σ) ∘e
                 ( equiv-tot

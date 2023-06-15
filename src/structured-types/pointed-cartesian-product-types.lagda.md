@@ -89,13 +89,13 @@ module _
 ### The pointed inclusions into `A ×∗ B` are sections to the pointed projections
 
 ```agda
-  issec-map-inl-prod-Pointed-Type :
+  is-section-map-inl-prod-Pointed-Type :
     (map-pr1-prod-Pointed-Type ∘ map-inl-prod-Pointed-Type) ~ id
-  issec-map-inl-prod-Pointed-Type = refl-htpy
+  is-section-map-inl-prod-Pointed-Type = refl-htpy
 
-  issec-map-inr-prod-Pointed-Type :
+  is-section-map-inr-prod-Pointed-Type :
     (map-pr2-prod-Pointed-Type ∘ map-inr-prod-Pointed-Type) ~ id
-  issec-map-inr-prod-Pointed-Type = refl-htpy
+  is-section-map-inr-prod-Pointed-Type = refl-htpy
 ```
 
 ### The pointed gap map for the pointed product

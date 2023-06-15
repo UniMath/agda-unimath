@@ -236,13 +236,13 @@ module _
   left-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   left-subtraction-Ab = left-div-Group (group-Ab A)
 
-  issec-add-neg-Ab :
+  is-section-add-neg-Ab :
     (x : type-Ab A) → (add-Ab A x ∘ left-subtraction-Ab x) ~ id
-  issec-add-neg-Ab = issec-mul-inv-Group (group-Ab A)
+  is-section-add-neg-Ab = is-section-mul-inv-Group (group-Ab A)
 
-  isretr-add-neg-Ab :
+  is-retraction-add-neg-Ab :
     (x : type-Ab A) → (left-subtraction-Ab x ∘ add-Ab A x) ~ id
-  isretr-add-neg-Ab = isretr-mul-inv-Group (group-Ab A)
+  is-retraction-add-neg-Ab = is-retraction-mul-inv-Group (group-Ab A)
 
   is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
   is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
@@ -261,15 +261,15 @@ module _
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
 
-  issec-add-neg-Ab' :
+  is-section-add-neg-Ab' :
     (x : type-Ab A) →
     (add-Ab' A x ∘ (λ y → right-subtraction-Ab y x)) ~ id
-  issec-add-neg-Ab' = issec-mul-inv-Group' (group-Ab A)
+  is-section-add-neg-Ab' = is-section-mul-inv-Group' (group-Ab A)
 
-  isretr-add-neg-Ab' :
+  is-retraction-add-neg-Ab' :
     (x : type-Ab A) →
     ((λ y → right-subtraction-Ab y x) ∘ add-Ab' A x) ~ id
-  isretr-add-neg-Ab' = isretr-mul-inv-Group' (group-Ab A)
+  is-retraction-add-neg-Ab' = is-retraction-mul-inv-Group' (group-Ab A)
 
   is-equiv-add-Ab' : (x : type-Ab A) → is-equiv (add-Ab' A x)
   is-equiv-add-Ab' = is-equiv-mul-Group' (group-Ab A)
@@ -481,7 +481,7 @@ module _
     (x : type-Ab A) → conjugation-Ab A x ~ id
   is-identity-conjugation-Ab x y =
     ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
-    ( isretr-add-neg-Ab' A x y)
+    ( is-retraction-add-neg-Ab' A x y)
 ```
 
 ### Laws for conjugation and addition

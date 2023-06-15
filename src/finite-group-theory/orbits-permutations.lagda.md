@@ -1505,7 +1505,7 @@ module _
             ( conserves-other-orbits-transposition-quotient
               (composition-transposition-a-b g) T NQ NR))
 
-      retr-h'-inr-inr :
+      retraction-h'-inr-inr :
         ( T :
           equivalence-class
             ( same-orbits-permutation-count (composition-transposition-a-b g)))
@@ -1547,9 +1547,9 @@ module _
                   ( conserves-other-orbits-transposition-quotient
                     (composition-transposition-a-b g) T NQ NR)))))))
           ( T)
-      retr-h'-inr-inr T NQ NR (inl Q') R' = ex-falso (NQ Q')
-      retr-h'-inr-inr T NQ NR (inr NQ') (inl R') = ex-falso (NR R')
-      retr-h'-inr-inr T NQ NR (inr NQ') (inr NR') =
+      retraction-h'-inr-inr T NQ NR (inl Q') R' = ex-falso (NQ Q')
+      retraction-h'-inr-inr T NQ NR (inr NQ') (inl R') = ex-falso (NR R')
+      retraction-h'-inr-inr T NQ NR (inr NQ') (inr NR') =
         ( ap
           ( λ w →
             h'-inl
@@ -1640,7 +1640,7 @@ module _
                     ( pair (pr1 T) (H-conserves T NQ NR))
                     ( b)))) ∙
               ( eq-pair-Σ refl ( eq-is-prop is-prop-type-trunc-Prop)))))
-      retr-h' :
+      retraction-h' :
         (T :
           equivalence-class
             ( same-orbits-permutation-count
@@ -1656,7 +1656,7 @@ module _
             ( T)
             ( b)) →
         Id (h' (inv-h' T)) T
-      retr-h' T (inl Q) R =
+      retraction-h' T (inl Q) R =
         tr
           (λ w →
             Id
@@ -1770,7 +1770,7 @@ module _
                 ( a)
                 ( T)
                 ( Q))))
-      retr-h' T (inr NQ) (inl R) =
+      retraction-h' T (inr NQ) (inl R) =
         tr
           (λ w → Id (h' (cases-inv-h' T (pr1 w) (pr2 w))) T)
           {x = pair (inr NQ) (inl R)}
@@ -1807,7 +1807,7 @@ module _
             ( b)
             ( T)
             ( R))
-      retr-h' T (inr NQ) (inr NR) =
+      retraction-h' T (inr NQ) (inr NR) =
         tr
           (λ w → Id (h' (cases-inv-h' T (pr1 w) (pr2 w))) T)
           {x = pair (inr NQ) (inr NR)}
@@ -1839,7 +1839,7 @@ module _
                     ( composition-transposition-a-b g))
                   ( T)
                   ( b)))))
-          ( retr-h'-inr-inr T NQ NR
+          ( retraction-h'-inr-inr T NQ NR
             ( is-decidable-is-in-equivalence-class-same-orbits-permutation
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -1851,7 +1851,7 @@ module _
               ( pair X (unit-trunc-Prop (equiv-count eX)))
               ( g)
               ( pair (pr1 T) (H-conserves T NQ NR)) b))
-      sec-h'-inl :
+      section-h'-inl :
         ( k : Fin (number-of-elements-count h))
         ( Q :
           is-decidable
@@ -1880,7 +1880,7 @@ module _
         Id
           ( cases-inv-h' (h'-inl k (map-equiv-count h k) refl Q R) Q' R')
           ( inl k)
-      sec-h'-inl k (inl Q) R (inl Q') R' =
+      section-h'-inl k (inl Q) R (inl Q') R' =
         ap inl
           ( is-injective-map-equiv (equiv-count h)
             ( ap
@@ -1891,7 +1891,7 @@ module _
                 ( a)
                 ( map-equiv-count h k)
                 ( Q))))
-      sec-h'-inl k (inl Q) R (inr NQ') R' =
+      section-h'-inl k (inl Q) R (inr NQ') R' =
         ex-falso
           ( NQ'
             ( is-in-equivalence-class-eq-equivalence-class
@@ -1902,7 +1902,7 @@ module _
                   ( composition-transposition-a-b g))
                 ( a))
               ( refl)))
-      sec-h'-inl k (inr NQ) (inl R) Q' R' =
+      section-h'-inl k (inr NQ) (inl R) Q' R' =
         ex-falso
         ( NQ
           ( transitive-is-in-equivalence-class
@@ -1912,9 +1912,9 @@ module _
             ( a)
             ( R)
             ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
-      sec-h'-inl k (inr NQ) (inr NR) (inl Q') R' = ex-falso (NQ Q')
-      sec-h'-inl k (inr NQ) (inr NR) (inr NQ') (inl R') = ex-falso (NR R')
-      sec-h'-inl k (inr NQ) (inr NR) (inr NQ') (inr NR') =
+      section-h'-inl k (inr NQ) (inr NR) (inl Q') R' = ex-falso (NQ Q')
+      section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inl R') = ex-falso (NR R')
+      section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inr NR') =
         ap
           ( inl)
           ( ap
@@ -1923,7 +1923,7 @@ module _
               ( refl)
               ( eq-is-prop is-prop-type-trunc-Prop)) ∙
             ap (λ f → map-equiv f k) (left-inverse-law-equiv (equiv-count h)))
-      sec-h'-inr :
+      section-h'-inr :
         ( Q :
           is-decidable
             ( is-in-equivalence-class
@@ -1950,13 +1950,13 @@ module _
             ( Q)
             ( R))
           ( inr star)
-      sec-h'-inr (inl Q) R =
+      section-h'-inr (inl Q) R =
         ex-falso (not-same-orbits-transposition-same-orbits g P
           ( symm-Eq-Rel
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( Q)))
-      sec-h'-inr (inr Q) (inl R) = refl
-      sec-h'-inr (inr Q) (inr NR) =
+      section-h'-inr (inr Q) (inl R) = refl
+      section-h'-inr (inr Q) (inr NR) =
         ex-falso
           ( NR
             ( is-in-equivalence-class-eq-equivalence-class
@@ -1967,10 +1967,10 @@ module _
                   ( composition-transposition-a-b g))
                 ( b))
               ( refl)))
-      sec-h' :
+      section-h' :
         (k : Fin (succ-ℕ (number-of-elements-count h))) → Id (inv-h' (h' k)) k
-      sec-h' (inl k) =
-        sec-h'-inl k Q R
+      section-h' (inl k) =
+        section-h'-inl k Q R
           ( is-decidable-is-in-equivalence-class-same-orbits-permutation
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -2016,8 +2016,8 @@ module _
             ( g)
             ( map-equiv-count h k)
             ( b)
-      sec-h' (inr star) =
-        sec-h'-inr
+      section-h' (inr star) =
+        section-h'-inr
         ( is-decidable-is-in-equivalence-class-same-orbits-permutation
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -2065,7 +2065,7 @@ module _
         ( is-equiv-has-inverse
           ( inv-h' g P h)
           ( λ T →
-            retr-h'
+            retraction-h'
               ( g)
               ( P)
               ( h)
@@ -2082,7 +2082,7 @@ module _
                 ( composition-transposition-a-b g)
                 ( T)
                 ( b)))
-          ( sec-h' g P h)))
+          ( section-h' g P h)))
 
   abstract
     number-orbits-composition-transposition :

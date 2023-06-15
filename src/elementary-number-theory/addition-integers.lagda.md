@@ -83,9 +83,9 @@ abstract
   left-predecessor-law-add-ℤ (inl n) y = refl
   left-predecessor-law-add-ℤ (inr (inl star)) y = refl
   left-predecessor-law-add-ℤ (inr (inr zero-ℕ)) y =
-    inv (isretr-pred-ℤ y)
+    inv (is-retraction-pred-ℤ y)
   left-predecessor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
-    inv (isretr-pred-ℤ ((inr (inr x)) +ℤ y))
+    inv (is-retraction-pred-ℤ ((inr (inr x)) +ℤ y))
 
   right-predecessor-law-add-ℤ :
     (x y : ℤ) → x +ℤ pred-ℤ y ＝ pred-ℤ (x +ℤ y)
@@ -97,18 +97,18 @@ abstract
     equational-reasoning
       succ-ℤ (pred-ℤ n)
       ＝ n
-        by issec-pred-ℤ n
+        by is-section-pred-ℤ n
       ＝ pred-ℤ (succ-ℤ n)
-        by inv (isretr-pred-ℤ n)
+        by inv (is-retraction-pred-ℤ n)
   right-predecessor-law-add-ℤ (inr (inr (succ-ℕ x))) n =
     equational-reasoning
       succ-ℤ (inr (inr x) +ℤ pred-ℤ n)
       ＝ succ-ℤ (pred-ℤ (inr (inr x) +ℤ n))
         by ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) n)
       ＝ inr (inr x) +ℤ n
-        by issec-pred-ℤ ((inr (inr x)) +ℤ n)
+        by is-section-pred-ℤ ((inr (inr x)) +ℤ n)
       ＝ pred-ℤ (succ-ℤ (inr (inr x) +ℤ n))
-        by inv (isretr-pred-ℤ ((inr (inr x)) +ℤ n))
+        by inv (is-retraction-pred-ℤ ((inr (inr x)) +ℤ n))
 ```
 
 ### Left and right successor laws
@@ -118,12 +118,12 @@ abstract
   left-successor-law-add-ℤ :
     (x y : ℤ) → succ-ℤ x +ℤ y ＝ succ-ℤ (x +ℤ y)
   left-successor-law-add-ℤ (inl zero-ℕ) y =
-    inv (issec-pred-ℤ y)
+    inv (is-section-pred-ℤ y)
   left-successor-law-add-ℤ (inl (succ-ℕ x)) y =
     equational-reasoning
       inl x +ℤ y
       ＝ succ-ℤ (pred-ℤ (inl x +ℤ y))
-        by inv (issec-pred-ℤ ((inl x) +ℤ y))
+        by inv (is-section-pred-ℤ ((inl x) +ℤ y))
       ＝ succ-ℤ (pred-ℤ (inl x) +ℤ y)
         by ap succ-ℤ (inv (left-predecessor-law-add-ℤ (inl x) y))
   left-successor-law-add-ℤ (inr (inl star)) y = refl
@@ -135,18 +135,18 @@ abstract
     equational-reasoning
       pred-ℤ (succ-ℤ y)
       ＝ y
-        by isretr-pred-ℤ y
+        by is-retraction-pred-ℤ y
       ＝ succ-ℤ (pred-ℤ y)
-        by inv (issec-pred-ℤ y)
+        by inv (is-section-pred-ℤ y)
   right-successor-law-add-ℤ (inl (succ-ℕ x)) y =
     equational-reasoning
       pred-ℤ (inl x +ℤ succ-ℤ y)
       ＝ pred-ℤ (succ-ℤ (inl x +ℤ y))
         by ap pred-ℤ (right-successor-law-add-ℤ (inl x) y)
       ＝ inl x +ℤ y
-        by isretr-pred-ℤ ((inl x) +ℤ y)
+        by is-retraction-pred-ℤ ((inl x) +ℤ y)
       ＝ succ-ℤ (pred-ℤ (inl x +ℤ y))
-        by inv (issec-pred-ℤ ((inl x) +ℤ y))
+        by inv (is-section-pred-ℤ ((inl x) +ℤ y))
   right-successor-law-add-ℤ (inr (inl star)) y = refl
   right-successor-law-add-ℤ (inr (inr zero-ℕ)) y = refl
   right-successor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
@@ -301,7 +301,7 @@ abstract
       ＝ succ-ℤ (pred-ℤ (inr (inr x) +ℤ inl x))
         by ap succ-ℤ (right-predecessor-law-add-ℤ (inr (inr x)) (inl x))
       ＝ inr (inr x) +ℤ inl x
-        by issec-pred-ℤ ((inr (inr x)) +ℤ (inl x))
+        by is-section-pred-ℤ ((inr (inr x)) +ℤ (inl x))
       ＝ zero-ℤ
         by left-inverse-law-add-ℤ (inl x)
   left-inverse-law-add-ℤ (inr (inl star)) = refl
@@ -338,9 +338,9 @@ interchange-law-add-add-ℤ =
 ### Addition by `x` is a binary equivalence
 
 ```agda
-issec-left-add-neg-ℤ :
+is-section-left-add-neg-ℤ :
   (x y : ℤ) → x +ℤ (neg-ℤ x +ℤ y) ＝ y
-issec-left-add-neg-ℤ x y =
+is-section-left-add-neg-ℤ x y =
   equational-reasoning
     x +ℤ (neg-ℤ x +ℤ y)
     ＝ (x +ℤ neg-ℤ x) +ℤ y
@@ -348,9 +348,9 @@ issec-left-add-neg-ℤ x y =
     ＝ y
       by ap (_+ℤ y) (right-inverse-law-add-ℤ x)
 
-isretr-left-add-neg-ℤ :
+is-retraction-left-add-neg-ℤ :
   (x y : ℤ) → (neg-ℤ x) +ℤ (x +ℤ y) ＝ y
-isretr-left-add-neg-ℤ x y =
+is-retraction-left-add-neg-ℤ x y =
   equational-reasoning
     neg-ℤ x +ℤ (x +ℤ y)
     ＝ (neg-ℤ x +ℤ x) +ℤ y
@@ -361,17 +361,17 @@ isretr-left-add-neg-ℤ x y =
 abstract
   is-equiv-left-add-ℤ : (x : ℤ) → is-equiv (x +ℤ_)
   pr1 (pr1 (is-equiv-left-add-ℤ x)) = add-ℤ (neg-ℤ x)
-  pr2 (pr1 (is-equiv-left-add-ℤ x)) = issec-left-add-neg-ℤ x
+  pr2 (pr1 (is-equiv-left-add-ℤ x)) = is-section-left-add-neg-ℤ x
   pr1 (pr2 (is-equiv-left-add-ℤ x)) = add-ℤ (neg-ℤ x)
-  pr2 (pr2 (is-equiv-left-add-ℤ x)) = isretr-left-add-neg-ℤ x
+  pr2 (pr2 (is-equiv-left-add-ℤ x)) = is-retraction-left-add-neg-ℤ x
 
 equiv-left-add-ℤ : ℤ → (ℤ ≃ ℤ)
 pr1 (equiv-left-add-ℤ x) = add-ℤ x
 pr2 (equiv-left-add-ℤ x) = is-equiv-left-add-ℤ x
 
-issec-right-add-neg-ℤ :
+is-section-right-add-neg-ℤ :
   (x y : ℤ) → (y +ℤ neg-ℤ x) +ℤ x ＝ y
-issec-right-add-neg-ℤ x y =
+is-section-right-add-neg-ℤ x y =
   equational-reasoning
     (y +ℤ neg-ℤ x) +ℤ x
     ＝ y +ℤ (neg-ℤ x +ℤ x)
@@ -381,9 +381,9 @@ issec-right-add-neg-ℤ x y =
     ＝ y
       by right-unit-law-add-ℤ y
 
-isretr-right-add-neg-ℤ :
+is-retraction-right-add-neg-ℤ :
   (x y : ℤ) → (y +ℤ x) +ℤ neg-ℤ x ＝ y
-isretr-right-add-neg-ℤ x y =
+is-retraction-right-add-neg-ℤ x y =
   equational-reasoning
     (y +ℤ x) +ℤ neg-ℤ x
     ＝ y +ℤ (x +ℤ neg-ℤ x)
@@ -396,9 +396,9 @@ isretr-right-add-neg-ℤ x y =
 abstract
   is-equiv-right-add-ℤ : (y : ℤ) → is-equiv (_+ℤ y)
   pr1 (pr1 (is-equiv-right-add-ℤ y)) = _+ℤ (neg-ℤ y)
-  pr2 (pr1 (is-equiv-right-add-ℤ y)) = issec-right-add-neg-ℤ y
+  pr2 (pr1 (is-equiv-right-add-ℤ y)) = is-section-right-add-neg-ℤ y
   pr1 (pr2 (is-equiv-right-add-ℤ y)) = _+ℤ (neg-ℤ y)
-  pr2 (pr2 (is-equiv-right-add-ℤ y)) = isretr-right-add-neg-ℤ y
+  pr2 (pr2 (is-equiv-right-add-ℤ y)) = is-retraction-right-add-neg-ℤ y
 
 equiv-right-add-ℤ : ℤ → (ℤ ≃ ℤ)
 pr1 (equiv-right-add-ℤ y) = _+ℤ y

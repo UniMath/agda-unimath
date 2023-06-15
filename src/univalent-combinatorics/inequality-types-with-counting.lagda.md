@@ -71,9 +71,9 @@ preserves-leq-equiv-count :
 preserves-leq-equiv-count e {x} {y} H =
   concatenate-eq-leq-eq-Fin
     ( number-of-elements-count e)
-    ( isretr-map-inv-equiv (equiv-count e) x)
+    ( is-retraction-map-inv-equiv (equiv-count e) x)
     ( H)
-    ( inv (isretr-map-inv-equiv (equiv-count e) y))
+    ( inv (is-retraction-map-inv-equiv (equiv-count e) y))
 
 reflects-leq-equiv-count :
   {l : Level} {X : UU l} (e : count X)
@@ -83,9 +83,9 @@ reflects-leq-equiv-count :
 reflects-leq-equiv-count e {x} {y} H =
   concatenate-eq-leq-eq-Fin
     ( number-of-elements-count e)
-    ( inv (isretr-map-inv-equiv (equiv-count e) x))
+    ( inv (is-retraction-map-inv-equiv (equiv-count e) x))
     ( H)
-    ( isretr-map-inv-equiv (equiv-count e) y)
+    ( is-retraction-map-inv-equiv (equiv-count e) y)
 
 transpose-leq-equiv-count :
   {l : Level} {X : UU l} (e : count X) →
@@ -96,7 +96,7 @@ transpose-leq-equiv-count :
 transpose-leq-equiv-count e {x} {y} H =
   concatenate-eq-leq-eq-Fin
     ( number-of-elements-count e)
-    ( isretr-map-inv-equiv (equiv-count e) x)
+    ( is-retraction-map-inv-equiv (equiv-count e) x)
     ( H)
     ( refl)
 
@@ -110,5 +110,5 @@ transpose-leq-equiv-count' e {x} {y} H =
     ( number-of-elements-count e)
     ( refl)
     ( H)
-    ( inv (isretr-map-inv-equiv (equiv-count e) y))
+    ( inv (is-retraction-map-inv-equiv (equiv-count e) y))
 ```

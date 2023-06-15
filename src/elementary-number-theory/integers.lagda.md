@@ -163,26 +163,26 @@ pr2 ℤ-Set = is-set-ℤ
 
 ```agda
 abstract
-  isretr-pred-ℤ : (pred-ℤ ∘ succ-ℤ) ~ id
-  isretr-pred-ℤ (inl zero-ℕ) = refl
-  isretr-pred-ℤ (inl (succ-ℕ x)) = refl
-  isretr-pred-ℤ (inr (inl star)) = refl
-  isretr-pred-ℤ (inr (inr zero-ℕ)) = refl
-  isretr-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+  is-retraction-pred-ℤ : (pred-ℤ ∘ succ-ℤ) ~ id
+  is-retraction-pred-ℤ (inl zero-ℕ) = refl
+  is-retraction-pred-ℤ (inl (succ-ℕ x)) = refl
+  is-retraction-pred-ℤ (inr (inl star)) = refl
+  is-retraction-pred-ℤ (inr (inr zero-ℕ)) = refl
+  is-retraction-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
-  issec-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
-  issec-pred-ℤ (inl zero-ℕ) = refl
-  issec-pred-ℤ (inl (succ-ℕ x)) = refl
-  issec-pred-ℤ (inr (inl star)) = refl
-  issec-pred-ℤ (inr (inr zero-ℕ)) = refl
-  issec-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+  is-section-pred-ℤ : (succ-ℤ ∘ pred-ℤ) ~ id
+  is-section-pred-ℤ (inl zero-ℕ) = refl
+  is-section-pred-ℤ (inl (succ-ℕ x)) = refl
+  is-section-pred-ℤ (inr (inl star)) = refl
+  is-section-pred-ℤ (inr (inr zero-ℕ)) = refl
+  is-section-pred-ℤ (inr (inr (succ-ℕ x))) = refl
 
 abstract
   is-equiv-succ-ℤ : is-equiv succ-ℤ
   pr1 (pr1 is-equiv-succ-ℤ) = pred-ℤ
-  pr2 (pr1 is-equiv-succ-ℤ) = issec-pred-ℤ
+  pr2 (pr1 is-equiv-succ-ℤ) = is-section-pred-ℤ
   pr1 (pr2 is-equiv-succ-ℤ) = pred-ℤ
-  pr2 (pr2 is-equiv-succ-ℤ) = isretr-pred-ℤ
+  pr2 (pr2 is-equiv-succ-ℤ) = is-retraction-pred-ℤ
 
 equiv-succ-ℤ : ℤ ≃ ℤ
 pr1 equiv-succ-ℤ = succ-ℤ
@@ -191,9 +191,9 @@ pr2 equiv-succ-ℤ = is-equiv-succ-ℤ
 abstract
   is-equiv-pred-ℤ : is-equiv pred-ℤ
   pr1 (pr1 is-equiv-pred-ℤ) = succ-ℤ
-  pr2 (pr1 is-equiv-pred-ℤ) = isretr-pred-ℤ
+  pr2 (pr1 is-equiv-pred-ℤ) = is-retraction-pred-ℤ
   pr1 (pr2 is-equiv-pred-ℤ) = succ-ℤ
-  pr2 (pr2 is-equiv-pred-ℤ) = issec-pred-ℤ
+  pr2 (pr2 is-equiv-pred-ℤ) = is-section-pred-ℤ
 
 equiv-pred-ℤ : ℤ ≃ ℤ
 pr1 equiv-pred-ℤ = pred-ℤ
@@ -205,7 +205,7 @@ pr2 equiv-pred-ℤ = is-equiv-pred-ℤ
 ```agda
 is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
-  inv (isretr-pred-ℤ x) ∙ (ap pred-ℤ p ∙ isretr-pred-ℤ y)
+  inv (is-retraction-pred-ℤ x) ∙ (ap pred-ℤ p ∙ is-retraction-pred-ℤ y)
 
 has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (succ-ℤ x ＝ x)
 has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
@@ -386,27 +386,27 @@ nat-nonnegative-ℤ : nonnegative-ℤ → ℕ
 nat-nonnegative-ℤ (pair (inr (inl x)) H) = zero-ℕ
 nat-nonnegative-ℤ (pair (inr (inr x)) H) = succ-ℕ x
 
-issec-nat-nonnegative-ℤ :
+is-section-nat-nonnegative-ℤ :
   (x : nonnegative-ℤ) → nonnegative-int-ℕ (nat-nonnegative-ℤ x) ＝ x
-issec-nat-nonnegative-ℤ (pair (inr (inl star)) star) = refl
-issec-nat-nonnegative-ℤ (pair (inr (inr x)) star) = refl
+is-section-nat-nonnegative-ℤ (pair (inr (inl star)) star) = refl
+is-section-nat-nonnegative-ℤ (pair (inr (inr x)) star) = refl
 
-isretr-nat-nonnegative-ℤ :
+is-retraction-nat-nonnegative-ℤ :
   (n : ℕ) → nat-nonnegative-ℤ (nonnegative-int-ℕ n) ＝ n
-isretr-nat-nonnegative-ℤ zero-ℕ = refl
-isretr-nat-nonnegative-ℤ (succ-ℕ n) = refl
+is-retraction-nat-nonnegative-ℤ zero-ℕ = refl
+is-retraction-nat-nonnegative-ℤ (succ-ℕ n) = refl
 
 is-equiv-nat-nonnegative-ℤ : is-equiv nat-nonnegative-ℤ
 pr1 (pr1 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
-pr2 (pr1 is-equiv-nat-nonnegative-ℤ) = isretr-nat-nonnegative-ℤ
+pr2 (pr1 is-equiv-nat-nonnegative-ℤ) = is-retraction-nat-nonnegative-ℤ
 pr1 (pr2 is-equiv-nat-nonnegative-ℤ) = nonnegative-int-ℕ
-pr2 (pr2 is-equiv-nat-nonnegative-ℤ) = issec-nat-nonnegative-ℤ
+pr2 (pr2 is-equiv-nat-nonnegative-ℤ) = is-section-nat-nonnegative-ℤ
 
 is-equiv-nonnegative-int-ℕ : is-equiv nonnegative-int-ℕ
 pr1 (pr1 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
-pr2 (pr1 is-equiv-nonnegative-int-ℕ) = issec-nat-nonnegative-ℤ
+pr2 (pr1 is-equiv-nonnegative-int-ℕ) = is-section-nat-nonnegative-ℤ
 pr1 (pr2 is-equiv-nonnegative-int-ℕ) = nat-nonnegative-ℤ
-pr2 (pr2 is-equiv-nonnegative-int-ℕ) = isretr-nat-nonnegative-ℤ
+pr2 (pr2 is-equiv-nonnegative-int-ℕ) = is-retraction-nat-nonnegative-ℤ
 
 equiv-nonnegative-int-ℕ : ℕ ≃ nonnegative-ℤ
 pr1 equiv-nonnegative-int-ℕ = nonnegative-int-ℕ
@@ -414,9 +414,9 @@ pr2 equiv-nonnegative-int-ℕ = is-equiv-nonnegative-int-ℕ
 
 is-injective-nonnegative-int-ℕ : is-injective nonnegative-int-ℕ
 is-injective-nonnegative-int-ℕ {x} {y} p =
-  ( inv (isretr-nat-nonnegative-ℤ x)) ∙
+  ( inv (is-retraction-nat-nonnegative-ℤ x)) ∙
   ( ( ap nat-nonnegative-ℤ p) ∙
-    ( isretr-nat-nonnegative-ℤ y))
+    ( is-retraction-nat-nonnegative-ℤ y))
 
 decide-is-nonnegative-ℤ :
   {x : ℤ} → (is-nonnegative-ℤ x) + (is-nonnegative-ℤ (neg-ℤ x))

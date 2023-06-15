@@ -201,15 +201,15 @@ map-inv-structure-𝕎-Alg :
   𝕎 A B → type-polynomial-endofunctor A B (𝕎 A B)
 map-inv-structure-𝕎-Alg (tree-𝕎 x α) = pair x α
 
-issec-map-inv-structure-𝕎-Alg :
+is-section-map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   (structure-𝕎-Alg {B = B} ∘ map-inv-structure-𝕎-Alg {B = B}) ~ id
-issec-map-inv-structure-𝕎-Alg (tree-𝕎 x α) = refl
+is-section-map-inv-structure-𝕎-Alg (tree-𝕎 x α) = refl
 
-isretr-map-inv-structure-𝕎-Alg :
+is-retraction-map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   (map-inv-structure-𝕎-Alg {B = B} ∘ structure-𝕎-Alg {B = B}) ~ id
-isretr-map-inv-structure-𝕎-Alg (pair x α) = refl
+is-retraction-map-inv-structure-𝕎-Alg (pair x α) = refl
 
 is-equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
@@ -217,8 +217,8 @@ is-equiv-structure-𝕎-Alg :
 is-equiv-structure-𝕎-Alg =
   is-equiv-has-inverse
     map-inv-structure-𝕎-Alg
-    issec-map-inv-structure-𝕎-Alg
-    isretr-map-inv-structure-𝕎-Alg
+    is-section-map-inv-structure-𝕎-Alg
+    is-retraction-map-inv-structure-𝕎-Alg
 
 equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
@@ -232,8 +232,8 @@ is-equiv-map-inv-structure-𝕎-Alg :
 is-equiv-map-inv-structure-𝕎-Alg =
   is-equiv-has-inverse
     structure-𝕎-Alg
-    isretr-map-inv-structure-𝕎-Alg
-    issec-map-inv-structure-𝕎-Alg
+    is-retraction-map-inv-structure-𝕎-Alg
+    is-section-map-inv-structure-𝕎-Alg
 
 inv-equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →

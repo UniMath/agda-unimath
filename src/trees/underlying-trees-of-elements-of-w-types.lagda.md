@@ -232,19 +232,20 @@ module _
   map-inv-enrichment-element-𝕎 =
     map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
 
-  issec-map-inv-enrichment-element-𝕎 :
+  is-section-map-inv-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
     ( map-enrichment-element-𝕎 w x ∘
       map-inv-enrichment-element-𝕎 w x) ~ id
-  issec-map-inv-enrichment-element-𝕎 =
-    issec-map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
+  is-section-map-inv-enrichment-element-𝕎 =
+    is-section-map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
 
-  isretr-map-inv-enrichment-element-𝕎 :
+  is-retraction-map-inv-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
     ( map-inv-enrichment-element-𝕎 w x ∘
       map-enrichment-element-𝕎 w x) ~ id
-  isretr-map-inv-enrichment-element-𝕎 =
-    isretr-map-inv-enrichment-directed-tree-element-coalgebra (𝕎-Coalg A B)
+  is-retraction-map-inv-enrichment-element-𝕎 =
+    is-retraction-map-inv-enrichment-directed-tree-element-coalgebra
+      ( 𝕎-Coalg A B)
 
   is-equiv-map-enrichment-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
@@ -341,17 +342,21 @@ module _
   map-inv-node-compute-directed-tree-element-𝕎 =
     map-inv-node-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
-  issec-map-inv-node-compute-directed-tree-element-𝕎 :
+  is-section-map-inv-node-compute-directed-tree-element-𝕎 :
     ( node-compute-directed-tree-element-𝕎 ∘
       map-inv-node-compute-directed-tree-element-𝕎) ~ id
-  issec-map-inv-node-compute-directed-tree-element-𝕎 =
-    issec-map-inv-node-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  is-section-map-inv-node-compute-directed-tree-element-𝕎 =
+    is-section-map-inv-node-compute-directed-tree-element-coalgebra
+      ( 𝕎-Coalg A B)
+      ( w)
 
-  isretr-map-inv-node-compute-directed-tree-element-𝕎 :
+  is-retraction-map-inv-node-compute-directed-tree-element-𝕎 :
     ( map-inv-node-compute-directed-tree-element-𝕎 ∘
       node-compute-directed-tree-element-𝕎) ~ id
-  isretr-map-inv-node-compute-directed-tree-element-𝕎 =
-    isretr-map-inv-node-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  is-retraction-map-inv-node-compute-directed-tree-element-𝕎 =
+    is-retraction-map-inv-node-compute-directed-tree-element-coalgebra
+      ( 𝕎-Coalg A B)
+      ( w)
 
   is-equiv-node-compute-directed-tree-element-𝕎 :
     is-equiv node-compute-directed-tree-element-𝕎
@@ -385,7 +390,7 @@ module _
   map-inv-edge-compute-directed-tree-element-𝕎 =
     map-inv-edge-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
 
-  issec-map-inv-edge-compute-directed-tree-element-𝕎 :
+  is-section-map-inv-edge-compute-directed-tree-element-𝕎 :
     (x y : node-element-𝕎 w) →
     ( e :
       edge-combinator-Directed-Tree
@@ -394,15 +399,19 @@ module _
         ( node-compute-directed-tree-element-𝕎 y)) →
     edge-compute-directed-tree-element-𝕎 x y
       ( map-inv-edge-compute-directed-tree-element-𝕎 x y e) ＝ e
-  issec-map-inv-edge-compute-directed-tree-element-𝕎 =
-    issec-map-inv-edge-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  is-section-map-inv-edge-compute-directed-tree-element-𝕎 =
+    is-section-map-inv-edge-compute-directed-tree-element-coalgebra
+      ( 𝕎-Coalg A B)
+      ( w)
 
-  isretr-map-inv-edge-compute-directed-tree-element-𝕎 :
+  is-retraction-map-inv-edge-compute-directed-tree-element-𝕎 :
     (x y : node-element-𝕎 w) (e : edge-element-𝕎 w x y) →
     map-inv-edge-compute-directed-tree-element-𝕎 x y
       ( edge-compute-directed-tree-element-𝕎 x y e) ＝ e
-  isretr-map-inv-edge-compute-directed-tree-element-𝕎 =
-    isretr-map-inv-edge-compute-directed-tree-element-coalgebra (𝕎-Coalg A B) w
+  is-retraction-map-inv-edge-compute-directed-tree-element-𝕎 =
+    is-retraction-map-inv-edge-compute-directed-tree-element-coalgebra
+      ( 𝕎-Coalg A B)
+      ( w)
 
   is-equiv-edge-compute-directed-tree-element-𝕎 :
     (x y : node-element-𝕎 w) →

@@ -215,18 +215,18 @@ convert-based-succ-based-ℕ
         ( succ-ℕ k)
         ( (succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
 
-issec-inv-convert-based-ℕ :
+is-section-inv-convert-based-ℕ :
   (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n
-issec-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
-issec-inv-convert-based-ℕ k (succ-ℕ n) =
+is-section-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
+is-section-inv-convert-based-ℕ k (succ-ℕ n) =
   ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) ∙
-  ( ap succ-ℕ (issec-inv-convert-based-ℕ k n))
+  ( ap succ-ℕ (is-section-inv-convert-based-ℕ k n))
 
-isretr-inv-convert-based-ℕ :
+is-retraction-inv-convert-based-ℕ :
   (k : ℕ) (x : based-ℕ (succ-ℕ k)) →
   inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x) ＝ x
-isretr-inv-convert-based-ℕ k x =
+is-retraction-inv-convert-based-ℕ k x =
   is-injective-convert-based-ℕ
     ( succ-ℕ k)
-    ( issec-inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x))
+    ( is-section-inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x))
 ```

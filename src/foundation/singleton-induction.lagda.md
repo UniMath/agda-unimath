@@ -32,7 +32,7 @@ singleton induction if and only if it is contractible.
 ```agda
 is-singleton :
   (l1 : Level) {l2 : Level} (A : UU l2) → A → UU (lsuc l1 ⊔ l2)
-is-singleton l A a = (B : A → UU l) → sec (ev-point a {B})
+is-singleton l A a = (B : A → UU l) → section (ev-point a {B})
 
 ind-is-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) →

@@ -116,22 +116,22 @@ module _
   map-inv-equiv-left-summand : X → Σ (X + Y) is-left
   map-inv-equiv-left-summand x = pair (inl x) star
 
-  issec-map-inv-equiv-left-summand :
+  is-section-map-inv-equiv-left-summand :
     (map-equiv-left-summand ∘ map-inv-equiv-left-summand) ~ id
-  issec-map-inv-equiv-left-summand x = refl
+  is-section-map-inv-equiv-left-summand x = refl
 
-  isretr-map-inv-equiv-left-summand :
+  is-retraction-map-inv-equiv-left-summand :
     (map-inv-equiv-left-summand ∘ map-equiv-left-summand) ~ id
-  isretr-map-inv-equiv-left-summand (pair (inl x) star) = refl
-  isretr-map-inv-equiv-left-summand (pair (inr x) ())
+  is-retraction-map-inv-equiv-left-summand (pair (inl x) star) = refl
+  is-retraction-map-inv-equiv-left-summand (pair (inr x) ())
 
   equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
   pr2 equiv-left-summand =
     is-equiv-has-inverse
       map-inv-equiv-left-summand
-      issec-map-inv-equiv-left-summand
-      isretr-map-inv-equiv-left-summand
+      is-section-map-inv-equiv-left-summand
+      is-retraction-map-inv-equiv-left-summand
 ```
 
 ### The type of right elements is equivalent to the right summand
@@ -148,22 +148,22 @@ module _
   map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
   map-inv-equiv-right-summand y = pair (inr y) star
 
-  issec-map-inv-equiv-right-summand :
+  is-section-map-inv-equiv-right-summand :
     (map-equiv-right-summand ∘ map-inv-equiv-right-summand) ~ id
-  issec-map-inv-equiv-right-summand y = refl
+  is-section-map-inv-equiv-right-summand y = refl
 
-  isretr-map-inv-equiv-right-summand :
+  is-retraction-map-inv-equiv-right-summand :
     (map-inv-equiv-right-summand ∘ map-equiv-right-summand) ~ id
-  isretr-map-inv-equiv-right-summand (pair (inl x) ())
-  isretr-map-inv-equiv-right-summand (pair (inr x) star) = refl
+  is-retraction-map-inv-equiv-right-summand (pair (inl x) ())
+  is-retraction-map-inv-equiv-right-summand (pair (inr x) star) = refl
 
   equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
     is-equiv-has-inverse
       map-inv-equiv-right-summand
-      issec-map-inv-equiv-right-summand
-      isretr-map-inv-equiv-right-summand
+      is-section-map-inv-equiv-right-summand
+      is-retraction-map-inv-equiv-right-summand
 ```
 
 ### Coproducts of contractible types are not contractible

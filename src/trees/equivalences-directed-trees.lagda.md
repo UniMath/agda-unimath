@@ -114,18 +114,18 @@ module _
       ( graph-Directed-Tree T)
       ( e)
 
-  issec-inv-node-equiv-Directed-Tree :
+  is-section-inv-node-equiv-Directed-Tree :
     ( node-equiv-Directed-Tree ∘ inv-node-equiv-Directed-Tree) ~ id
-  issec-inv-node-equiv-Directed-Tree =
-    issec-inv-vertex-equiv-Directed-Graph
+  is-section-inv-node-equiv-Directed-Tree =
+    is-section-inv-vertex-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( e)
 
-  isretr-inv-node-equiv-Directed-Tree :
+  is-retraction-inv-node-equiv-Directed-Tree :
     ( inv-node-equiv-Directed-Tree ∘ node-equiv-Directed-Tree) ~ id
-  isretr-inv-node-equiv-Directed-Tree =
-    isretr-inv-vertex-equiv-Directed-Graph
+  is-retraction-inv-node-equiv-Directed-Tree =
+    is-retraction-inv-vertex-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( e)
@@ -386,13 +386,13 @@ module _
     is-equiv (node-hom-Directed-Tree S T f) →
     preserves-root-hom-Directed-Tree S T f
   preserves-root-is-equiv-node-hom-Directed-Tree H =
-    ( inv (issec-map-inv-is-equiv H (root-Directed-Tree T))) ∙
+    ( inv (is-section-map-inv-is-equiv H (root-Directed-Tree T))) ∙
     ( inv
       ( ap
         ( node-hom-Directed-Tree S T f)
         ( is-root-is-root-node-hom-Directed-Tree S T f
           ( map-inv-is-equiv H (root-Directed-Tree T))
-          ( inv (issec-map-inv-is-equiv H (root-Directed-Tree T))))))
+          ( inv (is-section-map-inv-is-equiv H (root-Directed-Tree T))))))
 
 module _
   {l1 l2 l3 l4 : Level} (S : Directed-Tree l1 l2) (T : Directed-Tree l3 l4)
@@ -552,22 +552,22 @@ module _
       ( graph-Directed-Tree T)
       ( f)
 
-  issec-inv-equiv-Directed-Tree :
+  is-section-inv-equiv-Directed-Tree :
     htpy-equiv-Directed-Tree T T
       ( comp-equiv-Directed-Tree T S T f inv-equiv-Directed-Tree)
       ( id-equiv-Directed-Tree T)
-  issec-inv-equiv-Directed-Tree =
-    issec-inv-equiv-Directed-Graph
+  is-section-inv-equiv-Directed-Tree =
+    is-section-inv-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)
 
-  isretr-inv-equiv-Directed-Tree :
+  is-retraction-inv-equiv-Directed-Tree :
     htpy-equiv-Directed-Tree S S
       ( comp-equiv-Directed-Tree S T S inv-equiv-Directed-Tree f)
       ( id-equiv-Directed-Tree S)
-  isretr-inv-equiv-Directed-Tree =
-    isretr-inv-equiv-Directed-Graph
+  is-retraction-inv-equiv-Directed-Tree =
+    is-retraction-inv-equiv-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)

@@ -85,15 +85,15 @@ pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin k x
 #### We show that these maps are mutual inverses
 
 ```agda
-issec-classical-standard-Fin :
+is-section-classical-standard-Fin :
   {k : ℕ} (x : Fin k) →
   Id (standard-classical-Fin k (classical-standard-Fin k x)) x
-issec-classical-standard-Fin {succ-ℕ k} x = issec-nat-Fin k x
+is-section-classical-standard-Fin {succ-ℕ k} x = is-section-nat-Fin k x
 
-isretr-classical-standard-Fin :
+is-retraction-classical-standard-Fin :
   {k : ℕ} (x : classical-Fin k) →
   Id (classical-standard-Fin k (standard-classical-Fin k x)) x
-isretr-classical-standard-Fin {succ-ℕ k} (pair x p) =
+is-retraction-classical-standard-Fin {succ-ℕ k} (pair x p) =
   eq-Eq-classical-Fin (succ-ℕ k)
     ( classical-standard-Fin
       ( succ-ℕ k)

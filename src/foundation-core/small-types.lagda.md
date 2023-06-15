@@ -203,7 +203,7 @@ pr2 (is-small-Σ {B = B} (pair X e) H) =
     ( λ a →
       ( equiv-tr
         ( λ t → pr1 (H t))
-        ( inv (isretr-map-inv-equiv e a))) ∘e
+        ( inv (is-retraction-map-inv-equiv e a))) ∘e
       ( pr2 (H a)))
 
 Σ-Small-Type :
@@ -246,7 +246,7 @@ pr2 (is-small-Π {B = B} (pair X e) H) =
     ( λ a →
       ( equiv-tr
       ( λ t → pr1 (H t))
-        ( inv (isretr-map-inv-equiv e a))) ∘e
+        ( inv (is-retraction-map-inv-equiv e a))) ∘e
       ( pr2 (H a)))
 
 Π-Small-Type :

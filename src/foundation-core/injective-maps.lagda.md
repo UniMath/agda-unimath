@@ -108,9 +108,9 @@ module _
   abstract
     is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
     is-injective-is-equiv H {x} {y} p =
-      ( inv (isretr-map-inv-is-equiv H x)) ∙
+      ( inv (is-retraction-map-inv-is-equiv H x)) ∙
       ( ( ap (map-inv-is-equiv H) p) ∙
-        ( isretr-map-inv-is-equiv H y))
+        ( is-retraction-map-inv-is-equiv H y))
 
   abstract
     is-injective-map-equiv : (e : A ≃ B) → is-injective (map-equiv e)
@@ -125,7 +125,7 @@ module _
     is-injective-map-inv-equiv e =
       is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
-  is-equiv-is-injective : {f : A → B} → sec f → is-injective f → is-equiv f
+  is-equiv-is-injective : {f : A → B} → section f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =
     is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```

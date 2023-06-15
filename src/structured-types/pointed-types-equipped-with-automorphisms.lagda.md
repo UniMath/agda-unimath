@@ -68,15 +68,15 @@ module _
     type-Pointed-Type-With-Aut → type-Pointed-Type-With-Aut
   inv-map-aut-Pointed-Type-With-Aut = map-inv-equiv aut-Pointed-Type-With-Aut
 
-  issec-inv-map-aut-Pointed-Type-With-Aut :
+  is-section-inv-map-aut-Pointed-Type-With-Aut :
     (map-aut-Pointed-Type-With-Aut ∘ inv-map-aut-Pointed-Type-With-Aut) ~ id
-  issec-inv-map-aut-Pointed-Type-With-Aut =
-    issec-map-inv-equiv aut-Pointed-Type-With-Aut
+  is-section-inv-map-aut-Pointed-Type-With-Aut =
+    is-section-map-inv-equiv aut-Pointed-Type-With-Aut
 
-  isretr-inv-map-aut-Pointed-Type-With-Aut :
+  is-retraction-inv-map-aut-Pointed-Type-With-Aut :
     (inv-map-aut-Pointed-Type-With-Aut ∘ map-aut-Pointed-Type-With-Aut) ~ id
-  isretr-inv-map-aut-Pointed-Type-With-Aut =
-    isretr-map-inv-equiv aut-Pointed-Type-With-Aut
+  is-retraction-inv-map-aut-Pointed-Type-With-Aut =
+    is-retraction-map-inv-equiv aut-Pointed-Type-With-Aut
 ```
 
 ### Morphisms of pointed types with automorphisms

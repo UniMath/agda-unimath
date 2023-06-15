@@ -74,25 +74,25 @@ module _
     map-hom-Abstract-Group-Action G Y X
       ( hom-inv-iso-Abstract-Group-Action f)
 
-  issec-hom-inv-iso-Abstract-Group-Action :
+  is-section-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
     Id
       ( comp-hom-Abstract-Group-Action G Y X Y
         ( hom-iso-Abstract-Group-Action f)
         ( hom-inv-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G Y)
-  issec-hom-inv-iso-Abstract-Group-Action =
-    is-sec-hom-inv-iso-Large-Precategory C X Y
+  is-section-hom-inv-iso-Abstract-Group-Action =
+    is-section-hom-inv-iso-Large-Precategory C X Y
 
-  isretr-hom-inv-iso-Abstract-Group-Action :
+  is-retraction-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
     Id
       ( comp-hom-Abstract-Group-Action G X Y X
         ( hom-inv-iso-Abstract-Group-Action f)
         ( hom-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G X)
-  isretr-hom-inv-iso-Abstract-Group-Action =
-    is-retr-hom-inv-iso-Large-Precategory C X Y
+  is-retraction-hom-inv-iso-Abstract-Group-Action =
+    is-retraction-hom-inv-iso-Large-Precategory C X Y
 
   is-iso-hom-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
@@ -111,13 +111,13 @@ module _
           ( hom-iso-Abstract-Group-Action f)
           ( hom-inv-iso-Abstract-Group-Action f))
         ( id-hom-Abstract-Group-Action G Y)
-        ( issec-hom-inv-iso-Abstract-Group-Action f))
+        ( is-section-hom-inv-iso-Abstract-Group-Action f))
       ( htpy-eq-hom-Abstract-Group-Action G X X
         ( comp-hom-Abstract-Group-Action G X Y X
           ( hom-inv-iso-Abstract-Group-Action f)
           ( hom-iso-Abstract-Group-Action f))
         ( id-hom-Abstract-Group-Action G X)
-        ( isretr-hom-inv-iso-Abstract-Group-Action f))
+        ( is-retraction-hom-inv-iso-Abstract-Group-Action f))
   pr2 (equiv-iso-Abstract-Group-Action f) =
     coherence-square-iso-Abstract-Group-Action f
 ```

@@ -66,18 +66,18 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  section-is-split-surjective : is-split-surjective f → sec f
+  section-is-split-surjective : is-split-surjective f → section f
   pr1 (section-is-split-surjective s) = pr1 ∘ s
   pr2 (section-is-split-surjective s) = pr2 ∘ s
 
-  is-split-surjective-section : sec f → is-split-surjective f
+  is-split-surjective-section : section f → is-split-surjective f
   pr1 (is-split-surjective-section s b) = pr1 s b
   pr2 (is-split-surjective-section s b) = pr2 s b
 
-  equiv-section-is-split-surjective : is-split-surjective f ≃ sec f
+  equiv-section-is-split-surjective : is-split-surjective f ≃ section f
   equiv-section-is-split-surjective = distributive-Π-Σ
 
-  equiv-is-split-surjective-section : sec f ≃ is-split-surjective f
+  equiv-is-split-surjective-section : section f ≃ is-split-surjective f
   equiv-is-split-surjective-section = inv-distributive-Π-Σ
 ```
 
@@ -88,17 +88,17 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y)
   where
 
-  retr-is-split-surjective-is-injective :
-    is-injective f → is-split-surjective f → retr f
-  pr1 (retr-is-split-surjective-is-injective l s) = pr1 ∘ s
-  pr2 (retr-is-split-surjective-is-injective l s) = l ∘ (pr2 ∘ (s ∘ f))
+  retraction-is-split-surjective-is-injective :
+    is-injective f → is-split-surjective f → retraction f
+  pr1 (retraction-is-split-surjective-is-injective l s) = pr1 ∘ s
+  pr2 (retraction-is-split-surjective-is-injective l s) = l ∘ (pr2 ∘ (s ∘ f))
 
   is-equiv-is-split-surjective-is-injective :
     is-injective f → is-split-surjective f → is-equiv f
   pr1 (is-equiv-is-split-surjective-is-injective l s) =
     section-is-split-surjective f s
   pr2 (is-equiv-is-split-surjective-is-injective l s) =
-    retr-is-split-surjective-is-injective l s
+    retraction-is-split-surjective-is-injective l s
 
   is-split-surjective-is-equiv : is-equiv f → is-split-surjective f
   is-split-surjective-is-equiv = is-split-surjective-section f ∘ pr1

@@ -174,15 +174,15 @@ square-eq-Eq-list :
     ( pair refl (Eq-eq-list l l' p))
 square-eq-Eq-list refl = refl
 
-issec-eq-Eq-list :
+is-section-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (e : Eq-list l l') →
   Id (Eq-eq-list l l' (eq-Eq-list l l' e)) e
-issec-eq-Eq-list nil nil e = eq-is-contr is-contr-raise-unit
-issec-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
-issec-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
-issec-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
+is-section-eq-Eq-list nil nil e = eq-is-contr is-contr-raise-unit
+is-section-eq-Eq-list nil (cons x l') e = ex-falso (is-empty-raise-empty e)
+is-section-eq-Eq-list (cons x l) nil e = ex-falso (is-empty-raise-empty e)
+is-section-eq-Eq-list (cons x l) (cons .x l') (pair refl e) =
   ( square-eq-Eq-list (eq-Eq-list l l' e)) ∙
-  ( ap (pair refl) (issec-eq-Eq-list l l' e))
+  ( ap (pair refl) (is-section-eq-Eq-list l l' e))
 
 eq-Eq-refl-Eq-list :
   {l1 : Level} {A : UU l1} (l : list A) →
@@ -190,19 +190,20 @@ eq-Eq-refl-Eq-list :
 eq-Eq-refl-Eq-list nil = refl
 eq-Eq-refl-Eq-list (cons x l) = ap (ap (cons x)) (eq-Eq-refl-Eq-list l)
 
-isretr-eq-Eq-list :
+is-retraction-eq-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) (p : Id l l') →
   Id (eq-Eq-list l l' (Eq-eq-list l l' p)) p
-isretr-eq-Eq-list nil .nil refl = refl
-isretr-eq-Eq-list (cons x l) .(cons x l) refl = eq-Eq-refl-Eq-list (cons x l)
+is-retraction-eq-Eq-list nil .nil refl = refl
+is-retraction-eq-Eq-list (cons x l) .(cons x l) refl =
+  eq-Eq-refl-Eq-list (cons x l)
 
 is-equiv-Eq-eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) → is-equiv (Eq-eq-list l l')
 is-equiv-Eq-eq-list l l' =
   is-equiv-has-inverse
     ( eq-Eq-list l l')
-    ( issec-eq-Eq-list l l')
-    ( isretr-eq-Eq-list l l')
+    ( is-section-eq-Eq-list l l')
+    ( is-retraction-eq-Eq-list l l')
 
 equiv-Eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) → Id l l' ≃ Eq-list l l'
@@ -365,23 +366,23 @@ inv-map-algebra-list :
 inv-map-algebra-list A nil = inr star
 inv-map-algebra-list A (cons a x) = inl (pair a x)
 
-issec-inv-map-algebra-list :
+is-section-inv-map-algebra-list :
   {l1 : Level} (A : UU l1) →
   (map-algebra-list A ∘ inv-map-algebra-list A) ~ id
-issec-inv-map-algebra-list A nil = refl
-issec-inv-map-algebra-list A (cons a x) = refl
+is-section-inv-map-algebra-list A nil = refl
+is-section-inv-map-algebra-list A (cons a x) = refl
 
-isretr-inv-map-algebra-list :
+is-retraction-inv-map-algebra-list :
   {l1 : Level} (A : UU l1) →
   (inv-map-algebra-list A ∘ map-algebra-list A) ~ id
-isretr-inv-map-algebra-list A (inl (a , x)) = refl
-isretr-inv-map-algebra-list A (inr star) = refl
+is-retraction-inv-map-algebra-list A (inl (a , x)) = refl
+is-retraction-inv-map-algebra-list A (inr star) = refl
 
 is-equiv-map-algebra-list :
   {l1 : Level} (A : UU l1) → is-equiv (map-algebra-list A)
 is-equiv-map-algebra-list A =
   is-equiv-has-inverse
     ( inv-map-algebra-list A)
-    ( issec-inv-map-algebra-list A)
-    ( isretr-inv-map-algebra-list A)
+    ( is-section-inv-map-algebra-list A)
+    ( is-retraction-inv-map-algebra-list A)
 ```

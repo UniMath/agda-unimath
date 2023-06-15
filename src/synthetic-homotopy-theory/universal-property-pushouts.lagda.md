@@ -98,7 +98,7 @@ module _
     htpy-cocone-eq f g
       ( cocone-map f g c map-universal-property-pushout)
       ( d)
-      ( issec-map-inv-is-equiv (up-c Y) d)
+      ( is-section-map-inv-is-equiv (up-c Y) d)
 
   uniqueness-map-universal-property-pushout :
     is-contr ( Σ (X → Y) (λ h → htpy-cocone f g (cocone-map f g c h) d))
@@ -217,7 +217,7 @@ triangle-pullback-property-pushout-universal-property-pushout :
 triangle-pullback-property-pushout-universal-property-pushout f g c Y h =
     eq-pair-Σ refl
       ( eq-pair-Σ refl
-        ( inv (issec-eq-htpy (h ·l coherence-square-cocone f g c))))
+        ( inv (is-section-eq-htpy (h ·l coherence-square-cocone f g c))))
 
 pullback-property-pushout-universal-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2}

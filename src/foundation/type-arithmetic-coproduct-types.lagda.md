@@ -45,22 +45,22 @@ module _
   map-inv-commutative-coprod (inl b) = inr b
   map-inv-commutative-coprod (inr a) = inl a
 
-  issec-map-inv-commutative-coprod :
+  is-section-map-inv-commutative-coprod :
     ( map-commutative-coprod ∘ map-inv-commutative-coprod) ~ id
-  issec-map-inv-commutative-coprod (inl b) = refl
-  issec-map-inv-commutative-coprod (inr a) = refl
+  is-section-map-inv-commutative-coprod (inl b) = refl
+  is-section-map-inv-commutative-coprod (inr a) = refl
 
-  isretr-map-inv-commutative-coprod :
+  is-retraction-map-inv-commutative-coprod :
     ( map-inv-commutative-coprod ∘ map-commutative-coprod) ~ id
-  isretr-map-inv-commutative-coprod (inl a) = refl
-  isretr-map-inv-commutative-coprod (inr b) = refl
+  is-retraction-map-inv-commutative-coprod (inl a) = refl
+  is-retraction-map-inv-commutative-coprod (inr b) = refl
 
   is-equiv-map-commutative-coprod : is-equiv map-commutative-coprod
   is-equiv-map-commutative-coprod =
     is-equiv-has-inverse
       map-inv-commutative-coprod
-      issec-map-inv-commutative-coprod
-      isretr-map-inv-commutative-coprod
+      is-section-map-inv-commutative-coprod
+      is-retraction-map-inv-commutative-coprod
 
   commutative-coprod : (A + B) ≃ (B + A)
   pr1 commutative-coprod = map-commutative-coprod
@@ -84,31 +84,31 @@ module _
   map-inv-associative-coprod (inr (inl x)) = inl (inr x)
   map-inv-associative-coprod (inr (inr x)) = inr x
 
-  issec-map-inv-associative-coprod :
+  is-section-map-inv-associative-coprod :
     (map-associative-coprod ∘ map-inv-associative-coprod) ~ id
-  issec-map-inv-associative-coprod (inl x) = refl
-  issec-map-inv-associative-coprod (inr (inl x)) = refl
-  issec-map-inv-associative-coprod (inr (inr x)) = refl
+  is-section-map-inv-associative-coprod (inl x) = refl
+  is-section-map-inv-associative-coprod (inr (inl x)) = refl
+  is-section-map-inv-associative-coprod (inr (inr x)) = refl
 
-  isretr-map-inv-associative-coprod :
+  is-retraction-map-inv-associative-coprod :
     (map-inv-associative-coprod ∘ map-associative-coprod) ~ id
-  isretr-map-inv-associative-coprod (inl (inl x)) = refl
-  isretr-map-inv-associative-coprod (inl (inr x)) = refl
-  isretr-map-inv-associative-coprod (inr x) = refl
+  is-retraction-map-inv-associative-coprod (inl (inl x)) = refl
+  is-retraction-map-inv-associative-coprod (inl (inr x)) = refl
+  is-retraction-map-inv-associative-coprod (inr x) = refl
 
   is-equiv-map-associative-coprod : is-equiv map-associative-coprod
   is-equiv-map-associative-coprod =
     is-equiv-has-inverse
       map-inv-associative-coprod
-      issec-map-inv-associative-coprod
-      isretr-map-inv-associative-coprod
+      is-section-map-inv-associative-coprod
+      is-retraction-map-inv-associative-coprod
 
   is-equiv-map-inv-associative-coprod : is-equiv map-inv-associative-coprod
   is-equiv-map-inv-associative-coprod =
     is-equiv-has-inverse
       map-associative-coprod
-      isretr-map-inv-associative-coprod
-      issec-map-inv-associative-coprod
+      is-retraction-map-inv-associative-coprod
+      is-section-map-inv-associative-coprod
 
   associative-coprod : ((A + B) + C) ≃ (A + (B + C))
   pr1 associative-coprod = map-associative-coprod
@@ -138,17 +138,17 @@ module _
   pr1 (map-inv-right-distributive-Σ-coprod (inr (pair y z))) = inr y
   pr2 (map-inv-right-distributive-Σ-coprod (inr (pair y z))) = z
 
-  issec-map-inv-right-distributive-Σ-coprod :
+  is-section-map-inv-right-distributive-Σ-coprod :
     ( map-right-distributive-Σ-coprod ∘ map-inv-right-distributive-Σ-coprod) ~
     ( id)
-  issec-map-inv-right-distributive-Σ-coprod (inl (pair x z)) = refl
-  issec-map-inv-right-distributive-Σ-coprod (inr (pair y z)) = refl
+  is-section-map-inv-right-distributive-Σ-coprod (inl (pair x z)) = refl
+  is-section-map-inv-right-distributive-Σ-coprod (inr (pair y z)) = refl
 
-  isretr-map-inv-right-distributive-Σ-coprod :
+  is-retraction-map-inv-right-distributive-Σ-coprod :
     ( map-inv-right-distributive-Σ-coprod ∘ map-right-distributive-Σ-coprod) ~
     ( id)
-  isretr-map-inv-right-distributive-Σ-coprod (pair (inl x) z) = refl
-  isretr-map-inv-right-distributive-Σ-coprod (pair (inr y) z) = refl
+  is-retraction-map-inv-right-distributive-Σ-coprod (pair (inl x) z) = refl
+  is-retraction-map-inv-right-distributive-Σ-coprod (pair (inr y) z) = refl
 
   abstract
     is-equiv-map-right-distributive-Σ-coprod :
@@ -156,8 +156,8 @@ module _
     is-equiv-map-right-distributive-Σ-coprod =
       is-equiv-has-inverse
         map-inv-right-distributive-Σ-coprod
-        issec-map-inv-right-distributive-Σ-coprod
-        isretr-map-inv-right-distributive-Σ-coprod
+        is-section-map-inv-right-distributive-Σ-coprod
+        is-retraction-map-inv-right-distributive-Σ-coprod
 
   right-distributive-Σ-coprod :
     Σ (A + B) C ≃ ((Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y))))
@@ -184,23 +184,23 @@ module _
   pr1 (map-inv-left-distributive-Σ-coprod (inr (pair x z))) = x
   pr2 (map-inv-left-distributive-Σ-coprod (inr (pair x z))) = inr z
 
-  issec-map-inv-left-distributive-Σ-coprod :
+  is-section-map-inv-left-distributive-Σ-coprod :
     ( map-left-distributive-Σ-coprod ∘ map-inv-left-distributive-Σ-coprod) ~ id
-  issec-map-inv-left-distributive-Σ-coprod (inl (pair x y)) = refl
-  issec-map-inv-left-distributive-Σ-coprod (inr (pair x z)) = refl
+  is-section-map-inv-left-distributive-Σ-coprod (inl (pair x y)) = refl
+  is-section-map-inv-left-distributive-Σ-coprod (inr (pair x z)) = refl
 
-  isretr-map-inv-left-distributive-Σ-coprod :
+  is-retraction-map-inv-left-distributive-Σ-coprod :
     ( map-inv-left-distributive-Σ-coprod ∘ map-left-distributive-Σ-coprod) ~ id
-  isretr-map-inv-left-distributive-Σ-coprod (pair x (inl y)) = refl
-  isretr-map-inv-left-distributive-Σ-coprod (pair x (inr z)) = refl
+  is-retraction-map-inv-left-distributive-Σ-coprod (pair x (inl y)) = refl
+  is-retraction-map-inv-left-distributive-Σ-coprod (pair x (inr z)) = refl
 
   is-equiv-map-left-distributive-Σ-coprod :
     is-equiv map-left-distributive-Σ-coprod
   is-equiv-map-left-distributive-Σ-coprod =
     is-equiv-has-inverse
       map-inv-left-distributive-Σ-coprod
-      issec-map-inv-left-distributive-Σ-coprod
-      isretr-map-inv-left-distributive-Σ-coprod
+      is-section-map-inv-left-distributive-Σ-coprod
+      is-retraction-map-inv-left-distributive-Σ-coprod
 
   left-distributive-Σ-coprod :
     Σ A (λ x → B x + C x) ≃ ((Σ A B) + (Σ A C))
@@ -224,17 +224,17 @@ module _
   map-inv-right-distributive-prod-coprod =
     map-inv-right-distributive-Σ-coprod A B (λ x → C)
 
-  issec-map-inv-right-distributive-prod-coprod :
+  is-section-map-inv-right-distributive-prod-coprod :
     ( map-right-distributive-prod-coprod ∘
       map-inv-right-distributive-prod-coprod) ~ id
-  issec-map-inv-right-distributive-prod-coprod =
-    issec-map-inv-right-distributive-Σ-coprod A B (λ x → C)
+  is-section-map-inv-right-distributive-prod-coprod =
+    is-section-map-inv-right-distributive-Σ-coprod A B (λ x → C)
 
-  isretr-map-inv-right-distributive-prod-coprod :
+  is-retraction-map-inv-right-distributive-prod-coprod :
     ( map-inv-right-distributive-prod-coprod ∘
       map-right-distributive-prod-coprod) ~ id
-  isretr-map-inv-right-distributive-prod-coprod =
-    isretr-map-inv-right-distributive-Σ-coprod A B (λ x → C)
+  is-retraction-map-inv-right-distributive-prod-coprod =
+    is-retraction-map-inv-right-distributive-Σ-coprod A B (λ x → C)
 
   abstract
     is-equiv-map-right-distributive-prod-coprod :
@@ -262,17 +262,17 @@ module _
   map-inv-left-distributive-prod-coprod =
     map-inv-left-distributive-Σ-coprod A (λ x → B) (λ x → C)
 
-  issec-map-inv-left-distributive-prod-coprod :
+  is-section-map-inv-left-distributive-prod-coprod :
     ( map-left-distributive-prod-coprod ∘
       map-inv-left-distributive-prod-coprod) ~ id
-  issec-map-inv-left-distributive-prod-coprod =
-    issec-map-inv-left-distributive-Σ-coprod A (λ x → B) (λ x → C)
+  is-section-map-inv-left-distributive-prod-coprod =
+    is-section-map-inv-left-distributive-Σ-coprod A (λ x → B) (λ x → C)
 
-  isretr-map-inv-left-distributive-prod-coprod :
+  is-retraction-map-inv-left-distributive-prod-coprod :
     ( map-inv-left-distributive-prod-coprod ∘
       map-left-distributive-prod-coprod) ~ id
-  isretr-map-inv-left-distributive-prod-coprod =
-    isretr-map-inv-left-distributive-Σ-coprod A (λ x → B) (λ x → C)
+  is-retraction-map-inv-left-distributive-prod-coprod =
+    is-retraction-map-inv-left-distributive-Σ-coprod A (λ x → B) (λ x → C)
 
   is-equiv-map-left-distributive-prod-coprod :
     is-equiv map-left-distributive-prod-coprod

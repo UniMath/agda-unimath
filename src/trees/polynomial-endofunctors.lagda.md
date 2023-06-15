@@ -94,19 +94,20 @@ module _
   eq-Eq-type-polynomial-endofunctor x y =
     map-inv-is-equiv (is-equiv-Eq-type-polynomial-endofunctor-eq x y)
 
-  isretr-eq-Eq-type-polynomial-endofunctor :
+  is-retraction-eq-Eq-type-polynomial-endofunctor :
     (x y : type-polynomial-endofunctor A B X) →
     ( ( eq-Eq-type-polynomial-endofunctor x y) ∘
       ( Eq-type-polynomial-endofunctor-eq x y)) ~ id
-  isretr-eq-Eq-type-polynomial-endofunctor x y =
-    isretr-map-inv-is-equiv (is-equiv-Eq-type-polynomial-endofunctor-eq x y)
+  is-retraction-eq-Eq-type-polynomial-endofunctor x y =
+    is-retraction-map-inv-is-equiv
+      ( is-equiv-Eq-type-polynomial-endofunctor-eq x y)
 
   coh-refl-eq-Eq-type-polynomial-endofunctor :
     (x : type-polynomial-endofunctor A B X) →
     ( eq-Eq-type-polynomial-endofunctor x x
       ( refl-Eq-type-polynomial-endofunctor x)) ＝ refl
   coh-refl-eq-Eq-type-polynomial-endofunctor x =
-    isretr-eq-Eq-type-polynomial-endofunctor x x refl
+    is-retraction-eq-Eq-type-polynomial-endofunctor x x refl
 ```
 
 ### The action on morphisms of the polynomial endofunctor
