@@ -325,7 +325,7 @@ map-dependent-identification-contraction-total-space'
     ( ( ( eq-htpy
           ( square-tr-contraction-total-space c refl f e e' H
             ( map-inv-equiv (equiv-contraction-total-space c x e) h))) ∙
-        ( issec-map-inv-is-equiv
+        ( is-section-map-inv-is-equiv
           ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
           ( h))) ∙
       ( ( eq-htpy
@@ -339,7 +339,7 @@ map-dependent-identification-contraction-total-space'
         ( inv
           ( ap
             ( map-equiv (equiv-tr-contraction-total-space' c refl f e e' H))
-            ( issec-map-inv-is-equiv
+            ( is-section-map-inv-is-equiv
               ( is-equiv-map-equiv
                 ( equiv-precomp-Π e' (λ y' → Id c (pair x y'))))
               ( h'))))))
@@ -368,7 +368,7 @@ equiv-dependent-identification-contraction-total-space'
     ( ( equiv-concat' h
         ( ap
           ( map-equiv (equiv-tr-contraction-total-space' c refl f e e' H))
-          ( issec-map-inv-is-equiv
+          ( is-section-map-inv-is-equiv
             ( is-equiv-map-equiv
               ( equiv-precomp-Π e' (λ y' → Id c (pair x y'))))
             ( h')))) ∘e
@@ -377,7 +377,7 @@ equiv-dependent-identification-contraction-total-space'
             ( ( eq-htpy
                 ( square-tr-contraction-total-space c refl f e e' H
                   ( map-inv-equiv (equiv-contraction-total-space c x e) h))) ∙
-              ( issec-map-inv-is-equiv
+              ( is-section-map-inv-is-equiv
                 ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
                 ( h))))
           ( map-equiv
@@ -547,12 +547,12 @@ abstract
     Id (elim-ℤ P p0 pS (succ-ℤ k)) (map-equiv (pS k) (elim-ℤ P p0 pS k))
   compute-succ-elim-ℤ P p0 pS (inl zero-ℕ) =
     inv
-      ( issec-map-inv-is-equiv
+      ( is-section-map-inv-is-equiv
         ( is-equiv-map-equiv (pS (inl zero-ℕ)))
         ( elim-ℤ P p0 pS (succ-ℤ (inl zero-ℕ))))
   compute-succ-elim-ℤ P p0 pS (inl (succ-ℕ x)) =
     inv
-      ( issec-map-inv-is-equiv
+      ( is-section-map-inv-is-equiv
         ( is-equiv-map-equiv (pS (inl (succ-ℕ x))))
         ( elim-ℤ P p0 pS (succ-ℤ (inl (succ-ℕ x)))))
   compute-succ-elim-ℤ P p0 pS (inr (inl star)) = refl

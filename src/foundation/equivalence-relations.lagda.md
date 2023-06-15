@@ -280,10 +280,10 @@ module _
       ( y)
       ( r)
 
-issec-eq-rel-partition-Eq-Rel :
+is-section-eq-rel-partition-Eq-Rel :
   {l : Level} {A : UU l} (R : Eq-Rel l A) →
   eq-rel-partition (partition-Eq-Rel R) ＝ R
-issec-eq-rel-partition-Eq-Rel R =
+is-section-eq-rel-partition-Eq-Rel R =
   eq-relate-same-elements-Eq-Rel
     ( eq-rel-partition (partition-Eq-Rel R))
     ( R)
@@ -376,10 +376,10 @@ module _
   pr2 (has-same-elements-partition-eq-rel-partition Q) H =
     is-equivalence-class-is-block-partition Q H
 
-isretr-eq-rel-partition-Eq-Rel :
+is-retraction-eq-rel-partition-Eq-Rel :
   {l : Level} {A : UU l} (P : partition l l A) →
   partition-Eq-Rel (eq-rel-partition P) ＝ P
-isretr-eq-rel-partition-Eq-Rel P =
+is-retraction-eq-rel-partition-Eq-Rel P =
   eq-has-same-blocks-partition
     ( partition-Eq-Rel (eq-rel-partition P))
     ( P)
@@ -394,8 +394,8 @@ is-equiv-eq-rel-partition :
 is-equiv-eq-rel-partition =
   is-equiv-has-inverse
     partition-Eq-Rel
-    issec-eq-rel-partition-Eq-Rel
-    isretr-eq-rel-partition-Eq-Rel
+    is-section-eq-rel-partition-Eq-Rel
+    is-retraction-eq-rel-partition-Eq-Rel
 
 equiv-eq-rel-partition :
   {l : Level} {A : UU l} → partition l l A ≃ Eq-Rel l A
@@ -495,10 +495,10 @@ module _
   relate-same-elements-eq-rel-surjection-into-set-Eq-Rel x y =
     iff-equiv (is-effective-quotient-map R x y)
 
-isretr-eq-rel-Surjection-Into-Set :
+is-retraction-eq-rel-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel (l1 ⊔ l2) A) →
   eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Rel R) ＝ R
-isretr-eq-rel-Surjection-Into-Set R =
+is-retraction-eq-rel-Surjection-Into-Set R =
   eq-relate-same-elements-Eq-Rel
     ( eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Rel R))
     ( R)
@@ -532,10 +532,10 @@ equiv-surjection-into-set-eq-rel-Surjection-Into-Set f =
           ( is-surjective-Surjection-Into-Set f)
           ( is-effective-map-Surjection-Into-Set f))))
 
-issec-eq-rel-Surjection-Into-Set :
+is-section-eq-rel-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set (l1 ⊔ l2) A) →
   surjection-into-set-Eq-Rel (eq-rel-Surjection-Into-Set f) ＝ f
-issec-eq-rel-Surjection-Into-Set f =
+is-section-eq-rel-Surjection-Into-Set f =
   eq-equiv-Surjection-Into-Set
     ( surjection-into-set-Eq-Rel (eq-rel-Surjection-Into-Set f))
     ( f)
@@ -551,8 +551,8 @@ is-equiv-surjection-into-set-Eq-Rel :
 is-equiv-surjection-into-set-Eq-Rel {l1} {A} =
   is-equiv-has-inverse
     ( eq-rel-Surjection-Into-Set {l1} {l1} {A})
-    ( issec-eq-rel-Surjection-Into-Set {l1} {l1} {A})
-    ( isretr-eq-rel-Surjection-Into-Set {l1} {l1} {A})
+    ( is-section-eq-rel-Surjection-Into-Set {l1} {l1} {A})
+    ( is-retraction-eq-rel-Surjection-Into-Set {l1} {l1} {A})
 
 equiv-surjection-into-set-Eq-Rel :
   {l1 : Level} (A : UU l1) →

@@ -56,13 +56,14 @@ module _
   eq-equiv A B = map-inv-is-equiv (univalence A B)
 
   abstract
-    issec-eq-equiv :
+    is-section-eq-equiv :
       {A B : UU l} → (equiv-eq ∘ eq-equiv A B) ~ id
-    issec-eq-equiv {A} {B} = issec-map-inv-is-equiv (univalence A B)
+    is-section-eq-equiv {A} {B} = is-section-map-inv-is-equiv (univalence A B)
 
-    isretr-eq-equiv :
+    is-retraction-eq-equiv :
       {A B : UU l} → (eq-equiv A B ∘ equiv-eq) ~ id
-    isretr-eq-equiv {A} {B} = isretr-map-inv-is-equiv (univalence A B)
+    is-retraction-eq-equiv {A} {B} =
+      is-retraction-map-inv-is-equiv (univalence A B)
 
     is-equiv-eq-equiv :
       (A B : UU l) → is-equiv (eq-equiv A B)
@@ -70,7 +71,7 @@ module _
 
     compute-eq-equiv-id-equiv :
       (A : UU l) → eq-equiv A A id-equiv ＝ refl
-    compute-eq-equiv-id-equiv A = isretr-eq-equiv refl
+    compute-eq-equiv-id-equiv A = is-retraction-eq-equiv refl
 
     equiv-eq-equiv :
       (A B : UU l) → (A ≃ B) ≃ (A ＝ B)

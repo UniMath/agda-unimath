@@ -124,28 +124,29 @@ module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
 
-  retraction-sec-precomp-domain : sec (precomp f Y) → retr f
-  pr1 (retraction-sec-precomp-domain sec-precomp-Y) = pr1 sec-precomp-Y id
-  pr2 (retraction-sec-precomp-domain sec-precomp-Y) =
-    htpy-eq (pr2 sec-precomp-Y id)
+  retraction-section-precomp-domain : section (precomp f Y) → retraction f
+  pr1 (retraction-section-precomp-domain section-precomp-Y) =
+    pr1 section-precomp-Y id
+  pr2 (retraction-section-precomp-domain section-precomp-Y) =
+    htpy-eq (pr2 section-precomp-Y id)
 
-  section-is-local-domains' : sec (precomp f Y) → is-local f X → sec f
-  pr1 (section-is-local-domains' sec-precomp-Y is-local-X) =
-    pr1 sec-precomp-Y id
-  pr2 (section-is-local-domains' sec-precomp-Y is-local-X) =
+  section-is-local-domains' : section (precomp f Y) → is-local f X → section f
+  pr1 (section-is-local-domains' section-precomp-Y is-local-X) =
+    pr1 section-precomp-Y id
+  pr2 (section-is-local-domains' section-precomp-Y is-local-X) =
     htpy-eq
       ( ap
         ( pr1)
-        { ( f ∘ pr1 (section-is-local-domains' sec-precomp-Y is-local-X)) ,
-          ( ap (postcomp Y f) (pr2 sec-precomp-Y id))}
+        { ( f ∘ pr1 (section-is-local-domains' section-precomp-Y is-local-X)) ,
+          ( ap (postcomp Y f) (pr2 section-precomp-Y id))}
         { id , refl}
         ( eq-is-contr (is-contr-map-is-equiv is-local-X f)))
 
-  is-equiv-is-local-domains' : sec (precomp f Y) → is-local f X → is-equiv f
-  pr1 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
-    section-is-local-domains' sec-precomp-Y is-local-X
-  pr2 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
-    retraction-sec-precomp-domain sec-precomp-Y
+  is-equiv-is-local-domains' : section (precomp f Y) → is-local f X → is-equiv f
+  pr1 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
+    section-is-local-domains' section-precomp-Y is-local-X
+  pr2 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
+    retraction-section-precomp-domain section-precomp-Y
 
   is-equiv-is-local-domains : is-local f Y → is-local f X → is-equiv f
   is-equiv-is-local-domains is-local-Y =

@@ -118,9 +118,9 @@ module _
 inv-ev-𝕀 : {l : Level} {P : 𝕀 → UU l} → Data-𝕀 P → (x : 𝕀) → P x
 inv-ev-𝕀 x = ind-𝕀 _ (pr1 x) (pr1 (pr2 x)) (pr2 (pr2 x))
 
-issec-inv-ev-𝕀 :
+is-section-inv-ev-𝕀 :
   {l : Level} {P : 𝕀 → UU l} (x : Data-𝕀 P) → ev-𝕀 (inv-ev-𝕀 x) ＝ x
-issec-inv-ev-𝕀 (pair u (pair v q)) =
+is-section-inv-ev-𝕀 (pair u (pair v q)) =
   eq-Eq-Data-𝕀
     ( compute-source-𝕀 u v q)
     ( compute-target-𝕀 u v q)
@@ -133,9 +133,9 @@ tr-value :
   Id (tr (λ x → Id (f x) (g x)) p q) r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 
-isretr-inv-ev-𝕀 :
+is-retraction-inv-ev-𝕀 :
   {l : Level} {P : 𝕀 → UU l} (f : (x : 𝕀) → P x) → Id (inv-ev-𝕀 (ev-𝕀 f)) f
-isretr-inv-ev-𝕀 {l} {P} f =
+is-retraction-inv-ev-𝕀 {l} {P} f =
   eq-htpy
     ( ind-𝕀
       ( λ x → Id (inv-ev-𝕀 (ev-𝕀 f) x) (f x))
@@ -150,7 +150,7 @@ abstract
   is-equiv-ev-𝕀 :
     {l : Level} (P : 𝕀 → UU l) → is-equiv (ev-𝕀 {P = P})
   is-equiv-ev-𝕀 P =
-    is-equiv-has-inverse inv-ev-𝕀 issec-inv-ev-𝕀 isretr-inv-ev-𝕀
+    is-equiv-has-inverse inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
 
 tr-eq : {l : Level} {A : UU l} {x y : A} (p : Id x y) → Id (tr (Id x) p refl) p
 tr-eq refl = refl

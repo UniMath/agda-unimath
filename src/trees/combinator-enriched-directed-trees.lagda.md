@@ -177,24 +177,25 @@ module _
   map-inv-root-enrichment-combinator-Enriched-Directed-Tree
     (._ , edge-to-root-combinator-Directed-Tree b) = b
 
-  issec-map-inv-root-enrichment-combinator-Enriched-Directed-Tree :
+  is-section-map-inv-root-enrichment-combinator-Enriched-Directed-Tree :
     ( map-root-enrichment-combinator-Enriched-Directed-Tree ∘
       map-inv-root-enrichment-combinator-Enriched-Directed-Tree) ~ id
-  issec-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
+  is-section-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
     ( ._ , edge-to-root-combinator-Directed-Tree b) = refl
 
-  isretr-map-inv-root-enrichment-combinator-Enriched-Directed-Tree :
+  is-retraction-map-inv-root-enrichment-combinator-Enriched-Directed-Tree :
     ( map-inv-root-enrichment-combinator-Enriched-Directed-Tree ∘
       map-root-enrichment-combinator-Enriched-Directed-Tree) ~ id
-  isretr-map-inv-root-enrichment-combinator-Enriched-Directed-Tree b = refl
+  is-retraction-map-inv-root-enrichment-combinator-Enriched-Directed-Tree b =
+    refl
 
   is-equiv-map-root-enrichment-combinator-Enriched-Directed-Tree :
     is-equiv map-root-enrichment-combinator-Enriched-Directed-Tree
   is-equiv-map-root-enrichment-combinator-Enriched-Directed-Tree =
     is-equiv-has-inverse
       map-inv-root-enrichment-combinator-Enriched-Directed-Tree
-      issec-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
-      isretr-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
+      is-section-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
+      is-retraction-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
 
   root-enrichment-combinator-Enriched-Directed-Tree :
     B a ≃
@@ -326,18 +327,18 @@ module _
     index-base-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  issec-index-base-combinator-Enriched-Directed-Tree :
+  is-section-index-base-combinator-Enriched-Directed-Tree :
     ( base-index-combinator-Enriched-Directed-Tree ∘
       index-base-combinator-Enriched-Directed-Tree) ~ id
-  issec-index-base-combinator-Enriched-Directed-Tree =
-    issec-index-base-combinator-Directed-Tree
+  is-section-index-base-combinator-Enriched-Directed-Tree =
+    is-section-index-base-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  isretr-index-base-combinator-Enriched-Directed-Tree :
+  is-retraction-index-base-combinator-Enriched-Directed-Tree :
     ( index-base-combinator-Enriched-Directed-Tree ∘
       base-index-combinator-Enriched-Directed-Tree) ~ id
-  isretr-index-base-combinator-Enriched-Directed-Tree =
-    isretr-index-base-combinator-Directed-Tree
+  is-retraction-index-base-combinator-Enriched-Directed-Tree =
+    is-retraction-index-base-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
   is-equiv-base-index-combinator-Enriched-Directed-Tree :
@@ -375,18 +376,18 @@ module _
     map-inv-compute-node-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  issec-map-inv-compute-node-combinator-Enriched-Directed-Tree :
+  is-section-map-inv-compute-node-combinator-Enriched-Directed-Tree :
     ( map-compute-node-combinator-Enriched-Directed-Tree ∘
       map-inv-compute-node-combinator-Enriched-Directed-Tree) ~ id
-  issec-map-inv-compute-node-combinator-Enriched-Directed-Tree =
-    issec-map-inv-compute-node-combinator-Directed-Tree
+  is-section-map-inv-compute-node-combinator-Enriched-Directed-Tree =
+    is-section-map-inv-compute-node-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  isretr-map-inv-compute-node-combinator-Enriched-Directed-Tree :
+  is-retraction-map-inv-compute-node-combinator-Enriched-Directed-Tree :
     ( map-inv-compute-node-combinator-Enriched-Directed-Tree ∘
       map-compute-node-combinator-Enriched-Directed-Tree) ~ id
-  isretr-map-inv-compute-node-combinator-Enriched-Directed-Tree =
-    isretr-map-inv-compute-node-combinator-Directed-Tree
+  is-retraction-map-inv-compute-node-combinator-Enriched-Directed-Tree =
+    is-retraction-map-inv-compute-node-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
   is-equiv-map-compute-node-combinator-Enriched-Directed-Tree :
@@ -425,18 +426,18 @@ module _
     map-inv-compute-proper-node-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  issec-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
+  is-section-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
     ( map-compute-proper-node-combinator-Enriched-Directed-Tree ∘
       map-inv-compute-proper-node-combinator-Enriched-Directed-Tree) ~ id
-  issec-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
-    issec-map-inv-compute-proper-node-combinator-Directed-Tree
+  is-section-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
+    is-section-map-inv-compute-proper-node-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
-  isretr-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
+  is-retraction-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree :
     ( map-inv-compute-proper-node-combinator-Enriched-Directed-Tree ∘
       map-compute-proper-node-combinator-Enriched-Directed-Tree) ~ id
-  isretr-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
-    isretr-map-inv-compute-proper-node-combinator-Directed-Tree
+  is-retraction-map-inv-compute-proper-node-combinator-Enriched-Directed-Tree =
+    is-retraction-map-inv-compute-proper-node-combinator-Directed-Tree
       ( directed-tree-Enriched-Directed-Tree A B ∘ T)
 
   is-equiv-map-compute-proper-node-combinator-Enriched-Directed-Tree :

@@ -149,15 +149,15 @@ module _
     repetition-of-values g → repetition-of-values f
   map-inv-equiv-repetition-of-values = map-inv-equiv equiv-repetition-of-values
 
-  issec-map-inv-equiv-repetition-of-values :
+  is-section-map-inv-equiv-repetition-of-values :
     ( map-equiv-repetition-of-values ∘ map-inv-equiv-repetition-of-values) ~ id
-  issec-map-inv-equiv-repetition-of-values =
-    issec-map-inv-equiv equiv-repetition-of-values
+  is-section-map-inv-equiv-repetition-of-values =
+    is-section-map-inv-equiv equiv-repetition-of-values
 
-  isretr-map-inv-equiv-repetition-of-values :
+  is-retraction-map-inv-equiv-repetition-of-values :
     ( map-inv-equiv-repetition-of-values ∘ map-equiv-repetition-of-values) ~ id
-  isretr-map-inv-equiv-repetition-of-values =
-    isretr-map-inv-equiv equiv-repetition-of-values
+  is-retraction-map-inv-equiv-repetition-of-values =
+    is-retraction-map-inv-equiv equiv-repetition-of-values
 ```
 
 ### Embeddings of repetitions values

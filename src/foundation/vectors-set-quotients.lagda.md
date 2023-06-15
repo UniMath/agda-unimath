@@ -196,12 +196,14 @@ equiv-set-quotient-vector (succ-ℕ n) A R =
   pr2 (pr1 (pr1 (pr2 lemma)) (qa0 , qa)) =
     map-inv-equiv (equiv-set-quotient-vector n _ _) qa
   pr2 (pr1 (pr2 lemma)) (qa0 , qa) =
-    eq-pair refl (issec-map-inv-equiv (equiv-set-quotient-vector n _ _) qa)
+    eq-pair refl (is-section-map-inv-equiv (equiv-set-quotient-vector n _ _) qa)
   pr1 (pr1 (pr2 (pr2 lemma)) (qa0 , qa)) = qa0
   pr2 (pr1 (pr2 (pr2 lemma)) (qa0 , qa)) =
     map-inv-equiv (equiv-set-quotient-vector n _ _) qa
   pr2 (pr2 (pr2 lemma)) (qa0 , qa) =
-    eq-pair refl (isretr-map-inv-equiv (equiv-set-quotient-vector n _ _) qa)
+    eq-pair
+      ( refl)
+      ( is-retraction-map-inv-equiv (equiv-set-quotient-vector n _ _) qa)
 
 map-equiv-equiv-set-quotient-vector-quotient-map :
   { l1 l2 : Level}
@@ -246,21 +248,21 @@ inv-precomp-vector-set-quotient (succ-ℕ n) A R X f (qa0 , qa) =
     ( f)
     ( qa0 , map-equiv (equiv-set-quotient-vector n _ _) qa)
 
-issec-inv-precomp-vector-set-quotient :
+is-section-inv-precomp-vector-set-quotient :
   { l l1 l2 : Level}
   ( n : ℕ)
   ( A : functional-vec (UU l1) n)
   ( R : (i : Fin n) → Eq-Rel l2 (A i)) →
   ( X : Set l) →
-  ( sec
+  ( section
     ( precomp-Set-Quotient
       ( all-sim-Eq-Rel n A R)
       ( set-quotient-vector-Set n A R)
       ( reflecting-map-quotient-vector-map n A R)
       ( X)))
-pr1 (issec-inv-precomp-vector-set-quotient n A R X) =
+pr1 (is-section-inv-precomp-vector-set-quotient n A R X) =
   inv-precomp-vector-set-quotient n A R X
-pr2 (issec-inv-precomp-vector-set-quotient {l} {l1} {l2} zero-ℕ A R X) f =
+pr2 (is-section-inv-precomp-vector-set-quotient {l} {l1} {l2} zero-ℕ A R X) f =
   eq-pair-Σ
     ( eq-htpy (λ {(map-raise star) → refl}))
     ( eq-is-prop
@@ -268,7 +270,7 @@ pr2 (issec-inv-precomp-vector-set-quotient {l} {l1} {l2} zero-ℕ A R X) f =
         ( raise-indiscrete-Eq-Rel l2 (raise-unit l1))
         ( X)
         ( map-reflecting-map-Eq-Rel _ f)))
-pr2 (issec-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
+pr2 (is-section-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
   eq-pair-Σ
     ( eq-htpy
       ( λ (a0 , a) →
@@ -283,7 +285,7 @@ pr2 (issec-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
         ( htpy-eq
           ( ap
             ( map-reflecting-map-Eq-Rel _)
-            ( issec-inv-precomp-set-quotient-prod-set-quotient
+            ( is-section-inv-precomp-set-quotient-prod-set-quotient
               ( R (inr star))
               ( all-sim-Eq-Rel n
               ( tail-functional-vec n A)
@@ -295,23 +297,23 @@ pr2 (issec-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
         ( X)
         ( map-reflecting-map-Eq-Rel _ f)))
 
-isretr-inv-precomp-vector-set-quotient :
+is-retraction-inv-precomp-vector-set-quotient :
   { l l1 l2 : Level}
   ( n : ℕ)
   ( A : functional-vec (UU l1) n)
   ( R : (i : Fin n) → Eq-Rel l2 (A i)) →
   ( X : Set l) →
-  ( retr
+  ( retraction
     ( precomp-Set-Quotient
       ( all-sim-Eq-Rel n A R)
       ( set-quotient-vector-Set n A R)
       ( reflecting-map-quotient-vector-map n A R)
       ( X)))
-pr1 (isretr-inv-precomp-vector-set-quotient n A R X) =
+pr1 (is-retraction-inv-precomp-vector-set-quotient n A R X) =
   inv-precomp-vector-set-quotient n A R X
-pr2 (isretr-inv-precomp-vector-set-quotient zero-ℕ A R X) f =
+pr2 (is-retraction-inv-precomp-vector-set-quotient zero-ℕ A R X) f =
   eq-htpy (λ {(map-raise star) → refl})
-pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
+pr2 (is-retraction-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
   ap (_∘ set-quotient-vector-prod-set-quotient)
     is-inv-map-inv-equiv-f ∙ lemma-f
   where
@@ -350,11 +352,11 @@ pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
         ( ap f
           ( eq-pair-Σ
             ( refl)
-            ( isretr-map-inv-equiv
+            ( is-retraction-map-inv-equiv
               ( equiv-set-quotient-vector n _ _)
               ( qa)))))
 
-  isretr-inv-precomp-f :
+  is-retraction-inv-precomp-f :
     ( inv-precomp-set-quotient-prod-set-quotient
       ( R (inr star))
       ( all-sim-Eq-Rel n (tail-functional-vec n A) (λ x → R (inl x)))
@@ -370,8 +372,8 @@ pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
           ( X)
           ( map-inv-equiv-f))) ＝
     map-inv-equiv-f
-  isretr-inv-precomp-f =
-    isretr-inv-precomp-set-quotient-prod-set-quotient
+  is-retraction-inv-precomp-f =
+    is-retraction-inv-precomp-set-quotient-prod-set-quotient
       ( R (inr star))
       ( all-sim-Eq-Rel n (tail-functional-vec n A) (λ x → R (inl x)))
       ( X)
@@ -409,7 +411,7 @@ pr2 (isretr-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
               ( R (inr star))
               ( all-sim-Eq-Rel n _ _))
             ( X) _))) ∙
-      isretr-inv-precomp-f
+      is-retraction-inv-precomp-f
 
 is-set-quotient-vector-set-quotient :
   { l l1 l2 : Level}
@@ -421,7 +423,7 @@ is-set-quotient-vector-set-quotient :
     ( set-quotient-vector-Set n A R)
     ( reflecting-map-quotient-vector-map n A R))
 pr1 (is-set-quotient-vector-set-quotient n A R X) =
-  issec-inv-precomp-vector-set-quotient n A R X
+  is-section-inv-precomp-vector-set-quotient n A R X
 pr2 (is-set-quotient-vector-set-quotient n A R X) =
-  isretr-inv-precomp-vector-set-quotient n A R X
+  is-retraction-inv-precomp-vector-set-quotient n A R X
 ```

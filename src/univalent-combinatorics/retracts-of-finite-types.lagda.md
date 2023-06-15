@@ -34,49 +34,50 @@ open import univalent-combinatorics.standard-finite-types
 ### If a map `i : A → Fin k` has a retraction, then it is a decidable map
 
 ```agda
-is-decidable-map-retr-Fin :
-  {l1 : Level} (k : ℕ) {A : UU l1} (i : A → Fin k) → retr i → is-decidable-map i
-is-decidable-map-retr-Fin k =
-  is-decidable-map-retr (has-decidable-equality-Fin k)
+is-decidable-map-retraction-Fin :
+  {l1 : Level} (k : ℕ) {A : UU l1} (i : A → Fin k) →
+  retraction i → is-decidable-map i
+is-decidable-map-retraction-Fin k =
+  is-decidable-map-retraction (has-decidable-equality-Fin k)
 ```
 
 ### If a map `i : A → B` into a finite type `B` has a retraction, then `i` is decidable and `A` is finite
 
 ```agda
-is-decidable-map-retr-count :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) → retr i →
-  is-decidable-map i
-is-decidable-map-retr-count e =
-  is-decidable-map-retr (has-decidable-equality-count e)
+is-decidable-map-retraction-count :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
+  retraction i → is-decidable-map i
+is-decidable-map-retraction-count e =
+  is-decidable-map-retraction (has-decidable-equality-count e)
 
-is-decidable-map-retr-is-finite :
+is-decidable-map-retraction-is-finite :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : is-finite B) (i : A → B) →
-  retr i → is-decidable-map i
-is-decidable-map-retr-is-finite H =
-  is-decidable-map-retr (has-decidable-equality-is-finite H)
+  retraction i → is-decidable-map i
+is-decidable-map-retraction-is-finite H =
+  is-decidable-map-retraction (has-decidable-equality-is-finite H)
 ```
 
 ```agda
 abstract
   is-emb-retract-count :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
-    retr i → is-emb i
+    retraction i → is-emb i
   is-emb-retract-count e i R =
-    is-emb-is-injective (is-set-count e) (is-injective-retr i R)
+    is-emb-is-injective (is-set-count e) (is-injective-retraction i R)
 
 emb-retract-count :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
-  retr i → A ↪ B
+  retraction i → A ↪ B
 pr1 (emb-retract-count e i R) = i
 pr2 (emb-retract-count e i R) = is-emb-retract-count e i R
 
 decidable-emb-retract-count :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
-  retr i → A ↪d B
+  retraction i → A ↪d B
 pr1 (decidable-emb-retract-count e i R) = i
 pr1 (pr2 (decidable-emb-retract-count e i R)) = is-emb-retract-count e i R
 pr2 (pr2 (decidable-emb-retract-count e i R)) =
-  is-decidable-map-retr-count e i R
+  is-decidable-map-retraction-count e i R
 
 count-retract :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →

@@ -388,7 +388,7 @@ module _
       htpy-eq
         ( ap
             ( pr1)
-            ( issec-map-inv-is-equiv
+            ( is-section-map-inv-is-equiv
               ( Q ( pair
                     ( im (map-reflecting-map-Eq-Rel R q))
                     ( is-set-im
@@ -435,7 +435,7 @@ module _
         ( ap pr1
           ( htpy-eq
             ( ap pr1
-              ( inv (issec-map-inv-is-equiv (Q (Prop-Set l2)) α)))
+              ( inv (is-section-map-inv-is-equiv (Q (Prop-Set l2)) α)))
             ( a)))
     point-P : type-Prop (P (map-reflecting-map-Eq-Rel R q x))
     point-P = map-equiv (compute-P x) (refl-Eq-Rel R)
@@ -557,7 +557,7 @@ module _
         ( α (map-reflecting-map-Eq-Rel R q a)) ＝
         ( pair (pr1 f a) (unit-trunc-Prop (pair a (pair refl refl))))
       β = htpy-eq
-            ( issec-map-inv-is-equiv
+            ( is-section-map-inv-is-equiv
               ( dependent-universal-property-surj-is-surjective
                 ( map-reflecting-map-Eq-Rel R q)
                 ( pr1 E)

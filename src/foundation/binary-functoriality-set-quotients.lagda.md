@@ -201,9 +201,9 @@ module _
   pr1 (binary-hom-hom-Eq-Rel f) = map-binary-hom-hom-Eq-Rel f
   pr2 (binary-hom-hom-Eq-Rel f) = preserves-sim-binary-hom-hom-Eq-Rel f
 
-  issec-binary-hom-hom-Eq-Rel :
+  is-section-binary-hom-hom-Eq-Rel :
     ( hom-binary-hom-Eq-Rel ∘ binary-hom-hom-Eq-Rel) ~ id
-  issec-binary-hom-hom-Eq-Rel f =
+  is-section-binary-hom-hom-Eq-Rel f =
     eq-htpy-hom-Eq-Rel R
       ( eq-rel-hom-Eq-Rel S T)
       ( hom-binary-hom-Eq-Rel (binary-hom-hom-Eq-Rel f))
@@ -217,9 +217,9 @@ module _
           ( map-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f x)
           ( refl-htpy))
 
-  isretr-binary-hom-hom-Eq-Rel :
+  is-retraction-binary-hom-hom-Eq-Rel :
     ( binary-hom-hom-Eq-Rel ∘ hom-binary-hom-Eq-Rel) ~ id
-  isretr-binary-hom-hom-Eq-Rel f =
+  is-retraction-binary-hom-hom-Eq-Rel f =
     eq-binary-htpy-hom-Eq-Rel R S T
       ( binary-hom-hom-Eq-Rel (hom-binary-hom-Eq-Rel f))
       ( f)
@@ -230,8 +230,8 @@ module _
   is-equiv-hom-binary-hom-Eq-Rel =
     is-equiv-has-inverse
       binary-hom-hom-Eq-Rel
-      issec-binary-hom-hom-Eq-Rel
-      isretr-binary-hom-hom-Eq-Rel
+      is-section-binary-hom-hom-Eq-Rel
+      is-retraction-binary-hom-hom-Eq-Rel
 
   equiv-hom-binary-hom-Eq-Rel :
     binary-hom-Eq-Rel R S T ≃ hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T)

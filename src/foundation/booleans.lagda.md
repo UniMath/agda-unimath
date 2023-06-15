@@ -151,22 +151,22 @@ Fin-two-ℕ-bool true = inl (inr star)
 Fin-two-ℕ-bool false = inr star
 
 abstract
-  isretr-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
-  isretr-Fin-two-ℕ-bool (inl (inr star)) = refl
-  isretr-Fin-two-ℕ-bool (inr star) = refl
+  is-retraction-Fin-two-ℕ-bool : (Fin-two-ℕ-bool ∘ bool-Fin-two-ℕ) ~ id
+  is-retraction-Fin-two-ℕ-bool (inl (inr star)) = refl
+  is-retraction-Fin-two-ℕ-bool (inr star) = refl
 
 abstract
-  issec-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
-  issec-Fin-two-ℕ-bool true = refl
-  issec-Fin-two-ℕ-bool false = refl
+  is-section-Fin-two-ℕ-bool : (bool-Fin-two-ℕ ∘ Fin-two-ℕ-bool) ~ id
+  is-section-Fin-two-ℕ-bool true = refl
+  is-section-Fin-two-ℕ-bool false = refl
 
 equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
 pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
 pr2 equiv-bool-Fin-two-ℕ =
   is-equiv-has-inverse
     ( Fin-two-ℕ-bool)
-    ( issec-Fin-two-ℕ-bool)
-    ( isretr-Fin-two-ℕ-bool)
+    ( is-section-Fin-two-ℕ-bool)
+    ( is-retraction-Fin-two-ℕ-bool)
 ```
 
 ### The type of booleans is finite

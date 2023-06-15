@@ -142,20 +142,20 @@ map-equiv-Fin-one-ℕ (inr star) = star
 inv-map-equiv-Fin-one-ℕ : unit → Fin 1
 inv-map-equiv-Fin-one-ℕ star = inr star
 
-issec-inv-map-equiv-Fin-one-ℕ :
+is-section-inv-map-equiv-Fin-one-ℕ :
   ( map-equiv-Fin-one-ℕ ∘ inv-map-equiv-Fin-one-ℕ) ~ id
-issec-inv-map-equiv-Fin-one-ℕ star = refl
+is-section-inv-map-equiv-Fin-one-ℕ star = refl
 
-isretr-inv-map-equiv-Fin-one-ℕ :
+is-retraction-inv-map-equiv-Fin-one-ℕ :
   ( inv-map-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-isretr-inv-map-equiv-Fin-one-ℕ (inr star) = refl
+is-retraction-inv-map-equiv-Fin-one-ℕ (inr star) = refl
 
 is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
 is-equiv-map-equiv-Fin-one-ℕ =
   is-equiv-has-inverse
     inv-map-equiv-Fin-one-ℕ
-    issec-inv-map-equiv-Fin-one-ℕ
-    isretr-inv-map-equiv-Fin-one-ℕ
+    is-section-inv-map-equiv-Fin-one-ℕ
+    is-retraction-inv-map-equiv-Fin-one-ℕ
 
 equiv-Fin-one-ℕ : Fin 1 ≃ unit
 pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ
@@ -372,27 +372,27 @@ succ-skip-neg-two-Fin zero-ℕ (inr star) = refl
 succ-skip-neg-two-Fin (succ-ℕ k) (inl x) = refl
 succ-skip-neg-two-Fin (succ-ℕ k) (inr star) = refl
 
-issec-pred-Fin :
+is-section-pred-Fin :
   (k : ℕ) (x : Fin k) → succ-Fin k (pred-Fin k x) ＝ x
-issec-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
-issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
+is-section-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
+is-section-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
   ( succ-skip-neg-two-Fin k (pred-Fin (succ-ℕ k) x)) ∙
-  ( ap inl (issec-pred-Fin (succ-ℕ k) x))
-issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = refl
+  ( ap inl (is-section-pred-Fin (succ-ℕ k) x))
+is-section-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = refl
 
-isretr-pred-Fin :
+is-retraction-pred-Fin :
   (k : ℕ) (x : Fin k) → pred-Fin k (succ-Fin k x) ＝ x
-isretr-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
-isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inl x)) =
-  ap (skip-neg-two-Fin (succ-ℕ k)) (isretr-pred-Fin (succ-ℕ k) (inl x))
-isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inr star)) = refl
-isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = pred-zero-Fin (succ-ℕ k)
+is-retraction-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
+is-retraction-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inl x)) =
+  ap (skip-neg-two-Fin (succ-ℕ k)) (is-retraction-pred-Fin (succ-ℕ k) (inl x))
+is-retraction-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inr star)) = refl
+is-retraction-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = pred-zero-Fin (succ-ℕ k)
 
 is-equiv-succ-Fin : (k : ℕ) → is-equiv (succ-Fin k)
 pr1 (pr1 (is-equiv-succ-Fin k)) = pred-Fin k
-pr2 (pr1 (is-equiv-succ-Fin k)) = issec-pred-Fin k
+pr2 (pr1 (is-equiv-succ-Fin k)) = is-section-pred-Fin k
 pr1 (pr2 (is-equiv-succ-Fin k)) = pred-Fin k
-pr2 (pr2 (is-equiv-succ-Fin k)) = isretr-pred-Fin k
+pr2 (pr2 (is-equiv-succ-Fin k)) = is-retraction-pred-Fin k
 
 equiv-succ-Fin : (k : ℕ) → Fin k ≃ Fin k
 pr1 (equiv-succ-Fin k) = succ-Fin k
@@ -400,9 +400,9 @@ pr2 (equiv-succ-Fin k) = is-equiv-succ-Fin k
 
 is-equiv-pred-Fin : (k : ℕ) → is-equiv (pred-Fin k)
 pr1 (pr1 (is-equiv-pred-Fin k)) = succ-Fin k
-pr2 (pr1 (is-equiv-pred-Fin k)) = isretr-pred-Fin k
+pr2 (pr1 (is-equiv-pred-Fin k)) = is-retraction-pred-Fin k
 pr1 (pr2 (is-equiv-pred-Fin k)) = succ-Fin k
-pr2 (pr2 (is-equiv-pred-Fin k)) = issec-pred-Fin k
+pr2 (pr2 (is-equiv-pred-Fin k)) = is-section-pred-Fin k
 
 equiv-pred-Fin : (k : ℕ) → Fin k ≃ Fin k
 pr1 (equiv-pred-Fin k) = pred-Fin k

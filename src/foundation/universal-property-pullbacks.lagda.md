@@ -72,7 +72,7 @@ module _
     {C' : UU l5} (c' : cone f g C') →
     cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
   eq-map-universal-property-pullback up-c {C'} c' =
-    issec-map-inv-is-equiv (up-c C') c'
+    is-section-map-inv-is-equiv (up-c C') c'
 ```
 
 ### The homotopy of cones obtained from the universal property of pullbacks

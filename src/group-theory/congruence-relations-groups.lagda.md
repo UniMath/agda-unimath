@@ -178,7 +178,7 @@ module _
     binary-tr
       ( sim-congruence-Group)
       ( right-unit-law-mul-Group G x)
-      ( issec-mul-inv-Group G x y)
+      ( is-section-mul-inv-Group G x y)
       ( symm-congruence-Group (left-mul-congruence-Group x H))
 
   inv-congruence-Group :

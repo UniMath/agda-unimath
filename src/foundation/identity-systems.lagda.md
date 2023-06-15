@@ -36,7 +36,7 @@ module _
   IND-identity-system : UU (l1 ⊔ l2 ⊔ lsuc l)
   IND-identity-system =
     ( P : (x : A) (y : B x) → UU l) →
-      sec (λ (h : (x : A) (y : B x) → P x y) → h a b)
+      section (λ (h : (x : A) (y : B x) → P x y) → h a b)
 ```
 
 ## Properties

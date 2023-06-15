@@ -207,23 +207,23 @@ map-inv-equiv-ℕ : unit + ℕ → ℕ
 map-inv-equiv-ℕ (inl x) = zero-ℕ
 map-inv-equiv-ℕ (inr n) = succ-ℕ n
 
-isretr-map-inv-equiv-ℕ :
+is-retraction-map-inv-equiv-ℕ :
   ( map-inv-equiv-ℕ ∘ map-equiv-ℕ) ~ id
-isretr-map-inv-equiv-ℕ zero-ℕ = refl
-isretr-map-inv-equiv-ℕ (succ-ℕ n) = refl
+is-retraction-map-inv-equiv-ℕ zero-ℕ = refl
+is-retraction-map-inv-equiv-ℕ (succ-ℕ n) = refl
 
-issec-map-inv-equiv-ℕ :
+is-section-map-inv-equiv-ℕ :
   ( map-equiv-ℕ ∘ map-inv-equiv-ℕ) ~ id
-issec-map-inv-equiv-ℕ (inl star) = refl
-issec-map-inv-equiv-ℕ (inr n) = refl
+is-section-map-inv-equiv-ℕ (inl star) = refl
+is-section-map-inv-equiv-ℕ (inr n) = refl
 
 equiv-ℕ : ℕ ≃ (unit + ℕ)
 pr1 equiv-ℕ = map-equiv-ℕ
 pr2 equiv-ℕ =
   is-equiv-has-inverse
     map-inv-equiv-ℕ
-    issec-map-inv-equiv-ℕ
-    isretr-map-inv-equiv-ℕ
+    is-section-map-inv-equiv-ℕ
+    is-retraction-map-inv-equiv-ℕ
 ```
 
 ## See also

@@ -42,7 +42,7 @@ abstract
     is-prop-is-proof-irrelevant
       ( λ H →
         is-contr-equiv'
-          ( Σ (sec f)
+          ( Σ (section f)
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
               ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
           ( associative-Σ (B → A)
@@ -50,7 +50,7 @@ abstract
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
               ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
           ( is-contr-Σ
-            ( is-contr-sec-is-equiv (E H))
+            ( is-contr-section-is-equiv (E H))
             ( pair (g H) (G H))
             ( is-contr-equiv'
               ( (x : A) →
@@ -104,7 +104,7 @@ triangle-is-invertible-id-htpy-id-id :
         ( λ s → (pr1 s ∘ id) ~ id)) ∘
       ( map-inv-left-unit-law-Σ-is-contr
         { B = λ s → (pr1 s ∘ id) ~ id}
-        ( is-contr-sec-is-equiv (is-equiv-id {_} {A}))
+        ( is-contr-section-is-equiv (is-equiv-id {_} {A}))
         ( pair id refl-htpy)))
 triangle-is-invertible-id-htpy-id-id A H = refl
 
@@ -119,11 +119,11 @@ abstract
         ( λ g → (id ∘ g) ~ id)
         ( λ s → (pr1 s ∘ id) ~ id))
       ( map-inv-left-unit-law-Σ-is-contr
-        ( is-contr-sec-is-equiv is-equiv-id)
+        ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
       ( triangle-is-invertible-id-htpy-id-id A)
       ( is-equiv-map-inv-left-unit-law-Σ-is-contr
-        ( is-contr-sec-is-equiv is-equiv-id)
+        ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
       ( is-equiv-map-associative-Σ _ _ _)
 ```

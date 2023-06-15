@@ -55,14 +55,14 @@ module _
   where
 
   diagonal-lift : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  diagonal-lift = sec (pullback-hom f g)
+  diagonal-lift = section (pullback-hom f g)
 
   _⧄_ = diagonal-lift -- This symbol doesn't have an input sequence :(
 
   map-diagonal-lift : diagonal-lift → type-pullback-hom f g → X → B
   map-diagonal-lift = pr1
 
-  issec-map-diagonal-lift :
+  is-section-map-diagonal-lift :
     (d : diagonal-lift) → (pullback-hom f g ∘ map-diagonal-lift d) ~ id
-  issec-map-diagonal-lift = pr2
+  is-section-map-diagonal-lift = pr2
 ```

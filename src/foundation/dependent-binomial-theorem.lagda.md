@@ -59,27 +59,27 @@ module _
   pr1 (map-inv-compute-total-fam-coprod (inr x)) = one-Fin 1
   pr2 (map-inv-compute-total-fam-coprod (inr x)) = map-raise x
 
-  issec-map-inv-compute-total-fam-coprod :
+  is-section-map-inv-compute-total-fam-coprod :
     (map-compute-total-fam-coprod ∘ map-inv-compute-total-fam-coprod) ~ id
-  issec-map-inv-compute-total-fam-coprod (inl x) =
-    ap inl (isretr-map-inv-raise {l2} x)
-  issec-map-inv-compute-total-fam-coprod (inr x) =
-    ap inr (isretr-map-inv-raise {l1} x)
+  is-section-map-inv-compute-total-fam-coprod (inl x) =
+    ap inl (is-retraction-map-inv-raise {l2} x)
+  is-section-map-inv-compute-total-fam-coprod (inr x) =
+    ap inr (is-retraction-map-inv-raise {l1} x)
 
-  isretr-map-inv-compute-total-fam-coprod :
+  is-retraction-map-inv-compute-total-fam-coprod :
     (map-inv-compute-total-fam-coprod ∘ map-compute-total-fam-coprod) ~ id
-  isretr-map-inv-compute-total-fam-coprod (pair (inl (inr star)) y) =
-    ap (pair (zero-Fin 1)) (issec-map-inv-raise y)
-  isretr-map-inv-compute-total-fam-coprod (pair (inr star) y) =
-    ap (pair (one-Fin 1)) (issec-map-inv-raise y)
+  is-retraction-map-inv-compute-total-fam-coprod (pair (inl (inr star)) y) =
+    ap (pair (zero-Fin 1)) (is-section-map-inv-raise y)
+  is-retraction-map-inv-compute-total-fam-coprod (pair (inr star) y) =
+    ap (pair (one-Fin 1)) (is-section-map-inv-raise y)
 
   is-equiv-map-compute-total-fam-coprod :
     is-equiv map-compute-total-fam-coprod
   is-equiv-map-compute-total-fam-coprod =
     is-equiv-has-inverse
       map-inv-compute-total-fam-coprod
-      issec-map-inv-compute-total-fam-coprod
-      isretr-map-inv-compute-total-fam-coprod
+      is-section-map-inv-compute-total-fam-coprod
+      is-retraction-map-inv-compute-total-fam-coprod
 
   compute-total-fam-coprod :
     (Σ (Fin 2) fam-coprod) ≃ (A + B)

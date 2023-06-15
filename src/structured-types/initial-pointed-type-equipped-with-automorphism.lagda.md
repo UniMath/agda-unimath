@@ -148,7 +148,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut :
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
   inv
     ( inv-con
-      ( issec-map-inv-equiv
+      ( is-section-map-inv-equiv
         ( aut-Pointed-Type-With-Aut X)
         ( point-Pointed-Type-With-Aut X))
       ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h zero-ℤ) ∙
@@ -167,7 +167,7 @@ coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl zero-ℕ) =
 coh-aut-htpy-map-ℤ-Pointed-Type-With-Aut X h (inl (succ-ℕ k)) =
   inv
     ( inv-con
-      ( issec-map-inv-equiv
+      ( is-section-map-inv-equiv
         ( aut-Pointed-Type-With-Aut X)
         ( map-ℤ-Pointed-Type-With-Aut X (inl k)))
       ( ( htpy-map-ℤ-Pointed-Type-With-Aut X h (inl k)) ∙

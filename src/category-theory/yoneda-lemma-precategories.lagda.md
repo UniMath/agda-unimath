@@ -77,16 +77,16 @@ module _
             ( preserves-comp-functor-Precategory C (Set-Precategory l1) F g f))
           ( u))
 
-  sec-yoneda-evid-Precategory :
-    sec yoneda-evid-Precategory
-  pr1 sec-yoneda-evid-Precategory = yoneda-extension-Precategory
-  pr2 sec-yoneda-evid-Precategory =
+  section-yoneda-evid-Precategory :
+    section yoneda-evid-Precategory
+  pr1 section-yoneda-evid-Precategory = yoneda-extension-Precategory
+  pr2 section-yoneda-evid-Precategory =
     htpy-eq (preserves-id-functor-Precategory C (Set-Precategory l1) F c)
 
-  retr-yoneda-evid-Precategory :
-    retr yoneda-evid-Precategory
-  pr1 retr-yoneda-evid-Precategory = yoneda-extension-Precategory
-  pr2 retr-yoneda-evid-Precategory α =
+  retraction-yoneda-evid-Precategory :
+    retraction yoneda-evid-Precategory
+  pr1 retraction-yoneda-evid-Precategory = yoneda-extension-Precategory
+  pr2 retraction-yoneda-evid-Precategory α =
     eq-pair-Σ
       ( eq-htpy
         ( λ x →
@@ -105,6 +105,6 @@ module _
         ( pr2 α))
 
   yoneda-lemma-Precategory : is-equiv yoneda-evid-Precategory
-  pr1 yoneda-lemma-Precategory = sec-yoneda-evid-Precategory
-  pr2 yoneda-lemma-Precategory = retr-yoneda-evid-Precategory
+  pr1 yoneda-lemma-Precategory = section-yoneda-evid-Precategory
+  pr2 yoneda-lemma-Precategory = retraction-yoneda-evid-Precategory
 ```

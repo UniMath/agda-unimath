@@ -126,13 +126,13 @@ module _
         ( map-inv-equiv-trunc)
         ( inv-htpy
           ( preserves-comp-map-trunc k (map-equiv e) (map-inv-equiv e)) ∙h
-          ( htpy-trunc (issec-map-inv-equiv e) ∙h
+          ( htpy-trunc (is-section-map-inv-equiv e) ∙h
             id-map-trunc k)))
       ( pair
         ( map-inv-equiv-trunc)
         ( inv-htpy
           ( preserves-comp-map-trunc k (map-inv-equiv e) (map-equiv e)) ∙h
-          ( htpy-trunc (isretr-map-inv-equiv e) ∙h
+          ( htpy-trunc (is-retraction-map-inv-equiv e) ∙h
             id-map-trunc k)))
 
   equiv-trunc : (type-trunc k A ≃ type-trunc k B)
