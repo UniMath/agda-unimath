@@ -24,7 +24,6 @@ open import foundation-core.embeddings public
 open import foundation-core.empty-types public
 open import foundation-core.endomorphisms public
 open import foundation-core.equality-dependent-pair-types public
-open import foundation-core.equivalence-induction public
 open import foundation-core.equivalence-relations public
 open import foundation-core.equivalences public
 open import foundation-core.fibers-of-maps public

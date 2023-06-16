@@ -1,6 +1,8 @@
 # The reduced 1-bordism category
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module univalent-combinatorics.reduced-1-bordism-category where
 ```
 

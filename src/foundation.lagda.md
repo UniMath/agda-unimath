@@ -10,6 +10,7 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
@@ -246,6 +247,7 @@ open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
+open import foundation.symmetric-binary-relations public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
@@ -281,7 +283,6 @@ open import foundation.uniqueness-truncation public
 open import foundation.unit-type public
 open import foundation.unital-binary-operations public
 open import foundation.univalence public
-open import foundation.univalence-action-on-equivalences public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public

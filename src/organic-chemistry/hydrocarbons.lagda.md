@@ -19,7 +19,7 @@ open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import graph-theory.connected-undirected-graphs
-open import graph-theory.finite-graphs
+open import graph-theory.finite-undirected-graphs
 
 open import univalent-combinatorics.finite-types
 ```

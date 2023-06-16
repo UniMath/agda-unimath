@@ -1,6 +1,8 @@
 # Walks in finite undirected graphs
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module graph-theory.walks-finite-undirected-graphs where
 ```
 
@@ -537,7 +539,6 @@ module _
     has-decidable-equality (walk-Undirected-Graph-𝔽 G x y)
   has-decidable-equality-walk-Undirected-Graph-𝔽 {x} {.x}
     refl-walk-Undirected-Graph w =
-
     {!!}
   has-decidable-equality-walk-Undirected-Graph-𝔽 {x} {._}
     ( cons-walk-Undirected-Graph p e v) w =

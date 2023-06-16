@@ -1,6 +1,8 @@
 # Finite undirected trees
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module trees.finite-undirected-trees where
 ```
 

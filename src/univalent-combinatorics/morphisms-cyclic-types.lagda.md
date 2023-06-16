@@ -1,6 +1,8 @@
 # Morphisms of cyclic types
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module univalent-combinatorics.morphisms-cyclic-types where
 ```
 
@@ -11,7 +13,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cyclic-types

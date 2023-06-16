@@ -1,6 +1,8 @@
 # Cyclic types
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module univalent-combinatorics.cyclic-types where
 ```
 

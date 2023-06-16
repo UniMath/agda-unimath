@@ -1,6 +1,8 @@
 # Undirected graphs
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module graph-theory.undirected-graphs where
 ```
 
@@ -81,18 +83,26 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  graph-Undirected-Graph : Directed-Graph l1 (lsuc lzero ⊔ l1 ⊔ l2)
-  pr1 graph-Undirected-Graph = vertex-Undirected-Graph G
-  pr2 graph-Undirected-Graph x y =
-    Σ ( unordered-pair-vertices-Undirected-Graph G)
-      ( λ p →
-        ( mere-Eq-unordered-pair (standard-unordered-pair x y) p) ×
-        ( edge-Undirected-Graph G p))
+  vertex-graph-Undirected-Graph : UU l1
+  vertex-graph-Undirected-Graph = vertex-Undirected-Graph G
 
-  graph-Undirected-Graph' : Directed-Graph l1 l2
-  pr1 graph-Undirected-Graph' = vertex-Undirected-Graph G
-  pr2 graph-Undirected-Graph' x y =
+  edge-graph-Undirected-Graph :
+    (x y : vertex-graph-Undirected-Graph) → UU l2
+  edge-graph-Undirected-Graph x y =
     edge-Undirected-Graph G (standard-unordered-pair x y)
+
+  graph-Undirected-Graph : Directed-Graph l1 l2
+  pr1 graph-Undirected-Graph = vertex-graph-Undirected-Graph
+  pr2 graph-Undirected-Graph = edge-graph-Undirected-Graph
+
+  directed-edge-edge-Undirected-Graph :
+    (p : unordered-pair-vertices-Undirected-Graph G)
+    (e : edge-Undirected-Graph G p)
+    (i : type-unordered-pair p) →
+    edge-graph-Undirected-Graph
+      ( element-unordered-pair p i)
+      ( other-element-unordered-pair p i)
+  directed-edge-edge-Undirected-Graph p e i = {!!}
 ```
 
 ### Transporting edges along equalities of unordered pairs of vertices
