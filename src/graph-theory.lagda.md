@@ -26,6 +26,8 @@ open import graph-theory.eulerian-circuits-undirected-graphs public
 open import graph-theory.faithful-morphisms-undirected-graphs public
 open import graph-theory.fibers-directed-graphs public
 open import graph-theory.finite-undirected-graphs public
+open import graph-theory.forgetful-functor-from-directed-graphs-to-undirected-graphs public
+open import graph-theory.forgetful-functor-from-undirected-graphs-to-directed-graphs public
 open import graph-theory.geometric-realizations-undirected-graphs public
 open import graph-theory.hypergraphs public
 open import graph-theory.matchings public
@@ -45,6 +47,7 @@ open import graph-theory.stereoisomerism-enriched-undirected-graphs public
 open import graph-theory.totally-faithful-morphisms-undirected-graphs public
 open import graph-theory.trails-directed-graphs public
 open import graph-theory.trails-undirected-graphs public
+open import graph-theory.undirected-core-directed-graphs public
 open import graph-theory.undirected-graph-structures-on-standard-finite-sets public
 open import graph-theory.undirected-graphs public
 open import graph-theory.vertex-covers public

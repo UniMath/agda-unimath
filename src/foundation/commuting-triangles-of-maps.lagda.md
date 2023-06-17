@@ -11,10 +11,12 @@ open import foundation-core.commuting-triangles-of-maps public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.function-types
 ```
 
 </details>
@@ -50,13 +52,22 @@ module _
 
   equiv-coherence-triangle-maps-inv-top :
     coherence-triangle-maps left right (map-equiv e) ≃
-    coherence-triangle-maps' right left (map-inv-equiv e)
+    coherence-triangle-maps right left (map-inv-equiv e)
   equiv-coherence-triangle-maps-inv-top =
-    equiv-Π
+    ( equiv-inv-htpy
+      ( left ∘ (map-inv-equiv e))
+      ( right)) ∘e
+    ( equiv-Π
       ( λ b → left (map-inv-equiv e b) ＝ right b)
       ( e)
       ( λ a →
         equiv-concat
           ( ap left (is-retraction-map-inv-equiv e a))
-          ( right (map-equiv e a)))
+          ( right (map-equiv e a))))
+
+  coherence-triangle-maps-inv-top :
+    coherence-triangle-maps left right (map-equiv e) →
+    coherence-triangle-maps right left (map-inv-equiv e)
+  coherence-triangle-maps-inv-top =
+    map-equiv equiv-coherence-triangle-maps-inv-top
 ```

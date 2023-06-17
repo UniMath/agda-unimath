@@ -8,10 +8,22 @@ module foundation.symmetric-binary-relations where
 
 ```agda
 open import foundation.action-on-equivalences-type-families
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
+open import foundation.binary-transport
+open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.symmetric-operations
 open import foundation.transport
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -30,6 +42,10 @@ symmetric binary relation `R` on `A` and an equivalence of unordered pairs
 for any two elements `x y : A`, where `{x,y}` is the _standard unordered pair_
 consisting of `x` and `y`.
 
+Note that a symmetric binary relation R on a type is just a
+[symmetric operation](foundation.symmetric-operations.md) from `A` into a
+universe `𝒰`.
+
 ## Definitions
 
 ### Symmetric binary relations
@@ -37,23 +53,124 @@ consisting of `x` and `y`.
 ```agda
 symmetric-binary-relation :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-symmetric-binary-relation l2 A = unordered-pair A → UU l2
+symmetric-binary-relation l2 A = symmetric-operation A (UU l2)
 ```
 
-### Symmetries of symmetric binary relations
+### Action on symmetries of symmetric binary relations
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : symmetric-binary-relation l2 A)
   where
 
-  equiv-tr-symmetric-binary-relation :
-    (p q : unordered-pair A) → Eq-unordered-pair p q → R p ≃ R q
-  equiv-tr-symmetric-binary-relation p q e =
-    equiv-tr R (eq-Eq-unordered-pair' p q e)
+  abstract
+    equiv-tr-symmetric-binary-relation :
+      (p q : unordered-pair A) → Eq-unordered-pair p q → R p ≃ R q
+    equiv-tr-symmetric-binary-relation p =
+      ind-Eq-unordered-pair p (λ q e → R p ≃ R q) id-equiv
 
-  tr-symmetric-binary-relation :
-    (p q : unordered-pair A) → Eq-unordered-pair p q → R p → R q
-  tr-symmetric-binary-relation p q e =
-    map-equiv (equiv-tr-symmetric-binary-relation p q e)
+    compute-refl-equiv-tr-symmetric-binary-relation :
+      (p : unordered-pair A) →
+      equiv-tr-symmetric-binary-relation p p (refl-Eq-unordered-pair p) ＝
+      id-equiv
+    compute-refl-equiv-tr-symmetric-binary-relation p =
+      compute-refl-ind-Eq-unordered-pair p (λ q e → R p ≃ R q) id-equiv
+
+    htpy-compute-refl-equiv-tr-symmetric-binary-relation :
+      (p : unordered-pair A) →
+      htpy-equiv
+        ( equiv-tr-symmetric-binary-relation p p (refl-Eq-unordered-pair p))
+        ( id-equiv)
+    htpy-compute-refl-equiv-tr-symmetric-binary-relation p =
+      htpy-eq-equiv (compute-refl-equiv-tr-symmetric-binary-relation p)
+
+  abstract
+    tr-symmetric-binary-relation :
+      (p q : unordered-pair A) → Eq-unordered-pair p q → R p → R q
+    tr-symmetric-binary-relation p q e =
+      map-equiv (equiv-tr-symmetric-binary-relation p q e)
+
+    compute-refl-tr-symmetric-binary-relation :
+      (p : unordered-pair A) →
+      tr-symmetric-binary-relation p p (refl-Eq-unordered-pair p) ＝ id
+    compute-refl-tr-symmetric-binary-relation p =
+      ap map-equiv (compute-refl-equiv-tr-symmetric-binary-relation p)
+
+    htpy-compute-refl-tr-symmetric-binary-relation :
+      (p : unordered-pair A) →
+      tr-symmetric-binary-relation p p (refl-Eq-unordered-pair p) ~ id
+    htpy-compute-refl-tr-symmetric-binary-relation p =
+      htpy-eq (compute-refl-tr-symmetric-binary-relation p)
+```
+
+### The underlying binary relation of a symmetric binary relation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : symmetric-binary-relation l2 A)
+  where
+
+  rel-symmetric-binary-relation : Rel l2 A
+  rel-symmetric-binary-relation x y = R (standard-unordered-pair x y)
+
+  equiv-symmetric-rel-symmetric-binary-relation :
+    {x y : A} →
+    rel-symmetric-binary-relation x y ≃ rel-symmetric-binary-relation y x
+  equiv-symmetric-rel-symmetric-binary-relation {x} {y} =
+    equiv-tr-symmetric-binary-relation R
+      ( standard-unordered-pair x y)
+      ( standard-unordered-pair y x)
+      ( swap-standard-unordered-pair x y)
+
+  symmetric-rel-symmetric-binary-relation :
+    {x y : A} →
+    rel-symmetric-binary-relation x y → rel-symmetric-binary-relation y x
+  symmetric-rel-symmetric-binary-relation =
+    map-equiv equiv-symmetric-rel-symmetric-binary-relation
+```
+
+### The forgetful functor from binary relations to symmetric binary relations
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Rel l2 A)
+  where
+
+  symmetric-binary-relation-Rel : symmetric-binary-relation l2 A
+  symmetric-binary-relation-Rel p =
+    Σ ( type-unordered-pair p)
+      ( λ i →
+        R (element-unordered-pair p i) (other-element-unordered-pair p i))
+
+  unit-symmetric-binary-relation-Rel :
+    (x y : A) →
+    R x y → rel-symmetric-binary-relation symmetric-binary-relation-Rel x y
+  pr1 (unit-symmetric-binary-relation-Rel x y r) = zero-Fin 1
+  pr2 (unit-symmetric-binary-relation-Rel x y r) =
+    tr
+      ( R x)
+      ( inv (compute-other-element-standard-unordered-pair x y (zero-Fin 1)))
+      ( r)
+```
+
+### The symmetric core of a binary relation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Rel l2 A)
+  where
+
+  symmetric-core-Rel : symmetric-binary-relation l2 A
+  symmetric-core-Rel p =
+    (i : type-unordered-pair p) →
+    R (element-unordered-pair p i) (other-element-unordered-pair p i)
+
+  counit-symmetric-core-Rel :
+    (x y : A) →
+    rel-symmetric-binary-relation symmetric-core-Rel x y → R x y
+  counit-symmetric-core-Rel x y r =
+    tr
+      ( R x)
+      ( compute-other-element-standard-unordered-pair x y (zero-Fin 1))
+      ( r (zero-Fin 1))
 ```

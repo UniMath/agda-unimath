@@ -460,11 +460,19 @@ module _
     hom-descent-data-circle l P Q
   equiv-fixpoint-descent-data-circle-function-type-hom =
     equiv-tot
-      (λ h →
-        ( equiv-inv-htpy (((map-equiv f) ∘ h)) (h ∘ (map-equiv e))) ∘e
-        ( ( inv-equiv
-            ( equiv-coherence-triangle-maps-inv-top ((map-equiv f) ∘ h) h e)) ∘e
-          ( equiv-funext)))
+      ( λ h →
+        ( inv-equiv
+          ( ( equiv-inv-htpy
+              ( h)
+              ( (map-equiv f ∘ h) ∘ map-inv-equiv e)) ∘e
+            ( ( equiv-coherence-triangle-maps-inv-top
+                ( (map-equiv f) ∘ h)
+                ( h)
+                ( e)) ∘e
+              ( equiv-inv-htpy
+                ( h ∘ map-equiv e)
+                ( map-equiv f ∘ h))))) ∘e
+        ( equiv-funext))
 
   equiv-ev-descent-data-circle-function-type-hom :
     dependent-universal-property-circle (l2 ⊔ l3) l →
