@@ -13,10 +13,10 @@ open import foundation.full-subtypes
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.unions-subtypes
+open import foundation.universe-levels
 
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -41,7 +41,7 @@ complement-subtype P x = neg-Prop (P x)
 ```agda
 complement-decidable-subtype :
   {l1 l2 : Level} {A : UU l1} → decidable-subtype l2 A → decidable-subtype l2 A
-complement-decidable-subtype P x = neg-decidable-Prop (P x)
+complement-decidable-subtype P x = neg-Decidable-Prop (P x)
 ```
 
 ## Properties
@@ -55,7 +55,7 @@ module _
 
   is-full-union-subtype-complement-subtype :
     (P : subtype l2 A) → is-decidable-subtype P →
-    is-full-subtype (union-subtype P (complement-subtype P) )
+    is-full-subtype (union-subtype P (complement-subtype P))
   is-full-union-subtype-complement-subtype P d x =
     unit-trunc-Prop (d x)
 
@@ -76,5 +76,5 @@ module _
   is-full-union-subtype-complement-decidable-subtype P =
     is-full-union-subtype-complement-subtype
       ( subtype-decidable-subtype P)
-      ( is-decidable-subtype-decidable-subtype P)
+      ( is-decidable-decidable-subtype P)
 ```

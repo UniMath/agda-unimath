@@ -9,7 +9,7 @@ module group-theory.stabilizer-groups-concrete-group-actions where
 ```agda
 open import foundation.0-connected-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -27,8 +27,8 @@ open import group-theory.transitive-concrete-group-actions
 
 ## Idea
 
-The stabilizer of an element `x : X pt` of a concrete G-set `X : BG → Set` is
-the connected component of `pair pt x` in the type of orbits of `X`. Its loop
+The stabilizer of an element `x : X point` of a concrete G-set `X : BG → Set` is
+the connected component of `pair point x` in the type of orbits of `X`. Its loop
 space is indeed the type of elements `g : G` such that `g x = x`.
 
 ## Definition
@@ -51,7 +51,7 @@ module _
       ( action-stabilizer-action-Concrete-Group x)
   is-transitive-action-stabilizer-action-Concrete-Group x =
     is-0-connected-equiv'
-      ( assoc-Σ
+      ( associative-Σ
         ( classifying-type-Concrete-Group G)
         ( type-Set ∘ X)
         ( λ uy →

@@ -9,7 +9,9 @@ module univalent-combinatorics.standard-finite-types where
 ```agda
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -19,7 +21,7 @@ open import foundation.empty-types
 open import foundation.equality-coproduct-types
 open import foundation.equivalences
 open import foundation.equivalences-maybe
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -40,11 +42,11 @@ open import structured-types.types-equipped-with-endomorphisms
 The standard finite types are defined inductively by `Fin 0 := empty` and
 `Fin (n+1) := (Fin n) + 1`. **Note** that the outermost coproduct (i.e. the
 `inr` injection) is the _top_ element, when `Fin n` is considered as an initial
-segment of `n`.
+segment of `ℕ`.
 
 ## Definition
 
-### The standard finite types in universe level zero.
+### The standard finite types in universe level zero
 
 ```agda
 Fin-Set : ℕ → Set lzero
@@ -87,6 +89,18 @@ is-neg-one-is-not-inl-Fin k (inr star) H = refl
 inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inr-Fin (succ-ℕ k) (inl x) = inl (inr-Fin k x)
 inr-Fin (succ-ℕ k) (inr star) = inr star
+
+neq-inl-Fin-inr-Fin :
+  (n : ℕ) → (k : Fin n) → ¬ (inl-Fin n k ＝ inr-Fin n k)
+neq-inl-Fin-inr-Fin (succ-ℕ n) (inl k) =
+  neq-inl-Fin-inr-Fin n k ∘ is-injective-inl
+neq-inl-Fin-inr-Fin (succ-ℕ n) (inr star) = neq-inl-inr
+
+neq-inr-Fin-inl-Fin :
+  (n : ℕ) → (k : Fin n) → ¬ (inr-Fin n k ＝ inl-Fin n k)
+neq-inr-Fin-inl-Fin (succ-ℕ n) (inl k) =
+  neq-inr-Fin-inl-Fin n k ∘ is-injective-inl
+neq-inr-Fin-inl-Fin (succ-ℕ n) (inr k) = neq-inr-inl
 ```
 
 ### The standard finite types in an arbitrary universe
@@ -128,20 +142,20 @@ map-equiv-Fin-one-ℕ (inr star) = star
 inv-map-equiv-Fin-one-ℕ : unit → Fin 1
 inv-map-equiv-Fin-one-ℕ star = inr star
 
-issec-inv-map-equiv-Fin-one-ℕ :
+is-section-inv-map-equiv-Fin-one-ℕ :
   ( map-equiv-Fin-one-ℕ ∘ inv-map-equiv-Fin-one-ℕ) ~ id
-issec-inv-map-equiv-Fin-one-ℕ star = refl
+is-section-inv-map-equiv-Fin-one-ℕ star = refl
 
-isretr-inv-map-equiv-Fin-one-ℕ :
+is-retraction-inv-map-equiv-Fin-one-ℕ :
   ( inv-map-equiv-Fin-one-ℕ ∘ map-equiv-Fin-one-ℕ) ~ id
-isretr-inv-map-equiv-Fin-one-ℕ (inr star) = refl
+is-retraction-inv-map-equiv-Fin-one-ℕ (inr star) = refl
 
 is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
 is-equiv-map-equiv-Fin-one-ℕ =
   is-equiv-has-inverse
     inv-map-equiv-Fin-one-ℕ
-    issec-inv-map-equiv-Fin-one-ℕ
-    isretr-inv-map-equiv-Fin-one-ℕ
+    is-section-inv-map-equiv-Fin-one-ℕ
+    is-retraction-inv-map-equiv-Fin-one-ℕ
 
 equiv-Fin-one-ℕ : Fin 1 ≃ unit
 pr1 equiv-Fin-one-ℕ = map-equiv-Fin-one-ℕ
@@ -165,6 +179,10 @@ nat-Fin : (k : ℕ) → Fin k → ℕ
 nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
 
+nat-Fin-reverse : (k : ℕ) → Fin k → ℕ
+nat-Fin-reverse (succ-ℕ k) (inl x) = succ-ℕ (nat-Fin k x)
+nat-Fin-reverse (succ-ℕ k) (inr x) = 0
+
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
 strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
   transitive-le-ℕ
@@ -182,6 +200,11 @@ upper-bound-nat-Fin zero-ℕ (inr star) = star
 upper-bound-nat-Fin (succ-ℕ k) (inl x) =
   preserves-leq-succ-ℕ (nat-Fin (succ-ℕ k) x) k (upper-bound-nat-Fin k x)
 upper-bound-nat-Fin (succ-ℕ k) (inr star) = refl-leq-ℕ (succ-ℕ k)
+
+upper-bound-nat-Fin' :
+  (k : ℕ) (x : Fin k) → leq-ℕ (nat-Fin k x) k
+upper-bound-nat-Fin' k x =
+  leq-le-ℕ (nat-Fin k x) k (strict-upper-bound-nat-Fin k x)
 
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
@@ -277,17 +300,28 @@ is-one-nat-one-Fin (succ-ℕ k) = is-one-nat-one-Fin k
 ```agda
 is-injective-inl-Fin : (k : ℕ) → is-injective (inl-Fin k)
 is-injective-inl-Fin k refl = refl
+```
 
--- Exercise 7.5 (c)
+### Exercise 7.5 (c)
+
+```agda
+neq-zero-skip-zero-Fin :
+  {k : ℕ} {x : Fin k} →
+  is-nonzero-Fin (succ-ℕ k) (skip-zero-Fin k x)
+neq-zero-skip-zero-Fin {succ-ℕ k} {inl x} p =
+  neq-zero-skip-zero-Fin {k = k} {x = x} (is-injective-inl-Fin (succ-ℕ k) p)
 
 neq-zero-succ-Fin :
-  {k : ℕ} {x : Fin k} → is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
+  {k : ℕ} {x : Fin k} →
+  is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
 neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
   neq-zero-succ-Fin (is-injective-inl-Fin (succ-ℕ k) p)
 neq-zero-succ-Fin {succ-ℕ k} {inr star} ()
+```
 
--- Exercise 7.5 (d)
+### Exercise 7.5 (d)
 
+```agda
 is-injective-skip-zero-Fin : (k : ℕ) → is-injective (skip-zero-Fin k)
 is-injective-skip-zero-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-skip-zero-Fin k (is-injective-inl-Fin (succ-ℕ k) p))
@@ -305,22 +339,26 @@ is-injective-succ-Fin (succ-ℕ k) {inr star} {inl y} p =
 is-injective-succ-Fin (succ-ℕ k) {inr star} {inr star} p = refl
 ```
 
-```agda
--- We define a function skip-neg-two-Fin in order to define pred-Fin.
+We define a function `skip-neg-two-Fin` in order to define `pred-Fin`.
 
+```agda
 skip-neg-two-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 skip-neg-two-Fin (succ-ℕ k) (inl x) = inl (inl x)
 skip-neg-two-Fin (succ-ℕ k) (inr x) = neg-one-Fin (succ-ℕ k)
+```
 
--- We define the predecessor function on Fin k.
+We define the predecessor function on `Fin k`.
 
+```agda
 pred-Fin : (k : ℕ) → Fin k → Fin k
 pred-Fin (succ-ℕ k) (inl x) = skip-neg-two-Fin k (pred-Fin k x)
 pred-Fin (succ-ℕ k) (inr x) = neg-two-Fin k
+```
 
--- We now turn to the exercise.
+We now turn to the exercise.
 
+```agda
 pred-zero-Fin :
   (k : ℕ) → is-neg-one-Fin (succ-ℕ k) (pred-Fin (succ-ℕ k) (zero-Fin k))
 pred-zero-Fin (zero-ℕ) = refl
@@ -334,27 +372,27 @@ succ-skip-neg-two-Fin zero-ℕ (inr star) = refl
 succ-skip-neg-two-Fin (succ-ℕ k) (inl x) = refl
 succ-skip-neg-two-Fin (succ-ℕ k) (inr star) = refl
 
-issec-pred-Fin :
+is-section-pred-Fin :
   (k : ℕ) (x : Fin k) → succ-Fin k (pred-Fin k x) ＝ x
-issec-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
-issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
+is-section-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
+is-section-pred-Fin (succ-ℕ (succ-ℕ k)) (inl x) =
   ( succ-skip-neg-two-Fin k (pred-Fin (succ-ℕ k) x)) ∙
-  ( ap inl (issec-pred-Fin (succ-ℕ k) x))
-issec-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = refl
+  ( ap inl (is-section-pred-Fin (succ-ℕ k) x))
+is-section-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = refl
 
-isretr-pred-Fin :
+is-retraction-pred-Fin :
   (k : ℕ) (x : Fin k) → pred-Fin k (succ-Fin k x) ＝ x
-isretr-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
-isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inl x)) =
-  ap (skip-neg-two-Fin (succ-ℕ k)) (isretr-pred-Fin (succ-ℕ k) (inl x))
-isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inr star)) = refl
-isretr-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = pred-zero-Fin (succ-ℕ k)
+is-retraction-pred-Fin (succ-ℕ zero-ℕ) (inr star) = refl
+is-retraction-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inl x)) =
+  ap (skip-neg-two-Fin (succ-ℕ k)) (is-retraction-pred-Fin (succ-ℕ k) (inl x))
+is-retraction-pred-Fin (succ-ℕ (succ-ℕ k)) (inl (inr star)) = refl
+is-retraction-pred-Fin (succ-ℕ (succ-ℕ k)) (inr star) = pred-zero-Fin (succ-ℕ k)
 
 is-equiv-succ-Fin : (k : ℕ) → is-equiv (succ-Fin k)
 pr1 (pr1 (is-equiv-succ-Fin k)) = pred-Fin k
-pr2 (pr1 (is-equiv-succ-Fin k)) = issec-pred-Fin k
+pr2 (pr1 (is-equiv-succ-Fin k)) = is-section-pred-Fin k
 pr1 (pr2 (is-equiv-succ-Fin k)) = pred-Fin k
-pr2 (pr2 (is-equiv-succ-Fin k)) = isretr-pred-Fin k
+pr2 (pr2 (is-equiv-succ-Fin k)) = is-retraction-pred-Fin k
 
 equiv-succ-Fin : (k : ℕ) → Fin k ≃ Fin k
 pr1 (equiv-succ-Fin k) = succ-Fin k
@@ -362,9 +400,9 @@ pr2 (equiv-succ-Fin k) = is-equiv-succ-Fin k
 
 is-equiv-pred-Fin : (k : ℕ) → is-equiv (pred-Fin k)
 pr1 (pr1 (is-equiv-pred-Fin k)) = succ-Fin k
-pr2 (pr1 (is-equiv-pred-Fin k)) = isretr-pred-Fin k
+pr2 (pr1 (is-equiv-pred-Fin k)) = is-retraction-pred-Fin k
 pr1 (pr2 (is-equiv-pred-Fin k)) = succ-Fin k
-pr2 (pr2 (is-equiv-pred-Fin k)) = issec-pred-Fin k
+pr2 (pr2 (is-equiv-pred-Fin k)) = is-section-pred-Fin k
 
 equiv-pred-Fin : (k : ℕ) → Fin k ≃ Fin k
 pr1 (equiv-pred-Fin k) = pred-Fin k

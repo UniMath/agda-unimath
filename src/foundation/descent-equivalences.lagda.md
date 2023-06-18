@@ -7,14 +7,14 @@ module foundation.descent-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
 open import foundation.equivalences
+open import foundation.functoriality-fibers-of-maps
+open import foundation.universe-levels
 
-open import foundation-core.cones-pullbacks
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-fibers-of-maps
 open import foundation-core.pullbacks
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -24,7 +24,7 @@ open import foundation-core.universe-levels
 The descent property of equivalences is a somewhat degenerate form of a descent
 property. It asserts that in a commuting diagram of the form
 
-```md
+```text
      p        q
  A -----> B -----> C
  |        |        |
@@ -49,7 +49,7 @@ module _
     (i : X → Y) (j : Y → Z) (h : C → Z)
     (c : cone j h B) (d : cone i (vertical-map-cone j h c) A) →
     is-equiv i → is-equiv (horizontal-map-cone i (vertical-map-cone j h c) d) →
-    is-pullback (j ∘ i) h (cone-comp-horizontal i j h c d) →
+    is-pullback (j ∘ i) h (pasting-horizontal-cone i j h c d) →
     is-pullback j h c
   descent-is-equiv i j h c d
     is-equiv-i is-equiv-k is-pb-rectangle =
@@ -60,12 +60,12 @@ module _
         ( λ y → is-equiv (map-fib-cone j h c y))
         ( λ x → is-equiv-left-factor-htpy
           ( map-fib-cone (j ∘ i) h
-            ( cone-comp-horizontal i j h c d) x)
+            ( pasting-horizontal-cone i j h c d) x)
           ( map-fib-cone j h c (i x))
           ( map-fib-cone i (vertical-map-cone j h c) d x)
-          ( map-fib-cone-comp-horizontal i j h c d x)
+          ( map-fib-pasting-horizontal-cone i j h c d x)
           ( is-fiberwise-equiv-map-fib-cone-is-pullback (j ∘ i) h
-            ( cone-comp-horizontal i j h c d)
+            ( pasting-horizontal-cone i j h c d)
             ( is-pb-rectangle)
             ( x))
           ( is-fiberwise-equiv-map-fib-cone-is-pullback i
@@ -85,7 +85,7 @@ module _
     is-pullback
       ( j ∘ map-equiv i)
       ( h)
-      ( cone-comp-horizontal (map-equiv i) j h c d) →
+      ( pasting-horizontal-cone (map-equiv i) j h c d) →
     is-pullback j h c
   descent-equiv i j h c d =
     descent-is-equiv (map-equiv i) j h c d (is-equiv-map-equiv i)

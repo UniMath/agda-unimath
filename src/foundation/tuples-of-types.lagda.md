@@ -9,7 +9,7 @@ module foundation.tuples-of-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -29,7 +29,7 @@ tuple-types l n = Fin n → UU l
 
 ## Properties
 
-### The tuple of types `A j` for `i ≠ j`, given `i`.
+### The tuple of types `A j` for `i ≠ j`, given `i`
 
 ```agda
 {-
@@ -39,5 +39,3 @@ tuple-types-complement-point :
 tuple-types-complement-point A i = {!!}
 -}
 ```
-
--- Σ (x : Fin (n + 1)) (a ≠ x) ≃ -- Fin n

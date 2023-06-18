@@ -9,6 +9,7 @@ module trees.undirected-trees where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
@@ -19,6 +20,7 @@ open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport
 open import foundation.universe-levels
 
 open import graph-theory.paths-undirected-graphs
@@ -31,8 +33,8 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-A tree is a graph such that the type of trails from x to y is contractible for
-any two vertices x and y.
+An **undirected tree** is an undirected graph such that the type of trails from
+x to y is contractible for any two vertices x and y.
 
 ## Definition
 
@@ -363,29 +365,55 @@ has-decidable-equality-node-Undirected-Tree T x y =
 
 ### Any trail in a tree is a path
 
--- ```agda -- module \_ -- {l1 l2 : Level} (T : Tree l1 l2) -- where
+```agda
+-- module _
+--   {l1 l2 : Level} (T : Tree l1 l2)
+--   where
 
--- is-path-is-trail-walk-Undirected-Tree : -- {x y : node-Undirected-Tree T} (w
-: walk-Undirected-Tree T x y) → -- is-trail-walk-Undirected-Tree T w →
-is-path-walk-Undirected-Tree T w -- is-path-is-trail-walk-Undirected-Tree {x}
-{y} w H {pair u KU} {pair v K} p with --
-is-vertex-on-first-or-second-segment-walk-Undirected-Graph --
-(undirected-graph-Undirected-Tree T) w (pair u KU) (pair v K) -- ... | inl L =
-{!!} -- where -- w1' : walk-Undirected-Tree T x u -- w1' = --
-first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair
-u KU) -- w1 : walk-Undirected-Tree T x v -- w1 = --
-first-segment-walk-Undirected-Graph -- ( undirected-graph-Undirected-Tree T) --
-( w1') -- ( pair v L) -- w' : walk-Undirected-Tree T v u -- w' = {!!} -- ... |
-inr L = {!!} -- where -- w1 : walk-Undirected-Tree T x u -- w1 = --
-first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair
-u KU)
+--   is-path-is-trail-walk-Undirected-Tree :
+--     {x y : node-Undirected-Tree T} (w : walk-Undirected-Tree T x y) →
+--     is-trail-walk-Undirected-Tree T w → is-path-walk-Undirected-Tree T w
+--   is-path-is-trail-walk-Undirected-Tree {x} {y} w H {pair u KU} {pair v K} p with
+--     is-vertex-on-first-or-second-segment-walk-Undirected-Graph
+--       (undirected-graph-Undirected-Tree T) w (pair u KU) (pair v K)
+--   ... | inl L = {!!}
+--     where
+--     w1' : walk-Undirected-Tree T x u
+--     w1' =
+--       first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair u KU)
+--     w1 : walk-Undirected-Tree T x v
+--     w1 =
+--       first-segment-walk-Undirected-Graph
+--         ( undirected-graph-Undirected-Tree T)
+--         ( w1')
+--         ( pair v L)
+--     w' : walk-Undirected-Tree T v u
+--     w' = {!!}
+--   ... | inr L = {!!}
+--     where
+--     w1 : walk-Undirected-Tree T x u
+--     w1 =
+--       first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w (pair u KU)
 
--- {- -- where -- w1 : walk-Undirected-Tree T x
-(node-node-on-walk-Undirected-Tree T w u) -- w1 = --
-first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u --
-w2' : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) y -- w2'
-= -- second-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w
-u -- w2 : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u)
-(node-node-on-walk-Undirected-Tree T w v) -- w2 =
-{!first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w2'
-!} -- -} -- ```
+-- {-
+--     where
+--     w1 : walk-Undirected-Tree T x (node-node-on-walk-Undirected-Tree T w u)
+--     w1 =
+--       first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u
+--     w2' : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) y
+--     w2' =
+--       second-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w u
+--     w2 : walk-Undirected-Tree T (node-node-on-walk-Undirected-Tree T w u) (node-node-on-walk-Undirected-Tree T w v)
+--     w2 = {!first-segment-walk-Undirected-Graph (undirected-graph-Undirected-Tree T) w2' !}
+--   -}
+```
+
+## See also
+
+There are many variations of the notion of trees, all of which are subtly
+different:
+
+- Directed trees can be found in
+  [`trees.directed-trees`](trees.directed-trees.md).
+- Acyclic undirected graphs can be found in
+  [`graph-theory.acyclic-undirected-graphs`](graph-theory.acyclic-undirected-graphs.md).

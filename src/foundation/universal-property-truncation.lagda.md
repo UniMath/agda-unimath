@@ -2,14 +2,16 @@
 
 ```agda
 module foundation.universal-property-truncation where
+
+open import foundation-core.universal-property-truncation public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universal-property-truncation public
-
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositional-truncations
@@ -18,16 +20,15 @@ open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -103,10 +104,12 @@ module _
       ( dependent-universal-property-truncation-is-truncation B f H
         ( λ y → truncated-type-trunc-Prop k (fib f y)))
       ( λ x → unit-trunc-Prop (pair x refl))
+```
 
+### Corollary 18.5.4
+
+```agda
 {-
--- Corollary 18.5.4
-
 reflecting-map-mere-eq-unit-trunc-Set :
   {l : Level} (A : UU l) →
   reflecting-map-Eq-Rel (mere-eq-Eq-Rel A) (type-trunc-Set A)
@@ -199,9 +202,13 @@ abstract
       ( trunc-Set A)
       ( unit-trunc-Set)
       ( is-surjective-and-effective-unit-trunc-Set A)
+-}
+```
 
--- Uniqueness of trunc-Set
+### Uniqueness of `trunc-Set`
 
+```agda
+{-
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set B (trunc-Set A)} (H : (h ∘ f) ~ unit-trunc-Set)
@@ -364,9 +371,13 @@ module _
     (map-equiv-uniqueness-trunc-Set' ∘ f) ~ unit-trunc-Set
   triangle-uniqueness-trunc-Set' =
     pr2 (center uniqueness-trunc-Set')
+-}
+```
 
--- Proposition 18.5.5
+### Proposition 18.5.5
 
+```agda
+{-
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
@@ -470,9 +481,13 @@ map-equiv-trunc-Set :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → type-trunc-Set A → type-trunc-Set B
 map-equiv-trunc-Set e = map-equiv (equiv-trunc-Set e)
+-}
+```
 
---------------------------------------------------------------------------------
+---
 
+```agda
+{-
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
@@ -526,9 +541,13 @@ module _
     ( map-coprod unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-coprod-Set =
     pr2 (center distributive-trunc-coprod-Set)
+-}
+```
 
--- Set truncations of Σ-types
+### Set truncations of Σ-types
 
+```agda
+{-
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
@@ -589,9 +608,13 @@ module _
       is-equiv-htpy-equiv
         ( equiv-trunc-Σ-Set)
         ( htpy-map-equiv-trunc-Σ-Set)
+-}
+```
 
--- trunc-Set distributes over products
+### `trunc-Set` distributes over products
 
+```agda
+{-
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
@@ -635,9 +658,13 @@ module _
     ( map-prod unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-prod-Set =
     pr2 (center distributive-trunc-prod-Set)
+-}
+```
 
--- trunc-Set distributes over Π indexed by Fin
+### `trunc-Set` distributes over Π-types indexed by `Fin`
 
+```agda
+{-
 abstract
   distributive-trunc-Π-Fin-Set :
     {l : Level} (k : ℕ) (A : Fin k → UU l) →
@@ -886,5 +913,5 @@ module _
     ( map-Π (λ x → unit-trunc-Set))
   triangle-distributive-trunc-Π-is-finite-Set =
     pr2 (center distributive-trunc-Π-is-finite-Set)
-    -}
+-}
 ```

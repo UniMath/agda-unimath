@@ -1,8 +1,8 @@
 
 ### Agda ###
 *.agdai
-MAlonzo/**
-_build/**
+MAlonzo/
+_build/
 agdaFiles
 src/**/*.html
 
@@ -317,7 +317,7 @@ TSWLatexianTemp*
 # KBibTeX
 *~[0-9]*
 
-# auto folder when using emacs and auctex
+# auto folder when using Emacs and auctex
 ./auto/*
 *.el
 
@@ -420,6 +420,6 @@ package-lock.json
 docs/
 html/
 book/
+src/temp/
 src/everything.lagda.md
-CONTRIBUTORS.md
 SUMMARY.md

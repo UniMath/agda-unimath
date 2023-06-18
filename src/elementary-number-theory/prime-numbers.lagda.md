@@ -10,10 +10,13 @@ module elementary-number-theory.prime-numbers where
 open import elementary-number-theory.decidable-types
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
+open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.proper-divisors-natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -23,7 +26,10 @@ open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.propositions
+open import foundation.transport
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -35,16 +41,29 @@ A prime number is a natural number of which 1 is the only proper divisor.
 
 ## Definition
 
-### Definition 1
+### The main definition of prime numbers
 
 This is a direct interpretation of what it means to be prime.
 
 ```agda
 is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
+
+Prime-ℕ : UU lzero
+Prime-ℕ = Σ ℕ is-prime-ℕ
+
+module _
+  (p : Prime-ℕ)
+  where
+
+  nat-Prime-ℕ : ℕ
+  nat-Prime-ℕ = pr1 p
+
+  is-prime-Prime-ℕ : is-prime-ℕ nat-Prime-ℕ
+  is-prime-Prime-ℕ = pr2 p
 ```
 
-### Definition 2
+### Second definition of prime numbers
 
 This is an implementation of the idea of being prime, which is usually taken as
 the definition.
@@ -58,7 +77,7 @@ is-prime-easy-ℕ : ℕ → UU lzero
 is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
 ```
 
-### Definition 3
+### Third definition of prime numbers
 
 ```agda
 has-unique-proper-divisor-ℕ : ℕ → UU lzero
@@ -67,12 +86,61 @@ has-unique-proper-divisor-ℕ n = is-contr (Σ ℕ (is-proper-divisor-ℕ n))
 
 ## Properties
 
-### Definitions 1, 2, and 3 of prime numbers are equivalent
+### The number `0` is not a prime
+
+```agda
+is-nonzero-is-prime-ℕ :
+  (n : ℕ) → is-prime-ℕ n → is-nonzero-ℕ n
+is-nonzero-is-prime-ℕ n H p =
+  is-not-one-two-ℕ
+    ( pr1
+      ( H 2)
+      ( tr (λ n → ¬ (2 ＝ n)) (inv (p)) ( is-nonzero-two-ℕ),
+        tr (λ n → div-ℕ 2 n) (inv p) (0 , refl)))
+```
+
+### The number `1` is not a prime
 
 ```agda
 is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
 is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
+```
 
+### A prime is strictly greater than `1`
+
+```agda
+le-one-is-prime-ℕ :
+  (n : ℕ) → is-prime-ℕ n → le-ℕ 1 n
+le-one-is-prime-ℕ 0 x = ex-falso (is-nonzero-is-prime-ℕ 0 x refl)
+le-one-is-prime-ℕ 1 x = ex-falso (is-not-one-is-prime-ℕ 1 x refl)
+le-one-is-prime-ℕ (succ-ℕ (succ-ℕ n)) x = star
+```
+
+### Being a prime is a proposition
+
+```agda
+is-prop-is-prime-ℕ :
+  (n : ℕ) → is-prop (is-prime-ℕ n)
+is-prop-is-prime-ℕ n =
+  is-prop-Π
+    ( λ x →
+      is-prop-prod
+        ( is-prop-Π (λ p → is-set-ℕ x 1))
+        ( is-prop-Π (λ p → is-prop-is-proper-divisor-ℕ n x)))
+
+is-prime-ℕ-Prop :
+  (n : ℕ) → Prop lzero
+pr1 (is-prime-ℕ-Prop n) = is-prime-ℕ n
+pr2 (is-prime-ℕ-Prop n) = is-prop-is-prime-ℕ n
+
+is-prop-has-unique-proper-divisor-ℕ :
+  (n : ℕ) → is-prop (has-unique-proper-divisor-ℕ n)
+is-prop-has-unique-proper-divisor-ℕ n = is-property-is-contr
+```
+
+### The three definitions of primes are equivalent
+
+```agda
 is-prime-easy-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-prime-easy-ℕ n
 pr1 (is-prime-easy-is-prime-ℕ n H) = is-not-one-is-prime-ℕ n H
 pr2 (is-prime-easy-is-prime-ℕ n H) x = pr1 (H x)
@@ -131,9 +199,7 @@ is-decidable-is-prime-ℕ n =
     ( is-decidable-is-prime-easy-ℕ n)
 ```
 
-## Examples
-
-### The number 2 is a prime.
+### The number `2` is a prime
 
 ```agda
 is-one-is-proper-divisor-two-ℕ : is-one-is-proper-divisor-ℕ 2
@@ -153,3 +219,33 @@ is-prime-two-ℕ : is-prime-ℕ 2
 is-prime-two-ℕ =
   is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
 ```
+
+### If a prime number `p` divides a nonzero number `x`, then `x/p < x`
+
+```agda
+le-quotient-div-is-prime-ℕ :
+  (p x : ℕ) → is-nonzero-ℕ x → is-prime-ℕ p →
+  (H : div-ℕ p x) → le-ℕ (quotient-div-ℕ p x H) x
+le-quotient-div-is-prime-ℕ p x N P H =
+  le-quotient-div-ℕ p x N H (is-not-one-is-prime-ℕ p P)
+```
+
+### If a prime number `p` divides a number `x + 1`, then `(x + 1)/p ≤ x`
+
+```agda
+leq-quotient-div-is-prime-ℕ :
+  (p x : ℕ) → is-prime-ℕ p →
+  (H : div-ℕ p (succ-ℕ x)) → leq-ℕ (quotient-div-ℕ p (succ-ℕ x) H) x
+leq-quotient-div-is-prime-ℕ p x P H =
+  leq-le-succ-ℕ
+    ( quotient-div-ℕ p (succ-ℕ x) H)
+    ( x)
+    ( le-quotient-div-is-prime-ℕ p (succ-ℕ x) (is-nonzero-succ-ℕ x) P H)
+```
+
+## See also
+
+- The fundamental theorem of arithmetic asserts that every positive natural
+  number can be written uniquely as a product of primes. This theorem is proven
+  in
+  [`fundamental-theorem-of-arithmetic`](elementary-number-theory.fundamental-theorem-of-arithmetic.md).

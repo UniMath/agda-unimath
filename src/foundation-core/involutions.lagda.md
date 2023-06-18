@@ -7,14 +7,15 @@ module foundation-core.involutions where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.automorphisms
-open import foundation-core.dependent-pair-types
+open import foundation.automorphisms
+open import foundation.dependent-pair-types
+open import foundation.function-types
+open import foundation.universe-levels
+
 open import foundation-core.equivalences
-open import foundation-core.functions
 open import foundation-core.homotopies
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import structured-types.pointed-types
 ```
@@ -74,7 +75,7 @@ pr2 (equiv-is-involution is-involution-f) =
   is-equiv-is-involution is-involution-f
 ```
 
-### If `A` is k-truncated then the type of involutions is k-truncated
+### If `A` is `k`-truncated then the type of involutions is `k`-truncated
 
 ```agda
 is-trunc-is-involution :
@@ -82,7 +83,8 @@ is-trunc-is-involution :
   is-trunc (succ-𝕋 k) A → (f : A → A) → is-trunc k (is-involution f)
 is-trunc-is-involution k is-trunc-A f = is-trunc-Π k λ x → is-trunc-A (f(f x)) x
 
-is-involution-Truncated-Type : {l : Level} {A : UU l} (k : 𝕋) →
+is-involution-Truncated-Type :
+  {l : Level} {A : UU l} (k : 𝕋) →
   is-trunc (succ-𝕋 k) A → (A → A) → Truncated-Type l k
 pr1 (is-involution-Truncated-Type k is-trunc-A f) = is-involution f
 pr2 (is-involution-Truncated-Type k is-trunc-A f) =

@@ -2,23 +2,26 @@
 
 ```agda
 module foundation.univalence where
+
+open import foundation-core.univalence public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.univalence public
-
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -31,36 +34,65 @@ that the map `Id A B → A ≃ B` is an equivalence.
 In this file we postulate the univalence axiom. Its statement is defined in
 [`foundation-core.univalence`](foundation-core.univalence.md).
 
-## Postulates
+## Postulate
 
 ```agda
 postulate univalence : {l : Level} (A B : UU l) → UNIVALENCE A B
 ```
 
-## Definitions
+## Properties
 
 ```agda
-eq-equiv : {l : Level} (A B : UU l) → A ≃ B → A ＝ B
-eq-equiv A B = map-inv-is-equiv (univalence A B)
+module _
+  {l : Level}
+  where
 
-equiv-univalence :
-  {l : Level} {A B : UU l} → (A ＝ B) ≃ (A ≃ B)
-pr1 equiv-univalence = equiv-eq
-pr2 equiv-univalence = univalence _ _
+  equiv-univalence :
+    {A B : UU l} → (A ＝ B) ≃ (A ≃ B)
+  pr1 equiv-univalence = equiv-eq
+  pr2 (equiv-univalence {A} {B}) = univalence A B
 
-abstract
-  is-contr-total-equiv : {l : Level} (A : UU l) →
-    is-contr (Σ (UU l) (λ X → A ≃ X))
-  is-contr-total-equiv A = is-contr-total-equiv-UNIVALENCE A (univalence A)
+  eq-equiv : (A B : UU l) → A ≃ B → A ＝ B
+  eq-equiv A B = map-inv-is-equiv (univalence A B)
 
-abstract
-  is-contr-total-equiv' : {l : Level} (A : UU l) →
-    is-contr (Σ (UU l) (λ X → X ≃ A))
-  is-contr-total-equiv' {l} A =
-    is-contr-equiv'
-      ( Σ (UU l) (λ X → X ＝ A))
-      ( equiv-tot (λ X → equiv-univalence))
-      ( is-contr-total-path' A)
+  abstract
+    is-section-eq-equiv :
+      {A B : UU l} → (equiv-eq ∘ eq-equiv A B) ~ id
+    is-section-eq-equiv {A} {B} = is-section-map-inv-is-equiv (univalence A B)
+
+    is-retraction-eq-equiv :
+      {A B : UU l} → (eq-equiv A B ∘ equiv-eq) ~ id
+    is-retraction-eq-equiv {A} {B} =
+      is-retraction-map-inv-is-equiv (univalence A B)
+
+    is-equiv-eq-equiv :
+      (A B : UU l) → is-equiv (eq-equiv A B)
+    is-equiv-eq-equiv A B = is-equiv-map-inv-is-equiv (univalence A B)
+
+    compute-eq-equiv-id-equiv :
+      (A : UU l) → eq-equiv A A id-equiv ＝ refl
+    compute-eq-equiv-id-equiv A = is-retraction-eq-equiv refl
+
+    equiv-eq-equiv :
+      (A B : UU l) → (A ≃ B) ≃ (A ＝ B)
+    pr1 (equiv-eq-equiv A B) = eq-equiv A B
+    pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
+```
+
+```agda
+  abstract
+    is-contr-total-equiv :
+      (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
+    is-contr-total-equiv A =
+      is-contr-total-equiv-UNIVALENCE A (univalence A)
+
+    is-contr-total-equiv' :
+      (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))
+    is-contr-total-equiv' A =
+      is-contr-equiv'
+        ( Σ (UU l) (λ X → X ＝ A))
+        ( equiv-tot (λ X → equiv-univalence))
+        ( is-contr-total-path' A)
 ```
 
 ### Univalence for type families
@@ -106,30 +138,38 @@ eq-equiv-fam :
 eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ```
 
-## Properties
+### Computations with univalence
 
 ```agda
-comp-equiv-eq : {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
+compute-equiv-eq :
+  {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-comp-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
+compute-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
 
-comp-eq-equiv : {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
+compute-eq-equiv :
+  {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
-comp-eq-equiv A B C f g =
+compute-eq-equiv A B C f g =
   is-injective-map-equiv
     ( equiv-univalence)
-    ( ( inv ( comp-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
+    ( ( inv ( compute-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
         ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
         ( right-inverse-law-equiv equiv-univalence)) ∙
-        ( ( ap (λ e → g ∘e map-equiv e f) (right-inverse-law-equiv equiv-univalence)) ∙
-          ( ap (λ e → map-equiv e (g ∘e f)) (inv (right-inverse-law-equiv equiv-univalence))))))
+        ( ( ap
+            ( λ e → g ∘e map-equiv e f)
+            ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( ap
+            ( λ e → map-equiv e (g ∘e f))
+            ( inv (right-inverse-law-equiv equiv-univalence))))))
 
-commutativity-inv-equiv-eq : {l : Level} (A B : UU l) (p : A ＝ B) →
+commutativity-inv-equiv-eq :
+  {l : Level} (A B : UU l) (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
 commutativity-inv-equiv-eq A .A refl = eq-equiv-eq-map-equiv refl
 
-commutativity-inv-eq-equiv : {l : Level} (A B : UU l) (f : A ≃ B) →
+commutativity-inv-eq-equiv :
+  {l : Level} (A B : UU l) (f : A ≃ B) →
   inv (eq-equiv A B f) ＝ eq-equiv B A (inv-equiv f)
 commutativity-inv-eq-equiv A B f =
   is-injective-map-equiv
@@ -141,14 +181,4 @@ commutativity-inv-eq-equiv A B f =
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))
-```
-
-### eq-equiv on id is refl
-
-```agda
-refl-eq-equiv-id :
-  {l1 : Level} {A : UU l1} →
-  (eq-equiv A A (id-equiv {A = A})) ＝ refl
-refl-eq-equiv-id =
-  (isretr-map-inv-equiv equiv-univalence) refl
 ```

@@ -11,7 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -89,7 +89,7 @@ module _
               preserves-mul-Semigroup G (pair (set-Semigroup G) μ) id)) →
     Id center-total-preserves-mul-id-Semigroup t
   contraction-total-preserves-mul-id-Semigroup
-    (pair (pair μ-G' assoc-G') μ-id) =
+    (pair (pair μ-G' associative-G') μ-id) =
     eq-type-subtype
       ( λ μ →
         preserves-mul-semigroup-Prop G (pair (set-Semigroup G) μ) id)

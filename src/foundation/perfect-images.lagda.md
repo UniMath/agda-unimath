@@ -1,4 +1,4 @@
-# Perfect Images
+# Perfect images
 
 ```agda
 module foundation.perfect-images where
@@ -9,24 +9,26 @@ module foundation.perfect-images where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
 open import foundation.negation
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -48,7 +50,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (g : B → A)
   where
 
-  is-perfect-image : (a : A) →  UU (l1 ⊔ l2)
+  is-perfect-image : (a : A) → UU (l1 ⊔ l2)
   is-perfect-image a =
     (a₀ : A) (n : ℕ) → (iterate n (g ∘ f)) a₀ ＝ a → fib g a₀
 ```
@@ -68,8 +70,8 @@ module _
   is-prop-is-perfect-image-is-emb :
     (a : A) → is-prop (is-perfect-image f g a)
   is-prop-is-perfect-image-is-emb a =
-     is-prop-Π (λ a₀ → (is-prop-Π λ n →
-        is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
+    is-prop-Π (λ a₀ → (is-prop-Π λ n →
+      is-prop-Π (λ p → (is-prop-map-is-emb is-emb-g a₀))))
 
   is-perfect-image-Prop : A → Prop (l1 ⊔ l2)
   pr1 (is-perfect-image-Prop a) = is-perfect-image f g a
@@ -109,10 +111,10 @@ module _
   inverse-of-perfect-image a ρ =
     pr1 (is-perfect-image-is-fib a ρ)
 
-  is-sec-inverse-of-perfect-image :
+  is-section-inverse-of-perfect-image :
     (a : A) (ρ : is-perfect-image f g a) →
     g (inverse-of-perfect-image a ρ) ＝ a
-  is-sec-inverse-of-perfect-image a ρ =
+  is-section-inverse-of-perfect-image a ρ =
     pr2 (is-perfect-image-is-fib a ρ)
 ```
 
@@ -122,13 +124,13 @@ module _
   {f : A → B} {g : B → A} {is-emb-g : is-emb g}
   where
 
-  is-retr-inverse-of-perfect-image :
+  is-retraction-inverse-of-perfect-image :
     (b : B) (ρ : is-perfect-image f g (g b)) →
     inverse-of-perfect-image (g b) ρ ＝ b
-  is-retr-inverse-of-perfect-image b ρ =
-     is-injective-is-emb
-       is-emb-g
-       (is-sec-inverse-of-perfect-image (g b) ρ)
+  is-retraction-inverse-of-perfect-image b ρ =
+    is-injective-is-emb
+      is-emb-g
+      (is-section-inverse-of-perfect-image (g b) ρ)
 ```
 
 If `g (f (a))` is a perfect image for `g`, so is `a`.
@@ -159,7 +161,7 @@ module _
   perfect-image-has-distinct-image a a₀ nρ ρ p = v ρ
     where
     q : g (f a) ＝ a₀
-    q = ap g p ∙ is-sec-inverse-of-perfect-image a₀ ρ
+    q = ap g p ∙ is-section-inverse-of-perfect-image a₀ ρ
 
     s : ¬ (is-perfect-image f g (g (f a)))
     s = λ η → nρ (previous-perfect-image a η)
@@ -178,7 +180,7 @@ module _
 
   is-not-perfect-image : (a : A) → UU (l1 ⊔ l2)
   is-not-perfect-image a =
-    Σ A (λ a₀ → (Σ ℕ (λ n →  ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
+    Σ A (λ a₀ → (Σ ℕ (λ n → ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
 ```
 
 If we assume law of excluded middle and `g` is embedding, we can prove that if
@@ -234,7 +236,7 @@ module _
         q = is-injective-is-emb is-emb-g (pr1 u)
 
         a : fib f b
-        a = pair ((iterate n (g ∘ f)) x₀)  q
+        a = pair ((iterate n (g ∘ f)) x₀) q
 
         w : ¬ (is-perfect-image f g ((iterate n (g ∘ f)) x₀))
         w = λ s → pr2 u (s x₀ n refl)
@@ -249,5 +251,5 @@ module _
           (λ s → is-prop-neg {A = is-perfect-image f g (pr1 s)})
 
       v : Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
-      v = dn-elim-is-decidable (lem (pair _ iv)) iii
+      v = double-negation-elim-is-decidable (lem (pair _ iv)) iii
 ```

@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.26-id-pushout where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -14,28 +15,28 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
 
-open import synthetic-homotopy-theory.24-pushouts
 open import synthetic-homotopy-theory.26-descent
-open import synthetic-homotopy-theory.cocones-pushouts
-open import synthetic-homotopy-theory.pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
 
-```agda
--- Section 19.1 Characterizing families of maps over pushouts
+## Section 19.1 Characterizing families of maps over pushouts
 
+```agda
 module hom-Fam-pushout
   { l1 l2 l3 l4 l5 : Level}
   { S : UU l1}
@@ -54,19 +55,24 @@ module hom-Fam-pushout
     QA = pr1 Q
     QB = pr1 (pr2 Q)
     QS = pr2 (pr2 Q)
+```
 
-  {- Definition 19.1.1 -}
+### Definition 19.1.1
 
+```agda
   hom-Fam-pushout :
     UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   hom-Fam-pushout =
     Σ ( (x : A) → (PA x) → (QA x)) (λ hA →
       Σ ( (y : B) → (PB y) → (QB y)) (λ hB →
         ( s : S) →
-          ( (hB (g s)) ∘ (map-equiv (PS s))) ~ ((map-equiv (QS s)) ∘ (hA (f s)))))
+          ( (hB (g s)) ∘ (map-equiv (PS s))) ~
+          ( (map-equiv (QS s)) ∘ (hA (f s)))))
+```
 
-  {- Remark 19.1.2. We characterize the identity type of hom-Fam-pushout. -}
+### Remark 19.1.2 We characterize the identity type of `hom-Fam-pushout`
 
+```agda
   htpy-hom-Fam-pushout :
     ( h k : hom-Fam-pushout) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
   htpy-hom-Fam-pushout h k =
@@ -132,13 +138,17 @@ module hom-Fam-pushout
     map-inv-is-equiv (is-equiv-htpy-hom-Fam-pushout-eq h k)
 
 open hom-Fam-pushout public
+```
 
-{- Definition 19.1.3. Given a cocone structure on X and a family of maps indexed
-   by X, we obtain a morphism of descent data. -}
+### Definition 19.1.3
 
+Given a cocone structure on `X` and a family of maps indexed by `X`, we obtain a
+morphism of descent data.
+
+```agda
 Naturality-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU _
+  ( f : (a : A) → B a → C a) {x x' : A} (p : Id x x') → UU (l2 ⊔ l3)
 Naturality-fam-maps {B = B} {C} f {x} {x'} p =
   (y : B x) → Id (f x' (tr B p y)) (tr C p (f x y))
 
@@ -159,9 +169,11 @@ hom-Fam-pushout-map {f = f} {g} c P Q h =
     ( pair
       ( precomp-Π (pr1 (pr2 c)) (λ x → P x → Q x) h)
       ( λ s → naturality-fam-maps h (pr2 (pr2 c) s)))
+```
 
-{- Theorem 19.1.4. The function hom-Fam-pushout-map is an equivalence. -}
+### Theorem 19.1.4 The function `hom-Fam-pushout-map` is an equivalence
 
+```agda
 square-path-over-fam-maps :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   { x x' : A} (p : Id x x') (f : B x → C x) (f' : B x' → C x') →
@@ -169,13 +181,13 @@ square-path-over-fam-maps :
   ( y : B x) → Id (f' (tr B p y)) (tr C p (f y))
 square-path-over-fam-maps refl f f' = htpy-eq ∘ inv
 
-hom-Fam-pushout-dep-cocone :
+hom-Fam-pushout-dependent-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
-  dep-cocone f g c (λ x → P x → Q x) →
+  dependent-cocone f g c (λ x → P x → Q x) →
   hom-Fam-pushout (desc-fam c P) (desc-fam c Q)
-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
+hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   tot (λ hA → tot (λ hB →
     map-Π (λ s →
       square-path-over-fam-maps (pr2 (pr2 c) s) (hA (f s)) (hB (g s)))))
@@ -187,12 +199,12 @@ is-equiv-square-path-over-fam-maps :
 is-equiv-square-path-over-fam-maps refl f f' =
   is-equiv-comp htpy-eq inv (is-equiv-inv f f') (funext f' f)
 
-is-equiv-hom-Fam-pushout-dep-cocone :
+is-equiv-hom-Fam-pushout-dependent-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
-  is-equiv (hom-Fam-pushout-dep-cocone c P Q)
-is-equiv-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
+  is-equiv (hom-Fam-pushout-dependent-cocone c P Q)
+is-equiv-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   is-equiv-tot-is-fiberwise-equiv (λ hA →
     is-equiv-tot-is-fiberwise-equiv (λ hB →
       is-equiv-map-Π _
@@ -202,33 +214,36 @@ is-equiv-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q =
           ( hB (g s)))))
 
 coherence-naturality-fam-maps :
-  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (P : B → UU l3) (Q : B → UU l4) →
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
+  (P : B → UU l3) (Q : B → UU l4) →
   { f f' : A → B} (H : f ~ f') (h : (b : B) → P b → Q b) (a : A) →
-  Id ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
-     ( naturality-fam-maps h (H a))
+  Id
+    ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
+    ( naturality-fam-maps h (H a))
 coherence-naturality-fam-maps {A = A} {B} P Q {f} {f'} H =
   ind-htpy f
     ( λ f' H →
       ( h : (b : B) → P b → Q b) (a : A) →
-      Id ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
-         ( naturality-fam-maps h (H a)))
+      Id
+        ( square-path-over-fam-maps (H a) (h (f a)) (h (f' a)) (apd h (H a)))
+        ( naturality-fam-maps h (H a)))
     ( λ h a → refl)
     ( H)
 
-triangle-hom-Fam-pushout-dep-cocone :
+triangle-hom-Fam-pushout-dependent-cocone :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X) →
   ( P : X → UU l5) (Q : X → UU l6) →
   ( hom-Fam-pushout-map c P Q) ~
-  ( ( hom-Fam-pushout-dep-cocone c P Q) ∘
-    ( dep-cocone-map f g c (λ x → P x → Q x)))
-triangle-hom-Fam-pushout-dep-cocone {f = f} {g} c P Q h =
+  ( ( hom-Fam-pushout-dependent-cocone c P Q) ∘
+    ( dependent-cocone-map f g c (λ x → P x → Q x)))
+triangle-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q h =
   eq-htpy-hom-Fam-pushout
     ( desc-fam c P)
     ( desc-fam c Q)
     ( hom-Fam-pushout-map c P Q h)
-    ( hom-Fam-pushout-dep-cocone c P Q
-      ( dep-cocone-map f g c (λ x → P x → Q x) h))
+    ( hom-Fam-pushout-dependent-cocone c P Q
+      ( dependent-cocone-map f g c (λ x → P x → Q x) h))
     ( pair
       ( λ a → refl-htpy)
       ( pair
@@ -247,12 +262,12 @@ is-equiv-hom-Fam-pushout-map :
 is-equiv-hom-Fam-pushout-map {l5 = l5} {l6} {f = f} {g} c up-X P Q =
   is-equiv-comp-htpy
     ( hom-Fam-pushout-map c P Q)
-    ( hom-Fam-pushout-dep-cocone c P Q)
-    ( dep-cocone-map f g c (λ x → P x → Q x))
-    ( triangle-hom-Fam-pushout-dep-cocone c P Q)
+    ( hom-Fam-pushout-dependent-cocone c P Q)
+    ( dependent-cocone-map f g c (λ x → P x → Q x))
+    ( triangle-hom-Fam-pushout-dependent-cocone c P Q)
     ( dependent-universal-property-universal-property-pushout
       f g c up-X (l5 ⊔ l6) (λ x → P x → Q x))
-    ( is-equiv-hom-Fam-pushout-dep-cocone c P Q)
+    ( is-equiv-hom-Fam-pushout-dependent-cocone c P Q)
 
 equiv-hom-Fam-pushout-map :
   { l1 l2 l3 l4 l5 l6 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
@@ -265,30 +280,34 @@ equiv-hom-Fam-pushout-map c up-X P Q =
   pair
     ( hom-Fam-pushout-map c P Q)
     ( is-equiv-hom-Fam-pushout-map c up-X P Q)
+```
 
-{- Definition 19.2.1. Universal families over spans -}
+### Definition 19.2.1 Universal families over spans
 
-ev-pt-hom-Fam-pushout :
+```agda
+ev-point-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g)
   {a : A} → (pr1 P a) → (hom-Fam-pushout P Q) → pr1 Q a
-ev-pt-hom-Fam-pushout P Q {a} p h = pr1 h a p
+ev-point-hom-Fam-pushout P Q {a} p h = pr1 h a p
 
 is-universal-Fam-pushout :
   { l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} (P : Fam-pushout l4 f g) (a : A) (p : pr1 P a) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
 is-universal-Fam-pushout l {f = f} {g} P a p =
-  ( Q : Fam-pushout l f g) → is-equiv (ev-pt-hom-Fam-pushout P Q p)
+  ( Q : Fam-pushout l f g) → is-equiv (ev-point-hom-Fam-pushout P Q p)
+```
 
-{- Lemma 19.2.2. The descent data of the identity type is a universal family. -}
+### Lemma 19.2.2 The descent data of the identity type is a universal family
 
+```agda
 triangle-is-universal-id-Fam-pushout' :
   { l l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   { f : S → A} {g : S → B} (c : cocone f g X)
   (a : A) ( Q : (x : X) → UU l) →
   ( ev-refl (pr1 c a) {B = λ x p → Q x}) ~
-  ( ( ev-pt-hom-Fam-pushout
+  ( ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl)) ∘
@@ -301,14 +320,14 @@ is-universal-id-Fam-pushout' :
   ( up-X : (l' : Level) → universal-property-pushout l' f g c) (a : A) →
   ( Q : (x : X) → UU l) →
   is-equiv
-    ( ev-pt-hom-Fam-pushout
+    ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl))
 is-universal-id-Fam-pushout' c up-X a Q =
   is-equiv-left-factor-htpy
     ( ev-refl (pr1 c a) {B = λ x p → Q x})
-    ( ev-pt-hom-Fam-pushout
+    ( ev-point-hom-Fam-pushout
       ( desc-fam c (Id (pr1 c a)))
       ( desc-fam c Q)
       ( refl))
@@ -328,14 +347,16 @@ is-universal-id-Fam-pushout l {S = S} {A} {B} {X} {f} {g} c up-X a Q =
     ( equiv-precomp-Π
       ( equiv-desc-fam c up-X)
       ( λ (Q : Fam-pushout l f g) →
-        is-equiv (ev-pt-hom-Fam-pushout
+        is-equiv (ev-point-hom-Fam-pushout
           ( desc-fam c (Id (pr1 c a))) Q refl)))
     ( is-universal-id-Fam-pushout' c up-X a)
     ( Q)
+```
 
-{- We construct the identity morphism and composition, and we show that
-   morphisms equipped with two-sided inverses are equivalences. -}
+We construct the identity morphism and composition, and we show that morphisms
+equipped with two-sided inverses are equivalences.
 
+```agda
 id-hom-Fam-pushout :
   { l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
@@ -357,16 +378,17 @@ comp-hom-Fam-pushout {f = f} {g} P Q R k h =
     ( λ a → (pr1 k a) ∘ (pr1 h a))
     ( pair
       ( λ b → (pr1 (pr2 k) b) ∘ (pr1 (pr2 h) b))
-      ( λ s → coherence-square-maps-comp-horizontal
-        ( pr1 h (f s))
-        ( pr1 k (f s))
-        ( map-equiv (pr2 (pr2 P) s))
-        ( map-equiv (pr2 (pr2 Q) s))
-        ( map-equiv (pr2 (pr2 R) s))
-        ( pr1 (pr2 h) (g s))
-        ( pr1 (pr2 k) (g s))
-        ( pr2 (pr2 h) s)
-        ( pr2 (pr2 k) s)))
+      ( λ s →
+        pasting-horizontal-coherence-square-maps
+          ( pr1 h (f s))
+          ( pr1 k (f s))
+          ( map-equiv (pr2 (pr2 P) s))
+          ( map-equiv (pr2 (pr2 Q) s))
+          ( map-equiv (pr2 (pr2 R) s))
+          ( pr1 (pr2 h) (g s))
+          ( pr1 (pr2 k) (g s))
+          ( pr2 (pr2 h) s)
+          ( pr2 (pr2 k) s)))
 
 has-inverse-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
@@ -418,9 +440,11 @@ equiv-is-equiv-hom-Fam-pushout P Q h is-equiv-h =
     ( pair
       ( λ b → pair (pr1 (pr2 h) b) (pr2 is-equiv-h b))
       ( pr2 (pr2 h)))
+```
 
-{- Theorem 19.1.3. Characterization of identity types of pushouts. -}
+### Theorem 19.1.3 Characterization of identity types of pushouts
 
+```agda
 {-
 hom-identity-is-universal-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l5}

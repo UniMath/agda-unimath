@@ -7,17 +7,18 @@ module foundation.isomorphisms-of-sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.sets
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -65,8 +66,8 @@ module _
 
   is-iso-is-equiv-Set : {f : type-hom-Set A B} → is-equiv f → is-iso-Set f
   pr1 (is-iso-is-equiv-Set H) = map-inv-is-equiv H
-  pr1 (pr2 (is-iso-is-equiv-Set H)) = eq-htpy (issec-map-inv-is-equiv H)
-  pr2 (pr2 (is-iso-is-equiv-Set H)) = eq-htpy (isretr-map-inv-is-equiv H)
+  pr1 (pr2 (is-iso-is-equiv-Set H)) = eq-htpy (is-section-map-inv-is-equiv H)
+  pr2 (pr2 (is-iso-is-equiv-Set H)) = eq-htpy (is-retraction-map-inv-is-equiv H)
 
   is-equiv-is-iso-Set : {f : type-hom-Set A B} → is-iso-Set f → is-equiv f
   is-equiv-is-iso-Set H =

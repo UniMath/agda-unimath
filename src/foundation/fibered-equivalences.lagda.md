@@ -7,21 +7,21 @@ module foundation.fibered-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.pullbacks
 open import foundation.slice
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -30,7 +30,7 @@ open import foundation-core.universe-levels
 
 A fibered equivalence is a fibered map
 
-```md
+```text
        h
   A -------> B
   |          |
@@ -240,7 +240,8 @@ module _
     is-fibered-equiv-fibered-map f g ihH →
     is-pullback (pr1 ihH) g (cone-fibered-map f g ihH)
   is-pullback-is-fibered-equiv (is-equiv-i , is-equiv-h) =
-    is-pullback-is-equiv' (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i is-equiv-h
+    is-pullback-is-equiv'
+      (pr1 ihH) g (cone-fibered-map f g ihH) is-equiv-i is-equiv-h
 
   equiv-is-fibered-equiv-is-pullback :
     is-equiv (pr1 ihH) →
@@ -275,7 +276,10 @@ is-pullback-fibered-equiv :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   {Y : UU l4} (f : A → X) (g : B → Y)
   (e : fibered-equiv f g) →
-  is-pullback (pr1 (pr1 e)) g (cone-fibered-map f g (map-fibered-map-fibered-equiv f g e))
+  is-pullback
+    ( pr1 (pr1 e))
+    ( g)
+    ( cone-fibered-map f g (map-fibered-map-fibered-equiv f g e))
 is-pullback-fibered-equiv f g ((i , is-equiv-i) , (h , is-equiv-h) , H) =
   is-pullback-is-fibered-equiv f g (i , h , H) (is-equiv-i , is-equiv-h)
 ```

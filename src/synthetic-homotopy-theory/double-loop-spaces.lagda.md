@@ -7,7 +7,9 @@ module synthetic-homotopy-theory.double-loop-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.identity-types
+open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
 
@@ -66,7 +68,7 @@ naturality-right-unit :
 naturality-right-unit {p = refl} refl = refl
 
 naturality-right-unit-Ω² :
-  {l : Level} {A : UU l} {x : A} (α :  type-Ω² x) →
+  {l : Level} {A : UU l} {x : A} (α : type-Ω² x) →
   Id (ap (concat' x refl) α) α
 naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
 
@@ -78,8 +80,9 @@ right-unit-law-horizontal-concat-Ω² {α = α} =
 
 interchange-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
-  Id ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
-     ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
+  Id
+    ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
+    ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
 interchange-Ω² α β γ δ = interchange-Id² α β γ δ
 
 outer-eckmann-hilton-connection-Ω² :
@@ -108,4 +111,10 @@ eckmann-hilton-Ω² :
 eckmann-hilton-Ω² α β =
   ( inv (outer-eckmann-hilton-connection-Ω² α β)) ∙
   ( inner-eckmann-hilton-connection-Ω² α β)
+
+interchange-concat-Ω² :
+  {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
+  ((α ∙ β) ∙ (γ ∙ δ)) ＝ ((α ∙ γ) ∙ (β ∙ δ))
+interchange-concat-Ω² =
+  interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² assoc
 ```

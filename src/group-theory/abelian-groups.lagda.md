@@ -7,12 +7,14 @@ module group-theory.abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -21,13 +23,15 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.central-elements-groups
 open import group-theory.commutative-monoids
 open import group-theory.conjugation
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import univalent-combinatorics.lists
+open import lists.concatenation-lists
+open import lists.lists
 ```
 
 </details>
@@ -96,7 +100,7 @@ module _
   ap-add-Ab p q = ap-binary add-Ab p q
 
   associative-add-Ab :
-    (x y z : type-Ab ) → add-Ab (add-Ab x y) z ＝ add-Ab x (add-Ab y z)
+    (x y z : type-Ab) → add-Ab (add-Ab x y) z ＝ add-Ab x (add-Ab y z)
   associative-add-Ab = associative-mul-Group group-Ab
 
   semigroup-Ab : Semigroup l
@@ -232,13 +236,13 @@ module _
   left-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   left-subtraction-Ab = left-div-Group (group-Ab A)
 
-  issec-add-neg-Ab :
+  is-section-add-neg-Ab :
     (x : type-Ab A) → (add-Ab A x ∘ left-subtraction-Ab x) ~ id
-  issec-add-neg-Ab = issec-mul-inv-Group (group-Ab A)
+  is-section-add-neg-Ab = is-section-mul-inv-Group (group-Ab A)
 
-  isretr-add-neg-Ab :
+  is-retraction-add-neg-Ab :
     (x : type-Ab A) → (left-subtraction-Ab x ∘ add-Ab A x) ~ id
-  isretr-add-neg-Ab = isretr-mul-inv-Group (group-Ab A)
+  is-retraction-add-neg-Ab = is-retraction-mul-inv-Group (group-Ab A)
 
   is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
   is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
@@ -257,15 +261,15 @@ module _
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
 
-  issec-add-neg-Ab' :
+  is-section-add-neg-Ab' :
     (x : type-Ab A) →
     (add-Ab' A x ∘ (λ y → right-subtraction-Ab y x)) ~ id
-  issec-add-neg-Ab' = issec-mul-inv-Group' (group-Ab A)
+  is-section-add-neg-Ab' = is-section-mul-inv-Group' (group-Ab A)
 
-  isretr-add-neg-Ab' :
+  is-retraction-add-neg-Ab' :
     (x : type-Ab A) →
     ((λ y → right-subtraction-Ab y x) ∘ add-Ab' A x) ~ id
-  isretr-add-neg-Ab' = isretr-mul-inv-Group' (group-Ab A)
+  is-retraction-add-neg-Ab' = is-retraction-mul-inv-Group' (group-Ab A)
 
   is-equiv-add-Ab' : (x : type-Ab A) → is-equiv (add-Ab' A x)
   is-equiv-add-Ab' = is-equiv-mul-Group' (group-Ab A)
@@ -477,7 +481,7 @@ module _
     (x : type-Ab A) → conjugation-Ab A x ~ id
   is-identity-conjugation-Ab x y =
     ( ap (add-Ab' A (neg-Ab A x)) (commutative-add-Ab A x y)) ∙
-    ( isretr-add-neg-Ab' A x y)
+    ( is-retraction-add-neg-Ab' A x y)
 ```
 
 ### Laws for conjugation and addition
@@ -586,8 +590,39 @@ module _
 
   preserves-concat-add-list-Ab :
     (l1 l2 : list (type-Ab A)) →
-    Id ( add-list-Ab (concat-list l1 l2))
-       ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
+    Id
+      ( add-list-Ab (concat-list l1 l2))
+      ( add-Ab A (add-list-Ab l1) (add-list-Ab l2))
   preserves-concat-add-list-Ab =
     preserves-concat-mul-list-Group (group-Ab A)
+```
+
+### A group is abelian if and only if every element is central
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-abelian-every-element-central-Group :
+    ((x : type-Group G) → is-central-element-Group G x) → is-abelian-Group G
+  is-abelian-every-element-central-Group = id
+
+  every-element-central-is-abelian-Group :
+    is-abelian-Group G → ((x : type-Group G) → is-central-element-Group G x)
+  every-element-central-is-abelian-Group = id
+```
+
+### Equip a type with a structure of abelian groups
+
+```agda
+structure-abelian-group :
+  {l1 : Level} → UU l1 → UU l1
+structure-abelian-group X =
+  Σ (structure-group X) (λ p → is-abelian-Group (compute-structure-group X p))
+
+compute-structure-abelian-group :
+  {l1 : Level} → (X : UU l1) → structure-abelian-group X → Ab l1
+pr1 (compute-structure-abelian-group X (p , q)) = compute-structure-group X p
+pr2 (compute-structure-abelian-group X (p , q)) = q
 ```

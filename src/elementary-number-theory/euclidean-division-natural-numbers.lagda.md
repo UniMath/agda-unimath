@@ -10,11 +10,12 @@ module elementary-number-theory.euclidean-division-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -38,7 +39,7 @@ unique natural number `r < d` such that `kd + r = n`.
 The following definition produces for each `k : ℕ` a sequence of sequences as
 follows:
 
-```md
+```text
     This is column k
       ↓
   0,…,0,0,0,0,0,0,0,…  -- The sequence at row 0 is the constant sequence
@@ -109,7 +110,7 @@ quotient-euclidean-division-ℕ k x =
 
 eq-quotient-euclidean-division-ℕ :
   (k x : ℕ) →
-  ( mul-ℕ (quotient-euclidean-division-ℕ k x) k) ＝
+  ( (quotient-euclidean-division-ℕ k x) *ℕ k) ＝
   ( dist-ℕ x (remainder-euclidean-division-ℕ k x))
 eq-quotient-euclidean-division-ℕ k x =
   pr2 (cong-euclidean-division-ℕ k x)
@@ -117,20 +118,21 @@ eq-quotient-euclidean-division-ℕ k x =
 eq-euclidean-division-ℕ :
   (k x : ℕ) →
   ( add-ℕ
-    ( mul-ℕ (quotient-euclidean-division-ℕ k x) k)
+    ( (quotient-euclidean-division-ℕ k x) *ℕ k)
     ( remainder-euclidean-division-ℕ k x)) ＝
   ( x)
 eq-euclidean-division-ℕ zero-ℕ x =
   ( inv
     ( ap
-      ( add-ℕ' x)
+      ( _+ℕ x)
       ( right-zero-law-mul-ℕ (quotient-euclidean-division-ℕ zero-ℕ x)))) ∙
   ( left-unit-law-add-ℕ x)
 eq-euclidean-division-ℕ (succ-ℕ k) x =
-  ( ap ( add-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x))
-       ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
-         ( symmetric-dist-ℕ x
-           ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙
+  ( ap
+    ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
+    ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
+      ( symmetric-dist-ℕ x
+        ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙
   ( is-difference-dist-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x) x
     ( leq-nat-mod-succ-ℕ k x))
 ```

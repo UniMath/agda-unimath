@@ -21,15 +21,17 @@ open import group-theory.homomorphisms-concrete-groups
 ## Idea
 
 A monomorphism of concrete groups from `G` to `H` is a faithful pointed map BH
-→* BG. Recall that a map is said to be faithful if it induces embeddings on
-identity types. In particular, any faithful pointed map BH →* BG induces an
+→∗ BG. Recall that a map is said to be faithful if it induces embeddings on
+identity types. In particular, any faithful pointed map BH →∗ BG induces an
 embedding ΩBH → ΩBG, i.e., an inclusion of the underlying groups of a concrete
 group.
 
 ```agda
-module _ {l1 l2 : Level} (l3 : Level)
+module _
+  {l1 l2 : Level} (l3 : Level)
   (G : Concrete-Group l1) (H : Concrete-Group l2)
-  (f : hom-Concrete-Group G H) where
+  (f : hom-Concrete-Group G H)
+  where
 
   is-mono-hom-Concrete-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-hom-Concrete-Group-Prop =
@@ -44,7 +46,9 @@ module _ {l1 l2 : Level} (l3 : Level)
   is-prop-is-mono-hom-Concrete-Group =
     is-prop-type-Prop is-mono-hom-Concrete-Group-Prop
 
-module _ {l1 : Level} (l2 : Level) (G : Concrete-Group l1) where
+module _
+  {l1 : Level} (l2 : Level) (G : Concrete-Group l1)
+  where
 
   mono-Concrete-Group : UU (l1 ⊔ lsuc l2)
   mono-Concrete-Group =

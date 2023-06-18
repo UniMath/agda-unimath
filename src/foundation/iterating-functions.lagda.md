@@ -12,14 +12,16 @@ open import elementary-number-theory.exponentiation-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.endomorphisms
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
-open import foundation-core.universe-levels
 
 open import group-theory.monoid-actions
 ```
@@ -31,6 +33,8 @@ open import group-theory.monoid-actions
 Any map `f : X → X` can be iterated by repeatedly applying `f`
 
 ## Definition
+
+### Iterating functions
 
 ```agda
 module _
@@ -44,6 +48,30 @@ module _
   iterate' : ℕ → (X → X) → (X → X)
   iterate' zero-ℕ f x = x
   iterate' (succ-ℕ k) f x = iterate' k f (f x)
+```
+
+### Homotopies of iterating functions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (s : A → A) (t : B → B)
+  where
+
+  coherence-square-iterate :
+    {f : A → B} (H : coherence-square-maps f s t f) →
+    (n : ℕ) → coherence-square-maps f (iterate n s) (iterate n t) f
+  coherence-square-iterate {f} H zero-ℕ x = refl
+  coherence-square-iterate {f} H (succ-ℕ n) =
+    pasting-vertical-coherence-square-maps
+      ( f)
+      ( iterate n s)
+      ( iterate n t)
+      ( f)
+      ( s)
+      ( t)
+      ( f)
+      ( coherence-square-iterate H n)
+      ( H)
 ```
 
 ## Properties
@@ -75,7 +103,7 @@ module _
 
   iterate-add-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    iterate (add-ℕ k l) f x ＝ iterate k f (iterate l f x)
+    iterate (k +ℕ l) f x ＝ iterate k f (iterate l f x)
   iterate-add-ℕ k zero-ℕ f x = refl
   iterate-add-ℕ k (succ-ℕ l) f x =
     ap f (iterate-add-ℕ k l f x) ∙ iterate-succ-ℕ k f (iterate l f x)
@@ -105,10 +133,10 @@ module _
 
   iterate-mul-ℕ :
     (k l : ℕ) (f : X → X) (x : X) →
-    iterate (mul-ℕ k l) f x ＝ iterate k (iterate l f) x
+    iterate (k *ℕ l) f x ＝ iterate k (iterate l f) x
   iterate-mul-ℕ zero-ℕ l f x = refl
   iterate-mul-ℕ (succ-ℕ k) l f x =
-    ( iterate-add-ℕ (mul-ℕ k l) l f x) ∙
+    ( iterate-add-ℕ (k *ℕ l) l f x) ∙
     ( ( iterate-mul-ℕ k l f (iterate l f x)) ∙
       ( inv (iterate-succ-ℕ k (iterate l f) x)))
 

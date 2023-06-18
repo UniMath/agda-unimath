@@ -16,7 +16,7 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-types
 
-open import synthetic-homotopy-theory.cocones-pushouts
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
@@ -25,50 +25,59 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The cofiber of a map `f : A → B` is the pushout of the span `1 ← A → B`.
+The **cofiber** of a map `f : A → B` is the
+[pushout](synthetic-homotopy-theory.pushouts.md) of the span `1 ← A → B`.
 
-## Definition
+## Definitions
+
+### The cofiber of a map
 
 ```agda
-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-cofiber {A = A} f = pushout f (const A unit star)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
 
-cocone-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  cocone f (const A unit star) (cofiber f)
-cocone-cofiber {A = A} f = cocone-pushout f (const A unit star)
+  cofiber : (A → B) → UU (l1 ⊔ l2)
+  cofiber f = pushout f (const A unit star)
 
-inl-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → B → cofiber f
-inl-cofiber {A = A} f = pr1 (cocone-cofiber f)
+  cocone-cofiber :
+    (f : A → B) → cocone f (const A unit star) (cofiber f)
+  cocone-cofiber f = cocone-pushout f (const A unit star)
 
-inr-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → unit → cofiber f
-inr-cofiber f = pr1 (pr2 (cocone-cofiber f))
+  inl-cofiber : (f : A → B) → B → cofiber f
+  inl-cofiber f = pr1 (cocone-cofiber f)
 
-pt-cofiber :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → cofiber f
-pt-cofiber {A = A} f = inr-cofiber f star
+  inr-cofiber : (f : A → B) → unit → cofiber f
+  inr-cofiber f = pr1 (pr2 (cocone-cofiber f))
 
-cofiber-ptd :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) → Pointed-Type (l1 ⊔ l2)
-cofiber-ptd f = pair (cofiber f) (pt-cofiber f)
+  point-cofiber : (f : A → B) → cofiber f
+  point-cofiber f = inr-cofiber f star
 
-up-cofiber :
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  ( {l : Level} →
-    universal-property-pushout l f (const A unit star) (cocone-cofiber f))
-up-cofiber {A = A} f = up-pushout f (const A unit star)
+  cofiber-Pointed-Type : (f : A → B) → Pointed-Type (l1 ⊔ l2)
+  pr1 (cofiber-Pointed-Type f) = cofiber f
+  pr2 (cofiber-Pointed-Type f) = point-cofiber f
+
+  universal-property-cofiber :
+    (f : A → B) {l : Level} →
+    universal-property-pushout l f (const A unit star) (cocone-cofiber f)
+  universal-property-cofiber f = up-pushout f (const A unit star)
 ```
 
 ## Properties
+
+### The cofiber of an equivalence is contractible
+
+Note that this is not a logical equivalence. Not every map whose cofibers are
+all contractible is an equivalence. For instance The cofiber of `X → 1` where
+`X` is an [acyclic type](synthetic-homotopy-theory.acyclic-types.md) is by
+definition contractible. Examples of noncontractible acyclic types include
+[Hatcher's acyclic type](synthetic-homotopy-theory.hatchers-acyclic-type.md).
 
 ```agda
 is-contr-cofiber-is-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   is-equiv f → is-contr (cofiber f)
-is-contr-cofiber-is-equiv {A = A} {B} f is-equiv-f =
+is-contr-cofiber-is-equiv {A = A} f is-equiv-f =
   is-contr-is-equiv'
     ( unit)
     ( pr1 (pr2 (cocone-cofiber f)))
@@ -77,6 +86,20 @@ is-contr-cofiber-is-equiv {A = A} {B} f is-equiv-f =
       ( const A unit star)
       ( cocone-cofiber f)
       ( is-equiv-f)
-      ( up-cofiber f))
+      ( universal-property-cofiber f))
     ( is-contr-unit)
+```
+
+### The cofiber of the point inclusion of `X` is equivalent to `X`
+
+```agda
+is-equiv-inl-cofiber-point :
+  {l : Level} {B : UU l} (b : B) → is-equiv (inl-cofiber (point b))
+is-equiv-inl-cofiber-point {B = B} b =
+  is-equiv-universal-property-pushout'
+    ( const unit B b)
+    ( const unit unit star)
+    ( cocone-pushout (const unit B b) (const unit unit star))
+    ( is-equiv-is-contr (const unit unit star) is-contr-unit is-contr-unit)
+    ( up-pushout (const unit B b) (const unit unit star))
 ```

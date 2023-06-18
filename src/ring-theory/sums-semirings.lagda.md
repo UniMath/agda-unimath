@@ -7,10 +7,12 @@ module ring-theory.sums-semirings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.unit-type
@@ -21,6 +23,7 @@ open import linear-algebra.vectors-on-semirings
 
 open import ring-theory.semirings
 
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -228,4 +231,38 @@ module _
         ( head-functional-vec-Semiring R n f))
       ( shift-sum-Semiring n
         ( tail-functional-vec-Semiring R n f))
+```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Semiring l)
+  where
+
+  sum-zero-Semiring :
+    (n : ℕ) →
+    sum-Semiring R n (zero-functional-vec-Semiring R n) ＝ zero-Semiring R
+  sum-zero-Semiring zero-ℕ = refl
+  sum-zero-Semiring (succ-ℕ n) =
+    right-unit-law-add-Semiring R _ ∙ sum-zero-Semiring n
+```
+
+### Splitting sums
+
+```agda
+split-sum-Semiring :
+  {l : Level} (R : Semiring l)
+  (n m : ℕ) (f : functional-vec-Semiring R (n +ℕ m)) →
+  sum-Semiring R (n +ℕ m) f ＝
+  add-Semiring R
+    ( sum-Semiring R n (f ∘ inl-coprod-Fin n m))
+    ( sum-Semiring R m (f ∘ inr-coprod-Fin n m))
+split-sum-Semiring R n zero-ℕ f =
+  inv (right-unit-law-add-Semiring R (sum-Semiring R n f))
+split-sum-Semiring R n (succ-ℕ m) f =
+  ( ap
+    ( add-Semiring' R (f(inr star)))
+    ( split-sum-Semiring R n m (f ∘ inl))) ∙
+  ( associative-add-Semiring R _ _ _)
 ```

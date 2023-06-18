@@ -7,9 +7,10 @@ module ring-theory.sums-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -20,6 +21,7 @@ open import linear-algebra.vectors-on-rings
 open import ring-theory.rings
 open import ring-theory.sums-semirings
 
+open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -166,4 +168,29 @@ module _
         ( zero-Ring R)) ＝
     sum-Ring R n f
   shift-sum-Ring = shift-sum-Semiring (semiring-Ring R)
+```
+
+### A sum of zeroes is zero
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  sum-zero-Ring :
+    (n : ℕ) → sum-Ring R n (zero-functional-vec-Ring R n) ＝ zero-Ring R
+  sum-zero-Ring = sum-zero-Semiring (semiring-Ring R)
+```
+
+### Splitting sums
+
+```agda
+split-sum-Ring :
+  {l : Level} (R : Ring l)
+  (n m : ℕ) (f : functional-vec-Ring R (n +ℕ m)) →
+  sum-Ring R (n +ℕ m) f ＝
+  add-Ring R
+    ( sum-Ring R n (f ∘ inl-coprod-Fin n m))
+    ( sum-Ring R m (f ∘ inr-coprod-Fin n m))
+split-sum-Ring R = split-sum-Semiring (semiring-Ring R)
 ```

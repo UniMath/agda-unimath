@@ -1,4 +1,4 @@
-# Monomorphisms in groups
+# Monomorphisms in the category of groups
 
 ```agda
 module group-theory.monomorphisms-groups where
@@ -37,7 +37,7 @@ module _
 
   is-mono-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Group-Prop =
-    is-mono-Large-Precat-Prop Group-Large-Precat l3 G H f
+    is-mono-Large-Precategory-Prop Group-Large-Precategory l3 G H f
 
   is-mono-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Group = type-Prop is-mono-Group-Prop
@@ -58,5 +58,6 @@ module _
 
   is-mono-iso-Group :
     is-mono-Group l3 G H (hom-iso-Group G H f)
-  is-mono-iso-Group = is-mono-iso-Large-Precat Group-Large-Precat l3 G H f
+  is-mono-iso-Group =
+    is-mono-iso-Large-Precategory Group-Large-Precategory l3 G H f
 ```

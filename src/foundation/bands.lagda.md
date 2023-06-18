@@ -8,9 +8,9 @@ module foundation.bands where
 
 ```agda
 open import foundation.set-truncations
+open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.universe-levels
 ```
 
 </details>

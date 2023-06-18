@@ -7,36 +7,44 @@ module foundation.decidable-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-relations
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalence-classes
+open import foundation.equivalence-relations
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
+open import foundation.sets
 open import foundation.slice
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-image
+open import foundation.universe-levels
 
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
-open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -51,6 +59,11 @@ A decidable equivalence relation on a type `X` is an equivalence relation `R` on
 ### Decidable equivalence relations
 
 ```agda
+is-decidable-Eq-Rel :
+  {l1 l2 : Level} → {A : UU l1} → Eq-Rel l2 A → UU (l1 ⊔ l2)
+is-decidable-Eq-Rel {A = A} R =
+  (x y : A) → is-decidable ( sim-Eq-Rel R x y)
+
 Decidable-Equivalence-Relation :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
 Decidable-Equivalence-Relation l2 X =
@@ -72,18 +85,18 @@ module _
 
   sim-Decidable-Equivalence-Relation : X → X → UU l2
   sim-Decidable-Equivalence-Relation =
-    type-Decidable-Relation decidable-relation-Decidable-Equivalence-Relation
+    rel-Decidable-Relation decidable-relation-Decidable-Equivalence-Relation
 
   is-prop-sim-Decidable-Equivalence-Relation :
     (x y : X) → is-prop (sim-Decidable-Equivalence-Relation x y)
   is-prop-sim-Decidable-Equivalence-Relation =
-    is-prop-type-Decidable-Relation
+    is-prop-rel-Decidable-Relation
       decidable-relation-Decidable-Equivalence-Relation
 
   is-decidable-sim-Decidable-Equivalence-Relation :
     (x y : X) → is-decidable (sim-Decidable-Equivalence-Relation x y)
   is-decidable-sim-Decidable-Equivalence-Relation =
-    is-decidable-type-Decidable-Relation
+    is-decidable-Decidable-Relation
       decidable-relation-Decidable-Equivalence-Relation
 
   is-equivalence-relation-Decidable-Equivalence-Relation :
@@ -124,6 +137,23 @@ module _
     sim-Decidable-Equivalence-Relation x z
   transitive-Decidable-Equivalence-Relation =
     trans-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
+
+equiv-equivalence-relation-is-decidable-Dec-Eq-Rel :
+  {l1 l2 : Level} {X : UU l1} →
+  Decidable-Equivalence-Relation l2 X ≃
+  Σ ( Eq-Rel l2 X)
+    ( λ R → is-decidable-Eq-Rel R)
+pr1 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel R =
+  ( equivalence-relation-Decidable-Equivalence-Relation R ,
+    is-decidable-sim-Decidable-Equivalence-Relation R)
+pr2 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel =
+  is-equiv-has-inverse
+    ( λ (R , d) →
+      ( map-inv-equiv
+          ( equiv-relation-is-decidable-Decidable-Relation)
+          ( prop-Eq-Rel R , d) , is-equivalence-relation-prop-Eq-Rel R))
+    ( refl-htpy)
+    ( refl-htpy)
 ```
 
 ### Equivalence classes of decidable equivalence relations
@@ -259,7 +289,7 @@ module _
                 ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
             ( eq-htpy
               ( λ y →
-                eq-iff-decidable-Prop
+                eq-iff-Decidable-Prop
                   ( pr1 R a y)
                   ( pr1 R x y)
                   ( transitive-Decidable-Equivalence-Relation R H)
@@ -441,4 +471,75 @@ module _
           ( backward-implication (P a))
           ( forward-implication (P a))
           ( F t a))
+```
+
+#### The type of decidable equivalence relations on `A` is equivalent to the type of surjections from `A` into a type with decidable equality
+
+```agda
+has-decidable-equality-type-Surjection-Into-Set :
+  {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A) →
+  ( is-decidable-Eq-Rel (eq-rel-Surjection-Into-Set surj)) →
+  has-decidable-equality (type-Surjection-Into-Set surj)
+has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
+  apply-twice-dependent-universal-property-surj-is-surjective
+    ( map-Surjection-Into-Set surj)
+    ( is-surjective-Surjection-Into-Set surj)
+    ( λ (s t : (type-Surjection-Into-Set surj)) →
+      ( is-decidable (s ＝ t),
+        is-prop-is-decidable ( is-set-type-Surjection-Into-Set surj s t)))
+    ( λ a1 a2 → is-dec-rel a1 a2)
+    ( x)
+    ( y)
+
+is-decidable-Eq-Rel-Surjection-Into-Set :
+  {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A)→
+  has-decidable-equality (type-Surjection-Into-Set surj) →
+  is-decidable-Eq-Rel (eq-rel-Surjection-Into-Set surj)
+is-decidable-Eq-Rel-Surjection-Into-Set surj dec-eq x y =
+  dec-eq (map-Surjection-Into-Set surj x) (map-Surjection-Into-Set surj y)
+
+equiv-Surjection-Into-Set-Decidable-Equivalence-Relation :
+  {l1 : Level} (A : UU l1) →
+  Decidable-Equivalence-Relation l1 A ≃
+  Σ (UU l1) (λ X → (A ↠ X) × has-decidable-equality X)
+equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
+  ( ( equiv-Σ
+      ( λ z → (A ↠ z) × has-decidable-equality z)
+      ( id-equiv)
+      ( λ X →
+        ( equiv-prod
+          ( id-equiv)
+          ( inv-equiv
+              ( equiv-add-redundant-prop
+                ( is-prop-is-set ( X))
+                ( is-set-has-decidable-equality)) ∘e
+            commutative-prod) ∘e
+        ( equiv-left-swap-Σ)))) ∘e
+    ( ( associative-Σ
+        ( UU l1)
+        ( λ X → is-set X)
+        ( λ X → (A ↠ pr1 X) × has-decidable-equality (pr1 X))) ∘e
+      ( ( associative-Σ
+          ( Set l1)
+          ( λ X → (A ↠ type-Set X))
+          ( λ X → has-decidable-equality (pr1 (pr1 X)))) ∘e
+        ( ( equiv-type-subtype
+            ( λ surj →
+              is-prop-Π
+                ( λ x →
+                  is-prop-Π
+                    ( λ y →
+                      is-prop-is-decidable
+                        ( is-prop-sim-Eq-Rel
+                          ( eq-rel-Surjection-Into-Set surj)
+                          ( x)
+                          ( y)))))
+            ( λ _ → is-prop-has-decidable-equality)
+            ( λ surj → has-decidable-equality-type-Surjection-Into-Set surj)
+            ( λ surj → is-decidable-Eq-Rel-Surjection-Into-Set surj)) ∘e
+          ( ( inv-equiv
+              ( equiv-Σ-equiv-base
+                ( λ R → is-decidable-Eq-Rel R)
+                ( inv-equiv (equiv-surjection-into-set-Eq-Rel A)))) ∘e
+                  equiv-equivalence-relation-is-decidable-Dec-Eq-Rel)))))
 ```

@@ -9,6 +9,7 @@ module group-theory.concrete-groups where
 ```agda
 open import foundation.0-connected-types
 open import foundation.1-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
@@ -17,10 +18,12 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.truncated-types
 open import foundation.truncation-levels
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.higher-groups
+
+open import higher-group-theory.higher-groups
 
 open import structured-types.pointed-types
 ```
@@ -113,11 +116,13 @@ module _
   mul-Concrete-Group' : (x y : type-Concrete-Group) → type-Concrete-Group
   mul-Concrete-Group' x y = mul-Concrete-Group y x
 
-  assoc-mul-Concrete-Group :
+  associative-mul-Concrete-Group :
     (x y z : type-Concrete-Group) →
-    Id (mul-Concrete-Group (mul-Concrete-Group x y) z)
-       (mul-Concrete-Group x (mul-Concrete-Group y z))
-  assoc-mul-Concrete-Group = assoc-mul-∞-Group ∞-group-Concrete-Group
+    Id
+      ( mul-Concrete-Group (mul-Concrete-Group x y) z)
+      ( mul-Concrete-Group x (mul-Concrete-Group y z))
+  associative-mul-Concrete-Group =
+    associative-mul-∞-Group ∞-group-Concrete-Group
 
   left-unit-law-mul-Concrete-Group :
     (x : type-Concrete-Group) → Id (mul-Concrete-Group unit-Concrete-Group x) x
@@ -130,8 +135,9 @@ module _
     right-unit-law-mul-∞-Group ∞-group-Concrete-Group
 
   coherence-unit-laws-mul-Concrete-Group :
-    Id ( left-unit-law-mul-Concrete-Group unit-Concrete-Group)
-       ( right-unit-law-mul-Concrete-Group unit-Concrete-Group)
+    Id
+      ( left-unit-law-mul-Concrete-Group unit-Concrete-Group)
+      ( right-unit-law-mul-Concrete-Group unit-Concrete-Group)
   coherence-unit-laws-mul-Concrete-Group =
     coherence-unit-laws-mul-∞-Group ∞-group-Concrete-Group
 
@@ -153,7 +159,7 @@ module _
   abstract-group-Concrete-Group : Group l
   pr1 (pr1 abstract-group-Concrete-Group) = set-Concrete-Group
   pr1 (pr2 (pr1 abstract-group-Concrete-Group)) = mul-Concrete-Group
-  pr2 (pr2 (pr1 abstract-group-Concrete-Group)) = assoc-mul-Concrete-Group
+  pr2 (pr2 (pr1 abstract-group-Concrete-Group)) = associative-mul-Concrete-Group
   pr1 (pr1 (pr2 abstract-group-Concrete-Group)) = unit-Concrete-Group
   pr1 (pr2 (pr1 (pr2 abstract-group-Concrete-Group))) =
     left-unit-law-mul-Concrete-Group
@@ -170,7 +176,7 @@ module _
   pr1 (pr1 op-abstract-group-Concrete-Group) = set-Concrete-Group
   pr1 (pr2 (pr1 op-abstract-group-Concrete-Group)) = mul-Concrete-Group'
   pr2 (pr2 (pr1 op-abstract-group-Concrete-Group)) x y z =
-    inv (assoc-mul-Concrete-Group z y x)
+    inv (associative-mul-Concrete-Group z y x)
   pr1 (pr1 (pr2 op-abstract-group-Concrete-Group)) = unit-Concrete-Group
   pr1 (pr2 (pr1 (pr2 op-abstract-group-Concrete-Group))) =
     right-unit-law-mul-Concrete-Group
@@ -181,4 +187,19 @@ module _
     right-inverse-law-mul-Concrete-Group
   pr2 (pr2 (pr2 (pr2 op-abstract-group-Concrete-Group))) =
     left-inverse-law-mul-Concrete-Group
+```
+
+## Example
+
+### The trivial concrete group
+
+```agda
+trivial-Concrete-Group : {l : Level} → Concrete-Group l
+trivial-Concrete-Group =
+  trivial-∞-Group ,
+  is-trunc-is-contr
+    (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
+    is-contr-raise-unit
+    raise-star
+    raise-star
 ```

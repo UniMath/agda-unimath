@@ -13,6 +13,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.unit-elements-standard-finite-types
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -43,14 +44,15 @@ sim-unit-Fin k x y = Σ (unit-Fin k) (λ u → mul-Fin k (pr1 u) x ＝ y)
 ```agda
 sim-unit-ℕ :
   (k : ℕ) → ℕ → ℕ → UU lzero
-sim-unit-ℕ k x y = Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k (mul-ℕ (pr1 l) x) y)
+sim-unit-ℕ k x y =
+  Σ (Σ ℕ (λ l → cong-ℕ k l 1)) (λ l → cong-ℕ k ((pr1 l) *ℕ x) y)
 ```
 
 ### Congruence to `1`
 
 ```agda
 sim-unit-one-ℕ : (k x : ℕ) → UU lzero
-sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (mul-ℕ l x) 1)
+sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (l *ℕ x) 1)
 ```
 
 ## Properties
@@ -83,7 +85,7 @@ pr2 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
   ( ap (mul-Fin (succ-ℕ k) (pr1 v)) p ∙ q)
 ```
 
-### A natural number `x` is congruent to `1` modulo `k+1` if and only if `[x]_{k+1}` is unit similar to `1`.
+### A natural number `x` is congruent to `1` modulo `k+1` if and only if `[x]_{k+1}` is unit similar to `1`
 
 ```agda
 is-unit-similar-one-sim-unit-mod-succ-ℕ :
@@ -93,11 +95,11 @@ pr1 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   nat-Fin (succ-ℕ k) (pr1 u)
 pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
   cong-eq-mod-succ-ℕ k
-    ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
+    ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
     ( 1)
     ( ( eq-mod-succ-cong-ℕ k
-        ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) x)
-        ( mul-ℕ (nat-Fin (succ-ℕ k) (pr1 u)) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
+        ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ x)
+        ( (nat-Fin (succ-ℕ k) (pr1 u)) *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
         ( scalar-invariant-cong-ℕ
           ( succ-ℕ k)
           ( x)

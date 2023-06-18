@@ -2,30 +2,33 @@
 
 ```agda
 module foundation.embeddings where
+
+open import foundation-core.embeddings public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.embeddings public
-
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.truncated-maps
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.cones-pullbacks
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.sections
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -167,7 +170,7 @@ module _
         ( triangle-section f g e H
           ( pair
             ( map-inv-is-equiv is-equiv-e)
-            ( issec-map-inv-is-equiv is-equiv-e)))
+            ( is-section-map-inv-is-equiv is-equiv-e)))
         ( is-equiv-map-inv-is-equiv is-equiv-e)
         ( is-emb-f)
 ```
@@ -179,8 +182,8 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  is-emb-tot : {f : (x : A) → B x → C x}
-    → ((x : A) → is-emb (f x)) → is-emb (tot f)
+  is-emb-tot :
+    {f : (x : A) → B x → C x} → ((x : A) → is-emb (f x)) → is-emb (tot f)
   is-emb-tot H =
     is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
 
@@ -197,8 +200,8 @@ module _
   where
 
   abstract
-    is-emb-map-Σ-map-base : {f : A → B} (C : B → UU l3)
-      → is-emb f → is-emb (map-Σ-map-base f C)
+    is-emb-map-Σ-map-base :
+      {f : A → B} (C : B → UU l3) → is-emb f → is-emb (map-Σ-map-base f C)
     is-emb-map-Σ-map-base C H =
       is-emb-is-prop-map (is-prop-map-map-Σ-map-base C (is-prop-map-is-emb H))
 
@@ -212,8 +215,9 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
   where
 
-  is-emb-map-Σ : (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)}
-    → is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
+  is-emb-map-Σ :
+    (D : B → UU l4) {f : A → B} {g : (x : A) → C x → D (f x)} →
+    is-emb f → ((x : A) → is-emb (g x)) → is-emb (map-Σ D f g)
   is-emb-map-Σ D H K =
     is-emb-is-prop-map
       ( is-prop-map-map-Σ D
@@ -235,11 +239,16 @@ module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   where
 
-  emb-× : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
-  emb-× f g = emb-Σ (λ _ → D) f (λ _ → g)
+  emb-prod : (A ↪ C) → (B ↪ D) → ((A × B) ↪ (C × D))
+  emb-prod f g = emb-Σ (λ _ → D) f (λ _ → g)
+
+  is-emb-map-prod :
+    (f : A → C) (g : B → D) → is-emb f → is-emb g → (is-emb (map-prod f g))
+  is-emb-map-prod f g is-emb-f is-emb-g =
+    is-emb-map-emb (emb-prod (f , is-emb-f) (g , is-emb-g))
 ```
 
-### If the action on identifications has a section, then f is an embedding
+### If the action on identifications has a section, then `f` is an embedding
 
 ```agda
 module _
@@ -247,10 +256,10 @@ module _
   where
 
   abstract
-    is-emb-sec-ap :
-      ((x y : A) → sec (ap f {x = x} {y = y})) → is-emb f
-    is-emb-sec-ap sec-ap-f x y =
-      fundamental-theorem-id-sec x (λ y → ap f {y = y}) (sec-ap-f x) y
+    is-emb-section-ap :
+      ((x y : A) → section (ap f {x = x} {y = y})) → is-emb f
+    is-emb-section-ap section-ap-f x y =
+      fundamental-theorem-id-section x (λ y → ap f {y = y}) (section-ap-f x) y
 ```
 
 ### If there is an equivalence `(f x = f y) ≃ (x = y)` that sends `refl` to `refl`, then f is an embedding
@@ -269,8 +278,8 @@ module _
       is-equiv-htpy-equiv
         (inv-equiv (e x y))
         λ { refl →
-              inv (isretr-map-inv-equiv (e x x) refl) ∙
-              ap (map-equiv (inv-equiv (e x x))) (p x) }
+              inv (is-retraction-map-inv-equiv (e x x) refl) ∙
+              ap (map-equiv (inv-equiv (e x x))) (p x)}
 ```
 
 ### Embeddings are closed under pullback
@@ -282,15 +291,64 @@ module _
   where
 
   abstract
-    is-emb-is-pullback : is-pullback f g c → is-emb g → is-emb (pr1 c)
-    is-emb-is-pullback pb is-emb-g =
+    is-emb-vertical-map-cone-is-pullback :
+      is-pullback f g c → is-emb g → is-emb (vertical-map-cone f g c)
+    is-emb-vertical-map-cone-is-pullback pb is-emb-g =
       is-emb-is-prop-map
         ( is-trunc-is-pullback neg-one-𝕋 f g c pb (is-prop-map-is-emb is-emb-g))
 
   abstract
-    is-emb-is-pullback' : is-pullback f g c → is-emb f → is-emb (pr1 (pr2 c))
-    is-emb-is-pullback' pb is-emb-f =
+    is-emb-horizontal-map-cone-is-pullback :
+      is-pullback f g c → is-emb f → is-emb (horizontal-map-cone f g c)
+    is-emb-horizontal-map-cone-is-pullback pb is-emb-f =
       is-emb-is-prop-map
         ( is-trunc-is-pullback' neg-one-𝕋 f g c pb
           ( is-prop-map-is-emb is-emb-f))
+```
+
+### In a commuting square of which the sides are embeddings, the top map is an embedding if and only if the bottom map is an embedding
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (H : coherence-square-maps top left right bottom)
+  where
+
+  is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps :
+    is-equiv left → is-equiv right → is-emb bottom → is-emb top
+  is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps K L M =
+    is-emb-right-factor
+      ( right)
+      ( top)
+      ( is-emb-is-equiv L)
+      ( is-emb-htpy'
+        ( bottom ∘ left)
+        ( right ∘ top)
+        ( H)
+        ( is-emb-comp bottom left M (is-emb-is-equiv K)))
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
+  (H : coherence-square-maps top left right bottom)
+  where
+
+  is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps :
+    is-equiv left → is-equiv right → is-emb top → is-emb bottom
+  is-emb-bottom-is-emb-top-is-equiv-coherence-square-maps K L M =
+    is-emb-top-is-emb-bottom-is-equiv-coherence-square-maps
+      ( bottom)
+      ( map-inv-is-equiv K)
+      ( map-inv-is-equiv L)
+      ( top)
+      ( coherence-square-inv-vertical
+        ( top)
+        ( left , K)
+        ( right , L)
+        ( bottom)
+        ( H))
+      ( is-equiv-map-inv-is-equiv K)
+      ( is-equiv-map-inv-is-equiv L)
+      ( M)
 ```

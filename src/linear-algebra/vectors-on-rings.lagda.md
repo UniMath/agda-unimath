@@ -9,6 +9,7 @@ module linear-algebra.vectors-on-rings where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-types
@@ -32,7 +33,7 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module
+Given a ring `R`, the type `vec n R` of `R`-vectors is an `R`-module.
 
 ## Definitions
 
@@ -123,8 +124,9 @@ module _
 
   associative-add-vec-Ring :
     {n : ℕ} (v1 v2 v3 : vec-Ring R n) →
-    Id ( add-vec-Ring (add-vec-Ring v1 v2) v3)
-       ( add-vec-Ring v1 (add-vec-Ring v2 v3))
+    Id
+      ( add-vec-Ring (add-vec-Ring v1 v2) v3)
+      ( add-vec-Ring v1 (add-vec-Ring v2 v3))
   associative-add-vec-Ring empty-vec empty-vec empty-vec = refl
   associative-add-vec-Ring (x ∷ v1) (y ∷ v2) (z ∷ v3) =
     ap-binary _∷_

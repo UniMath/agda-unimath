@@ -12,9 +12,9 @@ open import foundation.embeddings
 open import foundation.law-of-excluded-middle
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 
 open import order-theory.large-preorders
 ```
@@ -56,12 +56,13 @@ transitive-mere-emb g f =
 
 mere-emb-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder mere-emb-Large-Preorder l = UU l
-leq-large-preorder-Prop mere-emb-Large-Preorder = mere-emb-Prop
+leq-Large-Preorder-Prop mere-emb-Large-Preorder = mere-emb-Prop
 refl-leq-Large-Preorder mere-emb-Large-Preorder = refl-mere-emb
-trans-leq-Large-Preorder mere-emb-Large-Preorder X Y Z = transitive-mere-emb
+transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
+  transitive-mere-emb
 ```
 
-### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them.
+### Assuming excluded middle, if there are mere embeddings between `A` and `B` in both directions, then there is a mere equivalence between them
 
 ```agda
 antisymmetric-mere-emb :
@@ -69,9 +70,9 @@ antisymmetric-mere-emb :
   (LEM (l1 ⊔ l2)) → mere-emb X Y → mere-emb Y X → mere-equiv X Y
 antisymmetric-mere-emb lem f g =
   apply-universal-property-trunc-Prop f
-   (mere-equiv-Prop _ _)
-   λ f' →
-     apply-universal-property-trunc-Prop g
-     (mere-equiv-Prop _ _)
-     λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')
+    (mere-equiv-Prop _ _)
+    λ f' →
+      apply-universal-property-trunc-Prop g
+      (mere-equiv-Prop _ _)
+      λ g' → unit-trunc-Prop (Cantor-Schröder-Bernstein-Escardó lem f' g')
 ```

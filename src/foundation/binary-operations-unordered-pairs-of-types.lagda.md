@@ -8,9 +8,8 @@ module foundation.binary-operations-unordered-pairs-of-types where
 
 ```agda
 open import foundation.products-unordered-pairs-of-types
+open import foundation.universe-levels
 open import foundation.unordered-pairs
-
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -18,7 +17,7 @@ open import foundation-core.universe-levels
 ## Idea
 
 A binary operation on an unordered pair of types A indexed by a 2-element type I
-is a map `((i : I) → A i) →  B`.
+is a map `((i : I) → A i) → B`.
 
 ## Definition
 

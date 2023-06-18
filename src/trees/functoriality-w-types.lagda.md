@@ -7,17 +7,19 @@ module trees.functoriality-w-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-maps
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-maps
+open import foundation.transport
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -70,7 +72,7 @@ abstract
     (y : 𝕎 C D) → fib (map-𝕎 D f e) y ≃ fib-map-𝕎 D f e y
   equiv-fib-map-𝕎 {A = A} {B} {C} D f e (tree-𝕎 c γ) =
     ( ( ( inv-equiv
-          ( assoc-Σ A
+          ( associative-Σ A
             ( λ a → f a ＝ c)
             ( λ t → (d : D c) → fib (map-𝕎 D f e) (γ d)))) ∘e
         ( equiv-tot
@@ -86,14 +88,15 @@ abstract
                     ( λ α →
                       equiv-Π
                         ( λ (b : B a) →
-                          map-𝕎 D f e (α b) ＝  γ (tr D p (map-equiv (e a) b)))
+                          map-𝕎 D f e (α b) ＝ γ (tr D p (map-equiv (e a) b)))
                         ( inv-equiv (e a))
                         ( λ d →
                           ( equiv-concat'
                             ( map-𝕎 D f e
                               ( α (map-inv-equiv (e a) d)))
-                            ( ap ( γ ∘ (tr D p))
-                                 ( inv (issec-map-inv-equiv (e a) d)))) ∘e
+                            ( ap
+                              ( γ ∘ (tr D p))
+                              ( inv (is-section-map-inv-equiv (e a) d)))) ∘e
                           ( inv-equiv
                             ( equiv-Eq-𝕎-eq
                               ( map-𝕎 D f e
@@ -107,7 +110,7 @@ abstract
                     ( f a)
                     ( ( map-𝕎 D f e) ∘
                       ( α ∘ map-inv-equiv (e a)))) (tree-𝕎 c γ)))))) ∘e
-      ( assoc-Σ A
+      ( associative-Σ A
         ( λ a → B a → 𝕎 A B)
         ( λ t → map-𝕎 D f e (structure-𝕎-Alg t) ＝ tree-𝕎 c γ))) ∘e
     ( equiv-Σ
@@ -115,7 +118,7 @@ abstract
       ( inv-equiv-structure-𝕎-Alg)
       ( λ x →
         equiv-concat
-          ( ap (map-𝕎 D f e) (issec-map-inv-structure-𝕎-Alg x))
+          ( ap (map-𝕎 D f e) (is-section-map-inv-structure-𝕎-Alg x))
           ( tree-𝕎 c γ)))
 ```
 

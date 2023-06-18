@@ -7,16 +7,18 @@ module foundation-core.propositions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -30,8 +32,7 @@ at most one element.
 ## Definition
 
 ```agda
-is-prop :
-  {i : Level} (A : UU i) → UU i
+is-prop : {l : Level} (A : UU l) → UU l
 is-prop A = (x y : A) → is-contr (x ＝ y)
 
 Prop :
@@ -55,7 +56,7 @@ module _
 We prove here only that any contractible type is a proposition. The fact that
 the empty type and the unit type are propositions can be found in
 
-```md
+```text
 foundation.empty-types
 foundation.unit-type
 ```
@@ -179,7 +180,8 @@ module _
 
 ```agda
 abstract
-  is-prop-Σ : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  is-prop-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-prop A → ((x : A) → is-prop (B x)) → is-prop (Σ A B)
   is-prop-Σ H K x y =
     is-contr-equiv'
@@ -276,7 +278,7 @@ abstract
   is-prop-function-type :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop B → is-prop (A → B)
-  is-prop-function-type H = is-prop-Π (λ x → H)
+  is-prop-function-type H = is-prop-Π (λ _ → H)
 
 type-function-Prop :
   {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)

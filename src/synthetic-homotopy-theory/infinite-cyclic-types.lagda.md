@@ -11,11 +11,12 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -147,7 +148,7 @@ module _
                               ℤ-Pointed-Type-With-Aut))))
                       ( is-equiv-id)))) ∘e
               ( ( equiv-right-swap-Σ) ∘e
-                ( ( assoc-Σ
+                ( ( associative-Σ
                     ( ℤ ≃ ℤ)
                     ( λ e → Id (map-equiv e zero-ℤ) zero-ℤ)
                     ( λ e →
@@ -158,25 +159,25 @@ module _
                       ( λ e → Id (map-equiv (pr1 e) zero-ℤ) zero-ℤ)
                       ( equiv-Σ
                         ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
-                        ( equiv-postcomp-equiv (equiv-add-ℤ (neg-ℤ x)) ℤ)
+                        ( equiv-postcomp-equiv (equiv-left-add-ℤ (neg-ℤ x)) ℤ)
                         ( λ e →
                           equiv-map-Π
                             ( λ k →
                               ( equiv-concat'
-                                ( add-ℤ (neg-ℤ x) (map-equiv e (succ-ℤ k)))
+                                ( (neg-ℤ x) +ℤ (map-equiv e (succ-ℤ k)))
                                 ( right-successor-law-add-ℤ
                                   ( neg-ℤ x)
                                   ( map-equiv e k))) ∘e
                               ( equiv-ap
-                                ( equiv-add-ℤ (neg-ℤ x))
+                                ( equiv-left-add-ℤ (neg-ℤ x))
                                 ( map-equiv e (succ-ℤ k))
                                 ( succ-ℤ (map-equiv e k))))))
                       ( λ e →
                         ( equiv-concat'
-                          ( add-ℤ (neg-ℤ x) (map-equiv (pr1 e) zero-ℤ))
+                          ( (neg-ℤ x) +ℤ (map-equiv (pr1 e) zero-ℤ))
                           ( left-inverse-law-add-ℤ x)) ∘e
                         ( equiv-ap
-                          ( equiv-add-ℤ (neg-ℤ x))
+                          ( equiv-left-add-ℤ (neg-ℤ x))
                           ( map-equiv (pr1 e) zero-ℤ)
                           ( x))))))))
             ( is-initial-ℤ-Pointed-Type-With-Aut ℤ-Pointed-Type-With-Aut))

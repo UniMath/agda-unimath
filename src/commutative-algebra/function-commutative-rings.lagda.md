@@ -10,18 +10,13 @@ module commutative-algebra.function-commutative-rings where
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.dependent-products-commutative-rings
 
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
-open import group-theory.dependent-products-commutative-monoids
 
-open import ring-theory.dependent-products-rings
 open import ring-theory.rings
 ```
 
@@ -29,18 +24,18 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a commutative ring `R` and a type `X`, the type `R^X` of functions from
-`X` into the underlying type of `R` is again a commutative ring.
+Given a commutative ring `A` and a type `X`, the type `A^X` of functions from
+`X` into the underlying type of `A` is again a commutative ring.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Commutative-Ring l1) (X : UU l2)
+  {l1 l2 : Level} (A : Commutative-Ring l1) (X : UU l2)
   where
 
   function-Commutative-Ring : Commutative-Ring (l1 ⊔ l2)
-  function-Commutative-Ring = Π-Commutative-Ring X (λ _ → R)
+  function-Commutative-Ring = Π-Commutative-Ring X (λ _ → A)
 
   ring-function-Commutative-Ring : Ring (l1 ⊔ l2)
   ring-function-Commutative-Ring =

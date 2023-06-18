@@ -7,8 +7,10 @@ module graph-theory.reflecting-maps-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.symmetric-identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -22,13 +24,15 @@ open import graph-theory.undirected-graphs
 A reflecting map from an undirected graph `(V , E)` into a type `X` consists of
 a map `fV : V → X` and a map
 
-```md
+```text
   fE : (v : unordered-pair V) → E v → symmetric-Id (map-unordered-pair fV v).
 ```
 
 In other words, it maps edges into the symmetric identity type.
 
-## Definition
+## Definitions
+
+### Reflecting maps of undirected graphs
 
 ```agda
 reflecting-map-Undirected-Graph :
@@ -58,4 +62,16 @@ module _
     edge-Undirected-Graph G v →
     symmetric-Id (unordered-pair-vertices-reflecting-map-Undirected-Graph v)
   edge-reflecting-map-Undirected-Graph = pr2 f
+```
+
+### Terminal reflecting maps
+
+```agda
+terminal-reflecting-map-Undirected-Graph :
+  {l1 l2 : Level} (G : Undirected-Graph l1 l2) →
+  reflecting-map-Undirected-Graph G unit
+pr1 (terminal-reflecting-map-Undirected-Graph G) x = star
+pr1 (pr2 (terminal-reflecting-map-Undirected-Graph G) p e) = star
+pr2 (pr2 (terminal-reflecting-map-Undirected-Graph G) p e) x =
+  eq-is-contr is-contr-unit
 ```

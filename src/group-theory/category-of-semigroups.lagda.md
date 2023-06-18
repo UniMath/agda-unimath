@@ -29,9 +29,11 @@ category.
 
 ## Definition
 
+### The large category of semigroups
+
 ```agda
 is-category-Semigroup :
-  is-category-Large-Precat Semigroup-Large-Precat
+  is-category-Large-Precategory Semigroup-Large-Precategory
 is-category-Semigroup G =
   fundamental-theorem-id
     ( is-contr-total-iso-Semigroup G)
@@ -46,7 +48,7 @@ eq-iso-Semigroup :
   {l : Level} (G H : Semigroup l) → type-iso-Semigroup G H → Id G H
 eq-iso-Semigroup G H = map-inv-is-equiv (is-category-Semigroup G H)
 
-Semigroup-Large-Cat : Large-Cat lsuc (λ l1 l2 → l1 ⊔ l2)
-precat-Large-Cat Semigroup-Large-Cat = Semigroup-Large-Precat
-is-category-Large-Cat Semigroup-Large-Cat = is-category-Semigroup
+Semigroup-Large-Category : Large-Category lsuc (_⊔_)
+precat-Large-Category Semigroup-Large-Category = Semigroup-Large-Precategory
+is-category-Large-Category Semigroup-Large-Category = is-category-Semigroup
 ```

@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.decidable-propositions where
+
+open import foundation.decidable-propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-propositions public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.coproduct-types
@@ -42,12 +42,12 @@ count-is-decidable-is-prop H (inl x) =
   count-is-contr (is-proof-irrelevant-is-prop H x)
 count-is-decidable-is-prop H (inr f) = count-is-empty f
 
-count-decidable-Prop :
+count-Decidable-Prop :
   {l1 : Level} (P : Prop l1) →
   is-decidable (type-Prop P) → count (type-Prop P)
-count-decidable-Prop P (inl p) =
+count-Decidable-Prop P (inl p) =
   count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) p)
-count-decidable-Prop P (inr f) = count-is-empty f
+count-Decidable-Prop P (inr f) = count-is-empty f
 ```
 
 ### We can count the elements of an identity type of a type that has decidable equality
@@ -80,8 +80,9 @@ number-of-elements-count-eq' d x y =
 cases-number-of-elements-count-eq :
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
   (e : is-decidable (Id x y)) →
-  Id ( number-of-elements-count (cases-count-eq d e))
-     ( cases-number-of-elements-count-eq' e)
+  Id
+    ( number-of-elements-count (cases-count-eq d e))
+    ( cases-number-of-elements-count-eq' e)
 cases-number-of-elements-count-eq d (inl p) = refl
 cases-number-of-elements-count-eq d (inr f) = refl
 

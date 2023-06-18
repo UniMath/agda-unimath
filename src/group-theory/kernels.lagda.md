@@ -7,6 +7,7 @@ module group-theory.kernels where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.identity-types
@@ -23,6 +24,8 @@ open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-abelian-groups
+open import group-theory.subsets-abelian-groups
+open import group-theory.subsets-groups
 ```
 
 </details>
@@ -79,12 +82,12 @@ module _
 
   inclusion-kernel-hom-Group : type-hom-Group group-kernel-hom-Group G
   inclusion-kernel-hom-Group =
-    inclusion-group-Subgroup G subgroup-kernel-hom-Group
+    hom-inclusion-Subgroup G subgroup-kernel-hom-Group
 
   is-emb-inclusion-kernel-hom-Group :
     is-emb-hom-Group group-kernel-hom-Group G inclusion-kernel-hom-Group
   is-emb-inclusion-kernel-hom-Group =
-    is-emb-inclusion-group-Subgroup G subgroup-kernel-hom-Group
+    is-emb-inclusion-Subgroup G subgroup-kernel-hom-Group
 
   emb-inclusion-kernel-hom-Group : emb-Group group-kernel-hom-Group G
   pr1 emb-inclusion-kernel-hom-Group =

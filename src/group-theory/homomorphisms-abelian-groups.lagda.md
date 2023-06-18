@@ -7,17 +7,16 @@ module group-theory.homomorphisms-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.large-precategories
-
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.homomorphisms-commutative-monoids
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 ```
@@ -65,6 +64,19 @@ module _
     (f : type-hom-Ab) → preserves-negatives-Ab (map-hom-Ab f)
   preserves-negatives-hom-Ab f =
     preserves-inv-hom-Group (group-Ab A) (group-Ab B) f
+
+  hom-semigroup-hom-Ab :
+    type-hom-Ab → type-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
+  pr1 (hom-semigroup-hom-Ab f) = map-hom-Ab f
+  pr2 (hom-semigroup-hom-Ab f) = preserves-add-hom-Ab f
+
+  hom-commutative-monoid-hom-Ab :
+    type-hom-Ab →
+    type-hom-Commutative-Monoid
+      ( commutative-monoid-Ab A)
+      ( commutative-monoid-Ab B)
+  pr1 (hom-commutative-monoid-hom-Ab f) = hom-semigroup-hom-Ab f
+  pr2 (hom-commutative-monoid-hom-Ab f) = preserves-zero-hom-Ab f
 ```
 
 ### Characterization of the identity type of the abelian group homomorphisms
@@ -128,8 +140,9 @@ comp-hom-Ab A B C =
 associative-comp-hom-Ab :
   { l1 l2 l3 l4 : Level} (A : Ab l1) (B : Ab l2) (C : Ab l3) (D : Ab l4) →
   ( h : type-hom-Ab C D) (g : type-hom-Ab B C) (f : type-hom-Ab A B) →
-  Id (comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
-     (comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
+  Id
+    ( comp-hom-Ab A B D (comp-hom-Ab B C D h g) f)
+    ( comp-hom-Ab A C D h (comp-hom-Ab A B C g f))
 associative-comp-hom-Ab A B C D =
   associative-comp-hom-Semigroup
     ( semigroup-Ab A)
@@ -152,20 +165,4 @@ right-unit-law-comp-hom-Ab :
   ( f : type-hom-Ab A B) → Id (comp-hom-Ab A A B f (id-hom-Ab A)) f
 right-unit-law-comp-hom-Ab A B =
   right-unit-law-comp-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
-```
-
-### The large precategory of abelian groups
-
-```agda
-ab-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
-Large-Precat.obj-Large-Precat ab-Precat = Ab
-Large-Precat.hom-Large-Precat ab-Precat = hom-Ab
-Large-Precat.comp-hom-Large-Precat ab-Precat {X = A} {B} {C} = comp-hom-Ab A B C
-Large-Precat.id-hom-Large-Precat ab-Precat {X = A} = id-hom-Ab A
-Large-Precat.associative-comp-hom-Large-Precat ab-Precat {X = A} {B} {C} {D} =
-  associative-comp-hom-Ab A B C D
-Large-Precat.left-unit-law-comp-hom-Large-Precat ab-Precat {X = A} {B} =
-  left-unit-law-comp-hom-Ab A B
-Large-Precat.right-unit-law-comp-hom-Large-Precat ab-Precat {X = A} {B} =
-  right-unit-law-comp-hom-Ab A B
 ```

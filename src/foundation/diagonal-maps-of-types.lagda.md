@@ -2,20 +2,22 @@
 
 ```agda
 module foundation.diagonal-maps-of-types where
+
+open import foundation-core.diagonal-maps-of-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.diagonal-maps-of-types public
+open import foundation.0-maps
+open import foundation.dependent-pair-types
+open import foundation.faithful-maps
+open import foundation.universe-levels
 
-open import foundation-core.0-maps
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
-open import foundation-core.faithful-maps
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
@@ -24,14 +26,13 @@ open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Properties
 
-### A type is (k+1)-truncated if and only if the diagonal is k-truncated
+### A type is `k+1`-truncated if and only if the diagonal is `k`-truncated
 
 ```agda
 module _

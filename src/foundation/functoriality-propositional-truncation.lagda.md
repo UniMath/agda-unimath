@@ -7,17 +7,17 @@ module foundation.functoriality-propositional-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -81,12 +81,12 @@ abstract
 
 ```agda
 abstract
-  comp-map-trunc-Prop :
+  preserves-comp-map-trunc-Prop :
     { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
     ( g : B → C) (f : A → B) →
     ( map-trunc-Prop (g ∘ f)) ~
     ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))
-  comp-map-trunc-Prop g f =
+  preserves-comp-map-trunc-Prop g f =
     htpy-uniqueness-map-trunc-Prop
       ( g ∘ f)
       ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))

@@ -16,23 +16,29 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
 </details>
 
-# The congruence relations on the integers
+## Definitions
 
 ```agda
 cong-ℤ : ℤ → ℤ → ℤ → UU lzero
-cong-ℤ k x y = div-ℤ k (diff-ℤ x y)
+cong-ℤ k x y = div-ℤ k (x -ℤ y)
 
 is-cong-zero-ℤ : ℤ → ℤ → UU lzero
 is-cong-zero-ℤ k x = cong-ℤ k x zero-ℤ
+```
 
+## Properties
+
+```agda
 is-cong-zero-div-ℤ : (k x : ℤ) → div-ℤ k x → is-cong-zero-ℤ k x
 pr1 (is-cong-zero-div-ℤ k x (pair d p)) = d
 pr2 (is-cong-zero-div-ℤ k x (pair d p)) = p ∙ inv (right-unit-law-add-ℤ x)
@@ -42,20 +48,20 @@ pr1 (div-is-cong-zero-ℤ k x (pair d p)) = d
 pr2 (div-is-cong-zero-ℤ k x (pair d p)) = p ∙ right-unit-law-add-ℤ x
 
 is-indiscrete-cong-ℤ : (k : ℤ) → is-unit-ℤ k → (x y : ℤ) → cong-ℤ k x y
-is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (diff-ℤ x y) H
+is-indiscrete-cong-ℤ k H x y = div-is-unit-ℤ k (x -ℤ y) H
 
 is-discrete-cong-ℤ : (k : ℤ) → is-zero-ℤ k → (x y : ℤ) → cong-ℤ k x y → x ＝ y
 is-discrete-cong-ℤ .zero-ℤ refl x y K =
-  eq-diff-ℤ (is-zero-div-zero-ℤ (diff-ℤ x y) K)
+  eq-diff-ℤ (is-zero-div-zero-ℤ (x -ℤ y) K)
 
 is-unit-cong-succ-ℤ : (k x : ℤ) → cong-ℤ k x (succ-ℤ x) → is-unit-ℤ k
 pr1 (is-unit-cong-succ-ℤ k x (pair y p)) = neg-ℤ y
 pr2 (is-unit-cong-succ-ℤ k x (pair y p)) =
   ( left-negative-law-mul-ℤ y k) ∙
   ( is-injective-neg-ℤ
-    ( ( neg-neg-ℤ (mul-ℤ y k)) ∙
+    ( ( neg-neg-ℤ (y *ℤ k)) ∙
       ( ( p) ∙
-        ( ( ap (add-ℤ x) (neg-succ-ℤ x)) ∙
+        ( ( ap (x +ℤ_) (neg-succ-ℤ x)) ∙
           ( ( right-predecessor-law-add-ℤ x (neg-ℤ x)) ∙
             ( ap pred-ℤ (right-inverse-law-add-ℤ x)))))))
 
@@ -63,7 +69,7 @@ is-unit-cong-pred-ℤ : (k x : ℤ) → cong-ℤ k x (pred-ℤ x) → is-unit-�
 pr1 (is-unit-cong-pred-ℤ k x (pair y p)) = y
 pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
   ( p) ∙
-  ( ( ap (add-ℤ x) (neg-pred-ℤ x)) ∙
+  ( ( ap (x +ℤ_) (neg-pred-ℤ x)) ∙
     ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
       ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
 
@@ -79,7 +85,7 @@ pr2 (symmetric-cong-ℤ k x y (pair d p)) =
     ( distributive-neg-diff-ℤ x y))
 
 transitive-cong-ℤ : (k x y z : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k x z
-pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = add-ℤ d e
+pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = d +ℤ e
 pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙
@@ -130,7 +136,7 @@ cong-int-cong-ℕ :
 cong-int-cong-ℕ k x y H =
   div-sim-unit-ℤ
     ( refl-sim-unit-ℤ (int-ℕ k))
-    ( sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y)))
+    ( sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y)))
     ( tr
       ( div-ℤ (int-ℕ k))
       ( inv (ap int-ℕ (dist-int-ℕ x y)))
@@ -145,6 +151,6 @@ cong-cong-int-ℕ k x y H =
       ( ap int-ℕ (dist-int-ℕ x y))
       ( div-sim-unit-ℤ
         ( refl-sim-unit-ℤ (int-ℕ k))
-        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ (diff-ℤ (int-ℕ x) (int-ℕ y))))
+        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
         ( H)))
 ```

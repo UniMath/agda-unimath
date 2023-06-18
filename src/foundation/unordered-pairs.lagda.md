@@ -7,28 +7,28 @@ module foundation.unordered-pairs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.decidable-equality
+open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
-open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
@@ -148,7 +148,8 @@ module _
   Eq-unordered-pair : (p q : unordered-pair A) → UU l1
   Eq-unordered-pair p q =
     Σ ( type-unordered-pair p ≃ type-unordered-pair q)
-      ( λ e → (element-unordered-pair p) ~ (element-unordered-pair q ∘ map-equiv e))
+      ( λ e →
+        (element-unordered-pair p) ~ (element-unordered-pair q ∘ map-equiv e))
 
   refl-Eq-unordered-pair : (p : unordered-pair A) → Eq-unordered-pair p p
   pr1 (refl-Eq-unordered-pair (pair X p)) = id-equiv-UU-Fin {k = 2} X
@@ -186,25 +187,27 @@ module _
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
   eq-Eq-unordered-pair :
-    (p q : unordered-pair A) (e : type-unordered-pair p ≃ type-unordered-pair q) →
-    (element-unordered-pair p ~ (element-unordered-pair q ∘ map-equiv e)) → (p ＝ q)
+    (p q : unordered-pair A)
+    (e : type-unordered-pair p ≃ type-unordered-pair q) →
+    (element-unordered-pair p ~ (element-unordered-pair q ∘ map-equiv e)) →
+    (p ＝ q)
   eq-Eq-unordered-pair p q e H = eq-Eq-unordered-pair' p q (pair e H)
 
-  isretr-eq-Eq-unordered-pair :
+  is-retraction-eq-Eq-unordered-pair :
     (p q : unordered-pair A) →
     (eq-Eq-unordered-pair' p q ∘ Eq-eq-unordered-pair p q) ~ id
-  isretr-eq-Eq-unordered-pair p q =
-    isretr-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
+  is-retraction-eq-Eq-unordered-pair p q =
+    is-retraction-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
-  issec-eq-Eq-unordered-pair :
+  is-section-eq-Eq-unordered-pair :
     (p q : unordered-pair A) →
     ( Eq-eq-unordered-pair p q ∘ eq-Eq-unordered-pair' p q) ~ id
-  issec-eq-Eq-unordered-pair p q =
-    issec-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
+  is-section-eq-Eq-unordered-pair p q =
+    is-section-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
   eq-Eq-refl-unordered-pair :
     (p : unordered-pair A) → eq-Eq-unordered-pair p p id-equiv refl-htpy ＝ refl
-  eq-Eq-refl-unordered-pair p = isretr-eq-Eq-unordered-pair p p refl
+  eq-Eq-refl-unordered-pair p = is-retraction-eq-Eq-unordered-pair p p refl
 ```
 
 ### Mere equality of unordered pairs
@@ -231,7 +234,7 @@ module _
     unit-trunc-Prop (refl-Eq-unordered-pair p)
 ```
 
-### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`.
+### A standard unordered pair `{x,y}` is equal to the standard unordered pair `{y,x}`
 
 ```agda
 is-commutative-standard-unordered-pair :
@@ -279,7 +282,7 @@ preserves-refl-htpy-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   htpy-unordered-pair (refl-htpy {f = f}) ~ refl-htpy
 preserves-refl-htpy-unordered-pair f p =
-  isretr-eq-Eq-unordered-pair
+  is-retraction-eq-Eq-unordered-pair
     ( map-unordered-pair f p)
     ( map-unordered-pair f p)
     ( refl)
@@ -329,7 +332,8 @@ element-id-equiv-standard-unordered-pair x y (inl (inr star)) = refl
 element-id-equiv-standard-unordered-pair x y (inr star) = refl
 
 id-equiv-standard-unordered-pair :
-  {l : Level} {A : UU l} (x y : A) → equiv-standard-unordered-pair id-equiv x y ＝ refl
+  {l : Level} {A : UU l} (x y : A) →
+  equiv-standard-unordered-pair id-equiv x y ＝ refl
 id-equiv-standard-unordered-pair x y =
   ( ap
     ( eq-Eq-unordered-pair

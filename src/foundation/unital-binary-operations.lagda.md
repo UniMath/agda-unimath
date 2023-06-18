@@ -7,21 +7,23 @@ module foundation.unital-binary-operations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A binary operation of type `A → A → A` is unital if there is a unit of type `A`
-that satisfies both the left and right unit laws. Furthermore, an binary
-operation is _coherently_ unital if the proofs of left and right unit laws agree
-on the case where both arguments of the operation are the unit.
+A binary operation of type `A → A → A` is **unital** if there is a unit of type
+`A` that satisfies both the left and right unit laws. Furthermore, a binary
+operation is **coherently unital** if the proofs of the left and right unit laws
+agree on the case where both arguments of the operation are the unit.
 
 ## Definitions
 
@@ -65,7 +67,7 @@ is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
 
 ## Properties
 
-### The unit laws for an operation μ with unit e can be upgraded to coherent unit laws
+### The unit laws for an operation `μ` with unit `e` can be upgraded to coherent unit laws
 
 ```agda
 module _

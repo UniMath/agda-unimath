@@ -9,7 +9,7 @@ module group-theory.subsemigroups where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -17,6 +17,7 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-semigroups
 open import group-theory.semigroups
 ```
 
@@ -177,6 +178,17 @@ module _
   pr1 semigroup-Subsemigroup = set-Subsemigroup
   pr1 (pr2 semigroup-Subsemigroup) = mul-Subsemigroup
   pr2 (pr2 semigroup-Subsemigroup) = associative-mul-Subsemigroup
+
+  preserves-mul-inclusion-Subsemigroup :
+    (x y : type-Subsemigroup) →
+    inclusion-Subsemigroup (mul-Subsemigroup x y) ＝
+    mul-Semigroup G (inclusion-Subsemigroup x) (inclusion-Subsemigroup y)
+  preserves-mul-inclusion-Subsemigroup x y = refl
+
+  hom-inclusion-Subsemigroup :
+    type-hom-Semigroup semigroup-Subsemigroup G
+  pr1 hom-inclusion-Subsemigroup = inclusion-Subsemigroup
+  pr2 hom-inclusion-Subsemigroup = preserves-mul-inclusion-Subsemigroup
 ```
 
 ## Properties

@@ -7,25 +7,27 @@ module foundation-core.injective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-A map `f : A → B` is injective if `Id (f x) (f y)` implies `Id x y`.
+A map `f : A → B` is injective if `f x ＝ f y` implies `x ＝ y`.
 
 ## Warning
 
@@ -38,6 +40,9 @@ is recommended to use the notion of embedding.
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
+
+injection : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+injection A B = Σ (A → B) is-injective
 ```
 
 ## Examples
@@ -47,6 +52,10 @@ is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
 ```agda
 is-injective-id : {l1 : Level} {A : UU l1} → is-injective (id {A = A})
 is-injective-id p = p
+
+id-injection : {l1 : Level} {A : UU l1} → injection A A
+pr1 id-injection = id
+pr2 id-injection = is-injective-id
 ```
 
 ## Properties
@@ -99,9 +108,9 @@ module _
   abstract
     is-injective-is-equiv : {f : A → B} → is-equiv f → is-injective f
     is-injective-is-equiv H {x} {y} p =
-      ( inv (isretr-map-inv-is-equiv H x)) ∙
+      ( inv (is-retraction-map-inv-is-equiv H x)) ∙
       ( ( ap (map-inv-is-equiv H) p) ∙
-        ( isretr-map-inv-is-equiv H y))
+        ( is-retraction-map-inv-is-equiv H y))
 
   abstract
     is-injective-map-equiv : (e : A ≃ B) → is-injective (map-equiv e)
@@ -116,7 +125,7 @@ module _
     is-injective-map-inv-equiv e =
       is-injective-is-equiv (is-equiv-map-inv-equiv e)
 
-  is-equiv-is-injective : {f : A → B} → sec f → is-injective f → is-equiv f
+  is-equiv-is-injective : {f : A → B} → section f → is-injective f → is-equiv f
   is-equiv-is-injective {f} (pair g G) H =
     is-equiv-has-inverse g G (λ x → H (G (f x)))
 ```
@@ -139,7 +148,8 @@ module _
 
 ```agda
 abstract
-  is-emb-is-injective' : {l1 l2 : Level} {A : UU l1} (is-set-A : is-set A)
+  is-emb-is-injective' :
+    {l1 l2 : Level} {A : UU l1} (is-set-A : is-set A)
     {B : UU l2} (is-set-B : is-set B) (f : A → B) →
     is-injective f → is-emb f
   is-emb-is-injective' is-set-A is-set-B f is-injective-f x y =

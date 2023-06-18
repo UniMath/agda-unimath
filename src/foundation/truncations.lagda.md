@@ -7,33 +7,34 @@ module foundation.truncations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.truncated-types
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-We postulate the existence of truncations
+We postulate the existence of truncations.
 
 ## Postulates
 
@@ -66,7 +67,7 @@ pr2 (equiv-universal-property-trunc A B) = is-truncation-trunc B
 
 ## Properties
 
-### The n-truncations satisfy the universal property
+### The `n`-truncations satisfy the universal property of `n`-truncations
 
 ```agda
 universal-property-trunc :
@@ -108,7 +109,7 @@ module _
     pr2 (apply-universal-property-trunc B f)
 ```
 
-### The n-truncations satisfy the dependent universal property
+### The `n`-truncations satisfy the dependent universal property of `n`-truncations
 
 ```agda
 module _
@@ -223,70 +224,70 @@ module _
 
 module _
   {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} (B : A → Truncated-Type l2 k)
-    ( C : total-truncated-fam-trunc B → Truncated-Type l3 k)
-    ( f : (x : A) (y : type-Truncated-Type (B x)) →
-          type-Truncated-Type
-            ( C ( pair
-                  ( unit-trunc x)
-                  ( map-equiv (compute-truncated-fam-trunc B x) y))))
+  ( C : total-truncated-fam-trunc B → Truncated-Type l3 k)
+  ( f :
+    ( x : A)
+    ( y : type-Truncated-Type (B x)) →
+    type-Truncated-Type
+      ( C (unit-trunc x , map-equiv (compute-truncated-fam-trunc B x) y)))
   where
 
   dependent-universal-property-total-truncated-fam-trunc :
     is-contr
-     ( Σ ( (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t))
-         ( λ h →
-           (x : A) (y : type-Truncated-Type (B x)) →
-           Id ( h (pair (unit-trunc x) (map-compute-truncated-fam-trunc B x y)))
+      ( Σ ( (t : total-truncated-fam-trunc B) → type-Truncated-Type (C t))
+          ( λ h →
+            (x : A) (y : type-Truncated-Type (B x)) →
+            Id
+              ( h (unit-trunc x , map-compute-truncated-fam-trunc B x y))
               ( f x y)))
   dependent-universal-property-total-truncated-fam-trunc =
     is-contr-equiv _
       ( equiv-Σ
         ( λ g →
           (x : A) →
-          Id ( g (unit-trunc x))
-             ( map-equiv-Π
-               ( λ u → type-Truncated-Type (C (pair (unit-trunc x) u)))
-               ( compute-truncated-fam-trunc B x)
-               ( λ u → id-equiv)
-               ( f x)))
+          Id
+            ( g (unit-trunc x))
+            ( map-equiv-Π
+              ( λ u → type-Truncated-Type (C (unit-trunc x , u)))
+              ( compute-truncated-fam-trunc B x)
+              ( λ u → id-equiv)
+              ( f x)))
         ( equiv-ev-pair)
         ( λ g →
           equiv-map-Π
             ( λ x →
-                ( inv-equiv equiv-funext) ∘e
-                ( equiv-Π
-                  ( λ y →
-                    Id ( g (pair (unit-trunc x) y))
-                       ( map-equiv-Π
-                         ( λ u →
-                           type-Truncated-Type (C (pair (unit-trunc x) u)))
-                         ( compute-truncated-fam-trunc B x)
-                         ( λ u → id-equiv)
-                         ( f x)
-                         ( y)))
-                  ( compute-truncated-fam-trunc B x)
-                  ( λ y →
-                    equiv-concat'
-                      ( g ( pair
-                            ( unit-trunc x)
-                            ( map-compute-truncated-fam-trunc B x y)))
-                      ( inv
-                        ( compute-map-equiv-Π
-                          ( λ u →
-                            type-Truncated-Type (C (pair (unit-trunc x) u)))
-                          ( compute-truncated-fam-trunc B x)
-                          ( λ y → id-equiv)
-                          ( λ y → f x y)
-                          ( y))))))))
+              ( inv-equiv equiv-funext) ∘e
+              ( equiv-Π
+                ( λ y →
+                  Id
+                    ( g (unit-trunc x , y))
+                    ( map-equiv-Π
+                      ( λ u →
+                        type-Truncated-Type (C (unit-trunc x , u)))
+                      ( compute-truncated-fam-trunc B x)
+                      ( λ u → id-equiv)
+                      ( f x)
+                      ( y)))
+                ( compute-truncated-fam-trunc B x)
+                ( λ y →
+                  equiv-concat'
+                    ( g (unit-trunc x , map-compute-truncated-fam-trunc B x y))
+                    ( inv
+                      ( compute-map-equiv-Π
+                        ( λ u → type-Truncated-Type (C (unit-trunc x , u)))
+                        ( compute-truncated-fam-trunc B x)
+                        ( λ y → id-equiv)
+                        ( f x)
+                        ( y))))))))
       ( unique-dependent-function-trunc
         ( λ y →
           truncated-type-succ-Truncated-Type k
             ( Π-Truncated-Type k
               ( truncated-fam-trunc B y)
-              ( λ u → C (pair y u))))
+              ( λ u → C (y , u))))
         ( λ y →
           map-equiv-Π
-            ( λ u → type-Truncated-Type (C (pair (unit-trunc y) u)))
+            ( λ u → type-Truncated-Type (C (unit-trunc y , u)))
             ( compute-truncated-fam-trunc B y)
             ( λ u → id-equiv)
             ( f y)))
@@ -298,14 +299,15 @@ module _
 
   htpy-dependent-universal-property-total-truncated-fam-trunc :
     (x : A) (y : type-Truncated-Type (B x)) →
-    Id ( function-dependent-universal-property-total-truncated-fam-trunc
-         ( pair (unit-trunc x) (map-compute-truncated-fam-trunc B x y)))
-       ( f x y)
+    Id
+      ( function-dependent-universal-property-total-truncated-fam-trunc
+        ( unit-trunc x , map-compute-truncated-fam-trunc B x y))
+      ( f x y)
   htpy-dependent-universal-property-total-truncated-fam-trunc =
     pr2 (center dependent-universal-property-total-truncated-fam-trunc)
 ```
 
-### An n-truncated type is equivalent to its n-truncation
+### An `n`-truncated type is equivalent to its `n`-truncation
 
 ```agda
 module _
@@ -316,13 +318,13 @@ module _
     type-trunc k (type-Truncated-Type A) → type-Truncated-Type A
   map-inv-unit-trunc = map-universal-property-trunc A id
 
-  isretr-map-inv-unit-trunc :
+  is-retraction-map-inv-unit-trunc :
     ( map-inv-unit-trunc ∘ unit-trunc) ~ id
-  isretr-map-inv-unit-trunc = triangle-universal-property-trunc A id
+  is-retraction-map-inv-unit-trunc = triangle-universal-property-trunc A id
 
-  issec-map-inv-unit-trunc :
+  is-section-map-inv-unit-trunc :
     ( unit-trunc ∘ map-inv-unit-trunc) ~ id
-  issec-map-inv-unit-trunc =
+  is-section-map-inv-unit-trunc =
     htpy-eq
       ( pr1
         ( pair-eq-Σ
@@ -334,22 +336,19 @@ module _
                 ( type-Truncated-Type A)
                 ( trunc k (type-Truncated-Type A))
                 ( unit-trunc)))
-            ( pair
-              ( unit-trunc ∘ map-inv-unit-trunc)
-              ( unit-trunc ·l
-                isretr-map-inv-unit-trunc))
-            ( pair
-              ( id)
-              ( refl-htpy)))))
+            ( unit-trunc ∘ map-inv-unit-trunc ,
+              unit-trunc ·l is-retraction-map-inv-unit-trunc)
+            ( id , refl-htpy))))
 
   is-equiv-unit-trunc : is-equiv unit-trunc
   is-equiv-unit-trunc =
     is-equiv-has-inverse
       map-inv-unit-trunc
-      issec-map-inv-unit-trunc
-      isretr-map-inv-unit-trunc
+      is-section-map-inv-unit-trunc
+      is-retraction-map-inv-unit-trunc
 
-  equiv-unit-trunc : type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
+  equiv-unit-trunc :
+    type-Truncated-Type A ≃ type-trunc k (type-Truncated-Type A)
   pr1 equiv-unit-trunc = unit-trunc
   pr2 equiv-unit-trunc = is-equiv-unit-trunc
 ```
@@ -404,7 +403,7 @@ module _
             ( λ b →
               truncated-type-succ-Truncated-Type k
                 ( Eq-trunc-Truncated-Type b)))
-          ( pair (unit-trunc a) refl-Eq-trunc))
+          ( unit-trunc a , refl-Eq-trunc))
       ( λ y →
         function-dependent-universal-property-trunc
           ( λ q →
@@ -414,14 +413,16 @@ module _
                 ( λ y →
                   truncated-type-succ-Truncated-Type k
                     ( Eq-trunc-Truncated-Type y)))
-              ( pair (unit-trunc a) refl-Eq-trunc)
-              ( pair (unit-trunc y) (map-compute-Eq-trunc y q)))
+              ( unit-trunc a , refl-Eq-trunc)
+              ( unit-trunc y , map-compute-Eq-trunc y q))
           ( r y))
     where
-    r : (y : A) (p : a ＝ y) →
-        Id { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
-           ( pair (unit-trunc a) refl-Eq-trunc)
-           ( pair (unit-trunc y) (map-compute-Eq-trunc y (unit-trunc p)))
+    r :
+      (y : A) (p : a ＝ y) →
+      Id
+        { A = Σ (type-trunc (succ-𝕋 k) A) Eq-trunc}
+        ( unit-trunc a , refl-Eq-trunc)
+        ( unit-trunc y , (map-compute-Eq-trunc y (unit-trunc p)))
     r .a refl = refl
 
   Eq-eq-trunc : (x : type-trunc (succ-𝕋 k) A) → (unit-trunc a ＝ x) → Eq-trunc x
@@ -453,7 +454,7 @@ module _
   refl-effectiveness-trunc :
     map-effectiveness-trunc a (unit-trunc refl) ＝ refl
   refl-effectiveness-trunc =
-    isretr-map-inv-equiv (extensionality-trunc (unit-trunc a)) refl
+    is-retraction-map-inv-equiv (extensionality-trunc (unit-trunc a)) refl
 ```
 
 ### Truncations of Σ-types
@@ -468,77 +469,78 @@ module _
   map-trunc-Σ =
     map-universal-property-trunc
       ( trunc k (Σ A (λ x → type-trunc k (B x))))
-      ( λ (pair a b) → unit-trunc (pair a (unit-trunc b)))
+      ( λ (a , b) → unit-trunc (a , unit-trunc b))
 
   map-inv-trunc-Σ :
     type-trunc k (Σ A (λ x → type-trunc k (B x))) → type-trunc k (Σ A B)
   map-inv-trunc-Σ =
     map-universal-property-trunc
       ( trunc k (Σ A B))
-      ( λ (pair a |b|) →
+      ( λ (a , |b|) →
         map-universal-property-trunc
           ( trunc k (Σ A B))
-          ( λ b → unit-trunc (pair a b))
+          ( λ b → unit-trunc (a , b))
           ( |b|))
 
-  isretr-map-inv-trunc-Σ :
+  is-retraction-map-inv-trunc-Σ :
     ( map-inv-trunc-Σ ∘ map-trunc-Σ) ~ id
-  isretr-map-inv-trunc-Σ =
+  is-retraction-map-inv-trunc-Σ =
     function-dependent-universal-property-trunc
       ( λ |ab| →
         Id-Truncated-Type'
           ( trunc k (Σ A B))
           ( map-inv-trunc-Σ (map-trunc-Σ |ab|))
           ( |ab|))
-      ( λ (pair a b) →
-        ap map-inv-trunc-Σ
-           ( triangle-universal-property-trunc _
-             ( λ (pair a' b') → unit-trunc (pair a' (unit-trunc b')))
-             ( pair a b)) ∙
-        (triangle-universal-property-trunc _
-          ( λ (pair a' |b'|) →
+      ( λ (a , b) →
+        ( ap
+          ( map-inv-trunc-Σ)
+          ( triangle-universal-property-trunc _
+            ( λ (a' , b') → unit-trunc (a' , unit-trunc b'))
+            ( a , b))) ∙
+        ( triangle-universal-property-trunc _
+          ( λ (a' , |b'|) →
             map-universal-property-trunc
               ( trunc k (Σ A B))
-              ( λ b' → unit-trunc (pair a' b'))
+              ( λ b' → unit-trunc (a' , b'))
               ( |b'|))
-          ( pair a (unit-trunc b)) ∙
+          ( a , unit-trunc b) ∙
         triangle-universal-property-trunc _
-          ( λ b' → unit-trunc (pair a b'))
+          ( λ b' → unit-trunc (a , b'))
           ( b)))
 
-  issec-map-inv-trunc-Σ :
+  is-section-map-inv-trunc-Σ :
     ( map-trunc-Σ ∘ map-inv-trunc-Σ) ~ id
-  issec-map-inv-trunc-Σ =
+  is-section-map-inv-trunc-Σ =
     function-dependent-universal-property-trunc
       ( λ |a|b|| →
         Id-Truncated-Type'
           ( trunc k (Σ A (λ x → type-trunc k (B x))))
           ( map-trunc-Σ (map-inv-trunc-Σ |a|b||))
           ( |a|b||))
-      ( λ (pair a |b|) →
+      ( λ (a , |b|) →
         function-dependent-universal-property-trunc
           (λ |b'| →
             Id-Truncated-Type'
               ( trunc k (Σ A (λ x → type-trunc k (B x))))
-              (map-trunc-Σ (map-inv-trunc-Σ (unit-trunc (pair a |b'|))))
-              (unit-trunc (pair a |b'|)))
+              (map-trunc-Σ (map-inv-trunc-Σ (unit-trunc (a , |b'|))))
+              (unit-trunc (a , |b'|)))
           (λ b →
             ap map-trunc-Σ
               (triangle-universal-property-trunc _
-                ( λ (pair a' |b'|) →
+                ( λ (a' , |b'|) →
                   map-universal-property-trunc
                     ( trunc k (Σ A B))
-                    ( λ b' → unit-trunc (pair a' b'))
+                    ( λ b' → unit-trunc (a' , b'))
                     ( |b'|))
-                ( pair a (unit-trunc b))) ∙
+                ( a , unit-trunc b)) ∙
             (ap map-trunc-Σ
               (triangle-universal-property-trunc
                 ( trunc k (Σ A B))
-                ( λ b' → unit-trunc (pair a b'))
+                ( λ b' → unit-trunc (a , b'))
                 ( b)) ∙
             triangle-universal-property-trunc _
-              ( λ (pair a' b') → unit-trunc (pair a' (unit-trunc b')))
-              ( pair a b)))
+              ( λ (a' , b') → unit-trunc (a' , unit-trunc b'))
+              ( a , b)))
           ( |b|))
 
   equiv-trunc-Σ :
@@ -547,8 +549,8 @@ module _
   pr2 equiv-trunc-Σ =
     is-equiv-has-inverse
       map-inv-trunc-Σ
-      issec-map-inv-trunc-Σ
-      isretr-map-inv-trunc-Σ
+      is-section-map-inv-trunc-Σ
+      is-retraction-map-inv-trunc-Σ
 
   inv-equiv-trunc-Σ :
     type-trunc k (Σ A (λ x → type-trunc k (B x))) ≃ type-trunc k (Σ A B)
@@ -556,6 +558,6 @@ module _
   pr2 inv-equiv-trunc-Σ =
     is-equiv-has-inverse
       map-trunc-Σ
-      isretr-map-inv-trunc-Σ
-      issec-map-inv-trunc-Σ
+      is-retraction-map-inv-trunc-Σ
+      is-section-map-inv-trunc-Σ
 ```

@@ -7,15 +7,16 @@ module foundation-core.sets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -27,13 +28,11 @@ A type is a set if its identity types are propositions.
 ## Definition
 
 ```agda
-is-set :
-  {i : Level} → UU i → UU i
+is-set : {l : Level} → UU l → UU l
 is-set A = (x y : A) → is-prop (x ＝ y)
 
-Set :
-  (i : Level) → UU (lsuc i)
-Set i = Σ (UU i) is-set
+Set : (l : Level) → UU (lsuc l)
+Set l = Σ (UU l) is-set
 
 module _
   {l : Level} (X : Set l)
@@ -56,8 +55,7 @@ module _
 ### A type is a set if and only if it satisfies Streicher's axiom K
 
 ```agda
-axiom-K :
-  {i : Level} → UU i → UU i
+axiom-K : {l : Level} → UU l → UU l
 axiom-K A = (x : A) (p : x ＝ x) → refl ＝ p
 
 module _
@@ -80,7 +78,7 @@ module _
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
 ```
 
-### If a reflexive binary relation maps into the identity type of A, then A is a set
+### If a reflexive binary relation maps into the identity type of `A`, then `A` is a set
 
 ```agda
 module _
@@ -92,7 +90,7 @@ module _
   abstract
     is-equiv-prop-in-id : (x y : A) → is-equiv (i x y)
     is-equiv-prop-in-id x =
-      fundamental-theorem-id-retr x (i x)
+      fundamental-theorem-id-retraction x (i x)
         ( λ y →
           pair
             ( ind-Id x (λ z p → R x z) (ρ x) y)
@@ -121,25 +119,25 @@ set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 ```agda
 abstract
   is-set-is-equiv :
-    {i j : Level} {A : UU i} (B : UU j) (f : A → B) → is-equiv f →
+    {l1 l2 : Level} {A : UU l1} (B : UU l2) (f : A → B) → is-equiv f →
     is-set B → is-set A
   is-set-is-equiv = is-trunc-is-equiv zero-𝕋
 
 abstract
   is-set-equiv :
-    {i j : Level} {A : UU i} (B : UU j) (e : A ≃ B) →
+    {l1 l2 : Level} {A : UU l1} (B : UU l2) (e : A ≃ B) →
     is-set B → is-set A
   is-set-equiv = is-trunc-equiv zero-𝕋
 
 abstract
   is-set-is-equiv' :
-    {i j : Level} (A : UU i) {B : UU j} (f : A → B) → is-equiv f →
+    {l1 l2 : Level} (A : UU l1) {B : UU l2} (f : A → B) → is-equiv f →
     is-set A → is-set B
   is-set-is-equiv' = is-trunc-is-equiv' zero-𝕋
 
 abstract
   is-set-equiv' :
-    {i j : Level} (A : UU i) {B : UU j} (e : A ≃ B) →
+    {l1 l2 : Level} (A : UU l1) {B : UU l2} (e : A ≃ B) →
     is-set A → is-set B
   is-set-equiv' = is-trunc-equiv' zero-𝕋
 ```

@@ -7,23 +7,23 @@ module foundation.equivalence-extensionality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -70,14 +70,14 @@ module _
       (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
     is-contr-total-htpy-equiv e =
       fundamental-theorem-id'
-        ( λ f → map-equiv (extensionality-equiv e f))
-        ( λ f → is-equiv-map-equiv (extensionality-equiv e f))
+        ( map-equiv ∘ extensionality-equiv e)
+        ( is-equiv-map-equiv ∘ extensionality-equiv e)
 
   refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
   refl-htpy-equiv e = refl-htpy
 
-  eq-htpy-equiv : {e e' : A ≃ B} → (htpy-equiv e e') → e ＝ e'
-  eq-htpy-equiv {e = e} {e'} = map-inv-equiv (extensionality-equiv e e')
+  eq-htpy-equiv : {e e' : A ≃ B} → htpy-equiv e e' → e ＝ e'
+  eq-htpy-equiv {e} {e'} = map-inv-equiv (extensionality-equiv e e')
 
   htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
   htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')

@@ -7,10 +7,11 @@ module graph-theory.enriched-undirected-graphs where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-components
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -18,8 +19,8 @@ open import foundation.universe-levels
 open import graph-theory.neighbors-undirected-graphs
 open import graph-theory.undirected-graphs
 
-open import group-theory.higher-group-actions
-open import group-theory.higher-groups
+open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
 ```
 
 </details>
@@ -117,29 +118,31 @@ module _
 
   map-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
-    B (shape-vertex-Enriched-Undirected-Graph v) → neighbor-Enriched-Undirected-Graph v
+    B (shape-vertex-Enriched-Undirected-Graph v) →
+    neighbor-Enriched-Undirected-Graph v
   map-equiv-neighbor-Enriched-Undirected-Graph v =
     map-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
   map-inv-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
-    neighbor-Enriched-Undirected-Graph v → B (shape-vertex-Enriched-Undirected-Graph v)
+    neighbor-Enriched-Undirected-Graph v →
+    B (shape-vertex-Enriched-Undirected-Graph v)
   map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
     map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
-  issec-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
+  is-section-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
     ( map-equiv-neighbor-Enriched-Undirected-Graph v ∘
       map-inv-equiv-neighbor-Enriched-Undirected-Graph v) ~ id
-  issec-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
-    issec-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
+  is-section-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
+    is-section-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
-  isretr-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
+  is-retraction-map-inv-equiv-neighbor-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
     ( map-inv-equiv-neighbor-Enriched-Undirected-Graph v ∘
       map-equiv-neighbor-Enriched-Undirected-Graph v) ~ id
-  isretr-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
-    isretr-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
+  is-retraction-map-inv-equiv-neighbor-Enriched-Undirected-Graph v =
+    is-retraction-map-inv-equiv (equiv-neighbor-Enriched-Undirected-Graph v)
 
   action-∞-group-vertex-Enriched-Undirected-Graph :
     (v : vertex-Enriched-Undirected-Graph) →
@@ -182,7 +185,7 @@ module _
             ( action-∞-group-vertex-Enriched-Undirected-Graph v)
             ( g))
           ( inv
-            ( isretr-map-inv-equiv-neighbor-Enriched-Undirected-Graph v
+            ( is-retraction-map-inv-equiv-neighbor-Enriched-Undirected-Graph v
               ( mul-action-∞-Group
                 ( ∞-group-vertex-Enriched-Undirected-Graph v)
                 ( action-∞-group-vertex-Enriched-Undirected-Graph v) h

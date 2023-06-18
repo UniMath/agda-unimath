@@ -12,11 +12,11 @@ open import elementary-number-theory.natural-numbers
 open import foundation.connected-maps
 open import foundation.surjective-maps
 open import foundation.truncation-levels
+open import foundation.universe-levels
 
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -26,14 +26,14 @@ open import foundation-core.universe-levels
 A type `X` is said to be **set-projective** if for every surjective map
 `f : A → B` into a set `B` the postcomposition function
 
-```md
+```text
   (X → A) → (X → B)
 ```
 
 is surjective. This is equivalent to the condition that for every equivalence
 relation `R` on a type `A` the natural map
 
-```md
+```text
   (X → A)/~ → (X → A/R)
 ```
 
@@ -43,8 +43,8 @@ holds.
 
 The notion of set-projectiveness generalizes to `n`-projectiveness, for `n : ℕ`.
 A type `X` is said to be `k`-projective if the postcomposition function
-`(X → A) → (X → B)` is surjective for every `(k-1)`-connected map `f : A → B`
-into a `k`-truncated type `B`.
+`(X → A) → (X → B)` is surjective for every `k-1`-connected map `f : A → B` into
+a `k`-truncated type `B`.
 
 ## Definitions
 

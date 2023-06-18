@@ -7,14 +7,16 @@ module foundation-core.fibers-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -68,21 +70,21 @@ module _
     ((ap f α) ∙ (pr2 t)) ＝ pr2 s → s ＝ t
   eq-Eq-fib α β = eq-Eq-fib-uncurry (α , β)
 
-  issec-eq-Eq-fib :
+  is-section-eq-Eq-fib :
     {s t : fib f b} → (Eq-eq-fib {s} {t} ∘ eq-Eq-fib-uncurry {s} {t}) ~ id
-  issec-eq-Eq-fib (refl , refl) = refl
+  is-section-eq-Eq-fib (refl , refl) = refl
 
-  isretr-eq-Eq-fib :
+  is-retraction-eq-Eq-fib :
     {s t : fib f b} → (eq-Eq-fib-uncurry {s} {t} ∘ Eq-eq-fib {s} {t}) ~ id
-  isretr-eq-Eq-fib refl = refl
+  is-retraction-eq-Eq-fib refl = refl
 
   abstract
     is-equiv-Eq-eq-fib : {s t : fib f b} → is-equiv (Eq-eq-fib {s} {t})
     is-equiv-Eq-eq-fib =
       is-equiv-has-inverse
         eq-Eq-fib-uncurry
-        issec-eq-Eq-fib
-        isretr-eq-Eq-fib
+        is-section-eq-Eq-fib
+        is-retraction-eq-Eq-fib
 
   equiv-Eq-eq-fib : {s t : fib f b} → (s ＝ t) ≃ Eq-fib s t
   pr1 equiv-Eq-eq-fib = Eq-eq-fib
@@ -94,8 +96,8 @@ module _
     is-equiv-eq-Eq-fib =
       is-equiv-has-inverse
         Eq-eq-fib
-        isretr-eq-Eq-fib
-        issec-eq-Eq-fib
+        is-retraction-eq-Eq-fib
+        is-section-eq-Eq-fib
 
   equiv-eq-Eq-fib : {s t : fib f b} → Eq-fib s t ≃ (s ＝ t)
   pr1 equiv-eq-Eq-fib = eq-Eq-fib-uncurry
@@ -128,21 +130,21 @@ module _
     (pr2 t) ＝ ((pr2 s) ∙ (ap f α)) → s ＝ t
   eq-Eq-fib' α β = eq-Eq-fib-uncurry' (α , β)
 
-  issec-eq-Eq-fib' :
+  is-section-eq-Eq-fib' :
     {s t : fib' f b} → (Eq-eq-fib' {s} {t} ∘ eq-Eq-fib-uncurry' {s} {t}) ~ id
-  issec-eq-Eq-fib' {x , refl} (refl , refl) = refl
+  is-section-eq-Eq-fib' {x , refl} (refl , refl) = refl
 
-  isretr-eq-Eq-fib' :
+  is-retraction-eq-Eq-fib' :
     {s t : fib' f b} → (eq-Eq-fib-uncurry' {s} {t} ∘ Eq-eq-fib' {s} {t}) ~ id
-  isretr-eq-Eq-fib' {x , refl} refl = refl
+  is-retraction-eq-Eq-fib' {x , refl} refl = refl
 
   abstract
     is-equiv-Eq-eq-fib' : {s t : fib' f b} → is-equiv (Eq-eq-fib' {s} {t})
     is-equiv-Eq-eq-fib' =
       is-equiv-has-inverse
         eq-Eq-fib-uncurry'
-        issec-eq-Eq-fib'
-        isretr-eq-Eq-fib'
+        is-section-eq-Eq-fib'
+        is-retraction-eq-Eq-fib'
 
   equiv-Eq-eq-fib' : {s t : fib' f b} → (s ＝ t) ≃ Eq-fib' s t
   pr1 equiv-Eq-eq-fib' = Eq-eq-fib'
@@ -154,8 +156,8 @@ module _
     is-equiv-eq-Eq-fib' =
       is-equiv-has-inverse
         Eq-eq-fib'
-        isretr-eq-Eq-fib'
-        issec-eq-Eq-fib'
+        is-retraction-eq-Eq-fib'
+        is-section-eq-Eq-fib'
 
   equiv-eq-Eq-fib' : {s t : fib' f b} → Eq-fib' s t ≃ (s ＝ t)
   pr1 equiv-eq-Eq-fib' = eq-Eq-fib-uncurry'
@@ -177,18 +179,18 @@ module _
   pr1 (map-inv-equiv-fib (x , refl)) = x
   pr2 (map-inv-equiv-fib (x , refl)) = refl
 
-  issec-map-inv-equiv-fib : (map-equiv-fib ∘ map-inv-equiv-fib) ~ id
-  issec-map-inv-equiv-fib (x , refl) = refl
+  is-section-map-inv-equiv-fib : (map-equiv-fib ∘ map-inv-equiv-fib) ~ id
+  is-section-map-inv-equiv-fib (x , refl) = refl
 
-  isretr-map-inv-equiv-fib : (map-inv-equiv-fib ∘ map-equiv-fib) ~ id
-  isretr-map-inv-equiv-fib (x , refl) = refl
+  is-retraction-map-inv-equiv-fib : (map-inv-equiv-fib ∘ map-equiv-fib) ~ id
+  is-retraction-map-inv-equiv-fib (x , refl) = refl
 
   is-equiv-map-equiv-fib : is-equiv map-equiv-fib
   is-equiv-map-equiv-fib =
     is-equiv-has-inverse
       map-inv-equiv-fib
-      issec-map-inv-equiv-fib
-      isretr-map-inv-equiv-fib
+      is-section-map-inv-equiv-fib
+      is-retraction-map-inv-equiv-fib
 
   equiv-fib : fib f y ≃ fib' f y
   pr1 equiv-fib = map-equiv-fib
@@ -210,19 +212,19 @@ module _
   pr2 (pr1 (map-inv-fib-pr1 b)) = b
   pr2 (map-inv-fib-pr1 b) = refl
 
-  issec-map-inv-fib-pr1 : (map-inv-fib-pr1 ∘ map-fib-pr1) ~ id
-  issec-map-inv-fib-pr1 ((.a , y) , refl) = refl
+  is-section-map-inv-fib-pr1 : (map-inv-fib-pr1 ∘ map-fib-pr1) ~ id
+  is-section-map-inv-fib-pr1 ((.a , y) , refl) = refl
 
-  isretr-map-inv-fib-pr1 : (map-fib-pr1 ∘ map-inv-fib-pr1) ~ id
-  isretr-map-inv-fib-pr1 b = refl
+  is-retraction-map-inv-fib-pr1 : (map-fib-pr1 ∘ map-inv-fib-pr1) ~ id
+  is-retraction-map-inv-fib-pr1 b = refl
 
   abstract
     is-equiv-map-fib-pr1 : is-equiv map-fib-pr1
     is-equiv-map-fib-pr1 =
       is-equiv-has-inverse
         map-inv-fib-pr1
-        isretr-map-inv-fib-pr1
-        issec-map-inv-fib-pr1
+        is-retraction-map-inv-fib-pr1
+        is-section-map-inv-fib-pr1
 
   equiv-fib-pr1 : fib (pr1 {B = B}) a ≃ B a
   pr1 equiv-fib-pr1 = map-fib-pr1
@@ -233,8 +235,8 @@ module _
     is-equiv-map-inv-fib-pr1 =
       is-equiv-has-inverse
         map-fib-pr1
-        issec-map-inv-fib-pr1
-        isretr-map-inv-fib-pr1
+        is-section-map-inv-fib-pr1
+        is-retraction-map-inv-fib-pr1
 
   inv-equiv-fib-pr1 : B a ≃ fib (pr1 {B = B}) a
   pr1 inv-equiv-fib-pr1 = map-inv-fib-pr1
@@ -259,28 +261,28 @@ module _
   pr1 (pr2 (map-inv-equiv-total-fib x)) = x
   pr2 (pr2 (map-inv-equiv-total-fib x)) = refl
 
-  isretr-map-inv-equiv-total-fib :
+  is-retraction-map-inv-equiv-total-fib :
     (map-inv-equiv-total-fib ∘ map-equiv-total-fib) ~ id
-  isretr-map-inv-equiv-total-fib (.(f x) , x , refl) = refl
+  is-retraction-map-inv-equiv-total-fib (.(f x) , x , refl) = refl
 
-  issec-map-inv-equiv-total-fib :
+  is-section-map-inv-equiv-total-fib :
     (map-equiv-total-fib ∘ map-inv-equiv-total-fib) ~ id
-  issec-map-inv-equiv-total-fib x = refl
+  is-section-map-inv-equiv-total-fib x = refl
 
   abstract
     is-equiv-map-equiv-total-fib : is-equiv map-equiv-total-fib
     is-equiv-map-equiv-total-fib =
       is-equiv-has-inverse
         map-inv-equiv-total-fib
-        issec-map-inv-equiv-total-fib
-        isretr-map-inv-equiv-total-fib
+        is-section-map-inv-equiv-total-fib
+        is-retraction-map-inv-equiv-total-fib
 
     is-equiv-map-inv-equiv-total-fib : is-equiv map-inv-equiv-total-fib
     is-equiv-map-inv-equiv-total-fib =
       is-equiv-has-inverse
         map-equiv-total-fib
-        isretr-map-inv-equiv-total-fib
-        issec-map-inv-equiv-total-fib
+        is-retraction-map-inv-equiv-total-fib
+        is-section-map-inv-equiv-total-fib
 
   equiv-total-fib : Σ B (fib f) ≃ A
   pr1 equiv-total-fib = map-equiv-total-fib
@@ -312,14 +314,14 @@ module _
   pr2 (inv-map-compute-fib-comp t) =
     ap g (pr2 (pr2 t)) ∙ pr2 (pr1 t)
 
-  issec-inv-map-compute-fib-comp :
+  is-section-inv-map-compute-fib-comp :
     (map-compute-fib-comp ∘ inv-map-compute-fib-comp) ~ id
-  issec-inv-map-compute-fib-comp
+  is-section-inv-map-compute-fib-comp
     ((.(h a) , refl) , (a , refl)) = refl
 
-  isretr-inv-map-compute-fib-comp :
+  is-retraction-inv-map-compute-fib-comp :
     (inv-map-compute-fib-comp ∘ map-compute-fib-comp) ~ id
-  isretr-inv-map-compute-fib-comp (a , refl) = refl
+  is-retraction-inv-map-compute-fib-comp (a , refl) = refl
 
   abstract
     is-equiv-map-compute-fib-comp :
@@ -327,8 +329,8 @@ module _
     is-equiv-map-compute-fib-comp =
       is-equiv-has-inverse
         ( inv-map-compute-fib-comp)
-        ( issec-inv-map-compute-fib-comp)
-        ( isretr-inv-map-compute-fib-comp)
+        ( is-section-inv-map-compute-fib-comp)
+        ( is-retraction-inv-map-compute-fib-comp)
 
   equiv-compute-fib-comp :
     fib (g ∘ h) x ≃ Σ (fib g x) (λ t → fib h (pr1 t))
@@ -341,8 +343,8 @@ module _
     is-equiv-inv-map-compute-fib-comp =
         is-equiv-has-inverse
           ( map-compute-fib-comp)
-          ( isretr-inv-map-compute-fib-comp)
-          ( issec-inv-map-compute-fib-comp)
+          ( is-retraction-inv-map-compute-fib-comp)
+          ( is-section-inv-map-compute-fib-comp)
 
   inv-equiv-compute-fib-comp :
     Σ (fib g x) (λ t → fib h (pr1 t)) ≃ fib (g ∘ h) x
@@ -350,7 +352,7 @@ module _
   pr2 inv-equiv-compute-fib-comp = is-equiv-inv-map-compute-fib-comp
 ```
 
-### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map.
+### When a product is taken over all fibers of a map, then we can equivalently take the product over the domain of that map
 
 ```agda
 module _
@@ -366,26 +368,26 @@ module _
     ((x : A) → C (f x) (x , refl)) → ((y : B) (z : fib f y) → C y z)
   inv-map-reduce-Π-fib h .(f x) (x , refl) = h x
 
-  issec-inv-map-reduce-Π-fib :
+  is-section-inv-map-reduce-Π-fib :
     (map-reduce-Π-fib ∘ inv-map-reduce-Π-fib) ~ id
-  issec-inv-map-reduce-Π-fib h = refl
+  is-section-inv-map-reduce-Π-fib h = refl
 
-  isretr-inv-map-reduce-Π-fib' :
+  is-retraction-inv-map-reduce-Π-fib' :
     (h : (y : B) (z : fib f y) → C y z) (y : B) →
     (inv-map-reduce-Π-fib (map-reduce-Π-fib h) y) ~ (h y)
-  isretr-inv-map-reduce-Π-fib' h .(f z) (z , refl) = refl
+  is-retraction-inv-map-reduce-Π-fib' h .(f z) (z , refl) = refl
 
-  isretr-inv-map-reduce-Π-fib :
+  is-retraction-inv-map-reduce-Π-fib :
     (inv-map-reduce-Π-fib ∘ map-reduce-Π-fib) ~ id
-  isretr-inv-map-reduce-Π-fib h =
-    eq-htpy (eq-htpy ∘ isretr-inv-map-reduce-Π-fib' h)
+  is-retraction-inv-map-reduce-Π-fib h =
+    eq-htpy (eq-htpy ∘ is-retraction-inv-map-reduce-Π-fib' h)
 
   is-equiv-map-reduce-Π-fib : is-equiv map-reduce-Π-fib
   is-equiv-map-reduce-Π-fib =
     is-equiv-has-inverse
       ( inv-map-reduce-Π-fib)
-      ( issec-inv-map-reduce-Π-fib)
-      ( isretr-inv-map-reduce-Π-fib)
+      ( is-section-inv-map-reduce-Π-fib)
+      ( is-retraction-inv-map-reduce-Π-fib)
 
   reduce-Π-fib' :
     ((y : B) (z : fib f y) → C y z) ≃ ((x : A) → C (f x) (x , refl))

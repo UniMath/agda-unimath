@@ -7,12 +7,13 @@ module foundation-core.logical-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -101,4 +102,44 @@ module _
 iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
 pr1 (iff-equiv e) = map-equiv e
 pr2 (iff-equiv e) = map-inv-equiv e
+```
+
+## Logical equivalences between dependent function types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  iff-Π : ((i : I) → A i ↔ B i) → ((i : I) → A i) ↔ ((i : I) → B i)
+  pr1 (iff-Π e) a i = forward-implication (e i) (a i)
+  pr2 (iff-Π e) b i = backward-implication (e i) (b i)
+```
+
+## Reasoning with logical equivalences
+
+Logical equivalences can be constructed by equational reasoning in the following
+way:
+
+```text
+logical-equivalence-reasoning
+  X ↔ Y by equiv-1
+    ↔ Z by equiv-2
+    ↔ V by equiv-3
+```
+
+```agda
+infixl 1 logical-equivalence-reasoning_
+infixl 0 step-logical-equivalence-reasoning
+
+logical-equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ↔ X
+logical-equivalence-reasoning X = pair id id
+
+step-logical-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ↔ Y) → (Z : UU l3) → (Y ↔ Z) → (X ↔ Z)
+step-logical-equivalence-reasoning e Z f = f ∘iff e
+
+syntax step-logical-equivalence-reasoning e Z f = e ↔ Z by f
 ```

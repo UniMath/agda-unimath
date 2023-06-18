@@ -7,6 +7,8 @@ module orthogonal-factorization-systems.extensions-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -14,7 +16,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -24,6 +26,7 @@ open import foundation.monomorphisms
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -40,7 +43,7 @@ An _extension_ of a map `f : (x : A) → P x` along a map `i : A → B` is a map
 `g : (y : B) → Q y` such that `Q` restricts along `i` to `P` and `g` restricts
 along `i` to `f`.
 
-```md
+```text
   A
   |  \
   i    f
@@ -92,7 +95,7 @@ module _
 
 ### Vertical composition of extensions of maps
 
-```md
+```text
   A
   |  \
   i    f
@@ -113,14 +116,14 @@ module _
   {f : (x : A) → P (j (i x))} {g : (x : B) → P (j x)} {h : (x : C) → P x}
   where
 
-  vertical-comp-is-extension :
+  is-extension-comp-vertical :
     is-extension j g h → is-extension i f g → is-extension (j ∘ i) f h
-  vertical-comp-is-extension H G x = G x ∙ H (i x)
+  is-extension-comp-vertical H G x = G x ∙ H (i x)
 ```
 
 ### Horizontal composition of extensions of maps
 
-```md
+```text
            A
         /  |  \
       f    g    h
@@ -160,7 +163,7 @@ module _
 
 ### Left whiskering of extensions of maps
 
-```md
+```text
   A
   |  \
   i    f
@@ -183,7 +186,7 @@ module _
 
 ### Right whiskering of extensions of maps
 
-```md
+```text
   X - h -> A
            |  \
            i    f

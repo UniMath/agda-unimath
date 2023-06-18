@@ -7,23 +7,23 @@ module foundation.symmetric-identity-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.unit-type
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -104,13 +104,13 @@ module _
     pr2 (map-inv-compute-symmetric-Id p) (inl (inr star)) = refl
     pr2 (map-inv-compute-symmetric-Id p) (inr star) = p
 
-    issec-map-inv-compute-symmetric-Id :
+    is-section-map-inv-compute-symmetric-Id :
       ( map-compute-symmetric-Id ∘ map-inv-compute-symmetric-Id) ~ id
-    issec-map-inv-compute-symmetric-Id refl = refl
+    is-section-map-inv-compute-symmetric-Id refl = refl
 
-    isretr-map-inv-compute-symmetric-Id :
+    is-retraction-map-inv-compute-symmetric-Id :
       ( map-inv-compute-symmetric-Id ∘ map-compute-symmetric-Id) ~ id
-    isretr-map-inv-compute-symmetric-Id (x , f) =
+    is-retraction-map-inv-compute-symmetric-Id (x , f) =
       eq-Eq-symmetric-Id
         ( standard-unordered-pair a b)
         ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
@@ -124,8 +124,8 @@ module _
     is-equiv-map-compute-symmetric-Id =
       is-equiv-has-inverse
         ( map-inv-compute-symmetric-Id)
-        ( issec-map-inv-compute-symmetric-Id)
-        ( isretr-map-inv-compute-symmetric-Id)
+        ( is-section-map-inv-compute-symmetric-Id)
+        ( is-retraction-map-inv-compute-symmetric-Id)
 
     compute-symmetric-Id :
       symmetric-Id (standard-unordered-pair a b) ≃ (a ＝ b)

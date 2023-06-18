@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.counting-decidable-subtypes where
+
+open import foundation.decidable-subtypes public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-subtypes public
-
 open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
@@ -19,7 +19,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
@@ -52,7 +52,7 @@ count-decidable-subtype' P zero-ℕ e =
   count-is-empty
     ( is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl ∘ pr1)
 count-decidable-subtype' P (succ-ℕ k) e
-  with is-decidable-subtype-decidable-subtype P (map-equiv e (inr star))
+  with is-decidable-decidable-subtype P (map-equiv e (inr star))
 ... | inl p =
   count-equiv
     ( equiv-Σ (is-in-decidable-subtype P) e (λ x → id-equiv))

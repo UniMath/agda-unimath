@@ -8,13 +8,12 @@ module univalent-combinatorics.classical-finite-types where
 
 ```agda
 open import elementary-number-theory.congruence-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -53,9 +52,10 @@ Eq-classical-Fin k x y = Id (nat-classical-Fin k x) (nat-classical-Fin k y)
 
 eq-succ-classical-Fin :
   (k : ℕ) (x y : classical-Fin k) → Id {A = classical-Fin k} x y →
-  Id {A = classical-Fin (succ-ℕ k)}
-     ( pair (succ-ℕ (pr1 x)) (pr2 x))
-     ( pair (succ-ℕ (pr1 y)) (pr2 y))
+  Id
+    { A = classical-Fin (succ-ℕ k)}
+    ( pair (succ-ℕ (pr1 x)) (pr2 x))
+    ( pair (succ-ℕ (pr1 y)) (pr2 y))
 eq-succ-classical-Fin k x .x refl = refl
 
 eq-Eq-classical-Fin :
@@ -85,15 +85,15 @@ pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin k x
 #### We show that these maps are mutual inverses
 
 ```agda
-issec-classical-standard-Fin :
+is-section-classical-standard-Fin :
   {k : ℕ} (x : Fin k) →
   Id (standard-classical-Fin k (classical-standard-Fin k x)) x
-issec-classical-standard-Fin {succ-ℕ k} x = issec-nat-Fin k x
+is-section-classical-standard-Fin {succ-ℕ k} x = is-section-nat-Fin k x
 
-isretr-classical-standard-Fin :
+is-retraction-classical-standard-Fin :
   {k : ℕ} (x : classical-Fin k) →
   Id (classical-standard-Fin k (standard-classical-Fin k x)) x
-isretr-classical-standard-Fin {succ-ℕ k} (pair x p) =
+is-retraction-classical-standard-Fin {succ-ℕ k} (pair x p) =
   eq-Eq-classical-Fin (succ-ℕ k)
     ( classical-standard-Fin
       ( succ-ℕ k)

@@ -9,7 +9,7 @@ module foundation.shifting-sequences where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>
@@ -19,7 +19,7 @@ open import foundation-core.universe-levels
 Given a sequence `f : ℕ → A` and an element `a : A` we define
 `shift-ℕ a f : ℕ → A` by
 
-```md
+```text
   shift-ℕ a f zero-ℕ := a
   shift-ℕ a f (succ-ℕ n) := f n
 ```

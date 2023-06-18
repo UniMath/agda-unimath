@@ -10,6 +10,7 @@ module univalent-combinatorics.pi-finite-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -17,7 +18,6 @@ open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equality-cartesian-product-types
@@ -27,7 +27,7 @@ open import foundation.equivalences
 open import foundation.fiber-inclusions
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -46,6 +46,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types
@@ -60,7 +61,7 @@ open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.dependent-function-types
-open import univalent-combinatorics.dependent-sum-finite-types
+open import univalent-combinatorics.dependent-pair-types
 open import univalent-combinatorics.distributivity-of-set-truncation-over-finite-products
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
@@ -335,7 +336,7 @@ pr2 (coprod-π-Finite k A B) =
 
 ```agda
 Maybe-π-Finite :
-  {l : Level} (k : ℕ) → π-Finite  l k → π-Finite l k
+  {l : Level} (k : ℕ) → π-Finite l k → π-Finite l k
 Maybe-π-Finite k A =
   coprod-π-Finite k A (unit-π-Finite k)
 
@@ -469,11 +470,13 @@ is-π-finite-is-truncated-π-finite zero-ℕ H =
 pr1 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) = pr1 H
 pr2 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
   is-π-finite-is-truncated-π-finite k (pr2 H x y)
+```
 
--- Proposition 1.5
+### Proposition 1.5
 
--- Dependent product of locally finite types
+#### The dependent product of locally finite types
 
+```agda
 is-locally-finite-prod :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-locally-finite A → is-locally-finite B → is-locally-finite (A × B)
@@ -502,7 +505,7 @@ is-locally-finite-Π-count :
   ((x : A) → is-locally-finite (B x)) → is-locally-finite ((x : A) → B x)
 is-locally-finite-Π-count {l1} {l2} {A} {B} (pair k e) g =
   is-locally-finite-equiv
-    ( equiv-precomp-Π e B )
+    ( equiv-precomp-Π e B)
     ( is-locally-finite-Π-Fin k (λ x → g (map-equiv e x)))
 
 is-locally-finite-Π :
@@ -512,9 +515,11 @@ is-locally-finite-Π {l1} {l2} {A} {B} f g =
   apply-universal-property-trunc-Prop f
     ( is-locally-finite-Prop ((x : A) → B x))
     ( λ e → is-locally-finite-Π-count e g)
+```
 
--- Finite products of π-finite types
+#### Finite products of π-finite types
 
+```agda
 is-π-finite-Π :
   {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
   is-finite A → ((a : A) → is-π-finite k (B a)) →
@@ -538,9 +543,11 @@ pr2 (π-Finite-Π k A B) =
   is-π-finite-Π k
     ( is-finite-type-𝔽 A)
     ( λ x → is-π-finite-type-π-Finite k (B x))
+```
 
--- Proposition 1.6
+### Proposition 1.6
 
+```agda
 is-locally-finite-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-locally-finite A → ((x : A) → is-locally-finite (B x)) →
@@ -549,9 +556,11 @@ is-locally-finite-Σ {B = B} H K (pair x y) (pair x' y') =
   is-finite-equiv'
     ( equiv-pair-eq-Σ (pair x y) (pair x' y'))
     ( is-finite-Σ (H x x') (λ p → K x' (tr B p y) y'))
+```
 
--- Proposition 1.7
+### Proposition 1.7
 
+```agda
 has-finite-connected-components-Σ-is-0-connected :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-0-connected A → is-π-finite 1 A →
@@ -657,20 +666,20 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                 ( mere-eq-Prop {A = Σ A B} (pair a y) (pair a y'))
             f t = apply-universal-property-trunc-Prop t
                     ( mere-eq-Prop (pair a y) (pair a y'))
-                     λ { (pair u v) →
-                         apply-dependent-universal-property-trunc-Set'
-                           ( λ u' →
-                             hom-Set
-                               ( set-Prop (P u'))
-                               ( set-Prop
-                                 ( mere-eq-Prop (pair a y) (pair a y'))))
-                           ( λ ω v' →
-                             apply-universal-property-trunc-Prop
-                               ( map-equiv (compute-P ω) v')
-                               ( mere-eq-Prop (pair a y) (pair a y'))
-                               ( λ p → unit-trunc-Prop (eq-pair-Σ ω p)))
-                           ( u)
-                           ( v)}
+                      λ { (pair u v) →
+                          apply-dependent-universal-property-trunc-Set'
+                            ( λ u' →
+                              hom-Set
+                                ( set-Prop (P u'))
+                                ( set-Prop
+                                  ( mere-eq-Prop (pair a y) (pair a y'))))
+                            ( λ ω v' →
+                              apply-universal-property-trunc-Prop
+                                ( map-equiv (compute-P ω) v')
+                                ( mere-eq-Prop (pair a y) (pair a y'))
+                                ( λ p → unit-trunc-Prop (eq-pair-Σ ω p)))
+                            ( u)
+                            ( v)}
             e : mere-eq {A = Σ A B} (pair a y) (pair a y') ≃
                 type-trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P))
             e = equiv-iff
@@ -688,9 +697,11 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                                   ( unit-trunc-Prop r)))}) ∘
                         ( pair-eq-Σ)))
                   ( f)
+```
 
--- Proposition 1.8
+### Proposition 1.8
 
+```agda
 module _
   {l1 l2 l3 : Level} {A1 : UU l1} {A2 : UU l2} {B : UU l3}
   (f : A1 + A2 → B) (e : (A1 + A2) ≃ type-trunc-Set B)
@@ -731,7 +742,7 @@ module _
   is-surjective-map-is-coprod-codomain b =
     apply-universal-property-trunc-Prop
       ( apply-effectiveness-unit-trunc-Set
-        ( inv (issec-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
+        ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
       ( trunc-Prop (fib map-is-coprod-codomain b))
       ( λ p →
         unit-trunc-Prop
@@ -859,13 +870,13 @@ has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
           ( right-distributive-Σ-coprod
             ( im (f ∘ inl))
             ( im (f ∘ inr))
-            ( ind-coprod (λ x → UU _) (B ∘ pr1) (B ∘ pr1))))
+            ( ind-coprod (λ x → UU l2) (B ∘ pr1) (B ∘ pr1))))
     i : Fin k → type-trunc-Set (im (f ∘ inl))
     i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
     is-surjective-i : is-surjective i
     is-surjective-i =
       is-surjective-comp
-        ( is-surjective-unit-trunc-Set _)
+        ( is-surjective-unit-trunc-Set (im (f ∘ inl)))
         ( is-surjective-map-unit-im (f ∘ inl))
     is-emb-i : is-emb i
     is-emb-i =

@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 open import group-theory.concrete-groups
 open import group-theory.homomorphisms-groups
-open import group-theory.homomorphisms-higher-groups
+
+open import higher-group-theory.homomorphisms-higher-groups
 ```
 
 </details>
@@ -33,7 +34,7 @@ module _
 
   is-set-hom-Concrete-Group : is-set hom-Concrete-Group
   is-set-hom-Concrete-Group =
-    is-trunc-map-ev-pt-is-connected
+    is-trunc-map-ev-point-is-connected
       ( zero-𝕋)
       ( shape-Concrete-Group G)
       ( is-0-connected-classifying-type-Concrete-Group G)
@@ -57,8 +58,9 @@ module _
 
   preserves-point-classifying-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) →
-    Id ( classifying-map-hom-Concrete-Group f (shape-Concrete-Group G))
-       ( shape-Concrete-Group H)
+    Id
+      ( classifying-map-hom-Concrete-Group f (shape-Concrete-Group G))
+      ( shape-Concrete-Group H)
   preserves-point-classifying-map-hom-Concrete-Group =
     preserves-point-classifying-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -73,8 +75,9 @@ module _
 
   preserves-unit-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) →
-    Id ( map-hom-Concrete-Group f (unit-Concrete-Group G))
-       ( unit-Concrete-Group H)
+    Id
+      ( map-hom-Concrete-Group f (unit-Concrete-Group G))
+      ( unit-Concrete-Group H)
   preserves-unit-map-hom-Concrete-Group =
     preserves-unit-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -82,10 +85,11 @@ module _
 
   preserves-mul-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) (x y : type-Concrete-Group G) →
-    Id ( map-hom-Concrete-Group f (mul-Concrete-Group G x y))
-       ( mul-Concrete-Group H
-         ( map-hom-Concrete-Group f x)
-         ( map-hom-Concrete-Group f y))
+    Id
+      ( map-hom-Concrete-Group f (mul-Concrete-Group G x y))
+      ( mul-Concrete-Group H
+        ( map-hom-Concrete-Group f x)
+        ( map-hom-Concrete-Group f y))
   preserves-mul-map-hom-Concrete-Group =
     preserves-mul-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -93,8 +97,9 @@ module _
 
   preserves-inv-map-hom-Concrete-Group :
     (f : hom-Concrete-Group) (x : type-Concrete-Group G) →
-    Id ( map-hom-Concrete-Group f (inv-Concrete-Group G x))
-       ( inv-Concrete-Group H (map-hom-Concrete-Group f x))
+    Id
+      ( map-hom-Concrete-Group f (inv-Concrete-Group G x))
+      ( inv-Concrete-Group H (map-hom-Concrete-Group f x))
   preserves-inv-map-hom-Concrete-Group =
     preserves-inv-map-hom-∞-Group
       ( ∞-group-Concrete-Group G)
@@ -135,14 +140,17 @@ module _
 
   eq-htpy-hom-Concrete-Group :
     (g : hom-Concrete-Group G H) → (htpy-hom-Concrete-Group g) → Id f g
-  eq-htpy-hom-Concrete-Group g = map-inv-equiv (extensionality-hom-Concrete-Group g)
+  eq-htpy-hom-Concrete-Group g =
+    map-inv-equiv (extensionality-hom-Concrete-Group g)
 ```
 
 ```agda
-id-hom-Concrete-Group : {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
+id-hom-Concrete-Group :
+  {l : Level} (G : Concrete-Group l) → hom-Concrete-Group G G
 id-hom-Concrete-Group G = id-hom-∞-Group ( ∞-group-Concrete-Group G)
 
-comp-hom-Concrete-Group : {l1 l2 l3 : Level}
+comp-hom-Concrete-Group :
+  {l1 l2 l3 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2) (K : Concrete-Group l3) →
   hom-Concrete-Group H K → hom-Concrete-Group G H → hom-Concrete-Group G K
 comp-hom-Concrete-Group G H K =
@@ -151,7 +159,8 @@ comp-hom-Concrete-Group G H K =
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)
 
-assoc-comp-hom-Concrete-Group : {l1 l2 l3 l4 : Level}
+associative-comp-hom-Concrete-Group :
+  {l1 l2 l3 l4 : Level}
   (G : Concrete-Group l1) (H : Concrete-Group l2)
   (K : Concrete-Group l3) (L : Concrete-Group l4)
   (h : hom-Concrete-Group K L) (g : hom-Concrete-Group H K)
@@ -159,8 +168,8 @@ assoc-comp-hom-Concrete-Group : {l1 l2 l3 l4 : Level}
   htpy-hom-Concrete-Group G L
     ( comp-hom-Concrete-Group G H L (comp-hom-Concrete-Group H K L h g) f)
     ( comp-hom-Concrete-Group G K L h (comp-hom-Concrete-Group G H K g f))
-assoc-comp-hom-Concrete-Group G H K L =
-  assoc-comp-hom-∞-Group
+associative-comp-hom-Concrete-Group G H K L =
+  associative-comp-hom-∞-Group
     ( ∞-group-Concrete-Group G)
     ( ∞-group-Concrete-Group H)
     ( ∞-group-Concrete-Group K)

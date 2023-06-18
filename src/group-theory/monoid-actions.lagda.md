@@ -7,6 +7,7 @@ module group-theory.monoid-actions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
 open import foundation.function-extensionality
@@ -30,7 +31,7 @@ A monoid `M` can act on a type `A` by a monoid homomorphism `hom M (A → A)`.
 
 ```agda
 Monoid-Action : {l1 : Level} (l : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l)
-Monoid-Action l M = Σ (Set l) (λ X → hom-Monoid M (endo-Monoid X))
+Monoid-Action l M = Σ (Set l) (λ X → type-hom-Monoid M (endo-Monoid X))
 
 module _
   {l1 l2 : Level} (M : Monoid l1) (X : Monoid-Action l2 M)
@@ -61,8 +62,9 @@ module _
 
   associative-mul-Monoid-Action :
     (x y : type-Monoid M) (z : type-Monoid-Action) →
-    Id ( mul-Monoid-Action (mul-Monoid M x y) z)
-       ( mul-Monoid-Action x (mul-Monoid-Action y z))
+    Id
+      ( mul-Monoid-Action (mul-Monoid M x y) z)
+      ( mul-Monoid-Action x (mul-Monoid-Action y z))
   associative-mul-Monoid-Action x y = htpy-eq (pr2 (pr1 (pr2 X)) x y)
 
   unit-law-mul-Monoid-Action :

@@ -7,19 +7,19 @@ module foundation.pairs-of-distinct-elements where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.negation
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -40,14 +40,14 @@ module _
   {l : Level} {A : UU l} (p : pair-of-distinct-elements A)
   where
 
-  fst-pair-of-distinct-elements : A
-  fst-pair-of-distinct-elements = pr1 p
+  first-pair-of-distinct-elements : A
+  first-pair-of-distinct-elements = pr1 p
 
-  snd-pair-of-distinct-elements : A
-  snd-pair-of-distinct-elements = pr1 (pr2 p)
+  second-pair-of-distinct-elements : A
+  second-pair-of-distinct-elements = pr1 (pr2 p)
 
   distinction-pair-of-distinct-elements :
-    ¬ (fst-pair-of-distinct-elements ＝ snd-pair-of-distinct-elements)
+    ¬ (first-pair-of-distinct-elements ＝ second-pair-of-distinct-elements)
   distinction-pair-of-distinct-elements = pr2 (pr2 p)
 ```
 
@@ -63,8 +63,8 @@ module _
   Eq-pair-of-distinct-elements :
     (p q : pair-of-distinct-elements A) → UU l
   Eq-pair-of-distinct-elements p q =
-    (fst-pair-of-distinct-elements p ＝ fst-pair-of-distinct-elements q) ×
-    (snd-pair-of-distinct-elements p ＝ snd-pair-of-distinct-elements q)
+    (first-pair-of-distinct-elements p ＝ first-pair-of-distinct-elements q) ×
+    (second-pair-of-distinct-elements p ＝ second-pair-of-distinct-elements q)
 
   refl-Eq-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) → Eq-pair-of-distinct-elements p p
@@ -82,13 +82,13 @@ module _
     is-contr (Σ (pair-of-distinct-elements A) (Eq-pair-of-distinct-elements p))
   is-contr-total-Eq-pair-of-distinct-elements p =
     is-contr-total-Eq-structure
-      ( λ x ynp α → snd-pair-of-distinct-elements p ＝ pr1 ynp)
-      ( is-contr-total-path (fst-pair-of-distinct-elements p))
-      ( pair (fst-pair-of-distinct-elements p) refl)
+      ( λ x ynp α → second-pair-of-distinct-elements p ＝ pr1 ynp)
+      ( is-contr-total-path (first-pair-of-distinct-elements p))
+      ( pair (first-pair-of-distinct-elements p) refl)
       ( is-contr-total-Eq-subtype
-        ( is-contr-total-path (snd-pair-of-distinct-elements p))
+        ( is-contr-total-path (second-pair-of-distinct-elements p))
         ( λ x → is-prop-neg)
-        ( snd-pair-of-distinct-elements p)
+        ( second-pair-of-distinct-elements p)
         ( refl)
         ( distinction-pair-of-distinct-elements p))
 
@@ -102,8 +102,8 @@ module _
 
   eq-Eq-pair-of-distinct-elements :
     {p q : pair-of-distinct-elements A} →
-    fst-pair-of-distinct-elements p ＝ fst-pair-of-distinct-elements q →
-    snd-pair-of-distinct-elements p ＝ snd-pair-of-distinct-elements q →
+    first-pair-of-distinct-elements p ＝ first-pair-of-distinct-elements q →
+    second-pair-of-distinct-elements p ＝ second-pair-of-distinct-elements q →
     p ＝ q
   eq-Eq-pair-of-distinct-elements {p} {q} α β =
     map-inv-is-equiv (is-equiv-Eq-eq-pair-of-distinct-elements p q) (pair α β)
@@ -119,9 +119,9 @@ module _
   map-equiv-pair-of-distinct-elements :
     pair-of-distinct-elements A → pair-of-distinct-elements B
   pr1 (map-equiv-pair-of-distinct-elements p) =
-    map-equiv e (fst-pair-of-distinct-elements p)
+    map-equiv e (first-pair-of-distinct-elements p)
   pr1 (pr2 (map-equiv-pair-of-distinct-elements p)) =
-    map-equiv e (snd-pair-of-distinct-elements p)
+    map-equiv e (second-pair-of-distinct-elements p)
   pr2 (pr2 (map-equiv-pair-of-distinct-elements p)) q =
     distinction-pair-of-distinct-elements p
       ( is-injective-is-equiv (is-equiv-map-equiv e) q)
@@ -129,40 +129,40 @@ module _
   map-inv-equiv-pair-of-distinct-elements :
     pair-of-distinct-elements B → pair-of-distinct-elements A
   pr1 (map-inv-equiv-pair-of-distinct-elements q) =
-    map-inv-equiv e (fst-pair-of-distinct-elements q)
+    map-inv-equiv e (first-pair-of-distinct-elements q)
   pr1 (pr2 (map-inv-equiv-pair-of-distinct-elements q)) =
-    map-inv-equiv e (snd-pair-of-distinct-elements q)
+    map-inv-equiv e (second-pair-of-distinct-elements q)
   pr2 (pr2 (map-inv-equiv-pair-of-distinct-elements q)) p =
     distinction-pair-of-distinct-elements q
       ( is-injective-is-equiv (is-equiv-map-inv-equiv e) p)
 
-  issec-map-inv-equiv-pair-of-distinct-elements :
+  is-section-map-inv-equiv-pair-of-distinct-elements :
     (q : pair-of-distinct-elements B) →
     ( map-equiv-pair-of-distinct-elements
       ( map-inv-equiv-pair-of-distinct-elements q)) ＝
     ( q)
-  issec-map-inv-equiv-pair-of-distinct-elements q =
+  is-section-map-inv-equiv-pair-of-distinct-elements q =
     eq-Eq-pair-of-distinct-elements
-      ( issec-map-inv-equiv e (fst-pair-of-distinct-elements q))
-      ( issec-map-inv-equiv e (snd-pair-of-distinct-elements q))
+      ( is-section-map-inv-equiv e (first-pair-of-distinct-elements q))
+      ( is-section-map-inv-equiv e (second-pair-of-distinct-elements q))
 
-  isretr-map-inv-equiv-pair-of-distinct-elements :
+  is-retraction-map-inv-equiv-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) →
     ( map-inv-equiv-pair-of-distinct-elements
       ( map-equiv-pair-of-distinct-elements p)) ＝
     ( p)
-  isretr-map-inv-equiv-pair-of-distinct-elements p =
+  is-retraction-map-inv-equiv-pair-of-distinct-elements p =
     eq-Eq-pair-of-distinct-elements
-      ( isretr-map-inv-equiv e (fst-pair-of-distinct-elements p))
-      ( isretr-map-inv-equiv e (snd-pair-of-distinct-elements p))
+      ( is-retraction-map-inv-equiv e (first-pair-of-distinct-elements p))
+      ( is-retraction-map-inv-equiv e (second-pair-of-distinct-elements p))
 
   is-equiv-map-equiv-pair-of-distinct-elements :
     is-equiv map-equiv-pair-of-distinct-elements
   is-equiv-map-equiv-pair-of-distinct-elements =
     is-equiv-has-inverse
       map-inv-equiv-pair-of-distinct-elements
-      issec-map-inv-equiv-pair-of-distinct-elements
-      isretr-map-inv-equiv-pair-of-distinct-elements
+      is-section-map-inv-equiv-pair-of-distinct-elements
+      is-retraction-map-inv-equiv-pair-of-distinct-elements
 
   equiv-pair-of-distinct-elements :
     pair-of-distinct-elements A ≃ pair-of-distinct-elements B

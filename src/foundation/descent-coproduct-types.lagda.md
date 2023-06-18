@@ -7,19 +7,20 @@ module foundation.descent-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.functoriality-coproduct-types
+open import foundation.functoriality-fibers-of-maps
+open import foundation.universe-levels
 
-open import foundation-core.cones-pullbacks
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.functoriality-fibers-of-maps
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -104,9 +105,12 @@ module _
         ( cone-descent-coprod (triple h f' H) (triple k g' K))
         ( α)
       where
-      α : is-fiberwise-equiv
-          ( map-fib-cone (ind-coprod (λ _ → X) f g) i
-          ( cone-descent-coprod (triple h f' H) (triple k g' K)))
+      α :
+        is-fiberwise-equiv
+          ( map-fib-cone
+            ( ind-coprod (λ _ → X) f g)
+            ( i)
+            ( cone-descent-coprod (triple h f' H) (triple k g' K)))
       α (inl x) =
         is-equiv-left-factor-htpy
           ( map-fib-cone f i (triple h f' H) x)

@@ -7,14 +7,15 @@ module foundation-core.commuting-cubes-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.hexagons-of-identifications
+open import foundation.universe-levels
 
-open import foundation-core.cones-pullbacks
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -24,7 +25,7 @@ open import foundation-core.universe-levels
 We specify the type of the homotopy witnessing that a cube commutes. Imagine
 that the cube is presented as a lattice
 
-```md
+```text
             *
           / | \
          /  |  \
@@ -61,7 +62,7 @@ coherence-cube-maps :
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
   (bottom : (h ∘ f) ~ (k ∘ g)) →
-  UU _
+  UU (l4 ⊔ l1')
 coherence-cube-maps
   f g h k f' g' h' k' hA hB hC hD
   top back-left back-right front-left front-right bottom =

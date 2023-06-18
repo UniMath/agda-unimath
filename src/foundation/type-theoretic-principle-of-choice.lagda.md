@@ -7,16 +7,17 @@ module foundation.type-theoretic-principle-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -95,18 +96,18 @@ map-inv-distributive-Π-Σ :
 pr1 (map-inv-distributive-Π-Σ ψ x) = (pr1 ψ) x
 pr2 (map-inv-distributive-Π-Σ ψ x) = (pr2 ψ) x
 
-issec-map-inv-distributive-Π-Σ :
+is-section-map-inv-distributive-Π-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
   ( ( map-distributive-Π-Σ {A = A} {B = B} {C = C}) ∘
     ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})) ~ id
-issec-map-inv-distributive-Π-Σ {A = A} {C = C} (pair ψ ψ') =
+is-section-map-inv-distributive-Π-Σ {A = A} {C = C} (pair ψ ψ') =
   eq-htpy-universally-structured-Π C (pair refl-htpy refl-htpy)
 
-isretr-map-inv-distributive-Π-Σ :
+is-retraction-map-inv-distributive-Π-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
   ( ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C}) ∘
     ( map-distributive-Π-Σ {A = A} {B = B} {C = C})) ~ id
-isretr-map-inv-distributive-Π-Σ φ =
+is-retraction-map-inv-distributive-Π-Σ φ =
   eq-htpy (λ x → eq-pair-Σ refl refl)
 
 abstract
@@ -116,8 +117,8 @@ abstract
   is-equiv-map-distributive-Π-Σ {A = A} {B = B} {C = C} =
     is-equiv-has-inverse
       ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( issec-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( isretr-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
+      ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
+      ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
 
 distributive-Π-Σ :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
@@ -132,8 +133,8 @@ abstract
   is-equiv-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C} =
     is-equiv-has-inverse
       ( map-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( isretr-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
-      ( issec-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
+      ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
+      ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
 
 inv-distributive-Π-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →

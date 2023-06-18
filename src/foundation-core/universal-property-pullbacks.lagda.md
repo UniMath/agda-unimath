@@ -7,17 +7,19 @@ module foundation-core.universal-property-pullbacks where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.cones-pullbacks
+open import foundation.action-on-identifications-functions
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -29,15 +31,16 @@ open import foundation-core.universe-levels
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (l : Level) {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
+  (f : A → X) (g : B → X) {C : UU l4}
   where
 
-  universal-property-pullback : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-  universal-property-pullback =
+  universal-property-pullback :
+    (c : cone f g C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
+  universal-property-pullback c =
     (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
 ```
 
-### Properties
+## Properties
 
 ### 3-for-2 property of pullbacks
 
@@ -122,5 +125,5 @@ module _
         ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
         ( equiv-tot
           ( λ h → extensionality-cone f g (cone-map f g c h) c'))
-        ( is-contr-map-is-equiv (up C')  c')
+        ( is-contr-map-is-equiv (up C') c')
 ```

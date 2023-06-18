@@ -7,6 +7,8 @@ module foundation.functoriality-set-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.functoriality-truncation
 open import foundation.images
 open import foundation.propositional-truncations
@@ -17,13 +19,13 @@ open import foundation.uniqueness-image
 open import foundation.uniqueness-set-truncations
 open import foundation.universal-property-image
 open import foundation.universal-property-set-truncation
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -31,7 +33,6 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -83,11 +84,11 @@ id-map-trunc-Set = id-map-trunc zero-𝕋
 ### The functorial action of set truncations preserves composition
 
 ```agda
-comp-map-trunc-Set :
+preserves-comp-map-trunc-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (g : B → C) (f : A → B) →
   map-trunc-Set (g ∘ f) ~ (map-trunc-Set g ∘ map-trunc-Set f)
-comp-map-trunc-Set = comp-map-trunc zero-𝕋
+preserves-comp-map-trunc-Set = preserves-comp-map-trunc zero-𝕋
 ```
 
 ### The functorial action of set truncations preserves homotopies
@@ -161,7 +162,7 @@ module _
         ( λ u →
           set-Prop
             ( function-Prop (map-trunc-Set f u ＝ map-trunc-Set f y)
-            ( Id-Prop (trunc-Set A) u y) ))
+            ( Id-Prop (trunc-Set A) u y)))
         ( λ a →
           apply-dependent-universal-property-trunc-Set'
           ( λ v →
@@ -260,7 +261,7 @@ module _
     map-trunc-Set f ~ (inclusion-trunc-im-Set ∘ map-trunc-Set (map-unit-im f))
   triangle-hom-slice-trunc-im-Set =
     ( htpy-trunc-Set (triangle-unit-im f)) ∙h
-    ( comp-map-trunc-Set (inclusion-im f) (map-unit-im f))
+    ( preserves-comp-map-trunc-Set (inclusion-im f) (map-unit-im f))
 
   hom-slice-trunc-im-Set : hom-slice (map-trunc-Set f) inclusion-trunc-im-Set
   hom-slice-trunc-im-Set =
@@ -369,7 +370,8 @@ module _
           unit-trunc-Prop
             ( pair
               ( unit-trunc-Set (pr1 u))
-              ( naturality-unit-trunc-Set f (pr1 u) ∙ ap unit-trunc-Set (pr2 u)))))
+              ( naturality-unit-trunc-Set f (pr1 u) ∙
+                ap unit-trunc-Set (pr2 u)))))
 
   left-square-unit-im-map-trunc-Set :
     ( map-unit-im (map-trunc-Set f) ∘ unit-trunc-Set) ~

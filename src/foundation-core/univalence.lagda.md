@@ -7,12 +7,15 @@ module foundation-core.univalence where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -26,7 +29,7 @@ In this file, we define the statement of the axiom. The axiom itself is
 postulated in [`foundation.univalence`](foundation.univalence.md) as
 `univalence`.
 
-## Definition
+## Statement
 
 ```agda
 equiv-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A ≃ B
@@ -42,7 +45,8 @@ UNIVALENCE A B = is-equiv (equiv-eq {A = A} {B = B})
 
 ```agda
 abstract
-  is-contr-total-equiv-UNIVALENCE : {l : Level} (A : UU l) →
+  is-contr-total-equiv-UNIVALENCE :
+    {l : Level} (A : UU l) →
     ((B : UU l) → UNIVALENCE A B) → is-contr (Σ (UU l) (λ X → A ≃ X))
   is-contr-total-equiv-UNIVALENCE A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
@@ -52,7 +56,8 @@ abstract
 
 ```agda
 abstract
-  UNIVALENCE-is-contr-total-equiv : {l : Level} (A : UU l) →
+  UNIVALENCE-is-contr-total-equiv :
+    {l : Level} (A : UU l) →
     is-contr (Σ (UU l) (λ X → A ≃ X)) → (B : UU l) → UNIVALENCE A B
   UNIVALENCE-is-contr-total-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
@@ -61,7 +66,8 @@ abstract
 ### Computing transport
 
 ```agda
-tr-equiv-eq-ap : {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
+compute-equiv-eq-ap :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A}
   (p : x ＝ y) → map-equiv (equiv-eq (ap B p)) ＝ tr B p
-tr-equiv-eq-ap refl = refl
+compute-equiv-eq-ap refl = refl
 ```

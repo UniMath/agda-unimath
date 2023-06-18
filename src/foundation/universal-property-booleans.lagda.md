@@ -8,16 +8,16 @@ module foundation.universal-property-booleans where
 
 ```agda
 open import foundation.booleans
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -34,25 +34,25 @@ map-universal-property-bool (pair x y) true = x
 map-universal-property-bool (pair x y) false = y
 
 abstract
-  issec-map-universal-property-bool :
+  is-section-map-universal-property-bool :
     {l : Level} {A : UU l} →
     ((ev-true-false A) ∘ map-universal-property-bool) ~ id
-  issec-map-universal-property-bool (pair x y) =
+  is-section-map-universal-property-bool (pair x y) =
     eq-pair refl refl
 
 abstract
-  isretr-map-universal-property-bool' :
+  is-retraction-map-universal-property-bool' :
     {l : Level} {A : UU l} (f : bool → A) →
     (map-universal-property-bool (ev-true-false A f)) ~ f
-  isretr-map-universal-property-bool' f true = refl
-  isretr-map-universal-property-bool' f false = refl
+  is-retraction-map-universal-property-bool' f true = refl
+  is-retraction-map-universal-property-bool' f false = refl
 
 abstract
-  isretr-map-universal-property-bool :
+  is-retraction-map-universal-property-bool :
     {l : Level} {A : UU l} →
     (map-universal-property-bool ∘ (ev-true-false A)) ~ id
-  isretr-map-universal-property-bool f =
-    eq-htpy (isretr-map-universal-property-bool' f)
+  is-retraction-map-universal-property-bool f =
+    eq-htpy (is-retraction-map-universal-property-bool' f)
 
 abstract
   universal-property-bool :
@@ -61,8 +61,8 @@ abstract
   universal-property-bool A =
     is-equiv-has-inverse
       map-universal-property-bool
-      issec-map-universal-property-bool
-      isretr-map-universal-property-bool
+      is-section-map-universal-property-bool
+      is-retraction-map-universal-property-bool
 
 ev-true :
   {l : Level} {A : UU l} → (bool → A) → A

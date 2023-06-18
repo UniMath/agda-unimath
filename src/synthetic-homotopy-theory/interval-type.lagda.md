@@ -7,12 +7,15 @@ module synthetic-homotopy-theory.interval-type where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 ```
 
@@ -40,19 +43,20 @@ postulate
     {l : Level} (P : 𝕀 → UU l) (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) → (x : 𝕀) → P x
 
-  comp-source-𝕀 :
+  compute-source-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) → Id (ind-𝕀 P u v q source-𝕀) u
 
-  comp-target-𝕀 :
+  compute-target-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) → Id (ind-𝕀 P u v q target-𝕀) v
 
-  comp-path-𝕀 :
+  compute-path-𝕀 :
     {l : Level} {P : 𝕀 → UU l} (u : P source-𝕀) (v : P target-𝕀)
     (q : Id (tr P path-𝕀 u) v) →
-    Id ( apd (ind-𝕀 P u v q) path-𝕀 ∙ comp-target-𝕀 u v q)
-       ( ap (tr P path-𝕀) (comp-source-𝕀 u v q) ∙ q)
+    Id
+      ( apd (ind-𝕀 P u v q) path-𝕀 ∙ compute-target-𝕀 u v q)
+      ( ap (tr P path-𝕀) (compute-source-𝕀 u v q) ∙ q)
 ```
 
 ## Properties
@@ -114,38 +118,39 @@ module _
 inv-ev-𝕀 : {l : Level} {P : 𝕀 → UU l} → Data-𝕀 P → (x : 𝕀) → P x
 inv-ev-𝕀 x = ind-𝕀 _ (pr1 x) (pr1 (pr2 x)) (pr2 (pr2 x))
 
-issec-inv-ev-𝕀 : {l : Level} {P : 𝕀 → UU l} (x : Data-𝕀 P) →
-  Id (ev-𝕀 (inv-ev-𝕀 x)) x
-issec-inv-ev-𝕀 (pair u (pair v q)) =
+is-section-inv-ev-𝕀 :
+  {l : Level} {P : 𝕀 → UU l} (x : Data-𝕀 P) → ev-𝕀 (inv-ev-𝕀 x) ＝ x
+is-section-inv-ev-𝕀 (pair u (pair v q)) =
   eq-Eq-Data-𝕀
-    ( comp-source-𝕀 u v q)
-    ( comp-target-𝕀 u v q)
-    ( comp-path-𝕀 u v q)
+    ( compute-source-𝕀 u v q)
+    ( compute-target-𝕀 u v q)
+    ( compute-path-𝕀 u v q)
 
 tr-value :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x) {x y : A}
   (p : Id x y) (q : Id (f x) (g x)) (r : Id (f y) (g y)) →
-  Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) → Id (tr (λ x → Id (f x) (g x)) p q) r
+  Id (apd f p ∙ r) (ap (tr B p) q ∙ apd g p) →
+  Id (tr (λ x → Id (f x) (g x)) p q) r
 tr-value f g refl q r s = (inv (ap-id q) ∙ inv right-unit) ∙ inv s
 
-isretr-inv-ev-𝕀 :
+is-retraction-inv-ev-𝕀 :
   {l : Level} {P : 𝕀 → UU l} (f : (x : 𝕀) → P x) → Id (inv-ev-𝕀 (ev-𝕀 f)) f
-isretr-inv-ev-𝕀 {l} {P} f =
+is-retraction-inv-ev-𝕀 {l} {P} f =
   eq-htpy
     ( ind-𝕀
       ( λ x → Id (inv-ev-𝕀 (ev-𝕀 f) x) (f x))
-      ( comp-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-      ( comp-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+      ( compute-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+      ( compute-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
       ( tr-value (inv-ev-𝕀 (ev-𝕀 f)) f path-𝕀
-        ( comp-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-        ( comp-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
-        ( comp-path-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))))
+        ( compute-source-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+        ( compute-target-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))
+        ( compute-path-𝕀 (f source-𝕀) (f target-𝕀) (apd f path-𝕀))))
 
 abstract
   is-equiv-ev-𝕀 :
     {l : Level} (P : 𝕀 → UU l) → is-equiv (ev-𝕀 {P = P})
   is-equiv-ev-𝕀 P =
-    is-equiv-has-inverse inv-ev-𝕀 issec-inv-ev-𝕀 isretr-inv-ev-𝕀
+    is-equiv-has-inverse inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
 
 tr-eq : {l : Level} {A : UU l} {x y : A} (p : Id x y) → Id (tr (Id x) p refl) p
 tr-eq refl = refl

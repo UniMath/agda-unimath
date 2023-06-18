@@ -9,14 +9,14 @@ module foundation.multisubsets where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.images
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.sets
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.finite-types
 ```

@@ -7,18 +7,17 @@ module foundation.universal-property-maybe where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.maybe
-open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -28,9 +27,9 @@ open import foundation-core.universe-levels
 We combine the universal property of coproducts and the unit type to obtain a
 universal property of the maybe modality.
 
-```agda
--- The universal property of Maybe
+## Definitions
 
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2}
   where
@@ -46,24 +45,24 @@ module _
   ind-Maybe (pair h b) (inr star) = b
 
   abstract
-    issec-ind-Maybe : (ev-Maybe ∘ ind-Maybe) ~ id
-    issec-ind-Maybe (pair h b) = refl
+    is-section-ind-Maybe : (ev-Maybe ∘ ind-Maybe) ~ id
+    is-section-ind-Maybe (pair h b) = refl
 
-    isretr-ind-Maybe' :
+    is-retraction-ind-Maybe' :
       (h : (x : Maybe A) → B x) → (ind-Maybe (ev-Maybe h)) ~ h
-    isretr-ind-Maybe' h (inl x) = refl
-    isretr-ind-Maybe' h (inr star) = refl
+    is-retraction-ind-Maybe' h (inl x) = refl
+    is-retraction-ind-Maybe' h (inr star) = refl
 
-    isretr-ind-Maybe : (ind-Maybe ∘ ev-Maybe) ~ id
-    isretr-ind-Maybe h = eq-htpy (isretr-ind-Maybe' h)
+    is-retraction-ind-Maybe : (ind-Maybe ∘ ev-Maybe) ~ id
+    is-retraction-ind-Maybe h = eq-htpy (is-retraction-ind-Maybe' h)
 
     dependent-universal-property-Maybe :
       is-equiv ev-Maybe
     dependent-universal-property-Maybe =
       is-equiv-has-inverse
         ind-Maybe
-        issec-ind-Maybe
-        isretr-ind-Maybe
+        is-section-ind-Maybe
+        is-retraction-ind-Maybe
 
 equiv-dependent-universal-property-Maybe :
   {l1 l2 : Level} {A : UU l1} (B : Maybe A → UU l2) →

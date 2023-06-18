@@ -1,25 +1,25 @@
-# 1-Types
+# `1`-Types
 
 ```agda
 module foundation.1-types where
+
+open import foundation-core.1-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.1-types public
-
+open import foundation.dependent-pair-types
 open import foundation.subuniverses
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>

@@ -59,8 +59,9 @@ leq-cardinality-Prop' {l1} {l2} X =
 
 compute-leq-cardinality-Prop' :
   {l1 l2 : Level} (X : Set l1) (Y : Set l2) →
-  Id ( leq-cardinality-Prop' X (cardinality Y))
-     ( mere-emb-Prop (type-Set X) (type-Set Y))
+  Id
+    ( leq-cardinality-Prop' X (cardinality Y))
+    ( mere-emb-Prop (type-Set X) (type-Set Y))
 compute-leq-cardinality-Prop' {l1} {l2} X =
   triangle-universal-property-trunc-Set
     ( Prop-Set (l1 ⊔ l2))
@@ -77,7 +78,8 @@ _≤-cardinality_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 �
 X ≤-cardinality Y = type-Prop (leq-cardinality-Prop X Y)
 
 is-prop-≤-cardinality :
-  {l1 l2 : Level} {X : cardinal l1} {Y : cardinal l2} → is-prop (X ≤-cardinality Y)
+  {l1 l2 : Level} {X : cardinal l1} {Y : cardinal l2} →
+  is-prop (X ≤-cardinality Y)
 is-prop-≤-cardinality {X = X} {Y = Y} =
   is-prop-type-Prop (leq-cardinality-Prop X Y)
 
@@ -150,7 +152,7 @@ transitive-≤-cardinality {l1} {l2} {l3} X Y Z =
 
 ## Properties
 
-### Given two sets `X` and `Y`, the type `# X ＝ # Y` is equivalent to the type of mere equivalences from `X` to `Y`.
+### For sets, the type `# X ＝ # Y` is equivalent to the type of mere equivalences from `X` to `Y`
 
 ```agda
 is-effective-cardinality :
@@ -161,7 +163,10 @@ is-effective-cardinality X Y =
   ( is-effective-unit-trunc-Set (Set _) X Y)
 ```
 
-### Using this and assuming excluded middle , we can show `≤-cardinality` is a partial order by showing that it is antisymmetric.
+### Assuming excluded middle we can show that `≤-cardinality` is a partial order
+
+Using the previous result and assuming excluded middle, we can show
+`≤-cardinality` is a partial order by showing that it is antisymmetric.
 
 ```agda
 antisymmetric-≤-cardinality :

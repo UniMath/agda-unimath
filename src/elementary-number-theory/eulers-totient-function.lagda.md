@@ -29,9 +29,9 @@ eulers-totient-function : ℕ → ℕ
 eulers-totient-function n =
   bounded-sum-ℕ n (λ x H → α x)
   where
-  α' : (x : ℕ) → is-decidable (relatively-prime-ℕ x n) → ℕ
+  α' : (x : ℕ) → is-decidable (is-relatively-prime-ℕ x n) → ℕ
   α' x (inl H) = 1
   α' x (inr H) = 0
   α : ℕ → ℕ
-  α x = α' x (is-decidable-relatively-prime-ℕ x n)
+  α x = α' x (is-decidable-is-relatively-prime-ℕ x n)
 ```

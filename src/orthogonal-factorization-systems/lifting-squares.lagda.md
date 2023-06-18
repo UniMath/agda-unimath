@@ -11,7 +11,7 @@ open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.universe-levels
 
@@ -23,9 +23,9 @@ open import orthogonal-factorization-systems.lifts-of-maps
 
 ## Idea
 
-A _lifting square_ is a commuting square
+A **lifting square** is a commuting square
 
-```md
+```text
        h
   A ------> B
   |         |
@@ -38,7 +38,7 @@ A _lifting square_ is a commuting square
 
 together with a diagonal map `j : X → B` such that the complete diagram
 
-```md
+```text
        h
   A ------> B
   |       ^ |
@@ -57,8 +57,10 @@ commutativity proof.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square-maps h f g i)
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y)
+  (H : coherence-square-maps h f g i)
   where
 
   is-lifting-square : (j : X → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
@@ -70,8 +72,10 @@ module _
   lifting-square = Σ (X → B) (is-lifting-square)
 
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {h : A → B} {f : A → X} {g : B → Y} {i : X → Y} {H : coherence-square-maps h f g i}
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {h : A → B} {f : A → X} {g : B → Y} {i : X → Y}
+  {H : coherence-square-maps h f g i}
   where
 
   map-diagonal-lifting-square : lifting-square h f g i H → (X → B)
@@ -82,7 +86,8 @@ module _
   is-extension-is-lifting-square = pr1
 
   is-extension-lifting-square :
-    (l : lifting-square h f g i H) → is-extension f h (map-diagonal-lifting-square l)
+    (l : lifting-square h f g i H) →
+    is-extension f h (map-diagonal-lifting-square l)
   is-extension-lifting-square = pr1 ∘ pr2
 
   extension-lifting-square : lifting-square h f g i H → extension f h
@@ -94,7 +99,8 @@ module _
   is-lift-is-lifting-square = pr1 ∘ pr2
 
   is-lift-lifting-square :
-    (l : lifting-square h f g i H) → is-lift g i (map-diagonal-lifting-square l)
+    (l : lifting-square h f g i H) →
+    is-lift g i (map-diagonal-lifting-square l)
   is-lift-lifting-square = pr1 ∘ (pr2 ∘ pr2)
 
   lift-lifting-square : lifting-square h f g i H → lift g i
@@ -103,12 +109,14 @@ module _
 
   coherence-is-lifting-square :
     {j : X → B} → (l : is-lifting-square h f g i H j) →
-    (is-lift-is-lifting-square l ·r f) ~ (H ∙h (g ·l is-extension-is-lifting-square l))
+    ( is-lift-is-lifting-square l ·r f) ~
+    ( H ∙h (g ·l is-extension-is-lifting-square l))
   coherence-is-lifting-square = pr2 ∘ pr2
 
   coherence-lifting-square :
     (l : lifting-square h f g i H) →
-    (is-lift-lifting-square l ·r f) ~ (H ∙h (g ·l is-extension-lifting-square l))
+    (is-lift-lifting-square l ·r f) ~
+    (H ∙h (g ·l is-extension-lifting-square l))
   coherence-lifting-square = pr2 ∘ (pr2 ∘ pr2)
 ```
 
@@ -118,15 +126,24 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y) (H : coherence-square-maps h f g i)
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (h : A → B) (f : A → X) (g : B → Y) (i : X → Y)
+  (H : coherence-square-maps h f g i)
   where
 
   coherence-htpy-lifting-square :
     (l l' : lifting-square h f g i H)
-    (K : map-diagonal-lifting-square l ~ map-diagonal-lifting-square l')
-    (E : is-extension-lifting-square l' ~ (is-extension-lifting-square l ∙h (K ·r f)))
-    (L : is-lift-lifting-square l' ~ (is-lift-lifting-square l ∙h (g ·l K))) → UU (l1 ⊔ l4)
+    (K :
+      ( map-diagonal-lifting-square l) ~
+      ( map-diagonal-lifting-square l'))
+    (E :
+      ( is-extension-lifting-square l') ~
+      ( is-extension-lifting-square l ∙h (K ·r f)))
+    (L :
+      ( is-lift-lifting-square l') ~
+      ( is-lift-lifting-square l ∙h (g ·l K))) →
+    UU (l1 ⊔ l4)
   coherence-htpy-lifting-square l l' K E L =
     coherence-3-simplex-homotopies
       ( is-lift-lifting-square l ·r f)
@@ -140,21 +157,28 @@ module _
       ( right-whisk-coherence-triangle-homotopies (g ·l K) L f)
       ( coherence-lifting-square l')
 
-  htpy-lifting-square : (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-lifting-square :
+    (l l' : lifting-square h f g i H) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   htpy-lifting-square l l' =
-    Σ ( map-diagonal-lifting-square l ~ map-diagonal-lifting-square l')
+    Σ ( ( map-diagonal-lifting-square l) ~
+        ( map-diagonal-lifting-square l'))
       ( λ K →
-        Σ ( is-extension-lifting-square l' ~ (is-extension-lifting-square l ∙h (K ·r f)))
+        Σ ( ( is-extension-lifting-square l') ~
+            ( is-extension-lifting-square l ∙h (K ·r f)))
           ( λ E →
-            Σ ( is-lift-lifting-square l' ~ (is-lift-lifting-square l ∙h (g ·l K)))
+            Σ ( ( is-lift-lifting-square l') ~
+                ( is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
 ```
+
+It remans to show that `coherence-htpy-lifting-square` indeed is a
+characterization of identifications of lifting squares.
 
 ### Diagonal maps give lifting squares
 
 The diagram
 
-```md
+```text
   A         B
   |       ^ |
  f|   j  /  |g
@@ -165,7 +189,7 @@ The diagram
 
 gives rise to a lifting square
 
-```md
+```text
      j ∘ f
   A ------> B
   |       ^ |
@@ -182,7 +206,8 @@ module _
   (f : A → X) (g : B → Y)
   where
 
-  is-lifting-square-diagonal : (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
+  is-lifting-square-diagonal :
+    (j : X → B) → is-lifting-square (j ∘ f) f g (g ∘ j) refl-htpy j
   pr1 (is-lifting-square-diagonal j) = refl-htpy
   pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
   pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy

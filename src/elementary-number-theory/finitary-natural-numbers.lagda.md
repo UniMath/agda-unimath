@@ -1,4 +1,4 @@
-# The natural numbers base k
+# The natural numbers base `k`
 
 ```agda
 module elementary-number-theory.finitary-natural-numbers where
@@ -12,14 +12,15 @@ open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -27,38 +28,43 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
-# The finitary natural numbers
+## Definition
+
+### The finitary natural numbers
 
 ```agda
 data based-ℕ : ℕ → UU lzero where
   constant-based-ℕ : (k : ℕ) → Fin k → based-ℕ k
   unary-op-based-ℕ : (k : ℕ) → Fin k → based-ℕ k → based-ℕ k
+```
 
-{- Converting a k-ary natural number to a natural number -}
+### Converting a `k`-ary natural number to a natural number
 
+```agda
 constant-ℕ : (k : ℕ) → Fin k → ℕ
 constant-ℕ k x = nat-Fin k x
 
 unary-op-ℕ : (k : ℕ) → Fin k → ℕ → ℕ
-unary-op-ℕ k x n = add-ℕ (mul-ℕ k (succ-ℕ n)) (nat-Fin k x)
+unary-op-ℕ k x n = (k *ℕ (succ-ℕ n)) +ℕ (nat-Fin k x)
 
 convert-based-ℕ : (k : ℕ) → based-ℕ k → ℕ
 convert-based-ℕ k (constant-based-ℕ .k x) =
   constant-ℕ k x
 convert-based-ℕ k (unary-op-based-ℕ .k x n) =
   unary-op-ℕ k x (convert-based-ℕ k n)
+```
 
--- Exercise 7.10 (a)
+### The type of `0`-ary natural numbers is empty
 
-{- The type of 0-ary natural numbers is empty -}
+```agda
 is-empty-based-zero-ℕ : is-empty (based-ℕ zero-ℕ)
 is-empty-based-zero-ℕ (constant-based-ℕ .zero-ℕ ())
 is-empty-based-zero-ℕ (unary-op-based-ℕ .zero-ℕ () n)
+```
 
--- Exercise 7.10 (b)
+### The function `convert-based-ℕ` is injective
 
-{- We show that the function convert-based-ℕ is injective -}
-
+```agda
 cong-unary-op-ℕ :
   (k : ℕ) (x : Fin k) (n : ℕ) →
   cong-ℕ k (unary-op-ℕ k x n) (nat-Fin k x)
@@ -68,15 +74,16 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
     { unary-op-ℕ (succ-ℕ k) x n}
     ( translation-invariant-cong-ℕ'
       ( succ-ℕ k)
-      ( mul-ℕ (succ-ℕ k) (succ-ℕ n))
+      ( (succ-ℕ k) *ℕ (succ-ℕ n))
       ( zero-ℕ)
       ( nat-Fin (succ-ℕ k) x)
       ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (succ-ℕ k))))
     ( left-unit-law-add-ℕ (nat-Fin (succ-ℕ k) x))
+```
 
-{- Any natural number of the form constant-ℕ k x is strictly less than any
-   natural number of the form unary-op-ℕ k y m -}
+### Any natural number of the form `constant-ℕ k x` is strictly less than any natural number of the form `unary-op-ℕ k y m`
 
+```agda
 le-constant-unary-op-ℕ :
   (k : ℕ) (x y : Fin k) (m : ℕ) → le-ℕ (constant-ℕ k x) (unary-op-ℕ k y m)
 le-constant-unary-op-ℕ k x y m =
@@ -84,9 +91,9 @@ le-constant-unary-op-ℕ k x y m =
     ( strict-upper-bound-nat-Fin k x)
     ( transitive-leq-ℕ
       ( k)
-      ( mul-ℕ k (succ-ℕ m))
+      ( k *ℕ (succ-ℕ m))
       ( unary-op-ℕ k y m)
-      ( leq-add-ℕ (mul-ℕ k (succ-ℕ m)) (nat-Fin k y))
+      ( leq-add-ℕ (k *ℕ (succ-ℕ m)) (nat-Fin k y))
       ( leq-mul-ℕ m k))
 
 is-injective-convert-based-ℕ :
@@ -116,7 +123,6 @@ is-injective-convert-based-ℕ
   ( succ-ℕ k)
   { unary-op-based-ℕ .(succ-ℕ k) x n}
   { unary-op-based-ℕ .(succ-ℕ k) y m} p with
-  -- the following term has type Id x y
   is-injective-nat-Fin (succ-ℕ k) {x} {y}
     ( eq-cong-le-ℕ
       ( succ-ℕ k)
@@ -138,32 +144,39 @@ is-injective-convert-based-ℕ
         ( p)
         ( cong-unary-op-ℕ (succ-ℕ k) y (convert-based-ℕ (succ-ℕ k) m))))
 ... | refl =
-  ap ( unary-op-based-ℕ (succ-ℕ k) x)
-     ( is-injective-convert-based-ℕ (succ-ℕ k)
-       ( is-injective-succ-ℕ
-         ( is-injective-mul-succ-ℕ k
-           ( is-injective-add-ℕ' (nat-Fin (succ-ℕ k) x) p))))
+  ap
+    ( unary-op-based-ℕ (succ-ℕ k) x)
+    ( is-injective-convert-based-ℕ (succ-ℕ k)
+      ( is-injective-succ-ℕ
+        ( is-injective-left-mul-succ-ℕ k
+          ( is-injective-right-add-ℕ (nat-Fin (succ-ℕ k) x) p))))
+```
 
--- Exercise 7.10 (c)
+### The zero-element of the `k+1`-ary natural numbers
 
-{- We show that the map convert-based-ℕ has an inverse. -}
-
--- The zero-element of the (k+1)-ary natural numbers
+```agda
 zero-based-ℕ : (k : ℕ) → based-ℕ (succ-ℕ k)
 zero-based-ℕ k = constant-based-ℕ (succ-ℕ k) (zero-Fin k)
+```
 
--- The successor function on the k-ary natural numbers
+### The successor function on the `k`-ary natural numbers
+
+```agda
 succ-based-ℕ : (k : ℕ) → based-ℕ k → based-ℕ k
 succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl x)) =
   constant-based-ℕ (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))
 succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
-  unary-op-based-ℕ (succ-ℕ k) (zero-Fin k) (constant-based-ℕ (succ-ℕ k) (zero-Fin k))
+  unary-op-based-ℕ
+    (succ-ℕ k) (zero-Fin k) (constant-based-ℕ (succ-ℕ k) (zero-Fin k))
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
   unary-op-based-ℕ (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) n
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr x) n) =
   unary-op-based-ℕ (succ-ℕ k) (zero-Fin k) (succ-based-ℕ (succ-ℕ k) n)
+```
 
--- The inverse map of convert-based-ℕ
+### The inverse map of `convert-based-ℕ`
+
+```agda
 inv-convert-based-ℕ : (k : ℕ) → ℕ → based-ℕ (succ-ℕ k)
 inv-convert-based-ℕ k zero-ℕ =
   zero-based-ℕ k
@@ -178,40 +191,42 @@ convert-based-succ-based-ℕ (succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inl
 convert-based-succ-based-ℕ
   ( succ-ℕ k) (constant-based-ℕ .(succ-ℕ k) (inr star)) =
   ( ap
-    ( λ t → add-ℕ (mul-ℕ (succ-ℕ k) (succ-ℕ t)) t)
+    ( λ t → ((succ-ℕ k) *ℕ (succ-ℕ t)) +ℕ t)
     ( is-zero-nat-zero-Fin {k})) ∙
   ( right-unit-law-mul-ℕ (succ-ℕ k))
 convert-based-succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
-  ap ( add-ℕ (mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))
-     ( nat-succ-Fin k x)
+  ap
+    ( ((succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) +ℕ_)
+    ( nat-succ-Fin k x)
 convert-based-succ-based-ℕ
   (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr star) n) =
-  ( ap ( add-ℕ
-         ( mul-ℕ
-           ( succ-ℕ k)
-           ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n)))))
-       ( is-zero-nat-zero-Fin {k})) ∙
-  ( ( ap ( (mul-ℕ (succ-ℕ k)) ∘ succ-ℕ)
-         ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
+  ( ap
+    ( ( ( succ-ℕ k) *ℕ
+        ( succ-ℕ (convert-based-ℕ (succ-ℕ k) (succ-based-ℕ (succ-ℕ k) n))))
+          +ℕ_)
+    ( is-zero-nat-zero-Fin {k})) ∙
+  ( ( ap
+      ( ((succ-ℕ k) *ℕ_) ∘ succ-ℕ)
+      ( convert-based-succ-based-ℕ (succ-ℕ k) n)) ∙
     ( ( right-successor-law-mul-ℕ
         ( succ-ℕ k)
         ( succ-ℕ (convert-based-ℕ (succ-ℕ k) n))) ∙
       ( commutative-add-ℕ
         ( succ-ℕ k)
-        ( mul-ℕ (succ-ℕ k) (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
+        ( (succ-ℕ k) *ℕ (succ-ℕ (convert-based-ℕ (succ-ℕ k) n))))))
 
-issec-inv-convert-based-ℕ :
+is-section-inv-convert-based-ℕ :
   (k n : ℕ) → convert-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n) ＝ n
-issec-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
-issec-inv-convert-based-ℕ k (succ-ℕ n) =
-  ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ  k n)) ∙
-  ( ap succ-ℕ (issec-inv-convert-based-ℕ k n))
+is-section-inv-convert-based-ℕ k zero-ℕ = is-zero-nat-zero-Fin {k}
+is-section-inv-convert-based-ℕ k (succ-ℕ n) =
+  ( convert-based-succ-based-ℕ (succ-ℕ k) (inv-convert-based-ℕ k n)) ∙
+  ( ap succ-ℕ (is-section-inv-convert-based-ℕ k n))
 
-isretr-inv-convert-based-ℕ :
+is-retraction-inv-convert-based-ℕ :
   (k : ℕ) (x : based-ℕ (succ-ℕ k)) →
   inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x) ＝ x
-isretr-inv-convert-based-ℕ k x =
+is-retraction-inv-convert-based-ℕ k x =
   is-injective-convert-based-ℕ
     ( succ-ℕ k)
-    ( issec-inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x))
+    ( is-section-inv-convert-based-ℕ k (convert-based-ℕ (succ-ℕ k) x))
 ```

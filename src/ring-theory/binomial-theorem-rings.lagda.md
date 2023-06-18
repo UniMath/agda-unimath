@@ -7,6 +7,8 @@ module ring-theory.binomial-theorem-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.binomial-coefficients
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.natural-numbers
 
@@ -19,6 +21,7 @@ open import linear-algebra.vectors-on-rings
 open import ring-theory.binomial-theorem-semirings
 open import ring-theory.powers-of-elements-rings
 open import ring-theory.rings
+open import ring-theory.sums-rings
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -31,7 +34,7 @@ The binomial theorem for rings asserts that for any two elements `x` and `y` of
 a commutative ring `R` and any natural number `n`, if `xy ＝ yx` holds then we
 have
 
-```md
+```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
@@ -116,6 +119,41 @@ binomial-theorem-Ring :
     ( λ i →
       mul-Ring R
       ( power-Ring R (nat-Fin (succ-ℕ n) i) x)
-      ( power-Ring R (dist-ℕ n (nat-Fin (succ-ℕ n) i)) y))
+      ( power-Ring R (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-Ring R = binomial-theorem-Semiring (semiring-Ring R)
+```
+
+## Corollaries
+
+### If `x` commutes with `y`, then we can compute `(x+y)ⁿ⁺ᵐ` as a linear combination of `xⁿ` and `yᵐ`
+
+```agda
+is-linear-combination-power-add-Ring :
+  {l : Level} (R : Ring l) (n m : ℕ) (x y : type-Ring R) →
+  mul-Ring R x y ＝ mul-Ring R y x →
+  power-Ring R (n +ℕ m) (add-Ring R x y) ＝
+  add-Ring R
+    ( mul-Ring R
+      ( power-Ring R m y)
+      ( sum-Ring R n
+        ( λ i →
+          mul-nat-scalar-Ring R
+            ( binomial-coefficient-ℕ (n +ℕ m) (nat-Fin n i))
+            ( mul-Ring R
+              ( power-Ring R (nat-Fin n i) x)
+              ( power-Ring R (dist-ℕ (nat-Fin n i) n) y)))))
+    ( mul-Ring R
+      ( power-Ring R n x)
+      ( sum-Ring R
+        ( succ-ℕ m)
+        ( λ i →
+          mul-nat-scalar-Ring R
+            ( binomial-coefficient-ℕ
+              ( n +ℕ m)
+              ( n +ℕ (nat-Fin (succ-ℕ m) i)))
+            ( mul-Ring R
+              ( power-Ring R (nat-Fin (succ-ℕ m) i) x)
+              ( power-Ring R (dist-ℕ (nat-Fin (succ-ℕ m) i) m) y)))))
+is-linear-combination-power-add-Ring R =
+  is-linear-combination-power-add-Semiring (semiring-Ring R)
 ```

@@ -2,31 +2,31 @@
 
 ```agda
 module foundation.small-types where
+
+open import foundation-core.small-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.small-types public
-
+open import foundation.dependent-pair-types
 open import foundation.images
 open import foundation.locally-small-types
 open import foundation.replacement
 open import foundation.surjective-maps
 open import foundation.uniqueness-image
 open import foundation.universal-property-image
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Properties
 
-### If `f` is a surjective map from a small type into a locally small type, then Replacement implies that the codomain is small.
+### If `f` is a surjective map from a small type into a locally small type, then `Replacement` implies that the codomain is small
 
 ```agda
 is-small-is-surjective :

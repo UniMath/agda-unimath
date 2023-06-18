@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.modal-operators where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.locally-small-types
 open import foundation.propositions
 open import foundation.small-types
@@ -31,18 +31,18 @@ a **modal unit** that compares every type `X` to its modal type `○ X`
 ### Modal operators and units
 
 ```agda
-modal-operator : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-modal-operator l1 l2 = UU l1 → UU l2
+operator-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+operator-modality l1 l2 = UU l1 → UU l2
 
-modal-unit : {l1 l2 : Level} → modal-operator l1 l2 → UU (lsuc l1 ⊔ l2)
-modal-unit {l1} ○ = {X : UU l1} → X → ○ X
+unit-modality : {l1 l2 : Level} → operator-modality l1 l2 → UU (lsuc l1 ⊔ l2)
+unit-modality {l1} ○ = {X : UU l1} → X → ○ X
 ```
 
 ### The subuniverse of modal types
 
 ```agda
 module _
-  {l1 l2 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
+  {l1 l2 : Level} {○ : operator-modality l1 l2} (unit-○ : unit-modality ○)
   where
 
   is-modal : (X : UU l1) → UU (l1 ⊔ l2)
@@ -71,7 +71,7 @@ A small type is said to be modal if its small equivalent is modal.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
+  {l1 l2 l3 : Level} {○ : operator-modality l1 l2} (unit-○ : unit-modality ○)
   (X : UU l3) (is-small-X : is-small l1 X)
   where
 
@@ -95,7 +95,7 @@ module _
     map-inv-equiv ∘ equiv-unit-is-modal-is-small
 
 module _
-  {l1 l2 l3 : Level} {○ : modal-operator l1 l2} (unit-○ : modal-unit ○)
+  {l1 l2 l3 : Level} {○ : operator-modality l1 l2} (unit-○ : unit-modality ○)
   (X : Small-Type l1 l3)
   where
 
@@ -126,44 +126,31 @@ module _
 
 ### Locally small modal operators
 
-We say a modal operator is _locally small_ if it maps small types to locally
+We say a modal operator is **locally small** if it maps small types to locally
 small types.
 
 ```agda
-is-locally-small-modal-operator :
-  {l1 l2 l3 : Level} (○ : modal-operator l1 l2) → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
-is-locally-small-modal-operator {l1} {l2} {l3} ○ =
+is-locally-small-operator-modality :
+  {l1 l2 l3 : Level} (○ : operator-modality l1 l2) → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
+is-locally-small-operator-modality {l1} {l2} {l3} ○ =
   (X : UU l1) → is-locally-small l3 (○ X)
 
-locally-small-modal-operator :
+locally-small-operator-modality :
   (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-locally-small-modal-operator l1 l2 l3 =
-  Σ (modal-operator l1 l2) (is-locally-small-modal-operator {l1} {l2} {l3})
+locally-small-operator-modality l1 l2 l3 =
+  Σ ( operator-modality l1 l2)
+    ( is-locally-small-operator-modality {l1} {l2} {l3})
 
-modal-operator-locally-small-modal-operator :
+operator-modality-locally-small-operator-modality :
   {l1 l2 l3 : Level} →
-  locally-small-modal-operator l1 l2 l3 → modal-operator l1 l2
-modal-operator-locally-small-modal-operator = pr1
+  locally-small-operator-modality l1 l2 l3 → operator-modality l1 l2
+operator-modality-locally-small-operator-modality = pr1
 
-is-locally-small-locally-small-modal-operator :
-  {l1 l2 l3 : Level} (○ : locally-small-modal-operator l1 l2 l3) →
-  is-locally-small-modal-operator
-    ( modal-operator-locally-small-modal-operator ○)
-is-locally-small-locally-small-modal-operator = pr2
-```
-
-### Σ-closed modal operators
-
-We can say a modal operator `○` is Σ-closed if for every type `X` such that for
-every term of `○ X` and for every family `P` over `X` equipped with a section of
-`○ ∘ P`, there is also a term of `○ (Σ X P)`. Note that this is not completely
-conventional terminology.
-
-```agda
-is-Σ-closed-modal-operator :
-  {l1 l2 : Level} → modal-operator l1 l2 → UU (lsuc l1 ⊔ l2)
-is-Σ-closed-modal-operator {l1} ○ =
-  (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
+is-locally-small-locally-small-operator-modality :
+  {l1 l2 l3 : Level} (○ : locally-small-operator-modality l1 l2 l3) →
+  is-locally-small-operator-modality
+    ( operator-modality-locally-small-operator-modality ○)
+is-locally-small-locally-small-operator-modality = pr2
 ```
 
 ## References

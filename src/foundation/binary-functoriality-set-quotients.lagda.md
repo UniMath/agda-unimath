@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module foundation.binary-functoriality-set-quotients where
 ```
 
@@ -12,29 +10,29 @@ module foundation.binary-functoriality-set-quotients where
 
 ```agda
 open import foundation.binary-homotopies
+open import foundation.dependent-pair-types
 open import foundation.exponents-set-quotients
 open import foundation.function-extensionality
 open import foundation.functoriality-set-quotients
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.surjective-maps
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -203,9 +201,9 @@ module _
   pr1 (binary-hom-hom-Eq-Rel f) = map-binary-hom-hom-Eq-Rel f
   pr2 (binary-hom-hom-Eq-Rel f) = preserves-sim-binary-hom-hom-Eq-Rel f
 
-  issec-binary-hom-hom-Eq-Rel :
+  is-section-binary-hom-hom-Eq-Rel :
     ( hom-binary-hom-Eq-Rel ∘ binary-hom-hom-Eq-Rel) ~ id
-  issec-binary-hom-hom-Eq-Rel f =
+  is-section-binary-hom-hom-Eq-Rel f =
     eq-htpy-hom-Eq-Rel R
       ( eq-rel-hom-Eq-Rel S T)
       ( hom-binary-hom-Eq-Rel (binary-hom-hom-Eq-Rel f))
@@ -219,9 +217,9 @@ module _
           ( map-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f x)
           ( refl-htpy))
 
-  isretr-binary-hom-hom-Eq-Rel :
+  is-retraction-binary-hom-hom-Eq-Rel :
     ( binary-hom-hom-Eq-Rel ∘ hom-binary-hom-Eq-Rel) ~ id
-  isretr-binary-hom-hom-Eq-Rel f =
+  is-retraction-binary-hom-hom-Eq-Rel f =
     eq-binary-htpy-hom-Eq-Rel R S T
       ( binary-hom-hom-Eq-Rel (hom-binary-hom-Eq-Rel f))
       ( f)
@@ -232,8 +230,8 @@ module _
   is-equiv-hom-binary-hom-Eq-Rel =
     is-equiv-has-inverse
       binary-hom-hom-Eq-Rel
-      issec-binary-hom-hom-Eq-Rel
-      isretr-binary-hom-hom-Eq-Rel
+      is-section-binary-hom-hom-Eq-Rel
+      is-retraction-binary-hom-hom-Eq-Rel
 
   equiv-hom-binary-hom-Eq-Rel :
     binary-hom-Eq-Rel R S T ≃ hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T)
@@ -259,14 +257,15 @@ module _
   where
 
   private
-    p : (x : A) (y : B) →
-        map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
-        inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
-          ( quotient-hom-Eq-Rel-Set S T)
-          ( reflecting-map-quotient-map-hom-Eq-Rel S T)
-          ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
-          ( quotient-map-hom-Eq-Rel S T (map-hom-binary-hom-Eq-Rel R S T f x))
-          ( map-reflecting-map-Eq-Rel S qS y)
+    p :
+      (x : A) (y : B) →
+      map-reflecting-map-Eq-Rel T qT (map-binary-hom-Eq-Rel R S T f x y) ＝
+      inclusion-is-set-quotient-hom-Eq-Rel S QS qS UqS T QT qT UqT
+        ( quotient-hom-Eq-Rel-Set S T)
+        ( reflecting-map-quotient-map-hom-Eq-Rel S T)
+        ( is-set-quotient-set-quotient-hom-Eq-Rel S T)
+        ( quotient-map-hom-Eq-Rel S T (map-hom-binary-hom-Eq-Rel R S T f x))
+        ( map-reflecting-map-Eq-Rel S qS y)
     p x y =
       ( inv
         ( coherence-square-map-is-set-quotient S QS qS T QT qT UqS UqT

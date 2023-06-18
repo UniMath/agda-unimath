@@ -9,14 +9,14 @@ module foundation.standard-apartness-relations where
 ```agda
 open import foundation.apartness-relations
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.law-of-excluded-middle
 open import foundation.tight-apartness-relations
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -45,7 +45,7 @@ is-standard-is-tight-Apartness-Relation :
   {l1 l2 : Level} {A : UU l1} (R : Apartness-Relation l2 A) →
   is-tight-Apartness-Relation R → is-standard-Apartness-Relation l2 R
 pr1 (is-standard-is-tight-Apartness-Relation R H lem x y) np =
-  dn-elim-is-decidable
+  double-negation-elim-is-decidable
     ( lem (rel-Apartness-Relation R x y))
     ( map-neg (H x y) np)
 pr2 (is-standard-is-tight-Apartness-Relation R H lem x .x) r refl =

@@ -7,6 +7,7 @@ module foundation.axiom-of-choice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.functoriality-propositional-truncation
 open import foundation.projective-types
@@ -14,16 +15,15 @@ open import foundation.propositional-truncations
 open import foundation.sections
 open import foundation.split-surjective-maps
 open import foundation.surjective-maps
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -78,7 +78,7 @@ AC-0-is-set-projective :
   AC-0 l1 l2
 AC-0-is-set-projective H A B K =
   map-trunc-Prop
-    ( map-equiv (equiv-Π-sec-pr1 {B = B}) ∘ tot (λ g → htpy-eq))
+    ( map-equiv (equiv-Π-section-pr1 {B = B}) ∘ tot (λ g → htpy-eq))
     ( H ( type-Set A)
         ( Σ (type-Set A) B)
         ( A)

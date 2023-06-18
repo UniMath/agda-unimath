@@ -14,11 +14,12 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.cubes
@@ -35,7 +36,8 @@ open import univalent-combinatorics.finite-types
 equiv-cube : (k : ℕ) → cube k → cube k → UU lzero
 equiv-cube k X Y =
   Σ ( (dim-cube k X) ≃ (dim-cube k Y))
-    ( λ e → (x : dim-cube k X) → (axis-cube k X x) ≃ (axis-cube k Y (map-equiv e x)))
+    ( λ e →
+      (x : dim-cube k X) → (axis-cube k X x) ≃ (axis-cube k Y (map-equiv e x)))
 
 dim-equiv-cube :
   (k : ℕ) (X Y : cube k) → equiv-cube k X Y → dim-cube k X ≃ dim-cube k Y
@@ -92,7 +94,8 @@ eq-equiv-cube k X Y =
   map-inv-is-equiv (is-equiv-equiv-eq-cube k X Y)
 
 comp-equiv-cube :
-  (k : ℕ) (X Y Z : cube k) → equiv-cube k Y Z → equiv-cube k X Y → equiv-cube k X Z
+  (k : ℕ) (X Y Z : cube k) →
+  equiv-cube k Y Z → equiv-cube k X Y → equiv-cube k X Z
 comp-equiv-cube k X Y Z (pair dim-f axis-f) (pair dim-e axis-e) =
   pair (dim-f ∘e dim-e) (λ d → axis-f (map-equiv (dim-e) d) ∘e axis-e d)
 
@@ -100,9 +103,10 @@ htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) → UU lzero
 htpy-equiv-cube k X Y e f =
   Σ ( map-dim-equiv-cube k X Y e ~ map-dim-equiv-cube k X Y f)
-    ( λ H → (d : dim-cube k X) →
-            ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
-            ( map-axis-equiv-cube k X Y f d))
+    ( λ H →
+      ( d : dim-cube k X) →
+      ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
+      ( map-axis-equiv-cube k X Y f d))
 
 refl-htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e : equiv-cube k X Y) → htpy-equiv-cube k X Y e e

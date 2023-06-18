@@ -8,12 +8,12 @@ module foundation.law-of-excluded-middle where
 
 ```agda
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 ```
@@ -33,11 +33,11 @@ LEM l = (P : Prop l) → is-decidable (type-Prop P)
 
 ## Properties
 
-### Given LEM, we obtain a map from the type of propositions to the type of all propositions
+### Given LEM, we obtain a map from the type of propositions to the type of decidable propositions
 
 ```agda
 decidable-prop-Prop :
-  {l : Level} → LEM l → Prop l → decidable-Prop l
+  {l : Level} → LEM l → Prop l → Decidable-Prop l
 pr1 (decidable-prop-Prop lem P) = type-Prop P
 pr1 (pr2 (decidable-prop-Prop lem P)) = is-prop-type-Prop P
 pr2 (pr2 (decidable-prop-Prop lem P)) = lem P

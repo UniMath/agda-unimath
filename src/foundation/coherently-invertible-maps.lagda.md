@@ -2,28 +2,29 @@
 
 ```agda
 module foundation.coherently-invertible-maps where
+
+open import foundation-core.coherently-invertible-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.coherently-invertible-maps public
-
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -41,15 +42,15 @@ abstract
     is-prop-is-proof-irrelevant
       ( λ H →
         is-contr-equiv'
-          ( Σ (sec f)
+          ( Σ (section f)
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
               ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
-          ( assoc-Σ (B → A)
+          ( associative-Σ (B → A)
             ( λ g → ((f ∘ g) ~ id))
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
               ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
           ( is-contr-Σ
-            ( is-contr-sec-is-equiv (E H))
+            ( is-contr-section-is-equiv (E H))
             ( pair (g H) (G H))
             ( is-contr-equiv'
               ( (x : A) →
@@ -97,10 +98,13 @@ pr2 (pr2 (is-invertible-id-htpy-id-id A H)) = H
 triangle-is-invertible-id-htpy-id-id :
   {l : Level} (A : UU l) →
   ( is-invertible-id-htpy-id-id A) ~
-    ( ( map-assoc-Σ (A → A) (λ g → (id ∘ g) ~ id) (λ s → ((pr1 s) ∘ id) ~ id)) ∘
+    ( ( map-associative-Σ
+        ( A → A)
+        ( λ g → (id ∘ g) ~ id)
+        ( λ s → (pr1 s ∘ id) ~ id)) ∘
       ( map-inv-left-unit-law-Σ-is-contr
-        { B = λ s → ((pr1 s) ∘ id) ~ id}
-        ( is-contr-sec-is-equiv (is-equiv-id {_} {A}))
+        { B = λ s → (pr1 s ∘ id) ~ id}
+        ( is-contr-section-is-equiv (is-equiv-id {_} {A}))
         ( pair id refl-htpy)))
 triangle-is-invertible-id-htpy-id-id A H = refl
 
@@ -110,15 +114,18 @@ abstract
   is-equiv-invertible-id-htpy-id-id A =
     is-equiv-comp-htpy
       ( is-invertible-id-htpy-id-id A)
-      ( map-assoc-Σ (A → A) (λ g → (id ∘ g) ~ id) (λ s → ((pr1 s) ∘ id) ~ id))
+      ( map-associative-Σ
+        ( A → A)
+        ( λ g → (id ∘ g) ~ id)
+        ( λ s → (pr1 s ∘ id) ~ id))
       ( map-inv-left-unit-law-Σ-is-contr
-        ( is-contr-sec-is-equiv is-equiv-id)
+        ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
       ( triangle-is-invertible-id-htpy-id-id A)
       ( is-equiv-map-inv-left-unit-law-Σ-is-contr
-        ( is-contr-sec-is-equiv is-equiv-id)
+        ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
-      ( is-equiv-map-assoc-Σ _ _ _)
+      ( is-equiv-map-associative-Σ _ _ _)
 ```
 
 ## See also

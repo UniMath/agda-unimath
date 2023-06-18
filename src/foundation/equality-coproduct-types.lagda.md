@@ -7,22 +7,24 @@ module foundation.equality-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -50,7 +52,7 @@ module _
 
 ## Properties
 
-### The type `Eq-coprod x y` is equivalent to `Id x y`.
+### The type `Eq-coprod x y` is equivalent to `Id x y`
 
 We will use the fundamental theorem of identity types.
 
@@ -109,21 +111,21 @@ module _
     map-compute-Eq-coprod-inl-inl : Eq-coprod {B = B} (inl x) (inl y) → (x ＝ y)
     map-compute-Eq-coprod-inl-inl (Eq-eq-coprod-inl p) = p
 
-    issec-Eq-eq-coprod-inl :
+    is-section-Eq-eq-coprod-inl :
       (map-compute-Eq-coprod-inl-inl ∘ Eq-eq-coprod-inl) ~ id
-    issec-Eq-eq-coprod-inl p = refl
+    is-section-Eq-eq-coprod-inl p = refl
 
-    isretr-Eq-eq-coprod-inl :
+    is-retraction-Eq-eq-coprod-inl :
       (Eq-eq-coprod-inl ∘ map-compute-Eq-coprod-inl-inl) ~ id
-    isretr-Eq-eq-coprod-inl (Eq-eq-coprod-inl p) = refl
+    is-retraction-Eq-eq-coprod-inl (Eq-eq-coprod-inl p) = refl
 
     is-equiv-map-compute-Eq-coprod-inl-inl :
       is-equiv map-compute-Eq-coprod-inl-inl
     is-equiv-map-compute-Eq-coprod-inl-inl =
       is-equiv-has-inverse
         ( Eq-eq-coprod-inl)
-        ( issec-Eq-eq-coprod-inl)
-        ( isretr-Eq-eq-coprod-inl)
+        ( is-section-Eq-eq-coprod-inl)
+        ( is-retraction-Eq-eq-coprod-inl)
 
     compute-Eq-coprod-inl-inl : Eq-coprod (inl x) (inl y) ≃ (x ＝ y)
     pr1 compute-Eq-coprod-inl-inl = map-compute-Eq-coprod-inl-inl
@@ -189,21 +191,21 @@ module _
     map-compute-Eq-coprod-inr-inr : Eq-coprod {A = A} (inr x) (inr y) → x ＝ y
     map-compute-Eq-coprod-inr-inr (Eq-eq-coprod-inr p) = p
 
-    issec-Eq-eq-coprod-inr :
+    is-section-Eq-eq-coprod-inr :
       (map-compute-Eq-coprod-inr-inr ∘ Eq-eq-coprod-inr) ~ id
-    issec-Eq-eq-coprod-inr p = refl
+    is-section-Eq-eq-coprod-inr p = refl
 
-    isretr-Eq-eq-coprod-inr :
+    is-retraction-Eq-eq-coprod-inr :
       (Eq-eq-coprod-inr ∘ map-compute-Eq-coprod-inr-inr) ~ id
-    isretr-Eq-eq-coprod-inr (Eq-eq-coprod-inr p) = refl
+    is-retraction-Eq-eq-coprod-inr (Eq-eq-coprod-inr p) = refl
 
     is-equiv-map-compute-Eq-coprod-inr-inr :
       is-equiv map-compute-Eq-coprod-inr-inr
     is-equiv-map-compute-Eq-coprod-inr-inr =
       is-equiv-has-inverse
         ( Eq-eq-coprod-inr)
-        ( issec-Eq-eq-coprod-inr)
-        ( isretr-Eq-eq-coprod-inr)
+        ( is-section-Eq-eq-coprod-inr)
+        ( is-retraction-Eq-eq-coprod-inr)
 
     compute-Eq-coprod-inr-inr : Eq-coprod (inr x) (inr y) ≃ (x ＝ y)
     pr1 compute-Eq-coprod-inr-inr = map-compute-Eq-coprod-inr-inr
@@ -316,7 +318,8 @@ module _
 
 ```agda
 abstract
-  is-set-coprod : {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-set-coprod :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-set A → is-set B → is-set (A + B)
   is-set-coprod = is-trunc-coprod neg-two-𝕋
 

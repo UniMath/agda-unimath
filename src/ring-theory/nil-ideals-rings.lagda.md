@@ -1,4 +1,4 @@
-# Nil ideals
+# Nil ideals of rings
 
 ```agda
 module ring-theory.nil-ideals-rings where
@@ -11,7 +11,9 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
+open import ring-theory.left-ideals-rings
 open import ring-theory.nilpotent-elements-rings
+open import ring-theory.right-ideals-rings
 open import ring-theory.rings
 ```
 
@@ -67,24 +69,24 @@ module _
     is-prop-type-Prop is-nil-right-ideal-ring-Prop
 ```
 
-### Nil two-sided ideals
+### Nil ideals
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (I : two-sided-ideal-Ring l2 R)
+  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
   where
 
-  is-nil-two-sided-ideal-ring-Prop : Prop (l1 ⊔ l2)
-  is-nil-two-sided-ideal-ring-Prop =
+  is-nil-ideal-ring-Prop : Prop (l1 ⊔ l2)
+  is-nil-ideal-ring-Prop =
     Π-Prop
-      ( type-two-sided-ideal-Ring R I)
+      ( type-ideal-Ring R I)
       ( λ x →
-        is-nilpotent-element-ring-Prop R (inclusion-two-sided-ideal-Ring R I x))
+        is-nilpotent-element-ring-Prop R (inclusion-ideal-Ring R I x))
 
-  is-nil-two-sided-ideal-Ring : UU (l1 ⊔ l2)
-  is-nil-two-sided-ideal-Ring = type-Prop is-nil-two-sided-ideal-ring-Prop
+  is-nil-ideal-Ring : UU (l1 ⊔ l2)
+  is-nil-ideal-Ring = type-Prop is-nil-ideal-ring-Prop
 
-  is-prop-is-nil-two-sided-ideal-Ring : is-prop is-nil-two-sided-ideal-Ring
-  is-prop-is-nil-two-sided-ideal-Ring =
-    is-prop-type-Prop is-nil-two-sided-ideal-ring-Prop
+  is-prop-is-nil-ideal-Ring : is-prop is-nil-ideal-Ring
+  is-prop-is-nil-ideal-Ring =
+    is-prop-type-Prop is-nil-ideal-ring-Prop
 ```

@@ -7,16 +7,16 @@ module foundation.unordered-pairs-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.structure-identity-principle
 open import foundation.univalence
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 ```

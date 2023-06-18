@@ -14,6 +14,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -61,7 +62,7 @@ pr1 (is-unit-neg-one-Fin {succ-ℕ k}) = neg-one-Fin (succ-ℕ k)
 pr2 (is-unit-neg-one-Fin {succ-ℕ k}) =
   eq-mod-succ-cong-ℕ
     ( succ-ℕ k)
-    ( mul-ℕ (succ-ℕ k) (succ-ℕ k))
+    ( (succ-ℕ k) *ℕ (succ-ℕ k))
     ( 1)
     ( concatenate-eq-cong-ℕ
       ( succ-ℕ (succ-ℕ k))
@@ -69,7 +70,7 @@ pr2 (is-unit-neg-one-Fin {succ-ℕ k}) =
       ( square-succ-ℕ k)
       ( pair k
         ( ( commutative-mul-ℕ k (succ-ℕ (succ-ℕ k))) ∙
-          ( inv (right-unit-law-dist-ℕ (mul-ℕ (succ-ℕ (succ-ℕ k)) k))))))
+          ( inv (right-unit-law-dist-ℕ ((succ-ℕ (succ-ℕ k)) *ℕ k))))))
 
 neg-one-unit-Fin : (k : ℕ) → unit-Fin (succ-ℕ k)
 pr1 (neg-one-unit-Fin k) = neg-one-Fin k
@@ -82,7 +83,8 @@ pr2 (neg-one-unit-Fin k) = is-unit-neg-one-Fin
 is-unit-mul-Fin :
   {k : ℕ} {x y : Fin k} →
   is-unit-Fin k x → is-unit-Fin k y → is-unit-Fin k (mul-Fin k x y)
-pr1 (is-unit-mul-Fin {succ-ℕ k} {x} {y} (pair d p) (pair e q)) = mul-Fin (succ-ℕ k) e d
+pr1 (is-unit-mul-Fin {succ-ℕ k} {x} {y} (pair d p) (pair e q)) =
+  mul-Fin (succ-ℕ k) e d
 pr2 (is-unit-mul-Fin {succ-ℕ k} {x} {y} (pair d p) (pair e q)) =
   ( associative-mul-Fin (succ-ℕ k) e d (mul-Fin (succ-ℕ k) x y)) ∙
     ( ( ap

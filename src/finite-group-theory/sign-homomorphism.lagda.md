@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import finite-group-theory.permutations
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -20,6 +21,7 @@ open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -30,10 +32,13 @@ open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-semigroups
 open import group-theory.symmetric-groups
 
+open import lists.concatenation-lists
+open import lists.functoriality-lists
+open import lists.lists
+
 open import univalent-combinatorics.2-element-decidable-subtypes
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
-open import univalent-combinatorics.lists
 open import univalent-combinatorics.standard-finite-types
 ```
 
@@ -61,15 +66,18 @@ module _
 
   preserves-add-sign-homomorphism-Fin-two :
     (f g : (type-UU-Fin n X) ≃ (type-UU-Fin n X)) →
-    Id ( sign-homomorphism-Fin-two (f ∘e g))
-       ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
+    Id
+      ( sign-homomorphism-Fin-two (f ∘e g))
+      ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g))
   preserves-add-sign-homomorphism-Fin-two f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-UU-Fin n X)
       ( Id-Prop
         ( Fin-Set 2)
         ( sign-homomorphism-Fin-two (f ∘e g))
-        ( add-Fin 2 (sign-homomorphism-Fin-two f) (sign-homomorphism-Fin-two g)))
+        ( add-Fin 2
+          ( sign-homomorphism-Fin-two f)
+          ( sign-homomorphism-Fin-two g)))
       ( λ h →
         ( ap
           ( pr1)
@@ -103,7 +111,7 @@ module _
                           ( refl)
                           ( inv
                             ( eq-htpy-equiv
-                              ( retr-permutation-list-transpositions-count
+                              ( retraction-permutation-list-transpositions-count
                                 ( type-UU-Fin n X)
                                 ( pair n h)
                                 ( f)))))))}
@@ -122,7 +130,7 @@ module _
                           ( refl)
                           ( inv
                             ( eq-htpy-equiv
-                              ( retr-permutation-list-transpositions-count
+                              ( retraction-permutation-list-transpositions-count
                                 ( type-UU-Fin n X)
                                 ( pair n h)
                                 ( g)))))))}
@@ -134,30 +142,31 @@ module _
       ( f' : (type-UU-Fin n X) ≃ (type-UU-Fin n X))
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))))
     list-trans f' h =
       list-transpositions-permutation-count (type-UU-Fin n X) (pair n h) f'
     list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin n X) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n X) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
-                ( Σ (type-UU-Fin n X) (λ x → type-decidable-Prop (P x)))))
+                ( Σ (type-UU-Fin n X) (type-Decidable-Prop ∘ P))))
     list-comp-f-g h = concat-list (list-trans f h) (list-trans g h)
     eq-list-comp-f-g :
       ( h : Fin n ≃ type-UU-Fin n X) →
-      Id ( f ∘e g)
-         ( permutation-list-transpositions
-           ( list-comp-f-g h))
+      Id
+        ( f ∘e g)
+        ( permutation-list-transpositions
+          ( list-comp-f-g h))
     eq-list-comp-f-g h =
       eq-htpy-equiv
         ( λ x →
           ( inv
-            ( retr-permutation-list-transpositions-count
+            ( retraction-permutation-list-transpositions-count
               ( type-UU-Fin n X)
               ( pair n h)
               ( f)
@@ -167,7 +176,7 @@ module _
               ( permutation-list-transpositions
                 ( list-trans f h)))
             ( inv
-              ( retr-permutation-list-transpositions-count
+              ( retraction-permutation-list-transpositions-count
                 ( type-UU-Fin n X)
                 ( pair n h)
                 ( g)
@@ -183,13 +192,15 @@ module _
       ( inr star)
   eq-sign-homomorphism-Fin-two-transposition Y =
     ap pr1
-      { x = center (is-contr-parity-transposition-permutation n X (transposition Y))}
+      { x =
+        center
+          ( is-contr-parity-transposition-permutation n X (transposition Y))}
       { y =
         pair
           ( inr star)
           ( unit-trunc-Prop
             ( pair
-              ( in-list Y)
+              ( unit-list Y)
               ( pair refl (inv (right-unit-law-equiv (transposition Y))))))}
       ( eq-is-contr
         ( is-contr-parity-transposition-permutation n X (transposition Y)))
@@ -201,8 +212,9 @@ module _
   preserves-conjugation-sign-homomorphism-Fin-two :
     (f : (type-UU-Fin n X) ≃ (type-UU-Fin n X)) →
     (g : (type-UU-Fin n X) ≃ (type-UU-Fin n Y)) →
-    Id ( sign-homomorphism-Fin-two n Y (g ∘e (f ∘e inv-equiv g)))
-       ( sign-homomorphism-Fin-two n X f)
+    Id
+      ( sign-homomorphism-Fin-two n Y (g ∘e (f ∘e inv-equiv g)))
+      ( sign-homomorphism-Fin-two n X f)
   preserves-conjugation-sign-homomorphism-Fin-two f g =
     apply-universal-property-trunc-Prop
       ( has-cardinality-type-UU-Fin n X)
@@ -214,22 +226,35 @@ module _
         ( ap
           ( pr1)
             ( eq-is-contr
-              (is-contr-parity-transposition-permutation n Y (g ∘e (f ∘e inv-equiv g)))
+              ( is-contr-parity-transposition-permutation
+                ( n)
+                ( Y)
+                ( g ∘e (f ∘e inv-equiv g)))
               { x =
-                center (is-contr-parity-transposition-permutation n Y (g ∘e (f ∘e inv-equiv g)))}
+                center
+                  ( is-contr-parity-transposition-permutation
+                    ( n)
+                    ( Y)
+                    ( g ∘e (f ∘e inv-equiv g)))}
               { y =
                 pair
                   ( mod-two-ℕ
                     ( length-list
                       ( map-list
                         ( map-equiv
-                          ( equiv-universes-2-Element-Decidable-Subtype (type-UU-Fin n Y) l l'))
+                          ( equiv-universes-2-Element-Decidable-Subtype
+                            ( type-UU-Fin n Y)
+                            ( l)
+                            ( l')))
                         ( list-conjugation h))))
                   ( unit-trunc-Prop
                     ( pair
                       ( map-list
                         ( map-equiv
-                          ( equiv-universes-2-Element-Decidable-Subtype (type-UU-Fin n Y) l l'))
+                          ( equiv-universes-2-Element-Decidable-Subtype
+                            ( type-UU-Fin n Y)
+                            ( l)
+                            ( l')))
                         ( list-conjugation h))
                       ( pair
                         ( refl)
@@ -243,8 +268,10 @@ module _
                             ( ap
                               ( λ h' → g ∘e (h' ∘e inv-equiv g))
                               ( eq-htpy-equiv
-                                { e = permutation-list-transpositions (list-trans h)}
-                                ( retr-permutation-list-transpositions-count
+                                { e =
+                                  permutation-list-transpositions
+                                    ( list-trans h)}
+                                ( retraction-permutation-list-transpositions-count
                                   ( type-UU-Fin n X)
                                   ( pair n h)
                                   ( f)))))) ∙
@@ -255,12 +282,18 @@ module _
                             ( list-conjugation h))))))})) ∙
           ( ( ap
             ( mod-two-ℕ)
-            ( ( length-functor-list
+            ( ( length-map-list
               ( map-equiv
-                ( equiv-universes-2-Element-Decidable-Subtype (type-UU-Fin n Y) l l'))
+                ( equiv-universes-2-Element-Decidable-Subtype
+                  ( type-UU-Fin n Y)
+                  ( l)
+                  ( l')))
               ( list-conjugation h)) ∙
-              ( length-functor-list
-              ( transposition-conjugation-equiv (type-UU-Fin n X) (type-UU-Fin n Y) g)
+              ( length-map-list
+              ( transposition-conjugation-equiv
+                ( type-UU-Fin n X)
+                ( type-UU-Fin n Y)
+                ( g))
               ( list-trans h)))) ∙
             ( ap
               ( pr1)
@@ -274,7 +307,7 @@ module _
                         ( refl)
                         ( inv
                           ( eq-htpy-equiv
-                            ( retr-permutation-list-transpositions-count
+                            ( retraction-permutation-list-transpositions-count
                               ( type-UU-Fin n X)
                               ( pair n h)
                               ( f)))))))}
@@ -285,12 +318,12 @@ module _
     list-trans :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( type-UU-Fin n X → decidable-Prop l)
+        ( Σ ( type-UU-Fin n X → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
                 ( Σ
                   ( type-UU-Fin n X)
-                  ( λ x → type-decidable-Prop (P x)))))
+                  ( type-Decidable-Prop ∘ P))))
     list-trans h =
       list-transpositions-permutation-count
         ( type-UU-Fin n X)
@@ -299,15 +332,19 @@ module _
     list-conjugation :
       ( h : Fin n ≃ type-UU-Fin n X) →
       list
-        ( Σ ( (type-UU-Fin n Y) → decidable-Prop l)
+        ( Σ ( (type-UU-Fin n Y) → Decidable-Prop l)
             ( λ P →
               has-cardinality 2
                 ( Σ
                   ( type-UU-Fin n Y)
-                  ( λ x → type-decidable-Prop (P x)))))
+                  ( type-Decidable-Prop ∘ P))))
     list-conjugation h =
       map-list
-        ( transposition-conjugation-equiv {l4 = l} (type-UU-Fin n X) (type-UU-Fin n Y) g)
+        ( transposition-conjugation-equiv
+          { l4 = l}
+          ( type-UU-Fin n X)
+          ( type-UU-Fin n Y)
+          ( g))
         ( list-trans h)
 ```
 

@@ -8,16 +8,12 @@ module ring-theory.dependent-products-rings where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.dependent-products-abelian-groups
-open import group-theory.dependent-products-groups
-open import group-theory.dependent-products-monoids
-open import group-theory.dependent-products-semigroups
 open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
@@ -131,8 +127,9 @@ module _
 
   right-distributive-mul-add-Π-Ring :
     (f g h : type-Π-Ring) →
-    Id ( mul-Π-Ring (add-Π-Ring f g) h)
-       ( add-Π-Ring (mul-Π-Ring f h) (mul-Π-Ring g h))
+    Id
+      ( mul-Π-Ring (add-Π-Ring f g) h)
+      ( add-Π-Ring (mul-Π-Ring f h) (mul-Π-Ring g h))
   right-distributive-mul-add-Π-Ring =
     right-distributive-mul-add-Semiring semiring-Π-Ring
 

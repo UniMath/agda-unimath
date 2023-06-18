@@ -7,16 +7,16 @@ module foundation.universal-property-coproduct-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -36,14 +36,13 @@ module _
     ((t : A + B) → P t) → ((x : A) → P (inl x)) × ((y : B) → P (inr y))
   ev-inl-inr P s = pair (λ x → s (inl x)) (λ y → s (inr y))
 
-  abstract
-    dependent-universal-property-coprod :
-      {l3 : Level} (P : A + B → UU l3) → is-equiv (ev-inl-inr P)
-    dependent-universal-property-coprod P =
-      is-equiv-has-inverse
-        ( λ p → ind-coprod P (pr1 p) (pr2 p))
-        ( ind-Σ (λ f g → eq-pair refl refl))
-        ( λ s → eq-htpy (ind-coprod _ (λ x → refl) λ y → refl))
+  dependent-universal-property-coprod :
+    {l3 : Level} (P : A + B → UU l3) → is-equiv (ev-inl-inr P)
+  dependent-universal-property-coprod P =
+    is-equiv-has-inverse
+      ( λ p → ind-coprod P (pr1 p) (pr2 p))
+      ( ind-Σ (λ f g → eq-pair refl refl))
+      ( λ s → eq-htpy (ind-coprod _ (λ x → refl) λ y → refl))
 
   equiv-dependent-universal-property-coprod :
     {l3 : Level} (P : A + B → UU l3) →

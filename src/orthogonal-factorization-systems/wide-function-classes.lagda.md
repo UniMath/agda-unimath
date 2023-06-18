@@ -9,7 +9,7 @@ module orthogonal-factorization-systems.wide-function-classes where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -46,6 +46,7 @@ is-wide-function-class-Prop c =
     ( is-composition-closed-function-class-Prop c)
 
 is-prop-is-wide-function-class :
-  {l1 l2 : Level} (c : function-class l1 l1 l2) → is-prop (is-wide-function-class c)
+  {l1 l2 : Level} (c : function-class l1 l1 l2) →
+  is-prop (is-wide-function-class c)
 is-prop-is-wide-function-class = is-prop-type-Prop ∘ is-wide-function-class-Prop
 ```

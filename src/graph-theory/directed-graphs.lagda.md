@@ -1,4 +1,4 @@
-# Graphs
+# Directed graphs
 
 ```agda
 module graph-theory.directed-graphs where
@@ -9,7 +9,7 @@ module graph-theory.directed-graphs where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -18,8 +18,26 @@ open import foundation.universe-levels
 
 ## Idea
 
-A graph consists of a type of vertices equipped with a binary, type valued
-relation of edges.
+A **directed graph** consists of a type of vertices equipped with a binary, type
+valued relation of edges. Alternatively, one can define a directed graph to
+consist of a type `V` of **vertices**, a type `E` of **edges**, and a map
+`E → V × V` determining the **source** and **target** of each edge.
+
+To see that these two definitions are equivalent, recall that $\Sigma$-types
+preserve equivalences and a type family $A \to U$ is equivalent to
+$\sum_{(C : U)} C \to A$ by [type duality](foundation.type-duality.md). Using
+these two observations we make the following calculation:
+
+$$
+\begin{equation}
+\begin{split}
+\sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
+ (V \times V \to \mathcal{U}) \\
+ &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
+&\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
+\end{split}
+\end{equation}
+$$
 
 ## Definition
 
@@ -34,7 +52,7 @@ module _
   vertex-Directed-Graph : UU l1
   vertex-Directed-Graph = pr1 G
 
-  edge-Directed-Graph : vertex-Directed-Graph → vertex-Directed-Graph → UU l2
+  edge-Directed-Graph : (x y : vertex-Directed-Graph) → UU l2
   edge-Directed-Graph = pr2 G
 
   total-edge-Directed-Graph : UU (l1 ⊔ l2)
@@ -56,6 +74,16 @@ module _
       ( source-total-edge-Directed-Graph e)
       ( target-total-edge-Directed-Graph e)
   edge-total-edge-Directed-Graph e = pr2 (pr2 e)
+
+  direct-predecessor-Directed-Graph :
+    vertex-Directed-Graph → UU (l1 ⊔ l2)
+  direct-predecessor-Directed-Graph x =
+    Σ vertex-Directed-Graph (λ y → edge-Directed-Graph y x)
+
+  direct-successor-Directed-Graph :
+    vertex-Directed-Graph → UU (l1 ⊔ l2)
+  direct-successor-Directed-Graph x =
+    Σ vertex-Directed-Graph (edge-Directed-Graph x)
 ```
 
 ### Alternative definition
@@ -63,10 +91,12 @@ module _
 ```agda
 module alternative where
 
-  Directed-Graph' : (l1 l2 : Level)  → UU (lsuc l1 ⊔ lsuc l2)
-  Directed-Graph' l1 l2 = Σ (UU l1)  λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
+  Directed-Graph' : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+  Directed-Graph' l1 l2 = Σ (UU l1) λ V → Σ (UU l2) (λ E → (E → V) × (E → V))
 
-  module _ {l1 l2 : Level} (G : Directed-Graph' l1 l2) where
+  module _
+    {l1 l2 : Level} (G : Directed-Graph' l1 l2)
+    where
 
     vertex-Directed-Graph' : UU l1
     vertex-Directed-Graph' = pr1 G
@@ -90,7 +120,7 @@ module equiv {l1 l2 : Level} where
   pr1 (Directed-Graph-to-Directed-Graph' G) = vertex-Directed-Graph G
   pr1 (pr2 (Directed-Graph-to-Directed-Graph' G)) =
     Σ ( vertex-Directed-Graph G)
-      ( λ x → Σ (vertex-Directed-Graph G) λ y → edge-Directed-Graph G  x y)
+      ( λ x → Σ (vertex-Directed-Graph G) λ y → edge-Directed-Graph G x y)
   pr1 (pr2 (pr2 (Directed-Graph-to-Directed-Graph' G))) = pr1
   pr2 (pr2 (pr2 (Directed-Graph-to-Directed-Graph' G))) = pr1 ∘ pr2
 
@@ -100,53 +130,3 @@ module equiv {l1 l2 : Level} where
   pr2 (Directed-Graph'-to-Directed-Graph (V , E , st , tg)) x y =
     Σ E (λ e → (Id (st e) x) × (Id (tg e) y))
 ```
-
-### Results
-
-#### Equivalence between Directed-Graph definitions
-
-The two definitions given above for directed graphs are equivalent.
-$\Sigma$-types preserve equivalences and a type family $A \to U$ is equivalent
-to $\sum_{(C : U)} C \to A$. We use these lemmas in the following calculation:
-
-$$
-\begin{equation}
-\begin{split}
-\sum_{(V\,:\,\mathcal{U})} (V \to V \to \mathcal{U}) & \simeq \sum_{(V\,:\,\mathcal{U})}
- (V \times V \to \mathcal{U}) \\
- &\simeq \sum_{(V,E\,:\,\mathcal{U})} (E \to (V \times V)) \\
-&\simeq  \sum_{(V,E\,:\,\mathcal{U})} ((E \to V) \times (E \to V))
-\end{split}
-\end{equation}
-$$
-
-<!--
-```agda
-module directed-graph-defs-equivalence
-  {l1 l2 : Level} where
-  -- is-equiv-htpy-equiv
-  -- Uses equiv-Fib
-  -- universal-property-cartesian-product-types.lagda
-  -- equiv.
-
-  -- The canonical (optimal) map for the equivalence.
-  -- Any other map is homotopic to the canonical map.
-  --is-equi
-```
-
-#### The type of Directed-Graph forms a category
-
-```agda
--- Show that Directed-Graph is pre-category
--- + iso corresponds to equiv.
--- Instance of
-```
-
-#### The type of Directed-Graph forms a Topos
-
-```agda
--- Show that Directed-Graph is pre-category
--- + iso corresponds to equiv.
--- Instance of
-```
--->

@@ -57,8 +57,9 @@ module _
     {x y : type-Monoid-Action M X} (f g : hom-orbit-Monoid-Action x y) →
     UU l1
   htpy-hom-orbit-Monoid-Action {x} {y} f g =
-    Id ( element-hom-orbit-Monoid-Action f)
-       ( element-hom-orbit-Monoid-Action g)
+    Id
+      ( element-hom-orbit-Monoid-Action f)
+      ( element-hom-orbit-Monoid-Action g)
 
   refl-htpy-hom-orbit-Monoid-Action :
     {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
@@ -150,8 +151,9 @@ module _
   associative-comp-hom-orbit-Monoid-Action :
     {x y z w : type-Monoid-Action M X} (h : hom-orbit-Monoid-Action z w)
     (g : hom-orbit-Monoid-Action y z) (f : hom-orbit-Monoid-Action x y) →
-    Id ( comp-hom-orbit-Monoid-Action (comp-hom-orbit-Monoid-Action h g) f)
-       ( comp-hom-orbit-Monoid-Action h (comp-hom-orbit-Monoid-Action g f))
+    Id
+      ( comp-hom-orbit-Monoid-Action (comp-hom-orbit-Monoid-Action h g) f)
+      ( comp-hom-orbit-Monoid-Action h (comp-hom-orbit-Monoid-Action g f))
   associative-comp-hom-orbit-Monoid-Action h g f =
     eq-htpy-hom-orbit-Monoid-Action
       ( associative-mul-Monoid M
@@ -173,17 +175,17 @@ module _
     eq-htpy-hom-orbit-Monoid-Action
       ( right-unit-law-mul-Monoid M (element-hom-orbit-Monoid-Action f))
 
-  orbit-monoid-action-Precategory : Precat l2 (l1 ⊔ l2)
-  pr1 orbit-monoid-action-Precategory = type-Monoid-Action M X
-  pr1 (pr2 orbit-monoid-action-Precategory) = hom-orbit-monoid-action-Set
-  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+  orbit-monoid-action-Precategoryegory : Precategory l2 (l1 ⊔ l2)
+  pr1 orbit-monoid-action-Precategoryegory = type-Monoid-Action M X
+  pr1 (pr2 orbit-monoid-action-Precategoryegory) = hom-orbit-monoid-action-Set
+  pr1 (pr1 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
     comp-hom-orbit-Monoid-Action
-  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+  pr2 (pr1 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
     associative-comp-hom-orbit-Monoid-Action
-  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory))) =
+  pr1 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory))) =
     id-hom-orbit-Monoid-Action
-  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
+  pr1 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory)))) =
     left-unit-law-comp-hom-orbit-Monoid-Action
-  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategory)))) =
+  pr2 (pr2 (pr2 (pr2 (pr2 orbit-monoid-action-Precategoryegory)))) =
     right-unit-law-comp-hom-orbit-Monoid-Action
 ```

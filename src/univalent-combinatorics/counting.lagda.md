@@ -16,7 +16,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -59,11 +59,12 @@ module _
   map-inv-equiv-count : X → Fin number-of-elements-count
   map-inv-equiv-count = map-inv-equiv equiv-count
 
-  issec-map-inv-equiv-count : (map-equiv-count ∘ map-inv-equiv-count) ~ id
-  issec-map-inv-equiv-count = issec-map-inv-equiv equiv-count
+  is-section-map-inv-equiv-count : (map-equiv-count ∘ map-inv-equiv-count) ~ id
+  is-section-map-inv-equiv-count = is-section-map-inv-equiv equiv-count
 
-  isretr-map-inv-equiv-count : (map-inv-equiv-count ∘ map-equiv-count) ~ id
-  isretr-map-inv-equiv-count = isretr-map-inv-equiv equiv-count
+  is-retraction-map-inv-equiv-count :
+    (map-inv-equiv-count ∘ map-equiv-count) ~ id
+  is-retraction-map-inv-equiv-count = is-retraction-map-inv-equiv equiv-count
 
   inv-equiv-count : X ≃ Fin number-of-elements-count
   inv-equiv-count = inv-equiv equiv-count

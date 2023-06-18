@@ -1,10 +1,15 @@
 {
   "recommendations": [
     "banacorn.agda-mode",
-    "j-mueller.agda",
     "bbenoist.nix",
-    "davidanson.vscode-markdownlint",
+    "dbankier.vscode-quick-select",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "fredrikbakke.agda-syntax",
+    "github.vscode-pull-request-github",
     "ms-python.python",
-    "ms-python.vscode-pylance"
+    "ms-python.vscode-pylance",
+    "oderwat.indent-rainbow",
+    "brunnerh.insert-unicode"
   ]
 }

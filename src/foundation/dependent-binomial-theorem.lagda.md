@@ -1,4 +1,4 @@
-# The dependent binomial theorem for types (Distributivity of dependent function types over coproduct types)
+# The dependent binomial theorem for types (distributivity of dependent function types over coproduct types)
 
 ```agda
 module foundation.dependent-binomial-theorem where
@@ -7,23 +7,27 @@ module foundation.dependent-binomial-theorem where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.coproduct-decompositions
+open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.raising-universe-levels
+open import foundation.transport
 open import foundation.type-theoretic-principle-of-choice
-open import foundation.unit-type
 open import foundation.universal-property-coproduct-types
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
-open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
+open import foundation-core.univalence
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -39,7 +43,7 @@ module _
   where
 
   fam-coprod :
-    Fin 2  → UU (l1 ⊔ l2)
+    Fin 2 → UU (l1 ⊔ l2)
   fam-coprod (inl (inr star)) = raise l2 A
   fam-coprod (inr star) = raise l1 B
 
@@ -55,27 +59,27 @@ module _
   pr1 (map-inv-compute-total-fam-coprod (inr x)) = one-Fin 1
   pr2 (map-inv-compute-total-fam-coprod (inr x)) = map-raise x
 
-  issec-map-inv-compute-total-fam-coprod :
+  is-section-map-inv-compute-total-fam-coprod :
     (map-compute-total-fam-coprod ∘ map-inv-compute-total-fam-coprod) ~ id
-  issec-map-inv-compute-total-fam-coprod (inl x) =
-    ap inl (isretr-map-inv-raise {l2} x)
-  issec-map-inv-compute-total-fam-coprod (inr x) =
-    ap inr (isretr-map-inv-raise {l1} x)
+  is-section-map-inv-compute-total-fam-coprod (inl x) =
+    ap inl (is-retraction-map-inv-raise {l2} x)
+  is-section-map-inv-compute-total-fam-coprod (inr x) =
+    ap inr (is-retraction-map-inv-raise {l1} x)
 
-  isretr-map-inv-compute-total-fam-coprod :
+  is-retraction-map-inv-compute-total-fam-coprod :
     (map-inv-compute-total-fam-coprod ∘ map-compute-total-fam-coprod) ~ id
-  isretr-map-inv-compute-total-fam-coprod (pair (inl (inr star)) y) =
-    ap (pair (zero-Fin 1)) (issec-map-inv-raise y)
-  isretr-map-inv-compute-total-fam-coprod (pair (inr star) y) =
-    ap (pair (one-Fin 1)) (issec-map-inv-raise y)
+  is-retraction-map-inv-compute-total-fam-coprod (pair (inl (inr star)) y) =
+    ap (pair (zero-Fin 1)) (is-section-map-inv-raise y)
+  is-retraction-map-inv-compute-total-fam-coprod (pair (inr star) y) =
+    ap (pair (one-Fin 1)) (is-section-map-inv-raise y)
 
   is-equiv-map-compute-total-fam-coprod :
     is-equiv map-compute-total-fam-coprod
   is-equiv-map-compute-total-fam-coprod =
     is-equiv-has-inverse
       map-inv-compute-total-fam-coprod
-      issec-map-inv-compute-total-fam-coprod
-      isretr-map-inv-compute-total-fam-coprod
+      is-section-map-inv-compute-total-fam-coprod
+      is-retraction-map-inv-compute-total-fam-coprod
 
   compute-total-fam-coprod :
     (Σ (Fin 2) fam-coprod) ≃ (A + B)
@@ -126,4 +130,82 @@ module _
       ( distributive-Π-Σ)) ∘e
     ( equiv-map-Π
       ( λ x → inv-compute-total-fam-coprod (A x) (B x)))
+
+  type-distributive-Π-coprod-binary-coproduct-Decomposition :
+    UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l1 ⊔ lsuc l1)
+  type-distributive-Π-coprod-binary-coproduct-Decomposition =
+    Σ ( binary-coproduct-Decomposition l1 l1 X)
+      ( λ d →
+        ( ( (u : left-summand-binary-coproduct-Decomposition d) →
+            ( A
+              ( map-inv-equiv
+                ( matching-correspondence-binary-coproduct-Decomposition d)
+                ( inl u)))) ×
+          ( ( v : right-summand-binary-coproduct-Decomposition d) →
+            ( B
+              ( map-inv-equiv
+                ( matching-correspondence-binary-coproduct-Decomposition d)
+                ( inr v))))))
+
+  equiv-type-distributive-Π-coprod-binary-coproduct-Decomposition :
+    type-distributive-Π-coprod ≃
+    type-distributive-Π-coprod-binary-coproduct-Decomposition
+  equiv-type-distributive-Π-coprod-binary-coproduct-Decomposition =
+    equiv-Σ
+    ( λ d →
+      ( (u : left-summand-binary-coproduct-Decomposition d) →
+        A
+          ( map-inv-equiv
+            ( matching-correspondence-binary-coproduct-Decomposition d)
+            ( inl u))) ×
+      ( (v : right-summand-binary-coproduct-Decomposition d) →
+        B
+          ( map-inv-equiv
+            ( matching-correspondence-binary-coproduct-Decomposition d)
+            ( inr v))))
+      ( equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ X)
+      ( λ f →
+        equiv-prod
+          ( equiv-Π
+              ( λ z →
+                  A
+                  ( map-inv-equiv
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      ( X)
+                      ( f))
+                    ( inl z)))
+              ( id-equiv)
+              ( λ a →
+                equiv-eq
+                  ( ap
+                      ( A)
+                      ( compute-left-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ
+                        ( X)
+                        ( f)
+                        ( a)))) ∘e
+            inv-equiv equiv-ev-pair)
+          ( equiv-Π
+              ( λ z →
+                  B
+                  ( map-inv-equiv
+                    ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
+                      X f)
+                    ( inr z)))
+              ( id-equiv)
+              ( λ a →
+                equiv-eq
+                  ( ap
+                      ( B)
+                      ( compute-right-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ
+                        ( X)
+                        ( f)
+                        ( a)))) ∘e
+            inv-equiv equiv-ev-pair))
+
+  distributive-Π-coprod-binary-coproduct-Decomposition :
+    ((x : X) → A x + B x) ≃
+    type-distributive-Π-coprod-binary-coproduct-Decomposition
+  distributive-Π-coprod-binary-coproduct-Decomposition =
+    equiv-type-distributive-Π-coprod-binary-coproduct-Decomposition ∘e
+    distributive-Π-coprod
 ```

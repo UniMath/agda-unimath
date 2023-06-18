@@ -10,8 +10,6 @@ module commutative-algebra.dependent-products-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -28,18 +26,18 @@ open import ring-theory.rings
 
 ## Idea
 
-Given a family of commutative rings `R i` indexed by `i : I`, their dependent
-product `Π(i:I), R i` is again a commutative ring.
+Given a family of commutative rings `A i` indexed by `i : I`, their **dependent
+product** `Π(i:I), A i` is again a commutative ring.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (I : UU l1) (R : I → Commutative-Ring l2)
+  {l1 l2 : Level} (I : UU l1) (A : I → Commutative-Ring l2)
   where
 
   ring-Π-Commutative-Ring : Ring (l1 ⊔ l2)
-  ring-Π-Commutative-Ring = Π-Ring I (λ i → ring-Commutative-Ring (R i))
+  ring-Π-Commutative-Ring = Π-Ring I (λ i → ring-Commutative-Ring (A i))
 
   ab-Π-Commutative-Ring : Ab (l1 ⊔ l2)
   ab-Π-Commutative-Ring = ab-Ring ring-Π-Commutative-Ring
@@ -48,7 +46,7 @@ module _
     Commutative-Monoid (l1 ⊔ l2)
   multiplicative-commutative-monoid-Π-Commutative-Ring =
     Π-Commutative-Monoid I
-      ( λ i → multiplicative-commutative-monoid-Commutative-Ring (R i))
+      ( λ i → multiplicative-commutative-monoid-Commutative-Ring (A i))
 
   set-Π-Commutative-Ring : Set (l1 ⊔ l2)
   set-Π-Commutative-Ring = set-Ring ring-Π-Commutative-Ring

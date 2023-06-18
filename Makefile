@@ -1,21 +1,19 @@
 
-CHECKOPTS :=--without-K --exact-split --guardedness
-everythingOpts :=$(CHECKOPTS)
-AGDAVERBOSE?=-v1
+CHECKOPTS := --without-K --exact-split --guardedness
+everythingOpts := $(CHECKOPTS)
+AGDAVERBOSE ?=-v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
-AGDAFILES := $(wildcard src/**/*.lagda.md)
-AGDAMDFILES:= $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
+AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
+AGDAMDFILES := $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
 
-bar := $(foreach f,$(AGDAFILES),$(shell wc -l $(f))"\n")
+AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
+AGDA ?= agda $(AGDAVERBOSE)
+TIME ?= time
 
-AGDAHTMLFLAGS?=--html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
-AGDA ?=agda $(AGDAVERBOSE)
-TIME ?=time
-
-METAFILES:=CITATION.cff \
+METAFILES :=CITATION.cff \
 			CODINGSTYLE.md \
 			CONTRIBUTORS.md \
-			CONVENTIONS.md \
+			FILE-CONVENTIONS.md \
 			DESIGN-PRINCIPLES.md \
 			HOME.md \
 			HOWTO-INSTALL.md \
@@ -24,80 +22,79 @@ METAFILES:=CITATION.cff \
 			README.md \
 			STATEMENT-OF-INCLUSION.md \
 			SUMMARY.md \
+			TEMPLATE.lagda.md \
 			USERS.md \
 
-.PHONY : agdaFiles
-agdaFiles :
+.PHONY: agdaFiles
+agdaFiles:
 	@rm -rf $@
 	@rm -rf src/everything.lagda.md
-	@find src -type f \( -name "*.agda" -o -name "*.lagda"  -o -name  "*.lagda.md" \) > $@
+	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda" -o -name "*.lagda.md" \) -print > $@
 	@sort -o $@ $@
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
 
-.PHONY : src/everything.lagda.md
-src/everything.lagda.md : agdaFiles
+.PHONY: src/everything.lagda.md
+src/everything.lagda.md: agdaFiles
 	@echo "\`\`\`agda" > $@ ;\
 	echo "{-# OPTIONS $(everythingOpts) #-}" >> $@ ;\
-	echo "module everything where" >> $@ ;\
 	echo "" >> $@ ;\
+	echo "module everything where" >> $@ ;\
 	cat agdaFiles \
 		| cut -c 5-               \
 		| cut -f1 -d'.'           \
 		| sed 's/\//\./g'         \
-		| sed 's/^/open import /' \
+		| awk 'BEGIN { FS = "."; OFS = "."; lastdir = "" } { if ($$1 != lastdir) { print ""; lastdir = $$1 } print "open import " $$0 }' \
 		>> $@ ;\
 	echo "\`\`\`" >> $@ ;
 
-.PHONY : check
-check : src/everything.lagda.md
+.PHONY: check
+check: src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
 AGDAMDFILES: $(AGDAMDFILES)
 
 docs/%.md: src/%.lagda.md
 	@echo "... $@"
-	@${AGDA} ${AGDAHTMLFLAfoGS} $<
+	@${AGDA} ${AGDAHTMLFLAGS} $<
 
 agda-html: src/everything.lagda.md
 	@rm -rf docs/
 	@mkdir -p docs/
 	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
 
-SUMMARY.md:
+SUMMARY.md: ${AGDAFILES}
 	@python3 scripts/generate_main_index_file.py
-
-CONTRIBUTORS.md:
-	@python3 scripts/update_contributors.py
 
 .PHONY: website
 website: agda-html \
-		 SUMMARY.md \
-		 CONTRIBUTORS.md
+		SUMMARY.md
 	@cp $(METAFILES) docs/
+	@cp theme/images/agda-unimath-logo.svg  docs/
 	@mdbook build
 
-.phony: serve-website
+.PHONY: serve-website
 serve-website:
 	@mdbook serve -p 8080 --open -d ./book/html
 
-.PHONY : graph
+.PHONY: graph
 graph:
 	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=docs/dependency.dot src/README.lagda.md
 
-.PHONY : clean
+.PHONY: clean
 clean:
-	rm -Rf _build/
-	find docs -name '*.html' -and -name '*.md' -delete -print0
+	@rm -Rf _build/ book/ docs/
 
-.PHONY : pre-commit
+.PHONY: pre-commit
 pre-commit:
 	@pre-commit run --all-files
+	@echo
+	@echo Typechecking library
 	@make check
 
-website-dev:
-	@curl https://sh.rustup.rs -sSf | sh
+install-website-dev:
 	@cargo install mdbook
 	@cargo install mdbook-linkcheck
 	@cargo install mdbook-katex
 	@cargo install mdbook-pagetoc
+	@cargo install mdbook-catppuccin

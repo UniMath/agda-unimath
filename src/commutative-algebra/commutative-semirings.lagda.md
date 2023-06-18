@@ -26,8 +26,8 @@ open import ring-theory.semirings
 
 ## Idea
 
-A semiring `R` is said to be commutative if its multiplicative operation is
-commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
+A semiring `A` is said to be **commutative** if its multiplicative operation is
+commutative, i.e., if `xy = yx` for all `x, y ∈ A`.
 
 ## Definition
 
@@ -35,17 +35,17 @@ commutative, i.e., if `xy = yx` for all `x, y ∈ R`.
 
 ```agda
 is-commutative-Semiring : {l : Level} → Semiring l → UU l
-is-commutative-Semiring R =
-  (x y : type-Semiring R) → mul-Semiring R x y ＝ mul-Semiring R y x
+is-commutative-Semiring A =
+  (x y : type-Semiring A) → mul-Semiring A x y ＝ mul-Semiring A y x
 
 is-prop-is-commutative-Semiring :
-  { l : Level} (R : Semiring l) → is-prop (is-commutative-Semiring R)
-is-prop-is-commutative-Semiring R =
+  { l : Level} (A : Semiring l) → is-prop (is-commutative-Semiring A)
+is-prop-is-commutative-Semiring A =
   is-prop-Π
     ( λ x →
       is-prop-Π
       ( λ y →
-        is-set-type-Semiring R (mul-Semiring R x y) (mul-Semiring R y x)))
+        is-set-type-Semiring A (mul-Semiring A x y) (mul-Semiring A y x)))
 
 Commutative-Semiring :
   ( l : Level) → UU (lsuc l)
@@ -56,11 +56,11 @@ Commutative-Semiring l = Σ (Semiring l) is-commutative-Semiring
 
 ```agda
 module _
-  {l : Level} (R : Commutative-Semiring l)
+  {l : Level} (A : Commutative-Semiring l)
   where
 
   semiring-Commutative-Semiring : Semiring l
-  semiring-Commutative-Semiring = pr1 R
+  semiring-Commutative-Semiring = pr1 A
 
   additive-commutative-monoid-Commutative-Semiring : Commutative-Monoid l
   additive-commutative-monoid-Commutative-Semiring =
@@ -207,7 +207,7 @@ module _
   commutative-mul-Commutative-Semiring :
     (x y : type-Commutative-Semiring) →
     mul-Commutative-Semiring x y ＝ mul-Commutative-Semiring y x
-  commutative-mul-Commutative-Semiring = pr2 R
+  commutative-mul-Commutative-Semiring = pr2 A
 
   multiplicative-commutative-monoid-Commutative-Semiring :
     Commutative-Monoid l
@@ -265,6 +265,19 @@ module _
   ap-mul-nat-scalar-Commutative-Semiring =
     ap-mul-nat-scalar-Semiring semiring-Commutative-Semiring
 
+  left-zero-law-mul-nat-scalar-Commutative-Semiring :
+    (x : type-Commutative-Semiring) →
+    mul-nat-scalar-Commutative-Semiring 0 x ＝ zero-Commutative-Semiring
+  left-zero-law-mul-nat-scalar-Commutative-Semiring =
+    left-zero-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
+
+  right-zero-law-mul-nat-scalar-Commutative-Semiring :
+    (n : ℕ) →
+    mul-nat-scalar-Commutative-Semiring n zero-Commutative-Semiring ＝
+    zero-Commutative-Semiring
+  right-zero-law-mul-nat-scalar-Commutative-Semiring =
+    right-zero-law-mul-nat-scalar-Semiring semiring-Commutative-Semiring
+
   left-unit-law-mul-nat-scalar-Commutative-Semiring :
     (x : type-Commutative-Semiring) →
     mul-nat-scalar-Commutative-Semiring 1 x ＝ x
@@ -296,7 +309,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Commutative-Semiring :
     (m n : ℕ) (x : type-Commutative-Semiring) →
-    mul-nat-scalar-Commutative-Semiring (add-ℕ m n) x ＝
+    mul-nat-scalar-Commutative-Semiring (m +ℕ n) x ＝
     add-Commutative-Semiring
       ( mul-nat-scalar-Commutative-Semiring m x)
       ( mul-nat-scalar-Commutative-Semiring n x)

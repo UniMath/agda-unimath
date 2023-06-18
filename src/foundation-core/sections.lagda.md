@@ -1,27 +1,28 @@
 # Sections
 
 ```agda
-{-# OPTIONS --safe #-}
-```
-
-```agda
 module foundation-core.sections where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-Any dependent function induces a section of the projection map
+A **section** is a map that has a left inverse, i.e. a retraction. Thus,
+`s : B → A` is a section of `f : A → B` if the composition `f ∘ s` is homotopic
+to the identity at `B`.
+
+For example, every dependent function induces a section of the projection map.
 
 ## Definition
 
@@ -30,8 +31,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  sec : (A → B) → UU (l1 ⊔ l2)
-  sec f = Σ (B → A) (λ g → (f ∘ g) ~ id)
+  section : (A → B) → UU (l1 ⊔ l2)
+  section f = Σ (B → A) (λ s → (f ∘ s) ~ id)
 ```
 
 ## Properties
@@ -44,52 +45,52 @@ module _
   where
 
   section-left-factor :
-    (g : B → X) (h : A → B) → sec (g ∘ h) → sec g
-  pr1 (section-left-factor g h sec-gh) = h ∘ (pr1 sec-gh)
-  pr2 (section-left-factor g h sec-gh) = pr2 sec-gh
+    (g : B → X) (h : A → B) → section (g ∘ h) → section g
+  pr1 (section-left-factor g h section-gh) = h ∘ (pr1 section-gh)
+  pr2 (section-left-factor g h section-gh) = pr2 section-gh
 
   section-left-factor-htpy' :
     (f : A → X) (g : B → X) (h : A → B) (H' : (g ∘ h) ~ f) →
-    sec f → sec g
-  pr1 (section-left-factor-htpy' f g h H' sec-f) =
-    h ∘ (pr1 sec-f)
-  pr2 (section-left-factor-htpy' f g h H' sec-f) =
-    (H' ·r pr1 sec-f) ∙h (pr2 sec-f)
+    section f → section g
+  pr1 (section-left-factor-htpy' f g h H' section-f) =
+    h ∘ (pr1 section-f)
+  pr2 (section-left-factor-htpy' f g h H' section-f) =
+    (H' ·r pr1 section-f) ∙h (pr2 section-f)
 
   section-left-factor-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    sec f → sec g
-  section-left-factor-htpy f g h H sec-f =
-    section-left-factor-htpy' f g h (inv-htpy H) sec-f
+    section f → section g
+  section-left-factor-htpy f g h H section-f =
+    section-left-factor-htpy' f g h (inv-htpy H) section-f
 ```
 
 ### Composites of sections are sections
 
 ```agda
   section-comp :
-    (g : B → X) (h : A → B) → sec h → sec g → sec (g ∘ h)
-  pr1 (section-comp g h sec-h sec-g) = pr1 sec-h ∘ pr1 sec-g
-  pr2 (section-comp g h sec-h sec-g) =
-    (g ·l (pr2 sec-h ·r (pr1 sec-g))) ∙h (pr2 sec-g)
+    (g : B → X) (h : A → B) → section h → section g → section (g ∘ h)
+  pr1 (section-comp g h section-h section-g) = pr1 section-h ∘ pr1 section-g
+  pr2 (section-comp g h section-h section-g) =
+    (g ·l (pr2 section-h ·r (pr1 section-g))) ∙h (pr2 section-g)
 
   section-comp-htpy :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    sec h → sec g → sec f
-  pr1 (section-comp-htpy f g h H sec-h sec-g) =
-    pr1 (section-comp g h sec-h sec-g)
-  pr2 (section-comp-htpy f g h H sec-h sec-g) =
-    (H ·r pr1 (section-comp g h sec-h sec-g)) ∙h
-    (pr2 (section-comp g h sec-h sec-g))
+    section h → section g → section f
+  pr1 (section-comp-htpy f g h H section-h section-g) =
+    pr1 (section-comp g h section-h section-g)
+  pr2 (section-comp-htpy f g h H section-h section-g) =
+    (H ·r pr1 (section-comp g h section-h section-g)) ∙h
+    (pr2 (section-comp g h section-h section-g))
 
   inv-triangle-section :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-    (sec-h : sec h) → (f ∘ (pr1 sec-h)) ~ g
-  inv-triangle-section h g f H sec-h =
-    (H ·r (pr1 sec-h)) ∙h (g ·l (pr2 sec-h))
+    (section-h : section h) → (f ∘ (pr1 section-h)) ~ g
+  inv-triangle-section h g f H section-h =
+    (H ·r (pr1 section-h)) ∙h (g ·l (pr2 section-h))
 
   triangle-section :
     (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-    (sec-h : sec h) → g ~ (f ∘ (pr1 sec-h))
-  triangle-section h g f H sec-h =
-    inv-htpy (inv-triangle-section h g f H sec-h)
+    (section-h : section h) → g ~ (f ∘ (pr1 section-h))
+  triangle-section h g f H section-h =
+    inv-htpy (inv-triangle-section h g f H section-h)
 ```

@@ -7,16 +7,18 @@ module foundation-core.diagonal-maps-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -49,7 +51,7 @@ ap-diagonal :
 ap-diagonal refl = refl
 ```
 
-### If the diagonal of `A` is an equivalence, then `A` is a proposition.
+### If the diagonal of `A` is an equivalence, then `A` is a proposition
 
 ```agda
 module _
@@ -61,8 +63,17 @@ module _
     is-prop-is-equiv-diagonal is-equiv-d =
       is-prop-all-elements-equal
         ( λ x y →
-          ( inv (ap pr1 (issec-map-inv-is-equiv is-equiv-d (pair x y)))) ∙
-          ( ap pr2 (issec-map-inv-is-equiv is-equiv-d (pair x y))))
+          ( inv (ap pr1 (is-section-map-inv-is-equiv is-equiv-d (pair x y)))) ∙
+          ( ap pr2 (is-section-map-inv-is-equiv is-equiv-d (pair x y))))
+
+  equiv-diagonal-is-prop :
+    is-prop A → A ≃ (A × A)
+  pr1 (equiv-diagonal-is-prop is-prop-A) = diagonal A
+  pr2 (equiv-diagonal-is-prop is-prop-A) =
+    is-equiv-has-inverse
+      ( pr1)
+      ( λ pair-a → eq-pair (eq-is-prop is-prop-A) (eq-is-prop is-prop-A))
+      ( λ a → eq-is-prop is-prop-A)
 ```
 
 ### The fibers of the diagonal map
@@ -79,19 +90,19 @@ module _
   pr1 (fib-diagonal-eq (pair x y) β) = x
   pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
 
-  issec-fib-diagonal-eq :
+  is-section-fib-diagonal-eq :
     (t : A × A) → ((eq-fib-diagonal t) ∘ (fib-diagonal-eq t)) ~ id
-  issec-fib-diagonal-eq (pair x .x) refl = refl
+  is-section-fib-diagonal-eq (pair x .x) refl = refl
 
-  isretr-fib-diagonal-eq :
+  is-retraction-fib-diagonal-eq :
     (t : A × A) → ((fib-diagonal-eq t) ∘ (eq-fib-diagonal t)) ~ id
-  isretr-fib-diagonal-eq .(pair z z) (pair z refl) = refl
+  is-retraction-fib-diagonal-eq .(pair z z) (pair z refl) = refl
 
   abstract
     is-equiv-eq-fib-diagonal : (t : A × A) → is-equiv (eq-fib-diagonal t)
     is-equiv-eq-fib-diagonal t =
       is-equiv-has-inverse
         ( fib-diagonal-eq t)
-        ( issec-fib-diagonal-eq t)
-        ( isretr-fib-diagonal-eq t)
+        ( is-section-fib-diagonal-eq t)
+        ( is-retraction-fib-diagonal-eq t)
 ```

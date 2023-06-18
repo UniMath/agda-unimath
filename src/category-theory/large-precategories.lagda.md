@@ -7,9 +7,10 @@ module category-theory.large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
+open import category-theory.precategories
 
-open import foundation.functions
+open import foundation.action-on-identifications-binary-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -25,85 +26,106 @@ type.)
 
 ## Definition
 
+### Large precategories
+
 ```agda
-record Large-Precat (α : Level → Level) (β : Level → Level → Level) : Setω where
-  constructor make-Large-Precat
+record
+  Large-Precategory (α : Level → Level) (β : Level → Level → Level) : UUω where
+  constructor make-Large-Precategory
   field
-    obj-Large-Precat :
+    obj-Large-Precategory :
       (l : Level) → UU (α l)
-    hom-Large-Precat :
-      {l1 l2 : Level} → obj-Large-Precat l1 → obj-Large-Precat l2 →
+    hom-Large-Precategory :
+      {l1 l2 : Level} → obj-Large-Precategory l1 → obj-Large-Precategory l2 →
       Set (β l1 l2)
-    comp-hom-Large-Precat :
-      {l1 l2 l3 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
-      {Z : obj-Large-Precat l3} →
-      type-Set (hom-Large-Precat Y Z) → type-Set (hom-Large-Precat X Y) →
-      type-Set (hom-Large-Precat X Z)
-    id-hom-Large-Precat :
-      {l1 : Level} {X : obj-Large-Precat l1} → type-Set (hom-Large-Precat X X)
-    associative-comp-hom-Large-Precat :
-      {l1 l2 l3 l4 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
-      {Z : obj-Large-Precat l3} {W : obj-Large-Precat l4} →
-      (h : type-Set (hom-Large-Precat Z W))
-      (g : type-Set (hom-Large-Precat Y Z))
-      (f : type-Set (hom-Large-Precat X Y)) →
-      ( comp-hom-Large-Precat (comp-hom-Large-Precat h g) f) ＝
-      ( comp-hom-Large-Precat h (comp-hom-Large-Precat g f))
-    left-unit-law-comp-hom-Large-Precat :
-      {l1 l2 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
-      (f : type-Set (hom-Large-Precat X Y)) →
-      ( comp-hom-Large-Precat id-hom-Large-Precat f) ＝ f
-    right-unit-law-comp-hom-Large-Precat :
-      {l1 l2 : Level} {X : obj-Large-Precat l1} {Y : obj-Large-Precat l2}
-      (f : type-Set (hom-Large-Precat X Y)) →
-      ( comp-hom-Large-Precat f id-hom-Large-Precat) ＝ f
+    comp-hom-Large-Precategory :
+      {l1 l2 l3 : Level}
+      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      {Z : obj-Large-Precategory l3} →
+      type-Set (hom-Large-Precategory Y Z) →
+      type-Set (hom-Large-Precategory X Y) →
+      type-Set (hom-Large-Precategory X Z)
+    id-hom-Large-Precategory :
+      {l1 : Level} {X : obj-Large-Precategory l1} →
+      type-Set (hom-Large-Precategory X X)
+    associative-comp-hom-Large-Precategory :
+      {l1 l2 l3 l4 : Level}
+      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      {Z : obj-Large-Precategory l3} {W : obj-Large-Precategory l4} →
+      (h : type-Set (hom-Large-Precategory Z W))
+      (g : type-Set (hom-Large-Precategory Y Z))
+      (f : type-Set (hom-Large-Precategory X Y)) →
+      ( comp-hom-Large-Precategory (comp-hom-Large-Precategory h g) f) ＝
+      ( comp-hom-Large-Precategory h (comp-hom-Large-Precategory g f))
+    left-unit-law-comp-hom-Large-Precategory :
+      {l1 l2 : Level}
+      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      (f : type-Set (hom-Large-Precategory X Y)) →
+      ( comp-hom-Large-Precategory id-hom-Large-Precategory f) ＝ f
+    right-unit-law-comp-hom-Large-Precategory :
+      {l1 l2 : Level}
+      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      (f : type-Set (hom-Large-Precategory X Y)) →
+      ( comp-hom-Large-Precategory f id-hom-Large-Precategory) ＝ f
 
-open Large-Precat public
-
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precat α β) {l1 l2 : Level}
-  (X : obj-Large-Precat C l1) (Y : obj-Large-Precat C l2)
-  where
-
-  type-hom-Large-Precat : UU (β l1 l2)
-  type-hom-Large-Precat = type-Set (hom-Large-Precat C X Y)
-
-  is-set-type-hom-Large-Precat : is-set type-hom-Large-Precat
-  is-set-type-hom-Large-Precat = is-set-type-Set (hom-Large-Precat C X Y)
+open Large-Precategory public
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precat α β) {l1 l2 l3 : Level}
-  {X : obj-Large-Precat C l1} {Y : obj-Large-Precat C l2}
-  {Z : obj-Large-Precat C l3}
+  (C : Large-Precategory α β) {l1 l2 : Level}
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
   where
 
-  ap-comp-hom-Large-Precat :
-    {g g' : type-hom-Large-Precat C Y Z} (p : g ＝ g')
-    {f f' : type-hom-Large-Precat C X Y} (q : f ＝ f') →
-    comp-hom-Large-Precat C g f ＝ comp-hom-Large-Precat C g' f'
-  ap-comp-hom-Large-Precat p q = ap-binary (comp-hom-Large-Precat C) p q
+  type-hom-Large-Precategory : UU (β l1 l2)
+  type-hom-Large-Precategory = type-Set (hom-Large-Precategory C X Y)
 
-  comp-hom-Large-Precat' :
-    type-hom-Large-Precat C X Y → type-hom-Large-Precat C Y Z →
-    type-hom-Large-Precat C X Z
-  comp-hom-Large-Precat' f g = comp-hom-Large-Precat C g f
+  is-set-type-hom-Large-Precategory : is-set type-hom-Large-Precategory
+  is-set-type-hom-Large-Precategory =
+    is-set-type-Set (hom-Large-Precategory C X Y)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
+  {Z : obj-Large-Precategory C l3}
+  where
+
+  ap-comp-hom-Large-Precategory :
+    {g g' : type-hom-Large-Precategory C Y Z} (p : g ＝ g')
+    {f f' : type-hom-Large-Precategory C X Y} (q : f ＝ f') →
+    comp-hom-Large-Precategory C g f ＝
+    comp-hom-Large-Precategory C g' f'
+  ap-comp-hom-Large-Precategory p q =
+    ap-binary (comp-hom-Large-Precategory C) p q
+
+  comp-hom-Large-Precategory' :
+    type-hom-Large-Precategory C X Y → type-hom-Large-Precategory C Y Z →
+    type-hom-Large-Precategory C X Z
+  comp-hom-Large-Precategory' f g = comp-hom-Large-Precategory C g f
 ```
 
-## Examples
-
-### The large precategory of sets and functions
-
-The sets and functions, of all universes, form a precategory.
+### Precategories obtained from large precategories
 
 ```agda
-Set-Large-Precat : Large-Precat lsuc (λ l1 l2 → l1 ⊔ l2)
-obj-Large-Precat Set-Large-Precat = Set
-hom-Large-Precat Set-Large-Precat = hom-Set
-comp-hom-Large-Precat Set-Large-Precat g f = g ∘ f
-id-hom-Large-Precat Set-Large-Precat = id
-associative-comp-hom-Large-Precat Set-Large-Precat h g f = refl
-left-unit-law-comp-hom-Large-Precat Set-Large-Precat f = refl
-right-unit-law-comp-hom-Large-Precat Set-Large-Precat f = refl
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  where
+
+  precategory-Large-Precategory :
+    (l : Level) → Precategory (α l) (β l l)
+  pr1 (precategory-Large-Precategory l) =
+    obj-Large-Precategory C l
+  pr1 (pr2 (precategory-Large-Precategory l)) =
+    hom-Large-Precategory C
+  pr1 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
+    comp-hom-Large-Precategory C
+  pr2 (pr1 (pr2 (pr2 (precategory-Large-Precategory l)))) =
+    associative-comp-hom-Large-Precategory C
+  pr1 (pr2 (pr2 (pr2 (precategory-Large-Precategory l)))) x =
+    id-hom-Large-Precategory C
+  pr1 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =
+    left-unit-law-comp-hom-Large-Precategory C
+  pr2 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =
+    right-unit-law-comp-hom-Large-Precategory C
 ```

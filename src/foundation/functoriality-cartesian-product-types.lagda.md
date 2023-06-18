@@ -7,17 +7,18 @@ module foundation.functoriality-cartesian-product-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -91,19 +92,22 @@ module _
   pr1 (map-inv-map-prod f g H K (c , d)) = map-inv-is-equiv H c
   pr2 (map-inv-map-prod f g H K (c , d)) = map-inv-is-equiv K d
 
-  issec-map-inv-map-prod :
+  is-section-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     (map-prod f g ∘ map-inv-map-prod f g H K) ~ id
-  issec-map-inv-map-prod f g H K (c , d) =
-    htpy-map-prod (issec-map-inv-is-equiv H) (issec-map-inv-is-equiv K) (c , d)
+  is-section-map-inv-map-prod f g H K (c , d) =
+    htpy-map-prod
+      ( is-section-map-inv-is-equiv H)
+      ( is-section-map-inv-is-equiv K)
+      ( c , d)
 
-  isretr-map-inv-map-prod :
+  is-retraction-map-inv-map-prod :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     (map-inv-map-prod f g H K ∘ map-prod f g) ~ id
-  isretr-map-inv-map-prod f g H K (a , b) =
+  is-retraction-map-inv-map-prod f g H K (a , b) =
     htpy-map-prod
-      ( isretr-map-inv-is-equiv H)
-      ( isretr-map-inv-is-equiv K)
+      ( is-retraction-map-inv-is-equiv H)
+      ( is-retraction-map-inv-is-equiv K)
       ( a , b)
 
   is-equiv-map-prod :
@@ -112,12 +116,12 @@ module _
   is-equiv-map-prod f g H K =
     is-equiv-has-inverse
       ( map-inv-map-prod f g H K)
-      ( issec-map-inv-map-prod f g H K)
-      ( isretr-map-inv-map-prod f g H K)
+      ( is-section-map-inv-map-prod f g H K)
+      ( is-retraction-map-inv-map-prod f g H K)
 
   equiv-prod : (f : A ≃ C) (g : B ≃ D) → (A × B) ≃ (C × D)
-  pr1 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) = map-prod f g
-  pr2 (equiv-prod (pair f is-equiv-f) (pair g is-equiv-g)) =
+  pr1 (equiv-prod (f , is-equiv-f) (g , is-equiv-g)) = map-prod f g
+  pr2 (equiv-prod (f , is-equiv-f) (g , is-equiv-g)) =
     is-equiv-map-prod f g is-equiv-f is-equiv-g
 ```
 
@@ -142,25 +146,25 @@ module _
   pr2 (pr1 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl))) = y
   pr2 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl)) = refl
 
-  issec-map-inv-compute-fib-map-prod :
+  is-section-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-compute-fib-map-prod t) ∘ (map-inv-compute-fib-map-prod t)) ~ id
-  issec-map-inv-compute-fib-map-prod (pair .(f x) .(g y))
-    (pair (pair x refl) (pair y refl)) = refl
+  is-section-map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , (y , refl)) =
+    refl
 
-  isretr-map-inv-compute-fib-map-prod :
+  is-retraction-map-inv-compute-fib-map-prod :
     (t : C × D) →
     ((map-inv-compute-fib-map-prod t) ∘ (map-compute-fib-map-prod t)) ~ id
-  isretr-map-inv-compute-fib-map-prod .(map-prod f g (pair a b))
-    (pair (pair a b) refl) = refl
+  is-retraction-map-inv-compute-fib-map-prod ._ ((a , b) , refl) =
+    refl
 
   is-equiv-map-compute-fib-map-prod :
     (t : C × D) → is-equiv (map-compute-fib-map-prod t)
   is-equiv-map-compute-fib-map-prod t =
     is-equiv-has-inverse
       ( map-inv-compute-fib-map-prod t)
-      ( issec-map-inv-compute-fib-map-prod t)
-      ( isretr-map-inv-compute-fib-map-prod t)
+      ( is-section-map-inv-compute-fib-map-prod t)
+      ( is-retraction-map-inv-compute-fib-map-prod t)
 
   compute-fib-map-prod :
     (t : C × D) → fib (map-prod f g) t ≃ ((fib f (pr1 t)) × (fib g (pr2 t)))
@@ -181,10 +185,10 @@ is-equiv-left-factor-is-equiv-map-prod f g d is-equiv-fg =
       ( fib f x)
       ( fib g d)
       ( is-contr-is-equiv'
-        ( fib (map-prod f g) (pair x d))
-        ( map-compute-fib-map-prod f g (pair x d))
-        ( is-equiv-map-compute-fib-map-prod f g (pair x d))
-        ( is-contr-map-is-equiv is-equiv-fg (pair x d))))
+        ( fib (map-prod f g) (x , d))
+        ( map-compute-fib-map-prod f g (x , d))
+        ( is-equiv-map-compute-fib-map-prod f g (x , d))
+        ( is-contr-map-is-equiv is-equiv-fg (x , d))))
 
 is-equiv-right-factor-is-equiv-map-prod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
@@ -196,10 +200,10 @@ is-equiv-right-factor-is-equiv-map-prod f g c is-equiv-fg =
       ( fib f c)
       ( fib g y)
       ( is-contr-is-equiv'
-        ( fib (map-prod f g) (pair c y))
-        ( map-compute-fib-map-prod f g (pair c y))
-        ( is-equiv-map-compute-fib-map-prod f g (pair c y))
-        ( is-contr-map-is-equiv is-equiv-fg (pair c y))))
+        ( fib (map-prod f g) (c , y))
+        ( map-compute-fib-map-prod f g (c , y))
+        ( is-equiv-map-compute-fib-map-prod f g (c , y))
+        ( is-contr-map-is-equiv is-equiv-fg (c , y))))
 ```
 
 ## See also

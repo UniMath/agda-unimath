@@ -8,7 +8,7 @@ module order-theory.subpreorders where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -19,88 +19,97 @@ open import order-theory.preorders
 
 </details>
 
+## Idea
+
+A **subpreorder** of a preorder `P` is a subtype of `P`. By restriction of the
+ordering on `P`, the subpreorder inherits the structure of a preorder.
+
 ## Definition
 
 ### Subpreorders
 
 ```agda
+Subpreorder :
+  {l1 l2 : Level} (l3 : Level) → Preorder l1 l2 → UU (l1 ⊔ lsuc l3)
+Subpreorder l3 P = subtype l3 (type-Preorder P)
+
 module _
-  {l1 l2 l3 : Level} (X : Preorder l1 l2) (S : element-Preorder X → Prop l3)
+  {l1 l2 l3 : Level} (P : Preorder l1 l2) (S : Subpreorder l3 P)
   where
 
-  element-sub-Preorder : UU (l1 ⊔ l3)
-  element-sub-Preorder = type-subtype S
+  type-Subpreorder : UU (l1 ⊔ l3)
+  type-Subpreorder = type-subtype S
 
-  eq-element-sub-Preorder :
-    (x y : element-sub-Preorder) → Id (pr1 x) (pr1 y) → Id x y
-  eq-element-sub-Preorder x y = eq-type-subtype S
+  eq-type-Subpreorder :
+    (x y : type-Subpreorder) → Id (pr1 x) (pr1 y) → Id x y
+  eq-type-Subpreorder x y = eq-type-subtype S
 
-  leq-sub-preorder-Prop : (x y : element-sub-Preorder) → Prop l2
-  leq-sub-preorder-Prop x y = leq-preorder-Prop X (pr1 x) (pr1 y)
+  leq-Subpreorder-Prop : (x y : type-Subpreorder) → Prop l2
+  leq-Subpreorder-Prop x y = leq-Preorder-Prop P (pr1 x) (pr1 y)
 
-  leq-sub-Preorder : (x y : element-sub-Preorder) → UU l2
-  leq-sub-Preorder x y = type-Prop (leq-sub-preorder-Prop x y)
+  leq-Subpreorder : (x y : type-Subpreorder) → UU l2
+  leq-Subpreorder x y = type-Prop (leq-Subpreorder-Prop x y)
 
-  is-prop-leq-sub-Preorder :
-    (x y : element-sub-Preorder) → is-prop (leq-sub-Preorder x y)
-  is-prop-leq-sub-Preorder x y =
-    is-prop-type-Prop (leq-sub-preorder-Prop x y)
+  is-prop-leq-Subpreorder :
+    (x y : type-Subpreorder) → is-prop (leq-Subpreorder x y)
+  is-prop-leq-Subpreorder x y =
+    is-prop-type-Prop (leq-Subpreorder-Prop x y)
 
-  refl-leq-sub-Preorder : (x : element-sub-Preorder) → leq-sub-Preorder x x
-  refl-leq-sub-Preorder x = refl-leq-Preorder X (pr1 x)
+  refl-leq-Subpreorder : (x : type-Subpreorder) → leq-Subpreorder x x
+  refl-leq-Subpreorder x = refl-leq-Preorder P (pr1 x)
 
-  transitive-leq-sub-Preorder :
-    (x y z : element-sub-Preorder) →
-    leq-sub-Preorder y z → leq-sub-Preorder x y → leq-sub-Preorder x z
-  transitive-leq-sub-Preorder x y z =
-    transitive-leq-Preorder X (pr1 x) (pr1 y) (pr1 z)
+  transitive-leq-Subpreorder :
+    (x y z : type-Subpreorder) →
+    leq-Subpreorder y z → leq-Subpreorder x y → leq-Subpreorder x z
+  transitive-leq-Subpreorder x y z =
+    transitive-leq-Preorder P (pr1 x) (pr1 y) (pr1 z)
 
-  sub-Preorder : Preorder (l1 ⊔ l3) l2
-  pr1 sub-Preorder = element-sub-Preorder
-  pr1 (pr2 sub-Preorder) = leq-sub-preorder-Prop
-  pr1 (pr2 (pr2 sub-Preorder)) = refl-leq-sub-Preorder
-  pr2 (pr2 (pr2 sub-Preorder)) = transitive-leq-sub-Preorder
+  preorder-Subpreorder : Preorder (l1 ⊔ l3) l2
+  pr1 preorder-Subpreorder = type-Subpreorder
+  pr1 (pr2 preorder-Subpreorder) = leq-Subpreorder-Prop
+  pr1 (pr2 (pr2 preorder-Subpreorder)) = refl-leq-Subpreorder
+  pr2 (pr2 (pr2 preorder-Subpreorder)) = transitive-leq-Subpreorder
 ```
 
 ### Inclusions of subpreorders
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Preorder l1 l2)
+  {l1 l2 : Level} (P : Preorder l1 l2)
   where
 
   module _
-    {l3 l4 : Level} (S : element-Preorder X → Prop l3)
-    (T : element-Preorder X → Prop l4)
+    {l3 l4 : Level} (S : type-Preorder P → Prop l3)
+    (T : type-Preorder P → Prop l4)
     where
 
-    inclusion-sub-preorder-Prop : Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-preorder-Prop =
-      Π-Prop (element-Preorder X) (λ x → hom-Prop (S x) (T x))
+    inclusion-Subpreorder-Prop : Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-Subpreorder-Prop =
+      Π-Prop (type-Preorder P) (λ x → hom-Prop (S x) (T x))
 
-    inclusion-sub-Preorder : UU (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-Preorder = type-Prop inclusion-sub-preorder-Prop
+    inclusion-Subpreorder : UU (l1 ⊔ l3 ⊔ l4)
+    inclusion-Subpreorder = type-Prop inclusion-Subpreorder-Prop
 
-    is-prop-inclusion-sub-Preorder : is-prop inclusion-sub-Preorder
-    is-prop-inclusion-sub-Preorder =
-      is-prop-type-Prop inclusion-sub-preorder-Prop
+    is-prop-inclusion-Subpreorder : is-prop inclusion-Subpreorder
+    is-prop-inclusion-Subpreorder =
+      is-prop-type-Prop inclusion-Subpreorder-Prop
 
-  refl-inclusion-sub-Preorder :
-    {l3 : Level} (S : element-Preorder X → Prop l3) →
-    inclusion-sub-Preorder S S
-  refl-inclusion-sub-Preorder S x = id
+  refl-inclusion-Subpreorder :
+    {l3 : Level} (S : type-Preorder P → Prop l3) →
+    inclusion-Subpreorder S S
+  refl-inclusion-Subpreorder S x = id
 
-  transitive-inclusion-sub-Preorder :
-    {l3 l4 l5 : Level} (S : element-Preorder X → Prop l3)
-    (T : element-Preorder X → Prop l4)
-    (U : element-Preorder X → Prop l5) →
-    inclusion-sub-Preorder T U → inclusion-sub-Preorder S T →
-    inclusion-sub-Preorder S U
-  transitive-inclusion-sub-Preorder S T U g f x = (g x) ∘ (f x)
+  transitive-inclusion-Subpreorder :
+    {l3 l4 l5 : Level} (S : type-Preorder P → Prop l3)
+    (T : type-Preorder P → Prop l4)
+    (U : type-Preorder P → Prop l5) →
+    inclusion-Subpreorder T U → inclusion-Subpreorder S T →
+    inclusion-Subpreorder S U
+  transitive-inclusion-Subpreorder S T U g f x = (g x) ∘ (f x)
 
   Sub-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
-  pr1 (Sub-Preorder l) = element-Preorder X → Prop l
-  pr1 (pr2 (Sub-Preorder l)) = inclusion-sub-preorder-Prop
-  pr1 (pr2 (pr2 (Sub-Preorder l))) = refl-inclusion-sub-Preorder
-  pr2 (pr2 (pr2 (Sub-Preorder l))) = transitive-inclusion-sub-Preorder
+  pr1 (Sub-Preorder l) = type-Preorder P → Prop l
+  pr1 (pr2 (Sub-Preorder l)) = inclusion-Subpreorder-Prop
+  pr1 (pr2 (pr2 (Sub-Preorder l))) = refl-inclusion-Subpreorder
+  pr2 (pr2 (pr2 (Sub-Preorder l))) = transitive-inclusion-Subpreorder
 ```

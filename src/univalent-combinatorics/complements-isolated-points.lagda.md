@@ -59,9 +59,9 @@ equiv-maybe-structure-point-UU-Fin :
   Maybe (type-complement-point-UU-Fin k (pair X x)) ≃
   type-UU-Fin (succ-ℕ k) X
 equiv-maybe-structure-point-UU-Fin k X x =
-   equiv-maybe-structure-isolated-point
-     ( type-UU-Fin (succ-ℕ k) X)
-     ( isolated-point-UU-Fin k X x)
+  equiv-maybe-structure-isolated-point
+    ( type-UU-Fin (succ-ℕ k) X)
+    ( isolated-point-UU-Fin k X x)
 
 has-cardinality-type-complement-point-UU-Fin :
   {l1 : Level} (k : ℕ)
@@ -120,4 +120,6 @@ equiv-complement-point-UU-Fin
 
 ## Properties
 
-### The map from a pointed (k+1)-element type to the complement of the point is an equivalence
+### The map from a pointed `k+1`-element type to the complement of the point is an equivalence
+
+This remains to be shown.

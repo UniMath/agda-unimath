@@ -2,24 +2,26 @@
 
 ```agda
 module foundation.propositions where
+
+open import foundation-core.propositions public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.propositions public
-
 open import foundation.contractible-types
+open import foundation.universe-levels
 
 open import foundation-core.retractions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
 
-### Propositions are (k+1)-truncated for any k
+## Properties
+
+### Propositions are `k+1`-truncated for any `k`
 
 ```agda
 abstract

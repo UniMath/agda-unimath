@@ -7,8 +7,6 @@ module category-theory.homotopies-natural-transformations-large-precategories wh
 <details><summary>Imports</summary>
 
 ```agda
-open import Agda.Primitive using (Setω)
-
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
@@ -25,44 +23,44 @@ open import foundation.universe-levels
 Two natural transformations `α β : F ⇒ G` are homotopic if for every object `x`
 there is an identity `Id (α x) (β x)`.
 
-In `Setω` the identity type is not available. If it were, we would be able to
-characterize the identity type of natural transformations from `F` to `G` as the
-type of homotopies of natural transformations.
+In `UUω` the usual identity type is not available. If it were, we would be able
+to characterize the identity type of natural transformations from `F` to `G` as
+the type of homotopies of natural transformations.
 
-## Definition
+## Definitions
+
+### Homotopies of natural transformations
 
 ```agda
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
-  {C : Large-Precat αC βC} {D : Large-Precat αD βD}
-  {F : functor-Large-Precat C D γF} {G : functor-Large-Precat C D γG}
+  {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
+  {F : functor-Large-Precategory C D γF}
+  {G : functor-Large-Precategory C D γG}
   where
 
-  htpy-natural-transformation-Large-Precat :
-    (α β : natural-transformation-Large-Precat F G) → Setω
-  htpy-natural-transformation-Large-Precat α β =
-    {l : Level} (X : obj-Large-Precat C l) →
-    ( obj-natural-transformation-Large-Precat α X) ＝
-    ( obj-natural-transformation-Large-Precat β X)
+  htpy-natural-transformation-Large-Precategory :
+    (α β : natural-transformation-Large-Precategory F G) → UUω
+  htpy-natural-transformation-Large-Precategory α β =
+    { l : Level} (X : obj-Large-Precategory C l) →
+    ( obj-natural-transformation-Large-Precategory α X) ＝
+    ( obj-natural-transformation-Large-Precategory β X)
 ```
 
-## Examples
-
-### Reflexivity homotopy
-
-Any natural transformation is homotopic to itself.
+### The reflexivity homotopy
 
 ```agda
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
-  {C : Large-Precat αC βC} {D : Large-Precat αD βD}
-  {F : functor-Large-Precat C D γF} {G : functor-Large-Precat C D γG}
+  {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
+  {F : functor-Large-Precategory C D γF}
+  {G : functor-Large-Precategory C D γG}
   where
 
-  refl-htpy-natural-transformation-Large-Precat :
-    (α : natural-transformation-Large-Precat F G) →
-    htpy-natural-transformation-Large-Precat α α
-  refl-htpy-natural-transformation-Large-Precat α = refl-htpy
+  refl-htpy-natural-transformation-Large-Precategory :
+    (α : natural-transformation-Large-Precategory F G) →
+    htpy-natural-transformation-Large-Precategory α α
+  refl-htpy-natural-transformation-Large-Precategory α = refl-htpy
 ```
 
 ### Concatenation of homotopies
@@ -71,28 +69,29 @@ A homotopy from `α` to `β` can be concatenated with a homotopy from `β` to `�
 to form a homotopy from `α` to `γ`. The concatenation is associative.
 
 ```agda
-  concat-htpy-natural-transformation-Large-Precat :
-    (α β γ : natural-transformation-Large-Precat F G) →
-    htpy-natural-transformation-Large-Precat α β →
-    htpy-natural-transformation-Large-Precat β γ →
-    htpy-natural-transformation-Large-Precat α γ
-  concat-htpy-natural-transformation-Large-Precat α β γ H K X =
+  concat-htpy-natural-transformation-Large-Precategory :
+    (α β γ : natural-transformation-Large-Precategory F G) →
+    htpy-natural-transformation-Large-Precategory α β →
+    htpy-natural-transformation-Large-Precategory β γ →
+    htpy-natural-transformation-Large-Precategory α γ
+  concat-htpy-natural-transformation-Large-Precategory α β γ H K X =
     H X ∙ K X
 
-  associative-concat-htpy-natural-transformation-Large-Precat :
-    (α β γ δ : natural-transformation-Large-Precat F G)
-    (H : htpy-natural-transformation-Large-Precat α β)
-    (K : htpy-natural-transformation-Large-Precat β γ)
-    (L : htpy-natural-transformation-Large-Precat γ δ) →
-    {l : Level} (X : obj-Large-Precat C l) →
-    ( concat-htpy-natural-transformation-Large-Precat α γ δ
-      ( concat-htpy-natural-transformation-Large-Precat α β γ H K)
+  associative-concat-htpy-natural-transformation-Large-Precategory :
+    (α β γ δ : natural-transformation-Large-Precategory F G)
+    (H : htpy-natural-transformation-Large-Precategory α β)
+    (K : htpy-natural-transformation-Large-Precategory β γ)
+    (L : htpy-natural-transformation-Large-Precategory γ δ) →
+    {l : Level} (X : obj-Large-Precategory C l) →
+    ( concat-htpy-natural-transformation-Large-Precategory α γ δ
+      ( concat-htpy-natural-transformation-Large-Precategory α β γ H K)
       ( L)
       ( X)) ＝
-    ( concat-htpy-natural-transformation-Large-Precat α β δ
+    ( concat-htpy-natural-transformation-Large-Precategory α β δ
       ( H)
-      ( concat-htpy-natural-transformation-Large-Precat β γ δ K L)
+      ( concat-htpy-natural-transformation-Large-Precategory β γ δ K L)
       ( X))
-  associative-concat-htpy-natural-transformation-Large-Precat α β γ δ H K L X =
+  associative-concat-htpy-natural-transformation-Large-Precategory
+    α β γ δ H K L X =
     assoc (H X) (K X) (L X)
 ```

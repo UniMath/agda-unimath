@@ -7,10 +7,12 @@ module structured-types.coherent-h-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -42,7 +44,7 @@ coherent-unit-laws-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
   (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
 coherent-unit-laws-mul-Pointed-Type A μ =
-  coherent-unit-laws μ (pt-Pointed-Type A)
+  coherent-unit-laws μ (point-Pointed-Type A)
 
 coherent-unital-mul-Pointed-Type :
   {l : Level} → Pointed-Type l → UU l
@@ -69,7 +71,7 @@ module _
   type-Coherent-H-Space = type-Pointed-Type pointed-type-Coherent-H-Space
 
   unit-Coherent-H-Space : type-Coherent-H-Space
-  unit-Coherent-H-Space = pt-Pointed-Type pointed-type-Coherent-H-Space
+  unit-Coherent-H-Space = point-Pointed-Type pointed-type-Coherent-H-Space
 
   coherent-unital-mul-Coherent-H-Space :
     coherent-unital-mul-Pointed-Type pointed-type-Coherent-H-Space
@@ -110,8 +112,9 @@ module _
     pr1 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 
   coh-unit-laws-mul-Coherent-H-Space :
-    Id ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
-       ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
+    Id
+      ( left-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
+      ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
   coh-unit-laws-mul-Coherent-H-Space =
     pr2 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
 ```
@@ -129,24 +132,24 @@ pr2 (pr2 (coherent-h-space-H-Space A)) =
   coherent-unit-laws-unit-laws (mul-H-Space A) (unit-laws-mul-H-Space A)
 ```
 
-### The type of coherent H-space structures on `A` is equivalent to the type of sections of `ev_pt : (A → A) →* A`.
+### The type of coherent H-space structures on `A` is equivalent to the type of sections of `ev-point : (A → A) →∗ A`
 
 ```agda
 module _
   {l : Level} (A : Pointed-Type l)
   where
 
-  pointed-section-ev-pt-Pointed-Type : UU l
-  pointed-section-ev-pt-Pointed-Type =
+  pointed-section-ev-point-Pointed-Type : UU l
+  pointed-section-ev-point-Pointed-Type =
     pointed-section-Pointed-Type
       ( endo-Pointed-Type (type-Pointed-Type A))
       ( A)
-      ( pair (ev-pt-Pointed-Type A) refl)
+      ( pair (ev-point-Pointed-Type A) refl)
 
-compute-pointed-section-ev-pt-Pointed-Type :
+compute-pointed-section-ev-point-Pointed-Type :
   {l : Level} (A : Pointed-Type l) →
-  pointed-section-ev-pt-Pointed-Type A ≃ coherent-unital-mul-Pointed-Type A
-compute-pointed-section-ev-pt-Pointed-Type (pair A a) =
+  pointed-section-ev-point-Pointed-Type A ≃ coherent-unital-mul-Pointed-Type A
+compute-pointed-section-ev-point-Pointed-Type (pair A a) =
   ( equiv-tot
     ( λ μ →
       ( equiv-Σ
@@ -161,7 +164,7 @@ compute-pointed-section-ev-pt-Pointed-Type (pair A a) =
                   ( equiv-concat' (K a) (ap-ev a H))) ∘e
                 ( equiv-concat' (K a) right-unit)) ∘e
               ( equiv-concat' (K a) right-unit)))))) ∘e
-  ( assoc-Σ
+  ( associative-Σ
     ( A → (A → A))
     ( λ μ → μ a ＝ id)
     ( λ μp →

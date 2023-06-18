@@ -9,18 +9,18 @@ module foundation.maybe where
 ```agda
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.equality-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -38,6 +38,11 @@ is a map `f : X → Maybe Y`.
 ```agda
 Maybe : {l : Level} → UU l → UU l
 Maybe X = X + unit
+
+data Maybe' {l} (X : UU l) : UU l where
+  unit-Maybe' : X → Maybe' X
+  exception-Maybe' : Maybe' X
+{-# BUILTIN MAYBE Maybe' #-}
 
 unit-Maybe : {l : Level} {X : UU l} → X → Maybe X
 unit-Maybe = inl
@@ -165,4 +170,21 @@ eq-is-not-exception-Maybe :
   inl (value-is-not-exception-Maybe x H) ＝ x
 eq-is-not-exception-Maybe x H =
   eq-is-value-Maybe x (is-value-is-not-exception-Maybe x H)
+```
+
+### The two definitions of `Maybe` are equal
+
+```agda
+equiv-Maybe-Maybe' :
+  {l1 l2 : Level} {X : UU l1} → Maybe X ≃ Maybe' X
+pr1 equiv-Maybe-Maybe' (inl x) = unit-Maybe' x
+pr1 equiv-Maybe-Maybe' (inr star) = exception-Maybe'
+pr1 (pr1 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = inl x
+pr1 (pr1 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = inr star
+pr2 (pr1 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = refl
+pr2 (pr1 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = refl
+pr1 (pr2 (pr2 equiv-Maybe-Maybe')) (unit-Maybe' x) = inl x
+pr1 (pr2 (pr2 equiv-Maybe-Maybe')) exception-Maybe' = inr star
+pr2 (pr2 (pr2 equiv-Maybe-Maybe')) (inl x) = refl
+pr2 (pr2 (pr2 equiv-Maybe-Maybe')) (inr star) = refl
 ```

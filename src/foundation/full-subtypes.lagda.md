@@ -8,15 +8,15 @@ module foundation.full-subtypes where
 
 ```agda
 open import foundation.decidable-subtypes
+open import foundation.dependent-pair-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -93,6 +93,6 @@ module _
   is-full-is-equiv-inclusion-subtype H x =
     tr
       ( is-in-subtype P)
-      ( issec-map-inv-is-equiv H x)
+      ( is-section-map-inv-is-equiv H x)
       ( pr2 (map-inv-is-equiv H x))
 ```

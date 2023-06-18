@@ -2,25 +2,28 @@
 
 ```agda
 module foundation.homotopies where
+
+open import foundation-core.homotopies public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.homotopies public
-
+open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.identity-systems
 open import foundation-core.sections
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -72,7 +75,7 @@ IND-HTPY :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → f ~ g → UU l3) → sec (ev-refl-htpy f C)
+  (C : (g : (x : A) → B x) → f ~ g → UU l3) → section (ev-refl-htpy f C)
 ```
 
 ```agda
@@ -113,10 +116,10 @@ module _
       C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
     ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
 
-    comp-htpy :
+    compute-ind-htpy :
       (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
-    comp-htpy f C = pr2 (Ind-htpy f C)
+    compute-ind-htpy f C = pr2 (Ind-htpy f C)
 ```
 
 ### Inverting homotopies is an equivalence
@@ -169,22 +172,22 @@ module _
   (K : g ~ h)
   where
 
-  issec-concat-inv-htpy' :
+  is-section-concat-inv-htpy' :
     ((concat-htpy' f K) ∘ (concat-inv-htpy' f K)) ~ id
-  issec-concat-inv-htpy' L =
-    eq-htpy (λ x → issec-inv-concat' (f x) (K x) (L x))
+  is-section-concat-inv-htpy' L =
+    eq-htpy (λ x → is-section-inv-concat' (f x) (K x) (L x))
 
-  isretr-concat-inv-htpy' :
+  is-retraction-concat-inv-htpy' :
     ((concat-inv-htpy' f K) ∘ (concat-htpy' f K)) ~ id
-  isretr-concat-inv-htpy' L =
-    eq-htpy (λ x → isretr-inv-concat' (f x) (K x) (L x))
+  is-retraction-concat-inv-htpy' L =
+    eq-htpy (λ x → is-retraction-inv-concat' (f x) (K x) (L x))
 
   is-equiv-concat-htpy' : is-equiv (concat-htpy' f K)
   is-equiv-concat-htpy' =
     is-equiv-has-inverse
       ( concat-inv-htpy' f K)
-      ( issec-concat-inv-htpy')
-      ( isretr-concat-inv-htpy')
+      ( is-section-concat-inv-htpy')
+      ( is-retraction-concat-inv-htpy')
 
   equiv-concat-htpy' : (f ~ g) ≃ (f ~ h)
   equiv-concat-htpy' =
@@ -214,60 +217,60 @@ module _
   equiv-con-inv-htpy = pair (con-inv-htpy H K L) is-equiv-con-inv-htpy
 ```
 
-### Computing path-overs in the type family `eq-value` of dependent functions
+### Computing dependent-identifications in the type family `eq-value` of dependent functions
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f g : (x : A) → B x)
   where
 
-  is-equiv-map-compute-path-over-eq-value :
+  is-equiv-map-compute-dependent-identification-eq-value :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
-    is-equiv (map-compute-path-over-eq-value f g p q r)
-  is-equiv-map-compute-path-over-eq-value refl q r =
+    is-equiv (map-compute-dependent-identification-eq-value f g p q r)
+  is-equiv-map-compute-dependent-identification-eq-value refl q r =
     is-equiv-comp
       ( inv)
       ( concat' r (right-unit ∙ ap-id q))
       ( is-equiv-concat' r (right-unit ∙ ap-id q))
       ( is-equiv-inv r q)
 
-  compute-path-over-eq-value :
+  compute-dependent-identification-eq-value :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
     (((apd f p) ∙ r) ＝ ((ap (tr B p) q) ∙ (apd g p))) ≃
     (tr (eq-value f g) p q ＝ r)
-  pr1 (compute-path-over-eq-value p q r) =
-    map-compute-path-over-eq-value f g p q r
-  pr2 (compute-path-over-eq-value p q r) =
-    is-equiv-map-compute-path-over-eq-value p q r
+  pr1 (compute-dependent-identification-eq-value p q r) =
+    map-compute-dependent-identification-eq-value f g p q r
+  pr2 (compute-dependent-identification-eq-value p q r) =
+    is-equiv-map-compute-dependent-identification-eq-value p q r
 ```
 
-### Computing path-overs in the type family `eq-value` of ordinary functions
+### Computing dependent-identifications in the type family `eq-value` of ordinary functions
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
   where
 
-  is-equiv-map-compute-path-over-eq-value' :
+  is-equiv-map-compute-dependent-identification-eq-value-function :
     {x y : A} (p : x ＝ y) (q : eq-value f g x) (q' : eq-value f g y) →
-    is-equiv (map-compute-path-over-eq-value' f g p q q')
-  is-equiv-map-compute-path-over-eq-value' refl q q' =
+    is-equiv (map-compute-dependent-identification-eq-value-function f g p q q')
+  is-equiv-map-compute-dependent-identification-eq-value-function refl q q' =
     is-equiv-comp
       ( inv)
       ( concat' q' right-unit)
       ( is-equiv-concat' q' right-unit)
       ( is-equiv-inv q' q)
 
-  compute-path-over-eq-value' :
+  compute-dependent-identification-eq-value-function :
     {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
     (((ap f p) ∙ q') ＝ (q ∙ (ap g p))) ≃ ((tr (eq-value f g) p q) ＝ q')
-  pr1 (compute-path-over-eq-value' p q q') =
-    map-compute-path-over-eq-value' f g p q q'
-  pr2 (compute-path-over-eq-value' p q q') =
-    is-equiv-map-compute-path-over-eq-value' p q q'
+  pr1 (compute-dependent-identification-eq-value-function p q q') =
+    map-compute-dependent-identification-eq-value-function f g p q q'
+  pr2 (compute-dependent-identification-eq-value-function p q q') =
+    is-equiv-map-compute-dependent-identification-eq-value-function p q q'
 ```
 
-Relation between between `compute-path-over-eq-value'` and `nat-htpy`
+### Relation between between `compute-dependent-identification-eq-value-function` and `nat-htpy`
 
 ```agda
 module _
@@ -277,17 +280,25 @@ module _
 
   nat-htpy-apd-htpy :
     (p : a0 ＝ a1) →
-    (map-inv-equiv (compute-path-over-eq-value'
+    (map-inv-equiv (compute-dependent-identification-eq-value-function
       f g p (H a0) (H a1))) (apd H p) ＝ inv (nat-htpy H p)
   nat-htpy-apd-htpy refl =
-    inv (ap (map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a0)))
-      (ap inv (left-inv right-unit))) ∙
-     (isretr-map-inv-equiv (compute-path-over-eq-value' f g refl (H a0) (H a1)) (inv right-unit))
+    inv
+      ( ap
+        ( map-inv-equiv
+          ( compute-dependent-identification-eq-value-function f g refl
+            ( H a0)
+            ( H a0)))
+        ( ap inv (left-inv right-unit))) ∙
+      ( is-retraction-map-inv-equiv
+        ( compute-dependent-identification-eq-value-function f g refl
+          ( H a0)
+          ( H a1))
+        ( inv right-unit))
 ```
 
 ## See also
 
-- We postulate that homotopy is equivalent to identity of functions in
+- We postulate that homotopies characterize identifications in (dependent)
+  function types in the file
   [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
-- We define an equational reasoning syntax for homotopies in
-  [`foundation.equational-reasoning`](foundation.equational-reasoning.md).

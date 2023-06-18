@@ -7,11 +7,13 @@ module synthetic-homotopy-theory.multiplication-circle where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import structured-types.pointed-homotopies
@@ -39,12 +41,20 @@ htpy-id-id-Π-𝕊¹ :
   Π-𝕊¹
     ( eq-value id id)
     ( loop-𝕊¹)
-    ( map-compute-path-over-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+    ( map-compute-dependent-identification-eq-value-id-id
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( refl))
 htpy-id-id-Π-𝕊¹ =
   apply-dependent-universal-property-𝕊¹
     ( eq-value id id)
     ( loop-𝕊¹)
-    ( map-compute-path-over-eq-value-id-id loop-𝕊¹ loop-𝕊¹ loop-𝕊¹ refl)
+    ( map-compute-dependent-identification-eq-value-id-id
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( refl))
 
 htpy-id-id-𝕊¹ : (x : 𝕊¹) → Id x x
 htpy-id-id-𝕊¹ = pr1 htpy-id-id-Π-𝕊¹
@@ -57,13 +67,13 @@ htpy-id-id-base-𝕊¹ = pr1 (pr2 htpy-id-id-Π-𝕊¹)
 
 ```agda
 Mul-Π-𝕊¹ : 𝕊¹ → UU lzero
-Mul-Π-𝕊¹ x = 𝕊¹-Pointed-Type →* (pair 𝕊¹ x)
+Mul-Π-𝕊¹ x = 𝕊¹-Pointed-Type →∗ (pair 𝕊¹ x)
 
-path-over-Mul-Π-𝕊¹ :
+dependent-identification-Mul-Π-𝕊¹ :
   {x : 𝕊¹} (p : Id base-𝕊¹ x) (q : Mul-Π-𝕊¹ base-𝕊¹) (r : Mul-Π-𝕊¹ x) →
   (H : pr1 q ~ pr1 r) → Id (pr2 q ∙ p) (H base-𝕊¹ ∙ pr2 r) →
   Id (tr Mul-Π-𝕊¹ p q) r
-path-over-Mul-Π-𝕊¹ {x} refl q r H u =
+dependent-identification-Mul-Π-𝕊¹ {x} refl q r H u =
   eq-htpy-pointed-map
     ( 𝕊¹-Pointed-Type)
     ( 𝕊¹-Pointed-Type)
@@ -74,16 +84,13 @@ path-over-Mul-Π-𝕊¹ {x} refl q r H u =
 eq-id-id-𝕊¹-Pointed-Type :
   Id (tr Mul-Π-𝕊¹ loop-𝕊¹ id-pointed-map) id-pointed-map
 eq-id-id-𝕊¹-Pointed-Type =
-  path-over-Mul-Π-𝕊¹ loop-𝕊¹
+  dependent-identification-Mul-Π-𝕊¹ loop-𝕊¹
     ( id-pointed-map)
     ( id-pointed-map)
     ( htpy-id-id-𝕊¹)
     ( inv htpy-id-id-base-𝕊¹ ∙ inv right-unit)
 
-mul-Π-𝕊¹ :
-  Π-𝕊¹ ( Mul-Π-𝕊¹)
-       ( id-pointed-map)
-       ( eq-id-id-𝕊¹-Pointed-Type)
+mul-Π-𝕊¹ : Π-𝕊¹ (Mul-Π-𝕊¹) (id-pointed-map) (eq-id-id-𝕊¹-Pointed-Type)
 mul-Π-𝕊¹ =
   apply-dependent-universal-property-𝕊¹
     ( Mul-Π-𝕊¹)

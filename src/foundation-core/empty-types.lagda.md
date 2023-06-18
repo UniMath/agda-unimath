@@ -7,16 +7,16 @@ module foundation-core.empty-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.propositions
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -29,6 +29,8 @@ type available, we will say that a type is empty if it maps into the standard
 empty type.
 
 ## Definition
+
+### Empty types
 
 ```agda
 data empty : UU lzero where
@@ -112,7 +114,7 @@ pr1 empty-Set = empty
 pr2 empty-Set = is-set-empty
 ```
 
-### The empty type is k-truncated for any k ≥ 1
+### The empty type is `k`-truncated for any `k ≥ 1`
 
 ```agda
 abstract

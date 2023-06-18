@@ -2,28 +2,28 @@
 
 ```agda
 module foundation.sets where
+
+open import foundation-core.sets public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.sets public
-
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.subuniverses
 open import foundation.truncated-types
+open import foundation.universe-levels
 
 open import foundation-core.1-types
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -33,7 +33,7 @@ open import foundation-core.universe-levels
 ### The type of all sets in a universe is a 1-type
 
 ```agda
-is-1-type-Set : {l : Level}  → is-1-type (Set l)
+is-1-type-Set : {l : Level} → is-1-type (Set l)
 is-1-type-Set = is-trunc-Truncated-Type zero-𝕋
 
 Set-1-Type : (l : Level) → 1-Type (lsuc l)
@@ -226,20 +226,21 @@ module _
 ```agda
 abstract
   is-set-is-emb :
-    {i j : Level} {A : UU i} {B : UU j} (f : A → B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-emb f → is-set B → is-set A
   is-set-is-emb = is-trunc-is-emb neg-one-𝕋
 
 abstract
   is-set-emb :
-    {i j : Level} {A : UU i} {B : UU j} (f : A ↪ B) → is-set B → is-set A
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-set B → is-set A
   is-set-emb = is-trunc-emb neg-one-𝕋
 ```
 
 ### Any function from a proposition into a set is an embedding
 
 ```agda
-module _ {i j} {A : UU i} {B : UU j} where
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} where
 
   is-emb-is-prop-is-set : is-prop A → is-set B → {f : A → B} → is-emb f
   is-emb-is-prop-is-set is-prop-A is-set-B {f} =

@@ -37,7 +37,7 @@ module _
   where
 
   type-Ω : UU l
-  type-Ω = Id (pt-Pointed-Type A) (pt-Pointed-Type A)
+  type-Ω = Id (point-Pointed-Type A) (point-Pointed-Type A)
 
   refl-Ω : type-Ω
   refl-Ω = refl
@@ -119,14 +119,14 @@ module _
   associative-mul-Ω x y z = assoc x y z
 ```
 
--- We compute transport of type-Ω
+We compute transport of `type-Ω`.
 
 ```agda
 module _
   {l1 : Level} {A : UU l1} {x y : A}
   where
 
-  equiv-tr-Ω : Id x y → Ω (pair A x) ≃* Ω (pair A y)
+  equiv-tr-Ω : Id x y → Ω (pair A x) ≃∗ Ω (pair A y)
   equiv-tr-Ω refl = pair id-equiv refl
 
   equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
@@ -144,14 +144,16 @@ module _
 
   preserves-mul-tr-Ω :
     (p : Id x y) (u v : type-Ω (pair A x)) →
-    Id ( tr-type-Ω p (mul-Ω (pair A x) u v))
-       ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
+    Id
+      ( tr-type-Ω p (mul-Ω (pair A x) u v))
+      ( mul-Ω (pair A y) (tr-type-Ω p u) (tr-type-Ω p v))
   preserves-mul-tr-Ω refl u v = refl
 
   preserves-inv-tr-Ω :
     (p : Id x y) (u : type-Ω (pair A x)) →
-    Id ( tr-type-Ω p (inv-Ω (pair A x) u))
-       ( inv-Ω (pair A y) (tr-type-Ω p u))
+    Id
+      ( tr-type-Ω p (inv-Ω (pair A x) u))
+      ( inv-Ω (pair A y) (tr-type-Ω p u))
   preserves-inv-tr-Ω refl u = refl
 
   eq-tr-type-Ω :

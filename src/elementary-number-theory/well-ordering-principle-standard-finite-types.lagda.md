@@ -1,4 +1,4 @@
-# The Well-Ordering Principle of the standard finite types
+# The well-ordering principle of the standard finite types
 
 ```agda
 module elementary-number-theory.well-ordering-principle-standard-finite-types where
@@ -21,7 +21,7 @@ open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.existential-quantification
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
@@ -31,6 +31,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
@@ -47,7 +48,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The standard finite types inherit a well-ordering principle from the natural
-numbers
+numbers.
 
 ## Properties
 
@@ -86,7 +87,10 @@ exists-not-not-forall-count {l1} {l2} {X} P p e =
   f nf f' =
     nf
       ( λ x →
-        tr P (htpy-eq-equiv (right-inverse-law-equiv (pr2 e)) x) (f' (map-inv-equiv (pr2 e) x)))
+        tr
+          ( P)
+          ( htpy-eq-equiv (right-inverse-law-equiv (pr2 e)) x)
+          ( f' (map-inv-equiv (pr2 e) x)))
   g : Σ (Fin k) (λ x → ¬ (P' x)) → Σ X (λ x → ¬ (P x))
   pr1 (g (pair l np)) = map-equiv (pr2 e) l
   pr2 (g (pair l np)) x = np x
@@ -181,10 +185,10 @@ well-ordering-principle-∃-Fin k P H =
   apply-universal-property-trunc-Prop H
     ( minimal-element-Fin-Prop k (subtype-decidable-subtype P))
     ( well-ordering-principle-Σ-Fin k
-      ( is-decidable-subtype-decidable-subtype P))
+      ( is-decidable-decidable-subtype P))
 ```
 
-### Hilbert's epsilon operator for decidable subtypes of standard finite types
+### Hilbert's `ε`-operator for decidable subtypes of standard finite types
 
 ```agda
 ε-operator-decidable-subtype-Fin :
@@ -202,14 +206,15 @@ well-ordering-principle-∃-Fin k P H =
         ( map-Σ
           ( type-Prop ∘ Q)
           ( nat-Fin (succ-ℕ k))
-          ( λ x → tr (is-in-decidable-subtype P) (inv (issec-nat-Fin k x))))
+          ( λ x →
+            tr (is-in-decidable-subtype P) (inv (is-section-nat-Fin k x))))
         ( t)))
   where
   Q : ℕ → Prop l
   Q n = subtype-decidable-subtype P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
   is-decidable-Q n =
-    is-decidable-subtype-decidable-subtype P (mod-succ-ℕ k n)
+    is-decidable-decidable-subtype P (mod-succ-ℕ k n)
   ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
   ε-operator-total-Q =
     ε-operator-decidable-subtype-ℕ Q is-decidable-Q

@@ -29,7 +29,7 @@ open import ring-theory.rings
 A (left) module `M` over a ring `R` consists of an abelian group `M` equipped
 with an action `R → M → M` such
 
-```md
+```text
   r(x+y) = rx + ry
       r0 = 0
    r(-x) = -(rx)
@@ -80,8 +80,9 @@ module _
 
   associative-add-left-module-Ring :
     (x y z : type-left-module-Ring) →
-    Id ( add-left-module-Ring (add-left-module-Ring x y) z)
-       ( add-left-module-Ring x (add-left-module-Ring y z))
+    Id
+      ( add-left-module-Ring (add-left-module-Ring x y) z)
+      ( add-left-module-Ring x (add-left-module-Ring y z))
   associative-add-left-module-Ring =
     associative-add-Ab ab-left-module-Ring
 
@@ -99,15 +100,17 @@ module _
 
   left-inverse-law-add-left-module-Ring :
     (x : type-left-module-Ring) →
-    Id ( add-left-module-Ring (neg-left-module-Ring x) x)
-       ( zero-left-module-Ring)
+    Id
+      ( add-left-module-Ring (neg-left-module-Ring x) x)
+      ( zero-left-module-Ring)
   left-inverse-law-add-left-module-Ring =
     left-inverse-law-add-Ab ab-left-module-Ring
 
   right-inverse-law-add-left-module-Ring :
     (x : type-left-module-Ring) →
-    Id ( add-left-module-Ring x (neg-left-module-Ring x))
-       ( zero-left-module-Ring)
+    Id
+      ( add-left-module-Ring x (neg-left-module-Ring x))
+      ( zero-left-module-Ring)
   right-inverse-law-add-left-module-Ring =
     right-inverse-law-add-Ab ab-left-module-Ring
 
@@ -142,16 +145,17 @@ module _
         ( mul-hom-left-module-Ring)
         ( one-Ring R))
       ( id-hom-Ab ab-left-module-Ring)
-      ( preserves-one-hom-Ring R
+      ( preserves-unit-hom-Ring R
         ( endomorphism-ring-ab-left-module-Ring)
         ( mul-hom-left-module-Ring))
 
   left-distributive-mul-add-left-module-Ring :
     (r : type-Ring R) (x y : type-left-module-Ring) →
-    Id ( mul-left-module-Ring r (add-left-module-Ring x y))
-       ( add-left-module-Ring
-         ( mul-left-module-Ring r x)
-         ( mul-left-module-Ring r y))
+    Id
+      ( mul-left-module-Ring r (add-left-module-Ring x y))
+      ( add-left-module-Ring
+        ( mul-left-module-Ring r x)
+        ( mul-left-module-Ring r y))
   left-distributive-mul-add-left-module-Ring r =
     preserves-add-hom-Ab
       ( ab-left-module-Ring)
@@ -163,10 +167,11 @@ module _
 
   right-distributive-mul-add-left-module-Ring :
     (r s : type-Ring R) (x : type-left-module-Ring) →
-    Id ( mul-left-module-Ring (add-Ring R r s) x)
-       ( add-left-module-Ring
-         ( mul-left-module-Ring r x)
-         ( mul-left-module-Ring s x))
+    Id
+      ( mul-left-module-Ring (add-Ring R r s) x)
+      ( add-left-module-Ring
+        ( mul-left-module-Ring r x)
+        ( mul-left-module-Ring s x))
   right-distributive-mul-add-left-module-Ring r s =
     htpy-eq-hom-Ab
       ( ab-left-module-Ring)
@@ -194,8 +199,9 @@ module _
 
   associative-mul-left-module-Ring :
     (r s : type-Ring R) (x : type-left-module-Ring) →
-    Id ( mul-left-module-Ring (mul-Ring R r s) x)
-       ( mul-left-module-Ring r (mul-left-module-Ring s x))
+    Id
+      ( mul-left-module-Ring (mul-Ring R r s) x)
+      ( mul-left-module-Ring r (mul-left-module-Ring s x))
   associative-mul-left-module-Ring r s =
     htpy-eq-hom-Ab
       ( ab-left-module-Ring)
@@ -252,8 +258,9 @@ module _
 
   left-negative-law-mul-left-module-Ring :
     (r : type-Ring R) (x : type-left-module-Ring) →
-    Id ( mul-left-module-Ring (neg-Ring R r) x)
-       ( neg-left-module-Ring (mul-left-module-Ring r x))
+    Id
+      ( mul-left-module-Ring (neg-Ring R r) x)
+      ( neg-left-module-Ring (mul-left-module-Ring r x))
   left-negative-law-mul-left-module-Ring r =
     htpy-eq-hom-Ab
       ( ab-left-module-Ring)
@@ -276,8 +283,9 @@ module _
 
   right-negative-law-mul-left-module-Ring :
     (r : type-Ring R) (x : type-left-module-Ring) →
-    Id ( mul-left-module-Ring r (neg-left-module-Ring x))
-       ( neg-left-module-Ring (mul-left-module-Ring r x))
+    Id
+      ( mul-left-module-Ring r (neg-left-module-Ring x))
+      ( neg-left-module-Ring (mul-left-module-Ring r x))
   right-negative-law-mul-left-module-Ring r =
     preserves-negatives-hom-Ab
       ( ab-left-module-Ring)
@@ -321,8 +329,9 @@ module _
 
   associative-add-right-module-Ring :
     (x y z : type-right-module-Ring) →
-    Id ( add-right-module-Ring (add-right-module-Ring x y) z)
-       ( add-right-module-Ring x (add-right-module-Ring y z))
+    Id
+      ( add-right-module-Ring (add-right-module-Ring x y) z)
+      ( add-right-module-Ring x (add-right-module-Ring y z))
   associative-add-right-module-Ring =
     associative-add-Ab ab-right-module-Ring
 
@@ -340,15 +349,17 @@ module _
 
   left-inverse-law-add-right-module-Ring :
     (x : type-right-module-Ring) →
-    Id ( add-right-module-Ring (neg-right-module-Ring x) x)
-       ( zero-right-module-Ring)
+    Id
+      ( add-right-module-Ring (neg-right-module-Ring x) x)
+      ( zero-right-module-Ring)
   left-inverse-law-add-right-module-Ring =
     left-inverse-law-add-Ab ab-right-module-Ring
 
   right-inverse-law-add-right-module-Ring :
     (x : type-right-module-Ring) →
-    Id ( add-right-module-Ring x (neg-right-module-Ring x))
-       ( zero-right-module-Ring)
+    Id
+      ( add-right-module-Ring x (neg-right-module-Ring x))
+      ( zero-right-module-Ring)
   right-inverse-law-add-right-module-Ring =
     right-inverse-law-add-Ab ab-right-module-Ring
 
@@ -383,16 +394,17 @@ module _
         ( mul-hom-right-module-Ring)
         ( one-Ring R))
       ( id-hom-Ab ab-right-module-Ring)
-      ( preserves-one-hom-Ring R
+      ( preserves-unit-hom-Ring R
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
         ( mul-hom-right-module-Ring))
 
   left-distributive-mul-add-right-module-Ring :
     (r : type-Ring R) (x y : type-right-module-Ring) →
-    Id ( mul-right-module-Ring r (add-right-module-Ring x y))
-       ( add-right-module-Ring
-         ( mul-right-module-Ring r x)
-         ( mul-right-module-Ring r y))
+    Id
+      ( mul-right-module-Ring r (add-right-module-Ring x y))
+      ( add-right-module-Ring
+        ( mul-right-module-Ring r x)
+        ( mul-right-module-Ring r y))
   left-distributive-mul-add-right-module-Ring r =
     preserves-add-hom-Ab
       ( ab-right-module-Ring)
@@ -404,10 +416,11 @@ module _
 
   right-distributive-mul-add-right-module-Ring :
     (r s : type-Ring R) (x : type-right-module-Ring) →
-    Id ( mul-right-module-Ring (add-Ring R r s) x)
-       ( add-right-module-Ring
-         ( mul-right-module-Ring r x)
-         ( mul-right-module-Ring s x))
+    Id
+      ( mul-right-module-Ring (add-Ring R r s) x)
+      ( add-right-module-Ring
+        ( mul-right-module-Ring r x)
+        ( mul-right-module-Ring s x))
   right-distributive-mul-add-right-module-Ring r s =
     htpy-eq-hom-Ab
       ( ab-right-module-Ring)
@@ -435,8 +448,9 @@ module _
 
   associative-mul-right-module-Ring :
     (r s : type-Ring R) (x : type-right-module-Ring) →
-    Id ( mul-right-module-Ring (mul-Ring R r s) x)
-       ( mul-right-module-Ring s (mul-right-module-Ring r x))
+    Id
+      ( mul-right-module-Ring (mul-Ring R r s) x)
+      ( mul-right-module-Ring s (mul-right-module-Ring r x))
   associative-mul-right-module-Ring r s =
     htpy-eq-hom-Ab
       ( ab-right-module-Ring)
@@ -493,8 +507,9 @@ module _
 
   left-negative-law-mul-right-module-Ring :
     (r : type-Ring R) (x : type-right-module-Ring) →
-    Id ( mul-right-module-Ring (neg-Ring R r) x)
-       ( neg-right-module-Ring (mul-right-module-Ring r x))
+    Id
+      ( mul-right-module-Ring (neg-Ring R r) x)
+      ( neg-right-module-Ring (mul-right-module-Ring r x))
   left-negative-law-mul-right-module-Ring r =
     htpy-eq-hom-Ab
       ( ab-right-module-Ring)
@@ -517,8 +532,9 @@ module _
 
   right-negative-law-mul-right-module-Ring :
     (r : type-Ring R) (x : type-right-module-Ring) →
-    Id ( mul-right-module-Ring r (neg-right-module-Ring x))
-       ( neg-right-module-Ring (mul-right-module-Ring r x))
+    Id
+      ( mul-right-module-Ring r (neg-right-module-Ring x))
+      ( neg-right-module-Ring (mul-right-module-Ring r x))
   right-negative-law-mul-right-module-Ring r =
     preserves-negatives-hom-Ab
       ( ab-right-module-Ring)

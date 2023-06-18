@@ -9,7 +9,7 @@ module trees.multisets where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.empty-types
-open import foundation.functions
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types
@@ -20,7 +20,7 @@ open import trees.w-types
 
 ## Idea
 
-The type of multisets of universe level `l` is the W-type of the universal
+The type of **multisets** of universe level `l` is the W-type of the universal
 family over the universe `UU l`.
 
 ## Definitions
@@ -46,7 +46,7 @@ X ∉-𝕍 Y = is-empty (X ∈-𝕍 Y)
 
 ```agda
 comprehension-𝕍 :
-  {l : Level} (X : 𝕍 l) (P : symbol-𝕎 X → UU l) → 𝕍 l
+  {l : Level} (X : 𝕍 l) (P : shape-𝕎 X → UU l) → 𝕍 l
 comprehension-𝕍 X P =
-  tree-𝕎 (Σ (symbol-𝕎 X) P) (component-𝕎 X ∘ pr1)
+  tree-𝕎 (Σ (shape-𝕎 X) P) (component-𝕎 X ∘ pr1)
 ```

@@ -11,20 +11,20 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.powersets
-open import foundation.propositional-extensionality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
+open import group-theory.subsets-groups
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
@@ -35,19 +35,6 @@ open import order-theory.preorders
 </details>
 
 ## Definitions
-
-### Subsets of groups
-
-```agda
-subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-subset-Group l G = subtype l (type-Group G)
-
-is-set-subset-Group :
-  (l : Level) {l1 : Level} (G : Group l1) → is-set (subset-Group l G)
-is-set-subset-Group l G =
-  is-set-function-type is-set-type-Prop
-```
 
 ### Subgroups
 
@@ -202,7 +189,7 @@ module _
         ( inv-Group G y)
         ( p)
         ( is-closed-under-inv-Subgroup y q))
-      ( isretr-mul-inv-Group' G y x)
+      ( is-retraction-mul-inv-Group' G y x)
 
   is-in-subgroup-right-factor-Subgroup :
     (x y : type-Group G) →
@@ -215,7 +202,7 @@ module _
         ( mul-Group G x y)
         ( is-closed-under-inv-Subgroup x q)
         ( p))
-      ( isretr-mul-inv-Group G x y)
+      ( is-retraction-mul-inv-Group G x y)
 
 is-emb-subset-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
@@ -231,21 +218,16 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  type-group-Subgroup :  UU (l1 ⊔ l2)
+  type-group-Subgroup : UU (l1 ⊔ l2)
   type-group-Subgroup = type-subtype (subset-Subgroup G H)
 
-  map-inclusion-group-Subgroup : type-group-Subgroup → type-Group G
-  map-inclusion-group-Subgroup =
+  map-inclusion-Subgroup : type-group-Subgroup → type-Group G
+  map-inclusion-Subgroup =
     inclusion-subtype (subset-Subgroup G H)
 
-  is-emb-inclusion-group-Subgroup :
-    is-emb map-inclusion-group-Subgroup
-  is-emb-inclusion-group-Subgroup =
-    is-emb-inclusion-subtype (subset-Subgroup G H)
-
-  eq-subgroup-eq-group : is-injective map-inclusion-group-Subgroup
+  eq-subgroup-eq-group : is-injective map-inclusion-Subgroup
   eq-subgroup-eq-group {x} {y} =
-    map-inv-is-equiv (is-emb-inclusion-group-Subgroup x y)
+    map-inv-is-equiv (is-emb-inclusion-Subgroup G H x y)
 
   set-group-Subgroup : Set (l1 ⊔ l2)
   pr1 set-group-Subgroup = type-group-Subgroup
@@ -259,8 +241,9 @@ module _
 
   associative-mul-Subgroup :
     (x y z : type-group-Subgroup) →
-    Id (mul-Subgroup (mul-Subgroup x y) z)
-       (mul-Subgroup x (mul-Subgroup y z))
+    Id
+      ( mul-Subgroup (mul-Subgroup x y) z)
+      ( mul-Subgroup x (mul-Subgroup y z))
   associative-mul-Subgroup x y z =
     eq-subgroup-eq-group
       ( associative-mul-Group G (pr1 x) (pr1 y) (pr1 z))
@@ -286,15 +269,17 @@ module _
 
   left-inverse-law-mul-Subgroup :
     ( x : type-group-Subgroup) →
-    Id ( mul-Subgroup (inv-Subgroup x) x)
-       ( unit-Subgroup)
+    Id
+      ( mul-Subgroup (inv-Subgroup x) x)
+      ( unit-Subgroup)
   left-inverse-law-mul-Subgroup x =
     eq-subgroup-eq-group (left-inverse-law-mul-Group G (pr1 x))
 
   right-inverse-law-mul-Subgroup :
     (x : type-group-Subgroup) →
-    Id ( mul-Subgroup x (inv-Subgroup x))
-       ( unit-Subgroup)
+    Id
+      ( mul-Subgroup x (inv-Subgroup x))
+      ( unit-Subgroup)
   right-inverse-law-mul-Subgroup x =
     eq-subgroup-eq-group (right-inverse-law-mul-Group G (pr1 x))
 
@@ -321,31 +306,31 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  preserves-mul-inclusion-group-Subgroup :
+  preserves-mul-inclusion-Subgroup :
     preserves-mul-Group
       ( group-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Subgroup G H)
-  preserves-mul-inclusion-group-Subgroup x y = refl
+      ( map-inclusion-Subgroup G H)
+  preserves-mul-inclusion-Subgroup x y = refl
 
-  preserves-unit-inclusion-group-Subgroup :
+  preserves-unit-inclusion-Subgroup :
     preserves-unit-Group
       ( group-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Subgroup G H)
-  preserves-unit-inclusion-group-Subgroup = refl
+      ( map-inclusion-Subgroup G H)
+  preserves-unit-inclusion-Subgroup = refl
 
-  preserves-inverses-inclusion-group-Subgroup :
+  preserves-inverses-inclusion-Subgroup :
     preserves-inverses-Group
       ( group-Subgroup G H)
       ( G)
-      ( map-inclusion-group-Subgroup G H)
-  preserves-inverses-inclusion-group-Subgroup x = refl
+      ( map-inclusion-Subgroup G H)
+  preserves-inverses-inclusion-Subgroup x = refl
 
-  inclusion-group-Subgroup : type-hom-Group (group-Subgroup G H) G
-  pr1 inclusion-group-Subgroup = map-inclusion-group-Subgroup G H
-  pr2 inclusion-group-Subgroup =
-    preserves-mul-inclusion-group-Subgroup
+  hom-inclusion-Subgroup :
+    type-hom-Group (group-Subgroup G H) G
+  pr1 hom-inclusion-Subgroup = inclusion-Subgroup G H
+  pr2 hom-inclusion-Subgroup = preserves-mul-inclusion-Subgroup
 ```
 
 ## Properties
@@ -391,51 +376,51 @@ module _
 ### The containment relation of subgroups
 
 ```agda
-contains-Subgroup-Prop :
+leq-Subgroup-Prop :
   {l1 l2 l3 : Level} (G : Group l1) →
   Subgroup l2 G → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-contains-Subgroup-Prop G H K =
-  inclusion-rel-subtype-Prop
+leq-Subgroup-Prop G H K =
+  leq-subtype-Prop
     ( subset-Subgroup G H)
     ( subset-Subgroup G K)
 
-contains-Subgroup :
+leq-Subgroup :
   {l1 l2 l3 : Level} (G : Group l1) →
   Subgroup l2 G → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
-contains-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
+leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
-refl-contains-Subgroup :
+refl-leq-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
-  contains-Subgroup G H H
-refl-contains-Subgroup G H = refl-⊆ (subset-Subgroup G H)
+  leq-Subgroup G H H
+refl-leq-Subgroup G H = refl-leq-subtype (subset-Subgroup G H)
 
-transitive-contains-Subgroup :
+transitive-leq-Subgroup :
   {l1 l2 l3 l4 : Level} (G : Group l1) (H : Subgroup l2 G)
   (K : Subgroup l3 G) (L : Subgroup l4 G) →
-  contains-Subgroup G K L → contains-Subgroup G H K →
-  contains-Subgroup G H L
-transitive-contains-Subgroup G H K L =
-  trans-⊆
+  leq-Subgroup G K L → leq-Subgroup G H K →
+  leq-Subgroup G H L
+transitive-leq-Subgroup G H K L =
+  transitive-leq-subtype
     ( subset-Subgroup G H)
     ( subset-Subgroup G K)
     ( subset-Subgroup G L)
 
-antisymmetric-contains-Subgroup :
+antisymmetric-leq-Subgroup :
   {l1 l2 : Level} (G : Group l1) (H K : Subgroup l2 G) →
-  contains-Subgroup G H K → contains-Subgroup G K H → H ＝ K
-antisymmetric-contains-Subgroup G H K α β =
+  leq-Subgroup G H K → leq-Subgroup G K H → H ＝ K
+antisymmetric-leq-Subgroup G H K α β =
   eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
 
 Subgroup-Large-Preorder :
   {l1 : Level} (G : Group l1) →
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G
-leq-large-preorder-Prop (Subgroup-Large-Preorder G) H K =
-  contains-Subgroup-Prop G H K
+leq-Large-Preorder-Prop (Subgroup-Large-Preorder G) H K =
+  leq-Subgroup-Prop G H K
 refl-leq-Large-Preorder (Subgroup-Large-Preorder G) =
-  refl-contains-Subgroup G
-trans-leq-Large-Preorder (Subgroup-Large-Preorder G) =
-  transitive-contains-Subgroup G
+  refl-leq-Subgroup G
+transitive-leq-Large-Preorder (Subgroup-Large-Preorder G) =
+  transitive-leq-Subgroup G
 
 Subgroup-Preorder :
   {l1 : Level} (l2 : Level) (G : Group l1) →
@@ -449,7 +434,7 @@ Subgroup-Large-Poset :
 large-preorder-Large-Poset (Subgroup-Large-Poset G) =
   Subgroup-Large-Preorder G
 antisymmetric-leq-Large-Poset (Subgroup-Large-Poset G) =
-  antisymmetric-contains-Subgroup G
+  antisymmetric-leq-Subgroup G
 
 Subgroup-Poset :
   {l1 : Level} (l2 : Level) (G : Group l1) →

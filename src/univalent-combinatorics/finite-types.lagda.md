@@ -12,17 +12,19 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.0-connected-types
 open import foundation.1-types
+open import foundation.action-on-identifications-functions
 open import foundation.connected-components-universes
 open import foundation.contractible-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.identity-types
+open import foundation.inhabited-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -30,6 +32,7 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
@@ -223,6 +226,12 @@ abstract
   is-finite-unit : is-finite unit
   is-finite-unit = is-finite-count count-unit
 
+abstract
+  is-finite-raise-unit :
+    {l1 : Level} → is-finite (raise-unit l1)
+  is-finite-raise-unit {l1} =
+    is-finite-equiv (compute-raise-unit l1) is-finite-unit
+
 unit-𝔽 : 𝔽 lzero
 pr1 unit-𝔽 = unit
 pr2 unit-𝔽 = is-finite-unit
@@ -383,7 +392,7 @@ number-of-elements-𝔽 : {l : Level} → 𝔽 l → ℕ
 number-of-elements-𝔽 X = number-of-elements-is-finite (is-finite-type-𝔽 X)
 ```
 
-### If a type has cardinality `k` and cardinality `l`, then `k = l`.
+### If a type has cardinality `k` and cardinality `l`, then `k = l`
 
 ```agda
 eq-cardinality :
@@ -512,6 +521,19 @@ is-inhabited-or-empty-is-finite {l1} {A} f =
   apply-universal-property-trunc-Prop f
     ( is-inhabited-or-empty-Prop A)
     ( is-inhabited-or-empty-count)
+```
+
+### Finite types of cardinality greater than one are inhabited
+
+```agda
+is-inhabited-type-UU-Fin-succ-ℕ :
+  {l1 : Level} (n : ℕ) (A : UU-Fin l1 (succ-ℕ n)) →
+  is-inhabited (type-UU-Fin (succ-ℕ n) A)
+is-inhabited-type-UU-Fin-succ-ℕ n A =
+  apply-universal-property-trunc-Prop
+    ( pr2 A)
+    ( is-inhabited-Prop (type-UU-Fin (succ-ℕ n) A))
+    ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin n)))
 ```
 
 ### If `X` is finite, then its propositional truncation is decidable
@@ -673,7 +695,8 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-set-ℕ (number-of-elements-is-finite H) n)
       ( λ p →
-        tr ( λ m → has-cardinality m X)
-           ( p)
-           ( pr2 (has-finite-cardinality-is-finite H)))
+        tr
+          ( λ m → has-cardinality m X)
+          ( p)
+          ( pr2 (has-finite-cardinality-is-finite H)))
 ```

@@ -7,14 +7,16 @@ module foundation.raising-universe-levels where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.dependent-pair-types
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -31,6 +33,15 @@ overlap. Using `data` types we can construct for any type `A` of universe level
 data raise (l : Level) {l1 : Level} (A : UU l1) : UU (l1 ⊔ l) where
   map-raise : A → raise l A
 
+data raiseω {l1 : Level} (A : UU l1) : UUω where
+  map-raiseω : A → raiseω A
+```
+
+## Properties
+
+### Types are equivalent to their raised equivalents
+
+```agda
 module _
   {l l1 : Level} {A : UU l1}
   where
@@ -38,18 +49,18 @@ module _
   map-inv-raise : raise l A → A
   map-inv-raise (map-raise x) = x
 
-  issec-map-inv-raise : (map-raise ∘ map-inv-raise) ~ id
-  issec-map-inv-raise (map-raise x) = refl
+  is-section-map-inv-raise : (map-raise ∘ map-inv-raise) ~ id
+  is-section-map-inv-raise (map-raise x) = refl
 
-  isretr-map-inv-raise : (map-inv-raise ∘ map-raise) ~ id
-  isretr-map-inv-raise x = refl
+  is-retraction-map-inv-raise : (map-inv-raise ∘ map-raise) ~ id
+  is-retraction-map-inv-raise x = refl
 
   is-equiv-map-raise : is-equiv (map-raise {l} {l1} {A})
   is-equiv-map-raise =
     is-equiv-has-inverse
       map-inv-raise
-      issec-map-inv-raise
-      isretr-map-inv-raise
+      is-section-map-inv-raise
+      is-retraction-map-inv-raise
 
 compute-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
 pr1 (compute-raise l A) = map-raise
@@ -91,22 +102,22 @@ module _
   map-inv-equiv-raise : raise l4 B → raise l3 A
   map-inv-equiv-raise (map-raise y) = map-raise (map-inv-equiv e y)
 
-  issec-map-inv-equiv-raise :
+  is-section-map-inv-equiv-raise :
     ( map-equiv-raise ∘ map-inv-equiv-raise) ~ id
-  issec-map-inv-equiv-raise (map-raise y) =
-    ap map-raise (issec-map-inv-equiv e y)
+  is-section-map-inv-equiv-raise (map-raise y) =
+    ap map-raise (is-section-map-inv-equiv e y)
 
-  isretr-map-inv-equiv-raise :
+  is-retraction-map-inv-equiv-raise :
     ( map-inv-equiv-raise ∘ map-equiv-raise) ~ id
-  isretr-map-inv-equiv-raise (map-raise x) =
-    ap map-raise (isretr-map-inv-equiv e x)
+  is-retraction-map-inv-equiv-raise (map-raise x) =
+    ap map-raise (is-retraction-map-inv-equiv e x)
 
   is-equiv-map-equiv-raise : is-equiv map-equiv-raise
   is-equiv-map-equiv-raise =
     is-equiv-has-inverse
       map-inv-equiv-raise
-      issec-map-inv-equiv-raise
-      isretr-map-inv-equiv-raise
+      is-section-map-inv-equiv-raise
+      is-retraction-map-inv-equiv-raise
 
   equiv-raise : raise l3 A ≃ raise l4 B
   pr1 equiv-raise = map-equiv-raise

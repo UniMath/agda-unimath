@@ -8,22 +8,22 @@ module foundation.connected-components-universes where
 
 ```agda
 open import foundation.0-connected-types
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.functoriality-propositional-truncation
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.subtype-identity-principle
 open import foundation.subuniverses
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
-open import foundation-core.subtype-identity-principle
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -36,7 +36,7 @@ component of a universe `UU l1` of types merely equal to `A : UU l2`.
 
 ## Definition
 
-### The connected component of a universe with variable universe.
+### The connected component of a universe with variable universe
 
 ```agda
 component-UU-Level :

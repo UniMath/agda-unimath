@@ -32,7 +32,7 @@ open import univalent-combinatorics.standard-finite-types
 The binomial theorem for the integers asserts that for any two integers `x` and
 `y` and any natural number `n`, we have
 
-```md
+```text
   (x + y)ⁿ = ∑_{0 ≤ i < n+1} (n choose i) xⁱ yⁿ⁻ⁱ.
 ```
 
@@ -57,7 +57,7 @@ binomial-sum-one-element-ℤ =
 
 binomial-sum-two-elements-ℤ :
   (f : functional-vec ℤ 2) →
-  binomial-sum-ℤ 1 f ＝ add-ℤ (f (zero-Fin 1)) (f (one-Fin 1))
+  binomial-sum-ℤ 1 f ＝ (f (zero-Fin 1)) +ℤ (f (one-Fin 1))
 binomial-sum-two-elements-ℤ =
   binomial-sum-two-elements-Commutative-Ring ℤ-Commutative-Ring
 ```
@@ -77,13 +77,13 @@ htpy-binomial-sum-ℤ =
 ```agda
 left-distributive-mul-binomial-sum-ℤ :
   (n : ℕ) (x : ℤ) (f : functional-vec ℤ (succ-ℕ n)) →
-  mul-ℤ x (binomial-sum-ℤ n f) ＝ binomial-sum-ℤ n (λ i → mul-ℤ x (f i))
+  x *ℤ (binomial-sum-ℤ n f) ＝ binomial-sum-ℤ n (λ i → x *ℤ (f i))
 left-distributive-mul-binomial-sum-ℤ =
   left-distributive-mul-binomial-sum-Commutative-Ring ℤ-Commutative-Ring
 
 right-distributive-mul-binomial-sum-ℤ :
   (n : ℕ) (f : functional-vec ℤ (succ-ℕ n)) (x : ℤ) →
-  mul-ℤ (binomial-sum-ℤ n f) x ＝ binomial-sum-ℤ n (λ i → mul-ℤ (f i) x)
+  (binomial-sum-ℤ n f) *ℤ x ＝ binomial-sum-ℤ n (λ i → (f i) *ℤ x)
 right-distributive-mul-binomial-sum-ℤ =
   right-distributive-mul-binomial-sum-Commutative-Ring
     ℤ-Commutative-Ring
@@ -96,11 +96,10 @@ right-distributive-mul-binomial-sum-ℤ =
 ```agda
 binomial-theorem-ℤ :
   (n : ℕ) (x y : ℤ) →
-  power-ℤ n (add-ℤ x y) ＝
+  power-ℤ n (x +ℤ y) ＝
   binomial-sum-ℤ n
     ( λ i →
-      mul-ℤ
-      ( power-ℤ (nat-Fin (succ-ℕ n) i) x)
-      ( power-ℤ (dist-ℕ n (nat-Fin (succ-ℕ n) i)) y))
+        ( power-ℤ (nat-Fin (succ-ℕ n) i) x) *ℤ
+        ( power-ℤ (dist-ℕ (nat-Fin (succ-ℕ n) i) n) y))
 binomial-theorem-ℤ = binomial-theorem-Commutative-Ring ℤ-Commutative-Ring
 ```

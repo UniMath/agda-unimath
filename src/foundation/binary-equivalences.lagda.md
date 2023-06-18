@@ -7,10 +7,11 @@ module foundation.binary-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -21,9 +22,9 @@ A binary operation `f : A → B → C` is said to be a binary equivalence if the
 functions `λ x → f x b` and `λ y → f a y` are equivalences for each `a : A` and
 `b : B` respectively.
 
-```agda
-{- Binary equivalences and binary embeddings -}
+## Definitions
 
+```agda
 fix-left :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
   A → B → C

@@ -12,18 +12,21 @@ open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.sums-of-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
+open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.sections
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-unit-type
@@ -105,7 +108,7 @@ abstract
       ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
       ( f (map-equiv e (inr star)))) ∙
     ( ap
-      ( add-ℕ' (number-of-elements-count (f (map-equiv e (inr star)))))
+      ( _+ℕ (number-of-elements-count (f (map-equiv e (inr star)))))
       ( number-of-elements-count-Σ' k id-equiv (λ x → f (map-equiv e (inl x)))))
 
 abstract
@@ -117,20 +120,26 @@ abstract
   number-of-elements-count-Σ (pair k e) f = number-of-elements-count-Σ' k e f
 ```
 
-### If A and Σ A B can be counted, then each B x can be counted
+### If `A` and `Σ A B` can be counted, then each `B x` can be counted
 
 ```agda
 count-fiber-count-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  count A → count (Σ A B) → (x : A) → count (B x)
-count-fiber-count-Σ {B = B} e f x =
+  has-decidable-equality A → count (Σ A B) → (x : A) → count (B x)
+count-fiber-count-Σ {B = B} d f x =
   count-equiv
     ( equiv-fib-pr1 B x)
     ( count-Σ f
-      ( λ z → count-eq (has-decidable-equality-count e) (pr1 z) x))
+      ( λ z → count-eq d (pr1 z) x))
+
+count-fiber-count-Σ-count-base :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  count A → count (Σ A B) → (x : A) → count (B x)
+count-fiber-count-Σ-count-base e f x =
+  count-fiber-count-Σ (has-decidable-equality-count e) f x
 ```
 
-### If Σ A B and each B x can be counted, and if B has a section, then A can be counted
+### If `Σ A B` and each `B x` can be counted, and if `B` has a section, then `A` can be counted
 
 ```agda
 count-fib-map-section :
@@ -142,7 +151,7 @@ count-fib-map-section {l1} {l2} {A} {B} b e f (pair y z) =
     ( ( ( left-unit-law-Σ-is-contr
             ( is-contr-total-path' y)
             ( pair y refl)) ∘e
-        ( inv-assoc-Σ A
+        ( inv-associative-Σ A
           ( λ x → Id x y)
           ( λ t → Id (tr B (pr2 t) (b (pr1 t))) z))) ∘e
       ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
@@ -162,7 +171,7 @@ counted if and only if the type `Σ A (¬ ∘ B)` can be counted. However, to av
 having to invoke function extensionality, we show that if `Σ A B` and each `B x`
 can be counted, then `A` can be counted if and only if
 
-```md
+```text
    count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))),
 ```
 
@@ -208,7 +217,7 @@ is-decidable-count-Σ :
   {l1 l2 : Level} {X : UU l1} {P : X → UU l2} →
   count X → count (Σ X P) → (x : X) → is-decidable (P x)
 is-decidable-count-Σ e f x =
-  is-decidable-count (count-fiber-count-Σ e f x)
+  is-decidable-count (count-fiber-count-Σ-count-base e f x)
 ```
 
 ```agda
@@ -216,8 +225,9 @@ abstract
   double-counting-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
     (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) →
-    Id ( number-of-elements-count count-C)
-       ( sum-count-ℕ count-A (λ x → number-of-elements-count (count-B x)))
+    Id
+      ( number-of-elements-count count-C)
+      ( sum-count-ℕ count-A (λ x → number-of-elements-count (count-B x)))
   double-counting-Σ count-A count-B count-C =
     ( double-counting count-C (count-Σ count-A count-B)) ∙
     ( number-of-elements-count-Σ count-A count-B)
@@ -226,30 +236,38 @@ abstract
   sum-number-of-elements-count-fiber-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
     (f : count (Σ A B)) →
-    Id ( sum-count-ℕ e
-         ( λ x → number-of-elements-count (count-fiber-count-Σ e f x)))
-       ( number-of-elements-count f)
+    Id
+      ( sum-count-ℕ e
+        ( λ x → number-of-elements-count
+          (count-fiber-count-Σ-count-base e f x)))
+      ( number-of-elements-count f)
   sum-number-of-elements-count-fiber-count-Σ e f =
-    ( inv (number-of-elements-count-Σ e (λ x → count-fiber-count-Σ e f x))) ∙
-    ( double-counting (count-Σ e (λ x → count-fiber-count-Σ e f x)) f)
+    ( inv
+      ( number-of-elements-count-Σ e (count-fiber-count-Σ-count-base e f))) ∙
+    ( double-counting (count-Σ e (count-fiber-count-Σ-count-base e f)) f)
 
 abstract
   double-counting-fiber-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
     (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) (x : A) →
-    Id ( number-of-elements-count (count-B x))
-       ( number-of-elements-count (count-fiber-count-Σ count-A count-C x))
+    Id
+      ( number-of-elements-count (count-B x))
+      ( number-of-elements-count
+        ( count-fiber-count-Σ-count-base count-A count-C x))
   double-counting-fiber-count-Σ count-A count-B count-C x =
-    double-counting (count-B x) (count-fiber-count-Σ count-A count-C x)
+    double-counting
+      ( count-B x)
+      ( count-fiber-count-Σ-count-base count-A count-C x)
 
 abstract
   sum-number-of-elements-count-base-count-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
     (count-ΣAB : count (Σ A B)) (count-B : (x : A) → count (B x)) →
-    Id ( sum-count-ℕ
-         ( count-base-count-Σ b count-ΣAB count-B)
-         ( λ x → number-of-elements-count (count-B x)))
-       ( number-of-elements-count count-ΣAB)
+    Id
+      ( sum-count-ℕ
+        ( count-base-count-Σ b count-ΣAB count-B)
+        ( λ x → number-of-elements-count (count-B x)))
+      ( number-of-elements-count count-ΣAB)
   sum-number-of-elements-count-base-count-Σ b count-ΣAB count-B =
     ( inv
       ( number-of-elements-count-Σ
@@ -264,8 +282,9 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
     (count-A : count A) (count-B : (x : A) → count (B x))
     (count-ΣAB : count (Σ A B)) →
-    Id ( number-of-elements-count (count-base-count-Σ b count-ΣAB count-B))
-       ( number-of-elements-count count-A)
+    Id
+      ( number-of-elements-count (count-base-count-Σ b count-ΣAB count-B))
+      ( number-of-elements-count count-A)
   double-counting-base-count-Σ b count-A count-B count-ΣAB =
     double-counting (count-base-count-Σ b count-ΣAB count-B) count-A
 
@@ -275,10 +294,11 @@ abstract
     ( count-B : (x : A) → count (B x)) →
     ( count-nB :
       count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    Id ( sum-count-ℕ
-         ( count-base-count-Σ' count-ΣAB count-B count-nB)
-         ( λ x → number-of-elements-count (count-B x)))
-       ( number-of-elements-count count-ΣAB)
+    Id
+      ( sum-count-ℕ
+        ( count-base-count-Σ' count-ΣAB count-B count-nB)
+        ( λ x → number-of-elements-count (count-B x)))
+      ( number-of-elements-count count-ΣAB)
   sum-number-of-elements-count-base-count-Σ' count-ΣAB count-B count-nB =
     ( inv
       ( number-of-elements-count-Σ
@@ -296,9 +316,10 @@ abstract
     ( count-B : (x : A) → count (B x)) (count-ΣAB : count (Σ A B)) →
     ( count-nB :
       count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    Id ( number-of-elements-count
-         ( count-base-count-Σ' count-ΣAB count-B count-nB))
-       ( number-of-elements-count count-A)
+    Id
+      ( number-of-elements-count
+        ( count-base-count-Σ' count-ΣAB count-B count-nB))
+      ( number-of-elements-count count-A)
   double-counting-base-count-Σ' count-A count-B count-ΣAB count-nB =
     double-counting (count-base-count-Σ' count-ΣAB count-B count-nB) count-A
 ```

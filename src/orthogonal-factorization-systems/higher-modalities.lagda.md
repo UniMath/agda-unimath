@@ -7,11 +7,12 @@ module orthogonal-factorization-systems.higher-modalities where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.small-types
@@ -37,8 +38,10 @@ defining map (propositionally).
 
 Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
-`x' y' : ○ X`. Because of this, higher modalities in their most general form
-only make sense for locally small modal operators.
+`x' y' : ○ X`. In other words, `○ X` is
+[`○`-separated](orthogonal-factorization-systems.separated-types.md). Because of
+this, higher modalities in their most general form only make sense for locally
+small modal operators.
 
 ## Definition
 
@@ -47,31 +50,31 @@ only make sense for locally small modal operators.
 ```agda
 module _
   {l1 l2 : Level}
-  {○ : modal-operator l1 l2}
-  (unit-○ : modal-unit ○)
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○)
   where
 
-  modal-ind : UU (lsuc l1 ⊔ l2)
-  modal-ind =
+  ind-modality : UU (lsuc l1 ⊔ l2)
+  ind-modality =
     (X : UU l1) (P : ○ X → UU l1) →
     ((x : X) → ○ (P (unit-○ x))) →
     (x' : ○ X) → ○ (P x')
 
-  modal-rec : UU (lsuc l1 ⊔ l2)
-  modal-rec = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
+  rec-modality : UU (lsuc l1 ⊔ l2)
+  rec-modality = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
 
-  modal-comp : modal-ind → UU (lsuc l1 ⊔ l2)
-  modal-comp ind-○ =
+  compute-ind-modality : ind-modality → UU (lsuc l1 ⊔ l2)
+  compute-ind-modality ind-○ =
     (X : UU l1) (P : ○ X → UU l1) →
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
 
-  modal-universal-property : UU (lsuc l1 ⊔ l2)
-  modal-universal-property =
-    Σ modal-ind modal-comp
+  dependent-universal-property-modality : UU (lsuc l1 ⊔ l2)
+  dependent-universal-property-modality =
+    Σ ind-modality compute-ind-modality
 
-  modal-rec-modal-ind : modal-ind → modal-rec
-  modal-rec-modal-ind ind X Y = ind X (λ _ → Y)
+  rec-modality-ind-modality : ind-modality → rec-modality
+  rec-modality-ind-modality ind X Y = ind X (λ _ → Y)
 ```
 
 ### Closure under identity type formers
@@ -83,8 +86,8 @@ formation if for every modal type, their identity types are also modal.
 ```agda
 module _
   {l1 l2 : Level}
-  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
-  (unit-○ : modal-unit ○)
+  ((○ , is-locally-small-○) : locally-small-operator-modality l1 l2 l1)
+  (unit-○ : unit-modality ○)
   where
 
   is-modal-identity-types : UU (lsuc l1 ⊔ l2)
@@ -98,23 +101,23 @@ module _
 ```agda
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
-    modal-universal-property (unit-○) × is-modal-identity-types
+    dependent-universal-property-modality (unit-○) × is-modal-identity-types
 ```
 
-### Projections for the `is-higher-modality` predicate
+### Components of a `is-higher-modality` proof
 
 ```agda
-  modal-ind-is-higher-modality : is-higher-modality → modal-ind unit-○
-  modal-ind-is-higher-modality = pr1 ∘ pr1
+  ind-modality-is-higher-modality : is-higher-modality → ind-modality unit-○
+  ind-modality-is-higher-modality = pr1 ∘ pr1
 
-  modal-rec-is-higher-modality : is-higher-modality → modal-rec unit-○
-  modal-rec-is-higher-modality =
-    modal-rec-modal-ind unit-○ ∘ modal-ind-is-higher-modality
+  rec-modality-is-higher-modality : is-higher-modality → rec-modality unit-○
+  rec-modality-is-higher-modality =
+    rec-modality-ind-modality unit-○ ∘ ind-modality-is-higher-modality
 
-  modal-comp-is-higher-modality :
+  compute-ind-modality-is-higher-modality :
     (h : is-higher-modality) →
-    modal-comp unit-○ (modal-ind-is-higher-modality h)
-  modal-comp-is-higher-modality = pr2 ∘ pr1
+    compute-ind-modality unit-○ (ind-modality-is-higher-modality h)
+  compute-ind-modality-is-higher-modality = pr2 ∘ pr1
 
   is-modal-identity-types-is-higher-modality :
     is-higher-modality → is-modal-identity-types
@@ -126,77 +129,77 @@ module _
 ```agda
 higher-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 higher-modality l1 l2 =
-  Σ ( locally-small-modal-operator l1 l2 l1)
+  Σ ( locally-small-operator-modality l1 l2 l1)
     ( λ ○ →
-      Σ ( modal-unit (pr1 ○))
+      Σ ( unit-modality (pr1 ○))
         ( is-higher-modality ○))
 ```
 
-### Projections for `higher-modality`
+### Compoents of a higher modality
 
 ```agda
 module _
   {l1 l2 : Level} (h : higher-modality l1 l2)
     where
 
-  locally-small-modal-operator-higher-modality :
-    locally-small-modal-operator l1 l2 l1
-  locally-small-modal-operator-higher-modality = pr1 h
+  locally-small-operator-higher-modality :
+    locally-small-operator-modality l1 l2 l1
+  locally-small-operator-higher-modality = pr1 h
 
-  modal-operator-higher-modality : modal-operator l1 l2
-  modal-operator-higher-modality =
-    modal-operator-locally-small-modal-operator
-      ( locally-small-modal-operator-higher-modality)
+  operator-higher-modality : operator-modality l1 l2
+  operator-higher-modality =
+    operator-modality-locally-small-operator-modality
+      ( locally-small-operator-higher-modality)
 
-  is-locally-small-modal-operator-higher-modality :
-    is-locally-small-modal-operator (modal-operator-higher-modality)
-  is-locally-small-modal-operator-higher-modality =
-    is-locally-small-locally-small-modal-operator
-      ( locally-small-modal-operator-higher-modality)
+  is-locally-small-operator-higher-modality :
+    is-locally-small-operator-modality (operator-higher-modality)
+  is-locally-small-operator-higher-modality =
+    is-locally-small-locally-small-operator-modality
+      ( locally-small-operator-higher-modality)
 
-  modal-unit-higher-modality :
-    modal-unit (modal-operator-higher-modality)
-  modal-unit-higher-modality = pr1 (pr2 h)
+  unit-higher-modality :
+    unit-modality (operator-higher-modality)
+  unit-higher-modality = pr1 (pr2 h)
 
   is-higher-modality-higher-modality :
     is-higher-modality
-      ( locally-small-modal-operator-higher-modality)
-      ( modal-unit-higher-modality)
+      ( locally-small-operator-higher-modality)
+      ( unit-higher-modality)
   is-higher-modality-higher-modality = pr2 (pr2 h)
 
-  modal-ind-higher-modality :
-    modal-ind (modal-unit-higher-modality)
-  modal-ind-higher-modality =
-    modal-ind-is-higher-modality
-      ( locally-small-modal-operator-higher-modality)
-      ( modal-unit-higher-modality)
+  ind-modality-higher-modality :
+    ind-modality (unit-higher-modality)
+  ind-modality-higher-modality =
+    ind-modality-is-higher-modality
+      ( locally-small-operator-higher-modality)
+      ( unit-higher-modality)
       ( is-higher-modality-higher-modality)
 
-  modal-rec-higher-modality :
-    modal-rec (modal-unit-higher-modality)
-  modal-rec-higher-modality =
-    modal-rec-modal-ind
-      ( modal-unit-higher-modality)
-      ( modal-ind-higher-modality)
+  rec-modality-higher-modality :
+    rec-modality (unit-higher-modality)
+  rec-modality-higher-modality =
+    rec-modality-ind-modality
+      ( unit-higher-modality)
+      ( ind-modality-higher-modality)
 
-  modal-comp-higher-modality :
-    modal-comp
-      ( modal-unit-higher-modality)
-      ( modal-ind-higher-modality)
-  modal-comp-higher-modality =
-    modal-comp-is-higher-modality
-      ( locally-small-modal-operator-higher-modality)
-      ( modal-unit-higher-modality)
+  compute-ind-modality-higher-modality :
+    compute-ind-modality
+      ( unit-higher-modality)
+      ( ind-modality-higher-modality)
+  compute-ind-modality-higher-modality =
+    compute-ind-modality-is-higher-modality
+      ( locally-small-operator-higher-modality)
+      ( unit-higher-modality)
       ( is-higher-modality-higher-modality)
 
   is-modal-identity-types-higher-modality :
     is-modal-identity-types
-      ( locally-small-modal-operator-higher-modality)
-      ( modal-unit-higher-modality)
+      ( locally-small-operator-higher-modality)
+      ( unit-higher-modality)
   is-modal-identity-types-higher-modality =
     ( is-modal-identity-types-is-higher-modality)
-    ( locally-small-modal-operator-higher-modality)
-    ( modal-unit-higher-modality)
+    ( locally-small-operator-higher-modality)
+    ( unit-higher-modality)
     ( is-higher-modality-higher-modality)
 ```
 
@@ -207,11 +210,12 @@ module _
 ```agda
 module _
   {l : Level}
-  {○ : modal-operator l l} (unit-○ : modal-unit ○)
+  {○ : operator-modality l l} (unit-○ : unit-modality ○)
   where
 
-  map-modal-rec : (rec-○ : modal-rec unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
-  map-modal-rec rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+  map-rec-modality :
+    (rec-○ : rec-modality unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
+  map-rec-modality rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
 ```
 
 ### Modal identity elimination
@@ -219,28 +223,28 @@ module _
 ```agda
 module _
   {l1 l2 : Level}
-  ((○ , is-locally-small-○) : locally-small-modal-operator l1 l2 l1)
-  (unit-○ : modal-unit ○)
+  ((○ , is-locally-small-○) : locally-small-operator-modality l1 l2 l1)
+  (unit-○ : unit-modality ○)
   (Id-○ : is-modal-identity-types (○ , is-locally-small-○) unit-○)
   where
 
-  id-elim-higher-modality :
+  elim-Id-higher-modality :
     {X : UU l1} {x' y' : ○ X} →
     ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
-  id-elim-higher-modality {X} {x'} {y'} =
+  elim-Id-higher-modality {X} {x'} {y'} =
     map-inv-unit-is-modal-is-small unit-○
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y')
 ```
 
-Homogenous higher modalities are closed under identity formation in the usual
-sense
+### For homogenous higher modalities, The identity types of modal types are modal in the usual sense
 
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  ( ((○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) :
+      higher-modality l l)
   where
 
   map-inv-unit-id-higher-modality :
@@ -250,8 +254,8 @@ module _
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y') ∘
-      ( map-modal-rec unit-○
-        ( modal-rec-modal-ind unit-○ ind-○)
+      ( map-rec-modality unit-○
+        ( rec-modality-ind-modality unit-○ ind-○)
         ( map-equiv-is-small ( is-locally-small-○ X x' y')))
 ```
 
@@ -260,69 +264,76 @@ module _
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  ( ((○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) :
+      higher-modality l l)
   (X : UU l)
   where
 
-  map-inv-modal-unit : ○ (○ X) → ○ X
-  map-inv-modal-unit = ind-○ (○ X) (λ _ → X) id
+  map-inv-unit-higher-modality : ○ (○ X) → ○ X
+  map-inv-unit-higher-modality = ind-○ (○ X) (λ _ → X) id
 
-  isretr-map-inv-modal-unit : (map-inv-modal-unit ∘ unit-○) ~ id
-  isretr-map-inv-modal-unit = comp-○ (○ X) (λ _ → X) id
+  is-retraction-map-inv-unit-higher-modality :
+    (map-inv-unit-higher-modality ∘ unit-○) ~ id
+  is-retraction-map-inv-unit-higher-modality = compute-ind-○ (○ X) (λ _ → X) id
 
-  issec-map-inv-modal-unit : (unit-○ ∘ map-inv-modal-unit) ~ id
-  issec-map-inv-modal-unit x'' =
+  is-section-map-inv-unit-higher-modality :
+    (unit-○ ∘ map-inv-unit-higher-modality) ~ id
+  is-section-map-inv-unit-higher-modality x'' =
     map-inv-unit-id-higher-modality
-      ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○)
+      ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○)
       ( ind-○ (○ X)
-        ( λ x'' → unit-○ (map-inv-modal-unit x'') ＝ x'')
-        ( unit-○ ∘ (ap unit-○ ∘ isretr-map-inv-modal-unit)) x'')
+        ( λ x'' → unit-○ (map-inv-unit-higher-modality x'') ＝ x'')
+        ( unit-○ ∘ (ap unit-○ ∘ is-retraction-map-inv-unit-higher-modality))
+        ( x''))
 
-  is-modal-modal-operator-type : is-modal unit-○ (○ X)
-  pr1 (pr1 is-modal-modal-operator-type) = map-inv-modal-unit
-  pr2 (pr1 is-modal-modal-operator-type) = issec-map-inv-modal-unit
-  pr1 (pr2 is-modal-modal-operator-type) = map-inv-modal-unit
-  pr2 (pr2 is-modal-modal-operator-type) = isretr-map-inv-modal-unit
+  is-modal-operator-modality-type : is-modal unit-○ (○ X)
+  pr1 (pr1 is-modal-operator-modality-type) = map-inv-unit-higher-modality
+  pr2 (pr1 is-modal-operator-modality-type) =
+    is-section-map-inv-unit-higher-modality
+  pr1 (pr2 is-modal-operator-modality-type) = map-inv-unit-higher-modality
+  pr2 (pr2 is-modal-operator-modality-type) =
+    is-retraction-map-inv-unit-higher-modality
 ```
 
-## Higher modalities are uniquely eliminating modalities
+### Higher modalities are uniquely eliminating modalities
 
 ```agda
 module _
   {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) : higher-modality l l)
+  ( ((○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) :
+      higher-modality l l)
   where
 
-  isretr-modal-ind :
+  is-retraction-ind-modality :
     {X : UU l} {P : ○ X → UU l} → (precomp-Π unit-○ (○ ∘ P) ∘ ind-○ X P) ~ id
-  isretr-modal-ind {X} {P} = eq-htpy ∘ comp-○ X P
+  is-retraction-ind-modality {X} {P} = eq-htpy ∘ compute-ind-○ X P
 
-  issec-modal-ind :
+  is-section-ind-modality :
     {X : UU l} {P : ○ X → UU l} → (ind-○ X P ∘ precomp-Π unit-○ (○ ∘ P)) ~ id
-  issec-modal-ind {X} {P} s =
+  is-section-ind-modality {X} {P} s =
     eq-htpy
       ( map-inv-unit-id-higher-modality
-        ( (○ , is-locally-small-○) , unit-○ , (ind-○ , comp-○) , Id-○) ∘
+        ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) ∘
         ( ind-○ X
           ( λ x' → (ind-○ X P ∘ precomp-Π (unit-○) (○ ∘ P)) s x' ＝ s x')
-          ( unit-○ ∘ comp-○ X P (s ∘ unit-○))))
+          ( unit-○ ∘ compute-ind-○ X P (s ∘ unit-○))))
 
-  is-equiv-modal-ind : (X : UU l) (P : ○ X → UU l) → is-equiv (ind-○ X P)
-  pr1 (pr1 (is-equiv-modal-ind X P)) = precomp-Π unit-○ (○ ∘ P)
-  pr2 (pr1 (is-equiv-modal-ind X P)) = issec-modal-ind
-  pr1 (pr2 (is-equiv-modal-ind X P)) = precomp-Π unit-○ (○ ∘ P)
-  pr2 (pr2 (is-equiv-modal-ind X P)) = isretr-modal-ind
+  is-equiv-ind-modality : (X : UU l) (P : ○ X → UU l) → is-equiv (ind-○ X P)
+  pr1 (pr1 (is-equiv-ind-modality X P)) = precomp-Π unit-○ (○ ∘ P)
+  pr2 (pr1 (is-equiv-ind-modality X P)) = is-section-ind-modality
+  pr1 (pr2 (is-equiv-ind-modality X P)) = precomp-Π unit-○ (○ ∘ P)
+  pr2 (pr2 (is-equiv-ind-modality X P)) = is-retraction-ind-modality
 
-  equiv-modal-ind :
+  equiv-ind-modality :
     (X : UU l) (P : ○ X → UU l) →
     ((x : X) → ○ (P (unit-○ x))) ≃ ((x' : ○ X) → ○ (P x'))
-  pr1 (equiv-modal-ind X P) = ind-○ X P
-  pr2 (equiv-modal-ind X P) = is-equiv-modal-ind X P
+  pr1 (equiv-ind-modality X P) = ind-○ X P
+  pr2 (equiv-ind-modality X P) = is-equiv-ind-modality X P
 
   is-uniquely-eliminating-modality-higher-modality :
     is-uniquely-eliminating-modality unit-○
   is-uniquely-eliminating-modality-higher-modality X P =
-    is-equiv-map-inv-is-equiv (is-equiv-modal-ind X P)
+    is-equiv-map-inv-is-equiv (is-equiv-ind-modality X P)
 ```
 
 ## See also
@@ -330,8 +341,8 @@ module _
 The equivalent notions of
 
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)
-- [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
+- [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
+- [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
 
 ## References
 

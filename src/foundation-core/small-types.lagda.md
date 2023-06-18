@@ -7,6 +7,7 @@ module foundation-core.small-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
@@ -14,18 +15,18 @@ open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -51,6 +52,10 @@ type-is-small = pr1
 equiv-is-small :
   {l l1 : Level} {A : UU l1} (H : is-small l A) → A ≃ type-is-small H
 equiv-is-small = pr2
+
+inv-equiv-is-small :
+  {l l1 : Level} {A : UU l1} (H : is-small l A) → type-is-small H ≃ A
+inv-equiv-is-small H = inv-equiv (equiv-is-small H)
 
 map-equiv-is-small :
   {l l1 : Level} {A : UU l1} (H : is-small l A) → A → type-is-small H
@@ -116,9 +121,18 @@ pr2 is-small' = id-equiv
 ### Every type of universe level `l1` is `l1 ⊔ l2`-small
 
 ```agda
-is-small-lmax : {l1 : Level} (l2 : Level) (X : UU l1) → is-small (l1 ⊔ l2) X
-pr1 (is-small-lmax l2 X) = raise l2 X
-pr2 (is-small-lmax l2 X) = compute-raise l2 X
+module _
+  {l1 : Level} (l2 : Level) (X : UU l1)
+  where
+
+  is-small-lmax : is-small (l1 ⊔ l2) X
+  pr1 is-small-lmax = raise l2 X
+  pr2 is-small-lmax = compute-raise l2 X
+
+  is-contr-is-small-lmax :
+    is-contr (is-small (l1 ⊔ l2) X)
+  pr1 is-contr-is-small-lmax = is-small-lmax
+  pr2 is-contr-is-small-lmax x = eq-is-prop (is-prop-is-small (l1 ⊔ l2) X)
 ```
 
 ### Every type of universe level `l` is `UU (lsuc l)`-small
@@ -189,7 +203,7 @@ pr2 (is-small-Σ {B = B} (pair X e) H) =
     ( λ a →
       ( equiv-tr
         ( λ t → pr1 (H t))
-        ( inv (isretr-map-inv-equiv e a))) ∘e
+        ( inv (is-retraction-map-inv-equiv e a))) ∘e
       ( pr2 (H a)))
 
 Σ-Small-Type :
@@ -232,7 +246,7 @@ pr2 (is-small-Π {B = B} (pair X e) H) =
     ( λ a →
       ( equiv-tr
       ( λ t → pr1 (H t))
-        ( inv (isretr-map-inv-equiv e a))) ∘e
+        ( inv (is-retraction-map-inv-equiv e a))) ∘e
       ( pr2 (H a)))
 
 Π-Small-Type :

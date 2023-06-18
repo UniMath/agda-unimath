@@ -12,6 +12,7 @@ open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -21,7 +22,6 @@ open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -37,7 +37,7 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 A group `F` equipped with an element `x : F` is said to satisfy the universal
 property of the free group with one generator if for every group `G` the map
 
-```md
+```text
   type-hom-Group F G → type-Group G
 ```
 
@@ -119,7 +119,7 @@ module _
 
   preserves-mul-map-hom-free-group-with-one-generator-ℤ :
     (x y : ℤ) →
-    ( map-hom-free-group-with-one-generator-ℤ (add-ℤ x y)) ＝
+    ( map-hom-free-group-with-one-generator-ℤ (x +ℤ y)) ＝
     ( mul-Group G
       ( map-hom-free-group-with-one-generator-ℤ x)
       ( map-hom-free-group-with-one-generator-ℤ y))
@@ -152,7 +152,7 @@ module _
           ( λ x →
             ( ap
               ( map-hom-Group ℤ-Group G h)
-              ( is-add-one-succ-ℤ x)) ∙
+              ( is-left-add-one-succ-ℤ x)) ∙
             ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 

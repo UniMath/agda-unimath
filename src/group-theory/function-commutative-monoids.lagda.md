@@ -7,20 +7,16 @@ module group-theory.function-commutative-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
 open import group-theory.dependent-products-commutative-monoids
-open import group-theory.dependent-products-semigroups
 open import group-theory.monoids
-open import group-theory.semigroups
 ```
 
-<details>
+</details>
 
 ## Idea
 
@@ -32,7 +28,7 @@ multiplicative operation and the unit are given pointwise.
 
 ```agda
 module _
-  {l1 l2 : Level} (M :  Commutative-Monoid l1) (X : UU l2)
+  {l1 l2 : Level} (M : Commutative-Monoid l1) (X : UU l2)
   where
 
   function-Commutative-Monoid : Commutative-Monoid (l1 ⊔ l2)

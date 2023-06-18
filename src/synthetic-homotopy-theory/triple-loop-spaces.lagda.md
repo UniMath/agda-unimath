@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.triple-loop-spaces where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
@@ -19,6 +21,8 @@ open import synthetic-homotopy-theory.iterated-loop-spaces
 ```
 
 </details>
+
+## Definition
 
 ```agda
 module _
@@ -34,6 +38,8 @@ module _
   refl-Ω³ : {A : UU l} {a : A} → type-Ω³ a
   refl-Ω³ = refl
 ```
+
+## Operations
 
 ```agda
 x-concat-Ω³ :
@@ -62,9 +68,13 @@ ap-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} {α α' β β' : type-Ω³ a}
   (s : Id α α') (t : Id β β') → Id (z-concat-Ω³ α β) (z-concat-Ω³ α' β')
 ap-z-concat-Ω³ s t = k-concat-Id⁴ s t
+```
 
--- The unit laws for the three concatenations on Ω³
+## Properties
 
+### The unit laws for the three concatenations on Ω³
+
+```agda
 left-unit-law-x-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α : type-Ω³ a) →
   Id (x-concat-Ω³ refl-Ω³ α) α
@@ -111,6 +121,7 @@ right-unit-law-z-concat-Ω³ :
 right-unit-law-z-concat-Ω³ α =
   ( right-unit-law-z-concat-Id³ α) ∙
   {!!}
+-}
 {-
   ( ( inv right-unit) ∙
     ( ( inv-nat-htpy (λ ω → right-unit-law-horizontal-concat-Id² ω) α) ∙
@@ -122,31 +133,37 @@ right-unit-law-z-concat-Ω³ α =
                   ( inv-nat-htpy (λ ω → right-unit) z) ∙ ( ap-id z)) α) ∙
             ( ap-id α))))))
 -}
--}
+```
 
--- The interchange laws for Ω³
+### The interchange laws for Ω³
 
+```agda
 interchange-x-y-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω³ a) →
-  Id ( y-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
-     ( x-concat-Ω³ (y-concat-Ω³ α γ) (y-concat-Ω³ β δ))
+  Id
+    ( y-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
+    ( x-concat-Ω³ (y-concat-Ω³ α γ) (y-concat-Ω³ β δ))
 interchange-x-y-concat-Ω³ = interchange-x-y-concat-Id³
 
 interchange-x-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω³ a) →
-  Id ( z-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
-     ( x-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
+  Id
+    ( z-concat-Ω³ (x-concat-Ω³ α β) (x-concat-Ω³ γ δ))
+    ( x-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
 interchange-x-z-concat-Ω³ = interchange-x-z-concat-Id³
 
 interchange-y-z-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω³ a) →
-  Id ( z-concat-Ω³ (y-concat-Ω³ α β) (y-concat-Ω³ γ δ))
-     ( y-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
+  Id
+    ( z-concat-Ω³ (y-concat-Ω³ α β) (y-concat-Ω³ γ δ))
+    ( y-concat-Ω³ (z-concat-Ω³ α γ) (z-concat-Ω³ β δ))
 interchange-y-z-concat-Ω³ α β γ δ =
   inv right-unit ∙ interchange-y-z-concat-Id³ α β γ δ
+```
 
--- The Eckmann-Hilton connections in Ω³
+### The Eckmann-Hilton connections in Ω³
 
+```agda
 outer-eckmann-hilton-connection-x-y-concat-Ω³ :
   {l : Level} {A : UU l} {a : A} (α δ : type-Ω³ a) →
   Id (y-concat-Ω³ α δ) (x-concat-Ω³ α δ)

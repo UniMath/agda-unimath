@@ -10,7 +10,7 @@ module graph-theory.neighbors-undirected-graphs where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -47,7 +47,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
   equiv-neighbor-equiv-Undirected-Graph :
@@ -60,7 +61,8 @@ module _
         edge-Undirected-Graph H
           ( standard-unordered-pair (vertex-equiv-Undirected-Graph G H e x) y))
       ( equiv-vertex-equiv-Undirected-Graph G H e)
-      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph G H e x)
+      ( equiv-edge-standard-unordered-pair-vertices-equiv-Undirected-Graph
+          G H e x)
 
   neighbor-equiv-Undirected-Graph :
     (e : equiv-Undirected-Graph G H) (x : vertex-Undirected-Graph G) →
@@ -70,8 +72,11 @@ module _
     map-equiv (equiv-neighbor-equiv-Undirected-Graph e x)
 
 neighbor-id-equiv-Undirected-Graph :
-  {l1 l2 : Level} (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G) →
+  {l1 l2 : Level}
+  (G : Undirected-Graph l1 l2) (x : vertex-Undirected-Graph G) →
   neighbor-equiv-Undirected-Graph G G (id-equiv-Undirected-Graph G) x ~ id
 neighbor-id-equiv-Undirected-Graph G x (pair y e) =
-  eq-pair-Σ refl (edge-standard-unordered-pair-vertices-id-equiv-Undirected-Graph G x y e)
+  eq-pair-Σ
+    ( refl)
+    ( edge-standard-unordered-pair-vertices-id-equiv-Undirected-Graph G x y e)
 ```

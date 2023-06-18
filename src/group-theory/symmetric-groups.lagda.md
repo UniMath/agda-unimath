@@ -7,12 +7,13 @@ module group-theory.symmetric-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.functions
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -103,7 +104,7 @@ module _
         ( inv (right-inverse-law-equiv e))) ∙
         ( eq-equiv-eq-map-equiv refl))
 
-  is-sec-hom-inv-symmetric-group-equiv-Set :
+  is-section-hom-inv-symmetric-group-equiv-Set :
     Id
       ( comp-hom-Group
         ( symmetric-Group Y)
@@ -112,7 +113,7 @@ module _
         ( hom-symmetric-group-equiv-Set)
         ( hom-inv-symmetric-group-equiv-Set))
       ( id-hom-Group (symmetric-Group Y))
-  is-sec-hom-inv-symmetric-group-equiv-Set =
+  is-section-hom-inv-symmetric-group-equiv-Set =
     eq-pair-Σ
       ( eq-htpy
         ( λ f →
@@ -125,7 +126,7 @@ module _
           ( semigroup-Group (symmetric-Group Y))
           ( id)))
 
-  is-retr-hom-inv-symmetric-group-equiv-Set :
+  is-retraction-hom-inv-symmetric-group-equiv-Set :
     Id
       ( comp-hom-Group
         ( symmetric-Group X)
@@ -134,7 +135,7 @@ module _
         ( hom-inv-symmetric-group-equiv-Set)
         ( hom-symmetric-group-equiv-Set))
       ( id-hom-Group (symmetric-Group X))
-  is-retr-hom-inv-symmetric-group-equiv-Set =
+  is-retraction-hom-inv-symmetric-group-equiv-Set =
     eq-pair-Σ
       ( eq-htpy
         ( λ f →
@@ -152,9 +153,9 @@ module _
   pr1 iso-symmetric-group-equiv-Set = hom-symmetric-group-equiv-Set
   pr1 (pr2 iso-symmetric-group-equiv-Set) = hom-inv-symmetric-group-equiv-Set
   pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
-    is-sec-hom-inv-symmetric-group-equiv-Set
+    is-section-hom-inv-symmetric-group-equiv-Set
   pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
-    is-retr-hom-inv-symmetric-group-equiv-Set
+    is-retraction-hom-inv-symmetric-group-equiv-Set
 ```
 
 ### The symmetric group and the abstract automorphism group of a set are isomorphic

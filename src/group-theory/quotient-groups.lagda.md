@@ -2,15 +2,14 @@
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module group-theory.quotient-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
@@ -54,7 +53,7 @@ module _
   nullifies-normal-subgroup-hom-Group-Prop :
     type-hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Group-Prop f H =
-    contains-Normal-Subgroup-Prop G H (kernel-hom-Group G K f)
+    leq-Normal-Subgroup-Prop G H (kernel-hom-Group G K f)
 
   nullifies-normal-subgroup-hom-Group :
     type-hom-Group G K → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)

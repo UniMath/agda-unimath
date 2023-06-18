@@ -6,7 +6,7 @@ on:
       ref:
         description: the repository ref to build
         required: true
-        default: main
+        default: master
 
   push:
     branches:
@@ -23,7 +23,7 @@ env:
     --css=Agda.css
   AGDA: agda
 jobs:
-  pages:
+  website:
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -39,7 +39,7 @@ jobs:
       - name: Checkout our repository
         uses: actions/checkout@v3
         with:
-          path: main
+          path: master
 
       - uses: r-lib/actions/setup-pandoc@v2
         with:
@@ -54,32 +54,37 @@ jobs:
         id: cache-agda-formalisation
         name: Restore Agda formalisation cache
         with:
-          path: main/_build
+          path: master/_build
           key:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-${{
-            hashFiles('main/src/**') }}
+            hashFiles('master/src/**') }}
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
-
-      - name: Install mdbook-pagetoc
-        uses: baptiste0928/cargo-install@v1
-        with:
-          crate: mdbook-pagetoc
-
-      - name: Install mdbook-katex
-        uses: baptiste0928/cargo-install@v1
-        with:
-          crate: mdbook-katex
-
-      - name: Install mdbook-linkcheck
-        uses: baptiste0928/cargo-install@v1
-        with:
-          crate: mdbook-linkcheck
 
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: "latest"
+
+      - name: Install mdbook-pagetoc
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-pagetoc
+
+      - name: Install mdbook-katex
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-katex
+
+      - name: Install mdbook-linkcheck
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-linkcheck
+
+      - name: Install mdbook-catppuccin
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: mdbook-catppuccin
 
       - uses: actions/setup-python@v4
         with:
@@ -87,20 +92,30 @@ jobs:
           check-latest: true
           cache: "pip"
 
-      - run: pip install -r main/scripts/requirements.txt
+      - run: pip install -r master/scripts/requirements.txt
 
       - name: Generate book
         run: |
-          cd main
+          cd master
           make website
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
+        if: >-
+          github.ref == 'refs/heads/master' || github.event_name ==
+          'workflow_dispatch'
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+        if: >-
+          github.ref == 'refs/heads/master' || github.event_name ==
+          'workflow_dispatch'
         with:
-          path: main/book/html
+          path: master/book/html
+
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v1
+        id: deployment
+        if: >-
+          github.ref == 'refs/heads/master' || github.event_name ==
+          'workflow_dispatch'

@@ -7,16 +7,18 @@ module trees.small-multisets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.small-types
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -28,7 +30,7 @@ open import trees.w-types
 
 ## Idea
 
-A multiset `X := tree-𝕎 A α` is said to be small with respect to a universe
+A multiset `X := tree-𝕎 A α` is said to be **small** with respect to a universe
 `UU l` if its symbol `A` is a small type with respect to `UU l`, and if each
 `α x` is a small multiset with respect to `UU l`.
 
@@ -64,8 +66,8 @@ resize-𝕍 (tree-𝕎 A α) (pair (pair A' e) H2) =
 
 ```agda
 is-small-comprehension-𝕍 :
-  (l : Level) {l1 : Level} {X : 𝕍 l1} {P : symbol-𝕎 X → UU l1} →
-  is-small-𝕍 l X → ((x : symbol-𝕎 X) → is-small l (P x)) →
+  (l : Level) {l1 : Level} {X : 𝕍 l1} {P : shape-𝕎 X → UU l1} →
+  is-small-𝕍 l X → ((x : shape-𝕎 X) → is-small l (P x)) →
   is-small-𝕍 l (comprehension-𝕍 X P)
 is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
   pair
@@ -79,7 +81,8 @@ is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
 is-small-eq-𝕍 :
   (l : Level) {l1 : Level} {X Y : 𝕍 l1} →
   is-small-𝕍 l X → is-small-𝕍 l Y → is-small l (X ＝ Y)
-is-small-eq-𝕍 l {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (pair (pair Y f) K) =
+is-small-eq-𝕍 l
+  {l1} {tree-𝕎 A α} {tree-𝕎 B β} (pair (pair X e) H) (pair (pair Y f) K) =
   is-small-equiv
     ( Eq-𝕎 (tree-𝕎 A α) (tree-𝕎 B β))
     ( equiv-Eq-𝕎-eq (tree-𝕎 A α) (tree-𝕎 B β))
@@ -173,7 +176,7 @@ abstract
                   resize-𝕍
                     ( resize-𝕍 (α t) (H t))
                     ( is-small-resize-𝕍 (α t) (H t)))
-                ( isretr-map-inv-equiv e z)) ∙
+                ( is-retraction-map-inv-equiv e z)) ∙
               ( resize-resize-𝕍 (H z)))))
 
 abstract
@@ -233,7 +236,7 @@ abstract
         ( equiv-concat
           ( ap
             ( λ t → resize-𝕍 (β t) (K t))
-            ( isretr-map-inv-equiv e b))
+            ( is-retraction-map-inv-equiv e b))
           ( resize-𝕍 X H)) ∘e
         ( eq-resize-𝕍 (K b) H))
 ```

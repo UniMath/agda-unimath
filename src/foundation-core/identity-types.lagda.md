@@ -1,16 +1,13 @@
 # Identity types
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation-core.identity-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.constant-maps
-open import foundation-core.functions
-open import foundation-core.universe-levels
+open import foundation.universe-levels
 ```
 
 </details>
@@ -31,11 +28,10 @@ option the infix notation `_＝_`.
 
 **Note**: The equals sign in the infix notation is not the standard equals sign
 on your keyboard, but it is the
-[full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm).
-Note that the full width equals sign is slightly wider, and it is highlighted in
-blue just like all the other defined constructions in Agda. In order to type the
-full width equals sign in Agda emacs mode, you need to add it to your agda input
-method as follows:
+[full width equals sign](https://codepoints.net/U+ff1d). Note that the full
+width equals sign is slightly wider, and it is highlighted like all the other
+defined constructions in Agda. In order to type the full width equals sign in
+Agda's Emacs Mode, you need to add it to your agda input method as follows:
 
 - Type `M-x customize-variable` and press enter.
 - Type `agda-input-user-translations` and press enter.
@@ -47,6 +43,33 @@ method as follows:
 
 After completing these steps, you can type `\=` in order to obtain the full
 width equals sign `＝`.
+
+## List of files directly related to identity types
+
+The following table lists files that are about identity types and operations on
+identifications in arbitrary types.
+
+| Concept                                          | File                                                                                                                      |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
+| Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
+| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
+| Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
+| Commuting squares of identifications             | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
+| Dependent identifications (foundation)           | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
+| Dependent identifications (foundation-core)      | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
+| The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
+| Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
+| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
+| The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
+| The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
+| Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
+| Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
+| Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Torsorial type families                          | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
+| Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
+| Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
+| The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
 
 ## Definition
 
@@ -181,247 +204,47 @@ module _
   is-injective-concat' refl s = (inv right-unit) ∙ (s ∙ right-unit)
 ```
 
-### The functorial action of functions on identity types
+## Equational reasoning
 
-```agda
-ap :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} →
-  x ＝ y → (f x) ＝ (f y)
-ap f refl = refl
+Identifications can be constructed by equational reasoning in the following way:
+
+```text
+equational-reasoning
+  x ＝ y by eq-1
+    ＝ z by eq-2
+    ＝ v by eq-3
 ```
 
-### Laws for the functorial action on paths
+The resulting identification of this computaion is `eq-1 ∙ (eq-2 ∙ eq-3)`, i.e.,
+the identification is associated fully to the right. For examples of the use of
+equational reasoning, see
+[addition-integers](elementary-number-theory.addition-integers.md).
 
 ```agda
-ap-id :
-  {l : Level} {A : UU l} {x y : A} (p : x ＝ y) → (ap id p) ＝ p
-ap-id refl = refl
+infixl 1 equational-reasoning_
+infixl 0 step-equational-reasoning
 
-ap-comp :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C)
-  (f : A → B) {x y : A} (p : x ＝ y) → (ap (g ∘ f) p) ＝ ((ap g ∘ ap f) p)
-ap-comp g f refl = refl
+equational-reasoning_ :
+  {l : Level} {X : UU l} (x : X) → x ＝ x
+equational-reasoning x = refl
 
-ap-refl :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A) →
-  (ap f (refl {x = x})) ＝ refl
-ap-refl f x = refl
+step-equational-reasoning :
+  {l : Level} {X : UU l} {x y : X} →
+  (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
+step-equational-reasoning p z q = p ∙ q
 
-inv-ap-refl-concat :
-  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
-  (right-unit ∙ (r ∙ inv right-unit)) ＝ (ap (_∙ refl) r)
-inv-ap-refl-concat refl = right-inv right-unit
-
-ap-refl-concat :
-  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} (r : p ＝ q) →
-  (ap (_∙ refl) r) ＝ (right-unit ∙ (r ∙ inv right-unit))
-ap-refl-concat = inv ∘ inv-ap-refl-concat
-
-ap-concat :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) → (ap f (p ∙ q)) ＝ ((ap f p) ∙ (ap f q))
-ap-concat f refl q = refl
-
-ap-concat-eq :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y z : A}
-  (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) (H : r ＝ (p ∙ q)) → (ap f r) ＝ ((ap f p) ∙ (ap f q))
-ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
-
-ap-inv :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))
-ap-inv f refl = refl
-
-ap-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B) {x y : A}
-  (p : x ＝ y) → (ap (const A B b) p) ＝ refl
-ap-const b refl = refl
+syntax step-equational-reasoning p z q = p ＝ z by q
 ```
 
-### Transport
+## References
 
-We introduce the operation of transport between fibers over an identification.
+Our setup of equational reasoning is derived from the following sources:
 
-The fact that `tr B p` is an equivalence is recorded in
-[`foundation.identity-types`](foundation.identity-types.md).
+1. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/Id.lagda>
 
-```agda
-tr :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : x ＝ y) → B x → B y
-tr B refl b = b
+2. Martín Escardó.
+   <https://github.com/martinescardo/TypeTopology/blob/master/source/UF-Equiv.lagda>
 
-path-over :
-  {l1 l2 : Level} {A :  UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
-  B x → B x' → UU l2
-path-over B p y y' = (tr B p y) ＝ y'
-
-refl-path-over :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (x : A) (y : B x) →
-  path-over B refl y y
-refl-path-over B x y = refl
-```
-
-### Laws for transport
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  tr-concat :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) (b : B x) →
-    tr B (p ∙ q) b ＝ tr B q (tr B p b)
-  tr-concat refl q b = refl
-
-  eq-transpose-tr :
-    {x y : A} (p : x ＝ y) {u : B x} {v : B y} →
-    v ＝ (tr B p u) → (tr B (inv p) v) ＝ u
-  eq-transpose-tr refl q = q
-
-  eq-transpose-tr' :
-    {x y : A} (p : x ＝ y) {u : B x} {v : B y} →
-    (tr B p u) ＝ v → u ＝ (tr B (inv p) v)
-  eq-transpose-tr' refl q = q
-
-tr-ap :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
-  (f : A → C) (g : (x : A) → B x → D (f x)) {x y : A} (p : x ＝ y) (z : B x) →
-  (tr D (ap f p) (g x z)) ＝ (g y (tr B p z))
-tr-ap f g refl z = refl
-
-preserves-tr :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (f : (i : I) → A i → B i) {i j : I} (p : i ＝ j) (x : A i) →
-  f j (tr A p x) ＝ tr B p (f i x)
-preserves-tr f refl x = refl
-
-tr-Id-left :
-  {l : Level} {A : UU l} {a b c : A} (q : Id b c) (p : Id b a) →
-  Id (tr (λ y → Id y a) q p) ((inv q) ∙ p)
-tr-Id-left refl p  = refl
-
-tr-Id-right :
-  {l : Level} {A : UU l} {a b c : A} (q : Id b c) (p : Id a b) →
-  Id (tr (λ y → Id a y) q p) (p ∙ q)
-tr-Id-right refl refl = refl
-
-tr-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : Id x y) (b : B) →
-  Id (tr (λ (a : A) → B) p b) b
-tr-const refl b = refl
-```
-
-### Functorial action of dependent functions on identity types
-
-```agda
-apd :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) {x y : A}
-  (p : x ＝ y) → (tr B p (f x)) ＝ (f y)
-apd f refl = refl
-
-apd-const :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : Id x y) → Id (apd f p) ((tr-const p (f x)) ∙ (ap f p))
-apd-const f refl = refl
-```
-
-### The Mac Lane pentagon for identity types
-
-```agda
-Mac-Lane-pentagon :
-  {l : Level} {A : UU l} {a b c d e : A}
-  (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
-  let α₁ = (ap (λ t → t ∙ s) (assoc p q r))
-      α₂ = (assoc p (q ∙ r) s)
-      α₃ = (ap (λ t → p ∙ t) (assoc q r s))
-      α₄ = (assoc (p ∙ q) r s)
-      α₅ = (assoc p q (r ∙ s))
-  in
-  ((α₁ ∙ α₂) ∙ α₃) ＝ (α₄ ∙ α₅)
-Mac-Lane-pentagon refl refl refl refl = refl
-```
-
-### The binary action on identifications
-
-```agda
-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : x ＝ x') {y y' : B}
-  (q : y ＝ y') → (f x y) ＝ (f x' y')
-ap-binary f refl refl = refl
-
-ap-binary-diagonal :
-  {l1 l2 : Level} {A : UU l1}
-  {B : UU l2} (f : A → A → B) →
-  {x x' : A} (p : x ＝ x') →
-  (ap-binary f p p) ＝ (ap (λ a → f a a) p)
-ap-binary-diagonal f refl = refl
-
-triangle-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1}
-  {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
-  (ap-binary f p q) ＝ (ap (λ z → f z y) p ∙ ap (f x') q)
-triangle-ap-binary f refl refl = refl
-
-triangle-ap-binary' :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
-  {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
-  (ap-binary f p q) ＝ (ap (f x) q ∙ ap (λ z → f z y') p)
-triangle-ap-binary' f refl refl = refl
-
-left-unit-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1}
-  {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x : A} {y y' : B} (q : y ＝ y') →
-  (ap-binary f refl q) ＝ (ap (f x) q)
-left-unit-ap-binary f refl = refl
-
-right-unit-ap-binary :
-  {l1 l2 l3 : Level} {A : UU l1}
-  {B : UU l2} {C : UU l3} (f : A → B → C) →
-  {x x' : A} (p : x ＝ x') {y : B} →
-  (ap-binary f p refl) ＝ (ap (λ z → f z y) p)
-right-unit-ap-binary f refl = refl
-
-ap-binary-comp :
-  {l1 l2 l3 l4 l5 : Level} {X : UU l4} {Y : UU l5}
-  {A : UU l1} {B : UU l2} {C : UU l3} (H : A → B → C)
-  (f : X → A) (g : Y → B) {x0 x1 : X} (p : x0 ＝ x1)
-  {y0 y1 : Y} (q : y0 ＝ y1) → (ap-binary (λ x y → H (f x) (g y)) p q) ＝
-    ap-binary H (ap f p) (ap g q)
-ap-binary-comp H f g refl refl = refl
-
-ap-binary-comp-diagonal :
-  {l1 l2 l3 l4 : Level} {A' : UU l4} {A : UU l1}
-  {B : UU l2} {C : UU l3} (H : A → B → C)
-  (f : A' → A) (g : A' → B) {a'0 a'1 : A'} (p : a'0 ＝ a'1) →
-  (ap (λ z → H (f z) (g z)) p) ＝ ap-binary H (ap f p) (ap g p)
-ap-binary-comp-diagonal H f g p =
-  inv (ap-binary-diagonal (λ x y → H (f x) (g y)) p) ∙ (ap-binary-comp H f g p p)
-
-ap-binary-comp' :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2}
-  {C : UU l3} {D : UU l4} (f : C → D) (H : A → B → C)
-  {a0 a1 : A} (p : a0 ＝ a1) {b0 b1 : B} (q : b0 ＝ b1) →
-  (ap-binary (λ a b → f (H a b)) p q) ＝ (ap f (ap-binary H p q))
-ap-binary-comp' f H refl refl = refl
-
-ap-binary-permute :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}
-  {B : UU l2} {b0 b1 : B} {C : UU l3} (f : A → B → C) →
-  (p : a0 ＝ a1) (q : b0 ＝ b1) →
-  (ap-binary (λ y x → f x y) q p) ＝ (ap-binary f p q)
-ap-binary-permute f refl refl = refl
-
-ap-binary-concat :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 a2 : A}
-  {B : UU l2} {b0 b1 b2 : B} {C : UU l3}
-  (f : A → B → C) (p : a0 ＝ a1) (p' : a1 ＝ a2)
-  (q : b0 ＝ b1) (q' : b1 ＝ b2) →
-  (ap-binary f (p ∙ p') (q ∙ q')) ＝
-    ((ap-binary f p q) ∙ (ap-binary f p' q'))
-ap-binary-concat f refl refl refl refl  = refl
-```
+3. The Agda standard library.
+   <https://github.com/agda/agda-stdlib/blob/master/src/Relation/Binary/PropositionalEquality/Core.agda>

@@ -1,10 +1,8 @@
-# Groups of order 2
+# Groups of order `2`
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
-```
 
-```agda
 module finite-group-theory.groups-of-order-2 where
 ```
 
@@ -15,6 +13,7 @@ open import elementary-number-theory.groups-of-modular-arithmetic
 
 open import finite-group-theory.finite-groups
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

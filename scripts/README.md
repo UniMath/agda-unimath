@@ -1,13 +1,5 @@
-We have included Python scripts/hooks which should run on almost any platform.
+# Scripts/hooks
 
-Install pre-commit
-
-```
-pip install pre-commit
-```
-
-Next time you commit, pre-commit will run the hooks.
-
-```
-make pre-commit
-```
+We have included Python scripts/hooks for continuous integration that runs on
+almost any platform. For installation instructions, please see the
+[installation guide](https://unimath.github.io/agda-unimath/HOWTO-INSTALL.html#pre-commit-hooks).

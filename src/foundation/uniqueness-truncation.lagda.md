@@ -7,18 +7,19 @@ module foundation.uniqueness-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functions
+open import foundation.universe-levels
+
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-The universal property of n-truncations implies that n-truncations are
+The universal property of `n`-truncations implies that `n`-truncations are
 determined uniquely up to a unique equivalence.
 
 ```agda
@@ -81,10 +82,12 @@ module _
             ( f)
             ( pr2 (center K))
             -}
+```
 
+### Uniqueness of set truncations
+
+```agda
 {-
--- Uniqueness of set truncations
-
 module _
   {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   (C : Set l3) (g : A → type-Set C) {h : type-hom-Set B C}

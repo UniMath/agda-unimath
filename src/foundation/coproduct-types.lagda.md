@@ -2,27 +2,29 @@
 
 ```agda
 module foundation.coproduct-types where
+
+open import foundation-core.coproduct-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.coproduct-types public
-
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.noncontractible-types
+open import foundation.subuniverses
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -53,6 +55,29 @@ module _
 
   is-prop-is-right : (x : X + Y) → is-prop (is-right x)
   is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
+
+  is-left-or-is-right : (x : X + Y) → is-left x + is-right x
+  is-left-or-is-right (inl x) = inl star
+  is-left-or-is-right (inr x) = inr star
+```
+
+### The predicate that a subuniverse is closed under coproducts
+
+We formulate a variant with three subuniverses and the more traditional variant
+using a single subuniverse
+
+```agda
+is-closed-under-coproducts-subuniverses :
+  {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2) (Q : subuniverse l3 l4) →
+  subuniverse (l1 ⊔ l3) l5 → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
+is-closed-under-coproducts-subuniverses {l1} {l2} {l3} P Q R =
+  {X : UU l1} {Y : UU l3} →
+  is-in-subuniverse P X → is-in-subuniverse Q Y → is-in-subuniverse R (X + Y)
+
+is-closed-under-coproducts-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
+is-closed-under-coproducts-subuniverse P =
+  is-closed-under-coproducts-subuniverses P P P
 ```
 
 ## Properties
@@ -91,22 +116,22 @@ module _
   map-inv-equiv-left-summand : X → Σ (X + Y) is-left
   map-inv-equiv-left-summand x = pair (inl x) star
 
-  issec-map-inv-equiv-left-summand :
+  is-section-map-inv-equiv-left-summand :
     (map-equiv-left-summand ∘ map-inv-equiv-left-summand) ~ id
-  issec-map-inv-equiv-left-summand x = refl
+  is-section-map-inv-equiv-left-summand x = refl
 
-  isretr-map-inv-equiv-left-summand :
+  is-retraction-map-inv-equiv-left-summand :
     (map-inv-equiv-left-summand ∘ map-equiv-left-summand) ~ id
-  isretr-map-inv-equiv-left-summand (pair (inl x) star) = refl
-  isretr-map-inv-equiv-left-summand (pair (inr x) ())
+  is-retraction-map-inv-equiv-left-summand (pair (inl x) star) = refl
+  is-retraction-map-inv-equiv-left-summand (pair (inr x) ())
 
   equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
   pr2 equiv-left-summand =
     is-equiv-has-inverse
       map-inv-equiv-left-summand
-      issec-map-inv-equiv-left-summand
-      isretr-map-inv-equiv-left-summand
+      is-section-map-inv-equiv-left-summand
+      is-retraction-map-inv-equiv-left-summand
 ```
 
 ### The type of right elements is equivalent to the right summand
@@ -123,22 +148,22 @@ module _
   map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
   map-inv-equiv-right-summand y = pair (inr y) star
 
-  issec-map-inv-equiv-right-summand :
+  is-section-map-inv-equiv-right-summand :
     (map-equiv-right-summand ∘ map-inv-equiv-right-summand) ~ id
-  issec-map-inv-equiv-right-summand y = refl
+  is-section-map-inv-equiv-right-summand y = refl
 
-  isretr-map-inv-equiv-right-summand :
+  is-retraction-map-inv-equiv-right-summand :
     (map-inv-equiv-right-summand ∘ map-equiv-right-summand) ~ id
-  isretr-map-inv-equiv-right-summand (pair (inl x) ())
-  isretr-map-inv-equiv-right-summand (pair (inr x) star) = refl
+  is-retraction-map-inv-equiv-right-summand (pair (inl x) ())
+  is-retraction-map-inv-equiv-right-summand (pair (inr x) star) = refl
 
   equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
     is-equiv-has-inverse
       map-inv-equiv-right-summand
-      issec-map-inv-equiv-right-summand
-      isretr-map-inv-equiv-right-summand
+      is-section-map-inv-equiv-right-summand
+      is-retraction-map-inv-equiv-right-summand
 ```
 
 ### Coproducts of contractible types are not contractible
@@ -152,7 +177,7 @@ module _
     is-not-contractible-coprod-is-contr :
       is-contr A → is-contr B → is-not-contractible (A + B)
     is-not-contractible-coprod-is-contr HA HB HAB =
-      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr  HAB)
+      neq-inl-inr {x = center HA} {y = center HB} (eq-is-contr HAB)
 ```
 
 ### Coproducts of mutually exclusive propositions are propositions

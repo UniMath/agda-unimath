@@ -7,24 +7,24 @@ module foundation.universal-property-propositional-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
+open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -62,7 +62,7 @@ universal-property-propositional-truncation :
   (P : Prop l2) (f : A → type-Prop P) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-propositional-truncation l {A = A} P f =
   (Q : Prop l) (g : A → type-Prop Q) →
-  is-contr (Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ~  g))
+  is-contr (Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ~ g))
 ```
 
 ### Extension property of the propositional truncation
@@ -207,7 +207,7 @@ abstract
       ( is-property-is-equiv)
       ( map-is-propositional-truncation P f is-ptr-f P' f')
       ( htpy-is-propositional-truncation P f is-ptr-f P' f')
-      ( is-equiv-is-ptruncation-is-ptruncation  P P' f f'
+      ( is-equiv-is-ptruncation-is-ptruncation P P' f f'
         ( map-is-propositional-truncation P f is-ptr-f P' f')
         ( htpy-is-propositional-truncation P f is-ptr-f P' f')
         ( λ {l} → is-ptr-f)

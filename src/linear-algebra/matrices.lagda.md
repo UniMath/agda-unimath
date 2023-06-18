@@ -9,6 +9,7 @@ module linear-algebra.matrices where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -38,7 +39,8 @@ matrix A m n = vec (vec A n) m
 ### The top row of a matrix
 
 ```agda
-top-row-matrix : {l : Level} {m n : ℕ} {A : UU l} → matrix A (succ-ℕ m) n → vec A n
+top-row-matrix :
+  {l : Level} {m n : ℕ} {A : UU l} → matrix A (succ-ℕ m) n → vec A n
 top-row-matrix (v ∷ M) = v
 ```
 
@@ -74,7 +76,8 @@ vertically-empty-matrix :
 vertically-empty-matrix = empty-vec
 
 eq-vertically-empty-matrix :
-  {l : Level} {n : ℕ} {A : UU l} (x : matrix A 0 n) → Id vertically-empty-matrix x
+  {l : Level} {n : ℕ} {A : UU l}
+  (x : matrix A 0 n) → Id vertically-empty-matrix x
 eq-vertically-empty-matrix empty-vec = refl
 
 is-contr-matrix-zero-ℕ :
@@ -92,7 +95,8 @@ horizontally-empty-matrix {m = zero-ℕ} = empty-vec
 horizontally-empty-matrix {m = succ-ℕ m} = empty-vec ∷ horizontally-empty-matrix
 
 eq-horizontally-empty-matrix :
-  {l : Level} {m : ℕ} {A : UU l} (x : matrix A m 0) → Id horizontally-empty-matrix x
+  {l : Level} {m : ℕ} {A : UU l}
+  (x : matrix A m 0) → Id horizontally-empty-matrix x
 eq-horizontally-empty-matrix {m = zero-ℕ} empty-vec = refl
 eq-horizontally-empty-matrix {m = succ-ℕ m} (empty-vec ∷ M) =
   ap-binary _∷_ refl (eq-horizontally-empty-matrix M)

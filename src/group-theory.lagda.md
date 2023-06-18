@@ -1,5 +1,7 @@
 # Group theory
 
+## Files in the group theory folder
+
 ```agda
 module group-theory where
 
@@ -7,6 +9,7 @@ open import group-theory.abelian-groups public
 open import group-theory.addition-homomorphisms-abelian-groups public
 open import group-theory.automorphism-groups public
 open import group-theory.cartesian-products-abelian-groups public
+open import group-theory.cartesian-products-concrete-groups public
 open import group-theory.cartesian-products-groups public
 open import group-theory.cartesian-products-monoids public
 open import group-theory.cartesian-products-semigroups public
@@ -15,11 +18,17 @@ open import group-theory.category-of-groups public
 open import group-theory.category-of-semigroups public
 open import group-theory.cayleys-theorem public
 open import group-theory.centers-groups public
+open import group-theory.centers-monoids public
+open import group-theory.centers-semigroups public
+open import group-theory.central-elements-groups public
+open import group-theory.central-elements-monoids public
+open import group-theory.central-elements-semigroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutators-groups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.congruence-relations-abelian-groups public
+open import group-theory.congruence-relations-commutative-monoids public
 open import group-theory.congruence-relations-groups public
 open import group-theory.congruence-relations-monoids public
 open import group-theory.congruence-relations-semigroups public
@@ -41,12 +50,9 @@ open import group-theory.epimorphisms-groups public
 open import group-theory.equivalences-concrete-group-actions public
 open import group-theory.equivalences-concrete-groups public
 open import group-theory.equivalences-group-actions public
-open import group-theory.equivalences-higher-groups public
 open import group-theory.equivalences-semigroups public
-open import group-theory.fixed-points-higher-group-actions public
 open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
-open import group-theory.free-higher-group-actions public
 open import group-theory.full-subgroups public
 open import group-theory.function-abelian-groups public
 open import group-theory.function-commutative-monoids public
@@ -54,22 +60,20 @@ open import group-theory.function-groups public
 open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
+open import group-theory.generating-sets-groups public
 open import group-theory.group-actions public
-open import group-theory.group-solver public
 open import group-theory.groups public
-open import group-theory.higher-group-actions public
-open import group-theory.higher-groups public
 open import group-theory.homomorphisms-abelian-groups public
+open import group-theory.homomorphisms-commutative-monoids public
 open import group-theory.homomorphisms-concrete-group-actions public
 open import group-theory.homomorphisms-concrete-groups public
 open import group-theory.homomorphisms-generated-subgroups public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
-open import group-theory.homomorphisms-higher-group-actions public
-open import group-theory.homomorphisms-higher-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
-open import group-theory.integers-higher-group public
+open import group-theory.intersections-subgroups-abelian-groups public
+open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public
 open import group-theory.invertible-elements-monoids public
 open import group-theory.isomorphisms-abelian-groups public
@@ -77,8 +81,10 @@ open import group-theory.isomorphisms-concrete-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
 open import group-theory.isomorphisms-semigroups public
+open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels public
 open import group-theory.kernels-homomorphisms-concrete-groups public
+open import group-theory.large-semigroups public
 open import group-theory.loop-groups-sets public
 open import group-theory.mere-equivalences-concrete-group-actions public
 open import group-theory.mere-equivalences-group-actions public
@@ -88,24 +94,31 @@ open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.normal-subgroups public
 open import group-theory.normal-subgroups-concrete-groups public
+open import group-theory.normal-submonoids public
+open import group-theory.normal-submonoids-commutative-monoids public
 open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
-open import group-theory.orbits-higher-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.precategory-of-abelian-groups public
+open import group-theory.precategory-of-commutative-monoids public
 open import group-theory.precategory-of-concrete-groups public
 open import group-theory.precategory-of-group-actions public
 open import group-theory.precategory-of-groups public
+open import group-theory.precategory-of-monoids public
 open import group-theory.precategory-of-semigroups public
 open import group-theory.principal-group-actions public
 open import group-theory.principal-torsors-concrete-groups public
+open import group-theory.products-of-elements-monoids public
 open import group-theory.products-of-tuples-of-elements-commutative-monoids public
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
 open import group-theory.representations-monoids public
+open import group-theory.saturated-congruence-relations-commutative-monoids public
+open import group-theory.saturated-congruence-relations-monoids public
 open import group-theory.semigroups public
 open import group-theory.sheargroups public
 open import group-theory.shriek-concrete-group-actions public
@@ -115,14 +128,17 @@ open import group-theory.subgroups public
 open import group-theory.subgroups-abelian-groups public
 open import group-theory.subgroups-concrete-groups public
 open import group-theory.subgroups-generated-by-subsets-groups public
-open import group-theory.subgroups-higher-groups public
 open import group-theory.submonoids public
+open import group-theory.submonoids-commutative-monoids public
 open import group-theory.subsemigroups public
+open import group-theory.subsets-abelian-groups public
+open import group-theory.subsets-commutative-monoids public
+open import group-theory.subsets-groups public
+open import group-theory.subsets-monoids public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
 open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
-open import group-theory.symmetric-higher-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public

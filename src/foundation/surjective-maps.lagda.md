@@ -7,33 +7,36 @@ module foundation.surjective-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.connected-maps
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equality-cartesian-product-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.truncated-types
 open import foundation.univalence
 open import foundation.universal-property-propositional-truncation
+open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
 ```
@@ -51,8 +54,7 @@ A map `f : A → B` is surjective if all of its fibers are inhabited.
 ```agda
 is-surjective-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
-is-surjective-Prop {B = B} f =
-  Π-Prop B (λ b → trunc-Prop (fib f b))
+is-surjective-Prop {B = B} f = Π-Prop B (trunc-Prop ∘ fib f)
 
 is-surjective :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
@@ -63,8 +65,7 @@ is-prop-is-surjective :
   is-prop (is-surjective f)
 is-prop-is-surjective f = is-prop-type-Prop (is-surjective-Prop f)
 
-_↠_ :
-  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+_↠_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↠ B = Σ (A → B) is-surjective
 
 module _
@@ -82,7 +83,7 @@ module _
 
 ```agda
 Surjection : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
-Surjection l2 A = Σ (UU l2) (λ X → A ↠ X)
+Surjection l2 A = Σ (UU l2) (A ↠_)
 
 module _
   {l1 l2 : Level} {A : UU l1} (f : Surjection l2 A)
@@ -207,7 +208,7 @@ module _
 abstract
   is-surjective-has-section :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    sec f → is-surjective f
+    section f → is-surjective f
   is-surjective-has-section (pair g G) b = unit-trunc-Prop (pair (g b) (G b))
 ```
 
@@ -294,6 +295,23 @@ apply-dependent-universal-property-surj-is-surjective :
   ((a : A) → type-Prop (C (f a))) → ((y : B) → type-Prop (C y))
 apply-dependent-universal-property-surj-is-surjective f H C =
   map-inv-equiv (equiv-dependent-universal-property-surj-is-surjective f H C)
+
+apply-twice-dependent-universal-property-surj-is-surjective :
+  {l l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-surjective f → (C : B → B → Prop l) →
+  ((x y : A) → type-Prop (C (f x) (f y))) → ((s t : B) → type-Prop (C s t))
+apply-twice-dependent-universal-property-surj-is-surjective f H C G s =
+  apply-dependent-universal-property-surj-is-surjective
+    ( f)
+    ( H)
+    ( λ b → C s b)
+    ( λ y →
+      apply-dependent-universal-property-surj-is-surjective
+        ( f)
+        ( H)
+        ( λ b → C b (f y))
+        (λ x → G x y)
+        ( s))
 ```
 
 ### A map into a proposition is a propositional truncation if and only if it is surjective
@@ -364,6 +382,28 @@ module _
     is-surjective-comp-htpy (g ∘ h) g h refl-htpy
 ```
 
+### Functoriality of products preserves being surjective
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  is-surjective-map-prod :
+    {f : A → C} {g : B → D} →
+    is-surjective f → is-surjective g → is-surjective (map-prod f g)
+  is-surjective-map-prod {f} {g} s s' (c , d) =
+    apply-twice-universal-property-trunc-Prop
+      ( s c)
+      ( s' d)
+      ( trunc-Prop (fib (map-prod f g) (c , d)))
+      ( λ x y →
+        unit-trunc-Prop
+          ( pair
+            ( (pr1 x) , (pr1 y))
+            ( eq-pair (pr2 x) (pr2 y))))
+```
+
 ### The composite of a surjective map with an equivalence is surjective
 
 ```agda
@@ -408,7 +448,7 @@ module _
     is-surjective-left-factor-htpy (g ∘ h) g h refl-htpy
 ```
 
-### Surjective maps are -1-connected
+### Surjective maps are `-1`-connected
 
 ```agda
 is-neg-one-connected-map-is-surjective :
@@ -418,7 +458,7 @@ is-neg-one-connected-map-is-surjective H b =
   is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
 ```
 
-### Precomposing functions into a family of (k+1)-types by a surjective map is a k-truncated map
+### Precomposing functions into a family of `k+1`-types by a surjective map is a `k`-truncated map
 
 ```agda
 is-trunc-map-precomp-Π-is-surjective :
@@ -575,6 +615,8 @@ module _
 
 ### The type `Surjection-Into-Truncated-Type l2 (succ-𝕋 k) A` is `k`-truncated
 
+This remains to be shown.
+
 ### Characterization of the identity type of `Surjection-Into-Set l2 A`
 
 ```agda
@@ -633,10 +675,10 @@ module _
           ( λ a →
             ( ap
               ( concat' (g (i a)) (M (f a)))
-              ( issec-map-inv-is-equiv
+              ( is-section-map-inv-is-equiv
                 ( K (i a) ((j (f a))))
                 ( L a ∙ inv (M (f a))))) ∙
-            ( issec-inv-concat' (g (i a)) (M (f a)) (L a)))))
+            ( is-section-inv-concat' (g (i a)) (M (f a)) (L a)))))
     where
 
     J : (b : B) → fib g (h b)
@@ -677,3 +719,7 @@ module _
       ( is-surjective-map-surjection f)
       ( is-emb-map-emb g)
 ```
+
+### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
+
+This remains to be shown.

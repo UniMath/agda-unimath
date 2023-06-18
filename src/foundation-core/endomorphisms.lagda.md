@@ -7,13 +7,13 @@ module foundation-core.endomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.sets
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 
 open import structured-types.pointed-types
 ```
@@ -48,7 +48,7 @@ pr1 (endo-Set A) = endo (type-Set A)
 pr2 (endo-Set A) = is-set-endo (is-set-type-Set A)
 ```
 
-### If the domain is k-truncated the type of endomorphisms is k-truncated
+### If the domain is `k`-truncated the type of endomorphisms is `k`-truncated
 
 ```agda
 is-trunc-endo :

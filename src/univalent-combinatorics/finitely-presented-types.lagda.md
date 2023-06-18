@@ -12,7 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.set-presented-types
@@ -44,7 +44,8 @@ has-presentation-of-cardinality-Prop k A =
   has-set-presentation-Prop (Fin-Set k) A
 
 has-presentation-of-cardinality : {l1 : Level} (k : ℕ) (A : UU l1) → UU l1
-has-presentation-of-cardinality k A = type-Prop (has-presentation-of-cardinality-Prop k A)
+has-presentation-of-cardinality k A =
+  type-Prop (has-presentation-of-cardinality-Prop k A)
 ```
 
 ### Finitely presented types
@@ -76,11 +77,13 @@ has-presentation-of-cardinality-has-cardinality-components {l} k {A} H =
               ( λ x → pr1 (g x))
               ( is-equiv-htpy-equiv e (λ x → pr2 (g x))))))
   where
-  P1 : (e : Fin k ≃ type-trunc-Set A) (x : Fin k) →
-       type-trunc-Prop (fib unit-trunc-Set (map-equiv e x))
+  P1 :
+    (e : Fin k ≃ type-trunc-Set A) (x : Fin k) →
+    type-trunc-Prop (fib unit-trunc-Set (map-equiv e x))
   P1 e x = is-surjective-unit-trunc-Set A (map-equiv e x)
-  P2 : (e : Fin k ≃ type-trunc-Set A) →
-       type-trunc-Prop ((x : Fin k) → fib unit-trunc-Set (map-equiv e x))
+  P2 :
+    (e : Fin k ≃ type-trunc-Set A) →
+    type-trunc-Prop ((x : Fin k) → fib unit-trunc-Set (map-equiv e x))
   P2 e = finite-choice-Fin k (P1 e)
 
 has-cardinality-components-has-presentation-of-cardinality :

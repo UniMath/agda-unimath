@@ -7,6 +7,7 @@ module group-theory.invertible-elements-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -96,7 +97,8 @@ module _
   is-prop-is-invertible-element-Monoid :
     (x : type-Monoid M) → is-prop (is-invertible-element-Monoid M x)
   is-prop-is-invertible-element-Monoid x =
-    is-prop-all-elements-equal (all-elements-equal-is-invertible-element-Monoid x)
+    is-prop-all-elements-equal
+      ( all-elements-equal-is-invertible-element-Monoid x)
 
   is-invertible-element-monoid-Prop : type-Monoid M → Prop l
   pr1 (is-invertible-element-monoid-Prop x) = is-invertible-element-Monoid M x

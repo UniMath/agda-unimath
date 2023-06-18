@@ -24,18 +24,43 @@ transformation between the functors on the underlying precategories.
 ## Definition
 
 ```agda
-module _ {l1 l2 l3 l4}
-  (C : Cat l1 l2)
-  (D : Cat l3 l4)
-  (F G : functor-Cat C D) where
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (D : Category l3 l4)
+  (F G : functor-Category C D)
+  where
 
-  is-nat-trans-Cat : ((x : obj-Cat C) → type-hom-Cat D (obj-functor-Cat C D F x) (obj-functor-Cat C D G x))
-                   → UU (l1 ⊔ l2 ⊔ l4)
-  is-nat-trans-Cat = is-nat-trans-Precat (precat-Cat C) (precat-Cat D) F G
+  is-natural-transformation-Category :
+    ( ( x : obj-Category C) →
+      type-hom-Category D
+        ( obj-functor-Category C D F x)
+        ( obj-functor-Category C D G x)) →
+    UU (l1 ⊔ l2 ⊔ l4)
+  is-natural-transformation-Category =
+    is-natural-transformation-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
 
-  nat-trans-Cat : UU (l1 ⊔ l2 ⊔ l4)
-  nat-trans-Cat = nat-trans-Precat (precat-Cat C) (precat-Cat D) F G
+  natural-transformation-Category : UU (l1 ⊔ l2 ⊔ l4)
+  natural-transformation-Category =
+    natural-transformation-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
 
-  components-nat-trans-Cat : nat-trans-Cat → (x : obj-Cat C) → type-hom-Cat D (obj-functor-Cat C D F x) (obj-functor-Cat C D G x)
-  components-nat-trans-Cat = components-nat-trans-Precat (precat-Cat C) (precat-Cat D) F G
+  components-natural-transformation-Category :
+    natural-transformation-Category → (x : obj-Category C) →
+    type-hom-Category D
+      ( obj-functor-Category C D F x)
+      ( obj-functor-Category C D G x)
+  components-natural-transformation-Category =
+    components-natural-transformation-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
 ```

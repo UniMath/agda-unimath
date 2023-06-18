@@ -35,7 +35,8 @@ module _
   hom-Endo : UU (l1 ⊔ l2)
   hom-Endo =
     Σ ( type-Endo X → type-Endo Y)
-      ( λ f → coherence-square-maps f (endomorphism-Endo X) (endomorphism-Endo Y) f)
+      ( λ f →
+        coherence-square-maps f (endomorphism-Endo X) (endomorphism-Endo Y) f)
 
   map-hom-Endo : hom-Endo → type-Endo X → type-Endo Y
   map-hom-Endo = pr1
@@ -90,7 +91,8 @@ module _
         ( equiv-tot (λ H → equiv-concat-htpy' H right-unit-htpy))
         ( is-contr-total-htpy' (coherence-square-hom-Endo X Y f)))
 
-  is-equiv-htpy-eq-hom-Endo : (f g : hom-Endo X Y) → is-equiv (htpy-eq-hom-Endo f g)
+  is-equiv-htpy-eq-hom-Endo :
+    (f g : hom-Endo X Y) → is-equiv (htpy-eq-hom-Endo f g)
   is-equiv-htpy-eq-hom-Endo f =
     fundamental-theorem-id
       ( is-contr-total-htpy-hom-Endo f)

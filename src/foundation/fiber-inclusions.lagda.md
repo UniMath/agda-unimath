@@ -7,19 +7,22 @@ module foundation.fiber-inclusions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-maps
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
+open import foundation.faithful-maps
 open import foundation.fibers-of-maps
 open import foundation.identity-types
+open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
-open import foundation-core.0-maps
 open import foundation-core.1-types
-open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-maps
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.faithful-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositional-maps
@@ -29,8 +32,6 @@ open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -62,7 +63,7 @@ module _
 
 ## Properties
 
-### The fiber inclusions are truncated maps for any type family B if and only if A is truncated
+### The fiber inclusions are truncated maps for any type family `B` if and only if `A` is truncated
 
 ```agda
 module _
@@ -143,17 +144,17 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A)
   where
 
-  cone-fiber-fam : cone (pr1 {B = B}) (pt a) (B a)
+  cone-fiber-fam : cone (pr1 {B = B}) (point a) (B a)
   pr1 cone-fiber-fam = fiber-inclusion B a
   pr1 (pr2 cone-fiber-fam) = terminal-map
   pr2 (pr2 cone-fiber-fam) = refl-htpy
 
   abstract
     is-pullback-cone-fiber-fam :
-      is-pullback (pr1 {B = B}) (pt a) cone-fiber-fam
+      is-pullback (pr1 {B = B}) (point a) cone-fiber-fam
     is-pullback-cone-fiber-fam =
       is-equiv-comp
-        ( gap (pr1 {B = B}) (pt a) (cone-fiber (pr1 {B = B}) a))
+        ( gap (pr1 {B = B}) (point a) (cone-fiber (pr1 {B = B}) a))
         ( map-inv-fib-pr1 B a)
         ( is-equiv-map-inv-fib-pr1 B a)
         ( is-pullback-cone-fiber pr1 a)

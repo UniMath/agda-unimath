@@ -7,17 +7,19 @@ module foundation.symmetric-operations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.functoriality-coproduct-types
 open import foundation.universal-property-propositional-truncation-into-sets
+open import foundation.universe-levels
 open import foundation.unordered-pairs
 
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
@@ -31,7 +33,7 @@ open import univalent-combinatorics.standard-finite-types
 Recall that there is a standard unordered pairing operation
 `{-,-} : A → (A → unordered-pair A)`. This induces for any type `B` a map
 
-```md
+```text
   λ f x y → f {x,y} : (unordered-pair A → B) → (A → A → B)
 ```
 
@@ -76,7 +78,7 @@ is-commutative-symmetric-operation f x y =
   ap f (is-commutative-standard-unordered-pair x y)
 ```
 
-### A binary operation from $A$ to $B$ is commutative if and only if it extends to the unordered pairs in $A$.
+### A binary operation from `A` to `B` is commutative if and only if it extends to the unordered pairs in `A`
 
 ```agda
 module _

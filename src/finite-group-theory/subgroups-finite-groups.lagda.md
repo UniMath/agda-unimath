@@ -25,6 +25,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.semigroups
 open import group-theory.subgroups
+open import group-theory.subsets-groups
 
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.finite-types
@@ -332,7 +333,7 @@ module _
       ( group-Group-𝔽 G)
       ( inclusion-Subgroup-𝔽 G H)
   preserves-mul-inclusion-group-Subgroup-𝔽 =
-    preserves-mul-inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+    preserves-mul-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
   preserves-unit-inclusion-group-Subgroup-𝔽 :
     preserves-unit-Group
@@ -340,7 +341,7 @@ module _
       ( group-Group-𝔽 G)
       ( inclusion-Subgroup-𝔽 G H)
   preserves-unit-inclusion-group-Subgroup-𝔽 =
-    preserves-unit-inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+    preserves-unit-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
   preserves-inverses-inclusion-group-Subgroup-𝔽 :
     preserves-inverses-Group
@@ -348,12 +349,12 @@ module _
       ( group-Group-𝔽 G)
       ( inclusion-Subgroup-𝔽 G H)
   preserves-inverses-inclusion-group-Subgroup-𝔽 =
-    preserves-inverses-inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+    preserves-inverses-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
   inclusion-group-Subgroup-𝔽 :
     type-hom-Group (group-Subgroup-𝔽 G H) (group-Group-𝔽 G)
   inclusion-group-Subgroup-𝔽 =
-    inclusion-group-Decidable-Subgroup (group-Group-𝔽 G) H
+    hom-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 ```
 
 ## Properties
@@ -378,7 +379,7 @@ module _
 
 ### Every finite subgroup induces two equivalence relations
 
-#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`.
+#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `xu = y`
 
 ```agda
 module _
@@ -418,7 +419,7 @@ module _
     right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 ```
 
-#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`.
+#### The equivalence relation where `x ~ y` if and only if there exists `u : H` such that `ux = y`
 
 ```agda
 module _

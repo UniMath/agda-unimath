@@ -1,4 +1,4 @@
-# 2-element subtypes
+# `2`-element subtypes
 
 ```agda
 module univalent-combinatorics.2-element-subtypes where
@@ -13,7 +13,7 @@ open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -24,6 +24,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -250,11 +251,15 @@ module _
       ( λ h → {!!})
     where
     first-element : (Fin 2 ≃ (type-2-Element-Type X)) →
-      Σ (type-2-Element-Type X) (λ x → ¬ ((y : type-2-Element-Type X) → Id (f x) (f y)))
+      Σ ( type-2-Element-Type X)
+        ( λ x → ¬ ((y : type-2-Element-Type X) → Id (f x) (f y)))
     first-element h =
-      exists-not-not-forall-count (λ z → (w : type-2-Element-Type X) → Id (f z) (f w)) (λ z → {!!})
+      exists-not-not-forall-count (λ z → (w : type-2-Element-Type X) →
+      Id (f z) (f w)) (λ z → {!!})
         {!!} {!!}
-    two-elements-different-image : Σ (type-2-Element-Type X) (λ x → Σ (type-2-Element-Type X) (λ y → ¬ (Id (f x) (f y))))
+    two-elements-different-image :
+      Σ ( type-2-Element-Type X)
+        ( λ x → Σ (type-2-Element-Type X) (λ y → ¬ (Id (f x) (f y))))
     two-elements-different-image = {!!}
 -}
 ```

@@ -1,12 +1,15 @@
 # Set truncations
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.set-truncations where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equality-coproduct-types
 open import foundation.functoriality-cartesian-product-types
@@ -24,15 +27,15 @@ open import foundation.universal-property-dependent-pair-types
 open import foundation.universal-property-image
 open import foundation.universal-property-set-quotients
 open import foundation.universal-property-set-truncation
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
@@ -40,7 +43,6 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -85,7 +87,8 @@ equiv-dependent-universal-property-trunc-Set :
   {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → Set l2) →
   ((x : type-trunc-Set A) → type-Set (B x)) ≃
   ((a : A) → type-Set (B (unit-trunc-Set a)))
-equiv-dependent-universal-property-trunc-Set = equiv-dependent-universal-property-trunc
+equiv-dependent-universal-property-trunc-Set =
+  equiv-dependent-universal-property-trunc
 
 module _
   {l1 : Level} {A : UU l1}
@@ -123,7 +126,8 @@ module _
 ### The universal property of set truncations
 
 ```agda
-universal-property-trunc-Set : {l1 l2 : Level} (A : UU l1) →
+universal-property-trunc-Set :
+  {l1 l2 : Level} (A : UU l1) →
   universal-property-set-truncation l2
     ( trunc-Set A)
     ( unit-trunc-Set)
@@ -261,9 +265,11 @@ abstract
       ( trunc-Set A)
       ( unit-trunc-Set)
       ( is-surjective-and-effective-unit-trunc-Set A)
+```
 
--- Uniqueness of trunc-Set
+### Uniqueness of trunc-Set
 
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
   {h : type-hom-Set B (trunc-Set A)} (H : (h ∘ f) ~ unit-trunc-Set)
@@ -415,6 +421,21 @@ module _
     pr2 (center uniqueness-trunc-Set')
 ```
 
+### The set truncation of a set is equivalent to the set
+
+```agda
+module _
+  {l : Level} (A : Set l)
+  where
+
+  equiv-unit-trunc-set :
+    type-Set A ≃ type-trunc-Set (type-Set A)
+  equiv-unit-trunc-set =
+    equiv-unit-trunc A
+```
+
+### Distributive of set truncation over coproduct
+
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
@@ -469,9 +490,11 @@ module _
     ( map-coprod unit-trunc-Set unit-trunc-Set)
   triangle-distributive-trunc-coprod-Set =
     pr2 (center distributive-trunc-coprod-Set)
+```
 
--- Set truncations of Σ-types
+### Set truncations of Σ-types
 
+```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
@@ -497,7 +520,8 @@ module _
               ( ( equiv-map-Π
                   ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
                 ( ( equiv-ev-pair) ∘e
-                  ( equiv-universal-property-trunc-Set (Σ A (type-trunc-Set ∘ B)) C)))
+                  ( equiv-universal-property-trunc-Set
+                    ( Σ A (type-trunc-Set ∘ B)) C)))
               ( refl-htpy)))
 
   equiv-trunc-Σ-Set :
@@ -509,9 +533,11 @@ module _
     type-trunc-Set (Σ A B) → type-trunc-Set (Σ A (λ x → type-trunc-Set (B x)))
   map-equiv-trunc-Σ-Set =
     map-equiv equiv-trunc-Σ-Set
+```
 
--- trunc-Set distributes over products
+### `trunc-Set` distributes over products
 
+```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where

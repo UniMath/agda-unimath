@@ -1,12 +1,15 @@
 # Russell's paradox
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module foundation.russells-paradox where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
 open import foundation.identity-types
@@ -15,14 +18,13 @@ open import foundation.negation
 open import foundation.small-types
 open import foundation.small-universes
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-cartesian-product-types
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.type-arithmetic-cartesian-product-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 
 open import trees.multisets
 open import trees.small-multisets
@@ -33,12 +35,12 @@ open import trees.universal-multiset
 
 ## Idea
 
-Russells paradox arises when a set of all sets is assumed to exist. In Russell's
-paradox it is of no importance that the elementhood relation takes values in
-propositions. In other words, Russells paradox arises similarly if there is a
-multiset of all multisets. We will construct Russell's paradox from the
-assumption that a universe `U` is equivalent to a type `A : U`. We conclude that
-there can be no universe that is contained in itself. Furthermore, using
+Russell's paradox arises when a set of all sets is assumed to exist. In
+Russell's paradox it is of no importance that the elementhood relation takes
+values in propositions. In other words, Russell's paradox arises similarly if
+there is a multiset of all multisets. We will construct Russell's paradox from
+the assumption that a universe `U` is equivalent to a type `A : U`. We conclude
+that there can be no universe that is contained in itself. Furthermore, using
 replacement we show that for any type `A : U`, there is no surjective map
 `A → U`.
 
@@ -129,7 +131,7 @@ paradox-Russell {l} H =
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
             ( is-contr-total-path' R')
             ( pair R' refl)) ∘e
-          ( ( inv-assoc-Σ (𝕍 l) (λ t → t ＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
+          ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot
                 ( λ t →
                   ( commutative-prod) ∘e
@@ -141,7 +143,7 @@ paradox-Russell {l} H =
                         ( eq-resize-𝕍
                           ( is-small-multiset-𝕍 is-small-lsuc t)
                           ( is-small-R'))))))) ∘e
-              ( assoc-Σ
+              ( associative-Σ
                 ( 𝕍 l)
                 ( λ t → t ∉-𝕍 t)
                 ( λ t → ( resize-𝕍

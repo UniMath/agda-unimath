@@ -7,25 +7,25 @@ module foundation.fibered-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.slice
 open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
-open import foundation-core.fundamental-theorem-of-identity-types
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.small-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -34,7 +34,7 @@ open import foundation-core.universe-levels
 
 Consider a diagram of the form
 
-```md
+```text
   A         B
   |         |
  f|         |g
@@ -81,7 +81,8 @@ module _
   map-total-map-over i = pr1
 
   is-map-over-map-total-map-over :
-    (i : X → Y) (m : map-over f g i) → is-map-over f g i (map-total-map-over i m)
+    (i : X → Y) (m : map-over f g i) →
+    is-map-over f g i (map-total-map-over i m)
   is-map-over-map-total-map-over i = pr2
 
   map-over-fibered-map : (m : fibered-map f g) → map-over f g (pr1 m)
@@ -94,7 +95,8 @@ module _
   map-total-fibered-map = pr1 ∘ pr2
 
   is-map-over-map-total-fibered-map :
-    (m : fibered-map f g) → is-map-over f g (map-base-fibered-map m) (map-total-fibered-map m)
+    (m : fibered-map f g) →
+    is-map-over f g (map-base-fibered-map m) (map-total-fibered-map m)
   is-map-over-map-total-fibered-map = pr2 ∘ pr2
 ```
 
@@ -109,9 +111,11 @@ module _
   where
 
   coherence-htpy-map-over :
-    (m m' : map-over f g i) → map-total-map-over f g i m ~ map-total-map-over f g i m' → UU (l1 ⊔ l4)
+    (m m' : map-over f g i) →
+    map-total-map-over f g i m ~ map-total-map-over f g i m' → UU (l1 ⊔ l4)
   coherence-htpy-map-over m m' K =
-    (is-map-over-map-total-map-over f g i m ∙h (g ·l K)) ~ is-map-over-map-total-map-over f g i m'
+    ( is-map-over-map-total-map-over f g i m ∙h (g ·l K)) ~
+    ( is-map-over-map-total-map-over f g i m')
 
   htpy-map-over : (m m' : map-over f g i) → UU (l1 ⊔ l2 ⊔ l4)
   htpy-map-over m m' =
@@ -129,10 +133,11 @@ module _
     (m : map-over f g i) → is-contr (Σ (map-over f g i) (htpy-map-over m))
   is-contr-total-htpy-map-over m =
     is-contr-total-Eq-structure
-      (λ g G → coherence-htpy-map-over m (g , G))
-      (is-contr-total-htpy (map-total-map-over f g i m))
-      (map-total-map-over f g i m , refl-htpy)
-      (is-contr-total-htpy (is-map-over-map-total-map-over f g i m ∙h refl-htpy))
+      ( λ g G → coherence-htpy-map-over m (g , G))
+      ( is-contr-total-htpy (map-total-map-over f g i m))
+      ( map-total-map-over f g i m , refl-htpy)
+      ( is-contr-total-htpy
+        ( is-map-over-map-total-map-over f g i m ∙h refl-htpy))
 
   is-equiv-htpy-eq-map-over :
     (m m' : map-over f g i) → is-equiv (htpy-eq-map-over m m')
@@ -174,9 +179,11 @@ module _
   refl-htpy-fibered-map : (m : fibered-map f g) → htpy-fibered-map m m
   pr1 (refl-htpy-fibered-map m) = refl-htpy
   pr1 (pr2 (refl-htpy-fibered-map m)) = refl-htpy
-  pr2 (pr2 (refl-htpy-fibered-map m)) = inv-htpy-left-unit-htpy ∙h right-unit-htpy
+  pr2 (pr2 (refl-htpy-fibered-map m)) =
+    inv-htpy-left-unit-htpy ∙h right-unit-htpy
 
-  htpy-eq-fibered-map : (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
+  htpy-eq-fibered-map :
+    (m m' : fibered-map f g) → m ＝ m' → htpy-fibered-map m m'
   htpy-eq-fibered-map m .m refl = refl-htpy-fibered-map m
 
   is-contr-total-htpy-fibered-map :
@@ -189,22 +196,30 @@ module _
       ( is-contr-total-htpy (map-base-fibered-map f g m))
       ( map-base-fibered-map f g m , refl-htpy)
       ( is-contr-total-Eq-structure
-        ( λ h H → coherence-htpy-fibered-map m (map-base-fibered-map f g m , h , H) refl-htpy)
+        ( λ h H →
+          coherence-htpy-fibered-map
+            ( m)
+            ( map-base-fibered-map f g m , h , H)
+            ( refl-htpy))
         ( is-contr-total-htpy (map-total-fibered-map f g m))
         ( map-total-fibered-map f g m , refl-htpy)
-        (is-contr-total-htpy (is-map-over-map-total-fibered-map f g m ∙h refl-htpy)))
+        ( is-contr-total-htpy
+          ( is-map-over-map-total-fibered-map f g m ∙h refl-htpy)))
 
   is-equiv-htpy-eq-fibered-map :
     (m m' : fibered-map f g) → is-equiv (htpy-eq-fibered-map m m')
   is-equiv-htpy-eq-fibered-map m =
-    fundamental-theorem-id (is-contr-total-htpy-fibered-map m) (htpy-eq-fibered-map m)
+    fundamental-theorem-id
+      ( is-contr-total-htpy-fibered-map m)
+      ( htpy-eq-fibered-map m)
 
   extensionality-fibered-map :
     (m m' : fibered-map f g) → (m ＝ m') ≃ (htpy-fibered-map m m')
   pr1 (extensionality-fibered-map m m') = htpy-eq-fibered-map m m'
   pr2 (extensionality-fibered-map m m') = is-equiv-htpy-eq-fibered-map m m'
 
-  eq-htpy-fibered-map : (m m' : fibered-map f g) → htpy-fibered-map m m' → m ＝ m'
+  eq-htpy-fibered-map :
+    (m m' : fibered-map f g) → htpy-fibered-map m m' → m ＝ m'
   eq-htpy-fibered-map m m' = map-inv-equiv (extensionality-fibered-map m m')
 ```
 
@@ -226,20 +241,20 @@ module _
   pr1 (map-over-fiberwise-map-over α) a = pr1 (α (f a) (pair a refl))
   pr2 (map-over-fiberwise-map-over α) a = inv (pr2 (α (f a) (pair a refl)))
 
-  issec-map-over-fiberwise-map-over-eq-htpy :
+  is-section-map-over-fiberwise-map-over-eq-htpy :
     (α : fiberwise-map-over f g i) (x : X) →
     (fiberwise-map-over-map-over (map-over-fiberwise-map-over α) x) ~ (α x)
-  issec-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
+  is-section-map-over-fiberwise-map-over-eq-htpy α .(f a) (pair a refl) =
     eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
 
-  issec-map-over-fiberwise-map-over :
+  is-section-map-over-fiberwise-map-over :
     (fiberwise-map-over-map-over ∘ map-over-fiberwise-map-over) ~ id
-  issec-map-over-fiberwise-map-over α =
-    eq-htpy (eq-htpy ∘ issec-map-over-fiberwise-map-over-eq-htpy α)
+  is-section-map-over-fiberwise-map-over α =
+    eq-htpy (eq-htpy ∘ is-section-map-over-fiberwise-map-over-eq-htpy α)
 
-  isretr-map-over-fiberwise-map-over :
+  is-retraction-map-over-fiberwise-map-over :
     (map-over-fiberwise-map-over ∘ fiberwise-map-over-map-over) ~ id
-  isretr-map-over-fiberwise-map-over (pair h H) =
+  is-retraction-map-over-fiberwise-map-over (pair h H) =
     eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
 
   abstract
@@ -248,8 +263,8 @@ module _
     is-equiv-fiberwise-map-over-map-over =
       is-equiv-has-inverse
         ( map-over-fiberwise-map-over)
-        ( issec-map-over-fiberwise-map-over)
-        ( isretr-map-over-fiberwise-map-over)
+        ( is-section-map-over-fiberwise-map-over)
+        ( is-retraction-map-over-fiberwise-map-over)
 
   abstract
     is-equiv-map-over-fiberwise-map-over :
@@ -257,8 +272,8 @@ module _
     is-equiv-map-over-fiberwise-map-over =
       is-equiv-has-inverse
         ( fiberwise-map-over-map-over)
-        ( isretr-map-over-fiberwise-map-over)
-        ( issec-map-over-fiberwise-map-over)
+        ( is-retraction-map-over-fiberwise-map-over)
+        ( is-section-map-over-fiberwise-map-over)
 
   equiv-fiberwise-map-over-map-over :
     map-over f g i ≃ fiberwise-map-over f g i
@@ -314,25 +329,25 @@ module _
   {f : A → X} {g : B → Y} {h : C → Z}
   where
 
-  is-map-over-comp-horizontal :
+  is-map-over-pasting-horizontal :
     {k : X → Y} {l : Y → Z} {i : A → B} {j : B → C} →
     is-map-over f g k i → is-map-over g h l j →
     is-map-over f h (l ∘ k) (j ∘ i)
-  is-map-over-comp-horizontal {k} {l} {i} {j} =
-    coherence-square-maps-comp-horizontal i j f g h k l
+  is-map-over-pasting-horizontal {k} {l} {i} {j} =
+    pasting-horizontal-coherence-square-maps i j f g h k l
 
-  map-over-comp-horizontal :
+  map-over-pasting-horizontal :
     {k : X → Y} {l : Y → Z} →
     map-over f g k → map-over g h l → map-over f h (l ∘ k)
-  pr1 (map-over-comp-horizontal {k} {l} (i , I) (j , J)) = j ∘ i
-  pr2 (map-over-comp-horizontal {k} {l} (i , I) (j , J)) =
-    is-map-over-comp-horizontal {k} {l} I J
+  pr1 (map-over-pasting-horizontal {k} {l} (i , I) (j , J)) = j ∘ i
+  pr2 (map-over-pasting-horizontal {k} {l} (i , I) (j , J)) =
+    is-map-over-pasting-horizontal {k} {l} I J
 
-  fibered-map-comp-horizontal :
+  fibered-map-pasting-horizontal :
     fibered-map f g → fibered-map g h → fibered-map f h
-  pr1 (fibered-map-comp-horizontal (k , iI) (l , jJ)) = l ∘ k
-  pr2 (fibered-map-comp-horizontal (k , iI) (l , jJ)) =
-    map-over-comp-horizontal {k} {l} iI jJ
+  pr1 (fibered-map-pasting-horizontal (k , iI) (l , jJ)) = l ∘ k
+  pr2 (fibered-map-pasting-horizontal (k , iI) (l , jJ)) =
+    map-over-pasting-horizontal {k} {l} iI jJ
 ```
 
 ### Vertical composition for fibered maps
@@ -346,13 +361,13 @@ module _
   {i : A → B} {j : C → D} {k : X → Y}
   where
 
-  is-map-over-comp-vertical :
+  is-map-over-pasting-vertical :
     {f : A → C} {g : B → D}
     {f' : C → X} {g' : D → Y} →
     is-map-over f g j i → is-map-over f' g' k j →
     is-map-over (f' ∘ f) (g' ∘ g) k i
-  is-map-over-comp-vertical {f} {g} {f'} {g'} =
-    coherence-square-maps-comp-vertical i f g j f' g' k
+  is-map-over-pasting-vertical {f} {g} {f'} {g'} =
+    pasting-vertical-coherence-square-maps i f g j f' g' k
 ```
 
 ### The truncation level of the types of fibered maps is bounded by the truncation level of the codomains
@@ -383,7 +398,12 @@ module _
   is-trunc-fibered-map k is-trunc-Y is-trunc-B f g =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-Y)
-      ( is-trunc-map-over k (is-trunc-succ-is-trunc k is-trunc-Y) is-trunc-B f g)
+      ( is-trunc-map-over
+        ( k)
+        ( is-trunc-succ-is-trunc k is-trunc-Y)
+        ( is-trunc-B)
+        ( f)
+        ( g))
 ```
 
 ### The transpose of a fibered map

@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "check",
+      "detail": "Typecheck the entire library.",
+      "type": "shell",
+      "command": "make",
+      "args": ["check"],
+      "problemMatcher": []
+    },
+    {
+      "label": "pre-commit",
+      "detail": "Quality assurance for the library.",
+      "type": "shell",
+      "command": "make",
+      "args": ["pre-commit"],
+      "problemMatcher": []
+    },
+    {
+      "label": "remove-unused-imports",
+      "detail": "Search for and remove unused imports",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/scripts/remove_unused_imports.py"],
+      "problemMatcher": [],
+      "hide": true
+    },
+    {
+      "label": "unused-imports",
+      "detail": "Search for and remove unused imports. Very slow!",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
+      "problemMatcher": [],
+      "dependsOn": "remove-unused-imports"
+    }
+  ],
+  "statusbar.default.hide": false
+}

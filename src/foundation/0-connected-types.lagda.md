@@ -1,4 +1,4 @@
-# 0-Connected types
+# `0`-Connected types
 
 ```agda
 module foundation.0-connected-types where
@@ -7,28 +7,30 @@ module foundation.0-connected-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
 open import foundation.fiber-inclusions
 open import foundation.functoriality-set-truncation
 open import foundation.inhabited-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.set-truncations
+open import foundation.sets
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
+open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.sets
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -74,10 +76,10 @@ abstract
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
 
-is-0-connected-is-surjective-pt :
+is-0-connected-is-surjective-point :
   {l1 : Level} {A : UU l1} (a : A) →
-  is-surjective (pt a) → is-0-connected A
-is-0-connected-is-surjective-pt a H =
+  is-surjective (point a) → is-0-connected A
+is-0-connected-is-surjective-point a H =
   is-0-connected-mere-eq a
     ( λ x →
       apply-universal-property-trunc-Prop
@@ -85,27 +87,27 @@ is-0-connected-is-surjective-pt a H =
         ( mere-eq-Prop a x)
         ( λ u → unit-trunc-Prop (pr2 u)))
 
-is-surjective-pt-is-0-connected :
+is-surjective-point-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) →
-  is-0-connected A → is-surjective (pt a)
-is-surjective-pt-is-0-connected a H x =
+  is-0-connected A → is-surjective (point a)
+is-surjective-point-is-0-connected a H x =
   apply-universal-property-trunc-Prop
     ( mere-eq-is-0-connected H a x)
-    ( trunc-Prop (fib (pt a) x))
+    ( trunc-Prop (fib (point a) x))
     ( λ {refl → unit-trunc-Prop (pair star refl)})
 
-is-trunc-map-ev-pt-is-connected :
+is-trunc-map-ev-point-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
   is-0-connected A → is-trunc (succ-𝕋 k) B →
-  is-trunc-map k (ev-pt a (λ _ → B))
-is-trunc-map-ev-pt-is-connected k {A} {B} a H K =
+  is-trunc-map k (ev-point' a {B})
+is-trunc-map-ev-point-is-connected k {A} {B} a H K =
   is-trunc-map-comp k
-    ( ev-pt star (λ _ → B))
-    ( precomp (pt a) B)
+    ( ev-point' star {B})
+    ( precomp (point a) B)
     ( is-trunc-map-is-equiv k
       ( universal-property-contr-is-contr star is-contr-unit B))
     ( is-trunc-map-precomp-Π-is-surjective k
-      ( is-surjective-pt-is-0-connected a H)
+      ( is-surjective-point-is-0-connected a H)
       ( λ _ → pair B K))
 
 equiv-dependent-universal-property-is-0-connected :
@@ -115,8 +117,8 @@ equiv-dependent-universal-property-is-0-connected :
 equiv-dependent-universal-property-is-0-connected a H P =
   ( equiv-universal-property-unit (type-Prop (P a))) ∘e
   ( equiv-dependent-universal-property-surj-is-surjective
-    ( pt a)
-    ( is-surjective-pt-is-0-connected a H)
+    ( point a)
+    ( is-surjective-point-is-0-connected a H)
     ( P))
 
 apply-dependent-universal-property-is-0-connected :
@@ -163,4 +165,30 @@ is-0-connected-equiv' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → is-0-connected A → is-0-connected B
 is-0-connected-equiv' e = is-0-connected-equiv (inv-equiv e)
+```
+
+### `0-connected` types are closed under cartesian products
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (Y : UU l2)
+  (p1 : is-0-connected X) (p2 : is-0-connected Y)
+  where
+
+  is-0-connected-product : is-0-connected (X × Y)
+  is-0-connected-product =
+    is-contr-equiv
+      ( type-trunc-Set X × type-trunc-Set Y)
+      ( equiv-distributive-trunc-prod-Set X Y)
+      ( is-contr-prod p1 p2)
+```
+
+### A contractible type is `0`-connected
+
+```agda
+is-0-connected-is-contr :
+  {l : Level} (X : UU l) →
+  is-contr X → is-0-connected X
+is-0-connected-is-contr X p =
+  is-contr-equiv X (inv-equiv (equiv-unit-trunc-Set (X , is-set-is-contr p))) p
 ```

@@ -1,4 +1,4 @@
-# Unordered n-tuples of elements in a type
+# Unordered `n`-tuples of elements in a type
 
 ```agda
 module foundation.unordered-tuples where
@@ -10,19 +10,19 @@ module foundation.unordered-tuples where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.decidable-equality
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.sets
-open import foundation-core.universe-levels
 
 open import univalent-combinatorics.complements-isolated-points
 open import univalent-combinatorics.equality-finite-types
@@ -34,8 +34,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-An unordered n-tuple of elements of a type `A` consists of an n-element set `X`
-equipped with a map `X → A`.
+An **unordered `n`-tuple** of elements of a type `A` consists of an `n`-element
+set `X` equipped with a map `X → A`.
 
 ## Definition
 
@@ -166,11 +166,11 @@ module _
   eq-Eq-unordered-tuple x y =
     map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
 
-  isretr-eq-Eq-unordered-tuple :
+  is-retraction-eq-Eq-unordered-tuple :
     (x y : unordered-tuple n A) →
     (eq-Eq-unordered-tuple x y ∘ Eq-eq-unordered-tuple x y) ~ id
-  isretr-eq-Eq-unordered-tuple x y =
-    isretr-map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
+  is-retraction-eq-Eq-unordered-tuple x y =
+    is-retraction-map-inv-is-equiv (is-equiv-Eq-eq-unordered-tuple x y)
 ```
 
 ### Functoriality of unordered tuples
@@ -207,7 +207,7 @@ preserves-refl-htpy-unordered-tuple :
   {l1 l2 : Level} (n : ℕ) {A : UU l1} {B : UU l2} (f : A → B) →
   htpy-unordered-tuple n (refl-htpy {f = f}) ~ refl-htpy
 preserves-refl-htpy-unordered-tuple n f p =
-  isretr-eq-Eq-unordered-tuple n
+  is-retraction-eq-Eq-unordered-tuple n
     ( map-unordered-tuple n f p)
     ( map-unordered-tuple n f p)
     ( refl)

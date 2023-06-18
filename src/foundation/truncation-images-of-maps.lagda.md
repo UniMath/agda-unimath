@@ -7,13 +7,14 @@ module foundation.truncation-images-of-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.truncations
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -24,7 +25,7 @@ The **`k`-truncation image** of a map `f : A → B` is the type `trunc-im k f`
 that fits in the (`k`-connected,`k`-truncated) factorization of `f`. It is
 defined as the type
 
-```md
+```text
   trunc-im k f := Σ (y : B), type-trunc k (fib f y)
 ```
 

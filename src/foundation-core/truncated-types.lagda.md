@@ -7,21 +7,23 @@ module foundation-core.truncated-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.retractions
+open import foundation-core.transport
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -30,8 +32,8 @@ open import foundation-core.universe-levels
 
 The truncatedness of a type is a measure of the complexity of its identity
 types. The simplest case is a contractible type. This is the base case of the
-inductive definition of truncatedness for types. A type is (k+1)-truncated if
-its identity types are k-truncated.
+inductive definition of truncatedness for types. A type is `k+1`-truncated if
+its identity types are `k`-truncated.
 
 ## Definition
 
@@ -67,7 +69,7 @@ module _
 
 ## Properties
 
-### If a type is k-truncated, then it is (k+1)-truncated.
+### If a type is `k`-truncated, then it is `k+1`-truncated
 
 ```agda
 abstract
@@ -84,7 +86,7 @@ pr2 (truncated-type-succ-Truncated-Type k A) =
   is-trunc-succ-is-trunc k (is-trunc-type-Truncated-Type A)
 ```
 
-### The identity type of a k-truncated type is k-truncated
+### The identity type of a `k`-truncated type is `k`-truncated
 
 ```agda
 abstract
@@ -107,7 +109,7 @@ pr2 (Id-Truncated-Type' A x y) =
   is-trunc-Id (is-trunc-type-Truncated-Type A) x y
 ```
 
-### k-truncated types are closed under retracts
+### `k`-truncated types are closed under retracts
 
 ```agda
 module _
@@ -122,7 +124,7 @@ module _
     is-trunc-retract-of (retract-eq R x y) (H (pr1 R x) (pr1 R y))
 ```
 
-### k-truncated types are closed under equivalences
+### `k`-truncated types are closed under equivalences
 
 ```agda
 abstract
@@ -143,7 +145,7 @@ abstract
   is-trunc-is-equiv' :
     {l1 l2 : Level} (k : 𝕋) (A : UU l1) {B : UU l2} (f : A → B) →
     is-equiv f → is-trunc k A → is-trunc k B
-  is-trunc-is-equiv' k A  f is-equiv-f is-trunc-A =
+  is-trunc-is-equiv' k A f is-equiv-f is-trunc-A =
     is-trunc-is-equiv k A
       ( map-inv-is-equiv is-equiv-f)
       ( is-equiv-map-inv-is-equiv is-equiv-f)
@@ -157,7 +159,7 @@ abstract
     is-trunc-is-equiv' k A f is-equiv-f
 ```
 
-### If a type embeds into a (k+1)-truncated type, then it is (k+1)-truncated
+### If a type embeds into a `k+1`-truncated type, then it is (k+1)-truncated
 
 ```agda
 abstract

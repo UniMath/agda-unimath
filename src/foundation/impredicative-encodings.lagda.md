@@ -8,20 +8,20 @@ module foundation.impredicative-encodings where
 
 ```agda
 open import foundation.conjunction
+open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.existential-quantification
 open import foundation.negation
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -287,7 +287,7 @@ map-impredicative-id-Prop :
 map-impredicative-id-Prop A x .x refl Q r = r x
 
 inv-map-impredicative-id-Prop :
-  {l : Level} (A : Set l ) (x y : type-Set A) →
+  {l : Level} (A : Set l) (x y : type-Set A) →
   type-impredicative-id-Prop A x y → x ＝ y
 inv-map-impredicative-id-Prop A x y H =
   H (λ a b → pair (a ＝ b) (is-set-type-Set A a b)) (λ a → refl)

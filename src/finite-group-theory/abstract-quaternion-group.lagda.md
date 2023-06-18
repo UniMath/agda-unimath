@@ -1,4 +1,4 @@
-# The abstract quaternion group of order 8
+# The abstract quaternion group of order `8`
 
 ```agda
 module finite-group-theory.abstract-quaternion-group where
@@ -13,7 +13,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation
@@ -41,13 +41,13 @@ The abstract quaternion group of order 8 is the group of the quaternions `1`,
 
 ```agda
 data Q8 : UU lzero where
-  e-Q8  : Q8
+  e-Q8 : Q8
   -e-Q8 : Q8
-  i-Q8  : Q8
+  i-Q8 : Q8
   -i-Q8 : Q8
-  j-Q8  : Q8
+  j-Q8 : Q8
   -j-Q8 : Q8
-  k-Q8  : Q8
+  k-Q8 : Q8
   -k-Q8 : Q8
 
 mul-Q8 : Q8 → Q8 → Q8
@@ -885,36 +885,37 @@ map-inv-equiv-count-Q8 -j-Q8 = inl (inl (inr star))
 map-inv-equiv-count-Q8 k-Q8 = inl (inr star)
 map-inv-equiv-count-Q8 -k-Q8 = inr star
 
-issec-map-inv-equiv-count-Q8 :
+is-section-map-inv-equiv-count-Q8 :
   ( map-equiv-count-Q8 ∘ map-inv-equiv-count-Q8) ~ id
-issec-map-inv-equiv-count-Q8 e-Q8 = refl
-issec-map-inv-equiv-count-Q8 -e-Q8 = refl
-issec-map-inv-equiv-count-Q8 i-Q8 = refl
-issec-map-inv-equiv-count-Q8 -i-Q8 = refl
-issec-map-inv-equiv-count-Q8 j-Q8 = refl
-issec-map-inv-equiv-count-Q8 -j-Q8 = refl
-issec-map-inv-equiv-count-Q8 k-Q8 = refl
-issec-map-inv-equiv-count-Q8 -k-Q8 = refl
+is-section-map-inv-equiv-count-Q8 e-Q8 = refl
+is-section-map-inv-equiv-count-Q8 -e-Q8 = refl
+is-section-map-inv-equiv-count-Q8 i-Q8 = refl
+is-section-map-inv-equiv-count-Q8 -i-Q8 = refl
+is-section-map-inv-equiv-count-Q8 j-Q8 = refl
+is-section-map-inv-equiv-count-Q8 -j-Q8 = refl
+is-section-map-inv-equiv-count-Q8 k-Q8 = refl
+is-section-map-inv-equiv-count-Q8 -k-Q8 = refl
 
-isretr-map-inv-equiv-count-Q8 :
+is-retraction-map-inv-equiv-count-Q8 :
   ( map-inv-equiv-count-Q8 ∘ map-equiv-count-Q8) ~ id
-isretr-map-inv-equiv-count-Q8
+is-retraction-map-inv-equiv-count-Q8
   (inl (inl (inl (inl (inl (inl (inl (inr star)))))))) = refl
-isretr-map-inv-equiv-count-Q8
+is-retraction-map-inv-equiv-count-Q8
   (inl (inl (inl (inl (inl (inl (inr star))))))) = refl
-isretr-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inl (inr star)))))) = refl
-isretr-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inr star))))) = refl
-isretr-map-inv-equiv-count-Q8 (inl (inl (inl (inr star)))) = refl
-isretr-map-inv-equiv-count-Q8 (inl (inl (inr star))) = refl
-isretr-map-inv-equiv-count-Q8 (inl (inr star)) = refl
-isretr-map-inv-equiv-count-Q8 (inr star) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inl (inr star)))))) =
+  refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inl (inr star))))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inl (inr star)))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inl (inr star))) = refl
+is-retraction-map-inv-equiv-count-Q8 (inl (inr star)) = refl
+is-retraction-map-inv-equiv-count-Q8 (inr star) = refl
 
 is-equiv-map-equiv-count-Q8 : is-equiv map-equiv-count-Q8
 is-equiv-map-equiv-count-Q8 =
   is-equiv-has-inverse
     map-inv-equiv-count-Q8
-    issec-map-inv-equiv-count-Q8
-    isretr-map-inv-equiv-count-Q8
+    is-section-map-inv-equiv-count-Q8
+    is-retraction-map-inv-equiv-count-Q8
 
 equiv-count-Q8 : Fin 8 ≃ Q8
 equiv-count-Q8 = pair map-equiv-count-Q8 is-equiv-map-equiv-count-Q8

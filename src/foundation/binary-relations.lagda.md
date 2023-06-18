@@ -7,18 +7,18 @@ module foundation.binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtypes
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -37,8 +37,8 @@ say that the relation is valued in propositions.
 Rel : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Rel l A = A → A → UU l
 
-total-space-Rel : {l1 l : Level} {A : UU l1}
-        → Rel l A → UU (l1 ⊔ l)
+total-space-Rel :
+  {l1 l : Level} {A : UU l1} → Rel l A → UU (l1 ⊔ l)
 total-space-Rel {A = A} R = Σ (A × A) λ (pair a a') → R a a'
 ```
 
@@ -47,20 +47,19 @@ total-space-Rel {A = A} R = Σ (A × A) λ (pair a a') → R a a'
 ```agda
 Rel-Prop :
   (l : Level) {l1 : Level} (A : UU l1) → UU ((lsuc l) ⊔ l1)
-Rel-Prop l A = A → (A → Prop l)
+Rel-Prop l A = A → A → Prop l
 
 type-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) → A → A → UU l2
 type-Rel-Prop R x y = pr1 (R x y)
 
-abstract
-  is-prop-type-Rel-Prop :
-    {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
-    (x y : A) → is-prop (type-Rel-Prop R x y)
-  is-prop-type-Rel-Prop R x y = pr2 (R x y)
+is-prop-type-Rel-Prop :
+  {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
+  (x y : A) → is-prop (type-Rel-Prop R x y)
+is-prop-type-Rel-Prop R x y = pr2 (R x y)
 
-total-space-Rel-Prop : {l : Level} {l1 : Level} {A : UU l1}
-             → Rel-Prop l A → UU (l ⊔ l1)
+total-space-Rel-Prop :
+  {l : Level} {l1 : Level} {A : UU l1} → Rel-Prop l A → UU (l ⊔ l1)
 total-space-Rel-Prop {A = A} R = Σ (A × A) λ (pair a a') → type-Rel-Prop R a a'
 ```
 

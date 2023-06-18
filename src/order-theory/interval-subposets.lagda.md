@@ -18,21 +18,21 @@ open import order-theory.subposets
 
 ## Idea
 
-Given two elements `x` and `y` in a poset `X`, the interval `[x, y]` is the
-subposet of `X` consisting of all elements `z` in `X` such that `x ≤ z` and
-`z ≤ y`.
+Given two elements `x` and `y` in a poset `X`, the **interval subposet**
+`[x, y]` is the subposet of `X` consisting of all elements `z` in `X` such that
+`x ≤ z` and `z ≤ y`. Note that interval subposets need not be linearly ordered.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Poset l1 l2) (x y : element-Poset X)
+  {l1 l2 : Level} (X : Poset l1 l2) (x y : type-Poset X)
   where
 
-  is-in-interval-Poset : (z : element-Poset X) → Prop l2
+  is-in-interval-Poset : (z : type-Poset X) → Prop l2
   is-in-interval-Poset z =
-    prod-Prop (leq-poset-Prop X x z) (leq-poset-Prop X z y)
+    prod-Prop (leq-Poset-Prop X x z) (leq-Poset-Prop X z y)
 
-  interval-sub-Poset : Poset (l1 ⊔ l2) l2
-  interval-sub-Poset = sub-Poset X is-in-interval-Poset
+  poset-interval-Subposet : Poset (l1 ⊔ l2) l2
+  poset-interval-Subposet = poset-Subposet X is-in-interval-Poset
 ```

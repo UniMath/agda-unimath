@@ -93,7 +93,7 @@ module _
   unordered-pair-vertices-hydrocarbon = unordered-pair vertex-hydrocarbon
 
   edge-hydrocarbon-𝔽 : unordered-pair-vertices-hydrocarbon → 𝔽 l2
-  edge-hydrocarbon-𝔽 = pr2  finite-graph-hydrocarbon
+  edge-hydrocarbon-𝔽 = pr2 finite-graph-hydrocarbon
 
   edge-hydrocarbon : unordered-pair-vertices-hydrocarbon → UU l2
   edge-hydrocarbon = edge-Undirected-Graph-𝔽 finite-graph-hydrocarbon

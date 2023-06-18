@@ -7,10 +7,11 @@ module elementary-number-theory.natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -82,7 +83,7 @@ is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
 
 ```agda
 ind-ℕ :
-  {i : Level} {P : ℕ → UU i} →
+  {l : Level} {P : ℕ → UU l} →
   P 0 → ((n : ℕ) → P n → P(succ-ℕ n)) → ((n : ℕ) → P n)
 ind-ℕ p0 pS 0 = p0
 ind-ℕ p0 pS (succ-ℕ n) = pS n (ind-ℕ p0 pS n)
@@ -131,6 +132,9 @@ is-nonzero-one-ℕ ()
 
 is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
 is-not-one-zero-ℕ ()
+
+is-nonzero-two-ℕ : is-nonzero-ℕ 2
+is-nonzero-two-ℕ = is-nonzero-succ-ℕ 1
 
 is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
@@ -203,21 +207,30 @@ map-inv-equiv-ℕ : unit + ℕ → ℕ
 map-inv-equiv-ℕ (inl x) = zero-ℕ
 map-inv-equiv-ℕ (inr n) = succ-ℕ n
 
-isretr-map-inv-equiv-ℕ :
+is-retraction-map-inv-equiv-ℕ :
   ( map-inv-equiv-ℕ ∘ map-equiv-ℕ) ~ id
-isretr-map-inv-equiv-ℕ zero-ℕ = refl
-isretr-map-inv-equiv-ℕ (succ-ℕ n) = refl
+is-retraction-map-inv-equiv-ℕ zero-ℕ = refl
+is-retraction-map-inv-equiv-ℕ (succ-ℕ n) = refl
 
-issec-map-inv-equiv-ℕ :
+is-section-map-inv-equiv-ℕ :
   ( map-equiv-ℕ ∘ map-inv-equiv-ℕ) ~ id
-issec-map-inv-equiv-ℕ (inl star) = refl
-issec-map-inv-equiv-ℕ (inr n) = refl
+is-section-map-inv-equiv-ℕ (inl star) = refl
+is-section-map-inv-equiv-ℕ (inr n) = refl
 
 equiv-ℕ : ℕ ≃ (unit + ℕ)
 pr1 equiv-ℕ = map-equiv-ℕ
 pr2 equiv-ℕ =
   is-equiv-has-inverse
     map-inv-equiv-ℕ
-    issec-map-inv-equiv-ℕ
-    isretr-map-inv-equiv-ℕ
+    is-section-map-inv-equiv-ℕ
+    is-retraction-map-inv-equiv-ℕ
 ```
+
+## See also
+
+- The based induction principle is defined in
+  [`based-induction-natural-numbers`](elementary-number-theory.based-induction-natural-numbers.md).
+- The strong induction principle is defined in
+  [`strong-induction-natural-numbers`](elementary-number-theory.strong-induction-natural-numbers.md).
+- The based strong induction principle is defined in
+  [`based-strong-induction-natural-numbers`](elementary-number-theory.based-strong-induction-natural-numbers.md).

@@ -2,9 +2,7 @@
 
 ```agda
 {-# OPTIONS --guardedness #-}
-```
 
-```agda
 module type-theories.comprehension-type-theories where
 ```
 
@@ -19,7 +17,7 @@ module type-theories.comprehension-type-theories where
 ## Idea
 
 Given a fibered type theory `S` over `T`, we can form the comprehension type
-theory `∫ST` analogous to the Grothendieck construction
+theory `∫ST` analogous to the Grothendieck construction.
 
 ## Definition
 

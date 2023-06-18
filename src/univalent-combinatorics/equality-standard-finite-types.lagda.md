@@ -10,6 +10,7 @@ module univalent-combinatorics.equality-standard-finite-types where
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.apartness-relations
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -51,6 +52,12 @@ Eq-Fin (succ-ℕ k) (inl x) (inr y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inl y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inr y) = unit
 
+is-prop-Eq-Fin : (k : ℕ) → (x : Fin k) → (y : Fin k) → is-prop (Eq-Fin k x y)
+is-prop-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-prop-Eq-Fin k x y
+is-prop-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-prop-empty
+is-prop-Eq-Fin (succ-ℕ k) (inl x) (inr y) = is-prop-empty
+is-prop-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-prop-unit
+
 refl-Eq-Fin : (k : ℕ) (x : Fin k) → Eq-Fin k x x
 refl-Eq-Fin (succ-ℕ k) (inl x) = refl-Eq-Fin k x
 refl-Eq-Fin (succ-ℕ k) (inr x) = star
@@ -62,6 +69,17 @@ eq-Eq-Fin :
   (k : ℕ) {x y : Fin k} → Eq-Fin k x y → Id x y
 eq-Eq-Fin (succ-ℕ k) {inl x} {inl y} e = ap inl (eq-Eq-Fin k e)
 eq-Eq-Fin (succ-ℕ k) {inr star} {inr star} star = refl
+
+extensionality-Fin :
+  (k : ℕ)
+  (x y : Fin k) →
+  (x ＝ y) ≃ (Eq-Fin k x y)
+pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
+pr2 (extensionality-Fin k x y) =
+  is-equiv-is-prop
+    ( is-set-Fin k x y)
+    ( is-prop-Eq-Fin k x y)
+    ( eq-Eq-Fin k)
 
 is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
 is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-Eq-Fin k x y
@@ -114,7 +132,7 @@ is-prop-is-zero-or-one-Fin-two-ℕ x =
     ( is-prop-is-one-Fin 1 x)
 ```
 
-### Every element in the standard two-element type is either 0 or 1.
+### Every element in the standard two-element type is either `0` or `1`
 
 ```agda
 is-contr-is-zero-or-one-Fin-two-ℕ :
@@ -127,7 +145,7 @@ is-contr-is-zero-or-one-Fin-two-ℕ x =
 
 ```agda
 decidable-Eq-Fin :
-  (n : ℕ) (i j : Fin n) → decidable-Prop lzero
+  (n : ℕ) (i j : Fin n) → Decidable-Prop lzero
 pr1 (decidable-Eq-Fin n i j) = Id i j
 pr1 (pr2 (decidable-Eq-Fin n i j)) = is-set-Fin n i j
 pr2 (pr2 (decidable-Eq-Fin n i j)) = has-decidable-equality-Fin n i j
@@ -143,11 +161,14 @@ equiv-unit-trunc-Fin-Set k = equiv-unit-trunc-Set (Fin-Set k)
 ### If `leq-ℕ 2 n`, then there exists two distinct elements in `Fin n`
 
 ```agda
-two-distinct-elements-leq-2-Fin : (n : ℕ) → leq-ℕ 2 n →
-  Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
-pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) = inr star
-pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = inl (inr star)
-pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) = neq-inr-inl
+two-distinct-elements-leq-2-Fin :
+  (n : ℕ) → leq-ℕ 2 n → Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
+pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) =
+  inr star
+pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =
+  inl (inr star)
+pr2 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =
+  neq-inr-inl
 ```
 
 ### The standard finite type with a (tight) apartness relation

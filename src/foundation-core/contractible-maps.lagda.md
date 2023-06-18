@@ -7,15 +7,17 @@ module foundation-core.contractible-maps where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.coherently-invertible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -52,29 +54,30 @@ module _
   map-inv-is-contr-map : is-contr-map f → B → A
   map-inv-is-contr-map H y = pr1 (center (H y))
 
-  issec-map-inv-is-contr-map :
+  is-section-map-inv-is-contr-map :
     (H : is-contr-map f) → (f ∘ (map-inv-is-contr-map H)) ~ id
-  issec-map-inv-is-contr-map H y = pr2 (center (H y))
+  is-section-map-inv-is-contr-map H y = pr2 (center (H y))
 
-  isretr-map-inv-is-contr-map :
+  is-retraction-map-inv-is-contr-map :
     (H : is-contr-map f) → ((map-inv-is-contr-map H) ∘ f) ~ id
-  isretr-map-inv-is-contr-map H x =
-    ap ( pr1 {B = λ z → (f z) ＝ (f x)})
-       ( ( inv
-           ( contraction
-             ( H (f x))
-             ( pair
-               ( map-inv-is-contr-map H (f x))
-               ( issec-map-inv-is-contr-map H (f x))))) ∙
-         ( contraction (H (f x)) (pair x refl)))
+  is-retraction-map-inv-is-contr-map H x =
+    ap
+      ( pr1 {B = λ z → (f z) ＝ (f x)})
+      ( ( inv
+          ( contraction
+            ( H (f x))
+            ( pair
+              ( map-inv-is-contr-map H (f x))
+              ( is-section-map-inv-is-contr-map H (f x))))) ∙
+        ( contraction (H (f x)) (pair x refl)))
 
   abstract
     is-equiv-is-contr-map : is-contr-map f → is-equiv f
     is-equiv-is-contr-map H =
       is-equiv-has-inverse
         ( map-inv-is-contr-map H)
-        ( issec-map-inv-is-contr-map H)
-        ( isretr-map-inv-is-contr-map H)
+        ( is-section-map-inv-is-contr-map H)
+        ( is-retraction-map-inv-is-contr-map H)
 ```
 
 ### Any coherently invertible map is a contractible map
@@ -90,14 +93,14 @@ module _
     pr1 (center-fib-is-coherently-invertible H y) =
       inv-is-coherently-invertible H y
     pr2 (center-fib-is-coherently-invertible H y) =
-      issec-inv-is-coherently-invertible H y
+      is-section-inv-is-coherently-invertible H y
 
     contraction-fib-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fib f y) →
       (center-fib-is-coherently-invertible H y) ＝ t
     contraction-fib-is-coherently-invertible H y (pair x refl) =
       eq-Eq-fib f y
-        ( isretr-inv-is-coherently-invertible H x)
+        ( is-retraction-inv-is-coherently-invertible H x)
         ( ( right-unit) ∙
           ( inv ( coh-inv-is-coherently-invertible H x)))
 

@@ -7,21 +7,24 @@ module foundation-core.subtypes where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.dependent-pair-types
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
+
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtype-identity-principle
+open import foundation-core.transport
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -31,7 +34,9 @@ open import foundation-core.universe-levels
 A subtype of a type `A` is a family of propositions over `A`. The underlying
 type of a subtype `P` of `A` is the total space `Σ A B`.
 
-## Definition
+## Definitions
+
+### Subtypes
 
 ```agda
 module _
@@ -81,7 +86,46 @@ module _
   is-closed-under-eq-subtype' p refl = p
 ```
 
+### The containment relation on subtypes
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  leq-subtype-Prop :
+    {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+  leq-subtype-Prop P Q =
+    Π-Prop A (λ x → hom-Prop (P x) (Q x))
+
+  _⊆_ :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
+  P ⊆ Q = type-Prop (leq-subtype-Prop P Q)
+
+  is-prop-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
+  is-prop-leq-subtype P Q =
+    is-prop-type-Prop (leq-subtype-Prop P Q)
+```
+
 ## Properties
+
+### The containment relation on subtypes is a preordering
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  refl-leq-subtype : {l2 : Level} (P : subtype l2 A) → P ⊆ P
+  refl-leq-subtype P x = id
+
+  transitive-leq-subtype :
+    {l2 l3 l4 : Level}
+    (P : subtype l2 A) (Q : subtype l3 A) (R : subtype l4 A) →
+    Q ⊆ R → P ⊆ Q → P ⊆ R
+  transitive-leq-subtype P Q R H K x = H x ∘ K x
+```
 
 ### Equality in subtypes
 
@@ -137,16 +181,18 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where
 
-  emb-into-subtype : {l3 : Level} {X : UU l3}
-                   → (f : X ↪ A)
-                   → ((x : X) → is-in-subtype B (map-emb f x))
-                   → X ↪ type-subtype B
+  emb-into-subtype :
+    {l3 : Level} {X : UU l3} (f : X ↪ A) →
+    ((x : X) → is-in-subtype B (map-emb f x)) →
+    X ↪ type-subtype B
   pr1 (emb-into-subtype f p) x = (map-emb f x , p x)
   pr2 (emb-into-subtype f p) =
     is-emb-is-prop-map
-      ( λ (a , b) → is-prop-equiv
-        ( equiv-tot (λ x → extensionality-type-subtype' B (map-emb f x , p x) (a , b)))
-        ( is-prop-map-is-emb (is-emb-map-emb f) a))
+      ( λ (a , b) →
+        is-prop-equiv
+          ( equiv-tot
+            ( λ x → extensionality-type-subtype' B (map-emb f x , p x) (a , b)))
+          ( is-prop-map-is-emb (is-emb-map-emb f) a))
 ```
 
 ### If the projection map of a type family is an embedding, then the type family is a subtype
@@ -162,7 +208,7 @@ module _
       is-prop-equiv' (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
 ```
 
-### A subtype of a (k+1)-truncated type is (k+1)-truncated.
+### A subtype of a `k+1`-truncated type is `k+1`-truncated
 
 ```agda
 module _
@@ -190,18 +236,14 @@ module _
     is-set-type-subtype = is-trunc-type-subtype neg-one-𝕋 P
 
 prop-subprop :
-  {l1 l2 : Level} (A : Prop l1) (P : subtype l2 (type-Prop A)) →
-  Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Prop l1) (P : subtype l2 (type-Prop A)) → Prop (l1 ⊔ l2)
 pr1 (prop-subprop A P) = type-subtype P
-pr2 (prop-subprop A P) =
-  is-prop-type-subtype P (is-prop-type-Prop A)
+pr2 (prop-subprop A P) = is-prop-type-subtype P (is-prop-type-Prop A)
 
 set-subset :
-  {l1 l2 : Level} (A : Set l1) (P : subtype l2 (type-Set A)) →
-  Set (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Set l1) (P : subtype l2 (type-Set A)) → Set (l1 ⊔ l2)
 pr1 (set-subset A P) = type-subtype P
-pr2 (set-subset A P) =
-  is-set-type-subtype P (is-set-type-Set A)
+pr2 (set-subset A P) = is-set-type-subtype P (is-set-type-Set A)
 ```
 
 ### Logically equivalent subtypes induce equivalences on the underlying type of a subtype
@@ -229,8 +271,7 @@ equiv-subtype-equiv :
   ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
   type-subtype C ≃ type-subtype D
 equiv-subtype-equiv e C D H =
-  equiv-Σ (λ y → type-Prop (D y)) e
-    ( λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
+  equiv-Σ (type-Prop ∘ D) (e) (λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
 ```
 
 ```agda
@@ -258,5 +299,5 @@ abstract
     is-subtype-P is-subtype-Q f g is-equiv-f h =
     is-equiv-map-Σ Q f g is-equiv-f
       ( λ x → is-equiv-is-prop (is-subtype-P x) (is-subtype-Q (f x))
-        ( (tr P (isretr-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
+        ( (tr P (is-retraction-map-inv-is-equiv is-equiv-f x)) ∘ (h (f x))))
 ```

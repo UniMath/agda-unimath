@@ -7,10 +7,12 @@ module foundation.induction-principle-propositional-truncation where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.dependent-pair-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -43,7 +45,7 @@ induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
 
 ## Properties
 
-### A type family over the propositional truncation comes equipped with the structure to satisfy the path clause of the induction principle if and only if it is a family of propositions.
+### A type family over the propositional truncation comes equipped with the structure to satisfy the path clause of the induction principle if and only if it is a family of propositions
 
 ```agda
 abstract

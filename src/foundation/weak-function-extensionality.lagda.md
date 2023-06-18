@@ -7,20 +7,21 @@ module foundation.weak-function-extensionality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.decidable-equality
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-extensionality
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -37,7 +38,7 @@ extensionality axiom.
 
 ```agda
 WEAK-FUNEXT :
-  {i j : Level} (A : UU i) (B : A → UU j) → UU (i ⊔ j)
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
 WEAK-FUNEXT A B =
   ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
 ```
@@ -108,8 +109,9 @@ cases-eq-function-converse-weak-funext :
   (H : is-contr ((i : I) → A i)) (i : I) (x : A i) (e : is-decidable (i ＝ i)) →
   cases-function-converse-weak-funext d H i x i e ＝ x
 cases-eq-function-converse-weak-funext d H i x (inl p) =
-  ap ( λ t → cases-function-converse-weak-funext d H i x i (inl t))
-     ( eq-is-prop (is-set-has-decidable-equality d i i) {p} {refl})
+  ap
+    ( λ t → cases-function-converse-weak-funext d H i x i (inl t))
+    ( eq-is-prop (is-set-has-decidable-equality d i i) {p} {refl})
 cases-eq-function-converse-weak-funext d H i x (inr f) = ex-falso (f refl)
 
 eq-function-converse-weak-funext :

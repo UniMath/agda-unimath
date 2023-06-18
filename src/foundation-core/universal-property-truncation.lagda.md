@@ -7,31 +7,31 @@ module foundation-core.universal-property-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sections
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
 
 ## Idea
 
-We say that a map `f : A → B` into a `k`-truncated type `B` is a `k`-truncation
-of `A` -- or that it satisfies the universal property of the `k`-truncation of
-`A` -- if any map `g : A → C` into a `k`-truncated type `C` extends uniquely
-along `f` to a map `B → C`.
+We say that a map `f : A → B` into a `k`-truncated type `B` is a
+**`k`-truncation** of `A` -- or that it **satisfies the universal property of
+the `k`-truncation** of `A` -- if any map `g : A → C` into a `k`-truncated type
+`C` extends uniquely along `f` to a map `B → C`.
 
 ## Definition
 
@@ -99,7 +99,7 @@ dependent-universal-property-truncation l {k} B f =
 abstract
   is-truncation-id :
     {l1 : Level} {k : 𝕋} {A : UU l1} (H : is-trunc k A) →
-    {l : Level} → is-truncation l (pair A H) id
+    {l : Level} → is-truncation l (A , H) id
   is-truncation-id H B =
     is-equiv-precomp-is-equiv id is-equiv-id (type-Truncated-Type B)
 
@@ -194,15 +194,15 @@ module _
     is-truncation-dependent-universal-property-truncation H X =
       H (λ b → X)
 
-  sec-is-truncation :
+  section-is-truncation :
     ({l : Level} → is-truncation l B f) →
     {l3 : Level} (C : Truncated-Type l3 k)
     (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
-    f ~ (g ∘ h) → sec g
-  sec-is-truncation H C h g K =
+    f ~ (g ∘ h) → section g
+  section-is-truncation H C h g K =
     map-distributive-Π-Σ
       ( map-inv-is-equiv
         ( dependent-universal-property-truncation-is-truncation H
           ( fib-Truncated-Type C B g))
-        ( λ a → pair (h a) (inv (K a))))
+        ( λ a → h a , inv (K a)))
 ```

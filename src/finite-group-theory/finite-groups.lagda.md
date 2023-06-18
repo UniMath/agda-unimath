@@ -18,7 +18,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
@@ -156,10 +156,10 @@ module _
   is-unit-finite-group-Prop : type-Group-𝔽 → Prop l
   is-unit-finite-group-Prop = is-unit-group-Prop group-Group-𝔽
 
-  is-unit-finite-group-decidable-Prop : type-Group-𝔽 → decidable-Prop l
-  pr1 (is-unit-finite-group-decidable-Prop x) =
+  is-unit-finite-group-Decidable-Prop : type-Group-𝔽 → Decidable-Prop l
+  pr1 (is-unit-finite-group-Decidable-Prop x) =
     is-unit-Group-𝔽 x
-  pr2 (is-unit-finite-group-decidable-Prop x) =
+  pr2 (is-unit-finite-group-Decidable-Prop x) =
     is-decidable-prop-is-unit-Group-𝔽 x
 
   left-unit-law-mul-Group-𝔽 :
@@ -198,15 +198,15 @@ module _
     inv-Group-𝔽 unit-Group-𝔽 ＝ unit-Group-𝔽
   inv-unit-Group-𝔽 = inv-unit-Group group-Group-𝔽
 
-  issec-mul-inv-Group-𝔽 :
+  is-section-mul-inv-Group-𝔽 :
     (x : type-Group-𝔽) →
     ( mul-Group-𝔽 x ∘ mul-Group-𝔽 (inv-Group-𝔽 x)) ~ id
-  issec-mul-inv-Group-𝔽 = issec-mul-inv-Group group-Group-𝔽
+  is-section-mul-inv-Group-𝔽 = is-section-mul-inv-Group group-Group-𝔽
 
-  isretr-mul-inv-Group-𝔽 :
+  is-retraction-mul-inv-Group-𝔽 :
     (x : type-Group-𝔽) →
     ( mul-Group-𝔽 (inv-Group-𝔽 x) ∘ mul-Group-𝔽 x) ~ id
-  isretr-mul-inv-Group-𝔽 = isretr-mul-inv-Group group-Group-𝔽
+  is-retraction-mul-inv-Group-𝔽 = is-retraction-mul-inv-Group group-Group-𝔽
 
   is-equiv-mul-Group-𝔽 :
     (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽 x)
@@ -216,15 +216,15 @@ module _
     (x : type-Group-𝔽) → type-Group-𝔽 ≃ type-Group-𝔽
   equiv-mul-Group-𝔽 = equiv-mul-Group group-Group-𝔽
 
-  issec-mul-inv-Group-𝔽' :
+  is-section-mul-inv-Group-𝔽' :
     (x : type-Group-𝔽) →
     (mul-Group-𝔽' x ∘ mul-Group-𝔽' (inv-Group-𝔽 x)) ~ id
-  issec-mul-inv-Group-𝔽' = issec-mul-inv-Group' group-Group-𝔽
+  is-section-mul-inv-Group-𝔽' = is-section-mul-inv-Group' group-Group-𝔽
 
-  isretr-mul-inv-Group-𝔽' :
+  is-retraction-mul-inv-Group-𝔽' :
     (x : type-Group-𝔽) →
     (mul-Group-𝔽' (inv-Group-𝔽 x) ∘ mul-Group-𝔽' x) ~ id
-  isretr-mul-inv-Group-𝔽' = isretr-mul-inv-Group' group-Group-𝔽
+  is-retraction-mul-inv-Group-𝔽' = is-retraction-mul-inv-Group' group-Group-𝔽
 
   is-equiv-mul-Group-𝔽' :
     (x : type-Group-𝔽) → is-equiv (mul-Group-𝔽' x)
@@ -355,8 +355,9 @@ is-π-finite-Group-of-Order {l} k n =
         is-π-finite-is-finite k
           ( is-finite-is-group n X)))
   where
-  e : Group-of-Order l n ≃
-      Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))
+  e :
+    Group-of-Order l n ≃
+    Σ (Semigroup-of-Order l n) (λ X → is-group (pr1 X))
   e = equiv-right-swap-Σ
 
 number-of-groups-of-order : ℕ → ℕ

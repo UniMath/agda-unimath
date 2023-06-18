@@ -3,7 +3,7 @@
 - This style guide is here to improve the readability of the code. If an item in
   this guide causes suboptimal readability of the code if applied, please notify
   us and we will try to improve this guide, and possibly our code.
-- The library uses a standard line length of 80 characters.
+- The library uses a [standard line length of 80 characters](#character-limit).
 - All module headers and standard term definitions should have a single empty
   line before and after them.
 - The library uses Lisp-style parentheses, and indent arguments of functions if
@@ -52,10 +52,9 @@ improve the readability.
   code.
 - If a symbol is not available, the concept is described in words or abbreviated
   words.
-- The readability of the code has high priority. Therefore we try to avoid
+- The readability of the code has high priority. Therefore, we try to avoid
   subtly different variations of the same symbol. The only exception to this
-  rule is the use of the
-  [full width equals sign](https://www.fileformat.info/info/unicode/char/ff1d/index.htm)
+  rule is the use of the [full width equals sign](https://codepoints.net/U+ff1d)
   for identity type formation, as the standard equals sign is a reserved symbol
   in Agda.
 
@@ -126,7 +125,7 @@ improve the readability.
 - The `where` keyword is positioned on a new line after the variable
   declarations, with a 2-space indentation level.
 
-```md
+```agda
 module _
   {l : Level} (G : Group l)
   where
@@ -142,7 +141,7 @@ module _
 - Types should be provided for each of the terms, and all terms should be on
   lines after the `where`, e.g.
 
-  ```md
+  ```agda
   statement : Statement
   statement = proof
     where
@@ -169,6 +168,18 @@ module _
 - The library doesn't use variables at the moment. All variables are declared
   either as parameters of an anonymous module or in the type declaration of a
   construction.
+
+## <a name="character-limit"></a>80-character limit
+
+The library employs an 80-character line limit to improve readability and
+maintainability. However, there are a few notable exceptions to this rule that
+enable us to have names that are more than 80 characters long. The exceptions to
+the rule are as follows:
+
+- Named module declarations
+- Open import statements
+- Lines consisting of a single, possibly parenthesized (`(){}`), token that is
+  potentially followed by one of the symbols `;`, `:`, `=`, or `→`.
 
 ## Coding practices we avoid
 

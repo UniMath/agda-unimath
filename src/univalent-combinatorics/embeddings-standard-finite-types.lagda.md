@@ -10,6 +10,7 @@ module univalent-combinatorics.embeddings-standard-finite-types where
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.repeating-element-standard-finite-type
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
@@ -18,6 +19,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -27,14 +29,23 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding
+An embedding between standard finite types is simply an embedding
 `Fin k ↪ Fin l`.
 
-## Theorem
+## Definitions
+
+```agda
+emb-Fin : (k l : ℕ) → UU lzero
+emb-Fin k l = Fin k ↪ Fin l
+```
+
+## Properties
+
+### Given an embedding `f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)`, we obtain an embedding `Fin k ↪ Fin l`
 
 ```agda
 cases-map-reduce-emb-Fin :
-  (k l : ℕ) (f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l)) →
+  (k l : ℕ) (f : emb-Fin (succ-ℕ k) (succ-ℕ l)) →
   is-decidable (is-inl-Fin l (map-emb f (inr star))) → (x : Fin k) →
   is-decidable (is-inl-Fin l (map-emb f (inl x))) → Fin l
 cases-map-reduce-emb-Fin k l f (inl (pair t p)) x d =
@@ -61,9 +72,10 @@ abstract
     (k l : ℕ) (f : Fin (succ-ℕ k) ↪ Fin (succ-ℕ l))
     (d : is-decidable (is-inl-Fin l (map-emb f (inr star))))
     (x : Fin k) (e : is-decidable (is-inl-Fin l (map-emb f (inl x))))
-    (x' : Fin k) (e' : is-decidable  (is-inl-Fin l (map-emb f (inl x')))) →
-    Id ( cases-map-reduce-emb-Fin k l f d x e)
-       ( cases-map-reduce-emb-Fin k l f d x' e') →
+    (x' : Fin k) (e' : is-decidable (is-inl-Fin l (map-emb f (inl x')))) →
+    Id
+      ( cases-map-reduce-emb-Fin k l f d x e)
+      ( cases-map-reduce-emb-Fin k l f d x' e') →
     Id x x'
   is-injective-cases-map-reduce-emb-Fin k l f (inl (pair t q)) x e x' e' p =
     is-injective-inl
@@ -117,12 +129,11 @@ abstract
     is-emb-is-injective (is-set-Fin l) (is-injective-map-reduce-emb-Fin k l f)
 
 reduce-emb-Fin :
-  (k l : ℕ) → Fin (succ-ℕ k) ↪ Fin (succ-ℕ l) → Fin k ↪ Fin l
+  (k l : ℕ) → emb-Fin (succ-ℕ k) (succ-ℕ l) → emb-Fin k l
 pr1 (reduce-emb-Fin k l f) = map-reduce-emb-Fin k l f
 pr2 (reduce-emb-Fin k l f) = is-emb-map-reduce-emb-Fin k l f
 ```
 
-### Any embedding from `Fin k` into itself is surjective
+## To do
 
---
-`agda -- is-split-surjective-is-emb-Fin : --   {k : ℕ} {f : Fin k → Fin k} → is-emb f → is-split-surjective f -- is-split-surjective-is-emb-Fin {zero-ℕ} {f} H () -- is-split-surjective-is-emb-Fin {succ-ℕ k} {f} H y = {!!} -- `
+- Any embedding from `Fin k` into itself is surjective

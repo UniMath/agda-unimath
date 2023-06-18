@@ -2,21 +2,23 @@
 
 ```agda
 module foundation.functoriality-function-types where
+
+open import foundation-core.functoriality-function-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functoriality-function-types public
-
+open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.constant-maps
-open import foundation-core.functions
+open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -42,6 +44,21 @@ is-trunc-map-is-trunc-map-postcomp k {X} {Y} f is-trunc-post-f =
     ( const unit (X → Y) f)
     ( λ {l} {J} α → is-trunc-post-f {l} J)
     ( star)
+```
+
+### The precomposition function preserves homotopies
+
+```agda
+htpy-precomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B} (H : f ~ g) (C : UU l3) →
+  (precomp f C) ~ (precomp g C)
+htpy-precomp H C h = eq-htpy (h ·l H)
+
+compute-htpy-precomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
+  (htpy-precomp (refl-htpy' f) C) ~ refl-htpy
+compute-htpy-precomp f C h = eq-htpy-refl-htpy (h ∘ f)
 ```
 
 ## See also

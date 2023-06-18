@@ -2,12 +2,14 @@
 
 ```agda
 module elementary-number-theory.decidable-dependent-function-types where
+
+open import foundation.decidable-dependent-function-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.decidable-dependent-function-types public
+
 ```
 
 </details>

@@ -9,11 +9,12 @@ module elementary-number-theory.universal-property-natural-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -107,12 +108,14 @@ module _
     α (succ-ℕ n) = ap f (α n) ∙ inv (pr2 (pr2 h) n)
     β : pr1 (pr2 center-structure-preserving-map-ℕ) ＝ (α zero-ℕ ∙ pr1 (pr2 h))
     β = inv (left-inv (pr1 (pr2 h)))
-    γ : (n : ℕ) →
-        ( pr2 (pr2 center-structure-preserving-map-ℕ) n ∙ ap f (α n)) ＝
-        ( α (succ-ℕ n) ∙ pr2 (pr2 h) n)
+    γ :
+      (n : ℕ) →
+      ( pr2 (pr2 center-structure-preserving-map-ℕ) n ∙ ap f (α n)) ＝
+      ( α (succ-ℕ n) ∙ pr2 (pr2 h) n)
     γ n = ( ( inv right-unit) ∙
             ( ap (λ q → (ap f (α n) ∙ q)) (inv (left-inv (pr2 (pr2 h) n))))) ∙
-          ( inv (assoc (ap f (α n)) (inv (pr2 (pr2 h) n)) (pr2 (pr2 h) n)))
+          ( inv
+            ( assoc (ap f (α n)) (inv (pr2 (pr2 h) n)) (pr2 (pr2 h) n)))
 
   is-contr-structure-preserving-map-ℕ : is-contr structure-preserving-map-ℕ
   pr1 is-contr-structure-preserving-map-ℕ = center-structure-preserving-map-ℕ

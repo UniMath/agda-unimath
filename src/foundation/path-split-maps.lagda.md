@@ -2,19 +2,19 @@
 
 ```agda
 module foundation.path-split-maps where
+
+open import foundation-core.path-split-maps public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.path-split-maps public
-
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -34,14 +34,17 @@ module _
       is-prop-is-proof-irrelevant
         ( λ is-path-split-f →
           ( is-contr-prod
-            ( is-contr-sec-is-equiv (is-equiv-is-path-split f is-path-split-f))
+            ( is-contr-section-is-equiv
+              ( is-equiv-is-path-split f is-path-split-f))
             ( is-contr-Π
               ( λ x → is-contr-Π
-                ( λ y → is-contr-sec-is-equiv
-                  ( is-emb-is-equiv (is-equiv-is-path-split f is-path-split-f) x y))))))
+                ( λ y → is-contr-section-is-equiv
+                  ( is-emb-is-equiv
+                    ( is-equiv-is-path-split f is-path-split-f) x y))))))
 
   abstract
-    is-equiv-is-path-split-is-equiv : (f : A → B) → is-equiv (is-path-split-is-equiv f)
+    is-equiv-is-path-split-is-equiv :
+      (f : A → B) → is-equiv (is-path-split-is-equiv f)
     is-equiv-is-path-split-is-equiv f =
       is-equiv-is-prop
         ( is-property-is-equiv f)
@@ -53,7 +56,8 @@ module _
     pair (is-path-split-is-equiv f) (is-equiv-is-path-split-is-equiv f)
 
   abstract
-    is-equiv-is-equiv-is-path-split : (f : A → B) → is-equiv (is-equiv-is-path-split f)
+    is-equiv-is-equiv-is-path-split :
+      (f : A → B) → is-equiv (is-equiv-is-path-split f)
     is-equiv-is-equiv-is-path-split f =
       is-equiv-is-prop
         ( is-prop-is-path-split f)

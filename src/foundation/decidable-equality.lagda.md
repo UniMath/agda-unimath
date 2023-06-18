@@ -7,15 +7,18 @@ module foundation.decidable-equality where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.negation
 open import foundation.sections
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
@@ -25,8 +28,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -91,7 +93,7 @@ has-decidable-equality-prod d e =
   has-decidable-equality-prod' (λ y → d) (λ x → e)
 ```
 
-### Decidability of equality of the factors of a cartesian product.
+### Decidability of equality of the factors of a cartesian product
 
 If `A × B` has decidable equality and `B` has an element, then `A` has decidable
 equality; and vice versa.
@@ -225,7 +227,7 @@ abstract
           is-prop-Π
           ( λ y →
             is-prop-coprod
-            ( intro-dn)
+            ( intro-double-negation)
             ( is-set-has-decidable-equality d x y)
             ( is-prop-neg))))
 

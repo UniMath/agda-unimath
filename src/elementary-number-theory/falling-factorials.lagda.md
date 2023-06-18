@@ -25,7 +25,7 @@ falling-factorial-ℕ zero-ℕ zero-ℕ = 1
 falling-factorial-ℕ zero-ℕ (succ-ℕ m) = 0
 falling-factorial-ℕ (succ-ℕ n) zero-ℕ = 1
 falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
-  mul-ℕ (succ-ℕ n) (falling-factorial-ℕ n m)
+  (succ-ℕ n) *ℕ (falling-factorial-ℕ n m)
 
 {-
 Fin-falling-factorial-ℕ :
@@ -34,7 +34,8 @@ Fin-falling-factorial-ℕ n m = {!!}
 -}
 
 {-
-Fin-falling-factorial-ℕ : (n m : ℕ) → Fin (falling-factorial-ℕ n m) ≃ (Fin m ↪ Fin n)
+Fin-falling-factorial-ℕ :
+  (n m : ℕ) → Fin (falling-factorial-ℕ n m) ≃ (Fin m ↪ Fin n)
 Fin-falling-factorial-ℕ zero-ℕ zero-ℕ =
   equiv-is-contr
     ( is-contr-Fin-one-ℕ)
@@ -73,7 +74,9 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
             ( λ f → fib (map-emb f) (inr star))
             ( λ f → ¬ (fib (map-emb f) (inr star))))) ∘e
         {!!})) ∘e
-    ( equiv-coprod (Fin-falling-factorial-ℕ n m) (Fin-falling-factorial-ℕ n (succ-ℕ m)))) ∘e
+    ( equiv-coprod
+      ( Fin-falling-factorial-ℕ n m)
+      ( Fin-falling-factorial-ℕ n (succ-ℕ m)))) ∘e
   ( Fin-add-ℕ (falling-factorial-ℕ n m) (falling-factorial-ℕ n (succ-ℕ m)))
 -}
 ```

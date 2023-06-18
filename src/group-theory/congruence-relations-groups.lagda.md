@@ -7,6 +7,7 @@ module group-theory.congruence-relations-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.binary-transport
 open import foundation.contractible-types
@@ -177,7 +178,7 @@ module _
     binary-tr
       ( sim-congruence-Group)
       ( right-unit-law-mul-Group G x)
-      ( issec-mul-inv-Group G x y)
+      ( is-section-mul-inv-Group G x y)
       ( symm-congruence-Group (left-mul-congruence-Group x H))
 
   inv-congruence-Group :

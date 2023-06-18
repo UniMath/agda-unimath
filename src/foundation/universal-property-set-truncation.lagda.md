@@ -7,24 +7,24 @@ module foundation.universal-property-set-truncation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.mere-equality
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -55,7 +55,7 @@ universal-property-set-truncation :
   (B : Set l2) (f : A → type-Set B) → UU (lsuc l ⊔ l1 ⊔ l2)
 universal-property-set-truncation l {A = A} B f =
   (C : Set l) (g : A → type-Set C) →
-  is-contr (Σ (type-hom-Set B C) (λ h → (h ∘ f) ~  g))
+  is-contr (Σ (type-hom-Set B C) (λ h → (h ∘ f) ~ g))
 ```
 
 ### The dependent universal property of set truncations

@@ -7,16 +7,18 @@ module foundation-core.contractible-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
-open import foundation-core.equality-cartesian-product-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -94,9 +96,9 @@ module _
 
   abstract
     is-contr-retract-of : A retract-of B → is-contr B → is-contr A
-    pr1 (is-contr-retract-of (pair i (pair r isretr)) H) = r (center H)
-    pr2 (is-contr-retract-of (pair i (pair r isretr)) H) x =
-      ap r (contraction H (i x)) ∙ (isretr x)
+    pr1 (is-contr-retract-of (pair i (pair r is-retraction)) H) = r (center H)
+    pr2 (is-contr-retract-of (pair i (pair r is-retraction)) H) x =
+      ap r (contraction H (i x)) ∙ (is-retraction x)
 ```
 
 ### Contractible types are closed under equivalences
@@ -112,7 +114,7 @@ module _
     pr1 (is-contr-is-equiv f H (pair b K)) = map-inv-is-equiv H b
     pr2 (is-contr-is-equiv f H (pair b K)) x =
       ( ap (map-inv-is-equiv H) (K (f x))) ∙
-      ( isretr-map-inv-is-equiv H x)
+      ( is-retraction-map-inv-is-equiv H x)
 
   abstract
     is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A
@@ -189,7 +191,7 @@ module _
         ( A × B)
         ( pair
           ( pair (pr1 (center is-contr-AB)))
-          ( pair pr2 (λ x → refl))           )
+          ( pair pr2 (λ x → refl)))
         ( is-contr-AB)
 
 module _

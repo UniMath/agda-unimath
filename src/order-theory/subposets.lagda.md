@@ -19,51 +19,59 @@ open import order-theory.subpreorders
 
 </details>
 
+## Idea
+
+A **subposet** of a poset `P` is a subtype of `P`. By restriction of the
+ordering on `P`, subposets have again the structure of a poset.
+
 ## Definitions
 
 ### Subposets
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (X : Poset l1 l2) (S : element-Poset X → Prop l3)
+  {l1 l2 l3 : Level} (X : Poset l1 l2) (S : type-Poset X → Prop l3)
   where
 
-  element-sub-Poset : UU (l1 ⊔ l3)
-  element-sub-Poset = element-sub-Preorder (preorder-Poset X) S
+  type-Subposet : UU (l1 ⊔ l3)
+  type-Subposet = type-Subpreorder (preorder-Poset X) S
 
-  eq-element-sub-Poset :
-    (x y : element-sub-Poset) → Id (pr1 x) (pr1 y) → Id x y
-  eq-element-sub-Poset = eq-element-sub-Preorder (preorder-Poset X) S
+  eq-type-Subposet :
+    (x y : type-Subposet) → Id (pr1 x) (pr1 y) → Id x y
+  eq-type-Subposet = eq-type-Subpreorder (preorder-Poset X) S
 
-  leq-sub-poset-Prop : (x y : element-sub-Poset) → Prop l2
-  leq-sub-poset-Prop = leq-sub-preorder-Prop (preorder-Poset X) S
+  leq-Subposet-Prop : (x y : type-Subposet) → Prop l2
+  leq-Subposet-Prop = leq-Subpreorder-Prop (preorder-Poset X) S
 
-  leq-sub-Poset : (x y : element-sub-Poset) → UU l2
-  leq-sub-Poset = leq-sub-Preorder (preorder-Poset X) S
+  leq-Subposet : (x y : type-Subposet) → UU l2
+  leq-Subposet = leq-Subpreorder (preorder-Poset X) S
 
-  is-prop-leq-sub-Poset :
-    (x y : element-sub-Poset) → is-prop (leq-sub-Poset x y)
-  is-prop-leq-sub-Poset = is-prop-leq-sub-Preorder (preorder-Poset X) S
+  is-prop-leq-Subposet :
+    (x y : type-Subposet) → is-prop (leq-Subposet x y)
+  is-prop-leq-Subposet = is-prop-leq-Subpreorder (preorder-Poset X) S
 
-  refl-leq-sub-Poset : (x : element-sub-Poset) → leq-sub-Poset x x
-  refl-leq-sub-Poset = refl-leq-sub-Preorder (preorder-Poset X) S
+  refl-leq-Subposet : (x : type-Subposet) → leq-Subposet x x
+  refl-leq-Subposet = refl-leq-Subpreorder (preorder-Poset X) S
 
-  transitive-leq-sub-Poset :
-    (x y z : element-sub-Poset) →
-    leq-sub-Poset y z → leq-sub-Poset x y → leq-sub-Poset x z
-  transitive-leq-sub-Poset = transitive-leq-sub-Preorder (preorder-Poset X) S
+  transitive-leq-Subposet :
+    (x y z : type-Subposet) →
+    leq-Subposet y z → leq-Subposet x y → leq-Subposet x z
+  transitive-leq-Subposet = transitive-leq-Subpreorder (preorder-Poset X) S
 
-  antisymmetric-leq-sub-Poset :
-    (x y : element-sub-Poset) → leq-sub-Poset x y → leq-sub-Poset y x → Id x y
-  antisymmetric-leq-sub-Poset x y H K =
-    eq-element-sub-Poset x y (antisymmetric-leq-Poset X (pr1 x) (pr1 y) H K)
+  antisymmetric-leq-Subposet :
+    (x y : type-Subposet) → leq-Subposet x y → leq-Subposet y x → Id x y
+  antisymmetric-leq-Subposet x y H K =
+    eq-type-Subposet x y (antisymmetric-leq-Poset X (pr1 x) (pr1 y) H K)
 
-  sub-Poset : Poset (l1 ⊔ l3) l2
-  pr1 sub-Poset = element-sub-Poset
-  pr1 (pr2 sub-Poset) = leq-sub-poset-Prop
-  pr1 (pr1 (pr2 (pr2 sub-Poset))) = refl-leq-sub-Poset
-  pr2 (pr1 (pr2 (pr2 sub-Poset))) = transitive-leq-sub-Poset
-  pr2 (pr2 (pr2 sub-Poset)) = antisymmetric-leq-sub-Poset
+  preorder-Subposet : Preorder (l1 ⊔ l3) l2
+  pr1 preorder-Subposet = type-Subposet
+  pr1 (pr2 preorder-Subposet) = leq-Subposet-Prop
+  pr1 (pr2 (pr2 preorder-Subposet)) = refl-leq-Subposet
+  pr2 (pr2 (pr2 preorder-Subposet)) = transitive-leq-Subposet
+
+  poset-Subposet : Poset (l1 ⊔ l3) l2
+  pr1 poset-Subposet = preorder-Subposet
+  pr2 poset-Subposet = antisymmetric-leq-Subposet
 ```
 
 ### Inclusion of sub-posets
@@ -74,38 +82,38 @@ module _
   where
 
   module _
-    {l3 l4 : Level} (S : element-Poset X → Prop l3)
-    (T : element-Poset X → Prop l4)
+    {l3 l4 : Level} (S : type-Poset X → Prop l3)
+    (T : type-Poset X → Prop l4)
     where
 
-    inclusion-sub-poset-Prop : Prop (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-poset-Prop =
-      inclusion-sub-preorder-Prop (preorder-Poset X) S T
+    inclusion-Subposet-Prop : Prop (l1 ⊔ l3 ⊔ l4)
+    inclusion-Subposet-Prop =
+      inclusion-Subpreorder-Prop (preorder-Poset X) S T
 
-    inclusion-sub-Poset : UU (l1 ⊔ l3 ⊔ l4)
-    inclusion-sub-Poset = inclusion-sub-Preorder (preorder-Poset X) S T
+    inclusion-Subposet : UU (l1 ⊔ l3 ⊔ l4)
+    inclusion-Subposet = inclusion-Subpreorder (preorder-Poset X) S T
 
-    is-prop-inclusion-sub-Poset : is-prop inclusion-sub-Poset
-    is-prop-inclusion-sub-Poset =
-      is-prop-inclusion-sub-Preorder (preorder-Poset X) S T
+    is-prop-inclusion-Subposet : is-prop inclusion-Subposet
+    is-prop-inclusion-Subposet =
+      is-prop-inclusion-Subpreorder (preorder-Poset X) S T
 
-  refl-inclusion-sub-Poset :
-    {l3 : Level} (S : element-Poset X → Prop l3) →
-    inclusion-sub-Poset S S
-  refl-inclusion-sub-Poset = refl-inclusion-sub-Preorder (preorder-Poset X)
+  refl-inclusion-Subposet :
+    {l3 : Level} (S : type-Poset X → Prop l3) →
+    inclusion-Subposet S S
+  refl-inclusion-Subposet = refl-inclusion-Subpreorder (preorder-Poset X)
 
-  transitive-inclusion-sub-Poset :
-    {l3 l4 l5 : Level} (S : element-Poset X → Prop l3)
-    (T : element-Poset X → Prop l4)
-    (U : element-Poset X → Prop l5) →
-    inclusion-sub-Poset T U → inclusion-sub-Poset S T →
-    inclusion-sub-Poset S U
-  transitive-inclusion-sub-Poset =
-    transitive-inclusion-sub-Preorder (preorder-Poset X)
+  transitive-inclusion-Subposet :
+    {l3 l4 l5 : Level} (S : type-Poset X → Prop l3)
+    (T : type-Poset X → Prop l4)
+    (U : type-Poset X → Prop l5) →
+    inclusion-Subposet T U → inclusion-Subposet S T →
+    inclusion-Subposet S U
+  transitive-inclusion-Subposet =
+    transitive-inclusion-Subpreorder (preorder-Poset X)
 
   sub-poset-Preorder : (l : Level) → Preorder (l1 ⊔ lsuc l) (l1 ⊔ l)
-  pr1 (sub-poset-Preorder l) = element-Poset X → Prop l
-  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-sub-poset-Prop
-  pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-sub-Poset
-  pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-sub-Poset
+  pr1 (sub-poset-Preorder l) = type-Poset X → Prop l
+  pr1 (pr2 (sub-poset-Preorder l)) = inclusion-Subposet-Prop
+  pr1 (pr2 (pr2 (sub-poset-Preorder l))) = refl-inclusion-Subposet
+  pr2 (pr2 (pr2 (sub-poset-Preorder l))) = transitive-inclusion-Subposet
 ```

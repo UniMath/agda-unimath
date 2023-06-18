@@ -10,6 +10,8 @@ module ring-theory.rings where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.action-on-identifications-functions
 open import foundation.binary-embeddings
 open import foundation.binary-equivalences
 open import foundation.cartesian-product-types
@@ -18,6 +20,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.involutions
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -30,9 +33,10 @@ open import group-theory.groups
 open import group-theory.monoids
 open import group-theory.semigroups
 
-open import ring-theory.semirings
+open import lists.concatenation-lists
+open import lists.lists
 
-open import univalent-combinatorics.lists
+open import ring-theory.semirings
 ```
 
 </details>
@@ -72,6 +76,15 @@ module _
   group-Ring : Group l
   group-Ring = group-Ab ab-Ring
 
+  additive-commutative-monoid-Ring : Commutative-Monoid l
+  additive-commutative-monoid-Ring = commutative-monoid-Ab ab-Ring
+
+  additive-monoid-Ring : Monoid l
+  additive-monoid-Ring = monoid-Ab ab-Ring
+
+  additive-semigroup-Ring : Semigroup l
+  additive-semigroup-Ring = semigroup-Ab ab-Ring
+
   set-Ring : Set l
   set-Ring = set-Ab ab-Ring
 
@@ -108,10 +121,7 @@ module _
     Id (add-Ring (add-Ring x y) z) (add-Ring x (add-Ring y z))
   associative-add-Ring = associative-add-Ab (ab-Ring R)
 
-  additive-semigroup-Ring : Semigroup l
-  additive-semigroup-Ring = semigroup-Ab (ab-Ring R)
-
-  is-group-additive-semigroup-Ring : is-group additive-semigroup-Ring
+  is-group-additive-semigroup-Ring : is-group (additive-semigroup-Ring R)
   is-group-additive-semigroup-Ring = is-group-Ab (ab-Ring R)
 
   commutative-add-Ring : (x y : type-Ring R) → Id (add-Ring x y) (add-Ring y x)
@@ -182,6 +192,9 @@ module _
   is-zero-ring-Prop : type-Ring R → Prop l
   is-zero-ring-Prop x = Id-Prop (set-Ring R) x zero-Ring
 
+  is-nonzero-ring-Prop : type-Ring R → Prop l
+  is-nonzero-ring-Prop x = neg-Prop (is-zero-ring-Prop x)
+
   left-unit-law-add-Ring : (x : type-Ring R) → Id (add-Ring R zero-Ring x) x
   left-unit-law-add-Ring = left-unit-law-add-Ab (ab-Ring R)
 
@@ -209,6 +222,14 @@ module _
   right-inverse-law-add-Ring :
     (x : type-Ring R) → Id (add-Ring R x (neg-Ring x)) (zero-Ring R)
   right-inverse-law-add-Ring = right-inverse-law-add-Ab (ab-Ring R)
+
+  neg-neg-Ring : (x : type-Ring R) → neg-Ring (neg-Ring x) ＝ x
+  neg-neg-Ring = neg-neg-Ab (ab-Ring R)
+
+  distributive-neg-add-Ring :
+    (x y : type-Ring R) →
+    neg-Ring (add-Ring R x y) ＝ add-Ring R (neg-Ring x) (neg-Ring y)
+  distributive-neg-add-Ring = distributive-neg-add-Ab (ab-Ring R)
 ```
 
 ### Multiplication in a ring
@@ -311,22 +332,22 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  commutative-monoid-Ring : Commutative-Monoid l
-  commutative-monoid-Ring = commutative-monoid-Ab (ab-Ring R)
-
-  has-mul-Ring : has-mul-Commutative-Monoid commutative-monoid-Ring
+  has-mul-Ring :
+    has-mul-Commutative-Monoid (additive-commutative-monoid-Ring R)
   pr1 has-mul-Ring = has-associative-mul-Ring R
   pr1 (pr2 has-mul-Ring) = is-unital-Ring R
   pr1 (pr2 (pr2 has-mul-Ring)) = left-distributive-mul-add-Ring R
   pr2 (pr2 (pr2 has-mul-Ring)) = right-distributive-mul-add-Ring R
 
   zero-laws-mul-Ring :
-    zero-laws-Commutative-Monoid commutative-monoid-Ring has-mul-Ring
+    zero-laws-Commutative-Monoid
+      ( additive-commutative-monoid-Ring R)
+      ( has-mul-Ring)
   pr1 zero-laws-mul-Ring = left-zero-law-mul-Ring R
   pr2 zero-laws-mul-Ring = right-zero-law-mul-Ring R
 
   semiring-Ring : Semiring l
-  pr1 semiring-Ring = commutative-monoid-Ring
+  pr1 semiring-Ring = additive-commutative-monoid-Ring R
   pr1 (pr2 semiring-Ring) = has-mul-Ring
   pr2 (pr2 semiring-Ring) = zero-laws-mul-Ring
 ```
@@ -342,17 +363,98 @@ module _
   neg-one-Ring = neg-Ring R (one-Ring R)
 
   mul-neg-one-Ring :
-    (x : type-Ring R) → Id (mul-Ring R neg-one-Ring x) (neg-Ring R x)
+    (x : type-Ring R) → mul-Ring R neg-one-Ring x ＝ neg-Ring R x
   mul-neg-one-Ring x =
     is-injective-add-Ring R x
-      ( ( ap
-          ( add-Ring' R (mul-Ring R neg-one-Ring x))
-          ( inv (left-unit-law-mul-Ring R x)) ∙
-        ( ( inv
-            ( right-distributive-mul-add-Ring R (one-Ring R) neg-one-Ring x)) ∙
-          ( ( ap (mul-Ring' R x) (right-inverse-law-add-Ring R (one-Ring R))) ∙
-            ( left-zero-law-mul-Ring R x)))) ∙
+      ( ( ( ap
+            ( add-Ring' R (mul-Ring R neg-one-Ring x))
+            ( inv (left-unit-law-mul-Ring R x))) ∙
+          ( ( inv
+              ( right-distributive-mul-add-Ring R
+                ( one-Ring R)
+                ( neg-one-Ring)
+                ( x))) ∙
+            ( ( ap
+                ( mul-Ring' R x)
+                ( right-inverse-law-add-Ring R (one-Ring R))) ∙
+              ( left-zero-law-mul-Ring R x)))) ∙
         ( inv (right-inverse-law-add-Ring R x)))
+
+  mul-neg-one-Ring' :
+    (x : type-Ring R) → mul-Ring R x neg-one-Ring ＝ neg-Ring R x
+  mul-neg-one-Ring' x =
+    is-injective-add-Ring R x
+      ( ( ap
+          ( add-Ring' R (mul-Ring R x neg-one-Ring))
+          ( inv (right-unit-law-mul-Ring R x))) ∙
+        ( ( inv
+            ( left-distributive-mul-add-Ring R x (one-Ring R) neg-one-Ring)) ∙
+          ( ( ap (mul-Ring R x) (right-inverse-law-add-Ring R (one-Ring R))) ∙
+            ( ( right-zero-law-mul-Ring R x) ∙
+              ( inv (right-inverse-law-add-Ring R x))))))
+
+  is-involution-mul-neg-one-Ring :
+    is-involution (mul-Ring R neg-one-Ring)
+  is-involution-mul-neg-one-Ring x =
+    ( mul-neg-one-Ring (mul-Ring R neg-one-Ring x)) ∙
+    ( ( ap (neg-Ring R) (mul-neg-one-Ring x)) ∙
+      ( neg-neg-Ring R x))
+
+  is-involution-mul-neg-one-Ring' :
+    is-involution (mul-Ring' R neg-one-Ring)
+  is-involution-mul-neg-one-Ring' x =
+    ( mul-neg-one-Ring' (mul-Ring R x neg-one-Ring)) ∙
+    ( ( ap (neg-Ring R) (mul-neg-one-Ring' x)) ∙
+      ( neg-neg-Ring R x))
+```
+
+### Left and right negative laws for multiplication
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-negative-law-mul-Ring :
+    (x y : type-Ring R) →
+    mul-Ring R (neg-Ring R x) y ＝ neg-Ring R (mul-Ring R x y)
+  left-negative-law-mul-Ring x y =
+    ( ap (mul-Ring' R y) (inv (mul-neg-one-Ring R x))) ∙
+    ( ( associative-mul-Ring R (neg-one-Ring R) x y) ∙
+      ( mul-neg-one-Ring R (mul-Ring R x y)))
+
+  right-negative-law-mul-Ring :
+    (x y : type-Ring R) →
+    mul-Ring R x (neg-Ring R y) ＝ neg-Ring R (mul-Ring R x y)
+  right-negative-law-mul-Ring x y =
+    ( ap (mul-Ring R x) (inv (mul-neg-one-Ring' R y))) ∙
+    ( ( inv (associative-mul-Ring R x y (neg-one-Ring R))) ∙
+      ( mul-neg-one-Ring' R (mul-Ring R x y)))
+
+  mul-neg-Ring :
+    (x y : type-Ring R) →
+    mul-Ring R (neg-Ring R x) (neg-Ring R y) ＝ mul-Ring R x y
+  mul-neg-Ring x y =
+    ( left-negative-law-mul-Ring x (neg-Ring R y)) ∙
+    ( ( ap (neg-Ring R) (right-negative-law-mul-Ring x y)) ∙
+      ( neg-neg-Ring R (mul-Ring R x y)))
+```
+
+### Bidistributivity for multiplication over addition
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  bidistributive-mul-add-Ring :
+    (u v x y : type-Ring R) →
+    mul-Ring R (add-Ring R u v) (add-Ring R x y) ＝
+    add-Ring R
+      ( add-Ring R (mul-Ring R u x) (mul-Ring R u y))
+      ( add-Ring R (mul-Ring R v x) (mul-Ring R v y))
+  bidistributive-mul-add-Ring =
+    bidistributive-mul-add-Semiring (semiring-Ring R)
 ```
 
 ### Scalar multiplication of ring elements by a natural number
@@ -370,8 +472,18 @@ module _
     (m ＝ n) → (x ＝ y) → mul-nat-scalar-Ring m x ＝ mul-nat-scalar-Ring n y
   ap-mul-nat-scalar-Ring = ap-mul-nat-scalar-Semiring (semiring-Ring R)
 
+  left-zero-law-mul-nat-scalar-Ring :
+    (x : type-Ring R) → mul-nat-scalar-Ring 0 x ＝ zero-Ring R
+  left-zero-law-mul-nat-scalar-Ring =
+    left-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
+
+  right-zero-law-mul-nat-scalar-Ring :
+    (n : ℕ) → mul-nat-scalar-Ring n (zero-Ring R) ＝ zero-Ring R
+  right-zero-law-mul-nat-scalar-Ring =
+    right-zero-law-mul-nat-scalar-Semiring (semiring-Ring R)
+
   left-unit-law-mul-nat-scalar-Ring :
-    (x : type-Ring R) →  mul-nat-scalar-Ring 1 x ＝ x
+    (x : type-Ring R) → mul-nat-scalar-Ring 1 x ＝ x
   left-unit-law-mul-nat-scalar-Ring =
     left-unit-law-mul-nat-scalar-Semiring (semiring-Ring R)
 
@@ -398,7 +510,7 @@ module _
 
   right-distributive-mul-nat-scalar-add-Ring :
     (m n : ℕ) (x : type-Ring R) →
-    mul-nat-scalar-Ring (add-ℕ m n) x ＝
+    mul-nat-scalar-Ring (m +ℕ n) x ＝
     add-Ring R (mul-nat-scalar-Ring m x) (mul-nat-scalar-Ring n x)
   right-distributive-mul-nat-scalar-add-Ring =
     right-distributive-mul-nat-scalar-add-Semiring (semiring-Ring R)
@@ -416,7 +528,23 @@ module _
 
   preserves-concat-add-list-Ring :
     (l1 l2 : list (type-Ring R)) →
-    Id ( add-list-Ring (concat-list l1 l2))
-       ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
+    Id
+      ( add-list-Ring (concat-list l1 l2))
+      ( add-Ring R (add-list-Ring l1) (add-list-Ring l2))
   preserves-concat-add-list-Ring = preserves-concat-add-list-Ab (ab-Ring R)
+```
+
+### Equip a type with a structure of a ring
+
+```agda
+structure-ring :
+  {l1 : Level} → UU l1 → UU l1
+structure-ring X =
+  Σ ( structure-abelian-group X)
+    ( λ p → has-mul-Ab (compute-structure-abelian-group X p))
+
+compute-structure-ring :
+  {l1 : Level} → (X : UU l1) → structure-ring X → Ring l1
+pr1 (compute-structure-ring X (p , q)) = compute-structure-abelian-group X p
+pr2 (compute-structure-ring X (p , q)) = q
 ```

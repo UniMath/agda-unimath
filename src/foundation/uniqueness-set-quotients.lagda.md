@@ -7,21 +7,22 @@ module foundation.uniqueness-set-quotients where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.universal-property-set-quotients
+open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalence-relations
 open import foundation-core.function-extensionality
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -64,11 +65,11 @@ module _
   map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     map-universal-property-set-quotient-is-set-quotient R C g Ug B f
 
-  issec-map-inv-is-equiv-is-set-quotient-is-set-quotient :
+  is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient :
     ( Uf : {l : Level} → is-set-quotient l R B f) →
     ( Ug : {l : Level} → is-set-quotient l R C g) →
     ( h ∘ map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug) ~ id
-  issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
+  is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     htpy-eq
       ( is-injective-is-equiv
       ( Ug C)
@@ -90,11 +91,11 @@ module _
               ( precomp-Set-Quotient R B f C h) g H) ∙
             ( inv (precomp-id-Set-Quotient R C g))))))
 
-  isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient :
+  is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient :
     ( Uf : {l : Level} → is-set-quotient l R B f) →
     ( Ug : {l : Level} → is-set-quotient l R C g) →
     ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug ∘ h) ~ id
-  isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
+  is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     htpy-eq
       ( is-injective-is-equiv
       ( Uf B)
@@ -125,8 +126,8 @@ module _
   is-equiv-is-set-quotient-is-set-quotient Uf Ug =
     is-equiv-has-inverse
       ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
-      ( issec-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
-      ( isretr-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
+      ( is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
+      ( is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
 
   is-set-quotient-is-set-quotient-is-equiv :
     is-equiv h → ({l : Level} → is-set-quotient l R B f) →
@@ -191,7 +192,7 @@ module _
     pr1 (center uniqueness-set-quotient)
 
   map-equiv-uniqueness-set-quotient : type-Set B → type-Set C
-  map-equiv-uniqueness-set-quotient =  map-equiv equiv-uniqueness-set-quotient
+  map-equiv-uniqueness-set-quotient = map-equiv equiv-uniqueness-set-quotient
 
   triangle-uniqueness-set-quotient :
     ( map-equiv-uniqueness-set-quotient ∘ map-reflecting-map-Eq-Rel R f) ~

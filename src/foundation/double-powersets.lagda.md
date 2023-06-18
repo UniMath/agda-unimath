@@ -7,14 +7,14 @@ module foundation.double-powersets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.powersets
 open import foundation.propositional-truncations
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.posets
@@ -44,7 +44,7 @@ module _
     poset-Large-Poset (double-powerset-Large-Poset A) l
 
   double-powerset : (l3 : Level) → UU l1 → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-  double-powerset l3 A = element-Poset (double-powerset-Poset l3 A)
+  double-powerset l3 A = type-Poset (double-powerset-Poset l3 A)
 ```
 
 ## Operations on the double powerset

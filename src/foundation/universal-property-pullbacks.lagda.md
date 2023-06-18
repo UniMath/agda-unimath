@@ -2,22 +2,22 @@
 
 ```agda
 module foundation.universal-property-pullbacks where
+
+open import foundation-core.universal-property-pullbacks public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.universal-property-pullbacks public
-
+open import foundation.cones-over-cospans
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.subtype-identity-principle
+open import foundation.universe-levels
 
-open import foundation-core.cones-pullbacks
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -27,7 +27,7 @@ open import foundation-core.universe-levels
 The universal property of pullbacks describes the optimal way to complete a
 diagram of the form
 
-```md
+```text
          B
          |
          |
@@ -37,15 +37,13 @@ A -----> X
 
 to a square
 
-```md
+```text
 C -----> B
 |        |
 |        |
 V        V
 A -----> X
 ```
-
-## Definitions
 
 ## Properties
 
@@ -74,7 +72,7 @@ module _
     {C' : UU l5} (c' : cone f g C') →
     cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
   eq-map-universal-property-pullback up-c {C'} c' =
-    issec-map-inv-is-equiv (up-c C') c'
+    is-section-map-inv-is-equiv (up-c C') c'
 ```
 
 ### The homotopy of cones obtained from the universal property of pullbacks

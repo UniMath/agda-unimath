@@ -1,4 +1,4 @@
-# 2-element types
+# `2`-element types
 
 ```agda
 module univalent-combinatorics.2-element-types where
@@ -10,6 +10,7 @@ module univalent-combinatorics.2-element-types where
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.connected-components-universes
 open import foundation.contractible-maps
@@ -21,7 +22,7 @@ open import foundation.double-negation
 open import foundation.empty-types
 open import foundation.equivalence-extensionality
 open import foundation.fibers-of-maps
-open import foundation.functions
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
@@ -36,6 +37,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -208,40 +210,40 @@ aut-point-Fin-two-ℕ (inl (inr star)) = id-equiv
 aut-point-Fin-two-ℕ (inr star) = equiv-succ-Fin 2
 
 abstract
-  issec-aut-point-Fin-two-ℕ :
+  is-section-aut-point-Fin-two-ℕ :
     (ev-zero-aut-Fin-two-ℕ ∘ aut-point-Fin-two-ℕ) ~ id
-  issec-aut-point-Fin-two-ℕ (inl (inr star)) = refl
-  issec-aut-point-Fin-two-ℕ (inr star) = refl
+  is-section-aut-point-Fin-two-ℕ (inl (inr star)) = refl
+  is-section-aut-point-Fin-two-ℕ (inr star) = refl
 
-  isretr-aut-point-Fin-two-ℕ' :
+  is-retraction-aut-point-Fin-two-ℕ' :
     (e : Fin 2 ≃ Fin 2) (x y : Fin 2) →
     map-equiv e (zero-Fin 1) ＝ x →
     map-equiv e (one-Fin 1) ＝ y → htpy-equiv (aut-point-Fin-two-ℕ x) e
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inl (inr star)) = inv p
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inl (inr star)) p q (inr star) =
     ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inl (inr star)) = inv p
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inl (inr star)) (inr star) p q (inr star) = inv q
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inl (inr star)) p q (inl (inr star)) = inv p
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inl (inr star)) p q (inr star) = inv q
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inl (inr star)) =
     ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
-  isretr-aut-point-Fin-two-ℕ' e
+  is-retraction-aut-point-Fin-two-ℕ' e
     (inr star) (inr star) p q (inr star) =
     ex-falso (Eq-Fin-eq 2 (is-injective-map-equiv e (p ∙ inv q)))
 
-  isretr-aut-point-Fin-two-ℕ :
+  is-retraction-aut-point-Fin-two-ℕ :
     (aut-point-Fin-two-ℕ ∘ ev-zero-aut-Fin-two-ℕ) ~ id
-  isretr-aut-point-Fin-two-ℕ e =
+  is-retraction-aut-point-Fin-two-ℕ e =
     eq-htpy-equiv
-      ( isretr-aut-point-Fin-two-ℕ' e
+      ( is-retraction-aut-point-Fin-two-ℕ' e
         ( map-equiv e (zero-Fin 1))
         ( map-equiv e (one-Fin 1))
         ( refl)
@@ -252,8 +254,8 @@ abstract
   is-equiv-ev-zero-aut-Fin-two-ℕ =
     is-equiv-has-inverse
       aut-point-Fin-two-ℕ
-      issec-aut-point-Fin-two-ℕ
-      isretr-aut-point-Fin-two-ℕ
+      is-section-aut-point-Fin-two-ℕ
+      is-retraction-aut-point-Fin-two-ℕ
 
 equiv-ev-zero-aut-Fin-two-ℕ : (Fin 2 ≃ Fin 2) ≃ Fin 2
 pr1 equiv-ev-zero-aut-Fin-two-ℕ = ev-zero-aut-Fin-two-ℕ
@@ -304,31 +306,31 @@ module _
   map-inv-equiv-point-2-Element-Type x =
     map-inv-equiv (equiv-point-2-Element-Type x)
 
-  issec-map-inv-equiv-point-2-Element-Type :
+  is-section-map-inv-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
     (map-equiv-point-2-Element-Type x ∘ map-inv-equiv-point-2-Element-Type x) ~
     id
-  issec-map-inv-equiv-point-2-Element-Type x =
-    issec-map-inv-equiv (equiv-point-2-Element-Type x)
+  is-section-map-inv-equiv-point-2-Element-Type x =
+    is-section-map-inv-equiv (equiv-point-2-Element-Type x)
 
-  isretr-map-inv-equiv-point-2-Element-Type :
+  is-retraction-map-inv-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
     (map-inv-equiv-point-2-Element-Type x ∘ map-equiv-point-2-Element-Type x) ~
     id
-  isretr-map-inv-equiv-point-2-Element-Type x =
-    isretr-map-inv-equiv (equiv-point-2-Element-Type x)
+  is-retraction-map-inv-equiv-point-2-Element-Type x =
+    is-retraction-map-inv-equiv (equiv-point-2-Element-Type x)
 
   compute-map-equiv-point-2-Element-Type :
     (x : type-2-Element-Type X) →
     map-equiv-point-2-Element-Type x (zero-Fin 1) ＝ x
   compute-map-equiv-point-2-Element-Type =
-    issec-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
+    is-section-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ
 
   is-unique-equiv-point-2-Element-Type :
     (e : Fin 2 ≃ type-2-Element-Type X) →
     htpy-equiv (equiv-point-2-Element-Type (map-equiv e (zero-Fin 1))) e
   is-unique-equiv-point-2-Element-Type e =
-    htpy-eq-equiv (isretr-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
+    htpy-eq-equiv (is-retraction-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
 ```
 
 #### The type of pointed 2-element types of any universe level is contractible
@@ -382,7 +384,7 @@ eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
 
-### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type.
+### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type
 
 ```agda
 module _
@@ -406,7 +408,7 @@ module _
   pr2 Aut-2-Element-Type = has-two-elements-Aut-2-Element-Type
 ```
 
-### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence.
+### Evaluating homotopies of equivalences `e, e' : Fin 2 ≃ X` at `0` is an equivalence
 
 ```agda
 module _
@@ -490,8 +492,8 @@ abstract
           ( ¬ (pr1 X))
           ( apply-universal-property-trunc-Prop
             ( pr2 X)
-            ( dn-Prop' (pr1 X))
-            ( λ e → intro-dn {l} (map-equiv e (zero-Fin 1))))
+            ( double-negation-Prop' (pr1 X))
+            ( λ e → intro-double-negation {l} (map-equiv e (zero-Fin 1))))
           ( d X))
 ```
 
@@ -536,13 +538,13 @@ module _
       ( has-two-elements-type-2-Element-Type X)
       ( Id-Prop (set-UU-Fin 2 X) (map-equiv (e ∘e e) x) x)
       ( λ h →
-        ( ap (map-equiv (e ∘e e)) (inv (issec-map-inv-equiv h x))) ∙
-        ( ( ap (map-equiv e) (inv (issec-map-inv-equiv h _))) ∙
-          ( inv (issec-map-inv-equiv h _) ∙
+        ( ap (map-equiv (e ∘e e)) (inv (is-section-map-inv-equiv h x))) ∙
+        ( ( ap (map-equiv e) (inv (is-section-map-inv-equiv h _))) ∙
+          ( inv (is-section-map-inv-equiv h _) ∙
             ( ( ap
                 ( map-equiv h)
                 ( is-involution-aut-Fin-two-ℕ (inv-equiv h ∘e (e ∘e h)) _)) ∙
-              ( issec-map-inv-equiv h x)))))
+              ( is-section-map-inv-equiv h x)))))
 ```
 
 ### The swapping equivalence on arbitrary 2-element types
@@ -570,10 +572,10 @@ module _
       ( f
         ( (inv (compute-map-equiv-point-2-Element-Type X x)) ∙
           ( ( ap (map-equiv-point-2-Element-Type X x) (inv q)) ∙
-            ( issec-map-inv-equiv-point-2-Element-Type X x y))))
+            ( is-section-map-inv-equiv-point-2-Element-Type X x y))))
   compute-swap-2-Element-Type' x y p (inr star) q =
     ( ap (map-equiv-point-2-Element-Type X x) (inv q)) ∙
-    ( issec-map-inv-equiv-point-2-Element-Type X x y)
+    ( is-section-map-inv-equiv-point-2-Element-Type X x y)
 
   compute-swap-2-Element-Type :
     (x y : type-2-Element-Type X) → ¬ (x ＝ y) →
@@ -674,8 +676,10 @@ module _
                 ( refl)
                 ( refl))))
     where
-    f : (h : type-2-Element-Type X ≃ Fin 2) → (y : type-2-Element-Type X) →
-        ( k1 k2 k3 : Fin 2) →
+    f :
+      ( h : type-2-Element-Type X ≃ Fin 2)
+      ( y : type-2-Element-Type X) →
+      ( k1 k2 k3 : Fin 2) →
         map-equiv h x ＝ k1 → map-equiv h y ＝ k2 →
         map-equiv h (map-equiv (swap-2-Element-Type X) y) ＝ k3 →
         map-equiv (swap-2-Element-Type X) y ＝ y
@@ -750,7 +754,7 @@ is-coprod-Σ-Fin-two-ℕ P =
   ( right-distributive-Σ-coprod (Fin 1) unit P)
 ```
 
-### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`.
+### For any equivalence `e : Fin 2 ≃ X`, any element of `X` is either `e 0` or it is `e 1`
 
 ```agda
 module _
@@ -836,13 +840,15 @@ module _
 
 ### A map between 2-element types is an equivalence if and only if its image is the full subtype of the codomain
 
-```agda
-
-```
+This remains to be shown.
 
 ### A map between 2-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
 
+This remains to be shown.
+
 ### Any map between 2-element types that is not an equivalence is constant
+
+This remains to be shown.
 
 ```agda
 {-
@@ -856,6 +862,8 @@ module _
 ```
 
 ### Any map between 2-element types is either an equivalence or it is constant
+
+This remains to be shown.
 
 ### Coinhabited 2-element types are equivalent
 

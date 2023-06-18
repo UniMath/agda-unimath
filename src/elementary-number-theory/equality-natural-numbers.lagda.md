@@ -9,13 +9,14 @@ module elementary-number-theory.equality-natural-numbers where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-equality
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.set-truncations
@@ -43,7 +44,7 @@ has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
 
-decidable-eq-ℕ : ℕ → ℕ → decidable-Prop lzero
+decidable-eq-ℕ : ℕ → ℕ → Decidable-Prop lzero
 pr1 (decidable-eq-ℕ m n) = (m ＝ n)
 pr1 (pr2 (decidable-eq-ℕ m n)) = is-set-ℕ m n
 pr2 (pr2 (decidable-eq-ℕ m n)) = has-decidable-equality-ℕ m n

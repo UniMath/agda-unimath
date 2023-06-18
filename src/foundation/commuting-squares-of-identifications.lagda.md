@@ -1,16 +1,17 @@
 # Commuting squares of identifications
 
 ```agda
-{-# OPTIONS --safe #-}
 module foundation.commuting-squares-of-identifications where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.functions
+open import foundation.action-on-identifications-binary-functions
+open import foundation.universe-levels
+
+open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -19,7 +20,7 @@ open import foundation-core.universe-levels
 
 A square of identifications
 
-```md
+```text
           top
       x ------- y
       |         |
@@ -29,9 +30,9 @@ A square of identifications
          bottom
 ```
 
-is said to _commute_ if there is an identification
-`left ∙ bottom ＝ top ∙ right`. Such an identification may be called a
-_coherence_ of the square.
+is said to **commute** if there is an identification
+`left ∙ bottom ＝ top ∙ right`. Such an identification is called a **coherence**
+of the square.
 
 ## Definition
 
@@ -66,7 +67,8 @@ module _
   coherence-square-identifications-comp-horizontal :
     coherence-square-identifications p-left p-bottom p-top middle →
     coherence-square-identifications middle q-bottom q-top q-right →
-    coherence-square-identifications p-left (p-bottom ∙ q-bottom) (p-top ∙ q-top) q-right
+    coherence-square-identifications
+      p-left (p-bottom ∙ q-bottom) (p-top ∙ q-top) q-right
   coherence-square-identifications-comp-horizontal p q =
     ( ( ( inv (assoc p-left p-bottom q-bottom) ∙
           ap-binary (_∙_) p (refl {x = q-bottom})) ∙
@@ -85,7 +87,8 @@ module _
   coherence-square-identifications-comp-vertical :
     coherence-square-identifications p-left middle p-top p-right →
     coherence-square-identifications q-left q-bottom middle q-right →
-    coherence-square-identifications (p-left ∙ q-left) q-bottom p-top (p-right ∙ q-right)
+    coherence-square-identifications
+      (p-left ∙ q-left) q-bottom p-top (p-right ∙ q-right)
   coherence-square-identifications-comp-vertical p q =
     ( assoc p-left q-left q-bottom ∙
       ( ( ap-binary (_∙_) (refl {x = p-left}) q ∙
@@ -159,20 +162,24 @@ module _
     coherence-square-identifications left bottom top right →
     coherence-square-identifications left bottom (top ∙ p) (inv p ∙ right)
   coherence-square-identifications-top-right-whisk refl =
-    coherence-square-identifications-top-paste left bottom top right (inv right-unit)
+    coherence-square-identifications-top-paste
+      left bottom top right (inv right-unit)
 
   coherence-square-identifications-bottom-left-whisk :
     {z' : A} (p : z ＝ z') →
     coherence-square-identifications left bottom top right →
     coherence-square-identifications (left ∙ p) (inv p ∙ bottom) top right
   coherence-square-identifications-bottom-left-whisk refl =
-    coherence-square-identifications-left-paste left bottom top right (inv right-unit)
+    coherence-square-identifications-left-paste
+      left bottom top right (inv right-unit)
 
   coherence-square-identifications-bottom-right-whisk :
     {w' : A} (p : w ＝ w') →
     coherence-square-identifications left bottom top right →
     coherence-square-identifications left (bottom ∙ p) top (right ∙ p)
   coherence-square-identifications-bottom-right-whisk refl =
-    coherence-square-identifications-bottom-paste left bottom top (right ∙ refl) (inv right-unit) ∘
-    coherence-square-identifications-right-paste left bottom top right (inv right-unit)
+    ( coherence-square-identifications-bottom-paste
+      left bottom top (right ∙ refl) (inv right-unit)) ∘
+    ( coherence-square-identifications-right-paste
+      left bottom top right (inv right-unit))
 ```

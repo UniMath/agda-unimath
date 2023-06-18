@@ -7,10 +7,11 @@ module group-theory.homomorphisms-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.functions
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -105,9 +106,11 @@ module _
   preserves-mul-hom-Semigroup :
     (f : type-hom-Semigroup) → preserves-mul-Semigroup (map-hom-Semigroup f)
   preserves-mul-hom-Semigroup f = pr2 f
+```
 
-  {- We characterize the identity type of the semigroup homomorphisms. -}
+### Characterizing the identity type of semigroup homomorphisms
 
+```agda
   htpy-hom-Semigroup : (f g : type-hom-Semigroup) → UU (l1 ⊔ l2)
   htpy-hom-Semigroup f g = map-hom-Semigroup f ~ map-hom-Semigroup g
 
@@ -181,8 +184,9 @@ comp-hom-Semigroup :
 pr1 (comp-hom-Semigroup G H K g f) =
   (map-hom-Semigroup H K g) ∘ (map-hom-Semigroup G H f)
 pr2 (comp-hom-Semigroup G H K g f) x y =
-  ( ap ( map-hom-Semigroup H K g)
-       ( preserves-mul-hom-Semigroup G H f x y)) ∙
+  ( ap
+    ( map-hom-Semigroup H K g)
+    ( preserves-mul-hom-Semigroup G H f x y)) ∙
   ( preserves-mul-hom-Semigroup H K g
     ( map-hom-Semigroup G H f x)
     ( map-hom-Semigroup G H f y))
@@ -195,11 +199,13 @@ associative-comp-hom-Semigroup :
   { l1 l2 l3 l4 : Level} (G : Semigroup l1) (H : Semigroup l2)
   ( K : Semigroup l3) (L : Semigroup l4) (h : type-hom-Semigroup K L) →
   ( g : type-hom-Semigroup H K) (f : type-hom-Semigroup G H) →
-  Id ( comp-hom-Semigroup G H L
-       ( comp-hom-Semigroup H K L h g) f)
-     ( comp-hom-Semigroup G K L h
-       ( comp-hom-Semigroup G H K g f))
-associative-comp-hom-Semigroup G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
+  Id
+    ( comp-hom-Semigroup G H L
+      ( comp-hom-Semigroup H K L h g) f)
+    ( comp-hom-Semigroup G K L h
+      ( comp-hom-Semigroup G H K g f))
+associative-comp-hom-Semigroup
+  G H K L (pair h μ-h) (pair g μ-g) (pair f μ-f) =
   eq-htpy-hom-Semigroup G L refl-htpy
 ```
 
@@ -211,9 +217,9 @@ left-unit-law-comp-hom-Semigroup :
   ( f : type-hom-Semigroup G H) →
   Id ( comp-hom-Semigroup G H H (id-hom-Semigroup H) f) f
 left-unit-law-comp-hom-Semigroup G
-  (pair (pair H is-set-H) (pair μ-H assoc-H)) (pair f μ-f) =
+  (pair (pair H is-set-H) (pair μ-H associative-H)) (pair f μ-f) =
   eq-htpy-hom-Semigroup G
-    ( pair (pair H is-set-H) (pair μ-H assoc-H))
+    ( pair (pair H is-set-H) (pair μ-H associative-H))
     ( refl-htpy)
 
 right-unit-law-comp-hom-Semigroup :
@@ -221,7 +227,7 @@ right-unit-law-comp-hom-Semigroup :
   ( f : type-hom-Semigroup G H) →
   Id ( comp-hom-Semigroup G G H f (id-hom-Semigroup G)) f
 right-unit-law-comp-hom-Semigroup
-  (pair (pair G is-set-G) (pair μ-G assoc-G)) H (pair f μ-f) =
+  (pair (pair G is-set-G) (pair μ-G associative-G)) H (pair f μ-f) =
   eq-htpy-hom-Semigroup
-    ( pair (pair G is-set-G) (pair μ-G assoc-G)) H refl-htpy
+    ( pair (pair G is-set-G) (pair μ-G associative-G)) H refl-htpy
 ```

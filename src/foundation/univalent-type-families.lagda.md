@@ -8,9 +8,10 @@ module foundation.univalent-type-families where
 
 ```agda
 open import foundation.identity-types
+open import foundation.transport
+open import foundation.universe-levels
 
 open import foundation-core.equivalences
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -19,7 +20,7 @@ open import foundation-core.universe-levels
 
 A type family `B` over `A` is said to be univalent if the map
 
-```md
+```text
   equiv-tr : (Id x y) → (B x ≃ B y)
 ```
 

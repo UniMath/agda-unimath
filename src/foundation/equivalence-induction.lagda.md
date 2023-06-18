@@ -2,20 +2,20 @@
 
 ```agda
 module foundation.equivalence-induction where
+
+open import foundation-core.equivalence-induction public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation-core.equivalence-induction public
-
+open import foundation.dependent-pair-types
 open import foundation.univalence
+open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.sections
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -28,15 +28,17 @@ Equivalence induction is a condition equivalent to the univalence axiom
 
 ```agda
 abstract
-  Ind-equiv : {i j : Level} (A : UU i) (P : (B : UU i) (e : A ≃ B) → UU j) →
-    sec (ev-id P)
+  Ind-equiv :
+    {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
+    section (ev-id P)
   Ind-equiv A P =
     IND-EQUIV-is-contr-total-equiv
     ( is-contr-total-equiv A)
     ( λ t → P (pr1 t) (pr2 t))
 
-ind-equiv : {i j : Level} (A : UU i) (P : (B : UU i) (e : A ≃ B) → UU j) →
-  P A id-equiv → {B : UU i} (e : A ≃ B) → P B e
+ind-equiv :
+  {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
+  P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
 ind-equiv A P p {B} = pr1 (Ind-equiv A P) p B
 ```
 

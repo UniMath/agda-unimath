@@ -26,25 +26,28 @@ universal property that there is a unique morphism into it from any object.
 ## Definition
 
 ```agda
-terminal-object : {l1 l2 : Level} (C : Precat l1 l2) → UU (l1 ⊔ l2)
-terminal-object C =
-  Σ (obj-Precat C) λ t →
-    (x : obj-Precat C) → is-contr (type-hom-Precat C x t)
+terminal-object-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
+terminal-object-Precategory C =
+  Σ (obj-Precategory C) λ t →
+    (x : obj-Precategory C) → is-contr (type-hom-Precategory C x t)
 
-module _ {l1 l2 : Level} (C : Precat l1 l2)
-  (t : terminal-object C) where
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (t : terminal-object-Precategory C)
+  where
 
-  object-terminal-object : obj-Precat C
-  object-terminal-object = pr1 t
+  object-terminal-object-Precategory : obj-Precategory C
+  object-terminal-object-Precategory = pr1 t
 
-  morphism-terminal-object :
-    (x : obj-Precat C) →
-    type-hom-Precat C x object-terminal-object
-  morphism-terminal-object x = pr1 (pr2 t x)
+  morphism-terminal-object-Precategory :
+    (x : obj-Precategory C) →
+    type-hom-Precategory C x object-terminal-object-Precategory
+  morphism-terminal-object-Precategory x = pr1 (pr2 t x)
 
-  is-unique-morphism-terminal-object :
-    (x : obj-Precat C) →
-    (f : type-hom-Precat C x object-terminal-object) →
-    morphism-terminal-object x ＝ f
-  is-unique-morphism-terminal-object x = pr2 (pr2 t x)
+  is-unique-morphism-terminal-object-Precategory :
+    (x : obj-Precategory C) →
+    (f : type-hom-Precategory C x object-terminal-object-Precategory) →
+    morphism-terminal-object-Precategory x ＝ f
+  is-unique-morphism-terminal-object-Precategory x = pr2 (pr2 t x)
 ```

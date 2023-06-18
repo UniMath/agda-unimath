@@ -7,33 +7,34 @@ module foundation.decidable-embeddings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.decidable-maps
 open import foundation.decidable-subtypes
 open import foundation.decidable-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.functoriality-cartesian-product-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositional-maps
-open import foundation.type-duality
+open import foundation.structured-type-duality
+open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
-open import foundation-core.dependent-pair-types
 open import foundation-core.empty-types
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.propositions
-open import foundation-core.subtype-identity-principle
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -171,10 +172,10 @@ pr2 (decidable-subtype-decidable-emb f y) =
 ### The type of all decidable embeddings into a type `A` is equivalent to the type of decidable subtypes of `A`
 
 ```agda
-equiv-Fib-decidable-Prop :
+equiv-Fib-Decidable-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
   Σ (UU (l1 ⊔ l)) (λ X → X ↪d A) ≃ (decidable-subtype (l1 ⊔ l) A)
-equiv-Fib-decidable-Prop l A =
+equiv-Fib-Decidable-Prop l A =
   ( equiv-Fib-structure l is-decidable-prop A) ∘e
   ( equiv-tot
     ( λ X →
@@ -324,7 +325,7 @@ equiv-precomp-decidable-emb-equiv e C =
         ( is-decidable-emb-comp (is-decidable-emb-is-equiv (pr2 e)))
         ( λ d →
           is-decidable-emb-htpy
-            ( λ b → ap g (inv (issec-map-inv-equiv e b)))
+            ( λ b → ap g (inv (is-section-map-inv-equiv e b)))
             ( is-decidable-emb-comp
               ( is-decidable-emb-is-equiv (is-equiv-map-inv-equiv e))
               ( d))))
@@ -338,4 +339,36 @@ abstract
     {l : Level} {X : UU l} → is-decidable-emb (ex-falso {l} {X})
   pr1 (is-decidable-emb-ex-falso {l} {X}) = is-emb-ex-falso
   pr2 (is-decidable-emb-ex-falso {l} {X}) x = inr pr1
+
+decidable-emb-ex-falso :
+  {l : Level} {X : UU l} → empty ↪d X
+pr1 decidable-emb-ex-falso = ex-falso
+pr2 decidable-emb-ex-falso = is-decidable-emb-ex-falso
+
+decidable-emb-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪d B
+decidable-emb-is-empty {A = A} f =
+  map-equiv
+    ( equiv-precomp-decidable-emb-equiv (equiv-is-empty f id) _)
+    ( decidable-emb-ex-falso)
+```
+
+### The map on total spaces induced by a family of decidable embeddings is a decidable embeddings
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  where
+
+  is-decidable-emb-tot :
+    {f : (x : A) → B x → C x} →
+    ((x : A) → is-decidable-emb (f x)) → is-decidable-emb (tot f)
+  is-decidable-emb-tot H =
+    ( is-emb-tot (λ x → is-emb-is-decidable-emb (H x)) ,
+      is-decidable-map-tot λ x → is-decidable-map-is-decidable-emb (H x))
+
+  decidable-emb-tot : ((x : A) → B x ↪d C x) → Σ A B ↪d Σ A C
+  pr1 (decidable-emb-tot f) = tot (λ x → map-decidable-emb (f x))
+  pr2 (decidable-emb-tot f) =
+    is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x))
 ```

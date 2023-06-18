@@ -19,12 +19,12 @@ open import orthogonal-factorization-systems.pullback-hom
 
 ## Idea
 
-The map `f : A → X` is said to be _orthogonal to_ `g : B → Y` if the
+The map `f : A → X` is said to be **orthogonal to** `g : B → Y` if their
 pullback-hom is an equivalence. This means that there is a unique lifting
 operation between `f` and `g`.
 
-In this case we say that `f` is _left orthogonal_ to `g` and `g` is _right
-orthogonal_ to `f`.
+In this case we say that `f` is **left orthogonal** to `g` and `g` is **right
+orthogonal** to `f`.
 
 ## Definition
 
@@ -41,12 +41,18 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   where
+```
 
-  -- `is-right-orthogonal f g` asserts that `g` is right orthogonal to `f`
+A term of `is-right-orthogonal f g` asserts that `g` is right orthogonal to `f`.
+
+```agda
   is-right-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-right-orthogonal = is-orthogonal
+```
 
-  -- `is-left-orthogonal f g` asserts that `g` is left orthogonal to `f`
+A term of `is-left-orthogonal f g` asserts that `g` is left orthogonal to `f`.
+
+```agda
   is-left-orthogonal : (A → X) → (B → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-left-orthogonal g f = is-orthogonal f g
 ```

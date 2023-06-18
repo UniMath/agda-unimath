@@ -8,15 +8,17 @@ module foundation.type-arithmetic-empty-type where
 
 ```agda
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
+open import foundation-core.contractible-maps
+open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -37,18 +39,18 @@ module _
   inv-pr1-prod-empty : empty → empty × X
   inv-pr1-prod-empty ()
 
-  issec-inv-pr1-prod-empty : (pr1 ∘ inv-pr1-prod-empty) ~ id
-  issec-inv-pr1-prod-empty ()
+  is-section-inv-pr1-prod-empty : (pr1 ∘ inv-pr1-prod-empty) ~ id
+  is-section-inv-pr1-prod-empty ()
 
-  isretr-inv-pr1-prod-empty : (inv-pr1-prod-empty ∘ pr1) ~ id
-  isretr-inv-pr1-prod-empty (pair () x)
+  is-retraction-inv-pr1-prod-empty : (inv-pr1-prod-empty ∘ pr1) ~ id
+  is-retraction-inv-pr1-prod-empty (pair () x)
 
   is-equiv-pr1-prod-empty : is-equiv (pr1 {A = empty} {B = λ t → X})
   is-equiv-pr1-prod-empty =
     is-equiv-has-inverse
       inv-pr1-prod-empty
-      issec-inv-pr1-prod-empty
-      isretr-inv-pr1-prod-empty
+      is-section-inv-pr1-prod-empty
+      is-retraction-inv-pr1-prod-empty
 
   left-zero-law-prod : (empty × X) ≃ empty
   pr1 left-zero-law-prod = pr1
@@ -60,18 +62,18 @@ module _
   inv-pr1-prod-is-empty : A → A × B
   inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
 
-  issec-inv-pr1-prod-is-empty : (pr1 ∘ inv-pr1-prod-is-empty) ~ id
-  issec-inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
+  is-section-inv-pr1-prod-is-empty : (pr1 ∘ inv-pr1-prod-is-empty) ~ id
+  is-section-inv-pr1-prod-is-empty a = ex-falso (is-empty-A a)
 
-  isretr-inv-pr1-prod-is-empty : (inv-pr1-prod-is-empty ∘ pr1) ~ id
-  isretr-inv-pr1-prod-is-empty (pair a b) = ex-falso (is-empty-A a)
+  is-retraction-inv-pr1-prod-is-empty : (inv-pr1-prod-is-empty ∘ pr1) ~ id
+  is-retraction-inv-pr1-prod-is-empty (pair a b) = ex-falso (is-empty-A a)
 
   is-equiv-pr1-prod-is-empty : is-equiv (pr1 {A = A} {B = λ a → B})
   is-equiv-pr1-prod-is-empty =
     is-equiv-has-inverse
       inv-pr1-prod-is-empty
-      issec-inv-pr1-prod-is-empty
-      isretr-inv-pr1-prod-is-empty
+      is-section-inv-pr1-prod-is-empty
+      is-retraction-inv-pr1-prod-is-empty
 
   left-zero-law-prod-is-empty : (A × B) ≃ A
   pr1 left-zero-law-prod-is-empty = pr1
@@ -88,18 +90,18 @@ module _
   inv-pr2-prod-empty : empty → (X × empty)
   inv-pr2-prod-empty ()
 
-  issec-inv-pr2-prod-empty : (pr2 ∘ inv-pr2-prod-empty) ~ id
-  issec-inv-pr2-prod-empty ()
+  is-section-inv-pr2-prod-empty : (pr2 ∘ inv-pr2-prod-empty) ~ id
+  is-section-inv-pr2-prod-empty ()
 
-  isretr-inv-pr2-prod-empty : (inv-pr2-prod-empty ∘ pr2) ~ id
-  isretr-inv-pr2-prod-empty (pair x ())
+  is-retraction-inv-pr2-prod-empty : (inv-pr2-prod-empty ∘ pr2) ~ id
+  is-retraction-inv-pr2-prod-empty (pair x ())
 
   is-equiv-pr2-prod-empty : is-equiv (pr2 {A = X} {B = λ x → empty})
   is-equiv-pr2-prod-empty =
     is-equiv-has-inverse
       inv-pr2-prod-empty
-      issec-inv-pr2-prod-empty
-      isretr-inv-pr2-prod-empty
+      is-section-inv-pr2-prod-empty
+      is-retraction-inv-pr2-prod-empty
 
   right-zero-law-prod : (X × empty) ≃ empty
   pr1 right-zero-law-prod = pr2
@@ -111,18 +113,18 @@ module _
   inv-pr2-prod-is-empty : B → A × B
   inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
 
-  issec-inv-pr2-prod-is-empty : (pr2 ∘ inv-pr2-prod-is-empty) ~ id
-  issec-inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
+  is-section-inv-pr2-prod-is-empty : (pr2 ∘ inv-pr2-prod-is-empty) ~ id
+  is-section-inv-pr2-prod-is-empty b = ex-falso (is-empty-B b)
 
-  isretr-inv-pr2-prod-is-empty : (inv-pr2-prod-is-empty ∘ pr2) ~ id
-  isretr-inv-pr2-prod-is-empty (pair a b) = ex-falso (is-empty-B b)
+  is-retraction-inv-pr2-prod-is-empty : (inv-pr2-prod-is-empty ∘ pr2) ~ id
+  is-retraction-inv-pr2-prod-is-empty (pair a b) = ex-falso (is-empty-B b)
 
   is-equiv-pr2-prod-is-empty : is-equiv (pr2 {A = A} {B = λ a → B})
   is-equiv-pr2-prod-is-empty =
     is-equiv-has-inverse
       inv-pr2-prod-is-empty
-      issec-inv-pr2-prod-is-empty
-      isretr-inv-pr2-prod-is-empty
+      is-section-inv-pr2-prod-is-empty
+      is-retraction-inv-pr2-prod-is-empty
 
   right-zero-law-prod-is-empty : (A × B) ≃ B
   pr1 right-zero-law-prod-is-empty = pr2
@@ -223,36 +225,51 @@ module _
   map-inv-left-unit-law-coprod-is-empty : B → A + B
   map-inv-left-unit-law-coprod-is-empty = inr
 
-  issec-map-inv-left-unit-law-coprod-is-empty :
+  is-section-map-inv-left-unit-law-coprod-is-empty :
     ( map-left-unit-law-coprod-is-empty ∘
       map-inv-left-unit-law-coprod-is-empty) ~ id
-  issec-map-inv-left-unit-law-coprod-is-empty = refl-htpy
+  is-section-map-inv-left-unit-law-coprod-is-empty = refl-htpy
 
-  isretr-map-inv-left-unit-law-coprod-is-empty :
+  is-retraction-map-inv-left-unit-law-coprod-is-empty :
     ( map-inv-left-unit-law-coprod-is-empty ∘
       map-left-unit-law-coprod-is-empty) ~ id
-  isretr-map-inv-left-unit-law-coprod-is-empty (inl a) = ex-falso (H a)
-  isretr-map-inv-left-unit-law-coprod-is-empty (inr b) = refl
+  is-retraction-map-inv-left-unit-law-coprod-is-empty (inl a) = ex-falso (H a)
+  is-retraction-map-inv-left-unit-law-coprod-is-empty (inr b) = refl
 
   is-equiv-map-left-unit-law-coprod-is-empty :
     is-equiv map-left-unit-law-coprod-is-empty
   is-equiv-map-left-unit-law-coprod-is-empty =
     is-equiv-has-inverse
       map-inv-left-unit-law-coprod-is-empty
-      issec-map-inv-left-unit-law-coprod-is-empty
-      isretr-map-inv-left-unit-law-coprod-is-empty
+      is-section-map-inv-left-unit-law-coprod-is-empty
+      is-retraction-map-inv-left-unit-law-coprod-is-empty
 
   left-unit-law-coprod-is-empty : (A + B) ≃ B
   pr1 left-unit-law-coprod-is-empty = map-left-unit-law-coprod-is-empty
   pr2 left-unit-law-coprod-is-empty = is-equiv-map-left-unit-law-coprod-is-empty
 
-  inv-left-unit-law-coprod-is-empty : B ≃ (A + B)
-  pr1 inv-left-unit-law-coprod-is-empty = map-inv-left-unit-law-coprod-is-empty
-  pr2 inv-left-unit-law-coprod-is-empty =
+  is-equiv-inr-is-empty :
+    is-equiv inr
+  is-equiv-inr-is-empty =
     is-equiv-has-inverse
       ( map-left-unit-law-coprod-is-empty)
-      ( isretr-map-inv-left-unit-law-coprod-is-empty)
-      ( issec-map-inv-left-unit-law-coprod-is-empty)
+      ( is-retraction-map-inv-left-unit-law-coprod-is-empty)
+      ( is-section-map-inv-left-unit-law-coprod-is-empty)
+
+  inv-left-unit-law-coprod-is-empty : B ≃ (A + B)
+  pr1 inv-left-unit-law-coprod-is-empty = map-inv-left-unit-law-coprod-is-empty
+  pr2 inv-left-unit-law-coprod-is-empty = is-equiv-inr-is-empty
+
+  is-contr-map-left-unit-law-coprod-is-empty :
+    is-contr-map map-left-unit-law-coprod-is-empty
+  is-contr-map-left-unit-law-coprod-is-empty =
+    is-contr-map-is-equiv is-equiv-map-left-unit-law-coprod-is-empty
+
+  is-contr-map-inr-is-empty : is-contr-map map-inv-left-unit-law-coprod-is-empty
+  is-contr-map-inr-is-empty = is-contr-map-is-equiv is-equiv-inr-is-empty
+
+  is-right-coprod-is-empty : (x : A + B) → Σ B (λ b → inr b ＝ x)
+  is-right-coprod-is-empty x = center (is-contr-map-inr-is-empty x)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -260,7 +277,7 @@ module _
 
   is-empty-left-summand-is-equiv : is-equiv (inr {A = A} {B = B}) → is-empty A
   is-empty-left-summand-is-equiv H a =
-    neq-inr-inl (issec-map-inv-is-equiv H (inl a))
+    neq-inr-inl (is-section-map-inv-is-equiv H (inl a))
 
 module _
   {l : Level} (B : UU l)
@@ -272,15 +289,15 @@ module _
   map-inv-left-unit-law-coprod : B → empty + B
   map-inv-left-unit-law-coprod = inr
 
-  issec-map-inv-left-unit-law-coprod :
+  is-section-map-inv-left-unit-law-coprod :
     ( map-left-unit-law-coprod ∘ map-inv-left-unit-law-coprod) ~ id
-  issec-map-inv-left-unit-law-coprod =
-    issec-map-inv-left-unit-law-coprod-is-empty empty B id
+  is-section-map-inv-left-unit-law-coprod =
+    is-section-map-inv-left-unit-law-coprod-is-empty empty B id
 
-  isretr-map-inv-left-unit-law-coprod :
+  is-retraction-map-inv-left-unit-law-coprod :
     ( map-inv-left-unit-law-coprod ∘ map-left-unit-law-coprod) ~ id
-  isretr-map-inv-left-unit-law-coprod =
-    isretr-map-inv-left-unit-law-coprod-is-empty empty B id
+  is-retraction-map-inv-left-unit-law-coprod =
+    is-retraction-map-inv-left-unit-law-coprod-is-empty empty B id
 
   is-equiv-map-left-unit-law-coprod : is-equiv map-left-unit-law-coprod
   is-equiv-map-left-unit-law-coprod =
@@ -307,31 +324,31 @@ module _
   map-inv-right-unit-law-coprod-is-empty : A → A + B
   map-inv-right-unit-law-coprod-is-empty = inl
 
-  issec-map-inv-right-unit-law-coprod-is-empty :
+  is-section-map-inv-right-unit-law-coprod-is-empty :
     ( map-right-unit-law-coprod-is-empty ∘
       map-inv-right-unit-law-coprod-is-empty) ~ id
-  issec-map-inv-right-unit-law-coprod-is-empty a = refl
+  is-section-map-inv-right-unit-law-coprod-is-empty a = refl
 
-  isretr-map-inv-right-unit-law-coprod-is-empty :
+  is-retraction-map-inv-right-unit-law-coprod-is-empty :
     ( map-inv-right-unit-law-coprod-is-empty ∘
       map-right-unit-law-coprod-is-empty) ~ id
-  isretr-map-inv-right-unit-law-coprod-is-empty (inl a) = refl
-  isretr-map-inv-right-unit-law-coprod-is-empty (inr b) = ex-falso (H b)
+  is-retraction-map-inv-right-unit-law-coprod-is-empty (inl a) = refl
+  is-retraction-map-inv-right-unit-law-coprod-is-empty (inr b) = ex-falso (H b)
 
   is-equiv-map-right-unit-law-coprod-is-empty :
     is-equiv map-right-unit-law-coprod-is-empty
   is-equiv-map-right-unit-law-coprod-is-empty =
     is-equiv-has-inverse
       map-inv-right-unit-law-coprod-is-empty
-      issec-map-inv-right-unit-law-coprod-is-empty
-      isretr-map-inv-right-unit-law-coprod-is-empty
+      is-section-map-inv-right-unit-law-coprod-is-empty
+      is-retraction-map-inv-right-unit-law-coprod-is-empty
 
   is-equiv-inl-is-empty : is-equiv (inl {l1} {l2} {A} {B})
   is-equiv-inl-is-empty =
     is-equiv-has-inverse
       ( map-right-unit-law-coprod-is-empty)
-      ( isretr-map-inv-right-unit-law-coprod-is-empty)
-      ( issec-map-inv-right-unit-law-coprod-is-empty)
+      ( is-retraction-map-inv-right-unit-law-coprod-is-empty)
+      ( is-section-map-inv-right-unit-law-coprod-is-empty)
 
   right-unit-law-coprod-is-empty : (A + B) ≃ A
   pr1 right-unit-law-coprod-is-empty = map-right-unit-law-coprod-is-empty
@@ -340,11 +357,19 @@ module _
 
   inv-right-unit-law-coprod-is-empty : A ≃ (A + B)
   pr1 inv-right-unit-law-coprod-is-empty = inl
-  pr2 inv-right-unit-law-coprod-is-empty =
-    is-equiv-has-inverse
-      ( map-right-unit-law-coprod-is-empty)
-      ( isretr-map-inv-right-unit-law-coprod-is-empty)
-      ( issec-map-inv-right-unit-law-coprod-is-empty)
+  pr2 inv-right-unit-law-coprod-is-empty = is-equiv-inl-is-empty
+
+  is-contr-map-right-unit-law-coprod-is-empty :
+    is-contr-map map-right-unit-law-coprod-is-empty
+  is-contr-map-right-unit-law-coprod-is-empty =
+    is-contr-map-is-equiv is-equiv-map-right-unit-law-coprod-is-empty
+
+  is-contr-map-inl-is-empty : is-contr-map inl
+  is-contr-map-inl-is-empty = is-contr-map-is-equiv is-equiv-inl-is-empty
+
+  is-left-coprod-is-empty :
+    (x : A + B) → Σ A (λ a → inl a ＝ x)
+  is-left-coprod-is-empty x = center (is-contr-map-inl-is-empty x)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -352,7 +377,7 @@ module _
 
   is-empty-right-summand-is-equiv : is-equiv (inl {A = A} {B = B}) → is-empty B
   is-empty-right-summand-is-equiv H b =
-    neq-inl-inr (issec-map-inv-is-equiv H (inr b))
+    neq-inl-inr (is-section-map-inv-is-equiv H (inr b))
 
 module _
   {l : Level} (A : UU l)
@@ -364,15 +389,15 @@ module _
   map-inv-right-unit-law-coprod : A → A + empty
   map-inv-right-unit-law-coprod = inl
 
-  issec-map-inv-right-unit-law-coprod :
+  is-section-map-inv-right-unit-law-coprod :
     ( map-right-unit-law-coprod ∘ map-inv-right-unit-law-coprod) ~ id
-  issec-map-inv-right-unit-law-coprod =
-    issec-map-inv-right-unit-law-coprod-is-empty A empty id
+  is-section-map-inv-right-unit-law-coprod =
+    is-section-map-inv-right-unit-law-coprod-is-empty A empty id
 
-  isretr-map-inv-right-unit-law-coprod :
+  is-retraction-map-inv-right-unit-law-coprod :
     ( map-inv-right-unit-law-coprod ∘ map-right-unit-law-coprod) ~ id
-  isretr-map-inv-right-unit-law-coprod =
-    isretr-map-inv-right-unit-law-coprod-is-empty A empty id
+  is-retraction-map-inv-right-unit-law-coprod =
+    is-retraction-map-inv-right-unit-law-coprod-is-empty A empty id
 
   is-equiv-map-right-unit-law-coprod : is-equiv map-right-unit-law-coprod
   is-equiv-map-right-unit-law-coprod =

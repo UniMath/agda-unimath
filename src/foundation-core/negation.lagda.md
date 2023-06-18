@@ -7,8 +7,9 @@ module foundation-core.negation where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.universe-levels
+
 open import foundation-core.empty-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -25,7 +26,8 @@ type `A` is the type `A → empty`.
 ¬ : {l : Level} → UU l → UU l
 ¬ A = A → empty
 
-map-neg : {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
+map-neg :
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} →
   (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
 ```

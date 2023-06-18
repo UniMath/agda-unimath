@@ -10,13 +10,15 @@ module elementary-number-theory.congruence-natural-numbers where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.strict-inequality-natural-numbers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types
@@ -160,15 +162,15 @@ is-one-cong-succ-ℕ {k} x H =
 
 ```agda
 scalar-invariant-cong-ℕ :
-  (k x y z : ℕ) → cong-ℕ k x y →  cong-ℕ k (mul-ℕ z x) (mul-ℕ z y)
-pr1 (scalar-invariant-cong-ℕ k x y z (pair d p)) = mul-ℕ z d
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (z *ℕ x) (z *ℕ y)
+pr1 (scalar-invariant-cong-ℕ k x y z (pair d p)) = z *ℕ d
 pr2 (scalar-invariant-cong-ℕ k x y z (pair d p)) =
   ( associative-mul-ℕ z d k) ∙
-    ( ( ap (mul-ℕ z) p) ∙
+    ( ( ap (z *ℕ_) p) ∙
       ( left-distributive-mul-dist-ℕ x y z))
 
 scalar-invariant-cong-ℕ' :
-  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (mul-ℕ x z) (mul-ℕ y z)
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (x *ℕ z) (y *ℕ z)
 scalar-invariant-cong-ℕ' k x y z H =
   concatenate-eq-cong-eq-ℕ k
     ( commutative-mul-ℕ x z)
@@ -181,9 +183,9 @@ scalar-invariant-cong-ℕ' k x y z H =
 ```agda
 congruence-mul-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
-  cong-ℕ  k x x' → cong-ℕ k y y' → cong-ℕ k (mul-ℕ x y) (mul-ℕ x' y')
+  cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x *ℕ y) (x' *ℕ y')
 congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
-  trans-cong-ℕ k (mul-ℕ x y) (mul-ℕ x y') (mul-ℕ x' y')
+  trans-cong-ℕ k (x *ℕ y) (x *ℕ y') (x' *ℕ y')
     ( scalar-invariant-cong-ℕ k y y' x K)
     ( scalar-invariant-cong-ℕ' k x x' y' H)
 ```
@@ -192,13 +194,13 @@ congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
 
 ```agda
 translation-invariant-cong-ℕ :
-  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ z x) (add-ℕ z y)
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (z +ℕ x) (z +ℕ y)
 pr1 (translation-invariant-cong-ℕ k x y z (pair d p)) = d
 pr2 (translation-invariant-cong-ℕ k x y z (pair d p)) =
   p ∙ inv (translation-invariant-dist-ℕ z x y)
 
 translation-invariant-cong-ℕ' :
-  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (add-ℕ x z) (add-ℕ y z)
+  (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (x +ℕ z) (y +ℕ z)
 translation-invariant-cong-ℕ' k x y z H =
   concatenate-eq-cong-eq-ℕ k
     ( commutative-add-ℕ x z)
@@ -210,7 +212,7 @@ step-invariant-cong-ℕ :
 step-invariant-cong-ℕ k x y = translation-invariant-cong-ℕ' k x y 1
 
 reflects-cong-add-ℕ :
-  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (add-ℕ x y) (add-ℕ x z) → cong-ℕ k y z
+  {k : ℕ} (x : ℕ) {y z : ℕ} → cong-ℕ k (x +ℕ y) (x +ℕ z) → cong-ℕ k y z
 pr1 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) = d
 pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
   p ∙ translation-invariant-dist-ℕ x y z

@@ -1,21 +1,19 @@
 # Function extensionality
 
 ```agda
-{-# OPTIONS --safe #-}
-```
-
-```agda
 module foundation-core.function-extensionality where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.universe-levels
+
 open import foundation-core.equivalences
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
 ```
 
 </details>
@@ -31,7 +29,7 @@ postulated in
 [`foundation.function-extensionality`](foundation.function-extensionality.md) as
 `funext`.
 
-## Definition
+## Statement
 
 ```agda
 module _
@@ -44,6 +42,8 @@ module _
   FUNEXT : (f : (x : A) → B x) → UU (l1 ⊔ l2)
   FUNEXT f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
 ```
+
+## Properties
 
 ### Naturality of `htpy-eq`
 

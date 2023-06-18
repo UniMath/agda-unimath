@@ -25,6 +25,7 @@ open import group-theory.homomorphisms-abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.semigroups
 open import group-theory.subgroups
+open import group-theory.subsets-abelian-groups
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
@@ -35,18 +36,6 @@ open import order-theory.preorders
 </details>
 
 ## Definitions
-
-### Subsets of abelian groups
-
-```agda
-subset-Ab :
-  (l : Level) {l1 : Level} (A : Ab l1) → UU ((lsuc l) ⊔ l1)
-subset-Ab l A = subset-Group l (group-Ab A)
-
-is-set-subset-Ab :
-  (l : Level) {l1 : Level} (A : Ab l1) → is-set (subset-Ab l A)
-is-set-subset-Ab l A = is-set-subset-Group l (group-Ab A)
-```
 
 ### Subgroups of abelian groups
 
@@ -187,15 +176,15 @@ module _
   type-ab-Subgroup-Ab : UU (l1 ⊔ l2)
   type-ab-Subgroup-Ab = type-group-Subgroup (group-Ab A) B
 
-  map-inclusion-ab-Subgroup-Ab : type-ab-Subgroup-Ab → type-Ab A
-  map-inclusion-ab-Subgroup-Ab = map-inclusion-group-Subgroup (group-Ab A) B
+  map-inclusion-Subgroup-Ab : type-ab-Subgroup-Ab → type-Ab A
+  map-inclusion-Subgroup-Ab = map-inclusion-Subgroup (group-Ab A) B
 
-  is-emb-incl-ab-Subgroup-Ab : is-emb map-inclusion-ab-Subgroup-Ab
-  is-emb-incl-ab-Subgroup-Ab = is-emb-inclusion-group-Subgroup (group-Ab A) B
+  is-emb-incl-ab-Subgroup-Ab : is-emb map-inclusion-Subgroup-Ab
+  is-emb-incl-ab-Subgroup-Ab = is-emb-inclusion-Subgroup (group-Ab A) B
 
   eq-subgroup-ab-eq-ab :
     {x y : type-ab-Subgroup-Ab} →
-    Id (map-inclusion-ab-Subgroup-Ab x) (map-inclusion-ab-Subgroup-Ab y) →
+    Id (map-inclusion-Subgroup-Ab x) (map-inclusion-Subgroup-Ab y) →
     Id x y
   eq-subgroup-ab-eq-ab = eq-subgroup-eq-group (group-Ab A) B
 
@@ -213,8 +202,9 @@ module _
 
   associative-add-Subgroup-Ab :
     ( x y z : type-ab-Subgroup-Ab) →
-    Id (add-ab-Subgroup-Ab (add-ab-Subgroup-Ab x y) z)
-       (add-ab-Subgroup-Ab x (add-ab-Subgroup-Ab y z))
+    Id
+      ( add-ab-Subgroup-Ab (add-ab-Subgroup-Ab x y) z)
+      ( add-ab-Subgroup-Ab x (add-ab-Subgroup-Ab y z))
   associative-add-Subgroup-Ab =
     associative-mul-Subgroup (group-Ab A) B
 
@@ -232,15 +222,17 @@ module _
 
   left-inverse-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
-    Id ( add-ab-Subgroup-Ab (neg-ab-Subgroup-Ab x) x)
-       ( zero-ab-Subgroup-Ab)
+    Id
+      ( add-ab-Subgroup-Ab (neg-ab-Subgroup-Ab x) x)
+      ( zero-ab-Subgroup-Ab)
   left-inverse-law-add-Subgroup-Ab =
     left-inverse-law-mul-Subgroup (group-Ab A) B
 
   right-inverse-law-add-Subgroup-Ab :
     (x : type-ab-Subgroup-Ab) →
-    Id ( add-ab-Subgroup-Ab x (neg-ab-Subgroup-Ab x))
-       ( zero-ab-Subgroup-Ab)
+    Id
+      ( add-ab-Subgroup-Ab x (neg-ab-Subgroup-Ab x))
+      ( zero-ab-Subgroup-Ab)
   right-inverse-law-add-Subgroup-Ab =
     right-inverse-law-mul-Subgroup (group-Ab A) B
 
@@ -268,26 +260,26 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   where
 
-  preserves-add-inclusion-ab-Subgroup-Ab :
-    preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
-  preserves-add-inclusion-ab-Subgroup-Ab =
-    preserves-mul-inclusion-group-Subgroup (group-Ab A) B
+  preserves-add-inclusion-Subgroup-Ab :
+    preserves-add-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
+  preserves-add-inclusion-Subgroup-Ab =
+    preserves-mul-inclusion-Subgroup (group-Ab A) B
 
-  preserves-zero-inclusion-ab-Subgroup-Ab :
-    preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-ab-Subgroup-Ab A B)
-  preserves-zero-inclusion-ab-Subgroup-Ab =
-    preserves-unit-inclusion-group-Subgroup (group-Ab A) B
+  preserves-zero-inclusion-Subgroup-Ab :
+    preserves-zero-Ab (ab-Subgroup-Ab A B) A (map-inclusion-Subgroup-Ab A B)
+  preserves-zero-inclusion-Subgroup-Ab =
+    preserves-unit-inclusion-Subgroup (group-Ab A) B
 
-  preserves-negatives-inclusion-ab-Subgroup-Ab :
+  preserves-negatives-inclusion-Subgroup-Ab :
     preserves-negatives-Ab
       ( ab-Subgroup-Ab A B)
       ( A)
-      ( map-inclusion-ab-Subgroup-Ab A B)
-  preserves-negatives-inclusion-ab-Subgroup-Ab =
-    preserves-inverses-inclusion-group-Subgroup (group-Ab A) B
+      ( map-inclusion-Subgroup-Ab A B)
+  preserves-negatives-inclusion-Subgroup-Ab =
+    preserves-inverses-inclusion-Subgroup (group-Ab A) B
 
-  inclusion-ab-Subgroup-Ab : type-hom-Ab (ab-Subgroup-Ab A B) A
-  inclusion-ab-Subgroup-Ab = inclusion-group-Subgroup (group-Ab A) B
+  hom-inclusion-Subgroup-Ab : type-hom-Ab (ab-Subgroup-Ab A B) A
+  hom-inclusion-Subgroup-Ab = hom-inclusion-Subgroup (group-Ab A) B
 ```
 
 ### Normal subgroups of an abelian group
@@ -335,34 +327,34 @@ module _
 ### The containment relation of subgroups of abelian groups
 
 ```agda
-contains-Subgroup-Ab-Prop :
+leq-Subgroup-Ab-Prop :
   {l1 l2 l3 : Level} (A : Ab l1) →
   Subgroup-Ab l2 A → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-contains-Subgroup-Ab-Prop A = contains-Subgroup-Prop (group-Ab A)
+leq-Subgroup-Ab-Prop A = leq-Subgroup-Prop (group-Ab A)
 
-contains-Subgroup-Ab :
+leq-Subgroup-Ab :
   {l1 l2 l3 : Level} (A : Ab l1) →
   Subgroup-Ab l2 A → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
-contains-Subgroup-Ab A = contains-Subgroup (group-Ab A)
+leq-Subgroup-Ab A = leq-Subgroup (group-Ab A)
 
-refl-contains-Subgroup-Ab :
+refl-leq-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A) →
-  contains-Subgroup-Ab A B B
-refl-contains-Subgroup-Ab A = refl-contains-Subgroup (group-Ab A)
+  leq-Subgroup-Ab A B B
+refl-leq-Subgroup-Ab A = refl-leq-Subgroup (group-Ab A)
 
-transitive-contains-Subgroup-Ab :
+transitive-leq-Subgroup-Ab :
   {l1 l2 l3 l4 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
   (C : Subgroup-Ab l3 A) (D : Subgroup-Ab l4 A) →
-  contains-Subgroup-Ab A C D → contains-Subgroup-Ab A B C →
-  contains-Subgroup-Ab A B D
-transitive-contains-Subgroup-Ab A =
-  transitive-contains-Subgroup (group-Ab A)
+  leq-Subgroup-Ab A C D → leq-Subgroup-Ab A B C →
+  leq-Subgroup-Ab A B D
+transitive-leq-Subgroup-Ab A =
+  transitive-leq-Subgroup (group-Ab A)
 
-antisymmetric-contains-Subgroup-Ab :
+antisymmetric-leq-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (B C : Subgroup-Ab l2 A) →
-  contains-Subgroup-Ab A B C → contains-Subgroup-Ab A C B → B ＝ C
-antisymmetric-contains-Subgroup-Ab A =
-  antisymmetric-contains-Subgroup (group-Ab A)
+  leq-Subgroup-Ab A B C → leq-Subgroup-Ab A C B → B ＝ C
+antisymmetric-leq-Subgroup-Ab A =
+  antisymmetric-leq-Subgroup (group-Ab A)
 
 Subgroup-Ab-Large-Preorder :
   {l1 : Level} (A : Ab l1) →
@@ -628,9 +620,9 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  isretr-subgroup-congruence-Ab :
+  is-retraction-subgroup-congruence-Ab :
     subgroup-congruence-Ab A (congruence-Subgroup-Ab A B) ＝ B
-  isretr-subgroup-congruence-Ab =
+  is-retraction-subgroup-congruence-Ab =
     eq-has-same-elements-Subgroup-Ab A
       ( subgroup-congruence-Ab A (congruence-Subgroup-Ab A B))
       ( B)
@@ -653,9 +645,9 @@ module _
       ( group-Ab A)
       ( R)
 
-  issec-subgroup-congruence-Ab :
+  is-section-subgroup-congruence-Ab :
     congruence-Subgroup-Ab A (subgroup-congruence-Ab A R) ＝ R
-  issec-subgroup-congruence-Ab =
+  is-section-subgroup-congruence-Ab =
     eq-relate-same-elements-congruence-Ab A
       ( congruence-Subgroup-Ab A (subgroup-congruence-Ab A R))
       ( R)
@@ -674,8 +666,8 @@ module _
   is-equiv-congruence-Subgroup-Ab =
     is-equiv-has-inverse
       ( subgroup-congruence-Ab A)
-      ( issec-subgroup-congruence-Ab A)
-      ( isretr-subgroup-congruence-Ab A)
+      ( is-section-subgroup-congruence-Ab A)
+      ( is-retraction-subgroup-congruence-Ab A)
 
   equiv-congruence-Subgroup-Ab :
     Subgroup-Ab l2 A ≃ congruence-Ab l2 A
@@ -689,8 +681,8 @@ module _
   is-equiv-subgroup-congruence-Ab =
     is-equiv-has-inverse
       ( congruence-Subgroup-Ab A)
-      ( isretr-subgroup-congruence-Ab A)
-      ( issec-subgroup-congruence-Ab A)
+      ( is-retraction-subgroup-congruence-Ab A)
+      ( is-section-subgroup-congruence-Ab A)
 
   equiv-subgroup-congruence-Ab :
     congruence-Ab l2 A ≃ Subgroup-Ab l2 A

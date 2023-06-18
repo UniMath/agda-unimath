@@ -9,6 +9,8 @@ module structured-types.types-equipped-with-endomorphisms where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
+open import foundation.function-types
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -36,4 +38,14 @@ module _
 
   endomorphism-Endo : type-Endo → type-Endo
   endomorphism-Endo = pr2 X
+```
+
+## Example
+
+### Unit type equipped with endomorphisms
+
+```agda
+trivial-Endo : {l : Level} → Endo l
+pr1 (trivial-Endo {l})= raise-unit l
+pr2 trivial-Endo = id
 ```

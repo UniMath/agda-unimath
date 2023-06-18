@@ -9,9 +9,7 @@ module orthogonal-factorization-systems.reflective-subuniverses where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.functions
 open import foundation.propositions
-open import foundation.raising-universe-levels
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
@@ -23,54 +21,34 @@ open import orthogonal-factorization-systems.modal-operators
 ## Idea
 
 A **reflective subuniverse** is a subuniverse `P` together with a modal operator
-`○` such that `○ A` is in `P` for all small types `A` and a modal unit with the
-property that the types in `P` are local at the modal unit of all small types
-`A`.
-
-Hence the modal types with respect to `○` are precisely the types in the
+`○` such that `○ A` is in `P` for all small types `A`, and a modal unit with the
+property that the types in `P` are local at the modal unit for all small types
+`A`. Hence the modal types with respect to `○` are precisely the types in the
 reflective subuniverse.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {○ : modal-operator (l1 ⊔ l2) l1} (unit-○ : modal-unit ○)
-  (is-modal' : UU (l1 ⊔ l2) → Prop l3)
+  {l lM : Level} {○ : operator-modality l l} (unit-○ : unit-modality ○)
+  (is-modal' : UU l → Prop lM)
   where
 
-  is-reflective-subuniverse : UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
+  is-reflective-subuniverse : UU (lsuc l ⊔ lM)
   is-reflective-subuniverse =
-    ( (X : UU (l1 ⊔ l2)) → type-Prop (is-modal' (raise (l1 ⊔ l2) (○ X)))) ×
-    ( (X : UU (l1 ⊔ l2)) → type-Prop (is-modal' X) →
-      (Y : UU (l1 ⊔ l2)) → is-local-type (unit-○ {Y}) X)
+    ( (X : UU l) → type-Prop (is-modal' (○ X))) ×
+    ( (X : UU l) → type-Prop (is-modal' X) →
+      (Y : UU l) → is-local (unit-○ {Y}) X)
 
-reflective-subuniverse : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-reflective-subuniverse l1 l2 l3 =
-  Σ ( modal-operator (l1 ⊔ l2) l1)
+reflective-subuniverse : (l lM : Level) → UU (lsuc l ⊔ lsuc lM)
+reflective-subuniverse l lM =
+  Σ ( operator-modality l l)
     ( λ ○ →
-      Σ ( modal-unit ○)
+      Σ ( unit-modality ○)
         ( λ unit-○ →
-          Σ ( UU (l1 ⊔ l2) → Prop l3)
-            ( is-reflective-subuniverse {l1} {l2} {l3} unit-○)))
-
-is-Σ-closed-reflective-subuniverse :
-  {l1 l2 l3 : Level}
-  (U : reflective-subuniverse l1 l2 l3) → UU (lsuc l1 ⊔ lsuc l2 ⊔ l3)
-is-Σ-closed-reflective-subuniverse (○ , unit-○ , is-modal' , _) =
-  is-Σ-closed-modal-operator (type-Prop ∘ is-modal')
-
-Σ-closed-reflective-subuniverse :
-  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-Σ-closed-reflective-subuniverse l1 l2 l3 =
-  Σ ( reflective-subuniverse l1 l2 l3)
-    ( is-Σ-closed-reflective-subuniverse {l1} {l2} {l3})
+          Σ ( UU l → Prop lM)
+            ( is-reflective-subuniverse unit-○)))
 ```
-
-## See also
-
-- [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
-- [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
-- [Orthogonal factorization systems](orthogonal-factorization-systems.orthogonal-factorization-systems.md)
 
 ## References
 

@@ -7,16 +7,18 @@ module foundation-core.functoriality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.universe-levels
+open import foundation-core.transport
 ```
 
 </details>
@@ -40,9 +42,11 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (x : A) → B x → C x)
   where
+```
 
-  {- Any family of maps induces a map on the total spaces. -}
+Any family of maps induces a map on the total spaces.
 
+```agda
   tot : Σ A B → Σ A C
   pr1 (tot t) = pr1 t
   pr2 (tot t) = f (pr1 t) (pr2 t)
@@ -118,40 +122,43 @@ tot-id B (pair x y) = refl
 ### the map `tot` preserves composition
 
 ```agda
-tot-comp :
+preserves-comp-tot :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
   (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
   tot (λ x → (g x) ∘ (f x)) ~ ((tot g) ∘ (tot f))
-tot-comp f g (pair x y) = refl
+preserves-comp-tot f g (pair x y) = refl
 ```
 
 ### The fibers of `tot`
+
+We show that for any family of maps, the fiber of the induced map on total
+spaces are equivalent to the fibers of the maps in the family.
 
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (x : A) → B x → C x)
   where
-  {- We show that for any family of maps, the fiber of the induced map on total
-     spaces are equivalent to the fibers of the maps in the family. -}
 
   map-compute-fib-tot : (t : Σ A C) → fib (tot f) t → fib (f (pr1 t)) (pr2 t)
   pr1 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = y
   pr2 (map-compute-fib-tot .(tot f (pair x y)) (pair (pair x y) refl)) = refl
 
-  map-inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib (tot f) t
+  map-inv-compute-fib-tot :
+    (t : Σ A C) → fib (f (pr1 t)) (pr2 t) → fib (tot f) t
   pr1 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = a
   pr2 (pr1 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl))) = y
   pr2 (map-inv-compute-fib-tot (pair a .(f a y)) (pair y refl)) = refl
 
-  issec-map-inv-compute-fib-tot :
+  is-section-map-inv-compute-fib-tot :
     (t : Σ A C) → (map-compute-fib-tot t ∘ map-inv-compute-fib-tot t) ~ id
-  issec-map-inv-compute-fib-tot (pair x .(f x y)) (pair y refl) = refl
+  is-section-map-inv-compute-fib-tot (pair x .(f x y)) (pair y refl) = refl
 
-  isretr-map-inv-compute-fib-tot :
+  is-retraction-map-inv-compute-fib-tot :
     (t : Σ A C) → (map-inv-compute-fib-tot t ∘ map-compute-fib-tot t) ~ id
-  isretr-map-inv-compute-fib-tot .(pair x (f x y)) (pair (pair x y) refl) = refl
+  is-retraction-map-inv-compute-fib-tot ._ (pair (pair x y) refl) =
+    refl
 
   abstract
     is-equiv-map-compute-fib-tot :
@@ -159,8 +166,8 @@ module _
     is-equiv-map-compute-fib-tot t =
       is-equiv-has-inverse
         ( map-inv-compute-fib-tot t)
-        ( issec-map-inv-compute-fib-tot t)
-        ( isretr-map-inv-compute-fib-tot t)
+        ( is-section-map-inv-compute-fib-tot t)
+        ( is-retraction-map-inv-compute-fib-tot t)
 
   compute-fib-tot : (t : Σ A C) → fib (tot f) t ≃ fib (f (pr1 t)) (pr2 t)
   pr1 (compute-fib-tot t) = map-compute-fib-tot t
@@ -172,8 +179,8 @@ module _
     is-equiv-map-inv-compute-fib-tot t =
       is-equiv-has-inverse
         ( map-compute-fib-tot t)
-        ( isretr-map-inv-compute-fib-tot t)
-        ( issec-map-inv-compute-fib-tot t)
+        ( is-retraction-map-inv-compute-fib-tot t)
+        ( is-section-map-inv-compute-fib-tot t)
 
   inv-compute-fib-tot : (t : Σ A C) → fib (f (pr1 t)) (pr2 t) ≃ fib (tot f) t
   pr1 (inv-compute-fib-tot t) = map-inv-compute-fib-tot t
@@ -246,13 +253,14 @@ module _
     ( fib-fib-map-Σ-map-base
       .(map-Σ-map-base f C (pair x z)) (pair (pair x z) refl)) = refl
 
-  issec-fib-fib-map-Σ-map-base :
+  is-section-fib-fib-map-Σ-map-base :
     (t : Σ B C) → (fib-map-Σ-map-base-fib t ∘ fib-fib-map-Σ-map-base t) ~ id
-  issec-fib-fib-map-Σ-map-base .(pair (f x) z) (pair (pair x z) refl) = refl
+  is-section-fib-fib-map-Σ-map-base .(pair (f x) z) (pair (pair x z) refl) =
+    refl
 
-  isretr-fib-fib-map-Σ-map-base :
+  is-retraction-fib-fib-map-Σ-map-base :
     (t : Σ B C) → (fib-fib-map-Σ-map-base t ∘ fib-map-Σ-map-base-fib t) ~ id
-  isretr-fib-fib-map-Σ-map-base (pair .(f x) z) (pair x refl) = refl
+  is-retraction-fib-fib-map-Σ-map-base (pair .(f x) z) (pair x refl) = refl
 
   abstract
     is-equiv-fib-map-Σ-map-base-fib :
@@ -260,8 +268,8 @@ module _
     is-equiv-fib-map-Σ-map-base-fib t =
       is-equiv-has-inverse
         ( fib-fib-map-Σ-map-base t)
-        ( issec-fib-fib-map-Σ-map-base t)
-        ( isretr-fib-fib-map-Σ-map-base t)
+        ( is-section-fib-fib-map-Σ-map-base t)
+        ( is-retraction-fib-fib-map-Σ-map-base t)
 
   equiv-fib-map-Σ-map-base-fib :
     (t : Σ B C) → fib f (pr1 t) ≃ fib (map-Σ-map-base f C) t
@@ -411,6 +419,17 @@ module _
         ( is-equiv-map-equiv-total-fib f)
         ( is-equiv-map-equiv-total-fib g)
         ( is-equiv-tot-is-fiberwise-equiv E)
+```
+
+### `map-Σ` preserves identity maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  compute-map-Σ-id : map-Σ B id (λ x → id) ~ id
+  compute-map-Σ-id = refl-htpy
 ```
 
 ## See also

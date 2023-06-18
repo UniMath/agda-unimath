@@ -7,34 +7,31 @@ module foundation.type-duality where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equational-reasoning
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.locally-small-types
-open import foundation.polynomial-endofunctors
-open import foundation.propositional-maps
 open import foundation.slice
-open import foundation.structure
-open import foundation.type-theoretic-principle-of-choice
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
+open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.embeddings
 open import foundation-core.fibers-of-maps
-open import foundation-core.functions
+open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.fundamental-theorem-of-identity-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.propositions
 open import foundation-core.small-types
-open import foundation-core.type-arithmetic-dependent-pair-types
-open import foundation-core.universe-levels
+
+open import trees.polynomial-endofunctors
 ```
 
 </details>
@@ -44,14 +41,14 @@ open import foundation-core.universe-levels
 Given a univalent universe `𝒰`, we can define two closely related functors
 acting on all types. First there is the covariant functor given by
 
-```md
+```text
   P_𝒰(A) := Σ (X : 𝒰), X → A.
 ```
 
 This is a polynomial endofunctor. Second, there is the contravariant functor
 given by
 
-```md
+```text
   P^𝒰(A) := A → 𝒰.
 ```
 
@@ -139,7 +136,7 @@ is-emb-map-type-duality
               by inv-equiv (equiv-fam-equiv-equiv-slice f g)
             ≃ ( (X , f) ＝ (Y , g))
               by
-              inv-equiv (extensionality-Slice (X , f) (Y , g)) ))
+              inv-equiv (extensionality-Slice (X , f) (Y , g))))
       ( is-contr-total-path (X , f)))
     ( λ Y → ap (map-type-duality H))
 
@@ -171,10 +168,10 @@ module _
       ( equiv-is-small
         ( is-small-Σ {l3 = l} {l4 = l} H (λ a → is-small' {l} {B a}))))
 
-  issec-map-inv-type-duality :
+  is-section-map-inv-type-duality :
     ( map-type-duality (is-locally-small-is-small H) ∘ map-inv-type-duality) ~
     id
-  issec-map-inv-type-duality B =
+  is-section-map-inv-type-duality B =
     eq-equiv-fam
       ( λ a →
         equivalence-reasoning
@@ -216,13 +213,13 @@ module _
             by
             equiv-fib-pr1 B a)
 
-  isretr-map-inv-type-duality :
+  is-retraction-map-inv-type-duality :
     ( map-inv-type-duality ∘ map-type-duality (is-locally-small-is-small H)) ~
     id
-  isretr-map-inv-type-duality X =
+  is-retraction-map-inv-type-duality X =
     is-injective-is-emb
       ( is-emb-map-type-duality (is-locally-small-is-small H))
-      ( issec-map-inv-type-duality
+      ( is-section-map-inv-type-duality
         ( map-type-duality (is-locally-small-is-small H) X))
 
   is-equiv-map-type-duality :
@@ -230,8 +227,8 @@ module _
   is-equiv-map-type-duality =
     is-equiv-has-inverse
       map-inv-type-duality
-      issec-map-inv-type-duality
-      isretr-map-inv-type-duality
+      is-section-map-inv-type-duality
+      is-retraction-map-inv-type-duality
 
   type-duality : type-polynomial-endofunctor-UU l A ≃ type-exp-UU l A
   pr1 type-duality = map-type-duality (is-locally-small-is-small H)
@@ -258,7 +255,7 @@ module _
             is-contr-equiv
               ( raise-unit l)
               ( ( equiv-eq-fam _ _
-                  ( issec-map-inv-is-equiv E (λ _ → raise-unit l))
+                  ( is-section-map-inv-is-equiv E (λ _ → raise-unit l))
                   ( a)) ∘e
                 ( equiv-tot
                   ( λ x →
@@ -278,13 +275,13 @@ Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → Slice (l1 ⊔ l) A
 pr1 (Pr1 A B) = Σ A B
 pr2 (Pr1 A B) = pr1
 
-issec-Pr1 :
+is-section-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
-issec-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
+is-section-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
 
-isretr-Pr1 :
+is-retraction-Pr1 :
   {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
-isretr-Pr1 {A = A} (pair X f) =
+is-retraction-Pr1 {A = A} (pair X f) =
   eq-equiv-slice
     ( Pr1 A (Fib A (pair X f)))
     ( pair X f)
@@ -293,7 +290,10 @@ isretr-Pr1 {A = A} (pair X f) =
 is-equiv-Fib :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
 is-equiv-Fib l2 A =
-  is-equiv-has-inverse (Pr1 A) (issec-Pr1 {l2 = l2}) (isretr-Pr1 {l2 = l2})
+  is-equiv-has-inverse
+    ( Pr1 A)
+    ( is-section-Pr1 {l2 = l2})
+    ( is-retraction-Pr1 {l2 = l2})
 
 equiv-Fib :
   {l1 : Level} (l2 : Level) (A : UU l1) → Slice (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
@@ -303,7 +303,10 @@ pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
 is-equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
 is-equiv-Pr1 {l1} l2 A =
-  is-equiv-has-inverse (Fib A) (isretr-Pr1 {l2 = l2}) (issec-Pr1 {l2 = l2})
+  is-equiv-has-inverse
+    ( Fib A)
+    ( is-retraction-Pr1 {l2 = l2})
+    ( is-section-Pr1 {l2 = l2})
 
 equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → (A → UU (l1 ⊔ l2)) ≃ Slice (l1 ⊔ l2) A
@@ -311,36 +314,23 @@ pr1 (equiv-Pr1 l2 A) = Pr1 A
 pr2 (equiv-Pr1 l2 A) = is-equiv-Pr1 l2 A
 ```
 
-### Structured type duality
+The type of all function from `A → B` is equivalent to the type of function
+`Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
 
 ```agda
-Slice-structure :
-  {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
-  UU (l1 ⊔ l2 ⊔ lsuc l)
-Slice-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
-
-equiv-Fib-structure :
-  {l1 l3 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l3) (B : UU l1) →
-  Slice-structure (l1 ⊔ l) P B ≃ fam-structure P B
-equiv-Fib-structure {l1} {l3} l P B =
-  ( ( inv-distributive-Π-Σ) ∘e
-    ( equiv-Σ
-      ( λ C → (b : B) → P (C b))
-      ( equiv-Fib l B)
-      ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
-  ( inv-assoc-Σ (UU (l1 ⊔ l)) (λ A → A → B) (λ f → structure-map P (pr2 f)))
-```
-
-### Subtype duality
-
-```agda
-Slice-emb : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-Slice-emb l A = Σ (UU l) (λ X → X ↪ A)
-
-equiv-Fib-Prop :
-  (l : Level) {l1 : Level} (A : UU l1) →
-  Slice-emb (l1 ⊔ l) A ≃ (A → Prop (l1 ⊔ l))
-equiv-Fib-Prop l A =
-  ( equiv-Fib-structure l is-prop A) ∘e
-  ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))
+fib-Σ :
+  {l1 l2 : Level} (X : UU l1) (A : UU l2) →
+  (X → A) ≃
+    Σ (A → UU (l2 ⊔ l1)) (λ Y → X ≃ Σ A Y)
+fib-Σ {l1} {l2} X A =
+  ( ( equiv-Σ
+      ( λ Z → X ≃ Σ A Z)
+      ( equiv-Fib l1 A)
+      ( λ s →
+        inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
+    ( ( equiv-right-swap-Σ) ∘e
+      ( ( inv-left-unit-law-Σ-is-contr
+          ( is-contr-is-small-lmax l2 X)
+          ( is-small-lmax l2 X)) ∘e
+        ( equiv-precomp (inv-equiv (equiv-is-small (is-small-lmax l2 X))) A))))
 ```

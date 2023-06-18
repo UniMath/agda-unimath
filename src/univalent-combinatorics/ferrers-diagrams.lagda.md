@@ -75,8 +75,8 @@ module _
 ### Finite Ferrers diagrams of finite types
 
 ```agda
-ferrers-diagram-𝔽 : {l1 : Level} (l2 l3 : Level) →
-  (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+ferrers-diagram-𝔽 :
+  {l1 : Level} (l2 l3 : Level) (A : 𝔽 l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
 ferrers-diagram-𝔽 {l} l2 l3 A =
   Σ ( 𝔽 l2)
     ( λ X →
@@ -165,9 +165,9 @@ module _
       ( is-contr-total-Eq-subtype
         ( is-contr-total-equiv-fam (dot-ferrers-diagram D))
         ( λ Y →
-           is-prop-prod
-             ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
-             ( is-prop-mere-equiv A (Σ (row-ferrers-diagram D) Y)))
+          is-prop-prod
+            ( is-prop-Π (λ x → is-prop-type-trunc-Prop))
+            ( is-prop-mere-equiv A (Σ (row-ferrers-diagram D) Y)))
         ( dot-ferrers-diagram D)
         ( λ x → id-equiv)
         ( pair
@@ -259,6 +259,8 @@ module _
 ## Properties
 
 ### The type of Ferrers diagrams of any finite type is π-finite
+
+This remains to be shown.
 
 ## See also
 

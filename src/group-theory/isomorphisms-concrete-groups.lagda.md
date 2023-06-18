@@ -27,13 +27,11 @@ concrete groups
 ```agda
 iso-Concrete-Group :
   {l1 l2 : Level} → Concrete-Group l1 → Concrete-Group l2 → UU (l1 ⊔ l2)
-iso-Concrete-Group = iso-Large-Precat Concrete-Group-Large-Precat
+iso-Concrete-Group = iso-Large-Precategory Concrete-Group-Large-Precategory
 ```
 
 ## Properties
 
 ### Equivalences of concrete groups are isomorphisms of concrete groups
 
-```agda
-
-```
+This remains to be shown.
