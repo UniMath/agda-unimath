@@ -339,22 +339,22 @@ the story. Here's how we handle indentation and line breaks in the
   tree structure of the definition, and aligns well with our convention to have
   2-space indentation level increases.
 
-- Some proofs contain a part with equational reasoning. Such proofs should be
-  tyeset as follows:
+- Some proofs contain a part with equational reasoning. The standard way to
+  typeset equational reasoning proofs is as follows
 
   ```text
     equational-reasoning
       term-1
       ＝ term-2
         by
-  equation-1
+        equation-1
       ＝ term-3
         by
-  equation-2
+        equation-2
   ```
 
-  unless line-breaks can be avoided while respecting the 80-character line
-  limit.
+  Sometimes, however, `equation-n` is a short proof term that fits on the same
+  line as `by` within the 80 character limit. In that case it is ok to do so.
 
 ## Coding practices we tend to avoid
 
