@@ -7,8 +7,8 @@ encyclopedia-like format.
 
 The coding and style conventions we've established aren't simply rules; they're
 tools for us to shape and nurture this resource. They ensure that the formalized
-definitions are clean and focused, and ready for reuse across the library, thereby
-weaving each contribution into a bigger tapestry.
+definitions are clean and focused, and ready for reuse across the library,
+thereby weaving each contribution into a bigger tapestry.
 
 At the heart of every successful project lies clarity and readability. Our style
 guide aims to serve as a compass, guiding contributors towards creating code
@@ -57,11 +57,12 @@ Here are the benefits of this approach:
 
 In essence, our refactoring conventions are guided by the goal of ensuring that
 our code remains as conceptually clear and as effective as possible. Finally, a
-maintainable codebase is a welcoming codebase. By ensuring that the `agda-unimath`
-code is easy to understand and navigate, new contributors can more readily
-participate in the project. This is crucial for the growth and dynamism of the
-`agda-unimath` community. It allows a diverse group of developers, each with their
-unique skills and perspectives, to contribute to the project's ongoing success.
+maintainable codebase is a welcoming codebase. By ensuring that the
+`agda-unimath` code is easy to understand and navigate, new contributors can
+more readily participate in the project. This is crucial for the growth and
+dynamism of the `agda-unimath` community. It allows a diverse group of
+developers, each with their unique skills and perspectives, to contribute to the
+project's ongoing success.
 
 So, refactoring isn't just about "cleaning up" the code; it's a strategic
 approach to ensure the longevity, vitality, and success of the `agda-unimath`
@@ -69,10 +70,9 @@ project.
 
 ## Guidelines for definitions in the `agda-unimath` library
 
-- **Universe Polymorphism**: We make use of universe polymorphism to
-  to make our definitions maximally applicable.
-  Each assumed type or type family is assigned its own
-  universe level, catering to a wide range of mathematical theories.
+- **Universe Polymorphism**: We make use of universe polymorphism to to make our
+  definitions maximally applicable. Each assumed type or type family is assigned
+  its own universe level, catering to a wide range of mathematical theories.
 - **Reuse of Definitions**: We advocate for the maximal use of existing
   definitions in both type specifications and definition bodies. This not only
   helps maintain naming consistency, but also highlights the correlation between
@@ -92,10 +92,10 @@ project.
   [`graph-theory.undirected-graphs`](graph-theory.undirected-graphs.md).
 - **Implicit Arguments**: If an argument can be inferred in most use cases, make
   it implicit.
-- **Use of Anonymous Modules**: If several arguments are commonly used
-  across different proofs, extract them into an anonymous module. This helps
-  keep type specifications brief and ensures consistency in the variable
-  ordering among related definitions.
+- **Use of Anonymous Modules**: If several arguments are commonly used across
+  different proofs, extract them into an anonymous module. This helps keep type
+  specifications brief and ensures consistency in the variable ordering among
+  related definitions.
 - **Use of `where` Blocks**: While `where` blocks are permissible, their use is
   generally discouraged as their content cannot be reused outside the main
   definition. This contradicts our objective of refactoring the library into
@@ -120,10 +120,10 @@ project.
 
 ## Code comments
 
-Given that the files in `agda-unimath` are literate Agda markdown files, designed
-to be displayed in a user-friendly format on the `agda-unimath` website, we have
-the opportunity to comment on our code using markdown outside of the code
-blocks.
+Given that the files in `agda-unimath` are literate Agda markdown files,
+designed to be displayed in a user-friendly format on the `agda-unimath`
+website, we have the opportunity to comment on our code using markdown outside
+of the code blocks.
 
 Each code block typically starts with a section header that provides a succinct
 explanation of the code's purpose or functionality. This header can be followed
@@ -270,8 +270,8 @@ Here is a list of our naming conventions:
 ## <a name="formatting"></a>Formatting: Indentation, line breaks, and parentheses
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
-the story. Here's how we handle indentation and line breaks in the `agda-unimath`
-library:
+the story. Here's how we handle indentation and line breaks in the
+`agda-unimath` library:
 
 - In order to improve the readability on the `agda-unimath` website, we use a
   standard line length of 80 characters. There are only a few exceptions that
