@@ -23,10 +23,12 @@ open import foundation-core.transport
 
 ## Idea
 
-A **(unary) identity system** on a type `A` equipped with a point `a : A` consists of
-a type family `B` over `A` equipped with a point `b : B a` that satisfies an
-induction principle analogous to the induction principle of the [identity type](foundation.identity-types.md) at
-`a`. The [dependent universal property of identity types](foundation.universal-property-identity-types.md) also follows for identity systems.
+A **(unary) identity system** on a type `A` equipped with a point `a : A`
+consists of a type family `B` over `A` equipped with a point `b : B a` that
+satisfies an induction principle analogous to the induction principle of the
+[identity type](foundation.identity-types.md) at `a`. The
+[dependent universal property of identity types](foundation.universal-property-identity-types.md)
+also follows for identity systems.
 
 ## Definitions
 
@@ -45,7 +47,8 @@ module _
 
 ### A type family over `A` is an identity system if and only if its total space is contractible
 
-In [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md) we will start calling type families with contractible total space torsorial.
+In [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)
+we will start calling type families with contractible total space torsorial.
 
 ```agda
 module _
