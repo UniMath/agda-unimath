@@ -19,7 +19,7 @@ library within any topic in mathematics.
 
 The `agda-unimath` library is compatible with Agda 2.6.3 and can be compiled by
 running `make check` from the root directory of the repository. A complete list
-of all Agda modules in the library can be found [here](everything.html).
+of all Agda modules in the library can be found [here](everything.md).
 
 ## Participating in the Project
 
