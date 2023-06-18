@@ -339,6 +339,23 @@ the story. Here's how we handle indentation and line breaks in the
   tree structure of the definition, and aligns well with our convention to have
   2-space indentation level increases.
 
+- Some proofs contain a part with equational reasoning. Such proofs should be
+  tyeset as follows:
+
+  ```text
+    equational-reasoning
+      term-1
+      ＝ term-2
+        by
+  equation-1
+      ＝ term-3
+        by
+  equation-2
+  ```
+
+  unless line-breaks can be avoided while respecting the 80-character line
+  limit.
+
 ## Coding practices we tend to avoid
 
 - Using Unicode characters in names is entirely permissible, but we recommend
