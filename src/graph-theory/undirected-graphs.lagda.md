@@ -1,8 +1,6 @@
 # Undirected graphs
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module graph-theory.undirected-graphs where
 ```
 

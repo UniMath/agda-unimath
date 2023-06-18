@@ -1,6 +1,8 @@
 # Symmetric binary relations
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module foundation.symmetric-binary-relations where
 ```
 
@@ -166,11 +168,83 @@ module _
     R (element-unordered-pair p i) (other-element-unordered-pair p i)
 
   counit-symmetric-core-Rel :
-    (x y : A) →
+    {x y : A} →
     rel-symmetric-binary-relation symmetric-core-Rel x y → R x y
-  counit-symmetric-core-Rel x y r =
+  counit-symmetric-core-Rel {x} {y} r =
     tr
       ( R x)
       ( compute-other-element-standard-unordered-pair x y (zero-Fin 1))
       ( r (zero-Fin 1))
+```
+
+### Morphisms of symmetric binary relations
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  hom-symmetric-binary-relation :
+    symmetric-binary-relation l2 A → symmetric-binary-relation l3 A →
+    UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3)
+  hom-symmetric-binary-relation R S =
+    (p : unordered-pair A) → R p → S p
+
+  hom-rel-hom-symmetric-binary-relation :
+    (R : symmetric-binary-relation l2 A) (S : symmetric-binary-relation l3 A) →
+    hom-symmetric-binary-relation R S →
+    hom-Rel
+      ( rel-symmetric-binary-relation R)
+      ( rel-symmetric-binary-relation S)
+  hom-rel-hom-symmetric-binary-relation R S f x y =
+    f (standard-unordered-pair x y)
+```
+
+## Properties
+
+### The universal property of the symmetric core of a binary relation
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (R : Rel l2 A)
+  (S : symmetric-binary-relation l3 A)
+  where
+
+  map-universal-property-symmetric-core-Rel :
+    hom-symmetric-binary-relation S (symmetric-core-Rel R) →
+    hom-Rel (rel-symmetric-binary-relation S) R
+  map-universal-property-symmetric-core-Rel f x y s =
+    counit-symmetric-core-Rel R (f (standard-unordered-pair x y) s)
+
+  map-inv-universal-property-symmetric-core-Rel :
+    hom-Rel (rel-symmetric-binary-relation S) R →
+    hom-symmetric-binary-relation S (symmetric-core-Rel R)
+  map-inv-universal-property-symmetric-core-Rel f p s i =
+    f ( element-unordered-pair p i)
+      ( other-element-unordered-pair p i)
+      ( tr-symmetric-binary-relation S
+        ( p)
+        ( standard-unordered-pair
+          ( element-unordered-pair p i)
+          ( other-element-unordered-pair p i))
+        ( inv-Eq-unordered-pair
+          ( standard-unordered-pair
+            ( element-unordered-pair p i)
+            ( other-element-unordered-pair p i))
+          ( p)
+          ( compute-standard-unordered-pair-element-unordered-pair p i))
+        ( s))
+
+  is-section-map-inv-universal-property-symmetric-core-Rel :
+    ( map-universal-property-symmetric-core-Rel ∘
+      map-inv-universal-property-symmetric-core-Rel) ~ id
+  is-section-map-inv-universal-property-symmetric-core-Rel f =
+    eq-htpy
+      ( λ p →
+        eq-htpy
+          ( λ s →
+            eq-htpy
+              ( λ i →
+                {!!})))
+    
 ```

@@ -73,8 +73,8 @@ module _
     {l : Level}
     (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
     coherence-triangle-maps
-      ( ev-point (pair A id-equiv) {P})
-      ( ev-id-equiv (λ X e → P (pair X e)))
+      ( ev-point (A , id-equiv) {P})
+      ( ev-id-equiv (λ X e → P (X , e)))
       ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
   triangle-ev-id-equiv P f = refl
 ```
@@ -91,20 +91,19 @@ module _
   where
 
   abstract
-    IND-EQUIV-is-contr-total-equiv :
+    is-identity-system-is-contr-total-equiv :
       is-contr (Σ (UU l1) (λ X → A ≃ X)) →
       {l : Level} →
-      (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) → IND-EQUIV (λ B e → P (pair B e))
-    IND-EQUIV-is-contr-total-equiv c P =
+      (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) → IND-EQUIV (λ B e → P (B , e))
+    is-identity-system-is-contr-total-equiv c P =
       section-left-factor
-        ( ev-id-equiv (λ X e → P (pair X e)))
+        ( ev-id-equiv (λ X e → P (X , e)))
         ( ev-pair)
         ( is-singleton-is-contr
-          ( pair A id-equiv)
-          ( pair
-            ( pair A id-equiv)
-            ( λ t → ( inv (contraction c (pair A id-equiv))) ∙
-                    ( contraction c t)))
+          ( A , id-equiv)
+          ( ( A , id-equiv) ,
+            ( λ t →
+              ( inv (contraction c (A , id-equiv))) ∙ (contraction c t)))
           ( P))
 ```
 
@@ -116,19 +115,18 @@ module _
   where
 
   abstract
-    is-contr-total-equiv-IND-EQUIV :
-      ( {l : Level} (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
-        IND-EQUIV (λ B e → P (pair B e))) →
+    is-contr-total-is-identity-system-equiv :
+      ( {l : Level} → is-identity-system l (λ X → A ≃ X) A id-equiv) →
       is-contr (Σ (UU l1) (λ X → A ≃ X))
-    is-contr-total-equiv-IND-EQUIV ind =
+    is-contr-total-is-identity-system-equiv ind =
       is-contr-is-singleton
         ( Σ (UU l1) (λ X → A ≃ X))
-        ( pair A id-equiv)
+        ( A , id-equiv)
         ( λ P → section-comp
-          ( ev-id-equiv (λ X e → P (pair X e)))
+          ( ev-id-equiv (λ X e → P (X , e)))
           ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
-          ( pair ind-Σ refl-htpy)
-          ( ind P))
+          ( ind-Σ , refl-htpy)
+          ( ind (λ X e → P (X , e))))
 ```
 
 ### Equivalence induction in a universe
@@ -139,19 +137,19 @@ module _
   where
 
   abstract
-    Ind-equiv : section (ev-id-equiv P)
-    Ind-equiv =
-      IND-EQUIV-is-contr-total-equiv
-      ( is-contr-total-equiv _)
-      ( λ t → P (pr1 t) (pr2 t))
+    is-identity-system-equiv : section (ev-id-equiv P)
+    is-identity-system-equiv =
+      is-identity-system-is-contr-total-equiv
+        ( is-contr-total-equiv _)
+        ( λ t → P (pr1 t) (pr2 t))
 
   ind-equiv :
     P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
-  ind-equiv p {B} = pr1 Ind-equiv p B
+  ind-equiv p {B} = pr1 is-identity-system-equiv p B
 
   compute-ind-equiv :
     (u : P A id-equiv) → ind-equiv u id-equiv ＝ u
-  compute-ind-equiv = pr2 Ind-equiv
+  compute-ind-equiv = pr2 is-identity-system-equiv
 ```
 
 ### Equivalence induction in a subuniverse
@@ -176,23 +174,26 @@ module _
   triangle-ev-id-equiv-subuniverse F E = refl
 
   abstract
-    Ind-equiv-subuniverse :
+    is-identity-system-equiv-subuniverse :
       (F : (B : type-subuniverse P) → equiv-subuniverse P A B → UU l3) →
       section (ev-id-equiv-subuniverse {F})
-    Ind-equiv-subuniverse =
-      Ind-identity-system A id-equiv (is-contr-total-equiv-subuniverse P A)
+    is-identity-system-equiv-subuniverse =
+      is-identity-system-is-torsorial-family-of-types A id-equiv
+        ( is-contr-total-equiv-subuniverse P A)
 
   ind-equiv-subuniverse :
     (F : (B : type-subuniverse P) → equiv-subuniverse P A B → UU l3) →
     F A id-equiv → (B : type-subuniverse P) (e : equiv-subuniverse P A B) →
     F B e
-  ind-equiv-subuniverse F = pr1 (Ind-equiv-subuniverse F)
+  ind-equiv-subuniverse F =
+    pr1 (is-identity-system-equiv-subuniverse F)
 
   compute-ind-equiv-subuniverse :
     (F : (B : type-subuniverse P) → equiv-subuniverse P A B → UU l3) →
     (u : F A id-equiv) →
     ind-equiv-subuniverse F u A id-equiv ＝ u
-  compute-ind-equiv-subuniverse F = pr2 (Ind-equiv-subuniverse F)
+  compute-ind-equiv-subuniverse F =
+    pr2 (is-identity-system-equiv-subuniverse F)
 ```
 
 ### The evaluation map `ev-id-equiv` is an equivalence

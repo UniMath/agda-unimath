@@ -8,10 +8,13 @@ module graph-theory.undirected-core-directed-graphs where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.symmetric-binary-relations
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
+open import graph-theory.forgetful-functor-from-undirected-graphs-to-directed-graphs
+open import graph-theory.morphisms-directed-graphs
 open import graph-theory.undirected-graphs
 ```
 
@@ -48,4 +51,32 @@ module _
   undirected-core-Directed-Graph : Undirected-Graph l1 l2
   pr1 undirected-core-Directed-Graph = vertex-undirected-core-Directed-Graph
   pr2 undirected-core-Directed-Graph = edge-undirected-core-Directed-Graph
+```
+
+### The counit of the undirected core of a directed graph
+
+```agda
+module _
+  {l1 l2 : Level} (G : Directed-Graph l1 l2)
+  where
+
+  vertex-counit-undirected-core-Directed-Graph :
+    vertex-undirected-core-Directed-Graph G → vertex-Directed-Graph G
+  vertex-counit-undirected-core-Directed-Graph = id
+
+  edge-counit-undirected-core-Directed-Graph :
+    {x y : vertex-Directed-Graph G} →
+    edge-graph-Undirected-Graph (undirected-core-Directed-Graph G) x y →
+    edge-Directed-Graph G x y
+  edge-counit-undirected-core-Directed-Graph =
+    counit-symmetric-core-Rel (edge-Directed-Graph G)
+
+  counit-undirected-core-Directed-Graph :
+    hom-Directed-Graph
+      ( graph-Undirected-Graph (undirected-core-Directed-Graph G))
+      ( G)
+  pr1 counit-undirected-core-Directed-Graph =
+    vertex-counit-undirected-core-Directed-Graph
+  pr2 counit-undirected-core-Directed-Graph x y =
+    edge-counit-undirected-core-Directed-Graph
 ```

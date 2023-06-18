@@ -84,7 +84,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     FUNEXT f → IND-HTPY {l3 = l3} f
   IND-HTPY-FUNEXT {l3 = l3} {A = A} {B = B} f funext-f =
-    Ind-identity-system f
+    is-identity-system-is-torsorial-family-of-types f
       ( refl-htpy)
       ( is-contr-total-htpy f)
 
@@ -93,7 +93,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     ({l : Level} → IND-HTPY {l3 = l} f) → FUNEXT f
   FUNEXT-IND-HTPY f ind-htpy-f =
-    fundamental-theorem-id-IND-identity-system f
+    fundamental-theorem-id-is-identity-system f
       ( refl-htpy)
       ( ind-htpy-f)
       ( λ g → htpy-eq)

@@ -10,6 +10,7 @@ module foundation.equivalence-extensionality where
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.identity-systems
 open import foundation.subtype-identity-principle
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
@@ -24,6 +25,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.sections
 ```
 
 </details>
@@ -85,4 +87,35 @@ module _
   htpy-eq-map-equiv :
     {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → htpy-equiv e e'
   htpy-eq-map-equiv = htpy-eq
+```
+
+### Homotopy induction for homotopies between equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    Ind-htpy-equiv :
+      {l3 : Level} (e : A ≃ B)
+      (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
+      section
+        ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
+          h e (refl-htpy-equiv e))
+    Ind-htpy-equiv e =
+      is-identity-system-is-torsorial-family-of-types e
+        ( refl-htpy-equiv e)
+        ( is-contr-total-htpy-equiv e)
+
+  ind-htpy-equiv :
+    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
+    P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
+  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
+
+  compute-ind-htpy-equiv :
+    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
+    (p : P e (refl-htpy-equiv e)) →
+    ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
+  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```

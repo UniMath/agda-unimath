@@ -118,6 +118,17 @@ is-prop-is-transitive-Rel-Prop R =
                 ( is-prop-function-type (is-prop-type-Rel-Prop R x z)))))
 ```
 
+### Morphisms of binary relations
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  hom-Rel : Rel l2 A → Rel l3 A → UU (l1 ⊔ l2 ⊔ l3)
+  hom-Rel R S = (x y : A) → R x y → S x y
+```
+
 ## Properties
 
 ### Characterization of equality of binary relations

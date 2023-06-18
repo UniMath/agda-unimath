@@ -23,25 +23,29 @@ open import foundation-core.transport
 
 ## Idea
 
-A unary identity system on a type `A` equipped with a point `a : A` consists of
+A **(unary) identity system** on a type `A` equipped with a point `a : A` consists of
 a type family `B` over `A` equipped with a point `b : B a` that satisfies an
-induction principle analogous to the induction principle of the identity type at
-`a`.
+induction principle analogous to the induction principle of the [identity type](foundation.identity-types.md) at
+`a`. The [dependent universal property of identity types](foundation.universal-property-identity-types.md) also follows for identity systems.
+
+## Definitions
 
 ```agda
 module _
   {l1 l2 : Level} (l : Level) {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
   where
 
-  IND-identity-system : UU (l1 ⊔ l2 ⊔ lsuc l)
-  IND-identity-system =
+  is-identity-system : UU (l1 ⊔ l2 ⊔ lsuc l)
+  is-identity-system =
     ( P : (x : A) (y : B x) → UU l) →
       section (λ (h : (x : A) (y : B x) → P x y) → h a b)
 ```
 
 ## Properties
 
-### A type family over `A` is an identity system if and only if it is equivalent to the identity type
+### A type family over `A` is an identity system if and only if its total space is contractible
+
+In [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md) we will start calling type families with contractible total space torsorial.
 
 ```agda
 module _
@@ -49,36 +53,36 @@ module _
   where
 
   abstract
-    Ind-identity-system :
-      (is-contr-AB : is-contr (Σ A B)) →
-      {l : Level} → IND-identity-system l B a b
-    pr1 (Ind-identity-system is-contr-AB P) p x y =
+    is-identity-system-is-torsorial-family-of-types :
+      (H : is-contr (Σ A B)) →
+      {l : Level} → is-identity-system l B a b
+    pr1 (is-identity-system-is-torsorial-family-of-types H P) p x y =
       tr
         ( fam-Σ P)
-        ( eq-is-contr is-contr-AB)
+        ( eq-is-contr H)
         ( p)
-    pr2 (Ind-identity-system is-contr-AB P) p =
+    pr2 (is-identity-system-is-torsorial-family-of-types H P) p =
       ap
         ( λ t → tr (fam-Σ P) t p)
         ( eq-is-contr'
-          ( is-prop-is-contr is-contr-AB (pair a b) (pair a b))
-          ( eq-is-contr is-contr-AB)
+          ( is-prop-is-contr H (pair a b) (pair a b))
+          ( eq-is-contr H)
           ( refl))
 
   abstract
-    is-contr-total-space-IND-identity-system :
-      ({l : Level} → IND-identity-system l B a b) → is-contr (Σ A B)
-    pr1 (pr1 (is-contr-total-space-IND-identity-system ind)) = a
-    pr2 (pr1 (is-contr-total-space-IND-identity-system ind)) = b
-    pr2 (is-contr-total-space-IND-identity-system ind) (pair x y) =
-      pr1 (ind (λ x' y' → (pair a b) ＝ (pair x' y'))) refl x y
+    is-torsorial-family-of-types-is-identity-system :
+      ({l : Level} → is-identity-system l B a b) → is-contr (Σ A B)
+    pr1 (pr1 (is-torsorial-family-of-types-is-identity-system H)) = a
+    pr2 (pr1 (is-torsorial-family-of-types-is-identity-system H)) = b
+    pr2 (is-torsorial-family-of-types-is-identity-system H) (pair x y) =
+      pr1 (H (λ x' y' → (pair a b) ＝ (pair x' y'))) refl x y
 
   abstract
-    fundamental-theorem-id-IND-identity-system :
-      ({l : Level} → IND-identity-system l B a b) →
+    fundamental-theorem-id-is-identity-system :
+      ({l : Level} → is-identity-system l B a b) →
       (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
-    fundamental-theorem-id-IND-identity-system ind f =
+    fundamental-theorem-id-is-identity-system H f =
       fundamental-theorem-id
-        ( is-contr-total-space-IND-identity-system ind)
+        ( is-torsorial-family-of-types-is-identity-system H)
         ( f)
 ```
