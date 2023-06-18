@@ -165,6 +165,9 @@ explanations, allows readers to gain a conceptual understanding of the code's
 purpose, and helps towards the goal of `agda-unimath` library to be an
 informative resource of formalized mathematics from a univalent point of view.
 
+Note that for consistency across the library, we prefer the use of US English in
+comments and other explanatory or introductory texts.
+
 ## Modules in the agda-unimath library
 
 Modules play an important role in structuring Agda code. They allow us to group
@@ -243,6 +246,7 @@ Here is a list of our naming conventions:
 
 - Names are unique; we steer clear of namespace overloading.
 - Names should accurately convey the concept of its construction.
+- We use US-English spelling of words in names.
 - Important concepts can be capitalized. Usually, these are categories like
   `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`,
   `Precategory`, `Category`, `Directed-Graph`, `Undirected-Graph`, and so on.
