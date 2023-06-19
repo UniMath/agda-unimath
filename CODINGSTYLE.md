@@ -73,7 +73,7 @@ project.
   definitions maximally applicable. Each assumed type or type family is assigned
   its own universe level.
 
-- **Reuse of Definitions**: We advocate for the reuse of existing constructions
+- **Reuse of definitions**: We advocate for the reuse of existing constructions
   in both type specifications and definition bodies. This not only helps
   maintain naming consistency, but also highlights the correlation between
   current and prior definitions, while keeping our code concise and to the
