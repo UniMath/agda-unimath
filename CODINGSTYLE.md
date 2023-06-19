@@ -10,23 +10,21 @@ tools for us to shape and nurture this resource. They ensure that the formalized
 definitions are clean and focused, and ready for reuse across the library,
 thereby weaving each contribution into a bigger tapestry.
 
-At the heart of every successful project lies clarity and readability. Our style
-guide aims to serve as a compass, guiding contributors towards creating code
-that not only fulfills its purpose but is also easy to comprehend. If you
-stumble upon a guideline that seems to undermine the code's readability, we
-encourage you to bring it to our attention. If you have any questions or need
-clarification, please don't hesitate to ask. We're all here to learn, grow, and
-contribute to this ambitious project together. We are always open to refining
-our guide and our code to better serve our community.
+Conceptual clarity and readability are the core values of our formalization
+project. This style guide aims to help contributors write code that is both
+functional and understandable, as well as easily maintainable. Please reach out
+to us if you have any questions or remarks about the `agda-unimath` style, or
+need any help getting started with your formalization project. Our code, and
+also this guide, are open to refinement to best support our community and the
+project's goals.
 
 ## Refactoring conventions
 
 The `agda-unimath` library is a comprehensive collection of formalized
-mathematics, spanning a broad range of mathematical fields. All fields of
-mathematics are inherently interlinked, and we leverage this in our
-formalization process.
+mathematics spanning a broad range of subjects. All fields of mathematics are
+inherently interlinked, which we leverage in our formalization process.
 
-One critical aspect of maintaining such a vast codebase lies in efficient and
+One critical aspect of maintaining such a large codebase lies in efficient and
 strategic refactoring of our code into small, reusable entries. In line with
 this approach, we aim to encapsulate every bit of reusable logic or computation
 into its own independent definition.
@@ -40,24 +38,25 @@ Here are the benefits of this approach:
   efficiency.
 - **Cleanliness**: By separating reusable logic from proof constructions, we
   keep our proofs clean and focus only on the essential parts of the argument.
-- **Demonstrability**: Well-refactored code serves as a practical guide on how
+- **Demonstrability**: Well-structured code serves as a practical guide on how
   to use prior parts of the library in the current setting or in new
   definitions.
 - **Maintainability**: When logic is broken down into separate, reusable pieces,
   it becomes easier to manage and maintain the codebase. Constructions that are
-  broken down into small definitions are much easier to understand.
+  broken down into small definitions are much easier to understand. This also
+  makes the project more scalable.
 - **Reliability**: While formally verified code is guaranteed to be "correct" in
   terms of its internal logic, it doesn't necessarily ensure that a mathematical
-  concept is accurately modeled within Agda. By reusing existing implementations
-  in manners that mirror the expectations of mathematicians, and by tightly
-  integrating them with the rest of the library, we create more opportunities to
-  test and confirm the fidelity of these implementations. This iterative testing
-  and refinement process bolsters confidence in their correctness and the
+  concept is accurately modeled within Agda. By proving properties, reusing
+  existing implementations in manners that mirror the expectations of
+  mathematicians, and by tightly integrating them with the rest of the library,
+  we create more opportunities to use and confirm the fidelity of these
+  implementations. This process bolsters confidence in their correctness and the
   overall reliability of the library.
 
 In essence, our refactoring conventions are guided by the goal of ensuring that
-our code remains as conceptually clear and as effective as possible. Finally, a
-maintainable codebase is a welcoming codebase. By ensuring that the
+our code remains as conceptually clear and as understandable as possible.
+Finally, a maintainable codebase is a welcoming codebase. By ensuring that the
 `agda-unimath` code is easy to understand and navigate, new contributors can
 more readily participate in the project. This is crucial for the growth and
 dynamism of the `agda-unimath` community. It allows a diverse group of
@@ -70,45 +69,50 @@ project.
 
 ## Guidelines for definitions in the `agda-unimath` library
 
-- **Universe Polymorphism**: We make use of universe polymorphism to to make our
+- **Universe polymorphism**: We make use of universe polymorphism to make our
   definitions maximally applicable. Each assumed type or type family is assigned
-  its own universe level, catering to a wide range of mathematical theories.
-- **Reuse of Definitions**: We advocate for the maximal use of existing
-  definitions in both type specifications and definition bodies. This not only
-  helps maintain naming consistency, but also highlights the correlation between
+  its own universe level.
+
+- **Reuse of Definitions**: We advocate for the reuse of existing constructions
+  in both type specifications and definition bodies. This not only helps
+  maintain naming consistency, but also highlights the correlation between
   current and prior definitions, while keeping our code concise and to the
   point.
+
 - **Comprehensive infrastructure for key concepts**: To further elucidate the
-  usage and the scope of each concept in the library, we often invest in
-  creating comprehensive infrastructure around it. This approach not only
-  clarifies the intent behind the definition but also helps keeping a consisting
-  naming scheme by providing names for frequently used projections and other
-  readily inferrable definitions. The emphasis on infrastructure enhances the
-  library's maintainability since modifications to well-supported definitions
-  can be executed more easily than those lacking robust infrastructure. This is
-  another way we endeavor to ensure the clarity, resilience, and continual
-  evolution of our codebase. Good examples of files where infrastructure is
-  well-developed include [`group-theory.groups`](group-theory.groups.md) and
+  usage and scope of each concept in the library, we often invest in building
+  comprehensive infrastructure around it. This approach not only clarifies the
+  intent behind the definition but also helps keeping a consistent naming scheme
+  by providing names for frequently used projections and other readily
+  inferrable definitions. The emphasis on infrastructure enhances the library's
+  maintainability since modifications to well-supported definitions can be
+  executed more easily than those lacking robust infrastructure. This is another
+  way we endeavor to ensure the clarity, resilience, and continual evolution of
+  our codebase. Good examples of files where infrastructure is well-developed
+  include [`group-theory.groups`](group-theory.groups.md) and
   [`graph-theory.undirected-graphs`](graph-theory.undirected-graphs.md).
-- **Implicit Arguments**: If an argument can be inferred in most use cases, make
+
+- **Implicit arguments**: If an argument can be inferred in most use cases, make
   it implicit.
-- **Use of Anonymous Modules**: If several arguments are commonly used across
+
+- **Use of anonymous modules**: If several arguments are commonly used across
   different proofs, extract them into an anonymous module. This helps keep type
   specifications brief and ensures consistency in the variable ordering among
   related definitions.
-- **Use of `where` Blocks**: While `where` blocks are permissible, their use is
+
+- **Use of `where` blocks**: While `where` blocks are permissible, their use is
   generally discouraged as their content cannot be reused outside the main
-  definition. This contradicts our objective of refactoring the library into
+  definition. This contradicts our objective of organizing the library into
   compact, reusable components. If a `where` block is deemed necessary, follow
   these conventions:
 
-  - Opt for `where` blocks over the `let` construction.
-  - Indent `where` blocks by two spaces and align their content with the
-    `where`.
+  - Opt for `where` blocks over `let` expressions.
+  - Indent the `where` keyword by two spaces and align their content with the
+    `where` keyword.
   - Position the `where` keyword on the line beneath the main proof, indented by
     two spaces.
   - Ensure each term has a type, and place all terms on lines following the
-    `where`. For instance:
+    `where` keyword. For instance:
 
   ```agda
   statement : Statement
@@ -163,11 +167,11 @@ module _
 
 The use of descriptive section headers, coupled with comprehensive markdown
 explanations, allows readers to gain a conceptual understanding of the code's
-purpose, and helps towards the goal of `agda-unimath` library to be an
-informative resource of formalized mathematics from a univalent point of view.
+purpose, and contributes towards making `agda-unimath` an informative resource
+of formalized mathematics from a univalent point of view.
 
-Note that for consistency across the library, we prefer the use of US English in
-comments and other explanatory or introductory texts.
+Note that for consistency across the library, our convention is to use US
+English in comments and other explanatory or introductory texts.
 
 ## Modules in the `agda-unimath` library
 
@@ -177,11 +181,12 @@ maintainability of our codebase. Here are our guidelines for using modules in
 the `agda-unimath` library:
 
 - In Agda, every file should start by opening a module with the same name as the
-  file. Generally, this should be the only named module in the file.
-- We encourage the use of anonymous modules for grouping constructions that
-  share a common theme or common parameters. This not only improves the
-  organization of the code but also enhances readability. Here is an example
-  from [`graph-theory.directed-graphs`](graph-theory.directed-graphs.md):
+  file. Generally, this should be the only named module in the file. Any
+  additional modules should either be anonymous, or they should occur in the
+  form of `record` or `data` definitions.
+- However, we encourage the use of anonymous modules for grouping constructions
+  that share a common theme or common parameters. Here is an example from
+  [`graph-theory.directed-graphs`](graph-theory.directed-graphs.md):
 
   ```agda
   Directed-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
@@ -198,25 +203,21 @@ the `agda-unimath` library:
     edge-Directed-Graph = pr2 G
   ```
 
-- Generally, a file should contain only one named module. Any additional modules
-  should either be anonymous, or they should occur in the form of `record` or
-  `data` definitions.
 - We recommend leaving a single blank line after a module declaration for
   clarity and readability.
 - Module variables should be declared on a new line, with an indentation level
-  increase of two spaces. If the variables cannot fit on a single line, feel
-  free to declare them over multiple lines, while keeping the logical groupings
-  intact.
+  increase of two spaces. If the variables cannot fit on a single line, they can
+  be declared over multiple lines.
 - The `where` keyword should be positioned on a new line following the variable
   declarations, and it should also adopt the same two-space indentation level
   increase.
-- It is completely okay to use nested modules when necessary. However, we
-  recommend using them carefully and only when really needed. With nested
-  modules it can sometimes be harder for readers as well as maintainers to keep
-  track of assumptions. By carefully considering when to use nested modules, you
-  can create code that is more readable and easier to maintain.
+- If necessary, nested modules may be used. However, we recommend using them
+  carefully and only when really needed. With nested modules it can sometimes be
+  harder for readers as well as maintainers to keep track of assumptions.
 - Module imports should occur directly after the file's named module declaration
-  and should be listed in alphabetical order to simplify navigation.
+  and should be listed in alphabetical order to simplify navigation. Note that
+  our `pre-commit` hooks automatically organize the imports; the user does not
+  need to sort them by hand.
 - The library doesn't use
   [variables](https://agda.readthedocs.io/en/v2.6.3/language/generalization-of-declared-variables.html)
   at the moment. All variables are declared either as parameters of an anonymous
@@ -235,32 +236,35 @@ We also reflect the type of hypotheses used in the construction within the name.
 However, the crux of a name primarily describes the type of the constructed
 term; descriptions of the hypotheses follow this. For instance,
 `is-equiv-is-contr-map` is a function of type `is-contr-map f → is-equiv f`,
-where `f` is a given function. The term `is-equiv-is-contr-map H` places the
-descriptor `is-contr-map` right next to the variable `H` it refers to.
+where `f` is a given function. Notice how the term `is-equiv-is-contr-map H`
+places the descriptor `is-contr-map` right next to the variable `H` it refers
+to.
 
 While abbreviations might seem like a good way to shorten names, we use them
-sparingly. They might save a bit of time for the author, but in the grand scheme
-of things, it may compromise readability and maintainability, especially for
-newcomers and maintainers. We aim for clarity, not brevity.
+sparingly. They might save a couple of keystrokes for the author, but in the
+grand scheme of things, they will likely compromise readability and
+maintainability, especially for newcomers and maintainers. We aim for clarity,
+not brevity.
 
 Here is a list of our naming conventions:
 
 - Names are unique; we steer clear of namespace overloading.
 - Names should accurately convey the concept of its construction.
-- We use US-English spelling of words in names.
+- We use US English spelling of words in names.
 - Important concepts can be capitalized. Usually, these are categories like
   `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`,
   `Precategory`, `Category`, `Directed-Graph`, `Undirected-Graph`, and so on.
 - As a general rule of thumb, names should start out with an all lowercase
   portion with words separated by hyphens, and may have a capitalized portion at
   the end that describes which larger mathematical framework the definition
-  takes place in.
+  takes place in -- for instance, if it is constructed internally to a certain
+  subuniverse or category of mathematical objects.
 - The start of a name describes the object that is being constructed. For some
   theorems, the latter part of a name describes the hypotheses.
 - Names never reference variables.
 - We use Unicode symbols sparingly and only when they align with established
   mathematical practice.
-- Just as we do with abbreviations, we use symbols sparingly in names.
+- Just as we do with abbreviations, we use special symbols sparingly in names.
 - If a symbol is not available, we describe the concept concisely in words.
 - We prioritize the readability of the code and avoid subtly different
   variations of the same symbol. An important exception is the use of the
@@ -282,7 +286,7 @@ the story. Here's how we handle indentation and line breaks in the
     potentially followed by one of the symbols `;`, `:`, `=`, or `→`.
 - The contents of a top-level module have zero indentation. For every subsequent
   nested scope, we add an extra two spaces of indentation, so our indentation
-  levels always multiples of two.
+  levels always be a multiple of two.
 - We always declare the variables of a module on a new line, with the
   indentation level increased by two spaces. If the variable declarations
   themselves spill over the 80 character line limit, we break them up with line
@@ -366,13 +370,17 @@ the story. Here's how we handle indentation and line breaks in the
   glance, and easier to work with in subsequent code.
 - We encourage limiting the depth increase of indentation levels to two spaces.
   This practice tends to keep our code reader-friendly, especially on smaller
-  screens, by keeping more code on the left-hand side of the screen.
+  screens, by keeping more code on the left-hand side of the screen. In
+  particular, we discourage the use of indentation for the sole purpose of
+  aligning code to make it "neat". In our experience, this hurts the
+  maintainability of the code, and you may find that it violates some of our
+  other conventions as well.
 - The use of `where` blocks in definitions is perfectly fine but keeping them
   short and specific to the definition of the current object is beneficial. Note
   that definitions made in a `where` block in a definition cannot be reused
-  outside of that definition. Finding a way to factor out small lemmas into
+  outside of that definition, and finding a way to factor out small lemmas into
   reusable definitions leads to more readable, maintainable, and refactorable
-  code, and it can even help Agda's verification process run smoother.
+  code. It can even help Agda's verification process run smoother.
 - Record types aren't frequently used in the `agda-unimath` library. This is
   mostly because they make it more complex to characterize their identity type.
   However, when the identity type isn't as critical, feel free to use record
@@ -384,6 +392,7 @@ the story. Here's how we handle indentation and line breaks in the
   We therefore prefer naming the projections. When a type of the form `Σ A B` is
   given a name, naming its projections too can enhance readability and will
   provide more informative responses when jumping to the definition.
+  Furthermore, it makes it easier to change the definition later on.
 - Lastly, we recommend not naming constructions after infix notation of
   operations included in them. Preferring primary prefix notation over infix
   notation can help keep our code consistent. For example, it's preferred to use

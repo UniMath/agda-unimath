@@ -18,8 +18,8 @@ is designed to work towards this goal, and we welcome contributions to the
 library within any topic in mathematics.
 
 The `agda-unimath` library is compatible with Agda 2.6.3 and can be compiled by
-running `make check` from the root directory of the repository. A complete list
-of all Agda modules in the library can be found [here](everything.md).
+running `make check` from the root directory of the repository. Learn more about
+using the library locally in our [installation guide](HOWTO-INSTALL.md).
 
 ## Participating in the Project
 
@@ -32,7 +32,7 @@ TypeTopology communities, where we are more than happy to get you started.
 To contribute, fork the library and create a separate branch for your work.
 Follow the instructions in our [installation guide](HOWTO-INSTALL.md) to set up
 the project. After you have completed your formalization, submit it via a pull
-request. We will review your contribution and, if suitable, incorporate it into
+request. We will review your contribution and work towards incorporating it into
 the `agda-unimath` library.
 
 ## Citing the Agda-UniMath Library
