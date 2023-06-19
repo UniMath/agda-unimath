@@ -100,7 +100,7 @@ right-unit-law-mul-fraction-ℤ (n , d , p) =
     by ap-mul-ℤ {n} refl (inv (right-unit-law-mul-ℤ d))
 ```
 
-### multiplication is associative
+### Multiplication is associative
 
 ```agda
 associative-add-fraction-ℤ :
@@ -115,7 +115,7 @@ associative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
   by  ap-mul-ℤ (associative-mul-ℤ nx ny nz) (inv (associative-mul-ℤ dx dy dz))
  ```
 
-### Addition is commutative
+### Multiplication is commutative
 
 ```agda
 commutative-mul-fraction-ℤ :
