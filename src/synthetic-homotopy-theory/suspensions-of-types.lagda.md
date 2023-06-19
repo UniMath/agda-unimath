@@ -211,7 +211,7 @@ module _
       P c' H)
   ind-htpy-suspension-structure P =
     pr1
-      ( is-identity-system-is-torsorial-family-of-types
+      ( is-identity-system-is-torsorial
         ( c)
         ( refl-htpy-suspension-structure)
         ( is-contr-equiv

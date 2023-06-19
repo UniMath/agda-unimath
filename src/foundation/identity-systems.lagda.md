@@ -1,6 +1,8 @@
 # Identity systems
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module foundation.identity-systems where
 ```
 
@@ -32,15 +34,22 @@ also follows for identity systems.
 
 ## Definitions
 
+### The predicate of being an identity system
+
 ```agda
+ev-refl-identity-system :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {a : A} (b : B a)
+  {P : (x : A) (y : B x) → UU l3} →
+  ((x : A) (y : B x) → P x y) → P a b
+ev-refl-identity-system b f = f _ b
+
 module _
   {l1 l2 : Level} (l : Level) {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
   where
 
   is-identity-system : UU (l1 ⊔ l2 ⊔ lsuc l)
   is-identity-system =
-    ( P : (x : A) (y : B x) → UU l) →
-      section (λ (h : (x : A) (y : B x) → P x y) → h a b)
+    (P : (x : A) (y : B x) → UU l) → section (ev-refl-identity-system b {P})
 ```
 
 ## Properties
@@ -56,15 +65,15 @@ module _
   where
 
   abstract
-    is-identity-system-is-torsorial-family-of-types :
+    is-identity-system-is-torsorial :
       (H : is-contr (Σ A B)) →
       {l : Level} → is-identity-system l B a b
-    pr1 (is-identity-system-is-torsorial-family-of-types H P) p x y =
+    pr1 (is-identity-system-is-torsorial H P) p x y =
       tr
         ( fam-Σ P)
         ( eq-is-contr H)
         ( p)
-    pr2 (is-identity-system-is-torsorial-family-of-types H P) p =
+    pr2 (is-identity-system-is-torsorial H P) p =
       ap
         ( λ t → tr (fam-Σ P) t p)
         ( eq-is-contr'
@@ -73,11 +82,11 @@ module _
           ( refl))
 
   abstract
-    is-torsorial-family-of-types-is-identity-system :
+    is-torsorial-is-identity-system :
       ({l : Level} → is-identity-system l B a b) → is-contr (Σ A B)
-    pr1 (pr1 (is-torsorial-family-of-types-is-identity-system H)) = a
-    pr2 (pr1 (is-torsorial-family-of-types-is-identity-system H)) = b
-    pr2 (is-torsorial-family-of-types-is-identity-system H) (pair x y) =
+    pr1 (pr1 (is-torsorial-is-identity-system H)) = a
+    pr2 (pr1 (is-torsorial-is-identity-system H)) = b
+    pr2 (is-torsorial-is-identity-system H) (pair x y) =
       pr1 (H (λ x' y' → (pair a b) ＝ (pair x' y'))) refl x y
 
   abstract
@@ -86,6 +95,6 @@ module _
       (f : (x : A) → a ＝ x → B x) → (x : A) → is-equiv (f x)
     fundamental-theorem-id-is-identity-system H f =
       fundamental-theorem-id
-        ( is-torsorial-family-of-types-is-identity-system H)
+        ( is-torsorial-is-identity-system H)
         ( f)
 ```

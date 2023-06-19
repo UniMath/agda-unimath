@@ -178,7 +178,7 @@ module _
       (F : (B : type-subuniverse P) → equiv-subuniverse P A B → UU l3) →
       section (ev-id-equiv-subuniverse {F})
     is-identity-system-equiv-subuniverse =
-      is-identity-system-is-torsorial-family-of-types A id-equiv
+      is-identity-system-is-torsorial A id-equiv
         ( is-contr-total-equiv-subuniverse P A)
 
   ind-equiv-subuniverse :

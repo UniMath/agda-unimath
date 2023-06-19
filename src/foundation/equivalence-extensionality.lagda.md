@@ -104,7 +104,7 @@ module _
         ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
           h e (refl-htpy-equiv e))
     Ind-htpy-equiv e =
-      is-identity-system-is-torsorial-family-of-types e
+      is-identity-system-is-torsorial e
         ( refl-htpy-equiv e)
         ( is-contr-total-htpy-equiv e)
 

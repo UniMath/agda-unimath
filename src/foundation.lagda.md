@@ -291,6 +291,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-fiber-products public
+open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public
 open import foundation.universal-property-maybe public
