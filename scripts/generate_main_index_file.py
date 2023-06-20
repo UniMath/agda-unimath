@@ -79,7 +79,7 @@ def generate_index(root, header):
 summary_template = """
 # SUMMARY
 
-# Project
+# Overview
 
 - [Agda-UniMath](HOME.md)
   - [Home](HOME.md)
@@ -88,15 +88,15 @@ summary_template = """
     - [Contributors](CONTRIBUTORS.md)
     - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
     - [Projects using Agda-Unimath](USERS.md)
-  - [How-to](HOWTO-INSTALL.md)
-    - [Install](HOWTO-INSTALL.md)
+    - [Grant acknowledgements](grant-acknowledgements.md)
+  - [Guides](CODINGSTYLE.md)
+    - [Install the library](HOWTO-INSTALL.md)
     - [Cite the library](CITATION.cff)
-  - [Guidelines](CODINGSTYLE.md)
+    - [Design principles](DESIGN-PRINCIPLES.md)
     - [Structure your file](FILE-CONVENTIONS.md)
         - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
     - [Library coding style](CODINGSTYLE.md)
-    - [Design principles](DESIGN-PRINCIPLES.md)
-  - [Everything](everything.md)
+    - [Prepare a pull request](pull-requests.md)
 
 {module_index}
 """
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     root = 'src'
 
     summary_path = 'SUMMARY.md'
-    index_header = '# Formalisation in Agda'
+    index_header = '# Formalization pages'
 
     index_content, status = generate_index(root, index_header)
     if status == 0:
