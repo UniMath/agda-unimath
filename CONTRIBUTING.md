@@ -1,4 +1,4 @@
-# Preparing Pull Requests
+# Contributing to the library
 
 We employ several tools to maintain our library. This guide will walk you
 through their usage and help ensure your contributions meet our standards.

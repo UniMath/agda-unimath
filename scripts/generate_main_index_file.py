@@ -88,15 +88,15 @@ summary_template = """
     - [Contributors](CONTRIBUTORS.md)
     - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
     - [Projects using Agda-Unimath](USERS.md)
-    - [Grant acknowledgements](grant-acknowledgements.md)
+    - [Grant acknowledgements](GRANT-ACKNOWLEDGEMENTS.md)
   - [Guides](HOWTO-INSTALL.md)
     - [Installing the library](HOWTO-INSTALL.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
-    - [Contributing to the library](contributing.md)
+    - [Contributing to the library](CONTRIBUTING.md)
     - [Structuring your file](FILE-CONVENTIONS.md)
         - [File template](TEMPLATE.lagda.md)
     - [The library coding style](CODINGSTYLE.md)
-    - [Citing the library](cite-this-library.md)
+    - [Citing the library](CITE-THIS-LIBRARY.md)
 
 {module_index}
 """

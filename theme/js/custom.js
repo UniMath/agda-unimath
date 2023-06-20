@@ -4,10 +4,13 @@ if (link) {
   var filename = link.getAttribute("href");
   const fileList = [
     "CITATION.cff",
+    "CITE-THIS-LIBRARY.md",  
     "CODINGSTYLE.md",
+    "CONTRIBUTING.md",
     "CONTRIBUTORS.md",
-    "FILE-CONVENTIONS.md",
     "DESIGN-PRINCIPLES.md",
+    "FILE-CONVENTIONS.md",
+    "GRANT-ACKNOWLEDGEMENTS.md",
     "HOME.md",
     "HOWTO-INSTALL.md",
     "LICENSE.md",
