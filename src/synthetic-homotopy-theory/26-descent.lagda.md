@@ -1,4 +1,4 @@
-# Formalisation of the Symmetry Book - 26 descent
+# formalization of the Symmetry Book - 26 descent
 
 ```agda
 module synthetic-homotopy-theory.26-descent where

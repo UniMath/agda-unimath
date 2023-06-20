@@ -15,33 +15,34 @@ makes use of several postulates.
    levels below `ω`, so a lot of the theory developed in this library does not
    apply to universe level `ω` and beyond.
 3. The **function extensionality axiom** is postulated in
-   [`foundation-core.function-extensionality`](https://unimath.github.io/agda-unimath/foundation-core.function-extensionality.html).
+   [`foundation.function-extensionality`](foundation.function-extensionality.md).
 4. The **univalence axiom** is postulated in
-   [`foundation-core.univalence`](https://unimath.github.io/agda-unimath/foundation-core.univalence.html).
+   [`foundation.univalence`](foundation.univalence.md).
 5. The type theoretic **replacement axiom** is postulated in
-   [`foundation.replacement`](https://unimath.github.io/agda-unimath/foundation.replacement.html)
+   [`foundation.replacement`](foundation.replacement.md)
 6. The **truncation operations** are postulated in
-   [`foundation.truncations`](https://unimath.github.io/agda-unimath/foundation.truncations.html)
+   [`foundation.truncations`](foundation.truncations.md)
 7. The **interval** is postulated in
-   [`synthetic-homotopy-theory.interval-type`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.interval-type.html)
+   [`synthetic-homotopy-theory.interval-type`](synthetic-homotopy-theory.interval-type.md)
 8. The **circle** is postulated in
-   [`synthetic-homotopy-theory.circle`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.circle.html)
+   [`synthetic-homotopy-theory.circle`](synthetic-homotopy-theory.circle.md)
 9. **Pushouts** are postulated in
-   [`synthetic-homotopy-theory.pushouts`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.pushouts.html)
-10. **Agda built-in types** are postulated in
-    [`primitives`](https://unimath.github.io/agda-unimath/primitives.html) and
-    in [`reflection`](https://unimath.github.io/agda-unimath/reflection.html).
+   [`synthetic-homotopy-theory.pushouts`](synthetic-homotopy-theory.pushouts.md)
+10. Various **Agda built-in types** are postulated in
+    [`primitives`](primitives.md) and in [`reflection`](reflection.md).
 
 Note that there is some redundancy in the postulates we assume. For example, the
-[univalence axiom implies function extensionality](https://unimath.github.io/agda-unimath/foundation.univalence-implies-function-extensionality.html),
+[univalence axiom implies function extensionality](foundation.univalence-implies-function-extensionality.md),
 but we still assume function extensionality separately. Furthermore,
 [the interval type is contractible](synthetic-homotopy-theory.interval-type.md),
 and the higher inductive types in the `agda-unimath` library only have
 computation rules up to identification, so there is no need at all to postulate
-it. The circle can be constructed as the type of `ℤ`-torsors, and the
-replacement axiom can be used to prove there is a circle in `UU lzero`.
-Additionally, the replacement axiom can be proven by the join construction,
-which only uses pushouts.
+it. The [circle](synthetic-homotopy-theory.circle.md) can be constructed as the
+type of `ℤ`-[torsors](group-theory.torsors.md), and the
+[replacement axiom](foundation.replacement.md) can be used to prove there is a
+circle in `UU lzero`. Additionally, the replacement axiom can be proven by the
+join construction, which only uses
+[pushouts](synthetic-homotopy-theory.pushouts.md).
 
 With these postulates, the `agda-unimath` library is a library for constructive
 univalent mathematics. Mathematics for which the law of excluded middle or the
@@ -51,12 +52,12 @@ and would welcome contributions in that direction.
 
 ## Library structure
 
-1. The source code of the formalisation can be found in the folder `src`.
+1. The source code of the formalization can be found in the folder `src`.
 2. The library is organized by mathematical subject, with one folder per
    subject. For each folder, there is also an Agda file of the same name, which
    lists the files in that folder by importing them publicly.
-3. The `agda-unimath` library aims to be an informative resource for formalised
-   mathematics. We therefore formalise in literate Agda using markdown, treating
+3. The `agda-unimath` library aims to be an informative resource for formalized
+   mathematics. We therefore formalize in literate Agda using markdown, treating
    files as pages of a mathematics wiki.
 4. Each file is focused on a single topic, typically introducing one new concept
    and establishing its basic properties, or proving a central theorem and

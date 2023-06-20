@@ -24,7 +24,7 @@ accepted mathematical term, such as `poset`.
 
 ### The file format is literate Agda with markdown
 
-Files that are part of the formalisation should be in literate Agda using
+Files that are part of the formalization should be in literate Agda using
 markdown. The file extension is `.lagda.md`.
 
 ### File header and module declaration

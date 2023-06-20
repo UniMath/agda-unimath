@@ -1,4 +1,4 @@
-name: Formalisation website
+name: formalization website
 on:
   # To run this workflow manually
   workflow_dispatch:
@@ -51,8 +51,8 @@ jobs:
           agda-version: ${{ matrix.agda }}
 
       - uses: actions/cache/restore@v3
-        id: cache-agda-formalisation
-        name: Restore Agda formalisation cache
+        id: cache-agda-formalization
+        name: Restore Agda formalization cache
         with:
           path: master/_build
           key:
