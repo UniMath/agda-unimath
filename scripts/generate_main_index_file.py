@@ -81,7 +81,7 @@ summary_template = """
 
 # Overview
 
-- [Agda-UniMath](HOME.md)
+- [Overview](HOME.md)
   - [Home](HOME.md)
   - [Community](CONTRIBUTORS.md)
     - [Maintainers](MAINTAINERS.md)
@@ -92,11 +92,11 @@ summary_template = """
   - [Guides](HOWTO-INSTALL.md)
     - [Installing the library](HOWTO-INSTALL.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
+    - [Contributing to the library](contributing.md)
     - [Structuring your file](FILE-CONVENTIONS.md)
-        - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
+        - [File template](TEMPLATE.lagda.md)
     - [The library coding style](CODINGSTYLE.md)
-    - [Preparing a pull request](pull-requests.md)
-    - [Citing the library](CITATION.cff)
+    - [Citing the library](cite-this-library.md)
 
 {module_index}
 """
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     root = 'src'
 
     summary_path = 'SUMMARY.md'
-    index_header = '# Formalization pages'
+    index_header = '# The agda-unimath library'
 
     index_content, status = generate_index(root, index_header)
     if status == 0:

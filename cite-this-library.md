@@ -1,5 +1,8 @@
 # Citing the `agda-unimath` library
 
+If you wish to reference our library in your work, please use the following
+BibTeX entry:
+
 ```tex
 @software{agda-unimath,
 author = {Rijke, Egbert and Bonnevier, Elisabeth and Prieto-Cubides, Jonathan and Bakke, Fredrik and {others}},

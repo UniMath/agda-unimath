@@ -1,4 +1,4 @@
-# Univalent mathematics in Agda
+# The agda-unimath library
 
 Welcome to the `agda-unimath` project. This is a community-driven effort aimed
 at formalizing mathematics from a univalent point of view using the dependently
@@ -34,20 +34,6 @@ Follow the instructions in our [installation guide](HOWTO-INSTALL.md) to set up
 the project. After you have completed your formalization, submit it via a pull
 request. We will review your contribution and work towards incorporating it into
 the `agda-unimath` library.
-
-## Citing the Agda-UniMath Library
-
-If you wish to reference our library in your work, please use the following
-BibTeX entry:
-
-```text
-@software{agda-unimath,
-  author = {Rijke, Egbert and Bonnevier, Elisabeth and Prieto-Cubides, Jonathan and Bakke, Fredrik and {others}},
-  license = {MIT},
-  title = {{Univalent mathematics in Agda}},
-  url = {https://github.com/UniMath/agda-unimath/}
-}
-```
 
 {{#include SUMMARY.md}}
 
