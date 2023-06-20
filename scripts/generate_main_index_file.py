@@ -90,13 +90,13 @@ summary_template = """
     - [Projects using Agda-Unimath](USERS.md)
     - [Grant acknowledgements](grant-acknowledgements.md)
   - [Guides](CODINGSTYLE.md)
-    - [Install the library](HOWTO-INSTALL.md)
-    - [Cite the library](CITATION.cff)
+    - [Installing the library](HOWTO-INSTALL.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
-    - [Structure your file](FILE-CONVENTIONS.md)
+    - [Structuring your file](FILE-CONVENTIONS.md)
         - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
-    - [Library coding style](CODINGSTYLE.md)
-    - [Prepare a pull request](pull-requests.md)
+    - [The library coding style](CODINGSTYLE.md)
+    - [Preparing a pull request](pull-requests.md)
+    - [Citing the library](CITATION.cff)
 
 {module_index}
 """

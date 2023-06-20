@@ -1,4 +1,4 @@
-# INSTALL
+# Installing the library
 
 To use the `agda-unimath` library, you will need to have Agda and a code editor
 set up. This guide provides instructions for installing Agda as well as specific
