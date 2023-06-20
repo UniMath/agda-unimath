@@ -89,7 +89,7 @@ summary_template = """
     - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
     - [Projects using Agda-Unimath](USERS.md)
     - [Grant acknowledgements](grant-acknowledgements.md)
-  - [Guides](CODINGSTYLE.md)
+  - [Guides](HOWTO-INSTALL.md)
     - [Installing the library](HOWTO-INSTALL.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
     - [Structuring your file](FILE-CONVENTIONS.md)
