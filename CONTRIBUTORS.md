@@ -1,8 +1,6 @@
-
 ## Contributors
 
-We are grateful to the following people for their contributions to
-the library.
+We are grateful to the following people for their contributions to the library.
 
 - [Egbert Rijke](https://github.com/EgbertRijke)
 - [Fredrik Bakke](https://github.com/fredrik-bakke)
@@ -35,6 +33,6 @@ the library.
 - [Pierre Cagne](https://github.com/pierrecagne)
 - [Tom de Jong](https://github.com/tomdjong)
 
-Help us to improve the library by contributing to the project!
-Contributions come in many forms, please ask us if you are not sure
-how to help. We are happy to help you get started.
+Help us to improve the library by contributing to the project! Contributions
+come in many forms, please ask us if you are not sure how to help. We are happy
+to help you get started.
