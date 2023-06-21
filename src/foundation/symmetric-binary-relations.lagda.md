@@ -92,6 +92,25 @@ module _
     tr-symmetric-binary-relation p q e =
       map-equiv (equiv-tr-symmetric-binary-relation p q e)
 
+    tr-inv-symmetric-binary-relation :
+      (p q : unordered-pair A) → Eq-unordered-pair p q → R q → R p
+    tr-inv-symmetric-binary-relation p q e =
+      map-inv-equiv (equiv-tr-symmetric-binary-relation p q e)
+
+    is-section-tr-inv-symmetric-binary-relation :
+      (p q : unordered-pair A) (e : Eq-unordered-pair p q) →
+      ( tr-symmetric-binary-relation p q e ∘
+        tr-inv-symmetric-binary-relation p q e) ~ id
+    is-section-tr-inv-symmetric-binary-relation p q e =
+      is-section-map-inv-equiv (equiv-tr-symmetric-binary-relation p q e)
+
+    is-retraction-tr-inv-symmetric-binary-relation :
+      (p q : unordered-pair A) (e : Eq-unordered-pair p q) →
+      ( tr-inv-symmetric-binary-relation p q e ∘
+        tr-symmetric-binary-relation p q e) ~ id
+    is-retraction-tr-inv-symmetric-binary-relation p q e =
+      is-retraction-map-inv-equiv (equiv-tr-symmetric-binary-relation p q e)
+
     compute-refl-tr-symmetric-binary-relation :
       (p : unordered-pair A) →
       tr-symmetric-binary-relation p p (refl-Eq-unordered-pair p) ＝ id
@@ -222,17 +241,12 @@ module _
   map-inv-universal-property-symmetric-core-Rel f p s i =
     f ( element-unordered-pair p i)
       ( other-element-unordered-pair p i)
-      ( tr-symmetric-binary-relation S
-        ( p)
+      ( tr-inv-symmetric-binary-relation S
         ( standard-unordered-pair
           ( element-unordered-pair p i)
           ( other-element-unordered-pair p i))
-        ( inv-Eq-unordered-pair
-          ( standard-unordered-pair
-            ( element-unordered-pair p i)
-            ( other-element-unordered-pair p i))
-          ( p)
-          ( compute-standard-unordered-pair-element-unordered-pair p i))
+        ( p)
+        ( compute-standard-unordered-pair-element-unordered-pair p i)
         ( s))
 
   is-section-map-inv-universal-property-symmetric-core-Rel :
@@ -245,5 +259,5 @@ module _
           ( λ s →
             eq-htpy
               ( λ i →
-                {!!})))
+                {! !})))
 ```
