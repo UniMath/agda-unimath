@@ -18,16 +18,16 @@ need any help getting started with your formalization project. Our code, and
 also this guide, are open to refinement to best support our community and the
 project's goals.
 
-## Refactoring conventions
+## Code structuring conventions
 
 The `agda-unimath` library is a comprehensive collection of formalized
 mathematics spanning a broad range of subjects. All fields of mathematics are
 inherently interlinked, which we leverage in our formalization process.
 
 One critical aspect of maintaining such a large codebase lies in efficient and
-strategic refactoring of our code into small, reusable entries. In line with
-this approach, we aim to encapsulate every bit of reusable logic or computation
-into its own independent definition.
+strategic code structuring into small, reusable entries. In line with this
+approach, we aim to encapsulate every bit of reusable logic or computation into
+its own independent definition.
 
 Here are the benefits of this approach:
 
@@ -54,8 +54,8 @@ Here are the benefits of this approach:
   implementations. This process bolsters confidence in their correctness and the
   overall reliability of the library.
 
-In essence, our refactoring conventions are guided by the goal of ensuring that
-our code remains as conceptually clear and as understandable as possible.
+In essence, our code structuring conventions are guided by the goal of ensuring
+that our code remains as conceptually clear and as understandable as possible.
 Finally, a maintainable codebase is a welcoming codebase. By ensuring that the
 `agda-unimath` code is easy to understand and navigate, new contributors can
 more readily participate in the project. This is crucial for the growth and
@@ -63,9 +63,9 @@ dynamism of the `agda-unimath` community. It allows a diverse group of
 developers, each with their unique skills and perspectives, to contribute to the
 project's ongoing success.
 
-So, refactoring isn't just about "cleaning up" the code; it's a strategic
-approach to ensure the longevity, vitality, and success of the `agda-unimath`
-project.
+So, in particular, refactoring isn't just about "cleaning up" the code; it's a
+strategic endeavour to ensure the longevity, vitality, and success of the
+`agda-unimath` project.
 
 ## Guidelines for definitions in the `agda-unimath` library
 
@@ -379,8 +379,8 @@ the story. Here's how we handle indentation and line breaks in the
   short and specific to the definition of the current object is beneficial. Note
   that definitions made in a `where` block in a definition cannot be reused
   outside of that definition, and finding a way to factor out small lemmas into
-  reusable definitions leads to more readable, maintainable, and refactorable
-  code. It can even help Agda's verification process run smoother.
+  reusable definitions leads to more readable, maintainable, and also
+  refactorable code. It can even help Agda's verification process run smoother.
 - Record types aren't frequently used in the `agda-unimath` library. This is
   mostly because they make it more complex to characterize their identity type.
   However, when the identity type isn't as critical, feel free to use record
