@@ -10,8 +10,7 @@ AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --o
 AGDA ?= agda $(AGDAVERBOSE)
 TIME ?= time
 
-METAFILES :=CITATION.cff \
-			CITE-THIS-LIBRARY.md \
+METAFILES :=CITE-THIS-LIBRARY.md \
 			CODINGSTYLE.md \
 			CONTRIBUTING.md \
 			CONTRIBUTORS.md \
