@@ -34,18 +34,23 @@ Here are the benefits of this approach:
 
 - **Simplicity**: Breaking down complex structures into smaller ones simplifies
   the overall codebase, making it more accessible to new contributors.
+
 - **Reusability**: Once a particular logic or computation is formalized, it can
   be reused in multiple places, thereby avoiding redundancy and promoting
   efficiency.
+
 - **Cleanliness**: By separating reusable logic from proof constructions, we
   keep our proofs clean and focus only on the essential parts of the argument.
+
 - **Demonstrability**: Well-structured code serves as a practical guide on how
   to use prior parts of the library in the current setting or in new
   definitions.
+
 - **Maintainability**: When logic is broken down into separate, reusable pieces,
   it becomes easier to manage and maintain the codebase. Constructions that are
   broken down into small definitions are much easier to understand. This also
   makes the project more scalable.
+
 - **Reliability**: While formally verified code is guaranteed to be "correct" in
   terms of its internal logic, it doesn't necessarily ensure that a mathematical
   concept is accurately modeled within Agda. By proving properties, reusing
@@ -185,6 +190,7 @@ the `agda-unimath` library:
   file. Generally, this should be the only named module in the file. Any
   additional modules should either be anonymous, or they should occur in the
   form of `record` or `data` definitions.
+
 - However, we encourage the use of anonymous modules for grouping constructions
   that share a common theme or common parameters. Here is an example from
   [`graph-theory.directed-graphs`](graph-theory.directed-graphs.md):
@@ -206,19 +212,24 @@ the `agda-unimath` library:
 
 - We recommend leaving a single blank line after a module declaration for
   clarity and readability.
+
 - Module variables should be declared on a new line, with an indentation level
   increase of two spaces. If the variables cannot fit on a single line, they can
   be declared over multiple lines.
+
 - The `where` keyword should be positioned on a new line following the variable
   declarations, and it should also adopt the same two-space indentation level
   increase.
+
 - If necessary, nested modules may be used. However, we recommend using them
   carefully and only when really needed. With nested modules it can sometimes be
   harder for readers as well as maintainers to keep track of assumptions.
+
 - Module imports should occur directly after the file's named module declaration
   and should be listed in alphabetical order to simplify navigation. Note that
   our `pre-commit` hooks automatically organize the imports; the user does not
   need to sort them by hand.
+
 - The library doesn't use
   [variables](https://agda.readthedocs.io/en/v2.6.3/language/generalization-of-declared-variables.html)
   at the moment. All variables are declared either as parameters of an anonymous
@@ -250,23 +261,33 @@ not brevity.
 Here is a list of our naming conventions:
 
 - Names are unique; we steer clear of namespace overloading.
+
 - Names should accurately convey the concept of its construction.
+
 - We use US English spelling of words in names.
+
 - Important concepts can be capitalized. Usually, these are categories like
   `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`,
   `Precategory`, `Category`, `Directed-Graph`, `Undirected-Graph`, and so on.
+
 - As a general rule of thumb, names should start out with an all lowercase
   portion with words separated by hyphens, and may have a capitalized portion at
   the end that describes which larger mathematical framework the definition
   takes place in -- for instance, if it is constructed internally to a certain
   subuniverse or category of mathematical objects.
+
 - The start of a name describes the object that is being constructed. For some
   theorems, the latter part of a name describes the hypotheses.
+
 - Names never reference variables.
+
 - We use Unicode symbols sparingly and only when they align with established
   mathematical practice.
+
 - Just as we do with abbreviations, we use special symbols sparingly in names.
+
 - If a symbol is not available, we describe the concept concisely in words.
+
 - We prioritize the readability of the code and avoid subtly different
   variations of the same symbol. An important exception is the use of the
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
@@ -278,25 +299,6 @@ Code formatting is like punctuation in a novel - it helps readers make sense of
 the story. Here's how we handle indentation and line breaks in the
 `agda-unimath` library:
 
-- In order to improve the readability on the `agda-unimath` website, we use a
-  standard line length of 80 characters. There are only a few exceptions that
-  enable us to have names that are more than 80 characters long:
-  - Named `module` declarations
-  - `open import` statements
-  - Lines consisting of a single, possibly parenthesized (`(){}`), token that is
-    potentially followed by one of the symbols `;`, `:`, `=`, or `→`.
-- The contents of a top-level module have zero indentation. For every subsequent
-  nested scope, we add an extra two spaces of indentation, so our indentation
-  levels always be a multiple of two.
-- We always declare the variables of a module on a new line, with the
-  indentation level increased by two spaces. If the variable declarations
-  themselves spill over the 80 character line limit, we break them up with line
-  breaks while grouping the variables together logically. The `where` keyword of
-  a module declaration is entered on a new line after the variable declarations.
-- If a construction's name and its type declaration do not fit into a single
-  line, we move the type declaration to a new line with an extra two spaces of
-  indentation. If the type specification still doesn't fit on an 80-character
-  line, we break it up across lines, keeping the same indentation level.
 - In Agda, each definition is structured like a tree, where each operation can
   be seen as a branching point. We use indentation levels and parentheses to
   highlight this structure, which makes the code feel more organized and
@@ -342,7 +344,31 @@ the story. Here's how we handle indentation and line breaks in the
   Note also that we use parentheses to mark the branches. The extra space after
   the opening parentheses marking a branch is there to visually emphasize the
   tree structure of the definition, and aligns well with our convention to have
-  2-space indentation level increases.
+  two-space indentation level increases.
+
+- In order to improve the readability on the `agda-unimath` website, we use a
+  standard line length of 80 characters. There are only a few exceptions that
+  enable us to have names that are more than 80 characters long:
+
+  - Named `module` declarations
+  - `open import` statements
+  - Lines consisting of a single, possibly parenthesized (`(){}`), token that is
+    potentially followed by one of the symbols `;`, `:`, `=`, or `→`.
+
+- The contents of a top-level module have zero indentation. For every subsequent
+  nested scope, we add an extra two spaces of indentation, so the indentation
+  level should always be a multiple of two.
+
+- We always declare the variables of a module on a new line, with the
+  indentation level increased by two spaces. If the variable declarations
+  themselves spill over the 80 character line limit, we break them up with line
+  breaks while grouping the variables together logically. The `where` keyword of
+  a module declaration is entered on a new line after the variable declarations.
+
+- If a construction's name and its type declaration do not fit into a single
+  line, we move the type declaration to a new line with an extra two spaces of
+  indentation. If the type specification still doesn't fit on an 80-character
+  line, we break it up across lines, keeping the same indentation level.
 
 - Some proofs contain a part with equational reasoning. The standard way to
   typeset equational reasoning proofs is as follows
@@ -366,9 +392,11 @@ the story. Here's how we handle indentation and line breaks in the
 - Using Unicode characters in names is entirely permissible, but we recommend
   restraint to maintain readability. Just a few well-placed symbols can often
   express a lot.
+
 - To enhance conceptual clarity, we suggest names of constructions avoid
   referring to variable names. This makes code more understandable, even at a
   glance, and easier to work with in subsequent code.
+
 - We encourage limiting the depth increase of indentation levels to two spaces.
   This practice tends to keep our code reader-friendly, especially on smaller
   screens, by keeping more code on the left-hand side of the screen. In
@@ -376,16 +404,19 @@ the story. Here's how we handle indentation and line breaks in the
   aligning code to make it "neat". In our experience, this hurts the
   maintainability of the code, and you may find that it violates some of our
   other conventions as well.
+
 - The use of `where` blocks in definitions is perfectly fine but keeping them
   short and specific to the definition of the current object is beneficial. Note
   that definitions made in a `where` block in a definition cannot be reused
   outside of that definition, and finding a way to factor out small lemmas into
   reusable definitions leads to more readable, maintainable, and also
   refactorable code. It can even help Agda's verification process run smoother.
+
 - Record types aren't frequently used in the `agda-unimath` library. This is
   mostly because they make it more complex to characterize their identity type.
   However, when the identity type isn't as critical, feel free to use record
   types as they can be convenient.
+
 - Using the projection functions `pr1` and `pr2`, particularly their
   compositions, can lead to short code, but we recommend to avoid doing so. When
   constructions contain a lot of projections throughout their definition, the
@@ -394,6 +425,7 @@ the story. Here's how we handle indentation and line breaks in the
   given a name, naming its projections too can enhance readability and will
   provide more informative responses when jumping to the definition.
   Furthermore, it makes it easier to change the definition later on.
+
 - Lastly, we recommend not naming constructions after infix notation of
   operations included in them. Preferring primary prefix notation over infix
   notation can help keep our code consistent. For example, it's preferred to use
