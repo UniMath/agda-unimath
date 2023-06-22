@@ -308,6 +308,7 @@ module _
           ( k1 +ℕ k2)
           ( zero-ℕ)
           ( 2 *ℕ k')
+          ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2))
           ( transitive-cong-ℕ 2
             ( k1 +ℕ k2)
             ( add-ℕ
@@ -318,6 +319,15 @@ module _
                 ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
                     d2 d3)))
             ( zero-ℕ)
+            ( concatenate-eq-cong-ℕ 2
+              ( ( ap-binary
+                  ( add-ℕ)
+                  ( ap (nat-Fin 2) (inv p1))
+                  ( ap (nat-Fin 2) (inv p2))) ∙
+                ( ap
+                  ( λ n → n +ℕ (nat-Fin 2 m))
+                  ( inv (left-unit-law-mul-ℕ (nat-Fin 2 m)))))
+              ( scalar-invariant-cong-ℕ' 2 2 0 (nat-Fin 2 m) (cong-zero-ℕ' 2)))
             ( symmetric-cong-ℕ 2
               ( add-ℕ
                 ( nat-Fin 2
@@ -327,17 +337,7 @@ module _
                   ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
                       d2 d3)))
               ( k1 +ℕ k2)
-              ( cong-add-ℕ k1 k2))
-            ( concatenate-eq-cong-ℕ 2
-              ( ( ap-binary
-                ( add-ℕ)
-                ( ap (nat-Fin 2) (inv p1))
-                ( ap (nat-Fin 2) (inv p2))) ∙
-                ( ap
-                  ( λ n → n +ℕ (nat-Fin 2 m))
-                  ( inv (left-unit-law-mul-ℕ (nat-Fin 2 m)))))
-              ( scalar-invariant-cong-ℕ' 2 2 0 (nat-Fin 2 m) (cong-zero-ℕ' 2))))
-          ( scalar-invariant-cong-ℕ' 2 0 2 k' (cong-zero-ℕ' 2)))) ∙
+              ( cong-add-ℕ k1 k2))))) ∙
       ( ap
         ( mod-two-ℕ)
         ( ( symmetric-dist-ℕ (k1 +ℕ k2) (2 *ℕ k')) ∙

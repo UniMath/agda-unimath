@@ -83,8 +83,8 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
     ( succ-ℕ x)
-    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( cong-nat-mod-succ-ℕ k x)
+    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
 ```
 
 ### If the congruence classes of `x` and `y` modulo `k + 1` are equal, then `x` and `y` are congruent modulo `k + 1`
@@ -115,10 +115,10 @@ eq-mod-succ-cong-ℕ k x y H =
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( x)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
-      ( cong-nat-mod-succ-ℕ k x)
-      ( transitive-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) H
+      ( transitive-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
         ( symmetric-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
-          ( cong-nat-mod-succ-ℕ k y))))
+          ( cong-nat-mod-succ-ℕ k y)) H)
+      ( cong-nat-mod-succ-ℕ k x))
 ```
 
 ### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
@@ -209,32 +209,33 @@ cong-add-ℕ :
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ y)
 cong-add-ℕ {k} x y =
-  transitive-cong-ℕ (succ-ℕ k)
+  transitive-cong-ℕ
+    ( succ-ℕ k)
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ y)
-    ( translation-invariant-cong-ℕ'
-      ( succ-ℕ k)
-      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
-      ( x)
-      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
-      ( cong-nat-mod-succ-ℕ k x))
     ( translation-invariant-cong-ℕ
       ( succ-ℕ k)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
       ( y)
       ( x)
       ( cong-nat-mod-succ-ℕ k y))
+    ( translation-invariant-cong-ℕ'
+      ( succ-ℕ k)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+      ( x)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
+      ( cong-nat-mod-succ-ℕ k x))
 
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y')
 congruence-add-ℕ k {x} {y} {x'} {y'} H K =
   transitive-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
-    ( translation-invariant-cong-ℕ k y y' x K)
     ( translation-invariant-cong-ℕ' k x x' y' H)
+    ( translation-invariant-cong-ℕ k y y' x K)
 
 mod-succ-add-ℕ :
   (k x y : ℕ) →
