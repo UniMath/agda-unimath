@@ -1,4 +1,4 @@
-# formalization of the Symmetry Book - 27 sequences
+# Formalization of the Symmetry book - 27 sequences
 
 ```agda
 module synthetic-homotopy-theory.27-sequences where
