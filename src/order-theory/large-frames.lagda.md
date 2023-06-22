@@ -119,9 +119,12 @@ module _
 
   transitive-leq-Large-Frame :
     {l1 l2 l3 : Level}
-    (x : type-Large-Frame l1) (y : type-Large-Frame l2)
+    (x : type-Large-Frame l1)
+    (y : type-Large-Frame l2)
     (z : type-Large-Frame l3) →
-    leq-Large-Frame y z → leq-Large-Frame x y → leq-Large-Frame x z
+    leq-Large-Frame y z →
+    leq-Large-Frame x y →
+    leq-Large-Frame x z
   transitive-leq-Large-Frame =
     transitive-leq-Large-Poset (large-poset-Large-Frame L)
 

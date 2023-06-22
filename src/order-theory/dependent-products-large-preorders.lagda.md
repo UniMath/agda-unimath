@@ -58,9 +58,11 @@ module _
 
   transitive-leq-Π-Large-Preorder :
     {l1 l2 l3 : Level}
-    (x : type-Π-Large-Preorder l1) (y : type-Π-Large-Preorder l2)
+    (x : type-Π-Large-Preorder l1)
+    (y : type-Π-Large-Preorder l2)
     (z : type-Π-Large-Preorder l3) →
-    leq-Π-Large-Preorder y z → leq-Π-Large-Preorder x y →
+    leq-Π-Large-Preorder y z →
+    leq-Π-Large-Preorder x y →
     leq-Π-Large-Preorder x z
   transitive-leq-Π-Large-Preorder x y z H K i =
     transitive-leq-Large-Preorder (P i) (x i) (y i) (z i) (H i) (K i)

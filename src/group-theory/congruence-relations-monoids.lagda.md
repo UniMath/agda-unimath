@@ -93,7 +93,7 @@ module _
   equiv-symm-congruence-Monoid x y = equiv-symm-Eq-Rel eq-rel-congruence-Monoid
 
   trans-congruence-Monoid : is-transitive-Rel-Prop prop-congruence-Monoid
-  trans-congruence-Monoid = trans-Eq-Rel eq-rel-congruence-Monoid
+  trans-congruence-Monoid = transitive-Eq-Rel eq-rel-congruence-Monoid
 
   mul-congruence-Monoid :
     is-congruence-Monoid M eq-rel-congruence-Monoid

@@ -7,6 +7,7 @@ module order-theory.suplattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -93,16 +94,11 @@ module _
     (x : type-Suplattice) → leq-Suplattice x x
   refl-leq-Suplattice = refl-leq-Poset poset-Suplattice
 
-  antisymmetric-leq-Suplattice :
-    (x y : type-Suplattice) →
-    leq-Suplattice x y → leq-Suplattice y x → x ＝ y
+  antisymmetric-leq-Suplattice : is-antisymmetric leq-Suplattice
   antisymmetric-leq-Suplattice =
     antisymmetric-leq-Poset poset-Suplattice
 
-  transitive-leq-Suplattice :
-    (x y z : type-Suplattice) →
-    leq-Suplattice y z → leq-Suplattice x y →
-    leq-Suplattice x z
+  transitive-leq-Suplattice : is-transitive leq-Suplattice
   transitive-leq-Suplattice = transitive-leq-Poset poset-Suplattice
 
   is-set-type-Suplattice : is-set type-Suplattice

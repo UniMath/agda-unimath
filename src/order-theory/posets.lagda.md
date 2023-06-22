@@ -7,6 +7,11 @@ module order-theory.posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
+open import category-theory.isomorphisms-precategories
+open import category-theory.precategories
+
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -63,11 +68,10 @@ module _
     {x y z : type-Poset} → leq-Poset x y → y ＝ z → leq-Poset x z
   concatenate-leq-eq-Poset = concatenate-leq-eq-Preorder preorder-Poset
 
-  refl-leq-Poset : (x : type-Poset) → leq-Poset x x
+  refl-leq-Poset : is-reflexive leq-Poset
   refl-leq-Poset = refl-leq-Preorder preorder-Poset
 
-  transitive-leq-Poset :
-    (x y z : type-Poset) → leq-Poset y z → leq-Poset x y → leq-Poset x z
+  transitive-leq-Poset : is-transitive leq-Poset
   transitive-leq-Poset = transitive-leq-Preorder preorder-Poset
 
   le-Poset-Prop : (x y : type-Poset) → Prop (l1 ⊔ l2)
@@ -89,8 +93,8 @@ module _
     is-set-prop-in-id
       ( λ x y → leq-Poset x y × leq-Poset y x)
       ( λ x y → is-prop-prod (is-prop-leq-Poset x y) (is-prop-leq-Poset y x))
-      ( λ x → pair (refl-leq-Poset x) (refl-leq-Poset x))
-      ( λ {x y (pair H K) → antisymmetric-leq-Poset x y H K})
+      ( λ x → refl-leq-Poset x , refl-leq-Poset x)
+      ( λ {x y (H , K) → antisymmetric-leq-Poset x y H K})
 
   set-Poset : Set l1
   pr1 set-Poset = type-Poset
@@ -131,8 +135,28 @@ step-calculate-in-Poset :
   {l1 l2 : Level} (X : Poset l1 l2)
   {x y : type-Poset X} → leq-Poset X x y →
   (z : type-Poset X) → leq-Poset X y z → leq-Poset X x z
-step-calculate-in-Poset X {x} {y} u z v =
-  transitive-leq-Poset X x y z v u
+step-calculate-in-Poset X {x} {y} u z v = transitive-leq-Poset X x y z v u
 
 syntax step-calculate-in-Poset X u z v = u ≤ z by v in-Poset X
+```
+
+## Properties
+
+### Posets are categories whose underlying hom-sets are propositions
+
+```agda
+module _
+  {l1 l2 : Level} (X : Poset l1 l2)
+  where
+
+  -- category-Poset : Category l1 l2
+  -- pr1 category-Poset = precategory-Preorder (preorder-Poset X)
+  -- pr2 category-Poset x y =
+  --   is-equiv-is-prop
+  --     ( is-set-type-Poset X x y)
+  --     {! !}
+  --     ( λ f →
+  --       antisymmetric-leq-Poset X x y
+  --         ( hom-iso-Precategory (pr1 category-Poset) f)
+  --         ( hom-inv-iso-Precategory (pr1 category-Poset) f))
 ```

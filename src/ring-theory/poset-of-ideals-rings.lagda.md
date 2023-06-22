@@ -66,8 +66,12 @@ module _
 
   transitive-leq-ideal-Ring :
     {l2 l3 l4 : Level}
-    (I : ideal-Ring l2 R) (J : ideal-Ring l3 R) (K : ideal-Ring l4 R) →
-    leq-ideal-Ring J K → leq-ideal-Ring I J → leq-ideal-Ring I K
+    (I : ideal-Ring l2 R)
+    (J : ideal-Ring l3 R)
+    (K : ideal-Ring l4 R) →
+    leq-ideal-Ring J K →
+    leq-ideal-Ring I J →
+    leq-ideal-Ring I K
   transitive-leq-ideal-Ring I J K =
     transitive-leq-subtype
       ( subset-ideal-Ring R I)

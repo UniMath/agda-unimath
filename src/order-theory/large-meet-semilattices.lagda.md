@@ -170,7 +170,8 @@ module _
     (x : type-Large-Meet-Semilattice l1)
     (y : type-Large-Meet-Semilattice l2)
     (z : type-Large-Meet-Semilattice l3) →
-    leq-Large-Meet-Semilattice y z → leq-Large-Meet-Semilattice x y →
+    leq-Large-Meet-Semilattice y z →
+    leq-Large-Meet-Semilattice x y →
     leq-Large-Meet-Semilattice x z
   transitive-leq-Large-Meet-Semilattice =
     transitive-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)

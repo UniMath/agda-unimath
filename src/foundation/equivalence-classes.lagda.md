@@ -85,7 +85,7 @@ module _
   class : A → equivalence-class
   pr1 (class x) = prop-Eq-Rel R x
   pr2 (class x) =
-    unit-trunc-Prop (pair x (refl-has-same-elements-subtype (prop-Eq-Rel R x)))
+    unit-trunc-Prop (x , refl-has-same-elements-subtype (prop-Eq-Rel R x))
 
   emb-equivalence-class : equivalence-class ↪ subtype l2 A
   emb-equivalence-class = emb-subtype is-equivalence-class-Prop
@@ -100,14 +100,13 @@ module _
 
   is-inhabited-subtype-equivalence-class :
     (C : equivalence-class) → is-inhabited-subtype (subtype-equivalence-class C)
-  is-inhabited-subtype-equivalence-class (pair Q H) =
+  is-inhabited-subtype-equivalence-class (Q , H) =
     apply-universal-property-trunc-Prop H
-      ( is-inhabited-subtype-Prop (subtype-equivalence-class (pair Q H)))
+      ( is-inhabited-subtype-Prop (subtype-equivalence-class (Q , H)))
       ( λ u →
         unit-trunc-Prop
-          ( pair
-            ( pr1 u)
-            ( backward-implication (pr2 u (pr1 u)) (refl-Eq-Rel R))))
+          ( pr1 u ,
+            backward-implication (pr2 u (pr1 u)) (refl-Eq-Rel R (pr1 u))))
 
   inhabited-subtype-equivalence-class :
     (C : equivalence-class) → inhabited-subtype l2 A
@@ -265,10 +264,10 @@ module _
                   ↔ sim-Eq-Rel R v x
                     by φ x
                   ↔ sim-Eq-Rel R a x
-                    by iff-trans-Eq-Rel R
-                        ( symm-Eq-Rel R (forward-implication (φ a) c))
+                    by iff-transitive-Eq-Rel R
+                        ( symm-Eq-Rel R _ _ (forward-implication (φ a) c))
                   ↔ sim-Eq-Rel R w x
-                    by iff-trans-Eq-Rel R (forward-implication (ψ a) d)
+                    by iff-transitive-Eq-Rel R (forward-implication (ψ a) d)
                   ↔ is-in-equivalence-class R D x
                     by inv-iff (ψ x)))
 
@@ -279,7 +278,7 @@ module _
     eq-share-common-element-equivalence-class
       ( class R a)
       ( C)
-      ( unit-trunc-Prop (pair a (pair (refl-Eq-Rel R) H)))
+      ( unit-trunc-Prop (a , refl-Eq-Rel R a , H))
 ```
 
 ### The type of equivalence classes containing a fixed element `a : A` is contractible
@@ -292,14 +291,14 @@ module _
   center-total-is-in-equivalence-class :
     Σ (equivalence-class R) (λ P → is-in-equivalence-class R P a)
   pr1 center-total-is-in-equivalence-class = class R a
-  pr2 center-total-is-in-equivalence-class = refl-Eq-Rel R
+  pr2 center-total-is-in-equivalence-class = refl-Eq-Rel R a
 
   contraction-total-is-in-equivalence-class :
     ( t :
       Σ ( equivalence-class R)
         ( λ C → is-in-equivalence-class R C a)) →
     center-total-is-in-equivalence-class ＝ t
-  contraction-total-is-in-equivalence-class (pair C H) =
+  contraction-total-is-in-equivalence-class (C , H) =
     eq-type-subtype
       ( λ D → is-in-equivalence-class-Prop R D a)
       ( eq-class-equivalence-class R C H)
@@ -317,7 +316,7 @@ module _
     (q : equivalence-class R) → class R a ＝ q →
     is-in-equivalence-class R q a
   is-in-equivalence-class-eq-equivalence-class .(class R a) refl =
-    refl-Eq-Rel R
+    refl-Eq-Rel R a
 
   abstract
     is-equiv-is-in-equivalence-class-eq-equivalence-class :
@@ -416,10 +415,10 @@ module _
     apply-universal-property-trunc-Prop
       ( is-equivalence-class-equivalence-class R P)
       ( subtype-equivalence-class R P b)
-      ( λ (pair x H) →
+      ( λ (x , H) →
         backward-implication
           ( H b)
-          ( trans-Eq-Rel R (forward-implication (H a) p) r))
+          ( transitive-Eq-Rel R _ a b r (forward-implication (H a) p)))
 ```
 
 ### The type of equivalence classes is locally small

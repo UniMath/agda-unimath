@@ -106,7 +106,9 @@ module _
     (x : type-Π-Large-Frame l2)
     (y : type-Π-Large-Frame l3)
     (z : type-Π-Large-Frame l4) →
-    leq-Π-Large-Frame y z → leq-Π-Large-Frame x y → leq-Π-Large-Frame x z
+    leq-Π-Large-Frame y z →
+    leq-Π-Large-Frame x y →
+    leq-Π-Large-Frame x z
   transitive-leq-Π-Large-Frame =
     transitive-leq-Large-Poset large-poset-Π-Large-Frame
 

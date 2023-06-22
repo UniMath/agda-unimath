@@ -67,12 +67,12 @@ module _
             ( pair
               ( pair (pr1 (center (H a))) (pr1 (pr2 (center (H a)))))
               ( ( apply-effectiveness-class' R
-                  ( symm-Eq-Rel R (pr2 (pr2 (center (H a)))))) ∙
+                  ( symm-Eq-Rel R _ _ (pr2 (pr2 (center (H a)))))) ∙
                 ( eq-class-equivalence-class R
                   ( pair Q K)
                   ( backward-implication
                     ( φ a)
-                    ( refl-Eq-Rel R))))))
+                    ( refl-Eq-Rel R _))))))
 
   abstract
     is-emb-class-representatives :

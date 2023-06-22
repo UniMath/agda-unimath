@@ -78,7 +78,8 @@ module _
     {x : type-Large-Preorder P l1}
     {y : type-Large-Preorder P l2}
     {z : type-Large-Preorder P l3} →
-    sim-Large-Preorder P y z → sim-Large-Preorder P x y →
+    sim-Large-Preorder P y z →
+    sim-Large-Preorder P x y →
     sim-Large-Preorder P x z
   pr1 (transitive-sim-Large-Preorder H K) =
     transitive-leq-Large-Preorder P _ _ _ (pr1 H) (pr1 K)

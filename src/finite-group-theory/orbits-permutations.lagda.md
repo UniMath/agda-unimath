@@ -257,6 +257,7 @@ module _
           ( two-points-iterate-ordered-ℕ
             ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))))
 
+
   abstract
     not-not-eq-second-point-zero-min-reporting :
       ¬¬ (Id second-point-min-repeating zero-ℕ)
@@ -412,12 +413,12 @@ module _
   same-orbits-permutation : Eq-Rel l (type-UU-Fin n X)
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
-  pr1 (pr2 same-orbits-permutation) = unit-trunc-Prop (pair 0 refl)
-  pr1 (pr2 (pr2 same-orbits-permutation)) {a} {b} P =
+  pr1 (pr2 same-orbits-permutation) _ = unit-trunc-Prop (0 , refl)
+  pr1 (pr2 (pr2 same-orbits-permutation)) a b P =
     apply-universal-property-trunc-Prop
       ( P)
       ( pr1 same-orbits-permutation b a)
-      ( λ (pair k p) →
+      ( λ (k , p) →
         apply-universal-property-trunc-Prop
           ( has-cardinality-type-UU-Fin n X)
           ( pr1 same-orbits-permutation b a)
@@ -455,15 +456,15 @@ module _
           ( pr1 (has-finite-orbits-permutation-a h))
           ( k)
           ( pr1 (pr2 (has-finite-orbits-permutation-a h))))
-  pr2 (pr2 (pr2 same-orbits-permutation)) {a} {b} {c} P Q =
+  pr2 (pr2 (pr2 same-orbits-permutation)) a b c Q P =
     apply-universal-property-trunc-Prop
       ( P)
       ( pr1 same-orbits-permutation a c)
-      ( λ (pair k1 p) →
+      ( λ (k1 , p) →
         apply-universal-property-trunc-Prop
           ( Q)
           ( pr1 same-orbits-permutation a c)
-          ( λ { (pair k2 q) →
+          ( λ { (k2 , q) →
                 ( unit-trunc-Prop
                   ( pair
                     ( k2 +ℕ k1)
@@ -1080,12 +1081,17 @@ module _
       ( prop-Eq-Rel
         (same-orbits-permutation-count (composition-transposition-a-b g)) x b)
       ( λ T1 T2 → not-same-orbits-transposition-same-orbits g P
-        ( trans-Eq-Rel
+        ( transitive-Eq-Rel
           ( same-orbits-permutation-count (composition-transposition-a-b g))
+          ( _)
+          ( _)
+          ( _)
+          ( T2)
           ( symm-Eq-Rel
             ( same-orbits-permutation-count (composition-transposition-a-b g))
-            ( T1))
-          ( T2)))
+            ( _)
+            ( _)
+            ( T1))))
 
   abstract
     split-orbits-a-b-transposition :
@@ -1341,8 +1347,12 @@ module _
           ( eq-htpy-equiv (composition-transposition-a-b-involution g))
           ( T)
       lemma3 (inr T) =
-        trans-Eq-Rel
+        transitive-Eq-Rel
           ( same-orbits-permutation-count g)
+          ( _)
+          ( _)
+          ( _)
+          ( symm-Eq-Rel (same-orbits-permutation-count g) _ _ P)
           ( tr
             ( λ g → sim-Eq-Rel (same-orbits-permutation-count g) x b)
             { x =
@@ -1350,7 +1360,6 @@ module _
             {y = g}
             ( eq-htpy-equiv (composition-transposition-a-b-involution g))
             ( T))
-          ( symm-Eq-Rel (same-orbits-permutation-count g) P)
 
   private
     module _
@@ -1395,7 +1404,7 @@ module _
               ( b)
               ( a)
               ( r)
-              ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
+              ( symm-Eq-Rel (same-orbits-permutation-count g) _ _ P)))
       h'-inl k T p (inr nq) (inr nr) =
         conserves-other-orbits-transposition-quotient g T nq nr
       h' :
@@ -1911,7 +1920,7 @@ module _
             ( b)
             ( a)
             ( R)
-            ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
+            ( symm-Eq-Rel (same-orbits-permutation-count g) _ _ P)))
       section-h'-inl k (inr NQ) (inr NR) (inl Q') R' = ex-falso (NQ Q')
       section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inl R') = ex-falso (NR R')
       section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inr NR') =
@@ -1954,6 +1963,7 @@ module _
         ex-falso (not-same-orbits-transposition-same-orbits g P
           ( symm-Eq-Rel
             ( same-orbits-permutation-count (composition-transposition-a-b g))
+            _ _
             ( Q)))
       section-h'-inr (inr Q) (inl R) = refl
       section-h'-inr (inr Q) (inr NR) =

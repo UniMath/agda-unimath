@@ -137,7 +137,8 @@ module _
     (x : type-Large-Quotient-Locale l1)
     (y : type-Large-Quotient-Locale l2)
     (z : type-Large-Quotient-Locale l3) →
-    leq-Large-Quotient-Locale y z → leq-Large-Quotient-Locale x y →
+    leq-Large-Quotient-Locale y z →
+    leq-Large-Quotient-Locale x y →
     leq-Large-Quotient-Locale x z
   transitive-leq-Large-Quotient-Locale =
     transitive-leq-Large-Subframe L Q

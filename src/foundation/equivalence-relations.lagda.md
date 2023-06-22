@@ -183,23 +183,19 @@ module _
   pr1 (prop-eq-rel-partition x y) = sim-partition x y
   pr2 (prop-eq-rel-partition x y) = is-prop-sim-partition x y
 
-  refl-sim-partition : {x : A} → sim-partition x x
-  pr1 (refl-sim-partition {x}) = class-partition P x
-  pr1 (pr2 (refl-sim-partition {x})) = is-in-block-class-partition P x
-  pr2 (pr2 (refl-sim-partition {x})) = is-in-block-class-partition P x
+  refl-sim-partition : is-reflexive sim-partition
+  pr1 (refl-sim-partition x) = class-partition P x
+  pr1 (pr2 (refl-sim-partition x)) = is-in-block-class-partition P x
+  pr2 (pr2 (refl-sim-partition x)) = is-in-block-class-partition P x
 
-  symm-sim-partition : {x y : A} → sim-partition x y → sim-partition y x
-  pr1 (symm-sim-partition {x} {y} (Q , p , q)) = Q
-  pr1 (pr2 (symm-sim-partition {x} {y} (Q , p , q))) = q
-  pr2 (pr2 (symm-sim-partition {x} {y} (Q , p , q))) = p
+  symm-sim-partition : is-symmetric sim-partition
+  pr1 (symm-sim-partition x y (Q , p , q)) = Q
+  pr1 (pr2 (symm-sim-partition x y (Q , p , q))) = q
+  pr2 (pr2 (symm-sim-partition x y (Q , p , q))) = p
 
-  trans-sim-partition :
-    {x y z : A} → sim-partition x y → sim-partition y z → sim-partition x z
-  pr1 (trans-sim-partition {x} {y} {z} (Q1 , p1 , q1) (Q2 , p2 , q2)) = Q1
-  pr1
-    ( pr2
-      ( trans-sim-partition (B , p , q) (B' , p' , q'))) = p
-  pr2 (pr2 (trans-sim-partition {x} {y} {z} (B , p , q) (B' , p' , q'))) =
+  trans-sim-partition : is-transitive sim-partition
+  pr1 (trans-sim-partition x y z  (B , p , q) (B' , p' , q')) = B
+  pr1 (pr2 (trans-sim-partition x y z (B , p , q) (B' , p' , q'))) =
     backward-implication
       ( has-same-elements-eq-inhabited-subtype
         ( inhabited-subtype-block-partition P B)
@@ -210,10 +206,12 @@ module _
             ( pr1)
             ( eq-is-contr
               ( is-contr-block-containing-element-partition P y)
-              { B , q}
-              { B' , p'})))
-        ( z))
-      ( q')
+              { B , p}
+              { B' , q'})))
+        ( x))
+      ( p')
+  pr2 (pr2 (trans-sim-partition x y z (B , p , q) (B' , p' , q'))) = q
+
 
   eq-rel-partition : Eq-Rel (l1 ⊔ l2) A
   pr1 eq-rel-partition = prop-eq-rel-partition
@@ -224,7 +222,7 @@ module _
   is-inhabited-subtype-prop-eq-rel-partition :
     (a : A) → is-inhabited-subtype (prop-eq-rel-partition a)
   is-inhabited-subtype-prop-eq-rel-partition a =
-    unit-trunc-Prop (a , refl-sim-partition)
+    unit-trunc-Prop (a , refl-sim-partition a)
 
   inhabited-subtype-eq-rel-partition :
     (a : A) → inhabited-subtype (l1 ⊔ l2) A
@@ -257,9 +255,10 @@ module _
       ( is-block-inhabited-subtype-block-partition (partition-Eq-Rel R) C)
       ( prop-Eq-Rel R x y)
       ( λ (z , K) →
-        trans-Eq-Rel R
-          ( symm-Eq-Rel R (forward-implication (K x) p))
-          ( forward-implication (K y) q))
+        transitive-Eq-Rel R
+          x _ y
+          ( forward-implication (K y) q)
+          ( symm-Eq-Rel R _ x (forward-implication (K x) p)))
   pr1 (pr2 (relate-same-elements-eq-rel-partition-Eq-Rel x y) r) =
     make-block-partition
       ( partition-Eq-Rel R)
@@ -271,7 +270,7 @@ module _
       ( inhabited-subtype-equivalence-class R (class R x))
       ( is-equivalence-class-equivalence-class R (class R x))
       ( x)
-      ( refl-Eq-Rel R)
+      ( refl-Eq-Rel R x)
   pr2 (pr2 (pr2 (relate-same-elements-eq-rel-partition-Eq-Rel x y) r)) =
     make-is-in-block-partition
       ( partition-Eq-Rel R)
@@ -453,13 +452,13 @@ module _
   symm-sim-map-into-set x y H = inv H
 
   trans-sim-map-into-set : is-transitive sim-map-into-set
-  trans-sim-map-into-set x y z H K = H ∙ K
+  trans-sim-map-into-set x y z H K = K ∙ H
 
   eq-rel-map-into-set : Eq-Rel l2 A
   pr1 eq-rel-map-into-set = rel-map-into-set
-  pr1 (pr2 eq-rel-map-into-set) {x} = refl-sim-map-into-set x
-  pr1 (pr2 (pr2 eq-rel-map-into-set)) {x} {y} = symm-sim-map-into-set x y
-  pr2 (pr2 (pr2 eq-rel-map-into-set)) {x} {y} {z} = trans-sim-map-into-set x y z
+  pr1 (pr2 eq-rel-map-into-set) x = refl-sim-map-into-set x
+  pr1 (pr2 (pr2 eq-rel-map-into-set)) x y = symm-sim-map-into-set x y
+  pr2 (pr2 (pr2 eq-rel-map-into-set)) x y z = trans-sim-map-into-set x y z
 
   is-effective-map-into-set :
     is-effective eq-rel-map-into-set f
@@ -572,9 +571,9 @@ module _
 
   Id-Eq-Rel : Eq-Rel l1 (type-Set A)
   pr1 Id-Eq-Rel = Id-Prop A
-  pr1 (pr2 Id-Eq-Rel) = refl
-  pr1 (pr2 (pr2 Id-Eq-Rel)) = inv
-  pr2 (pr2 (pr2 Id-Eq-Rel)) = λ p q → p ∙ q
+  pr1 (pr2 Id-Eq-Rel) _ = refl
+  pr1 (pr2 (pr2 Id-Eq-Rel)) _ _ = inv
+  pr2 (pr2 (pr2 Id-Eq-Rel)) _ _ _ H K = K ∙ H
 
   id-reflects-Id-Eq-Rel : reflects-Eq-Rel Id-Eq-Rel id
   id-reflects-Id-Eq-Rel = id

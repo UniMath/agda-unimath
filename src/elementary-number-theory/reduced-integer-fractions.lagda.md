@@ -256,16 +256,16 @@ reduce-preserves-sim-ℤ x y H =
     ( reduce-fraction-ℤ x)
     ( y)
     ( reduce-fraction-ℤ y)
+    ( sim-reduced-fraction-ℤ y)
     ( trans-sim-fraction-ℤ
       ( reduce-fraction-ℤ x)
       ( x)
       ( y)
+      ( H)
       ( symm-sim-fraction-ℤ
         ( x)
         ( reduce-fraction-ℤ x)
-        ( sim-reduced-fraction-ℤ x))
-      ( H))
-    ( sim-reduced-fraction-ℤ y)
+        ( sim-reduced-fraction-ℤ x)))
 ```
 
 ### Two similar fractions have equal reduced form

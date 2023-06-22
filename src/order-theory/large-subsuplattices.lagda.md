@@ -120,7 +120,8 @@ module _
     (x : type-Large-Subsuplattice l1)
     (y : type-Large-Subsuplattice l2)
     (z : type-Large-Subsuplattice l3) →
-    leq-Large-Subsuplattice y z → leq-Large-Subsuplattice x y →
+    leq-Large-Subsuplattice y z →
+    leq-Large-Subsuplattice x y →
     leq-Large-Subsuplattice x z
   transitive-leq-Large-Subsuplattice =
     transitive-leq-Large-Subposet

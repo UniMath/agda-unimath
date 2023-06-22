@@ -93,7 +93,7 @@ module _
 
   trans-congruence-Group :
     is-transitive-Rel-Prop prop-congruence-Group
-  trans-congruence-Group = trans-Eq-Rel eq-rel-congruence-Group
+  trans-congruence-Group = transitive-Eq-Rel eq-rel-congruence-Group
 
   mul-congruence-Group :
     is-congruence-Group G eq-rel-congruence-Group
@@ -104,14 +104,14 @@ module _
     sim-congruence-Group y z →
     sim-congruence-Group (mul-Group G x y) (mul-Group G x z)
   left-mul-congruence-Group x H =
-    mul-congruence-Group refl-congruence-Group H
+    mul-congruence-Group (refl-congruence-Group x) H
 
   right-mul-congruence-Group :
     {x y : type-Group G} → sim-congruence-Group x y →
     (z : type-Group G) →
     sim-congruence-Group (mul-Group G x z) (mul-Group G y z)
   right-mul-congruence-Group H z =
-    mul-congruence-Group H refl-congruence-Group
+    mul-congruence-Group H (refl-congruence-Group z)
 
   conjugation-congruence-Group :
     (x : type-Group G) {y z : type-Group G} →
@@ -167,6 +167,8 @@ module _
     sim-congruence-Group x y → sim-left-div-unit-congruence-Group x y
   map-sim-left-div-unit-congruence-Group {x} {y} H =
     symm-congruence-Group
+      (unit-Group G)
+      (mul-Group G (inv-Group G x) y)
       ( concatenate-eq-sim-congruence-Group
         ( inv (left-inverse-law-mul-Group G x))
         ( left-mul-congruence-Group (inv-Group G x) H))
@@ -179,7 +181,10 @@ module _
       ( sim-congruence-Group)
       ( right-unit-law-mul-Group G x)
       ( is-section-mul-inv-Group G x y)
-      ( symm-congruence-Group (left-mul-congruence-Group x H))
+      ( symm-congruence-Group
+        ( mul-Group G x (left-div-Group G x y))
+        ( mul-Group G x (unit-Group G))
+        ( left-mul-congruence-Group x H))
 
   inv-congruence-Group :
     {x y : type-Group G} →
@@ -196,7 +201,7 @@ module _
               ( mul-Group G (inv-Group G x))
               ( right-inverse-law-mul-Group G y)) ∙
             ( right-unit-law-mul-Group G (inv-Group G x)))))
-      ( symm-congruence-Group
+      ( symm-congruence-Group _ _
         ( right-mul-congruence-Group
           ( left-mul-congruence-Group (inv-Group G x) H)
           ( inv-Group G y)))

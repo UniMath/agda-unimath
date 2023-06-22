@@ -343,12 +343,14 @@ refl-leq-Subgroup-Ab :
 refl-leq-Subgroup-Ab A = refl-leq-Subgroup (group-Ab A)
 
 transitive-leq-Subgroup-Ab :
-  {l1 l2 l3 l4 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
-  (C : Subgroup-Ab l3 A) (D : Subgroup-Ab l4 A) →
-  leq-Subgroup-Ab A C D → leq-Subgroup-Ab A B C →
+  {l1 l2 l3 l4 : Level} (A : Ab l1)
+  (B : Subgroup-Ab l2 A)
+  (C : Subgroup-Ab l3 A)
+  (D : Subgroup-Ab l4 A) →
+  leq-Subgroup-Ab A C D →
+  leq-Subgroup-Ab A B C →
   leq-Subgroup-Ab A B D
-transitive-leq-Subgroup-Ab A =
-  transitive-leq-Subgroup (group-Ab A)
+transitive-leq-Subgroup-Ab A = transitive-leq-Subgroup (group-Ab A)
 
 antisymmetric-leq-Subgroup-Ab :
   {l1 l2 : Level} (A : Ab l1) (B C : Subgroup-Ab l2 A) →

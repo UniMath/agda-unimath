@@ -60,7 +60,7 @@ is-prop-type-Rel-Prop R x y = pr2 (R x y)
 
 total-space-Rel-Prop :
   {l : Level} {l1 : Level} {A : UU l1} → Rel-Prop l A → UU (l ⊔ l1)
-total-space-Rel-Prop {A = A} R = Σ (A × A) λ (pair a a') → type-Rel-Prop R a a'
+total-space-Rel-Prop {A = A} R = Σ (A × A) λ (a , a') → type-Rel-Prop R a a'
 ```
 
 ## Specifications of properties of binary relations
@@ -73,49 +73,53 @@ is-symmetric : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
 is-symmetric {A = A} R = (x y : A) → R x y → R y x
 
 is-transitive : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
-is-transitive {A = A} R = (x y z : A) → R x y → R y z → R x z
+is-transitive {A = A} R = (x y z : A) → R y z → R x y → R x z
+
+is-antisymmetric : {l1 l2 : Level} {A : UU l1} → Rel l2 A → UU (l1 ⊔ l2)
+is-antisymmetric {A = A} R = (x y : A) → R x y → R y x → x ＝ y
 
 is-reflexive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
-is-reflexive-Rel-Prop {A = A} R =
-  {x : A} → type-Rel-Prop R x x
+is-reflexive-Rel-Prop R = is-reflexive (type-Rel-Prop R)
 
 is-prop-is-reflexive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
   is-prop (is-reflexive-Rel-Prop R)
 is-prop-is-reflexive-Rel-Prop R =
-  is-prop-Π' (λ x → is-prop-type-Rel-Prop R x x)
+  is-prop-Π (λ x → is-prop-type-Rel-Prop R x x)
 
 is-symmetric-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
-is-symmetric-Rel-Prop {A = A} R =
-  {x y : A} → type-Rel-Prop R x y → type-Rel-Prop R y x
+is-symmetric-Rel-Prop R = is-symmetric (type-Rel-Prop R)
 
 is-prop-is-symmetric-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
   is-prop (is-symmetric-Rel-Prop R)
 is-prop-is-symmetric-Rel-Prop R =
-  is-prop-Π'
+  is-prop-Π
     ( λ x →
-      is-prop-Π' (λ y → is-prop-function-type (is-prop-type-Rel-Prop R y x)))
+      is-prop-Π (λ y → is-prop-function-type (is-prop-type-Rel-Prop R y x)))
 
 is-transitive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
-is-transitive-Rel-Prop {A = A} R =
-  {x y z : A} → type-Rel-Prop R x y → type-Rel-Prop R y z → type-Rel-Prop R x z
+is-transitive-Rel-Prop R = is-transitive (type-Rel-Prop R)
 
 is-prop-is-transitive-Rel-Prop :
   {l1 l2 : Level} {A : UU l1} (R : Rel-Prop l2 A) →
   is-prop (is-transitive-Rel-Prop R)
 is-prop-is-transitive-Rel-Prop R =
-  is-prop-Π'
+  is-prop-Π
     ( λ x →
-      is-prop-Π'
+      is-prop-Π
         ( λ y →
-          is-prop-Π'
+          is-prop-Π
             ( λ z →
               is-prop-function-type
                 ( is-prop-function-type (is-prop-type-Rel-Prop R x z)))))
+
+is-antisymmetric-Rel-Prop :
+  {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
+is-antisymmetric-Rel-Prop R = is-antisymmetric (type-Rel-Prop R)
 ```
 
 ## Properties

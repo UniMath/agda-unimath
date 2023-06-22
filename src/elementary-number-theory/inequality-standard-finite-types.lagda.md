@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -54,7 +55,7 @@ leq-neg-one-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → leq-Fin (succ-ℕ k) x (neg-one-Fin k)
 leq-neg-one-Fin k x = star
 
-refl-leq-Fin : (k : ℕ) (x : Fin k) → leq-Fin k x x
+refl-leq-Fin : (k : ℕ) → is-reflexive (leq-Fin k)
 refl-leq-Fin (succ-ℕ k) (inl x) = refl-leq-Fin k x
 refl-leq-Fin (succ-ℕ k) (inr star) = star
 
@@ -65,7 +66,7 @@ antisymmetric-leq-Fin (succ-ℕ k) (inl x) (inl y) H K =
 antisymmetric-leq-Fin (succ-ℕ k) (inr star) (inr star) H K = refl
 
 transitive-leq-Fin :
-  (k : ℕ) (x y z : Fin k) → leq-Fin k y z → leq-Fin k x y → leq-Fin k x z
+  (k : ℕ) → is-transitive (leq-Fin k)
 transitive-leq-Fin (succ-ℕ k) (inl x) (inl y) (inl z) H K =
   transitive-leq-Fin k x y z H K
 transitive-leq-Fin (succ-ℕ k) (inl x) (inl y) (inr star) H K = star

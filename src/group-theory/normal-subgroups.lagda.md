@@ -318,9 +318,12 @@ refl-leq-Normal-Subgroup G H =
   refl-leq-Subgroup G (subgroup-Normal-Subgroup G H)
 
 transitive-leq-Normal-Subgroup :
-  {l1 l2 l3 l4 : Level} (G : Group l1) (H : Normal-Subgroup l2 G)
-  (K : Normal-Subgroup l3 G) (L : Normal-Subgroup l4 G) →
-  leq-Normal-Subgroup G K L → leq-Normal-Subgroup G H K →
+  {l1 l2 l3 l4 : Level} (G : Group l1)
+  (H : Normal-Subgroup l2 G)
+  (K : Normal-Subgroup l3 G)
+  (L : Normal-Subgroup l4 G) →
+  leq-Normal-Subgroup G K L →
+  leq-Normal-Subgroup G H K →
   leq-Normal-Subgroup G H L
 transitive-leq-Normal-Subgroup G H K L =
   transitive-leq-Subgroup G
@@ -519,7 +522,8 @@ module _
 
   contains-unit-subset-congruence-Group :
     contains-unit-subset-Group G subset-congruence-Group
-  contains-unit-subset-congruence-Group = refl-congruence-Group G R
+  contains-unit-subset-congruence-Group =
+    refl-congruence-Group G R (unit-Group G)
 
   is-closed-under-mul-subset-congruence-Group :
     is-closed-under-mul-subset-Group G subset-congruence-Group
@@ -609,6 +613,8 @@ pr2
   ( relate-same-elements-congruence-normal-subgroup-congruence-Group
     G R x y) H =
   symm-congruence-Group G R
+    ( left-div-Group G x y)
+    ( unit-Group G)
     ( map-sim-left-div-unit-congruence-Group G R H)
 
 is-section-normal-subgroup-congruence-Group :

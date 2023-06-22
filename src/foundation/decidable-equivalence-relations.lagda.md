@@ -7,6 +7,7 @@ module foundation.decidable-equivalence-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
 open import foundation.decidable-relations
@@ -110,13 +111,12 @@ module _
     is-equivalence-relation-Decidable-Equivalence-Relation
 
   refl-Decidable-Equivalence-Relation :
-    {x : X} → sim-Decidable-Equivalence-Relation x x
+    is-reflexive sim-Decidable-Equivalence-Relation
   refl-Decidable-Equivalence-Relation =
     refl-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
 
   symmetric-Decidable-Equivalence-Relation :
-    {x y : X} → sim-Decidable-Equivalence-Relation x y →
-    sim-Decidable-Equivalence-Relation y x
+    is-symmetric sim-Decidable-Equivalence-Relation
   symmetric-Decidable-Equivalence-Relation =
     symm-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
 
@@ -128,15 +128,13 @@ module _
     equiv-prop
       ( is-prop-sim-Decidable-Equivalence-Relation x y)
       ( is-prop-sim-Decidable-Equivalence-Relation y x)
-      ( symmetric-Decidable-Equivalence-Relation)
-      ( symmetric-Decidable-Equivalence-Relation)
+      ( symmetric-Decidable-Equivalence-Relation x y)
+      ( symmetric-Decidable-Equivalence-Relation y x)
 
   transitive-Decidable-Equivalence-Relation :
-    {x y z : X} → sim-Decidable-Equivalence-Relation x y →
-    sim-Decidable-Equivalence-Relation y z →
-    sim-Decidable-Equivalence-Relation x z
+    is-transitive sim-Decidable-Equivalence-Relation
   transitive-Decidable-Equivalence-Relation =
-    trans-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
+    transitive-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
 
 equiv-equivalence-relation-is-decidable-Dec-Eq-Rel :
   {l1 l2 : Level} {X : UU l1} →
@@ -260,7 +258,7 @@ module _
     pr1 center-total-subtype-equivalence-class-Decidable-Equivalence-Relation =
       class-Decidable-Equivalence-Relation R a
     pr2 center-total-subtype-equivalence-class-Decidable-Equivalence-Relation =
-      refl-Decidable-Equivalence-Relation R
+      refl-Decidable-Equivalence-Relation R a
 
     contraction-total-subtype-equivalence-class-Decidable-Equivalence-Relation :
       ( t :
@@ -292,9 +290,9 @@ module _
                 eq-iff-Decidable-Prop
                   ( pr1 R a y)
                   ( pr1 R x y)
-                  ( transitive-Decidable-Equivalence-Relation R H)
-                  ( transitive-Decidable-Equivalence-Relation R
-                    ( symmetric-Decidable-Equivalence-Relation R H))))
+                  ( λ K → transitive-Decidable-Equivalence-Relation R x a y K H)
+                  ( λ K → transitive-Decidable-Equivalence-Relation R a x y K
+                    ( symmetric-Decidable-Equivalence-Relation R x a H))))
 
     is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation :
       is-contr
@@ -315,7 +313,7 @@ module _
     is-in-subtype-equivalence-class-Decidable-Equivalence-Relation R q a
   related-eq-quotient-Decidable-Equivalence-Relation
     .(class-Decidable-Equivalence-Relation R a) refl =
-    refl-Decidable-Equivalence-Relation R
+    refl-Decidable-Equivalence-Relation R a
 
   abstract
     is-equiv-related-eq-quotient-Decidable-Equivalence-Relation :
@@ -439,7 +437,7 @@ module _
           ( eq-pair-Σ
             ( T)
             ( all-elements-equal-type-trunc-Prop _ _))
-          ( transitive-Decidable-Equivalence-Relation R
+          ( transitive-Decidable-Equivalence-Relation R _ a b q
             ( tr
               ( λ Z →
                 is-in-subtype-equivalence-class-Decidable-Equivalence-Relation
@@ -447,8 +445,7 @@ module _
               { x = P}
               { y = class-Decidable-Equivalence-Relation R x}
               ( eq-pair-Σ (inv T) (all-elements-equal-type-trunc-Prop _ _))
-              ( p))
-            q))
+              ( p))))
 ```
 
 ```agda

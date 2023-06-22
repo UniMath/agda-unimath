@@ -143,7 +143,8 @@ module _
     (x : type-Large-Subframe l1)
     (y : type-Large-Subframe l2)
     (z : type-Large-Subframe l3) →
-    leq-Large-Subframe y z → leq-Large-Subframe x y →
+    leq-Large-Subframe y z →
+    leq-Large-Subframe x y →
     leq-Large-Subframe x z
   transitive-leq-Large-Subframe =
     transitive-leq-Large-Subposet

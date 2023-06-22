@@ -75,24 +75,21 @@ is-equivalence-relation-prop-Eq-Rel :
 is-equivalence-relation-prop-Eq-Rel R = pr2 R
 
 refl-Eq-Rel :
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) →
-  is-reflexive-Rel-Prop (prop-Eq-Rel R)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) → is-reflexive (sim-Eq-Rel R)
 refl-Eq-Rel R = pr1 (is-equivalence-relation-prop-Eq-Rel R)
 
 symm-Eq-Rel :
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) →
-  is-symmetric-Rel-Prop (prop-Eq-Rel R)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) → is-symmetric (sim-Eq-Rel R)
 symm-Eq-Rel R = pr1 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
 
-trans-Eq-Rel :
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) →
-  is-transitive-Rel-Prop (prop-Eq-Rel R)
-trans-Eq-Rel R = pr2 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
+transitive-Eq-Rel :
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) → is-transitive (sim-Eq-Rel R)
+transitive-Eq-Rel R = pr2 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
 
 inhabited-subtype-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} → Eq-Rel l2 A → A → inhabited-subtype l2 A
 pr1 (inhabited-subtype-Eq-Rel R x) = prop-Eq-Rel R x
-pr2 (inhabited-subtype-Eq-Rel R x) = unit-trunc-Prop (pair x (refl-Eq-Rel R))
+pr2 (inhabited-subtype-Eq-Rel R x) = unit-trunc-Prop (x , refl-Eq-Rel R x)
 ```
 
 ## Properties
@@ -103,8 +100,8 @@ pr2 (inhabited-subtype-Eq-Rel R x) = unit-trunc-Prop (pair x (refl-Eq-Rel R))
 iff-symm-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y : A} →
   sim-Eq-Rel R x y ↔ sim-Eq-Rel R y x
-pr1 (iff-symm-Eq-Rel R) = symm-Eq-Rel R
-pr2 (iff-symm-Eq-Rel R) = symm-Eq-Rel R
+pr1 (iff-symm-Eq-Rel R) = symm-Eq-Rel R _ _
+pr2 (iff-symm-Eq-Rel R) = symm-Eq-Rel R _ _
 
 equiv-symm-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y : A} →
@@ -116,33 +113,37 @@ equiv-symm-Eq-Rel R =
 ### Transitivity induces equivalences `R(y,z) ≃ R(x,z)`
 
 ```agda
-iff-trans-Eq-Rel :
+iff-transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
   sim-Eq-Rel R x y → (sim-Eq-Rel R y z ↔ sim-Eq-Rel R x z)
-pr1 (iff-trans-Eq-Rel R r) s = trans-Eq-Rel R r s
-pr2 (iff-trans-Eq-Rel R r) s = trans-Eq-Rel R (symm-Eq-Rel R r) s
+pr1 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s r
+pr2 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s (symm-Eq-Rel R _ _ r)
 
-equiv-trans-Eq-Rel :
+equiv-transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
   sim-Eq-Rel R x y → (sim-Eq-Rel R y z ≃ sim-Eq-Rel R x z)
-equiv-trans-Eq-Rel R r =
-  equiv-iff' (prop-Eq-Rel R _ _) (prop-Eq-Rel R _ _) (iff-trans-Eq-Rel R r)
+equiv-transitive-Eq-Rel R r =
+  equiv-iff' (prop-Eq-Rel R _ _) (prop-Eq-Rel R _ _) (iff-transitive-Eq-Rel R r)
 ```
 
 ### Transitivity induces equivalences `R(x,y) ≃ R(x,z)`
 
 ```agda
-iff-trans-Eq-Rel' :
+iff-transitive-Eq-Rel' :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
   sim-Eq-Rel R y z → (sim-Eq-Rel R x y ↔ sim-Eq-Rel R x z)
-pr1 (iff-trans-Eq-Rel' R r) s = trans-Eq-Rel R s r
-pr2 (iff-trans-Eq-Rel' R r) s = trans-Eq-Rel R s (symm-Eq-Rel R r)
+pr1 (iff-transitive-Eq-Rel' R r) s = transitive-Eq-Rel R _ _ _ r s
+pr2 (iff-transitive-Eq-Rel' R r) s =
+  transitive-Eq-Rel R _ _ _ (symm-Eq-Rel R _ _ r) s
 
-equiv-trans-Eq-Rel' :
+equiv-transitive-Eq-Rel' :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
   sim-Eq-Rel R y z → (sim-Eq-Rel R x y ≃ sim-Eq-Rel R x z)
-equiv-trans-Eq-Rel' R r =
-  equiv-iff' (prop-Eq-Rel R _ _) (prop-Eq-Rel R _ _) (iff-trans-Eq-Rel' R r)
+equiv-transitive-Eq-Rel' R r =
+  equiv-iff'
+    ( prop-Eq-Rel R _ _)
+    ( prop-Eq-Rel R _ _)
+    ( iff-transitive-Eq-Rel' R r)
 ```
 
 ## Examples
@@ -153,14 +154,14 @@ equiv-trans-Eq-Rel' R r =
 indiscrete-Eq-Rel :
   {l1 : Level} (A : UU l1) → Eq-Rel lzero A
 pr1 (indiscrete-Eq-Rel A) x y = unit-Prop
-pr1 (pr2 (indiscrete-Eq-Rel A)) = star
-pr1 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ = star
-pr2 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ _ = star
+pr1 (pr2 (indiscrete-Eq-Rel A)) _ = star
+pr1 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ _ _ = star
+pr2 (pr2 (pr2 (indiscrete-Eq-Rel A))) _ _ _ _ _ = star
 
 raise-indiscrete-Eq-Rel :
   {l1 : Level} (l2 : Level) (A : UU l1) → Eq-Rel l2 A
 pr1 (raise-indiscrete-Eq-Rel l A) x y = raise-unit-Prop l
-pr1 (pr2 (raise-indiscrete-Eq-Rel l A)) = raise-star
-pr1 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ = raise-star
-pr2 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ _ = raise-star
+pr1 (pr2 (raise-indiscrete-Eq-Rel l A)) _ = raise-star
+pr1 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ _ _ = raise-star
+pr2 (pr2 (pr2 (raise-indiscrete-Eq-Rel l A))) _ _ _ _ _ = raise-star
 ```

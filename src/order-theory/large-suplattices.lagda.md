@@ -139,7 +139,8 @@ module _
     (x : type-Large-Suplattice l1)
     (y : type-Large-Suplattice l2)
     (z : type-Large-Suplattice l3) →
-    leq-Large-Suplattice y z → leq-Large-Suplattice x y →
+    leq-Large-Suplattice y z →
+    leq-Large-Suplattice x y →
     leq-Large-Suplattice x z
   transitive-leq-Large-Suplattice =
     transitive-leq-Large-Poset (large-poset-Large-Suplattice L)

@@ -37,23 +37,24 @@ module _
   reflexive-prod-Rel-Prop :
     is-reflexive-Rel-Prop
       ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (reflexive-prod-Rel-Prop) = refl-Eq-Rel R
-  pr2 (reflexive-prod-Rel-Prop) = refl-Eq-Rel S
+  pr1 (reflexive-prod-Rel-Prop x) = refl-Eq-Rel R (pr1 x)
+  pr2 (reflexive-prod-Rel-Prop x) = refl-Eq-Rel S (pr2 x)
 
   symmetric-prod-Rel-Prop :
     is-symmetric-Rel-Prop
       ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (symmetric-prod-Rel-Prop (p , q)) = symm-Eq-Rel R p
-  pr2 (symmetric-prod-Rel-Prop (p , q)) = symm-Eq-Rel S q
+  pr1 (symmetric-prod-Rel-Prop x y (p , q)) = symm-Eq-Rel R (pr1 x) (pr1 y) p
+  pr2 (symmetric-prod-Rel-Prop x y (p , q)) = symm-Eq-Rel S (pr2 x) (pr2 y) q
 
   transitive-prod-Rel-Prop :
     is-transitive-Rel-Prop
       ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (transitive-prod-Rel-Prop (p , q) (p' , q')) = trans-Eq-Rel R p p'
-  pr2 (transitive-prod-Rel-Prop (p , q) (p' , q')) = trans-Eq-Rel S q q'
+  pr1 (transitive-prod-Rel-Prop x y z (p , q) (p' , q')) =
+    transitive-Eq-Rel R (pr1 x) (pr1 y) (pr1 z) p p'
+  pr2 (transitive-prod-Rel-Prop x y z (p , q) (p' , q')) =
+    transitive-Eq-Rel S (pr2 x) (pr2 y) (pr2 z) q q'
 
-  prod-Eq-Rel :
-    Eq-Rel (l2 ⊔ l4) (A × B)
+  prod-Eq-Rel : Eq-Rel (l2 ⊔ l4) (A × B)
   pr1 prod-Eq-Rel = prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S)
   pr1 (pr2 prod-Eq-Rel) = reflexive-prod-Rel-Prop
   pr1 (pr2 (pr2 prod-Eq-Rel)) = symmetric-prod-Rel-Prop

@@ -82,7 +82,8 @@ module _
     {x : type-Large-Poset P l1}
     {y : type-Large-Poset P l2}
     {z : type-Large-Poset P l3} →
-    sim-Large-Poset P y z → sim-Large-Poset P x y →
+    sim-Large-Poset P y z →
+    sim-Large-Poset P x y →
     sim-Large-Poset P x z
   transitive-sim-Large-Poset =
     transitive-sim-Large-Preorder (large-preorder-Large-Poset P)

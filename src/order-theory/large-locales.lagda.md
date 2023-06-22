@@ -91,9 +91,12 @@ module _
 
   transitive-leq-Large-Locale :
     {l1 l2 l3 : Level}
-    (x : type-Large-Locale l1) (y : type-Large-Locale l2)
+    (x : type-Large-Locale l1)
+    (y : type-Large-Locale l2)
     (z : type-Large-Locale l3) →
-    leq-Large-Locale y z → leq-Large-Locale x y → leq-Large-Locale x z
+    leq-Large-Locale y z →
+    leq-Large-Locale x y →
+    leq-Large-Locale x z
   transitive-leq-Large-Locale =
     transitive-leq-Large-Frame L
 

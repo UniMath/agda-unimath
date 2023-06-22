@@ -168,13 +168,13 @@ module _
     binary-hom-Eq-Rel R S T → A → hom-Eq-Rel S T
   pr1 (map-hom-binary-hom-Eq-Rel f a) = map-binary-hom-Eq-Rel R S T f a
   pr2 (map-hom-binary-hom-Eq-Rel f a) {x} {y} s =
-    preserves-sim-binary-hom-Eq-Rel R S T f (refl-Eq-Rel R) s
+    preserves-sim-binary-hom-Eq-Rel R S T f (refl-Eq-Rel R a) s
 
   preserves-sim-hom-binary-hom-Eq-Rel :
     (f : binary-hom-Eq-Rel R S T) →
     preserves-sim-Eq-Rel R (eq-rel-hom-Eq-Rel S T) (map-hom-binary-hom-Eq-Rel f)
   preserves-sim-hom-binary-hom-Eq-Rel f {x} {y} r b =
-    preserves-sim-binary-hom-Eq-Rel R S T f r (refl-Eq-Rel S)
+    preserves-sim-binary-hom-Eq-Rel R S T f r (refl-Eq-Rel S b)
 
   hom-binary-hom-Eq-Rel :
     binary-hom-Eq-Rel R S T → hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T)
@@ -190,11 +190,14 @@ module _
     (f : hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T)) →
     preserves-sim-binary-map-Eq-Rel R S T (map-binary-hom-hom-Eq-Rel f)
   preserves-sim-binary-hom-hom-Eq-Rel f {x} {x'} {y} {y'} r s =
-    trans-Eq-Rel T
-      ( preserves-sim-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f r y)
+    transitive-Eq-Rel T
+      ( pr1 (map-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f x) y)
+      ( pr1 (map-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f x') y)
+      ( map-hom-Eq-Rel S T (pr1 f x') y')
       ( preserves-sim-hom-Eq-Rel S T
         ( map-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f x')
         ( s))
+      ( preserves-sim-hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) f r y)
 
   binary-hom-hom-Eq-Rel :
     hom-Eq-Rel R (eq-rel-hom-Eq-Rel S T) → binary-hom-Eq-Rel R S T

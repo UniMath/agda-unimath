@@ -125,7 +125,8 @@ module _
     (x : type-Large-Subposet l1)
     (y : type-Large-Subposet l2)
     (z : type-Large-Subposet l3) →
-    leq-Large-Subposet y z → leq-Large-Subposet x y →
+    leq-Large-Subposet y z →
+    leq-Large-Subposet x y →
     leq-Large-Subposet x z
   transitive-leq-Large-Subposet =
     transitive-leq-Large-Subpreorder

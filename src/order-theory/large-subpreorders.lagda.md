@@ -86,7 +86,8 @@ module _
     (x : type-Large-Subpreorder l1)
     (y : type-Large-Subpreorder l2)
     (z : type-Large-Subpreorder l3) →
-    leq-Large-Subpreorder y z → leq-Large-Subpreorder x y →
+    leq-Large-Subpreorder y z →
+    leq-Large-Subpreorder x y →
     leq-Large-Subpreorder x z
   transitive-leq-Large-Subpreorder (x , p) (y , q) (z , r) =
     transitive-leq-Large-Preorder P x y z

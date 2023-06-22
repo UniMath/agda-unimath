@@ -65,24 +65,21 @@ module _
   sim-function-type : (f g : X → A) → UU (l1 ⊔ l3)
   sim-function-type = type-Rel-Prop rel-function-type
 
-  refl-sim-function-type : (f : X → A) → sim-function-type f f
-  refl-sim-function-type f x = refl-Eq-Rel R
+  refl-sim-function-type : is-reflexive sim-function-type
+  refl-sim-function-type f x = refl-Eq-Rel R (f x)
 
-  symm-sim-function-type :
-    (f g : X → A) → sim-function-type f g → sim-function-type g f
-  symm-sim-function-type f g r x = symm-Eq-Rel R (r x)
+  symm-sim-function-type : is-symmetric sim-function-type
+  symm-sim-function-type f g r x = symm-Eq-Rel R (f x) (g x) (r x)
 
-  trans-sim-function-type :
-    (f g h : X → A) →
-    sim-function-type f g → sim-function-type g h → sim-function-type f h
-  trans-sim-function-type f g h r s x = trans-Eq-Rel R (r x) (s x)
+  trans-sim-function-type : is-transitive sim-function-type
+  trans-sim-function-type f g h r s x =
+    transitive-Eq-Rel R (f x) (g x) (h x) (r x) (s x)
 
   eq-rel-function-type : Eq-Rel (l1 ⊔ l3) (X → A)
   pr1 eq-rel-function-type = rel-function-type
-  pr1 (pr2 eq-rel-function-type) {f} = refl-sim-function-type f
-  pr1 (pr2 (pr2 eq-rel-function-type)) {f} {g} = symm-sim-function-type f g
-  pr2 (pr2 (pr2 eq-rel-function-type)) {f} {g} {h} =
-    trans-sim-function-type f g h
+  pr1 (pr2 eq-rel-function-type) = refl-sim-function-type
+  pr1 (pr2 (pr2 eq-rel-function-type)) = symm-sim-function-type
+  pr2 (pr2 (pr2 eq-rel-function-type)) = trans-sim-function-type
 
   map-exponent-reflecting-map-Eq-Rel :
     {l4 : Level} {B : UU l4} → reflecting-map-Eq-Rel R B → (X → A) → (X → B)
@@ -177,9 +174,7 @@ module _
   symm-sim-hom-Eq-Rel f g =
     symm-sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
 
-  trans-sim-hom-Eq-Rel :
-    (f g h : hom-Eq-Rel R S) →
-    sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g h → sim-hom-Eq-Rel f h
+  trans-sim-hom-Eq-Rel : is-transitive sim-hom-Eq-Rel
   trans-sim-hom-Eq-Rel f g h =
     trans-sim-function-type A S
       ( map-hom-Eq-Rel R S f)
@@ -189,9 +184,9 @@ module _
   eq-rel-hom-Eq-Rel :
     Eq-Rel (l1 ⊔ l4) (hom-Eq-Rel R S)
   pr1 eq-rel-hom-Eq-Rel = rel-hom-Eq-Rel
-  pr1 (pr2 eq-rel-hom-Eq-Rel) {f} = refl-sim-hom-Eq-Rel f
-  pr1 (pr2 (pr2 eq-rel-hom-Eq-Rel)) {f} {g} = symm-sim-hom-Eq-Rel f g
-  pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) {f} {g} {h} = trans-sim-hom-Eq-Rel f g h
+  pr1 (pr2 eq-rel-hom-Eq-Rel) = refl-sim-hom-Eq-Rel
+  pr1 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = symm-sim-hom-Eq-Rel
+  pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = trans-sim-hom-Eq-Rel
 ```
 
 ### The universal reflecting map from `hom-Eq-Rel R S` to `A/R → B/S`

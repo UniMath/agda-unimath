@@ -74,7 +74,9 @@ module _
     (I : left-ideal-Ring l2 R)
     (J : left-ideal-Ring l3 R)
     (K : left-ideal-Ring l4 R) →
-    leq-left-ideal-Ring J K → leq-left-ideal-Ring I J → leq-left-ideal-Ring I K
+    leq-left-ideal-Ring J K →
+    leq-left-ideal-Ring I J →
+    leq-left-ideal-Ring I K
   transitive-leq-left-ideal-Ring I J K =
     transitive-leq-subtype
       ( subset-left-ideal-Ring R I)

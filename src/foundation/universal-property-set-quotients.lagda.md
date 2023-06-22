@@ -423,8 +423,8 @@ module _
         ( prop-Eq-Rel R x)
           ( λ r →
             eq-iff
-              ( λ s → trans-Eq-Rel R s r)
-              ( λ s → trans-Eq-Rel R s (symm-Eq-Rel R r)))
+              ( transitive-Eq-Rel R _ _ _ r)
+              ( transitive-Eq-Rel R _ _ _ (symm-Eq-Rel R _ _ r)))
     P : type-Set B → Prop l2
     P = map-inv-is-equiv (Q (Prop-Set l2)) α
     compute-P :
@@ -438,7 +438,7 @@ module _
               ( inv (is-section-map-inv-is-equiv (Q (Prop-Set l2)) α)))
             ( a)))
     point-P : type-Prop (P (map-reflecting-map-Eq-Rel R q x))
-    point-P = map-equiv (compute-P x) (refl-Eq-Rel R)
+    point-P = map-equiv (compute-P x) (refl-Eq-Rel R x)
     center-total-P : Σ (type-Set B) (λ b → type-Prop (P b))
     center-total-P = pair (map-reflecting-map-Eq-Rel R q x) point-P
     contraction-total-P :

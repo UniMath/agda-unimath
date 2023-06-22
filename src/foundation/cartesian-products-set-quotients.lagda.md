@@ -91,12 +91,12 @@ module _
           inv-precomp-set-quotient S X
             ( pair
               (λ b → f (a , b))
-              (λ p → H (pair (refl-Eq-Rel R) p)))
+              (λ p → H (refl-Eq-Rel R a , p)))
             qb')
         ( λ {a1} {a2} p →
           ( ap (inv-precomp-set-quotient S X)
             ( eq-pair-Σ
-              ( eq-htpy (λ b → H (pair p (refl-Eq-Rel S))))
+              ( eq-htpy (λ b → H (p , refl-Eq-Rel S b)))
               ( eq-is-prop
                 ( is-prop-reflects-Eq-Rel S X _))))))
       ( qa)

@@ -38,11 +38,14 @@ record
       {l1 l2 : Level} →
       type-Large-Preorder l1 → type-Large-Preorder l2 → Prop (β l1 l2)
     refl-leq-Large-Preorder :
-      {l1 : Level} (x : type-Large-Preorder l1) →
+      {l1 : Level}
+      (x : type-Large-Preorder l1) →
       type-Prop (leq-Large-Preorder-Prop x x)
     transitive-leq-Large-Preorder :
-      {l1 l2 l3 : Level} (x : type-Large-Preorder l1)
-      (y : type-Large-Preorder l2) (z : type-Large-Preorder l3) →
+      {l1 l2 l3 : Level}
+      (x : type-Large-Preorder l1)
+      (y : type-Large-Preorder l2)
+      (z : type-Large-Preorder l3) →
       type-Prop (leq-Large-Preorder-Prop y z) →
       type-Prop (leq-Large-Preorder-Prop x y) →
       type-Prop (leq-Large-Preorder-Prop x z)

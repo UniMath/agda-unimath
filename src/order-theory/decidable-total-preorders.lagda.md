@@ -7,6 +7,7 @@ module order-theory.decidable-total-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -101,22 +102,16 @@ module _
     leq-Decidable-Preorder-Decidable-Prop
       decidable-preorder-Decidable-Total-Preorder
 
-  refl-leq-Decidable-Total-Preorder :
-    (x : type-Decidable-Total-Preorder) → leq-Decidable-Total-Preorder x x
+  refl-leq-Decidable-Total-Preorder : is-reflexive leq-Decidable-Total-Preorder
   refl-leq-Decidable-Total-Preorder =
     refl-leq-Preorder preorder-Decidable-Total-Preorder
 
-  transitive-leq-Decidable-Total-Preorder :
-    (x y z : type-Decidable-Total-Preorder) →
-    leq-Decidable-Total-Preorder y z →
-    leq-Decidable-Total-Preorder x y →
-    leq-Decidable-Total-Preorder x z
+  transitive-leq-Decidable-Total-Preorder : is-transitive leq-Decidable-Total-Preorder
   transitive-leq-Decidable-Total-Preorder =
     transitive-leq-Preorder preorder-Decidable-Total-Preorder
 
   leq-or-strict-greater-Decidable-Preorder :
-    (x y : type-Decidable-Total-Preorder) →
-    UU (l1 ⊔ l2)
+    (x y : type-Decidable-Total-Preorder) → UU (l1 ⊔ l2)
   leq-or-strict-greater-Decidable-Preorder x y =
     leq-Decidable-Total-Preorder x y + le-Decidable-Total-Preorder y x
 

@@ -96,7 +96,9 @@ module _
     (x : type-Π-Large-Locale l2)
     (y : type-Π-Large-Locale l3)
     (z : type-Π-Large-Locale l4) →
-    leq-Π-Large-Locale y z → leq-Π-Large-Locale x y → leq-Π-Large-Locale x z
+    leq-Π-Large-Locale y z →
+    leq-Π-Large-Locale x y →
+    leq-Π-Large-Locale x z
   transitive-leq-Π-Large-Locale = transitive-leq-Π-Large-Frame L
 
   meet-Π-Large-Locale :

@@ -74,9 +74,13 @@ module _
   refl-leq-Large-Poset = refl-leq-Large-Preorder (large-preorder-Large-Poset X)
 
   transitive-leq-Large-Poset :
-    {l1 l2 l3 : Level} (x : type-Large-Poset l1) (y : type-Large-Poset l2)
+    {l1 l2 l3 : Level}
+    (x : type-Large-Poset l1)
+    (y : type-Large-Poset l2)
     (z : type-Large-Poset l3) →
-    leq-Large-Poset y z → leq-Large-Poset x y → leq-Large-Poset x z
+    leq-Large-Poset y z →
+    leq-Large-Poset x y →
+    leq-Large-Poset x z
   transitive-leq-Large-Poset =
     transitive-leq-Large-Preorder (large-preorder-Large-Poset X)
 

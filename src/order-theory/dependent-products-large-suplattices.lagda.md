@@ -112,7 +112,8 @@ module _
     (x : type-Π-Large-Suplattice l2)
     (y : type-Π-Large-Suplattice l3)
     (z : type-Π-Large-Suplattice l4) →
-    leq-Π-Large-Suplattice y z → leq-Π-Large-Suplattice x y →
+    leq-Π-Large-Suplattice y z →
+    leq-Π-Large-Suplattice x y →
     leq-Π-Large-Suplattice x z
   transitive-leq-Π-Large-Suplattice =
     transitive-leq-Large-Suplattice Π-Large-Suplattice

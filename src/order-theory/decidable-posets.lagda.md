@@ -7,6 +7,7 @@ module order-theory.decidable-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -94,13 +95,10 @@ module _
   concatenate-leq-eq-Decidable-Poset =
     concatenate-leq-eq-Poset poset-Decidable-Poset
 
-  refl-leq-Decidable-Poset :
-    (x : type-Decidable-Poset) → leq-Decidable-Poset x x
+  refl-leq-Decidable-Poset : is-reflexive leq-Decidable-Poset
   refl-leq-Decidable-Poset = refl-leq-Poset poset-Decidable-Poset
 
-  transitive-leq-Decidable-Poset :
-    (x y z : type-Decidable-Poset) → leq-Decidable-Poset y z →
-    leq-Decidable-Poset x y → leq-Decidable-Poset x z
+  transitive-leq-Decidable-Poset : is-transitive leq-Decidable-Poset
   transitive-leq-Decidable-Poset = transitive-leq-Poset poset-Decidable-Poset
 
   antisymmetric-leq-Decidable-Poset :

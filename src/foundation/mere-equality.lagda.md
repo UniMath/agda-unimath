@@ -8,6 +8,7 @@ module foundation.mere-equality where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.functoriality-propositional-truncation
 open import foundation.propositional-truncations
@@ -38,7 +39,7 @@ module _
   mere-eq-Prop x y = trunc-Prop (x ＝ y)
 
   mere-eq : A → A → UU l
-  mere-eq x y = type-trunc-Prop (x ＝ y)
+  mere-eq x y = type-Prop (mere-eq-Prop x y)
 
   is-prop-mere-eq : (x y : A) → is-prop (mere-eq x y)
   is-prop-mere-eq x y = is-prop-type-trunc-Prop
@@ -51,8 +52,8 @@ module _
 ```agda
 abstract
   refl-mere-eq :
-    {l : Level} {A : UU l} {x : A} → mere-eq x x
-  refl-mere-eq = unit-trunc-Prop refl
+    {l : Level} {A : UU l} → is-reflexive (mere-eq {l} {A})
+  refl-mere-eq _ = unit-trunc-Prop refl
 ```
 
 ### Symmetry
@@ -60,9 +61,8 @@ abstract
 ```agda
 abstract
   symm-mere-eq :
-    {l : Level} {A : UU l} {x y : A} → mere-eq x y → mere-eq y x
-  symm-mere-eq {x = x} {y} =
-    map-trunc-Prop inv
+    {l : Level} {A : UU l} → is-symmetric (mere-eq {l} {A})
+  symm-mere-eq _ _ = map-trunc-Prop inv
 ```
 
 ### Transitivity
@@ -70,12 +70,11 @@ abstract
 ```agda
 abstract
   trans-mere-eq :
-    {l : Level} {A : UU l} {x y z : A} →
-    mere-eq x y → mere-eq y z → mere-eq x z
-  trans-mere-eq {x = x} {y} {z} p q =
-    apply-universal-property-trunc-Prop p
+    {l : Level} {A : UU l} → is-transitive (mere-eq {l} {A})
+  trans-mere-eq x y z p q =
+    apply-universal-property-trunc-Prop q
       ( mere-eq-Prop x z)
-      ( λ p' → map-trunc-Prop (λ q' → p' ∙ q') q)
+      ( λ p' → map-trunc-Prop (p' ∙_) p)
 ```
 
 ### Mere equality is an equivalence relation
@@ -115,5 +114,5 @@ is-set-mere-eq-in-id =
   is-set-prop-in-id
     ( mere-eq)
     ( is-prop-mere-eq)
-    ( λ x → refl-mere-eq)
+    ( refl-mere-eq)
 ```

@@ -7,6 +7,7 @@ module order-theory.total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -98,17 +99,13 @@ module _
     leq-Total-Order x y → y ＝ z → leq-Total-Order x z
   concatenate-leq-eq-Total-Order = concatenate-leq-eq-Poset poset-Total-Order
 
-  refl-leq-Total-Order : (x : type-Total-Order) → leq-Total-Order x x
+  refl-leq-Total-Order : is-reflexive leq-Total-Order
   refl-leq-Total-Order = refl-leq-Poset poset-Total-Order
 
-  transitive-leq-Total-Order :
-    (x y z : type-Total-Order) → leq-Total-Order y z →
-    leq-Total-Order x y → leq-Total-Order x z
+  transitive-leq-Total-Order : is-transitive leq-Total-Order
   transitive-leq-Total-Order = transitive-leq-Poset poset-Total-Order
 
-  antisymmetric-leq-Total-Order :
-    (x y : type-Total-Order) →
-    leq-Total-Order x y → leq-Total-Order y x → Id x y
+  antisymmetric-leq-Total-Order : is-antisymmetric leq-Total-Order
   antisymmetric-leq-Total-Order = antisymmetric-leq-Poset poset-Total-Order
 
   is-set-type-Total-Order : is-set type-Total-Order

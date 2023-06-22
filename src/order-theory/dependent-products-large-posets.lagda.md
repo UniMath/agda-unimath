@@ -68,9 +68,11 @@ module _
 
   transitive-leq-Π-Large-Poset :
     {l1 l2 l3 : Level}
-    (x : type-Π-Large-Poset l1) (y : type-Π-Large-Poset l2)
+    (x : type-Π-Large-Poset l1)
+    (y : type-Π-Large-Poset l2)
     (z : type-Π-Large-Poset l3) →
-    leq-Π-Large-Poset y z → leq-Π-Large-Poset x y →
+    leq-Π-Large-Poset y z →
+    leq-Π-Large-Poset x y →
     leq-Π-Large-Poset x z
   transitive-leq-Π-Large-Poset =
     transitive-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
