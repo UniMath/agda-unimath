@@ -400,7 +400,7 @@ module _
 
 ```agda
   left-eq-rel-congruence-Normal-Subgroup :
-    Eq-Rel l2 (type-Group G)
+    Eq-Relation l2 (type-Group G)
   left-eq-rel-congruence-Normal-Subgroup =
     left-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
 
@@ -446,26 +446,26 @@ module _
 
 ```agda
   refl-congruence-Normal-Subgroup :
-    is-reflexive-Rel-Prop prop-congruence-Normal-Subgroup
+    is-reflexive-Relation-Prop prop-congruence-Normal-Subgroup
   refl-congruence-Normal-Subgroup =
     refl-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   symmetric-congruence-Normal-Subgroup :
-    is-symmetric-Rel-Prop prop-congruence-Normal-Subgroup
+    is-symmetric-Relation-Prop prop-congruence-Normal-Subgroup
   symmetric-congruence-Normal-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   transitive-congruence-Normal-Subgroup :
-    is-transitive-Rel-Prop prop-congruence-Normal-Subgroup
+    is-transitive-Relation-Prop prop-congruence-Normal-Subgroup
   transitive-congruence-Normal-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  eq-rel-congruence-Normal-Subgroup : Eq-Rel l2 (type-Group G)
+  eq-rel-congruence-Normal-Subgroup : Eq-Relation l2 (type-Group G)
   eq-rel-congruence-Normal-Subgroup =
     right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
 
   relate-same-elements-left-sim-congruence-Normal-Subgroup :
-    relate-same-elements-Eq-Rel
+    relate-same-elements-Eq-Relation
       ( eq-rel-congruence-Normal-Subgroup)
       ( left-eq-rel-congruence-Normal-Subgroup)
   pr1 (relate-same-elements-left-sim-congruence-Normal-Subgroup x y) =

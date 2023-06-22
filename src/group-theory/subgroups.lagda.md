@@ -492,7 +492,7 @@ module _
         ( q)
         ( p))
 
-  right-eq-rel-Subgroup : Eq-Rel l2 (type-Group G)
+  right-eq-rel-Subgroup : Eq-Relation l2 (type-Group G)
   pr1 right-eq-rel-Subgroup = prop-right-eq-rel-Subgroup
   pr1 (pr2 right-eq-rel-Subgroup) = refl-right-sim-Subgroup
   pr1 (pr2 (pr2 right-eq-rel-Subgroup)) = symmetric-right-sim-Subgroup
@@ -546,7 +546,7 @@ module _
         ( q)
         ( p))
 
-  left-eq-rel-Subgroup : Eq-Rel l2 (type-Group G)
+  left-eq-rel-Subgroup : Eq-Relation l2 (type-Group G)
   pr1 left-eq-rel-Subgroup = prop-left-eq-rel-Subgroup
   pr1 (pr2 left-eq-rel-Subgroup) = refl-left-sim-Subgroup
   pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symmetric-left-sim-Subgroup

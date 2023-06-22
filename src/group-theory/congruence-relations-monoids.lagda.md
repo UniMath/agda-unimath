@@ -31,40 +31,43 @@ semigroup of `M`.
 
 ```agda
 is-congruence-monoid-Prop :
-  {l1 l2 : Level} (M : Monoid l1) → Eq-Rel l2 (type-Monoid M) → Prop (l1 ⊔ l2)
+  {l1 l2 : Level} (M : Monoid l1) →
+  Eq-Relation l2 (type-Monoid M) → Prop (l1 ⊔ l2)
 is-congruence-monoid-Prop M = is-congruence-semigroup-Prop (semigroup-Monoid M)
 
 is-congruence-Monoid :
-  {l1 l2 : Level} (M : Monoid l1) → Eq-Rel l2 (type-Monoid M) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (M : Monoid l1) →
+  Eq-Relation l2 (type-Monoid M) → UU (l1 ⊔ l2)
 is-congruence-Monoid M R =
   is-congruence-Semigroup (semigroup-Monoid M) R
 
 is-prop-is-congruence-Monoid :
-  {l1 l2 : Level} (M : Monoid l1) (R : Eq-Rel l2 (type-Monoid M)) →
+  {l1 l2 : Level} (M : Monoid l1) (R : Eq-Relation l2 (type-Monoid M)) →
   is-prop (is-congruence-Monoid M R)
 is-prop-is-congruence-Monoid M =
   is-prop-is-congruence-Semigroup (semigroup-Monoid M)
 
 congruence-Monoid : {l : Level} (l2 : Level) (M : Monoid l) → UU (l ⊔ lsuc l2)
 congruence-Monoid l2 M =
-  Σ (Eq-Rel l2 (type-Monoid M)) (is-congruence-Monoid M)
+  Σ (Eq-Relation l2 (type-Monoid M)) (is-congruence-Monoid M)
 
 module _
   {l1 l2 : Level} (M : Monoid l1) (R : congruence-Monoid l2 M)
   where
 
-  eq-rel-congruence-Monoid : Eq-Rel l2 (type-Monoid M)
+  eq-rel-congruence-Monoid : Eq-Relation l2 (type-Monoid M)
   eq-rel-congruence-Monoid = pr1 R
 
-  prop-congruence-Monoid : Rel-Prop l2 (type-Monoid M)
-  prop-congruence-Monoid = prop-Eq-Rel eq-rel-congruence-Monoid
+  prop-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
+  prop-congruence-Monoid = prop-Eq-Relation eq-rel-congruence-Monoid
 
   sim-congruence-Monoid : (x y : type-Monoid M) → UU l2
-  sim-congruence-Monoid = sim-Eq-Rel eq-rel-congruence-Monoid
+  sim-congruence-Monoid = sim-Eq-Relation eq-rel-congruence-Monoid
 
   is-prop-sim-congruence-Monoid :
     (x y : type-Monoid M) → is-prop (sim-congruence-Monoid x y)
-  is-prop-sim-congruence-Monoid = is-prop-sim-Eq-Rel eq-rel-congruence-Monoid
+  is-prop-sim-congruence-Monoid =
+    is-prop-sim-Eq-Relation eq-rel-congruence-Monoid
 
   concatenate-sim-eq-congruence-Monoid :
     {x y z : type-Monoid M} → sim-congruence-Monoid x y → y ＝ z →
@@ -81,20 +84,22 @@ module _
     z ＝ w → sim-congruence-Monoid x w
   concatenate-eq-sim-eq-congruence-Monoid refl H refl = H
 
-  refl-congruence-Monoid : is-reflexive-Rel-Prop prop-congruence-Monoid
-  refl-congruence-Monoid = refl-Eq-Rel eq-rel-congruence-Monoid
+  refl-congruence-Monoid : is-reflexive-Relation-Prop prop-congruence-Monoid
+  refl-congruence-Monoid = refl-Eq-Relation eq-rel-congruence-Monoid
 
-  symmetric-congruence-Monoid : is-symmetric-Rel-Prop prop-congruence-Monoid
-  symmetric-congruence-Monoid = symmetric-Eq-Rel eq-rel-congruence-Monoid
+  symmetric-congruence-Monoid :
+    is-symmetric-Relation-Prop prop-congruence-Monoid
+  symmetric-congruence-Monoid = symmetric-Eq-Relation eq-rel-congruence-Monoid
 
   equiv-symmetric-congruence-Monoid :
     (x y : type-Monoid M) →
     sim-congruence-Monoid x y ≃ sim-congruence-Monoid y x
   equiv-symmetric-congruence-Monoid x y =
-    equiv-symmetric-Eq-Rel eq-rel-congruence-Monoid
+    equiv-symmetric-Eq-Relation eq-rel-congruence-Monoid
 
-  transitive-congruence-Monoid : is-transitive-Rel-Prop prop-congruence-Monoid
-  transitive-congruence-Monoid = transitive-Eq-Rel eq-rel-congruence-Monoid
+  transitive-congruence-Monoid :
+    is-transitive-Relation-Prop prop-congruence-Monoid
+  transitive-congruence-Monoid = transitive-Eq-Relation eq-rel-congruence-Monoid
 
   mul-congruence-Monoid :
     is-congruence-Monoid M eq-rel-congruence-Monoid

@@ -36,32 +36,32 @@ that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we have
 ```agda
 is-congruence-Group :
   {l1 l2 : Level} (G : Group l1) →
-  Eq-Rel l2 (type-Group G) → UU (l1 ⊔ l2)
+  Eq-Relation l2 (type-Group G) → UU (l1 ⊔ l2)
 is-congruence-Group G R =
   is-congruence-Semigroup (semigroup-Group G) R
 
 congruence-Group :
   {l : Level} (l2 : Level) (G : Group l) → UU (l ⊔ lsuc l2)
 congruence-Group l2 G =
-  Σ (Eq-Rel l2 (type-Group G)) (is-congruence-Group G)
+  Σ (Eq-Relation l2 (type-Group G)) (is-congruence-Group G)
 
 module _
   {l1 l2 : Level} (G : Group l1) (R : congruence-Group l2 G)
   where
 
-  eq-rel-congruence-Group : Eq-Rel l2 (type-Group G)
+  eq-rel-congruence-Group : Eq-Relation l2 (type-Group G)
   eq-rel-congruence-Group = pr1 R
 
-  prop-congruence-Group : Rel-Prop l2 (type-Group G)
-  prop-congruence-Group = prop-Eq-Rel eq-rel-congruence-Group
+  prop-congruence-Group : Relation-Prop l2 (type-Group G)
+  prop-congruence-Group = prop-Eq-Relation eq-rel-congruence-Group
 
   sim-congruence-Group : (x y : type-Group G) → UU l2
-  sim-congruence-Group = sim-Eq-Rel eq-rel-congruence-Group
+  sim-congruence-Group = sim-Eq-Relation eq-rel-congruence-Group
 
   is-prop-sim-congruence-Group :
     (x y : type-Group G) → is-prop (sim-congruence-Group x y)
   is-prop-sim-congruence-Group =
-    is-prop-sim-Eq-Rel eq-rel-congruence-Group
+    is-prop-sim-Eq-Relation eq-rel-congruence-Group
 
   concatenate-eq-sim-congruence-Group :
     {x1 x2 y : type-Group G} →
@@ -79,21 +79,21 @@ module _
     y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
 
-  refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
-  refl-congruence-Group = refl-Eq-Rel eq-rel-congruence-Group
+  refl-congruence-Group : is-reflexive-Relation-Prop prop-congruence-Group
+  refl-congruence-Group = refl-Eq-Relation eq-rel-congruence-Group
 
-  symmetric-congruence-Group : is-symmetric-Rel-Prop prop-congruence-Group
-  symmetric-congruence-Group = symmetric-Eq-Rel eq-rel-congruence-Group
+  symmetric-congruence-Group : is-symmetric-Relation-Prop prop-congruence-Group
+  symmetric-congruence-Group = symmetric-Eq-Relation eq-rel-congruence-Group
 
   equiv-symmetric-congruence-Group :
     (x y : type-Group G) →
     sim-congruence-Group x y ≃ sim-congruence-Group y x
   equiv-symmetric-congruence-Group x y =
-    equiv-symmetric-Eq-Rel eq-rel-congruence-Group
+    equiv-symmetric-Eq-Relation eq-rel-congruence-Group
 
   transitive-congruence-Group :
-    is-transitive-Rel-Prop prop-congruence-Group
-  transitive-congruence-Group = transitive-Eq-Rel eq-rel-congruence-Group
+    is-transitive-Relation-Prop prop-congruence-Group
+  transitive-congruence-Group = transitive-Eq-Relation eq-rel-congruence-Group
 
   mul-congruence-Group :
     is-congruence-Group G eq-rel-congruence-Group

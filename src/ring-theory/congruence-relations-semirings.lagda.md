@@ -44,7 +44,7 @@ module _
       ( eq-rel-congruence-Monoid (additive-monoid-Semiring R) S)
 
   is-congruence-eq-rel-Semiring :
-    {l2 : Level} (S : Eq-Rel l2 (type-Semiring R)) → UU (l1 ⊔ l2)
+    {l2 : Level} (S : Eq-Relation l2 (type-Semiring R)) → UU (l1 ⊔ l2)
   is-congruence-eq-rel-Semiring S =
     ( is-congruence-Monoid (additive-monoid-Semiring R) S) ×
     ( is-congruence-Monoid (multiplicative-monoid-Semiring R) S)
@@ -63,13 +63,13 @@ module _
     congruence-Monoid l2 (additive-monoid-Semiring R)
   congruence-additive-monoid-congruence-Semiring = pr1 S
 
-  eq-rel-congruence-Semiring : Eq-Rel l2 (type-Semiring R)
+  eq-rel-congruence-Semiring : Eq-Relation l2 (type-Semiring R)
   eq-rel-congruence-Semiring =
     eq-rel-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  prop-congruence-Semiring : Rel-Prop l2 (type-Semiring R)
+  prop-congruence-Semiring : Relation-Prop l2 (type-Semiring R)
   prop-congruence-Semiring =
     prop-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -89,14 +89,14 @@ module _
       ( congruence-additive-monoid-congruence-Semiring)
 
   refl-congruence-Semiring :
-    is-reflexive-Rel-Prop prop-congruence-Semiring
+    is-reflexive-Relation-Prop prop-congruence-Semiring
   refl-congruence-Semiring =
     refl-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
   symmetric-congruence-Semiring :
-    is-symmetric-Rel-Prop prop-congruence-Semiring
+    is-symmetric-Relation-Prop prop-congruence-Semiring
   symmetric-congruence-Semiring =
     symmetric-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -111,7 +111,7 @@ module _
       ( congruence-additive-monoid-congruence-Semiring)
 
   transitive-congruence-Semiring :
-    is-transitive-Rel-Prop prop-congruence-Semiring
+    is-transitive-Relation-Prop prop-congruence-Semiring
   transitive-congruence-Semiring =
     transitive-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -134,7 +134,7 @@ module _
 
 construct-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) →
-  (S : Eq-Rel l2 (type-Semiring R)) →
+  (S : Eq-Relation l2 (type-Semiring R)) →
   is-congruence-Monoid (additive-monoid-Semiring R) S →
   is-congruence-Monoid (multiplicative-monoid-Semiring R) S →
   congruence-Semiring l2 R

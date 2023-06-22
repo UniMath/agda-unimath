@@ -38,7 +38,7 @@ module _
   {l : Level} (X : Discrete-Type l)
   where
 
-  rel-apart-Discrete-Type : Rel-Prop l (type-Discrete-Type X)
+  rel-apart-Discrete-Type : Relation-Prop l (type-Discrete-Type X)
   rel-apart-Discrete-Type x y = neg-Prop' (x ＝ y)
 
   apart-Discrete-Type : (x y : type-Discrete-Type X) → UU l

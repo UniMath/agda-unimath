@@ -183,7 +183,7 @@ transitive-sim-fraction-ℤ x y z s r =
                             ( denominator-fraction-ℤ x)
                             ( denominator-fraction-ℤ y)))))))))))))
 
-eq-rel-sim-fraction-ℤ : Eq-Rel lzero fraction-ℤ
+eq-rel-sim-fraction-ℤ : Eq-Relation lzero fraction-ℤ
 pr1 eq-rel-sim-fraction-ℤ = sim-fraction-ℤ-Prop
 pr1 (pr2 eq-rel-sim-fraction-ℤ) = refl-sim-fraction-ℤ
 pr1 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = symmetric-sim-fraction-ℤ

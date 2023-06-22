@@ -30,35 +30,36 @@ relation.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {A : UU l1} (R : Eq-Rel l2 A)
-  {B : UU l3} (S : Eq-Rel l4 B)
+  {A : UU l1} (R : Eq-Relation l2 A)
+  {B : UU l3} (S : Eq-Relation l4 B)
   where
 
-  reflexive-prod-Rel-Prop :
-    is-reflexive-Rel-Prop
-      ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (reflexive-prod-Rel-Prop x) = refl-Eq-Rel R (pr1 x)
-  pr2 (reflexive-prod-Rel-Prop x) = refl-Eq-Rel S (pr2 x)
+  reflexive-prod-Relation-Prop :
+    is-reflexive-Relation-Prop
+      ( prod-Relation-Prop (prop-Eq-Relation R) (prop-Eq-Relation S))
+  pr1 (reflexive-prod-Relation-Prop x) = refl-Eq-Relation R (pr1 x)
+  pr2 (reflexive-prod-Relation-Prop x) = refl-Eq-Relation S (pr2 x)
 
-  symmetric-prod-Rel-Prop :
-    is-symmetric-Rel-Prop
-      ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (symmetric-prod-Rel-Prop x y (p , q)) =
-    symmetric-Eq-Rel R (pr1 x) (pr1 y) p
-  pr2 (symmetric-prod-Rel-Prop x y (p , q)) =
-    symmetric-Eq-Rel S (pr2 x) (pr2 y) q
+  symmetric-prod-Relation-Prop :
+    is-symmetric-Relation-Prop
+      ( prod-Relation-Prop (prop-Eq-Relation R) (prop-Eq-Relation S))
+  pr1 (symmetric-prod-Relation-Prop x y (p , q)) =
+    symmetric-Eq-Relation R (pr1 x) (pr1 y) p
+  pr2 (symmetric-prod-Relation-Prop x y (p , q)) =
+    symmetric-Eq-Relation S (pr2 x) (pr2 y) q
 
-  transitive-prod-Rel-Prop :
-    is-transitive-Rel-Prop
-      ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (transitive-prod-Rel-Prop x y z (p , q) (p' , q')) =
-    transitive-Eq-Rel R (pr1 x) (pr1 y) (pr1 z) p p'
-  pr2 (transitive-prod-Rel-Prop x y z (p , q) (p' , q')) =
-    transitive-Eq-Rel S (pr2 x) (pr2 y) (pr2 z) q q'
+  transitive-prod-Relation-Prop :
+    is-transitive-Relation-Prop
+      ( prod-Relation-Prop (prop-Eq-Relation R) (prop-Eq-Relation S))
+  pr1 (transitive-prod-Relation-Prop x y z (p , q) (p' , q')) =
+    transitive-Eq-Relation R (pr1 x) (pr1 y) (pr1 z) p p'
+  pr2 (transitive-prod-Relation-Prop x y z (p , q) (p' , q')) =
+    transitive-Eq-Relation S (pr2 x) (pr2 y) (pr2 z) q q'
 
-  prod-Eq-Rel : Eq-Rel (l2 ⊔ l4) (A × B)
-  pr1 prod-Eq-Rel = prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S)
-  pr1 (pr2 prod-Eq-Rel) = reflexive-prod-Rel-Prop
-  pr1 (pr2 (pr2 prod-Eq-Rel)) = symmetric-prod-Rel-Prop
-  pr2 (pr2 (pr2 prod-Eq-Rel)) = transitive-prod-Rel-Prop
+  prod-Eq-Relation : Eq-Relation (l2 ⊔ l4) (A × B)
+  pr1 prod-Eq-Relation =
+    prod-Relation-Prop (prop-Eq-Relation R) (prop-Eq-Relation S)
+  pr1 (pr2 prod-Eq-Relation) = reflexive-prod-Relation-Prop
+  pr1 (pr2 (pr2 prod-Eq-Relation)) = symmetric-prod-Relation-Prop
+  pr2 (pr2 (pr2 prod-Eq-Relation)) = transitive-prod-Relation-Prop
 ```

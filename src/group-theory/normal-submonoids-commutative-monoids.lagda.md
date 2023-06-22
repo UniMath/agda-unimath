@@ -275,7 +275,7 @@ module _
   where
 
   rel-congruence-Normal-Commutative-Submonoid :
-    Rel-Prop (l1 ⊔ l2) (type-Commutative-Monoid M)
+    Relation-Prop (l1 ⊔ l2) (type-Commutative-Monoid M)
   rel-congruence-Normal-Commutative-Submonoid x y =
     Π-Prop
       ( type-Commutative-Monoid M)
@@ -307,7 +307,7 @@ module _
     (H u) ∘iff (K u)
 
   eq-rel-congruence-Normal-Commutative-Submonoid :
-    Eq-Rel (l1 ⊔ l2) (type-Commutative-Monoid M)
+    Eq-Relation (l1 ⊔ l2) (type-Commutative-Monoid M)
   pr1 eq-rel-congruence-Normal-Commutative-Submonoid =
     rel-congruence-Normal-Commutative-Submonoid
   pr1 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid) =

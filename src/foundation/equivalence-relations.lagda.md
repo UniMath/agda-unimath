@@ -49,49 +49,52 @@ open import foundation-core.transport
 ### Characterization of equality in the type of equivalence relations
 
 ```agda
-relate-same-elements-Eq-Rel :
-  {l1 l2 l3 : Level} {A : UU l1} → Eq-Rel l2 A → Eq-Rel l3 A → UU (l1 ⊔ l2 ⊔ l3)
-relate-same-elements-Eq-Rel R S =
-  relates-same-elements-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S)
+relate-same-elements-Eq-Relation :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  Eq-Relation l2 A → Eq-Relation l3 A → UU (l1 ⊔ l2 ⊔ l3)
+relate-same-elements-Eq-Relation R S =
+  relates-same-elements-Relation-Prop (prop-Eq-Relation R) (prop-Eq-Relation S)
 
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
   where
 
-  refl-relate-same-elements-Eq-Rel : relate-same-elements-Eq-Rel R R
-  refl-relate-same-elements-Eq-Rel =
-    refl-relates-same-elements-Rel-Prop (prop-Eq-Rel R)
+  refl-relate-same-elements-Eq-Relation : relate-same-elements-Eq-Relation R R
+  refl-relate-same-elements-Eq-Relation =
+    refl-relates-same-elements-Relation-Prop (prop-Eq-Relation R)
 
-  is-contr-total-relate-same-elements-Eq-Rel :
-    is-contr (Σ (Eq-Rel l2 A) (relate-same-elements-Eq-Rel R))
-  is-contr-total-relate-same-elements-Eq-Rel =
+  is-contr-total-relate-same-elements-Eq-Relation :
+    is-contr (Σ (Eq-Relation l2 A) (relate-same-elements-Eq-Relation R))
+  is-contr-total-relate-same-elements-Eq-Relation =
     is-contr-total-Eq-subtype
-      ( is-contr-total-relates-same-elements-Rel-Prop (prop-Eq-Rel R))
+      ( is-contr-total-relates-same-elements-Relation-Prop (prop-Eq-Relation R))
       ( is-prop-is-equivalence-relation)
-      ( prop-Eq-Rel R)
-      ( refl-relate-same-elements-Eq-Rel)
-      ( is-equivalence-relation-prop-Eq-Rel R)
+      ( prop-Eq-Relation R)
+      ( refl-relate-same-elements-Eq-Relation)
+      ( is-equivalence-relation-prop-Eq-Relation R)
 
-  relate-same-elements-eq-Eq-Rel :
-    (S : Eq-Rel l2 A) → (R ＝ S) → relate-same-elements-Eq-Rel R S
-  relate-same-elements-eq-Eq-Rel .R refl = refl-relate-same-elements-Eq-Rel
+  relate-same-elements-eq-Eq-Relation :
+    (S : Eq-Relation l2 A) → (R ＝ S) → relate-same-elements-Eq-Relation R S
+  relate-same-elements-eq-Eq-Relation .R refl =
+    refl-relate-same-elements-Eq-Relation
 
-  is-equiv-relate-same-elements-eq-Eq-Rel :
-    (S : Eq-Rel l2 A) → is-equiv (relate-same-elements-eq-Eq-Rel S)
-  is-equiv-relate-same-elements-eq-Eq-Rel =
+  is-equiv-relate-same-elements-eq-Eq-Relation :
+    (S : Eq-Relation l2 A) → is-equiv (relate-same-elements-eq-Eq-Relation S)
+  is-equiv-relate-same-elements-eq-Eq-Relation =
     fundamental-theorem-id
-      is-contr-total-relate-same-elements-Eq-Rel
-      relate-same-elements-eq-Eq-Rel
+      is-contr-total-relate-same-elements-Eq-Relation
+      relate-same-elements-eq-Eq-Relation
 
-  extensionality-Eq-Rel :
-    (S : Eq-Rel l2 A) → (R ＝ S) ≃ relate-same-elements-Eq-Rel R S
-  pr1 (extensionality-Eq-Rel S) = relate-same-elements-eq-Eq-Rel S
-  pr2 (extensionality-Eq-Rel S) = is-equiv-relate-same-elements-eq-Eq-Rel S
+  extensionality-Eq-Relation :
+    (S : Eq-Relation l2 A) → (R ＝ S) ≃ relate-same-elements-Eq-Relation R S
+  pr1 (extensionality-Eq-Relation S) = relate-same-elements-eq-Eq-Relation S
+  pr2 (extensionality-Eq-Relation S) =
+    is-equiv-relate-same-elements-eq-Eq-Relation S
 
-  eq-relate-same-elements-Eq-Rel :
-    (S : Eq-Rel l2 A) → relate-same-elements-Eq-Rel R S → (R ＝ S)
-  eq-relate-same-elements-Eq-Rel S =
-    map-inv-equiv (extensionality-Eq-Rel S)
+  eq-relate-same-elements-Eq-Relation :
+    (S : Eq-Relation l2 A) → relate-same-elements-Eq-Relation R S → (R ＝ S)
+  eq-relate-same-elements-Eq-Relation S =
+    map-inv-equiv (extensionality-Eq-Relation S)
 ```
 
 ### The type of equivalence relations on `A` is equivalent to the type of partitions on `A`
@@ -100,19 +103,21 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
   where
 
-  is-block-partition-Eq-Rel-Prop : subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
-  is-block-partition-Eq-Rel-Prop Q =
+  is-block-partition-Eq-Relation-Prop :
+    subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
+  is-block-partition-Eq-Relation-Prop Q =
     is-equivalence-class-Prop R (subtype-inhabited-subtype Q)
 
-  is-block-partition-Eq-Rel : inhabited-subtype l2 A → UU (l1 ⊔ l2)
-  is-block-partition-Eq-Rel Q = type-Prop (is-block-partition-Eq-Rel-Prop Q)
+  is-block-partition-Eq-Relation : inhabited-subtype l2 A → UU (l1 ⊔ l2)
+  is-block-partition-Eq-Relation Q =
+    type-Prop (is-block-partition-Eq-Relation-Prop Q)
 
-  is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel :
-    is-partition (is-equivalence-class-inhabited-subtype-Eq-Rel R)
-  is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel x =
+  is-partition-is-equivalence-class-inhabited-subtype-Eq-Relation :
+    is-partition (is-equivalence-class-inhabited-subtype-Eq-Relation R)
+  is-partition-is-equivalence-class-inhabited-subtype-Eq-Relation x =
     is-contr-equiv
       ( Σ ( Σ ( equivalence-class R)
               ( λ C → is-in-equivalence-class R C x))
@@ -129,15 +134,15 @@ module _
           ( is-prop-type-trunc-Prop)
           ( is-inhabited-subtype-equivalence-class R (class R x))))
 
-  partition-Eq-Rel : partition l2 (l1 ⊔ l2) A
-  pr1 partition-Eq-Rel = is-block-partition-Eq-Rel-Prop
-  pr2 partition-Eq-Rel =
-    is-partition-is-equivalence-class-inhabited-subtype-Eq-Rel
+  partition-Eq-Relation : partition l2 (l1 ⊔ l2) A
+  pr1 partition-Eq-Relation = is-block-partition-Eq-Relation-Prop
+  pr2 partition-Eq-Relation =
+    is-partition-is-equivalence-class-inhabited-subtype-Eq-Relation
 
   equiv-block-equivalence-class :
-    equivalence-class R ≃ block-partition partition-Eq-Rel
+    equivalence-class R ≃ block-partition partition-Eq-Relation
   equiv-block-equivalence-class =
-    ( compute-block-partition partition-Eq-Rel) ∘e
+    ( compute-block-partition partition-Eq-Relation) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( inv-equiv
         ( equiv-inclusion-is-full-subtype
@@ -179,7 +184,7 @@ module _
   is-prop-sim-partition x y =
     is-prop-is-proof-irrelevant (is-proof-irrelevant-sim-partition x y)
 
-  prop-eq-rel-partition : Rel-Prop (l1 ⊔ l2) A
+  prop-eq-rel-partition : Relation-Prop (l1 ⊔ l2) A
   pr1 (prop-eq-rel-partition x y) = sim-partition x y
   pr2 (prop-eq-rel-partition x y) = is-prop-sim-partition x y
 
@@ -212,7 +217,7 @@ module _
       ( p')
   pr2 (pr2 (transitive-sim-partition x y z (B , p , q) (B' , p' , q'))) = q
 
-  eq-rel-partition : Eq-Rel (l1 ⊔ l2) A
+  eq-rel-partition : Eq-Relation (l1 ⊔ l2) A
   pr1 eq-rel-partition = prop-eq-rel-partition
   pr1 (pr2 eq-rel-partition) = refl-sim-partition
   pr1 (pr2 (pr2 eq-rel-partition)) = symmetric-sim-partition
@@ -232,7 +237,7 @@ module _
   is-block-inhabited-subtype-eq-rel-partition :
     (a : A) →
     is-block-partition
-      ( partition-Eq-Rel eq-rel-partition)
+      ( partition-Eq-Relation eq-rel-partition)
       ( inhabited-subtype-eq-rel-partition a)
   is-block-inhabited-subtype-eq-rel-partition a =
     unit-trunc-Prop (a , λ x → pair id id)
@@ -242,50 +247,52 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
   where
 
-  relate-same-elements-eq-rel-partition-Eq-Rel :
-    relate-same-elements-Eq-Rel (eq-rel-partition (partition-Eq-Rel R)) R
+  relate-same-elements-eq-rel-partition-Eq-Relation :
+    relate-same-elements-Eq-Relation
+      ( eq-rel-partition (partition-Eq-Relation R))
+      ( R)
   pr1
-    ( relate-same-elements-eq-rel-partition-Eq-Rel x y)
+    ( relate-same-elements-eq-rel-partition-Eq-Relation x y)
     ( C , p , q) =
     apply-universal-property-trunc-Prop
-      ( is-block-inhabited-subtype-block-partition (partition-Eq-Rel R) C)
-      ( prop-Eq-Rel R x y)
+      ( is-block-inhabited-subtype-block-partition (partition-Eq-Relation R) C)
+      ( prop-Eq-Relation R x y)
       ( λ (z , K) →
-        transitive-Eq-Rel R
+        transitive-Eq-Relation R
           x _ y
           ( forward-implication (K y) q)
-          ( symmetric-Eq-Rel R _ x (forward-implication (K x) p)))
-  pr1 (pr2 (relate-same-elements-eq-rel-partition-Eq-Rel x y) r) =
+          ( symmetric-Eq-Relation R _ x (forward-implication (K x) p)))
+  pr1 (pr2 (relate-same-elements-eq-rel-partition-Eq-Relation x y) r) =
     make-block-partition
-      ( partition-Eq-Rel R)
+      ( partition-Eq-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
       ( is-equivalence-class-equivalence-class R (class R x))
-  pr1 (pr2 (pr2 (relate-same-elements-eq-rel-partition-Eq-Rel x y) r)) =
+  pr1 (pr2 (pr2 (relate-same-elements-eq-rel-partition-Eq-Relation x y) r)) =
     make-is-in-block-partition
-      ( partition-Eq-Rel R)
+      ( partition-Eq-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
       ( is-equivalence-class-equivalence-class R (class R x))
       ( x)
-      ( refl-Eq-Rel R x)
-  pr2 (pr2 (pr2 (relate-same-elements-eq-rel-partition-Eq-Rel x y) r)) =
+      ( refl-Eq-Relation R x)
+  pr2 (pr2 (pr2 (relate-same-elements-eq-rel-partition-Eq-Relation x y) r)) =
     make-is-in-block-partition
-      ( partition-Eq-Rel R)
+      ( partition-Eq-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
       ( is-equivalence-class-equivalence-class R (class R x))
       ( y)
       ( r)
 
-is-section-eq-rel-partition-Eq-Rel :
-  {l : Level} {A : UU l} (R : Eq-Rel l A) →
-  eq-rel-partition (partition-Eq-Rel R) ＝ R
-is-section-eq-rel-partition-Eq-Rel R =
-  eq-relate-same-elements-Eq-Rel
-    ( eq-rel-partition (partition-Eq-Rel R))
+is-section-eq-rel-partition-Eq-Relation :
+  {l : Level} {A : UU l} (R : Eq-Relation l A) →
+  eq-rel-partition (partition-Eq-Relation R) ＝ R
+is-section-eq-rel-partition-Eq-Relation R =
+  eq-relate-same-elements-Eq-Relation
+    ( eq-rel-partition (partition-Eq-Relation R))
     ( R)
-    ( relate-same-elements-eq-rel-partition-Eq-Rel R)
+    ( relate-same-elements-eq-rel-partition-Eq-Relation R)
 ```
 
 #### The partition obtained from the equivalence relation induced by a partition is the partition itself
@@ -367,19 +374,19 @@ module _
 
   has-same-elements-partition-eq-rel-partition :
     has-same-elements-subtype
-      ( subtype-partition (partition-Eq-Rel (eq-rel-partition P)))
+      ( subtype-partition (partition-Eq-Relation (eq-rel-partition P)))
       ( subtype-partition P)
   pr1 (has-same-elements-partition-eq-rel-partition Q) H =
     is-block-is-equivalence-class-eq-rel-partition Q H
   pr2 (has-same-elements-partition-eq-rel-partition Q) H =
     is-equivalence-class-is-block-partition Q H
 
-is-retraction-eq-rel-partition-Eq-Rel :
+is-retraction-eq-rel-partition-Eq-Relation :
   {l : Level} {A : UU l} (P : partition l l A) →
-  partition-Eq-Rel (eq-rel-partition P) ＝ P
-is-retraction-eq-rel-partition-Eq-Rel P =
+  partition-Eq-Relation (eq-rel-partition P) ＝ P
+is-retraction-eq-rel-partition-Eq-Relation P =
   eq-has-same-blocks-partition
-    ( partition-Eq-Rel (eq-rel-partition P))
+    ( partition-Eq-Relation (eq-rel-partition P))
     ( P)
     ( has-same-elements-partition-eq-rel-partition P)
 ```
@@ -391,12 +398,12 @@ is-equiv-eq-rel-partition :
   {l : Level} {A : UU l} → is-equiv (eq-rel-partition {l} {l} {l} {A})
 is-equiv-eq-rel-partition =
   is-equiv-has-inverse
-    partition-Eq-Rel
-    is-section-eq-rel-partition-Eq-Rel
-    is-retraction-eq-rel-partition-Eq-Rel
+    partition-Eq-Relation
+    is-section-eq-rel-partition-Eq-Relation
+    is-retraction-eq-rel-partition-Eq-Relation
 
 equiv-eq-rel-partition :
-  {l : Level} {A : UU l} → partition l l A ≃ Eq-Rel l A
+  {l : Level} {A : UU l} → partition l l A ≃ Eq-Relation l A
 pr1 equiv-eq-rel-partition = eq-rel-partition
 pr2 equiv-eq-rel-partition = is-equiv-eq-rel-partition
 ```
@@ -407,13 +414,13 @@ pr2 equiv-eq-rel-partition = is-equiv-eq-rel-partition
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
   where
 
-  set-indexed-Σ-decomposition-Eq-Rel :
+  set-indexed-Σ-decomposition-Eq-Relation :
     Set-Indexed-Σ-Decomposition (l1 ⊔ l2) (l1 ⊔ l2) A
-  set-indexed-Σ-decomposition-Eq-Rel =
-    set-indexed-Σ-decomposition-partition (partition-Eq-Rel R)
+  set-indexed-Σ-decomposition-Eq-Relation =
+    set-indexed-Σ-decomposition-partition (partition-Eq-Relation R)
 ```
 
 ### The type of equivalence relations on `A` is equivalent to the type of sets `X` equipped with a surjective map from `A` into `X`
@@ -422,13 +429,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
   where
 
-  surjection-into-set-Eq-Rel :
+  surjection-into-set-Eq-Relation :
     Surjection-Into-Set (l1 ⊔ l2) A
-  pr1 surjection-into-set-Eq-Rel = quotient-Set R
-  pr2 surjection-into-set-Eq-Rel = surjection-quotient-map R
+  pr1 surjection-into-set-Eq-Relation = quotient-Set R
+  pr2 surjection-into-set-Eq-Relation = surjection-quotient-map R
 ```
 
 #### The equivalence relation obtained from a surjection into a set
@@ -438,10 +445,10 @@ module _
   {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : A → type-Set X)
   where
 
-  rel-map-into-set : Rel-Prop l2 A
+  rel-map-into-set : Relation-Prop l2 A
   rel-map-into-set x y = Id-Prop X (f x) (f y)
 
-  sim-map-into-set : Rel l2 A
+  sim-map-into-set : Relation l2 A
   sim-map-into-set x y = type-Prop (rel-map-into-set x y)
 
   refl-sim-map-into-set : is-reflexive sim-map-into-set
@@ -453,7 +460,7 @@ module _
   transitive-sim-map-into-set : is-transitive sim-map-into-set
   transitive-sim-map-into-set x y z H K = K ∙ H
 
-  eq-rel-map-into-set : Eq-Rel l2 A
+  eq-rel-map-into-set : Eq-Relation l2 A
   pr1 eq-rel-map-into-set = rel-map-into-set
   pr1 (pr2 eq-rel-map-into-set) x = refl-sim-map-into-set x
   pr1 (pr2 (pr2 eq-rel-map-into-set)) x y = symmetric-sim-map-into-set x y
@@ -464,7 +471,7 @@ module _
   is-effective-map-into-set x y = id-equiv
 
 eq-rel-Surjection-Into-Set :
-  {l1 l2 : Level} {A : UU l1} → Surjection-Into-Set l2 A → Eq-Rel l2 A
+  {l1 l2 : Level} {A : UU l1} → Surjection-Into-Set l2 A → Eq-Relation l2 A
 eq-rel-Surjection-Into-Set f =
   eq-rel-map-into-set
     ( set-Surjection-Into-Set f)
@@ -483,24 +490,24 @@ is-effective-map-Surjection-Into-Set f =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
   where
 
-  relate-same-elements-eq-rel-surjection-into-set-Eq-Rel :
-    relate-same-elements-Eq-Rel
-      ( eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Rel R))
+  relate-same-elements-eq-rel-surjection-into-set-Eq-Relation :
+    relate-same-elements-Eq-Relation
+      ( eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Relation R))
       ( R)
-  relate-same-elements-eq-rel-surjection-into-set-Eq-Rel x y =
+  relate-same-elements-eq-rel-surjection-into-set-Eq-Relation x y =
     iff-equiv (is-effective-quotient-map R x y)
 
 is-retraction-eq-rel-Surjection-Into-Set :
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Rel (l1 ⊔ l2) A) →
-  eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Rel R) ＝ R
+  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation (l1 ⊔ l2) A) →
+  eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Relation R) ＝ R
 is-retraction-eq-rel-Surjection-Into-Set R =
-  eq-relate-same-elements-Eq-Rel
-    ( eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Rel R))
+  eq-relate-same-elements-Eq-Relation
+    ( eq-rel-Surjection-Into-Set (surjection-into-set-Eq-Relation R))
     ( R)
-    ( relate-same-elements-eq-rel-surjection-into-set-Eq-Rel R)
+    ( relate-same-elements-eq-rel-surjection-into-set-Eq-Relation R)
 ```
 
 #### The surjection into a set obtained from the equivalence relation induced by a surjection into a set is the original surjection into a set
@@ -509,7 +516,7 @@ is-retraction-eq-rel-Surjection-Into-Set R =
 equiv-surjection-into-set-eq-rel-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set l2 A) →
   equiv-Surjection-Into-Set
-    ( surjection-into-set-Eq-Rel (eq-rel-Surjection-Into-Set f))
+    ( surjection-into-set-Eq-Relation (eq-rel-Surjection-Into-Set f))
     ( f)
 equiv-surjection-into-set-eq-rel-Surjection-Into-Set f =
   center
@@ -532,10 +539,10 @@ equiv-surjection-into-set-eq-rel-Surjection-Into-Set f =
 
 is-section-eq-rel-Surjection-Into-Set :
   {l1 l2 : Level} {A : UU l1} (f : Surjection-Into-Set (l1 ⊔ l2) A) →
-  surjection-into-set-Eq-Rel (eq-rel-Surjection-Into-Set f) ＝ f
+  surjection-into-set-Eq-Relation (eq-rel-Surjection-Into-Set f) ＝ f
 is-section-eq-rel-Surjection-Into-Set f =
   eq-equiv-Surjection-Into-Set
-    ( surjection-into-set-Eq-Rel (eq-rel-Surjection-Into-Set f))
+    ( surjection-into-set-Eq-Relation (eq-rel-Surjection-Into-Set f))
     ( f)
     ( equiv-surjection-into-set-eq-rel-Surjection-Into-Set f)
 ```
@@ -543,22 +550,22 @@ is-section-eq-rel-Surjection-Into-Set f =
 #### The type of equivalence relations on `A` is equivalent to the type of surjections from `A` into a set
 
 ```agda
-is-equiv-surjection-into-set-Eq-Rel :
+is-equiv-surjection-into-set-Eq-Relation :
   {l1 : Level} {A : UU l1} →
-  is-equiv (surjection-into-set-Eq-Rel {l1} {l1} {A})
-is-equiv-surjection-into-set-Eq-Rel {l1} {A} =
+  is-equiv (surjection-into-set-Eq-Relation {l1} {l1} {A})
+is-equiv-surjection-into-set-Eq-Relation {l1} {A} =
   is-equiv-has-inverse
     ( eq-rel-Surjection-Into-Set {l1} {l1} {A})
     ( is-section-eq-rel-Surjection-Into-Set {l1} {l1} {A})
     ( is-retraction-eq-rel-Surjection-Into-Set {l1} {l1} {A})
 
-equiv-surjection-into-set-Eq-Rel :
+equiv-surjection-into-set-Eq-Relation :
   {l1 : Level} (A : UU l1) →
-  Eq-Rel l1 A ≃ Surjection-Into-Set l1 A
-pr1 (equiv-surjection-into-set-Eq-Rel A) =
-  surjection-into-set-Eq-Rel
-pr2 (equiv-surjection-into-set-Eq-Rel A) =
-  is-equiv-surjection-into-set-Eq-Rel
+  Eq-Relation l1 A ≃ Surjection-Into-Set l1 A
+pr1 (equiv-surjection-into-set-Eq-Relation A) =
+  surjection-into-set-Eq-Relation
+pr2 (equiv-surjection-into-set-Eq-Relation A) =
+  is-equiv-surjection-into-set-Eq-Relation
 ```
 
 ### Equality on a set is an equivalence relation
@@ -568,24 +575,25 @@ module _
   {l1 : Level} (A : Set l1)
   where
 
-  Id-Eq-Rel : Eq-Rel l1 (type-Set A)
-  pr1 Id-Eq-Rel = Id-Prop A
-  pr1 (pr2 Id-Eq-Rel) _ = refl
-  pr1 (pr2 (pr2 Id-Eq-Rel)) _ _ = inv
-  pr2 (pr2 (pr2 Id-Eq-Rel)) _ _ _ H K = K ∙ H
+  Id-Eq-Relation : Eq-Relation l1 (type-Set A)
+  pr1 Id-Eq-Relation = Id-Prop A
+  pr1 (pr2 Id-Eq-Relation) _ = refl
+  pr1 (pr2 (pr2 Id-Eq-Relation)) _ _ = inv
+  pr2 (pr2 (pr2 Id-Eq-Relation)) _ _ _ H K = K ∙ H
 
-  id-reflects-Id-Eq-Rel : reflects-Eq-Rel Id-Eq-Rel id
-  id-reflects-Id-Eq-Rel = id
+  id-reflects-Id-Eq-Relation : reflects-Eq-Relation Id-Eq-Relation id
+  id-reflects-Id-Eq-Relation = id
 
-  id-reflecting-map-Id-Eq-Rel : reflecting-map-Eq-Rel Id-Eq-Rel (type-Set A)
-  pr1 id-reflecting-map-Id-Eq-Rel = id
-  pr2 id-reflecting-map-Id-Eq-Rel = id-reflects-Id-Eq-Rel
+  id-reflecting-map-Id-Eq-Relation :
+    reflecting-map-Eq-Relation Id-Eq-Relation (type-Set A)
+  pr1 id-reflecting-map-Id-Eq-Relation = id
+  pr2 id-reflecting-map-Id-Eq-Relation = id-reflects-Id-Eq-Relation
 
-  is-surjective-and-effective-id-Id-Eq-Rel :
-    is-surjective-and-effective Id-Eq-Rel id
-  pr1 is-surjective-and-effective-id-Id-Eq-Rel a =
+  is-surjective-and-effective-id-Id-Eq-Relation :
+    is-surjective-and-effective Id-Eq-Relation id
+  pr1 is-surjective-and-effective-id-Id-Eq-Relation a =
     unit-trunc-Prop (a , refl)
-  pr2 is-surjective-and-effective-id-Id-Eq-Rel a b = id-equiv
+  pr2 is-surjective-and-effective-id-Id-Eq-Relation a b = id-equiv
 ```
 
 ### For any set `A`, `Id` is a set quotient for the equality relation
@@ -595,11 +603,11 @@ module _
   {l : Level} (A : Set l)
   where
 
-  is-set-quotient-id-Id-Eq-Rel :
+  is-set-quotient-id-Id-Eq-Relation :
     {l' : Level} →
-    is-set-quotient l' (Id-Eq-Rel A) A (id-reflecting-map-Id-Eq-Rel A)
-  is-set-quotient-id-Id-Eq-Rel =
-    is-set-quotient-is-surjective-and-effective (Id-Eq-Rel A) A
-      ( id-reflecting-map-Id-Eq-Rel A)
-      ( is-surjective-and-effective-id-Id-Eq-Rel A)
+    is-set-quotient l' (Id-Eq-Relation A) A (id-reflecting-map-Id-Eq-Relation A)
+  is-set-quotient-id-Id-Eq-Relation =
+    is-set-quotient-is-surjective-and-effective (Id-Eq-Relation A) A
+      ( id-reflecting-map-Id-Eq-Relation A)
+      ( is-surjective-and-effective-id-Id-Eq-Relation A)
 ```

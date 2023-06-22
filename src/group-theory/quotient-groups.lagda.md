@@ -153,7 +153,7 @@ module _
       ( eq-rel-congruence-Normal-Subgroup G H)
 
   reflecting-map-quotient-hom-Group :
-    reflecting-map-Eq-Rel
+    reflecting-map-Eq-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( type-quotient-Group)
   reflecting-map-quotient-hom-Group =
@@ -178,7 +178,7 @@ module _
   unit-quotient-Group = map-quotient-hom-Group (unit-Group G)
 
   binary-hom-mul-quotient-Group :
-    binary-hom-Eq-Rel
+    binary-hom-Eq-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
@@ -213,7 +213,7 @@ module _
       ( binary-hom-mul-quotient-Group)
 
   hom-inv-quotient-Group :
-    hom-Eq-Rel
+    hom-Eq-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
   pr1 hom-inv-quotient-Group = inv-Group G

@@ -127,7 +127,7 @@ module _
   transitive-rel-partition-𝔽 : is-transitive rel-partition-𝔽
   transitive-rel-partition-𝔽 x y z r s = s ∙ r
 
-  eq-rel-partition-𝔽 : Eq-Rel l2 (type-𝔽 X)
+  eq-rel-partition-𝔽 : Eq-Relation l2 (type-𝔽 X)
   pr1 eq-rel-partition-𝔽 = rel-partition-𝔽-Prop
   pr1 (pr2 eq-rel-partition-𝔽) = refl-rel-partition-𝔽
   pr1 (pr2 (pr2 eq-rel-partition-𝔽)) = symmetric-rel-partition-𝔽

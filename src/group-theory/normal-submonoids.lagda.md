@@ -232,7 +232,7 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Normal-Submonoid l2 M)
   where
 
-  rel-congruence-Normal-Submonoid : Rel-Prop (l1 ⊔ l2) (type-Monoid M)
+  rel-congruence-Normal-Submonoid : Relation-Prop (l1 ⊔ l2) (type-Monoid M)
   rel-congruence-Normal-Submonoid x y =
     Π-Prop
       ( type-Monoid M)
@@ -264,7 +264,7 @@ module _
     is-transitive sim-congruence-Normal-Submonoid
   transitive-congruence-Normal-Submonoid _ _ _ H K u v = (H u v) ∘iff (K u v)
 
-  eq-rel-congruence-Normal-Submonoid : Eq-Rel (l1 ⊔ l2) (type-Monoid M)
+  eq-rel-congruence-Normal-Submonoid : Eq-Relation (l1 ⊔ l2) (type-Monoid M)
   pr1 eq-rel-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
   pr1 (pr2 eq-rel-congruence-Normal-Submonoid) =
     refl-congruence-Normal-Submonoid

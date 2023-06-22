@@ -82,11 +82,11 @@ module _
     is-saturated-congruence-Monoid M congruence-saturated-congruence-Monoid
   is-saturated-saturated-congruence-Monoid = pr2 R
 
-  eq-rel-saturated-congruence-Monoid : Eq-Rel l2 (type-Monoid M)
+  eq-rel-saturated-congruence-Monoid : Eq-Relation l2 (type-Monoid M)
   eq-rel-saturated-congruence-Monoid =
     eq-rel-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  prop-saturated-congruence-Monoid : Rel-Prop l2 (type-Monoid M)
+  prop-saturated-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
   prop-saturated-congruence-Monoid =
     prop-congruence-Monoid M congruence-saturated-congruence-Monoid
 
@@ -121,12 +121,12 @@ module _
       congruence-saturated-congruence-Monoid
 
   refl-saturated-congruence-Monoid :
-    is-reflexive-Rel-Prop prop-saturated-congruence-Monoid
+    is-reflexive-Relation-Prop prop-saturated-congruence-Monoid
   refl-saturated-congruence-Monoid =
     refl-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   symmetric-saturated-congruence-Monoid :
-    is-symmetric-Rel-Prop prop-saturated-congruence-Monoid
+    is-symmetric-Relation-Prop prop-saturated-congruence-Monoid
   symmetric-saturated-congruence-Monoid =
     symmetric-congruence-Monoid M congruence-saturated-congruence-Monoid
 
@@ -137,7 +137,7 @@ module _
     equiv-symmetric-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   transitive-saturated-congruence-Monoid :
-    is-transitive-Rel-Prop prop-saturated-congruence-Monoid
+    is-transitive-Relation-Prop prop-saturated-congruence-Monoid
   transitive-saturated-congruence-Monoid =
     transitive-congruence-Monoid M congruence-saturated-congruence-Monoid
 
