@@ -22,7 +22,8 @@ Below is a summary of the tasks this tool performs:
 - **End of files**: Ensures that a file is either empty, or ends with one
   newline.
 
-- **Mixed line ending**: Ensures consistent use of line endings (LF vs CRLF).
+- **Mixed line ending**: Ensures consistent use of line endings
+  ([LF vs CRLF](https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/#crlf-vs-lf-what-are-line-endings-anyway)).
 
 - **Double quoted strings**: Replaces double quoted strings with single quoted
   strings.
