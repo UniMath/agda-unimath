@@ -142,18 +142,18 @@ module _
     refl-congruence-Commutative-Monoid M
     congruence-saturated-congruence-Commutative-Monoid
 
-  symm-saturated-congruence-Commutative-Monoid :
+  symmetric-saturated-congruence-Commutative-Monoid :
     is-symmetric-Rel-Prop prop-saturated-congruence-Commutative-Monoid
-  symm-saturated-congruence-Commutative-Monoid =
-    symm-congruence-Commutative-Monoid M
+  symmetric-saturated-congruence-Commutative-Monoid =
+    symmetric-congruence-Commutative-Monoid M
     congruence-saturated-congruence-Commutative-Monoid
 
-  equiv-symm-saturated-congruence-Commutative-Monoid :
+  equiv-symmetric-saturated-congruence-Commutative-Monoid :
     (x y : type-Commutative-Monoid M) →
     sim-saturated-congruence-Commutative-Monoid x y ≃
     sim-saturated-congruence-Commutative-Monoid y x
-  equiv-symm-saturated-congruence-Commutative-Monoid =
-    equiv-symm-congruence-Commutative-Monoid M
+  equiv-symmetric-saturated-congruence-Commutative-Monoid =
+    equiv-symmetric-congruence-Commutative-Monoid M
     congruence-saturated-congruence-Commutative-Monoid
 
   transitive-saturated-congruence-Commutative-Monoid :

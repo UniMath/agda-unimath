@@ -43,8 +43,8 @@ module _
   symmetric-prod-Rel-Prop :
     is-symmetric-Rel-Prop
       ( prod-Rel-Prop (prop-Eq-Rel R) (prop-Eq-Rel S))
-  pr1 (symmetric-prod-Rel-Prop x y (p , q)) = symm-Eq-Rel R (pr1 x) (pr1 y) p
-  pr2 (symmetric-prod-Rel-Prop x y (p , q)) = symm-Eq-Rel S (pr2 x) (pr2 y) q
+  pr1 (symmetric-prod-Rel-Prop x y (p , q)) = symmetric-Eq-Rel R (pr1 x) (pr1 y) p
+  pr2 (symmetric-prod-Rel-Prop x y (p , q)) = symmetric-Eq-Rel S (pr2 x) (pr2 y) q
 
   transitive-prod-Rel-Prop :
     is-transitive-Rel-Prop

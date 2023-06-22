@@ -82,14 +82,14 @@ module _
   refl-congruence-Group : is-reflexive-Rel-Prop prop-congruence-Group
   refl-congruence-Group = refl-Eq-Rel eq-rel-congruence-Group
 
-  symm-congruence-Group : is-symmetric-Rel-Prop prop-congruence-Group
-  symm-congruence-Group = symm-Eq-Rel eq-rel-congruence-Group
+  symmetric-congruence-Group : is-symmetric-Rel-Prop prop-congruence-Group
+  symmetric-congruence-Group = symmetric-Eq-Rel eq-rel-congruence-Group
 
-  equiv-symm-congruence-Group :
+  equiv-symmetric-congruence-Group :
     (x y : type-Group G) →
     sim-congruence-Group x y ≃ sim-congruence-Group y x
-  equiv-symm-congruence-Group x y =
-    equiv-symm-Eq-Rel eq-rel-congruence-Group
+  equiv-symmetric-congruence-Group x y =
+    equiv-symmetric-Eq-Rel eq-rel-congruence-Group
 
   transitive-congruence-Group :
     is-transitive-Rel-Prop prop-congruence-Group
@@ -166,7 +166,7 @@ module _
     {x y : type-Group G} →
     sim-congruence-Group x y → sim-left-div-unit-congruence-Group x y
   map-sim-left-div-unit-congruence-Group {x} {y} H =
-    symm-congruence-Group
+    symmetric-congruence-Group
       (unit-Group G)
       (mul-Group G (inv-Group G x) y)
       ( concatenate-eq-sim-congruence-Group
@@ -181,7 +181,7 @@ module _
       ( sim-congruence-Group)
       ( right-unit-law-mul-Group G x)
       ( is-section-mul-inv-Group G x y)
-      ( symm-congruence-Group
+      ( symmetric-congruence-Group
         ( mul-Group G x (left-div-Group G x y))
         ( mul-Group G x (unit-Group G))
         ( left-mul-congruence-Group x H))
@@ -201,7 +201,7 @@ module _
               ( mul-Group G (inv-Group G x))
               ( right-inverse-law-mul-Group G y)) ∙
             ( right-unit-law-mul-Group G (inv-Group G x)))))
-      ( symm-congruence-Group _ _
+      ( symmetric-congruence-Group _ _
         ( right-mul-congruence-Group
           ( left-mul-congruence-Group (inv-Group G x) H)
           ( inv-Group G y)))

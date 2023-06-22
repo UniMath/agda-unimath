@@ -507,8 +507,8 @@ presim-unit-eq-ℤ {x} refl = refl-presim-unit-ℤ x
 sim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → sim-unit-ℤ x y
 sim-unit-eq-ℤ {x} refl = refl-sim-unit-ℤ x
 
-symm-presim-unit-ℤ : {x y : ℤ} → presim-unit-ℤ x y → presim-unit-ℤ y x
-symm-presim-unit-ℤ {x} {y} (pair (pair u H) p) =
+symmetric-presim-unit-ℤ : {x y : ℤ} → presim-unit-ℤ x y → presim-unit-ℤ y x
+symmetric-presim-unit-ℤ {x} {y} (pair (pair u H) p) =
   f (is-one-or-neg-one-is-unit-ℤ u H)
   where
   f : is-one-or-neg-one-ℤ u → presim-unit-ℤ y x
@@ -517,17 +517,17 @@ symm-presim-unit-ℤ {x} {y} (pair (pair u H) p) =
   pr1 (f (inr refl)) = neg-one-unit-ℤ
   pr2 (f (inr refl)) = inv (inv (neg-neg-ℤ x) ∙ ap (neg-one-ℤ *ℤ_) p)
 
-symm-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → sim-unit-ℤ y x
-symm-sim-unit-ℤ {x} {y} H f =
-  symm-presim-unit-ℤ (H (λ p → f (pair (pr2 p) (pr1 p))))
+symmetric-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → sim-unit-ℤ y x
+symmetric-sim-unit-ℤ {x} {y} H f =
+  symmetric-presim-unit-ℤ (H (λ p → f (pair (pr2 p) (pr1 p))))
 
 is-nonzero-sim-unit-ℤ' :
   {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ y → is-nonzero-ℤ x
-is-nonzero-sim-unit-ℤ' H = is-nonzero-sim-unit-ℤ (symm-sim-unit-ℤ H)
+is-nonzero-sim-unit-ℤ' H = is-nonzero-sim-unit-ℤ (symmetric-sim-unit-ℤ H)
 
 is-zero-sim-unit-ℤ' :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ y → is-zero-ℤ x
-is-zero-sim-unit-ℤ' H = is-zero-sim-unit-ℤ (symm-sim-unit-ℤ H)
+is-zero-sim-unit-ℤ' H = is-zero-sim-unit-ℤ (symmetric-sim-unit-ℤ H)
 
 transitive-presim-unit-ℤ :
   (x y z : ℤ) → presim-unit-ℤ x y → presim-unit-ℤ y z → presim-unit-ℤ x z
@@ -610,7 +610,7 @@ div-sim-unit-ℤ {x} {y} {x'} {y'} H K =
 div-int-abs-div-ℤ :
   {x y : ℤ} → div-ℤ x y → div-ℤ (int-abs-ℤ x) y
 div-int-abs-div-ℤ {x} {y} =
-  div-sim-unit-ℤ (symm-sim-unit-ℤ (sim-unit-abs-ℤ x)) (refl-sim-unit-ℤ y)
+  div-sim-unit-ℤ (symmetric-sim-unit-ℤ (sim-unit-abs-ℤ x)) (refl-sim-unit-ℤ y)
 
 div-div-int-abs-ℤ :
   {x y : ℤ} → div-ℤ (int-abs-ℤ x) y → div-ℤ x y

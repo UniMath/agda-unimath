@@ -130,8 +130,8 @@ is-prop-sim-fraction-ℤ x y = is-prop-type-Prop (sim-fraction-ℤ-Prop x y)
 refl-sim-fraction-ℤ : is-reflexive sim-fraction-ℤ
 refl-sim-fraction-ℤ x = refl
 
-symm-sim-fraction-ℤ : is-symmetric sim-fraction-ℤ
-symm-sim-fraction-ℤ x y r = inv r
+symmetric-sim-fraction-ℤ : is-symmetric sim-fraction-ℤ
+symmetric-sim-fraction-ℤ x y r = inv r
 
 transitive-sim-fraction-ℤ : is-transitive sim-fraction-ℤ
 transitive-sim-fraction-ℤ x y z s r =
@@ -186,7 +186,7 @@ transitive-sim-fraction-ℤ x y z s r =
 eq-rel-sim-fraction-ℤ : Eq-Rel lzero fraction-ℤ
 pr1 eq-rel-sim-fraction-ℤ = sim-fraction-ℤ-Prop
 pr1 (pr2 eq-rel-sim-fraction-ℤ) = refl-sim-fraction-ℤ
-pr1 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = symm-sim-fraction-ℤ
+pr1 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = symmetric-sim-fraction-ℤ
 pr2 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = transitive-sim-fraction-ℤ
 ```
 

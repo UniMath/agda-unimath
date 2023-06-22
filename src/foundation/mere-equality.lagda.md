@@ -60,9 +60,9 @@ abstract
 
 ```agda
 abstract
-  symm-mere-eq :
+  symmetric-mere-eq :
     {l : Level} {A : UU l} → is-symmetric (mere-eq {l} {A})
-  symm-mere-eq _ _ = map-trunc-Prop inv
+  symmetric-mere-eq _ _ = map-trunc-Prop inv
 ```
 
 ### Transitivity
@@ -83,7 +83,7 @@ abstract
 mere-eq-Eq-Rel : {l1 : Level} (A : UU l1) → Eq-Rel l1 A
 pr1 (mere-eq-Eq-Rel A) = mere-eq-Prop
 pr1 (pr2 (mere-eq-Eq-Rel A)) = refl-mere-eq
-pr1 (pr2 (pr2 (mere-eq-Eq-Rel A))) = symm-mere-eq
+pr1 (pr2 (pr2 (mere-eq-Eq-Rel A))) = symmetric-mere-eq
 pr2 (pr2 (pr2 (mere-eq-Eq-Rel A))) = transitive-mere-eq
 ```
 

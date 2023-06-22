@@ -94,14 +94,14 @@ module _
   refl-congruence-Semigroup : is-reflexive-Rel-Prop prop-congruence-Semigroup
   refl-congruence-Semigroup = refl-Eq-Rel eq-rel-congruence-Semigroup
 
-  symm-congruence-Semigroup : is-symmetric-Rel-Prop prop-congruence-Semigroup
-  symm-congruence-Semigroup = symm-Eq-Rel eq-rel-congruence-Semigroup
+  symmetric-congruence-Semigroup : is-symmetric-Rel-Prop prop-congruence-Semigroup
+  symmetric-congruence-Semigroup = symmetric-Eq-Rel eq-rel-congruence-Semigroup
 
-  equiv-symm-congruence-Semigroup :
+  equiv-symmetric-congruence-Semigroup :
     (x y : type-Semigroup G) →
     sim-congruence-Semigroup x y ≃ sim-congruence-Semigroup y x
-  equiv-symm-congruence-Semigroup x y =
-    equiv-symm-Eq-Rel eq-rel-congruence-Semigroup
+  equiv-symmetric-congruence-Semigroup x y =
+    equiv-symmetric-Eq-Rel eq-rel-congruence-Semigroup
 
   transitive-congruence-Semigroup : is-transitive-Rel-Prop prop-congruence-Semigroup
   transitive-congruence-Semigroup = transitive-Eq-Rel eq-rel-congruence-Semigroup

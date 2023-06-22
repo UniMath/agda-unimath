@@ -75,15 +75,15 @@ module _
     is-reflexive-Rel-Prop prop-congruence-Ring
   refl-congruence-Ring = refl-congruence-Semiring (semiring-Ring R) S
 
-  symm-congruence-Ring :
+  symmetric-congruence-Ring :
     is-symmetric-Rel-Prop prop-congruence-Ring
-  symm-congruence-Ring = symm-congruence-Semiring (semiring-Ring R) S
+  symmetric-congruence-Ring = symmetric-congruence-Semiring (semiring-Ring R) S
 
-  equiv-symm-congruence-Ring :
+  equiv-symmetric-congruence-Ring :
     (x y : type-Ring R) →
     sim-congruence-Ring x y ≃ sim-congruence-Ring y x
-  equiv-symm-congruence-Ring =
-    equiv-symm-congruence-Semiring (semiring-Ring R) S
+  equiv-symmetric-congruence-Ring =
+    equiv-symmetric-congruence-Semiring (semiring-Ring R) S
 
   transitive-congruence-Ring :
     is-transitive-Rel-Prop prop-congruence-Ring

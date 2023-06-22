@@ -118,7 +118,7 @@ module _
   symmetric-Decidable-Equivalence-Relation :
     is-symmetric sim-Decidable-Equivalence-Relation
   symmetric-Decidable-Equivalence-Relation =
-    symm-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
+    symmetric-Eq-Rel equivalence-relation-Decidable-Equivalence-Relation
 
   equiv-symmetric-Decidable-Equivalence-Relation :
     {x y : X} →

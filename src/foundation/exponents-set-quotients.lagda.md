@@ -68,8 +68,8 @@ module _
   refl-sim-function-type : is-reflexive sim-function-type
   refl-sim-function-type f x = refl-Eq-Rel R (f x)
 
-  symm-sim-function-type : is-symmetric sim-function-type
-  symm-sim-function-type f g r x = symm-Eq-Rel R (f x) (g x) (r x)
+  symmetric-sim-function-type : is-symmetric sim-function-type
+  symmetric-sim-function-type f g r x = symmetric-Eq-Rel R (f x) (g x) (r x)
 
   transitive-sim-function-type : is-transitive sim-function-type
   transitive-sim-function-type f g h r s x =
@@ -78,7 +78,7 @@ module _
   eq-rel-function-type : Eq-Rel (l1 ⊔ l3) (X → A)
   pr1 eq-rel-function-type = rel-function-type
   pr1 (pr2 eq-rel-function-type) = refl-sim-function-type
-  pr1 (pr2 (pr2 eq-rel-function-type)) = symm-sim-function-type
+  pr1 (pr2 (pr2 eq-rel-function-type)) = symmetric-sim-function-type
   pr2 (pr2 (pr2 eq-rel-function-type)) = transitive-sim-function-type
 
   map-exponent-reflecting-map-Eq-Rel :
@@ -169,10 +169,10 @@ module _
   refl-sim-hom-Eq-Rel f =
     refl-sim-function-type A S (map-hom-Eq-Rel R S f)
 
-  symm-sim-hom-Eq-Rel :
+  symmetric-sim-hom-Eq-Rel :
     (f g : hom-Eq-Rel R S) → sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g f
-  symm-sim-hom-Eq-Rel f g =
-    symm-sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
+  symmetric-sim-hom-Eq-Rel f g =
+    symmetric-sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
 
   transitive-sim-hom-Eq-Rel : is-transitive sim-hom-Eq-Rel
   transitive-sim-hom-Eq-Rel f g h =
@@ -185,7 +185,7 @@ module _
     Eq-Rel (l1 ⊔ l4) (hom-Eq-Rel R S)
   pr1 eq-rel-hom-Eq-Rel = rel-hom-Eq-Rel
   pr1 (pr2 eq-rel-hom-Eq-Rel) = refl-sim-hom-Eq-Rel
-  pr1 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = symm-sim-hom-Eq-Rel
+  pr1 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = symmetric-sim-hom-Eq-Rel
   pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = transitive-sim-hom-Eq-Rel
 ```
 

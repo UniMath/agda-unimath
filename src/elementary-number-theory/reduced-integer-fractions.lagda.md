@@ -262,7 +262,7 @@ reduce-preserves-sim-ℤ x y H =
       ( x)
       ( y)
       ( H)
-      ( symm-sim-fraction-ℤ
+      ( symmetric-sim-fraction-ℤ
         ( x)
         ( reduce-fraction-ℤ x)
         ( sim-reduced-fraction-ℤ x)))

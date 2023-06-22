@@ -125,16 +125,16 @@ module _
   refl-saturated-congruence-Monoid =
     refl-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  symm-saturated-congruence-Monoid :
+  symmetric-saturated-congruence-Monoid :
     is-symmetric-Rel-Prop prop-saturated-congruence-Monoid
-  symm-saturated-congruence-Monoid =
-    symm-congruence-Monoid M congruence-saturated-congruence-Monoid
+  symmetric-saturated-congruence-Monoid =
+    symmetric-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  equiv-symm-saturated-congruence-Monoid :
+  equiv-symmetric-saturated-congruence-Monoid :
     (x y : type-Monoid M) →
     sim-saturated-congruence-Monoid x y ≃ sim-saturated-congruence-Monoid y x
-  equiv-symm-saturated-congruence-Monoid =
-    equiv-symm-congruence-Monoid M congruence-saturated-congruence-Monoid
+  equiv-symmetric-saturated-congruence-Monoid =
+    equiv-symmetric-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   transitive-saturated-congruence-Monoid :
     is-transitive-Rel-Prop prop-saturated-congruence-Monoid

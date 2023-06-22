@@ -381,9 +381,9 @@ module _
   refl-right-sim-Decidable-Subgroup =
     refl-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  symm-right-sim-Decidable-Subgroup :
+  symmetric-right-sim-Decidable-Subgroup :
     is-symmetric-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
-  symm-right-sim-Decidable-Subgroup =
+  symmetric-right-sim-Decidable-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   transitive-right-sim-Decidable-Subgroup :

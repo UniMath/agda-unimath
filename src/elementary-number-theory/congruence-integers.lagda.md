@@ -151,6 +151,6 @@ cong-cong-int-ℕ k x y H =
       ( ap int-ℕ (dist-int-ℕ x y))
       ( div-sim-unit-ℤ
         ( refl-sim-unit-ℤ (int-ℕ k))
-        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
+        ( symmetric-sim-unit-ℤ (sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
         ( H)))
 ```

@@ -103,17 +103,17 @@ module _
   refl-congruence-Commutative-Monoid =
     refl-congruence-Monoid (monoid-Commutative-Monoid M) R
 
-  symm-congruence-Commutative-Monoid :
+  symmetric-congruence-Commutative-Monoid :
     is-symmetric-Rel-Prop prop-congruence-Commutative-Monoid
-  symm-congruence-Commutative-Monoid =
-    symm-congruence-Monoid (monoid-Commutative-Monoid M) R
+  symmetric-congruence-Commutative-Monoid =
+    symmetric-congruence-Monoid (monoid-Commutative-Monoid M) R
 
-  equiv-symm-congruence-Commutative-Monoid :
+  equiv-symmetric-congruence-Commutative-Monoid :
     (x y : type-Commutative-Monoid M) →
     sim-congruence-Commutative-Monoid x y ≃
     sim-congruence-Commutative-Monoid y x
-  equiv-symm-congruence-Commutative-Monoid =
-    equiv-symm-congruence-Monoid (monoid-Commutative-Monoid M) R
+  equiv-symmetric-congruence-Commutative-Monoid =
+    equiv-symmetric-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   transitive-congruence-Commutative-Monoid :
     is-transitive-Rel-Prop prop-congruence-Commutative-Monoid

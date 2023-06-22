@@ -67,7 +67,7 @@ module _
             ( pair
               ( pair (pr1 (center (H a))) (pr1 (pr2 (center (H a)))))
               ( ( apply-effectiveness-class' R
-                  ( symm-Eq-Rel R _ _ (pr2 (pr2 (center (H a)))))) ∙
+                  ( symmetric-Eq-Rel R _ _ (pr2 (pr2 (center (H a)))))) ∙
                 ( eq-class-equivalence-class R
                   ( pair Q K)
                   ( backward-implication

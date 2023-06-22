@@ -65,11 +65,11 @@ refl-sim-unit-Fin :
 pr1 (refl-sim-unit-Fin {succ-ℕ k} x) = one-unit-Fin
 pr2 (refl-sim-unit-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin k x
 
-symm-sim-unit-Fin :
+symmetric-sim-unit-Fin :
   {k : ℕ} (x y : Fin k) → sim-unit-Fin k x y → sim-unit-Fin k y x
-pr1 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
+pr1 (symmetric-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
   inv-unit-Fin (pair u (pair v q))
-pr2 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
+pr2 (symmetric-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
   ( ( ( ap (mul-Fin (succ-ℕ k) v) (inv p)) ∙
         ( inv (associative-mul-Fin (succ-ℕ k) v u x))) ∙
       ( ap (mul-Fin' (succ-ℕ k) x) q)) ∙
@@ -105,7 +105,7 @@ pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
           ( x)
           ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
           ( nat-Fin (succ-ℕ k) (pr1 u))
-          ( symm-cong-ℕ
+          ( symmetric-cong-ℕ
             ( succ-ℕ k)
             ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
             ( x)

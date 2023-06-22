@@ -95,18 +95,18 @@ module _
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  symm-congruence-Semiring :
+  symmetric-congruence-Semiring :
     is-symmetric-Rel-Prop prop-congruence-Semiring
-  symm-congruence-Semiring =
-    symm-congruence-Monoid
+  symmetric-congruence-Semiring =
+    symmetric-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  equiv-symm-congruence-Semiring :
+  equiv-symmetric-congruence-Semiring :
     (x y : type-Semiring R) →
     sim-congruence-Semiring x y ≃ sim-congruence-Semiring y x
-  equiv-symm-congruence-Semiring =
-    equiv-symm-congruence-Monoid
+  equiv-symmetric-congruence-Semiring =
+    equiv-symmetric-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 

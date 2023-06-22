@@ -450,9 +450,9 @@ module _
   refl-congruence-Normal-Subgroup =
     refl-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  symm-congruence-Normal-Subgroup :
+  symmetric-congruence-Normal-Subgroup :
     is-symmetric-Rel-Prop prop-congruence-Normal-Subgroup
-  symm-congruence-Normal-Subgroup =
+  symmetric-congruence-Normal-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   transitive-congruence-Normal-Subgroup :
@@ -612,7 +612,7 @@ pr1
 pr2
   ( relate-same-elements-congruence-normal-subgroup-congruence-Group
     G R x y) H =
-  symm-congruence-Group G R
+  symmetric-congruence-Group G R
     ( left-div-Group G x y)
     ( unit-Group G)
     ( map-sim-left-div-unit-congruence-Group G R H)

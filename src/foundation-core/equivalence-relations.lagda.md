@@ -78,9 +78,9 @@ refl-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) → is-reflexive (sim-Eq-Rel R)
 refl-Eq-Rel R = pr1 (is-equivalence-relation-prop-Eq-Rel R)
 
-symm-Eq-Rel :
+symmetric-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) → is-symmetric (sim-Eq-Rel R)
-symm-Eq-Rel R = pr1 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
+symmetric-Eq-Rel R = pr1 (pr2 (is-equivalence-relation-prop-Eq-Rel R))
 
 transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) → is-transitive (sim-Eq-Rel R)
@@ -97,17 +97,17 @@ pr2 (inhabited-subtype-Eq-Rel R x) = unit-trunc-Prop (x , refl-Eq-Rel R x)
 ### Symmetry induces equivalences `R(x,y) ≃ R(y,x)`
 
 ```agda
-iff-symm-Eq-Rel :
+iff-symmetric-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y : A} →
   sim-Eq-Rel R x y ↔ sim-Eq-Rel R y x
-pr1 (iff-symm-Eq-Rel R) = symm-Eq-Rel R _ _
-pr2 (iff-symm-Eq-Rel R) = symm-Eq-Rel R _ _
+pr1 (iff-symmetric-Eq-Rel R) = symmetric-Eq-Rel R _ _
+pr2 (iff-symmetric-Eq-Rel R) = symmetric-Eq-Rel R _ _
 
-equiv-symm-Eq-Rel :
+equiv-symmetric-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y : A} →
   sim-Eq-Rel R x y ≃ sim-Eq-Rel R y x
-equiv-symm-Eq-Rel R =
-  equiv-iff' (prop-Eq-Rel R _ _) (prop-Eq-Rel R _ _) (iff-symm-Eq-Rel R)
+equiv-symmetric-Eq-Rel R =
+  equiv-iff' (prop-Eq-Rel R _ _) (prop-Eq-Rel R _ _) (iff-symmetric-Eq-Rel R)
 ```
 
 ### Transitivity induces equivalences `R(y,z) ≃ R(x,z)`
@@ -117,7 +117,7 @@ iff-transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
   sim-Eq-Rel R x y → (sim-Eq-Rel R y z ↔ sim-Eq-Rel R x z)
 pr1 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s r
-pr2 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s (symm-Eq-Rel R _ _ r)
+pr2 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s (symmetric-Eq-Rel R _ _ r)
 
 equiv-transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
@@ -134,7 +134,7 @@ iff-transitive-Eq-Rel' :
   sim-Eq-Rel R y z → (sim-Eq-Rel R x y ↔ sim-Eq-Rel R x z)
 pr1 (iff-transitive-Eq-Rel' R r) s = transitive-Eq-Rel R _ _ _ r s
 pr2 (iff-transitive-Eq-Rel' R r) s =
-  transitive-Eq-Rel R _ _ _ (symm-Eq-Rel R _ _ r) s
+  transitive-Eq-Rel R _ _ _ (symmetric-Eq-Rel R _ _ r) s
 
 equiv-transitive-Eq-Rel' :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →

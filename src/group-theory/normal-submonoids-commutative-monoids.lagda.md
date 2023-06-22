@@ -407,7 +407,7 @@ module _
       ( mul-Commutative-Monoid M x u)
       ( unit-Commutative-Monoid M)
       ( K)
-      ( symm-congruence-Commutative-Monoid M R
+      ( symmetric-congruence-Commutative-Monoid M R
         ( mul-Commutative-Monoid M x u)
         ( x)
         ( concatenate-sim-eq-congruence-Commutative-Monoid M R
@@ -542,7 +542,7 @@ module _
       ( K)
       ( mul-saturated-congruence-Commutative-Monoid M R
         ( refl-saturated-congruence-Commutative-Monoid M R u)
-        ( symm-saturated-congruence-Commutative-Monoid M R x y H))
+        ( symmetric-saturated-congruence-Commutative-Monoid M R x y H))
   pr2
     ( pr2
       ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Commutative-Monoid

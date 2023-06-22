@@ -92,8 +92,8 @@ pr1 (is-gcd-sim-unit-ℤ H K (pair x _)) = x
 pr1 (pr2 (is-gcd-sim-unit-ℤ H K (pair _ G)) k) =
   ( pr1 (G k)) ∘
   ( is-common-divisor-sim-unit-ℤ
-    ( symm-sim-unit-ℤ H)
-    ( symm-sim-unit-ℤ K)
+    ( symmetric-sim-unit-ℤ H)
+    ( symmetric-sim-unit-ℤ K)
     ( refl-sim-unit-ℤ k))
 pr2 (pr2 (is-gcd-sim-unit-ℤ H K (pair _ G)) k) =
   ( is-common-divisor-sim-unit-ℤ H K (refl-sim-unit-ℤ k)) ∘
@@ -172,8 +172,8 @@ pr1 (pr2 (is-gcd-gcd-ℤ x y) k) =
       ( is-common-divisor-is-common-divisor-int-ℕ)) ∘
     ( is-common-divisor-int-abs-is-common-divisor-ℤ)) ∘
   ( is-common-divisor-sim-unit-ℤ
-    ( symm-sim-unit-ℤ (sim-unit-abs-ℤ x))
-    ( symm-sim-unit-ℤ (sim-unit-abs-ℤ y))
+    ( symmetric-sim-unit-ℤ (sim-unit-abs-ℤ x))
+    ( symmetric-sim-unit-ℤ (sim-unit-abs-ℤ y))
     ( refl-sim-unit-ℤ k))
 pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
   ( ( ( ( ( is-common-divisor-sim-unit-ℤ
@@ -185,7 +185,7 @@ pr2 (pr2 (is-gcd-gcd-ℤ x y) k) =
       ( pr2 (is-gcd-gcd-ℕ (abs-ℤ x) (abs-ℤ y) (abs-ℤ k)))) ∘
     ( div-div-int-ℕ)) ∘
   ( div-sim-unit-ℤ
-    ( symm-sim-unit-ℤ (sim-unit-abs-ℤ k))
+    ( symmetric-sim-unit-ℤ (sim-unit-abs-ℤ k))
     ( refl-sim-unit-ℤ (gcd-ℤ x y)))
 ```
 

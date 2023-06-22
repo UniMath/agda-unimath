@@ -77,14 +77,14 @@ module _
   refl-congruence-Ab : is-reflexive-Rel-Prop prop-congruence-Ab
   refl-congruence-Ab = refl-congruence-Group (group-Ab A) R
 
-  symm-congruence-Ab : is-symmetric-Rel-Prop prop-congruence-Ab
-  symm-congruence-Ab = symm-congruence-Group (group-Ab A) R
+  symmetric-congruence-Ab : is-symmetric-Rel-Prop prop-congruence-Ab
+  symmetric-congruence-Ab = symmetric-congruence-Group (group-Ab A) R
 
-  equiv-symm-congruence-Ab :
+  equiv-symmetric-congruence-Ab :
     (x y : type-Ab A) →
     sim-congruence-Ab x y ≃ sim-congruence-Ab y x
-  equiv-symm-congruence-Ab =
-    equiv-symm-congruence-Group (group-Ab A) R
+  equiv-symmetric-congruence-Ab =
+    equiv-symmetric-congruence-Group (group-Ab A) R
 
   transitive-congruence-Ab :
     is-transitive-Rel-Prop prop-congruence-Ab

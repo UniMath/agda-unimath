@@ -318,7 +318,7 @@ module _
                 ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
                     d2 d3)))
             ( zero-ℕ)
-            ( symm-cong-ℕ 2
+            ( symmetric-cong-ℕ 2
               ( add-ℕ
                 ( nat-Fin 2
                   ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph

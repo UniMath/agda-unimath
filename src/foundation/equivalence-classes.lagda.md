@@ -265,7 +265,7 @@ module _
                     by φ x
                   ↔ sim-Eq-Rel R a x
                     by iff-transitive-Eq-Rel R
-                        ( symm-Eq-Rel R _ _ (forward-implication (φ a) c))
+                        ( symmetric-Eq-Rel R _ _ (forward-implication (φ a) c))
                   ↔ sim-Eq-Rel R w x
                     by iff-transitive-Eq-Rel R (forward-implication (ψ a) d)
                   ↔ is-in-equivalence-class R D x
@@ -357,7 +357,7 @@ module _
     is-effective-class :
       is-effective R (class R)
     is-effective-class x y =
-      ( equiv-symm-Eq-Rel R) ∘e ( effective-quotient' x (class R y))
+      ( equiv-symmetric-Eq-Rel R) ∘e ( effective-quotient' x (class R y))
 
   abstract
     apply-effectiveness-class :

@@ -349,7 +349,7 @@ module _
       ( mul-Monoid M (mul-Monoid M x u) y)
       ( unit-Monoid M)
       ( K)
-      ( symm-congruence-Monoid M R
+      ( symmetric-congruence-Monoid M R
         ( mul-Monoid M (mul-Monoid M x u) y)
         ( mul-Monoid M x y)
         ( mul-congruence-Monoid M R
@@ -479,7 +479,7 @@ module _
       ( mul-saturated-congruence-Monoid M R
         ( mul-saturated-congruence-Monoid M R
           ( refl-saturated-congruence-Monoid M R u)
-          ( symm-saturated-congruence-Monoid M R x y H))
+          ( symmetric-saturated-congruence-Monoid M R x y H))
         ( refl-saturated-congruence-Monoid M R v))
   pr2
     ( pr2

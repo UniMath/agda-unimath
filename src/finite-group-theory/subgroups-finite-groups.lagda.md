@@ -404,10 +404,10 @@ module _
   refl-right-sim-Subgroup-𝔽 =
     refl-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  symm-right-sim-Subgroup-𝔽 :
+  symmetric-right-sim-Subgroup-𝔽 :
     is-symmetric-Rel-Prop prop-right-eq-rel-Subgroup-𝔽
-  symm-right-sim-Subgroup-𝔽 =
-    symm-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
+  symmetric-right-sim-Subgroup-𝔽 =
+    symmetric-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
   transitive-right-sim-Subgroup-𝔽 :
     is-transitive-Rel-Prop prop-right-eq-rel-Subgroup-𝔽

@@ -511,10 +511,10 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  symm-congruence-Subgroup-Ab :
+  symmetric-congruence-Subgroup-Ab :
     is-symmetric-Rel-Prop prop-congruence-Subgroup-Ab
-  symm-congruence-Subgroup-Ab =
-    symm-congruence-Normal-Subgroup
+  symmetric-congruence-Subgroup-Ab =
+    symmetric-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 

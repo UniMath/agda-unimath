@@ -188,10 +188,10 @@ module _
   pr1 (pr2 (refl-sim-partition x)) = is-in-block-class-partition P x
   pr2 (pr2 (refl-sim-partition x)) = is-in-block-class-partition P x
 
-  symm-sim-partition : is-symmetric sim-partition
-  pr1 (symm-sim-partition x y (Q , p , q)) = Q
-  pr1 (pr2 (symm-sim-partition x y (Q , p , q))) = q
-  pr2 (pr2 (symm-sim-partition x y (Q , p , q))) = p
+  symmetric-sim-partition : is-symmetric sim-partition
+  pr1 (symmetric-sim-partition x y (Q , p , q)) = Q
+  pr1 (pr2 (symmetric-sim-partition x y (Q , p , q))) = q
+  pr2 (pr2 (symmetric-sim-partition x y (Q , p , q))) = p
 
   transitive-sim-partition : is-transitive sim-partition
   pr1 (transitive-sim-partition x y z  (B , p , q) (B' , p' , q')) = B
@@ -216,7 +216,7 @@ module _
   eq-rel-partition : Eq-Rel (l1 ⊔ l2) A
   pr1 eq-rel-partition = prop-eq-rel-partition
   pr1 (pr2 eq-rel-partition) = refl-sim-partition
-  pr1 (pr2 (pr2 eq-rel-partition)) = symm-sim-partition
+  pr1 (pr2 (pr2 eq-rel-partition)) = symmetric-sim-partition
   pr2 (pr2 (pr2 eq-rel-partition)) = transitive-sim-partition
 
   is-inhabited-subtype-prop-eq-rel-partition :
@@ -258,7 +258,7 @@ module _
         transitive-Eq-Rel R
           x _ y
           ( forward-implication (K y) q)
-          ( symm-Eq-Rel R _ x (forward-implication (K x) p)))
+          ( symmetric-Eq-Rel R _ x (forward-implication (K x) p)))
   pr1 (pr2 (relate-same-elements-eq-rel-partition-Eq-Rel x y) r) =
     make-block-partition
       ( partition-Eq-Rel R)
@@ -448,8 +448,8 @@ module _
   refl-sim-map-into-set : is-reflexive sim-map-into-set
   refl-sim-map-into-set x = refl
 
-  symm-sim-map-into-set : is-symmetric sim-map-into-set
-  symm-sim-map-into-set x y H = inv H
+  symmetric-sim-map-into-set : is-symmetric sim-map-into-set
+  symmetric-sim-map-into-set x y H = inv H
 
   transitive-sim-map-into-set : is-transitive sim-map-into-set
   transitive-sim-map-into-set x y z H K = K ∙ H
@@ -457,7 +457,7 @@ module _
   eq-rel-map-into-set : Eq-Rel l2 A
   pr1 eq-rel-map-into-set = rel-map-into-set
   pr1 (pr2 eq-rel-map-into-set) x = refl-sim-map-into-set x
-  pr1 (pr2 (pr2 eq-rel-map-into-set)) x y = symm-sim-map-into-set x y
+  pr1 (pr2 (pr2 eq-rel-map-into-set)) x y = symmetric-sim-map-into-set x y
   pr2 (pr2 (pr2 eq-rel-map-into-set)) x y z = transitive-sim-map-into-set x y z
 
   is-effective-map-into-set :

@@ -84,13 +84,13 @@ module _
   refl-congruence-Monoid : is-reflexive-Rel-Prop prop-congruence-Monoid
   refl-congruence-Monoid = refl-Eq-Rel eq-rel-congruence-Monoid
 
-  symm-congruence-Monoid : is-symmetric-Rel-Prop prop-congruence-Monoid
-  symm-congruence-Monoid = symm-Eq-Rel eq-rel-congruence-Monoid
+  symmetric-congruence-Monoid : is-symmetric-Rel-Prop prop-congruence-Monoid
+  symmetric-congruence-Monoid = symmetric-Eq-Rel eq-rel-congruence-Monoid
 
-  equiv-symm-congruence-Monoid :
+  equiv-symmetric-congruence-Monoid :
     (x y : type-Monoid M) →
     sim-congruence-Monoid x y ≃ sim-congruence-Monoid y x
-  equiv-symm-congruence-Monoid x y = equiv-symm-Eq-Rel eq-rel-congruence-Monoid
+  equiv-symmetric-congruence-Monoid x y = equiv-symmetric-Eq-Rel eq-rel-congruence-Monoid
 
   transitive-congruence-Monoid : is-transitive-Rel-Prop prop-congruence-Monoid
   transitive-congruence-Monoid = transitive-Eq-Rel eq-rel-congruence-Monoid

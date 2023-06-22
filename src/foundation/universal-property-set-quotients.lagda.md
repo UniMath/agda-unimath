@@ -424,7 +424,7 @@ module _
           ( λ r →
             eq-iff
               ( transitive-Eq-Rel R _ _ _ r)
-              ( transitive-Eq-Rel R _ _ _ (symm-Eq-Rel R _ _ r)))
+              ( transitive-Eq-Rel R _ _ _ (symmetric-Eq-Rel R _ _ r)))
     P : type-Set B → Prop l2
     P = map-inv-is-equiv (Q (Prop-Set l2)) α
     compute-P :

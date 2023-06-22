@@ -1087,7 +1087,7 @@ module _
           ( _)
           ( _)
           ( T2)
-          ( symm-Eq-Rel
+          ( symmetric-Eq-Rel
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( _)
             ( _)
@@ -1352,7 +1352,7 @@ module _
           ( _)
           ( _)
           ( _)
-          ( symm-Eq-Rel (same-orbits-permutation-count g) _ _ P)
+          ( symmetric-Eq-Rel (same-orbits-permutation-count g) _ _ P)
           ( tr
             ( λ g → sim-Eq-Rel (same-orbits-permutation-count g) x b)
             { x =
@@ -1404,7 +1404,7 @@ module _
               ( b)
               ( a)
               ( r)
-              ( symm-Eq-Rel (same-orbits-permutation-count g) _ _ P)))
+              ( symmetric-Eq-Rel (same-orbits-permutation-count g) _ _ P)))
       h'-inl k T p (inr nq) (inr nr) =
         conserves-other-orbits-transposition-quotient g T nq nr
       h' :
@@ -1920,7 +1920,7 @@ module _
             ( b)
             ( a)
             ( R)
-            ( symm-Eq-Rel (same-orbits-permutation-count g) _ _ P)))
+            ( symmetric-Eq-Rel (same-orbits-permutation-count g) _ _ P)))
       section-h'-inl k (inr NQ) (inr NR) (inl Q') R' = ex-falso (NQ Q')
       section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inl R') = ex-falso (NR R')
       section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inr NR') =
@@ -1961,7 +1961,7 @@ module _
           ( inr star)
       section-h'-inr (inl Q) R =
         ex-falso (not-same-orbits-transposition-same-orbits g P
-          ( symm-Eq-Rel
+          ( symmetric-Eq-Rel
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             _ _
             ( Q)))

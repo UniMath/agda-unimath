@@ -78,15 +78,15 @@ cong-identification-ℕ :
   (k : ℕ) {x y : ℕ} → x ＝ y → cong-ℕ k x y
 cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
-symm-cong-ℕ :
+symmetric-cong-ℕ :
   (k x y : ℕ) → cong-ℕ k x y → cong-ℕ k y x
-pr1 (symm-cong-ℕ k x y (pair d p)) = d
-pr2 (symm-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
+pr1 (symmetric-cong-ℕ k x y (pair d p)) = d
+pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
 
 cong-zero-ℕ' :
   (k : ℕ) → cong-ℕ k zero-ℕ k
 cong-zero-ℕ' k =
-  symm-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
+  symmetric-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
 
 transitive-cong-ℕ :
   (k x y z : ℕ) →
