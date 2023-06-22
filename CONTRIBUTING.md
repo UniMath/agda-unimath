@@ -46,8 +46,11 @@ Below is a summary of the tasks this tool performs:
 - **Blank line conventions**: Searches for and removes any double or multiple
   blank lines.
 
-- **Agda space conventions**: Corrects common spacing mistakes according to our
-  conventions.
+- **Agda space conventions**: Corrects some common spacing mistakes according to
+  our conventions. This includes removing repeat whitespace characters between
+  two non-whitespace characters in a line, always having a space before and
+  after a semicolon, and never having a space before a closing parenthesis or
+  curly brace.
 
 - **Indentation conventions**: Verifies that the indentation level is always a
   multiple of two. If inconsistencies are found, it provides an error report
