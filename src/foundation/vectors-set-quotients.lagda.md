@@ -400,7 +400,7 @@ pr2 (is-retraction-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
       ( R (inr star))
       ( all-sim-Equivalence-Relation n
         ( tail-functional-vec n A)
-        ( sλ x → R (inl x)))
+        ( λ x → R (inl x)))
       ( X)
       ( map-inv-equiv-f)
 
