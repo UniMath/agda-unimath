@@ -24,7 +24,7 @@ accepted mathematical term, such as `poset`.
 
 ### The file format is literate Agda with markdown
 
-Files that are part of the formalisation should be in literate Agda using
+Files that are part of the formalization should be in literate Agda using
 markdown. The file extension is `.lagda.md`.
 
 ### File header and module declaration
@@ -82,10 +82,36 @@ like `## Examples` or `## Theorem`, based on the purpose of the file.
 
 Ideally, depending on the purpose of the file, the first section explains the
 main idea, the second section proceeds to give the main definition that is the
-focus of the file, then the third section proceeds possibly with examples or by
-deriving basic properties of the defined concept.
+focus of the file, then the third section proceeds possibly with basic
+properties of the defined concept. In rare cases we also have an example
+section, but often it is better to cover examples in their own files and
+referencing those in the `See also` section.
 
-#### Subsections
+In the `Idea` section, the main idea behind the topic of the current file must
+be explained. In this short, informal section we display the defined concept in
+bold, i.e., using `**defined concept**` and any technical terms that are used in
+this explanation are hyperlinked to other pages in the library. For example, the
+`Idea` section of
+[Galois connections on large posets](order-theory.galois-connections-large-posets.md)
+looks in markdown as follows:
+
+````md
+## Idea
+
+A **galois connection** between [large posets](order-theory.large-posets.md) `P`
+and `Q` consists of
+[order preserving maps](order-theory.order-preserving-maps-large-posets.md)
+`f : hom-Large-Poset id P Q` and `hom-Large-Poset id Q P` such that the adjoint
+relation
+
+```text
+  (f x ≤ y) ↔ (x ≤ g y)
+```
+
+holds for every two elements `x : P` and `y : Q`.
+````
+
+### Subsections
 
 Use `###` headings for subsections within the main sections. If a code block
 following a heading is very long, you can use `####` headings to subdivide the
@@ -113,13 +139,15 @@ contents of the file.
   be displayed as
   [UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
 
-## Notes
+## See also
 
 - For a template file see [`TEMPLATE.lagda.md`](TEMPLATE.lagda.md).
 
 - An instructive example of a file with the expected structure is
   [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
 
+## Note
+
 Please note that some of the conventions above are enforced by our `pre-commit`
 hooks. You can read more about them in our
-[installation guide](HOWTO-INSTALL.md#pre-commit-hooks).
+[contribution guide](CONTRIBUTING.md).
