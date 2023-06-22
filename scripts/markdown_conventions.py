@@ -2,6 +2,8 @@
 # Run this script:
 # $ python3 scripts/markdown_conventions.py fileName.md
 
+# * Remember to update the script's entry in `CONTRIBUTING.md` on expansion
+
 import sys
 import utils
 import re
@@ -80,9 +82,10 @@ if __name__ == '__main__':
 
         if top_level_header_after_first_line.search(output):
             print(
-                f"Error! File '{fpath}' has a top level header after the first line. Please increase it.")
+                f"Error! File '{fpath}' has a top level header after the first line. Please increase the header's level.")
             status |= STATUS_TOP_LEVEL_HEADER_AFTER_FIRST_LINE
 
+        # Check for empty sections
         # TODO: print line numbers
         if empty_section_nonincreasing_level.search(output):
             print(
@@ -96,8 +99,10 @@ if __name__ == '__main__':
 
             status |= STATUS_EMPTY_SECTION
 
+        # Remove empty code blocks
         output = empty_block_pattern.sub('', output)
 
+        # Remove punctuation in section headers
         output = re.sub(
             r'(^|\n)(#+\s.*)[\.,:;!?¡¿]\s*($|\n)', r'\1\2\3', output)
 
