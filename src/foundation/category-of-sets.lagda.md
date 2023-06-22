@@ -33,17 +33,24 @@ sets for each universe level, and there is a large category of sets.
 
 ## Definitions
 
+### The large precategory of sets
+
+```agda
+Set-Large-Precategory : Large-Precategory lsuc (_⊔_)
+obj-Large-Precategory Set-Large-Precategory = Set
+hom-Large-Precategory Set-Large-Precategory = hom-Set
+comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
+id-hom-Large-Precategory Set-Large-Precategory = id
+associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
+left-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
+right-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
+```
+
 ### The precategory of small sets
 
 ```agda
 Set-Precategory : (l : Level) → Precategory (lsuc l) l
-pr1 (Set-Precategory l) = Set l
-pr1 (pr2 (Set-Precategory l)) = hom-Set
-pr1 (pr1 (pr2 (pr2 (Set-Precategory l)))) g f = g ∘ f
-pr2 (pr1 (pr2 (pr2 (Set-Precategory l)))) h g f = refl
-pr1 (pr2 (pr2 (pr2 (Set-Precategory l)))) x = id
-pr1 (pr2 (pr2 (pr2 (pr2 (Set-Precategory l))))) f = refl
-pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precategory l))))) f = refl
+Set-Precategory = precategory-Large-Precategory Set-Large-Precategory
 ```
 
 ### The category of small sets
@@ -71,19 +78,3 @@ Set-Category : (l : Level) → Category (lsuc l) l
 pr1 (Set-Category l) = Set-Precategory l
 pr2 (Set-Category l) = is-category-Set-Precategory l
 ```
-
-### The large precategory of sets
-
-```agda
-Set-Large-Precategory : Large-Precategory lsuc (_⊔_)
-obj-Large-Precategory Set-Large-Precategory = Set
-hom-Large-Precategory Set-Large-Precategory = hom-Set
-comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
-id-hom-Large-Precategory Set-Large-Precategory = id
-associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl
-left-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
-right-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
-```
-
-Note that to prove that the large precategory of sets is a large _category_, we
-would need the univalence axiom for large types.
