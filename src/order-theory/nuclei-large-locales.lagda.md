@@ -8,6 +8,7 @@ module order-theory.nuclei-large-locales where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -239,20 +240,15 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   refl-leq-closed-element-nucleus-Large-Locale :
-    {l1 : Level}
-    (x : closed-element-nucleus-Large-Locale l1) →
-    leq-closed-element-nucleus-Large-Locale x x
+    {l1 : Level} → is-reflexive (leq-closed-element-nucleus-Large-Locale {l1})
   refl-leq-closed-element-nucleus-Large-Locale =
     refl-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   antisymmetric-leq-closed-element-nucleus-Large-Locale :
-    {l1 : Level}
-    (x y : closed-element-nucleus-Large-Locale l1) →
-    leq-closed-element-nucleus-Large-Locale x y →
-    leq-closed-element-nucleus-Large-Locale y x →
-    x ＝ y
+    {l1 : Level} →
+    is-antisymmetric (leq-closed-element-nucleus-Large-Locale {l1})
   antisymmetric-leq-closed-element-nucleus-Large-Locale =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Locale L)

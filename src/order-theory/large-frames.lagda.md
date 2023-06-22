@@ -7,6 +7,7 @@ module order-theory.large-frames where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -107,13 +108,11 @@ module _
   leq-eq-Large-Frame =
     leq-eq-Large-Poset (large-poset-Large-Frame L)
 
-  refl-leq-Large-Frame :
-    {l1 : Level} (x : type-Large-Frame l1) → leq-Large-Frame x x
+  refl-leq-Large-Frame : {l1 : Level} → is-reflexive (leq-Large-Frame {l1})
   refl-leq-Large-Frame = refl-leq-Large-Poset (large-poset-Large-Frame L)
 
   antisymmetric-leq-Large-Frame :
-    {l1 : Level} (x y : type-Large-Frame l1) →
-    leq-Large-Frame x y → leq-Large-Frame y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Large-Frame {l1})
   antisymmetric-leq-Large-Frame =
     antisymmetric-leq-Large-Poset (large-poset-Large-Frame L)
 

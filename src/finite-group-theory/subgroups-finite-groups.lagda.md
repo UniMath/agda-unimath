@@ -399,18 +399,15 @@ module _
   prop-right-eq-rel-Subgroup-𝔽 =
     prop-right-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  refl-right-sim-Subgroup-𝔽 :
-    is-reflexive-Relation-Prop prop-right-eq-rel-Subgroup-𝔽
+  refl-right-sim-Subgroup-𝔽 : is-reflexive right-sim-Subgroup-𝔽
   refl-right-sim-Subgroup-𝔽 =
     refl-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  symmetric-right-sim-Subgroup-𝔽 :
-    is-symmetric-Relation-Prop prop-right-eq-rel-Subgroup-𝔽
+  symmetric-right-sim-Subgroup-𝔽 : is-symmetric right-sim-Subgroup-𝔽
   symmetric-right-sim-Subgroup-𝔽 =
     symmetric-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  transitive-right-sim-Subgroup-𝔽 :
-    is-transitive-Relation-Prop prop-right-eq-rel-Subgroup-𝔽
+  transitive-right-sim-Subgroup-𝔽 : is-transitive right-sim-Subgroup-𝔽
   transitive-right-sim-Subgroup-𝔽 =
     transitive-right-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
@@ -438,18 +435,15 @@ module _
   prop-left-eq-rel-Subgroup-𝔽 =
     prop-left-eq-rel-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  refl-left-sim-Subgroup-𝔽 :
-    is-reflexive-Relation-Prop prop-left-eq-rel-Subgroup-𝔽
+  refl-left-sim-Subgroup-𝔽 : is-reflexive left-sim-Subgroup-𝔽
   refl-left-sim-Subgroup-𝔽 =
     refl-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  symmetric-left-sim-Subgroup-𝔽 :
-    is-symmetric-Relation-Prop prop-left-eq-rel-Subgroup-𝔽
+  symmetric-left-sim-Subgroup-𝔽 : is-symmetric left-sim-Subgroup-𝔽
   symmetric-left-sim-Subgroup-𝔽 =
     symmetric-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  transitive-left-sim-Subgroup-𝔽 :
-    is-transitive-Relation-Prop prop-left-eq-rel-Subgroup-𝔽
+  transitive-left-sim-Subgroup-𝔽 : is-transitive left-sim-Subgroup-𝔽
   transitive-left-sim-Subgroup-𝔽 =
     transitive-left-sim-Decidable-Subgroup (group-Group-𝔽 G) H
 

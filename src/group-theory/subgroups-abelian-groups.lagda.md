@@ -505,21 +505,21 @@ module _
 
 ```agda
   refl-congruence-Subgroup-Ab :
-    is-reflexive-Relation-Prop prop-congruence-Subgroup-Ab
+    is-reflexive sim-congruence-Subgroup-Ab
   refl-congruence-Subgroup-Ab =
     refl-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
   symmetric-congruence-Subgroup-Ab :
-    is-symmetric-Relation-Prop prop-congruence-Subgroup-Ab
+    is-symmetric sim-congruence-Subgroup-Ab
   symmetric-congruence-Subgroup-Ab =
     symmetric-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
   transitive-congruence-Subgroup-Ab :
-    is-transitive-Relation-Prop prop-congruence-Subgroup-Ab
+    is-transitive sim-congruence-Subgroup-Ab
   transitive-congruence-Subgroup-Ab =
     transitive-congruence-Normal-Subgroup
       ( group-Ab A)

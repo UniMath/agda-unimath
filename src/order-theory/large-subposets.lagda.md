@@ -7,6 +7,7 @@ module order-theory.large-subposets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -113,8 +114,7 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   refl-leq-Large-Subposet :
-    {l1 : Level} (x : type-Large-Subposet l1) →
-    leq-Large-Subposet x x
+    {l1 : Level} → is-reflexive (leq-Large-Subposet {l1})
   refl-leq-Large-Subposet =
     refl-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
@@ -134,10 +134,7 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   antisymmetric-leq-Large-Subposet :
-    {l1 : Level}
-    (x : type-Large-Subposet l1)
-    (y : type-Large-Subposet l1) →
-    leq-Large-Subposet x y → leq-Large-Subposet y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Large-Subposet {l1})
   antisymmetric-leq-Large-Subposet {l1} (x , p) (y , q) H K =
     eq-type-subtype
       ( large-subpreorder-Large-Subposet S {l1})

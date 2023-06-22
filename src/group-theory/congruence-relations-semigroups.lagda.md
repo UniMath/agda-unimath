@@ -94,13 +94,11 @@ module _
   is-prop-sim-congruence-Semigroup =
     is-prop-sim-Equivalence-Relation eq-rel-congruence-Semigroup
 
-  refl-congruence-Semigroup :
-    is-reflexive-Relation-Prop prop-congruence-Semigroup
+  refl-congruence-Semigroup : is-reflexive sim-congruence-Semigroup
   refl-congruence-Semigroup =
     refl-Equivalence-Relation eq-rel-congruence-Semigroup
 
-  symmetric-congruence-Semigroup :
-    is-symmetric-Relation-Prop prop-congruence-Semigroup
+  symmetric-congruence-Semigroup : is-symmetric sim-congruence-Semigroup
   symmetric-congruence-Semigroup =
     symmetric-Equivalence-Relation eq-rel-congruence-Semigroup
 
@@ -110,8 +108,7 @@ module _
   equiv-symmetric-congruence-Semigroup x y =
     equiv-symmetric-Equivalence-Relation eq-rel-congruence-Semigroup
 
-  transitive-congruence-Semigroup :
-    is-transitive-Relation-Prop prop-congruence-Semigroup
+  transitive-congruence-Semigroup : is-transitive sim-congruence-Semigroup
   transitive-congruence-Semigroup =
     transitive-Equivalence-Relation eq-rel-congruence-Semigroup
 

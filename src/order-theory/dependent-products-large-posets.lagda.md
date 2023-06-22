@@ -7,6 +7,7 @@ module order-theory.dependent-products-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
@@ -61,8 +62,7 @@ module _
     is-prop-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   refl-leq-Π-Large-Poset :
-    {l1 : Level} (x : type-Π-Large-Poset l1) →
-    leq-Π-Large-Poset x x
+    {l1 : Level} → is-reflexive (leq-Π-Large-Poset {l1})
   refl-leq-Π-Large-Poset =
     refl-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
@@ -78,8 +78,7 @@ module _
     transitive-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   antisymmetric-leq-Π-Large-Poset :
-    {l1 : Level} (x : type-Π-Large-Poset l1) (y : type-Π-Large-Poset l1) →
-    leq-Π-Large-Poset x y → leq-Π-Large-Poset y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Π-Large-Poset {l1})
   antisymmetric-leq-Π-Large-Poset x y H K =
     eq-htpy (λ i → antisymmetric-leq-Large-Poset (P i) (x i) (y i) (H i) (K i))
 

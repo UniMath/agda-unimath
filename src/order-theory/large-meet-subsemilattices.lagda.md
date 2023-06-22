@@ -179,7 +179,7 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   refl-leq-Large-Meet-Subsemilattice :
-    {l : Level} → is-reflexive (leq-Large-Meet-Subsemilattice {l})
+    {l1 : Level} → is-reflexive (leq-Large-Meet-Subsemilattice {l1})
   refl-leq-Large-Meet-Subsemilattice =
     refl-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
@@ -199,7 +199,7 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   antisymmetric-leq-Large-Meet-Subsemilattice :
-    {l : Level} → is-antisymmetric (leq-Large-Meet-Subsemilattice {l})
+    {l1 : Level} → is-antisymmetric (leq-Large-Meet-Subsemilattice {l1})
   antisymmetric-leq-Large-Meet-Subsemilattice =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)

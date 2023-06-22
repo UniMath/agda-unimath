@@ -171,7 +171,7 @@ module _
 
   is-surjective-map-hom-2-Element-Subtype :
     (f : hom-2-Element-Subtype) → is-surjective (map-hom-2-Element-Subtype f)
-  is-surjective-map-hom-2-Element-Subtype f (pair x q) = {!!}
+  is-surjective-map-hom-2-Element-Subtype f (pair x q) = {! type-subtype (P ∘ map-inv-equiv e) !}
 
   is-equiv-map-hom-2-Element-Subtype :
     (f : hom-2-Element-Subtype) → is-equiv (map-hom-2-Element-Subtype f)
@@ -211,8 +211,7 @@ precomp-equiv-2-Element-Subtype :
 pr1 (precomp-equiv-2-Element-Subtype e (pair P H)) =
   P ∘ (map-inv-equiv e)
 pr2 (precomp-equiv-2-Element-Subtype e (pair P H)) =
-  transitive-mere-equiv
-    ( H)
+  transitive-mere-equiv _ _ _
     ( unit-trunc-Prop
       ( equiv-subtype-equiv
         ( e)
@@ -224,6 +223,7 @@ pr2 (precomp-equiv-2-Element-Subtype e (pair P H)) =
               ( λ g → (type-Prop (P x)) ≃ (type-Prop (P (map-equiv g x))))
               ( inv (left-inverse-law-equiv e))
               ( id-equiv)))))
+    ( H)
 
 {-
 module _

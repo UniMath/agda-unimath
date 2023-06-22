@@ -7,6 +7,7 @@ module order-theory.dependent-products-large-meet-semilattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -117,15 +118,12 @@ module _
     leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
   refl-leq-Π-Large-Meet-Semilattice :
-    {l1 : Level} →
-    (x : type-Π-Large-Meet-Semilattice l1) → leq-Π-Large-Meet-Semilattice x x
+    {l1 : Level} → is-reflexive (leq-Π-Large-Meet-Semilattice {l1})
   refl-leq-Π-Large-Meet-Semilattice =
     refl-leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
   antisymmetric-leq-Π-Large-Meet-Semilattice :
-    {l1 : Level} →
-    (x y : type-Π-Large-Meet-Semilattice l1) →
-    leq-Π-Large-Meet-Semilattice x y → leq-Π-Large-Meet-Semilattice y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Π-Large-Meet-Semilattice {l1})
   antisymmetric-leq-Π-Large-Meet-Semilattice =
     antisymmetric-leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
@@ -134,7 +132,8 @@ module _
     (x : type-Π-Large-Meet-Semilattice l1)
     (y : type-Π-Large-Meet-Semilattice l2)
     (z : type-Π-Large-Meet-Semilattice l3) →
-    leq-Π-Large-Meet-Semilattice y z → leq-Π-Large-Meet-Semilattice x y →
+    leq-Π-Large-Meet-Semilattice y z →
+    leq-Π-Large-Meet-Semilattice x y →
     leq-Π-Large-Meet-Semilattice x z
   transitive-leq-Π-Large-Meet-Semilattice =
     transitive-leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice

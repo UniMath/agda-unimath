@@ -85,11 +85,10 @@ module _
     z ＝ w → sim-congruence-Monoid x w
   concatenate-eq-sim-eq-congruence-Monoid refl H refl = H
 
-  refl-congruence-Monoid : is-reflexive-Relation-Prop prop-congruence-Monoid
+  refl-congruence-Monoid : is-reflexive sim-congruence-Monoid
   refl-congruence-Monoid = refl-Equivalence-Relation eq-rel-congruence-Monoid
 
-  symmetric-congruence-Monoid :
-    is-symmetric-Relation-Prop prop-congruence-Monoid
+  symmetric-congruence-Monoid : is-symmetric sim-congruence-Monoid
   symmetric-congruence-Monoid =
     symmetric-Equivalence-Relation eq-rel-congruence-Monoid
 
@@ -99,8 +98,7 @@ module _
   equiv-symmetric-congruence-Monoid x y =
     equiv-symmetric-Equivalence-Relation eq-rel-congruence-Monoid
 
-  transitive-congruence-Monoid :
-    is-transitive-Relation-Prop prop-congruence-Monoid
+  transitive-congruence-Monoid : is-transitive sim-congruence-Monoid
   transitive-congruence-Monoid =
     transitive-Equivalence-Relation eq-rel-congruence-Monoid
 

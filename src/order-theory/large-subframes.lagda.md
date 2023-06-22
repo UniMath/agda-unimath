@@ -7,6 +7,7 @@ module order-theory.large-subframes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -131,8 +132,7 @@ module _
       ( large-subposet-Large-Subframe S)
 
   refl-leq-Large-Subframe :
-    {l1 : Level} (x : type-Large-Subframe l1) →
-    leq-Large-Subframe x x
+    {l1 : Level} → is-reflexive (leq-Large-Subframe {l1})
   refl-leq-Large-Subframe =
     refl-leq-Large-Subposet
       ( large-poset-Large-Frame F)
@@ -152,12 +152,7 @@ module _
       ( large-subposet-Large-Subframe S)
 
   antisymmetric-leq-Large-Subframe :
-    {l1 : Level}
-    (x : type-Large-Subframe l1)
-    (y : type-Large-Subframe l1) →
-    leq-Large-Subframe x y →
-    leq-Large-Subframe y x →
-    x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Large-Subframe {l1})
   antisymmetric-leq-Large-Subframe =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Frame F)

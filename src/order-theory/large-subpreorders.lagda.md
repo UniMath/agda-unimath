@@ -7,6 +7,7 @@ module order-theory.large-subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.propositions
 open import foundation.subtypes
@@ -77,8 +78,7 @@ module _
     is-prop-type-Prop (leq-Large-Subpreorder-Prop x y)
 
   refl-leq-Large-Subpreorder :
-    {l1 : Level} (x : type-Large-Subpreorder l1) →
-    leq-Large-Subpreorder x x
+    {l1 : Level} → is-reflexive (leq-Large-Subpreorder {l1})
   refl-leq-Large-Subpreorder (x , p) = refl-leq-Large-Preorder P x
 
   transitive-leq-Large-Subpreorder :

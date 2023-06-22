@@ -7,6 +7,7 @@ module order-theory.large-subsuplattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -108,8 +109,7 @@ module _
       ( large-subposet-Large-Subsuplattice S)
 
   refl-leq-Large-Subsuplattice :
-    {l1 : Level} (x : type-Large-Subsuplattice l1) →
-    leq-Large-Subsuplattice x x
+    {l1 : Level} → is-reflexive (leq-Large-Subsuplattice {l1})
   refl-leq-Large-Subsuplattice =
     refl-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
@@ -129,10 +129,7 @@ module _
       ( large-subposet-Large-Subsuplattice S)
 
   antisymmetric-leq-Large-Subsuplattice :
-    {l1 : Level}
-    (x : type-Large-Subsuplattice l1)
-    (y : type-Large-Subsuplattice l1) →
-    leq-Large-Subsuplattice x y → leq-Large-Subsuplattice y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Large-Subsuplattice {l1})
   antisymmetric-leq-Large-Subsuplattice =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)

@@ -119,7 +119,7 @@ is-one-is-proper-divisor-larger-prime-ℕ n H x (pair f K) =
           ( pair f K))
         ( λ y l d →
           is-one-is-divisor-below-larger-prime-ℕ n y l
-            ( transitive-div-ℕ y x (larger-prime-ℕ n) d K))))
+            ( transitive-div-ℕ y x (larger-prime-ℕ n) K d))))
     ( K)
 
 is-prime-larger-prime-ℕ :

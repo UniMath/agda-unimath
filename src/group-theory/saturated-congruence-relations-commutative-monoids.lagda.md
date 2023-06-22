@@ -137,13 +137,13 @@ module _
       congruence-saturated-congruence-Commutative-Monoid
 
   refl-saturated-congruence-Commutative-Monoid :
-    is-reflexive-Relation-Prop prop-saturated-congruence-Commutative-Monoid
+    is-reflexive sim-saturated-congruence-Commutative-Monoid
   refl-saturated-congruence-Commutative-Monoid =
     refl-congruence-Commutative-Monoid M
     congruence-saturated-congruence-Commutative-Monoid
 
   symmetric-saturated-congruence-Commutative-Monoid :
-    is-symmetric-Relation-Prop prop-saturated-congruence-Commutative-Monoid
+    is-symmetric sim-saturated-congruence-Commutative-Monoid
   symmetric-saturated-congruence-Commutative-Monoid =
     symmetric-congruence-Commutative-Monoid M
     congruence-saturated-congruence-Commutative-Monoid
@@ -157,7 +157,7 @@ module _
     congruence-saturated-congruence-Commutative-Monoid
 
   transitive-saturated-congruence-Commutative-Monoid :
-    is-transitive-Relation-Prop prop-saturated-congruence-Commutative-Monoid
+    is-transitive sim-saturated-congruence-Commutative-Monoid
   transitive-saturated-congruence-Commutative-Monoid =
     transitive-congruence-Commutative-Monoid M
       congruence-saturated-congruence-Commutative-Monoid

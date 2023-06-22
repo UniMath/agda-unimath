@@ -34,12 +34,11 @@ relation that takes values in propositions.
 ```agda
 is-antisymmetric-leq-Preorder :
   {l1 l2 : Level} (P : Preorder l1 l2) → UU (l1 ⊔ l2)
-is-antisymmetric-leq-Preorder P =
-  (x y : type-Preorder P) → leq-Preorder P x y → leq-Preorder P y x → x ＝ y
+is-antisymmetric-leq-Preorder P = is-antisymmetric (leq-Preorder P)
 
 Poset : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Poset l1 l2 =
-  Σ (Preorder l1 l2) is-antisymmetric-leq-Preorder
+  Σ (Preorder l1 l2) (is-antisymmetric-leq-Preorder)
 
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
@@ -84,8 +83,7 @@ module _
     (x y : type-Poset) → is-prop (le-Poset x y)
   is-prop-le-Poset = is-prop-le-Preorder preorder-Poset
 
-  antisymmetric-leq-Poset :
-    (x y : type-Poset) → leq-Poset x y → leq-Poset y x → Id x y
+  antisymmetric-leq-Poset : is-antisymmetric leq-Poset
   antisymmetric-leq-Poset = pr2 X
 
   is-set-type-Poset : is-set type-Poset

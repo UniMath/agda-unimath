@@ -7,7 +7,9 @@ module order-theory.large-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -38,9 +40,8 @@ record
       {l1 l2 : Level} →
       type-Large-Preorder l1 → type-Large-Preorder l2 → Prop (β l1 l2)
     refl-leq-Large-Preorder :
-      {l1 : Level}
-      (x : type-Large-Preorder l1) →
-      type-Prop (leq-Large-Preorder-Prop x x)
+      {l1 : Level} →
+      is-reflexive (λ X Y → type-Prop (leq-Large-Preorder-Prop {l1} X Y))
     transitive-leq-Large-Preorder :
       {l1 l2 l3 : Level}
       (x : type-Large-Preorder l1)

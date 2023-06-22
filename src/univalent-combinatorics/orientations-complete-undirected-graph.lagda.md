@@ -371,17 +371,17 @@ module _
                       ( 2-Element-Decidable-Subtype-subtype-pointwise-difference
                           d1 d3)
                       ( is-finite-2-Element-Decidable-Subtype n X)))
-                  ( transitive-mere-equiv
+                  ( transitive-mere-equiv _ _ _
+                    ( unit-trunc-Prop
+                      ( inv-equiv
+                        ( equiv-symmetric-difference-subtype-pointwise-difference
+                            d1 d2 d3)))
                     ( pr2
                       ( has-finite-cardinality-is-finite
                         ( is-finite-type-decidable-subtype
                           ( 2-Element-Decidable-Subtype-subtype-pointwise-difference
                               d1 d3)
-                          ( is-finite-2-Element-Decidable-Subtype n X))))
-                    ( unit-trunc-Prop
-                      ( inv-equiv
-                        ( equiv-symmetric-difference-subtype-pointwise-difference
-                            d1 d2 d3))))))))))
+                          ( is-finite-2-Element-Decidable-Subtype n X)))))))))))
     where
     k : ℕ
     k =

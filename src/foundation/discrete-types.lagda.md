@@ -47,12 +47,10 @@ module _
   antireflexive-apart-Discrete-Type : is-antireflexive rel-apart-Discrete-Type
   antireflexive-apart-Discrete-Type x r = r refl
 
-  symmetric-apart-Discrete-Type :
-    is-symmetric apart-Discrete-Type
+  symmetric-apart-Discrete-Type : is-symmetric apart-Discrete-Type
   symmetric-apart-Discrete-Type x y H p = H (inv p)
 
-  cotransitive-apart-Discrete-Type :
-    is-cotransitive rel-apart-Discrete-Type
+  cotransitive-apart-Discrete-Type : is-cotransitive rel-apart-Discrete-Type
   cotransitive-apart-Discrete-Type x y z r
     with has-decidable-equality-type-Discrete-Type X x z
   ... | inl refl = unit-trunc-Prop (inr (λ s → r (inv s)))

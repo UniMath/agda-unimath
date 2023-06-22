@@ -7,6 +7,7 @@ module order-theory.dependent-products-large-suplattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -95,15 +96,12 @@ module _
     is-prop-leq-Large-Suplattice Π-Large-Suplattice
 
   refl-leq-Π-Large-Suplattice :
-    {l2 : Level} (x : type-Π-Large-Suplattice l2) →
-    leq-Π-Large-Suplattice x x
+    {l2 : Level} → is-reflexive (leq-Π-Large-Suplattice {l2})
   refl-leq-Π-Large-Suplattice =
     refl-leq-Large-Suplattice Π-Large-Suplattice
 
   antisymmetric-leq-Π-Large-Suplattice :
-    {l2 : Level}
-    (x : type-Π-Large-Suplattice l2) (y : type-Π-Large-Suplattice l2) →
-    leq-Π-Large-Suplattice x y → leq-Π-Large-Suplattice y x → x ＝ y
+    {l2 : Level} → is-antisymmetric (leq-Π-Large-Suplattice {l2})
   antisymmetric-leq-Π-Large-Suplattice =
     antisymmetric-leq-Large-Suplattice Π-Large-Suplattice
 

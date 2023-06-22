@@ -7,6 +7,7 @@ module order-theory.dependent-products-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -83,12 +84,11 @@ module _
   is-prop-leq-Π-Large-Locale = is-prop-leq-Π-Large-Frame L
 
   refl-leq-Π-Large-Locale :
-    {l2 : Level} (x : type-Π-Large-Locale l2) → leq-Π-Large-Locale x x
+    {l2 : Level} → is-reflexive (leq-Π-Large-Locale {l2})
   refl-leq-Π-Large-Locale = refl-leq-Π-Large-Frame L
 
   antisymmetric-leq-Π-Large-Locale :
-    {l2 : Level} (x y : type-Π-Large-Locale l2) →
-    leq-Π-Large-Locale x y → leq-Π-Large-Locale y x → x ＝ y
+    {l2 : Level} → is-antisymmetric (leq-Π-Large-Locale {l2})
   antisymmetric-leq-Π-Large-Locale = antisymmetric-leq-Π-Large-Frame L
 
   transitive-leq-Π-Large-Locale :

@@ -89,14 +89,14 @@ module _
       ( congruence-additive-monoid-congruence-Semiring)
 
   refl-congruence-Semiring :
-    is-reflexive-Relation-Prop prop-congruence-Semiring
+    is-reflexive sim-congruence-Semiring
   refl-congruence-Semiring =
     refl-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
   symmetric-congruence-Semiring :
-    is-symmetric-Relation-Prop prop-congruence-Semiring
+    is-symmetric sim-congruence-Semiring
   symmetric-congruence-Semiring =
     symmetric-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -111,7 +111,7 @@ module _
       ( congruence-additive-monoid-congruence-Semiring)
 
   transitive-congruence-Semiring :
-    is-transitive-Relation-Prop prop-congruence-Semiring
+    is-transitive sim-congruence-Semiring
   transitive-congruence-Semiring =
     transitive-congruence-Monoid
       ( additive-monoid-Semiring R)

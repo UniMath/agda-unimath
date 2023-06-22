@@ -138,14 +138,13 @@ is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-right-mul-ℤ d f) x
 Note that the divisibility relation on the integers is not antisymmetric.
 
 ```agda
-refl-div-ℤ : (x : ℤ) → div-ℤ x x
+refl-div-ℤ : is-reflexive div-ℤ
 pr1 (refl-div-ℤ x) = one-ℤ
 pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
 
-transitive-div-ℤ :
-  (x y z : ℤ) → div-ℤ x y → div-ℤ y z → div-ℤ x z
-pr1 (transitive-div-ℤ x y z (pair d p) (pair e q)) = e *ℤ d
-pr2 (transitive-div-ℤ x y z (pair d p) (pair e q)) =
+transitive-div-ℤ : is-transitive div-ℤ
+pr1 (transitive-div-ℤ x y z (pair e q) (pair d p)) = e *ℤ d
+pr2 (transitive-div-ℤ x y z (pair e q) (pair d p)) =
   ( associative-mul-ℤ e d x) ∙
     ( ( ap (e *ℤ_) p) ∙
       ( q))
@@ -213,7 +212,7 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
 div-mul-ℤ :
   (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
 div-mul-ℤ k x y H =
-  transitive-div-ℤ x y (k *ℤ y) H (pair k refl)
+  transitive-div-ℤ x y (k *ℤ y) (pair k refl) H
 ```
 
 ### If `x` divides `y` then it divides `-y`

@@ -79,10 +79,10 @@ module _
     y1 ＝ y2 → sim-congruence-Group x1 y2
   concatenate-eq-sim-eq-congruence-Group refl H refl = H
 
-  refl-congruence-Group : is-reflexive-Relation-Prop prop-congruence-Group
+  refl-congruence-Group : is-reflexive sim-congruence-Group
   refl-congruence-Group = refl-Equivalence-Relation eq-rel-congruence-Group
 
-  symmetric-congruence-Group : is-symmetric-Relation-Prop prop-congruence-Group
+  symmetric-congruence-Group : is-symmetric sim-congruence-Group
   symmetric-congruence-Group =
     symmetric-Equivalence-Relation eq-rel-congruence-Group
 
@@ -93,7 +93,7 @@ module _
     equiv-symmetric-Equivalence-Relation eq-rel-congruence-Group
 
   transitive-congruence-Group :
-    is-transitive-Relation-Prop prop-congruence-Group
+    is-transitive sim-congruence-Group
   transitive-congruence-Group =
     transitive-Equivalence-Relation eq-rel-congruence-Group
 

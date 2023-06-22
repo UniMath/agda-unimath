@@ -7,6 +7,7 @@ module order-theory.large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -35,9 +36,8 @@ record
   field
     large-preorder-Large-Poset : Large-Preorder α β
     antisymmetric-leq-Large-Poset :
-      {l : Level} (x y : type-Large-Preorder large-preorder-Large-Poset l) →
-      leq-Large-Preorder large-preorder-Large-Poset x y →
-      leq-Large-Preorder large-preorder-Large-Poset y x → Id x y
+      {l : Level} →
+      is-antisymmetric (leq-Large-Preorder large-preorder-Large-Poset {l})
 
 open Large-Poset public
 
@@ -70,7 +70,7 @@ module _
     leq-eq-Large-Preorder (large-preorder-Large-Poset X)
 
   refl-leq-Large-Poset :
-    {l1 : Level} (x : type-Large-Poset l1) → leq-Large-Poset x x
+    {l1 : Level} → is-reflexive (leq-Large-Poset {l1})
   refl-leq-Large-Poset = refl-leq-Large-Preorder (large-preorder-Large-Poset X)
 
   transitive-leq-Large-Poset :

@@ -102,7 +102,8 @@ module _
     leq-Decidable-Preorder-Decidable-Prop
       decidable-preorder-Decidable-Total-Preorder
 
-  refl-leq-Decidable-Total-Preorder : is-reflexive leq-Decidable-Total-Preorder
+  refl-leq-Decidable-Total-Preorder :
+    is-reflexive leq-Decidable-Total-Preorder
   refl-leq-Decidable-Total-Preorder =
     refl-leq-Preorder preorder-Decidable-Total-Preorder
 

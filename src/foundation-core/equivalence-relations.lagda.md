@@ -77,13 +77,15 @@ is-equivalence-relation-prop-Equivalence-Relation R = pr2 R
 
 refl-Equivalence-Relation :
   {l1 l2 : Level} {A : UU l1}
-  (R : Equivalence-Relation l2 A) → is-reflexive (sim-Equivalence-Relation R)
+  (R : Equivalence-Relation l2 A) →
+  is-reflexive (sim-Equivalence-Relation R)
 refl-Equivalence-Relation R =
   pr1 (is-equivalence-relation-prop-Equivalence-Relation R)
 
 symmetric-Equivalence-Relation :
   {l1 l2 : Level} {A : UU l1}
-  (R : Equivalence-Relation l2 A) → is-symmetric (sim-Equivalence-Relation R)
+  (R : Equivalence-Relation l2 A) →
+  is-symmetric (sim-Equivalence-Relation R)
 symmetric-Equivalence-Relation R =
   pr1 (pr2 (is-equivalence-relation-prop-Equivalence-Relation R))
 

@@ -7,6 +7,7 @@ module order-theory.large-locales where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -80,12 +81,11 @@ module _
   leq-eq-Large-Locale = leq-eq-Large-Frame L
 
   refl-leq-Large-Locale :
-    {l1 : Level} (x : type-Large-Locale l1) → leq-Large-Locale x x
+    {l1 : Level} → is-reflexive (leq-Large-Locale {l1})
   refl-leq-Large-Locale = refl-leq-Large-Frame L
 
   antisymmetric-leq-Large-Locale :
-    {l1 : Level} (x y : type-Large-Locale l1) →
-    leq-Large-Locale x y → leq-Large-Locale y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Large-Locale {l1})
   antisymmetric-leq-Large-Locale =
     antisymmetric-leq-Large-Frame L
 

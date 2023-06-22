@@ -8,6 +8,7 @@ module order-theory.large-meet-semilattices where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
@@ -153,15 +154,12 @@ module _
     leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
   refl-leq-Large-Meet-Semilattice :
-    {l1 : Level} →
-    (x : type-Large-Meet-Semilattice l1) → leq-Large-Meet-Semilattice x x
+    {l1 : Level} → is-reflexive (leq-Large-Meet-Semilattice {l1})
   refl-leq-Large-Meet-Semilattice =
     refl-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
   antisymmetric-leq-Large-Meet-Semilattice :
-    {l1 : Level} →
-    (x y : type-Large-Meet-Semilattice l1) →
-    leq-Large-Meet-Semilattice x y → leq-Large-Meet-Semilattice y x → x ＝ y
+    {l1 : Level} → is-antisymmetric (leq-Large-Meet-Semilattice {l1})
   antisymmetric-leq-Large-Meet-Semilattice =
     antisymmetric-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 

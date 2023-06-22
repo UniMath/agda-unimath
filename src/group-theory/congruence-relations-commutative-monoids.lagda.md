@@ -101,12 +101,12 @@ module _
     concatenate-eq-sim-eq-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   refl-congruence-Commutative-Monoid :
-    is-reflexive-Relation-Prop prop-congruence-Commutative-Monoid
+    is-reflexive sim-congruence-Commutative-Monoid
   refl-congruence-Commutative-Monoid =
     refl-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   symmetric-congruence-Commutative-Monoid :
-    is-symmetric-Relation-Prop prop-congruence-Commutative-Monoid
+    is-symmetric sim-congruence-Commutative-Monoid
   symmetric-congruence-Commutative-Monoid =
     symmetric-congruence-Monoid (monoid-Commutative-Monoid M) R
 
@@ -118,7 +118,7 @@ module _
     equiv-symmetric-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   transitive-congruence-Commutative-Monoid :
-    is-transitive-Relation-Prop prop-congruence-Commutative-Monoid
+    is-transitive sim-congruence-Commutative-Monoid
   transitive-congruence-Commutative-Monoid =
     transitive-congruence-Monoid (monoid-Commutative-Monoid M) R
 

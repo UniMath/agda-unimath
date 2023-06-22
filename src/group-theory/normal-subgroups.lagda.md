@@ -446,17 +446,17 @@ module _
 
 ```agda
   refl-congruence-Normal-Subgroup :
-    is-reflexive-Relation-Prop prop-congruence-Normal-Subgroup
+    is-reflexive sim-congruence-Normal-Subgroup
   refl-congruence-Normal-Subgroup =
     refl-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   symmetric-congruence-Normal-Subgroup :
-    is-symmetric-Relation-Prop prop-congruence-Normal-Subgroup
+    is-symmetric sim-congruence-Normal-Subgroup
   symmetric-congruence-Normal-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   transitive-congruence-Normal-Subgroup :
-    is-transitive-Relation-Prop prop-congruence-Normal-Subgroup
+    is-transitive sim-congruence-Normal-Subgroup
   transitive-congruence-Normal-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 

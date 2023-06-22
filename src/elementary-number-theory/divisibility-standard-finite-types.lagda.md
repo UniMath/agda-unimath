@@ -11,6 +11,7 @@ open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -49,9 +50,9 @@ pr2 (refl-div-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin k x
 
 ```agda
 transitive-div-Fin :
-  (k : ℕ) (x y z : Fin k) → div-Fin k x y → div-Fin k y z → div-Fin k x z
-pr1 (transitive-div-Fin k x y z (pair u p) (pair v q)) = mul-Fin k v u
-pr2 (transitive-div-Fin k x y z (pair u p) (pair v q)) =
+  (k : ℕ) → is-transitive (div-Fin k)
+pr1 (transitive-div-Fin k x y z (pair v q) (pair u p)) = mul-Fin k v u
+pr2 (transitive-div-Fin k x y z (pair v q) (pair u p)) =
   associative-mul-Fin k v u x ∙ (ap (mul-Fin k v) p ∙ q)
 ```
 

@@ -7,6 +7,7 @@ module order-theory.dependent-products-large-frames where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.propositions
@@ -92,12 +93,11 @@ module _
     is-prop-leq-Large-Poset large-poset-Π-Large-Frame
 
   refl-leq-Π-Large-Frame :
-    {l2 : Level} (x : type-Π-Large-Frame l2) → leq-Π-Large-Frame x x
+    {l2 : Level} → is-reflexive (leq-Π-Large-Frame {l2})
   refl-leq-Π-Large-Frame = refl-leq-Large-Poset large-poset-Π-Large-Frame
 
   antisymmetric-leq-Π-Large-Frame :
-    {l2 : Level} (x y : type-Π-Large-Frame l2) →
-    leq-Π-Large-Frame x y → leq-Π-Large-Frame y x → x ＝ y
+    {l2 : Level} → is-antisymmetric (leq-Π-Large-Frame {l2})
   antisymmetric-leq-Π-Large-Frame =
     antisymmetric-leq-Large-Poset large-poset-Π-Large-Frame
 

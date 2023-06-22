@@ -7,6 +7,7 @@ module order-theory.closure-operators-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -187,19 +188,15 @@ module _
       ( large-subposet-closure-operator-Large-Poset)
 
   refl-leq-closed-element-closure-operator-Large-Poset :
-    {l1 : Level}
-    (x : closed-element-closure-operator-Large-Poset l1) →
-    leq-closed-element-closure-operator-Large-Poset x x
+    {l1 : Level} →
+    is-reflexive (leq-closed-element-closure-operator-Large-Poset {l1})
   refl-leq-closed-element-closure-operator-Large-Poset =
     refl-leq-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)
 
   antisymmetric-leq-closed-element-closure-operator-Large-Poset :
-    {l1 : Level}
-    (x y : closed-element-closure-operator-Large-Poset l1) →
-    leq-closed-element-closure-operator-Large-Poset x y →
-    leq-closed-element-closure-operator-Large-Poset y x →
-    x ＝ y
+    {l1 : Level} →
+    is-antisymmetric (leq-closed-element-closure-operator-Large-Poset {l1})
   antisymmetric-leq-closed-element-closure-operator-Large-Poset =
     antisymmetric-leq-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)

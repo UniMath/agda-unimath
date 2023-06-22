@@ -44,7 +44,8 @@ module _
 
   sim-Large-Poset :
     {l1 l2 : Level}
-    (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+    (x : type-Large-Poset P l1)
+    (y : type-Large-Poset P l2) →
     UU (β l1 l2 ⊔ β l2 l1)
   sim-Large-Poset = sim-Large-Preorder (large-preorder-Large-Poset P)
 
@@ -79,9 +80,9 @@ module _
 
   transitive-sim-Large-Poset :
     {l1 l2 l3 : Level}
-    {x : type-Large-Poset P l1}
-    {y : type-Large-Poset P l2}
-    {z : type-Large-Poset P l3} →
+    (x : type-Large-Poset P l1)
+    (y : type-Large-Poset P l2)
+    (z : type-Large-Poset P l3) →
     sim-Large-Poset P y z →
     sim-Large-Poset P x y →
     sim-Large-Poset P x z
@@ -98,8 +99,8 @@ module _
 
   symmetric-sim-Large-Poset :
     {l1 l2 : Level}
-    {x : type-Large-Poset P l1}
-    {y : type-Large-Poset P l2} →
+    (x : type-Large-Poset P l1)
+    (y : type-Large-Poset P l2) →
     sim-Large-Poset P x y → sim-Large-Poset P y x
   symmetric-sim-Large-Poset =
     symmetric-sim-Large-Preorder (large-preorder-Large-Poset P)

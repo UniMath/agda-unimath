@@ -191,7 +191,7 @@ is-nontrivial-divisors-div-list-ℕ :
   is-list-of-nontrivial-divisors-ℕ x l → is-list-of-nontrivial-divisors-ℕ y l
 is-nontrivial-divisors-div-list-ℕ x y d nil H = star
 is-nontrivial-divisors-div-list-ℕ x y d (cons z l) H =
-  ( pr1 (pr1 H) , transitive-div-ℕ z x y (pr2 (pr1 H)) d) ,
+  ( pr1 (pr1 H) , transitive-div-ℕ z x y d (pr2 (pr1 H))) ,
   is-nontrivial-divisors-div-list-ℕ x y d l (pr2 H)
 
 is-divisor-head-is-decomposition-list-ℕ :
@@ -333,11 +333,11 @@ pr1 (is-prime-least-nontrivial-divisor-ℕ n H x) (K , L) =
           ( L)
           ( K))
         ( is-minimal-least-nontrivial-divisor-ℕ n H x p
-          ( transitive-div-ℕ x l n L (div-least-nontrivial-divisor-ℕ n H))))
+          ( transitive-div-ℕ x l n (div-least-nontrivial-divisor-ℕ n H) L)))
     ( eq-or-le-leq-ℕ' 1 x
       ( leq-one-div-ℕ x n
-        ( transitive-div-ℕ x l n L
-          ( div-least-nontrivial-divisor-ℕ n H))
+        ( transitive-div-ℕ x l n
+          ( div-least-nontrivial-divisor-ℕ n H) L)
         ( leq-le-ℕ 1 n H)))
   where
   l = nat-least-nontrivial-divisor-ℕ n H
@@ -586,11 +586,11 @@ is-least-element-list-least-prime-divisor-ℕ x H (cons y l) D =
       ( y)
       ( quotient-div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
       ( succ-ℕ x)
-      ( pr2 (pr1 D))
       ( div-quotient-div-ℕ
         ( nat-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))
         ( succ-ℕ x)
-        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H)))) ,
+        ( div-least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H)))
+      ( pr2 (pr1 D))) ,
   is-least-element-list-least-prime-divisor-ℕ x H l (pr2 D)
 
 is-least-element-head-list-fundamental-theorem-arithmetic-succ-ℕ :
@@ -827,8 +827,8 @@ is-lower-bound-head-prime-decomposition-list-ℕ x H y l D m d =
           ( nat-least-prime-divisor-ℕ m (pr1 d))
           ( m)
           ( x)
-          ( div-least-nontrivial-divisor-ℕ m (pr1 d))
-          ( pr2 d))
+          ( pr2 d)
+          ( div-least-nontrivial-divisor-ℕ m (pr1 d)))
         ( is-prime-least-prime-divisor-ℕ m (pr1 d)))
       ( refl-leq-ℕ y))
 

@@ -9,6 +9,7 @@ module polytopes.abstract-polytopes where
 ```agda
 open import elementary-number-theory
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.disjunction
@@ -294,19 +295,15 @@ module _
     is-prop-leq-Prepolytope =
       is-prop-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope x y
 
-  refl-leq-Prepolytope : (x : type-Prepolytope) → leq-Prepolytope x x
+  refl-leq-Prepolytope : is-reflexive leq-Prepolytope
   refl-leq-Prepolytope =
     refl-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  transitive-leq-Prepolytope :
-    (x y z : type-Prepolytope) →
-    leq-Prepolytope y z → leq-Prepolytope x y → leq-Prepolytope x z
+  transitive-leq-Prepolytope : is-transitive leq-Prepolytope
   transitive-leq-Prepolytope =
     transitive-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 
-  antisymmetric-leq-Prepolytope :
-    (x y : type-Prepolytope) →
-    leq-Prepolytope x y → leq-Prepolytope y x → Id x y
+  antisymmetric-leq-Prepolytope : is-antisymmetric leq-Prepolytope
   antisymmetric-leq-Prepolytope =
     antisymmetric-leq-Finitely-Graded-Poset finitely-graded-poset-Prepolytope
 

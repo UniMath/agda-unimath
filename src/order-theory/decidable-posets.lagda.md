@@ -101,9 +101,7 @@ module _
   transitive-leq-Decidable-Poset : is-transitive leq-Decidable-Poset
   transitive-leq-Decidable-Poset = transitive-leq-Poset poset-Decidable-Poset
 
-  antisymmetric-leq-Decidable-Poset :
-    (x y : type-Decidable-Poset) →
-    leq-Decidable-Poset x y → leq-Decidable-Poset y x → Id x y
+  antisymmetric-leq-Decidable-Poset : is-antisymmetric leq-Decidable-Poset
   antisymmetric-leq-Decidable-Poset =
     antisymmetric-leq-Poset poset-Decidable-Poset
 
