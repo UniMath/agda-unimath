@@ -59,7 +59,7 @@ is-localization l5 f A B η =
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  {X : UU l1} {Y : UU l2} (f : X → Y)
+  {X : UU l1} {Y : UU l2} {f : X → Y}
   {A : UU l3} {B : UU l4} {η : A → B}
   (is-localization-B : is-localization l5 f A B η)
   where
