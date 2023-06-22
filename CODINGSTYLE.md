@@ -25,9 +25,10 @@ mathematics spanning a broad range of subjects. All fields of mathematics are
 inherently interlinked, which we leverage in our formalization process.
 
 One critical aspect of maintaining such a large codebase lies in efficient and
-strategic code structuring into small, reusable entries. In line with this
-approach, we aim to encapsulate every bit of reusable logic or computation into
-its own independent definition.
+strategic code structuring, and continued refactoring, into small, reusable
+entries. In line with this approach, we aim to factor out and encapsulate even
+the tiniest bits of reusable logic or computation in their own definitions, in
+what may seem like an excessive manner to some.
 
 Here are the benefits of this approach:
 
