@@ -37,8 +37,6 @@ Below is a summary of the tasks this tool performs:
 
 - **Merge conflicts**: Checks for any merge conflict artifacts in the code.
 
-- **Added large files**: Prevents giant files from being committed.
-
 - **Markdown conventions**: Checks/enforces various of our conventions related
   to markdown code.
 
@@ -72,11 +70,14 @@ Below is a summary of the tasks this tool performs:
   manual maintenance is required for this file.
 
 - **Python scripts formatting**: Performs `autopep8` formatting on python
-  scripts.
+  scripts. Note that this script takes care of most formatting for python
+  scripts, so you should not worry about formatting them.
 
 - **CSS, JS, YAML and Markdown (no codeblocks) formatting**: Performs basic
   formatting tasks such as enforcing the 80-character line limit, formatting
-  markdown tables, among others.
+  markdown tables, among others. Note that this script takes care of all
+  formatting for these file types, so you should not worry about formatting such
+  files.
 
 ## The `make website` tool
 
