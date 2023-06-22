@@ -8,7 +8,9 @@ module foundation.category-of-sets where
 
 ```agda
 open import category-theory.categories
+open import category-theory.isomorphisms-large-precategories
 open import category-theory.isomorphisms-precategories
+open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
@@ -46,6 +48,35 @@ left-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
 right-unit-law-comp-hom-Large-Precategory Set-Large-Precategory f = refl
 ```
 
+### The large category of sets
+
+```agda
+id-iso-Set :
+  {l : Level} {X : obj-Large-Precategory Set-Large-Precategory l} →
+  iso-Large-Precategory Set-Large-Precategory X X
+id-iso-Set {l} {X} = id-iso-Large-Precategory (Set-Large-Precategory) {l} {X}
+
+iso-eq-Set :
+  {l : Level} (X Y : obj-Large-Precategory Set-Large-Precategory l) →
+  X ＝ Y → iso-Large-Precategory Set-Large-Precategory X Y
+iso-eq-Set = iso-eq-Large-Precategory Set-Large-Precategory
+
+is-category-Set-Large-Precategory :
+  is-category-Large-Precategory Set-Large-Precategory
+is-category-Set-Large-Precategory {l} X =
+  fundamental-theorem-id
+    ( is-contr-equiv'
+      ( Σ (Set l) (type-equiv-Set X))
+      ( equiv-tot (equiv-iso-equiv-Set X))
+      ( is-contr-total-equiv-Set X))
+    ( iso-eq-Set X)
+
+Set-Large-Category : Large-Category lsuc (_⊔_)
+large-precategory-Large-Category Set-Large-Category = Set-Large-Precategory
+is-category-Large-Category Set-Large-Category =
+  is-category-Set-Large-Precategory
+```
+
 ### The precategory of small sets
 
 ```agda
@@ -58,23 +89,10 @@ Set-Precategory = precategory-Large-Precategory Set-Large-Precategory
 The precategory of sets and functions in a given universe is a category.
 
 ```agda
-id-iso-Set : {l : Level} {x : Set l} → iso-Set x x
-id-iso-Set {l} {x} = id-iso-Precategory (Set-Precategory l) {x}
-
-iso-eq-Set : {l : Level} (x y : Set l) → x ＝ y → iso-Set x y
-iso-eq-Set {l} = iso-eq-Precategory (Set-Precategory l)
-
 is-category-Set-Precategory :
   (l : Level) → is-category-Precategory (Set-Precategory l)
-is-category-Set-Precategory l x =
-  fundamental-theorem-id
-    ( is-contr-equiv'
-      ( Σ (Set l) (type-equiv-Set x))
-      ( equiv-tot (equiv-iso-equiv-Set x))
-      ( is-contr-total-equiv-Set x))
-    ( iso-eq-Set x)
+is-category-Set-Precategory l = is-category-Set-Large-Precategory
 
 Set-Category : (l : Level) → Category (lsuc l) l
-pr1 (Set-Category l) = Set-Precategory l
-pr2 (Set-Category l) = is-category-Set-Precategory l
+Set-Category = category-Large-Category Set-Large-Category
 ```

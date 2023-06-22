@@ -7,10 +7,16 @@ module category-theory.large-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.isomorphisms-large-precategories
 open import category-theory.large-precategories
+open import category-theory.precategories
 
+open import foundation.action-on-identifications-binary-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.sets
 open import foundation.universe-levels
 ```
 
@@ -41,10 +47,131 @@ record
   constructor
     make-Large-Category
   field
-    precat-Large-Category :
+    large-precategory-Large-Category :
       Large-Precategory α β
     is-category-Large-Category :
-      is-category-Large-Precategory precat-Large-Category
+      is-category-Large-Precategory large-precategory-Large-Category
 
 open Large-Category public
+```
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β)
+  where
+
+  obj-Large-Category : (l : Level) → UU (α l)
+  obj-Large-Category =
+    obj-Large-Precategory (large-precategory-Large-Category C)
+
+  hom-Large-Category :
+    {l1 l2 : Level} →
+    obj-Large-Precategory (large-precategory-Large-Category C) l1 →
+    obj-Large-Precategory (large-precategory-Large-Category C) l2 →
+    Set (β l1 l2)
+  hom-Large-Category =
+    hom-Large-Precategory (large-precategory-Large-Category C)
+
+  comp-hom-Large-Category :
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Precategory (large-precategory-Large-Category C) l1}
+    {Y : obj-Large-Precategory (large-precategory-Large-Category C) l2}
+    {Z : obj-Large-Precategory (large-precategory-Large-Category C) l3} →
+    type-Set (hom-Large-Precategory (large-precategory-Large-Category C) Y Z) →
+    type-Set (hom-Large-Precategory (large-precategory-Large-Category C) X Y) →
+    type-Set (hom-Large-Precategory (large-precategory-Large-Category C) X Z)
+  comp-hom-Large-Category =
+    comp-hom-Large-Precategory (large-precategory-Large-Category C)
+
+  id-hom-Large-Category :
+    {l1 : Level} {X : obj-Large-Category l1} →
+    type-Set (hom-Large-Category X X)
+  id-hom-Large-Category =
+    id-hom-Large-Precategory (large-precategory-Large-Category C)
+
+  associative-comp-hom-Large-Category :
+    {l1 l2 l3 l4 : Level}
+    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3} {W : obj-Large-Category l4} →
+    (h : type-Set (hom-Large-Category Z W))
+    (g : type-Set (hom-Large-Category Y Z))
+    (f : type-Set (hom-Large-Category X Y)) →
+    ( comp-hom-Large-Category (comp-hom-Large-Category h g) f) ＝
+    ( comp-hom-Large-Category h (comp-hom-Large-Category g f))
+  associative-comp-hom-Large-Category =
+    associative-comp-hom-Large-Precategory (large-precategory-Large-Category C)
+
+  left-unit-law-comp-hom-Large-Category :
+    {l1 l2 : Level}
+    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
+    (f : type-Set (hom-Large-Category X Y)) →
+    ( comp-hom-Large-Category id-hom-Large-Category f) ＝ f
+
+  left-unit-law-comp-hom-Large-Category =
+    left-unit-law-comp-hom-Large-Precategory
+      ( large-precategory-Large-Category C)
+
+  right-unit-law-comp-hom-Large-Category :
+    {l1 l2 : Level}
+    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
+    (f : type-Set (hom-Large-Category X Y)) →
+    ( comp-hom-Large-Category f id-hom-Large-Category) ＝ f
+  right-unit-law-comp-hom-Large-Category =
+    right-unit-law-comp-hom-Large-Precategory
+      ( large-precategory-Large-Category C)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 : Level}
+  (X : obj-Large-Category C l1) (Y : obj-Large-Category C l2)
+  where
+
+  type-hom-Large-Category : UU (β l1 l2)
+  type-hom-Large-Category = type-Set (hom-Large-Category C X Y)
+
+  is-set-type-hom-Large-Category : is-set type-hom-Large-Category
+  is-set-type-hom-Large-Category =
+    is-set-type-Set (hom-Large-Category C X Y)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+  {Z : obj-Large-Category C l3}
+  where
+
+  ap-comp-hom-Large-Category :
+    {g g' : type-hom-Large-Category C Y Z} (p : g ＝ g')
+    {f f' : type-hom-Large-Category C X Y} (q : f ＝ f') →
+    comp-hom-Large-Category C g f ＝
+    comp-hom-Large-Category C g' f'
+  ap-comp-hom-Large-Category p q =
+    ap-binary (comp-hom-Large-Category C) p q
+
+  comp-hom-Large-Category' :
+    type-hom-Large-Category C X Y → type-hom-Large-Category C Y Z →
+    type-hom-Large-Category C X Z
+  comp-hom-Large-Category' f g = comp-hom-Large-Category C g f
+```
+
+### Categories obtained from large categories
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β)
+  where
+
+  precategory-Large-Category : (l : Level) → Precategory (α l) (β l l)
+  precategory-Large-Category =
+    precategory-Large-Precategory (large-precategory-Large-Category C)
+
+  is-category-precategory-Large-Category :
+    (l : Level) → is-category-Precategory (precategory-Large-Category l)
+  is-category-precategory-Large-Category = {! !}
+
+  category-Large-Category : (l : Level) → Category (α l) (β l l)
+  pr1 (category-Large-Category l) = precategory-Large-Category l
+  pr2 (category-Large-Category l) = is-category-precategory-Large-Category l
 ```

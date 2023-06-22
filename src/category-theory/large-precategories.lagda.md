@@ -69,7 +69,9 @@ record
       ( comp-hom-Large-Precategory f id-hom-Large-Precategory) ＝ f
 
 open Large-Precategory public
+```
 
+```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level}

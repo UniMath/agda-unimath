@@ -44,7 +44,8 @@ improve the readability.
 - Names never refer to variables.
 - Important concepts can be capitalized. Usually, capitalized concepts form
   categories. Examples include `UU`, `Prop`, `Set`, `Semigroup`, `Monoid`,
-  `Group`, `Preorder`, `Poset`, `Precat`, `Cat`, `Graph`, `Undirected-Graph`.
+  `Group`, `Preorder`, `Poset`, `Precategory`, `Category`, `Graph`,
+  `Undirected-Graph`.
 - The capitalized part of a name only appears at the end of the name.
 - Unicode symbols are used sparingly, and only following established
   mathematical practice.

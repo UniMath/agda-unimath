@@ -21,7 +21,7 @@ open import foundation.universe-levels
 ## Idea
 
 The product of two precategories `C` and `D` has as objects pairs `(x , y)`, for
-`x` in `obj-Precat C` and `y` in `obj-Precat D`; and has a morphism
+`x` in `obj-Precategory C` and `y` in `obj-Precategory D`; and has a morphism
 `Hom (x , y) (x' , y)` for each pair of morphisms `f : x → x'` and `g : y → y'`.
 Composition of morphisms is given by composing each entry.
 
