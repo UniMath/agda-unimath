@@ -455,9 +455,9 @@ module _
   symm-congruence-Normal-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  trans-congruence-Normal-Subgroup :
+  transitive-congruence-Normal-Subgroup :
     is-transitive-Rel-Prop prop-congruence-Normal-Subgroup
-  trans-congruence-Normal-Subgroup =
+  transitive-congruence-Normal-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
   eq-rel-congruence-Normal-Subgroup : Eq-Rel l2 (type-Group G)

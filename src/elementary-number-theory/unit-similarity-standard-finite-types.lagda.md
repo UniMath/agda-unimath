@@ -75,12 +75,12 @@ pr2 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
       ( ap (mul-Fin' (succ-ℕ k) x) q)) ∙
     ( left-unit-law-mul-Fin k x)
 
-trans-sim-unit-Fin :
+transitive-sim-unit-Fin :
   {k : ℕ} (x y z : Fin k) → sim-unit-Fin k x y → sim-unit-Fin k y z →
   sim-unit-Fin k x z
-pr1 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
+pr1 (transitive-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
   mul-unit-Fin (succ-ℕ k) v u
-pr2 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
+pr2 (transitive-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
   ( associative-mul-Fin (succ-ℕ k) (pr1 v) (pr1 u) x) ∙
   ( ap (mul-Fin (succ-ℕ k) (pr1 v)) p ∙ q)
 ```

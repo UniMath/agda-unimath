@@ -303,12 +303,12 @@ module _
       ( is-zero-mod-succ-ℕ
         ( 1)
         ( dist-ℕ (k1 +ℕ k2) (2 *ℕ k'))
-        ( trans-cong-ℕ
+        ( transitive-cong-ℕ
           ( 2)
           ( k1 +ℕ k2)
           ( zero-ℕ)
           ( 2 *ℕ k')
-          ( trans-cong-ℕ 2
+          ( transitive-cong-ℕ 2
             ( k1 +ℕ k2)
             ( add-ℕ
               ( nat-Fin 2
@@ -417,23 +417,23 @@ module _
       ( zero-Fin 1)
       ( mod-two-number-of-differences-orientation-Complete-Undirected-Graph
           d d')
-  pr1 (pr2 even-difference-orientation-Complete-Undirected-Graph) {d} =
+  pr1 (pr2 even-difference-orientation-Complete-Undirected-Graph) d =
     ap
       ( mod-two-ℕ ∘ number-of-elements-has-finite-cardinality)
       ( all-elements-equal-has-finite-cardinality
         ( pair
           ( 0)
-          ( unit-trunc-Prop (equiv-is-empty id (λ (pair _ np) → np refl))))
+          ( unit-trunc-Prop (equiv-is-empty id (λ (_ , np) → np refl))))
         ( has-finite-cardinality-is-finite
           ( is-finite-subtype-pointwise-difference d d)))
   pr1 (pr2 (pr2 even-difference-orientation-Complete-Undirected-Graph))
-    {d} {d'} p =
+    d d' p =
     is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
       d d' (zero-Fin 1) p
   pr2 (pr2 (pr2 even-difference-orientation-Complete-Undirected-Graph))
-    {d1} {d2} {d3} p1 p2 =
+    d1 d2 d3 p1 p2 =
     eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
-      d1 d2 d3 (zero-Fin 1) p1 p2
+      d1 d2 d3 (zero-Fin 1) p2 p1
   abstract
     is-decidable-even-difference-orientation-Complete-Undirected-Graph :
       (Y Y' : orientation-Complete-Undirected-Graph) →
@@ -830,11 +830,11 @@ module _
       ( second-element-count)
       ( distinct-two-elements-count)
 
-  trans-canonical-orientation-count :
+  transitive-canonical-orientation-count :
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
-  trans-canonical-orientation-count =
+  transitive-canonical-orientation-count =
     orientation-two-elements-count
       ( second-element-count)
       ( first-element-count)
@@ -3279,7 +3279,7 @@ module _
       ( even-difference-orientation-Complete-Undirected-Graph
         ( number-of-elements-count eX)
         ( pair X (unit-trunc-Prop (equiv-count eX))))
-      ( trans-canonical-orientation-count)
+      ( transitive-canonical-orientation-count)
   pr2 equiv-fin-2-quotient-sign-count =
     is-equiv-has-inverse
       ( λ T →
@@ -3355,7 +3355,7 @@ module _
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))))
         ( T)
-        ( trans-canonical-orientation-count)
+        ( transitive-canonical-orientation-count)
     cases-retraction-orientation T NH t q (inl (inr star)) r =
       ex-falso
         ( NH
@@ -3377,27 +3377,27 @@ module _
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX))))
             ( x)
-            ( trans-canonical-orientation-count))
+            ( transitive-canonical-orientation-count))
         ( q)
         ( eq-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX)))
             ( t)
             ( canonical-orientation-count)
-            ( trans-canonical-orientation-count)
+            ( transitive-canonical-orientation-count)
             ( inr star)
             ( r)
             ( is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX)))
-              ( trans-canonical-orientation-count)
+              ( transitive-canonical-orientation-count)
               ( canonical-orientation-count)
               ( inr star)
               ( is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX)))
                 ( canonical-orientation-count)
-                ( trans-canonical-orientation-count)
+                ( transitive-canonical-orientation-count)
                 ( inr star)
                 ( ap
                   ( mod-two-ℕ)
@@ -3408,7 +3408,7 @@ module _
                         ( number-of-elements-count eX)
                         ( pair X (unit-trunc-Prop (equiv-count eX)))
                         ( canonical-orientation-count)
-                        ( trans-canonical-orientation-count))}
+                        ( transitive-canonical-orientation-count))}
                   ( eq-orientation-pointwise-difference-two-elements-count
                     ( first-element-count)
                     ( second-element-count)
@@ -3440,7 +3440,7 @@ module _
         ( even-difference-orientation-Complete-Undirected-Graph
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX))))
-        ( trans-canonical-orientation-count)
+        ( transitive-canonical-orientation-count)
         ( T)
         ( apply-universal-property-trunc-Prop
           ( pr2 T)
@@ -3450,13 +3450,13 @@ module _
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
               ( T)
-              ( trans-canonical-orientation-count))
+              ( transitive-canonical-orientation-count))
             ( is-prop-is-in-equivalence-class
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( number-of-elements-count eX)
                 ( pair X (unit-trunc-Prop (equiv-count eX))))
               ( T)
-              ( trans-canonical-orientation-count)))
+              ( transitive-canonical-orientation-count)))
           ( λ (pair t r) →
             cases-retraction-orientation
               ( T)
@@ -3505,7 +3505,8 @@ module _
           ( refl-Eq-Rel
             ( even-difference-orientation-Complete-Undirected-Graph
               ( number-of-elements-count eX)
-              ( pair X (unit-trunc-Prop (equiv-count eX))))))
+              ( X , (unit-trunc-Prop (equiv-count eX))))
+            ( canonical-orientation-count)))
     section-orientation (inr star) (inl Q) =
       ex-falso
         ( neq-inl-inr
@@ -3513,9 +3514,9 @@ module _
             inv
               ( is-symmetric-mod-two-number-of-differences-orientation-Complete-Undirected-Graph
                 ( number-of-elements-count eX)
-                ( pair X (unit-trunc-Prop (equiv-count eX)))
+                ( X , (unit-trunc-Prop (equiv-count eX)))
                 ( canonical-orientation-count)
-                ( trans-canonical-orientation-count)
+                ( transitive-canonical-orientation-count)
                 ( inr star)
                 ( ap mod-two-ℕ
                   ( eq-orientation-pointwise-difference-two-elements-count

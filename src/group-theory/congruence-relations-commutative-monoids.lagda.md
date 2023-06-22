@@ -115,10 +115,10 @@ module _
   equiv-symm-congruence-Commutative-Monoid =
     equiv-symm-congruence-Monoid (monoid-Commutative-Monoid M) R
 
-  trans-congruence-Commutative-Monoid :
+  transitive-congruence-Commutative-Monoid :
     is-transitive-Rel-Prop prop-congruence-Commutative-Monoid
-  trans-congruence-Commutative-Monoid =
-    trans-congruence-Monoid (monoid-Commutative-Monoid M) R
+  transitive-congruence-Commutative-Monoid =
+    transitive-congruence-Monoid (monoid-Commutative-Monoid M) R
 
   mul-congruence-Commutative-Monoid :
     is-congruence-Commutative-Monoid M eq-rel-congruence-Commutative-Monoid

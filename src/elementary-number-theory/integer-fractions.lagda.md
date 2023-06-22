@@ -133,8 +133,8 @@ refl-sim-fraction-ℤ x = refl
 symm-sim-fraction-ℤ : is-symmetric sim-fraction-ℤ
 symm-sim-fraction-ℤ x y r = inv r
 
-trans-sim-fraction-ℤ : is-transitive sim-fraction-ℤ
-trans-sim-fraction-ℤ x y z s r =
+transitive-sim-fraction-ℤ : is-transitive sim-fraction-ℤ
+transitive-sim-fraction-ℤ x y z s r =
   is-injective-right-mul-ℤ
     ( denominator-fraction-ℤ y)
     ( is-nonzero-denominator-fraction-ℤ y)
@@ -187,7 +187,7 @@ eq-rel-sim-fraction-ℤ : Eq-Rel lzero fraction-ℤ
 pr1 eq-rel-sim-fraction-ℤ = sim-fraction-ℤ-Prop
 pr1 (pr2 eq-rel-sim-fraction-ℤ) = refl-sim-fraction-ℤ
 pr1 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = symm-sim-fraction-ℤ
-pr2 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = trans-sim-fraction-ℤ
+pr2 (pr2 (pr2 eq-rel-sim-fraction-ℤ)) = transitive-sim-fraction-ℤ
 ```
 
 ### The greatest common divisor of the numerator and a denominator of a fraction is always a positive integer

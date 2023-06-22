@@ -110,10 +110,10 @@ module _
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  trans-congruence-Semiring :
+  transitive-congruence-Semiring :
     is-transitive-Rel-Prop prop-congruence-Semiring
-  trans-congruence-Semiring =
-    trans-congruence-Monoid
+  transitive-congruence-Semiring =
+    transitive-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 

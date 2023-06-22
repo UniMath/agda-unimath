@@ -251,18 +251,18 @@ module _
     type-Prop (rel-congruence-Normal-Submonoid x y)
 
   refl-congruence-Normal-Submonoid :
-    is-reflexive-Rel-Prop rel-congruence-Normal-Submonoid
-  pr1 (refl-congruence-Normal-Submonoid u v) = id
-  pr2 (refl-congruence-Normal-Submonoid u v) = id
+    is-reflexive sim-congruence-Normal-Submonoid
+  pr1 (refl-congruence-Normal-Submonoid _ u v) = id
+  pr2 (refl-congruence-Normal-Submonoid _ u v) = id
 
   symmetric-congruence-Normal-Submonoid :
-    is-symmetric-Rel-Prop rel-congruence-Normal-Submonoid
-  pr1 (symmetric-congruence-Normal-Submonoid H u v) = pr2 (H u v)
-  pr2 (symmetric-congruence-Normal-Submonoid H u v) = pr1 (H u v)
+    is-symmetric sim-congruence-Normal-Submonoid
+  pr1 (symmetric-congruence-Normal-Submonoid _ _ H u v) = pr2 (H u v)
+  pr2 (symmetric-congruence-Normal-Submonoid _ _ H u v) = pr1 (H u v)
 
   transitive-congruence-Normal-Submonoid :
-    is-transitive-Rel-Prop rel-congruence-Normal-Submonoid
-  transitive-congruence-Normal-Submonoid H K u v = (K u v) ∘iff (H u v)
+    is-transitive sim-congruence-Normal-Submonoid
+  transitive-congruence-Normal-Submonoid _ _ _ H K u v = (H u v) ∘iff (K u v)
 
   eq-rel-congruence-Normal-Submonoid : Eq-Rel (l1 ⊔ l2) (type-Monoid M)
   pr1 eq-rel-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
@@ -324,7 +324,7 @@ module _
   contains-unit-normal-submonoid-congruence-Monoid :
     is-in-normal-submonoid-congruence-Monoid (unit-Monoid M)
   contains-unit-normal-submonoid-congruence-Monoid =
-    refl-congruence-Monoid M R
+    refl-congruence-Monoid M R (unit-Monoid M)
 
   is-closed-under-multiplication-normal-submonoid-congruence-Monoid :
     is-closed-under-multiplication-subset-Monoid M
@@ -343,21 +343,31 @@ module _
 
   is-normal-submonoid-congruence-Monoid :
     is-normal-Submonoid M submonoid-congruence-Monoid
-  pr1 (is-normal-submonoid-congruence-Monoid x y u H) =
-    trans-congruence-Monoid M R
+  pr1 (is-normal-submonoid-congruence-Monoid x y u H) K =
+    transitive-congruence-Monoid M R
+      ( mul-Monoid M x y)
+      ( mul-Monoid M (mul-Monoid M x u) y)
+      ( unit-Monoid M)
+      ( K)
       ( symm-congruence-Monoid M R
+        ( mul-Monoid M (mul-Monoid M x u) y)
+        ( mul-Monoid M x y)
         ( mul-congruence-Monoid M R
           ( concatenate-sim-eq-congruence-Monoid M R
-            ( mul-congruence-Monoid M R (refl-congruence-Monoid M R) H)
+            ( mul-congruence-Monoid M R (refl-congruence-Monoid M R x) H)
             ( right-unit-law-mul-Monoid M x))
-          ( refl-congruence-Monoid M R)))
-  pr2 (is-normal-submonoid-congruence-Monoid x y u H) =
-    trans-congruence-Monoid M R
+          ( refl-congruence-Monoid M R y)))
+  pr2 (is-normal-submonoid-congruence-Monoid x y u H) K =
+    transitive-congruence-Monoid M R
+      ( mul-Monoid M(mul-Monoid M x u) y)
+      ( mul-Monoid M x y)
+      ( unit-Monoid M)
+      ( K)
       ( mul-congruence-Monoid M R
         ( concatenate-sim-eq-congruence-Monoid M R
-          ( mul-congruence-Monoid M R (refl-congruence-Monoid M R) H)
+          ( mul-congruence-Monoid M R (refl-congruence-Monoid M R x) H)
           ( right-unit-law-mul-Monoid M x))
-        ( refl-congruence-Monoid M R))
+        ( refl-congruence-Monoid M R y))
 
   normal-submonoid-congruence-Monoid : Normal-Submonoid l2 M
   pr1 normal-submonoid-congruence-Monoid = submonoid-congruence-Monoid
@@ -460,24 +470,32 @@ module _
     ( pr2
       ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid
         x y)
-      H u v) =
-    trans-saturated-congruence-Monoid M R
+      H u v) K =
+    transitive-saturated-congruence-Monoid M R
+      ( mul-Monoid M (mul-Monoid M u y) v)
+      ( mul-Monoid M (mul-Monoid M u x) v)
+      ( unit-Monoid M)
+      ( K)
       ( mul-saturated-congruence-Monoid M R
         ( mul-saturated-congruence-Monoid M R
-          ( refl-saturated-congruence-Monoid M R)
-          ( symm-saturated-congruence-Monoid M R H))
-        ( refl-saturated-congruence-Monoid M R))
+          ( refl-saturated-congruence-Monoid M R u)
+          ( symm-saturated-congruence-Monoid M R x y H))
+        ( refl-saturated-congruence-Monoid M R v))
   pr2
     ( pr2
       ( relate-same-elements-congruence-normal-submonoid-saturated-congruence-Monoid
         x y)
-      H u v) =
-    trans-saturated-congruence-Monoid M R
+      H u v) K =
+    transitive-saturated-congruence-Monoid M R
+      ( mul-Monoid M (mul-Monoid M u x) v)
+      ( mul-Monoid M (mul-Monoid M u y) v)
+      ( unit-Monoid M)
+      ( K)
       ( mul-saturated-congruence-Monoid M R
         ( mul-saturated-congruence-Monoid M R
-          ( refl-saturated-congruence-Monoid M R)
+          ( refl-saturated-congruence-Monoid M R u)
           ( H))
-        ( refl-saturated-congruence-Monoid M R))
+        ( refl-saturated-congruence-Monoid M R v))
 ```
 
 ### The type of normal submonoids of `M` is a retract of the type of congruence relations of `M`

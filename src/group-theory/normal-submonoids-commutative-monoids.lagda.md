@@ -402,7 +402,7 @@ module _
   is-normal-submonoid-congruence-Commutative-Monoid :
     is-normal-Commutative-Submonoid M submonoid-congruence-Commutative-Monoid
   is-normal-submonoid-congruence-Commutative-Monoid x u H K =
-    trans-congruence-Commutative-Monoid M R
+    transitive-congruence-Commutative-Monoid M R
       ( x)
       ( mul-Commutative-Monoid M x u)
       ( unit-Commutative-Monoid M)
@@ -535,7 +535,7 @@ module _
         ( y))
       ( H)
       ( u)) K =
-    trans-saturated-congruence-Commutative-Monoid M R
+    transitive-saturated-congruence-Commutative-Monoid M R
       ( mul-Commutative-Monoid M u y)
       ( mul-Commutative-Monoid M u x)
       ( unit-Commutative-Monoid M)
@@ -550,7 +550,7 @@ module _
         ( y))
       ( H)
       ( u)) K =
-    trans-saturated-congruence-Commutative-Monoid M R
+    transitive-saturated-congruence-Commutative-Monoid M R
       ( mul-Commutative-Monoid M u x)
       ( mul-Commutative-Monoid M u y)
       ( unit-Commutative-Monoid M)

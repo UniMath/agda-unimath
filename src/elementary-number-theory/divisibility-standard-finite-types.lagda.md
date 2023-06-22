@@ -48,10 +48,10 @@ pr2 (refl-div-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin k x
 ### The divisibility relation is transitive
 
 ```agda
-trans-div-Fin :
+transitive-div-Fin :
   (k : ℕ) (x y z : Fin k) → div-Fin k x y → div-Fin k y z → div-Fin k x z
-pr1 (trans-div-Fin k x y z (pair u p) (pair v q)) = mul-Fin k v u
-pr2 (trans-div-Fin k x y z (pair u p) (pair v q)) =
+pr1 (transitive-div-Fin k x y z (pair u p) (pair v q)) = mul-Fin k v u
+pr2 (transitive-div-Fin k x y z (pair u p) (pair v q)) =
   associative-mul-Fin k v u x ∙ (ap (mul-Fin k v) p ∙ q)
 ```
 

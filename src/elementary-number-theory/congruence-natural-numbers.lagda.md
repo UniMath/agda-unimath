@@ -88,16 +88,16 @@ cong-zero-ℕ' :
 cong-zero-ℕ' k =
   symm-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
 
-trans-cong-ℕ :
+transitive-cong-ℕ :
   (k x y z : ℕ) →
   cong-ℕ k x y → cong-ℕ k y z → cong-ℕ k x z
-trans-cong-ℕ k x y z d e with is-total-dist-ℕ x y z
-trans-cong-ℕ k x y z d e | inl α =
+transitive-cong-ℕ k x y z d e with is-total-dist-ℕ x y z
+transitive-cong-ℕ k x y z d e | inl α =
   concatenate-div-eq-ℕ (div-add-ℕ k (dist-ℕ x y) (dist-ℕ y z) d e) α
-trans-cong-ℕ k x y z d e | inr (inl α) =
+transitive-cong-ℕ k x y z d e | inr (inl α) =
   div-right-summand-ℕ k (dist-ℕ y z) (dist-ℕ x z) e
     ( concatenate-div-eq-ℕ d (inv α))
-trans-cong-ℕ k x y z d e | inr (inr α) =
+transitive-cong-ℕ k x y z d e | inr (inr α) =
   div-left-summand-ℕ k (dist-ℕ x z) (dist-ℕ x y) d
     ( concatenate-div-eq-ℕ e (inv α))
 
@@ -105,7 +105,7 @@ concatenate-cong-eq-cong-ℕ :
   {k x1 x2 x3 x4 : ℕ} →
   cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
 concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
-  trans-cong-ℕ k x y z H K
+  transitive-cong-ℕ k x y z H K
 
 concatenate-eq-cong-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
@@ -113,7 +113,7 @@ concatenate-eq-cong-eq-cong-eq-ℕ :
   cong-ℕ k x4 x5 → x5 ＝ x6 → cong-ℕ k x1 x6
 concatenate-eq-cong-eq-cong-eq-ℕ k
   {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
-  trans-cong-ℕ k x y z H K
+  transitive-cong-ℕ k x y z H K
 ```
 
 ```agda
@@ -185,7 +185,7 @@ congruence-mul-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x *ℕ y) (x' *ℕ y')
 congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
-  trans-cong-ℕ k (x *ℕ y) (x *ℕ y') (x' *ℕ y')
+  transitive-cong-ℕ k (x *ℕ y) (x *ℕ y') (x' *ℕ y')
     ( scalar-invariant-cong-ℕ k y y' x K)
     ( scalar-invariant-cong-ℕ' k x x' y' H)
 ```

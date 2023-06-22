@@ -85,10 +85,10 @@ module _
   equiv-symm-congruence-Ring =
     equiv-symm-congruence-Semiring (semiring-Ring R) S
 
-  trans-congruence-Ring :
+  transitive-congruence-Ring :
     is-transitive-Rel-Prop prop-congruence-Ring
-  trans-congruence-Ring =
-    trans-congruence-Semiring (semiring-Ring R) S
+  transitive-congruence-Ring =
+    transitive-congruence-Semiring (semiring-Ring R) S
 
   add-congruence-Ring :
     is-congruence-Ab (ab-Ring R) eq-rel-congruence-Ring

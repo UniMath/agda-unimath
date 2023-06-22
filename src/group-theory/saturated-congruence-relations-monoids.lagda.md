@@ -136,10 +136,10 @@ module _
   equiv-symm-saturated-congruence-Monoid =
     equiv-symm-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  trans-saturated-congruence-Monoid :
+  transitive-saturated-congruence-Monoid :
     is-transitive-Rel-Prop prop-saturated-congruence-Monoid
-  trans-saturated-congruence-Monoid =
-    trans-congruence-Monoid M congruence-saturated-congruence-Monoid
+  transitive-saturated-congruence-Monoid =
+    transitive-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   mul-saturated-congruence-Monoid :
     is-congruence-Monoid M eq-rel-saturated-congruence-Monoid

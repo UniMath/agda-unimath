@@ -78,7 +78,7 @@ cong-nat-mod-succ-ℕ :
   (k x : ℕ) → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
 cong-nat-mod-succ-ℕ k zero-ℕ = cong-is-zero-nat-zero-Fin
 cong-nat-mod-succ-ℕ k (succ-ℕ x) =
-  trans-cong-ℕ
+  transitive-cong-ℕ
     ( succ-ℕ k)
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
@@ -110,13 +110,13 @@ eq-mod-succ-cong-ℕ k x y H =
     ( succ-ℕ k)
     ( mod-succ-ℕ k x)
     ( mod-succ-ℕ k y)
-    ( trans-cong-ℕ
+    ( transitive-cong-ℕ
       ( succ-ℕ k)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( x)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
       ( cong-nat-mod-succ-ℕ k x)
-      ( trans-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) H
+      ( transitive-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) H
         ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
           ( cong-nat-mod-succ-ℕ k y))))
 ```
@@ -209,7 +209,7 @@ cong-add-ℕ :
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ y)
 cong-add-ℕ {k} x y =
-  trans-cong-ℕ (succ-ℕ k)
+  transitive-cong-ℕ (succ-ℕ k)
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
@@ -232,7 +232,7 @@ congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y')
 congruence-add-ℕ k {x} {y} {x'} {y'} H K =
-  trans-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
+  transitive-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
     ( translation-invariant-cong-ℕ k y y' x K)
     ( translation-invariant-cong-ℕ' k x x' y' H)
 

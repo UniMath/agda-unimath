@@ -91,20 +91,15 @@ module _
     equivalence-relation-Decidable-Equivalence-Relation R
 
   refl-Decidable-Equivalence-Relation-𝔽 :
-    {x : type-𝔽 X} → sim-Decidable-Equivalence-Relation-𝔽 x x
+    is-reflexive sim-Decidable-Equivalence-Relation-𝔽
   refl-Decidable-Equivalence-Relation-𝔽 =
     refl-Decidable-Equivalence-Relation R
 
-  symmetric-Decidable-Equivalence-Relation-𝔽 :
-    {x y : type-𝔽 X} → sim-Decidable-Equivalence-Relation-𝔽 x y →
-    sim-Decidable-Equivalence-Relation-𝔽 y x
+  symmetric-Decidable-Equivalence-Relation-𝔽 : is-symmetric sim-Decidable-Equivalence-Relation-𝔽
   symmetric-Decidable-Equivalence-Relation-𝔽 =
     symmetric-Decidable-Equivalence-Relation R
 
-  transitive-Decidable-Equivalence-Relation-𝔽 :
-    {x y z : type-𝔽 X} → sim-Decidable-Equivalence-Relation-𝔽 x y →
-    sim-Decidable-Equivalence-Relation-𝔽 y z →
-    sim-Decidable-Equivalence-Relation-𝔽 x z
+  transitive-Decidable-Equivalence-Relation-𝔽 : is-transitive sim-Decidable-Equivalence-Relation-𝔽
   transitive-Decidable-Equivalence-Relation-𝔽 =
     transitive-Decidable-Equivalence-Relation R
 
@@ -123,17 +118,17 @@ module _
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 :
     is-finite (is-reflexive-Rel-Prop (relation-Decidable-Relation R))
   is-finite-is-reflexive-Dec-Rel-Prop-𝔽 =
-    is-finite-Π'
+    is-finite-Π
       ( is-finite-type-𝔽 A)
       (λ x → is-finite-relation-Decidable-Relation-𝔽 x x)
 
   is-finite-is-symmetric-Dec-Rel-Prop-𝔽 :
     is-finite (is-symmetric-Rel-Prop (relation-Decidable-Relation R))
   is-finite-is-symmetric-Dec-Rel-Prop-𝔽 =
-    is-finite-Π'
+    is-finite-Π
       ( is-finite-type-𝔽 A)
       ( λ x →
-        is-finite-Π'
+        is-finite-Π
           ( is-finite-type-𝔽 A)
           ( λ y →
             is-finite-function-type
@@ -143,19 +138,19 @@ module _
   is-finite-is-transitive-Dec-Rel-Prop-𝔽 :
     is-finite (is-transitive-Rel-Prop (relation-Decidable-Relation R))
   is-finite-is-transitive-Dec-Rel-Prop-𝔽 =
-    is-finite-Π'
+    is-finite-Π
       ( is-finite-type-𝔽 A)
       ( λ x →
-        is-finite-Π'
+        is-finite-Π
           ( is-finite-type-𝔽 A)
           ( λ y →
-            is-finite-Π'
+            is-finite-Π
               ( is-finite-type-𝔽 A)
               ( λ z →
                 is-finite-function-type
-                  ( is-finite-relation-Decidable-Relation-𝔽 x y)
+                  ( is-finite-relation-Decidable-Relation-𝔽 y z)
                   ( is-finite-function-type
-                    ( is-finite-relation-Decidable-Relation-𝔽 y z)
+                    ( is-finite-relation-Decidable-Relation-𝔽 x y)
                     ( is-finite-relation-Decidable-Relation-𝔽 x z)))))
 
   is-finite-is-equivalence-Dec-Rel-Prop-𝔽 :

@@ -132,8 +132,8 @@ module _
       ( pretype-obj-left-adjoint-subst-Abstract-Group-Action X)
   pr1
     ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
-    ( pair h x)
-    ( pair h' x') =
+    ( h , x)
+    ( h' , x') =
     ∃-Prop
       ( type-Group G)
       ( λ g →
@@ -141,7 +141,7 @@ module _
         ( Id (mul-Abstract-Group-Action G X g x) x'))
   pr1
     ( pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X))
-    { pair h x} =
+    ( h , x) =
     intro-∃
       ( unit-Group G)
       ( pair
@@ -150,13 +150,13 @@ module _
         ( preserves-unit-mul-Abstract-Group-Action G X x))
   pr1
     ( pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
-    { pair h x} { pair h' x'} e =
+    ( h , x)  (h' , x') e =
     apply-universal-property-trunc-Prop e
       ( pr1
         ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
-        ( pair h' x')
-        ( pair h x))
-      ( λ { (pair g (pair p q)) →
+        ( h' , x')
+        ( h , x))
+      ( λ { (g , p , q) →
             intro-∃
               ( inv-Group G g)
               ( pair
@@ -166,19 +166,19 @@ module _
                   ( inv (transpose-eq-mul-Group' H p)))
                 ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
   pr2 (pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
-    { pair h x} { pair h' x'} { pair h'' x''} e d =
+    ( h , x) (h' , x') (h'' , x'') d e =
     apply-universal-property-trunc-Prop e
       ( pr1
         ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
-        ( pair h x)
-        ( pair h'' x''))
-      ( λ { ( pair g (pair p q)) →
+        ( h , x)
+        ( h'' , x''))
+      ( λ { (g , p , q) →
             apply-universal-property-trunc-Prop d
               ( pr1
                 ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)
-                ( pair h x)
-                ( pair h'' x''))
-              ( λ { ( pair g' (pair p' q')) →
+                ( h , x)
+                ( h'' , x''))
+              ( λ { (g' , p' , q') →
                     intro-∃
                       ( mul-Group G g' g)
                       ( pair
@@ -189,7 +189,7 @@ module _
                               ( map-hom-Group G H f g')
                               ( map-hom-Group G H f g)
                               ( h)) ∙
-                            ( ( ap ( mul-Group H (map-hom-Group G H f g')) p) ∙
+                            ( ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
                               ( p'))))
                         ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
                           ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))})})

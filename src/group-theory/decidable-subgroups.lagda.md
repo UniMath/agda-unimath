@@ -386,9 +386,9 @@ module _
   symm-right-sim-Decidable-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  trans-right-sim-Decidable-Subgroup :
+  transitive-right-sim-Decidable-Subgroup :
     is-transitive-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
-  trans-right-sim-Decidable-Subgroup =
+  transitive-right-sim-Decidable-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   right-eq-rel-Decidable-Subgroup : Eq-Rel l2 (type-Group G)

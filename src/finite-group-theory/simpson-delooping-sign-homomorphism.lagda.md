@@ -84,7 +84,7 @@ module _
       ( Fin-Set 2)
       ( zero-Fin 1)
       ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
-  pr1 (pr2 sign-comp-Eq-Rel) {f} =
+  pr1 (pr2 sign-comp-Eq-Rel) f =
     ap pr1
       { x =
         zero-Fin 1 ,
@@ -96,7 +96,7 @@ module _
       ( eq-is-contr
         ( is-contr-parity-transposition-permutation n
           (Fin-UU-Fin' n) (inv-equiv f ∘e f)))
-  pr1 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} P =
+  pr1 (pr2 (pr2 sign-comp-Eq-Rel)) f g P =
     ap pr1
       { x =
         zero-Fin 1 ,
@@ -132,7 +132,7 @@ module _
                 ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
                 ( distributive-inv-comp-equiv g (inv-equiv f) ∙
                   ap (inv-equiv g ∘e_) (inv-inv-equiv f)))))))
-  pr2 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} {h} P Q =
+  pr2 (pr2 (pr2 sign-comp-Eq-Rel)) f g h Q P =
     ( ap mod-two-ℕ
       ( ap
         ( zero-ℕ +ℕ_)
@@ -518,7 +518,8 @@ module _
           ( refl-Eq-Rel
             ( sign-comp-Eq-Rel
               ( number-of-elements-count eX)
-              ( X , unit-trunc-Prop (equiv-count eX)))))
+              ( X , unit-trunc-Prop (equiv-count eX)))
+            ( pr2 eX)))
     section-Fin-2-quotient-sign-comp-count (inr star) (inl D) =
       ex-falso
         ( neq-inr-inl

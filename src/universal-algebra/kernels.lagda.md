@@ -58,9 +58,9 @@ module _
     Eq-Rel l4 (type-Algebra Sg Th Alg1)
   pr1 eq-rel-kernel-hom-Algebra =
     rel-prop-kernel-hom-Algebra
-  pr1 (pr2 eq-rel-kernel-hom-Algebra) = refl
-  pr1 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) = inv
-  pr2 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) = _∙_
+  pr1 (pr2 eq-rel-kernel-hom-Algebra) _ = refl
+  pr1 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) _ _ = inv
+  pr2 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) _ _ _ f g = g ∙ f
 
   kernel-hom-Algebra :
     congruence-Algebra Sg Th Alg1 l4

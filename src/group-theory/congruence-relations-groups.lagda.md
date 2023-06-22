@@ -91,9 +91,9 @@ module _
   equiv-symm-congruence-Group x y =
     equiv-symm-Eq-Rel eq-rel-congruence-Group
 
-  trans-congruence-Group :
+  transitive-congruence-Group :
     is-transitive-Rel-Prop prop-congruence-Group
-  trans-congruence-Group = transitive-Eq-Rel eq-rel-congruence-Group
+  transitive-congruence-Group = transitive-Eq-Rel eq-rel-congruence-Group
 
   mul-congruence-Group :
     is-congruence-Group G eq-rel-congruence-Group

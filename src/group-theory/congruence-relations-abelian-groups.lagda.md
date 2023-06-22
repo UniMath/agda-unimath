@@ -86,9 +86,9 @@ module _
   equiv-symm-congruence-Ab =
     equiv-symm-congruence-Group (group-Ab A) R
 
-  trans-congruence-Ab :
+  transitive-congruence-Ab :
     is-transitive-Rel-Prop prop-congruence-Ab
-  trans-congruence-Ab = trans-congruence-Group (group-Ab A) R
+  transitive-congruence-Ab = transitive-congruence-Group (group-Ab A) R
 
   add-congruence-Ab : is-congruence-Ab A eq-rel-congruence-Ab
   add-congruence-Ab = mul-congruence-Group (group-Ab A) R

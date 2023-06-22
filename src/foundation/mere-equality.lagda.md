@@ -69,9 +69,9 @@ abstract
 
 ```agda
 abstract
-  trans-mere-eq :
+  transitive-mere-eq :
     {l : Level} {A : UU l} → is-transitive (mere-eq {l} {A})
-  trans-mere-eq x y z p q =
+  transitive-mere-eq x y z p q =
     apply-universal-property-trunc-Prop q
       ( mere-eq-Prop x z)
       ( λ p' → map-trunc-Prop (p' ∙_) p)
@@ -84,7 +84,7 @@ mere-eq-Eq-Rel : {l1 : Level} (A : UU l1) → Eq-Rel l1 A
 pr1 (mere-eq-Eq-Rel A) = mere-eq-Prop
 pr1 (pr2 (mere-eq-Eq-Rel A)) = refl-mere-eq
 pr1 (pr2 (pr2 (mere-eq-Eq-Rel A))) = symm-mere-eq
-pr2 (pr2 (pr2 (mere-eq-Eq-Rel A))) = trans-mere-eq
+pr2 (pr2 (pr2 (mere-eq-Eq-Rel A))) = transitive-mere-eq
 ```
 
 ### Any map into a set reflects mere equality

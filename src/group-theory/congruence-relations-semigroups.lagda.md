@@ -103,8 +103,8 @@ module _
   equiv-symm-congruence-Semigroup x y =
     equiv-symm-Eq-Rel eq-rel-congruence-Semigroup
 
-  trans-congruence-Semigroup : is-transitive-Rel-Prop prop-congruence-Semigroup
-  trans-congruence-Semigroup = transitive-Eq-Rel eq-rel-congruence-Semigroup
+  transitive-congruence-Semigroup : is-transitive-Rel-Prop prop-congruence-Semigroup
+  transitive-congruence-Semigroup = transitive-Eq-Rel eq-rel-congruence-Semigroup
 
   mul-congruence-Semigroup :
     is-congruence-Semigroup G eq-rel-congruence-Semigroup

@@ -141,10 +141,10 @@ refl-div-ℤ : (x : ℤ) → div-ℤ x x
 pr1 (refl-div-ℤ x) = one-ℤ
 pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
 
-trans-div-ℤ :
+transitive-div-ℤ :
   (x y z : ℤ) → div-ℤ x y → div-ℤ y z → div-ℤ x z
-pr1 (trans-div-ℤ x y z (pair d p) (pair e q)) = e *ℤ d
-pr2 (trans-div-ℤ x y z (pair d p) (pair e q)) =
+pr1 (transitive-div-ℤ x y z (pair d p) (pair e q)) = e *ℤ d
+pr2 (transitive-div-ℤ x y z (pair d p) (pair e q)) =
   ( associative-mul-ℤ e d x) ∙
     ( ( ap (e *ℤ_) p) ∙
       ( q))
@@ -212,7 +212,7 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
 div-mul-ℤ :
   (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
 div-mul-ℤ k x y H =
-  trans-div-ℤ x y (k *ℤ y) H (pair k refl)
+  transitive-div-ℤ x y (k *ℤ y) H (pair k refl)
 ```
 
 ### If `x` divides `y` then it divides `-y`
@@ -529,9 +529,9 @@ is-zero-sim-unit-ℤ' :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ y → is-zero-ℤ x
 is-zero-sim-unit-ℤ' H = is-zero-sim-unit-ℤ (symm-sim-unit-ℤ H)
 
-trans-presim-unit-ℤ :
+transitive-presim-unit-ℤ :
   (x y z : ℤ) → presim-unit-ℤ x y → presim-unit-ℤ y z → presim-unit-ℤ x z
-trans-presim-unit-ℤ x y z (pair (pair u H) p) (pair (pair v K) q) =
+transitive-presim-unit-ℤ x y z (pair (pair u H) p) (pair (pair v K) q) =
   f (is-one-or-neg-one-is-unit-ℤ u H) (is-one-or-neg-one-is-unit-ℤ v K)
   where
   f : is-one-or-neg-one-ℤ u → is-one-or-neg-one-ℤ v → presim-unit-ℤ x z
@@ -544,10 +544,10 @@ trans-presim-unit-ℤ x y z (pair (pair u H) p) (pair (pair v K) q) =
   pr1 (f (inr refl) (inr refl)) = one-unit-ℤ
   pr2 (f (inr refl) (inr refl)) = inv (neg-neg-ℤ x) ∙ (ap neg-ℤ p ∙ q)
 
-trans-sim-unit-ℤ :
+transitive-sim-unit-ℤ :
   (x y z : ℤ) → sim-unit-ℤ x y → sim-unit-ℤ y z → sim-unit-ℤ x z
-trans-sim-unit-ℤ x y z H K f =
-  trans-presim-unit-ℤ x y z
+transitive-sim-unit-ℤ x y z H K f =
+  transitive-presim-unit-ℤ x y z
     ( H (λ {(pair p q) → f (pair p (is-zero-sim-unit-ℤ K q))}))
     ( K (λ {(pair p q) → f (pair (is-zero-sim-unit-ℤ' H p) q)}))
 ```

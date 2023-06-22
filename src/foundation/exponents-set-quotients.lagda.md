@@ -71,15 +71,15 @@ module _
   symm-sim-function-type : is-symmetric sim-function-type
   symm-sim-function-type f g r x = symm-Eq-Rel R (f x) (g x) (r x)
 
-  trans-sim-function-type : is-transitive sim-function-type
-  trans-sim-function-type f g h r s x =
+  transitive-sim-function-type : is-transitive sim-function-type
+  transitive-sim-function-type f g h r s x =
     transitive-Eq-Rel R (f x) (g x) (h x) (r x) (s x)
 
   eq-rel-function-type : Eq-Rel (l1 ⊔ l3) (X → A)
   pr1 eq-rel-function-type = rel-function-type
   pr1 (pr2 eq-rel-function-type) = refl-sim-function-type
   pr1 (pr2 (pr2 eq-rel-function-type)) = symm-sim-function-type
-  pr2 (pr2 (pr2 eq-rel-function-type)) = trans-sim-function-type
+  pr2 (pr2 (pr2 eq-rel-function-type)) = transitive-sim-function-type
 
   map-exponent-reflecting-map-Eq-Rel :
     {l4 : Level} {B : UU l4} → reflecting-map-Eq-Rel R B → (X → A) → (X → B)
@@ -174,9 +174,9 @@ module _
   symm-sim-hom-Eq-Rel f g =
     symm-sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
 
-  trans-sim-hom-Eq-Rel : is-transitive sim-hom-Eq-Rel
-  trans-sim-hom-Eq-Rel f g h =
-    trans-sim-function-type A S
+  transitive-sim-hom-Eq-Rel : is-transitive sim-hom-Eq-Rel
+  transitive-sim-hom-Eq-Rel f g h =
+    transitive-sim-function-type A S
       ( map-hom-Eq-Rel R S f)
       ( map-hom-Eq-Rel R S g)
       ( map-hom-Eq-Rel R S h)
@@ -186,7 +186,7 @@ module _
   pr1 eq-rel-hom-Eq-Rel = rel-hom-Eq-Rel
   pr1 (pr2 eq-rel-hom-Eq-Rel) = refl-sim-hom-Eq-Rel
   pr1 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = symm-sim-hom-Eq-Rel
-  pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = trans-sim-hom-Eq-Rel
+  pr2 (pr2 (pr2 eq-rel-hom-Eq-Rel)) = transitive-sim-hom-Eq-Rel
 ```
 
 ### The universal reflecting map from `hom-Eq-Rel R S` to `A/R → B/S`

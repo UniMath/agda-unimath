@@ -252,12 +252,12 @@ reduce-preserves-sim-ℤ :
   (x y : fraction-ℤ) (H : sim-fraction-ℤ x y) →
   sim-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y)
 reduce-preserves-sim-ℤ x y H =
-  trans-sim-fraction-ℤ
+  transitive-sim-fraction-ℤ
     ( reduce-fraction-ℤ x)
     ( y)
     ( reduce-fraction-ℤ y)
     ( sim-reduced-fraction-ℤ y)
-    ( trans-sim-fraction-ℤ
+    ( transitive-sim-fraction-ℤ
       ( reduce-fraction-ℤ x)
       ( x)
       ( y)

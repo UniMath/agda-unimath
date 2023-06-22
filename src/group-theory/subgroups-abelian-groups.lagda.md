@@ -518,10 +518,10 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  trans-congruence-Subgroup-Ab :
+  transitive-congruence-Subgroup-Ab :
     is-transitive-Rel-Prop prop-congruence-Subgroup-Ab
-  trans-congruence-Subgroup-Ab =
-    trans-congruence-Normal-Subgroup
+  transitive-congruence-Subgroup-Ab =
+    transitive-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
