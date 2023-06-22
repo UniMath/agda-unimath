@@ -172,7 +172,9 @@ module _
   symmetric-sim-hom-Eq-Rel :
     (f g : hom-Eq-Rel R S) → sim-hom-Eq-Rel f g → sim-hom-Eq-Rel g f
   symmetric-sim-hom-Eq-Rel f g =
-    symmetric-sim-function-type A S (map-hom-Eq-Rel R S f) (map-hom-Eq-Rel R S g)
+    symmetric-sim-function-type A S
+      ( map-hom-Eq-Rel R S f)
+      ( map-hom-Eq-Rel R S g)
 
   transitive-sim-hom-Eq-Rel : is-transitive sim-hom-Eq-Rel
   transitive-sim-hom-Eq-Rel f g h =

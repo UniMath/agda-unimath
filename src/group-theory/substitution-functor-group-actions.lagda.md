@@ -150,7 +150,7 @@ module _
         ( preserves-unit-mul-Abstract-Group-Action G X x))
   pr1
     ( pr2 (pr2 (Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)))
-    ( h , x)  (h' , x') e =
+    ( h , x) (h' , x') e =
     apply-universal-property-trunc-Prop e
       ( pr1
         ( Eq-Rel-obj-left-adjoint-subst-Abstract-Group-Action X)

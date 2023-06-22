@@ -90,7 +90,8 @@ module _
   equiv-symmetric-congruence-Monoid :
     (x y : type-Monoid M) →
     sim-congruence-Monoid x y ≃ sim-congruence-Monoid y x
-  equiv-symmetric-congruence-Monoid x y = equiv-symmetric-Eq-Rel eq-rel-congruence-Monoid
+  equiv-symmetric-congruence-Monoid x y =
+    equiv-symmetric-Eq-Rel eq-rel-congruence-Monoid
 
   transitive-congruence-Monoid : is-transitive-Rel-Prop prop-congruence-Monoid
   transitive-congruence-Monoid = transitive-Eq-Rel eq-rel-congruence-Monoid

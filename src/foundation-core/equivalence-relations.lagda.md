@@ -117,7 +117,8 @@ iff-transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →
   sim-Eq-Rel R x y → (sim-Eq-Rel R y z ↔ sim-Eq-Rel R x z)
 pr1 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s r
-pr2 (iff-transitive-Eq-Rel R r) s = transitive-Eq-Rel R _ _ _ s (symmetric-Eq-Rel R _ _ r)
+pr2 (iff-transitive-Eq-Rel R r) s =
+  transitive-Eq-Rel R _ _ _ s (symmetric-Eq-Rel R _ _ r)
 
 equiv-transitive-Eq-Rel :
   {l1 l2 : Level} {A : UU l1} (R : Eq-Rel l2 A) {x y z : A} →

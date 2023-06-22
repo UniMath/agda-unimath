@@ -257,7 +257,6 @@ module _
           ( two-points-iterate-ordered-ℕ
             ( linear-leq-ℕ point1-iterate-ℕ point2-iterate-ℕ))))
 
-
   abstract
     not-not-eq-second-point-zero-min-reporting :
       ¬¬ (Id second-point-min-repeating zero-ℕ)

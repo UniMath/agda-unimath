@@ -303,7 +303,8 @@ module _
 
   transitive-congruence-Normal-Commutative-Submonoid :
     is-transitive sim-congruence-Normal-Commutative-Submonoid
-  transitive-congruence-Normal-Commutative-Submonoid _ _ _ H K u = (H u) ∘iff (K u)
+  transitive-congruence-Normal-Commutative-Submonoid _ _ _ H K u =
+    (H u) ∘iff (K u)
 
   eq-rel-congruence-Normal-Commutative-Submonoid :
     Eq-Rel (l1 ⊔ l2) (type-Commutative-Monoid M)

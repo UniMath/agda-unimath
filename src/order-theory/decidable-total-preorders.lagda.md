@@ -106,7 +106,8 @@ module _
   refl-leq-Decidable-Total-Preorder =
     refl-leq-Preorder preorder-Decidable-Total-Preorder
 
-  transitive-leq-Decidable-Total-Preorder : is-transitive leq-Decidable-Total-Preorder
+  transitive-leq-Decidable-Total-Preorder :
+    is-transitive leq-Decidable-Total-Preorder
   transitive-leq-Decidable-Total-Preorder =
     transitive-leq-Preorder preorder-Decidable-Total-Preorder
 

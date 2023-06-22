@@ -95,11 +95,13 @@ module _
   refl-Decidable-Equivalence-Relation-𝔽 =
     refl-Decidable-Equivalence-Relation R
 
-  symmetric-Decidable-Equivalence-Relation-𝔽 : is-symmetric sim-Decidable-Equivalence-Relation-𝔽
+  symmetric-Decidable-Equivalence-Relation-𝔽 :
+    is-symmetric sim-Decidable-Equivalence-Relation-𝔽
   symmetric-Decidable-Equivalence-Relation-𝔽 =
     symmetric-Decidable-Equivalence-Relation R
 
-  transitive-Decidable-Equivalence-Relation-𝔽 : is-transitive sim-Decidable-Equivalence-Relation-𝔽
+  transitive-Decidable-Equivalence-Relation-𝔽 :
+    is-transitive sim-Decidable-Equivalence-Relation-𝔽
   transitive-Decidable-Equivalence-Relation-𝔽 =
     transitive-Decidable-Equivalence-Relation R
 

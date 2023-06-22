@@ -194,7 +194,7 @@ module _
   pr2 (pr2 (symmetric-sim-partition x y (Q , p , q))) = p
 
   transitive-sim-partition : is-transitive sim-partition
-  pr1 (transitive-sim-partition x y z  (B , p , q) (B' , p' , q')) = B
+  pr1 (transitive-sim-partition x y z (B , p , q) (B' , p' , q')) = B
   pr1 (pr2 (transitive-sim-partition x y z (B , p , q) (B' , p' , q'))) =
     backward-implication
       ( has-same-elements-eq-inhabited-subtype
@@ -211,7 +211,6 @@ module _
         ( x))
       ( p')
   pr2 (pr2 (transitive-sim-partition x y z (B , p , q) (B' , p' , q'))) = q
-
 
   eq-rel-partition : Eq-Rel (l1 ⊔ l2) A
   pr1 eq-rel-partition = prop-eq-rel-partition

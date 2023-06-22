@@ -120,7 +120,8 @@ step-calculate-in-Preorder :
   {l1 l2 : Level} (X : Preorder l1 l2)
   {x y : type-Preorder X} → leq-Preorder X x y →
   (z : type-Preorder X) → leq-Preorder X y z → leq-Preorder X x z
-step-calculate-in-Preorder X {x} {y} u z v = is-transitive-leq-Preorder X x y z v u
+step-calculate-in-Preorder X {x} {y} u z v =
+  is-transitive-leq-Preorder X x y z v u
 
 syntax step-calculate-in-Preorder X u z v = u ≤ z by v in-Preorder X
 ```
