@@ -8,11 +8,11 @@ module foundation.axiom-l where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.sets
 open import foundation.universe-levels
 
+open import foundation-core.embeddings
+open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.univalence
 ```
