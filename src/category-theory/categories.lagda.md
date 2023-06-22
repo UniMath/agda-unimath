@@ -101,9 +101,9 @@ module _
   right-unit-law-comp-hom-Category =
     right-unit-law-comp-hom-Precategory precategory-Category
 
-  is-category-precategory-Category :
+  is-category-Category :
     is-category-Precategory precategory-Category
-  is-category-precategory-Category = pr2 C
+  is-category-Category = pr2 C
 ```
 
 ## Properties
@@ -124,7 +124,7 @@ module _
     is-set-is-equiv
       ( iso-Precategory (precategory-Category C) x y)
       ( iso-eq-Precategory (precategory-Category C) x y)
-      ( is-category-precategory-Category C x y)
+      ( is-category-Category C x y)
       ( is-set-iso-Precategory (precategory-Category C) x y)
 
   obj-Category-1-Type : 1-Type l1

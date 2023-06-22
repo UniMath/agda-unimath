@@ -95,5 +95,5 @@ Set-Category = category-Large-Category Set-Large-Category
 is-category-Set-Precategory :
   (l : Level) → is-category-Precategory (Set-Precategory l)
 is-category-Set-Precategory l =
-  is-category-precategory-Category (Set-Category l)
+  is-category-Category (Set-Category l)
 ```
