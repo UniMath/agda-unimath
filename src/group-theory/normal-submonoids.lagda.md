@@ -264,7 +264,8 @@ module _
     is-transitive sim-congruence-Normal-Submonoid
   transitive-congruence-Normal-Submonoid _ _ _ H K u v = (H u v) ∘iff (K u v)
 
-  eq-rel-congruence-Normal-Submonoid : Eq-Relation (l1 ⊔ l2) (type-Monoid M)
+  eq-rel-congruence-Normal-Submonoid :
+    Equivalence-Relation (l1 ⊔ l2) (type-Monoid M)
   pr1 eq-rel-congruence-Normal-Submonoid = rel-congruence-Normal-Submonoid
   pr1 (pr2 eq-rel-congruence-Normal-Submonoid) =
     refl-congruence-Normal-Submonoid

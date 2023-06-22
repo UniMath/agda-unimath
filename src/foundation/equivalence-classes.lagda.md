@@ -51,12 +51,12 @@ of the set quotient.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-equivalence-class-Prop : subtype l2 A → Prop (l1 ⊔ l2)
   is-equivalence-class-Prop P =
-    ∃-Prop A (λ x → has-same-elements-subtype P (prop-Eq-Relation R x))
+    ∃-Prop A (λ x → has-same-elements-subtype P (prop-Equivalence-Relation R x))
 
   is-equivalence-class : subtype l2 A → UU (l1 ⊔ l2)
   is-equivalence-class P = type-Prop (is-equivalence-class-Prop P)
@@ -70,9 +70,9 @@ module _
 ### The condition on inhabited subtypes of `A` of being an equivalence class
 
 ```agda
-  is-equivalence-class-inhabited-subtype-Eq-Relation :
+  is-equivalence-class-inhabited-subtype-Equivalence-Relation :
     subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
-  is-equivalence-class-inhabited-subtype-Eq-Relation Q =
+  is-equivalence-class-inhabited-subtype-Equivalence-Relation Q =
     is-equivalence-class-Prop (subtype-inhabited-subtype Q)
 ```
 
@@ -83,9 +83,10 @@ module _
   equivalence-class = type-subtype is-equivalence-class-Prop
 
   class : A → equivalence-class
-  pr1 (class x) = prop-Eq-Relation R x
+  pr1 (class x) = prop-Equivalence-Relation R x
   pr2 (class x) =
-    unit-trunc-Prop (x , refl-has-same-elements-subtype (prop-Eq-Relation R x))
+    unit-trunc-Prop
+      ( x , refl-has-same-elements-subtype (prop-Equivalence-Relation R x))
 
   emb-equivalence-class : equivalence-class ↪ subtype l2 A
   emb-equivalence-class = emb-subtype is-equivalence-class-Prop
@@ -106,7 +107,9 @@ module _
       ( λ u →
         unit-trunc-Prop
           ( pr1 u ,
-            backward-implication (pr2 u (pr1 u)) (refl-Eq-Relation R (pr1 u))))
+            backward-implication
+              ( pr2 u (pr1 u))
+              ( refl-Equivalence-Relation R (pr1 u))))
 
   inhabited-subtype-equivalence-class :
     (C : equivalence-class) → inhabited-subtype l2 A
@@ -138,7 +141,7 @@ module _
   pr2 equivalence-class-Set = is-set-equivalence-class
 
   unit-im-equivalence-class :
-    hom-slice (prop-Eq-Relation R) subtype-equivalence-class
+    hom-slice (prop-Equivalence-Relation R) subtype-equivalence-class
   pr1 unit-im-equivalence-class = class
   pr2 unit-im-equivalence-class x = refl
 
@@ -152,19 +155,19 @@ module _
               ( is-equivalence-class-Prop)
               ( eq-has-same-elements-subtype
                 ( pr1 C)
-                ( prop-Eq-Relation R x)
+                ( prop-Equivalence-Relation R x)
                 ( p)))))
       ( pr2 C)
 
   is-image-equivalence-class :
     {l : Level} →
     is-image l
-      ( prop-Eq-Relation R)
+      ( prop-Equivalence-Relation R)
       ( emb-equivalence-class)
       ( unit-im-equivalence-class)
   is-image-equivalence-class =
     is-image-is-surjective
-      ( prop-Eq-Relation R)
+      ( prop-Equivalence-Relation R)
       ( emb-equivalence-class)
       ( unit-im-equivalence-class)
       ( is-surjective-class)
@@ -178,7 +181,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   has-same-elements-equivalence-class :
@@ -238,7 +241,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   share-common-element-equivalence-class-Prop :
@@ -267,14 +270,14 @@ module _
             ( λ x →
               logical-equivalence-reasoning
                 is-in-equivalence-class R C x
-                  ↔ sim-Eq-Relation R v x
+                  ↔ sim-Equivalence-Relation R v x
                     by φ x
-                  ↔ sim-Eq-Relation R a x
-                    by iff-transitive-Eq-Relation R
-                        ( symmetric-Eq-Relation
+                  ↔ sim-Equivalence-Relation R a x
+                    by iff-transitive-Equivalence-Relation R
+                        ( symmetric-Equivalence-Relation
                             R _ _ (forward-implication (φ a) c))
-                  ↔ sim-Eq-Relation R w x
-                    by iff-transitive-Eq-Relation R
+                  ↔ sim-Equivalence-Relation R w x
+                    by iff-transitive-Equivalence-Relation R
                         ( forward-implication (ψ a) d)
                   ↔ is-in-equivalence-class R D x
                     by inv-iff (ψ x)))
@@ -286,20 +289,20 @@ module _
     eq-share-common-element-equivalence-class
       ( class R a)
       ( C)
-      ( unit-trunc-Prop (a , refl-Eq-Relation R a , H))
+      ( unit-trunc-Prop (a , refl-Equivalence-Relation R a , H))
 ```
 
 ### The type of equivalence classes containing a fixed element `a : A` is contractible
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A) (a : A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A) (a : A)
   where
 
   center-total-is-in-equivalence-class :
     Σ (equivalence-class R) (λ P → is-in-equivalence-class R P a)
   pr1 center-total-is-in-equivalence-class = class R a
-  pr2 center-total-is-in-equivalence-class = refl-Eq-Relation R a
+  pr2 center-total-is-in-equivalence-class = refl-Equivalence-Relation R a
 
   contraction-total-is-in-equivalence-class :
     ( t :
@@ -324,7 +327,7 @@ module _
     (q : equivalence-class R) → class R a ＝ q →
     is-in-equivalence-class R q a
   is-in-equivalence-class-eq-equivalence-class .(class R a) refl =
-    refl-Eq-Relation R a
+    refl-Equivalence-Relation R a
 
   abstract
     is-equiv-is-in-equivalence-class-eq-equivalence-class :
@@ -340,7 +343,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   abstract
@@ -365,17 +368,18 @@ module _
     is-effective-class :
       is-effective R (class R)
     is-effective-class x y =
-      ( equiv-symmetric-Eq-Relation R) ∘e ( effective-quotient' x (class R y))
+      ( equiv-symmetric-Equivalence-Relation R) ∘e
+      ( effective-quotient' x (class R y))
 
   abstract
     apply-effectiveness-class :
-      {x y : A} → class R x ＝ class R y → sim-Eq-Relation R x y
+      {x y : A} → class R x ＝ class R y → sim-Equivalence-Relation R x y
     apply-effectiveness-class {x} {y} =
       map-equiv (is-effective-class x y)
 
   abstract
     apply-effectiveness-class' :
-      {x y : A} → sim-Eq-Relation R x y → class R x ＝ class R y
+      {x y : A} → sim-Equivalence-Relation R x y → class R x ＝ class R y
     apply-effectiveness-class' {x} {y} =
       map-inv-equiv (is-effective-class x y)
 ```
@@ -384,7 +388,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-surjective-and-effective-class :
@@ -399,11 +403,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   quotient-reflecting-map-equivalence-class :
-    reflecting-map-Eq-Relation R (equivalence-class R)
+    reflecting-map-Equivalence-Relation R (equivalence-class R)
   pr1 quotient-reflecting-map-equivalence-class =
     class R
   pr2 quotient-reflecting-map-equivalence-class =
@@ -412,12 +416,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   transitive-is-in-equivalence-class :
     (P : equivalence-class R) (a b : A) →
-    is-in-equivalence-class R P a → sim-Eq-Relation R a b →
+    is-in-equivalence-class R P a → sim-Equivalence-Relation R a b →
     is-in-equivalence-class R P b
   transitive-is-in-equivalence-class P a b p r =
     apply-universal-property-trunc-Prop
@@ -426,14 +430,16 @@ module _
       ( λ (x , H) →
         backward-implication
           ( H b)
-          ( transitive-Eq-Relation R _ a b r (forward-implication (H a) p)))
+          ( transitive-Equivalence-Relation R _ a b
+            ( r)
+            ( forward-implication (H a) p)))
 ```
 
 ### The type of equivalence classes is locally small
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-locally-small-equivalence-class :
@@ -451,7 +457,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-small-equivalence-class : is-small (l1 ⊔ l2) (equivalence-class R)

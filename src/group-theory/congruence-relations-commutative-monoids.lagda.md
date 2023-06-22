@@ -32,19 +32,19 @@ the underlying monoid of `M`.
 ```agda
 is-congruence-commutative-monoid-Prop :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
-  Eq-Relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
+  Equivalence-Relation l2 (type-Commutative-Monoid M) → Prop (l1 ⊔ l2)
 is-congruence-commutative-monoid-Prop M =
   is-congruence-monoid-Prop (monoid-Commutative-Monoid M)
 
 is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1) →
-  Eq-Relation l2 (type-Commutative-Monoid M) → UU (l1 ⊔ l2)
+  Equivalence-Relation l2 (type-Commutative-Monoid M) → UU (l1 ⊔ l2)
 is-congruence-Commutative-Monoid M =
   is-congruence-Monoid (monoid-Commutative-Monoid M)
 
 is-prop-is-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
-  (R : Eq-Relation l2 (type-Commutative-Monoid M)) →
+  (R : Equivalence-Relation l2 (type-Commutative-Monoid M)) →
   is-prop (is-congruence-Commutative-Monoid M R)
 is-prop-is-congruence-Commutative-Monoid M =
   is-prop-is-congruence-Monoid (monoid-Commutative-Monoid M)
@@ -60,7 +60,7 @@ module _
   where
 
   eq-rel-congruence-Commutative-Monoid :
-    Eq-Relation l2 (type-Commutative-Monoid M)
+    Equivalence-Relation l2 (type-Commutative-Monoid M)
   eq-rel-congruence-Commutative-Monoid =
     eq-rel-congruence-Monoid (monoid-Commutative-Monoid M) R
 

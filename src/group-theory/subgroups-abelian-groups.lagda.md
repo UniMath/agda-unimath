@@ -465,7 +465,7 @@ module _
 
 ```agda
   left-eq-rel-congruence-Subgroup-Ab :
-    Eq-Relation l2 (type-Ab A)
+    Equivalence-Relation l2 (type-Ab A)
   left-eq-rel-congruence-Subgroup-Ab =
     left-eq-rel-congruence-Normal-Subgroup
       ( group-Ab A)
@@ -525,14 +525,14 @@ module _
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  eq-rel-congruence-Subgroup-Ab : Eq-Relation l2 (type-Ab A)
+  eq-rel-congruence-Subgroup-Ab : Equivalence-Relation l2 (type-Ab A)
   eq-rel-congruence-Subgroup-Ab =
     eq-rel-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
   relate-same-elements-left-sim-congruence-Subgroup-Ab :
-    relate-same-elements-Eq-Relation
+    relate-same-elements-Equivalence-Relation
       ( eq-rel-congruence-Subgroup-Ab)
       ( left-eq-rel-congruence-Subgroup-Ab)
   relate-same-elements-left-sim-congruence-Subgroup-Ab =

@@ -125,13 +125,13 @@ module _
   is-set-pretype-obj-left-adjoint-subst-Abstract-Group-Action X =
     is-set-type-Set (preset-obj-left-adjoint-subst-Abstract-Group-Action X)
 
-  Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action :
+  Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} (X : Abstract-Group-Action G l3) →
-    Eq-Relation
+    Equivalence-Relation
       ( l1 ⊔ l2 ⊔ l3)
       ( pretype-obj-left-adjoint-subst-Abstract-Group-Action X)
   pr1
-    ( Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
+    ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
     ( h , x)
     ( h' , x') =
     ∃-Prop
@@ -140,7 +140,7 @@ module _
         ( Id (mul-Group H (map-hom-Group G H f g) h) h') ×
         ( Id (mul-Abstract-Group-Action G X g x) x'))
   pr1
-    ( pr2 (Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X))
+    ( pr2 (Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X))
     ( h , x) =
     intro-∃
       ( unit-Group G)
@@ -149,11 +149,13 @@ module _
           ( left-unit-law-mul-Group H h))
         ( preserves-unit-mul-Abstract-Group-Action G X x))
   pr1
-    ( pr2 (pr2 (Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)))
+    ( pr2
+      ( pr2
+        ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)))
     ( h , x) (h' , x') e =
     apply-universal-property-trunc-Prop e
       ( pr1
-        ( Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
+        ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
         ( h' , x')
         ( h , x))
       ( λ { (g , p , q) →
@@ -165,17 +167,21 @@ module _
                     ( preserves-inv-hom-Group G H f g)) ∙
                   ( inv (transpose-eq-mul-Group' H p)))
                 ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
-  pr2 (pr2 (pr2 (Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)))
+  pr2
+    ( pr2
+      ( pr2
+        ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)))
     ( h , x) (h' , x') (h'' , x'') d e =
     apply-universal-property-trunc-Prop e
       ( pr1
-        ( Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
+        ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
         ( h , x)
         ( h'' , x''))
       ( λ { (g , p , q) →
             apply-universal-property-trunc-Prop d
               ( pr1
-                ( Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
+                ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action
+                  ( X))
                 ( h , x)
                 ( h'' , x''))
               ( λ { (g' , p' , q') →
@@ -199,7 +205,7 @@ module _
     Set (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
   set-left-adjoint-subst-Abstract-Group-Action X =
     equivalence-class-Set
-      ( Eq-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
+      ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
 
 {-
   obj-left-adjoint-subst-Abstract-Group-Action :

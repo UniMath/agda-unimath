@@ -97,22 +97,23 @@ module _
           ( vec-type-quotient-vec-type-Algebra v))
       ( pr2 (equivalence-class-set-quotient-Algebra x))
 
-  relation-holds-all-vec-all-sim-Eq-Relation :
+  relation-holds-all-vec-all-sim-Equivalence-Relation :
     { n : ℕ}
     ( v v' : multivariable-input n ( λ _ → type-Algebra Sg Th Alg)) →
     ( type-Prop
-      ( prop-Eq-Relation
-        ( all-sim-Eq-Relation n
+      ( prop-Equivalence-Relation
+        ( all-sim-Equivalence-Relation n
           ( λ _ → type-Algebra Sg Th Alg)
           ( λ _ → eq-rel-congruence-Algebra Sg Th Alg R)) v v')) →
     relation-holds-all-vec Sg Th Alg
       ( eq-rel-congruence-Algebra Sg Th Alg R)
       ( vector-multivariable-input n (type-Algebra Sg Th Alg) v)
       ( vector-multivariable-input n (type-Algebra Sg Th Alg) v')
-  relation-holds-all-vec-all-sim-Eq-Relation {zero-ℕ} v v' p = raise-star
-  relation-holds-all-vec-all-sim-Eq-Relation
+  relation-holds-all-vec-all-sim-Equivalence-Relation {zero-ℕ} v v' p =
+    raise-star
+  relation-holds-all-vec-all-sim-Equivalence-Relation
     {succ-ℕ n} (x , v) (x' , v') (p , p') =
-    p , (relation-holds-all-vec-all-sim-Eq-Relation v v' p')
+    p , (relation-holds-all-vec-all-sim-Equivalence-Relation v v' p')
 
   is-model-set-quotient-Algebra :
     is-model-signature Sg set-quotient-Algebra
@@ -139,7 +140,7 @@ module _
               ( arity-operation-signature Sg op)
               ( type-Algebra Sg Th Alg)
               ( v'))
-            (relation-holds-all-vec-all-sim-Eq-Relation v v' p)))
+            (relation-holds-all-vec-all-sim-Equivalence-Relation v v' p)))
       ( multivariable-input-vector
         ( arity-operation-signature Sg op)
         ( type-quotient-Algebra)

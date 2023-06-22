@@ -82,7 +82,7 @@ module _
     is-saturated-congruence-Monoid M congruence-saturated-congruence-Monoid
   is-saturated-saturated-congruence-Monoid = pr2 R
 
-  eq-rel-saturated-congruence-Monoid : Eq-Relation l2 (type-Monoid M)
+  eq-rel-saturated-congruence-Monoid : Equivalence-Relation l2 (type-Monoid M)
   eq-rel-saturated-congruence-Monoid =
     eq-rel-congruence-Monoid M congruence-saturated-congruence-Monoid
 

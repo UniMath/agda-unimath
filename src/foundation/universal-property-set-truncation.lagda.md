@@ -190,7 +190,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     ( {l : Level} →
       is-set-quotient l
-        ( mere-eq-Eq-Relation A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)) →
     is-set-truncation l3 B f
@@ -198,7 +198,7 @@ abstract
     is-equiv-comp
       ( pr1)
       ( precomp-Set-Quotient
-        ( mere-eq-Eq-Relation A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
@@ -206,7 +206,8 @@ abstract
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Eq-Relation (mere-eq-Eq-Relation A) X h)
+            ( is-prop-reflects-Equivalence-Relation
+              ( mere-eq-Equivalence-Relation A) X h)
             ( reflects-mere-eq X h)))
 ```
 
@@ -217,19 +218,23 @@ abstract
   is-set-quotient-is-set-truncation :
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     ( {l : Level} → is-set-truncation l B f) →
-    is-set-quotient l3 (mere-eq-Eq-Relation A) B (reflecting-map-mere-eq B f)
+    is-set-quotient l3
+      ( mere-eq-Equivalence-Relation A)
+      ( B)
+      ( reflecting-map-mere-eq B f)
   is-set-quotient-is-set-truncation {A = A} B f H X =
     is-equiv-right-factor
       ( pr1)
       ( precomp-Set-Quotient
-        ( mere-eq-Eq-Relation A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Eq-Relation (mere-eq-Eq-Relation A) X h)
+            ( is-prop-reflects-Equivalence-Relation
+              ( mere-eq-Equivalence-Relation A) X h)
             ( reflects-mere-eq X h)))
       ( H X)
 ```

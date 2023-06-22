@@ -34,7 +34,7 @@ such that for every `x1 x2 y1 y2 : G` such that `x1 ≡ x2` and `y1 ≡ y2` we h
 ```agda
 is-congruence-semigroup-Prop :
   {l1 l2 : Level} (G : Semigroup l1) →
-  Eq-Relation l2 (type-Semigroup G) → Prop (l1 ⊔ l2)
+  Equivalence-Relation l2 (type-Semigroup G) → Prop (l1 ⊔ l2)
 is-congruence-semigroup-Prop G R =
   Π-Prop'
     ( type-Semigroup G)
@@ -49,21 +49,22 @@ is-congruence-semigroup-Prop G R =
                 ( type-Semigroup G)
                 ( λ y2 →
                   function-Prop
-                    ( sim-Eq-Relation R x1 x2)
+                    ( sim-Equivalence-Relation R x1 x2)
                     ( function-Prop
-                      ( sim-Eq-Relation R y1 y2)
-                      ( prop-Eq-Relation R
+                      ( sim-Equivalence-Relation R y1 y2)
+                      ( prop-Equivalence-Relation R
                         ( mul-Semigroup G x1 y1)
                         ( mul-Semigroup G x2 y2)))))))
 
 is-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) →
-  Eq-Relation l2 (type-Semigroup G) → UU (l1 ⊔ l2)
+  Equivalence-Relation l2 (type-Semigroup G) → UU (l1 ⊔ l2)
 is-congruence-Semigroup G R =
   type-Prop (is-congruence-semigroup-Prop G R)
 
 is-prop-is-congruence-Semigroup :
-  {l1 l2 : Level} (G : Semigroup l1) (R : Eq-Relation l2 (type-Semigroup G)) →
+  {l1 l2 : Level} (G : Semigroup l1)
+  (R : Equivalence-Relation l2 (type-Semigroup G)) →
   is-prop (is-congruence-Semigroup G R)
 is-prop-is-congruence-Semigroup G R =
   is-prop-type-Prop (is-congruence-semigroup-Prop G R)
@@ -71,45 +72,48 @@ is-prop-is-congruence-Semigroup G R =
 congruence-Semigroup :
   {l : Level} (l2 : Level) (G : Semigroup l) → UU (l ⊔ lsuc l2)
 congruence-Semigroup l2 G =
-  Σ (Eq-Relation l2 (type-Semigroup G)) (is-congruence-Semigroup G)
+  Σ (Equivalence-Relation l2 (type-Semigroup G)) (is-congruence-Semigroup G)
 
 module _
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G)
   where
 
-  eq-rel-congruence-Semigroup : Eq-Relation l2 (type-Semigroup G)
+  eq-rel-congruence-Semigroup : Equivalence-Relation l2 (type-Semigroup G)
   eq-rel-congruence-Semigroup = pr1 R
 
   prop-congruence-Semigroup : Relation-Prop l2 (type-Semigroup G)
-  prop-congruence-Semigroup = prop-Eq-Relation eq-rel-congruence-Semigroup
+  prop-congruence-Semigroup =
+    prop-Equivalence-Relation eq-rel-congruence-Semigroup
 
   sim-congruence-Semigroup : (x y : type-Semigroup G) → UU l2
-  sim-congruence-Semigroup = sim-Eq-Relation eq-rel-congruence-Semigroup
+  sim-congruence-Semigroup =
+    sim-Equivalence-Relation eq-rel-congruence-Semigroup
 
   is-prop-sim-congruence-Semigroup :
     (x y : type-Semigroup G) → is-prop (sim-congruence-Semigroup x y)
   is-prop-sim-congruence-Semigroup =
-    is-prop-sim-Eq-Relation eq-rel-congruence-Semigroup
+    is-prop-sim-Equivalence-Relation eq-rel-congruence-Semigroup
 
   refl-congruence-Semigroup :
     is-reflexive-Relation-Prop prop-congruence-Semigroup
-  refl-congruence-Semigroup = refl-Eq-Relation eq-rel-congruence-Semigroup
+  refl-congruence-Semigroup =
+    refl-Equivalence-Relation eq-rel-congruence-Semigroup
 
   symmetric-congruence-Semigroup :
     is-symmetric-Relation-Prop prop-congruence-Semigroup
   symmetric-congruence-Semigroup =
-    symmetric-Eq-Relation eq-rel-congruence-Semigroup
+    symmetric-Equivalence-Relation eq-rel-congruence-Semigroup
 
   equiv-symmetric-congruence-Semigroup :
     (x y : type-Semigroup G) →
     sim-congruence-Semigroup x y ≃ sim-congruence-Semigroup y x
   equiv-symmetric-congruence-Semigroup x y =
-    equiv-symmetric-Eq-Relation eq-rel-congruence-Semigroup
+    equiv-symmetric-Equivalence-Relation eq-rel-congruence-Semigroup
 
   transitive-congruence-Semigroup :
     is-transitive-Relation-Prop prop-congruence-Semigroup
   transitive-congruence-Semigroup =
-    transitive-Eq-Relation eq-rel-congruence-Semigroup
+    transitive-Equivalence-Relation eq-rel-congruence-Semigroup
 
   mul-congruence-Semigroup :
     is-congruence-Semigroup G eq-rel-congruence-Semigroup
@@ -125,7 +129,7 @@ relate-same-elements-congruence-Semigroup :
   {l1 l2 l3 : Level} (G : Semigroup l1) →
   congruence-Semigroup l2 G → congruence-Semigroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
 relate-same-elements-congruence-Semigroup G R S =
-  relate-same-elements-Eq-Relation
+  relate-same-elements-Equivalence-Relation
     ( eq-rel-congruence-Semigroup G R)
     ( eq-rel-congruence-Semigroup G S)
 
@@ -133,7 +137,8 @@ refl-relate-same-elements-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G) →
   relate-same-elements-congruence-Semigroup G R R
 refl-relate-same-elements-congruence-Semigroup G R =
-  refl-relate-same-elements-Eq-Relation (eq-rel-congruence-Semigroup G R)
+  refl-relate-same-elements-Equivalence-Relation
+    ( eq-rel-congruence-Semigroup G R)
 
 is-contr-total-relate-same-elements-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G) →
@@ -142,7 +147,7 @@ is-contr-total-relate-same-elements-congruence-Semigroup :
         ( relate-same-elements-congruence-Semigroup G R))
 is-contr-total-relate-same-elements-congruence-Semigroup G R =
   is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-Eq-Relation
+    ( is-contr-total-relate-same-elements-Equivalence-Relation
       ( eq-rel-congruence-Semigroup G R))
     ( is-prop-is-congruence-Semigroup G)
     ( eq-rel-congruence-Semigroup G R)

@@ -42,7 +42,7 @@ open import foundation-core.subtypes
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   set-quotient : UU (l1 ⊔ l2)
@@ -131,7 +131,7 @@ module _
   pr2 quotient-Set = is-set-set-quotient
 
   unit-im-set-quotient :
-    hom-slice (prop-Eq-Relation R) subtype-set-quotient
+    hom-slice (prop-Equivalence-Relation R) subtype-set-quotient
   pr1 unit-im-set-quotient = quotient-map
   pr2 unit-im-set-quotient =
     ( ( subtype-equivalence-class R) ·l
@@ -141,12 +141,12 @@ module _
   is-image-set-quotient :
     {l : Level} →
     is-image l
-      ( prop-Eq-Relation R)
+      ( prop-Equivalence-Relation R)
       ( emb-subtype-set-quotient)
       ( unit-im-set-quotient)
   is-image-set-quotient =
     is-image-is-surjective
-      ( prop-Eq-Relation R)
+      ( prop-Equivalence-Relation R)
       ( emb-subtype-set-quotient)
       ( unit-im-set-quotient)
       ( is-surjective-quotient-map)
@@ -156,7 +156,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-effective-quotient-map : is-effective R (quotient-map R)
@@ -176,17 +176,21 @@ module _
         ( equiv-concat'
           ( class R x)
           ( is-retraction-equivalence-class-set-quotient R (class R y)))
-      ≃ ( sim-Eq-Relation R x y)
+      ≃ ( sim-Equivalence-Relation R x y)
         by
         ( is-effective-class R x y)
 
   apply-effectiveness-quotient-map :
-    {x y : A} → quotient-map R x ＝ quotient-map R y → sim-Eq-Relation R x y
+    {x y : A} →
+    quotient-map R x ＝ quotient-map R y →
+    sim-Equivalence-Relation R x y
   apply-effectiveness-quotient-map {x} {y} =
     map-equiv (is-effective-quotient-map x y)
 
   apply-effectiveness-quotient-map' :
-    {x y : A} → sim-Eq-Relation R x y → quotient-map R x ＝ quotient-map R y
+    {x y : A} →
+    sim-Equivalence-Relation R x y →
+    quotient-map R x ＝ quotient-map R y
   apply-effectiveness-quotient-map' {x} {y} =
     map-inv-equiv (is-effective-quotient-map x y)
 
@@ -196,7 +200,7 @@ module _
   pr2 is-surjective-and-effective-quotient-map = is-effective-quotient-map
 
   reflecting-map-quotient-map :
-    reflecting-map-Eq-Relation R (set-quotient R)
+    reflecting-map-Equivalence-Relation R (set-quotient R)
   pr1 reflecting-map-quotient-map = quotient-map R
   pr2 reflecting-map-quotient-map = apply-effectiveness-quotient-map'
 ```
@@ -205,7 +209,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-set-quotient-set-quotient :
@@ -220,7 +224,7 @@ module _
   inv-precomp-set-quotient :
     {l : Level} →
     (X : Set l) →
-    reflecting-map-Eq-Relation R (type-Set X) →
+    reflecting-map-Equivalence-Relation R (type-Set X) →
     (type-hom-Set (quotient-Set R) X)
   inv-precomp-set-quotient X =
     pr1 (pr1 (is-set-quotient-set-quotient X))
@@ -228,14 +232,14 @@ module _
   is-section-inv-precomp-set-quotient :
     {l : Level} →
     (X : Set l) →
-    (f : reflecting-map-Eq-Relation R (type-Set X)) →
+    (f : reflecting-map-Equivalence-Relation R (type-Set X)) →
     (a : A) →
     inv-precomp-set-quotient X f (quotient-map R a) ＝
-      map-reflecting-map-Eq-Relation R f a
+      map-reflecting-map-Equivalence-Relation R f a
   is-section-inv-precomp-set-quotient X f =
     htpy-eq
       ( ap
-        ( map-reflecting-map-Eq-Relation R)
+        ( map-reflecting-map-Equivalence-Relation R)
         ( is-section-map-inv-is-equiv
           ( is-set-quotient-set-quotient X)
           ( f)))
@@ -261,7 +265,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   equiv-induction-set-quotient :
@@ -288,7 +292,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} (R : Eq-Relation l2 A) {B : UU l3} (S : Eq-Relation l4 B)
+  {A : UU l1} (R : Equivalence-Relation l2 A)
+  {B : UU l3} (S : Equivalence-Relation l4 B)
   (P : set-quotient R → set-quotient S → Prop l5)
   where
 
@@ -315,7 +320,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   (P : (x y : set-quotient R) → Prop l3)
   where
 
@@ -340,8 +345,9 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 l6 l7 : Level}
-  {A : UU l1} (R : Eq-Relation l2 A) {B : UU l3} (S : Eq-Relation l4 B)
-  {C : UU l5} (T : Eq-Relation l6 C)
+  {A : UU l1} (R : Equivalence-Relation l2 A)
+  {B : UU l3} (S : Equivalence-Relation l4 B)
+  {C : UU l5} (T : Equivalence-Relation l6 C)
   (P : set-quotient R → set-quotient S → set-quotient T → Prop l7)
   where
 
@@ -378,7 +384,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   (P : (x y z : set-quotient R) → Prop l3)
   where
 
@@ -405,8 +411,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Eq-Relation l2 A)
-  (B : Set l3) (f : reflecting-map-Eq-Relation R (type-Set B))
+  {l1 l2 l3 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
+  (B : Set l3) (f : reflecting-map-Equivalence-Relation R (type-Set B))
   (Uf : {l : Level} → is-set-quotient l R B f)
   where
 

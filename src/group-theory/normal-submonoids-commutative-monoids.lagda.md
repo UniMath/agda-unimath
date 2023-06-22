@@ -307,7 +307,7 @@ module _
     (H u) ∘iff (K u)
 
   eq-rel-congruence-Normal-Commutative-Submonoid :
-    Eq-Relation (l1 ⊔ l2) (type-Commutative-Monoid M)
+    Equivalence-Relation (l1 ⊔ l2) (type-Commutative-Monoid M)
   pr1 eq-rel-congruence-Normal-Commutative-Submonoid =
     rel-congruence-Normal-Commutative-Submonoid
   pr1 (pr2 eq-rel-congruence-Normal-Commutative-Submonoid) =

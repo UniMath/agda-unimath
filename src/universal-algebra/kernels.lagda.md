@@ -55,7 +55,7 @@ module _
     is-set-Algebra Sg Th Alg2 _ _
 
   eq-rel-kernel-hom-Algebra :
-    Eq-Relation l4 (type-Algebra Sg Th Alg1)
+    Equivalence-Relation l4 (type-Algebra Sg Th Alg1)
   pr1 eq-rel-kernel-hom-Algebra =
     rel-prop-kernel-hom-Algebra
   pr1 (pr2 eq-rel-kernel-hom-Algebra) _ = refl

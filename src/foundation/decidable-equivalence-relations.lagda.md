@@ -60,10 +60,10 @@ A decidable equivalence relation on a type `X` is an equivalence relation `R` on
 ### Decidable equivalence relations
 
 ```agda
-is-decidable-Eq-Relation :
-  {l1 l2 : Level} → {A : UU l1} → Eq-Relation l2 A → UU (l1 ⊔ l2)
-is-decidable-Eq-Relation {A = A} R =
-  (x y : A) → is-decidable ( sim-Eq-Relation R x y)
+is-decidable-Equivalence-Relation :
+  {l1 l2 : Level} → {A : UU l1} → Equivalence-Relation l2 A → UU (l1 ⊔ l2)
+is-decidable-Equivalence-Relation {A = A} R =
+  (x y : A) → is-decidable ( sim-Equivalence-Relation R x y)
 
 Decidable-Equivalence-Relation :
   {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
@@ -104,7 +104,8 @@ module _
     is-equivalence-relation relation-Decidable-Equivalence-Relation
   is-equivalence-relation-Decidable-Equivalence-Relation = pr2 R
 
-  equivalence-relation-Decidable-Equivalence-Relation : Eq-Relation l2 X
+  equivalence-relation-Decidable-Equivalence-Relation :
+    Equivalence-Relation l2 X
   pr1 equivalence-relation-Decidable-Equivalence-Relation =
     relation-Decidable-Equivalence-Relation
   pr2 equivalence-relation-Decidable-Equivalence-Relation =
@@ -113,12 +114,14 @@ module _
   refl-Decidable-Equivalence-Relation :
     is-reflexive sim-Decidable-Equivalence-Relation
   refl-Decidable-Equivalence-Relation =
-    refl-Eq-Relation equivalence-relation-Decidable-Equivalence-Relation
+    refl-Equivalence-Relation
+      equivalence-relation-Decidable-Equivalence-Relation
 
   symmetric-Decidable-Equivalence-Relation :
     is-symmetric sim-Decidable-Equivalence-Relation
   symmetric-Decidable-Equivalence-Relation =
-    symmetric-Eq-Relation equivalence-relation-Decidable-Equivalence-Relation
+    symmetric-Equivalence-Relation
+      equivalence-relation-Decidable-Equivalence-Relation
 
   equiv-symmetric-Decidable-Equivalence-Relation :
     {x y : X} →
@@ -134,23 +137,24 @@ module _
   transitive-Decidable-Equivalence-Relation :
     is-transitive sim-Decidable-Equivalence-Relation
   transitive-Decidable-Equivalence-Relation =
-    transitive-Eq-Relation equivalence-relation-Decidable-Equivalence-Relation
+    transitive-Equivalence-Relation
+      equivalence-relation-Decidable-Equivalence-Relation
 
-equiv-equivalence-relation-is-decidable-Dec-Eq-Relation :
+equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation :
   {l1 l2 : Level} {X : UU l1} →
   Decidable-Equivalence-Relation l2 X ≃
-  Σ ( Eq-Relation l2 X)
-    ( λ R → is-decidable-Eq-Relation R)
-pr1 equiv-equivalence-relation-is-decidable-Dec-Eq-Relation R =
+  Σ ( Equivalence-Relation l2 X)
+    ( λ R → is-decidable-Equivalence-Relation R)
+pr1 equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation R =
   ( equivalence-relation-Decidable-Equivalence-Relation R ,
     is-decidable-sim-Decidable-Equivalence-Relation R)
-pr2 equiv-equivalence-relation-is-decidable-Dec-Eq-Relation =
+pr2 equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation =
   is-equiv-has-inverse
     ( λ (R , d) →
       ( map-inv-equiv
           ( equiv-relation-is-decidable-Decidable-Relation)
-          ( prop-Eq-Relation R , d) ,
-        is-equivalence-relation-prop-Eq-Relation R))
+          ( prop-Equivalence-Relation R , d) ,
+        is-equivalence-relation-prop-Equivalence-Relation R))
     ( refl-htpy)
     ( refl-htpy)
 ```
@@ -405,7 +409,7 @@ module _
   where
 
   quotient-reflecting-map-equivalence-class-Decidable-Equivalence-Relation :
-    reflecting-map-Eq-Relation
+    reflecting-map-Equivalence-Relation
       ( equivalence-relation-Decidable-Equivalence-Relation R)
       ( equivalence-class-Decidable-Equivalence-Relation R)
   pr1 quotient-reflecting-map-equivalence-class-Decidable-Equivalence-Relation =
@@ -451,11 +455,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Eq-Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
   where
 
   is-decidable-is-in-equivalence-class-is-decidable :
-    ((a b : A) → is-decidable (sim-Eq-Relation R a b)) →
+    ((a b : A) → is-decidable (sim-Equivalence-Relation R a b)) →
     (T : equivalence-class R) →
     (a : A) →
     is-decidable (is-in-equivalence-class R T a)
@@ -476,7 +480,7 @@ module _
 ```agda
 has-decidable-equality-type-Surjection-Into-Set :
   {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A) →
-  ( is-decidable-Eq-Relation (eq-rel-Surjection-Into-Set surj)) →
+  ( is-decidable-Equivalence-Relation (eq-rel-Surjection-Into-Set surj)) →
   has-decidable-equality (type-Surjection-Into-Set surj)
 has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
   apply-twice-dependent-universal-property-surj-is-surjective
@@ -489,11 +493,11 @@ has-decidable-equality-type-Surjection-Into-Set surj is-dec-rel x y =
     ( x)
     ( y)
 
-is-decidable-Eq-Relation-Surjection-Into-Set :
+is-decidable-Equivalence-Relation-Surjection-Into-Set :
   {l1 : Level} {A : UU l1} (surj : Surjection-Into-Set l1 A)→
   has-decidable-equality (type-Surjection-Into-Set surj) →
-  is-decidable-Eq-Relation (eq-rel-Surjection-Into-Set surj)
-is-decidable-Eq-Relation-Surjection-Into-Set surj dec-eq x y =
+  is-decidable-Equivalence-Relation (eq-rel-Surjection-Into-Set surj)
+is-decidable-Equivalence-Relation-Surjection-Into-Set surj dec-eq x y =
   dec-eq (map-Surjection-Into-Set surj x) (map-Surjection-Into-Set surj y)
 
 equiv-Surjection-Into-Set-Decidable-Equivalence-Relation :
@@ -528,16 +532,17 @@ equiv-Surjection-Into-Set-Decidable-Equivalence-Relation {l1} A =
                   is-prop-Π
                     ( λ y →
                       is-prop-is-decidable
-                        ( is-prop-sim-Eq-Relation
+                        ( is-prop-sim-Equivalence-Relation
                           ( eq-rel-Surjection-Into-Set surj)
                           ( x)
                           ( y)))))
             ( λ _ → is-prop-has-decidable-equality)
-            ( λ surj → has-decidable-equality-type-Surjection-Into-Set surj)
-            ( λ surj → is-decidable-Eq-Relation-Surjection-Into-Set surj)) ∘e
+            ( λ s → has-decidable-equality-type-Surjection-Into-Set s)
+            ( λ s → is-decidable-Equivalence-Relation-Surjection-Into-Set s)) ∘e
           ( ( inv-equiv
               ( equiv-Σ-equiv-base
-                ( λ R → is-decidable-Eq-Relation R)
-                ( inv-equiv (equiv-surjection-into-set-Eq-Relation A)))) ∘e
-                  equiv-equivalence-relation-is-decidable-Dec-Eq-Relation)))))
+                ( λ R → is-decidable-Equivalence-Relation R)
+                ( inv-equiv
+                  ( equiv-surjection-into-set-Equivalence-Relation A)))) ∘e
+                  equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation)))))
 ```

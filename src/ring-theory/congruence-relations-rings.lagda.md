@@ -40,7 +40,7 @@ module _
   is-congruence-Ring = is-congruence-Semiring (semiring-Ring R)
 
   is-congruence-eq-rel-Ring :
-    {l2 : Level} (S : Eq-Relation l2 (type-Ring R)) → UU (l1 ⊔ l2)
+    {l2 : Level} (S : Equivalence-Relation l2 (type-Ring R)) → UU (l1 ⊔ l2)
   is-congruence-eq-rel-Ring S =
     is-congruence-eq-rel-Semiring (semiring-Ring R) S
 
@@ -56,7 +56,7 @@ module _
   congruence-ab-congruence-Ring =
     congruence-additive-monoid-congruence-Semiring (semiring-Ring R) S
 
-  eq-rel-congruence-Ring : Eq-Relation l2 (type-Ring R)
+  eq-rel-congruence-Ring : Equivalence-Relation l2 (type-Ring R)
   eq-rel-congruence-Ring =
     eq-rel-congruence-Semiring (semiring-Ring R) S
 
@@ -172,7 +172,7 @@ module _
 
 construct-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) →
-  (S : Eq-Relation l2 (type-Ring R)) →
+  (S : Equivalence-Relation l2 (type-Ring R)) →
   is-congruence-Ab (ab-Ring R) S →
   is-congruence-Monoid (multiplicative-monoid-Ring R) S →
   congruence-Ring l2 R

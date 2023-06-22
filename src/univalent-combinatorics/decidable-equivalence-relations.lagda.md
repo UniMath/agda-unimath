@@ -86,7 +86,7 @@ module _
     is-equivalence-relation-Decidable-Equivalence-Relation R
 
   equivalence-relation-Decidable-Equivalence-Relation-𝔽 :
-    Eq-Relation l2 (type-𝔽 X)
+    Equivalence-Relation l2 (type-𝔽 X)
   equivalence-relation-Decidable-Equivalence-Relation-𝔽 =
     equivalence-relation-Decidable-Equivalence-Relation R
 
