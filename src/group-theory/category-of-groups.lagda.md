@@ -33,7 +33,7 @@ is-category-Group G =
 eq-iso-Group : {l : Level} (G H : Group l) → type-iso-Group G H → Id G H
 eq-iso-Group G H = map-inv-is-equiv (is-category-Group G H)
 
-Group-Large-Category : Large-Category lsuc (λ l1 l2 → l1 ⊔ l2)
+Group-Large-Category : Large-Category lsuc (_⊔_)
 large-precategory-Large-Category Group-Large-Category = Group-Large-Precategory
 is-category-Large-Category Group-Large-Category = is-category-Group
 ```
