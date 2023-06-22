@@ -109,34 +109,6 @@ module _
   is-category-Category = pr2 C
 ```
 
-## Examples
-
-### The category of sets and functions
-
-The precategory of sets and functions in a given universe is a category.
-
-```agda
-id-iso-Set : {l : Level} {x : Set l} → iso-Set x x
-id-iso-Set {l} {x} = id-iso-Precategory (Set-Precategory l) {x}
-
-iso-eq-Set : {l : Level} (x y : Set l) → x ＝ y → iso-Set x y
-iso-eq-Set {l} = iso-eq-Precategory (Set-Precategory l)
-
-is-category-Set-Precategory :
-  (l : Level) → is-category-Precategory (Set-Precategory l)
-is-category-Set-Precategory l x =
-  fundamental-theorem-id
-    ( is-contr-equiv'
-      ( Σ (Set l) (type-equiv-Set x))
-      ( equiv-tot (equiv-iso-equiv-Set x))
-      ( is-contr-total-equiv-Set x))
-    ( iso-eq-Set x)
-
-Set-Category : (l : Level) → Category (lsuc l) l
-pr1 (Set-Category l) = Set-Precategory l
-pr2 (Set-Category l) = is-category-Set-Precategory l
-```
-
 ## Properties
 
 ### The objects in a category form a 1-type

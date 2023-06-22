@@ -141,23 +141,6 @@ module _
   right-unit-law-comp-hom-Precategory = pr2 (pr2 is-unital-Precategory)
 ```
 
-## Examples
-
-### The category of sets and functions
-
-The precategory of sets and functions in a given universe.
-
-```agda
-Set-Precategory : (l : Level) → Precategory (lsuc l) l
-pr1 (Set-Precategory l) = Set l
-pr1 (pr2 (Set-Precategory l)) = hom-Set
-pr1 (pr1 (pr2 (pr2 (Set-Precategory l)))) g f = g ∘ f
-pr2 (pr1 (pr2 (pr2 (Set-Precategory l)))) h g f = refl
-pr1 (pr2 (pr2 (pr2 (Set-Precategory l)))) x = id
-pr1 (pr2 (pr2 (pr2 (pr2 (Set-Precategory l))))) f = refl
-pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precategory l))))) f = refl
-```
-
 ## Properties
 
 ### The property of having identity morphisms is a proposition

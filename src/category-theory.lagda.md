@@ -6,6 +6,7 @@
 | ---------- | ------------------------------------------------------------------------------- |
 | Groups     | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
 | Semigroups | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
+| Sets       | [`foundation.category-of-sets`](foundation.category-of-sets.md)                 |
 
 ## Examples of precategories and large precategories
 
