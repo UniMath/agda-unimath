@@ -7,6 +7,7 @@ module elementary-number-theory.congruence-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-integers
@@ -86,7 +87,7 @@ pr2 (symmetric-cong-ℤ k x y (pair d p)) =
     ( distributive-neg-diff-ℤ x y))
 
 transitive-cong-ℤ : (k : ℤ) → is-transitive (cong-ℤ k)
-pr1 (transitive-cong-ℤ k x y z  (pair e q) (pair d p)) = d +ℤ e
+pr1 (transitive-cong-ℤ k x y z (pair e q) (pair d p)) = d +ℤ e
 pr2 (transitive-cong-ℤ k x y z (pair e q) (pair d p)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙
@@ -151,6 +152,9 @@ cong-cong-int-ℕ k x y H =
       ( ap int-ℕ (dist-int-ℕ x y))
       ( div-sim-unit-ℤ
         ( refl-sim-unit-ℤ (int-ℕ k))
-        ( symmetric-sim-unit-ℤ (sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
+        ( symmetric-sim-unit-ℤ
+          ( int-abs-ℤ (int-ℕ x -ℤ int-ℕ y))
+          ( int-ℕ x -ℤ int-ℕ y)
+          ( sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
         ( H)))
 ```
