@@ -38,7 +38,10 @@ Below is a summary of the tasks this tool performs:
 - **Merge conflicts**: Checks for any merge conflict artifacts in the code.
 
 - **Markdown conventions**: Checks/enforces various of our conventions related
-  to markdown code.
+  to markdown code. This includes removing punctuation in section headers,
+  removing empty code blocks, ensuring that there is only one top-level header
+  and that this is placed on the first line of the file, and checking that no
+  section is void of contents.
 
 - **Blank line conventions**: Searches for and removes any double or multiple
   blank lines.
