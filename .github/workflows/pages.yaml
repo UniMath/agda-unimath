@@ -1,4 +1,4 @@
-name: formalization website
+name: Formalization website
 on:
   # To run this workflow manually
   workflow_dispatch:
