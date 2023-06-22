@@ -27,8 +27,7 @@ inherently interlinked, which we leverage in our formalization process.
 One critical aspect of maintaining such a large codebase lies in efficient and
 strategic code structuring, and continued refactoring, into small, reusable
 entries. In line with this approach, we aim to factor out and encapsulate even
-the tiniest bits of reusable logic or computation in their own definitions, in
-what may seem like an excessive manner to some.
+the tiniest bits of reusable logic or computation in their own definitions.
 
 Here are the benefits of this approach:
 
