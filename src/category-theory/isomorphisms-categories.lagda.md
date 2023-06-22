@@ -442,7 +442,7 @@ module _
   extensionality-obj-Category :
     (x y : obj-Category C) → (x ＝ y) ≃ iso-Category C x y
   pr1 (extensionality-obj-Category x y) = iso-eq-Category C
-  pr2 (extensionality-obj-Category x y) = is-category-Category C x y
+  pr2 (extensionality-obj-Category x y) = is-category-precategory-Category C x y
 
   eq-iso-Category :
     {x y : obj-Category C} → iso-Category C x y → x ＝ y

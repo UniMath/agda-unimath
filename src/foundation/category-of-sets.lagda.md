@@ -89,10 +89,11 @@ Set-Precategory = precategory-Large-Precategory Set-Large-Precategory
 The precategory of sets and functions in a given universe is a category.
 
 ```agda
-is-category-Set-Precategory :
-  (l : Level) → is-category-Precategory (Set-Precategory l)
-is-category-Set-Precategory l = is-category-Set-Large-Precategory
-
 Set-Category : (l : Level) → Category (lsuc l) l
 Set-Category = category-Large-Category Set-Large-Category
+
+is-category-Set-Precategory :
+  (l : Level) → is-category-Precategory (Set-Precategory l)
+is-category-Set-Precategory l =
+  is-category-precategory-Category (Set-Category l)
 ```

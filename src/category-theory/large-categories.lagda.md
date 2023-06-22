@@ -169,7 +169,12 @@ module _
 
   is-category-precategory-Large-Category :
     (l : Level) → is-category-Precategory (precategory-Large-Category l)
-  is-category-precategory-Large-Category = {! !}
+  is-category-precategory-Large-Category l X Y =
+    is-equiv-htpy
+      ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
+      ( htpy-iso-eq-precategory-Large-Precategory
+        ( large-precategory-Large-Category C) X Y)
+      (is-category-Large-Category C X Y)
 
   category-Large-Category : (l : Level) → Category (α l) (β l l)
   pr1 (category-Large-Category l) = precategory-Large-Category l
