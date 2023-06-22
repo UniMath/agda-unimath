@@ -61,9 +61,9 @@ iso-eq-Set :
   X ＝ Y → iso-Large-Precategory Set-Large-Precategory X Y
 iso-eq-Set = iso-eq-Large-Precategory Set-Large-Precategory
 
-is-category-Set-Large-Precategory :
-  is-category-Large-Precategory Set-Large-Precategory
-is-category-Set-Large-Precategory {l} X =
+is-large-category-Set-Large-Precategory :
+  is-large-category-Large-Precategory Set-Large-Precategory
+is-large-category-Set-Large-Precategory {l} X =
   fundamental-theorem-id
     ( is-contr-equiv'
       ( Σ (Set l) (type-equiv-Set X))
@@ -73,8 +73,8 @@ is-category-Set-Large-Precategory {l} X =
 
 Set-Large-Category : Large-Category lsuc (_⊔_)
 large-precategory-Large-Category Set-Large-Category = Set-Large-Precategory
-is-category-Large-Category Set-Large-Category =
-  is-category-Set-Large-Precategory
+is-large-category-Large-Category Set-Large-Category =
+  is-large-category-Set-Large-Precategory
 ```
 
 ### The precategory of small sets

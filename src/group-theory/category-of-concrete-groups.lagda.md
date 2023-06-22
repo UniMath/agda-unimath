@@ -18,6 +18,6 @@ module group-theory.category-of-concrete-groups where
 
 ```agda
 -- is-category-Concrete-Group-Large-Precategory :
---   is-category-Large-Precategory Concrete-Group-Large-Precategory
+--   is-large-category-Large-Precategory Concrete-Group-Large-Precategory
 --   is-category-Concrete-Group-Large-Precategory = {!!}
 ```

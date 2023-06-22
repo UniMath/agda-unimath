@@ -34,10 +34,10 @@ is a proposition.
 ## Definition
 
 ```agda
-is-category-Large-Precategory :
+is-large-category-Large-Precategory :
   {α : Level → Level} {β : Level → Level → Level} →
   (C : Large-Precategory α β) → UUω
-is-category-Large-Precategory C =
+is-large-category-Large-Precategory C =
   {l : Level} (X Y : obj-Large-Precategory C l) →
   is-equiv (iso-eq-Large-Precategory C X Y)
 
@@ -49,8 +49,8 @@ record
   field
     large-precategory-Large-Category :
       Large-Precategory α β
-    is-category-Large-Category :
-      is-category-Large-Precategory large-precategory-Large-Category
+    is-large-category-Large-Category :
+      is-large-category-Large-Precategory large-precategory-Large-Category
 
 open Large-Category public
 ```
@@ -167,16 +167,16 @@ module _
   precategory-Large-Category =
     precategory-Large-Precategory (large-precategory-Large-Category C)
 
-  is-category-precategory-Large-Category :
+  is-category-Large-Category :
     (l : Level) → is-category-Precategory (precategory-Large-Category l)
-  is-category-precategory-Large-Category l X Y =
+  is-category-Large-Category l X Y =
     is-equiv-htpy
       ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
-      ( htpy-iso-eq-precategory-Large-Precategory
+      ( htpy-iso-eq-Large-Precategory
         ( large-precategory-Large-Category C) X Y)
-      (is-category-Large-Category C X Y)
+      (is-large-category-Large-Category C X Y)
 
   category-Large-Category : (l : Level) → Category (α l) (β l l)
   pr1 (category-Large-Category l) = precategory-Large-Category l
-  pr2 (category-Large-Category l) = is-category-precategory-Large-Category l
+  pr2 (category-Large-Category l) = is-category-Large-Category l
 ```

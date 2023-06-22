@@ -122,13 +122,13 @@ iso-eq-Large-Precategory :
   X ＝ Y → iso-Large-Precategory C X Y
 iso-eq-Large-Precategory C X .X refl = id-iso-Large-Precategory C
 
-htpy-iso-eq-precategory-Large-Precategory :
+htpy-iso-eq-Large-Precategory :
   {α : Level → Level} {β : Level → Level → Level} →
   (C : Large-Precategory α β) {l1 : Level}
   (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
   iso-eq-Precategory (precategory-Large-Precategory C l1) X Y ~
   iso-eq-Large-Precategory C X Y
-htpy-iso-eq-precategory-Large-Precategory C X .X refl = refl
+htpy-iso-eq-Large-Precategory C X .X refl = refl
 ```
 
 ## Properties
