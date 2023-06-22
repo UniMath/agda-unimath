@@ -204,10 +204,10 @@ workflow.
 #### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
 The `agda-unimath` library includes [pre-commit](https://pre-commit.com/) hooks
-that enforce basic formatting rules. To utilize these hooks, if you did not
-install your environment using Nix, you'll need to install the `pre-commit` tool
-and the hooks' Python dependencies. The easiest way to accomplish this is by
-using the Python package manager `pip`.
+that enforce [basic formatting rules](CONTRIBUTING.md). To utilize these hooks,
+if you did not install your environment using Nix, you'll need to install the
+`pre-commit` tool and the hooks' Python dependencies. The easiest way to
+accomplish this is by using the Python package manager `pip`.
 
 First, make sure that you have the latest version of Python installed on your
 computer; the hooks require Python 3.8 or newer. Then run the following command
