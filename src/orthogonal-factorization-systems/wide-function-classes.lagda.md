@@ -20,9 +20,9 @@ open import orthogonal-factorization-systems.function-classes
 
 ## Idea
 
-We say a function class is **wide** if it contains the identities and is
-composition closed. This means it is morally a wide subpre-∞-category of the
-∞-category of small types.
+We say a [function class](orthogonal-factorization-systems.function-classes.md)
+is **wide** if it contains all identities and is composition closed. This means
+it is morally a wide subpre-∞-category of the ∞-category of small types.
 
 ```agda
 is-wide-function-class :

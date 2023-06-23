@@ -1,4 +1,4 @@
-# Localizations with respect to a map
+# Localizations at a map
 
 ```agda
 module orthogonal-factorization-systems.localizations-maps where
@@ -37,8 +37,8 @@ open import orthogonal-factorization-systems.localizations-subuniverses
 ## Idea
 
 Let `f` be a map of type `X → Y` and let `A` be a type. The **localization** of
-`A` with respect to `f`, or **`f`-localization**, is a type `B` together with an
-map `η : A → B` with the property that every type that is
+`A` at `f`, or **`f`-localization**, is a type `B` together with a map
+`η : A → B` with the property that every type that is
 `f`[-local](orthogonal-factorization-systems.local-types.md) is also `η`-local.
 
 ## Definition
@@ -81,7 +81,7 @@ localization l4 l5 f A =
 
 ## Properties
 
-### Localizations with respect to a map are localizations with respect to a subuniverse
+### Localizations at a map are localizations at a subuniverse
 
 ```agda
 module _

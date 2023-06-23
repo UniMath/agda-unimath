@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A function class is a subtype of the type of all functions.
+A **function class** is a [subtype](foundation.subtypes.md) of the type of all
+functions in a given universe.
 
 ## Definition
 

@@ -18,7 +18,7 @@ open import foundation.identity-types
 open import foundation.small-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.locally-small-modalities
+open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
@@ -28,7 +28,8 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ## Idea
 
 A **higher modality** is a _higher mode of logic_ defined in terms of a monadic
-modal operator `○` satisfying a certain induction principle.
+[modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
+satisfying a certain induction principle.
 
 The induction principle states that for every type `X` and family
 `P : ○ X → UU`, to define a dependent map `(x' : ○ X) → ○ (P x')` it suffices to
@@ -41,8 +42,8 @@ Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
 `x' y' : ○ X`. In other words, `○ X` is
 [`○`-separated](orthogonal-factorization-systems.separated-types.md). Because of
-this, higher modalities in their most general form only make sense for locally
-small modal operators.
+this, higher modalities in their most general form only make sense for
+[locally small modal operators](orthogonal-factorization-systems.locally-small-modal-operators.md).
 
 ## Definition
 
@@ -80,9 +81,11 @@ module _
 
 ### Closure under identity type formers
 
-We say that the identity types of a locally small type are modal if their small
-equivalent is modal. We say that a modality is closed under identity type
-formation if for every modal type, their identity types are also modal.
+We say that the [locally small type](foundation-core.identity-types.md) of a
+[locally small type](foundation.locally-small-types.md) are **modal** if their
+[small equivalent](foundation-core.small-types.md) is modal. We say that a
+modality is closed under identity type formation if, for every modal type, their
+identity types are also modal.
 
 ```agda
 module _

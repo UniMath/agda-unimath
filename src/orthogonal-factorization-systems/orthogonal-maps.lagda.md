@@ -19,9 +19,11 @@ open import orthogonal-factorization-systems.pullback-hom
 
 ## Idea
 
-The map `f : A → X` is said to be **orthogonal to** `g : B → Y` if their
-pullback-hom is an equivalence. This means that there is a unique lifting
-operation between `f` and `g`.
+The map `f : A → X` is said to be **orthogonal** to `g : B → Y` if their
+[pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is an
+equivalence. This means that there is a unique
+[lifting operation](orthogonal-factorization-systems.lifting-operations.md)
+between `f` and `g`.
 
 In this case we say that `f` is **left orthogonal** to `g` and `g` is **right
 orthogonal** to `f`.
@@ -59,7 +61,7 @@ A term of `is-left-orthogonal f g` asserts that `g` is left orthogonal to `f`.
 
 ## Properties
 
-### Orthogonality of maps is a property
+### Orthogonality is a property
 
 ```agda
 module _

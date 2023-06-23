@@ -25,10 +25,11 @@ open import orthogonal-factorization-systems.modal-operators
 
 A **reflective subuniverse** is a [subuniverse](foundation.subuniverses.md) `P`
 together with a reflecting operator `○ : UU → UU` that take values in `P`, and a
-[modal unit](foundation.modal-operators.md) `A → ○ A` for all small types `A`,
-with the property that the types in `P` are local at the modal unit for every
-`A`. Hence the modal types with respect to `○` are precisely the types in the
-reflective subuniverse.
+[modal unit](foundation.modal-operators.md) `A → ○ A` for all
+[small types](foundation-core.small-types.md) `A`, with the property that the
+types in `P` are [local](orthogonal-factorization-systems.local-types.md) at the
+modal unit for every `A`. Hence the modal types with respect to `○` are
+precisely the types in the reflective subuniverse.
 
 ## Definitions
 

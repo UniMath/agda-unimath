@@ -43,22 +43,6 @@ unit-modality : {l1 l2 : Level} → operator-modality l1 l2 → UU (lsuc l1 ⊔ 
 unit-modality {l1} ○ = {X : UU l1} → X → ○ X
 ```
 
-### Modalities
-
-```agda
-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-modality l1 l2 = Σ (operator-modality l1 l2) (unit-modality)
-
-operator-modality-modality :
-  {l1 l2 : Level} → modality l1 l2 → operator-modality l1 l2
-operator-modality-modality = pr1
-
-unit-modality-modality :
-  {l1 l2 : Level} (t : modality l1 l2) →
-  unit-modality (operator-modality-modality t)
-unit-modality-modality = pr2
-```
-
 ### The subuniverse of modal types
 
 ```agda

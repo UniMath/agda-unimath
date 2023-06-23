@@ -1,7 +1,7 @@
-# Locally small modalities
+# Locally small modal-operators
 
 ```agda
-module orthogonal-factorization-systems.locally-small-modalities where
+module orthogonal-factorization-systems.locally-small-modal-operators where
 ```
 
 <details><summary>Imports</summary>
@@ -55,42 +55,4 @@ is-locally-small-locally-small-operator-modality :
   is-locally-small-operator-modality l3
     ( operator-modality-locally-small-operator-modality ○)
 is-locally-small-locally-small-operator-modality = pr2
-```
-
-### Locally small modalities
-
-A modality is locally small if its modal operator is locally small.
-
-```agda
-is-locally-small-modality :
-  {l1 l2 : Level} (l3 : Level) → modality l1 l2 → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
-is-locally-small-modality l3 τ =
-  is-locally-small-operator-modality l3 (operator-modality-modality τ)
-
-locally-small-modality :
-  (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
-locally-small-modality l1 l2 l3 =
-  Σ ( modality l1 l2)
-    ( is-locally-small-operator-modality l3 ∘ operator-modality-modality)
-
-module _
-  {l1 l2 l3 : Level} (τ : locally-small-modality l1 l2 l3)
-  where
-
-  modality-locally-small-modality : modality l1 l2
-  modality-locally-small-modality = pr1 τ
-
-  operator-modality-locally-small-modality : operator-modality l1 l2
-  operator-modality-locally-small-modality =
-    operator-modality-modality modality-locally-small-modality
-
-  unit-modality-locally-small-modality :
-    unit-modality (operator-modality-modality modality-locally-small-modality)
-  unit-modality-locally-small-modality =
-    unit-modality-modality modality-locally-small-modality
-
-  is-locally-small-operator-modality-locally-small-modality :
-    is-locally-small-operator-modality l3
-      ( operator-modality-locally-small-modality)
-  is-locally-small-operator-modality-locally-small-modality = pr2 τ
 ```

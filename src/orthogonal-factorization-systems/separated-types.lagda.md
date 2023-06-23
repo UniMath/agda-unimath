@@ -18,8 +18,8 @@ open import orthogonal-factorization-systems.local-types
 ## Idea
 
 A type `A` is said to be **separated** with respect to a map `f`, or
-**`f`-separated**, if its identity types are
-[`f`-local](orthogonal-factorization-systems.local-types.md).
+**`f`-separated**, if its [identity types](foundation-core.identity-types.md)
+are [`f`-local](orthogonal-factorization-systems.local-types.md).
 
 ## Definition
 

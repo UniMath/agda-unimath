@@ -1,4 +1,4 @@
-# Localizations with respect to a subuniverse
+# Localizations at a subuniverse
 
 ```agda
 module orthogonal-factorization-systems.localizations-subuniverses where
@@ -36,8 +36,8 @@ open import orthogonal-factorization-systems.local-types
 ## Idea
 
 Let `P` be a [subuniverse](foundation.subuniverses.md). Given a type `A`, its
-**localization** with respect to `P`, or **`P`-localization**, is a type `B` in
-`P` and a map `η : A → B` such that every type in `P` is
+**localization** at `P`, or **`P`-localization**, is a type `B` in `P` and a map
+`η : A → B` such that every type in `P` is
 `η`[-local](orthogonal-factorization-systems.local-types.md). I.e. for every `X`
 in `P`, the precomposition map
 
@@ -49,7 +49,7 @@ is an equivalence.
 
 ## Definition
 
-### The predicate of being a localization with respect to a subuniverse
+### The predicate of being a localization at a subuniverse
 
 ```agda
 is-subuniverse-localization :
@@ -80,7 +80,7 @@ module _
     pr2 (pr2 is-localization-B)
 ```
 
-### The type of localizations with respect to a subuniverse
+### The type of localizations at a subuniverse
 
 ```agda
 subuniverse-localization :
@@ -101,26 +101,30 @@ module _
     is-subuniverse-localization P A type-subuniverse-localization
   is-subuniverse-localization-subuniverse-localization = pr2 L
 
-  is-in-subuniverse-subuniverse-localization : is-in-subuniverse P type-subuniverse-localization
+  is-in-subuniverse-subuniverse-localization :
+    is-in-subuniverse P type-subuniverse-localization
   is-in-subuniverse-subuniverse-localization =
-    is-in-subuniverse-is-subuniverse-localization P is-subuniverse-localization-subuniverse-localization
+    is-in-subuniverse-is-subuniverse-localization P
+      ( is-subuniverse-localization-subuniverse-localization)
 
   unit-subuniverse-localization : A → type-subuniverse-localization
-  unit-subuniverse-localization = unit-is-subuniverse-localization P is-subuniverse-localization-subuniverse-localization
+  unit-subuniverse-localization =
+    unit-is-subuniverse-localization P
+      ( is-subuniverse-localization-subuniverse-localization)
 
   is-local-at-unit-is-in-subuniverse-subuniverse-localization :
-    (X : UU l1) → is-in-subuniverse P X → is-local unit-subuniverse-localization X
+    (X : UU l1) →
+    is-in-subuniverse P X → is-local unit-subuniverse-localization X
   is-local-at-unit-is-in-subuniverse-subuniverse-localization =
-    is-local-at-unit-is-in-subuniverse-is-subuniverse-localization
-      P is-subuniverse-localization-subuniverse-localization
+    is-local-at-unit-is-in-subuniverse-is-subuniverse-localization P
+      ( is-subuniverse-localization-subuniverse-localization)
 ```
 
 ## Properties
 
 ### There is at most one `P`-localization of `A`
 
-This is Proposition 5.1.2 in [Classifying Types](#classifying-types), and
-remains to be formalized.
+This is Proposition 5.1.2 in _Classifying Types_, and remains to be formalized.
 
 ## References
 
