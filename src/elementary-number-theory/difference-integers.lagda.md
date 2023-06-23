@@ -125,5 +125,5 @@ diff-succ-ℤ x y =
   ( ap ((succ-ℤ x) +ℤ_) (neg-succ-ℤ y)) ∙
   ( ( left-successor-law-add-ℤ x (pred-ℤ (neg-ℤ y))) ∙
     ( ( ap succ-ℤ (right-predecessor-law-add-ℤ x (neg-ℤ y))) ∙
-      ( issec-pred-ℤ (x -ℤ y))))
+      ( is-section-pred-ℤ (x -ℤ y))))
 ```

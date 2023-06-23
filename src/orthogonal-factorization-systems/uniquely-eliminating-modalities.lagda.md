@@ -121,32 +121,33 @@ module _
   map-inv-unit-uniquely-eliminating-modality =
     ind-modality-is-uniquely-eliminating-modality is-uem-○ (○ X) (λ _ → X) id
 
-  issec-unit-uniquely-eliminating-modality :
+  is-section-unit-uniquely-eliminating-modality :
     (map-inv-unit-uniquely-eliminating-modality ∘ unit-○) ~ id
-  issec-unit-uniquely-eliminating-modality =
+  is-section-unit-uniquely-eliminating-modality =
     compute-ind-modality-is-uniquely-eliminating-modality
       ( is-uem-○)
       ( ○ X)
       ( λ _ → X)
       ( id)
 
-  isretr-unit-uniquely-eliminating-modality :
+  is-retraction-unit-uniquely-eliminating-modality :
     (unit-○ ∘ map-inv-unit-uniquely-eliminating-modality) ~ id
-  isretr-unit-uniquely-eliminating-modality =
+  is-retraction-unit-uniquely-eliminating-modality =
     htpy-eq
       ( ap pr1
         ( eq-is-contr'
           ( is-contr-map-is-equiv (is-uem-○ (○ X) (λ _ → ○ X)) unit-○)
           ( unit-○ ∘ map-inv-unit-uniquely-eliminating-modality ,
-            eq-htpy (ap unit-○ ∘ (issec-unit-uniquely-eliminating-modality)))
+            eq-htpy
+              ( ap unit-○ ∘ (is-section-unit-uniquely-eliminating-modality)))
           ( id , refl)))
 
   is-modal-uniquely-eliminating-modality : is-modal unit-○ (○ X)
   is-modal-uniquely-eliminating-modality =
     is-equiv-has-inverse
       map-inv-unit-uniquely-eliminating-modality
-      isretr-unit-uniquely-eliminating-modality
-      issec-unit-uniquely-eliminating-modality
+      is-retraction-unit-uniquely-eliminating-modality
+      is-section-unit-uniquely-eliminating-modality
 ```
 
 ### Uniquely eliminating modalities are uniquely determined by their modal types

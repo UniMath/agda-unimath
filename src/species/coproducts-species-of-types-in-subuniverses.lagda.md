@@ -136,21 +136,21 @@ module _
   map-inv-coproduct-Σ-extension-species-subuniverse (inr x) =
     pr1 x , inr (pr2 x)
 
-  issec-map-inv-coproduct-Σ-extension-species-subuniverse :
+  is-section-map-inv-coproduct-Σ-extension-species-subuniverse :
     ( map-coproduct-Σ-extension-species-subuniverse ∘
       map-inv-coproduct-Σ-extension-species-subuniverse) ~ id
-  issec-map-inv-coproduct-Σ-extension-species-subuniverse (inl (p , x)) =
+  is-section-map-inv-coproduct-Σ-extension-species-subuniverse (inl (p , x)) =
     refl
-  issec-map-inv-coproduct-Σ-extension-species-subuniverse (inr (p , x)) =
+  is-section-map-inv-coproduct-Σ-extension-species-subuniverse (inr (p , x)) =
     refl
 
-  isretr-map-inv-coproduct-Σ-extension-species-subuniverse :
+  is-retraction-map-inv-coproduct-Σ-extension-species-subuniverse :
     ( map-inv-coproduct-Σ-extension-species-subuniverse ∘
       map-coproduct-Σ-extension-species-subuniverse) ~
     id
-  isretr-map-inv-coproduct-Σ-extension-species-subuniverse (p , inl x) =
+  is-retraction-map-inv-coproduct-Σ-extension-species-subuniverse (p , inl x) =
     refl
-  isretr-map-inv-coproduct-Σ-extension-species-subuniverse (p , inr x) =
+  is-retraction-map-inv-coproduct-Σ-extension-species-subuniverse (p , inr x) =
     refl
 
   equiv-coproduct-Σ-extension-species-subuniverse :
@@ -174,6 +174,6 @@ module _
   pr2 equiv-coproduct-Σ-extension-species-subuniverse =
     is-equiv-has-inverse
       map-inv-coproduct-Σ-extension-species-subuniverse
-      issec-map-inv-coproduct-Σ-extension-species-subuniverse
-      isretr-map-inv-coproduct-Σ-extension-species-subuniverse
+      is-section-map-inv-coproduct-Σ-extension-species-subuniverse
+      is-retraction-map-inv-coproduct-Σ-extension-species-subuniverse
 ```

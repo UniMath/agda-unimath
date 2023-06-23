@@ -28,6 +28,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.pullbacks
 open import foundation-core.retractions
@@ -75,7 +76,7 @@ module _
     ( inv-equiv (equiv-ap e x (map-inv-equiv e y))) ∘e
     ( equiv-concat'
       ( map-equiv e x)
-      ( inv (issec-map-inv-equiv e y)))
+      ( inv (is-section-map-inv-equiv e y)))
 
   map-eq-transpose-equiv :
     {x : A} {y : B} → map-equiv e x ＝ y → x ＝ map-inv-equiv e y
@@ -88,19 +89,20 @@ module _
   triangle-eq-transpose-equiv :
     {x : A} {y : B} (p : map-equiv e x ＝ y) →
     ( ( ap (map-equiv e) (map-eq-transpose-equiv p)) ∙
-      ( issec-map-inv-equiv e y)) ＝
+      ( is-section-map-inv-equiv e y)) ＝
     ( p)
   triangle-eq-transpose-equiv {x} {y} p =
     ( ap
-      ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
-      ( issec-map-inv-equiv
+      ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
+      ( is-section-map-inv-equiv
         ( equiv-ap e x (map-inv-equiv e y))
-        ( p ∙ inv (issec-map-inv-equiv e y)))) ∙
+        ( p ∙ inv (is-section-map-inv-equiv e y)))) ∙
     ( ( assoc
         ( p)
-        ( inv (issec-map-inv-equiv e y))
-        ( issec-map-inv-equiv e y)) ∙
-      ( ( ap (concat p y) (left-inv (issec-map-inv-equiv e y))) ∙ right-unit))
+        ( inv (is-section-map-inv-equiv e y))
+        ( is-section-map-inv-equiv e y)) ∙
+      ( ( ap (concat p y) (left-inv (is-section-map-inv-equiv e y))) ∙
+        ( right-unit)))
 
   map-eq-transpose-equiv' :
     {a : A} {b : B} → b ＝ map-equiv e a → map-inv-equiv e b ＝ a
@@ -113,29 +115,29 @@ module _
 
   triangle-eq-transpose-equiv' :
     {x : A} {y : B} (p : y ＝ map-equiv e x) →
-    ( (issec-map-inv-equiv e y) ∙ p) ＝
+    ( (is-section-map-inv-equiv e y) ∙ p) ＝
     ( ap (map-equiv e) (map-eq-transpose-equiv' p))
   triangle-eq-transpose-equiv' {x} {y} p =
     map-inv-equiv
       ( equiv-ap
         ( equiv-inv (map-equiv e (map-inv-equiv e y)) (map-equiv e x))
-        ( (issec-map-inv-equiv e y) ∙ p)
+        ( (is-section-map-inv-equiv e y) ∙ p)
         ( ap (map-equiv e) (map-eq-transpose-equiv' p)))
-      ( ( distributive-inv-concat (issec-map-inv-equiv e y) p) ∙
+      ( ( distributive-inv-concat (is-section-map-inv-equiv e y) p) ∙
         ( ( inv
             ( con-inv
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
-              ( issec-map-inv-equiv e y)
+              ( is-section-map-inv-equiv e y)
               ( inv p)
               ( ( ap
-                  ( concat' (map-equiv e x) (issec-map-inv-equiv e y))
+                  ( concat' (map-equiv e x) (is-section-map-inv-equiv e y))
                   ( ap
                     ( ap (map-equiv e))
                     ( inv-inv
                       ( map-inv-equiv
                         ( equiv-ap e x (map-inv-equiv e y))
                         ( ( inv p) ∙
-                          ( inv (issec-map-inv-equiv e y))))))) ∙
+                          ( inv (is-section-map-inv-equiv e y))))))) ∙
                 ( triangle-eq-transpose-equiv (inv p))))) ∙
           ( ap-inv (map-equiv e) (map-eq-transpose-equiv' p))))
 ```
@@ -177,28 +179,44 @@ First, we prove this relative to a subuniverse, such that `f` is a map between
 two types in that subuniverse.
 
 ```agda
-abstract
-  is-equiv-is-equiv-precomp-subuniverse :
-    { l1 l2 : Level}
-    ( α : Level → Level) (P : (l : Level) → UU l → UU (α l))
-    ( A : Σ (UU l1) (P l1)) (B : Σ (UU l2) (P l2)) (f : pr1 A → pr1 B) →
-    ( (l : Level) (C : Σ (UU l) (P l)) →
-      is-equiv (precomp f (pr1 C))) →
-    is-equiv f
-  is-equiv-is-equiv-precomp-subuniverse α P A B f is-equiv-precomp-f =
-    let retr-f = center (is-contr-map-is-equiv (is-equiv-precomp-f _ A) id) in
-    is-equiv-has-inverse
-      ( pr1 retr-f)
-      ( htpy-eq
-        ( ap
-          ( pr1)
-          ( eq-is-contr'
-            ( is-contr-map-is-equiv (is-equiv-precomp-f _ B) f)
-            ( pair
-              ( f ∘ (pr1 retr-f))
-              ( ap (λ (g : pr1 A → pr1 A) → f ∘ g) (pr2 retr-f)))
-            ( pair id refl))))
-      ( htpy-eq (pr2 retr-f))
+module _
+  { l1 l2 : Level}
+  ( α : Level → Level) (P : (l : Level) → UU l → UU (α l))
+  ( A : Σ (UU l1) (P l1)) (B : Σ (UU l2) (P l2)) (f : pr1 A → pr1 B)
+  ( H : (l : Level) (C : Σ (UU l) (P l)) → is-equiv (precomp f (pr1 C)))
+  where
+
+  map-inv-is-equiv-precomp-subuniverse : pr1 B → pr1 A
+  map-inv-is-equiv-precomp-subuniverse =
+    pr1 (center (is-contr-map-is-equiv (H _ A) id))
+
+  is-section-map-inv-is-equiv-precomp-subuniverse :
+    ( f ∘ map-inv-is-equiv-precomp-subuniverse) ~ id
+  is-section-map-inv-is-equiv-precomp-subuniverse =
+    htpy-eq
+      ( ap
+        ( pr1)
+        ( eq-is-contr'
+          ( is-contr-map-is-equiv (H _ B) f)
+          ( ( f ∘ (pr1 (center (is-contr-map-is-equiv (H _ A) id)))) ,
+            ( ap
+              ( λ (g : pr1 A → pr1 A) → f ∘ g)
+              ( pr2 (center (is-contr-map-is-equiv (H _ A) id)))))
+          ( id , refl)))
+
+  is-retraction-map-inv-is-equiv-precomp-subuniverse :
+    ( map-inv-is-equiv-precomp-subuniverse ∘ f) ~ id
+  is-retraction-map-inv-is-equiv-precomp-subuniverse =
+    htpy-eq (pr2 (center (is-contr-map-is-equiv (H _ A) id)))
+
+  abstract
+    is-equiv-is-equiv-precomp-subuniverse :
+      is-equiv f
+    is-equiv-is-equiv-precomp-subuniverse =
+      is-equiv-has-inverse
+        ( map-inv-is-equiv-precomp-subuniverse)
+        ( is-section-map-inv-is-equiv-precomp-subuniverse)
+        ( is-retraction-map-inv-is-equiv-precomp-subuniverse)
 ```
 
 Now we prove the usual statement, without the subuniverse
@@ -257,8 +275,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-sec-is-equiv : {f : A → B} → is-equiv f → is-contr (sec f)
-  is-contr-sec-is-equiv {f} is-equiv-f =
+  is-contr-section-is-equiv : {f : A → B} → is-equiv f → is-contr (section f)
+  is-contr-section-is-equiv {f} is-equiv-f =
     is-contr-equiv'
       ( (b : B) → fib f b)
       ( distributive-Π-Σ)
@@ -272,8 +290,9 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-retr-is-equiv : {f : A → B} → is-equiv f → is-contr (retr f)
-  is-contr-retr-is-equiv {f} is-equiv-f =
+  is-contr-retraction-is-equiv :
+    {f : A → B} → is-equiv f → is-contr (retraction f)
+  is-contr-retraction-is-equiv {f} is-equiv-f =
     is-contr-is-equiv'
       ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
       ( tot (λ h → htpy-eq))
@@ -292,8 +311,8 @@ module _
   is-contr-is-equiv-is-equiv : {f : A → B} → is-equiv f → is-contr (is-equiv f)
   is-contr-is-equiv-is-equiv is-equiv-f =
     is-contr-prod
-      ( is-contr-sec-is-equiv is-equiv-f)
-      ( is-contr-retr-is-equiv is-equiv-f)
+      ( is-contr-section-is-equiv is-equiv-f)
+      ( is-contr-retraction-is-equiv is-equiv-f)
 
   abstract
     is-property-is-equiv : (f : A → B) → (H K : is-equiv f) → is-contr (H ＝ K)
@@ -329,7 +348,7 @@ module _
     Ind-htpy-equiv :
       {l3 : Level} (e : A ≃ B)
       (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-      sec
+      section
         ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
           h e (refl-htpy-equiv e))
     Ind-htpy-equiv e =
@@ -370,11 +389,11 @@ module _
 
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
   left-inverse-law-equiv e =
-    eq-htpy-equiv (isretr-map-inv-is-equiv (is-equiv-map-equiv e))
+    eq-htpy-equiv (is-retraction-map-inv-is-equiv (is-equiv-map-equiv e))
 
   right-inverse-law-equiv : (e : X ≃ Y) → (e ∘e (inv-equiv e)) ＝ id-equiv
   right-inverse-law-equiv e =
-    eq-htpy-equiv (issec-map-inv-is-equiv (is-equiv-map-equiv e))
+    eq-htpy-equiv (is-section-map-inv-is-equiv (is-equiv-map-equiv e))
 
   inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
   inv-inv-equiv e = eq-equiv-eq-map-equiv refl
@@ -420,14 +439,14 @@ comp-inv-equiv-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e
 comp-inv-equiv-comp-equiv f e =
-  eq-htpy-equiv (λ x → isretr-map-inv-equiv f (map-equiv e x))
+  eq-htpy-equiv (λ x → is-retraction-map-inv-equiv f (map-equiv e x))
 
 comp-equiv-comp-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ C) →
   (f ∘e (inv-equiv f ∘e e)) ＝ e
 comp-equiv-comp-inv-equiv f e =
-  eq-htpy-equiv (λ x → issec-map-inv-equiv f (map-equiv e x))
+  eq-htpy-equiv (λ x → is-section-map-inv-equiv f (map-equiv e x))
 
 is-equiv-comp-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}

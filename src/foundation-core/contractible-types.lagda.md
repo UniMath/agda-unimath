@@ -96,9 +96,9 @@ module _
 
   abstract
     is-contr-retract-of : A retract-of B → is-contr B → is-contr A
-    pr1 (is-contr-retract-of (pair i (pair r isretr)) H) = r (center H)
-    pr2 (is-contr-retract-of (pair i (pair r isretr)) H) x =
-      ap r (contraction H (i x)) ∙ (isretr x)
+    pr1 (is-contr-retract-of (pair i (pair r is-retraction)) H) = r (center H)
+    pr2 (is-contr-retract-of (pair i (pair r is-retraction)) H) x =
+      ap r (contraction H (i x)) ∙ (is-retraction x)
 ```
 
 ### Contractible types are closed under equivalences
@@ -114,7 +114,7 @@ module _
     pr1 (is-contr-is-equiv f H (pair b K)) = map-inv-is-equiv H b
     pr2 (is-contr-is-equiv f H (pair b K)) x =
       ( ap (map-inv-is-equiv H) (K (f x))) ∙
-      ( isretr-map-inv-is-equiv H x)
+      ( is-retraction-map-inv-is-equiv H x)
 
   abstract
     is-contr-equiv : (e : A ≃ B) → is-contr B → is-contr A

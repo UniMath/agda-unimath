@@ -250,7 +250,7 @@ module _
       ( f)
       ( equiv-count eA)
       ( equiv-count eB)
-      ( issec-map-inv-equiv-count eB ·r (f ∘ (map-equiv-count eA)))
+      ( is-section-map-inv-equiv-count eB ·r (f ∘ (map-equiv-count eA)))
       ( repetition-of-values-le-Fin
         ( number-of-elements-count eA)
         ( number-of-elements-count eB)

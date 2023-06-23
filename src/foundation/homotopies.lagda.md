@@ -75,7 +75,7 @@ IND-HTPY :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
 IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → f ~ g → UU l3) → sec (ev-refl-htpy f C)
+  (C : (g : (x : A) → B x) → f ~ g → UU l3) → section (ev-refl-htpy f C)
 ```
 
 ```agda
@@ -172,22 +172,22 @@ module _
   (K : g ~ h)
   where
 
-  issec-concat-inv-htpy' :
+  is-section-concat-inv-htpy' :
     ((concat-htpy' f K) ∘ (concat-inv-htpy' f K)) ~ id
-  issec-concat-inv-htpy' L =
-    eq-htpy (λ x → issec-inv-concat' (f x) (K x) (L x))
+  is-section-concat-inv-htpy' L =
+    eq-htpy (λ x → is-section-inv-concat' (f x) (K x) (L x))
 
-  isretr-concat-inv-htpy' :
+  is-retraction-concat-inv-htpy' :
     ((concat-inv-htpy' f K) ∘ (concat-htpy' f K)) ~ id
-  isretr-concat-inv-htpy' L =
-    eq-htpy (λ x → isretr-inv-concat' (f x) (K x) (L x))
+  is-retraction-concat-inv-htpy' L =
+    eq-htpy (λ x → is-retraction-inv-concat' (f x) (K x) (L x))
 
   is-equiv-concat-htpy' : is-equiv (concat-htpy' f K)
   is-equiv-concat-htpy' =
     is-equiv-has-inverse
       ( concat-inv-htpy' f K)
-      ( issec-concat-inv-htpy')
-      ( isretr-concat-inv-htpy')
+      ( is-section-concat-inv-htpy')
+      ( is-retraction-concat-inv-htpy')
 
   equiv-concat-htpy' : (f ~ g) ≃ (f ~ h)
   equiv-concat-htpy' =
@@ -290,7 +290,7 @@ module _
             ( H a0)
             ( H a0)))
         ( ap inv (left-inv right-unit))) ∙
-      ( isretr-map-inv-equiv
+      ( is-retraction-map-inv-equiv
         ( compute-dependent-identification-eq-value-function f g refl
           ( H a0)
           ( H a1))

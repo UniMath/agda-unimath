@@ -170,7 +170,7 @@ right-successor-law-mul-ℤ (inl (succ-ℕ n)) l =
                 ( ap
                   ( (inl (succ-ℕ n)) +ℤ_)
                   ( ( ap succ-ℤ (inv (pred-neg-ℤ l))) ∙
-                    ( issec-pred-ℤ (neg-ℤ l)))))))) ∙
+                    ( is-section-pred-ℤ (neg-ℤ l)))))))) ∙
         ( associative-add-ℤ (inl (succ-ℕ n)) (neg-ℤ l) ((inl n) *ℤ l)))))
 right-successor-law-mul-ℤ (inr (inl star)) l = refl
 right-successor-law-mul-ℤ (inr (inr zero-ℕ)) l = refl

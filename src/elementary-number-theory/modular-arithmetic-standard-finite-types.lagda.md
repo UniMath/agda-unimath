@@ -141,9 +141,9 @@ div-is-zero-mod-succ-ℕ k x p =
 ### The inclusion of `Fin k` into `ℕ` is a section of `mod-succ-ℕ`
 
 ```agda
-issec-nat-Fin :
+is-section-nat-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → mod-succ-ℕ k (nat-Fin (succ-ℕ k) x) ＝ x
-issec-nat-Fin k x =
+is-section-nat-Fin k x =
   is-injective-nat-Fin (succ-ℕ k)
     ( eq-cong-le-ℕ
       ( succ-ℕ k)
@@ -158,7 +158,7 @@ issec-nat-Fin k x =
 is-split-surjective-mod-succ-ℕ :
   {k : ℕ} → is-split-surjective (mod-succ-ℕ k)
 pr1 (is-split-surjective-mod-succ-ℕ {k} x) = nat-Fin (succ-ℕ k) x
-pr2 (is-split-surjective-mod-succ-ℕ {k} x) = issec-nat-Fin k x
+pr2 (is-split-surjective-mod-succ-ℕ {k} x) = is-section-nat-Fin k x
 ```
 
 ### The residue of `x` modulo `k + 1` is less than or equal to `x`
@@ -397,7 +397,7 @@ right-unit-law-add-Fin k x =
       { y' = zero-ℕ}
       ( refl-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) x))
       ( cong-is-zero-nat-zero-Fin {k}))) ∙
-  ( issec-nat-Fin k x)
+  ( is-section-nat-Fin k x)
 
 left-unit-law-add-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → add-Fin (succ-ℕ k) (zero-Fin k) x ＝ x
@@ -447,7 +447,7 @@ is-add-one-succ-Fin' :
   succ-Fin (succ-ℕ k) x ＝ add-Fin (succ-ℕ k) x (one-Fin k)
 is-add-one-succ-Fin' zero-ℕ (inr star) = refl
 is-add-one-succ-Fin' (succ-ℕ k) x =
-  ( ap (succ-Fin (succ-ℕ (succ-ℕ k))) (inv (issec-nat-Fin (succ-ℕ k) x))) ∙
+  ( ap (succ-Fin (succ-ℕ (succ-ℕ k))) (inv (is-section-nat-Fin (succ-ℕ k) x))) ∙
   ( ap
     ( mod-succ-ℕ (succ-ℕ k))
     ( ap
@@ -554,7 +554,7 @@ left-unit-law-mul-Fin (succ-ℕ k) x =
           ( _*ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))
           ( is-one-nat-one-Fin k)) ∙
         ( left-unit-law-mul-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) x))))) ∙
-  ( issec-nat-Fin (succ-ℕ k) x)
+  ( is-section-nat-Fin (succ-ℕ k) x)
 
 right-unit-law-mul-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → mul-Fin (succ-ℕ k) x (one-Fin k) ＝ x
@@ -574,7 +574,7 @@ left-zero-law-mul-Fin k x =
       { nat-Fin (succ-ℕ k) (zero-Fin k)}
       ( ( ap (_*ℕ (nat-Fin (succ-ℕ k) x)) (is-zero-nat-zero-Fin {k})) ∙
         ( inv (is-zero-nat-zero-Fin {k}))))) ∙
-  ( issec-nat-Fin k (zero-Fin k))
+  ( is-section-nat-Fin k (zero-Fin k))
 
 right-zero-law-mul-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → mul-Fin (succ-ℕ k) x (zero-Fin k) ＝ zero-Fin k
@@ -777,7 +777,7 @@ is-add-neg-one-pred-Fin' :
 is-add-neg-one-pred-Fin' k x =
   is-injective-succ-Fin
     ( succ-ℕ k)
-    ( ( issec-pred-Fin (succ-ℕ k) x) ∙
+    ( ( is-section-pred-Fin (succ-ℕ k) x) ∙
       ( ( ( ( inv (right-unit-law-add-Fin k x)) ∙
             ( ap
               ( add-Fin (succ-ℕ k) x)

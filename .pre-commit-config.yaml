@@ -14,7 +14,6 @@ repos:
       # - id: requirements-txt-fixer # Can't handle comments
       - id: check-case-conflict
       - id: check-merge-conflict
-      - id: check-added-large-files
 
   - repo: local
     hooks:
@@ -36,7 +35,7 @@ repos:
         types_or: [markdown, text]
 
       - id: fix-imports
-        name: Format Agda imports
+        name: Format imports of Agda files
         entry: scripts/fix_imports.py
         language: python
         always_run: true
@@ -44,16 +43,16 @@ repos:
         types_or: [markdown, text]
 
       - id: spaces-conventions-simple
-        name: Simple Agda space conventions
+        name: Simple space conventions in Agda blocks
         entry: scripts/spaces_conventions_simple.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
-      - id: indentation-conventions
-        name: Agda indentation conventions
-        entry: scripts/indentation_conventions.py
+      - id: even-indentation-conventions
+        name: Even indentation conventions in Agda blocks
+        entry: scripts/even_indentation_conventions.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
@@ -61,7 +60,7 @@ repos:
         require_serial: true
 
       - id: wrap-long-lines-simple
-        name: Wrap easily fixable long lines of Agda code
+        name: Wrap simple to fix long lines of Agda code
         entry: scripts/wrap_long_lines_simple.py
         language: python
         always_run: true

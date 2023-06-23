@@ -55,6 +55,7 @@ identifications in arbitrary types.
 | Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
 | Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
 | Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Torsorial type families                          | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
 | Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
 | Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
 | The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
@@ -95,13 +96,13 @@ module _
   inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
   inv-concat p = concat (inv p)
 
-  isretr-inv-concat :
+  is-retraction-inv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (inv-concat p z ∘ concat p z) ~ id
-  isretr-inv-concat refl z q = refl
+  is-retraction-inv-concat refl z q = refl
 
-  issec-inv-concat :
+  is-section-inv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (concat p z ∘ inv-concat p z) ~ id
-  issec-inv-concat refl z refl = refl
+  is-section-inv-concat refl z refl = refl
 
   abstract
     is-equiv-concat :
@@ -109,8 +110,8 @@ module _
     is-equiv-concat p z =
       is-equiv-has-inverse
         ( inv-concat p z)
-        ( issec-inv-concat p z)
-        ( isretr-inv-concat p z)
+        ( is-section-inv-concat p z)
+        ( is-retraction-inv-concat p z)
 
   equiv-concat :
     {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)
@@ -129,13 +130,13 @@ module _
   inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
   inv-concat' x q = concat' x (inv q)
 
-  isretr-inv-concat' :
+  is-retraction-inv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (inv-concat' x q ∘ concat' x q) ~ id
-  isretr-inv-concat' x refl refl = refl
+  is-retraction-inv-concat' x refl refl = refl
 
-  issec-inv-concat' :
+  is-section-inv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (concat' x q ∘ inv-concat' x q) ~ id
-  issec-inv-concat' x refl refl = refl
+  is-section-inv-concat' x refl refl = refl
 
   abstract
     is-equiv-concat' :
@@ -143,8 +144,8 @@ module _
     is-equiv-concat' x q =
       is-equiv-has-inverse
         ( inv-concat' x q)
-        ( issec-inv-concat' x q)
-        ( isretr-inv-concat' x q)
+        ( is-section-inv-concat' x q)
+        ( is-retraction-inv-concat' x q)
 
   equiv-concat' :
     (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
@@ -167,26 +168,27 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  issec-is-injective-concat :
+  is-section-is-injective-concat :
     {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : (p ∙ q) ＝ (p ∙ r)) →
     ap (concat p z) (is-injective-concat p s) ＝ s
-  issec-is-injective-concat refl refl = refl
+  is-section-is-injective-concat refl refl = refl
 
-  cases-issec-is-injective-concat' :
+  cases-is-section-is-injective-concat' :
     {x y : A} {p q : x ＝ y} (s : p ＝ q) →
     ( ap
       ( concat' x refl)
       ( is-injective-concat' refl (right-unit ∙ (s ∙ inv right-unit)))) ＝
     ( right-unit ∙ (s ∙ inv right-unit))
-  cases-issec-is-injective-concat' {p = refl} refl = refl
+  cases-is-section-is-injective-concat' {p = refl} refl = refl
 
-  issec-is-injective-concat' :
+  is-section-is-injective-concat' :
     {x y z : A} (r : y ＝ z) {p q : x ＝ y} (s : (p ∙ r) ＝ (q ∙ r)) →
     ap (concat' x r) (is-injective-concat' r s) ＝ s
-  issec-is-injective-concat' refl s =
-    ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α) ∙
-    ( ( cases-issec-is-injective-concat' (inv right-unit ∙ (s ∙ right-unit))) ∙
-      α)
+  is-section-is-injective-concat' refl s =
+    ( ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α)) ∙
+    ( ( cases-is-section-is-injective-concat'
+        ( inv right-unit ∙ (s ∙ right-unit))) ∙
+      ( α))
     where
     α :
       ( ( right-unit) ∙

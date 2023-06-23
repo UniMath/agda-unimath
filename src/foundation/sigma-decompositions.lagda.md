@@ -931,10 +931,10 @@ module _
         ( right-inverse-law-equiv (equiv-Σ-equiv-base Y (inv-equiv f)))
         ( map-equiv e a)
 
-  isretr-map-inv-displayed-fibered-Σ-Decomposition :
+  is-retraction-map-inv-displayed-fibered-Σ-Decomposition :
     map-inv-displayed-fibered-Σ-Decomposition
       ( map-displayed-fibered-Σ-Decomposition fib-D) ＝ fib-D
-  isretr-map-inv-displayed-fibered-Σ-Decomposition =
+  is-retraction-map-inv-displayed-fibered-Σ-Decomposition =
     eq-equiv-fibered-Σ-Decomposition
       ( map-inv-displayed-fibered-Σ-Decomposition
         ( map-displayed-fibered-Σ-Decomposition fib-D))
@@ -986,23 +986,23 @@ module _
               ( inv
                 ( map-eq-transpose-equiv
                   ( associative-Σ M P Y)
-                  ( issec-map-inv-associative-Σ M P Y
+                  ( is-section-map-inv-associative-Σ M P Y
                     ( map-equiv (equiv-tot t ∘e s) x)))))))) ∙
       ( inv
         ( preserves-comp-tot
           ( map-equiv ∘ t)
           ( map-inv-equiv ∘ t)
           ( map-equiv s x)) ∙
-      ( tot-htpy (λ z → isretr-map-inv-equiv (t z)) (map-equiv s x) ∙
+      ( tot-htpy (λ z → is-retraction-map-inv-equiv (t z)) (map-equiv s x) ∙
       ( tot-id
         ( λ z → cotype-fst-displayed-Σ-Decomposition disp-D z)
         ( map-equiv s x))))
 
-  issec-map-inv-displayed-fibered-Σ-Decomposition :
+  is-section-map-inv-displayed-fibered-Σ-Decomposition :
     ( map-displayed-fibered-Σ-Decomposition
       {l1} {l} {l} {l} {l} {A} fib-D) ＝
     disp-D
-  issec-map-inv-displayed-fibered-Σ-Decomposition =
+  is-section-map-inv-displayed-fibered-Σ-Decomposition =
     eq-equiv-displayed-Σ-Decomposition
       ( map-displayed-fibered-Σ-Decomposition fib-D)
       ( disp-D)
@@ -1021,8 +1021,8 @@ is-equiv-map-displayed-fibered-Σ-Decomposition :
 is-equiv-map-displayed-fibered-Σ-Decomposition =
   is-equiv-has-inverse
     ( map-inv-displayed-fibered-Σ-Decomposition)
-    ( issec-map-inv-displayed-fibered-Σ-Decomposition)
-    ( isretr-map-inv-displayed-fibered-Σ-Decomposition)
+    ( is-section-map-inv-displayed-fibered-Σ-Decomposition)
+    ( is-retraction-map-inv-displayed-fibered-Σ-Decomposition)
 
 equiv-displayed-fibered-Σ-Decomposition :
   {l1 l : Level} → {A : UU l1} →

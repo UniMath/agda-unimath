@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # Run this script:
 # python3 scripts/spaces_conventions_simple.py fileName.lagda.md
-# Some simply enforcable space conventions
+# Some simple to enforce space conventions
+
+# * Remember to update the script's entry in `CONTRIBUTING.md` on expansion
 
 import sys
 import utils

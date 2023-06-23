@@ -391,10 +391,10 @@ module _
       ( inv β₁ ∙ β₂)
       ( q)
 
-  issec-map-inv-pullback-product-Slice-Precategory :
+  is-section-map-inv-pullback-product-Slice-Precategory :
     ( map-pullback-product-Slice-Precategory ∘
       map-inv-pullback-product-Slice-Precategory) ~ id
-  issec-map-inv-pullback-product-Slice-Precategory
+  is-section-map-inv-pullback-product-Slice-Precategory
     ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
     eq-pair-Σ
       ( refl)
@@ -411,10 +411,11 @@ module _
               ( _))
           ( refl)))
 
-  isretr-map-inv-pullback-product-Slice-Precategory :
+  is-retraction-map-inv-pullback-product-Slice-Precategory :
     ( map-inv-pullback-product-Slice-Precategory ∘
       map-pullback-product-Slice-Precategory) ~ id
-  isretr-map-inv-pullback-product-Slice-Precategory (W , p₁ , p₂ , α , q) =
+  is-retraction-map-inv-pullback-product-Slice-Precategory
+    ( W , p₁ , p₂ , α , q) =
     eq-pair-Σ
       ( refl)
       ( eq-pair-Σ
@@ -433,6 +434,6 @@ module _
   pr2 equiv-pullback-product-Slice-Precategory =
     is-equiv-has-inverse
       map-inv-pullback-product-Slice-Precategory
-      issec-map-inv-pullback-product-Slice-Precategory
-      isretr-map-inv-pullback-product-Slice-Precategory
+      is-section-map-inv-pullback-product-Slice-Precategory
+      is-retraction-map-inv-pullback-product-Slice-Precategory
 ```

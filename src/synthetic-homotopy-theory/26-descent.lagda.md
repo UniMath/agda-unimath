@@ -1,4 +1,4 @@
-# Formalisation of the Symmetry Book - 26 descent
+# Formalization of the Symmetry book - 26 descent
 
 ```agda
 module synthetic-homotopy-theory.26-descent where
@@ -606,21 +606,21 @@ eq-equiv-Fam-pushout :
 eq-equiv-Fam-pushout {P = P} {Q} =
   map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
 
-issec-eq-equiv-Fam-pushout :
+is-section-eq-equiv-Fam-pushout :
   { l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} {P Q : Fam-pushout l f g} →
   ( ( equiv-Fam-pushout-eq {P = P} {Q}) ∘
     ( eq-equiv-Fam-pushout {P = P} {Q})) ~ id
-issec-eq-equiv-Fam-pushout {P = P} {Q} =
-  issec-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
+is-section-eq-equiv-Fam-pushout {P = P} {Q} =
+  is-section-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
 
-isretr-eq-equiv-Fam-pushout :
+is-retraction-eq-equiv-Fam-pushout :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} {P Q : Fam-pushout l f g} →
   ( ( eq-equiv-Fam-pushout {P = P} {Q}) ∘
     ( equiv-Fam-pushout-eq {P = P} {Q})) ~ id
-isretr-eq-equiv-Fam-pushout {P = P} {Q} =
-  isretr-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
+is-retraction-eq-equiv-Fam-pushout {P = P} {Q} =
+  is-retraction-map-inv-is-equiv (is-equiv-equiv-Fam-pushout-eq P Q)
 ```
 
 This concludes the characterization of the identity type of `Fam-pushout`.
@@ -731,12 +731,12 @@ fam-Fam-pushout :
 fam-Fam-pushout {f = f} {g} c up-X P =
   pr1 (center (uniqueness-Fam-pushout f g c up-X P))
 
-issec-fam-Fam-pushout :
+is-section-fam-Fam-pushout :
   {l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   {f : S → A} {g : S → B} (c : cocone f g X) →
   (up-X : (l' : Level) → universal-property-pushout l' f g c) →
   ((desc-fam {l = l} c) ∘ (fam-Fam-pushout c up-X)) ~ id
-issec-fam-Fam-pushout {f = f} {g} c up-X P =
+is-section-fam-Fam-pushout {f = f} {g} c up-X P =
   inv
     ( eq-equiv-Fam-pushout (pr2 (center (uniqueness-Fam-pushout f g c up-X P))))
 

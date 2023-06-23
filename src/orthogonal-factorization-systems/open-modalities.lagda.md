@@ -107,8 +107,8 @@ module _
                   ap
                     ( λ q'' → htpy-eq (z q'') q')
                     ( eq-is-prop (is-prop-type-Prop Q))))) ∙
-            ( isretr-eq-htpy (z q))))
-      ( isretr-eq-htpy)
+            ( is-retraction-eq-htpy (z q))))
+      ( is-retraction-eq-htpy)
 
   is-higher-modality-open-modality :
     is-higher-modality

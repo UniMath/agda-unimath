@@ -41,20 +41,20 @@ module _
   pr1 (map-inv-left-unit-law-Σ a) = star
   pr2 (map-inv-left-unit-law-Σ a) = a
 
-  issec-map-inv-left-unit-law-Σ :
+  is-section-map-inv-left-unit-law-Σ :
     ( map-left-unit-law-Σ ∘ map-inv-left-unit-law-Σ) ~ id
-  issec-map-inv-left-unit-law-Σ a = refl
+  is-section-map-inv-left-unit-law-Σ a = refl
 
-  isretr-map-inv-left-unit-law-Σ :
+  is-retraction-map-inv-left-unit-law-Σ :
     ( map-inv-left-unit-law-Σ ∘ map-left-unit-law-Σ) ~ id
-  isretr-map-inv-left-unit-law-Σ (pair star a) = refl
+  is-retraction-map-inv-left-unit-law-Σ (pair star a) = refl
 
   is-equiv-map-left-unit-law-Σ : is-equiv map-left-unit-law-Σ
   is-equiv-map-left-unit-law-Σ =
     is-equiv-has-inverse
       map-inv-left-unit-law-Σ
-      issec-map-inv-left-unit-law-Σ
-      isretr-map-inv-left-unit-law-Σ
+      is-section-map-inv-left-unit-law-Σ
+      is-retraction-map-inv-left-unit-law-Σ
 
   left-unit-law-Σ : Σ unit A ≃ A star
   pr1 left-unit-law-Σ = map-left-unit-law-Σ
@@ -64,8 +64,8 @@ module _
   is-equiv-map-inv-left-unit-law-Σ =
     is-equiv-has-inverse
       map-left-unit-law-Σ
-      isretr-map-inv-left-unit-law-Σ
-      issec-map-inv-left-unit-law-Σ
+      is-retraction-map-inv-left-unit-law-Σ
+      is-section-map-inv-left-unit-law-Σ
 
   inv-left-unit-law-Σ : A star ≃ Σ unit A
   pr1 inv-left-unit-law-Σ = map-inv-left-unit-law-Σ
@@ -85,21 +85,21 @@ module _
   map-inv-left-unit-law-prod : A → unit × A
   map-inv-left-unit-law-prod = map-inv-left-unit-law-Σ (λ x → A)
 
-  issec-map-inv-left-unit-law-prod :
+  is-section-map-inv-left-unit-law-prod :
     ( map-left-unit-law-prod ∘ map-inv-left-unit-law-prod) ~ id
-  issec-map-inv-left-unit-law-prod =
-    issec-map-inv-left-unit-law-Σ (λ x → A)
+  is-section-map-inv-left-unit-law-prod =
+    is-section-map-inv-left-unit-law-Σ (λ x → A)
 
-  isretr-map-inv-left-unit-law-prod :
+  is-retraction-map-inv-left-unit-law-prod :
     ( map-inv-left-unit-law-prod ∘ map-left-unit-law-prod) ~ id
-  isretr-map-inv-left-unit-law-prod (pair star a) = refl
+  is-retraction-map-inv-left-unit-law-prod (pair star a) = refl
 
   is-equiv-map-left-unit-law-prod : is-equiv map-left-unit-law-prod
   is-equiv-map-left-unit-law-prod =
     is-equiv-has-inverse
       map-inv-left-unit-law-prod
-      issec-map-inv-left-unit-law-prod
-      isretr-map-inv-left-unit-law-prod
+      is-section-map-inv-left-unit-law-prod
+      is-retraction-map-inv-left-unit-law-prod
 
   left-unit-law-prod : (unit × A) ≃ A
   pr1 left-unit-law-prod = map-left-unit-law-prod
@@ -109,8 +109,8 @@ module _
   is-equiv-map-inv-left-unit-law-prod =
     is-equiv-has-inverse
       map-left-unit-law-prod
-      isretr-map-inv-left-unit-law-prod
-      issec-map-inv-left-unit-law-prod
+      is-retraction-map-inv-left-unit-law-prod
+      is-section-map-inv-left-unit-law-prod
 
   inv-left-unit-law-prod : A ≃ (unit × A)
   pr1 inv-left-unit-law-prod = map-inv-left-unit-law-prod
@@ -127,20 +127,20 @@ module _
   pr1 (map-inv-right-unit-law-prod a) = a
   pr2 (map-inv-right-unit-law-prod a) = star
 
-  issec-map-inv-right-unit-law-prod :
+  is-section-map-inv-right-unit-law-prod :
     (map-right-unit-law-prod ∘ map-inv-right-unit-law-prod) ~ id
-  issec-map-inv-right-unit-law-prod a = refl
+  is-section-map-inv-right-unit-law-prod a = refl
 
-  isretr-map-inv-right-unit-law-prod :
+  is-retraction-map-inv-right-unit-law-prod :
     (map-inv-right-unit-law-prod ∘ map-right-unit-law-prod) ~ id
-  isretr-map-inv-right-unit-law-prod (pair a star) = refl
+  is-retraction-map-inv-right-unit-law-prod (pair a star) = refl
 
   is-equiv-map-right-unit-law-prod : is-equiv map-right-unit-law-prod
   is-equiv-map-right-unit-law-prod =
     is-equiv-has-inverse
       map-inv-right-unit-law-prod
-      issec-map-inv-right-unit-law-prod
-      isretr-map-inv-right-unit-law-prod
+      is-section-map-inv-right-unit-law-prod
+      is-retraction-map-inv-right-unit-law-prod
 
   right-unit-law-prod : (A × unit) ≃ A
   pr1 right-unit-law-prod = map-right-unit-law-prod
@@ -160,20 +160,20 @@ module _
   map-inv-left-unit-law-Π : A star → ((t : unit) → A t)
   map-inv-left-unit-law-Π a star = a
 
-  issec-map-inv-left-unit-law-Π :
+  is-section-map-inv-left-unit-law-Π :
     ( map-left-unit-law-Π ∘ map-inv-left-unit-law-Π) ~ id
-  issec-map-inv-left-unit-law-Π a = refl
+  is-section-map-inv-left-unit-law-Π a = refl
 
-  isretr-map-inv-left-unit-law-Π :
+  is-retraction-map-inv-left-unit-law-Π :
     ( map-inv-left-unit-law-Π ∘ map-left-unit-law-Π) ~ id
-  isretr-map-inv-left-unit-law-Π f = eq-htpy (λ { star → refl})
+  is-retraction-map-inv-left-unit-law-Π f = eq-htpy (λ { star → refl})
 
   is-equiv-map-left-unit-law-Π : is-equiv map-left-unit-law-Π
   is-equiv-map-left-unit-law-Π =
     is-equiv-has-inverse
       map-inv-left-unit-law-Π
-      issec-map-inv-left-unit-law-Π
-      isretr-map-inv-left-unit-law-Π
+      is-section-map-inv-left-unit-law-Π
+      is-retraction-map-inv-left-unit-law-Π
 
   left-unit-law-Π : ((t : unit) → A t) ≃ A star
   pr1 left-unit-law-Π = map-left-unit-law-Π
@@ -183,8 +183,8 @@ module _
   is-equiv-map-inv-left-unit-law-Π =
     is-equiv-has-inverse
       map-left-unit-law-Π
-      isretr-map-inv-left-unit-law-Π
-      issec-map-inv-left-unit-law-Π
+      is-retraction-map-inv-left-unit-law-Π
+      is-section-map-inv-left-unit-law-Π
 
   inv-left-unit-law-Π : A star ≃ ((t : unit) → A t)
   pr1 inv-left-unit-law-Π = map-inv-left-unit-law-Π

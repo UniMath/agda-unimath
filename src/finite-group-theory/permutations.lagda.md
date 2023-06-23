@@ -82,11 +82,11 @@ module _
         ( (inv-equiv-count eX ∘e f) ∘e equiv-count eX))
 
   abstract
-    retr-permutation-list-transpositions-count :
+    retraction-permutation-list-transpositions-count :
       htpy-equiv
         ( permutation-list-transpositions list-transpositions-permutation-count)
         ( f)
-    retr-permutation-list-transpositions-count x =
+    retraction-permutation-list-transpositions-count x =
       ( correct-transposition-conjugation-equiv-list
         ( Fin (number-of-elements-count eX))
         ( X)
@@ -97,7 +97,7 @@ module _
         ( x)) ∙
         ( ( ap
             ( map-equiv-count eX)
-            ( retr-permutation-list-transpositions-Fin
+            ( retraction-permutation-list-transpositions-Fin
               ( number-of-elements-count eX)
               ( (inv-equiv-count eX ∘e f) ∘e equiv-count eX)
               ( map-inv-equiv-count eX x))) ∙
@@ -147,7 +147,7 @@ module _
                   ( pair n h)
                   ( f))) ∙
               ( eq-htpy-equiv
-                ( retr-permutation-list-transpositions-count
+                ( retraction-permutation-list-transpositions-count
                   ( type-UU-Fin n X)
                   ( pair n h)
                   ( f))))))
@@ -210,7 +210,7 @@ module _
                     ( pair refl
                       ( inv
                         ( eq-htpy-equiv
-                          ( retr-permutation-list-transpositions-count
+                          ( retraction-permutation-list-transpositions-count
                             ( type-UU-Fin n X)
                             ( pair n h)
                             ( f))))))))
@@ -251,7 +251,7 @@ module _
                                   ( list-transposition-f h)}
                               { y = permutation-list-transpositions li}
                               ( ( eq-htpy-equiv
-                                  ( retr-permutation-list-transpositions-count
+                                  ( retraction-permutation-list-transpositions-count
                                     ( type-UU-Fin n X)
                                     ( pair n h)
                                     ( f))) ∙

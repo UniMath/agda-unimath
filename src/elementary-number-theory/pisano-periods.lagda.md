@@ -56,13 +56,13 @@ inv-generating-map-fibonacci-pair-Fin :
 inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   pair (add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x)) x
 
-issec-inv-generating-map-fibonacci-pair-Fin :
+is-section-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
   Id
     ( generating-map-fibonacci-pair-Fin k
       ( inv-generating-map-fibonacci-pair-Fin k p))
     ( p)
-issec-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
+is-section-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair refl
     ( ( commutative-add-Fin
         ( succ-ℕ k)
@@ -72,13 +72,13 @@ issec-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
         ( ( ap (add-Fin (succ-ℕ k) y) (left-inverse-law-add-Fin k x)) ∙
           ( right-unit-law-add-Fin k y))))
 
-isretr-inv-generating-map-fibonacci-pair-Fin :
+is-retraction-inv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) (p : Fin (succ-ℕ k) × Fin (succ-ℕ k)) →
   Id
     ( inv-generating-map-fibonacci-pair-Fin k
       ( generating-map-fibonacci-pair-Fin k p))
     ( p)
-isretr-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
+is-retraction-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
   ap-binary pair
     ( ( commutative-add-Fin
         ( succ-ℕ k)
@@ -94,8 +94,8 @@ is-equiv-generating-map-fibonacci-pair-Fin :
 is-equiv-generating-map-fibonacci-pair-Fin k =
   is-equiv-has-inverse
     ( inv-generating-map-fibonacci-pair-Fin k)
-    ( issec-inv-generating-map-fibonacci-pair-Fin k)
-    ( isretr-inv-generating-map-fibonacci-pair-Fin k)
+    ( is-section-inv-generating-map-fibonacci-pair-Fin k)
+    ( is-retraction-inv-generating-map-fibonacci-pair-Fin k)
 
 fibonacci-pair-Fin :
   (k : ℕ) → ℕ → Fin (succ-ℕ k) × Fin (succ-ℕ k)

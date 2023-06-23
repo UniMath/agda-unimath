@@ -90,7 +90,7 @@ module _
   abstract
     is-equiv-prop-in-id : (x y : A) → is-equiv (i x y)
     is-equiv-prop-in-id x =
-      fundamental-theorem-id-retr x (i x)
+      fundamental-theorem-id-retraction x (i x)
         ( λ y →
           pair
             ( ind-Id x (λ z p → R x z) (ρ x) y)

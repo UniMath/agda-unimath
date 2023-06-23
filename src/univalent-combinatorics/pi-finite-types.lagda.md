@@ -742,7 +742,7 @@ module _
   is-surjective-map-is-coprod-codomain b =
     apply-universal-property-trunc-Prop
       ( apply-effectiveness-unit-trunc-Set
-        ( inv (issec-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
+        ( inv (is-section-map-inv-equiv e (unit-trunc-Set b)) ∙ inv (H a)))
       ( trunc-Prop (fib map-is-coprod-codomain b))
       ( λ p →
         unit-trunc-Prop

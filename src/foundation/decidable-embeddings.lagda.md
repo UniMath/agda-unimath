@@ -325,7 +325,7 @@ equiv-precomp-decidable-emb-equiv e C =
         ( is-decidable-emb-comp (is-decidable-emb-is-equiv (pr2 e)))
         ( λ d →
           is-decidable-emb-htpy
-            ( λ b → ap g (inv (issec-map-inv-equiv e b)))
+            ( λ b → ap g (inv (is-section-map-inv-equiv e b)))
             ( is-decidable-emb-comp
               ( is-decidable-emb-is-equiv (is-equiv-map-inv-equiv e))
               ( d))))

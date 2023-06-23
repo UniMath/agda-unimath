@@ -188,6 +188,7 @@ open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
+open import foundation.pointed-torsorial-type-families public
 open import foundation.powersets public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
@@ -233,6 +234,7 @@ open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
+open import foundation.sorial-type-families public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
@@ -249,6 +251,7 @@ open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
+open import foundation.torsorial-type-families public
 open import foundation.transport public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public

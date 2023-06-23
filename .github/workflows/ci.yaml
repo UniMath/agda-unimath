@@ -49,8 +49,8 @@ jobs:
           agda-version: ${{ matrix.agda }}
 
       - uses: actions/cache/restore@v3
-        id: cache-agda-formalisation
-        name: Restore Agda formalisation cache
+        id: cache-agda-formalization
+        name: Restore Agda formalization cache
         with:
           path: master/_build
           key:
@@ -60,7 +60,7 @@ jobs:
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
             ${{ runner.os }}-check-refs/heads/master-${{ matrix.agda }}-
 
-      - name: Typecheck the whole formalisation
+      - name: Typecheck the whole formalization
         run: |
           cd master
           make check
@@ -69,7 +69,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: master/_build
-          key: '${{ steps.cache-agda-formalisation.outputs.cache-primary-key }}'
+          key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
 
   pre-commit:
     runs-on: ubuntu-latest

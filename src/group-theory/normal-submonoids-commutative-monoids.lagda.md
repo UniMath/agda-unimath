@@ -549,13 +549,13 @@ module _
 ### The type of normal submonoids of `M` is a retract of the type of congruence relations of `M`
 
 ```agda
-issec-congruence-Normal-Commutative-Submonoid :
+is-section-congruence-Normal-Commutative-Submonoid :
   {l1 : Level} (l2 : Level) (M : Commutative-Monoid l1)
   (N : Normal-Commutative-Submonoid (l1 ⊔ l2) M) →
   ( normal-submonoid-congruence-Commutative-Monoid M
     ( congruence-Normal-Commutative-Submonoid M N)) ＝
   ( N)
-issec-congruence-Normal-Commutative-Submonoid l2 M N =
+is-section-congruence-Normal-Commutative-Submonoid l2 M N =
   eq-has-same-elements-Normal-Commutative-Submonoid M
     ( normal-submonoid-congruence-Commutative-Monoid M
       ( congruence-Normal-Commutative-Submonoid M N))
@@ -572,19 +572,19 @@ pr1 (normal-submonoid-retract-of-congruence-Commutative-Monoid l2 M) =
 pr1 (pr2 (normal-submonoid-retract-of-congruence-Commutative-Monoid l2 M)) =
   normal-submonoid-congruence-Commutative-Monoid M
 pr2 (pr2 (normal-submonoid-retract-of-congruence-Commutative-Monoid l2 M)) =
-  issec-congruence-Normal-Commutative-Submonoid l2 M
+  is-section-congruence-Normal-Commutative-Submonoid l2 M
 ```
 
 ### The type of normal submonoids of `M` is equivalent to the type of saturated congruence relations on `M`
 
 ```agda
-issec-saturated-congruence-Normal-Commutative-Submonoid :
+is-section-saturated-congruence-Normal-Commutative-Submonoid :
   {l1 : Level} (l2 : Level) (M : Commutative-Monoid l1)
   (N : Normal-Commutative-Submonoid (l1 ⊔ l2) M) →
   ( normal-submonoid-saturated-congruence-Commutative-Monoid M
     ( saturated-congruence-Normal-Commutative-Submonoid M N)) ＝
   ( N)
-issec-saturated-congruence-Normal-Commutative-Submonoid l2 M N =
+is-section-saturated-congruence-Normal-Commutative-Submonoid l2 M N =
   eq-has-same-elements-Normal-Commutative-Submonoid M
     ( normal-submonoid-saturated-congruence-Commutative-Monoid M
       ( saturated-congruence-Normal-Commutative-Submonoid M N))
@@ -592,13 +592,13 @@ issec-saturated-congruence-Normal-Commutative-Submonoid l2 M N =
     ( has-same-elements-normal-submonoid-congruence-Normal-Commutative-Submonoid
       M N)
 
-isretr-saturated-congruence-Normal-Commutative-Submonoid :
+is-retraction-saturated-congruence-Normal-Commutative-Submonoid :
   {l1 : Level} (l2 : Level) (M : Commutative-Monoid l1)
   (R : saturated-congruence-Commutative-Monoid (l1 ⊔ l2) M) →
   ( saturated-congruence-Normal-Commutative-Submonoid M
     ( normal-submonoid-saturated-congruence-Commutative-Monoid M R)) ＝
   ( R)
-isretr-saturated-congruence-Normal-Commutative-Submonoid l2 M R =
+is-retraction-saturated-congruence-Normal-Commutative-Submonoid l2 M R =
   eq-relate-same-elements-saturated-congruence-Commutative-Monoid M
     ( saturated-congruence-Normal-Commutative-Submonoid M
       ( normal-submonoid-saturated-congruence-Commutative-Monoid M R))
@@ -614,8 +614,8 @@ is-equiv-normal-submonoid-saturated-congruence-Commutative-Monoid :
 is-equiv-normal-submonoid-saturated-congruence-Commutative-Monoid l2 M =
   is-equiv-has-inverse
     ( saturated-congruence-Normal-Commutative-Submonoid M)
-    ( issec-saturated-congruence-Normal-Commutative-Submonoid l2 M)
-    ( isretr-saturated-congruence-Normal-Commutative-Submonoid l2 M)
+    ( is-section-saturated-congruence-Normal-Commutative-Submonoid l2 M)
+    ( is-retraction-saturated-congruence-Normal-Commutative-Submonoid l2 M)
 
 equiv-normal-submonoid-saturated-congruence-Commutative-Monoid :
   {l1 : Level} (l2 : Level) (M : Commutative-Monoid l1) →

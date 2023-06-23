@@ -109,17 +109,17 @@ module _
   map-inv-iterate-automorphism-ℤ k e =
     map-inv-equiv (iterate-automorphism-ℤ k e)
 
-  issec-map-inv-iterate-automorphism-ℤ :
+  is-section-map-inv-iterate-automorphism-ℤ :
     (k : ℤ) (e : Aut X) →
     (map-iterate-automorphism-ℤ k e ∘ map-inv-iterate-automorphism-ℤ k e) ~ id
-  issec-map-inv-iterate-automorphism-ℤ k e =
-    issec-map-inv-equiv (iterate-automorphism-ℤ k e)
+  is-section-map-inv-iterate-automorphism-ℤ k e =
+    is-section-map-inv-equiv (iterate-automorphism-ℤ k e)
 
-  isretr-map-inv-iterate-automorphism-ℤ :
+  is-retraction-map-inv-iterate-automorphism-ℤ :
     (k : ℤ) (e : Aut X) →
     (map-inv-iterate-automorphism-ℤ k e ∘ map-iterate-automorphism-ℤ k e) ~ id
-  isretr-map-inv-iterate-automorphism-ℤ k e =
-    isretr-map-inv-equiv (iterate-automorphism-ℤ k e)
+  is-retraction-map-inv-iterate-automorphism-ℤ k e =
+    is-retraction-map-inv-equiv (iterate-automorphism-ℤ k e)
 ```
 
 #### Iterating by precomposition using an integer
@@ -196,9 +196,10 @@ module _
     htpy-equiv
       ( iterate-automorphism-ℤ (succ-ℤ k) e)
       ( iterate-automorphism-ℤ k e ∘e e)
-  iterate-automorphism-succ-ℤ (inl zero-ℕ) e = inv-htpy (isretr-map-inv-equiv e)
+  iterate-automorphism-succ-ℤ (inl zero-ℕ) e =
+    inv-htpy (is-retraction-map-inv-equiv e)
   iterate-automorphism-succ-ℤ (inl (succ-ℕ zero-ℕ)) e =
-    inv-htpy (map-inv-equiv e ·l isretr-map-inv-equiv e)
+    inv-htpy (map-inv-equiv e ·l is-retraction-map-inv-equiv e)
   iterate-automorphism-succ-ℤ (inl (succ-ℕ (succ-ℕ x))) e =
     map-inv-equiv e ·l iterate-automorphism-succ-ℤ (inl (succ-ℕ x)) e
   iterate-automorphism-succ-ℤ (inr (inl star)) e = refl-htpy
@@ -211,9 +212,10 @@ module _
     htpy-equiv
       ( iterate-automorphism-ℤ (succ-ℤ k) e)
       ( e ∘e iterate-automorphism-ℤ k e)
-  iterate-automorphism-succ-ℤ' (inl zero-ℕ) e = inv-htpy (issec-map-inv-equiv e)
+  iterate-automorphism-succ-ℤ' (inl zero-ℕ) e =
+    inv-htpy (is-section-map-inv-equiv e)
   iterate-automorphism-succ-ℤ' (inl (succ-ℕ x)) e =
-    ( inv-htpy (issec-map-inv-equiv e)) ·r
+    ( inv-htpy (is-section-map-inv-equiv e)) ·r
     ( map-iterate-automorphism-ℤ (inl x) e)
   iterate-automorphism-succ-ℤ' (inr (inl star)) e = refl-htpy
   iterate-automorphism-succ-ℤ' (inr (inr x)) e = refl-htpy
@@ -228,9 +230,9 @@ module _
     map-inv-equiv e ·l iterate-automorphism-pred-ℤ (inl x) e
   iterate-automorphism-pred-ℤ (inr (inl star)) e = refl-htpy
   iterate-automorphism-pred-ℤ (inr (inr zero-ℕ)) e =
-    inv-htpy (issec-map-inv-equiv e)
+    inv-htpy (is-section-map-inv-equiv e)
   iterate-automorphism-pred-ℤ (inr (inr (succ-ℕ zero-ℕ))) e =
-    inv-htpy (map-equiv e ·l issec-map-inv-equiv e)
+    inv-htpy (map-equiv e ·l is-section-map-inv-equiv e)
   iterate-automorphism-pred-ℤ (inr (inr (succ-ℕ (succ-ℕ x)))) e =
     map-equiv e ·l iterate-automorphism-pred-ℤ (inr (inr (succ-ℕ x))) e
 
@@ -243,9 +245,9 @@ module _
   iterate-automorphism-pred-ℤ' (inl (succ-ℕ x)) e = refl-htpy
   iterate-automorphism-pred-ℤ' (inr (inl star)) e = refl-htpy
   iterate-automorphism-pred-ℤ' (inr (inr zero-ℕ)) e =
-    inv-htpy (isretr-map-inv-equiv e)
+    inv-htpy (is-retraction-map-inv-equiv e)
   iterate-automorphism-pred-ℤ' (inr (inr (succ-ℕ x))) e =
-    ( inv-htpy (isretr-map-inv-equiv e)) ·r
+    ( inv-htpy (is-retraction-map-inv-equiv e)) ·r
     ( map-equiv (iterate-automorphism-ℤ (inr (inr x)) e))
 
   reassociate-iterate-automorphism-ℤ :

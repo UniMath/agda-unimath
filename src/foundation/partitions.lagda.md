@@ -219,15 +219,15 @@ will have no more use for the large type of blocks of a partition.
   map-inv-compute-block-partition =
     map-inv-equiv compute-block-partition
 
-  issec-map-inv-compute-block-partition :
+  is-section-map-inv-compute-block-partition :
     ( map-compute-block-partition ∘ map-inv-compute-block-partition) ~ id
-  issec-map-inv-compute-block-partition =
-    issec-map-inv-equiv compute-block-partition
+  is-section-map-inv-compute-block-partition =
+    is-section-map-inv-equiv compute-block-partition
 
-  isretr-map-inv-compute-block-partition :
+  is-retraction-map-inv-compute-block-partition :
     ( map-inv-compute-block-partition ∘ map-compute-block-partition) ~ id
-  isretr-map-inv-compute-block-partition =
-    isretr-map-inv-equiv compute-block-partition
+  is-retraction-map-inv-compute-block-partition =
+    is-retraction-map-inv-equiv compute-block-partition
 
   inhabited-subtype-block-partition : block-partition → inhabited-subtype l2 A
   inhabited-subtype-block-partition =
@@ -292,7 +292,7 @@ will have no more use for the large type of blocks of a partition.
   compute-is-in-block-partition B H x =
     equiv-tr
       ( λ C → is-in-block-partition-Large-Type C x)
-      ( inv (isretr-map-inv-compute-block-partition (B , H)))
+      ( inv (is-retraction-map-inv-compute-block-partition (B , H)))
 
   make-is-in-block-partition :
     (B : inhabited-subtype l2 A) (H : is-block-partition B) (x : A) →
@@ -317,7 +317,7 @@ will have no more use for the large type of blocks of a partition.
         ( λ B →
           equiv-tr
             ( λ C → is-in-block-partition-Large-Type C a)
-            ( inv (isretr-map-inv-compute-block-partition B))))
+            ( inv (is-retraction-map-inv-compute-block-partition B))))
       ( is-partition-subtype-partition a)
 
   center-block-containing-element-partition :

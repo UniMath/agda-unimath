@@ -155,7 +155,7 @@ module _
     contraction-total-Eq-isolated-point :
       (d : is-isolated a) (t : Σ A (Eq-isolated-point d)) →
       center-total-Eq-isolated-point d ＝ t
-    contraction-total-Eq-isolated-point d (pair x e) =
+    contraction-total-Eq-isolated-point d (x , e) =
       eq-type-subtype
         ( Eq-isolated-point-Prop d)
         ( cases-contraction-total-Eq-isolated-point d x (d x) e)
@@ -230,7 +230,7 @@ is-emb-inclusion-isolated-point A = is-emb-inclusion-subtype is-isolated-Prop
 
 has-decidable-equality-isolated-point :
   {l1 : Level} (A : UU l1) → has-decidable-equality (isolated-point A)
-has-decidable-equality-isolated-point A (pair x dx) (pair y dy) =
+has-decidable-equality-isolated-point A (x , dx) (y , dy) =
   is-decidable-equiv
     ( equiv-ap-inclusion-subtype is-isolated-Prop)
     ( dx y)
@@ -242,18 +242,18 @@ is-set-isolated-point A =
 
 decidable-emb-isolated-point :
   {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪d A
-decidable-emb-isolated-point {l1} {A} a =
-  pair
-    ( const unit A (pr1 a))
-    ( pair
-      ( is-emb-comp
-        ( inclusion-isolated-point A)
-        ( const unit (isolated-point A) a)
-        ( is-emb-inclusion-isolated-point A)
-        ( is-emb-is-injective
-          ( is-set-isolated-point A)
-          ( λ { {star} {star} p → refl})))
-      ( λ x → is-decidable-prod is-decidable-unit (pr2 a x)))
+pr1 (decidable-emb-isolated-point {l1} {A} a) =
+  const unit A (pr1 a)
+pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
+  is-emb-comp
+    ( inclusion-isolated-point A)
+    ( const unit (isolated-point A) a)
+    ( is-emb-inclusion-isolated-point A)
+    ( is-emb-is-injective
+      ( is-set-isolated-point A)
+      ( λ { {star} {star} p → refl}))
+pr2 (pr2 (decidable-emb-isolated-point {l1} {A} a)) x =
+  is-decidable-prod is-decidable-unit (pr2 a x)
 ```
 
 ### Types with isolated points can be equipped with a Maybe-structure
@@ -262,53 +262,54 @@ decidable-emb-isolated-point {l1} {A} a =
 map-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   Maybe (complement-isolated-point X x) → X
-map-maybe-structure-isolated-point X (pair x d) (inl (pair y f)) = y
-map-maybe-structure-isolated-point X (pair x d) (inr star) = x
+map-maybe-structure-isolated-point X (x , d) (inl (y , f)) = y
+map-maybe-structure-isolated-point X (x , d) (inr star) = x
 
 cases-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   (y : X) → is-decidable (pr1 x ＝ y) → Maybe (complement-isolated-point X x)
-cases-map-inv-maybe-structure-isolated-point X (pair x dx) y (inl p) =
+cases-map-inv-maybe-structure-isolated-point X (x , dx) y (inl p) =
   inr star
-cases-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
-  inl (pair y f)
+cases-map-inv-maybe-structure-isolated-point X (x , dx) y (inr f) =
+  inl (y , f)
 
 map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   X → Maybe (complement-isolated-point X x)
-map-inv-maybe-structure-isolated-point X (pair x d) y =
-  cases-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
+map-inv-maybe-structure-isolated-point X (x , d) y =
+  cases-map-inv-maybe-structure-isolated-point X (x , d) y (d y)
 
-cases-issec-map-inv-maybe-structure-isolated-point :
+cases-is-section-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   (y : X) (d : is-decidable (pr1 x ＝ y)) →
   ( map-maybe-structure-isolated-point X x
     ( cases-map-inv-maybe-structure-isolated-point X x y d)) ＝
   ( y)
-cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) .x (inl refl) =
+cases-is-section-map-inv-maybe-structure-isolated-point X
+  (x , dx) .x (inl refl) =
   refl
-cases-issec-map-inv-maybe-structure-isolated-point X (pair x dx) y (inr f) =
+cases-is-section-map-inv-maybe-structure-isolated-point X (x , dx) y (inr f) =
   refl
 
-issec-map-inv-maybe-structure-isolated-point :
+is-section-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   ( map-maybe-structure-isolated-point X x ∘
     map-inv-maybe-structure-isolated-point X x) ~ id
-issec-map-inv-maybe-structure-isolated-point X (pair x d) y =
-  cases-issec-map-inv-maybe-structure-isolated-point X (pair x d) y (d y)
+is-section-map-inv-maybe-structure-isolated-point X (x , d) y =
+  cases-is-section-map-inv-maybe-structure-isolated-point X (x , d) y (d y)
 
-isretr-map-inv-maybe-structure-isolated-point :
+is-retraction-map-inv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   ( map-inv-maybe-structure-isolated-point X x ∘
     map-maybe-structure-isolated-point X x) ~ id
-isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inl (pair y f)) =
+is-retraction-map-inv-maybe-structure-isolated-point X (x , dx) (inl (y , f)) =
   ap
-    ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) y)
+    ( cases-map-inv-maybe-structure-isolated-point X (x , dx) y)
     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx y)))
-isretr-map-inv-maybe-structure-isolated-point X (pair x dx) (inr star) =
+is-retraction-map-inv-maybe-structure-isolated-point X (x , dx) (inr star) =
   ap
-    ( cases-map-inv-maybe-structure-isolated-point X (pair x dx) x)
-    { x = dx (map-maybe-structure-isolated-point X (pair x dx) (inr star))}
+    ( cases-map-inv-maybe-structure-isolated-point X (x , dx) x)
+    { x = dx (map-maybe-structure-isolated-point X (x , dx) (inr star))}
     { y = inl refl}
     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-point x dx x)))
 
@@ -318,8 +319,8 @@ is-equiv-map-maybe-structure-isolated-point :
 is-equiv-map-maybe-structure-isolated-point X x =
   is-equiv-has-inverse
     ( map-inv-maybe-structure-isolated-point X x)
-    ( issec-map-inv-maybe-structure-isolated-point X x)
-    ( isretr-map-inv-maybe-structure-isolated-point X x)
+    ( is-section-map-inv-maybe-structure-isolated-point X x)
+    ( is-retraction-map-inv-maybe-structure-isolated-point X x)
 
 equiv-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
@@ -363,5 +364,5 @@ natural-inclusion-equiv-complement-isolated-point :
   ( inclusion-complement-isolated-point y ∘
     map-equiv (equiv-complement-isolated-point e x y p)) ~
   ( map-equiv e ∘ inclusion-complement-isolated-point x)
-natural-inclusion-equiv-complement-isolated-point e x y p (pair x' f) = refl
+natural-inclusion-equiv-complement-isolated-point e x y p (x' , f) = refl
 ```

@@ -176,7 +176,7 @@ abstract
                   resize-𝕍
                     ( resize-𝕍 (α t) (H t))
                     ( is-small-resize-𝕍 (α t) (H t)))
-                ( isretr-map-inv-equiv e z)) ∙
+                ( is-retraction-map-inv-equiv e z)) ∙
               ( resize-resize-𝕍 (H z)))))
 
 abstract
@@ -236,7 +236,7 @@ abstract
         ( equiv-concat
           ( ap
             ( λ t → resize-𝕍 (β t) (K t))
-            ( isretr-map-inv-equiv e b))
+            ( is-retraction-map-inv-equiv e b))
           ( resize-𝕍 X H)) ∘e
         ( eq-resize-𝕍 (K b) H))
 ```
