@@ -7,6 +7,7 @@ module order-theory.large-suplattices where
 <detail><summary>Imports</summary>
 
 ```agda
+open import foundation.large-binary-relations
 open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -123,23 +124,17 @@ module _
     is-prop-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   refl-leq-Large-Suplattice :
-    {l1 : Level} → is-reflexive (leq-Large-Suplattice {l1})
+    is-large-reflexive type-Large-Suplattice leq-Large-Suplattice
   refl-leq-Large-Suplattice =
     refl-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   antisymmetric-leq-Large-Suplattice :
-    {l1 : Level} → is-antisymmetric (leq-Large-Suplattice {l1})
+    is-large-antisymmetric type-Large-Suplattice leq-Large-Suplattice
   antisymmetric-leq-Large-Suplattice =
     antisymmetric-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   transitive-leq-Large-Suplattice :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Suplattice l1)
-    (y : type-Large-Suplattice l2)
-    (z : type-Large-Suplattice l3) →
-    leq-Large-Suplattice y z →
-    leq-Large-Suplattice x y →
-    leq-Large-Suplattice x z
+    is-large-transitive type-Large-Suplattice leq-Large-Suplattice
   transitive-leq-Large-Suplattice =
     transitive-leq-Large-Poset (large-poset-Large-Suplattice L)
 

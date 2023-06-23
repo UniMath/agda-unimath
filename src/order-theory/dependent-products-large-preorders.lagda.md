@@ -8,6 +8,7 @@ module order-theory.dependent-products-large-preorders where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -53,17 +54,11 @@ module _
     is-prop-type-Prop (leq-Π-Large-Preorder-Prop x y)
 
   refl-leq-Π-Large-Preorder :
-    {l1 : Level} → is-reflexive (leq-Π-Large-Preorder {l1})
+    is-large-reflexive type-Π-Large-Preorder leq-Π-Large-Preorder
   refl-leq-Π-Large-Preorder x i = refl-leq-Large-Preorder (P i) (x i)
 
   transitive-leq-Π-Large-Preorder :
-    {l1 l2 l3 : Level}
-    (x : type-Π-Large-Preorder l1)
-    (y : type-Π-Large-Preorder l2)
-    (z : type-Π-Large-Preorder l3) →
-    leq-Π-Large-Preorder y z →
-    leq-Π-Large-Preorder x y →
-    leq-Π-Large-Preorder x z
+    is-large-transitive type-Π-Large-Preorder leq-Π-Large-Preorder
   transitive-leq-Π-Large-Preorder x y z H K i =
     transitive-leq-Large-Preorder (P i) (x i) (y i) (z i) (H i) (K i)
 

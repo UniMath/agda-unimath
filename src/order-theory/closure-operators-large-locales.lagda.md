@@ -12,6 +12,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -219,29 +220,27 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   refl-leq-closed-element-closure-operator-Large-Locale :
-    {l1 : Level} →
-    is-reflexive (leq-closed-element-closure-operator-Large-Locale {l1})
+    is-large-reflexive
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   refl-leq-closed-element-closure-operator-Large-Locale =
     refl-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   antisymmetric-leq-closed-element-closure-operator-Large-Locale :
-    {l1 : Level} →
-    is-antisymmetric (leq-closed-element-closure-operator-Large-Locale {l1})
+    is-large-antisymmetric
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   antisymmetric-leq-closed-element-closure-operator-Large-Locale =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   transitive-leq-closed-element-closure-operator-Large-Locale :
-    {l1 l2 l3 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2)
-    (z : closed-element-closure-operator-Large-Locale l3) →
-    leq-closed-element-closure-operator-Large-Locale y z →
-    leq-closed-element-closure-operator-Large-Locale x y →
-    leq-closed-element-closure-operator-Large-Locale x z
+    is-large-transitive
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   transitive-leq-closed-element-closure-operator-Large-Locale =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Locale L)

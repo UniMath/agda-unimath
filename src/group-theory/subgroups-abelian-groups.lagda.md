@@ -13,6 +13,7 @@ open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -338,23 +339,18 @@ leq-Subgroup-Ab :
 leq-Subgroup-Ab A = leq-Subgroup (group-Ab A)
 
 refl-leq-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A) →
-  leq-Subgroup-Ab A B B
+  {l1 : Level} (A : Ab l1) →
+  is-large-reflexive (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 refl-leq-Subgroup-Ab A = refl-leq-Subgroup (group-Ab A)
 
 transitive-leq-Subgroup-Ab :
-  {l1 l2 l3 l4 : Level} (A : Ab l1)
-  (B : Subgroup-Ab l2 A)
-  (C : Subgroup-Ab l3 A)
-  (D : Subgroup-Ab l4 A) →
-  leq-Subgroup-Ab A C D →
-  leq-Subgroup-Ab A B C →
-  leq-Subgroup-Ab A B D
+  {l1 : Level} (A : Ab l1) →
+  is-large-transitive (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 transitive-leq-Subgroup-Ab A = transitive-leq-Subgroup (group-Ab A)
 
 antisymmetric-leq-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (B C : Subgroup-Ab l2 A) →
-  leq-Subgroup-Ab A B C → leq-Subgroup-Ab A C B → B ＝ C
+  {l1 : Level} (A : Ab l1) →
+  is-large-antisymmetric (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 antisymmetric-leq-Subgroup-Ab A =
   antisymmetric-leq-Subgroup (group-Ab A)
 

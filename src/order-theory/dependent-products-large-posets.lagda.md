@@ -10,6 +10,7 @@ module order-theory.dependent-products-large-posets where
 open import foundation.binary-relations
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -62,23 +63,17 @@ module _
     is-prop-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   refl-leq-Π-Large-Poset :
-    {l1 : Level} → is-reflexive (leq-Π-Large-Poset {l1})
+    is-large-reflexive type-Π-Large-Poset leq-Π-Large-Poset
   refl-leq-Π-Large-Poset =
     refl-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   transitive-leq-Π-Large-Poset :
-    {l1 l2 l3 : Level}
-    (x : type-Π-Large-Poset l1)
-    (y : type-Π-Large-Poset l2)
-    (z : type-Π-Large-Poset l3) →
-    leq-Π-Large-Poset y z →
-    leq-Π-Large-Poset x y →
-    leq-Π-Large-Poset x z
+    is-large-transitive type-Π-Large-Poset leq-Π-Large-Poset
   transitive-leq-Π-Large-Poset =
     transitive-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   antisymmetric-leq-Π-Large-Poset :
-    {l1 : Level} → is-antisymmetric (leq-Π-Large-Poset {l1})
+    is-large-antisymmetric type-Π-Large-Poset leq-Π-Large-Poset
   antisymmetric-leq-Π-Large-Poset x y H K =
     eq-htpy (λ i → antisymmetric-leq-Large-Poset (P i) (x i) (y i) (H i) (K i))
 

@@ -16,6 +16,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -312,19 +313,14 @@ leq-Normal-Subgroup G H K =
     ( subgroup-Normal-Subgroup G K)
 
 refl-leq-Normal-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H : Normal-Subgroup l2 G) →
-  leq-Normal-Subgroup G H H
+  {l1 : Level} (G : Group l1) →
+  is-large-reflexive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
 refl-leq-Normal-Subgroup G H =
   refl-leq-Subgroup G (subgroup-Normal-Subgroup G H)
 
 transitive-leq-Normal-Subgroup :
-  {l1 l2 l3 l4 : Level} (G : Group l1)
-  (H : Normal-Subgroup l2 G)
-  (K : Normal-Subgroup l3 G)
-  (L : Normal-Subgroup l4 G) →
-  leq-Normal-Subgroup G K L →
-  leq-Normal-Subgroup G H K →
-  leq-Normal-Subgroup G H L
+  {l1 : Level} (G : Group l1) →
+  is-large-transitive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
 transitive-leq-Normal-Subgroup G H K L =
   transitive-leq-Subgroup G
     ( subgroup-Normal-Subgroup G H)
@@ -332,9 +328,8 @@ transitive-leq-Normal-Subgroup G H K L =
     ( subgroup-Normal-Subgroup G L)
 
 antisymmetric-leq-Normal-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H K : Normal-Subgroup l2 G) →
-  leq-Normal-Subgroup G H K →
-  leq-Normal-Subgroup G K H → H ＝ K
+  {l1 : Level} (G : Group l1) →
+  is-large-antisymmetric (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
 antisymmetric-leq-Normal-Subgroup G H K α β =
   eq-has-same-elements-Normal-Subgroup G H K (λ x → (α x , β x))
 

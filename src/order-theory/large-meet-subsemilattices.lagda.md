@@ -10,6 +10,7 @@ module order-theory.large-meet-subsemilattices where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -179,27 +180,27 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   refl-leq-Large-Meet-Subsemilattice :
-    {l1 : Level} → is-reflexive (leq-Large-Meet-Subsemilattice {l1})
+    is-large-reflexive
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   refl-leq-Large-Meet-Subsemilattice =
     refl-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   transitive-leq-Large-Meet-Subsemilattice :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Meet-Subsemilattice l1)
-    (y : type-Large-Meet-Subsemilattice l2)
-    (z : type-Large-Meet-Subsemilattice l3) →
-    leq-Large-Meet-Subsemilattice y z →
-    leq-Large-Meet-Subsemilattice x y →
-    leq-Large-Meet-Subsemilattice x z
+    is-large-transitive
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   transitive-leq-Large-Meet-Subsemilattice =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   antisymmetric-leq-Large-Meet-Subsemilattice :
-    {l1 : Level} → is-antisymmetric (leq-Large-Meet-Subsemilattice {l1})
+    is-large-antisymmetric
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   antisymmetric-leq-Large-Meet-Subsemilattice =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)

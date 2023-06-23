@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -391,15 +392,13 @@ leq-Subgroup :
 leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
 refl-leq-Subgroup :
-  {l1 l2 : Level} (G : Group l1) → is-reflexive (leq-Subgroup {l2 = l2} G)
+  {l1 : Level} (G : Group l1) →
+  is-large-reflexive (λ l → Subgroup l G) (leq-Subgroup G)
 refl-leq-Subgroup G H = refl-leq-subtype (subset-Subgroup G H)
 
 transitive-leq-Subgroup :
-  {l1 l2 l3 l4 : Level} (G : Group l1)
-  (H : Subgroup l2 G) (K : Subgroup l3 G) (L : Subgroup l4 G) →
-  leq-Subgroup G K L →
-  leq-Subgroup G H K →
-  leq-Subgroup G H L
+  {l1 : Level} (G : Group l1) →
+  is-large-transitive (λ l → Subgroup l G) (leq-Subgroup G)
 transitive-leq-Subgroup G H K L =
   transitive-leq-subtype
     ( subset-Subgroup G H)
@@ -407,8 +406,8 @@ transitive-leq-Subgroup G H K L =
     ( subset-Subgroup G L)
 
 antisymmetric-leq-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H K : Subgroup l2 G) →
-  leq-Subgroup G H K → leq-Subgroup G K H → H ＝ K
+  {l1 : Level} (G : Group l1) →
+  is-large-antisymmetric (λ l → Subgroup l G) (leq-Subgroup G)
 antisymmetric-leq-Subgroup G H K α β =
   eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
 

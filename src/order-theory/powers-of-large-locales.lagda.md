@@ -9,6 +9,7 @@ module order-theory.powers-of-large-locales where
 ```agda
 open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -81,23 +82,17 @@ module _
     is-prop-leq-Large-Locale power-Large-Locale
 
   refl-leq-power-Large-Locale :
-    {l2 : Level} → is-reflexive (leq-power-Large-Locale {l2})
+    is-large-reflexive type-power-Large-Locale leq-power-Large-Locale
   refl-leq-power-Large-Locale =
     refl-leq-Large-Locale power-Large-Locale
 
   antisymmetric-leq-power-Large-Locale :
-    {l2 : Level} → is-antisymmetric (leq-power-Large-Locale {l2})
+    is-large-antisymmetric type-power-Large-Locale leq-power-Large-Locale
   antisymmetric-leq-power-Large-Locale =
     antisymmetric-leq-Large-Locale power-Large-Locale
 
   transitive-leq-power-Large-Locale :
-    {l2 l3 l4 : Level}
-    (x : type-power-Large-Locale l2)
-    (y : type-power-Large-Locale l3)
-    (z : type-power-Large-Locale l4) →
-    leq-power-Large-Locale y z →
-    leq-power-Large-Locale x y →
-    leq-power-Large-Locale x z
+    is-large-transitive type-power-Large-Locale leq-power-Large-Locale
   transitive-leq-power-Large-Locale =
     transitive-leq-Large-Locale power-Large-Locale
 

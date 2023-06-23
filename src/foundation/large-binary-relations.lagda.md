@@ -9,16 +9,9 @@ module foundation.large-binary-relations where
 ```agda
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.subtypes
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.contractible-types
-open import foundation-core.equivalences
-open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 
@@ -122,7 +115,6 @@ module _
   is-large-antisymmetric : UUω
   is-large-antisymmetric =
     {l : Level} → is-antisymmetric (relation-Large-Relation A R l)
-
 
 module _
   {α : Level → Level} {β : Level → Level → Level}

@@ -12,6 +12,7 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -240,28 +241,27 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   refl-leq-closed-element-nucleus-Large-Locale :
-    {l1 : Level} → is-reflexive (leq-closed-element-nucleus-Large-Locale {l1})
+    is-large-reflexive
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   refl-leq-closed-element-nucleus-Large-Locale =
     refl-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   antisymmetric-leq-closed-element-nucleus-Large-Locale :
-    {l1 : Level} →
-    is-antisymmetric (leq-closed-element-nucleus-Large-Locale {l1})
+    is-large-antisymmetric
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   antisymmetric-leq-closed-element-nucleus-Large-Locale =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   transitive-leq-closed-element-nucleus-Large-Locale :
-    {l1 l2 l3 : Level}
-    (x : closed-element-nucleus-Large-Locale l1)
-    (y : closed-element-nucleus-Large-Locale l2)
-    (z : closed-element-nucleus-Large-Locale l3) →
-    leq-closed-element-nucleus-Large-Locale y z →
-    leq-closed-element-nucleus-Large-Locale x y →
-    leq-closed-element-nucleus-Large-Locale x z
+    is-large-transitive
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   transitive-leq-closed-element-nucleus-Large-Locale =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Locale L)

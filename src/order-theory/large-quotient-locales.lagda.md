@@ -9,6 +9,7 @@ module order-theory.large-quotient-locales where
 ```agda
 open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -128,23 +129,23 @@ module _
     is-prop-leq-Large-Subframe L Q
 
   refl-leq-Large-Quotient-Locale :
-    {l1 : Level} → is-reflexive (leq-Large-Quotient-Locale {l1})
+    is-large-reflexive
+      ( type-Large-Quotient-Locale)
+      ( leq-Large-Quotient-Locale)
   refl-leq-Large-Quotient-Locale =
     refl-leq-Large-Subframe L Q
 
   transitive-leq-Large-Quotient-Locale :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Quotient-Locale l1)
-    (y : type-Large-Quotient-Locale l2)
-    (z : type-Large-Quotient-Locale l3) →
-    leq-Large-Quotient-Locale y z →
-    leq-Large-Quotient-Locale x y →
-    leq-Large-Quotient-Locale x z
+    is-large-transitive
+      ( type-Large-Quotient-Locale)
+      ( leq-Large-Quotient-Locale)
   transitive-leq-Large-Quotient-Locale =
     transitive-leq-Large-Subframe L Q
 
   antisymmetric-leq-Large-Quotient-Locale :
-    {l1 : Level} → is-antisymmetric (leq-Large-Quotient-Locale {l1})
+    is-large-antisymmetric
+      ( type-Large-Quotient-Locale)
+      ( leq-Large-Quotient-Locale)
   antisymmetric-leq-Large-Quotient-Locale =
     antisymmetric-leq-Large-Subframe L Q
 
