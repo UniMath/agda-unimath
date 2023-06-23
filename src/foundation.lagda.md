@@ -155,6 +155,7 @@ open import foundation.iterated-cartesian-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
 open import foundation.large-identity-types public

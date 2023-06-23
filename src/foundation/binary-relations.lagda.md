@@ -25,13 +25,15 @@ open import foundation-core.propositions
 
 ## Idea
 
-A binary relation on a type `A` is a family of types `R x y` depending on two
-variables `x y : A`. In the special case where each `R x y` is a proposition, we
-say that the relation is valued in propositions.
+A **binary relation** on a type `A` is a family of types `R x y` depending on
+two variables `x y : A`. In the special case where each `R x y` is a
+[proposition](foundation-core.propositions.md), we say that the relation is
+valued in propositions. Thus, we take a general relation to mean a
+_proof-relevant_ relation.
 
 ## Definition
 
-### Type-valued relations
+### Relations valued in types
 
 ```agda
 Relation : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
@@ -39,7 +41,7 @@ Relation l A = A → A → UU l
 
 total-space-Relation :
   {l1 l : Level} {A : UU l1} → Relation l A → UU (l1 ⊔ l)
-total-space-Relation {A = A} R = Σ (A × A) λ (pair a a') → R a a'
+total-space-Relation {A = A} R = Σ (A × A) λ (a , a') → R a a'
 ```
 
 ### Relations valued in propositions
@@ -50,7 +52,7 @@ Relation-Prop :
 Relation-Prop l A = A → A → Prop l
 
 type-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) → A → A → UU l2
+  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → Relation l2 A
 type-Relation-Prop R x y = pr1 (R x y)
 
 is-prop-type-Relation-Prop :
@@ -67,61 +69,59 @@ total-space-Relation-Prop {A = A} R =
 ## Specifications of properties of binary relations
 
 ```agda
-is-reflexive : {l1 l2 : Level} {A : UU l1} → Relation l2 A → UU (l1 ⊔ l2)
-is-reflexive {A = A} R = (x : A) → R x x
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
 
-is-symmetric : {l1 l2 : Level} {A : UU l1} → Relation l2 A → UU (l1 ⊔ l2)
-is-symmetric {A = A} R = (x y : A) → R x y → R y x
+  is-reflexive : UU (l1 ⊔ l2)
+  is-reflexive = (x : A) → R x x
 
-is-transitive : {l1 l2 : Level} {A : UU l1} → Relation l2 A → UU (l1 ⊔ l2)
-is-transitive {A = A} R = (x y z : A) → R y z → R x y → R x z
+  is-symmetric : UU (l1 ⊔ l2)
+  is-symmetric = (x y : A) → R x y → R y x
 
-is-antisymmetric : {l1 l2 : Level} {A : UU l1} → Relation l2 A → UU (l1 ⊔ l2)
-is-antisymmetric {A = A} R = (x y : A) → R x y → R y x → x ＝ y
+  is-transitive : UU (l1 ⊔ l2)
+  is-transitive = (x y z : A) → R y z → R x y → R x z
 
-is-reflexive-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → UU (l1 ⊔ l2)
-is-reflexive-Relation-Prop R = is-reflexive (type-Relation-Prop R)
+  is-antisymmetric : UU (l1 ⊔ l2)
+  is-antisymmetric = (x y : A) → R x y → R y x → x ＝ y
 
-is-prop-is-reflexive-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
-  is-prop (is-reflexive-Relation-Prop R)
-is-prop-is-reflexive-Relation-Prop R =
-  is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
 
-is-symmetric-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → UU (l1 ⊔ l2)
-is-symmetric-Relation-Prop R = is-symmetric (type-Relation-Prop R)
+  is-reflexive-Relation-Prop : UU (l1 ⊔ l2)
+  is-reflexive-Relation-Prop = is-reflexive (type-Relation-Prop R)
 
-is-prop-is-symmetric-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
-  is-prop (is-symmetric-Relation-Prop R)
-is-prop-is-symmetric-Relation-Prop R =
-  is-prop-Π
-    ( λ x →
-      is-prop-Π
-        ( λ y → is-prop-function-type (is-prop-type-Relation-Prop R y x)))
+  is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
+  is-prop-is-reflexive-Relation-Prop =
+    is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
 
-is-transitive-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → UU (l1 ⊔ l2)
-is-transitive-Relation-Prop R = is-transitive (type-Relation-Prop R)
+  is-symmetric-Relation-Prop : UU (l1 ⊔ l2)
+  is-symmetric-Relation-Prop = is-symmetric (type-Relation-Prop R)
 
-is-prop-is-transitive-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
-  is-prop (is-transitive-Relation-Prop R)
-is-prop-is-transitive-Relation-Prop R =
-  is-prop-Π
-    ( λ x →
-      is-prop-Π
-        ( λ y →
-          is-prop-Π
-            ( λ z →
-              is-prop-function-type
-                ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))))
+  is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
+  is-prop-is-symmetric-Relation-Prop =
+    is-prop-Π
+      ( λ x →
+        is-prop-Π
+          ( λ y → is-prop-function-type (is-prop-type-Relation-Prop R y x)))
 
-is-antisymmetric-Relation-Prop :
-  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → UU (l1 ⊔ l2)
-is-antisymmetric-Relation-Prop R = is-antisymmetric (type-Relation-Prop R)
+  is-transitive-Relation-Prop : UU (l1 ⊔ l2)
+  is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
+
+  is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
+  is-prop-is-transitive-Relation-Prop =
+    is-prop-Π
+      ( λ x →
+        is-prop-Π
+          ( λ y →
+            is-prop-Π
+              ( λ z →
+                is-prop-function-type
+                  ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))))
+
+  is-antisymmetric-Relation-Prop : UU (l1 ⊔ l2)
+  is-antisymmetric-Relation-Prop = is-antisymmetric (type-Relation-Prop R)
 ```
 
 ## Properties
@@ -221,3 +221,7 @@ module _
   eq-relates-same-elements-Relation-Prop S =
     map-inv-equiv (extensionality-Relation-Prop S)
 ```
+
+## See also
+
+- [Large binary relations](foundation.large-binary-relations.md)
