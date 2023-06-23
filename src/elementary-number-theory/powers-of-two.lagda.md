@@ -160,7 +160,7 @@ A pairing function is a bijection between `ℕ × ℕ` and `ℕ`.
 ```agda
 pairing-map : ℕ × ℕ → ℕ
 pairing-map (u , v) =
-  pr1 is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v)
+  pr1 (is-successor-is-nonzero-ℕ (is-nonzero-pair-expansion u v))
 ```
 
 ### Pairing function is split surjective
