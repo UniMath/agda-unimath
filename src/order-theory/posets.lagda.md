@@ -141,7 +141,7 @@ syntax step-calculate-in-Poset X u z v = u ≤ z by v in-Poset X
 
 ## Properties
 
-### Posets are categories
+### Posets are categories whose underlying hom-sets are propositions
 
 ```agda
 module _
