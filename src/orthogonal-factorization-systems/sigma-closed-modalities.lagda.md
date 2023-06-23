@@ -32,7 +32,7 @@ modal whenever `B` is a family of modal types over modal base `A`.
 is-closed-under-Σ-modality :
   {l : Level} {○ : operator-modality l l} → unit-modality ○ → UU (lsuc l)
 is-closed-under-Σ-modality =
-  is-closed-under-Σ-subuniverse ∘ modality-subuniverse
+  is-closed-under-Σ-subuniverse ∘ modal-type-subuniverse
 
 closed-under-Σ-modality : (l : Level) → UU (lsuc l)
 closed-under-Σ-modality l =

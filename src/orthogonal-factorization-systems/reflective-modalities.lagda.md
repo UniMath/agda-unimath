@@ -33,7 +33,7 @@ its [subuniverse](foundation.subuniverses.md) of modal types is
 is-reflective-modality :
   {l : Level} {○ : operator-modality l l} → unit-modality ○ → UU (lsuc l)
 is-reflective-modality unit-○ =
-  is-reflective-subuniverse (modality-subuniverse unit-○)
+  is-reflective-subuniverse (modal-type-subuniverse unit-○)
 
 reflective-modality : (l : Level) → UU (lsuc l)
 reflective-modality l =

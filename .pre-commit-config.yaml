@@ -68,7 +68,7 @@ repos:
         types_or: [markdown, text]
 
       - id: max-line-length-conventions
-        # Should run after `simply-wrappable-long-lines`
+        # Should run after `wrap-long-lines-simple`
         name: Check the maximum line length conventions
         entry: scripts/max_line_length_conventions.py
         language: python

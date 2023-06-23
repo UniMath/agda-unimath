@@ -66,8 +66,8 @@ module _
   is-subuniverse-is-modal : is-subuniverse is-modal
   is-subuniverse-is-modal = is-property-is-modal
 
-  modality-subuniverse : subuniverse l1 (l1 ⊔ l2)
-  modality-subuniverse = is-modal-Prop
+  modal-type-subuniverse : subuniverse l1 (l1 ⊔ l2)
+  modal-type-subuniverse = is-modal-Prop
 ```
 
 ### Modal small types
