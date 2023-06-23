@@ -323,7 +323,7 @@ module _
       ( is-retraction-precomp-hom-inv-is-iso-Precategory H z)
 ```
 
-### When `hom x y` and `hom y x` are propositions, it suffices to provide
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
 
 ```agda
 module _
