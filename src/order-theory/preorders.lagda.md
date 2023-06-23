@@ -151,18 +151,20 @@ module _
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   ( is-prop-hom-C :
-    (x y : obj-Precategory C) → is-prop (type-Set (hom-Precategory C x y)))
+    (x y : obj-Precategory C) → is-prop (type-hom-Precategory C x y))
   where
 
-  preorder-is-prop-hom-Precat : Preorder l1 l2
-  pr1 preorder-is-prop-hom-Precat =
+  preorder-is-prop-hom-Precategory : Preorder l1 l2
+  pr1 preorder-is-prop-hom-Precategory =
     obj-Precategory C
-  pr1 (pr1 (pr2 preorder-is-prop-hom-Precat) x y) =
+  pr1 (pr1 (pr2 preorder-is-prop-hom-Precategory) x y) =
     type-Set (hom-Precategory C x y)
-  pr2 (pr1 (pr2 preorder-is-prop-hom-Precat) x y) =
+  pr2 (pr1 (pr2 preorder-is-prop-hom-Precategory) x y) =
     is-prop-hom-C x y
-  pr1 (pr2 (pr2 preorder-is-prop-hom-Precat)) x =
+  pr1 (pr2 (pr2 preorder-is-prop-hom-Precategory)) x =
     id-hom-Precategory C
-  pr2 (pr2 (pr2 preorder-is-prop-hom-Precat)) x y z =
+  pr2 (pr2 (pr2 preorder-is-prop-hom-Precategory)) x y z =
     comp-hom-Precategory C
 ```
+
+It remains to show that these constructions form inverses to eachother.

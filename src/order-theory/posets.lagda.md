@@ -14,6 +14,7 @@ open import category-theory.precategories
 open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -140,21 +141,44 @@ syntax step-calculate-in-Poset X u z v = u ≤ z by v in-Poset X
 
 ## Properties
 
-### Posets are categories whose underlying hom-sets are propositions
+### Posets are categories
 
 ```agda
 module _
   {l1 l2 : Level} (X : Poset l1 l2)
   where
 
-  -- category-Poset : Category l1 l2
-  -- pr1 category-Poset = precategory-Preorder (preorder-Poset X)
-  -- pr2 category-Poset x y =
-  --   is-equiv-is-prop
-  --     ( is-set-type-Poset X x y)
-  --     {! !}
-  --     ( λ f →
-  --       antisymmetric-leq-Poset X x y
-  --         ( hom-iso-Precategory (pr1 category-Poset) f)
-  --         ( hom-inv-iso-Precategory (pr1 category-Poset) f))
+  precategory-Poset : Precategory l1 l2
+  precategory-Poset = precategory-Preorder (preorder-Poset X)
+
+  category-Poset : Category l1 l2
+  pr1 category-Poset = precategory-Poset
+  pr2 category-Poset x y =
+    is-equiv-is-prop
+      ( is-set-type-Poset X x y)
+      ( is-prop-iso-Precategory precategory-Poset x y (is-prop-leq-Poset X x y))
+      ( λ f →
+        antisymmetric-leq-Poset X x y
+          ( hom-iso-Precategory (pr1 category-Poset) f)
+          ( hom-inv-iso-Precategory (pr1 category-Poset) f))
+
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  ( is-prop-hom-C :
+    (x y : obj-Category C) → is-prop (type-hom-Category C x y))
+  where
+
+  preorder-is-prop-hom-Category : Preorder l1 l2
+  preorder-is-prop-hom-Category =
+    preorder-is-prop-hom-Precategory (precategory-Category C) (is-prop-hom-C)
+
+  poset-is-prop-hom-Category : Poset l1 l2
+  pr1 poset-is-prop-hom-Category = preorder-is-prop-hom-Category
+  pr2 poset-is-prop-hom-Category x y f g =
+    map-inv-is-equiv
+      ( is-category-Category C x y)
+      ( iso-is-prop-hom-Precategory
+        ( precategory-Category C) x y is-prop-hom-C f g)
 ```
+
+It remains to show that these constructions form inverses to eachother.
