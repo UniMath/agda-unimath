@@ -192,18 +192,14 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   leq-closed-element-closure-operator-Large-Locale-Prop :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2) → Prop (β l1 l2)
+    Large-Relation-Prop α β closed-element-closure-operator-Large-Locale
   leq-closed-element-closure-operator-Large-Locale-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   leq-closed-element-closure-operator-Large-Locale :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2) → UU (β l1 l2)
+    Large-Relation α β closed-element-closure-operator-Large-Locale
   leq-closed-element-closure-operator-Large-Locale =
     leq-Large-Subposet
       ( large-poset-Large-Locale L)

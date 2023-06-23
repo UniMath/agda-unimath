@@ -70,13 +70,17 @@ module _
   is-set-type-Π-Large-Locale = is-set-type-Π-Large-Frame L
 
   leq-Π-Large-Locale-Prop :
-    {l2 l3 : Level} → type-Π-Large-Locale l2 → type-Π-Large-Locale l3 →
-    Prop (β l2 l3 ⊔ l1)
+    Large-Relation-Prop
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Locale)
   leq-Π-Large-Locale-Prop = leq-Π-Large-Frame-Prop L
 
   leq-Π-Large-Locale :
-    {l2 l3 : Level} →
-    type-Π-Large-Locale l2 → type-Π-Large-Locale l3 → UU (β l2 l3 ⊔ l1)
+    Large-Relation
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Locale)
   leq-Π-Large-Locale = leq-Π-Large-Frame L
 
   is-prop-leq-Π-Large-Locale :

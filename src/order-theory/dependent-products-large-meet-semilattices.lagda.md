@@ -112,9 +112,10 @@ module _
     is-set-type-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
   leq-Π-Large-Meet-Semilattice :
-    {l1 l2 : Level} →
-    type-Π-Large-Meet-Semilattice l1 → type-Π-Large-Meet-Semilattice l2 →
-    UU (β l1 l2 ⊔ l)
+    Large-Relation
+      ( λ l1 → α l1 ⊔ l)
+      ( λ l1 l2 → β l1 l2 ⊔ l)
+      ( type-Π-Large-Meet-Semilattice)
   leq-Π-Large-Meet-Semilattice =
     leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 

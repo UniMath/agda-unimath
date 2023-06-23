@@ -104,16 +104,12 @@ module _
     is-set-type-Large-Poset (large-poset-Large-Suplattice L)
 
   leq-Large-Suplattice-Prop :
-    {l1 l2 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l2) →
-    Prop (β l1 l2)
+    Large-Relation-Prop α β type-Large-Suplattice
   leq-Large-Suplattice-Prop =
     leq-Large-Poset-Prop (large-poset-Large-Suplattice L)
 
   leq-Large-Suplattice :
-    {l1 l2 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l2) →
-    UU (β l1 l2)
+    Large-Relation α β type-Large-Suplattice
   leq-Large-Suplattice = leq-Large-Poset (large-poset-Large-Suplattice L)
 
   is-prop-leq-Large-Suplattice :

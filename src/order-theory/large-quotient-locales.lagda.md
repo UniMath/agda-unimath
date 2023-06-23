@@ -105,18 +105,12 @@ module _
     type-Large-Subframe L Q
 
   leq-Large-Quotient-Locale-Prop :
-    {l1 l2 : Level} →
-    type-Large-Quotient-Locale l1 →
-    type-Large-Quotient-Locale l2 →
-    Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Quotient-Locale
   leq-Large-Quotient-Locale-Prop =
     leq-Large-Subframe-Prop L Q
 
   leq-Large-Quotient-Locale :
-    {l1 l2 : Level} →
-    type-Large-Quotient-Locale l1 →
-    type-Large-Quotient-Locale l2 →
-    UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ δ l) β type-Large-Quotient-Locale
   leq-Large-Quotient-Locale =
     leq-Large-Subframe L Q
 

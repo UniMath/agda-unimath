@@ -76,7 +76,7 @@ module _
 
   leq-powerset-Large-Locale-Prop :
     Large-Relation-Prop
-      ( λ l → l1 ⊔ lsuc l)
+      ( λ l2 → l1 ⊔ lsuc l2)
       ( λ l2 l3 → l1 ⊔ l2 ⊔ l3)
       ( type-powerset-Large-Locale A)
 
@@ -85,7 +85,7 @@ module _
 
   leq-powerset-Large-Locale :
     Large-Relation
-      ( λ l → l1 ⊔ lsuc l)
+      ( λ l2 → l1 ⊔ lsuc l2)
       ( λ l2 l3 → l1 ⊔ l2 ⊔ l3)
       ( type-powerset-Large-Locale A)
   leq-powerset-Large-Locale =

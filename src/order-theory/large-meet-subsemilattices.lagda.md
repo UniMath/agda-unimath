@@ -150,20 +150,14 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   leq-Large-Meet-Subsemilattice-Prop :
-    {l1 l2 : Level} →
-    type-Large-Meet-Subsemilattice l1 →
-    type-Large-Meet-Subsemilattice l2 →
-    Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
   leq-Large-Meet-Subsemilattice-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   leq-Large-Meet-Subsemilattice :
-    {l1 l2 : Level} →
-    type-Large-Meet-Subsemilattice l1 →
-    type-Large-Meet-Subsemilattice l2 →
-    UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
   leq-Large-Meet-Subsemilattice =
     leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)

@@ -35,14 +35,18 @@ module _
   type-Π-Large-Preorder l1 = (i : I) → type-Large-Preorder (P i) l1
 
   leq-Π-Large-Preorder-Prop :
-    {l1 l2 : Level} →
-    type-Π-Large-Preorder l1 → type-Π-Large-Preorder l2 → Prop (β l1 l2 ⊔ l)
+    Large-Relation-Prop
+      ( λ l1 → α l1 ⊔ l)
+      ( λ l1 l2 → β l1 l2 ⊔ l)
+      ( type-Π-Large-Preorder)
   leq-Π-Large-Preorder-Prop x y =
     Π-Prop I (λ i → leq-Large-Preorder-Prop (P i) (x i) (y i))
 
   leq-Π-Large-Preorder :
-    {l1 l2 : Level} →
-    type-Π-Large-Preorder l1 → type-Π-Large-Preorder l2 → UU (β l1 l2 ⊔ l)
+    Large-Relation
+      ( λ l1 → α l1 ⊔ l)
+      ( λ l1 l2 → β l1 l2 ⊔ l)
+      ( type-Π-Large-Preorder)
   leq-Π-Large-Preorder x y =
     type-Prop (leq-Π-Large-Preorder-Prop x y)
 

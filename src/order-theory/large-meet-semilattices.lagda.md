@@ -147,10 +147,7 @@ module _
   is-set-type-Large-Meet-Semilattice =
     is-set-type-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
-  leq-Large-Meet-Semilattice :
-    {l1 l2 : Level} →
-    type-Large-Meet-Semilattice l1 → type-Large-Meet-Semilattice l2 →
-    UU (β l1 l2)
+  leq-Large-Meet-Semilattice : Large-Relation α β type-Large-Meet-Semilattice
   leq-Large-Meet-Semilattice =
     leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 

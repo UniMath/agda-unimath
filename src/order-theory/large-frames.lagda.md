@@ -88,13 +88,10 @@ module _
   is-set-type-Large-Frame =
     is-set-type-Large-Poset (large-poset-Large-Frame L)
 
-  leq-Large-Frame-Prop :
-    {l1 l2 : Level} →
-    type-Large-Frame l1 → type-Large-Frame l2 → Prop (β l1 l2)
+  leq-Large-Frame-Prop : Large-Relation-Prop α β type-Large-Frame
   leq-Large-Frame-Prop = leq-Large-Poset-Prop (large-poset-Large-Frame L)
 
-  leq-Large-Frame :
-    {l1 l2 : Level} → type-Large-Frame l1 → type-Large-Frame l2 → UU (β l1 l2)
+  leq-Large-Frame : Large-Relation α β type-Large-Frame
   leq-Large-Frame = leq-Large-Poset (large-poset-Large-Frame L)
 
   is-prop-leq-Large-Frame :

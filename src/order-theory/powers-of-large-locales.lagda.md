@@ -62,14 +62,18 @@ module _
     is-set-type-Large-Locale power-Large-Locale
 
   leq-power-Large-Locale-Prop :
-    {l2 l3 : Level} → type-power-Large-Locale l2 → type-power-Large-Locale l3 →
-    Prop (β l2 l3 ⊔ l1)
+    Large-Relation-Prop
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-power-Large-Locale)
   leq-power-Large-Locale-Prop =
     leq-Large-Locale-Prop power-Large-Locale
 
   leq-power-Large-Locale :
-    {l2 l3 : Level} →
-    type-power-Large-Locale l2 → type-power-Large-Locale l3 → UU (β l2 l3 ⊔ l1)
+    Large-Relation
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-power-Large-Locale)
   leq-power-Large-Locale =
     leq-Large-Locale power-Large-Locale
 

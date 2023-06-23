@@ -103,20 +103,14 @@ module _
       ( large-subposet-Large-Subframe S)
 
   leq-Large-Subframe-Prop :
-    {l1 l2 : Level} →
-    type-Large-Subframe l1 →
-    type-Large-Subframe l2 →
-    Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Subframe
   leq-Large-Subframe-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   leq-Large-Subframe :
-    {l1 l2 : Level} →
-    type-Large-Subframe l1 →
-    type-Large-Subframe l2 →
-    UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ δ l) β type-Large-Subframe
   leq-Large-Subframe =
     leq-Large-Subposet
       ( large-poset-Large-Frame F)

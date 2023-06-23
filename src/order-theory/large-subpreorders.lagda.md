@@ -61,14 +61,12 @@ module _
   type-Large-Subpreorder l1 = type-subtype (S {l1})
 
   leq-Large-Subpreorder-Prop :
-    {l1 l2 : Level} →
-    type-Large-Subpreorder l1 → type-Large-Subpreorder l2 → Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subpreorder
   leq-Large-Subpreorder-Prop x y =
     leq-Large-Preorder-Prop P (pr1 x) (pr1 y)
 
   leq-Large-Subpreorder :
-    {l1 l2 : Level} →
-    type-Large-Subpreorder l1 → type-Large-Subpreorder l2 → UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subpreorder
   leq-Large-Subpreorder x y = type-Prop (leq-Large-Subpreorder-Prop x y)
 
   is-prop-leq-Large-Subpreorder :

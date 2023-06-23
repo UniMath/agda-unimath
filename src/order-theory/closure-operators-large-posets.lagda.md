@@ -158,23 +158,19 @@ module _
     is-closed-under-sim-closure-operator-Large-Poset
 
   large-poset-closure-operator-Large-Poset :
-    Large-Poset (λ l → α l ⊔ α l) β
+    Large-Poset α β
   large-poset-closure-operator-Large-Poset =
     large-poset-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)
 
   leq-closed-element-closure-operator-Large-Poset-Prop :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Poset l1)
-    (y : closed-element-closure-operator-Large-Poset l2) → Prop (β l1 l2)
+    Large-Relation-Prop α β closed-element-closure-operator-Large-Poset
   leq-closed-element-closure-operator-Large-Poset-Prop =
     leq-Large-Subposet-Prop P
       ( large-subposet-closure-operator-Large-Poset)
 
   leq-closed-element-closure-operator-Large-Poset :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Poset l1)
-    (y : closed-element-closure-operator-Large-Poset l2) → UU (β l1 l2)
+    Large-Relation α β closed-element-closure-operator-Large-Poset
   leq-closed-element-closure-operator-Large-Poset =
     leq-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)

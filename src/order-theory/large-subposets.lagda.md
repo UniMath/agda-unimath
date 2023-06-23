@@ -90,16 +90,14 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet-Prop :
-    {l1 l2 : Level} →
-    type-Large-Subposet l1 → type-Large-Subposet l2 → Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subposet
   leq-Large-Subposet-Prop =
     leq-Large-Subpreorder-Prop
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet :
-    {l1 l2 : Level} →
-    type-Large-Subposet l1 → type-Large-Subposet l2 → UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subposet
   leq-Large-Subposet =
     leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
