@@ -99,9 +99,7 @@ module _
       ( large-subposet-Large-Subsuplattice S)
 
   is-prop-leq-Large-Subsuplattice :
-    {l1 l2 : Level} →
-    (x : type-Large-Subsuplattice l1) (y : type-Large-Subsuplattice l2) →
-    is-prop (leq-Large-Subsuplattice x y)
+    is-prop-Large-Relation type-Large-Subsuplattice leq-Large-Subsuplattice
   is-prop-leq-Large-Subsuplattice =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)

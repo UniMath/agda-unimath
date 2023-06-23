@@ -95,8 +95,7 @@ module _
   leq-Large-Frame = leq-Large-Poset (large-poset-Large-Frame L)
 
   is-prop-leq-Large-Frame :
-    {l1 l2 : Level} (x : type-Large-Frame l1) (y : type-Large-Frame l2) →
-    is-prop (leq-Large-Frame x y)
+    is-prop-Large-Relation type-Large-Frame leq-Large-Frame
   is-prop-leq-Large-Frame =
     is-prop-leq-Large-Poset (large-poset-Large-Frame L)
 

@@ -117,10 +117,7 @@ module _
       ( large-subposet-Large-Subframe S)
 
   is-prop-leq-Large-Subframe :
-    {l1 l2 : Level} →
-    (x : type-Large-Subframe l1)
-    (y : type-Large-Subframe l2) →
-    is-prop (leq-Large-Subframe x y)
+    is-prop-Large-Relation type-Large-Subframe leq-Large-Subframe
   is-prop-leq-Large-Subframe =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Frame F)

@@ -92,10 +92,9 @@ module _
     leq-Large-Locale (powerset-Large-Locale A)
 
   is-prop-leq-powerset-Large-Locale :
-    {l2 l3 : Level}
-    (x : type-powerset-Large-Locale A l2)
-    (y : type-powerset-Large-Locale A l3) →
-    is-prop (leq-powerset-Large-Locale x y)
+    is-prop-Large-Relation
+      ( type-powerset-Large-Locale A)
+      ( leq-powerset-Large-Locale)
   is-prop-leq-powerset-Large-Locale =
     is-prop-leq-Large-Locale (powerset-Large-Locale A)
 

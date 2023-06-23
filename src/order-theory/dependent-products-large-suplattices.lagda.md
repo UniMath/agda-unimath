@@ -91,9 +91,7 @@ module _
     leq-Large-Suplattice Π-Large-Suplattice
 
   is-prop-leq-Π-Large-Suplattice :
-    {l2 l3 : Level}
-    (x : type-Π-Large-Suplattice l2) (y : type-Π-Large-Suplattice l3) →
-    is-prop (leq-Π-Large-Suplattice x y)
+    is-prop-Large-Relation type-Π-Large-Suplattice leq-Π-Large-Suplattice
   is-prop-leq-Π-Large-Suplattice =
     is-prop-leq-Large-Suplattice Π-Large-Suplattice
 

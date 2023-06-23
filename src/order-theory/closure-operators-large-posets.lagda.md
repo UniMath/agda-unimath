@@ -176,10 +176,9 @@ module _
       ( large-subposet-closure-operator-Large-Poset)
 
   is-prop-leq-closed-element-closure-operator-Large-Poset :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Poset l1)
-    (y : closed-element-closure-operator-Large-Poset l2) →
-    is-prop (leq-closed-element-closure-operator-Large-Poset x y)
+    is-prop-Large-Relation
+      ( closed-element-closure-operator-Large-Poset)
+      ( leq-closed-element-closure-operator-Large-Poset)
   is-prop-leq-closed-element-closure-operator-Large-Poset =
     is-prop-leq-Large-Subposet P
       ( large-subposet-closure-operator-Large-Poset)

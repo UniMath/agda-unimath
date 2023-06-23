@@ -84,8 +84,7 @@ module _
   leq-Π-Large-Locale = leq-Π-Large-Frame L
 
   is-prop-leq-Π-Large-Locale :
-    {l2 l3 : Level} (x : type-Π-Large-Locale l2) (y : type-Π-Large-Locale l3) →
-    is-prop (leq-Π-Large-Locale x y)
+    is-prop-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   is-prop-leq-Π-Large-Locale = is-prop-leq-Π-Large-Frame L
 
   refl-leq-Π-Large-Locale :

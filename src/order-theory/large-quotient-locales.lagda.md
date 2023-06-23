@@ -115,10 +115,7 @@ module _
     leq-Large-Subframe L Q
 
   is-prop-leq-Large-Quotient-Locale :
-    {l1 l2 : Level} →
-    (x : type-Large-Quotient-Locale l1)
-    (y : type-Large-Quotient-Locale l2) →
-    is-prop (leq-Large-Quotient-Locale x y)
+    is-prop-Large-Relation type-Large-Quotient-Locale leq-Large-Quotient-Locale
   is-prop-leq-Large-Quotient-Locale =
     is-prop-leq-Large-Subframe L Q
 

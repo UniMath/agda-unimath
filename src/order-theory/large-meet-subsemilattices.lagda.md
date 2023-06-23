@@ -164,10 +164,9 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   is-prop-leq-Large-Meet-Subsemilattice :
-    {l1 l2 : Level} →
-    (x : type-Large-Meet-Subsemilattice l1)
-    (y : type-Large-Meet-Subsemilattice l2) →
-    is-prop (leq-Large-Meet-Subsemilattice x y)
+    is-prop-Large-Relation
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   is-prop-leq-Large-Meet-Subsemilattice =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)

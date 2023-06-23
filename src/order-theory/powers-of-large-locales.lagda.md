@@ -78,10 +78,7 @@ module _
     leq-Large-Locale power-Large-Locale
 
   is-prop-leq-power-Large-Locale :
-    {l2 l3 : Level}
-    (x : type-power-Large-Locale l2)
-    (y : type-power-Large-Locale l3) →
-    is-prop (leq-power-Large-Locale x y)
+    is-prop-Large-Relation (type-power-Large-Locale) (leq-power-Large-Locale)
   is-prop-leq-power-Large-Locale =
     is-prop-leq-Large-Locale power-Large-Locale
 

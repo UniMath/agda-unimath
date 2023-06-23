@@ -69,8 +69,7 @@ module _
   leq-Large-Locale = leq-Large-Frame L
 
   is-prop-leq-Large-Locale :
-    {l1 l2 : Level} (x : type-Large-Locale l1) (y : type-Large-Locale l2) →
-    is-prop (leq-Large-Locale x y)
+    is-prop-Large-Relation type-Large-Locale leq-Large-Locale
   is-prop-leq-Large-Locale = is-prop-leq-Large-Frame L
 
   leq-eq-Large-Locale :

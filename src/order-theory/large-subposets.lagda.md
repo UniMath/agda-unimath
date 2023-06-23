@@ -104,9 +104,7 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   is-prop-leq-Large-Subposet :
-    {l1 l2 : Level} →
-    (x : type-Large-Subposet l1) (y : type-Large-Subposet l2) →
-    is-prop (leq-Large-Subposet x y)
+    is-prop-Large-Relation type-Large-Subposet leq-Large-Subposet
   is-prop-leq-Large-Subposet =
     is-prop-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)

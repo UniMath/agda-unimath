@@ -46,6 +46,12 @@ total-space-Large-Relation A R =
 ### Large relations valued in propositions
 
 ```agda
+is-prop-Large-Relation :
+  {α : Level → Level} {β : Level → Level → Level}
+  (A : (l : Level) → UU (α l)) → Large-Relation α β A → UUω
+is-prop-Large-Relation A R =
+  {l1 l2 : Level} (x : A l1) (y : A l2) → is-prop (R x y)
+
 Large-Relation-Prop :
   (α : Level → Level) (β : Level → Level → Level)
   (A : (l : Level) → UU (α l)) →
@@ -61,9 +67,8 @@ type-Large-Relation-Prop A R x y = pr1 (R x y)
 is-prop-type-Large-Relation-Prop :
   {α : Level → Level} {β : Level → Level → Level}
   (A : (l : Level) → UU (α l))
-  (R : Large-Relation-Prop α β A)
-  {l1 l2 : Level} (x : A l1) (y : A l2) →
-  is-prop (type-Large-Relation-Prop A R x y)
+  (R : Large-Relation-Prop α β A) →
+  is-prop-Large-Relation A (type-Large-Relation-Prop A R)
 is-prop-type-Large-Relation-Prop A R x y = pr2 (R x y)
 
 total-space-Large-Relation-Prop :

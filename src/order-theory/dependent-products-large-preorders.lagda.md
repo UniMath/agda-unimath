@@ -51,9 +51,7 @@ module _
     type-Prop (leq-Π-Large-Preorder-Prop x y)
 
   is-prop-leq-Π-Large-Preorder :
-    {l1 l2 : Level}
-    (x : type-Π-Large-Preorder l1) (y : type-Π-Large-Preorder l2) →
-    is-prop (leq-Π-Large-Preorder x y)
+    is-prop-Large-Relation type-Π-Large-Preorder leq-Π-Large-Preorder
   is-prop-leq-Π-Large-Preorder x y =
     is-prop-type-Prop (leq-Π-Large-Preorder-Prop x y)
 

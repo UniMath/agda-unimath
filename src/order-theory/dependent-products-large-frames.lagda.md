@@ -92,8 +92,7 @@ module _
   leq-Π-Large-Frame = leq-Large-Poset large-poset-Π-Large-Frame
 
   is-prop-leq-Π-Large-Frame :
-    {l2 l3 : Level} (x : type-Π-Large-Frame l2) (y : type-Π-Large-Frame l3) →
-    is-prop (leq-Π-Large-Frame x y)
+    is-prop-Large-Relation type-Π-Large-Frame leq-Π-Large-Frame
   is-prop-leq-Π-Large-Frame =
     is-prop-leq-Large-Poset large-poset-Π-Large-Frame
 

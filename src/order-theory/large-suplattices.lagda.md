@@ -113,9 +113,7 @@ module _
   leq-Large-Suplattice = leq-Large-Poset (large-poset-Large-Suplattice L)
 
   is-prop-leq-Large-Suplattice :
-    {l1 l2 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l2) →
-    is-prop (leq-Large-Suplattice x y)
+    is-prop-Large-Relation type-Large-Suplattice leq-Large-Suplattice
   is-prop-leq-Large-Suplattice =
     is-prop-leq-Large-Poset (large-poset-Large-Suplattice L)
 

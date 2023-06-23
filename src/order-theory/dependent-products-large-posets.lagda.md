@@ -60,9 +60,7 @@ module _
     leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   is-prop-leq-Π-Large-Poset :
-    {l1 l2 : Level}
-    (x : type-Π-Large-Poset l1) (y : type-Π-Large-Poset l2) →
-    is-prop (leq-Π-Large-Poset x y)
+    is-prop-Large-Relation type-Π-Large-Poset leq-Π-Large-Poset
   is-prop-leq-Π-Large-Poset =
     is-prop-leq-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 

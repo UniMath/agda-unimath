@@ -57,8 +57,7 @@ module _
   leq-Large-Poset = leq-Large-Preorder (large-preorder-Large-Poset X)
 
   is-prop-leq-Large-Poset :
-    {l1 l2 : Level} (x : type-Large-Poset l1) (y : type-Large-Poset l2) →
-    is-prop (leq-Large-Poset x y)
+    is-prop-Large-Relation (type-Large-Poset) (leq-Large-Poset)
   is-prop-leq-Large-Poset =
     is-prop-leq-Large-Preorder (large-preorder-Large-Poset X)
 

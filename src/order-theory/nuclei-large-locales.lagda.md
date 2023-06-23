@@ -227,10 +227,9 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   is-prop-leq-closed-element-nucleus-Large-Locale :
-    {l1 l2 : Level}
-    (x : closed-element-nucleus-Large-Locale l1)
-    (y : closed-element-nucleus-Large-Locale l2) →
-    is-prop (leq-closed-element-nucleus-Large-Locale x y)
+    is-prop-Large-Relation
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   is-prop-leq-closed-element-nucleus-Large-Locale =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Locale L)

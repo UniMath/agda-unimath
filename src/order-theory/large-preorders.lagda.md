@@ -60,9 +60,7 @@ module _
       ( leq-Large-Preorder-Prop X)
 
   is-prop-leq-Large-Preorder :
-    {l1 l2 : Level} →
-    (x : type-Large-Preorder X l1) (y : type-Large-Preorder X l2) →
-    is-prop (leq-Large-Preorder x y)
+    is-prop-Large-Relation (type-Large-Preorder X) (leq-Large-Preorder)
   is-prop-leq-Large-Preorder =
     is-prop-type-Large-Relation-Prop
       ( type-Large-Preorder X)
