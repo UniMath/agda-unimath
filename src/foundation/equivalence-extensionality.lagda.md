@@ -45,7 +45,7 @@ module _
       ( pr2 f)
       ( refl-htpy' (pr1 f))
       ( λ g → equiv-funext)
-    where
+      where
       is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
       pr1 (is-equiv-Prop f) = is-equiv f
       pr2 (is-equiv-Prop f) H =

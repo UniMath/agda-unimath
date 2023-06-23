@@ -81,8 +81,9 @@ is-split-surjective-map-ℕ+ℕ-to-ℕ (succ-ℕ (succ-ℕ b)) =
 is-injective-map-ℕ+ℕ-to-ℕ : is-injective map-ℕ+ℕ-to-ℕ
 is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inl y} p =
   ( ap inl (is-injective-left-mul-succ-ℕ 1 p))
-is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inr y} p = ex-falso (t s)
-  where
+is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inr y} p =
+  ex-falso (t s)
+    where
     s : (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
     s = concatenate-div-eq-ℕ (x , commutative-mul-ℕ x 2) p
 
@@ -92,7 +93,7 @@ is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inr y} p = ex-falso (t s)
         ( 2 *ℕ y)
         ( y , commutative-mul-ℕ y 2))
 is-injective-map-ℕ+ℕ-to-ℕ {inr x} {inl y} p = ex-falso (t s)
-  where
+    where
     s : (div-ℕ 2 (succ-ℕ (2 *ℕ x)))
     s = concatenate-div-eq-ℕ (y , commutative-mul-ℕ y 2) (inv p)
 

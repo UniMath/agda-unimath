@@ -229,7 +229,7 @@ module _
   equiv-fiberwise-equiv-equiv-slice =
     equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
     equiv-right-swap-Σ
-    where
+      where
       α :
         (h : hom-slice f g) →
         is-equiv (pr1 h) ≃

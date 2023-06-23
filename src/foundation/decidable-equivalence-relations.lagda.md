@@ -280,7 +280,7 @@ module _
             ( class-Decidable-Equivalence-Relation R a)
             ( pair P p))
           ( α))
-      where
+        where
         α : fib (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
         α (pair x refl) =
           eq-type-subtype

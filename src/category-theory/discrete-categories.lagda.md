@@ -30,7 +30,7 @@ module _
   discrete-precategory-Set : Precategory l l
   discrete-precategory-Set =
     type-Set X , disc-Hom , composition-structure , id-structure
-    where
+      where
       disc-Hom : type-Set X → type-Set X → Set l
       disc-Hom x y = set-Prop (x ＝ y , is-set-type-Set X x y)
 

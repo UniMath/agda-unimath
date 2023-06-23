@@ -131,7 +131,7 @@ associative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
   ap-mul-ℤ
     eq-num
     (inv (associative-mul-ℤ dx dy dz))
-  where
+    where
     eq-num :
       (((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)) ＝
       (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx)

@@ -78,6 +78,6 @@ is-uncountable-baire-space P =
         ( λ F →
           reductio-ad-absurdum
             (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
-  where
+    where
     Q = is-directly-countable-is-countable baire-space-Set succ-ℕ P
 ```

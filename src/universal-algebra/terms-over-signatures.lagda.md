@@ -140,7 +140,7 @@ element of `A`.
       pair
         ( pr1 (is-nil-lemma p))
         ( all-vec-lemma v (pr2 (is-nil-lemma p)))
-      where
+        where
         is-nil-lemma =
           is-nil-union-is-nil-list
             ( has-decidable-equality-ℕ)

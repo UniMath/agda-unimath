@@ -88,7 +88,7 @@ group-Theory =
             pair
               (op mul-group-op (var 0 ∷ op unit-group-op empty-vec ∷ empty-vec))
               (var 0)})
-  where
+    where
     op = op-Term
     var = var-Term
 

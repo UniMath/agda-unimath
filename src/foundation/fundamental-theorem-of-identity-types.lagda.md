@@ -121,7 +121,7 @@ module _
       is-fiberwise-equiv f
     fundamental-theorem-id-section f section-f x =
       is-equiv-section-is-equiv (f x) (section-f x) (is-fiberwise-equiv-i x)
-      where
+        where
         i : (x : A) → B x → a ＝ x
         i = λ x → pr1 (section-f x)
         retraction-i : (x : A) → retraction (i x)

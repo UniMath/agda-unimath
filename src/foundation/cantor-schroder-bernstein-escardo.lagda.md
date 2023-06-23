@@ -116,8 +116,9 @@ module _
             ( y)
             ( v')
         ψ (inr v) = ex-falso (v γ)
-      a (inr γ) = pair x ψ
-        where
+      a (inr γ) =
+        pair x ψ
+          where
           w :
             Σ ( fib (map-emb f) y)
               ( λ s → ¬ (is-perfect-image (map-emb f) (map-emb g) (pr1 s)))

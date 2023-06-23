@@ -135,7 +135,7 @@ module _
           ( pair
             ( f ∘ (pr1 P))
             ( is-surjective-comp is-surjective-f (pr2 P))))
-    where
+      where
       f : Maybe (type-Set X) → type-Set X
       f (inl x) = x
       f (inr star) = a

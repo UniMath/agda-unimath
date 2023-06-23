@@ -620,7 +620,7 @@ needed.
     type-pseudo-cumulative-hierarchy V
   pair-cumulative-hierarchy x y =
     set-pseudo-cumulative-hierarchy V bool-map
-    where
+      where
       bool-map : raise-bool l1 → type-pseudo-cumulative-hierarchy V
       bool-map (map-raise true) = x
       bool-map (map-raise false) = y
@@ -660,7 +660,7 @@ needed.
   infinity-cumulative-hierarchy : type-pseudo-cumulative-hierarchy V
   infinity-cumulative-hierarchy =
     set-pseudo-cumulative-hierarchy V ℕ-map
-    where
+      where
       ℕ-map : raise l1 ℕ → type-pseudo-cumulative-hierarchy V
       ℕ-map (map-raise zero-ℕ) = empty-set-cumulative-hierarchy
       ℕ-map (map-raise (succ-ℕ x)) =

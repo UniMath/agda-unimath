@@ -223,7 +223,7 @@ module _
     map-is-pullback-is-product-Slice-Precategory
       ϕ (Z , .(comp-hom-Precategory C f h₁)) (h₁ , refl) (h₂ , β₂) =
       is-contr-Σ-is-prop c d q σ
-      where
+        where
         c :
           type-hom-Precategory
             ( Slice-Precategory C A)
@@ -284,7 +284,7 @@ module _
       is-pullback-Precategory C A X Y f g W p₁ p₂ α
     map-inv-is-pullback-is-product-Slice-Precategory ψ W' p₁' p₂' α' =
       is-contr-Σ-is-prop k γ q σ
-      where
+        where
         k : type-hom-Precategory C W' W
         k =
           pr1
