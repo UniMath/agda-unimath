@@ -83,4 +83,10 @@ module _
   pr2 (pr2 refinement-finite-refinement-covering-Locale) =
     is-refinement-finite-refinement-covering-Locale
 
+  is-finite-refinement-finite-refinement-covering-Locale :
+    is-finite-refinement-covering-Locale L v
+    refinement-finite-refinement-covering-Locale
+  is-finite-refinement-finite-refinement-covering-Locale =
+    is-finite-type-𝔽 (pr1 r)
+
 ```

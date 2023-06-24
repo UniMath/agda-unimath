@@ -63,7 +63,7 @@ module _
     covering-family-finite-covering-Locale
   pr2 (pr2 covering-finite-covering-Locale) = is-covering-finite-covering-Locale
 
-  is-finite-covering-covering-Locale :
+  is-finite-covering-finite-covering-Locale :
     is-finite-covering-Locale L u covering-finite-covering-Locale
-  is-finite-covering-covering-Locale = is-finite-type-𝔽 (pr1 v)
+  is-finite-covering-finite-covering-Locale = is-finite-type-𝔽 (pr1 v)
 ```
