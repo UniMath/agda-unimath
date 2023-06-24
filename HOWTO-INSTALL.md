@@ -214,7 +214,7 @@ computer; the hooks require Python 3.8 or newer. Then run the following command
 from the repository's main folder:
 
 ```shell
-pip install -r scripts/requirements.txt
+python3 -m pip install -r scripts/requirements.txt
 ```
 
 Now, before you submit a Pull Request (PR) next time, you can run `pre-commit`
