@@ -82,6 +82,6 @@ jobs:
           check-latest: true
           cache: "pip"
 
-      - run: pip install -r scripts/requirements.txt
+      - run: python3 -m pip install -r scripts/requirements.txt
 
       - uses: pre-commit/action@v3.0.0
