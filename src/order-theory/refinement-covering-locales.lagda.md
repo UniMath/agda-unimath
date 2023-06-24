@@ -49,16 +49,21 @@ module _
 
 module _
   {l1 l2 : Level} (L : Locale l1 l2) {u : type-Locale L}
-  {v : covering-Locale L u} (r : refinement-covering-Locale L v)
+  (v : covering-Locale L u) (r : refinement-covering-Locale L v)
   where
 
   domain-refinement-covering-Locale : UU l2
   domain-refinement-covering-Locale = pr1 r
 
+  reindexing-refinement-covering-Locale :
+    domain-refinement-covering-Locale → indexing-type-covering-Locale L v
+  reindexing-refinement-covering-Locale = pr1 (pr2 r)
+
   covering-family-refinement-covering-Locale :
     domain-refinement-covering-Locale → type-Locale L
   covering-family-refinement-covering-Locale =
-    (covering-family-covering-Locale L v) ∘ (pr1 (pr2 r))
+    (covering-family-covering-Locale L v) ∘
+    (reindexing-refinement-covering-Locale)
 
   is-covering-refinement-covering-Locale :
     is-covering-Locale L u covering-family-refinement-covering-Locale
