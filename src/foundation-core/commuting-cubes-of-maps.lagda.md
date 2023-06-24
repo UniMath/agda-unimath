@@ -402,7 +402,7 @@ rectangle-back-left-bottom-cube :
   (back-right : (g ∘ hA) ~ (hC ∘ g'))
   (front-left : (h ∘ hB) ~ (hD ∘ h'))
   (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g))→
+  (bottom : (h ∘ f) ~ (k ∘ g)) →
   ((h ∘ hB) ∘ f') ~ ((k ∘ g) ∘ hA)
 rectangle-back-left-bottom-cube
   f g h k f' g' h' k' hA hB hC hD

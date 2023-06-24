@@ -872,7 +872,7 @@ module _
   matching-correspondence-inv-displayed-fibered-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ M N by s
-      ≃ Σ M (λ m → Σ (P m) (Q m))by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
+      ≃ Σ M (λ m → Σ (P m) (Q m)) by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
       ≃ Σ (Σ M P) (λ (m , p) → Q m p)
       by inv-associative-Σ
         ( M)

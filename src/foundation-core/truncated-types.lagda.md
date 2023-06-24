@@ -93,7 +93,7 @@ abstract
   is-trunc-Id :
     {l : Level} {k : 𝕋} {A : UU l} →
     is-trunc k A → (x y : A) → is-trunc k (x ＝ y)
-  is-trunc-Id {l} {k}= is-trunc-succ-is-trunc k
+  is-trunc-Id {l} {k} = is-trunc-succ-is-trunc k
 
 Id-Truncated-Type :
   {l : Level} {k : 𝕋} (A : Truncated-Type l (succ-𝕋 k)) →

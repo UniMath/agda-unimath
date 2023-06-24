@@ -216,7 +216,7 @@ module _
   refl-Eq-unordered-pair-tr-symmetric-Id :
     (p : unordered-pair A) →
     tr-symmetric-Id p p id-equiv refl-htpy ~ id
-  refl-Eq-unordered-pair-tr-symmetric-Id p (a , K)=
+  refl-Eq-unordered-pair-tr-symmetric-Id p (a , K) =
     eq-pair-Σ refl
       ( eq-htpy
         ( ( compute-pr2-tr-symmetric-Id p p id-equiv refl-htpy K) ∙h

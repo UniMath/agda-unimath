@@ -38,7 +38,7 @@ species-subuniverse :
 species-subuniverse P Q = type-subuniverse P → type-subuniverse Q
 
 species-subuniverse-domain :
-  {l1 l2 : Level} (l3 : Level)→ subuniverse l1 l2 →
+  {l1 l2 : Level} (l3 : Level) → subuniverse l1 l2 →
   UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
 species-subuniverse-domain l3 P = type-subuniverse P → UU l3
 ```
