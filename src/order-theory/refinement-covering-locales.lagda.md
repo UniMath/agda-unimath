@@ -31,7 +31,7 @@ covering such that the composition still yields a covering of the same object.
 
 ```agda
 module _
-  {l1 l2 : Level} {L : Locale l1 l2} {u : type-Locale L}
+  {l1 l2 : Level} (L : Locale l1 l2) {u : type-Locale L}
   (v : covering-Locale L u)
   where
 
@@ -45,14 +45,23 @@ module _
     Σ (UU l2)
       ( λ J →
         Σ ( J → indexing-type-covering-Locale L v)
-          ( is-refinement-covering-Locale ))
+          ( is-refinement-covering-Locale))
 
 module _
-  {l1 l2 : Level} {L : Locale l1 l2} {u : type-Locale L}
-  {v : covering-Locale L u} (r : refinement-covering-Locale v)
+  {l1 l2 : Level} (L : Locale l1 l2) {u : type-Locale L}
+  {v : covering-Locale L u} (r : refinement-covering-Locale L v)
   where
 
   domain-refinement-covering-Locale : UU l2
   domain-refinement-covering-Locale = pr1 r
+
+  covering-family-refinement-covering-Locale :
+    domain-refinement-covering-Locale → type-Locale L
+  covering-family-refinement-covering-Locale =
+    (covering-family-covering-Locale L v) ∘ (pr1 (pr2 r))
+
+  is-covering-refinement-covering-Locale :
+    is-covering-Locale L u covering-family-refinement-covering-Locale
+  is-covering-refinement-covering-Locale = pr2 (pr2 r)
 
 ```
