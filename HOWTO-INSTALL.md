@@ -197,9 +197,10 @@ in the library.
 ### Contributing
 
 We welcome and appreciate contributions from the community. If you're interested
-in contributing to the `agda-unimath` library, please follow our guidelines and
-best practices, as well as the instructions below to ensure a smooth setup and
-workflow.
+in contributing to the `agda-unimath` library, you can follow the instructions
+below to ensure a smooth setup and workflow. Also, please make sure to follow
+our [coding style](CODINGSTYLE.md) and
+[design principles](DESIGN-PRINCIPLES.md).
 
 #### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
@@ -220,18 +221,6 @@ pip install -r scripts/requirements.txt
 Now, before you submit a Pull Request (PR) next time, you can run `pre-commit`
 by staging your changes and executing the command `make pre-commit` from the
 repository's main folder.
-
-To have `pre-commit` run automatically before every commit, run the following
-command:
-
-```shell
-pre-commit install
-```
-
-After this, `pre-commit` will inform you of any rule violations in your
-subsequent commits. For most violations, it will also automatically apply the
-required changes. In such cases, simply stage the new changes and commit again.
-To disable this behaviour again, you can run `pre-commit uninstall`.
 
 Keep in mind that `pre-commit` is also a part of the Continuous Integration
 (CI), so any PR that violates the enforced conventions will be automatically
