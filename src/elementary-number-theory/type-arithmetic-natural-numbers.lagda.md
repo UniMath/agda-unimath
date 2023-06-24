@@ -83,15 +83,15 @@ is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inl y} p =
   ( ap inl (is-injective-left-mul-succ-ℕ 1 p))
 is-injective-map-ℕ+ℕ-to-ℕ {inl x} {inr y} p =
   ex-falso (t s)
-    where
-    s : (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
-    s = concatenate-div-eq-ℕ (x , commutative-mul-ℕ x 2) p
+  where
+  s : (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
+  s = concatenate-div-eq-ℕ (x , commutative-mul-ℕ x 2) p
 
-    t : ¬ (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
-    t =
-      ( is-odd-succ-is-even-ℕ
-        ( 2 *ℕ y)
-        ( y , commutative-mul-ℕ y 2))
+  t : ¬ (div-ℕ 2 (succ-ℕ (2 *ℕ y)))
+  t =
+    ( is-odd-succ-is-even-ℕ
+      ( 2 *ℕ y)
+      ( y , commutative-mul-ℕ y 2))
 is-injective-map-ℕ+ℕ-to-ℕ {inr x} {inl y} p = ex-falso (t s)
     where
     s : (div-ℕ 2 (succ-ℕ (2 *ℕ x)))
