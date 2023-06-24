@@ -360,7 +360,7 @@ module _
           ( refl-congruence-Monoid M R y)))
   pr2 (is-normal-submonoid-congruence-Monoid x y u H) K =
     transitive-congruence-Monoid M R
-      ( mul-Monoid M(mul-Monoid M x u) y)
+      ( mul-Monoid M (mul-Monoid M x u) y)
       ( mul-Monoid M x y)
       ( unit-Monoid M)
       ( K)
