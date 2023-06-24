@@ -11,6 +11,7 @@ open import order-theory.chains-posets public
 open import order-theory.chains-preorders public
 open import order-theory.closure-operators-large-locales public
 open import order-theory.closure-operators-large-posets public
+open import order-theory.coverings-locales public
 open import order-theory.decidable-posets public
 open import order-theory.decidable-preorders public
 open import order-theory.decidable-subposets public
@@ -26,6 +27,7 @@ open import order-theory.dependent-products-large-suplattices public
 open import order-theory.directed-complete-posets public
 open import order-theory.directed-families public
 open import order-theory.distributive-lattices public
+open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
 open import order-theory.finitely-graded-posets public
