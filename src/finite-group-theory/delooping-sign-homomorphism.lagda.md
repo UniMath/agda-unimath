@@ -118,7 +118,7 @@ module _
   ( quotient-aut-succ-succ-Fin : (n : ℕ) →
     ( raise-Fin l1 (n +ℕ 2) ≃ raise-Fin l1 (n +ℕ 2)) →
     D ( n +ℕ 2)
-      ( raise-Fin l1 (n +ℕ 2),
+      ( raise-Fin l1 (n +ℕ 2) ,
         unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
   ( not-R-transposition-fin-succ-succ : (n : ℕ) →
     ( Y : 2-Element-Decidable-Subtype l1 (raise-Fin l1 (n +ℕ 2))) →

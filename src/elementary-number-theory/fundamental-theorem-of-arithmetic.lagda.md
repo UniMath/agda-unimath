@@ -544,7 +544,7 @@ is-decomposition-list-fundamental-theorem-arithmetic-ℕ x H =
                 ( preserves-leq-succ-ℕ 1 n N))
               ( leq-quotient-div-least-prime-divisor-ℕ
                 ( n)
-                ( le-succ-leq-ℕ 1 n N))))∙
+                ( le-succ-leq-ℕ 1 n N)))) ∙
           eq-quotient-div-ℕ'
             ( nat-least-prime-divisor-ℕ
               ( succ-ℕ n)
