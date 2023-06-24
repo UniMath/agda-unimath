@@ -30,10 +30,6 @@ def no_whitespace_before_closing_curly_brace(line):
     return re.sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
 
 
-def space_between_closing_and_opening_braces(line):
-    return re.sub(r'([)}])([{(])', r'\1 \2', line)
-
-
 if __name__ == '__main__':
 
     status = 0
@@ -64,7 +60,6 @@ if __name__ == '__main__':
                     line = space_after_semicolon(line)
                     line = no_whitespace_before_closing_parenthesis(line)
                     line = no_whitespace_before_closing_curly_brace(line)
-                    line = space_between_closing_and_opening_braces(line)
                     # line = space_after_opening_parenthesis_on_new_line(line)
 
                 block_comment_level -= block_comment_delta_neg
