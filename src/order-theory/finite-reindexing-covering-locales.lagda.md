@@ -7,14 +7,13 @@ module order-theory.finite-reindexing-covering-locales where
 <details><summary>Imports</summary>
 
 ```agda
-
-open import foundation.function-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.universe-levels
 
 open import order-theory.coverings-locales
-open import order-theory.locales
 open import order-theory.finite-coverings-locales
+open import order-theory.locales
 open import order-theory.reindexing-covering-locales
 
 open import univalent-combinatorics.finite-types
@@ -88,5 +87,4 @@ module _
       ( reindexing-finite-reindexing-covering-Locale)
   is-finite-reindexing-finite-reindexing-covering-Locale =
     is-finite-type-𝔽 (pr1 r)
-
 ```
