@@ -15,11 +15,11 @@ def no_repeat_whitespace_inside_line(line):
 
 
 def space_after_special_symbols(line):
-    return re.sub(r'([;)}])(?![)}])(\S)', r'\1 \2', line)
+    return re.sub(r'([;)}])(?![@"\')}])(\S)', r'\1 \2', line)
 
 
 def space_before_special_symbols(line):
-    return re.sub(r'(?![.{(])(\S)([;{(])', r'\1 \2', line)
+    return re.sub(r'(?![.@"\'{(])(\S)([;{(])', r'\1 \2', line)
 
 
 def no_whitespace_before_closing_parenthesis(line):
