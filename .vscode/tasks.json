@@ -42,7 +42,10 @@
     },
     {
       "label": "unused-imports",
-      "detail": "Search for and remove unused imports. Very slow!",
+      "detail": "Demotes imports from `foundation` to `foundation-core` when possible in `foundation` and `foundation-core` modules. Very slow!",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
       "problemMatcher": [],
       "dependsOn": ["remove-unused-imports", "demote-foundation-imports"],
       "dependsOrder": "sequence"

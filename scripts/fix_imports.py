@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/fix_imports.py fileName.lagda.md
+# $ ./scripts/fix_imports.py fileName.lagda.md
 
 import collections
 import sys
