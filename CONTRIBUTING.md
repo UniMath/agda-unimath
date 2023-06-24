@@ -48,15 +48,15 @@ Below is a summary of the tasks this tool performs:
 
 - **Agda space conventions**: Corrects some common spacing mistakes according to
   our conventions. This includes removing repeat whitespace characters between
-  two non-whitespace characters in a line, always having a space before and
-  after a semicolon, and never having a space before a closing parenthesis or
-  curly brace.
+  two non-whitespace characters in a line, never having a space before a closing
+  parenthesis or curly brace, always having whitespace between a closing and an
+  opening brace, and always having a space before and after a semicolon.
 
-- **Indentation conventions**: Verifies that the indentation level is always a
-  multiple of two. If inconsistencies are found, it provides an error report
+- **Even indentation convention**: Verifies that the indentation level is always
+  a multiple of two. If inconsistencies are found, it provides an error report
   indicating the location of the issues.
 
-- **Fix simply wrappable long lines**: Scans for any lines exceeding the
+- **Fix simple to wrap long lines**: Scans for any lines exceeding the
   80-character limit that can be resolved by inserting line breaks. It inserts
   line breaks at the beginning of any definition, but not in the middle of a
   definition.
