@@ -81,7 +81,8 @@ pr2 (equiv-is-involution is-involution-f) =
 is-trunc-is-involution :
   {l : Level} {A : UU l} (k : 𝕋) →
   is-trunc (succ-𝕋 k) A → (f : A → A) → is-trunc k (is-involution f)
-is-trunc-is-involution k is-trunc-A f = is-trunc-Π k λ x → is-trunc-A (f(f x)) x
+is-trunc-is-involution k is-trunc-A f =
+  is-trunc-Π k λ x → is-trunc-A (f (f x)) x
 
 is-involution-Truncated-Type :
   {l : Level} {A : UU l} (k : 𝕋) →

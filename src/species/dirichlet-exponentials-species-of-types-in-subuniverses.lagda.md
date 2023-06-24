@@ -132,7 +132,7 @@ module _
       ((U , ((λ u → pr1 (V u)) , e)) , ((pU , (λ u → pr2 (V u))) , pX) , s)
     pr2 reassociate =
       is-equiv-has-inverse
-        ( λ ((U , V , e) , ( ((pU , pV), pX) , s)) →
+        ( λ ((U , V , e) , ( ((pU , pV) , pX) , s)) →
           ( pX , ((U , pU) , (λ u → V u , pV u) , e) , s))
         ( refl-htpy)
         ( refl-htpy)

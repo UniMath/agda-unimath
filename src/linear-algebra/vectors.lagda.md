@@ -270,7 +270,7 @@ module _
   is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-head .x l) =
     (inr star) , refl
   is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
-    inl (pr1 (is-in-functional-vec-is-in-vec n l x I)),
+    inl (pr1 (is-in-functional-vec-is-in-vec n l x I)) ,
     pr2 (is-in-functional-vec-is-in-vec n l x I)
 
   is-in-vec-is-in-functional-vec :

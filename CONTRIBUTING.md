@@ -48,9 +48,10 @@ Below is a summary of the tasks this tool performs:
 
 - **Agda space conventions**: Corrects some common spacing mistakes according to
   our conventions. This includes removing repeat whitespace characters between
-  two non-whitespace characters in a line, always having a space before and
-  after a semicolon, and never having a space before a closing parenthesis or
-  curly brace.
+  two non-whitespace characters in a line, having whitespace before an opening
+  brace or semicolon if it is not preceeded by a dot or another opening brace,
+  and having whitespace after a closing brace or semicolon if it is not
+  succeeded by a closing brace.
 
 - **Indentation conventions**: Verifies that the indentation level is always a
   multiple of two. If inconsistencies are found, it provides an error report
