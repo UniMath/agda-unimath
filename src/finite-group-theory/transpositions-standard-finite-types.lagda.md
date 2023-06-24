@@ -616,7 +616,7 @@ htpy-permutation-snoc-list-adjacent-transpositions n (cons y l) x =
   htpy-permutation-snoc-list-adjacent-transpositions n l x
 
 htpy-permutation-list-adjacent-transpositions-transposition-Fin :
-  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j))→
+  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j)) →
   htpy-equiv
     ( permutation-list-adjacent-transpositions
       ( n)
