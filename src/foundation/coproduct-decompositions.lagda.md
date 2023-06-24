@@ -348,7 +348,7 @@ module _
               ( inv
                   ( inv-map-eq-transpose-equiv
                     ( left-unit-law-Σ-is-contr is-contr-unit star)
-                    ( refl))))) ,
+                    ( refl))))),
           refl)
 
     compute-right-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ :
@@ -681,7 +681,7 @@ module _
               ( compute-right-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
                 ( d)
                 ( x)
-                ( inv p))) ,
+                ( inv p))),
             refl)}
         ( inv
           ( pr2

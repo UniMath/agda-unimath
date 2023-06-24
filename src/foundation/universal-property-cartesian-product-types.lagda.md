@@ -38,7 +38,7 @@ product
 ```agda
 universal-property-product :
   {l1 l2 l3 : Level} {X : UU l1} {A : X → UU l2} {B : X → UU l3} →
-  ((x : X) → A x × B x) ≃ (((x : X) → A x) × ((x : X) → B x))
+  ((x : X)→ A x × B x) ≃ (((x : X) → A x) × ((x : X) → B x))
 pr1 universal-property-product f = (λ x → pr1 (f x)) , (λ x → pr2 (f x))
 pr2 universal-property-product =
   is-equiv-has-inverse

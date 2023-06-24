@@ -55,7 +55,7 @@ equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
             ( λ _ → commutative-prod)))
       ( λ b → id-equiv)) ∘e
     ( ( equiv-fixed-Slice-structure
-        ( λ x → (is-inhabited x) × (is-finite x))
+        ( λ x → (is-inhabited x)× (is-finite x))
         ( type-𝔽 A)
         ( type-𝔽 B)) ∘e
       ( ( equiv-Σ

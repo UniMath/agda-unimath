@@ -146,7 +146,7 @@ private
                 -- Clause
                 ( absurd-clause
                   ( unit-list
-                    ( " () " , visible-Arg (def (quote empty) nil)))
+                    ( "()" , visible-Arg (def (quote empty) nil)))
                   ( unit-list
                     ( visible-Arg (absurd 0)))))
               ( nil)))))

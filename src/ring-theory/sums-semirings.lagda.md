@@ -262,7 +262,7 @@ split-sum-Semiring R n zero-ℕ f =
   inv (right-unit-law-add-Semiring R (sum-Semiring R n f))
 split-sum-Semiring R n (succ-ℕ m) f =
   ( ap
-    ( add-Semiring' R (f (inr star)))
+    ( add-Semiring' R (f(inr star)))
     ( split-sum-Semiring R n m (f ∘ inl))) ∙
   ( associative-add-Semiring R _ _ _)
 ```

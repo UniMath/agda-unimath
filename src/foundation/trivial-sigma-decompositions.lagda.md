@@ -66,13 +66,13 @@ module _
   is-trivial-Σ-Decomposition = type-Prop is-trivial-Prop-Σ-Decomposition
 
 is-trivial-trivial-inhabited-Σ-Decomposition :
-  {l1 l2 : Level} {A : UU l1} (p : is-inhabited A) →
+  {l1 l2 : Level} {A : UU l1} (p : is-inhabited A)→
   is-trivial-Σ-Decomposition (trivial-inhabited-Σ-Decomposition l2 A p)
 is-trivial-trivial-inhabited-Σ-Decomposition p = is-contr-raise-unit
 
 type-trivial-Σ-Decomposition :
   {l1 l2 l3 : Level} {A : UU l1} → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
-type-trivial-Σ-Decomposition {l1} {l2} {l3} {A} =
+type-trivial-Σ-Decomposition {l1} {l2} {l3} {A}=
   type-subtype (is-trivial-Prop-Σ-Decomposition {l1} {l2} {l3} {A})
 ```
 

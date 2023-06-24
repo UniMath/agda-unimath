@@ -195,7 +195,7 @@ split-sum-Commutative-Ring A n zero-ℕ f =
   inv (right-unit-law-add-Commutative-Ring A (sum-Commutative-Ring A n f))
 split-sum-Commutative-Ring A n (succ-ℕ m) f =
   ( ap
-    ( add-Commutative-Ring' A (f (inr star)))
+    ( add-Commutative-Ring' A (f(inr star)))
     ( split-sum-Commutative-Ring A n m (f ∘ inl))) ∙
   ( associative-add-Commutative-Ring A _ _ _)
 ```
