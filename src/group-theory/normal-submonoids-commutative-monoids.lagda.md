@@ -449,7 +449,7 @@ module _
         ( x))
       ( H)
       ( u))
-    ( K)=
+    ( K) =
     is-closed-under-eq-Normal-Commutative-Submonoid' M N
       ( is-normal-Normal-Commutative-Submonoid M N u x H K)
       ( right-unit-law-mul-Commutative-Monoid M u)

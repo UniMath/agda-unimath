@@ -300,7 +300,7 @@ module _
   invariant-transposition-fold-vec {n} v i j neq =
     ( ( invariant-list-adjacent-transpositions-fold-vec
         ( v)
-        ( list-adjacent-transpositions-transposition-Fin n i j))∙
+        ( list-adjacent-transpositions-transposition-Fin n i j)) ∙
       ( ap
         ( λ t → fold-vec b μ (permute-vec (succ-ℕ n) v t))
         ( eq-htpy-equiv
