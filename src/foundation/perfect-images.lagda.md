@@ -158,16 +158,17 @@ module _
   perfect-image-has-distinct-image :
     (a a₀ : A) → ¬ (is-perfect-image f g a) → (ρ : is-perfect-image f g a₀) →
     ¬ (f a ＝ inverse-of-perfect-image a₀ ρ)
-  perfect-image-has-distinct-image a a₀ nρ ρ p = v ρ
-  where
-  q : g (f a) ＝ a₀
-  q = ap g p ∙ is-section-inverse-of-perfect-image a₀ ρ
+  perfect-image-has-distinct-image a a₀ nρ ρ p =
+    v ρ
+    where
+    q : g (f a) ＝ a₀
+    q = ap g p ∙ is-section-inverse-of-perfect-image a₀ ρ
 
-  s : ¬ (is-perfect-image f g (g (f a)))
-  s = λ η → nρ (previous-perfect-image a η)
+    s : ¬ (is-perfect-image f g (g (f a)))
+    s = λ η → nρ (previous-perfect-image a η)
 
-  v : ¬ (is-perfect-image f g a₀)
-  v = tr (λ _ → ¬ (is-perfect-image f g _)) q s
+    v : ¬ (is-perfect-image f g a₀)
+    v = tr (λ _ → ¬ (is-perfect-image f g _)) q s
 ```
 
 Using the property above, we can talk about origins of `a` which are not images
