@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Run this script:
-# python3 scripts/indentation_conventions.py fileName.lagda.md
+# $ ./scripts/even_indentation_conventions.py fileName.lagda.md
+
 # Some simply enforcable space conventions
 
 import sys

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-# python3 scripts/spaces_convention.py fileName.lagda.md
+# Run this script:
+# $ ./scripts/spaces_convention.py fileName.lagda.md
+
 # Hacky script to fix the spacing convention in the library
 
 import sys

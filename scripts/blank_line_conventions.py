@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/blank_line_conventions.py fileName.lagda.md
+# $ ./scripts/blank_line_conventions.py fileName.lagda.md
 
 import sys
 import utils
