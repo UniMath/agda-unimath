@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# Run this script:
+# $ ./scripts/demote_foundation_imports.py
+
 import itertools
 import os
 import shutil

@@ -92,7 +92,7 @@ jobs:
           check-latest: true
           cache: "pip"
 
-      - run: pip install -r master/scripts/requirements.txt
+      - run: python3 -m pip install -r master/scripts/requirements.txt
 
       - name: Generate book
         run: |
