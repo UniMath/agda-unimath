@@ -172,7 +172,7 @@ module _
   is-category-Large-Category l X Y =
     is-equiv-htpy
       ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
-      ( htpy-iso-eq-Large-Precategory
+      ( compute-iso-eq-Large-Precategory
         ( large-precategory-Large-Category C) X Y)
       (is-large-category-Large-Category C X Y)
 
