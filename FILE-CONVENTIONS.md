@@ -143,6 +143,9 @@ contents of the file.
 
 - For a template file see [`TEMPLATE.lagda.md`](TEMPLATE.lagda.md).
 
+- An instructive example of a file with the expected structure is
+  [`order-theory.galois-connections`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/order-theory/galois-connections.lagda.md).
+
 ## Note
 
 Please note that some of the conventions above are enforced by our `pre-commit`
