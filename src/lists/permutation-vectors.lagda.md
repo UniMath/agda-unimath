@@ -65,7 +65,7 @@ module _
       ( λ t → f v ＝ permute-vec n v t)
 
   permutation-is-permutation-vec :
-    (n : ℕ)(f : vec A n → vec A n) → is-permutation-vec n f →
+    (n : ℕ) (f : vec A n → vec A n) → is-permutation-vec n f →
     (v : vec A n) → Permutation n
   permutation-is-permutation-vec n f P v = pr1 (P v)
 
