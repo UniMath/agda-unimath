@@ -84,14 +84,14 @@ module _ {n : ℕ} where
 
   elim-inverses : SimpleElem n → Simple n → Simple n
   elim-inverses x nil = cons x nil
-  elim-inverses xi@(inv-SE x) yxs@(cons (inv-SE y) xs) = cons xi yxs
-  elim-inverses xi@(inv-SE x) yxs@(cons (pure-SE y) xs) with finEq x y
+  elim-inverses xi@ (inv-SE x) yxs@ (cons (inv-SE y) xs) = cons xi yxs
+  elim-inverses xi@ (inv-SE x) yxs@ (cons (pure-SE y) xs) with finEq x y
   ... | inl eq = xs
   ... | inr neq = cons xi yxs
-  elim-inverses xi@(pure-SE x) yxs@(cons (inv-SE y) xs) with finEq x y
+  elim-inverses xi@ (pure-SE x) yxs@ (cons (inv-SE y) xs) with finEq x y
   ... | inl eq = xs
   ... | inr neq = cons xi yxs
-  elim-inverses xi@(pure-SE x) yxs@(cons (pure-SE y) xs) = cons xi yxs
+  elim-inverses xi@ (pure-SE x) yxs@ (cons (pure-SE y) xs) = cons xi yxs
 
   concat-simplify : Simple n → Simple n → Simple n
   concat-simplify nil b = b
@@ -353,7 +353,7 @@ module _ {n : ℕ} where
       GroupEquality x y → unQuoteGS x env ＝ unQuoteGS y env
     useGroupEquality env refl-GE = refl
     useGroupEquality env (x ∷GE refl-GE) = useGroupEqualityElem env x
-    useGroupEquality env (x ∷GE xs@(_ ∷GE _)) =
+    useGroupEquality env (x ∷GE xs@ (_ ∷GE _)) =
       useGroupEqualityElem env x ∙ useGroupEquality env xs
 
     -- simplifyExpression :
