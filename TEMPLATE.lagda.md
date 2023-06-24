@@ -46,11 +46,6 @@ concept-subconcept : ...
 concept-subconcept = ...
 ```
 
-## See also
-
-- An instructive example of a file with the expected structure is
-  [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
-
 ## References
 
 - Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
