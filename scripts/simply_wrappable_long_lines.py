@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Run this script:
-# python3 scripts/simply_wrappable_long_lines.py fileName.lagda.md
+# $ ./scripts/simply_wrappable_long_lines.py fileName.lagda.md
+
 # Fix some easily fixable long lines
 
 import sys

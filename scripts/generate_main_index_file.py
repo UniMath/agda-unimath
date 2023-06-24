@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/generate_main_index_file.py
+# $ ./scripts/generate_main_index_file.py
 
 import os
 import sys
