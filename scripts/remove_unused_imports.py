@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Run this script:
+# $ ./scripts/remove_unused_imports.py
 
 import os
 import pathlib

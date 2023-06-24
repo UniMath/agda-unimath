@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Run this script:
+# $ ./scripts/max_line_length_conventions.py fileName.md
 
 import collections
 import os

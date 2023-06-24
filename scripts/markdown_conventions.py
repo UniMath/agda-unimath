@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/markdown_conventions.py fileName.md
+# $ ./scripts/markdown_conventions.py fileName.md
 
 # * Remember to update the script's entry in `CONTRIBUTING.md` on expansion
 

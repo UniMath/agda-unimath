@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Run this script:
+# $ ./scripts/update_contributors.py
 
 import requests
 import sys
