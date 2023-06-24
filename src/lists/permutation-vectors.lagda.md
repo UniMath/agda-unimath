@@ -65,7 +65,7 @@ module _
       ( λ t → f v ＝ permute-vec n v t)
 
   permutation-is-permutation-vec :
-    (n : ℕ)(f : vec A n → vec A n) → is-permutation-vec n f →
+    (n : ℕ) (f : vec A n → vec A n) → is-permutation-vec n f →
     (v : vec A n) → Permutation n
   permutation-is-permutation-vec n f P v = pr1 (P v)
 
@@ -300,7 +300,7 @@ module _
   invariant-transposition-fold-vec {n} v i j neq =
     ( ( invariant-list-adjacent-transpositions-fold-vec
         ( v)
-        ( list-adjacent-transpositions-transposition-Fin n i j))∙
+        ( list-adjacent-transpositions-transposition-Fin n i j)) ∙
       ( ap
         ( λ t → fold-vec b μ (permute-vec (succ-ℕ n) v t))
         ( eq-htpy-equiv

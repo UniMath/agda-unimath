@@ -337,7 +337,7 @@ module _
             pr1
               ( is-in-subtype-inclusion-subtype
                 ( is-finite-Σ-Decomposition A)
-                (x))))∘e
+                (x)))) ∘e
       interchange-Σ-Σ
         ( λ D D' p →
           type-Prop
