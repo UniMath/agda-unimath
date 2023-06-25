@@ -69,15 +69,13 @@ pr2 baire-space-Set = is-set-baire-space
 ```agda
 is-uncountable-baire-space : is-uncountable baire-space-Set
 is-uncountable-baire-space P =
-  apply-universal-property-trunc-Prop Q
+  apply-universal-property-trunc-Prop
+    ( is-directly-countable-is-countable baire-space-Set succ-ℕ P)
     ( empty-Prop)
     ( λ H →
       apply-universal-property-trunc-Prop
         ( fixed-point-theorem-Lawvere (pr2 H) succ-ℕ)
         ( empty-Prop)
         ( λ F →
-          reductio-ad-absurdum
-            (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
-    where
-    Q = is-directly-countable-is-countable baire-space-Set succ-ℕ P
+          reductio-ad-absurdum (pr2 F) (has-no-fixed-points-succ-ℕ (pr1 F))))
 ```

@@ -60,7 +60,7 @@ data group-laws : UU lzero where
 group-Theory : Theory group-signature lzero
 group-Theory =
   pair
-    group-laws
+    ( group-laws)
     ( λ { associative-l-group-laws →
             pair
               ( op mul-group-op
@@ -88,9 +88,9 @@ group-Theory =
             pair
               (op mul-group-op (var 0 ∷ op unit-group-op empty-vec ∷ empty-vec))
               (var 0)})
-    where
-    op = op-Term
-    var = var-Term
+  where
+  op = op-Term
+  var = var-Term
 
 group-Algebra : (l : Level) → UU (lsuc l)
 group-Algebra l = Algebra group-signature group-Theory l

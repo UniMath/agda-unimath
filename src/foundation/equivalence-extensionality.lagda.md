@@ -45,25 +45,25 @@ module _
       ( pr2 f)
       ( refl-htpy' (pr1 f))
       ( λ g → equiv-funext)
-      where
-      is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
-      pr1 (is-equiv-Prop f) = is-equiv f
-      pr2 (is-equiv-Prop f) H =
-        is-prop-is-contr
-          ( is-contr-prod
-            ( is-contr-equiv'
-              ( (b : B) → fib f b)
-              ( distributive-Π-Σ)
-              ( is-contr-Π (is-contr-map-is-equiv H)))
-            ( is-contr-is-equiv'
-              ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
-              ( tot (λ h → htpy-eq))
-              ( is-equiv-tot-is-fiberwise-equiv
-                ( λ h → funext (h ∘ f) id))
-              ( is-contr-map-is-equiv
-                (( is-equiv-precomp-Π-is-equiv f H) (λ y → A))
-                ( id))))
-          ( H)
+    where
+    is-equiv-Prop : (f : A → B) → Prop (l1 ⊔ l2)
+    pr1 (is-equiv-Prop f) = is-equiv f
+    pr2 (is-equiv-Prop f) H =
+      is-prop-is-contr
+        ( is-contr-prod
+          ( is-contr-equiv'
+            ( (b : B) → fib f b)
+            ( distributive-Π-Σ)
+            ( is-contr-Π (is-contr-map-is-equiv H)))
+          ( is-contr-is-equiv'
+            ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
+            ( tot (λ h → htpy-eq))
+            ( is-equiv-tot-is-fiberwise-equiv
+              ( λ h → funext (h ∘ f) id))
+            ( is-contr-map-is-equiv
+              (( is-equiv-precomp-Π-is-equiv f H) (λ y → A))
+              ( id))))
+        ( H)
 
   abstract
     is-contr-total-htpy-equiv :

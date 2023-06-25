@@ -140,12 +140,12 @@ element of `A`.
       pair
         ( pr1 (is-nil-lemma p))
         ( all-vec-lemma v (pr2 (is-nil-lemma p)))
-        where
-        is-nil-lemma =
-          is-nil-union-is-nil-list
-            ( has-decidable-equality-ℕ)
-            ( de-bruijn-variables-term x)
-            ( de-bruijn-variables-term-vec v)
+      where
+      is-nil-lemma =
+        is-nil-union-is-nil-list
+          ( has-decidable-equality-ℕ)
+          ( de-bruijn-variables-term x)
+          ( de-bruijn-variables-term-vec v)
 
   eval-constant-term-vec m empty-vec p = empty-vec
   eval-constant-term-vec m (x ∷ v) (p , p') =
