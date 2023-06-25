@@ -5,7 +5,7 @@ at formalizing mathematics from a univalent point of view using the dependently
 typed programming language [Agda](https://github.com/agda/agda).
 
 <a href="https://github.com/unimath/agda-unimath">
-<img align="right" width="300" alt="Agda-UniMath" src="agda-unimath-logo.svg" />
+<img align="right" width="300" alt="agda-unimath" src="agda-unimath-logo.svg" />
 </a>
 
 The library project was created by Elisabeth Bonnevier, Jonathan Prieto-Cubides,
