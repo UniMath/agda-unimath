@@ -100,7 +100,8 @@ module _
               ( length-list (list-trans g h))) ∙
             ( ( ap
                 ( λ P →
-                  add-Fin 2 (pr1 P) (mod-two-ℕ (length-list (list-trans g h))))
+                  add-Fin 2 (pr1 P)
+                    ( mod-two-ℕ (length-list (list-trans g h))))
                 { x =
                   pair
                     ( mod-two-ℕ (length-list (list-trans f h)))

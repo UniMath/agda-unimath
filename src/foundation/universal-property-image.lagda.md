@@ -9,7 +9,6 @@ module foundation.universal-property-image where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.identity-types
 open import foundation.images
 open import foundation.propositional-truncations
 open import foundation.slice
@@ -25,6 +24,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions

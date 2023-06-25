@@ -7,8 +7,10 @@ module order-theory.large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -35,9 +37,9 @@ record
   field
     large-preorder-Large-Poset : Large-Preorder α β
     antisymmetric-leq-Large-Poset :
-      {l : Level} (x y : type-Large-Preorder large-preorder-Large-Poset l) →
-      leq-Large-Preorder large-preorder-Large-Poset x y →
-      leq-Large-Preorder large-preorder-Large-Poset y x → Id x y
+      is-large-antisymmetric
+        ( type-Large-Preorder large-preorder-Large-Poset)
+        ( leq-Large-Preorder large-preorder-Large-Poset)
 
 open Large-Poset public
 
@@ -48,18 +50,14 @@ module _
   type-Large-Poset : (l : Level) → UU (α l)
   type-Large-Poset = type-Large-Preorder (large-preorder-Large-Poset X)
 
-  leq-Large-Poset-Prop :
-    {l1 l2 : Level} → type-Large-Poset l1 → type-Large-Poset l2 →
-    Prop (β l1 l2)
+  leq-Large-Poset-Prop : Large-Relation-Prop α β (type-Large-Poset)
   leq-Large-Poset-Prop = leq-Large-Preorder-Prop (large-preorder-Large-Poset X)
 
-  leq-Large-Poset :
-    {l1 l2 : Level} → type-Large-Poset l1 → type-Large-Poset l2 → UU (β l1 l2)
+  leq-Large-Poset : Large-Relation α β (type-Large-Poset)
   leq-Large-Poset = leq-Large-Preorder (large-preorder-Large-Poset X)
 
   is-prop-leq-Large-Poset :
-    {l1 l2 : Level} (x : type-Large-Poset l1) (y : type-Large-Poset l2) →
-    is-prop (leq-Large-Poset x y)
+    is-prop-Large-Relation (type-Large-Poset) (leq-Large-Poset)
   is-prop-leq-Large-Poset =
     is-prop-leq-Large-Preorder (large-preorder-Large-Poset X)
 
@@ -69,14 +67,11 @@ module _
   leq-eq-Large-Poset =
     leq-eq-Large-Preorder (large-preorder-Large-Poset X)
 
-  refl-leq-Large-Poset :
-    {l1 : Level} (x : type-Large-Poset l1) → leq-Large-Poset x x
+  refl-leq-Large-Poset : is-large-reflexive type-Large-Poset leq-Large-Poset
   refl-leq-Large-Poset = refl-leq-Large-Preorder (large-preorder-Large-Poset X)
 
   transitive-leq-Large-Poset :
-    {l1 l2 l3 : Level} (x : type-Large-Poset l1) (y : type-Large-Poset l2)
-    (z : type-Large-Poset l3) →
-    leq-Large-Poset y z → leq-Large-Poset x y → leq-Large-Poset x z
+    is-large-transitive type-Large-Poset leq-Large-Poset
   transitive-leq-Large-Poset =
     transitive-leq-Large-Preorder (large-preorder-Large-Poset X)
 

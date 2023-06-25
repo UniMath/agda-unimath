@@ -8,9 +8,11 @@ module order-theory.nuclei-large-locales where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -204,68 +206,57 @@ module _
     is-closed-under-sim-nucleus-Large-Locale
 
   large-poset-nucleus-Large-Locale :
-    Large-Poset (λ l → α l ⊔ α l) β
+    Large-Poset α β
   large-poset-nucleus-Large-Locale =
     large-poset-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   leq-closed-element-nucleus-Large-Locale-Prop :
-    {l1 l2 : Level}
-    (x : closed-element-nucleus-Large-Locale l1)
-    (y : closed-element-nucleus-Large-Locale l2) → Prop (β l1 l2)
+    Large-Relation-Prop α β closed-element-nucleus-Large-Locale
   leq-closed-element-nucleus-Large-Locale-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   leq-closed-element-nucleus-Large-Locale :
-    {l1 l2 : Level}
-    (x : closed-element-nucleus-Large-Locale l1)
-    (y : closed-element-nucleus-Large-Locale l2) → UU (β l1 l2)
+    Large-Relation α β closed-element-nucleus-Large-Locale
   leq-closed-element-nucleus-Large-Locale =
     leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   is-prop-leq-closed-element-nucleus-Large-Locale :
-    {l1 l2 : Level}
-    (x : closed-element-nucleus-Large-Locale l1)
-    (y : closed-element-nucleus-Large-Locale l2) →
-    is-prop (leq-closed-element-nucleus-Large-Locale x y)
+    is-prop-Large-Relation
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   is-prop-leq-closed-element-nucleus-Large-Locale =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   refl-leq-closed-element-nucleus-Large-Locale :
-    {l1 : Level}
-    (x : closed-element-nucleus-Large-Locale l1) →
-    leq-closed-element-nucleus-Large-Locale x x
+    is-large-reflexive
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   refl-leq-closed-element-nucleus-Large-Locale =
     refl-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   antisymmetric-leq-closed-element-nucleus-Large-Locale :
-    {l1 : Level}
-    (x y : closed-element-nucleus-Large-Locale l1) →
-    leq-closed-element-nucleus-Large-Locale x y →
-    leq-closed-element-nucleus-Large-Locale y x →
-    x ＝ y
+    is-large-antisymmetric
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   antisymmetric-leq-closed-element-nucleus-Large-Locale =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
   transitive-leq-closed-element-nucleus-Large-Locale :
-    {l1 l2 l3 : Level}
-    (x : closed-element-nucleus-Large-Locale l1)
-    (y : closed-element-nucleus-Large-Locale l2)
-    (z : closed-element-nucleus-Large-Locale l3) →
-    leq-closed-element-nucleus-Large-Locale y z →
-    leq-closed-element-nucleus-Large-Locale x y →
-    leq-closed-element-nucleus-Large-Locale x z
+    is-large-transitive
+      ( closed-element-nucleus-Large-Locale)
+      ( leq-closed-element-nucleus-Large-Locale)
   transitive-leq-closed-element-nucleus-Large-Locale =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Locale L)
@@ -310,7 +301,7 @@ module _
       ( large-meet-subsemilattice-nucleus-Large-Locale)
 
   large-meet-semilattice-nucleus-Large-Locale :
-    Large-Meet-Semilattice (λ l → α l ⊔ α l) β
+    Large-Meet-Semilattice α β
   large-meet-semilattice-nucleus-Large-Locale =
     large-meet-semilattice-Large-Meet-Subsemilattice
       ( large-meet-semilattice-Large-Locale L)
@@ -406,7 +397,7 @@ module _
     is-least-upper-bound-sup-closed-element-nucleus-Large-Locale x
 
   large-suplattice-nucleus-Large-Locale :
-    Large-Suplattice (λ l → α l ⊔ α l) β γ
+    Large-Suplattice α β γ
   large-poset-Large-Suplattice
     large-suplattice-nucleus-Large-Locale =
     large-poset-nucleus-Large-Locale
@@ -433,7 +424,7 @@ module _
             ( distributive-meet-sup-Large-Locale L x (pr1 ∘ y)))))
 
   large-frame-nucleus-Large-Locale :
-    Large-Frame (λ l → α l ⊔ α l) β γ
+    Large-Frame α β γ
   large-poset-Large-Frame
     large-frame-nucleus-Large-Locale =
     large-poset-nucleus-Large-Locale
@@ -448,6 +439,6 @@ module _
     distributive-meet-sup-nucleus-Large-Locale
 
   large-locale-nucleus-Large-Locale :
-    Large-Locale (λ l → α l ⊔ α l) β γ
+    Large-Locale α β γ
   large-locale-nucleus-Large-Locale = large-frame-nucleus-Large-Locale
 ```

@@ -12,6 +12,7 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -47,11 +48,9 @@ refl-div-ℤ-Mod {ℕ.succ-ℕ k} = refl-div-Fin
 ### The divisibility relation is transitive
 
 ```agda
-trans-div-ℤ-Mod :
-  {k : ℕ} (x y z : ℤ-Mod k) →
-  div-ℤ-Mod k x y → div-ℤ-Mod k y z → div-ℤ-Mod k x z
-trans-div-ℤ-Mod {zero-ℕ} = trans-div-ℤ
-trans-div-ℤ-Mod {succ-ℕ k} = trans-div-Fin (succ-ℕ k)
+transitive-div-ℤ-Mod : {k : ℕ} → is-transitive (div-ℤ-Mod k)
+transitive-div-ℤ-Mod {zero-ℕ} = transitive-div-ℤ
+transitive-div-ℤ-Mod {succ-ℕ k} = transitive-div-Fin (succ-ℕ k)
 ```
 
 ### The divisibility relation is decidable

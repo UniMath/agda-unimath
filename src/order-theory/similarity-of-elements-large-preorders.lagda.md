@@ -8,6 +8,7 @@ module order-theory.similarity-of-elements-large-preorders where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -61,7 +62,7 @@ module _
   where
 
   refl-sim-Large-Preorder :
-    {l1 : Level} (x : type-Large-Preorder P l1) → sim-Large-Preorder P x x
+    is-large-reflexive (type-Large-Preorder P) (sim-Large-Preorder P)
   pr1 (refl-sim-Large-Preorder x) = refl-leq-Large-Preorder P x
   pr2 (refl-sim-Large-Preorder x) = refl-leq-Large-Preorder P x
 ```
@@ -74,16 +75,11 @@ module _
   where
 
   transitive-sim-Large-Preorder :
-    {l1 l2 l3 : Level}
-    {x : type-Large-Preorder P l1}
-    {y : type-Large-Preorder P l2}
-    {z : type-Large-Preorder P l3} →
-    sim-Large-Preorder P y z → sim-Large-Preorder P x y →
-    sim-Large-Preorder P x z
-  pr1 (transitive-sim-Large-Preorder H K) =
-    transitive-leq-Large-Preorder P _ _ _ (pr1 H) (pr1 K)
-  pr2 (transitive-sim-Large-Preorder H K) =
-    transitive-leq-Large-Preorder P _ _ _ (pr2 K) (pr2 H)
+    is-large-transitive (type-Large-Preorder P) (sim-Large-Preorder P)
+  pr1 (transitive-sim-Large-Preorder x y z H K) =
+    transitive-leq-Large-Preorder P x y z (pr1 H) (pr1 K)
+  pr2 (transitive-sim-Large-Preorder x y z H K) =
+    transitive-leq-Large-Preorder P z y x (pr2 K) (pr2 H)
 ```
 
 ### The similarity relation is symmetric
@@ -94,10 +90,7 @@ module _
   where
 
   symmetric-sim-Large-Preorder :
-    {l1 l2 : Level}
-    {x : type-Large-Preorder P l1}
-    {y : type-Large-Preorder P l2} →
-    sim-Large-Preorder P x y → sim-Large-Preorder P y x
-  pr1 (symmetric-sim-Large-Preorder H) = pr2 H
-  pr2 (symmetric-sim-Large-Preorder H) = pr1 H
+    is-large-symmetric (type-Large-Preorder P) (sim-Large-Preorder P)
+  pr1 (symmetric-sim-Large-Preorder _ _ H) = pr2 H
+  pr2 (symmetric-sim-Large-Preorder _ _ H) = pr1 H
 ```

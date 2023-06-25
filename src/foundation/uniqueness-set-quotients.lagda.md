@@ -38,24 +38,26 @@ unique.
 
 ```agda
 precomp-comp-Set-Quotient :
-  {l1 l2 l3 l4 l5 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
+  (B : Set l3) (f : reflecting-map-Equivalence-Relation R (type-Set B))
   (C : Set l4) (g : type-hom-Set B C)
   (D : Set l5) (h : type-hom-Set C D) →
   ( precomp-Set-Quotient R B f D (h ∘ g)) ＝
   ( precomp-Set-Quotient R C (precomp-Set-Quotient R B f C g) D h)
 precomp-comp-Set-Quotient R B f C g D h =
-  eq-htpy-reflecting-map-Eq-Rel R D
+  eq-htpy-reflecting-map-Equivalence-Relation R D
     ( precomp-Set-Quotient R B f D (h ∘ g))
     ( precomp-Set-Quotient R C (precomp-Set-Quotient R B f C g) D h)
     ( refl-htpy)
 
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
-  (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
+  {l1 l2 l3 l4 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
+  (B : Set l3) (f : reflecting-map-Equivalence-Relation R (type-Set B))
+  (C : Set l4) (g : reflecting-map-Equivalence-Relation R (type-Set C))
   {h : type-Set B → type-Set C}
-  (H : (h ∘ map-reflecting-map-Eq-Rel R f) ~ map-reflecting-map-Eq-Rel R g)
+  (H :
+    (h ∘ map-reflecting-map-Equivalence-Relation R f) ~
+    map-reflecting-map-Equivalence-Relation R g)
   where
 
   map-inv-is-equiv-is-set-quotient-is-set-quotient :
@@ -81,13 +83,13 @@ module _
           ( h)) ∙
         ( ( ap
             ( λ t → precomp-Set-Quotient R B t C h)
-            ( eq-htpy-reflecting-map-Eq-Rel R B
+            ( eq-htpy-reflecting-map-Equivalence-Relation R B
               ( precomp-Set-Quotient R C g B
                 ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug))
               ( f)
               ( triangle-universal-property-set-quotient-is-set-quotient
                 R C g Ug B f))) ∙
-          ( ( eq-htpy-reflecting-map-Eq-Rel R C
+          ( ( eq-htpy-reflecting-map-Equivalence-Relation R C
               ( precomp-Set-Quotient R B f C h) g H) ∙
             ( inv (precomp-id-Set-Quotient R C g))))))
 
@@ -107,11 +109,11 @@ module _
             ( λ t →
               precomp-Set-Quotient R C t B
                 ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug))
-            ( eq-htpy-reflecting-map-Eq-Rel R C
+            ( eq-htpy-reflecting-map-Equivalence-Relation R C
               ( precomp-Set-Quotient R B f C h)
               ( g)
               ( H))) ∙
-          ( ( eq-htpy-reflecting-map-Eq-Rel R B
+          ( ( eq-htpy-reflecting-map-Equivalence-Relation R B
               ( precomp-Set-Quotient R C g B
                 ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug))
               ( f)
@@ -138,7 +140,7 @@ module _
       ( precomp-Set-Quotient R B f X)
       ( precomp h (type-Set X))
       ( λ k →
-        eq-htpy-reflecting-map-Eq-Rel R X
+        eq-htpy-reflecting-map-Equivalence-Relation R X
           ( precomp-Set-Quotient R C g X k)
           ( precomp-Set-Quotient R B f X (k ∘ h))
           ( inv-htpy (k ·l H)))
@@ -154,7 +156,7 @@ module _
       ( precomp-Set-Quotient R B f X)
       ( precomp h (type-Set X))
       ( λ k →
-        eq-htpy-reflecting-map-Eq-Rel R X
+        eq-htpy-reflecting-map-Equivalence-Relation R X
           ( precomp-Set-Quotient R C g X k)
           ( precomp-Set-Quotient R B f X (k ∘ h))
           ( inv-htpy (k ·l H)))
@@ -162,10 +164,10 @@ module _
       ( is-equiv-precomp-is-equiv h E (type-Set X))
 
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} (R : Eq-Rel l2 A)
-  (B : Set l3) (f : reflecting-map-Eq-Rel R (type-Set B))
+  {l1 l2 l3 l4 : Level} {A : UU l1} (R : Equivalence-Relation l2 A)
+  (B : Set l3) (f : reflecting-map-Equivalence-Relation R (type-Set B))
   (Uf : {l : Level} → is-set-quotient l R B f)
-  (C : Set l4) (g : reflecting-map-Eq-Rel R (type-Set C))
+  (C : Set l4) (g : reflecting-map-Equivalence-Relation R (type-Set C))
   (Ug : {l : Level} → is-set-quotient l R C g)
   where
 
@@ -173,8 +175,8 @@ module _
     is-contr
       ( Σ ( type-Set B ≃ type-Set C)
           ( λ e →
-            ( map-equiv e ∘ map-reflecting-map-Eq-Rel R f) ~
-            ( map-reflecting-map-Eq-Rel R g)))
+            ( map-equiv e ∘ map-reflecting-map-Equivalence-Relation R f) ~
+            ( map-reflecting-map-Equivalence-Relation R g)))
   uniqueness-set-quotient =
     is-contr-total-Eq-subtype
       ( universal-property-set-quotient-is-set-quotient R B f Uf C g)
@@ -195,8 +197,9 @@ module _
   map-equiv-uniqueness-set-quotient = map-equiv equiv-uniqueness-set-quotient
 
   triangle-uniqueness-set-quotient :
-    ( map-equiv-uniqueness-set-quotient ∘ map-reflecting-map-Eq-Rel R f) ~
-    ( map-reflecting-map-Eq-Rel R g)
+    ( map-equiv-uniqueness-set-quotient ∘
+      map-reflecting-map-Equivalence-Relation R f) ~
+    ( map-reflecting-map-Equivalence-Relation R g)
   triangle-uniqueness-set-quotient =
     pr2 (center uniqueness-set-quotient)
 ```

@@ -12,10 +12,10 @@ open import foundation-core.equality-dependent-pair-types public
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-identifications
+open import foundation.dependent-pair-types
 open import foundation.transport
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
 ```

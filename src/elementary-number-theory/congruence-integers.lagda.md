@@ -7,6 +7,7 @@ module elementary-number-theory.congruence-integers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.absolute-value-integers
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.congruence-natural-numbers
 open import elementary-number-theory.difference-integers
@@ -17,6 +18,7 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -73,20 +75,20 @@ pr2 (is-unit-cong-pred-ℤ k x (pair y p)) =
     ( ( right-successor-law-add-ℤ x (neg-ℤ x)) ∙
       ( ap succ-ℤ (right-inverse-law-add-ℤ x))))
 
-refl-cong-ℤ : (k x : ℤ) → cong-ℤ k x x
+refl-cong-ℤ : (k : ℤ) → is-reflexive (cong-ℤ k)
 pr1 (refl-cong-ℤ k x) = zero-ℤ
 pr2 (refl-cong-ℤ k x) = left-zero-law-mul-ℤ k ∙ inv (is-zero-diff-ℤ' x)
 
-symmetric-cong-ℤ : (k x y : ℤ) → cong-ℤ k x y → cong-ℤ k y x
+symmetric-cong-ℤ : (k : ℤ) → is-symmetric (cong-ℤ k)
 pr1 (symmetric-cong-ℤ k x y (pair d p)) = neg-ℤ d
 pr2 (symmetric-cong-ℤ k x y (pair d p)) =
   ( left-negative-law-mul-ℤ d k) ∙
   ( ( ap neg-ℤ p) ∙
     ( distributive-neg-diff-ℤ x y))
 
-transitive-cong-ℤ : (k x y z : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k x z
-pr1 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) = d +ℤ e
-pr2 (transitive-cong-ℤ k x y z (pair d p) (pair e q)) =
+transitive-cong-ℤ : (k : ℤ) → is-transitive (cong-ℤ k)
+pr1 (transitive-cong-ℤ k x y z (pair e q) (pair d p)) = d +ℤ e
+pr2 (transitive-cong-ℤ k x y z (pair e q) (pair d p)) =
   ( right-distributive-mul-add-ℤ d e k) ∙
   ( ( ap-add-ℤ p q) ∙
     ( triangle-diff-ℤ x y z))
@@ -106,13 +108,12 @@ concatenate-eq-cong-eq-ℤ k x .x y .y refl H refl = H
 concatenate-cong-eq-cong-ℤ :
   (k x y y' z : ℤ) → cong-ℤ k x y → y ＝ y' → cong-ℤ k y' z → cong-ℤ k x z
 concatenate-cong-eq-cong-ℤ k x y .y z H refl K =
-  transitive-cong-ℤ k x y z H K
+  transitive-cong-ℤ k x y z K H
 
 concatenate-cong-cong-cong-ℤ :
   (k x y z w : ℤ) → cong-ℤ k x y → cong-ℤ k y z → cong-ℤ k z w → cong-ℤ k x w
 concatenate-cong-cong-cong-ℤ k x y z w H K L =
-  transitive-cong-ℤ k x y w H
-    ( transitive-cong-ℤ k y z w K L)
+  transitive-cong-ℤ k x y w (transitive-cong-ℤ k y z w L K) H
 
 cong-cong-neg-ℤ : (k x y : ℤ) → cong-ℤ k (neg-ℤ x) (neg-ℤ y) → cong-ℤ k x y
 pr1 (cong-cong-neg-ℤ k x y (pair d p)) = neg-ℤ d
@@ -151,6 +152,9 @@ cong-cong-int-ℕ k x y H =
       ( ap int-ℕ (dist-int-ℕ x y))
       ( div-sim-unit-ℤ
         ( refl-sim-unit-ℤ (int-ℕ k))
-        ( symm-sim-unit-ℤ (sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
+        ( symmetric-sim-unit-ℤ
+          ( int-abs-ℤ (int-ℕ x -ℤ int-ℕ y))
+          ( int-ℕ x -ℤ int-ℕ y)
+          ( sim-unit-abs-ℤ ((int-ℕ x) -ℤ (int-ℕ y))))
         ( H)))
 ```

@@ -10,7 +10,6 @@ module category-theory.precategories where
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -139,23 +138,6 @@ module _
     {x y : obj-Precategory} (f : type-hom-Precategory x y) →
     comp-hom-Precategory f id-hom-Precategory ＝ f
   right-unit-law-comp-hom-Precategory = pr2 (pr2 is-unital-Precategory)
-```
-
-## Examples
-
-### The category of sets and functions
-
-The precategory of sets and functions in a given universe.
-
-```agda
-Set-Precategory : (l : Level) → Precategory (lsuc l) l
-pr1 (Set-Precategory l) = Set l
-pr1 (pr2 (Set-Precategory l)) = hom-Set
-pr1 (pr1 (pr2 (pr2 (Set-Precategory l)))) g f = g ∘ f
-pr2 (pr1 (pr2 (pr2 (Set-Precategory l)))) h g f = refl
-pr1 (pr2 (pr2 (pr2 (Set-Precategory l)))) x = id
-pr1 (pr2 (pr2 (pr2 (pr2 (Set-Precategory l))))) f = refl
-pr2 (pr2 (pr2 (pr2 (pr2 (Set-Precategory l))))) f = refl
 ```
 
 ## Properties

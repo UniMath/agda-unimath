@@ -8,6 +8,7 @@ module order-theory.meet-semilattices where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -151,12 +152,10 @@ module _
   private
     _≤_ = leq-Meet-Semilattice
 
-  refl-leq-Meet-Semilattice :
-    (x : type-Meet-Semilattice) → x ≤ x
+  refl-leq-Meet-Semilattice : is-reflexive leq-Meet-Semilattice
   refl-leq-Meet-Semilattice x = idempotent-meet-Meet-Semilattice x
 
-  transitive-leq-Meet-Semilattice :
-    (x y z : type-Meet-Semilattice) → y ≤ z → x ≤ y → x ≤ z
+  transitive-leq-Meet-Semilattice : is-transitive leq-Meet-Semilattice
   transitive-leq-Meet-Semilattice x y z H K =
     equational-reasoning
       x ∧ z
@@ -169,9 +168,7 @@ module _
       ＝ x
         by K
 
-  antisymmetric-leq-Meet-Semilattice :
-    (x y : type-Meet-Semilattice) →
-    leq-Meet-Semilattice x y → leq-Meet-Semilattice y x → x ＝ y
+  antisymmetric-leq-Meet-Semilattice : is-antisymmetric leq-Meet-Semilattice
   antisymmetric-leq-Meet-Semilattice x y H K =
     equational-reasoning
       x ＝ x ∧ y

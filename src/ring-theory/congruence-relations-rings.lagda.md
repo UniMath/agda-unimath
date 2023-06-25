@@ -40,7 +40,7 @@ module _
   is-congruence-Ring = is-congruence-Semiring (semiring-Ring R)
 
   is-congruence-eq-rel-Ring :
-    {l2 : Level} (S : Eq-Rel l2 (type-Ring R)) → UU (l1 ⊔ l2)
+    {l2 : Level} (S : Equivalence-Relation l2 (type-Ring R)) → UU (l1 ⊔ l2)
   is-congruence-eq-rel-Ring S =
     is-congruence-eq-rel-Semiring (semiring-Ring R) S
 
@@ -56,11 +56,11 @@ module _
   congruence-ab-congruence-Ring =
     congruence-additive-monoid-congruence-Semiring (semiring-Ring R) S
 
-  eq-rel-congruence-Ring : Eq-Rel l2 (type-Ring R)
+  eq-rel-congruence-Ring : Equivalence-Relation l2 (type-Ring R)
   eq-rel-congruence-Ring =
     eq-rel-congruence-Semiring (semiring-Ring R) S
 
-  prop-congruence-Ring : Rel-Prop l2 (type-Ring R)
+  prop-congruence-Ring : Relation-Prop l2 (type-Ring R)
   prop-congruence-Ring = prop-congruence-Semiring (semiring-Ring R) S
 
   sim-congruence-Ring : (x y : type-Ring R) → UU l2
@@ -72,23 +72,23 @@ module _
     is-prop-sim-congruence-Semiring (semiring-Ring R) S
 
   refl-congruence-Ring :
-    is-reflexive-Rel-Prop prop-congruence-Ring
+    is-reflexive-Relation-Prop prop-congruence-Ring
   refl-congruence-Ring = refl-congruence-Semiring (semiring-Ring R) S
 
-  symm-congruence-Ring :
-    is-symmetric-Rel-Prop prop-congruence-Ring
-  symm-congruence-Ring = symm-congruence-Semiring (semiring-Ring R) S
+  symmetric-congruence-Ring :
+    is-symmetric-Relation-Prop prop-congruence-Ring
+  symmetric-congruence-Ring = symmetric-congruence-Semiring (semiring-Ring R) S
 
-  equiv-symm-congruence-Ring :
+  equiv-symmetric-congruence-Ring :
     (x y : type-Ring R) →
     sim-congruence-Ring x y ≃ sim-congruence-Ring y x
-  equiv-symm-congruence-Ring =
-    equiv-symm-congruence-Semiring (semiring-Ring R) S
+  equiv-symmetric-congruence-Ring =
+    equiv-symmetric-congruence-Semiring (semiring-Ring R) S
 
-  trans-congruence-Ring :
-    is-transitive-Rel-Prop prop-congruence-Ring
-  trans-congruence-Ring =
-    trans-congruence-Semiring (semiring-Ring R) S
+  transitive-congruence-Ring :
+    is-transitive-Relation-Prop prop-congruence-Ring
+  transitive-congruence-Ring =
+    transitive-congruence-Semiring (semiring-Ring R) S
 
   add-congruence-Ring :
     is-congruence-Ab (ab-Ring R) eq-rel-congruence-Ring
@@ -172,7 +172,7 @@ module _
 
 construct-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) →
-  (S : Eq-Rel l2 (type-Ring R)) →
+  (S : Equivalence-Relation l2 (type-Ring R)) →
   is-congruence-Ab (ab-Ring R) S →
   is-congruence-Monoid (multiplicative-monoid-Ring R) S →
   congruence-Ring l2 R

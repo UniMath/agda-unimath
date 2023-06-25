@@ -7,8 +7,10 @@ module order-theory.large-subposets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -88,55 +90,42 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet-Prop :
-    {l1 l2 : Level} →
-    type-Large-Subposet l1 → type-Large-Subposet l2 → Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subposet
   leq-Large-Subposet-Prop =
     leq-Large-Subpreorder-Prop
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   leq-Large-Subposet :
-    {l1 l2 : Level} →
-    type-Large-Subposet l1 → type-Large-Subposet l2 → UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subposet
   leq-Large-Subposet =
     leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   is-prop-leq-Large-Subposet :
-    {l1 l2 : Level} →
-    (x : type-Large-Subposet l1) (y : type-Large-Subposet l2) →
-    is-prop (leq-Large-Subposet x y)
+    is-prop-Large-Relation type-Large-Subposet leq-Large-Subposet
   is-prop-leq-Large-Subposet =
     is-prop-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   refl-leq-Large-Subposet :
-    {l1 : Level} (x : type-Large-Subposet l1) →
-    leq-Large-Subposet x x
+    is-large-reflexive type-Large-Subposet leq-Large-Subposet
   refl-leq-Large-Subposet =
     refl-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   transitive-leq-Large-Subposet :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Subposet l1)
-    (y : type-Large-Subposet l2)
-    (z : type-Large-Subposet l3) →
-    leq-Large-Subposet y z → leq-Large-Subposet x y →
-    leq-Large-Subposet x z
+    is-large-transitive type-Large-Subposet leq-Large-Subposet
   transitive-leq-Large-Subposet =
     transitive-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   antisymmetric-leq-Large-Subposet :
-    {l1 : Level}
-    (x : type-Large-Subposet l1)
-    (y : type-Large-Subposet l1) →
-    leq-Large-Subposet x y → leq-Large-Subposet y x → x ＝ y
+    is-large-antisymmetric type-Large-Subposet leq-Large-Subposet
   antisymmetric-leq-Large-Subposet {l1} (x , p) (y , q) H K =
     eq-type-subtype
       ( large-subpreorder-Large-Subposet S {l1})

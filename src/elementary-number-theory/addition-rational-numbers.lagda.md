@@ -78,7 +78,7 @@ associative-add-ℚ (x , px) (y , py) (z , pz) =
     ＝ in-fraction-ℤ (add-fraction-ℤ (add-fraction-ℤ x y) z)
       by eq-ℚ-sim-fractions-ℤ _ _
         ( sim-fraction-add-fraction-ℤ
-          ( symm-sim-fraction-ℤ _ _
+          ( symmetric-sim-fraction-ℤ _ _
             ( sim-reduced-fraction-ℤ (add-fraction-ℤ x y)))
           ( refl-sim-fraction-ℤ z))
     ＝ in-fraction-ℤ (add-fraction-ℤ x (add-fraction-ℤ y z))

@@ -129,9 +129,9 @@ neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p
 ### Strict inequality is antisymmetric
 
 ```agda
-anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
-anti-symmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
-  ap succ-ℕ (anti-symmetric-le-ℕ m n p q)
+antisymmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
+antisymmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
+  ap succ-ℕ (antisymmetric-le-ℕ m n p q)
 ```
 
 ### The strict ordering of the natural numbers is transitive
