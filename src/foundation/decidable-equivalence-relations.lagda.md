@@ -284,20 +284,20 @@ module _
             ( pair P p))
           ( α))
       where
-        α : fib (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
-        α (pair x refl) =
-          eq-type-subtype
-            ( λ z →
-              trunc-Prop
-                ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
-            ( eq-htpy
-              ( λ y →
-                eq-iff-Decidable-Prop
-                  ( pr1 R a y)
-                  ( pr1 R x y)
-                  ( λ K → transitive-Decidable-Equivalence-Relation R x a y K H)
-                  ( λ K → transitive-Decidable-Equivalence-Relation R a x y K
-                    ( symmetric-Decidable-Equivalence-Relation R x a H))))
+      α : fib (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
+      α (pair x refl) =
+        eq-type-subtype
+          ( λ z →
+            trunc-Prop
+              ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
+          ( eq-htpy
+            ( λ y →
+              eq-iff-Decidable-Prop
+                ( pr1 R a y)
+                ( pr1 R x y)
+                ( λ K → transitive-Decidable-Equivalence-Relation R x a y K H)
+                ( λ K → transitive-Decidable-Equivalence-Relation R a x y K
+                  ( symmetric-Decidable-Equivalence-Relation R x a H))))
 
     is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation :
       is-contr
