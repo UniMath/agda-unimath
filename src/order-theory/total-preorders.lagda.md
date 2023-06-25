@@ -7,6 +7,7 @@ module order-theory.total-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.disjunction
 open import foundation.propositions
@@ -86,13 +87,10 @@ module _
     (x y : type-Total-Preorder) → is-prop (leq-Total-Preorder x y)
   is-prop-leq-Total-Preorder = is-prop-leq-Preorder preorder-Total-Preorder
 
-  refl-leq-Total-Preorder :
-    (x : type-Total-Preorder) → leq-Total-Preorder x x
+  refl-leq-Total-Preorder : is-reflexive leq-Total-Preorder
   refl-leq-Total-Preorder = refl-leq-Preorder preorder-Total-Preorder
 
-  transitive-leq-Total-Preorder :
-    (x y z : type-Total-Preorder) →
-    leq-Total-Preorder y z → leq-Total-Preorder x y → leq-Total-Preorder x z
+  transitive-leq-Total-Preorder : is-transitive leq-Total-Preorder
   transitive-leq-Total-Preorder =
     transitive-leq-Preorder preorder-Total-Preorder
 ```

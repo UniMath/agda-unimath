@@ -252,7 +252,7 @@ div-left-factor-div-gcd-ℕ a b x d with
 ... | inl p =
   concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-left-is-zero-add-ℕ a b p))
 ... | inr np =
-  transitive-div-ℕ x (gcd-ℕ a b) a d
+  transitive-div-ℕ x (gcd-ℕ a b) a
     ( pair q
       ( ( ( α) ∙
           ( ap
@@ -264,6 +264,7 @@ div-left-factor-div-gcd-ℕ a b x d with
                     ( div-gcd-is-common-divisor-ℕ a b x H))
                   ( concatenate-div-eq-ℕ (pr1 H) (inv β)))))) ∙
         ( right-unit-law-dist-ℕ a)))
+    ( d)
   where
   r = remainder-euclidean-division-ℕ (gcd-ℕ a b) a
   q = quotient-euclidean-division-ℕ (gcd-ℕ a b) a
@@ -280,7 +281,7 @@ div-right-factor-div-gcd-ℕ a b x d with
 ... | inl p =
   concatenate-div-eq-ℕ (div-zero-ℕ x) (inv (is-zero-right-is-zero-add-ℕ a b p))
 ... | inr np =
-  transitive-div-ℕ x (gcd-ℕ a b) b d
+  transitive-div-ℕ x (gcd-ℕ a b) b
     ( pair q
       ( ( α ∙
           ( ap
@@ -292,6 +293,7 @@ div-right-factor-div-gcd-ℕ a b x d with
                     ( div-gcd-is-common-divisor-ℕ a b x H))
                   ( concatenate-div-eq-ℕ (pr2 H) (inv β)))))) ∙
         ( right-unit-law-dist-ℕ b)))
+    ( d)
   where
   r = remainder-euclidean-division-ℕ (gcd-ℕ a b) b
   q = quotient-euclidean-division-ℕ (gcd-ℕ a b) b

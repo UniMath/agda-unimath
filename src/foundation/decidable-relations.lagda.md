@@ -30,10 +30,10 @@ that each `R x y` is a decidable proposition.
 ### Decidable relations
 
 ```agda
-is-decidable-Rel-Prop :
-  {l1 l2 : Level} {A : UU l1} → Rel-Prop l2 A → UU (l1 ⊔ l2)
-is-decidable-Rel-Prop {A = A} R =
-  (x y : A) → is-decidable ( type-Rel-Prop R x y)
+is-decidable-Relation-Prop :
+  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → UU (l1 ⊔ l2)
+is-decidable-Relation-Prop {A = A} R =
+  (x y : A) → is-decidable ( type-Relation-Prop R x y)
 
 Decidable-Relation : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
 Decidable-Relation l2 X = X → X → Decidable-Prop l2
@@ -59,17 +59,17 @@ module _
 
 map-inv-equiv-relation-is-decidable-Decidable-Relation :
   {l1 l2 : Level} {X : UU l1} →
-  Σ ( Rel-Prop l2 X) (λ R → is-decidable-Rel-Prop R) →
+  Σ ( Relation-Prop l2 X) (λ R → is-decidable-Relation-Prop R) →
   Decidable-Relation l2 X
 map-inv-equiv-relation-is-decidable-Decidable-Relation (R , d) x y =
-  ( ( type-Rel-Prop R x y) ,
-    ( is-prop-type-Rel-Prop R x y) ,
+  ( ( type-Relation-Prop R x y) ,
+    ( is-prop-type-Relation-Prop R x y) ,
     ( d x y))
 
 equiv-relation-is-decidable-Decidable-Relation :
   {l1 l2 : Level} {X : UU l1} →
   Decidable-Relation l2 X ≃
-  Σ ( Rel-Prop l2 X) (λ R → is-decidable-Rel-Prop R)
+  Σ ( Relation-Prop l2 X) (λ R → is-decidable-Relation-Prop R)
 pr1 equiv-relation-is-decidable-Decidable-Relation dec-R =
   ( relation-Decidable-Relation dec-R ,
     is-decidable-Decidable-Relation dec-R)

@@ -16,6 +16,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -312,16 +313,14 @@ leq-Normal-Subgroup G H K =
     ( subgroup-Normal-Subgroup G K)
 
 refl-leq-Normal-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H : Normal-Subgroup l2 G) →
-  leq-Normal-Subgroup G H H
+  {l1 : Level} (G : Group l1) →
+  is-large-reflexive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
 refl-leq-Normal-Subgroup G H =
   refl-leq-Subgroup G (subgroup-Normal-Subgroup G H)
 
 transitive-leq-Normal-Subgroup :
-  {l1 l2 l3 l4 : Level} (G : Group l1) (H : Normal-Subgroup l2 G)
-  (K : Normal-Subgroup l3 G) (L : Normal-Subgroup l4 G) →
-  leq-Normal-Subgroup G K L → leq-Normal-Subgroup G H K →
-  leq-Normal-Subgroup G H L
+  {l1 : Level} (G : Group l1) →
+  is-large-transitive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
 transitive-leq-Normal-Subgroup G H K L =
   transitive-leq-Subgroup G
     ( subgroup-Normal-Subgroup G H)
@@ -329,9 +328,8 @@ transitive-leq-Normal-Subgroup G H K L =
     ( subgroup-Normal-Subgroup G L)
 
 antisymmetric-leq-Normal-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H K : Normal-Subgroup l2 G) →
-  leq-Normal-Subgroup G H K →
-  leq-Normal-Subgroup G K H → H ＝ K
+  {l1 : Level} (G : Group l1) →
+  is-large-antisymmetric (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
 antisymmetric-leq-Normal-Subgroup G H K α β =
   eq-has-same-elements-Normal-Subgroup G H K (λ x → (α x , β x))
 
@@ -397,7 +395,7 @@ module _
 
 ```agda
   left-eq-rel-congruence-Normal-Subgroup :
-    Eq-Rel l2 (type-Group G)
+    Equivalence-Relation l2 (type-Group G)
   left-eq-rel-congruence-Normal-Subgroup =
     left-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
 
@@ -443,26 +441,26 @@ module _
 
 ```agda
   refl-congruence-Normal-Subgroup :
-    is-reflexive-Rel-Prop prop-congruence-Normal-Subgroup
+    is-reflexive sim-congruence-Normal-Subgroup
   refl-congruence-Normal-Subgroup =
     refl-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  symm-congruence-Normal-Subgroup :
-    is-symmetric-Rel-Prop prop-congruence-Normal-Subgroup
-  symm-congruence-Normal-Subgroup =
+  symmetric-congruence-Normal-Subgroup :
+    is-symmetric sim-congruence-Normal-Subgroup
+  symmetric-congruence-Normal-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  trans-congruence-Normal-Subgroup :
-    is-transitive-Rel-Prop prop-congruence-Normal-Subgroup
-  trans-congruence-Normal-Subgroup =
+  transitive-congruence-Normal-Subgroup :
+    is-transitive sim-congruence-Normal-Subgroup
+  transitive-congruence-Normal-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Normal-Subgroup G N)
 
-  eq-rel-congruence-Normal-Subgroup : Eq-Rel l2 (type-Group G)
+  eq-rel-congruence-Normal-Subgroup : Equivalence-Relation l2 (type-Group G)
   eq-rel-congruence-Normal-Subgroup =
     right-eq-rel-Subgroup G (subgroup-Normal-Subgroup G N)
 
   relate-same-elements-left-sim-congruence-Normal-Subgroup :
-    relate-same-elements-Eq-Rel
+    relate-same-elements-Equivalence-Relation
       ( eq-rel-congruence-Normal-Subgroup)
       ( left-eq-rel-congruence-Normal-Subgroup)
   pr1 (relate-same-elements-left-sim-congruence-Normal-Subgroup x y) =
@@ -519,7 +517,8 @@ module _
 
   contains-unit-subset-congruence-Group :
     contains-unit-subset-Group G subset-congruence-Group
-  contains-unit-subset-congruence-Group = refl-congruence-Group G R
+  contains-unit-subset-congruence-Group =
+    refl-congruence-Group G R (unit-Group G)
 
   is-closed-under-multiplication-subset-congruence-Group :
     is-closed-under-multiplication-subset-Group G subset-congruence-Group
@@ -608,7 +607,9 @@ pr1
 pr2
   ( relate-same-elements-congruence-normal-subgroup-congruence-Group
     G R x y) H =
-  symm-congruence-Group G R
+  symmetric-congruence-Group G R
+    ( left-div-Group G x y)
+    ( unit-Group G)
     ( map-sim-left-div-unit-congruence-Group G R H)
 
 is-section-normal-subgroup-congruence-Group :

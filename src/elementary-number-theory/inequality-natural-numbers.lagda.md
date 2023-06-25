@@ -12,6 +12,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -116,8 +117,7 @@ leq-eq-ℕ m .m refl = refl-leq-ℕ m
 ### Transitivity
 
 ```agda
-transitive-leq-ℕ :
-  (n m l : ℕ) → (m ≤-ℕ l) → (n ≤-ℕ m) → (n ≤-ℕ l)
+transitive-leq-ℕ : is-transitive leq-ℕ
 transitive-leq-ℕ zero-ℕ m l p q = star
 transitive-leq-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
   transitive-leq-ℕ n m l p q
@@ -336,7 +336,10 @@ reflects-order-add-ℕ' k m n H =
 leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (m +ℕ n)
 leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
 leq-add-ℕ m (succ-ℕ n) =
-  transitive-leq-ℕ m (m +ℕ n) (succ-ℕ (m +ℕ n))
+  transitive-leq-ℕ
+    ( m)
+    ( m +ℕ n)
+    ( succ-ℕ (m +ℕ n))
     ( succ-leq-ℕ (m +ℕ n))
     ( leq-add-ℕ m n)
 

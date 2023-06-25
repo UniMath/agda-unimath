@@ -8,6 +8,7 @@ module order-theory.join-semilattices where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
@@ -151,12 +152,10 @@ module _
   private
     _≤_ = leq-Join-Semilattice
 
-  refl-leq-Join-Semilattice :
-    (x : type-Join-Semilattice) → x ≤ x
+  refl-leq-Join-Semilattice : is-reflexive leq-Join-Semilattice
   refl-leq-Join-Semilattice x = idempotent-join-Join-Semilattice x
 
-  transitive-leq-Join-Semilattice :
-    (x y z : type-Join-Semilattice) → y ≤ z → x ≤ y → x ≤ z
+  transitive-leq-Join-Semilattice : is-transitive leq-Join-Semilattice
   transitive-leq-Join-Semilattice x y z H K =
     equational-reasoning
       x ∨ z
@@ -169,9 +168,7 @@ module _
       ＝ z
         by H
 
-  antisymmetric-leq-Join-Semilattice :
-    (x y : type-Join-Semilattice) →
-    leq-Join-Semilattice x y → leq-Join-Semilattice y x → x ＝ y
+  antisymmetric-leq-Join-Semilattice : is-antisymmetric leq-Join-Semilattice
   antisymmetric-leq-Join-Semilattice x y H K =
     equational-reasoning
       x ＝ y ∨ x

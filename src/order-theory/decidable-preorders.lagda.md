@@ -7,6 +7,7 @@ module order-theory.decidable-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
 open import foundation.propositions
@@ -86,15 +87,10 @@ module _
   pr2 (pr2 (leq-Decidable-Preorder-Decidable-Prop x y)) =
     is-decidable-leq-Decidable-Preorder x y
 
-  refl-leq-Decidable-Preorder :
-    (x : type-Decidable-Preorder) → leq-Decidable-Preorder x x
+  refl-leq-Decidable-Preorder : is-reflexive leq-Decidable-Preorder
   refl-leq-Decidable-Preorder = refl-leq-Preorder preorder-Decidable-Preorder
 
-  transitive-leq-Decidable-Preorder :
-    (x y z : type-Decidable-Preorder) →
-    leq-Decidable-Preorder y z →
-    leq-Decidable-Preorder x y →
-    leq-Decidable-Preorder x z
+  transitive-leq-Decidable-Preorder : is-transitive leq-Decidable-Preorder
   transitive-leq-Decidable-Preorder =
     transitive-leq-Preorder preorder-Decidable-Preorder
 ```

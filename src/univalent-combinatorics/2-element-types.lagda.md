@@ -112,11 +112,12 @@ module _
   where
 
   has-two-elements-equiv : X ≃ Y → has-two-elements X → has-two-elements Y
-  has-two-elements-equiv e H = transitive-mere-equiv H (unit-trunc-Prop e)
+  has-two-elements-equiv e H =
+    transitive-mere-equiv (Fin 2) X Y (unit-trunc-Prop e) H
 
   has-two-elements-equiv' : X ≃ Y → has-two-elements Y → has-two-elements X
   has-two-elements-equiv' e H =
-    transitive-mere-equiv H (unit-trunc-Prop (inv-equiv e))
+    transitive-mere-equiv (Fin 2) Y X (unit-trunc-Prop (inv-equiv e)) H
 ```
 
 ### Any 2-element type is inhabited

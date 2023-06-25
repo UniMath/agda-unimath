@@ -7,6 +7,7 @@ module group-theory.subgroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-relations
@@ -14,6 +15,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -390,15 +392,13 @@ leq-Subgroup :
 leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
 refl-leq-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G) →
-  leq-Subgroup G H H
+  {l1 : Level} (G : Group l1) →
+  is-large-reflexive (λ l → Subgroup l G) (leq-Subgroup G)
 refl-leq-Subgroup G H = refl-leq-subtype (subset-Subgroup G H)
 
 transitive-leq-Subgroup :
-  {l1 l2 l3 l4 : Level} (G : Group l1) (H : Subgroup l2 G)
-  (K : Subgroup l3 G) (L : Subgroup l4 G) →
-  leq-Subgroup G K L → leq-Subgroup G H K →
-  leq-Subgroup G H L
+  {l1 : Level} (G : Group l1) →
+  is-large-transitive (λ l → Subgroup l G) (leq-Subgroup G)
 transitive-leq-Subgroup G H K L =
   transitive-leq-subtype
     ( subset-Subgroup G H)
@@ -406,8 +406,8 @@ transitive-leq-Subgroup G H K L =
     ( subset-Subgroup G L)
 
 antisymmetric-leq-Subgroup :
-  {l1 l2 : Level} (G : Group l1) (H K : Subgroup l2 G) →
-  leq-Subgroup G H K → leq-Subgroup G K H → H ＝ K
+  {l1 : Level} (G : Group l1) →
+  is-large-antisymmetric (λ l → Subgroup l G) (leq-Subgroup G)
 antisymmetric-leq-Subgroup G H K α β =
   eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
 
@@ -464,18 +464,15 @@ module _
   pr2 (prop-right-eq-rel-Subgroup x y) =
     is-prop-right-sim-Subgroup x y
 
-  refl-right-sim-Subgroup :
-    {x : type-Group G} → right-sim-Subgroup x x
-  refl-right-sim-Subgroup {x} =
+  refl-right-sim-Subgroup : is-reflexive right-sim-Subgroup
+  refl-right-sim-Subgroup x =
     tr
       ( is-in-Subgroup G H)
       ( inv (left-inverse-law-mul-Group G x))
       ( contains-unit-Subgroup G H)
 
-  symmetric-right-sim-Subgroup :
-    {x y : type-Group G} →
-    right-sim-Subgroup x y → right-sim-Subgroup y x
-  symmetric-right-sim-Subgroup {x} {y} p =
+  symmetric-right-sim-Subgroup : is-symmetric right-sim-Subgroup
+  symmetric-right-sim-Subgroup x y p =
     tr
       ( is-in-Subgroup G H)
       ( inv-left-div-Group G x y)
@@ -483,20 +480,18 @@ module _
         ( left-div-Group G x y)
         ( p))
 
-  transitive-right-sim-Subgroup :
-    {x y z : type-Group G} → right-sim-Subgroup x y →
-    right-sim-Subgroup y z → right-sim-Subgroup x z
-  transitive-right-sim-Subgroup {x} {y} {z} p q =
+  transitive-right-sim-Subgroup : is-transitive right-sim-Subgroup
+  transitive-right-sim-Subgroup x y z p q =
     tr
       ( is-in-Subgroup G H)
       ( mul-left-div-Group G x y z)
       ( is-closed-under-multiplication-Subgroup G H
         ( left-div-Group G x y)
         ( left-div-Group G y z)
-        ( p)
-        ( q))
+        ( q)
+        ( p))
 
-  right-eq-rel-Subgroup : Eq-Rel l2 (type-Group G)
+  right-eq-rel-Subgroup : Equivalence-Relation l2 (type-Group G)
   pr1 right-eq-rel-Subgroup = prop-right-eq-rel-Subgroup
   pr1 (pr2 right-eq-rel-Subgroup) = refl-right-sim-Subgroup
   pr1 (pr2 (pr2 right-eq-rel-Subgroup)) = symmetric-right-sim-Subgroup
@@ -523,18 +518,15 @@ module _
   pr2 (prop-left-eq-rel-Subgroup x y) =
     is-prop-left-sim-Subgroup x y
 
-  refl-left-sim-Subgroup :
-    {x : type-Group G} → left-sim-Subgroup x x
-  refl-left-sim-Subgroup {x} =
+  refl-left-sim-Subgroup : is-reflexive left-sim-Subgroup
+  refl-left-sim-Subgroup x =
     tr
       ( is-in-Subgroup G H)
       ( inv (right-inverse-law-mul-Group G x))
       ( contains-unit-Subgroup G H)
 
-  symmetric-left-sim-Subgroup :
-    {x y : type-Group G} →
-    left-sim-Subgroup x y → left-sim-Subgroup y x
-  symmetric-left-sim-Subgroup {x} {y} p =
+  symmetric-left-sim-Subgroup : is-symmetric left-sim-Subgroup
+  symmetric-left-sim-Subgroup x y p =
     tr
       ( is-in-Subgroup G H)
       ( inv-right-div-Group G x y)
@@ -542,20 +534,18 @@ module _
         ( right-div-Group G x y)
         ( p))
 
-  transitive-left-sim-Subgroup :
-    {x y z : type-Group G} → left-sim-Subgroup x y →
-    left-sim-Subgroup y z → left-sim-Subgroup x z
-  transitive-left-sim-Subgroup {x} {y} {z} p q =
+  transitive-left-sim-Subgroup : is-transitive left-sim-Subgroup
+  transitive-left-sim-Subgroup x y z p q =
     tr
       ( is-in-Subgroup G H)
       ( mul-right-div-Group G x y z)
       ( is-closed-under-multiplication-Subgroup G H
         ( right-div-Group G x y)
         ( right-div-Group G y z)
-        ( p)
-        ( q))
+        ( q)
+        ( p))
 
-  left-eq-rel-Subgroup : Eq-Rel l2 (type-Group G)
+  left-eq-rel-Subgroup : Equivalence-Relation l2 (type-Group G)
   pr1 left-eq-rel-Subgroup = prop-left-eq-rel-Subgroup
   pr1 (pr2 left-eq-rel-Subgroup) = refl-left-sim-Subgroup
   pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symmetric-left-sim-Subgroup

@@ -11,6 +11,7 @@ open import category-theory.functors-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
+open import foundation.category-of-sets
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies

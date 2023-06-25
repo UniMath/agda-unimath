@@ -378,21 +378,21 @@ module _
     prop-right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   refl-right-sim-Decidable-Subgroup :
-    is-reflexive-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
+    is-reflexive right-sim-Decidable-Subgroup
   refl-right-sim-Decidable-Subgroup =
     refl-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  symm-right-sim-Decidable-Subgroup :
-    is-symmetric-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
-  symm-right-sim-Decidable-Subgroup =
+  symmetric-right-sim-Decidable-Subgroup :
+    is-symmetric right-sim-Decidable-Subgroup
+  symmetric-right-sim-Decidable-Subgroup =
     symmetric-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  trans-right-sim-Decidable-Subgroup :
-    is-transitive-Rel-Prop prop-right-eq-rel-Decidable-Subgroup
-  trans-right-sim-Decidable-Subgroup =
+  transitive-right-sim-Decidable-Subgroup :
+    is-transitive right-sim-Decidable-Subgroup
+  transitive-right-sim-Decidable-Subgroup =
     transitive-right-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  right-eq-rel-Decidable-Subgroup : Eq-Rel l2 (type-Group G)
+  right-eq-rel-Decidable-Subgroup : Equivalence-Relation l2 (type-Group G)
   right-eq-rel-Decidable-Subgroup =
     right-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```
@@ -418,21 +418,21 @@ module _
     prop-left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   refl-left-sim-Decidable-Subgroup :
-    is-reflexive-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
+    is-reflexive left-sim-Decidable-Subgroup
   refl-left-sim-Decidable-Subgroup =
     refl-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   symmetric-left-sim-Decidable-Subgroup :
-    is-symmetric-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
+    is-symmetric left-sim-Decidable-Subgroup
   symmetric-left-sim-Decidable-Subgroup =
     symmetric-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
   transitive-left-sim-Decidable-Subgroup :
-    is-transitive-Rel-Prop prop-left-eq-rel-Decidable-Subgroup
+    is-transitive left-sim-Decidable-Subgroup
   transitive-left-sim-Decidable-Subgroup =
     transitive-left-sim-Subgroup G (subgroup-Decidable-Subgroup G H)
 
-  left-eq-rel-Decidable-Subgroup : Eq-Rel l2 (type-Group G)
+  left-eq-rel-Decidable-Subgroup : Equivalence-Relation l2 (type-Group G)
   left-eq-rel-Decidable-Subgroup =
     left-eq-rel-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```

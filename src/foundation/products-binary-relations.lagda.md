@@ -29,13 +29,13 @@ Given two relations `R` and `S`, their product is given by
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {A : UU l1} (R : Rel-Prop l2 A)
-  {B : UU l3} (S : Rel-Prop l4 B)
+  {A : UU l1} (R : Relation-Prop l2 A)
+  {B : UU l3} (S : Relation-Prop l4 B)
   where
 
-  prod-Rel-Prop :
-    Rel-Prop (l2 ⊔ l4) (A × B)
-  prod-Rel-Prop (a , b) (a' , b') =
+  prod-Relation-Prop :
+    Relation-Prop (l2 ⊔ l4) (A × B)
+  prod-Relation-Prop (a , b) (a' , b') =
     prod-Prop
       ( R a a')
       ( S b b')

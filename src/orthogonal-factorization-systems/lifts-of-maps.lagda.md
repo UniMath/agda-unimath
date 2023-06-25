@@ -163,7 +163,7 @@ module _
 
 ## Properties
 
-### Characterizing identification of lifts of maps
+### Characterizing identifications of lifts of maps
 
 ```agda
 module _

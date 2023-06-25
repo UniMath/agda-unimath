@@ -36,38 +36,39 @@ open import univalent-combinatorics.standard-finite-types
 ```agda
 module _
   {l1 l2 l3 : Level}
-  {A : UU l1} (R : Eq-Rel l2 A)
-  (QR : Set l3) (f : reflecting-map-Eq-Rel R (type-Set QR))
+  {A : UU l1} (R : Equivalence-Relation l2 A)
+  (QR : Set l3) (f : reflecting-map-Equivalence-Relation R (type-Set QR))
   (Uf : {l : Level} → is-set-quotient l R QR f)
   (eA : type-Set QR ≃ Fin 2) (h : A → A)
   (H : {x y : A} →
-    sim-Eq-Rel R x y ↔ sim-Eq-Rel R (h x) (h y))
+    sim-Equivalence-Relation R x y ↔ sim-Equivalence-Relation R (h x) (h y))
   (h' : type-Set QR → type-Set QR)
   (x : A)
   (P :
-    h' (map-reflecting-map-Eq-Rel R f x) ＝
-    map-reflecting-map-Eq-Rel R f (h x))
+    h' (map-reflecting-map-Equivalence-Relation R f x) ＝
+    map-reflecting-map-Equivalence-Relation R f (h x))
   where
 
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient :
     is-emb h' →
     (y : A) (k k' k'' : Fin 2) →
-    map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)) ＝ k →
-    map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)) ＝ k' →
-    map-equiv eA (map-reflecting-map-Eq-Rel R f (h y)) ＝ k'' →
-    h' (map-reflecting-map-Eq-Rel R f y) ＝ map-reflecting-map-Eq-Rel R f (h y)
+    map-equiv eA (h' (map-reflecting-map-Equivalence-Relation R f x)) ＝ k →
+    map-equiv eA (h' (map-reflecting-map-Equivalence-Relation R f y)) ＝ k' →
+    map-equiv eA (map-reflecting-map-Equivalence-Relation R f (h y)) ＝ k'' →
+    h' (map-reflecting-map-Equivalence-Relation R f y) ＝
+    map-reflecting-map-Equivalence-Relation R f (h y)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inl (inr star)) k'' p q r =
     ( is-injective-map-equiv eA (q ∙ inv p)) ∙
       ( P ∙
-        reflects-map-reflecting-map-Eq-Rel R f
+        reflects-map-reflecting-map-Equivalence-Relation R f
           ( pr1 H
             ( map-equiv
               ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
                 ( H'
-                  ( map-reflecting-map-Eq-Rel R f x)
-                  ( map-reflecting-map-Eq-Rel R f y))
+                  ( map-reflecting-map-Equivalence-Relation R f x)
+                  ( map-reflecting-map-Equivalence-Relation R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
     ( inl (inr star)) (inr star) (inl (inr star)) p q r =
@@ -76,7 +77,7 @@ module _
         ( inv p ∙
           ( ( ap
             ( map-equiv eA ∘ h')
-            ( reflects-map-reflecting-map-Eq-Rel R f
+            ( reflects-map-reflecting-map-Equivalence-Relation R f
               ( pr2 H
                 (map-equiv
                   ( is-effective-is-set-quotient R QR f Uf (h x) (h y))
@@ -95,7 +96,7 @@ module _
         ( inv p ∙
           ( ( ap
             ( map-equiv eA ∘ h')
-            ( reflects-map-reflecting-map-Eq-Rel R f
+            ( reflects-map-reflecting-map-Equivalence-Relation R f
               ( pr2 H
                 (map-equiv
                   ( is-effective-is-set-quotient R QR f Uf (h x) (h y))
@@ -105,28 +106,28 @@ module _
     ( inr star) (inr star) k'' p q r =
     ( is-injective-map-equiv eA (q ∙ inv p)) ∙
       ( P ∙
-        reflects-map-reflecting-map-Eq-Rel R f
+        reflects-map-reflecting-map-Equivalence-Relation R f
           ( pr1 H
             ( map-equiv
               ( is-effective-is-set-quotient R QR f Uf x y)
               ( map-inv-is-equiv
                 ( H'
-                  ( map-reflecting-map-Eq-Rel R f x)
-                  ( map-reflecting-map-Eq-Rel R f y))
+                  ( map-reflecting-map-Equivalence-Relation R f x)
+                  ( map-reflecting-map-Equivalence-Relation R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
 
   coherence-square-maps-eq-one-value-emb-is-set-quotient :
     is-emb h' →
     coherence-square-maps
       ( h)
-      ( map-reflecting-map-Eq-Rel R f)
-      ( map-reflecting-map-Eq-Rel R f)
+      ( map-reflecting-map-Equivalence-Relation R f)
+      ( map-reflecting-map-Equivalence-Relation R f)
       ( h')
   coherence-square-maps-eq-one-value-emb-is-set-quotient H' y =
     cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-      ( map-equiv eA (h' (map-reflecting-map-Eq-Rel R f x)))
-      ( map-equiv eA (h' (map-reflecting-map-Eq-Rel R f y)))
-      ( map-equiv eA (map-reflecting-map-Eq-Rel R f (h y)))
+      ( map-equiv eA (h' (map-reflecting-map-Equivalence-Relation R f x)))
+      ( map-equiv eA (h' (map-reflecting-map-Equivalence-Relation R f y)))
+      ( map-equiv eA (map-reflecting-map-Equivalence-Relation R f (h y)))
       ( refl)
       ( refl)
       ( refl)

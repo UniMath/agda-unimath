@@ -7,8 +7,10 @@ module order-theory.large-meet-subsemilattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -148,62 +150,50 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   leq-Large-Meet-Subsemilattice-Prop :
-    {l1 l2 : Level} →
-    type-Large-Meet-Subsemilattice l1 →
-    type-Large-Meet-Subsemilattice l2 →
-    Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
   leq-Large-Meet-Subsemilattice-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   leq-Large-Meet-Subsemilattice :
-    {l1 l2 : Level} →
-    type-Large-Meet-Subsemilattice l1 →
-    type-Large-Meet-Subsemilattice l2 →
-    UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
   leq-Large-Meet-Subsemilattice =
     leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   is-prop-leq-Large-Meet-Subsemilattice :
-    {l1 l2 : Level} →
-    (x : type-Large-Meet-Subsemilattice l1)
-    (y : type-Large-Meet-Subsemilattice l2) →
-    is-prop (leq-Large-Meet-Subsemilattice x y)
+    is-prop-Large-Relation
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   is-prop-leq-Large-Meet-Subsemilattice =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   refl-leq-Large-Meet-Subsemilattice :
-    {l1 : Level} (x : type-Large-Meet-Subsemilattice l1) →
-    leq-Large-Meet-Subsemilattice x x
+    is-large-reflexive
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   refl-leq-Large-Meet-Subsemilattice =
     refl-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   transitive-leq-Large-Meet-Subsemilattice :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Meet-Subsemilattice l1)
-    (y : type-Large-Meet-Subsemilattice l2)
-    (z : type-Large-Meet-Subsemilattice l3) →
-    leq-Large-Meet-Subsemilattice y z → leq-Large-Meet-Subsemilattice x y →
-    leq-Large-Meet-Subsemilattice x z
+    is-large-transitive
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   transitive-leq-Large-Meet-Subsemilattice =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   antisymmetric-leq-Large-Meet-Subsemilattice :
-    {l1 : Level}
-    (x : type-Large-Meet-Subsemilattice l1)
-    (y : type-Large-Meet-Subsemilattice l1) →
-    leq-Large-Meet-Subsemilattice x y →
-    leq-Large-Meet-Subsemilattice y x →
-    x ＝ y
+    is-large-antisymmetric
+      ( type-Large-Meet-Subsemilattice)
+      ( leq-Large-Meet-Subsemilattice)
   antisymmetric-leq-Large-Meet-Subsemilattice =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)

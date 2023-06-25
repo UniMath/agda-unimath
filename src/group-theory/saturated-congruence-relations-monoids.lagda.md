@@ -82,11 +82,11 @@ module _
     is-saturated-congruence-Monoid M congruence-saturated-congruence-Monoid
   is-saturated-saturated-congruence-Monoid = pr2 R
 
-  eq-rel-saturated-congruence-Monoid : Eq-Rel l2 (type-Monoid M)
+  eq-rel-saturated-congruence-Monoid : Equivalence-Relation l2 (type-Monoid M)
   eq-rel-saturated-congruence-Monoid =
     eq-rel-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  prop-saturated-congruence-Monoid : Rel-Prop l2 (type-Monoid M)
+  prop-saturated-congruence-Monoid : Relation-Prop l2 (type-Monoid M)
   prop-saturated-congruence-Monoid =
     prop-congruence-Monoid M congruence-saturated-congruence-Monoid
 
@@ -100,46 +100,49 @@ module _
     is-prop-sim-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   concatenate-sim-eq-saturated-congruence-Monoid :
-    {x y z : type-Monoid M} → sim-saturated-congruence-Monoid x y → y ＝ z →
+    {x y z : type-Monoid M} →
+    sim-saturated-congruence-Monoid x y → y ＝ z →
     sim-saturated-congruence-Monoid x z
   concatenate-sim-eq-saturated-congruence-Monoid =
     concatenate-sim-eq-congruence-Monoid M
       congruence-saturated-congruence-Monoid
 
   concatenate-eq-sim-saturated-congruence-Monoid :
-    {x y z : type-Monoid M} → x ＝ y → sim-saturated-congruence-Monoid y z →
+    {x y z : type-Monoid M} →
+    x ＝ y → sim-saturated-congruence-Monoid y z →
     sim-saturated-congruence-Monoid x z
   concatenate-eq-sim-saturated-congruence-Monoid =
     concatenate-eq-sim-congruence-Monoid M
       congruence-saturated-congruence-Monoid
 
   concatenate-eq-sim-eq-saturated-congruence-Monoid :
-    {x y z w : type-Monoid M} → x ＝ y → sim-saturated-congruence-Monoid y z →
+    {x y z w : type-Monoid M} →
+    x ＝ y → sim-saturated-congruence-Monoid y z →
     z ＝ w → sim-saturated-congruence-Monoid x w
   concatenate-eq-sim-eq-saturated-congruence-Monoid =
     concatenate-eq-sim-eq-congruence-Monoid M
       congruence-saturated-congruence-Monoid
 
   refl-saturated-congruence-Monoid :
-    is-reflexive-Rel-Prop prop-saturated-congruence-Monoid
+    is-reflexive sim-saturated-congruence-Monoid
   refl-saturated-congruence-Monoid =
     refl-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  symm-saturated-congruence-Monoid :
-    is-symmetric-Rel-Prop prop-saturated-congruence-Monoid
-  symm-saturated-congruence-Monoid =
-    symm-congruence-Monoid M congruence-saturated-congruence-Monoid
+  symmetric-saturated-congruence-Monoid :
+    is-symmetric sim-saturated-congruence-Monoid
+  symmetric-saturated-congruence-Monoid =
+    symmetric-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  equiv-symm-saturated-congruence-Monoid :
+  equiv-symmetric-saturated-congruence-Monoid :
     (x y : type-Monoid M) →
     sim-saturated-congruence-Monoid x y ≃ sim-saturated-congruence-Monoid y x
-  equiv-symm-saturated-congruence-Monoid =
-    equiv-symm-congruence-Monoid M congruence-saturated-congruence-Monoid
+  equiv-symmetric-saturated-congruence-Monoid =
+    equiv-symmetric-congruence-Monoid M congruence-saturated-congruence-Monoid
 
-  trans-saturated-congruence-Monoid :
-    is-transitive-Rel-Prop prop-saturated-congruence-Monoid
-  trans-saturated-congruence-Monoid =
-    trans-congruence-Monoid M congruence-saturated-congruence-Monoid
+  transitive-saturated-congruence-Monoid :
+    is-transitive sim-saturated-congruence-Monoid
+  transitive-saturated-congruence-Monoid =
+    transitive-congruence-Monoid M congruence-saturated-congruence-Monoid
 
   mul-saturated-congruence-Monoid :
     is-congruence-Monoid M eq-rel-saturated-congruence-Monoid
@@ -153,7 +156,8 @@ module _
 
 ```agda
 relate-same-elements-saturated-congruence-Monoid :
-  {l1 l2 l3 : Level} (M : Monoid l1) (R : saturated-congruence-Monoid l2 M)
+  {l1 l2 l3 : Level} (M : Monoid l1)
+  (R : saturated-congruence-Monoid l2 M)
   (S : saturated-congruence-Monoid l3 M) → UU (l1 ⊔ l2 ⊔ l3)
 relate-same-elements-saturated-congruence-Monoid M R S =
   relate-same-elements-congruence-Monoid M

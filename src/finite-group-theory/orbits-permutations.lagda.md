@@ -409,15 +409,15 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (f : Aut (type-UU-Fin n X))
   where
 
-  same-orbits-permutation : Eq-Rel l (type-UU-Fin n X)
+  same-orbits-permutation : Equivalence-Relation l (type-UU-Fin n X)
   (pr1 same-orbits-permutation) a b =
     trunc-Prop (Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
-  pr1 (pr2 same-orbits-permutation) = unit-trunc-Prop (pair 0 refl)
-  pr1 (pr2 (pr2 same-orbits-permutation)) {a} {b} P =
+  pr1 (pr2 same-orbits-permutation) _ = unit-trunc-Prop (0 , refl)
+  pr1 (pr2 (pr2 same-orbits-permutation)) a b P =
     apply-universal-property-trunc-Prop
       ( P)
       ( pr1 same-orbits-permutation b a)
-      ( λ (pair k p) →
+      ( λ (k , p) →
         apply-universal-property-trunc-Prop
           ( has-cardinality-type-UU-Fin n X)
           ( pr1 same-orbits-permutation b a)
@@ -455,15 +455,15 @@ module _
           ( pr1 (has-finite-orbits-permutation-a h))
           ( k)
           ( pr1 (pr2 (has-finite-orbits-permutation-a h))))
-  pr2 (pr2 (pr2 same-orbits-permutation)) {a} {b} {c} P Q =
+  pr2 (pr2 (pr2 same-orbits-permutation)) a b c Q P =
     apply-universal-property-trunc-Prop
       ( P)
       ( pr1 same-orbits-permutation a c)
-      ( λ (pair k1 p) →
+      ( λ (k1 , p) →
         apply-universal-property-trunc-Prop
           ( Q)
           ( pr1 same-orbits-permutation a c)
-          ( λ { (pair k2 q) →
+          ( λ { (k2 , q) →
                 ( unit-trunc-Prop
                   ( pair
                     ( k2 +ℕ k1)
@@ -473,11 +473,12 @@ module _
   abstract
     is-decidable-same-orbits-permutation :
       ( a b : type-UU-Fin n X) →
-      is-decidable (sim-Eq-Rel same-orbits-permutation a b)
+      is-decidable (sim-Equivalence-Relation same-orbits-permutation a b)
     is-decidable-same-orbits-permutation a b =
       apply-universal-property-trunc-Prop
         ( has-cardinality-type-UU-Fin n X)
-        ( is-decidable-Prop (prop-Eq-Rel same-orbits-permutation a b))
+        ( is-decidable-Prop
+          ( prop-Equivalence-Relation same-orbits-permutation a b))
         ( λ h →
           is-decidable-trunc-Prop-is-merely-decidable
             ( Σ ℕ (λ k → Id (iterate k (map-equiv f) a) b))
@@ -656,7 +657,7 @@ module _
         ( np))
       ( map-equiv g x)
 
-  same-orbits-permutation-count : (X ≃ X) → Eq-Rel l1 X
+  same-orbits-permutation-count : (X ≃ X) → Equivalence-Relation l1 X
   same-orbits-permutation-count =
     same-orbits-permutation
       ( number-of-elements-count eX)
@@ -780,17 +781,17 @@ module _
   abstract
     conserves-other-orbits-transposition :
       (g : X ≃ X) (x y : X) →
-      ¬ (sim-Eq-Rel (same-orbits-permutation-count g) x a) →
-      ¬ (sim-Eq-Rel (same-orbits-permutation-count g) x b) →
-      ( ( sim-Eq-Rel (same-orbits-permutation-count g) x y) ≃
-        ( sim-Eq-Rel
+      ¬ (sim-Equivalence-Relation (same-orbits-permutation-count g) x a) →
+      ¬ (sim-Equivalence-Relation (same-orbits-permutation-count g) x b) →
+      ( ( sim-Equivalence-Relation (same-orbits-permutation-count g) x y) ≃
+        ( sim-Equivalence-Relation
           ( same-orbits-permutation-count (composition-transposition-a-b g))
           ( x)
           ( y)))
     conserves-other-orbits-transposition g x y NA NB =
       pair
         ( λ P' → apply-universal-property-trunc-Prop P'
-          ( prop-Eq-Rel
+          ( prop-Equivalence-Relation
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( x)
             ( y))
@@ -800,7 +801,7 @@ module _
                 ( p)))))
         ( is-equiv-is-prop is-prop-type-trunc-Prop is-prop-type-trunc-Prop
           ( λ P' → apply-universal-property-trunc-Prop P'
-            ( prop-Eq-Rel (same-orbits-permutation-count g) x y)
+            ( prop-Equivalence-Relation (same-orbits-permutation-count g) x y)
             ( λ (pair k p) → unit-trunc-Prop
               ( pair k
                 ( (inv (equal-iterate-transposition-other-orbits k)) ∙
@@ -843,21 +844,24 @@ module _
                     ( nr ∘ backward-implication (Q b))) ∘e
                   ( equiv-iff'
                     ( T1 y)
-                    ( prop-Eq-Rel (same-orbits-permutation-count g) x y)
+                    ( prop-Equivalence-Relation
+                      ( same-orbits-permutation-count g)
+                      ( x)
+                      ( y))
                     ( Q y))))))
 
   abstract
     not-same-orbits-transposition-same-orbits :
       ( g : X ≃ X)
       ( P :
-        ( sim-Eq-Rel
+        ( sim-Equivalence-Relation
           ( same-orbits-permutation
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX)))
             ( g))
           ( a)
           ( b))) →
-      ¬ ( sim-Eq-Rel
+      ¬ ( sim-Equivalence-Relation
           ( same-orbits-permutation-count (composition-transposition-a-b g))
           ( a)
           ( b))
@@ -1062,10 +1066,10 @@ module _
                 ( p)
                 ( pr1 (pr2 (minimal-element-iterate g a b pa)))))
 
-  coprod-sim-Eq-Rel-a-b-Prop :
+  coprod-sim-Equivalence-Relation-a-b-Prop :
     ( g : X ≃ X) →
     ( P :
-      sim-Eq-Rel
+      sim-Equivalence-Relation
         ( same-orbits-permutation
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -1073,25 +1077,30 @@ module _
         ( a)
         ( b))
     (x : X) → Prop l1
-  coprod-sim-Eq-Rel-a-b-Prop g P x =
+  coprod-sim-Equivalence-Relation-a-b-Prop g P x =
     coprod-Prop
-      ( prop-Eq-Rel
+      ( prop-Equivalence-Relation
         (same-orbits-permutation-count (composition-transposition-a-b g)) x a)
-      ( prop-Eq-Rel
+      ( prop-Equivalence-Relation
         (same-orbits-permutation-count (composition-transposition-a-b g)) x b)
       ( λ T1 T2 → not-same-orbits-transposition-same-orbits g P
-        ( trans-Eq-Rel
+        ( transitive-Equivalence-Relation
           ( same-orbits-permutation-count (composition-transposition-a-b g))
-          ( symm-Eq-Rel
+          ( _)
+          ( _)
+          ( _)
+          ( T2)
+          ( symmetric-Equivalence-Relation
             ( same-orbits-permutation-count (composition-transposition-a-b g))
-            ( T1))
-          ( T2)))
+            ( _)
+            ( _)
+            ( T1))))
 
   abstract
     split-orbits-a-b-transposition :
       (g : X ≃ X) →
       (P :
-        sim-Eq-Rel
+        sim-Equivalence-Relation
           ( same-orbits-permutation
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -1099,12 +1108,12 @@ module _
           ( a)
           ( b))
       (x : X) →
-      ( ( sim-Eq-Rel (same-orbits-permutation-count g) x a) ≃
-        ( ( sim-Eq-Rel
+      ( ( sim-Equivalence-Relation (same-orbits-permutation-count g) x a) ≃
+        ( ( sim-Equivalence-Relation
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( x)
             ( a)) +
-          ( sim-Eq-Rel
+          ( sim-Equivalence-Relation
             ( same-orbits-permutation-count
               ( composition-transposition-a-b g))
             ( x)
@@ -1113,14 +1122,14 @@ module _
       pair
         ( λ T →
           apply-universal-property-trunc-Prop T
-            ( coprod-sim-Eq-Rel-a-b-Prop g P x)
+            ( coprod-sim-Equivalence-Relation-a-b-Prop g P x)
             (λ pa → lemma2 g (pair (pr1 pa) (inl (pr2 pa)))))
         ( is-equiv-is-prop is-prop-type-trunc-Prop
-          ( is-prop-type-Prop (coprod-sim-Eq-Rel-a-b-Prop g P x))
+          ( is-prop-type-Prop (coprod-sim-Equivalence-Relation-a-b-Prop g P x))
           ( λ {
             (inl T) →
             apply-universal-property-trunc-Prop T
-              ( prop-Eq-Rel (same-orbits-permutation-count g) x a)
+              ( prop-Equivalence-Relation (same-orbits-permutation-count g) x a)
               ( λ pa →
                 lemma3
                   ( lemma2
@@ -1128,7 +1137,7 @@ module _
                     ( pair (pr1 pa) (inl (pr2 pa))))) ;
             (inr T) →
             apply-universal-property-trunc-Prop T
-              ( prop-Eq-Rel (same-orbits-permutation-count g) x a)
+              ( prop-Equivalence-Relation (same-orbits-permutation-count g) x a)
               ( λ pa →
                 lemma3
                   ( lemma2
@@ -1186,11 +1195,11 @@ module _
             (λ k →
               ( Id (iterate k (map-equiv g) x) a) +
               ( Id (iterate k (map-equiv g) x) b))) →
-        ( sim-Eq-Rel
+        ( sim-Equivalence-Relation
           ( same-orbits-permutation-count (composition-transposition-a-b g))
           ( x)
           ( a)) +
-        ( sim-Eq-Rel
+        ( sim-Equivalence-Relation
           ( same-orbits-permutation-count (composition-transposition-a-b g))
           ( x)
           ( b))
@@ -1218,12 +1227,12 @@ module _
                 ( x))
               ( b))) →
           Id c (pr1 (pr2 (minimal-element-iterate-2-a-b g pa))) →
-          ( sim-Eq-Rel
+          ( sim-Equivalence-Relation
             ( same-orbits-permutation-count
               ( composition-transposition-a-b g))
             ( x)
             ( a)) +
-          ( sim-Eq-Rel
+          ( sim-Equivalence-Relation
             ( same-orbits-permutation-count (composition-transposition-a-b g))
             ( x)
             ( b))
@@ -1320,43 +1329,48 @@ module _
             is-successor-ℕ (pr1 (minimal-element-iterate-2-a-b g pa))
           is-successor-k1 = is-successor-is-nonzero-ℕ q
       lemma3 :
-        ( ( sim-Eq-Rel
+        ( ( sim-Equivalence-Relation
             ( same-orbits-permutation-count
               ( composition-transposition-a-b
                 ( composition-transposition-a-b g)))
             ( x)
             ( a)) +
-          ( sim-Eq-Rel
+          ( sim-Equivalence-Relation
             ( same-orbits-permutation-count
               ( composition-transposition-a-b
                 ( composition-transposition-a-b g)))
             ( x)
             ( b))) →
-          sim-Eq-Rel (same-orbits-permutation-count g) x a
+          sim-Equivalence-Relation (same-orbits-permutation-count g) x a
       lemma3 (inl T) =
         tr
-          (λ f → sim-Eq-Rel (same-orbits-permutation-count f) x a)
+          (λ f → sim-Equivalence-Relation (same-orbits-permutation-count f) x a)
           { x = composition-transposition-a-b (composition-transposition-a-b g)}
           {y = g}
           ( eq-htpy-equiv (composition-transposition-a-b-involution g))
           ( T)
       lemma3 (inr T) =
-        trans-Eq-Rel
+        transitive-Equivalence-Relation
           ( same-orbits-permutation-count g)
+          ( _)
+          ( _)
+          ( _)
+          ( symmetric-Equivalence-Relation
+            ( same-orbits-permutation-count g) _ _ P)
           ( tr
-            ( λ g → sim-Eq-Rel (same-orbits-permutation-count g) x b)
+            ( λ g →
+              sim-Equivalence-Relation (same-orbits-permutation-count g) x b)
             { x =
               composition-transposition-a-b (composition-transposition-a-b g)}
             {y = g}
             ( eq-htpy-equiv (composition-transposition-a-b-involution g))
             ( T))
-          ( symm-Eq-Rel (same-orbits-permutation-count g) P)
 
   private
     module _
       ( g : X ≃ X)
       ( P :
-        sim-Eq-Rel
+        sim-Equivalence-Relation
           ( same-orbits-permutation
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -1395,7 +1409,8 @@ module _
               ( b)
               ( a)
               ( r)
-              ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
+              ( symmetric-Equivalence-Relation
+                ( same-orbits-permutation-count g) _ _ P)))
       h'-inl k T p (inr nq) (inr nr) =
         conserves-other-orbits-transposition-quotient g T nq nr
       h' :
@@ -1911,7 +1926,8 @@ module _
             ( b)
             ( a)
             ( R)
-            ( symm-Eq-Rel (same-orbits-permutation-count g) P)))
+            ( symmetric-Equivalence-Relation
+              ( same-orbits-permutation-count g) _ _ P)))
       section-h'-inl k (inr NQ) (inr NR) (inl Q') R' = ex-falso (NQ Q')
       section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inl R') = ex-falso (NR R')
       section-h'-inl k (inr NQ) (inr NR) (inr NQ') (inr NR') =
@@ -1952,8 +1968,9 @@ module _
           ( inr star)
       section-h'-inr (inl Q) R =
         ex-falso (not-same-orbits-transposition-same-orbits g P
-          ( symm-Eq-Rel
+          ( symmetric-Equivalence-Relation
             ( same-orbits-permutation-count (composition-transposition-a-b g))
+            _ _
             ( Q)))
       section-h'-inr (inr Q) (inl R) = refl
       section-h'-inr (inr Q) (inr NR) =
@@ -2038,7 +2055,7 @@ module _
   transf-same-orbits-count :
     ( g : X ≃ X)
     ( P :
-      sim-Eq-Rel
+      sim-Equivalence-Relation
         ( same-orbits-permutation
           ( number-of-elements-count eX)
           ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -2088,7 +2105,7 @@ module _
     number-orbits-composition-transposition :
       ( g : X ≃ X)
       ( P :
-        sim-Eq-Rel
+        sim-Equivalence-Relation
           ( same-orbits-permutation
             ( number-of-elements-count eX)
             ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -2145,11 +2162,12 @@ module _
   abstract
     same-orbits-transposition-not-same-orbits :
       ( g : X ≃ X)
-      ( NP : ¬ (sim-Eq-Rel (same-orbits-permutation-count g) a b)) →
-      sim-Eq-Rel
-        ( same-orbits-permutation-count (composition-transposition-a-b g))
-        ( a)
-        ( b)
+      ( NP :
+        ¬ (sim-Equivalence-Relation (same-orbits-permutation-count g) a b)) →
+        sim-Equivalence-Relation
+          ( same-orbits-permutation-count (composition-transposition-a-b g))
+          ( a)
+          ( b)
     same-orbits-transposition-not-same-orbits g NP =
       unit-trunc-Prop (pair (pr1 minimal-element-iterate-repeating) lemma)
       where
@@ -2251,7 +2269,7 @@ module _
     number-orbits-composition-transposition' :
       ( g : X ≃ X)
       (NP :
-        ¬ ( sim-Eq-Rel
+        ¬ ( sim-Equivalence-Relation
             ( same-orbits-permutation
               ( number-of-elements-count eX)
               ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -2303,7 +2321,8 @@ module _
           ( b))
       where
       cases-opposite-sign-composition-transposition :
-        is-decidable (sim-Eq-Rel (same-orbits-permutation-count g) a b) →
+        is-decidable
+          ( sim-Equivalence-Relation (same-orbits-permutation-count g) a b) →
         Id
           ( sign-permutation-orbit
             ( number-of-elements-count eX)

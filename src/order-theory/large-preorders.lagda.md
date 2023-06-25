@@ -7,8 +7,11 @@ module order-theory.large-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -34,18 +37,15 @@ record
     make-Large-Preorder
   field
     type-Large-Preorder : (l : Level) → UU (α l)
-    leq-Large-Preorder-Prop :
-      {l1 l2 : Level} →
-      type-Large-Preorder l1 → type-Large-Preorder l2 → Prop (β l1 l2)
+    leq-Large-Preorder-Prop : Large-Relation-Prop α β type-Large-Preorder
     refl-leq-Large-Preorder :
-      {l1 : Level} (x : type-Large-Preorder l1) →
-      type-Prop (leq-Large-Preorder-Prop x x)
+      is-large-reflexive-Large-Relation-Prop
+        ( type-Large-Preorder)
+        ( leq-Large-Preorder-Prop)
     transitive-leq-Large-Preorder :
-      {l1 l2 l3 : Level} (x : type-Large-Preorder l1)
-      (y : type-Large-Preorder l2) (z : type-Large-Preorder l3) →
-      type-Prop (leq-Large-Preorder-Prop y z) →
-      type-Prop (leq-Large-Preorder-Prop x y) →
-      type-Prop (leq-Large-Preorder-Prop x z)
+      is-large-transitive-Large-Relation-Prop
+        ( type-Large-Preorder)
+        ( leq-Large-Preorder-Prop)
 
 open Large-Preorder public
 
@@ -53,23 +53,24 @@ module _
   {α : Level → Level} {β : Level → Level → Level} (X : Large-Preorder α β)
   where
 
-  leq-Large-Preorder :
-    {l1 l2 : Level} →
-    type-Large-Preorder X l1 → type-Large-Preorder X l2 → UU (β l1 l2)
-  leq-Large-Preorder x y = type-Prop (leq-Large-Preorder-Prop X x y)
+  leq-Large-Preorder : Large-Relation α β (type-Large-Preorder X)
+  leq-Large-Preorder =
+    type-Large-Relation-Prop
+      ( type-Large-Preorder X)
+      ( leq-Large-Preorder-Prop X)
 
   is-prop-leq-Large-Preorder :
-    {l1 l2 : Level} →
-    (x : type-Large-Preorder X l1) (y : type-Large-Preorder X l2) →
-    is-prop (leq-Large-Preorder x y)
-  is-prop-leq-Large-Preorder x y =
-    is-prop-type-Prop (leq-Large-Preorder-Prop X x y)
+    is-prop-Large-Relation (type-Large-Preorder X) (leq-Large-Preorder)
+  is-prop-leq-Large-Preorder =
+    is-prop-type-Large-Relation-Prop
+      ( type-Large-Preorder X)
+      ( leq-Large-Preorder-Prop X)
 
   leq-eq-Large-Preorder :
     {l1 : Level}
     {x y : type-Large-Preorder X l1} →
     (x ＝ y) → leq-Large-Preorder x y
-  leq-eq-Large-Preorder refl = refl-leq-Large-Preorder X _
+  leq-eq-Large-Preorder {x = x} refl = refl-leq-Large-Preorder X x
 
   preorder-Large-Preorder : (l : Level) → Preorder (α l) (β l l)
   pr1 (preorder-Large-Preorder l) = type-Large-Preorder X l
