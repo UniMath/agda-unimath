@@ -49,7 +49,7 @@ concept-subconcept = ...
 ## See also
 
 - An instructive example of a file with the expected structure is
-  [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
+  [`order-theory.galois-connections`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/order-theory/galois-connections.lagda.md).
 
 ## References
 

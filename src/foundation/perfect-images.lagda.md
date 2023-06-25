@@ -158,7 +158,8 @@ module _
   perfect-image-has-distinct-image :
     (a a₀ : A) → ¬ (is-perfect-image f g a) → (ρ : is-perfect-image f g a₀) →
     ¬ (f a ＝ inverse-of-perfect-image a₀ ρ)
-  perfect-image-has-distinct-image a a₀ nρ ρ p = v ρ
+  perfect-image-has-distinct-image a a₀ nρ ρ p =
+    v ρ
     where
     q : g (f a) ＝ a₀
     q = ap g p ∙ is-section-inverse-of-perfect-image a₀ ρ
@@ -230,7 +231,8 @@ module _
         Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
       ii (pair x₀ (pair zero-ℕ u)) =
         ex-falso (pr2 u (pair b (inv (pr1 u))))
-      ii (pair x₀ (pair (succ-ℕ n) u)) = pair a w
+      ii (pair x₀ (pair (succ-ℕ n) u)) =
+        pair a w
         where
         q : f ((iterate n (g ∘ f)) x₀) ＝ b
         q = is-injective-is-emb is-emb-g (pr1 u)

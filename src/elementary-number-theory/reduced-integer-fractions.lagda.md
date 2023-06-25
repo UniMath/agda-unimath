@@ -380,7 +380,8 @@ unique-numerator-reduce-fraction-ℤ x y H =
         ( int-reduce-numerator-fraction-ℤ y) →
       int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
     is-plus-or-minus-case-split (inl pos) = pos
-    is-plus-or-minus-case-split (inr neg) = ex-falso (Eq-eq-ℤ contra)
+    is-plus-or-minus-case-split (inr neg) =
+      ex-falso (Eq-eq-ℤ contra)
       where
       lem : (w : ℤ) → is-positive-ℤ w → Σ ℕ (λ n → w ＝ inr (inr n))
       lem (inr (inr n)) H = pair n refl

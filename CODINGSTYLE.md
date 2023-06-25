@@ -121,10 +121,11 @@ strategic endeavour to ensure the longevity, vitality, and success of the
 
   ```agda
   statement : Statement
-  statement = proof
+  statement =
+    some-possibly-long-proof a
     where
-    proof : Proof
-    proof = some-very-long-proof
+    a : type-of-a
+    a = construction-of-a
   ```
 
 ## Code comments
