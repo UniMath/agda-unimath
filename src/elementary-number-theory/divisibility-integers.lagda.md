@@ -211,8 +211,7 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
 ```agda
 div-mul-ℤ :
   (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
-div-mul-ℤ k x y H =
-  transitive-div-ℤ x y (k *ℤ y) (pair k refl) H
+div-mul-ℤ k x y = transitive-div-ℤ x y (k *ℤ y) (k , refl)
 ```
 
 ### If `x` divides `y` then it divides `-y`

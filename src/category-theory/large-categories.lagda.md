@@ -121,38 +121,39 @@ module _
     right-unit-law-comp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
 
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Category α β) {l1 l2 : Level}
-  (X : obj-Large-Category C l1) (Y : obj-Large-Category C l2)
-  where
+  type-hom-Large-Category :
+    {l1 l2 : Level}
+    (X : obj-Large-Category l1) (Y : obj-Large-Category l2) →
+    UU (β l1 l2)
+  type-hom-Large-Category X Y = type-Set (hom-Large-Category X Y)
 
-  type-hom-Large-Category : UU (β l1 l2)
-  type-hom-Large-Category = type-Set (hom-Large-Category C X Y)
-
-  is-set-type-hom-Large-Category : is-set type-hom-Large-Category
-  is-set-type-hom-Large-Category =
-    is-set-type-Set (hom-Large-Category C X Y)
-
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Category α β) {l1 l2 l3 : Level}
-  {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
-  {Z : obj-Large-Category C l3}
-  where
+  is-set-type-hom-Large-Category :
+    {l1 l2 : Level}
+    (X : obj-Large-Category l1) (Y : obj-Large-Category l2) →
+    is-set (type-hom-Large-Category X Y)
+  is-set-type-hom-Large-Category X Y =
+    is-set-type-Set (hom-Large-Category X Y)
 
   ap-comp-hom-Large-Category :
-    {g g' : type-hom-Large-Category C Y Z} (p : g ＝ g')
-    {f f' : type-hom-Large-Category C X Y} (q : f ＝ f') →
-    comp-hom-Large-Category C g f ＝
-    comp-hom-Large-Category C g' f'
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3}
+    {g g' : type-hom-Large-Category Y Z} (p : g ＝ g')
+    {f f' : type-hom-Large-Category X Y} (q : f ＝ f') →
+    comp-hom-Large-Category g f ＝ comp-hom-Large-Category g' f'
   ap-comp-hom-Large-Category p q =
-    ap-binary (comp-hom-Large-Category C) p q
+    ap-binary comp-hom-Large-Category p q
 
   comp-hom-Large-Category' :
-    type-hom-Large-Category C X Y → type-hom-Large-Category C Y Z →
-    type-hom-Large-Category C X Z
-  comp-hom-Large-Category' f g = comp-hom-Large-Category C g f
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3} →
+    type-hom-Large-Category X Y →
+    type-hom-Large-Category Y Z →
+    type-hom-Large-Category X Z
+  comp-hom-Large-Category' f g = comp-hom-Large-Category g f
 ```
 
 ### Categories obtained from large categories

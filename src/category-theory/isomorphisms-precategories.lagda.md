@@ -237,18 +237,19 @@ form a proposition.
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   (x y : obj-Precategory C)
-  (is-prop-hom-C-x-y : is-prop (type-hom-Precategory C x y))
   where
 
-  is-prop-iso-Precategory : is-prop (iso-Precategory C x y)
-  is-prop-iso-Precategory =
-    is-prop-type-subtype
-      ( is-iso-Precategory-Prop C)
-      ( is-prop-hom-C-x-y)
+  is-prop-iso-Precategory :
+    (is-prop-hom-C-x-y : is-prop (type-hom-Precategory C x y)) →
+    is-prop (iso-Precategory C x y)
+  is-prop-iso-Precategory = is-prop-type-subtype (is-iso-Precategory-Prop C)
 
-  iso-Precategory-Prop : Prop l2
-  pr1 iso-Precategory-Prop = iso-Precategory C x y
-  pr2 iso-Precategory-Prop = is-prop-iso-Precategory
+  iso-Precategory-Prop :
+    (is-prop-hom-C-x-y : is-prop (type-hom-Precategory C x y)) →
+    Prop l2
+  pr1 (iso-Precategory-Prop _) = iso-Precategory C x y
+  pr2 (iso-Precategory-Prop is-prop-hom-C-x-y) =
+    is-prop-iso-Precategory is-prop-hom-C-x-y
 ```
 
 ### A morphism is an isomorphism if and only if precomposition by it is an equivalence
@@ -329,7 +330,6 @@ module _
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   (x y : obj-Precategory C)
-
   where
 
   is-iso-is-prop-hom-Precategory' :
