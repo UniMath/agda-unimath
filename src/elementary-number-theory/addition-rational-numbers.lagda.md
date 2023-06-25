@@ -1,9 +1,9 @@
-# Addition on the rationals
+# Addition on the rational numbers
 
 ```agda
 {-# OPTIONS --lossy-unification #-}
 
-module elementary-number-theory.addition-rationals where
+module elementary-number-theory.addition-rational-numbers where
 ```
 
 <details><summary>Imports</summary>

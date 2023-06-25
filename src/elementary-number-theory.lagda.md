@@ -10,7 +10,7 @@ open import elementary-number-theory.ackermann-function public
 open import elementary-number-theory.addition-integer-fractions public
 open import elementary-number-theory.addition-integers public
 open import elementary-number-theory.addition-natural-numbers public
-open import elementary-number-theory.addition-rationals public
+open import elementary-number-theory.addition-rational-numbers public
 open import elementary-number-theory.arithmetic-functions public
 open import elementary-number-theory.based-induction-natural-numbers public
 open import elementary-number-theory.based-strong-induction-natural-numbers public
@@ -77,9 +77,11 @@ open import elementary-number-theory.modular-arithmetic public
 open import elementary-number-theory.modular-arithmetic-standard-finite-types public
 open import elementary-number-theory.monoid-of-natural-numbers-with-addition public
 open import elementary-number-theory.monoid-of-natural-numbers-with-maximum public
+open import elementary-number-theory.multiplication-integer-fractions public
 open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
+open import elementary-number-theory.multiplication-rational-numbers public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.nonzero-natural-numbers public
