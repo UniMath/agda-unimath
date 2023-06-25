@@ -128,47 +128,45 @@ associative-add-fraction-ℤ :
     ((x +fraction-ℤ y) +fraction-ℤ z)
     (x +fraction-ℤ (y +fraction-ℤ z))
 associative-add-fraction-ℤ (nx , dx , dxp) (ny , dy , dyp) (nz , dz , dzp) =
-  ap-mul-ℤ
-    eq-num
-    (inv (associative-mul-ℤ dx dy dz))
+  ap-mul-ℤ (eq-num) (inv (associative-mul-ℤ dx dy dz))
   where
-    eq-num :
-      (((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)) ＝
-      (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx)
-    eq-num =
-      equational-reasoning
-        (((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy))
-        ＝ (((nx *ℤ dy) *ℤ dz) +ℤ ((ny *ℤ dx) *ℤ dz)) +ℤ
-            (nz *ℤ (dx *ℤ dy))
-          by ap-add-ℤ
-            (right-distributive-mul-add-ℤ (nx *ℤ dy) (ny *ℤ dx) dz) refl
-        ＝ ((nx *ℤ dy) *ℤ dz) +ℤ
-            (((ny *ℤ dx) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)))
-          by associative-add-ℤ
-            ((nx *ℤ dy) *ℤ dz) ((ny *ℤ dx) *ℤ dz) _
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
-            (((ny *ℤ dx) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)))
-          by ap-add-ℤ (associative-mul-ℤ nx dy dz) refl
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
-            ((ny *ℤ (dz *ℤ dx)) +ℤ (nz *ℤ (dy *ℤ dx)))
-          by ap-add-ℤ
-            (refl {x = nx *ℤ (dy *ℤ dz)})
+  eq-num :
+    ( ((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)) ＝
+    ( (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx))
+  eq-num =
+    equational-reasoning
+      (((nx *ℤ dy) +ℤ (ny *ℤ dx)) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy))
+      ＝ (((nx *ℤ dy) *ℤ dz) +ℤ ((ny *ℤ dx) *ℤ dz)) +ℤ
+          (nz *ℤ (dx *ℤ dy))
+        by ap-add-ℤ
+          (right-distributive-mul-add-ℤ (nx *ℤ dy) (ny *ℤ dx) dz) refl
+      ＝ ((nx *ℤ dy) *ℤ dz) +ℤ
+          (((ny *ℤ dx) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)))
+        by associative-add-ℤ
+          ((nx *ℤ dy) *ℤ dz) ((ny *ℤ dx) *ℤ dz) _
+      ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
+          (((ny *ℤ dx) *ℤ dz) +ℤ (nz *ℤ (dx *ℤ dy)))
+        by ap-add-ℤ (associative-mul-ℤ nx dy dz) refl
+      ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
+          ((ny *ℤ (dz *ℤ dx)) +ℤ (nz *ℤ (dy *ℤ dx)))
+        by ap-add-ℤ
+          (refl {x = nx *ℤ (dy *ℤ dz)})
+          (ap-add-ℤ
+            (associative-mul-ℤ ny dx dz ∙ ap-mul-ℤ (refl {x = ny})
+              (commutative-mul-ℤ dx dz))
+            (ap-mul-ℤ (refl {x = nz}) (commutative-mul-ℤ dx dy)))
+      ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
+          (((ny *ℤ dz) *ℤ dx) +ℤ ((nz *ℤ dy) *ℤ dx))
+        by ap-add-ℤ
+          (refl {x = nx *ℤ (dy *ℤ dz)})
+          (inv
             (ap-add-ℤ
-              (associative-mul-ℤ ny dx dz ∙ ap-mul-ℤ (refl {x = ny})
-                (commutative-mul-ℤ dx dz))
-              (ap-mul-ℤ (refl {x = nz}) (commutative-mul-ℤ dx dy)))
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ
-            (((ny *ℤ dz) *ℤ dx) +ℤ ((nz *ℤ dy) *ℤ dx))
-          by ap-add-ℤ
-            (refl {x = nx *ℤ (dy *ℤ dz)})
-            (inv
-              (ap-add-ℤ
-                ( associative-mul-ℤ ny dz dx)
-                ( associative-mul-ℤ nz dy dx)))
-        ＝ (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx)
-          by ap-add-ℤ
-            (refl {x = nx *ℤ (dy *ℤ dz)})
-            (inv (right-distributive-mul-add-ℤ (ny *ℤ dz) (nz *ℤ dy) dx))
+              ( associative-mul-ℤ ny dz dx)
+              ( associative-mul-ℤ nz dy dx)))
+      ＝ (nx *ℤ (dy *ℤ dz)) +ℤ (((ny *ℤ dz) +ℤ (nz *ℤ dy)) *ℤ dx)
+        by ap-add-ℤ
+          (refl {x = nx *ℤ (dy *ℤ dz)})
+          (inv (right-distributive-mul-add-ℤ (ny *ℤ dz) (nz *ℤ dy) dx))
 ```
 
 ### Addition is commutative

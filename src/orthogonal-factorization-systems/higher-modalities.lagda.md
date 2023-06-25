@@ -144,7 +144,7 @@ higher-modality l1 l2 =
 ```agda
 module _
   {l1 l2 : Level} (h : higher-modality l1 l2)
-    where
+  where
 
   locally-small-operator-higher-modality :
     locally-small-operator-modality l1 l2 l1
