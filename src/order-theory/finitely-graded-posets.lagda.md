@@ -11,6 +11,7 @@ open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
@@ -294,14 +295,12 @@ module _
       is-prop-type-Prop leq-Finitely-Graded-Poset-Prop
 
   refl-leq-Finitely-Graded-Poset :
-    (x : type-Finitely-Graded-Poset X) → leq-Finitely-Graded-Poset x x
+    is-reflexive leq-Finitely-Graded-Poset
   refl-leq-Finitely-Graded-Poset x =
     unit-trunc-Prop (refl-path-elements-Finitely-Graded-Poset X x)
 
   transitive-leq-Finitely-Graded-Poset :
-    (x y z : type-Finitely-Graded-Poset X) →
-    leq-Finitely-Graded-Poset y z → leq-Finitely-Graded-Poset x y →
-    leq-Finitely-Graded-Poset x z
+    is-transitive leq-Finitely-Graded-Poset
   transitive-leq-Finitely-Graded-Poset x y z H K =
     apply-universal-property-trunc-Prop H
       ( leq-Finitely-Graded-Poset-Prop x z)
@@ -313,8 +312,7 @@ module _
               ( concat-path-elements-Finitely-Graded-Poset X x y z L M)))
 
   antisymmetric-leq-Finitely-Graded-Poset :
-    (x y : type-Finitely-Graded-Poset X) →
-    leq-Finitely-Graded-Poset x y → leq-Finitely-Graded-Poset y x → Id x y
+    is-antisymmetric leq-Finitely-Graded-Poset
   antisymmetric-leq-Finitely-Graded-Poset x y H K =
     apply-universal-property-trunc-Prop H
       ( Id-Prop (set-Finitely-Graded-Poset X) x y)

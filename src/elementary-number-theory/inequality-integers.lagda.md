@@ -51,8 +51,8 @@ antisymmetric-leq-ℤ {x} {y} H K =
     ( is-zero-is-nonnegative-ℤ K
       ( is-nonnegative-eq-ℤ (inv (distributive-neg-diff-ℤ x y)) H))
 
-trans-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
-trans-leq-ℤ k l m p q =
+transitive-leq-ℤ : (k l m : ℤ) → leq-ℤ k l → leq-ℤ l m → leq-ℤ k m
+transitive-leq-ℤ k l m p q =
   tr is-nonnegative-ℤ
     ( triangle-diff-ℤ m l k)
     ( is-nonnegative-add-ℤ
@@ -78,7 +78,7 @@ succ-leq-ℤ k =
     ( star)
 
 leq-ℤ-succ-leq-ℤ : (k l : ℤ) → leq-ℤ k l → leq-ℤ k (succ-ℤ l)
-leq-ℤ-succ-leq-ℤ k l p = trans-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
+leq-ℤ-succ-leq-ℤ k l p = transitive-leq-ℤ k l (succ-ℤ l) p (succ-leq-ℤ l)
 
 concatenate-eq-leq-eq-ℤ :
   {x' x y y' : ℤ} → x' ＝ x → leq-ℤ x y → y ＝ y' → leq-ℤ x' y'
@@ -122,7 +122,7 @@ preserves-order-add-ℤ {x} {y} z =
 preserves-leq-add-ℤ :
   {a b c d : ℤ} → leq-ℤ a b → leq-ℤ c d → leq-ℤ (a +ℤ c) (b +ℤ d)
 preserves-leq-add-ℤ {a} {b} {c} {d} H K =
-  trans-leq-ℤ
+  transitive-leq-ℤ
     ( a +ℤ c)
     ( b +ℤ c)
     ( b +ℤ d)

@@ -7,6 +7,7 @@ module foundation.large-locale-of-subtypes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.large-binary-relations
 open import foundation.large-locale-of-propositions
 open import foundation.universe-levels
 
@@ -74,46 +75,47 @@ module _
   where
 
   leq-powerset-Large-Locale-Prop :
-    {l2 l3 : Level} →
-    type-powerset-Large-Locale A l2 → type-powerset-Large-Locale A l3 →
-    Prop (l1 ⊔ l2 ⊔ l3)
+    Large-Relation-Prop
+      ( λ l2 → l1 ⊔ lsuc l2)
+      ( λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+      ( type-powerset-Large-Locale A)
+
   leq-powerset-Large-Locale-Prop =
     leq-Large-Locale-Prop (powerset-Large-Locale A)
 
   leq-powerset-Large-Locale :
-    {l2 l3 : Level} →
-    type-powerset-Large-Locale A l2 → type-powerset-Large-Locale A l3 →
-    UU (l1 ⊔ l2 ⊔ l3)
+    Large-Relation
+      ( λ l2 → l1 ⊔ lsuc l2)
+      ( λ l2 l3 → l1 ⊔ l2 ⊔ l3)
+      ( type-powerset-Large-Locale A)
   leq-powerset-Large-Locale =
     leq-Large-Locale (powerset-Large-Locale A)
 
   is-prop-leq-powerset-Large-Locale :
-    {l2 l3 : Level}
-    (x : type-powerset-Large-Locale A l2)
-    (y : type-powerset-Large-Locale A l3) →
-    is-prop (leq-powerset-Large-Locale x y)
+    is-prop-Large-Relation
+      ( type-powerset-Large-Locale A)
+      ( leq-powerset-Large-Locale)
   is-prop-leq-powerset-Large-Locale =
     is-prop-leq-Large-Locale (powerset-Large-Locale A)
 
   refl-leq-powerset-Large-Locale :
-    {l2 : Level} (x : type-powerset-Large-Locale A l2) →
-    leq-powerset-Large-Locale x x
+    is-large-reflexive
+      ( type-powerset-Large-Locale A)
+      ( leq-powerset-Large-Locale)
   refl-leq-powerset-Large-Locale =
     refl-leq-Large-Locale (powerset-Large-Locale A)
 
   antisymmetric-leq-powerset-Large-Locale :
-    {l2 : Level} (x y : type-powerset-Large-Locale A l2) →
-    leq-powerset-Large-Locale x y → leq-powerset-Large-Locale y x → x ＝ y
+    is-large-antisymmetric
+      ( type-powerset-Large-Locale A)
+      ( leq-powerset-Large-Locale)
   antisymmetric-leq-powerset-Large-Locale =
     antisymmetric-leq-Large-Locale (powerset-Large-Locale A)
 
   transitive-leq-powerset-Large-Locale :
-    {l2 l3 l4 : Level}
-    (x : type-powerset-Large-Locale A l2)
-    (y : type-powerset-Large-Locale A l3)
-    (z : type-powerset-Large-Locale A l4) →
-    leq-powerset-Large-Locale y z → leq-powerset-Large-Locale x y →
-    leq-powerset-Large-Locale x z
+    is-large-transitive
+      ( type-powerset-Large-Locale A)
+      ( leq-powerset-Large-Locale)
   transitive-leq-powerset-Large-Locale =
     transitive-leq-Large-Locale (powerset-Large-Locale A)
 

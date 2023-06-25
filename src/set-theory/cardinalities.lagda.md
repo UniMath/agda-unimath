@@ -7,6 +7,7 @@ module set-theory.cardinalities where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -74,13 +75,16 @@ leq-cardinality-Prop {l1} {l2} =
     ( hom-Set (cardinal-Set l2) (Prop-Set (l1 ⊔ l2)))
     ( leq-cardinality-Prop')
 
-_≤-cardinality_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
-X ≤-cardinality Y = type-Prop (leq-cardinality-Prop X Y)
+leq-cardinality : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
+leq-cardinality X Y = type-Prop (leq-cardinality-Prop X Y)
 
-is-prop-≤-cardinality :
+_≤-cardinality_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
+_≤-cardinality_ = leq-cardinality
+
+is-prop-leq-cardinality :
   {l1 l2 : Level} {X : cardinal l1} {Y : cardinal l2} →
   is-prop (X ≤-cardinality Y)
-is-prop-≤-cardinality {X = X} {Y = Y} =
+is-prop-leq-cardinality {X = X} {Y = Y} =
   is-prop-type-Prop (leq-cardinality-Prop X Y)
 
 compute-leq-cardinality :
@@ -105,16 +109,21 @@ inv-unit-leq-cardinality :
   cardinality X ≤-cardinality cardinality Y → mere-emb (type-Set X) (type-Set Y)
 inv-unit-leq-cardinality X Y = pr1 (compute-leq-cardinality X Y)
 
-refl-≤-cardinality : {l : Level} (X : cardinal l) → X ≤-cardinality X
-refl-≤-cardinality {l} =
+refl-leq-cardinality : {l : Level} → is-reflexive (leq-cardinality {l})
+refl-leq-cardinality {l} =
   apply-dependent-universal-property-trunc-Set'
     ( λ X → set-Prop (leq-cardinality-Prop X X))
     ( λ A → unit-leq-cardinality A A (refl-mere-emb (type-Set A)))
 
-transitive-≤-cardinality :
-  {l1 l2 l3 : Level} (X : cardinal l1) (Y : cardinal l2) (Z : cardinal l3) →
-  X ≤-cardinality Y → Y ≤-cardinality Z → X ≤-cardinality Z
-transitive-≤-cardinality {l1} {l2} {l3} X Y Z =
+transitive-leq-cardinality :
+  {l1 l2 l3 : Level}
+  (X : cardinal l1)
+  (Y : cardinal l2)
+  (Z : cardinal l3) →
+  X ≤-cardinality Y →
+  Y ≤-cardinality Z →
+  X ≤-cardinality Z
+transitive-leq-cardinality X Y Z =
   apply-dependent-universal-property-trunc-Set'
   (λ u →
     set-Prop
@@ -163,16 +172,16 @@ is-effective-cardinality X Y =
   ( is-effective-unit-trunc-Set (Set _) X Y)
 ```
 
-### Assuming excluded middle we can show that `≤-cardinality` is a partial order
+### Assuming excluded middle we can show that `leq-cardinality` is a partial order
 
 Using the previous result and assuming excluded middle, we can show
-`≤-cardinality` is a partial order by showing that it is antisymmetric.
+`leq-cardinality` is a partial order by showing that it is antisymmetric.
 
 ```agda
-antisymmetric-≤-cardinality :
+antisymmetric-leq-cardinality :
   {l1 : Level} (X Y : cardinal l1) → (LEM l1) →
   X ≤-cardinality Y → Y ≤-cardinality X → X ＝ Y
-antisymmetric-≤-cardinality {l1} X Y lem =
+antisymmetric-leq-cardinality {l1} X Y lem =
   apply-dependent-universal-property-trunc-Set'
   (λ u →
     set-Prop

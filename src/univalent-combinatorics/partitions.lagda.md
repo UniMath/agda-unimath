@@ -9,6 +9,7 @@ module univalent-combinatorics.partitions where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
@@ -117,24 +118,20 @@ module _
   is-prop-rel-partition-𝔽 : (x y : type-𝔽 X) → is-prop (rel-partition-𝔽 x y)
   is-prop-rel-partition-𝔽 x y = is-prop-type-Prop (rel-partition-𝔽-Prop x y)
 
-  refl-rel-partition-𝔽 : (x : type-𝔽 X) → rel-partition-𝔽 x x
+  refl-rel-partition-𝔽 : is-reflexive rel-partition-𝔽
   refl-rel-partition-𝔽 x = refl
 
-  symmetric-rel-partition-𝔽 :
-    (x y : type-𝔽 X) → rel-partition-𝔽 x y → rel-partition-𝔽 y x
-  symmetric-rel-partition-𝔽 x y r = inv r
+  symmetric-rel-partition-𝔽 : is-symmetric rel-partition-𝔽
+  symmetric-rel-partition-𝔽 x y = inv
 
-  transitive-rel-partition-𝔽 :
-    (x y z : type-𝔽 X) →
-    rel-partition-𝔽 x y → rel-partition-𝔽 y z → rel-partition-𝔽 x z
-  transitive-rel-partition-𝔽 x y z r s = r ∙ s
+  transitive-rel-partition-𝔽 : is-transitive rel-partition-𝔽
+  transitive-rel-partition-𝔽 x y z r s = s ∙ r
 
-  eq-rel-partition-𝔽 : Eq-Rel l2 (type-𝔽 X)
+  eq-rel-partition-𝔽 : Equivalence-Relation l2 (type-𝔽 X)
   pr1 eq-rel-partition-𝔽 = rel-partition-𝔽-Prop
-  pr1 (pr2 eq-rel-partition-𝔽) {x} = refl-rel-partition-𝔽 x
-  pr1 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} = symmetric-rel-partition-𝔽 x y
-  pr2 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} {z} =
-    transitive-rel-partition-𝔽 x y z
+  pr1 (pr2 eq-rel-partition-𝔽) = refl-rel-partition-𝔽
+  pr1 (pr2 (pr2 eq-rel-partition-𝔽)) = symmetric-rel-partition-𝔽
+  pr2 (pr2 (pr2 eq-rel-partition-𝔽)) = transitive-rel-partition-𝔽
 ```
 
 ### Equivalences of partitions

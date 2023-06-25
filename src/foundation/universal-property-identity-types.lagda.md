@@ -9,6 +9,7 @@ module foundation.universal-property-identity-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.axiom-l
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.full-subtypes
@@ -23,7 +24,6 @@ open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.injective-maps

@@ -7,7 +7,9 @@ module order-theory.powers-of-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -60,42 +62,38 @@ module _
     is-set-type-Large-Locale power-Large-Locale
 
   leq-power-Large-Locale-Prop :
-    {l2 l3 : Level} → type-power-Large-Locale l2 → type-power-Large-Locale l3 →
-    Prop (β l2 l3 ⊔ l1)
+    Large-Relation-Prop
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-power-Large-Locale)
   leq-power-Large-Locale-Prop =
     leq-Large-Locale-Prop power-Large-Locale
 
   leq-power-Large-Locale :
-    {l2 l3 : Level} →
-    type-power-Large-Locale l2 → type-power-Large-Locale l3 → UU (β l2 l3 ⊔ l1)
+    Large-Relation
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-power-Large-Locale)
   leq-power-Large-Locale =
     leq-Large-Locale power-Large-Locale
 
   is-prop-leq-power-Large-Locale :
-    {l2 l3 : Level}
-    (x : type-power-Large-Locale l2) (y : type-power-Large-Locale l3) →
-    is-prop (leq-power-Large-Locale x y)
+    is-prop-Large-Relation (type-power-Large-Locale) (leq-power-Large-Locale)
   is-prop-leq-power-Large-Locale =
     is-prop-leq-Large-Locale power-Large-Locale
 
   refl-leq-power-Large-Locale :
-    {l2 : Level} (x : type-power-Large-Locale l2) → leq-power-Large-Locale x x
+    is-large-reflexive type-power-Large-Locale leq-power-Large-Locale
   refl-leq-power-Large-Locale =
     refl-leq-Large-Locale power-Large-Locale
 
   antisymmetric-leq-power-Large-Locale :
-    {l2 : Level} (x y : type-power-Large-Locale l2) →
-    leq-power-Large-Locale x y → leq-power-Large-Locale y x → x ＝ y
+    is-large-antisymmetric type-power-Large-Locale leq-power-Large-Locale
   antisymmetric-leq-power-Large-Locale =
     antisymmetric-leq-Large-Locale power-Large-Locale
 
   transitive-leq-power-Large-Locale :
-    {l2 l3 l4 : Level}
-    (x : type-power-Large-Locale l2)
-    (y : type-power-Large-Locale l3)
-    (z : type-power-Large-Locale l4) →
-    leq-power-Large-Locale y z → leq-power-Large-Locale x y →
-    leq-power-Large-Locale x z
+    is-large-transitive type-power-Large-Locale leq-power-Large-Locale
   transitive-leq-power-Large-Locale =
     transitive-leq-Large-Locale power-Large-Locale
 

@@ -12,7 +12,6 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.fibers-of-maps
-open import foundation.identity-types
 open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
@@ -25,6 +24,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.pullbacks

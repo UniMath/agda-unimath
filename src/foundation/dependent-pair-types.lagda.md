@@ -2,51 +2,75 @@
 
 ```agda
 module foundation.dependent-pair-types where
-
-open import foundation-core.dependent-pair-types public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.universe-levels
-
-open import foundation-core.dependent-identifications
-open import foundation-core.equality-dependent-pair-types
-open import foundation-core.identity-types
-open import foundation-core.transport
 ```
 
 </details>
 
 ## Idea
 
-When `B` is a family of types over `A`, then we can form the type of pairs
-`pair a b` consisting of an element `a : A` and an element `b : B a`. Such pairs
-are called dependent pairs, since the type of the second component depends on
-the first component.
+Consider a type family `B` over `A`. The **dependent pair type** `Σ A B` is the
+type consisting of **(dependent) pairs** `(a , b)` where `a : A` and `b : B a`.
+Such pairs are sometimes called dependent pairs because the type of `b` depends
+on the value of the first component `a`.
 
-## Properties
-
-### Transport in a family of dependent pair types
+## Definition
 
 ```agda
-tr-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} {B : A → UU l2}
-  (C : (x : A) → B x → UU l3) (p : a0 ＝ a1) (z : Σ (B a0) (λ x → C a0 x)) →
-  tr (λ a → (Σ (B a) (C a))) p z ＝
-  pair (tr B p (pr1 z)) (tr (ind-Σ C) (eq-pair-Σ p refl) (pr2 z))
-tr-Σ C refl z = refl
+record Σ {l1 l2 : Level} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
+  constructor pair
+  field
+    pr1 : A
+    pr2 : B pr1
+
+open Σ public
+
+{-# BUILTIN SIGMA Σ #-}
+
+infixr 10 _,_
+pattern _,_ a b = pair a b
 ```
 
-### Transport in a family over a dependent pair type
+## Constructions
 
 ```agda
-tr-eq-pair-Σ :
-  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}
-  {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : (Σ A B) → UU l3)
-  (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) (u : C (a0 , b0)) →
-  tr C (eq-pair-Σ p q) u ＝
-  tr (λ x → C (a1 , x)) q (tr C (eq-pair-Σ p refl) u)
-tr-eq-pair-Σ C refl refl u = refl
+ind-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  ((x : A) (y : B x) → C (pair x y)) → ((t : Σ A B) → C t)
+ind-Σ f (x , y) = f x y
+
+ev-pair :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  ((t : Σ A B) → C t) → (x : A) (y : B x) → C (pair x y)
+ev-pair f x y = f (x , y)
+
+triple :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
+  (a : A) (b : B a) → C a b → Σ A (λ x → Σ (B x) (C x))
+pr1 (triple a b c) = a
+pr1 (pr2 (triple a b c)) = b
+pr2 (pr2 (triple a b c)) = c
+
+triple' :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3} →
+  (a : A) (b : B a) → C (pair a b) → Σ (Σ A B) C
+pr1 (pr1 (triple' a b c)) = a
+pr2 (pr1 (triple' a b c)) = b
+pr2 (triple' a b c) = c
+```
+
+### Families on dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  fam-Σ : ((x : A) → B x → UU l3) → Σ A B → UU l3
+  fam-Σ C (x , y) = C x y
 ```

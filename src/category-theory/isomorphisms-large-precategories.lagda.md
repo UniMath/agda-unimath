@@ -7,11 +7,13 @@ module category-theory.isomorphisms-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -119,6 +121,14 @@ iso-eq-Large-Precategory :
   (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
   X ＝ Y → iso-Large-Precategory C X Y
 iso-eq-Large-Precategory C X .X refl = id-iso-Large-Precategory C
+
+compute-iso-eq-Large-Precategory :
+  {α : Level → Level} {β : Level → Level → Level} →
+  (C : Large-Precategory α β) {l1 : Level}
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
+  iso-eq-Precategory (precategory-Large-Precategory C l1) X Y ~
+  iso-eq-Large-Precategory C X Y
+compute-iso-eq-Large-Precategory C X .X refl = refl
 ```
 
 ## Properties

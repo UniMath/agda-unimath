@@ -7,6 +7,7 @@ module foundation.mere-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.decidable-equality
 open import foundation.functoriality-propositional-truncation
 open import foundation.mere-equality
@@ -52,8 +53,7 @@ abstract
 
 ```agda
 abstract
-  refl-mere-equiv :
-    {l1 : Level} (X : UU l1) → mere-equiv X X
+  refl-mere-equiv : {l1 : Level} → is-reflexive (mere-equiv {l1})
   refl-mere-equiv X = unit-trunc-Prop id-equiv
 ```
 
@@ -62,8 +62,8 @@ abstract
 ```agda
 abstract
   symmetric-mere-equiv :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} → mere-equiv X Y → mere-equiv Y X
-  symmetric-mere-equiv {l1} {l2} {X} {Y} =
+    {l1 l2 : Level} (X : UU l1) (Y : UU l2) → mere-equiv X Y → mere-equiv Y X
+  symmetric-mere-equiv X Y =
     map-universal-property-trunc-Prop
       ( mere-equiv-Prop Y X)
       ( λ e → unit-trunc-Prop (inv-equiv e))
@@ -74,9 +74,9 @@ abstract
 ```agda
 abstract
   transitive-mere-equiv :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} →
-    mere-equiv X Y → mere-equiv Y Z → mere-equiv X Z
-  transitive-mere-equiv {X = X} {Y} {Z} e f =
+    {l1 l2 l3 : Level} (X : UU l1) (Y : UU l2) (Z : UU l3) →
+    mere-equiv Y Z → mere-equiv X Y → mere-equiv X Z
+  transitive-mere-equiv X Y Z f e =
     apply-universal-property-trunc-Prop e
       ( mere-equiv-Prop X Z)
       ( λ e' →

@@ -7,6 +7,7 @@ module order-theory.lattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -69,16 +70,13 @@ module _
   is-prop-leq-Lattice : (x y : type-Lattice) → is-prop (leq-Lattice x y)
   is-prop-leq-Lattice = is-prop-leq-Poset poset-Lattice
 
-  refl-leq-Lattice : (x : type-Lattice) → leq-Lattice x x
+  refl-leq-Lattice : is-reflexive leq-Lattice
   refl-leq-Lattice = refl-leq-Poset poset-Lattice
 
-  antisymmetric-leq-Lattice :
-    (x y : type-Lattice) → leq-Lattice x y → leq-Lattice y x → Id x y
+  antisymmetric-leq-Lattice : is-antisymmetric leq-Lattice
   antisymmetric-leq-Lattice = antisymmetric-leq-Poset poset-Lattice
 
-  transitive-leq-Lattice :
-    (x y z : type-Lattice) →
-    leq-Lattice y z → leq-Lattice x y → leq-Lattice x z
+  transitive-leq-Lattice : is-transitive leq-Lattice
   transitive-leq-Lattice = transitive-leq-Poset poset-Lattice
 
   is-set-type-Lattice : is-set type-Lattice

@@ -7,11 +7,11 @@ module foundation.univalent-type-families where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
 open import foundation.transport
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.identity-types
 ```
 
 </details>

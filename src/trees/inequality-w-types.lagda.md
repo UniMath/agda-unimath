@@ -114,7 +114,7 @@ module _
   asymmetric-le-𝕎 H K = irreflexive-le-𝕎 (transitive-le-𝕎 H K)
 ```
 
-### Transitivity of ≤-𝕎
+### Transitivity of `≤-𝕎`
 
 ```agda
 module _

@@ -35,9 +35,11 @@ record
   field
     obj-Large-Precategory :
       (l : Level) → UU (α l)
+
     hom-Large-Precategory :
       {l1 l2 : Level} → obj-Large-Precategory l1 → obj-Large-Precategory l2 →
       Set (β l1 l2)
+
     comp-hom-Large-Precategory :
       {l1 l2 l3 : Level}
       {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
@@ -45,9 +47,11 @@ record
       type-Set (hom-Large-Precategory Y Z) →
       type-Set (hom-Large-Precategory X Y) →
       type-Set (hom-Large-Precategory X Z)
+
     id-hom-Large-Precategory :
       {l1 : Level} {X : obj-Large-Precategory l1} →
       type-Set (hom-Large-Precategory X X)
+
     associative-comp-hom-Large-Precategory :
       {l1 l2 l3 l4 : Level}
       {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
@@ -57,11 +61,13 @@ record
       (f : type-Set (hom-Large-Precategory X Y)) →
       ( comp-hom-Large-Precategory (comp-hom-Large-Precategory h g) f) ＝
       ( comp-hom-Large-Precategory h (comp-hom-Large-Precategory g f))
+
     left-unit-law-comp-hom-Large-Precategory :
       {l1 l2 : Level}
       {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
       (f : type-Set (hom-Large-Precategory X Y)) →
       ( comp-hom-Large-Precategory id-hom-Large-Precategory f) ＝ f
+
     right-unit-law-comp-hom-Large-Precategory :
       {l1 l2 : Level}
       {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
@@ -69,38 +75,49 @@ record
       ( comp-hom-Large-Precategory f id-hom-Large-Precategory) ＝ f
 
 open Large-Precategory public
+```
 
+```agda
 module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precategory α β) {l1 l2 : Level}
-  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
+  {α : Level → Level}
+  {β : Level → Level → Level}
+  (C : Large-Precategory α β)
   where
 
-  type-hom-Large-Precategory : UU (β l1 l2)
-  type-hom-Large-Precategory = type-Set (hom-Large-Precategory C X Y)
+  type-hom-Large-Precategory :
+    {l1 l2 : Level}
+    (X : obj-Large-Precategory C l1)
+    (Y : obj-Large-Precategory C l2) →
+    UU (β l1 l2)
+  type-hom-Large-Precategory X Y = type-Set (hom-Large-Precategory C X Y)
 
-  is-set-type-hom-Large-Precategory : is-set type-hom-Large-Precategory
-  is-set-type-hom-Large-Precategory =
+  is-set-type-hom-Large-Precategory :
+    {l1 l2 : Level}
+    (X : obj-Large-Precategory C l1)
+    (Y : obj-Large-Precategory C l2) →
+    is-set (type-hom-Large-Precategory X Y)
+  is-set-type-hom-Large-Precategory X Y =
     is-set-type-Set (hom-Large-Precategory C X Y)
 
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precategory α β) {l1 l2 l3 : Level}
-  {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
-  {Z : obj-Large-Precategory C l3}
-  where
-
   ap-comp-hom-Large-Precategory :
-    {g g' : type-hom-Large-Precategory C Y Z} (p : g ＝ g')
-    {f f' : type-hom-Large-Precategory C X Y} (q : f ＝ f') →
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Precategory C l1}
+    {Y : obj-Large-Precategory C l2}
+    {Z : obj-Large-Precategory C l3}
+    {g g' : type-hom-Large-Precategory Y Z} (p : g ＝ g')
+    {f f' : type-hom-Large-Precategory X Y} (q : f ＝ f') →
     comp-hom-Large-Precategory C g f ＝
     comp-hom-Large-Precategory C g' f'
-  ap-comp-hom-Large-Precategory p q =
-    ap-binary (comp-hom-Large-Precategory C) p q
+  ap-comp-hom-Large-Precategory = ap-binary (comp-hom-Large-Precategory C)
 
   comp-hom-Large-Precategory' :
-    type-hom-Large-Precategory C X Y → type-hom-Large-Precategory C Y Z →
-    type-hom-Large-Precategory C X Z
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Precategory C l1}
+    {Y : obj-Large-Precategory C l2}
+    {Z : obj-Large-Precategory C l3} →
+    type-hom-Large-Precategory X Y →
+    type-hom-Large-Precategory Y Z →
+    type-hom-Large-Precategory X Z
   comp-hom-Large-Precategory' f g = comp-hom-Large-Precategory C g f
 ```
 

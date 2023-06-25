@@ -7,6 +7,7 @@ module order-theory.decidable-subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -59,15 +60,11 @@ module _
   is-prop-leq-Decidable-Subpreorder =
     is-prop-leq-Subpreorder P (subtype-decidable-subtype S)
 
-  refl-leq-Decidable-Subpreorder :
-    (x : type-Decidable-Subpreorder) → leq-Decidable-Subpreorder x x
+  refl-leq-Decidable-Subpreorder : is-reflexive leq-Decidable-Subpreorder
   refl-leq-Decidable-Subpreorder =
     refl-leq-Subpreorder P (subtype-decidable-subtype S)
 
-  transitive-leq-Decidable-Subpreorder :
-    (x y z : type-Decidable-Subpreorder) →
-    leq-Decidable-Subpreorder y z → leq-Decidable-Subpreorder x y →
-    leq-Decidable-Subpreorder x z
+  transitive-leq-Decidable-Subpreorder : is-transitive leq-Decidable-Subpreorder
   transitive-leq-Decidable-Subpreorder =
     transitive-leq-Subpreorder P (subtype-decidable-subtype S)
 

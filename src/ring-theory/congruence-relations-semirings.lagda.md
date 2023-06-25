@@ -44,7 +44,7 @@ module _
       ( eq-rel-congruence-Monoid (additive-monoid-Semiring R) S)
 
   is-congruence-eq-rel-Semiring :
-    {l2 : Level} (S : Eq-Rel l2 (type-Semiring R)) → UU (l1 ⊔ l2)
+    {l2 : Level} (S : Equivalence-Relation l2 (type-Semiring R)) → UU (l1 ⊔ l2)
   is-congruence-eq-rel-Semiring S =
     ( is-congruence-Monoid (additive-monoid-Semiring R) S) ×
     ( is-congruence-Monoid (multiplicative-monoid-Semiring R) S)
@@ -63,13 +63,13 @@ module _
     congruence-Monoid l2 (additive-monoid-Semiring R)
   congruence-additive-monoid-congruence-Semiring = pr1 S
 
-  eq-rel-congruence-Semiring : Eq-Rel l2 (type-Semiring R)
+  eq-rel-congruence-Semiring : Equivalence-Relation l2 (type-Semiring R)
   eq-rel-congruence-Semiring =
     eq-rel-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  prop-congruence-Semiring : Rel-Prop l2 (type-Semiring R)
+  prop-congruence-Semiring : Relation-Prop l2 (type-Semiring R)
   prop-congruence-Semiring =
     prop-congruence-Monoid
       ( additive-monoid-Semiring R)
@@ -89,31 +89,31 @@ module _
       ( congruence-additive-monoid-congruence-Semiring)
 
   refl-congruence-Semiring :
-    is-reflexive-Rel-Prop prop-congruence-Semiring
+    is-reflexive sim-congruence-Semiring
   refl-congruence-Semiring =
     refl-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  symm-congruence-Semiring :
-    is-symmetric-Rel-Prop prop-congruence-Semiring
-  symm-congruence-Semiring =
-    symm-congruence-Monoid
+  symmetric-congruence-Semiring :
+    is-symmetric sim-congruence-Semiring
+  symmetric-congruence-Semiring =
+    symmetric-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  equiv-symm-congruence-Semiring :
+  equiv-symmetric-congruence-Semiring :
     (x y : type-Semiring R) →
     sim-congruence-Semiring x y ≃ sim-congruence-Semiring y x
-  equiv-symm-congruence-Semiring =
-    equiv-symm-congruence-Monoid
+  equiv-symmetric-congruence-Semiring =
+    equiv-symmetric-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
-  trans-congruence-Semiring :
-    is-transitive-Rel-Prop prop-congruence-Semiring
-  trans-congruence-Semiring =
-    trans-congruence-Monoid
+  transitive-congruence-Semiring :
+    is-transitive sim-congruence-Semiring
+  transitive-congruence-Semiring =
+    transitive-congruence-Monoid
       ( additive-monoid-Semiring R)
       ( congruence-additive-monoid-congruence-Semiring)
 
@@ -134,7 +134,7 @@ module _
 
 construct-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) →
-  (S : Eq-Rel l2 (type-Semiring R)) →
+  (S : Equivalence-Relation l2 (type-Semiring R)) →
   is-congruence-Monoid (additive-monoid-Semiring R) S →
   is-congruence-Monoid (multiplicative-monoid-Semiring R) S →
   congruence-Semiring l2 R
