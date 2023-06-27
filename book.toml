@@ -2,7 +2,7 @@
 language = "en"
 multilingual = false
 src = "docs"
-title = "Agda-UniMath"
+title = "agda-unimath"
 
 [build]
 create-missing = true
