@@ -8,8 +8,10 @@ module group-theory.large-semigroups where
 
 ```agda
 open import foundation.identity-types
+open import foundation.dependent-pair-types
 open import foundation.sets
 open import foundation.universe-levels
+open import group-theory.semigroups
 ```
 
 </details>
@@ -62,4 +64,17 @@ module _
   is-set-type-Large-Semigroup :
     {l : Level} → is-set (type-Large-Semigroup l)
   is-set-type-Large-Semigroup = is-set-type-Set (set-Large-Semigroup G _)
+```
+
+### Small semigroups from large semigroups
+
+```agda
+module _
+  {α : Level → Level} (G : Large-Semigroup α)
+  where
+
+  semigroup-Large-Semigroup : (l : Level) → Semigroup (α l)
+  pr1 (semigroup-Large-Semigroup l) = set-Large-Semigroup G l
+  pr1 (pr2 (semigroup-Large-Semigroup l)) = mul-Large-Semigroup G
+  pr2 (pr2 (semigroup-Large-Semigroup l)) = associative-mul-Large-Semigroup G
 ```

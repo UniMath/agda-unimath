@@ -11,8 +11,10 @@ open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import category-theory.large-precategories
 open import foundation.large-binary-relations
 open import foundation.propositions
+open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -71,10 +73,38 @@ module _
     {x y : type-Large-Preorder X l1} →
     (x ＝ y) → leq-Large-Preorder x y
   leq-eq-Large-Preorder {x = x} refl = refl-leq-Large-Preorder X x
+```
 
+## Properties
+
+### Small preorders from large preorders
+
+```agda
   preorder-Large-Preorder : (l : Level) → Preorder (α l) (β l l)
   pr1 (preorder-Large-Preorder l) = type-Large-Preorder X l
   pr1 (pr2 (preorder-Large-Preorder l)) = leq-Large-Preorder-Prop X
   pr1 (pr2 (pr2 (preorder-Large-Preorder l))) = refl-leq-Large-Preorder X
   pr2 (pr2 (pr2 (preorder-Large-Preorder l))) = transitive-leq-Large-Preorder X
+```
+
+### Large preorders are large precategories
+
+```agda
+  large-precategory-Large-Preorder : Large-Precategory α β
+  obj-Large-Precategory large-precategory-Large-Preorder = type-Large-Preorder X
+  hom-Large-Precategory large-precategory-Large-Preorder x y =
+    set-Prop (leq-Large-Preorder-Prop X x y)
+  comp-hom-Large-Precategory large-precategory-Large-Preorder {X = x} {y} {z} =
+    transitive-leq-Large-Preorder X x y z
+  id-hom-Large-Precategory large-precategory-Large-Preorder {X = x} =
+    refl-leq-Large-Preorder X x
+  associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
+    {X = x} {W = w} h g f =
+    eq-is-prop (is-prop-leq-Large-Preorder x w)
+  left-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
+    {X = x} {y} f =
+    eq-is-prop (is-prop-leq-Large-Preorder x y)
+  right-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
+    {X = x} {y} f =
+    eq-is-prop (is-prop-leq-Large-Preorder x y)
 ```
