@@ -233,6 +233,19 @@ module _
         ( eq-transpose-tr (eq-is-contr H) (eq-is-contr K))
 ```
 
+**Note**: In the previous construction, we showed that `Σ A B` is contractible
+whenever `A` is contractible and whenever `B a` is contractible for a specified
+term `a : A`. We _could_ have chosen this element `a` to be the center of
+contraction of `A`. However, it turns out to be better not to do so in the
+construction of `is-contr-Σ`. The reason is that proofs of contractibility could
+be quite complicated and difficult to normalize. If we would require in the
+definition of `is-contr-Σ` that `B (center c)` is contractible, given the proof
+`c` of contractibility of `A`, then the type inference algorithm of Agda will be
+forced to normalize the proof `c` including the contraction. By instead
+providing a center of contraction by hand, we avoid this unnecessary load on the
+type inference algorithm, and hence any instance of `is-contr-Σ` will type check
+more efficiently.
+
 ### Contractible types are propositions
 
 ```agda
