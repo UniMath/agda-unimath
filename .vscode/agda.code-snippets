@@ -1,5 +1,5 @@
 {
-  //? Remember to update `HOWTO-INSTALL.md` if you make additions or changes to this file
+  // * Remember to update `HOWTO-INSTALL.md` when making additions or changes
   "Diagonal lift (⧄)": {
     "body": ["⧄"],
     "description": "Diagonal lift",

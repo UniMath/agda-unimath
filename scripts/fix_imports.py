@@ -2,6 +2,8 @@
 # Run this script:
 # $ ./scripts/fix_imports.py fileName.lagda.md
 
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
+
 import collections
 import sys
 import utils

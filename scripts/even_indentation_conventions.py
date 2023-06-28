@@ -2,7 +2,8 @@
 # Run this script:
 # $ ./scripts/even_indentation_conventions.py fileName.lagda.md
 
-# Some simply enforcable space conventions
+# Some simple to enforce space conventions
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import sys
 import utils
