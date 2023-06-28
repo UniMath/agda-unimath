@@ -105,8 +105,9 @@ module _
     is-closed-under-Σ-reflective-subuniverse
       ( reflective-subuniverse-closed-modality)
   is-closed-under-Σ-reflective-subuniverse-closed-modality A B q =
-    is-contr-Σ-center
+    is-contr-Σ
       ( pr2 A q)
+      ( center (pr2 A q))
       ( pr2 (B (center (pr2 A q))) q)
 
   closed-under-Σ-reflective-subuniverse-closed-modality :
