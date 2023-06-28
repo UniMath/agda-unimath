@@ -30,7 +30,7 @@ open import synthetic-homotopy-theory.joins-of-types
 
 ## Idea
 
-Given any proposition `Q`, the
+Given any [proposition](foundation.propositions.md) `Q`, the
 [join operation](synthetic-homotopy-theory.joins-of-types.md) `_* Q` defines a
 [higher modality](orthogonal-factorization-systems.higher-modalities.md). We
 call these the **closed modalities**.

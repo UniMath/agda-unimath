@@ -221,3 +221,7 @@ module _
   eq-equiv-fam-subuniverse Y Z =
     map-inv-is-equiv (is-equiv-equiv-eq-fam-subuniverse Y Z)
 ```
+
+## See also
+
+- [Σ-closed subuniverses](foundation.sigma-closed-subuniverses.md)
