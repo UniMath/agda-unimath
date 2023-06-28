@@ -75,11 +75,11 @@ module _
 A small type is said to be modal if its small equivalent is modal.
 
 ```agda
-is-modal-small :
-  {l1 l2 : Level} (l3 : Level)
+is-modal-type-is-small :
+  {l1 l2 l3 : Level}
   {○ : operator-modality l1 l2} (unit-○ : unit-modality ○)
   (X : UU l3) (is-small-X : is-small l1 X) → UU (l1 ⊔ l2)
-is-modal-small l3 unit-○ X is-small-X =
+is-modal-type-is-small unit-○ X is-small-X =
   is-modal unit-○ (type-is-small is-small-X)
 
 module _
@@ -88,24 +88,28 @@ module _
   (X : UU l3) (is-small-X : is-small l1 X)
   where
 
-  is-equiv-unit-is-modal-small :
-    is-modal-small l3 unit-○ X is-small-X →
+  is-equiv-unit-is-modal-type-is-small :
+    is-modal-type-is-small unit-○ X is-small-X →
     is-equiv (unit-○ ∘ map-equiv-is-small is-small-X)
-  is-equiv-unit-is-modal-small =
+  is-equiv-unit-is-modal-type-is-small =
     is-equiv-comp
       ( unit-○)
       ( map-equiv-is-small is-small-X)
       ( is-equiv-map-equiv (equiv-is-small is-small-X))
 
-  equiv-unit-is-modal-small :
-    is-modal-small l3 unit-○ X is-small-X → X ≃ ○ (type-is-small is-small-X)
-  pr1 (equiv-unit-is-modal-small m) = unit-○ ∘ map-equiv-is-small is-small-X
-  pr2 (equiv-unit-is-modal-small m) = is-equiv-unit-is-modal-small m
+  equiv-unit-is-modal-type-is-small :
+    is-modal-type-is-small unit-○ X is-small-X →
+    X ≃ ○ (type-is-small is-small-X)
+  pr1 (equiv-unit-is-modal-type-is-small m) =
+    unit-○ ∘ map-equiv-is-small is-small-X
+  pr2 (equiv-unit-is-modal-type-is-small m) =
+    is-equiv-unit-is-modal-type-is-small m
 
-  map-inv-unit-is-modal-small :
-    is-modal-small l3 unit-○ X is-small-X → ○ (type-is-small is-small-X) → X
-  map-inv-unit-is-modal-small =
-    map-inv-equiv ∘ equiv-unit-is-modal-small
+  map-inv-unit-is-modal-type-is-small :
+    is-modal-type-is-small unit-○ X is-small-X →
+    ○ (type-is-small is-small-X) → X
+  map-inv-unit-is-modal-type-is-small =
+    map-inv-equiv ∘ equiv-unit-is-modal-type-is-small
 
 module _
   {l1 l2 : Level} (l3 : Level)
@@ -113,29 +117,31 @@ module _
   (X : Small-Type l1 l3)
   where
 
-  is-modal-small-type : UU (l1 ⊔ l2)
-  is-modal-small-type =
-    is-modal-small l3 unit-○ (type-Small-Type X) (is-small-type-Small-Type X)
+  is-modal-Small-Type : UU (l1 ⊔ l2)
+  is-modal-Small-Type =
+    is-modal-type-is-small unit-○
+      ( type-Small-Type X)
+      ( is-small-type-Small-Type X)
 
-  is-equiv-unit-is-modal-small-type :
-    is-modal-small-type →
+  is-equiv-unit-is-modal-Small-Type :
+    is-modal-Small-Type →
     is-equiv (unit-○ ∘ map-equiv (equiv-is-small-type-Small-Type X))
-  is-equiv-unit-is-modal-small-type =
-    is-equiv-unit-is-modal-small unit-○
+  is-equiv-unit-is-modal-Small-Type =
+    is-equiv-unit-is-modal-type-is-small unit-○
       ( type-Small-Type X)
       ( is-small-type-Small-Type X)
 
-  equiv-unit-is-modal-small-type :
-    is-modal-small-type → type-Small-Type X ≃ ○ (small-type-Small-Type X)
-  equiv-unit-is-modal-small-type =
-    equiv-unit-is-modal-small unit-○
+  equiv-unit-is-modal-Small-Type :
+    is-modal-Small-Type → type-Small-Type X ≃ ○ (small-type-Small-Type X)
+  equiv-unit-is-modal-Small-Type =
+    equiv-unit-is-modal-type-is-small unit-○
       ( type-Small-Type X)
       ( is-small-type-Small-Type X)
 
-  map-inv-unit-is-modal-small-type :
-    is-modal-small-type → ○ (small-type-Small-Type X) → type-Small-Type X
-  map-inv-unit-is-modal-small-type =
-    map-inv-equiv ∘ equiv-unit-is-modal-small-type
+  map-inv-unit-is-modal-Small-Type :
+    is-modal-Small-Type → ○ (small-type-Small-Type X) → type-Small-Type X
+  map-inv-unit-is-modal-Small-Type =
+    map-inv-equiv ∘ equiv-unit-is-modal-Small-Type
 ```
 
 ## References
