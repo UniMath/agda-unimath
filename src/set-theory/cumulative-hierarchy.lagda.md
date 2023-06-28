@@ -757,9 +757,10 @@ needed.
 
 ## References
 
-1. Institute for Advanced Study. Homotopy Type Theory: Univalent Foundations of
-   Mathematics.
-
-1. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg
+1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
+   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
+   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729),
+   [DOI:10.48550](https://doi.org/10.48550/arXiv.1308.0729))
+2. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg
    and Chuangjie Xu.
    <https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html>

@@ -11,7 +11,7 @@ import re
 
 
 def no_repeat_whitespace_inside_line(line):
-    return re.sub(r'(?<=\S)\s{2,}', ' ', line)
+    return re.sub(r'(?<=\S)(?<!{!)\s{2,}(?=\S)(?!!})', ' ', line)
 
 
 def space_after_special_symbols(line):

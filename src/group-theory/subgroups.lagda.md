@@ -57,8 +57,8 @@ module _
   is-prop-contains-unit-subset-Group =
     is-prop-type-Prop contains-unit-subset-group-Prop
 
-  is-closed-under-mul-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-mul-subset-group-Prop =
+  is-closed-under-multiplication-subset-group-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-subset-group-Prop =
     Π-Prop
       ( type-Group G)
       ( λ x →
@@ -67,14 +67,14 @@ module _
           ( λ y →
             hom-Prop (P x) (hom-Prop (P y) (P (mul-Group G x y)))))
 
-  is-closed-under-mul-subset-Group : UU (l1 ⊔ l2)
-  is-closed-under-mul-subset-Group =
-    type-Prop is-closed-under-mul-subset-group-Prop
+  is-closed-under-multiplication-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-multiplication-subset-Group =
+    type-Prop is-closed-under-multiplication-subset-group-Prop
 
-  is-prop-is-closed-under-mul-subset-Group :
-    is-prop is-closed-under-mul-subset-Group
-  is-prop-is-closed-under-mul-subset-Group =
-    is-prop-type-Prop is-closed-under-mul-subset-group-Prop
+  is-prop-is-closed-under-multiplication-subset-Group :
+    is-prop is-closed-under-multiplication-subset-Group
+  is-prop-is-closed-under-multiplication-subset-Group =
+    is-prop-type-Prop is-closed-under-multiplication-subset-group-Prop
 
   is-closed-under-inv-subset-group-Prop : Prop (l1 ⊔ l2)
   is-closed-under-inv-subset-group-Prop =
@@ -96,7 +96,7 @@ module _
     prod-Prop
       ( contains-unit-subset-group-Prop)
       ( prod-Prop
-        ( is-closed-under-mul-subset-group-Prop)
+        ( is-closed-under-multiplication-subset-group-Prop)
         ( is-closed-under-inv-subset-group-Prop))
 
   is-subgroup-subset-Group : UU (l1 ⊔ l2)
@@ -164,9 +164,9 @@ module _
     contains-unit-subset-Group G subset-Subgroup
   contains-unit-Subgroup = pr1 is-subgroup-Subgroup
 
-  is-closed-under-mul-Subgroup :
-    is-closed-under-mul-subset-Group G subset-Subgroup
-  is-closed-under-mul-Subgroup = pr1 (pr2 is-subgroup-Subgroup)
+  is-closed-under-multiplication-Subgroup :
+    is-closed-under-multiplication-subset-Group G subset-Subgroup
+  is-closed-under-multiplication-Subgroup = pr1 (pr2 is-subgroup-Subgroup)
 
   is-closed-under-inv-Subgroup :
     is-closed-under-inv-subset-Group G subset-Subgroup
@@ -186,7 +186,7 @@ module _
     is-in-Subgroup x
   is-in-subgroup-left-factor-Subgroup x y p q =
     is-closed-under-eq-Subgroup
-      ( is-closed-under-mul-Subgroup
+      ( is-closed-under-multiplication-Subgroup
         ( mul-Group G x y)
         ( inv-Group G y)
         ( p)
@@ -199,7 +199,7 @@ module _
     is-in-Subgroup y
   is-in-subgroup-right-factor-Subgroup x y p q =
     is-closed-under-eq-Subgroup
-      ( is-closed-under-mul-Subgroup
+      ( is-closed-under-multiplication-Subgroup
         ( inv-Group G x)
         ( mul-Group G x y)
         ( is-closed-under-inv-Subgroup x q)
@@ -239,7 +239,7 @@ module _
   mul-Subgroup : (x y : type-group-Subgroup) → type-group-Subgroup
   pr1 (mul-Subgroup x y) = mul-Group G (pr1 x) (pr1 y)
   pr2 (mul-Subgroup x y) =
-    is-closed-under-mul-Subgroup G H (pr1 x) (pr1 y) (pr2 x) (pr2 y)
+    is-closed-under-multiplication-Subgroup G H (pr1 x) (pr1 y) (pr2 x) (pr2 y)
 
   associative-mul-Subgroup :
     (x y z : type-group-Subgroup) →
@@ -485,7 +485,7 @@ module _
     tr
       ( is-in-Subgroup G H)
       ( mul-left-div-Group G x y z)
-      ( is-closed-under-mul-Subgroup G H
+      ( is-closed-under-multiplication-Subgroup G H
         ( left-div-Group G x y)
         ( left-div-Group G y z)
         ( q)
@@ -539,7 +539,7 @@ module _
     tr
       ( is-in-Subgroup G H)
       ( mul-right-div-Group G x y z)
-      ( is-closed-under-mul-Subgroup G H
+      ( is-closed-under-multiplication-Subgroup G H
         ( right-div-Group G x y)
         ( right-div-Group G y z)
         ( q)

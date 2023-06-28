@@ -20,15 +20,16 @@ open import orthogonal-factorization-systems.function-classes
 
 ## Idea
 
-We say a function class is **wide** if it contains the identities and is
-composition closed. This means it is morally a wide subpre-∞-category of the
-∞-category of small types.
+We say a [function class](orthogonal-factorization-systems.function-classes.md)
+is **wide** if it contains all identities and is composition closed. This means
+it is morally a wide subpre-∞-category of the ∞-category of small types.
 
 ```agda
 is-wide-function-class :
   {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
 is-wide-function-class c =
-  has-identity-maps-function-class c × is-composition-closed-function-class c
+  ( has-identity-maps-function-class c) ×
+  ( is-closed-under-composition-function-class c)
 
 wide-function-class : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 wide-function-class l1 l2 =
@@ -43,7 +44,7 @@ is-wide-function-class-Prop :
 is-wide-function-class-Prop c =
   prod-Prop
     ( has-identity-maps-function-class-Prop c)
-    ( is-composition-closed-function-class-Prop c)
+    ( is-closed-under-composition-function-class-Prop c)
 
 is-prop-is-wide-function-class :
   {l1 l2 : Level} (c : function-class l1 l1 l2) →

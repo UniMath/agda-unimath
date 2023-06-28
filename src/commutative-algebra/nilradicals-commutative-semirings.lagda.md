@@ -67,20 +67,20 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  is-closed-under-mul-right-nilradical-Commutative-Semiring :
+  is-closed-under-right-multiplication-nilradical-Commutative-Semiring :
     is-closed-under-right-multiplication-subset-Commutative-Semiring A
       ( subset-nilradical-Commutative-Semiring A)
-  is-closed-under-mul-right-nilradical-Commutative-Semiring x y =
+  is-closed-under-right-multiplication-nilradical-Commutative-Semiring x y =
     is-nilpotent-element-mul-Semiring
       ( semiring-Commutative-Semiring A)
       ( x)
       ( y)
       ( commutative-mul-Commutative-Semiring A x y)
 
-  is-closed-under-mul-left-nilradical-Commutative-Semiring :
+  is-closed-under-left-multiplication-nilradical-Commutative-Semiring :
     is-closed-under-left-multiplication-subset-Commutative-Semiring A
       ( subset-nilradical-Commutative-Semiring A)
-  is-closed-under-mul-left-nilradical-Commutative-Semiring x y =
+  is-closed-under-left-multiplication-nilradical-Commutative-Semiring x y =
     is-nilpotent-element-mul-Semiring'
       ( semiring-Commutative-Semiring A)
       ( y)

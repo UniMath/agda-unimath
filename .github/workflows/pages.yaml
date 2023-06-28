@@ -14,7 +14,7 @@ on:
 
 # Cancel previous runs of the same branch
 concurrency:
-  group: "${{ github.workflow }}-${{ github.head_ref || github.run_id }}"
+  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
   cancel-in-progress: true
 
 env:
@@ -27,7 +27,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        agda: ["2.6.3"]
+        agda: ['2.6.3']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -43,7 +43,7 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
         with:
-          pandoc-version: "3.0.1"
+          pandoc-version: '3.0.1'
 
       - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
@@ -64,7 +64,7 @@ jobs:
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
-          mdbook-version: "latest"
+          mdbook-version: 'latest'
 
       - name: Install mdbook-pagetoc
         uses: baptiste0928/cargo-install@v2
@@ -88,9 +88,9 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.11.1"
+          python-version: '3.11.1'
           check-latest: true
-          cache: "pip"
+          cache: 'pip'
 
       - run: python3 -m pip install -r master/scripts/requirements.txt
 

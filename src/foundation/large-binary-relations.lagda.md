@@ -95,6 +95,13 @@ relation-prop-Large-Relation-Prop :
   (A : (l : Level) → UU (α l)) (R : Large-Relation-Prop α β A)
   (l : Level) → Relation-Prop (β l l) (A l)
 relation-prop-Large-Relation-Prop A R l x y = R x y
+
+relation-Large-Relation-Prop :
+  {α : Level → Level} {β : Level → Level → Level}
+  (A : (l : Level) → UU (α l)) (R : Large-Relation-Prop α β A)
+  (l : Level) → Relation (β l l) (A l)
+relation-Large-Relation-Prop A R =
+  relation-Large-Relation A (type-Large-Relation-Prop A R)
 ```
 
 ## Specifications of properties of binary relations

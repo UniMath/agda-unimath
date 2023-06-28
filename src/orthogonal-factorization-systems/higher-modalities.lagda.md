@@ -18,6 +18,7 @@ open import foundation.identity-types
 open import foundation.small-types
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
@@ -27,7 +28,8 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ## Idea
 
 A **higher modality** is a _higher mode of logic_ defined in terms of a monadic
-modal operator `○` satisfying a certain induction principle.
+[modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
+satisfying a certain induction principle.
 
 The induction principle states that for every type `X` and family
 `P : ○ X → UU`, to define a dependent map `(x' : ○ X) → ○ (P x')` it suffices to
@@ -40,8 +42,8 @@ Lastly, higher modalities must also be **identity closed** in the sense that for
 every type `X` the identity types `(x' ＝ y')` are modal for all terms
 `x' y' : ○ X`. In other words, `○ X` is
 [`○`-separated](orthogonal-factorization-systems.separated-types.md). Because of
-this, higher modalities in their most general form only make sense for locally
-small modal operators.
+this, higher modalities in their most general form only make sense for
+[locally small modal operators](orthogonal-factorization-systems.locally-small-modal-operators.md).
 
 ## Definition
 
@@ -79,9 +81,11 @@ module _
 
 ### Closure under identity type formers
 
-We say that the identity types of a locally small type are modal if their small
-equivalent is modal. We say that a modality is closed under identity type
-formation if for every modal type, their identity types are also modal.
+We say that the [locally small type](foundation-core.identity-types.md) of a
+[locally small type](foundation.locally-small-types.md) are **modal** if their
+[small equivalent](foundation-core.small-types.md) is modal. We say that a
+modality is closed under [identity type](foundation-core.identity-types.md)
+formation if, for every modal type, their identity types are also modal.
 
 ```agda
 module _
@@ -93,7 +97,7 @@ module _
   is-modal-identity-types : UU (lsuc l1 ⊔ l2)
   is-modal-identity-types =
     (X : UU l1) (x y : ○ X) →
-    is-modal (unit-○) (type-is-small (is-locally-small-○ X x y))
+    is-modal-type-is-small (unit-○) (x ＝ y) (is-locally-small-○ X x y)
 ```
 
 ### The `is-higher-modality` predicate
@@ -152,7 +156,7 @@ module _
       ( locally-small-operator-higher-modality)
 
   is-locally-small-operator-higher-modality :
-    is-locally-small-operator-modality (operator-higher-modality)
+    is-locally-small-operator-modality l1 (operator-higher-modality)
   is-locally-small-operator-higher-modality =
     is-locally-small-locally-small-operator-modality
       ( locally-small-operator-higher-modality)
@@ -232,7 +236,7 @@ module _
     {X : UU l1} {x' y' : ○ X} →
     ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
   elim-Id-higher-modality {X} {x'} {y'} =
-    map-inv-unit-is-modal-is-small unit-○
+    map-inv-unit-is-modal-type-is-small unit-○
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y')
@@ -250,7 +254,7 @@ module _
   map-inv-unit-id-higher-modality :
     {X : UU l} {x' y' : ○ X} → ○ (x' ＝ y') → x' ＝ y'
   map-inv-unit-id-higher-modality {X} {x'} {y'} =
-    map-inv-unit-is-modal-is-small unit-○
+    map-inv-unit-is-modal-type-is-small unit-○
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y') ∘
@@ -341,6 +345,7 @@ module _
 The equivalent notions of
 
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
+- [Σ-closed reflective modalities](orthogonal-factorization-systems.sigma-closed-reflective-modalities.md)
 - [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
 - [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
 

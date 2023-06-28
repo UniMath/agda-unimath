@@ -224,7 +224,7 @@ module _
 
   abstract
     is-contr-Σ :
-      (C : is-contr A) (a : A) → is-contr (B a) → is-contr (Σ A B)
+      is-contr A → (a : A) → is-contr (B a) → is-contr (Σ A B)
     pr1 (pr1 (is-contr-Σ H a K)) = a
     pr2 (pr1 (is-contr-Σ H a K)) = center K
     pr2 (is-contr-Σ H a K) (pair x y) =
@@ -232,6 +232,27 @@ module _
         ( inv (eq-is-contr H))
         ( eq-transpose-tr (eq-is-contr H) (eq-is-contr K))
 ```
+
+**Note**: In the previous construction, we showed that `Σ A B` is contractible
+whenever `A` is contractible and whenever `B a` is contractible for a specified
+term `a : A`. We _could_ have chosen this term `a` to be the center of
+contraction of `A`. However, it turns out to be better not to do so in the
+construction of `is-contr-Σ`. The reason is that proofs of contractibility could
+be quite complicated and difficult to normalize. If we would require in the
+definition of `is-contr-Σ` that `B (center c)` is contractible, given the proof
+`c` of contractibility of `A`, then the type inference algorithm of Agda will be
+forced to normalize the proof `c` including the contraction. By instead
+providing a center of contraction by hand, we avoid this unnecessary load on the
+type inference algorithm, and hence any instance of `is-contr-Σ` will type check
+more efficiently.
+
+The general theme is that it may be computationally expensive to extract
+information from proofs of propositions, such as the center of contraction of a
+proof of contractibility. The reason for that is that when Agda normalizes an
+element (as it inevitably will do sometimes) then in such cases it will not just
+normalize the extracted information (in this case the first projection of the
+proof of contractibility), but it will normalize the entire proof of
+contractibility first, and then apply the projection.
 
 ### Contractible types are propositions
 

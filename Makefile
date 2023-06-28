@@ -1,7 +1,7 @@
 
 CHECKOPTS := --without-K --exact-split --guardedness
 everythingOpts := $(CHECKOPTS)
-AGDAVERBOSE ?=-v1
+AGDAVERBOSE ?= -v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 AGDAMDFILES := $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
@@ -30,13 +30,13 @@ METAFILES :=CITE-THIS-LIBRARY.md \
 .PHONY: agdaFiles
 agdaFiles:
 	@rm -rf $@
-	@rm -rf src/everything.lagda.md
+	@rm -rf ./src/everything.lagda.md
 	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda" -o -name "*.lagda.md" \) -print > $@
 	@sort -o $@ $@
 	@wc -l $@
 	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
 
-.PHONY: src/everything.lagda.md
+.PHONY: ./src/everything.lagda.md
 src/everything.lagda.md: agdaFiles
 	@echo "\`\`\`agda" > $@ ;\
 	echo "{-# OPTIONS $(everythingOpts) #-}" >> $@ ;\
@@ -51,28 +51,28 @@ src/everything.lagda.md: agdaFiles
 	echo "\`\`\`" >> $@ ;
 
 .PHONY: check
-check: src/everything.lagda.md
+check: ./src/everything.lagda.md
 	${TIME} ${AGDA} $?
 
 AGDAMDFILES: $(AGDAMDFILES)
 
-docs/%.md: src/%.lagda.md
+docs/%.md: ./src/%.lagda.md
 	@echo "... $@"
 	@${AGDA} ${AGDAHTMLFLAGS} $<
 
-agda-html: src/everything.lagda.md
-	@rm -rf docs/
-	@mkdir -p docs/
-	@${AGDA} ${AGDAHTMLFLAGS} src/everything.lagda.md
+agda-html: ./src/everything.lagda.md
+	@rm -rf ./docs/
+	@mkdir -p ./docs/
+	@${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md
 
 SUMMARY.md: ${AGDAFILES}
-	@python3 scripts/generate_main_index_file.py
+	@python3 ./scripts/generate_main_index_file.py
 
 .PHONY: website
 website: agda-html \
-		SUMMARY.md
-	@cp $(METAFILES) docs/
-	@cp theme/images/agda-unimath-logo.svg  docs/
+		./SUMMARY.md
+	@cp $(METAFILES) ./docs/
+	@cp ./theme/images/agda-unimath-logo.svg  ./docs/
 	@mdbook build
 
 .PHONY: serve-website
@@ -81,11 +81,11 @@ serve-website:
 
 .PHONY: graph
 graph:
-	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=docs/dependency.dot src/README.lagda.md
+	${AGDA} ${AGDAHTMLFLAGS} --dependency-graph=docs/dependency.dot ./src/README.lagda.md
 
 .PHONY: clean
 clean:
-	@rm -Rf _build/ book/ docs/
+	@rm -Rf ./_build/ ./book/ ./docs/
 
 .PHONY: pre-commit
 pre-commit:
@@ -100,3 +100,8 @@ install-website-dev:
 	@cargo install mdbook-katex
 	@cargo install mdbook-pagetoc
 	@cargo install mdbook-catppuccin
+
+.PHONY: unused-imports
+unused-imports:
+	python3 ./scripts/remove_unused_imports.py
+	python3 ./scripts/demote_foundation_imports.py

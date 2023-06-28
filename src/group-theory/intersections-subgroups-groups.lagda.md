@@ -50,15 +50,19 @@ module _
   pr1 contains-unit-intersection-Subgroup = contains-unit-Subgroup G H
   pr2 contains-unit-intersection-Subgroup = contains-unit-Subgroup G K
 
-  is-closed-under-mul-intersection-Subgroup :
+  is-closed-under-multiplication-intersection-Subgroup :
     (x y : type-Group G) →
     is-in-intersection-Subgroup x →
     is-in-intersection-Subgroup y →
     is-in-intersection-Subgroup (mul-Group G x y)
-  pr1 (is-closed-under-mul-intersection-Subgroup x y (pH , pK) (qH , qK)) =
-    is-closed-under-mul-Subgroup G H x y pH qH
-  pr2 (is-closed-under-mul-intersection-Subgroup x y (pH , pK) (qH , qK)) =
-    is-closed-under-mul-Subgroup G K x y pK qK
+  pr1
+    ( is-closed-under-multiplication-intersection-Subgroup
+        x y (pH , pK) (qH , qK)) =
+    is-closed-under-multiplication-Subgroup G H x y pH qH
+  pr2
+    ( is-closed-under-multiplication-intersection-Subgroup
+        x y (pH , pK) (qH , qK)) =
+    is-closed-under-multiplication-Subgroup G K x y pK qK
 
   is-closed-under-inv-intersection-Subgroup :
     (x : type-Group G) →
@@ -73,7 +77,7 @@ module _
   pr1 is-subgroup-intersection-Subgroup =
     contains-unit-intersection-Subgroup
   pr1 (pr2 is-subgroup-intersection-Subgroup) =
-    is-closed-under-mul-intersection-Subgroup
+    is-closed-under-multiplication-intersection-Subgroup
   pr2 (pr2 is-subgroup-intersection-Subgroup) =
     is-closed-under-inv-intersection-Subgroup
 

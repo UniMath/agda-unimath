@@ -2,6 +2,8 @@
 # Run this script:
 # $ ./scripts/blank_line_conventions.py fileName.lagda.md
 
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
+
 import sys
 import utils
 import re
