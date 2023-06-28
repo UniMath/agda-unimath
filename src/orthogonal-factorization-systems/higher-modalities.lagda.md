@@ -84,8 +84,8 @@ module _
 We say that the [locally small type](foundation-core.identity-types.md) of a
 [locally small type](foundation.locally-small-types.md) are **modal** if their
 [small equivalent](foundation-core.small-types.md) is modal. We say that a
-modality is closed under identity type formation if, for every modal type, their
-identity types are also modal.
+modality is closed under [identity type](foundation-core.identity-types.md)
+formation if, for every modal type, their identity types are also modal.
 
 ```agda
 module _
@@ -97,7 +97,7 @@ module _
   is-modal-identity-types : UU (lsuc l1 ⊔ l2)
   is-modal-identity-types =
     (X : UU l1) (x y : ○ X) →
-    is-modal (unit-○) (type-is-small (is-locally-small-○ X x y))
+    is-modal-small l2 (unit-○) (x ＝ y) (is-locally-small-○ X x y)
 ```
 
 ### The `is-higher-modality` predicate
