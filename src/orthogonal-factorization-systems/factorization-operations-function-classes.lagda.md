@@ -24,8 +24,8 @@ open import orthogonal-factorization-systems.function-classes
 A **factorization operation into function classes** `L` and `R` is a
 [factorization operation](orthogonal-factorization-systems.factorization-operations.md)
 such that the left map (in diagrammatic order) of every
-[factorization](orthogonal-factorization-systems.factorizations.md) is in `L`,
-and the right map is in `R`.
+[factorization](orthogonal-factorization-systems.factorizations-of-maps.md) is
+in `L`, and the right map is in `R`.
 
 ```text
        ∙

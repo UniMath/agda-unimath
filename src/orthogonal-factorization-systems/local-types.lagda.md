@@ -237,5 +237,5 @@ is-contr-is-local A is-local-A =
 
 ## See also
 
-- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps)
-- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses)
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)

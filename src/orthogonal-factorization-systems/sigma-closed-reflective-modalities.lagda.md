@@ -26,8 +26,8 @@ open import orthogonal-factorization-systems.sigma-closed-modalities
 
 A [modality](orthogonal-factorization-systems.modal-operators.md) is **Σ-closed
 reflective** if it is
-[reflective](orthogonal-factorization-systems.reflective-modalities) and
-[Σ-closed](orthogonal-factorization-systems.sigma-closed-modalities).
+[reflective](orthogonal-factorization-systems.reflective-modalities.md) and
+[Σ-closed](orthogonal-factorization-systems.sigma-closed-modalities.md).
 
 ## Definition
 

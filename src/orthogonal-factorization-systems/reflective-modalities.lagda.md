@@ -21,8 +21,9 @@ open import orthogonal-factorization-systems.reflective-subuniverses
 
 ## Idea
 
-A [modal operator](foundation.modal-operators.md) with unit is **reflective** if
-its [subuniverse](foundation.subuniverses.md) of modal types is
+A [modal operator](orthogonal-factorization-systems.modal-operators.md) with
+unit is **reflective** if its [subuniverse](foundation.subuniverses.md) of modal
+types is
 [reflective](orthogonal-factorization-systems.reflective-subuniverses.md).
 
 ## Definitions
