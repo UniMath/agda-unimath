@@ -37,7 +37,7 @@ g ∘ - |           | g ∘ -
 ```
 
 The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
-[pullback](foundation.pullbacks.md) of the [cospan](foundation.cospan.md):
+[pullback](foundation.pullbacks.md) of the [cospan](foundation.cospans.md):
 
 ```text
       ∙ ------> A → X
