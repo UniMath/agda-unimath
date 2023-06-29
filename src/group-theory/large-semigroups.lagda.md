@@ -7,10 +7,11 @@ module group-theory.large-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.identity-types
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
+
 open import group-theory.semigroups
 ```
 

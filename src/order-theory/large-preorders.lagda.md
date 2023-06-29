@@ -7,11 +7,12 @@ module order-theory.large-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.large-precategories
+
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
-open import category-theory.large-precategories
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets

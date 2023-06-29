@@ -165,7 +165,6 @@ module _
   pr1 category-Poset = precategory-Poset
   pr2 category-Poset = is-category-precategory-Poset
 
-
 module _
   {l1 l2 : Level} (C : Category l1 l2)
   ( is-prop-hom-C :
