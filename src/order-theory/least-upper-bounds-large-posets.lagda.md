@@ -13,6 +13,7 @@ open import foundation.universe-levels
 
 open import order-theory.dependent-products-large-posets
 open import order-theory.large-posets
+open import order-theory.least-upper-bounds-posets
 open import order-theory.similarity-of-elements-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -21,8 +22,9 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **least upper bound** of a family of elements `a : I → P` in a large poset `P`
-is an element `x` in `P` such that the logial equivalence
+A **least upper bound** of a family of elements `a : I → P` in a
+[large poset](order-theory.large-posets.md) `P` is an element `x` in `P` such
+that the [logical equivalence](foundation.logical-equivalences.md)
 
 ```text
   is-upper-bound-family-of-elements-Large-Poset P a y ↔ (x ≤ y)
@@ -32,7 +34,7 @@ holds for every element in `P`.
 
 ## Definitions
 
-### The predicate on large-posets of being a least upper bound of a family of elements
+### The predicate on large posets of being a least upper bound of a family of elements
 
 ```agda
 module _
@@ -157,4 +159,22 @@ module _
       ↔ leq-Π-Large-Poset P x y
         by
         iff-Π (λ i → H i (y i))
+```
+
+### Least upper bounds in small posets from least upper bounds in large posets
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (P : Large-Poset α β)
+  {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
+  where
+
+  is-least-upper-bound-family-of-elements-poset-Large-Poset :
+    (y : type-Large-Poset P l2) →
+    is-least-upper-bound-family-of-elements-Large-Poset P x y →
+    is-least-upper-bound-family-of-elements-Poset
+      ( poset-Large-Poset P l2) (x) (y)
+  is-least-upper-bound-family-of-elements-poset-Large-Poset y is-lub-y z =
+    is-lub-y z
 ```
