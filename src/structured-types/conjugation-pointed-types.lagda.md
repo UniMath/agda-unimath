@@ -10,6 +10,7 @@ module structured-types.conjugation-pointed-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
@@ -109,4 +110,11 @@ module _
       ( action-on-loops-conjugation-Pointed-Type p)
       ( compute-conjugation-Ω p)
       ( compute-action-on-loops-conjugation-Pointed-Type' p)
+
+  htpy-compute-action-on-loops-conjugation-Pointed-Type :
+    {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
+    map-conjugation-Ω p ~ map-action-on-loops-conjugation-Pointed-Type p
+  htpy-compute-action-on-loops-conjugation-Pointed-Type p =
+    pr1 (compute-action-on-loops-conjugation-Pointed-Type p)
+    
 ```
