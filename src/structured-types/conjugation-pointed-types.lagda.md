@@ -116,5 +116,4 @@ module _
     map-conjugation-Ω p ~ map-action-on-loops-conjugation-Pointed-Type p
   htpy-compute-action-on-loops-conjugation-Pointed-Type p =
     pr1 (compute-action-on-loops-conjugation-Pointed-Type p)
-    
 ```
