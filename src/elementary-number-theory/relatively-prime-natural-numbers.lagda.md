@@ -8,9 +8,11 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.commutative-rings-modular-arithmetic
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 
@@ -22,6 +24,8 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.transport
 open import foundation.universe-levels
+
+open import ring-theory
 ```
 
 </details>
@@ -64,6 +68,13 @@ pr1 (is-decidable-prop-is-relatively-prime-ℕ x y) =
   is-prop-is-relatively-prime-ℕ x y
 pr2 (is-decidable-prop-is-relatively-prime-ℕ x y) =
   is-decidable-is-relatively-prime-ℕ x y
+
+is-relatively-prime-ℕ-Decidable-Prop :
+  (x y : ℕ) → Decidable-Prop lzero
+pr1 (is-relatively-prime-ℕ-Decidable-Prop x y) =
+  is-relatively-prime-ℕ x y
+pr2 (is-relatively-prime-ℕ-Decidable-Prop x y) =
+  is-decidable-prop-is-relatively-prime-ℕ x y
 ```
 
 ### `a` and `b` are relatively prime if and only if any common divisor is equal to `1`
@@ -164,4 +175,15 @@ module _
       ( a)
       ( b)
       ( is-one-is-common-divisor-is-prime-ℕ)
+```
+
+### Two natural numbers `a` and `b` are relatively prime if and only if `a` is a multiplicative unit module `b`
+
+```agda
+is-relatively-prime-is-unit-ℤ-Mod :
+  (a n : ℕ) →
+  is-invertible-element-Ring (ℤ-Mod-Ring n) (mod-ℕ n a) →
+  is-relatively-prime-ℕ a n
+is-relatively-prime-is-unit-ℤ-Mod a n H =
+  {!!}
 ```
