@@ -428,20 +428,20 @@ module _
   shift : (type-Ω (suspension-Pointed-Type X)) → (N-susp ＝ S-susp)
   shift l = l ∙ (merid-susp (point-Pointed-Type X))
 
-  shift* :
+  shift∗ :
     Ω (suspension-Pointed-Type X) →∗
     ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
-  pr1 shift* = shift
-  pr2 shift* = refl
+  pr1 shift∗ = shift
+  pr2 shift∗ = refl
 
   unshift : (N-susp ＝ S-susp) → (type-Ω (suspension-Pointed-Type X))
   unshift p = p ∙ inv (merid-susp (point-Pointed-Type X))
 
-  unshift* :
+  unshift∗ :
     ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X))) →∗
     Ω (suspension-Pointed-Type X)
-  pr1 unshift* = unshift
-  pr2 unshift* = right-inv (merid-susp (point-Pointed-Type X))
+  pr1 unshift∗ = unshift
+  pr2 unshift∗ = right-inv (merid-susp (point-Pointed-Type X))
 
   is-equiv-shift : is-equiv shift
   is-equiv-shift = is-equiv-concat' N-susp (merid-susp (point-Pointed-Type X))
@@ -451,17 +451,17 @@ module _
     ( (N-susp ＝ S-susp) , merid-susp (point-Pointed-Type X))
   pr1 (pr1 pointed-equiv-shift) = shift
   pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
-  pr2 pointed-equiv-shift = preserves-point-pointed-map _ _ shift*
+  pr2 pointed-equiv-shift = preserves-point-pointed-map shift∗
 
-  merid-susp* : X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
-  pr1 merid-susp* = merid-susp
-  pr2 merid-susp* = refl
+  merid-susp∗ : X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
+  pr1 merid-susp∗ = merid-susp
+  pr2 merid-susp∗ = refl
 
-  unit-susp-loop-adj* : X →∗ Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
+  unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj∗ = unshift∗ ∘∗ merid-susp∗
 
   unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*
+  unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
 
   counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
   counit-susp-loop-adj =
@@ -471,9 +471,9 @@ module _
         ( point-Pointed-Type X) ,
         ( id))
 
-  counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →∗ X
-  pr1 counit-susp-loop-adj* = counit-susp-loop-adj
-  pr2 counit-susp-loop-adj* =
+  counit-susp-loop-adj∗ : ((suspension (type-Ω X)) , N-susp) →∗ X
+  pr1 counit-susp-loop-adj∗ = counit-susp-loop-adj
+  pr2 counit-susp-loop-adj∗ =
     up-suspension-N-susp
       ( type-Ω X)
       ( type-Pointed-Type X)

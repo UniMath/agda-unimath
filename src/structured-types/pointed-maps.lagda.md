@@ -60,7 +60,7 @@ the [asterisk](https://codepoints.net/U+002A) `*`.
   pr2 (pointed-map-Pointed-Type A B) = constant-pointed-map A B
 
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   where
 
   map-pointed-map : A →∗ B → type-Pointed-Type A → type-Pointed-Type B
@@ -76,31 +76,31 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  {l1 l2 l3 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   (C : Pointed-Fam l3 B) (f : A →∗ B)
   where
 
   precomp-Pointed-Fam : Pointed-Fam l3 A
-  pr1 precomp-Pointed-Fam = fam-Pointed-Fam B C ∘ map-pointed-map A B f
+  pr1 precomp-Pointed-Fam = fam-Pointed-Fam B C ∘ map-pointed-map f
   pr2 precomp-Pointed-Fam =
     tr
       ( fam-Pointed-Fam B C)
-      ( inv (preserves-point-pointed-map A B f))
+      ( inv (preserves-point-pointed-map f))
       ( point-Pointed-Fam B C)
 
   precomp-pointed-Π : pointed-Π B C → pointed-Π A precomp-Pointed-Fam
   pr1 (precomp-pointed-Π g) x =
-    function-pointed-Π B C g (map-pointed-map A B f x)
+    function-pointed-Π g (map-pointed-map f x)
   pr2 (precomp-pointed-Π g) =
     ( inv
       ( apd
-        ( function-pointed-Π B C g)
-        ( inv (preserves-point-pointed-map A B f)))) ∙
+        ( function-pointed-Π g)
+        ( inv (preserves-point-pointed-map f)))) ∙
     ( ap
       ( tr
         ( fam-Pointed-Fam B C)
-        ( inv (preserves-point-pointed-map A B f)))
-      ( preserves-point-function-pointed-Π B C g))
+        ( inv (preserves-point-pointed-map f)))
+      ( preserves-point-function-pointed-Π g))
 ```
 
 ### Composing pointed maps
@@ -108,33 +108,36 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3)
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
   where
 
   map-comp-pointed-map :
     B →∗ C → A →∗ B → type-Pointed-Type A → type-Pointed-Type C
   map-comp-pointed-map g f =
-    map-pointed-map B C g ∘ map-pointed-map A B f
+    map-pointed-map g ∘ map-pointed-map f
 
   preserves-point-comp-pointed-map :
     (g : B →∗ C) (f : A →∗ B) →
     (map-comp-pointed-map g f (point-Pointed-Type A)) ＝ point-Pointed-Type C
   preserves-point-comp-pointed-map g f =
-    ( ap (map-pointed-map B C g) (preserves-point-pointed-map A B f)) ∙
-    ( preserves-point-pointed-map B C g)
+    ( ap (map-pointed-map g) (preserves-point-pointed-map f)) ∙
+    ( preserves-point-pointed-map g)
 
   comp-pointed-map : B →∗ C → A →∗ B → A →∗ C
   pr1 (comp-pointed-map g f) = map-comp-pointed-map g f
   pr2 (comp-pointed-map g f) = preserves-point-comp-pointed-map g f
 
-  precomp-pointed-map : A →∗ B → B →∗ C → A →∗ C
-  precomp-pointed-map f g = comp-pointed-map g f
+precomp-pointed-map :
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} (C : Pointed-Type l3) →
+  A →∗ B → B →∗ C → A →∗ C
+precomp-pointed-map C f g = comp-pointed-map g f
 
 _∘∗_ :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
   B →∗ C → A →∗ B → A →∗ C
-_∘∗_ {A = A} {B} {C} = comp-pointed-map A B C
+_∘∗_ {A = A} {B} {C} = comp-pointed-map
 ```
 
 ### The identity pointed map

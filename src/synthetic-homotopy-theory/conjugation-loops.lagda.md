@@ -60,13 +60,12 @@ module _
   conjugation-Ω' refl = id-pointed-map
 
   map-conjugation-Ω' : {x y : A} (p : x ＝ y) → type-Ω (A , x) → type-Ω (A , y)
-  map-conjugation-Ω' p =
-    map-pointed-map (Ω (A , _)) (Ω (A , _)) (conjugation-Ω' p)
+  map-conjugation-Ω' p = map-pointed-map (conjugation-Ω' p)
 
   preserves-point-conjugation-Ω' :
     {x y : A} (p : x ＝ y) → map-conjugation-Ω' p refl ＝ refl
   preserves-point-conjugation-Ω' p =
-    preserves-point-pointed-map (Ω (A , _)) (Ω (A , _)) (conjugation-Ω' p)
+    preserves-point-pointed-map (conjugation-Ω' p)
 ```
 
 ## Properties

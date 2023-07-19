@@ -64,24 +64,20 @@ module _
 
 ```agda
 module _
-  {l : Level} (B : Pointed-Type l)
+  {l : Level} {B : Pointed-Type l}
   where
 
   action-on-loops-conjugation-Pointed-Type :
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
     Ω B →∗ Ω (type-Pointed-Type B , u)
   action-on-loops-conjugation-Pointed-Type p =
-    pointed-map-Ω B
-      ( type-Pointed-Type B , _)
-      ( conjugation-Pointed-Type B p)
+    pointed-map-Ω (conjugation-Pointed-Type B p)
 
   map-action-on-loops-conjugation-Pointed-Type :
     {u : type-Pointed-Type B} (p : point-Pointed-Type B ＝ u) →
     type-Ω B → type-Ω (type-Pointed-Type B , u)
   map-action-on-loops-conjugation-Pointed-Type p =
     map-pointed-map
-      ( Ω B)
-      ( Ω (type-Pointed-Type B , _))
       ( action-on-loops-conjugation-Pointed-Type p)
 
   preserves-point-action-on-loops-conjugation-Pointed-Type :
@@ -89,8 +85,6 @@ module _
     map-action-on-loops-conjugation-Pointed-Type p refl ＝ refl
   preserves-point-action-on-loops-conjugation-Pointed-Type p =
     preserves-point-pointed-map
-      ( Ω B)
-      ( Ω (type-Pointed-Type B , _))
       ( action-on-loops-conjugation-Pointed-Type p)
 
   compute-action-on-loops-conjugation-Pointed-Type' :
@@ -104,8 +98,6 @@ module _
     conjugation-Ω p ~∗ action-on-loops-conjugation-Pointed-Type p
   compute-action-on-loops-conjugation-Pointed-Type p =
     concat-htpy-pointed-map
-      ( Ω B)
-      ( Ω (type-Pointed-Type B , _))
       ( conjugation-Ω p) (conjugation-Ω' p)
       ( action-on-loops-conjugation-Pointed-Type p)
       ( compute-conjugation-Ω p)

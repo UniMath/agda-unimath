@@ -60,16 +60,16 @@ module _
         ( λ p →
           ( p ∙ refl) ∙
           ( inv
-            ( preserves-point-pointed-map S X
+            ( preserves-point-pointed-map
               ( constant-pointed-map B X ∘∗ g))))
         ( ap-const
           ( point-Pointed-Type X)
-          ( preserves-point-pointed-map S A f))) ∙
+          ( preserves-point-pointed-map f))) ∙
       ( ap
         ( λ p → inv (p ∙ refl))
         ( ap-const
           ( point-Pointed-Type X)
-          ( preserves-point-pointed-map S B g))))
+          ( preserves-point-pointed-map g))))
 ```
 
 ### Components of a cocone of pointed types

@@ -56,6 +56,5 @@ module _
     map-conjugation-Ω g ~ map-conjugation-∞-Group
   compute-map-conjugation-∞-Group =
     htpy-compute-action-on-loops-conjugation-Pointed-Type
-      ( classifying-pointed-type-∞-Group G)
       ( g)
 ```
