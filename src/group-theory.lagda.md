@@ -33,6 +33,7 @@ open import group-theory.congruence-relations-groups public
 open import group-theory.congruence-relations-monoids public
 open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
+open import group-theory.conjugation-concrete-groups public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
 open import group-theory.decidable-subgroups public
 open import group-theory.dependent-products-abelian-groups public

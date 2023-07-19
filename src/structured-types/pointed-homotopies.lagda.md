@@ -73,6 +73,20 @@ _~∗_ :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
   pointed-Π A B → pointed-Π A B → UU (l1 ⊔ l2)
 _~∗_ {A = A} {B} = htpy-pointed-Π A B
+
+htpy-pointed-htpy :
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
+  (f g : pointed-Π A B) → f ~∗ g →
+  function-pointed-Π A B f ~ function-pointed-Π A B g
+htpy-pointed-htpy f g = pr1
+
+triangle-pointed-htpy :
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
+  (f g : pointed-Π A B) (H : f ~∗ g) →
+  ( htpy-pointed-htpy f g H (point-Pointed-Type A)) ＝
+  ( ( preserves-point-function-pointed-Π A B f) ∙
+    ( inv (preserves-point-function-pointed-Π A B g)))
+triangle-pointed-htpy f g = pr2
 ```
 
 ## Properties
