@@ -123,13 +123,13 @@ power-nat-mul-Ω' m n A ω =
 
 ```agda
 map-power-nat-Ω :
-  {l1 l2 : Level} (n : ℕ) (A : Pointed-Type l1) (B : Pointed-Type l2)
+  {l1 l2 : Level} (n : ℕ) {A : Pointed-Type l1} {B : Pointed-Type l2}
   (f : A →∗ B) (ω : type-Ω A) →
-  map-Ω A B f (power-nat-Ω n A ω) ＝ power-nat-Ω n B (map-Ω A B f ω)
-map-power-nat-Ω zero-ℕ A B f ω = preserves-refl-map-Ω A B f
-map-power-nat-Ω (succ-ℕ n) A B f ω =
-  ( preserves-mul-map-Ω A B f (power-nat-Ω n A ω) ω) ∙
+  map-Ω f (power-nat-Ω n A ω) ＝ power-nat-Ω n B (map-Ω f ω)
+map-power-nat-Ω zero-ℕ {A} {B} f ω = preserves-refl-map-Ω f
+map-power-nat-Ω (succ-ℕ n) {A} {B} f ω =
+  ( preserves-mul-map-Ω f (power-nat-Ω n A ω) ω) ∙
   ( ap
-    ( concat' (point-Pointed-Type B) (map-Ω A B f ω))
-    ( map-power-nat-Ω n A B f ω))
+    ( concat' (point-Pointed-Type B) (map-Ω f ω))
+    ( map-power-nat-Ω n f ω))
 ```

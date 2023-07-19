@@ -159,13 +159,8 @@ module _
     is-connected-classifying-type-subgroup-Concrete-Group
   pr2 concrete-group-subgroup-Concrete-Group =
     is-set-is-emb
-      ( map-Ω
-        ( classifying-pointed-type-subgroup-Concrete-Group)
-        ( classifying-pointed-type-Concrete-Group G)
-        ( classifying-pointed-inclusion-subgroup-Concrete-Group))
+      ( map-Ω (classifying-pointed-inclusion-subgroup-Concrete-Group))
       ( is-emb-map-Ω
-        ( classifying-pointed-type-subgroup-Concrete-Group)
-        ( classifying-pointed-type-Concrete-Group G)
         ( classifying-pointed-inclusion-subgroup-Concrete-Group)
         ( is-faithful-classifying-inclusion-subgroup-Concrete-Group))
       ( is-set-type-Concrete-Group G)

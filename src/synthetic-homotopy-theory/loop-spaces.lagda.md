@@ -131,7 +131,7 @@ module _
 
   equiv-tr-type-Ω : Id x y → type-Ω (pair A x) ≃ type-Ω (pair A y)
   equiv-tr-type-Ω p =
-    equiv-pointed-equiv (Ω (pair A x)) (Ω (pair A y)) (equiv-tr-Ω p)
+    equiv-pointed-equiv (equiv-tr-Ω p)
 
   tr-type-Ω : Id x y → type-Ω (pair A x) → type-Ω (pair A y)
   tr-type-Ω p = map-equiv (equiv-tr-type-Ω p)
