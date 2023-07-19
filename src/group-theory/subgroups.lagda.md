@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
+open import foundation.powersets
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -30,6 +31,8 @@ open import group-theory.subsets-groups
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
@@ -440,6 +443,24 @@ Subgroup-Poset :
   {l1 : Level} (l2 : Level) (G : Group l1) →
   Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
 Subgroup-Poset l2 G = poset-Large-Poset (Subgroup-Large-Poset G) l2
+
+preserves-order-subset-Subgroup :
+  {l1 l2 l3 : Level} (G : Group l1) (H : Subgroup l2 G) (K : Subgroup l3 G) →
+  leq-Subgroup G H K → (subset-Subgroup G H ⊆ subset-Subgroup G K)
+preserves-order-subset-Subgroup G H K = id
+
+subset-subgroup-hom-large-poset-Group :
+  {l1 : Level} (G : Group l1) →
+  hom-Large-Poset
+    ( id)
+    ( Subgroup-Large-Poset G)
+    ( powerset-Large-Poset (type-Group G))
+map-hom-Large-Preorder
+  ( subset-subgroup-hom-large-poset-Group G) =
+  subset-Subgroup G
+preserves-order-hom-Large-Preorder
+  ( subset-subgroup-hom-large-poset-Group G) =
+  preserves-order-subset-Subgroup G
 ```
 
 ### Every subgroup induces two equivalence relations

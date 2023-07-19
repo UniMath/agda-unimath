@@ -12,6 +12,7 @@ open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-maps-pointed-types public
 open import structured-types.contractible-pointed-types public
+open import structured-types.cyclic-pointed-types public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public
