@@ -69,6 +69,10 @@ module _
 ### The pointed product `A ×∗ B` comes equipped with pointed inclusion of `A` and `B`
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
+
   map-inl-prod-Pointed-Type : type-Pointed-Type A → type-Pointed-Type (A ×∗ B)
   pr1 (map-inl-prod-Pointed-Type x) = x
   pr2 (map-inl-prod-Pointed-Type x) = point-Pointed-Type B
@@ -89,32 +93,40 @@ module _
 ### The pointed inclusions into `A ×∗ B` are sections to the pointed projections
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  where
+
   is-section-map-inl-prod-Pointed-Type :
-    (map-pr1-prod-Pointed-Type ∘ map-inl-prod-Pointed-Type) ~ id
+    (map-pr1-prod-Pointed-Type A B ∘ map-inl-prod-Pointed-Type A B) ~ id
   is-section-map-inl-prod-Pointed-Type = refl-htpy
 
   is-section-map-inr-prod-Pointed-Type :
-    (map-pr2-prod-Pointed-Type ∘ map-inr-prod-Pointed-Type) ~ id
+    (map-pr2-prod-Pointed-Type A B ∘ map-inr-prod-Pointed-Type A B) ~ id
   is-section-map-inr-prod-Pointed-Type = refl-htpy
 ```
 
 ### The pointed gap map for the pointed product
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  where
+
   map-gap-prod-Pointed-Type :
-    {l3 : Level} (S : Pointed-Type l3)
+    {l3 : Level} {S : Pointed-Type l3}
     (f : S →∗ A) (g : S →∗ B) →
     type-Pointed-Type S → type-Pointed-Type (A ×∗ B)
-  pr1 (map-gap-prod-Pointed-Type S f g x) = map-pointed-map S A f x
-  pr2 (map-gap-prod-Pointed-Type S f g x) = map-pointed-map S B g x
+  pr1 (map-gap-prod-Pointed-Type f g x) = map-pointed-map f x
+  pr2 (map-gap-prod-Pointed-Type f g x) = map-pointed-map g x
 
   gap-prod-Pointed-Type :
-    {l3 : Level} (S : Pointed-Type l3)
+    {l3 : Level} {S : Pointed-Type l3}
     (f : S →∗ A) (g : S →∗ B) → S →∗ (A ×∗ B)
-  pr1 (gap-prod-Pointed-Type S f g) =
-    map-gap-prod-Pointed-Type S f g
-  pr2 (gap-prod-Pointed-Type S f g) =
+  pr1 (gap-prod-Pointed-Type f g) =
+    map-gap-prod-Pointed-Type f g
+  pr2 (gap-prod-Pointed-Type f g) =
     eq-pair
-      ( preserves-point-pointed-map S A f)
-      ( preserves-point-pointed-map S B g)
+      ( preserves-point-pointed-map f)
+      ( preserves-point-pointed-map g)
 ```

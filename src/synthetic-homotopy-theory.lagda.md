@@ -15,6 +15,7 @@ open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
 open import synthetic-homotopy-theory.cofibers public
+open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts public

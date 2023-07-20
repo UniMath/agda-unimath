@@ -36,7 +36,7 @@ between pointed homotopies is just an instance of a pointed homotopy.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
   (f : pointed-Π A B)
   where
 
@@ -46,10 +46,10 @@ module _
       ( pair
         ( λ x →
           Id
-            ( function-pointed-Π A B f x)
-            ( function-pointed-Π A B g x))
-        ( ( preserves-point-function-pointed-Π A B f) ∙
-          ( inv (preserves-point-function-pointed-Π A B g))))
+            ( function-pointed-Π f x)
+            ( function-pointed-Π g x))
+        ( ( preserves-point-function-pointed-Π f) ∙
+          ( inv (preserves-point-function-pointed-Π g))))
 
   extensionality-pointed-Π : (g : pointed-Π A B) → Id f g ≃ htpy-pointed-Π g
   extensionality-pointed-Π =
@@ -57,13 +57,13 @@ module _
       ( λ {g} q H →
           Id
             ( H (point-Pointed-Type A))
-            ( preserves-point-function-pointed-Π A B f ∙
-              inv (preserves-point-function-pointed-Π A B (g , q))))
+            ( preserves-point-function-pointed-Π f ∙
+              inv (preserves-point-function-pointed-Π (g , q))))
       ( refl-htpy)
-      ( inv (right-inv (preserves-point-function-pointed-Π A B f)))
+      ( inv (right-inv (preserves-point-function-pointed-Π f)))
       ( λ g → equiv-funext)
-      ( λ p → equiv-con-inv refl p (preserves-point-function-pointed-Π A B f) ∘e
-              equiv-inv (preserves-point-function-pointed-Π A B f) p)
+      ( λ p → equiv-con-inv refl p (preserves-point-function-pointed-Π f) ∘e
+              equiv-inv (preserves-point-function-pointed-Π f) p)
 
   eq-htpy-pointed-Π :
     (g : pointed-Π A B) → (htpy-pointed-Π g) → Id f g
@@ -72,7 +72,21 @@ module _
 _~∗_ :
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
   pointed-Π A B → pointed-Π A B → UU (l1 ⊔ l2)
-_~∗_ {A = A} {B} = htpy-pointed-Π A B
+_~∗_ {A = A} {B} = htpy-pointed-Π
+
+htpy-pointed-htpy :
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
+  (f g : pointed-Π A B) → f ~∗ g →
+  function-pointed-Π f ~ function-pointed-Π g
+htpy-pointed-htpy f g = pr1
+
+triangle-pointed-htpy :
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A} →
+  (f g : pointed-Π A B) (H : f ~∗ g) →
+  ( htpy-pointed-htpy f g H (point-Pointed-Type A)) ＝
+  ( ( preserves-point-function-pointed-Π f) ∙
+    ( inv (preserves-point-function-pointed-Π g)))
+triangle-pointed-htpy f g = pr2
 ```
 
 ## Properties
@@ -81,24 +95,20 @@ _~∗_ {A = A} {B} = htpy-pointed-Π A B
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
   refl-htpy-pointed-map : f ~∗ f
   pr1 refl-htpy-pointed-map = refl-htpy
-  pr2 refl-htpy-pointed-map =
-    inv (right-inv (preserves-point-pointed-map A B f))
+  pr2 refl-htpy-pointed-map = inv (right-inv (preserves-point-pointed-map f))
 
   htpy-pointed-map : (g : A →∗ B) → UU (l1 ⊔ l2)
-  htpy-pointed-map = htpy-pointed-Π A (constant-Pointed-Fam A B) f
+  htpy-pointed-map = htpy-pointed-Π f
 
-  extensionality-pointed-map :
-    (g : A →∗ B) → Id f g ≃ (htpy-pointed-map g)
-  extensionality-pointed-map =
-    extensionality-pointed-Π A (constant-Pointed-Fam A B) f
+  extensionality-pointed-map : (g : A →∗ B) → Id f g ≃ (htpy-pointed-map g)
+  extensionality-pointed-map = extensionality-pointed-Π f
 
-  eq-htpy-pointed-map :
-    (g : A →∗ B) → (htpy-pointed-map g) → Id f g
+  eq-htpy-pointed-map : (g : A →∗ B) → (htpy-pointed-map g) → Id f g
   eq-htpy-pointed-map g = map-inv-equiv (extensionality-pointed-map g)
 ```
 
@@ -106,24 +116,24 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) (f : A →∗ B)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
   where
 
   left-unit-law-comp-pointed-map :
-    htpy-pointed-map A B (comp-pointed-map A B B id-pointed-map f) f
+    htpy-pointed-map (comp-pointed-map id-pointed-map f) f
   left-unit-law-comp-pointed-map =
     pair
       ( refl-htpy)
       ( ( inv (right-inv (pr2 f))) ∙
         ( ap
           ( concat'
-            ( map-pointed-map A B f (point-Pointed-Type A))
+            ( map-pointed-map f (point-Pointed-Type A))
             ( inv (pr2 f)))
           ( ( inv (ap-id (pr2 f))) ∙
             ( inv right-unit))))
 
   right-unit-law-comp-pointed-map :
-    htpy-pointed-map A B (comp-pointed-map A A B f id-pointed-map) f
+    htpy-pointed-map (comp-pointed-map f id-pointed-map) f
   right-unit-law-comp-pointed-map =
     pair
       ( refl-htpy)
@@ -134,26 +144,24 @@ module _
   where
 
   associative-comp-pointed-map :
-    (A : Pointed-Type l1) (B : Pointed-Type l2)
-    (C : Pointed-Type l3) (D : Pointed-Type l4)
+    {A : Pointed-Type l1} {B : Pointed-Type l2}
+    {C : Pointed-Type l3} {D : Pointed-Type l4}
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
-    htpy-pointed-map A D
-      ( comp-pointed-map A B D (comp-pointed-map B C D h g) f)
-      ( comp-pointed-map A C D h (comp-pointed-map A B C g f))
+    htpy-pointed-map
+      ( comp-pointed-map (comp-pointed-map h g) f)
+      ( comp-pointed-map h (comp-pointed-map g f))
   associative-comp-pointed-map
-    (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
 
   inv-associative-comp-pointed-map :
-    (A : Pointed-Type l1) (B : Pointed-Type l2)
-    (C : Pointed-Type l3) (D : Pointed-Type l4)
+    {A : Pointed-Type l1} {B : Pointed-Type l2}
+    {C : Pointed-Type l3} {D : Pointed-Type l4}
     (h : C →∗ D) (g : B →∗ C) (f : A →∗ B) →
-    htpy-pointed-map A D
-      ( comp-pointed-map A C D h (comp-pointed-map A B C g f))
-      ( comp-pointed-map A B D (comp-pointed-map B C D h g) f)
+    htpy-pointed-map
+      ( comp-pointed-map h (comp-pointed-map g f))
+      ( comp-pointed-map (comp-pointed-map h g) f)
   inv-associative-comp-pointed-map
-    (pair A a) (pair B .(f a)) (pair C .(g (f a))) (pair D .(h (g (f a))))
     (pair h refl) (pair g refl) (pair f refl) =
     pair refl-htpy refl
 ```
@@ -162,26 +170,26 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Fam l2 A)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
   where
 
   concat-htpy-pointed-Π :
     (f g h : pointed-Π A B) →
-    htpy-pointed-Π A B f g → htpy-pointed-Π A B g h → htpy-pointed-Π A B f h
+    htpy-pointed-Π f g → htpy-pointed-Π g h → htpy-pointed-Π f h
   concat-htpy-pointed-Π f g h G H =
     pair
       ( pr1 G ∙h pr1 H)
       ( ( ap-binary (λ p q → p ∙ q) (pr2 G) (pr2 H)) ∙
         ( ( assoc (pr2 f) (inv (pr2 g)) (pr2 g ∙ inv (pr2 h))) ∙
           ( ap
-            ( concat (pr2 f) (function-pointed-Π A B h (point-Pointed-Type A)))
+            ( concat (pr2 f) (function-pointed-Π h (point-Pointed-Type A)))
             ( ( inv (assoc (inv (pr2 g)) (pr2 g) (inv (pr2 h)))) ∙
               ( ap
                 ( concat' (point-Pointed-Fam A B) (inv (pr2 h)))
                 ( left-inv (pr2 g)))))))
 
   inv-htpy-pointed-Π :
-    (f g : pointed-Π A B) → htpy-pointed-Π A B f g → htpy-pointed-Π A B g f
+    (f g : pointed-Π A B) → htpy-pointed-Π f g → htpy-pointed-Π g f
   inv-htpy-pointed-Π f g H =
     pair
       ( inv-htpy (pr1 H))
@@ -189,30 +197,30 @@ module _
         ( ( distributive-inv-concat (pr2 f) (inv (pr2 g))) ∙
           ( ap
             ( concat'
-              ( function-pointed-Π A B g (point-Pointed-Type A))
+              ( function-pointed-Π g (point-Pointed-Type A))
               ( inv (pr2 f)))
             ( inv-inv (pr2 g)))))
 
 module _
-  {l1 l2 l3 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
-  (C : Pointed-Type l3)
+  {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
   where
 
   left-whisker-htpy-pointed-map :
-    (g : B →∗ C) (f1 f2 : A →∗ B) (H : htpy-pointed-map A B f1 f2) →
-    htpy-pointed-map A C
-      ( comp-pointed-map A B C g f1)
-      ( comp-pointed-map A B C g f2)
+    (g : B →∗ C) (f1 f2 : A →∗ B) (H : htpy-pointed-map f1 f2) →
+    htpy-pointed-map
+      ( comp-pointed-map g f1)
+      ( comp-pointed-map g f2)
   left-whisker-htpy-pointed-map g f1 f2 H =
     pair
-      ( map-pointed-map B C g ·l (pr1 H))
+      ( map-pointed-map g ·l (pr1 H))
       ( ( ( ( ap (ap (pr1 g)) (pr2 H)) ∙
             ( ap-concat (pr1 g) (pr2 f1) (inv (pr2 f2)))) ∙
           ( ap
             ( concat
               ( ap (pr1 g) (pr2 f1))
-              ( map-pointed-map B C g
-                ( map-pointed-map A B f2 (point-Pointed-Type A))))
+              ( map-pointed-map g
+                ( map-pointed-map f2 (point-Pointed-Type A))))
             ( ( ( ( ap-inv (pr1 g) (pr2 f2)) ∙
                   ( ap
                     ( concat'
@@ -226,8 +234,8 @@ module _
               ( ap
                 ( concat
                   ( pr2 g)
-                  ( map-pointed-map B C g
-                    ( map-pointed-map A B f2 (point-Pointed-Type A))))
+                  ( map-pointed-map g
+                    ( map-pointed-map f2 (point-Pointed-Type A))))
                 ( inv
                   ( distributive-inv-concat
                     ( ap (pr1 g) (pr2 f2))
@@ -240,24 +248,21 @@ module _
 
 module _
   {l1 l2 l3 : Level}
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3}
   where
 
   right-whisker-htpy-pointed-map :
-    (A : Pointed-Type l1) (B : Pointed-Type l2) (C : Pointed-Type l3)
-    (g1 g2 : B →∗ C) (H : htpy-pointed-map B C g1 g2) (f : A →∗ B) →
-    htpy-pointed-map A C
-      ( comp-pointed-map A B C g1 f)
-      ( comp-pointed-map A B C g2 f)
-  right-whisker-htpy-pointed-map (pair A a) (pair B .(f a)) (pair C c)
-    g1 g2 H (pair f refl) =
+    (g1 g2 : B →∗ C) (H : htpy-pointed-map g1 g2) (f : A →∗ B) →
+    htpy-pointed-map (comp-pointed-map g1 f) (comp-pointed-map g2 f)
+  right-whisker-htpy-pointed-map g1 g2 H (pair f refl) =
     pair (pr1 H ·r f) (pr2 H)
 
 module _
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2)
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   where
 
   concat-htpy-pointed-map :
-    (f g h : A →∗ B) → htpy-pointed-map A B f g → htpy-pointed-map A B g h →
-    htpy-pointed-map A B f h
-  concat-htpy-pointed-map = concat-htpy-pointed-Π A (constant-Pointed-Fam A B)
+    (f g h : A →∗ B) → htpy-pointed-map f g → htpy-pointed-map g h →
+    htpy-pointed-map f h
+  concat-htpy-pointed-map = concat-htpy-pointed-Π
 ```
