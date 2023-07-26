@@ -134,6 +134,19 @@ hom-descent-data-circle P Q =
         ( h))
 ```
 
+### Canonical descent data for a family over the circle
+
+A type family over the circle gives rise to its canonical descent data, obtained
+by evaluation at `base` and transporting along `loop`.
+
+```agda
+ev-descent-data-circle :
+  { l1 l2 : Level } {X : UU l1} (l : free-loop X) →
+  (X → UU l2) → descent-data-circle l2
+pr1 (ev-descent-data-circle l P) = P (base-free-loop l)
+pr2 (ev-descent-data-circle l P) = equiv-tr P (loop-free-loop l)
+```
+
 ## Properties
 
 ### Characterization of the identity type of descent data for the circle
@@ -207,27 +220,23 @@ module _
   { l1 l2 : Level} {X : UU l1} (l : free-loop X)
   where
 
-  ev-descent-data-circle : (X → UU l2) → descent-data-circle l2
-  pr1 (ev-descent-data-circle P) = P (base-free-loop l)
-  pr2 (ev-descent-data-circle P) = equiv-tr P (loop-free-loop l)
-
   triangle-comparison-descent-data-circle :
     coherence-triangle-maps
-      ( ev-descent-data-circle)
+      ( ev-descent-data-circle l)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))
   triangle-comparison-descent-data-circle P =
     eq-Eq-descent-data-circle
-      ( ev-descent-data-circle P)
+      ( ev-descent-data-circle l P)
       ( comparison-descent-data-circle l2 (ev-free-loop l (UU l2) P))
       ( id-equiv , (htpy-eq (inv (compute-equiv-eq-ap (loop-free-loop l)))))
 
   is-equiv-ev-descent-data-circle-universal-property-circle :
     ( up-circle : universal-property-circle (lsuc l2) l) →
-    is-equiv ev-descent-data-circle
+    is-equiv (ev-descent-data-circle l)
   is-equiv-ev-descent-data-circle-universal-property-circle up-circle =
     is-equiv-comp-htpy
-      ( ev-descent-data-circle)
+      ( ev-descent-data-circle l)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))
       ( triangle-comparison-descent-data-circle)
