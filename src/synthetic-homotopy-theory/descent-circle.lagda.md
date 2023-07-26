@@ -46,6 +46,11 @@ The descent property uniquely characterizes type families over the circle.
 
 ### Descent data for the circle
 
+By the universal property of the circle and univalence, a type family
+`A : 𝕊¹ → U` is equivalent to a type `X : U` equipped with an automorphism
+`e : X ≃ X`, in a way made precise in further sections of this file. The pair
+`(X, e)` is called descent data for the circle.
+
 ```agda
 descent-data-circle :
   ( l1 : Level) → UU (lsuc l1)
@@ -62,7 +67,43 @@ module _
   aut-descent-data-circle = pr2 P
 ```
 
+### Dependent descent data for the circle
+
+The equivalence extends to the dependent case, where given a type family `A`
+over the circle with descent data `(X, e)`, a type family
+`B : (t : 𝕊¹) → A t → U` is equivalent to a type family `R : X → U` equipped
+with a family of equivalences `K : (x : X) → R(x) ≃ R(e(x))`. The pair `(R, K)`
+is called dependent descent data for the circle. Intuitively, this states that
+the types over points of `X` belonging to the same connected component in the
+total space `Σ 𝕊¹ A` are equivalent.
+
+```agda
+dependent-descent-data-circle :
+  { l1 : Level} → descent-data-circle l1 →
+  ( l2 : Level) → UU (l1 ⊔ lsuc l2)
+dependent-descent-data-circle P l2 =
+  Σ ( type-descent-data-circle P → UU l2)
+    ( λ R → equiv-fam R (R ∘ (map-equiv (aut-descent-data-circle P))))
+
+module _
+  { l1 l2 : Level} (P : descent-data-circle l1)
+  ( Q : dependent-descent-data-circle P l2)
+  where
+
+  type-dependent-descent-data-circle : type-descent-data-circle P → UU l2
+  type-dependent-descent-data-circle = pr1 Q
+
+  equiv-dependent-descent-data-circle :
+    equiv-fam
+      type-dependent-descent-data-circle
+      ( type-dependent-descent-data-circle ∘
+        ( map-equiv (aut-descent-data-circle P)))
+  equiv-dependent-descent-data-circle = pr2 Q
+```
+
 ### Fixpoints of the descent data
+
+A fixpoint of `(X, e)` is a fixpoint of `e`.
 
 ```agda
 fixpoint-descent-data-circle :
@@ -74,6 +115,9 @@ fixpoint-descent-data-circle l P =
 ```
 
 ### Homomorphisms between descent data for the circle
+
+A homomorphism between `(X, e)` and `(Y, f)` is a map from `X` to `Y` such that
+the obvious square commutes.
 
 ```agda
 hom-descent-data-circle :
