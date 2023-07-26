@@ -107,9 +107,9 @@ A fixpoint of `(X, e)` is a fixpoint of `e`.
 
 ```agda
 fixpoint-descent-data-circle :
-  { l1 l2 : Level} {X : UU l1} (l : free-loop X)
-  ( P : descent-data-circle l2) → UU l2
-fixpoint-descent-data-circle l P =
+  { l1 : Level}
+  ( P : descent-data-circle l1) → UU l1
+fixpoint-descent-data-circle P =
   Σ ( type-descent-data-circle P)
     ( λ p → (map-equiv (aut-descent-data-circle P) p) ＝ p)
 ```
@@ -121,10 +121,10 @@ the obvious square commutes.
 
 ```agda
 hom-descent-data-circle :
-  { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
-  ( P : descent-data-circle l2) (Q : descent-data-circle l3) →
-  UU (l2 ⊔ l3)
-hom-descent-data-circle _ P Q =
+  { l1 l2 : Level}
+  ( P : descent-data-circle l1) (Q : descent-data-circle l2) →
+  UU (l1 ⊔ l2)
+hom-descent-data-circle P Q =
   Σ ( (type-descent-data-circle P) → (type-descent-data-circle Q))
     ( λ h →
       coherence-square-maps
@@ -336,7 +336,7 @@ module _
     α = pr1 αH
 
   ev-fixpoint-descent-data-circle :
-    ( (x : X) → Q x) → fixpoint-descent-data-circle l P
+    ( (x : X) → Q x) → fixpoint-descent-data-circle P
   pr1 (ev-fixpoint-descent-data-circle s) =
     map-inv-equiv
       ( α)
@@ -357,7 +357,7 @@ module _
           ( inv (is-section-map-inv-equiv α (s (base-free-loop l))))))
 
   equiv-fixpoint-descent-data-circle-free-dependent-loop :
-    fixpoint-descent-data-circle l P ≃ free-dependent-loop l Q
+    fixpoint-descent-data-circle P ≃ free-dependent-loop l Q
   equiv-fixpoint-descent-data-circle-free-dependent-loop =
     equiv-Σ
       ( λ x → dependent-identification Q (loop-free-loop l) x x)
@@ -366,7 +366,7 @@ module _
         compute-dependent-identification-loop-circle l Q P αH x x)
 
   comparison-fixpoint-descent-data-circle :
-    fixpoint-descent-data-circle l P → free-dependent-loop l Q
+    fixpoint-descent-data-circle P → free-dependent-loop l Q
   comparison-fixpoint-descent-data-circle =
     map-equiv equiv-fixpoint-descent-data-circle-free-dependent-loop
 
@@ -427,7 +427,7 @@ module _
 
   equiv-ev-fixpoint-descent-data-circle :
     ( dependent-universal-property-circle l2 l) →
-    ( (x : X) → Q x) ≃ (fixpoint-descent-data-circle l P)
+    ( (x : X) → Q x) ≃ (fixpoint-descent-data-circle P)
   pr1 (equiv-ev-fixpoint-descent-data-circle dup-circle) =
     ev-fixpoint-descent-data-circle
   pr2 (equiv-ev-fixpoint-descent-data-circle dup-circle) =
@@ -500,8 +500,8 @@ module _
         ( map-equiv (pr1 eq-descent-data-circle-function-type) h)))
 
   equiv-fixpoint-descent-data-circle-function-type-hom :
-    fixpoint-descent-data-circle l descent-data-circle-function-type ≃
-    hom-descent-data-circle l P Q
+    fixpoint-descent-data-circle descent-data-circle-function-type ≃
+    hom-descent-data-circle P Q
   equiv-fixpoint-descent-data-circle-function-type-hom =
     equiv-tot
       (λ h →
@@ -512,7 +512,7 @@ module _
 
   equiv-ev-descent-data-circle-function-type-hom :
     dependent-universal-property-circle (l2 ⊔ l3) l →
-    ((s : X) → A s → B s) ≃ (hom-descent-data-circle l P Q)
+    ((s : X) → A s → B s) ≃ (hom-descent-data-circle P Q)
   equiv-ev-descent-data-circle-function-type-hom dup-circle =
     equiv-fixpoint-descent-data-circle-function-type-hom ∘e
     ( equiv-ev-fixpoint-descent-data-circle
