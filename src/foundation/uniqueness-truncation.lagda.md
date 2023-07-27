@@ -52,7 +52,7 @@ module _
             { id}
             ( ( precomp-comp-Set-Quotient R C g B k C h) ∙
               ( ( ap (λ t → precomp-Set-Quotient R B t C h) α) ∙
-                ( ( eq-htpy-reflecting-map-Eq-Rel R C
+                ( ( eq-htpy-reflecting-map-Equivalence-Relation R C
                     ( precomp-Set-Quotient R B f C h) g H) ∙
                   ( inv (precomp-id-Set-Quotient R C g)))))))
         ( htpy-eq
@@ -63,7 +63,7 @@ module _
             ( ( precomp-comp-Set-Quotient R B f C h B k) ∙
               ( ( ap
                   ( λ t → precomp-Set-Quotient R C t B k)
-                  ( eq-htpy-reflecting-map-Eq-Rel R C
+                  ( eq-htpy-reflecting-map-Equivalence-Relation R C
                     ( precomp-Set-Quotient R B f C h) g H)) ∙
                 ( ( α) ∙
                   ( inv (precomp-id-Set-Quotient R B f)))))))
@@ -71,13 +71,13 @@ module _
       K : is-contr
             ( Σ ( type-hom-Set C B)
                 ( λ h →
-                  ( h ∘ map-reflecting-map-Eq-Rel R g) ~
-                  ( map-reflecting-map-Eq-Rel R f)))
+                  ( h ∘ map-reflecting-map-Equivalence-Relation R g) ~
+                  ( map-reflecting-map-Equivalence-Relation R f)))
       K = universal-property-set-quotient-is-set-quotient R C g Ug B f
       k : type-Set C → type-Set B
       k = pr1 (center K)
       α : Id (precomp-Set-Quotient R C g B k) f
-      α = eq-htpy-reflecting-map-Eq-Rel R B
+      α = eq-htpy-reflecting-map-Equivalence-Relation R B
             ( precomp-Set-Quotient R C g B k)
             ( f)
             ( pr2 (center K))
@@ -101,7 +101,7 @@ module _
       is-equiv h
     is-equiv-is-set-truncation-is-set-truncation Sf Sg =
       is-equiv-is-set-quotient-is-set-quotient
-        ( mere-eq-Eq-Rel A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( C)
@@ -117,7 +117,7 @@ module _
     is-set-truncation-is-equiv-is-set-truncation Sg Eh =
       is-set-truncation-is-set-quotient B f
         ( is-set-quotient-is-equiv-is-set-quotient
-          ( mere-eq-Eq-Rel A)
+          ( mere-eq-Equivalence-Relation A)
           ( B)
           ( reflecting-map-mere-eq B f)
           ( C)
@@ -133,7 +133,7 @@ module _
     is-set-truncation-is-set-truncation-is-equiv Eh Sf =
       is-set-truncation-is-set-quotient C g
         ( is-set-quotient-is-set-quotient-is-equiv
-          ( mere-eq-Eq-Rel A)
+          ( mere-eq-Equivalence-Relation A)
           ( B)
           ( reflecting-map-mere-eq B f)
           ( C)
@@ -154,7 +154,7 @@ module _
       is-contr (Σ (type-Set B ≃ type-Set C) (λ e → (map-equiv e ∘ f) ~ g))
     uniqueness-set-truncation =
       uniqueness-set-quotient
-        ( mere-eq-Eq-Rel A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( is-set-quotient-is-set-truncation B f Sf)

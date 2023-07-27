@@ -47,7 +47,7 @@ module _
   where
 
   rel-prop-kernel-hom-Algebra :
-    Rel-Prop l4 (type-Algebra Sg Th Alg1)
+    Relation-Prop l4 (type-Algebra Sg Th Alg1)
   pr1 (rel-prop-kernel-hom-Algebra x y) =
     map-hom-Algebra Sg Th Alg1 Alg2 F x ＝
       map-hom-Algebra Sg Th Alg1 Alg2 F y
@@ -55,12 +55,12 @@ module _
     is-set-Algebra Sg Th Alg2 _ _
 
   eq-rel-kernel-hom-Algebra :
-    Eq-Rel l4 (type-Algebra Sg Th Alg1)
+    Equivalence-Relation l4 (type-Algebra Sg Th Alg1)
   pr1 eq-rel-kernel-hom-Algebra =
     rel-prop-kernel-hom-Algebra
-  pr1 (pr2 eq-rel-kernel-hom-Algebra) = refl
-  pr1 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) = inv
-  pr2 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) = _∙_
+  pr1 (pr2 eq-rel-kernel-hom-Algebra) _ = refl
+  pr1 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) _ _ = inv
+  pr2 (pr2 (pr2 eq-rel-kernel-hom-Algebra)) _ _ _ f g = g ∙ f
 
   kernel-hom-Algebra :
     congruence-Algebra Sg Th Alg1 l4

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/generate_namespace_index_modules.py
+# $ ./scripts/generate_namespace_index_modules.py
+
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import os
 import pathlib

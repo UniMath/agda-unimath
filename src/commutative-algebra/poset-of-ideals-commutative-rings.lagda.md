@@ -21,7 +21,7 @@ open import order-theory.similarity-of-elements-large-posets
 open import ring-theory.poset-of-ideals-rings
 ```
 
-<details>
+</details>
 
 ## Idea
 
@@ -71,7 +71,8 @@ module _
     (I : ideal-Commutative-Ring l2 A)
     (J : ideal-Commutative-Ring l3 A)
     (K : ideal-Commutative-Ring l4 A) →
-    leq-ideal-Commutative-Ring J K → leq-ideal-Commutative-Ring I J →
+    leq-ideal-Commutative-Ring J K →
+    leq-ideal-Commutative-Ring I J →
     leq-ideal-Commutative-Ring I K
   transitive-leq-ideal-Commutative-Ring =
     transitive-leq-ideal-Ring (ring-Commutative-Ring A)

@@ -9,6 +9,7 @@ module order-theory.finite-preorders where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.decidable-equality
 open import foundation.decidable-propositions
@@ -156,9 +157,7 @@ module _
     (x : type-Preorder-𝔽) → leq-Preorder-𝔽 x x
   refl-leq-Preorder-𝔽 = pr1 (pr2 (pr2 P))
 
-  transitive-leq-Preorder-𝔽 :
-    (x y z : type-Preorder-𝔽) →
-    leq-Preorder-𝔽 y z → leq-Preorder-𝔽 x y → leq-Preorder-𝔽 x z
+  transitive-leq-Preorder-𝔽 : is-transitive leq-Preorder-𝔽
   transitive-leq-Preorder-𝔽 = pr2 (pr2 (pr2 P))
 
   preorder-Preorder-𝔽 : Preorder l1 l2
@@ -219,10 +218,7 @@ module _
   refl-leq-finite-Subpreorder =
     refl-leq-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 
-  transitive-leq-finite-Subpreorder :
-    (x y z : type-finite-Subpreorder) →
-    leq-finite-Subpreorder y z → leq-finite-Subpreorder x y →
-    leq-finite-Subpreorder x z
+  transitive-leq-finite-Subpreorder : is-transitive leq-finite-Subpreorder
   transitive-leq-finite-Subpreorder =
     transitive-leq-Decidable-Subpreorder (preorder-Preorder-𝔽 P) S
 

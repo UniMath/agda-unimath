@@ -113,14 +113,14 @@ abstract
     is-coherently-invertible f →
     (C : B → UU l3) → is-equiv (precomp-Π f C)
   is-equiv-precomp-Π-is-coherently-invertible f
-    ( pair g (pair issec-g (pair isretr-g coh))) C =
+    ( pair g (pair is-section-g (pair is-retraction-g coh))) C =
     is-equiv-has-inverse
-      (λ s y → tr C (issec-g y) (s (g y)))
+      (λ s y → tr C (is-section-g y) (s (g y)))
       ( λ s → eq-htpy (λ x →
         ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙
-        ( ( tr-precompose-fam C f (isretr-g x) (s (g (f x)))) ∙
-          ( apd s (isretr-g x)))))
-      ( λ s → eq-htpy λ y → apd s (issec-g y))
+        ( ( tr-precompose-fam C f (is-retraction-g x) (s (g (f x)))) ∙
+          ( apd s (is-retraction-g x)))))
+      ( λ s → eq-htpy λ y → apd s (is-section-g y))
 ```
 
 ### If `f` is an equivalence, then precomposing by `f` is an equivalence
@@ -144,17 +144,17 @@ module _
   map-inv-is-equiv-precomp-Π-is-equiv =
     map-inv-is-equiv is-equiv-precomp-Π-is-equiv
 
-  issec-map-inv-is-equiv-precomp-Π-is-equiv :
+  is-section-map-inv-is-equiv-precomp-Π-is-equiv :
     (h : (a : A) → C (f a)) →
     (precomp-Π f C (map-inv-is-equiv-precomp-Π-is-equiv h)) ~ h
-  issec-map-inv-is-equiv-precomp-Π-is-equiv h =
-    htpy-eq (issec-map-inv-is-equiv is-equiv-precomp-Π-is-equiv h)
+  is-section-map-inv-is-equiv-precomp-Π-is-equiv h =
+    htpy-eq (is-section-map-inv-is-equiv is-equiv-precomp-Π-is-equiv h)
 
-  isretr-map-inv-is-equiv-precomp-Π-is-equiv :
+  is-retraction-map-inv-is-equiv-precomp-Π-is-equiv :
     (g : (b : B) → C b) →
     (map-inv-is-equiv-precomp-Π-is-equiv (precomp-Π f C g)) ~ g
-  isretr-map-inv-is-equiv-precomp-Π-is-equiv g =
-    htpy-eq (isretr-map-inv-is-equiv is-equiv-precomp-Π-is-equiv g)
+  is-retraction-map-inv-is-equiv-precomp-Π-is-equiv g =
+    htpy-eq (is-retraction-map-inv-is-equiv is-equiv-precomp-Π-is-equiv g)
 
 equiv-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →

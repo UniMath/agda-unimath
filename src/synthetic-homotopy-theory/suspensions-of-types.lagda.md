@@ -243,7 +243,9 @@ module _
       ( λ c' H → (ap (pr1) (eq-htpy-suspension-structure H)) ＝ (pr1 H))
       ( (ap
         ( ap pr1)
-        ( isretr-map-inv-equiv (extensionality-suspension-structure c c) refl)))
+        ( is-retraction-map-inv-equiv
+          ( extensionality-suspension-structure c c)
+          ( refl))))
 
   ap-pr1∘pr2-eq-htpy-suspension-structure :
     (c' : suspension-structure X Z) (H : htpy-suspension-structure c c') →
@@ -254,7 +256,9 @@ module _
         ap (pr1 ∘ pr2) (eq-htpy-suspension-structure H) ＝ (pr1 ∘ pr2) H)
       ( ap
         ( ap (pr1 ∘ pr2))
-        ( isretr-map-inv-equiv (extensionality-suspension-structure c c) refl))
+        ( is-retraction-map-inv-equiv
+          ( extensionality-suspension-structure c c)
+          ( refl)))
 ```
 
 ### The universal property of the suspension as a pushout
@@ -362,29 +366,33 @@ module _
   map-inv-up-suspension Z =
     map-inv-equiv (equiv-up-suspension Z)
 
-  issec-map-inv-up-suspension :
+  is-section-map-inv-up-suspension :
     {l : Level} (Z : UU l) →
     ( ( ev-suspension ((suspension-structure-suspension X)) Z) ∘
       ( map-inv-up-suspension Z)) ~ id
-  issec-map-inv-up-suspension Z = issec-map-inv-is-equiv (up-suspension Z)
+  is-section-map-inv-up-suspension Z =
+    is-section-map-inv-is-equiv (up-suspension Z)
 
-  isretr-map-inv-up-suspension :
+  is-retraction-map-inv-up-suspension :
     {l : Level} (Z : UU l) →
     ( ( map-inv-up-suspension Z) ∘
       ( ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
-  isretr-map-inv-up-suspension Z = isretr-map-inv-is-equiv (up-suspension Z)
+  is-retraction-map-inv-up-suspension Z =
+    is-retraction-map-inv-is-equiv (up-suspension Z)
 
   up-suspension-N-susp :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (map-inv-up-suspension Z c N-susp) ＝ pr1 c
   up-suspension-N-susp Z c =
-    pr1 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c))
+    pr1 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c))
 
   up-suspension-S-susp :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
     (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
   up-suspension-S-susp Z c =
-    pr1 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
+    pr1
+      ( pr2
+        ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
 
   up-suspension-merid-susp :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
@@ -392,7 +400,9 @@ module _
       ( up-suspension-S-susp Z c)) ＝
     ( ( up-suspension-N-susp Z c) ∙ ( pr2 (pr2 c)) x)
   up-suspension-merid-susp Z c =
-    pr2 (pr2 (htpy-eq-suspension-structure ((issec-map-inv-up-suspension Z) c)))
+    pr2
+      ( pr2
+        ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
 
   ev-suspension-up-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
@@ -424,20 +434,20 @@ module _
   shift : (type-Ω (suspension-Pointed-Type X)) → (N-susp ＝ S-susp)
   shift l = l ∙ (merid-susp (point-Pointed-Type X))
 
-  shift* :
+  shift∗ :
     Ω (suspension-Pointed-Type X) →∗
     ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
-  pr1 shift* = shift
-  pr2 shift* = refl
+  pr1 shift∗ = shift
+  pr2 shift∗ = refl
 
   unshift : (N-susp ＝ S-susp) → (type-Ω (suspension-Pointed-Type X))
   unshift p = p ∙ inv (merid-susp (point-Pointed-Type X))
 
-  unshift* :
+  unshift∗ :
     ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X))) →∗
     Ω (suspension-Pointed-Type X)
-  pr1 unshift* = unshift
-  pr2 unshift* = right-inv (merid-susp (point-Pointed-Type X))
+  pr1 unshift∗ = unshift
+  pr2 unshift∗ = right-inv (merid-susp (point-Pointed-Type X))
 
   is-equiv-shift : is-equiv shift
   is-equiv-shift = is-equiv-concat' N-susp (merid-susp (point-Pointed-Type X))
@@ -447,17 +457,17 @@ module _
     ( (N-susp ＝ S-susp) , merid-susp (point-Pointed-Type X))
   pr1 (pr1 pointed-equiv-shift) = shift
   pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
-  pr2 pointed-equiv-shift = preserves-point-pointed-map _ _ shift*
+  pr2 pointed-equiv-shift = preserves-point-pointed-map shift∗
 
-  merid-susp* : X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
-  pr1 merid-susp* = merid-susp
-  pr2 merid-susp* = refl
+  merid-susp∗ : X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
+  pr1 merid-susp∗ = merid-susp
+  pr2 merid-susp∗ = refl
 
-  unit-susp-loop-adj* : X →∗ Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj* = comp-pointed-map _ _ _ unshift* merid-susp*
+  unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj∗ = unshift∗ ∘∗ merid-susp∗
 
   unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj = map-pointed-map _ _ unit-susp-loop-adj*
+  unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
 
   counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
   counit-susp-loop-adj =
@@ -467,9 +477,9 @@ module _
         ( point-Pointed-Type X) ,
         ( id))
 
-  counit-susp-loop-adj* : ((suspension (type-Ω X)) , N-susp) →∗ X
-  pr1 counit-susp-loop-adj* = counit-susp-loop-adj
-  pr2 counit-susp-loop-adj* =
+  counit-susp-loop-adj∗ : ((suspension (type-Ω X)) , N-susp) →∗ X
+  pr1 counit-susp-loop-adj∗ = counit-susp-loop-adj
+  pr2 counit-susp-loop-adj∗ =
     up-suspension-N-susp
       ( type-Ω X)
       ( type-Pointed-Type X)

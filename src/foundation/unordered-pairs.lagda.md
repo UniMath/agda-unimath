@@ -193,21 +193,21 @@ module _
     (p ＝ q)
   eq-Eq-unordered-pair p q e H = eq-Eq-unordered-pair' p q (pair e H)
 
-  isretr-eq-Eq-unordered-pair :
+  is-retraction-eq-Eq-unordered-pair :
     (p q : unordered-pair A) →
     (eq-Eq-unordered-pair' p q ∘ Eq-eq-unordered-pair p q) ~ id
-  isretr-eq-Eq-unordered-pair p q =
-    isretr-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
+  is-retraction-eq-Eq-unordered-pair p q =
+    is-retraction-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
-  issec-eq-Eq-unordered-pair :
+  is-section-eq-Eq-unordered-pair :
     (p q : unordered-pair A) →
     ( Eq-eq-unordered-pair p q ∘ eq-Eq-unordered-pair' p q) ~ id
-  issec-eq-Eq-unordered-pair p q =
-    issec-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
+  is-section-eq-Eq-unordered-pair p q =
+    is-section-map-inv-is-equiv (is-equiv-Eq-eq-unordered-pair p q)
 
   eq-Eq-refl-unordered-pair :
     (p : unordered-pair A) → eq-Eq-unordered-pair p p id-equiv refl-htpy ＝ refl
-  eq-Eq-refl-unordered-pair p = isretr-eq-Eq-unordered-pair p p refl
+  eq-Eq-refl-unordered-pair p = is-retraction-eq-Eq-unordered-pair p p refl
 ```
 
 ### Mere equality of unordered pairs
@@ -282,7 +282,7 @@ preserves-refl-htpy-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   htpy-unordered-pair (refl-htpy {f = f}) ~ refl-htpy
 preserves-refl-htpy-unordered-pair f p =
-  isretr-eq-Eq-unordered-pair
+  is-retraction-eq-Eq-unordered-pair
     ( map-unordered-pair f p)
     ( map-unordered-pair f p)
     ( refl)

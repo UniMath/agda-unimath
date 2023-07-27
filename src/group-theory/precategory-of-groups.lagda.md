@@ -21,7 +21,7 @@ open import group-theory.homomorphisms-groups
 
 ```agda
 instance
-  Group-Large-Precategory : Large-Precategory lsuc (λ l1 l2 → l1 ⊔ l2)
+  Group-Large-Precategory : Large-Precategory lsuc (_⊔_)
   obj-Large-Precategory Group-Large-Precategory = Group
   hom-Large-Precategory Group-Large-Precategory = hom-Group
   comp-hom-Large-Precategory Group-Large-Precategory {X = G} {H} {K} =

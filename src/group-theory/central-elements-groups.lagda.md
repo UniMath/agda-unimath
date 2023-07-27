@@ -102,7 +102,7 @@ module _
     conjugation-Group G y x ＝ x
   is-fixed-point-conjugation-is-central-element-Group x y H =
     ( ap (mul-Group' G (inv-Group G y)) (inv (H y))) ∙
-    ( isretr-mul-inv-Group' G y x)
+    ( is-retraction-mul-inv-Group' G y x)
 
   is-central-element-conjugation-Group :
     (x y : type-Group G) → is-central-element-Group G x →

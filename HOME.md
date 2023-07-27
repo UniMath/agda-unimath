@@ -1,58 +1,39 @@
-# Univalent mathematics in Agda
+# The agda-unimath library
 
-[![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
-[![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
-
-Welcome to the website of the `agda-unimath` formalization project!
+Welcome to the `agda-unimath` project. This is a community-driven effort aimed
+at formalizing mathematics from a univalent point of view using the dependently
+typed programming language [Agda](https://github.com/agda/agda).
 
 <a href="https://github.com/unimath/agda-unimath">
-<img align="right" width="300" alt="Agda-UniMath" src="agda-unimath-logo.svg" />
+<img align="right" width="300" alt="agda-unimath" src="agda-unimath-logo.svg" />
 </a>
 
-The `agda-unimath` library is a community formalisation project for univalent
-mathematics in [Agda](https://github.com/agda/agda). The library project was
-created by Elisabeth Bonnevier, Jonathan Prieto-Cubides, and Egbert Rijke, and
-is currently also being maintained by Fredrik Bakke. Our goal is to formalize an
-extensive curriculum of mathematics from the univalent point of view.
-Furthermore, we think libraries of formalized mathematics have the potential to
-be useful, and informative resources for mathematicians. Our library is designed
+The library project was created by Elisabeth Bonnevier, Jonathan Prieto-Cubides,
+and Egbert Rijke, and is also maintained by Fredrik Bakke. Our goal is to create
+an online encyclopedia of formalized mathematics containing an extensive
+curriculum of topics from a univalent point of view. We think libraries of
+formalized mathematics have the potential to be useful, and informative
+resources for both working and learning mathematicians. Our library is designed
 to work towards this goal, and we welcome contributions to the library within
 any topic in mathematics.
 
-The library is built in Agda 2.6.3. It can be compiled by running `make check`
-from the main folder of the repository.
+The `agda-unimath` library is compatible with Agda 2.6.3 and can be compiled by
+running `make check` from the root directory of the repository. Learn more about
+using the library locally in our [installation guide](HOWTO-INSTALL.md).
 
-See the list of all Agda modules in the library [here](everything.html).
+## Participating in the Project
 
-## Joining the project
+If you are interested in contributing to the `agda-unimath` project, we
+encourage you to join the conversation in our
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX). This is a
+discussion platform shared between the 1Lab, `agda-unimath`, Cubical Agda, and
+TypeTopology communities, where we are more than happy to get you started.
 
-Great, you want to contribute something! The best way to start is to find us in
-our chat channels on the
-[Univalent Agda discord](https://discord.gg/Zp2e8hYsuX), which is a discord
-servers shared between the 1Lab, cubical Agda, and agda-unimath. We have a
-vibing community there, and you're more than welcome to join us just to hang
-out.
-
-Once you've decided what you want to contribute, the best way to proceed is to
-make your own fork of the library. Within your fork, make a separate branch in
-which you will be making your contributions. And after following our
-[installation guide](HOWTO-INSTALL.md), you're ready to start your project! When
-you've completed your formalization you can proceed by making a pull request.
-Then we will review your contributions, and merge it when it is ready for the
-`agda-unimath` library.
-
-## Citing the Agda-UniMath library
-
-You can cite this library with the following BibTeX entry:
-
-```text
-@software{agda-unimath,
-  author = {Rijke, Egbert and Bonnevier, Elisabeth and Prieto-Cubides, Jonathan and Bakke, Fredrik and {others}},
-  license = {MIT},
-  title = {{Univalent mathematics in Agda}},
-  url = {https://github.com/UniMath/agda-unimath/}
-}
-```
+To contribute, fork the library and create a separate branch for your work.
+Follow the instructions in our [installation guide](HOWTO-INSTALL.md) to set up
+the project. After you have completed your formalization, submit it via a pull
+request. We will review your contribution and work towards incorporating it into
+the `agda-unimath` library.
 
 {{#include SUMMARY.md}}
 

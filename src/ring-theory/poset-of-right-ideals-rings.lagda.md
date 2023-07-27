@@ -7,6 +7,7 @@ module ring-theory.poset-of-right-ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -65,7 +66,7 @@ module _
       ( subset-right-ideal-Ring R J)
 
   refl-leq-right-ideal-Ring :
-    {l2 : Level} (I : right-ideal-Ring l2 R) → leq-right-ideal-Ring I I
+    {l2 : Level} → is-reflexive (leq-right-ideal-Ring {l2})
   refl-leq-right-ideal-Ring I =
     refl-leq-subtype (subset-right-ideal-Ring R I)
 
@@ -84,8 +85,7 @@ module _
       ( subset-right-ideal-Ring R K)
 
   antisymmetric-leq-right-ideal-Ring :
-    {l2 : Level} (I J : right-ideal-Ring l2 R) →
-    leq-right-ideal-Ring I J → leq-right-ideal-Ring J I → I ＝ J
+    {l2 : Level} → is-antisymmetric (leq-right-ideal-Ring {l2})
   antisymmetric-leq-right-ideal-Ring I J U V =
     eq-has-same-elements-right-ideal-Ring R I J (λ x → U x , V x)
 ```

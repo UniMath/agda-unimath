@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
 open import foundation.transport
@@ -210,16 +211,17 @@ module _
     is-in-subuniverse-equiv P (equiv-is-contr is-contr-raise-unit H) C3
   pr2 (map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse H) = H
 
-  issec-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
+  is-section-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
     ( map-equiv-Σ-extension-cauchy-composition-unit-subuniverse ∘
       map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse) ~ id
-  issec-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse =
+  is-section-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse =
     refl-htpy
 
-  isretr-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
+  is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
     ( map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse ∘
       map-equiv-Σ-extension-cauchy-composition-unit-subuniverse) ~ id
-  isretr-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse x =
+  is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
+    x =
     eq-pair
       ( eq-is-prop (is-prop-type-Prop (P X)))
       ( eq-is-prop is-property-is-contr)
@@ -229,8 +231,8 @@ module _
   is-equiv-map-equiv-Σ-extension-cauchy-composition-unit-subuniverse =
     is-equiv-has-inverse
       map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
-      issec-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
-      isretr-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
+      is-section-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
+      is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
 
   equiv-Σ-extension-cauchy-composition-unit-subuniverse :
     Σ-extension-species-subuniverse

@@ -7,6 +7,7 @@ module order-theory.subposets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -50,16 +51,13 @@ module _
     (x y : type-Subposet) → is-prop (leq-Subposet x y)
   is-prop-leq-Subposet = is-prop-leq-Subpreorder (preorder-Poset X) S
 
-  refl-leq-Subposet : (x : type-Subposet) → leq-Subposet x x
+  refl-leq-Subposet : is-reflexive leq-Subposet
   refl-leq-Subposet = refl-leq-Subpreorder (preorder-Poset X) S
 
-  transitive-leq-Subposet :
-    (x y z : type-Subposet) →
-    leq-Subposet y z → leq-Subposet x y → leq-Subposet x z
+  transitive-leq-Subposet : is-transitive leq-Subposet
   transitive-leq-Subposet = transitive-leq-Subpreorder (preorder-Poset X) S
 
-  antisymmetric-leq-Subposet :
-    (x y : type-Subposet) → leq-Subposet x y → leq-Subposet y x → Id x y
+  antisymmetric-leq-Subposet : is-antisymmetric leq-Subposet
   antisymmetric-leq-Subposet x y H K =
     eq-type-Subposet x y (antisymmetric-leq-Poset X (pr1 x) (pr1 y) H K)
 
@@ -106,7 +104,8 @@ module _
     {l3 l4 l5 : Level} (S : type-Poset X → Prop l3)
     (T : type-Poset X → Prop l4)
     (U : type-Poset X → Prop l5) →
-    inclusion-Subposet T U → inclusion-Subposet S T →
+    inclusion-Subposet T U →
+    inclusion-Subposet S T →
     inclusion-Subposet S U
   transitive-inclusion-Subposet =
     transitive-inclusion-Subpreorder (preorder-Poset X)

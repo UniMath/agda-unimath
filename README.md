@@ -1,9 +1,9 @@
-# Univalent mathematics in Agda
+# The agda-unimath library
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
-[![Agda-Unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
+[![agda-unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
 
-The `agda-unimath` library is a community formalisation project for univalent
+The `agda-unimath` library is a community formalization project for univalent
 mathematics in [Agda](https://github.com/agda/agda). The library project was
 created by Elisabeth Bonnevier, Jonathan Prieto-Cubides, and Egbert Rijke. Our
 goal is to formalize an extensive curriculum of mathematics from the univalent
@@ -14,6 +14,6 @@ the library about any topic in mathematics.
 
 ## Links
 
-1. [Agda-Unimath webpage](https://unimath.github.io/agda-unimath/)
+1. [agda-unimath webpage](https://unimath.github.io/agda-unimath/)
 2. [Discord](https://discord.gg/Zp2e8hYsuX)
 3. [Twitch](https://www.twitch.tv/agdaunimath)

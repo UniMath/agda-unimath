@@ -7,11 +7,13 @@ module category-theory.isomorphisms-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -66,21 +68,21 @@ module _
     iso-Large-Precategory → type-hom-Large-Precategory C Y X
   hom-inv-iso-Large-Precategory f = pr1 (pr2 f)
 
-  is-sec-hom-inv-iso-Large-Precategory :
+  is-section-hom-inv-iso-Large-Precategory :
     (f : iso-Large-Precategory) →
     ( comp-hom-Large-Precategory C
       ( hom-iso-Large-Precategory f)
       ( hom-inv-iso-Large-Precategory f)) ＝
     ( id-hom-Large-Precategory C)
-  is-sec-hom-inv-iso-Large-Precategory f = pr1 (pr2 (pr2 f))
+  is-section-hom-inv-iso-Large-Precategory f = pr1 (pr2 (pr2 f))
 
-  is-retr-hom-inv-iso-Large-Precategory :
+  is-retraction-hom-inv-iso-Large-Precategory :
     (f : iso-Large-Precategory) →
     ( comp-hom-Large-Precategory C
       ( hom-inv-iso-Large-Precategory f)
       ( hom-iso-Large-Precategory f)) ＝
     ( id-hom-Large-Precategory C)
-  is-retr-hom-inv-iso-Large-Precategory f = pr2 (pr2 (pr2 f))
+  is-retraction-hom-inv-iso-Large-Precategory f = pr2 (pr2 (pr2 f))
 ```
 
 ## Examples
@@ -119,6 +121,14 @@ iso-eq-Large-Precategory :
   (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
   X ＝ Y → iso-Large-Precategory C X Y
 iso-eq-Large-Precategory C X .X refl = id-iso-Large-Precategory C
+
+compute-iso-eq-Large-Precategory :
+  {α : Level → Level} {β : Level → Level → Level} →
+  (C : Large-Precategory α β) {l1 : Level}
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
+  iso-eq-Precategory (precategory-Large-Precategory C l1) X Y ~
+  iso-eq-Large-Precategory C X Y
+compute-iso-eq-Large-Precategory C X .X refl = refl
 ```
 
 ## Properties
@@ -226,10 +236,10 @@ module _
             ( λ h →
               comp-hom-Large-Precategory C h
                 (hom-inv-iso-Large-Precategory C Y Z (pair g q)))
-            ( is-sec-hom-inv-iso-Large-Precategory C X Y (pair f p))) ∙
+            ( is-section-hom-inv-iso-Large-Precategory C X Y (pair f p))) ∙
             ( left-unit-law-comp-hom-Large-Precategory C
               ( hom-inv-iso-Large-Precategory C Y Z (pair g q)))))) ∙
-        ( is-sec-hom-inv-iso-Large-Precategory C Y Z (pair g q)))
+        ( is-section-hom-inv-iso-Large-Precategory C Y Z (pair g q)))
   pr2 (pr2 (is-iso-comp-iso-Large-Precategory g f q p)) =
     ( associative-comp-hom-Large-Precategory C
       ( hom-inv-iso-Large-Precategory C X Y (pair f p))
@@ -246,9 +256,9 @@ module _
             ( f))) ∙
           ( ( ap
             ( λ h → comp-hom-Large-Precategory C h f)
-            ( is-retr-hom-inv-iso-Large-Precategory C Y Z (pair g q))) ∙
+            ( is-retraction-hom-inv-iso-Large-Precategory C Y Z (pair g q))) ∙
             ( left-unit-law-comp-hom-Large-Precategory C f)))) ∙
-        ( is-retr-hom-inv-iso-Large-Precategory C X Y (pair f p)))
+        ( is-retraction-hom-inv-iso-Large-Precategory C X Y (pair f p)))
 
   comp-iso-Large-Precategory :
     iso-Large-Precategory C Y Z →
@@ -281,9 +291,9 @@ module _
     is-iso-Large-Precategory C (hom-inv-iso-Large-Precategory C X Y (pair f p))
   pr1 (is-iso-inv-iso-Large-Precategory f p) = f
   pr1 (pr2 (is-iso-inv-iso-Large-Precategory f p)) =
-    is-retr-hom-inv-iso-Large-Precategory C X Y (pair f p)
+    is-retraction-hom-inv-iso-Large-Precategory C X Y (pair f p)
   pr2 (pr2 (is-iso-inv-iso-Large-Precategory f p)) =
-    is-sec-hom-inv-iso-Large-Precategory C X Y (pair f p)
+    is-section-hom-inv-iso-Large-Precategory C X Y (pair f p)
 
   inv-iso-Large-Precategory :
     iso-Large-Precategory C X Y →

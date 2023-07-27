@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # Run this script:
-# python3 scripts/spaces_conventions_simple.py fileName.lagda.md
-# Some simply enforcable space conventions
+# $ ./scripts/spaces_conventions_simple.py fileName.lagda.md
+
+# Some simple to enforce space conventions
+# * Remember to update the script's entry in `CONTRIBUTING.md` on expansion
 
 import sys
 import utils
@@ -9,15 +11,15 @@ import re
 
 
 def no_repeat_whitespace_inside_line(line):
-    return re.sub(r'(?<=\S)\s{2,}', ' ', line)
+    return re.sub(r'(?<=\S)(?<!{!)\s{2,}(?=\S)(?!!})', ' ', line)
 
 
-def space_before_semicolon(line):
-    return re.sub(r'(?<=\S);', ' ;', line)
+def space_after_special_symbols(line):
+    return re.sub(r'([;)}])(?![@"\')}])(\S)', r'\1 \2', line)
 
 
-def space_after_semicolon(line):
-    return re.sub(r';(?=\S)', '; ', line)
+def space_before_special_symbols(line):
+    return re.sub(r'(?![.@"\'{(])(\S)([;{(])', r'\1 \2', line)
 
 
 def no_whitespace_before_closing_parenthesis(line):
@@ -54,8 +56,8 @@ if __name__ == '__main__':
                 if block_comment_level == 0:
                     line = no_repeat_whitespace_inside_line(
                         line)
-                    line = space_before_semicolon(line)
-                    line = space_after_semicolon(line)
+                    line = space_after_special_symbols(line)
+                    line = space_before_special_symbols(line)
                     line = no_whitespace_before_closing_parenthesis(line)
                     line = no_whitespace_before_closing_curly_brace(line)
                     # line = space_after_opening_parenthesis_on_new_line(line)

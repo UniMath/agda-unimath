@@ -7,7 +7,9 @@ module order-theory.large-frames where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -86,18 +88,14 @@ module _
   is-set-type-Large-Frame =
     is-set-type-Large-Poset (large-poset-Large-Frame L)
 
-  leq-Large-Frame-Prop :
-    {l1 l2 : Level} →
-    type-Large-Frame l1 → type-Large-Frame l2 → Prop (β l1 l2)
+  leq-Large-Frame-Prop : Large-Relation-Prop α β type-Large-Frame
   leq-Large-Frame-Prop = leq-Large-Poset-Prop (large-poset-Large-Frame L)
 
-  leq-Large-Frame :
-    {l1 l2 : Level} → type-Large-Frame l1 → type-Large-Frame l2 → UU (β l1 l2)
+  leq-Large-Frame : Large-Relation α β type-Large-Frame
   leq-Large-Frame = leq-Large-Poset (large-poset-Large-Frame L)
 
   is-prop-leq-Large-Frame :
-    {l1 l2 : Level} (x : type-Large-Frame l1) (y : type-Large-Frame l2) →
-    is-prop (leq-Large-Frame x y)
+    is-prop-Large-Relation type-Large-Frame leq-Large-Frame
   is-prop-leq-Large-Frame =
     is-prop-leq-Large-Poset (large-poset-Large-Frame L)
 
@@ -107,21 +105,16 @@ module _
   leq-eq-Large-Frame =
     leq-eq-Large-Poset (large-poset-Large-Frame L)
 
-  refl-leq-Large-Frame :
-    {l1 : Level} (x : type-Large-Frame l1) → leq-Large-Frame x x
+  refl-leq-Large-Frame : is-large-reflexive type-Large-Frame leq-Large-Frame
   refl-leq-Large-Frame = refl-leq-Large-Poset (large-poset-Large-Frame L)
 
   antisymmetric-leq-Large-Frame :
-    {l1 : Level} (x y : type-Large-Frame l1) →
-    leq-Large-Frame x y → leq-Large-Frame y x → x ＝ y
+    is-large-antisymmetric type-Large-Frame leq-Large-Frame
   antisymmetric-leq-Large-Frame =
     antisymmetric-leq-Large-Poset (large-poset-Large-Frame L)
 
   transitive-leq-Large-Frame :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Frame l1) (y : type-Large-Frame l2)
-    (z : type-Large-Frame l3) →
-    leq-Large-Frame y z → leq-Large-Frame x y → leq-Large-Frame x z
+    is-large-transitive type-Large-Frame leq-Large-Frame
   transitive-leq-Large-Frame =
     transitive-leq-Large-Poset (large-poset-Large-Frame L)
 

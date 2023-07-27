@@ -7,6 +7,7 @@ module order-theory.frames where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -220,15 +221,13 @@ module _
   is-prop-leq-Frame : (x y : type-Frame) → is-prop (leq-Frame x y)
   is-prop-leq-Frame = is-prop-leq-Poset poset-Frame
 
-  refl-leq-Frame : (x : type-Frame) → leq-Frame x x
+  refl-leq-Frame : is-reflexive leq-Frame
   refl-leq-Frame = refl-leq-Poset poset-Frame
 
-  antisymmetric-leq-Frame :
-    (x y : type-Frame) → leq-Frame x y → leq-Frame y x → x ＝ y
+  antisymmetric-leq-Frame : is-antisymmetric leq-Frame
   antisymmetric-leq-Frame = antisymmetric-leq-Poset poset-Frame
 
-  transitive-leq-Frame :
-    (x y z : type-Frame) → leq-Frame y z → leq-Frame x y → leq-Frame x z
+  transitive-leq-Frame : is-transitive leq-Frame
   transitive-leq-Frame = transitive-leq-Poset poset-Frame
 
   meet-Frame : type-Frame → type-Frame → type-Frame

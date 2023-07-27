@@ -111,10 +111,10 @@ module _
   inverse-of-perfect-image a ρ =
     pr1 (is-perfect-image-is-fib a ρ)
 
-  is-sec-inverse-of-perfect-image :
+  is-section-inverse-of-perfect-image :
     (a : A) (ρ : is-perfect-image f g a) →
     g (inverse-of-perfect-image a ρ) ＝ a
-  is-sec-inverse-of-perfect-image a ρ =
+  is-section-inverse-of-perfect-image a ρ =
     pr2 (is-perfect-image-is-fib a ρ)
 ```
 
@@ -124,13 +124,13 @@ module _
   {f : A → B} {g : B → A} {is-emb-g : is-emb g}
   where
 
-  is-retr-inverse-of-perfect-image :
+  is-retraction-inverse-of-perfect-image :
     (b : B) (ρ : is-perfect-image f g (g b)) →
     inverse-of-perfect-image (g b) ρ ＝ b
-  is-retr-inverse-of-perfect-image b ρ =
+  is-retraction-inverse-of-perfect-image b ρ =
     is-injective-is-emb
       is-emb-g
-      (is-sec-inverse-of-perfect-image (g b) ρ)
+      (is-section-inverse-of-perfect-image (g b) ρ)
 ```
 
 If `g (f (a))` is a perfect image for `g`, so is `a`.
@@ -158,10 +158,11 @@ module _
   perfect-image-has-distinct-image :
     (a a₀ : A) → ¬ (is-perfect-image f g a) → (ρ : is-perfect-image f g a₀) →
     ¬ (f a ＝ inverse-of-perfect-image a₀ ρ)
-  perfect-image-has-distinct-image a a₀ nρ ρ p = v ρ
+  perfect-image-has-distinct-image a a₀ nρ ρ p =
+    v ρ
     where
     q : g (f a) ＝ a₀
-    q = ap g p ∙ is-sec-inverse-of-perfect-image a₀ ρ
+    q = ap g p ∙ is-section-inverse-of-perfect-image a₀ ρ
 
     s : ¬ (is-perfect-image f g (g (f a)))
     s = λ η → nρ (previous-perfect-image a η)
@@ -230,7 +231,8 @@ module _
         Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
       ii (pair x₀ (pair zero-ℕ u)) =
         ex-falso (pr2 u (pair b (inv (pr1 u))))
-      ii (pair x₀ (pair (succ-ℕ n) u)) = pair a w
+      ii (pair x₀ (pair (succ-ℕ n) u)) =
+        pair a w
         where
         q : f ((iterate n (g ∘ f)) x₀) ＝ b
         q = is-injective-is-emb is-emb-g (pr1 u)

@@ -8,9 +8,11 @@ module order-theory.closure-operators-large-locales where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.sets
@@ -190,61 +192,50 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   leq-closed-element-closure-operator-Large-Locale-Prop :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2) → Prop (β l1 l2)
+    Large-Relation-Prop α β closed-element-closure-operator-Large-Locale
   leq-closed-element-closure-operator-Large-Locale-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   leq-closed-element-closure-operator-Large-Locale :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2) → UU (β l1 l2)
+    Large-Relation α β closed-element-closure-operator-Large-Locale
   leq-closed-element-closure-operator-Large-Locale =
     leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   is-prop-leq-closed-element-closure-operator-Large-Locale :
-    {l1 l2 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2) →
-    is-prop (leq-closed-element-closure-operator-Large-Locale x y)
+    is-prop-Large-Relation
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   is-prop-leq-closed-element-closure-operator-Large-Locale =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   refl-leq-closed-element-closure-operator-Large-Locale :
-    {l1 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1) →
-    leq-closed-element-closure-operator-Large-Locale x x
+    is-large-reflexive
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   refl-leq-closed-element-closure-operator-Large-Locale =
     refl-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   antisymmetric-leq-closed-element-closure-operator-Large-Locale :
-    {l1 : Level}
-    (x y : closed-element-closure-operator-Large-Locale l1) →
-    leq-closed-element-closure-operator-Large-Locale x y →
-    leq-closed-element-closure-operator-Large-Locale y x →
-    x ＝ y
+    is-large-antisymmetric
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   antisymmetric-leq-closed-element-closure-operator-Large-Locale =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
   transitive-leq-closed-element-closure-operator-Large-Locale :
-    {l1 l2 l3 : Level}
-    (x : closed-element-closure-operator-Large-Locale l1)
-    (y : closed-element-closure-operator-Large-Locale l2)
-    (z : closed-element-closure-operator-Large-Locale l3) →
-    leq-closed-element-closure-operator-Large-Locale y z →
-    leq-closed-element-closure-operator-Large-Locale x y →
-    leq-closed-element-closure-operator-Large-Locale x z
+    is-large-transitive
+      ( closed-element-closure-operator-Large-Locale)
+      ( leq-closed-element-closure-operator-Large-Locale)
   transitive-leq-closed-element-closure-operator-Large-Locale =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Locale L)

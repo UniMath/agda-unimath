@@ -37,7 +37,7 @@ g ∘ - |           | g ∘ -
 ```
 
 The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
-pullback of the cospan:
+[pullback](foundation.pullbacks.md) of the [cospan](foundation.cospans.md):
 
 ```text
       ∙ ------> A → X
@@ -48,8 +48,9 @@ pullback of the cospan:
           - ∘ f
 ```
 
-This pullback type can be canonically understood as the type of fibered maps
-from `f` to `g`, i.e. commuting squares where the vertical maps are `f` and `g`.
+This pullback type can be canonically understood as the type of
+[fibered maps](foundation.fibered-maps.md) from `f` to `g`, i.e. commuting
+squares where the vertical maps are `f` and `g`.
 
 ## Definition
 

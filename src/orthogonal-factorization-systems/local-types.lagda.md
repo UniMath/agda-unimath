@@ -32,15 +32,15 @@ open import foundation.universe-levels
 ## Idea
 
 A type family `A` over `X` is said to be **local at** `f : Y → X`, or
-**`f`-local**, if the precomposition map
+**`f`-local**, if the [precomposition map](foundation-core.function-types.md)
 
 ```text
   _∘ f : ((x : X) → A x) → ((y : Y) → A (f y))
 ```
 
-is an equivalence.
+is an [equivalence](foundation-core.equivalences.md).
 
-Likewise, a type `A` is said to be `f`-local if the precomposition map
+Likewise, a _type_ `A` is said to be **`f`-local** if the precomposition map
 `_∘ f : (X → A) → (Y → A)` is an equivalence.
 
 We reserve the name `is-local` for local types, and specify `is-local-family`
@@ -124,28 +124,29 @@ module _
   {l1 l2 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
   where
 
-  retraction-sec-precomp-domain : sec (precomp f Y) → retr f
-  pr1 (retraction-sec-precomp-domain sec-precomp-Y) = pr1 sec-precomp-Y id
-  pr2 (retraction-sec-precomp-domain sec-precomp-Y) =
-    htpy-eq (pr2 sec-precomp-Y id)
+  retraction-section-precomp-domain : section (precomp f Y) → retraction f
+  pr1 (retraction-section-precomp-domain section-precomp-Y) =
+    pr1 section-precomp-Y id
+  pr2 (retraction-section-precomp-domain section-precomp-Y) =
+    htpy-eq (pr2 section-precomp-Y id)
 
-  section-is-local-domains' : sec (precomp f Y) → is-local f X → sec f
-  pr1 (section-is-local-domains' sec-precomp-Y is-local-X) =
-    pr1 sec-precomp-Y id
-  pr2 (section-is-local-domains' sec-precomp-Y is-local-X) =
+  section-is-local-domains' : section (precomp f Y) → is-local f X → section f
+  pr1 (section-is-local-domains' section-precomp-Y is-local-X) =
+    pr1 section-precomp-Y id
+  pr2 (section-is-local-domains' section-precomp-Y is-local-X) =
     htpy-eq
       ( ap
         ( pr1)
-        { ( f ∘ pr1 (section-is-local-domains' sec-precomp-Y is-local-X)) ,
-          ( ap (postcomp Y f) (pr2 sec-precomp-Y id))}
+        { ( f ∘ pr1 (section-is-local-domains' section-precomp-Y is-local-X)) ,
+          ( ap (postcomp Y f) (pr2 section-precomp-Y id))}
         { id , refl}
         ( eq-is-contr (is-contr-map-is-equiv is-local-X f)))
 
-  is-equiv-is-local-domains' : sec (precomp f Y) → is-local f X → is-equiv f
-  pr1 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
-    section-is-local-domains' sec-precomp-Y is-local-X
-  pr2 (is-equiv-is-local-domains' sec-precomp-Y is-local-X) =
-    retraction-sec-precomp-domain sec-precomp-Y
+  is-equiv-is-local-domains' : section (precomp f Y) → is-local f X → is-equiv f
+  pr1 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
+    section-is-local-domains' section-precomp-Y is-local-X
+  pr2 (is-equiv-is-local-domains' section-precomp-Y is-local-X) =
+    retraction-section-precomp-domain section-precomp-Y
 
   is-equiv-is-local-domains : is-local f Y → is-local f X → is-equiv f
   is-equiv-is-local-domains is-local-Y =
@@ -233,3 +234,8 @@ is-contr-is-local A is-local-A =
       ( is-local-A))
     ( universal-property-empty' A)
 ```
+
+## See also
+
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)

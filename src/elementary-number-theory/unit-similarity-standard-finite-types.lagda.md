@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.unit-elements-standard-finite-types
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
@@ -60,27 +61,23 @@ sim-unit-one-ℕ k x = Σ ℕ (λ l → cong-ℕ k (l *ℕ x) 1)
 ### Unit similarity is an equivalence relation
 
 ```agda
-refl-sim-unit-Fin :
-  {k : ℕ} (x : Fin k) → sim-unit-Fin k x x
+refl-sim-unit-Fin : {k : ℕ} → is-reflexive (sim-unit-Fin k)
 pr1 (refl-sim-unit-Fin {succ-ℕ k} x) = one-unit-Fin
 pr2 (refl-sim-unit-Fin {succ-ℕ k} x) = left-unit-law-mul-Fin k x
 
-symm-sim-unit-Fin :
-  {k : ℕ} (x y : Fin k) → sim-unit-Fin k x y → sim-unit-Fin k y x
-pr1 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
+symmetric-sim-unit-Fin : {k : ℕ} → is-symmetric (sim-unit-Fin k)
+pr1 (symmetric-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
   inv-unit-Fin (pair u (pair v q))
-pr2 (symm-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
+pr2 (symmetric-sim-unit-Fin {succ-ℕ k} x y (pair (pair u (pair v q)) p)) =
   ( ( ( ap (mul-Fin (succ-ℕ k) v) (inv p)) ∙
         ( inv (associative-mul-Fin (succ-ℕ k) v u x))) ∙
       ( ap (mul-Fin' (succ-ℕ k) x) q)) ∙
     ( left-unit-law-mul-Fin k x)
 
-trans-sim-unit-Fin :
-  {k : ℕ} (x y z : Fin k) → sim-unit-Fin k x y → sim-unit-Fin k y z →
-  sim-unit-Fin k x z
-pr1 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
+transitive-sim-unit-Fin : {k : ℕ} → is-transitive (sim-unit-Fin k)
+pr1 (transitive-sim-unit-Fin {succ-ℕ k} x y z (pair v q) (pair u p)) =
   mul-unit-Fin (succ-ℕ k) v u
-pr2 (trans-sim-unit-Fin {succ-ℕ k} x y z (pair u p) (pair v q)) =
+pr2 (transitive-sim-unit-Fin {succ-ℕ k} x y z (pair v q) (pair u p)) =
   ( associative-mul-Fin (succ-ℕ k) (pr1 v) (pr1 u) x) ∙
   ( ap (mul-Fin (succ-ℕ k) (pr1 v)) p ∙ q)
 ```
@@ -105,7 +102,7 @@ pr2 (is-unit-similar-one-sim-unit-mod-succ-ℕ k x (pair u p)) =
           ( x)
           ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
           ( nat-Fin (succ-ℕ k) (pr1 u))
-          ( symm-cong-ℕ
+          ( symmetric-cong-ℕ
             ( succ-ℕ k)
             ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
             ( x)

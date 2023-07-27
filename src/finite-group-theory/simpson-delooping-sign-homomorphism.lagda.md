@@ -78,13 +78,14 @@ module _
   {l : Level} (n : ℕ) (X : UU-Fin l n)
   where
 
-  sign-comp-Eq-Rel : Eq-Rel lzero (Fin n ≃ type-UU-Fin n X)
-  pr1 sign-comp-Eq-Rel f g =
+  sign-comp-Equivalence-Relation :
+    Equivalence-Relation lzero (Fin n ≃ type-UU-Fin n X)
+  pr1 sign-comp-Equivalence-Relation f g =
     Id-Prop
       ( Fin-Set 2)
       ( zero-Fin 1)
       ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
-  pr1 (pr2 sign-comp-Eq-Rel) {f} =
+  pr1 (pr2 sign-comp-Equivalence-Relation) f =
     ap pr1
       { x =
         zero-Fin 1 ,
@@ -96,7 +97,7 @@ module _
       ( eq-is-contr
         ( is-contr-parity-transposition-permutation n
           (Fin-UU-Fin' n) (inv-equiv f ∘e f)))
-  pr1 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} P =
+  pr1 (pr2 (pr2 sign-comp-Equivalence-Relation)) f g P =
     ap pr1
       { x =
         zero-Fin 1 ,
@@ -125,14 +126,14 @@ module _
                 ( sign-homomorphism-Fin-two n
                   (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g)))) +ℕ_)
             ( is-zero-nat-zero-Fin {k = 1}) ∙
-            ( issec-nat-Fin 1
+            ( is-section-nat-Fin 1
               ( sign-homomorphism-Fin-two n
                 (Fin-UU-Fin' n) (inv-equiv (inv-equiv f ∘e g))) ∙
               ( ap
                 ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n))
                 ( distributive-inv-comp-equiv g (inv-equiv f) ∙
                   ap (inv-equiv g ∘e_) (inv-inv-equiv f)))))))
-  pr2 (pr2 (pr2 sign-comp-Eq-Rel)) {f} {g} {h} P Q =
+  pr2 (pr2 (pr2 sign-comp-Equivalence-Relation)) f g h Q P =
     ( ap mod-two-ℕ
       ( ap
         ( zero-ℕ +ℕ_)
@@ -155,20 +156,20 @@ module _
               ( ap (_∘e h) (right-inverse-law-equiv g) ∙
                 left-unit-law-equiv h))))))
 
-  is-decidable-sign-comp-Eq-Rel :
+  is-decidable-sign-comp-Equivalence-Relation :
     (f g : Fin n ≃ type-UU-Fin n X) →
-    is-decidable (sim-Eq-Rel sign-comp-Eq-Rel f g)
-  is-decidable-sign-comp-Eq-Rel f g =
+    is-decidable (sim-Equivalence-Relation sign-comp-Equivalence-Relation f g)
+  is-decidable-sign-comp-Equivalence-Relation f g =
     has-decidable-equality-is-finite
       ( is-finite-Fin 2)
       ( zero-Fin 1)
       ( sign-homomorphism-Fin-two n (Fin-UU-Fin' n) (inv-equiv f ∘e g))
 
   quotient-sign-comp : UU (lsuc lzero ⊔ l)
-  quotient-sign-comp = equivalence-class sign-comp-Eq-Rel
+  quotient-sign-comp = equivalence-class sign-comp-Equivalence-Relation
 
   quotient-sign-comp-Set : Set (lsuc lzero ⊔ l)
-  quotient-sign-comp-Set = equivalence-class-Set sign-comp-Eq-Rel
+  quotient-sign-comp-Set = equivalence-class-Set sign-comp-Equivalence-Relation
 
 module _
   {l : Level} {X : UU l}
@@ -221,8 +222,8 @@ module _
 
   not-sign-comp-transposition-count :
     ( Y : 2-Element-Decidable-Subtype l X) →
-    ¬ ( sim-Eq-Rel
-      ( sign-comp-Eq-Rel
+    ¬ ( sim-Equivalence-Relation
+      ( sign-comp-Equivalence-Relation
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX)))
       ( transposition Y ∘e equiv-count eX)
@@ -276,7 +277,7 @@ module _
       ( X , unit-trunc-Prop (equiv-count eX))) →
     is-decidable
       ( is-in-equivalence-class
-        ( sign-comp-Eq-Rel
+        ( sign-comp-Equivalence-Relation
           ( number-of-elements-count eX)
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( T)
@@ -292,13 +293,13 @@ module _
       ( X , unit-trunc-Prop (equiv-count eX))
   pr1 equiv-Fin-2-quotient-sign-comp-count (inl (inr star)) =
     class
-      ( sign-comp-Eq-Rel
+      ( sign-comp-Equivalence-Relation
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX)))
       ( equiv-count eX)
   pr1 equiv-Fin-2-quotient-sign-comp-count (inr star) =
     class
-      ( sign-comp-Eq-Rel
+      ( sign-comp-Equivalence-Relation
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX)))
       ( equiv-count eX ∘e transposition-eX)
@@ -307,7 +308,7 @@ module _
       ( λ T →
         inv-Fin-2-quotient-sign-comp-count T
           ( is-decidable-is-in-equivalence-class-is-decidable
-            ( sign-comp-Eq-Rel
+            ( sign-comp-Equivalence-Relation
               ( number-of-elements-count eX)
               ( X , unit-trunc-Prop (equiv-count eX)))
             ( λ a b →
@@ -320,9 +321,9 @@ module _
             ( T)
             ( equiv-count eX)))
       ( λ T →
-        retr-Fin-2-quotient-sign-comp-count T
+        retraction-Fin-2-quotient-sign-comp-count T
           ( is-decidable-is-in-equivalence-class-is-decidable
-            ( sign-comp-Eq-Rel
+            ( sign-comp-Equivalence-Relation
               ( number-of-elements-count eX)
               ( X , unit-trunc-Prop (equiv-count eX)))
             ( λ a b →
@@ -335,9 +336,9 @@ module _
             ( T)
             ( equiv-count eX)))
       ( λ k →
-        sec-Fin-2-quotient-sign-comp-count k
+        section-Fin-2-quotient-sign-comp-count k
           ( is-decidable-is-in-equivalence-class-is-decidable
-            ( sign-comp-Eq-Rel
+            ( sign-comp-Equivalence-Relation
               ( number-of-elements-count eX)
               ( X , unit-trunc-Prop (equiv-count eX)))
             ( λ a b →
@@ -350,12 +351,12 @@ module _
             ( pr1 equiv-Fin-2-quotient-sign-comp-count k)
             ( equiv-count eX)))
     where
-    cases-retr-Fin-2-quotient-sign-comp-count :
+    cases-retraction-Fin-2-quotient-sign-comp-count :
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX))) →
       ¬ ( is-in-equivalence-class
-        ( sign-comp-Eq-Rel
+        ( sign-comp-Equivalence-Relation
           ( number-of-elements-count eX)
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( T)
@@ -363,7 +364,7 @@ module _
       ( f : Fin (number-of-elements-count eX) ≃ X) →
       Id
         ( class
-          ( sign-comp-Eq-Rel
+          ( sign-comp-Equivalence-Relation
             ( number-of-elements-count eX)
             ( X , unit-trunc-Prop (equiv-count eX)))
           ( f))
@@ -376,29 +377,30 @@ module _
           ( Fin-UU-Fin' (number-of-elements-count eX))
           ( inv-equiv f ∘e equiv-count eX)) →
       is-in-equivalence-class
-        ( sign-comp-Eq-Rel
+        ( sign-comp-Equivalence-Relation
           ( number-of-elements-count eX)
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( T)
         ( equiv-count eX ∘e transposition-eX)
-    cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inl (inr star)) q =
+    cases-retraction-Fin-2-quotient-sign-comp-count
+      T NP f p (inl (inr star)) q =
       ex-falso
         ( NP
           ( tr
             ( λ x →
               is-in-equivalence-class
-                ( sign-comp-Eq-Rel
+                ( sign-comp-Equivalence-Relation
                   ( number-of-elements-count eX)
                   ( X , unit-trunc-Prop (equiv-count eX)))
                 ( x)
                 ( equiv-count eX))
             ( p)
             ( q)))
-    cases-retr-Fin-2-quotient-sign-comp-count T NP f p (inr star) q =
+    cases-retraction-Fin-2-quotient-sign-comp-count T NP f p (inr star) q =
       tr
         ( λ x →
           is-in-equivalence-class
-            ( sign-comp-Eq-Rel
+            ( sign-comp-Equivalence-Relation
               ( number-of-elements-count eX)
               ( X , unit-trunc-Prop (equiv-count eX)))
             ( x)
@@ -433,13 +435,13 @@ module _
                         ( _∘e transposition-eX)
                         ( left-inverse-law-equiv (equiv-count eX)) ∙
                         ( left-unit-law-equiv transposition-eX)))))))))
-    retr-Fin-2-quotient-sign-comp-count :
+    retraction-Fin-2-quotient-sign-comp-count :
       ( T : quotient-sign-comp
         ( number-of-elements-count eX)
         ( X , unit-trunc-Prop (equiv-count eX))) →
       ( H : is-decidable
         ( is-in-equivalence-class
-          ( sign-comp-Eq-Rel
+          ( sign-comp-Equivalence-Relation
             ( number-of-elements-count eX)
             ( X , unit-trunc-Prop (equiv-count eX)))
           ( T)
@@ -448,17 +450,17 @@ module _
         ( pr1 equiv-Fin-2-quotient-sign-comp-count
           ( inv-Fin-2-quotient-sign-comp-count T H))
         ( T)
-    retr-Fin-2-quotient-sign-comp-count T (inl P) =
+    retraction-Fin-2-quotient-sign-comp-count T (inl P) =
       eq-effective-quotient'
-        ( sign-comp-Eq-Rel
+        ( sign-comp-Equivalence-Relation
           ( number-of-elements-count eX)
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( equiv-count eX)
         ( T)
         ( P)
-    retr-Fin-2-quotient-sign-comp-count T (inr NP) =
+    retraction-Fin-2-quotient-sign-comp-count T (inr NP) =
       eq-effective-quotient'
-        ( sign-comp-Eq-Rel
+        ( sign-comp-Equivalence-Relation
           ( number-of-elements-count eX)
           ( X , unit-trunc-Prop (equiv-count eX)))
         ( equiv-count eX ∘e transposition-eX)
@@ -467,27 +469,27 @@ module _
           ( pr2 T)
           ( pair
             ( is-in-equivalence-class
-              ( sign-comp-Eq-Rel
+              ( sign-comp-Equivalence-Relation
                 ( number-of-elements-count eX)
                 ( X , unit-trunc-Prop (equiv-count eX)))
               ( T)
               ( equiv-count eX ∘e transposition-eX))
             ( is-prop-is-in-equivalence-class
-              ( sign-comp-Eq-Rel
+              ( sign-comp-Equivalence-Relation
                 ( number-of-elements-count eX)
                 ( X , unit-trunc-Prop (equiv-count eX)))
               ( T)
               ( equiv-count eX ∘e transposition-eX)))
           ( λ (t , p) →
-            cases-retr-Fin-2-quotient-sign-comp-count T NP t
+            cases-retraction-Fin-2-quotient-sign-comp-count T NP t
               ( inv
                 ( eq-has-same-elements-equivalence-class
-                  ( sign-comp-Eq-Rel
+                  ( sign-comp-Equivalence-Relation
                     ( number-of-elements-count eX)
                     ( X , unit-trunc-Prop (equiv-count eX)))
                   ( T)
                   ( class
-                    ( sign-comp-Eq-Rel
+                    ( sign-comp-Equivalence-Relation
                       ( number-of-elements-count eX)
                       ( X , unit-trunc-Prop (equiv-count eX)))
                     ( t))
@@ -497,11 +499,11 @@ module _
                 ( Fin-UU-Fin' (number-of-elements-count eX))
                 ( inv-equiv t ∘e equiv-count eX))
               ( refl)))
-    sec-Fin-2-quotient-sign-comp-count :
+    section-Fin-2-quotient-sign-comp-count :
       ( k : Fin 2) →
       ( D : is-decidable
         ( is-in-equivalence-class
-          ( sign-comp-Eq-Rel
+          ( sign-comp-Equivalence-Relation
             ( number-of-elements-count eX)
             ( X , unit-trunc-Prop (equiv-count eX)))
           ( pr1 equiv-Fin-2-quotient-sign-comp-count k)
@@ -510,15 +512,16 @@ module _
         ( inv-Fin-2-quotient-sign-comp-count
           (pr1 equiv-Fin-2-quotient-sign-comp-count k) (D))
         ( k)
-    sec-Fin-2-quotient-sign-comp-count (inl (inr star)) (inl D) = refl
-    sec-Fin-2-quotient-sign-comp-count (inl (inr star)) (inr ND) =
+    section-Fin-2-quotient-sign-comp-count (inl (inr star)) (inl D) = refl
+    section-Fin-2-quotient-sign-comp-count (inl (inr star)) (inr ND) =
       ex-falso
         ( ND
-          ( refl-Eq-Rel
-            ( sign-comp-Eq-Rel
+          ( refl-Equivalence-Relation
+            ( sign-comp-Equivalence-Relation
               ( number-of-elements-count eX)
-              ( X , unit-trunc-Prop (equiv-count eX)))))
-    sec-Fin-2-quotient-sign-comp-count (inr star) (inl D) =
+              ( X , unit-trunc-Prop (equiv-count eX)))
+            ( pr2 eX)))
+    section-Fin-2-quotient-sign-comp-count (inr star) (inl D) =
       ex-falso
         ( neq-inr-inl
           ( lemma ∙
@@ -561,7 +564,7 @@ module _
                                   ( transposition-eX)
                                   ( equiv-count eX)
                                   ( inv-equiv (equiv-count eX)))))))))))))))
-    sec-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
+    section-Fin-2-quotient-sign-comp-count (inr star) (inr ND) = refl
 
 module _
   {l : Level} (n : ℕ) (X : UU-Fin l n) (ineq : leq-ℕ 2 n)
@@ -648,9 +651,9 @@ module _
     ( X X' : UU-Fin l n)
     ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
     ( f f' : Fin n ≃ type-UU-Fin n X) →
-    ( sim-Eq-Rel (sign-comp-Eq-Rel n X) f f' ↔
-      sim-Eq-Rel
-        ( sign-comp-Eq-Rel n X')
+    ( sim-Equivalence-Relation (sign-comp-Equivalence-Relation n X) f f' ↔
+      sim-Equivalence-Relation
+        ( sign-comp-Equivalence-Relation n X')
         ( map-simpson-comp-equiv X X' e f)
         ( map-simpson-comp-equiv X X' e f'))
   pr1 (preserves-sign-comp-simpson-comp-equiv X X' e f f') =
@@ -674,8 +677,8 @@ module _
     ( n : ℕ) →
     ( Y : 2-Element-Decidable-Subtype l
       ( raise-Fin l (n +ℕ 2))) →
-    ¬ ( sim-Eq-Rel
-      ( sign-comp-Eq-Rel (n +ℕ 2)
+    ¬ ( sim-Equivalence-Relation
+      ( sign-comp-Equivalence-Relation (n +ℕ 2)
         ( raise-Fin l (n +ℕ 2) ,
           unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2))))
       ( sign-comp-aut-succ-succ-Fin n (transposition Y))
@@ -694,8 +697,8 @@ module _
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
           ( raise-Fin l (n +ℕ 2))) →
-            ¬ ( sim-Eq-Rel
-              ( sign-comp-Eq-Rel
+            ¬ ( sim-Equivalence-Relation
+              ( sign-comp-Equivalence-Relation
                 ( n +ℕ 2)
                 ( raise-Fin l (n +ℕ 2) ,
                   unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2))))
@@ -736,8 +739,8 @@ module _
   simpson-delooping-sign =
     quotient-delooping-sign
       ( λ n X → Fin n ≃ type-UU-Fin n X)
-      ( sign-comp-Eq-Rel)
-      ( λ n _ → is-decidable-sign-comp-Eq-Rel n)
+      ( sign-comp-Equivalence-Relation)
+      ( λ n _ → is-decidable-sign-comp-Equivalence-Relation n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)
@@ -772,8 +775,8 @@ module _
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc lzero ⊔ l) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( λ n X → Fin n ≃ type-UU-Fin n X)
-            ( sign-comp-Eq-Rel)
-            ( λ n H → is-decidable-sign-comp-Eq-Rel n)
+            ( sign-comp-Equivalence-Relation)
+            ( λ n H → is-decidable-sign-comp-Equivalence-Relation n)
             ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
             ( sign-comp-aut-succ-succ-Fin)
             ( not-univalent-action-equiv-transposition)
@@ -788,8 +791,8 @@ module _
   eq-simpson-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( λ n X → Fin n ≃ type-UU-Fin n X)
-      ( sign-comp-Eq-Rel)
-      ( λ n _ → is-decidable-sign-comp-Eq-Rel n)
+      ( sign-comp-Equivalence-Relation)
+      ( λ n _ → is-decidable-sign-comp-Equivalence-Relation n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
       ( not-univalent-action-equiv-transposition)

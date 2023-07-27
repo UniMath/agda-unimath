@@ -252,20 +252,20 @@ reduce-preserves-sim-ℤ :
   (x y : fraction-ℤ) (H : sim-fraction-ℤ x y) →
   sim-fraction-ℤ (reduce-fraction-ℤ x) (reduce-fraction-ℤ y)
 reduce-preserves-sim-ℤ x y H =
-  trans-sim-fraction-ℤ
+  transitive-sim-fraction-ℤ
     ( reduce-fraction-ℤ x)
     ( y)
     ( reduce-fraction-ℤ y)
-    ( trans-sim-fraction-ℤ
+    ( sim-reduced-fraction-ℤ y)
+    ( transitive-sim-fraction-ℤ
       ( reduce-fraction-ℤ x)
       ( x)
       ( y)
-      ( symm-sim-fraction-ℤ
+      ( H)
+      ( symmetric-sim-fraction-ℤ
         ( x)
         ( reduce-fraction-ℤ x)
-        ( sim-reduced-fraction-ℤ x))
-      ( H))
-    ( sim-reduced-fraction-ℤ y)
+        ( sim-reduced-fraction-ℤ x)))
 ```
 
 ### Two similar fractions have equal reduced form
@@ -380,7 +380,8 @@ unique-numerator-reduce-fraction-ℤ x y H =
         ( int-reduce-numerator-fraction-ℤ y) →
       int-reduce-numerator-fraction-ℤ x ＝ int-reduce-numerator-fraction-ℤ y
     is-plus-or-minus-case-split (inl pos) = pos
-    is-plus-or-minus-case-split (inr neg) = ex-falso (Eq-eq-ℤ contra)
+    is-plus-or-minus-case-split (inr neg) =
+      ex-falso (Eq-eq-ℤ contra)
       where
       lem : (w : ℤ) → is-positive-ℤ w → Σ ℕ (λ n → w ＝ inr (inr n))
       lem (inr (inr n)) H = pair n refl

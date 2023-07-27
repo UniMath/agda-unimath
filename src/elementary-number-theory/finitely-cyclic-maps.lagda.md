@@ -54,17 +54,17 @@ module _
   map-inv-is-finitely-cyclic-map f H x =
     iterate (length-path-is-finitely-cyclic-map H (f x) x) f x
 
-  issec-map-inv-is-finitely-cyclic-map :
+  is-section-map-inv-is-finitely-cyclic-map :
     (f : X → X) (H : is-finitely-cyclic-map f) →
     (f ∘ map-inv-is-finitely-cyclic-map f H) ~ id
-  issec-map-inv-is-finitely-cyclic-map f H x =
+  is-section-map-inv-is-finitely-cyclic-map f H x =
     ( iterate-succ-ℕ (length-path-is-finitely-cyclic-map H (f x) x) f x) ∙
     ( eq-is-finitely-cyclic-map H (f x) x)
 
-  isretr-map-inv-is-finitely-cyclic-map :
+  is-retraction-map-inv-is-finitely-cyclic-map :
     (f : X → X) (H : is-finitely-cyclic-map f) →
     (map-inv-is-finitely-cyclic-map f H ∘ f) ~ id
-  isretr-map-inv-is-finitely-cyclic-map f H x =
+  is-retraction-map-inv-is-finitely-cyclic-map f H x =
     ( ap
       ( iterate (length-path-is-finitely-cyclic-map H (f (f x)) (f x)) f ∘ f)
       ( inv (eq-is-finitely-cyclic-map H (f x) x))) ∙
@@ -85,8 +85,8 @@ module _
   is-equiv-is-finitely-cyclic-map f H =
     is-equiv-has-inverse
       ( map-inv-is-finitely-cyclic-map f H)
-      ( issec-map-inv-is-finitely-cyclic-map f H)
-      ( isretr-map-inv-is-finitely-cyclic-map f H)
+      ( is-section-map-inv-is-finitely-cyclic-map f H)
+      ( is-retraction-map-inv-is-finitely-cyclic-map f H)
 ```
 
 ### The successor functions on standard finite types are finitely cyclic
@@ -109,7 +109,7 @@ pr2 (is-finitely-cyclic-succ-Fin {succ-ℕ k} x y) =
     ( x)) ∙
     ( ( ap
         ( add-Fin (succ-ℕ k) x)
-        ( issec-nat-Fin k (add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x)))) ∙
+        ( is-section-nat-Fin k (add-Fin (succ-ℕ k) y (neg-Fin (succ-ℕ k) x)))) ∙
       ( ( commutative-add-Fin
           ( succ-ℕ k)
           ( x)

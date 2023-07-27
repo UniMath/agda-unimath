@@ -7,8 +7,10 @@ module order-theory.dependent-products-large-frames where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.function-extensionality
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -75,44 +77,43 @@ module _
     is-set-type-Large-Poset large-poset-Π-Large-Frame
 
   leq-Π-Large-Frame-Prop :
-    {l2 l3 : Level} → type-Π-Large-Frame l2 → type-Π-Large-Frame l3 →
-    Prop (β l2 l3 ⊔ l1)
+    Large-Relation-Prop
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Frame)
   leq-Π-Large-Frame-Prop =
     leq-Large-Poset-Prop large-poset-Π-Large-Frame
 
   leq-Π-Large-Frame :
-    {l2 l3 : Level} →
-    type-Π-Large-Frame l2 → type-Π-Large-Frame l3 → UU (β l2 l3 ⊔ l1)
+    Large-Relation
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Frame)
   leq-Π-Large-Frame = leq-Large-Poset large-poset-Π-Large-Frame
 
   is-prop-leq-Π-Large-Frame :
-    {l2 l3 : Level} (x : type-Π-Large-Frame l2) (y : type-Π-Large-Frame l3) →
-    is-prop (leq-Π-Large-Frame x y)
+    is-prop-Large-Relation type-Π-Large-Frame leq-Π-Large-Frame
   is-prop-leq-Π-Large-Frame =
     is-prop-leq-Large-Poset large-poset-Π-Large-Frame
 
   refl-leq-Π-Large-Frame :
-    {l2 : Level} (x : type-Π-Large-Frame l2) → leq-Π-Large-Frame x x
+    is-large-reflexive type-Π-Large-Frame leq-Π-Large-Frame
   refl-leq-Π-Large-Frame = refl-leq-Large-Poset large-poset-Π-Large-Frame
 
   antisymmetric-leq-Π-Large-Frame :
-    {l2 : Level} (x y : type-Π-Large-Frame l2) →
-    leq-Π-Large-Frame x y → leq-Π-Large-Frame y x → x ＝ y
+    is-large-antisymmetric type-Π-Large-Frame leq-Π-Large-Frame
   antisymmetric-leq-Π-Large-Frame =
     antisymmetric-leq-Large-Poset large-poset-Π-Large-Frame
 
   transitive-leq-Π-Large-Frame :
-    {l2 l3 l4 : Level}
-    (x : type-Π-Large-Frame l2)
-    (y : type-Π-Large-Frame l3)
-    (z : type-Π-Large-Frame l4) →
-    leq-Π-Large-Frame y z → leq-Π-Large-Frame x y → leq-Π-Large-Frame x z
+    is-large-transitive type-Π-Large-Frame leq-Π-Large-Frame
   transitive-leq-Π-Large-Frame =
     transitive-leq-Large-Poset large-poset-Π-Large-Frame
 
   meet-Π-Large-Frame :
     {l2 l3 : Level} →
-    type-Π-Large-Frame l2 → type-Π-Large-Frame l3 →
+    type-Π-Large-Frame l2 →
+    type-Π-Large-Frame l3 →
     type-Π-Large-Frame (l2 ⊔ l3)
   meet-Π-Large-Frame =
     meet-has-meets-Large-Poset has-meets-Π-Large-Frame

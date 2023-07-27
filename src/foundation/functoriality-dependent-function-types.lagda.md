@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.identity-types
 open import foundation.transport
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
@@ -28,6 +27,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
@@ -56,7 +56,7 @@ module _
   map-equiv-Π =
     ( map-Π
       ( λ a →
-        ( tr B (issec-map-inv-equiv e a)) ∘
+        ( tr B (is-section-map-inv-equiv e a)) ∘
         ( map-equiv (f (map-inv-equiv e a))))) ∘
     ( precomp-Π (map-inv-equiv e) B')
 
@@ -74,12 +74,12 @@ module _
     ( ( tr-ap
         ( map-equiv e)
         ( λ _ → id)
-        ( isretr-map-inv-equiv e a')
+        ( is-retraction-map-inv-equiv e a')
         ( map-equiv
           ( f (map-inv-equiv e (map-equiv e a')))
           ( h (map-inv-equiv e (map-equiv e a'))))) ∙
       ( α ( map-inv-equiv e (map-equiv e a'))
-          ( isretr-map-inv-equiv e a')))
+          ( is-retraction-map-inv-equiv e a')))
     where
     α :
       (x : A') (p : x ＝ a') →
@@ -91,7 +91,7 @@ module _
     is-equiv-map-equiv-Π =
       is-equiv-comp
         ( map-Π (λ a →
-          ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
+          ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
           ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
         ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
         ( is-equiv-precomp-Π-is-equiv
@@ -100,11 +100,12 @@ module _
           ( B'))
         ( is-equiv-map-Π _
           ( λ a → is-equiv-comp
-            ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a))
+            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
             ( is-equiv-map-equiv
               ( f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
-            ( is-equiv-tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a))))
+            ( is-equiv-tr B
+              ( is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
 
   equiv-Π : ((a' : A') → B' a') ≃ ((a : A) → B a)
   pr1 equiv-Π = map-equiv-Π
@@ -226,7 +227,7 @@ htpy-map-equiv-Π-refl-htpy :
 htpy-map-equiv-Π-refl-htpy {B' = B'} B e f f' K =
   ( htpy-map-Π
     ( λ a →
-      ( tr B (issec-map-inv-is-equiv (is-equiv-map-equiv e) a)) ·l
+      ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ·l
       ( K (map-inv-is-equiv (is-equiv-map-equiv e) a)))) ·r
   ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
 

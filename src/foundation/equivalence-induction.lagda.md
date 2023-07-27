@@ -30,7 +30,7 @@ Equivalence induction is a condition equivalent to the univalence axiom
 abstract
   Ind-equiv :
     {l1 l2 : Level} (A : UU l1) (P : (B : UU l1) (e : A ≃ B) → UU l2) →
-    sec (ev-id P)
+    section (ev-id P)
   Ind-equiv A P =
     IND-EQUIV-is-contr-total-equiv
     ( is-contr-total-equiv A)

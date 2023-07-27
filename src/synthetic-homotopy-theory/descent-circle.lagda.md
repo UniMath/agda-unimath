@@ -309,9 +309,9 @@ module _
         ( map-inv-equiv α (s (base-free-loop l))))
       ( ( ap
           ( tr Q (loop-free-loop l))
-          ( issec-map-inv-equiv α (s (base-free-loop l)))) ∙
+          ( is-section-map-inv-equiv α (s (base-free-loop l)))) ∙
         ( ( apd s (loop-free-loop l)) ∙
-          ( inv (issec-map-inv-equiv α (s (base-free-loop l))))))
+          ( inv (is-section-map-inv-equiv α (s (base-free-loop l))))))
 
   equiv-fixpoint-descent-data-circle-free-dependent-loop :
     fixpoint-descent-data-circle l P ≃ free-dependent-loop l Q
@@ -338,11 +338,11 @@ module _
       ( ( comparison-fixpoint-descent-data-circle ∘
           ev-fixpoint-descent-data-circle)
         ( s))
-      ( inv issec-inv-α ,
+      ( inv is-section-inv-α ,
         inv
         ( ( horizontal-concat-Id²
-            ( refl {x = ap (tr Q (loop-free-loop l)) (inv issec-inv-α)})
-            ( issec-map-inv-is-equiv
+            ( refl {x = ap (tr Q (loop-free-loop l)) (inv is-section-inv-α)})
+            ( is-section-map-inv-is-equiv
               ( is-equiv-map-compute-dependent-identification-loop-circle
                 ( l)
                 ( Q)
@@ -351,19 +351,19 @@ module _
                 ( map-inv-equiv α (s (base-free-loop l)))
                 ( pr1 (ev-fixpoint-descent-data-circle s)))
               ( _))) ∙
-          ( ( inv (assoc (ap _ (inv issec-inv-α)) _ _)) ∙
+          ( ( inv (assoc (ap _ (inv is-section-inv-α)) _ _)) ∙
             ( horizontal-concat-Id²
               ( inv
                 ( ap-concat-eq (tr Q (loop-free-loop l))
-                  ( inv issec-inv-α)
-                  ( issec-inv-α)
+                  ( inv is-section-inv-α)
+                  ( is-section-inv-α)
                   ( refl)
-                  ( inv (left-inv issec-inv-α))))
+                  ( inv (left-inv is-section-inv-α))))
               ( refl)))))
     where
-    issec-inv-α :
+    is-section-inv-α :
       eq-value (map-equiv α ∘ map-inv-equiv α) id (s (base-free-loop l))
-    issec-inv-α = issec-map-inv-equiv α (s (base-free-loop l))
+    is-section-inv-α = is-section-map-inv-equiv α (s (base-free-loop l))
 
   is-equiv-comparison-fixpoint-descent-data-circle :
     is-equiv comparison-fixpoint-descent-data-circle

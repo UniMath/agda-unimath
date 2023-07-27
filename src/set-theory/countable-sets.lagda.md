@@ -136,12 +136,12 @@ module _
             ( f ∘ (pr1 P))
             ( is-surjective-comp is-surjective-f (pr2 P))))
     where
-      f : Maybe (type-Set X) → type-Set X
-      f (inl x) = x
-      f (inr star) = a
+    f : Maybe (type-Set X) → type-Set X
+    f (inl x) = x
+    f (inr star) = a
 
-      is-surjective-f : is-surjective f
-      is-surjective-f x = unit-trunc-Prop (pair (inl x) refl)
+    is-surjective-f : is-surjective f
+    is-surjective-f x = unit-trunc-Prop (pair (inl x) refl)
 
   is-countable-is-directly-countable :
     is-directly-countable X → is-countable X

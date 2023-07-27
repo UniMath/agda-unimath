@@ -49,7 +49,7 @@ induction-principle-pushout :
   ( f : S → A) (g : S → B) (c : cocone f g X) →
   UU (lsuc l ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
 induction-principle-pushout l {X = X} f g c =
-  (P : X → UU l) → sec (dependent-cocone-map f g c P)
+  (P : X → UU l) → section (dependent-cocone-map f g c P)
 
 module _
   { l1 l2 l3 l4 l : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}

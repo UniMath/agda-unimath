@@ -172,13 +172,15 @@ pred-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 pred-ℤ-Mod zero-ℕ = pred-ℤ
 pred-ℤ-Mod (succ-ℕ k) = pred-Fin (succ-ℕ k)
 
-issec-pred-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → succ-ℤ-Mod k (pred-ℤ-Mod k x) ＝ x
-issec-pred-ℤ-Mod zero-ℕ = issec-pred-ℤ
-issec-pred-ℤ-Mod (succ-ℕ k) = issec-pred-Fin (succ-ℕ k)
+is-section-pred-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → succ-ℤ-Mod k (pred-ℤ-Mod k x) ＝ x
+is-section-pred-ℤ-Mod zero-ℕ = is-section-pred-ℤ
+is-section-pred-ℤ-Mod (succ-ℕ k) = is-section-pred-Fin (succ-ℕ k)
 
-isretr-pred-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → pred-ℤ-Mod k (succ-ℤ-Mod k x) ＝ x
-isretr-pred-ℤ-Mod zero-ℕ = isretr-pred-ℤ
-isretr-pred-ℤ-Mod (succ-ℕ k) = isretr-pred-Fin (succ-ℕ k)
+is-retraction-pred-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → pred-ℤ-Mod k (succ-ℤ-Mod k x) ＝ x
+is-retraction-pred-ℤ-Mod zero-ℕ = is-retraction-pred-ℤ
+is-retraction-pred-ℤ-Mod (succ-ℕ k) = is-retraction-pred-Fin (succ-ℕ k)
 
 abstract
   is-equiv-pred-ℤ-Mod : (k : ℕ) → is-equiv (pred-ℤ-Mod k)
@@ -460,7 +462,9 @@ preserves-successor-mod-ℤ (succ-ℕ k) (inl (succ-ℕ x)) =
   ( ap
     ( neg-Fin (succ-ℕ k))
     ( inv
-      ( isretr-pred-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))))) ∙
+      ( is-retraction-pred-Fin
+        ( succ-ℕ k)
+        ( succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))))) ∙
   ( neg-pred-Fin
     ( succ-ℕ k)
     ( succ-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))))
@@ -481,9 +485,9 @@ preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr zero-ℕ)) =
     ( ( ap
         ( pred-Fin (succ-ℕ k))
         ( preserves-successor-mod-ℤ (succ-ℕ k) zero-ℤ)) ∙
-      ( isretr-pred-Fin (succ-ℕ k) (zero-Fin k)))
+      ( is-retraction-pred-Fin (succ-ℕ k) (zero-Fin k)))
 preserves-predecessor-mod-ℤ (succ-ℕ k) (inr (inr (succ-ℕ x))) =
-  inv (isretr-pred-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
+  inv (is-retraction-pred-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
 
 preserves-add-mod-ℤ :
   (k : ℕ) (x y : ℤ) →
@@ -614,27 +618,11 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
           ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x)))))
       ( int-ℕ (k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
       ( inl x)
-      ( cong-int-cong-ℕ
-        ( succ-ℕ k)
-        ( nat-Fin
-          ( succ-ℕ k)
-          ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
-        ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
-        ( cong-mul-Fin (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
       ( transitive-cong-ℤ
         ( int-ℕ (succ-ℕ k))
         ( int-ℕ (k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
         ( int-ℕ (k *ℕ (succ-ℕ x)))
         ( inl x)
-        ( cong-int-cong-ℕ
-          ( succ-ℕ k)
-          ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
-          ( k *ℕ (succ-ℕ x))
-          ( congruence-mul-ℕ
-            ( succ-ℕ k)
-            {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
-            ( refl-cong-ℕ (succ-ℕ k) k)
-            ( cong-nat-mod-succ-ℕ k (succ-ℕ x))))
         ( pair
           ( inr (inr x))
           ( ( commutative-mul-ℤ (inr (inr x)) (inr (inr k))) ∙
@@ -644,7 +632,23 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
               ( ( right-distributive-mul-add-ℤ (int-ℕ k) one-ℤ (inr (inr x))) ∙
                 ( ap-add-ℤ
                   ( mul-int-ℕ k (succ-ℕ x))
-                  ( left-unit-law-mul-ℤ (inr (inr x))))))))))
+                  ( left-unit-law-mul-ℤ (inr (inr x))))))))
+        ( cong-int-cong-ℕ
+          ( succ-ℕ k)
+          ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
+          ( k *ℕ (succ-ℕ x))
+          ( congruence-mul-ℕ
+            ( succ-ℕ k)
+            {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
+            ( refl-cong-ℕ (succ-ℕ k) k)
+            ( cong-nat-mod-succ-ℕ k (succ-ℕ x)))))
+      ( cong-int-cong-ℕ
+        ( succ-ℕ k)
+        ( nat-Fin
+          ( succ-ℕ k)
+          ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
+        ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
+        ( cong-mul-Fin (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x)))))
 cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) =
   cong-int-cong-ℕ
     ( succ-ℕ k)
@@ -726,8 +730,8 @@ div-is-zero-mod-ℤ (succ-ℕ k) x p =
     ( x)
     ( cong-eq-mod-ℤ (succ-ℕ k) x zero-ℤ p)
 
-issec-int-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → mod-ℤ k (int-ℤ-Mod k x) ＝ x
-issec-int-ℤ-Mod k x =
+is-section-int-ℤ-Mod : (k : ℕ) (x : ℤ-Mod k) → mod-ℤ k (int-ℤ-Mod k x) ＝ x
+is-section-int-ℤ-Mod k x =
   eq-cong-int-ℤ-Mod k
     ( mod-ℤ k (int-ℤ-Mod k x))
     ( x)
@@ -743,11 +747,11 @@ is-one-is-fixed-point-succ-ℤ-Mod k x p =
       ( cong-eq-mod-ℤ k
         ( int-ℤ-Mod k x)
         ( succ-ℤ (int-ℤ-Mod k x))
-        ( ( issec-int-ℤ-Mod k x) ∙
+        ( ( is-section-int-ℤ-Mod k x) ∙
           ( ( inv p) ∙
             ( inv
               ( ( preserves-successor-mod-ℤ k (int-ℤ-Mod k x)) ∙
-                ( ap (succ-ℤ-Mod k) (issec-int-ℤ-Mod k x))))))))
+                ( ap (succ-ℤ-Mod k) (is-section-int-ℤ-Mod k x))))))))
 
 has-no-fixed-points-succ-ℤ-Mod :
   (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (succ-ℤ-Mod k x ＝ x)

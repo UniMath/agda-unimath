@@ -1,6 +1,8 @@
 # Function extensionality
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module foundation.function-extensionality where
 
 open import foundation-core.function-extensionality public
@@ -11,8 +13,8 @@ open import foundation-core.function-extensionality public
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
 open import foundation.dependent-homotopies
+open import foundation.dependent-pair-types
 open import foundation.homotopies
 open import foundation.universe-levels
 
@@ -26,12 +28,16 @@ open import foundation-core.transport
 
 ## Idea
 
-The [function extensionality axiom](foundation-core.function-extensionality.md) asserts that [identifications](foundation-core.identity-types.md) of (dependent)
-functions are [equivalently](foundation-core.equivalences.md) described as pointwise equalities between them. In
-other words, a function is completely determined by its values.
+The [function extensionality axiom](foundation-core.function-extensionality.md)
+asserts that [identifications](foundation-core.identity-types.md) of (dependent)
+functions are [equivalently](foundation-core.equivalences.md) described as
+pointwise equalities between them. In other words, a function is completely
+determined by its values.
 
 We postulated the function extensionality axiom in
-[`foundation-core.function-extensionality`](foundation-core.function-extensionality.md). In this file, we will derive some elementary properties of the identification `eq-htpy H` obtained from a homotopy `H`.
+[`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+In this file, we will derive some elementary properties of the identification
+`eq-htpy H` obtained from a homotopy `H`.
 
 ## Properties
 
@@ -51,9 +57,9 @@ module _
     {f g : (x : A) → B x} (H : f ~ g) (h : (x : A) → C x (f x)) →
     dependent-homotopy C H h (tr (λ u → (x : A) → C x (u x)) (eq-htpy H) h)
   dependent-homotopy-eq-htpy H h =
-    ( htpy-eq (ap (λ K → tr-htpy C K h) (inv (issec-eq-htpy H)))) ∙h
+    ( htpy-eq (ap (λ K → tr-htpy C K h) (inv (is-section-eq-htpy H)))) ∙h
     ( dependent-homotopy-htpy-eq (eq-htpy H) h)
-    
+
   dependent-homotopy-eq-htpy-refl-htpy :
     {f : (x : A) → B x} (h : (x : A) → C x (f x)) → {!!}
     {-

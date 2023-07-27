@@ -66,6 +66,7 @@ identifications in arbitrary types.
 | Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
 | Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
 | Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Torsorial type families                          | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
 | Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
 | Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
 | The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |

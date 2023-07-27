@@ -10,13 +10,14 @@ module foundation.singleton-subtypes where
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.subtypes
 ```
 
 </details>
@@ -26,7 +27,7 @@ open import foundation-core.subtypes
 A singleton subtype of a type `X` is a subtype `P` of `X` of which the
 underlying type is contractible.
 
-## Definition
+## Definitions
 
 ### General singleton subtypes
 
@@ -78,4 +79,16 @@ pr1 (inhabited-subtype-standard-singleton-subtype X x) =
   subtype-standard-singleton-subtype X x
 pr2 (inhabited-subtype-standard-singleton-subtype X x) =
   unit-trunc-Prop (pair x refl)
+```
+
+## Properties
+
+### The standard singleton subtype `{x}` of a set is the least subtype containing `x`
+
+```agda
+is-least-subtype-containing-element-Set :
+  {l1 l2 : Level} (X : Set l1) (x : type-Set X) (A : subtype l2 (type-Set X)) →
+  is-in-subtype A x ↔ (subtype-standard-singleton-subtype X x ⊆ A)
+pr1 (is-least-subtype-containing-element-Set X x A) H .x refl = H
+pr2 (is-least-subtype-containing-element-Set X x A) H = H x refl
 ```

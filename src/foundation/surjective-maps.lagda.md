@@ -208,7 +208,7 @@ module _
 abstract
   is-surjective-has-section :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    sec f → is-surjective f
+    section f → is-surjective f
   is-surjective-has-section (pair g G) b = unit-trunc-Prop (pair (g b) (G b))
 ```
 
@@ -675,10 +675,10 @@ module _
           ( λ a →
             ( ap
               ( concat' (g (i a)) (M (f a)))
-              ( issec-map-inv-is-equiv
+              ( is-section-map-inv-is-equiv
                 ( K (i a) ((j (f a))))
                 ( L a ∙ inv (M (f a))))) ∙
-            ( issec-inv-concat' (g (i a)) (M (f a)) (L a)))))
+            ( is-section-inv-concat' (g (i a)) (M (f a)) (L a)))))
     where
 
     J : (b : B) → fib g (h b)

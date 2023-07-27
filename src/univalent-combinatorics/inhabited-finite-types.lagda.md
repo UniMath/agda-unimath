@@ -102,7 +102,7 @@ Fam-Inhabited-Types-𝔽 l2 X = type-𝔽 X → Inhabited-𝔽 l2
 
 module _
   {l1 l2 : Level} (X : 𝔽 l1) (Y : Fam-Inhabited-Types-𝔽 l2 X)
-    where
+  where
 
   type-Fam-Inhabited-Types-𝔽 : type-𝔽 X → UU l2
   type-Fam-Inhabited-Types-𝔽 x = type-Inhabited-𝔽 (Y x)

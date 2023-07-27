@@ -61,13 +61,13 @@ module _
   eq-htpy {f} {g} = map-inv-is-equiv (funext f g)
 
   abstract
-    issec-eq-htpy :
+    is-section-eq-htpy :
       {f g : (x : A) → B x} → (htpy-eq ∘ eq-htpy {f} {g}) ~ id
-    issec-eq-htpy {f} {g} = issec-map-inv-is-equiv (funext f g)
+    is-section-eq-htpy {f} {g} = is-section-map-inv-is-equiv (funext f g)
 
-    isretr-eq-htpy :
+    is-retraction-eq-htpy :
       {f g : (x : A) → B x} → (eq-htpy ∘ htpy-eq {f = f} {g = g}) ~ id
-    isretr-eq-htpy {f} {g} = isretr-map-inv-is-equiv (funext f g)
+    is-retraction-eq-htpy {f} {g} = is-retraction-map-inv-is-equiv (funext f g)
 
     is-equiv-eq-htpy :
       (f g : (x : A) → B x) → is-equiv (eq-htpy {f} {g})
@@ -75,7 +75,7 @@ module _
 
     eq-htpy-refl-htpy :
       (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
-    eq-htpy-refl-htpy f = isretr-eq-htpy refl
+    eq-htpy-refl-htpy f = is-retraction-eq-htpy refl
 
     equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
     pr1 (equiv-eq-htpy {f} {g}) = eq-htpy
@@ -130,13 +130,15 @@ module _
       eq-htpy (H ∙h K)
       ＝ eq-htpy (htpy-eq (eq-htpy H) ∙h htpy-eq (eq-htpy K))
         by
-        inv (ap eq-htpy (ap-binary _∙h_ (issec-eq-htpy H) (issec-eq-htpy K)))
+        inv
+          ( ap eq-htpy
+            ( ap-binary _∙h_ (is-section-eq-htpy H) (is-section-eq-htpy K)))
       ＝ eq-htpy (htpy-eq (eq-htpy H ∙ eq-htpy K))
         by
         ap eq-htpy (inv (htpy-eq-concat (eq-htpy H) (eq-htpy K)))
       ＝ eq-htpy H ∙ eq-htpy K
         by
-        isretr-eq-htpy (eq-htpy H ∙ eq-htpy K)
+        is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K)
 ```
 
 ## See also

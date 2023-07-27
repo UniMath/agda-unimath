@@ -123,7 +123,7 @@ list-transpositions-permutation-Fin (succ-ℕ n) f =
   list-transpositions-permutation-Fin' n f (map-equiv f (inr star)) refl
 
 abstract
-  retr-permutation-list-transpositions-Fin' :
+  retraction-permutation-list-transpositions-Fin' :
     (n : ℕ) (f : Permutation (succ-ℕ n)) →
     (x : Fin (succ-ℕ n)) → Id (map-equiv f (inr star)) x →
     (y z : Fin (succ-ℕ n)) → Id (map-equiv f y) z →
@@ -133,10 +133,10 @@ abstract
           ( list-transpositions-permutation-Fin (succ-ℕ n) f))
         ( y))
       ( map-equiv f y)
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     zero-ℕ f (inr star) p (inr star) z q =
     inv p
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inl x) p (inl y) (inl z) q =
     ap
       (λ w →
@@ -171,7 +171,7 @@ abstract
               ( list-transpositions-permutation-Fin (succ-ℕ n) _)}
           { y = F'}
           ( eq-htpy-equiv
-            ( λ w → retr-permutation-list-transpositions-Fin'
+            ( λ w → retraction-permutation-list-transpositions-Fin'
               n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
             ( (ap (map-equiv (transposition t)) lemma) ∙
               (lemma2 ∙ inv q))))
@@ -224,7 +224,7 @@ abstract
         ( λ e → map-equiv (pr1 (map-equiv e P)) (inl y))
         ( right-inverse-law-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))))) ∙
       ( ap (map-equiv (transposition t)) q ∙ lemma2)
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inl x) p (inl y) (inr star) q =
     ap
       (λ w →
@@ -260,7 +260,7 @@ abstract
           { y = F'}
           ( eq-htpy-equiv
             ( λ w →
-              retr-permutation-list-transpositions-Fin'
+              retraction-permutation-list-transpositions-Fin'
                 n _ (map-equiv F' (inr star)) refl w (map-equiv F' w) refl)) ∙
           ( ( ap (map-equiv (transposition t)) lemma) ∙
             ( ( right-computation-standard-transposition
@@ -313,7 +313,7 @@ abstract
           { inr star}
           { inl x}
           ( neq-inr-inl)))
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inl x) p (inr star) z q =
     ap
       (λ w →
@@ -369,7 +369,7 @@ abstract
               { inr star}
               { inl x}
               ( neq-inr-inl)))
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inr star) p (inl y) (inl z) q =
     ap
       ( λ w →
@@ -393,18 +393,18 @@ abstract
           ( inl y)) ∙
         ( ( ap
             ( inl)
-            ( retr-permutation-list-transpositions-Fin'
+            ( retraction-permutation-list-transpositions-Fin'
               n f' (map-equiv f' (inr star)) refl y (map-equiv f' y) refl)) ∙
           ( computation-inv-extend-equiv-Maybe (Fin-Set (succ-ℕ n)) f p y)))
     where
     f' : (Permutation (succ-ℕ n))
     f' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) (pair f p)
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inr star) p (inl y) (inr star) q =
     ex-falso
       ( neq-inr-inl
         ( is-injective-map-equiv f (p ∙ inv q)))
-  retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin'
     (succ-ℕ n) f (inr star) p (inr star) z q =
     ap
       (λ w →
@@ -430,15 +430,15 @@ abstract
     f' : (Permutation (succ-ℕ n))
     f' = map-inv-equiv (extend-equiv-Maybe (Fin-Set (succ-ℕ n))) (pair f p)
 
-  retr-permutation-list-transpositions-Fin :
+  retraction-permutation-list-transpositions-Fin :
     (n : ℕ) (f : Permutation n) →
     htpy-equiv
       ( permutation-list-transpositions
         ( list-transpositions-permutation-Fin n f))
       ( f)
-  retr-permutation-list-transpositions-Fin zero-ℕ f ()
-  retr-permutation-list-transpositions-Fin (succ-ℕ n) f y =
-    retr-permutation-list-transpositions-Fin'
+  retraction-permutation-list-transpositions-Fin zero-ℕ f ()
+  retraction-permutation-list-transpositions-Fin (succ-ℕ n) f y =
+    retraction-permutation-list-transpositions-Fin'
       n f (map-equiv f (inr star)) refl y (map-equiv f y) refl
 ```
 
@@ -494,15 +494,15 @@ private
     ( map-transposition P ·l
       htpy-permutation-list n l)
 
-retr-permutation-list-standard-transpositions-Fin :
+retraction-permutation-list-standard-transpositions-Fin :
   (n : ℕ) (f : Permutation n) →
   htpy-equiv
     ( permutation-list-standard-transpositions-Fin
       ( n)
       ( list-standard-transpositions-permutation-Fin n f))
     ( f)
-retr-permutation-list-standard-transpositions-Fin 0 f ()
-retr-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
+retraction-permutation-list-standard-transpositions-Fin 0 f ()
+retraction-permutation-list-standard-transpositions-Fin (succ-ℕ n) f =
   htpy-permutation-list n (list-transpositions-permutation-Fin (succ-ℕ n) f) ∙h
-  retr-permutation-list-transpositions-Fin (succ-ℕ n) f
+  retraction-permutation-list-transpositions-Fin (succ-ℕ n) f
 ```

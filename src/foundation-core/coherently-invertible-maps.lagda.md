@@ -9,10 +9,10 @@ module foundation-core.coherently-invertible-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -57,26 +57,26 @@ module _
   inv-is-coherently-invertible : is-coherently-invertible f → B → A
   inv-is-coherently-invertible = pr1
 
-  issec-inv-is-coherently-invertible :
+  is-section-inv-is-coherently-invertible :
     (H : is-coherently-invertible f) → (f ∘ inv-is-coherently-invertible H) ~ id
-  issec-inv-is-coherently-invertible H = pr1 (pr2 H)
+  is-section-inv-is-coherently-invertible H = pr1 (pr2 H)
 
-  isretr-inv-is-coherently-invertible :
+  is-retraction-inv-is-coherently-invertible :
     (H : is-coherently-invertible f) → (inv-is-coherently-invertible H ∘ f) ~ id
-  isretr-inv-is-coherently-invertible H = pr1 (pr2 (pr2 H))
+  is-retraction-inv-is-coherently-invertible H = pr1 (pr2 (pr2 H))
 
   coh-inv-is-coherently-invertible :
     (H : is-coherently-invertible f) →
     coherence-is-coherently-invertible f
       ( inv-is-coherently-invertible H)
-      ( issec-inv-is-coherently-invertible H)
-      ( isretr-inv-is-coherently-invertible H)
+      ( is-section-inv-is-coherently-invertible H)
+      ( is-retraction-inv-is-coherently-invertible H)
   coh-inv-is-coherently-invertible H = pr2 (pr2 (pr2 H))
 ```
 
 ## Properties
 
-### Invertible maps are coherenctly invertible
+### Invertible maps are coherently invertible
 
 #### Lemma: A coherence for homotopies to an identity map
 
@@ -101,17 +101,20 @@ module _
   inv-has-inverse H = pr1 H
 
   abstract
-    issec-inv-has-inverse : (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
-    issec-inv-has-inverse H y =
+    is-section-inv-has-inverse :
+      (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
+    is-section-inv-has-inverse H y =
       ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
       ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
 
-    isretr-inv-has-inverse : (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
-    isretr-inv-has-inverse H = pr2 (pr2 H)
+    is-retraction-inv-has-inverse :
+      (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
+    is-retraction-inv-has-inverse H = pr2 (pr2 H)
 
     coherence-inv-has-inverse :
-      (H : has-inverse f) →
-      (issec-inv-has-inverse H ·r f) ~ (f ·l isretr-inv-has-inverse H)
+      ( H : has-inverse f) →
+      ( is-section-inv-has-inverse H ·r f) ~
+      ( f ·l is-retraction-inv-has-inverse H)
     coherence-inv-has-inverse H x =
       inv
         ( inv-con
@@ -133,9 +136,10 @@ module _
     is-coherently-invertible-has-inverse :
       (H : has-inverse f) → is-coherently-invertible f
     pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
-    pr1 (pr2 (is-coherently-invertible-has-inverse H)) = issec-inv-has-inverse H
+    pr1 (pr2 (is-coherently-invertible-has-inverse H)) =
+      is-section-inv-has-inverse H
     pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      isretr-inv-has-inverse H
+      is-retraction-inv-has-inverse H
     pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
       coherence-inv-has-inverse H
 ```

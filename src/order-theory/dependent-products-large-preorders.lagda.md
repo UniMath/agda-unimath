@@ -7,6 +7,8 @@ module order-theory.dependent-products-large-preorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -33,35 +35,32 @@ module _
   type-Π-Large-Preorder l1 = (i : I) → type-Large-Preorder (P i) l1
 
   leq-Π-Large-Preorder-Prop :
-    {l1 l2 : Level} →
-    type-Π-Large-Preorder l1 → type-Π-Large-Preorder l2 → Prop (β l1 l2 ⊔ l)
+    Large-Relation-Prop
+      ( λ l1 → α l1 ⊔ l)
+      ( λ l1 l2 → β l1 l2 ⊔ l)
+      ( type-Π-Large-Preorder)
   leq-Π-Large-Preorder-Prop x y =
     Π-Prop I (λ i → leq-Large-Preorder-Prop (P i) (x i) (y i))
 
   leq-Π-Large-Preorder :
-    {l1 l2 : Level} →
-    type-Π-Large-Preorder l1 → type-Π-Large-Preorder l2 → UU (β l1 l2 ⊔ l)
+    Large-Relation
+      ( λ l1 → α l1 ⊔ l)
+      ( λ l1 l2 → β l1 l2 ⊔ l)
+      ( type-Π-Large-Preorder)
   leq-Π-Large-Preorder x y =
     type-Prop (leq-Π-Large-Preorder-Prop x y)
 
   is-prop-leq-Π-Large-Preorder :
-    {l1 l2 : Level}
-    (x : type-Π-Large-Preorder l1) (y : type-Π-Large-Preorder l2) →
-    is-prop (leq-Π-Large-Preorder x y)
+    is-prop-Large-Relation type-Π-Large-Preorder leq-Π-Large-Preorder
   is-prop-leq-Π-Large-Preorder x y =
     is-prop-type-Prop (leq-Π-Large-Preorder-Prop x y)
 
   refl-leq-Π-Large-Preorder :
-    {l1 : Level} (x : type-Π-Large-Preorder l1) →
-    leq-Π-Large-Preorder x x
+    is-large-reflexive type-Π-Large-Preorder leq-Π-Large-Preorder
   refl-leq-Π-Large-Preorder x i = refl-leq-Large-Preorder (P i) (x i)
 
   transitive-leq-Π-Large-Preorder :
-    {l1 l2 l3 : Level}
-    (x : type-Π-Large-Preorder l1) (y : type-Π-Large-Preorder l2)
-    (z : type-Π-Large-Preorder l3) →
-    leq-Π-Large-Preorder y z → leq-Π-Large-Preorder x y →
-    leq-Π-Large-Preorder x z
+    is-large-transitive type-Π-Large-Preorder leq-Π-Large-Preorder
   transitive-leq-Π-Large-Preorder x y z H K i =
     transitive-leq-Large-Preorder (P i) (x i) (y i) (z i) (H i) (K i)
 

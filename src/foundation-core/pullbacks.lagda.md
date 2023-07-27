@@ -132,7 +132,7 @@ module _
   where
 
   Eq-canonical-pullback : (t t' : canonical-pullback f g) → UU (l1 ⊔ l2 ⊔ l3)
-  Eq-canonical-pullback (pair a bp) t' =
+  Eq-canonical-pullback (a , bp) t' =
     let b = pr1 bp
         p = pr2 bp
         a' = pr1 t'
@@ -143,9 +143,9 @@ module _
 
   refl-Eq-canonical-pullback :
     (t : canonical-pullback f g) → Eq-canonical-pullback t t
-  pr1 (refl-Eq-canonical-pullback (pair a (pair b p))) = refl
-  pr1 (pr2 (refl-Eq-canonical-pullback (pair a (pair b p)))) = refl
-  pr2 (pr2 (refl-Eq-canonical-pullback (pair a (pair b p)))) = inv right-unit
+  pr1 (refl-Eq-canonical-pullback (a , b , p)) = refl
+  pr1 (pr2 (refl-Eq-canonical-pullback (a , b , p))) = refl
+  pr2 (pr2 (refl-Eq-canonical-pullback (a , b , p))) = inv right-unit
 
   Eq-eq-canonical-pullback :
     (s t : canonical-pullback f g) → s ＝ t → Eq-canonical-pullback s t
@@ -153,12 +153,12 @@ module _
 
   extensionality-canonical-pullback :
     (t t' : canonical-pullback f g) → (t ＝ t') ≃ Eq-canonical-pullback t t'
-  extensionality-canonical-pullback (pair a (pair b p)) =
+  extensionality-canonical-pullback (a , b , p) =
     extensionality-Σ
       ( λ {a'} bp' α →
         Σ (b ＝ pr1 bp') (λ β → (ap f α ∙ pr2 bp') ＝ (p ∙ ap g β)))
       ( refl)
-      ( pair refl (inv right-unit))
+      ( refl , inv right-unit)
       ( λ x → id-equiv)
       ( extensionality-Σ
         ( λ {b'} p' β → p' ＝ (p ∙ ap g β))
@@ -264,24 +264,21 @@ module _
 
   inv-gap-cone-canonical-pullback-Σ :
     canonical-pullback f (pr1 {B = Q}) → canonical-pullback-Σ
-  pr1 (inv-gap-cone-canonical-pullback-Σ (pair x (pair (pair .(f x) q) refl))) =
-    x
-  pr2 (inv-gap-cone-canonical-pullback-Σ (pair x (pair (pair .(f x) q) refl))) =
-    q
+  pr1 (inv-gap-cone-canonical-pullback-Σ (x , (.(f x) , q) , refl)) = x
+  pr2 (inv-gap-cone-canonical-pullback-Σ (x , (.(f x) , q) , refl)) = q
 
   abstract
-    issec-inv-gap-cone-canonical-pullback-Σ :
+    is-section-inv-gap-cone-canonical-pullback-Σ :
       ( ( gap f (pr1 {B = Q}) cone-canonical-pullback-Σ) ∘
         ( inv-gap-cone-canonical-pullback-Σ)) ~ id
-    issec-inv-gap-cone-canonical-pullback-Σ
-      (pair x (pair (pair .(f x) q) refl)) =
+    is-section-inv-gap-cone-canonical-pullback-Σ (x , (.(f x) , q) , refl) =
       refl
 
   abstract
-    isretr-inv-gap-cone-canonical-pullback-Σ :
+    is-retraction-inv-gap-cone-canonical-pullback-Σ :
       ( ( inv-gap-cone-canonical-pullback-Σ) ∘
         ( gap f (pr1 {B = Q}) cone-canonical-pullback-Σ)) ~ id
-    isretr-inv-gap-cone-canonical-pullback-Σ (pair x q) = refl
+    is-retraction-inv-gap-cone-canonical-pullback-Σ (x , q) = refl
 
   abstract
     is-pullback-cone-canonical-pullback-Σ :
@@ -289,8 +286,8 @@ module _
     is-pullback-cone-canonical-pullback-Σ =
       is-equiv-has-inverse
         inv-gap-cone-canonical-pullback-Σ
-        issec-inv-gap-cone-canonical-pullback-Σ
-        isretr-inv-gap-cone-canonical-pullback-Σ
+        is-section-inv-gap-cone-canonical-pullback-Σ
+        is-retraction-inv-gap-cone-canonical-pullback-Σ
 
   compute-canonical-pullback-Σ :
     canonical-pullback-Σ ≃ canonical-pullback f (pr1 {B = Q})
@@ -340,7 +337,7 @@ triangle-map-commutative-canonical-pullback :
   (f : A → X) (g : B → X) (c : cone f g C) →
   ( gap g f (swap-cone f g c)) ~
   ( ( map-commutative-canonical-pullback f g) ∘ ( gap f g c))
-triangle-map-commutative-canonical-pullback f g (pair p (pair q H)) x = refl
+triangle-map-commutative-canonical-pullback f g (p , q , H) x = refl
 
 abstract
   is-pullback-swap-cone :
@@ -396,21 +393,21 @@ inv-map-fold-cone :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) → (g : B → X) →
   canonical-pullback (map-prod f g) (diagonal X) → canonical-pullback f g
-inv-map-fold-cone f g (pair (pair a b) (pair x α)) =
+inv-map-fold-cone f g ((a , b) , (x , α)) =
   triple a b ((ap pr1 α) ∙ (inv (ap pr2 α)))
 
 abstract
-  issec-inv-map-fold-cone :
+  is-section-inv-map-fold-cone :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) →
     ((map-fold-cone f g) ∘ (inv-map-fold-cone f g)) ~ id
-  issec-inv-map-fold-cone {A = A} {B} {X} f g (pair (pair a b) (pair x α)) =
+  is-section-inv-map-fold-cone {A = A} {B} {X} f g ((a , b) , (x , α)) =
     map-extensionality-canonical-pullback
       ( map-prod f g)
       ( diagonal X)
       refl
       ( ap pr2 α)
-      ( ( ( ( inv (issec-pair-eq α)) ∙
+      ( ( ( ( inv (is-section-pair-eq α)) ∙
             ( ap
               ( λ t → (eq-pair t (ap pr2 α)))
               ( ( ( inv right-unit) ∙
@@ -424,15 +421,16 @@ abstract
         ( ap
           ( concat
             ( eq-pair ((ap pr1 α) ∙ (inv (ap pr2 α))) refl)
-            ( pair x x))
+            ( x , x))
           ( inv (ap-diagonal (ap pr2 α)))))
 
 abstract
-  isretr-inv-map-fold-cone :
+  is-retraction-inv-map-fold-cone :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) →
     ((inv-map-fold-cone f g) ∘ (map-fold-cone f g)) ~ id
-  isretr-inv-map-fold-cone { A = A} { B = B} { X = X} f g (pair a (pair b p)) =
+  is-retraction-inv-map-fold-cone { A = A} { B = B} { X = X} f g (a , b , p) =
+
     map-extensionality-canonical-pullback {A = A} {B = B} {X = X} f g
       refl
       refl
@@ -443,8 +441,8 @@ abstract
                   ( λ t → t ∙
                     ( inv
                       ( ap pr2 (eq-pair
-                      { s = pair (f a) (g b)}
-                      { pair (g b) (g b)}
+                      { s = (f a , g b)}
+                      { (g b , g b)}
                       p refl))))
                     ( ap-pr1-eq-pair p refl)) ∙
                 ( ap (λ t → p ∙ (inv t)) (ap-pr2-eq-pair p refl))) ∙
@@ -458,15 +456,15 @@ abstract
   is-equiv-map-fold-cone f g =
     is-equiv-has-inverse
       ( inv-map-fold-cone f g)
-      ( issec-inv-map-fold-cone f g)
-      ( isretr-inv-map-fold-cone f g)
+      ( is-section-inv-map-fold-cone f g)
+      ( is-retraction-inv-map-fold-cone f g)
 
 triangle-map-fold-cone :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c : cone f g C) →
   ( gap (map-prod f g) (diagonal X) (fold-cone f g c)) ~
   ( (map-fold-cone f g) ∘ (gap f g c))
-triangle-map-fold-cone f g (pair p (pair q H)) z = refl
+triangle-map-fold-cone f g (p , q , H) z = refl
 
 abstract
   is-pullback-fold-cone-is-pullback :
@@ -538,8 +536,7 @@ triangle-map-prod-cone :
   (f' : A' → X') (g' : B' → X') (c' : cone f' g' C') →
   (gap (map-prod f f') (map-prod g g') (prod-cone f g f' g' c c')) ~
   ((map-prod-cone f g f' g') ∘ (map-prod (gap f g c) (gap f' g' c')))
-triangle-map-prod-cone {B' = B'}
-  f g (pair p (pair q H)) f' g' (pair p' (pair q' H')) (pair z z') =
+triangle-map-prod-cone {B' = B'} f g (p , q , H) f' g' (p' , q' , H') (z , z') =
   eq-pair-Σ refl (eq-pair-Σ refl right-unit)
 
 abstract
@@ -704,7 +701,7 @@ module _
   square-tot-map-fib-cone :
     ( (gap f g c) ∘ (map-equiv-total-fib (pr1 c))) ~
     ( (tot (λ a → tot (λ b → inv))) ∘ (tot (map-fib-cone f g c)))
-  square-tot-map-fib-cone (pair .((vertical-map-cone f g c) x) (pair x refl)) =
+  square-tot-map-fib-cone (pair .((vertical-map-cone f g c) x) (x , refl)) =
     eq-pair-Σ refl
       ( eq-pair-Σ refl
         ( inv
@@ -848,7 +845,7 @@ module _
                 ( pasting-vertical-cone f g h c d)
                 ( is-pb-dc)
                 ( vertical-map-cone f g c x)))
-            ( pair x refl))
+            ( x , refl))
 
   abstract
     is-pullback-rectangle-is-pullback-top :

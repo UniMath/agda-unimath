@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A function class is a subtype of the type of all functions.
+A **function class** is a [subtype](foundation.subtypes.md) of the type of all
+functions in a given universe.
 
 ## Definition
 
@@ -58,9 +59,9 @@ We say a function class is **composition closed** if it is closed under taking
 composites.
 
 ```agda
-is-composition-closed-function-class :
+is-closed-under-composition-function-class :
   {l1 l2 : Level} → function-class l1 l1 l2 → UU (lsuc l1 ⊔ l2)
-is-composition-closed-function-class {l1} {l2} c =
+is-closed-under-composition-function-class {l1} {l2} c =
   (A B C : UU l1) (f : A → B) (g : B → C) →
   type-Prop (c f) → type-Prop (c g) →
   type-Prop (c (g ∘ f))
@@ -68,7 +69,7 @@ is-composition-closed-function-class {l1} {l2} c =
 composition-closed-function-class :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 composition-closed-function-class l1 l2 =
-  Σ (function-class l1 l1 l2) (is-composition-closed-function-class)
+  Σ (function-class l1 l1 l2) (is-closed-under-composition-function-class)
 ```
 
 ## Pullback-stable function classes
@@ -127,21 +128,21 @@ is-prop-has-equivalences-function-class =
 ### Composition closedness is a property
 
 ```agda
-is-prop-is-composition-closed-function-class :
+is-prop-is-closed-under-composition-function-class :
   {l1 l2 : Level} (c : function-class l1 l1 l2) →
-  is-prop (is-composition-closed-function-class c)
-is-prop-is-composition-closed-function-class c =
+  is-prop (is-closed-under-composition-function-class c)
+is-prop-is-closed-under-composition-function-class c =
   is-prop-Π λ A → is-prop-Π λ B → is-prop-Π λ C →
     is-prop-Π λ f → is-prop-Π λ g →
       is-prop-function-type (is-prop-function-type
         ( is-prop-type-Prop (c (g ∘ f))))
 
-is-composition-closed-function-class-Prop :
+is-closed-under-composition-function-class-Prop :
   {l1 l2 : Level} → function-class l1 l1 l2 → Prop (lsuc l1 ⊔ l2)
-pr1 (is-composition-closed-function-class-Prop c) =
-  is-composition-closed-function-class c
-pr2 (is-composition-closed-function-class-Prop c) =
-  is-prop-is-composition-closed-function-class c
+pr1 (is-closed-under-composition-function-class-Prop c) =
+  is-closed-under-composition-function-class c
+pr2 (is-closed-under-composition-function-class-Prop c) =
+  is-prop-is-closed-under-composition-function-class c
 ```
 
 ### Being pullback-stable is a property

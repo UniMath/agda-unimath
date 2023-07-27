@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
 open import foundation.transport
@@ -162,7 +163,7 @@ module _
       ((U , ((λ u → pr1 (V u)) , e)) , ((pU , (λ u → pr2 (V u))) , pX) , s)
     pr2 reassociate =
       is-equiv-has-inverse
-        ( λ ((U , V , e) , ( ((pU , pV), pX) , s)) →
+        ( λ ((U , V , e) , ( ((pU , pV) , pX) , s)) →
           ( pX , ((U , pU) , (λ u → V u , pV u) , e) , s))
         ( refl-htpy)
         ( refl-htpy)

@@ -72,6 +72,7 @@ open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
+open import foundation.dependent-homotopies public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
 open import foundation.descent-coproduct-types public
@@ -155,6 +156,7 @@ open import foundation.iterated-cartesian-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
 open import foundation.large-identity-types public
@@ -163,6 +165,7 @@ open import foundation.large-locale-of-subtypes public
 open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
+open import foundation.lifts-families-of-elements public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
@@ -188,6 +191,7 @@ open import foundation.path-split-maps public
 open import foundation.perfect-images public
 open import foundation.pi-decompositions public
 open import foundation.pi-decompositions-subuniverse public
+open import foundation.pointed-torsorial-type-families public
 open import foundation.powersets public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
@@ -224,6 +228,7 @@ open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.shifting-sequences public
+open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public
@@ -232,6 +237,7 @@ open import foundation.slice public
 open import foundation.small-maps public
 open import foundation.small-types public
 open import foundation.small-universes public
+open import foundation.sorial-type-families public
 open import foundation.split-surjective-maps public
 open import foundation.standard-apartness-relations public
 open import foundation.strongly-extensional-maps public
@@ -248,6 +254,7 @@ open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
+open import foundation.torsorial-type-families public
 open import foundation.transport public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public

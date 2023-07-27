@@ -146,20 +146,20 @@ module _
   pr1 (hom-slice-fiberwise-hom α) a = pr1 (α (f a) (pair a refl))
   pr2 (hom-slice-fiberwise-hom α) a = inv (pr2 (α (f a) (pair a refl)))
 
-  issec-hom-slice-fiberwise-hom-eq-htpy :
+  is-section-hom-slice-fiberwise-hom-eq-htpy :
     (α : fiberwise-hom f g) (x : X) →
     (fiberwise-hom-hom-slice (hom-slice-fiberwise-hom α) x) ~ (α x)
-  issec-hom-slice-fiberwise-hom-eq-htpy α .(f a) (pair a refl) =
+  is-section-hom-slice-fiberwise-hom-eq-htpy α .(f a) (pair a refl) =
     eq-pair-Σ refl (inv-inv (pr2 (α (f a) (pair a refl))))
 
-  issec-hom-slice-fiberwise-hom :
+  is-section-hom-slice-fiberwise-hom :
     (fiberwise-hom-hom-slice ∘ hom-slice-fiberwise-hom) ~ id
-  issec-hom-slice-fiberwise-hom α =
-    eq-htpy (λ x → eq-htpy (issec-hom-slice-fiberwise-hom-eq-htpy α x))
+  is-section-hom-slice-fiberwise-hom α =
+    eq-htpy (λ x → eq-htpy (is-section-hom-slice-fiberwise-hom-eq-htpy α x))
 
-  isretr-hom-slice-fiberwise-hom :
+  is-retraction-hom-slice-fiberwise-hom :
     (hom-slice-fiberwise-hom ∘ fiberwise-hom-hom-slice) ~ id
-  isretr-hom-slice-fiberwise-hom (pair h H) =
+  is-retraction-hom-slice-fiberwise-hom (pair h H) =
     eq-pair-Σ refl (eq-htpy (inv-inv ∘ H))
 
   abstract
@@ -167,8 +167,8 @@ module _
     is-equiv-fiberwise-hom-hom-slice =
       is-equiv-has-inverse
         ( hom-slice-fiberwise-hom)
-        ( issec-hom-slice-fiberwise-hom)
-        ( isretr-hom-slice-fiberwise-hom)
+        ( is-section-hom-slice-fiberwise-hom)
+        ( is-retraction-hom-slice-fiberwise-hom)
 
   equiv-fiberwise-hom-hom-slice : hom-slice f g ≃ fiberwise-hom f g
   pr1 equiv-fiberwise-hom-hom-slice = fiberwise-hom-hom-slice
@@ -179,8 +179,8 @@ module _
     is-equiv-hom-slice-fiberwise-hom =
       is-equiv-has-inverse
         ( fiberwise-hom-hom-slice)
-        ( isretr-hom-slice-fiberwise-hom)
-        ( issec-hom-slice-fiberwise-hom)
+        ( is-retraction-hom-slice-fiberwise-hom)
+        ( is-section-hom-slice-fiberwise-hom)
 
   equiv-hom-slice-fiberwise-hom :
     fiberwise-hom f g ≃ hom-slice f g
@@ -230,15 +230,15 @@ module _
     equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
     equiv-right-swap-Σ
     where
-      α :
-        (h : hom-slice f g) →
-        is-equiv (pr1 h) ≃
-        is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
-      α h = equiv-prop
-        ( is-property-is-equiv _)
-        ( is-prop-Π (λ _ → is-property-is-equiv _))
-        ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice h)
-        ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice h)
+    α :
+      (h : hom-slice f g) →
+      is-equiv (pr1 h) ≃
+      is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+    α h = equiv-prop
+      ( is-property-is-equiv _)
+      ( is-prop-Π (λ _ → is-property-is-equiv _))
+      ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice h)
+      ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice h)
 
   equiv-equiv-slice-fiberwise-equiv :
     fiberwise-equiv (fib f) (fib g) ≃ equiv-slice f g

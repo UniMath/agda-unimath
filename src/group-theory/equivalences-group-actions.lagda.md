@@ -349,7 +349,7 @@ module _
         ( inv-equiv-Abstract-Group-Action G X Y f)
         ( f))
       ( id-equiv-Abstract-Group-Action G X)
-      ( isretr-map-inv-equiv (pr1 f))
+      ( is-retraction-map-inv-equiv (pr1 f))
 
   right-inverse-law-comp-equiv-Abstract-Group-Action :
     (f : equiv-Abstract-Group-Action G X Y) →
@@ -362,5 +362,5 @@ module _
       ( comp-equiv-Abstract-Group-Action G Y X Y f
         ( inv-equiv-Abstract-Group-Action G X Y f))
       ( id-equiv-Abstract-Group-Action G Y)
-      ( issec-map-inv-equiv (pr1 f))
+      ( is-section-map-inv-equiv (pr1 f))
 ```

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/generate_main_index_file.py
+# $ ./scripts/generate_main_index_file.py
 
 import os
 import sys
@@ -79,24 +79,24 @@ def generate_index(root, header):
 summary_template = """
 # SUMMARY
 
-# Project
+# Overview
 
-- [Agda-UniMath](HOME.md)
+- [Overview](HOME.md)
   - [Home](HOME.md)
   - [Community](CONTRIBUTORS.md)
     - [Maintainers](MAINTAINERS.md)
     - [Contributors](CONTRIBUTORS.md)
     - [Statement of inclusivity](STATEMENT-OF-INCLUSION.md)
     - [Projects using Agda-Unimath](USERS.md)
-  - [How-to](HOWTO-INSTALL.md)
-    - [Install](HOWTO-INSTALL.md)
-    - [Cite the library](CITATION.cff)
-  - [Guidelines](CODINGSTYLE.md)
-    - [Structure your file](FILE-CONVENTIONS.md)
-        - [TEMPLATE.lagda.md](TEMPLATE.lagda.md)
-    - [Library coding style](CODINGSTYLE.md)
+    - [Grant acknowledgements](GRANT-ACKNOWLEDGEMENTS.md)
+  - [Guides](HOWTO-INSTALL.md)
+    - [Installing the library](HOWTO-INSTALL.md)
     - [Design principles](DESIGN-PRINCIPLES.md)
-  - [Everything](everything.md)
+    - [Contributing to the library](CONTRIBUTING.md)
+    - [Structuring your file](FILE-CONVENTIONS.md)
+        - [File template](TEMPLATE.lagda.md)
+    - [The library coding style](CODINGSTYLE.md)
+    - [Citing the library](CITE-THIS-LIBRARY.md)
 
 {module_index}
 """
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     root = 'src'
 
     summary_path = 'SUMMARY.md'
-    index_header = '# Formalisation in Agda'
+    index_header = '# The agda-unimath library'
 
     index_content, status = generate_index(root, index_header)
     if status == 0:

@@ -7,6 +7,7 @@ module group-theory.category-of-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.large-categories
 
 open import foundation.equivalences
@@ -24,16 +25,20 @@ open import group-theory.precategory-of-groups
 ## Definition
 
 ```agda
-is-category-Group : is-category-Large-Precategory Group-Large-Precategory
-is-category-Group G =
+is-large-category-Group :
+  is-large-category-Large-Precategory Group-Large-Precategory
+is-large-category-Group G =
   fundamental-theorem-id
     ( is-contr-total-iso-Group G)
     ( iso-eq-Group G)
 
 eq-iso-Group : {l : Level} (G H : Group l) → type-iso-Group G H → Id G H
-eq-iso-Group G H = map-inv-is-equiv (is-category-Group G H)
+eq-iso-Group G H = map-inv-is-equiv (is-large-category-Group G H)
 
-Group-Large-Category : Large-Category lsuc (λ l1 l2 → l1 ⊔ l2)
-precat-Large-Category Group-Large-Category = Group-Large-Precategory
-is-category-Large-Category Group-Large-Category = is-category-Group
+Group-Large-Category : Large-Category lsuc (_⊔_)
+large-precategory-Large-Category Group-Large-Category = Group-Large-Precategory
+is-large-category-Large-Category Group-Large-Category = is-large-category-Group
+
+Group-Category : (l : Level) → Category (lsuc l) l
+Group-Category = category-Large-Category Group-Large-Category
 ```

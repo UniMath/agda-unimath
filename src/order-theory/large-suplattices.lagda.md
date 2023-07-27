@@ -7,6 +7,8 @@ module order-theory.large-suplattices where
 <detail><summary>Imports</summary>
 
 ```agda
+open import foundation.large-binary-relations
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -102,45 +104,31 @@ module _
     is-set-type-Large-Poset (large-poset-Large-Suplattice L)
 
   leq-Large-Suplattice-Prop :
-    {l1 l2 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l2) →
-    Prop (β l1 l2)
+    Large-Relation-Prop α β type-Large-Suplattice
   leq-Large-Suplattice-Prop =
     leq-Large-Poset-Prop (large-poset-Large-Suplattice L)
 
   leq-Large-Suplattice :
-    {l1 l2 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l2) →
-    UU (β l1 l2)
+    Large-Relation α β type-Large-Suplattice
   leq-Large-Suplattice = leq-Large-Poset (large-poset-Large-Suplattice L)
 
   is-prop-leq-Large-Suplattice :
-    {l1 l2 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l2) →
-    is-prop (leq-Large-Suplattice x y)
+    is-prop-Large-Relation type-Large-Suplattice leq-Large-Suplattice
   is-prop-leq-Large-Suplattice =
     is-prop-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   refl-leq-Large-Suplattice :
-    {l1 : Level} (x : type-Large-Suplattice l1) →
-    leq-Large-Suplattice x x
+    is-large-reflexive type-Large-Suplattice leq-Large-Suplattice
   refl-leq-Large-Suplattice =
     refl-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   antisymmetric-leq-Large-Suplattice :
-    {l1 : Level}
-    (x : type-Large-Suplattice l1) (y : type-Large-Suplattice l1) →
-    leq-Large-Suplattice x y → leq-Large-Suplattice y x → x ＝ y
+    is-large-antisymmetric type-Large-Suplattice leq-Large-Suplattice
   antisymmetric-leq-Large-Suplattice =
     antisymmetric-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   transitive-leq-Large-Suplattice :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Suplattice l1)
-    (y : type-Large-Suplattice l2)
-    (z : type-Large-Suplattice l3) →
-    leq-Large-Suplattice y z → leq-Large-Suplattice x y →
-    leq-Large-Suplattice x z
+    is-large-transitive type-Large-Suplattice leq-Large-Suplattice
   transitive-leq-Large-Suplattice =
     transitive-leq-Large-Poset (large-poset-Large-Suplattice L)
 

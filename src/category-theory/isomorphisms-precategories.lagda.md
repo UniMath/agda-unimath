@@ -54,19 +54,19 @@ module _
     is-iso-Precategory f → type-hom-Precategory C y x
   hom-inv-is-iso-Precategory H = pr1 H
 
-  issec-hom-inv-is-iso-Precategory :
+  is-section-hom-inv-is-iso-Precategory :
     {x y : obj-Precategory C} {f : type-hom-Precategory C x y}
     (H : is-iso-Precategory f) →
     comp-hom-Precategory C f (hom-inv-is-iso-Precategory H) ＝
     id-hom-Precategory C
-  issec-hom-inv-is-iso-Precategory H = pr1 (pr2 H)
+  is-section-hom-inv-is-iso-Precategory H = pr1 (pr2 H)
 
-  isretr-hom-inv-is-iso-Precategory :
+  is-retraction-hom-inv-is-iso-Precategory :
     {x y : obj-Precategory C} {f : type-hom-Precategory C x y}
     (H : is-iso-Precategory f) →
     comp-hom-Precategory C (hom-inv-is-iso-Precategory H) f ＝
     id-hom-Precategory C
-  isretr-hom-inv-is-iso-Precategory H = pr2 (pr2 H)
+  is-retraction-hom-inv-is-iso-Precategory H = pr2 (pr2 H)
 
   abstract
     is-proof-irrelevant-is-iso-Precategory :
@@ -132,21 +132,23 @@ module _
     iso-Precategory x y → type-hom-Precategory C y x
   hom-inv-iso-Precategory f = pr1 (is-iso-hom-iso-Precategory f)
 
-  issec-hom-inv-iso-Precategory :
+  is-section-hom-inv-iso-Precategory :
     {x y : obj-Precategory C} (f : iso-Precategory x y) →
     ( comp-hom-Precategory C
       ( hom-iso-Precategory f)
       ( hom-inv-iso-Precategory f)) ＝
     ( id-hom-Precategory C)
-  issec-hom-inv-iso-Precategory f = pr1 (pr2 (is-iso-hom-iso-Precategory f))
+  is-section-hom-inv-iso-Precategory f =
+    pr1 (pr2 (is-iso-hom-iso-Precategory f))
 
-  isretr-hom-inv-iso-Precategory :
+  is-retraction-hom-inv-iso-Precategory :
     {x y : obj-Precategory C} (f : iso-Precategory x y) →
     ( comp-hom-Precategory C
       ( hom-inv-iso-Precategory f)
       ( hom-iso-Precategory f)) ＝
     ( id-hom-Precategory C)
-  isretr-hom-inv-iso-Precategory f = pr2 (pr2 (is-iso-hom-iso-Precategory f))
+  is-retraction-hom-inv-iso-Precategory f =
+    pr2 (pr2 (is-iso-hom-iso-Precategory f))
 ```
 
 ## Examples
@@ -225,6 +227,31 @@ module _
   pr2 (iso-Precategory-Set x y) = is-set-iso-Precategory x y
 ```
 
+### When `hom x y` is a proposition, The type of isomorphisms from `x` to `y` form a proposition
+
+The type of isomorphisms between objects `x y : A` is a subtype of `hom x y`, so
+when this type is a proposition, then the type of isomorphisms from `x` to `y`
+form a proposition.
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (x y : obj-Precategory C)
+  where
+
+  is-prop-iso-Precategory :
+    (is-prop-hom-C-x-y : is-prop (type-hom-Precategory C x y)) →
+    is-prop (iso-Precategory C x y)
+  is-prop-iso-Precategory = is-prop-type-subtype (is-iso-Precategory-Prop C)
+
+  iso-Precategory-Prop :
+    (is-prop-hom-C-x-y : is-prop (type-hom-Precategory C x y)) →
+    Prop l2
+  pr1 (iso-Precategory-Prop _) = iso-Precategory C x y
+  pr2 (iso-Precategory-Prop is-prop-hom-C-x-y) =
+    is-prop-iso-Precategory is-prop-hom-C-x-y
+```
+
 ### A morphism is an isomorphism if and only if precomposition by it is an equivalence
 
 ```agda
@@ -239,11 +266,11 @@ module _
   precomp-hom-inv-is-iso-Precategory H z =
     precomp-hom-Precategory C (hom-inv-is-iso-Precategory C H) z
 
-  issec-precomp-hom-inv-is-iso-Precategory :
+  is-section-precomp-hom-inv-is-iso-Precategory :
     (H : is-iso-Precategory C f) (z : obj-Precategory C) →
     ( precomp-hom-Precategory C f z ∘ precomp-hom-inv-is-iso-Precategory H z) ~
     ( id)
-  issec-precomp-hom-inv-is-iso-Precategory H z g =
+  is-section-precomp-hom-inv-is-iso-Precategory H z g =
     equational-reasoning
       comp-hom-Precategory
         ( C)
@@ -256,15 +283,18 @@ module _
         by
         associative-comp-hom-Precategory C g (hom-inv-is-iso-Precategory C H) f
       ＝ comp-hom-Precategory C g (id-hom-Precategory C)
-        by ap (comp-hom-Precategory C g) (isretr-hom-inv-is-iso-Precategory C H)
+        by
+        ap
+          ( comp-hom-Precategory C g)
+          ( is-retraction-hom-inv-is-iso-Precategory C H)
       ＝ g
         by right-unit-law-comp-hom-Precategory C g
 
-  isretr-precomp-hom-inv-is-iso-Precategory :
+  is-retraction-precomp-hom-inv-is-iso-Precategory :
     (H : is-iso-Precategory C f) (z : obj-Precategory C) →
     ( precomp-hom-inv-is-iso-Precategory H z ∘ precomp-hom-Precategory C f z) ~
     ( id)
-  isretr-precomp-hom-inv-is-iso-Precategory H z g =
+  is-retraction-precomp-hom-inv-is-iso-Precategory H z g =
     equational-reasoning
       comp-hom-Precategory
         ( C)
@@ -277,7 +307,10 @@ module _
         by
         associative-comp-hom-Precategory C g f (hom-inv-is-iso-Precategory C H)
       ＝ comp-hom-Precategory C g (id-hom-Precategory C)
-        by ap (comp-hom-Precategory C g) (issec-hom-inv-is-iso-Precategory C H)
+        by
+        ap
+          ( comp-hom-Precategory C g)
+          ( is-section-hom-inv-is-iso-Precategory C H)
       ＝ g
         by right-unit-law-comp-hom-Precategory C g
 
@@ -287,6 +320,52 @@ module _
   is-equiv-precomp-is-iso-Precategory H z =
     is-equiv-has-inverse
       ( precomp-hom-inv-is-iso-Precategory H z)
-      ( issec-precomp-hom-inv-is-iso-Precategory H z)
-      ( isretr-precomp-hom-inv-is-iso-Precategory H z)
+      ( is-section-precomp-hom-inv-is-iso-Precategory H z)
+      ( is-retraction-precomp-hom-inv-is-iso-Precategory H z)
+```
+
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  (x y : obj-Precategory C)
+  where
+
+  is-iso-is-prop-hom-Precategory' :
+    is-prop (type-hom-Precategory C x x) →
+    is-prop (type-hom-Precategory C y y) →
+    (f : type-hom-Precategory C x y) →
+    type-hom-Precategory C y x →
+    is-iso-Precategory C f
+  pr1 (is-iso-is-prop-hom-Precategory' _ _ f g) = g
+  pr1 (pr2 (is-iso-is-prop-hom-Precategory' _ is-prop-hom-C-y-y f g)) =
+    eq-is-prop is-prop-hom-C-y-y
+  pr2 (pr2 (is-iso-is-prop-hom-Precategory' is-prop-hom-C-x-x _ f g)) =
+    eq-is-prop is-prop-hom-C-x-x
+
+  iso-is-prop-hom-Precategory' :
+    is-prop (type-hom-Precategory C x x) →
+    is-prop (type-hom-Precategory C y y) →
+    type-hom-Precategory C x y →
+    type-hom-Precategory C y x →
+    iso-Precategory C x y
+  pr1 (iso-is-prop-hom-Precategory' _ _ f g) = f
+  pr2 (iso-is-prop-hom-Precategory' is-prop-hom-C-x-x is-prop-hom-C-y-y f g) =
+    is-iso-is-prop-hom-Precategory' is-prop-hom-C-x-x is-prop-hom-C-y-y f g
+
+  is-iso-is-prop-hom-Precategory :
+    (( x' y' : obj-Precategory C) → is-prop (type-hom-Precategory C x' y')) →
+    (f : type-hom-Precategory C x y) → type-hom-Precategory C y x →
+    is-iso-Precategory C f
+  is-iso-is-prop-hom-Precategory is-prop-hom-C =
+    is-iso-is-prop-hom-Precategory' (is-prop-hom-C x x) (is-prop-hom-C y y)
+
+  iso-is-prop-hom-Precategory :
+    (( x' y' : obj-Precategory C) → is-prop (type-hom-Precategory C x' y')) →
+    type-hom-Precategory C x y →
+    type-hom-Precategory C y x →
+    iso-Precategory C x y
+  iso-is-prop-hom-Precategory is-prop-hom-C =
+    iso-is-prop-hom-Precategory' (is-prop-hom-C x x) (is-prop-hom-C y y)
 ```

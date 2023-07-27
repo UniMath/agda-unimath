@@ -167,11 +167,11 @@ module _
   function-functional-correspondence C x =
     pr1 (center (is-functional-functional-correspondence C x))
 
-  isretr-function-functional-correspondence :
+  is-retraction-function-functional-correspondence :
     (f : (x : A) → B x) →
     function-functional-correspondence
       ( functional-correspondence-function f) ＝ f
-  isretr-function-functional-correspondence f =
+  is-retraction-function-functional-correspondence f =
     eq-htpy
       ( λ x →
         ap pr1
@@ -185,50 +185,50 @@ module _
     {l3 : Level} (C : functional-correspondence l3 A B)
     where
 
-    map-issec-function-functional-correspondence :
+    map-is-section-function-functional-correspondence :
       (x : A) (y : B x) →
       function-functional-correspondence C x ＝ y →
       correspondence-functional-correspondence C x y
-    map-issec-function-functional-correspondence x ._ refl =
+    map-is-section-function-functional-correspondence x ._ refl =
       pr2 ( center (is-functional-functional-correspondence C x))
 
-    is-equiv-map-issec-function-functional-correspondence :
+    is-equiv-map-is-section-function-functional-correspondence :
       (x : A) (y : B x) →
-      is-equiv (map-issec-function-functional-correspondence x y)
-    is-equiv-map-issec-function-functional-correspondence
+      is-equiv (map-is-section-function-functional-correspondence x y)
+    is-equiv-map-is-section-function-functional-correspondence
       x =
       fundamental-theorem-id
         ( is-functional-functional-correspondence C x)
-        ( map-issec-function-functional-correspondence x)
+        ( map-is-section-function-functional-correspondence x)
 
-    equiv-issec-function-functional-correspondence :
+    equiv-is-section-function-functional-correspondence :
       equiv-functional-correspondence
         ( functional-correspondence-function
           ( function-functional-correspondence C))
         ( C)
-    pr1 ( equiv-issec-function-functional-correspondence x y) =
-      map-issec-function-functional-correspondence x y
-    pr2 (equiv-issec-function-functional-correspondence x y) =
-      is-equiv-map-issec-function-functional-correspondence x y
+    pr1 ( equiv-is-section-function-functional-correspondence x y) =
+      map-is-section-function-functional-correspondence x y
+    pr2 (equiv-is-section-function-functional-correspondence x y) =
+      is-equiv-map-is-section-function-functional-correspondence x y
 
-  issec-function-functional-correspondence :
+  is-section-function-functional-correspondence :
     (C : functional-correspondence l2 A B) →
     functional-correspondence-function (function-functional-correspondence C) ＝
     C
-  issec-function-functional-correspondence C =
+  is-section-function-functional-correspondence C =
     eq-equiv-functional-correspondence
       ( functional-correspondence-function
         ( function-functional-correspondence C))
       ( C)
-      ( equiv-issec-function-functional-correspondence C)
+      ( equiv-is-section-function-functional-correspondence C)
 
   is-equiv-functional-correspondence-function :
     is-equiv functional-correspondence-function
   is-equiv-functional-correspondence-function =
     is-equiv-has-inverse
       function-functional-correspondence
-      issec-function-functional-correspondence
-      isretr-function-functional-correspondence
+      is-section-function-functional-correspondence
+      is-retraction-function-functional-correspondence
 
   equiv-functional-correspondence-function :
     ((x : A) → B x) ≃ functional-correspondence l2 A B

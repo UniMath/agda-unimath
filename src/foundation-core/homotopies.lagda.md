@@ -166,7 +166,7 @@ module _
   where
 
   tr-htpy :
-     (f ~ g) → ((x : A) → C x (f x)) → ((x : A) → C x (g x))
+    (f ~ g) → ((x : A) → C x (f x)) → ((x : A) → C x (g x))
   tr-htpy H f' x = tr (C x) (H x) (f' x)
 
   tr-htpy² :

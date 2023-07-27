@@ -45,20 +45,20 @@ module _
   pr1 (map-inv-commutative-prod (pair b a)) = a
   pr2 (map-inv-commutative-prod (pair b a)) = b
 
-  issec-map-inv-commutative-prod :
+  is-section-map-inv-commutative-prod :
     (map-commutative-prod ∘ map-inv-commutative-prod) ~ id
-  issec-map-inv-commutative-prod (pair b a) = refl
+  is-section-map-inv-commutative-prod (pair b a) = refl
 
-  isretr-map-inv-commutative-prod :
+  is-retraction-map-inv-commutative-prod :
     (map-inv-commutative-prod ∘ map-commutative-prod) ~ id
-  isretr-map-inv-commutative-prod (pair a b) = refl
+  is-retraction-map-inv-commutative-prod (pair a b) = refl
 
   is-equiv-map-commutative-prod : is-equiv map-commutative-prod
   is-equiv-map-commutative-prod =
     is-equiv-has-inverse
       map-inv-commutative-prod
-      issec-map-inv-commutative-prod
-      isretr-map-inv-commutative-prod
+      is-section-map-inv-commutative-prod
+      is-retraction-map-inv-commutative-prod
 
   commutative-prod : (A × B) ≃ (B × A)
   pr1 commutative-prod = map-commutative-prod
@@ -78,15 +78,15 @@ module _
   map-inv-associative-prod : A × (B × C) → (A × B) × C
   map-inv-associative-prod = map-inv-associative-Σ A (λ x → B) (λ w → C)
 
-  issec-map-inv-associative-prod :
+  is-section-map-inv-associative-prod :
     (map-associative-prod ∘ map-inv-associative-prod) ~ id
-  issec-map-inv-associative-prod =
-    issec-map-inv-associative-Σ A (λ x → B) (λ w → C)
+  is-section-map-inv-associative-prod =
+    is-section-map-inv-associative-Σ A (λ x → B) (λ w → C)
 
-  isretr-map-inv-associative-prod :
+  is-retraction-map-inv-associative-prod :
     (map-inv-associative-prod ∘ map-associative-prod) ~ id
-  isretr-map-inv-associative-prod =
-    isretr-map-inv-associative-Σ A (λ x → B) (λ w → C)
+  is-retraction-map-inv-associative-prod =
+    is-retraction-map-inv-associative-Σ A (λ x → B) (λ w → C)
 
   is-equiv-map-associative-prod : is-equiv map-associative-prod
   is-equiv-map-associative-prod =

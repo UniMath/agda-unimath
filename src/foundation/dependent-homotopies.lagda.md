@@ -17,14 +17,18 @@ open import foundation-core.homotopies
 
 ## Idea
 
-Consider a [homotopy](foundation-core.homotopies.md) `H : f ~ g` between two functions `f g : (x : A) → B x`. Furthermore, consider a type family `C : (x : A) → B x → 𝒰` and two functions
+Consider a [homotopy](foundation-core.homotopies.md) `H : f ~ g` between two
+functions `f g : (x : A) → B x`. Furthermore, consider a type family
+`C : (x : A) → B x → 𝒰` and two functions
 
 ```text
   f' : (x : A) → C x (f x)
   g' : (x : A) → C x (g x)
 ```
 
-A **dependent homotopy** from `f'` to `g'` over `H` is a family of [dependent identifications](foundation-core.dependent-identifications.md) from `f' x` to `g' x` over `H x`.
+A **dependent homotopy** from `f'` to `g'` over `H` is a family of
+[dependent identifications](foundation-core.dependent-identifications.md) from
+`f' x` to `g' x` over `H x`.
 
 ## Definitions
 

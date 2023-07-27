@@ -56,22 +56,22 @@ module _
     {x y : obj-Category C} → iso-Category x y → type-hom-Category C y x
   hom-inv-iso-Category f = pr1 (is-iso-hom-iso-Category f)
 
-  issec-hom-inv-iso-Category :
+  is-section-hom-inv-iso-Category :
     { x y : obj-Category C}
     ( f : iso-Category x y) →
     ( comp-hom-Category C
       ( hom-iso-Category f)
       ( hom-inv-iso-Category f)) ＝
     ( id-hom-Category C)
-  issec-hom-inv-iso-Category f =
+  is-section-hom-inv-iso-Category f =
     pr1 (pr2 (is-iso-hom-iso-Category f))
 
-  isretr-hom-inv-iso-Category :
+  is-retraction-hom-inv-iso-Category :
     { x y : obj-Category C}
     ( f : iso-Category x y) →
     ( comp-hom-Category C (hom-inv-iso-Category f) (hom-iso-Category f)) ＝
     ( id-hom-Category C)
-  isretr-hom-inv-iso-Category f =
+  is-retraction-hom-inv-iso-Category f =
     pr2 (pr2 (is-iso-hom-iso-Category f))
 
   inv-iso-Category :
@@ -82,8 +82,8 @@ module _
       ( pair
         ( hom-iso-Category f)
         ( pair
-          ( isretr-hom-inv-iso-Category f)
-          ( issec-hom-inv-iso-Category f)))
+          ( is-retraction-hom-inv-iso-Category f)
+          ( is-section-hom-inv-iso-Category f)))
 ```
 
 ### Precomposing by isomorphisms
@@ -148,7 +148,7 @@ module _
   hom-inv-comp-iso-Category g f =
     comp-hom-Category C (hom-inv-iso-Category C f) (hom-inv-iso-Category C g)
 
-  issec-hom-inv-comp-iso-Category :
+  is-section-hom-inv-comp-iso-Category :
     { x y z : obj-Category C}
     ( g : iso-Category C y z)
     ( f : iso-Category C x y) →
@@ -156,7 +156,7 @@ module _
       ( hom-comp-iso-Category g f)
       ( hom-inv-comp-iso-Category g f)) ＝
     ( id-hom-Category C)
-  issec-hom-inv-comp-iso-Category g f =
+  is-section-hom-inv-comp-iso-Category g f =
     equational-reasoning
       comp-hom-Category C
         ( hom-comp-iso-Category g f)
@@ -196,23 +196,23 @@ module _
             ( comp-hom-Category C (hom-iso-Category C g))
             ( ap
               ( λ h → comp-hom-Category C h (hom-inv-iso-Category C g))
-              ( issec-hom-inv-iso-Category C f))
+              ( is-section-hom-inv-iso-Category C f))
       ＝ comp-hom-Category C (hom-iso-Category C g) (hom-inv-iso-Category C g)
         by
           ap
             ( comp-hom-Category C (hom-iso-Category C g))
             ( left-unit-law-comp-hom-Category C (hom-inv-iso-Category C g))
       ＝ id-hom-Category C
-        by issec-hom-inv-iso-Category C g
+        by is-section-hom-inv-iso-Category C g
 
-  isretr-hom-inv-comp-iso-Category :
+  is-retraction-hom-inv-comp-iso-Category :
     {x y z : obj-Category C} (g : iso-Category C y z) (f : iso-Category C x y) →
     ( comp-hom-Category
       ( C)
       ( hom-inv-comp-iso-Category g f)
       ( hom-comp-iso-Category g f)) ＝
     ( id-hom-Category C)
-  isretr-hom-inv-comp-iso-Category g f =
+  is-retraction-hom-inv-comp-iso-Category g f =
     equational-reasoning
       comp-hom-Category C
         ( hom-inv-comp-iso-Category g f)
@@ -252,14 +252,14 @@ module _
             ( comp-hom-Category C (hom-inv-iso-Category C f))
             ( ap
               ( λ h → comp-hom-Category C h (hom-iso-Category C f))
-              ( isretr-hom-inv-iso-Category C g))
+              ( is-retraction-hom-inv-iso-Category C g))
       ＝ comp-hom-Category C (hom-inv-iso-Category C f) (hom-iso-Category C f)
         by
           ap
             ( comp-hom-Category C (hom-inv-iso-Category C f))
             ( left-unit-law-comp-hom-Category C (hom-iso-Category C f))
       ＝ id-hom-Category C
-        by isretr-hom-inv-iso-Category C f
+        by is-retraction-hom-inv-iso-Category C f
 
   is-iso-hom-comp-iso-Category :
     {x y z : obj-Category C} (g : iso-Category C y z) (f : iso-Category C x y) →
@@ -267,9 +267,9 @@ module _
   pr1 (is-iso-hom-comp-iso-Category g f) =
     hom-inv-comp-iso-Category g f
   pr1 (pr2 (is-iso-hom-comp-iso-Category g f)) =
-    issec-hom-inv-comp-iso-Category g f
+    is-section-hom-inv-comp-iso-Category g f
   pr2 (pr2 (is-iso-hom-comp-iso-Category g f)) =
-    isretr-hom-inv-comp-iso-Category g f
+    is-retraction-hom-inv-comp-iso-Category g f
 
   comp-iso-Category :
     {x y z : obj-Category C} →
@@ -396,7 +396,7 @@ module _
     eq-Eq-iso-Category C
       ( comp-iso-Category C (inv-iso-Category C f) f)
       ( id-iso-Category C)
-      ( isretr-hom-inv-iso-Category C f)
+      ( is-retraction-hom-inv-iso-Category C f)
 ```
 
 #### Right inverse law
@@ -409,7 +409,7 @@ module _
     eq-Eq-iso-Category C
       ( comp-iso-Category C f (inv-iso-Category C f))
       ( id-iso-Category C)
-      ( issec-hom-inv-iso-Category C f)
+      ( is-section-hom-inv-iso-Category C f)
 ```
 
 ### Equalities give rise to isomorphisms
@@ -448,17 +448,17 @@ module _
     {x y : obj-Category C} → iso-Category C x y → x ＝ y
   eq-iso-Category {x} {y} = map-inv-equiv (extensionality-obj-Category x y)
 
-  issec-eq-iso-Category :
+  is-section-eq-iso-Category :
     {x y : obj-Category C} (f : iso-Category C x y) →
     iso-eq-Category C (eq-iso-Category f) ＝ f
-  issec-eq-iso-Category {x} {y} =
-    issec-map-inv-equiv (extensionality-obj-Category x y)
+  is-section-eq-iso-Category {x} {y} =
+    is-section-map-inv-equiv (extensionality-obj-Category x y)
 
-  isretr-eq-iso-Category :
+  is-retraction-eq-iso-Category :
     {x y : obj-Category C} (p : x ＝ y) →
     eq-iso-Category (iso-eq-Category C p) ＝ p
-  isretr-eq-iso-Category {x} {y} =
-    isretr-map-inv-equiv (extensionality-obj-Category x y)
+  is-retraction-eq-iso-Category {x} {y} =
+    is-retraction-map-inv-equiv (extensionality-obj-Category x y)
 
   preserves-comp-eq-iso-Category :
     { x y z : obj-Category C}
@@ -477,8 +477,8 @@ module _
           ap eq-iso-Category
             ( ap-binary
               ( comp-iso-Category C)
-              ( inv (issec-eq-iso-Category g))
-              ( inv (issec-eq-iso-Category f)))
+              ( inv (is-section-eq-iso-Category g))
+              ( inv (is-section-eq-iso-Category f)))
       ＝ eq-iso-Category
           ( iso-eq-Category C (eq-iso-Category f ∙ eq-iso-Category g))
         by
@@ -488,7 +488,7 @@ module _
                 ( eq-iso-Category f)
                 ( eq-iso-Category g)))
       ＝ eq-iso-Category f ∙ eq-iso-Category g
-        by isretr-eq-iso-Category (eq-iso-Category f ∙ eq-iso-Category g)
+        by is-retraction-eq-iso-Category (eq-iso-Category f ∙ eq-iso-Category g)
 ```
 
 ### The type of isomorphisms forms a set

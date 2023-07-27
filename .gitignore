@@ -1,3 +1,6 @@
+# envrc
+\.envrc
+\.direnv/
 
 ### Agda ###
 *.agdai

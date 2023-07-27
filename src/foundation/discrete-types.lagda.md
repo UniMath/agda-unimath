@@ -38,7 +38,7 @@ module _
   {l : Level} (X : Discrete-Type l)
   where
 
-  rel-apart-Discrete-Type : Rel-Prop l (type-Discrete-Type X)
+  rel-apart-Discrete-Type : Relation-Prop l (type-Discrete-Type X)
   rel-apart-Discrete-Type x y = neg-Prop' (x ＝ y)
 
   apart-Discrete-Type : (x y : type-Discrete-Type X) → UU l
@@ -47,12 +47,10 @@ module _
   antireflexive-apart-Discrete-Type : is-antireflexive rel-apart-Discrete-Type
   antireflexive-apart-Discrete-Type x r = r refl
 
-  symmetric-apart-Discrete-Type :
-    is-symmetric apart-Discrete-Type
+  symmetric-apart-Discrete-Type : is-symmetric apart-Discrete-Type
   symmetric-apart-Discrete-Type x y H p = H (inv p)
 
-  cotransitive-apart-Discrete-Type :
-    is-cotransitive rel-apart-Discrete-Type
+  cotransitive-apart-Discrete-Type : is-cotransitive rel-apart-Discrete-Type
   cotransitive-apart-Discrete-Type x y z r
     with has-decidable-equality-type-Discrete-Type X x z
   ... | inl refl = unit-trunc-Prop (inr (λ s → r (inv s)))

@@ -67,12 +67,12 @@ module _
             ( pair
               ( number-of-elements-is-finite
                 ( is-finite-coprod-symmetric-difference))
-              ( transitive-mere-equiv
+              ( transitive-mere-equiv _ _ _
+                ( unit-trunc-Prop
+                  ( inv-equiv (equiv-symmetric-difference P Q)))
                 ( mere-equiv-has-finite-cardinality
                   ( has-finite-cardinality-is-finite
-                    ( is-finite-coprod-symmetric-difference)))
-                ( unit-trunc-Prop
-                  ( inv-equiv (equiv-symmetric-difference P Q))))))) ∙
+                    ( is-finite-coprod-symmetric-difference))))))) ∙
         ( inv
           ( coprod-eq-is-finite
             ( is-finite-type-decidable-subtype

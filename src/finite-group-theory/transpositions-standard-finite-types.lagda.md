@@ -9,14 +9,12 @@ module finite-group-theory.transpositions-standard-finite-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import finite-group-theory.permutations-standard-finite-types
 open import finite-group-theory.transpositions
 
 open import foundation.action-on-identifications-functions
-open import foundation.automorphisms
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
@@ -31,7 +29,6 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import lists.flattening-lists
 open import lists.functoriality-lists
 open import lists.lists
 
@@ -616,7 +613,7 @@ htpy-permutation-snoc-list-adjacent-transpositions n (cons y l) x =
   htpy-permutation-snoc-list-adjacent-transpositions n l x
 
 htpy-permutation-list-adjacent-transpositions-transposition-Fin :
-  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j))→
+  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j)) →
   htpy-equiv
     ( permutation-list-adjacent-transpositions
       ( n)

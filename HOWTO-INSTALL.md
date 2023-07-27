@@ -1,4 +1,4 @@
-# INSTALL
+# Installing the library
 
 To use the `agda-unimath` library, you will need to have Agda and a code editor
 set up. This guide provides instructions for installing Agda as well as specific
@@ -197,41 +197,36 @@ in the library.
 ### Contributing
 
 We welcome and appreciate contributions from the community. If you're interested
-in contributing to the `agda-unimath` library, please follow our guidelines and
-best practices, as well as the instructions below to ensure a smooth setup and
-workflow.
+in contributing to the `agda-unimath` library, you can follow the instructions
+below to ensure a smooth setup and workflow. Also, please make sure to follow
+our [coding style](CODINGSTYLE.md) and
+[design principles](DESIGN-PRINCIPLES.md).
 
 #### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
 The `agda-unimath` library includes [pre-commit](https://pre-commit.com/) hooks
-that enforce basic formatting rules. To utilize these hooks, if you did not
-install your environment using Nix, you'll need to install the `pre-commit` tool
-and the hooks' Python dependencies. The easiest way to accomplish this is by
-using the Python package manager `pip`.
+that enforce [basic formatting rules](CONTRIBUTING.md). These will inform you of
+some rule violations in your commits, and for most violations they will also
+automatically apply the required changes.
 
-First, make sure that you have the latest version of Python installed on your
-computer; the hooks require Python 3.8 or newer. Then run the following command
-from the repository's main folder:
+To utilize these hooks, if you did not install your environment using Nix, you
+will need to install the `pre-commit` tool and the hooks' Python dependencies.
+The easiest way to accomplish this is by using the Python package manager `pip`.
+
+First, make sure that you have the latest version of Python and pip installed on
+your computer; the hooks require Python 3.8 or newer. Then run the following
+command from the repository's main folder:
 
 ```shell
-pip install -r scripts/requirements.txt
+python3 -m pip install -r scripts/requirements.txt
 ```
+
+Note that Python keeps the installed dependencies separate for different Python
+versions, so if you update Python, you need to re-run the above command.
 
 Now, before you submit a Pull Request (PR) next time, you can run `pre-commit`
 by staging your changes and executing the command `make pre-commit` from the
 repository's main folder.
-
-To have `pre-commit` run automatically before every commit, run the following
-command:
-
-```shell
-pre-commit install
-```
-
-After this, `pre-commit` will inform you of any rule violations in your
-subsequent commits. For most violations, it will also automatically apply the
-required changes. In such cases, simply stage the new changes and commit again.
-To disable this behaviour again, you can run `pre-commit uninstall`.
 
 Keep in mind that `pre-commit` is also a part of the Continuous Integration
 (CI), so any PR that violates the enforced conventions will be automatically

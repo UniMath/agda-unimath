@@ -224,59 +224,59 @@ module _
       ϕ (Z , .(comp-hom-Precategory C f h₁)) (h₁ , refl) (h₂ , β₂) =
       is-contr-Σ-is-prop c d q σ
       where
-        c :
-          type-hom-Precategory
+      c :
+        type-hom-Precategory
+          ( Slice-Precategory C A)
+          ( Z , comp-hom-Precategory C f h₁)
+          ( W , p)
+      pr1 c = pr1 (pr1 (ϕ Z h₁ h₂ β₂))
+      pr2 c =
+        ( ap
+          ( comp-hom-Precategory C f)
+          ( inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂)))))) ∙
+        ( inv (associative-comp-hom-Precategory C f p₁ _) ∙
+        ap
+          ( λ k → comp-hom-Precategory C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂))))
+          ( inv α₁))
+
+      d :
+        ( ( comp-hom-Precategory (Slice-Precategory C A) (p₁ , α₁) c) ＝
+          ( h₁ , refl)) ×
+        ( ( comp-hom-Precategory (Slice-Precategory C A) (p₂ , α₂) c) ＝
+          ( h₂ , β₂))
+      pr1 d =
+        eq-hom-Slice-Precategory C A _ _ (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
+      pr2 d =
+        eq-hom-Slice-Precategory C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
+
+      q :
+        ∀ k →
+        is-prop
+          ( ( comp-hom-Precategory
+              (Slice-Precategory C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
+            ( comp-hom-Precategory
+              (Slice-Precategory C A) (p₂ , α₂) k ＝ (h₂ , β₂)))
+      q k =
+        is-prop-prod
+          ( is-set-type-Set (hom-Slice-Precategory C A _ _) _ _)
+          ( is-set-type-Set (hom-Slice-Precategory C A _ _) _ _)
+
+      σ :
+        ∀ k →
+        ( ( comp-hom-Precategory
             ( Slice-Precategory C A)
-            ( Z , comp-hom-Precategory C f h₁)
-            ( W , p)
-        pr1 c = pr1 (pr1 (ϕ Z h₁ h₂ β₂))
-        pr2 c =
-          ( ap
-            ( comp-hom-Precategory C f)
-            ( inv (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂)))))) ∙
-          ( inv (associative-comp-hom-Precategory C f p₁ _) ∙
-          ap
-            ( λ k → comp-hom-Precategory C k (pr1 (pr1 (ϕ Z h₁ h₂ β₂))))
-            ( inv α₁))
-
-        d :
-          ( ( comp-hom-Precategory (Slice-Precategory C A) (p₁ , α₁) c) ＝
-            ( h₁ , refl)) ×
-          ( ( comp-hom-Precategory (Slice-Precategory C A) (p₂ , α₂) c) ＝
-            ( h₂ , β₂))
-        pr1 d =
-          eq-hom-Slice-Precategory C A _ _ (pr1 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
-        pr2 d =
-          eq-hom-Slice-Precategory C A _ _ (pr2 (pr2 (pr1 (ϕ Z h₁ h₂ β₂))))
-
-        q :
-          ∀ k →
-          is-prop
-            ( ( comp-hom-Precategory
-                (Slice-Precategory C A) (p₁ , α₁) k ＝ (h₁ , refl)) ×
-              ( comp-hom-Precategory
-                (Slice-Precategory C A) (p₂ , α₂) k ＝ (h₂ , β₂)))
-        q k =
-          is-prop-prod
-            ( is-set-type-Set (hom-Slice-Precategory C A _ _) _ _)
-            ( is-set-type-Set (hom-Slice-Precategory C A _ _) _ _)
-
-        σ :
-          ∀ k →
-          ( ( comp-hom-Precategory
-              ( Slice-Precategory C A)
-              ( p₁ , α₁)
-              ( k)) ＝
-            ( h₁ , refl)) ×
-          ( ( comp-hom-Precategory
-              ( Slice-Precategory C A)
-              ( p₂ , α₂)
-              ( k)) ＝
-            ( h₂ , β₂)) →
-          c ＝ k
-        σ (k , γ) (γ₁ , γ₂) =
-          eq-hom-Slice-Precategory C A _ _
-            ( ap pr1 (pr2 (ϕ Z h₁ h₂ β₂) (k , (ap pr1 γ₁ , ap pr1 γ₂))))
+            ( p₁ , α₁)
+            ( k)) ＝
+          ( h₁ , refl)) ×
+        ( ( comp-hom-Precategory
+            ( Slice-Precategory C A)
+            ( p₂ , α₂)
+            ( k)) ＝
+          ( h₂ , β₂)) →
+        c ＝ k
+      σ (k , γ) (γ₁ , γ₂) =
+        eq-hom-Slice-Precategory C A _ _
+          ( ap pr1 (pr2 (ϕ Z h₁ h₂ β₂) (k , (ap pr1 γ₁ , ap pr1 γ₂))))
 
     map-inv-is-pullback-is-product-Slice-Precategory :
       is-product-Precategory
@@ -285,65 +285,65 @@ module _
     map-inv-is-pullback-is-product-Slice-Precategory ψ W' p₁' p₂' α' =
       is-contr-Σ-is-prop k γ q σ
       where
-        k : type-hom-Precategory C W' W
-        k =
-          pr1
+      k : type-hom-Precategory C W' W
+      k =
+        pr1
+          ( pr1
             ( pr1
+              ( ψ
+                ( W' , comp-hom-Precategory C f p₁')
+                ( p₁' , refl)
+                ( p₂' , α'))))
+
+      γ :
+        (comp-hom-Precategory C p₁ k ＝ p₁') ×
+        (comp-hom-Precategory C p₂ k ＝ p₂')
+      pr1 γ =
+        ap pr1
+          ( pr1
+            ( pr2
               ( pr1
                 ( ψ
                   ( W' , comp-hom-Precategory C f p₁')
                   ( p₁' , refl)
-                  ( p₂' , α'))))
-
-        γ :
-          (comp-hom-Precategory C p₁ k ＝ p₁') ×
-          (comp-hom-Precategory C p₂ k ＝ p₂')
-        pr1 γ =
-          ap pr1
-            ( pr1
-              ( pr2
-                ( pr1
-                  ( ψ
-                    ( W' , comp-hom-Precategory C f p₁')
-                    ( p₁' , refl)
-                    ( p₂' , α')))))
-        pr2 γ =
-          ap pr1
+                  ( p₂' , α')))))
+      pr2 γ =
+        ap pr1
+          ( pr2
             ( pr2
-              ( pr2
-                ( pr1
-                  ( ψ
-                    ( W' , comp-hom-Precategory C f p₁')
-                    ( p₁' , refl)
-                    ( p₂' , α')))))
+              ( pr1
+                ( ψ
+                  ( W' , comp-hom-Precategory C f p₁')
+                  ( p₁' , refl)
+                  ( p₂' , α')))))
 
-        q :
-          ∀ k' →
-          is-prop
-            (( comp-hom-Precategory C p₁ k' ＝ p₁') ×
-            ( comp-hom-Precategory C p₂ k' ＝ p₂'))
-        q k' =
-          is-prop-prod
-            ( is-set-type-Set (hom-Precategory C _ _) _ _)
-            ( is-set-type-Set (hom-Precategory C _ _) _ _)
+      q :
+        ∀ k' →
+        is-prop
+          (( comp-hom-Precategory C p₁ k' ＝ p₁') ×
+          ( comp-hom-Precategory C p₂ k' ＝ p₂'))
+      q k' =
+        is-prop-prod
+          ( is-set-type-Set (hom-Precategory C _ _) _ _)
+          ( is-set-type-Set (hom-Precategory C _ _) _ _)
 
-        σ :
-          ( k' : type-hom-Precategory C W' W) →
-          ( γ' :
-            ( comp-hom-Precategory C p₁ k' ＝ p₁') ×
-            ( comp-hom-Precategory C p₂ k' ＝ p₂')) →
-            k ＝ k'
-        σ k' (γ₁ , γ₂) =
-          ap
-            ( pr1 ∘ pr1)
-            ( pr2
-              ( ψ (W' , comp-hom-Precategory C f p₁') (p₁' , refl) (p₂' , α'))
-              ( ( ( k') ,
-                  ( ( ap (comp-hom-Precategory C f) (inv γ₁)) ∙
-                    ( ( inv (associative-comp-hom-Precategory C f p₁ k')) ∙
-                      ( ap (λ l → comp-hom-Precategory C l k') (inv α₁))))) ,
-                ( eq-hom-Slice-Precategory C A _ _ γ₁) ,
-                ( eq-hom-Slice-Precategory C A _ _ γ₂)))
+      σ :
+        ( k' : type-hom-Precategory C W' W) →
+        ( γ' :
+          ( comp-hom-Precategory C p₁ k' ＝ p₁') ×
+          ( comp-hom-Precategory C p₂ k' ＝ p₂')) →
+          k ＝ k'
+      σ k' (γ₁ , γ₂) =
+        ap
+          ( pr1 ∘ pr1)
+          ( pr2
+            ( ψ (W' , comp-hom-Precategory C f p₁') (p₁' , refl) (p₂' , α'))
+            ( ( ( k') ,
+                ( ( ap (comp-hom-Precategory C f) (inv γ₁)) ∙
+                  ( ( inv (associative-comp-hom-Precategory C f p₁ k')) ∙
+                    ( ap (λ l → comp-hom-Precategory C l k') (inv α₁))))) ,
+              ( eq-hom-Slice-Precategory C A _ _ γ₁) ,
+              ( eq-hom-Slice-Precategory C A _ _ γ₂)))
 
     equiv-is-pullback-is-product-Slice-Precategory :
       is-pullback-Precategory C A X Y f g W p₁ p₂ α ≃
@@ -391,10 +391,10 @@ module _
       ( inv β₁ ∙ β₂)
       ( q)
 
-  issec-map-inv-pullback-product-Slice-Precategory :
+  is-section-map-inv-pullback-product-Slice-Precategory :
     ( map-pullback-product-Slice-Precategory ∘
       map-inv-pullback-product-Slice-Precategory) ~ id
-  issec-map-inv-pullback-product-Slice-Precategory
+  is-section-map-inv-pullback-product-Slice-Precategory
     ((Z , .(comp-hom-Precategory C f h₁)) , (h₁ , refl) , (h₂ , β₂) , q) =
     eq-pair-Σ
       ( refl)
@@ -411,10 +411,11 @@ module _
               ( _))
           ( refl)))
 
-  isretr-map-inv-pullback-product-Slice-Precategory :
+  is-retraction-map-inv-pullback-product-Slice-Precategory :
     ( map-inv-pullback-product-Slice-Precategory ∘
       map-pullback-product-Slice-Precategory) ~ id
-  isretr-map-inv-pullback-product-Slice-Precategory (W , p₁ , p₂ , α , q) =
+  is-retraction-map-inv-pullback-product-Slice-Precategory
+    ( W , p₁ , p₂ , α , q) =
     eq-pair-Σ
       ( refl)
       ( eq-pair-Σ
@@ -433,6 +434,6 @@ module _
   pr2 equiv-pullback-product-Slice-Precategory =
     is-equiv-has-inverse
       map-inv-pullback-product-Slice-Precategory
-      issec-map-inv-pullback-product-Slice-Precategory
-      isretr-map-inv-pullback-product-Slice-Precategory
+      is-section-map-inv-pullback-product-Slice-Precategory
+      is-retraction-map-inv-pullback-product-Slice-Precategory
 ```

@@ -10,7 +10,6 @@ module foundation.univalence-action-on-equivalences where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.identity-types
 open import foundation.sets
 open import foundation.subuniverses
 open import foundation.transport
@@ -20,6 +19,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
+open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.subtypes
@@ -55,7 +55,7 @@ module _
     ( ap (equiv-tr B)
       ( is-injective-map-equiv
         ( extensionality-subuniverse P X X)
-        ( issec-map-inv-is-equiv
+        ( is-section-map-inv-is-equiv
           ( is-equiv-equiv-eq-subuniverse P X X)
           ( id-equiv)))) ∙
       ( equiv-tr-refl B)
@@ -120,7 +120,7 @@ module _
     lemma2 f g h X Y e =
       tr
         ( λ e' → f X Y e' ＝ g X Y e')
-        ( issec-map-inv-is-equiv (univalence (pr1 X) (pr1 Y)) e)
+        ( is-section-map-inv-is-equiv (univalence (pr1 X) (pr1 Y)) e)
         ( lemma1
           ( λ X Y pX pY p → f (X , pX) (Y , pY) (equiv-eq p))
           ( λ X Y pX pY p → g (X , pX) (Y , pY) (equiv-eq p))

@@ -217,15 +217,15 @@ module _
     eq-htpy-dependent-cocone d' =
       map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
 
-    issec-eq-htpy-dependent-cocone :
+    is-section-eq-htpy-dependent-cocone :
       (d' : dependent-cocone f g c P) →
       ( htpy-eq-dependent-cocone d' ∘ eq-htpy-dependent-cocone d') ~ id
-    issec-eq-htpy-dependent-cocone d' =
-      issec-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
+    is-section-eq-htpy-dependent-cocone d' =
+      is-section-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
 
-    isretr-eq-htpy-dependent-cocone :
+    is-retraction-eq-htpy-dependent-cocone :
       (d' : dependent-cocone f g c P) →
       ( eq-htpy-dependent-cocone d' ∘ htpy-eq-dependent-cocone d') ~ id
-    isretr-eq-htpy-dependent-cocone d' =
-      isretr-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
+    is-retraction-eq-htpy-dependent-cocone d' =
+      is-retraction-map-inv-is-equiv (is-equiv-htpy-eq-dependent-cocone d')
 ```

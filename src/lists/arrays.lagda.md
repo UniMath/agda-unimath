@@ -111,20 +111,20 @@ module _
   vec-list nil = empty-vec
   vec-list (cons x l) = x ∷ vec-list l
 
-  issec-vec-list : (λ l → list-vec (length-list l) (vec-list l)) ~ id
-  issec-vec-list nil = refl
-  issec-vec-list (cons x l) = ap (cons x) (issec-vec-list l)
+  is-section-vec-list : (λ l → list-vec (length-list l) (vec-list l)) ~ id
+  is-section-vec-list nil = refl
+  is-section-vec-list (cons x l) = ap (cons x) (is-section-vec-list l)
 
-  isretr-vec-list :
+  is-retraction-vec-list :
     ( λ (x : Σ ℕ (λ n → vec A n)) →
       ( length-list (list-vec (pr1 x) (pr2 x)) ,
         vec-list (list-vec (pr1 x) (pr2 x)))) ~
     id
-  isretr-vec-list (zero-ℕ , empty-vec) = refl
-  isretr-vec-list (succ-ℕ n , (x ∷ v)) =
+  is-retraction-vec-list (zero-ℕ , empty-vec) = refl
+  is-retraction-vec-list (succ-ℕ n , (x ∷ v)) =
     ap
       ( λ v → succ-ℕ (pr1 v) , (x ∷ (pr2 v)))
-      ( isretr-vec-list (n , v))
+      ( is-retraction-vec-list (n , v))
 
   list-array : array A → list A
   list-array (n , t) = list-vec n (listed-vec-functional-vec n t)
@@ -133,32 +133,32 @@ module _
   array-list l =
     ( length-list l , functional-vec-vec (length-list l) (vec-list l))
 
-  issec-array-list : (list-array ∘ array-list) ~ id
-  issec-array-list nil = refl
-  issec-array-list (cons x l) = ap (cons x) (issec-array-list l)
+  is-section-array-list : (list-array ∘ array-list) ~ id
+  is-section-array-list nil = refl
+  is-section-array-list (cons x l) = ap (cons x) (is-section-array-list l)
 
-  isretr-array-list : (array-list ∘ list-array) ~ id
-  isretr-array-list (n , t) =
+  is-retraction-array-list : (array-list ∘ list-array) ~ id
+  is-retraction-array-list (n , t) =
     ap
       ( λ (n , v) → (n , functional-vec-vec n v))
-      ( isretr-vec-list (n , listed-vec-functional-vec n t)) ∙
-    eq-pair-Σ refl (isretr-functional-vec-vec n t)
+      ( is-retraction-vec-list (n , listed-vec-functional-vec n t)) ∙
+    eq-pair-Σ refl (is-retraction-functional-vec-vec n t)
 
   equiv-list-array : array A ≃ list A
   pr1 equiv-list-array = list-array
   pr2 equiv-list-array =
     is-equiv-has-inverse
       array-list
-      issec-array-list
-      isretr-array-list
+      is-section-array-list
+      is-retraction-array-list
 
   equiv-array-list : list A ≃ array A
   pr1 equiv-array-list = array-list
   pr2 equiv-array-list =
     is-equiv-has-inverse
       list-array
-      isretr-array-list
-      issec-array-list
+      is-retraction-array-list
+      is-section-array-list
 ```
 
 ### Computational rules of the equivalence between arrays and lists

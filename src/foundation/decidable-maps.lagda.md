@@ -37,10 +37,10 @@ module _
 ```
 
 ```agda
-is-decidable-map-retr :
+is-decidable-map-retraction :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → has-decidable-equality B →
-  (i : A → B) → retr i → is-decidable-map i
-is-decidable-map-retr d i (pair r R) b =
+  (i : A → B) → retraction i → is-decidable-map i
+is-decidable-map-retraction d i (pair r R) b =
   is-decidable-iff
     ( λ (p : i (r b) ＝ b) → pair (r b) p)
     ( λ t → ap (i ∘ r) (inv (pr2 t)) ∙ (ap i (R (pr1 t)) ∙ pr2 t))

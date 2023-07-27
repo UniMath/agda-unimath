@@ -25,7 +25,9 @@ open import foundation-core.transport
 
 ## Idea
 
-Consider a map `h : A → X` and a type family `P` over `X`, which we think of as a family of elements in `X`. A **lift of families of elements** into `P` along `f` is a family of elements `(a : A) → P (h a)`.
+Consider a map `h : A → X` and a type family `P` over `X`, which we think of as
+a family of elements in `X`. A **lift of families of elements** into `P` along
+`f` is a family of elements `(a : A) → P (h a)`.
 
 ## Definitions
 
@@ -35,7 +37,7 @@ Consider a map `h : A → X` and a type family `P` over `X`, which we think of a
 module _
   {l1 l2 l3 : Level} (A : UU l1) {X : UU l2} (P : X → UU l3)
   where
-  
+
   lift-family-of-elements :
     (A → X) → UU (l1 ⊔ l3)
   lift-family-of-elements h = (a : A) → P (h a)
@@ -88,8 +90,8 @@ module _
 
     compute-tr-eq-htpy-lift-family-of-elements :
       (h : B → X) (f : A → B) →
-      Id ( tr-eq-htpy-lift-family-of-elements h (refl-htpy' f))
-         ( tr-eq-htpy-lift-family-of-elements-refl-htpy h f)
+      tr-eq-htpy-lift-family-of-elements h (refl-htpy' f) ＝
+      tr-eq-htpy-lift-family-of-elements-refl-htpy h f
     compute-tr-eq-htpy-lift-family-of-elements h f =
       compute-ind-htpy f
         ( λ g H → TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS h H)
@@ -106,7 +108,8 @@ TRIANGLE-PRECOMPOSE-LIFTS :
   ( P : X → UU l4) {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
-    ( (tr (lift-family-of-elements A P) (eq-htpy (h ·l H))) ∘ (precompose-lifts P f h)) ~
+    ( ( tr (lift-family-of-elements A P) (eq-htpy (h ·l H))) ∘
+      ( precompose-lifts P f h)) ~
     ( precompose-lifts P g h)
 
 triangle-precompose-lifts-refl-htpy :
@@ -166,7 +169,8 @@ COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS :
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
     ( triangle-precompose-lifts P H h) ~
-    ( ( ( tr-eq-htpy-lift-family-of-elements P h H) ·r (precompose-lifts P f h)) ∙h
+    ( ( ( tr-eq-htpy-lift-family-of-elements P h H) ·r
+        ( precompose-lifts P f h)) ∙h
       ( triangle-precompose-lifts' P H h))
 
 coherence-triangle-precompose-lifts-refl-htpy :
@@ -176,7 +180,8 @@ coherence-triangle-precompose-lifts-refl-htpy P f h =
   ( htpy-eq (htpy-eq (compute-triangle-precompose-lifts P f) h)) ∙h
   ( ( ( inv-htpy-right-unit-htpy) ∙h
       ( ap-concat-htpy
-        ( λ h' → tr-eq-htpy-lift-family-of-elements-refl-htpy P h f (λ a → h' (f a)))
+        ( λ h' →
+          tr-eq-htpy-lift-family-of-elements-refl-htpy P h f (λ a → h' (f a)))
         ( refl-htpy)
         ( triangle-precompose-lifts' P refl-htpy h)
         ( inv-htpy (compute-triangle-precompose-lifts' P f h)))) ∙h

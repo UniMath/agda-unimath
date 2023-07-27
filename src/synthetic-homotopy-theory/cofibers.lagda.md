@@ -68,7 +68,7 @@ module _
 ### The cofiber of an equivalence is contractible
 
 Note that this is not a logical equivalence. Not every map whose cofibers are
-all contractible is an equivalence. For instance The cofiber of `X → 1` where
+all contractible is an equivalence. For instance, the cofiber of `X → 1` where
 `X` is an [acyclic type](synthetic-homotopy-theory.acyclic-types.md) is by
 definition contractible. Examples of noncontractible acyclic types include
 [Hatcher's acyclic type](synthetic-homotopy-theory.hatchers-acyclic-type.md).

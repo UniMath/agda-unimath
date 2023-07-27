@@ -83,12 +83,12 @@ module _
     type-Type-With-Apartness type-with-apartness-Type-With-Tight-Apartness
 
   rel-apart-Type-With-Tight-Apartness :
-    Rel-Prop l2 type-Type-With-Tight-Apartness
+    Relation-Prop l2 type-Type-With-Tight-Apartness
   rel-apart-Type-With-Tight-Apartness =
     rel-apart-Type-With-Apartness type-with-apartness-Type-With-Tight-Apartness
 
   apart-Type-With-Tight-Apartness :
-    Rel l2 type-Type-With-Tight-Apartness
+    Relation l2 type-Type-With-Tight-Apartness
   apart-Type-With-Tight-Apartness =
     apart-Type-With-Apartness type-with-apartness-Type-With-Tight-Apartness
 

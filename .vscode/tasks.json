@@ -7,7 +7,8 @@
       "type": "shell",
       "command": "make",
       "args": ["check"],
-      "problemMatcher": []
+      "problemMatcher": [],
+      "group": "build"
     },
     {
       "label": "pre-commit",
@@ -15,25 +16,39 @@
       "type": "shell",
       "command": "make",
       "args": ["pre-commit"],
-      "problemMatcher": []
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     },
     {
       "label": "remove-unused-imports",
       "detail": "Search for and remove unused imports",
       "type": "shell",
-      "command": "python",
+      "command": "python3",
       "args": ["${workspaceFolder}/scripts/remove_unused_imports.py"],
       "problemMatcher": [],
       "hide": true
     },
     {
-      "label": "unused-imports",
-      "detail": "Search for and remove unused imports. Very slow!",
+      "label": "demote-foundation-imports",
+      "detail": "Search for and demote imports",
       "type": "shell",
-      "command": "python",
+      "command": "python3",
       "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
       "problemMatcher": [],
-      "dependsOn": "remove-unused-imports"
+      "hide": true
+    },
+    {
+      "label": "unused-imports",
+      "detail": "Demotes imports from `foundation` to `foundation-core` when possible in `foundation` and `foundation-core` modules. Very slow!",
+      "type": "shell",
+      "command": "python3",
+      "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
+      "problemMatcher": [],
+      "dependsOn": ["remove-unused-imports", "demote-foundation-imports"],
+      "dependsOrder": "sequence"
     }
   ],
   "statusbar.default.hide": false

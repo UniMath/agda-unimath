@@ -7,10 +7,10 @@ module foundation-core.equality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
-open import foundation-core.dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -58,22 +58,22 @@ module _
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 
-  isretr-pair-eq-Σ :
+  is-retraction-pair-eq-Σ :
     (s t : Σ A B) →
     ((pair-eq-Σ {s} {t}) ∘ (eq-pair-Σ' {s} {t})) ~ id {A = Eq-Σ s t}
-  isretr-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
+  is-retraction-pair-eq-Σ (pair x y) (pair .x .y) (pair refl refl) = refl
 
-  issec-pair-eq-Σ :
+  is-section-pair-eq-Σ :
     (s t : Σ A B) → ((eq-pair-Σ' {s} {t}) ∘ (pair-eq-Σ {s} {t})) ~ id
-  issec-pair-eq-Σ (pair x y) .(pair x y) refl = refl
+  is-section-pair-eq-Σ (pair x y) .(pair x y) refl = refl
 
   abstract
     is-equiv-eq-pair-Σ : (s t : Σ A B) → is-equiv (eq-pair-Σ' {s} {t})
     is-equiv-eq-pair-Σ s t =
       is-equiv-has-inverse
         ( pair-eq-Σ)
-        ( issec-pair-eq-Σ s t)
-        ( isretr-pair-eq-Σ s t)
+        ( is-section-pair-eq-Σ s t)
+        ( is-retraction-pair-eq-Σ s t)
 
   equiv-eq-pair-Σ : (s t : Σ A B) → Eq-Σ s t ≃ (s ＝ t)
   equiv-eq-pair-Σ s t = pair eq-pair-Σ' (is-equiv-eq-pair-Σ s t)
@@ -83,8 +83,8 @@ module _
     is-equiv-pair-eq-Σ s t =
       is-equiv-has-inverse
         ( eq-pair-Σ')
-        ( isretr-pair-eq-Σ s t)
-        ( issec-pair-eq-Σ s t)
+        ( is-retraction-pair-eq-Σ s t)
+        ( is-section-pair-eq-Σ s t)
 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
   equiv-pair-eq-Σ s t = pair pair-eq-Σ (is-equiv-pair-eq-Σ s t)
@@ -103,6 +103,29 @@ module _
   lift-eq-Σ :
     {x y : A} (p : x ＝ y) (b : B x) → (pair x b) ＝ (pair y (tr B p b))
   lift-eq-Σ refl b = refl
+```
+
+### Transport in a family of dependent pair types
+
+```agda
+tr-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A} {B : A → UU l2}
+  (C : (x : A) → B x → UU l3) (p : a0 ＝ a1) (z : Σ (B a0) (λ x → C a0 x)) →
+  tr (λ a → (Σ (B a) (C a))) p z ＝
+  pair (tr B p (pr1 z)) (tr (ind-Σ C) (eq-pair-Σ p refl) (pr2 z))
+tr-Σ C refl z = refl
+```
+
+### Transport in a family over a dependent pair type
+
+```agda
+tr-eq-pair-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {a0 a1 : A}
+  {B : A → UU l2} {b0 : B a0} {b1 : B a1} (C : (Σ A B) → UU l3)
+  (p : a0 ＝ a1) (q : dependent-identification B p b0 b1) (u : C (a0 , b0)) →
+  tr C (eq-pair-Σ p q) u ＝
+  tr (λ x → C (a1 , x)) q (tr C (eq-pair-Σ p refl) u)
+tr-eq-pair-Σ C refl refl u = refl
 ```
 
 ## See also
