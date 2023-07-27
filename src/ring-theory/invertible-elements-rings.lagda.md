@@ -22,9 +22,9 @@ open import ring-theory.rings
 
 ## Idea
 
-Invertible elements are elements that have a two-sided multiplicative inverse.
-Such elements are also called the units of the Ring. The set of units of any
-ring forms a group.
+**Invertible elements** in a [ring](ring-theory.rings.md) are elements that have a two-sided multiplicative inverse.
+Such elements are also called the **units** of the ring. The [set](foundation.sets.md) of units of any
+ring forms a [group](group-theory.groups.md).
 
 ## Definition
 

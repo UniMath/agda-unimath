@@ -9,10 +9,13 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.commutative-rings-modular-arithmetic
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 
@@ -184,6 +187,6 @@ is-relatively-prime-is-unit-ℤ-Mod :
   (a n : ℕ) →
   is-invertible-element-Ring (ℤ-Mod-Ring n) (mod-ℕ n a) →
   is-relatively-prime-ℕ a n
-is-relatively-prime-is-unit-ℤ-Mod a n H =
-  {!!}
+is-relatively-prime-is-unit-ℤ-Mod a zero-ℕ (d , p , q) = {!!}
+is-relatively-prime-is-unit-ℤ-Mod a (succ-ℕ n) (d , p , q) = {!!}
 ```
