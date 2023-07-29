@@ -99,20 +99,21 @@ pointed-map-smash-prod-prod-Pointed-Type A B =
 ### The smash product is the product in the category of pointed types
 
 ```agda
-gap-smash-prod-Pointed-Type :
+module _
   {l1 l2 l3 : Level}
-  (A : Pointed-Type l1) (B : Pointed-Type l2) (S : Pointed-Type l3) →
-  (f : S →∗ A) (g : S →∗ B) → S →∗ (A ∧∗ B)
-gap-smash-prod-Pointed-Type A B S f g =
-  pointed-map-smash-prod-prod-Pointed-Type A B ∘∗
-  gap-prod-Pointed-Type A B S f g
+  {A : Pointed-Type l1} {B : Pointed-Type l2} {S : Pointed-Type l3}
+  where
 
-map-gap-smash-prod-Pointed-Type :
-  {l1 l2 l3 : Level}
-  (A : Pointed-Type l1) (B : Pointed-Type l2) (S : Pointed-Type l3) →
-  (f : S →∗ A) (g : S →∗ B) → type-Pointed-Type S → type-Pointed-Type (A ∧∗ B)
-map-gap-smash-prod-Pointed-Type A B S f g =
-  pr1 (gap-smash-prod-Pointed-Type A B S f g)
+  gap-smash-prod-Pointed-Type :
+    (f : S →∗ A) (g : S →∗ B) → S →∗ (A ∧∗ B)
+  gap-smash-prod-Pointed-Type f g =
+    pointed-map-smash-prod-prod-Pointed-Type A B ∘∗
+    gap-prod-Pointed-Type f g
+
+  map-gap-smash-prod-Pointed-Type :
+    (f : S →∗ A) (g : S →∗ B) → type-Pointed-Type S → type-Pointed-Type (A ∧∗ B)
+  map-gap-smash-prod-Pointed-Type f g =
+    pr1 (gap-smash-prod-Pointed-Type f g)
 ```
 
 It remains to show that this is the correct map, and that it is unique.

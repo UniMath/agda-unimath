@@ -50,7 +50,7 @@ module _
   is-closed-under-add-intersection-Subgroup-Ab :
     is-closed-under-add-subset-Ab A subset-intersection-Subgroup-Ab
   is-closed-under-add-intersection-Subgroup-Ab =
-    is-closed-under-mul-intersection-Subgroup (group-Ab A) B C
+    is-closed-under-multiplication-intersection-Subgroup (group-Ab A) B C
 
   is-closed-under-neg-intersection-Subgroup-Ab :
     is-closed-under-neg-subset-Ab A subset-intersection-Subgroup-Ab

@@ -1,4 +1,4 @@
-name: Agda-Unimath CI
+name: agda-unimath CI
 on:
   # To run this workflow manually
   workflow_dispatch:
@@ -22,7 +22,7 @@ on:
 
 # Cancel previous runs of the same branch
 concurrency:
-  group: "${{ github.workflow }}-${{ github.head_ref || github.run_id }}"
+  group: '${{ github.workflow }}-${{ github.head_ref || github.run_id }}'
   cancel-in-progress: true
 
 env:
@@ -37,7 +37,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest]
-        agda: ["2.6.3"]
+        agda: ['2.6.3']
     steps:
       - name: Checkout our repository
         uses: actions/checkout@v3
@@ -69,7 +69,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: master/_build
-          key: "${{ steps.cache-agda-formalization.outputs.cache-primary-key }}"
+          key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
 
   pre-commit:
     runs-on: ubuntu-latest
@@ -78,9 +78,9 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.11.1"
+          python-version: '3.11.1'
           check-latest: true
-          cache: "pip"
+          cache: 'pip'
 
       - run: python3 -m pip install -r scripts/requirements.txt
 

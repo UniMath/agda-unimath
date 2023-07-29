@@ -2,7 +2,7 @@
 # Run this script:
 # $ ./scripts/markdown_conventions.py fileName.md
 
-# * Remember to update the script's entry in `CONTRIBUTING.md` on expansion
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import sys
 import utils

@@ -21,10 +21,9 @@ open import structured-types.pointed-types
 
 ```agda
 fib-Pointed-Type :
-  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} →
   (A →∗ B) → Pointed-Type (l1 ⊔ l2)
-pr1 (fib-Pointed-Type A B f) =
-  fib (map-pointed-map A B f) (point-Pointed-Type B)
-pr1 (pr2 (fib-Pointed-Type A B f)) = point-Pointed-Type A
-pr2 (pr2 (fib-Pointed-Type A B f)) = preserves-point-pointed-map A B f
+pr1 (fib-Pointed-Type f) = fib (map-pointed-map f) (point-Pointed-Type _)
+pr1 (pr2 (fib-Pointed-Type f)) = point-Pointed-Type _
+pr2 (pr2 (fib-Pointed-Type f)) = preserves-point-pointed-map f
 ```

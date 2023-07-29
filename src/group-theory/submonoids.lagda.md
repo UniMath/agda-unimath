@@ -115,17 +115,17 @@ module _
   pr1 unit-Submonoid = unit-Monoid M
   pr2 unit-Submonoid = contains-unit-Submonoid
 
-  is-closed-under-mul-Submonoid :
+  is-closed-under-multiplication-Submonoid :
     {x y : type-Monoid M} →
     is-in-Submonoid x → is-in-Submonoid y →
     is-in-Submonoid (mul-Monoid M x y)
-  is-closed-under-mul-Submonoid {x} {y} = pr2 (pr2 P) x y
+  is-closed-under-multiplication-Submonoid {x} {y} = pr2 (pr2 P) x y
 
   mul-Submonoid : (x y : type-Submonoid) → type-Submonoid
   pr1 (mul-Submonoid x y) =
     mul-Monoid M (inclusion-Submonoid x) (inclusion-Submonoid y)
   pr2 (mul-Submonoid x y) =
-    is-closed-under-mul-Submonoid
+    is-closed-under-multiplication-Submonoid
       ( is-in-submonoid-inclusion-Submonoid x)
       ( is-in-submonoid-inclusion-Submonoid y)
 

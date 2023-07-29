@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ ./scripts/simply_wrappable_long_lines.py fileName.lagda.md
+# $ ./scripts/wrap_long_lines_simple.py fileName.lagda.md
 
-# Fix some easily fixable long lines
+# Fix some easy to fix long lines
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import sys
 import utils

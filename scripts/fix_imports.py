@@ -2,18 +2,20 @@
 # Run this script:
 # $ ./scripts/fix_imports.py fileName.lagda.md
 
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
+
 import collections
 import sys
 import utils
 
 
 def get_imports_block(contents):
-    start = contents.find('<details>')
+    start = contents.find('<details><summary>Imports</summary>')
     if start == -1:
-        return None, -1, -1
+        return None, start, -1
     end = contents.find('</details>', start)
     if end == -1:
-        return None, -1, -1
+        return None, start, end
     return contents[start:end], start, end
 
 
@@ -121,6 +123,7 @@ if __name__ == '__main__':
 
     FLAG_NO_IMPORT_BLOCK = 1
     FLAG_IMPORT_BLOCK_HAS_PUBLIC = 2
+    FLAG_IMPORT_MISSING_CLOSING_TAG = 4
 
     status = 0
 
@@ -131,6 +134,11 @@ if __name__ == '__main__':
 
         block, start, end = get_imports_block(contents)
         if block is None:
+            if start != -1:
+                print('Error: Agda import block is not closed with a `</details>` tag in:\n\t' +
+                      str(fpath), file=sys.stderr)
+                status |= FLAG_IMPORT_MISSING_CLOSING_TAG
+
             agdaBlockStart = utils.find_index(contents, '```agda')
             if len(agdaBlockStart) > 1:
                 print('Warning: No Agda import block found inside <details> block in:\n\t' +

@@ -32,15 +32,15 @@ open import foundation.universe-levels
 ## Idea
 
 A type family `A` over `X` is said to be **local at** `f : Y → X`, or
-**`f`-local**, if the precomposition map
+**`f`-local**, if the [precomposition map](foundation-core.function-types.md)
 
 ```text
   _∘ f : ((x : X) → A x) → ((y : Y) → A (f y))
 ```
 
-is an equivalence.
+is an [equivalence](foundation-core.equivalences.md).
 
-Likewise, a type `A` is said to be `f`-local if the precomposition map
+Likewise, a _type_ `A` is said to be **`f`-local** if the precomposition map
 `_∘ f : (X → A) → (Y → A)` is an equivalence.
 
 We reserve the name `is-local` for local types, and specify `is-local-family`
@@ -234,3 +234,8 @@ is-contr-is-local A is-local-A =
       ( is-local-A))
     ( universal-property-empty' A)
 ```
+
+## See also
+
+- [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
+- [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)

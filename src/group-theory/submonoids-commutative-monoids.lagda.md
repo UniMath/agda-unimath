@@ -123,12 +123,12 @@ module _
   unit-Commutative-Submonoid =
     unit-Submonoid (monoid-Commutative-Monoid M) P
 
-  is-closed-under-mul-Commutative-Submonoid :
+  is-closed-under-multiplication-Commutative-Submonoid :
     {x y : type-Commutative-Monoid M} →
     is-in-Commutative-Submonoid x → is-in-Commutative-Submonoid y →
     is-in-Commutative-Submonoid (mul-Commutative-Monoid M x y)
-  is-closed-under-mul-Commutative-Submonoid =
-    is-closed-under-mul-Submonoid (monoid-Commutative-Monoid M) P
+  is-closed-under-multiplication-Commutative-Submonoid =
+    is-closed-under-multiplication-Submonoid (monoid-Commutative-Monoid M) P
 
   mul-Commutative-Submonoid :
     (x y : type-Commutative-Submonoid) → type-Commutative-Submonoid

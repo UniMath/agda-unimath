@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.subuniverses
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -29,8 +30,8 @@ open import synthetic-homotopy-theory.joins-of-types
 
 ## Idea
 
-Given any proposition `Q`, the
-[join](synthetic-homotopy-theory.joins-of-types.md) operation `_* Q` defines a
+Given any [proposition](foundation.propositions.md) `Q`, the
+[join operation](synthetic-homotopy-theory.joins-of-types.md) `_* Q` defines a
 [higher modality](orthogonal-factorization-systems.higher-modalities.md). We
 call these the **closed modalities**.
 
@@ -53,7 +54,7 @@ pr2 (is-closed-modal Q B) = is-prop-function-type is-property-is-contr
 
 ## Properties
 
-### The closed modalities define `Σ`-closed reflective subuniverses
+### The closed modalities define Σ-closed reflective subuniverses
 
 ```agda
 module _
@@ -61,64 +62,60 @@ module _
   where
 
   is-reflective-subuniverse-closed-modality :
-    is-reflective-subuniverse
-      { l ⊔ lQ}
-      ( unit-closed-modality Q)
-      ( is-closed-modal Q)
-  pr1 is-reflective-subuniverse-closed-modality A q =
+    is-reflective-subuniverse {l ⊔ lQ} (is-closed-modal Q)
+  pr1 is-reflective-subuniverse-closed-modality =
+    operator-closed-modality (l ⊔ lQ) Q
+  pr1 (pr2 is-reflective-subuniverse-closed-modality) =
+    unit-closed-modality Q
+  pr1 (pr2 (pr2 is-reflective-subuniverse-closed-modality)) A q =
     right-zero-law-join-is-contr
       ( A)
       ( type-Prop Q)
       ( is-proof-irrelevant-is-prop (is-prop-type-Prop Q) q)
-  pr2 is-reflective-subuniverse-closed-modality B is-modal-B A =
-      is-equiv-is-contr-map
-        ( λ f →
-          is-contr-equiv
-            ( Σ (A → B) (_＝ f))
-            ( equiv-Σ
-              ( _＝ f)
-              ( right-unit-law-Σ-is-contr
-                ( λ f' →
-                  is-contr-Σ
-                    ( is-contr-Π is-modal-B)
-                    ( center ∘ is-modal-B)
-                    ( is-contr-Π
-                      ( λ (a , q) →
-                        is-prop-is-contr
-                          ( is-modal-B q)
-                          ( f' a)
-                          ( center (is-modal-B q))))) ∘e
-                ( equiv-up-join A (type-Prop Q) B))
-              ( λ _ → id-equiv))
-            ( is-contr-total-path' f))
+  pr2 (pr2 (pr2 is-reflective-subuniverse-closed-modality)) B A is-modal-B =
+    is-equiv-is-contr-map
+      ( λ f →
+        is-contr-equiv
+          ( Σ (A → B) (_＝ f))
+          ( equiv-Σ
+            ( _＝ f)
+            ( right-unit-law-Σ-is-contr
+              ( λ f' →
+                is-contr-Σ
+                  ( is-contr-Π is-modal-B)
+                  ( center ∘ is-modal-B)
+                  ( is-contr-Π
+                    ( λ (a , q) →
+                      is-prop-is-contr
+                        ( is-modal-B q)
+                        ( f' a)
+                        ( center (is-modal-B q))))) ∘e
+              ( equiv-up-join A (type-Prop Q) B))
+            ( λ _ → id-equiv))
+          ( is-contr-total-path' f))
 
   reflective-subuniverse-closed-modality :
     reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)
   pr1 reflective-subuniverse-closed-modality =
-    operator-closed-modality (l ⊔ lQ) Q
-  pr1 (pr2 reflective-subuniverse-closed-modality) =
-    unit-closed-modality Q
-  pr1 (pr2 (pr2 reflective-subuniverse-closed-modality)) =
     is-closed-modal Q
-  pr2 (pr2 (pr2 reflective-subuniverse-closed-modality)) =
+  pr2 reflective-subuniverse-closed-modality =
     is-reflective-subuniverse-closed-modality
 
-  is-Σ-closed-reflective-subuniverse-closed-modality :
-    is-Σ-closed-reflective-subuniverse
+  is-closed-under-Σ-reflective-subuniverse-closed-modality :
+    is-closed-under-Σ-reflective-subuniverse
       ( reflective-subuniverse-closed-modality)
-  is-Σ-closed-reflective-subuniverse-closed-modality
-    X is-modal-X P is-modal-P q =
+  is-closed-under-Σ-reflective-subuniverse-closed-modality A B q =
     is-contr-Σ
-      ( is-modal-X q)
-      ( center (is-modal-X q))
-      ( is-modal-P (center (is-modal-X q)) q)
+      ( pr2 A q)
+      ( center (pr2 A q))
+      ( pr2 (B (center (pr2 A q))) q)
 
-  Σ-closed-reflective-subuniverse-closed-modality :
-    Σ-closed-reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)
-  pr1 Σ-closed-reflective-subuniverse-closed-modality =
+  closed-under-Σ-reflective-subuniverse-closed-modality :
+    closed-under-Σ-reflective-subuniverse (l ⊔ lQ) (l ⊔ lQ)
+  pr1 closed-under-Σ-reflective-subuniverse-closed-modality =
     reflective-subuniverse-closed-modality
-  pr2 Σ-closed-reflective-subuniverse-closed-modality =
-    is-Σ-closed-reflective-subuniverse-closed-modality
+  pr2 closed-under-Σ-reflective-subuniverse-closed-modality =
+    is-closed-under-Σ-reflective-subuniverse-closed-modality
 ```
 
 ## References

@@ -54,12 +54,12 @@ module _
 
   is-closed-under-add-subset-Ab : UU (l1 ⊔ l2)
   is-closed-under-add-subset-Ab =
-    is-closed-under-mul-subset-Group (group-Ab A) P
+    is-closed-under-multiplication-subset-Group (group-Ab A) P
 
   is-prop-is-closed-under-add-subset-Ab :
     is-prop is-closed-under-add-subset-Ab
   is-prop-is-closed-under-add-subset-Ab =
-    is-prop-is-closed-under-mul-subset-Group (group-Ab A) P
+    is-prop-is-closed-under-multiplication-subset-Group (group-Ab A) P
 
   is-closed-under-neg-subset-Ab : UU (l1 ⊔ l2)
   is-closed-under-neg-subset-Ab =
@@ -141,7 +141,7 @@ module _
   is-closed-under-add-Subgroup-Ab :
     is-closed-under-add-subset-Ab A subset-Subgroup-Ab
   is-closed-under-add-Subgroup-Ab =
-    is-closed-under-mul-Subgroup (group-Ab A) B
+    is-closed-under-multiplication-Subgroup (group-Ab A) B
 
   is-closed-under-neg-Subgroup-Ab :
     is-closed-under-neg-subset-Ab A subset-Subgroup-Ab
@@ -581,7 +581,7 @@ module _
   is-closed-under-add-subset-congruence-Ab :
     is-closed-under-add-subset-Ab A subset-congruence-Ab
   is-closed-under-add-subset-congruence-Ab =
-    is-closed-under-mul-subset-congruence-Group (group-Ab A) R
+    is-closed-under-multiplication-subset-congruence-Group (group-Ab A) R
 
   is-closed-under-neg-subset-congruence-Ab :
     is-closed-under-neg-subset-Ab A subset-congruence-Ab

@@ -226,6 +226,7 @@ open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.shifting-sequences public
+open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public

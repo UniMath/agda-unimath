@@ -1,0 +1,33 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+quote_type = single
+max_line_length = 80
+ij_visual_guides = 80
+
+[*.agda]
+indent_size = 2
+
+[*.css]
+indent_size = 2
+
+[*.javascript]
+indent_size = 2
+
+[*.jsonc?]
+indent_size = 2
+
+[*.md]
+indent_size = 2
+
+[*.py]
+indent_size = 4
+
+[*.{ya?ml,cff}]
+indent_size = 2

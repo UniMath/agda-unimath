@@ -25,9 +25,14 @@ open import group-theory.isomorphisms-groups
 
 ## Idea
 
-Conjugation by an element `x` in a group `G` is the map `y ↦ (xy)x⁻¹`.
+**Conjugation** by an element `x` of a [group](group-theory.groups.md) `G` is
+the map `y ↦ (xy)x⁻¹`. This can be seen as a homomorphism `G → G` as well as a
+group action of `G` onto itself.
 
-## Definition
+The delooping of the conjugation homomorphism is defined in
+[`structured-types.conjugation-pointed-types.md`](structured-types.conjugation-pointed-types.md)`.
+
+## Definitions
 
 ### Conjugation
 

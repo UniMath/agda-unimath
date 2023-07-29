@@ -76,19 +76,20 @@ module _
   is-prop-contains-unit-decidable-subset-Group =
     is-prop-contains-unit-subset-Group G (subset-decidable-subset-Group G P)
 
-  is-closed-under-mul-decidable-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-mul-decidable-subset-group-Prop =
-    is-closed-under-mul-subset-group-Prop G
+  is-closed-under-multiplication-decidable-subset-group-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-decidable-subset-group-Prop =
+    is-closed-under-multiplication-subset-group-Prop G
       ( subset-decidable-subset-Group G P)
 
-  is-closed-under-mul-decidable-subset-Group : UU (l1 ⊔ l2)
-  is-closed-under-mul-decidable-subset-Group =
-    is-closed-under-mul-subset-Group G (subset-decidable-subset-Group G P)
+  is-closed-under-multiplication-decidable-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-multiplication-decidable-subset-Group =
+    is-closed-under-multiplication-subset-Group G
+      ( subset-decidable-subset-Group G P)
 
-  is-prop-is-closed-under-mul-decidable-subset-Group :
-    is-prop is-closed-under-mul-decidable-subset-Group
-  is-prop-is-closed-under-mul-decidable-subset-Group =
-    is-prop-is-closed-under-mul-subset-Group G
+  is-prop-is-closed-under-multiplication-decidable-subset-Group :
+    is-prop is-closed-under-multiplication-decidable-subset-Group
+  is-prop-is-closed-under-multiplication-decidable-subset-Group =
+    is-prop-is-closed-under-multiplication-subset-Group G
       ( subset-decidable-subset-Group G P)
 
   is-closed-under-inv-decidable-subset-group-Prop : Prop (l1 ⊔ l2)
@@ -185,11 +186,11 @@ module _
   contains-unit-Decidable-Subgroup =
     contains-unit-Subgroup G subgroup-Decidable-Subgroup
 
-  is-closed-under-mul-Decidable-Subgroup :
-    is-closed-under-mul-decidable-subset-Group G
+  is-closed-under-multiplication-Decidable-Subgroup :
+    is-closed-under-multiplication-decidable-subset-Group G
       decidable-subset-Decidable-Subgroup
-  is-closed-under-mul-Decidable-Subgroup =
-    is-closed-under-mul-Subgroup G subgroup-Decidable-Subgroup
+  is-closed-under-multiplication-Decidable-Subgroup =
+    is-closed-under-multiplication-Subgroup G subgroup-Decidable-Subgroup
 
   is-closed-under-inv-Decidable-Subgroup :
     is-closed-under-inv-decidable-subset-Group G

@@ -22,12 +22,13 @@ open import orthogonal-factorization-systems.wide-function-classes
 
 ## Idea
 
-An **orthogonal factorization system** is a pair of composition closed function
-classes `L` and `R` that contain the identities (morally, this means that they
-are wide subpre-∞-categories of the ∞-category of types), such that for every
-function `f : A → B` there is a unique factorization `f ~ r ∘ l` such that the
-left map (by diagrammatic ordering) `l` is in `L` and the right map `r` is in
-`R`.
+An **orthogonal factorization system** is a pair of
+[wide](orthogonal-factorization-systems.wide-function-classes.md)
+[function classes](orthogonal-factorization-systems.function-classes.md) `L`,
+such that for every function `f : A → B` there is a unique
+[factorization](orthogonal-factorization-systems.factorizations-of-maps.md)
+`f ~ r ∘ l` where the left map (by diagrammatic ordering) `l` is in `L` and the
+right map `r` is in `R`.
 
 ## Definition
 
@@ -53,7 +54,7 @@ orthogonal-factorization-system l lL lR =
         ( is-orthogonal-factorization-system L))
 ```
 
-### Components of a orthogonal factorization system
+### Components of an orthogonal factorization system
 
 ```agda
 module _

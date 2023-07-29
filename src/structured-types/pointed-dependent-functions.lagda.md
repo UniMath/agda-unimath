@@ -45,12 +45,16 @@ type `Π∗`, and pointed type constructions in general, is the
 the [asterisk](https://codepoints.net/U+002A) `*`.
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  where
+
   function-pointed-Π :
-    pointed-Π → (x : type-Pointed-Type A) → fam-Pointed-Fam A B x
+    pointed-Π A B → (x : type-Pointed-Type A) → fam-Pointed-Fam A B x
   function-pointed-Π = pr1
 
   preserves-point-function-pointed-Π :
-    (f : pointed-Π) →
+    (f : pointed-Π A B) →
     Id (function-pointed-Π f (point-Pointed-Type A)) (point-Pointed-Fam A B)
   preserves-point-function-pointed-Π = pr2
 ```

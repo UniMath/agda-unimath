@@ -2,7 +2,7 @@
 language = "en"
 multilingual = false
 src = "docs"
-title = "Agda-UniMath"
+title = "agda-unimath"
 
 [build]
 create-missing = true
@@ -21,7 +21,7 @@ inline-delimiter = {left = "$", right = "$"}
 macros = "theme/latex-macros.txt"
 
 [preprocessor.catppuccin]
-assets_version = "0.1.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+assets_version = "0.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [output.linkcheck]
 follow-web-links = false
@@ -30,7 +30,7 @@ follow-web-links = false
 default-theme = "light"
 preferred-dark-theme = "Ayu"
 copy-fonts = true
-additional-css = ["theme/Agda.css", "theme/pagetoc.css", "theme/catppuccin.css", "theme/catppuccin-highlight.css", "theme/agda-logo.css"]
+additional-css = ["theme/Agda.css", "theme/pagetoc.css", "theme/agda-logo.css", "./theme/catppuccin.css", "./theme/catppuccin-highlight.css"]
 additional-js = ["theme/js/custom.js", "theme/pagetoc.js"]
 no-section-label = false
 git-repository-url = "https://github.com/UniMath/agda-unimath"

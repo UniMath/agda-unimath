@@ -2,7 +2,8 @@
 # Run this script:
 # $ ./scripts/even_indentation_conventions.py fileName.lagda.md
 
-# Some simply enforcable space conventions
+# Some simple to enforce space conventions
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import sys
 import utils
@@ -40,7 +41,7 @@ if __name__ == '__main__':
             if is_tag:
                 is_in_agda_block = is_opening
             elif is_in_agda_block:
-                line, comment, block_comment_delta_pos, block_comment_delta_neg = utils.split_agda_line_comment_and_get_block_comment_delta(
+                block_comment_delta_pos, block_comment_delta_neg = utils.get_block_comment_delta(
                     line)
 
                 block_comment_level += block_comment_delta_pos
@@ -50,7 +51,7 @@ if __name__ == '__main__':
 
                     # Check even indentation
                     if not is_even_indentation(line):
-                        if (status == 0):
+                        if status == 0:
                             print('Error! Uneven indentation found')
 
                         print(f'{fpath}:line {i+1}')
@@ -59,13 +60,6 @@ if __name__ == '__main__':
                         status |= STATUS_UNEVEN_INDENTATION
 
                 block_comment_level -= block_comment_delta_neg
-
-                lines[i] = line + comment
-
-        new_contents = '\n'.join(lines)
-        if new_contents != contents:
-            with open(fpath, 'w') as f:
-                f.write(new_contents)
 
     if status & STATUS_UNEVEN_INDENTATION != 0:  # There were offending lines
 
