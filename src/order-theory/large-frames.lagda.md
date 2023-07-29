@@ -35,9 +35,8 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large frame** is a
-[large meet-suplattice](order-theory.large-meet-suplattices.md) satisfying the
-distributive law for meets over suprema.
+A **large frame** is a large [meet-suplattice](order-theory.meet-suplattices.md)
+satisfying the distributive law for meets over suprema.
 
 ## Definitions
 

@@ -33,9 +33,9 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large locale** is a
-[large meet-suplattice](order-theory.large-meet-suplattices.md) satisfying the
-distributive law for meets over suprema.
+A **large locale** is a large
+[meet-suplattice](order-theory.meet-suplattices.md) satisfying the distributive
+law for meets over suprema.
 
 ## Definitions
 
