@@ -35,8 +35,9 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large frame** is a large meet-suplattice satisfying the distributive law for
-meets over suprema.
+A **large frame** is a
+[large meet-suplattice](order-theory.large-meet-suplattices.md) satisfying the
+distributive law for meets over suprema.
 
 ## Definitions
 
@@ -220,7 +221,7 @@ module _
 
 ## Properties
 
-### Small frames from large frames
+### Small constructions from large frames
 
 ```agda
 module _
@@ -266,5 +267,3 @@ module _
     meet-semilattice-Large-Meet-Semilattice
       ( large-meet-semilattice-Large-Frame L)
 ```
-
-It remains to give the full construction of a small frame.

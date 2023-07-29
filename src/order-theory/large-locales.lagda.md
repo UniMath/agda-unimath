@@ -33,8 +33,9 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large locale** is a large meet-suplattice satisfying the distributive law
-for meets over suprema.
+A **large locale** is a
+[large meet-suplattice](order-theory.large-meet-suplattices.md) satisfying the
+distributive law for meets over suprema.
 
 ## Definitions
 
@@ -186,7 +187,7 @@ module _
 
 ## Properties
 
-### Small locales from large locales
+### Small constructions from large locales
 
 ```agda
 module _
@@ -222,5 +223,3 @@ module _
   meet-semilattice-Large-Locale : (l : Level) → Meet-Semilattice (α l)
   meet-semilattice-Large-Locale = meet-semilattice-Large-Frame L
 ```
-
-It remains to give the full construction of a small locale.

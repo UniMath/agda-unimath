@@ -32,8 +32,9 @@ open import order-theory.preorders
 
 ## Idea
 
-A **large poset** is a large preorder such that the restriction of the ordering
-relation to any particular universe level is antisymmetric
+A **large poset** is a [large preorder](order-theory.large-preorders.md) such
+that the restriction of the ordering relation to any particular universe level
+is antisymmetric.
 
 ## Definition
 
