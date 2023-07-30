@@ -94,19 +94,19 @@ abstract
 ```agda
 module _
   {l1 l2 : Level} {I : UU l1} {A : I → UU l2}
-  (decidable-equality-I : has-decidable-equality I)
-  (is-contr-Π-I-A : is-contr ((i : I) → A i))
+  (d : has-decidable-equality I)
+  (H : is-contr ((i : I) → A i))
   where
 
   cases-function-converse-weak-funext :
     (i : I) (x : A i) (j : I) (e : is-decidable (i ＝ j)) → A j
   cases-function-converse-weak-funext i x .i (inl refl) = x
-  cases-function-converse-weak-funext i x j (inr f) = center is-contr-Π-I-A j
+  cases-function-converse-weak-funext i x j (inr f) = center H j
 
   function-converse-weak-funext :
     (i : I) (x : A i) (j : I) → A j
   function-converse-weak-funext i x j =
-    cases-function-converse-weak-funext i x j (decidable-equality-I i j)
+    cases-function-converse-weak-funext i x j (d i j)
 
   cases-eq-function-converse-weak-funext :
     (i : I) (x : A i) (e : is-decidable (i ＝ i)) →
@@ -115,7 +115,7 @@ module _
     ap
       ( λ t → cases-function-converse-weak-funext i x i (inl t))
       ( eq-is-prop
-        ( is-set-has-decidable-equality decidable-equality-I i i)
+        ( is-set-has-decidable-equality d i i)
         { p}
         { refl})
   cases-eq-function-converse-weak-funext i x (inr f) =
@@ -125,13 +125,13 @@ module _
     (i : I) (x : A i) →
     function-converse-weak-funext i x i ＝ x
   eq-function-converse-weak-funext i x =
-    cases-eq-function-converse-weak-funext i x (decidable-equality-I i i)
+    cases-eq-function-converse-weak-funext i x (d i i)
 
   converse-weak-funext : (i : I) → is-contr (A i)
-  pr1 (converse-weak-funext i) = center is-contr-Π-I-A i
+  pr1 (converse-weak-funext i) = center H i
   pr2 (converse-weak-funext i) y =
     ( htpy-eq
-      ( contraction is-contr-Π-I-A (function-converse-weak-funext i y))
+      ( contraction H (function-converse-weak-funext i y))
       ( i)) ∙
     ( eq-function-converse-weak-funext i y)
 ```
