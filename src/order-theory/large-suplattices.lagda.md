@@ -7,6 +7,7 @@ module order-theory.large-suplattices where
 <detail><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
 open import foundation.binary-relations
 open import foundation.identity-types
@@ -16,6 +17,8 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.large-posets
+open import order-theory.posets
+open import order-theory.suplattices
 open import order-theory.least-upper-bounds-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -202,4 +205,32 @@ module _
           ( sup-Large-Suplattice L y)
           ( is-upper-bound-sup-Large-Suplattice L y i)
           ( H i))
+```
+
+### Small suplattices from large suplattices
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Suplattice α β γ)
+  where
+
+  poset-Large-Suplattice : (l : Level) → Poset (α l) (β l l)
+  poset-Large-Suplattice = poset-Large-Poset (large-poset-Large-Suplattice L)
+
+  is-suplattice-poset-Large-Suplattice :
+    (l1 l2 : Level) →
+    is-suplattice-Poset l1 (poset-Large-Suplattice (γ ⊔ l1 ⊔ l2))
+  pr1 (is-suplattice-poset-Large-Suplattice l1 l2 I f) =
+    sup-Large-Suplattice L f
+  pr2 (is-suplattice-poset-Large-Suplattice l1 l2 I f) =
+    is-least-upper-bound-sup-Large-Suplattice L f
+
+  suplattice-Large-Suplattice :
+    (l1 l2 : Level) →
+    Suplattice (α (γ ⊔ l1 ⊔ l2)) (β (γ ⊔ l1 ⊔ l2) (γ ⊔ l1 ⊔ l2)) (l1)
+  pr1 (suplattice-Large-Suplattice l1 l2) =
+    poset-Large-Suplattice (γ ⊔ l1 ⊔ l2)
+  pr2 (suplattice-Large-Suplattice l1 l2) =
+    is-suplattice-poset-Large-Suplattice l1 l2
 ```

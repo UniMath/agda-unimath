@@ -18,7 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Semigroups are sets equipped an associative binary operation.
+**Semigroups** are [sets](foundation-core.sets.md) equipped with an associative
+binary operation.
 
 ## Definition
 
@@ -71,7 +72,7 @@ module _
   associative-mul-Semigroup = pr2 has-associative-mul-Semigroup
 ```
 
-### Equip a type with a structure of semigroup
+### Equip a type with the structure of a semigroup
 
 ```agda
 structure-semigroup :
