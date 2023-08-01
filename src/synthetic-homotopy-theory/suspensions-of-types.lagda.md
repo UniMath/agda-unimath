@@ -417,8 +417,8 @@ module _
 
 Here we prove the universal property of the suspension of a pointed type: the
 suspension is left adjoint to the loop space. We do this by constructing an
-equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalences is
-given by λ f → Ω(f) ∘ unit
+equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this
+equivalences is given by λ f → Ω(f) ∘ unit
 
 #### The unit and counit of the adjunction
 
@@ -455,14 +455,16 @@ module _
   pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
   pr2 pointed-equiv-shift = preserves-point-pointed-map shift∗
 
-  merid-susp∗ : X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
+  merid-susp∗ :
+    X →∗ ((N-susp ＝ S-susp) , (merid-susp (point-Pointed-Type X)))
   pr1 merid-susp∗ = merid-susp
   pr2 merid-susp∗ = refl
 
   unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj∗ = unshift∗ ∘∗ merid-susp∗
 
-  unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj :
+    type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
 
   counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
@@ -484,7 +486,8 @@ module _
         ( id))
 ```
 
-#### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
+#### The equivalence between pointed maps out of the suspension of X and
+pointed maps into the loop space of Y
 
 ```agda
 module _
@@ -537,36 +540,50 @@ module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where
 
-  point-suspension-structure-Pointed-Type : (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
+  point-suspension-structure-Pointed-Type :
+    (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
   pr1 point-suspension-structure-Pointed-Type  = point-Pointed-Type Y
   pr1 (pr2 point-suspension-structure-Pointed-Type) = point-Pointed-Type Y
   pr2 (pr2 point-suspension-structure-Pointed-Type) =
-    const (type-Pointed-Type X) (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
+    const
+      (type-Pointed-Type X)
+      (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
 
   pointed-suspension-structure-Pointed-Type : Pointed-Type (l1 ⊔ l2)
-  pr1 pointed-suspension-structure-Pointed-Type = (suspension-structure (pr1 X) (pr1 Y))
-  pr2 pointed-suspension-structure-Pointed-Type = point-suspension-structure-Pointed-Type
+  pr1 pointed-suspension-structure-Pointed-Type =
+    (suspension-structure (pr1 X) (pr1 Y))
+  pr2 pointed-suspension-structure-Pointed-Type =
+    point-suspension-structure-Pointed-Type
 
   pointed-suspension-structure-pointed-function-type : Pointed-Type (l1 ⊔ l2)
   pr1 pointed-suspension-structure-pointed-function-type =
-    Σ (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
+    Σ
+      (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
       (λ (y₀ , y₁ , meridY) → y₀ ＝ (point-Pointed-Type Y))
-  pr1 (pr2 pointed-suspension-structure-pointed-function-type) = point-suspension-structure-Pointed-Type
+  pr1 (pr2 pointed-suspension-structure-pointed-function-type) =
+    point-suspension-structure-Pointed-Type
   pr2 (pr2 pointed-suspension-structure-pointed-function-type) = refl
 
-  htpy-ev-const-point-suspension-structure : htpy-suspension-structure
+  htpy-ev-const-point-suspension-structure :
+    htpy-suspension-structure
       (ev-suspension (suspension-structure-suspension (pr1 X)) (pr1 Y)
         (λ x → pr2 Y))
       point-suspension-structure-Pointed-Type
   pr1 htpy-ev-const-point-suspension-structure = refl
   pr1 (pr2 htpy-ev-const-point-suspension-structure) = refl
-  pr2 (pr2 htpy-ev-const-point-suspension-structure) = λ x → right-unit ∙
-    ap-const (point-Pointed-Type Y) (glue-pushout (λ x₁ → star) (λ x₁ → star) x)
+  pr2 (pr2 htpy-ev-const-point-suspension-structure) =
+    λ x →
+      concat
+        right-unit
+        refl
+        (ap-const
+          (point-Pointed-Type Y)
+          (glue-pushout (λ x₁ → star) (λ x₁ → star) x))
   
   equiv-pointed-map-pointed-suspension-structure-pointed-function-type :
-    (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y) 
+      (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y) 
     ≃∗
-    pointed-suspension-structure-pointed-function-type
+      pointed-suspension-structure-pointed-function-type
   pr1 equiv-pointed-map-pointed-suspension-structure-pointed-function-type =
     equiv-Σ-equiv-base
       ( λ c → (pr1 c) ＝ (point-Pointed-Type Y))
@@ -576,15 +593,24 @@ module _
   pr2 equiv-pointed-map-pointed-suspension-structure-pointed-function-type =
     eq-pair-Σ
       (eq-htpy-suspension-structure htpy-ev-const-point-suspension-structure)
-      ( inv (tr-subst (λ t → t ＝ (point-Pointed-Type Y))
-                                   pr1
-                                   (eq-htpy-suspension-structure htpy-ev-const-point-suspension-structure)) ∙
-       tr² (λ t → (t ＝ point-Pointed-Type Y))
-         (ap-pr1-eq-htpy-suspension-structure
-           (ev-suspension (suspension-structure-suspension (pr1 X)) (pr1 Y) (λ x → pr2 Y))
-           point-suspension-structure-Pointed-Type htpy-ev-const-point-suspension-structure)       
-         refl )
-```
+      (concat
+        (inv
+          (tr-subst
+            (λ t → t ＝ (point-Pointed-Type Y))
+            pr1
+            (eq-htpy-suspension-structure
+              htpy-ev-const-point-suspension-structure)))
+        refl
+        (tr² (λ t → (t ＝ point-Pointed-Type Y))
+          (ap-pr1-eq-htpy-suspension-structure
+            (ev-suspension
+              (suspension-structure-suspension (pr1 X))
+              (pr1 Y)
+              (λ x → pr2 Y))
+            point-suspension-structure-Pointed-Type
+            htpy-ev-const-point-suspension-structure)
+         refl ))
+```         
 
 ### The suspension of a contractible type is contractible
 
