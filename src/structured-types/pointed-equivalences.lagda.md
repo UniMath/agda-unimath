@@ -116,6 +116,42 @@ module _
     preserves-point-comp-pointed-map
       ( pointed-map-pointed-equiv f)
       ( pointed-map-pointed-equiv e)
+
+  _∘e∗_ : (B ≃∗ C) → (A ≃∗ B) → (A ≃∗ C)
+  _∘e∗_ = comp-pointed-equiv
+```
+
+#### Pointed Equivalence Reasoning
+
+The above allows use to use equaltional reasoning to construct pointed
+equivalences
+
+Equivalences can be constructed by equational reasoning in the following way:
+
+```text
+equivalence-reasoning
+  X ≃∗ Y by pointed-equiv-1
+    ≃∗ Z by pointed-equiv-2
+    ≃∗ V by pointed-equiv-3
+```
+
+The equivalence constructed in this way is `equiv-1 ∘e (equiv-2 ∘e equiv-3)`,
+i.e., the equivivalence is associated fully to the right.
+
+```agda
+infixl 1 pointed-equivalence-reasoning_
+infixl 0 step-pointed-equivalence-reasoning
+
+pointed-equivalence-reasoning_ :
+  {l1 : Level} (X : Pointed-Type l1) → X ≃∗ X
+pointed-equivalence-reasoning X = id-pointed-equiv
+
+step-pointed-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : Pointed-Type l1} {Y : Pointed-Type l2} →
+  (X ≃∗ Y) → (Z : Pointed-Type l3) → (Y ≃∗ Z) → (X ≃∗ Z)
+step-pointed-equivalence-reasoning e Z f = f ∘e∗ e
+
+syntax step-pointed-equivalence-reasoning e Z f = e ≃∗ Z by f
 ```
 
 ### Pointed isomorphisms
