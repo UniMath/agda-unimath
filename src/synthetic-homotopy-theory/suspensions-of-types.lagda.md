@@ -417,8 +417,8 @@ module _
 
 Here we prove the universal property of the suspension of a pointed type: the
 suspension is left adjoint to the loop space. We do this by constructing an
-equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalence
-is given by λ f → Ω(f) ∘ unit
+equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalence is
+given by λ f → Ω(f) ∘ unit
 
 #### The unit and counit of the adjunction
 
@@ -532,7 +532,7 @@ module _
 
 #### The equivalence in the suspension-loop space adjunction is pointed
 
-The below code is progress towards this, to it still remains to be shown
+The below code is progress towards this, though it still remains to be shown
    
 ```agda
 module _
