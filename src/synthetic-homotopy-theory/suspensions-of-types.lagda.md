@@ -533,7 +533,7 @@ module _
 #### The equivalence in the suspension-loop space adjunction is pointed
 
 The below code is progress towards this, though it still remains to be shown
-   
+
 ```agda
 module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
@@ -578,7 +578,7 @@ module _
         ( ap-const
           ( point-Pointed-Type Y)
           ( glue-pushout (λ x₁ → star) (λ x₁ → star) x))
-  
+
   equiv-pointed-map-pointed-suspension-structure-pointed-function-type :
       (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y)
     ≃∗
