@@ -11,8 +11,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
@@ -20,8 +20,8 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
@@ -417,8 +417,8 @@ module _
 
 Here we prove the universal property of the suspension of a pointed type: the
 suspension is left adjoint to the loop space. We do this by constructing an
-equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this
-equivalences is given by λ f → Ω(f) ∘ unit
+equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalence
+is given by λ f → Ω(f) ∘ unit
 
 #### The unit and counit of the adjunction
 
@@ -541,7 +541,7 @@ module _
 
   point-suspension-structure-Pointed-Type :
     (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
-  pr1 point-suspension-structure-Pointed-Type  = point-Pointed-Type Y
+  pr1 point-suspension-structure-Pointed-Type = point-Pointed-Type Y
   pr1 (pr2 point-suspension-structure-Pointed-Type) = point-Pointed-Type Y
   pr2 (pr2 point-suspension-structure-Pointed-Type) =
     const
@@ -608,7 +608,7 @@ module _
               ( λ x → pr2 Y))
             point-suspension-structure-Pointed-Type
             htpy-ev-const-point-suspension-structure)
-         refl ))
+         refl))
 ```         
 
 ### The suspension of a contractible type is contractible
