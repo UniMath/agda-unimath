@@ -546,7 +546,8 @@ module _
   pr2 (pr2 point-suspension-structure-Pointed-Type) =
     const
       ( type-Pointed-Type X)
-      ( point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
+      ( point-Pointed-Type Y ＝ point-Pointed-Type Y)
+      ( refl)
 
   pointed-suspension-structure-Pointed-Type : Pointed-Type (l1 ⊔ l2)
   pr1 pointed-suspension-structure-Pointed-Type =
