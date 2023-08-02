@@ -21,7 +21,7 @@ inline-delimiter = {left = "$", right = "$"}
 macros = "theme/latex-macros.txt"
 
 [preprocessor.catppuccin]
-assets_version = "0.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+assets_version = "0.2.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [output.linkcheck]
 follow-web-links = false
