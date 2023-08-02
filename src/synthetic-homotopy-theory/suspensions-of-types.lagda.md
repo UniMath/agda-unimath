@@ -486,8 +486,7 @@ module _
         ( id))
 ```
 
-#### The equivalence between pointed maps out of the suspension of X and
-pointed maps into the loop space of Y
+#### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
 
 ```agda
 module _
@@ -533,7 +532,7 @@ module _
 
 #### The equivalence in the suspension-loop space adjunction is pointed
 
-This remains to be shown.
+The below code is progress towards this, to it still remains to be shown
    
 ```agda
 module _
@@ -546,12 +545,12 @@ module _
   pr1 (pr2 point-suspension-structure-Pointed-Type) = point-Pointed-Type Y
   pr2 (pr2 point-suspension-structure-Pointed-Type) =
     const
-      (type-Pointed-Type X)
-      (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
+      ( type-Pointed-Type X)
+      ( point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
 
   pointed-suspension-structure-Pointed-Type : Pointed-Type (l1 ⊔ l2)
   pr1 pointed-suspension-structure-Pointed-Type =
-    (suspension-structure (pr1 X) (pr1 Y))
+    ( suspension-structure (pr1 X) (pr1 Y))
   pr2 pointed-suspension-structure-Pointed-Type =
     point-suspension-structure-Pointed-Type
 
@@ -566,8 +565,8 @@ module _
 
   htpy-ev-const-point-suspension-structure :
     htpy-suspension-structure
-      (ev-suspension (suspension-structure-suspension (pr1 X)) (pr1 Y)
-        (λ x → pr2 Y))
+      ( ev-suspension (suspension-structure-suspension (pr1 X)) (pr1 Y)
+        ( λ x → pr2 Y))
       point-suspension-structure-Pointed-Type
   pr1 htpy-ev-const-point-suspension-structure = refl
   pr1 (pr2 htpy-ev-const-point-suspension-structure) = refl
@@ -576,9 +575,9 @@ module _
       concat
         right-unit
         refl
-        (ap-const
-          (point-Pointed-Type Y)
-          (glue-pushout (λ x₁ → star) (λ x₁ → star) x))
+        ( ap-const
+          ( point-Pointed-Type Y)
+          ( glue-pushout (λ x₁ → star) (λ x₁ → star) x))
   
   equiv-pointed-map-pointed-suspension-structure-pointed-function-type :
       (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y) 
@@ -592,21 +591,21 @@ module _
         ( type-Pointed-Type Y))
   pr2 equiv-pointed-map-pointed-suspension-structure-pointed-function-type =
     eq-pair-Σ
-      (eq-htpy-suspension-structure htpy-ev-const-point-suspension-structure)
-      (concat
-        (inv
-          (tr-subst
+      ( eq-htpy-suspension-structure htpy-ev-const-point-suspension-structure)
+      ( concat
+        ( inv
+          ( tr-subst
             (λ t → t ＝ (point-Pointed-Type Y))
             pr1
-            (eq-htpy-suspension-structure
+            ( eq-htpy-suspension-structure
               htpy-ev-const-point-suspension-structure)))
         refl
-        (tr² (λ t → (t ＝ point-Pointed-Type Y))
-          (ap-pr1-eq-htpy-suspension-structure
-            (ev-suspension
-              (suspension-structure-suspension (pr1 X))
-              (pr1 Y)
-              (λ x → pr2 Y))
+        ( tr² (λ t → (t ＝ point-Pointed-Type Y))
+          ( ap-pr1-eq-htpy-suspension-structure
+            ( ev-suspension
+              ( suspension-structure-suspension (pr1 X))
+              ( pr1 Y)
+              ( λ x → pr2 Y))
             point-suspension-structure-Pointed-Type
             htpy-ev-const-point-suspension-structure)
          refl ))
