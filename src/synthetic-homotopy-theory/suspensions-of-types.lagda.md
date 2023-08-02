@@ -550,15 +550,14 @@ module _
 
   pointed-suspension-structure-Pointed-Type : Pointed-Type (l1 ⊔ l2)
   pr1 pointed-suspension-structure-Pointed-Type =
-    ( suspension-structure (pr1 X) (pr1 Y))
+    suspension-structure (pr1 X) (pr1 Y)
   pr2 pointed-suspension-structure-Pointed-Type =
     point-suspension-structure-Pointed-Type
 
   pointed-suspension-structure-pointed-function-type : Pointed-Type (l1 ⊔ l2)
   pr1 pointed-suspension-structure-pointed-function-type =
-    Σ
-      (suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
-      (λ (y₀ , y₁ , meridY) → y₀ ＝ (point-Pointed-Type Y))
+    Σ ( suspension-structure (type-Pointed-Type X) (type-Pointed-Type Y))
+      ( λ (y₀ , y₁ , meridY) → y₀ ＝ (point-Pointed-Type Y))
   pr1 (pr2 pointed-suspension-structure-pointed-function-type) =
     point-suspension-structure-Pointed-Type
   pr2 (pr2 pointed-suspension-structure-pointed-function-type) = refl
@@ -570,18 +569,16 @@ module _
       point-suspension-structure-Pointed-Type
   pr1 htpy-ev-const-point-suspension-structure = refl
   pr1 (pr2 htpy-ev-const-point-suspension-structure) = refl
-  pr2 (pr2 htpy-ev-const-point-suspension-structure) =
-    λ x →
-      concat
-        right-unit
-        refl
-        ( ap-const
-          ( point-Pointed-Type Y)
-          ( glue-pushout (λ x₁ → star) (λ x₁ → star) x))
+  pr2 (pr2 htpy-ev-const-point-suspension-structure) x =
+    concat
+      ( right-unit)
+      ( refl)
+      ( ap-const
+        ( point-Pointed-Type Y)
+        ( glue-pushout (λ _ → star) (λ _ → star) x))
 
   equiv-pointed-map-pointed-suspension-structure-pointed-function-type :
-      (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y)
-    ≃∗
+    ( pointed-map-Pointed-Type (suspension-Pointed-Type X) Y) ≃∗
       pointed-suspension-structure-pointed-function-type
   pr1 equiv-pointed-map-pointed-suspension-structure-pointed-function-type =
     equiv-Σ-equiv-base
@@ -595,20 +592,20 @@ module _
       ( concat
         ( inv
           ( tr-subst
-            (λ t → t ＝ (point-Pointed-Type Y))
-            pr1
+            ( λ t → t ＝ (point-Pointed-Type Y))
+            ( pr1)
             ( eq-htpy-suspension-structure
               htpy-ev-const-point-suspension-structure)))
-        refl
-        ( tr² (λ t → (t ＝ point-Pointed-Type Y))
+        ( refl)
+        ( tr² (λ t → t ＝ point-Pointed-Type Y)
           ( ap-pr1-eq-htpy-suspension-structure
             ( ev-suspension
               ( suspension-structure-suspension (pr1 X))
               ( pr1 Y)
               ( λ x → pr2 Y))
-            point-suspension-structure-Pointed-Type
-            htpy-ev-const-point-suspension-structure)
-          refl))
+            ( point-suspension-structure-Pointed-Type)
+            ( htpy-ev-const-point-suspension-structure))
+          ( refl)))
 ```
 
 ### The suspension of a contractible type is contractible
