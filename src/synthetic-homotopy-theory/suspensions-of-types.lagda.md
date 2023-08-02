@@ -580,7 +580,7 @@ module _
           ( glue-pushout (λ x₁ → star) (λ x₁ → star) x))
   
   equiv-pointed-map-pointed-suspension-structure-pointed-function-type :
-      (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y) 
+      (pointed-map-Pointed-Type (suspension-Pointed-Type X) Y)
     ≃∗
       pointed-suspension-structure-pointed-function-type
   pr1 equiv-pointed-map-pointed-suspension-structure-pointed-function-type =
