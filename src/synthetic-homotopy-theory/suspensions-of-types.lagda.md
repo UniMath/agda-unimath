@@ -609,7 +609,7 @@ module _
             point-suspension-structure-Pointed-Type
             htpy-ev-const-point-suspension-structure)
           refl))
-```         
+```
 
 ### The suspension of a contractible type is contractible
 
