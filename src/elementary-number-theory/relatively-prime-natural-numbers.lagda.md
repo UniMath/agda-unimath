@@ -1,6 +1,8 @@
 # Relatively prime natural numbers
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module elementary-number-theory.relatively-prime-natural-numbers where
 ```
 

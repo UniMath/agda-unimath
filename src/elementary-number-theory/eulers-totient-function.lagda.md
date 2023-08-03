@@ -1,6 +1,8 @@
 # Euler's totient function
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module elementary-number-theory.eulers-totient-function where
 ```
 
