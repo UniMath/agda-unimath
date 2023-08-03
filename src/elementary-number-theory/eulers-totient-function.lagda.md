@@ -26,8 +26,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-**Euler's totient function** `φ : ℕ → ℕ` is the function that maps a natural number
-`n` to the number of `x < n` that are relatively prime with `n`.
+**Euler's totient function** `φ : ℕ → ℕ` is the function that maps a natural
+number `n` to the number of `x < n` that are relatively prime with `n`.
 
 ## Definition
 
@@ -37,4 +37,5 @@ eulers-totient-function n =
   number-of-elements-subset-𝔽
     ( Fin-𝔽 n)
     ( λ x → is-relatively-prime-ℕ-Decidable-Prop (nat-Fin n x) n)
+
 ```
