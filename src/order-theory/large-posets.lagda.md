@@ -7,8 +7,16 @@ module order-theory.large-posets where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-precategories
+open import category-theory.large-categories
+open import category-theory.large-precategories
+open import category-theory.precategories
+
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
@@ -24,8 +32,9 @@ open import order-theory.preorders
 
 ## Idea
 
-A **large poset** is a large preorder such that the restriction of the ordering
-relation to any particular universe level is antisymmetric
+A **large poset** is a [large preorder](order-theory.large-preorders.md) such
+that the restriction of the ordering relation to any particular universe level
+is antisymmetric.
 
 ## Definition
 
@@ -74,12 +83,15 @@ module _
     is-large-transitive type-Large-Poset leq-Large-Poset
   transitive-leq-Large-Poset =
     transitive-leq-Large-Preorder (large-preorder-Large-Poset X)
+```
 
+## Properties
+
+### Small posets from large posets
+
+```agda
   preorder-Large-Poset : (l : Level) → Preorder (α l) (β l l)
-  pr1 (preorder-Large-Poset l) = type-Large-Poset l
-  pr1 (pr2 (preorder-Large-Poset l)) = leq-Large-Poset-Prop
-  pr1 (pr2 (pr2 (preorder-Large-Poset l))) = refl-leq-Large-Poset
-  pr2 (pr2 (pr2 (preorder-Large-Poset l))) = transitive-leq-Large-Poset
+  preorder-Large-Poset = preorder-Large-Preorder (large-preorder-Large-Poset X)
 
   poset-Large-Poset : (l : Level) → Poset (α l) (β l l)
   pr1 (poset-Large-Poset l) = preorder-Large-Poset l
@@ -90,4 +102,34 @@ module _
 
   is-set-type-Large-Poset : {l : Level} → is-set (type-Large-Poset l)
   is-set-type-Large-Poset {l} = is-set-type-Poset (poset-Large-Poset l)
+```
+
+### Large posets are large categories
+
+```agda
+  large-precategory-Large-Poset : Large-Precategory α β
+  large-precategory-Large-Poset =
+    large-precategory-Large-Preorder (large-preorder-Large-Poset X)
+
+  precategory-Large-Poset : (l : Level) → Precategory (α l) (β l l)
+  precategory-Large-Poset =
+    precategory-Large-Precategory large-precategory-Large-Poset
+
+  is-large-category-Large-Poset :
+    is-large-category-Large-Precategory large-precategory-Large-Poset
+  is-large-category-Large-Poset {l} x y =
+    is-equiv-is-prop
+      ( is-set-type-Large-Poset x y)
+      ( is-prop-iso-Precategory
+        ( precategory-Large-Poset l) x y (is-prop-leq-Large-Poset x y))
+      ( λ f →
+        antisymmetric-leq-Large-Poset X x y
+        ( hom-iso-Precategory (precategory-Large-Poset l) f)
+        ( hom-inv-iso-Precategory (precategory-Large-Poset l) f))
+
+  large-category-Large-Poset : Large-Category α β
+  large-precategory-Large-Category large-category-Large-Poset =
+    large-precategory-Large-Poset
+  is-large-category-Large-Category large-category-Large-Poset =
+    is-large-category-Large-Poset
 ```

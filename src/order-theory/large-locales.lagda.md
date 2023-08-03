@@ -21,6 +21,10 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.suplattices
 open import order-theory.top-elements-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -29,8 +33,9 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large locale** is a large meet-suplattice satisfying the distributive law
-for meets over suprema.
+A **large locale** is a large
+[meet-suplattice](order-theory.meet-suplattices.md) satisfying the distributive
+law for meets over suprema.
 
 ## Definitions
 
@@ -178,4 +183,43 @@ module _
     sup-Large-Locale (λ i → meet-Large-Locale x (y i))
   distributive-meet-sup-Large-Locale =
     distributive-meet-sup-Large-Frame L
+```
+
+## Properties
+
+### Small constructions from large locales
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ)
+  where
+
+  preorder-Large-Locale : (l : Level) → Preorder (α l) (β l l)
+  preorder-Large-Locale = preorder-Large-Frame L
+
+  poset-Large-Locale : (l : Level) → Poset (α l) (β l l)
+  poset-Large-Locale = poset-Large-Frame L
+
+  is-suplattice-poset-Large-Locale :
+    (l1 l2 : Level) → is-suplattice-Poset l1 (poset-Large-Locale (γ ⊔ l1 ⊔ l2))
+  is-suplattice-poset-Large-Locale = is-suplattice-poset-Large-Frame L
+
+  suplattice-Large-Locale :
+    (l1 l2 : Level) →
+    Suplattice (α (γ ⊔ l1 ⊔ l2)) (β (γ ⊔ l1 ⊔ l2) (γ ⊔ l1 ⊔ l2)) l1
+  suplattice-Large-Locale = suplattice-Large-Frame L
+
+  is-meet-semilattice-poset-Large-Locale :
+    (l : Level) → is-meet-semilattice-Poset (poset-Large-Locale l)
+  is-meet-semilattice-poset-Large-Locale =
+    is-meet-semilattice-poset-Large-Frame L
+
+  order-theoretic-meet-semilattice-Large-Locale :
+    (l : Level) → Order-Theoretic-Meet-Semilattice (α l) (β l l)
+  order-theoretic-meet-semilattice-Large-Locale =
+    order-theoretic-meet-semilattice-Large-Frame L
+
+  meet-semilattice-Large-Locale : (l : Level) → Meet-Semilattice (α l)
+  meet-semilattice-Large-Locale = meet-semilattice-Large-Frame L
 ```
