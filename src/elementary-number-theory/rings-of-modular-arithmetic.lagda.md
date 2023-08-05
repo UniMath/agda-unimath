@@ -7,13 +7,16 @@ module elementary-number-theory.rings-of-modular-arithmetic where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-open import ring-theory.rings
-open import foundation.universe-levels
-open import foundation.dependent-pair-types
+open import commutative-algebra.commutative-rings
+
 open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.modular-arithmetic
-open import commutative-algebra.commutative-rings
+open import elementary-number-theory.natural-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.universe-levels
+
+open import ring-theory.rings
 ```
 
 </details>

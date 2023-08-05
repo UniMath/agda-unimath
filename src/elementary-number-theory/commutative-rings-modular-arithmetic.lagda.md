@@ -23,7 +23,8 @@ open import ring-theory.rings
 
 ## Idea
 
-The integers modulo `n` form a [commutative ring](commutative-algebra.commutative-rings.md).
+The integers modulo `n` form a
+[commutative ring](commutative-algebra.commutative-rings.md).
 
 ## Definition
 

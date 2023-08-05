@@ -23,7 +23,8 @@ open import ring-theory.rings
 
 ## Idea
 
-A **unit element** of a [ring](ring-theory.rings.md) `R` is an element `u : R` for which there exists an element `v` such that `uv ＝ 1` and `vu ＝ 1`.
+A **unit element** of a [ring](ring-theory.rings.md) `R` is an element `u : R`
+for which there exists an element `v` such that `uv ＝ 1` and `vu ＝ 1`.
 
 ## Definitions
 
@@ -33,7 +34,7 @@ A **unit element** of a [ring](ring-theory.rings.md) `R` is an element `u : R` f
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   is-unit-Ring : type-Ring R → UU l
   is-unit-Ring x =
     Σ ( type-Ring R)
@@ -96,9 +97,9 @@ module _
     is-unit-Ring R x → is-unit-Ring R y →
     is-unit-Ring R (mul-Ring R x y)
   pr1 (is-unit-mul-Ring x y (x⁻¹ , p , q) (y⁻¹ , r , s)) =
-    mul-Ring  R y⁻¹ x⁻¹
+    mul-Ring R y⁻¹ x⁻¹
   pr1 (pr2 (is-unit-mul-Ring x y (x⁻¹ , p , q) (y⁻¹ , r , s))) =
-    ( associative-mul-Ring R x y (mul-Ring  R y⁻¹ x⁻¹)) ∙
+    ( associative-mul-Ring R x y (mul-Ring R y⁻¹ x⁻¹)) ∙
     ( ( ap
         ( mul-Ring R x)
         ( ( inv (associative-mul-Ring R y y⁻¹ x⁻¹)) ∙
