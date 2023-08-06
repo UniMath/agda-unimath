@@ -113,7 +113,7 @@ pr1 (section-left-factor-retract-of-section-composition f g h H s) =
   section-comp-htpy f g h H s
 pr1 (pr2 (section-left-factor-retract-of-section-composition f g h H s)) =
   section-left-factor-htpy f g h H
-  
+
 pr2 (pr2 (section-left-factor-retract-of-section-composition f g h H s)) =
   is-retraction-section-comp-htpy f g h H s
 ```

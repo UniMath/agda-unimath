@@ -28,9 +28,14 @@ Consider a [subgroup](group-theory.subgroups.md) `H` of a
 [group](group-theory.groups.md) `G`. The **normalizer subgroup** `Nᴳ(H)` of `G`
 is the largest subgroup of `G` of which `H` is a
 [normal subgroup](group-theory.normal-subgroups.md). The normalizer subgroup
-consists of all elements `g : G` such that `h ∈ H ⇔ (gh)g⁻¹ ∈ H` for all `h ∈ G`. In other words, the normalizer subgroup consists of all elements `g` such that `(gH)g⁻¹ ＝ H`.
+consists of all elements `g : G` such that `h ∈ H ⇔ (gh)g⁻¹ ∈ H` for all
+`h ∈ G`. In other words, the normalizer subgroup consists of all elements `g`
+such that `(gH)g⁻¹ ＝ H`.
 
-The weaker condition that `(gH)g⁻¹ ⊆ H` is [not sufficient](https://math.stackexchange.com/q/107862) in the case of infinite groups. In this case, the group elements satisfying this weaker condition may not be closed under inverses.
+The weaker condition that `(gH)g⁻¹ ⊆ H` is
+[not sufficient](https://math.stackexchange.com/q/107862) in the case of
+infinite groups. In this case, the group elements satisfying this weaker
+condition may not be closed under inverses.
 
 Note: The normalizer subgroup should not be confused with the
 [normal closure](group-theory.normal-closures-subgroups.md) of a subgroup, or
