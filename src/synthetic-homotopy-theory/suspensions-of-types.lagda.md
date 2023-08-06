@@ -436,6 +436,7 @@ suspension is left adjoint to the loop space. We do this by constructing an
 equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalences is
 given by λ f → Ω(f) ∘ unit
 
+
 #### The unit and counit of the adjunction
 
 ```agda
@@ -516,6 +517,9 @@ module _
 
 #### The underlying map of the inverse of the equivalence
 
+The following function takes a map `X → Ω Y` and returns a suspension
+structure on `Y`.
+
 ```agda
 module _
   {l1 l2 : Level} (X : UU l1) (Y : Pointed-Type l2)
@@ -525,19 +529,12 @@ module _
   pr1 (suspension-structure-map-into-Ω f) = point-Pointed-Type Y
   pr1 (pr2 (suspension-structure-map-into-Ω f)) = point-Pointed-Type Y
   pr2 (pr2 (suspension-structure-map-into-Ω f)) = f
+```
 
-  constant-map-constant-suspension-structure :
-    (map-inv-up-suspension
-      ( X)
-      ( type-Pointed-Type Y)
-      ( constant-suspension-structure-Pointed-Type X Y))
-    ~
-      const
-        (suspension X)
-        (type-Pointed-Type Y)
-        (point-Pointed-Type Y)
-  constant-map-constant-suspension-structure x = {!!}
+The above  plus the universal property of suspensions defines the inverse map.
+We use the universal property to define the inverse.
 
+```agda
 module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where
@@ -552,9 +549,19 @@ module _
         ( type-Pointed-Type X)
         ( Y)
         ( map-pointed-map f∗))
-  pr2 (map-inv-equiv-susp-loop-adj f∗) = {!!}
+  pr2 (map-inv-equiv-susp-loop-adj f∗) =
+    up-suspension-N-susp
+      ( type-Pointed-Type X)
+      ( type-Pointed-Type Y)
+      ( suspension-structure-map-into-Ω
+      ( type-Pointed-Type X)
+      ( Y)
+      ( map-pointed-map f∗))
 ```
-NEED LEMMA: showing the the constant suspension structure induces the constant map via up-suspension
+
+We now show these maps are inverses of each other.
+
+[To Do]
 
 #### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
 
