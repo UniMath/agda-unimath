@@ -19,9 +19,8 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.type-arithmetic-dependent-pair-types
-
 open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
@@ -150,7 +149,7 @@ pr1 (constant-suspension-structure-Pointed-Type X Y) =
 pr1 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
   point-Pointed-Type Y
 pr2 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
-  const X (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl 
+  const X (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
 ```
 
 ## Properties
@@ -436,7 +435,6 @@ suspension is left adjoint to the loop space. We do this by constructing an
 equivalence ((suspension A) →∗ B) ≃ (A →∗ Ω B) and showing this equivalences is
 given by λ f → Ω(f) ∘ unit
 
-
 #### The unit and counit of the adjunction
 
 ```agda
@@ -512,13 +510,13 @@ module _
     ((suspension-Pointed-Type X) →∗ Y) →
     (X →∗ Ω Y)
   map-equiv-susp-loop-adj f∗ =
-     ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))  
+     ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))
 ```
 
 #### The underlying map of the inverse of the equivalence
 
-The following function takes a map `X → Ω Y` and returns a suspension
-structure on `Y`.
+The following function takes a map `X → Ω Y` and returns a suspension structure
+on `Y`.
 
 ```agda
 module _
@@ -531,8 +529,8 @@ module _
   pr2 (pr2 (suspension-structure-map-into-Ω f)) = f
 ```
 
-The above  plus the universal property of suspensions defines the inverse map.
-We use the universal property to define the inverse.
+The above plus the universal property of suspensions defines the inverse map. We
+use the universal property to define the inverse.
 
 ```agda
 module _
