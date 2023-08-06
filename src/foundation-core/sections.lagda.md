@@ -28,11 +28,17 @@ For example, every dependent function induces a section of the projection map.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  section : (A → B) → UU (l1 ⊔ l2)
-  section f = Σ (B → A) (λ s → (f ∘ s) ~ id)
+  section : UU (l1 ⊔ l2)
+  section = Σ (B → A) (λ s → (f ∘ s) ~ id)
+
+  map-section : section → B → A
+  map-section = pr1
+
+  is-section-map-section : (s : section) → (f ∘ map-section s) ~ id
+  is-section-map-section = pr2
 ```
 
 ## Properties

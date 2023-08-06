@@ -232,7 +232,7 @@ module _
           ( mul-Group G x z)) ∙
         ( ap
           ( mul-Group G (mul-Group G x y))
-          ( is-retraction-mul-inv-Group G x z)))
+          ( is-retraction-left-div-Group G x z)))
 
   closure-property-Normal-Subgroup' :
     {x y z : type-Group G} →
@@ -602,7 +602,7 @@ pr1
   binary-tr
     ( sim-congruence-Group G R)
     ( right-unit-law-mul-Group G x)
-    ( is-section-mul-inv-Group G x y)
+    ( is-section-left-div-Group G x y)
     ( left-mul-congruence-Group G R x H)
 pr2
   ( relate-same-elements-congruence-normal-subgroup-congruence-Group
