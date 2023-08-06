@@ -14,12 +14,14 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
+open import group-theory.subsets-groups
 ```
 
 </details>
@@ -83,6 +85,19 @@ module _
             ( associative-mul-Group G g
               ( mul-Group G h x)
               ( inv-Group G h)))))
+```
+
+### The predicate on subsets of groups of being closed under conjugation
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (S : subset-Group l2 G)
+  where
+
+  is-closed-under-conjugation-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-conjugation-subset-Group =
+    (x y : type-Group G) →
+    is-in-subtype S y → is-in-subtype S (conjugation-Group G x y)
 ```
 
 ## Properties
