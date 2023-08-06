@@ -510,7 +510,7 @@ module _
     ((suspension-Pointed-Type X) →∗ Y) →
     (X →∗ Ω Y)
   map-equiv-susp-loop-adj f∗ =
-     ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))
+    ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))
 ```
 
 #### The underlying map of the inverse of the equivalence
