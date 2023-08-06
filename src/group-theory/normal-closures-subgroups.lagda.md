@@ -212,7 +212,7 @@ module _
     backward-implication-is-normal-closure-normal-closure-Subgroup N
 ```
 
-### The normal closure  Galois connection
+### The normal closure Galois connection
 
 ```agda
 module _
