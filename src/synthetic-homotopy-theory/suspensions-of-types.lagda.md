@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.suspensions-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.constant-maps
 open import foundation.contractible-types
@@ -439,8 +440,9 @@ module _
                 ( S)))
 
 module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (susp-str : suspension-structure X Y)
-  (B : Y → UU l3) (d-susp-str : dependent-suspension-structure B susp-str)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  (susp-str : suspension-structure X Y)
+  (d-susp-str : dependent-suspension-structure B susp-str)
   where
 
 
@@ -458,20 +460,37 @@ module _
       ( N-dependent-suspension-structure)
       ( S-dependent-suspension-structure)
   merid-dependent-suspension-structure = (pr2 ∘ pr2) (d-susp-str)
-
-module _
-  {l1 l2 : Level} (X : UU l1) (B : suspension X → UU l1)
-  where
   
-  dependent-ev-suspension :
-      {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-      (susp-str-Y : suspension-structure X Y) →
-      (B : Y → UU l3) → ((y : Y) → B y) →
-      {!dependent-suspension-structure
-          ( X)
-          ( {!!})!}
-  dependent-ev-suspension = {!!}
+dependent-ev-suspension :
+    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+    (susp-str-Y : suspension-structure X Y) (B : Y → UU l3) 
+     → ((y : Y) → B y) →
+    dependent-suspension-structure B susp-str-Y
+pr1 (dependent-ev-suspension susp-str-Y B s) =
+  s (N-suspension-structure susp-str-Y)
+pr1 (pr2 (dependent-ev-suspension susp-str-Y B s)) =
+  s (S-suspension-structure susp-str-Y)
+pr2 (pr2 (dependent-ev-suspension susp-str-Y B s)) =
+  (apd s) ∘ (merid-suspension-structure susp-str-Y)
 ```
+
+We can now state the dependent universal property
+
+```agda
+module _
+  (l : Level) {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  (susp-str-Y : suspension-structure X Y)
+  where
+
+  dependent-universal-property-suspension : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  dependent-universal-property-suspension =
+    (B : Y → UU l3) → is-equiv (dependent-ev-suspension susp-str-Y B)
+```
+
+We now show that the suspension of a type `X` has the dependent universal
+property of suspensions
+
+[To Do]
 
 ### The suspension-loop space adjunction
 
