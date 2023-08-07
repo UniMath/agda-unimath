@@ -80,7 +80,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1}
   where
 
-  intersection-fam-subtype :
+  intersection-family-of-subtypes :
     {I : UU l2} (P : I → subtype l3 X) → subtype (l2 ⊔ l3) X
-  intersection-fam-subtype {I} P x = Π-Prop I (λ i → P i x)
+  intersection-family-of-subtypes {I} P x = Π-Prop I (λ i → P i x)
 ```

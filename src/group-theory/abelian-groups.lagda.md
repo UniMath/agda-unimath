@@ -238,11 +238,11 @@ module _
 
   is-section-add-neg-Ab :
     (x : type-Ab A) → (add-Ab A x ∘ left-subtraction-Ab x) ~ id
-  is-section-add-neg-Ab = is-section-mul-inv-Group (group-Ab A)
+  is-section-add-neg-Ab = is-section-left-div-Group (group-Ab A)
 
   is-retraction-add-neg-Ab :
     (x : type-Ab A) → (left-subtraction-Ab x ∘ add-Ab A x) ~ id
-  is-retraction-add-neg-Ab = is-retraction-mul-inv-Group (group-Ab A)
+  is-retraction-add-neg-Ab = is-retraction-left-div-Group (group-Ab A)
 
   is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
   is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
@@ -264,12 +264,12 @@ module _
   is-section-add-neg-Ab' :
     (x : type-Ab A) →
     (add-Ab' A x ∘ (λ y → right-subtraction-Ab y x)) ~ id
-  is-section-add-neg-Ab' = is-section-mul-inv-Group' (group-Ab A)
+  is-section-add-neg-Ab' = is-section-right-div-Group (group-Ab A)
 
   is-retraction-add-neg-Ab' :
     (x : type-Ab A) →
     ((λ y → right-subtraction-Ab y x) ∘ add-Ab' A x) ~ id
-  is-retraction-add-neg-Ab' = is-retraction-mul-inv-Group' (group-Ab A)
+  is-retraction-add-neg-Ab' = is-retraction-right-div-Group (group-Ab A)
 
   is-equiv-add-Ab' : (x : type-Ab A) → is-equiv (add-Ab' A x)
   is-equiv-add-Ab' = is-equiv-mul-Group' (group-Ab A)

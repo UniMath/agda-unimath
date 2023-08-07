@@ -187,16 +187,16 @@ module _
   left-div-Group : type-Group G → type-Group G → type-Group G
   left-div-Group x y = mul-Group G (inv-Group G x) y
 
-  is-section-mul-inv-Group :
+  is-section-left-div-Group :
     (x : type-Group G) → (mul-Group G x ∘ left-div-Group x) ~ id
-  is-section-mul-inv-Group x y =
+  is-section-left-div-Group x y =
     ( inv (associative-mul-Group G _ _ _)) ∙
     ( ( ap (mul-Group' G y) (right-inverse-law-mul-Group G x)) ∙
       ( left-unit-law-mul-Group G y))
 
-  is-retraction-mul-inv-Group :
+  is-retraction-left-div-Group :
     (x : type-Group G) → (left-div-Group x ∘ mul-Group G x) ~ id
-  is-retraction-mul-inv-Group x y =
+  is-retraction-left-div-Group x y =
     ( inv (associative-mul-Group G _ _ _)) ∙
     ( ( ap (mul-Group' G y) (left-inverse-law-mul-Group G x)) ∙
       ( left-unit-law-mul-Group G y))
@@ -205,12 +205,23 @@ module _
   is-equiv-mul-Group x =
     is-equiv-has-inverse
       ( left-div-Group x)
-      ( is-section-mul-inv-Group x)
-      ( is-retraction-mul-inv-Group x)
+      ( is-section-left-div-Group x)
+      ( is-retraction-left-div-Group x)
 
   equiv-mul-Group : (x : type-Group G) → type-Group G ≃ type-Group G
   pr1 (equiv-mul-Group x) = mul-Group G x
   pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
+
+  is-equiv-left-div-Group : (x : type-Group G) → is-equiv (left-div-Group x)
+  is-equiv-left-div-Group x =
+    is-equiv-has-inverse
+      ( mul-Group G x)
+      ( is-retraction-left-div-Group x)
+      ( is-section-left-div-Group x)
+
+  equiv-left-div-Group : (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-left-div-Group x) = left-div-Group x
+  pr2 (equiv-left-div-Group x) = is-equiv-left-div-Group x
 ```
 
 ### Multiplication by `x` from the right is an equivalence
@@ -219,16 +230,16 @@ module _
   right-div-Group : type-Group G → type-Group G → type-Group G
   right-div-Group x y = mul-Group G x (inv-Group G y)
 
-  is-section-mul-inv-Group' :
+  is-section-right-div-Group :
     (x : type-Group G) → (mul-Group' G x ∘ (λ y → right-div-Group y x)) ~ id
-  is-section-mul-inv-Group' x y =
+  is-section-right-div-Group x y =
     ( associative-mul-Group G _ _ _) ∙
     ( ( ap (mul-Group G y) (left-inverse-law-mul-Group G x)) ∙
       ( right-unit-law-mul-Group G y))
 
-  is-retraction-mul-inv-Group' :
+  is-retraction-right-div-Group :
     (x : type-Group G) → ((λ y → right-div-Group y x) ∘ mul-Group' G x) ~ id
-  is-retraction-mul-inv-Group' x y =
+  is-retraction-right-div-Group x y =
     ( associative-mul-Group G _ _ _) ∙
     ( ( ap (mul-Group G y) (right-inverse-law-mul-Group G x)) ∙
       ( right-unit-law-mul-Group G y))
@@ -237,12 +248,25 @@ module _
   is-equiv-mul-Group' x =
     is-equiv-has-inverse
       ( λ y → right-div-Group y x)
-      ( is-section-mul-inv-Group' x)
-      ( is-retraction-mul-inv-Group' x)
+      ( is-section-right-div-Group x)
+      ( is-retraction-right-div-Group x)
 
   equiv-mul-Group' : (x : type-Group G) → type-Group G ≃ type-Group G
   pr1 (equiv-mul-Group' x) = mul-Group' G x
   pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
+
+  is-equiv-right-div-Group :
+    (x : type-Group G) → is-equiv (λ y → right-div-Group y x)
+  is-equiv-right-div-Group x =
+    is-equiv-has-inverse
+      ( mul-Group' G x)
+      ( is-retraction-right-div-Group x)
+      ( is-section-right-div-Group x)
+
+  equiv-right-div-Group :
+    (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-right-div-Group x) y = right-div-Group y x
+  pr2 (equiv-right-div-Group x) = is-equiv-right-div-Group x
 ```
 
 ### Multiplication is a binary equivalence and a binary embedding
@@ -276,25 +300,25 @@ module _
     {x y z : type-Group G} →
     (mul-Group G x y ＝ z) → (x ＝ mul-Group G z (inv-Group G y))
   transpose-eq-mul-Group {x} {y} {z} refl =
-    inv (is-retraction-mul-inv-Group' y x)
+    inv (is-retraction-right-div-Group y x)
 
   inv-transpose-eq-mul-Group :
     {x y z : type-Group G} →
     (x ＝ mul-Group G z (inv-Group G y)) → (mul-Group G x y ＝ z)
   inv-transpose-eq-mul-Group {._} {y} {z} refl =
-    is-section-mul-inv-Group' y z
+    is-section-right-div-Group y z
 
   transpose-eq-mul-Group' :
     {x y z : type-Group G} →
     Id (mul-Group G x y) z → Id y (mul-Group G (inv-Group G x) z)
   transpose-eq-mul-Group' {x} {y} {z} refl =
-    inv (is-retraction-mul-inv-Group x y)
+    inv (is-retraction-left-div-Group x y)
 
   inv-transpose-eq-mul-Group' :
     {x y z : type-Group G} →
     Id y (mul-Group G (inv-Group G x) z) → (mul-Group G x y ＝ z)
   inv-transpose-eq-mul-Group' {x} {y} {._} refl =
-    is-section-mul-inv-Group x _
+    is-section-left-div-Group x _
 ```
 
 ### Distributivity of inverses over multiplication
@@ -405,7 +429,7 @@ module _
       ＝ mul-Group G (inv-Group G x) (mul-Group G y (left-div-Group y z))
         by associative-mul-Group G (inv-Group G x) y (left-div-Group y z)
       ＝ left-div-Group x z
-        by ap (mul-Group G (inv-Group G x)) (is-section-mul-inv-Group y z)
+        by ap (left-div-Group x) (is-section-left-div-Group y z)
 ```
 
 ### The multiple of `xy⁻¹` and `yz⁻¹` is `xz⁻¹`
@@ -421,7 +445,7 @@ module _
       ＝ mul-Group G x (mul-Group G (inv-Group G y) (right-div-Group y z))
         by associative-mul-Group G x (inv-Group G y) (right-div-Group y z)
       ＝ right-div-Group x z
-        by ap (mul-Group G x) (is-retraction-mul-inv-Group y (inv-Group G z))
+        by ap (mul-Group G x) (is-retraction-left-div-Group y (inv-Group G z))
 ```
 
 ### For any semigroup, being a group is a property

@@ -97,3 +97,21 @@ abstract
     is-injective f
   is-injective-retraction f (h , H) {x} {y} p = (inv (H x)) ∙ (ap h p ∙ H y)
 ```
+
+### Transposing identifications along retractions
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  transpose-eq-retraction :
+    (g : B → A) (H : (g ∘ f) ~ id) {x : B} {y : A} →
+    x ＝ f y → g x ＝ y
+  transpose-eq-retraction g H refl = H _
+
+  transpose-eq-retraction' :
+    (g : B → A) (H : (g ∘ f) ~ id) {x : A} {y : B} →
+    f x ＝ y → x ＝ g y
+  transpose-eq-retraction' g H refl = inv (H _)
+```
