@@ -194,7 +194,7 @@ module _
         ( inv-Group G y)
         ( p)
         ( is-closed-under-inv-Subgroup y q))
-      ( is-retraction-mul-inv-Group' G y x)
+      ( is-retraction-right-div-Group G y x)
 
   is-in-subgroup-right-factor-Subgroup :
     (x y : type-Group G) →
@@ -207,7 +207,7 @@ module _
         ( mul-Group G x y)
         ( is-closed-under-inv-Subgroup x q)
         ( p))
-      ( is-retraction-mul-inv-Group G x y)
+      ( is-retraction-left-div-Group G x y)
 
 is-emb-subset-Subgroup :
   {l1 l2 : Level} (G : Group l1) →

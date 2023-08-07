@@ -106,11 +106,11 @@ pr2 (fib-𝔽 X Y f y) =
 
 ```agda
 abstract
-  is-finite-fib-map-section :
+  is-finite-fib-map-section-family :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
     is-finite (Σ A B) → ((x : A) → is-finite (B x)) →
-    (t : Σ A B) → is-finite (fib (map-section b) t)
-  is-finite-fib-map-section {l1} {l2} {A} {B} b f g (pair y z) =
+    (t : Σ A B) → is-finite (fib (map-section-family b) t)
+  is-finite-fib-map-section-family {l1} {l2} {A} {B} b f g (pair y z) =
     is-finite-equiv'
       ( ( ( left-unit-law-Σ-is-contr
             ( is-contr-total-path' y)

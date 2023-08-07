@@ -23,6 +23,7 @@ open import group-theory.centers-semigroups public
 open import group-theory.central-elements-groups public
 open import group-theory.central-elements-monoids public
 open import group-theory.central-elements-semigroups public
+open import group-theory.centralizer-subgroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutators-groups public
 open import group-theory.concrete-group-actions public
@@ -94,10 +95,13 @@ open import group-theory.monoid-actions public
 open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
+open import group-theory.normal-closures-subgroups public
+open import group-theory.normal-cores-subgroups public
 open import group-theory.normal-subgroups public
 open import group-theory.normal-subgroups-concrete-groups public
 open import group-theory.normal-submonoids public
 open import group-theory.normal-submonoids-commutative-monoids public
+open import group-theory.normalizer-subgroups public
 open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public

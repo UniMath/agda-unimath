@@ -182,7 +182,7 @@ module _
     binary-tr
       ( sim-congruence-Group)
       ( right-unit-law-mul-Group G x)
-      ( is-section-mul-inv-Group G x y)
+      ( is-section-left-div-Group G x y)
       ( symmetric-congruence-Group
         ( mul-Group G x (left-div-Group G x y))
         ( mul-Group G x (unit-Group G))

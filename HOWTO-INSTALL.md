@@ -327,3 +327,47 @@ website locally:
 You've now successfully set up the local environment for the website! As you
 make changes to the website's source files, you can repeat steps 2 and 3 to view
 the updates locally before pushing the changes to the repository.
+
+## Troubleshooting
+
+If you encounter any issues during the installation process, don't hesitate to
+reach out to us on the
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX). Our community is
+here to help and ensure you have a smooth experience.
+
+### I have installed `make pre-commit` on my Debian-based system, but the `pre-commit` command isn't recognized. What should I do?
+
+This issue can arise if the `pre-commit` executable gets placed in the
+`~/.local/bin` directory, which might not be in your system's `PATH`.
+
+**To resolve this:**
+
+1. **Check the `~/.local/bin` directory**: Use the command
+   `ls ~/.local/bin | grep pre-commit` to see if the executable is present.
+
+2. **Update your `PATH`**:
+
+   - If you're using the bash terminal, open your `.bashrc` file with a text
+     editor like `nano`:
+
+     ```bash
+     nano ~/.bashrc
+     ```
+
+   - Add the following line to the end of the file:
+
+     ```bash
+     export PATH=$PATH:~/.local/bin
+     ```
+
+   - Save the file and close the editor.
+
+3. **Reload your `.bashrc`**:
+
+   - Run the following command to apply the changes:
+
+     ```bash
+     source ~/.bashrc
+     ```
+
+Now, try running the `pre-commit` command again. It should be recognized.
