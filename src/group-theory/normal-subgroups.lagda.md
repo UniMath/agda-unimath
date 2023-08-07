@@ -31,6 +31,8 @@ open import group-theory.subsets-groups
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 open import order-theory.posets
 open import order-theory.preorders
 ```
@@ -199,18 +201,18 @@ module _
   group-Normal-Subgroup : Group (l1 ⊔ l2)
   group-Normal-Subgroup = group-Subgroup G subgroup-Normal-Subgroup
 
-  is-normal-subgroup-Normal-Subgroup :
+  is-normal-Normal-Subgroup :
     (x y : type-Group G) → is-in-Normal-Subgroup y →
     is-in-Normal-Subgroup (conjugation-Group G x y)
-  is-normal-subgroup-Normal-Subgroup x y p = pr2 N x (y , p)
+  is-normal-Normal-Subgroup x y p = pr2 N x (y , p)
 
-  is-normal-subgroup-Normal-Subgroup' :
+  is-normal-Normal-Subgroup' :
     (x y : type-Group G) → is-in-Normal-Subgroup y →
     is-in-Normal-Subgroup (conjugation-Group' G x y)
-  is-normal-subgroup-Normal-Subgroup' x y p =
+  is-normal-Normal-Subgroup' x y p =
     is-normal-is-normal-Subgroup G
       ( subgroup-Normal-Subgroup)
-      ( λ x y → is-normal-subgroup-Normal-Subgroup x (pr1 y) (pr2 y))
+      ( λ x y → is-normal-Normal-Subgroup x (pr1 y) (pr2 y))
       ( x)
       ( pair y p)
 
@@ -224,7 +226,7 @@ module _
       ( is-closed-under-multiplication-Normal-Subgroup
         ( conjugation-Group G x y)
         ( mul-Group G x z)
-        ( is-normal-subgroup-Normal-Subgroup x y p)
+        ( is-normal-Normal-Subgroup x y p)
         ( q))
       ( ( associative-mul-Group G
           ( mul-Group G x y)
@@ -232,7 +234,7 @@ module _
           ( mul-Group G x z)) ∙
         ( ap
           ( mul-Group G (mul-Group G x y))
-          ( is-retraction-mul-inv-Group G x z)))
+          ( is-retraction-left-div-Group G x z)))
 
   closure-property-Normal-Subgroup' :
     {x y z : type-Group G} →
@@ -249,14 +251,14 @@ module _
   pr1 (conjugation-Normal-Subgroup y u) =
     conjugation-Group G y (inclusion-Normal-Subgroup u)
   pr2 (conjugation-Normal-Subgroup y u) =
-    is-normal-subgroup-Normal-Subgroup y (pr1 u) (pr2 u)
+    is-normal-Normal-Subgroup y (pr1 u) (pr2 u)
 
   conjugation-Normal-Subgroup' :
     type-Group G → type-Normal-Subgroup → type-Normal-Subgroup
   pr1 (conjugation-Normal-Subgroup' y u) =
     conjugation-Group' G y (inclusion-Normal-Subgroup u)
   pr2 (conjugation-Normal-Subgroup' y u) =
-    is-normal-subgroup-Normal-Subgroup' y (pr1 u) (pr2 u)
+    is-normal-Normal-Subgroup' y (pr1 u) (pr2 u)
 ```
 
 ## Properties
@@ -282,7 +284,7 @@ module _
     extensionality-type-subtype
       ( is-normal-subgroup-Prop G)
       ( λ x y →
-        is-normal-subgroup-Normal-Subgroup G N x (pr1 y) (pr2 y))
+        is-normal-Normal-Subgroup G N x (pr1 y) (pr2 y))
       ( λ x → pair id id)
       ( extensionality-Subgroup G (subgroup-Normal-Subgroup G N))
 
@@ -364,6 +366,21 @@ Normal-Subgroup-Poset :
   Poset (l1 ⊔ lsuc l2) (l1 ⊔ l2)
 Normal-Subgroup-Poset l2 G =
   poset-Large-Poset (Normal-Subgroup-Large-Poset G) l2
+
+preserves-order-subgroup-Normal-Subgroup :
+  {l1 l2 l3 : Level} (G : Group l1)
+  (N : Normal-Subgroup l2 G) (M : Normal-Subgroup l3 G) →
+  leq-Normal-Subgroup G N M →
+  leq-Subgroup G (subgroup-Normal-Subgroup G N) (subgroup-Normal-Subgroup G M)
+preserves-order-subgroup-Normal-Subgroup G N M = id
+
+subgroup-normal-subgroup-hom-Large-Poset :
+  {l1 : Level} (G : Group l1) →
+  hom-Large-Poset id (Normal-Subgroup-Large-Poset G) (Subgroup-Large-Poset G)
+subgroup-normal-subgroup-hom-Large-Poset G =
+  make-hom-Large-Preorder
+    ( subgroup-Normal-Subgroup G)
+    ( preserves-order-subgroup-Normal-Subgroup G)
 ```
 
 ### Normal subgroups are in 1-1 correspondence with congruence relations on groups
@@ -414,7 +431,7 @@ module _
     left-sim-congruence-Normal-Subgroup x y
   left-sim-sim-congruence-Normal-Subgroup x y H =
     is-closed-under-eq-Normal-Subgroup G N
-      ( is-normal-subgroup-Normal-Subgroup G N y
+      ( is-normal-Normal-Subgroup G N y
         ( inv-Group G (left-div-Group G x y))
         ( is-closed-under-inv-Normal-Subgroup G N
           ( left-div-Group G x y)
@@ -428,7 +445,7 @@ module _
     sim-congruence-Normal-Subgroup x y
   sim-left-sim-congruence-Normal-Subgroup x y H =
     is-closed-under-eq-Normal-Subgroup G N
-      ( is-normal-subgroup-Normal-Subgroup' G N x
+      ( is-normal-Normal-Subgroup' G N x
         ( inv-Group G (right-div-Group G x y))
         ( is-closed-under-inv-Normal-Subgroup G N
           ( right-div-Group G x y)
@@ -602,7 +619,7 @@ pr1
   binary-tr
     ( sim-congruence-Group G R)
     ( right-unit-law-mul-Group G x)
-    ( is-section-mul-inv-Group G x y)
+    ( is-section-left-div-Group G x y)
     ( left-mul-congruence-Group G R x H)
 pr2
   ( relate-same-elements-congruence-normal-subgroup-congruence-Group
