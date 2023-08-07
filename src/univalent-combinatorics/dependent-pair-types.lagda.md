@@ -15,6 +15,7 @@ open import foundation.decidable-types
 open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-propositional-truncation
@@ -96,10 +97,11 @@ abstract
       ( λ e →
         is-finite-count
           ( count-equiv
-            ( ( equiv-total-fib-map-section b) ∘e
+            ( ( equiv-total-fib (map-section-family b)) ∘e
               ( equiv-tot
                 ( λ t →
-                  ( equiv-tot (λ x → equiv-eq-pair-Σ (map-section b x) t)) ∘e
+                  ( equiv-tot
+                    ( λ x → equiv-eq-pair-Σ (map-section-family b x) t)) ∘e
                   ( ( associative-Σ A
                       ( λ (x : A) → Id x (pr1 t))
                       ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e

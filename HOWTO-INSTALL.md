@@ -10,14 +10,57 @@ environment for making contributions to the library.
 
 ## Getting a copy of the library
 
-Get a copy of our library on your machine with `git` using
+### Creating a fork of the library
 
-```shell
-git clone git@github.com:UniMath/agda-unimath.git
+Begin by creating a fork of the library on GitHub:
+
+1. Navigate to the library's GitHub page at
+   [https://github.com/UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
+2. In the upper-right corner of the page, click the "Fork" button.
+3. Select your GitHub account to create the fork under.
+
+### Cloning your fork of the library
+
+After you have your own fork of the library, you can clone it to your machine
+with git using the following command in your terminal:
+
+```bash
+git clone --depth 1 git@github.com:[YourUsername]/agda-unimath.git
 ```
 
-or by going to the [GitHub page](https://github.com/UniMath/agda-unimath) and
-manually downloading it.
+Replace `[YourUsername]` with your actual GitHub username. This command will
+clone a shallow copy of the library, i.e., a copy of the library without its
+entire git history, which is a version of the library that is under 20MB in
+size.
+
+If you prefer to clone the library with its history, simply omit `--depth 1` in
+the above command.
+
+### Creating a branch within your clone of the library
+
+Once you've cloned the library, we highly recommend you to preserve the `master`
+branch in its original state and up to date with the official `agda-unimath`
+repository. This means you should avoid making changes directly to the `master`
+branch.
+
+Instead, whenever you're about to start a new piece of work (be it a new
+feature, bug fix, or any other modifications), create a new branch from
+`master`. This way, you can keep track of different lines of work, isolate them
+from each other, and prevent potential conflicts.
+
+Here's a basic example of how you can create a new branch:
+
+```bash
+git checkout -b my-feature
+```
+
+This command creates a new branch named `my-feature` and automatically checks it
+out, meaning your 'working directory' will switch to this branch.
+
+By maintaining the `master` branch untouched, you ensure a clean, up-to-date
+base that is aligned with the original library you forked from. This makes it
+easier to pull in updates from the original repository and merge them into your
+working branches when necessary.
 
 ## Installing Agda
 
@@ -46,7 +89,7 @@ nix develop
 Once you've activated the shell, launch your editor from within it by running
 `code` or `emacs`. This ensures your editor recognizes the Agda installation.
 
-## Tutorials for Agda
+### Tutorials for Agda
 
 If you're new to Agda, there are several resources available to help you learn
 the basics and become proficient in using the language. We recommend starting
@@ -271,3 +314,47 @@ website locally:
 You've now successfully set up the local environment for the website! As you
 make changes to the website's source files, you can repeat steps 2 and 3 to view
 the updates locally before pushing the changes to the repository.
+
+## Troubleshooting
+
+If you encounter any issues during the installation process, don't hesitate to
+reach out to us on the
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX). Our community is
+here to help and ensure you have a smooth experience.
+
+### I have installed `make pre-commit` on my Debian-based system, but the `pre-commit` command isn't recognized. What should I do?
+
+This issue can arise if the `pre-commit` executable gets placed in the
+`~/.local/bin` directory, which might not be in your system's `PATH`.
+
+**To resolve this:**
+
+1. **Check the `~/.local/bin` directory**: Use the command
+   `ls ~/.local/bin | grep pre-commit` to see if the executable is present.
+
+2. **Update your `PATH`**:
+
+   - If you're using the bash terminal, open your `.bashrc` file with a text
+     editor like `nano`:
+
+     ```bash
+     nano ~/.bashrc
+     ```
+
+   - Add the following line to the end of the file:
+
+     ```bash
+     export PATH=$PATH:~/.local/bin
+     ```
+
+   - Save the file and close the editor.
+
+3. **Reload your `.bashrc`**:
+
+   - Run the following command to apply the changes:
+
+     ```bash
+     source ~/.bashrc
+     ```
+
+Now, try running the `pre-commit` command again. It should be recognized.

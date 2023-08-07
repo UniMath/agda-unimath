@@ -284,13 +284,13 @@ abstract
     has-decidable-equality A
   has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
     has-decidable-equality-equiv'
-      ( equiv-total-fib (map-section b))
+      ( equiv-total-fib (map-section-family b))
       ( has-decidable-equality-Σ dΣ
         ( λ t →
           has-decidable-equality-is-prop
             ( is-prop-map-is-injective
               ( is-set-has-decidable-equality dΣ)
-              ( is-injective-map-section b)
+              ( is-injective-map-section-family b)
               ( t))))
 ```
 
