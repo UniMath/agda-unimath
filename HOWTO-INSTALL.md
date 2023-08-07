@@ -13,11 +13,14 @@ environment for making contributions to the library.
 Get a copy of our library on your machine with `git` using
 
 ```shell
-git clone git@github.com:UniMath/agda-unimath.git
+git clone --depth 1 git@github.com:UniMath/agda-unimath.git
 ```
 
-or by going to the [GitHub page](https://github.com/UniMath/agda-unimath) and
-manually downloading it.
+in your terminal. This will clone a shallow copy of the library, i.e., a copy of
+the library without its entire git history that is under 20MB in size. If you
+prefer to clone the library with its history, simply omit `--depth 1` in the
+above command. Alternatively, the library can be downloaded manually by going to
+the [GitHub page](https://github.com/UniMath/agda-unimath).
 
 ## Installing Agda
 
