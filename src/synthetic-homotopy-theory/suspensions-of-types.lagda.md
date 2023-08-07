@@ -443,7 +443,16 @@ module _
 
   dependent-suspension-structure : UU (l1 ⊔ l3)
   dependent-suspension-structure =
-    Σ
+    Σ ( B (N-suspension-structure susp-str))
+      ( λ N →
+        Σ ( B (S-suspension-structure susp-str))
+          ( λ S →
+            (x : X) →
+            dependent-identification
+              ( B)
+              ( merid-suspension-structure susp-str x)
+              ( N)
+              ( S)))
       (B (N-suspension-structure susp-str))
       (λ N →
         Σ
