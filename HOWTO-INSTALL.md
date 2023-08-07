@@ -1,14 +1,57 @@
 # Installing the library
 
-To use the `agda-unimath` library, you will need to have Agda and a code editor
-set up. This guide provides instructions for installing Agda as well as specific
-setup instructions for the editors [Emacs](https://www.gnu.org/software/emacs/)
-and [Visual Studio Code](https://code.visualstudio.com/). By following these
-step-by-step directions, you will create a tailored working environment for
-using the library. Additionally, we provide instructions for setting up your
-environment for making contributions to the library.
+## Overview
 
-## Getting a copy of the library
+### Quick setup
+
+To work or experiment with the `agda-unimath` library on your machine, you will
+need to have `agda` version 2.6.3 installed on your machine, and a suitable
+editor such as [Emacs](https://www.gnu.org/software/emacs/) or
+[Visual Studio Code](https://code.visualstudio.com/). The following instructions
+will help you on your way right away:
+
+1. [Getting a copy of the library](#getting-a-copy)
+2. [Installing Agda](#installing-agda)
+3. [Setting up your editor](#editor-setup)
+
+### Setup for contributors
+
+In order to contribute to the `agda-unimath` library you will additionally need:
+
+1. `git`
+2. `make`
+3. `python` version 3.8 or newer
+4. `pre-commit` and `request`. Those two programs can be installed by running
+
+   ```shell
+   python3 -m pip install -r scripts/requirements.txt
+   ```
+
+5. `rust` version 1.68 or newer
+6. `mdbook` version 4.34 or newer, along with the following packages:
+
+   - `mdbook-linkcheck`
+   - `mdbook-katex`
+   - `mdbook-pagetoc`
+   - `mdbook-catppuccin`
+
+   These can be installed by running the command
+
+   ```shell
+   make install-website-dev
+   ```
+
+In the section [Creating a setup for contributors](#contributor-setup) we will
+walk you through the steps of preparing your environment for contributing to the
+library.
+
+Additionally, we added a [Troubleshooting](#troubleshooting) section at the end
+of this guide. If you experience any issues during the setup process, don't
+hesitate to reach out to us on the
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX). Our community is
+here to help and ensure you have a smooth experience.
+
+## Getting a copy of the library {#getting-a-copy}
 
 The way you install the library on your machine might depend on the way you plan
 to use it. If you plan to contribute to the library, then we suggest first
@@ -83,7 +126,7 @@ base that is aligned with the original library you forked from. This makes it
 easier to pull in updates from the original repository and merge them into your
 working branches when necessary.
 
-## Installing Agda
+## Installing Agda {#installing-agda}
 
 The `agda-unimath` library is built and verified with Agda 2.6.3, and we provide
 two methods for installation: with or without the package manager
@@ -118,7 +161,7 @@ with the
 [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
 provided on the Agda documentation page.
 
-## Editor setup
+## Editor setup {#editor-setup}
 
 We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
@@ -258,7 +301,7 @@ repository's main folder. This requires the
 generates the `everything.lagda.md` file, which imports and verifies all files
 in the library.
 
-### Contributing
+## Creating a setup for contributors {#contributor-setup}
 
 We welcome and appreciate contributions from the community. If you're interested
 in contributing to the `agda-unimath` library, you can follow the instructions
@@ -266,7 +309,7 @@ below to ensure a smooth setup and workflow. Also, please make sure to follow
 our [coding style](CODINGSTYLE.md) and
 [design principles](DESIGN-PRINCIPLES.md).
 
-#### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
+### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
 The `agda-unimath` library includes [pre-commit](https://pre-commit.com/) hooks
 that enforce [basic formatting rules](CONTRIBUTING.md). These will inform you of
@@ -296,7 +339,7 @@ Keep in mind that `pre-commit` is also a part of the Continuous Integration
 (CI), so any PR that violates the enforced conventions will be automatically
 blocked from merging.
 
-#### <a name="build-website"></a>Building and viewing the website locally
+### <a name="build-website"></a>Building and viewing the website locally
 
 The build process for the website uses the
 [Rust language](https://www.rust-lang.org/)'s package manager `cargo`. To
@@ -336,7 +379,7 @@ You've now successfully set up the local environment for the website! As you
 make changes to the website's source files, you can repeat steps 2 and 3 to view
 the updates locally before pushing the changes to the repository.
 
-## Troubleshooting
+## Troubleshooting {#troubleshooting}
 
 If you encounter any issues during the installation process, don't hesitate to
 reach out to us on the
