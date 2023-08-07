@@ -24,6 +24,10 @@ open import group-theory.groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
+
+open import order-theory.galois-connections-large-posets
+open import order-theory.order-preserving-maps-large-posets
+open import order-theory.order-preserving-maps-large-preorders
 ```
 
 </details>
@@ -59,7 +63,7 @@ module _
     {l3 : Level} (N : Normal-Subgroup l3 G) → UUω
   is-normal-core-Subgroup N =
     {l : Level} (M : Normal-Subgroup l G) →
-    leq-Subgroup G (subgroup-Normal-Subgroup G M) H ↔ leq-Normal-Subgroup G N M
+    leq-Subgroup G (subgroup-Normal-Subgroup G M) H ↔ leq-Normal-Subgroup G M N
 ```
 
 ### The construction of the normal core
@@ -139,6 +143,100 @@ module _
   normal-core-Subgroup : Normal-Subgroup (l1 ⊔ l2) G
   pr1 normal-core-Subgroup = subgroup-normal-core-Subgroup
   pr2 normal-core-Subgroup = is-normal-normal-core-Subgroup
+
+  is-contained-in-subgroup-normal-core-Subgroup :
+    leq-Subgroup G subgroup-normal-core-Subgroup H
+  is-contained-in-subgroup-normal-core-Subgroup x h =
+    is-closed-under-eq-Subgroup G H
+      ( is-in-subgroup-inclusion-Subgroup G H (pr1 (h (unit-Group G))))
+      ( ( inv
+          ( compute-conjugation-unit-Group G
+            ( inclusion-Subgroup G H (pr1 (h (unit-Group G)))))) ∙
+        ( pr2 (h (unit-Group G))))
+
+  forward-implication-is-normal-core-normal-core-Subgroup :
+    {l : Level} (N : Normal-Subgroup l G) →
+    leq-Subgroup G (subgroup-Normal-Subgroup G N) H →
+    leq-Normal-Subgroup G N normal-core-Subgroup
+  pr1
+    ( pr1
+      ( forward-implication-is-normal-core-normal-core-Subgroup N u x n y)) =
+    conjugation-Group G (inv-Group G y) x
+  pr2
+    ( pr1
+      ( forward-implication-is-normal-core-normal-core-Subgroup N u x n y)) =
+    u ( conjugation-Group G (inv-Group G y) x)
+      ( (is-normal-Normal-Subgroup G N (inv-Group G y) x n))
+  pr2 (forward-implication-is-normal-core-normal-core-Subgroup N u x n y) =
+    is-section-conjugation-inv-Group G y x
+
+  backward-implication-is-normal-core-normal-core-Subgroup :
+    {l : Level} (N : Normal-Subgroup l G) →
+    leq-Normal-Subgroup G N normal-core-Subgroup →
+    leq-Subgroup G (subgroup-Normal-Subgroup G N) H
+  backward-implication-is-normal-core-normal-core-Subgroup N =
+    transitive-leq-Subgroup G
+      ( subgroup-Normal-Subgroup G N)
+      ( subgroup-normal-core-Subgroup)
+      ( H)
+      ( is-contained-in-subgroup-normal-core-Subgroup)
+
+  is-normal-core-normal-core-Subgroup :
+    is-normal-core-Subgroup G H normal-core-Subgroup
+  pr1 (is-normal-core-normal-core-Subgroup N) =
+    forward-implication-is-normal-core-normal-core-Subgroup N
+  pr2 (is-normal-core-normal-core-Subgroup N) =
+    backward-implication-is-normal-core-normal-core-Subgroup N
+```
+
+### The normal core Galois connection
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  preserves-order-normal-core-Subgroup :
+    {l2 l3 : Level} (H : Subgroup l2 G) (K : Subgroup l3 G) →
+    leq-Subgroup G H K →
+    leq-Normal-Subgroup G
+      ( normal-core-Subgroup G H)
+      ( normal-core-Subgroup G K)
+  preserves-order-normal-core-Subgroup H K u =
+    forward-implication-is-normal-core-normal-core-Subgroup G K
+      ( normal-core-Subgroup G H)
+      ( transitive-leq-Subgroup G
+        ( subgroup-normal-core-Subgroup G H)
+        ( H)
+        ( K)
+        ( u)
+        ( is-contained-in-subgroup-normal-core-Subgroup G H))
+
+  normal-core-subgroup-hom-Large-Poset :
+    hom-Large-Poset
+      ( λ l2 → l1 ⊔ l2)
+      ( Subgroup-Large-Poset G)
+      ( Normal-Subgroup-Large-Poset G)
+  normal-core-subgroup-hom-Large-Poset =
+    make-hom-Large-Preorder
+      ( normal-core-Subgroup G)
+      ( preserves-order-normal-core-Subgroup)
+
+  normal-core-subgroup-Galois-Connection :
+    galois-connection-Large-Poset
+      ( id)
+      ( λ l2 → l1 ⊔ l2)
+      ( Normal-Subgroup-Large-Poset G)
+      ( Subgroup-Large-Poset G)
+  lower-adjoint-galois-connection-Large-Poset
+    normal-core-subgroup-Galois-Connection =
+    subgroup-normal-subgroup-hom-Large-Poset G
+  upper-adjoint-galois-connection-Large-Poset
+    normal-core-subgroup-Galois-Connection =
+    normal-core-subgroup-hom-Large-Poset
+  adjoint-relation-galois-connection-Large-Poset
+    normal-core-subgroup-Galois-Connection N H =
+    is-normal-core-normal-core-Subgroup G H N
 ```
 
 ## See also
