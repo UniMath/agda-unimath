@@ -10,17 +10,57 @@ environment for making contributions to the library.
 
 ## Getting a copy of the library
 
-Get a copy of our library on your machine with `git` using
+### Creating a fork of the library
 
-```shell
-git clone --depth 1 git@github.com:UniMath/agda-unimath.git
+Begin by creating a fork of the library on GitHub:
+
+1. Navigate to the library's GitHub page at
+   [https://github.com/UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
+2. In the upper-right corner of the page, click the "Fork" button.
+3. Select your GitHub account to create the fork under.
+
+### Cloning your fork of the library
+
+After you have your own fork of the library, you can clone it to your machine
+with git using the following command in your terminal:
+
+```bash
+git clone --depth 1 git@github.com:[YourUsername]/agda-unimath.git
 ```
 
-in your terminal. This will clone a shallow copy of the library, i.e., a copy of
-the library without its entire git history that is under 20MB in size. If you
-prefer to clone the library with its history, simply omit `--depth 1` in the
-above command. Alternatively, the library can be downloaded manually by going to
-the [GitHub page](https://github.com/UniMath/agda-unimath).
+Replace `[YourUsername]` with your actual GitHub username. This command will
+clone a shallow copy of the library, i.e., a copy of the library without its
+entire git history, which is a version of the library that is under 20MB in
+size.
+
+If you prefer to clone the library with its history, simply omit `--depth 1` in
+the above command.
+
+### Creating a branch within your clone of the library
+
+Once you've cloned the library, we highly recommend you to preserve the `master`
+branch in its original state and up to date with the official `agda-unimath`
+repository. This means you should avoid making changes directly to the `master`
+branch.
+
+Instead, whenever you're about to start a new piece of work (be it a new
+feature, bug fix, or any other modifications), create a new branch from
+`master`. This way, you can keep track of different lines of work, isolate them
+from each other, and prevent potential conflicts.
+
+Here's a basic example of how you can create a new branch:
+
+```bash
+git checkout -b my-feature
+```
+
+This command creates a new branch named `my-feature` and automatically checks it
+out, meaning your 'working directory' will switch to this branch.
+
+By maintaining the `master` branch untouched, you ensure a clean, up-to-date
+base that is aligned with the original library you forked from. This makes it
+easier to pull in updates from the original repository and merge them into your
+working branches when necessary.
 
 ## Installing Agda
 
@@ -49,7 +89,7 @@ nix develop
 Once you've activated the shell, launch your editor from within it by running
 `code` or `emacs`. This ensures your editor recognizes the Agda installation.
 
-## Tutorials for Agda
+### Tutorials for Agda
 
 If you're new to Agda, there are several resources available to help you learn
 the basics and become proficient in using the language. We recommend starting
