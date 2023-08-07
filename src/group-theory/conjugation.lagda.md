@@ -14,6 +14,8 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.retractions
+open import foundation.sections
 open import foundation.subtypes
 open import foundation.universe-levels
 
@@ -327,6 +329,42 @@ module _
         ( is-retraction-left-div-Group G x
           ( right-div-Group G y x)))) ∙
     ( is-retraction-right-div-Group G (inv-Group G x) y)
+
+  transpose-eq-conjugation-Group :
+    {x y z : type-Group G} →
+    y ＝ conjugation-Group G (inv-Group G x) z → conjugation-Group G x y ＝ z
+  transpose-eq-conjugation-Group {x} {y} {z} =
+    transpose-eq-section
+      ( conjugation-Group G x)
+      ( conjugation-Group G (inv-Group G x))
+      ( is-section-conjugation-inv-Group x)
+
+  transpose-eq-conjugation-Group' :
+    {x y z : type-Group G} →
+    conjugation-Group G (inv-Group G x) y ＝ z → y ＝ conjugation-Group G x z
+  transpose-eq-conjugation-Group' {x} {y} {z} =
+    transpose-eq-section'
+      ( conjugation-Group G x)
+      ( conjugation-Group G (inv-Group G x))
+      ( is-section-conjugation-inv-Group x)
+
+  transpose-eq-conjugation-inv-Group :
+    {x y z : type-Group G} →
+    y ＝ conjugation-Group G x z → conjugation-Group G (inv-Group G x) y ＝ z
+  transpose-eq-conjugation-inv-Group {x} {y} {z} =
+    transpose-eq-retraction
+      ( conjugation-Group G x)
+      ( conjugation-Group G (inv-Group G x))
+      ( is-retraction-conjugation-inv-Group x)
+
+  transpose-eq-conjugation-inv-Group' :
+    {x y z : type-Group G} →
+    conjugation-Group G x y ＝ z → y ＝ conjugation-Group G (inv-Group G x) z
+  transpose-eq-conjugation-inv-Group' {x} {y} {z} =
+    transpose-eq-retraction'
+      ( conjugation-Group G x)
+      ( conjugation-Group G (inv-Group G x))
+      ( is-retraction-conjugation-inv-Group x)
 ```
 
 ### Conjugation by `x` is an automorphism of `G`

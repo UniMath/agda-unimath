@@ -126,6 +126,19 @@ module _
     is-closed-under-multiplication-normal-core-Subgroup
   pr2 (pr2 (pr2 subgroup-normal-core-Subgroup)) =
     is-closed-under-inv-normal-core-Subgroup
+
+  is-normal-normal-core-Subgroup :
+    is-normal-Subgroup G subgroup-normal-core-Subgroup
+  pr1 (is-normal-normal-core-Subgroup x (y , u) z) =
+    pr1 (u (left-div-Group G x z))
+  pr2 (is-normal-normal-core-Subgroup x (y , u) z) =
+    transpose-eq-conjugation-Group' G
+      ( ( inv (compute-conjugation-mul-Group G (inv-Group G x) z _)) ∙
+        ( pr2 (u _)))
+
+  normal-core-Subgroup : Normal-Subgroup (l1 ⊔ l2) G
+  pr1 normal-core-Subgroup = subgroup-normal-core-Subgroup
+  pr2 normal-core-Subgroup = is-normal-normal-core-Subgroup
 ```
 
 ## See also
