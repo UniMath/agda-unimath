@@ -7,6 +7,7 @@ module group-theory.subgroups-generated-by-elements-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.singleton-subtypes
 open import foundation.subtypes
@@ -15,6 +16,7 @@ open import foundation.universe-levels
 open import group-theory.groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
+open import group-theory.subsets-groups
 ```
 
 </details>
@@ -69,6 +71,39 @@ module _
     subgroup-subset-Group G
       ( subtype-standard-singleton-subtype (set-Group G) g)
 
+  subset-subgroup-element-Group : subset-Group l1 G
+  subset-subgroup-element-Group = subset-Subgroup G subgroup-element-Group
+
+  is-in-subgroup-element-Group : type-Group G → UU l1
+  is-in-subgroup-element-Group = is-in-Subgroup G subgroup-element-Group
+
+  is-closed-under-eq-subgroup-element-Group :
+    {x y : type-Group G} → is-in-subgroup-element-Group x →
+    x ＝ y → is-in-subgroup-element-Group y
+  is-closed-under-eq-subgroup-element-Group =
+    is-closed-under-eq-Subgroup G subgroup-element-Group
+
+  is-closed-under-eq-subgroup-element-Group' :
+    {x y : type-Group G} → is-in-subgroup-element-Group y →
+    x ＝ y → is-in-subgroup-element-Group x
+  is-closed-under-eq-subgroup-element-Group' =
+    is-closed-under-eq-Subgroup' G subgroup-element-Group
+
+  contains-unit-subgroup-element-Group :
+    contains-unit-subset-Group G subset-subgroup-element-Group
+  contains-unit-subgroup-element-Group =
+    contains-unit-Subgroup G subgroup-element-Group
+
+  is-closed-under-multiplication-subgroup-element-Group :
+    is-closed-under-multiplication-subset-Group G subset-subgroup-element-Group
+  is-closed-under-multiplication-subgroup-element-Group =
+    is-closed-under-multiplication-Subgroup G subgroup-element-Group
+
+  is-closed-under-inv-subgroup-element-Group :
+    is-closed-under-inv-subset-Group G subset-subgroup-element-Group
+  is-closed-under-inv-subgroup-element-Group =
+    is-closed-under-inv-Subgroup G subgroup-element-Group
+
   is-subgroup-generated-by-element-subgroup-element-Group :
     is-subgroup-generated-by-element-Group G g subgroup-element-Group
   is-subgroup-generated-by-element-subgroup-element-Group H =
@@ -87,4 +122,12 @@ module _
           ( adjoint-relation-subgroup-subset-Group G
             ( subtype-standard-singleton-subtype (set-Group G) g)
             ( H))
+
+  contains-element-subgroup-element-Group :
+    is-in-subgroup-element-Group g
+  contains-element-subgroup-element-Group =
+    contains-subset-subgroup-subset-Group G
+      ( subtype-standard-singleton-subtype (set-Group G) g)
+      ( g)
+      ( refl)
 ```

@@ -60,15 +60,3 @@ module _
   is-prop-is-cyclic-Group : is-prop is-cyclic-Group
   is-prop-is-cyclic-Group = is-prop-type-Prop is-cyclic-prop-Group
 ```
-
-### Groups with a generating element
-
-```agda
-module _
-  {l1 : Level} (G : Group l1)
-  where
-
-  is-generating-element-Group : (g : type-Group G) → UU l1
-  is-generating-element-Group g =
-    is-full-Subgroup G (subgroup-element-Group G g)
-```
