@@ -441,7 +441,7 @@ module _
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  (susp-str : suspension-structure X Y)
+  {susp-str : suspension-structure X Y}
   (d-susp-str : dependent-suspension-structure B susp-str)
   where
 
