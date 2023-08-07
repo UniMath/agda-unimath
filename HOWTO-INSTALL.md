@@ -26,15 +26,9 @@ In order to contribute to the `agda-unimath` library you will additionally need:
    python3 -m pip install -r scripts/requirements.txt
    ```
 5. `rust` version 1.68 or newer
-6. `mdbook` version 4.34 or newer, along with the following plugins:
-
-   - `mdbook-linkcheck`
-   - `mdbook-katex`
-   - `mdbook-pagetoc`
-   - `mdbook-catppuccin`
-
-   These can be installed by running the command
-
+6. `mdbook` version 4.34 or newer, along with the `catppuccin`, `katex`,
+   `linkcheck`, and `pagetoc` plugins. These can be installed by running the
+   command
    ```shell
    make install-website-dev
    ```
