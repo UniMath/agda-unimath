@@ -5,8 +5,8 @@
 ### Quick setup
 
 To work or experiment with the `agda-unimath` library on your machine, you will
-need to have `agda` version 2.6.3 installed on your machine, and a suitable
-editor such as [Emacs](https://www.gnu.org/software/emacs/) or
+need to have `agda` version 2.6.3 installed, and a suitable editor such as
+[Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/). The following instructions
 will help you on your way right away:
 
@@ -22,13 +22,11 @@ In order to contribute to the `agda-unimath` library you will additionally need:
 2. `make`
 3. `python` version 3.8 or newer
 4. `pre-commit` and `request`. Those two programs can be installed by running
-
    ```shell
    python3 -m pip install -r scripts/requirements.txt
    ```
-
 5. `rust` version 1.68 or newer
-6. `mdbook` version 4.34 or newer, along with the following packages:
+6. `mdbook` version 4.34 or newer, along with the following plugins:
 
    - `mdbook-linkcheck`
    - `mdbook-katex`
@@ -41,9 +39,10 @@ In order to contribute to the `agda-unimath` library you will additionally need:
    make install-website-dev
    ```
 
-In the section [Creating a setup for contributors](#contributor-setup) we will
-walk you through the steps of preparing your environment for contributing to the
-library.
+All of these can also be installed in one go by using `nix`. In the section
+[Creating a setup for contributors](#contributor-setup) we will walk you through
+the steps of preparing your environment for contributing to the library with and
+without `nix`.
 
 Additionally, we added a [Troubleshooting](#troubleshooting) section at the end
 of this guide. If you experience any issues during the setup process, don't
