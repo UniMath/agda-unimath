@@ -35,6 +35,11 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
+Note that the title of the file must be on one line, even if it contains more
+than 80 characters. Titles that go over the 80 character limit don't trigger an
+error in the
+[pre-commit hooks](https://unimath.github.io/agda-unimath/CONTRIBUTING.html#the-make-pre-commit-tool).
+
 Directly after the header, include an Agda code block containing
 
 - any option pragmas,
@@ -118,6 +123,11 @@ following a heading is very long, you can use `####` headings to subdivide the
 subsections further. Ensure that subsection headings concisely describe the
 content of the following code block. However, don't hesitate to include
 explanatory text within a section when necessary.
+
+Note that subsection titles must be on one line, even if they contain more than
+80 characters. Subsection titles that go over the 80 character limit don't
+trigger an error in the
+[pre-commit hooks](https://unimath.github.io/agda-unimath/CONTRIBUTING.html#the-make-pre-commit-tool).
 
 ### See also and references
 
