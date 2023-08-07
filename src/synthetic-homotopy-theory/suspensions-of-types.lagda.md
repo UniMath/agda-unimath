@@ -445,7 +445,6 @@ module _
   (d-susp-str : dependent-suspension-structure B susp-str)
   where
 
-
   N-dependent-suspension-structure : B (N-suspension-structure susp-str)
   N-dependent-suspension-structure = pr1 (d-susp-str)
 
@@ -460,11 +459,11 @@ module _
       ( N-dependent-suspension-structure)
       ( S-dependent-suspension-structure)
   merid-dependent-suspension-structure = (pr2 ∘ pr2) (d-susp-str)
-  
+
 dependent-ev-suspension :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-    (susp-str-Y : suspension-structure X Y) (B : Y → UU l3) 
-     → ((y : Y) → B y) →
+    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+    (susp-str-Y : suspension-structure X Y) (B : Y → UU l3) →
+    ((y : Y) → B y) →
     dependent-suspension-structure B susp-str-Y
 pr1 (dependent-ev-suspension susp-str-Y B s) =
   s (N-suspension-structure susp-str-Y)
