@@ -454,10 +454,10 @@ module _
   merid-dependent-suspension-structure :
     (x : X) →
       dependent-identification
-      ( B)
-      ( merid-suspension-structure susp-str x)
-      ( N-dependent-suspension-structure)
-      ( S-dependent-suspension-structure)
+        ( B)
+        ( merid-suspension-structure susp-str x)
+        ( N-dependent-suspension-structure)
+        ( S-dependent-suspension-structure)
   merid-dependent-suspension-structure = (pr2 ∘ pr2) (d-susp-str)
 
 dependent-ev-suspension :
