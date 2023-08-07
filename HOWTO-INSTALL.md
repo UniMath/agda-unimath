@@ -10,9 +10,17 @@ environment for making contributions to the library.
 
 ## Getting a copy of the library
 
+The way you install the library on your machine might depend on the way you plan
+to use it. If you plan to contribute to the library, then we suggest first
+creating a fork of the library, and then cloning your fork. If you don't intend
+to contribute the library, then you don't need to create your own fork, and you
+can proceed directly to clone the library.
+
 ### Creating a fork of the library
 
-Begin by creating a fork of the library on GitHub:
+If your plan is to submit a contribution, or to do a project that eventually
+could lead to a contribution to the library, then it is best to begin by
+creating a fork of the library on GitHub:
 
 1. Navigate to the library's GitHub page at
    [https://github.com/UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
