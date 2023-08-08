@@ -9,6 +9,8 @@ module synthetic-homotopy-theory.suspensions-of-types where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
+open import foundation.commuting-squares-of-maps
 open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
@@ -33,6 +35,7 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.conjugation-loops
+open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
@@ -431,14 +434,25 @@ module _
           ( up-suspension-merid-susp Z c)))
 ```
 
-### The dependent universal property of suspensions
-
-#### Dependent Suspension Structures
+### Dependent Suspension Structures
 
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  (susp-str : suspension-structure X Y)
+  (c : suspension-cocone X Y)
+  where
+
+  dependent-suspension-cocone : UU (l1 ⊔ l3)
+  dependent-suspension-cocone =
+    dependent-cocone
+      (const X unit star)
+      (const X unit star)
+      ( c)
+      ( B)
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (susp-str : suspension-structure X Y)
+  (B : Y → UU l3)
   where
 
   dependent-suspension-structure : UU (l1 ⊔ l3)
@@ -454,11 +468,11 @@ module _
               ( merid-suspension-structure susp-str x)
               ( N)
               ( S)))
-
+              
 module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {B : Y → UU l3}
   {susp-str : suspension-structure X Y}
-  (d-susp-str : dependent-suspension-structure B susp-str)
+  (d-susp-str : dependent-suspension-structure susp-str B)
   where
 
   N-dependent-suspension-structure : B (N-suspension-structure susp-str)
@@ -475,35 +489,129 @@ module _
         ( N-dependent-suspension-structure)
         ( S-dependent-suspension-structure)
   merid-dependent-suspension-structure = (pr2 ∘ pr2) (d-susp-str)
-
-dependent-ev-suspension :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-    (susp-str-Y : suspension-structure X Y) (B : Y → UU l3) →
-    ((y : Y) → B y) →
-    dependent-suspension-structure B susp-str-Y
-pr1 (dependent-ev-suspension susp-str-Y B s) =
-  s (N-suspension-structure susp-str-Y)
-pr1 (pr2 (dependent-ev-suspension susp-str-Y B s)) =
-  s (S-suspension-structure susp-str-Y)
-pr2 (pr2 (dependent-ev-suspension susp-str-Y B s)) =
-  (apd s) ∘ (merid-suspension-structure susp-str-Y)
 ```
 
-We can now state the dependent universal property
+We characterize equalities in the type of dependent suspension structures:
 
 ```agda
 module _
-  (l : Level) {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-  (susp-str-Y : suspension-structure X Y)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  {susp-str : suspension-structure X Y}
+  (d-susp-str0 d-susp-str1 : dependent-suspension-structure susp-str B)
   where
 
-  dependent-universal-property-suspension : UU (l1 ⊔ l2 ⊔ lsuc l3)
+  htpy-dependent-suspension-structure : UU (l1 ⊔ l3)
+  htpy-dependent-suspension-structure =
+    Σ (N-dependent-suspension-structure d-susp-str0 ＝ N-dependent-suspension-structure d-susp-str1)
+      λ N-htpy  →
+        Σ (S-dependent-suspension-structure d-susp-str0 ＝ S-dependent-suspension-structure d-susp-str1)
+          λ S-htpy →
+            (x : X) →
+              coherence-square-identifications
+                ( merid-dependent-suspension-structure d-susp-str0 x)
+                ( S-htpy)
+                ( ap (tr B (merid-suspension-structure susp-str x)) N-htpy)
+                ( merid-dependent-suspension-structure d-susp-str1 x)
+                
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  {susp-str : suspension-structure X Y}
+  (d-susp-str0 : dependent-suspension-structure susp-str B)
+  where
+
+  extensionality-dependent-suspension-structure :
+    (d-susp-str1 : dependent-suspension-structure susp-str B) →
+    (d-susp-str0 ＝ d-susp-str1) ≃ htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1
+  extensionality-dependent-suspension-structure =
+    extensionality-Σ
+      ( λ (S1 , m1) (N-htpy) →
+        Σ (S-dependent-suspension-structure d-susp-str0 ＝ S1)
+          (λ S-htpy →
+            (x : X) →
+              coherence-square-identifications
+                ( merid-dependent-suspension-structure d-susp-str0 x)
+                ( S-htpy)
+                ( ap (tr B (merid-suspension-structure susp-str x)) N-htpy)
+                ( m1 x)))
+      ( refl)
+      ( refl , λ x₁ → right-unit)
+      ( λ N → id-equiv)
+      ( extensionality-Σ
+         (λ m1 S-htpy →
+           (x : X) →
+           (merid-dependent-suspension-structure d-susp-str0 x ∙ S-htpy) ＝ m1 x)
+        ( refl)
+        ( λ x₁ → right-unit)
+        ( λ S → id-equiv)
+        ( λ m1 →
+          equiv-concat-htpy right-unit-htpy m1 ∘e inv-equiv equiv-eq-htpy))
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  {susp-str : suspension-structure X Y}
+  {d-susp-str0 d-susp-str1 : dependent-suspension-structure susp-str B}
+  where
+  
+  htpy-eq-dependent-suspension-structure :
+    (d-susp-str0 ＝ d-susp-str1) →
+      htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1
+  htpy-eq-dependent-suspension-structure =
+    map-equiv
+      (extensionality-dependent-suspension-structure B d-susp-str0 d-susp-str1)
+
+  eq-htpy-dependent-suspension-structure :
+    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 →
+    d-susp-str0 ＝ d-susp-str1
+  eq-htpy-dependent-suspension-structure =
+    map-inv-equiv
+      (extensionality-dependent-suspension-structure B d-susp-str0 d-susp-str1)
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  {susp-str : suspension-structure X Y}
+  (d-susp-str : dependent-suspension-structure susp-str B)
+  where
+
+  refl-htpy-dependent-suspension-structure :
+    htpy-dependent-suspension-structure B d-susp-str d-susp-str
+  pr1 refl-htpy-dependent-suspension-structure = refl
+  pr1 (pr2 refl-htpy-dependent-suspension-structure) = refl
+  pr2 (pr2 refl-htpy-dependent-suspension-structure) x = right-unit
+
+  is-refl-refl-htpy-dependent-suspension-structure :
+      refl-htpy-dependent-suspension-structure
+    ＝
+      htpy-eq-dependent-suspension-structure B refl
+  is-refl-refl-htpy-dependent-suspension-structure = refl
+```
+
+### The dependent universal property of suspensions
+
+```agda
+dependent-ev-suspension :
+    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+    (susp-str : suspension-structure X Y) (B : Y → UU l3) →
+    ((y : Y) → B y) →
+    dependent-suspension-structure susp-str B
+pr1 (dependent-ev-suspension susp-str B s) =
+  s (N-suspension-structure susp-str)
+pr1 (pr2 (dependent-ev-suspension susp-str B s)) =
+  s (S-suspension-structure susp-str)
+pr2 (pr2 (dependent-ev-suspension susp-str B s)) =
+  (apd s) ∘ (merid-suspension-structure susp-str)
+
+module _
+  (l : Level) {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  (susp-str : suspension-structure X Y)
+  where
+
+  dependent-universal-property-suspension : UU (l1 ⊔ l2 ⊔ lsuc l)
   dependent-universal-property-suspension =
-    (B : Y → UU l3) → is-equiv (dependent-ev-suspension susp-str-Y B)
+    (B : Y → UU l) → is-equiv (dependent-ev-suspension susp-str B)
 ```
 
 We now show that the suspension of a type `X` has the dependent universal
-property of suspensions
+property of suspensions. This requires a few preliminaries.
 
 [To Do]
 
