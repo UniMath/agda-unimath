@@ -449,9 +449,12 @@ module _
       (const X unit star)
       ( c)
       ( B)
+```
 
+```agda
 module _
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (susp-str : suspension-structure X Y)
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  (susp-str : suspension-structure X Y)
   (B : Y → UU l3)
   where
 
@@ -468,7 +471,9 @@ module _
               ( merid-suspension-structure susp-str x)
               ( N)
               ( S)))
-              
+```
+
+```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {B : Y → UU l3}
   {susp-str : suspension-structure X Y}
@@ -502,9 +507,15 @@ module _
 
   htpy-dependent-suspension-structure : UU (l1 ⊔ l3)
   htpy-dependent-suspension-structure =
-    Σ (N-dependent-suspension-structure d-susp-str0 ＝ N-dependent-suspension-structure d-susp-str1)
-      λ N-htpy  →
-        Σ (S-dependent-suspension-structure d-susp-str0 ＝ S-dependent-suspension-structure d-susp-str1)
+    Σ
+      ( N-dependent-suspension-structure d-susp-str0
+    ＝
+      N-dependent-suspension-structure d-susp-str1)
+      λ N-htpy →
+        Σ
+          ( S-dependent-suspension-structure d-susp-str0
+        ＝
+          S-dependent-suspension-structure d-susp-str1)
           λ S-htpy →
             (x : X) →
               coherence-square-identifications
@@ -512,7 +523,7 @@ module _
                 ( S-htpy)
                 ( ap (tr B (merid-suspension-structure susp-str x)) N-htpy)
                 ( merid-dependent-suspension-structure d-susp-str1 x)
-                
+
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {susp-str : suspension-structure X Y}
@@ -521,7 +532,9 @@ module _
 
   extensionality-dependent-suspension-structure :
     (d-susp-str1 : dependent-suspension-structure susp-str B) →
-    (d-susp-str0 ＝ d-susp-str1) ≃ htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1
+      (d-susp-str0 ＝ d-susp-str1)
+    ≃
+      htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1
   extensionality-dependent-suspension-structure =
     extensionality-Σ
       ( λ (S1 , m1) (N-htpy) →
@@ -537,9 +550,11 @@ module _
       ( refl , λ x₁ → right-unit)
       ( λ N → id-equiv)
       ( extensionality-Σ
-         (λ m1 S-htpy →
-           (x : X) →
-           (merid-dependent-suspension-structure d-susp-str0 x ∙ S-htpy) ＝ m1 x)
+        (λ m1 S-htpy →
+          (x : X) →
+              (merid-dependent-suspension-structure d-susp-str0 x ∙ S-htpy)
+            ＝
+              ( m1 x))
         ( refl)
         ( λ x₁ → right-unit)
         ( λ S → id-equiv)
@@ -551,7 +566,7 @@ module _
   {susp-str : suspension-structure X Y}
   {d-susp-str0 d-susp-str1 : dependent-suspension-structure susp-str B}
   where
-  
+
   htpy-eq-dependent-suspension-structure :
     (d-susp-str0 ＝ d-susp-str1) →
       htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1
