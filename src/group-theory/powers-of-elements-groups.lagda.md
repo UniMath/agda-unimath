@@ -1,0 +1,300 @@
+# Powers of elements in groups
+
+```agda
+module group-theory.powers-of-elements-groups where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.addition-integers
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
+open import foundation.identity-types
+open import foundation.iterating-automorphisms
+open import foundation.universe-levels
+
+open import group-theory.groups
+open import group-theory.homomorphisms-groups
+open import group-theory.powers-of-elements-monoids
+
+open import structured-types.initial-pointed-type-equipped-with-automorphism
+```
+
+</details>
+
+## Idea
+
+The power operation on a group is the map `n x ↦ xⁿ`, which is defined by
+iteratively multiplying `x` with itself `n` times. We define this operation
+where `n` ranges over the natural numbers, as well as where `n` ranges over the
+integers.
+
+## Definition
+
+### Powers by natural numbers of group elements
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  power-nat-Group : ℕ → type-Group G → type-Group G
+  power-nat-Group = power-Monoid (monoid-Group G)
+```
+
+### Iterating multiplication by `g`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  iterated-multiplication-by-element-Group :
+    type-Group G → ℤ → type-Group G → type-Group G
+  iterated-multiplication-by-element-Group g k =
+    map-iterate-automorphism-ℤ k (equiv-mul-Group G g)
+```
+
+### Powers by integers of group elements
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+  
+  power-int-Group : ℤ → type-Group G → type-Group G
+  power-int-Group k g =
+    map-iterate-automorphism-ℤ k (equiv-mul-Group G g) (unit-Group G)
+```
+
+## Properties
+
+### Associativity of iterated multiplication by a group element
+
+```agda
+module _
+  {l : Level} (G : Group l) (g : type-Group G)
+  where
+
+  associative-iterated-multiplication-by-element-Group :
+    (k : ℤ) (h1 h2 : type-Group G) →
+    iterated-multiplication-by-element-Group G g k (mul-Group G h1 h2) ＝
+    mul-Group G (iterated-multiplication-by-element-Group G g k h1) h2
+  associative-iterated-multiplication-by-element-Group
+    ( inl zero-ℕ) h1 h2 =
+    inv (associative-mul-Group G (inv-Group G g) h1 h2)
+  associative-iterated-multiplication-by-element-Group
+    ( inl (succ-ℕ x)) h1 h2 =
+    ( ap
+      ( mul-Group G (inv-Group G g))
+      ( associative-iterated-multiplication-by-element-Group
+        ( inl x)
+        ( h1)
+        ( h2))) ∙
+    ( inv
+      ( associative-mul-Group G
+        ( inv-Group G g)
+        ( iterated-multiplication-by-element-Group G g (inl x) h1)
+        ( h2)))
+  associative-iterated-multiplication-by-element-Group
+    ( inr (inl star)) h1 h2 =
+    refl
+  associative-iterated-multiplication-by-element-Group
+    ( inr (inr zero-ℕ)) h1 h2 =
+    inv (associative-mul-Group G g h1 h2)
+  associative-iterated-multiplication-by-element-Group
+    ( inr (inr (succ-ℕ x))) h1 h2 =
+    ( ap
+      ( mul-Group G g)
+      ( associative-iterated-multiplication-by-element-Group
+        ( inr (inr x))
+        ( h1)
+        ( h2))) ∙
+    ( inv
+      ( associative-mul-Group G g
+        ( iterated-multiplication-by-element-Group G g (inr (inr x)) h1)
+        ( h2)))
+```
+
+### `1ⁿ ＝ 1`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  power-nat-unit-Group :
+    (n : ℕ) → power-nat-Group G n (unit-Group G) ＝ unit-Group G
+  power-nat-unit-Group = power-unit-Monoid (monoid-Group G)
+```
+
+### `xⁿ⁺¹ = xⁿx`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  power-succ-nat-Group :
+    (n : ℕ) (x : type-Group G) →
+    power-nat-Group G (succ-ℕ n) x ＝ mul-Group G (power-nat-Group G n x) x
+  power-succ-nat-Group = power-succ-Monoid (monoid-Group G)
+```
+
+### `xⁿ⁺¹ ＝ xxⁿ`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  power-succ-nat-Group' :
+    (n : ℕ) (x : type-Group G) →
+    power-nat-Group G (succ-ℕ n) x ＝ mul-Group G x (power-nat-Group G n x)
+  power-succ-nat-Group' = power-succ-Monoid' (monoid-Group G)
+```
+
+### Powers by sums of natural numbers are products of powers
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  power-add-nat-Group :
+    (m n : ℕ) {x : type-Group G} →
+    power-nat-Group G (m +ℕ n) x ＝
+    mul-Group G (power-nat-Group G m x) (power-nat-Group G n x)
+  power-add-nat-Group = power-add-Monoid (monoid-Group G)
+```
+
+### If `x` commutes with `y` then so do their powers
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  commute-powers-nat-Group' :
+    (n : ℕ) {x y : type-Group G} →
+    ( mul-Group G x y ＝ mul-Group G y x) →
+    ( mul-Group G (power-nat-Group G n x) y) ＝
+    ( mul-Group G y (power-nat-Group G n x))
+  commute-powers-nat-Group' = commute-powers-Monoid' (monoid-Group G)
+
+  commute-powers-nat-Group :
+    (m n : ℕ) {x y : type-Group G} →
+    ( mul-Group G x y ＝ mul-Group G y x) →
+    ( mul-Group G (power-nat-Group G m x) (power-nat-Group G n y)) ＝
+    ( mul-Group G (power-nat-Group G n y) (power-nat-Group G m x))
+  commute-powers-nat-Group = commute-powers-Monoid (monoid-Group G)
+```
+
+### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  distributive-power-nat-mul-Group :
+    (n : ℕ) {x y : type-Group G} →
+    (H : mul-Group G x y ＝ mul-Group G y x) →
+    power-nat-Group G n (mul-Group G x y) ＝
+    mul-Group G (power-nat-Group G n x) (power-nat-Group G n y)
+  distributive-power-nat-mul-Group =
+    distributive-power-mul-Monoid (monoid-Group G)
+```
+
+### Powers by products of natural numbers are iterated powers
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  power-mul-nat-Group :
+    (m n : ℕ) {x : type-Group G} →
+    power-nat-Group G (m *ℕ n) x ＝ power-nat-Group G n (power-nat-Group G m x)
+  power-mul-nat-Group = power-mul-Monoid (monoid-Group G)
+```
+
+### `power-int-Group G (int-ℕ n) g ＝ power-nat-Group G n g`
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  power-int-nat-Group :
+    (n : ℕ) (g : type-Group G) →
+    power-int-Group G (int-ℕ n) g ＝ power-nat-Group G n g
+  power-int-nat-Group zero-ℕ g = refl
+  power-int-nat-Group (succ-ℕ zero-ℕ) g = right-unit-law-mul-Group G g
+  power-int-nat-Group (succ-ℕ (succ-ℕ n)) g =
+    ( ap (mul-Group G g) (power-int-nat-Group (succ-ℕ n) g)) ∙
+    ( inv (power-succ-nat-Group' G (succ-ℕ n) g))
+```
+
+### The integer power `x⁰` is the unit of the group
+
+```agda
+module _
+  {l : Level} (G : Group l) (g : type-Group G)
+  where
+
+  power-zero-int-Group :
+    power-int-Group G zero-ℤ g ＝ unit-Group G
+  power-zero-int-Group =
+    preserves-point-map-ℤ-Pointed-Type-With-Aut
+      ( pointed-type-with-aut-Group G g)
+```
+
+### The integer power `gˣ⁺ʸ` computes to `gˣgʸ`
+
+```agda
+module _
+  {l : Level} (G : Group l) (g : type-Group G)
+  where
+
+  power-add-int-Group :
+    (x y : ℤ) →
+    ( power-int-Group G (x +ℤ y) g) ＝
+    ( mul-Group G
+      ( power-int-Group G x g)
+      ( power-int-Group G y g))
+  power-add-int-Group x y =
+    ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
+    ( ( ap
+        ( iterated-multiplication-by-element-Group G g x)
+        ( inv (left-unit-law-mul-Group G
+          ( power-int-Group G y g)))) ∙
+      ( associative-iterated-multiplication-by-element-Group G g x
+        ( unit-Group G)
+        ( power-int-Group G y g)))
+```
+
+### Group homomorphisms preserve powers
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  where
+
+  preserves-powers-hom-Group :
+    (n : ℕ) (x : type-Group G) →
+    map-hom-Group G H f (power-nat-Group G n x) ＝
+    power-nat-Group H n (map-hom-Group G H f x)
+  preserves-powers-hom-Group =
+    preserves-powers-hom-Monoid
+      ( monoid-Group G)
+      ( monoid-Group H)
+      ( hom-monoid-hom-Group G H f)
+```

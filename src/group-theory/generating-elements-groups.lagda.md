@@ -70,7 +70,8 @@ module _
     is-in-subgroup-element-Group G g x
   is-generating-element-is-surjective-map-hom-Group-ℤ' .(map-hom-Group-ℤ G g (inl zero-ℕ)) (inl zero-ℕ) refl =
     is-closed-under-eq-subgroup-element-Group' G g
-      ( is-closed-under-inv-subgroup-element-Group G g g {!!})
+      ( is-closed-under-inv-subgroup-element-Group G g g
+        {!!})
       ( right-unit-law-mul-Group G _)
   is-generating-element-is-surjective-map-hom-Group-ℤ' .(map-hom-Group-ℤ G g (inl (succ-ℕ x))) (inl (succ-ℕ x)) refl = {!!}
   is-generating-element-is-surjective-map-hom-Group-ℤ' .(map-hom-Group-ℤ G g (inr k)) (inr k) refl = {!!}
@@ -83,3 +84,4 @@ module _
       ( subset-subgroup-element-Group G g x)
       {!!}
 ```
+
