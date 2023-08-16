@@ -12,7 +12,9 @@ open import foundation.existential-quantification
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
+open import group-theory.generating-elements-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.subgroups-generated-by-elements-groups
@@ -39,11 +41,6 @@ given by `f ↦ f g` is an [embedding](foundation.embeddings.md) for every group
 ### Cyclic groups
 
 ```agda
-ev-element-Group :
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (g : type-Group G) →
-  type-hom-Group G H → type-Group H
-ev-element-Group G H g f = map-hom-Group G H f g
-
 module _
   {l1 : Level} (l2 : Level) (G : Group l1)
   where
@@ -59,4 +56,18 @@ module _
 
   is-prop-is-cyclic-Group : is-prop is-cyclic-Group
   is-prop-is-cyclic-Group = is-prop-type-Prop is-cyclic-prop-Group
+```
+
+## Properties
+
+### A group is cyclic if and only if it has a generating element
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  is-cyclic-has-generating-element-Group :
+    has-generating-element-Group G → is-cyclic-Group G
+  is-cyclic-has-generating-element-Group = ?
 ```

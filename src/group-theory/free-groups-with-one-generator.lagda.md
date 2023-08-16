@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.powers-of-elements-groups
 
 open import structured-types.initial-pointed-type-equipped-with-automorphism
 ```
@@ -47,11 +48,15 @@ one generator.
 ## Definitions
 
 ```agda
+ev-element-Group :
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (g : type-Group G) →
+  type-hom-Group G H → type-Group H
+ev-element-Group G H g f = map-hom-Group G H f g
+
 is-free-group-with-one-generator :
   {l1 : Level} (F : Group l1) (x : type-Group F) → UUω
 is-free-group-with-one-generator F x =
-  {l2 : Level} (G : Group l2) →
-  is-equiv (λ (h : type-hom-Group F G) → map-hom-Group F G h x)
+  {l2 : Level} (G : Group l2) → is-equiv (ev-element-Group F G x)
 ```
 
 ## Properties
@@ -63,86 +68,27 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  generalized-map-hom-Group-ℤ :
-    ℤ → type-Group G → type-Group G
-  generalized-map-hom-Group-ℤ k =
-    map-iterate-automorphism-ℤ k (equiv-mul-Group G g)
+  map-hom-element-Group : ℤ → type-Group G
+  map-hom-element-Group k = power-int-Group G k g
 
-  associative-generalized-map-hom-Group-ℤ :
-    (k : ℤ) (h1 h2 : type-Group G) →
-    generalized-map-hom-Group-ℤ k (mul-Group G h1 h2) ＝
-    mul-Group G (generalized-map-hom-Group-ℤ k h1) h2
-  associative-generalized-map-hom-Group-ℤ
-    ( inl zero-ℕ) h1 h2 =
-    inv (associative-mul-Group G (inv-Group G g) h1 h2)
-  associative-generalized-map-hom-Group-ℤ
-    ( inl (succ-ℕ x)) h1 h2 =
-    ( ap
-      ( mul-Group G (inv-Group G g))
-      ( associative-generalized-map-hom-Group-ℤ
-        ( inl x)
-        ( h1)
-        ( h2))) ∙
-    ( inv
-      ( associative-mul-Group G
-        ( inv-Group G g)
-        ( generalized-map-hom-Group-ℤ (inl x) h1)
-        ( h2)))
-  associative-generalized-map-hom-Group-ℤ
-    ( inr (inl star)) h1 h2 =
-    refl
-  associative-generalized-map-hom-Group-ℤ
-    ( inr (inr zero-ℕ)) h1 h2 =
-    inv (associative-mul-Group G g h1 h2)
-  associative-generalized-map-hom-Group-ℤ
-    ( inr (inr (succ-ℕ x))) h1 h2 =
-    ( ap
-      ( mul-Group G g)
-      ( associative-generalized-map-hom-Group-ℤ
-        ( inr (inr x))
-        ( h1)
-        ( h2))) ∙
-    ( inv
-      ( associative-mul-Group G g
-        ( generalized-map-hom-Group-ℤ (inr (inr x)) h1)
-        ( h2)))
+  preserves-unit-hom-element-Group :
+    map-hom-element-Group zero-ℤ ＝ unit-Group G
+  preserves-unit-hom-element-Group = power-zero-int-Group G g
 
-  map-hom-Group-ℤ : ℤ → type-Group G
-  map-hom-Group-ℤ k =
-    generalized-map-hom-Group-ℤ k (unit-Group G)
-
-  preserves-unit-hom-Group-ℤ :
-    map-hom-Group-ℤ zero-ℤ ＝ unit-Group G
-  preserves-unit-hom-Group-ℤ =
-    preserves-point-map-ℤ-Pointed-Type-With-Aut
-      ( pointed-type-with-aut-Group G g)
-
-  preserves-mul-map-hom-Group-ℤ :
+  preserves-mul-map-hom-element-Group :
     (x y : ℤ) →
-    ( map-hom-Group-ℤ (x +ℤ y)) ＝
-    ( mul-Group G
-      ( map-hom-Group-ℤ x)
-      ( map-hom-Group-ℤ y))
-  preserves-mul-map-hom-Group-ℤ x y =
-    ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
-    ( ( ap
-        ( generalized-map-hom-Group-ℤ x)
-        ( inv (left-unit-law-mul-Group G
-          ( map-hom-Group-ℤ y)))) ∙
-      ( associative-generalized-map-hom-Group-ℤ x
-        ( unit-Group G)
-        ( map-hom-Group-ℤ y)))
+    ( map-hom-element-Group (x +ℤ y)) ＝
+    ( mul-Group G (map-hom-element-Group x) (map-hom-element-Group y))
+  preserves-mul-map-hom-element-Group = power-add-int-Group G g
 
-  hom-Group-ℤ : type-hom-Group ℤ-Group G
-  pr1 hom-Group-ℤ =
-    map-hom-Group-ℤ
-  pr2 hom-Group-ℤ =
-    preserves-mul-map-hom-Group-ℤ
+  hom-element-Group : type-hom-Group ℤ-Group G
+  pr1 hom-element-Group = map-hom-element-Group
+  pr2 hom-element-Group = preserves-mul-map-hom-element-Group
 
-  htpy-hom-Group-ℤ :
+  htpy-hom-element-Group :
     (h : type-hom-Group ℤ-Group G) → map-hom-Group ℤ-Group G h one-ℤ ＝ g →
-    htpy-hom-Group ℤ-Group G hom-Group-ℤ h
-  htpy-hom-Group-ℤ h p =
+    htpy-hom-Group ℤ-Group G hom-element-Group h
+  htpy-hom-element-Group h p =
     htpy-map-ℤ-Pointed-Type-With-Aut
       ( pair (pointed-type-Group G) (equiv-mul-Group G g))
       ( pair
@@ -156,23 +102,23 @@ module _
             ( ( preserves-mul-hom-Group ℤ-Group G h one-ℤ x) ∙
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 
-  is-contr-total-hom-Group-ℤ :
+  is-contr-total-hom-element-Group :
     is-contr
       ( Σ ( type-hom-Group ℤ-Group G)
           ( λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g))
-  pr1 (pr1 is-contr-total-hom-Group-ℤ) =
-    hom-Group-ℤ
-  pr2 (pr1 is-contr-total-hom-Group-ℤ) =
+  pr1 (pr1 is-contr-total-hom-element-Group) =
+    hom-element-Group
+  pr2 (pr1 is-contr-total-hom-element-Group) =
     right-unit-law-mul-Group G g
-  pr2 is-contr-total-hom-Group-ℤ (pair h p) =
+  pr2 is-contr-total-hom-element-Group (pair h p) =
     eq-type-subtype
       ( λ f → Id-Prop (set-Group G) (map-hom-Group ℤ-Group G f one-ℤ) g)
       ( eq-htpy-hom-Group ℤ-Group G
-        ( htpy-hom-Group-ℤ h p))
+        ( htpy-hom-element-Group h p))
 
 abstract
   is-free-group-with-one-generator-ℤ :
     is-free-group-with-one-generator ℤ-Group one-ℤ
   is-free-group-with-one-generator-ℤ G =
-    is-equiv-is-contr-map (is-contr-total-hom-Group-ℤ G)
+    is-equiv-is-contr-map (is-contr-total-hom-element-Group G)
 ```

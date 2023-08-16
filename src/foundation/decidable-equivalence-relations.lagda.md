@@ -231,8 +231,7 @@ module _
     unit-im (decidable-relation-Decidable-Equivalence-Relation R)
 
   is-image-equivalence-class-Decidable-Equivalence-Relation :
-    {l : Level} →
-    is-image l
+    is-image
       ( decidable-relation-Decidable-Equivalence-Relation R)
       ( emb-equivalence-class-Decidable-Equivalence-Relation)
       ( unit-im-equivalence-class-Decidable-Equivalence-Relation)

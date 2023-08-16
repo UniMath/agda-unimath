@@ -293,7 +293,8 @@ module _
 
   preserves-powers-hom-Monoid :
     (n : ℕ) (x : type-Monoid M) →
-    map-hom-Monoid M N f (power-Monoid M n x) ＝ power-Monoid N n (map-hom-Monoid M N f x)
+    map-hom-Monoid M N f (power-Monoid M n x) ＝
+    power-Monoid N n (map-hom-Monoid M N f x)
   preserves-powers-hom-Monoid zero-ℕ x = preserves-unit-hom-Monoid M N f
   preserves-powers-hom-Monoid (succ-ℕ zero-ℕ) x = refl
   preserves-powers-hom-Monoid (succ-ℕ (succ-ℕ n)) x =

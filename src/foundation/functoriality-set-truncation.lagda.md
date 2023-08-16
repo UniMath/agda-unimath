@@ -277,8 +277,7 @@ module _
 
   abstract
     is-image-trunc-im-Set :
-      {l : Level} →
-      is-image l
+      is-image
         ( map-trunc-Set f)
         ( emb-trunc-im-Set)
         ( hom-slice-trunc-im-Set)

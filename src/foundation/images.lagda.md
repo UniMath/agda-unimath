@@ -16,6 +16,7 @@ open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import foundation-core.1-types
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
@@ -35,10 +36,11 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-The image of a map is a type that satisfies the universal property of the image
-of a map.
+The **image** of a map is a type that satisfies the
+[universal property of the image](foundation.universal-property-image.md) of a
+map.
 
-## Definition
+## Definitions
 
 ```agda
 module _
@@ -58,7 +60,7 @@ module _
   pr1 (map-unit-im a) = f a
   pr2 (map-unit-im a) = unit-trunc-Prop (pair a refl)
 
-  triangle-unit-im : f ~ (inclusion-im ∘ map-unit-im)
+  triangle-unit-im : coherence-triangle-maps f inclusion-im map-unit-im
   triangle-unit-im a = refl
 
   unit-im : hom-slice f inclusion-im

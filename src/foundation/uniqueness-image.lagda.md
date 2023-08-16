@@ -38,8 +38,8 @@ module _
 
   abstract
     is-equiv-is-image-is-image :
-      ({l : Level} → is-image l f i q) →
-      ({l : Level} → is-image l f i' q') →
+      is-image f i q →
+      is-image f i' q' →
       is-equiv (map-hom-slice (map-emb i) (map-emb i') h)
     is-equiv-is-image-is-image up-i up-i' =
       is-equiv-hom-slice-emb i i' h (map-inv-is-equiv (up-i' B i) q)
@@ -47,10 +47,10 @@ module _
   abstract
     is-image-is-image-is-equiv :
       is-equiv (map-hom-slice (map-emb i) (map-emb i') h) →
-      ({l : Level} → is-image l f i q) →
-      ({l : Level} → is-image l f i' q')
+      is-image f i q →
+      is-image f i' q'
     is-image-is-image-is-equiv is-equiv-h up-i {l} =
-      is-image-is-image' l f i' q'
+      is-image-is-image' f i' q'
         ( λ C j r →
           comp-hom-slice
             ( map-emb i')
@@ -70,11 +70,11 @@ module _
 
   abstract
     is-image-is-equiv-is-image :
-      ({l : Level} → is-image l f i' q') →
+      is-image f i' q' →
       is-equiv (map-hom-slice (map-emb i) (map-emb i') h) →
-      ({l : Level} → is-image l f i q)
+      is-image f i q
     is-image-is-equiv-is-image up-i' is-equiv-h {l} =
-      is-image-is-image' l f i q
+      is-image-is-image' f i q
         ( λ C j r →
           comp-hom-slice
             ( map-emb i)
@@ -86,9 +86,9 @@ module _
 module _
   {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   {B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i))
-  (Hi : {l : Level} → is-image l f i q)
+  (Hi : is-image f i q)
   {B' : UU l4} (i' : B' ↪ X) (q' : hom-slice f (map-emb i'))
-  (Hi' : {l : Level} → is-image l f i' q')
+  (Hi' : is-image f i' q')
   where
 
   abstract
@@ -201,7 +201,7 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   {B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i))
-  (H : {l : Level} → is-image l f i q)
+  (H : is-image f i q)
   where
 
   abstract

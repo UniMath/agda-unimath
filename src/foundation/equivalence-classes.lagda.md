@@ -160,8 +160,7 @@ module _
       ( pr2 C)
 
   is-image-equivalence-class :
-    {l : Level} →
-    is-image l
+    is-image
       ( prop-Equivalence-Relation R)
       ( emb-equivalence-class)
       ( unit-im-equivalence-class)

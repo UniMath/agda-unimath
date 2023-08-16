@@ -7,7 +7,11 @@ module group-theory.subgroups where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+open import elementary-number-theory.natural-numbers
+
 open import foundation.binary-relations
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalence-relations
@@ -26,6 +30,7 @@ open import foundation.universe-levels
 
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.powers-of-elements-groups
 open import group-theory.semigroups
 open import group-theory.subsets-groups
 
@@ -208,6 +213,30 @@ module _
         ( is-closed-under-inv-Subgroup x q)
         ( p))
       ( is-retraction-left-div-Group G x y)
+
+  is-closed-under-powers-int-Subgroup :
+    (k : ℤ) (x : type-Group G) →
+    is-in-Subgroup x → is-in-Subgroup (power-int-Group G k x)
+  is-closed-under-powers-int-Subgroup (inl zero-ℕ) x H =
+    is-closed-under-eq-Subgroup'
+      ( is-closed-under-inv-Subgroup x H)
+      ( right-unit-law-mul-Group G (inv-Group G x))
+  is-closed-under-powers-int-Subgroup (inl (succ-ℕ k)) x H =
+    is-closed-under-multiplication-Subgroup
+      ( inv-Group G x)
+      ( power-int-Group G (inl k) x)
+      ( is-closed-under-inv-Subgroup x H)
+      ( is-closed-under-powers-int-Subgroup (inl k) x H)
+  is-closed-under-powers-int-Subgroup (inr (inl star)) x H =
+    contains-unit-Subgroup
+  is-closed-under-powers-int-Subgroup (inr (inr zero-ℕ)) x H =
+    is-closed-under-eq-Subgroup' H (right-unit-law-mul-Group G x)
+  is-closed-under-powers-int-Subgroup (inr (inr (succ-ℕ k))) x H =
+    is-closed-under-multiplication-Subgroup
+      ( x)
+      ( power-int-Group G (inr (inr k)) x)
+      ( H)
+      ( is-closed-under-powers-int-Subgroup (inr (inr k)) x H)
 
 is-emb-subset-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
