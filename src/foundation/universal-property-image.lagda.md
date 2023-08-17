@@ -47,7 +47,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   {B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i))
   where
-  
+
   precomp-emb :
     {l4 : Level} {C : UU l4} ( j : C ↪ X) →
     hom-slice (map-emb i) (map-emb j) → hom-slice f (map-emb j)
@@ -70,7 +70,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   {B : UU l3} (i : B ↪ X) (q : hom-slice f (map-emb i))
   where
-  
+
   is-image' : UUω
   is-image' =
     {l : Level} (C : UU l) (j : C ↪ X) →
@@ -84,7 +84,7 @@ module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (f : A → X)
   (B : subtype l3 X)
   where
-  
+
   is-image-subtype : UUω
   is-image-subtype =
     {l : Level} (C : subtype l X) → (B ⊆ C) ↔ ((a : A) → is-in-subtype C (f a))
@@ -194,7 +194,7 @@ module _
       subtype-im f ⊆ B → (a : A) → is-in-subtype B (f a)
     forward-implication-is-image-subtype-subtype-im B H a =
       H (f a) (unit-trunc-Prop (a , refl))
-    
+
     backward-implication-is-image-subtype-subtype-im :
       {l : Level} (B : subtype l X) →
       ((a : A) → is-in-subtype B (f a)) → subtype-im f ⊆ B

@@ -267,7 +267,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
-  
+
   hom-Group' : UU (l1 ⊔ l2)
   hom-Group' =
     Σ ( type-hom-Group G H)

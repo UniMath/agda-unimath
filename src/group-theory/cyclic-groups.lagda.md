@@ -7,8 +7,11 @@ module group-theory.cyclic-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.existential-quantification
+open import foundation.inhabited-subtypes
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -40,6 +43,8 @@ given by `f ↦ f g` is an [embedding](foundation.embeddings.md) for every group
 
 ### Cyclic groups
 
+#### The standard definition of cyclic groups
+
 ```agda
 module _
   {l1 : Level} (l2 : Level) (G : Group l1)
@@ -49,13 +54,35 @@ module _
   is-cyclic-prop-Group =
     ∃-Prop
       ( type-Group G)
-      ( λ g → (H : Group l2) → is-emb (ev-element-Group G H g))
+      ( λ g → (H : Group l2) → is-emb (ev-element-hom-Group G H g))
 
-  is-cyclic-Group : UU (l1 ⊔ lsuc l2)
-  is-cyclic-Group = type-Prop is-cyclic-prop-Group
+  is-cyclic-Group' : UU (l1 ⊔ lsuc l2)
+  is-cyclic-Group' = type-Prop is-cyclic-prop-Group
 
-  is-prop-is-cyclic-Group : is-prop is-cyclic-Group
+  is-prop-is-cyclic-Group : is-prop is-cyclic-Group'
   is-prop-is-cyclic-Group = is-prop-type-Prop is-cyclic-prop-Group
+
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  is-cyclic-Group : UUω
+  is-cyclic-Group = {l : Level} → type-Prop (is-cyclic-prop-Group l G)
+```
+
+#### The definition where `G` has a generating element
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  has-generating-element-prop-Group : Prop l1
+  has-generating-element-prop-Group =
+    is-inhabited-subtype-Prop (generating-element-Group G)
+
+  has-generating-element-Group : UU l1
+  has-generating-element-Group = type-Prop has-generating-element-prop-Group
 ```
 
 ## Properties
@@ -69,5 +96,10 @@ module _
 
   is-cyclic-has-generating-element-Group :
     has-generating-element-Group G → is-cyclic-Group G
-  is-cyclic-has-generating-element-Group = ?
+  is-cyclic-has-generating-element-Group H =
+    apply-universal-property-trunc-Prop H
+      ( is-cyclic-prop-Group _ G)
+      ( λ (g , u) →
+        intro-∃ g
+          ( is-emb-ev-element-is-generating-element-Group G g u))
 ```

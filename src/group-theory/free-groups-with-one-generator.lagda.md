@@ -48,15 +48,15 @@ one generator.
 ## Definitions
 
 ```agda
-ev-element-Group :
+ev-element-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (g : type-Group G) →
   type-hom-Group G H → type-Group H
-ev-element-Group G H g f = map-hom-Group G H f g
+ev-element-hom-Group G H g f = map-hom-Group G H f g
 
 is-free-group-with-one-generator :
   {l1 : Level} (F : Group l1) (x : type-Group F) → UUω
 is-free-group-with-one-generator F x =
-  {l2 : Level} (G : Group l2) → is-equiv (ev-element-Group F G x)
+  {l2 : Level} (G : Group l2) → is-equiv (ev-element-hom-Group F G x)
 ```
 
 ## Properties
@@ -69,17 +69,17 @@ module _
   where
 
   map-hom-element-Group : ℤ → type-Group G
-  map-hom-element-Group k = power-int-Group G k g
+  map-hom-element-Group k = integer-power-Group G k g
 
   preserves-unit-hom-element-Group :
     map-hom-element-Group zero-ℤ ＝ unit-Group G
-  preserves-unit-hom-element-Group = power-zero-int-Group G g
+  preserves-unit-hom-element-Group = integer-power-zero-Group G g
 
   preserves-mul-map-hom-element-Group :
     (x y : ℤ) →
     ( map-hom-element-Group (x +ℤ y)) ＝
     ( mul-Group G (map-hom-element-Group x) (map-hom-element-Group y))
-  preserves-mul-map-hom-element-Group = power-add-int-Group G g
+  preserves-mul-map-hom-element-Group = integer-power-add-Group G g
 
   hom-element-Group : type-hom-Group ℤ-Group G
   pr1 hom-element-Group = map-hom-element-Group

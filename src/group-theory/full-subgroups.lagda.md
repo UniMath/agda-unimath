@@ -10,6 +10,7 @@ module group-theory.full-subgroups where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.full-subtypes
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -30,9 +31,18 @@ The full subset of a group is a normal subgroup.
 ### Full subgroups
 
 ```agda
-is-full-Subgroup :
-  {l1 l2 : Level} (G : Group l1) → Subgroup l2 G → UU (l1 ⊔ l2)
-is-full-Subgroup G H = is-full-subtype (subset-Subgroup G H)
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+
+  is-full-prop-Subgroup : Prop (l1 ⊔ l2)
+  is-full-prop-Subgroup = is-full-subtype-Prop (subset-Subgroup G H)
+
+  is-full-Subgroup : UU (l1 ⊔ l2)
+  is-full-Subgroup = type-Prop is-full-prop-Subgroup
+
+  is-prop-is-full-Subgroup : is-prop is-full-Subgroup
+  is-prop-is-full-Subgroup = is-prop-type-Prop is-full-prop-Subgroup
 ```
 
 ### The full subgroup at each universe level

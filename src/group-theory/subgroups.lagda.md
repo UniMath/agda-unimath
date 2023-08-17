@@ -216,7 +216,7 @@ module _
 
   is-closed-under-powers-int-Subgroup :
     (k : ℤ) (x : type-Group G) →
-    is-in-Subgroup x → is-in-Subgroup (power-int-Group G k x)
+    is-in-Subgroup x → is-in-Subgroup (integer-power-Group G k x)
   is-closed-under-powers-int-Subgroup (inl zero-ℕ) x H =
     is-closed-under-eq-Subgroup'
       ( is-closed-under-inv-Subgroup x H)
@@ -224,7 +224,7 @@ module _
   is-closed-under-powers-int-Subgroup (inl (succ-ℕ k)) x H =
     is-closed-under-multiplication-Subgroup
       ( inv-Group G x)
-      ( power-int-Group G (inl k) x)
+      ( integer-power-Group G (inl k) x)
       ( is-closed-under-inv-Subgroup x H)
       ( is-closed-under-powers-int-Subgroup (inl k) x H)
   is-closed-under-powers-int-Subgroup (inr (inl star)) x H =
@@ -234,7 +234,7 @@ module _
   is-closed-under-powers-int-Subgroup (inr (inr (succ-ℕ k))) x H =
     is-closed-under-multiplication-Subgroup
       ( x)
-      ( power-int-Group G (inr (inr k)) x)
+      ( integer-power-Group G (inr (inr k)) x)
       ( H)
       ( is-closed-under-powers-int-Subgroup (inr (inr k)) x H)
 

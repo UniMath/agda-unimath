@@ -13,9 +13,9 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.dependent-pair-types
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.universe-levels
@@ -45,7 +45,7 @@ integers.
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   multiple-nat-Ab : ℕ → type-Ab A → type-Ab A
   multiple-nat-Ab = power-nat-Group (group-Ab A)
 ```
@@ -56,7 +56,7 @@ module _
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   iterated-addition-by-element-Ab :
     type-Ab A → ℤ → type-Ab A → type-Ab A
   iterated-addition-by-element-Ab g k =
@@ -69,7 +69,7 @@ module _
 module _
   {l : Level} (A : Ab l)
   where
-  
+
   multiple-int-Ab : ℤ → type-Ab A → type-Ab A
   multiple-int-Ab k g =
     map-iterate-automorphism-ℤ k (equiv-add-Ab A g) (zero-Ab A)
@@ -221,7 +221,7 @@ module _
 
   multiple-zero-int-Ab :
     multiple-int-Ab A zero-ℤ g ＝ zero-Ab A
-  multiple-zero-int-Ab = power-zero-int-Group (group-Ab A) g
+  multiple-zero-int-Ab = integer-power-zero-Group (group-Ab A) g
 ```
 
 ### The integer multiple `gˣ⁺ʸ` computes to `gˣgʸ`
@@ -237,7 +237,7 @@ module _
     ( add-Ab A
       ( multiple-int-Ab A x g)
       ( multiple-int-Ab A y g))
-  multiple-add-int-Ab = power-add-int-Group (group-Ab A) g
+  multiple-add-int-Ab = integer-power-add-Group (group-Ab A) g
 ```
 
 ### Homomorphisms of abelian groups preserve multiples
