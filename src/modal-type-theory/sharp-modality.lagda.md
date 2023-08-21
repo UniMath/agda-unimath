@@ -83,7 +83,6 @@ ap-♯ {B = B} f = rec-♯ B (unit-♯ ∘ f)
 
 -- {-# REWRITE compute-ind-♯ #-}
 
--- postulate fusion iso 1:
 -- judgemental version of "induced map ♭ A → ♭ (♯ A) is an equivalence"
 postulate
   crisp-elim-♯ :
@@ -96,8 +95,17 @@ postulate
 -- {-# REWRITE compute-crisp-elim-♯ #-}
 
 postulate
-  -- coherence between β (which is a rewrite so definitional) and η
+  -- coherence between computation and uniqueness rules for `crisp-elim-♯`
   coherence-uniqueness-crisp-elim-♯ :
     {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
     uniqueness-crisp-elim-♯ (unit-♯ x) ＝ ap unit-♯ (compute-crisp-elim-♯ x)
 ```
+
+## References
+
+- Michael Shulman, _Brouwer's fixed-point theorem in real-cohesive homotopy type
+  theory_, 2015 ([arXiv:1509.07584](https://arxiv.org/abs/1509.07584))
+- Dan Licata, _cohesion-agda_, GitHub repository
+  (<https://github.com/dlicata335/cohesion-agda>)
+- Felix Cherubini, _DCHoTT-Agda_/Im.agda, file in GitHub repository
+  (<https://github.com/felixwellen/DCHoTT-Agda/blob/master/Im.agda>)
