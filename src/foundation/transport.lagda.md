@@ -10,7 +10,10 @@ open import foundation-core.transport public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -38,11 +41,18 @@ recorded in this file.
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
-  (B : A → UU l2)
   where
 
-  tr² : (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
-  tr² α b0 = ap (λ t → tr B t b0) α
+  tr² :   (B : A → UU l2) (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
+  tr² B α b0 = ap (λ t → tr B t b0) α
+
+module _
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
+  {α α' : p0 ＝ p1}
+  where
+
+  tr³ :   (B : A → UU l2) (β : α ＝ α') (b0 : B a0) → (tr² B α b0) ＝ (tr² B α' b0)
+  tr³ B β b0 = ap (λ t → tr² B t b0) β
 ```
 
 ## Properties
@@ -92,4 +102,88 @@ tr-subst :
   {x y : X} (p : x ＝ y) {x' : B (f x)} →
   tr B (ap f p) x' ＝ tr (B ∘ f) p x'
 tr-subst B f refl = refl
+```
+
+### Coherences and algebraic identities for tr²
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {a0 a1 : A}
+  {B : A → UU l2}
+  where
+
+  tr²-concat :
+       {p p' p'' : a0 ＝ a1} (α : p ＝ p') (α' : p' ＝ p'') (b0 : B a0) →
+       (tr² B (α ∙ α') b0) ＝ (tr² B α b0 ∙ tr² B α' b0)
+  tr²-concat α α' b0 = ap-concat (λ t → tr B t b0) α α'
+
+module _
+  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
+  {B : A → UU l2}
+  where
+  
+  tr²-left-whisk :
+    (p : a0 ＝ a1) {q q' : a1 ＝ a2 } (β : q ＝ q') (b0 : B a0)  →
+    coherence-square-identifications
+      ( tr² B (identification-left-whisk p β) b0)
+      ( tr-concat p q' b0)
+      ( tr-concat p q b0 )
+      ( htpy-right-whisk (tr² B β) (tr B p) b0)
+  tr²-left-whisk refl refl b0 = refl
+
+  tr²-right-whisk :
+    {p p' : a0 ＝ a1} (α : p ＝ p') (q : a1 ＝ a2) (b0 : B a0) →
+    coherence-square-identifications
+      ( tr² B (identification-right-whisk α q) b0)
+      ( tr-concat p' q b0)
+      ( tr-concat p q b0)
+      ( htpy-left-whisk (tr B q) (tr² B α) b0)      
+  tr²-right-whisk refl refl b0 = inv right-unit
+```
+
+#### Coherences for tr³
+
+```
+module _
+  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
+  (B : A → UU l2)
+  where
+  
+  tr-htpy-swap-path-swap :
+    {p p' : a0 ＝ a1} (α : p ＝ p') {q q' : a1 ＝ a2 } (β : q ＝ q') (b0 : B a0) →
+    coherence-square-identifications
+      ( identification-right-whisk (tr³ B (path-swap-nat-identification-left-whisk β α) b0) (tr-concat p' q' b0))
+      ( (identification-right-whisk
+        ( tr²-concat
+          ( identification-right-whisk α q)
+          ( identification-left-whisk p' β) b0)
+        ( tr-concat p' q' b0)) ∙
+      ( vertical-concat-square
+        ( tr² B (identification-right-whisk α q) b0)
+        ( tr² B (identification-left-whisk p' β) b0)
+        ( tr-concat p' q' b0)
+        ( tr-concat p' q b0)
+        ( tr-concat p q b0)
+        ( htpy-left-whisk (tr B q) (tr² B α) b0)
+        ( htpy-right-whisk (tr² B β) (tr B p') b0)
+        ( tr²-right-whisk α q b0)
+        ( tr²-left-whisk p' β b0)))
+      ( (identification-right-whisk
+        ( tr²-concat (identification-left-whisk p β)
+        ( identification-right-whisk α q') b0)
+        ( tr-concat p' q' b0)) ∙
+      (vertical-concat-square
+        ( tr² B (identification-left-whisk p β) b0)
+        ( tr² B (identification-right-whisk α q') b0)
+        ( tr-concat p' q' b0)
+        ( tr-concat p q' b0)
+        ( tr-concat p q b0)
+        ( htpy-right-whisk (tr² B β) (tr B p) b0)
+        ( htpy-left-whisk (tr B q') (tr² B α) b0)
+        ( tr²-left-whisk p β b0)
+        ( tr²-right-whisk α q' b0)))
+      ( identification-left-whisk
+        ( tr-concat p q b0)
+        ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b0))
+  tr-htpy-swap-path-swap {p = refl} refl {q = refl} refl b0 = refl
 ```

@@ -158,6 +158,27 @@ horizontal-concat-Id² :
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
 ```
 
+#### Related operations
+
+```agda
+module _
+  {l : Level} {A : UU l} {a0 a1 a2 : A}
+  where
+
+  identification-left-whisk :
+    (p : a0 ＝ a1) {q q' : a1 ＝ a2 } → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
+  identification-left-whisk p β = horizontal-concat-Id² (refl {x = p}) β
+
+  identification-right-whisk :
+    {p p' : a0 ＝ a1} → p ＝ p' → (q : a1 ＝ a2 ) → (p ∙ q) ＝ (p' ∙ q)
+  identification-right-whisk α q = horizontal-concat-Id² α (refl {x = q})
+
+  htpy-identification-left-whisk :
+    {q q' : a1 ＝ a2 } → q ＝ q' → (λ p → p ∙ q) ~ (λ p → p ∙ q')
+  htpy-identification-left-whisk β p = identification-left-whisk p β
+```
+
+
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
 
 ```agda
@@ -195,6 +216,28 @@ right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α (refl {x = u}) ＝ ap (concat' x u) α
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
+```
+
+#### The above operations allow "swapping paths"
+
+```agda
+module _
+  {l : Level} {A : UU l} {a0 a1 a2 : A}
+  where
+  
+  path-swap-nat-identification-left-whisk :
+    {q q' : a1 ＝ a2 } (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') →
+    coherence-square-identifications
+      ( identification-left-whisk p β)
+      ( identification-right-whisk α q')
+      ( identification-right-whisk α q)
+      ( identification-left-whisk p' β)
+  path-swap-nat-identification-left-whisk {q} {q'} β {p} {p'} α =
+    (identification-left-whisk (identification-left-whisk p β) (right-unit-law-horizontal-concat-Id² α) ∙
+    nat-htpy (htpy-identification-left-whisk β) α) ∙
+    identification-right-whisk
+      ( inv (right-unit-law-horizontal-concat-Id² α))
+      ( identification-left-whisk p' β)
 ```
 
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on
