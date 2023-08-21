@@ -232,11 +232,13 @@ module _
       ( identification-right-whisk α q)
       ( identification-left-whisk p' β)
   path-swap-nat-identification-left-whisk {q} {q'} β {p} {p'} α =
-    (identification-left-whisk (identification-left-whisk p β) (right-unit-law-horizontal-concat-Id² α) ∙
-    nat-htpy (htpy-identification-left-whisk β) α) ∙
-    identification-right-whisk
+    ( identification-left-whisk
+      ( identification-left-whisk p β)
+      ( right-unit-law-horizontal-concat-Id² α) ∙
+    ( nat-htpy (htpy-identification-left-whisk β) α)) ∙
+    ( identification-right-whisk
       ( inv (right-unit-law-horizontal-concat-Id² α))
-      ( identification-left-whisk p' β)
+      ( identification-left-whisk p' β))
 ```
 
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on

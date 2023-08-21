@@ -321,7 +321,8 @@ eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
   (H ∙h K) ~ (K ∙h H)
 eckmann-hilton-htpy H K x =
-  ( inv (identification-left-whisk (H x) (ap-id (K x))) ∙ (htpy-swap-nat-right-htpy H K x)) ∙
+  ( inv (identification-left-whisk (H x) (ap-id (K x))) ∙
+  ( htpy-swap-nat-right-htpy H K x)) ∙
   ( identification-right-whisk (ap-id (K x)) (H x))
 ```
 
