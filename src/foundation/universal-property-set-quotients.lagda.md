@@ -188,7 +188,7 @@ module _
   is-effective-is-image :
     (i : type-Set B ↪ (A → Prop l2)) →
     (T : (prop-Equivalence-Relation R) ~ ((map-emb i) ∘ q)) →
-    ({l : Level} → is-image l (prop-Equivalence-Relation R) i (pair q T)) →
+    is-image (prop-Equivalence-Relation R) i (pair q T) →
     is-effective R q
   is-effective-is-image i T H x y =
     ( is-effective-class R x y) ∘e
@@ -199,7 +199,7 @@ module _
   is-surjective-and-effective-is-image :
     (i : type-Set B ↪ (A → Prop l2)) →
     (T : (prop-Equivalence-Relation R) ~ ((map-emb i) ∘ q)) →
-    ({l : Level} → is-image l (prop-Equivalence-Relation R) i (pair q T)) →
+    is-image (prop-Equivalence-Relation R) i (pair q T) →
     is-surjective-and-effective R q
   pr1 (is-surjective-and-effective-is-image i T H) =
     is-surjective-is-image (prop-Equivalence-Relation R) i (pair q T) H
@@ -329,11 +329,10 @@ module _
 
   is-image-is-surjective-and-effective :
     ( H : is-surjective-and-effective R q) →
-    ( {l : Level} →
-      is-image l
-        ( prop-Equivalence-Relation R)
-        ( emb-is-surjective-and-effective H)
-        ( pair q (triangle-emb-is-surjective-and-effective H)))
+    is-image
+      ( prop-Equivalence-Relation R)
+      ( emb-is-surjective-and-effective H)
+      ( pair q (triangle-emb-is-surjective-and-effective H))
   is-image-is-surjective-and-effective H =
     is-image-is-surjective
       ( prop-Equivalence-Relation R)

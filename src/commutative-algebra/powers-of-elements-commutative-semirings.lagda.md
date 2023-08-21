@@ -58,14 +58,14 @@ module _
   {l : Level} (A : Commutative-Semiring l)
   where
 
-  power-add-Commutative-Semiring :
+  distributive-power-add-Commutative-Semiring :
     (m n : ℕ) {x : type-Commutative-Semiring A} →
     power-Commutative-Semiring A (m +ℕ n) x ＝
     mul-Commutative-Semiring A
       ( power-Commutative-Semiring A m x)
       ( power-Commutative-Semiring A n x)
-  power-add-Commutative-Semiring =
-    power-add-Semiring (semiring-Commutative-Semiring A)
+  distributive-power-add-Commutative-Semiring =
+    distributive-power-add-Semiring (semiring-Commutative-Semiring A)
 ```
 
 ### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`

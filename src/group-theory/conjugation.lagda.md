@@ -7,6 +7,8 @@ module group-theory.conjugation where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.integers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
@@ -23,6 +25,7 @@ open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.isomorphisms-groups
+open import group-theory.powers-of-elements-groups
 open import group-theory.subsets-groups
 ```
 
@@ -384,4 +387,11 @@ module _
 
   conjugation-iso-Group : type-Group G → type-iso-Group G G
   conjugation-iso-Group x = iso-equiv-Group G G (conjugation-equiv-Group x)
+
+  preserves-integer-powers-conjugation-Group :
+    (k : ℤ) (g x : type-Group G) →
+    conjugation-Group G g (integer-power-Group G k x) ＝
+    integer-power-Group G k (conjugation-Group G g x)
+  preserves-integer-powers-conjugation-Group k g =
+    preserves-integer-powers-hom-Group G G (conjugation-hom-Group g) k
 ```
