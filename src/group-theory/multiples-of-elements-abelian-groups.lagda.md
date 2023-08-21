@@ -65,7 +65,7 @@ module _
     map-iterate-automorphism-ℤ k (equiv-add-Ab A g)
 ```
 
-### Multiples by integers of group elements
+### Integer Multiplication with group elements
 
 ```agda
 module _
@@ -79,7 +79,7 @@ module _
 
 ## Properties
 
-### Associativity of iterated multiplication by a group element
+### Associativity of iterated addition by a group element
 
 ```agda
 module _
