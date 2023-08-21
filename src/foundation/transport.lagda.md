@@ -18,7 +18,6 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 ```
 
@@ -43,7 +42,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
   where
 
-  tr² :   (B : A → UU l2) (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
+  tr² : (B : A → UU l2) (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
   tr² B α b0 = ap (λ t → tr B t b0) α
 
 module _
@@ -51,7 +50,7 @@ module _
   {α α' : p0 ＝ p1}
   where
 
-  tr³ :   (B : A → UU l2) (β : α ＝ α') (b0 : B a0) → (tr² B α b0) ＝ (tr² B α' b0)
+  tr³ : (B : A → UU l2) (β : α ＝ α') (b0 : B a0) → (tr² B α b0) ＝ (tr² B α' b0)
   tr³ B β b0 = ap (λ t → tr² B t b0) β
 ```
 
@@ -113,21 +112,21 @@ module _
   where
 
   tr²-concat :
-       {p p' p'' : a0 ＝ a1} (α : p ＝ p') (α' : p' ＝ p'') (b0 : B a0) →
-       (tr² B (α ∙ α') b0) ＝ (tr² B α b0 ∙ tr² B α' b0)
+    {p p' p'' : a0 ＝ a1} (α : p ＝ p') (α' : p' ＝ p'') (b0 : B a0) →
+    (tr² B (α ∙ α') b0) ＝ (tr² B α b0 ∙ tr² B α' b0)
   tr²-concat α α' b0 = ap-concat (λ t → tr B t b0) α α'
 
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
   {B : A → UU l2}
   where
-  
+
   tr²-left-whisk :
-    (p : a0 ＝ a1) {q q' : a1 ＝ a2 } (β : q ＝ q') (b0 : B a0)  →
+    (p : a0 ＝ a1) {q q' : a1 ＝ a2} (β : q ＝ q') (b0 : B a0) →
     coherence-square-identifications
       ( tr² B (identification-left-whisk p β) b0)
       ( tr-concat p q' b0)
-      ( tr-concat p q b0 )
+      ( tr-concat p q b0)
       ( htpy-right-whisk (tr² B β) (tr B p) b0)
   tr²-left-whisk refl refl b0 = refl
 
@@ -137,7 +136,7 @@ module _
       ( tr² B (identification-right-whisk α q) b0)
       ( tr-concat p' q b0)
       ( tr-concat p q b0)
-      ( htpy-left-whisk (tr B q) (tr² B α) b0)      
+      ( htpy-left-whisk (tr B q) (tr² B α) b0)
   tr²-right-whisk refl refl b0 = inv right-unit
 ```
 
@@ -148,7 +147,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
   {B : A → UU l2}
   where
-  
+
   tr³-htpy-swap-path-swap :
     {q q' : a1 ＝ a2 } (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') (b0 : B a0) →
     coherence-square-identifications

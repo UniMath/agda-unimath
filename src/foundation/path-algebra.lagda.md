@@ -166,18 +166,17 @@ module _
   where
 
   identification-left-whisk :
-    (p : a0 ＝ a1) {q q' : a1 ＝ a2 } → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
+    (p : a0 ＝ a1) {q q' : a1 ＝ a2} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
   identification-left-whisk p β = horizontal-concat-Id² (refl {x = p}) β
 
   identification-right-whisk :
-    {p p' : a0 ＝ a1} → p ＝ p' → (q : a1 ＝ a2 ) → (p ∙ q) ＝ (p' ∙ q)
+    {p p' : a0 ＝ a1} → p ＝ p' → (q : a1 ＝ a2) → (p ∙ q) ＝ (p' ∙ q)
   identification-right-whisk α q = horizontal-concat-Id² α (refl {x = q})
 
   htpy-identification-left-whisk :
-    {q q' : a1 ＝ a2 } → q ＝ q' → (λ p → p ∙ q) ~ (λ p → p ∙ q')
+    {q q' : a1 ＝ a2} → q ＝ q' → (λ p → p ∙ q) ~ (λ p → p ∙ q')
   htpy-identification-left-whisk β p = identification-left-whisk p β
 ```
-
 
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
 
@@ -224,9 +223,9 @@ right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s �
 module _
   {l : Level} {A : UU l} {a0 a1 a2 : A}
   where
-  
+
   path-swap-nat-identification-left-whisk :
-    {q q' : a1 ＝ a2 } (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') →
+    {q q' : a1 ＝ a2} (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') →
     coherence-square-identifications
       ( identification-left-whisk p β)
       ( identification-right-whisk α q')

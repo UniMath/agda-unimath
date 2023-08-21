@@ -304,11 +304,18 @@ module _
 htpy-swap-nat-right-htpy :
   {l0 l1 l2 : Level} {X0 : UU l0} {X1 : UU l1} {X2 : UU l2}
   {f01 g01 : X0 → X1} {f12 g12 : X1 → X2} (H12 : f12 ~ g12)
-  (H01 : f01 ~ g01)  →
+  (H01 : f01 ~ g01) →
   (htpy-right-whisk H12 f01 ∙h htpy-left-whisk g12 H01) ~
   (htpy-left-whisk f12 H01 ∙h htpy-right-whisk H12 g01)
-htpy-swap-nat-right-htpy {f01 = f01} {g01 = g01} {f12 = f12} {g12 = g12} H12 H01 x0 =
-  nat-htpy H12 (H01 x0)
+htpy-swap-nat-right-htpy
+  { f01 = f01}
+  { g01 = g01}
+  { f12 = f12}
+  { g12 = g12}
+  ( H12)
+  ( H01)
+  ( x0) =
+    nat-htpy H12 (H01 x0)
 
 eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
@@ -317,7 +324,6 @@ eckmann-hilton-htpy H K x =
   ( inv (identification-left-whisk (H x) (ap-id (K x))) ∙ (htpy-swap-nat-right-htpy H K x)) ∙
   ( identification-right-whisk (ap-id (K x)) (H x))
 ```
-
 
 ## See also
 
