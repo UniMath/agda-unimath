@@ -106,7 +106,7 @@ module _
   multiple-zero-Ab = power-unit-Group (group-Ab A)
 ```
 
-### `xⁿ⁺¹ = xⁿx`
+### `(n + 1) · x = n · x + x`
 
 ```agda
 module _
