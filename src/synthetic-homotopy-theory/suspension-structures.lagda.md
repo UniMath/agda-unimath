@@ -45,10 +45,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The suspension of `X` is the pushout of span the span `unit <-- X --> unit`.
-A cocone under such a span is called a `suspension-cocone'. Since `unit` is a
-quite special type, suspension cocones are equivalent to a simpler structure,
-which we call `suspension-structure`.
+The suspension of `X` is the pushout of span the span `unit <-- X --> unit`. A
+cocone under such a span is called a
+`suspension-cocone'. Since `unit`is a quite special type, suspension cocones are equivalent to a simpler structure, which we call`suspension-structure`.
 
 ## Definition
 
@@ -89,7 +88,9 @@ module _
 ## Properties
 
 ### Equivalence between suspension structures and suspension cocones
+
 TODO add in cocone-suspension-structure is map-comparisons-suspension-cocone
+
 ```agda
 cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
@@ -244,5 +245,3 @@ module _
           ( extensionality-suspension-structure c c)
           ( refl)))
 ```
-
-

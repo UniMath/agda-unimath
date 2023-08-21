@@ -1,4 +1,4 @@
-# Suspensions of types
+# Universal Property of suspensions of pointed types
 
 ```agda
 module synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types where
@@ -49,12 +49,14 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
+</details>
+
 ## Idea
 
-The suspension of a pointed type enjoys an additional universal property, on
-top of the universal propertise associtated with being a suspension.
-This universal property is packaged in an adjunction:
-the suspension (of a pointed type) is left adjoint to the loop space.
+The suspension of a pointed type enjoys an additional universal property, on top
+of the universal propertise associtated with being a suspension. This universal
+property is packaged in an adjunction: the suspension (of a pointed type) is
+left adjoint to the loop space.
 
 #### The unit and counit of the adjunction
 

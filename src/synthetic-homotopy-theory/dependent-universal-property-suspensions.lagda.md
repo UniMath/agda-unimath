@@ -1,4 +1,4 @@
-# Suspensions of types
+# Dependent universal property of suspensions
 
 ```agda
 module synthetic-homotopy-theory.dependent-universal-property-suspensions where
@@ -43,6 +43,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
+</details>
 
 ### The dependent universal property of suspensions
 

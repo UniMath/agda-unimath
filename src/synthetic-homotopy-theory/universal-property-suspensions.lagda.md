@@ -1,4 +1,4 @@
-# Suspensions of types
+# Universal property of suspensions
 
 ```agda
 module synthetic-homotopy-theory.universal-property-suspensions where
@@ -38,15 +38,15 @@ open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
+</details>
 
 ## Idea
 
 Since suspensions are just pushouts, they retain the expected universal
-property. We denote this universal property by
-`universal-property-suspension'`.
-But, due to the special nature of the span being pushed out, the
-suspension of a type enjoys an equivalent universal property, here
-denoted by `universal-property-suspension`.
+property. We denote this universal property by `universal-property-suspension'`.
+But, due to the special nature of the span being pushed out, the suspension of a
+type enjoys an equivalent universal property, here denoted by
+`universal-property-suspension`.
 
 ## Definition
 

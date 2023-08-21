@@ -1,4 +1,4 @@
-# Suspensions of types
+# Dependent suspension structures
 
 ```agda
 module synthetic-homotopy-theory.dependent-suspension-structures where
@@ -44,10 +44,12 @@ open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
+</details>
+
 ## Idea
 
-Just as non-dependent cocones under a suspension span have a simple
-description, so do the dependent counter parts.
+Just as non-dependent cocones under a suspension span have a simple description,
+so do the dependent counter parts.
 
 ## Definition
 
@@ -115,6 +117,7 @@ module _
 ## Properties
 
 #### Equivalence between dependent suspension structures and
+
 dependent suspension cocones
 
 Soon TODO

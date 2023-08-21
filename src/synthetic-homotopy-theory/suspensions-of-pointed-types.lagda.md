@@ -1,4 +1,4 @@
-# Suspensions of types
+# Suspensions of pointed types
 
 ```agda
 module synthetic-homotopy-theory.suspensions-of-pointed-types where
