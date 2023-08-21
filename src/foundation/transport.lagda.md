@@ -154,8 +154,9 @@ module _
       ( identification-right-whisk
         ( tr³
           ( B)
-          ( path-swap-nat-identification-left-whisk β α) b0)
-          ( tr-concat p' q' b0))
+          ( path-swap-nat-identification-left-whisk β α)
+          ( b0))
+        ( tr-concat p' q' b0))
       ( (identification-right-whisk
         ( tr²-concat
           ( identification-right-whisk α q)
