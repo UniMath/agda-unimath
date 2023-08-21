@@ -11,7 +11,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.path-algebra
-open import foundation.transport
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
