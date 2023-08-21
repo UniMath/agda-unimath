@@ -122,6 +122,8 @@ module _
   pr2 kernel-hom-Group = is-normal-kernel-hom-Group
 ```
 
+### Kernels of group homomorphisms between abelian groups
+
 ```agda
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
