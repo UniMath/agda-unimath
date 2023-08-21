@@ -43,8 +43,8 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 ## Idea
 
-The suspension of a type `X` is the [pushout](synthetic-homotopy-theory.pushouts.md)
-of the span
+The suspension of a type `X` is the
+[pushout](synthetic-homotopy-theory.pushouts.md) of the span
 
 ```text
 unit <-- X --> unit

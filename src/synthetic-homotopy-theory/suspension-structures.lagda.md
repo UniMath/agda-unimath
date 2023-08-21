@@ -46,8 +46,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md)
-of the span `unit <-- X --> unit`. A [cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
+The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
+the span `unit <-- X --> unit`. A
+[cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
 is called a `suspension-cocone'. Explicitly, a suspension cocone with nadir `Y`
 consists of functions
 
@@ -62,9 +63,10 @@ and a homotopy
 h : (x : X) → (f ∘ (const X unit star)) x ＝ (g ∘ (const X unit star)) x
 ```
 
-Using the [universal property of `unit`](foundation.universal-property-unit-type.md),
-we can characterize suspension cocones as equivalent to a selection of "north"
-and "south" poles
+Using the
+[universal property of `unit`](foundation.universal-property-unit-type.md), we
+can characterize suspension cocones as equivalent to a selection of "north" and
+"south" poles
 
 ```text
 north , south : Y

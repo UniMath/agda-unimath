@@ -43,10 +43,11 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 Since suspensions are just [pushouts](synthetic-homotopy-theory.pushouts.md),
-they retain the expected [universal property](synthetic-homotopy-theory.universal-property-pushouts.md).
-We denote this universal property by `universal-property-suspension'`.
-But, due to the special nature of the span being pushed out, the suspension of a
-type enjoys an equivalent universal property, here denoted by
+they retain the expected
+[universal property](synthetic-homotopy-theory.universal-property-pushouts.md).
+We denote this universal property by `universal-property-suspension'`. But, due
+to the special nature of the span being pushed out, the suspension of a type
+enjoys an equivalent universal property, here denoted by
 `universal-property-suspension`.
 
 ## Definition

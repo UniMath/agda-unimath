@@ -47,7 +47,8 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 ## Idea
 
-This is the dependent analog of the [universal property of suspensions](synthetic-homotopy-theory.universal-property-suspensions.md).
+This is the dependent analog of the
+[universal property of suspensions](synthetic-homotopy-theory.universal-property-suspensions.md).
 
 ## Definition
 
