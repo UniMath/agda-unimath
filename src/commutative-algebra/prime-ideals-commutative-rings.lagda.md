@@ -179,8 +179,9 @@ radical-ideal-prime-ideal-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l)
   (P : prime-ideal-Commutative-Ring l R) →
   radical-ideal-Commutative-Ring l R
-radical-ideal-prime-ideal-Commutative-Ring R P =
-  ideal-prime-ideal-Commutative-Ring R P ,
+pr1 (radical-ideal-prime-ideal-Commutative-Ring R P) =
+  ideal-prime-ideal-Commutative-Ring R P
+pr2 (radical-ideal-prime-ideal-Commutative-Ring R P) =
   is-radical-prime-ideal-Commutative-Ring R P
 
 is-prime-ideal-radical-ideal-prime-ideal-Commutative-Ring :
