@@ -139,11 +139,11 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  distributive-multiple-add-Ab :
+  right-distributive-multiple-add-Ab :
     (m n : ℕ) {x : type-Ab A} →
     multiple-Ab A (m +ℕ n) x ＝
     add-Ab A (multiple-Ab A m x) (multiple-Ab A n x)
-  distributive-multiple-add-Ab = distributive-power-add-Group (group-Ab A)
+  right-distributive-multiple-add-Ab = distributive-power-add-Group (group-Ab A)
 ```
 
 ### Multiples distribute over the sum of `x` and `y`
@@ -153,11 +153,11 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  right-distributive-multiple-add-Ab :
+  left-distributive-multiple-add-Ab :
     (n : ℕ) {x y : type-Ab A} →
     multiple-Ab A n (add-Ab A x y) ＝
     add-Ab A (multiple-Ab A n x) (multiple-Ab A n y)
-  right-distributive-multiple-add-Ab n =
+  left-distributive-multiple-add-Ab n =
     distributive-power-mul-Group (group-Ab A) n (commutative-add-Ab A _ _)
 ```
 
