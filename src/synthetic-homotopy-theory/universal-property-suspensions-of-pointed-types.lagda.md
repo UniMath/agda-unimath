@@ -55,8 +55,8 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 The suspension of a pointed type enjoys an additional universal property, on top
 of the universal property associtated with being a suspension. This universal
-property is packaged in an adjunction: the suspension (on pointed types) is
-left adjoint to the loop space.
+property is packaged in an adjunction: the suspension (on pointed types) is left
+adjoint to the loop space.
 
 #### The unit and counit of the adjunction
 
@@ -130,30 +130,12 @@ module _
   where
 
   map-equiv-susp-loop-adj :
-    ((suspension-Pointed-Type X) →∗ Y) →
-    (X →∗ Ω Y)
+    ((suspension-Pointed-Type X) →∗ Y) → (X →∗ Ω Y)
   map-equiv-susp-loop-adj f∗ =
     ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))
 ```
 
-#### The underlying map of the inverse of the equivalence
-
-The following function takes a map `X → Ω Y` and returns a suspension structure
-on `Y`.
-
-```agda
-module _
-  {l1 l2 : Level} (X : UU l1) (Y : Pointed-Type l2)
-  where
-  suspension-structure-map-into-Ω :
-    (X → type-Ω Y) → suspension-structure X (type-Pointed-Type Y)
-  pr1 (suspension-structure-map-into-Ω f) = point-Pointed-Type Y
-  pr1 (pr2 (suspension-structure-map-into-Ω f)) = point-Pointed-Type Y
-  pr2 (pr2 (suspension-structure-map-into-Ω f)) = f
-```
-
-The above plus the universal property of suspensions defines the inverse map. We
-use the universal property to define the inverse.
+#### The underlying map of the inverse equivalence
 
 ```agda
 module _

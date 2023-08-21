@@ -46,10 +46,9 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The suspension of `X` is the pushout of the span `unit <-- X --> unit`. A
-cocone under such a span is called a `suspension-cocone'.
-Since `unit`is a quite special type, suspension cocones are equivalent to a
-structure that is easier to work with, one which we call`suspension-structure`.
+The suspension of `X` is the pushout of the span `unit <-- X --> unit`. A cocone
+under such a span is called a
+`suspension-cocone'. Since `unit`is a quite special type, suspension cocones are equivalent to a structure that is easier to work with, one which we call`suspension-structure`.
 
 ## Definition
 
@@ -131,16 +130,18 @@ htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
     ( map-inv-equiv (comparison-suspension-cocone X Z))
   ~
-    ( cocone-suspension-structure  X Z)
+    ( cocone-suspension-structure X Z)
 htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
- X Z x =
-   map-inv-equiv
-     ( equiv-ap-emb (emb-equiv (comparison-suspension-cocone X Z)))
-     ( is-section-map-inv-equiv (comparison-suspension-cocone X Z) x)
+  ( X)
+  ( Z)
+  ( x) =
+    map-inv-equiv
+      ( equiv-ap-emb (emb-equiv (comparison-suspension-cocone X Z)))
+      ( is-section-map-inv-equiv (comparison-suspension-cocone X Z) x)
 
 is-equiv-map-inv-comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (cocone-suspension-structure  X Z)
+  is-equiv (cocone-suspension-structure X Z)
 is-equiv-map-inv-comparison-suspension-cocone X Z =
   is-equiv-htpy
     ( map-inv-equiv (comparison-suspension-cocone X Z))
@@ -148,8 +149,7 @@ is-equiv-map-inv-comparison-suspension-cocone X Z =
       ( htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
         ( X)
         ( Z)))
-    ( is-equiv-map-inv-equiv (comparison-suspension-cocone X Z))  
-  
+    ( is-equiv-map-inv-equiv (comparison-suspension-cocone X Z))
 ```
 
 #### Characterization of equalities in `suspension-structure`
