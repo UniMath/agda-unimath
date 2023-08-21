@@ -29,10 +29,6 @@ open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
-open import structured-types.pointed-equivalences
-open import structured-types.pointed-maps
-open import structured-types.pointed-types
-
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.conjugation-loops
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
@@ -48,8 +44,8 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-Here is the dependent analog of suspension structures. The relation between
-[suspension structures](synthetic-homotopy-theory.suspension-structures.md)
+This is the dependent analog of [suspension structures](synthetic-homotopy-theory.suspension-structures.md).
+The relation between [suspension structures](synthetic-homotopy-theory.suspension-structures.md)
 and dependent suspension structures mirrors the relation between
 [cocones under a span](synthetic-homotopy-theory.cocones-under-spans.md)
 and [dependent cocones under a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md).
@@ -71,8 +67,10 @@ merid : (x : X) → dependent-identification P (h x) ((north ∘ (const X unit s
 ```
 
 Using the [universal property of `unit`](foundation.unit-type.md)  and the
-previous characterization of suspension cocones in the file on [suspension structures](synthetic-homotopy-theory.suspension-structures.md), we can characterize dependent cocones over a suspension cocone
-as equivalent to the following:
+previous characterization of suspension cocones (to be found in the file
+[synthetic-homotopy-theory.suspension-structures](synthetic-homotopy-theory.suspension-structures.md)),
+we can characterize dependent cocones over a suspension cocone as
+equivalent to the following:
 
 For a suspension structure `(N , S , m)`, a dependent suspension structure in
 `P` over (N , S , m)` is given by points

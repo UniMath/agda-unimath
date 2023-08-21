@@ -46,9 +46,10 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The suspension of `X` is the pushout of the span `unit <-- X --> unit`. A cocone
-under such a span is called a `suspension-cocone'. Explicitly, a suspension
-cocone with nadir `Y`  consists of functions
+The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md)
+of the span `unit <-- X --> unit`. A [cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
+is called a `suspension-cocone'. Explicitly, a suspension cocone with nadir `Y`
+consists of functions
 
 ```text
 f : unit → Y

@@ -45,6 +45,12 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 </details>
 
+## Idea
+
+This is the dependent analog of the [universal property of suspensions](synthetic-homotopy-theory.universal-property-suspensions.md).
+
+## Definition
+
 ### The dependent universal property of suspensions
 
 ```agda

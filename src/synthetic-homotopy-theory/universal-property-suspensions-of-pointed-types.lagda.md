@@ -53,10 +53,12 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 ## Idea
 
-The suspension of a pointed type enjoys an additional universal property, on top
-of the universal property associtated with being a suspension. This universal
-property is packaged in an adjunction: the suspension (on pointed types) is left
-adjoint to the loop space.
+The [suspension](synthetic-homotopy-theory.suspensions-of-types) of a
+[pointed type](structured-types.pointed-types.md) enjoys an additional
+universal property, on top of [the universal property associtated with being a
+suspension](synthetic-homotopy-theory.universal-property-suspensions).
+This universal property is packaged in an adjunction:
+the suspension (on pointed types) is left adjoint to the loop space.
 
 #### The unit and counit of the adjunction
 
