@@ -8,18 +8,18 @@ module orthogonal-factorization-systems.functoriality-higher-modalities where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.transport
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.univalence
 open import foundation.identity-types
 open import foundation.small-types
+open import foundation.transport
+open import foundation.univalence
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.higher-modalities
 open import orthogonal-factorization-systems.induction-modalities
+open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.subuniverse-induction-modalities
 ```
 

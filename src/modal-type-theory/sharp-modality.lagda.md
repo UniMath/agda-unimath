@@ -25,6 +25,8 @@ open import foundation.equivalences
 
 ## Idea
 
+TODO
+
 ## Definition
 
 ```agda
@@ -79,7 +81,6 @@ compute-rec-♯ B = compute-ind-♯ (λ _ → B)
 ```agda
 ap-♯ : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
 ap-♯ {B = B} f = rec-♯ B (unit-♯ ∘ f)
-
 
 -- {-# REWRITE compute-ind-♯ #-}
 

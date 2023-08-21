@@ -113,7 +113,6 @@ module _
   --   map-inv-distributive-♭-Σ
   --     ( map-inv-is-equiv is-flat-A x , map-inv-is-equiv {! is-flat-B x !} y)
 
-
   -- is-flat-Σ :  is-flat (Σ A B)
   -- is-flat-Σ = {!  !}
 ```
