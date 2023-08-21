@@ -33,7 +33,7 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 ## Idea
 
 The multiplication operation on an
-[abelian group](group-theory.abelian-groups.md) is the map `n x ↦ nx`, which is
+[abelian group](group-theory.abelian-groups.md) is the map `n x ↦ n · x`, which is
 defined by [iteratively](foundation.iterating-functions.md) adding `x` with
 itself `n` times. We define this operation where `n` ranges over the
 [natural numbers](elementary-number-theory.natural-numbers.md), as well as where
