@@ -149,7 +149,7 @@ module _
   where
 
   tr³-htpy-swap-path-swap :
-    {q q' : a1 ＝ a2 } (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') (b0 : B a0) →
+    {q q' : a1 ＝ a2} (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') (b0 : B a0) →
     coherence-square-identifications
       ( identification-right-whisk
         ( tr³
