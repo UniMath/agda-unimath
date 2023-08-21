@@ -517,6 +517,24 @@ module _
     sim-congruence-Normal-Subgroup (inv-Group G x) (inv-Group G y)
   inv-congruence-Normal-Subgroup =
     inv-congruence-Group G congruence-Normal-Subgroup
+
+  unit-congruence-Normal-Subgroup :
+    {x : type-Group G} →
+    sim-congruence-Normal-Subgroup x (unit-Group G) →
+    is-in-Normal-Subgroup G N x
+  unit-congruence-Normal-Subgroup {x} H =
+    is-closed-under-inv-Normal-Subgroup' G N x
+      ( is-closed-under-eq-Normal-Subgroup G N H
+        ( right-unit-law-mul-Group G (inv-Group G x)))
+
+  unit-congruence-Normal-Subgroup' :
+    {x : type-Group G} →
+    is-in-Normal-Subgroup G N x →
+    sim-congruence-Normal-Subgroup x (unit-Group G)
+  unit-congruence-Normal-Subgroup' {x} H =
+    is-closed-under-eq-Normal-Subgroup' G N
+      ( is-closed-under-inv-Normal-Subgroup G N x H)
+      ( right-unit-law-mul-Group G (inv-Group G x))
 ```
 
 #### The normal subgroup obtained from a congruence relation
