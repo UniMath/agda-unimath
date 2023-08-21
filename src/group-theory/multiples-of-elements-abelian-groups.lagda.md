@@ -191,7 +191,7 @@ module _
     ( inv (multiple-succ-Ab' A (succ-ℕ n) g))
 ```
 
-### The integer multiple `x⁰` is the unit of the group
+### The integer multiple `0 · x` is the unit of the group
 
 ```agda
 module _
