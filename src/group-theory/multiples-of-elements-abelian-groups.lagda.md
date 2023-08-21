@@ -119,7 +119,7 @@ module _
   multiple-succ-Ab = power-succ-Group (group-Ab A)
 ```
 
-### `xⁿ⁺¹ ＝ xxⁿ`
+### `(n + 1) · x ＝ x + n · x`
 
 ```agda
 module _
