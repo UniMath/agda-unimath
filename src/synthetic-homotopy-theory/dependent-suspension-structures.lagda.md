@@ -49,7 +49,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 Just as non-dependent cocones under a suspension span have a simple description,
-so do the dependent counter parts.
+so too do the dependent counter parts.
 
 ## Definition
 
