@@ -11,20 +11,14 @@ module modal-type-theory.sharp-modality where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.locally-small-types
-open import foundation.sections
 open import foundation.universe-levels
 
-open import modal-type-theory.flat-modality
-
-open import orthogonal-factorization-systems.higher-modalities
 open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.locally-small-modal-operators
-open import orthogonal-factorization-systems.modal-operators
 ```
 
 </details>

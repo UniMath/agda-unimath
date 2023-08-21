@@ -16,8 +16,6 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.small-types
-open import foundation.transport
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.induction-modalities

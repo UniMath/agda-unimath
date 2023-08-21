@@ -9,17 +9,12 @@ module modal-type-theory.flat-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
-open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.unit-type
 open import foundation.universe-levels
 

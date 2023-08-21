@@ -7,22 +7,13 @@ module orthogonal-factorization-systems.induction-modalities where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.small-types
-open import foundation.transport
-open import foundation.univalence
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
 </details>
