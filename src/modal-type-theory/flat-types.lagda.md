@@ -4,23 +4,29 @@
 {-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.flat-types where
+```
 
-open import modal-type-theory.flat-modality
+<details><summary>Imports</summary>
 
+```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
 open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.unit-type
-open import foundation.empty-types
-open import foundation.homotopies
 open import foundation.retractions
 open import foundation.sections
-open import foundation.equivalences
+open import foundation.unit-type
+open import foundation.universe-levels
+
+open import modal-type-theory.flat-modality
 ```
+
+</details>
 
 ## Idea
 

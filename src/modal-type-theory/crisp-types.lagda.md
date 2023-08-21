@@ -4,11 +4,17 @@
 {-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.crisp-types where
+```
 
-open import foundation.universe-levels
+<details><summary>Imports</summary>
+
+```agda
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.universe-levels
 ```
+
+</details>
 
 ## Idea
 

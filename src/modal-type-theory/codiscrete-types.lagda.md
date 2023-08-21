@@ -4,26 +4,32 @@
 {-# OPTIONS --cohesion --flat-split --rewriting #-}
 
 module modal-type-theory.codiscrete-types where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import foundation.dependent-pair-types
+open import foundation.empty-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.locally-small-types
+open import foundation.propositions
+open import foundation.retractions
+open import foundation.sections
+open import foundation.unit-type
+open import foundation.universe-levels
 
 open import modal-type-theory.sharp-modality
 
 open import orthogonal-factorization-systems.higher-modalities
-open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.locally-small-modal-operators
-
-open import foundation.universe-levels
-open import foundation.locally-small-types
-open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.unit-type
-open import foundation.empty-types
-open import foundation.homotopies
-open import foundation.retractions
-open import foundation.sections
-open import foundation.equivalences
+open import orthogonal-factorization-systems.modal-operators
 ```
+
+</details>
 
 ## Idea
 
