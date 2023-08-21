@@ -79,7 +79,6 @@ pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
 
 ## Properties
 
-
 ### The suspension of X has the universal property of suspensions
 
 ```agda
