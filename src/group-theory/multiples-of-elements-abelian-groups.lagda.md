@@ -94,7 +94,7 @@ module _
     associative-iterated-multiplication-by-element-Group (group-Ab A) a
 ```
 
-### `1ⁿ ＝ 1`
+### `n · 0 ＝ 0`
 
 ```agda
 module _
