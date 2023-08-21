@@ -46,3 +46,55 @@ open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
 ```
+
+</details>
+
+## Definition
+
+### The suspension of an ordinary type `X`
+
+```agda
+suspension :
+  {l : Level} → UU l → UU l
+suspension X = pushout (const X unit star) (const X unit star)
+
+N-susp :
+  {l : Level} {X : UU l} → suspension X
+N-susp {X = X} = inl-pushout (const X unit star) (const X unit star) star
+
+S-susp :
+  {l : Level} {X : UU l} → suspension X
+S-susp {X = X} = inr-pushout (const X unit star) (const X unit star) star
+
+merid-susp :
+  {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
+merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
+
+suspension-structure-suspension :
+  {l : Level} (X : UU l) → suspension-structure X (suspension X)
+pr1 (suspension-structure-suspension X) = N-susp
+pr1 (pr2 (suspension-structure-suspension X)) = S-susp
+pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
+```
+
+## Properties
+
+### The suspension of a contractible type is contractible
+
+```agda
+is-contr-suspension-is-contr :
+  {l : Level} {X : UU l} → is-contr X → is-contr (suspension X)
+is-contr-suspension-is-contr {l} {X} is-contr-X =
+  is-contr-is-equiv'
+    ( unit)
+    ( pr1 (pr2 (cocone-pushout (const X unit star) (const X unit star))))
+    ( is-equiv-universal-property-pushout
+      ( const X unit star)
+      ( const X unit star)
+      ( cocone-pushout
+        ( const X unit star)
+        ( const X unit star))
+      ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
+      ( up-pushout (const X unit star) (const X unit star)))
+    ( is-contr-unit)
+```
