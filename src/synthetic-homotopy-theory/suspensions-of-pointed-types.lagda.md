@@ -38,6 +38,7 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.dependent-universal-property-suspensions
+open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
@@ -72,4 +73,20 @@ pr1 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
   point-Pointed-Type Y
 pr2 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
   const X (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
+```
+
+#### Suspension structure induced by a map into a loop space
+
+The following function takes a map `X → Ω Y` and returns a suspension structure
+on `Y`.
+
+```agda
+module _
+  {l1 l2 : Level} (X : UU l1) (Y : Pointed-Type l2)
+  where
+  suspension-structure-map-into-Ω :
+    (X → type-Ω Y) → suspension-structure X (type-Pointed-Type Y)
+  pr1 (suspension-structure-map-into-Ω f) = point-Pointed-Type Y
+  pr1 (pr2 (suspension-structure-map-into-Ω f)) = point-Pointed-Type Y
+  pr2 (pr2 (suspension-structure-map-into-Ω f)) = f
 ```
