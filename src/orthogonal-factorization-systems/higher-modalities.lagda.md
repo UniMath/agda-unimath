@@ -16,8 +16,11 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.small-types
+open import foundation.transport
+open import foundation.univalence
 open import foundation.universe-levels
 
+open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
@@ -46,38 +49,6 @@ this, higher modalities in their most general form only make sense for
 [locally small modal operators](orthogonal-factorization-systems.locally-small-modal-operators.md).
 
 ## Definition
-
-### The universal property of higher modalities
-
-```agda
-module _
-  {l1 l2 : Level}
-  {○ : operator-modality l1 l2}
-  (unit-○ : unit-modality ○)
-  where
-
-  ind-modality : UU (lsuc l1 ⊔ l2)
-  ind-modality =
-    (X : UU l1) (P : ○ X → UU l1) →
-    ((x : X) → ○ (P (unit-○ x))) →
-    (x' : ○ X) → ○ (P x')
-
-  rec-modality : UU (lsuc l1 ⊔ l2)
-  rec-modality = (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y
-
-  compute-ind-modality : ind-modality → UU (lsuc l1 ⊔ l2)
-  compute-ind-modality ind-○ =
-    (X : UU l1) (P : ○ X → UU l1) →
-    (f : (x : X) → ○ (P (unit-○ x))) →
-    (x : X) → ind-○ X P f (unit-○ x) ＝ f x
-
-  dependent-universal-property-modality : UU (lsuc l1 ⊔ l2)
-  dependent-universal-property-modality =
-    Σ ind-modality compute-ind-modality
-
-  rec-modality-ind-modality : ind-modality → rec-modality
-  rec-modality-ind-modality ind X Y = ind X (λ _ → Y)
-```
 
 ### Closure under identity type formers
 
@@ -116,7 +87,7 @@ module _
 
   rec-modality-is-higher-modality : is-higher-modality → rec-modality unit-○
   rec-modality-is-higher-modality =
-    rec-modality-ind-modality unit-○ ∘ ind-modality-is-higher-modality
+    rec-ind-modality unit-○ ∘ ind-modality-is-higher-modality
 
   compute-ind-modality-is-higher-modality :
     (h : is-higher-modality) →
@@ -139,7 +110,7 @@ higher-modality l1 l2 =
         ( is-higher-modality ○))
 ```
 
-### Compoents of a higher modality
+### Components of a higher modality
 
 ```agda
 module _
@@ -182,7 +153,7 @@ module _
   rec-modality-higher-modality :
     rec-modality (unit-higher-modality)
   rec-modality-higher-modality =
-    rec-modality-ind-modality
+    rec-ind-modality
       ( unit-higher-modality)
       ( ind-modality-higher-modality)
 
@@ -208,19 +179,6 @@ module _
 ```
 
 ## Properties
-
-### The modal operator's action on maps
-
-```agda
-module _
-  {l : Level}
-  {○ : operator-modality l l} (unit-○ : unit-modality ○)
-  where
-
-  map-rec-modality :
-    (rec-○ : rec-modality unit-○) {X Y : UU l} → (X → Y) → ○ X → ○ Y
-  map-rec-modality rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
-```
 
 ### Modal identity elimination
 
@@ -258,8 +216,8 @@ module _
       ( x' ＝ y')
       ( is-locally-small-○ X x' y')
       ( Id-○ X x' y') ∘
-      ( map-rec-modality unit-○
-        ( rec-modality-ind-modality unit-○ ind-○)
+      ( ap-ind-modality unit-○
+        ( ind-○)
         ( map-equiv-is-small ( is-locally-small-○ X x' y')))
 ```
 

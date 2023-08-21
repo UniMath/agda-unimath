@@ -23,8 +23,10 @@ open import orthogonal-factorization-systems.factorization-operations public
 open import orthogonal-factorization-systems.factorization-operations-function-classes public
 open import orthogonal-factorization-systems.factorizations-of-maps public
 open import orthogonal-factorization-systems.function-classes public
+open import orthogonal-factorization-systems.functoriality-higher-modalities public
 open import orthogonal-factorization-systems.higher-modalities public
 open import orthogonal-factorization-systems.identity-modality public
+open import orthogonal-factorization-systems.induction-modalities public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-squares public
 open import orthogonal-factorization-systems.lifts-of-maps public
@@ -47,6 +49,7 @@ open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
+open import orthogonal-factorization-systems.subuniverse-induction-modalities public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.zero-modality public
