@@ -140,7 +140,7 @@ module _
   tr²-right-whisk refl refl b0 = inv right-unit
 ```
 
-#### Coherences for tr³
+#### Coherences and algebraic identities for tr³
 
 ```
 module _
@@ -151,7 +151,11 @@ module _
   tr³-htpy-swap-path-swap :
     {q q' : a1 ＝ a2 } (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') (b0 : B a0) →
     coherence-square-identifications
-      ( identification-right-whisk (tr³ B (path-swap-nat-identification-left-whisk β α) b0) (tr-concat p' q' b0))
+      ( identification-right-whisk
+        ( tr³
+          ( B)
+          ( path-swap-nat-identification-left-whisk β α) b0)
+          ( tr-concat p' q' b0))
       ( (identification-right-whisk
         ( tr²-concat
           ( identification-right-whisk α q)
