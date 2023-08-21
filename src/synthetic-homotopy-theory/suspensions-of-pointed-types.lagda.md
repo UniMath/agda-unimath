@@ -1,7 +1,7 @@
 # Suspensions of types
 
 ```agda
-module synthetic-homotopy-theory.dependent-universal-property-suspensions where
+module synthetic-homotopy-theory.suspensions-of-pointed-types where
 ```
 
 <details><summary>Imports</summary>
@@ -37,34 +37,39 @@ open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
+open import synthetic-homotopy-theory.dependent-universal-property-suspensions
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.suspensions-of-types
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
+</details>
 
-### The dependent universal property of suspensions
+## Idea
+
+When `X` is a pointed type, the suspension of `X` has nice properties
+
+### The suspension of a pointed type
 
 ```agda
-dependent-ev-suspension :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-  (susp-str : suspension-structure X Y) (B : Y → UU l3) →
-  ((y : Y) → B y) →
-  dependent-suspension-structure susp-str B
-pr1 (dependent-ev-suspension susp-str B s) =
-  s (N-suspension-structure susp-str)
-pr1 (pr2 (dependent-ev-suspension susp-str B s)) =
-  s (S-suspension-structure susp-str)
-pr2 (pr2 (dependent-ev-suspension susp-str B s)) =
-  (apd s) ∘ (merid-suspension-structure susp-str)
+suspension-Pointed-Type :
+  {l : Level} → Pointed-Type l → Pointed-Type l
+pr1 (suspension-Pointed-Type X) = suspension (type-Pointed-Type X)
+pr2 (suspension-Pointed-Type X) = N-susp
+```
 
-module _
-  (l : Level) {l1 l2 : Level} {X : UU l1} {Y : UU l2}
-  (susp-str : suspension-structure X Y)
-  where
+#### Suspension structure induced by a pointed type
 
-  dependent-universal-property-suspension : UU (l1 ⊔ l2 ⊔ lsuc l)
-  dependent-universal-property-suspension =
-    (B : Y → UU l) → is-equiv (dependent-ev-suspension susp-str B)
+```agda
+constant-suspension-structure-Pointed-Type :
+  {l1 l2 : Level} (X : UU l1) (Y : Pointed-Type l2) →
+  suspension-structure X (type-Pointed-Type Y)
+pr1 (constant-suspension-structure-Pointed-Type X Y) =
+  point-Pointed-Type Y
+pr1 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
+  point-Pointed-Type Y
+pr2 (pr2 (constant-suspension-structure-Pointed-Type X Y)) =
+  const X (point-Pointed-Type Y ＝ point-Pointed-Type Y) refl
 ```
