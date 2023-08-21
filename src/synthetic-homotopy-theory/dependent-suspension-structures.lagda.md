@@ -48,8 +48,48 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-Just as non-dependent cocones under a suspension span have a simple description,
-so too do the dependent counter parts.
+Here is the dependent analog of suspension structures. The relation between
+[suspension structures](synthetic-homotopy-theory.suspension-structures.md)
+and dependent suspension structures mirrors the relation between
+[cocones under a span](synthetic-homotopy-theory.cocones-under-spans.md)
+and [dependent cocones under a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md).
+
+Fix a type `X` and consider a suspension cocone `(f , g , h)` with
+nadir `Y`.  Given a type family `P : Y → UU`, a dependent suspension cocone
+on `P` over `(f , g , h)` consists of dependent functions
+
+```text
+north : (t : unit) → P (f t)
+
+south : (t : unit) → P (g t)
+```
+
+together with a family of dependent identifications
+
+```text
+merid : (x : X) → dependent-identification P (h x) ((north ∘ (const X unit star)) x) (south ∘ (const X unit star) x)
+```
+
+Using the [universal property of `unit`](foundation.unit-type.md)  and the
+previous characterization of suspension cocones in the file on [suspension structures](synthetic-homotopy-theory.suspension-structures.md), we can characterize dependent cocones over a suspension cocone
+as equivalent to the following:
+
+For a suspension structure `(N , S , m)`, a dependent suspension structure in
+`P` over (N , S , m)` is given by points
+
+```text
+north : P N
+
+south : P S
+```
+
+and a family of dependent identifications
+
+```text
+
+meridian : (x : X) → dependent-identification P (m x) north south
+
+```
 
 ## Definition
 
@@ -116,9 +156,7 @@ module _
 
 ## Properties
 
-#### Equivalence between dependent suspension structures and
-
-dependent suspension cocones
+#### Equivalence between dependent suspension structures and dependent suspension cocones
 
 Soon TODO
 

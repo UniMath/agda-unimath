@@ -47,8 +47,35 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 ## Idea
 
 The suspension of `X` is the pushout of the span `unit <-- X --> unit`. A cocone
-under such a span is called a
-`suspension-cocone'. Since `unit`is a quite special type, suspension cocones are equivalent to a structure that is easier to work with, one which we call`suspension-structure`.
+under such a span is called a `suspension-cocone'. Explicitly, a suspension
+cocone with nadir `Y`  consists of functions
+
+```text
+f : unit → Y
+g : unit → Y
+```
+
+and a homotopy
+
+```text
+h : (x : X) → (f ∘ (const X unit star)) x ＝ (g ∘ (const X unit star)) x
+```
+
+Using the [universal property of `unit`](foundation.universal-property-unit-type.md),
+we can characterize suspension cocones as equivalent to a selection of "north"
+and "south" poles
+
+```text
+north , south : Y
+```
+
+and a meridian function
+
+```text
+meridian : X → N ＝ S
+```
+
+We call this type of structure `suspension-structure`.
 
 ## Definition
 

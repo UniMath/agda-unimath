@@ -49,6 +49,19 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 </details>
 
+## Idea
+
+The suspension of a type `X` is the [pushout](synthetic-homotopy-theory.pushouts.md)
+of the span
+
+```text
+unit <-- X --> unit
+```
+
+Suspensions play an important role in synthetic homotopy theory. For example,
+they star in the freudenthal suspension theorem and allow us to define
+[the spheres](spheres.md).
+
 ## Definition
 
 ### The suspension of an ordinary type `X`
