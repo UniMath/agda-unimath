@@ -79,7 +79,8 @@ module _
     (x y : ℤ) →
     ( map-hom-element-Group (x +ℤ y)) ＝
     ( mul-Group G (map-hom-element-Group x) (map-hom-element-Group y))
-  preserves-mul-map-hom-element-Group = integer-power-add-Group G g
+  preserves-mul-map-hom-element-Group =
+    distributive-integer-power-add-Group G g
 
   hom-element-Group : type-hom-Group ℤ-Group G
   pr1 hom-element-Group = map-hom-element-Group

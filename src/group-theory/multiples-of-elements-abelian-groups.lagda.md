@@ -32,22 +32,24 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 
 ## Idea
 
-The power operation on a group is the map `n x ↦ xⁿ`, which is defined by
-iteratively multiplying `x` with itself `n` times. We define this operation
-where `n` ranges over the natural numbers, as well as where `n` ranges over the
-integers.
+The multiplication operation on an
+[abelian group](group-theory.abelian-groups.md) is the map `n x ↦ nx`, which is
+defined by [iteratively](foundation.iterating-functions.md) adding `x` with
+itself `n` times. We define this operation where `n` ranges over the
+[natural numbers](elementary-number-theory.natural-numbers.md), as well as where
+`n` ranges over the [integers](elementary-number-theory.integers.md).
 
 ## Definition
 
-### Powers by natural numbers of group elements
+### Natural number multiples of abelian group elements
 
 ```agda
 module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-nat-Ab : ℕ → type-Ab A → type-Ab A
-  multiple-nat-Ab = power-nat-Group (group-Ab A)
+  multiple-Ab : ℕ → type-Ab A → type-Ab A
+  multiple-Ab = power-Group (group-Ab A)
 ```
 
 ### Iterating multiplication by `g`
@@ -70,8 +72,8 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-int-Ab : ℤ → type-Ab A → type-Ab A
-  multiple-int-Ab k g =
+  integer-multiple-Ab : ℤ → type-Ab A → type-Ab A
+  integer-multiple-Ab k g =
     map-iterate-automorphism-ℤ k (equiv-add-Ab A g) (zero-Ab A)
 ```
 
@@ -99,9 +101,9 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-nat-zero-Ab :
-    (n : ℕ) → multiple-nat-Ab A n (zero-Ab A) ＝ zero-Ab A
-  multiple-nat-zero-Ab = power-nat-unit-Group (group-Ab A)
+  multiple-zero-Ab :
+    (n : ℕ) → multiple-Ab A n (zero-Ab A) ＝ zero-Ab A
+  multiple-zero-Ab = power-unit-Group (group-Ab A)
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -111,10 +113,10 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-succ-nat-Ab :
+  multiple-succ-Ab :
     (n : ℕ) (x : type-Ab A) →
-    multiple-nat-Ab A (succ-ℕ n) x ＝ add-Ab A (multiple-nat-Ab A n x) x
-  multiple-succ-nat-Ab = power-succ-nat-Group (group-Ab A)
+    multiple-Ab A (succ-ℕ n) x ＝ add-Ab A (multiple-Ab A n x) x
+  multiple-succ-Ab = power-succ-Group (group-Ab A)
 ```
 
 ### `xⁿ⁺¹ ＝ xxⁿ`
@@ -124,10 +126,10 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-succ-nat-Ab' :
+  multiple-succ-Ab' :
     (n : ℕ) (x : type-Ab A) →
-    multiple-nat-Ab A (succ-ℕ n) x ＝ add-Ab A x (multiple-nat-Ab A n x)
-  multiple-succ-nat-Ab' = power-succ-nat-Group' (group-Ab A)
+    multiple-Ab A (succ-ℕ n) x ＝ add-Ab A x (multiple-Ab A n x)
+  multiple-succ-Ab' = power-succ-Group' (group-Ab A)
 ```
 
 ### Multiples by sums of natural numbers are products of multiples
@@ -137,49 +139,26 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-add-nat-Ab :
+  distributive-multiple-add-Ab :
     (m n : ℕ) {x : type-Ab A} →
-    multiple-nat-Ab A (m +ℕ n) x ＝
-    add-Ab A (multiple-nat-Ab A m x) (multiple-nat-Ab A n x)
-  multiple-add-nat-Ab = power-add-nat-Group (group-Ab A)
+    multiple-Ab A (m +ℕ n) x ＝
+    add-Ab A (multiple-Ab A m x) (multiple-Ab A n x)
+  distributive-multiple-add-Ab = distributive-power-add-Group (group-Ab A)
 ```
 
-### If `x` commutes with `y` then so do their multiples
+### Multiples distribute over the sum of `x` and `y`
 
 ```agda
 module _
   {l : Level} (A : Ab l)
   where
 
-  commute-multiples-nat-Ab' :
+  right-distributive-multiple-add-Ab :
     (n : ℕ) {x y : type-Ab A} →
-    ( add-Ab A x y ＝ add-Ab A y x) →
-    ( add-Ab A (multiple-nat-Ab A n x) y) ＝
-    ( add-Ab A y (multiple-nat-Ab A n x))
-  commute-multiples-nat-Ab' = commute-powers-nat-Group' (group-Ab A)
-
-  commute-multiples-nat-Ab :
-    (m n : ℕ) {x y : type-Ab A} →
-    ( add-Ab A x y ＝ add-Ab A y x) →
-    ( add-Ab A (multiple-nat-Ab A m x) (multiple-nat-Ab A n y)) ＝
-    ( add-Ab A (multiple-nat-Ab A n y) (multiple-nat-Ab A m x))
-  commute-multiples-nat-Ab = commute-powers-nat-Group (group-Ab A)
-```
-
-### If `x` commutes with `y`, then multiples distribute over the product of `x` and `y`
-
-```agda
-module _
-  {l : Level} (A : Ab l)
-  where
-
-  distributive-multiple-nat-add-Ab :
-    (n : ℕ) {x y : type-Ab A} →
-    (H : add-Ab A x y ＝ add-Ab A y x) →
-    multiple-nat-Ab A n (add-Ab A x y) ＝
-    add-Ab A (multiple-nat-Ab A n x) (multiple-nat-Ab A n y)
-  distributive-multiple-nat-add-Ab =
-    distributive-power-nat-mul-Group (group-Ab A)
+    multiple-Ab A n (add-Ab A x y) ＝
+    add-Ab A (multiple-Ab A n x) (multiple-Ab A n y)
+  right-distributive-multiple-add-Ab n =
+    distributive-power-mul-Group (group-Ab A) n (commutative-add-Ab A _ _)
 ```
 
 ### Multiples by products of natural numbers are iterated multiples
@@ -189,27 +168,27 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-mul-nat-Ab :
+  multiple-mul-Ab :
     (m n : ℕ) {x : type-Ab A} →
-    multiple-nat-Ab A (m *ℕ n) x ＝ multiple-nat-Ab A n (multiple-nat-Ab A m x)
-  multiple-mul-nat-Ab = power-mul-nat-Group (group-Ab A)
+    multiple-Ab A (m *ℕ n) x ＝ multiple-Ab A n (multiple-Ab A m x)
+  multiple-mul-Ab = power-mul-Group (group-Ab A)
 ```
 
-### `multiple-int-Ab A (int-ℕ n) g ＝ multiple-nat-Ab A n g`
+### `integer-multiple-Ab A (int-ℕ n) g ＝ multiple-Ab A n g`
 
 ```agda
 module _
   {l : Level} (A : Ab l)
   where
 
-  multiple-int-nat-Ab :
+  integer-multiple-int-Ab :
     (n : ℕ) (g : type-Ab A) →
-    multiple-int-Ab A (int-ℕ n) g ＝ multiple-nat-Ab A n g
-  multiple-int-nat-Ab zero-ℕ g = refl
-  multiple-int-nat-Ab (succ-ℕ zero-ℕ) g = right-unit-law-add-Ab A g
-  multiple-int-nat-Ab (succ-ℕ (succ-ℕ n)) g =
-    ( ap (add-Ab A g) (multiple-int-nat-Ab (succ-ℕ n) g)) ∙
-    ( inv (multiple-succ-nat-Ab' A (succ-ℕ n) g))
+    integer-multiple-Ab A (int-ℕ n) g ＝ multiple-Ab A n g
+  integer-multiple-int-Ab zero-ℕ g = refl
+  integer-multiple-int-Ab (succ-ℕ zero-ℕ) g = right-unit-law-add-Ab A g
+  integer-multiple-int-Ab (succ-ℕ (succ-ℕ n)) g =
+    ( ap (add-Ab A g) (integer-multiple-int-Ab (succ-ℕ n) g)) ∙
+    ( inv (multiple-succ-Ab' A (succ-ℕ n) g))
 ```
 
 ### The integer multiple `x⁰` is the unit of the group
@@ -219,25 +198,26 @@ module _
   {l : Level} (A : Ab l) (g : type-Ab A)
   where
 
-  multiple-zero-int-Ab :
-    multiple-int-Ab A zero-ℤ g ＝ zero-Ab A
-  multiple-zero-int-Ab = integer-power-zero-Group (group-Ab A) g
+  integer-multiple-zero-Ab :
+    integer-multiple-Ab A zero-ℤ g ＝ zero-Ab A
+  integer-multiple-zero-Ab = integer-power-zero-Group (group-Ab A) g
 ```
 
-### The integer multiple `gˣ⁺ʸ` computes to `gˣgʸ`
+### The integer multiple `(x+y)g` computes to `xg+yg`
 
 ```agda
 module _
   {l : Level} (A : Ab l) (g : type-Ab A)
   where
 
-  multiple-add-int-Ab :
+  distributive-integer-multiple-add-Ab :
     (x y : ℤ) →
-    ( multiple-int-Ab A (x +ℤ y) g) ＝
+    ( integer-multiple-Ab A (x +ℤ y) g) ＝
     ( add-Ab A
-      ( multiple-int-Ab A x g)
-      ( multiple-int-Ab A y g))
-  multiple-add-int-Ab = integer-power-add-Group (group-Ab A) g
+      ( integer-multiple-Ab A x g)
+      ( integer-multiple-Ab A y g))
+  distributive-integer-multiple-add-Ab =
+    distributive-integer-power-add-Group (group-Ab A) g
 ```
 
 ### Homomorphisms of abelian groups preserve multiples
@@ -249,8 +229,8 @@ module _
 
   preserves-multiples-hom-Ab :
     (n : ℕ) (x : type-Ab A) →
-    map-hom-Ab A B f (multiple-nat-Ab A n x) ＝
-    multiple-nat-Ab B n (map-hom-Ab A B f x)
+    map-hom-Ab A B f (multiple-Ab A n x) ＝
+    multiple-Ab B n (map-hom-Ab A B f x)
   preserves-multiples-hom-Ab =
     preserves-powers-hom-Group
       ( group-Ab A)

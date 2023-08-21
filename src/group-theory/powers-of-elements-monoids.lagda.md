@@ -93,17 +93,17 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  power-add-Monoid :
+  distributive-power-add-Monoid :
     (m n : ℕ) {x : type-Monoid M} →
     power-Monoid M (m +ℕ n) x ＝
     mul-Monoid M (power-Monoid M m x) (power-Monoid M n x)
-  power-add-Monoid m zero-ℕ {x} =
+  distributive-power-add-Monoid m zero-ℕ {x} =
     inv
       ( right-unit-law-mul-Monoid M
         ( power-Monoid M m x))
-  power-add-Monoid m (succ-ℕ n) {x} =
+  distributive-power-add-Monoid m (succ-ℕ n) {x} =
     ( power-succ-Monoid M (m +ℕ n) x) ∙
-    ( ( ap (mul-Monoid' M x) (power-add-Monoid m n)) ∙
+    ( ( ap (mul-Monoid' M x) (distributive-power-add-Monoid m n)) ∙
       ( ( associative-mul-Monoid M
           ( power-Monoid M m x)
           ( power-Monoid M n x)
@@ -275,7 +275,7 @@ module _
   power-mul-Monoid (succ-ℕ zero-ℕ) n {x} =
     ap (λ t → power-Monoid M t x) (left-unit-law-add-ℕ n)
   power-mul-Monoid (succ-ℕ (succ-ℕ m)) n {x} =
-    ( ( power-add-Monoid M (succ-ℕ m *ℕ n) n) ∙
+    ( ( distributive-power-add-Monoid M (succ-ℕ m *ℕ n) n) ∙
       ( ap
         ( mul-Monoid' M (power-Monoid M n x))
         ( power-mul-Monoid (succ-ℕ m) n))) ∙

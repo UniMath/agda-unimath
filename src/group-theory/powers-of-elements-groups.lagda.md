@@ -46,8 +46,8 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-nat-Group : ℕ → type-Group G → type-Group G
-  power-nat-Group = power-Monoid (monoid-Group G)
+  power-Group : ℕ → type-Group G → type-Group G
+  power-Group = power-Monoid (monoid-Group G)
 ```
 
 ### Iterating multiplication by `g`
@@ -131,9 +131,9 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-nat-unit-Group :
-    (n : ℕ) → power-nat-Group G n (unit-Group G) ＝ unit-Group G
-  power-nat-unit-Group = power-unit-Monoid (monoid-Group G)
+  power-unit-Group :
+    (n : ℕ) → power-Group G n (unit-Group G) ＝ unit-Group G
+  power-unit-Group = power-unit-Monoid (monoid-Group G)
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -143,10 +143,10 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-succ-nat-Group :
+  power-succ-Group :
     (n : ℕ) (x : type-Group G) →
-    power-nat-Group G (succ-ℕ n) x ＝ mul-Group G (power-nat-Group G n x) x
-  power-succ-nat-Group = power-succ-Monoid (monoid-Group G)
+    power-Group G (succ-ℕ n) x ＝ mul-Group G (power-Group G n x) x
+  power-succ-Group = power-succ-Monoid (monoid-Group G)
 ```
 
 ### `xⁿ⁺¹ ＝ xxⁿ`
@@ -156,10 +156,10 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-succ-nat-Group' :
+  power-succ-Group' :
     (n : ℕ) (x : type-Group G) →
-    power-nat-Group G (succ-ℕ n) x ＝ mul-Group G x (power-nat-Group G n x)
-  power-succ-nat-Group' = power-succ-Monoid' (monoid-Group G)
+    power-Group G (succ-ℕ n) x ＝ mul-Group G x (power-Group G n x)
+  power-succ-Group' = power-succ-Monoid' (monoid-Group G)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -169,11 +169,11 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-add-nat-Group :
+  distributive-power-add-Group :
     (m n : ℕ) {x : type-Group G} →
-    power-nat-Group G (m +ℕ n) x ＝
-    mul-Group G (power-nat-Group G m x) (power-nat-Group G n x)
-  power-add-nat-Group = power-add-Monoid (monoid-Group G)
+    power-Group G (m +ℕ n) x ＝
+    mul-Group G (power-Group G m x) (power-Group G n x)
+  distributive-power-add-Group = distributive-power-add-Monoid (monoid-Group G)
 ```
 
 ### If `x` commutes with `y` then so do their powers
@@ -183,19 +183,19 @@ module _
   {l : Level} (G : Group l)
   where
 
-  commute-powers-nat-Group' :
+  commute-powers-Group' :
     (n : ℕ) {x y : type-Group G} →
     ( mul-Group G x y ＝ mul-Group G y x) →
-    ( mul-Group G (power-nat-Group G n x) y) ＝
-    ( mul-Group G y (power-nat-Group G n x))
-  commute-powers-nat-Group' = commute-powers-Monoid' (monoid-Group G)
+    ( mul-Group G (power-Group G n x) y) ＝
+    ( mul-Group G y (power-Group G n x))
+  commute-powers-Group' = commute-powers-Monoid' (monoid-Group G)
 
-  commute-powers-nat-Group :
+  commute-powers-Group :
     (m n : ℕ) {x y : type-Group G} →
     ( mul-Group G x y ＝ mul-Group G y x) →
-    ( mul-Group G (power-nat-Group G m x) (power-nat-Group G n y)) ＝
-    ( mul-Group G (power-nat-Group G n y) (power-nat-Group G m x))
-  commute-powers-nat-Group = commute-powers-Monoid (monoid-Group G)
+    ( mul-Group G (power-Group G m x) (power-Group G n y)) ＝
+    ( mul-Group G (power-Group G n y) (power-Group G m x))
+  commute-powers-Group = commute-powers-Monoid (monoid-Group G)
 ```
 
 ### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`
@@ -205,12 +205,12 @@ module _
   {l : Level} (G : Group l)
   where
 
-  distributive-power-nat-mul-Group :
+  distributive-power-mul-Group :
     (n : ℕ) {x y : type-Group G} →
     (H : mul-Group G x y ＝ mul-Group G y x) →
-    power-nat-Group G n (mul-Group G x y) ＝
-    mul-Group G (power-nat-Group G n x) (power-nat-Group G n y)
-  distributive-power-nat-mul-Group =
+    power-Group G n (mul-Group G x y) ＝
+    mul-Group G (power-Group G n x) (power-Group G n y)
+  distributive-power-mul-Group =
     distributive-power-mul-Monoid (monoid-Group G)
 ```
 
@@ -221,27 +221,27 @@ module _
   {l : Level} (G : Group l)
   where
 
-  power-mul-nat-Group :
+  power-mul-Group :
     (m n : ℕ) {x : type-Group G} →
-    power-nat-Group G (m *ℕ n) x ＝ power-nat-Group G n (power-nat-Group G m x)
-  power-mul-nat-Group = power-mul-Monoid (monoid-Group G)
+    power-Group G (m *ℕ n) x ＝ power-Group G n (power-Group G m x)
+  power-mul-Group = power-mul-Monoid (monoid-Group G)
 ```
 
-### `integer-power-Group G (int-ℕ n) g ＝ power-nat-Group G n g`
+### `integer-power-Group G (int-ℕ n) g ＝ power-Group G n g`
 
 ```agda
 module _
   {l : Level} (G : Group l)
   where
 
-  integer-power-nat-Group :
+  integer-power-int-Group :
     (n : ℕ) (g : type-Group G) →
-    integer-power-Group G (int-ℕ n) g ＝ power-nat-Group G n g
-  integer-power-nat-Group zero-ℕ g = refl
-  integer-power-nat-Group (succ-ℕ zero-ℕ) g = right-unit-law-mul-Group G g
-  integer-power-nat-Group (succ-ℕ (succ-ℕ n)) g =
-    ( ap (mul-Group G g) (integer-power-nat-Group (succ-ℕ n) g)) ∙
-    ( inv (power-succ-nat-Group' G (succ-ℕ n) g))
+    integer-power-Group G (int-ℕ n) g ＝ power-Group G n g
+  integer-power-int-Group zero-ℕ g = refl
+  integer-power-int-Group (succ-ℕ zero-ℕ) g = right-unit-law-mul-Group G g
+  integer-power-int-Group (succ-ℕ (succ-ℕ n)) g =
+    ( ap (mul-Group G g) (integer-power-int-Group (succ-ℕ n) g)) ∙
+    ( inv (power-succ-Group' G (succ-ℕ n) g))
 ```
 
 ### The integer power `x⁰` is the unit of the group
@@ -265,13 +265,13 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  integer-power-add-Group :
+  distributive-integer-power-add-Group :
     (x y : ℤ) →
     ( integer-power-Group G (x +ℤ y) g) ＝
     ( mul-Group G
       ( integer-power-Group G x g)
       ( integer-power-Group G y g))
-  integer-power-add-Group x y =
+  distributive-integer-power-add-Group x y =
     ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
     ( ( ap
         ( iterated-multiplication-by-element-Group G g x)
@@ -291,8 +291,8 @@ module _
 
   preserves-powers-hom-Group :
     (n : ℕ) (x : type-Group G) →
-    map-hom-Group G H f (power-nat-Group G n x) ＝
-    power-nat-Group H n (map-hom-Group G H f x)
+    map-hom-Group G H f (power-Group G n x) ＝
+    power-Group H n (map-hom-Group G H f x)
   preserves-powers-hom-Group =
     preserves-powers-hom-Monoid
       ( monoid-Group G)
