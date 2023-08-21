@@ -151,6 +151,6 @@ is-contained-in-prime-ideal-nilradical-Commutative-Ring :
   is-in-prime-ideal-Commutative-Ring R P x
 is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
   is-in-prime-ideal-is-in-radical-ideal-Commutative-Ring R P x
-    (is-contained-in-radical-ideal-nilradical-Commutative-Ring R
-      (radical-ideal-prime-ideal-Commutative-Ring R P) x p)
+    ( is-contained-in-radical-ideal-nilradical-Commutative-Ring R
+      ( radical-ideal-prime-ideal-Commutative-Ring R P) x p)
 ```
