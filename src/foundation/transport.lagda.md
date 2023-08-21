@@ -142,7 +142,7 @@ module _
 
 #### Coherences and algebraic identities for tr³
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
   {B : A → UU l2}
