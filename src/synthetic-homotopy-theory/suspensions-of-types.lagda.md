@@ -79,6 +79,92 @@ pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
 
 ## Properties
 
+
+### The suspension of X has the universal property of suspensions
+
+```agda
+module _
+  {l1 : Level} (X : UU l1)
+  where
+
+  up-suspension :
+    {l : Level} →
+    universal-property-suspension l X
+      ( suspension X)
+      ( suspension-structure-suspension X)
+  up-suspension Z =
+    is-equiv-htpy
+      ( ev-suspension (suspension-structure-suspension X) Z)
+      ( triangle-ev-suspension
+        { X = X}
+        { Y = suspension X}
+        ( suspension-structure-suspension X) Z)
+      ( is-equiv-map-equiv
+        ( ( comparison-suspension-cocone X Z) ∘e
+          ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
+
+  equiv-up-suspension :
+    {l : Level} (Z : UU l) → (suspension X → Z) ≃ (suspension-structure X Z)
+  pr1 (equiv-up-suspension Z) =
+    ev-suspension (suspension-structure-suspension X) Z
+  pr2 (equiv-up-suspension Z) = up-suspension Z
+
+  map-inv-up-suspension :
+    {l : Level} (Z : UU l) → suspension-structure X Z → suspension X → Z
+  map-inv-up-suspension Z =
+    map-inv-equiv (equiv-up-suspension Z)
+
+  is-section-map-inv-up-suspension :
+    {l : Level} (Z : UU l) →
+    ( ( ev-suspension ((suspension-structure-suspension X)) Z) ∘
+      ( map-inv-up-suspension Z)) ~ id
+  is-section-map-inv-up-suspension Z =
+    is-section-map-inv-is-equiv (up-suspension Z)
+
+  is-retraction-map-inv-up-suspension :
+    {l : Level} (Z : UU l) →
+    ( ( map-inv-up-suspension Z) ∘
+      ( ev-suspension ((suspension-structure-suspension X)) Z)) ~ id
+  is-retraction-map-inv-up-suspension Z =
+    is-retraction-map-inv-is-equiv (up-suspension Z)
+
+  up-suspension-N-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+    (map-inv-up-suspension Z c N-susp) ＝ pr1 c
+  up-suspension-N-susp Z c =
+    pr1 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c))
+
+  up-suspension-S-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+    (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
+  up-suspension-S-susp Z c =
+    pr1
+      ( pr2
+        ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
+
+  up-suspension-merid-susp :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
+    ( ( ap (map-inv-up-suspension Z c) (merid-susp x)) ∙
+      ( up-suspension-S-susp Z c)) ＝
+    ( ( up-suspension-N-susp Z c) ∙ ( pr2 (pr2 c)) x)
+  up-suspension-merid-susp Z c =
+    pr2
+      ( pr2
+        ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
+
+  ev-suspension-up-suspension :
+    {l : Level} (Z : UU l) (c : suspension-structure X Z) →
+    ( ev-suspension
+      ( suspension-structure-suspension X)
+      ( Z)
+      ( map-inv-up-suspension Z c)) ＝ c
+  ev-suspension-up-suspension {l} Z c =
+    eq-htpy-suspension-structure
+      ( ( up-suspension-N-susp Z c) ,
+        ( ( up-suspension-S-susp Z c) ,
+          ( up-suspension-merid-susp Z c)))
+```
+
 ### The suspension of a contractible type is contractible
 
 ```agda
