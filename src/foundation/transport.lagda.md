@@ -146,11 +146,11 @@ module _
 ```
 module _
   {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
-  (B : A → UU l2)
+  {B : A → UU l2}
   where
   
-  tr-htpy-swap-path-swap :
-    {p p' : a0 ＝ a1} (α : p ＝ p') {q q' : a1 ＝ a2 } (β : q ＝ q') (b0 : B a0) →
+  tr³-htpy-swap-path-swap :
+    {q q' : a1 ＝ a2 } (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') (b0 : B a0) →
     coherence-square-identifications
       ( identification-right-whisk (tr³ B (path-swap-nat-identification-left-whisk β α) b0) (tr-concat p' q' b0))
       ( (identification-right-whisk
@@ -185,5 +185,5 @@ module _
       ( identification-left-whisk
         ( tr-concat p q b0)
         ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b0))
-  tr-htpy-swap-path-swap {p = refl} refl {q = refl} refl b0 = refl
+  tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b0 = refl
 ```
