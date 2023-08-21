@@ -15,6 +15,7 @@ open import foundation.constant-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
@@ -90,8 +91,6 @@ module _
 
 ### Equivalence between suspension structures and suspension cocones
 
-TODO add in cocone-suspension-structure is map-comparisons-suspension-cocone
-
 ```agda
 cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
@@ -127,6 +126,30 @@ is-equiv-map-comparison-suspension-cocone :
   is-equiv (map-comparison-suspension-cocone X Z)
 is-equiv-map-comparison-suspension-cocone X Z =
   is-equiv-map-equiv (comparison-suspension-cocone X Z)
+
+htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+    ( map-inv-equiv (comparison-suspension-cocone X Z))
+  ~
+    ( cocone-suspension-structure  X Z)
+htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
+ X Z x =
+   map-inv-equiv
+     ( equiv-ap-emb (emb-equiv (comparison-suspension-cocone X Z)))
+     ( is-section-map-inv-equiv (comparison-suspension-cocone X Z) x)
+
+is-equiv-map-inv-comparison-suspension-cocone :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+  is-equiv (cocone-suspension-structure  X Z)
+is-equiv-map-inv-comparison-suspension-cocone X Z =
+  is-equiv-htpy
+    ( map-inv-equiv (comparison-suspension-cocone X Z))
+    ( inv-htpy
+      ( htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
+        ( X)
+        ( Z)))
+    ( is-equiv-map-inv-equiv (comparison-suspension-cocone X Z))  
+  
 ```
 
 #### Characterization of equalities in `suspension-structure`
