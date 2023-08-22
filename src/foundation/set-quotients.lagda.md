@@ -139,8 +139,7 @@ module _
     ( class R)
 
   is-image-set-quotient :
-    {l : Level} →
-    is-image l
+    is-image
       ( prop-Equivalence-Relation R)
       ( emb-subtype-set-quotient)
       ( unit-im-set-quotient)

@@ -17,6 +17,7 @@ open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.groups
+open import group-theory.homomorphisms-monoids
 open import group-theory.homomorphisms-semigroups
 ```
 
@@ -263,20 +264,34 @@ module _
 ### Group homomorphisms preserve all group structure
 
 ```agda
-hom-Group' :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) → UU (l1 ⊔ l2)
-hom-Group' G H =
-  Σ ( type-hom-Group G H)
-    ( λ f →
-      ( preserves-unit-Group G H (map-hom-Group G H f)) ×
-      ( preserves-inverses-Group G H (map-hom-Group G H f)))
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2)
+  where
 
-preserves-group-structure-hom-Group :
-  { l1 l2 : Level} (G : Group l1) (H : Group l2) →
-  type-hom-Group G H → hom-Group' G H
-pr1 (preserves-group-structure-hom-Group G H f) = f
-pr1 (pr2 (preserves-group-structure-hom-Group G H f)) =
-  preserves-unit-hom-Group G H f
-pr2 (pr2 (preserves-group-structure-hom-Group G H f)) =
-  preserves-inv-hom-Group G H f
+  hom-Group' : UU (l1 ⊔ l2)
+  hom-Group' =
+    Σ ( type-hom-Group G H)
+      ( λ f →
+        ( preserves-unit-Group G H (map-hom-Group G H f)) ×
+        ( preserves-inverses-Group G H (map-hom-Group G H f)))
+
+  preserves-group-structure-hom-Group :
+    type-hom-Group G H → hom-Group'
+  pr1 (preserves-group-structure-hom-Group f) = f
+  pr1 (pr2 (preserves-group-structure-hom-Group f)) =
+    preserves-unit-hom-Group G H f
+  pr2 (pr2 (preserves-group-structure-hom-Group f)) =
+    preserves-inv-hom-Group G H f
+```
+
+### Group homomorphisms induce monoid homomorphisms between the underlying monoids
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  where
+
+  hom-monoid-hom-Group : type-hom-Monoid (monoid-Group G) (monoid-Group H)
+  pr1 hom-monoid-hom-Group = f
+  pr2 hom-monoid-hom-Group = preserves-unit-hom-Group G H f
 ```
