@@ -74,7 +74,8 @@ south-suspension {X = X} =
   inr-pushout (const X unit star) (const X unit star) star
 
 meridian-suspension :
-  {l : Level} {X : UU l} → X → Id (north-suspension {X = X}) (south-suspension {X = X})
+  {l : Level} {X : UU l} → X →
+  Id (north-suspension {X = X}) (south-suspension {X = X})
 meridian-suspension {X = X} =
   glue-pushout (const X unit star) (const X unit star)
 
