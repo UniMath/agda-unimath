@@ -140,7 +140,7 @@ module _
   tr²-right-whisk refl refl b0 = inv right-unit
 ```
 
-#### Coherences and algebraic identities for tr³
+#### Coherences and algebraic identities for `tr³`
 
 ```agda
 module _

@@ -158,7 +158,7 @@ horizontal-concat-Id² :
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
 ```
 
-#### Related operations
+#### Identification whiskering
 
 ```agda
 module _
@@ -174,7 +174,7 @@ module _
   identification-right-whisk α q = horizontal-concat-Id² α (refl {x = q})
 
   htpy-identification-left-whisk :
-    {q q' : a1 ＝ a2} → q ＝ q' → (λ p → p ∙ q) ~ (λ p → p ∙ q')
+    {q q' : a1 ＝ a2} → q ＝ q' → (_∙ q) ~ (_∙ q')
   htpy-identification-left-whisk β p = identification-left-whisk p β
 ```
 
@@ -217,7 +217,7 @@ right-unit-law-horizontal-concat-Id² :
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
 ```
 
-#### The above operations allow "swapping paths"
+#### The whiskering operations allow us to commute higher identifications
 
 ```agda
 module _
