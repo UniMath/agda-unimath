@@ -61,11 +61,11 @@ dependent-ev-suspension :
   ((y : Y) → B y) →
   dependent-suspension-structure susp-str B
 pr1 (dependent-ev-suspension susp-str B s) =
-  s (N-suspension-structure susp-str)
+  s (north-suspension-structure susp-str)
 pr1 (pr2 (dependent-ev-suspension susp-str B s)) =
-  s (S-suspension-structure susp-str)
+  s (south-suspension-structure susp-str)
 pr2 (pr2 (dependent-ev-suspension susp-str B s)) =
-  (apd s) ∘ (merid-suspension-structure susp-str)
+  (apd s) ∘ (meridian-suspension-structure susp-str)
 
 module _
   (l : Level) {l1 l2 : Level} {X : UU l1} {Y : UU l2}

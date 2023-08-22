@@ -104,16 +104,16 @@ module _
   {l1 l2 : Level} {X : UU l1} {Y : UU l2}
   where
 
-  N-suspension-structure : suspension-structure X Y → Y
-  N-suspension-structure c = pr1 c
+  north-suspension-structure : suspension-structure X Y → Y
+  north-suspension-structure c = pr1 c
 
-  S-suspension-structure : suspension-structure X Y → Y
-  S-suspension-structure c = (pr1 ∘ pr2) c
+  south-suspension-structure : suspension-structure X Y → Y
+  south-suspension-structure c = (pr1 ∘ pr2) c
 
-  merid-suspension-structure :
+  meridian-suspension-structure :
     (c : suspension-structure X Y) →
-    X → N-suspension-structure c ＝ S-suspension-structure c
-  merid-suspension-structure c = (pr2 ∘ pr2) c
+    X → north-suspension-structure c ＝ south-suspension-structure c
+  meridian-suspension-structure c = (pr2 ∘ pr2) c
 ```
 
 ## Properties
@@ -192,13 +192,13 @@ module _
   htpy-suspension-structure :
     (c c' : suspension-structure X Z) → UU (l1 ⊔ l2)
   htpy-suspension-structure c c' =
-    Σ ( (N-suspension-structure c) ＝ (N-suspension-structure c'))
+    Σ ( (north-suspension-structure c) ＝ (north-suspension-structure c'))
       ( λ p →
-        Σ ( ( S-suspension-structure c) ＝ ( S-suspension-structure c'))
+        Σ ( ( south-suspension-structure c) ＝ ( south-suspension-structure c'))
           ( λ q →
             ( x : X) →
-            ( merid-suspension-structure c x ∙ q) ＝
-            ( p ∙ merid-suspension-structure c' x)))
+            ( meridian-suspension-structure c x ∙ q) ＝
+            ( p ∙ meridian-suspension-structure c' x)))
 
   extensionality-suspension-structure :
     (c c' : suspension-structure X Z) →

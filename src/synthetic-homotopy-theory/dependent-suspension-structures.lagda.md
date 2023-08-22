@@ -113,43 +113,43 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-  (susp-str : suspension-structure X Y)
+  (ss : suspension-structure X Y)
   (B : Y → UU l3)
   where
 
   dependent-suspension-structure : UU (l1 ⊔ l3)
   dependent-suspension-structure =
-    Σ ( B (N-suspension-structure susp-str))
+    Σ ( B (north-suspension-structure ss))
       ( λ N →
-        Σ ( B (S-suspension-structure susp-str))
+        Σ ( B (south-suspension-structure ss))
           ( λ S →
             (x : X) →
             dependent-identification
               ( B)
-              ( merid-suspension-structure susp-str x)
+              ( meridian-suspension-structure ss x)
               ( N)
               ( S)))
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {B : Y → UU l3}
-  {susp-str : suspension-structure X Y}
-  (d-susp-str : dependent-suspension-structure susp-str B)
+  {ss : suspension-structure X Y}
+  (d-ss : dependent-suspension-structure ss B)
   where
 
-  N-dependent-suspension-structure : B (N-suspension-structure susp-str)
-  N-dependent-suspension-structure = pr1 (d-susp-str)
+  north-dependent-suspension-structure : B (north-suspension-structure ss)
+  north-dependent-suspension-structure = pr1 (d-ss)
 
-  S-dependent-suspension-structure : B (S-suspension-structure susp-str)
-  S-dependent-suspension-structure = (pr1 ∘ pr2) (d-susp-str)
+  south-dependent-suspension-structure : B (south-suspension-structure ss)
+  south-dependent-suspension-structure = (pr1 ∘ pr2) (d-ss)
 
-  merid-dependent-suspension-structure :
+  meridian-dependent-suspension-structure :
     (x : X) →
     dependent-identification
       ( B)
-      ( merid-suspension-structure susp-str x)
-      ( N-dependent-suspension-structure)
-      ( S-dependent-suspension-structure)
-  merid-dependent-suspension-structure = (pr2 ∘ pr2) (d-susp-str)
+      ( meridian-suspension-structure ss x)
+      ( north-dependent-suspension-structure)
+      ( south-dependent-suspension-structure)
+  meridian-dependent-suspension-structure = (pr2 ∘ pr2) (d-ss)
 ```
 
 ## Properties
@@ -163,47 +163,47 @@ Soon TODO
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  {susp-str : suspension-structure X Y}
-  (d-susp-str0 d-susp-str1 : dependent-suspension-structure susp-str B)
+  {ss : suspension-structure X Y}
+  (d-ss d-ss' : dependent-suspension-structure ss B)
   where
 
   htpy-dependent-suspension-structure : UU (l1 ⊔ l3)
   htpy-dependent-suspension-structure =
-    Σ ( N-dependent-suspension-structure d-susp-str0 ＝
-        N-dependent-suspension-structure d-susp-str1)
+    Σ ( north-dependent-suspension-structure d-ss ＝
+        north-dependent-suspension-structure d-ss')
       ( λ N-htpy →
-        Σ ( S-dependent-suspension-structure d-susp-str0 ＝
-            S-dependent-suspension-structure d-susp-str1)
+        Σ ( south-dependent-suspension-structure d-ss ＝
+            south-dependent-suspension-structure d-ss')
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( merid-dependent-suspension-structure d-susp-str0 x)
+              ( meridian-dependent-suspension-structure d-ss x)
               ( S-htpy)
               ( ap
-                ( tr B (merid-suspension-structure susp-str x))
+                ( tr B (meridian-suspension-structure ss x))
                 ( N-htpy))
-              ( merid-dependent-suspension-structure d-susp-str1 x)))
+              ( meridian-dependent-suspension-structure d-ss' x)))
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  {susp-str : suspension-structure X Y}
-  (d-susp-str0 : dependent-suspension-structure susp-str B)
+  {ss : suspension-structure X Y}
+  (d-ss : dependent-suspension-structure ss B)
   where
 
   extensionality-dependent-suspension-structure :
-    ( d-susp-str1 : dependent-suspension-structure susp-str B) →
-    ( d-susp-str0 ＝ d-susp-str1) ≃
-    ( htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1)
+    ( d-ss' : dependent-suspension-structure ss B) →
+    ( d-ss ＝ d-ss') ≃
+    ( htpy-dependent-suspension-structure B d-ss d-ss')
   extensionality-dependent-suspension-structure =
     extensionality-Σ
       ( λ (S , m) (N-htpy) →
-        Σ (S-dependent-suspension-structure d-susp-str0 ＝ S)
+        Σ (south-dependent-suspension-structure d-ss ＝ S)
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( merid-dependent-suspension-structure d-susp-str0 x)
+              ( meridian-dependent-suspension-structure d-ss x)
               ( S-htpy)
-              ( ap (tr B (merid-suspension-structure susp-str x)) N-htpy)
+              ( ap (tr B (meridian-suspension-structure ss x)) N-htpy)
               ( m x)))
       ( refl)
       ( refl , λ x → right-unit)
@@ -211,7 +211,7 @@ module _
       ( extensionality-Σ
         ( λ m S-htpy →
           (x : X) →
-          ( merid-dependent-suspension-structure d-susp-str0 x ∙ S-htpy) ＝
+          ( meridian-dependent-suspension-structure d-ss x ∙ S-htpy) ＝
           ( m x))
         ( refl)
         ( λ x → right-unit)
@@ -221,32 +221,32 @@ module _
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  {susp-str : suspension-structure X Y}
-  {d-susp-str0 d-susp-str1 : dependent-suspension-structure susp-str B}
+  {ss : suspension-structure X Y}
+  {d-ss d-ss' : dependent-suspension-structure ss B}
   where
 
   htpy-eq-dependent-suspension-structure :
-    (d-susp-str0 ＝ d-susp-str1) →
-    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1
+    (d-ss ＝ d-ss') →
+    htpy-dependent-suspension-structure B d-ss d-ss'
   htpy-eq-dependent-suspension-structure =
     map-equiv
-      ( extensionality-dependent-suspension-structure B d-susp-str0 d-susp-str1)
+      ( extensionality-dependent-suspension-structure B d-ss d-ss')
 
   eq-htpy-dependent-suspension-structure :
-    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 →
-    d-susp-str0 ＝ d-susp-str1
+    htpy-dependent-suspension-structure B d-ss d-ss' →
+    d-ss ＝ d-ss'
   eq-htpy-dependent-suspension-structure =
     map-inv-equiv
-      ( extensionality-dependent-suspension-structure B d-susp-str0 d-susp-str1)
+      ( extensionality-dependent-suspension-structure B d-ss d-ss')
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  {susp-str : suspension-structure X Y}
-  (d-susp-str : dependent-suspension-structure susp-str B)
+  {ss : suspension-structure X Y}
+  (d-ss : dependent-suspension-structure ss B)
   where
 
   refl-htpy-dependent-suspension-structure :
-    htpy-dependent-suspension-structure B d-susp-str d-susp-str
+    htpy-dependent-suspension-structure B d-ss d-ss
   pr1 refl-htpy-dependent-suspension-structure = refl
   pr1 (pr2 refl-htpy-dependent-suspension-structure) = refl
   pr2 (pr2 refl-htpy-dependent-suspension-structure) x = right-unit

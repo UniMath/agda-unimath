@@ -63,23 +63,23 @@ suspension :
   {l : Level} → UU l → UU l
 suspension X = pushout (const X unit star) (const X unit star)
 
-N-susp :
+north-suspension :
   {l : Level} {X : UU l} → suspension X
-N-susp {X = X} = inl-pushout (const X unit star) (const X unit star) star
+north-suspension {X = X} = inl-pushout (const X unit star) (const X unit star) star
 
-S-susp :
+south-suspension :
   {l : Level} {X : UU l} → suspension X
-S-susp {X = X} = inr-pushout (const X unit star) (const X unit star) star
+south-suspension {X = X} = inr-pushout (const X unit star) (const X unit star) star
 
-merid-susp :
-  {l : Level} {X : UU l} → X → Id (N-susp {X = X}) (S-susp {X = X})
-merid-susp {X = X} = glue-pushout (const X unit star) (const X unit star)
+meridian-suspension :
+  {l : Level} {X : UU l} → X → Id (north-suspension {X = X}) (south-suspension {X = X})
+meridian-suspension {X = X} = glue-pushout (const X unit star) (const X unit star)
 
 suspension-structure-suspension :
   {l : Level} (X : UU l) → suspension-structure X (suspension X)
-pr1 (suspension-structure-suspension X) = N-susp
-pr1 (pr2 (suspension-structure-suspension X)) = S-susp
-pr2 (pr2 (suspension-structure-suspension X)) = merid-susp
+pr1 (suspension-structure-suspension X) = north-suspension
+pr1 (pr2 (suspension-structure-suspension X)) = south-suspension
+pr2 (pr2 (suspension-structure-suspension X)) = meridian-suspension
 ```
 
 ## Properties
@@ -132,26 +132,26 @@ module _
   is-retraction-map-inv-up-suspension Z =
     is-retraction-map-inv-is-equiv (up-suspension Z)
 
-  up-suspension-N-susp :
+  up-suspension-north-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
-    (map-inv-up-suspension Z c N-susp) ＝ pr1 c
-  up-suspension-N-susp Z c =
+    (map-inv-up-suspension Z c north-suspension) ＝ pr1 c
+  up-suspension-north-suspension Z c =
     pr1 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c))
 
-  up-suspension-S-susp :
+  up-suspension-south-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
-    (map-inv-up-suspension Z c S-susp) ＝ pr1 (pr2 c)
-  up-suspension-S-susp Z c =
+    (map-inv-up-suspension Z c south-suspension) ＝ pr1 (pr2 c)
+  up-suspension-south-suspension Z c =
     pr1
       ( pr2
         ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
 
-  up-suspension-merid-susp :
+  up-suspension-meridian-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
-    ( ( ap (map-inv-up-suspension Z c) (merid-susp x)) ∙
-      ( up-suspension-S-susp Z c)) ＝
-    ( ( up-suspension-N-susp Z c) ∙ ( pr2 (pr2 c)) x)
-  up-suspension-merid-susp Z c =
+    ( ( ap (map-inv-up-suspension Z c) (meridian-suspension x)) ∙
+      ( up-suspension-south-suspension Z c)) ＝
+    ( ( up-suspension-north-suspension Z c) ∙ ( pr2 (pr2 c)) x)
+  up-suspension-meridian-suspension Z c =
     pr2
       ( pr2
         ( htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c)))
@@ -164,9 +164,9 @@ module _
       ( map-inv-up-suspension Z c)) ＝ c
   ev-suspension-up-suspension {l} Z c =
     eq-htpy-suspension-structure
-      ( ( up-suspension-N-susp Z c) ,
-        ( ( up-suspension-S-susp Z c) ,
-          ( up-suspension-merid-susp Z c)))
+      ( ( up-suspension-north-suspension Z c) ,
+        ( ( up-suspension-south-suspension Z c) ,
+          ( up-suspension-meridian-suspension Z c)))
 ```
 
 ### The suspension of a contractible type is contractible

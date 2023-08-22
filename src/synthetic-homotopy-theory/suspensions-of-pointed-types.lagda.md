@@ -58,7 +58,7 @@ When `X` is a pointed type, the suspension of `X` has nice properties
 suspension-Pointed-Type :
   {l : Level} → Pointed-Type l → Pointed-Type l
 pr1 (suspension-Pointed-Type X) = suspension (type-Pointed-Type X)
-pr2 (suspension-Pointed-Type X) = N-susp
+pr2 (suspension-Pointed-Type X) = north-suspension
 ```
 
 #### Suspension structure induced by a pointed type
