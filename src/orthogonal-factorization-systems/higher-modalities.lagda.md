@@ -21,6 +21,7 @@ open import foundation.universe-levels
 open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.locally-small-modal-operators
 open import orthogonal-factorization-systems.modal-operators
+open import orthogonal-factorization-systems.subuniverse-induction-modalities
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
 
@@ -80,17 +81,17 @@ module _
 ### Components of a `is-higher-modality` proof
 
 ```agda
-  ind-modality-is-higher-modality : is-higher-modality → ind-modality unit-○
-  ind-modality-is-higher-modality = pr1 ∘ pr1
+  ind-is-higher-modality : is-higher-modality → ind-modality unit-○
+  ind-is-higher-modality = pr1 ∘ pr1
 
   rec-modality-is-higher-modality : is-higher-modality → rec-modality unit-○
   rec-modality-is-higher-modality =
-    rec-ind-modality unit-○ ∘ ind-modality-is-higher-modality
+    rec-ind-modality unit-○ ∘ ind-is-higher-modality
 
-  compute-ind-modality-is-higher-modality :
+  compute-ind-is-higher-modality :
     (h : is-higher-modality) →
-    compute-ind-modality unit-○ (ind-modality-is-higher-modality h)
-  compute-ind-modality-is-higher-modality = pr2 ∘ pr1
+    compute-ind-modality unit-○ (ind-is-higher-modality h)
+  compute-ind-is-higher-modality = pr2 ∘ pr1
 
   is-modal-identity-types-is-higher-modality :
     is-higher-modality → is-modal-identity-types
@@ -140,10 +141,10 @@ module _
       ( unit-higher-modality)
   is-higher-modality-higher-modality = pr2 (pr2 h)
 
-  ind-modality-higher-modality :
+  ind-higher-modality :
     ind-modality (unit-higher-modality)
-  ind-modality-higher-modality =
-    ind-modality-is-higher-modality
+  ind-higher-modality =
+    ind-is-higher-modality
       ( locally-small-operator-higher-modality)
       ( unit-higher-modality)
       ( is-higher-modality-higher-modality)
@@ -153,14 +154,14 @@ module _
   rec-modality-higher-modality =
     rec-ind-modality
       ( unit-higher-modality)
-      ( ind-modality-higher-modality)
+      ( ind-higher-modality)
 
-  compute-ind-modality-higher-modality :
+  compute-ind-higher-modality :
     compute-ind-modality
       ( unit-higher-modality)
-      ( ind-modality-higher-modality)
-  compute-ind-modality-higher-modality =
-    compute-ind-modality-is-higher-modality
+      ( ind-higher-modality)
+  compute-ind-higher-modality =
+    compute-ind-is-higher-modality
       ( locally-small-operator-higher-modality)
       ( unit-higher-modality)
       ( is-higher-modality-higher-modality)
@@ -178,24 +179,59 @@ module _
 
 ## Properties
 
-### Modal identity elimination
+### Subuniverse induction for higher modalities
 
 ```agda
 module _
+  {l : Level} (m : higher-modality l l)
+  where
+
+  ind-subuniverse-higher-modality :
+    ind-subuniverse-modality (unit-higher-modality m)
+  ind-subuniverse-higher-modality =
+    ind-subuniverse-ind-modality
+      ( unit-higher-modality m)
+      ( ind-higher-modality m)
+
+  compute-ind-subuniverse-higher-modality :
+    compute-ind-subuniverse-modality
+      ( unit-higher-modality m)
+      ( ind-subuniverse-higher-modality)
+  compute-ind-subuniverse-higher-modality =
+    compute-ind-subuniverse-ind-modality
+      ( unit-higher-modality m)
+      ( ind-higher-modality m)
+      ( compute-ind-higher-modality m)
+```
+
+### Modal identity elimination
+
+```agda
+elim-Id-higher-modality' :
   {l1 l2 : Level}
   ((○ , is-locally-small-○) : locally-small-operator-modality l1 l2 l1)
   (unit-○ : unit-modality ○)
   (Id-○ : is-modal-identity-types (○ , is-locally-small-○) unit-○)
-  where
+  {X : UU l1} {x' y' : ○ X} →
+  ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
+elim-Id-higher-modality' (○ , is-locally-small-○) unit-○ Id-○ {X} {x'} {y'} =
+  map-inv-unit-is-modal-type-is-small unit-○
+    ( x' ＝ y')
+    ( is-locally-small-○ X x' y')
+    ( Id-○ X x' y')
 
-  elim-Id-higher-modality :
-    {X : UU l1} {x' y' : ○ X} →
-    ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
-  elim-Id-higher-modality {X} {x'} {y'} =
-    map-inv-unit-is-modal-type-is-small unit-○
-      ( x' ＝ y')
-      ( is-locally-small-○ X x' y')
-      ( Id-○ X x' y')
+elim-Id-higher-modality :
+  {l1 l2 : Level}
+  (m : higher-modality l1 l2)
+  {X : UU l1} {x' y' : operator-higher-modality m X} →
+  operator-higher-modality m
+    ( type-is-small (is-locally-small-operator-higher-modality m X x' y')) →
+  x' ＝ y'
+elim-Id-higher-modality m =
+  elim-Id-higher-modality'
+    ( locally-small-operator-higher-modality m)
+    ( unit-higher-modality m)
+    ( is-modal-identity-types-higher-modality m)
 ```
 
 ### For homogenous higher modalities, The identity types of modal types are modal in the usual sense
