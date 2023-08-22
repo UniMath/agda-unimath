@@ -67,42 +67,59 @@ module _
   {l1 : Level} (X : Pointed-Type l1)
   where
 
-  shift : (type-Ω (suspension-Pointed-Type X)) → (north-suspension ＝ south-suspension)
+  shift :
+    (type-Ω (suspension-Pointed-Type X)) → (north-suspension ＝ south-suspension)
   shift l = l ∙ (meridian-suspension (point-Pointed-Type X))
 
   shift∗ :
     Ω (suspension-Pointed-Type X) →∗
-    ((north-suspension ＝ south-suspension) , (meridian-suspension (point-Pointed-Type X)))
+    (pair
+      ( north-suspension ＝ south-suspension)
+      (meridian-suspension (point-Pointed-Type X)))
   pr1 shift∗ = shift
   pr2 shift∗ = refl
 
-  unshift : (north-suspension ＝ south-suspension) → (type-Ω (suspension-Pointed-Type X))
+  unshift :
+    (north-suspension ＝ south-suspension) →
+    (type-Ω (suspension-Pointed-Type X))
   unshift p = p ∙ inv (meridian-suspension (point-Pointed-Type X))
 
   unshift∗ :
-    ((north-suspension ＝ south-suspension) , (meridian-suspension (point-Pointed-Type X))) →∗
+    (pair
+      ( north-suspension ＝ south-suspension)
+      ( meridian-suspension (point-Pointed-Type X))) →∗
     Ω (suspension-Pointed-Type X)
   pr1 unshift∗ = unshift
   pr2 unshift∗ = right-inv (meridian-suspension (point-Pointed-Type X))
 
   is-equiv-shift : is-equiv shift
-  is-equiv-shift = is-equiv-concat' north-suspension (meridian-suspension (point-Pointed-Type X))
+  is-equiv-shift =
+    is-equiv-concat'
+      ( north-suspension)
+      ( meridian-suspension (point-Pointed-Type X))
 
   pointed-equiv-shift :
     ( Ω (suspension-Pointed-Type X)) ≃∗
-    ( (north-suspension ＝ south-suspension) , meridian-suspension (point-Pointed-Type X))
+    ( pair
+      ( north-suspension ＝ south-suspension)
+      ( meridian-suspension (point-Pointed-Type X)))
   pr1 (pr1 pointed-equiv-shift) = shift
   pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
   pr2 pointed-equiv-shift = preserves-point-pointed-map shift∗
 
-  meridian-suspension∗ : X →∗ ((north-suspension ＝ south-suspension) , (meridian-suspension (point-Pointed-Type X)))
+  meridian-suspension∗ :
+    X →∗
+    ( pair
+      ( north-suspension ＝ south-suspension)
+      ( meridian-suspension (point-Pointed-Type X)))
   pr1 meridian-suspension∗ = meridian-suspension
   pr2 meridian-suspension∗ = refl
 
   unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj∗ = unshift∗ ∘∗ meridian-suspension∗
 
-  unit-susp-loop-adj : type-Pointed-Type X → type-Ω (suspension-Pointed-Type X)
+  unit-susp-loop-adj : type-Pointed-Type X →
+    type-Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
 
   counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
