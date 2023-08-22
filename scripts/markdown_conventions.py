@@ -70,7 +70,7 @@ if __name__ == '__main__':
         offender_line_number, offender_is_closing = find_ill_formed_block(
             output)
 
-        if offender_line_number:
+        if offender_line_number is not None:
             if offender_is_closing:
                 print(
                     f"Error! File '{fpath}' line {offender_line_number} contains an untagged opening code guard, or a misplaced closing guard. Please note that untagged code blocks are disallowed.", file=sys.stderr)
