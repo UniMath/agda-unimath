@@ -35,10 +35,8 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
-Note that the title of the file must be on one line, even if it contains more
-than 80 characters. Titles that go over the 80 character limit don't trigger an
-error in the
-[pre-commit hooks](https://unimath.github.io/agda-unimath/CONTRIBUTING.html#the-make-pre-commit-tool).
+Note that the title of the file and other markdown headers must be on one line,
+even if it contains more than 80 characters.
 
 Directly after the header, include an Agda code block containing
 
@@ -139,7 +137,7 @@ contents of the file.
   `[The univalence axiom](foundation.univalence.md)`, which will be displayed as
   [The univalence axiom](foundation.univalence.md).
 - You can reference another module by module name using
-  ``[`foundation.univalence`](foundation.univalence.md)``, which will be
+  `` [`foundation.univalence`](foundation.univalence.md) ``, which will be
   displayed as [`foundation.univalence`](foundation.univalence.md).
 - If you just want to add a clickable link, use the pattern
   `<https://unimath.github.io/agda-unimath/>`. This will be displayed as

@@ -54,6 +54,9 @@
 
   "editor.tabSize": 2,
 
+  // GitHub
+  "githubPullRequests.ignoredPullRequestBranches": ["master"],
+
   // File type specific
   "files.associations": {
     "*.lock": "json"
