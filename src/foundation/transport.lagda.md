@@ -39,15 +39,15 @@ recorded in this file.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {x y : A} {p0 p1 : x ＝ y}
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' : x ＝ y}
   where
 
-  tr² : (B : A → UU l2) (α : p0 ＝ p1) (b : B x) → (tr B p0 b) ＝ (tr B p1 b)
+  tr² : (B : A → UU l2) (α : p ＝ p') (b : B x) → (tr B p b) ＝ (tr B p' b)
   tr² B α b = ap (λ t → tr B t b) α
 
 module _
-  {l1 l2 : Level} {A : UU l1} {x y : A} {p0 p1 : x ＝ y}
-  {α α' : p0 ＝ p1}
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' : x ＝ y}
+  {α α' : p ＝ p'}
   where
 
   tr³ : (B : A → UU l2) (β : α ＝ α') (b : B x) → (tr² B α b) ＝ (tr² B α' b)
