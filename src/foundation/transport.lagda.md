@@ -39,19 +39,19 @@ recorded in this file.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p0 p1 : x ＝ y}
   where
 
-  tr² : (B : A → UU l2) (α : p0 ＝ p1) (b0 : B a0) → (tr B p0 b0) ＝ (tr B p1 b0)
-  tr² B α b0 = ap (λ t → tr B t b0) α
+  tr² : (B : A → UU l2) (α : p0 ＝ p1) (b : B x) → (tr B p0 b) ＝ (tr B p1 b)
+  tr² B α b = ap (λ t → tr B t b) α
 
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A} {p0 p1 : a0 ＝ a1}
+  {l1 l2 : Level} {A : UU l1} {x y : A} {p0 p1 : x ＝ y}
   {α α' : p0 ＝ p1}
   where
 
-  tr³ : (B : A → UU l2) (β : α ＝ α') (b0 : B a0) → (tr² B α b0) ＝ (tr² B α' b0)
-  tr³ B β b0 = ap (λ t → tr² B t b0) β
+  tr³ : (B : A → UU l2) (β : α ＝ α') (b : B x) → (tr² B α b) ＝ (tr² B α' b)
+  tr³ B β b = ap (λ t → tr² B t b) β
 ```
 
 ## Properties
@@ -107,87 +107,87 @@ tr-subst B f refl = refl
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 : A}
+  {l1 l2 : Level} {A : UU l1} {x y : A}
   {B : A → UU l2}
   where
 
   tr²-concat :
-    {p p' p'' : a0 ＝ a1} (α : p ＝ p') (α' : p' ＝ p'') (b0 : B a0) →
-    (tr² B (α ∙ α') b0) ＝ (tr² B α b0 ∙ tr² B α' b0)
-  tr²-concat α α' b0 = ap-concat (λ t → tr B t b0) α α'
+    {p p' p'' : x ＝ y} (α : p ＝ p') (α' : p' ＝ p'') (b : B x) →
+    (tr² B (α ∙ α') b) ＝ (tr² B α b ∙ tr² B α' b)
+  tr²-concat α α' b = ap-concat (λ t → tr B t b) α α'
 
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
+  {l1 l2 : Level} {A : UU l1} {x y z : A}
   {B : A → UU l2}
   where
 
   tr²-left-whisk :
-    (p : a0 ＝ a1) {q q' : a1 ＝ a2} (β : q ＝ q') (b0 : B a0) →
+    (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
     coherence-square-identifications
-      ( tr² B (identification-left-whisk p β) b0)
-      ( tr-concat p q' b0)
-      ( tr-concat p q b0)
-      ( htpy-right-whisk (tr² B β) (tr B p) b0)
-  tr²-left-whisk refl refl b0 = refl
+      ( tr² B (identification-left-whisk p β) b)
+      ( tr-concat p q' b)
+      ( tr-concat p q b)
+      ( htpy-right-whisk (tr² B β) (tr B p) b)
+  tr²-left-whisk refl refl b = refl
 
   tr²-right-whisk :
-    {p p' : a0 ＝ a1} (α : p ＝ p') (q : a1 ＝ a2) (b0 : B a0) →
+    {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
     coherence-square-identifications
-      ( tr² B (identification-right-whisk α q) b0)
-      ( tr-concat p' q b0)
-      ( tr-concat p q b0)
-      ( htpy-left-whisk (tr B q) (tr² B α) b0)
-  tr²-right-whisk refl refl b0 = inv right-unit
+      ( tr² B (identification-right-whisk α q) b)
+      ( tr-concat p' q b)
+      ( tr-concat p q b)
+      ( htpy-left-whisk (tr B q) (tr² B α) b)
+  tr²-right-whisk refl refl b = inv right-unit
 ```
 
 #### Coherences and algebraic identities for tr³
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {a0 a1 a2 : A}
+  {l1 l2 : Level} {A : UU l1} {x y z : A}
   {B : A → UU l2}
   where
 
   tr³-htpy-swap-path-swap :
-    {q q' : a1 ＝ a2} (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') (b0 : B a0) →
+    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
     coherence-square-identifications
       ( identification-right-whisk
         ( tr³
           ( B)
           ( path-swap-nat-identification-left-whisk β α)
-          ( b0))
-        ( tr-concat p' q' b0))
+          ( b))
+        ( tr-concat p' q' b))
       ( (identification-right-whisk
         ( tr²-concat
           ( identification-right-whisk α q)
-          ( identification-left-whisk p' β) b0)
-        ( tr-concat p' q' b0)) ∙
+          ( identification-left-whisk p' β) b)
+        ( tr-concat p' q' b)) ∙
       ( vertical-concat-square
-        ( tr² B (identification-right-whisk α q) b0)
-        ( tr² B (identification-left-whisk p' β) b0)
-        ( tr-concat p' q' b0)
-        ( tr-concat p' q b0)
-        ( tr-concat p q b0)
-        ( htpy-left-whisk (tr B q) (tr² B α) b0)
-        ( htpy-right-whisk (tr² B β) (tr B p') b0)
-        ( tr²-right-whisk α q b0)
-        ( tr²-left-whisk p' β b0)))
+        ( tr² B (identification-right-whisk α q) b)
+        ( tr² B (identification-left-whisk p' β) b)
+        ( tr-concat p' q' b)
+        ( tr-concat p' q b)
+        ( tr-concat p q b)
+        ( htpy-left-whisk (tr B q) (tr² B α) b)
+        ( htpy-right-whisk (tr² B β) (tr B p') b)
+        ( tr²-right-whisk α q b)
+        ( tr²-left-whisk p' β b)))
       ( (identification-right-whisk
         ( tr²-concat (identification-left-whisk p β)
-        ( identification-right-whisk α q') b0)
-        ( tr-concat p' q' b0)) ∙
+        ( identification-right-whisk α q') b)
+        ( tr-concat p' q' b)) ∙
       (vertical-concat-square
-        ( tr² B (identification-left-whisk p β) b0)
-        ( tr² B (identification-right-whisk α q') b0)
-        ( tr-concat p' q' b0)
-        ( tr-concat p q' b0)
-        ( tr-concat p q b0)
-        ( htpy-right-whisk (tr² B β) (tr B p) b0)
-        ( htpy-left-whisk (tr B q') (tr² B α) b0)
-        ( tr²-left-whisk p β b0)
-        ( tr²-right-whisk α q' b0)))
+        ( tr² B (identification-left-whisk p β) b)
+        ( tr² B (identification-right-whisk α q') b)
+        ( tr-concat p' q' b)
+        ( tr-concat p q' b)
+        ( tr-concat p q b)
+        ( htpy-right-whisk (tr² B β) (tr B p) b)
+        ( htpy-left-whisk (tr B q') (tr² B α) b)
+        ( tr²-left-whisk p β b)
+        ( tr²-right-whisk α q' b)))
       ( identification-left-whisk
-        ( tr-concat p q b0)
-        ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b0))
-  tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b0 = refl
+        ( tr-concat p q b)
+        ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
+  tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
 ```

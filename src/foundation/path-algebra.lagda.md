@@ -158,23 +158,23 @@ horizontal-concat-Id² :
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
 ```
 
-#### Related operations
+#### Identification whiskering
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 a2 : A}
+  {l : Level} {A : UU l} {x y z : A}
   where
 
   identification-left-whisk :
-    (p : a0 ＝ a1) {q q' : a1 ＝ a2} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
-  identification-left-whisk p β = horizontal-concat-Id² (refl {x = p}) β
+    (p : x ＝ y) {q q' : y ＝ z} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
+  identification-left-whisk p β = ap (p ∙_) β
 
   identification-right-whisk :
-    {p p' : a0 ＝ a1} → p ＝ p' → (q : a1 ＝ a2) → (p ∙ q) ＝ (p' ∙ q)
-  identification-right-whisk α q = horizontal-concat-Id² α (refl {x = q})
+    {p p' : x ＝ y} → p ＝ p' → (q : y ＝ z) → (p ∙ q) ＝ (p' ∙ q)
+  identification-right-whisk α q = ap (_∙ q) α
 
   htpy-identification-left-whisk :
-    {q q' : a1 ＝ a2} → q ＝ q' → (λ p → p ∙ q) ~ (λ p → p ∙ q')
+    {q q' : y ＝ z} → q ＝ q' → (λ p → p ∙ q) ~ (λ p → p ∙ q')
   htpy-identification-left-whisk β p = identification-left-whisk p β
 ```
 
@@ -221,24 +221,18 @@ right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s �
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 a2 : A}
+  {l : Level} {A : UU l} {x y z : A}
   where
 
   path-swap-nat-identification-left-whisk :
-    {q q' : a1 ＝ a2} (β : q ＝ q') {p p' : a0 ＝ a1} (α : p ＝ p') →
+    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
     coherence-square-identifications
       ( identification-left-whisk p β)
       ( identification-right-whisk α q')
       ( identification-right-whisk α q)
       ( identification-left-whisk p' β)
   path-swap-nat-identification-left-whisk {q} {q'} β {p} {p'} α =
-    ( identification-left-whisk
-      ( identification-left-whisk p β)
-      ( right-unit-law-horizontal-concat-Id² α) ∙
-    ( nat-htpy (htpy-identification-left-whisk β) α)) ∙
-    ( identification-right-whisk
-      ( inv (right-unit-law-horizontal-concat-Id² α))
-      ( identification-left-whisk p' β))
+    ( nat-htpy (htpy-identification-left-whisk β) α)
 ```
 
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on
@@ -246,7 +240,7 @@ both the left and right) induced by the unit laws on the boundary 1-paths.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1} (α : p ＝ p')
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y} (α : p ＝ p')
   where
 
   nat-sq-right-unit-Id² :
@@ -271,7 +265,7 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1}
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y}
   where
 
   horizontal-inv-Id² : p ＝ p' → (inv p) ＝ (inv p')
@@ -283,7 +277,7 @@ This operation satisfies a left and right idenity induced by the inverse laws on
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1} (α : p ＝ p')
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y} (α : p ＝ p')
   where
 
   nat-sq-right-inv-Id² :
@@ -366,8 +360,8 @@ Functions have an induced action on 2-paths
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (f : A → B) (α : p ＝ p')
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
   where
 
   ap² : (ap f p) ＝ (ap f p')
@@ -381,8 +375,8 @@ Inverse law.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (f : A → B) (α : p ＝ p')
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
   where
 
   nat-sq-ap-inv-Id² :
@@ -401,8 +395,8 @@ Identity law and constant law.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (α : p ＝ p')
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p p' : x ＝ y} (α : p ＝ p')
   where
 
   nat-sq-ap-id-Id² :
@@ -427,7 +421,7 @@ Composition law
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {a0 a1 : A} {p p' : a0 ＝ a1} (g : B → C) (f : A → B) (α : p ＝ p')
+  {x y : A} {p p' : x ＝ y} (g : B → C) (f : A → B) (α : p ＝ p')
   where
 
   nat-sq-ap-comp-Id² :

@@ -302,20 +302,20 @@ module _
 
 ```agda
 htpy-swap-nat-right-htpy :
-  {l0 l1 l2 : Level} {X0 : UU l0} {X1 : UU l1} {X2 : UU l2}
-  {f01 g01 : X0 → X1} {f12 g12 : X1 → X2} (H12 : f12 ~ g12)
-  (H01 : f01 ~ g01) →
-  (htpy-right-whisk H12 f01 ∙h htpy-left-whisk g12 H01) ~
-  (htpy-left-whisk f12 H01 ∙h htpy-right-whisk H12 g01)
+  {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
+  {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
+  (H : f ~ g) →
+  (htpy-right-whisk H' f ∙h htpy-left-whisk g' H) ~
+  (htpy-left-whisk f' H ∙h htpy-right-whisk H' g)
 htpy-swap-nat-right-htpy
-  { f01 = f01}
-  { g01 = g01}
-  { f12 = f12}
-  { g12 = g12}
-  ( H12)
-  ( H01)
-  ( x0) =
-    nat-htpy H12 (H01 x0)
+  { f = f}
+  { g = g}
+  { f' = f'}
+  { g' = g'}
+  ( H')
+  ( H)
+  ( x) =
+    nat-htpy H' (H x)
 
 eckmann-hilton-htpy :
   {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
