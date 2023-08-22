@@ -103,7 +103,7 @@ tr-subst :
 tr-subst B f refl = refl
 ```
 
-### Coherences and algebraic identities for tr²
+### Coherences and algebraic identities for `tr²`
 
 ```agda
 module _
