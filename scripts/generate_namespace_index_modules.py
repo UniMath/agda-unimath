@@ -61,7 +61,7 @@ if __name__ == '__main__':
         title_index = contents.find('# ')
         if title_index > 0:
             print(
-                f'Warning! Namespace file {namespace_filename}\'s title is misplaced. It should be the first line in the file.', file=sys.stderr)
+                f'Warning! Namespace file {namespace_filename} should start with a top-level title.', file=sys.stderr)
             status |= MISPLACED_TITLE_FLAG
         elif title_index == -1:  # Missing title, generate it
             contents = generate_title(namespace) + contents
