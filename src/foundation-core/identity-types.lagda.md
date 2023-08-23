@@ -173,9 +173,6 @@ module _
 
 ### Transposing inverses
 
-The fact that `inv-con` and `con-inv` are equivalences is recorded in
-[`foundation.identity-types`](foundation.identity-types.md).
-
 ```agda
 inv-con :
   {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
@@ -187,6 +184,9 @@ con-inv :
   (r : x ＝ z) → ((p ∙ q) ＝ r) → p ＝ (r ∙ (inv q))
 con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
+
+The fact that `inv-con` and `con-inv` are equivalences is recorded in
+[`foundation.identity-types`](foundation.identity-types.md).
 
 ### Concatenation is injective
 
