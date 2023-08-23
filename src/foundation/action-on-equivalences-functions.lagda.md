@@ -32,14 +32,14 @@ open import foundation-core.injective-maps
 
 ```agda
 ap-eq-equiv :
-  {l1 l2 : Level} {A : UU l2} (B : UU l1 → A) {X Y : UU l1} →
-  X ≃ Y → B X ＝ B Y
-ap-eq-equiv B {X} {Y} e = ap B (eq-equiv X Y e)
+  {l1 l2 : Level} {B : UU l2} (f : UU l1 → B) {X Y : UU l1} →
+  X ≃ Y → f X ＝ f Y
+ap-eq-equiv f {X} {Y} e = ap f (eq-equiv X Y e)
 
 ap-equiv :
-  {l1 l2 : Level} (B : UU l1 → UU l2) {X Y : UU l1} →
-  X ≃ Y → B X ≃ B Y
-ap-equiv B = equiv-eq ∘ ap-eq-equiv B
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
+  X ≃ Y → f X ≃ f Y
+ap-equiv f = equiv-eq ∘ ap-eq-equiv f
 ```
 
 ## Properties
@@ -57,7 +57,7 @@ ap-equiv-id {l} {X} {Y} e =
 
 ```agda
 ap-eq-equiv-comp :
-  {l1 l2 l3 : Level} {A : UU l3} (g : UU l2 → A) (f : UU l1 → UU l2)
+  {l1 l2 l3 : Level} {C : UU l3} (g : UU l2 → C) (f : UU l1 → UU l2)
   {X Y : UU l1} → ap-eq-equiv (g ∘ f) ~ (ap-eq-equiv g ∘ ap-equiv f)
 ap-eq-equiv-comp g f {X} {Y} e =
   ( ap-comp g f (eq-equiv X Y e)) ∙
