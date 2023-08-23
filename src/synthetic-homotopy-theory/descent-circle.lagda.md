@@ -124,6 +124,23 @@ hom-descent-data-circle P Q =
         ( map-descent-data-circle P)
         ( map-descent-data-circle Q)
         ( h))
+
+module _
+  { l1 l2 : Level} (P : descent-data-circle l1) (Q : descent-data-circle l2)
+  ( h : hom-descent-data-circle P Q)
+  where
+
+  map-hom-descent-data-circle :
+    type-descent-data-circle P → type-descent-data-circle Q
+  map-hom-descent-data-circle = pr1 h
+
+  coherence-hom-descent-data-circle :
+    coherence-square-maps
+      ( map-hom-descent-data-circle)
+      ( map-descent-data-circle P)
+      ( map-descent-data-circle Q)
+      ( map-hom-descent-data-circle)
+  coherence-hom-descent-data-circle = pr2 h
 ```
 
 ### Canonical descent data for a family over the circle
@@ -141,8 +158,8 @@ pr2 (ev-descent-data-circle l A) = equiv-tr A (loop-free-loop l)
 
 ### The identity type of descent data
 
-An equivalence between `(X, e)` and `(Y, f)` is a homomorphism between them,
-where the underlying map is an equivalence.
+An equivalence between `(X, e)` and `(Y, f)` is an equivalence between `X` and
+`Y` which commutes with the automorphisms.
 
 ```agda
 Eq-descent-data-circle :
