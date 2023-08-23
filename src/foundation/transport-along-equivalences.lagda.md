@@ -152,6 +152,11 @@ tr-equiv-subst :
 tr-equiv-subst g f {X} {Y} e X' =
   ( ap (λ p → tr g p X') (is-retraction-eq-equiv (ap-eq-equiv f e))) ∙
   ( tr-subst g f (eq-equiv X Y e))
+
+equiv-tr-equiv-subst :
+  {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
+  (e : X ≃ Y) → equiv-tr-equiv g (ap-equiv f e) ＝ equiv-tr-equiv (g ∘ f) e
+equiv-tr-equiv-subst g f e = eq-htpy-equiv (tr-equiv-subst g f e)
 ```
 
 ### Transporting along the action on equivalences of a function
