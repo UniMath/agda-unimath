@@ -181,7 +181,7 @@ eq-equiv-tr-equiv-ap-equiv :
 eq-equiv-tr-equiv-ap-equiv f {X} =
     ind-equiv X
       ( λ Y e → equiv-tr-equiv f e ＝ ap-equiv f e)
-      ( compute-equiv-tr-equiv-id-equiv f ∙ inv (ap-equiv-id-equiv f X))
+      ( compute-equiv-tr-equiv-id-equiv f ∙ inv (compute-ap-equiv-id-equiv f X))
 
 eq-tr-equiv-map-ap-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
