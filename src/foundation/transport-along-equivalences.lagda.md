@@ -24,6 +24,8 @@ open import foundation-core.identity-types
 
 </details>
 
+## Idea
+
 Applying
 [transport along identifications](foundation-core.transport-along-identifications.md)
 to [identifications](foundation-core.identity-types.md) arising from the
