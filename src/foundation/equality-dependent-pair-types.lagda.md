@@ -100,12 +100,12 @@ module _
     {x y : X} (p : x ＝ y) →
     pair-eq-Σ (ap f p) ＝
     ( ( ap (pr1 ∘ f) p) ,
-      ( tr-subst B (pr1 ∘ f) p ∙ apd (λ x → pr2 (f x)) p))
+      ( tr-subst B (pr1 ∘ f) p ∙ apd (pr2 ∘ f) p))
   pair-eq-Σ-ap refl = refl
 
   pr1-pair-eq-Σ-ap :
     {x y : X} (p : x ＝ y) →
-    pr1 (pair-eq-Σ (ap f p)) ＝ ap (λ x → pr1 (f x)) p
+    pr1 (pair-eq-Σ (ap f p)) ＝ ap (pr1 ∘ f) p
   pr1-pair-eq-Σ-ap refl = refl
 ```
 
