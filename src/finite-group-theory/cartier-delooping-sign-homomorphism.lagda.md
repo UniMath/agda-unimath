@@ -27,9 +27,9 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
+open import foundation.transport-along-equivalences-subuniverses
 open import foundation.transport-along-identifications
 open import foundation.unit-type
-open import foundation.univalence-action-on-equivalences
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -57,7 +57,7 @@ module _
   { l : Level}
   where
 
-  not-even-difference-univalent-action-equiv :
+  not-even-difference-ap-equiv-subuniverse :
     (n : ℕ) (Y : 2-Element-Decidable-Subtype l (raise-Fin l (n +ℕ 2))) →
     ¬ ( sim-Equivalence-Relation
       ( even-difference-orientation-Complete-Undirected-Graph
@@ -69,7 +69,7 @@ module _
         ( star)
         ( transposition Y))
       ( map-equiv
-        ( univalent-action-equiv
+        ( ap-equiv-subuniverse
           ( mere-equiv-Prop (Fin (n +ℕ 2)))
           ( orientation-Complete-Undirected-Graph (n +ℕ 2))
           ( raise l (Fin (n +ℕ 2)) ,
@@ -79,7 +79,7 @@ module _
           ( transposition Y))
         ( orientation-aut-count
           (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) star (transposition Y))))
-  not-even-difference-univalent-action-equiv n =
+  not-even-difference-ap-equiv-subuniverse n =
     tr
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
@@ -110,14 +110,14 @@ module _
           preserves-id-equiv-orientation-complete-undirected-graph-equiv
             ( n +ℕ 2)}
         { y =
-          ( univalent-action-equiv
+          ( ap-equiv-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( orientation-Complete-Undirected-Graph (n +ℕ 2))) ,
-          ( preserves-id-equiv-univalent-action-equiv
+          ( preserves-id-equiv-ap-equiv-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( orientation-Complete-Undirected-Graph (n +ℕ 2)))}
         ( eq-is-contr
-          ( is-contr-preserves-id-action-equiv
+          ( is-contr-preserves-id-ap-equiv-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( orientation-Complete-Undirected-Graph (n +ℕ 2))
             ( is-set-orientation-Complete-Undirected-Graph (n +ℕ 2)))))
@@ -135,7 +135,7 @@ module _
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
         orientation-aut-count (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) (star))
-      ( not-even-difference-univalent-action-equiv)
+      ( not-even-difference-ap-equiv-subuniverse)
 
   eq-cartier-delooping-sign-homomorphism :
     (n : ℕ) →
@@ -176,7 +176,7 @@ module _
               orientation-aut-count
                 ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
                 ( star))
-            ( not-even-difference-univalent-action-equiv)
+            ( not-even-difference-ap-equiv-subuniverse)
             ( n))
           ( sign-homomorphism
             ( n +ℕ 2)
@@ -194,7 +194,7 @@ module _
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
         orientation-aut-count (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) (star))
-      ( not-even-difference-univalent-action-equiv)
+      ( not-even-difference-ap-equiv-subuniverse)
 ```
 
 ## References

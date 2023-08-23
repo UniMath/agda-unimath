@@ -255,6 +255,7 @@ open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.transport-along-equivalences public
+open import foundation.transport-along-equivalences-subuniverses public
 open import foundation.transport-along-identifications public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
@@ -285,7 +286,6 @@ open import foundation.uniqueness-truncation public
 open import foundation.unit-type public
 open import foundation.unital-binary-operations public
 open import foundation.univalence public
-open import foundation.univalence-action-on-equivalences public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public
