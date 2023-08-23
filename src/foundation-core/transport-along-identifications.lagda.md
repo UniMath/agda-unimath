@@ -33,7 +33,7 @@ recorded in
 ```agda
 tr :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : x ＝ y) → B x → B y
-tr B refl = id
+tr B refl b = b
 ```
 
 ## Properties

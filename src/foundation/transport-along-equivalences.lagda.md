@@ -12,7 +12,9 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.equivalence-extensionality
+open import foundation.equivalence-induction
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.transport-along-identifications
 open import foundation.univalence
@@ -140,4 +142,25 @@ compute-tr-equiv-ap-equiv :
 compute-tr-equiv-ap-equiv {D = D} f g {X} {Y} e X' =
   ( ap (λ p → tr D p (g X X')) (is-retraction-eq-equiv (ap-eq-equiv f e))) ∙
   ( tr-ap f g (eq-equiv X Y e) X')
+```
+
+### The transport equivalence in the universe and action on equivalences coincide
+
+```agda
+htpy-tr-equiv-ap-equiv :
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
+  (e : X ≃ Y) → tr-equiv f e ~ map-equiv (ap-equiv f e)
+htpy-tr-equiv-ap-equiv f {X} {Y} e X' =
+  ind-equiv
+    ( X)
+    ( λ Y e' → tr-equiv f e' X' ＝ map-equiv (ap-equiv f e') X')
+    ( ( ap (λ p → tr f p X') (compute-eq-equiv-id-equiv X)) ∙
+      ( htpy-eq (ap pr1 (inv (ap-equiv-id-equiv f X))) X'))
+    ( e)
+
+eq-tr-equiv-ap-equiv :
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
+  equiv-tr-equiv f {X} {Y} ~ ap-equiv f {X} {Y}
+eq-tr-equiv-ap-equiv f e =
+  eq-htpy-equiv (htpy-tr-equiv-ap-equiv f e)
 ```
