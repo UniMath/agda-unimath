@@ -69,6 +69,11 @@ pr2 (equiv-tr-equiv f e) = is-equiv-tr-equiv f e
 ### Transporting along `id-equiv` is the identity equivalence
 
 ```agda
+tr-equiv-id-equiv :
+  {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1} →
+  tr-equiv f id-equiv ＝ id
+tr-equiv-id-equiv f {X} = ap (tr f) (compute-eq-equiv-id-equiv X)
+
 equiv-tr-equiv-id-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1} →
   equiv-tr-equiv f id-equiv ＝ id-equiv
