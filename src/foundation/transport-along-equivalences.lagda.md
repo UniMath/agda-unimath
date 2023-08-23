@@ -70,35 +70,35 @@ pr2 (equiv-tr-equiv f e) = is-equiv-tr-equiv f e
 ### Transporting along `id-equiv` is the identity equivalence
 
 ```agda
-tr-equiv-id-equiv :
+compute-tr-equiv-id-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1} →
   tr-equiv f id-equiv ＝ id
-tr-equiv-id-equiv f {X} = ap (tr f) (compute-eq-equiv-id-equiv X)
+compute-tr-equiv-id-equiv f {X} = ap (tr f) (compute-eq-equiv-id-equiv X)
 
-equiv-tr-equiv-id-equiv :
+compute-equiv-tr-equiv-id-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X : UU l1} →
   equiv-tr-equiv f id-equiv ＝ id-equiv
-equiv-tr-equiv-id-equiv f {X} =
+compute-equiv-tr-equiv-id-equiv f {X} =
   (ap (equiv-tr f) (compute-eq-equiv-id-equiv X)) ∙ (equiv-tr-refl f)
 ```
 
 ### Transport along equivalences preserves composition of equivalences
 
 ```agda
-tr-equiv-equiv-comp :
+distributive-tr-equiv-equiv-comp :
   {l1 l2 : Level} (f : UU l1 → UU l2)
   {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
   tr-equiv f (e' ∘e e) ~ (tr-equiv f e' ∘ tr-equiv f e)
-tr-equiv-equiv-comp f {X} {Y} {Z} e e' x =
+distributive-tr-equiv-equiv-comp f {X} {Y} {Z} e e' x =
   ( ap (λ p → tr f p x) (inv (compute-eq-equiv-equiv-comp X Y Z e e'))) ∙
   ( tr-concat (eq-equiv X Y e) (eq-equiv Y Z e') x)
 
-equiv-tr-equiv-equiv-comp :
+distributive-equiv-tr-equiv-equiv-comp :
   {l1 l2 : Level} (f : UU l1 → UU l2)
   {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
   equiv-tr-equiv f (e' ∘e e) ＝ (equiv-tr-equiv f e' ∘e equiv-tr-equiv f e)
-equiv-tr-equiv-equiv-comp f {X} {Y} {Z} e e' =
-  eq-htpy-equiv (tr-equiv-equiv-comp f e e')
+distributive-equiv-tr-equiv-equiv-comp f {X} {Y} {Z} e e' =
+  eq-htpy-equiv (distributive-tr-equiv-equiv-comp f e e')
 ```
 
 ### Transporting along an equivalence and its inverse is just the identity
@@ -146,17 +146,17 @@ eq-transpose-tr-equiv' f e {u} p =
 ### Substitution law for transport along equivalences
 
 ```agda
-tr-equiv-subst :
+substitution-tr-equiv :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
   (e : X ≃ Y) → tr-equiv g (ap-equiv f e) ~ tr-equiv (g ∘ f) e
-tr-equiv-subst g f {X} {Y} e X' =
+substitution-tr-equiv g f {X} {Y} e X' =
   ( ap (λ p → tr g p X') (is-retraction-eq-equiv (ap-eq-equiv f e))) ∙
-  ( tr-subst g f (eq-equiv X Y e))
+  ( substitution-tr g f (eq-equiv X Y e))
 
-equiv-tr-equiv-subst :
+substitution-equiv-tr-equiv :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
   (e : X ≃ Y) → equiv-tr-equiv g (ap-equiv f e) ＝ equiv-tr-equiv (g ∘ f) e
-equiv-tr-equiv-subst g f e = eq-htpy-equiv (tr-equiv-subst g f e)
+substitution-equiv-tr-equiv g f e = eq-htpy-equiv (substitution-tr-equiv g f e)
 ```
 
 ### Transporting along the action on equivalences of a function
@@ -181,7 +181,7 @@ eq-equiv-tr-equiv-ap-equiv :
 eq-equiv-tr-equiv-ap-equiv f {X} =
     ind-equiv X
       ( λ Y e → equiv-tr-equiv f e ＝ ap-equiv f e)
-      ( equiv-tr-equiv-id-equiv f ∙ inv (ap-equiv-id-equiv f X))
+      ( compute-equiv-tr-equiv-id-equiv f ∙ inv (ap-equiv-id-equiv f X))
 
 eq-tr-equiv-map-ap-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →

@@ -100,7 +100,7 @@ module _
     {x y : X} (p : x ＝ y) →
     pair-eq-Σ (ap f p) ＝
     ( ( ap (pr1 ∘ f) p) ,
-      ( tr-subst B (pr1 ∘ f) p ∙ apd (pr2 ∘ f) p))
+      ( substitution-tr B (pr1 ∘ f) p ∙ apd (pr2 ∘ f) p))
   pair-eq-Σ-ap refl = refl
 
   pr1-pair-eq-Σ-ap :
