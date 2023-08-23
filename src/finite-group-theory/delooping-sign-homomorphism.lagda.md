@@ -18,6 +18,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-equivalences-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
@@ -47,7 +48,6 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.transport-along-equivalences-subuniverses
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.uniqueness-set-quotients

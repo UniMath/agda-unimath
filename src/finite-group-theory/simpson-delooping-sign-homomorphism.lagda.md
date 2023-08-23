@@ -21,6 +21,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-equivalences-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -41,7 +42,6 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.transport-along-equivalences-subuniverses
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels

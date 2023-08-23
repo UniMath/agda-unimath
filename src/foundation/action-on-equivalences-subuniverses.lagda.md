@@ -1,7 +1,7 @@
-# Transport along equivalences in subuniverses
+# Action on equivalences in subuniverses
 
 ```agda
-module foundation.transport-along-equivalences-subuniverses where
+module foundation.action-on-equivalences-subuniverses where
 ```
 
 <details><summary>Imports</summary>
