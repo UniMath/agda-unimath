@@ -169,8 +169,8 @@ module _
   ev-suspension-up-suspension {l} Z c =
     eq-htpy-suspension-structure
       ( ( up-suspension-north-suspension Z c) ,
-        ( ( up-suspension-south-suspension Z c) ,
-          ( up-suspension-meridian-suspension Z c)))
+        ( up-suspension-south-suspension Z c) ,
+        ( up-suspension-meridian-suspension Z c))
 ```
 
 ### The suspension of a contractible type is contractible
