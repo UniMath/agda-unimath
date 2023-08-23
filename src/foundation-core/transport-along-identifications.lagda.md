@@ -9,6 +9,7 @@ module foundation-core.transport-along-identifications where
 ```agda
 open import foundation.universe-levels
 
+open import foundation-core.function-types
 open import foundation-core.identity-types
 ```
 
@@ -32,7 +33,7 @@ recorded in
 ```agda
 tr :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : x ＝ y) → B x → B y
-tr B refl b = b
+tr B refl = id
 ```
 
 ## Properties
