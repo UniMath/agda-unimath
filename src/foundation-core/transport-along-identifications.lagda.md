@@ -9,7 +9,6 @@ module foundation-core.transport-along-identifications where
 ```agda
 open import foundation.universe-levels
 
-open import foundation-core.function-types
 open import foundation-core.identity-types
 ```
 

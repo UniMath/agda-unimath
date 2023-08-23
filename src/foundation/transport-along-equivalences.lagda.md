@@ -10,22 +10,16 @@ module foundation.transport-along-equivalences where
 open import foundation.action-on-equivalences-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
-open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.injective-maps
 ```
 
 </details>
@@ -144,23 +138,19 @@ compute-tr-equiv-ap-equiv {D = D} f g {X} {Y} e X' =
   ( tr-ap f g (eq-equiv X Y e) X')
 ```
 
-### The transport equivalence in the universe and action on equivalences coincide
+### Transport along and the action on equivalences in the universe coincide
 
 ```agda
-htpy-tr-equiv-ap-equiv :
+eq-equiv-tr-equiv-ap-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  (e : X ≃ Y) → tr-equiv f e ~ map-equiv (ap-equiv f e)
-htpy-tr-equiv-ap-equiv f {X} {Y} e X' =
-  ind-equiv
-    ( X)
-    ( λ Y e' → tr-equiv f e' X' ＝ map-equiv (ap-equiv f e') X')
-    ( ( ap (λ p → tr f p X') (compute-eq-equiv-id-equiv X)) ∙
-      ( htpy-eq (ap pr1 (inv (ap-equiv-id-equiv f X))) X'))
-    ( e)
+  (e : X ≃ Y) → equiv-tr-equiv f e ＝ ap-equiv f e
+eq-equiv-tr-equiv-ap-equiv f {X} =
+    ind-equiv X
+      ( λ Y e → equiv-tr-equiv f e ＝ ap-equiv f e)
+      ( equiv-tr-equiv-id-equiv f ∙ inv (ap-equiv-id-equiv f X))
 
-eq-tr-equiv-ap-equiv :
+eq-tr-equiv-map-ap-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  equiv-tr-equiv f {X} {Y} ~ ap-equiv f {X} {Y}
-eq-tr-equiv-ap-equiv f e =
-  eq-htpy-equiv (htpy-tr-equiv-ap-equiv f e)
+  (e : X ≃ Y) → tr-equiv f e ＝ map-equiv (ap-equiv f e)
+eq-tr-equiv-map-ap-equiv f e = ap pr1 (eq-equiv-tr-equiv-ap-equiv f e)
 ```
