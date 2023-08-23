@@ -157,11 +157,11 @@ module _
           ( path-swap-nat-identification-left-whisk β α)
           ( b))
         ( tr-concat p' q' b))
-      ( (identification-right-whisk
-        ( tr²-concat
-          ( identification-right-whisk α q)
-          ( identification-left-whisk p' β) b)
-        ( tr-concat p' q' b)) ∙
+      ( ( identification-right-whisk
+          ( tr²-concat
+            ( identification-right-whisk α q)
+            ( identification-left-whisk p' β) b)
+          ( tr-concat p' q' b)) ∙
       ( vertical-concat-square
         ( tr² B (identification-right-whisk α q) b)
         ( tr² B (identification-left-whisk p' β) b)
@@ -172,11 +172,11 @@ module _
         ( htpy-right-whisk (tr² B β) (tr B p') b)
         ( tr²-right-whisk α q b)
         ( tr²-left-whisk p' β b)))
-      ( (identification-right-whisk
-        ( tr²-concat (identification-left-whisk p β)
-        ( identification-right-whisk α q') b)
-        ( tr-concat p' q' b)) ∙
-      (vertical-concat-square
+      ( ( identification-right-whisk
+          ( tr²-concat (identification-left-whisk p β)
+          ( identification-right-whisk α q') b)
+          ( tr-concat p' q' b)) ∙
+      ( vertical-concat-square
         ( tr² B (identification-left-whisk p β) b)
         ( tr² B (identification-right-whisk α q') b)
         ( tr-concat p' q' b)
