@@ -344,7 +344,7 @@ module _
     ((x : A) → is-set (P (i x))) →
     (g : (x : B) → P x) → is-prop (is-extension i f g)
   is-prop-is-extension f is-set-P g =
-    is-prop-Π λ x → is-set-P x (f x) (g (i x))
+    is-prop-Π (λ x → is-set-P x (f x) (g (i x)))
 ```
 
 ### Every map has a unique extension along `i` if and only if `P` is `i`-local
