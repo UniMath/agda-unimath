@@ -86,7 +86,8 @@ module _
       ( Σ
         ( (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y)
         ( λ D → (X : type-subuniverse P) → D X X id-equiv ＝ id-equiv))
-  pr1 (pr1 (is-contr-preserves-id-ap-equiv-subuniverse H)) = ap-equiv-subuniverse
+  pr1 (pr1 (is-contr-preserves-id-ap-equiv-subuniverse H)) =
+    ap-equiv-subuniverse
   pr2 (pr1 (is-contr-preserves-id-ap-equiv-subuniverse H)) =
     preserves-id-equiv-ap-equiv-subuniverse
   pr2 (is-contr-preserves-id-ap-equiv-subuniverse H) (D , p) =
