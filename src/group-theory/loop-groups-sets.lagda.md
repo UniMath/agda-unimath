@@ -129,7 +129,9 @@ module _
   pr2 hom-inv-symmetric-group-loop-group-Set f g =
     ( ap
       ( inv)
-      ( inv (compute-eq-equiv-equiv-comp (type-Set X) (type-Set X) (type-Set X) g f))) ∙
+      ( inv
+        ( compute-eq-equiv-equiv-comp
+          ( type-Set X) (type-Set X) (type-Set X) g f))) ∙
       ( distributive-inv-concat
         ( eq-equiv (type-Set X) (type-Set X) g)
         ( eq-equiv (type-Set X) (type-Set X) f))
