@@ -35,9 +35,9 @@ Given a lifting operation we can say that `f` has a _left lifting structure_
 with respect to `g` and that `g` has a _right lifting structure_ with respect to
 `f`.
 
-**Warning**: This is the Curry–Howard interpretation of what is classically
-called _lifting properties_. However, these are generally additional structure
-on the maps. For the proof-irrelevant notion see
+**Note**: This is the Curry–Howard interpretation of what is classically called
+_lifting properties_. However, these are generally additional structure on the
+maps. For the proof-irrelevant notion see
 [mere lifting properties](orthogonal-factorization-systems.mere-lifting-properties.md).
 
 ## Definition
