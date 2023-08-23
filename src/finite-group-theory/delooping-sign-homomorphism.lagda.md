@@ -1098,7 +1098,7 @@ module _
             ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
             ( ap inv
               ( inv
-                ( compute-eq-equiv
+                ( compute-eq-equiv-equiv-comp
                   ( raise l4 (Fin 2))
                   ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                   ( raise l4 (Fin 2))
@@ -1113,7 +1113,7 @@ module _
                 ( ap
                   ( _∙ eq-counting-equivalence-class-R n)
                   ( inv
-                    ( compute-eq-equiv
+                    ( compute-eq-equiv-equiv-comp
                       ( raise l4 (Fin 2))
                       ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                       ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
