@@ -41,6 +41,7 @@ open import synthetic-homotopy-theory.prespectra public
 open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
+open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.spheres public
