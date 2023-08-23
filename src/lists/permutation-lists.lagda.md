@@ -289,7 +289,7 @@ eq-map-list-permute-list {B = B} f p t =
               ( t)) ∙
             ( ap
               ( λ v → permute-vec (length-list p) v t)
-              ( is-section-inv-tr
+              ( is-retraction-tr
                 ( vec B)
                 ( length-map-list f p)
                 ( map-vec f (vec-list p)))))))) ∙
