@@ -10,6 +10,7 @@ module foundation.transport-along-equivalences where
 open import foundation.action-on-equivalences-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -91,6 +92,13 @@ tr-equiv-equiv-comp :
 tr-equiv-equiv-comp f {X} {Y} {Z} e e' x =
   ( ap (λ p → tr f p x) (inv (compute-eq-equiv-equiv-comp X Y Z e e'))) ∙
   ( tr-concat (eq-equiv X Y e) (eq-equiv Y Z e') x)
+
+equiv-tr-equiv-equiv-comp :
+  {l1 l2 : Level} (f : UU l1 → UU l2)
+  {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
+  equiv-tr-equiv f (e' ∘e e) ＝ (equiv-tr-equiv f e' ∘e equiv-tr-equiv f e)
+equiv-tr-equiv-equiv-comp f {X} {Y} {Z} e e' =
+  eq-htpy-equiv (tr-equiv-equiv-comp f e e')
 ```
 
 ### Transporting along an equivalence and its inverse is just the identity
