@@ -7,49 +7,42 @@
 import sys
 import utils
 import re
+import itertools
 
-open_tag_pattern = re.compile(r'^```\S+.*\n', flags=re.MULTILINE)
-close_tag_pattern = re.compile(r'\n```$', flags=re.MULTILINE)
 
 empty_block_pattern = re.compile(
     r'^```\S+.*\n(\s*\n)*\n```\s*$(?!\n(\s*\n)*</details>)', flags=re.MULTILINE)
 
 
-def has_well_formed_blocks(mdcode, pos=0):
+def find_ill_formed_block(mdcode):
     """
-    Checks if in a markdown file, every opening block tag is paired with a closing
-    block tag before a new one is opened.
+    Checks if in a markdown file, every (specified) opening block tag is paired
+    with a closing block tag before a new one is opened.
+
+    Returns the line number of the first offending guard, as well as whether it is identified as a closing or opening guard.
 
     Note: This also disallows unspecified code blocks.
     """
+    stack = []
+    lines = mdcode.split('\n')
 
-    if pos >= len(mdcode):
-        return True
-
-    open_match = open_tag_pattern.search(mdcode, pos)
-    close_match = close_tag_pattern.search(mdcode, pos)
-
-    if (open_match is None) != (close_match is None):
-        # Open or closing tag but not both
-        return False
-    elif open_match is None:
-        # No more blocks
-        return True
-
-    if close_match.start() < open_match.start():
-        # A block is closed before it is opened
-        return False
-
-    # Check if multiple open tags
-    second_open_match = open_tag_pattern.search(mdcode, open_match.end())
-    if second_open_match is None:
-        # Check for extra close tag
-        return open_tag_pattern.search(mdcode, close_match.end()) is None
-    elif second_open_match.start() < close_match.start():
-        return False
-
-    # Recurse
-    return has_well_formed_blocks(mdcode, close_match.end())
+    for line_number, line in enumerate(lines, 1):
+        line = line.strip()
+        if line.startswith('```'):
+            num_backticks = sum(
+                1 for _ in itertools.takewhile(lambda x: x == '`', line))
+            tag = line[num_backticks:]
+            is_closing_guard = tag == ''
+            if is_closing_guard:
+                if stack and num_backticks == stack[-1]:
+                    stack.pop()
+                else:
+                    return line_number, is_closing_guard
+            elif not stack or num_backticks < stack[-1]:
+                stack.append(num_backticks)
+            else:
+                return line_number, is_closing_guard
+    return None, None
 
 
 top_level_header_after_first_line = re.compile(r'\n#\s', flags=re.MULTILINE)
@@ -74,9 +67,16 @@ if __name__ == '__main__':
 
         output = inputText
 
-        if not has_well_formed_blocks(output):
-            print(
-                f"Error! File '{fpath}' has an unspecified or ill-formed code block. Please note that unspecified code blocks are disallowed in this project. Otherwise, please check if there is an opening or closing code block tag (```) without a corresponding closing/opening tag.", file=sys.stderr)
+        offender_line_number, offender_is_closing = find_ill_formed_block(
+            output)
+
+        if offender_line_number is not None:
+            if offender_is_closing:
+                print(
+                    f"Error! File '{fpath}' line {offender_line_number} contains an untagged opening code guard, or a misplaced closing guard. Please note that untagged code blocks are disallowed.", file=sys.stderr)
+            else:
+                print(
+                    f"Error! File '{fpath}' line {offender_line_number} contains an illegal opening code guard. This is likely because the previous code block should be closed when it is not. Otherwise, this code block needs to have a lower backtick level.", file=sys.stderr)
 
             status |= STATUS_UNSPECIFIED_OR_ILL_FORMED_BLOCK
 

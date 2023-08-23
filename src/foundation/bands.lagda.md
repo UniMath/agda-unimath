@@ -17,8 +17,9 @@ open import foundation-core.equivalences
 
 ## Idea
 
-A band from $X$ to $Y$ is an element of the set-truncation of the type of
-equivalences from $X$ to $Y$.
+A **band** from $X$ to $Y$ is an element of the
+[set-truncation](foundation.set-truncations.md) of the type of
+[equivalences](foundation-core.equivalences.md) from $X$ to $Y$.
 
 ## Definition
 
