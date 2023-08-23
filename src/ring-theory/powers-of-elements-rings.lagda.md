@@ -64,11 +64,12 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  power-add-Ring :
+  distributive-power-add-Ring :
     (m n : ℕ) {x : type-Ring R} →
     power-Ring R (m +ℕ n) x ＝
     mul-Ring R (power-Ring R m x) (power-Ring R n x)
-  power-add-Ring = power-add-Semiring (semiring-Ring R)
+  distributive-power-add-Ring =
+    distributive-power-add-Semiring (semiring-Ring R)
 ```
 
 ### Powers by products of natural numbers are iterated powers

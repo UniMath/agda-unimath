@@ -28,7 +28,8 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-Given any proposition `Q`, the hom functor `Q →_` defines a
+Given any [proposition](foundation-core.propositions.md) `Q`, the hom functor
+`Q →_` defines a
 [higher modality](orthogonal-factorization-systems.higher-modalities.md). We
 call these the **open modalities**.
 

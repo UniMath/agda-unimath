@@ -1,4 +1,4 @@
-# Localizations at a subuniverse
+# Localizations at subuniverses
 
 ```agda
 module orthogonal-factorization-systems.localizations-subuniverses where
@@ -109,6 +109,10 @@ module _
 ### There is at most one `P`-localization
 
 This is Proposition 5.1.2 in _Classifying Types_, and remains to be formalized.
+
+## See also
+
+- [Localizations at maps](orthogonal-factorization-systems.localizations-maps.md)
 
 ## References
 

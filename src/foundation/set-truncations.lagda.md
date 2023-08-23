@@ -256,8 +256,8 @@ hom-slice-trunc-Set A =
 
 abstract
   is-image-trunc-Set :
-    {l1 l2 : Level} (A : UU l1) →
-    is-image l2
+    {l1 : Level} (A : UU l1) →
+    is-image
       ( mere-eq-Prop {A = A})
       ( emb-trunc-Set A)
       ( hom-slice-trunc-Set A)

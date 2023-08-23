@@ -15,6 +15,8 @@ open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import group-theory.powers-of-elements-monoids
+
 open import ring-theory.semirings
 ```
 
@@ -30,10 +32,7 @@ iteratively multiplying `x` with itself `n` times.
 ```agda
 power-Semiring :
   {l : Level} (R : Semiring l) → ℕ → type-Semiring R → type-Semiring R
-power-Semiring R zero-ℕ x = one-Semiring R
-power-Semiring R (succ-ℕ zero-ℕ) x = x
-power-Semiring R (succ-ℕ (succ-ℕ n)) x =
-  mul-Semiring R (power-Semiring R (succ-ℕ n) x) x
+power-Semiring R n x = power-Monoid (multiplicative-monoid-Semiring R) n x
 ```
 
 ## Properties
@@ -46,12 +45,8 @@ module _
   where
 
   power-one-Semiring :
-    (n : ℕ) →
-    power-Semiring R n (one-Semiring R) ＝ one-Semiring R
-  power-one-Semiring zero-ℕ = refl
-  power-one-Semiring (succ-ℕ zero-ℕ) = refl
-  power-one-Semiring (succ-ℕ (succ-ℕ n)) =
-    right-unit-law-mul-Semiring R _ ∙ power-one-Semiring (succ-ℕ n)
+    (n : ℕ) → power-Semiring R n (one-Semiring R) ＝ one-Semiring R
+  power-one-Semiring = power-unit-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### `xⁿ⁺¹ = xⁿx`
@@ -64,8 +59,7 @@ module _
   power-succ-Semiring :
     (n : ℕ) (x : type-Semiring R) →
     power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R (power-Semiring R n x) x
-  power-succ-Semiring zero-ℕ x = inv (left-unit-law-mul-Semiring R x)
-  power-succ-Semiring (succ-ℕ n) x = refl
+  power-succ-Semiring = power-succ-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### `xⁿ⁺¹ ＝ xxⁿ`
@@ -78,11 +72,7 @@ module _
   power-succ-Semiring' :
     (n : ℕ) (x : type-Semiring R) →
     power-Semiring R (succ-ℕ n) x ＝ mul-Semiring R x (power-Semiring R n x)
-  power-succ-Semiring' zero-ℕ x = inv (right-unit-law-mul-Semiring R x)
-  power-succ-Semiring' (succ-ℕ zero-ℕ) x = refl
-  power-succ-Semiring' (succ-ℕ (succ-ℕ n)) x =
-    ( ap (mul-Semiring' R x) (power-succ-Semiring' (succ-ℕ n) x)) ∙
-    ( associative-mul-Semiring R x (power-Semiring R (succ-ℕ n) x) x)
+  power-succ-Semiring' = power-succ-Monoid' (multiplicative-monoid-Semiring R)
 ```
 
 ### Powers by sums of natural numbers are products of powers
@@ -92,24 +82,12 @@ module _
   {l : Level} (R : Semiring l)
   where
 
-  power-add-Semiring :
+  distributive-power-add-Semiring :
     (m n : ℕ) {x : type-Semiring R} →
     power-Semiring R (m +ℕ n) x ＝
     mul-Semiring R (power-Semiring R m x) (power-Semiring R n x)
-  power-add-Semiring m zero-ℕ {x} =
-    inv
-      ( right-unit-law-mul-Semiring R
-        ( power-Semiring R m x))
-  power-add-Semiring m (succ-ℕ n) {x} =
-    ( power-succ-Semiring R (m +ℕ n) x) ∙
-    ( ( ap (mul-Semiring' R x) (power-add-Semiring m n)) ∙
-      ( ( associative-mul-Semiring R
-          ( power-Semiring R m x)
-          ( power-Semiring R n x)
-          ( x)) ∙
-        ( ap
-          ( mul-Semiring R (power-Semiring R m x))
-          ( inv (power-succ-Semiring R n x)))))
+  distributive-power-add-Semiring =
+    distributive-power-add-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### If `x` commutes with `y` then so do their powers
@@ -124,16 +102,8 @@ module _
     ( mul-Semiring R x y ＝ mul-Semiring R y x) →
     ( mul-Semiring R (power-Semiring R n x) y) ＝
     ( mul-Semiring R y (power-Semiring R n x))
-  commute-powers-Semiring' zero-ℕ H =
-    left-unit-law-mul-Semiring R _ ∙ inv (right-unit-law-mul-Semiring R _)
-  commute-powers-Semiring' (succ-ℕ zero-ℕ) {x} {y} H = H
-  commute-powers-Semiring' (succ-ℕ (succ-ℕ n)) {x} {y} H =
-    ( associative-mul-Semiring R (power-Semiring R (succ-ℕ n) x) x y) ∙
-    ( ( ap (mul-Semiring R (power-Semiring R (succ-ℕ n) x)) H) ∙
-      ( ( inv
-          ( associative-mul-Semiring R (power-Semiring R (succ-ℕ n) x) y x)) ∙
-        ( ( ap (mul-Semiring' R x) (commute-powers-Semiring' (succ-ℕ n) H)) ∙
-          ( associative-mul-Semiring R y (power-Semiring R (succ-ℕ n) x) x))))
+  commute-powers-Semiring' =
+    commute-powers-Monoid' (multiplicative-monoid-Semiring R)
 
   commute-powers-Semiring :
     (m n : ℕ) {x y : type-Semiring R} →
@@ -144,71 +114,8 @@ module _
     ( mul-Semiring R
       ( power-Semiring R n y)
       ( power-Semiring R m x))
-  commute-powers-Semiring zero-ℕ zero-ℕ H = refl
-  commute-powers-Semiring zero-ℕ (succ-ℕ n) H =
-    ( left-unit-law-mul-Semiring R (power-Semiring R (succ-ℕ n) _)) ∙
-    ( inv (right-unit-law-mul-Semiring R (power-Semiring R (succ-ℕ n) _)))
-  commute-powers-Semiring (succ-ℕ m) zero-ℕ H =
-    ( right-unit-law-mul-Semiring R (power-Semiring R (succ-ℕ m) _)) ∙
-    ( inv (left-unit-law-mul-Semiring R (power-Semiring R (succ-ℕ m) _)))
-  commute-powers-Semiring (succ-ℕ m) (succ-ℕ n) {x} {y} H =
-    ( ap-mul-Semiring R
-      ( power-succ-Semiring R m x)
-      ( power-succ-Semiring R n y)) ∙
-    ( ( associative-mul-Semiring R
-        ( power-Semiring R m x)
-        ( x)
-        ( mul-Semiring R (power-Semiring R n y) y)) ∙
-      ( ( ap
-          ( mul-Semiring R (power-Semiring R m x))
-          ( ( inv (associative-mul-Semiring R x (power-Semiring R n y) y)) ∙
-            ( ( ap
-                ( mul-Semiring' R y)
-                ( inv (commute-powers-Semiring' n (inv H)))) ∙
-              ( ( associative-mul-Semiring R (power-Semiring R n y) x y) ∙
-                ( ( ap (mul-Semiring R (power-Semiring R n y)) H) ∙
-                  ( inv
-                    ( associative-mul-Semiring R
-                      ( power-Semiring R n y)
-                      ( y)
-                      ( x)))))))) ∙
-        ( ( inv
-            ( associative-mul-Semiring R
-              ( power-Semiring R m x)
-              ( mul-Semiring R (power-Semiring R n y) y)
-              ( x))) ∙
-          ( ( ap
-              ( mul-Semiring' R x)
-              ( ( inv
-                  ( associative-mul-Semiring R
-                    ( power-Semiring R m x)
-                    ( power-Semiring R n y)
-                    ( y))) ∙
-                ( ( ap
-                    ( mul-Semiring' R y)
-                    ( commute-powers-Semiring m n H)) ∙
-                  ( ( associative-mul-Semiring R
-                      ( power-Semiring R n y)
-                      ( power-Semiring R m x)
-                      ( y)) ∙
-                    ( ( ap
-                        ( mul-Semiring R (power-Semiring R n y))
-                        ( commute-powers-Semiring' m H)) ∙
-                      ( ( inv
-                          ( associative-mul-Semiring R
-                            ( power-Semiring R n y)
-                            ( y)
-                            ( power-Semiring R m x))) ∙
-                        ( ap
-                          ( mul-Semiring' R (power-Semiring R m x))
-                          ( inv (power-succ-Semiring R n y))))))))) ∙
-            ( ( associative-mul-Semiring R
-                ( power-Semiring R (succ-ℕ n) y)
-                ( power-Semiring R m x)
-                ( x)) ∙
-              ( ap
-                ( mul-Semiring R (power-Semiring R (succ-ℕ n) y))
-                ( inv (power-succ-Semiring R m x))))))))
+  commute-powers-Semiring =
+    commute-powers-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### If `x` commutes with `y`, then powers distribute over the product of `x` and `y`
@@ -223,39 +130,8 @@ module _
     (H : mul-Semiring R x y ＝ mul-Semiring R y x) →
     power-Semiring R n (mul-Semiring R x y) ＝
     mul-Semiring R (power-Semiring R n x) (power-Semiring R n y)
-  distributive-power-mul-Semiring zero-ℕ H =
-    inv (left-unit-law-mul-Semiring R (one-Semiring R))
-  distributive-power-mul-Semiring (succ-ℕ n) {x} {y} H =
-    ( power-succ-Semiring R n (mul-Semiring R x y)) ∙
-    ( ( ap
-        ( mul-Semiring' R (mul-Semiring R x y))
-        ( distributive-power-mul-Semiring n H)) ∙
-      ( ( inv
-          ( associative-mul-Semiring R
-            ( mul-Semiring R (power-Semiring R n x) (power-Semiring R n y))
-            ( x)
-            ( y))) ∙
-        ( ( ap
-            ( mul-Semiring' R y)
-            ( ( associative-mul-Semiring R
-                ( power-Semiring R n x)
-                ( power-Semiring R n y)
-                ( x)) ∙
-              ( ( ap
-                  ( mul-Semiring R (power-Semiring R n x))
-                  ( commute-powers-Semiring' R n (inv H))) ∙
-                ( inv
-                  ( associative-mul-Semiring R
-                    ( power-Semiring R n x)
-                    ( x)
-                    ( power-Semiring R n y)))))) ∙
-          ( ( associative-mul-Semiring R
-              ( mul-Semiring R (power-Semiring R n x) x)
-              ( power-Semiring R n y)
-              ( y)) ∙
-            ( ap-mul-Semiring R
-              ( inv (power-succ-Semiring R n x))
-              ( inv (power-succ-Semiring R n y)))))))
+  distributive-power-mul-Semiring =
+    distributive-power-mul-Monoid (multiplicative-monoid-Semiring R)
 ```
 
 ### Powers by products of natural numbers are iterated powers
@@ -267,18 +143,6 @@ module _
 
   power-mul-Semiring :
     (m n : ℕ) {x : type-Semiring R} →
-    power-Semiring R (m *ℕ n) x ＝
-    power-Semiring R n (power-Semiring R m x)
-  power-mul-Semiring zero-ℕ n {x} =
-    inv (power-one-Semiring R n)
-  power-mul-Semiring (succ-ℕ zero-ℕ) n {x} =
-    ap (λ t → power-Semiring R t x) (left-unit-law-add-ℕ n)
-  power-mul-Semiring (succ-ℕ (succ-ℕ m)) n {x} =
-    ( ( power-add-Semiring R (succ-ℕ m *ℕ n) n) ∙
-      ( ap
-        ( mul-Semiring' R (power-Semiring R n x))
-        ( power-mul-Semiring (succ-ℕ m) n))) ∙
-    ( inv
-      ( distributive-power-mul-Semiring R n
-        ( commute-powers-Semiring' R (succ-ℕ m) refl)))
+    power-Semiring R (m *ℕ n) x ＝ power-Semiring R n (power-Semiring R m x)
+  power-mul-Semiring = power-mul-Monoid (multiplicative-monoid-Semiring R)
 ```
