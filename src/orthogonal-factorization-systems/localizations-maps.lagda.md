@@ -1,4 +1,4 @@
-# Localizations at a map
+# Localizations at maps
 
 ```agda
 module orthogonal-factorization-systems.localizations-maps where
@@ -101,6 +101,8 @@ module _
     Z is-local-Z =
       pr2 is-localization-Y Z is-local-Z
 ```
+
+It remains to construct a converse.
 
 ## References
 
