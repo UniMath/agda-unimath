@@ -24,6 +24,20 @@ open import foundation-core.identity-types
 
 </details>
 
+Applying
+[transport along identifications](foundation-core.transport-along-identifications.md)
+to [identifications](foundation-core.identity-types.md) arising from the
+[univalence axiom](foundation.univalence.md) gives us **transport along
+equivalences**.
+
+Since transport defines [equivalences](foundation-core.equivalences.md) of
+[fibers](foundation-core.fibers-of-maps.md), this gives us an _action on
+equivalences_. Alternatively, we could apply the
+[action on identifications](foundation.action-on-identifications-functions.md)
+to get another
+[action on equivalences](foundation.action-on-equivalences-functions.md), but
+luckily, these two notions coincide.
+
 ## Definition
 
 ```agda
@@ -138,7 +152,7 @@ compute-tr-equiv-ap-equiv {D = D} f g {X} {Y} e X' =
   ( tr-ap f g (eq-equiv X Y e) X')
 ```
 
-### Transport along and the action on equivalences in the universe coincide
+### Transport along equivalences and the action on equivalences in the universe coincide
 
 ```agda
 eq-equiv-tr-equiv-ap-equiv :

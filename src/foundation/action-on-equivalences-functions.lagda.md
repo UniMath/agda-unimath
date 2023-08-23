@@ -20,6 +20,20 @@ open import foundation-core.identity-types
 
 </details>
 
+## Idea
+
+Applying the
+[action on identifications](foundation.action-on-identifications-functions.md)
+to [identifications](foundation-core.identity-types.md) arising from the
+[univalence axiom](foundation.univalence.md) gives us the **action on
+equivalences**.
+
+Alternatively, one can apply
+[transport along identifications](foundation-core.transport-along-identifications.md)
+to get
+[transport along equivalences](foundation.transport-along-equivalences.md), but
+luckily, these two notions coincide.
+
 ## Definition
 
 ```agda
@@ -67,12 +81,12 @@ ap-equiv-comp g f {X} {Y} e =
 ```agda
 ap-eq-equiv-id-equiv :
   {l1 l2 : Level} {B : UU l2} (f : UU l1 → B) (A : UU l1) →
-  (ap-eq-equiv f (id-equiv {A = A})) ＝ refl
+  (ap-eq-equiv f id-equiv) ＝ refl
 ap-eq-equiv-id-equiv f A = ap (ap f) (compute-eq-equiv-id-equiv A)
 
 ap-equiv-id-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) (A : UU l1) →
-  (ap-equiv f (id-equiv {A = A})) ＝ id-equiv {A = f A}
+  (ap-equiv f id-equiv) ＝ id-equiv
 ap-equiv-id-equiv f A = ap equiv-eq (ap-eq-equiv-id-equiv f A)
 ```
 
