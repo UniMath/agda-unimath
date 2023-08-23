@@ -20,7 +20,7 @@ open import foundation.pi-decompositions-subuniverse
 open import foundation.product-decompositions
 open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.univalence
 open import foundation.universe-levels

@@ -26,7 +26,7 @@ open import foundation.monomorphisms
 open import foundation.propositions
 open import foundation.sets
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types

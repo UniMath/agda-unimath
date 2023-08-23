@@ -46,7 +46,7 @@ open import foundation.set-truncations
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-coproduct-types

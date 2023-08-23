@@ -21,9 +21,9 @@ Given a dependent function `f : (x : A) → B x` and an
 [identification](foundation-core.identity-types.md) `p : x ＝ y` in `A`, we
 cannot directly compare the values `f x` and `f y`, since `f x` is an element of
 type `B x` while `f y` is an element of type `B y`. However, we can
-[transport](foundation-core.transport.md) the value `f x` along `p` to obtain an
-element of type `B y` that is comparable to the value `f y`. In other words, we
-can consider the type of
+[transport](foundation-core.transport-along-identifications.md) the value `f x`
+along `p` to obtain an element of type `B y` that is comparable to the value
+`f y`. In other words, we can consider the type of
 [dependent identifications](foundation-core.dependent-identifications.md) over
 `p` from `f x` to `f y`. The **dependent action on identifications** of `f` on
 `p` is a dependent identification

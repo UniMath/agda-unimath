@@ -14,7 +14,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.higher-modalities

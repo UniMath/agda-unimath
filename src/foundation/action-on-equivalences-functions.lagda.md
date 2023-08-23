@@ -13,7 +13,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 

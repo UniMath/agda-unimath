@@ -19,7 +19,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -55,8 +55,8 @@ identifications in arbitrary types.
 | Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
 | Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
 | Torsorial type families                          | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
-| Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
-| Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
+| Transport (foundation)                           | [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md)                             |
+| Transport (foundation-core)                      | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                   |
 | The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
 
 ## Properties

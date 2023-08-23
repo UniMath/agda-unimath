@@ -22,7 +22,7 @@ open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.small-types
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice

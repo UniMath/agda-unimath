@@ -12,7 +12,7 @@ open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
