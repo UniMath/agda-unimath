@@ -75,7 +75,7 @@ north , south : Y
 and a meridian function
 
 ```text
-meridian : X → N ＝ S
+meridian : X → north ＝ south
 ```
 
 We call this type of structure `suspension-structure`.
