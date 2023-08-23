@@ -20,6 +20,7 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts public
 open import synthetic-homotopy-theory.descent-circle public
+open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
