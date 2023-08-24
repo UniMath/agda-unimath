@@ -49,11 +49,3 @@ universal-property-quotient-Ring :
 universal-property-quotient-Ring l R I S f H =
   (T : Ring l) → is-equiv (precomp-quotient-Ring R I S T f H)
 ```
-
-### The equivalence relation obtained from an ideal
-
-### The quotient ring
-
-#### The universal property of the quotient ring
-
-This remains to be defined.
