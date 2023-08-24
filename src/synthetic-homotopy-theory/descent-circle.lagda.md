@@ -735,9 +735,9 @@ module _
         ( l3)) →
     is-contr (family-for-dependent-descent-data-circle l A Q)
 
-  unique-dependent-family-property-circle-dependent-universal-property-circle :
-    dependent-universal-property-circle (l2 ⊔ lsuc l3) l →
-    unique-dependent-family-property-circle
-  unique-dependent-family-property-circle-dependent-universal-property-circle
-    dup-circle Q = {!!}
+  -- unique-dependent-family-property-circle-dependent-universal-property-circle :
+  --   dependent-universal-property-circle (l2 ⊔ lsuc l3) l →
+  --   unique-dependent-family-property-circle
+  -- unique-dependent-family-property-circle-dependent-universal-property-circle
+  --   dup-circle Q = {!!}
 ```
