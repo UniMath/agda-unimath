@@ -1,4 +1,4 @@
-# Descent data for dependent pair types over the circle
+# Descent data for families of dependent pair types over the circle
 
 ```agda
 module synthetic-homotopy-theory.descent-circle-dependent-pair-types where
@@ -30,6 +30,16 @@ open import synthetic-homotopy-theory.universal-property-circle
 </details>
 
 ## Idea
+
+Given a family `A : 𝕊¹ → U` over the circle and a family
+`B : (t : 𝕊¹) → (A t) → U` over `A`, the
+[descent data](synthetic-homotopy-theory.descent-circle.md) for the family of
+dependent pair types `λ t → Σ (A t) (B t)` is `(Σ X R, map-Σ e k)`, where
+`(X, e)` is descent data for `A` and `(R, k)` is dependent descent data for `B`.
+
+## Properties
+
+### Characterization of descent data for families of dependent pair types over the circle
 
 ```agda
 module _
