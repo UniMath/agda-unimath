@@ -7,24 +7,15 @@ module synthetic-homotopy-theory.descent-circle-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
-open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.transport
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
-open import synthetic-homotopy-theory.sections-descent-circle
-open import synthetic-homotopy-theory.universal-property-circle
 ```
 
 </details>
