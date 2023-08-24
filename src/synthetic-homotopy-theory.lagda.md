@@ -23,6 +23,7 @@ open import synthetic-homotopy-theory.descent-circle public
 open import synthetic-homotopy-theory.descent-circle-constant-families public
 open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
+open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.double-loop-spaces public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
