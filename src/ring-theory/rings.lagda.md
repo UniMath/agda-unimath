@@ -230,6 +230,9 @@ module _
     (x y : type-Ring R) →
     neg-Ring (add-Ring R x y) ＝ add-Ring R (neg-Ring x) (neg-Ring y)
   distributive-neg-add-Ring = distributive-neg-add-Ab (ab-Ring R)
+
+  neg-zero-Ring : neg-Ring (zero-Ring R) ＝ (zero-Ring R)
+  neg-zero-Ring = neg-zero-Ab (ab-Ring R)
 ```
 
 ### Multiplication in a ring

@@ -21,6 +21,8 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import foundation-core.function-types
+
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-monoids
 open import group-theory.subgroups-abelian-groups
@@ -427,10 +429,65 @@ module _
 
 #### The ideal obtained from a congruence relation
 
-#### The ideal obtained from the congruence relalation of an ideal `I` is `I` itself
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R)
+  where
 
-#### The congruence relation of the ideal obtained from a congruence relation `S` is `S` itself
+  subset-congruence-Ring : subset-Ring l2 R
+  subset-congruence-Ring = prop-congruence-Ring R S (zero-Ring R)
 
-#### The equivalence of ideals and congruence relations
+  is-in-subset-congruence-Ring : (type-Ring R) → UU l2
+  is-in-subset-congruence-Ring = type-Prop ∘ subset-congruence-Ring
 
-This remains to be shown.
+  contains-zero-subset-congruence-Ring :
+    contains-zero-subset-Ring R subset-congruence-Ring
+  contains-zero-subset-congruence-Ring =
+    refl-congruence-Ring R S (zero-Ring R)
+
+  is-closed-under-addition-subset-congruence-Ring :
+    is-closed-under-addition-subset-Ring R subset-congruence-Ring
+  is-closed-under-addition-subset-congruence-Ring x y H K =
+    concatenate-eq-sim-congruence-Ring R S
+      ( inv (left-unit-law-add-Ring R (zero-Ring R)))
+      ( add-congruence-Ring R S H K)
+
+  is-closed-under-negatives-subset-congruence-Ring :
+    is-closed-under-negatives-subset-Ring R subset-congruence-Ring
+  is-closed-under-negatives-subset-congruence-Ring x H =
+      concatenate-eq-sim-congruence-Ring R S
+        ( inv (neg-zero-Ring R))
+        ( neg-congruence-Ring R S H)
+
+  is-closed-under-left-multiplication-subset-congruence-Ring :
+    is-closed-under-left-multiplication-subset-Ring R subset-congruence-Ring
+  is-closed-under-left-multiplication-subset-congruence-Ring x y H =
+    concatenate-eq-sim-congruence-Ring R S
+      ( inv (right-zero-law-mul-Ring R x))
+      ( mul-congruence-Ring R S (refl-congruence-Ring R S x) H)
+
+  is-closed-under-right-multiplication-subset-congruence-Ring :
+    is-closed-under-right-multiplication-subset-Ring R subset-congruence-Ring
+  is-closed-under-right-multiplication-subset-congruence-Ring x y H =
+    concatenate-eq-sim-congruence-Ring R S
+      ( inv (left-zero-law-mul-Ring R y))
+      ( mul-congruence-Ring R S H (refl-congruence-Ring R S y))
+
+  is-additive-subgroup-congruence-Ring :
+    is-additive-subgroup-subset-Ring R subset-congruence-Ring
+  pr1 is-additive-subgroup-congruence-Ring =
+    contains-zero-subset-congruence-Ring
+  pr1 (pr2 is-additive-subgroup-congruence-Ring) =
+    is-closed-under-addition-subset-congruence-Ring
+  pr2 (pr2 is-additive-subgroup-congruence-Ring) =
+    is-closed-under-negatives-subset-congruence-Ring
+
+  ideal-congruence-Ring : ideal-Ring l2 R
+  pr1 ideal-congruence-Ring = subset-congruence-Ring
+  pr1 (pr2 ideal-congruence-Ring) =
+    is-additive-subgroup-congruence-Ring
+  pr1 (pr2 (pr2 ideal-congruence-Ring)) =
+    is-closed-under-left-multiplication-subset-congruence-Ring
+  pr2 (pr2 (pr2 ideal-congruence-Ring)) =
+    is-closed-under-right-multiplication-subset-congruence-Ring
+```

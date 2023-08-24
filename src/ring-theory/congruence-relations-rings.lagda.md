@@ -14,6 +14,8 @@ open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 
+open import foundation-core.identity-types
+
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-monoids
 
@@ -70,6 +72,22 @@ module _
     (x y : type-Ring R) → is-prop (sim-congruence-Ring x y)
   is-prop-sim-congruence-Ring =
     is-prop-sim-congruence-Semiring (semiring-Ring R) S
+
+  concatenate-eq-sim-congruence-Ring :
+    {x1 x2 y : type-Ring R} →
+    x1 ＝ x2 → sim-congruence-Ring x2 y → sim-congruence-Ring x1 y
+  concatenate-eq-sim-congruence-Ring refl H = H
+
+  concatenate-sim-eq-congruence-Ring :
+    {x y1 y2 : type-Ring R} →
+    sim-congruence-Ring x y1 → y1 ＝ y2 → sim-congruence-Ring x y2
+  concatenate-sim-eq-congruence-Ring H refl = H
+
+  concatenate-sim-eq-sim-congruence-Ring :
+    {x1 x2 y1 y2 : type-Ring R} →
+    x1 ＝ x2 → sim-congruence-Ring x2 y1 →
+    y1 ＝ y2 → sim-congruence-Ring x1 y2
+  concatenate-sim-eq-sim-congruence-Ring refl H refl = H
 
   refl-congruence-Ring :
     is-reflexive-Relation-Prop prop-congruence-Ring
