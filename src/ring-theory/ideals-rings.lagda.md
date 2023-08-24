@@ -7,9 +7,12 @@ module ring-theory.ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -18,8 +21,11 @@ open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.congruence-relations-abelian-groups
+open import group-theory.congruence-relations-monoids
 open import group-theory.subgroups-abelian-groups
 
+open import ring-theory.congruence-relations-rings
 open import ring-theory.left-ideals-rings
 open import ring-theory.right-ideals-rings
 open import ring-theory.rings
@@ -204,3 +210,227 @@ module _
   eq-has-same-elements-ideal-Ring J =
     map-inv-equiv (extensionality-ideal-Ring J)
 ```
+
+### Two sided ideals of rings are in 1-1 correspondence with congruence relations
+
+#### The standard similarity relation obtained from an ideal
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
+  where
+
+  sim-congruence-ideal-Ring : (x y : type-Ring R) → UU l2
+  sim-congruence-ideal-Ring =
+    sim-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  is-prop-sim-congruence-ideal-Ring :
+    (x y : type-Ring R) → is-prop (sim-congruence-ideal-Ring x y)
+  is-prop-sim-congruence-ideal-Ring =
+    is-prop-sim-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  prop-congruence-ideal-Ring : (x y : type-Ring R) → Prop l2
+  prop-congruence-ideal-Ring =
+    prop-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+```
+
+#### The left equivalence relation obtained from an ideal
+
+```agda
+  left-eq-rel-congruence-ideal-Ring :
+    Equivalence-Relation l2 (type-Ring R)
+  left-eq-rel-congruence-ideal-Ring =
+    left-eq-rel-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  left-sim-congruence-ideal-Ring :
+    type-Ring R → type-Ring R → UU l2
+  left-sim-congruence-ideal-Ring =
+    left-sim-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+```
+
+#### The left similarity relation of an ideal relates the same elements as the standard similarity relation
+
+```agda
+  left-sim-sim-congruence-ideal-Ring :
+    (x y : type-Ring R) →
+    sim-congruence-ideal-Ring x y →
+    left-sim-congruence-ideal-Ring x y
+  left-sim-sim-congruence-ideal-Ring =
+    left-sim-sim-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  sim-left-sim-congruence-ideal-Ring :
+    (x y : type-Ring R) →
+    left-sim-congruence-ideal-Ring x y →
+    sim-congruence-ideal-Ring x y
+  sim-left-sim-congruence-ideal-Ring =
+    sim-left-sim-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+```
+
+#### The standard similarity relation is a congruence relation
+
+```agda
+  refl-congruence-ideal-Ring :
+    is-reflexive sim-congruence-ideal-Ring
+  refl-congruence-ideal-Ring =
+    refl-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  symmetric-congruence-ideal-Ring :
+    is-symmetric sim-congruence-ideal-Ring
+  symmetric-congruence-ideal-Ring =
+    symmetric-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  transitive-congruence-ideal-Ring :
+    is-transitive sim-congruence-ideal-Ring
+  transitive-congruence-ideal-Ring =
+    transitive-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  eq-rel-congruence-ideal-Ring : Equivalence-Relation l2 (type-Ring R)
+  eq-rel-congruence-ideal-Ring =
+    eq-rel-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  relate-same-elements-left-sim-congruence-ideal-Ring :
+    relate-same-elements-Equivalence-Relation
+      ( eq-rel-congruence-ideal-Ring)
+      ( left-eq-rel-congruence-ideal-Ring)
+  relate-same-elements-left-sim-congruence-ideal-Ring =
+    relate-same-elements-left-sim-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I)
+
+  add-congruence-ideal-Ring :
+    ( is-congruence-Ab
+      ( ab-Ring R)
+      ( eq-rel-congruence-ideal-Ring))
+  add-congruence-ideal-Ring =
+    ( add-congruence-Subgroup-Ab
+      ( ab-Ring R)
+      ( subgroup-ideal-Ring R I))
+
+  mul-congruence-lemma : {x y u v : type-Ring R} →
+    ( is-in-ideal-Ring R I (add-Ring R (neg-Ring R x) y)) →
+    ( is-in-ideal-Ring R I (add-Ring R (neg-Ring R u) v)) →
+    ( is-in-ideal-Ring R I
+      ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v)))
+  mul-congruence-lemma {x} {y} {u} {v} e f =
+    ( is-closed-under-eq-ideal-Ring R I
+      ( is-closed-under-addition-ideal-Ring R I
+        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+        ( mul-Ring R y (add-Ring R (neg-Ring R u) v))
+        ( is-closed-under-right-multiplication-ideal-Ring R I
+          ( add-Ring R (neg-Ring R x) y)
+          ( u)
+          ( e))
+        ( is-closed-under-left-multiplication-ideal-Ring R I
+          ( y)
+          ( add-Ring R (neg-Ring R u) v)
+          ( f))))
+    ( equational-reasoning
+      ( add-Ring R
+        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+        ( mul-Ring R y (add-Ring R (neg-Ring R u) v))) ＝
+      ( add-Ring R
+        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+        ( add-Ring R (mul-Ring R y (neg-Ring R u)) (mul-Ring R y v))) by
+      ( ap (λ a →
+        ( add-Ring R
+          ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+          ( a)))
+        ( left-distributive-mul-add-Ring R y (neg-Ring R u) v)) ＝
+      ( add-Ring R
+        ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+        ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))) by
+      ( ap (λ a →
+        ( add-Ring R
+          ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+          ( add-Ring R a (mul-Ring R y v))))
+        ( right-negative-law-mul-Ring R y u)) ＝
+      ( add-Ring R
+        ( add-Ring R (mul-Ring R (neg-Ring R x) u) (mul-Ring R y u))
+        ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))) by
+      ( ap (λ a →
+        ( add-Ring R
+          ( a)
+          ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))))
+        ( right-distributive-mul-add-Ring R (neg-Ring R x) y u)) ＝
+      ( add-Ring R
+        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
+      ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))) by
+        ( ap (λ a →
+          ( add-Ring R
+            ( add-Ring R a (mul-Ring R y u))
+            ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))))
+        ( left-negative-law-mul-Ring R x u)) ＝
+      ( add-Ring R
+        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
+        ( add-Ring R (mul-Ring R y v) (neg-Ring R (mul-Ring R y u)))) by
+      ( ap (λ a →
+        ( add-Ring R
+          ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
+          ( a)))
+        ( commutative-add-Ring R
+          ( neg-Ring R (mul-Ring R y u))
+          ( mul-Ring R y v))) ＝
+      ( add-Ring R
+        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
+        ( add-Ring R (mul-Ring R y u) (neg-Ring R (mul-Ring R y u)))) by
+      ( interchange-add-add-Ring R
+        ( neg-Ring R (mul-Ring R x u))
+        ( mul-Ring R y u)
+        ( mul-Ring R y v)
+        ( neg-Ring R (mul-Ring R y u))) ＝
+      ( add-Ring R
+        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
+        ( zero-Ring R)) by
+      ( ap (λ a →
+        ( add-Ring R
+          ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
+          ( a)))
+        ( right-inverse-law-add-Ring R (mul-Ring R y u))) ＝
+      ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v)) by
+      ( right-unit-law-add-Ring R
+        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))))
+
+  mul-congruence-ideal-Ring :
+    (is-congruence-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( eq-rel-congruence-ideal-Ring))
+  mul-congruence-ideal-Ring = mul-congruence-lemma
+
+  congruence-ideal-Ring : congruence-Ring l2 R
+  congruence-ideal-Ring = construct-congruence-Ring R
+    ( eq-rel-congruence-ideal-Ring)
+    ( add-congruence-ideal-Ring)
+    ( mul-congruence-ideal-Ring)
+```
+
+#### The ideal obtained from a congruence relation
+
+#### The ideal obtained from the congruence relalation of an ideal `I` is `I` itself
+
+#### The congruence relation of the ideal obtained from a congruence relation `S` is `S` itself
+
+#### The equivalence of ideals and congruence relations
+
+This remains to be shown.
