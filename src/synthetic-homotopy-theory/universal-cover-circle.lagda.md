@@ -13,6 +13,7 @@ open import elementary-number-theory.universal-property-integers
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
@@ -46,22 +47,16 @@ circle with respect to any universe level, then it satisfies the induction
 principle with respect to the zeroth universe level.
 
 ```agda
-naturality-tr-fiberwise-transformation :
-  { l1 l2 l3 : Level} {X : UU l1} {P : X → UU l2} {Q : X → UU l3}
-  ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y) (p : P x) →
-  Id (tr Q α (f x p)) (f y (tr P α p))
-naturality-tr-fiberwise-transformation f refl p = refl
-
 functor-free-dependent-loop :
   { l1 l2 l3 : Level} {X : UU l1} (l : free-loop X)
   { P : X → UU l2} {Q : X → UU l3} (f : (x : X) → P x → Q x) →
   free-dependent-loop l P → free-dependent-loop l Q
 functor-free-dependent-loop l {P} {Q} f =
   map-Σ
-    ( λ q₀ → Id (tr Q (loop-free-loop l) q₀) q₀)
+    ( λ q → dependent-identification Q (loop-free-loop l) q q)
     ( f (base-free-loop l))
-    ( λ p₀ α →
-      ( naturality-tr-fiberwise-transformation f (loop-free-loop l) p₀) ∙
+    ( λ p α →
+      inv (preserves-tr f (loop-free-loop l) p) ∙
       ( ap (f (base-free-loop l)) α))
 
 coherence-square-functor-free-dependent-loop :
@@ -69,7 +64,7 @@ coherence-square-functor-free-dependent-loop :
   ( f : (x : X) → P x → Q x) {x y : X} (α : Id x y)
   ( h : (x : X) → P x) →
   Id
-    ( ( naturality-tr-fiberwise-transformation f α (h x)) ∙
+    ( inv ( preserves-tr f α (h x)) ∙
       ( ap (f y) (apd h α)))
     ( apd (map-Π f h) α)
 coherence-square-functor-free-dependent-loop f refl h = refl
@@ -103,12 +98,12 @@ abstract
       ( λ p₀ →
         is-equiv-comp
           ( concat
-            ( naturality-tr-fiberwise-transformation f l p₀)
+            ( inv (preserves-tr f l p₀))
             ( f x p₀))
           ( ap (f x))
           ( is-emb-is-equiv (is-equiv-f x) (tr P l p₀) p₀)
           ( is-equiv-concat
-            ( naturality-tr-fiberwise-transformation f l p₀)
+            ( inv (preserves-tr f l p₀))
             ( f x p₀)))
 
 abstract
@@ -140,45 +135,45 @@ abstract
 ### The fundamental cover
 
 ```agda
-abstract
-  Fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loop X) →
-    ( {l2 : Level} → dependent-universal-property-circle l2 l) →
-    Σ ( X → UU lzero)
-      ( λ P →
-        Eq-descent-data-circle
-        ( pair ℤ equiv-succ-ℤ)
-        ( ev-descent-data-circle l P))
-  Fundamental-cover-circle {l1} l dup-circle =
-    center
-      ( unique-family-property-universal-property-circle l
-        ( universal-property-dependent-universal-property-circle l
-          ( dup-circle))
-        ( pair ℤ equiv-succ-ℤ))
+module _
+  { l1 : Level} {S : UU l1} (l : free-loop S)
+  where
 
-  fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loop X) →
-    ({k : Level} → dependent-universal-property-circle k l) →
-    X → UU lzero
-  fundamental-cover-circle l dup-circle =
-    pr1 (Fundamental-cover-circle l dup-circle)
+  descent-data-Fundamental-cover-circle :
+    descent-data-circle lzero
+  pr1 descent-data-Fundamental-cover-circle = ℤ
+  pr2 descent-data-Fundamental-cover-circle = equiv-succ-ℤ
 
-  compute-fiber-fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loop X) →
-    ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
-    ℤ ≃ fundamental-cover-circle l dup-circle (base-free-loop l)
-  compute-fiber-fundamental-cover-circle l dup-circle =
-    pr1 ( pr2 ( Fundamental-cover-circle l dup-circle))
+  module _
+    ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l)
+    where
 
-  compute-tr-fundamental-cover-circle :
-    { l1 : Level} {X : UU l1} (l : free-loop X) →
-    ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
-    ( ( map-equiv (compute-fiber-fundamental-cover-circle l dup-circle)) ∘
-      ( succ-ℤ)) ~
-    ( ( tr (fundamental-cover-circle l dup-circle) (loop-free-loop l)) ∘
-      ( map-equiv (compute-fiber-fundamental-cover-circle l dup-circle)))
-  compute-tr-fundamental-cover-circle l dup-circle =
-    pr2 ( pr2 ( Fundamental-cover-circle l dup-circle))
+    abstract
+
+      Fundamental-cover-circle : family-with-descent-data-circle l lzero
+      Fundamental-cover-circle =
+        family-with-descent-data-circle-descent-data l
+          ( universal-property-dependent-universal-property-circle l dup-circle)
+          ( descent-data-Fundamental-cover-circle)
+
+      fundamental-cover-circle : S → UU lzero
+      fundamental-cover-circle =
+        family-family-with-descent-data-circle Fundamental-cover-circle
+
+      compute-fiber-fundamental-cover-circle :
+        ℤ ≃ fundamental-cover-circle (base-free-loop l)
+      compute-fiber-fundamental-cover-circle =
+        equiv-family-with-descent-data-circle Fundamental-cover-circle
+
+      compute-tr-fundamental-cover-circle :
+        coherence-square-maps
+          ( map-equiv compute-fiber-fundamental-cover-circle)
+          ( succ-ℤ)
+          ( tr fundamental-cover-circle (loop-free-loop l))
+          ( map-equiv compute-fiber-fundamental-cover-circle)
+      compute-tr-fundamental-cover-circle =
+        coherence-square-family-with-descent-data-circle
+          Fundamental-cover-circle
 ```
 
 ### The fundamental cover of the circle is a family of sets
