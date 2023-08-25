@@ -26,6 +26,9 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
+Given two families `A, B : 𝕊¹ → U` over the circle, to show that they are
+equivalent is the same as showing that their descent data is equivalent.
+
 ## Properties
 
 ### Characterization of descent data for families of equivalence types over the circle
