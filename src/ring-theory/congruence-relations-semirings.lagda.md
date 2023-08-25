@@ -158,7 +158,7 @@ pr2 (construct-congruence-Semiring R S H K) = K
 
 ## Properties
 
-### Characterizing equality of congruence relations on semirings
+### Characterizing equality of congruence relations of semirings
 
 ```agda
 relate-same-elements-congruence-Semiring :
@@ -200,11 +200,10 @@ relate-same-elements-eq-congruence-Semiring R S .S refl =
 is-equiv-relate-same-elements-eq-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S T : congruence-Semiring l2 R) →
   is-equiv (relate-same-elements-eq-congruence-Semiring R S T)
-is-equiv-relate-same-elements-eq-congruence-Semiring R S T =
+is-equiv-relate-same-elements-eq-congruence-Semiring R S =
     fundamental-theorem-id
       ( is-contr-total-relate-same-elements-congruence-Semiring R S)
       ( relate-same-elements-eq-congruence-Semiring R S)
-      ( T)
 
 extensionality-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S T : congruence-Semiring l2 R) →

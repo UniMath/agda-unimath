@@ -8,6 +8,7 @@ module ring-theory.congruence-relations-rings where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -211,4 +212,56 @@ construct-congruence-Ring :
 pr1 (pr1 (construct-congruence-Ring R S H K)) = S
 pr2 (pr1 (construct-congruence-Ring R S H K)) = H
 pr2 (construct-congruence-Ring R S H K) = K
+```
+
+## Properties
+
+### Characterizing equality of congruence relations of rings
+
+```agda
+relate-same-elements-congruence-Ring :
+  {l1 l2 l3 : Level} (R : Ring l1) →
+  congruence-Ring l2 R → congruence-Ring l3 R → UU (l1 ⊔ l2 ⊔ l3)
+relate-same-elements-congruence-Ring R =
+  relate-same-elements-congruence-Semiring (semiring-Ring R)
+
+refl-relate-same-elements-congruence-Ring :
+  {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R) →
+  relate-same-elements-congruence-Ring R S S
+refl-relate-same-elements-congruence-Ring R =
+  refl-relate-same-elements-congruence-Semiring (semiring-Ring R)
+
+is-contr-total-relate-same-elements-congruence-Ring :
+  {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R) →
+  is-contr
+    ( Σ ( congruence-Ring l2 R)
+        ( relate-same-elements-congruence-Ring R S))
+is-contr-total-relate-same-elements-congruence-Ring R =
+  is-contr-total-relate-same-elements-congruence-Semiring
+    ( semiring-Ring R)
+
+relate-same-elements-eq-congruence-Ring :
+  {l1 l2 : Level} (R : Ring l1) (S T : congruence-Ring l2 R) →
+  S ＝ T → relate-same-elements-congruence-Ring R S T
+relate-same-elements-eq-congruence-Ring R =
+  relate-same-elements-eq-congruence-Semiring (semiring-Ring R)
+
+is-equiv-relate-same-elements-eq-congruence-Ring :
+  {l1 l2 : Level} (R : Ring l1) (S T : congruence-Ring l2 R) →
+  is-equiv (relate-same-elements-eq-congruence-Ring R S T)
+is-equiv-relate-same-elements-eq-congruence-Ring R =
+  is-equiv-relate-same-elements-eq-congruence-Semiring
+    ( semiring-Ring R)
+
+extensionality-congruence-Ring :
+  {l1 l2 : Level} (R : Ring l1) (S T : congruence-Ring l2 R) →
+  (S ＝ T) ≃ relate-same-elements-congruence-Ring R S T
+extensionality-congruence-Ring R =
+  extensionality-congruence-Semiring (semiring-Ring R)
+
+eq-relate-same-elements-congruence-Ring :
+  {l1 l2 : Level} (R : Ring l1) (S T : congruence-Ring l2 R) →
+  relate-same-elements-congruence-Ring R S T → S ＝ T
+eq-relate-same-elements-congruence-Ring R =
+  eq-relate-same-elements-congruence-Semiring (semiring-Ring R)
 ```

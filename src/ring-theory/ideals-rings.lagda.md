@@ -483,7 +483,8 @@ module _
     is-closed-under-negatives-subset-congruence-Ring
 
   ideal-congruence-Ring : ideal-Ring l2 R
-  pr1 ideal-congruence-Ring = subset-congruence-Ring
+  pr1 ideal-congruence-Ring =
+    subset-congruence-Ring
   pr1 (pr2 ideal-congruence-Ring) =
     is-additive-subgroup-congruence-Ring
   pr1 (pr2 (pr2 ideal-congruence-Ring)) =
@@ -521,7 +522,7 @@ module _
       ( has-same-elements-ideal-congruence-Ring)
 ```
 
-#### The congruence relation of the ideal obtained from a congruence relation `S is  `S itself
+#### The congruence relation of the ideal obtained from a congruence relation `S is `S itself
 
 ```agda
 module _
