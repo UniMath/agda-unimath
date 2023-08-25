@@ -282,10 +282,10 @@ module _
 The equivalence extends to the dependent case, where given a type family `A`
 over the circle with descent data `(X, e)`, a type family
 `B : (t : 𝕊¹) → A t → U` is equivalent to a type family `R : X → U` equipped
-with a family of equivalences `K : (x : X) → R(x) ≃ R(e(x))`. The pair `(R, K)`
-is called **dependent descent data** for the circle. Intuitively, this states
-that the types over points of `X` belonging to the same connected component in
-the total space `Σ 𝕊¹ A` are equivalent.
+with a family of equivalences `k : (x : X) → R(x) ≃ R(e(x))`. The pair `(R, k)`
+is called **dependent descent data** for the circle over `A`. Intuitively, this
+states that the types over points of `X` belonging to the same connected
+component in the total space `Σ 𝕊¹ A` are equivalent.
 
 ```agda
 dependent-descent-data-circle :
@@ -608,6 +608,9 @@ module _
 
 ### Uniqueness of descent data characterizing a type family over the circle
 
+Given a type `X` and an automorphism `e : X ≃ X`, there is a unique type family
+`𝓓(X, e) : 𝕊¹ → U` for which `(X, e)` is descent data.
+
 ```agda
 comparison-descent-data-circle :
   ( l1 : Level) → free-loop (UU l1) → descent-data-circle l1
@@ -653,12 +656,12 @@ unique-family-property-circle l2 {S} l =
 
 module _
   { l1 l2 : Level} {S : UU l1} (l : free-loop S)
+  ( up-circle : universal-property-circle (lsuc l2) l)
   where
 
   unique-family-property-universal-property-circle :
-    universal-property-circle (lsuc l2) l →
     unique-family-property-circle l2 l
-  unique-family-property-universal-property-circle up-circle Q =
+  unique-family-property-universal-property-circle Q =
     is-contr-is-equiv'
       ( fib (ev-descent-data-circle l) Q)
       ( tot
@@ -677,6 +680,21 @@ module _
           ( l)
           ( up-circle))
         ( Q))
+
+  family-for-descent-data-circle-descent-data :
+    ( P : descent-data-circle l2) →
+    family-for-descent-data-circle l P
+  family-for-descent-data-circle-descent-data P =
+    center (unique-family-property-universal-property-circle P)
+
+  family-with-descent-data-circle-descent-data :
+    ( P : descent-data-circle l2) →
+    ( family-with-descent-data-circle l l2)
+  pr1 (family-with-descent-data-circle-descent-data P) =
+    pr1 (family-for-descent-data-circle-descent-data P)
+  pr1 (pr2 (family-with-descent-data-circle-descent-data P)) = P
+  pr2 (pr2 (family-with-descent-data-circle-descent-data P)) =
+    pr2 (family-for-descent-data-circle-descent-data P)
 ```
 
 ### Characterization of the identity type of dependent descent data for the circle
@@ -740,6 +758,13 @@ module _
 ```
 
 ### Uniqueness of dependent descent data characterizing a type family over a family over the circle
+
+Given a type family `A : 𝕊¹ → U` with corresponding descent data `(X, e)`, and a
+type family `R : X → U` over `X` invariant under `e` as witnessed by `k`, there
+is a unique family `B : (t : 𝕊¹) → A t → U` for which `(R, k)` is dependent
+descent data over `A`.
+
+This is so far a conjecture which remains to be shown.
 
 ```agda
 module _
