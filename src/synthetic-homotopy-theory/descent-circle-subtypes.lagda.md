@@ -32,9 +32,9 @@ open import synthetic-homotopy-theory.universal-property-circle
 Given a family `A : 𝕊¹ → U` over the circle and a family
 `B : (t : 𝕊¹) → (A t) → U` over `A` with corresponding
 [descent data](synthetic-homotopy-theory.descent-circle.md) `(X, e)` and
-dependent descent data `(R, k)`, where `R` is a subtype of `X`,
-we get that dependent functions of type `(t : 𝕊¹) → Σ (A t) (B t)` are exactly
-the fixpoints of `e` which belong to `R`.
+dependent descent data `(R, k)`, where `R` is a subtype of `X`, we get that
+dependent functions of type `(t : 𝕊¹) → Σ (A t) (B t)` are exactly the fixpoints
+of `e` which belong to `R`.
 
 ## Properties
 
