@@ -36,54 +36,85 @@ module _
       higher-modality l1 l2)
   where
 
-  ap-higher-modality : {X Y : UU l1} → (X → Y) → ○ X → ○ Y
-  ap-higher-modality = ap-ind-modality unit-○ ind-○
-```
-
-### Naturality of the unit
-
-```agda
-module _
-  {l1 l2 : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) :
-      higher-modality l1 l2)
-  where
-
-  naturality-unit-higher-modality :
-    {X Y : UU l1} (f : X → Y) →
-    ((ap-ind-modality unit-○ ind-○ f) ∘ unit-○) ~ (unit-○ ∘ f)
-  naturality-unit-higher-modality =
-    naturality-unit-modality unit-○ ind-○ compute-ind-○
+  map-higher-modality : {X Y : UU l1} → (X → Y) → ○ X → ○ Y
+  map-higher-modality = map-ind-modality unit-○ ind-○
 ```
 
 ### Functoriality
 
 ```agda
 module _
-  {l : Level}
-  (((○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) :
-      higher-modality l l)
+  {l : Level} (m : higher-modality l l)
   where
 
   functoriality-higher-modality :
     {X Y Z : UU l}
-    (f : X → Y) (g : Y → Z) →
-    ( ap-ind-modality unit-○ ind-○ g ∘ ap-ind-modality unit-○ ind-○ f) ~
-    ( ap-ind-modality unit-○ ind-○ (g ∘ f))
-  functoriality-higher-modality {X} {Y} {Z} f g =
-    ind-subuniverse-ind-modality unit-○ ind-○ X _
-      ( λ x' →
-        -- TODO: we should be able to avoid univalence here
-        tr
-          ( is-modal unit-○)
-          ( eq-equiv _ _ (inv-equiv-is-small (is-locally-small-○ Z _ _)))
-          ( Id-○ Z _ _))
+    (g : Y → Z) (f : X → Y) →
+    ( map-higher-modality m g ∘ map-higher-modality m f) ~
+    ( map-higher-modality m (g ∘ f))
+  functoriality-higher-modality {X} {Y} {Z} g f =
+    ind-subuniverse-higher-modality m X _
+      ( λ _ → is-modal-Id-higher-modality m)
       ( λ x →
-        ( ( ap
-            ( ap-ind-modality unit-○ ind-○ g)
-            ( compute-ind-○ X (λ _ → Y) (unit-○ ∘ f) x)) ∙
-          ( compute-ind-○ Y (λ _ → Z) (unit-○ ∘ g) (f x))) ∙
-        ( inv (compute-ind-○ X (λ _ → Z) (unit-○ ∘ (g ∘ f)) x)))
+        ( ap
+          ( map-higher-modality m g)
+          ( compute-rec-higher-modality m X Y
+            ( unit-higher-modality m ∘ f)
+            ( x))) ∙
+        ( ( compute-rec-higher-modality m Y Z
+            ( unit-higher-modality m ∘ g)
+            ( f x)) ∙
+          ( inv
+            ( compute-rec-higher-modality m X Z
+              ( unit-higher-modality m ∘ (g ∘ f))
+              ( x)))))
+```
+
+### Naturality of the unit
+
+```agda
+module _
+  {l1 l2 : Level} (m : higher-modality l1 l2)
+  where
+
+  naturality-unit-higher-modality :
+    {X Y : UU l1} (f : X → Y) →
+    ( map-higher-modality m f ∘ unit-higher-modality m) ~
+    ( unit-higher-modality m ∘ f)
+  naturality-unit-higher-modality =
+    naturality-unit-modality
+      ( unit-higher-modality m)
+      ( ind-higher-modality m)
+      ( compute-ind-higher-modality m)
+
+  naturality-unit-higher-modality' :
+    {X Y : UU l1} (f : X → Y) {x x' : X} →
+    unit-higher-modality m x ＝ unit-higher-modality m x' →
+    unit-higher-modality m (f x) ＝ unit-higher-modality m (f x')
+  naturality-unit-higher-modality' =
+    naturality-unit-modality'
+      ( unit-higher-modality m)
+      ( ind-higher-modality m)
+      ( compute-ind-higher-modality m)
+
+module _
+  {l : Level} (m : higher-modality l l)
+  where
+
+  compute-naturality-unit-modality :
+    {X Y Z : UU l}
+    (g : Y → Z) (f : X → Y) (x : X) →
+    ( ( functoriality-higher-modality m g f (unit-higher-modality m x)) ∙
+      ( naturality-unit-higher-modality m (g ∘ f) x)) ＝
+    ( ( ap (map-higher-modality m g) (naturality-unit-higher-modality m f x)) ∙
+      ( naturality-unit-higher-modality m g (f x)))
+  compute-naturality-unit-modality {X} {Y} {Z} g f x =
+    ( ap
+      ( _∙
+        compute-rec-higher-modality m X Z (unit-higher-modality m ∘ (g ∘ f)) x)
+      ( compute-ind-subuniverse-higher-modality m
+        X _ ( λ _ → is-modal-Id-higher-modality m) _ x)) ∙
+    {!   !}
 ```
 
 ## References

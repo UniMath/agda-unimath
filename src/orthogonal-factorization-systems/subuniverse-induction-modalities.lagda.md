@@ -27,6 +27,8 @@ TODO
 
 Nonstandard terminology
 
+### Subuniverse induction
+
 ```agda
 ind-subuniverse-modality :
   {l1 l2 : Level}
@@ -52,22 +54,73 @@ compute-ind-subuniverse-modality {l1} {l2} {○} unit-○ ind-○ =
   (x : X) → ind-○ X P is-modal-P f (unit-○ x) ＝ f x
 ```
 
+### Subuniverse recursion
+
+```agda
+rec-subuniverse-modality :
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○) →
+  UU (lsuc l1 ⊔ l2)
+rec-subuniverse-modality {l1} {l2} {○} unit-○ =
+  (X : UU l1) (Y : UU l1) →
+  (is-modal unit-○ Y) →
+  (X → Y) → ○ X → Y
+
+compute-rec-subuniverse-modality :
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○) →
+  (rec-○ : rec-subuniverse-modality unit-○) →
+  UU (lsuc l1 ⊔ l2)
+compute-rec-subuniverse-modality {l1} {l2} {○} unit-○ rec-○ =
+  (X : UU l1) (Y : UU l1) →
+  (is-modal-Y : is-modal unit-○ Y) →
+  (f : X → Y) →
+  (x : X) → rec-○ X Y is-modal-Y f (unit-○ x) ＝ f x
+```
+
 ## Properties
+
+### Subuniverse recursion from subuniverse induction
+
+```agda
+rec-subuniverse-ind-subuniverse-modality :
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○) →
+  (ind-○ : ind-subuniverse-modality unit-○) →
+  rec-subuniverse-modality unit-○
+rec-subuniverse-ind-subuniverse-modality unit-○ ind-○ X Y is-modal-Y =
+  ind-○ X (λ _ → Y) (λ _ → is-modal-Y)
+
+compute-rec-subuniverse-compute-ind-subuniverse-modality :
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○)
+  (ind-○ : ind-subuniverse-modality unit-○)
+  (compute-ind-○ : compute-ind-subuniverse-modality unit-○ ind-○) →
+  compute-rec-subuniverse-modality unit-○
+    ( rec-subuniverse-ind-subuniverse-modality unit-○ ind-○)
+compute-rec-subuniverse-compute-ind-subuniverse-modality
+  unit-○ ind-○ compute-ind-○ X Y is-modal-Y =
+    compute-ind-○ X (λ _ → Y) (λ _ → is-modal-Y)
+```
 
 ### Subuniverse induction follows from modal induction
 
 ```agda
 ind-subuniverse-ind-modality :
-  {l : Level}
-  {○ : operator-modality l l}
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○) →
   ind-modality unit-○ → ind-subuniverse-modality unit-○
 ind-subuniverse-ind-modality {○ = ○} unit-○ ind-○ X P is-modal-P f x' =
   map-retraction-is-equiv (is-modal-P x') (ind-○ X P (unit-○ ∘ f) x')
 
 compute-ind-subuniverse-ind-modality :
-  {l : Level}
-  {○ : operator-modality l l}
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○) →
   (ind-○ : ind-modality unit-○) →
   compute-ind-modality unit-○ ind-○ →
@@ -79,4 +132,31 @@ compute-ind-subuniverse-ind-modality
     ( map-retraction-is-equiv (is-modal-P (unit-○ x)))
     ( compute-ind-○ X P (unit-○ ∘ f) x)) ∙
   ( is-section-is-equiv (is-modal-P (unit-○ x)) (f x))
+```
+
+### Subuniverse recursion follows from modal recursion
+
+```agda
+rec-subuniverse-rec-modality :
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○) →
+  rec-modality unit-○ → rec-subuniverse-modality unit-○
+rec-subuniverse-rec-modality {○ = ○} unit-○ rec-○ X Y is-modal-Y f x' =
+  map-retraction-is-equiv is-modal-Y (rec-○ X Y (unit-○ ∘ f) x')
+
+compute-rec-subuniverse-rec-modality :
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○) →
+  (rec-○ : rec-modality unit-○) →
+  compute-rec-modality unit-○ rec-○ →
+  compute-rec-subuniverse-modality unit-○
+    ( rec-subuniverse-rec-modality unit-○ rec-○)
+compute-rec-subuniverse-rec-modality
+  unit-○ rec-○ compute-rec-○ X Y is-modal-Y f x =
+  ( ap
+    ( map-retraction-is-equiv is-modal-Y)
+    ( compute-rec-○ X Y (unit-○ ∘ f) x)) ∙
+  ( is-section-is-equiv is-modal-Y (f x))
 ```

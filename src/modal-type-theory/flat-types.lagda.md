@@ -9,6 +9,7 @@ module modal-type-theory.flat-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
@@ -86,34 +87,4 @@ is-flat-unit =
     ( map-is-flat-unit)
     ( is-section-map-is-flat-unit)
     ( is-retraction-map-is-flat-unit)
-```
-
-### The type of natural numbers is flat
-
-```agda
--- map-is-flat-ℕ : ℕ → ♭ ℕ
--- map-is-flat-ℕ zero-ℕ = con-♭ zero-ℕ
--- map-is-flat-ℕ (succ-ℕ n) = ap-♭ succ-ℕ (map-is-flat-ℕ n)
-
--- is-section-map-is-flat : (counit-♭ ∘ map-is-flat-ℕ) ~ id
--- is-section-map-is-flat zero-ℕ = refl
--- is-section-map-is-flat (succ-ℕ x) = {!  !}
-```
-
-### Flat types are closed under taking dependent sums
-
-```agda
-module _
-  {@♭ l1 l2 : Level}
-  (@♭ A : UU l1) (@♭ B : A → UU l2)
-  (is-flat-A : is-flat A) (is-flat-B : (@♭ a : A) → is-flat (B a))
-  where
-
-  -- map-is-flat-Σ : Σ A B → ♭ (Σ A B)
-  -- map-is-flat-Σ (x , y) =
-  --   map-inv-distributive-♭-Σ
-  --     ( map-inv-is-equiv is-flat-A x , map-inv-is-equiv {! is-flat-B x !} y)
-
-  -- is-flat-Σ :  is-flat (Σ A B)
-  -- is-flat-Σ = {!  !}
 ```
