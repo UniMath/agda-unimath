@@ -464,14 +464,14 @@ module _
   is-closed-under-left-multiplication-subset-congruence-Ring x y H =
     concatenate-eq-sim-congruence-Ring R S
       ( inv (right-zero-law-mul-Ring R x))
-      ( mul-congruence-Ring R S (refl-congruence-Ring R S x) H)
+      ( left-mul-congruence-Ring R S x H)
 
   is-closed-under-right-multiplication-subset-congruence-Ring :
     is-closed-under-right-multiplication-subset-Ring R subset-congruence-Ring
   is-closed-under-right-multiplication-subset-congruence-Ring x y H =
     concatenate-eq-sim-congruence-Ring R S
       ( inv (left-zero-law-mul-Ring R y))
-      ( mul-congruence-Ring R S H (refl-congruence-Ring R S y))
+      ( right-mul-congruence-Ring R S H y)
 
   is-additive-subgroup-congruence-Ring :
     is-additive-subgroup-subset-Ring R subset-congruence-Ring
@@ -491,3 +491,48 @@ module _
   pr2 (pr2 (pr2 ideal-congruence-Ring)) =
     is-closed-under-right-multiplication-subset-congruence-Ring
 ```
+
+#### The ideal obtained from the congruence relation of an ideal `I is `I itself
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
+  where
+
+  has-same-elements-ideal-congruence-Ring :
+    has-same-elements-ideal-Ring R
+      ( ideal-congruence-Ring R (congruence-ideal-Ring R I))
+      ( I)
+  pr1 (has-same-elements-ideal-congruence-Ring x) H =
+    is-closed-under-eq-ideal-Ring R I H
+      ( ( ap (add-Ring' R x) (neg-zero-Ring R)) ∙
+        ( left-unit-law-add-Ring R x))
+  pr2 (has-same-elements-ideal-congruence-Ring x) H =
+    is-closed-under-eq-ideal-Ring' R I H
+      ( ( ap (add-Ring' R x) (neg-zero-Ring R)) ∙
+        ( left-unit-law-add-Ring R x))
+
+  is-retraction-ideal-congruence-Ring :
+    ideal-congruence-Ring R (congruence-ideal-Ring R I) ＝ I
+  is-retraction-ideal-congruence-Ring =
+    eq-has-same-elements-ideal-Ring R
+      ( ideal-congruence-Ring R (congruence-ideal-Ring R I))
+      ( I)
+      ( has-same-elements-ideal-congruence-Ring)
+```
+
+#### The congruence relation of the ideal obtained from a congruence relation `S is  `S itself
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R)
+  where
+
+  {-relate-same-elements-congruence-ideal-congruence-Ring :
+    relate-same-elements-congruence-Ring R
+      ( congruence-ideal-Ring R (ideal-congruence-Ring R S))
+      ( S)
+  relate-same-elements-congruence-ideal-congruence-Ring = ?-}
+```
+
+Characterisation of ring congruences remains to be defined.

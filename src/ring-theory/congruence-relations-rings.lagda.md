@@ -188,6 +188,20 @@ module _
       ( eq-rel-congruence-Ring)
   mul-congruence-Ring = pr2 S
 
+  left-mul-congruence-Ring :
+    (x : type-Ring R) {y z : type-Ring R} →
+    sim-congruence-Ring y z →
+    sim-congruence-Ring (mul-Ring R x y) (mul-Ring R x z)
+  left-mul-congruence-Ring x H =
+    mul-congruence-Ring (refl-congruence-Ring x) H
+
+  right-mul-congruence-Ring :
+    {x y : type-Ring R} → sim-congruence-Ring x y →
+    (z : type-Ring R) →
+    sim-congruence-Ring (mul-Ring R x z) (mul-Ring R y z)
+  right-mul-congruence-Ring H z =
+    mul-congruence-Ring H (refl-congruence-Ring z)
+
 construct-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) →
   (S : Equivalence-Relation l2 (type-Ring R)) →
