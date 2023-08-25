@@ -14,8 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
-
-open import foundation-core.identity-types
+open import foundation.identity-types
 
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-monoids

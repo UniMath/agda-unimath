@@ -26,9 +26,8 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
-
-open import foundation-core.function-types
-open import foundation-core.homotopies
+open import foundation.function-types
+open import foundation.homotopies
 
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
