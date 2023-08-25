@@ -26,6 +26,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.transport
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -584,6 +585,25 @@ eq-Eq-descent-data-circle :
   Eq-descent-data-circle P Q → P ＝ Q
 eq-Eq-descent-data-circle P Q =
   map-inv-is-equiv (is-equiv-Eq-eq-descent-data-circle P Q)
+```
+
+### Alternative definition of equality of descent data as homomorphisms which are equivalences
+
+```agda
+module _
+  { l1 l2 : Level}
+  ( P : descent-data-circle l1)
+  ( Q : descent-data-circle l2)
+  where
+
+  Eq-descent-data-circle' : UU (l1 ⊔ l2)
+  Eq-descent-data-circle' =
+    Σ ( hom-descent-data-circle P Q)
+      ( λ h → is-equiv (map-hom-descent-data-circle P Q h))
+
+  equiv-Eq-descent-data-circle-hom-is-equiv :
+    Eq-descent-data-circle P Q ≃ Eq-descent-data-circle'
+  equiv-Eq-descent-data-circle-hom-is-equiv = equiv-right-swap-Σ
 ```
 
 ### Uniqueness of descent data characterizing a type family over the circle

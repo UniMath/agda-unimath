@@ -22,6 +22,7 @@ open import synthetic-homotopy-theory.dependent-universal-property-pushouts publ
 open import synthetic-homotopy-theory.descent-circle public
 open import synthetic-homotopy-theory.descent-circle-constant-families public
 open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
+open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.double-loop-spaces public
