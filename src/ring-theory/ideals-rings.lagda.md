@@ -15,13 +15,13 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.function-types
 
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-monoids
@@ -352,7 +352,7 @@ module _
       ( add-Ring R
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
         ( mul-Ring R y (add-Ring R (neg-Ring R u) v)))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
         ( add-Ring R (mul-Ring R y (neg-Ring R u)) (mul-Ring R y v)))
       by
@@ -361,7 +361,7 @@ module _
           ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
           ( a)))
         ( left-distributive-mul-add-Ring R y (neg-Ring R u) v))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
         ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
       by
@@ -370,7 +370,7 @@ module _
           ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
           ( add-Ring R a (mul-Ring R y v))))
         ( right-negative-law-mul-Ring R y u))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( add-Ring R (mul-Ring R (neg-Ring R x) u) (mul-Ring R y u))
         ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
       by
@@ -379,7 +379,7 @@ module _
           ( a)
           ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))))
         ( right-distributive-mul-add-Ring R (neg-Ring R x) y u))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
         ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
       by
@@ -388,7 +388,7 @@ module _
           ( add-Ring R a (mul-Ring R y u))
           ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))))
         ( left-negative-law-mul-Ring R x u))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
         ( add-Ring R (mul-Ring R y v) (neg-Ring R (mul-Ring R y u))))
       by
@@ -399,7 +399,7 @@ module _
         ( commutative-add-Ring R
           ( neg-Ring R (mul-Ring R y u))
           ( mul-Ring R y v)))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
         ( add-Ring R (mul-Ring R y u) (neg-Ring R (mul-Ring R y u))))
       by
@@ -408,7 +408,7 @@ module _
         ( mul-Ring R y u)
         ( mul-Ring R y v)
         ( neg-Ring R (mul-Ring R y u)))
-   ＝ ( add-Ring R
+    ＝ ( add-Ring R
         ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
         ( zero-Ring R))
       by
@@ -417,7 +417,7 @@ module _
           ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
           ( a)))
         ( right-inverse-law-add-Ring R (mul-Ring R y u)))
-   ＝ ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
+    ＝ ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
       by
       ( right-unit-law-add-Ring R
         ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))))

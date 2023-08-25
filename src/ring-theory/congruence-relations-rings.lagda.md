@@ -12,9 +12,9 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-relations
 open import foundation.equivalences
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
-open import foundation.identity-types
 
 open import group-theory.congruence-relations-abelian-groups
 open import group-theory.congruence-relations-monoids
