@@ -435,6 +435,12 @@ module _
               ( λ g → map-equiv (f ∘e (g ∘e (inv-equiv f))) x)
               ( inv (right-inverse-law-equiv e)))))
 
+  distributive-map-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
+    (map-inv-equiv (f ∘e e)) ＝ ((map-inv-equiv e) ∘ (map-inv-equiv f))
+  distributive-map-inv-comp-equiv e f =
+    ap map-equiv (distributive-inv-comp-equiv e f)
+
 comp-inv-equiv-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e

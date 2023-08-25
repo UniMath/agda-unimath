@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
+open import foundation.sections
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
@@ -121,7 +122,35 @@ is-retraction-ind-id-modality :
 is-retraction-ind-id-modality {○ = ○} unit-○ ind-○ compute-ind-○ {X} =
   compute-ind-○ (○ X) (λ _ → X) id
 
---TODO: do the same for recursion
+module _
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○)
+  (rec-○ : rec-modality unit-○)
+  (compute-rec-○ : compute-rec-modality unit-○ rec-○)
+  where
+
+  is-retraction-rec-map-modality :
+    {X Y : UU l1} (f : ○ X → Y) (r : retraction f) →
+    (rec-○ Y X (map-retraction f r) ∘ (unit-○ ∘ f)) ~ id
+  is-retraction-rec-map-modality {X} {Y} f r =
+    ( compute-rec-○ Y X (map-retraction f r) ∘ f) ∙h
+    ( is-retraction-map-retraction f r)
+
+  retraction-rec-map-modality :
+    {X Y : UU l1} (f : ○ X → Y) →
+    retraction f → retraction (unit-○ ∘ f)
+  pr1 (retraction-rec-map-modality {X} {Y} f r) = rec-○ Y X (map-retraction f r)
+  pr2 (retraction-rec-map-modality f r) = is-retraction-rec-map-modality f r
+
+  section-rec-map-modality :
+    {X Y : UU l1} (f : X → ○ Y) →
+    section f → section (rec-○ X Y f)
+  pr1 (section-rec-map-modality f s) = unit-○ ∘ map-section f s
+  pr2 (section-rec-map-modality {X} {Y} f s) =
+    (compute-rec-○ X Y f ∘ map-section f s) ∙h is-section-map-section f s
+
+--TODO: do the same for induction?
 ```
 
 ### `dependent-universal-property-modality ≃ section precomp-Π unit-○ (○ ∘ P)`

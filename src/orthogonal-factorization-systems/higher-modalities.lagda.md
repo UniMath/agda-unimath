@@ -178,11 +178,11 @@ module _
       ( ind-higher-modality)
       ( compute-ind-higher-modality)
 
-  is-modal-identity-types-higher-modality :
+  is-modal-small-identity-type-higher-modality :
     is-modal-identity-types
       ( locally-small-operator-higher-modality)
       ( unit-higher-modality)
-  is-modal-identity-types-higher-modality =
+  is-modal-small-identity-type-higher-modality =
     ( is-modal-identity-types-is-higher-modality)
     ( locally-small-operator-higher-modality)
     ( unit-higher-modality)
@@ -236,32 +236,32 @@ module _
 ### Modal induction on identity types
 
 ```agda
-map-inv-unit-Id-higher-modality' :
+map-inv-unit-Id-modality :
   {l1 l2 : Level}
   ((○ , is-locally-small-○) : locally-small-operator-modality l1 l2 l1)
   (unit-○ : unit-modality ○)
   (Id-○ : is-modal-identity-types (○ , is-locally-small-○) unit-○)
   {X : UU l1} {x' y' : ○ X} →
   ○ (type-is-small (is-locally-small-○ X x' y')) → x' ＝ y'
-map-inv-unit-Id-higher-modality'
+map-inv-unit-Id-modality
   (○ , is-locally-small-○) unit-○ Id-○ {X} {x'} {y'} =
   map-inv-unit-is-modal-type-is-small unit-○
     ( x' ＝ y')
     ( is-locally-small-○ X x' y')
     ( Id-○ X x' y')
 
-map-inv-unit-Id-higher-modality :
+map-inv-unit-Id-higher-modality' :
   {l1 l2 : Level}
   (m : higher-modality l1 l2)
   {X : UU l1} {x' y' : operator-higher-modality m X} →
   operator-higher-modality m
     ( type-is-small (is-locally-small-operator-higher-modality m X x' y')) →
   x' ＝ y'
-map-inv-unit-Id-higher-modality m =
-  map-inv-unit-Id-higher-modality'
+map-inv-unit-Id-higher-modality' m =
+  map-inv-unit-Id-modality
     ( locally-small-operator-higher-modality m)
     ( unit-higher-modality m)
-    ( is-modal-identity-types-higher-modality m)
+    ( is-modal-small-identity-type-higher-modality m)
 
 ind-Id-higher-modality' :
   {l1 l2 : Level}
@@ -310,37 +310,71 @@ ind-Id-higher-modality' m X Y f g =
 ### For homogenous higher modalities, The identity types of modal types are modal in the usual sense
 
 Currently, this uses univalence, although it may be possible to avoid it. One
-way to do this is if we had given a second definition of higher modalities when
-`l1 = l2`.
+surefire way to do this is if we had given a second definition of higher
+modalities when `l1 = l2`.
 
 ```agda
 module _
-  {l : Level}
-  ( ((○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) :
-      higher-modality l l)
+  {l : Level} (m : higher-modality l l)
   where
 
-  map-inv-unit-id-higher-modality :
-    {X : UU l} {x' y' : ○ X} → ○ (x' ＝ y') → x' ＝ y'
-  map-inv-unit-id-higher-modality {X} {x'} {y'} =
-    map-inv-unit-is-modal-type-is-small unit-○
+  map-inv-unit-Id-higher-modality :
+    {X : UU l} {x' y' : operator-higher-modality m X} →
+    operator-higher-modality m (x' ＝ y') → x' ＝ y'
+  map-inv-unit-Id-higher-modality {X} {x'} {y'} =
+    map-inv-unit-is-modal-type-is-small
+      ( unit-higher-modality m)
       ( x' ＝ y')
-      ( is-locally-small-○ X x' y')
-      ( Id-○ X x' y') ∘
-      ( map-ind-modality unit-○
-        ( ind-○)
-        ( map-equiv-is-small ( is-locally-small-○ X x' y')))
+      ( is-locally-small-operator-higher-modality m X x' y')
+      ( is-modal-small-identity-type-higher-modality m X x' y') ∘
+      ( map-ind-modality
+        ( unit-higher-modality m)
+        ( ind-higher-modality m)
+        ( map-equiv-is-small
+          ( is-locally-small-operator-higher-modality m X x' y')))
+
+  is-section-unit-Id-higher-modality :
+    {X : UU l} {x' y' : operator-higher-modality m X} →
+    (map-inv-unit-Id-higher-modality ∘ unit-higher-modality m {x' ＝ y'}) ~ id
+  is-section-unit-Id-higher-modality {X} {x'} {y'} p =
+    ( ap
+      ( map-inv-equiv
+        ( equiv-unit-is-modal-type-is-small
+          ( unit-higher-modality m)
+          ( x' ＝ y')
+          ( is-small-x=y)
+          ( is-modal-x=y)))
+      ( compute-ind-higher-modality m
+        ( x' ＝ y')
+        ( λ _ → type-is-small is-small-x=y)
+        ( unit-higher-modality m ∘ map-equiv-is-small is-small-x=y)
+        ( p))) ∙
+    ( ( htpy-eq
+        ( distributive-map-inv-comp-equiv
+          ( equiv-is-small is-small-x=y)
+          ( unit-higher-modality m , is-modal-x=y))
+        ( unit-higher-modality m (map-equiv-is-small is-small-x=y p))) ∙
+      ( ( ap
+          ( map-inv-equiv-is-small is-small-x=y)
+          ( is-retraction-map-inv-is-equiv is-modal-x=y
+            ( map-equiv-is-small is-small-x=y p))) ∙
+        ( is-retraction-map-inv-equiv (equiv-is-small is-small-x=y) p)))
+    where
+      is-small-x=y = is-locally-small-operator-higher-modality m X x' y'
+      is-modal-x=y = is-modal-small-identity-type-higher-modality m X x' y'
 
   is-modal-Id-higher-modality :
-    {X : UU l} {x' y' : ○ X} → is-modal unit-○ (x' ＝ y')
+    {X : UU l} {x' y' : operator-higher-modality m X} →
+    is-modal (unit-higher-modality m) (x' ＝ y')
   is-modal-Id-higher-modality {X} {x'} {y'} =
     tr
-      ( is-modal unit-○)
+      ( is-modal (unit-higher-modality m))
       ( eq-equiv
-        ( type-is-small (is-locally-small-○ X x' y'))
+        ( type-is-small (is-locally-small-operator-higher-modality m X x' y'))
         ( x' ＝ y')
-        ( inv-equiv-is-small (is-locally-small-○ X x' y')))
-      ( Id-○ X x' y')
+        ( inv-equiv-is-small
+          ( is-locally-small-operator-higher-modality m X x' y')))
+      ( is-modal-small-identity-type-higher-modality m X x' y')
 ```
 
 ### `○ X` is modal
@@ -363,7 +397,7 @@ module _
   is-section-map-inv-unit-higher-modality :
     (unit-○ ∘ map-inv-unit-higher-modality) ~ id
   is-section-map-inv-unit-higher-modality x'' =
-    map-inv-unit-id-higher-modality
+    map-inv-unit-Id-higher-modality
       ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○)
       ( ind-○ (○ X)
         ( λ x'' → unit-○ (map-inv-unit-higher-modality x'') ＝ x'')
@@ -404,7 +438,7 @@ module _
     {X : UU l} {P : ○ X → UU l} → (ind-○ X P ∘ precomp-Π unit-○ (○ ∘ P)) ~ id
   is-retraction-ind-higher-modality {X} {P} s =
     eq-htpy
-      ( map-inv-unit-id-higher-modality
+      ( map-inv-unit-Id-higher-modality
         ( (○ , is-locally-small-○) , unit-○ , (ind-○ , compute-ind-○) , Id-○) ∘
         ( ind-○ X
           ( λ x' → (ind-○ X P ∘ precomp-Π (unit-○) (○ ∘ P)) s x' ＝ s x')

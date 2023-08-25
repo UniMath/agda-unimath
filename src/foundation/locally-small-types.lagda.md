@@ -81,7 +81,8 @@ module _
     is-locally-small l1 type-Locally-Small-Type
   is-locally-small-type-Locally-Small-Type = pr2 A
 
-  small-identity-type-Locally-Small-Type : (x y : type-Locally-Small-Type) → UU l1
+  small-identity-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) → UU l1
   small-identity-type-Locally-Small-Type =
     type-is-locally-small is-locally-small-type-Locally-Small-Type
 
