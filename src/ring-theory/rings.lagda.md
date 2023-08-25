@@ -27,6 +27,9 @@ open import foundation.sets
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
+open import foundation-core.function-types
+open import foundation-core.homotopies
+
 open import group-theory.abelian-groups
 open import group-theory.commutative-monoids
 open import group-theory.groups
@@ -143,30 +146,93 @@ module _
     (x y z : type-Ring R) →
     add-Ring x (add-Ring y z) ＝ add-Ring y (add-Ring x z)
   left-swap-add-Ring = left-swap-add-Ab (ab-Ring R)
+```
 
-  is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring x)
+### Addition in a ring is a binary equivalence
+
+#### Addition on the left is an equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
+  left-subtraction-Ring = left-subtraction-Ab (ab-Ring R)
+
+  is-section-add-neg-Ring :
+    (x : type-Ring R) → (add-Ring R x ∘ left-subtraction-Ring x) ~ id
+  is-section-add-neg-Ring = is-section-add-neg-Ab (ab-Ring R)
+
+  is-retraction-add-neg-Ring :
+    (x : type-Ring R) → (left-subtraction-Ring x ∘ add-Ring R x) ~ id
+  is-retraction-add-neg-Ring = is-retraction-add-neg-Ab (ab-Ring R)
+
+  is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring R x)
   is-equiv-add-Ring = is-equiv-add-Ab (ab-Ring R)
 
-  is-equiv-add-Ring' : (x : type-Ring R) → is-equiv (add-Ring' x)
+  equiv-add-Ring : type-Ring R → (type-Ring R ≃ type-Ring R)
+  equiv-add-Ring = equiv-add-Ab (ab-Ring R)
+```
+
+#### Addition on the right is an equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  right-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
+  right-subtraction-Ring = right-subtraction-Ab (ab-Ring R)
+
+  is-section-add-neg-Ring' :
+    (x : type-Ring R) →
+    (add-Ring' R x ∘ (λ y → right-subtraction-Ring y x)) ~ id
+  is-section-add-neg-Ring' = is-section-add-neg-Ab' (ab-Ring R)
+
+  is-retraction-add-neg-Ring' :
+    (x : type-Ring R) →
+    ((λ y → right-subtraction-Ring y x) ∘ add-Ring' R x) ~ id
+  is-retraction-add-neg-Ring' = is-retraction-add-neg-Ab' (ab-Ring R)
+
+  is-equiv-add-Ring' : (x : type-Ring R) → is-equiv (add-Ring' R x)
   is-equiv-add-Ring' = is-equiv-add-Ab' (ab-Ring R)
 
-  is-binary-equiv-add-Ring : is-binary-equiv add-Ring
-  pr1 is-binary-equiv-add-Ring = is-equiv-add-Ring'
-  pr2 is-binary-equiv-add-Ring = is-equiv-add-Ring
+  equiv-add-Ring' : type-Ring R → (type-Ring R ≃ type-Ring R)
+  equiv-add-Ring' = equiv-add-Ab' (ab-Ring R)
+```
 
-  is-binary-emb-add-Ring : is-binary-emb add-Ring
+#### Addition in a ring is a binary equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-binary-equiv-add-Ring : is-binary-equiv (add-Ring R)
+  is-binary-equiv-add-Ring = is-binary-equiv-add-Ab (ab-Ring R)
+```
+
+#### Addition in a ring is a binary embedding
+
+```agda
+  is-binary-emb-add-Ring : is-binary-emb (add-Ring R)
   is-binary-emb-add-Ring = is-binary-emb-add-Ab (ab-Ring R)
 
-  is-emb-add-Ring : (x : type-Ring R) → is-emb (add-Ring x)
+  is-emb-add-Ring : (x : type-Ring R) → is-emb (add-Ring R x)
   is-emb-add-Ring = is-emb-add-Ab (ab-Ring R)
 
-  is-emb-add-Ring' : (x : type-Ring R) → is-emb (add-Ring' x)
+  is-emb-add-Ring' : (x : type-Ring R) → is-emb (add-Ring' R x)
   is-emb-add-Ring' = is-emb-add-Ab' (ab-Ring R)
+```
 
-  is-injective-add-Ring : (x : type-Ring R) → is-injective (add-Ring x)
+#### Addition in a ring is pointwise injective from both sides
+
+```agda
+  is-injective-add-Ring : (x : type-Ring R) → is-injective (add-Ring R x)
   is-injective-add-Ring = is-injective-add-Ab (ab-Ring R)
 
-  is-injective-add-Ring' : (x : type-Ring R) → is-injective (add-Ring' x)
+  is-injective-add-Ring' : (x : type-Ring R) → is-injective (add-Ring' R x)
   is-injective-add-Ring' = is-injective-add-Ab' (ab-Ring R)
 ```
 

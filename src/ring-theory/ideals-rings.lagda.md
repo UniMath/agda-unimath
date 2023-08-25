@@ -9,6 +9,7 @@ module ring-theory.ideals-rings where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -529,11 +530,63 @@ module _
   {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R)
   where
 
-  {-relate-same-elements-congruence-ideal-congruence-Ring :
+  relate-same-elements-congruence-ideal-congruence-Ring :
     relate-same-elements-congruence-Ring R
       ( congruence-ideal-Ring R (ideal-congruence-Ring R S))
       ( S)
-  relate-same-elements-congruence-ideal-congruence-Ring = ?-}
+  pr1
+    ( relate-same-elements-congruence-ideal-congruence-Ring x y) H =
+    binary-tr
+      ( sim-congruence-Ring R S)
+      ( right-unit-law-add-Ring R x)
+      ( is-section-add-neg-Ring R x y)
+      ( left-add-congruence-Ring R S x H)
+  pr2
+    ( relate-same-elements-congruence-ideal-congruence-Ring x y) H =
+    symmetric-congruence-Ring R S
+      ( left-subtraction-Ring R x y)
+      ( zero-Ring R)
+      ( map-sim-left-subtraction-zero-congruence-Ring R S H)
+
+  is-section-ideal-congruence-Ring :
+    congruence-ideal-Ring R (ideal-congruence-Ring R S) ＝ S
+  is-section-ideal-congruence-Ring =
+    eq-relate-same-elements-congruence-Ring R
+      ( congruence-ideal-Ring R (ideal-congruence-Ring R S))
+      ( S)
+      ( relate-same-elements-congruence-ideal-congruence-Ring)
 ```
 
-Characterisation of equality of ring congruences remains to be defined.
+#### The equivalence of two sided ideals and congruence relations
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1)
+  where
+
+  is-equiv-congruence-ideal-Ring :
+    is-equiv (congruence-ideal-Ring {l1} {l2} R)
+  is-equiv-congruence-ideal-Ring =
+    is-equiv-has-inverse
+      ( ideal-congruence-Ring R)
+      ( is-section-ideal-congruence-Ring R)
+      ( is-retraction-ideal-congruence-Ring R)
+
+  equiv-congruence-ideal-Ring :
+    ideal-Ring l2 R ≃ congruence-Ring l2 R
+  pr1 equiv-congruence-ideal-Ring = congruence-ideal-Ring R
+  pr2 equiv-congruence-ideal-Ring = is-equiv-congruence-ideal-Ring
+
+  is-equiv-ideal-congruence-Ring :
+    is-equiv (ideal-congruence-Ring {l1} {l2} R)
+  is-equiv-ideal-congruence-Ring =
+    is-equiv-has-inverse
+      ( congruence-ideal-Ring R)
+      ( is-retraction-ideal-congruence-Ring R)
+      ( is-section-ideal-congruence-Ring R)
+
+  equiv-ideal-congruence-Ring :
+    congruence-Ring l2 R ≃ ideal-Ring l2 R
+  pr1 equiv-ideal-congruence-Ring = ideal-congruence-Ring R
+  pr2 equiv-ideal-congruence-Ring = is-equiv-ideal-congruence-Ring
+```
