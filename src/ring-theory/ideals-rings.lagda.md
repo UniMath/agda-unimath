@@ -535,4 +535,4 @@ module _
   relate-same-elements-congruence-ideal-congruence-Ring = ?-}
 ```
 
-Characterisation of ring congruences remains to be defined.
+Characterisation of equality of ring congruences remains to be defined.
