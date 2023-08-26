@@ -49,7 +49,7 @@ open import orthogonal-factorization-systems.sigma-closed-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-modalities public
 open import orthogonal-factorization-systems.sigma-closed-reflective-subuniverses public
 open import orthogonal-factorization-systems.stable-orthogonal-factorization-systems public
-open import orthogonal-factorization-systems.subuniverse-induction-modalities public
+open import orthogonal-factorization-systems.subuniverse-induction public
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities public
 open import orthogonal-factorization-systems.wide-function-classes public
 open import orthogonal-factorization-systems.zero-modality public

@@ -1,7 +1,7 @@
-# Subuniverse induction on modalities
+# Subuniverse induction
 
 ```agda
-module orthogonal-factorization-systems.subuniverse-induction-modalities where
+module orthogonal-factorization-systems.subuniverse-induction where
 ```
 
 <details><summary>Imports</summary>
