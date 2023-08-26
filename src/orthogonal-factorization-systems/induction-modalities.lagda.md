@@ -16,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
@@ -181,7 +182,39 @@ module _
 
 ### Naturality of the unit
 
+```text
+         f
+    X ------> Y
+    |         |
+    |         |
+    v         v
+   ○ X ----> ○ Y
+        ○ f
+```
+
 ```agda
+module _
+  {l1 l2 : Level}
+  {○ : operator-modality l1 l2}
+  (unit-○ : unit-modality ○)
+  (rec-○ : rec-modality unit-○)
+  (compute-rec-○ : compute-rec-modality unit-○ rec-○)
+  where
+
+  naturality-unit-rec-modality :
+    {X Y : UU l1} (f : X → Y) →
+    (map-rec-modality unit-○ rec-○ f ∘ unit-○) ~ (unit-○ ∘ f)
+  naturality-unit-rec-modality {X} {Y} f =
+    compute-rec-○ X Y (unit-○ ∘ f)
+
+  naturality-unit-rec-modality' :
+    {X Y : UU l1} (f : X → Y) {x x' : X} →
+    unit-○ x ＝ unit-○ x' → unit-○ (f x) ＝ unit-○ (f x')
+  naturality-unit-rec-modality' f {x} {x'} p =
+    ( inv (naturality-unit-rec-modality f x)) ∙
+    ( ( ap (map-rec-modality unit-○ rec-○ f) p) ∙
+      ( naturality-unit-rec-modality f x'))
+
 module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
@@ -190,19 +223,21 @@ module _
   (compute-ind-○ : compute-ind-modality unit-○ ind-○)
   where
 
-  naturality-unit-modality :
+  naturality-unit-ind-modality :
     {X Y : UU l1} (f : X → Y) →
     (map-ind-modality unit-○ ind-○ f ∘ unit-○) ~ (unit-○ ∘ f)
-  naturality-unit-modality {X} {Y} f =
-    compute-ind-○ X (λ _ → Y) (unit-○ ∘ f)
+  naturality-unit-ind-modality =
+    naturality-unit-rec-modality unit-○
+      ( rec-ind-modality unit-○ ind-○)
+      ( compute-rec-compute-ind-modality unit-○ ind-○ compute-ind-○)
 
-  naturality-unit-modality' :
+  naturality-unit-ind-modality' :
     {X Y : UU l1} (f : X → Y) {x x' : X} →
     unit-○ x ＝ unit-○ x' → unit-○ (f x) ＝ unit-○ (f x')
-  naturality-unit-modality' f {x} {x'} p =
-    ( inv (naturality-unit-modality f x)) ∙
-    ( ( ap (map-ind-modality unit-○ ind-○ f) p) ∙
-      ( naturality-unit-modality f x'))
+  naturality-unit-ind-modality' =
+    naturality-unit-rec-modality' unit-○
+      ( rec-ind-modality unit-○ ind-○)
+      ( compute-rec-compute-ind-modality unit-○ ind-○ compute-ind-○)
 ```
 
 ## See also
