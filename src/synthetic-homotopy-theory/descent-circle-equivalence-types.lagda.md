@@ -46,9 +46,9 @@ module _
       ( l2 ⊔ l3)
   pr1 dependent-descent-data-circle-is-equiv = is-equiv
   pr2 dependent-descent-data-circle-is-equiv f =
-    equiv-is-equiv-postcomp-is-equiv
+    equiv-is-equiv-left-factor
       ( aut-family-with-descent-data-circle B) ∘e
-    ( equiv-is-equiv-precomp-is-equiv
+    ( equiv-is-equiv-right-factor
       ( inv-equiv (aut-family-with-descent-data-circle A)))
 
   family-with-dependent-descent-data-circle-is-equiv :
@@ -59,9 +59,9 @@ module _
   pr1 (pr2 family-with-dependent-descent-data-circle-is-equiv) =
     dependent-descent-data-circle-is-equiv
   pr1 (pr2 (pr2 family-with-dependent-descent-data-circle-is-equiv)) f =
-    equiv-is-equiv-postcomp-is-equiv
+    equiv-is-equiv-left-factor
       ( equiv-family-with-descent-data-circle B) ∘e
-    ( equiv-is-equiv-precomp-is-equiv
+    ( equiv-is-equiv-right-factor
       ( inv-equiv (equiv-family-with-descent-data-circle A)))
   pr2 (pr2 (pr2 family-with-dependent-descent-data-circle-is-equiv)) f p =
     center (is-property-is-equiv _ _ _)

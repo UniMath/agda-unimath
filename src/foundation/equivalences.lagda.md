@@ -337,56 +337,58 @@ module _
   pr2 emb-map-equiv = is-emb-map-equiv
 ```
 
-### Being an equivalence is closed under postcompositions by equivalences
+### The 3-for-2 property of being an equivalence
+
+#### If a right factor is an equivalence, then the left factor is an equivalence iff the composite is
 
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  equiv-is-equiv-postcomp-is-equiv :
+  equiv-is-equiv-left-factor-htpy :
+    { f : A → B} (e : B ≃ C) (h : A → C) (H : h ~ (map-equiv e ∘ f)) →
+    is-equiv f ≃ is-equiv h
+  equiv-is-equiv-left-factor-htpy {f} e h H =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv h)
+      ( λ is-equiv-f →
+        is-equiv-comp-htpy h (map-equiv e) f H is-equiv-f
+          ( is-equiv-map-equiv e))
+      ( is-equiv-right-factor-htpy h (map-equiv e) f H (is-equiv-map-equiv e))
+
+  equiv-is-equiv-left-factor :
     { f : A → B} (e : B ≃ C) →
     is-equiv f ≃ is-equiv (map-equiv e ∘ f)
-  equiv-is-equiv-postcomp-is-equiv {f} e =
-    equiv-prop
-      ( is-property-is-equiv f)
-      ( is-property-is-equiv (map-equiv e ∘ f))
-      ( λ is-equiv-f →
-        is-equiv-comp
-          ( map-equiv e)
-          ( f)
-          ( is-equiv-f)
-          ( is-equiv-map-equiv e))
-      ( is-equiv-right-factor
-        ( map-equiv e)
-        ( f)
-        ( is-equiv-map-equiv e))
+  equiv-is-equiv-left-factor {f} e =
+    equiv-is-equiv-left-factor-htpy e (map-equiv e ∘ f) refl-htpy
 ```
 
-### Being an equivalence is closed under precompositions by equivalences
+#### If a left factor is an equivalence, then the right factor is an equivalence iff the composite is
 
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
-  equiv-is-equiv-precomp-is-equiv :
-    ( e : A ≃ B) {f : B → C} →
-    is-equiv f ≃ is-equiv (f ∘ map-equiv e)
-  equiv-is-equiv-precomp-is-equiv e {f} =
+  equiv-is-equiv-right-factor-htpy :
+    ( e : A ≃ B) {f : B → C} (h : A → C) (H : h ~ (f ∘ map-equiv e)) →
+    is-equiv f ≃ is-equiv h
+  equiv-is-equiv-right-factor-htpy e {f} h H =
     equiv-prop
       ( is-property-is-equiv f)
-      ( is-property-is-equiv (f ∘ map-equiv e))
-      ( is-equiv-comp
-        ( f)
-        ( map-equiv e)
-        ( is-equiv-map-equiv e))
-      ( λ is-equiv-f-e →
-        is-equiv-left-factor
-          ( f)
-          ( map-equiv e)
-          ( is-equiv-f-e)
+      ( is-property-is-equiv h)
+      ( is-equiv-comp-htpy h f (map-equiv e) H (is-equiv-map-equiv e))
+      ( λ is-equiv-h →
+        is-equiv-left-factor-htpy h f (map-equiv e) H is-equiv-h
           ( is-equiv-map-equiv e))
+
+  equiv-is-equiv-right-factor :
+    ( e : A ≃ B) {f : B → C} →
+    is-equiv f ≃ is-equiv (f ∘ map-equiv e)
+  equiv-is-equiv-right-factor e {f} =
+    equiv-is-equiv-right-factor-htpy e (f ∘ map-equiv e) refl-htpy
 ```
 
 ### Homotopy induction for homotopies between equivalences
