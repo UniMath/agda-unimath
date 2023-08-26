@@ -22,11 +22,40 @@ open import synthetic-homotopy-theory.free-loops
 
 ## Idea
 
-Given a family `A : 𝕊¹ → U` over the circle and a family
+Given a family `A : 𝕊¹ → U` over the
+[circle](synthetic-homotopy-theory.circle.md) and a family
 `B : (t : 𝕊¹) → (A t) → U` over `A`, the
 [descent data](synthetic-homotopy-theory.descent-circle.md) for the family of
-dependent pair types `λ t → Σ (A t) (B t)` is `(Σ X R, map-Σ e k)`, where
-`(X, e)` is descent data for `A` and `(R, k)` is dependent descent data for `B`.
+[dependent pair types](foundation.dependent-pair-types.md) `λ t → Σ (A t) (B t)`
+is `(Σ X R, map-Σ e k)`, where `(X, e)` is descent data for `A` and `(R, k)` is
+dependent descent data for `B`.
+
+## Definitions
+
+### Descent data for families of dependent pair types over the circle
+
+```agda
+module _
+  { l1 l2 l3 : Level} {S : UU l1} (l : free-loop S)
+  ( A : family-with-descent-data-circle l l2)
+  ( B : family-with-dependent-descent-data-circle l A l3)
+  where
+
+  descent-data-circle-dependent-pair-type : descent-data-circle (l2 ⊔ l3)
+  pr1 descent-data-circle-dependent-pair-type =
+    Σ ( type-family-with-descent-data-circle A)
+      ( type-family-with-dependent-descent-data-circle A B)
+  pr2 descent-data-circle-dependent-pair-type =
+    equiv-Σ
+      ( type-family-with-dependent-descent-data-circle A B)
+      ( aut-family-with-descent-data-circle A)
+      ( pseudo-aut-family-with-dependent-descent-data-circle A B)
+
+  family-descent-data-circle-dependent-pair-type : S → UU (l2 ⊔ l3)
+  family-descent-data-circle-dependent-pair-type x =
+    Σ ( family-family-with-descent-data-circle A x)
+      ( family-family-with-dependent-descent-data-circle A B x)
+```
 
 ## Properties
 
@@ -39,25 +68,11 @@ module _
   ( B : family-with-dependent-descent-data-circle l A l3)
   where
 
-  family-descent-data-circle-dependent-pair-type : S → UU (l2 ⊔ l3)
-  family-descent-data-circle-dependent-pair-type x =
-    Σ ( family-family-with-descent-data-circle A x)
-      ( family-family-with-dependent-descent-data-circle A B x)
-
-  descent-data-circle-dependent-pair-type : descent-data-circle (l2 ⊔ l3)
-  pr1 descent-data-circle-dependent-pair-type =
-    Σ ( type-family-with-descent-data-circle A)
-      ( type-family-with-dependent-descent-data-circle A B)
-  pr2 descent-data-circle-dependent-pair-type =
-    equiv-Σ
-      ( type-family-with-dependent-descent-data-circle A B)
-      ( aut-family-with-descent-data-circle A)
-      ( pseudo-aut-family-with-dependent-descent-data-circle A B)
-
   eq-descent-data-circle-dependent-pair-type :
     Eq-descent-data-circle
-      ( descent-data-circle-dependent-pair-type)
-      ( ev-descent-data-circle l family-descent-data-circle-dependent-pair-type)
+      ( descent-data-circle-dependent-pair-type l A B)
+      ( ev-descent-data-circle l
+        ( family-descent-data-circle-dependent-pair-type l A B))
   pr1 eq-descent-data-circle-dependent-pair-type =
     equiv-Σ
       ( family-family-with-dependent-descent-data-circle A B (base-free-loop l))
@@ -92,9 +107,9 @@ module _
   family-with-descent-data-circle-dependent-pair-type :
     family-with-descent-data-circle l (l2 ⊔ l3)
   pr1 family-with-descent-data-circle-dependent-pair-type =
-    family-descent-data-circle-dependent-pair-type
+    family-descent-data-circle-dependent-pair-type l A B
   pr1 (pr2 family-with-descent-data-circle-dependent-pair-type) =
-    descent-data-circle-dependent-pair-type
+    descent-data-circle-dependent-pair-type l A B
   pr2 (pr2 family-with-descent-data-circle-dependent-pair-type) =
     eq-descent-data-circle-dependent-pair-type
 ```

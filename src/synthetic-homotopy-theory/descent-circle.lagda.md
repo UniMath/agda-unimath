@@ -44,10 +44,13 @@ The descent property uniquely characterizes type families over the circle.
 
 ### Descent data for the circle
 
-By the universal property of the circle and univalence, a type family
-`A : 𝕊¹ → U` is equivalent to a type `X : U` equipped with an automorphism
-`e : X ≃ X`, in a way made precise in further sections of this file. The pair
-`(X, e)` is called **descent data** for the circle.
+By the
+[universal property of the circle](synthetic-homotopy-theory.universal-property-circle.md)
+and [univalence](foundation.univalence.md), a type family `A : 𝕊¹ → U` over the
+[circle](synthetic-homotopy-theory.circle.md) is equivalent to a type `X : U`
+equipped with an [automorphism](foundation.automorphisms.md) `e : X ≃ X`, in a
+way made precise in further sections of this file. The pair `(X, e)` is called
+**descent data** for the circle.
 
 ```agda
 descent-data-circle :
@@ -71,7 +74,7 @@ module _
 ### Homomorphisms between descent data for the circle
 
 A homomorphism between `(X, e)` and `(Y, f)` is a map from `X` to `Y` such that
-the obvious square commutes.
+the obvious square [commutes](foundation.commuting-squares-of-maps.md).
 
 ```agda
 hom-descent-data-circle :
@@ -108,7 +111,8 @@ module _
 ### Canonical descent data for a family over the circle
 
 A type family over the circle gives rise to its canonical descent data, obtained
-by evaluation at `base` and transporting along `loop`.
+by evaluation at `base` and [transporting](foundation-core.transport.md) along
+`loop`.
 
 ```agda
 ev-descent-data-circle :
@@ -120,8 +124,8 @@ pr2 (ev-descent-data-circle l A) = equiv-tr A (loop-free-loop l)
 
 ### The identity type of descent data for the circle
 
-An equivalence between `(X, e)` and `(Y, f)` is an equivalence between `X` and
-`Y` which commutes with the automorphisms.
+An [equivalence](foundation.equivalences.md) between `(X, e)` and `(Y, f)` is an
+equivalence between `X` and `Y` which commutes with the automorphisms.
 
 ```agda
 Eq-descent-data-circle :
@@ -161,13 +165,13 @@ module _
 ### A family over the circle equipped with corresponding descent data
 
 A family for descent data `(X, e)` is a family over the circle, along with a
-proof that they are equivalent.
+proof that `(X, e)` is equivalent to the canonical descent data of the family.
 
-Descent data for a family `A` is descent data with a proof that it's equivalent
-to `A`.
+Descent data for a family `A : 𝕊¹ → U` is descent data with a proof that it's
+equivalent to the canonical descent data of `A`.
 
-A family with descent data is a family `A` over the circle, equipped with
-descent data `(X, e)`, and a proof of their equivalence.
+A family with descent data is a family `A : 𝕊¹ → U` over the circle, equipped
+with descent data `(X, e)`, and a proof of their equivalence.
 
 Ideally, every section characterizing descent data of a particular type family
 should include a term of type `family-with-descent-data-circle`, whose type
@@ -317,7 +321,7 @@ module _
     map-equiv (pseudo-aut-dependent-descent-data-circle x)
 ```
 
-### Canonical dependent descent data for a family over a family oveer the circle
+### Canonical dependent descent data for a family over a family over the circle
 
 ```agda
 ev-dependent-descent-data-circle :

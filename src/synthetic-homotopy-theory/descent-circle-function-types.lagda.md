@@ -30,7 +30,8 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-Given two families `A, B : 𝕊¹ → U` over the circle, the
+Given two families `A, B : 𝕊¹ → U` over the
+[circle](synthetic-homotopy-theory.circle.md), the
 [descent data](synthetic-homotopy-theory.descent-circle.md) for the family of
 function types `λ t → (A t → B t)` is `(X → Y, λ h → f ∘ h ∘ e⁻¹)`, where
 `(X, e)` is descent data for `A` and `(Y, f)` is descent data for `B`.
@@ -39,6 +40,8 @@ This correspondence allows us to characterize sections of this family as
 homomorphisms from `(X, e)` to `(Y, f)`.
 
 ## Definitions
+
+### Descent data for families of function types over the circle
 
 ```agda
 module _
@@ -67,7 +70,7 @@ module _
 
 ## Properties
 
-### Characterization of descent data for function types over the circle
+### Characterization of descent data for families of function types over the circle
 
 ```agda
 module _

@@ -21,12 +21,13 @@ open import synthetic-homotopy-theory.free-loops
 
 ## Idea
 
-Descent data for a constant type family is simply the type it evaluates to,
-together with the identity.
+[Descent data for the circle](synthetic-homotopy-theory.descent-circle.md) for a
+[constant type family](foundation.constant-type-families.md) is simply the type
+it evaluates to, together with the identity.
 
-## Properties
+## Definitions
 
-### Characterization of descent data for constant type families over the circle
+### Descent data for constant type families over the circle
 
 ```agda
 module _
@@ -38,19 +39,35 @@ module _
   pr1 descent-data-circle-constant-type = X
   pr2 descent-data-circle-constant-type = id-equiv
 
+  family-descent-data-circle-constant-type : S → UU l2
+  family-descent-data-circle-constant-type x = X
+```
+
+## Properties
+
+### Characterization of descent data for constant type families over the circle
+
+```agda
+module _
+  { l1 l2 : Level} {S : UU l1} (l : free-loop S)
+  ( X : UU l2)
+  where
+
   eq-descent-data-circle-constant-type :
     Eq-descent-data-circle
-      ( descent-data-circle-constant-type)
-      ( ev-descent-data-circle l (constant-type-family S X))
+      ( descent-data-circle-constant-type l X)
+      ( ev-descent-data-circle l
+        ( family-descent-data-circle-constant-type l X))
   pr1 eq-descent-data-circle-constant-type = id-equiv
   pr2 eq-descent-data-circle-constant-type x =
     inv (tr-constant-type-family (loop-free-loop l) x)
 
   family-with-descent-data-constant-type :
     family-with-descent-data-circle l l2
-  pr1 family-with-descent-data-constant-type = constant-type-family S X
+  pr1 family-with-descent-data-constant-type =
+    family-descent-data-circle-constant-type l X
   pr1 (pr2 family-with-descent-data-constant-type) =
-    descent-data-circle-constant-type
+    descent-data-circle-constant-type l X
   pr2 (pr2 family-with-descent-data-constant-type) =
     eq-descent-data-circle-constant-type
 ```
