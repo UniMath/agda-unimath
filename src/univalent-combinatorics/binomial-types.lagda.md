@@ -65,7 +65,7 @@ merely equal to `B` into `A`.
 binomial-type-Level :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 binomial-type-Level l X Y =
-  Σ (component-UU-Level l Y) (λ Z → type-component-UU-Level Z ↪d X)
+  Σ (component-UU-Level l Y) (λ Z → type-component-UU-Level Z ↪ᵈ X)
 
 type-binomial-type-Level :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
@@ -81,7 +81,7 @@ abstract
 
 decidable-emb-binomial-type-Level :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
-  type-binomial-type-Level Z ↪d X
+  type-binomial-type-Level Z ↪ᵈ X
 decidable-emb-binomial-type-Level Z = pr2 Z
 
 map-decidable-emb-binomial-type-Level :
@@ -119,7 +119,7 @@ abstract
 
 decidable-emb-binomial-type :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-  type-binomial-type Z ↪d X
+  type-binomial-type Z ↪ᵈ X
 decidable-emb-binomial-type Z = pr2 Z
 
 map-decidable-emb-binomial-type :
@@ -158,10 +158,10 @@ compute-binomial-type-Level l {l1} {l2} A B =
               ( inv-equiv (equiv-total-fib (pr1 (pr2 e)))) B))) ∘e
       ( inv-associative-Σ
         ( UU (l1 ⊔ l))
-        ( λ X → X ↪d A)
+        ( λ X → X ↪ᵈ A)
         ( λ X → mere-equiv B (pr1 X)))) ∘e
     ( equiv-tot (λ X → commutative-prod))) ∘e
-  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪d A))
+  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
 
 binomial-type' :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc (l1 ⊔ l2))
@@ -205,12 +205,12 @@ abstract
     {l : Level} {X : UU l} → is-contr (binomial-type X empty)
   binomial-type-over-empty {l} {X} =
     is-contr-equiv
-      ( raise-empty l ↪d X)
+      ( raise-empty l ↪ᵈ X)
       ( left-unit-law-Σ-is-contr
         ( is-contr-component-UU-Level-empty l)
         ( Fin-UU-Fin l zero-ℕ))
       ( is-contr-equiv
-        ( empty ↪d X)
+        ( empty ↪ᵈ X)
         ( equiv-precomp-decidable-emb-equiv (compute-raise-empty l) X)
         ( is-contr-equiv
           ( is-decidable-emb ex-falso)

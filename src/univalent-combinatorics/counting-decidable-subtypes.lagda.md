@@ -116,7 +116,7 @@ count-decidable-subtype P e =
 
 ```agda
 count-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪d Y) → count Y → count X
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ᵈ Y) → count Y → count X
 count-decidable-emb f e =
   count-equiv
     ( equiv-total-fib (map-decidable-emb f))

@@ -241,7 +241,7 @@ is-set-isolated-point A =
   is-set-has-decidable-equality (has-decidable-equality-isolated-point A)
 
 decidable-emb-isolated-point :
-  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪d A
+  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪ᵈ A
 pr1 (decidable-emb-isolated-point {l1} {A} a) =
   const unit A (pr1 a)
 pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
