@@ -24,8 +24,7 @@ open import structured-types.pointed-types
 
 ## Idea
 
-An involution on a type `A` is a map (or an equivalence) `f : A → A` such that
-`(f ∘ f) ~ id`
+An **involution** on a type `A` is a map `f : A → A` such that `(f ∘ f) ~ id`.
 
 ## Definition
 
