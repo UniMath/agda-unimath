@@ -40,7 +40,7 @@ module _
   pointed-map : Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
   pointed-map A B = pointed-Π A (constant-Pointed-Fam A B)
 
-  infix 4 _→∗_
+  infixr 4 _→∗_
   _→∗_ = pointed-map
 ```
 
