@@ -9,15 +9,22 @@ module foundation-core.logical-equivalences where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.coherently-invertible-maps
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.injective-maps
 open import foundation-core.propositions
 ```
 
@@ -25,9 +32,10 @@ open import foundation-core.propositions
 
 ## Idea
 
-Logical equivalences between two types `A` and `B` consist of a map `A → B` and
-a map `B → A`. The type of logical equivalences between types is the
-Curry-Howard interpretation of logical equivalences between propositions.
+**Logical equivalences** between two types `A` and `B` consist of a map `A → B`
+and a map `B → A`. The type of logical equivalences between types is the
+Curry-Howard interpretation of logical equivalences between
+[propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -75,8 +83,8 @@ pr2 (iff-Prop P Q) = is-prop-iff-Prop P Q
 _∘iff_ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (B ↔ C) → (A ↔ B) → (A ↔ C)
-pr1 (pair g1 g2 ∘iff pair f1 f2) = g1 ∘ f1
-pr2 (pair g1 g2 ∘iff pair f1 f2) = f2 ∘ g2
+pr1 ((g1 , g2) ∘iff (f1 , f2)) = g1 ∘ f1
+pr2 ((g1 , g2) ∘iff (f1 , f2)) = f2 ∘ g2
 ```
 
 ### Inverting a logical equivalence
@@ -130,11 +138,59 @@ module _
   equiv-iff :
     (type-Prop P → type-Prop Q) → (type-Prop Q → type-Prop P) →
     type-Prop P ≃ type-Prop Q
-  equiv-iff f g = equiv-iff' (pair f g)
+  equiv-iff f g = equiv-iff' (f , g)
+```
 
+### Equivalences are logical equivalences
+
+```agda
 iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
 pr1 (iff-equiv e) = map-equiv e
 pr2 (iff-equiv e) = map-inv-equiv e
+
+is-injective-iff-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-injective (iff-equiv {A = A} {B})
+is-injective-iff-equiv p = eq-htpy-equiv (pr1 (htpy-eq-iff p))
+
+compute-fib-iff-equiv :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} ((f , g) : A ↔ B) →
+  fib (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
+compute-fib-iff-equiv {A = A} {B} (f , g) =
+  ( ( ( ( ( equiv-tot (λ _ → equiv-funext)) ∘e
+          ( left-unit-law-Σ-is-contr (is-contr-total-path' f) (f , refl))) ∘e
+        ( inv-associative-Σ (A → B) (_＝ f) _)) ∘e
+      ( equiv-tot (λ _ → equiv-left-swap-Σ))) ∘e
+    ( associative-Σ (A → B) _ _)) ∘e
+  ( equiv-tot (λ e → equiv-pair-eq (iff-equiv e) (f , g)))
+```
+
+### Two equal propositions are logically equivalent
+
+```agda
+iff-eq :
+  {l1 : Level} {P Q : Prop l1} → P ＝ Q → P ⇔ Q
+pr1 (iff-eq refl) = id
+pr2 (iff-eq refl) = id
+```
+
+### Logical equivalence of propositions is equivalent to equivalence of propositions
+
+```agda
+abstract
+  is-equiv-equiv-iff :
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+    is-equiv (equiv-iff' P Q)
+  is-equiv-equiv-iff P Q =
+    is-equiv-is-prop
+      ( is-prop-iff-Prop P Q)
+      ( is-prop-type-equiv-Prop P Q)
+      ( iff-equiv)
+
+equiv-equiv-iff :
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+  (P ⇔ Q) ≃ (type-Prop P ≃ type-Prop Q)
+pr1 (equiv-equiv-iff P Q) = equiv-iff' P Q
+pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
 ```
 
 ## Logical equivalences between dependent function types
@@ -167,7 +223,8 @@ infixl 0 step-logical-equivalence-reasoning
 
 logical-equivalence-reasoning_ :
   {l1 : Level} (X : UU l1) → X ↔ X
-logical-equivalence-reasoning X = pair id id
+pr1 (logical-equivalence-reasoning X) = id
+pr2 (logical-equivalence-reasoning X) = id
 
 step-logical-equivalence-reasoning :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →

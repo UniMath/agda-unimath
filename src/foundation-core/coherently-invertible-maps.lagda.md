@@ -39,6 +39,19 @@ module _
   has-inverse : (A → B) → UU (l1 ⊔ l2)
   has-inverse f = Σ (B → A) (λ g → ((f ∘ g) ~ id) × ((g ∘ f) ~ id))
 
+  map-inv-has-inverse : (f : A → B) → has-inverse f → B → A
+  map-inv-has-inverse f = pr1
+
+  is-retraction-has-inverse :
+    (f : A → B) (has-inverse-f : has-inverse f) →
+    (f ∘ map-inv-has-inverse f has-inverse-f) ~ id
+  is-retraction-has-inverse f = pr1 ∘ pr2
+
+  is-section-has-inverse :
+    (f : A → B) (has-inverse-f : has-inverse f) →
+    (map-inv-has-inverse f has-inverse-f ∘ f) ~ id
+  is-section-has-inverse f = pr2 ∘ pr2
+
   coherence-is-coherently-invertible :
     (f : A → B) (g : B → A) (G : (f ∘ g) ~ id) (H : (g ∘ f) ~ id) → UU (l1 ⊔ l2)
   coherence-is-coherently-invertible f g G H = (G ·r f) ~ (f ·l H)

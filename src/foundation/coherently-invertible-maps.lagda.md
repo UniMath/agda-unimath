@@ -42,9 +42,9 @@ abstract
     is-prop-is-proof-irrelevant
       ( λ H →
         is-contr-equiv'
-          ( Σ (section f)
-            ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
-              ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
+          ( Σ ( section f)
+              ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
+                ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
           ( associative-Σ (B → A)
             ( λ g → ((f ∘ g) ~ id))
             ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
