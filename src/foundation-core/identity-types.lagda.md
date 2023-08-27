@@ -81,7 +81,7 @@ module _
   data Id (x : A) : A → UU l where
     refl : Id x x
 
-  infix 10 _＝_
+  infix 15 _＝_
   _＝_ : A → A → UU l
   (a ＝ b) = Id a b
 

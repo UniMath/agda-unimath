@@ -65,7 +65,7 @@ is-prop-is-surjective :
   is-prop (is-surjective f)
 is-prop-is-surjective f = is-prop-type-Prop (is-surjective-Prop f)
 
-infixr -10 _↠_
+infix 4 _↠_
 _↠_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↠ B = Σ (A → B) is-surjective
 

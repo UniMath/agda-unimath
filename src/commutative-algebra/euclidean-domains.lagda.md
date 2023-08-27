@@ -74,7 +74,7 @@ is-euclidean-valuation R v =
     ( λ (q , r) →
       ( Id x (add-Integral-Domain R (mul-Integral-Domain R q y) r)) ×
         ( is-zero-Integral-Domain R r +
-        ( v r < v y)))
+        ( v r <-ℕ v y)))
 ```
 
 ### The condition of being a Euclidean domain

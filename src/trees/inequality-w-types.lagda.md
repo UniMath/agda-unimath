@@ -34,7 +34,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  infix -5 _<-𝕎_
+  infix 15 _<-𝕎_
 
   data _<-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
     le-∈-𝕎 : {y : 𝕎 A B} → x ∈-𝕎 y → x <-𝕎 y
@@ -48,7 +48,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  infix -5 _≤-𝕎_
+  infix 15 _≤-𝕎_
 
   data _≤-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
     refl-leq-𝕎 : x ≤-𝕎 x

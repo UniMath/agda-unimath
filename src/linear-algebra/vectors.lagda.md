@@ -78,6 +78,7 @@ module _
   component-vec (succ-ℕ n) (a ∷ v) (inl k) = component-vec n v k
   component-vec (succ-ℕ n) (a ∷ v) (inr k) = a
 
+  infix 15 _∈-vec_
   data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
     is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
     is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)
