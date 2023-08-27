@@ -2,16 +2,15 @@
 
 ```agda
 module foundation-core.invertible-maps where
-
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation.action-on-identifications-functions
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -89,7 +88,8 @@ module _
   map-invertible-map : invertible-map A B → A → B
   map-invertible-map = pr1
 
-  has-inverse-map-invertible-map : (f : invertible-map A B) → has-inverse (map-invertible-map f)
+  has-inverse-map-invertible-map :
+    (f : invertible-map A B) → has-inverse (map-invertible-map f)
   has-inverse-map-invertible-map = pr2
 
   map-inv-invertible-map : invertible-map A B → B → A

@@ -19,7 +19,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -61,8 +60,11 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  coherence-htpy-section : (s t : section f) → (pr1 s ~ pr1 t) → UU l2
+  coherence-htpy-section s t H = pr2 s ~ ((f ·l H) ∙h pr2 t)
+
   htpy-section : (s t : section f) → UU (l1 ⊔ l2)
-  htpy-section s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
+  htpy-section s t = Σ (pr1 s ~ pr1 t) (coherence-htpy-section s t)
 
   extensionality-section : (s t : section f) → (s ＝ t) ≃ htpy-section s t
   extensionality-section (s , H) =
