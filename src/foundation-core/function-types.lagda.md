@@ -31,7 +31,7 @@ idω a = a
 ### Dependent composition of functions
 
 ```agda
-infixr 18 _∘_
+infixr 30 _∘_
 _∘_ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3} →
   ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)

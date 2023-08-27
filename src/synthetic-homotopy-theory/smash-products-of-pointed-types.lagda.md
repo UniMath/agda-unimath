@@ -49,6 +49,7 @@ smash-prod-Pointed-Type A B =
     ( pointed-map-prod-wedge-Pointed-Type A B)
     ( terminal-pointed-map (A ∨∗ B))
 
+infixr 10 _∧∗_
 _∧∗_ = smash-prod-Pointed-Type
 ```
 

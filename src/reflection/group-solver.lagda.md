@@ -320,9 +320,9 @@ module _ {n : ℕ} where
     private
       -- Shorter names to make the proofs less verbose
       _*_ = mul-Group G
-      infixl 30 _*_
+      infixl 31 _*_
       _⁻¹ = inv-Group G
-      infix 40 _⁻¹
+      infix 32 _⁻¹
       unit = unit-Group G
 
     useGroupEqualityElem :

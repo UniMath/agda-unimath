@@ -98,6 +98,7 @@ module _
   leq-subtype-Prop P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
 
+  infixr -10 _⊆_
   _⊆_ :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
   P ⊆ Q = type-Prop (leq-subtype-Prop P Q)

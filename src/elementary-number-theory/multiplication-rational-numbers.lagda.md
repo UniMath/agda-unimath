@@ -36,7 +36,7 @@ rational numbers.
 mul-ℚ : ℚ → ℚ → ℚ
 mul-ℚ (x , p) (y , q) = in-fraction-ℤ (mul-fraction-ℤ x y)
 
-infix 30 _*ℚ_
+infix 31 _*ℚ_
 _*ℚ_ = mul-ℚ
 ```
 

@@ -45,6 +45,7 @@ module _
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = section f × retraction f
 
+infix 10 _≃_
 _≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = Σ (A → B) is-equiv
 ```
@@ -280,7 +281,7 @@ module _
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
   pr2 (equiv-comp g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
-  infixr 18 _∘e_
+  infixr 30 _∘e_
   _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
   _∘e_ = equiv-comp
 ```

@@ -135,7 +135,7 @@ mul-ℤ[i] : ℤ[i] → ℤ[i] → ℤ[i]
 pr1 (mul-ℤ[i] (a , b) (a' , b')) = (a *ℤ a') -ℤ (b *ℤ b')
 pr2 (mul-ℤ[i] (a , b) (a' , b')) = (a *ℤ b') +ℤ (a' *ℤ b)
 
-infix 30 _*ℤ[i]_
+infix 31 _*ℤ[i]_
 _*ℤ[i]_ = mul-ℤ[i]
 
 ap-mul-ℤ[i] :

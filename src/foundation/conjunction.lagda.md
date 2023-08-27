@@ -30,6 +30,7 @@ and `Q` is the proposition that both `P` and `Q` hold.
 ```agda
 conj-Prop = prod-Prop
 
+infixr 10 _∧_
 _∧_ = conj-Prop
 ```
 
