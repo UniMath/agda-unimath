@@ -35,7 +35,7 @@ mul-ℕ : ℕ → ℕ → ℕ
 mul-ℕ 0 n = 0
 mul-ℕ (succ-ℕ m) n = (mul-ℕ m n) +ℕ n
 
-infix 31 _*ℕ_
+infix 33 _*ℕ_
 _*ℕ_ = mul-ℕ
 
 mul-ℕ' : ℕ → ℕ → ℕ

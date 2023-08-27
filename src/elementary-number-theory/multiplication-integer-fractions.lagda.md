@@ -43,7 +43,7 @@ pr2 (pr2 (mul-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos))) =
 mul-fraction-ℤ' : fraction-ℤ → fraction-ℤ → fraction-ℤ
 mul-fraction-ℤ' x y = mul-fraction-ℤ y x
 
-infix 31 _*fraction-ℤ_
+infix 33 _*fraction-ℤ_
 _*fraction-ℤ_ = mul-fraction-ℤ
 
 ap-mul-fraction-ℤ :
