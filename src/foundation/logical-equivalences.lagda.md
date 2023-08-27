@@ -12,6 +12,10 @@ open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
+open import foundation-core.homotopies
+open import foundation.equality-cartesian-product-types
+open import foundation.functoriality-cartesian-product-types
+open import foundation.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -83,6 +87,32 @@ inv-iff :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ↔ B) → (B ↔ A)
 pr1 (inv-iff (f , g)) = g
 pr2 (inv-iff (f , g)) = f
+```
+
+### Characterizing equality of logical equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  htpy-iff : (f g : A ↔ B) → UU (l1 ⊔ l2)
+  htpy-iff f g =
+    ( forward-implication f ~ forward-implication g) ×
+    ( backward-implication f ~ backward-implication g)
+
+  ext-iff : (f g : A ↔ B) → (f ＝ g) ≃ htpy-iff f g
+  ext-iff f g = equiv-prod equiv-funext equiv-funext ∘e equiv-pair-eq f g
+
+  refl-htpy-iff : (f : A ↔ B) → htpy-iff f f
+  pr1 (refl-htpy-iff f) = refl-htpy
+  pr2 (refl-htpy-iff f) = refl-htpy
+
+  htpy-eq-iff : {f g : A ↔ B} → f ＝ g → htpy-iff f g
+  htpy-eq-iff {f} {g} = map-equiv (ext-iff f g)
+
+  eq-htpy-iff : (f g : A ↔ B) → htpy-iff f g → (f ＝ g)
+  eq-htpy-iff f g = map-inv-equiv (ext-iff f g)
 ```
 
 ### Logical equivalences between propositions induce equivalences
