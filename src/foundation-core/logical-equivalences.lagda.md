@@ -67,6 +67,7 @@ pr2 (iff-Prop P Q) = is-prop-iff-Prop P Q
 ### Composition of logical equivalences
 
 ```agda
+infixr 18 _∘iff_
 _∘iff_ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (B ↔ C) → (A ↔ B) → (A ↔ C)

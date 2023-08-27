@@ -280,6 +280,7 @@ module _
   pr1 (equiv-comp g h) = (map-equiv g) ∘ (map-equiv h)
   pr2 (equiv-comp g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
+  infixr 18 _∘e_
   _∘e_ : (B ≃ X) → (A ≃ B) → (A ≃ X)
   _∘e_ = equiv-comp
 ```

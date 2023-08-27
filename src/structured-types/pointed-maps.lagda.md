@@ -133,6 +133,7 @@ precomp-pointed-map :
   A →∗ B → B →∗ C → A →∗ C
 precomp-pointed-map C f g = comp-pointed-map g f
 
+infixr 18 _∘∗_
 _∘∗_ :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →

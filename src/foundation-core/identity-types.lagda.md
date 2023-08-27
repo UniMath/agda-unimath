@@ -117,6 +117,7 @@ module _
   {l : Level} {A : UU l}
   where
 
+  infix 18 _∙_
   _∙_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
   refl ∙ q = q
 
