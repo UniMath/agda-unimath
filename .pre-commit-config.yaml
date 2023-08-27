@@ -76,6 +76,14 @@ repos:
         types_or: [markdown, text]
         require_serial: true
 
+      - id: agda-conventions
+        name: Check miscellaneous Agda conventions
+        entry: scripts/agda_conventions.py
+        language: python
+        files: ^src\/[^/]+\/.+\.lagda\.md$ # Don't match top level modules
+        types_or: [markdown, text]
+        require_serial: true
+
       - id: generate-namespace-index-modules
         name: Generate Agda namespace index modules
         entry: scripts/generate_namespace_index_modules.py
