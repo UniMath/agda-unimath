@@ -16,18 +16,21 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.invertible-maps
 ```
 
 </details>
 
 ## Idea
 
-An inverse for a map `f : A → B` is a map `g : B → A` equipped with homotopies
-` (f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is structure on the map
-`f`, and not a property. Therefore we include an coherence condition for the
-homotopies of an inverse. Coherently invertible map `f : A → B` is a map
-equipped with a two-sided inverse and this additional coherence law. They are
-also called half-adjoint equivalences.
+An [inverse](foundation.invertible-maps.md) for a map `f : A → B` is a map
+`g : B → A` equipped with [homotopies](foundation-core.homotopies.md)
+` (f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is
+[structure](foundation.structure.md) on the map `f`, and not a
+[property](foundation-core.propositions.md). Therefore we include an coherence
+condition for the homotopies of an inverse. Coherently invertible map
+`f : A → B` is a map equipped with a two-sided inverse and this additional
+coherence law. They are also called half-adjoint equivalences.
 
 ## Definition
 
@@ -35,22 +38,6 @@ also called half-adjoint equivalences.
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-
-  has-inverse : (A → B) → UU (l1 ⊔ l2)
-  has-inverse f = Σ (B → A) (λ g → ((f ∘ g) ~ id) × ((g ∘ f) ~ id))
-
-  map-inv-has-inverse : (f : A → B) → has-inverse f → B → A
-  map-inv-has-inverse f = pr1
-
-  is-retraction-has-inverse :
-    (f : A → B) (has-inverse-f : has-inverse f) →
-    (f ∘ map-inv-has-inverse f has-inverse-f) ~ id
-  is-retraction-has-inverse f = pr1 ∘ pr2
-
-  is-section-has-inverse :
-    (f : A → B) (has-inverse-f : has-inverse f) →
-    (map-inv-has-inverse f has-inverse-f ∘ f) ~ id
-  is-section-has-inverse f = pr2 ∘ pr2
 
   coherence-is-coherently-invertible :
     (f : A → B) (g : B → A) (G : (f ∘ g) ~ id) (H : (g ∘ f) ~ id) → UU (l1 ⊔ l2)
@@ -103,44 +90,31 @@ coh-is-coherently-invertible-id {_} {A} {f} H x =
       ( nat-htpy H (H x)))
 ```
 
-#### The proof that invertible maps are coherently invertible
+#### Invertible maps are coherently invertible
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  inv-has-inverse : has-inverse f → B → A
-  inv-has-inverse H = pr1 H
-
   abstract
-    is-section-inv-has-inverse :
-      (H : has-inverse f) → (f ∘ inv-has-inverse H) ~ id
-    is-section-inv-has-inverse H y =
-      ( inv (pr1 (pr2 H) (f (inv-has-inverse H y)))) ∙
-      ( ap f (pr2 (pr2 H) (inv-has-inverse H y)) ∙ (pr1 (pr2 H) y))
-
-    is-retraction-inv-has-inverse :
-      (H : has-inverse f) → (inv-has-inverse H ∘ f) ~ id
-    is-retraction-inv-has-inverse H = pr2 (pr2 H)
-
-    coherence-inv-has-inverse :
+    coherence-map-inv-has-inverse :
       ( H : has-inverse f) →
-      ( is-section-inv-has-inverse H ·r f) ~
-      ( f ·l is-retraction-inv-has-inverse H)
-    coherence-inv-has-inverse H x =
+      ( is-section-map-inv-has-inverse H ·r f) ~
+      ( f ·l is-retraction-map-inv-has-inverse H)
+    coherence-map-inv-has-inverse H x =
       inv
         ( inv-con
-          ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
+          ( pr1 (pr2 H) (f (map-inv-has-inverse H (f x))))
           ( ap f (pr2 (pr2 H) x))
-          ( ( ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙
+          ( ( ap f (pr2 (pr2 H) (map-inv-has-inverse H (f x)))) ∙
             ( pr1 (pr2 H) (f x)))
           ( coherence-square-identifications-top-paste
-            ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
+            ( pr1 (pr2 H) (f (map-inv-has-inverse H (f x))))
             ( ap f (pr2 (pr2 H) x))
-            ( (ap (f ∘ (inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
+            ( (ap (f ∘ (map-inv-has-inverse H ∘ f)) (pr2 (pr2 H) x)))
             ( pr1 (pr2 H) (f x))
-            ( ( ap-comp f (inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
+            ( ( ap-comp f (map-inv-has-inverse H ∘ f) (pr2 (pr2 H) x)) ∙
               ( inv
                 ( ap (ap f) (coh-is-coherently-invertible-id (pr2 (pr2 H)) x))))
             ( nat-htpy (htpy-right-whisk (pr1 (pr2 H)) f) (pr2 (pr2 H) x))))
@@ -148,13 +122,13 @@ module _
   abstract
     is-coherently-invertible-has-inverse :
       (H : has-inverse f) → is-coherently-invertible f
-    pr1 (is-coherently-invertible-has-inverse H) = inv-has-inverse H
+    pr1 (is-coherently-invertible-has-inverse H) = map-inv-has-inverse H
     pr1 (pr2 (is-coherently-invertible-has-inverse H)) =
-      is-section-inv-has-inverse H
+      is-section-map-inv-has-inverse H
     pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      is-retraction-inv-has-inverse H
+      is-retraction-map-inv-has-inverse H
     pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      coherence-inv-has-inverse H
+      coherence-map-inv-has-inverse H
 ```
 
 ## See also

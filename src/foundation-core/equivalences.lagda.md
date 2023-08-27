@@ -17,6 +17,7 @@ open import foundation-core.coherently-invertible-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.invertible-maps
 open import foundation-core.retractions
 open import foundation-core.sections
 ```
@@ -198,16 +199,16 @@ module _
 
   is-section-map-inv-is-equiv : (f ∘ map-inv-is-equiv) ~ id
   is-section-map-inv-is-equiv =
-    is-section-inv-has-inverse (has-inverse-is-equiv H)
+    is-section-map-inv-has-inverse (has-inverse-is-equiv H)
 
   is-retraction-map-inv-is-equiv : (map-inv-is-equiv ∘ f) ~ id
   is-retraction-map-inv-is-equiv =
-    is-retraction-inv-has-inverse (has-inverse-is-equiv H)
+    is-retraction-map-inv-has-inverse (has-inverse-is-equiv H)
 
   coherence-map-inv-is-equiv :
     ( is-section-map-inv-is-equiv ·r f) ~ (f ·l is-retraction-map-inv-is-equiv)
   coherence-map-inv-is-equiv =
-    coherence-inv-has-inverse (has-inverse-is-equiv H)
+    coherence-map-inv-has-inverse (has-inverse-is-equiv H)
 
   is-equiv-map-inv-is-equiv : is-equiv map-inv-is-equiv
   is-equiv-map-inv-is-equiv =
