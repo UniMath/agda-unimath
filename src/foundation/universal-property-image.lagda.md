@@ -10,7 +10,6 @@ module foundation.universal-property-image where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.images
-open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.slice
 open import foundation.surjective-maps
@@ -27,6 +26,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections

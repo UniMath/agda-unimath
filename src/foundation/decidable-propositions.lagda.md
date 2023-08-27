@@ -16,7 +16,6 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
@@ -30,6 +29,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
