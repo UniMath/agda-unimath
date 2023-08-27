@@ -10,13 +10,13 @@ module foundation-core.equivalence-relations where
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.inhabited-subtypes
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 ```
 
