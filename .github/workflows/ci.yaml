@@ -129,10 +129,15 @@ jobs:
         if: ${{ always() }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Note that the cleanup currently fails, because we don't give the
+        # `actions:write` permission to actions; hence the `set +e` to ignore
+        # the error
         run: |
           gh extension install actions/gh-actions-cache
           REPO=${{ github.repository }}
           BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
+
+          set +e
           gh actions-cache delete pre-website-${{ github.run_id }} -R $REPO -B $BRANCH --confirm
 
   pre-commit:
