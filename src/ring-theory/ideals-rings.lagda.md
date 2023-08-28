@@ -531,7 +531,7 @@ module _
       ( has-same-elements-ideal-congruence-Ring)
 ```
 
-#### The congruence relation of the ideal obtained from a congruence relation `S is `S itself
+#### The congruence relation of the ideal obtained from a congruence relation `S` is `S` itself
 
 ```agda
 module _
