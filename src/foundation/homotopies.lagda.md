@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -295,6 +296,27 @@ module _
           ( H a0)
           ( H a1))
         ( inv right-unit))
+```
+
+### Eckmann-Hilton for homotopies
+
+```agda
+htpy-swap-nat-right-htpy :
+  {l0 l1 l2 : Level} {X : UU l0} {Y : UU l1} {Z : UU l2}
+  {f g : X → Y} {f' g' : Y → Z} (H' : f' ~ g')
+  (H : f ~ g) →
+  (htpy-right-whisk H' f ∙h htpy-left-whisk g' H) ~
+  (htpy-left-whisk f' H ∙h htpy-right-whisk H' g)
+htpy-swap-nat-right-htpy H' H x =
+    nat-htpy H' (H x)
+
+eckmann-hilton-htpy :
+  {l : Level} {X : UU l} (H K : id {A = X} ~ id) →
+  (H ∙h K) ~ (K ∙h H)
+eckmann-hilton-htpy H K x =
+  ( inv (identification-left-whisk (H x) (ap-id (K x))) ∙
+  ( htpy-swap-nat-right-htpy H K x)) ∙
+  ( identification-right-whisk (ap-id (K x)) (H x))
 ```
 
 ## See also

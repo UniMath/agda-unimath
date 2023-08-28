@@ -103,11 +103,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689783639,
-        "narHash": "sha256-k6ExUOrKdlqfdhbdRLHYay0tAqSLcteQj/78qQ+l7kI=",
+        "lastModified": 1690590452,
+        "narHash": "sha256-d7jaMDFjlVoomGYjdxECpe+7xcLzQiF6LVLJSHj6q20=",
         "owner": "catppuccin",
         "repo": "mdBook",
-        "rev": "7616df4bfc8f63e44e4a9f6fc1849c975fd0fc03",
+        "rev": "b6a45ab31ac1f91d82b5302ab4f030bb0a751877",
         "type": "github"
       },
       "original": {
