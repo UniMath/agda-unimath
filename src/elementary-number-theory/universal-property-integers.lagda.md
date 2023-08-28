@@ -32,8 +32,9 @@ open import foundation.universe-levels
 
 The universal property of [the integers](elementary-number-theory.integers.md)
 states that given any type `X` equipped with a point `x : X` and an
-[automorphism](foundation.automorphisms.md) `e : X ≃ X`, the type of structure
-preserving maps from `ℤ` to `X` is contractible.
+[automorphism](foundation.automorphisms.md) `e : X ≃ X`, there is a
+[unique](foundation.contractible-types.md) structure preserving map from `ℤ` to
+`X`.
 
 ```agda
 abstract
@@ -209,7 +210,7 @@ abstract
           ( equiv-comparison-map-Eq-ELIM-ℤ P p0 pS s t)))
 ```
 
-We finally arrive at the dependent universal property of ℤ
+### The dependent universal property of the integers
 
 ```agda
 abstract
@@ -221,7 +222,10 @@ abstract
     is-proof-irrelevant-is-prop (is-prop-ELIM-ℤ P p0 pS) (Elim-ℤ P p0 pS)
 ```
 
-The universal property of ℤ is now just a special case
+### The universal property of the integers
+
+The non-dependent universal property of the integers is a special case of the
+dependent universal property applied to constant type families.
 
 ```agda
 ELIM-ℤ' :

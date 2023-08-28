@@ -73,8 +73,18 @@ module _
 
 ### Homomorphisms between descent data for the circle
 
-A homomorphism between `(X, e)` and `(Y, f)` is a map from `X` to `Y` such that
-the obvious square [commutes](foundation.commuting-squares-of-maps.md).
+A homomorphism `h` between `(X, e)` and `(Y, f)` is a map from `X` to `Y` such
+that the obvious square [commutes](foundation.commuting-squares-of-maps.md).
+
+```text
+      h
+  X -----> Y
+  |        |
+ e|        |f
+  v        v
+  X -----> Y
+      h
+```
 
 ```agda
 hom-descent-data-circle :
@@ -171,7 +181,18 @@ Descent data for a family `A : 𝕊¹ → U` is descent data with a proof that i
 equivalent to the canonical descent data of `A`.
 
 A family with descent data is a family `A : 𝕊¹ → U` over the circle, equipped
-with descent data `(X, e)`, and a proof of their equivalence.
+with descent data `(X, e)`, and a proof of their equivalence. This can be
+described as a diagram
+
+```text
+      α
+  X -----> A base
+  |         |
+ e|         | tr A loop
+  v         v
+  X -----> A base
+      α
+```
 
 Ideally, every section characterizing descent data of a particular type family
 should include a term of type `family-with-descent-data-circle`, whose type
@@ -783,10 +804,4 @@ module _
         ( descent-data-family-with-descent-data-circle A)
         ( l3)) →
     is-contr (family-for-dependent-descent-data-circle l A Q)
-
-  -- unique-dependent-family-property-circle-dependent-universal-property-circle :
-  --   dependent-universal-property-circle (l2 ⊔ lsuc l3) l →
-  --   unique-dependent-family-property-circle
-  -- unique-dependent-family-property-circle-dependent-universal-property-circle
-  --   dup-circle Q = {!!}
 ```

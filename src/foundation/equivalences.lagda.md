@@ -339,7 +339,7 @@ module _
 
 ### The 3-for-2 property of being an equivalence
 
-#### If a right factor is an equivalence, then the left factor is an equivalence iff the composite is
+#### If the right factor is an equivalence, then the left factor being an equivalence is equivalent to the composite being one
 
 ```agda
 module _
@@ -365,7 +365,7 @@ module _
     equiv-is-equiv-left-factor-htpy e (map-equiv e ∘ f) refl-htpy
 ```
 
-#### If a left factor is an equivalence, then the right factor is an equivalence iff the composite is
+#### If the left factor is an equivalence, then the right factor being an equivalence is equivalent to the composite being one
 
 ```agda
 module _
