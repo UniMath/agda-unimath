@@ -33,6 +33,7 @@ copy-fonts = true
 additional-css = ["theme/Agda.css", "theme/pagetoc.css", "theme/agda-logo.css", "./theme/catppuccin.css", "./theme/catppuccin-highlight.css"]
 additional-js = ["theme/js/custom.js", "theme/pagetoc.js"]
 no-section-label = false
+site-url = "/agda-unimath/"
 git-repository-url = "https://github.com/UniMath/agda-unimath"
 git-repository-icon = "fa-github"
 
