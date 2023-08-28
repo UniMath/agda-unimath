@@ -183,83 +183,36 @@ module _
   pr1 (pr2 (refl-htpy-lifting-square l)) = inv-htpy-right-unit-htpy
   pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
   pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
-    equational-reasoning
-      ((inv right-unit) ∙ (β ∙ α))
-      ＝ ((inv right-unit ∙ β) ∙ α)
-        by inv (assoc (inv right-unit) (β) (α))
-      ＝ (coherence-lifting-square l x ∙ inv right-unit) ∙ α
-        by
-          ap
-            ( _∙ α)
-            ( equational-reasoning
-              ( inv right-unit ∙ β)
-              ＝
-                ( inv right-unit ∙
-                  ( right-unit ∙
-                    ( coherence-lifting-square l x ∙ inv right-unit)))
-                by
-                  ap
-                    ( inv right-unit ∙_)
-                    ( ap-refl-concat (coherence-lifting-square l x))
-              ＝ (coherence-lifting-square l x ∙ inv right-unit)
-                by
-                  left-left-inv
-                    ( right-unit)
-                    ( coherence-lifting-square l x ∙ inv right-unit))
-      ＝ (coherence-lifting-square l x ∙ (inv right-unit ∙ α))
-        by assoc (coherence-lifting-square l x) (inv right-unit) (α)
-      ＝
-        ( ( coherence-lifting-square l x) ∙
-          ( ( ap (H x ∙_) (inv right-unit) ∙ inv α) ∙ α))
-        by
-          ap
+    ( inv (assoc (inv right-unit) (β) (α))) ∙
+    ( ( ap
+        ( _∙ α)
+        ( ( ap
+            ( inv right-unit ∙_)
+            ( ap-refl-concat (coherence-lifting-square l x))) ∙
+          ( left-left-inv
+            ( right-unit)
+            ( coherence-lifting-square l x ∙ inv right-unit)))) ∙
+      ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
+        ( ( ap
             ( coherence-lifting-square l x ∙_)
-            ( equational-reasoning
-              ( inv right-unit ∙ α)
-              ＝
-                ( ( inv right-unit) ∙
-                  ( right-unit ∙ ap (H x ∙_) (inv right-unit)))
-                by
-                  ap
-                    ( inv right-unit ∙_)
-                    ( assoc-right-refl
-                      ( H x)
-                      ( ap g (is-extension-lifting-square l x)))
-              ＝ ap (H x ∙_) (inv right-unit)
-                by left-left-inv right-unit (ap (H x ∙_) (inv right-unit))
-              ＝ ((ap (H x ∙_) (inv right-unit)) ∙ (inv α)) ∙ α
-                by inv (right-left-inv (ap (H x ∙_) (inv right-unit)) (α)))
-      ＝
-        ( ( coherence-lifting-square l x) ∙
-          ( ( ap (H x ∙_) (inv right-unit)) ∙
-            ( inv α))) ∙
-        ( α)
-        by
-          ( inv
-            ( assoc
-              ( coherence-lifting-square l x)
-              ( ap (H x ∙_) (inv right-unit) ∙ inv α)
-              ( α)))
-      ＝
-        ( ( coherence-lifting-square l x) ∙
-          ( ( ap
-              ( H x ∙_)
-              ( ap-concat-eq
-                  ( g)
-                  ( is-extension-lifting-square l x)
-                  ( refl)
-                  ( is-extension-lifting-square l x)
-                  ( inv right-unit))) ∙
-            ( inv α))) ∙
-        ( α)
-        by
-          ap
-            ( λ r →
-              ( ( coherence-lifting-square l x) ∙
-                ( ( ap (H x ∙_) (r)) ∙
-                  ( inv α))) ∙
-              ( α))
-            ( ap-concat-eq-middle-refl g (is-extension-lifting-square l x))
+            ( ( ap
+                ( inv right-unit ∙_)
+                ( assoc-right-refl
+                  ( H x)
+                  ( ap g (is-extension-lifting-square l x)))) ∙
+              ( ( left-left-inv right-unit (ap (H x ∙_) (inv right-unit))) ∙
+                ( inv (right-left-inv (ap (H x ∙_) (inv right-unit)) (α)))))) ∙
+          ( ( inv
+              ( assoc
+                ( coherence-lifting-square l x)
+                ( ap (H x ∙_) (inv right-unit) ∙ inv α)
+                ( α))) ∙
+            ( ap
+              ( λ r →
+                ( coherence-lifting-square l x ∙ (ap (H x ∙_) r ∙ inv α)) ∙ α)
+              ( ap-concat-eq-middle-refl
+                ( g)
+                ( is-extension-lifting-square l x)))))))
     where
       α = assoc (H x) (ap g (is-extension-lifting-square l x)) refl
       β = ap (_∙ refl) (coherence-lifting-square l x)
