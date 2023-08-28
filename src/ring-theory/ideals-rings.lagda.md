@@ -330,7 +330,8 @@ module _
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I))
 
-  mul-congruence-lemma : {x y u v : type-Ring R} →
+  mul-congruence-lemma :
+    { x y u v : type-Ring R} →
     ( is-in-ideal-Ring R I (add-Ring R (neg-Ring R x) y)) →
     ( is-in-ideal-Ring R I (add-Ring R (neg-Ring R u) v)) →
     ( is-in-ideal-Ring R I
