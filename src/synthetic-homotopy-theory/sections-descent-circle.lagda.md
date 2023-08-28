@@ -37,8 +37,7 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 Sections of type families over the [circle](synthetic-homotopy-theory.circle.md)
 are exactly the fixpoints of the [automorphism](foundation.automorphisms.md)
-from the corresponding
-[descent data](synthetic-homotopy-theory.descent-circle).
+from the corresponding [descent data](synthetic-homotopy-theory.descent-circle).
 
 ## Definitions
 
