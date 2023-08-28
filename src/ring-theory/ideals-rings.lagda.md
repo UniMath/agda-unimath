@@ -330,13 +330,13 @@ module _
       ( ab-Ring R)
       ( subgroup-ideal-Ring R I))
 
-  mul-congruence-lemma :
+  is-congruence-monoid-mul-congruence-ideal-Ring :
     { x y u v : type-Ring R} →
     ( is-in-ideal-Ring R I (add-Ring R (neg-Ring R x) y)) →
     ( is-in-ideal-Ring R I (add-Ring R (neg-Ring R u) v)) →
     ( is-in-ideal-Ring R I
       ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v)))
-  mul-congruence-lemma {x} {y} {u} {v} e f =
+  is-congruence-monoid-mul-congruence-ideal-Ring {x} {y} {u} {v} e f =
     ( is-closed-under-eq-ideal-Ring R I
       ( is-closed-under-addition-ideal-Ring R I
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
@@ -357,77 +357,50 @@ module _
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
         ( add-Ring R (mul-Ring R y (neg-Ring R u)) (mul-Ring R y v)))
       by
-      ( ap (λ a →
-        ( add-Ring R
-          ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
-          ( a)))
+      ( ap
+        ( add-Ring R ( mul-Ring R (add-Ring R (neg-Ring R x) y) u))
         ( left-distributive-mul-add-Ring R y (neg-Ring R u) v))
     ＝ ( add-Ring R
         ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
         ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
       by
-      ( ap (λ a →
-        ( add-Ring R
-          ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
-          ( add-Ring R a (mul-Ring R y v))))
+      ( ap
+        ( λ a →
+          add-Ring R
+            ( mul-Ring R (add-Ring R (neg-Ring R x) y) u)
+            ( add-Ring R a (mul-Ring R y v)))
         ( right-negative-law-mul-Ring R y u))
     ＝ ( add-Ring R
         ( add-Ring R (mul-Ring R (neg-Ring R x) u) (mul-Ring R y u))
         ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
       by
-      ( ap (λ a →
-        ( add-Ring R
-          ( a)
-          ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))))
+      ( ap
+        ( add-Ring' R
+          ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
         ( right-distributive-mul-add-Ring R (neg-Ring R x) y u))
     ＝ ( add-Ring R
         ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
         ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
       by
-      ( ap (λ a →
-        ( add-Ring R
-          ( add-Ring R a (mul-Ring R y u))
-          ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v))))
+      ( ap
+        ( λ a →
+          add-Ring R
+            ( add-Ring R a (mul-Ring R y u))
+            ( add-Ring R (neg-Ring R (mul-Ring R y u)) (mul-Ring R y v)))
         ( left-negative-law-mul-Ring R x u))
-    ＝ ( add-Ring R
-        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
-        ( add-Ring R (mul-Ring R y v) (neg-Ring R (mul-Ring R y u))))
-      by
-      ( ap (λ a →
-        ( add-Ring R
-          ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y u))
-          ( a)))
-        ( commutative-add-Ring R
-          ( neg-Ring R (mul-Ring R y u))
-          ( mul-Ring R y v)))
-    ＝ ( add-Ring R
-        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
-        ( add-Ring R (mul-Ring R y u) (neg-Ring R (mul-Ring R y u))))
-      by
-      ( interchange-add-add-Ring R
-        ( neg-Ring R (mul-Ring R x u))
-        ( mul-Ring R y u)
-        ( mul-Ring R y v)
-        ( neg-Ring R (mul-Ring R y u)))
-    ＝ ( add-Ring R
-        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
-        ( zero-Ring R))
-      by
-      ( ap (λ a →
-        ( add-Ring R
-          ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
-          ( a)))
-        ( right-inverse-law-add-Ring R (mul-Ring R y u)))
     ＝ ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))
       by
-      ( right-unit-law-add-Ring R
-        ( add-Ring R (neg-Ring R (mul-Ring R x u)) (mul-Ring R y v))))
+      ( add-and-subtract-Ring R
+        ( neg-Ring R (mul-Ring R x u))
+        ( mul-Ring R y u)
+        ( mul-Ring R y v)))
 
   mul-congruence-ideal-Ring :
-    (is-congruence-Monoid
+    ( is-congruence-Monoid
       ( multiplicative-monoid-Ring R)
       ( eq-rel-congruence-ideal-Ring))
-  mul-congruence-ideal-Ring = mul-congruence-lemma
+  mul-congruence-ideal-Ring =
+    is-congruence-monoid-mul-congruence-ideal-Ring
 
   congruence-ideal-Ring : congruence-Ring l2 R
   congruence-ideal-Ring = construct-congruence-Ring R

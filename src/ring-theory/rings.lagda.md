@@ -298,6 +298,27 @@ module _
 
   neg-zero-Ring : neg-Ring (zero-Ring R) ＝ (zero-Ring R)
   neg-zero-Ring = neg-zero-Ab (ab-Ring R)
+
+  add-and-subtract-Ring :
+    (x y z : type-Ring R) →
+    add-Ring R (add-Ring R x y) (add-Ring R (neg-Ring y) z) ＝ add-Ring R x z
+  add-and-subtract-Ring x y z =
+    equational-reasoning
+      add-Ring R (add-Ring R x y) (add-Ring R (neg-Ring y) z)
+    ＝ add-Ring R (add-Ring R y x) (add-Ring R (neg-Ring y) z)
+    by
+    ( ap
+      ( add-Ring' R (add-Ring R (neg-Ring y) z))
+      ( commutative-add-Ring R x y))
+    ＝ add-Ring R (add-Ring R y (neg-Ring y)) (add-Ring R x z)
+    by interchange-add-add-Ring R y x (neg-Ring y) z
+    ＝ add-Ring R (zero-Ring R) (add-Ring R x z)
+    by
+    ( ap
+      ( add-Ring' R (add-Ring R x z))
+      ( right-inverse-law-add-Ring y))
+    ＝ add-Ring R x z
+    by left-unit-law-add-Ring R (add-Ring R x z)
 ```
 
 ### Multiplication in a ring
