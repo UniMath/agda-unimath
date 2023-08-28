@@ -337,6 +337,60 @@ module _
   pr2 emb-map-equiv = is-emb-map-equiv
 ```
 
+### The 3-for-2 property of being an equivalence
+
+#### If the right factor is an equivalence, then the left factor being an equivalence is equivalent to the composite being one
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  equiv-is-equiv-left-factor-htpy :
+    { f : A → B} (e : B ≃ C) (h : A → C) (H : h ~ (map-equiv e ∘ f)) →
+    is-equiv f ≃ is-equiv h
+  equiv-is-equiv-left-factor-htpy {f} e h H =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv h)
+      ( λ is-equiv-f →
+        is-equiv-comp-htpy h (map-equiv e) f H is-equiv-f
+          ( is-equiv-map-equiv e))
+      ( is-equiv-right-factor-htpy h (map-equiv e) f H (is-equiv-map-equiv e))
+
+  equiv-is-equiv-left-factor :
+    { f : A → B} (e : B ≃ C) →
+    is-equiv f ≃ is-equiv (map-equiv e ∘ f)
+  equiv-is-equiv-left-factor {f} e =
+    equiv-is-equiv-left-factor-htpy e (map-equiv e ∘ f) refl-htpy
+```
+
+#### If the left factor is an equivalence, then the right factor being an equivalence is equivalent to the composite being one
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  equiv-is-equiv-right-factor-htpy :
+    ( e : A ≃ B) {f : B → C} (h : A → C) (H : h ~ (f ∘ map-equiv e)) →
+    is-equiv f ≃ is-equiv h
+  equiv-is-equiv-right-factor-htpy e {f} h H =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv h)
+      ( is-equiv-comp-htpy h f (map-equiv e) H (is-equiv-map-equiv e))
+      ( λ is-equiv-h →
+        is-equiv-left-factor-htpy h f (map-equiv e) H is-equiv-h
+          ( is-equiv-map-equiv e))
+
+  equiv-is-equiv-right-factor :
+    ( e : A ≃ B) {f : B → C} →
+    is-equiv f ≃ is-equiv (f ∘ map-equiv e)
+  equiv-is-equiv-right-factor e {f} =
+    equiv-is-equiv-right-factor-htpy e (f ∘ map-equiv e) refl-htpy
+```
+
 ### Homotopy induction for homotopies between equivalences
 
 ```agda

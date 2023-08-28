@@ -49,25 +49,3 @@ universal-property-quotient-Ring :
 universal-property-quotient-Ring l R I S f H =
   (T : Ring l) → is-equiv (precomp-quotient-Ring R I S T f H)
 ```
-
-### The equivalence relation obtained from an ideal
-
-```agda
-{-
-sim-congruence-ideal-Ring :
-  {l1 l2 : Level} (R : Ring l1) (I : ideal-Ring l2 R) →
-  type-Ring R → type-Ring R → UU {!!}
-sim-congruence-ideal-Ring R I x y =
-  sim-congruence-Normal-Subgroup
-    ( group-Ring R)
-    {!!}
-    {!!}
-    {!!}
-    -}
-```
-
-### The quotient ring
-
-#### The universal property of the quotient ring
-
-This remains to be defined.

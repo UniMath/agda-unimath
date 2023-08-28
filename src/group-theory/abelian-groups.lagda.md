@@ -247,7 +247,7 @@ module _
   is-equiv-add-Ab : (x : type-Ab A) → is-equiv (add-Ab A x)
   is-equiv-add-Ab = is-equiv-mul-Group (group-Ab A)
 
-  equiv-add-Ab : (x : type-Ab A) → type-Ab A ≃ type-Ab A
+  equiv-add-Ab : type-Ab A → (type-Ab A ≃ type-Ab A)
   equiv-add-Ab = equiv-mul-Group (group-Ab A)
 ```
 
