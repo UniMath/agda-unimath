@@ -18,6 +18,8 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -187,6 +189,43 @@ module _
   eq-htpy-invertible-map :
     (s t : invertible-map A B) → htpy-invertible-map s t → s ＝ t
   eq-htpy-invertible-map s t = map-inv-equiv (extensionality-invertible-map s t)
+```
+
+### If the domais are `k`-truncated, then the type of inverses is `k`-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  is-trunc-is-inverse :
+    (f : A → B) (g : B → A) →
+    is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) B →
+    is-trunc k (is-inverse f g)
+  is-trunc-is-inverse f g is-trunc-A is-trunc-B =
+    is-trunc-prod k
+      ( is-trunc-Π k ( λ x → is-trunc-B (f (g x)) x))
+      (is-trunc-Π k ( λ x → is-trunc-A (g (f x)) x))
+
+  is-trunc-has-inverse :
+    (f : A → B) →
+    is-trunc k A → is-trunc k B →
+    is-trunc k (has-inverse f)
+  is-trunc-has-inverse f is-trunc-A is-trunc-B =
+    is-trunc-Σ
+      ( is-trunc-function-type k is-trunc-A)
+      ( λ g →
+        is-trunc-is-inverse f g
+          ( is-trunc-succ-is-trunc k is-trunc-A)
+          ( is-trunc-succ-is-trunc k is-trunc-B))
+
+  is-trunc-invertible-map :
+    is-trunc k A → is-trunc k B →
+    is-trunc k (invertible-map A B)
+  is-trunc-invertible-map is-trunc-A is-trunc-B =
+    is-trunc-Σ
+      ( is-trunc-function-type k is-trunc-B)
+      ( λ f → is-trunc-has-inverse f is-trunc-A is-trunc-B)
 ```
 
 ### The type `has-inverse id` is equivalent to `id ~ id`
