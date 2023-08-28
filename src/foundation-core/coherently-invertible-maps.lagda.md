@@ -23,12 +23,12 @@ open import foundation-core.invertible-maps
 
 ## Idea
 
-An [inverse](foundation.invertible-maps.md) for a map `f : A → B` is a map
+An [inverse](foundation-core.invertible-maps.md) for a map `f : A → B` is a map
 `g : B → A` equipped with [homotopies](foundation-core.homotopies.md)
 ` (f ∘ g) ~ id` and `(g ∘ f) ~ id`. Such data, however is
-[structure](foundation.structure.md) on the map `f`, and not a
-[property](foundation-core.propositions.md). Therefore we include an coherence
-condition for the homotopies of an inverse. Coherently invertible map
+[structure](foundation.structure.md) on the map `f`, and not generally a
+[property](foundation-core.propositions.md). Therefore we include a coherence
+condition for the homotopies of an inverse. A **coherently invertible map**
 `f : A → B` is a map equipped with a two-sided inverse and this additional
 coherence law. They are also called half-adjoint equivalences.
 
@@ -48,7 +48,7 @@ module _
     Σ ( B → A)
       ( λ g → Σ ((f ∘ g) ~ id)
         ( λ G → Σ ((g ∘ f) ~ id)
-          (λ H → coherence-is-coherently-invertible f g G H)))
+          ( λ H → coherence-is-coherently-invertible f g G H)))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
