@@ -24,7 +24,7 @@ open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
