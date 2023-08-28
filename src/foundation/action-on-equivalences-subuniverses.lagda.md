@@ -31,8 +31,8 @@ open import foundation-core.subtypes
 
 Given a [subuniverse](foundation.subuniverses.md) `P`, any family of types `B`
 indexed by types of `P` has an
-[action on equivalences](foundation.action-on-equivalences.md) obtained by using
-the [univalence axiom](foundation.univalence.md).
+[action on equivalences](foundation.action-on-equivalences-functions.md)
+obtained by using the [univalence axiom](foundation.univalence.md).
 
 ## Definition
 
