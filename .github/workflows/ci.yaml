@@ -140,6 +140,9 @@ jobs:
           set +e
           gh actions-cache delete pre-website-${{ github.run_id }} -R $REPO -B $BRANCH --confirm
 
+          # The previous command failing would report an error even with `set -e`
+          exit 0
+
   pre-commit:
     runs-on: ubuntu-latest
     steps:
