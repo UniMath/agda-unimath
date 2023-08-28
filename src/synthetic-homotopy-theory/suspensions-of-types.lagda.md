@@ -52,7 +52,7 @@ unit <-- X --> unit
 
 Suspensions play an important role in synthetic homotopy theory. For example,
 they star in the freudenthal suspension theorem and give us a definition of
-[the spheres](spheres.md).
+[the spheres](synthetic-homotopy-theory.spheres.md).
 
 ## Definition
 

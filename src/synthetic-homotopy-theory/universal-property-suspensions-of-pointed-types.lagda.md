@@ -53,10 +53,10 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 ## Idea
 
-The [suspension](synthetic-homotopy-theory.suspensions-of-types) of a
+The [suspension](synthetic-homotopy-theory.suspensions-of-types.md) of a
 [pointed type](structured-types.pointed-types.md) enjoys an additional universal
 property, on top of
-[the universal property associtated with being a suspension](synthetic-homotopy-theory.universal-property-suspensions).
+[the universal property associtated with being a suspension](synthetic-homotopy-theory.universal-property-suspensions.md).
 This universal property is packaged in an adjunction: the suspension
 construction on pointed types is left adjoint to the loop space construction.
 
@@ -182,8 +182,6 @@ module _
 ```
 
 We now show these maps are inverses of each other.
-
-[To Do]
 
 #### The equivalence between pointed maps out of the suspension of X and pointed maps into the loop space of Y
 
