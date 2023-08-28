@@ -502,7 +502,7 @@ module _
     is-closed-under-right-multiplication-subset-congruence-Ring
 ```
 
-#### The ideal obtained from the congruence relation of an ideal `I is `I itself
+#### The ideal obtained from the congruence relation of an ideal `I` is `I` itself
 
 ```agda
 module _
