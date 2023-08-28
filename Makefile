@@ -68,11 +68,13 @@ agda-html: ./src/everything.lagda.md
 SUMMARY.md: ${AGDAFILES}
 	@python3 ./scripts/generate_main_index_file.py
 
-.PHONY: website
-website: agda-html \
-		./SUMMARY.md
+.PHONY: website-prepare
+website-prepare: agda-html ./SUMMARY.md
 	@cp $(METAFILES) ./docs/
-	@cp ./theme/images/agda-unimath-logo.svg  ./docs/
+	@cp ./theme/images/agda-unimath-logo.svg ./docs/
+
+.PHONY: website
+website: website-prepare
 	@mdbook build
 
 .PHONY: serve-website
