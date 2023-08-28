@@ -237,7 +237,7 @@ module _
       ( map-diagonal-lifting-square l , refl-htpy)
       ( is-contr-total-Eq-structure
         ( λ x z E →
-          Σ( ( is-lift-lifting-square
+          Σ ( ( is-lift-lifting-square
                 ( map-diagonal-lifting-square l , x , z)) ~
               ( is-lift-lifting-square l ∙h (g ·l refl-htpy)))
             ( coherence-htpy-lifting-square l
