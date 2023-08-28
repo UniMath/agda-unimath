@@ -7,6 +7,7 @@ module foundation.fibered-equivalences where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -131,8 +132,11 @@ module _
       ( emb-subtype (is-equiv-Prop ∘ pr1))
       ( emb-equiv equiv-Σ-is-equiv-equiv-over)
 
-  map-emb-map-over-equiv-over : equiv-over f g i → map-over f g i
-  map-emb-map-over-equiv-over = map-emb emb-map-over-equiv-over
+  map-map-over-equiv-over : equiv-over f g i → map-over f g i
+  map-map-over-equiv-over = map-emb emb-map-over-equiv-over
+
+  is-emb-map-map-over-equiv-over : is-emb map-map-over-equiv-over
+  is-emb-map-map-over-equiv-over = is-emb-map-emb emb-map-over-equiv-over
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -218,6 +222,86 @@ module _
 
   map-fibered-map-fibered-equiv : fibered-equiv f g → fibered-map f g
   map-fibered-map-fibered-equiv = map-emb emb-fibered-map-fibered-equiv
+
+  is-emb-map-fibered-map-fibered-equiv : is-emb map-fibered-map-fibered-equiv
+  is-emb-map-fibered-map-fibered-equiv =
+    is-emb-map-emb emb-fibered-map-fibered-equiv
+```
+
+### Extensionality for equivalences over
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y) (i : X → Y)
+  where
+
+  extensionality-equiv-over :
+    (e e' : equiv-over f g i) →
+    ( e ＝ e') ≃
+    ( htpy-map-over f g i
+      ( map-map-over-equiv-over f g i e)
+      ( map-map-over-equiv-over f g i e'))
+  extensionality-equiv-over e e' =
+    ( extensionality-map-over f g i
+      ( map-map-over-equiv-over f g i e)
+      ( map-map-over-equiv-over f g i e')) ∘e
+    ( ap (map-map-over-equiv-over f g i) ,
+      is-emb-map-map-over-equiv-over f g i e e')
+
+  htpy-eq-equiv-over :
+    (e e' : equiv-over f g i) →
+    ( e ＝ e') →
+    ( htpy-map-over f g i
+      ( map-map-over-equiv-over f g i e)
+      ( map-map-over-equiv-over f g i e'))
+  htpy-eq-equiv-over e e' = map-equiv (extensionality-equiv-over e e')
+
+  eq-htpy-equiv-over :
+    (e e' : equiv-over f g i) →
+    ( htpy-map-over f g i
+      ( map-map-over-equiv-over f g i e)
+      ( map-map-over-equiv-over f g i e')) →
+    ( e ＝ e')
+  eq-htpy-equiv-over e e' = map-inv-equiv (extensionality-equiv-over e e')
+```
+
+### Extensionality for fibered equivalences
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y)
+  where
+
+  extensionality-fibered-equiv :
+    (e e' : fibered-equiv f g) →
+    ( e ＝ e') ≃
+    ( htpy-fibered-map f g
+      ( map-fibered-map-fibered-equiv f g e)
+      ( map-fibered-map-fibered-equiv f g e'))
+  extensionality-fibered-equiv e e' =
+    ( extensionality-fibered-map f g
+      ( map-fibered-map-fibered-equiv f g e)
+      ( map-fibered-map-fibered-equiv f g e')) ∘e
+    ( ap (map-fibered-map-fibered-equiv f g) ,
+      is-emb-map-fibered-map-fibered-equiv f g e e')
+
+  htpy-eq-fibered-equiv :
+    (e e' : fibered-equiv f g) →
+    ( e ＝ e') →
+    ( htpy-fibered-map f g
+      ( map-fibered-map-fibered-equiv f g e)
+      ( map-fibered-map-fibered-equiv f g e'))
+  htpy-eq-fibered-equiv e e' = map-equiv (extensionality-fibered-equiv e e')
+
+  eq-htpy-fibered-equiv :
+    (e e' : fibered-equiv f g) →
+    ( htpy-fibered-map f g
+      ( map-fibered-map-fibered-equiv f g e)
+      ( map-fibered-map-fibered-equiv f g e')) →
+    ( e ＝ e')
+  eq-htpy-fibered-equiv e e' = map-inv-equiv (extensionality-fibered-equiv e e')
 ```
 
 ### Fibered equivalences are pullback squares
