@@ -21,6 +21,7 @@ open import foundation.iterating-automorphisms
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.commuting-elements-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.powers-of-elements-monoids
@@ -113,16 +114,13 @@ module _
 
   commute-powers-Group' :
     (n : ℕ) {x y : type-Group G} →
-    ( mul-Group G x y ＝ mul-Group G y x) →
-    ( mul-Group G (power-Group G n x) y) ＝
-    ( mul-Group G y (power-Group G n x))
+    commute-Group G x y → commute-Group G (power-Group G n x) y
   commute-powers-Group' = commute-powers-Monoid' (monoid-Group G)
 
   commute-powers-Group :
     (m n : ℕ) {x y : type-Group G} →
-    ( mul-Group G x y ＝ mul-Group G y x) →
-    ( mul-Group G (power-Group G m x) (power-Group G n y)) ＝
-    ( mul-Group G (power-Group G n y) (power-Group G m x))
+    commute-Group G x y →
+    commute-Group G (power-Group G m x) (power-Group G n y)
   commute-powers-Group = commute-powers-Monoid (monoid-Group G)
 ```
 

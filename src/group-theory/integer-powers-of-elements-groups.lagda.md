@@ -15,8 +15,10 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
+open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.commuting-elements-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.powers-of-elements-groups
@@ -303,13 +305,63 @@ module _
 
   commute-integer-powers-Group' :
     (k : ℤ) {x y : type-Group G} →
-    x * y ＝ y * x → (x ^ k) * y ＝ y * (x ^ k)
+    commute-Group G x y → commute-Group G x (y ^ k)
   commute-integer-powers-Group' (inl zero-ℕ) {x} {y} H =
-    ( ap (_* y) (integer-power-neg-one-Group G x)) ∙
-    ( ( double-transpose-eq-mul-Group G (inv H)) ∙
-      ( ap (y *_) (inv (integer-power-neg-one-Group G x))))
-  commute-integer-powers-Group' (inl (succ-ℕ k)) {x} {y} H = {!!}
-  commute-integer-powers-Group' (inr k) {x} {y} H = {!!}
+    ( ap (x *_) (integer-power-neg-one-Group G y)) ∙
+    ( ( commute-inv-Group G x y H) ∙
+      ( ap (_* x) (inv (integer-power-neg-one-Group G y))))
+  commute-integer-powers-Group' (inl (succ-ℕ k)) {x} {y} H =
+    commute-mul-Group G x
+      ( inv-Group G y)
+      ( integer-power-Group G (inl k) y)
+      ( commute-inv-Group G x y H)
+      ( commute-integer-powers-Group' (inl k) H)
+  commute-integer-powers-Group' (inr (inl star)) {x} {y} H =
+    commute-unit-Group G x
+  commute-integer-powers-Group' (inr (inr zero-ℕ)) {x} {y} H =
+    ( ap (x *_) (integer-power-one-Group G y)) ∙
+    ( ( H) ∙
+      ( ap (_* x) (inv (integer-power-one-Group G y))))
+  commute-integer-powers-Group' (inr (inr (succ-ℕ k))) {x} {y} H =
+    commute-mul-Group G x y
+      ( integer-power-Group G (inr (inr k)) y)
+      ( H)
+      ( commute-integer-powers-Group' (inr (inr k)) H)
+
+  commute-integer-powers-Group :
+    (k l : ℤ) {x y : type-Group G} →
+    commute-Group G x y → commute-Group G (x ^ k) (y ^ l)
+  commute-integer-powers-Group (inl zero-ℕ) l {x} {y} H =
+    ( ap (_* y ^ l) (integer-power-neg-one-Group G x)) ∙
+    ( ( inv
+        ( commute-inv-Group G
+          ( y ^ l)
+          ( x)
+          ( inv (commute-integer-powers-Group' l H)))) ∙
+      ( ap (y ^ l *_) (inv (integer-power-neg-one-Group G x))))
+  commute-integer-powers-Group (inl (succ-ℕ k)) l {x} {y} H =
+    inv
+      ( commute-mul-Group G
+        ( y ^ l)
+        ( inv-Group G x)
+        ( x ^ inl k)
+        ( commute-inv-Group G (y ^ l) x
+          ( inv (commute-integer-powers-Group' l H)))
+        ( inv (commute-integer-powers-Group (inl k) l H)))
+  commute-integer-powers-Group (inr (inl star)) l {x} {y} H =
+    inv (commute-unit-Group G (y ^ l))
+  commute-integer-powers-Group (inr (inr zero-ℕ)) l {x} {y} H =
+    ( ap (_* y ^ l) (integer-power-one-Group G x)) ∙
+    ( ( commute-integer-powers-Group' l H) ∙
+      ( ap (y ^ l *_) (inv (integer-power-one-Group G x))))
+  commute-integer-powers-Group (inr (inr (succ-ℕ k))) l {x} {y} H =
+    inv
+      ( commute-mul-Group G
+        ( y ^ l)
+        ( x)
+        ( x ^ inr (inr k))
+        ( inv (commute-integer-powers-Group' l H))
+        ( inv (commute-integer-powers-Group (inr (inr k)) l H)))
 ```
 
 ### If `x` commutes with `y`, then integer powers distribute over the product of `x` and `y`

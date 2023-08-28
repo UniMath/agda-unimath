@@ -111,9 +111,6 @@ module _
   mul-Group' : type-Group → type-Group → type-Group
   mul-Group' x y = mul-Group y x
 
-  commute-Group : type-Group → type-Group → UU l
-  commute-Group x y = mul-Group x y ＝ mul-Group y x
-
   associative-mul-Group :
     (x y z : type-Group) →
     Id (mul-Group (mul-Group x y) z) (mul-Group x (mul-Group y z))
