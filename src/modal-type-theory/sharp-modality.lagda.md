@@ -55,10 +55,10 @@ module _
   pr1 ♯-locally-small-operator-modality = ♯ {l}
   pr2 ♯-locally-small-operator-modality A = is-locally-small' {l} {♯ A}
 
-  dependent-universal-property-modality-♯ :
-    dependent-universal-property-modality {l} unit-♯
-  pr1 dependent-universal-property-modality-♯ X = ind-♯
-  pr2 dependent-universal-property-modality-♯ X = compute-ind-♯
+  induction-principle-modality-♯ :
+    induction-principle-modality {l} unit-♯
+  pr1 induction-principle-modality-♯ X = ind-♯
+  pr2 induction-principle-modality-♯ X = compute-ind-♯
 ```
 
 ### Sharp recursion

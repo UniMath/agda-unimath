@@ -8,6 +8,7 @@ module orthogonal-factorization-systems.subuniverse-induction where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -48,6 +49,10 @@ module _
   compute-ind-subuniverse-modality ind-○ =
     (X : UU l1) (P : ○ X → UU l1) (is-modal-P : is-modal-family unit-○ P) →
     (f : (x : X) → P (unit-○ x)) → (ind-○ X P is-modal-P f ∘ unit-○) ~ f
+
+  induction-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  induction-principle-subuniverse-modality =
+    Σ ind-subuniverse-modality compute-ind-subuniverse-modality
 ```
 
 ### Subuniverse recursion
@@ -69,6 +74,10 @@ module _
   compute-rec-subuniverse-modality rec-○ =
     (X Y : UU l1) (is-modal-Y : is-modal unit-○ Y) →
     (f : X → Y) → (rec-○ X Y is-modal-Y f ∘ unit-○) ~ f
+
+  recursion-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  recursion-principle-subuniverse-modality =
+    Σ rec-subuniverse-modality compute-rec-subuniverse-modality
 ```
 
 ### Strong subuniverse induction
@@ -98,6 +107,10 @@ module _
     (X : UU l1) (P : ○ X → UU l1) →
     (is-premodal-P : (x' : ○ X) → retraction (unit-○ {P x'})) →
     (f : (x : X) → P (unit-○ x)) → (ind-○ X P is-premodal-P f ∘ unit-○) ~ f
+
+  strong-induction-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  strong-induction-principle-subuniverse-modality =
+    Σ strong-ind-subuniverse-modality compute-strong-ind-subuniverse-modality
 ```
 
 ### Strong subuniverse recursion
@@ -119,6 +132,10 @@ module _
   compute-strong-rec-subuniverse-modality rec-○ =
     (X Y : UU l1) (is-premodal-Y : retraction (unit-○ {Y})) →
     (f : X → Y) → (rec-○ X Y is-premodal-Y f ∘ unit-○) ~ f
+
+  strong-recursion-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  strong-recursion-principle-subuniverse-modality =
+    Σ strong-rec-subuniverse-modality compute-strong-rec-subuniverse-modality
 ```
 
 ## Properties
@@ -130,20 +147,33 @@ module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○)
-  (ind-○ : ind-subuniverse-modality unit-○)
   where
 
-  rec-subuniverse-ind-subuniverse-modality : rec-subuniverse-modality unit-○
-  rec-subuniverse-ind-subuniverse-modality X Y is-modal-Y =
+  rec-subuniverse-ind-subuniverse-modality :
+    ind-subuniverse-modality unit-○ → rec-subuniverse-modality unit-○
+  rec-subuniverse-ind-subuniverse-modality ind-○ X Y is-modal-Y =
     ind-○ X (λ _ → Y) (λ _ → is-modal-Y)
 
   compute-rec-subuniverse-compute-ind-subuniverse-modality :
-    (compute-ind-○ : compute-ind-subuniverse-modality unit-○ ind-○) →
+    (ind-○ : ind-subuniverse-modality unit-○) →
+    compute-ind-subuniverse-modality unit-○ ind-○ →
     compute-rec-subuniverse-modality unit-○
-      ( rec-subuniverse-ind-subuniverse-modality)
+      ( rec-subuniverse-ind-subuniverse-modality ind-○)
   compute-rec-subuniverse-compute-ind-subuniverse-modality
-    compute-ind-○ X Y is-modal-Y =
+    ind-○ compute-ind-○ X Y is-modal-Y =
       compute-ind-○ X (λ _ → Y) (λ _ → is-modal-Y)
+
+  recursion-principle-induction-principle-subuniverse-modality :
+    induction-principle-subuniverse-modality unit-○ →
+    recursion-principle-subuniverse-modality unit-○
+  pr1
+    ( recursion-principle-induction-principle-subuniverse-modality
+      ( ind-○ , compute-ind-○)) =
+    rec-subuniverse-ind-subuniverse-modality ind-○
+  pr2
+    ( recursion-principle-induction-principle-subuniverse-modality
+      ( ind-○ , compute-ind-○)) =
+    compute-rec-subuniverse-compute-ind-subuniverse-modality ind-○ compute-ind-○
 ```
 
 ### Subuniverse induction from strong subuniverse induction
@@ -153,21 +183,34 @@ module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○)
-  (ind-○ : strong-ind-subuniverse-modality unit-○)
+
   where
 
   ind-subuniverse-strong-ind-subuniverse-modality :
-    ind-subuniverse-modality unit-○
-  ind-subuniverse-strong-ind-subuniverse-modality X P is-modal-P =
+    strong-ind-subuniverse-modality unit-○ → ind-subuniverse-modality unit-○
+  ind-subuniverse-strong-ind-subuniverse-modality ind-○ X P is-modal-P =
     ind-○ X P (retraction-is-equiv ∘ is-modal-P)
 
   compute-ind-subuniverse-strong-ind-subuniverse-modality :
-    (compute-ind-○ : compute-strong-ind-subuniverse-modality unit-○ ind-○) →
+    (ind-○ : strong-ind-subuniverse-modality unit-○) →
+    compute-strong-ind-subuniverse-modality unit-○ ind-○ →
     compute-ind-subuniverse-modality unit-○
-      ( ind-subuniverse-strong-ind-subuniverse-modality)
+      ( ind-subuniverse-strong-ind-subuniverse-modality ind-○)
   compute-ind-subuniverse-strong-ind-subuniverse-modality
-    compute-ind-○ X P is-modal-P =
+    ind-○ compute-ind-○ X P is-modal-P =
     compute-ind-○ X P (retraction-is-equiv ∘ is-modal-P)
+
+  induction-principle-strong-induction-principle-subuniverse-modality :
+    strong-induction-principle-subuniverse-modality unit-○ →
+    induction-principle-subuniverse-modality unit-○
+  pr1
+    ( induction-principle-strong-induction-principle-subuniverse-modality
+      ( ind-○ , compute-ind-○)) =
+    ind-subuniverse-strong-ind-subuniverse-modality ind-○
+  pr2
+    ( induction-principle-strong-induction-principle-subuniverse-modality
+      ( ind-○ , compute-ind-○)) =
+    compute-ind-subuniverse-strong-ind-subuniverse-modality ind-○ compute-ind-○
 ```
 
 ### Subuniverse recursion from strong subuniverse recursion
@@ -177,21 +220,33 @@ module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○)
-  (rec-○ : strong-rec-subuniverse-modality unit-○)
   where
 
   rec-subuniverse-strong-rec-subuniverse-modality :
-    rec-subuniverse-modality unit-○
-  rec-subuniverse-strong-rec-subuniverse-modality X Y is-modal-Y =
+    strong-rec-subuniverse-modality unit-○ → rec-subuniverse-modality unit-○
+  rec-subuniverse-strong-rec-subuniverse-modality rec-○ X Y is-modal-Y =
     rec-○ X Y (retraction-is-equiv is-modal-Y)
 
   compute-rec-subuniverse-strong-rec-subuniverse-modality :
+    (rec-○ : strong-rec-subuniverse-modality unit-○)
     (compute-rec-○ : compute-strong-rec-subuniverse-modality unit-○ rec-○) →
     compute-rec-subuniverse-modality unit-○
-      ( rec-subuniverse-strong-rec-subuniverse-modality)
+      ( rec-subuniverse-strong-rec-subuniverse-modality rec-○)
   compute-rec-subuniverse-strong-rec-subuniverse-modality
-    compute-rec-○ X Y is-modal-Y =
+    rec-○ compute-rec-○ X Y is-modal-Y =
     compute-rec-○ X Y (retraction-is-equiv is-modal-Y)
+
+  recursion-principle-strong-recursion-principle-subuniverse-modality :
+    strong-recursion-principle-subuniverse-modality unit-○ →
+    recursion-principle-subuniverse-modality unit-○
+  pr1
+    ( recursion-principle-strong-recursion-principle-subuniverse-modality
+      ( rec-○ , compute-rec-○)) =
+    rec-subuniverse-strong-rec-subuniverse-modality rec-○
+  pr2
+    ( recursion-principle-strong-recursion-principle-subuniverse-modality
+      ( rec-○ , compute-rec-○)) =
+    compute-rec-subuniverse-strong-rec-subuniverse-modality rec-○ compute-rec-○
 ```
 
 ### Subuniverse induction from modal induction
@@ -201,37 +256,64 @@ module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○)
-  (ind-○ : ind-modality unit-○)
   where
 
-  strong-ind-subuniverse-ind-modality : strong-ind-subuniverse-modality unit-○
-  strong-ind-subuniverse-ind-modality X P is-premodal-P f x' =
+  strong-ind-subuniverse-ind-modality :
+    ind-modality unit-○ → strong-ind-subuniverse-modality unit-○
+  strong-ind-subuniverse-ind-modality ind-○ X P is-premodal-P f x' =
     map-retraction unit-○ (is-premodal-P x') (ind-○ X P (unit-○ ∘ f) x')
 
   compute-strong-ind-subuniverse-ind-modality :
+    (ind-○ : ind-modality unit-○) →
     compute-ind-modality unit-○ ind-○ →
     compute-strong-ind-subuniverse-modality unit-○
-      ( strong-ind-subuniverse-ind-modality)
+      ( strong-ind-subuniverse-ind-modality ind-○)
   compute-strong-ind-subuniverse-ind-modality
-    compute-ind-○ X P is-premodal-P f x =
+    ind-○ compute-ind-○ X P is-premodal-P f x =
     ( ap
       ( map-retraction unit-○ (is-premodal-P (unit-○ x)))
       ( compute-ind-○ X P (unit-○ ∘ f) x)) ∙
     ( is-retraction-map-retraction unit-○ (is-premodal-P (unit-○ x)) (f x))
 
-  ind-subuniverse-ind-modality : ind-subuniverse-modality unit-○
-  ind-subuniverse-ind-modality =
+  strong-induction-principle-subuniverse-induction-principle-modality :
+    induction-principle-modality unit-○ →
+    strong-induction-principle-subuniverse-modality unit-○
+  pr1
+    ( strong-induction-principle-subuniverse-induction-principle-modality
+      ( ind-○ , compute-ind-○)) =
+    strong-ind-subuniverse-ind-modality ind-○
+  pr2
+    ( strong-induction-principle-subuniverse-induction-principle-modality
+      ( ind-○ , compute-ind-○)) =
+    compute-strong-ind-subuniverse-ind-modality ind-○ compute-ind-○
+
+  ind-subuniverse-ind-modality :
+    ind-modality unit-○ → ind-subuniverse-modality unit-○
+  ind-subuniverse-ind-modality ind-○ =
     ind-subuniverse-strong-ind-subuniverse-modality unit-○
-      ( strong-ind-subuniverse-ind-modality)
+      ( strong-ind-subuniverse-ind-modality ind-○)
 
   compute-ind-subuniverse-ind-modality :
+    (ind-○ : ind-modality unit-○) →
     compute-ind-modality unit-○ ind-○ →
     compute-ind-subuniverse-modality unit-○
-      ( ind-subuniverse-ind-modality)
-  compute-ind-subuniverse-ind-modality compute-ind-○ =
+      ( ind-subuniverse-ind-modality ind-○)
+  compute-ind-subuniverse-ind-modality ind-○ compute-ind-○ =
     compute-ind-subuniverse-strong-ind-subuniverse-modality unit-○
-      ( strong-ind-subuniverse-ind-modality)
-      ( compute-strong-ind-subuniverse-ind-modality compute-ind-○)
+      ( strong-ind-subuniverse-ind-modality ind-○)
+      ( compute-strong-ind-subuniverse-ind-modality ind-○ compute-ind-○)
+
+  induction-principle-subuniverse-induction-principle-modality :
+    induction-principle-modality unit-○ →
+    induction-principle-subuniverse-modality unit-○
+  pr1
+    ( induction-principle-subuniverse-induction-principle-modality
+      ( ind-○ , compute-ind-○)) =
+    ind-subuniverse-ind-modality ind-○
+  pr2
+    ( induction-principle-subuniverse-induction-principle-modality
+      ( ind-○ , compute-ind-○)) =
+    compute-ind-subuniverse-ind-modality ind-○ compute-ind-○
 ```
 
 ### Subuniverse recursion from modal recursion
@@ -241,36 +323,63 @@ module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○)
-  (rec-○ : rec-modality unit-○)
   where
 
-  strong-rec-subuniverse-rec-modality : strong-rec-subuniverse-modality unit-○
-  strong-rec-subuniverse-rec-modality X Y is-premodal-Y f x' =
+  strong-rec-subuniverse-rec-modality :
+    rec-modality unit-○ → strong-rec-subuniverse-modality unit-○
+  strong-rec-subuniverse-rec-modality rec-○ X Y is-premodal-Y f x' =
     map-retraction unit-○ (is-premodal-Y) (rec-○ X Y (unit-○ ∘ f) x')
 
   compute-strong-rec-subuniverse-rec-modality :
+    (rec-○ : rec-modality unit-○) →
     compute-rec-modality unit-○ rec-○ →
     compute-strong-rec-subuniverse-modality unit-○
-      ( strong-rec-subuniverse-rec-modality)
+      ( strong-rec-subuniverse-rec-modality rec-○)
   compute-strong-rec-subuniverse-rec-modality
-    compute-rec-○ X Y is-premodal-Y f x =
+    rec-○ compute-rec-○ X Y is-premodal-Y f x =
     ( ap
       ( map-retraction unit-○ (is-premodal-Y))
       ( compute-rec-○ X Y (unit-○ ∘ f) x)) ∙
     ( is-retraction-map-retraction unit-○ (is-premodal-Y) (f x))
 
-  rec-subuniverse-rec-modality : rec-subuniverse-modality unit-○
-  rec-subuniverse-rec-modality =
+  strong-recursion-principle-subuniverse-recursion-principle-modality :
+    recursion-principle-modality unit-○ →
+    strong-recursion-principle-subuniverse-modality unit-○
+  pr1
+    ( strong-recursion-principle-subuniverse-recursion-principle-modality
+      ( rec-○ , compute-rec-○)) =
+    strong-rec-subuniverse-rec-modality rec-○
+  pr2
+    ( strong-recursion-principle-subuniverse-recursion-principle-modality
+      ( rec-○ , compute-rec-○)) =
+    compute-strong-rec-subuniverse-rec-modality rec-○ compute-rec-○
+
+  rec-subuniverse-rec-modality :
+    rec-modality unit-○ → rec-subuniverse-modality unit-○
+  rec-subuniverse-rec-modality rec-○ =
     rec-subuniverse-strong-rec-subuniverse-modality unit-○
-      ( strong-rec-subuniverse-rec-modality)
+      ( strong-rec-subuniverse-rec-modality rec-○)
 
   compute-rec-subuniverse-rec-modality :
+    (rec-○ : rec-modality unit-○) →
     compute-rec-modality unit-○ rec-○ →
-    compute-rec-subuniverse-modality unit-○ (rec-subuniverse-rec-modality)
-  compute-rec-subuniverse-rec-modality compute-rec-○ =
+    compute-rec-subuniverse-modality unit-○ (rec-subuniverse-rec-modality rec-○)
+  compute-rec-subuniverse-rec-modality rec-○ compute-rec-○ =
     compute-rec-subuniverse-strong-rec-subuniverse-modality unit-○
-      ( strong-rec-subuniverse-rec-modality)
-      ( compute-strong-rec-subuniverse-rec-modality compute-rec-○)
+      ( strong-rec-subuniverse-rec-modality rec-○)
+      ( compute-strong-rec-subuniverse-rec-modality rec-○ compute-rec-○)
+
+  recursion-principle-subuniverse-recursion-principle-modality :
+    recursion-principle-modality unit-○ →
+    recursion-principle-subuniverse-modality unit-○
+  pr1
+    ( recursion-principle-subuniverse-recursion-principle-modality
+      ( rec-○ , compute-rec-○)) =
+    rec-subuniverse-rec-modality rec-○
+  pr2
+    ( recursion-principle-subuniverse-recursion-principle-modality
+      ( rec-○ , compute-rec-○)) =
+    compute-rec-subuniverse-rec-modality rec-○ compute-rec-○
 ```
 
 ## See also

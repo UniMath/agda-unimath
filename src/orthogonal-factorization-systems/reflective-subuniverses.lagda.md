@@ -229,7 +229,7 @@ module _
     operator-is-reflective-subuniverse P is-reflective-P X →
     operator-is-reflective-subuniverse P is-reflective-P Y
   map-is-reflective-subuniverse =
-    map-rec-modality
+    ap-map-rec-modality
       ( unit-is-reflective-subuniverse P is-reflective-P)
       ( rec-modality-is-reflective-subuniverse)
 

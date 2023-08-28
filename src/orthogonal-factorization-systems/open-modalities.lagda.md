@@ -77,10 +77,10 @@ module _
               ( λ _ → ap-const a (eq-is-prop (is-prop-type-Prop Q))))) ∙
           ( eq-htpy-refl-htpy (λ _ → a))))
 
-  dependent-universal-property-open-modality :
-    dependent-universal-property-modality {l} (unit-open-modality Q)
-  pr1 dependent-universal-property-open-modality = ind-open-modality
-  pr2 dependent-universal-property-open-modality = compute-ind-open-modality
+  induction-principle-open-modality :
+    induction-principle-modality {l} (unit-open-modality Q)
+  pr1 induction-principle-open-modality = ind-open-modality
+  pr2 induction-principle-open-modality = compute-ind-open-modality
 ```
 
 For local smallness with respect to the appropriate universe level, we must take
@@ -93,7 +93,7 @@ module _
   where
 
   is-modal-identity-types-open-modality :
-    is-modal-identity-types
+    is-modal-small-identity-types
       ( locally-small-operator-open-modality (l ⊔ lQ) Q)
       ( unit-open-modality Q)
   is-modal-identity-types-open-modality X x y =
@@ -117,7 +117,7 @@ module _
       ( locally-small-operator-open-modality (l ⊔ lQ) Q)
       ( unit-open-modality Q)
   pr1 is-higher-modality-open-modality =
-    dependent-universal-property-open-modality Q
+    induction-principle-open-modality Q
   pr2 is-higher-modality-open-modality =
     is-modal-identity-types-open-modality
 
@@ -134,5 +134,5 @@ is-uniquely-eliminating-modality-open-modality :
   (l : Level) {lQ : Level} (Q : Prop lQ) →
   is-uniquely-eliminating-modality {l ⊔ lQ} (unit-open-modality Q)
 is-uniquely-eliminating-modality-open-modality l Q =
-  is-uniquely-eliminating-modality-higher-modality (open-higher-modality l Q)
+  is-uniquely-eliminating-higher-modality (open-higher-modality l Q)
 ```

@@ -104,7 +104,7 @@ module _
   where
   is-higher-modality-♯ :
     is-higher-modality (♯-locally-small-operator-modality l) (unit-♯)
-  pr1 is-higher-modality-♯ = dependent-universal-property-modality-♯ l
+  pr1 is-higher-modality-♯ = induction-principle-modality-♯ l
   pr2 is-higher-modality-♯ X = is-codiscrete-Id-♯
 
   ♯-higher-modality : higher-modality l l

@@ -12,10 +12,13 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -51,8 +54,8 @@ module _
     (f : (x : X) → ○ (P (unit-○ x))) →
     (x : X) → ind-○ X P f (unit-○ x) ＝ f x
 
-  dependent-universal-property-modality : UU (lsuc l1 ⊔ l2)
-  dependent-universal-property-modality =
+  induction-principle-modality : UU (lsuc l1 ⊔ l2)
+  induction-principle-modality =
     Σ ind-modality compute-ind-modality
 ```
 
@@ -74,8 +77,8 @@ module _
     (f : X → ○ Y) →
     (x : X) → rec-○ X Y f (unit-○ x) ＝ f x
 
-  universal-property-modality : UU (lsuc l1 ⊔ l2)
-  universal-property-modality = Σ rec-modality compute-rec-modality
+  recursion-principle-modality : UU (lsuc l1 ⊔ l2)
+  recursion-principle-modality = Σ rec-modality compute-rec-modality
 ```
 
 ## Properties
@@ -98,6 +101,17 @@ module _
     compute-rec-modality unit-○ (rec-ind-modality ind-○)
   compute-rec-compute-ind-modality ind-○ compute-ind-○ X Y =
     compute-ind-○ X (λ _ → Y)
+
+  recursion-principle-induction-principle-modality :
+    induction-principle-modality unit-○ → recursion-principle-modality unit-○
+  pr1
+    ( recursion-principle-induction-principle-modality
+      ( ind-○ , compute-ind-○)) =
+    rec-ind-modality ind-○
+  pr2
+    ( recursion-principle-induction-principle-modality
+      ( ind-○ , compute-ind-○)) =
+    compute-rec-compute-ind-modality ind-○ compute-ind-○
 ```
 
 ### Modal induction gives an inverse to the unit
@@ -150,18 +164,40 @@ module _
   pr1 (section-rec-map-modality f s) = unit-○ ∘ map-section f s
   pr2 (section-rec-map-modality {X} {Y} f s) =
     (compute-rec-○ X Y f ∘ map-section f s) ∙h is-section-map-section f s
-
---TODO: do the same for induction?
 ```
 
-### `dependent-universal-property-modality ≃ section precomp-Π unit-○ (○ ∘ P)`
+### `induction-principle-modality ≃ section precomp-Π unit-○ (○ ∘ P)`
 
 ```agda
--- TODO
-  -- equiv-section-dependent-universal-property-modality :
-  --   ( {X : UU l1} {P : ○ X → UU l1} → section (precomp-Π unit-○ (○ ∘ P))) ≃
-  --   ( dependent-universal-property-modality unit-○)
-  -- equiv-section-dependent-universal-property-modality = {!   !}
+equiv-section-unit-induction-principle-modality :
+  { l1 l2 : Level}
+  { ○ : operator-modality l1 l2}
+  ( unit-○ : unit-modality ○) →
+  ( (X : UU l1) (P : ○ X → UU l1) → section (precomp-Π unit-○ (○ ∘ P))) ≃
+  ( induction-principle-modality unit-○)
+equiv-section-unit-induction-principle-modality unit-○ =
+  ( ( equiv-tot
+      ( λ I →
+        equiv-Π-equiv-fam
+        ( λ X →
+          equiv-Π-equiv-fam (λ P → equiv-Π-equiv-fam (λ _ → equiv-funext))))) ∘e
+    ( distributive-Π-Σ)) ∘e
+  ( equiv-Π-equiv-fam (λ _ → distributive-Π-Σ))
+
+equiv-section-unit-recursion-principle-modality :
+  { l1 l2 : Level}
+  { ○ : operator-modality l1 l2}
+  ( unit-○ : unit-modality ○) →
+  ( (X Y : UU l1) → section (precomp unit-○ (○ Y))) ≃
+  ( recursion-principle-modality unit-○)
+equiv-section-unit-recursion-principle-modality unit-○ =
+  ( ( equiv-tot
+      ( λ I →
+        equiv-Π-equiv-fam
+        ( λ X →
+          equiv-Π-equiv-fam (λ P → equiv-Π-equiv-fam (λ _ → equiv-funext))))) ∘e
+    ( distributive-Π-Σ)) ∘e
+  ( equiv-Π-equiv-fam (λ _ → distributive-Π-Σ))
 ```
 
 ### The modal operator's action on maps
@@ -173,11 +209,14 @@ module _
   (unit-○ : unit-modality ○)
   where
 
-  map-rec-modality : rec-modality unit-○ → {X Y : UU l1} → (X → Y) → ○ X → ○ Y
-  map-rec-modality rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
+  ap-map-rec-modality :
+    rec-modality unit-○ → {X Y : UU l1} → (X → Y) → ○ X → ○ Y
+  ap-map-rec-modality rec-○ {X} {Y} f = rec-○ X Y (unit-○ ∘ f)
 
-  map-ind-modality : ind-modality unit-○ → {X Y : UU l1} → (X → Y) → ○ X → ○ Y
-  map-ind-modality ind-○ = map-rec-modality (rec-ind-modality unit-○ ind-○)
+  ap-map-ind-modality :
+    ind-modality unit-○ → {X Y : UU l1} → (X → Y) → ○ X → ○ Y
+  ap-map-ind-modality ind-○ =
+    ap-map-rec-modality (rec-ind-modality unit-○ ind-○)
 ```
 
 ### Naturality of the unit
@@ -203,7 +242,7 @@ module _
 
   naturality-unit-rec-modality :
     {X Y : UU l1} (f : X → Y) →
-    (map-rec-modality unit-○ rec-○ f ∘ unit-○) ~ (unit-○ ∘ f)
+    (ap-map-rec-modality unit-○ rec-○ f ∘ unit-○) ~ (unit-○ ∘ f)
   naturality-unit-rec-modality {X} {Y} f =
     compute-rec-○ X Y (unit-○ ∘ f)
 
@@ -212,7 +251,7 @@ module _
     unit-○ x ＝ unit-○ x' → unit-○ (f x) ＝ unit-○ (f x')
   naturality-unit-rec-modality' f {x} {x'} p =
     ( inv (naturality-unit-rec-modality f x)) ∙
-    ( ( ap (map-rec-modality unit-○ rec-○ f) p) ∙
+    ( ( ap (ap-map-rec-modality unit-○ rec-○ f) p) ∙
       ( naturality-unit-rec-modality f x'))
 
 module _
@@ -225,7 +264,7 @@ module _
 
   naturality-unit-ind-modality :
     {X Y : UU l1} (f : X → Y) →
-    (map-ind-modality unit-○ ind-○ f ∘ unit-○) ~ (unit-○ ∘ f)
+    (ap-map-ind-modality unit-○ ind-○ f ∘ unit-○) ~ (unit-○ ∘ f)
   naturality-unit-ind-modality =
     naturality-unit-rec-modality unit-○
       ( rec-ind-modality unit-○ ind-○)

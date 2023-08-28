@@ -67,8 +67,8 @@ module _
   (unit-○ : unit-modality ○)
   where
 
-  is-modal-identity-types : UU (lsuc l1 ⊔ l2)
-  is-modal-identity-types =
+  is-modal-small-identity-types : UU (lsuc l1 ⊔ l2)
+  is-modal-small-identity-types =
     (X : UU l1) (x y : ○ X) →
     is-modal-type-is-small (unit-○) (x ＝ y) (is-locally-small-○ X x y)
 ```
@@ -78,27 +78,45 @@ module _
 ```agda
   is-higher-modality : UU (lsuc l1 ⊔ l2)
   is-higher-modality =
-    dependent-universal-property-modality (unit-○) × is-modal-identity-types
+    induction-principle-modality (unit-○) × is-modal-small-identity-types
 ```
 
 ### Components of a `is-higher-modality` proof
 
 ```agda
-  ind-is-higher-modality : is-higher-modality → ind-modality unit-○
-  ind-is-higher-modality = pr1 ∘ pr1
+module _
+  {l1 l2 : Level}
+  (locally-small-○ : locally-small-operator-modality l1 l2 l1)
+  (unit-○ : unit-modality (pr1 locally-small-○))
+  (h : is-higher-modality locally-small-○ unit-○)
+  where
 
-  rec-modality-is-higher-modality : is-higher-modality → rec-modality unit-○
-  rec-modality-is-higher-modality =
-    rec-ind-modality unit-○ ∘ ind-is-higher-modality
+  induction-principle-is-higher-modality : induction-principle-modality unit-○
+  induction-principle-is-higher-modality = pr1 h
+
+  ind-is-higher-modality : ind-modality unit-○
+  ind-is-higher-modality = pr1 induction-principle-is-higher-modality
 
   compute-ind-is-higher-modality :
-    (h : is-higher-modality) →
-    compute-ind-modality unit-○ (ind-is-higher-modality h)
-  compute-ind-is-higher-modality = pr2 ∘ pr1
+    compute-ind-modality unit-○ ind-is-higher-modality
+  compute-ind-is-higher-modality = pr2 induction-principle-is-higher-modality
 
-  is-modal-identity-types-is-higher-modality :
-    is-higher-modality → is-modal-identity-types
-  is-modal-identity-types-is-higher-modality = pr2
+  recursion-principle-is-higher-modality : recursion-principle-modality unit-○
+  recursion-principle-is-higher-modality =
+    recursion-principle-induction-principle-modality
+      ( unit-○)
+      ( induction-principle-is-higher-modality)
+
+  rec-is-higher-modality : rec-modality unit-○
+  rec-is-higher-modality = pr1 recursion-principle-is-higher-modality
+
+  compute-rec-is-higher-modality :
+    compute-rec-modality unit-○ rec-is-higher-modality
+  compute-rec-is-higher-modality = pr2 recursion-principle-is-higher-modality
+
+  is-modal-small-identity-types-is-higher-modality :
+    is-modal-small-identity-types locally-small-○ unit-○
+  is-modal-small-identity-types-is-higher-modality = pr2 h
 ```
 
 ### The structure of a higher modality
@@ -144,47 +162,46 @@ module _
       ( unit-higher-modality)
   is-higher-modality-higher-modality = pr2 (pr2 h)
 
+  induction-principle-higher-modality :
+    induction-principle-modality (unit-higher-modality)
+  induction-principle-higher-modality =
+    induction-principle-is-higher-modality
+      ( locally-small-operator-higher-modality)
+      ( unit-higher-modality)
+      ( is-higher-modality-higher-modality)
+
   ind-higher-modality :
     ind-modality (unit-higher-modality)
-  ind-higher-modality =
-    ind-is-higher-modality
+  ind-higher-modality = pr1 induction-principle-higher-modality
+
+  compute-ind-higher-modality :
+    compute-ind-modality
+      ( unit-higher-modality)
+      ( ind-higher-modality)
+  compute-ind-higher-modality = pr2 induction-principle-higher-modality
+
+  recursion-principle-higher-modality :
+    recursion-principle-modality (unit-higher-modality)
+  recursion-principle-higher-modality =
+    recursion-principle-is-higher-modality
       ( locally-small-operator-higher-modality)
       ( unit-higher-modality)
       ( is-higher-modality-higher-modality)
 
   rec-higher-modality :
     rec-modality (unit-higher-modality)
-  rec-higher-modality =
-    rec-ind-modality
-      ( unit-higher-modality)
-      ( ind-higher-modality)
-
-  compute-ind-higher-modality :
-    compute-ind-modality
-      ( unit-higher-modality)
-      ( ind-higher-modality)
-  compute-ind-higher-modality =
-    compute-ind-is-higher-modality
-      ( locally-small-operator-higher-modality)
-      ( unit-higher-modality)
-      ( is-higher-modality-higher-modality)
+  rec-higher-modality = pr1 recursion-principle-higher-modality
 
   compute-rec-higher-modality :
-    compute-rec-modality
-      ( unit-higher-modality)
-      ( rec-higher-modality)
-  compute-rec-higher-modality =
-    compute-rec-compute-ind-modality
-      ( unit-higher-modality)
-      ( ind-higher-modality)
-      ( compute-ind-higher-modality)
+    compute-rec-modality (unit-higher-modality) (rec-higher-modality)
+  compute-rec-higher-modality = pr2 recursion-principle-higher-modality
 
   is-modal-small-identity-type-higher-modality :
-    is-modal-identity-types
+    is-modal-small-identity-types
       ( locally-small-operator-higher-modality)
       ( unit-higher-modality)
   is-modal-small-identity-type-higher-modality =
-    ( is-modal-identity-types-is-higher-modality)
+    ( is-modal-small-identity-types-is-higher-modality)
     ( locally-small-operator-higher-modality)
     ( unit-higher-modality)
     ( is-higher-modality-higher-modality)
@@ -294,7 +311,7 @@ module _
     operator-higher-modality m (x' ＝ y') → x' ＝ y'
   map-inv-unit-Id-higher-modality {X} {x'} {y'} =
     map-inv-unit-small-Id-higher-modality m ∘
-      ( map-ind-modality
+      ( ap-map-ind-modality
         ( unit-higher-modality m)
         ( ind-higher-modality m)
         ( map-equiv-is-small

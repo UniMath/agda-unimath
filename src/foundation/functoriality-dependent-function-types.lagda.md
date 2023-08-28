@@ -90,9 +90,10 @@ module _
     is-equiv-map-equiv-Π : is-equiv map-equiv-Π
     is-equiv-map-equiv-Π =
       is-equiv-comp
-        ( map-Π (λ a →
-          ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
-          ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
+        ( map-Π
+          ( λ a →
+            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
+            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
         ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
         ( is-equiv-precomp-Π-is-equiv
           ( map-inv-is-equiv (is-equiv-map-equiv e))
@@ -110,6 +111,15 @@ module _
   equiv-Π : ((a' : A') → B' a') ≃ ((a : A) → B a)
   pr1 equiv-Π = map-equiv-Π
   pr2 equiv-Π = is-equiv-map-equiv-Π
+
+module _
+  { l2 l3 l4 : Level}
+  {A : UU l3} {B' : A → UU l2} {B : A → UU l4}
+  (f : (a : A) → B' a ≃ B a)
+  where
+
+  equiv-Π-equiv-fam : ((a : A) → B' a) ≃ ((a : A) → B a)
+  equiv-Π-equiv-fam = equiv-Π B id-equiv f
 ```
 
 ### The functorial action of dependent function types preserves identity morphisms
