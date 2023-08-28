@@ -7,12 +7,15 @@ module orthogonal-factorization-systems.lifting-squares where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
@@ -169,6 +172,114 @@ module _
             Σ ( ( is-lift-lifting-square l') ~
                 ( is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
+
+  refl-htpy-lifting-square :
+    (l : lifting-square h f g i H) → htpy-lifting-square l l
+  pr1 (refl-htpy-lifting-square l) = refl-htpy
+  pr1 (pr2 (refl-htpy-lifting-square l)) = inv-htpy-right-unit-htpy
+  pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
+  pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
+    equational-reasoning
+      ( ( inv right-unit) ∙
+        ( ( ap (_∙ refl) (pr2 (pr2 (pr2 l)) x)) ∙
+          ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))
+      ＝
+        ( ( inv right-unit ∙ (ap (_∙ refl) (pr2 (pr2 (pr2 l)) x))) ∙
+          ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl))
+        by
+          inv
+            ( assoc
+              ( inv right-unit)
+              ( (ap (_∙ refl) (pr2 (pr2 (pr2 l)) x)))
+              ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl))
+      ＝
+        ( pr2 (pr2 (pr2 l)) x ∙ inv right-unit) ∙
+        ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)
+        by
+          ap
+            ( _∙ (assoc (H x) (ap g (pr1 (pr2 l) x)) refl))
+            ( equational-reasoning
+              ( inv right-unit ∙ (ap (_∙ refl) (pr2 (pr2 (pr2 l)) x)))
+              ＝
+                ( ( inv right-unit) ∙
+                  ( right-unit ∙ (pr2 (pr2 (pr2 l)) x ∙ inv right-unit)))
+                by
+                  ap
+                    ( inv right-unit ∙_)
+                    ( ap-refl-concat (pr2 (pr2 (pr2 l)) x))
+              ＝ (pr2 (pr2 (pr2 l)) x ∙ inv right-unit)
+                by
+                  left-left-inv
+                    ( right-unit)
+                    ( pr2 (pr2 (pr2 l)) x ∙ inv right-unit))
+      ＝
+        ( ( pr2 (pr2 (pr2 l)) x) ∙
+          ( inv right-unit ∙ assoc (H x) (ap g (pr1 (pr2 l) x)) refl))
+        by
+          assoc
+            ( pr2 (pr2 (pr2 l)) x)
+            ( inv right-unit)
+            ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)
+      ＝
+        ( ( pr2 (pr2 (pr2 l)) x) ∙
+          ( ( ( ap (H x ∙_) (inv right-unit)) ∙
+              ( inv (assoc (H x) (ap g (pr1 (pr2 l) x)) refl))) ∙
+            ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))
+        by
+          ap
+            ( pr2 (pr2 (pr2 l)) x ∙_)
+            ( equational-reasoning
+              ( inv right-unit ∙ assoc (H x) (ap g (pr1 (pr2 l) x)) refl)
+              ＝
+                ( ( inv right-unit) ∙
+                  ( right-unit ∙ ap (H x ∙_) (inv right-unit)))
+                by
+                  ap
+                    ( inv right-unit ∙_)
+                    ( assoc-right-refl (H x) (ap g (pr1 (pr2 l) x)))
+              ＝ ap (H x ∙_) (inv right-unit)
+                by left-left-inv right-unit (ap (H x ∙_) (inv right-unit))
+              ＝
+                ( ( ap (H x ∙_) (inv right-unit)) ∙
+                  ( inv (assoc (H x) (ap g (pr1 (pr2 l) x)) refl))) ∙
+                ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)
+                by
+                  ( inv
+                    ( right-left-inv
+                      ( ap (H x ∙_) (inv right-unit))
+                      ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl))))
+      ＝
+        ( ( pr2 (pr2 (pr2 l)) x) ∙
+          ( ( ap (H x ∙_) (inv right-unit)) ∙
+            ( inv (assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))) ∙
+        ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)
+        by
+          ( inv
+            ( assoc
+              ( pr2 (pr2 (pr2 l)) x)
+              ( ( ap (H x ∙_) (inv right-unit)) ∙
+                ( inv (assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))
+              ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))
+      ＝
+        ( ( pr2 (pr2 (pr2 l)) x) ∙
+          ( ( ap
+              ( H x ∙_)
+              ( ap-concat-eq
+                  g (pr1 (pr2 l) x) refl (pr1 (pr2 l) x) (inv right-unit))) ∙
+            ( inv (assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))) ∙
+        ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl)
+        by
+          ap
+            ( λ r →
+              ( ( pr2 (pr2 (pr2 l)) x) ∙
+                ( ( ap (H x ∙_) (r)) ∙
+                  ( inv (assoc (H x) (ap g (pr1 (pr2 l) x)) refl)))) ∙
+              ( assoc (H x) (ap g (pr1 (pr2 l) x)) refl))
+            ( ap-concat-eq-middle-refl g (pr1 (pr2 l) x))
+
+  htpy-eq-lifting-square :
+    (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'
+  htpy-eq-lifting-square l .l refl = refl-htpy-lifting-square l
 ```
 
 It remans to show that `coherence-htpy-lifting-square` indeed is a

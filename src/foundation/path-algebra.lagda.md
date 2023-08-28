@@ -45,7 +45,7 @@ coherences on the boundary 1-paths.
 
 ## Properties
 
-### the unit laws of concatination induce homotopies
+### the unit laws of concatenation induced homotopies
 
 ```agda
 module _
@@ -117,30 +117,72 @@ vertical-concat-square {a = a} {f = f}
 ### Unit laws for the associator
 
 ```agda
-unit-law-assoc-011 :
-  {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  assoc refl p q ＝ refl
-unit-law-assoc-011 p q = refl
+module _
+  {l : Level} {A : UU l}
+  where
 
-unit-law-assoc-101 :
-  {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  assoc p refl q ＝ ap (concat' x q) right-unit
-unit-law-assoc-101 refl refl = refl
+  assoc-left-refl :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    assoc refl p q ＝ refl
+  assoc-left-refl p q = refl
 
-unit-law-assoc-101' :
-  {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  inv (assoc p refl q) ＝ ap (concat' x q) (inv right-unit)
-unit-law-assoc-101' refl refl = refl
+  assoc-middle-refl :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    assoc p refl q ＝ ap (_∙ q) (right-unit)
+  assoc-middle-refl refl q = refl
 
-unit-law-assoc-110 :
-  {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  (assoc p q refl ∙ ap (concat p z) right-unit) ＝ right-unit
-unit-law-assoc-110 refl refl = refl
+  assoc-right-refl :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    assoc p q refl ＝ (right-unit ∙ ap (p ∙_) (inv right-unit))
+  assoc-right-refl refl refl = refl
 
-unit-law-assoc-110' :
-  {l : Level} {X : UU l} {x y z : X} (p : x ＝ y) (q : y ＝ z) →
-  (inv right-unit ∙ assoc p q refl) ＝ ap (concat p z) (inv right-unit)
-unit-law-assoc-110' refl refl = refl
+  unit-law-assoc-101' :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
+  unit-law-assoc-101' refl q = refl
+
+  unit-law-assoc-110 :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    (assoc p q refl ∙ ap (p ∙_) right-unit) ＝ right-unit
+  unit-law-assoc-110 refl refl = refl
+
+  unit-law-assoc-110' :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    (inv right-unit ∙ assoc p q refl) ＝ ap (p ∙_) (inv right-unit)
+  unit-law-assoc-110' refl refl = refl
+```
+
+### Unit laws for `ap-concat-eq`
+
+```agda
+ap-concat-eq-middle-refl :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
+  (p : x ＝ y) → inv right-unit ＝ ap-concat-eq f p refl p (inv right-unit)
+ap-concat-eq-middle-refl f refl = refl
+```
+
+### Iterated inverse laws
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  left-left-inv :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
+  left-left-inv refl q = refl
+
+  left-right-inv :
+    {x y z : A} (p : x ＝ y) (q : x ＝ z) → (p ∙ (inv p ∙ q)) ＝ q
+  left-right-inv refl q = refl
+
+  right-left-inv :
+    {x y z : A} (p : x ＝ y) (q : z ＝ y) → ((p ∙ inv q) ∙ q) ＝ p
+  right-left-inv refl refl = refl
+
+  right-right-inv :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ((p ∙ q) ∙ inv q) ＝ p
+  right-right-inv refl refl = refl
 ```
 
 ## Properties of 2-paths
