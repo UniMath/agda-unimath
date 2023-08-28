@@ -222,7 +222,7 @@ module _
   htpy-eq-lifting-square l .l refl = refl-htpy-lifting-square l
 ```
 
-It remans to show that `coherence-htpy-lifting-square` indeed is a
+It remains to show that `coherence-htpy-lifting-square` indeed is a
 characterization of identifications of lifting squares.
 
 ### Diagonal maps give lifting squares
