@@ -74,7 +74,7 @@ jobs:
       # We need to run the sources through Agda not only to get the highlighting
       # (which is irrelevant for checking links), but because it flattens the
       # directory structure to a format which is expected in the links we write.
-      # We don't need to produce this artefact for more then one configuration.
+      # We don't need to produce this artifact for more than one configuration.
       - name: Produce syntax highlighted markdown
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
