@@ -10,15 +10,22 @@ module group-theory.cyclic-groups where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.existential-quantification
+open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.propositional-truncations
 open import foundation.propositions
+open import foundation.sets
+open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
+open import group-theory.addition-homomorphisms-abelian-groups
+open import group-theory.abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
 open import group-theory.generating-elements-groups
 open import group-theory.groups
+open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
 open import group-theory.subgroups-generated-by-elements-groups
 ```
@@ -47,27 +54,64 @@ given by `f ↦ f g` is an [embedding](foundation.embeddings.md) for every group
 
 ```agda
 module _
-  {l1 : Level} (l2 : Level) (G : Group l1)
-  where
-
-  is-cyclic-prop-Group : Prop (l1 ⊔ lsuc l2)
-  is-cyclic-prop-Group =
-    ∃-Prop
-      ( type-Group G)
-      ( λ g → (H : Group l2) → is-emb (ev-element-hom-Group G H g))
-
-  is-cyclic-Group' : UU (l1 ⊔ lsuc l2)
-  is-cyclic-Group' = type-Prop is-cyclic-prop-Group
-
-  is-prop-is-cyclic-Group : is-prop is-cyclic-Group'
-  is-prop-is-cyclic-Group = is-prop-type-Prop is-cyclic-prop-Group
-
-module _
   {l1 : Level} (G : Group l1)
   where
 
-  is-cyclic-Group : UUω
-  is-cyclic-Group = {l : Level} → type-Prop (is-cyclic-prop-Group l G)
+  is-cyclic-prop-Group : Prop l1
+  is-cyclic-prop-Group =
+    ∃-Prop
+      ( type-Group G)
+      ( λ g → is-generating-element-Group G g)
+
+  is-cyclic-Group : UU l1
+  is-cyclic-Group = type-Prop is-cyclic-prop-Group
+
+  is-prop-is-cyclic-Group : is-prop is-cyclic-Group
+  is-prop-is-cyclic-Group = is-prop-type-Prop is-cyclic-prop-Group
+
+Cyclic-Group : (l : Level) → UU (lsuc l)
+Cyclic-Group l = type-subtype (is-cyclic-prop-Group {l})
+
+module _
+  {l : Level} (C : Cyclic-Group l)
+  where
+
+  group-Cyclic-Group : Group l
+  group-Cyclic-Group = pr1 C
+
+  is-cyclic-Cyclic-Group : is-cyclic-Group group-Cyclic-Group
+  is-cyclic-Cyclic-Group = pr2 C
+
+  set-Cyclic-Group : Set l
+  set-Cyclic-Group = set-Group group-Cyclic-Group
+
+  type-Cyclic-Group : UU l
+  type-Cyclic-Group = type-Group group-Cyclic-Group
+
+  zero-Cyclic-Group : type-Cyclic-Group
+  zero-Cyclic-Group = unit-Group group-Cyclic-Group
+
+  add-Cyclic-Group : (x y : type-Cyclic-Group) → type-Cyclic-Group
+  add-Cyclic-Group = mul-Group group-Cyclic-Group
+
+  neg-Cyclic-Group : type-Cyclic-Group → type-Cyclic-Group
+  neg-Cyclic-Group = inv-Group group-Cyclic-Group
+
+  associative-add-Cyclic-Group :
+    (x y z : type-Cyclic-Group) →
+    add-Cyclic-Group (add-Cyclic-Group x y) z ＝
+    add-Cyclic-Group x (add-Cyclic-Group y z)
+  associative-add-Cyclic-Group = associative-mul-Group group-Cyclic-Group
+
+  commutative-add-Cyclic-Group :
+    (x y : type-Cyclic-Group) →
+    add-Cyclic-Group x y ＝ add-Cyclic-Group y x
+  commutative-add-Cyclic-Group x y =
+    apply-universal-property-trunc-Prop
+      ( is-cyclic-Cyclic-Group)
+      ( Id-Prop set-Cyclic-Group (add-Cyclic-Group x y) (add-Cyclic-Group y x))
+      ( λ (g , u) →
+        {!commutative-mul-!})
 ```
 
 #### The definition where `G` has a generating element
@@ -95,11 +139,31 @@ module _
   where
 
   is-cyclic-has-generating-element-Group :
-    has-generating-element-Group G → is-cyclic-Group G
+    is-cyclic-Group G →
+    {l : Level} → ∃ (type-Group G) (λ g → is-emb-ev-element-hom-Group' G g l)
   is-cyclic-has-generating-element-Group H =
     apply-universal-property-trunc-Prop H
-      ( is-cyclic-prop-Group _ G)
+      ( ∃-Prop (type-Group G) (λ g → is-emb-ev-element-hom-Group' G g _))
       ( λ (g , u) →
         intro-∃ g
           ( is-emb-ev-element-is-generating-element-Group G g u))
+```
+
+## Properties
+
+### 
+
+### Evaluation at an element of a cyclic group is a surjective group homomorphism from `ab-endomorphisms-ring-Ab A` to `A`
+
+```agda
+module _
+  {l : Level} (A : Ab l) (a : type-Ab A)
+  where
+
+  map-section-ev-element-hom-Ab : type-Ab A → type-hom-Ab A A
+  map-section-ev-element-hom-Ab x = {!!}
+
+  is-surjective-ev-element-hom-Ab : is-surjective (ev-element-hom-Ab A A a)
+  is-surjective-ev-element-hom-Ab x =
+    unit-trunc-Prop ({!!} , {!!})
 ```

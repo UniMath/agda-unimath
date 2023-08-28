@@ -109,9 +109,13 @@ module _
   {l1 : Level} (G : Group l1) (g : type-Group G)
   where
 
+  is-emb-ev-element-hom-Group' : (l : Level) → UU (l1 ⊔ lsuc l)
+  is-emb-ev-element-hom-Group' l =
+    (H : Group l) → is-emb (ev-element-hom-Group G H g)
+
   is-emb-ev-element-hom-Group : UUω
   is-emb-ev-element-hom-Group =
-    {l : Level} (H : Group l) → is-emb (ev-element-hom-Group G H g)
+    {l : Level} → is-emb-ev-element-hom-Group' l
 
   is-prop-map-ev-element-hom-Group : UUω
   is-prop-map-ev-element-hom-Group =
@@ -192,6 +196,33 @@ module _
       ( contains-element-image-hom-element-Group G g)
       ( x)
       ( raise-star)
+```
+
+### If `g` is a generating element of `G`, then `G` is abelian
+
+```agda
+module _
+  {l1 : Level} (G : Group l1) (g : type-Group G)
+  where
+
+  abstract
+    commutative-mul-is-surjective-hom-element-Group :
+      (U : is-surjective-hom-element-Group G g) →
+      (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x
+    commutative-mul-is-surjective-hom-element-Group U x y =
+      apply-twice-universal-property-trunc-Prop
+        ( U x)
+        ( U y)
+        ( Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x))
+        ( λ { (k , refl) (l , refl) →
+              {!commute-integer-powers-Group k l G g!}})
+
+  commutative-mul-is-generating-element-Group :
+    (U : is-generating-element-Group G g) →
+    (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x
+  commutative-mul-is-generating-element-Group U =
+    commutative-mul-is-surjective-hom-element-Group
+      ( is-surjective-hom-element-is-generating-element-Group G g U)
 ```
 
 ### If the evaluation map `hom(G,H) → H` at `g` is an embedding for every group `H`, then `g̃ : ℤ → G` is surjective

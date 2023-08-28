@@ -297,28 +297,40 @@ module _
 
 ```agda
   transpose-eq-mul-Group :
-    {x y z : type-Group G} →
-    (mul-Group G x y ＝ z) → (x ＝ mul-Group G z (inv-Group G y))
+    {x y z : type-Group G} → mul-Group G x y ＝ z → x ＝ right-div-Group z y
   transpose-eq-mul-Group {x} {y} {z} refl =
     inv (is-retraction-right-div-Group y x)
 
   inv-transpose-eq-mul-Group :
-    {x y z : type-Group G} →
-    (x ＝ mul-Group G z (inv-Group G y)) → (mul-Group G x y ＝ z)
+    {x y z : type-Group G} → x ＝ right-div-Group z y → mul-Group G x y ＝ z
   inv-transpose-eq-mul-Group {._} {y} {z} refl =
     is-section-right-div-Group y z
 
   transpose-eq-mul-Group' :
-    {x y z : type-Group G} →
-    Id (mul-Group G x y) z → Id y (mul-Group G (inv-Group G x) z)
+    {x y z : type-Group G} → mul-Group G x y ＝ z → y ＝ left-div-Group x z
   transpose-eq-mul-Group' {x} {y} {z} refl =
     inv (is-retraction-left-div-Group x y)
 
   inv-transpose-eq-mul-Group' :
-    {x y z : type-Group G} →
-    Id y (mul-Group G (inv-Group G x) z) → (mul-Group G x y ＝ z)
+    {x y z : type-Group G} → y ＝ left-div-Group x z → mul-Group G x y ＝ z
   inv-transpose-eq-mul-Group' {x} {y} {._} refl =
     is-section-left-div-Group x _
+
+  double-transpose-eq-mul-Group :
+    {x y z w : type-Group G} →
+    mul-Group G y w ＝ mul-Group G x z →
+    left-div-Group x y ＝ right-div-Group z w
+  double-transpose-eq-mul-Group p =
+    inv
+      ( transpose-eq-mul-Group'
+        ( inv (transpose-eq-mul-Group p ∙ associative-mul-Group G _ _ _)))
+
+  double-transpose-eq-mul-Group' :
+    {x y z w : type-Group G} →
+    mul-Group G z x ＝ mul-Group G w y →
+    right-div-Group x y ＝ left-div-Group z w
+  double-transpose-eq-mul-Group' p =
+    inv (double-transpose-eq-mul-Group (inv p))
 ```
 
 ### Distributivity of inverses over multiplication
@@ -347,6 +359,16 @@ module _
       ( inv-Group G x)
       ( ( right-inverse-law-mul-Group G (inv-Group G x)) ∙
         ( inv (left-inverse-law-mul-Group G x)))
+
+  transpose-eq-inv-Group :
+    {x y : type-Group G} →
+    inv-Group G x ＝ y → x ＝ inv-Group G y
+  transpose-eq-inv-Group refl = inv (inv-inv-Group _)
+
+  transpose-eq-inv-Group' :
+    {x y : type-Group G} →
+    x ＝ inv-Group G y → inv-Group G x ＝ y
+  transpose-eq-inv-Group' refl = inv-inv-Group _
 ```
 
 ### Inverting elements of a group is an equivalence
@@ -417,7 +439,7 @@ module _
         by ap (mul-Group' G (inv-Group G x)) (inv-inv-Group y)
 ```
 
-### The multiple of `x⁻¹y` and `y⁻¹z` is `x⁻¹z`
+### The product of `x⁻¹y` and `y⁻¹z` is `x⁻¹z`
 
 ```agda
   mul-left-div-Group :
@@ -432,7 +454,7 @@ module _
         by ap (left-div-Group x) (is-section-left-div-Group y z)
 ```
 
-### The multiple of `xy⁻¹` and `yz⁻¹` is `xz⁻¹`
+### The product of `xy⁻¹` and `yz⁻¹` is `xz⁻¹`
 
 ```agda
   mul-right-div-Group :
