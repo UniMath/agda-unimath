@@ -191,7 +191,7 @@ module _
   eq-htpy-invertible-map s t = map-inv-equiv (extensionality-invertible-map s t)
 ```
 
-### If the domais are `k`-truncated, then the type of inverses is `k`-truncated
+### If the domains are `k`-truncated, then the type of inverses is `k`-truncated
 
 ```agda
 module _
@@ -204,8 +204,8 @@ module _
     is-trunc k (is-inverse f g)
   is-trunc-is-inverse f g is-trunc-A is-trunc-B =
     is-trunc-prod k
-      ( is-trunc-Π k ( λ x → is-trunc-B (f (g x)) x))
-      (is-trunc-Π k ( λ x → is-trunc-A (g (f x)) x))
+      ( is-trunc-Π k (λ x → is-trunc-B (f (g x)) x))
+      ( is-trunc-Π k (λ x → is-trunc-A (g (f x)) x))
 
   is-trunc-has-inverse :
     (f : A → B) →
