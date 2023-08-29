@@ -78,6 +78,9 @@ module _
   total-extension-Π : (P : B → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
   total-extension-Π P = Σ ((x : A) → P (i x)) (extension-Π P)
 
+  total-extension : (X : UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  total-extension X = total-extension-Π (λ _ → X)
+
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {i : A → B}
   {P : B → UU l3} {f : (x : A) → P (i x)}
@@ -288,13 +291,21 @@ module _
 
   inv-compute-total-extension-Π :
     {P : B → UU l3} → total-extension-Π i P ≃ ((y : B) → P y)
-  inv-compute-total-extension-Π {P} =
-    ( right-unit-law-Σ-is-contr ( λ f → is-contr-total-htpy' (f ∘ i))) ∘e
+  inv-compute-total-extension-Π =
+    ( right-unit-law-Σ-is-contr (λ f → is-contr-total-htpy' (f ∘ i))) ∘e
     ( equiv-left-swap-Σ)
 
   compute-total-extension-Π :
     {P : B → UU l3} → ((y : B) → P y) ≃ total-extension-Π i P
-  compute-total-extension-Π {P} = inv-equiv (inv-compute-total-extension-Π)
+  compute-total-extension-Π = inv-equiv (inv-compute-total-extension-Π)
+
+  inv-compute-total-extension :
+    {X : UU l3} → total-extension i X ≃ (B → X)
+  inv-compute-total-extension = inv-compute-total-extension-Π
+
+  compute-total-extension :
+    {X : UU l3} → (B → X) ≃ total-extension i X
+  compute-total-extension = compute-total-extension-Π
 ```
 
 ### The truncation level of the type of extensions is bounded by the truncation level of the codomains
@@ -365,25 +376,25 @@ module _
   equiv-fib-precomp-extension-Π f =
     (equiv-fib'-precomp-extension-Π f) ∘e (equiv-fib (precomp-Π i P) f)
 
-  equiv-is-contr-extension-Π-is-local-family :
-    is-local-family i P ≃
+  equiv-is-contr-extension-Π-is-local-Π :
+    is-local-Π i P ≃
     ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
-  equiv-is-contr-extension-Π-is-local-family =
+  equiv-is-contr-extension-Π-is-local-Π =
     ( equiv-map-Π
       ( λ f → equiv-is-contr-equiv (equiv-fib-precomp-extension-Π f))) ∘e
     ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
-  is-contr-extension-Π-is-local-family :
-    is-local-family i P →
+  is-contr-extension-Π-is-local-Π :
+    is-local-Π i P →
     ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
-  is-contr-extension-Π-is-local-family =
-    map-equiv equiv-is-contr-extension-Π-is-local-family
+  is-contr-extension-Π-is-local-Π =
+    map-equiv equiv-is-contr-extension-Π-is-local-Π
 
-  is-local-family-is-contr-extension-Π :
+  is-local-Π-is-contr-extension-Π :
     ((f : (x : A) → P (i x)) →
-    is-contr (extension-Π i P f)) → is-local-family i P
-  is-local-family-is-contr-extension-Π =
-    map-inv-equiv equiv-is-contr-extension-Π-is-local-family
+    is-contr (extension-Π i P f)) → is-local-Π i P
+  is-local-Π-is-contr-extension-Π =
+    map-inv-equiv equiv-is-contr-extension-Π-is-local-Π
 ```
 
 ## Examples
