@@ -57,7 +57,7 @@ module _
 
   _⧄_ = diagonal-lift
 
-  map-diagonal-lift : diagonal-lift → type-pullback-hom f g → X → B
+  map-diagonal-lift : diagonal-lift → type-canonical-pullback-hom f g → X → B
   map-diagonal-lift = pr1
 
   is-section-map-diagonal-lift :
