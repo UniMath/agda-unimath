@@ -45,21 +45,34 @@ htpy-map-Π' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   {J : UU l4} (α : J → I) {f f' : (i : I) → A i → B i} →
   ((i : I) → (f i) ~ (f' i)) → (map-Π' α f ~ map-Π' α f')
-htpy-map-Π' α H = htpy-map-Π (λ j → H (α j))
+htpy-map-Π' α H = htpy-map-Π (H ∘ α)
 ```
 
-### We compute the fibers of map-Π
+### The fibers of `map-Π`
 
 ```agda
-equiv-fib-map-Π :
+compute-fib-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
   ((i : I) → fib (f i) (h i)) ≃ fib (map-Π f) h
-equiv-fib-map-Π f h =
-  equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
+compute-fib-map-Π f h =
+  equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
 ```
 
-### Families of equivalences induce equivalences on dependent function types
+### The fibers of `map-Π'`
+
+```agda
+compute-fib-map-Π' :
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
+  (h : (j : J) → B (α j)) →
+  ((j : J) → fib (f (α j)) (h j)) ≃ fib (map-Π' α f) h
+compute-fib-map-Π' α f = compute-fib-map-Π (f ∘ α)
+```
+
+### Postcomposition and equivalences
+
+#### Families of equivalences induce equivalences on dependent function types
 
 ```agda
 abstract
@@ -71,17 +84,20 @@ abstract
     is-equiv-is-contr-map
       ( λ g →
         is-contr-equiv' _
-          ( equiv-fib-map-Π f g)
+          ( compute-fib-map-Π f g)
           ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
 
 equiv-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
 pr1 (equiv-map-Π e) = map-Π (λ i → map-equiv (e i))
-pr2 (equiv-map-Π e) = is-equiv-map-Π _ (λ i → is-equiv-map-equiv (e i))
+pr2 (equiv-map-Π e) =
+  is-equiv-map-Π (λ i → map-equiv (e i)) (λ i → is-equiv-map-equiv (e i))
 ```
 
-### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fib f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
+### Precomposition and equivalences
+
+#### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fib f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
 
 This condition simplifies, for example, the proof that connected maps satisfy a
 dependent universal property.
@@ -99,7 +115,7 @@ is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
     ( is-equiv-map-reduce-Π-fib f (λ b u → C b))
 ```
 
-### If `f` is coherently invertible, then precomposing by `f` is an equivalence
+#### If `f` is coherently invertible, then precomposing by `f` is an equivalence
 
 ```agda
 tr-precompose-fam :
@@ -123,7 +139,7 @@ abstract
       ( λ s → eq-htpy λ y → apd s (is-section-g y))
 ```
 
-### If `f` is an equivalence, then precomposing by `f` is an equivalence
+#### If `f` is an equivalence, then dependent precomposition by `f` is an equivalence
 
 ```agda
 module _

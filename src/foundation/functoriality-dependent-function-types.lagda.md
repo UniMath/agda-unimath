@@ -118,19 +118,7 @@ module _
 id-map-equiv-Π :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
   ( map-equiv-Π B (id-equiv {A = A}) (λ a → id-equiv {A = B a})) ~ id
-id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ a → id-equiv) h)
-```
-
-### The fibers of `map-Π'`
-
-```agda
-equiv-fib-map-Π' :
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
-  (h : (j : J) → B (α j)) →
-  ((j : J) → fib (f (α j)) (h j)) ≃ fib (map-Π' α f) h
-equiv-fib-map-Π' α f h =
-  equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
+id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equiv) h)
 ```
 
 ### Truncated families of maps induce truncated maps on dependent function types
@@ -144,7 +132,7 @@ abstract
   is-trunc-map-map-Π k {I = I} f H h =
     is-trunc-equiv' k
       ( (i : I) → fib (f i) (h i))
-      ( equiv-fib-map-Π f h)
+      ( compute-fib-map-Π f h)
       ( is-trunc-Π k (λ i → H i (h i)))
 
 abstract
@@ -174,7 +162,7 @@ is-trunc-map-map-Π-is-trunc-map' :
 is-trunc-map-map-Π-is-trunc-map' k {J = J} α f H h =
   is-trunc-equiv' k
     ( (j : J) → fib (f (α j)) (h j))
-    ( equiv-fib-map-Π' α f h)
+    ( compute-fib-map-Π' α f h)
     ( is-trunc-Π k (λ j → H (α j) (h j)))
 
 is-trunc-map-is-trunc-map-map-Π' :

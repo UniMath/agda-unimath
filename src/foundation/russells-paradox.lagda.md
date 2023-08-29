@@ -25,6 +25,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 
 open import trees.multisets
 open import trees.small-multisets
