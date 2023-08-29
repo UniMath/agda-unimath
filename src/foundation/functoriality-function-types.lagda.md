@@ -9,21 +9,68 @@ open import foundation-core.functoriality-function-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
+open import foundation.equivalence-extensionality
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
+open import foundation.transport
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
+open import foundation-core.embeddings
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
+open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
 
 </details>
 
 ## Properties
+
+### An equivalence of domain and codomain induce an equivalence on function types
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level}
+  { A' : UU l1} {B' : UU l2} {A : UU l3} (B : UU l4)
+  ( e : A' ≃ A) (f : B' ≃ B)
+  where
+
+  map-equiv-function-type : (A' → B') → (A → B)
+  map-equiv-function-type h = map-equiv f ∘ (h ∘ map-inv-equiv e)
+
+  compute-map-equiv-function-type :
+    (h : A' → B') (x : A') →
+    map-equiv-function-type h (map-equiv e x) ＝ map-equiv f (h x)
+  compute-map-equiv-function-type h x =
+    ap (map-equiv f ∘ h) (is-retraction-map-inv-equiv e x)
+
+  is-equiv-map-equiv-function-type : is-equiv map-equiv-function-type
+  is-equiv-map-equiv-function-type =
+    is-equiv-comp
+      ( precomp (map-equiv (inv-equiv e)) B)
+      ( postcomp A' (map-equiv f))
+      ( is-equiv-postcomp-equiv f A')
+      ( is-equiv-precomp-equiv (inv-equiv e) B)
+
+  equiv-function-type : (A' → B') ≃ (A → B)
+  pr1 equiv-function-type = map-equiv-function-type
+  pr2 equiv-function-type = is-equiv-map-equiv-function-type
+```
+
+### TODO
 
 ```agda
 is-trunc-map-postcomp-is-trunc-map :

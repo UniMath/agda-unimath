@@ -90,22 +90,27 @@ module _
     is-equiv-map-equiv-Π : is-equiv map-equiv-Π
     is-equiv-map-equiv-Π =
       is-equiv-comp
-        ( map-Π (λ a →
-          ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
-          ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
+        ( map-Π
+          ( λ a →
+            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
+            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
         ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
         ( is-equiv-precomp-Π-is-equiv
           ( map-inv-is-equiv (is-equiv-map-equiv e))
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
-        ( is-equiv-map-Π _
-          ( λ a → is-equiv-comp
-            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
-            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
-            ( is-equiv-map-equiv
-              ( f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
-            ( is-equiv-tr B
-              ( is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
+        ( is-equiv-map-Π
+          ( λ a →
+            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
+            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a))))
+          ( λ a →
+            is-equiv-comp
+              ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
+              ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
+              ( is-equiv-map-equiv
+                ( f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
+              ( is-equiv-tr B
+                ( is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
 
   equiv-Π : ((a' : A') → B' a') ≃ ((a : A) → B a)
   pr1 equiv-Π = map-equiv-Π
