@@ -108,6 +108,30 @@ module _
           equiv-swap-Π))
 ```
 
+### Locality of dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
+  {A : UU l3} {B : A → UU l4}
+  (is-local-A : is-local f A)
+  (is-local-B : ((x : A) → is-local f (B x)))
+  where
+
+  -- map-is-local-Σ : (Y → Σ A B) → X → Σ A B
+  -- pr1 (map-is-local-Σ g x) = map-inv-is-equiv is-local-A (pr1 ∘ g) x
+  -- pr2 (map-is-local-Σ g x) =
+  --   map-inv-is-equiv (is-local-B (pr1 (map-is-local-Σ g x))) (λ y → {! pr2 (g ?)  !}) {!   !}
+
+  -- is-local-Σ :
+  --   is-local f A → ((x : A) → is-local f (B x)) → is-local f (Σ A B)
+  -- is-local-Σ is-local-A is-local-B =
+  --   is-equiv-htpy
+  --     {!   !}
+  --     {!   !}
+  --     ( is-equiv-map-equiv-Π (λ _ → Σ A B) {!   !} {!   !})
+```
+
 ### If every type is `f`-local, then `f` is an equivalence
 
 ```agda
