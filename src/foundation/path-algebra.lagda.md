@@ -155,10 +155,10 @@ module _
 ### Unit laws for `ap-concat-eq`
 
 ```agda
-ap-concat-eq-middle-refl :
+ap-concat-eq-inv-right-unit :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
   (p : x ＝ y) → inv right-unit ＝ ap-concat-eq f p refl p (inv right-unit)
-ap-concat-eq-middle-refl f refl = refl
+ap-concat-eq-inv-right-unit f refl = refl
 ```
 
 ### Iterated inverse laws

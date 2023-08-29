@@ -210,7 +210,7 @@ module _
             ( ap
               ( λ r →
                 ( coherence-lifting-square l x ∙ (ap (H x ∙_) r ∙ inv α)) ∙ α)
-              ( ap-concat-eq-middle-refl
+              ( ap-concat-eq-inv-right-unit
                 ( g)
                 ( is-extension-lifting-square l x)))))))
     where
