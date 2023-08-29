@@ -9,11 +9,17 @@ module foundation.fibered-maps where
 ```agda
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.slice
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
+open import foundation.unit-type
+open import foundation.universal-property-empty-type
+open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
@@ -26,6 +32,9 @@ open import foundation-core.identity-types
 open import foundation-core.small-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>
@@ -63,6 +72,8 @@ module _
 
   fibered-map : UU (l1 ⊔ l3 ⊔ l2 ⊔ l4)
   fibered-map = Σ (X → Y) (map-over)
+
+  _⇉_ = fibered-map
 
   fiberwise-map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   fiberwise-map-over i = (x : X) → fib f x → fib g (i x)
@@ -433,6 +444,107 @@ module _
     transpose-map-over f g i hH
 ```
 
+### If the top left corner is empty, the type of fibered maps is equivalent to maps `X → Y`
+
+```text
+       !
+empty ---> B
+  |        |
+ !|        |g
+  V        V
+  X -----> Y
+       i
+```
+
+```agda
+module _
+  { l2 l3 l4 : Level} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : empty → X} (g : B → Y)
+  where
+
+  inv-compute-fibered-map-empty :
+    (fibered-map f g) ≃ (X → Y)
+  inv-compute-fibered-map-empty =
+    right-unit-law-Σ-is-contr
+      ( λ i →
+        is-contr-Σ
+          ( universal-property-empty' B)
+          ( ex-falso)
+          ( dependent-universal-property-empty'
+            ( λ z → (i ∘ f) z ＝ (g ∘ ex-falso) z)))
+
+  compute-fibered-map-empty :
+    (X → Y) ≃ (fibered-map f g)
+  compute-fibered-map-empty = inv-equiv inv-compute-fibered-map-empty
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y) (is-empty-A : is-empty A)
+  where
+
+  inv-compute-fibered-map-is-empty : (fibered-map f g) ≃ (X → Y)
+  inv-compute-fibered-map-is-empty =
+    right-unit-law-Σ-is-contr
+      ( λ i →
+        is-contr-Σ
+          ( universal-property-empty-is-empty A is-empty-A B)
+          ( ex-falso ∘ is-empty-A)
+          ( dependent-universal-property-empty-is-empty A is-empty-A
+            ( λ z → (i ∘ f) z ＝ (g ∘ (ex-falso ∘ is-empty-A)) z)))
+
+  compute-fibered-map-is-empty : (X → Y) ≃ (fibered-map f g)
+  compute-fibered-map-is-empty = inv-equiv inv-compute-fibered-map-is-empty
+```
+
+### If the bottom right corner is contractible, the type of fibered maps is equivalent `A → B`
+
+```text
+  A -----> B
+  |        |
+ f|        |!
+  V        V
+  X ---> unit
+      !
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) {g : B → unit}
+  where
+
+  inv-compute-fibered-map-unit : (fibered-map f g) ≃ (A → B)
+  inv-compute-fibered-map-unit =
+    ( right-unit-law-Σ-is-contr
+      ( λ _ → is-contr-Π (λ _ → is-prop-is-contr is-contr-unit star star))) ∘e
+    ( left-unit-law-Σ-is-contr
+      ( is-contr-function-type is-contr-unit)
+      ( λ _ → star))
+
+  compute-fibered-map-unit : (A → B) ≃ (fibered-map f g)
+  compute-fibered-map-unit = inv-equiv inv-compute-fibered-map-unit
+
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → X) (g : B → Y) (is-contr-Y : is-contr Y)
+  where
+
+  inv-compute-fibered-map-is-contr : (fibered-map f g) ≃ (A → B)
+  inv-compute-fibered-map-is-contr =
+    ( right-unit-law-Σ-is-contr
+      ( λ j →
+        is-contr-Π
+          ( λ x →
+            is-prop-is-contr
+              is-contr-Y (((λ _ → center is-contr-Y) ∘ f) x) ((g ∘ j) x)))) ∘e
+    ( left-unit-law-Σ-is-contr
+      ( is-contr-function-type is-contr-Y)
+      ( λ _ → center is-contr-Y))
+
+  compute-fibered-map-is-contr : (A → B) ≃ (fibered-map f g)
+  compute-fibered-map-is-contr = inv-equiv inv-compute-fibered-map-is-contr
+```
+
 ## Examples
 
 ```agda
@@ -462,9 +574,7 @@ module _
   id-fibered-map : fibered-map h h
   pr1 id-fibered-map = id
   pr2 id-fibered-map = id-map-over
-```
 
-```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y) (j : X → B)
