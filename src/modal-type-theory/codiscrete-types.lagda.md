@@ -117,5 +117,6 @@ module _
 
 ```agda
 is-codiscrete-♯ : {l : Level} (X : UU l) → is-codiscrete (♯ X)
-is-codiscrete-♯ {l} = is-modal-operator-modality-type (♯-higher-modality l)
+is-codiscrete-♯ {l} =
+  is-modal-operator-type-higher-modality (♯-higher-modality l)
 ```
