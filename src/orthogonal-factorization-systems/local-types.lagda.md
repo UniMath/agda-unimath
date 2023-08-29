@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.retractions
@@ -25,6 +26,8 @@ open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
 open import foundation.universe-levels
+
+open import foundation-core.functoriality-function-types
 ```
 
 </details>

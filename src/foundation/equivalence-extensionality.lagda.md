@@ -38,6 +38,8 @@ module _
   htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
   htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
 
+  _~e_ = htpy-equiv
+
   extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
   extensionality-equiv f =
     extensionality-type-subtype
