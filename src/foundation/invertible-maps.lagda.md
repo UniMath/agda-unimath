@@ -209,7 +209,7 @@ module _
 
   is-trunc-has-inverse :
     (f : A → B) →
-    is-trunc k A → is-trunc k B →
+    is-trunc k A → is-trunc (succ-𝕋 k) B →
     is-trunc k (has-inverse f)
   is-trunc-has-inverse f is-trunc-A is-trunc-B =
     is-trunc-Σ
@@ -217,7 +217,7 @@ module _
       ( λ g →
         is-trunc-is-inverse f g
           ( is-trunc-succ-is-trunc k is-trunc-A)
-          ( is-trunc-succ-is-trunc k is-trunc-B))
+          ( is-trunc-B))
 
   is-trunc-invertible-map :
     is-trunc k A → is-trunc k B →
@@ -225,7 +225,8 @@ module _
   is-trunc-invertible-map is-trunc-A is-trunc-B =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-B)
-      ( λ f → is-trunc-has-inverse f is-trunc-A is-trunc-B)
+      ( λ f →
+        is-trunc-has-inverse f is-trunc-A (is-trunc-succ-is-trunc k is-trunc-B))
 ```
 
 ### The type `has-inverse id` is equivalent to `id ~ id`
