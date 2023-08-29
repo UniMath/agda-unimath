@@ -41,7 +41,7 @@ is-uniquely-eliminating-modality :
   {l1 l2 : Level} {○ : operator-modality l1 l2} →
   unit-modality ○ → UU (lsuc l1 ⊔ l2)
 is-uniquely-eliminating-modality {l1} {l2} {○} unit-○ =
-  (X : UU l1) (P : ○ X → UU l1) → is-local-family (unit-○) (○ ∘ P)
+  (X : UU l1) (P : ○ X → UU l1) → is-local-Π (unit-○) (○ ∘ P)
 
 uniquely-eliminating-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 uniquely-eliminating-modality l1 l2 =
@@ -99,7 +99,7 @@ module _
   is-prop-is-uniquely-eliminating-modality :
     is-prop (is-uniquely-eliminating-modality unit-○)
   is-prop-is-uniquely-eliminating-modality =
-    is-prop-Π λ X → is-prop-Π λ P → is-property-is-local-family unit-○ (○ ∘ P)
+    is-prop-Π λ X → is-prop-Π λ P → is-property-is-local-Π unit-○ (○ ∘ P)
 
   is-uniquely-eliminating-modality-Prop : Prop (lsuc l1 ⊔ l2)
   pr1 is-uniquely-eliminating-modality-Prop =

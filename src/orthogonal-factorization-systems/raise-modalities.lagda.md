@@ -47,7 +47,7 @@ is-uniquely-eliminating-modality-raise-modality :
   {l1 l2 : Level} →
   is-uniquely-eliminating-modality (unit-raise-modality {l1} {l2})
 is-uniquely-eliminating-modality-raise-modality {l1} {l2} _ P =
-  is-local-family-is-equiv
+  is-local-Π-is-equiv
     ( unit-raise-modality)
     ( is-equiv-map-raise)
     ( operator-raise-modality l1 l2 ∘ P)

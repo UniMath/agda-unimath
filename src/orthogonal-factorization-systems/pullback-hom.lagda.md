@@ -36,8 +36,9 @@ g ∘ - |           | g ∘ -
           - ∘ f
 ```
 
-The **pullback-hom** of `f` and `g` is the comparison map from `B → X` to the
-[pullback](foundation.pullbacks.md) of the [cospan](foundation.cospans.md):
+The **pullback-hom** of `f` and `g`, `f ⋔ g`, is the comparison map from `B → X`
+to the [pullback](foundation.pullbacks.md) of the
+[cospan](foundation.cospans.md):
 
 ```text
       ∙ ------> A → X
@@ -112,13 +113,11 @@ module _
 ### The pullback-hom type is equivalent to the type of fibered maps between `f` and `g`
 
 ```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  where
-
-  equiv-fibered-map-type-pullback-hom :
-    type-pullback-hom f g ≃ fibered-map f g
-  equiv-fibered-map-type-pullback-hom =
-    equiv-tot (λ i → equiv-tot (λ h → equiv-funext))
+equiv-fibered-map-type-pullback-hom :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) →
+  type-pullback-hom f g ≃ fibered-map f g
+equiv-fibered-map-type-pullback-hom f g =
+  equiv-tot (λ _ → equiv-tot (λ _ → equiv-funext))
 ```
