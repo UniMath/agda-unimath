@@ -18,6 +18,7 @@ open import foundation-core.coherently-invertible-maps
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -57,17 +58,24 @@ compute-fib-map-Π :
   ((i : I) → fib (f i) (h i)) ≃ fib (map-Π f) h
 compute-fib-map-Π f h =
   equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
-```
 
-### The fibers of `map-Π'`
-
-```agda
 compute-fib-map-Π' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
   (h : (j : J) → B (α j)) →
   ((j : J) → fib (f (α j)) (h j)) ≃ fib (map-Π' α f) h
 compute-fib-map-Π' α f = compute-fib-map-Π (f ∘ α)
+```
+
+### Dependent precomposition preserves homotopies
+
+```agda
+htpy-precomp-Π :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B} (H : f ~ g) (C : B → UU l3) →
+  (h : (y : B) → C y) (x : A) →
+  dependent-identification C (H x) (h (f x)) (h (g x))
+htpy-precomp-Π H C h x = apd h (H x)
 ```
 
 ### Postcomposition and equivalences

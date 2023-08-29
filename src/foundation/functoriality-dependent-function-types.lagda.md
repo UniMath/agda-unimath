@@ -60,32 +60,6 @@ module _
         ( map-equiv (f (map-inv-equiv e a))))) ∘
     ( precomp-Π (map-inv-equiv e) B')
 
-  compute-map-equiv-Π :
-    (h : (a' : A') → B' a') (a' : A') →
-    map-equiv-Π h (map-equiv e a') ＝ map-equiv (f a') (h a')
-  compute-map-equiv-Π h a' =
-    ( ap
-      ( λ t →
-        tr B t
-          ( map-equiv
-            ( f (map-inv-equiv e (map-equiv e a')))
-            ( h (map-inv-equiv e (map-equiv e a')))))
-      ( coherence-map-inv-equiv e a')) ∙
-    ( ( tr-ap
-        ( map-equiv e)
-        ( λ _ → id)
-        ( is-retraction-map-inv-equiv e a')
-        ( map-equiv
-          ( f (map-inv-equiv e (map-equiv e a')))
-          ( h (map-inv-equiv e (map-equiv e a'))))) ∙
-      ( α ( map-inv-equiv e (map-equiv e a'))
-          ( is-retraction-map-inv-equiv e a')))
-    where
-    α :
-      (x : A') (p : x ＝ a') →
-      tr (B ∘ map-equiv e) p (map-equiv (f x) (h x)) ＝ map-equiv (f a') (h a')
-    α x refl = refl
-
   abstract
     is-equiv-map-equiv-Π : is-equiv map-equiv-Π
     is-equiv-map-equiv-Π =
@@ -117,9 +91,35 @@ module _
   pr2 equiv-Π = is-equiv-map-equiv-Π
 ```
 
-### The functorial action of dependent function types preserves identity morphisms
+#### Computing `map-equiv-Π`
 
 ```agda
+  compute-map-equiv-Π :
+    (h : (a' : A') → B' a') (a' : A') →
+    map-equiv-Π h (map-equiv e a') ＝ map-equiv (f a') (h a')
+  compute-map-equiv-Π h a' =
+    ( ap
+      ( λ t →
+        tr B t
+          ( map-equiv
+            ( f (map-inv-equiv e (map-equiv e a')))
+            ( h (map-inv-equiv e (map-equiv e a')))))
+      ( coherence-map-inv-equiv e a')) ∙
+    ( ( tr-ap
+        ( map-equiv e)
+        ( λ _ → id)
+        ( is-retraction-map-inv-equiv e a')
+        ( map-equiv
+          ( f (map-inv-equiv e (map-equiv e a')))
+          ( h (map-inv-equiv e (map-equiv e a'))))) ∙
+      ( α ( map-inv-equiv e (map-equiv e a'))
+          ( is-retraction-map-inv-equiv e a')))
+    where
+    α :
+      (x : A') (p : x ＝ a') →
+      tr (B ∘ map-equiv e) p (map-equiv (f x) (h x)) ＝ map-equiv (f a') (h a')
+    α x refl = refl
+
 id-map-equiv-Π :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
   ( map-equiv-Π B (id-equiv {A = A}) (λ a → id-equiv {A = B a})) ~ id

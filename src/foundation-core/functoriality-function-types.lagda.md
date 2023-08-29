@@ -18,6 +18,7 @@ open import foundation-core.coherently-invertible-maps
 open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.dependent-identifications
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -42,8 +43,13 @@ open import foundation-core.truncation-levels
 ```agda
 htpy-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
-  (f g : X → Y) → (f ~ g) → postcomp A f ~ postcomp A g
-htpy-postcomp A f g H h = eq-htpy (λ x → H (h x))
+  {f g : X → Y} → (f ~ g) → postcomp A f ~ postcomp A g
+htpy-postcomp A H h = eq-htpy (H ∘ h)
+
+compute-htpy-postcomp-refl-htpy :
+  {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} {C : UU l3} (f : B → C) →
+  (htpy-postcomp A (refl-htpy' f)) ~ refl-htpy
+compute-htpy-postcomp-refl-htpy A f h = eq-htpy-refl-htpy (f ∘ h)
 ```
 
 ### The fibers of `postcomp`
@@ -55,6 +61,21 @@ compute-fib-postcomp :
   ((x : A) → fib f (h x)) ≃ fib (postcomp A f) h
 compute-fib-postcomp A f h =
   equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
+```
+
+### Precomposition preserves homotopies
+
+```agda
+htpy-precomp :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  {f g : A → B} (H : f ~ g) (C : UU l3) →
+  (precomp f C) ~ (precomp g C)
+htpy-precomp H C h = eq-htpy (h ·l H)
+
+compute-htpy-precomp-refl-htpy :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3) →
+  (htpy-precomp (refl-htpy' f) C) ~ refl-htpy
+compute-htpy-precomp-refl-htpy f C h = eq-htpy-refl-htpy (h ∘ f)
 ```
 
 ### Postcomposition and equivalences

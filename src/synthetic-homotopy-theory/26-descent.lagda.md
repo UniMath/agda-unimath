@@ -388,7 +388,7 @@ coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
     ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
     ( refl-htpy)
     ( inv-htpy
-      ( λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
+      ( λ h → compute-htpy-precomp-refl-htpy f (Σ X P) (map-inv-distributive-Π-Σ h))))
 
 abstract
   coherence-inv-htpy-distributive-Π-Σ :
