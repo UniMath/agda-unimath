@@ -11,6 +11,7 @@ open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
@@ -20,6 +21,10 @@ open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
+
+open import structured-types.pointed-types
 ```
 
 </details>
