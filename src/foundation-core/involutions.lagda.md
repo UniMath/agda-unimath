@@ -7,9 +7,13 @@ module foundation-core.involutions where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.automorphisms
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
+open import foundation.transport
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -59,7 +63,7 @@ module _
 
 ## Properties
 
-### Any involution is an equivalence
+### Involutions are equivalences
 
 ```agda
 is-equiv-is-involution :
@@ -67,41 +71,51 @@ is-equiv-is-involution :
 is-equiv-is-involution {f = f} is-involution-f =
   is-equiv-has-inverse f is-involution-f is-involution-f
 
+is-equiv-map-involution :
+  {l : Level} {A : UU l} (f : involution A) → is-equiv (map-involution f)
+is-equiv-map-involution = is-equiv-is-involution ∘ is-involution-map-involution
+
 equiv-is-involution :
   {l : Level} {A : UU l} {f : A → A} → is-involution f → A ≃ A
 pr1 (equiv-is-involution {f = f} is-involution-f) = f
 pr2 (equiv-is-involution is-involution-f) =
   is-equiv-is-involution is-involution-f
+
+equiv-involution :
+  {l : Level} {A : UU l} → involution A → A ≃ A
+equiv-involution f =
+  equiv-is-involution {f = map-involution f} (is-involution-map-involution f)
 ```
 
 ### If `A` is `k`-truncated then the type of involutions is `k`-truncated
 
 ```agda
 is-trunc-is-involution :
-  {l : Level} {A : UU l} (k : 𝕋) →
+  {l : Level} (k : 𝕋) {A : UU l} →
   is-trunc (succ-𝕋 k) A → (f : A → A) → is-trunc k (is-involution f)
 is-trunc-is-involution k is-trunc-A f =
   is-trunc-Π k λ x → is-trunc-A (f (f x)) x
 
 is-involution-Truncated-Type :
-  {l : Level} {A : UU l} (k : 𝕋) →
+  {l : Level} (k : 𝕋) {A : UU l} →
   is-trunc (succ-𝕋 k) A → (A → A) → Truncated-Type l k
 pr1 (is-involution-Truncated-Type k is-trunc-A f) = is-involution f
 pr2 (is-involution-Truncated-Type k is-trunc-A f) =
   is-trunc-is-involution k is-trunc-A f
 
 is-trunc-involution :
-  {l : Level} {A : UU l} (k : 𝕋) →
+  {l : Level} (k : 𝕋) {A : UU l} →
   is-trunc k A → is-trunc k (involution A)
 is-trunc-involution k is-trunc-A =
   is-trunc-Σ
-    (is-trunc-function-type k is-trunc-A)
-    (is-trunc-is-involution k (is-trunc-succ-is-trunc k is-trunc-A))
+    ( is-trunc-function-type k is-trunc-A)
+    ( is-trunc-is-involution k (is-trunc-succ-is-trunc k is-trunc-A))
 
 involution-Truncated-Type :
-  {l : Level} {k : 𝕋} → Truncated-Type l k → Truncated-Type l k
-involution-Truncated-Type {k = k} (A , is-trunc-A) =
-  involution A , is-trunc-involution k is-trunc-A
+  {l : Level} (k : 𝕋) → Truncated-Type l k → Truncated-Type l k
+pr1 (involution-Truncated-Type k (A , is-trunc-A)) = involution A
+pr2 (involution-Truncated-Type k (A , is-trunc-A)) =
+  is-trunc-involution k is-trunc-A
 ```
 
 ### The identity function is an involution
@@ -120,4 +134,16 @@ involution-Pointed-Type :
   {l : Level} (A : UU l) → Pointed-Type l
 pr1 (involution-Pointed-Type A) = involution A
 pr2 (involution-Pointed-Type A) = id-involution
+```
+
+### Involutions on dependent function types
+
+```agda
+involution-Π-involution-fam :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  ((x : A) → involution (B x)) → involution ((x : A) → B x)
+pr1 (involution-Π-involution-fam i) f x =
+  map-involution (i x) (f x)
+pr2 (involution-Π-involution-fam i) f =
+  eq-htpy (λ x → is-involution-map-involution (i x) (f x))
 ```
