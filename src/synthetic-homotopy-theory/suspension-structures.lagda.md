@@ -166,9 +166,12 @@ htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
   ( Z)
   ( x) =
     map-inv-equiv
-      ( ( equiv-ap-emb (emb-equiv (comparison-suspension-cocone X Z)))) {- replace with `equiv-ap` -}
+      ( equiv-ap
+        ( comparison-suspension-cocone X Z)
+        ( map-inv-equiv (comparison-suspension-cocone X Z) x)
+        ( cocone-suspension-structure X Z x))
       ( is-section-map-inv-equiv (comparison-suspension-cocone X Z) x)
-
+      
 is-equiv-map-inv-comparison-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
   is-equiv (cocone-suspension-structure X Z)
