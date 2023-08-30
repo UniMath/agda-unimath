@@ -244,6 +244,38 @@ module _
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
+  {susp-str : suspension-structure X Y}
+  {d-susp-str0 d-susp-str1 : dependent-suspension-structure B susp-str}
+  where
+  
+  north-htpy-dependent-suspension-structure :
+    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 → 
+        ( north-dependent-suspension-structure d-susp-str0
+    ＝
+      north-dependent-suspension-structure d-susp-str1)
+  north-htpy-dependent-suspension-structure = pr1 
+
+  south-htpy-dependent-suspension-structure :
+    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 → 
+      ( south-dependent-suspension-structure d-susp-str0
+        ＝
+      south-dependent-suspension-structure d-susp-str1)
+  south-htpy-dependent-suspension-structure = (pr1 ∘ pr2)
+
+  meridian-htpy-dependent-suspension-structure :
+    (d-susp-str : htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1) → 
+      (x : X) →
+        ( coherence-square-identifications
+          ( meridian-dependent-suspension-structure d-susp-str0 x)
+          ( south-htpy-dependent-suspension-structure d-susp-str)
+          ( ap
+            (tr B (meridian-suspension-structure susp-str x))
+            (north-htpy-dependent-suspension-structure d-susp-str))
+          ( meridian-dependent-suspension-structure d-susp-str1 x))
+  meridian-htpy-dependent-suspension-structure = pr2 ∘ pr2
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
   (d-ss : dependent-suspension-structure B ss)
   where
