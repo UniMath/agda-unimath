@@ -113,8 +113,8 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-  (ss : suspension-structure X Y)
   (B : Y → UU l3)
+  (ss : suspension-structure X Y)
   where
 
   dependent-suspension-structure : UU (l1 ⊔ l3)
@@ -133,7 +133,7 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {B : Y → UU l3}
   {ss : suspension-structure X Y}
-  (d-ss : dependent-suspension-structure ss B)
+  (d-ss : dependent-suspension-structure B ss)
   where
 
   north-dependent-suspension-structure : B (north-suspension-structure ss)
@@ -156,7 +156,48 @@ module _
 
 #### Equivalence between dependent suspension structures and dependent suspension cocones
 
-Soon TODO
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (ss : suspension-structure X Y)
+  (B : Y → UU l3)
+  where
+
+  dependent-cocone-dependent-suspension-structure :
+     dependent-suspension-structure B ss → dependent-suspension-cocone B (cocone-suspension-structure X Y ss)
+  dependent-cocone-dependent-suspension-structure = {!!}
+  
+  comparison-dependent-suspension-cocone :
+      (dependent-suspension-cocone
+        ( B)
+        ( cocone-suspension-structure X Y ss)) ≃
+      dependent-suspension-structure B ss
+  comparison-dependent-suspension-cocone = 
+    equiv-Σ
+      (λ N-d-susp-str →
+        Σ (B (south-suspension-structure ss))
+           (λ S-d-susp-str →
+             (x : X) →
+               ( dependent-identification
+                 ( B)
+                 ( meridian-suspension-structure ss x)
+                 ( N-d-susp-str)
+                 ( S-d-susp-str))))
+      ( equiv-dependent-universal-property-unit  (λ x → (B (north-suspension-structure ss))))
+      ( λ N-susp-c →
+        ( equiv-Σ
+          (λ S-d-susp-str →
+            (x : X) →
+              ( dependent-identification
+                ( B)
+                ( meridian-suspension-structure ss x)
+                ( map-equiv
+                  ( equiv-dependent-universal-property-unit (λ x₁ → B (pr1 ss)))
+                  ( N-susp-c))
+                ( S-d-susp-str)))
+          (equiv-dependent-universal-property-unit
+            ( const unit (UU l3) (B (south-suspension-structure ss))))
+          λ S-susp-c → id-equiv))
+```
 
 #### Characterizing equality of dependent suspension structures
 
@@ -164,7 +205,7 @@ Soon TODO
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  (d-ss d-ss' : dependent-suspension-structure ss B)
+  (d-ss d-ss' : dependent-suspension-structure B ss)
   where
 
   htpy-dependent-suspension-structure : UU (l1 ⊔ l3)
@@ -187,11 +228,11 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  (d-ss : dependent-suspension-structure ss B)
+  (d-ss : dependent-suspension-structure B ss)
   where
 
   extensionality-dependent-suspension-structure :
-    ( d-ss' : dependent-suspension-structure ss B) →
+    ( d-ss' : dependent-suspension-structure B ss) →
     ( d-ss ＝ d-ss') ≃
     ( htpy-dependent-suspension-structure B d-ss d-ss')
   extensionality-dependent-suspension-structure =
@@ -222,7 +263,7 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  {d-ss d-ss' : dependent-suspension-structure ss B}
+  {d-ss d-ss' : dependent-suspension-structure B ss}
   where
 
   htpy-eq-dependent-suspension-structure :
@@ -242,7 +283,7 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  (d-ss : dependent-suspension-structure ss B)
+  (d-ss : dependent-suspension-structure B ss)
   where
 
   refl-htpy-dependent-suspension-structure :
