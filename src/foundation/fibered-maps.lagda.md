@@ -32,9 +32,6 @@ open import foundation-core.identity-types
 open import foundation-core.small-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-
-open import orthogonal-factorization-systems.extensions-of-maps
-open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>
@@ -574,14 +571,9 @@ module _
   id-fibered-map : fibered-map h h
   pr1 id-fibered-map = id
   pr2 id-fibered-map = id-map-over
-
-module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → X) (g : B → Y) (j : X → B)
-  where
-
-  diagonal-fibered-map : fibered-map f g
-  pr1 diagonal-fibered-map = g ∘ j
-  pr1 (pr2 diagonal-fibered-map) = j ∘ f
-  pr2 (pr2 diagonal-fibered-map) = refl-htpy
 ```
+
+## See also
+
+- For the pullback property of the type of fibered maps, see
+  [the pullback-hom](orthogonal-factorization-systems.pullback-hom.md)

@@ -91,9 +91,9 @@ module _
 
 ### The `is-pullback` property
 
-The proposition is-pullback is the assertion that the gap map is an equivalence.
-Note that this proposition is small, whereas the universal property is a large
-proposition.
+The proposition `is-pullback` is the assertion that the gap map is an
+equivalence. Note that this proposition is small, whereas the universal property
+is a large proposition.
 
 ```agda
 module _
@@ -120,6 +120,14 @@ module _
   pr1 (pr2 (map-canonical-pullback (hA , hB , _) (a' , b' , _))) = hB b'
   pr2 (pr2 (map-canonical-pullback (hA , hB , hX , HA , HB) (a' , b' , p'))) =
     (HA a') ∙ ((ap hX p') ∙ (inv (HB b')))
+
+  map-is-pullback :
+    {l4 l4' : Level} {C : UU l4} {C' : UU l4'} →
+    (c : cone f g C) (c' : cone f' g' C') →
+    is-pullback f g c → is-pullback f' g' c' →
+    hom-cospan f' g' f g → C' → C
+  map-is-pullback c c' is-pb-c is-pb-c' h x =
+    map-inv-is-equiv is-pb-c (map-canonical-pullback h (gap f' g' c' x))
 ```
 
 ## Properties

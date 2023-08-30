@@ -112,7 +112,7 @@ abstract
     is-equiv-right-factor-htpy
       ( cone-map f g c)
       ( map-canonical-pullback-exponent f g T)
-      ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
+      ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
       ( triangle-map-canonical-pullback-exponent T f g c)
       ( is-equiv-map-canonical-pullback-exponent f g T)
       ( universal-property-pullback-is-pullback f g c is-pb-c T)
