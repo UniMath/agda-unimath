@@ -62,15 +62,13 @@ module _
   where
 
   is-map-over : (X → Y) → (A → B) → UU (l1 ⊔ l4)
-  is-map-over i h = coherence-square-maps h f g i -- (i ∘ f) ~ (g ∘ h)
+  is-map-over i h = coherence-square-maps h f g i
 
   map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l4)
   map-over i = Σ (A → B) (is-map-over i)
 
   fibered-map : UU (l1 ⊔ l3 ⊔ l2 ⊔ l4)
   fibered-map = Σ (X → Y) (map-over)
-
-  _⇉_ = fibered-map
 
   fiberwise-map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   fiberwise-map-over i = (x : X) → fib f x → fib g (i x)

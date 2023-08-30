@@ -7,18 +7,26 @@ module orthogonal-factorization-systems.pullback-hom where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fibered-maps
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.morphisms-cospans
 open import foundation.pullbacks
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
+
+open import orthogonal-factorization-systems.extensions-of-maps
+open import orthogonal-factorization-systems.lifting-squares
+open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>
@@ -161,6 +169,7 @@ module _
   pullback-hom : (B → X) → fibered-map f g
   pullback-hom = gap-pullback-hom f g (postcomp B g , precomp f X , refl-htpy)
 
+  infix 30 _⋔_
   _⋔_ = pullback-hom
 ```
 
@@ -198,4 +207,41 @@ module _
 
 ### The fibers of the pullback-hom
 
-These remain to be computed.
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y) (h : fibered-map f g)
+  where
+
+  inv-compute-fib-pullback-hom :
+    (fib (pullback-hom f g) h) ≃ (lifting-square-fibered-map f g h)
+  inv-compute-fib-pullback-hom =
+    equiv-tot
+      ( λ j →
+        ( equiv-Σ _
+          ( equiv-inv-htpy (j ∘ f) (map-total-fibered-map f g h))
+          ( λ E →
+            equiv-Σ _
+              ( equiv-inv-htpy (g ∘ j) (map-base-fibered-map f g h))
+              ( λ L →
+                ( equiv-concat-htpy'
+                  ( inv-htpy L ·r f)
+                  ( λ x →
+                    ap
+                      ( is-map-over-map-total-fibered-map f g h x ∙_)
+                      ( inv-htpy-left-whisk-inv-htpy g E x))) ∘e
+                ( ( equiv-con-inv-htpy
+                    ( inv-htpy (L ·r f))
+                    ( g ·l E)
+                    ( is-map-over-map-total-fibered-map f g h)) ∘e
+                  ( equiv-inv-con-htpy'
+                    ( g ·l E)
+                    ( L ·r f)
+                    ( is-map-over-map-total-fibered-map f g h)))))) ∘e
+        ( ( equiv-left-swap-Σ) ∘e
+          ( extensionality-fibered-map f g (pullback-hom f g j) h)))
+
+  compute-fib-pullback-hom :
+    (lifting-square-fibered-map f g h) ≃ (fib (pullback-hom f g) h)
+  compute-fib-pullback-hom = inv-equiv inv-compute-fib-pullback-hom
+```

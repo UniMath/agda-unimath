@@ -14,6 +14,7 @@ open import foundation.commuting-triangles-of-homotopies
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibered-maps
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -262,4 +263,23 @@ module _
   pr1 (is-lifting-square-diagonal j) = refl-htpy
   pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
   pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
+```
+
+### The lifting square associated to a fibered map
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  lifting-square-fibered-map :
+    (h : fibered-map f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  lifting-square-fibered-map h =
+    lifting-square
+      ( map-total-fibered-map f g h)
+      ( f)
+      ( g)
+      ( map-base-fibered-map f g h)
+      ( is-map-over-map-total-fibered-map f g h)
 ```
