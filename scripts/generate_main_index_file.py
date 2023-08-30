@@ -64,10 +64,11 @@ def generate_namespace_entry_list(namespace):
 def generate_index(root, header):
     status = 0
     entry_lists = []
-    for namespace in sorted(utils.get_subdirectories_recursive(root)):
+    namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
+
+    for namespace in namespaces:
         if namespace == 'temp':
             continue
-
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s

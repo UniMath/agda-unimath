@@ -18,11 +18,13 @@ open import orthogonal-factorization-systems.pullback-hom
 
 ## Idea
 
-Given two maps, `f : A → X` and `g : B → Y`, we say that `f` has the _mere left
-lifting property_ with respect to `g` and that `g` has the _mere right lifting
-property_ with respect to `f` if the pullback-hom is surjective. This means that
-the type of lifting operations between `f` and `g` is merely
-[inhabited](foundation.inhabited-types.md).
+Given two maps, `f : A → X` and `g : B → Y`, we say that `f` has the **mere left
+lifting property** with respect to `g` and that `g` has the **mere right lifting
+property** with respect to `f` if the
+[pullback-hom](orthogonal-factorization-systems.pullback-hom.md) is
+[surjective](foundation.surjective-maps.md). This means that the type of
+[lifting operations](orthogonal-factorization-systems.lifting-operations.md)
+between `f` and `g` is merely [inhabited](foundation.inhabited-types.md).
 
 ## Definition
 

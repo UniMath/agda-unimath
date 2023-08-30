@@ -28,8 +28,10 @@ open import foundation-core.injective-maps
 
 ## Idea
 
-The univalence axiom characterizes the identity types of universes. It asserts
-that the map `Id A B → A ≃ B` is an equivalence.
+The univalence axiom characterizes the
+[identity types](foundation-core.identity-types.md) of universes. It asserts
+that the map `(A ＝ B) → (A ≃ B)` is an
+[equivalence](foundation-core.equivalences.md).
 
 In this file we postulate the univalence axiom. Its statement is defined in
 [`foundation-core.univalence`](foundation-core.univalence.md).
@@ -154,8 +156,8 @@ compute-eq-equiv A B C f g =
     ( equiv-univalence)
     ( ( inv ( compute-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
-        ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
-        ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
+          ( right-inverse-law-equiv equiv-univalence)) ∙
         ( ( ap
             ( λ e → g ∘e map-equiv e f)
             ( right-inverse-law-equiv equiv-univalence)) ∙

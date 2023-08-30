@@ -120,7 +120,7 @@ nilradical-Commutative-Ring A =
     ( is-closed-under-right-multiplication-nilradical-Commutative-Ring A)
 ```
 
-### The nilradical is contained in every prime ideal
+### The nilradical is contained in every radical ideal
 
 ```agda
 is-in-nilradical-Commutative-Ring :
@@ -128,23 +128,6 @@ is-in-nilradical-Commutative-Ring :
 is-in-nilradical-Commutative-Ring R =
   is-in-ideal-Commutative-Ring R (nilradical-Commutative-Ring R)
 
-is-contained-in-prime-ideal-nilradical-Commutative-Ring :
-  {l : Level} (R : Commutative-Ring l)
-  (P : prime-ideal-Commutative-Ring l R) (x : type-Commutative-Ring R) →
-  is-in-nilradical-Commutative-Ring R x →
-  is-in-prime-ideal-Commutative-Ring R P x
-is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
-  apply-universal-property-trunc-Prop p
-    ( subset-prime-ideal-Commutative-Ring R P x)
-    ( λ (n , p) →
-      is-radical-prime-ideal-Commutative-Ring R P x n
-      (is-closed-under-eq-prime-ideal-Commutative-Ring' R P
-      (contains-zero-prime-ideal-Commutative-Ring R P) p))
-```
-
-### The nilradical is contained in every radical ideal
-
-```agda
 is-contained-in-radical-ideal-nilradical-Commutative-Ring :
   {l : Level} (R : Commutative-Ring l)
   (I : radical-ideal-Commutative-Ring l R) (x : type-Commutative-Ring R) →
@@ -156,4 +139,18 @@ is-contained-in-radical-ideal-nilradical-Commutative-Ring R I x p =
     ( λ (n , p) → is-radical-radical-ideal-Commutative-Ring R I x n
     (is-closed-under-eq-radical-ideal-Commutative-Ring' R I
     (contains-zero-radical-ideal-Commutative-Ring R I) p))
+```
+
+### The nilradical is contained in every prime ideal
+
+```agda
+is-contained-in-prime-ideal-nilradical-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l)
+  (P : prime-ideal-Commutative-Ring l R) (x : type-Commutative-Ring R) →
+  is-in-nilradical-Commutative-Ring R x →
+  is-in-prime-ideal-Commutative-Ring R P x
+is-contained-in-prime-ideal-nilradical-Commutative-Ring R P x p =
+  is-in-prime-ideal-is-in-radical-ideal-Commutative-Ring R P x
+    ( is-contained-in-radical-ideal-nilradical-Commutative-Ring R
+      ( radical-ideal-prime-ideal-Commutative-Ring R P) x p)
 ```
