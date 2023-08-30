@@ -188,22 +188,30 @@ dependent-up-suspension :
 dependent-up-suspension l {X = X} B =
   is-equiv-htpy
     ( (map-equiv
-         (comparison-dependent-suspension-cocone (suspension-structure-suspension X) B)) ∘
+         ( comparison-dependent-suspension-cocone
+           ( suspension-structure-suspension X)
+           ( B))) ∘
       ( dependent-cocone-map
         ( const X unit star)
         ( const X unit star)
-        ( cocone-suspension-structure X (suspension X) (suspension-structure-suspension X))
+        ( cocone-suspension-structure
+          ( X)
+          ( suspension X)
+          ( suspension-structure-suspension X))
         ( B)))
-    ( inv-htpy (triangle-dependent-ev-suspension (suspension-structure-suspension X) B))
+    ( inv-htpy
+      ( triangle-dependent-ev-suspension
+        ( suspension-structure-suspension X)
+        ( B)))
     ( is-equiv-comp
       ( map-equiv
-        (comparison-dependent-suspension-cocone
-          (suspension-structure-suspension X) B))
+        ( comparison-dependent-suspension-cocone
+          ( suspension-structure-suspension X) B))
       ( dependent-cocone-map
-        (const X unit star)
-        (const X unit star)
-        (cocone-suspension-structure X (suspension X)
-          (suspension-structure-suspension X))
+        ( const X unit star)
+        ( const X unit star)
+        ( cocone-suspension-structure X (suspension X)
+          ( suspension-structure-suspension X))
         ( B))
       ( dependent-up-pushout (const X unit star) (const X unit star) B)
       ( is-equiv-map-equiv
@@ -225,7 +233,7 @@ module _
   where
 
   map-inv-dependent-up-suspension :
-    dependent-suspension-structure B (suspension-structure-suspension X)  →
+    dependent-suspension-structure B (suspension-structure-suspension X) →
     (x : suspension X) → B x
   map-inv-dependent-up-suspension =
     map-inv-is-equiv (dependent-up-suspension l2 B)
@@ -233,7 +241,7 @@ module _
   is-section-map-inv-dependent-up-suspension :
     ( ( dependent-ev-suspension (suspension-structure-suspension X) B) ∘
       ( map-inv-dependent-up-suspension)) ~ id
-  is-section-map-inv-dependent-up-suspension  =
+  is-section-map-inv-dependent-up-suspension =
     is-section-map-inv-is-equiv (dependent-up-suspension l2 B)
 
   is-retraction-map-inv-dependent-up-suspension :
@@ -243,7 +251,9 @@ module _
     is-retraction-map-inv-is-equiv (dependent-up-suspension l2 B)
 
   dependent-up-suspension-north-suspension :
-    (d-susp-str : dependent-suspension-structure B (suspension-structure-suspension X)) →
+    (d-susp-str : dependent-suspension-structure
+      ( B)
+      ( suspension-structure-suspension X)) →
       ( map-inv-dependent-up-suspension d-susp-str north-suspension) ＝
       ( north-dependent-suspension-structure d-susp-str)
   dependent-up-suspension-north-suspension d-susp-str =
@@ -254,7 +264,9 @@ module _
       ( is-section-map-inv-dependent-up-suspension d-susp-str))
 
   dependent-up-suspension-south-suspension :
-    (d-susp-str : dependent-suspension-structure B (suspension-structure-suspension X)) →
+    (d-susp-str : dependent-suspension-structure
+      ( B)
+      ( suspension-structure-suspension X)) →
     ( map-inv-dependent-up-suspension d-susp-str south-suspension) ＝
     ( south-dependent-suspension-structure d-susp-str)
   dependent-up-suspension-south-suspension d-susp-str =
@@ -270,21 +282,26 @@ module _
       ( suspension-structure-suspension X))
     (x : X) →
       coherence-square-identifications
-        ( apd (map-inv-dependent-up-suspension d-susp-str ) (meridian-suspension x))
+        ( apd
+          ( map-inv-dependent-up-suspension d-susp-str)
+          ( meridian-suspension x))
         ( dependent-up-suspension-south-suspension d-susp-str)
-        ( ap (tr B (meridian-suspension x)) (dependent-up-suspension-north-suspension d-susp-str))
+        ( ap
+          ( tr B (meridian-suspension x))
+          ( dependent-up-suspension-north-suspension d-susp-str))
         (meridian-dependent-suspension-structure d-susp-str x)
   dependent-up-suspension-meridian-suspension d-susp-str =
     meridian-htpy-dependent-suspension-structure
       ( B)
       ( htpy-eq-dependent-suspension-structure
         ( B)
-        ( is-section-map-inv-dependent-up-suspension d-susp-str))  
+        ( is-section-map-inv-dependent-up-suspension d-susp-str))
 ```
 
 ### Consequences of the dependent universal property
 
 #### Characterization of homotopies between functions with domain a
+
 suspension
 
 ```agda
@@ -295,7 +312,7 @@ module _
 
   htpy-function-out-of-suspension : UU (l1 ⊔ l2)
   htpy-function-out-of-suspension =
-    (Σ (f (north-suspension) ＝ g(north-suspension))
+    (Σ (f (north-suspension) ＝ g (north-suspension))
       ( λ N-eq → Σ (f (south-suspension) ＝ g (south-suspension))
         ( λ S-eq →
           (x : X) →
@@ -307,14 +324,13 @@ module _
 
   north-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension →
-    f (north-suspension) ＝ g(north-suspension)
+    f (north-suspension) ＝ g (north-suspension)
   north-htpy-function-out-of-suspension = pr1
 
   south-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension →
-    f (south-suspension) ＝ g(south-suspension)
+    f (south-suspension) ＝ g (south-suspension)
   south-htpy-function-out-of-suspension = pr1 ∘ pr2
-
 
   meridian-htpy-function-out-of-suspension :
     (h : htpy-function-out-of-suspension) →
@@ -334,7 +350,7 @@ module _
       dependent-suspension-structure
         ( eq-value f g)
         ( suspension-structure-suspension X)
-      by equiv-dependent-up-suspension (eq-value f g) 
+      by equiv-dependent-up-suspension (eq-value f g)
       ≃ htpy-function-out-of-suspension
         by equiv-tot
                 ( λ N-eq →
@@ -348,12 +364,13 @@ module _
                             ( N-eq)
                             ( ap g (meridian-suspension x))))
                           ( id-equiv)
-                          ( λ x → 
+                          ( λ x →
                             ( inv-equiv
                               ( compute-dependent-identification-eq-value-function
                                 ( f)
                                 ( g)
-                                ( meridian-suspension-structure (suspension-structure-suspension X) x)
+                                ( meridian-suspension-structure
+                                  ( suspension-structure-suspension X) x)
                                 ( N-eq)
                                 ( S-eq))))))
 

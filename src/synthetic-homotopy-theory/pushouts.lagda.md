@@ -161,7 +161,6 @@ dependent-up-pushout {l4 = l4} f g =
   ( l4)
 ```
 
-
 ### Computation with the cogap map
 
 ```agda

@@ -78,6 +78,7 @@ module _
 ```
 
 #### Coherence between `dependent-ev-suspension` and
+
 `dependent-cocone-map`
 
 ```agda
@@ -93,5 +94,5 @@ triangle-dependent-ev-suspension :
         ( B))
       ~
         dependent-ev-suspension susp-str B
-triangle-dependent-ev-suspension {X = X} {Y = Y} susp-str B = refl-htpy  
+triangle-dependent-ev-suspension {X = X} {Y = Y} susp-str B = refl-htpy
 ```
