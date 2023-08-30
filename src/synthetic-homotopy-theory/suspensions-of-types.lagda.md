@@ -180,7 +180,7 @@ dependent-up-suspension :
     (l : Level) {l1 : Level} {X : UU l1} →
     dependent-universal-property-suspension
       ( l)
-      ( suspension-structure-suspension X)  
+      ( suspension-structure-suspension X)
 dependent-up-suspension l {X = X} B =
   is-equiv-htpy
     ( (map-equiv
@@ -199,8 +199,8 @@ dependent-up-suspension l {X = X} B =
         (const X unit star)
         (const X unit star)
         (cocone-suspension-structure X (suspension X)
-        ( B)
-        ( suspension-structure-suspension X)))
+          (suspension-structure-suspension X))
+        ( B))
       ( dependent-up-pushout (const X unit star) (const X unit star) B)
       ( is-equiv-map-equiv
         ( comparison-dependent-suspension-cocone
@@ -209,9 +209,8 @@ dependent-up-suspension l {X = X} B =
 
 equiv-dependent-up-suspension :
     {l1 l2 : Level} {X : UU l1} (B : (suspension X) → UU l2) →
-    ((x : suspension X) → B x)
-  ≃
-    ( dependent-suspension-structure (suspension-structure-suspension X) B)
+    ((x : suspension X) → B x) ≃
+    ( dependent-suspension-structure B (suspension-structure-suspension X))
 pr1 (equiv-dependent-up-suspension {l2 = l2} {X = X} B) =
   (dependent-ev-suspension (suspension-structure-suspension X) B)
 pr2 (equiv-dependent-up-suspension {l2 = l2} B) =
@@ -222,7 +221,7 @@ module _
   where
 
   map-inv-dependent-up-suspension :
-    dependent-suspension-structure (suspension-structure-suspension X) B  →
+    dependent-suspension-structure B (suspension-structure-suspension X)  →
     (x : suspension X) → B x
   map-inv-dependent-up-suspension =
     map-inv-is-equiv (dependent-up-suspension l2 B)
@@ -239,44 +238,44 @@ module _
   is-retraction-map-inv-dependent-up-suspension =
     is-retraction-map-inv-is-equiv (dependent-up-suspension l2 B)
 
-  dependent-up-suspension-N-susp :
-    (d-susp-str : dependent-suspension-structure (suspension-structure-suspension X) B) →
-      ( map-inv-dependent-up-suspension d-susp-str N-susp) ＝
-      ( N-dependent-suspension-structure d-susp-str)
-  dependent-up-suspension-N-susp d-susp-str =
-    N-htpy-dependent-suspension-structure
+  dependent-up-suspension-north-suspension :
+    (d-susp-str : dependent-suspension-structure B (suspension-structure-suspension X)) →
+      ( map-inv-dependent-up-suspension d-susp-str north-suspension) ＝
+      ( north-dependent-suspension-structure d-susp-str)
+  dependent-up-suspension-north-suspension d-susp-str =
+    {!north-htpy-dependent-suspension-structure
     ( B)
     ( htpy-eq-dependent-suspension-structure
       ( B)
-      ( is-section-map-inv-dependent-up-suspension d-susp-str))
+      ( is-section-map-inv-dependent-up-suspension d-susp-str))!}
 
-  dependent-up-suspension-S-susp :
-    (d-susp-str : dependent-suspension-structure (suspension-structure-suspension X) B) →
-    ( map-inv-dependent-up-suspension d-susp-str S-susp) ＝
-    ( S-dependent-suspension-structure d-susp-str)
-  dependent-up-suspension-S-susp d-susp-str =
-    S-htpy-dependent-suspension-structure
+  dependent-up-suspension-south-suspension :
+    (d-susp-str : dependent-suspension-structure B (suspension-structure-suspension X)) →
+    ( map-inv-dependent-up-suspension d-susp-str south-suspension) ＝
+    ( south-dependent-suspension-structure d-susp-str)
+  dependent-up-suspension-south-suspension d-susp-str =
+    {!S-htpy-dependent-suspension-structure
     ( B)
     ( htpy-eq-dependent-suspension-structure
       ( B)
-      ( is-section-map-inv-dependent-up-suspension d-susp-str))
+      ( is-section-map-inv-dependent-up-suspension d-susp-str))!}
 
-  dependent-up-suspension-merid-susp :
+  dependent-up-suspension-meridian-suspension :
     (d-susp-str : dependent-suspension-structure
-      (suspension-structure-suspension X)
-      ( B))
+      ( B)
+      ( suspension-structure-suspension X))
     (x : X) →
       coherence-square-identifications
-        ( apd (map-inv-dependent-up-suspension d-susp-str ) (merid-susp x))
-        ( dependent-up-suspension-S-susp d-susp-str)
-        ( ap (tr B (merid-susp x)) (dependent-up-suspension-N-susp d-susp-str))
-        (merid-dependent-suspension-structure d-susp-str x)
-  dependent-up-suspension-merid-susp d-susp-str =
-    merid-htpy-dependent-suspension-structure
+        ( apd (map-inv-dependent-up-suspension d-susp-str ) (meridian-suspension x))
+        ( dependent-up-suspension-south-suspension d-susp-str)
+        ( ap (tr B (meridian-suspension x)) (dependent-up-suspension-north-suspension d-susp-str))
+        (meridian-dependent-suspension-structure d-susp-str x)
+  dependent-up-suspension-meridian-suspension d-susp-str =
+    {!merid-htpy-dependent-suspension-structure
       ( B)
       ( htpy-eq-dependent-suspension-structure
         ( B)
-        ( is-section-map-inv-dependent-up-suspension d-susp-str))  
+        ( is-section-map-inv-dependent-up-suspension d-susp-str))  !}
 ```
 
 
