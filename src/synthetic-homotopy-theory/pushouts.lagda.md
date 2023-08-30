@@ -149,9 +149,9 @@ is-pushout f g c = is-equiv (cogap f g c)
 
 ```agda
 dependent-up-pushout :
-     {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-    (f : S → A) (g : S → B) →
-     dependent-universal-property-pushout l4 f g (cocone-pushout f g)
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  (f : S → A) (g : S → B) →
+  dependent-universal-property-pushout l4 f g (cocone-pushout f g)
 dependent-up-pushout {l4 = l4} f g =
   dependent-universal-property-universal-property-pushout
   ( f)

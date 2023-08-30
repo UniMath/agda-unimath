@@ -187,10 +187,10 @@ dependent-up-suspension :
       ( suspension-structure-suspension X)
 dependent-up-suspension l {X = X} B =
   is-equiv-htpy
-    ( (map-equiv
-         ( comparison-dependent-suspension-cocone
-           ( suspension-structure-suspension X)
-           ( B))) ∘
+    ( ( map-equiv
+      ( comparison-dependent-suspension-cocone
+        ( suspension-structure-suspension X)
+        ( B))) ∘
       ( dependent-cocone-map
         ( const X unit star)
         ( const X unit star)
