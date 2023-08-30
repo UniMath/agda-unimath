@@ -163,8 +163,14 @@ module _
   where
 
   dependent-cocone-dependent-suspension-structure :
-     dependent-suspension-structure B ss → dependent-suspension-cocone B (cocone-suspension-structure X Y ss)
-  dependent-cocone-dependent-suspension-structure = {!!}
+     dependent-suspension-structure B ss →
+     dependent-suspension-cocone B (cocone-suspension-structure X Y ss)
+  pr1 (dependent-cocone-dependent-suspension-structure dss) t =
+    north-dependent-suspension-structure dss
+  pr1 (pr2 (dependent-cocone-dependent-suspension-structure dss)) t =
+    south-dependent-suspension-structure dss
+  pr2 (pr2 (dependent-cocone-dependent-suspension-structure dss)) x =
+    meridian-dependent-suspension-structure dss x
   
   comparison-dependent-suspension-cocone :
       (dependent-suspension-cocone
@@ -197,6 +203,17 @@ module _
           (equiv-dependent-universal-property-unit
             ( const unit (UU l3) (B (south-suspension-structure ss))))
           λ S-susp-c → id-equiv))
+
+  htpy-map-inv-comparison-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :
+    map-inv-equiv comparison-dependent-suspension-cocone ~
+    dependent-cocone-dependent-suspension-structure
+  htpy-map-inv-comparison-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure
+    ( dss) =
+      map-inv-equiv
+        ( equiv-ap comparison-dependent-suspension-cocone
+          ( map-inv-equiv comparison-dependent-suspension-cocone dss)
+          ( dependent-cocone-dependent-suspension-structure dss))
+        (is-section-map-inv-equiv comparison-dependent-suspension-cocone dss)
 ```
 
 #### Characterizing equality of dependent suspension structures

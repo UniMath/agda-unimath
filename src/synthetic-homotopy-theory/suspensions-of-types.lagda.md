@@ -173,6 +173,113 @@ module _
         ( up-suspension-meridian-suspension Z c))
 ```
 
+### The suspension of X has the dependent universal property of suspensions
+
+```agda
+dependent-up-suspension :
+    (l : Level) {l1 : Level} {X : UU l1} →
+    dependent-universal-property-suspension
+      ( l)
+      ( suspension-structure-suspension X)  
+dependent-up-suspension l {X = X} B =
+  is-equiv-htpy
+    ( (map-equiv
+         (comparison-dependent-suspension-cocone (suspension-structure-suspension X) B)) ∘
+      ( dependent-cocone-map
+        ( const X unit star)
+        ( const X unit star)
+        ( cocone-suspension-structure X (suspension X) (suspension-structure-suspension X))
+        ( B)))
+    ( inv-htpy (triangle-dependent-ev-suspension (suspension-structure-suspension X) B))
+    ( is-equiv-comp
+      ( map-equiv
+        (comparison-dependent-suspension-cocone
+          (suspension-structure-suspension X) B))
+      ( dependent-cocone-map
+        (const X unit star)
+        (const X unit star)
+        (cocone-suspension-structure X (suspension X)
+        ( B)
+        ( suspension-structure-suspension X)))
+      ( dependent-up-pushout (const X unit star) (const X unit star) B)
+      ( is-equiv-map-equiv
+        ( comparison-dependent-suspension-cocone
+          ( suspension-structure-suspension X)
+          ( B))))
+
+equiv-dependent-up-suspension :
+    {l1 l2 : Level} {X : UU l1} (B : (suspension X) → UU l2) →
+    ((x : suspension X) → B x)
+  ≃
+    ( dependent-suspension-structure (suspension-structure-suspension X) B)
+pr1 (equiv-dependent-up-suspension {l2 = l2} {X = X} B) =
+  (dependent-ev-suspension (suspension-structure-suspension X) B)
+pr2 (equiv-dependent-up-suspension {l2 = l2} B) =
+  dependent-up-suspension l2 B
+
+module _
+  {l1 l2 : Level} {X : UU l1} (B : (suspension X) → UU l2)
+  where
+
+  map-inv-dependent-up-suspension :
+    dependent-suspension-structure (suspension-structure-suspension X) B  →
+    (x : suspension X) → B x
+  map-inv-dependent-up-suspension =
+    map-inv-is-equiv (dependent-up-suspension l2 B)
+
+  is-section-map-inv-dependent-up-suspension :
+    ( ( dependent-ev-suspension (suspension-structure-suspension X) B) ∘
+      ( map-inv-dependent-up-suspension)) ~ id
+  is-section-map-inv-dependent-up-suspension  =
+    is-section-map-inv-is-equiv (dependent-up-suspension l2 B)
+
+  is-retraction-map-inv-dependent-up-suspension :
+    ( ( map-inv-dependent-up-suspension) ∘
+      ( dependent-ev-suspension (suspension-structure-suspension X) B)) ~ id
+  is-retraction-map-inv-dependent-up-suspension =
+    is-retraction-map-inv-is-equiv (dependent-up-suspension l2 B)
+
+  dependent-up-suspension-N-susp :
+    (d-susp-str : dependent-suspension-structure (suspension-structure-suspension X) B) →
+      ( map-inv-dependent-up-suspension d-susp-str N-susp) ＝
+      ( N-dependent-suspension-structure d-susp-str)
+  dependent-up-suspension-N-susp d-susp-str =
+    N-htpy-dependent-suspension-structure
+    ( B)
+    ( htpy-eq-dependent-suspension-structure
+      ( B)
+      ( is-section-map-inv-dependent-up-suspension d-susp-str))
+
+  dependent-up-suspension-S-susp :
+    (d-susp-str : dependent-suspension-structure (suspension-structure-suspension X) B) →
+    ( map-inv-dependent-up-suspension d-susp-str S-susp) ＝
+    ( S-dependent-suspension-structure d-susp-str)
+  dependent-up-suspension-S-susp d-susp-str =
+    S-htpy-dependent-suspension-structure
+    ( B)
+    ( htpy-eq-dependent-suspension-structure
+      ( B)
+      ( is-section-map-inv-dependent-up-suspension d-susp-str))
+
+  dependent-up-suspension-merid-susp :
+    (d-susp-str : dependent-suspension-structure
+      (suspension-structure-suspension X)
+      ( B))
+    (x : X) →
+      coherence-square-identifications
+        ( apd (map-inv-dependent-up-suspension d-susp-str ) (merid-susp x))
+        ( dependent-up-suspension-S-susp d-susp-str)
+        ( ap (tr B (merid-susp x)) (dependent-up-suspension-N-susp d-susp-str))
+        (merid-dependent-suspension-structure d-susp-str x)
+  dependent-up-suspension-merid-susp d-susp-str =
+    merid-htpy-dependent-suspension-structure
+      ( B)
+      ( htpy-eq-dependent-suspension-structure
+        ( B)
+        ( is-section-map-inv-dependent-up-suspension d-susp-str))  
+```
+
+
 ### The suspension of a contractible type is contractible
 
 ```agda

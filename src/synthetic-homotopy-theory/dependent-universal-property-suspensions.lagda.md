@@ -59,7 +59,7 @@ dependent-ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
   (susp-str : suspension-structure X Y) (B : Y → UU l3) →
   ((y : Y) → B y) →
-  dependent-suspension-structure susp-str B
+  dependent-suspension-structure B susp-str
 pr1 (dependent-ev-suspension susp-str B s) =
   s (north-suspension-structure susp-str)
 pr1 (pr2 (dependent-ev-suspension susp-str B s)) =
@@ -75,4 +75,23 @@ module _
   dependent-universal-property-suspension : UU (l1 ⊔ l2 ⊔ lsuc l)
   dependent-universal-property-suspension =
     (B : Y → UU l) → is-equiv (dependent-ev-suspension susp-str B)
+```
+
+#### Coherence between `dependent-ev-suspension` and
+`dependent-cocone-map`
+
+```agda
+triangle-dependent-ev-suspension :
+    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+    (susp-str : suspension-structure X Y) →
+    (B : Y → UU l3) →
+  (map-equiv (comparison-dependent-suspension-cocone susp-str B) ∘
+      dependent-cocone-map
+        ( const X unit star)
+        ( const X unit star)
+        ( cocone-suspension-structure X Y susp-str)
+        ( B))
+      ~
+        dependent-ev-suspension susp-str B
+triangle-dependent-ev-suspension {X = X} {Y = Y} susp-str B = refl-htpy  
 ```
