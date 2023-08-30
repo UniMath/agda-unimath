@@ -183,7 +183,7 @@ module _
   abstract
     is-equiv-is-coherently-invertible :
       is-coherently-invertible f → is-equiv f
-    is-equiv-is-coherently-invertible (pair g (pair G (pair H K))) =
+    is-equiv-is-coherently-invertible (g , G , H , K) =
       is-equiv-has-inverse g G H
 ```
 

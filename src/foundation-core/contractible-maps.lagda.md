@@ -91,18 +91,18 @@ module _
     center-fib-is-coherently-invertible :
       is-coherently-invertible f → (y : B) → fib f y
     pr1 (center-fib-is-coherently-invertible H y) =
-      inv-is-coherently-invertible H y
+      map-inv-is-coherently-invertible H y
     pr2 (center-fib-is-coherently-invertible H y) =
-      is-section-inv-is-coherently-invertible H y
+      is-retraction-is-coherently-invertible H y
 
     contraction-fib-is-coherently-invertible :
       (H : is-coherently-invertible f) → (y : B) → (t : fib f y) →
       (center-fib-is-coherently-invertible H y) ＝ t
     contraction-fib-is-coherently-invertible H y (pair x refl) =
       eq-Eq-fib f y
-        ( is-retraction-inv-is-coherently-invertible H x)
+        ( is-section-is-coherently-invertible H x)
         ( ( right-unit) ∙
-          ( inv ( coh-inv-is-coherently-invertible H x)))
+          ( inv ( coh-is-coherently-invertible H x)))
 
   is-contr-map-is-coherently-invertible :
     is-coherently-invertible f → is-contr-map f

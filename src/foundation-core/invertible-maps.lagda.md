@@ -24,7 +24,7 @@ open import foundation-core.identity-types
 An **inverse** for a map `f : A → B` is a map `g : B → A` equipped with
 [homotopies](foundation-core.homotopies.md) ` (f ∘ g) ~ id` and `(g ∘ f) ~ id`.
 Such data, however is [structure](foundation.structure.md) on the map `f`, and
-not a [property](foundation-core.propositions.md).
+not generally a [property](foundation-core.propositions.md).
 
 ## Definition
 
