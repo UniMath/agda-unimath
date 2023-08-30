@@ -98,7 +98,7 @@ coh-is-coherently-invertible-id {_} {A} {f} H x =
       ( nat-htpy H (H x)))
 ```
 
-#### Invertible maps are coherently invertible
+#### The proof that invertible maps are coherently invertible
 
 ```agda
 module _
@@ -106,6 +106,17 @@ module _
   where
 
   abstract
+    is-section-map-inv-has-inverse :
+      (H : has-inverse f) → (f ∘ map-inv-has-inverse H) ~ id
+    is-section-map-inv-has-inverse H y =
+      ( inv (is-retraction-has-inverse H (f (map-inv-has-inverse H y)))) ∙
+      ( ( ap f (is-section-has-inverse H (map-inv-has-inverse H y))) ∙
+        ( is-retraction-has-inverse H y))
+
+    is-retraction-map-inv-has-inverse :
+      (H : has-inverse f) → (map-inv-has-inverse H ∘ f) ~ id
+    is-retraction-map-inv-has-inverse = is-section-has-inverse
+
     coherence-map-inv-has-inverse :
       ( H : has-inverse f) →
       ( is-section-map-inv-has-inverse H ·r f) ~

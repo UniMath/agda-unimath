@@ -110,27 +110,16 @@ module _
 
 ## Properties
 
-### The iterated inverse invertible map
+### The inverse invertible map
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  is-section-map-inv-has-inverse :
-    (H : has-inverse f) → (f ∘ map-inv-has-inverse H) ~ id
-  is-section-map-inv-has-inverse H y =
-    ( inv (is-retraction-has-inverse H (f (map-inv-has-inverse H y)))) ∙
-    ( ( ap f (is-section-has-inverse H (map-inv-has-inverse H y))) ∙
-      ( is-retraction-has-inverse H y))
-
-  is-retraction-map-inv-has-inverse :
-    (H : has-inverse f) → (map-inv-has-inverse H ∘ f) ~ id
-  is-retraction-map-inv-has-inverse = is-section-has-inverse
-
   inv-is-inverse : {g : B → A} → is-inverse f g → is-inverse g f
-  pr1 (inv-is-inverse {g} H) = is-retraction-map-inv-has-inverse (g , H)
-  pr2 (inv-is-inverse {g} H) = is-section-map-inv-has-inverse (g , H)
+  pr1 (inv-is-inverse {g} H) = is-section-has-inverse (g , H)
+  pr2 (inv-is-inverse {g} H) = is-retraction-has-inverse (g , H)
 
   inv-has-inverse : (g : has-inverse f) → has-inverse (map-inv-has-inverse g)
   pr1 (inv-has-inverse g) = f
