@@ -138,13 +138,15 @@ module _
 
   up-suspension-north-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
-    (map-inv-up-suspension Z c north-suspension) ＝ pr1 c
+    ( map-inv-up-suspension Z c north-suspension) ＝
+    ( north-suspension-structure c)
   up-suspension-north-suspension Z c =
     pr1 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c))
 
   up-suspension-south-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
-    (map-inv-up-suspension Z c south-suspension) ＝ pr1 (pr2 c)
+    ( map-inv-up-suspension Z c south-suspension) ＝
+    ( south-suspension-structure c)
   up-suspension-south-suspension Z c =
     pr1
       ( pr2
@@ -154,7 +156,8 @@ module _
     {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
     ( ( ap (map-inv-up-suspension Z c) (meridian-suspension x)) ∙
       ( up-suspension-south-suspension Z c)) ＝
-    ( ( up-suspension-north-suspension Z c) ∙ ( pr2 (pr2 c)) x)
+    ( ( up-suspension-north-suspension Z c) ∙
+    ( meridian-suspension-structure c) x)
   up-suspension-meridian-suspension Z c =
     pr2
       ( pr2
