@@ -11,7 +11,6 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.slice
@@ -19,7 +18,6 @@ open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universal-property-empty-type
-open import foundation.universal-property-unit-type
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps

@@ -11,16 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.fibered-maps
 open import foundation.function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.path-algebra
-open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps

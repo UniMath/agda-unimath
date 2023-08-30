@@ -24,9 +24,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.extensions-of-maps
 open import orthogonal-factorization-systems.lifting-squares
-open import orthogonal-factorization-systems.lifts-of-maps
 ```
 
 </details>
