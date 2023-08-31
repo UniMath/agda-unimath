@@ -265,7 +265,7 @@ module _
     is-equiv-fiberwise-map-over-map-over :
       is-equiv (fiberwise-map-over-map-over)
     is-equiv-fiberwise-map-over-map-over =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-over-fiberwise-map-over)
         ( is-section-map-over-fiberwise-map-over)
         ( is-retraction-map-over-fiberwise-map-over)
@@ -274,7 +274,7 @@ module _
     is-equiv-map-over-fiberwise-map-over :
       is-equiv (map-over-fiberwise-map-over)
     is-equiv-map-over-fiberwise-map-over =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fiberwise-map-over-map-over)
         ( is-retraction-map-over-fiberwise-map-over)
         ( is-section-map-over-fiberwise-map-over)

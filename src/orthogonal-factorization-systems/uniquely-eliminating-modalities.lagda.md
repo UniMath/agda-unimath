@@ -144,7 +144,7 @@ module _
 
   is-modal-uniquely-eliminating-modality : is-modal unit-○ (○ X)
   is-modal-uniquely-eliminating-modality =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-unit-uniquely-eliminating-modality
       is-retraction-unit-uniquely-eliminating-modality
       is-section-unit-uniquely-eliminating-modality

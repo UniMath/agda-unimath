@@ -548,7 +548,7 @@ module _
   is-equiv-congruence-ideal-Ring :
     is-equiv (congruence-ideal-Ring {l1} {l2} R)
   is-equiv-congruence-ideal-Ring =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( ideal-congruence-Ring R)
       ( is-section-ideal-congruence-Ring R)
       ( is-retraction-ideal-congruence-Ring R)
@@ -561,7 +561,7 @@ module _
   is-equiv-ideal-congruence-Ring :
     is-equiv (ideal-congruence-Ring {l1} {l2} R)
   is-equiv-ideal-congruence-Ring =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( congruence-ideal-Ring R)
       ( is-retraction-ideal-congruence-Ring R)
       ( is-section-ideal-congruence-Ring R)

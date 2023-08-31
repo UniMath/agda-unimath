@@ -115,7 +115,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
     is-equiv (map-distributive-Π-Σ {A = A} {B = B} {C = C})
   is-equiv-map-distributive-Π-Σ {A = A} {B = B} {C = C} =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
@@ -131,7 +131,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
     is-equiv (map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
   is-equiv-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C} =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})

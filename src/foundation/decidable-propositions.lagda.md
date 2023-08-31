@@ -106,7 +106,7 @@ module _
   is-equiv-map-equiv-bool-Decidable-Prop' :
     is-equiv map-equiv-bool-Decidable-Prop'
   is-equiv-map-equiv-bool-Decidable-Prop' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-bool-Decidable-Prop'
       is-section-map-inv-equiv-bool-Decidable-Prop'
       is-retraction-map-inv-equiv-bool-Decidable-Prop'

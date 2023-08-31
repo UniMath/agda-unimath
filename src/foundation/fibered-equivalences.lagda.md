@@ -110,7 +110,7 @@ module _
 
   is-equiv-map-Σ-is-equiv-equiv-over : is-equiv map-Σ-is-equiv-equiv-over
   is-equiv-map-Σ-is-equiv-equiv-over =
-    is-equiv-has-inverse map-equiv-over-Σ-is-equiv refl-htpy refl-htpy
+    is-equiv-is-invertible map-equiv-over-Σ-is-equiv refl-htpy refl-htpy
 
   equiv-Σ-is-equiv-equiv-over :
     (equiv-over f g i) ≃ Σ (map-over f g i) (is-equiv ∘ pr1)
@@ -119,7 +119,7 @@ module _
 
   is-equiv-map-equiv-over-Σ-is-equiv : is-equiv map-equiv-over-Σ-is-equiv
   is-equiv-map-equiv-over-Σ-is-equiv =
-    is-equiv-has-inverse map-Σ-is-equiv-equiv-over refl-htpy refl-htpy
+    is-equiv-is-invertible map-Σ-is-equiv-equiv-over refl-htpy refl-htpy
 
   equiv-equiv-over-Σ-is-equiv :
     Σ (map-over f g i) (is-equiv ∘ pr1) ≃ (equiv-over f g i)
@@ -175,7 +175,7 @@ module _
   is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv :
     is-equiv (map-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
   is-equiv-map-Σ-is-fibered-equiv-fibered-map-fibered-equiv =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-fibered-equiv-Σ-is-fibered-equiv-fibered-map)
       ( refl-htpy)
       ( refl-htpy)
@@ -190,7 +190,7 @@ module _
   is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map :
     is-equiv (map-fibered-equiv-Σ-is-fibered-equiv-fibered-map)
   is-equiv-map-fibered-equiv-Σ-is-fibered-equiv-fibered-map =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
       ( refl-htpy)
       ( refl-htpy)

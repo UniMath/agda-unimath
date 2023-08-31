@@ -310,7 +310,7 @@ module _
       is-equiv (precomp-pointed-map C f)) →
     is-equiv-pointed-map f
   is-equiv-is-equiv-precomp-pointed-map H =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-pointed-map g)
       ( htpy-eq
         ( ap pr1
@@ -433,7 +433,7 @@ module _
     ({l : Level} (X : Pointed-Type l) →
     is-equiv (comp-pointed-map {A = X} f)) → is-equiv-pointed-map f
   is-equiv-is-equiv-comp-pointed-map H =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-pointed-map g)
       ( pr1 G)
       ( htpy-eq

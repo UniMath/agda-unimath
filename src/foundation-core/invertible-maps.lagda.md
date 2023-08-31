@@ -52,32 +52,32 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  has-inverse : (A → B) → UU (l1 ⊔ l2)
-  has-inverse f = Σ (B → A) (is-inverse f)
+  is-invertible : (A → B) → UU (l1 ⊔ l2)
+  is-invertible f = Σ (B → A) (is-inverse f)
 
-  map-inv-has-inverse : {f : A → B} → has-inverse f → B → A
-  map-inv-has-inverse = pr1
+  map-inv-is-invertible : {f : A → B} → is-invertible f → B → A
+  map-inv-is-invertible = pr1
 
-  is-inverse-map-inv-has-inverse :
-    {f : A → B} (g : has-inverse f) → is-inverse f (map-inv-has-inverse g)
-  is-inverse-map-inv-has-inverse = pr2
+  is-inverse-map-inv-is-invertible :
+    {f : A → B} (g : is-invertible f) → is-inverse f (map-inv-is-invertible g)
+  is-inverse-map-inv-is-invertible = pr2
 
-  is-retraction-has-inverse :
-    {f : A → B} (has-inverse-f : has-inverse f) →
-    (f ∘ map-inv-has-inverse has-inverse-f) ~ id
-  is-retraction-has-inverse = pr1 ∘ is-inverse-map-inv-has-inverse
+  is-retraction-is-invertible :
+    {f : A → B} (is-invertible-f : is-invertible f) →
+    (f ∘ map-inv-is-invertible is-invertible-f) ~ id
+  is-retraction-is-invertible = pr1 ∘ is-inverse-map-inv-is-invertible
 
-  is-section-has-inverse :
-    {f : A → B} (has-inverse-f : has-inverse f) →
-    (map-inv-has-inverse has-inverse-f ∘ f) ~ id
-  is-section-has-inverse = pr2 ∘ is-inverse-map-inv-has-inverse
+  is-section-is-invertible :
+    {f : A → B} (is-invertible-f : is-invertible f) →
+    (map-inv-is-invertible is-invertible-f ∘ f) ~ id
+  is-section-is-invertible = pr2 ∘ is-inverse-map-inv-is-invertible
 ```
 
 ### The type of invertible maps
 
 ```agda
 invertible-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-invertible-map A B = Σ (A → B) (has-inverse)
+invertible-map A B = Σ (A → B) (is-invertible)
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -86,24 +86,25 @@ module _
   map-invertible-map : invertible-map A B → A → B
   map-invertible-map = pr1
 
-  has-inverse-map-invertible-map :
-    (f : invertible-map A B) → has-inverse (map-invertible-map f)
-  has-inverse-map-invertible-map = pr2
+  is-invertible-map-invertible-map :
+    (f : invertible-map A B) → is-invertible (map-invertible-map f)
+  is-invertible-map-invertible-map = pr2
 
   map-inv-invertible-map : invertible-map A B → B → A
-  map-inv-invertible-map = map-inv-has-inverse ∘ has-inverse-map-invertible-map
+  map-inv-invertible-map =
+    map-inv-is-invertible ∘ is-invertible-map-invertible-map
 
   is-section-map-invertible-map :
     (f : invertible-map A B) →
     (map-inv-invertible-map f ∘ map-invertible-map f) ~ id
   is-section-map-invertible-map =
-    is-section-has-inverse ∘ has-inverse-map-invertible-map
+    is-section-is-invertible ∘ is-invertible-map-invertible-map
 
   is-retraction-map-invertible-map :
     (f : invertible-map A B) →
     (map-invertible-map f ∘ map-inv-invertible-map f) ~ id
   is-retraction-map-invertible-map =
-    is-retraction-has-inverse ∘ has-inverse-map-invertible-map
+    is-retraction-is-invertible ∘ is-invertible-map-invertible-map
 ```
 
 ## Properties
@@ -116,12 +117,14 @@ module _
   where
 
   inv-is-inverse : {g : B → A} → is-inverse f g → is-inverse g f
-  pr1 (inv-is-inverse {g} H) = is-section-has-inverse (g , H)
-  pr2 (inv-is-inverse {g} H) = is-retraction-has-inverse (g , H)
+  pr1 (inv-is-inverse {g} H) = is-section-is-invertible (g , H)
+  pr2 (inv-is-inverse {g} H) = is-retraction-is-invertible (g , H)
 
-  inv-has-inverse : (g : has-inverse f) → has-inverse (map-inv-has-inverse g)
-  pr1 (inv-has-inverse g) = f
-  pr2 (inv-has-inverse g) = inv-is-inverse (is-inverse-map-inv-has-inverse g)
+  inv-is-invertible :
+    (g : is-invertible f) → is-invertible (map-inv-is-invertible g)
+  pr1 (inv-is-invertible g) = f
+  pr2 (inv-is-invertible g) =
+    inv-is-inverse (is-inverse-map-inv-is-invertible g)
 ```
 
 ## See also

@@ -2079,7 +2079,7 @@ module _
       ( succ-ℕ (number-of-elements-count h))
       ( pair
         ( h' g P h)
-        ( is-equiv-has-inverse
+        ( is-equiv-is-invertible
           ( inv-h' g P h)
           ( λ T →
             retraction-h'

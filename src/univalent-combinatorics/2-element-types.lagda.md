@@ -253,7 +253,7 @@ abstract
 abstract
   is-equiv-ev-zero-aut-Fin-two-ℕ : is-equiv ev-zero-aut-Fin-two-ℕ
   is-equiv-ev-zero-aut-Fin-two-ℕ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       aut-point-Fin-two-ℕ
       is-section-aut-point-Fin-two-ℕ
       is-retraction-aut-point-Fin-two-ℕ

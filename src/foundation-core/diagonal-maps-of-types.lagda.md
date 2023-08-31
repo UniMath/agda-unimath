@@ -70,7 +70,7 @@ module _
     is-prop A → A ≃ (A × A)
   pr1 (equiv-diagonal-is-prop is-prop-A) = diagonal A
   pr2 (equiv-diagonal-is-prop is-prop-A) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( pr1)
       ( λ pair-a → eq-pair (eq-is-prop is-prop-A) (eq-is-prop is-prop-A))
       ( λ a → eq-is-prop is-prop-A)
@@ -101,7 +101,7 @@ module _
   abstract
     is-equiv-eq-fib-diagonal : (t : A × A) → is-equiv (eq-fib-diagonal t)
     is-equiv-eq-fib-diagonal t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fib-diagonal-eq t)
         ( is-section-fib-diagonal-eq t)
         ( is-retraction-fib-diagonal-eq t)

@@ -138,7 +138,7 @@ abstract
     (C : B → UU l3) → is-equiv (precomp-Π f C)
   is-equiv-precomp-Π-is-coherently-invertible f
     ( pair g (pair is-section-g (pair is-retraction-g coh))) C =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       (λ s y → tr C (is-section-g y) (s (g y)))
       ( λ s → eq-htpy (λ x →
         ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙

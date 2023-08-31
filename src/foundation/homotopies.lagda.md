@@ -130,7 +130,7 @@ is-equiv-inv-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   (f g : (x : A) → B x) → is-equiv (inv-htpy {f = f} {g = g})
 is-equiv-inv-htpy f g =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( inv-htpy)
     ( λ H → eq-htpy (λ x → inv-inv (H x)))
     ( λ H → eq-htpy (λ x → inv-inv (H x)))
@@ -185,7 +185,7 @@ module _
 
   is-equiv-concat-htpy' : is-equiv (concat-htpy' f K)
   is-equiv-concat-htpy' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( concat-inv-htpy' f K)
       ( is-section-concat-inv-htpy')
       ( is-retraction-concat-inv-htpy')

@@ -51,7 +51,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (a : A)
     {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B = B})
   is-equiv-ev-refl a =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( ind-Id a _)
       ( λ b → refl)
       ( λ f → eq-htpy

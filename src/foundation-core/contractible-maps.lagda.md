@@ -74,7 +74,7 @@ module _
   abstract
     is-equiv-is-contr-map : is-contr-map f → is-equiv f
     is-equiv-is-contr-map H =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-is-contr-map H)
         ( is-section-map-inv-is-contr-map H)
         ( is-retraction-map-inv-is-contr-map H)

@@ -40,7 +40,7 @@ module _
   dependent-universal-property-coprod :
     {l3 : Level} (P : A + B → UU l3) → is-equiv (ev-inl-inr P)
   dependent-universal-property-coprod P =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ p → ind-coprod P (pr1 p) (pr2 p))
       ( ind-Σ (λ f g → eq-pair refl refl))
       ( λ s → eq-htpy (ind-coprod _ (λ x → refl) λ y → refl))

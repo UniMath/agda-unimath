@@ -292,7 +292,7 @@ module _
     is-pullback-cone-canonical-pullback-Σ :
       is-pullback f (pr1 {B = Q}) cone-canonical-pullback-Σ
     is-pullback-cone-canonical-pullback-Σ =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         inv-gap-cone-canonical-pullback-Σ
         is-section-inv-gap-cone-canonical-pullback-Σ
         is-retraction-inv-gap-cone-canonical-pullback-Σ
@@ -326,7 +326,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) → is-equiv (map-commutative-canonical-pullback f g)
   is-equiv-map-commutative-canonical-pullback f g =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-commutative-canonical-pullback g f)
       ( inv-inv-map-commutative-canonical-pullback f g)
       ( inv-inv-map-commutative-canonical-pullback g f)
@@ -462,7 +462,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) → is-equiv (map-fold-cone f g)
   is-equiv-map-fold-cone f g =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-map-fold-cone f g)
       ( is-section-inv-map-fold-cone f g)
       ( is-retraction-inv-map-fold-cone f g)

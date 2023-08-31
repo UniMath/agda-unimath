@@ -59,7 +59,7 @@ abstract
     {l : Level} (A : UU l) →
     is-equiv (λ (f : bool → A) → pair (f true) (f false))
   universal-property-bool A =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-universal-property-bool
       is-section-map-universal-property-bool
       is-retraction-map-universal-property-bool

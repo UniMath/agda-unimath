@@ -136,7 +136,7 @@ module _
     is-equiv-fib-map-coprod-inl-fib :
       (x : A) → is-equiv (fib-map-coprod-inl-fib x)
     is-equiv-fib-map-coprod-inl-fib x =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fib-fib-map-coprod-inl x)
         ( is-section-fib-fib-map-coprod-inl x)
         ( is-retraction-fib-fib-map-coprod-inl x)
@@ -168,7 +168,7 @@ module _
     is-equiv-fib-map-coprod-inr-fib :
       (y : B) → is-equiv (fib-map-coprod-inr-fib y)
     is-equiv-fib-map-coprod-inr-fib y =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fib-fib-map-coprod-inr y)
         ( is-section-fib-fib-map-coprod-inr y)
         ( is-retraction-fib-fib-map-coprod-inr y)
@@ -393,7 +393,7 @@ module _
   pr1 (pr1 (retraction-equiv-coprod f g p)) x =
     cases-retraction-equiv-coprod f g p x (map-equiv f (inl x)) refl
   pr2 (pr1 (retraction-equiv-coprod f g p)) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ x →
         inv-cases-retraction-equiv-coprod f g p x
           ( map-inv-equiv f (inl x))
@@ -471,7 +471,7 @@ module _
     (e : (P + Q) ≃ (P' + Q')) (u : P + Q) → is-left u ≃ is-left (map-equiv e u)
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr is-left (is-retraction-map-inv-equiv e u) ∘
         left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
       ( λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
@@ -482,7 +482,7 @@ module _
     is-right u ≃ is-right (map-equiv e u)
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr is-right (is-retraction-map-inv-equiv e u) ∘
         right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
@@ -527,7 +527,7 @@ module _
     ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))
   pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
   pr2 equiv-mutually-exclusive-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-mutually-exclusive-coprod
       is-retraction-map-inv-mutually-exclusive-coprod
       is-section-map-inv-mutually-exclusive-coprod

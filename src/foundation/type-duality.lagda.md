@@ -226,7 +226,7 @@ module _
   is-equiv-map-type-duality :
     is-equiv (map-type-duality (is-locally-small-is-small H))
   is-equiv-map-type-duality =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-type-duality
       is-section-map-inv-type-duality
       is-retraction-map-inv-type-duality
@@ -291,7 +291,7 @@ is-retraction-Pr1 {A = A} (pair X f) =
 is-equiv-Fib :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
 is-equiv-Fib l2 A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( Pr1 A)
     ( is-section-Pr1 {l2 = l2})
     ( is-retraction-Pr1 {l2 = l2})
@@ -304,7 +304,7 @@ pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
 is-equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
 is-equiv-Pr1 {l1} l2 A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( Fib A)
     ( is-retraction-Pr1 {l2 = l2})
     ( is-section-Pr1 {l2 = l2})

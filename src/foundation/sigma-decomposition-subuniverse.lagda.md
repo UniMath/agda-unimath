@@ -134,7 +134,7 @@ equiv-total-is-in-subuniverse-Σ-Decomposition :
 pr1 (equiv-total-is-in-subuniverse-Σ-Decomposition P A) =
   map-equiv-total-is-in-subuniverse-Σ-Decomposition P A
 pr2 (equiv-total-is-in-subuniverse-Σ-Decomposition P A) =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-inv-equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-Subuniverse P A)
     ( refl-htpy)
     ( refl-htpy)

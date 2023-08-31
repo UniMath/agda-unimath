@@ -194,7 +194,7 @@ module _
         ( C5 X)
         ( pr2 S)
     pr2 (equiv-Σ-extension-small-cauchy-composition-unit-subuniverse X) =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ S →
           ( tr
               ( is-in-subuniverse P)

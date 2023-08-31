@@ -56,62 +56,67 @@ module _
   eq-htpy-is-inverse = map-inv-equiv extensionality-is-inverse
 ```
 
-#### Characterizing equality of `has-inverse`
+#### Characterizing equality of `is-invertible`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
-  coherence-htpy-has-inverse :
-    (s t : has-inverse f) →
-    map-inv-has-inverse s ~ map-inv-has-inverse t → UU (l1 ⊔ l2)
-  coherence-htpy-has-inverse s t H =
-    ( is-retraction-has-inverse s ~ ((f ·l H) ∙h is-retraction-has-inverse t)) ×
-    ( is-section-has-inverse s ~ ((H ·r f) ∙h is-section-has-inverse t))
+  coherence-htpy-is-invertible :
+    (s t : is-invertible f) →
+    map-inv-is-invertible s ~ map-inv-is-invertible t → UU (l1 ⊔ l2)
+  coherence-htpy-is-invertible s t H =
+    ( ( is-retraction-is-invertible s) ~
+      ( (f ·l H) ∙h is-retraction-is-invertible t)) ×
+    ( ( is-section-is-invertible s) ~
+      ( (H ·r f) ∙h is-section-is-invertible t))
 
-  htpy-has-inverse : (s t : has-inverse f) → UU (l1 ⊔ l2)
-  htpy-has-inverse s t =
-    Σ ( map-inv-has-inverse s ~ map-inv-has-inverse t)
-      ( coherence-htpy-has-inverse s t)
+  htpy-is-invertible : (s t : is-invertible f) → UU (l1 ⊔ l2)
+  htpy-is-invertible s t =
+    Σ ( map-inv-is-invertible s ~ map-inv-is-invertible t)
+      ( coherence-htpy-is-invertible s t)
 
-  refl-htpy-has-inverse : (s : has-inverse f) → htpy-has-inverse s s
-  pr1 (refl-htpy-has-inverse s) = refl-htpy
-  pr1 (pr2 (refl-htpy-has-inverse s)) = refl-htpy
-  pr2 (pr2 (refl-htpy-has-inverse s)) = refl-htpy
+  refl-htpy-is-invertible : (s : is-invertible f) → htpy-is-invertible s s
+  pr1 (refl-htpy-is-invertible s) = refl-htpy
+  pr1 (pr2 (refl-htpy-is-invertible s)) = refl-htpy
+  pr2 (pr2 (refl-htpy-is-invertible s)) = refl-htpy
 
-  htpy-eq-has-inverse : (s t : has-inverse f) → s ＝ t → htpy-has-inverse s t
-  htpy-eq-has-inverse s .s refl = refl-htpy-has-inverse s
+  htpy-eq-is-invertible :
+    (s t : is-invertible f) → s ＝ t → htpy-is-invertible s t
+  htpy-eq-is-invertible s .s refl = refl-htpy-is-invertible s
 
-  is-contr-total-htpy-has-inverse :
-    (s : has-inverse f) → is-contr (Σ (has-inverse f) (htpy-has-inverse s))
-  is-contr-total-htpy-has-inverse s =
+  is-contr-total-htpy-is-invertible :
+    (s : is-invertible f) →
+    is-contr (Σ (is-invertible f) (htpy-is-invertible s))
+  is-contr-total-htpy-is-invertible s =
     is-contr-total-Eq-structure
-      ( λ x z → coherence-htpy-has-inverse s (x , z))
-      ( is-contr-total-htpy (map-inv-has-inverse s))
-      ( map-inv-has-inverse s , refl-htpy)
+      ( λ x z → coherence-htpy-is-invertible s (x , z))
+      ( is-contr-total-htpy (map-inv-is-invertible s))
+      ( map-inv-is-invertible s , refl-htpy)
       ( is-contr-total-Eq-structure
         ( λ S R H →
-          ( is-section-has-inverse s) ~
-          ( is-section-has-inverse (map-inv-has-inverse s , S , R)))
-        ( is-contr-total-htpy (is-retraction-has-inverse s))
-        ( is-retraction-has-inverse s , refl-htpy)
-        ( is-contr-total-htpy (is-section-has-inverse s)))
+          ( is-section-is-invertible s) ~
+          ( is-section-is-invertible (map-inv-is-invertible s , S , R)))
+        ( is-contr-total-htpy (is-retraction-is-invertible s))
+        ( is-retraction-is-invertible s , refl-htpy)
+        ( is-contr-total-htpy (is-section-is-invertible s)))
 
-  is-equiv-htpy-eq-has-inverse :
-    (s t : has-inverse f) → is-equiv (htpy-eq-has-inverse s t)
-  is-equiv-htpy-eq-has-inverse s =
+  is-equiv-htpy-eq-is-invertible :
+    (s t : is-invertible f) → is-equiv (htpy-eq-is-invertible s t)
+  is-equiv-htpy-eq-is-invertible s =
     fundamental-theorem-id
-      ( is-contr-total-htpy-has-inverse s)
-      ( htpy-eq-has-inverse s)
+      ( is-contr-total-htpy-is-invertible s)
+      ( htpy-eq-is-invertible s)
 
-  extensionality-has-inverse :
-    (s t : has-inverse f) → (s ＝ t) ≃ (htpy-has-inverse s t)
-  pr1 (extensionality-has-inverse s t) = htpy-eq-has-inverse s t
-  pr2 (extensionality-has-inverse s t) = is-equiv-htpy-eq-has-inverse s t
+  extensionality-is-invertible :
+    (s t : is-invertible f) → (s ＝ t) ≃ (htpy-is-invertible s t)
+  pr1 (extensionality-is-invertible s t) = htpy-eq-is-invertible s t
+  pr2 (extensionality-is-invertible s t) = is-equiv-htpy-eq-is-invertible s t
 
-  eq-htpy-has-inverse : (s t : has-inverse f) → htpy-has-inverse s t → s ＝ t
-  eq-htpy-has-inverse s t = map-inv-equiv (extensionality-has-inverse s t)
+  eq-htpy-is-invertible :
+    (s t : is-invertible f) → htpy-is-invertible s t → s ＝ t
+  eq-htpy-is-invertible s t = map-inv-equiv (extensionality-is-invertible s t)
 ```
 
 #### Characterizing equality of `invertible-map`
@@ -207,11 +212,11 @@ module _
       ( is-trunc-Π k (λ x → is-trunc-B (f (g x)) x))
       ( is-trunc-Π k (λ x → is-trunc-A (g (f x)) x))
 
-  is-trunc-has-inverse :
+  is-trunc-is-invertible :
     (f : A → B) →
     is-trunc k A → is-trunc (succ-𝕋 k) B →
-    is-trunc k (has-inverse f)
-  is-trunc-has-inverse f is-trunc-A is-trunc-B =
+    is-trunc k (is-invertible f)
+  is-trunc-is-invertible f is-trunc-A is-trunc-B =
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-A)
       ( λ g →
@@ -226,22 +231,24 @@ module _
     is-trunc-Σ
       ( is-trunc-function-type k is-trunc-B)
       ( λ f →
-        is-trunc-has-inverse f is-trunc-A (is-trunc-succ-is-trunc k is-trunc-B))
+        is-trunc-is-invertible f
+          ( is-trunc-A)
+          ( is-trunc-succ-is-trunc k is-trunc-B))
 ```
 
-### The type `has-inverse id` is equivalent to `id ~ id`
+### The type `is-invertible id` is equivalent to `id ~ id`
 
 ```agda
-has-inverse-id-htpy-id-id :
+is-invertible-id-htpy-id-id :
   {l : Level} (A : UU l) →
-  (id {A = A} ~ id {A = A}) → has-inverse (id {A = A})
-pr1 (has-inverse-id-htpy-id-id A H) = id
-pr1 (pr2 (has-inverse-id-htpy-id-id A H)) = refl-htpy
-pr2 (pr2 (has-inverse-id-htpy-id-id A H)) = H
+  (id {A = A} ~ id {A = A}) → is-invertible (id {A = A})
+pr1 (is-invertible-id-htpy-id-id A H) = id
+pr1 (pr2 (is-invertible-id-htpy-id-id A H)) = refl-htpy
+pr2 (pr2 (is-invertible-id-htpy-id-id A H)) = H
 
-triangle-has-inverse-id-htpy-id-id :
+triangle-is-invertible-id-htpy-id-id :
   {l : Level} (A : UU l) →
-  ( has-inverse-id-htpy-id-id A) ~
+  ( is-invertible-id-htpy-id-id A) ~
     ( ( map-associative-Σ
         ( A → A)
         ( λ g → (id ∘ g) ~ id)
@@ -250,14 +257,14 @@ triangle-has-inverse-id-htpy-id-id :
         { B = λ s → (pr1 s ∘ id) ~ id}
         ( is-contr-section-is-equiv (is-equiv-id {_} {A}))
         ( pair id refl-htpy)))
-triangle-has-inverse-id-htpy-id-id A H = refl
+triangle-is-invertible-id-htpy-id-id A H = refl
 
 abstract
-  is-equiv-has-inverse-id-htpy-id-id :
-    {l : Level} (A : UU l) → is-equiv (has-inverse-id-htpy-id-id A)
-  is-equiv-has-inverse-id-htpy-id-id A =
+  is-equiv-is-invertible-id-htpy-id-id :
+    {l : Level} (A : UU l) → is-equiv (is-invertible-id-htpy-id-id A)
+  is-equiv-is-invertible-id-htpy-id-id A =
     is-equiv-comp-htpy
-      ( has-inverse-id-htpy-id-id A)
+      ( is-invertible-id-htpy-id-id A)
       ( map-associative-Σ
         ( A → A)
         ( λ g → (id ∘ g) ~ id)
@@ -265,7 +272,7 @@ abstract
       ( map-inv-left-unit-law-Σ-is-contr
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
-      ( triangle-has-inverse-id-htpy-id-id A)
+      ( triangle-is-invertible-id-htpy-id-id A)
       ( is-equiv-map-inv-left-unit-law-Σ-is-contr
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))

@@ -196,7 +196,7 @@ module _
   is-equiv-Eq-eq-vec :
     (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
   is-equiv-Eq-eq-vec n u v =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( eq-Eq-vec n u v)
       ( is-section-eq-Eq-vec n u v)
       ( is-retraction-eq-Eq-vec n u v)
@@ -243,7 +243,7 @@ module _
   is-equiv-listed-vec-functional-vec :
     (n : ℕ) → is-equiv (listed-vec-functional-vec n)
   is-equiv-listed-vec-functional-vec n =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( functional-vec-vec n)
       ( is-section-functional-vec-vec n)
       ( is-retraction-functional-vec-vec n)
@@ -251,7 +251,7 @@ module _
   is-equiv-functional-vec-vec :
     (n : ℕ) → is-equiv (functional-vec-vec n)
   is-equiv-functional-vec-vec n =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( listed-vec-functional-vec n)
       ( is-retraction-functional-vec-vec n)
       ( is-section-functional-vec-vec n)

@@ -51,7 +51,7 @@ module _
 
   is-equiv-map-left-unit-law-Σ : is-equiv map-left-unit-law-Σ
   is-equiv-map-left-unit-law-Σ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-left-unit-law-Σ
       is-section-map-inv-left-unit-law-Σ
       is-retraction-map-inv-left-unit-law-Σ
@@ -62,7 +62,7 @@ module _
 
   is-equiv-map-inv-left-unit-law-Σ : is-equiv map-inv-left-unit-law-Σ
   is-equiv-map-inv-left-unit-law-Σ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-left-unit-law-Σ
       is-retraction-map-inv-left-unit-law-Σ
       is-section-map-inv-left-unit-law-Σ
@@ -96,7 +96,7 @@ module _
 
   is-equiv-map-left-unit-law-prod : is-equiv map-left-unit-law-prod
   is-equiv-map-left-unit-law-prod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-left-unit-law-prod
       is-section-map-inv-left-unit-law-prod
       is-retraction-map-inv-left-unit-law-prod
@@ -107,7 +107,7 @@ module _
 
   is-equiv-map-inv-left-unit-law-prod : is-equiv map-inv-left-unit-law-prod
   is-equiv-map-inv-left-unit-law-prod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-left-unit-law-prod
       is-retraction-map-inv-left-unit-law-prod
       is-section-map-inv-left-unit-law-prod
@@ -137,7 +137,7 @@ module _
 
   is-equiv-map-right-unit-law-prod : is-equiv map-right-unit-law-prod
   is-equiv-map-right-unit-law-prod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-right-unit-law-prod
       is-section-map-inv-right-unit-law-prod
       is-retraction-map-inv-right-unit-law-prod
@@ -170,7 +170,7 @@ module _
 
   is-equiv-map-left-unit-law-Π : is-equiv map-left-unit-law-Π
   is-equiv-map-left-unit-law-Π =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-left-unit-law-Π
       is-section-map-inv-left-unit-law-Π
       is-retraction-map-inv-left-unit-law-Π
@@ -181,7 +181,7 @@ module _
 
   is-equiv-map-inv-left-unit-law-Π : is-equiv map-inv-left-unit-law-Π
   is-equiv-map-inv-left-unit-law-Π =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-left-unit-law-Π
       is-retraction-map-inv-left-unit-law-Π
       is-section-map-inv-left-unit-law-Π

@@ -161,7 +161,7 @@ module _
     is-equiv-is-iso-hom-Semigroup
       ( pair f μ-f)
       ( pair (pair g μ-g) (pair is-section is-retraction)) =
-      is-equiv-has-inverse g
+      is-equiv-is-invertible g
         ( htpy-eq (ap pr1 is-section))
         ( htpy-eq (ap pr1 is-retraction))
 

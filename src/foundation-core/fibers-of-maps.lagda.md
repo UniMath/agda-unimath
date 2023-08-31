@@ -81,7 +81,7 @@ module _
   abstract
     is-equiv-Eq-eq-fib : {s t : fib f b} → is-equiv (Eq-eq-fib {s} {t})
     is-equiv-Eq-eq-fib =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         eq-Eq-fib-uncurry
         is-section-eq-Eq-fib
         is-retraction-eq-Eq-fib
@@ -94,7 +94,7 @@ module _
     is-equiv-eq-Eq-fib :
       {s t : fib f b} → is-equiv (eq-Eq-fib-uncurry {s} {t})
     is-equiv-eq-Eq-fib =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         Eq-eq-fib
         is-retraction-eq-Eq-fib
         is-section-eq-Eq-fib
@@ -141,7 +141,7 @@ module _
   abstract
     is-equiv-Eq-eq-fib' : {s t : fib' f b} → is-equiv (Eq-eq-fib' {s} {t})
     is-equiv-Eq-eq-fib' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         eq-Eq-fib-uncurry'
         is-section-eq-Eq-fib'
         is-retraction-eq-Eq-fib'
@@ -154,7 +154,7 @@ module _
     is-equiv-eq-Eq-fib' :
       {s t : fib' f b} → is-equiv (eq-Eq-fib-uncurry' {s} {t})
     is-equiv-eq-Eq-fib' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         Eq-eq-fib'
         is-retraction-eq-Eq-fib'
         is-section-eq-Eq-fib'
@@ -187,7 +187,7 @@ module _
 
   is-equiv-map-equiv-fib : is-equiv map-equiv-fib
   is-equiv-map-equiv-fib =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-fib
       is-section-map-inv-equiv-fib
       is-retraction-map-inv-equiv-fib
@@ -221,7 +221,7 @@ module _
   abstract
     is-equiv-map-fib-pr1 : is-equiv map-fib-pr1
     is-equiv-map-fib-pr1 =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-fib-pr1
         is-retraction-map-inv-fib-pr1
         is-section-map-inv-fib-pr1
@@ -233,7 +233,7 @@ module _
   abstract
     is-equiv-map-inv-fib-pr1 : is-equiv map-inv-fib-pr1
     is-equiv-map-inv-fib-pr1 =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-fib-pr1
         is-section-map-inv-fib-pr1
         is-retraction-map-inv-fib-pr1
@@ -272,14 +272,14 @@ module _
   abstract
     is-equiv-map-equiv-total-fib : is-equiv map-equiv-total-fib
     is-equiv-map-equiv-total-fib =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-equiv-total-fib
         is-section-map-inv-equiv-total-fib
         is-retraction-map-inv-equiv-total-fib
 
     is-equiv-map-inv-equiv-total-fib : is-equiv map-inv-equiv-total-fib
     is-equiv-map-inv-equiv-total-fib =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-equiv-total-fib
         is-retraction-map-inv-equiv-total-fib
         is-section-map-inv-equiv-total-fib
@@ -327,7 +327,7 @@ module _
     is-equiv-map-compute-fib-comp :
       is-equiv map-compute-fib-comp
     is-equiv-map-compute-fib-comp =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( inv-map-compute-fib-comp)
         ( is-section-inv-map-compute-fib-comp)
         ( is-retraction-inv-map-compute-fib-comp)
@@ -341,7 +341,7 @@ module _
     is-equiv-inv-map-compute-fib-comp :
       is-equiv inv-map-compute-fib-comp
     is-equiv-inv-map-compute-fib-comp =
-        is-equiv-has-inverse
+        is-equiv-is-invertible
           ( map-compute-fib-comp)
           ( is-retraction-inv-map-compute-fib-comp)
           ( is-section-inv-map-compute-fib-comp)
@@ -384,7 +384,7 @@ module _
 
   is-equiv-map-reduce-Π-fib : is-equiv map-reduce-Π-fib
   is-equiv-map-reduce-Π-fib =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-map-reduce-Π-fib)
       ( is-section-inv-map-reduce-Π-fib)
       ( is-retraction-inv-map-reduce-Π-fib)

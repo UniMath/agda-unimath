@@ -85,7 +85,7 @@ pr1 (equiv-coproduct-Decomposition-full-subuniverse X) d =
   ( right-summand-binary-coproduct-Decomposition d , star) ,
   ( matching-correspondence-binary-coproduct-Decomposition d)
 pr2 (equiv-coproduct-Decomposition-full-subuniverse X) =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( λ d →
       type-left-summand-binary-coproduct-Decomposition-subuniverse
         ( λ _ → unit-Prop)
@@ -868,7 +868,7 @@ module _
   is-equiv-map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
     is-equiv map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
   is-equiv-map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
       ( is-section-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)
       ( is-retraction-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)

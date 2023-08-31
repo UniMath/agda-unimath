@@ -165,7 +165,7 @@ module _
   abstract
     is-equiv-fiberwise-hom-hom-slice : is-equiv (fiberwise-hom-hom-slice)
     is-equiv-fiberwise-hom-hom-slice =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( hom-slice-fiberwise-hom)
         ( is-section-hom-slice-fiberwise-hom)
         ( is-retraction-hom-slice-fiberwise-hom)
@@ -177,7 +177,7 @@ module _
   abstract
     is-equiv-hom-slice-fiberwise-hom : is-equiv hom-slice-fiberwise-hom
     is-equiv-hom-slice-fiberwise-hom =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fiberwise-hom-hom-slice)
         ( is-retraction-hom-slice-fiberwise-hom)
         ( is-section-hom-slice-fiberwise-hom)
@@ -279,7 +279,7 @@ module _
       hom-slice (map-emb g) (map-emb f) →
       is-equiv-hom-slice (map-emb f) (map-emb g) h
     is-equiv-hom-slice-emb f g h i =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-hom-slice (map-emb g) (map-emb f) i)
         ( λ y →
           is-injective-emb g

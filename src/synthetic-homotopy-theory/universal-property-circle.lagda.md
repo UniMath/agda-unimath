@@ -149,7 +149,7 @@ module _
       ({l : Level} → induction-principle-circle l α) →
       ({l : Level} → dependent-universal-property-circle l α)
     dependent-universal-property-induction-principle-circle ind-circle P =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( function-induction-principle-circle α ind-circle P)
         ( compute-induction-principle-circle α ind-circle P)
         ( is-retraction-ind-circle ind-circle P)

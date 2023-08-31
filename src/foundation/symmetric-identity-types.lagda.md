@@ -122,7 +122,7 @@ module _
     is-equiv-map-compute-symmetric-Id :
       is-equiv (map-compute-symmetric-Id)
     is-equiv-map-compute-symmetric-Id =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-compute-symmetric-Id)
         ( is-section-map-inv-compute-symmetric-Id)
         ( is-retraction-map-inv-compute-symmetric-Id)

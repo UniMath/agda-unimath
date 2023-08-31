@@ -164,7 +164,7 @@ module _
     is-equiv-map-compute-fib-tot :
       (t : Σ A C) → is-equiv (map-compute-fib-tot t)
     is-equiv-map-compute-fib-tot t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-compute-fib-tot t)
         ( is-section-map-inv-compute-fib-tot t)
         ( is-retraction-map-inv-compute-fib-tot t)
@@ -177,7 +177,7 @@ module _
     is-equiv-map-inv-compute-fib-tot :
       (t : Σ A C) → is-equiv (map-inv-compute-fib-tot t)
     is-equiv-map-inv-compute-fib-tot t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-compute-fib-tot t)
         ( is-retraction-map-inv-compute-fib-tot t)
         ( is-section-map-inv-compute-fib-tot t)
@@ -266,7 +266,7 @@ module _
     is-equiv-fib-map-Σ-map-base-fib :
       (t : Σ B C) → is-equiv (fib-map-Σ-map-base-fib t)
     is-equiv-fib-map-Σ-map-base-fib t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fib-fib-map-Σ-map-base t)
         ( is-section-fib-fib-map-Σ-map-base t)
         ( is-retraction-fib-fib-map-Σ-map-base t)

@@ -103,7 +103,7 @@ module _
   is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution :
     is-equiv (map-Σ-is-fibered-involution-fibered-map-fibered-involution)
   is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-fibered-involution-Σ-is-fibered-involution-fibered-map)
       ( refl-htpy)
       ( refl-htpy)
@@ -119,7 +119,7 @@ module _
   is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map :
     is-equiv (map-fibered-involution-Σ-is-fibered-involution-fibered-map)
   is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-Σ-is-fibered-involution-fibered-map-fibered-involution)
       ( refl-htpy)
       ( refl-htpy)

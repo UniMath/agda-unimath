@@ -72,12 +72,12 @@ module _
       ( is-section-is-coherently-invertible)
   coh-is-coherently-invertible = pr2 (pr2 (pr2 H))
 
-  has-inverse-is-coherently-invertible : has-inverse f
-  pr1 has-inverse-is-coherently-invertible =
+  is-invertible-is-coherently-invertible : is-invertible f
+  pr1 is-invertible-is-coherently-invertible =
     map-inv-is-coherently-invertible
-  pr1 (pr2 has-inverse-is-coherently-invertible) =
+  pr1 (pr2 is-invertible-is-coherently-invertible) =
     is-retraction-is-coherently-invertible
-  pr2 (pr2 has-inverse-is-coherently-invertible) =
+  pr2 (pr2 is-invertible-is-coherently-invertible) =
     is-section-is-coherently-invertible
 ```
 
@@ -105,57 +105,58 @@ module _
   where
 
   abstract
-    is-section-map-inv-has-inverse :
-      (H : has-inverse f) → (f ∘ map-inv-has-inverse H) ~ id
-    is-section-map-inv-has-inverse H y =
-      ( inv (is-retraction-has-inverse H (f (map-inv-has-inverse H y)))) ∙
-      ( ( ap f (is-section-has-inverse H (map-inv-has-inverse H y))) ∙
-        ( is-retraction-has-inverse H y))
+    is-section-map-inv-is-invertible :
+      (H : is-invertible f) → (f ∘ map-inv-is-invertible H) ~ id
+    is-section-map-inv-is-invertible H y =
+      ( inv (is-retraction-is-invertible H (f (map-inv-is-invertible H y)))) ∙
+      ( ( ap f (is-section-is-invertible H (map-inv-is-invertible H y))) ∙
+        ( is-retraction-is-invertible H y))
 
-    is-retraction-map-inv-has-inverse :
-      (H : has-inverse f) → (map-inv-has-inverse H ∘ f) ~ id
-    is-retraction-map-inv-has-inverse = is-section-has-inverse
+    is-retraction-map-inv-is-invertible :
+      (H : is-invertible f) → (map-inv-is-invertible H ∘ f) ~ id
+    is-retraction-map-inv-is-invertible = is-section-is-invertible
 
-    coherence-map-inv-has-inverse :
-      ( H : has-inverse f) →
-      ( is-section-map-inv-has-inverse H ·r f) ~
-      ( f ·l is-retraction-map-inv-has-inverse H)
-    coherence-map-inv-has-inverse H x =
+    coherence-map-inv-is-invertible :
+      ( H : is-invertible f) →
+      ( is-section-map-inv-is-invertible H ·r f) ~
+      ( f ·l is-retraction-map-inv-is-invertible H)
+    coherence-map-inv-is-invertible H x =
       inv
         ( inv-con
-          ( is-retraction-has-inverse H (f (map-inv-has-inverse H (f x))))
-          ( ap f (is-section-has-inverse H x))
-          ( ( ap f (is-section-has-inverse H (map-inv-has-inverse H (f x)))) ∙
-            ( is-retraction-has-inverse H (f x)))
+          ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
+          ( ap f (is-section-is-invertible H x))
+          ( ( ap f
+              ( is-section-is-invertible H (map-inv-is-invertible H (f x)))) ∙
+            ( is-retraction-is-invertible H (f x)))
           ( coherence-square-identifications-top-paste
-            ( is-retraction-has-inverse H (f (map-inv-has-inverse H (f x))))
-            ( ap f (is-section-has-inverse H x))
+            ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
+            ( ap f (is-section-is-invertible H x))
             ( ( ap
-                ( f ∘ (map-inv-has-inverse H ∘ f))
-                ( is-section-has-inverse H x)))
-            ( is-retraction-has-inverse H (f x))
+                ( f ∘ (map-inv-is-invertible H ∘ f))
+                ( is-section-is-invertible H x)))
+            ( is-retraction-is-invertible H (f x))
             ( ( ap-comp f
-                ( map-inv-has-inverse H ∘ f)
-                ( is-section-has-inverse H x)) ∙
+                ( map-inv-is-invertible H ∘ f)
+                ( is-section-is-invertible H x)) ∙
               ( inv
                 ( ap
                   ( ap f)
                   ( coh-is-coherently-invertible-id
-                    ( is-section-has-inverse H) x))))
+                    ( is-section-is-invertible H) x))))
             ( nat-htpy
-              ( htpy-right-whisk (is-retraction-has-inverse H) f)
-              ( is-section-has-inverse H x))))
+              ( htpy-right-whisk (is-retraction-is-invertible H) f)
+              ( is-section-is-invertible H x))))
 
   abstract
-    is-coherently-invertible-has-inverse :
-      (H : has-inverse f) → is-coherently-invertible f
-    pr1 (is-coherently-invertible-has-inverse H) = map-inv-has-inverse H
-    pr1 (pr2 (is-coherently-invertible-has-inverse H)) =
-      is-section-map-inv-has-inverse H
-    pr1 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      is-retraction-map-inv-has-inverse H
-    pr2 (pr2 (pr2 (is-coherently-invertible-has-inverse H))) =
-      coherence-map-inv-has-inverse H
+    is-coherently-invertible-is-invertible :
+      (H : is-invertible f) → is-coherently-invertible f
+    pr1 (is-coherently-invertible-is-invertible H) = map-inv-is-invertible H
+    pr1 (pr2 (is-coherently-invertible-is-invertible H)) =
+      is-section-map-inv-is-invertible H
+    pr1 (pr2 (pr2 (is-coherently-invertible-is-invertible H))) =
+      is-retraction-map-inv-is-invertible H
+    pr2 (pr2 (pr2 (is-coherently-invertible-is-invertible H))) =
+      coherence-map-inv-is-invertible H
 ```
 
 ## See also

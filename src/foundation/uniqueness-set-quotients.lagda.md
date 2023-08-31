@@ -127,7 +127,7 @@ module _
     ({l : Level} → is-set-quotient l R C g) →
     is-equiv h
   is-equiv-is-set-quotient-is-set-quotient Uf Ug =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( is-section-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)
       ( is-retraction-map-inv-is-equiv-is-set-quotient-is-set-quotient Uf Ug)

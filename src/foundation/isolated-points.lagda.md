@@ -317,7 +317,7 @@ is-equiv-map-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   is-equiv (map-maybe-structure-isolated-point X x)
 is-equiv-map-maybe-structure-isolated-point X x =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-inv-maybe-structure-isolated-point X x)
     ( is-section-map-inv-maybe-structure-isolated-point X x)
     ( is-retraction-map-inv-maybe-structure-isolated-point X x)

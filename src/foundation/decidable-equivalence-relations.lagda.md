@@ -149,7 +149,7 @@ pr1 equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation R =
   ( equivalence-relation-Decidable-Equivalence-Relation R ,
     is-decidable-sim-Decidable-Equivalence-Relation R)
 pr2 equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( λ (R , d) →
       ( map-inv-equiv
           ( equiv-relation-is-decidable-Decidable-Relation)

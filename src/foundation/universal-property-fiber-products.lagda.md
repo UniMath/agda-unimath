@@ -75,7 +75,7 @@ map.
     is-pullback-fiberwise-prod :
       is-pullback (pr1 {B = P}) (pr1 {B = Q}) cone-fiberwise-prod
     is-pullback-fiberwise-prod =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         inv-gap-fiberwise-prod
         is-section-inv-gap-fiberwise-prod
         is-retraction-inv-gap-fiberwise-prod
@@ -131,7 +131,7 @@ module _
     is-pullback-total-prod-fibers :
       is-pullback f g cone-total-prod-fibers
     is-pullback-total-prod-fibers =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         inv-gap-total-prod-fibers
         is-section-inv-gap-total-prod-fibers
         is-retraction-inv-gap-total-prod-fibers

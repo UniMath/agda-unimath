@@ -114,7 +114,7 @@ module _
     (f : A → C) (g : B → D) →
     is-equiv f → is-equiv g → is-equiv (map-prod f g)
   is-equiv-map-prod f g H K =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-map-prod f g H K)
       ( is-section-map-inv-map-prod f g H K)
       ( is-retraction-map-inv-map-prod f g H K)
@@ -161,7 +161,7 @@ module _
   is-equiv-map-compute-fib-map-prod :
     (t : C × D) → is-equiv (map-compute-fib-map-prod t)
   is-equiv-map-compute-fib-map-prod t =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-compute-fib-map-prod t)
       ( is-section-map-inv-compute-fib-map-prod t)
       ( is-retraction-map-inv-compute-fib-map-prod t)

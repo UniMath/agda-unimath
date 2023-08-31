@@ -698,7 +698,7 @@ module _
                       ( P (map-equiv g (pr1 (map-equiv h x))))))
                 ( inv (left-inverse-law-equiv e))
                 ( map-raise (pr2 (map-equiv h x)))))
-          ( is-equiv-has-inverse
+          ( is-equiv-is-invertible
             ( λ (pair x p) →
               map-inv-equiv h ( pair (map-inv-equiv e x) (map-inv-raise p)))
             ( λ (pair x p) →
@@ -855,7 +855,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
         ( type-Decidable-Prop ∘ pr1 (Fin-succ-Fin-transposition n (pair P H)))))
     ( λ h →
       unit-trunc-Prop
-        ( ( pair f (is-equiv-has-inverse inv-f retraction-f section-f)) ∘e
+        ( ( pair f (is-equiv-is-invertible inv-f retraction-f section-f)) ∘e
           ( ( inv-right-unit-law-coprod-is-empty
               ( Σ
                 ( Fin n)

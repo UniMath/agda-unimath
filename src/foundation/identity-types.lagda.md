@@ -86,7 +86,7 @@ module _
 
   abstract
     is-equiv-inv : (x y : A) → is-equiv (λ (p : x ＝ y) → inv p)
-    is-equiv-inv x y = is-equiv-has-inverse inv inv-inv inv-inv
+    is-equiv-inv x y = is-equiv-is-invertible inv inv-inv inv-inv
 
   equiv-inv : (x y : A) → (x ＝ y) ≃ (y ＝ x)
   pr1 (equiv-inv x y) = inv
@@ -107,7 +107,7 @@ module _
     is-equiv-concat :
       {x y : A} (p : x ＝ y) (z : A) → is-equiv (concat p z)
     is-equiv-concat p z =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( inv-concat p z)
         ( is-section-inv-concat p z)
         ( is-retraction-inv-concat p z)
@@ -121,7 +121,7 @@ module _
     {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) ≃ (x' ＝ x)
   pr1 (equiv-concat-equiv {x}) e = map-equiv (e x) refl
   pr2 equiv-concat-equiv =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       equiv-concat
       (λ { refl → refl})
       (λ e → eq-htpy (λ y → eq-htpy-equiv (λ { refl → right-unit})))
@@ -141,7 +141,7 @@ module _
     is-equiv-concat' :
       (x : A) {y z : A} (q : y ＝ z) → is-equiv (concat' x q)
     is-equiv-concat' x q =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( inv-concat' x q)
         ( is-section-inv-concat' x q)
         ( is-retraction-inv-concat' x q)

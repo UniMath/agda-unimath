@@ -225,7 +225,7 @@ module _
   is-equiv-functional-correspondence-function :
     is-equiv functional-correspondence-function
   is-equiv-functional-correspondence-function =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       function-functional-correspondence
       is-section-function-functional-correspondence
       is-retraction-function-functional-correspondence

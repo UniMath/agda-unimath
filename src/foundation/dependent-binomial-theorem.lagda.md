@@ -75,7 +75,7 @@ module _
   is-equiv-map-compute-total-fam-coprod :
     is-equiv map-compute-total-fam-coprod
   is-equiv-map-compute-total-fam-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-total-fam-coprod
       is-section-map-inv-compute-total-fam-coprod
       is-retraction-map-inv-compute-total-fam-coprod

@@ -147,7 +147,7 @@ module _
   equiv-list-array : array A ≃ list A
   pr1 equiv-list-array = list-array
   pr2 equiv-list-array =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       array-list
       is-section-array-list
       is-retraction-array-list
@@ -155,7 +155,7 @@ module _
   equiv-array-list : list A ≃ array A
   pr1 equiv-array-list = array-list
   pr2 equiv-array-list =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       list-array
       is-retraction-array-list
       is-section-array-list

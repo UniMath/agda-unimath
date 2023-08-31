@@ -72,7 +72,7 @@ module _
 is-equiv-is-involution :
   {l : Level} {A : UU l} {f : A → A} → is-involution f → is-equiv f
 is-equiv-is-involution {f = f} is-involution-f =
-  is-equiv-has-inverse f is-involution-f is-involution-f
+  is-equiv-is-invertible f is-involution-f is-involution-f
 
 is-equiv-map-involution :
   {l : Level} {A : UU l} (f : involution A) → is-equiv (map-involution f)

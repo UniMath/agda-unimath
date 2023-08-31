@@ -111,7 +111,7 @@ module _
   pr1 swap-two-last-elements-transposition-Fin =
     map-swap-two-last-elements-transposition-Fin
   pr2 swap-two-last-elements-transposition-Fin =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-swap-two-last-elements-transposition-Fin
       is-involution-map-swap-two-last-elements-transposition-Fin
       is-involution-map-swap-two-last-elements-transposition-Fin

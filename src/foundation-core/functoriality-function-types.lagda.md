@@ -107,7 +107,7 @@ module _
   abstract
     is-equiv-is-equiv-postcomp : is-equiv f
     is-equiv-is-equiv-postcomp =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-is-equiv-is-equiv-postcomp
         is-section-map-inv-is-equiv-is-equiv-postcomp
         is-retraction-map-inv-is-equiv-is-equiv-postcomp
@@ -125,7 +125,7 @@ is-equiv-is-equiv-postcomp'
   {l} {X} {Y} f is-equiv-postcomp-f =
   let section-f = center (is-contr-map-is-equiv (is-equiv-postcomp-f Y) id)
   in
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( pr1 section-f)
     ( htpy-eq (pr2 section-f))
     ( htpy-eq
@@ -141,7 +141,7 @@ abstract
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) → is-equiv f →
     {l3 : Level} (A : UU l3) → is-equiv (postcomp A f)
   is-equiv-postcomp-is-equiv {X = X} {Y = Y} f is-equiv-f A =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( postcomp A (map-inv-is-equiv is-equiv-f))
       ( eq-htpy ∘ htpy-right-whisk (is-section-map-inv-is-equiv is-equiv-f))
       ( eq-htpy ∘ htpy-right-whisk (is-retraction-map-inv-is-equiv is-equiv-f))
@@ -239,7 +239,7 @@ module _
     is-equiv-is-equiv-precomp-subuniverse :
       is-equiv f
     is-equiv-is-equiv-precomp-subuniverse =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-is-equiv-precomp-subuniverse)
         ( is-section-map-inv-is-equiv-precomp-subuniverse)
         ( is-retraction-map-inv-is-equiv-precomp-subuniverse)

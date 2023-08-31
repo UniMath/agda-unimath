@@ -343,7 +343,7 @@ module _
 
   is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
   is-equiv-inv-equiv =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-equiv)
       ( inv-inv-equiv')
       ( inv-inv-equiv)
@@ -422,7 +422,7 @@ is-equiv-left-comp-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (A : UU l1) → is-equiv (λ (e : A ≃ B) → f ∘e e)
 is-equiv-left-comp-equiv f A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( inv-equiv f ∘e_)
     ( left-right-inverse-law-equiv f)
     ( left-left-inverse-law-equiv f)
@@ -431,7 +431,7 @@ is-equiv-right-comp-equiv :
   {l1 l2 l3 : Level} {A : UU l2} {B : UU l3}
   (C : UU l1) (e : A ≃ B) → is-equiv (λ (f : B ≃ C) → f ∘e e)
 is-equiv-right-comp-equiv A e =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( _∘e inv-equiv e)
     ( λ f → right-left-inverse-law-equiv f e)
     ( λ f → right-right-inverse-law-equiv f e)

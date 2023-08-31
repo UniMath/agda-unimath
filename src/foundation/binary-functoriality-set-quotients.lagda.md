@@ -278,7 +278,7 @@ module _
   is-equiv-hom-binary-hom-Equivalence-Relation :
     is-equiv hom-binary-hom-Equivalence-Relation
   is-equiv-hom-binary-hom-Equivalence-Relation =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       binary-hom-hom-Equivalence-Relation
       is-section-binary-hom-hom-Equivalence-Relation
       is-retraction-binary-hom-hom-Equivalence-Relation

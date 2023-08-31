@@ -158,7 +158,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B)
   universal-property-set-quotient-trunc-Prop {A = A} B =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-universal-property-set-quotient-trunc-Prop' B)
       ( is-section-map-universal-property-set-quotient-trunc-Prop B)
       ( is-retraction-map-universal-property-set-quotient-trunc-Prop B)

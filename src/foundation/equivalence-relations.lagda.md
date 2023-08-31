@@ -421,7 +421,7 @@ is-retraction-eq-rel-partition-Equivalence-Relation P =
 is-equiv-eq-rel-partition :
   {l : Level} {A : UU l} → is-equiv (eq-rel-partition {l} {l} {l} {A})
 is-equiv-eq-rel-partition =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     partition-Equivalence-Relation
     is-section-eq-rel-partition-Equivalence-Relation
     is-retraction-eq-rel-partition-Equivalence-Relation
@@ -579,7 +579,7 @@ is-equiv-surjection-into-set-Equivalence-Relation :
   {l1 : Level} {A : UU l1} →
   is-equiv (surjection-into-set-Equivalence-Relation {l1} {l1} {A})
 is-equiv-surjection-into-set-Equivalence-Relation {l1} {A} =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( eq-rel-Surjection-Into-Set {l1} {l1} {A})
     ( is-section-eq-rel-Surjection-Into-Set {l1} {l1} {A})
     ( is-retraction-eq-rel-Surjection-Into-Set {l1} {l1} {A})

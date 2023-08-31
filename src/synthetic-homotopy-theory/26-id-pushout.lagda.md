@@ -390,12 +390,12 @@ comp-hom-Fam-pushout {f = f} {g} P Q R k h =
           ( pr2 (pr2 h) s)
           ( pr2 (pr2 k) s)))
 
-has-inverse-hom-Fam-pushout :
+is-invertible-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
   ( P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) (h : hom-Fam-pushout P Q) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5)
-has-inverse-hom-Fam-pushout P Q h =
+is-invertible-hom-Fam-pushout P Q h =
   Σ ( hom-Fam-pushout Q P) (λ k →
     ( htpy-hom-Fam-pushout Q Q
       ( comp-hom-Fam-pushout Q P Q h k)
@@ -411,20 +411,20 @@ is-equiv-hom-Fam-pushout :
 is-equiv-hom-Fam-pushout {A = A} {B} {f} {g} P Q h =
   ((a : A) → is-equiv (pr1 h a)) × ((b : B) → is-equiv (pr1 (pr2 h) b))
 
-is-equiv-has-inverse-hom-Fam-pushout :
+is-equiv-is-invertible-hom-Fam-pushout :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { f : S → A} {g : S → B} →
   ( P : Fam-pushout l4 f g) (Q : Fam-pushout l5 f g) (h : hom-Fam-pushout P Q) →
-  has-inverse-hom-Fam-pushout P Q h → is-equiv-hom-Fam-pushout P Q h
-is-equiv-has-inverse-hom-Fam-pushout P Q h has-inv-h =
+  is-invertible-hom-Fam-pushout P Q h → is-equiv-hom-Fam-pushout P Q h
+is-equiv-is-invertible-hom-Fam-pushout P Q h has-inv-h =
   pair
     ( λ a →
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( pr1 (pr1 has-inv-h) a)
         ( pr1 (pr1 (pr2 has-inv-h)) a)
         ( pr1 (pr2 (pr2 has-inv-h)) a))
     ( λ b →
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( pr1 (pr2 (pr1 has-inv-h)) b)
         ( pr1 (pr2 (pr1 (pr2 has-inv-h))) b)
         ( pr1 (pr2 (pr2 (pr2 has-inv-h))) b))
