@@ -232,16 +232,16 @@ module _
 ### The type `has-inverse id` is equivalent to `id ~ id`
 
 ```agda
-is-invertible-id-htpy-id-id :
+has-inverse-id-htpy-id-id :
   {l : Level} (A : UU l) →
   (id {A = A} ~ id {A = A}) → has-inverse (id {A = A})
-pr1 (is-invertible-id-htpy-id-id A H) = id
-pr1 (pr2 (is-invertible-id-htpy-id-id A H)) = refl-htpy
-pr2 (pr2 (is-invertible-id-htpy-id-id A H)) = H
+pr1 (has-inverse-id-htpy-id-id A H) = id
+pr1 (pr2 (has-inverse-id-htpy-id-id A H)) = refl-htpy
+pr2 (pr2 (has-inverse-id-htpy-id-id A H)) = H
 
-triangle-is-invertible-id-htpy-id-id :
+triangle-has-inverse-id-htpy-id-id :
   {l : Level} (A : UU l) →
-  ( is-invertible-id-htpy-id-id A) ~
+  ( has-inverse-id-htpy-id-id A) ~
     ( ( map-associative-Σ
         ( A → A)
         ( λ g → (id ∘ g) ~ id)
@@ -250,14 +250,14 @@ triangle-is-invertible-id-htpy-id-id :
         { B = λ s → (pr1 s ∘ id) ~ id}
         ( is-contr-section-is-equiv (is-equiv-id {_} {A}))
         ( pair id refl-htpy)))
-triangle-is-invertible-id-htpy-id-id A H = refl
+triangle-has-inverse-id-htpy-id-id A H = refl
 
 abstract
-  is-equiv-invertible-id-htpy-id-id :
-    {l : Level} (A : UU l) → is-equiv (is-invertible-id-htpy-id-id A)
-  is-equiv-invertible-id-htpy-id-id A =
+  is-equiv-has-inverse-id-htpy-id-id :
+    {l : Level} (A : UU l) → is-equiv (has-inverse-id-htpy-id-id A)
+  is-equiv-has-inverse-id-htpy-id-id A =
     is-equiv-comp-htpy
-      ( is-invertible-id-htpy-id-id A)
+      ( has-inverse-id-htpy-id-id A)
       ( map-associative-Σ
         ( A → A)
         ( λ g → (id ∘ g) ~ id)
@@ -265,7 +265,7 @@ abstract
       ( map-inv-left-unit-law-Σ-is-contr
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))
-      ( triangle-is-invertible-id-htpy-id-id A)
+      ( triangle-has-inverse-id-htpy-id-id A)
       ( is-equiv-map-inv-left-unit-law-Σ-is-contr
         ( is-contr-section-is-equiv is-equiv-id)
         ( pair id refl-htpy))

@@ -32,7 +32,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type family `A` over `X` is said to be **local at** `f : Y → X`, or
+A dependent type `A` over `X` is said to be **local at** `f : Y → X`, or
 **`f`-local**, if the [precomposition map](foundation-core.function-types.md)
 
 ```text
@@ -41,11 +41,8 @@ A type family `A` over `X` is said to be **local at** `f : Y → X`, or
 
 is an [equivalence](foundation-core.equivalences.md).
 
-Likewise, a _type_ `A` is said to be **`f`-local** if the precomposition map
-`_∘ f : (X → A) → (Y → A)` is an equivalence.
-
-We reserve the name `is-local` for local types, and specify `is-local-Π` when
-the type may vary over the base.
+We reserve the name `is-local` for when `A` does not vary over `X`, and specify
+with `is-local-Π` when it does.
 
 ## Definition
 
@@ -104,30 +101,6 @@ module _
       ( equiv-swap-Π ∘e
         ( equiv-map-Π (λ a → precomp-Π f (B a) , (f-loc a)) ∘e
           equiv-swap-Π))
-```
-
-### Locality of dependent pair types
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {Y : UU l1} {X : UU l2} (f : Y → X)
-  {A : UU l3} {B : A → UU l4}
-  (is-local-A : is-local f A)
-  (is-local-B : ((x : A) → is-local f (B x)))
-  where
-
-  -- map-is-local-Σ : (Y → Σ A B) → X → Σ A B
-  -- pr1 (map-is-local-Σ g x) = map-inv-is-equiv is-local-A (pr1 ∘ g) x
-  -- pr2 (map-is-local-Σ g x) =
-  --   map-inv-is-equiv (is-local-B (pr1 (map-is-local-Σ g x))) (λ y → {! pr2 (g ?)  !}) {!   !}
-
-  -- is-local-Σ :
-  --   is-local f A → ((x : A) → is-local f (B x)) → is-local f (Σ A B)
-  -- is-local-Σ is-local-A is-local-B =
-  --   is-equiv-htpy
-  --     {!   !}
-  --     {!   !}
-  --     ( is-equiv-map-equiv-Π (λ _ → Σ A B) {!   !} {!   !})
 ```
 
 ### If every type is `f`-local, then `f` is an equivalence
@@ -262,5 +235,6 @@ is-contr-is-local A is-local-A =
 
 ## See also
 
+- [Local maps](orthogonal-factorization-systems.local-maps.md)
 - [Localizations with respect to maps](orthogonal-factorization-systems.localizations-maps.md)
 - [Localizations with respect to subuniverses](orthogonal-factorization-systems.localizations-subuniverses.md)

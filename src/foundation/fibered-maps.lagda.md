@@ -451,26 +451,6 @@ empty ---> B
 
 ```agda
 module _
-  { l2 l3 l4 : Level} {B : UU l2} {X : UU l3} {Y : UU l4}
-  {f : empty → X} (g : B → Y)
-  where
-
-  inv-compute-fibered-map-empty :
-    (fibered-map f g) ≃ (X → Y)
-  inv-compute-fibered-map-empty =
-    right-unit-law-Σ-is-contr
-      ( λ i →
-        is-contr-Σ
-          ( universal-property-empty' B)
-          ( ex-falso)
-          ( dependent-universal-property-empty'
-            ( λ z → (i ∘ f) z ＝ (g ∘ ex-falso) z)))
-
-  compute-fibered-map-empty :
-    (X → Y) ≃ (fibered-map f g)
-  compute-fibered-map-empty = inv-equiv inv-compute-fibered-map-empty
-
-module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y) (is-empty-A : is-empty A)
   where
@@ -487,6 +467,17 @@ module _
 
   compute-fibered-map-is-empty : (X → Y) ≃ (fibered-map f g)
   compute-fibered-map-is-empty = inv-equiv inv-compute-fibered-map-is-empty
+
+module _
+  { l2 l3 l4 : Level} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : empty → X} (g : B → Y)
+  where
+
+  inv-compute-fibered-map-empty : (fibered-map f g) ≃ (X → Y)
+  inv-compute-fibered-map-empty = inv-compute-fibered-map-is-empty f g id
+
+  compute-fibered-map-empty : (X → Y) ≃ (fibered-map f g)
+  compute-fibered-map-empty = compute-fibered-map-is-empty f g id
 ```
 
 ### If the bottom right corner is contractible, the type of fibered maps is equivalent `A → B`
@@ -501,22 +492,6 @@ module _
 ```
 
 ```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) {g : B → unit}
-  where
-
-  inv-compute-fibered-map-unit : (fibered-map f g) ≃ (A → B)
-  inv-compute-fibered-map-unit =
-    ( right-unit-law-Σ-is-contr
-      ( λ _ → is-contr-Π (λ _ → is-prop-is-contr is-contr-unit star star))) ∘e
-    ( left-unit-law-Σ-is-contr
-      ( is-contr-function-type is-contr-unit)
-      ( λ _ → star))
-
-  compute-fibered-map-unit : (A → B) ≃ (fibered-map f g)
-  compute-fibered-map-unit = inv-equiv inv-compute-fibered-map-unit
-
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → X) (g : B → Y) (is-contr-Y : is-contr Y)
@@ -536,6 +511,18 @@ module _
 
   compute-fibered-map-is-contr : (A → B) ≃ (fibered-map f g)
   compute-fibered-map-is-contr = inv-equiv inv-compute-fibered-map-is-contr
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) {g : B → unit}
+  where
+
+  inv-compute-fibered-map-unit : (fibered-map f g) ≃ (A → B)
+  inv-compute-fibered-map-unit =
+    inv-compute-fibered-map-is-contr f g is-contr-unit
+
+  compute-fibered-map-unit : (A → B) ≃ (fibered-map f g)
+  compute-fibered-map-unit = compute-fibered-map-is-contr f g is-contr-unit
 ```
 
 ## Examples
