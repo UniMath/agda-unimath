@@ -16,6 +16,8 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.invertible-maps
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -79,6 +81,14 @@ module _
     is-retraction-is-coherently-invertible
   pr2 (pr2 is-invertible-is-coherently-invertible) =
     is-section-is-coherently-invertible
+
+  section-is-coherently-invertible : section f
+  pr1 section-is-coherently-invertible = map-inv-is-coherently-invertible
+  pr2 section-is-coherently-invertible = is-retraction-is-coherently-invertible
+
+  retraction-is-coherently-invertible : retraction f
+  pr1 retraction-is-coherently-invertible = map-inv-is-coherently-invertible
+  pr2 retraction-is-coherently-invertible = is-section-is-coherently-invertible
 ```
 
 ## Properties
@@ -150,7 +160,8 @@ module _
   abstract
     is-coherently-invertible-is-invertible :
       (H : is-invertible f) → is-coherently-invertible f
-    pr1 (is-coherently-invertible-is-invertible H) = map-inv-is-invertible H
+    pr1 (is-coherently-invertible-is-invertible H) =
+      map-inv-is-invertible H
     pr1 (pr2 (is-coherently-invertible-is-invertible H)) =
       is-section-map-inv-is-invertible H
     pr1 (pr2 (pr2 (is-coherently-invertible-is-invertible H))) =

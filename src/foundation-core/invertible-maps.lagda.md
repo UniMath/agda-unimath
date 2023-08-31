@@ -13,6 +13,8 @@ open import foundation.universe-levels
 open import foundation-core.cartesian-product-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.retractions
+open import foundation-core.sections
 ```
 
 </details>
@@ -48,29 +50,33 @@ module _
 ### The type of inverses of a map
 
 ```agda
+is-invertible :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
+is-invertible {A = A} {B} f = Σ (B → A) (is-inverse f)
+
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (g : is-invertible f)
   where
 
-  is-invertible : (A → B) → UU (l1 ⊔ l2)
-  is-invertible f = Σ (B → A) (is-inverse f)
+  map-inv-is-invertible : B → A
+  map-inv-is-invertible = pr1 g
 
-  map-inv-is-invertible : {f : A → B} → is-invertible f → B → A
-  map-inv-is-invertible = pr1
+  is-inverse-map-inv-is-invertible : is-inverse f map-inv-is-invertible
+  is-inverse-map-inv-is-invertible = pr2 g
 
-  is-inverse-map-inv-is-invertible :
-    {f : A → B} (g : is-invertible f) → is-inverse f (map-inv-is-invertible g)
-  is-inverse-map-inv-is-invertible = pr2
+  is-retraction-is-invertible : (f ∘ map-inv-is-invertible) ~ id
+  is-retraction-is-invertible = pr1 is-inverse-map-inv-is-invertible
 
-  is-retraction-is-invertible :
-    {f : A → B} (is-invertible-f : is-invertible f) →
-    (f ∘ map-inv-is-invertible is-invertible-f) ~ id
-  is-retraction-is-invertible = pr1 ∘ is-inverse-map-inv-is-invertible
+  is-section-is-invertible : (map-inv-is-invertible ∘ f) ~ id
+  is-section-is-invertible = pr2 is-inverse-map-inv-is-invertible
 
-  is-section-is-invertible :
-    {f : A → B} (is-invertible-f : is-invertible f) →
-    (map-inv-is-invertible is-invertible-f ∘ f) ~ id
-  is-section-is-invertible = pr2 ∘ is-inverse-map-inv-is-invertible
+  section-is-invertible : section f
+  pr1 section-is-invertible = map-inv-is-invertible
+  pr2 section-is-invertible = is-retraction-is-invertible
+
+  retraction-is-invertible : retraction f
+  pr1 retraction-is-invertible = map-inv-is-invertible
+  pr2 retraction-is-invertible = is-section-is-invertible
 ```
 
 ### The type of invertible maps

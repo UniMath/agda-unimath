@@ -38,41 +38,49 @@ abstract
   is-prop-is-coherently-invertible :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-prop (is-coherently-invertible f)
-  is-prop-is-coherently-invertible {l1} {l2} {A} {B} f =
+  is-prop-is-coherently-invertible {A = A} {B} f =
     is-prop-is-proof-irrelevant
       ( λ H →
         is-contr-equiv'
           ( Σ ( section f)
-              ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
-                ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
-          ( associative-Σ (B → A)
-            ( λ g → ((f ∘ g) ~ id))
-            ( λ sf → Σ (((pr1 sf) ∘ f) ~ id)
-              ( λ H → (htpy-right-whisk (pr2 sf) f) ~ (htpy-left-whisk f H))))
+              ( λ s →
+                Σ ( ( map-section f s ∘ f) ~ id)
+                  ( λ H →
+                    ( htpy-right-whisk (is-section-map-section f s) f) ~
+                    ( htpy-left-whisk f H))))
+          ( associative-Σ
+            ( B → A)
+            ( λ g → (f ∘ g) ~ id)
+            ( λ s →
+              Σ ( ( map-section f s ∘ f) ~ id)
+                ( λ H →
+                  ( htpy-right-whisk (is-section-map-section f s) f) ~
+                  ( htpy-left-whisk f H))))
           ( is-contr-Σ
-            ( is-contr-section-is-equiv (E H))
-            ( pair (g H) (G H))
+            ( is-contr-section-is-equiv (is-equiv-is-coherently-invertible H))
+            ( section-is-coherently-invertible H)
             ( is-contr-equiv'
               ( (x : A) →
-                Σ ( Id (g H (f x)) x)
-                  ( λ p → Id (G H (f x)) (ap f p)))
+                Σ ( map-inv-is-coherently-invertible H (f x) ＝ x)
+                  ( λ p →
+                    is-retraction-is-coherently-invertible H (f x) ＝ ap f p))
               ( distributive-Π-Σ)
               ( is-contr-Π
                 ( λ x →
                   is-contr-equiv'
-                    ( fib (ap f) (G H (f x)))
+                    ( fib
+                      ( ap f)
+                      ( is-retraction-is-coherently-invertible H (f x)))
                     ( equiv-tot
-                      ( λ p → equiv-inv (ap f p) (G H (f x))))
+                      ( λ p →
+                        equiv-inv
+                          ( ap f p)
+                          ( is-retraction-is-coherently-invertible H (f x))))
                     ( is-contr-map-is-equiv
-                      ( is-emb-is-equiv (E H) (g H (f x)) x)
-                      ( (G H) (f x))))))))
-    where
-    E : is-coherently-invertible f → is-equiv f
-    E H = is-equiv-is-coherently-invertible H
-    g : is-coherently-invertible f → (B → A)
-    g H = pr1 H
-    G : (H : is-coherently-invertible f) → (f ∘ g H) ~ id
-    G H = pr1 (pr2 H)
+                      ( is-emb-is-equiv
+                        ( is-equiv-is-coherently-invertible H)
+                        ( map-inv-is-coherently-invertible H (f x)) x)
+                      ( is-retraction-is-coherently-invertible H (f x))))))))
 
 abstract
   is-equiv-is-coherently-invertible-is-equiv :
