@@ -199,7 +199,8 @@ module _
                   ( B)
                   ( meridian-suspension-structure ss x)
                   ( map-equiv
-                    ( equiv-dependent-universal-property-unit (λ x₁ → B (pr1 ss)))
+                    ( equiv-dependent-universal-property-unit
+                      ( λ x₁ → B (pr1 ss)))
                     ( N-susp-c))
                   ( S-d-susp-str)))
             (equiv-dependent-universal-property-unit
