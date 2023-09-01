@@ -172,49 +172,51 @@ module _
   pr2 (pr2 (dependent-cocone-dependent-suspension-structure dss)) x =
     meridian-dependent-suspension-structure dss x
 
-  comparison-dependent-suspension-cocone :
+  compute-dependent-suspension-cocone :
+    ( dependent-suspension-structure B ss) ≃
     ( dependent-suspension-cocone
       ( B)
-      ( cocone-suspension-structure X Y ss)) ≃
-    ( dependent-suspension-structure B ss)
-  comparison-dependent-suspension-cocone =
-    equiv-Σ
-      (λ N-d-susp-str →
-        Σ (B (south-suspension-structure ss))
-          ( λ S-d-susp-str →
-            (x : X) →
-              ( dependent-identification
-                ( B)
-                ( meridian-suspension-structure ss x)
-                ( N-d-susp-str)
-                ( S-d-susp-str))))
-      ( equiv-dependent-universal-property-unit
-        ( λ x → (B (north-suspension-structure ss))))
-      ( λ N-susp-c →
-        ( equiv-Σ
-          (λ S-d-susp-str →
-            (x : X) →
-              ( dependent-identification
-                ( B)
-                ( meridian-suspension-structure ss x)
-                ( map-equiv
-                  ( equiv-dependent-universal-property-unit (λ x₁ → B (pr1 ss)))
-                  ( N-susp-c))
-                ( S-d-susp-str)))
-          (equiv-dependent-universal-property-unit
-            ( const unit (UU l3) (B (south-suspension-structure ss))))
-          λ S-susp-c → id-equiv))
+      ( cocone-suspension-structure X Y ss))
+  compute-dependent-suspension-cocone =
+    inv-equiv
+      ( equiv-Σ
+        (λ N-d-susp-str →
+          Σ (B (south-suspension-structure ss))
+            ( λ S-d-susp-str →
+              (x : X) →
+                ( dependent-identification
+                  ( B)
+                  ( meridian-suspension-structure ss x)
+                  ( N-d-susp-str)
+                  ( S-d-susp-str))))
+        ( equiv-dependent-universal-property-unit
+          ( λ x → (B (north-suspension-structure ss))))
+        ( λ N-susp-c →
+          ( equiv-Σ
+            (λ S-d-susp-str →
+              (x : X) →
+                ( dependent-identification
+                  ( B)
+                  ( meridian-suspension-structure ss x)
+                  ( map-equiv
+                    ( equiv-dependent-universal-property-unit (λ x₁ → B (pr1 ss)))
+                    ( N-susp-c))
+                  ( S-d-susp-str)))
+            (equiv-dependent-universal-property-unit
+              ( const unit (UU l3) (B (south-suspension-structure ss))))
+            λ S-susp-c → id-equiv)))
 
-  htpy-map-inv-comparison-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :
-    map-inv-equiv comparison-dependent-suspension-cocone ~
+  htpy-map-inv-compute-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :
+    map-equiv compute-dependent-suspension-cocone ~
     dependent-cocone-dependent-suspension-structure
-  htpy-map-inv-comparison-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure
+  htpy-map-inv-compute-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure
     ( dss) =
       map-inv-equiv
-        ( equiv-ap comparison-dependent-suspension-cocone
-          ( map-inv-equiv comparison-dependent-suspension-cocone dss)
+        ( equiv-ap
+          ( inv-equiv compute-dependent-suspension-cocone)
+          ( map-equiv compute-dependent-suspension-cocone dss)
           ( dependent-cocone-dependent-suspension-structure dss))
-        (is-section-map-inv-equiv comparison-dependent-suspension-cocone dss)
+        ( is-retraction-map-inv-equiv compute-dependent-suspension-cocone dss)
 ```
 
 #### Characterizing equality of dependent suspension structures
