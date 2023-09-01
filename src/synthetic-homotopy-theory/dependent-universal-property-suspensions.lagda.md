@@ -86,7 +86,7 @@ triangle-dependent-ev-suspension :
     {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
     (susp-str : suspension-structure X Y) →
     (B : Y → UU l3) →
-  (map-equiv (comparison-dependent-suspension-cocone susp-str B) ∘
+  (map-inv-equiv (compute-dependent-suspension-cocone susp-str B) ∘
       dependent-cocone-map
         ( const X unit star)
         ( const X unit star)

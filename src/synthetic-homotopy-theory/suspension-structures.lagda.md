@@ -157,12 +157,24 @@ is-equiv-map-compute-suspension-cocone :
 is-equiv-map-compute-suspension-cocone X Z =
   is-equiv-map-equiv (compute-suspension-cocone X Z)
 
-htpy-comparison-dependent-suspension-cocone-dependent-suspension-structure :
+map-inv-compute-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-    ( map-equiv (compute-suspension-cocone X Z))
+  suspension-cocone X Z → suspension-structure X Z
+map-inv-compute-suspension-cocone X Z =
+  map-inv-equiv (compute-suspension-cocone X Z)
+
+is-equiv-map-inv-compute-suspension-cocone :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+  is-equiv (map-inv-compute-suspension-cocone X Z)
+is-equiv-map-inv-compute-suspension-cocone X Z =
+  is-equiv-map-inv-equiv (compute-suspension-cocone X Z)
+
+htpy-comparison-suspension-cocone-suspension-structure :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+    ( map-compute-suspension-cocone X Z)
   ~
     ( cocone-suspension-structure X Z)
-htpy-comparison-dependent-suspension-cocone-dependent-suspension-structure
+htpy-comparison-suspension-cocone-suspension-structure
   ( X)
   ( Z)
   ( ss) =
