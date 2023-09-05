@@ -17,7 +17,6 @@ open import foundation.equality-dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
@@ -212,7 +211,7 @@ module _
   (right : (c : C) → R c → T (right' c))
   (bottom : (b : B) → Q b → T (bottom' b))
   where
-  
+
   coherence-square-maps-Σ :
     {H' : coherence-square-maps top' left' right' bottom'} →
     ( (a : A) (p : P a) →
@@ -239,7 +238,7 @@ module _
   (right : (a : A) → R a → T a)
   (bottom : (a : A) → Q a → T a)
   where
-  
+
   coherence-square-maps-tot :
     ((a : A) → coherence-square-maps (top a) (left a) (right a) (bottom a)) →
     coherence-square-maps (tot top) (tot left) (tot right) (tot bottom)
@@ -254,7 +253,7 @@ module _
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} (T : D → UU l5)
   (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
   where
-  
+
   coherence-square-maps-map-Σ-map-base :
     (H : coherence-square-maps top left right bottom) →
     coherence-square-maps

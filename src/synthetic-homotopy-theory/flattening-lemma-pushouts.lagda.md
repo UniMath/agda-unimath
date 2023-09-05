@@ -22,7 +22,10 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The **flattening lemma** for [pushouts](synthetic-homotopy-theory.pushouts.md) states that pushouts commute with [dependent pair types](foundation-core.dependent-pair-types.md). More precisely, given a pushout square
+The **flattening lemma** for [pushouts](synthetic-homotopy-theory.pushouts.md)
+states that pushouts commute with
+[dependent pair types](foundation.dependent-pair-types.md). More precisely,
+given a pushout square
 
 ```text
       g
@@ -34,7 +37,8 @@ The **flattening lemma** for [pushouts](synthetic-homotopy-theory.pushouts.md) s
       i
 ```
 
-with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the commuting square
+with homotopy `H : i ∘ f ~ j ∘ g`, and for any type family `P` over `X`, the
+commuting square
 
 ```text
   Σ (s : S), P(if(s)) ---> Σ (s : S), P(jg(s)) ---> Σ (b : B), P(j(b))
