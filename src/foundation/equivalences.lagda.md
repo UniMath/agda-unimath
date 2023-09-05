@@ -296,7 +296,7 @@ module _
 
 ### The groupoid laws for equivalences
 
-#### Equivalence composition is associative
+#### Composition of equivalences is associative
 
 ```agda
 associative-comp-equiv :
