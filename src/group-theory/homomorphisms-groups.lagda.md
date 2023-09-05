@@ -25,8 +25,9 @@ open import group-theory.homomorphisms-semigroups
 
 ## Idea
 
-A **group homomorphism** from one [group](group-theory.groups.md) to another is a [semigroup homomorphism](group-theory.homomorphisms-semigroups.md)
-between their underlying [semigroups](group-theory.semigroups.md).
+A **group homomorphism** from one [group](group-theory.groups.md) to another is
+a [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) between
+their underlying [semigroups](group-theory.semigroups.md).
 
 ## Definition
 

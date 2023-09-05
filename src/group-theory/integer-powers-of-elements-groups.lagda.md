@@ -9,6 +9,7 @@ module group-theory.integer-powers-of-elements-groups where
 ```agda
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -30,8 +31,11 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 
 ## Idea
 
-The **integer power operation** on a [group](group-theory.groups.md) is the map `k x ↦ xᵏ`, which is defined by
-[iteratively](foundation.iterating-automorphisms.md) the automorphism multiplying `x` with itself an [integer](elementary-number-theory.integers.md) `k` times.
+The **integer power operation** on a [group](group-theory.groups.md) is the map
+`k x ↦ xᵏ`, which is defined by
+[iteratively](foundation.iterating-automorphisms.md) the automorphism
+multiplying `x` with itself an [integer](elementary-number-theory.integers.md)
+`k` times.
 
 ## Definitions
 
@@ -261,6 +265,21 @@ module _
       ( ap (mul-Group' G _) (integer-power-one-Group G x)))
 ```
 
+### `xᵏ⁻¹ = xᵏx⁻¹`
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  integer-power-pred-Group :
+    (k : ℤ) (x : type-Group G) →
+    integer-power-Group G (pred-ℤ k) x ＝
+    mul-Group G (integer-power-Group G k x) (inv-Group G x)
+  integer-power-pred-Group k x =
+    {!( ap (!}
+```
+
 ### `1ᵏ ＝ 1`
 
 ```agda
@@ -290,12 +309,12 @@ module _
   where
 
   private
-  
+
     infixl 50 _*_
     _*_ = mul-Group G
 
     pwr = integer-power-Group G
-    
+
     infixr 60 _^_
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
@@ -366,7 +385,51 @@ module _
 
 ### If `x` commutes with `y`, then integer powers distribute over the product of `x` and `y`
 
-### Powers by products of natural numbers are iterated powers
+### Powers by products of integers are iterated integer powers
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  private
+
+    infixl 50 _*_
+    _*_ = mul-ℤ
+
+    pwr = integer-power-Group G
+
+    infixr 60 _^_
+    _^_ : (x : type-Group G) (k : ℤ) → type-Group G
+    _^_ x k = integer-power-Group G k x
+
+
+  integer-power-mul-Group :
+    (k l : ℤ) (x : type-Group G) → x ^ (k * l) ＝ (x ^ k) ^ l
+  integer-power-mul-Group k (inl zero-ℕ) x =
+    ( ap (x ^_) (right-neg-unit-law-mul-ℤ k)) ∙
+    ( ( integer-power-neg-Group G k x) ∙
+      ( inv (integer-power-neg-one-Group G _)))
+  integer-power-mul-Group k (inl (succ-ℕ l)) x =
+    equational-reasoning
+      (x ^ (k * inl (succ-ℕ l)))
+      ＝ x ^ (neg-ℤ k +ℤ (k *ℤ inl l))
+        by ap (x ^_) (right-predecessor-law-mul-ℤ k (inl l))
+      ＝ mul-Group G (x ^ neg-ℤ k) (x ^ (k * (inl l)))
+        by distributive-integer-power-add-Group G x (neg-ℤ k) _
+      ＝ mul-Group G ((x ^ k) ^ neg-one-ℤ) ((x ^ k) ^ (inl l))
+        by
+        ap-mul-Group G
+          ( ( integer-power-neg-Group G k x) ∙
+            ( inv (integer-power-neg-one-Group G (x ^ k))))
+          ( integer-power-mul-Group k (inl l) x)
+      ＝ (x ^ k) ^ (neg-one-ℤ +ℤ (inl l))
+        by
+        inv (distributive-integer-power-add-Group G (x ^ k) neg-one-ℤ (inl l))
+      ＝ (x ^ k) ^ (inl (succ-ℕ l))
+        by ap ((x ^ k) ^_) (is-left-add-neg-one-pred-ℤ (inl l))
+  integer-power-mul-Group k (inr l) x = {!!}
+```
 
 ### Group homomorphisms preserve integer powers
 
@@ -374,7 +437,7 @@ module _
 module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
   where
-  
+
   preserves-integer-powers-hom-Group :
     (k : ℤ) (x : type-Group G) →
     map-hom-Group G H f (integer-power-Group G k x) ＝

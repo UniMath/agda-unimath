@@ -20,7 +20,10 @@ open import group-theory.groups
 
 ## Idea
 
-Two elements `x` and `y` of a [group](group-theory.groups.md) `G` are said to **commute** if the equality `xy ＝ yx` holds. For any element `x`, the subset of elements that commute with `x` form a subgroup of `G` called the [centralizer](group-theory.centralizer-subgroups.md) of the element `x`.
+Two elements `x` and `y` of a [group](group-theory.groups.md) `G` are said to
+**commute** if the equality `xy ＝ yx` holds. For any element `x`, the subset of
+elements that commute with `x` form a subgroup of `G` called the
+[centralizer](group-theory.centralizer-subgroups.md) of the element `x`.
 
 ## Definitions
 
@@ -30,7 +33,7 @@ Two elements `x` and `y` of a [group](group-theory.groups.md) `G` are said to **
 module _
   {l : Level} (G : Group l)
   where
-  
+
   commute-prop-Group : (x y : type-Group G) → Prop l
   commute-prop-Group x y =
     Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x)
@@ -101,7 +104,7 @@ module _
   where
 
   private
-  
+
     infix 50 _*_
     _*_ = mul-Group G
 

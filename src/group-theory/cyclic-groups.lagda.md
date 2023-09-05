@@ -19,8 +19,8 @@ open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
-open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.abelian-groups
+open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
 open import group-theory.generating-elements-groups
@@ -151,7 +151,7 @@ module _
 
 ## Properties
 
-### 
+###
 
 ### Evaluation at an element of a cyclic group is a surjective group homomorphism from `ab-endomorphisms-ring-Ab A` to `A`
 
