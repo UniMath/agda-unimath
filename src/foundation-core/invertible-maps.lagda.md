@@ -115,7 +115,7 @@ module _
 
 ## Properties
 
-### The inverse invertible map
+### The invertible inverse of an invertible map
 
 ```agda
 module _
