@@ -28,7 +28,7 @@ not generally a [property](foundation-core.propositions.md).
 
 ## Definition
 
-### The type of inverse proofs
+### The predicate that a map `g` is an inverse of a map `f`
 
 ```agda
 module _
