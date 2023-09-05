@@ -47,7 +47,7 @@ module _
   is-retraction-is-inverse = pr2
 ```
 
-### The type of inverses of a map
+### The predicate that a map `f` is invertible
 
 ```agda
 is-invertible :
