@@ -320,7 +320,7 @@ module _
   right-unit-law-equiv e = eq-equiv-eq-map-equiv refl
 ```
 
-#### Inverse laws for equivalence composition
+#### Inverse laws for composition of equivalences
 
 ```agda
   left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
