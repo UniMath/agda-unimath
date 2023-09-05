@@ -353,7 +353,7 @@ module _
   pr2 equiv-inv-equiv = is-equiv-inv-equiv
 ```
 
-#### Higher coherence between the unit laws for equivalence composition
+#### A coherence law for the unit laws for composition of equivalences
 
 ```agda
 coh-unit-laws-equiv :
