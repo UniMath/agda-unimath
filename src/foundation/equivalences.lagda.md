@@ -306,7 +306,7 @@ associative-comp-equiv :
 associative-comp-equiv e f g = eq-equiv-eq-map-equiv refl
 ```
 
-#### Unit laws for equivalence composition
+#### Unit laws for composition of equivalences
 
 ```agda
 module _
