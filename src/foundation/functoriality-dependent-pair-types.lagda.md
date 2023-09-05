@@ -204,26 +204,26 @@ module _
   {A : UU l1} {P : A → UU l2}
   {B : UU l3} {Q : B → UU l4}
   {C : UU l5} {R : C → UU l6}
-  {D : UU l7} (T : D → UU l8)
+  {D : UU l7} (S : D → UU l8)
   {top' : A → C} {left' : A → B} {right' : C → D} {bottom' : B → D}
   (top : (a : A) → P a → R (top' a))
   (left : (a : A) → P a → Q (left' a))
-  (right : (c : C) → R c → T (right' c))
-  (bottom : (b : B) → Q b → T (bottom' b))
+  (right : (c : C) → R c → S (right' c))
+  (bottom : (b : B) → Q b → S (bottom' b))
   where
 
   coherence-square-maps-Σ :
     {H' : coherence-square-maps top' left' right' bottom'} →
     ( (a : A) (p : P a) →
-      dependent-identification T
+      dependent-identification S
         ( H' a)
         ( bottom _ (left _ p))
         ( right _ (top _ p))) →
     coherence-square-maps
       ( map-Σ R top' top)
       ( map-Σ Q left' left)
-      ( map-Σ T right' right)
-      ( map-Σ T bottom' bottom)
+      ( map-Σ S right' right)
+      ( map-Σ S bottom' bottom)
   coherence-square-maps-Σ {H'} H (a , p) = eq-pair-Σ (H' a) (H a p)
 ```
 
@@ -232,11 +232,11 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {P : A → UU l2} {Q : A → UU l3} {R : A → UU l4} {T : A → UU l5}
+  {A : UU l1} {P : A → UU l2} {Q : A → UU l3} {R : A → UU l4} {S : A → UU l5}
   (top : (a : A) → P a → R a)
   (left : (a : A) → P a → Q a)
-  (right : (a : A) → R a → T a)
-  (bottom : (a : A) → Q a → T a)
+  (right : (a : A) → R a → S a)
+  (bottom : (a : A) → Q a → S a)
   where
 
   coherence-square-maps-tot :
@@ -250,17 +250,17 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 l5 : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} (T : D → UU l5)
+  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} (S : D → UU l5)
   (top : A → C) (left : A → B) (right : C → D) (bottom : B → D)
   where
 
   coherence-square-maps-map-Σ-map-base :
     (H : coherence-square-maps top left right bottom) →
     coherence-square-maps
-      ( map-Σ (T ∘ right) top (λ a → tr T (H a)))
-      ( map-Σ-map-base left (T ∘ bottom))
-      ( map-Σ-map-base right T)
-      ( map-Σ-map-base bottom T)
+      ( map-Σ (S ∘ right) top (λ a → tr S (H a)))
+      ( map-Σ-map-base left (S ∘ bottom))
+      ( map-Σ-map-base right S)
+      ( map-Σ-map-base bottom S)
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
 ```
 
