@@ -91,5 +91,5 @@ incident-edges-vertex-Undirected-Graph-𝔽 :
   (x : vertex-Undirected-Graph-𝔽 G) → UU (lsuc lzero ⊔ l1)
 incident-edges-vertex-Undirected-Graph-𝔽 G x =
   Σ ( unordered-pair (vertex-Undirected-Graph-𝔽 G))
-    ( λ p → fib (element-unordered-pair p) x)
+    ( λ p → fiber (element-unordered-pair p) x)
 ```

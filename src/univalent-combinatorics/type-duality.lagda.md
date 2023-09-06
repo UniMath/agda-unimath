@@ -69,9 +69,9 @@ equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
           ( ( inv-equiv
               ( equiv-inclusion-is-full-subtype
                 ( λ f →
-                  Π-Prop (type-𝔽 B) (λ b → is-finite-Prop (fib (pr1 f) b)))
+                  Π-Prop (type-𝔽 B) (λ b → is-finite-Prop (fiber (pr1 f) b)))
                 ( λ f →
-                  is-finite-fib
+                  is-finite-fiber
                     ( pr1 f)
                     ( is-finite-type-𝔽 A)
                     ( is-finite-type-𝔽 B)))))))))
@@ -79,15 +79,15 @@ equiv-surjection-𝔽-family-finite-inhabited-type {l} A B =
 Slice-Surjection-𝔽 : (l : Level) {l1 : Level} (A : 𝔽 l1) → UU (lsuc l ⊔ l1)
 Slice-Surjection-𝔽 l A = Σ (𝔽 l) (λ X → (type-𝔽 X) ↠ type-𝔽 A)
 
-equiv-Fib-trunc-Prop-𝔽 :
+equiv-Fiber-trunc-Prop-𝔽 :
   (l : Level) {l1 : Level} (A : 𝔽 l1) →
   Slice-Surjection-𝔽 (l1 ⊔ l) A ≃ (type-𝔽 A → Inhabited-𝔽 (l1 ⊔ l))
-equiv-Fib-trunc-Prop-𝔽 l {l1} A =
+equiv-Fiber-trunc-Prop-𝔽 l {l1} A =
   ( ( equiv-Π
       ( λ _ → Inhabited-𝔽 _)
       ( id-equiv)
       ( λ a → inv-associative-Σ _ _ _) ∘e
-      ( ( equiv-Fib-structure
+      ( ( equiv-Fiber-structure
           ( l)
           ( λ X → is-finite X × is-inhabited X) (type-𝔽 A)))) ∘e
     ( ( equiv-Σ
@@ -102,7 +102,7 @@ equiv-Fib-trunc-Prop-𝔽 l {l1} A =
               ( equiv-Σ-equiv-base
                 ( _)
                 ( inv-equiv
-                  ( equiv-is-finite-domain-is-finite-fib A f)))))) ∘e
+                  ( equiv-is-finite-domain-is-finite-fiber A f)))))) ∘e
       ( ( equiv-Σ
           ( _)
           ( id-equiv)

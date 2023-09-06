@@ -38,7 +38,7 @@ abstract
     {l : Level} {A : UU l} {B : A → UU l} → WEAK-FUNEXT A B
   weak-funext-univalence {A = A} {B} is-contr-B =
     is-contr-retract-of
-      ( fib (postcomp A (pr1 {B = B})) id)
+      ( fiber (postcomp A (pr1 {B = B})) id)
       ( pair
         ( λ f → pair (λ x → pair x (f x)) refl)
         ( pair
