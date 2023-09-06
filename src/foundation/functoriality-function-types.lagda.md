@@ -11,13 +11,13 @@ open import foundation-core.functoriality-function-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.functoriality-dependent-function-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps

@@ -12,7 +12,6 @@ open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -21,6 +20,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps

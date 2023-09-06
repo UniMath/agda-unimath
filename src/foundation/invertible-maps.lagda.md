@@ -17,8 +17,6 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.structure-identity-principle
-open import foundation.truncated-types
-open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -26,6 +24,8 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 ```
 
 </details>

@@ -9,7 +9,6 @@ module foundation.fibered-maps where
 ```agda
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
+open import foundation-core.empty-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
