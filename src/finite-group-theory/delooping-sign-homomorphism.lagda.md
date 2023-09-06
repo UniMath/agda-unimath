@@ -48,7 +48,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.truncated-types
 open import foundation.uniqueness-set-quotients
 open import foundation.unit-type

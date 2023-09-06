@@ -14,7 +14,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.pullback-squares
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.univalence
 open import foundation.universe-levels
 ```

@@ -25,7 +25,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.path-split-maps
-open import foundation-core.transport-along-identifications
+open import foundation-core.transport
 ```
 
 </details>

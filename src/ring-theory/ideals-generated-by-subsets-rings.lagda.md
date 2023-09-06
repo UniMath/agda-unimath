@@ -17,7 +17,7 @@ open import foundation.logical-equivalences
 open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.subtypes
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 

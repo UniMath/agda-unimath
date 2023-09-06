@@ -29,8 +29,7 @@ to [identifications](foundation-core.identity-types.md) arising from the
 equivalences**.
 
 Alternatively, one can apply
-[transport along identifications](foundation-core.transport-along-identifications.md)
-to get
+[transport along identifications](foundation-core.transport.md) to get
 [transport along equivalences](foundation.transport-along-equivalences.md), but
 luckily, these two notions coincide.
 

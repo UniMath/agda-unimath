@@ -24,7 +24,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.raising-universe-levels
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs

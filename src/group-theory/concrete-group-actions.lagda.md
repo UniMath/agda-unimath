@@ -9,7 +9,7 @@ module group-theory.concrete-group-actions where
 ```agda
 open import foundation.function-types
 open import foundation.sets
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups

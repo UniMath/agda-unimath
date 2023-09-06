@@ -25,7 +25,7 @@ open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.surjective-maps
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.universal-property-image
 open import foundation.universe-levels
 

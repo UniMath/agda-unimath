@@ -28,7 +28,7 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
-open import foundation.transport-along-identifications
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 
