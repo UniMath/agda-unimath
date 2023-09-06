@@ -41,7 +41,7 @@ module _
   is-locally-finite-multisubset :
     (U : Set l1) → multisubset U → UU (l1 ⊔ l2)
   is-locally-finite-multisubset U (pair B f) =
-    (x : type-Set U) → is-finite (fib f x)
+    (x : type-Set U) → is-finite (fiber f x)
 
   is-finite-multisubset :
     (U : Set l1) → multisubset U → UU (l1 ⊔ l2)

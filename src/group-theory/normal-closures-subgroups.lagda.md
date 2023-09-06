@@ -77,7 +77,7 @@ module _
   generating-subset-normal-closure-Subgroup x =
     ∃-Prop
       ( type-Group G)
-      ( λ y → fib (conjugation-Group G y ∘ inclusion-Subgroup G H) x)
+      ( λ y → fiber (conjugation-Group G y ∘ inclusion-Subgroup G H) x)
 
   contains-subgroup-generating-subset-normal-closure-Subgroup :
     subset-Subgroup G H ⊆ generating-subset-normal-closure-Subgroup

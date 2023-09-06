@@ -90,12 +90,12 @@ module _
   is-decidable-map-const-is-isolated :
     is-isolated a → is-decidable-map (const unit A a)
   is-decidable-map-const-is-isolated d x =
-    is-decidable-equiv (fib-const a x) (d x)
+    is-decidable-equiv (fiber-const a x) (d x)
 
   is-isolated-is-decidable-map-const :
     is-decidable-map (const unit A a) → is-isolated a
   is-isolated-is-decidable-map-const d x =
-    is-decidable-equiv' (fib-const a x) (d x)
+    is-decidable-equiv' (fiber-const a x) (d x)
 
   cases-Eq-isolated-point :
     is-isolated a → (x : A) → is-decidable (a ＝ x) → UU lzero

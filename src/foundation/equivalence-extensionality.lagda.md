@@ -52,7 +52,7 @@ module _
       is-prop-is-contr
         ( is-contr-prod
           ( is-contr-equiv'
-            ( (b : B) → fib f b)
+            ( (b : B) → fiber f b)
             ( distributive-Π-Σ)
             ( is-contr-Π (is-contr-map-is-equiv H)))
           ( is-contr-is-equiv'

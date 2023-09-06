@@ -35,7 +35,7 @@ module _
   where
 
   is-0-map : {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-  is-0-map {A} {B} f = (y : B) → is-set (fib f y)
+  is-0-map {A} {B} f = (y : B) → is-set (fiber f y)
 
   0-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
   0-map A B = Σ (A → B) is-0-map
@@ -61,7 +61,7 @@ module _
     is-0-map-pr1 :
       {B : A → UU l2} → ((x : A) → is-set (B x)) → is-0-map (pr1 {B = B})
     is-0-map-pr1 {B} H x =
-      is-set-equiv (B x) (equiv-fib-pr1 B x) (H x)
+      is-set-equiv (B x) (equiv-fiber-pr1 B x) (H x)
 
   pr1-0-map :
     (B : A → Set l2) → 0-map (Σ A (λ x → type-Set (B x))) A

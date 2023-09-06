@@ -125,7 +125,7 @@ module _
     ({l : Level} → universal-property-set-quotient l R B f)
   universal-property-set-quotient-is-set-quotient Q X g =
     is-contr-equiv'
-      ( fib (precomp-Set-Quotient R B f X) g)
+      ( fiber (precomp-Set-Quotient R B f X) g)
       ( equiv-tot
         ( λ h →
           extensionality-reflecting-map-Equivalence-Relation R X
@@ -218,7 +218,7 @@ module _
           ( is-small-Prop l2 (x ＝ y))
           ( α u))
     where
-    α : fib q x → fib q y → is-small l2 (x ＝ y)
+    α : fiber q x → fiber q y → is-small l2 (x ＝ y)
     pr1 (α (pair a refl) (pair b refl)) = sim-Equivalence-Relation R a b
     pr2 (α (pair a refl) (pair b refl)) = pr2 e a b
 
@@ -278,7 +278,7 @@ module _
       (p :
         ( map-emb-is-surjective-and-effective H x) ＝
         ( map-emb-is-surjective-and-effective H y)) →
-      fib q y →
+      fiber q y →
       type-Prop (Id-Prop B x y)
     α {x} p (pair a refl) =
       map-inv-equiv
@@ -316,7 +316,7 @@ module _
       (p :
         ( large-map-emb-is-surjective-and-effective e x) ＝
         ( large-map-emb-is-surjective-and-effective e y)) →
-      fib q y →
+      fiber q y →
       type-Prop (Id-Prop B x y)
     α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
 
@@ -355,7 +355,7 @@ module _
   is-surjective-is-set-quotient q Q b =
     tr
       ( λ y →
-        type-trunc-Prop (fib (map-reflecting-map-Equivalence-Relation R q) y))
+        type-trunc-Prop (fiber (map-reflecting-map-Equivalence-Relation R q) y))
       ( htpy-eq
         ( ap pr1
           ( eq-is-contr

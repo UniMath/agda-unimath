@@ -193,11 +193,11 @@ module _
       is-surjective f → is-surjective (map-trunc-Set f)
     is-surjective-map-trunc-Set H =
       apply-dependent-universal-property-trunc-Set'
-        ( λ x → set-Prop (trunc-Prop (fib (map-trunc-Set f) x)))
+        ( λ x → set-Prop (trunc-Prop (fiber (map-trunc-Set f) x)))
         ( λ b →
           apply-universal-property-trunc-Prop
             ( H b)
-            ( trunc-Prop (fib (map-trunc-Set f) (unit-trunc-Set b)))
+            ( trunc-Prop (fiber (map-trunc-Set f) (unit-trunc-Set b)))
             ( λ { (pair a p) →
                   unit-trunc-Prop
                     ( pair
@@ -214,16 +214,16 @@ module _
     is-surjective-is-surjective-map-trunc-Set H b =
       apply-universal-property-trunc-Prop
         ( H (unit-trunc-Set b))
-        ( trunc-Prop (fib f b))
+        ( trunc-Prop (fiber f b))
         ( λ { (pair x p) →
               apply-universal-property-trunc-Prop
                 ( is-surjective-unit-trunc-Set A x)
-                ( trunc-Prop (fib f b))
+                ( trunc-Prop (fiber f b))
                 ( λ { (pair a refl) →
                       apply-universal-property-trunc-Prop
                         ( apply-effectiveness-unit-trunc-Set
                           ( inv (naturality-unit-trunc-Set f a) ∙ p))
-                        ( trunc-Prop (fib f b))
+                        ( trunc-Prop (fiber f b))
                         ( λ q → unit-trunc-Prop (pair a q))})})
 ```
 
@@ -364,7 +364,7 @@ module _
     pair
       ( unit-trunc-Set (pr1 x))
       ( apply-universal-property-trunc-Prop (pr2 x)
-        ( trunc-Prop (fib (map-trunc-Set f) (unit-trunc-Set (pr1 x))))
+        ( trunc-Prop (fiber (map-trunc-Set f) (unit-trunc-Set (pr1 x))))
         ( λ u →
           unit-trunc-Prop
             ( pair

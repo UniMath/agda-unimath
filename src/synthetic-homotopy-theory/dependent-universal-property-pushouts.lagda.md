@@ -70,7 +70,7 @@ abstract
             htpy-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
   uniqueness-dependent-universal-property-pushout f g c dup-c P h =
     is-contr-is-equiv'
-      ( fib (dependent-cocone-map f g c P) h)
+      ( fiber (dependent-cocone-map f g c P) h)
       ( tot
         ( λ k →
           htpy-eq-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))

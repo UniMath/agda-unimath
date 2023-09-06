@@ -44,7 +44,7 @@ module _
   where
 
   is-split-surjective : (A → B) → UU (l1 ⊔ l2)
-  is-split-surjective f = (b : B) → fib f b
+  is-split-surjective f = (b : B) → fiber f b
 
   split-surjection : UU (l1 ⊔ l2)
   split-surjection = Σ (A → B) is-split-surjective
