@@ -10,6 +10,7 @@ module foundation.uniqueness-set-quotients where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -18,7 +19,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

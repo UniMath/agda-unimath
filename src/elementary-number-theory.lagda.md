@@ -82,6 +82,8 @@ open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-rational-numbers public
+open import elementary-number-theory.multiplicative-units-integers public
+open import elementary-number-theory.multiplicative-units-modular-arithmetic public
 open import elementary-number-theory.multiset-coefficients public
 open import elementary-number-theory.natural-numbers public
 open import elementary-number-theory.nonzero-natural-numbers public

@@ -10,6 +10,7 @@ module foundation-core.functoriality-dependent-function-types where
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.function-extensionality
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
@@ -19,7 +20,6 @@ open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies

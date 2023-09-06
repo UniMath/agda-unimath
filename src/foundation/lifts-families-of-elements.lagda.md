@@ -9,6 +9,7 @@ module foundation.lifts-families-of-elements where
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-maps
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
@@ -28,7 +29,7 @@ open import foundation-core.transport
 
 Consider a map `h : A → X` and a type family `P` over `X`, which we think of as
 a family of elements in `X`. A **lift of families of elements** into `P` along
-`f` is a family of elements `(a : A) → P (h a)`.
+`h` is a family of elements `(a : A) → P (h a)`.
 
 ## Definitions
 
