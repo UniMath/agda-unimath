@@ -480,7 +480,7 @@ module _
   compute-fibered-map-empty = compute-fibered-map-is-empty f g id
 ```
 
-### If the bottom right corner is contractible, the type of fibered maps is equivalent `A → B`
+### If the bottom right corner is contractible, the type of fibered maps is equivalent to maps `A → B`
 
 ```text
   A -----> B
