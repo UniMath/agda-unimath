@@ -12,6 +12,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
+open import foundation.transport-along-homotopies
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 

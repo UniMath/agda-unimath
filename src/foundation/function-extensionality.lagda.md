@@ -16,6 +16,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-homotopies
 open import foundation.dependent-pair-types
 open import foundation.homotopies
+open import foundation.transport-along-homotopies
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
