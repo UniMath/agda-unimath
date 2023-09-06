@@ -60,7 +60,7 @@ abstract
               ( is-contr-Π
                 ( λ x →
                   is-contr-equiv'
-                    ( fib (ap f) (G H (f x)))
+                    ( fiber (ap f) (G H (f x)))
                     ( equiv-tot
                       ( λ p → equiv-inv (ap f p) (G H (f x))))
                     ( is-contr-map-is-equiv

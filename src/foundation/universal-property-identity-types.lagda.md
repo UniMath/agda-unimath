@@ -121,12 +121,12 @@ module _
         ( pair a refl)
         ( λ _ →
           is-injective-emb
-            ( emb-fib a)
+            ( emb-fiber a)
             ( eq-is-contr (is-contr-total-path a))))
       ( λ _ → ap Id)
     where
-    emb-fib : (a : A) → fib' Id (Id a) ↪ Σ A (Id a)
-    emb-fib a =
+    emb-fiber : (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
+    emb-fiber a =
       comp-emb
         ( comp-emb
           ( emb-equiv
@@ -144,7 +144,7 @@ module _
               comp-emb
                 ( emb-Π (λ y → emb-L L (Id x y) (Id a y)))
                 ( emb-equiv equiv-funext))))
-        ( emb-equiv (inv-equiv (equiv-fib Id (Id a))))
+        ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding
@@ -175,7 +175,7 @@ module _
           equiv-map-Π
             ( λ x → equiv-postcomp-equiv (inv-equiv (e x)) (b ＝ x))))
       ( is-contr-equiv'
-        ( fib Id (Id a))
+        ( fiber Id (Id a))
         ( equiv-tot
           ( λ b → equiv-map-Π (λ x → equiv-univalence) ∘e equiv-funext))
         ( is-proof-irrelevant-is-prop
