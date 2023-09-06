@@ -28,7 +28,7 @@ open import foundation-core.transport
 ## Idea
 
 The [univalence axiom](foundation-core.univalence.md) implies
-[function extensionality](foundation-core.function-extensionality.md).
+[function extensionality](foundation.function-extensionality.md).
 
 ## Theorem
 

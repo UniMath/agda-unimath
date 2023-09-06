@@ -32,7 +32,7 @@ open import foundation-core.propositions
 **Weak function extensionality** is the principle that any dependent product of
 [contractible types](foundation-core.contractible-types.md) is contractible.
 This principle is [equivalent](foundation-core.equivalences.md) to
-[the function extensionality axiom](foundation-core.function-extensionality.md).
+[the function extensionality axiom](foundation.function-extensionality.md).
 
 ## Definition
 

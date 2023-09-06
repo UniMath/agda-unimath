@@ -323,4 +323,4 @@ eckmann-hilton-htpy H K x =
 
 - We postulate that homotopies characterize identifications in (dependent)
   function types in the file
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+  [`foundation.function-extensionality`](foundation.function-extensionality.md).
