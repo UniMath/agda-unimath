@@ -24,7 +24,7 @@ open import primitives.strings
 The `Name` type represents quoted names, i.e. they are an abstract syntactic
 representation of terms. Agda provides primitive functions to manipulate them,
 giving them an equality and ordering. A closed term can be converted to a quoted
-name by means of the `quote` primitive, e.g. `quote bool`.
+name by means of the `quote` keyword, e.g. `quote bool`.
 
 ## Definition
 

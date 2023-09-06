@@ -52,5 +52,5 @@ module _
 
   order-element-Group : type-Group G → order-Group l
   order-element-Group g =
-    kernel-hom-Group ℤ-Group G (hom-free-group-with-one-generator-ℤ G g)
+    kernel-hom-Group ℤ-Group G (hom-element-Group G g)
 ```

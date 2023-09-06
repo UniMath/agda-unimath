@@ -22,7 +22,9 @@ open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 
@@ -217,8 +219,12 @@ module _
   subset-subgroup-subset-Group x =
     trunc-Prop (subset-subgroup-subset-Group' x)
 
+  is-in-subgroup-subset-Group : type-Group G → UU (l1 ⊔ l2)
+  is-in-subgroup-subset-Group x =
+    type-Prop (subset-subgroup-subset-Group x)
+
   contains-unit-subgroup-subset-Group :
-    type-Prop (subset-subgroup-subset-Group (unit-Group G))
+    contains-unit-subset-Group G subset-subgroup-subset-Group
   contains-unit-subgroup-subset-Group = unit-trunc-Prop (pair nil refl)
 
   is-closed-under-multiplication-subgroup-subset-Group' :
@@ -236,10 +242,7 @@ module _
       ( ap-mul-Group G p q)
 
   is-closed-under-multiplication-subgroup-subset-Group :
-    (x y : type-Group G) →
-    type-Prop (subset-subgroup-subset-Group x) →
-    type-Prop (subset-subgroup-subset-Group y) →
-    type-Prop (subset-subgroup-subset-Group (mul-Group G x y))
+    is-closed-under-multiplication-subset-Group G subset-subgroup-subset-Group
   is-closed-under-multiplication-subgroup-subset-Group x y H K =
     apply-universal-property-trunc-Prop H
       ( subset-subgroup-subset-Group (mul-Group G x y))
@@ -262,9 +265,7 @@ module _
       ( ap (inv-Group G) p)
 
   is-closed-under-inv-subgroup-subset-Group :
-    (x : type-Group G) →
-    type-Prop (subset-subgroup-subset-Group x) →
-    type-Prop (subset-subgroup-subset-Group (inv-Group G x))
+    is-closed-under-inv-subset-Group G subset-subgroup-subset-Group
   is-closed-under-inv-subgroup-subset-Group x H =
     apply-universal-property-trunc-Prop H
       ( subset-subgroup-subset-Group (inv-Group G x))
@@ -384,4 +385,69 @@ module _
   adjoint-relation-galois-connection-Large-Poset
     subgroup-subset-galois-connection-Group S =
     adjoint-relation-subgroup-subset-Group S
+```
+
+## Properties
+
+### If `S` is closed under conjugation, then `(S)` is normal
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1)
+  (S : subset-Group l2 G) (H : is-closed-under-conjugation-subset-Group G S)
+  where
+
+  conjugation-formal-combination-subset-Group :
+    type-Group G →
+    formal-combination-subset-Group G S → formal-combination-subset-Group G S
+  conjugation-formal-combination-subset-Group x nil = nil
+  conjugation-formal-combination-subset-Group x (cons (b , y , s) z) =
+    cons
+      ( (b , conjugation-Group G x y , H x y s))
+      ( conjugation-formal-combination-subset-Group x z)
+
+  preserves-conjugation-ev-formal-combination-subset-Group :
+    (x : type-Group G) (l : formal-combination-subset-Group G S) →
+    ev-formal-combination-subset-Group G S
+      ( conjugation-formal-combination-subset-Group x l) ＝
+    conjugation-Group G x (ev-formal-combination-subset-Group G S l)
+  preserves-conjugation-ev-formal-combination-subset-Group x nil =
+    inv (conjugation-unit-Group G x)
+  preserves-conjugation-ev-formal-combination-subset-Group x
+    ( cons (inl (inr star) , y , s) l) =
+    ( ap-mul-Group G
+      ( inv (conjugation-inv-Group G x y))
+      ( preserves-conjugation-ev-formal-combination-subset-Group x l)) ∙
+    ( inv
+      ( distributive-conjugation-mul-Group G x
+        ( inv-Group G y)
+        ( ev-formal-combination-subset-Group G S l)))
+  preserves-conjugation-ev-formal-combination-subset-Group x
+    ( cons (inr star , y , s) l) =
+    ( ap
+      ( mul-Group G (conjugation-Group G x y))
+      ( preserves-conjugation-ev-formal-combination-subset-Group x l)) ∙
+    ( inv
+      ( distributive-conjugation-mul-Group G x y
+        ( ev-formal-combination-subset-Group G S l)))
+
+  is-normal-is-closed-under-conjugation-subgroup-subset-Group' :
+    (x y : type-Group G) → subset-subgroup-subset-Group' G S y →
+    subset-subgroup-subset-Group' G S (conjugation-Group G x y)
+  pr1
+    ( is-normal-is-closed-under-conjugation-subgroup-subset-Group' x ._
+      ( l , refl)) =
+    conjugation-formal-combination-subset-Group x l
+  pr2
+    ( is-normal-is-closed-under-conjugation-subgroup-subset-Group' x ._
+      ( l , refl)) =
+    preserves-conjugation-ev-formal-combination-subset-Group x l
+
+  is-normal-is-closed-under-conjugation-subgroup-subset-Group :
+    is-normal-Subgroup G (subgroup-subset-Group G S)
+  is-normal-is-closed-under-conjugation-subgroup-subset-Group x (y , h) =
+    apply-universal-property-trunc-Prop h
+      ( subset-subgroup-subset-Group G S (conjugation-Group G x y))
+      ( unit-trunc-Prop ∘
+        is-normal-is-closed-under-conjugation-subgroup-subset-Group' x y)
 ```

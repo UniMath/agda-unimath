@@ -158,6 +158,26 @@ horizontal-concat-Id² :
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
 ```
 
+#### Identification whiskering
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  identification-left-whisk :
+    (p : x ＝ y) {q q' : y ＝ z} → q ＝ q' → (p ∙ q) ＝ (p ∙ q')
+  identification-left-whisk p β = ap (p ∙_) β
+
+  identification-right-whisk :
+    {p p' : x ＝ y} → p ＝ p' → (q : y ＝ z) → (p ∙ q) ＝ (p' ∙ q)
+  identification-right-whisk α q = ap (_∙ q) α
+
+  htpy-identification-left-whisk :
+    {q q' : y ＝ z} → q ＝ q' → (_∙ q) ~ (_∙ q')
+  htpy-identification-left-whisk β p = identification-left-whisk p β
+```
+
 ### Both horizontal and vertical concatenation of 2-paths are binary equivalences
 
 ```agda
@@ -197,12 +217,30 @@ right-unit-law-horizontal-concat-Id² :
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
 ```
 
+#### The whiskering operations allow us to commute higher identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  path-swap-nat-identification-left-whisk :
+    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
+    coherence-square-identifications
+      ( identification-right-whisk α q)
+      ( identification-left-whisk p β)
+      ( identification-left-whisk p' β)
+      ( identification-right-whisk α q')
+  path-swap-nat-identification-left-whisk β =
+    nat-htpy (htpy-identification-left-whisk β)
+```
+
 Horizontal concatination satisfies an additional "2-dimensional" unit law (on
 both the left and right) induced by the unit laws on the boundary 1-paths.
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1} (α : p ＝ p')
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y} (α : p ＝ p')
   where
 
   nat-sq-right-unit-Id² :
@@ -233,7 +271,7 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1}
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y}
   where
 
   horizontal-inv-Id² : p ＝ p' → (inv p) ＝ (inv p')
@@ -245,7 +283,7 @@ This operation satisfies a left and right idenity induced by the inverse laws on
 
 ```agda
 module _
-  {l : Level} {A : UU l} {a0 a1 : A} {p p' : a0 ＝ a1} (α : p ＝ p')
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y} (α : p ＝ p')
   where
 
   nat-sq-right-inv-Id² :
@@ -328,8 +366,8 @@ Functions have an induced action on 2-paths
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (f : A → B) (α : p ＝ p')
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
   where
 
   ap² : (ap f p) ＝ (ap f p')
@@ -343,8 +381,8 @@ Inverse law.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (f : A → B) (α : p ＝ p')
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p p' : x ＝ y} (f : A → B) (α : p ＝ p')
   where
 
   nat-sq-ap-inv-Id² :
@@ -363,8 +401,8 @@ Identity law and constant law.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {a0 a1 : A}
-  {p p' : a0 ＝ a1} (α : p ＝ p')
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p p' : x ＝ y} (α : p ＝ p')
   where
 
   nat-sq-ap-id-Id² :
@@ -389,7 +427,7 @@ Composition law
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  {a0 a1 : A} {p p' : a0 ＝ a1} (g : B → C) (f : A → B) (α : p ＝ p')
+  {x y : A} {p p' : x ＝ y} (g : B → C) (f : A → B) (α : p ＝ p')
   where
 
   nat-sq-ap-comp-Id² :

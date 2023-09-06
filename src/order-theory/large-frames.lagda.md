@@ -8,18 +8,25 @@ module order-theory.large-frames where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import order-theory.frames
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-meet-semilattices
 open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.meet-semilattices
+open import order-theory.meet-suplattices
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.suplattices
 open import order-theory.top-elements-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -28,8 +35,8 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large frame** is a large meet-suplattice satisfying the distributive law for
-meets over suprema.
+A **large frame** is a large [meet-suplattice](order-theory.meet-suplattices.md)
+satisfying the distributive law for meets over suprema.
 
 ## Definitions
 
@@ -209,4 +216,53 @@ module _
       ( sup-Large-Frame x)
   is-upper-bound-sup-Large-Frame =
     is-upper-bound-sup-Large-Suplattice large-suplattice-Large-Frame
+```
+
+## Properties
+
+### Small constructions from large frames
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Frame α β γ)
+  where
+
+  preorder-Large-Frame : (l : Level) → Preorder (α l) (β l l)
+  preorder-Large-Frame = preorder-Large-Preorder (large-preorder-Large-Frame L)
+
+  poset-Large-Frame : (l : Level) → Poset (α l) (β l l)
+  poset-Large-Frame = poset-Large-Poset (large-poset-Large-Frame L)
+
+  is-suplattice-poset-Large-Frame :
+    (l1 l2 : Level) → is-suplattice-Poset l1 (poset-Large-Frame (γ ⊔ l1 ⊔ l2))
+  pr1 (is-suplattice-poset-Large-Frame l1 l2 I y) =
+    sup-Large-Frame L y
+  pr2 (is-suplattice-poset-Large-Frame l1 l2 I y) =
+    is-least-upper-bound-sup-Large-Frame L y
+
+  suplattice-Large-Frame :
+    (l1 l2 : Level) →
+    Suplattice (α (γ ⊔ l1 ⊔ l2)) (β (γ ⊔ l1 ⊔ l2) (γ ⊔ l1 ⊔ l2)) l1
+  pr1 (suplattice-Large-Frame l1 l2) = poset-Large-Frame (γ ⊔ l1 ⊔ l2)
+  pr2 (suplattice-Large-Frame l1 l2) = is-suplattice-poset-Large-Frame l1 l2
+
+  is-meet-semilattice-poset-Large-Frame :
+    (l : Level) → is-meet-semilattice-Poset (poset-Large-Frame l)
+  pr1 (is-meet-semilattice-poset-Large-Frame l x y) =
+    meet-Large-Frame L x y
+  pr2 (is-meet-semilattice-poset-Large-Frame l x y) =
+    is-greatest-binary-lower-bound-meet-Large-Frame L x y
+
+  order-theoretic-meet-semilattice-Large-Frame :
+    (l : Level) → Order-Theoretic-Meet-Semilattice (α l) (β l l)
+  pr1 (order-theoretic-meet-semilattice-Large-Frame l) =
+    poset-Large-Frame l
+  pr2 (order-theoretic-meet-semilattice-Large-Frame l) =
+    is-meet-semilattice-poset-Large-Frame l
+
+  meet-semilattice-Large-Frame : (l : Level) → Meet-Semilattice (α l)
+  meet-semilattice-Large-Frame =
+    meet-semilattice-Large-Meet-Semilattice
+      ( large-meet-semilattice-Large-Frame L)
 ```

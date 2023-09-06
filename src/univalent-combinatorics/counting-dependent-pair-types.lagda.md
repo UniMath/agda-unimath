@@ -142,11 +142,11 @@ count-fiber-count-Σ-count-base e f x =
 ### If `Σ A B` and each `B x` can be counted, and if `B` has a section, then `A` can be counted
 
 ```agda
-count-fib-map-section :
+count-fib-map-section-family :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   count (Σ A B) → ((x : A) → count (B x)) →
-  (t : Σ A B) → count (fib (map-section b) t)
-count-fib-map-section {l1} {l2} {A} {B} b e f (pair y z) =
+  (t : Σ A B) → count (fib (map-section-family b) t)
+count-fib-map-section-family {l1} {l2} {A} {B} b e f (pair y z) =
   count-equiv'
     ( ( ( left-unit-law-Σ-is-contr
             ( is-contr-total-path' y)
@@ -162,8 +162,8 @@ count-base-count-Σ :
   count (Σ A B) → ((x : A) → count (B x)) → count A
 count-base-count-Σ b e f =
   count-equiv
-    ( equiv-total-fib-map-section b)
-    ( count-Σ e (count-fib-map-section b e f))
+    ( equiv-total-fib (map-section-family b))
+    ( count-Σ e (count-fib-map-section-family b e f))
 ```
 
 More generally, if `Σ A B` and each `B x` can be counted, then `A` can be

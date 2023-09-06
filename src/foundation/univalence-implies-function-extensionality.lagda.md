@@ -27,7 +27,8 @@ open import foundation-core.transport
 
 ## Idea
 
-The univalence axiom implies function extensionality
+The [univalence axiom](foundation-core.univalence.md) implies
+[function extensionality](foundation-core.function-extensionality.md).
 
 ## Theorem
 
@@ -51,5 +52,5 @@ abstract
   funext-univalence :
     {l : Level} {A : UU l} {B : A → UU l} (f : (x : A) → B x) → FUNEXT f
   funext-univalence {A = A} {B} f =
-    FUNEXT-WEAK-FUNEXT (λ A B → weak-funext-univalence) A B f
+    funext-weak-funext (λ A B → weak-funext-univalence) A B f
 ```

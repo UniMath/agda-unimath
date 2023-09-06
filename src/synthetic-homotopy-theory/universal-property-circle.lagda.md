@@ -263,5 +263,5 @@ abstract
   is-connected-circle' l dup-circle P is-prop-P p =
     map-inv-is-equiv
       ( dup-circle P)
-      ( pair p (center (is-prop-P _ (tr P (pr2 l) p) p)))
+      ( pair p (center (is-prop-P _ (tr P (loop-free-loop l) p) p)))
 ```

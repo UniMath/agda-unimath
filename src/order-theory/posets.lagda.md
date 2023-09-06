@@ -151,16 +151,19 @@ module _
   precategory-Poset : Precategory l1 l2
   precategory-Poset = precategory-Preorder (preorder-Poset X)
 
-  category-Poset : Category l1 l2
-  pr1 category-Poset = precategory-Poset
-  pr2 category-Poset x y =
+  is-category-precategory-Poset : is-category-Precategory precategory-Poset
+  is-category-precategory-Poset x y =
     is-equiv-is-prop
       ( is-set-type-Poset X x y)
       ( is-prop-iso-Precategory precategory-Poset x y (is-prop-leq-Poset X x y))
       ( λ f →
         antisymmetric-leq-Poset X x y
-          ( hom-iso-Precategory (pr1 category-Poset) f)
-          ( hom-inv-iso-Precategory (pr1 category-Poset) f))
+          ( hom-iso-Precategory precategory-Poset f)
+          ( hom-inv-iso-Precategory precategory-Poset f))
+
+  category-Poset : Category l1 l2
+  pr1 category-Poset = precategory-Poset
+  pr2 category-Poset = is-category-precategory-Poset
 
 module _
   {l1 l2 : Level} (C : Category l1 l2)

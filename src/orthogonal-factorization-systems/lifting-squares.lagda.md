@@ -64,9 +64,9 @@ module _
   where
 
   is-lifting-square : (j : X → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-lifting-square j = Σ
-    ( is-extension f h j)
-    ( λ E → Σ (is-lift g i j) (λ L → (L ·r f) ~ (H ∙h (g ·l E))))
+  is-lifting-square j =
+    Σ ( is-extension f h j)
+      ( λ E → Σ (is-lift g i j) (λ L → (L ·r f) ~ (H ∙h (g ·l E))))
 
   lifting-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   lifting-square = Σ (X → B) (is-lifting-square)

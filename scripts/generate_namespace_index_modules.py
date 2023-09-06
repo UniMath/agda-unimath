@@ -22,7 +22,7 @@ def generate_imports(root, namespace):
 
     import_statements = (utils.get_import_statement(
         namespace, module_file, public=True) for module_file in namespace_files)
-    return '\n'.join(sorted(import_statements))
+    return '\n'.join(sorted(set(import_statements)))
 
 
 agda_block_template = \
@@ -50,19 +50,20 @@ if __name__ == '__main__':
 
         namespace_filename = os.path.join(root, namespace) + '.lagda.md'
 
-        with open(namespace_filename, 'a+') as namespace_file:
-            pass
-        with open(namespace_filename, 'r+') as namespace_file:
-            contents = namespace_file.read()
+        if os.path.isfile(namespace_filename):
+            with open(namespace_filename, 'r+') as namespace_file:
+                contents = namespace_file.read()
+        else:
+            contents = ''
 
         oldcontents = contents
 
         title_index = contents.find('# ')
-        if title_index != 0:
+        if title_index > 0:
             print(
-                f'Warning! Namespace file {namespace_filename} does not start with a title.', file=sys.stderr)
+                f'Warning! Namespace file {namespace_filename} should start with a top-level title.', file=sys.stderr)
             status |= MISPLACED_TITLE_FLAG
-        elif title_index == -1:  # Missing title. Generate it
+        elif title_index == -1:  # Missing title, generate it
             contents = generate_title(namespace) + contents
 
         agda_block_start = contents.rfind('```agda\n')

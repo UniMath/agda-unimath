@@ -43,8 +43,8 @@ contains the top element, and is closed under suprema.
 ```agda
 record
   Large-Subframe
-    {α : Level → Level} {β : Level → Level → Level} {γ : Level}
-    (δ : Level → Level) (F : Large-Frame α β γ) :
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (δ : Level → Level) (F : Large-Frame α β γ) :
   UUω
   where
   field

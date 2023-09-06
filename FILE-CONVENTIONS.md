@@ -35,6 +35,10 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
+Note that the title of the file and other markdown headers must be on one line,
+even if it contains more than 80 characters. Headers that exceed the 80
+character limit are not considered violations of the 80 character rule.
+
 Directly after the header, include an Agda code block containing
 
 - any option pragmas,
@@ -110,6 +114,10 @@ relation
 
 holds for every two elements `x : P` and `y : Q`.
 ````
+
+Note that section and subsection headers must be on one line, even if they
+contain more than 80 characters. Headers that exceed the 80 character limit are
+not considered violations of the 80 character rule.
 
 ### Subsections
 

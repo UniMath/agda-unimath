@@ -34,9 +34,9 @@ open import reflection.terms
 
 ## Idea
 
-The type-checking monad allows us to interact directly with Agda's type checking
-mechanism. Additionally to primitives (see below), Agda includes the some
-keywords to handle, notably `unquote`.
+The type-checking monad `TC` allows us to interact directly with Agda's type
+checking mechanism. Additionally to primitives (see below), Agda includes the
+the keyword `unquote` to manually unquote an element from `TC unit`.
 
 ## Definition
 
@@ -257,7 +257,7 @@ example was addapted from
 
   ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))
   ＝-type-info
-    ( def (quote _＝_) (cons 𝓁 (cons 𝒯 (cons (arg _ l) (cons (arg _ r) nil))))) =
+    ( def (quote _＝_) (𝓁 ∷ 𝒯 ∷ (arg _ l) ∷ (arg _ r) ∷ nil)) =
     returnTC (𝓁 , 𝒯 , l , r)
   ＝-type-info _ = typeError (unit-list (strErr "Term is not a ＝-type."))
 

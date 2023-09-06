@@ -19,8 +19,8 @@ Below is a summary of the tasks this tool performs:
 
 - **Trailing whitespace**: Identifies and removes any trailing whitespace.
 
-- **End of files**: Ensures that a file is either empty, or ends with one
-  newline.
+- **End of files**: Ensures that a file is either empty, or ends with one new
+  line.
 
 - **Mixed line ending**: Ensures consistent use of line endings
   ([LF vs CRLF](https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/#crlf-vs-lf-what-are-line-endings-anyway)).
