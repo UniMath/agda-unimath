@@ -45,7 +45,7 @@ coherences on the boundary 1-paths.
 
 ## Properties
 
-### the unit laws of concatenation induced homotopies
+### The unit laws of concatenation induce homotopies
 
 ```agda
 module _
@@ -59,7 +59,7 @@ module _
   htpy-right-unit p = right-unit
 ```
 
-### squares
+### Squares
 
 ```agda
 horizontal-concat-square :
@@ -168,21 +168,21 @@ module _
   {l : Level} {A : UU l}
   where
 
-  left-left-inv :
+  is-section-left-concat-inv :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → (inv p ∙ (p ∙ q)) ＝ q
-  left-left-inv refl q = refl
+  is-section-left-concat-inv refl q = refl
 
-  left-right-inv :
+  is-retraction-left-concat-inv :
     {x y z : A} (p : x ＝ y) (q : x ＝ z) → (p ∙ (inv p ∙ q)) ＝ q
-  left-right-inv refl q = refl
+  is-retraction-left-concat-inv refl q = refl
 
-  right-left-inv :
+  is-section-right-concat-inv :
     {x y z : A} (p : x ＝ y) (q : z ＝ y) → ((p ∙ inv q) ∙ q) ＝ p
-  right-left-inv refl refl = refl
+  is-section-right-concat-inv refl refl = refl
 
-  right-right-inv :
+  is-retraction-right-concat-inv :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → ((p ∙ q) ∙ inv q) ＝ p
-  right-right-inv refl refl = refl
+  is-retraction-right-concat-inv refl refl = refl
 ```
 
 ## Properties of 2-paths

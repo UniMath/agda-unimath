@@ -170,7 +170,7 @@ module _
             ( refl-htpy))
         ( is-contr-total-htpy (map-inv-invertible-map s))
         ( map-inv-invertible-map s , refl-htpy)
-        (is-contr-total-Eq-structure
+        ( is-contr-total-Eq-structure
           ( λ x z a →
             ( is-section-map-invertible-map s) ~
             ( is-section-map-invertible-map

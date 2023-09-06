@@ -132,11 +132,11 @@ module _
       ( emb-subtype (is-equiv-Prop ∘ pr1))
       ( emb-equiv equiv-Σ-is-equiv-equiv-over)
 
-  map-map-over-equiv-over : equiv-over f g i → map-over f g i
-  map-map-over-equiv-over = map-emb emb-map-over-equiv-over
+  map-over-equiv-over : equiv-over f g i → map-over f g i
+  map-over-equiv-over = map-emb emb-map-over-equiv-over
 
-  is-emb-map-map-over-equiv-over : is-emb map-map-over-equiv-over
-  is-emb-map-map-over-equiv-over = is-emb-map-emb emb-map-over-equiv-over
+  is-emb-map-over-equiv-over : is-emb map-over-equiv-over
+  is-emb-map-over-equiv-over = is-emb-map-emb emb-map-over-equiv-over
 
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
@@ -220,11 +220,11 @@ module _
       ( emb-subtype is-fibered-equiv-fibered-map-Prop)
       ( emb-equiv equiv-Σ-is-fibered-equiv-fibered-map-fibered-equiv)
 
-  map-fibered-map-fibered-equiv : fibered-equiv f g → fibered-map f g
-  map-fibered-map-fibered-equiv = map-emb emb-fibered-map-fibered-equiv
+  fibered-map-fibered-equiv : fibered-equiv f g → fibered-map f g
+  fibered-map-fibered-equiv = map-emb emb-fibered-map-fibered-equiv
 
-  is-emb-map-fibered-map-fibered-equiv : is-emb map-fibered-map-fibered-equiv
-  is-emb-map-fibered-map-fibered-equiv =
+  is-emb-fibered-map-fibered-equiv : is-emb fibered-map-fibered-equiv
+  is-emb-fibered-map-fibered-equiv =
     is-emb-map-emb emb-fibered-map-fibered-equiv
 ```
 
@@ -240,28 +240,28 @@ module _
     (e e' : equiv-over f g i) →
     ( e ＝ e') ≃
     ( htpy-map-over f g i
-      ( map-map-over-equiv-over f g i e)
-      ( map-map-over-equiv-over f g i e'))
+      ( map-over-equiv-over f g i e)
+      ( map-over-equiv-over f g i e'))
   extensionality-equiv-over e e' =
     ( extensionality-map-over f g i
-      ( map-map-over-equiv-over f g i e)
-      ( map-map-over-equiv-over f g i e')) ∘e
-    ( ap (map-map-over-equiv-over f g i) ,
-      is-emb-map-map-over-equiv-over f g i e e')
+      ( map-over-equiv-over f g i e)
+      ( map-over-equiv-over f g i e')) ∘e
+    ( ap (map-over-equiv-over f g i) ,
+      is-emb-map-over-equiv-over f g i e e')
 
   htpy-eq-equiv-over :
     (e e' : equiv-over f g i) →
     ( e ＝ e') →
     ( htpy-map-over f g i
-      ( map-map-over-equiv-over f g i e)
-      ( map-map-over-equiv-over f g i e'))
+      ( map-over-equiv-over f g i e)
+      ( map-over-equiv-over f g i e'))
   htpy-eq-equiv-over e e' = map-equiv (extensionality-equiv-over e e')
 
   eq-htpy-equiv-over :
     (e e' : equiv-over f g i) →
     ( htpy-map-over f g i
-      ( map-map-over-equiv-over f g i e)
-      ( map-map-over-equiv-over f g i e')) →
+      ( map-over-equiv-over f g i e)
+      ( map-over-equiv-over f g i e')) →
     ( e ＝ e')
   eq-htpy-equiv-over e e' = map-inv-equiv (extensionality-equiv-over e e')
 ```
@@ -278,28 +278,28 @@ module _
     (e e' : fibered-equiv f g) →
     ( e ＝ e') ≃
     ( htpy-fibered-map f g
-      ( map-fibered-map-fibered-equiv f g e)
-      ( map-fibered-map-fibered-equiv f g e'))
+      ( fibered-map-fibered-equiv f g e)
+      ( fibered-map-fibered-equiv f g e'))
   extensionality-fibered-equiv e e' =
     ( extensionality-fibered-map f g
-      ( map-fibered-map-fibered-equiv f g e)
-      ( map-fibered-map-fibered-equiv f g e')) ∘e
-    ( ap (map-fibered-map-fibered-equiv f g) ,
-      is-emb-map-fibered-map-fibered-equiv f g e e')
+      ( fibered-map-fibered-equiv f g e)
+      ( fibered-map-fibered-equiv f g e')) ∘e
+    ( ap (fibered-map-fibered-equiv f g) ,
+      is-emb-fibered-map-fibered-equiv f g e e')
 
   htpy-eq-fibered-equiv :
     (e e' : fibered-equiv f g) →
     ( e ＝ e') →
     ( htpy-fibered-map f g
-      ( map-fibered-map-fibered-equiv f g e)
-      ( map-fibered-map-fibered-equiv f g e'))
+      ( fibered-map-fibered-equiv f g e)
+      ( fibered-map-fibered-equiv f g e'))
   htpy-eq-fibered-equiv e e' = map-equiv (extensionality-fibered-equiv e e')
 
   eq-htpy-fibered-equiv :
     (e e' : fibered-equiv f g) →
     ( htpy-fibered-map f g
-      ( map-fibered-map-fibered-equiv f g e)
-      ( map-fibered-map-fibered-equiv f g e')) →
+      ( fibered-map-fibered-equiv f g e)
+      ( fibered-map-fibered-equiv f g e')) →
     ( e ＝ e')
   eq-htpy-fibered-equiv e e' = map-inv-equiv (extensionality-fibered-equiv e e')
 ```
@@ -363,7 +363,7 @@ is-pullback-fibered-equiv :
   is-pullback
     ( pr1 (pr1 e))
     ( g)
-    ( cone-fibered-map f g (map-fibered-map-fibered-equiv f g e))
+    ( cone-fibered-map f g (fibered-map-fibered-equiv f g e))
 is-pullback-fibered-equiv f g ((i , is-equiv-i) , (h , is-equiv-h) , H) =
   is-pullback-is-fibered-equiv f g (i , h , H) (is-equiv-i , is-equiv-h)
 ```

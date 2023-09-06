@@ -286,7 +286,7 @@ module _
               ( ev-zero-equiv-Fin-two-ℕ)
               ( is-equiv-ev-zero-aut-Fin-two-ℕ)
               ( is-equiv-map-equiv α))
-            ( is-equiv-left-comp-equiv α (Fin 2)))
+            ( is-equiv-postcomp-equiv-equiv α (Fin 2)))
 
   equiv-ev-zero-equiv-Fin-two-ℕ :
     (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X

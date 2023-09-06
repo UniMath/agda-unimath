@@ -360,7 +360,7 @@ coh-unit-laws-equiv :
   {l : Level} {X : UU l} →
   left-unit-law-equiv (id-equiv {A = X}) ＝
   right-unit-law-equiv (id-equiv {A = X})
-coh-unit-laws-equiv {l} {X} = ap eq-equiv-eq-map-equiv refl
+coh-unit-laws-equiv = ap eq-equiv-eq-map-equiv refl
 ```
 
 #### Taking the inverse equivalence distributes over composition
@@ -387,68 +387,68 @@ module _
 #### Iterated inverse laws for equivalence composition
 
 ```agda
-left-left-inverse-law-equiv :
+is-retraction-postcomp-equiv-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) → (inv-equiv f ∘e (f ∘e e)) ＝ e
-left-left-inverse-law-equiv f e =
+is-retraction-postcomp-equiv-inv-equiv f e =
   eq-htpy-equiv (λ x → is-retraction-map-inv-equiv f (map-equiv e x))
 
-left-right-inverse-law-equiv :
+is-section-postcomp-equiv-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ C) →
   (f ∘e (inv-equiv f ∘e e)) ＝ e
-left-right-inverse-law-equiv f e =
+is-section-postcomp-equiv-inv-equiv f e =
   eq-htpy-equiv (λ x → is-section-map-inv-equiv f (map-equiv e x))
 
-right-right-inverse-law-equiv :
+is-section-precomp-equiv-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : A ≃ B) →
   ((f ∘e e) ∘e inv-equiv e) ＝ f
-right-right-inverse-law-equiv f e =
+is-section-precomp-equiv-inv-equiv f e =
   eq-htpy-equiv (λ x → ap (map-equiv f) (is-section-map-inv-equiv e x))
 
-right-left-inverse-law-equiv :
+is-retraction-precomp-equiv-inv-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (e : B ≃ A) →
   ((f ∘e inv-equiv e) ∘e e) ＝ f
-right-left-inverse-law-equiv f e =
+is-retraction-precomp-equiv-inv-equiv f e =
   eq-htpy-equiv (λ x → ap (map-equiv f) (is-retraction-map-inv-equiv e x))
 ```
 
-### Left and right composition by an equivalence defines equivalences
+### The post- and precomposition operations by an equivalence are equivalences
 
 ```agda
-is-equiv-left-comp-equiv :
+is-equiv-postcomp-equiv-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3}
   (f : B ≃ C) (A : UU l1) → is-equiv (λ (e : A ≃ B) → f ∘e e)
-is-equiv-left-comp-equiv f A =
+is-equiv-postcomp-equiv-equiv f A =
   is-equiv-is-invertible
     ( inv-equiv f ∘e_)
-    ( left-right-inverse-law-equiv f)
-    ( left-left-inverse-law-equiv f)
+    ( is-section-postcomp-equiv-inv-equiv f)
+    ( is-retraction-postcomp-equiv-inv-equiv f)
 
-is-equiv-right-comp-equiv :
+is-equiv-precomp-equiv-equiv :
   {l1 l2 l3 : Level} {A : UU l2} {B : UU l3}
   (C : UU l1) (e : A ≃ B) → is-equiv (λ (f : B ≃ C) → f ∘e e)
-is-equiv-right-comp-equiv A e =
+is-equiv-precomp-equiv-equiv A e =
   is-equiv-is-invertible
     ( _∘e inv-equiv e)
-    ( λ f → right-left-inverse-law-equiv f e)
-    ( λ f → right-right-inverse-law-equiv f e)
+    ( λ f → is-retraction-precomp-equiv-inv-equiv f e)
+    ( λ f → is-section-precomp-equiv-inv-equiv f e)
 
 equiv-postcomp-equiv :
   {l1 l2 l3 : Level} {B : UU l2} {C : UU l3} →
   (f : B ≃ C) → (A : UU l1) → (A ≃ B) ≃ (A ≃ C)
-pr1 (equiv-postcomp-equiv f A) e = f ∘e e
-pr2 (equiv-postcomp-equiv f A) = is-equiv-left-comp-equiv f A
+pr1 (equiv-postcomp-equiv f A) = f ∘e_
+pr2 (equiv-postcomp-equiv f A) = is-equiv-postcomp-equiv-equiv f A
 ```
 
 ```agda
 equiv-precomp-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
   (A ≃ B) → (C : UU l3) → (B ≃ C) ≃ (A ≃ C)
-pr1 (equiv-precomp-equiv e C) f = f ∘e e
-pr2 (equiv-precomp-equiv e C) = is-equiv-right-comp-equiv C e
+pr1 (equiv-precomp-equiv e C) = _∘e e
+pr2 (equiv-precomp-equiv e C) = is-equiv-precomp-equiv-equiv C e
 ```
 
 ### A cospan in which one of the legs is an equivalence is a pullback if and only if the corresponding map on the cone is an equivalence
