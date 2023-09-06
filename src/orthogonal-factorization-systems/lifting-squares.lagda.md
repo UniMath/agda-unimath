@@ -197,8 +197,13 @@ module _
                 ( assoc-right-refl
                   ( H x)
                   ( ap g (is-extension-lifting-square l x)))) ∙
-              ( ( is-section-left-concat-inv right-unit (ap (H x ∙_) (inv right-unit))) ∙
-                ( inv (is-section-right-concat-inv (ap (H x ∙_) (inv right-unit)) (α)))))) ∙
+              ( ( is-section-left-concat-inv
+                  ( right-unit)
+                  ( ap (H x ∙_) (inv right-unit))) ∙
+                ( inv
+                  ( is-section-right-concat-inv
+                    ( ap (H x ∙_) (inv right-unit))
+                    ( α)))))) ∙
           ( ( inv
               ( assoc
                 ( coherence-lifting-square l x)
