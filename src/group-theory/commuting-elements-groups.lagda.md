@@ -148,26 +148,3 @@ module _
       ＝ y * (z * x) by ap (y *_) K
       ＝ (y * z) * x by inv (associative-mul-Group G _ _ _)
 ```
-
-### An interchange law for commuting elements in a group
-
-```agda
-module _
-  {l : Level} (G : Group l)
-  where
-
-  private
-
-    infix 50 _*_
-    _*_ = mul-Group G
-
-  interchange-mul-mul-Group :
-    {x y z w : type-Group G} →
-    commute-Group G y z → (x * y) * (z * w) ＝ (x * z) * (y * w)
-  interchange-mul-mul-Group {x} {y} {z} {w} H =
-    equational-reasoning
-      (x * y) * (z * w)
-      ＝ x * (y * (z * w)) by associative-mul-Group G _ _ _
-      ＝ x * (z * (y * w)) by ap (x *_) (left-swap-commute-Group G _ _ _ H)
-      ＝ (x * z) * (y * w) by inv (associative-mul-Group G _ _ _)
-```

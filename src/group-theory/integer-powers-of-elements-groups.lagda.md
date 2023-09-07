@@ -194,10 +194,10 @@ module _
 
   distributive-integer-power-add-Group :
     (x y : ℤ) →
-    ( integer-power-Group G (x +ℤ y) g) ＝
-    ( mul-Group G
+    integer-power-Group G (x +ℤ y) g ＝
+    mul-Group G
       ( integer-power-Group G x g)
-      ( integer-power-Group G y g))
+      ( integer-power-Group G y g)
   distributive-integer-power-add-Group x y =
     ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
     ( ( ap
@@ -231,7 +231,7 @@ module _
     ( ap (inv-Group G) (inv (integer-power-in-pos-Group G k x)))
 ```
 
-### `xᵏ⁺¹ = xᵏx`
+### `xᵏ⁺¹ = xᵏx` and `xᵏ⁺¹ = xxᵏ`
 
 ```agda
 module _
@@ -246,14 +246,6 @@ module _
     ( ap (λ t → integer-power-Group G t x) (is-right-add-one-succ-ℤ k)) ∙
     ( ( distributive-integer-power-add-Group G x k one-ℤ) ∙
       ( ap (mul-Group G _) (integer-power-one-Group G x)))
-```
-
-### `xᵏ⁺¹ = xxᵏ`
-
-```agda
-module _
-  {l1 : Level} (G : Group l1)
-  where
 
   integer-power-succ-Group' :
     (k : ℤ) (x : type-Group G) →
@@ -265,19 +257,40 @@ module _
       ( ap (mul-Group' G _) (integer-power-one-Group G x)))
 ```
 
-### `xᵏ⁻¹ = xᵏx⁻¹`
+### `xᵏ⁻¹ = xᵏx⁻¹` and `xᵏ⁻¹ = x⁻¹xᵏ`
 
 ```agda
 module _
   {l1 : Level} (G : Group l1)
   where
 
+  private
+
+    infixl 50 _*_
+    _*_ = mul-Group G
+
+    pwr = integer-power-Group G
+
+    infixr 60 _^_
+    _^_ : (x : type-Group G) (k : ℤ) → type-Group G
+    _^_ x k = integer-power-Group G k x
+
+    infix 70 _⁻¹
+    _⁻¹ = inv-Group G
+
   integer-power-pred-Group :
-    (k : ℤ) (x : type-Group G) →
-    integer-power-Group G (pred-ℤ k) x ＝
-    mul-Group G (integer-power-Group G k x) (inv-Group G x)
+    (k : ℤ) (x : type-Group G) → x ^ (pred-ℤ k) ＝ x ^ k * x ⁻¹
   integer-power-pred-Group k x =
-    {!( ap (!}
+    ( ap (x ^_) (is-right-add-neg-one-pred-ℤ k)) ∙
+    ( ( distributive-integer-power-add-Group G x k neg-one-ℤ) ∙
+      ( ap (x ^ k *_) (integer-power-neg-one-Group G x)))
+
+  integer-power-pred-Group' :
+    (k : ℤ) (x : type-Group G) → x ^ (pred-ℤ k) ＝ x ⁻¹ * x ^ k
+  integer-power-pred-Group' k x =
+    ( ap (x ^_) (is-left-add-neg-one-pred-ℤ k)) ∙
+    ( ( distributive-integer-power-add-Group G x neg-one-ℤ k) ∙
+      ( ap (_* x ^ k) (integer-power-neg-one-Group G x)))
 ```
 
 ### `1ᵏ ＝ 1`
@@ -385,6 +398,84 @@ module _
 
 ### If `x` commutes with `y`, then integer powers distribute over the product of `x` and `y`
 
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  private
+
+    infixl 50 _*_
+    _*_ = mul-Group G
+
+    pwr = integer-power-Group G
+
+    infixr 60 _^_
+    _^_ : (x : type-Group G) (k : ℤ) → type-Group G
+    _^_ x k = integer-power-Group G k x
+
+    infix 70 _⁻¹
+    _⁻¹ = inv-Group G
+
+  distributive-integer-power-mul-Group :
+    (k : ℤ) (x y : type-Group G) →
+    commute-Group G x y → (x * y) ^ k ＝ x ^ k * y ^ k
+  distributive-integer-power-mul-Group (inl zero-ℕ) x y H =
+    equational-reasoning
+      (x * y) ^ neg-one-ℤ
+      ＝ (x * y) ⁻¹
+        by integer-power-neg-one-Group G (x * y)
+      ＝ x ⁻¹ * y ⁻¹
+        by distributive-inv-mul-Group' G x y H
+      ＝ x ^ neg-one-ℤ * y ^ neg-one-ℤ
+        by
+        inv
+          ( ap-mul-Group G
+            ( integer-power-neg-one-Group G x)
+            ( integer-power-neg-one-Group G y))
+  distributive-integer-power-mul-Group (inl (succ-ℕ k)) x y H =
+    equational-reasoning
+      (x * y) ^ (pred-ℤ (inl k))
+      ＝ (x * y) ^ (inl k) * (x * y) ⁻¹
+        by integer-power-pred-Group G (inl k) (x * y)
+      ＝ (x ^ (inl k) * y ^ (inl k)) * (x ⁻¹ * y ⁻¹)
+        by
+        ap-mul-Group G
+          ( distributive-integer-power-mul-Group (inl k) x y H)
+          ( distributive-inv-mul-Group' G x y H)
+      ＝ (x ^ (inl k) * x ⁻¹) * (y ^ (inl k) * y ⁻¹)
+        by
+        interchange-mul-mul-Group G
+          ( double-transpose-eq-mul-Group' G
+            ( commute-integer-powers-Group' G (inl k) H))
+      ＝ (x ^ (pred-ℤ (inl k))) * (y ^ (pred-ℤ (inl k)))
+        by
+        ap-mul-Group G
+          ( inv (integer-power-pred-Group G (inl k) x))
+          ( inv (integer-power-pred-Group G (inl k) y))
+  distributive-integer-power-mul-Group (inr (inl star)) x y H =
+    inv (left-unit-law-mul-Group G (unit-Group G))
+  distributive-integer-power-mul-Group (inr (inr zero-ℕ)) x y H =
+    ( integer-power-one-Group G (x * y)) ∙
+    ( inv (ap-mul-Group G (integer-power-one-Group G x) (integer-power-one-Group G y)))
+  distributive-integer-power-mul-Group (inr (inr (succ-ℕ k))) x y H =
+    equational-reasoning
+      (x * y) ^ (succ-ℤ (in-pos k))
+      ＝ (x * y) ^ (in-pos k) * (x * y)
+        by integer-power-succ-Group G (in-pos k) (x * y)
+      ＝ (x ^ (in-pos k) * y ^ (in-pos k)) * (x * y)
+        by ap (_* (x * y)) (distributive-integer-power-mul-Group (inr (inr k)) x y H)
+      ＝ (x ^ (in-pos k) * x) * (y ^ (in-pos k) * y)
+        by
+        interchange-mul-mul-Group G
+          ( inv (commute-integer-powers-Group' G (in-pos k) H))
+      ＝ x ^ (succ-ℤ (in-pos k)) * y ^ (succ-ℤ (in-pos k))
+        by
+        ap-mul-Group G
+          ( inv (integer-power-succ-Group G (in-pos k) x))
+          ( inv (integer-power-succ-Group G (in-pos k) y))
+```
+
 ### Powers by products of integers are iterated integer powers
 
 ```agda
@@ -428,7 +519,25 @@ module _
         inv (distributive-integer-power-add-Group G (x ^ k) neg-one-ℤ (inl l))
       ＝ (x ^ k) ^ (inl (succ-ℕ l))
         by ap ((x ^ k) ^_) (is-left-add-neg-one-pred-ℤ (inl l))
-  integer-power-mul-Group k (inr l) x = {!!}
+  integer-power-mul-Group k (inr (inl star)) x =
+    ap (x ^_) (right-zero-law-mul-ℤ k)
+  integer-power-mul-Group k (inr (inr zero-ℕ)) x =
+    ( ap (x ^_) (right-unit-law-mul-ℤ k)) ∙
+    ( inv (integer-power-one-Group G _))
+  integer-power-mul-Group k (inr (inr (succ-ℕ l))) x =
+    equational-reasoning
+      (x ^ (k * succ-ℤ (in-pos l)))
+      ＝ x ^ (k +ℤ k * (in-pos l))
+        by ap (x ^_) (right-successor-law-mul-ℤ k (in-pos l))
+      ＝ mul-Group G (x ^ k) (x ^ (k * in-pos l))
+        by
+        distributive-integer-power-add-Group G x k (k * in-pos l)
+      ＝ mul-Group G (x ^ k) ((x ^ k) ^ (in-pos l))
+        by
+        ap (mul-Group G _) (integer-power-mul-Group k (inr (inr l)) x)
+      ＝ (x ^ k) ^ (succ-ℤ (in-pos l))
+        by
+        inv (integer-power-succ-Group' G (in-pos l) (x ^ k))
 ```
 
 ### Group homomorphisms preserve integer powers

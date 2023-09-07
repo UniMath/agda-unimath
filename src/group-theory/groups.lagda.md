@@ -170,6 +170,27 @@ module _
   inv-unit-Group =
     ( inv (left-unit-law-mul-Group (inv-Group unit-Group))) ∙
       ( right-inverse-law-mul-Group unit-Group)
+
+  left-swap-mul-Group :
+    {x y z : type-Group} → mul-Group x y ＝ mul-Group y x →
+    mul-Group x (mul-Group y z) ＝
+    mul-Group y (mul-Group x z)
+  left-swap-mul-Group =
+    left-swap-mul-Semigroup semigroup-Group
+
+  right-swap-mul-Group :
+    {x y z : type-Group} → mul-Group y z ＝ mul-Group z y →
+    mul-Group (mul-Group x y) z ＝
+    mul-Group (mul-Group x z) y
+  right-swap-mul-Group =
+    right-swap-mul-Semigroup semigroup-Group
+
+  interchange-mul-mul-Group :
+    {x y z w : type-Group} → mul-Group y z ＝ mul-Group z y →
+    mul-Group (mul-Group x y) (mul-Group z w) ＝
+    mul-Group (mul-Group x z) (mul-Group y w)
+  interchange-mul-mul-Group =
+    interchange-mul-mul-Semigroup semigroup-Group
 ```
 
 ## Properties
@@ -335,15 +356,21 @@ module _
 ```agda
   distributive-inv-mul-Group :
     (x y : type-Group G) →
-    Id
-      ( inv-Group G (mul-Group G x y))
-      ( mul-Group G (inv-Group G y) (inv-Group G x))
+    inv-Group G (mul-Group G x y) ＝
+    mul-Group G (inv-Group G y) (inv-Group G x)
   distributive-inv-mul-Group x y =
     transpose-eq-mul-Group
       ( ( transpose-eq-mul-Group
           ( ( associative-mul-Group G (inv-Group G (mul-Group G x y)) x y) ∙
             ( left-inverse-law-mul-Group G (mul-Group G x y)))) ∙
         ( left-unit-law-mul-Group G (inv-Group G y)))
+
+  distributive-inv-mul-Group' :
+    (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x →
+    inv-Group G (mul-Group G x y) ＝ mul-Group G (inv-Group G x) (inv-Group G y)
+  distributive-inv-mul-Group' x y H =
+    ( distributive-inv-mul-Group x y) ∙
+    ( inv (double-transpose-eq-mul-Group (double-transpose-eq-mul-Group H)))
 ```
 
 ### Inverting elements of a group is an involution
