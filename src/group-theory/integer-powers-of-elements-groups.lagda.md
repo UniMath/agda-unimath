@@ -457,14 +457,20 @@ module _
     inv (left-unit-law-mul-Group G (unit-Group G))
   distributive-integer-power-mul-Group (inr (inr zero-ℕ)) x y H =
     ( integer-power-one-Group G (x * y)) ∙
-    ( inv (ap-mul-Group G (integer-power-one-Group G x) (integer-power-one-Group G y)))
+    ( inv
+      ( ap-mul-Group G
+        ( integer-power-one-Group G x)
+        ( integer-power-one-Group G y)))
   distributive-integer-power-mul-Group (inr (inr (succ-ℕ k))) x y H =
     equational-reasoning
       (x * y) ^ (succ-ℤ (in-pos k))
       ＝ (x * y) ^ (in-pos k) * (x * y)
         by integer-power-succ-Group G (in-pos k) (x * y)
       ＝ (x ^ (in-pos k) * y ^ (in-pos k)) * (x * y)
-        by ap (_* (x * y)) (distributive-integer-power-mul-Group (inr (inr k)) x y H)
+        by
+        ap
+          ( _* (x * y))
+          ( distributive-integer-power-mul-Group (inr (inr k)) x y H)
       ＝ (x ^ (in-pos k) * x) * (y ^ (in-pos k) * y)
         by
         interchange-mul-mul-Group G
@@ -493,7 +499,6 @@ module _
     infixr 60 _^_
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
-
 
   integer-power-mul-Group :
     (k l : ℤ) (x : type-Group G) → x ^ (k * l) ＝ (x ^ k) ^ l
