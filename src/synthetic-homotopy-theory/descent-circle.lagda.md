@@ -688,7 +688,7 @@ module _
     unique-family-property-circle l2 l
   unique-family-property-universal-property-circle Q =
     is-contr-is-equiv'
-      ( fib (ev-descent-data-circle l) Q)
+      ( fiber (ev-descent-data-circle l) Q)
       ( tot
         ( λ P →
           Eq-eq-descent-data-circle Q (ev-descent-data-circle l P) ∘

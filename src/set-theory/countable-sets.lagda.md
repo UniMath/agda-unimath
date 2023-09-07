@@ -157,7 +157,7 @@ module _
             ( λ {
               (inl x) →
                 apply-universal-property-trunc-Prop (pr2 P x)
-                  ( trunc-Prop (fib _ (inl x)))
+                  ( trunc-Prop (fiber _ (inl x)))
                   ( λ { (pair n p) →
                     unit-trunc-Prop
                       ( pair (succ-ℕ (succ-ℕ n)) (ap inl p))}) ;
@@ -187,7 +187,7 @@ module _
         ( λ {(n , p) → value-is-not-exception-Maybe (f n) p})
         ( λ x →
           ( apply-universal-property-trunc-Prop (H (inl x))
-            ( trunc-Prop (fib _ x))
+            ( trunc-Prop (fiber _ x))
             ( λ (n , p) →
                 ( unit-trunc-Prop
                   ( pair
@@ -253,7 +253,7 @@ module _
     ( is-surjective map-enumeration-decidable-subprojection-ℕ)
   is-surjective-map-enumeration-decidable-subprojection-ℕ H (inl x) =
     ( apply-universal-property-trunc-Prop (H x)
-      (trunc-Prop (fib map-enumeration-decidable-subprojection-ℕ (inl x)))
+      (trunc-Prop (fiber map-enumeration-decidable-subprojection-ℕ (inl x)))
       ( λ { ((n , s) , refl) →
         ( unit-trunc-Prop
           ( succ-ℕ n ,

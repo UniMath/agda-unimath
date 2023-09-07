@@ -181,7 +181,7 @@ module _
 
   subset-ideal-subset-Ring' : type-Ring R → UU (l1 ⊔ l2)
   subset-ideal-subset-Ring' x =
-    fib ev-formal-combination-subset-Ring x
+    fiber ev-formal-combination-subset-Ring x
 
   subset-ideal-subset-Ring : subset-Ring (l1 ⊔ l2) R
   subset-ideal-subset-Ring x =
@@ -498,7 +498,7 @@ module _
 
   generating-subset-ideal-family-of-elements-Ring : subset-Ring l1 R
   generating-subset-ideal-family-of-elements-Ring x =
-    trunc-Prop (fib a x)
+    trunc-Prop (fiber a x)
 
   ideal-family-of-elements-Ring : ideal-Ring l1 R
   ideal-family-of-elements-Ring =

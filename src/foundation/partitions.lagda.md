@@ -165,7 +165,7 @@ reduce the universe level of this type. Therefore we call this type of blocks
   is-surjective-large-block-element-partition B =
     apply-universal-property-trunc-Prop
       ( is-inhabited-subtype-block-partition-Large-Type B)
-      ( trunc-Prop (fib large-block-element-partition B))
+      ( trunc-Prop (fiber large-block-element-partition B))
       ( λ (a , u) →
         unit-trunc-Prop
           ( pair a

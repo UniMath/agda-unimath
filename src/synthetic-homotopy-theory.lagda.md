@@ -28,6 +28,7 @@ open import synthetic-homotopy-theory.descent-circle-equivalence-types public
 open import synthetic-homotopy-theory.descent-circle-function-types public
 open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.double-loop-spaces public
+open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
