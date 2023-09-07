@@ -190,8 +190,10 @@ module _
 
   map-pullback-hom :
     hom-cospan
-      ( precomp f' Y') (postcomp A' g')
-      ( precomp f Y) (postcomp A g) →
+      ( precomp f' Y')
+      ( postcomp A' g')
+      ( precomp f Y)
+      ( postcomp A g) →
     fibered-map f' g' → fibered-map f g
   map-pullback-hom =
     map-is-pullback
