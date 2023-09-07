@@ -197,8 +197,10 @@ module _
     fibered-map f' g' → fibered-map f g
   map-pullback-hom =
     map-is-pullback
-      ( precomp f Y) (postcomp A g)
-      ( precomp f' Y') (postcomp A' g')
+      ( precomp f Y)
+      ( postcomp A g)
+      ( precomp f' Y')
+      ( postcomp A' g')
       ( cone-pullback-hom f g)
       ( cone-pullback-hom f' g')
       ( is-pullback-fibered-map f g)
