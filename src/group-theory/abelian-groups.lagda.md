@@ -32,6 +32,8 @@ open import group-theory.semigroups
 
 open import lists.concatenation-lists
 open import lists.lists
+
+open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 
 </details>
@@ -182,6 +184,14 @@ module _
 
   neg-zero-Ab : neg-Ab zero-Ab ＝ zero-Ab
   neg-zero-Ab = inv-unit-Group group-Ab
+
+  transpose-eq-neg-Ab :
+    {x y : type-Ab} → neg-Ab x ＝ y → x ＝ neg-Ab y
+  transpose-eq-neg-Ab = transpose-eq-inv-Group group-Ab
+
+  transpose-eq-neg-Ab' :
+    {x y : type-Ab} → x ＝ neg-Ab y → neg-Ab x ＝ y
+  transpose-eq-neg-Ab' = transpose-eq-inv-Group' group-Ab
 ```
 
 ### Conjugation in an abelian group
@@ -346,6 +356,20 @@ module _
     {x y z : type-Ab A} →
     Id y (add-Ab A (neg-Ab A x) z) → Id (add-Ab A x y) z
   inv-transpose-eq-add-Ab' = inv-transpose-eq-mul-Group' (group-Ab A)
+
+  double-transpose-eq-add-Ab :
+    {x y z w : type-Ab A} →
+    add-Ab A y w ＝ add-Ab A x z →
+    left-subtraction-Ab A x y ＝ right-subtraction-Ab A z w
+  double-transpose-eq-add-Ab =
+    double-transpose-eq-mul-Group (group-Ab A)
+
+  double-transpose-eq-add-Ab' :
+    {x y z w : type-Ab A} →
+    add-Ab A z x ＝ add-Ab A w y →
+    right-subtraction-Ab A x y ＝ left-subtraction-Ab A z w
+  double-transpose-eq-add-Ab' =
+    double-transpose-eq-mul-Group' (group-Ab A)
 ```
 
 ### Any idempotent element in an abelian group is zero
@@ -611,6 +635,17 @@ module _
   every-element-central-is-abelian-Group :
     is-abelian-Group G → ((x : type-Group G) → is-central-element-Group G x)
   every-element-central-is-abelian-Group = id
+```
+
+### Any group element yields a type equipped with an automorphism
+
+```agda
+module _
+  {l : Level} (A : Ab l) (a : type-Ab A)
+  where
+
+  pointed-type-with-aut-Ab : Pointed-Type-With-Aut l
+  pointed-type-with-aut-Ab = pointed-type-with-aut-Group (group-Ab A) a
 ```
 
 ### Equip a type with a structure of abelian groups

@@ -33,9 +33,8 @@ open import structured-types.initial-pointed-type-equipped-with-automorphism
 
 The **integer power operation** on a [group](group-theory.groups.md) is the map
 `k x ↦ xᵏ`, which is defined by
-[iteratively](foundation.iterating-automorphisms.md) the automorphism
-multiplying `x` with itself an [integer](elementary-number-theory.integers.md)
-`k` times.
+[iteratively](foundation.iterating-automorphisms.md) multiplying `x` with itself
+an [integer](elementary-number-theory.integers.md) `k` times.
 
 ## Definitions
 

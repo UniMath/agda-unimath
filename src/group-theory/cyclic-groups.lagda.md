@@ -1,6 +1,8 @@
 # Cyclic groups
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module group-theory.cyclic-groups where
 ```
 
