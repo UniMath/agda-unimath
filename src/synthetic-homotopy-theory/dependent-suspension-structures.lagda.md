@@ -184,28 +184,28 @@ module _
           Σ (B (south-suspension-structure ss))
             ( λ S-d-susp-str →
               (x : X) →
-                ( dependent-identification
-                  ( B)
-                  ( meridian-suspension-structure ss x)
-                  ( N-d-susp-str)
-                  ( S-d-susp-str))))
+              ( dependent-identification
+                ( B)
+                ( meridian-suspension-structure ss x)
+                ( N-d-susp-str)
+                ( S-d-susp-str))))
         ( equiv-dependent-universal-property-unit
           ( λ x → (B (north-suspension-structure ss))))
         ( λ N-susp-c →
           ( equiv-Σ
-            (λ S-d-susp-str →
+            ( λ S-d-susp-str →
               (x : X) →
-                ( dependent-identification
-                  ( B)
-                  ( meridian-suspension-structure ss x)
-                  ( map-equiv
-                    ( equiv-dependent-universal-property-unit
-                      ( λ x₁ → B (pr1 ss)))
-                    ( N-susp-c))
-                  ( S-d-susp-str)))
-            (equiv-dependent-universal-property-unit
+              ( dependent-identification
+                ( B)
+                ( meridian-suspension-structure ss x)
+                ( map-equiv
+                  ( equiv-dependent-universal-property-unit
+                    ( λ x₁ → B (pr1 ss)))
+                  ( N-susp-c))
+                ( S-d-susp-str)))
+            ( equiv-dependent-universal-property-unit
               ( const unit (UU l3) (B (south-suspension-structure ss))))
-            λ S-susp-c → id-equiv)))
+            ( λ S-susp-c → id-equiv))))
 
   htpy-map-inv-compute-dependent-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure :
     map-equiv compute-dependent-suspension-cocone ~
@@ -254,31 +254,27 @@ module _
 
   north-htpy-dependent-suspension-structure :
     htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 →
-        ( north-dependent-suspension-structure d-susp-str0
-    ＝
-      north-dependent-suspension-structure d-susp-str1)
+    north-dependent-suspension-structure d-susp-str0 ＝
+    north-dependent-suspension-structure d-susp-str1
   north-htpy-dependent-suspension-structure = pr1
 
   south-htpy-dependent-suspension-structure :
     htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 →
-      ( south-dependent-suspension-structure d-susp-str0
-        ＝
-      south-dependent-suspension-structure d-susp-str1)
+    south-dependent-suspension-structure d-susp-str0 ＝
+    south-dependent-suspension-structure d-susp-str1
   south-htpy-dependent-suspension-structure = (pr1 ∘ pr2)
 
   meridian-htpy-dependent-suspension-structure :
-    (d-susp-str : htpy-dependent-suspension-structure
-      ( B)
-      ( d-susp-str0)
-      ( d-susp-str1)) →
-      (x : X) →
-        ( coherence-square-identifications
-          ( meridian-dependent-suspension-structure d-susp-str0 x)
-          ( south-htpy-dependent-suspension-structure d-susp-str)
-          ( ap
-            (tr B (meridian-suspension-structure susp-str x))
-            (north-htpy-dependent-suspension-structure d-susp-str))
-          ( meridian-dependent-suspension-structure d-susp-str1 x))
+    ( d-susp-str : 
+      htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1) →
+    ( x : X) →
+    coherence-square-identifications
+      ( meridian-dependent-suspension-structure d-susp-str0 x)
+      ( south-htpy-dependent-suspension-structure d-susp-str)
+      ( ap
+        ( tr B (meridian-suspension-structure susp-str x))
+        ( north-htpy-dependent-suspension-structure d-susp-str))
+      ( meridian-dependent-suspension-structure d-susp-str1 x)
   meridian-htpy-dependent-suspension-structure = pr2 ∘ pr2
 
 module _
