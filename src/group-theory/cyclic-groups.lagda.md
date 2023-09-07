@@ -111,7 +111,11 @@ module _
       ( is-cyclic-Cyclic-Group)
       ( Id-Prop set-Cyclic-Group (add-Cyclic-Group x y) (add-Cyclic-Group y x))
       ( λ (g , u) →
-        {!commutative-mul-!})
+        commutative-mul-is-generating-element-Group group-Cyclic-Group g u x y)
+
+  ab-Cyclic-Group : Ab l
+  pr1 ab-Cyclic-Group = group-Cyclic-Group
+  pr2 ab-Cyclic-Group = commutative-add-Cyclic-Group
 ```
 
 #### The definition where `G` has a generating element
@@ -148,10 +152,6 @@ module _
         intro-∃ g
           ( is-emb-ev-element-is-generating-element-Group G g u))
 ```
-
-## Properties
-
-###
 
 ### Evaluation at an element of a cyclic group is a surjective group homomorphism from `ab-endomorphisms-ring-Ab A` to `A`
 

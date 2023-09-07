@@ -25,14 +25,15 @@ open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import group-theory.commuting-elements-groups
 open import group-theory.conjugation
 open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.images-of-group-homomorphisms
+open import group-theory.integer-powers-of-elements-groups
 open import group-theory.normal-subgroups
-open import group-theory.powers-of-elements-groups
 open import group-theory.quotient-groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-elements-groups
@@ -208,18 +209,18 @@ module _
   abstract
     commutative-mul-is-surjective-hom-element-Group :
       (U : is-surjective-hom-element-Group G g) →
-      (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x
+      (x y : type-Group G) → commute-Group G x y
     commutative-mul-is-surjective-hom-element-Group U x y =
       apply-twice-universal-property-trunc-Prop
         ( U x)
         ( U y)
         ( Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x))
         ( λ { (k , refl) (l , refl) →
-              {!commute-integer-powers-Group k l G g!}})
+              commute-integer-powers-Group G k l refl})
 
   commutative-mul-is-generating-element-Group :
     (U : is-generating-element-Group G g) →
-    (x y : type-Group G) → mul-Group G x y ＝ mul-Group G y x
+    (x y : type-Group G) → commute-Group G x y
   commutative-mul-is-generating-element-Group U =
     commutative-mul-is-surjective-hom-element-Group
       ( is-surjective-hom-element-is-generating-element-Group G g U)
