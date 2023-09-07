@@ -57,12 +57,12 @@ module _
   statement-compute-tr-htpy :
     {f g : (x : A) → B x} (H : f ~ g) → UU (l1 ⊔ l3)
   statement-compute-tr-htpy H =
-    tr-htpy C H ~ tr (λ u → (x : A) → C x (u x)) (eq-htpy H)
+    tr (λ u → (x : A) → C x (u x)) (eq-htpy H) ~ tr-htpy C H
 
   base-case-compute-tr-htpy :
     {f : (x : A) → B x} → statement-compute-tr-htpy (refl-htpy' f)
   base-case-compute-tr-htpy =
-    htpy-eq (ap (tr (λ u → (x : A) → C x (u x))) (inv (eq-htpy-refl-htpy _)))
+    htpy-eq (ap (tr (λ u → (x : A) → C x (u x))) (eq-htpy-refl-htpy _))
 
   abstract
     compute-tr-htpy :

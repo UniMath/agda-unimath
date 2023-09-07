@@ -62,42 +62,38 @@ precompose-lifts P f h h' a = h' (f a)
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)
+  (h : B → X)
   where
 
-  tr-lift-family-of-elements' :
-    (h : B → X) {f g : A → B} (H : f ~ g) →
+  tr-lift-family-of-elements :
+    {f g : A → B} (H : f ~ g) →
     lift-family-of-elements A P (h ∘ f) → lift-family-of-elements A P (h ∘ g)
-  tr-lift-family-of-elements' h = tr-htpy (λ _ → P ∘ h)
+  tr-lift-family-of-elements = tr-htpy (λ _ → P ∘ h)
 
-  TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS :
-    (h : B → X) {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l4)
-  TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS h H =
-    tr (lift-family-of-elements A P) (eq-htpy (h ·l H)) ~
-    tr-lift-family-of-elements' h H
+  COMPUTE-TR-LIFT-FAMILY-OF-ELEMENTS :
+    {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l4)
+  COMPUTE-TR-LIFT-FAMILY-OF-ELEMENTS =
+    statement-compute-tr-htpy (λ _ → P ∘ h)
 
-  tr-eq-htpy-lift-family-of-elements-refl-htpy :
-    (h : B → X) (f : A → B) →
-    TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS h (refl-htpy' f)
-  tr-eq-htpy-lift-family-of-elements-refl-htpy h f k =
-    ap (λ t → tr (lift-family-of-elements _ P) t k) (eq-htpy-refl-htpy (h ∘ f))
+  base-case-compute-tr-lift-family-of-elements :
+    {f : A → B} →
+    COMPUTE-TR-LIFT-FAMILY-OF-ELEMENTS (refl-htpy' f)
+  base-case-compute-tr-lift-family-of-elements =
+    base-case-compute-tr-htpy (λ _ → P ∘ h)
 
   abstract
-    tr-eq-htpy-lift-family-of-elements :
-      (h : B → X) {f g : A → B} (H : f ~ g) →
-      TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS h H
-    tr-eq-htpy-lift-family-of-elements h {f} =
-      ind-htpy f
-        ( λ g H → TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS h H)
-        ( tr-eq-htpy-lift-family-of-elements-refl-htpy h f)
+    compute-tr-lift-family-of-elements :
+      {f g : A → B} (H : f ~ g) →
+      COMPUTE-TR-LIFT-FAMILY-OF-ELEMENTS H
+    compute-tr-lift-family-of-elements {f} =
+      compute-tr-htpy (λ _ → P ∘ h)
 
-    compute-tr-eq-htpy-lift-family-of-elements :
-      (h : B → X) (f : A → B) →
-      tr-eq-htpy-lift-family-of-elements h (refl-htpy' f) ＝
-      tr-eq-htpy-lift-family-of-elements-refl-htpy h f
-    compute-tr-eq-htpy-lift-family-of-elements h f =
-      compute-ind-htpy f
-        ( λ g H → TR-EQ-HTPY-LIFT-FAMILY-OF-ELEMENTS h H)
-        ( tr-eq-htpy-lift-family-of-elements-refl-htpy h f)
+    compute-tr-left-family-of-elements-refl-htpy :
+      {f : A → B} →
+      compute-tr-lift-family-of-elements (refl-htpy' f) ＝
+      base-case-compute-tr-lift-family-of-elements
+    compute-tr-left-family-of-elements-refl-htpy =
+      compute-tr-htpy-refl-htpy (λ _ → P ∘ h)
 ```
 
 Given two homotopic maps, their precomposition functions have different
@@ -105,20 +101,25 @@ codomains. However, there is a commuting triangle. We obtain this triangle by
 homotopy induction.
 
 ```agda
-TRIANGLE-PRECOMPOSE-LIFTS :
+module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  ( P : X → UU l4) {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
-  (h : B → X) →
-    ( ( tr (lift-family-of-elements A P) (eq-htpy (h ·l H))) ∘
-      ( precompose-lifts P f h)) ~
-    ( precompose-lifts P g h)
+  ( P : X → UU l4)
+  where
+  
+  TRIANGLE-PRECOMPOSE-LIFTS :
+    {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  TRIANGLE-PRECOMPOSE-LIFTS {f} {g} H =
+    (h : B → X) →
+    coherence-triangle-maps' 
+      ( precompose-lifts P g h)
+      ( tr (λ u → (x : A) → P (u x)) (eq-htpy (h ·l H)))
+      -- ( tr (lift-family-of-elements A P) (eq-htpy (h ·l H)))
+      ( precompose-lifts P f h)
 
-triangle-precompose-lifts-refl-htpy :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (P : X → UU l4) (f : A → B) → TRIANGLE-PRECOMPOSE-LIFTS P (refl-htpy' f)
-triangle-precompose-lifts-refl-htpy {A = A} P f h h' =
-  tr-eq-htpy-lift-family-of-elements-refl-htpy P h f (λ a → h' (f a))
+  triangle-precompose-lifts-refl-htpy :
+    (f : A → B) → TRIANGLE-PRECOMPOSE-LIFTS (refl-htpy' f)
+  triangle-precompose-lifts-refl-htpy f h h' =
+    base-case-compute-tr-lift-family-of-elements P h (h' ∘ f)
 
 triangle-precompose-lifts :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -149,7 +150,7 @@ explicit definition instead.
 triangle-precompose-lifts' :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (P : X → UU l4) {f g : A → B} (H : f ~ g) → (h : B → X) →
-  ( (tr-lift-family-of-elements' P h H) ∘ (precompose-lifts P f h)) ~
+  ( (tr-lift-family-of-elements P h H) ∘ (precompose-lifts P f h)) ~
   ( precompose-lifts P g h)
 triangle-precompose-lifts' P H h k = eq-htpy (λ a → apd k (H a))
 
@@ -171,7 +172,7 @@ COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS :
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
     ( triangle-precompose-lifts P H h) ~
-    ( ( ( tr-eq-htpy-lift-family-of-elements P h H) ·r
+    ( ( ( compute-tr-lift-family-of-elements P h H) ·r
         ( precompose-lifts P f h)) ∙h
       ( triangle-precompose-lifts' P H h))
 
@@ -183,7 +184,7 @@ coherence-triangle-precompose-lifts-refl-htpy P f h =
   ( ( ( inv-htpy-right-unit-htpy) ∙h
       ( ap-concat-htpy
         ( λ h' →
-          tr-eq-htpy-lift-family-of-elements-refl-htpy P h f (λ a → h' (f a)))
+          base-case-compute-tr-lift-family-of-elements P h (λ a → h' (f a)))
         ( refl-htpy)
         ( triangle-precompose-lifts' P refl-htpy h)
         ( inv-htpy (compute-triangle-precompose-lifts' P f h)))) ∙h
@@ -192,7 +193,7 @@ coherence-triangle-precompose-lifts-refl-htpy P f h =
         ( λ t →
           ( t ·r (precompose-lifts P f h)) ∙h
           ( triangle-precompose-lifts' P refl-htpy h))
-        ( inv (compute-tr-eq-htpy-lift-family-of-elements P h f)))))
+        ( inv (compute-tr-left-family-of-elements-refl-htpy P h)))))
 
 abstract
   coherence-triangle-precompose-lifts :
@@ -257,7 +258,8 @@ htpy-precompose-total-lifts :
 htpy-precompose-total-lifts {A = A} {B} P {f} {g} H =
   htpy-map-Σ
     ( lift-family-of-elements A P)
-    ( λ h → eq-htpy (h ·l H))
+    ( λ h → {!!}) -- ( λ h → eq-htpy (h ·l H))
     ( precompose-lifts P f)
-    ( triangle-precompose-lifts P H)
+    ( triangle-precompose-lifts P H) -- ( triangle-precompose-lifts P H)
+    ∙h {!!}
 ```
