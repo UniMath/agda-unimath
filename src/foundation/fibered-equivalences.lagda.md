@@ -259,10 +259,10 @@ module _
 
   eq-htpy-equiv-over :
     (e e' : equiv-over f g i) →
-    ( htpy-map-over f g i
+    htpy-map-over f g i
       ( map-over-equiv-over f g i e)
-      ( map-over-equiv-over f g i e')) →
-    ( e ＝ e')
+      ( map-over-equiv-over f g i e') →
+    e ＝ e'
   eq-htpy-equiv-over e e' = map-inv-equiv (extensionality-equiv-over e e')
 ```
 
