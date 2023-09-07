@@ -267,7 +267,7 @@ abstract
     (x : A) → has-decidable-equality (B x)
   has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
     has-decidable-equality-equiv'
-      ( equiv-fib-pr1 B x)
+      ( equiv-fiber-pr1 B x)
       ( has-decidable-equality-Σ dΣ
         ( λ t →
           has-decidable-equality-is-prop
@@ -284,7 +284,7 @@ abstract
     has-decidable-equality A
   has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
     has-decidable-equality-equiv'
-      ( equiv-total-fib (map-section-family b))
+      ( equiv-total-fiber (map-section-family b))
       ( has-decidable-equality-Σ dΣ
         ( λ t →
           has-decidable-equality-is-prop

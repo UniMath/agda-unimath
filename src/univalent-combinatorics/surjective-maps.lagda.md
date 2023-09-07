@@ -51,7 +51,7 @@ is-decidable-is-surjective-is-finite :
   is-finite A → is-finite B → is-decidable (is-surjective f)
 is-decidable-is-surjective-is-finite f HA HB =
   is-decidable-Π-is-finite HB
-    ( λ y → is-decidable-type-trunc-Prop-is-finite (is-finite-fib f HA HB y))
+    ( λ y → is-decidable-type-trunc-Prop-is-finite (is-finite-fiber f HA HB y))
 ```
 
 ### If `X` has decidable equality and there exist a surjection `Fin-n ↠ X` then `X` has a counting
@@ -74,14 +74,14 @@ module _
                   is-proof-irrelevant-is-prop
                     ( is-prop-type-trunc-Prop)
                     ( is-surjective-map-surjection f x))))
-            (Σ _ (fib (pr1 f))))
+            (Σ _ (fiber (pr1 f))))
           ( decidable-emb-tot-trunc-Prop-count
-            { P = fib (map-surjection f)}
+            { P = fiber (map-surjection f)}
             ( count-fiber-count-Σ
               dec-X
               ( count-equiv
-                ( inv-equiv-total-fib (map-surjection f)) (count-Fin n))))))
-      ( count-equiv (inv-equiv-total-fib (map-surjection f)) (count-Fin n))
+                ( inv-equiv-total-fiber (map-surjection f)) (count-Fin n))))))
+      ( count-equiv (inv-equiv-total-fiber (map-surjection f)) (count-Fin n))
 ```
 
 ### A type `X` is finite if and only if it has decidable equality and there exists a surjection from a finite type to `X`

@@ -283,12 +283,12 @@ module _
             ( pair P p))
           ( α))
       where
-      α : fib (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
+      α : fiber (pr1 R) P → class-Decidable-Equivalence-Relation R a ＝ pair P p
       α (pair x refl) =
         eq-type-subtype
           ( λ z →
             trunc-Prop
-              ( fib (decidable-relation-Decidable-Equivalence-Relation R) z))
+              ( fiber (decidable-relation-Decidable-Equivalence-Relation R) z))
           ( eq-htpy
             ( λ y →
               eq-iff-Decidable-Prop

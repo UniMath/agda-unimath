@@ -70,7 +70,7 @@ is-set-projective-AC-0 ac X A B f h =
         ( precomp h A)
         ( λ s H → eq-htpy (H ·r h))) ∘
       ( section-is-split-surjective (map-surjection f)))
-    ( ac B (fib (map-surjection f)) (is-surjective-map-surjection f))
+    ( ac B (fiber (map-surjection f)) (is-surjective-map-surjection f))
 
 AC-0-is-set-projective :
   {l1 l2 : Level} →
@@ -82,6 +82,6 @@ AC-0-is-set-projective H A B K =
     ( H ( type-Set A)
         ( Σ (type-Set A) B)
         ( A)
-        ( pr1 , (λ a → map-trunc-Prop (map-inv-fib-pr1 B a) (K a)))
+        ( pr1 , (λ a → map-trunc-Prop (map-inv-fiber-pr1 B a) (K a)))
         ( id))
 ```

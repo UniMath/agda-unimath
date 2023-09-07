@@ -97,7 +97,7 @@ abstract
       ( λ e →
         is-finite-count
           ( count-equiv
-            ( ( equiv-total-fib (map-section-family b)) ∘e
+            ( ( equiv-total-fiber (map-section-family b)) ∘e
               ( equiv-tot
                 ( λ t →
                   ( equiv-tot

@@ -35,12 +35,12 @@ module _
 
   square-fiber :
     ( f ∘ (pr1 {B = λ x → Id (f x) b})) ~
-    ( (const unit B b) ∘ (const (fib f b) unit star))
+    ( (const unit B b) ∘ (const (fiber f b) unit star))
   square-fiber = pr2
 
-  cone-fiber : cone f (const unit B b) (fib f b)
+  cone-fiber : cone f (const unit B b) (fiber f b)
   pr1 cone-fiber = pr1
-  pr1 (pr2 cone-fiber) = const (fib f b) unit star
+  pr1 (pr2 cone-fiber) = const (fiber f b) unit star
   pr2 (pr2 cone-fiber) = square-fiber
 
   abstract

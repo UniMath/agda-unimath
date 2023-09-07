@@ -61,7 +61,7 @@ module _
     is-surjective-class-representatives H (pair Q K) =
       apply-universal-property-trunc-Prop K
         ( trunc-Prop
-          ( fib (class-representatives H) (pair Q K)))
+          ( fiber (class-representatives H) (pair Q K)))
         ( λ (pair a φ) →
           unit-trunc-Prop
             ( pair
