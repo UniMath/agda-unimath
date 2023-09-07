@@ -297,10 +297,10 @@ module _
 
   eq-htpy-fibered-equiv :
     (e e' : fibered-equiv f g) →
-    ( htpy-fibered-map f g
+    htpy-fibered-map f g
       ( fibered-map-fibered-equiv f g e)
-      ( fibered-map-fibered-equiv f g e')) →
-    ( e ＝ e')
+      ( fibered-map-fibered-equiv f g e') →
+    e ＝ e'
   eq-htpy-fibered-equiv e e' = map-inv-equiv (extensionality-fibered-equiv e e')
 ```
 
