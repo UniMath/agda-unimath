@@ -148,17 +148,20 @@ is-pushout f g c = is-equiv (cogap f g c)
 ### The pushout of a span has the dependent universal property
 
 ```agda
-dependent-up-pushout :
-  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
-  (f : S → A) (g : S → B) →
-  dependent-universal-property-pushout l4 f g (cocone-pushout f g)
-dependent-up-pushout {l4 = l4} f g =
-  dependent-universal-property-universal-property-pushout
-  ( f)
-  ( g)
-  ( cocone-pushout f g)
-  ( λ l → up-pushout f g)
-  ( l4)
+module _
+ {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+ where
+
+  dependent-up-pushout :
+    (f : S → A) (g : S → B) →
+    dependent-universal-property-pushout l4 f g (cocone-pushout f g)
+  dependent-up-pushout f g =
+    dependent-universal-property-universal-property-pushout
+    ( f)
+    ( g)
+    ( cocone-pushout f g)
+    ( λ l → up-pushout f g)
+    ( l4)
 ```
 
 ### Computation with the cogap map

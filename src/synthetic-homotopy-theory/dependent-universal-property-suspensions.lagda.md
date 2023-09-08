@@ -82,17 +82,20 @@ module _
 `dependent-cocone-map`
 
 ```agda
-triangle-dependent-ev-suspension :
-    {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
-    (s : suspension-structure X Y) →
-    (B : Y → UU l3) →
-  ( ( map-equiv
-    ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
-  ( dependent-cocone-map
-    ( const X unit star)
-    ( const X unit star)
-    ( cocone-suspension-structure X Y s)
-    ( B))) ~
-  ( dependent-ev-suspension s B)
-triangle-dependent-ev-suspension {X = X} {Y = Y} s B = refl-htpy
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  triangle-dependent-ev-suspension :
+      (s : suspension-structure X Y) →
+      (B : Y → UU l3) →
+    ( ( map-equiv
+      ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
+    ( dependent-cocone-map
+      ( const X unit star)
+      ( const X unit star)
+      ( cocone-suspension-structure X Y s)
+      ( B))) ~
+    ( dependent-ev-suspension s B)
+  triangle-dependent-ev-suspension s B = refl-htpy
 ```
