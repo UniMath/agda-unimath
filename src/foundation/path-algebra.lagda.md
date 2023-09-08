@@ -131,25 +131,25 @@ module _
     assoc p refl q ＝ ap (_∙ q) (right-unit)
   assoc-middle-refl refl q = refl
 
+  inv-assoc-middle-refl :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
+  inv-assoc-middle-refl refl q = refl
+
   assoc-right-refl :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     assoc p q refl ＝ (right-unit ∙ ap (p ∙_) (inv right-unit))
   assoc-right-refl refl refl = refl
 
-  unit-law-assoc-101' :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
-    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
-  unit-law-assoc-101' refl q = refl
-
-  unit-law-assoc-110 :
+  assoc-right-refl' :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     (assoc p q refl ∙ ap (p ∙_) right-unit) ＝ right-unit
-  unit-law-assoc-110 refl refl = refl
+  assoc-right-refl' refl refl = refl
 
-  unit-law-assoc-110' :
+  assoc-right-refl'' :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) →
     (inv right-unit ∙ assoc p q refl) ＝ ap (p ∙_) (inv right-unit)
-  unit-law-assoc-110' refl refl = refl
+  assoc-right-refl'' refl refl = refl
 ```
 
 ### Unit laws for `ap-concat-eq`
