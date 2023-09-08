@@ -150,7 +150,7 @@ module _
   is-contr-section-is-equiv : {f : A → B} → is-equiv f → is-contr (section f)
   is-contr-section-is-equiv {f} is-equiv-f =
     is-contr-equiv'
-      ( (b : B) → fib f b)
+      ( (b : B) → fiber f b)
       ( distributive-Π-Σ)
       ( is-contr-Π (is-contr-map-is-equiv is-equiv-f))
 ```
@@ -469,9 +469,9 @@ module _
   abstract
     is-pullback-is-equiv : is-equiv g → is-equiv (pr1 c) → is-pullback f g c
     is-pullback-is-equiv is-equiv-g is-equiv-p =
-      is-pullback-is-fiberwise-equiv-map-fib-cone f g c
+      is-pullback-is-fiberwise-equiv-map-fiber-cone f g c
         ( λ a → is-equiv-is-contr
-          ( map-fib-cone f g c a)
+          ( map-fiber-cone f g c a)
           ( is-contr-map-is-equiv is-equiv-p a)
           ( is-contr-map-is-equiv is-equiv-g (f a)))
 ```

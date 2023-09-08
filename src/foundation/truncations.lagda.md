@@ -142,7 +142,7 @@ module _
           ( λ h → (h ∘ unit-trunc) ~ f))
   unique-dependent-function-trunc B f =
     is-contr-equiv'
-      ( fib (precomp-Π-Truncated-Type unit-trunc B) f)
+      ( fiber (precomp-Π-Truncated-Type unit-trunc B) f)
       ( equiv-tot
         ( λ h → equiv-funext))
       ( is-contr-map-is-equiv

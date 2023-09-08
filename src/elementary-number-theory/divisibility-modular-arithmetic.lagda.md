@@ -59,6 +59,6 @@ transitive-div-ℤ-Mod {succ-ℕ k} = transitive-div-Fin (succ-ℕ k)
 is-decidable-div-ℤ-Mod :
   (k : ℕ) (x y : ℤ-Mod k) → is-decidable (div-ℤ-Mod k x y)
 is-decidable-div-ℤ-Mod zero-ℕ x y = is-decidable-div-ℤ x y
-is-decidable-div-ℤ-Mod (succ-ℕ k) x y = is-decidable-fib-Fin
+is-decidable-div-ℤ-Mod (succ-ℕ k) x y = is-decidable-fiber-Fin
   {succ-ℕ k} {succ-ℕ k} (mul-ℤ-Mod' (succ-ℕ k) x) y
 ```

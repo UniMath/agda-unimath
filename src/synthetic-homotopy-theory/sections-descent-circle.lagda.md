@@ -82,13 +82,13 @@ module _
   is-equiv-map-compute-dependent-identification-loop-circle x y =
     fundamental-theorem-id
       ( is-contr-equiv'
-        ( fib
+        ( fiber
           ( map-equiv-family-with-descent-data-circle A)
           ( tr
             ( family-family-with-descent-data-circle A)
             ( loop-free-loop l)
             ( map-equiv-family-with-descent-data-circle A x)))
-        ( equiv-fib _ _)
+        ( equiv-fiber _ _)
         ( is-contr-map-is-equiv
           ( is-equiv-map-equiv (equiv-family-with-descent-data-circle A))
           ( tr

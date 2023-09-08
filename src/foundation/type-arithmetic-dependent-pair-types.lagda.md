@@ -113,7 +113,7 @@ module _
       is-equiv-is-contr-map
         ( λ x → is-contr-equiv
           ( B x)
-          ( equiv-fib-pr1 B x)
+          ( equiv-fiber-pr1 B x)
           ( is-contr-B x))
 
   equiv-pr1 : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
@@ -127,8 +127,8 @@ module _
     is-contr-is-equiv-pr1 : is-equiv (pr1 {B = B}) → ((a : A) → is-contr (B a))
     is-contr-is-equiv-pr1 is-equiv-pr1-B a =
       is-contr-equiv'
-        ( fib pr1 a)
-        ( equiv-fib-pr1 B a)
+        ( fiber pr1 a)
+        ( equiv-fiber-pr1 B a)
         ( is-contr-map-is-equiv is-equiv-pr1-B a)
 
   map-inv-right-unit-law-Σ-is-contr :

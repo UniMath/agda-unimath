@@ -69,7 +69,7 @@ module _
   fibered-map = Σ (X → Y) (map-over)
 
   fiberwise-map-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  fiberwise-map-over i = (x : X) → fib f x → fib g (i x)
+  fiberwise-map-over i = (x : X) → fiber f x → fiber g (i x)
 
   cone-fibered-map : (ihH : fibered-map) → cone (pr1 ihH) g A
   pr1 (cone-fibered-map ihH) = f

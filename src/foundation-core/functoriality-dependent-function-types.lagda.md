@@ -52,19 +52,19 @@ htpy-map-Π' α H = htpy-map-Π (H ∘ α)
 ### The fibers of `map-Π`
 
 ```agda
-compute-fib-map-Π :
+compute-fiber-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
-  ((i : I) → fib (f i) (h i)) ≃ fib (map-Π f) h
-compute-fib-map-Π f h =
+  ((i : I) → fiber (f i) (h i)) ≃ fiber (map-Π f) h
+compute-fiber-map-Π f h =
   equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
 
-compute-fib-map-Π' :
+compute-fiber-map-Π' :
   {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
   (h : (j : J) → B (α j)) →
-  ((j : J) → fib (f (α j)) (h j)) ≃ fib (map-Π' α f) h
-compute-fib-map-Π' α f = compute-fib-map-Π (f ∘ α)
+  ((j : J) → fiber (f (α j)) (h j)) ≃ fiber (map-Π' α f) h
+compute-fiber-map-Π' α f = compute-fiber-map-Π (f ∘ α)
 ```
 
 ### Dependent precomposition preserves homotopies
@@ -92,7 +92,7 @@ abstract
     is-equiv-is-contr-map
       ( λ g →
         is-contr-equiv' _
-          ( compute-fib-map-Π f g)
+          ( compute-fiber-map-Π f g)
           ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
 
 equiv-map-Π :
@@ -105,7 +105,7 @@ pr2 (equiv-map-Π e) =
 
 ### Precomposition and equivalences
 
-#### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fib f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
+#### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fiber f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
 
 This condition simplifies, for example, the proof that connected maps satisfy a
 dependent universal property.
@@ -113,14 +113,14 @@ dependent universal property.
 ```agda
 is-equiv-precomp-Π-fiber-condition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3} →
-  ((b : B) → is-equiv (λ (c : C b) → const (fib f b) (C b) c)) →
+  ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
   is-equiv (precomp-Π f C)
 is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
   is-equiv-comp
-    ( map-reduce-Π-fib f (λ b u → C b))
+    ( map-reduce-Π-fiber f (λ b u → C b))
     ( map-Π (λ b u t → u))
     ( is-equiv-map-Π (λ b u t → u) H)
-    ( is-equiv-map-reduce-Π-fib f (λ b u → C b))
+    ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
 ```
 
 #### If `f` is coherently invertible, then precomposing by `f` is an equivalence

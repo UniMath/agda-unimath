@@ -366,22 +366,22 @@ module _
   {l : Level} (P : B → UU l)
   where
 
-  equiv-fib'-precomp-extension-Π :
-    (f : (x : A) → P (i x)) → fib' (precomp-Π i P) f ≃ extension-Π i P f
-  equiv-fib'-precomp-extension-Π f =
+  equiv-fiber'-precomp-extension-Π :
+    (f : (x : A) → P (i x)) → fiber' (precomp-Π i P) f ≃ extension-Π i P f
+  equiv-fiber'-precomp-extension-Π f =
     equiv-tot (λ g → equiv-funext {f = f} {g ∘ i})
 
-  equiv-fib-precomp-extension-Π :
-    (f : (x : A) → P (i x)) → fib (precomp-Π i P) f ≃ extension-Π i P f
-  equiv-fib-precomp-extension-Π f =
-    (equiv-fib'-precomp-extension-Π f) ∘e (equiv-fib (precomp-Π i P) f)
+  equiv-fiber-precomp-extension-Π :
+    (f : (x : A) → P (i x)) → fiber (precomp-Π i P) f ≃ extension-Π i P f
+  equiv-fiber-precomp-extension-Π f =
+    (equiv-fiber'-precomp-extension-Π f) ∘e (equiv-fiber (precomp-Π i P) f)
 
   equiv-is-contr-extension-Π-is-local-Π :
     is-local-Π i P ≃
     ((f : (x : A) → P (i x)) → is-contr (extension-Π i P f))
   equiv-is-contr-extension-Π-is-local-Π =
     ( equiv-map-Π
-      ( λ f → equiv-is-contr-equiv (equiv-fib-precomp-extension-Π f))) ∘e
+      ( λ f → equiv-is-contr-equiv (equiv-fiber-precomp-extension-Π f))) ∘e
     ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
   is-contr-extension-Π-is-local-Π :

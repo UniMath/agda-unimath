@@ -438,7 +438,7 @@ module _
           ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
           ( is-contr-total-htpy-equiv e)
           ( is-contr-equiv
-            ( fib (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
+            ( fiber (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
             ( equiv-tot
               ( λ e' →
                 equiv-inv
@@ -770,7 +770,7 @@ module _
           ( x ＝ map-equiv e (one-Fin 1)))
     is-contr-decide-value-equiv-Fin-two-ℕ e x =
       is-contr-equiv'
-        ( fib (map-equiv e) x)
+        ( fiber (map-equiv e) x)
         ( ( is-coprod-Σ-Fin-two-ℕ (λ y → x ＝ map-equiv e y)) ∘e
           ( equiv-tot (λ y → equiv-inv (map-equiv e y) x)))
         ( is-contr-map-is-equiv (is-equiv-map-equiv e) x)

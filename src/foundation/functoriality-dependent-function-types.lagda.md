@@ -135,8 +135,8 @@ abstract
     ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
   is-trunc-map-map-Π k {I = I} f H h =
     is-trunc-equiv' k
-      ( (i : I) → fib (f i) (h i))
-      ( compute-fib-map-Π f h)
+      ( (i : I) → fiber (f i) (h i))
+      ( equiv-fiber-map-Π f h)
       ( is-trunc-Π k (λ i → H i (h i)))
 
 abstract
@@ -165,8 +165,8 @@ is-trunc-map-map-Π-is-trunc-map' :
   ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π' α f)
 is-trunc-map-map-Π-is-trunc-map' k {J = J} α f H h =
   is-trunc-equiv' k
-    ( (j : J) → fib (f (α j)) (h j))
-    ( compute-fib-map-Π' α f h)
+    ( (j : J) → fiber (f (α j)) (h j))
+    ( equiv-fiber-map-Π' α f h)
     ( is-trunc-Π k (λ j → H (α j) (h j)))
 
 is-trunc-map-is-trunc-map-map-Π' :
@@ -176,7 +176,7 @@ is-trunc-map-is-trunc-map-map-Π' :
   (i : I) → is-trunc-map k (f i)
 is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
-    ( fib (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
+    ( fiber (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
     ( equiv-Σ
       ( λ a → f i a ＝ b)
       ( equiv-universal-property-unit (A i))

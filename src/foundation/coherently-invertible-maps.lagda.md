@@ -68,7 +68,7 @@ abstract
               ( is-contr-Π
                 ( λ x →
                   is-contr-equiv'
-                    ( fib
+                    ( fiber
                       ( ap f)
                       ( is-retraction-is-coherently-invertible H (f x)))
                     ( equiv-tot

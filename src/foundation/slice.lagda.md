@@ -132,7 +132,7 @@ module _
   where
 
   fiberwise-hom : (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
-  fiberwise-hom f g = (x : X) → fib f x → fib g x
+  fiberwise-hom f g = (x : X) → fiber f x → fiber g x
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
@@ -140,7 +140,7 @@ module _
   where
 
   fiberwise-hom-hom-slice : hom-slice f g → fiberwise-hom f g
-  fiberwise-hom-hom-slice (pair h H) = fib-triangle f g h H
+  fiberwise-hom-hom-slice (pair h H) = fiber-triangle f g h H
 
   hom-slice-fiberwise-hom : fiberwise-hom f g → hom-slice f g
   pr1 (hom-slice-fiberwise-hom α) a = pr1 (α (f a) (pair a refl))
@@ -225,7 +225,7 @@ module _
       is-equiv-triangle-is-fiberwise-equiv f g h H
 
   equiv-fiberwise-equiv-equiv-slice :
-    equiv-slice f g ≃ fiberwise-equiv (fib f) (fib g)
+    equiv-slice f g ≃ fiberwise-equiv (fiber f) (fiber g)
   equiv-fiberwise-equiv-equiv-slice =
     equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
     equiv-right-swap-Σ
@@ -241,17 +241,17 @@ module _
       ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice h)
 
   equiv-equiv-slice-fiberwise-equiv :
-    fiberwise-equiv (fib f) (fib g) ≃ equiv-slice f g
+    fiberwise-equiv (fiber f) (fiber g) ≃ equiv-slice f g
   equiv-equiv-slice-fiberwise-equiv =
     inv-equiv equiv-fiberwise-equiv-equiv-slice
 
   fiberwise-equiv-equiv-slice :
-    equiv-slice f g → fiberwise-equiv (fib f) (fib g)
+    equiv-slice f g → fiberwise-equiv (fiber f) (fiber g)
   fiberwise-equiv-equiv-slice =
     map-equiv equiv-fiberwise-equiv-equiv-slice
 
   equiv-fam-equiv-equiv-slice :
-    equiv-slice f g ≃ ((x : X) → fib f x ≃ fib g x) -- fam-equiv (fib f) (fib g)
+    equiv-slice f g ≃ ((x : X) → fiber f x ≃ fiber g x) -- fam-equiv (fiber f) (fiber g)
   equiv-fam-equiv-equiv-slice =
     inv-distributive-Π-Σ ∘e equiv-fiberwise-equiv-equiv-slice
 ```

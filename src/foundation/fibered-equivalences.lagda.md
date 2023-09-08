@@ -63,7 +63,7 @@ module _
     Σ (fiberwise-map-over f g i) (is-fiberwise-equiv)
 
   fam-equiv-over : (X → Y) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  fam-equiv-over i = (x : X) → (fib f x) ≃ (fib g (i x))
+  fam-equiv-over i = (x : X) → (fiber f x) ≃ (fiber g (i x))
 ```
 
 ## Properties
@@ -83,7 +83,7 @@ module _
   eq-equiv-slice-equiv-over = refl
 
   equiv-equiv-over-fiberwise-equiv :
-    fiberwise-equiv (fib (i ∘ f)) (fib g) ≃ equiv-over f g i
+    fiberwise-equiv (fiber (i ∘ f)) (fiber g) ≃ equiv-over f g i
   equiv-equiv-over-fiberwise-equiv =
     equiv-equiv-slice-fiberwise-equiv (i ∘ f) g
 ```
