@@ -47,7 +47,7 @@ is-uniquely-eliminating-modality-double-negation-modality :
   {l : Level} →
   is-uniquely-eliminating-modality (unit-double-negation-modality {l})
 is-uniquely-eliminating-modality-double-negation-modality {l} A P =
-  is-local-Π-is-prop
+  is-local-dependent-type-is-prop
     ( unit-double-negation-modality)
     ( operator-double-negation-modality l ∘ P)
     ( λ _ → is-prop-double-negation)
