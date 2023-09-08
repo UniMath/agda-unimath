@@ -246,8 +246,7 @@ module _
     ( extensionality-map-over f g i
       ( map-over-equiv-over f g i e)
       ( map-over-equiv-over f g i e')) ∘e
-    ( ap (map-over-equiv-over f g i) ,
-      is-emb-map-over-equiv-over f g i e e')
+    ( equiv-ap-emb (emb-map-over-equiv-over f g i))
 
   htpy-eq-equiv-over :
     (e e' : equiv-over f g i) →
@@ -284,8 +283,7 @@ module _
     ( extensionality-fibered-map f g
       ( fibered-map-fibered-equiv f g e)
       ( fibered-map-fibered-equiv f g e')) ∘e
-    ( ap (fibered-map-fibered-equiv f g) ,
-      is-emb-fibered-map-fibered-equiv f g e e')
+    ( equiv-ap-emb (emb-fibered-map-fibered-equiv f g))
 
   htpy-eq-fibered-equiv :
     (e e' : fibered-equiv f g) →

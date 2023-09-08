@@ -196,18 +196,6 @@ pr2 (equiv-equiv-iff P Q) = is-equiv-equiv-iff P Q
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {I : UU l1} {J : UU l2} {A : I → UU l3} {B : J → UU l4}
-  where
-
-  iff-Π :
-    (e : I ↔ J) →
-    ((i : I) → B (forward-implication e i) → A i) →
-    ((j : J) → A (backward-implication e j) → B j) →
-    ((i : I) → A i) ↔ ((j : J) → B j)
-  pr1 (iff-Π e f g) a j = g j (a (backward-implication e j))
-  pr2 (iff-Π e f g) b i = f i (b (forward-implication e i))
-
-module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   where
 
