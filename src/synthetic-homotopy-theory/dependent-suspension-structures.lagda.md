@@ -264,7 +264,7 @@ module _
   south-htpy-dependent-suspension-structure = (pr1 ∘ pr2)
 
   meridian-htpy-dependent-suspension-structure :
-    ( d-s : 
+    ( d-s :
       htpy-dependent-suspension-structure B d d') →
     ( x : X) →
     coherence-square-identifications

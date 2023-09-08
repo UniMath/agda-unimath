@@ -180,7 +180,9 @@ htpy-comparison-suspension-cocone-suspension-structure
   ( ss) =
     is-injective-map-equiv
       ( equiv-suspension-structure-suspension-cocone X Z)
-      ( ( is-section-map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z) ss))
+      ( ( is-section-map-inv-equiv
+        ( equiv-suspension-structure-suspension-cocone X Z)
+        ( ss)))
 ```
 
 #### Characterization of equalities in `suspension-structure`

@@ -1,4 +1,4 @@
- # Universal property of suspensions
+# Universal property of suspensions
 
 ```agda
 module synthetic-homotopy-theory.universal-property-suspensions where
