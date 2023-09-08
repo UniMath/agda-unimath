@@ -97,6 +97,39 @@ precomp-coherence-square-maps top leeft right bottom H X =
 
 ### Commutativity of pasting squares and transposing by precomposition
 
+Given two commuting squares which can be composed horizontally (vertically),
+we know that composing them and then transposing them by precomposition gives
+the same homotopies as first transposing the squares and then composing them.
+
+```text
+      tl       tr                tr ∘ tl
+  A -----> B -----> C         A --------> C
+  |        |        |         |           |
+l |       m|        | r |->  l|          r|
+  |   H    |   K    |         |   H | K   |
+  v        v        v         v           v
+  X -----> Y -----> Z         X --------> Z
+      bl       br                br ∘ bl
+
+         -                          -
+         |                          |
+         v                          v
+
+           -∘r
+    W^Z ------> W^C
+     |           |
+-∘br |    W^K    | -∘tr           W^(H | K)
+     |           |
+     v     -∘m   v                   ~
+    W^Y ------> W^B   |->
+     |           |                  W^K
+-∘bl |    W^H    | -∘tl             ---
+     |           |                  W^H
+     v           v
+    W^X ------> W^A
+          -∘l
+```
+
 ```agda
 module _
   { l1 l2 l3 l4 l5 l6 l7 : Level}
