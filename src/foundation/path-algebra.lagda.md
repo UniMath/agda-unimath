@@ -118,38 +118,38 @@ vertical-concat-square {a = a} {f = f}
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} {A : UU l} {x y z : A}
   where
 
   assoc-left-refl :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    (p : x ＝ y) (q : y ＝ z) →
     assoc refl p q ＝ refl
   assoc-left-refl p q = refl
 
   assoc-middle-refl :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    (p : x ＝ y) (q : y ＝ z) →
     assoc p refl q ＝ ap (_∙ q) (right-unit)
   assoc-middle-refl refl q = refl
 
   inv-assoc-middle-refl :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    (p : x ＝ y) (q : y ＝ z) →
     inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
   inv-assoc-middle-refl refl q = refl
 
   assoc-right-refl :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    (p : x ＝ y) (q : y ＝ z) →
     assoc p q refl ＝ (right-unit ∙ ap (p ∙_) (inv right-unit))
   assoc-right-refl refl refl = refl
 
-  assoc-right-refl' :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+  transpose-assoc-right-refl :
+    (p : x ＝ y) (q : y ＝ z) →
     (assoc p q refl ∙ ap (p ∙_) right-unit) ＝ right-unit
-  assoc-right-refl' refl refl = refl
+  transpose-assoc-right-refl refl refl = refl
 
-  assoc-right-refl'' :
-    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+  inv-inv-con-assoc-right-refl :
+    (p : x ＝ y) (q : y ＝ z) →
     (inv right-unit ∙ assoc p q refl) ＝ ap (p ∙_) (inv right-unit)
-  assoc-right-refl'' refl refl = refl
+  inv-inv-con-assoc-right-refl refl refl = refl
 ```
 
 ### Unit laws for `ap-concat-eq`
