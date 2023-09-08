@@ -151,10 +151,10 @@ is-injective-iff-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-injective (iff-equiv {A = A} {B})
 is-injective-iff-equiv p = eq-htpy-equiv (pr1 (htpy-eq-iff p))
 
-compute-fib-iff-equiv :
+compute-fiber-iff-equiv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} ((f , g) : A ↔ B) →
-  fib (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
-compute-fib-iff-equiv {A = A} {B} (f , g) =
+  fiber (iff-equiv) (f , g) ≃ Σ (is-equiv f) (λ f' → map-inv-is-equiv f' ~ g)
+compute-fiber-iff-equiv {A = A} {B} (f , g) =
   ( ( ( ( ( equiv-tot (λ _ → equiv-funext)) ∘e
           ( left-unit-law-Σ-is-contr (is-contr-total-path' f) (f , refl))) ∘e
         ( inv-associative-Σ (A → B) (_＝ f) _)) ∘e
