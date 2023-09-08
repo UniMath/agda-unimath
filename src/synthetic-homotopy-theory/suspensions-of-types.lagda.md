@@ -157,8 +157,8 @@ module _
     {l : Level} (Z : UU l) (c : suspension-structure X Z) (x : X) →
     ( ( ap (map-inv-up-suspension Z c) (meridian-suspension x)) ∙
       ( up-suspension-south-suspension Z c)) ＝
-    ( up-suspension-north-suspension Z c) ∙
-    ( meridian-suspension-structure c x)
+    ( ( up-suspension-north-suspension Z c) ∙
+    ( meridian-suspension-structure c x))
   up-suspension-meridian-suspension Z c =
     pr2
       ( pr2
