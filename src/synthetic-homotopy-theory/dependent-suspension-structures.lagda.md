@@ -166,12 +166,12 @@ module _
   dependent-cocone-dependent-suspension-structure :
     dependent-suspension-structure B c →
     dependent-suspension-cocone B (cocone-suspension-structure X Y c)
-  pr1 (dependent-cocone-dependent-suspension-structure dc) t =
-    north-dependent-suspension-structure dc
-  pr1 (pr2 (dependent-cocone-dependent-suspension-structure dc)) t =
-    south-dependent-suspension-structure dc
-  pr2 (pr2 (dependent-cocone-dependent-suspension-structure dc)) x =
-    meridian-dependent-suspension-structure dc x
+  pr1 (dependent-cocone-dependent-suspension-structure d) t =
+    north-dependent-suspension-structure d
+  pr1 (pr2 (dependent-cocone-dependent-suspension-structure d)) t =
+    south-dependent-suspension-structure d
+  pr2 (pr2 (dependent-cocone-dependent-suspension-structure d)) x =
+    meridian-dependent-suspension-structure d x
 
   equiv-dependent-suspension-structure-suspension-cocone :
     ( dependent-suspension-cocone
@@ -211,12 +211,12 @@ module _
     map-inv-equiv equiv-dependent-suspension-structure-suspension-cocone ~
     dependent-cocone-dependent-suspension-structure
   htpy-map-inv-equiv-dependent-suspension-structure-suspension-cocone-cocone-dependent-cocone-dependent-suspension-structure
-    ( dc) =
+    ( d) =
       is-injective-map-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone)
         ( is-section-map-inv-equiv
           ( equiv-dependent-suspension-structure-suspension-cocone)
-          ( dc))
+          ( d))
 ```
 
 #### Characterizing equality of dependent suspension structures
