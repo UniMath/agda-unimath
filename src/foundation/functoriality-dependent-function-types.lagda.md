@@ -136,7 +136,7 @@ abstract
   is-trunc-map-map-Π k {I = I} f H h =
     is-trunc-equiv' k
       ( (i : I) → fiber (f i) (h i))
-      ( equiv-fiber-map-Π f h)
+      ( compute-fiber-map-Π f h)
       ( is-trunc-Π k (λ i → H i (h i)))
 
 abstract
@@ -166,7 +166,7 @@ is-trunc-map-map-Π-is-trunc-map' :
 is-trunc-map-map-Π-is-trunc-map' k {J = J} α f H h =
   is-trunc-equiv' k
     ( (j : J) → fiber (f (α j)) (h j))
-    ( equiv-fiber-map-Π' α f h)
+    ( compute-fiber-map-Π' α f h)
     ( is-trunc-Π k (λ j → H (α j) (h j)))
 
 is-trunc-map-is-trunc-map-map-Π' :

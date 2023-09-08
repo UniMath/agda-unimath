@@ -49,11 +49,11 @@ compute-htpy-postcomp-refl-htpy A f h = eq-htpy-refl-htpy (f ∘ h)
 ### The fibers of `postcomp`
 
 ```agda
-compute-fib-postcomp :
+compute-fiber-postcomp :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
   (f : X → Y) (h : A → Y) →
-  ((x : A) → fib f (h x)) ≃ fib (postcomp A f) h
-compute-fib-postcomp A f h =
+  ((x : A) → fiber f (h x)) ≃ fiber (postcomp A f) h
+compute-fiber-postcomp A f h =
   equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
 ```
 

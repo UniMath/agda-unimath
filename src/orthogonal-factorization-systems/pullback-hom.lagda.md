@@ -215,9 +215,9 @@ module _
   (f : A → B) (g : X → Y) (h : fibered-map f g)
   where
 
-  inv-compute-fib-pullback-hom :
-    (fib (pullback-hom f g) h) ≃ (lifting-square-fibered-map f g h)
-  inv-compute-fib-pullback-hom =
+  inv-compute-fiber-pullback-hom :
+    (fiber (pullback-hom f g) h) ≃ (lifting-square-fibered-map f g h)
+  inv-compute-fiber-pullback-hom =
     equiv-tot
       ( λ j →
         ( equiv-Σ _
@@ -243,7 +243,7 @@ module _
         ( ( equiv-left-swap-Σ) ∘e
           ( extensionality-fibered-map f g (pullback-hom f g j) h)))
 
-  compute-fib-pullback-hom :
-    (lifting-square-fibered-map f g h) ≃ (fib (pullback-hom f g) h)
-  compute-fib-pullback-hom = inv-equiv inv-compute-fib-pullback-hom
+  compute-fiber-pullback-hom :
+    (lifting-square-fibered-map f g h) ≃ (fiber (pullback-hom f g) h)
+  compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
 ```

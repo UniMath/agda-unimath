@@ -92,7 +92,7 @@ to show that this fiber is a proposition. We do this by constructing an
 embedding
 
 ```text
-  fib Id (Id a) ↪ Σ A (Id a).
+  fiber Id (Id a) ↪ Σ A (Id a).
 ```
 
 Since the codomain of this embedding is contractible, the claim follows. The

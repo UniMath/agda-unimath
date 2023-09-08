@@ -54,7 +54,7 @@ module _
 
   is-local-map :
     {l3 l4 : Level} {A : UU l3} {B : UU l4} → (A → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-local-map g = is-local-family (fib g)
+  is-local-map g = is-local-family (fiber g)
 ```
 
 ## Properties
@@ -81,12 +81,12 @@ module _
   is-property-is-local-map :
     {l3 l4 : Level} {A : UU l3} {B : UU l4}
     (g : A → B) → is-prop (is-local-map f g)
-  is-property-is-local-map g = is-property-is-local-family (fib g)
+  is-property-is-local-map g = is-property-is-local-family (fiber g)
 
   is-local-map-Prop :
     {l3 l4 : Level} {A : UU l3} {B : UU l4}
     (g : A → B) → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-local-map-Prop g = is-local-family-Prop (fib g)
+  is-local-map-Prop g = is-local-family-Prop (fiber g)
 ```
 
 ### A type `B` is `f`-local if and only if the terminal projection `B → unit` is `f`-local

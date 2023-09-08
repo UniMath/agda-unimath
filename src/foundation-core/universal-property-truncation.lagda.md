@@ -204,6 +204,6 @@ module _
     map-distributive-Π-Σ
       ( map-inv-is-equiv
         ( dependent-universal-property-truncation-is-truncation H
-          ( fib-Truncated-Type C B g))
+          ( fiber-Truncated-Type C B g))
         ( λ a → h a , inv (K a)))
 ```
