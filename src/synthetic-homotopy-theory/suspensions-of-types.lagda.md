@@ -251,51 +251,51 @@ module _
     is-retraction-map-inv-is-equiv (dependent-up-suspension l2 B)
 
   dependent-up-suspension-north-suspension :
-    (d-susp-str : dependent-suspension-structure
+    (d : dependent-suspension-structure
       ( B)
       ( suspension-structure-suspension X)) →
-      ( map-inv-dependent-up-suspension d-susp-str north-suspension) ＝
-      ( north-dependent-suspension-structure d-susp-str)
-  dependent-up-suspension-north-suspension d-susp-str =
+      ( map-inv-dependent-up-suspension d north-suspension) ＝
+      ( north-dependent-suspension-structure d)
+  dependent-up-suspension-north-suspension d =
     north-htpy-dependent-suspension-structure
     ( B)
     ( htpy-eq-dependent-suspension-structure
       ( B)
-      ( is-section-map-inv-dependent-up-suspension d-susp-str))
+      ( is-section-map-inv-dependent-up-suspension d))
 
   dependent-up-suspension-south-suspension :
-    (d-susp-str : dependent-suspension-structure
+    (d : dependent-suspension-structure
       ( B)
       ( suspension-structure-suspension X)) →
-    ( map-inv-dependent-up-suspension d-susp-str south-suspension) ＝
-    ( south-dependent-suspension-structure d-susp-str)
-  dependent-up-suspension-south-suspension d-susp-str =
+    ( map-inv-dependent-up-suspension d south-suspension) ＝
+    ( south-dependent-suspension-structure d)
+  dependent-up-suspension-south-suspension d =
     south-htpy-dependent-suspension-structure
     ( B)
     ( htpy-eq-dependent-suspension-structure
       ( B)
-      ( is-section-map-inv-dependent-up-suspension d-susp-str))
+      ( is-section-map-inv-dependent-up-suspension d))
 
   dependent-up-suspension-meridian-suspension :
-    (d-susp-str : dependent-suspension-structure
+    (d : dependent-suspension-structure
       ( B)
       ( suspension-structure-suspension X))
     (x : X) →
       coherence-square-identifications
         ( apd
-          ( map-inv-dependent-up-suspension d-susp-str)
+          ( map-inv-dependent-up-suspension d)
           ( meridian-suspension x))
-        ( dependent-up-suspension-south-suspension d-susp-str)
+        ( dependent-up-suspension-south-suspension d)
         ( ap
           ( tr B (meridian-suspension x))
-          ( dependent-up-suspension-north-suspension d-susp-str))
-        (meridian-dependent-suspension-structure d-susp-str x)
-  dependent-up-suspension-meridian-suspension d-susp-str =
+          ( dependent-up-suspension-north-suspension d))
+        (meridian-dependent-suspension-structure d x)
+  dependent-up-suspension-meridian-suspension d =
     meridian-htpy-dependent-suspension-structure
       ( B)
       ( htpy-eq-dependent-suspension-structure
         ( B)
-        ( is-section-map-inv-dependent-up-suspension d-susp-str))
+        ( is-section-map-inv-dependent-up-suspension d))
 ```
 
 ### Consequences of the dependent universal property
@@ -313,13 +313,13 @@ module _
   htpy-function-out-of-suspension : UU (l1 ⊔ l2)
   htpy-function-out-of-suspension =
     (Σ (f (north-suspension) ＝ g (north-suspension))
-      ( λ N-eq → Σ (f (south-suspension) ＝ g (south-suspension))
-        ( λ S-eq →
+      ( λ p → Σ (f (south-suspension) ＝ g (south-suspension))
+        ( λ q →
           (x : X) →
             ( coherence-square-identifications
               ( ap f (meridian-suspension x))
-              ( S-eq)
-              ( N-eq)
+              ( q)
+              ( p)
               ( ap g (meridian-suspension x))))))
 
   north-htpy-function-out-of-suspension :
@@ -353,15 +353,15 @@ module _
       by equiv-dependent-up-suspension (eq-value f g)
       ≃ htpy-function-out-of-suspension
         by equiv-tot
-                ( λ N-eq →
+                ( λ p →
                   equiv-tot
-                    ( λ S-eq →
+                    ( λ q →
                       equiv-Π
                         ( λ x →
                           ( coherence-square-identifications
                             ( ap f (meridian-suspension x))
-                            ( S-eq)
-                            ( N-eq)
+                            ( q)
+                            ( p)
                             ( ap g (meridian-suspension x))))
                           ( id-equiv)
                           ( λ x →
@@ -371,8 +371,8 @@ module _
                                 ( g)
                                 ( meridian-suspension-structure
                                   ( suspension-structure-suspension X) x)
-                                ( N-eq)
-                                ( S-eq))))))
+                                ( p)
+                                ( q))))))
 
   htpy-function-out-of-suspension-htpy :
     (f ~ g) → htpy-function-out-of-suspension

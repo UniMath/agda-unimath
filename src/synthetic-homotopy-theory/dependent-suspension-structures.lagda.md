@@ -134,14 +134,14 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {B : Y → UU l3}
   {ss : suspension-structure X Y}
-  (d-ss : dependent-suspension-structure B ss)
+  (d : dependent-suspension-structure B ss)
   where
 
   north-dependent-suspension-structure : B (north-suspension-structure ss)
-  north-dependent-suspension-structure = pr1 (d-ss)
+  north-dependent-suspension-structure = pr1 (d)
 
   south-dependent-suspension-structure : B (south-suspension-structure ss)
-  south-dependent-suspension-structure = (pr1 ∘ pr2) (d-ss)
+  south-dependent-suspension-structure = (pr1 ∘ pr2) (d)
 
   meridian-dependent-suspension-structure :
     (x : X) →
@@ -150,7 +150,7 @@ module _
       ( meridian-suspension-structure ss x)
       ( north-dependent-suspension-structure)
       ( south-dependent-suspension-structure)
-  meridian-dependent-suspension-structure = (pr2 ∘ pr2) (d-ss)
+  meridian-dependent-suspension-structure = (pr2 ∘ pr2) (d)
 ```
 
 ## Properties
@@ -180,20 +180,20 @@ module _
     ( dependent-suspension-structure B ss)
   equiv-dependent-suspension-structure-suspension-cocone =
     ( equiv-Σ
-      (λ N-d-susp-str →
+      (λ n →
         Σ (B (south-suspension-structure ss))
-          ( λ S-d-susp-str →
+          ( λ s →
             (x : X) →
             ( dependent-identification
               ( B)
               ( meridian-suspension-structure ss x)
-              ( N-d-susp-str)
-              ( S-d-susp-str))))
+              ( n)
+              ( s))))
       ( equiv-dependent-universal-property-unit
         ( λ x → (B (north-suspension-structure ss))))
       ( λ N-susp-c →
         ( equiv-Σ
-          ( λ S-d-susp-str →
+          ( λ s →
             (x : X) →
             ( dependent-identification
               ( B)
@@ -202,7 +202,7 @@ module _
                 ( equiv-dependent-universal-property-unit
                   ( λ x₁ → B (pr1 ss)))
                 ( N-susp-c))
-              ( S-d-susp-str)))
+              ( s)))
           ( equiv-dependent-universal-property-unit
             ( const unit (UU l3) (B (south-suspension-structure ss))))
           ( λ S-susp-c → id-equiv))))
@@ -225,75 +225,75 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  (d-ss d-ss' : dependent-suspension-structure B ss)
+  (d d' : dependent-suspension-structure B ss)
   where
 
   htpy-dependent-suspension-structure : UU (l1 ⊔ l3)
   htpy-dependent-suspension-structure =
-    Σ ( north-dependent-suspension-structure d-ss ＝
-        north-dependent-suspension-structure d-ss')
+    Σ ( north-dependent-suspension-structure d ＝
+        north-dependent-suspension-structure d')
       ( λ N-htpy →
-        Σ ( south-dependent-suspension-structure d-ss ＝
-            south-dependent-suspension-structure d-ss')
+        Σ ( south-dependent-suspension-structure d ＝
+            south-dependent-suspension-structure d')
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( meridian-dependent-suspension-structure d-ss x)
+              ( meridian-dependent-suspension-structure d x)
               ( S-htpy)
               ( ap
                 ( tr B (meridian-suspension-structure ss x))
                 ( N-htpy))
-              ( meridian-dependent-suspension-structure d-ss' x)))
+              ( meridian-dependent-suspension-structure d' x)))
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
-  {susp-str : suspension-structure X Y}
-  {d-susp-str0 d-susp-str1 : dependent-suspension-structure B susp-str}
+  {s : suspension-structure X Y}
+  {d d' : dependent-suspension-structure B s}
   where
 
   north-htpy-dependent-suspension-structure :
-    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 →
-    north-dependent-suspension-structure d-susp-str0 ＝
-    north-dependent-suspension-structure d-susp-str1
+    htpy-dependent-suspension-structure B d d' →
+    north-dependent-suspension-structure d ＝
+    north-dependent-suspension-structure d'
   north-htpy-dependent-suspension-structure = pr1
 
   south-htpy-dependent-suspension-structure :
-    htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1 →
-    south-dependent-suspension-structure d-susp-str0 ＝
-    south-dependent-suspension-structure d-susp-str1
+    htpy-dependent-suspension-structure B d d' →
+    south-dependent-suspension-structure d ＝
+    south-dependent-suspension-structure d'
   south-htpy-dependent-suspension-structure = (pr1 ∘ pr2)
 
   meridian-htpy-dependent-suspension-structure :
-    ( d-susp-str : 
-      htpy-dependent-suspension-structure B d-susp-str0 d-susp-str1) →
+    ( d-s : 
+      htpy-dependent-suspension-structure B d d') →
     ( x : X) →
     coherence-square-identifications
-      ( meridian-dependent-suspension-structure d-susp-str0 x)
-      ( south-htpy-dependent-suspension-structure d-susp-str)
+      ( meridian-dependent-suspension-structure d x)
+      ( south-htpy-dependent-suspension-structure d-s)
       ( ap
-        ( tr B (meridian-suspension-structure susp-str x))
-        ( north-htpy-dependent-suspension-structure d-susp-str))
-      ( meridian-dependent-suspension-structure d-susp-str1 x)
+        ( tr B (meridian-suspension-structure s x))
+        ( north-htpy-dependent-suspension-structure d-s))
+      ( meridian-dependent-suspension-structure d' x)
   meridian-htpy-dependent-suspension-structure = pr2 ∘ pr2
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  (d-ss : dependent-suspension-structure B ss)
+  (d : dependent-suspension-structure B ss)
   where
 
   extensionality-dependent-suspension-structure :
-    ( d-ss' : dependent-suspension-structure B ss) →
-    ( d-ss ＝ d-ss') ≃
-    ( htpy-dependent-suspension-structure B d-ss d-ss')
+    ( d' : dependent-suspension-structure B ss) →
+    ( d ＝ d') ≃
+    ( htpy-dependent-suspension-structure B d d')
   extensionality-dependent-suspension-structure =
     extensionality-Σ
       ( λ (S , m) (N-htpy) →
-        Σ (south-dependent-suspension-structure d-ss ＝ S)
+        Σ (south-dependent-suspension-structure d ＝ S)
           ( λ S-htpy →
             (x : X) →
             coherence-square-identifications
-              ( meridian-dependent-suspension-structure d-ss x)
+              ( meridian-dependent-suspension-structure d x)
               ( S-htpy)
               ( ap (tr B (meridian-suspension-structure ss x)) N-htpy)
               ( m x)))
@@ -303,7 +303,7 @@ module _
       ( extensionality-Σ
         ( λ m S-htpy →
           (x : X) →
-          ( meridian-dependent-suspension-structure d-ss x ∙ S-htpy) ＝
+          ( meridian-dependent-suspension-structure d x ∙ S-htpy) ＝
           ( m x))
         ( refl)
         ( λ x → right-unit)
@@ -314,31 +314,31 @@ module _
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  {d-ss d-ss' : dependent-suspension-structure B ss}
+  {d d' : dependent-suspension-structure B ss}
   where
 
   htpy-eq-dependent-suspension-structure :
-    (d-ss ＝ d-ss') →
-    htpy-dependent-suspension-structure B d-ss d-ss'
+    (d ＝ d') →
+    htpy-dependent-suspension-structure B d d'
   htpy-eq-dependent-suspension-structure =
     map-equiv
-      ( extensionality-dependent-suspension-structure B d-ss d-ss')
+      ( extensionality-dependent-suspension-structure B d d')
 
   eq-htpy-dependent-suspension-structure :
-    htpy-dependent-suspension-structure B d-ss d-ss' →
-    d-ss ＝ d-ss'
+    htpy-dependent-suspension-structure B d d' →
+    d ＝ d'
   eq-htpy-dependent-suspension-structure =
     map-inv-equiv
-      ( extensionality-dependent-suspension-structure B d-ss d-ss')
+      ( extensionality-dependent-suspension-structure B d d')
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (B : Y → UU l3)
   {ss : suspension-structure X Y}
-  (d-ss : dependent-suspension-structure B ss)
+  (d : dependent-suspension-structure B ss)
   where
 
   refl-htpy-dependent-suspension-structure :
-    htpy-dependent-suspension-structure B d-ss d-ss
+    htpy-dependent-suspension-structure B d d
   pr1 refl-htpy-dependent-suspension-structure = refl
   pr1 (pr2 refl-htpy-dependent-suspension-structure) = refl
   pr2 (pr2 refl-htpy-dependent-suspension-structure) x = right-unit

@@ -58,12 +58,12 @@ This universal property states that the map `ev-suspension` is an equivalence.
 ```agda
 universal-property-suspension' :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2)
-  (susp-str : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-suspension' l X Y susp-str-Y =
+  (s : suspension-structure X Y) → UU (lsuc l ⊔ l1 ⊔ l2)
+universal-property-suspension' l X Y s =
   universal-property-pushout l
     ( const X unit star)
     ( const X unit star)
-    ( cocone-suspension-structure X Y susp-str-Y)
+    ( cocone-suspension-structure X Y s)
 
 is-suspension :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
@@ -76,7 +76,7 @@ is-suspension l X Y =
 ```agda
 ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-  (susp-str-Y : suspension-structure X Y) →
+  (s : suspension-structure X Y) →
   (Z : UU l3) → (Y → Z) → suspension-structure X Z
 ev-suspension (pair N (pair S merid)) Z h =
   pair (h N) (pair (h S) (h ·l merid))
@@ -84,8 +84,8 @@ ev-suspension (pair N (pair S merid)) Z h =
 universal-property-suspension :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
   suspension-structure X Y → UU (lsuc l ⊔ l1 ⊔ l2)
-universal-property-suspension l X Y susp-str-Y =
-  (Z : UU l) → is-equiv (ev-suspension susp-str-Y Z)
+universal-property-suspension l X Y s =
+  (Z : UU l) → is-equiv (ev-suspension s Z)
 ```
 
 ## Properties
@@ -93,30 +93,30 @@ universal-property-suspension l X Y susp-str-Y =
 ```agda
 triangle-ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-  (susp-str-Y : suspension-structure X Y) →
+  (s : suspension-structure X Y) →
   (Z : UU l3) →
   ( ( map-equiv-suspension-structure-suspension-cocone X Z) ∘
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
-      ( cocone-suspension-structure X Y susp-str-Y))) ~
-  ( ev-suspension susp-str-Y Z)
+      ( cocone-suspension-structure X Y s))) ~
+  ( ev-suspension s Z)
 triangle-ev-suspension (pair N (pair S merid)) Z h = refl
 
 is-equiv-ev-suspension :
   { l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
-  ( susp-str-Y : suspension-structure X Y) →
-  ( up-Y : universal-property-suspension' l3 X Y susp-str-Y) →
-  ( Z : UU l3) → is-equiv (ev-suspension susp-str-Y Z)
-is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
+  ( s : suspension-structure X Y) →
+  ( up-Y : universal-property-suspension' l3 X Y s) →
+  ( Z : UU l3) → is-equiv (ev-suspension s Z)
+is-equiv-ev-suspension {X = X} s up-Y Z =
   is-equiv-comp-htpy
-    ( ev-suspension susp-str-Y Z)
+    ( ev-suspension s Z)
     ( map-equiv-suspension-structure-suspension-cocone X Z)
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
-      ( cocone-suspension-structure X _ susp-str-Y))
-    ( inv-htpy (triangle-ev-suspension susp-str-Y Z))
+      ( cocone-suspension-structure X _ s))
+    ( inv-htpy (triangle-ev-suspension s Z))
     ( up-Y Z)
     ( is-equiv-map-equiv-suspension-structure-suspension-cocone X Z)
 ```
