@@ -1,4 +1,4 @@
-# Universal property of suspensions
+ # Universal property of suspensions
 
 ```agda
 module synthetic-homotopy-theory.universal-property-suspensions where
@@ -95,7 +95,7 @@ triangle-ev-suspension :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
   (susp-str-Y : suspension-structure X Y) →
   (Z : UU l3) →
-  ( ( map-inv-compute-suspension-cocone X Z) ∘
+  ( ( map-equiv-suspension-structure-suspension-cocone X Z) ∘
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
@@ -111,12 +111,12 @@ is-equiv-ev-suspension :
 is-equiv-ev-suspension {X = X} susp-str-Y up-Y Z =
   is-equiv-comp-htpy
     ( ev-suspension susp-str-Y Z)
-    ( map-inv-compute-suspension-cocone X Z)
+    ( map-equiv-suspension-structure-suspension-cocone X Z)
     ( cocone-map
       ( const X unit star)
       ( const X unit star)
       ( cocone-suspension-structure X _ susp-str-Y))
     ( inv-htpy (triangle-ev-suspension susp-str-Y Z))
     ( up-Y Z)
-    ( is-equiv-map-inv-compute-suspension-cocone X Z)
+    ( is-equiv-map-equiv-suspension-structure-suspension-cocone X Z)
 ```

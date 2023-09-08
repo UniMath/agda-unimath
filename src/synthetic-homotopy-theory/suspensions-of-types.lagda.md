@@ -109,7 +109,7 @@ module _
         { Y = suspension X}
         ( suspension-structure-suspension X) Z)
       ( is-equiv-map-equiv
-        ( ( inv-equiv ( compute-suspension-cocone X Z)) ∘e
+        ( ( equiv-suspension-structure-suspension-cocone X Z) ∘e
           ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
 
   equiv-up-suspension :
@@ -187,8 +187,8 @@ dependent-up-suspension :
       ( suspension-structure-suspension X)
 dependent-up-suspension l {X = X} B =
   is-equiv-htpy
-    ( ( map-inv-equiv
-      ( compute-dependent-suspension-cocone
+    ( ( map-equiv
+      ( equiv-dependent-suspension-structure-suspension-cocone
         ( suspension-structure-suspension X)
         ( B))) ∘
       ( dependent-cocone-map
@@ -204,8 +204,8 @@ dependent-up-suspension l {X = X} B =
         ( suspension-structure-suspension X)
         ( B)))
     ( is-equiv-comp
-      ( map-inv-equiv
-        ( compute-dependent-suspension-cocone
+      ( map-equiv
+        ( equiv-dependent-suspension-structure-suspension-cocone
           ( suspension-structure-suspension X) B))
       ( dependent-cocone-map
         ( const X unit star)
@@ -214,8 +214,8 @@ dependent-up-suspension l {X = X} B =
           ( suspension-structure-suspension X))
         ( B))
       ( dependent-up-pushout (const X unit star) (const X unit star) B)
-      ( is-equiv-map-inv-equiv
-        ( compute-dependent-suspension-cocone
+      ( is-equiv-map-equiv
+        ( equiv-dependent-suspension-structure-suspension-cocone
           ( suspension-structure-suspension X)
           ( B))))
 

@@ -23,6 +23,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
@@ -131,59 +132,55 @@ cocone-suspension-structure X Y (pair N (pair S merid)) =
       ( const unit Y S)
       ( merid))
 
-compute-suspension-cocone :
+equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-structure X Z ≃ suspension-cocone X Z
-compute-suspension-cocone X Z =
-  inv-equiv
-    ( equiv-Σ
-      ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
-      ( equiv-universal-property-unit Z)
-      ( λ z1 →
-        equiv-Σ
-          ( λ z2 → (x : X) → Id (z1 star) z2)
-          ( equiv-universal-property-unit Z)
-          ( λ z2 → id-equiv)))
+  suspension-cocone X Z ≃ suspension-structure X Z
+equiv-suspension-structure-suspension-cocone X Z =
+  ( equiv-Σ
+    ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
+    ( equiv-universal-property-unit Z)
+    ( λ z1 →
+      equiv-Σ
+        ( λ z2 → (x : X) → Id (z1 star) z2)
+        ( equiv-universal-property-unit Z)
+        ( λ z2 → id-equiv)))
 
-map-compute-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  suspension-structure X Z → suspension-cocone X Z
-map-compute-suspension-cocone X Z =
-  map-equiv (compute-suspension-cocone X Z)
-
-is-equiv-map-compute-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (map-compute-suspension-cocone X Z)
-is-equiv-map-compute-suspension-cocone X Z =
-  is-equiv-map-equiv (compute-suspension-cocone X Z)
-
-map-inv-compute-suspension-cocone :
+map-equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
   suspension-cocone X Z → suspension-structure X Z
-map-inv-compute-suspension-cocone X Z =
-  map-inv-equiv (compute-suspension-cocone X Z)
+map-equiv-suspension-structure-suspension-cocone X Z =
+  map-equiv (equiv-suspension-structure-suspension-cocone X Z)
 
-is-equiv-map-inv-compute-suspension-cocone :
+is-equiv-map-equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (map-inv-compute-suspension-cocone X Z)
-is-equiv-map-inv-compute-suspension-cocone X Z =
-  is-equiv-map-inv-equiv (compute-suspension-cocone X Z)
+  is-equiv (map-equiv-suspension-structure-suspension-cocone X Z)
+is-equiv-map-equiv-suspension-structure-suspension-cocone X Z =
+  is-equiv-map-equiv (equiv-suspension-structure-suspension-cocone X Z)
+
+map-inv-equiv-suspension-structure-suspension-cocone :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+  suspension-structure X Z → suspension-cocone X Z
+map-inv-equiv-suspension-structure-suspension-cocone X Z =
+  map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z)
+
+is-equiv-map-inv-equiv-suspension-structure-suspension-cocone :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+  is-equiv (map-inv-equiv-suspension-structure-suspension-cocone X Z)
+is-equiv-map-inv-equiv-suspension-structure-suspension-cocone X Z =
+  is-equiv-map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z)
 
 htpy-comparison-suspension-cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-    ( map-compute-suspension-cocone X Z)
+    ( map-inv-equiv-suspension-structure-suspension-cocone X Z)
   ~
     ( cocone-suspension-structure X Z)
 htpy-comparison-suspension-cocone-suspension-structure
   ( X)
   ( Z)
   ( ss) =
-    map-inv-equiv
-      ( equiv-ap
-        ( inv-equiv (compute-suspension-cocone X Z))
-        ( map-equiv (compute-suspension-cocone X Z) ss)
-        ( cocone-suspension-structure X Z ss))
-      ( is-retraction-map-inv-equiv (compute-suspension-cocone X Z) ss)
+    is-injective-map-equiv
+      ( equiv-suspension-structure-suspension-cocone X Z)
+      ( ( is-section-map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z) ss))
 ```
 
 #### Characterization of equalities in `suspension-structure`
