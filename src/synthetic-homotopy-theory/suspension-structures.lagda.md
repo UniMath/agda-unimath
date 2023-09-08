@@ -136,14 +136,14 @@ equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
   suspension-cocone X Z ≃ suspension-structure X Z
 equiv-suspension-structure-suspension-cocone X Z =
-  ( equiv-Σ
+  equiv-Σ
     ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
     ( equiv-universal-property-unit Z)
     ( λ z1 →
       equiv-Σ
         ( λ z2 → (x : X) → Id (z1 star) z2)
         ( equiv-universal-property-unit Z)
-        ( λ z2 → id-equiv)))
+        ( λ z2 → id-equiv))
 
 map-equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
