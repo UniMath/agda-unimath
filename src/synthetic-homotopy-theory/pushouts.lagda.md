@@ -149,8 +149,8 @@ is-pushout f g c = is-equiv (cogap f g c)
 
 ```agda
 module _
- {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
- where
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  where
 
   dependent-up-pushout :
     (f : S → A) (g : S → B) →
