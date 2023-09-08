@@ -98,9 +98,9 @@ module _
     is-local-dependent-type f (λ x → (a : A) → B a x)
   map-distributive-Π-is-local-dependent-type B f-loc =
     is-equiv-map-equiv
-      ( equiv-swap-Π ∘e
-        ( equiv-map-Π (λ a → precomp-Π f (B a) , (f-loc a)) ∘e
-          equiv-swap-Π))
+      ( ( equiv-swap-Π) ∘e
+        ( ( equiv-map-Π (λ a → precomp-Π f (B a) , (f-loc a))) ∘e
+          ( equiv-swap-Π)))
 
   map-distributive-Π-is-local :
     {l3 l4 : Level} {A : UU l3} (B : A → UU l4) →
