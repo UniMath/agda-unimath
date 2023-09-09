@@ -181,7 +181,7 @@ module _
   equiv-dependent-suspension-structure-suspension-cocone =
     ( equiv-Σ
       ( λ n →
-        Σ (B (south-suspension-structure c))
+        Σ ( B (south-suspension-structure c))
           ( λ s →
             (x : X) →
             ( dependent-identification
