@@ -6,7 +6,15 @@ associativity to different
 
 ## Mixfix operators in Agda
 
-Mixfix operators in Agda can each be assigned a
+Infix operations in Agda are binary operations that take arguments on either
+side. For example, addition is commonly written in infix notation as `1 + 2`.
+Mixfix operations are operations with longer names potentially containing
+multiple components, where the arguments appear between the components. For
+example, the commutator `[a,b]` is a common mixfix operation. The purpose of
+introducing infix and mixfix operations in Agda is to make the code more
+readable by using commonly accepted notation for widely used operations.
+
+Mixfix operators can each be assigned a
 [precedence level](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html#precedence).
 This can in principle be any signed fractional value, although we prefer them to
 be non-negative integral values. The higher this value is, the higher precedence
@@ -21,6 +29,9 @@ For instance, the operator `_*ℕ_` is assigned the precedence level `40`, and
 In addition to a precedence level, every mixfix operator can be defined to be
 either left or right
 [associative](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html#associativity).
+It can be beneficial to define associativity of operators, to avoid excessively
+parenthesized expressions. The parenthization should however never be omitted
+when there making the code ambiguous or harder to read.
 
 For instance, since the pairing operator `_,_` is defined to associate to the
 right, the expression `a , b , c` is parsed as `a , (b , c)`. By default, an
@@ -54,7 +65,7 @@ parametric operations.
 As a rule of thumb, the lowest value in a range is assigned by default. The
 notable exceptions are outlined below.
 
-## Special rules
+## Special rules for assigning precedence levels
 
 In this section, we outline special rules for assigning precedence levels and
 associativity to particular classes of operations. Please make sure to update
@@ -63,11 +74,12 @@ this section if new rules are implemented.
 ### Function type-like formation operations
 
 In Agda, the arrow notation `_→_` is directly handled by the parser, hence it
-has hardcoded precedence and associativity. In particular, it has lower
+has hardcoded precedence and right associativity. In particular, it has lower
 precedence than any user-declared operator. To make other arrow notations
 consistent with this, we consider them as relational operators and assign them
-the precedence level of `5`. Other relational operators are assigned the
-precedence level `6` by default.
+the precedence level of `5`, and usually define them to also be right
+associative. Other relational operators are assigned the precedence level `6` by
+default.
 
 ### Reasoning syntax
 
@@ -84,6 +96,24 @@ expressions like `a - b + c` are parsed as `(a - b) + c`.
 
 Moreover, subtractive operators are usually left associative, meaning that
 `a - b - c` should be parsed as `(a - b) - c`.
+
+## Assigning associativities
+
+Below, we outline a list of general rules when assigning associativities.
+
+- If the operator is definitionally associative, e.g. `_∘_`, feel free to assign
+  it any associativity.
+- It is natural to compute arithmetic expressions such as `1 + 2 + 3` from left
+  to right, i.e. as `(1 + 2) + 3 = 3 + 3 = 6`,
+- For type formers such as `_+_` and `_×_`, it is natural to parse them from
+  left to right in terms of their introduction/elimination rules. Therefore,
+  they are commonly associated to the _right_.
+
+For operators that are only weakly associative, it may be practical to define
+_an_ associativity, for when the particular association doesn't matter and you
+still want to apply the operator multiple times. For instance, when performing
+an equality proof when you do not care which way the identifications are
+concatenated.
 
 ## Table of assigned precedences
 
