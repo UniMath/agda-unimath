@@ -168,14 +168,14 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : Pointed-Type l} {x : type-Pointed-Type A}
+  {l : Level} (A : Pointed-Type l) {x : type-Pointed-Type A}
   (p : point-Pointed-Type A ＝ x)
   where
 
-  equiv-loop-pointed-identity :
-   (point-Pointed-Type A ＝ x , p) ≃∗ Ω A
-  pr1 equiv-loop-pointed-identity =
+  pointed-equiv-loop-pointed-identity :
+   ( pair (point-Pointed-Type A ＝ x)  p) ≃∗ Ω A
+  pr1 pointed-equiv-loop-pointed-identity =
     equiv-concat' (point-Pointed-Type A) (inv p)
-  pr2 equiv-loop-pointed-identity =
+  pr2 pointed-equiv-loop-pointed-identity =
     right-inv p
 ```
