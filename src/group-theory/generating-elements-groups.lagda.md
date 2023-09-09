@@ -7,6 +7,8 @@ module group-theory.generating-elements-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-rings
+
 open import elementary-number-theory.integers
 open import elementary-number-theory.natural-numbers
 
@@ -31,6 +33,7 @@ open import group-theory.abelian-groups
 open import group-theory.addition-homomorphisms-abelian-groups
 open import group-theory.commuting-elements-groups
 open import group-theory.conjugation
+open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
 open import group-theory.groups
@@ -46,6 +49,9 @@ open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-elements-groups
 open import group-theory.subsets-groups
 open import group-theory.trivial-group-homomorphisms
+
+open import ring-theory.rings
+open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
 ```
 
 </details>
@@ -70,8 +76,7 @@ Of these four equivalent characterizations, we take the first as our standard de
 We note that the concept of *group equipped with a generating element* is subtly different from the concept of [cyclic group](group-theory.cyclic-groups.md). Groups equipped with generating elements have a specified generating element as part of their structure, whereas cyclic groups are groups with the property that there [exists](foundation.existential-quantification.md) a generating element.
 
 Furthermore, we show that for any group `G` equipped with a generating element, the evaluation map
-`hom(G,G) → G` is an [equivalence](foundation.equivalences.md). Since cyclic
-groups are [abelian](group-theory.abelian-groups.md), it follows that `hom(G,G)`
+`hom(G,G) → G` is an [equivalence](foundation.equivalences.md). Since groups equipped with a generating element are [abelian](group-theory.abelian-groups.md), it follows that `hom(G,G)`
 is the [endomorphism ring](group-theory.endomorphism-rings-abelian-groups.md) of
 an abelian group. The evaluation map on an endomorphism ring is always a group
 homomorphism, so it follows from the
@@ -81,8 +86,8 @@ homomorphism, so it follows from the
   hom(G,G) ≅ G
 ```
 
-that any cyclic group is in fact a
-[commutative ring](commutative-algebra.commutative-rings.md).
+that any group equipped with a generating element is in fact a
+[commutative ring](commutative-algebra.commutative-rings.md). Here we see another difference between groups equipped with a specified generating element and cyclic groups: Equipping a cyclic group with the structure of a commutative ring amounts to equipping the cyclic group with a *specified* generating element, which corresponds to the unit element of the commutative ring structure.
 
 ## Definitions
 
@@ -580,7 +585,7 @@ module _
       ( is-equiv-ev-element-Group-With-Generating-Element)
 
   iso-ev-element-Group-With-Generating-Element :
-    iso-Ab
+    type-iso-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G))
@@ -598,7 +603,28 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (G : Group l1) (g : type-Group G)
-  (U : is-generating-element-Group G g)
+  {l1 : Level} (G : Group-With-Generating-Element l1)
   where
+
+  ring-Group-With-Generating-Element : Ring l1
+  ring-Group-With-Generating-Element =
+    transport-ring-structure-iso-Ab
+      ( endomorphism-ring-Ab (abelian-group-Group-With-Generating-Element G))
+      ( abelian-group-Group-With-Generating-Element G)
+      ( iso-ev-element-Group-With-Generating-Element G)
+
+  one-Group-With-Generating-Element : type-Group-With-Generating-Element G
+  one-Group-With-Generating-Element =
+    one-Ring ring-Group-With-Generating-Element
+
+  compute-one-Group-With-Generating-Element :
+    one-Group-With-Generating-Element ＝
+    element-Group-With-Generating-Element G
+  compute-one-Group-With-Generating-Element = refl
+
+  mul-Group-With-Generating-Element :
+    (x y : type-Group-With-Generating-Element G) →
+    type-Group-With-Generating-Element G
+  mul-Group-With-Generating-Element =
+    mul-Ring ring-Group-With-Generating-Element
 ```

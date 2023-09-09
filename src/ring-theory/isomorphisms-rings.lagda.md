@@ -209,7 +209,7 @@ abstract
     ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f) →
     ( pres-mul-f : preserves-mul-hom-Ab R1 R2 f) →
     preserves-mul-hom-Ab R2 R1
-      ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
+      ( hom-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
   preserves-mul-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-mul-f x y =
     ( inv
       ( ap
@@ -251,7 +251,7 @@ preserves-unit-inv-is-iso-hom-Ab :
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f)
   ( pres-unit-f : preserves-unit-hom-Ab R1 R2 f) →
   preserves-unit-hom-Ab R2 R1
-    ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
+    ( hom-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
 preserves-unit-inv-is-iso-hom-Ab R1 R2 f is-iso-f pres-unit-f =
   ( inv
     ( ap
@@ -266,7 +266,7 @@ is-ring-homomorphism-inv-is-iso-hom-Ab :
   ( is-iso-f : is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f) →
   ( is-ring-hom-f : is-ring-homomorphism-hom-Ab R1 R2 f) →
   is-ring-homomorphism-hom-Ab R2 R1
-    ( inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
+    ( hom-inv-is-iso-hom-Ab (ab-Ring R1) (ab-Ring R2) f is-iso-f)
 pr1
   ( is-ring-homomorphism-inv-is-iso-hom-Ab
       R1 R2 f is-iso-f (pres-mul-f , pres-unit-f)) =
@@ -285,7 +285,7 @@ inv-hom-Ring-is-iso-hom-Ab :
       ( hom-ab-hom-Ring R1 R2 f)) →
   type-hom-Ring R2 R1
 pr1 (inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f) =
-  inv-is-iso-hom-Ab
+  hom-inv-is-iso-hom-Ab
     ( ab-Ring R1)
     ( ab-Ring R2)
     ( hom-ab-hom-Ring R1 R2 f)
@@ -314,7 +314,7 @@ abstract
           ( comp-hom-Ring R2 R1 R2 f
             ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)))
         ( id-hom-Ab (ab-Ring R2))
-        ( is-section-inv-is-iso-hom-Ab
+        ( is-section-hom-inv-is-iso-hom-Ab
           ( ab-Ring R1)
           ( ab-Ring R2)
           ( hom-ab-hom-Ring R1 R2 f)
@@ -331,7 +331,7 @@ abstract
             ( inv-hom-Ring-is-iso-hom-Ab R1 R2 f is-iso-f)
             ( f)))
         ( id-hom-Ab (ab-Ring R1))
-        ( is-retraction-inv-is-iso-hom-Ab
+        ( is-retraction-hom-inv-is-iso-hom-Ab
           ( ab-Ring R1)
           ( ab-Ring R2)
           ( hom-ab-hom-Ring R1 R2 f)
@@ -340,19 +340,19 @@ abstract
 iso-Ab-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) → UU (l1 ⊔ l2)
 iso-Ab-Ring R1 R2 =
-  Σ ( iso-Ab (ab-Ring R1) (ab-Ring R2))
+  Σ ( type-iso-Ab (ab-Ring R1) (ab-Ring R2))
     ( λ f →
       is-ring-homomorphism-hom-Ab R1 R2
         ( hom-iso-Ab (ab-Ring R1) (ab-Ring R2) f))
 
 iso-Ab-iso-Ab-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  iso-Ab-Ring R1 R2 → iso-Ab (ab-Ring R1) (ab-Ring R2)
+  iso-Ab-Ring R1 R2 → type-iso-Ab (ab-Ring R1) (ab-Ring R2)
 iso-Ab-iso-Ab-Ring R1 R2 = pr1
 
 iso-Ab-iso-Ring :
   { l1 l2 : Level} (R1 : Ring l1) (R2 : Ring l2) →
-  iso-Ring R1 R2 → iso-Ab (ab-Ring R1) (ab-Ring R2)
+  iso-Ring R1 R2 → type-iso-Ab (ab-Ring R1) (ab-Ring R2)
 pr1 (iso-Ab-iso-Ring R1 R2 f) = hom-ab-hom-Ring R1 R2 (hom-iso-Ring R1 R2 f)
 pr2 (iso-Ab-iso-Ring R1 R2 f) =
   is-iso-hom-Ab-is-iso-hom-Ring R1 R2

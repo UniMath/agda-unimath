@@ -273,17 +273,6 @@ module _
   {l : Level} (A : Ab l)
   where
 
-  private
-
-    infixl 50 _*_
-    _*_ = add-ℤ
-
-    pwr = integer-multiple-Ab A
-
-    infixr 60 _^_
-    _^_ : (x : type-Ab A) (k : ℤ) → type-Ab A
-    _^_ x k = integer-multiple-Ab A k x
-
   integer-multiple-mul-Ab :
     (k l : ℤ) (x : type-Ab A) →
     integer-multiple-Ab A (k *ℤ l) x ＝

@@ -22,7 +22,6 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.isomorphisms-groups
-open import group-theory.isomorphisms-semigroups
 ```
 
 </details>
@@ -35,91 +34,141 @@ underlying [groups](group-theory.groups.md).
 
 ## Definitions
 
+### The predicate of being an isomorphism of abelian groups
+
 ```agda
-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  ( f : type-hom-Ab A B) → UU (l1 ⊔ l2)
-is-iso-hom-Ab A B =
-  is-iso-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B)
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  where
+  
+  is-iso-hom-Ab : UU (l1 ⊔ l2)
+  is-iso-hom-Ab = is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  is-iso-hom-Ab A B f → type-hom-Ab B A
-inv-is-iso-hom-Ab A B f = pr1
+  is-prop-is-iso-hom-Ab : is-prop is-iso-hom-Ab
+  is-prop-is-iso-hom-Ab =
+    is-prop-is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
-map-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  is-iso-hom-Ab A B f → type-Ab B → type-Ab A
-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  map-hom-Ab B A (inv-is-iso-hom-Ab A B f is-iso-f)
+  is-iso-prop-hom-Ab : Prop (l1 ⊔ l2)
+  is-iso-prop-hom-Ab = is-iso-prop-hom-Group (group-Ab A) (group-Ab B) f
 
-is-section-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  ( is-iso-f : is-iso-hom-Ab A B f) →
-  Id (comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f)) (id-hom-Ab B)
-is-section-inv-is-iso-hom-Ab A B f is-iso-f = pr1 (pr2 is-iso-f)
+  hom-inv-is-iso-hom-Ab : is-iso-hom-Ab → type-hom-Ab B A
+  hom-inv-is-iso-hom-Ab = hom-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
-is-section-map-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  ( is-iso-f : is-iso-hom-Ab A B f) →
-  ( (map-hom-Ab A B f) ∘ (map-hom-Ab B A (inv-is-iso-hom-Ab A B f is-iso-f))) ~
-  id
-is-section-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  htpy-eq-hom-Ab B B
-    ( comp-hom-Ab B A B f (inv-is-iso-hom-Ab A B f is-iso-f))
-    ( id-hom-Ab B)
-    ( is-section-inv-is-iso-hom-Ab A B f is-iso-f)
+  map-inv-is-iso-hom-Ab : is-iso-hom-Ab → type-Ab B → type-Ab A
+  map-inv-is-iso-hom-Ab =
+    map-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
-is-retraction-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  ( is-iso-f : is-iso-hom-Ab A B f) →
-  Id (comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f) (id-hom-Ab A)
-is-retraction-inv-is-iso-hom-Ab A B f is-iso-f = pr2 (pr2 is-iso-f)
+  is-section-hom-inv-is-iso-hom-Ab :
+    (H : is-iso-hom-Ab) →
+    comp-hom-Ab B A B f (hom-inv-is-iso-hom-Ab H) ＝ id-hom-Ab B
+  is-section-hom-inv-is-iso-hom-Ab =
+    is-section-hom-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
-is-retraction-map-inv-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  ( is-iso-f : is-iso-hom-Ab A B f) →
-  ( (map-inv-is-iso-hom-Ab A B f is-iso-f) ∘ (map-hom-Ab A B f)) ~ id
-is-retraction-map-inv-is-iso-hom-Ab A B f is-iso-f =
-  htpy-eq-hom-Ab A A
-    ( comp-hom-Ab A B A (inv-is-iso-hom-Ab A B f is-iso-f) f)
-    ( id-hom-Ab A)
-    ( is-retraction-inv-is-iso-hom-Ab A B f is-iso-f)
+  is-section-map-inv-is-iso-hom-Ab :
+    (H : is-iso-hom-Ab) →
+    ( map-hom-Ab A B f ∘ map-hom-Ab B A (hom-inv-is-iso-hom-Ab H)) ~ id
+  is-section-map-inv-is-iso-hom-Ab =
+    is-section-map-inv-is-iso-hom-Group
+      ( group-Ab A)
+      ( group-Ab B)
+      ( f)
 
-is-prop-is-iso-hom-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B) →
-  is-prop (is-iso-hom-Ab A B f)
-is-prop-is-iso-hom-Ab A B f =
-  is-prop-is-iso-hom-Semigroup (semigroup-Ab A) (semigroup-Ab B) f
+  is-retraction-hom-inv-is-iso-hom-Ab :
+    (H : is-iso-hom-Ab) →
+    comp-hom-Ab A B A (hom-inv-is-iso-hom-Ab H) f ＝ id-hom-Ab A
+  is-retraction-hom-inv-is-iso-hom-Ab H = pr2 (pr2 H)
 
-iso-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) → UU (l1 ⊔ l2)
-iso-Ab A B = Σ (type-hom-Ab A B) (is-iso-hom-Ab A B)
+  is-retraction-map-inv-is-iso-hom-Ab :
+    (H : is-iso-hom-Ab) →
+    ( map-inv-is-iso-hom-Ab H ∘ map-hom-Ab A B f) ~ id
+  is-retraction-map-inv-is-iso-hom-Ab =
+    is-retraction-map-inv-is-iso-hom-Group
+      ( group-Ab A)
+      ( group-Ab B)
+      ( f)
+```
 
-hom-iso-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  iso-Ab A B → type-hom-Ab A B
-hom-iso-Ab A B = pr1
+### The predicate of being an equivalence of groups
 
-is-iso-hom-iso-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  ( f : iso-Ab A B) → is-iso-hom-Ab A B (hom-iso-Ab A B f)
-is-iso-hom-iso-Ab A B = pr2
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
 
-inv-hom-iso-Ab :
-  { l1 l2 : Level} (A : Ab l1) (B : Ab l2) →
-  iso-Ab A B → type-hom-Ab B A
-inv-hom-iso-Ab A B f =
-  inv-is-iso-hom-Ab A B
-    ( hom-iso-Ab A B f)
-    ( is-iso-hom-iso-Ab A B f)
+  is-equiv-hom-Ab : type-hom-Ab A B → UU (l1 ⊔ l2)
+  is-equiv-hom-Ab =
+    is-equiv-hom-Group (group-Ab A) (group-Ab B)
+
+  equiv-Ab : UU (l1 ⊔ l2)
+  equiv-Ab = equiv-Group (group-Ab A) (group-Ab B)
+```
+
+### The type of isomorphisms of abelian groups
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
+
+  type-iso-Ab : UU (l1 ⊔ l2)
+  type-iso-Ab = type-iso-Group (group-Ab A) (group-Ab B)
+
+  hom-iso-Ab : type-iso-Ab → type-hom-Ab A B
+  hom-iso-Ab = hom-iso-Group (group-Ab A) (group-Ab B)
+
+  map-iso-Ab : type-iso-Ab → type-Ab A → type-Ab B
+  map-iso-Ab = map-iso-Group (group-Ab A) (group-Ab B)
+
+  preserves-add-iso-Ab :
+    (f : type-iso-Ab) (x y : type-Ab A) →
+    map-iso-Ab f (add-Ab A x y) ＝ add-Ab B (map-iso-Ab f x) (map-iso-Ab f y)
+  preserves-add-iso-Ab =
+    preserves-mul-iso-Group (group-Ab A) (group-Ab B)
+
+  is-iso-iso-Ab : (f : type-iso-Ab) → is-iso-hom-Ab A B (hom-iso-Ab f)
+  is-iso-iso-Ab = is-iso-iso-Group (group-Ab A) (group-Ab B)
+
+  hom-inv-iso-Ab : type-iso-Ab → type-hom-Ab B A
+  hom-inv-iso-Ab = hom-inv-iso-Group (group-Ab A) (group-Ab B)
+
+  map-inv-iso-Ab : type-iso-Ab → type-Ab B → type-Ab A
+  map-inv-iso-Ab = map-inv-iso-Group (group-Ab A) (group-Ab B)
+
+  preserves-add-inv-iso-Ab :
+    (f : type-iso-Ab) (x y : type-Ab B) →
+    map-inv-iso-Ab f (add-Ab B x y) ＝
+    add-Ab A (map-inv-iso-Ab f x) (map-inv-iso-Ab f y)
+  preserves-add-inv-iso-Ab =
+    preserves-mul-inv-iso-Group (group-Ab A) (group-Ab B)
+
+  is-section-hom-inv-iso-Ab :
+    (f : type-iso-Ab) →
+    comp-hom-Ab B A B (hom-iso-Ab f) (hom-inv-iso-Ab f) ＝ id-hom-Ab B
+  is-section-hom-inv-iso-Ab =
+    is-section-hom-inv-iso-Group (group-Ab A) (group-Ab B)
+
+  is-section-map-inv-iso-Ab :
+    (f : type-iso-Ab) → (map-iso-Ab f ∘ map-inv-iso-Ab f) ~ id
+  is-section-map-inv-iso-Ab =
+    is-section-map-inv-iso-Group (group-Ab A) (group-Ab B)
+
+  is-retraction-hom-inv-iso-Ab :
+    (f : type-iso-Ab) →
+    comp-hom-Ab A B A (hom-inv-iso-Ab f) (hom-iso-Ab f) ＝ id-hom-Ab A
+  is-retraction-hom-inv-iso-Ab =
+    is-retraction-hom-inv-iso-Group (group-Ab A) (group-Ab B)
+
+  is-retraction-map-inv-iso-Ab :
+    (f : type-iso-Ab) → (map-inv-iso-Ab f ∘ map-iso-Ab f) ~ id
+  is-retraction-map-inv-iso-Ab =
+    is-retraction-map-inv-iso-Group (group-Ab A) (group-Ab B)
 ```
 
 ### The identity isomorphism of abelian groups
 
 ```agda
 id-iso-Ab :
-  {l1 : Level} (A : Ab l1) → iso-Ab A A
+  {l1 : Level} (A : Ab l1) → type-iso-Ab A A
 id-iso-Ab A = id-iso-Group (group-Ab A)
 ```
 
@@ -129,19 +178,19 @@ id-iso-Ab A = id-iso-Group (group-Ab A)
 
 ```agda
 iso-eq-Ab :
-  { l1 : Level} (A B : Ab l1) → Id A B → iso-Ab A B
+  { l1 : Level} (A B : Ab l1) → Id A B → type-iso-Ab A B
 iso-eq-Ab A .A refl = id-iso-Ab A
 
 abstract
   equiv-iso-eq-Ab' :
-    {l1 : Level} (A B : Ab l1) → Id A B ≃ iso-Ab A B
+    {l1 : Level} (A B : Ab l1) → Id A B ≃ type-iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
     ( equiv-ap-inclusion-subtype is-abelian-group-Prop {A} {B})
 
 abstract
   is-contr-total-iso-Ab :
-    { l1 : Level} (A : Ab l1) → is-contr (Σ (Ab l1) (iso-Ab A))
+    { l1 : Level} (A : Ab l1) → is-contr (Σ (Ab l1) (type-iso-Ab A))
   is-contr-total-iso-Ab {l1} A =
     is-contr-equiv'
       ( Σ (Ab l1) (Id A))
@@ -156,7 +205,7 @@ is-equiv-iso-eq-Ab A =
     ( iso-eq-Ab A)
 
 eq-iso-Ab :
-  { l1 : Level} (A B : Ab l1) → iso-Ab A B → Id A B
+  { l1 : Level} (A B : Ab l1) → type-iso-Ab A B → Id A B
 eq-iso-Ab A B = map-inv-is-equiv (is-equiv-iso-eq-Ab A B)
 ```
 
@@ -167,23 +216,17 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
 
-  is-equiv-hom-Ab : type-hom-Ab A B → UU (l1 ⊔ l2)
-  is-equiv-hom-Ab = is-equiv-hom-Group (group-Ab A) (group-Ab B)
-
-  equiv-Ab : UU (l1 ⊔ l2)
-  equiv-Ab = equiv-Group (group-Ab A) (group-Ab B)
-
   is-iso-is-equiv-hom-Ab :
-    (f : type-hom-Ab A B) → is-equiv-hom-Ab f → is-iso-hom-Ab A B f
+    (f : type-hom-Ab A B) → is-equiv-hom-Ab A B f → is-iso-hom-Ab A B f
   is-iso-is-equiv-hom-Ab = is-iso-is-equiv-hom-Group (group-Ab A) (group-Ab B)
 
   is-equiv-is-iso-hom-Ab :
-    (f : type-hom-Ab A B) → is-iso-hom-Ab A B f → is-equiv-hom-Ab f
+    (f : type-hom-Ab A B) → is-iso-hom-Ab A B f → is-equiv-hom-Ab A B f
   is-equiv-is-iso-hom-Ab = is-equiv-is-iso-hom-Group (group-Ab A) (group-Ab B)
 
-  equiv-iso-equiv-Ab : equiv-Ab ≃ iso-Ab A B
+  equiv-iso-equiv-Ab : equiv-Ab A B ≃ type-iso-Ab A B
   equiv-iso-equiv-Ab = equiv-iso-equiv-Group (group-Ab A) (group-Ab B)
 
-  iso-equiv-Ab : equiv-Ab → iso-Ab A B
+  iso-equiv-Ab : equiv-Ab A B → type-iso-Ab A B
   iso-equiv-Ab = iso-equiv-Group (group-Ab A) (group-Ab B)
 ```
