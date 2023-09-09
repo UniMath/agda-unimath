@@ -190,7 +190,7 @@ module _
               ( n)
               ( s))))
       ( equiv-dependent-universal-property-unit
-        ( λ x → (B (north-suspension-structure c))))
+        ( λ x → B (north-suspension-structure c)))
       ( λ N-susp-c →
         ( equiv-Σ
           ( λ s →
