@@ -56,7 +56,7 @@ pointed-equiv A B =
   Σ ( type-Pointed-Type A ≃ type-Pointed-Type B)
     ( λ e → map-equiv e (point-Pointed-Type A) ＝ point-Pointed-Type B)
 
-infix 7 _≃∗_
+infix 6 _≃∗_
 _≃∗_ = pointed-equiv
 
 compute-pointed-equiv :

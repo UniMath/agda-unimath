@@ -81,7 +81,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  infix 7 _~_
+  infix 6 _~_
   _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
   f ~ g = (x : A) → eq-value f g x
 ```

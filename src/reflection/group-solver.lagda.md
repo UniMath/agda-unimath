@@ -139,7 +139,7 @@ module _ {n : ℕ} where
       ∀ {x} {y} {z} →
       GroupEqualityElem x y → GroupEquality y z → GroupEquality x z
 
-  infixr 6 _∷GE_
+  infixr 10 _∷GE_
 
   module _ where
     -- equivalence relation

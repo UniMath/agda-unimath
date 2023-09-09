@@ -45,7 +45,7 @@ module _
   is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = section f × retraction f
 
-infix 10 _≃_
+infix 6 _≃_
 _≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = Σ (A → B) is-equiv
 ```
