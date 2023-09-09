@@ -198,33 +198,33 @@ module _
       ＝ eq-htpy
           ( (h ·l (bottom-right ·l H)) ∙h ((h ·l K) ·r top-left))
         by
-          ap
-            ( eq-htpy)
-            ( eq-htpy
-              ( distributive-left-whisk-concat-htpy
-                ( h)
-                ( bottom-right ·l H)
-                ( K ·r top-left)))
+        ap
+          ( eq-htpy)
+          ( eq-htpy
+            ( distributive-left-whisk-concat-htpy
+              ( h)
+              ( bottom-right ·l H)
+              ( K ·r top-left)))
       ＝ eq-htpy
           ( h ·l (bottom-right ·l H)) ∙
         eq-htpy
           ( (h ·l K) ·r top-left)
         by
-          eq-htpy-concat-htpy
-            ( h ·l (bottom-right ·l H))
-            ( (h ·l K) ·r top-left)
+        eq-htpy-concat-htpy
+          ( h ·l (bottom-right ·l H))
+          ( (h ·l K) ·r top-left)
       ＝ eq-htpy
           ( (h ∘ bottom-right) ·l H) ∙
           ap
             ( precomp top-left W)
             ( eq-htpy (h ·l K))
         by
-          ap-binary
-            ( λ L q → eq-htpy L ∙ q)
-            ( eq-htpy (associative-left-whisk-comp h bottom-right H))
-            ( compute-eq-htpy-right-whisk
-              ( top-left)
-              ( (h ·l K)))
+        ap-binary
+          ( λ L q → eq-htpy L ∙ q)
+          ( eq-htpy (associative-left-whisk-comp h bottom-right H))
+          ( compute-eq-htpy-right-whisk
+            ( top-left)
+            ( h ·l K))
 
   commutative-precomp-pasting-coherence-square-maps' :
     ( top : A → X) (left-top : A → B) (right-top : X → Y) (middle : B → Y) →
