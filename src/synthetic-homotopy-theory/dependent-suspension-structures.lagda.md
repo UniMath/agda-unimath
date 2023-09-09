@@ -180,7 +180,7 @@ module _
     ( dependent-suspension-structure B c)
   equiv-dependent-suspension-structure-suspension-cocone =
     ( equiv-Σ
-      (λ n →
+      ( λ n →
         Σ (B (south-suspension-structure c))
           ( λ s →
             (x : X) →
