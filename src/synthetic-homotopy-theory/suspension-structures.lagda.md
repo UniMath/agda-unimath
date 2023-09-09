@@ -23,6 +23,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-systems
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.structure-identity-principle
 open import foundation.transport
 open import foundation.type-arithmetic-dependent-pair-types
@@ -131,10 +132,10 @@ cocone-suspension-structure X Y (pair N (pair S merid)) =
       ( const unit Y S)
       ( merid))
 
-comparison-suspension-cocone :
+equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
   suspension-cocone X Z ≃ suspension-structure X Z
-comparison-suspension-cocone X Z =
+equiv-suspension-structure-suspension-cocone X Z =
   equiv-Σ
     ( λ z1 → Σ Z (λ z2 → (x : X) → Id z1 z2))
     ( equiv-universal-property-unit Z)
@@ -144,42 +145,44 @@ comparison-suspension-cocone X Z =
         ( equiv-universal-property-unit Z)
         ( λ z2 → id-equiv))
 
-map-comparison-suspension-cocone :
+map-equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
   suspension-cocone X Z → suspension-structure X Z
-map-comparison-suspension-cocone X Z =
-  map-equiv (comparison-suspension-cocone X Z)
+map-equiv-suspension-structure-suspension-cocone X Z =
+  map-equiv (equiv-suspension-structure-suspension-cocone X Z)
 
-is-equiv-map-comparison-suspension-cocone :
+is-equiv-map-equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (map-comparison-suspension-cocone X Z)
-is-equiv-map-comparison-suspension-cocone X Z =
-  is-equiv-map-equiv (comparison-suspension-cocone X Z)
+  is-equiv (map-equiv-suspension-structure-suspension-cocone X Z)
+is-equiv-map-equiv-suspension-structure-suspension-cocone X Z =
+  is-equiv-map-equiv (equiv-suspension-structure-suspension-cocone X Z)
 
-htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure :
+map-inv-equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-    ( map-inv-equiv (comparison-suspension-cocone X Z))
+  suspension-structure X Z → suspension-cocone X Z
+map-inv-equiv-suspension-structure-suspension-cocone X Z =
+  map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z)
+
+is-equiv-map-inv-equiv-suspension-structure-suspension-cocone :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+  is-equiv (map-inv-equiv-suspension-structure-suspension-cocone X Z)
+is-equiv-map-inv-equiv-suspension-structure-suspension-cocone X Z =
+  is-equiv-map-inv-equiv (equiv-suspension-structure-suspension-cocone X Z)
+
+htpy-comparison-suspension-cocone-suspension-structure :
+  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
+    ( map-inv-equiv-suspension-structure-suspension-cocone X Z)
   ~
     ( cocone-suspension-structure X Z)
-htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
+htpy-comparison-suspension-cocone-suspension-structure
   ( X)
   ( Z)
-  ( x) =
-    map-inv-equiv
-      ( equiv-ap-emb (emb-equiv (comparison-suspension-cocone X Z)))
-      ( is-section-map-inv-equiv (comparison-suspension-cocone X Z) x)
-
-is-equiv-map-inv-comparison-suspension-cocone :
-  {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
-  is-equiv (cocone-suspension-structure X Z)
-is-equiv-map-inv-comparison-suspension-cocone X Z =
-  is-equiv-htpy
-    ( map-inv-equiv (comparison-suspension-cocone X Z))
-    ( inv-htpy
-      ( htpy-map-inv-comparison-suspension-cocone-cocone-suspension-structure
-        ( X)
-        ( Z)))
-    ( is-equiv-map-inv-equiv (comparison-suspension-cocone X Z))
+  ( s) =
+  is-injective-map-equiv
+    ( equiv-suspension-structure-suspension-cocone X Z)
+    ( is-section-map-inv-equiv
+      ( equiv-suspension-structure-suspension-cocone X Z)
+      ( s))
 ```
 
 #### Characterization of equalities in `suspension-structure`

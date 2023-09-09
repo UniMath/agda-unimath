@@ -15,7 +15,9 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
+open import synthetic-homotopy-theory.dependent-universal-property-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
@@ -142,6 +144,25 @@ is-pushout f g c = is-equiv (cogap f g c)
 ```
 
 ## Properties
+
+### The pushout of a span has the dependent universal property
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
+  where
+
+  dependent-up-pushout :
+    (f : S → A) (g : S → B) →
+    dependent-universal-property-pushout l4 f g (cocone-pushout f g)
+  dependent-up-pushout f g =
+    dependent-universal-property-universal-property-pushout
+    ( f)
+    ( g)
+    ( cocone-pushout f g)
+    ( λ l → up-pushout f g)
+    ( l4)
+```
 
 ### Computation with the cogap map
 
