@@ -14,8 +14,8 @@ open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
 
-open import structured-types.pointed-types
 open import structured-types.pointed-equivalences
+open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.iterated-loop-spaces
@@ -124,8 +124,8 @@ interchange-concat-Ω² =
 ```
 
 ### The loop space of a pointed type is equivalent to a double loop
-space
 
+space
 
 ```agda
 module _
@@ -134,8 +134,8 @@ module _
   where
 
   pointed-equiv-2-loop-pointed-identity :
-    Ω ((pair (point-Pointed-Type A ＝ x)  p)) ≃∗ Ω² A
+    Ω ((pair (point-Pointed-Type A ＝ x) p)) ≃∗ Ω² A
   pointed-equiv-2-loop-pointed-identity =
     pointed-equiv-Ω-pointed-equiv
-      ( pointed-equiv-loop-pointed-identity A p)  
+      ( pointed-equiv-loop-pointed-identity A p)
 ```

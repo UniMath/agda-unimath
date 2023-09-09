@@ -99,23 +99,21 @@ module _
 
 ### Pointed embeddings induce pointed equivalces on loop spaces
 
-```
+```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
   (f : A →∗ B) (t : is-emb (map-pointed-map f))
   where
 
-
-
   is-equiv-map-Ω-emb :
-     is-equiv (map-Ω f)
+    is-equiv (map-Ω f)
   is-equiv-map-Ω-emb =
     is-equiv-comp
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap (map-pointed-map f))
       ( t (point-Pointed-Type A) (point-Pointed-Type A))
       ( is-equiv-tr-type-Ω (preserves-point-pointed-map f))
-    
+
   equiv-map-Ω-emb :
     type-Ω A ≃ type-Ω B
   pr1 equiv-map-Ω-emb = map-Ω f
@@ -127,7 +125,7 @@ module _
   pr2 pointed-equiv-pointed-map-Ω-emb = preserves-refl-map-Ω f
 ```
 
-### the  `pointed-map-Ω` preserves equivalences
+### the `pointed-map-Ω` preserves equivalences
 
 ```agda
 module _
@@ -154,6 +152,6 @@ module _
   pointed-equiv-Ω-pointed-equiv :
     Ω A ≃∗ Ω B
   pr1 pointed-equiv-Ω-pointed-equiv = equiv-map-Ω-pointed-equiv e
-  pr2 pointed-equiv-Ω-pointed-equiv = preserves-refl-map-Ω (pointed-map-pointed-equiv e)
-
+  pr2 pointed-equiv-Ω-pointed-equiv =
+    preserves-refl-map-Ω (pointed-map-pointed-equiv e)
 ```

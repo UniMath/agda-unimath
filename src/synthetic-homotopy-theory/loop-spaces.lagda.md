@@ -115,7 +115,8 @@ module _
   where
 
   associative-mul-Ω :
-    (x y z : type-Ω A) → Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
+    (x y z : type-Ω A) →
+    Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
   associative-mul-Ω x y z = assoc x y z
 ```
 
@@ -173,7 +174,7 @@ module _
   where
 
   pointed-equiv-loop-pointed-identity :
-   ( pair (point-Pointed-Type A ＝ x)  p) ≃∗ Ω A
+    ( pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω A
   pr1 pointed-equiv-loop-pointed-identity =
     equiv-concat' (point-Pointed-Type A) (inv p)
   pr2 pointed-equiv-loop-pointed-identity =
