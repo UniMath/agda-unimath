@@ -131,10 +131,10 @@ module _
     ( H : f ~ g) →
     eq-htpy (H ·r h) ＝ ap (precomp h C) (eq-htpy H)
   compute-eq-htpy-right-whisk H =
-    ap
+    ( ap
       ( λ K → eq-htpy (K ·r h))
-      ( inv (is-section-eq-htpy H)) ∙
-    compute-eq-htpy-htpy-eq-right-whisk (eq-htpy H)
+      ( inv (is-section-eq-htpy H))) ∙
+    ( compute-eq-htpy-htpy-eq-right-whisk (eq-htpy H))
 ```
 
 ```agda
