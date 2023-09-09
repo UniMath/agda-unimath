@@ -286,7 +286,7 @@ module _
       ＝ eq-htpy
           ( ((h ·l K) ·r left-top) ∙h (h ·l (right-bottom ·l H)))
         by
-          ap
+        ap
           ( eq-htpy)
           ( eq-htpy
             ( distributive-left-whisk-concat-htpy
@@ -298,17 +298,17 @@ module _
         eq-htpy
           ( h ·l (right-bottom ·l H))
         by
-          eq-htpy-concat-htpy
-            ( (h ·l K) ·r left-top)
-            ( h ·l (right-bottom ·l H))
+        eq-htpy-concat-htpy
+          ( (h ·l K) ·r left-top)
+          ( h ·l (right-bottom ·l H))
       ＝ ap
           ( precomp left-top W)
           ( eq-htpy (h ·l K)) ∙
         eq-htpy
           ( (h ∘ right-bottom) ·l H)
         by
-          ap-binary
-            ( λ p L → p ∙ eq-htpy L)
-            ( compute-eq-htpy-right-whisk left-top (h ·l K))
-            ( eq-htpy (associative-left-whisk-comp h right-bottom H))
+        ap-binary
+          ( λ p L → p ∙ eq-htpy L)
+          ( compute-eq-htpy-right-whisk left-top (h ·l K))
+          ( eq-htpy (associative-left-whisk-comp h right-bottom H))
 ```
