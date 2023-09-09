@@ -33,7 +33,7 @@ directed graph.
 ## Definition
 
 ```agda
-infixl 7 is-element-of-coalgebra-polynomial-endofunctor
+infixl 6 is-element-of-coalgebra-polynomial-endofunctor
 
 is-element-of-coalgebra-polynomial-endofunctor :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}

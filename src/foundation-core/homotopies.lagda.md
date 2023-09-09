@@ -116,7 +116,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  infix 15 _∙h_
+  infixl 15 _∙h_
   _∙h_ : {f g h : (x : A) → B x} → f ~ g → g ~ h → f ~ h
   (H ∙h K) x = (H x) ∙ (K x)
 

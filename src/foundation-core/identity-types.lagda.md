@@ -118,7 +118,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  infix 15 _∙_
+  infixl 15 _∙_
   _∙_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
   refl ∙ q = q
 
