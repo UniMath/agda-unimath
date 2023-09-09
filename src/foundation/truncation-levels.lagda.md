@@ -48,7 +48,7 @@ add-𝕋 (succ-𝕋 neg-two-𝕋) (succ-𝕋 l) = l
 add-𝕋 (succ-𝕋 (succ-𝕋 k)) neg-two-𝕋 = k
 add-𝕋 (succ-𝕋 (succ-𝕋 k)) (succ-𝕋 l) = succ-𝕋 (add-𝕋 (succ-𝕋 k) (succ-𝕋 l))
 
-infixr 31 _+𝕋_
+infixr 35 _+𝕋_
 _+𝕋_ = add-𝕋
 ```
 

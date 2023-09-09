@@ -252,7 +252,7 @@ example was addapted from
 
 ```agda
   private
-    infixr 10 _∷_
+    infixr 6 _∷_
     pattern _∷_ x xs = cons x xs
 
   ＝-type-info : Term → TC (Arg Term × (Arg Term × (Term × Term)))

@@ -81,7 +81,7 @@ module _
   data Id (x : A) : A → UU l where
     refl : Id x x
 
-  infix 15 _＝_
+  infix 7 _＝_
   _＝_ : A → A → UU l
   (a ＝ b) = Id a b
 
@@ -118,7 +118,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  infix 30 _∙_
+  infix 15 _∙_
   _∙_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
   refl ∙ q = q
 

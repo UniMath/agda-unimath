@@ -87,7 +87,7 @@ is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
 ### The type of decidable embeddings
 
 ```agda
-infix 4 _↪ᵈ_
+infix 5 _↪ᵈ_
 _↪ᵈ_ :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
 X ↪ᵈ Y = Σ (X → Y) is-decidable-emb

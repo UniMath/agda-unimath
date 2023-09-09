@@ -37,7 +37,7 @@ pr2 (pr2 (add-fraction-ℤ (m , n , n-pos) (m' , n' , n'-pos))) =
 add-fraction-ℤ' : fraction-ℤ → fraction-ℤ → fraction-ℤ
 add-fraction-ℤ' x y = add-fraction-ℤ y x
 
-infixr 31 _+fraction-ℤ_
+infixr 35 _+fraction-ℤ_
 _+fraction-ℤ_ = add-fraction-ℤ
 
 ap-add-fraction-ℤ :

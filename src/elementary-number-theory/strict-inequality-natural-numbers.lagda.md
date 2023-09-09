@@ -45,7 +45,7 @@ le-ℕ n m = type-Prop (le-ℕ-Prop n m)
 is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
 is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
 
-infix 15 _<-ℕ_
+infix 30 _<-ℕ_
 _<-ℕ_ = le-ℕ
 ```
 

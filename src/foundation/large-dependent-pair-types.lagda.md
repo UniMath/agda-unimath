@@ -30,7 +30,7 @@ record Σω (A : UUω) (B : A → UUω) : UUω where
 
 open Σω public
 
-infixr 10 _,ω_
+infixr 6 _,ω_
 pattern _,ω_ a b = pairω a b
 ```
 

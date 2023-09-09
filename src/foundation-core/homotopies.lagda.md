@@ -81,7 +81,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  infix 15 _~_
+  infix 7 _~_
   _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
   f ~ g = (x : A) → eq-value f g x
 ```
@@ -116,7 +116,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  infix 30 _∙h_
+  infix 15 _∙h_
   _∙h_ : {f g h : (x : A) → B x} → f ~ g → g ~ h → f ~ h
   (H ∙h K) x = (H x) ∙ (K x)
 
@@ -149,7 +149,7 @@ htpy-left-whisk :
   (h : B → C) {f g : A → B} → f ~ g → (h ∘ f) ~ (h ∘ g)
 htpy-left-whisk h H x = ap h (H x)
 
-infixr 30 _·l_
+infixr 15 _·l_
 _·l_ = htpy-left-whisk
 
 htpy-right-whisk :
@@ -157,7 +157,7 @@ htpy-right-whisk :
   {g h : (y : B) → C y} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
 htpy-right-whisk H f x = H (f x)
 
-infixl 30 _·r_
+infixl 15 _·r_
 _·r_ = htpy-right-whisk
 ```
 

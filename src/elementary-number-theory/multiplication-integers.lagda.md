@@ -44,7 +44,7 @@ mul-ℤ (inr (inl star)) l = zero-ℤ
 mul-ℤ (inr (inr zero-ℕ)) l = l
 mul-ℤ (inr (inr (succ-ℕ x))) l = l +ℤ (mul-ℤ (inr (inr x)) l)
 
-infixr 33 _*ℤ_
+infixr 40 _*ℤ_
 _*ℤ_ = mul-ℤ
 
 mul-ℤ' : ℤ → ℤ → ℤ

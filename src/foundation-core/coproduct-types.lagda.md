@@ -20,7 +20,7 @@ of `A` and `B`.
 ## Definition
 
 ```agda
-infixr 15 _+_
+infixr 10 _+_
 
 data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)
   where

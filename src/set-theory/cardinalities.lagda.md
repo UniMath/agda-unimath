@@ -78,7 +78,7 @@ leq-cardinality-Prop {l1} {l2} =
 leq-cardinality : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
 leq-cardinality X Y = type-Prop (leq-cardinality-Prop X Y)
 
-infix 15 _≤-cardinality_
+infix 7 _≤-cardinality_
 _≤-cardinality_ : {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
 _≤-cardinality_ = leq-cardinality
 
