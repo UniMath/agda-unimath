@@ -67,24 +67,24 @@ module _
   {l1 : Level} (X : Pointed-Type l1)
   where
 
-  pointed-equiv-pointed-equiv-loop-pointed-identity∗ :
+  pointed-equiv-loop-pointed-identity-suspension :
     (pair
       ( north-suspension ＝ south-suspension)
       ( meridian-suspension (point-Pointed-Type X))) ≃∗
     Ω (suspension-Pointed-Type X)
-  pointed-equiv-pointed-equiv-loop-pointed-identity∗ =
+  pointed-equiv-loop-pointed-identity-suspension =
     pointed-equiv-loop-pointed-identity
       ( suspension-Pointed-Type X)
       ( meridian-suspension (point-Pointed-Type X))
 
-  pointed-equiv-loop-pointed-identity∗ :
+  pointed-map-loop-pointed-identity-suspension :
     (pair
       ( north-suspension ＝ south-suspension)
       ( meridian-suspension (point-Pointed-Type X))) →∗
     Ω (suspension-Pointed-Type X)
-  pointed-equiv-loop-pointed-identity∗ =
+  pointed-map-loop-pointed-identity-suspension =
     pointed-map-pointed-equiv
-      pointed-equiv-pointed-equiv-loop-pointed-identity∗
+      ( pointed-equiv-loop-pointed-identity-suspension)
 
   meridian-suspension∗ :
     X →∗
@@ -96,15 +96,14 @@ module _
 
   unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj∗ =
-    pointed-equiv-loop-pointed-identity∗ ∘∗
+    pointed-map-loop-pointed-identity-suspension ∘∗
     meridian-suspension∗
 
   unit-susp-loop-adj : type-Pointed-Type X →
     type-Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
 
-  counit-susp-loop-adj :
-    ( suspension (type-Ω X)) → type-Pointed-Type X
+  counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
   counit-susp-loop-adj =
     map-inv-is-equiv
       ( up-suspension (type-Ω X) (type-Pointed-Type X))
@@ -184,12 +183,13 @@ module _
           ( λ z → (point-Pointed-Type Y) ＝ z)
           ( λ t →
             Σ ( type-Pointed-Type X →
-              (point-Pointed-Type Y) ＝ (pr1 t))
+              ( point-Pointed-Type Y) ＝ (pr1 t))
               ( λ f → f (point-Pointed-Type X) ＝ (pr2 t))))) ∘e
       ( ( equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
         ( ( associative-Σ
             ( type-Pointed-Type Y)
-            ( λ y1 → type-Pointed-Type X → (point-Pointed-Type Y) ＝ y1)
+            ( λ y1 → type-Pointed-Type X →
+              (point-Pointed-Type Y) ＝ y1)
             ( λ z →
               Σ ( Id (point-Pointed-Type Y) (pr1 z))
                 ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
@@ -199,8 +199,8 @@ module _
                             ( λ y1 →
                               type-Pointed-Type X →
                               point-Pointed-Type Y ＝ y1)) →
-                  ( is-contr-total-path
-                    ( (pr2 z) (point-Pointed-Type X)))))) ∘e
+                  is-contr-total-path
+                    ( (pr2 z) (point-Pointed-Type X))))) ∘e
             ( ( left-unit-law-Σ-is-contr
                 ( is-contr-total-path' (point-Pointed-Type Y))
                 ( (point-Pointed-Type Y) , refl)) ∘e
