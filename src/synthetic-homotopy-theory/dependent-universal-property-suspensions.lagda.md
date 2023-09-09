@@ -87,8 +87,8 @@ module _
   where
 
   triangle-dependent-ev-suspension :
-      (s : suspension-structure X Y) →
-      (B : Y → UU l3) →
+    (s : suspension-structure X Y) →
+    (B : Y → UU l3) →
     ( ( map-equiv
       ( equiv-dependent-suspension-structure-suspension-cocone s B)) ∘
     ( dependent-cocone-map
