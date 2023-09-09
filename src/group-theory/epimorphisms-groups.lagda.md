@@ -83,7 +83,7 @@ we may assume `x : G` equipped with an
 to show that `g (f x) ＝ h (f x)`, which was assumed.
 
 For the converse, suppose that `f : G → H` is an epimorphism and consider the
-subgroup `I := im f` of `H`. We first show that `I` is
+[image subgroup](group-theory.images-of-group-homomorphisms.md) `I := im f` of `H`. We first show that `I` is
 [normal](group-theory.normal-subgroups.md), and then we show that `I ＝ H`.
 
 In order to show that `I` is normal, we want to show that `I` has only one
