@@ -161,3 +161,21 @@ module _
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
 ```
+
+## Properties
+
+### Every pointed identity type is equivalent to a loop space
+
+```agda
+module _
+  {l : Level} {A : Pointed-Type l} {x : type-Pointed-Type A}
+  (p : point-Pointed-Type A ＝ x)
+  where
+
+  equiv-loop-pointed-identity :
+   (point-Pointed-Type A ＝ x , p) ≃∗ Ω A
+  pr1 equiv-loop-pointed-identity =
+    equiv-concat' (point-Pointed-Type A) (inv p)
+  pr2 equiv-loop-pointed-identity =
+    right-inv p
+```
