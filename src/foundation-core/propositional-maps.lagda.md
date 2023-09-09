@@ -34,7 +34,7 @@ module _
   where
 
   is-prop-map : (A → B) → UU (l1 ⊔ l2)
-  is-prop-map f = (b : B) → is-prop (fib f b)
+  is-prop-map f = (b : B) → is-prop (fiber f b)
 ```
 
 ## Properties
@@ -51,8 +51,8 @@ module _
     is-emb-is-prop-map is-prop-map-f x =
       fundamental-theorem-id
         ( is-contr-equiv'
-          ( fib f (f x))
-          ( equiv-fib f (f x))
+          ( fiber f (f x))
+          ( equiv-fiber f (f x))
           ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (x , refl)))
         ( λ _ → ap f)
 
@@ -61,11 +61,11 @@ module _
     is-prop-map-is-emb is-emb-f y =
       is-prop-is-proof-irrelevant α
       where
-      α : (t : fib f y) → is-contr (fib f y)
+      α : (t : fiber f y) → is-contr (fiber f y)
       α (x , refl) =
         is-contr-equiv
-          ( fib' f (f x))
-          ( equiv-fib f (f x))
+          ( fiber' f (f x))
+          ( equiv-fiber f (f x))
           ( fundamental-theorem-id' (λ _ → ap f) (is-emb-f x))
 
 module _
@@ -75,15 +75,15 @@ module _
   is-prop-map-emb : (f : A ↪ B) → is-prop-map (map-emb f)
   is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
 
-  is-prop-map-emb' : (f : A ↪ B) → (b : B) → is-prop (fib' (map-emb f) b)
+  is-prop-map-emb' : (f : A ↪ B) → (b : B) → is-prop (fiber' (map-emb f) b)
   is-prop-map-emb' f y =
-    is-prop-equiv' (equiv-fib (map-emb f) y) (is-prop-map-emb f y)
+    is-prop-equiv' (equiv-fiber (map-emb f) y) (is-prop-map-emb f y)
 
-  fib-emb-Prop : A ↪ B → B → Prop (l1 ⊔ l2)
-  pr1 (fib-emb-Prop f y) = fib (map-emb f) y
-  pr2 (fib-emb-Prop f y) = is-prop-map-emb f y
+  fiber-emb-Prop : A ↪ B → B → Prop (l1 ⊔ l2)
+  pr1 (fiber-emb-Prop f y) = fiber (map-emb f) y
+  pr2 (fiber-emb-Prop f y) = is-prop-map-emb f y
 
-  fib-emb-Prop' : A ↪ B → B → Prop (l1 ⊔ l2)
-  pr1 (fib-emb-Prop' f y) = fib' (map-emb f) y
-  pr2 (fib-emb-Prop' f y) = is-prop-map-emb' f y
+  fiber-emb-Prop' : A ↪ B → B → Prop (l1 ⊔ l2)
+  pr1 (fiber-emb-Prop' f y) = fiber' (map-emb f) y
+  pr2 (fiber-emb-Prop' f y) = is-prop-map-emb' f y
 ```

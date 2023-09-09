@@ -33,7 +33,7 @@ module _
   where
 
   is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
-  is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fib f x))
+  is-prop-is-trunc-map k f = is-prop-Π (λ x → is-prop-is-trunc k (fiber f x))
 
   is-trunc-map-Prop : (k : 𝕋) → (A → B) → Prop (l1 ⊔ l2)
   pr1 (is-trunc-map-Prop k f) = is-trunc-map k f
@@ -53,9 +53,9 @@ module _
       is-pullback f g c → is-trunc-map k g → is-trunc-map k (pr1 c)
     is-trunc-is-pullback pb is-trunc-g a =
       is-trunc-is-equiv k
-        ( fib g (f a))
-        ( map-fib-cone f g c a)
-        ( is-fiberwise-equiv-map-fib-cone-is-pullback f g c pb a)
+        ( fiber g (f a))
+        ( map-fiber-cone f g c a)
+        ( is-fiberwise-equiv-map-fiber-cone-is-pullback f g c pb a)
         ( is-trunc-g (f a))
 
 abstract

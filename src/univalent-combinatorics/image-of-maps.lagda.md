@@ -37,7 +37,7 @@ module _
       is-finite-base-is-finite-Σ-merely-inhabited
         ( is-set-has-decidable-equality d)
         ( H)
-        ( is-finite-equiv' (equiv-total-fib f) K)
+        ( is-finite-equiv' (equiv-total-fiber f) K)
         ( λ b → is-finite-Σ K (λ a → is-finite-eq d))
 
 abstract
@@ -49,6 +49,6 @@ abstract
       ( is-surjective-map-unit-im f)
       ( λ x y →
         is-decidable-equiv
-          ( extensionality-type-subtype' (λ u → trunc-Prop (fib f u)) x y)
+          ( extensionality-type-subtype' (λ u → trunc-Prop (fiber f u)) x y)
           ( d (pr1 x) (pr1 y)))
 ```

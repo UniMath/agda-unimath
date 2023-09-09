@@ -84,7 +84,7 @@ count-retract :
   A retract-of B → count B → count A
 count-retract (pair i R) e =
   count-equiv
-    ( equiv-total-fib i)
+    ( equiv-total-fiber i)
     ( count-decidable-subtype
       ( decidable-subtype-decidable-emb (decidable-emb-retract-count e i R))
       ( e))

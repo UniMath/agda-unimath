@@ -79,11 +79,11 @@ has-presentation-of-cardinality-has-cardinality-components {l} k {A} H =
   where
   P1 :
     (e : Fin k ≃ type-trunc-Set A) (x : Fin k) →
-    type-trunc-Prop (fib unit-trunc-Set (map-equiv e x))
+    type-trunc-Prop (fiber unit-trunc-Set (map-equiv e x))
   P1 e x = is-surjective-unit-trunc-Set A (map-equiv e x)
   P2 :
     (e : Fin k ≃ type-trunc-Set A) →
-    type-trunc-Prop ((x : Fin k) → fib unit-trunc-Set (map-equiv e x))
+    type-trunc-Prop ((x : Fin k) → fiber unit-trunc-Set (map-equiv e x))
   P2 e = finite-choice-Fin k (P1 e)
 
 has-cardinality-components-has-presentation-of-cardinality :

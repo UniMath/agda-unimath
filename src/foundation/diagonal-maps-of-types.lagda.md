@@ -44,9 +44,9 @@ module _
       (k : 𝕋) → is-trunc-map k (diagonal A) → is-trunc (succ-𝕋 k) A
     is-trunc-is-trunc-map-diagonal k is-trunc-d x y =
       is-trunc-is-equiv' k
-        ( fib (diagonal A) (pair x y))
-        ( eq-fib-diagonal A (pair x y))
-        ( is-equiv-eq-fib-diagonal A (pair x y))
+        ( fiber (diagonal A) (pair x y))
+        ( eq-fiber-diagonal A (pair x y))
+        ( is-equiv-eq-fiber-diagonal A (pair x y))
         ( is-trunc-d (pair x y))
 
   abstract
@@ -77,8 +77,8 @@ module _
     is-trunc-map-diagonal-is-trunc k is-trunc-A t =
       is-trunc-is-equiv k
         ( pr1 t ＝ pr2 t)
-        ( eq-fib-diagonal A t)
-        ( is-equiv-eq-fib-diagonal A t)
+        ( eq-fiber-diagonal A t)
+        ( is-equiv-eq-fiber-diagonal A t)
           ( is-trunc-A (pr1 t) (pr2 t))
 
   abstract

@@ -161,7 +161,7 @@ module _
       is-emb-is-prop-map
         ( λ x →
           is-prop-equiv
-            ( equiv-fib-pr1 (is-in-subtype B) x)
+            ( equiv-fiber-pr1 (is-in-subtype B) x)
             ( is-prop-is-in-subtype B x))
 
   emb-subtype : type-subtype B ↪ A
@@ -206,7 +206,7 @@ module _
   abstract
     is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
     is-subtype-is-emb-pr1 H x =
-      is-prop-equiv' (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
+      is-prop-equiv' (equiv-fiber-pr1 B x) (is-prop-map-is-emb H x)
 ```
 
 ### A subtype of a `k+1`-truncated type is `k+1`-truncated

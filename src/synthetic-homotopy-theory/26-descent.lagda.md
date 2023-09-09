@@ -717,7 +717,7 @@ uniqueness-Fam-pushout :
       equiv-Fam-pushout P (desc-fam c Q)))
 uniqueness-Fam-pushout {l = l} f g c up-c P =
   is-contr-equiv'
-    ( fib (desc-fam c) P)
+    ( fiber (desc-fam c) P)
     ( equiv-tot (λ Q →
       ( equiv-equiv-Fam-pushout P (desc-fam c Q)) ∘e
       ( equiv-inv (desc-fam c Q) P)))

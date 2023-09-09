@@ -48,7 +48,7 @@ module _
   where
 
   subtype-im : subtype (l1 ⊔ l2) X
-  subtype-im x = trunc-Prop (fib f x)
+  subtype-im x = trunc-Prop (fiber f x)
 
   im : UU (l1 ⊔ l2)
   im = type-subtype subtype-im
@@ -120,7 +120,7 @@ abstract
     {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
     is-emb (inclusion-im f)
   is-emb-inclusion-im f =
-    is-emb-inclusion-subtype (λ x → trunc-Prop (fib f x))
+    is-emb-inclusion-subtype (λ x → trunc-Prop (fiber f x))
 
 emb-im :
   {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) → im f ↪ X
@@ -148,12 +148,13 @@ abstract
     is-surjective (map-unit-im f)
   is-surjective-map-unit-im f (pair y z) =
     apply-universal-property-trunc-Prop z
-      ( trunc-Prop (fib (map-unit-im f) (pair y z)))
+      ( trunc-Prop (fiber (map-unit-im f) (pair y z)))
       ( α)
     where
-    α : fib f y → type-Prop (trunc-Prop (fib (map-unit-im f) (pair y z)))
+    α : fiber f y → type-Prop (trunc-Prop (fiber (map-unit-im f) (pair y z)))
     α (pair x p) =
-      unit-trunc-Prop (pair x (eq-type-subtype (λ z → trunc-Prop (fib f z)) p))
+      unit-trunc-Prop
+        ( pair x (eq-type-subtype (λ z → trunc-Prop (fiber f z)) p))
 ```
 
 ### The image of a map into a truncated type is truncated

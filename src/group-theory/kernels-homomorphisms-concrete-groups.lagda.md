@@ -43,7 +43,7 @@ module _
   classifying-type-kernel-hom-Concrete-Group : UU (l1 ⊔ l2)
   classifying-type-kernel-hom-Concrete-Group =
     connected-component
-      ( fib
+      ( fiber
         ( classifying-map-hom-Concrete-Group G H f)
         ( shape-Concrete-Group H))
       ( pair
@@ -54,7 +54,7 @@ module _
     classifying-type-kernel-hom-Concrete-Group
   shape-kernel-hom-Concrete-Group =
     point-connected-component
-      ( fib
+      ( fiber
         ( classifying-map-hom-Concrete-Group G H f)
         ( shape-Concrete-Group H))
       ( shape-Concrete-Group G

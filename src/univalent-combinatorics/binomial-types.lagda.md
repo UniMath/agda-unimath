@@ -151,11 +151,11 @@ compute-binomial-type-Level :
 compute-binomial-type-Level l {l1} {l2} A B =
   ( ( ( equiv-Σ
         ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
-        ( equiv-Fib-Decidable-Prop l A)
+        ( equiv-Fiber-Decidable-Prop l A)
         ( λ e →
           equiv-trunc-Prop
             ( equiv-postcomp-equiv
-              ( inv-equiv (equiv-total-fib (pr1 (pr2 e)))) B))) ∘e
+              ( inv-equiv (equiv-total-fiber (pr1 (pr2 e)))) B))) ∘e
       ( inv-associative-Σ
         ( UU (l1 ⊔ l))
         ( λ X → X ↪ᵈ A)
@@ -182,14 +182,14 @@ Note that the universe level of `small-binomial-type` is lower.
 small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 small-binomial-type A B =
-  Σ (A → bool) (λ f → mere-equiv B (fib f true))
+  Σ (A → bool) (λ f → mere-equiv B (fiber f true))
 
 compute-small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type A B ≃ small-binomial-type A B
 compute-small-binomial-type A B =
   ( equiv-Σ
-    ( λ f → mere-equiv B (fib f true))
+    ( λ f → mere-equiv B (fiber f true))
     ( equiv-postcomp A equiv-bool-Decidable-Prop)
     ( λ P →
       equiv-trunc-Prop
@@ -342,7 +342,7 @@ equiv-small-binomial-type :
   (A ≃ A') → (B ≃ B') → small-binomial-type A' B' ≃ small-binomial-type A B
 equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
   equiv-Σ
-    ( λ P → mere-equiv B (fib P true))
+    ( λ P → mere-equiv B (fiber P true))
     ( equiv-precomp e bool)
     ( λ P →
       equiv-trunc-Prop
@@ -351,8 +351,8 @@ equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
               ( ( right-unit-law-Σ-is-contr
                   ( λ u →
                     is-contr-map-is-equiv (is-equiv-map-equiv e) (pr1 u))) ∘e
-                ( equiv-compute-fib-comp P (map-equiv e) true))) B) ∘e
-          ( equiv-precomp-equiv f (fib P true))))
+                ( equiv-compute-fiber-comp P (map-equiv e) true))) B) ∘e
+          ( equiv-precomp-equiv f (fiber P true))))
 
 equiv-binomial-type :
   {l1 l2 l3 l4 : Level} {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} →
