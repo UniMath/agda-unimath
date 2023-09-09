@@ -73,7 +73,7 @@ module _
 
 **Proof using the law of excluded middle:** The forward direction of this claim
 is the easier of the two directions, and this part of the proof doesn't require
-the [law of exculded middle](foundation.law-of-excluded-middle.md). If `f` is
+the [law of excluded middle](foundation.law-of-excluded-middle.md). If `f` is
 [surjective](foundation.surjective-maps.md) and `g h : H → K` are two group
 homomorphisms such that `g ∘ f ＝ h ∘ f`, then to show that `g ＝ h` it suffices
 to show that `g y ＝ h y` for any `y : H`. Since we are proving a
