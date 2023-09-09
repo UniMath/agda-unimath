@@ -88,7 +88,7 @@ For the converse, suppose that `f : G → H` is an epimorphism and consider the
 
 In order to show that `I` is normal, we want to show that `I` has only one
 conjugacy class, namely itself. Consider the group `K` of permutations of the
-set of [conjugate](group-theory.conjugation.md) subgroups of the subgroup `I` of
+set of [conjugate](group-theory.conjugation.md) [subgroups](group-theory.subgroups.md) of the subgroup `I` of
 `H`. There is a group homomorphism `α : H → K` given by `h ↦ J ↦ hJh⁻¹`, where
 `J` ranges over the conjugacy classes of `I`. Notice that `I` itself is a fixed
 point of the conjugation operation `J ↦ f(x)Jf(x)⁻¹`, i.e., `I` is a fixed point
