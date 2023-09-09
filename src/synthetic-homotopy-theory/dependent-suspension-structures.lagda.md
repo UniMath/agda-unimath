@@ -200,7 +200,7 @@ module _
               ( meridian-suspension-structure c x)
               ( map-equiv
                 ( equiv-dependent-universal-property-unit
-                  ( λ x₁ → B (north-suspension-structure c)))
+                  ( λ _ → B (north-suspension-structure c)))
                 ( N-susp-c))
               ( s)))
           ( equiv-dependent-universal-property-unit
