@@ -125,7 +125,7 @@ module _
   pr2 pointed-equiv-pointed-map-Ω-emb = preserves-refl-map-Ω f
 ```
 
-### the `pointed-map-Ω` preserves equivalences
+### the operator `pointed-map-Ω` preserves equivalences
 
 ```agda
 module _
