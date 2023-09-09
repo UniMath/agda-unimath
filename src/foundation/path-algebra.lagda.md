@@ -114,42 +114,71 @@ vertical-concat-square {a = a} {f = f}
         ( assoc p-ttop p-tright p-bright))))
 ```
 
-### Unit laws for the associator
+### Unit laws for `assoc`
+
+We give two treatments of the unit laws for the associator. One for computing
+with the associator, and one for coherences between the unit laws.
+
+#### Computing `assoc` at a reflexivity identification
 
 ```agda
 module _
   {l : Level} {A : UU l} {x y z : A}
   where
 
-  assoc-left-refl :
+  left-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
     assoc refl p q ＝ refl
-  assoc-left-refl p q = refl
+  left-unit-law-assoc p q = refl
 
-  assoc-middle-refl :
+  middle-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
     assoc p refl q ＝ ap (_∙ q) (right-unit)
-  assoc-middle-refl refl q = refl
+  middle-unit-law-assoc refl q = refl
 
-  inv-assoc-middle-refl :
-    (p : x ＝ y) (q : y ＝ z) →
-    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
-  inv-assoc-middle-refl refl q = refl
-
-  assoc-right-refl :
+  right-unit-law-assoc :
     (p : x ＝ y) (q : y ＝ z) →
     assoc p q refl ＝ (right-unit ∙ ap (p ∙_) (inv right-unit))
-  assoc-right-refl refl refl = refl
+  right-unit-law-assoc refl refl = refl
+```
 
-  transpose-assoc-right-refl :
+#### Unit laws for `assoc` and their coherence
+
+We use a binary naming scheme for the (higher) unit laws of the associator. For
+each 3-digit binary number except when all digits are `1`, there is a
+corresponding unit law. A `0` reflects that the unit of the operator is present
+in the corresponding position. More generally, there is for each `n`-digit
+binary number (except all `1`s) a unit law for the `n`-ary coherence operator.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  unit-law-assoc-011 :
+    (p : x ＝ y) (q : y ＝ z) →
+    assoc refl p q ＝ refl
+  unit-law-assoc-011 p q = refl
+
+  unit-law-assoc-101 :
+    (p : x ＝ y) (q : y ＝ z) →
+    assoc p refl q ＝ ap (_∙ q) (right-unit)
+  unit-law-assoc-101 refl q = refl
+
+  unit-law-assoc-101' :
+    (p : x ＝ y) (q : y ＝ z) →
+    inv (assoc p refl q) ＝ ap (_∙ q) (inv right-unit)
+  unit-law-assoc-101' refl q = refl
+
+  unit-law-assoc-110 :
     (p : x ＝ y) (q : y ＝ z) →
     (assoc p q refl ∙ ap (p ∙_) right-unit) ＝ right-unit
-  transpose-assoc-right-refl refl refl = refl
+  unit-law-assoc-110 refl refl = refl
 
-  inv-inv-con-assoc-right-refl :
+  unit-law-assoc-110' :
     (p : x ＝ y) (q : y ＝ z) →
     (inv right-unit ∙ assoc p q refl) ＝ ap (p ∙_) (inv right-unit)
-  inv-inv-con-assoc-right-refl refl refl = refl
+  unit-law-assoc-110' refl refl = refl
 ```
 
 ### Unit laws for `ap-concat-eq`

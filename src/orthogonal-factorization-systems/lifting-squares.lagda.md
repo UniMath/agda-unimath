@@ -194,7 +194,7 @@ module _
             ( coherence-lifting-square l x ∙_)
             ( ( ap
                 ( inv right-unit ∙_)
-                ( assoc-right-refl
+                ( right-unit-law-assoc
                   ( H x)
                   ( ap g (is-extension-lifting-square l x)))) ∙
               ( ( is-section-left-concat-inv
