@@ -153,10 +153,10 @@ module _
     (H : f ~ g) →
     eq-htpy (h ·l H) ＝ ap (postcomp A h) (eq-htpy H)
   compute-eq-htpy-left-whisk H =
-    ap
+    ( ap
       ( λ K → eq-htpy (h ·l K))
-      ( inv (is-section-eq-htpy H)) ∙
-    compute-eq-htpy-htpy-eq-left-whisk (eq-htpy H)
+      ( inv (is-section-eq-htpy H))) ∙
+    ( compute-eq-htpy-htpy-eq-left-whisk (eq-htpy H))
 ```
 
 ## See also
