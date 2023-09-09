@@ -213,7 +213,7 @@ module _
 ```agda
   subset-subgroup-subset-Group' : type-Group G → UU (l1 ⊔ l2)
   subset-subgroup-subset-Group' x =
-    fib ev-formal-combination-subset-Group x
+    fiber ev-formal-combination-subset-Group x
 
   subset-subgroup-subset-Group : subset-Group (l1 ⊔ l2) G
   subset-subgroup-subset-Group x =

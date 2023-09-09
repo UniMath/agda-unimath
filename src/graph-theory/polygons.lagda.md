@@ -53,7 +53,7 @@ edge-standard-polygon-Undirected-Graph :
 edge-standard-polygon-Undirected-Graph k p =
   Σ ( type-unordered-pair p)
     ( λ x →
-      fib
+      fiber
         ( element-unordered-pair p)
         ( succ-ℤ-Mod k (element-unordered-pair p x)))
 

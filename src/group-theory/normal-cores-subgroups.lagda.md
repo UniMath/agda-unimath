@@ -77,7 +77,7 @@ module _
   subset-normal-core-Subgroup =
     intersection-family-of-subtypes
       ( λ (x : type-Group G) →
-        fib-emb-Prop
+        fiber-emb-Prop
           ( comp-emb
             ( emb-equiv (equiv-conjugation-Group G x))
             ( emb-inclusion-Subgroup G H)))

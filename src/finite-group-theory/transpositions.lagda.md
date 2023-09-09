@@ -152,7 +152,7 @@ module _
 
   is-transposition-permutation-Prop : X ≃ X → Prop (l1 ⊔ lsuc l2)
   is-transposition-permutation-Prop f =
-    trunc-Prop (fib (transposition {l2 = l2}) f)
+    trunc-Prop (fiber (transposition {l2 = l2}) f)
 
   is-transposition-permutation : X ≃ X → UU (l1 ⊔ lsuc l2)
   is-transposition-permutation f =

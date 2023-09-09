@@ -40,7 +40,7 @@ is-element-of-coalgebra-polynomial-endofunctor :
   (X : coalgebra-polynomial-endofunctor l3 A B)
   (x y : type-coalgebra-polynomial-endofunctor X) → UU (l2 ⊔ l3)
 is-element-of-coalgebra-polynomial-endofunctor X x y =
-  fib (component-coalgebra-polynomial-endofunctor X y) x
+  fiber (component-coalgebra-polynomial-endofunctor X y) x
 
 syntax
   is-element-of-coalgebra-polynomial-endofunctor X x y = x ∈ y in-coalgebra X
