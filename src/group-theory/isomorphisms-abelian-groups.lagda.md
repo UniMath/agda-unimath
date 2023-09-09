@@ -29,10 +29,11 @@ open import group-theory.isomorphisms-semigroups
 
 ## Idea
 
-Isomorphisms between abelian groups are just isomorphisms between their
-underlying groups.
+**Isomorphisms** between [abelian groups](group-theory.abelian-groups.md) are
+just [isomorphisms](group-theory.isomorphisms-groups.md) between their
+underlying [groups](group-theory.groups.md).
 
-## Definition
+## Definitions
 
 ```agda
 is-iso-hom-Ab :
@@ -112,11 +113,21 @@ inv-hom-iso-Ab A B f =
   inv-is-iso-hom-Ab A B
     ( hom-iso-Ab A B f)
     ( is-iso-hom-iso-Ab A B f)
+```
 
+### The identity isomorphism of abelian groups
+
+```agda
 id-iso-Ab :
   {l1 : Level} (A : Ab l1) → iso-Ab A A
 id-iso-Ab A = id-iso-Group (group-Ab A)
+```
 
+## Properties
+
+### Isomorphisms characterize identifications of abelian groups
+
+```agda
 iso-eq-Ab :
   { l1 : Level} (A B : Ab l1) → Id A B → iso-Ab A B
 iso-eq-Ab A .A refl = id-iso-Ab A
@@ -147,4 +158,32 @@ is-equiv-iso-eq-Ab A =
 eq-iso-Ab :
   { l1 : Level} (A B : Ab l1) → iso-Ab A B → Id A B
 eq-iso-Ab A B = map-inv-is-equiv (is-equiv-iso-eq-Ab A B)
+```
+
+### A homomorphism of abelian groups is an isomorphism if and only if its underlying map is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
+
+  is-equiv-hom-Ab : type-hom-Ab A B → UU (l1 ⊔ l2)
+  is-equiv-hom-Ab = is-equiv-hom-Group (group-Ab A) (group-Ab B)
+
+  equiv-Ab : UU (l1 ⊔ l2)
+  equiv-Ab = equiv-Group (group-Ab A) (group-Ab B)
+
+  is-iso-is-equiv-hom-Ab :
+    (f : type-hom-Ab A B) → is-equiv-hom-Ab f → is-iso-hom-Ab A B f
+  is-iso-is-equiv-hom-Ab = is-iso-is-equiv-hom-Group (group-Ab A) (group-Ab B)
+
+  is-equiv-is-iso-hom-Ab :
+    (f : type-hom-Ab A B) → is-iso-hom-Ab A B f → is-equiv-hom-Ab f
+  is-equiv-is-iso-hom-Ab = is-equiv-is-iso-hom-Group (group-Ab A) (group-Ab B)
+
+  equiv-iso-equiv-Ab : equiv-Ab ≃ iso-Ab A B
+  equiv-iso-equiv-Ab = equiv-iso-equiv-Group (group-Ab A) (group-Ab B)
+
+  iso-equiv-Ab : equiv-Ab → iso-Ab A B
+  iso-equiv-Ab = iso-equiv-Group (group-Ab A) (group-Ab B)
 ```

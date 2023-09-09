@@ -78,7 +78,7 @@ open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.images-of-group-homomorphisms public
-open import group-theory.integer-multiples-elements-abelian-groups public
+open import group-theory.integer-multiples-of-elements-abelian-groups public
 open import group-theory.integer-powers-of-elements-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
 open import group-theory.intersections-subgroups-groups public

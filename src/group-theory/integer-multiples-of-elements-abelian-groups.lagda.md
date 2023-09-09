@@ -1,7 +1,7 @@
 # Integer multiples of elements in abelian groups
 
 ```agda
-module group-theory.integer-multiples-elements-abelian-groups where
+module group-theory.integer-multiples-of-elements-abelian-groups where
 ```
 
 <details><summary>Imports</summary>
@@ -14,6 +14,7 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
 open import foundation.universe-levels
@@ -251,6 +252,18 @@ module _
       ( x)
       ( y)
       ( commutative-add-Ab A x y)
+```
+
+### For each integer `k`, the operation `k-` taking integer multiples is a group homomorphism
+
+```agda
+module _
+  {l : Level} (A : Ab l) (k : ℤ)
+  where
+
+  hom-integer-multiple-Ab : type-hom-Ab A A
+  pr1 hom-integer-multiple-Ab = integer-multiple-Ab A k
+  pr2 hom-integer-multiple-Ab = left-distributive-integer-multiple-add-Ab A k
 ```
 
 ### Multiples by products of integers are iterated integer multiples
