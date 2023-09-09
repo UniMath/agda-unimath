@@ -505,6 +505,20 @@ module _
     add-Group-With-Generating-Element x zero-Group-With-Generating-Element ＝ x
   right-unit-law-add-Group-With-Generating-Element =
     right-unit-law-add-Ab abelian-group-Group-With-Generating-Element
+
+  left-inverse-law-add-Group-With-Generating-Element :
+    (x : type-Group-With-Generating-Element G) →
+    add-Group-With-Generating-Element (neg-Group-With-Generating-Element x) x ＝
+    zero-Group-With-Generating-Element
+  left-inverse-law-add-Group-With-Generating-Element =
+    left-inverse-law-add-Ab abelian-group-Group-With-Generating-Element
+
+  right-inverse-law-add-Group-With-Generating-Element :
+    (x : type-Group-With-Generating-Element G) →
+    add-Group-With-Generating-Element x (neg-Group-With-Generating-Element x) ＝
+    zero-Group-With-Generating-Element
+  right-inverse-law-add-Group-With-Generating-Element =
+    right-inverse-law-add-Ab abelian-group-Group-With-Generating-Element
 ```
 
 ### If `g` is a generating element of `G`, then the evaluation map `hom(G,G) → G` is an isomorphism of groups
