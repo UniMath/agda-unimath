@@ -134,7 +134,7 @@ module _
   where
 
   pointed-equiv-2-loop-pointed-identity :
-    Ω ((pair (point-Pointed-Type A ＝ x) p)) ≃∗ Ω² A
+    Ω (pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω² A
   pointed-equiv-2-loop-pointed-identity =
     pointed-equiv-Ω-pointed-equiv
       ( pointed-equiv-loop-pointed-identity A p)
