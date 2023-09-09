@@ -43,7 +43,7 @@ module _
   {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
   (f : type-hom-Large-Precategory C X Y)
   where
-  
+
   is-iso-hom-Large-Precategory : UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   is-iso-hom-Large-Precategory =
     Σ ( type-hom-Large-Precategory C Y X)

@@ -19,12 +19,14 @@ open import group-theory.multiples-of-elements-abelian-groups
 open import ring-theory.rings
 ```
 
-</summary>
+</details>
 
 ## Idea
 
-For any [ring](ring-theory.rings.md) `R` there is a multiplication operation `ℕ → R → R`, which we write as `n x ↦ n · x`. This operation is defined by [iteratively](foundation.iterating-functions.md) adding `x` with
-itself `n` times.
+For any [ring](ring-theory.rings.md) `R` there is a multiplication operation
+`ℕ → R → R`, which we write as `n x ↦ n · x`. This operation is defined by
+[iteratively](foundation.iterating-functions.md) adding `x` with itself `n`
+times.
 
 ## Definition
 
@@ -121,4 +123,3 @@ module _
     multiple-Ring R (m *ℕ n) x ＝ multiple-Ring R n (multiple-Ring R m x)
   multiple-mul-Ring = multiple-mul-Ab (ab-Ring R)
 ```
-

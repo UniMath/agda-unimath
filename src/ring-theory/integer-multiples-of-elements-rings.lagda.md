@@ -27,10 +27,10 @@ open import ring-theory.rings
 
 ## Idea
 
-The **integer multiple operation** on a
-[ring](ring-theory.rings.md) is the map `k x ↦ kx`, which is
-defined by [iteratively](foundation.iterating-automorphisms.md) adding `x` with
-itself an [integer](elementary-number-theory.integers.md) `k` times.
+The **integer multiple operation** on a [ring](ring-theory.rings.md) is the map
+`k x ↦ kx`, which is defined by
+[iteratively](foundation.iterating-automorphisms.md) adding `x` with itself an
+[integer](elementary-number-theory.integers.md) `k` times.
 
 ## Definitions
 
@@ -304,4 +304,3 @@ module _
       ( hom-ab-hom-Ring R S f)
       ( hom-ab-hom-Ring R S g)
 ```
-

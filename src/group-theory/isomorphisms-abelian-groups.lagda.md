@@ -40,7 +40,7 @@ underlying [groups](group-theory.groups.md).
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
   where
-  
+
   is-iso-hom-Ab : UU (l1 ⊔ l2)
   is-iso-hom-Ab = is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
