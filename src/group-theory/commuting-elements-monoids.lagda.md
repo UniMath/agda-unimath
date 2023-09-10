@@ -19,7 +19,7 @@ open import group-theory.monoids
 
 ## Idea
 
-Two elements `x` and `y` of a [monoid](group-theory.monoid.md) `G` are said to
+Two elements `x` and `y` of a [monoid](group-theory.monoids.md) `G` are said to
 **commute** if the equality `xy ＝ yx` holds.
 
 ## Definitions
