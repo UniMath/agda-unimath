@@ -199,8 +199,8 @@ module _
                 ( λ y1 →
                   type-Pointed-Type X →
                   point-Pointed-Type Y ＝ y1)) →
-`                is-contr-total-path
-                  ( (pr2 z) (point-Pointed-Type X))))) ∘e
+                    ( is-contr-total-path
+                      ( (pr2 z) (point-Pointed-Type X)))))) ∘e
             ( ( left-unit-law-Σ-is-contr
                 ( is-contr-total-path' (point-Pointed-Type Y))
                 ( (point-Pointed-Type Y) , refl)) ∘e
