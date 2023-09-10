@@ -53,3 +53,4 @@ is-uniquely-eliminating-modality-zero-modality {l2 = l2} A P =
 ### The zero modality is equivalent to `-2`-truncation
 
 This remains to be made formal.
+[#739](https://github.com/UniMath/agda-unimath/issues/739)
