@@ -190,7 +190,7 @@ abstract
 is-equiv-resize-𝕍' :
   {l1 l2 : Level} → is-equiv (resize-𝕍' {l1} {l2})
 is-equiv-resize-𝕍' {l1} {l2} =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( resize-𝕍' {l2} {l1})
     ( resize-resize-𝕍')
     ( resize-resize-𝕍')

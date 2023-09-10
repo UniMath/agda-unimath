@@ -29,15 +29,18 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-Unlabeled partitions, also known as Ferrers diagrams, of a type `A` record the
-number of ways in which `A` can be decomposed as the dependent pair type of a
-family of inhabited types. More precisely, a Ferrers diagram of a type `A`
-consists of a type `X` and a family `Y` of inhabited types over `X` such that
-`Σ X Y` is merely equivalent to `A`. A finite Finite ferrers diagram of a finite
-type `A` consists of a finite type `X` and a family `Y` of inhabited finite
-types over `X` such that `Σ X Y` is merely equivalent to `A`. The number of
-finite Ferrers diagrams of `A` is the partition number of the cardinality of
-`A`.
+**Unlabeled partitions**, also known as **Ferrers diagrams**, of a type `A`
+record the number of ways in which `A` can be decomposed as the
+[dependent pair type](foundation.dependent-pair-types.md) of a family of
+[inhabited types](foundation.inhabited-types.md). More precisely, a Ferrers
+diagram of a type `A` consists of a type `X` and a family `Y` of inhabited types
+over `X` such that `Σ X Y` is
+[merely equivalent](foundation.mere-equivalences.md) to `A`. A finite Finite
+ferrers diagram of a [finite type](univalent-combinatorics.finite-types.md) `A`
+consists of a finite type `X` and a family `Y` of inhabited finite types over
+`X` such that `Σ X Y` is merely equivalent to `A`. The number of finite Ferrers
+diagrams of `A` is the [partition number](univalent-combinatorics.partitions.md)
+of the [cardinality](set-theory.cardinalities.md) of `A`.
 
 ## Definition
 
@@ -261,6 +264,7 @@ module _
 ### The type of Ferrers diagrams of any finite type is π-finite
 
 This remains to be shown.
+[#746](https://github.com/UniMath/agda-unimath/issues/746)
 
 ## See also
 

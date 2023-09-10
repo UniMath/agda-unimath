@@ -140,7 +140,7 @@ module _
     is-equiv-fiber-map-coprod-inl-fiber :
       (x : A) → is-equiv (fiber-map-coprod-inl-fiber x)
     is-equiv-fiber-map-coprod-inl-fiber x =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fiber-fiber-map-coprod-inl x)
         ( is-section-fiber-fiber-map-coprod-inl x)
         ( is-retraction-fiber-fiber-map-coprod-inl x)
@@ -176,7 +176,7 @@ module _
     is-equiv-fiber-map-coprod-inr-fiber :
       (y : B) → is-equiv (fiber-map-coprod-inr-fiber y)
     is-equiv-fiber-map-coprod-inr-fiber y =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fiber-fiber-map-coprod-inr y)
         ( is-section-fiber-fiber-map-coprod-inr y)
         ( is-retraction-fiber-fiber-map-coprod-inr y)
@@ -270,9 +270,9 @@ is-contr-fiber-map-coprod {A = A} {B} {C} {D} f g =
     ( equiv-tot
       ( λ fg' →
         ( ( equiv-prod
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ a → compute-eq-coprod-inl-inl (pr1 fg' a) (f a)))
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ c → compute-eq-coprod-inr-inr (pr2 fg' c) (g c)))) ∘e
           ( equiv-dependent-universal-property-coprod
             ( λ x →
@@ -401,7 +401,7 @@ module _
   pr1 (pr1 (retraction-equiv-coprod f g p)) x =
     cases-retraction-equiv-coprod f g p x (map-equiv f (inl x)) refl
   pr2 (pr1 (retraction-equiv-coprod f g p)) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ x →
         inv-cases-retraction-equiv-coprod f g p x
           ( map-inv-equiv f (inl x))
@@ -479,7 +479,7 @@ module _
     (e : (P + Q) ≃ (P' + Q')) (u : P + Q) → is-left u ≃ is-left (map-equiv e u)
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr is-left (is-retraction-map-inv-equiv e u) ∘
         left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
       ( λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
@@ -490,7 +490,7 @@ module _
     is-right u ≃ is-right (map-equiv e u)
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr is-right (is-retraction-map-inv-equiv e u) ∘
         right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
@@ -535,7 +535,7 @@ module _
     ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))
   pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
   pr2 equiv-mutually-exclusive-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-mutually-exclusive-coprod
       is-retraction-map-inv-mutually-exclusive-coprod
       is-section-map-inv-mutually-exclusive-coprod

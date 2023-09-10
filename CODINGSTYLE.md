@@ -387,6 +387,12 @@ the story. Here's how we handle indentation and line breaks in the
   Sometimes, however, `equation-n` is a short proof term that fits on the same
   line as `by` within the 80 character limit. In that case it is ok to do so.
 
+- Expressions involving mixfix operators are appropriately parenthesized when
+  the particular association bears relevance, or if there is any chance of
+  confusion from omitting the parentheses. A reader of the code should not be
+  expected to know the precedence levels or associativity of particular
+  operators.
+
 ## Coding practices we tend to avoid
 
 - Using Unicode characters in names is entirely permissible, but we recommend

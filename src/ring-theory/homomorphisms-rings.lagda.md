@@ -43,11 +43,10 @@ preserves-mul-hom-Ab :
   type-hom-Ab (ab-Ring R) (ab-Ring S) → UU (l1 ⊔ l2)
 preserves-mul-hom-Ab R S f =
   (x y : type-Ring R) →
-  Id
-    ( map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y))
-    ( mul-Ring S
-      ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
-      ( map-hom-Ab (ab-Ring R) (ab-Ring S) f y))
+  map-hom-Ab (ab-Ring R) (ab-Ring S) f (mul-Ring R x y) ＝
+  mul-Ring S
+    ( map-hom-Ab (ab-Ring R) (ab-Ring S) f x)
+    ( map-hom-Ab (ab-Ring R) (ab-Ring S) f y)
 
 is-prop-preserves-mul-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
@@ -72,7 +71,7 @@ preserves-unit-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
   type-hom-Ab (ab-Ring R) (ab-Ring S) → UU l2
 preserves-unit-hom-Ab R S f =
-  Id (map-hom-Ab (ab-Ring R) (ab-Ring S) f (one-Ring R)) (one-Ring S)
+  map-hom-Ab (ab-Ring R) (ab-Ring S) f (one-Ring R) ＝ one-Ring S
 
 is-prop-preserves-unit-hom-Ab :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) →
@@ -165,13 +164,13 @@ module _
     preserves-mul-hom-Ring : preserves-mul-hom-Ab R S hom-ab-hom-Ring
     preserves-mul-hom-Ring = pr1 (pr2 f)
 
-    preserves-unit-hom-Ring : preserves-unit-hom-Ab R S hom-ab-hom-Ring
-    preserves-unit-hom-Ring = pr2 (pr2 f)
+    preserves-one-hom-Ring : preserves-unit-hom-Ab R S hom-ab-hom-Ring
+    preserves-one-hom-Ring = pr2 (pr2 f)
 
     is-ring-homomorphism-hom-Ring :
       is-ring-homomorphism-hom-Ab R S hom-ab-hom-Ring
     pr1 is-ring-homomorphism-hom-Ring = preserves-mul-hom-Ring
-    pr2 is-ring-homomorphism-hom-Ring = preserves-unit-hom-Ring
+    pr2 is-ring-homomorphism-hom-Ring = preserves-one-hom-Ring
 
     hom-multiplicative-monoid-hom-Ring :
       type-hom-Monoid
@@ -179,7 +178,7 @@ module _
         ( multiplicative-monoid-Ring S)
     pr1 (pr1 hom-multiplicative-monoid-hom-Ring) = map-hom-Ring
     pr2 (pr1 hom-multiplicative-monoid-hom-Ring) = preserves-mul-hom-Ring
-    pr2 hom-multiplicative-monoid-hom-Ring = preserves-unit-hom-Ring
+    pr2 hom-multiplicative-monoid-hom-Ring = preserves-one-hom-Ring
 
     hom-semiring-hom-Ring :
       type-hom-Semiring (semiring-Ring R) (semiring-Ring S)
@@ -369,7 +368,7 @@ module _
 ```agda
 id-law-ab-Ring :
   { l1 : Level} (R : Ring l1) →
-  Id (hom-ab-hom-Ring R R (id-hom-Ring R)) (id-hom-Ab (ab-Ring R))
+  hom-ab-hom-Ring R R (id-hom-Ring R) ＝ id-hom-Ab (ab-Ring R)
 id-law-ab-Ring R =
   eq-htpy-hom-Ab
     ( ab-Ring R)
@@ -383,14 +382,13 @@ id-law-ab-Ring R =
 comp-law-ab-Ring :
   { l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3) →
   ( g : type-hom-Ring S T) (f : type-hom-Ring R S) →
-  Id
-    ( hom-ab-hom-Ring R T (comp-hom-Ring R S T g f))
-    ( comp-hom-Ab
-      ( ab-Ring R)
-      ( ab-Ring S)
-      ( ab-Ring T)
-      ( hom-ab-hom-Ring S T g)
-      ( hom-ab-hom-Ring R S f))
+  hom-ab-hom-Ring R T (comp-hom-Ring R S T g f) ＝
+  comp-hom-Ab
+    ( ab-Ring R)
+    ( ab-Ring S)
+    ( ab-Ring T)
+    ( hom-ab-hom-Ring S T g)
+    ( hom-ab-hom-Ring R S f)
 comp-law-ab-Ring R S T g f =
   eq-htpy-hom-Ab
     ( ab-Ring R)

@@ -31,6 +31,8 @@ idω a = a
 ### Dependent composition of functions
 
 ```agda
+infixr 15 _∘_
+
 _∘_ :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3} →
   ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)
@@ -67,19 +69,25 @@ precomp f C = precomp-Π f (λ b → C)
 
 ```agda
 postcomp :
-  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (A : UU l3) →
+  {l1 l2 l3 : Level}
+  {X : UU l1} {Y : UU l2} (A : UU l3) →
   (X → Y) → (A → X) → (A → Y)
 postcomp A f h = f ∘ h
 
 map-Π :
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  {l1 l2 l3 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) →
-  ((i : I) → A i) → ((i : I) → B i)
+  ((i : I) → A i) →
+  ((i : I) → B i)
 map-Π f h i = f i (h i)
 
 map-Π' :
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  {l1 l2 l3 l4 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   {J : UU l4} (α : J → I) →
-  ((i : I) → A i → B i) → ((j : J) → A (α j)) → ((j : J) → B (α j))
-map-Π' α f = map-Π (λ j → f (α j))
+  ((i : I) → A i → B i) →
+  ((j : J) → A (α j)) →
+  ((j : J) → B (α j))
+map-Π' α f = map-Π (f ∘ α)
 ```

@@ -26,6 +26,9 @@ open import group-theory.central-elements-semigroups public
 open import group-theory.centralizer-subgroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutators-groups public
+open import group-theory.commuting-elements-groups public
+open import group-theory.commuting-elements-monoids public
+open import group-theory.commuting-elements-semigroups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.congruence-relations-abelian-groups public
@@ -77,6 +80,8 @@ open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.images-of-group-homomorphisms public
+open import group-theory.integer-multiples-of-elements-abelian-groups public
+open import group-theory.integer-powers-of-elements-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
 open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public

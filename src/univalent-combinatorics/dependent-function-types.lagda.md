@@ -93,7 +93,7 @@ abstract
     is-finite-equiv
       (( pair
         ( λ f {x} → f x)
-        ( is-equiv-has-inverse
+        ( is-equiv-is-invertible
           ( λ g x → g {x})
           ( refl-htpy)
           ( refl-htpy))))

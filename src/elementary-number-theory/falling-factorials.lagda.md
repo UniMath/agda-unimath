@@ -60,7 +60,7 @@ Fin-falling-factorial-ℕ (succ-ℕ n) zero-ℕ =
         ( λ x → (y : empty) → is-equiv (ap ex-falso))))
 Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
   ( ( ( right-unit-law-Σ-is-contr
-        { B = λ f → is-decidable (fib (map-emb f) (inr star))}
+        { B = λ f → is-decidable (fiber (map-emb f) (inr star))}
         ( λ f →
           is-proof-irrelevant-is-prop
             ( is-prop-is-decidable
@@ -71,8 +71,8 @@ Fin-falling-factorial-ℕ (succ-ℕ n) (succ-ℕ m) =
       ( ( inv-equiv
           ( left-distributive-Σ-coprod
             ( Fin (succ-ℕ m) ↪ Fin (succ-ℕ n))
-            ( λ f → fib (map-emb f) (inr star))
-            ( λ f → ¬ (fib (map-emb f) (inr star))))) ∘e
+            ( λ f → fiber (map-emb f) (inr star))
+            ( λ f → ¬ (fiber (map-emb f) (inr star))))) ∘e
         {!!})) ∘e
     ( equiv-coprod
       ( Fin-falling-factorial-ℕ n m)

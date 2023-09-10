@@ -177,7 +177,7 @@ abstract
   is-equiv-ev-𝕀 :
     {l : Level} (P : 𝕀 → UU l) → is-equiv (ev-𝕀 {P = P})
   is-equiv-ev-𝕀 P =
-    is-equiv-has-inverse inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
+    is-equiv-is-invertible inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
 
 contraction-𝕀 : (x : 𝕀) → Id source-𝕀 x
 contraction-𝕀 =

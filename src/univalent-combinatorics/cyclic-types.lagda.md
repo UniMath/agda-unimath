@@ -475,7 +475,7 @@ is-equiv-Eq-equiv-Cyclic-Type k X =
     ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X)
     ( is-equiv-Prop (Eq-equiv-Cyclic-Type k X))
     ( λ { refl →
-          is-equiv-has-inverse
+          is-equiv-is-invertible
             ( equiv-Eq-Cyclic-Type k)
             ( is-section-equiv-Eq-Cyclic-Type k)
             ( is-retraction-equiv-Eq-Cyclic-Type k)})

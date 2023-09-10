@@ -75,7 +75,7 @@ module _
   is-equiv-map-compute-total-fam-coprod :
     is-equiv map-compute-total-fam-coprod
   is-equiv-map-compute-total-fam-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-total-fam-coprod
       is-section-map-inv-compute-total-fam-coprod
       is-retraction-map-inv-compute-total-fam-coprod
@@ -106,20 +106,20 @@ module _
     ( ( equiv-tot
         ( λ f →
           ( ( equiv-prod
-              ( equiv-map-Π
+              ( equiv-Π-equiv-family
                 ( λ x →
-                  equiv-map-Π
+                  equiv-Π-equiv-family
                     ( λ p →
                       ( inv-equiv (compute-raise l3 (A x))) ∘e
                       ( equiv-tr (fam-coprod (A x) (B x)) p))))
-              ( equiv-map-Π
+              ( equiv-Π-equiv-family
                 ( λ x →
-                  equiv-map-Π
+                  equiv-Π-equiv-family
                     ( λ p →
                       ( inv-equiv (compute-raise l2 (B x))) ∘e
                       ( equiv-tr (fam-coprod (A x) (B x)) p))))) ∘e
             ( distributive-Π-Σ)) ∘e
-          ( equiv-map-Π
+          ( equiv-Π-equiv-family
             ( λ x →
               ( equiv-universal-property-coprod
                 ( fam-coprod (A x) (B x) (f x))) ∘e
@@ -127,7 +127,7 @@ module _
                 ( fam-coprod (A x) (B x) (f x))
                 ( is-contr-is-zero-or-one-Fin-two-ℕ (f x))))))) ∘e
       ( distributive-Π-Σ)) ∘e
-    ( equiv-map-Π
+    ( equiv-Π-equiv-family
       ( λ x → inv-compute-total-fam-coprod (A x) (B x)))
 
   type-distributive-Π-coprod-binary-coproduct-Decomposition :

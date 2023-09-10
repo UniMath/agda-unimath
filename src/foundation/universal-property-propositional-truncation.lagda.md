@@ -22,6 +22,7 @@ open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -344,7 +345,7 @@ abstract
         ( λ h a a' → h a (f' a'))
         ( λ h a p' → h (f a) p')
         ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))
-        ( is-equiv-map-Π
+        ( is-equiv-map-equiv-Π-equiv-family
           ( λ a g a' → g (f' a'))
           ( λ a → is-ptr-f' Q)))
 ```

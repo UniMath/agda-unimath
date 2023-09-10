@@ -63,7 +63,7 @@ module _
                 ( λ F → ((S A) × (T B)) × (pr1 F → X))))
     pr1 reassociate (F , ((A , B , e) , x) , y) = (A , B , (F , e) , x , y)
     pr2 reassociate =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ (A , B , (F , e) , x , y) → (F , ((A , B , e) , x) , y))
         ( refl-htpy)
         ( refl-htpy)
@@ -75,7 +75,7 @@ module _
     pr1 reassociate' (A , B , (s , t) , (fs , ft)) =
       ((A , (s , fs)) , (B , (t , ft)))
     pr2 reassociate' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ ((A , (s , fs)) , (B , (t , ft))) →
           (A , B , (s , t) , (fs , ft)))
         ( refl-htpy)

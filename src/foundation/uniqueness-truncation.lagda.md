@@ -38,12 +38,12 @@ module _
       ({l : Level} → is-truncation l C g) →
       is-equiv h
     is-equiv-is-truncation-is-truncation K L =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-is-equiv (L B) f)
         ( {!!})
         {!!}
 
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( pr1 (center K))
         ( htpy-eq
           ( is-injective-is-equiv

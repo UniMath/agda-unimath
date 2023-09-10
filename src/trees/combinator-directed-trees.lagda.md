@@ -330,7 +330,7 @@ module _
   is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree :
     is-equiv map-compute-direct-predecessor-combinator-Directed-Tree
   is-equiv-map-compute-direct-predecessor-combinator-Directed-Tree =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-direct-predecessor-combinator-Directed-Tree
       is-section-map-inv-compute-direct-predecessor-combinator-Directed-Tree
       is-retraction-map-inv-compute-direct-predecessor-combinator-Directed-Tree
@@ -407,7 +407,7 @@ module _
   is-equiv-base-index-combinator-Directed-Tree :
     is-equiv base-index-combinator-Directed-Tree
   is-equiv-base-index-combinator-Directed-Tree =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       index-base-combinator-Directed-Tree
       is-section-index-base-combinator-Directed-Tree
       is-retraction-index-base-combinator-Directed-Tree
@@ -464,7 +464,7 @@ module _
   is-equiv-map-compute-node-combinator-Directed-Tree :
     is-equiv map-compute-node-combinator-Directed-Tree
   is-equiv-map-compute-node-combinator-Directed-Tree =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-node-combinator-Directed-Tree
       is-section-map-inv-compute-node-combinator-Directed-Tree
       is-retraction-map-inv-compute-node-combinator-Directed-Tree
@@ -524,7 +524,7 @@ module _
   is-equiv-map-compute-proper-node-combinator-Directed-Tree :
     is-equiv map-compute-proper-node-combinator-Directed-Tree
   is-equiv-map-compute-proper-node-combinator-Directed-Tree =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-proper-node-combinator-Directed-Tree
       is-section-map-inv-compute-proper-node-combinator-Directed-Tree
       is-retraction-map-inv-compute-proper-node-combinator-Directed-Tree
@@ -749,7 +749,7 @@ module _
   is-equiv-node-combinator-fiber-base-Directed-Tree :
     is-equiv node-combinator-fiber-base-Directed-Tree
   is-equiv-node-combinator-fiber-base-Directed-Tree =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-node-combinator-fiber-base-Directed-Tree
       is-section-map-inv-node-combinator-fiber-base-Directed-Tree
       is-retraction-map-inv-node-combinator-fiber-base-Directed-Tree

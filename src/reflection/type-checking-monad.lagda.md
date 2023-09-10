@@ -177,11 +177,11 @@ postulate
 ## Monad syntax
 
 ```agda
-infixl 3 _<|>_
+infixl 15 _<|>_
 _<|>_ : {l : Level} {A : UU l} → TC A → TC A → TC A
 _<|>_ = catchTC
 
-infixl 1 _>>=_ _>>_ _<&>_
+infixl 10 _>>=_ _>>_ _<&>_
 _>>=_ :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   TC A → (A → TC B) → TC B

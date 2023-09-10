@@ -11,11 +11,11 @@ open import foundation.apartness-relations
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.law-of-excluded-middle
+open import foundation.logical-equivalences
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 open import foundation-core.negation
 ```
 

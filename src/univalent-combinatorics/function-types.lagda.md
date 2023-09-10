@@ -70,6 +70,7 @@ abstract
               is-finite-Π f
                 ( λ x → is-finite-eq (has-decidable-equality-is-finite f)))))
 
+infix 6 _≃-𝔽_
 _≃-𝔽_ : {l1 l2 : Level} → 𝔽 l1 → 𝔽 l2 → 𝔽 (l1 ⊔ l2)
 pr1 (A ≃-𝔽 B) = type-𝔽 A ≃ type-𝔽 B
 pr2 (A ≃-𝔽 B) = is-finite-≃ (is-finite-type-𝔽 A) (is-finite-type-𝔽 B)

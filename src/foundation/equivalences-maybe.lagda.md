@@ -371,7 +371,7 @@ abstract
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : Maybe X ≃ Maybe Y) →
     is-equiv (map-equiv-equiv-Maybe e)
   is-equiv-map-equiv-equiv-Maybe e =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-equiv-equiv-Maybe e)
       ( is-section-map-inv-equiv-equiv-Maybe e)
       ( is-retraction-map-inv-equiv-equiv-Maybe e)
@@ -396,7 +396,7 @@ module _
   pr1 (pr1 extend-equiv-Maybe f) = equiv-coprod f id-equiv
   pr2 (pr1 extend-equiv-Maybe f) = refl
   pr2 extend-equiv-Maybe =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ f → pr1 (retraction-equiv-coprod (pr1 f) id-equiv (p f)))
       ( λ f →
         ( eq-pair-Σ

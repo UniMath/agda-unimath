@@ -83,7 +83,7 @@ module _
   is-equiv-is-finitely-cyclic-map :
     (f : X → X) → is-finitely-cyclic-map f → is-equiv f
   is-equiv-is-finitely-cyclic-map f H =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-is-finitely-cyclic-map f H)
       ( is-section-map-inv-is-finitely-cyclic-map f H)
       ( is-retraction-map-inv-is-finitely-cyclic-map f H)

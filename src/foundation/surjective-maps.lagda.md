@@ -45,7 +45,9 @@ open import orthogonal-factorization-systems.extensions-of-maps
 
 ## Idea
 
-A map `f : A → B` is surjective if all of its fibers are inhabited.
+A map `f : A → B` is **surjective** if all of its
+[fibers](foundation-core.fibers-of-maps.md) are
+[inhabited](foundation.inhabited-types.md).
 
 ## Definition
 
@@ -65,6 +67,7 @@ is-prop-is-surjective :
   is-prop (is-surjective f)
 is-prop-is-surjective f = is-prop-type-Prop (is-surjective-Prop f)
 
+infix 5 _↠_
 _↠_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↠ B = Σ (A → B) is-surjective
 
@@ -268,7 +271,7 @@ abstract
       ( is-equiv-comp
         ( λ h y → (h y) ∘ unit-trunc-Prop)
         ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
-        ( is-equiv-map-Π
+        ( is-equiv-map-equiv-Π-equiv-family
           ( λ y p z → p)
           ( λ y →
             is-equiv-diagonal-is-contr
@@ -276,7 +279,7 @@ abstract
                 ( is-prop-type-trunc-Prop)
                 ( is-surj-f y))
               ( type-Prop (P y))))
-        ( is-equiv-map-Π
+        ( is-equiv-map-equiv-Π-equiv-family
           ( λ b g → g ∘ unit-trunc-Prop)
           ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
       ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
@@ -616,6 +619,7 @@ module _
 ### The type `Surjection-Into-Truncated-Type l2 (succ-𝕋 k) A` is `k`-truncated
 
 This remains to be shown.
+[#735](https://github.com/UniMath/agda-unimath/issues/735)
 
 ### Characterization of the identity type of `Surjection-Into-Set l2 A`
 
@@ -723,3 +727,4 @@ module _
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
 
 This remains to be shown.
+[#735](https://github.com/UniMath/agda-unimath/issues/735)

@@ -32,18 +32,25 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  coherence-htpy-retraction :
+    (g h : retraction f) → map-retraction f g ~ map-retraction f h → UU l1
+  coherence-htpy-retraction = coherence-htpy-hom-coslice
+
   htpy-retraction : retraction f → retraction f → UU (l1 ⊔ l2)
   htpy-retraction = htpy-hom-coslice
 
   extensionality-retraction :
-    (g h : retraction f) → Id g h ≃ htpy-retraction g h
-  extensionality-retraction g h = extensionality-hom-coslice g h
+    (g h : retraction f) → (g ＝ h) ≃ htpy-retraction g h
+  extensionality-retraction = extensionality-hom-coslice
 
   eq-htpy-retraction :
-    ( g h : retraction f) (H : pr1 g ~ pr1 h)
-    ( K : (pr2 g) ~ ((H ·r f) ∙h pr2 h)) →
+    ( g h : retraction f)
+    ( H : map-retraction f g ~ map-retraction f h)
+    ( K :
+      ( is-retraction-map-retraction f g) ~
+      ( (H ·r f) ∙h is-retraction-map-retraction f h)) →
     g ＝ h
-  eq-htpy-retraction g h = eq-htpy-hom-coslice g h
+  eq-htpy-retraction = eq-htpy-hom-coslice
 ```
 
 ### If the left factor of a composite has a retraction, then the type of retractions of the right factor is a retract of the type of retractions of the composite

@@ -23,7 +23,7 @@ open import foundation.universe-levels
 open import group-theory.free-groups-with-one-generator
 open import group-theory.groups
 open import group-theory.images-of-group-homomorphisms
-open import group-theory.powers-of-elements-groups
+open import group-theory.integer-powers-of-elements-groups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-subsets-groups
 open import group-theory.subsets-groups

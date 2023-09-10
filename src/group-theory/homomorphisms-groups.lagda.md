@@ -25,8 +25,9 @@ open import group-theory.homomorphisms-semigroups
 
 ## Idea
 
-A group homomorphism from one group to another is a semigroup homomorphism
-between their underlying semigroups
+A **group homomorphism** from one [group](group-theory.groups.md) to another is
+a [semigroup homomorphism](group-theory.homomorphisms-semigroups.md) between
+their underlying [semigroups](group-theory.semigroups.md).
 
 ## Definition
 
@@ -186,7 +187,7 @@ module _
   where
 
   preserves-unit-Group : (type-Group G → type-Group H) → UU l2
-  preserves-unit-Group f = Id (f (unit-Group G)) (unit-Group H)
+  preserves-unit-Group f = f (unit-Group G) ＝ unit-Group H
 
   abstract
     preserves-unit-hom-Group :
