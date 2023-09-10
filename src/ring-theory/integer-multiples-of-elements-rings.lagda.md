@@ -15,12 +15,14 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
+open import foundation.transport
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.integer-multiples-of-elements-abelian-groups
 
+open import ring-theory.commuting-elements-rings
 open import ring-theory.homomorphisms-rings
 open import ring-theory.multiples-of-elements-rings
 open import ring-theory.rings
@@ -312,6 +314,88 @@ module _
           ( add-Ring' R _)
           ( right-integer-multiple-law-mul-Ring (inr (inr k)) x y)) ∙
         ( inv (integer-multiple-succ-Ring R (inr (inr k)) _))))
+```
+
+### If `x` and `y` commute, then integer multiples of `x` and `y` commute
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  commute-integer-multiple-Ring :
+    (k : ℤ) {x y : type-Ring R} → commute-Ring R x y →
+    commute-Ring R x (integer-multiple-Ring R k y)
+  commute-integer-multiple-Ring (inl zero-ℕ) H =
+    tr
+      ( commute-Ring R _)
+      ( inv (integer-multiple-neg-one-Ring R _))
+      ( commute-neg-Ring R H)
+  commute-integer-multiple-Ring (inl (succ-ℕ k)) H =
+    tr
+      ( commute-Ring R _)
+      ( inv (integer-multiple-pred-Ring R (inl k) _))
+      ( commute-right-subtraction-Ring R
+        ( commute-integer-multiple-Ring (inl k) H)
+        ( H))
+  commute-integer-multiple-Ring (inr (inl star)) {x} H =
+    tr
+      ( commute-Ring R _)
+      ( inv (integer-multiple-zero-Ring R x))
+      ( inv (commute-zero-Ring R _))
+  commute-integer-multiple-Ring (inr (inr zero-ℕ)) H =
+    tr
+      ( commute-Ring R _)
+      ( inv (integer-multiple-one-Ring R _))
+      ( H)
+  commute-integer-multiple-Ring (inr (inr (succ-ℕ k))) H =
+    tr
+      ( commute-Ring R _)
+      ( inv (integer-multiple-succ-Ring R (inr (inr k)) _))
+      ( commute-add-Ring R
+        ( commute-integer-multiple-Ring (inr (inr k)) H)
+        ( H))
+
+  commute-integer-multiples-Ring :
+    (k l : ℤ) {x y : type-Ring R} → commute-Ring R x y →
+    commute-Ring R (integer-multiple-Ring R k x) (integer-multiple-Ring R l y)
+  commute-integer-multiples-Ring (inl zero-ℕ) l H =
+    tr
+      ( commute-Ring' R _)
+      ( inv (integer-multiple-neg-one-Ring R _))
+      ( inv (commute-neg-Ring R (inv (commute-integer-multiple-Ring l H))))
+  commute-integer-multiples-Ring (inl (succ-ℕ k)) l H =
+    tr
+      ( commute-Ring' R _)
+      ( inv (integer-multiple-pred-Ring R (inl k) _))
+      ( inv
+        ( commute-right-subtraction-Ring R
+          ( commute-integer-multiples-Ring l (inl k) (inv H))
+          ( inv (commute-integer-multiple-Ring l H))))
+  commute-integer-multiples-Ring (inr (inl star)) l {x} H =
+    tr
+      ( commute-Ring' R _)
+      ( inv (integer-multiple-zero-Ring R x))
+      ( commute-zero-Ring R _)
+  commute-integer-multiples-Ring (inr (inr zero-ℕ)) l H =
+    tr
+      ( commute-Ring' R _)
+      ( inv (integer-multiple-one-Ring R _))
+      ( commute-integer-multiple-Ring l H)
+  commute-integer-multiples-Ring (inr (inr (succ-ℕ k))) l H =
+    tr
+      ( commute-Ring' R _)
+      ( inv (integer-multiple-succ-Ring R (inr (inr k)) _))
+      ( inv
+        ( commute-add-Ring R
+          ( commute-integer-multiples-Ring l (inr (inr k)) (inv H))
+          ( inv (commute-integer-multiple-Ring l H))))
+
+  commute-integer-multiples-diagonal-Ring :
+    (k l : ℤ) {x : type-Ring R} →
+    commute-Ring R (integer-multiple-Ring R k x) (integer-multiple-Ring R l x)
+  commute-integer-multiples-diagonal-Ring k l =
+    commute-integer-multiples-Ring k l refl
 ```
 
 ### For each integer `k`, the operation `k-` taking integer multiples is a group homomorphism

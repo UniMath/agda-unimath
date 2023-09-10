@@ -27,6 +27,8 @@ open import group-theory.centralizer-subgroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutators-groups public
 open import group-theory.commuting-elements-groups public
+open import group-theory.commuting-elements-monoids public
+open import group-theory.commuting-elements-semigroups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.congruence-relations-abelian-groups public

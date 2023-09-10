@@ -10,6 +10,7 @@ open import ring-theory.binomial-theorem-rings public
 open import ring-theory.binomial-theorem-semirings public
 open import ring-theory.central-elements-rings public
 open import ring-theory.central-elements-semirings public
+open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
 open import ring-theory.dependent-products-rings public

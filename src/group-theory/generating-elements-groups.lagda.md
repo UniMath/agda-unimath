@@ -50,6 +50,7 @@ open import group-theory.subgroups-generated-by-elements-groups
 open import group-theory.subsets-groups
 open import group-theory.trivial-group-homomorphisms
 
+open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
 open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
 ```
@@ -198,6 +199,10 @@ module _
 
   group-Group-With-Generating-Element : Group l
   group-Group-With-Generating-Element = pr1 G
+
+  set-Group-With-Generating-Element : Set l
+  set-Group-With-Generating-Element =
+    set-Group group-Group-With-Generating-Element
 
   type-Group-With-Generating-Element : UU l
   type-Group-With-Generating-Element =
@@ -641,4 +646,25 @@ module _
     type-Group-With-Generating-Element G
   mul-Group-With-Generating-Element =
     mul-Ring ring-Group-With-Generating-Element
+
+  commutative-mul-Group-With-Generating-Element :
+    (x y : type-Group-With-Generating-Element G) →
+    mul-Group-With-Generating-Element x y ＝
+    mul-Group-With-Generating-Element y x
+  commutative-mul-Group-With-Generating-Element x y =
+    apply-twice-universal-property-trunc-Prop
+      ( is-surjective-hom-element-Group-With-Generating-Element G x)
+      ( is-surjective-hom-element-Group-With-Generating-Element G y)
+      ( Id-Prop (set-Group-With-Generating-Element G) _ _)
+      ( λ { (k , refl) (l , refl) →
+            commute-integer-multiples-diagonal-Ring
+              ( ring-Group-With-Generating-Element)
+              ( k)
+              ( l)})
+
+  commutative-ring-Group-With-Generating-Element : Commutative-Ring l1
+  pr1 commutative-ring-Group-With-Generating-Element =
+    ring-Group-With-Generating-Element
+  pr2 commutative-ring-Group-With-Generating-Element =
+    commutative-mul-Group-With-Generating-Element
 ```

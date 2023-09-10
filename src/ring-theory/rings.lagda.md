@@ -159,6 +159,12 @@ module _
   left-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
   left-subtraction-Ring = left-subtraction-Ab (ab-Ring R)
 
+  ap-left-subtraction-Ring :
+    {x x' y y' : type-Ring R} → x ＝ x' → y ＝ y' →
+    left-subtraction-Ring x y ＝ left-subtraction-Ring x' y'
+  ap-left-subtraction-Ring =
+    ap-left-subtraction-Ab (ab-Ring R)
+
   is-section-left-subtraction-Ring :
     (x : type-Ring R) → (add-Ring R x ∘ left-subtraction-Ring x) ~ id
   is-section-left-subtraction-Ring =
@@ -185,6 +191,11 @@ module _
 
   right-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
   right-subtraction-Ring = right-subtraction-Ab (ab-Ring R)
+
+  ap-right-subtraction-Ring :
+    {x x' y y' : type-Ring R} → x ＝ x' → y ＝ y' →
+    right-subtraction-Ring x y ＝ right-subtraction-Ring x' y'
+  ap-right-subtraction-Ring = ap-right-subtraction-Ab (ab-Ring R)
 
   is-section-right-subtraction-Ring :
     (x : type-Ring R) →

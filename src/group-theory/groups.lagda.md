@@ -205,6 +205,11 @@ module _
   left-div-Group : type-Group G → type-Group G → type-Group G
   left-div-Group x y = mul-Group G (inv-Group G x) y
 
+  ap-left-div-Group :
+    {x x' y y' : type-Group G} → x ＝ x' → y ＝ y' →
+    left-div-Group x y ＝ left-div-Group x' y'
+  ap-left-div-Group p q = ap-binary left-div-Group p q
+
   is-section-left-div-Group :
     (x : type-Group G) → (mul-Group G x ∘ left-div-Group x) ~ id
   is-section-left-div-Group x y =
@@ -247,6 +252,11 @@ module _
 ```agda
   right-div-Group : type-Group G → type-Group G → type-Group G
   right-div-Group x y = mul-Group G x (inv-Group G y)
+
+  ap-right-div-Group :
+    {x x' y y' : type-Group G} → x ＝ x' → y ＝ y' →
+    right-div-Group x y ＝ right-div-Group x' y'
+  ap-right-div-Group p q = ap-binary right-div-Group p q
 
   is-section-right-div-Group :
     (x : type-Group G) → (mul-Group' G x ∘ (λ y → right-div-Group y x)) ~ id

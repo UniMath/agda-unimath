@@ -246,6 +246,11 @@ module _
   left-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   left-subtraction-Ab = left-div-Group (group-Ab A)
 
+  ap-left-subtraction-Ab :
+    {x x' y y' : type-Ab A} → x ＝ x' → y ＝ y' →
+    left-subtraction-Ab x y ＝ left-subtraction-Ab x' y'
+  ap-left-subtraction-Ab = ap-left-div-Group (group-Ab A)
+
   is-section-left-subtraction-Ab :
     (x : type-Ab A) → (add-Ab A x ∘ left-subtraction-Ab x) ~ id
   is-section-left-subtraction-Ab = is-section-left-div-Group (group-Ab A)
@@ -270,6 +275,11 @@ module _
 
   right-subtraction-Ab : type-Ab A → type-Ab A → type-Ab A
   right-subtraction-Ab = right-div-Group (group-Ab A)
+
+  ap-right-subtraction-Ab :
+    {x x' y y' : type-Ab A} → x ＝ x' → y ＝ y' →
+    right-subtraction-Ab x y ＝ right-subtraction-Ab x' y'
+  ap-right-subtraction-Ab = ap-right-div-Group (group-Ab A)
 
   is-section-right-subtraction-Ab :
     (x : type-Ab A) →

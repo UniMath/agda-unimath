@@ -13,6 +13,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
+open import group-theory.commuting-elements-monoids
 open import group-theory.groups
 ```
 
@@ -35,14 +36,16 @@ module _
   where
 
   commute-prop-Group : (x y : type-Group G) → Prop l
-  commute-prop-Group x y =
-    Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x)
+  commute-prop-Group = commute-prop-Monoid (monoid-Group G)
 
   commute-Group : (x y : type-Group G) → UU l
-  commute-Group x y = type-Prop (commute-prop-Group x y)
+  commute-Group = commute-Monoid (monoid-Group G)
+
+  commute-Group' : (x y : type-Group G) → UU l
+  commute-Group' = commute-Monoid' (monoid-Group G)
 
   is-prop-commute-Group : (x y : type-Group G) → is-prop (commute-Group x y)
-  is-prop-commute-Group x y = is-prop-type-Prop (commute-prop-Group x y)
+  is-prop-commute-Group = is-prop-commute-Monoid (monoid-Group G)
 ```
 
 ## Properties
@@ -55,7 +58,7 @@ module _
   where
 
   refl-commute-Group : (x : type-Group G) → commute-Group G x x
-  refl-commute-Group x = refl
+  refl-commute-Group = refl-commute-Monoid (monoid-Group G)
 ```
 
 ### The relation `commute-Group` is symmetric
@@ -67,7 +70,7 @@ module _
 
   symmetric-commute-Group :
     (x y : type-Group G) → commute-Group G x y → commute-Group G y x
-  symmetric-commute-Group x y = inv
+  symmetric-commute-Group = symmetric-commute-Monoid (monoid-Group G)
 ```
 
 ### The unit element commutes with every element of the group
@@ -78,8 +81,7 @@ module _
   where
 
   commute-unit-Group : (x : type-Group G) → commute-Group G x (unit-Group G)
-  commute-unit-Group x =
-    right-unit-law-mul-Group G x ∙ inv (left-unit-law-mul-Group G x)
+  commute-unit-Group = commute-unit-Monoid (monoid-Group G)
 ```
 
 ### If `x` commutes with `y`, then `x` commutes with `y⁻¹`
@@ -111,18 +113,12 @@ module _
   left-swap-commute-Group :
     (x y z : type-Group G) → commute-Group G x y →
     x * (y * z) ＝ y * (x * z)
-  left-swap-commute-Group x y z H =
-    ( inv (associative-mul-Group G _ _ _)) ∙
-    ( ( ap (_* z) H) ∙
-      ( associative-mul-Group G _ _ _))
+  left-swap-commute-Group = left-swap-commute-Monoid (monoid-Group G)
 
   right-swap-commute-Group :
     (x y z : type-Group G) → commute-Group G y z →
     (x * y) * z ＝ (x * z) * y
-  right-swap-commute-Group x y z H =
-    ( associative-mul-Group G _ _ _) ∙
-    ( ( ap (x *_) H) ∙
-      ( inv (associative-mul-Group G _ _ _)))
+  right-swap-commute-Group = right-swap-commute-Monoid (monoid-Group G)
 ```
 
 ### If `x` commutes with `y` and with `z`, then `x` commutes with `yz`
@@ -132,19 +128,9 @@ module _
   {l : Level} (G : Group l)
   where
 
-  private
-
-    infix 50 _*_
-    _*_ = mul-Group G
-
   commute-mul-Group :
     (x y z : type-Group G) →
     commute-Group G x y → commute-Group G x z →
     commute-Group G x (mul-Group G y z)
-  commute-mul-Group x y z H K =
-    equational-reasoning
-      (x * (y * z))
-      ＝ y * (x * z) by left-swap-commute-Group G _ _ _ H
-      ＝ y * (z * x) by ap (y *_) K
-      ＝ (y * z) * x by inv (associative-mul-Group G _ _ _)
+  commute-mul-Group = commute-mul-Monoid (monoid-Group G)
 ```
