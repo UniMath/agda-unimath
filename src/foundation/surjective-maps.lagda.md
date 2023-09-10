@@ -45,7 +45,9 @@ open import orthogonal-factorization-systems.extensions-of-maps
 
 ## Idea
 
-A map `f : A → B` is surjective if all of its fibers are inhabited.
+A map `f : A → B` is **surjective** if all of its
+[fibers](foundation-core.fibers-of-maps.md) are
+[inhabited](foundation.inhabited-types.md).
 
 ## Definition
 
@@ -617,6 +619,7 @@ module _
 ### The type `Surjection-Into-Truncated-Type l2 (succ-𝕋 k) A` is `k`-truncated
 
 This remains to be shown.
+[#735](https://github.com/UniMath/agda-unimath/issues/735)
 
 ### Characterization of the identity type of `Surjection-Into-Set l2 A`
 
@@ -724,3 +727,4 @@ module _
 ### The type of surjections `A ↠ B` is equivalent to the type of families `P` of inhabited types over `B` equipped with an equivalence `A ≃ Σ B P`
 
 This remains to be shown.
+[#735](https://github.com/UniMath/agda-unimath/issues/735)
