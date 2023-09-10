@@ -34,18 +34,24 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A partition of a finite type `X` can be defined in several equivalent ways:
+A **partition** of a [finite type](univalent-combinatorics.finite-types.md) `X`
+can be defined in several equivalent ways:
 
-- A partition is a subset `P` of the powerset of `X` such that each `U ⊆ X` in
-  `P` is inhabited and each element `x : X` is in exactly one subset `U ⊆ X` in
-  `P`.
-- A partition is an equivalence relation on `X`
+- A partition is a [subset](foundation.subtypes.md) `P` of the
+  [powerset](foundation.powersets.md) of `X` such that each `U ⊆ X` in `P` is
+  [inhabited](foundation.inhabited-types.md) and each element `x : X` is in
+  exactly one subset `U ⊆ X` in `P`.
+- A partition is an
+  [equivalence relation](foundation-core.equivalence-relations.md) on `X`
 - A partition is a decomposition of `X` into a type of the form `Σ A B` where
   `A` is finite and `B` is a family of inhabited finite types, i.e., it consists
-  of such `A` and `B` and an equivalence `X ≃ Σ A B`.
+  of such `A` and `B` and an [equivalence](foundation-core.equivalences.md)
+  `X ≃ Σ A B`.
 
-Note that the last description is subtly different from the notion of unlabeled
-partition (i.e., Ferrers diagram), because it only uses mere equivalences.
+Note that the last description is subtly different from the notion of
+[unlabeled partition](univalent-combinatorics.ferrers-diagrams.md) (i.e.,
+Ferrers diagram), because it only uses
+[mere equivalences](foundation.mere-equivalences.md).
 
 ## Definition
 
