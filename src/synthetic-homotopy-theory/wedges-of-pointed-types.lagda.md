@@ -52,6 +52,7 @@ wedge-Pointed-Type A B =
     ( inclusion-point-Pointed-Type A)
     ( inclusion-point-Pointed-Type B)
 
+infixr 10 _∨∗_
 _∨∗_ = wedge-Pointed-Type
 
 indexed-wedge-Pointed-Type :

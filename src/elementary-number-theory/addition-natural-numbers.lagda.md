@@ -34,7 +34,7 @@ add-ℕ x (succ-ℕ y) = succ-ℕ (add-ℕ x y)
 add-ℕ' : ℕ → ℕ → ℕ
 add-ℕ' m n = add-ℕ n m
 
-infix 30 _+ℕ_
+infixl 35 _+ℕ_
 _+ℕ_ = add-ℕ
 
 ap-add-ℕ :

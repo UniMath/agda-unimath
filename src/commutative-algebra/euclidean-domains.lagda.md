@@ -74,7 +74,7 @@ is-euclidean-valuation R v =
     ( λ (q , r) →
       ( Id x (add-Integral-Domain R (mul-Integral-Domain R q y) r)) ×
         ( is-zero-Integral-Domain R r +
-        ( v r < v y)))
+        ( v r <-ℕ v y)))
 ```
 
 ### The condition of being a Euclidean domain
@@ -691,7 +691,7 @@ module _
     ( is-zero-Euclidean-Domain
       ( remainder-euclidean-division-Euclidean-Domain x y p)) +
     ( euclidean-valuation-Euclidean-Domain
-      ( remainder-euclidean-division-Euclidean-Domain x y p) <
+      ( remainder-euclidean-division-Euclidean-Domain x y p) <-ℕ
     ( euclidean-valuation-Euclidean-Domain y))
   remainder-condition-euclidean-division-Euclidean-Domain x y p =
     pr2 (pr2 (pr2 is-euclidean-domain-Euclidean-Domain x y p))

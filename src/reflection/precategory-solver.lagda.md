@@ -167,11 +167,11 @@ module _
 
 ```agda
 private
-  infixr 10 _∷_
+  infixr 11 _∷_
   pattern _∷_ x xs = cons x xs
   _++_ : {l : Level} {A : UU l} → list A → list A → list A
   _++_ = concat-list
-  infixr 5 _++_
+  infixr 10 _++_
 
   pattern apply-pr1 xs =
     def (quote pr1)

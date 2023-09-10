@@ -40,6 +40,7 @@ module _
   pointed-map : Pointed-Type l1 → Pointed-Type l2 → UU (l1 ⊔ l2)
   pointed-map A B = pointed-Π A (constant-Pointed-Fam A B)
 
+  infixr 5 _→∗_
   _→∗_ = pointed-map
 ```
 
@@ -133,6 +134,7 @@ precomp-pointed-map :
   A →∗ B → B →∗ C → A →∗ C
 precomp-pointed-map C f g = comp-pointed-map g f
 
+infixr 15 _∘∗_
 _∘∗_ :
   {l1 l2 l3 : Level}
   {A : Pointed-Type l1} {B : Pointed-Type l2} {C : Pointed-Type l3} →
