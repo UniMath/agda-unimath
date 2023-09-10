@@ -41,8 +41,11 @@ open import univalent-combinatorics.surjective-maps
 
 ## Idea
 
-A decidable equivalence relation on a finite type is an equivalence relation `R`
-such that each `R x y` is a decidable proposition.
+A **decidable equivalence relation** on a
+[finite type](univalent-combinatorics.finite-types.md) is an
+[equivalence relation](foundation-core.equivalence-relations.md) `R` such that
+each `R x y` is a
+[decidable proposition](foundation-core.decidable-propositions.md).
 
 ## Definition
 
@@ -250,3 +253,4 @@ is-finite-Decidable-Equivalence-Relation-𝔽 A =
 ### The number of decidable equivalence relations on a finite type is a Stirling number of the second kind
 
 This remains to be characterized.
+[#745](https://github.com/UniMath/agda-unimath/issues/745)
