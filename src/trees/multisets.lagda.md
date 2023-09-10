@@ -35,6 +35,8 @@ family over the universe `UU l`.
 ### The elementhood relation on multisets
 
 ```agda
+infix 6 _∈-𝕍_ _∉-𝕍_
+
 _∈-𝕍_ : {l : Level} → 𝕍 l → 𝕍 l → UU (lsuc l)
 X ∈-𝕍 Y = X ∈-𝕎 Y
 

@@ -87,36 +87,37 @@ is-decidable-map-is-decidable-prop-map H y = pr2 (H y)
 ### The type of decidable embeddings
 
 ```agda
-_↪d_ :
+infix 5 _↪ᵈ_
+_↪ᵈ_ :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
-X ↪d Y = Σ (X → Y) is-decidable-emb
+X ↪ᵈ Y = Σ (X → Y) is-decidable-emb
 
 map-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪d Y → X → Y
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪ᵈ Y → X → Y
 map-decidable-emb e = pr1 e
 
 abstract
   is-decidable-emb-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y) →
     is-decidable-emb (map-decidable-emb e)
   is-decidable-emb-map-decidable-emb e = pr2 e
 
 abstract
   is-emb-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y) →
     is-emb (map-decidable-emb e)
   is-emb-map-decidable-emb e =
     is-emb-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
 
 abstract
   is-decidable-map-map-decidable-emb :
-    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪d Y) →
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y) →
     is-decidable-map (map-decidable-emb e)
   is-decidable-map-map-decidable-emb e =
     is-decidable-map-is-decidable-emb (is-decidable-emb-map-decidable-emb e)
 
 emb-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪d Y → X ↪ Y
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → X ↪ᵈ Y → X ↪ Y
 pr1 (emb-decidable-emb e) = map-decidable-emb e
 pr2 (emb-decidable-emb e) = is-emb-map-decidable-emb e
 ```
@@ -163,7 +164,7 @@ module _
 
 decidable-subtype-decidable-emb :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
-  (X ↪d Y) → (decidable-subtype (l1 ⊔ l2) Y)
+  (X ↪ᵈ Y) → (decidable-subtype (l1 ⊔ l2) Y)
 pr1 (decidable-subtype-decidable-emb f y) = fiber (map-decidable-emb f) y
 pr2 (decidable-subtype-decidable-emb f y) =
   is-decidable-prop-map-is-decidable-emb (pr2 f) y
@@ -174,7 +175,7 @@ pr2 (decidable-subtype-decidable-emb f y) =
 ```agda
 equiv-Fiber-Decidable-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
-  Σ (UU (l1 ⊔ l)) (λ X → X ↪d A) ≃ (decidable-subtype (l1 ⊔ l) A)
+  Σ (UU (l1 ⊔ l)) (λ X → X ↪ᵈ A) ≃ (decidable-subtype (l1 ⊔ l) A)
 equiv-Fiber-Decidable-Prop l A =
   ( equiv-Fiber-structure l is-decidable-prop A) ∘e
   ( equiv-tot
@@ -202,7 +203,7 @@ abstract
   pr2 (is-decidable-emb-id {l1} {A}) x = inl (pair x refl)
 
 decidable-emb-id :
-  {l1 : Level} {A : UU l1} → A ↪d A
+  {l1 : Level} {A : UU l1} → A ↪ᵈ A
 pr1 (decidable-emb-id {l1} {A}) = id
 pr2 (decidable-emb-id {l1} {A}) = is-decidable-emb-id
 ```
@@ -268,22 +269,22 @@ abstract
 
 ```agda
 htpy-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪ᵈ B) → UU (l1 ⊔ l2)
 htpy-decidable-emb f g = map-decidable-emb f ~ map-decidable-emb g
 
 refl-htpy-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪d B) → htpy-decidable-emb f f
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ᵈ B) → htpy-decidable-emb f f
 refl-htpy-decidable-emb f = refl-htpy
 
 htpy-eq-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪ᵈ B) →
   f ＝ g → htpy-decidable-emb f g
 htpy-eq-decidable-emb f .f refl = refl-htpy-decidable-emb f
 
 abstract
   is-contr-total-htpy-decidable-emb :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪d B) →
-    is-contr (Σ (A ↪d B) (htpy-decidable-emb f))
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ᵈ B) →
+    is-contr (Σ (A ↪ᵈ B) (htpy-decidable-emb f))
   is-contr-total-htpy-decidable-emb f =
     is-contr-total-Eq-subtype
       ( is-contr-total-htpy (map-decidable-emb f))
@@ -294,7 +295,7 @@ abstract
 
 abstract
   is-equiv-htpy-eq-decidable-emb :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪d B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A ↪ᵈ B) →
     is-equiv (htpy-eq-decidable-emb f g)
   is-equiv-htpy-eq-decidable-emb f =
     fundamental-theorem-id
@@ -302,7 +303,7 @@ abstract
       ( htpy-eq-decidable-emb f)
 
 eq-htpy-decidable-emb :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A ↪d B} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A ↪ᵈ B} →
   htpy-decidable-emb f g → f ＝ g
 eq-htpy-decidable-emb {f = f} {g} =
   map-inv-is-equiv (is-equiv-htpy-eq-decidable-emb f g)
@@ -313,7 +314,7 @@ eq-htpy-decidable-emb {f = f} {g} =
 ```agda
 equiv-precomp-decidable-emb-equiv :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
-  (C : UU l3) → (B ↪d C) ≃ (A ↪d C)
+  (C : UU l3) → (B ↪ᵈ C) ≃ (A ↪ᵈ C)
 equiv-precomp-decidable-emb-equiv e C =
   equiv-Σ
     ( is-decidable-emb)
@@ -341,12 +342,12 @@ abstract
   pr2 (is-decidable-emb-ex-falso {l} {X}) x = inr pr1
 
 decidable-emb-ex-falso :
-  {l : Level} {X : UU l} → empty ↪d X
+  {l : Level} {X : UU l} → empty ↪ᵈ X
 pr1 decidable-emb-ex-falso = ex-falso
 pr2 decidable-emb-ex-falso = is-decidable-emb-ex-falso
 
 decidable-emb-is-empty :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪d B
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → A ↪ᵈ B
 decidable-emb-is-empty {A = A} f =
   map-equiv
     ( equiv-precomp-decidable-emb-equiv (equiv-is-empty f id) _)
@@ -367,7 +368,7 @@ module _
     ( is-emb-tot (λ x → is-emb-is-decidable-emb (H x)) ,
       is-decidable-map-tot λ x → is-decidable-map-is-decidable-emb (H x))
 
-  decidable-emb-tot : ((x : A) → B x ↪d C x) → Σ A B ↪d Σ A C
+  decidable-emb-tot : ((x : A) → B x ↪ᵈ C x) → Σ A B ↪ᵈ Σ A C
   pr1 (decidable-emb-tot f) = tot (λ x → map-decidable-emb (f x))
   pr2 (decidable-emb-tot f) =
     is-decidable-emb-tot (λ x → is-decidable-emb-map-decidable-emb (f x))

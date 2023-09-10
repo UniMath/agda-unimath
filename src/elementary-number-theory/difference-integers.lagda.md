@@ -31,8 +31,8 @@ are derived there.
 diff-ℤ : ℤ → ℤ → ℤ
 diff-ℤ x y = x +ℤ (neg-ℤ y)
 
+infixl 36 _-ℤ_
 _-ℤ_ = diff-ℤ
-infix 30 _-ℤ_
 ```
 
 ## Properties
