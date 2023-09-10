@@ -49,7 +49,7 @@ module _
     iterated-addition-by-element-Ring (ring-Commutative-Ring A)
 ```
 
-### Multiples by integers of abelian group elements
+### Multiples by integers of elements of commutative rings
 
 ```agda
 module _
@@ -64,7 +64,7 @@ module _
 
 ## Properties
 
-### Associativity of iterated addition by a group element
+### Associativity of iterated addition by an element of a commutative ring
 
 ```agda
 module _
@@ -313,7 +313,7 @@ module _
     integer-multiple-mul-Ring (ring-Commutative-Ring A)
 ```
 
-### Commutative-Ringelian group homomorphisms preserve integer multiples
+### Commutative Ring homomorphisms preserve integer multiples
 
 ```agda
 module _
