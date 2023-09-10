@@ -119,7 +119,7 @@ module _
       ( is-retraction-hom-inv-is-iso-hom-Commutative-Ring U)
 ```
 
-### Isomorphisms of rings
+### Isomorphisms of commutative rings
 
 ```agda
 module _
@@ -321,7 +321,7 @@ module _
   id-iso-Commutative-Ring = id-iso-Ring (ring-Commutative-Ring A)
 ```
 
-### Converting identifications of rings to isomorphisms of rings
+### Converting identifications of commutative rings to isomorphisms of commutative rings
 
 ```agda
 iso-eq-Commutative-Ring :
@@ -331,7 +331,7 @@ iso-eq-Commutative-Ring A .A refl = id-iso-Commutative-Ring A
 
 ## Properties
 
-### A ring homomorphism is an isomorphism if and only if the underlying homomorphism of abelian groups is an isomorphism
+### A commutative ring homomorphism is an isomorphism if and only if the underlying homomorphism of abelian groups is an isomorphism
 
 ```agda
 module _
@@ -383,7 +383,7 @@ module _
       ( ring-Commutative-Ring B)
 ```
 
-### Characterizing identifications of rings
+### Characterizing identifications of commutative rings
 
 ```agda
 module _
