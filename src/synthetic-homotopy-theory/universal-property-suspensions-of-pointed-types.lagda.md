@@ -86,18 +86,18 @@ module _
     pointed-map-pointed-equiv
       ( pointed-equiv-loop-pointed-identity-suspension)
 
-  meridian-suspension∗ :
+  pointed-map-concat-meridian-suspension :
     X →∗
     ( pair
       ( north-suspension ＝ south-suspension)
       ( meridian-suspension (point-Pointed-Type X)))
-  pr1 meridian-suspension∗ = meridian-suspension
-  pr2 meridian-suspension∗ = refl
+  pr1 pointed-map-concat-meridian-suspension = meridian-suspension
+  pr2 pointed-map-concat-meridian-suspension = refl
 
   unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
   unit-susp-loop-adj∗ =
     pointed-map-loop-pointed-identity-suspension ∘∗
-    meridian-suspension∗
+    pointed-map-concat-meridian-suspension
 
   unit-susp-loop-adj : type-Pointed-Type X →
     type-Ω (suspension-Pointed-Type X)
@@ -215,3 +215,4 @@ module _
 #### The equivalence in the suspension-loop space adjunction is pointed
 
 This remains to be shown.
+ 
