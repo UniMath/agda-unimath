@@ -280,14 +280,14 @@ module _
   integer-power-pred-Group k x =
     ( ap (x ^_) (is-right-add-neg-one-pred-ℤ k)) ∙
     ( distributive-integer-power-add-Group G x k neg-one-ℤ) ∙
-    ( ap (x ^ k *_) (integer-power-neg-one-Group G x))
+    ( ap ((x ^ k) *_) (integer-power-neg-one-Group G x))
 
   integer-power-pred-Group' :
     (k : ℤ) (x : type-Group G) → x ^ (pred-ℤ k) ＝ x ⁻¹ * x ^ k
   integer-power-pred-Group' k x =
     ( ap (x ^_) (is-left-add-neg-one-pred-ℤ k)) ∙
     ( distributive-integer-power-add-Group G x neg-one-ℤ k) ∙
-    ( ap (_* x ^ k) (integer-power-neg-one-Group G x))
+    ( ap (_* (x ^ k)) (integer-power-neg-one-Group G x))
 ```
 
 ### `1ᵏ ＝ 1`
@@ -361,13 +361,13 @@ module _
     (k l : ℤ) {x y : type-Group G} →
     commute-Group G x y → commute-Group G (x ^ k) (y ^ l)
   commute-integer-powers-Group (inl zero-ℕ) l {x} {y} H =
-    ( ap (_* y ^ l) (integer-power-neg-one-Group G x)) ∙
+    ( ap (_* (y ^ l)) (integer-power-neg-one-Group G x)) ∙
     ( inv
       ( commute-inv-Group G
         ( y ^ l)
         ( x)
         ( inv (commute-integer-powers-Group' l H)))) ∙
-    ( ap (y ^ l *_) (inv (integer-power-neg-one-Group G x)))
+    ( ap ((y ^ l) *_) (inv (integer-power-neg-one-Group G x)))
   commute-integer-powers-Group (inl (succ-ℕ k)) l {x} {y} H =
     inv
       ( commute-mul-Group G
@@ -380,9 +380,9 @@ module _
   commute-integer-powers-Group (inr (inl star)) l {x} {y} H =
     inv (commute-unit-Group G (y ^ l))
   commute-integer-powers-Group (inr (inr zero-ℕ)) l {x} {y} H =
-    ( ap (_* y ^ l) (integer-power-one-Group G x)) ∙
+    ( ap (_* (y ^ l)) (integer-power-one-Group G x)) ∙
     ( commute-integer-powers-Group' l H) ∙
-    ( ap (y ^ l *_) (inv (integer-power-one-Group G x)))
+    ( ap ((y ^ l) *_) (inv (integer-power-one-Group G x)))
   commute-integer-powers-Group (inr (inr (succ-ℕ k))) l {x} {y} H =
     inv
       ( commute-mul-Group G

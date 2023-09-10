@@ -168,7 +168,7 @@ module _
 
 ```agda
 id-iso-Ab :
-  {l1 : Level} (A : Ab l1) → type-iso-Ab A A
+  {l : Level} (A : Ab l) → type-iso-Ab A A
 id-iso-Ab A = id-iso-Group (group-Ab A)
 ```
 
@@ -178,34 +178,34 @@ id-iso-Ab A = id-iso-Group (group-Ab A)
 
 ```agda
 iso-eq-Ab :
-  { l1 : Level} (A B : Ab l1) → Id A B → type-iso-Ab A B
+  {l : Level} (A B : Ab l) → Id A B → type-iso-Ab A B
 iso-eq-Ab A .A refl = id-iso-Ab A
 
 abstract
   equiv-iso-eq-Ab' :
-    {l1 : Level} (A B : Ab l1) → Id A B ≃ type-iso-Ab A B
+    {l : Level} (A B : Ab l) → Id A B ≃ type-iso-Ab A B
   equiv-iso-eq-Ab' A B =
     ( extensionality-Group' (group-Ab A) (group-Ab B)) ∘e
     ( equiv-ap-inclusion-subtype is-abelian-group-Prop {A} {B})
 
 abstract
   is-contr-total-iso-Ab :
-    { l1 : Level} (A : Ab l1) → is-contr (Σ (Ab l1) (type-iso-Ab A))
-  is-contr-total-iso-Ab {l1} A =
+    {l : Level} (A : Ab l) → is-contr (Σ (Ab l) (type-iso-Ab A))
+  is-contr-total-iso-Ab {l} A =
     is-contr-equiv'
-      ( Σ (Ab l1) (Id A))
+      ( Σ (Ab l) (Id A))
       ( equiv-tot (equiv-iso-eq-Ab' A))
       ( is-contr-total-path A)
 
 is-equiv-iso-eq-Ab :
-  { l1 : Level} (A B : Ab l1) → is-equiv (iso-eq-Ab A B)
+  {l : Level} (A B : Ab l) → is-equiv (iso-eq-Ab A B)
 is-equiv-iso-eq-Ab A =
   fundamental-theorem-id
     ( is-contr-total-iso-Ab A)
     ( iso-eq-Ab A)
 
 eq-iso-Ab :
-  { l1 : Level} (A B : Ab l1) → type-iso-Ab A B → Id A B
+  {l : Level} (A B : Ab l) → type-iso-Ab A B → Id A B
 eq-iso-Ab A B = map-inv-is-equiv (is-equiv-iso-eq-Ab A B)
 ```
 

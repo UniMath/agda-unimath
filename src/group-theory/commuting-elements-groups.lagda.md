@@ -23,7 +23,7 @@ open import group-theory.groups
 
 Two elements `x` and `y` of a [group](group-theory.groups.md) `G` are said to
 **commute** if the equality `xy ＝ yx` holds. For any element `x`, the subset of
-elements that commute with `x` form a subgroup of `G` called the
+elements that commute with `x` form a [subgroup](group-theory.subgroups.md) of `G` called the
 [centralizer](group-theory.centralizer-subgroups.md) of the element `x`.
 
 ## Definitions
