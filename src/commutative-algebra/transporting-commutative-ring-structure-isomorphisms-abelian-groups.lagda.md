@@ -32,11 +32,11 @@ open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-g
 
 ## Idea
 
-If `R` is a [commutative ring](commutative-algebra.commutative-rings.md) and `A`
+If `A` is a [commutative ring](commutative-algebra.commutative-rings.md) and `B`
 is an [abelian group](group-theory.abelian-groups.md) equipped with an
-[isomorphism](group-theory.isomorphisms-abelian-groups.md) `R ≅ A` from the
-additive abelian group of `R` to `A`, then the multiplicative structure of `R`
-can be transported along the isomorphism to obtain a ring structure on `A`.
+[isomorphism](group-theory.isomorphisms-abelian-groups.md) `A ≅ B` from the
+additive abelian group of `A` to `B`, then the multiplicative structure of `A`
+can be transported along the isomorphism to obtain a ring structure on `B`.
 
 Note that this structure can be transported by
 [univalence](foundation.univalence.md). However, we will give explicit
