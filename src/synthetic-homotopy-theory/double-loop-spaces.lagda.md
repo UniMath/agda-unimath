@@ -8,14 +8,18 @@ module synthetic-homotopy-theory.double-loop-spaces where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
 
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
 
+open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.iterated-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>
@@ -117,4 +121,19 @@ interchange-concat-Ω² :
   ((α ∙ β) ∙ (γ ∙ δ)) ＝ ((α ∙ γ) ∙ (β ∙ δ))
 interchange-concat-Ω² =
   interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² assoc
+```
+
+### The loop space of a pointed type is equivalent to a double loop space
+
+```agda
+module _
+  {l : Level} {A : Pointed-Type l} {x : type-Pointed-Type A}
+  (p : point-Pointed-Type A ＝ x)
+  where
+
+  pointed-equiv-2-loop-pointed-identity :
+    Ω (pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω² A
+  pointed-equiv-2-loop-pointed-identity =
+    pointed-equiv-Ω-pointed-equiv
+      ( pointed-equiv-loop-pointed-identity A p)
 ```
