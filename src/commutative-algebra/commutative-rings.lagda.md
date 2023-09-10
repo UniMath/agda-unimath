@@ -19,6 +19,8 @@ open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
@@ -159,13 +161,58 @@ module _
   left-swap-add-Commutative-Ring =
     left-swap-add-Ring ring-Commutative-Ring
 
+  left-subtraction-Commutative-Ring :
+    type-Commutative-Ring → type-Commutative-Ring → type-Commutative-Ring
+  left-subtraction-Commutative-Ring =
+    left-subtraction-Ring ring-Commutative-Ring
+
+  is-section-left-subtraction-Commutative-Ring :
+    (x : type-Commutative-Ring) →
+    (add-Commutative-Ring x ∘ left-subtraction-Commutative-Ring x) ~ id
+  is-section-left-subtraction-Commutative-Ring =
+    is-section-left-subtraction-Ring ring-Commutative-Ring
+
+  is-retraction-left-subtraction-Commutative-Ring :
+    (x : type-Commutative-Ring) →
+    (left-subtraction-Commutative-Ring x ∘ add-Commutative-Ring x) ~ id
+  is-retraction-left-subtraction-Commutative-Ring =
+    is-retraction-left-subtraction-Ring ring-Commutative-Ring
+
   is-equiv-add-Commutative-Ring :
     (x : type-Commutative-Ring) → is-equiv (add-Commutative-Ring x)
   is-equiv-add-Commutative-Ring = is-equiv-add-Ab ab-Commutative-Ring
 
+  equiv-add-Commutative-Ring :
+    type-Commutative-Ring → (type-Commutative-Ring ≃ type-Commutative-Ring)
+  equiv-add-Commutative-Ring = equiv-add-Ring ring-Commutative-Ring
+
+  right-subtraction-Commutative-Ring :
+    type-Commutative-Ring → type-Commutative-Ring → type-Commutative-Ring
+  right-subtraction-Commutative-Ring =
+    right-subtraction-Ring ring-Commutative-Ring
+
+  is-section-right-subtraction-Commutative-Ring :
+    (x : type-Commutative-Ring) →
+    ( add-Commutative-Ring' x ∘
+      (λ y → right-subtraction-Commutative-Ring y x)) ~ id
+  is-section-right-subtraction-Commutative-Ring =
+    is-section-right-subtraction-Ring ring-Commutative-Ring
+
+  is-retraction-right-subtraction-Commutative-Ring :
+    (x : type-Commutative-Ring) →
+    ( ( λ y → right-subtraction-Commutative-Ring y x) ∘
+      add-Commutative-Ring' x) ~ id
+  is-retraction-right-subtraction-Commutative-Ring =
+    is-retraction-right-subtraction-Ring ring-Commutative-Ring
+
   is-equiv-add-Commutative-Ring' :
     (x : type-Commutative-Ring) → is-equiv (add-Commutative-Ring' x)
   is-equiv-add-Commutative-Ring' = is-equiv-add-Ab' ab-Commutative-Ring
+
+  equiv-add-Commutative-Ring' :
+    type-Commutative-Ring → (type-Commutative-Ring ≃ type-Commutative-Ring)
+  equiv-add-Commutative-Ring' =
+    equiv-add-Ring' ring-Commutative-Ring
 
   is-binary-equiv-add-Commutative-Ring : is-binary-equiv add-Commutative-Ring
   pr1 is-binary-equiv-add-Commutative-Ring = is-equiv-add-Commutative-Ring'
@@ -480,6 +527,46 @@ module _
     mul-Commutative-Ring (neg-Commutative-Ring x) (neg-Commutative-Ring y) ＝
     mul-Commutative-Ring x y
   mul-neg-Commutative-Ring = mul-neg-Ring ring-Commutative-Ring
+```
+
+### Distributivity of multiplication over subtraction
+
+```agda
+  left-distributive-mul-left-subtraction-Commutative-Ring :
+    (x y z : type-Commutative-Ring) →
+    mul-Commutative-Ring x (left-subtraction-Commutative-Ring y z) ＝
+    left-subtraction-Commutative-Ring
+      ( mul-Commutative-Ring x y)
+      ( mul-Commutative-Ring x z)
+  left-distributive-mul-left-subtraction-Commutative-Ring =
+    left-distributive-mul-left-subtraction-Ring ring-Commutative-Ring
+
+  right-distributive-mul-left-subtraction-Commutative-Ring :
+    (x y z : type-Commutative-Ring) →
+    mul-Commutative-Ring (left-subtraction-Commutative-Ring x y) z ＝
+    left-subtraction-Commutative-Ring
+      ( mul-Commutative-Ring x z)
+      ( mul-Commutative-Ring y z)
+  right-distributive-mul-left-subtraction-Commutative-Ring =
+    right-distributive-mul-left-subtraction-Ring ring-Commutative-Ring
+
+  left-distributive-mul-right-subtraction-Commutative-Ring :
+    (x y z : type-Commutative-Ring) →
+    mul-Commutative-Ring x (right-subtraction-Commutative-Ring y z) ＝
+    right-subtraction-Commutative-Ring
+      ( mul-Commutative-Ring x y)
+      ( mul-Commutative-Ring x z)
+  left-distributive-mul-right-subtraction-Commutative-Ring =
+    left-distributive-mul-right-subtraction-Ring ring-Commutative-Ring
+
+  right-distributive-mul-right-subtraction-Commutative-Ring :
+    (x y z : type-Commutative-Ring) →
+    mul-Commutative-Ring (right-subtraction-Commutative-Ring x y) z ＝
+    right-subtraction-Commutative-Ring
+      ( mul-Commutative-Ring x z)
+      ( mul-Commutative-Ring y z)
+  right-distributive-mul-right-subtraction-Commutative-Ring =
+    right-distributive-mul-right-subtraction-Ring ring-Commutative-Ring
 ```
 
 ### Scalar multiplication of elements of a commutative ring by natural numbers

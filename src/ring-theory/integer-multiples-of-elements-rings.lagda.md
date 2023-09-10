@@ -12,7 +12,10 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
@@ -243,6 +246,72 @@ module _
     add-Ring R (integer-multiple-Ring R k x) (integer-multiple-Ring R k y)
   left-distributive-integer-multiple-add-Ring =
     left-distributive-integer-multiple-add-Ab (ab-Ring R)
+```
+
+### Left and right integer multiple laws for ring multiplication
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-integer-multiple-law-mul-Ring :
+    (k : ℤ) (x y : type-Ring R) →
+    mul-Ring R (integer-multiple-Ring R k x) y ＝
+    integer-multiple-Ring R k (mul-Ring R x y)
+  left-integer-multiple-law-mul-Ring (inl zero-ℕ) x y =
+    ( ap (mul-Ring' R y) (integer-multiple-neg-one-Ring R x)) ∙
+    ( ( left-negative-law-mul-Ring R x y) ∙
+      ( inv (integer-multiple-neg-one-Ring R _)))
+  left-integer-multiple-law-mul-Ring (inl (succ-ℕ k)) x y =
+    ( ap (mul-Ring' R y) (integer-multiple-pred-Ring R (inl k) x)) ∙
+    ( ( right-distributive-mul-right-subtraction-Ring R _ _ _) ∙
+      ( ( ap
+          ( λ u → right-subtraction-Ring R u _)
+          ( left-integer-multiple-law-mul-Ring (inl k) _ _)) ∙
+        ( inv (integer-multiple-pred-Ring R (inl k) _))))
+  left-integer-multiple-law-mul-Ring (inr (inl star)) x y =
+    ( ap (mul-Ring' R y) (integer-multiple-zero-Ring R x)) ∙
+    ( left-zero-law-mul-Ring R y)
+  left-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
+    ( ap (mul-Ring' R y) (integer-multiple-one-Ring R x)) ∙
+    ( inv (integer-multiple-one-Ring R _))
+  left-integer-multiple-law-mul-Ring (inr (inr (succ-ℕ k))) x y =
+    ( ap (mul-Ring' R y) (integer-multiple-succ-Ring R (inr (inr k)) x)) ∙
+    ( ( right-distributive-mul-add-Ring R _ _ _) ∙
+      ( ( ap
+          ( add-Ring' R _)
+          ( left-integer-multiple-law-mul-Ring (inr (inr k)) _ _)) ∙
+        ( inv (integer-multiple-succ-Ring R (inr (inr k)) _))))
+
+  right-integer-multiple-law-mul-Ring :
+    (k : ℤ) (x y : type-Ring R) →
+    mul-Ring R x (integer-multiple-Ring R k y) ＝
+    integer-multiple-Ring R k (mul-Ring R x y)
+  right-integer-multiple-law-mul-Ring (inl zero-ℕ) x y =
+    ( ap (mul-Ring R x) (integer-multiple-neg-one-Ring R y)) ∙
+    ( ( right-negative-law-mul-Ring R x y) ∙
+      ( inv (integer-multiple-neg-one-Ring R _)))
+  right-integer-multiple-law-mul-Ring (inl (succ-ℕ k)) x y =
+    ( ap (mul-Ring R x) (integer-multiple-pred-Ring R (inl k) y)) ∙
+    ( ( left-distributive-mul-right-subtraction-Ring R _ _ _) ∙
+      ( ( ap
+          ( add-Ring' R _)
+          ( right-integer-multiple-law-mul-Ring (inl k) x y)) ∙
+        ( inv (integer-multiple-pred-Ring R (inl k) _))))
+  right-integer-multiple-law-mul-Ring (inr (inl star)) x y =
+    ( ap (mul-Ring R x) (integer-multiple-zero-Ring R y)) ∙
+    ( right-zero-law-mul-Ring R x)
+  right-integer-multiple-law-mul-Ring (inr (inr zero-ℕ)) x y =
+    ( ap (mul-Ring R x) (integer-multiple-one-Ring R y)) ∙
+    ( inv (integer-multiple-one-Ring R _))
+  right-integer-multiple-law-mul-Ring (inr (inr (succ-ℕ k))) x y =
+    ( ap (mul-Ring R x) (integer-multiple-succ-Ring R (inr (inr k)) y)) ∙
+    ( ( left-distributive-mul-add-Ring R x _ _) ∙
+      ( ( ap
+          ( add-Ring' R _)
+          ( right-integer-multiple-law-mul-Ring (inr (inr k)) x y)) ∙
+        ( inv (integer-multiple-succ-Ring R (inr (inr k)) _))))
 ```
 
 ### For each integer `k`, the operation `k-` taking integer multiples is a group homomorphism

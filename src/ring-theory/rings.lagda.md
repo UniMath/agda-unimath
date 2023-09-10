@@ -159,13 +159,15 @@ module _
   left-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
   left-subtraction-Ring = left-subtraction-Ab (ab-Ring R)
 
-  is-section-add-neg-Ring :
+  is-section-left-subtraction-Ring :
     (x : type-Ring R) → (add-Ring R x ∘ left-subtraction-Ring x) ~ id
-  is-section-add-neg-Ring = is-section-add-neg-Ab (ab-Ring R)
+  is-section-left-subtraction-Ring =
+    is-section-left-subtraction-Ab (ab-Ring R)
 
-  is-retraction-add-neg-Ring :
+  is-retraction-left-subtraction-Ring :
     (x : type-Ring R) → (left-subtraction-Ring x ∘ add-Ring R x) ~ id
-  is-retraction-add-neg-Ring = is-retraction-add-neg-Ab (ab-Ring R)
+  is-retraction-left-subtraction-Ring =
+    is-retraction-left-subtraction-Ab (ab-Ring R)
 
   is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring R x)
   is-equiv-add-Ring = is-equiv-add-Ab (ab-Ring R)
@@ -184,15 +186,17 @@ module _
   right-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
   right-subtraction-Ring = right-subtraction-Ab (ab-Ring R)
 
-  is-section-add-neg-Ring' :
+  is-section-right-subtraction-Ring :
     (x : type-Ring R) →
     (add-Ring' R x ∘ (λ y → right-subtraction-Ring y x)) ~ id
-  is-section-add-neg-Ring' = is-section-add-neg-Ab' (ab-Ring R)
+  is-section-right-subtraction-Ring =
+    is-section-right-subtraction-Ab (ab-Ring R)
 
-  is-retraction-add-neg-Ring' :
+  is-retraction-right-subtraction-Ring :
     (x : type-Ring R) →
     ((λ y → right-subtraction-Ring y x) ∘ add-Ring' R x) ~ id
-  is-retraction-add-neg-Ring' = is-retraction-add-neg-Ab' (ab-Ring R)
+  is-retraction-right-subtraction-Ring =
+    is-retraction-right-subtraction-Ab (ab-Ring R)
 
   is-equiv-add-Ring' : (x : type-Ring R) → is-equiv (add-Ring' R x)
   is-equiv-add-Ring' = is-equiv-add-Ab' (ab-Ring R)
@@ -529,7 +533,47 @@ module _
       ( neg-neg-Ring R (mul-Ring R x y)))
 ```
 
-### Bidistributivity for multiplication over addition
+### Distributivity of multiplication over subtraction
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-distributive-mul-left-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R x (left-subtraction-Ring R y z) ＝
+    left-subtraction-Ring R (mul-Ring R x y) (mul-Ring R x z)
+  left-distributive-mul-left-subtraction-Ring x y z =
+    ( left-distributive-mul-add-Ring R x (neg-Ring R y) z) ∙
+    ( ap (add-Ring' R _) (right-negative-law-mul-Ring R _ _))
+
+  right-distributive-mul-left-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R (left-subtraction-Ring R x y) z ＝
+    left-subtraction-Ring R (mul-Ring R x z) (mul-Ring R y z)
+  right-distributive-mul-left-subtraction-Ring x y z =
+    ( right-distributive-mul-add-Ring R (neg-Ring R x) y z) ∙
+    ( ap (add-Ring' R _) (left-negative-law-mul-Ring R _ _))
+
+  left-distributive-mul-right-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R x (right-subtraction-Ring R y z) ＝
+    right-subtraction-Ring R (mul-Ring R x y) (mul-Ring R x z)
+  left-distributive-mul-right-subtraction-Ring x y z =
+    ( left-distributive-mul-add-Ring R x y (neg-Ring R z)) ∙
+    ( ap (add-Ring R _) (right-negative-law-mul-Ring R _ _))
+
+  right-distributive-mul-right-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R (right-subtraction-Ring R x y) z ＝
+    right-subtraction-Ring R (mul-Ring R x z) (mul-Ring R y z)
+  right-distributive-mul-right-subtraction-Ring x y z =
+    ( right-distributive-mul-add-Ring R x (neg-Ring R y) z) ∙
+    ( ap (add-Ring R _) (left-negative-law-mul-Ring R _ _))
+```
+
+### Bidistributivity of multiplication over addition
 
 ```agda
 module _
