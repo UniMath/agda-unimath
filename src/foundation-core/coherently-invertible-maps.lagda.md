@@ -60,7 +60,7 @@ module _
   map-inv-is-coherently-invertible = pr1 H
 
   is-retraction-is-coherently-invertible :
-    (f ∘ map-inv-is-coherently-invertible) ~ id
+    f ∘ map-inv-is-coherently-invertible ~ id
   is-retraction-is-coherently-invertible = pr1 (pr2 H)
 
   is-section-is-coherently-invertible :
