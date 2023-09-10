@@ -52,7 +52,7 @@ module _
     iterated-addition-by-element-Ab (ab-Ring R)
 ```
 
-### Multiples by integers of abelian group elements
+### Multiples by integers of elements of rings
 
 ```agda
 module _
@@ -65,7 +65,7 @@ module _
 
 ## Properties
 
-### Rssociativity of iterated addition by a group element
+### Associativity of iterated addition by a ring element
 
 ```agda
 module _
@@ -424,7 +424,7 @@ module _
     integer-multiple-mul-Ab (ab-Ring R)
 ```
 
-### Ringelian group homomorphisms preserve integer multiples
+### Ring homomorphisms preserve integer multiples
 
 ```agda
 module _
