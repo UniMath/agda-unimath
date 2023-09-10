@@ -398,16 +398,16 @@ module _
 
   equiv-iso-ab-iso-Ring : iso-Ring R S ≃ iso-ab-Ring
   equiv-iso-ab-iso-Ring =
-    ( ( ( inv-equiv
-          ( associative-Σ
-            ( type-hom-Ab (ab-Ring R) (ab-Ring S))
-            ( is-iso-hom-Ab (ab-Ring R) (ab-Ring S))
-            ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
-        ( equiv-tot (λ f → commutative-prod))) ∘e
+    ( inv-equiv
       ( associative-Σ
         ( type-hom-Ab (ab-Ring R) (ab-Ring S))
-        ( is-ring-homomorphism-hom-Ab R S)
-        ( λ f → is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (pr1 f)))) ∘e
+        ( is-iso-hom-Ab (ab-Ring R) (ab-Ring S))
+        ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
+    ( equiv-tot (λ f → commutative-prod)) ∘e
+    ( associative-Σ
+      ( type-hom-Ab (ab-Ring R) (ab-Ring S))
+      ( is-ring-homomorphism-hom-Ab R S)
+      ( λ f → is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
     ( equiv-type-subtype
       ( is-prop-is-iso-hom-Ring R S)
       ( λ f →
