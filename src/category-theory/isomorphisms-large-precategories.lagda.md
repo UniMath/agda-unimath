@@ -124,13 +124,17 @@ module _
   (C : Large-Precategory α β) {l1 : Level} {X : obj-Large-Precategory C l1}
   where
 
+  is-iso-id-hom-Large-Precategory :
+    is-iso-hom-Large-Precategory C (id-hom-Large-Precategory C {X = X})
+  pr1 is-iso-id-hom-Large-Precategory = id-hom-Large-Precategory C
+  pr1 (pr2 is-iso-id-hom-Large-Precategory) =
+    left-unit-law-comp-hom-Large-Precategory C (id-hom-Large-Precategory C)
+  pr2 (pr2 is-iso-id-hom-Large-Precategory) =
+    left-unit-law-comp-hom-Large-Precategory C (id-hom-Large-Precategory C)
+
   id-iso-Large-Precategory : iso-Large-Precategory C X X
   pr1 id-iso-Large-Precategory = id-hom-Large-Precategory C
-  pr1 (pr2 id-iso-Large-Precategory) = id-hom-Large-Precategory C
-  pr1 (pr2 (pr2 id-iso-Large-Precategory)) =
-    left-unit-law-comp-hom-Large-Precategory C (id-hom-Large-Precategory C)
-  pr2 (pr2 (pr2 id-iso-Large-Precategory)) =
-    left-unit-law-comp-hom-Large-Precategory C (id-hom-Large-Precategory C)
+  pr2 id-iso-Large-Precategory = is-iso-id-hom-Large-Precategory
 ```
 
 ### Equalities give rise to isomorphisms

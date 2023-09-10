@@ -19,6 +19,8 @@ open import group-theory.abelian-groups
 open import group-theory.isomorphisms-abelian-groups
 open import group-theory.semigroups
 
+open import ring-theory.homomorphisms-rings
+open import ring-theory.isomorphisms-rings
 open import ring-theory.rings
 ```
 
@@ -140,4 +142,46 @@ module _
     left-distributive-mul-add-transport-ring-structure-iso-Ab
   pr2 (pr2 (pr2 (pr2 transport-ring-structure-iso-Ab))) =
     right-distributive-mul-add-transport-ring-structure-iso-Ab
+
+  preserves-mul-transport-ring-structure-iso-Ab :
+    preserves-mul-hom-Ab
+      ( R)
+      ( transport-ring-structure-iso-Ab)
+      ( hom-iso-Ab (ab-Ring R) A f)
+  preserves-mul-transport-ring-structure-iso-Ab x y =
+    ap map-f
+      ( ap-mul-Ring R
+        ( inv (is-retraction-map-inv-iso-Ab (ab-Ring R) A f x))
+        ( inv (is-retraction-map-inv-iso-Ab (ab-Ring R) A f y)))
+
+  hom-iso-transport-ring-structure-iso-Ab :
+    type-hom-Ring R transport-ring-structure-iso-Ab
+  pr1 hom-iso-transport-ring-structure-iso-Ab =
+    hom-iso-Ab (ab-Ring R) A f
+  pr1 (pr2 hom-iso-transport-ring-structure-iso-Ab) =
+    preserves-mul-transport-ring-structure-iso-Ab
+  pr2 (pr2 hom-iso-transport-ring-structure-iso-Ab) =
+    refl
+
+  is-iso-iso-transport-ring-structure-iso-Ab :
+    is-iso-hom-Ring
+      ( R)
+      ( transport-ring-structure-iso-Ab)
+      ( hom-iso-transport-ring-structure-iso-Ab)
+  is-iso-iso-transport-ring-structure-iso-Ab =
+    is-iso-hom-ring-is-iso-hom-Ab
+      ( R)
+      ( transport-ring-structure-iso-Ab)
+      ( hom-iso-transport-ring-structure-iso-Ab)
+      ( is-iso-iso-Ab (ab-Ring R) A f)
+
+  iso-transport-ring-structure-iso-Ab :
+    iso-Ring R transport-ring-structure-iso-Ab
+  pr1 (pr1 iso-transport-ring-structure-iso-Ab) = hom-iso-Ab (ab-Ring R) A f
+  pr1 (pr2 (pr1 iso-transport-ring-structure-iso-Ab)) =
+    preserves-mul-transport-ring-structure-iso-Ab
+  pr2 (pr2 (pr1 iso-transport-ring-structure-iso-Ab)) =
+    refl
+  pr2 iso-transport-ring-structure-iso-Ab =
+    is-iso-iso-transport-ring-structure-iso-Ab
 ```
