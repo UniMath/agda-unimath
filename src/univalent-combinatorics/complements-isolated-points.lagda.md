@@ -26,8 +26,9 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-For any point `x` in a finite type `X` of cardinality `n+1`, we can construct
-its complement, which is a type of cardinality `n`.
+For any point `x` in a [finite type](univalent-combinatorics.finite-types.md)
+`X` of [cardinality](set-theory.cardinalities.md) `n+1`, we can construct its
+**complement**, which is a type of cardinality `n`.
 
 ## Definition
 
@@ -123,3 +124,4 @@ equiv-complement-point-UU-Fin
 ### The map from a pointed `k+1`-element type to the complement of the point is an equivalence
 
 This remains to be shown.
+[#744](https://github.com/UniMath/agda-unimath/issues/744)
