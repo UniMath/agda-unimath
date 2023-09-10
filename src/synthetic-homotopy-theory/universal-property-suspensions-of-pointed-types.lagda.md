@@ -215,4 +215,3 @@ module _
 #### The equivalence in the suspension-loop space adjunction is pointed
 
 This remains to be shown.
- 
