@@ -81,7 +81,7 @@ module _
 
   private
 
-    infix 50 _*_
+    infix 45 _*_
     _*_ = mul-Semigroup G
 
   left-swap-commute-Semigroup :
@@ -110,7 +110,7 @@ module _
 
   private
 
-    infix 50 _*_
+    infix 45 _*_
     _*_ = mul-Semigroup G
 
   commute-mul-Semigroup :

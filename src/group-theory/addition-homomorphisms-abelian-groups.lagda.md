@@ -185,7 +185,7 @@ module _
     eq-htpy-hom-Ab A C (λ x → refl)
 ```
 
-### Evaluation at an element is a group homomorphism `hom G H → H`
+### Evaluation at an element is a group homomorphism `hom A B → A`
 
 ```agda
 module _

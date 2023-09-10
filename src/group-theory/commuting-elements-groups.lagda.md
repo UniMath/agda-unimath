@@ -107,7 +107,7 @@ module _
 
   private
 
-    infix 50 _*_
+    infix 45 _*_
     _*_ = mul-Group G
 
   left-swap-commute-Group :
