@@ -205,7 +205,8 @@ module _
 
   is-equiv-inv-con-htpy : is-equiv (inv-con-htpy H K L)
   is-equiv-inv-con-htpy =
-    is-equiv-Π-equiv-family _ (λ x → is-equiv-inv-con (H x) (K x) (L x))
+    is-equiv-map-equiv-Π-equiv-family _
+      ( λ x → is-equiv-inv-con (H x) (K x) (L x))
 
   equiv-inv-con-htpy : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
   pr1 equiv-inv-con-htpy = inv-con-htpy H K L
@@ -213,7 +214,8 @@ module _
 
   is-equiv-con-inv-htpy : is-equiv (con-inv-htpy H K L)
   is-equiv-con-inv-htpy =
-    is-equiv-Π-equiv-family _ (λ x → is-equiv-con-inv (H x) (K x) (L x))
+    is-equiv-map-equiv-Π-equiv-family _
+      ( λ x → is-equiv-con-inv (H x) (K x) (L x))
 
   equiv-con-inv-htpy : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
   pr1 equiv-con-inv-htpy = con-inv-htpy H K L

@@ -444,7 +444,9 @@ module _
       ( is-mono-is-emb g H B)
       ( λ j →
         is-emb-is-equiv
-          ( is-equiv-Π-equiv-family (λ x → ap g) (λ x → H (i x) (j (f x)))))
+          ( is-equiv-map-equiv-Π-equiv-family
+            ( λ x → ap g)
+            ( λ x → H (i x) (j (f x)))))
 ```
 
 ## See also

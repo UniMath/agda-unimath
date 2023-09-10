@@ -70,7 +70,8 @@ equiv-ev-refl' :
   {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
   ((x : A) (p : x ＝ a) → B x p) ≃ B a refl
 equiv-ev-refl' a {B} =
-  equiv-ev-refl a ∘e equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x))
+  ( equiv-ev-refl a) ∘e
+  ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
 ```
 
 ### `Id : A → (A → 𝒰)` is an embedding
@@ -177,7 +178,8 @@ module _
       ( is-contr-equiv'
         ( fiber Id (Id a))
         ( equiv-tot
-          ( λ b → equiv-Π-equiv-family (λ x → equiv-univalence) ∘e equiv-funext))
+          ( λ b →
+            equiv-Π-equiv-family (λ x → equiv-univalence) ∘e equiv-funext))
         ( is-proof-irrelevant-is-prop
           ( is-prop-map-is-emb (is-emb-Id A) (Id a))
           ( a , refl)))

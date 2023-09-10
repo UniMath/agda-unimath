@@ -168,7 +168,8 @@ module _
         (x : type-unordered-pair a) →
         b ＝ map-equiv e (element-unordered-pair a x))
       ( e)
-      ( λ x → equiv-Π-equiv-family (λ i → equiv-ap e x (element-unordered-pair a i)))
+      ( λ x →
+        equiv-Π-equiv-family (λ i → equiv-ap e x (element-unordered-pair a i)))
 
   map-equiv-symmetric-Id :
     (e : A ≃ B) (a : unordered-pair A) →

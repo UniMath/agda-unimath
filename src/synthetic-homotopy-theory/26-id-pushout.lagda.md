@@ -207,7 +207,7 @@ is-equiv-hom-Fam-pushout-dependent-cocone :
 is-equiv-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   is-equiv-tot-is-fiberwise-equiv (λ hA →
     is-equiv-tot-is-fiberwise-equiv (λ hB →
-      is-equiv-Π-equiv-family _
+      is-equiv-map-equiv-Π-equiv-family _
         ( λ s → is-equiv-square-path-over-fam-maps
           ( pr2 (pr2 c) s)
           ( hA (f s))
