@@ -174,7 +174,6 @@ module _
   where
 
   private
-
     infix 50 _*_
     _*_ = mul-Ring R
 
