@@ -230,3 +230,4 @@ module _
 #### The equivalence in the suspension-loop space adjunction is pointed
 
 This remains to be shown.
+[#702](https://github.com/UniMath/agda-unimath/issues/702)
