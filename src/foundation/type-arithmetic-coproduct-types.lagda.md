@@ -57,7 +57,7 @@ module _
 
   is-equiv-map-commutative-coprod : is-equiv map-commutative-coprod
   is-equiv-map-commutative-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-commutative-coprod
       is-section-map-inv-commutative-coprod
       is-retraction-map-inv-commutative-coprod
@@ -98,14 +98,14 @@ module _
 
   is-equiv-map-associative-coprod : is-equiv map-associative-coprod
   is-equiv-map-associative-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-associative-coprod
       is-section-map-inv-associative-coprod
       is-retraction-map-inv-associative-coprod
 
   is-equiv-map-inv-associative-coprod : is-equiv map-inv-associative-coprod
   is-equiv-map-inv-associative-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-associative-coprod
       is-retraction-map-inv-associative-coprod
       is-section-map-inv-associative-coprod
@@ -154,7 +154,7 @@ module _
     is-equiv-map-right-distributive-Σ-coprod :
       is-equiv map-right-distributive-Σ-coprod
     is-equiv-map-right-distributive-Σ-coprod =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-right-distributive-Σ-coprod
         is-section-map-inv-right-distributive-Σ-coprod
         is-retraction-map-inv-right-distributive-Σ-coprod
@@ -197,7 +197,7 @@ module _
   is-equiv-map-left-distributive-Σ-coprod :
     is-equiv map-left-distributive-Σ-coprod
   is-equiv-map-left-distributive-Σ-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-left-distributive-Σ-coprod
       is-section-map-inv-left-distributive-Σ-coprod
       is-retraction-map-inv-left-distributive-Σ-coprod

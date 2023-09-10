@@ -106,7 +106,7 @@ module _
     pr1 (reassociate X) ((d , dl , dr) , s , t) =
       ( d , (dl , s) , dr , t)
     pr2 (reassociate X) =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ ( d , (dl , s) , dr , t) → ((d , dl , dr) , s , t))
         ( refl-htpy)
         ( refl-htpy)
@@ -128,7 +128,7 @@ module _
         ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
         ( λ D →
           equiv-prod
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ a' →
                 equiv-eq
                   ( ap S
@@ -136,7 +136,7 @@ module _
                       ( compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition
                         ( D)
                         ( a'))))))
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ b' →
                 equiv-eq
                   ( ap T

@@ -21,9 +21,11 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Structure is presented in type theory by dependent pair types. The structure
-identity principle is a way to characterize the identity type of a structure,
-using characterizations of the identity types of its components.
+[Structure](foundation.structure.md) is presented in type theory by
+[dependent pair types](foundation.dependent-pair-types.md). The **structure
+identity principle** is a way to characterize the
+[identity type](foundation-core.identity-types.md) of a structure, using
+characterizations of the identity types of its components.
 
 ## Lemma
 

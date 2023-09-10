@@ -202,7 +202,7 @@ is-retraction-eq-Eq-list (cons x l) .(cons x l) refl =
 is-equiv-Eq-eq-list :
   {l1 : Level} {A : UU l1} (l l' : list A) → is-equiv (Eq-eq-list l l')
 is-equiv-Eq-eq-list l l' =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( eq-Eq-list l l')
     ( is-section-eq-Eq-list l l')
     ( is-retraction-eq-Eq-list l l')
@@ -383,7 +383,7 @@ is-retraction-inv-map-algebra-list A (inr star) = refl
 is-equiv-map-algebra-list :
   {l1 : Level} (A : UU l1) → is-equiv (map-algebra-list A)
 is-equiv-map-algebra-list A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( inv-map-algebra-list A)
     ( is-section-inv-map-algebra-list A)
     ( is-retraction-inv-map-algebra-list A)

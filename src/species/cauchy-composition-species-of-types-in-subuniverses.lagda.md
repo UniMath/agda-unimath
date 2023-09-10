@@ -229,7 +229,7 @@ module _
   is-equiv-map-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
     is-equiv map-equiv-Σ-extension-cauchy-composition-unit-subuniverse
   is-equiv-map-equiv-Σ-extension-cauchy-composition-unit-subuniverse =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
       is-section-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
       is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
@@ -336,7 +336,7 @@ module _
           ( λ D →
             equiv-prod
               ( id-equiv)
-              ( equiv-map-Π
+              ( equiv-Π-equiv-family
                 ( λ x →
                   equiv-Σ-extension-cauchy-composition-unit-subuniverse
                     ( P)

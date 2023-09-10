@@ -147,7 +147,7 @@ module _
     is-equiv-is-contr :
       (f : A → B) → is-contr A → is-contr B → is-equiv f
     is-equiv-is-contr f is-contr-A is-contr-B =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ y → center is-contr-A)
         ( λ y → eq-is-contr is-contr-B)
         ( contraction is-contr-A)

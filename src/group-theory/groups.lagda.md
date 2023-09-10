@@ -226,7 +226,7 @@ module _
 
   is-equiv-mul-Group : (x : type-Group G) → is-equiv (mul-Group G x)
   is-equiv-mul-Group x =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( left-div-Group x)
       ( is-section-left-div-Group x)
       ( is-retraction-left-div-Group x)
@@ -237,7 +237,7 @@ module _
 
   is-equiv-left-div-Group : (x : type-Group G) → is-equiv (left-div-Group x)
   is-equiv-left-div-Group x =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( mul-Group G x)
       ( is-retraction-left-div-Group x)
       ( is-section-left-div-Group x)
@@ -274,7 +274,7 @@ module _
 
   is-equiv-mul-Group' : (x : type-Group G) → is-equiv (mul-Group' G x)
   is-equiv-mul-Group' x =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ y → right-div-Group y x)
       ( is-section-right-div-Group x)
       ( is-retraction-right-div-Group x)
@@ -286,7 +286,7 @@ module _
   is-equiv-right-div-Group :
     (x : type-Group G) → is-equiv (λ y → right-div-Group y x)
   is-equiv-right-div-Group x =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( mul-Group' G x)
       ( is-retraction-right-div-Group x)
       ( is-section-right-div-Group x)

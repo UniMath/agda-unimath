@@ -215,7 +215,7 @@ is-equiv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-equiv (structure-𝕎-Alg {B = B})
 is-equiv-structure-𝕎-Alg =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     map-inv-structure-𝕎-Alg
     is-section-map-inv-structure-𝕎-Alg
     is-retraction-map-inv-structure-𝕎-Alg
@@ -230,7 +230,7 @@ is-equiv-map-inv-structure-𝕎-Alg :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-equiv (map-inv-structure-𝕎-Alg {B = B})
 is-equiv-map-inv-structure-𝕎-Alg =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     structure-𝕎-Alg
     is-retraction-map-inv-structure-𝕎-Alg
     is-section-map-inv-structure-𝕎-Alg

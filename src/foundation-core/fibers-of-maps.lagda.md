@@ -81,7 +81,7 @@ module _
   abstract
     is-equiv-Eq-eq-fiber : {s t : fiber f b} → is-equiv (Eq-eq-fiber {s} {t})
     is-equiv-Eq-eq-fiber =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         eq-Eq-fiber-uncurry
         is-section-eq-Eq-fiber
         is-retraction-eq-Eq-fiber
@@ -94,7 +94,7 @@ module _
     is-equiv-eq-Eq-fiber :
       {s t : fiber f b} → is-equiv (eq-Eq-fiber-uncurry {s} {t})
     is-equiv-eq-Eq-fiber =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         Eq-eq-fiber
         is-retraction-eq-Eq-fiber
         is-section-eq-Eq-fiber
@@ -144,7 +144,7 @@ module _
     is-equiv-Eq-eq-fiber' :
       {s t : fiber' f b} → is-equiv (Eq-eq-fiber' {s} {t})
     is-equiv-Eq-eq-fiber' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         eq-Eq-fiber-uncurry'
         is-section-eq-Eq-fiber'
         is-retraction-eq-Eq-fiber'
@@ -157,7 +157,7 @@ module _
     is-equiv-eq-Eq-fiber' :
       {s t : fiber' f b} → is-equiv (eq-Eq-fiber-uncurry' {s} {t})
     is-equiv-eq-Eq-fiber' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         Eq-eq-fiber'
         is-retraction-eq-Eq-fiber'
         is-section-eq-Eq-fiber'
@@ -191,7 +191,7 @@ module _
 
   is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber
   is-equiv-map-equiv-fiber =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-fiber
       is-section-map-inv-equiv-fiber
       is-retraction-map-inv-equiv-fiber
@@ -225,7 +225,7 @@ module _
   abstract
     is-equiv-map-fiber-pr1 : is-equiv map-fiber-pr1
     is-equiv-map-fiber-pr1 =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-fiber-pr1
         is-retraction-map-inv-fiber-pr1
         is-section-map-inv-fiber-pr1
@@ -237,7 +237,7 @@ module _
   abstract
     is-equiv-map-inv-fiber-pr1 : is-equiv map-inv-fiber-pr1
     is-equiv-map-inv-fiber-pr1 =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-fiber-pr1
         is-section-map-inv-fiber-pr1
         is-retraction-map-inv-fiber-pr1
@@ -276,14 +276,14 @@ module _
   abstract
     is-equiv-map-equiv-total-fiber : is-equiv map-equiv-total-fiber
     is-equiv-map-equiv-total-fiber =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-equiv-total-fiber
         is-section-map-inv-equiv-total-fiber
         is-retraction-map-inv-equiv-total-fiber
 
     is-equiv-map-inv-equiv-total-fiber : is-equiv map-inv-equiv-total-fiber
     is-equiv-map-inv-equiv-total-fiber =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-equiv-total-fiber
         is-retraction-map-inv-equiv-total-fiber
         is-section-map-inv-equiv-total-fiber
@@ -331,7 +331,7 @@ module _
     is-equiv-map-compute-fiber-comp :
       is-equiv map-compute-fiber-comp
     is-equiv-map-compute-fiber-comp =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( inv-map-compute-fiber-comp)
         ( is-section-inv-map-compute-fiber-comp)
         ( is-retraction-inv-map-compute-fiber-comp)
@@ -345,7 +345,7 @@ module _
     is-equiv-inv-map-compute-fiber-comp :
       is-equiv inv-map-compute-fiber-comp
     is-equiv-inv-map-compute-fiber-comp =
-        is-equiv-has-inverse
+        is-equiv-is-invertible
           ( map-compute-fiber-comp)
           ( is-retraction-inv-map-compute-fiber-comp)
           ( is-section-inv-map-compute-fiber-comp)
@@ -388,7 +388,7 @@ module _
 
   is-equiv-map-reduce-Π-fiber : is-equiv map-reduce-Π-fiber
   is-equiv-map-reduce-Π-fiber =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-map-reduce-Π-fiber)
       ( is-section-inv-map-reduce-Π-fiber)
       ( is-retraction-inv-map-reduce-Π-fiber)

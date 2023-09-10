@@ -37,8 +37,7 @@
       "type": "shell",
       "command": "python3",
       "args": ["${workspaceFolder}/scripts/demote_foundation_imports.py"],
-      "problemMatcher": [],
-      "hide": true
+      "problemMatcher": []
     },
     {
       "label": "unused-imports",

@@ -226,7 +226,7 @@ module _
       (a : A) → is-contr A →
       {l : Level} → dependent-universal-property-contr l a
     dependent-universal-property-contr-is-contr a H {l} P =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( ind-singleton-is-contr a H P)
         ( compute-ind-singleton-is-contr a H P)
         ( λ f →
@@ -288,7 +288,7 @@ module _
       is-contr A →
       {l : Level} (X : UU l) → is-equiv (λ x → const A X x)
     is-equiv-diagonal-is-contr H X =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( ev-point' (center H))
         ( λ f → eq-htpy (λ x → ap f (contraction H x)))
         ( λ x → refl)

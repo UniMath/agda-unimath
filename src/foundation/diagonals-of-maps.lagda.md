@@ -78,7 +78,7 @@ abstract
     (t : canonical-pullback f f) →
     is-equiv (fiber-ap-fiber-diagonal-map f t)
   is-equiv-fiber-ap-fiber-diagonal-map f t =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( fiber-diagonal-map-fiber-ap f t)
       ( is-section-fiber-diagonal-map-fiber-ap f t)
       ( is-retraction-fiber-diagonal-map-fiber-ap f t)

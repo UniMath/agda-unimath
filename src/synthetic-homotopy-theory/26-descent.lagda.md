@@ -388,7 +388,8 @@ coherence-inv-htpy-distributive-Π-Σ-refl-htpy {X = X} P f =
     ( ( htpy-precomp refl-htpy (Σ X P)) ·r map-inv-distributive-Π-Σ)
     ( refl-htpy)
     ( inv-htpy
-      ( λ h → compute-htpy-precomp f (Σ X P) (map-inv-distributive-Π-Σ h))))
+      ( λ h →
+        compute-htpy-precomp-refl-htpy f (Σ X P) (map-inv-distributive-Π-Σ h))))
 
 abstract
   coherence-inv-htpy-distributive-Π-Σ :
@@ -656,7 +657,7 @@ is-equiv-Fam-pushout-cocone-UU :
 is-equiv-Fam-pushout-cocone-UU l {f = f} {g} =
   is-equiv-tot-is-fiberwise-equiv
     ( λ PA → is-equiv-tot-is-fiberwise-equiv
-      ( λ PB → is-equiv-map-Π
+      ( λ PB → is-equiv-map-equiv-Π-equiv-family
         ( λ s → equiv-eq)
         ( λ s → univalence (PA (f s)) (PB (g s)))))
 

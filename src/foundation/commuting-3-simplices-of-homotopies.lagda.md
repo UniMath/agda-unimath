@@ -17,7 +17,7 @@ open import foundation-core.homotopies
 
 ## Idea
 
-A commuting 3-simplex of homotopies is a commuting diagram of the form
+A **commuting 3-simplex of homotopies** is a commuting diagram of the form
 
 ```text
   f ----------> g
@@ -29,7 +29,7 @@ A commuting 3-simplex of homotopies is a commuting diagram of the form
   h ----------> i.
 ```
 
-where f, g, h, and i are functions.
+where `f`, `g`, `h`, and `i` are functions.
 
 ## Definition
 

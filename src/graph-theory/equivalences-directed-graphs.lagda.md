@@ -134,7 +134,8 @@ module _
     interchange-Σ-Σ
       ( λ fV H fE → (x y : vertex-Directed-Graph G) → is-equiv (fE x y)) ∘e
       ( equiv-tot
-        ( λ fV → distributive-Π-Σ ∘e equiv-map-Π (λ x → distributive-Π-Σ)))
+        ( λ fV →
+          distributive-Π-Σ ∘e equiv-Π-equiv-family (λ x → distributive-Π-Σ)))
 
   hom-equiv-Directed-Graph :
     equiv-Directed-Graph G H → hom-Directed-Graph G H

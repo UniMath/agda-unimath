@@ -824,7 +824,7 @@ is-equiv-map-displayed-fibered-Relaxed-Σ-Decomposition :
   is-equiv
     ( map-displayed-fibered-Relaxed-Σ-Decomposition {l1} {l} {l} {l} {l} {A})
 is-equiv-map-displayed-fibered-Relaxed-Σ-Decomposition =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-inv-displayed-fibered-Relaxed-Σ-Decomposition)
     ( is-section-map-inv-displayed-fibered-Relaxed-Σ-Decomposition)
     ( is-retraction-map-inv-displayed-fibered-Relaxed-Σ-Decomposition)

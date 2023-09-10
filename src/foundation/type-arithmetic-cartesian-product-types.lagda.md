@@ -55,7 +55,7 @@ module _
 
   is-equiv-map-commutative-prod : is-equiv map-commutative-prod
   is-equiv-map-commutative-prod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-commutative-prod
       is-section-map-inv-commutative-prod
       is-retraction-map-inv-commutative-prod
@@ -135,7 +135,7 @@ equiv-add-redundant-prop :
   (is-prop B) → (f : A → B) → (A ≃ (A × B))
 pr1 (equiv-add-redundant-prop is-prop-B f) a = a , f a
 pr2 (equiv-add-redundant-prop is-prop-B f) =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( pr1)
     ( λ p → eq-pair refl (eq-is-prop is-prop-B))
     ( λ a → refl)

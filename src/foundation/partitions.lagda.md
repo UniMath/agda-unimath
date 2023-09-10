@@ -630,7 +630,7 @@ module _
                 ( unit-trunc-Prop (pair a refl)))))
       ( ( equiv-tot
           ( λ Q →
-            ( ( ( equiv-map-Π
+            ( ( ( equiv-Π-equiv-family
                   ( λ x →
                     inv-equiv
                       ( equiv-equiv-iff
