@@ -169,7 +169,7 @@ module _
     logical-equivalence-reasoning
       ((α : _) → f (x α) ≤-Q z)
       ↔ ((α : _) → (x α) ≤-P g z)
-        by iff-Π-iff-fam (λ α → adjoint-relation-G (x α) z)
+        by iff-Π-iff-family (λ α → adjoint-relation-G (x α) z)
       ↔ y ≤-P g z by H (g z)
       ↔ f y ≤-Q z by inv-iff (adjoint-relation-G y z)
 ```

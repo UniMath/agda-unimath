@@ -117,18 +117,18 @@ is-emb-map-type-duality
             ≃ ( (a : A) →
                 Σ X (λ x → type-is-small (H (f x) a)) ≃
                 Σ Y (λ y → type-is-small (H (g y) a)))
-              by equiv-map-Π (λ a → equiv-univalence)
+              by equiv-Π-equiv-family (λ a → equiv-univalence)
             ≃ ( (a : A) →
                 fiber f a ≃ Σ Y (λ y → type-is-small (H (g y) a)))
               by
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ a →
                   equiv-precomp-equiv
                     ( equiv-tot (λ x → equiv-is-small (H (f x) a)))
                     ( Σ Y (λ y → type-is-small (H (g y) a))))
             ≃ ( (a : A) → fiber f a ≃ fiber g a)
               by
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ a →
                   equiv-postcomp-equiv
                     ( equiv-tot (λ y → inv-equiv (equiv-is-small (H (g y) a))))

@@ -657,7 +657,7 @@ is-equiv-Fam-pushout-cocone-UU :
 is-equiv-Fam-pushout-cocone-UU l {f = f} {g} =
   is-equiv-tot-is-fiberwise-equiv
     ( λ PA → is-equiv-tot-is-fiberwise-equiv
-      ( λ PB → is-equiv-map-Π
+      ( λ PB → is-equiv-Π-equiv-family
         ( λ s → equiv-eq)
         ( λ s → univalence (PA (f s)) (PB (g s)))))
 

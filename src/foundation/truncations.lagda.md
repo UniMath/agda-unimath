@@ -187,7 +187,7 @@ unique-truncated-fam-trunc {l1} {l2} {k} {A} B =
         ( λ C → (C ∘ unit-trunc) ~ B))
     ( equiv-tot
       ( λ C →
-        equiv-map-Π
+        equiv-Π-equiv-family
           ( λ x →
             ( extensionality-Truncated-Type (B x) (C (unit-trunc x))) ∘e
             ( equiv-inv (C (unit-trunc x)) (B x)))))
@@ -254,7 +254,7 @@ module _
               ( f x)))
         ( equiv-ev-pair)
         ( λ g →
-          equiv-map-Π
+          equiv-Π-equiv-family
             ( λ x →
               ( inv-equiv equiv-funext) ∘e
               ( equiv-Π

@@ -128,7 +128,7 @@ module _
         ( equiv-binary-coproduct-Decomposition-Σ-Decomposition)
         ( λ D →
           equiv-prod
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ a' →
                 equiv-eq
                   ( ap S
@@ -136,7 +136,7 @@ module _
                       ( compute-left-equiv-binary-coproduct-Decomposition-Σ-Decomposition
                         ( D)
                         ( a'))))))
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ b' →
                 equiv-eq
                   ( ap T

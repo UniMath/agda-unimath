@@ -61,7 +61,7 @@ module _
           ( equiv-tot
             ( λ z →
               ( ( equiv-ev-refl' x) ∘e
-                ( equiv-map-Π
+                ( equiv-Π-equiv-family
                   ( λ x' →
                     equiv-is-truncation
                       ( Id-Truncated-Type B (f x') (f x))
@@ -83,11 +83,11 @@ module _
           ( ( equiv-tot
               ( λ h →
                 ( ( ( inv-equiv (equiv-funext)) ∘e
-                    ( equiv-map-Π
+                    ( equiv-Π-equiv-family
                       ( λ x →
                         equiv-inv (g x) (h (f x)) ∘e equiv-ev-refl (f x)))) ∘e
                   ( equiv-swap-Π)) ∘e
-                ( equiv-map-Π (λ x → equiv-ev-pair)))) ∘e
+                ( equiv-Π-equiv-family (λ x → equiv-ev-pair)))) ∘e
             ( distributive-Π-Σ))
           ( is-contr-Π
             ( unique-extension-fiber-is-truncation-is-truncation-ap C g)))
@@ -570,7 +570,7 @@ module _
             ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
-              ( ( equiv-map-Π
+              ( ( equiv-Π-equiv-family
                   ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
                 ( ( equiv-ev-pair) ∘e
                   ( equiv-universal-property-trunc-Set
@@ -788,7 +788,7 @@ module _
             ( equiv-precomp-Π e (type-trunc-Set ∘ B))
             ( type-trunc-Set ((x : A) → B x)))
           ( λ f →
-            equiv-map-Π
+            equiv-Π-equiv-family
               ( λ h →
                 ( ( inv-equiv equiv-funext) ∘e
                   ( equiv-precomp-Π e

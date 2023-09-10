@@ -205,9 +205,9 @@ module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   where
 
-  iff-Π-iff-fam : ((i : I) → A i ↔ B i) → ((i : I) → A i) ↔ ((i : I) → B i)
-  pr1 (iff-Π-iff-fam e) a i = forward-implication (e i) (a i)
-  pr2 (iff-Π-iff-fam e) b i = backward-implication (e i) (b i)
+  iff-Π-iff-family : ((i : I) → A i ↔ B i) → ((i : I) → A i) ↔ ((i : I) → B i)
+  pr1 (iff-Π-iff-family e) a i = forward-implication (e i) (a i)
+  pr2 (iff-Π-iff-family e) b i = backward-implication (e i) (b i)
 ```
 
 ## Reasoning with logical equivalences

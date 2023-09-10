@@ -330,7 +330,7 @@ abstract
                 pair
                   ( fiber (map-emb m) (pr1 i b))
                   ( is-prop-map-emb m (pr1 i b)))) ∘e
-            ( ( equiv-map-Π (λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
+            ( ( equiv-Π-equiv-family (λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
               ( ( reduce-Π-fiber f (fiber (map-emb m))) ∘e
                 ( equiv-fiberwise-hom-hom-slice f (map-emb m)))))))
 

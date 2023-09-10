@@ -107,7 +107,7 @@ module _
         ( equiv-binary-product-Decomposition-Π-Decomposition)
         ( λ D →
           equiv-prod
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ a' →
                 equiv-eq
                   ( ap S
@@ -115,7 +115,7 @@ module _
                       ( compute-left-equiv-binary-product-Decomposition-Π-Decomposition
                         ( D)
                         ( a'))))))
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ b' →
                 equiv-eq
                   ( ap T

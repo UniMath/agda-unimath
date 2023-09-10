@@ -336,7 +336,7 @@ module _
           ( λ D →
             equiv-prod
               ( id-equiv)
-              ( equiv-map-Π
+              ( equiv-Π-equiv-family
                 ( λ x →
                   equiv-Σ-extension-cauchy-composition-unit-subuniverse
                     ( P)

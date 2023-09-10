@@ -68,7 +68,7 @@ module _
 
   triangle-hom-slice :
     (f : A → X) (g : B → X) (h : hom-slice f g) →
-    f ~ (g ∘ map-hom-slice f g h)
+    f ~ g ∘ map-hom-slice f g h
   triangle-hom-slice f g h = pr2 h
 ```
 

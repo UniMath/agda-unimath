@@ -390,7 +390,7 @@ module _
     is-local-dependent-type i P ≃
     ((f : (x : A) → P (i x)) → is-contr (extension-dependent-type i P f))
   equiv-is-contr-extension-dependent-type-is-local-dependent-type =
-    ( equiv-map-Π
+    ( equiv-Π-equiv-family
       ( equiv-is-contr-equiv ∘ equiv-fiber-precomp-extension-dependent-type)) ∘e
     ( equiv-is-contr-map-is-equiv (precomp-Π i P))
 
@@ -444,7 +444,7 @@ module _
       ( is-mono-is-emb g H B)
       ( λ j →
         is-emb-is-equiv
-          ( is-equiv-map-Π (λ x → ap g) (λ x → H (i x) (j (f x)))))
+          ( is-equiv-Π-equiv-family (λ x → ap g) (λ x → H (i x) (j (f x)))))
 ```
 
 ## See also

@@ -373,7 +373,7 @@ module _
                     S T)))) ∘e
           ( equiv-tot
             ( λ h →
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ x →
                   ( inv-equiv equiv-funext) ∘e
                   ( inv-equiv
@@ -396,7 +396,7 @@ module _
                         ( h
                           ( map-reflecting-map-Equivalence-Relation R qR x)
                           ( u)))) ∘e
-                    ( equiv-map-Π
+                    ( equiv-Π-equiv-family
                       ( λ y →
                         ( equiv-inv _ _) ∘e
                         ( equiv-concat'

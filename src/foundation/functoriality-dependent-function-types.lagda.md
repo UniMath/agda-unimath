@@ -72,7 +72,7 @@ module _
           ( map-inv-is-equiv (is-equiv-map-equiv e))
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
-        ( is-equiv-map-Π
+        ( is-equiv-Π-equiv-family
           ( λ a →
             ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a))))
@@ -262,7 +262,7 @@ abstract
   is-equiv-map-automorphism-Π {B = B} e f =
     is-equiv-comp _ _
       ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
-      ( is-equiv-map-Π _
+      ( is-equiv-Π-equiv-family _
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))
 
 automorphism-Π :
