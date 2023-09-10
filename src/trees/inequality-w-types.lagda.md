@@ -34,6 +34,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
+  infix 6 _<-𝕎_
+
   data _<-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
     le-∈-𝕎 : {y : 𝕎 A B} → x ∈-𝕎 y → x <-𝕎 y
     propagate-le-𝕎 : {y z : 𝕎 A B} → y ∈-𝕎 z → x <-𝕎 y → x <-𝕎 z
@@ -45,6 +47,8 @@ module _
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
+
+  infix 6 _≤-𝕎_
 
   data _≤-𝕎_ (x : 𝕎 A B) : 𝕎 A B → UU (l1 ⊔ l2) where
     refl-leq-𝕎 : x ≤-𝕎 x
