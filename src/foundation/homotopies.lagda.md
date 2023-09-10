@@ -203,19 +203,24 @@ module _
   (H : f ~ g) (K : g ~ h) (L : f ~ h)
   where
 
-  is-equiv-inv-con-htpy : is-equiv (inv-con-htpy H K L)
-  is-equiv-inv-con-htpy =
-    is-equiv-map-Π _ (λ x → is-equiv-inv-con (H x) (K x) (L x))
+  is-equiv-left-transpose-htpy-concat :
+    is-equiv (left-transpose-htpy-concat H K L)
+  is-equiv-left-transpose-htpy-concat =
+    is-equiv-map-Π _ (λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
 
-  equiv-inv-con-htpy : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
-  equiv-inv-con-htpy = pair (inv-con-htpy H K L) is-equiv-inv-con-htpy
+  equiv-left-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
+  equiv-left-transpose-htpy-concat =
+    pair (left-transpose-htpy-concat H K L) is-equiv-left-transpose-htpy-concat
 
-  is-equiv-con-inv-htpy : is-equiv (con-inv-htpy H K L)
-  is-equiv-con-inv-htpy =
-    is-equiv-map-Π _ (λ x → is-equiv-con-inv (H x) (K x) (L x))
+  is-equiv-right-transpose-htpy-concat :
+    is-equiv (right-transpose-htpy-concat H K L)
+  is-equiv-right-transpose-htpy-concat =
+    is-equiv-map-Π _
+      ( λ x → is-equiv-right-transpose-eq-concat (H x) (K x) (L x))
 
-  equiv-con-inv-htpy : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
-  equiv-con-inv-htpy = pair (con-inv-htpy H K L) is-equiv-con-inv-htpy
+  equiv-right-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
+  pr1 equiv-right-transpose-htpy-concat = right-transpose-htpy-concat H K L
+  pr2 equiv-right-transpose-htpy-concat = is-equiv-right-transpose-htpy-concat
 ```
 
 ### Computing dependent-identifications in the type family `eq-value` of dependent functions
