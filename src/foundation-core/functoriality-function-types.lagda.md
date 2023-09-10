@@ -266,6 +266,8 @@ module _
         ( λ l C → is-equiv-precomp-f l (pr1 C))
 ```
 
+#### Corollaries for particular subuniverses
+
 ```agda
 is-equiv-is-equiv-precomp-Prop :
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
