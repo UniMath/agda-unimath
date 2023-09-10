@@ -191,17 +191,19 @@ module _
   (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : (H ∙h K) ~ L)
   where
 
-  inv-con-htpy : K ~ ((inv-htpy H) ∙h L)
-  inv-con-htpy x = inv-con (H x) (K x) (L x) (M x)
+  left-transpose-htpy-concat : K ~ ((inv-htpy H) ∙h L)
+  left-transpose-htpy-concat x =
+    left-transpose-eq-concat (H x) (K x) (L x) (M x)
 
-  inv-htpy-inv-con-htpy : ((inv-htpy H) ∙h L) ~ K
-  inv-htpy-inv-con-htpy = inv-htpy inv-con-htpy
+  inv-htpy-left-transpose-htpy-concat : ((inv-htpy H) ∙h L) ~ K
+  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
 
-  con-inv-htpy : H ~ (L ∙h (inv-htpy K))
-  con-inv-htpy x = con-inv (H x) (K x) (L x) (M x)
+  right-transpose-htpy-concat : H ~ (L ∙h (inv-htpy K))
+  right-transpose-htpy-concat x =
+    right-transpose-eq-concat (H x) (K x) (L x) (M x)
 
-  inv-htpy-con-inv-htpy : (L ∙h (inv-htpy K)) ~ H
-  inv-htpy-con-inv-htpy = inv-htpy con-inv-htpy
+  inv-htpy-right-transpose-htpy-concat : (L ∙h (inv-htpy K)) ~ H
+  inv-htpy-right-transpose-htpy-concat = inv-htpy right-transpose-htpy-concat
 ```
 
 ### Associativity of concatenation of homotopies

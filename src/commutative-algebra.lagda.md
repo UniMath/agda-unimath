@@ -24,6 +24,7 @@ open import commutative-algebra.homomorphisms-commutative-semirings public
 open import commutative-algebra.ideals-commutative-rings public
 open import commutative-algebra.ideals-commutative-semirings public
 open import commutative-algebra.ideals-generated-by-subsets-commutative-rings public
+open import commutative-algebra.integer-multiples-of-elements-commutative-rings public
 open import commutative-algebra.integral-domains public
 open import commutative-algebra.intersections-ideals-commutative-rings public
 open import commutative-algebra.intersections-radical-ideals-commutative-rings public
@@ -33,6 +34,7 @@ open import commutative-algebra.joins-ideals-commutative-rings public
 open import commutative-algebra.joins-radical-ideals-commutative-rings public
 open import commutative-algebra.local-commutative-rings public
 open import commutative-algebra.maximal-ideals-commutative-rings public
+open import commutative-algebra.multiples-of-elements-commutative-rings public
 open import commutative-algebra.nilradical-commutative-rings public
 open import commutative-algebra.nilradicals-commutative-semirings public
 open import commutative-algebra.poset-of-ideals-commutative-rings public
@@ -53,6 +55,7 @@ open import commutative-algebra.subsets-commutative-rings public
 open import commutative-algebra.subsets-commutative-semirings public
 open import commutative-algebra.sums-commutative-rings public
 open import commutative-algebra.sums-commutative-semirings public
+open import commutative-algebra.transporting-commutative-ring-structure-isomorphisms-abelian-groups public
 open import commutative-algebra.trivial-commutative-rings public
 open import commutative-algebra.zariski-locale public
 open import commutative-algebra.zariski-topology public

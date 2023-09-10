@@ -37,7 +37,8 @@ module _
 
   is-iso-hom-Abstract-Group-Action :
     (f : type-hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
-  is-iso-hom-Abstract-Group-Action = is-iso-Large-Precategory C {X = X} {Y = Y}
+  is-iso-hom-Abstract-Group-Action =
+    is-iso-hom-Large-Precategory C {X = X} {Y = Y}
 
   type-iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
   type-iso-Abstract-Group-Action = iso-Large-Precategory C X Y
@@ -94,10 +95,10 @@ module _
   is-retraction-hom-inv-iso-Abstract-Group-Action =
     is-retraction-hom-inv-iso-Large-Precategory C X Y
 
-  is-iso-hom-iso-Abstract-Group-Action :
+  is-iso-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
     is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
-  is-iso-hom-iso-Abstract-Group-Action = is-iso-hom-iso-Large-Precategory C X Y
+  is-iso-iso-Abstract-Group-Action = is-iso-iso-Large-Precategory C X Y
 
   equiv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y

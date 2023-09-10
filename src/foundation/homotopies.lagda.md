@@ -203,40 +203,25 @@ module _
   (H : f ~ g) (K : g ~ h) (L : f ~ h)
   where
 
-  is-equiv-inv-con-htpy : is-equiv (inv-con-htpy H K L)
-  is-equiv-inv-con-htpy =
+  is-equiv-left-transpose-htpy-concat :
+    is-equiv (left-transpose-htpy-concat H K L)
+  is-equiv-left-transpose-htpy-concat =
     is-equiv-map-equiv-Π-equiv-family _
-      ( λ x → is-equiv-inv-con (H x) (K x) (L x))
+      ( λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
 
-  equiv-inv-con-htpy : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
-  pr1 equiv-inv-con-htpy = inv-con-htpy H K L
-  pr2 equiv-inv-con-htpy = is-equiv-inv-con-htpy
+  equiv-left-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
+  equiv-left-transpose-htpy-concat =
+    pair (left-transpose-htpy-concat H K L) is-equiv-left-transpose-htpy-concat
 
-  is-equiv-con-inv-htpy : is-equiv (con-inv-htpy H K L)
-  is-equiv-con-inv-htpy =
+  is-equiv-right-transpose-htpy-concat :
+    is-equiv (right-transpose-htpy-concat H K L)
+  is-equiv-right-transpose-htpy-concat =
     is-equiv-map-equiv-Π-equiv-family _
-      ( λ x → is-equiv-con-inv (H x) (K x) (L x))
+      ( λ x → is-equiv-right-transpose-eq-concat (H x) (K x) (L x))
 
-  equiv-con-inv-htpy : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
-  pr1 equiv-con-inv-htpy = con-inv-htpy H K L
-  pr2 equiv-con-inv-htpy = is-equiv-con-inv-htpy
-
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
-  (H : f ~ h) (K : f ~ g) (L : g ~ h)
-  where
-
-  equiv-inv-con-htpy' : (H ~ (K ∙h L)) ≃ (((inv-htpy K) ∙h H) ~ L)
-  equiv-inv-con-htpy' =
-    ( equiv-inv-htpy L ((inv-htpy K) ∙h H)) ∘e
-    ( ( equiv-inv-con-htpy K L H) ∘e
-      ( equiv-inv-htpy H (K ∙h L)))
-
-  equiv-con-inv-htpy' : (H ~ (K ∙h L)) ≃ ((H ∙h (inv-htpy L)) ~ K)
-  equiv-con-inv-htpy' =
-    ( equiv-inv-htpy K (H ∙h (inv-htpy L))) ∘e
-    ( ( equiv-con-inv-htpy K L H) ∘e
-      ( equiv-inv-htpy H (K ∙h L)))
+  equiv-right-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
+  pr1 equiv-right-transpose-htpy-concat = right-transpose-htpy-concat H K L
+  pr2 equiv-right-transpose-htpy-concat = is-equiv-right-transpose-htpy-concat
 ```
 
 ### Computing dependent-identifications in the type family `eq-value` of dependent functions

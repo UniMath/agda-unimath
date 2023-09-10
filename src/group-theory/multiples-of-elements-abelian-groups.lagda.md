@@ -52,47 +52,7 @@ module _
   multiple-Ab = power-Group (group-Ab A)
 ```
 
-### Iterating multiplication by `g`
-
-```agda
-module _
-  {l : Level} (A : Ab l)
-  where
-
-  iterated-addition-by-element-Ab :
-    type-Ab A → ℤ → type-Ab A → type-Ab A
-  iterated-addition-by-element-Ab g k =
-    map-iterate-automorphism-ℤ k (equiv-add-Ab A g)
-```
-
-### Integer Multiplication with group elements
-
-```agda
-module _
-  {l : Level} (A : Ab l)
-  where
-
-  integer-multiple-Ab : ℤ → type-Ab A → type-Ab A
-  integer-multiple-Ab k g =
-    map-iterate-automorphism-ℤ k (equiv-add-Ab A g) (zero-Ab A)
-```
-
 ## Properties
-
-### Associativity of iterated addition by a group element
-
-```agda
-module _
-  {l : Level} (A : Ab l) (a : type-Ab A)
-  where
-
-  associative-iterated-addition-by-element-Ab :
-    (k : ℤ) (h1 h2 : type-Ab A) →
-    iterated-addition-by-element-Ab A a k (add-Ab A h1 h2) ＝
-    add-Ab A (iterated-addition-by-element-Ab A a k h1) h2
-  associative-iterated-addition-by-element-Ab =
-    associative-iterated-multiplication-by-element-Group (group-Ab A) a
-```
 
 ### `n · 0 ＝ 0`
 
@@ -172,68 +132,4 @@ module _
     (m n : ℕ) {x : type-Ab A} →
     multiple-Ab A (m *ℕ n) x ＝ multiple-Ab A n (multiple-Ab A m x)
   multiple-mul-Ab = power-mul-Group (group-Ab A)
-```
-
-### `integer-multiple-Ab A (int-ℕ n) g ＝ multiple-Ab A n g`
-
-```agda
-module _
-  {l : Level} (A : Ab l)
-  where
-
-  integer-multiple-int-Ab :
-    (n : ℕ) (g : type-Ab A) →
-    integer-multiple-Ab A (int-ℕ n) g ＝ multiple-Ab A n g
-  integer-multiple-int-Ab zero-ℕ g = refl
-  integer-multiple-int-Ab (succ-ℕ zero-ℕ) g = right-unit-law-add-Ab A g
-  integer-multiple-int-Ab (succ-ℕ (succ-ℕ n)) g =
-    ( ap (add-Ab A g) (integer-multiple-int-Ab (succ-ℕ n) g)) ∙
-    ( inv (multiple-succ-Ab' A (succ-ℕ n) g))
-```
-
-### The integer multiple `0 · x` is the unit of the group
-
-```agda
-module _
-  {l : Level} (A : Ab l) (g : type-Ab A)
-  where
-
-  integer-multiple-zero-Ab :
-    integer-multiple-Ab A zero-ℤ g ＝ zero-Ab A
-  integer-multiple-zero-Ab = integer-power-zero-Group (group-Ab A) g
-```
-
-### The integer multiple `(x+y)g` computes to `xg+yg`
-
-```agda
-module _
-  {l : Level} (A : Ab l) (g : type-Ab A)
-  where
-
-  distributive-integer-multiple-add-Ab :
-    (x y : ℤ) →
-    ( integer-multiple-Ab A (x +ℤ y) g) ＝
-    ( add-Ab A
-      ( integer-multiple-Ab A x g)
-      ( integer-multiple-Ab A y g))
-  distributive-integer-multiple-add-Ab =
-    distributive-integer-power-add-Group (group-Ab A) g
-```
-
-### Homomorphisms of abelian groups preserve multiples
-
-```agda
-module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
-  where
-
-  preserves-multiples-hom-Ab :
-    (n : ℕ) (x : type-Ab A) →
-    map-hom-Ab A B f (multiple-Ab A n x) ＝
-    multiple-Ab B n (map-hom-Ab A B f x)
-  preserves-multiples-hom-Ab =
-    preserves-powers-hom-Group
-      ( group-Ab A)
-      ( group-Ab B)
-      ( f)
 ```

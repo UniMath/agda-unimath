@@ -146,13 +146,13 @@ module _
         ( ring-Ring-𝔽 B)
         ( f)
 
-    preserves-unit-hom-Ring-𝔽 :
+    preserves-one-hom-Ring-𝔽 :
       preserves-unit-hom-Ab
         ( ring-Ring-𝔽 A)
         ( ring-Ring-𝔽 B)
         ( hom-ab-hom-Ring-𝔽)
-    preserves-unit-hom-Ring-𝔽 =
-      preserves-unit-hom-Ring
+    preserves-one-hom-Ring-𝔽 =
+      preserves-one-hom-Ring
         ( ring-Ring-𝔽 A)
         ( ring-Ring-𝔽 B)
         ( f)

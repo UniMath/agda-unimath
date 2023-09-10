@@ -167,17 +167,18 @@ abstract
             ( refl-htpy))
         ( is-contr-is-equiv'
           ( Σ (Id (pr1 s zero-ℤ) p0) (λ α → Id α (pr1 (pr2 s))))
-          ( tot (λ α → con-inv refl α (pr1 (pr2 s))))
+          ( tot (λ α → right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
-            ( λ α → is-equiv-con-inv refl α (pr1 (pr2 s))))
+            ( λ α → is-equiv-right-transpose-eq-concat refl α (pr1 (pr2 s))))
           ( is-contr-total-path' (pr1 (pr2 s))))
         ( pair (pr1 (pr2 s)) (inv (right-inv (pr1 (pr2 s)))))
         ( is-contr-is-equiv'
           ( Σ ( ( k : ℤ) → Id (pr1 s (succ-ℤ k)) (pr1 (pS k) (pr1 s k)))
               ( λ β → β ~ (pr2 (pr2 s))))
-          ( tot (λ β → con-inv-htpy refl-htpy β (pr2 (pr2 s))))
+          ( tot (λ β → right-transpose-htpy-concat refl-htpy β (pr2 (pr2 s))))
           ( is-equiv-tot-is-fiberwise-equiv
-            ( λ β → is-equiv-con-inv-htpy refl-htpy β (pr2 (pr2 s))))
+            ( λ β →
+              is-equiv-right-transpose-htpy-concat refl-htpy β (pr2 (pr2 s))))
           ( is-contr-total-htpy' (pr2 (pr2 s)))))
 
 abstract

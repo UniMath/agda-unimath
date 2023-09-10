@@ -53,6 +53,7 @@ is-uniquely-eliminating-modality-raise-modality {l1} {l2} _ P =
     ( operator-raise-modality l1 l2 ∘ P)
 ```
 
-### In the case that `l1 ⊔ l2 = l1` we recover the trivial modality
+### In the case that `l1 ⊔ l2 = l1` we recover the identity modality
 
 This remains to be made formal.
+[#739](https://github.com/UniMath/agda-unimath/issues/739)

@@ -199,7 +199,7 @@ module _
             ( inv (preserves-point-pointed-map f))))
         ( equiv-tot
           ( λ p →
-            ( ( equiv-con-inv
+            ( ( equiv-right-transpose-eq-concat
                 ( ap (map-pointed-map f) p)
                 ( preserves-point-pointed-map f)
                 ( is-section-map-inv-is-equiv H (point-Pointed-Type B))) ∘e

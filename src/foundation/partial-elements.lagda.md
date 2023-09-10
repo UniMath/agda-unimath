@@ -18,8 +18,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-A partial element of `X` consists of a proposition `P` and a map `P → X`. We say
-that a partial element `(P, f)` is defined if the proposition `P` holds.
+A **partial element** of `X` consists of a
+[proposition](foundation-core.propositions.md) `P` and a map `P → X`. We say
+that a partial element `(P, f)` is **defined** if the proposition `P` holds.
 
 ```agda
 partial-element : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
@@ -44,3 +45,4 @@ pr2 (unit-partial-element x) y = x
 ### The type of partial elements is a directed complete poset
 
 This remains to be shown.
+[#734](https://github.com/UniMath/agda-unimath/issues/734)

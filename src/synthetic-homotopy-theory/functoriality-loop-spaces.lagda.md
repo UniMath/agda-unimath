@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import structured-types.faithful-pointed-maps
+open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
@@ -94,4 +95,63 @@ module _
     is-emb-map-Ω
       ( pointed-map-faithful-pointed-map f)
       ( is-faithful-faithful-pointed-map f)
+```
+
+### Pointed embeddings induce pointed equivalences on loop spaces
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (f : A →∗ B) (t : is-emb (map-pointed-map f))
+  where
+
+  is-equiv-map-Ω-emb :
+    is-equiv (map-Ω f)
+  is-equiv-map-Ω-emb =
+    is-equiv-comp
+      ( tr-type-Ω (preserves-point-pointed-map f))
+      ( ap (map-pointed-map f))
+      ( t (point-Pointed-Type A) (point-Pointed-Type A))
+      ( is-equiv-tr-type-Ω (preserves-point-pointed-map f))
+
+  equiv-map-Ω-emb :
+    type-Ω A ≃ type-Ω B
+  pr1 equiv-map-Ω-emb = map-Ω f
+  pr2 equiv-map-Ω-emb = is-equiv-map-Ω-emb
+
+  pointed-equiv-pointed-map-Ω-emb :
+    Ω A ≃∗ Ω B
+  pr1 pointed-equiv-pointed-map-Ω-emb = equiv-map-Ω-emb
+  pr2 pointed-equiv-pointed-map-Ω-emb = preserves-refl-map-Ω f
+```
+
+### the operator `pointed-map-Ω` preserves equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : A ≃∗ B)
+  where
+
+  equiv-map-Ω-pointed-equiv :
+    type-Ω A ≃ type-Ω B
+  equiv-map-Ω-pointed-equiv =
+    equiv-map-Ω-emb
+      ( pointed-map-pointed-equiv e)
+      ( is-emb-is-equiv (is-equiv-map-equiv-pointed-equiv e))
+```
+
+### `pointed-map-Ω` preserves pointed equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : A ≃∗ B)
+  where
+
+  pointed-equiv-Ω-pointed-equiv :
+    Ω A ≃∗ Ω B
+  pr1 pointed-equiv-Ω-pointed-equiv = equiv-map-Ω-pointed-equiv e
+  pr2 pointed-equiv-Ω-pointed-equiv =
+    preserves-refl-map-Ω (pointed-map-pointed-equiv e)
 ```

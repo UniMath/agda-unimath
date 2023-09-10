@@ -132,7 +132,7 @@ module _
       ( f ·l is-retraction-map-inv-is-invertible H)
     coherence-map-inv-is-invertible H x =
       inv
-        ( inv-con
+        ( left-transpose-eq-concat
           ( is-retraction-is-invertible H (f (map-inv-is-invertible H (f x))))
           ( ap f (is-section-is-invertible H x))
           ( ( ap f

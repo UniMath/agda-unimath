@@ -354,7 +354,9 @@ module _
 ### The type `Connected-Map-Into-Truncated-Type l2 k k A` is contractible
 
 This remains to be shown.
+[#733](https://github.com/UniMath/agda-unimath/issues/733)
 
-### The type `Connected-Map-Into-Truncated-Type l2 k l A` is `k - l - 2` truncated
+### The type `Connected-Map-Into-Truncated-Type l2 k l A` is `k - l - 2`-truncated
 
 This remains to be shown.
+[#733](https://github.com/UniMath/agda-unimath/issues/733)
