@@ -14,8 +14,11 @@ module univalent-combinatorics.unlabeled-rooted-trees where
 
 ## Idea
 
-An unlabeled rooted tree is an unlabeled tree equipped with a vertex.
+An **unlabeled rooted tree** is an
+[unlabeled tree](univalent-combinatorics.unlabeled-trees.md) equipped with a
+vertex.
 
 ## Definition
 
 This remains to be defined.
+[#749](https://github.com/UniMath/agda-unimath/issues/749)
