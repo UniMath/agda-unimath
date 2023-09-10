@@ -106,7 +106,6 @@ module _
   where
 
   private
-
     infix 45 _*_
     _*_ = mul-Group G
 
