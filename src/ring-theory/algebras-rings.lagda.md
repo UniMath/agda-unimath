@@ -20,8 +20,9 @@ open import ring-theory.rings
 
 ## Idea
 
-An algebra over a ring `R` consists of an `R`-module `M` equipped with a binary
-operation `x y ↦ xy : M → M → M` such that
+An **algebra** over a [ring](ring-theory.rings.md) `R` consists of an
+[`R`-module](ring-theory.modules-rings.md) `M` equipped with a binary operation
+`x y ↦ xy : M → M → M` such that
 
 ```text
   (xy)z  = x(yz)
@@ -202,3 +203,4 @@ module _
 ### Unital algebras over a ring
 
 This remains to be defined.
+[#740](https://github.com/UniMath/agda-unimath/issues/740)
