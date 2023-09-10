@@ -228,14 +228,13 @@ module _
   (H : f ~ h) (K : f ~ g) (L : g ~ h)
   where
 
-  equiv-left-transpose-htpy-concat' : (H ~ (K ∙h L)) ≃ (((inv-htpy K) ∙h H) ~ L)
+  equiv-left-transpose-htpy-concat' : (H ~ K ∙h L) ≃ (inv-htpy K ∙h H ~ L)
   equiv-left-transpose-htpy-concat' =
     ( equiv-inv-htpy L ((inv-htpy K) ∙h H)) ∘e
     ( equiv-left-transpose-htpy-concat K L H) ∘e
     ( equiv-inv-htpy H (K ∙h L))
 
-  equiv-right-transpose-htpy-concat' :
-    (H ~ (K ∙h L)) ≃ ((H ∙h (inv-htpy L)) ~ K)
+  equiv-right-transpose-htpy-concat' : (H ~ K ∙h L) ≃ (H ∙h inv-htpy L ~ K)
   equiv-right-transpose-htpy-concat' =
     ( equiv-inv-htpy K (H ∙h (inv-htpy L))) ∘e
     ( equiv-right-transpose-htpy-concat K L H) ∘e
