@@ -10,6 +10,8 @@ module
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.isomorphisms-commutative-rings
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -21,6 +23,7 @@ open import group-theory.abelian-groups
 open import group-theory.isomorphisms-abelian-groups
 open import group-theory.semigroups
 
+open import ring-theory.homomorphisms-rings
 open import ring-theory.rings
 open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups
 ```
@@ -120,4 +123,42 @@ module _
     ring-transport-commutative-ring-structure-iso-Ab
   pr2 transport-commutative-ring-structure-iso-Ab =
     commutative-mul-transport-commutative-ring-structure-iso-Ab
+
+  preserves-mul-transport-commutative-ring-structure-iso-Ab :
+    preserves-mul-hom-Ab
+      ( ring-Commutative-Ring A)
+      ( ring-transport-commutative-ring-structure-iso-Ab)
+      ( hom-iso-Ab (ab-Commutative-Ring A) B f)
+  preserves-mul-transport-commutative-ring-structure-iso-Ab =
+    preserves-mul-transport-ring-structure-iso-Ab
+      ( ring-Commutative-Ring A)
+      ( B)
+      ( f)
+
+  hom-iso-transport-commutative-ring-structure-iso-Ab :
+    type-hom-Commutative-Ring A transport-commutative-ring-structure-iso-Ab
+  hom-iso-transport-commutative-ring-structure-iso-Ab =
+    hom-iso-transport-ring-structure-iso-Ab
+      ( ring-Commutative-Ring A)
+      ( B)
+      ( f)
+
+  is-iso-iso-transport-commutative-ring-structure-iso-Ab :
+    is-iso-hom-Commutative-Ring
+      ( A)
+      ( transport-commutative-ring-structure-iso-Ab)
+      ( hom-iso-transport-commutative-ring-structure-iso-Ab)
+  is-iso-iso-transport-commutative-ring-structure-iso-Ab =
+    is-iso-iso-transport-ring-structure-iso-Ab
+      ( ring-Commutative-Ring A)
+      ( B)
+      ( f)
+
+  iso-transport-commutative-ring-structure-iso-Ab :
+    iso-Commutative-Ring A transport-commutative-ring-structure-iso-Ab
+  iso-transport-commutative-ring-structure-iso-Ab =
+    iso-transport-ring-structure-iso-Ab
+      ( ring-Commutative-Ring A)
+      ( B)
+      ( f)
 ```

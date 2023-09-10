@@ -8,11 +8,20 @@ module commutative-algebra.isomorphisms-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
+open import commutative-algebra.homomorphisms-commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
+
+open import group-theory.isomorphisms-abelian-groups
 
 open import ring-theory.isomorphisms-rings
 ```
@@ -24,22 +33,389 @@ open import ring-theory.isomorphisms-rings
 An **isomorphism** of commutative rings is an invertible homomorphism of
 commutative rings.
 
-## Definition
+## Definitions
+
+### The predicate of being an isomorphism of rings
 
 ```agda
-iso-Commutative-Ring :
-  { l1 l2 : Level} → Commutative-Ring l1 → Commutative-Ring l2 → UU (l1 ⊔ l2)
-iso-Commutative-Ring A B =
-  iso-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
+  (f : type-hom-Commutative-Ring A B)
+  where
 
-is-contr-total-iso-Commutative-Ring :
-  { l1 : Level} (A : Commutative-Ring l1) →
-  is-contr (Σ (Commutative-Ring l1) (iso-Commutative-Ring A))
-is-contr-total-iso-Commutative-Ring A =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-iso-Ring (ring-Commutative-Ring A))
-    ( is-prop-is-commutative-Ring)
-    ( ring-Commutative-Ring A)
-    ( id-iso-Ring (ring-Commutative-Ring A))
-    ( commutative-mul-Commutative-Ring A)
+  is-iso-prop-hom-Commutative-Ring : Prop (l1 ⊔ l2)
+  is-iso-prop-hom-Commutative-Ring =
+    is-iso-prop-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( f)
+
+  is-iso-hom-Commutative-Ring : UU (l1 ⊔ l2)
+  is-iso-hom-Commutative-Ring =
+    is-iso-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( f)
+
+  is-prop-is-iso-hom-Commutative-Ring : is-prop is-iso-hom-Commutative-Ring
+  is-prop-is-iso-hom-Commutative-Ring =
+    is-prop-is-iso-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( f)
+
+  hom-inv-is-iso-hom-Commutative-Ring :
+    is-iso-hom-Commutative-Ring → type-hom-Commutative-Ring B A
+  hom-inv-is-iso-hom-Commutative-Ring =
+    hom-inv-is-iso-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( f)
+
+  is-section-hom-inv-is-iso-hom-Commutative-Ring :
+    (U : is-iso-hom-Commutative-Ring) →
+    comp-hom-Commutative-Ring B A B f (hom-inv-is-iso-hom-Commutative-Ring U) ＝
+    id-hom-Commutative-Ring B
+  is-section-hom-inv-is-iso-hom-Commutative-Ring =
+    is-section-hom-inv-is-iso-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( f)
+
+  is-retraction-hom-inv-is-iso-hom-Commutative-Ring :
+    (U : is-iso-hom-Commutative-Ring) →
+    comp-hom-Commutative-Ring A B A (hom-inv-is-iso-hom-Commutative-Ring U) f ＝
+    id-hom-Commutative-Ring A
+  is-retraction-hom-inv-is-iso-hom-Commutative-Ring =
+    is-retraction-hom-inv-is-iso-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+      ( f)
+
+  map-inv-is-iso-hom-Commutative-Ring :
+    is-iso-hom-Commutative-Ring →
+    type-Commutative-Ring B → type-Commutative-Ring A
+  map-inv-is-iso-hom-Commutative-Ring U =
+    map-hom-Commutative-Ring B A (hom-inv-is-iso-hom-Commutative-Ring U)
+
+  is-section-map-inv-is-iso-hom-Commutative-Ring :
+    (U : is-iso-hom-Commutative-Ring) →
+    map-hom-Commutative-Ring A B f ∘ map-inv-is-iso-hom-Commutative-Ring U ~ id
+  is-section-map-inv-is-iso-hom-Commutative-Ring U =
+    htpy-eq-hom-Commutative-Ring B B
+      ( comp-hom-Commutative-Ring B A B f
+        ( hom-inv-is-iso-hom-Commutative-Ring U))
+      ( id-hom-Commutative-Ring B)
+      ( is-section-hom-inv-is-iso-hom-Commutative-Ring U)
+
+  is-retraction-map-inv-is-iso-hom-Commutative-Ring :
+    (U : is-iso-hom-Commutative-Ring) →
+    map-inv-is-iso-hom-Commutative-Ring U ∘ map-hom-Commutative-Ring A B f ~ id
+  is-retraction-map-inv-is-iso-hom-Commutative-Ring U =
+    htpy-eq-hom-Commutative-Ring A A
+      ( comp-hom-Commutative-Ring A B A
+        ( hom-inv-is-iso-hom-Commutative-Ring U) f)
+      ( id-hom-Commutative-Ring A)
+      ( is-retraction-hom-inv-is-iso-hom-Commutative-Ring U)
+```
+
+### Isomorphisms of rings
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
+  where
+
+  iso-Commutative-Ring : UU (l1 ⊔ l2)
+  iso-Commutative-Ring =
+    iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  hom-iso-Commutative-Ring :
+    iso-Commutative-Ring → type-hom-Commutative-Ring A B
+  hom-iso-Commutative-Ring =
+    hom-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  map-iso-Commutative-Ring :
+    iso-Commutative-Ring → type-Commutative-Ring A → type-Commutative-Ring B
+  map-iso-Commutative-Ring =
+    map-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-zero-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    map-iso-Commutative-Ring f (zero-Commutative-Ring A) ＝
+    zero-Commutative-Ring B
+  preserves-zero-iso-Commutative-Ring =
+    preserves-zero-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-one-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    map-iso-Commutative-Ring f (one-Commutative-Ring A) ＝
+    one-Commutative-Ring B
+  preserves-one-iso-Commutative-Ring =
+    preserves-one-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-add-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring A) →
+    map-iso-Commutative-Ring f (add-Commutative-Ring A x y) ＝
+    add-Commutative-Ring B
+      ( map-iso-Commutative-Ring f x)
+      ( map-iso-Commutative-Ring f y)
+  preserves-add-iso-Commutative-Ring =
+    preserves-add-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-neg-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) (x : type-Commutative-Ring A) →
+    map-iso-Commutative-Ring f (neg-Commutative-Ring A x) ＝
+    neg-Commutative-Ring B (map-iso-Commutative-Ring f x)
+  preserves-neg-iso-Commutative-Ring =
+    preserves-neg-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-mul-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring A) →
+    map-iso-Commutative-Ring f (mul-Commutative-Ring A x y) ＝
+    mul-Commutative-Ring B
+      ( map-iso-Commutative-Ring f x)
+      ( map-iso-Commutative-Ring f y)
+  preserves-mul-iso-Commutative-Ring =
+    preserves-mul-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-iso-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    is-iso-hom-Commutative-Ring A B (hom-iso-Commutative-Ring f)
+  is-iso-iso-Commutative-Ring =
+    is-iso-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  hom-inv-iso-Commutative-Ring :
+    iso-Commutative-Ring → type-hom-Commutative-Ring B A
+  hom-inv-iso-Commutative-Ring =
+    hom-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  map-inv-iso-Commutative-Ring :
+    iso-Commutative-Ring → type-Commutative-Ring B → type-Commutative-Ring A
+  map-inv-iso-Commutative-Ring =
+    map-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-zero-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    map-inv-iso-Commutative-Ring f (zero-Commutative-Ring B) ＝
+    zero-Commutative-Ring A
+  preserves-zero-inv-iso-Commutative-Ring =
+    preserves-zero-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-one-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    map-inv-iso-Commutative-Ring f (one-Commutative-Ring B) ＝
+    one-Commutative-Ring A
+  preserves-one-inv-iso-Commutative-Ring =
+    preserves-one-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-add-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring B) →
+    map-inv-iso-Commutative-Ring f (add-Commutative-Ring B x y) ＝
+    add-Commutative-Ring A
+      ( map-inv-iso-Commutative-Ring f x)
+      ( map-inv-iso-Commutative-Ring f y)
+  preserves-add-inv-iso-Commutative-Ring =
+    preserves-add-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-neg-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) (x : type-Commutative-Ring B) →
+    map-inv-iso-Commutative-Ring f (neg-Commutative-Ring B x) ＝
+    neg-Commutative-Ring A (map-inv-iso-Commutative-Ring f x)
+  preserves-neg-inv-iso-Commutative-Ring =
+    preserves-neg-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  preserves-mul-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) (x y : type-Commutative-Ring B) →
+    map-inv-iso-Commutative-Ring f (mul-Commutative-Ring B x y) ＝
+    mul-Commutative-Ring A
+      ( map-inv-iso-Commutative-Ring f x)
+      ( map-inv-iso-Commutative-Ring f y)
+  preserves-mul-inv-iso-Commutative-Ring =
+    preserves-mul-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-section-hom-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    comp-hom-Commutative-Ring B A B
+      ( hom-iso-Commutative-Ring f)
+      ( hom-inv-iso-Commutative-Ring f) ＝
+    id-hom-Commutative-Ring B
+  is-section-hom-inv-iso-Commutative-Ring =
+    is-section-hom-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-section-map-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    map-iso-Commutative-Ring f ∘ map-inv-iso-Commutative-Ring f ~ id
+  is-section-map-inv-iso-Commutative-Ring =
+    is-section-map-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-retraction-hom-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    comp-hom-Commutative-Ring A B A
+      ( hom-inv-iso-Commutative-Ring f)
+      ( hom-iso-Commutative-Ring f) ＝
+    id-hom-Commutative-Ring A
+  is-retraction-hom-inv-iso-Commutative-Ring =
+    is-retraction-hom-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-retraction-map-inv-iso-Commutative-Ring :
+    (f : iso-Commutative-Ring) →
+    map-inv-iso-Commutative-Ring f ∘ map-iso-Commutative-Ring f ~ id
+  is-retraction-map-inv-iso-Commutative-Ring =
+    is-retraction-map-inv-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+```
+
+### The identity isomorphism of rings
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  is-iso-id-hom-Commutative-Ring :
+    is-iso-hom-Commutative-Ring A A (id-hom-Commutative-Ring A)
+  is-iso-id-hom-Commutative-Ring =
+    is-iso-id-hom-Ring (ring-Commutative-Ring A)
+
+  id-iso-Commutative-Ring : iso-Commutative-Ring A A
+  id-iso-Commutative-Ring = id-iso-Ring (ring-Commutative-Ring A)
+```
+
+### Converting identifications of rings to isomorphisms of rings
+
+```agda
+iso-eq-Commutative-Ring :
+  { l : Level} (A B : Commutative-Ring l) → A ＝ B → iso-Commutative-Ring A B
+iso-eq-Commutative-Ring A .A refl = id-iso-Commutative-Ring A
+```
+
+## Properties
+
+### A ring homomorphism is an isomorphism if and only if the underlying homomorphism of abelian groups is an isomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
+  where
+
+  iso-ab-Commutative-Ring : UU (l1 ⊔ l2)
+  iso-ab-Commutative-Ring =
+    iso-ab-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  iso-ab-iso-ab-Commutative-Ring :
+    iso-ab-Commutative-Ring →
+    type-iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+  iso-ab-iso-ab-Commutative-Ring =
+    iso-ab-iso-ab-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-iso-hom-ab-hom-Commutative-Ring :
+    type-hom-Commutative-Ring A B → UU (l1 ⊔ l2)
+  is-iso-hom-ab-hom-Commutative-Ring =
+    is-iso-hom-ab-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  is-iso-hom-ab-is-iso-hom-Commutative-Ring :
+    (f : type-hom-Commutative-Ring A B) →
+    is-iso-hom-Commutative-Ring A B f → is-iso-hom-ab-hom-Commutative-Ring f
+  is-iso-hom-ab-is-iso-hom-Commutative-Ring =
+    is-iso-hom-ab-is-iso-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  iso-ab-iso-Commutative-Ring :
+    iso-Commutative-Ring A B →
+    type-iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+  iso-ab-iso-Commutative-Ring =
+    iso-ab-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+
+  equiv-iso-ab-iso-Commutative-Ring :
+    iso-Commutative-Ring A B ≃ iso-ab-Commutative-Ring
+  equiv-iso-ab-iso-Commutative-Ring =
+    equiv-iso-ab-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring B)
+```
+
+### Characterizing identifications of rings
+
+```agda
+module _
+  {l : Level} (A : Commutative-Ring l)
+  where
+
+  abstract
+    is-contr-total-iso-Commutative-Ring :
+      is-contr (Σ (Commutative-Ring l) (iso-Commutative-Ring A))
+    is-contr-total-iso-Commutative-Ring =
+      is-contr-total-Eq-subtype
+        ( is-contr-total-iso-Ring (ring-Commutative-Ring A))
+        ( is-prop-is-commutative-Ring)
+        ( ring-Commutative-Ring A)
+        ( id-iso-Ring (ring-Commutative-Ring A))
+        ( commutative-mul-Commutative-Ring A)
+
+
+  is-equiv-iso-eq-Commutative-Ring :
+    (B : Commutative-Ring l) → is-equiv (iso-eq-Commutative-Ring A B)
+  is-equiv-iso-eq-Commutative-Ring =
+    fundamental-theorem-id
+      ( is-contr-total-iso-Commutative-Ring)
+      ( iso-eq-Commutative-Ring A)
+
+  extensionality-Commutative-Ring :
+    (B : Commutative-Ring l) → (A ＝ B) ≃ iso-Commutative-Ring A B
+  pr1 (extensionality-Commutative-Ring B) = iso-eq-Commutative-Ring A B
+  pr2 (extensionality-Commutative-Ring B) = is-equiv-iso-eq-Commutative-Ring B
+
+  eq-iso-Commutative-Ring :
+    (B : Commutative-Ring l) → iso-Commutative-Ring A B → A ＝ B
+  eq-iso-Commutative-Ring B =
+    map-inv-is-equiv (is-equiv-iso-eq-Commutative-Ring B)
 ```
