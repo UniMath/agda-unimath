@@ -125,7 +125,7 @@ module _
         ( ap (map-equiv e) (map-eq-transpose-equiv' p)))
       ( ( distributive-inv-concat (is-section-map-inv-equiv e y) p) ∙
         ( ( inv
-            ( con-inv
+            ( right-transpose-eq-concat
               ( ap (map-equiv e) (inv (map-eq-transpose-equiv' p)))
               ( is-section-map-inv-equiv e y)
               ( inv p)
