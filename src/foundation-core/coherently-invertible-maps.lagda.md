@@ -119,8 +119,8 @@ module _
       (H : is-invertible f) → (f ∘ map-inv-is-invertible H) ~ id
     is-section-map-inv-is-invertible H y =
       ( inv (is-retraction-is-invertible H (f (map-inv-is-invertible H y)))) ∙
-      ( ( ap f (is-section-is-invertible H (map-inv-is-invertible H y))) ∙
-        ( is-retraction-is-invertible H y))
+      ( ap f (is-section-is-invertible H (map-inv-is-invertible H y))) ∙
+      ( is-retraction-is-invertible H y)
 
     is-retraction-map-inv-is-invertible :
       (H : is-invertible f) → (map-inv-is-invertible H ∘ f) ~ id
