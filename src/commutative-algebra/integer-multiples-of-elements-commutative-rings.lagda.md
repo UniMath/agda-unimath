@@ -50,7 +50,7 @@ module _
     iterated-addition-by-element-Ring (ring-Commutative-Ring A)
 ```
 
-### Multiples by integers of elements of commutative rings
+### Integer multiples of elements of commutative rings
 
 ```agda
 module _

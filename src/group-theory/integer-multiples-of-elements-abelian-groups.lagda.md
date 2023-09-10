@@ -52,7 +52,7 @@ module _
     iterated-multiplication-by-element-Group (group-Ab A)
 ```
 
-### Multiples by integers of abelian group elements
+### Integer multiples of abelian group elements
 
 ```agda
 module _

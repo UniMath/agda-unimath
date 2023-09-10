@@ -52,7 +52,7 @@ module _
     iterated-addition-by-element-Ab (ab-Ring R)
 ```
 
-### Multiples by integers of elements of rings
+### Integer multiples of elements of rings
 
 ```agda
 module _
