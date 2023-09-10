@@ -117,7 +117,7 @@ module _
       ( f ·l is-retraction-inv-has-inverse H)
     coherence-inv-has-inverse H x =
       inv
-        ( left-transpose-eq
+        ( left-transpose-eq-concat
           ( pr1 (pr2 H) (f (inv-has-inverse H (f x))))
           ( ap f (pr2 (pr2 H) x))
           ( ( ap f (pr2 (pr2 H) (inv-has-inverse H (f x)))) ∙

@@ -63,7 +63,7 @@ module _
       ( inv (right-inv (preserves-point-function-pointed-Π f)))
       ( λ g → equiv-funext)
       ( λ p →
-        ( equiv-right-transpose-eq
+        ( equiv-right-transpose-eq-concat
           ( refl)
           ( p)
           ( preserves-point-function-pointed-Π f)) ∘e

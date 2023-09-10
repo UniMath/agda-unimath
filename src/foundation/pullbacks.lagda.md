@@ -270,7 +270,7 @@ module _
             ( (Hf (p' z)) ∙ (H' z))
             ( inv (Hg (q' z))))) ∙
         ( inv
-          ( right-transpose-eq
+          ( right-transpose-eq-concat
             ( (H z) ∙ (ap g (Hq z)))
             ( Hg (q' z))
             ( ( ap f (Hp z)) ∙ ((Hf (p' z)) ∙ (H' z)))

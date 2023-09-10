@@ -78,7 +78,7 @@ dependent-identification-Mul-Π-𝕊¹ {x} refl q r H u =
     ( q)
     ( r)
     ( ( H) ,
-      (right-transpose-eq
+      (right-transpose-eq-concat
         ( H base-𝕊¹)
         ( pr2 r)
         ( pr2 q)

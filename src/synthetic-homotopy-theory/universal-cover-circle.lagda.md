@@ -321,7 +321,7 @@ map-dependent-identification-contraction-total-space'
           ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
           ( h))) ∙
       ( ( eq-htpy
-          ( right-transpose-htpy h
+          ( right-transpose-htpy-concat h
             ( segment-Σ refl f e e' H)
             ( precomp-Π
               ( map-equiv f)
@@ -350,7 +350,7 @@ equiv-dependent-identification-contraction-total-space' :
 equiv-dependent-identification-contraction-total-space'
   c {x} {.x} refl f e e' H h h' =
   ( inv-equiv
-    ( equiv-right-transpose-htpy h
+    ( equiv-right-transpose-htpy-concat h
       ( segment-Σ refl f e e' H)
       ( precomp-Π
         ( map-equiv f)
