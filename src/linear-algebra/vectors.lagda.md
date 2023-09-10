@@ -45,7 +45,7 @@ of vectors and show that they are equivalent.
 ### The type of listed vectors
 
 ```agda
-infixr 5 _∷_
+infixr 10 _∷_
 
 data vec {l : Level} (A : UU l) : ℕ → UU l where
   empty-vec : vec A zero-ℕ
@@ -78,6 +78,7 @@ module _
   component-vec (succ-ℕ n) (a ∷ v) (inl k) = component-vec n v k
   component-vec (succ-ℕ n) (a ∷ v) (inr k) = a
 
+  infix 6 _∈-vec_
   data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
     is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
     is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)

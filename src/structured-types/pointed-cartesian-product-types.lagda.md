@@ -39,6 +39,7 @@ module _
   pr1 (prod-Pointed-Type (A , a) (B , b)) = A × B
   pr2 (prod-Pointed-Type (A , a) (B , b)) = a , b
 
+  infixr 15 _×∗_
   _×∗_ = prod-Pointed-Type
 ```
 

@@ -47,7 +47,7 @@ add-ℤ (inr (inr (succ-ℕ x))) l = succ-ℤ (add-ℤ (inr (inr x)) l)
 add-ℤ' : ℤ → ℤ → ℤ
 add-ℤ' x y = add-ℤ y x
 
-infix 30 _+ℤ_
+infixl 35 _+ℤ_
 _+ℤ_ = add-ℤ
 
 ap-add-ℤ :
