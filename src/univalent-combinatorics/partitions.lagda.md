@@ -196,19 +196,24 @@ extensionality-partition-𝔽 X P =
 ### The type of finite partitions of a finite type `X` is equivalent to the type of decidable partitions of `X` in the usual sense
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The type of finite partitions of a finite type `X` is equivalent to the type of equivalence relations on `X`
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The type of finite partitions of a finite type is finite
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The number of elements of the type of finite partitions of a finite type is a Stirling number of the second kind
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The type of finite partitions of a contractible type is contractible
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
