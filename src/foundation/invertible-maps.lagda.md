@@ -9,6 +9,7 @@ open import foundation-core.invertible-maps public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
@@ -16,6 +17,8 @@ open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.retractions
+open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -67,10 +70,14 @@ module _
     (s t : is-invertible f) →
     map-inv-is-invertible s ~ map-inv-is-invertible t → UU (l1 ⊔ l2)
   coherence-htpy-is-invertible s t H =
-    ( ( is-retraction-is-invertible s) ~
-      ( (f ·l H) ∙h is-retraction-is-invertible t)) ×
-    ( ( is-section-is-invertible s) ~
-      ( (H ·r f) ∙h is-section-is-invertible t))
+    ( coherence-htpy-section {f = f}
+      ( section-is-invertible s)
+      ( section-is-invertible t)
+      ( H)) ×
+    ( coherence-htpy-retraction
+      ( retraction-is-invertible s)
+      ( retraction-is-invertible t)
+      ( H))
 
   htpy-is-invertible : (s t : is-invertible f) → UU (l1 ⊔ l2)
   htpy-is-invertible s t =
@@ -95,12 +102,14 @@ module _
       ( is-contr-total-htpy (map-inv-is-invertible s))
       ( map-inv-is-invertible s , refl-htpy)
       ( is-contr-total-Eq-structure
-        ( λ S R H →
-          ( is-section-is-invertible s) ~
-          ( is-section-is-invertible (map-inv-is-invertible s , S , R)))
+        ( λ x z a →
+          coherence-htpy-retraction
+            ( retraction-is-invertible s)
+            ( retraction-is-invertible (map-inv-is-invertible s , x , z))
+            ( refl-htpy))
         ( is-contr-total-htpy (is-retraction-is-invertible s))
         ( is-retraction-is-invertible s , refl-htpy)
-        ( is-contr-total-htpy (is-section-is-invertible s)))
+        (is-contr-total-htpy (is-section-is-invertible s)))
 
   is-equiv-htpy-eq-is-invertible :
     (s t : is-invertible f) → is-equiv (htpy-eq-is-invertible s t)
@@ -131,10 +140,14 @@ module _
     map-invertible-map s ~ map-invertible-map t →
     map-inv-invertible-map s ~ map-inv-invertible-map t → UU (l1 ⊔ l2)
   coherence-htpy-invertible-map s t H I =
-    ( ( is-retraction-map-invertible-map s) ~
-      ( htpy-comp-horizontal I H ∙h is-retraction-map-invertible-map t)) ×
-    ( ( is-section-map-invertible-map s) ~
-      ( htpy-comp-horizontal H I ∙h is-section-map-invertible-map t))
+    ( coherence-triangle-homotopies
+      ( is-retraction-map-invertible-map s)
+      ( is-retraction-map-invertible-map t)
+      ( htpy-comp-horizontal I H)) ×
+    ( coherence-triangle-homotopies
+      ( is-section-map-invertible-map s)
+      ( is-section-map-invertible-map t)
+      ( htpy-comp-horizontal H I))
 
   htpy-invertible-map : (s t : invertible-map A B) → UU (l1 ⊔ l2)
   htpy-invertible-map s t =
