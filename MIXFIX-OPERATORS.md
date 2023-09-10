@@ -48,8 +48,11 @@ We divide the different operators into broad classes, each assigned a range of
 possible precedence levels. In broad terms, we discern between _parametric_ and
 _non-parametric_ operators. The general rule is that non-parametric operator has
 higher precedence than parametric operators. Parametric operators are operators
-like the [cartesian product `_×_`](foundation-core.cartesian-product-types.md) ,
-the [identity type former `_＝_`](foundation-core.identity-types.md) and the
+that take a universe level as one of their arguments. We consider an operator to
+be parametric even if it only takes a universe level as an implicit argument.
+Examples are the
+[cartesian product type former`_×_`](foundation-core.cartesian-product-types.md)
+, the [identity type former `_＝_`](foundation-core.identity-types.md) and the
 [pairing operator `_,_`](foundation.dependent-pair-types.md). Examples of
 non-parametric operators are
 [difference of integers `_-ℤ_`](elementary-number-theory.difference-integers.md)
