@@ -48,6 +48,7 @@ leq-ℕ zero-ℕ m = unit
 leq-ℕ (succ-ℕ n) zero-ℕ = empty
 leq-ℕ (succ-ℕ n) (succ-ℕ m) = leq-ℕ n m
 
+infix 30 _≤-ℕ_
 _≤-ℕ_ = leq-ℕ
 ```
 

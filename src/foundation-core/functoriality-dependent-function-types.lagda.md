@@ -51,11 +51,11 @@ htpy-map-Π' α H = htpy-map-Π (λ j → H (α j))
 ### We compute the fibers of map-Π
 
 ```agda
-equiv-fib-map-Π :
+equiv-fiber-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
-  ((i : I) → fib (f i) (h i)) ≃ fib (map-Π f) h
-equiv-fib-map-Π f h =
+  ((i : I) → fiber (f i) (h i)) ≃ fiber (map-Π f) h
+equiv-fiber-map-Π f h =
   equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
 ```
 
@@ -71,7 +71,7 @@ abstract
     is-equiv-is-contr-map
       ( λ g →
         is-contr-equiv' _
-          ( equiv-fib-map-Π f g)
+          ( equiv-fiber-map-Π f g)
           ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
 
 equiv-map-Π :
@@ -81,7 +81,7 @@ pr1 (equiv-map-Π e) = map-Π (λ i → map-equiv (e i))
 pr2 (equiv-map-Π e) = is-equiv-map-Π _ (λ i → is-equiv-map-equiv (e i))
 ```
 
-### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fib f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
+### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fiber f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence
 
 This condition simplifies, for example, the proof that connected maps satisfy a
 dependent universal property.
@@ -89,14 +89,14 @@ dependent universal property.
 ```agda
 is-equiv-precomp-Π-fiber-condition :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3} →
-  ((b : B) → is-equiv (λ (c : C b) → const (fib f b) (C b) c)) →
+  ((b : B) → is-equiv (λ (c : C b) → const (fiber f b) (C b) c)) →
   is-equiv (precomp-Π f C)
 is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
   is-equiv-comp
-    ( map-reduce-Π-fib f (λ b u → C b))
+    ( map-reduce-Π-fiber f (λ b u → C b))
     ( map-Π (λ b u t → u))
     ( is-equiv-map-Π (λ b u t → u) H)
-    ( is-equiv-map-reduce-Π-fib f (λ b u → C b))
+    ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
 ```
 
 ### If `f` is coherently invertible, then precomposing by `f` is an equivalence

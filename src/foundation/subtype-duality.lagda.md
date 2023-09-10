@@ -30,19 +30,19 @@ open import foundation-core.propositions
 Slice-emb : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 Slice-emb l A = Σ (UU l) (λ X → X ↪ A)
 
-equiv-Fib-Prop :
+equiv-Fiber-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
   Slice-emb (l1 ⊔ l) A ≃ (A → Prop (l1 ⊔ l))
-equiv-Fib-Prop l A =
-  ( equiv-Fib-structure l is-prop A) ∘e
+equiv-Fiber-Prop l A =
+  ( equiv-Fiber-structure l is-prop A) ∘e
   ( equiv-tot (λ X → equiv-tot equiv-is-prop-map-is-emb))
 
 Slice-surjection : (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 Slice-surjection l A = Σ (UU l) (λ X → X ↠ A)
 
-equiv-Fib-trunc-Prop :
+equiv-Fiber-trunc-Prop :
   (l : Level) {l1 : Level} (A : UU l1) →
   Slice-surjection (l1 ⊔ l) A ≃ (A → Inhabited-Type (l1 ⊔ l))
-equiv-Fib-trunc-Prop l A =
-  ( equiv-Fib-structure l is-inhabited A)
+equiv-Fiber-trunc-Prop l A =
+  ( equiv-Fiber-structure l is-inhabited A)
 ```

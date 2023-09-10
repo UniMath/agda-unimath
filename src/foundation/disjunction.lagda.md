@@ -33,6 +33,7 @@ holds or `Q` holds.
 disj-Prop : {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
 disj-Prop P Q = trunc-Prop (type-Prop P + type-Prop Q)
 
+infixr 10 _∨_
 _∨_ = disj-Prop
 ```
 

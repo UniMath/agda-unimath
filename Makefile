@@ -10,22 +10,24 @@ AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --o
 AGDA ?= agda $(AGDAVERBOSE)
 TIME ?= time
 
-METAFILES :=CITE-THIS-LIBRARY.md \
-			CODINGSTYLE.md \
-			CONTRIBUTING.md \
-			CONTRIBUTORS.md \
-			FILE-CONVENTIONS.md \
-			DESIGN-PRINCIPLES.md \
-			GRANT-ACKNOWLEDGEMENTS.md \
-			HOME.md \
-			HOWTO-INSTALL.md \
-			LICENSE.md \
-			MAINTAINERS.md \
-			README.md \
-			STATEMENT-OF-INCLUSION.md \
-			SUMMARY.md \
-			TEMPLATE.lagda.md \
-			USERS.md \
+METAFILES := \
+  CITE-THIS-LIBRARY.md \
+  CODINGSTYLE.md \
+  CONTRIBUTING.md \
+  CONTRIBUTORS.md \
+  FILE-CONVENTIONS.md \
+  DESIGN-PRINCIPLES.md \
+  GRANT-ACKNOWLEDGEMENTS.md \
+  HOME.md \
+  HOWTO-INSTALL.md \
+  LICENSE.md \
+  MIXFIX-OPERATORS.md \
+  MAINTAINERS.md \
+  README.md \
+  STATEMENT-OF-INCLUSION.md \
+  SUMMARY.md \
+  TEMPLATE.lagda.md \
+  USERS.md \
 
 .PHONY: agdaFiles
 agdaFiles:

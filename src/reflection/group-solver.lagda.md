@@ -139,7 +139,7 @@ module _ {n : ℕ} where
       ∀ {x} {y} {z} →
       GroupEqualityElem x y → GroupEquality y z → GroupEquality x z
 
-  infixr 5 _∷GE_
+  infixr 10 _∷GE_
 
   module _ where
     -- equivalence relation
@@ -150,7 +150,7 @@ module _ {n : ℕ} where
       ∀ {x} {y} {z} → GroupEquality x y → GroupEquality y z → GroupEquality x z
     refl-GE ∙GE b = b
     (x ∷GE a) ∙GE b = x ∷GE (a ∙GE b)
-    infixr 20 _∙GE_
+    infixr 15 _∙GE_
 
     sym-GE : ∀ {x} {y} → GroupEquality x y → GroupEquality y x
     sym-GE refl-GE = refl-GE
@@ -320,9 +320,9 @@ module _ {n : ℕ} where
     private
       -- Shorter names to make the proofs less verbose
       _*_ = mul-Group G
-      infixl 30 _*_
+      infixl 40 _*_
       _⁻¹ = inv-Group G
-      infix 40 _⁻¹
+      infix 45 _⁻¹
       unit = unit-Group G
 
     useGroupEqualityElem :
@@ -390,7 +390,7 @@ module _ {n : ℕ} where
 -- gMul x : GroupSyntax 2 x = inner (zero-Fin) y : GroupSyntax 2 y = inner
 -- (succ-Fin zero-Fin)
 
---     infixl 20 _*'_
+--     infixl 40 _*'_
 --     ex1 : GroupEquality {n = 2} (gInv (x *' y *' gInv x *' gInv y)) (y *' x *' gInv y *' gInv x)
 --     ex1 = simplifyValid _
 

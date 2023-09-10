@@ -32,7 +32,7 @@ open Σ public
 
 {-# BUILTIN SIGMA Σ #-}
 
-infixr 10 _,_
+infixr 3 _,_
 pattern _,_ a b = pair a b
 ```
 

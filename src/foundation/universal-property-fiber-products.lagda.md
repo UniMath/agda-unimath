@@ -97,17 +97,17 @@ module _
   (f : A → X) (g : B → X)
   where
 
-  cone-total-prod-fibers : cone f g (Σ X (λ x → (fib f x) × (fib g x)))
+  cone-total-prod-fibers : cone f g (Σ X (λ x → (fiber f x) × (fiber g x)))
   pr1 cone-total-prod-fibers (x , (a , p) , (b , q)) = a
   pr1 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = b
   pr2 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = p ∙ inv q
 
   gap-total-prod-fibers :
-    Σ X (λ x → (fib f x) × (fib g x)) → canonical-pullback f g
+    Σ X (λ x → (fiber f x) × (fiber g x)) → canonical-pullback f g
   gap-total-prod-fibers = gap f g cone-total-prod-fibers
 
   inv-gap-total-prod-fibers :
-    canonical-pullback f g → Σ X (λ x → (fib f x) × (fib g x))
+    canonical-pullback f g → Σ X (λ x → (fiber f x) × (fiber g x))
   pr1 (inv-gap-total-prod-fibers (a , b , p)) = g b
   pr1 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = a
   pr2 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = p

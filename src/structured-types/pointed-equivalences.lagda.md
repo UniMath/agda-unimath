@@ -56,6 +56,7 @@ pointed-equiv A B =
   Σ ( type-Pointed-Type A ≃ type-Pointed-Type B)
     ( λ e → map-equiv e (point-Pointed-Type A) ＝ point-Pointed-Type B)
 
+infix 6 _≃∗_
 _≃∗_ = pointed-equiv
 
 compute-pointed-equiv :
@@ -192,7 +193,7 @@ module _
       ( is-contr-section-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-section-map-inv-is-equiv H))
       ( is-contr-equiv
-        ( fib
+        ( fiber
           ( ap (map-pointed-map f))
           ( ( is-section-map-inv-is-equiv H (point-Pointed-Type B)) ∙
             ( inv (preserves-point-pointed-map f))))
@@ -234,7 +235,7 @@ module _
       ( is-contr-retraction-is-equiv H)
       ( pair (map-inv-is-equiv H) (is-retraction-map-inv-is-equiv H))
       ( is-contr-equiv
-        ( fib
+        ( fiber
           ( λ p →
             ( ( ap
                 ( map-inv-is-equiv H)

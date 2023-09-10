@@ -122,7 +122,7 @@ module _
         pair x ψ
         where
         w :
-          Σ ( fib (map-emb f) y)
+          Σ ( fiber (map-emb f) y)
             ( λ s → ¬ (is-perfect-image (map-emb f) (map-emb g) (pr1 s)))
         w =
           not-perfect-image-has-not-perfect-fiber
