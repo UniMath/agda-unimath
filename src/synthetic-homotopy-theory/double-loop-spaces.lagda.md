@@ -123,9 +123,7 @@ interchange-concat-Ω² =
   interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² assoc
 ```
 
-### The loop space of a pointed type is equivalent to a double loop
-
-space
+### The loop space of a pointed type is equivalent to a double loop space
 
 ```agda
 module _
