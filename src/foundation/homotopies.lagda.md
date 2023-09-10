@@ -208,14 +208,16 @@ module _
     is-equiv-map-Π _ (λ x → is-equiv-left-transpose-eq (H x) (K x) (L x))
 
   equiv-left-transpose-htpy : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
-  equiv-left-transpose-htpy = pair (left-transpose-htpy H K L) is-equiv-left-transpose-htpy
+  equiv-left-transpose-htpy =
+    pair (left-transpose-htpy H K L) is-equiv-left-transpose-htpy
 
   is-equiv-right-transpose-htpy : is-equiv (right-transpose-htpy H K L)
   is-equiv-right-transpose-htpy =
     is-equiv-map-Π _ (λ x → is-equiv-right-transpose-eq (H x) (K x) (L x))
 
   equiv-right-transpose-htpy : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
-  equiv-right-transpose-htpy = pair (right-transpose-htpy H K L) is-equiv-right-transpose-htpy
+  equiv-right-transpose-htpy =
+    pair (right-transpose-htpy H K L) is-equiv-right-transpose-htpy
 ```
 
 ### Computing dependent-identifications in the type family `eq-value` of dependent functions
