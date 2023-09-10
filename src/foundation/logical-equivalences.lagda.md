@@ -41,6 +41,8 @@ Curry-Howard interpretation of logical equivalences between
 ### Logical equivalences between types
 
 ```agda
+infix 6 _↔_
+
 _↔_ : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↔ B = (A → B) × (B → A)
 
@@ -58,6 +60,8 @@ module _
 ### Logical equivalences between propositions
 
 ```agda
+infix 6 _⇔_
+
 _⇔_ :
   {l1 l2 : Level} → Prop l1 → Prop l2 → UU (l1 ⊔ l2)
 P ⇔ Q = type-Prop P ↔ type-Prop Q
@@ -79,6 +83,8 @@ pr2 (iff-Prop P Q) = is-prop-iff-Prop P Q
 ### Composition of logical equivalences
 
 ```agda
+infixr 15 _∘iff_
+
 _∘iff_ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (B ↔ C) → (A ↔ B) → (A ↔ C)
