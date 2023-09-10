@@ -232,11 +232,11 @@ module _
                     ap
                       ( is-map-over-map-total-fibered-map f g h x ∙_)
                       ( inv-htpy-left-whisk-inv-htpy g E x))) ∘e
-                ( ( equiv-con-inv-htpy
+                ( ( equiv-right-transpose-htpy-concat
                     ( inv-htpy (L ·r f))
                     ( g ·l E)
                     ( is-map-over-map-total-fibered-map f g h)) ∘e
-                  ( equiv-inv-con-htpy'
+                  ( equiv-left-transpose-htpy-concat'
                     ( g ·l E)
                     ( L ·r f)
                     ( is-map-over-map-total-fibered-map f g h)))))) ∘e
