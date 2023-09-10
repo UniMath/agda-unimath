@@ -36,18 +36,18 @@ The **integer multiple operation** on a
 
 ## Definitions
 
-### Iterating adding by `g`
+### Iteratively adding `g`
 
 ```agda
 module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  iterated-addition-by-element-Commutative-Ring :
+  iterative-addition-by-element-Commutative-Ring :
     type-Commutative-Ring A →
     ℤ → type-Commutative-Ring A → type-Commutative-Ring A
-  iterated-addition-by-element-Commutative-Ring =
-    iterated-addition-by-element-Ring (ring-Commutative-Ring A)
+  iterative-addition-by-element-Commutative-Ring =
+    iterative-addition-by-element-Ring (ring-Commutative-Ring A)
 ```
 
 ### Integer multiples of elements of commutative rings
@@ -72,15 +72,15 @@ module _
   {l : Level} (A : Commutative-Ring l) (a : type-Commutative-Ring A)
   where
 
-  associative-iterated-addition-by-element-Commutative-Ring :
+  associative-iterative-addition-by-element-Commutative-Ring :
     (k : ℤ) (h1 h2 : type-Commutative-Ring A) →
-    iterated-addition-by-element-Commutative-Ring A a k
+    iterative-addition-by-element-Commutative-Ring A a k
       ( add-Commutative-Ring A h1 h2) ＝
     add-Commutative-Ring A
-      ( iterated-addition-by-element-Commutative-Ring A a k h1)
+      ( iterative-addition-by-element-Commutative-Ring A a k h1)
       ( h2)
-  associative-iterated-addition-by-element-Commutative-Ring =
-    associative-iterated-addition-by-element-Ring (ring-Commutative-Ring A) a
+  associative-iterative-addition-by-element-Commutative-Ring =
+    associative-iterative-addition-by-element-Ring (ring-Commutative-Ring A) a
 ```
 
 ### `integer-multiple-Commutative-Ring A (int-ℕ n) a ＝ multiple-Commutative-Ring A n a`
@@ -285,7 +285,7 @@ module _
     right-integer-multiple-law-mul-Ring (ring-Commutative-Ring A)
 ```
 
-### For each integer `k`, the operation `k-` taking integer multiples is a group homomorphism
+### For each integer `k`, the operation of taking `k`-multiples is a group homomorphism
 
 ```agda
 module _
@@ -314,7 +314,7 @@ module _
     integer-multiple-mul-Ring (ring-Commutative-Ring A)
 ```
 
-### Commutative Ring homomorphisms preserve integer multiples
+### Commutative ring homomorphisms preserve integer multiples
 
 ```agda
 module _

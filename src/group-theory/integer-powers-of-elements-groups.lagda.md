@@ -38,16 +38,16 @@ an [integer](elementary-number-theory.integers.md) `k` times.
 
 ## Definitions
 
-### Iterating multiplication by `g`
+### Iteratively multiplication by `g`
 
 ```agda
 module _
   {l : Level} (G : Group l)
   where
 
-  iterated-multiplication-by-element-Group :
+  iterative-multiplication-by-element-Group :
     type-Group G → ℤ → type-Group G → type-Group G
-  iterated-multiplication-by-element-Group g k =
+  iterative-multiplication-by-element-Group g k =
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g)
 ```
 
@@ -72,43 +72,43 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  associative-iterated-multiplication-by-element-Group :
+  associative-iterative-multiplication-by-element-Group :
     (k : ℤ) (h1 h2 : type-Group G) →
-    iterated-multiplication-by-element-Group G g k (mul-Group G h1 h2) ＝
-    mul-Group G (iterated-multiplication-by-element-Group G g k h1) h2
-  associative-iterated-multiplication-by-element-Group
+    iterative-multiplication-by-element-Group G g k (mul-Group G h1 h2) ＝
+    mul-Group G (iterative-multiplication-by-element-Group G g k h1) h2
+  associative-iterative-multiplication-by-element-Group
     ( inl zero-ℕ) h1 h2 =
     inv (associative-mul-Group G (inv-Group G g) h1 h2)
-  associative-iterated-multiplication-by-element-Group
+  associative-iterative-multiplication-by-element-Group
     ( inl (succ-ℕ x)) h1 h2 =
     ( ap
       ( mul-Group G (inv-Group G g))
-      ( associative-iterated-multiplication-by-element-Group
+      ( associative-iterative-multiplication-by-element-Group
         ( inl x)
         ( h1)
         ( h2))) ∙
     ( inv
       ( associative-mul-Group G
         ( inv-Group G g)
-        ( iterated-multiplication-by-element-Group G g (inl x) h1)
+        ( iterative-multiplication-by-element-Group G g (inl x) h1)
         ( h2)))
-  associative-iterated-multiplication-by-element-Group
+  associative-iterative-multiplication-by-element-Group
     ( inr (inl star)) h1 h2 =
     refl
-  associative-iterated-multiplication-by-element-Group
+  associative-iterative-multiplication-by-element-Group
     ( inr (inr zero-ℕ)) h1 h2 =
     inv (associative-mul-Group G g h1 h2)
-  associative-iterated-multiplication-by-element-Group
+  associative-iterative-multiplication-by-element-Group
     ( inr (inr (succ-ℕ x))) h1 h2 =
     ( ap
       ( mul-Group G g)
-      ( associative-iterated-multiplication-by-element-Group
+      ( associative-iterative-multiplication-by-element-Group
         ( inr (inr x))
         ( h1)
         ( h2))) ∙
     ( inv
       ( associative-mul-Group G g
-        ( iterated-multiplication-by-element-Group G g (inr (inr x)) h1)
+        ( iterative-multiplication-by-element-Group G g (inr (inr x)) h1)
         ( h2)))
 ```
 
@@ -200,9 +200,9 @@ module _
   distributive-integer-power-add-Group x y =
     ( iterate-automorphism-add-ℤ x y (equiv-mul-Group G g) (unit-Group G)) ∙
     ( ap
-      ( iterated-multiplication-by-element-Group G g x)
+      ( iterative-multiplication-by-element-Group G g x)
       ( inv (left-unit-law-mul-Group G (integer-power-Group G y g)))) ∙
-    ( associative-iterated-multiplication-by-element-Group G g x
+    ( associative-iterative-multiplication-by-element-Group G g x
       ( unit-Group G)
       ( integer-power-Group G y g))
 ```

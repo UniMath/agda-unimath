@@ -39,17 +39,17 @@ The **integer multiple operation** on a [ring](ring-theory.rings.md) is the map
 
 ## Definitions
 
-### Iterating adding by `g`
+### Iteratively adding `g`
 
 ```agda
 module _
   {l : Level} (R : Ring l)
   where
 
-  iterated-addition-by-element-Ring :
+  iterative-addition-by-element-Ring :
     type-Ring R → ℤ → type-Ring R → type-Ring R
-  iterated-addition-by-element-Ring =
-    iterated-addition-by-element-Ab (ab-Ring R)
+  iterative-addition-by-element-Ring =
+    iterative-addition-by-element-Ab (ab-Ring R)
 ```
 
 ### Integer multiples of elements of rings
@@ -72,12 +72,12 @@ module _
   {l : Level} (R : Ring l) (a : type-Ring R)
   where
 
-  associative-iterated-addition-by-element-Ring :
+  associative-iterative-addition-by-element-Ring :
     (k : ℤ) (h1 h2 : type-Ring R) →
-    iterated-addition-by-element-Ring R a k (add-Ring R h1 h2) ＝
-    add-Ring R (iterated-addition-by-element-Ring R a k h1) h2
-  associative-iterated-addition-by-element-Ring =
-    associative-iterated-addition-by-element-Ab (ab-Ring R) a
+    iterative-addition-by-element-Ring R a k (add-Ring R h1 h2) ＝
+    add-Ring R (iterative-addition-by-element-Ring R a k h1) h2
+  associative-iterative-addition-by-element-Ring =
+    associative-iterative-addition-by-element-Ab (ab-Ring R) a
 ```
 
 ### `integer-multiple-Ring R (int-ℕ n) a ＝ multiple-Ring R n a`
@@ -398,7 +398,7 @@ module _
     commute-integer-multiples-Ring k l refl
 ```
 
-### For each integer `k`, the operation `k-` taking integer multiples is a group homomorphism
+### For each integer `k`, the operation of taking `k`-multiples is a group homomorphism
 
 ```agda
 module _

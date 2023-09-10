@@ -30,7 +30,7 @@ open import ring-theory.isomorphisms-rings
 
 ## Idea
 
-An **isomorphism** of commutative rings is an invertible homomorphism of
+An **isomorphism** of [commutative rings](commutative-algebra.commutative-rings.md) is an invertible [homomorphism](commutative-algebra.homomorphisms-commutative-rings.md) of
 commutative rings.
 
 ## Definitions

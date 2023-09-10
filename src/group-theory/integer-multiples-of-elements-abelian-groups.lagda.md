@@ -39,17 +39,17 @@ itself an [integer](elementary-number-theory.integers.md) `k` times.
 
 ## Definitions
 
-### Iterating adding by `g`
+### Iteratively adding `g`
 
 ```agda
 module _
   {l : Level} (A : Ab l)
   where
 
-  iterated-addition-by-element-Ab :
+  iterative-addition-by-element-Ab :
     type-Ab A → ℤ → type-Ab A → type-Ab A
-  iterated-addition-by-element-Ab =
-    iterated-multiplication-by-element-Group (group-Ab A)
+  iterative-addition-by-element-Ab =
+    iterative-multiplication-by-element-Group (group-Ab A)
 ```
 
 ### Integer multiples of abelian group elements
@@ -72,12 +72,12 @@ module _
   {l : Level} (A : Ab l) (a : type-Ab A)
   where
 
-  associative-iterated-addition-by-element-Ab :
+  associative-iterative-addition-by-element-Ab :
     (k : ℤ) (h1 h2 : type-Ab A) →
-    iterated-addition-by-element-Ab A a k (add-Ab A h1 h2) ＝
-    add-Ab A (iterated-addition-by-element-Ab A a k h1) h2
-  associative-iterated-addition-by-element-Ab =
-    associative-iterated-multiplication-by-element-Group (group-Ab A) a
+    iterative-addition-by-element-Ab A a k (add-Ab A h1 h2) ＝
+    add-Ab A (iterative-addition-by-element-Ab A a k h1) h2
+  associative-iterative-addition-by-element-Ab =
+    associative-iterative-multiplication-by-element-Group (group-Ab A) a
 ```
 
 ### `integer-multiple-Ab A (int-ℕ n) a ＝ multiple-Ab A n a`
@@ -254,7 +254,7 @@ module _
       ( commutative-add-Ab A x y)
 ```
 
-### For each integer `k`, the operation `k-` taking integer multiples is a group homomorphism
+### For each integer `k`, the operation of taking `k`-multiples is a group homomorphism
 
 ```agda
 module _
