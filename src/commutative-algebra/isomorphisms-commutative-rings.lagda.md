@@ -13,8 +13,8 @@ open import commutative-algebra.homomorphisms-commutative-rings
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.function-types
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -400,7 +400,6 @@ module _
         ( ring-Commutative-Ring A)
         ( id-iso-Ring (ring-Commutative-Ring A))
         ( commutative-mul-Commutative-Ring A)
-
 
   is-equiv-iso-eq-Commutative-Ring :
     (B : Commutative-Ring l) → is-equiv (iso-eq-Commutative-Ring A B)
