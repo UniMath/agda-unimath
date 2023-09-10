@@ -60,11 +60,11 @@ module _
   map-inv-is-coherently-invertible = pr1 H
 
   is-retraction-is-coherently-invertible :
-    f ∘ map-inv-is-coherently-invertible ~ id
+    (f ∘ map-inv-is-coherently-invertible) ~ id
   is-retraction-is-coherently-invertible = pr1 (pr2 H)
 
   is-section-is-coherently-invertible :
-    map-inv-is-coherently-invertible ∘ f ~ id
+    (map-inv-is-coherently-invertible ∘ f) ~ id
   is-section-is-coherently-invertible = pr1 (pr2 (pr2 H))
 
   coh-is-coherently-invertible :
@@ -119,8 +119,8 @@ module _
       (H : is-invertible f) → (f ∘ map-inv-is-invertible H) ~ id
     is-section-map-inv-is-invertible H y =
       ( inv (is-retraction-is-invertible H (f (map-inv-is-invertible H y)))) ∙
-      ( ap f (is-section-is-invertible H (map-inv-is-invertible H y))) ∙
-      ( is-retraction-is-invertible H y)
+      ( ( ap f (is-section-is-invertible H (map-inv-is-invertible H y))) ∙
+        ( is-retraction-is-invertible H y))
 
     is-retraction-map-inv-is-invertible :
       (H : is-invertible f) → (map-inv-is-invertible H ∘ f) ~ id
