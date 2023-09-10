@@ -91,6 +91,12 @@ this, we consider them as relational operators and assign them a precedence
 level of `5`, and usually define them to be _right associative_. Other
 relational operators are assigned the precedence level `6` by default.
 
+### Pairing operations
+
+The pairing operations [`_,_`](foundation.dependent-pair-types.md) and
+[`_,ω_`](foundation.large-dependent-pair-types.md) are assigned a low precedence
+level of `3`, below any of the above defined classes.
+
 ### Reasoning syntaxes
 
 Reasoning syntaxes, like
