@@ -81,17 +81,17 @@ module _
     inv (associative-mul-Group G (inv-Group G g) h1 h2)
   associative-iterated-multiplication-by-element-Group
     ( inl (succ-ℕ x)) h1 h2 =
-    ap
+    ( ap
       ( mul-Group G (inv-Group G g))
       ( associative-iterated-multiplication-by-element-Group
         ( inl x)
         ( h1)
-        ( h2)) ∙
-    inv
+        ( h2))) ∙
+    ( inv
       ( associative-mul-Group G
         ( inv-Group G g)
         ( iterated-multiplication-by-element-Group G g (inl x) h1)
-        ( h2))
+        ( h2)))
   associative-iterated-multiplication-by-element-Group
     ( inr (inl star)) h1 h2 =
     refl
