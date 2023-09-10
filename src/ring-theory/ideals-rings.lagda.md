@@ -520,7 +520,7 @@ module _
     binary-tr
       ( sim-congruence-Ring R S)
       ( right-unit-law-add-Ring R x)
-      ( is-section-add-neg-Ring R x y)
+      ( is-section-left-subtraction-Ring R x y)
       ( left-add-congruence-Ring R S x H)
   pr2
     ( relate-same-elements-congruence-ideal-congruence-Ring x y) H =

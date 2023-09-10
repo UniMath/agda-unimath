@@ -78,6 +78,27 @@ module _
 
   right-unit-law-mul-Monoid : (x : type-Monoid) → mul-Monoid x unit-Monoid ＝ x
   right-unit-law-mul-Monoid = pr2 (pr2 has-unit-Monoid)
+
+  left-swap-mul-Monoid :
+    {x y z : type-Monoid} → mul-Monoid x y ＝ mul-Monoid y x →
+    mul-Monoid x (mul-Monoid y z) ＝
+    mul-Monoid y (mul-Monoid x z)
+  left-swap-mul-Monoid =
+    left-swap-mul-Semigroup semigroup-Monoid
+
+  right-swap-mul-Monoid :
+    {x y z : type-Monoid} → mul-Monoid y z ＝ mul-Monoid z y →
+    mul-Monoid (mul-Monoid x y) z ＝
+    mul-Monoid (mul-Monoid x z) y
+  right-swap-mul-Monoid =
+    right-swap-mul-Semigroup semigroup-Monoid
+
+  interchange-mul-mul-Monoid :
+    {x y z w : type-Monoid} → mul-Monoid y z ＝ mul-Monoid z y →
+    mul-Monoid (mul-Monoid x y) (mul-Monoid z w) ＝
+    mul-Monoid (mul-Monoid x z) (mul-Monoid y w)
+  interchange-mul-mul-Monoid =
+    interchange-mul-mul-Semigroup semigroup-Monoid
 ```
 
 ## Properties
