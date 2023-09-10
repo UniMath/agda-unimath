@@ -97,7 +97,7 @@ summary_template = """
     - [Structuring your file](FILE-CONVENTIONS.md)
         - [File template](TEMPLATE.lagda.md)
     - [The library coding style](CODINGSTYLE.md)
-    - [Guidelines for mixfix operations](MIXFIX-OPERATIONS.md)
+    - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
     - [Citing the library](CITE-THIS-LIBRARY.md)
 
 {module_index}
