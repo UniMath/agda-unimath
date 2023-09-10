@@ -115,7 +115,8 @@ module _
   where
 
   associative-mul-Ω :
-    (x y z : type-Ω A) → Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
+    (x y z : type-Ω A) →
+    Id (mul-Ω A (mul-Ω A x y) z) (mul-Ω A x (mul-Ω A y z))
   associative-mul-Ω x y z = assoc x y z
 ```
 
@@ -160,4 +161,22 @@ module _
     (p : Id x y) (q : type-Ω (pair A x)) →
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
+```
+
+## Properties
+
+### Every pointed identity type is equivalent to a loop space
+
+```agda
+module _
+  {l : Level} (A : Pointed-Type l) {x : type-Pointed-Type A}
+  (p : point-Pointed-Type A ＝ x)
+  where
+
+  pointed-equiv-loop-pointed-identity :
+    ( pair (point-Pointed-Type A ＝ x) p) ≃∗ Ω A
+  pr1 pointed-equiv-loop-pointed-identity =
+    equiv-concat' (point-Pointed-Type A) (inv p)
+  pr2 pointed-equiv-loop-pointed-identity =
+    right-inv p
 ```

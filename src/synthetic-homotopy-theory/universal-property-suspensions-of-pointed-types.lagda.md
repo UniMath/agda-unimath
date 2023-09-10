@@ -67,72 +67,54 @@ module _
   {l1 : Level} (X : Pointed-Type l1)
   where
 
-  shift :
-    (type-Ω (suspension-Pointed-Type X)) → (north-suspension ＝ south-suspension)
-  shift l = l ∙ (meridian-suspension (point-Pointed-Type X))
-
-  shift∗ :
-    Ω (suspension-Pointed-Type X) →∗
-    (pair
+  pointed-equiv-loop-pointed-identity-suspension :
+    ( pair
       ( north-suspension ＝ south-suspension)
-      (meridian-suspension (point-Pointed-Type X)))
-  pr1 shift∗ = shift
-  pr2 shift∗ = refl
+      ( meridian-suspension (point-Pointed-Type X))) ≃∗
+    ( Ω (suspension-Pointed-Type X))
+  pointed-equiv-loop-pointed-identity-suspension =
+    pointed-equiv-loop-pointed-identity
+      ( suspension-Pointed-Type X)
+      ( meridian-suspension (point-Pointed-Type X))
 
-  unshift :
-    (north-suspension ＝ south-suspension) →
-    (type-Ω (suspension-Pointed-Type X))
-  unshift p = p ∙ inv (meridian-suspension (point-Pointed-Type X))
-
-  unshift∗ :
-    (pair
+  pointed-map-loop-pointed-identity-suspension :
+    ( pair
       ( north-suspension ＝ south-suspension)
       ( meridian-suspension (point-Pointed-Type X))) →∗
     Ω (suspension-Pointed-Type X)
-  pr1 unshift∗ = unshift
-  pr2 unshift∗ = right-inv (meridian-suspension (point-Pointed-Type X))
+  pointed-map-loop-pointed-identity-suspension =
+    pointed-map-pointed-equiv
+      ( pointed-equiv-loop-pointed-identity-suspension)
 
-  is-equiv-shift : is-equiv shift
-  is-equiv-shift =
-    is-equiv-concat'
-      ( north-suspension)
-      ( meridian-suspension (point-Pointed-Type X))
-
-  pointed-equiv-shift :
-    ( Ω (suspension-Pointed-Type X)) ≃∗
-    ( pair
-      ( north-suspension ＝ south-suspension)
-      ( meridian-suspension (point-Pointed-Type X)))
-  pr1 (pr1 pointed-equiv-shift) = shift
-  pr2 (pr1 pointed-equiv-shift) = is-equiv-shift
-  pr2 pointed-equiv-shift = preserves-point-pointed-map shift∗
-
-  meridian-suspension∗ :
+  pointed-map-concat-meridian-suspension :
     X →∗
     ( pair
       ( north-suspension ＝ south-suspension)
       ( meridian-suspension (point-Pointed-Type X)))
-  pr1 meridian-suspension∗ = meridian-suspension
-  pr2 meridian-suspension∗ = refl
+  pr1 pointed-map-concat-meridian-suspension = meridian-suspension
+  pr2 pointed-map-concat-meridian-suspension = refl
 
-  unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj∗ = unshift∗ ∘∗ meridian-suspension∗
+  pointed-map-unit-susp-loop-adj : X →∗ Ω (suspension-Pointed-Type X)
+  pointed-map-unit-susp-loop-adj =
+    pointed-map-loop-pointed-identity-suspension ∘∗
+    pointed-map-concat-meridian-suspension
 
-  unit-susp-loop-adj : type-Pointed-Type X →
+  map-unit-susp-loop-adj : type-Pointed-Type X →
     type-Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
+  map-unit-susp-loop-adj = map-pointed-map pointed-map-unit-susp-loop-adj
 
-  counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
-  counit-susp-loop-adj =
+  map-counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
+  map-counit-susp-loop-adj =
     map-inv-is-equiv
       ( up-suspension (type-Ω X) (type-Pointed-Type X))
       ( ( point-Pointed-Type X) ,
         ( point-Pointed-Type X) ,
         ( id))
 
-  counit-susp-loop-adj∗ : ((suspension (type-Ω X)) , north-suspension) →∗ X
-  pr1 counit-susp-loop-adj∗ = counit-susp-loop-adj
-  pr2 counit-susp-loop-adj∗ =
+  pointed-map-counit-susp-loop-adj :
+    ( pair (suspension (type-Ω X)) north-suspension) →∗ X
+  pr1 pointed-map-counit-susp-loop-adj = map-counit-susp-loop-adj
+  pr2 pointed-map-counit-susp-loop-adj =
     up-suspension-north-suspension
       ( type-Ω X)
       ( type-Pointed-Type X)
@@ -151,7 +133,7 @@ module _
   map-equiv-susp-loop-adj :
     ((suspension-Pointed-Type X) →∗ Y) → (X →∗ Ω Y)
   map-equiv-susp-loop-adj f∗ =
-    ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))
+    ((pointed-map-Ω f∗) ∘∗ (pointed-map-unit-susp-loop-adj X))
 ```
 
 #### The underlying map of the inverse equivalence
@@ -200,22 +182,25 @@ module _
           ( type-Pointed-Type Y)
           ( λ z → (point-Pointed-Type Y) ＝ z)
           ( λ t →
-            Σ ( type-Pointed-Type X → (point-Pointed-Type Y) ＝ (pr1 t))
+            Σ ( type-Pointed-Type X →
+                ( point-Pointed-Type Y) ＝ (pr1 t))
               ( λ f → f (point-Pointed-Type X) ＝ (pr2 t))))) ∘e
       ( ( equiv-tot (λ y1 → equiv-left-swap-Σ)) ∘e
         ( ( associative-Σ
             ( type-Pointed-Type Y)
-            ( λ y1 → type-Pointed-Type X → (point-Pointed-Type Y) ＝ y1)
+            ( λ y1 →
+              type-Pointed-Type X → point-Pointed-Type Y ＝ y1)
             ( λ z →
               Σ ( Id (point-Pointed-Type Y) (pr1 z))
                 ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
           ( ( inv-equiv
-              ( right-unit-law-Σ-is-contr
-                ( λ ( z : Σ ( type-Pointed-Type Y)
-                            ( λ y1 →
-                              type-Pointed-Type X →
-                              point-Pointed-Type Y ＝ y1)) →
-                  is-contr-total-path ((pr2 z) (point-Pointed-Type X))))) ∘e
+            ( right-unit-law-Σ-is-contr
+              ( λ ( z : Σ ( type-Pointed-Type Y)
+                ( λ y1 →
+                  type-Pointed-Type X →
+                  point-Pointed-Type Y ＝ y1)) →
+                    ( is-contr-total-path
+                      ( (pr2 z) (point-Pointed-Type X)))))) ∘e
             ( ( left-unit-law-Σ-is-contr
                 ( is-contr-total-path' (point-Pointed-Type Y))
                 ( (point-Pointed-Type Y) , refl)) ∘e
