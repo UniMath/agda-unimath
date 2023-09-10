@@ -86,9 +86,9 @@ relational operators and assign them the a precedence level of `5`, and usually
 define them to be _right associative_. Other relational operators are assigned
 the precedence level `6` by default.
 
-### Reasoning syntax
+### Reasoning syntaxes
 
-Reasoning syntax, like
+Reasoning syntaxes, like
 [`equational-reasoning`](foundation-core.identity-types.md), is defined using
 Agda's mixfix operators, and should have lower precedence than all other
 operators (notably except for `_→_`). The precedence value range `0-1` is
@@ -108,18 +108,21 @@ Below, we outline a list of general rules when assigning associativities.
 
 - **Definitionally associative operators**, e.g. `_∘_`, can be assigned _any
   associativity_.
+
 - **Non-parametric arithmetic operators** are often naturally computed from left
   to right. For instance, the expression `1 - 2 - 3` is computed as
   `(1 - 2) - 3 = -1 - 3 = -4`, hence should be _left associative_. This applies
   to addition, subtraction, multiplication and division. Note that for
   non-parametric exponentiation, we compute from right to left. I.e. `2 ^ 3 ^ 4`
   should compute as `2 ^ (3 ^ 4)`. Hence it will usually be _right associative_.
+
 - **Arithmetic type formers** such as
   [`_+_`](foundation-core.coproduct-types.md) and
   [`_×_`](foundation-core.cartesian-product-types.md), are natural to parse from
   left to right in terms of their introduction/elimination rules. Therefore,
   they are commonly associated to the _right_. This means that for instance to
   map into the left hand argument of `A + B + C`, one uses a single `inl`.
+
 - **Weakly associative operators**, meaning operators that are associative up to
   [identification](foundation-core.identity-types.md), may still be practical to
   define _an_ associativity for, for cases when the particular association does
@@ -129,9 +132,15 @@ Below, we outline a list of general rules when assigning associativities.
   that parenthization should still only be omitted when the association is
   completely irrelevant, even if your expression is left associated regardless.
   For instance, one should never write
+
   ```agda
   assoc : p ∙ (q ∙ r) ＝ p ∙ q ∙ r
   ```
+
+- **Well-typed associativity**, meaning when an operator only has one well-typed
+  associativity, then one can define it to have that associativity. For
+  instance, `f ·l g ·l H` is only ever well-typed when associated to the
+  _right_.
 
 ## Full table of assigned precedences
 
@@ -150,5 +159,5 @@ Below, we outline a list of general rules when assigning associativities.
 | 6                | Parametric relational operations like `_＝_`, `_~_`, `_≃_`, and `_↔_`, elementhood relations, subtype relations                                                                                                                              |
 | 5                | Directed function type-like formation operations, e.g. `_→∗_` and `_↪_`                                                                                                                                                                      |
 | 3                | The pairing operations `_,_` and `_,ω_`                                                                                                                                                                                                      |
-| 0-1              | Reasoning syntax                                                                                                                                                                                                                             |
+| 0-1              | Reasoning syntaxes                                                                                                                                                                                                                           |
 | -∞               | Function type formation `_→_`                                                                                                                                                                                                                |
