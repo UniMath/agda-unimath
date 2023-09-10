@@ -94,17 +94,17 @@ module _
   pr1 pointed-map-concat-meridian-suspension = meridian-suspension
   pr2 pointed-map-concat-meridian-suspension = refl
 
-  unit-susp-loop-adj∗ : X →∗ Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj∗ =
+  pointed-map-unit-susp-loop-adj : X →∗ Ω (suspension-Pointed-Type X)
+  pointed-map-unit-susp-loop-adj =
     pointed-map-loop-pointed-identity-suspension ∘∗
     pointed-map-concat-meridian-suspension
 
-  unit-susp-loop-adj : type-Pointed-Type X →
+  map-unit-susp-loop-adj : type-Pointed-Type X →
     type-Ω (suspension-Pointed-Type X)
-  unit-susp-loop-adj = map-pointed-map unit-susp-loop-adj∗
+  map-unit-susp-loop-adj = map-pointed-map pointed-map-unit-susp-loop-adj
 
-  counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
-  counit-susp-loop-adj =
+  map-counit-susp-loop-adj : (suspension (type-Ω X)) → type-Pointed-Type X
+  map-counit-susp-loop-adj =
     map-inv-is-equiv
       ( up-suspension (type-Ω X) (type-Pointed-Type X))
       ( ( point-Pointed-Type X) ,
@@ -113,7 +113,7 @@ module _
 
   pointed-map-counit-susp-loop-adj :
     ( pair (suspension (type-Ω X)) north-suspension) →∗ X
-  pr1 pointed-map-counit-susp-loop-adj = counit-susp-loop-adj
+  pr1 pointed-map-counit-susp-loop-adj = map-counit-susp-loop-adj
   pr2 pointed-map-counit-susp-loop-adj =
     up-suspension-north-suspension
       ( type-Ω X)
@@ -133,7 +133,7 @@ module _
   map-equiv-susp-loop-adj :
     ((suspension-Pointed-Type X) →∗ Y) → (X →∗ Ω Y)
   map-equiv-susp-loop-adj f∗ =
-    ((pointed-map-Ω f∗) ∘∗ (unit-susp-loop-adj∗ X))
+    ((pointed-map-Ω f∗) ∘∗ (pointed-map-unit-susp-loop-adj X))
 ```
 
 #### The underlying map of the inverse equivalence
@@ -194,13 +194,13 @@ module _
               Σ ( Id (point-Pointed-Type Y) (pr1 z))
                 ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
           ( ( inv-equiv
-              ( right-unit-law-Σ-is-contr
-                ( λ ( z : Σ ( type-Pointed-Type Y)
-                            ( λ y1 →
-                              type-Pointed-Type X →
-                              point-Pointed-Type Y ＝ y1)) →
-                  is-contr-total-path
-                    ( (pr2 z) (point-Pointed-Type X))))) ∘e
+            ( right-unit-law-Σ-is-contr
+              ( λ ( z : Σ ( type-Pointed-Type Y)
+                ( λ y1 →
+                  type-Pointed-Type X →
+                  point-Pointed-Type Y ＝ y1)) →
+`                is-contr-total-path
+                  ( (pr2 z) (point-Pointed-Type X))))) ∘e
             ( ( left-unit-law-Σ-is-contr
                 ( is-contr-total-path' (point-Pointed-Type Y))
                 ( (point-Pointed-Type Y) , refl)) ∘e
