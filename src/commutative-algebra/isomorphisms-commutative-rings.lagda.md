@@ -305,7 +305,7 @@ module _
       ( ring-Commutative-Ring B)
 ```
 
-### The identity isomorphism of rings
+### The identity isomorphism of commutative rings
 
 ```agda
 module _
