@@ -22,12 +22,12 @@ open import univalent-combinatorics.finite-types
 ## Idea
 
 The type of **unlabeled `F`-structures** of order `n` of a
-[species](species.species.md) `F` is the type of [sets](foundation-core.sets.md)
-`X` of size `n` equipped with an `F`-structure. Two unlabeled `F`-structures of
-order `n` are considered to be the same if the underlying sets are isomorphic
-and the `F`-structure of the first transports along this isomorphism to the
-`F`-structure of the second. It will automatically follow from the
-[univalence axiom](foundation.univalence.md) that the
+[species](species.species-of-types.md) `F` is the type of
+[sets](foundation-core.sets.md) `X` of size `n` equipped with an `F`-structure.
+Two unlabeled `F`-structures of order `n` are considered to be the same if the
+underlying sets are isomorphic and the `F`-structure of the first transports
+along this isomorphism to the `F`-structure of the second. It will automatically
+follow from the [univalence axiom](foundation.univalence.md) that the
 [identity type](foundation-core.identity-types.md) of the type of unlabeled
 `F`-structures of order `n` captures this idea.
 

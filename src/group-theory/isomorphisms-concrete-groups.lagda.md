@@ -20,8 +20,8 @@ open import group-theory.precategory-of-concrete-groups
 ## Idea
 
 **Isomorphisms** of [concrete groups](group-theory.concrete-groups.md) are
-[isomorphisms](category-theory.isomorphisms-large-precategories) in the
-[large precategory of concrete groups](group-theory.precategory-of-concrete-groups).
+[isomorphisms](category-theory.isomorphisms-large-precategories.md) in the
+[large precategory of concrete groups](group-theory.precategory-of-concrete-groups.md).
 
 ## Definition
 

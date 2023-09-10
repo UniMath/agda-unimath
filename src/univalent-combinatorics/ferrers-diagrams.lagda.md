@@ -35,7 +35,7 @@ record the number of ways in which `A` can be decomposed as the
 [inhabited types](foundation.inhabited-types.md). More precisely, a Ferrers
 diagram of a type `A` consists of a type `X` and a family `Y` of inhabited types
 over `X` such that `Σ X Y` is
-[merely equivalent](foundation.mere-equivalence.md) to `A`. A finite Finite
+[merely equivalent](foundation.mere-equivalences.md) to `A`. A finite Finite
 ferrers diagram of a [finite type](univalent-combinatorics.finite-types.md) `A`
 consists of a finite type `X` and a family `Y` of inhabited finite types over
 `X` such that `Σ X Y` is merely equivalent to `A`. The number of finite Ferrers
