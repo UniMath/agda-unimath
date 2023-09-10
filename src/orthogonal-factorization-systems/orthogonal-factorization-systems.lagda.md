@@ -177,10 +177,12 @@ module _
 ### An orthogonal factorization system is uniquely determined by its right class
 
 This remains to be shown.
+[#738](https://github.com/UniMath/agda-unimath/issues/738)
 
 ### The right class of an orthogonal factorization system is pullback-stable
 
 This remains to be shown.
+[#738](https://github.com/UniMath/agda-unimath/issues/738)
 
 ## References
 
