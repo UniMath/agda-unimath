@@ -265,16 +265,16 @@ module _
 
   private
 
-    infixl 50 _*_
+    infixl 45 _*_
     _*_ = mul-Group G
 
     pwr = integer-power-Group G
 
-    infixr 60 _^_
+    infixr 50 _^_
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
 
-    infix 70 _⁻¹
+    infix 55 _⁻¹
     _⁻¹ = inv-Group G
 
   integer-power-pred-Group :
@@ -322,16 +322,16 @@ module _
 
   private
 
-    infixl 50 _*_
+    infixl 45 _*_
     _*_ = mul-Group G
 
     pwr = integer-power-Group G
 
-    infixr 60 _^_
+    infixr 50 _^_
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
 
-    infix 70 _⁻¹
+    infix 55 _⁻¹
     _⁻¹ = inv-Group G
 
   commute-integer-powers-Group' :
@@ -404,16 +404,16 @@ module _
 
   private
 
-    infixl 50 _*_
+    infixl 45 _*_
     _*_ = mul-Group G
 
     pwr = integer-power-Group G
 
-    infixr 60 _^_
+    infixr 50 _^_
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
 
-    infix 70 _⁻¹
+    infix 55 _⁻¹
     _⁻¹ = inv-Group G
 
   distributive-integer-power-mul-Group :
@@ -490,12 +490,12 @@ module _
 
   private
 
-    infixl 50 _*_
+    infixl 45 _*_
     _*_ = mul-ℤ
 
     pwr = integer-power-Group G
 
-    infixr 60 _^_
+    infixr 50 _^_
     _^_ : (x : type-Group G) (k : ℤ) → type-Group G
     _^_ x k = integer-power-Group G k x
 
