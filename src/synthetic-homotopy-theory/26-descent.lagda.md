@@ -101,7 +101,7 @@ pullback-property-dependent-pullback-property-pushout
         ( λ h → right-unit ∙
           ( ( ap eq-htpy
               ( eq-htpy (λ s →
-                inv-con
+                left-transpose-eq
                   ( tr-constant-type-family (H s) (h (i (f s))))
                   ( ap h (H s))
                   ( apd h (H s))

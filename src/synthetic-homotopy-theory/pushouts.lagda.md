@@ -196,7 +196,7 @@ module _
     ( ( compute-inl-cogap (f s) ∙ coherence-square-cocone f g c s) ∙
       ( inv (compute-inr-cogap (g s))))
   compute-glue-cogap s =
-    con-inv
+    right-transpose-eq
       ( ap (cogap f g c) (glue-pushout f g s))
       ( compute-inr-cogap (g s))
       ( compute-inl-cogap (f s) ∙ coherence-square-cocone f g c s)

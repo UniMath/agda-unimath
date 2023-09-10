@@ -215,31 +215,31 @@ module _
   where
 
   abstract
-    is-equiv-inv-con :
-      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (inv-con p q r)
-    is-equiv-inv-con refl q r = is-equiv-id
+    is-equiv-left-transpose-eq :
+      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (left-transpose-eq p q r)
+    is-equiv-left-transpose-eq refl q r = is-equiv-id
 
-  equiv-inv-con :
+  equiv-left-transpose-eq :
     (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
     ((p ∙ q) ＝ r) ≃ (q ＝ ((inv p) ∙ r))
-  pr1 (equiv-inv-con p q r) = inv-con p q r
-  pr2 (equiv-inv-con p q r) = is-equiv-inv-con p q r
+  pr1 (equiv-left-transpose-eq p q r) = left-transpose-eq p q r
+  pr2 (equiv-left-transpose-eq p q r) = is-equiv-left-transpose-eq p q r
 
   abstract
-    is-equiv-con-inv :
-      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (con-inv p q r)
-    is-equiv-con-inv p refl r =
+    is-equiv-right-transpose-eq :
+      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (right-transpose-eq p q r)
+    is-equiv-right-transpose-eq p refl r =
       is-equiv-comp
         ( concat' p (inv right-unit))
         ( concat (inv right-unit) r)
         ( is-equiv-concat (inv right-unit) r)
         ( is-equiv-concat' p (inv right-unit))
 
-  equiv-con-inv :
+  equiv-right-transpose-eq :
     (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
     ((p ∙ q) ＝ r) ≃ (p ＝ (r ∙ (inv q)))
-  pr1 (equiv-con-inv p q r) = con-inv p q r
-  pr2 (equiv-con-inv p q r) = is-equiv-con-inv p q r
+  pr1 (equiv-right-transpose-eq p q r) = right-transpose-eq p q r
+  pr2 (equiv-right-transpose-eq p q r) = is-equiv-right-transpose-eq p q r
 ```
 
 ### Computing transport in the type family of identifications with a fixed target

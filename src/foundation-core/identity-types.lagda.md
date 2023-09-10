@@ -176,19 +176,19 @@ module _
 ### Transposing inverses
 
 ```agda
-inv-con :
+left-transpose-eq :
   {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
   (r : x ＝ z) → ((p ∙ q) ＝ r) → q ＝ ((inv p) ∙ r)
-inv-con refl q r s = s
+left-transpose-eq refl q r s = s
 
-con-inv :
+right-transpose-eq :
   {l : Level} {A : UU l} {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z)
   (r : x ＝ z) → ((p ∙ q) ＝ r) → p ＝ (r ∙ (inv q))
-con-inv p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
+right-transpose-eq p refl r s = ((inv right-unit) ∙ s) ∙ (inv right-unit)
 ```
 
-The fact that `inv-con` and `con-inv` are equivalences is recorded in
-[`foundation.identity-types`](foundation.identity-types.md).
+The fact that `left-transpose-eq` and `right-transpose-eq` are equivalences is
+recorded in [`foundation.identity-types`](foundation.identity-types.md).
 
 ### Concatenation is injective
 

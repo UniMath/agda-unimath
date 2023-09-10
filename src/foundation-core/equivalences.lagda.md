@@ -569,7 +569,7 @@ module _
                 ( inv (ap-comp f (map-inv-is-equiv H) p))
                 ( inv (coherence-map-inv-is-equiv H y))))) ∙
           ( inv
-            ( inv-con
+            ( left-transpose-eq
               ( ap f (is-retraction-map-inv-is-equiv H x))
               ( p)
               ( ( ap (f ∘ map-inv-is-equiv H) p) ∙

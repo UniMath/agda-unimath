@@ -79,7 +79,7 @@ module _
   pr1 (pr2 (coherent-unit-laws-unit-laws (pair H K))) x =
     ( inv (ap (μ x) (K e))) ∙ (( ap (μ x) (H e)) ∙ (K x))
   pr2 (pr2 (coherent-unit-laws-unit-laws (pair H K))) =
-    inv-con
+    left-transpose-eq
       ( ap (μ e) (K e))
       ( H e)
       ( (ap (μ e) (H e)) ∙ (K e))

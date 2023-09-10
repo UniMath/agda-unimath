@@ -62,7 +62,7 @@ module _
       ( refl-htpy)
       ( inv (right-inv (preserves-point-function-pointed-Π f)))
       ( λ g → equiv-funext)
-      ( λ p → equiv-con-inv refl p (preserves-point-function-pointed-Π f) ∘e
+      ( λ p → equiv-right-transpose-eq refl p (preserves-point-function-pointed-Π f) ∘e
               equiv-inv (preserves-point-function-pointed-Π f) p)
 
   eq-htpy-pointed-Π :
