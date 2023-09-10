@@ -88,7 +88,7 @@ module _
       ( f)
 ```
 
-### The predicate of being an equivalence of groups
+### The predicate of being an equivalence of abelian groups
 
 ```agda
 module _
