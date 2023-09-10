@@ -97,7 +97,7 @@ module _
       ( is-faithful-faithful-pointed-map f)
 ```
 
-### Pointed embeddings induce pointed equivalces on loop spaces
+### Pointed embeddings induce pointed equivalences on loop spaces
 
 ```agda
 module _
