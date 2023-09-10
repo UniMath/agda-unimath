@@ -1,4 +1,4 @@
-# Multiples of elements rings
+# Multiples of elements in rings
 
 ```agda
 module ring-theory.multiples-of-elements-rings where
@@ -24,13 +24,13 @@ open import ring-theory.rings
 ## Idea
 
 For any [ring](ring-theory.rings.md) `R` there is a multiplication operation
-`ℕ → R → R`, which we write as `n x ↦ n · x`. This operation is defined by
-[iteratively](foundation.iterating-functions.md) adding `x` with itself `n`
-times.
+`ℕ → R → R`, which we write informally as `n x ↦ n · x`. This operation is
+defined by [iteratively](foundation.iterating-functions.md) adding `x` with
+itself `n` times.
 
 ## Definition
 
-### Natural number multiples of abelian group elements
+### Natural number multiples of ring elements
 
 ```agda
 module _

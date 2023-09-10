@@ -364,8 +364,8 @@ module _
   eq-integer-multiple-hom-Ring :
     (g : type-hom-Ring R S) (k : ℤ) (x : type-Ring R) →
     ( map-hom-Ring R S f x ＝ map-hom-Ring R S g x) →
-    ( map-hom-Ring R S f (integer-multiple-Ring R k x) ＝
-      map-hom-Ring R S g (integer-multiple-Ring R k x))
+    map-hom-Ring R S f (integer-multiple-Ring R k x) ＝
+    map-hom-Ring R S g (integer-multiple-Ring R k x)
   eq-integer-multiple-hom-Ring g =
     eq-integer-multiple-hom-Ab
       ( ab-Ring R)
