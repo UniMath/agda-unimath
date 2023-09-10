@@ -119,7 +119,7 @@ vertical-concat-square {a = a} {f = f}
 We give two treatments of the unit laws for the associator. One for computing
 with the associator, and one for coherences between the unit laws.
 
-#### Computing `assoc` at a reflexivity identification
+#### Computing `assoc` at a reflexivity
 
 ```agda
 module _

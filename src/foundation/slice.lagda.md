@@ -7,6 +7,7 @@ module foundation.slice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -67,7 +68,7 @@ module _
 
   triangle-hom-slice :
     (f : A → X) (g : B → X) (h : hom-slice f g) →
-    f ~ (g ∘ (map-hom-slice f g h))
+    f ~ (g ∘ map-hom-slice f g h)
   triangle-hom-slice f g h = pr2 h
 ```
 
@@ -81,12 +82,20 @@ module _
   (f : A → X) (g : B → X)
   where
 
+  coherence-htpy-hom-slice :
+    (h h' : hom-slice f g) →
+    map-hom-slice f g h ~ map-hom-slice f g h' →
+    UU (l1 ⊔ l2)
+  coherence-htpy-hom-slice h h' H =
+      coherence-triangle-homotopies'
+        ( triangle-hom-slice f g h')
+        ( g ·l H)
+        ( triangle-hom-slice f g h)
+
   htpy-hom-slice : (h h' : hom-slice f g) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-hom-slice h h' =
     Σ ( map-hom-slice f g h ~ map-hom-slice f g h')
-      ( λ K →
-        ( (triangle-hom-slice f g h) ∙h (g ·l K)) ~
-        ( triangle-hom-slice f g h'))
+      ( coherence-htpy-hom-slice h h')
 
   extensionality-hom-slice :
     (h h' : hom-slice f g) → (h ＝ h') ≃ htpy-hom-slice h h'
