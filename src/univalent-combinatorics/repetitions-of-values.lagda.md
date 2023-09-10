@@ -112,6 +112,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
 ### The predicate that `f` maps two different elements to the same value
 
 This remains to be defined.
+[#748](https://github.com/UniMath/agda-unimath/issues/748)
 
 ### On the standard finite sets, `has-repetition-of-values f` is decidable
 

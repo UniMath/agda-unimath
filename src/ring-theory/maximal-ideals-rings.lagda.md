@@ -14,9 +14,11 @@ module ring-theory.maximal-ideals-rings where
 
 ## Idea
 
-A maximal ideal in a ring `R` is a proper ideal `I` of `R` such that for any
-ideal `J` containing `I` is either `I` or the entire ring `R`.
+A **maximal ideal** in a [ring](ring-theory.rings.md) `R` is a proper ideal `I`
+of `R` such that for any [ideal](ring-theory.ideals-rings.md) `J` containing `I`
+is either `I` or the entire ring `R`.
 
 ## Definition
 
 This remains to be defined.
+[#731](https://github.com/UniMath/agda-unimath/issues/731)
