@@ -7,8 +7,11 @@ module commutative-algebra.isomorphisms-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-large-precategories
+
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -328,7 +331,8 @@ module _
 ```agda
 iso-eq-Commutative-Ring :
   { l : Level} (A B : Commutative-Ring l) → A ＝ B → iso-Commutative-Ring A B
-iso-eq-Commutative-Ring A .A refl = id-iso-Commutative-Ring A
+iso-eq-Commutative-Ring =
+  iso-eq-Large-Precategory Commutative-Ring-Large-Precategory
 ```
 
 ## Properties

@@ -243,7 +243,7 @@ module _
 ```agda
 iso-eq-Ring :
   { l : Level} (R S : Ring l) → R ＝ S → iso-Ring R S
-iso-eq-Ring R .R refl = id-iso-Ring R
+iso-eq-Ring R S = iso-eq-Large-Precategory Ring-Large-Precategory R S
 ```
 
 ## Properties
