@@ -132,7 +132,7 @@ dependent-universal-property-pushout-induction-principle-pushout :
   ((l : Level) → dependent-universal-property-pushout l f g c)
 dependent-universal-property-pushout-induction-principle-pushout
   f g c ind-c l P =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( ind-induction-principle-pushout f g c (ind-c l) P)
     ( pr2 (ind-c l P))
     ( λ h →

@@ -51,5 +51,5 @@ equiv-universal-property-coproduct-species-types :
   ((hom-species-types F H) × (hom-species-types G H))
 equiv-universal-property-coproduct-species-types F G H =
   ( distributive-Π-Σ) ∘e
-  ( equiv-map-Π (λ X → equiv-universal-property-coprod (H X)))
+  ( equiv-Π-equiv-family (λ X → equiv-universal-property-coprod (H X)))
 ```

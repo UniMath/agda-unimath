@@ -122,7 +122,7 @@ module _
   is-emb-map-restriction-generating-subset-Subgroup :
     is-emb (map-restriction-generating-subset-Subgroup)
   is-emb-map-restriction-generating-subset-Subgroup f g =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ P →
         eq-htpy-hom-Group
           ( group-Subgroup G (subgroup-subset-Group G S))

@@ -83,7 +83,7 @@ is-retraction-ℕ-Nat-𝕎 (succ-ℕ x) = ap succ-ℕ (is-retraction-ℕ-Nat-�
 
 is-equiv-Nat-𝕎-ℕ : is-equiv Nat-𝕎-ℕ
 is-equiv-Nat-𝕎-ℕ =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ℕ-Nat-𝕎
     is-section-ℕ-Nat-𝕎
     is-retraction-ℕ-Nat-𝕎
@@ -93,7 +93,7 @@ equiv-Nat-𝕎-ℕ = pair Nat-𝕎-ℕ is-equiv-Nat-𝕎-ℕ
 
 is-equiv-ℕ-Nat-𝕎 : is-equiv ℕ-Nat-𝕎
 is-equiv-ℕ-Nat-𝕎 =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     Nat-𝕎-ℕ
     is-retraction-ℕ-Nat-𝕎
     is-section-ℕ-Nat-𝕎

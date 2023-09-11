@@ -43,7 +43,7 @@ unit-id-modality = id
 is-uniquely-eliminating-modality-id-modality :
   {l : Level} → is-uniquely-eliminating-modality (unit-id-modality {l})
 is-uniquely-eliminating-modality-id-modality {l} _ P =
-  is-local-family-is-equiv
+  is-local-dependent-type-is-equiv
     ( unit-id-modality)
     ( is-equiv-id)
     ( operator-id-modality l ∘ P)

@@ -148,12 +148,13 @@ module _
         ( equiv-inv-htpy
           ( map-aut-family-with-descent-data-circle B ∘ h)
           ( h ∘ map-aut-family-with-descent-data-circle A)) ∘e
-        ( ( inv-equiv
-            ( equiv-coherence-triangle-maps-inv-top
-              ( map-aut-family-with-descent-data-circle B ∘ h)
-              ( h)
-              ( aut-family-with-descent-data-circle A))) ∘e
-          ( equiv-funext)))
+        ( inv-equiv
+          ( equiv-coherence-triangle-maps-inv-top
+            ( map-aut-family-with-descent-data-circle B ∘ h)
+            ( h)
+            ( aut-family-with-descent-data-circle A))) ∘e
+        ( equiv-inv-htpy _ _) ∘e
+        ( equiv-funext))
 
   equiv-ev-descent-data-circle-function-type-hom :
     dependent-universal-property-circle (l2 ⊔ l3) l →

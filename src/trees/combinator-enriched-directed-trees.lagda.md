@@ -192,7 +192,7 @@ module _
   is-equiv-map-root-enrichment-combinator-Enriched-Directed-Tree :
     is-equiv map-root-enrichment-combinator-Enriched-Directed-Tree
   is-equiv-map-root-enrichment-combinator-Enriched-Directed-Tree =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-root-enrichment-combinator-Enriched-Directed-Tree
       is-section-map-inv-root-enrichment-combinator-Enriched-Directed-Tree
       is-retraction-map-inv-root-enrichment-combinator-Enriched-Directed-Tree

@@ -136,7 +136,8 @@ module _
 
   equiv-symmetric-relation-symmetric-binary-relation :
     {x y : A} →
-    relation-symmetric-binary-relation x y ≃ relation-symmetric-binary-relation y x
+    relation-symmetric-binary-relation x y ≃
+    relation-symmetric-binary-relation y x
   equiv-symmetric-relation-symmetric-binary-relation {x} {y} =
     equiv-tr-symmetric-binary-relation R
       ( standard-unordered-pair x y)

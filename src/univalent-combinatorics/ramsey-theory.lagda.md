@@ -50,7 +50,7 @@ is-ramsey-set-empty-coloring zero-ℕ c = {!!}
 is-ramsey-set-empty-coloring (succ-ℕ r) c = {!!}
 
 is-ramsey-set-Fin-r :
-  {k : ℕ} (q : Fin k → ℕ) (r : ℕ) → fib q r → is-ramsey-set q r (Fin-𝔽 r)
+  {k : ℕ} (q : Fin k → ℕ) (r : ℕ) → fiber q r → is-ramsey-set q r (Fin-𝔽 r)
 is-ramsey-set-Fin-r q .(q i) (pair i refl) c =
   pair
     ( c R)

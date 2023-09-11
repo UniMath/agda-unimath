@@ -245,7 +245,7 @@ module _
               ( htpy-hom-Group G (symmetric-Group (pr1 X)) (pr2 X)))
           ( equiv-tot
             ( λ f →
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ g →
                   inv-equiv
                     ( extensionality-equiv
