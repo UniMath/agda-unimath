@@ -1,9 +1,9 @@
 # Transport along identifications
 
 ```agda
-module foundation.transport where
+module foundation.transport-along-identifications where
 
-open import foundation-core.transport public
+open import foundation-core.transport-along-identifications public
 ```
 
 <details><summary>Imports</summary>
@@ -27,8 +27,9 @@ open import foundation-core.identity-types
 
 Given a type family `B` over `A`, an
 [identification](foundation-core.identity-types.md) `p : x ＝ y` in `A` and an
-element `b : B x`, we can [**transport**](foundation-core.transport.md) the
-element `b` along the identification `p` to obtain an element `tr B p b : B y`.
+element `b : B x`, we can
+[**transport**](foundation-core.transport-along-identifications.md) the element
+`b` along the identification `p` to obtain an element `tr B p b : B y`.
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in this file.

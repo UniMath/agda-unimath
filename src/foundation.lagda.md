@@ -256,8 +256,8 @@ open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
-open import foundation.transport public
 open import foundation.transport-along-equivalences public
+open import foundation.transport-along-identifications public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-equality public

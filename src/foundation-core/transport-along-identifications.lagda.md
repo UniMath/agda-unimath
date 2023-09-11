@@ -1,7 +1,7 @@
 # Transport along identifications
 
 ```agda
-module foundation-core.transport where
+module foundation-core.transport-along-identifications where
 ```
 
 <details><summary>Imports</summary>
@@ -22,7 +22,8 @@ element `b : B x`, we can **transport** the element `b` along the identification
 `p` to obtain an element `tr B p b : B y`.
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
-recorded in [`foundation.transport`](foundation.transport.md).
+recorded in
+[`foundation.transport-along-identifications`](foundation.transport-along-identifications.md).
 
 ## Definition
 

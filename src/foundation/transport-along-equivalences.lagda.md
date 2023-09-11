@@ -1,7 +1,7 @@
 # Transport along equivalences
 
 ```agda
-module foundation.transport-along-equivalences where
+module foundation.transport-along-identifications-along-equivalences where
 ```
 
 <details><summary>Imports</summary>
@@ -14,7 +14,7 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -27,8 +27,9 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Applying [transport along identifications](foundation-core.transport.md) to
-[identifications](foundation-core.identity-types.md) arising from the
+Applying
+[transport along identifications](foundation-core.transport-along-identifications.md)
+to [identifications](foundation-core.identity-types.md) arising from the
 [univalence axiom](foundation.univalence.md) gives us **transport along
 equivalences**.
 

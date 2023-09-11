@@ -22,7 +22,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```

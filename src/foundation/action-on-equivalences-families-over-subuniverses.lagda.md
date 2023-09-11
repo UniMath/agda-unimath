@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.sets
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 

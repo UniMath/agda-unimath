@@ -10,7 +10,7 @@ open import foundation-core.dependent-identifications public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
