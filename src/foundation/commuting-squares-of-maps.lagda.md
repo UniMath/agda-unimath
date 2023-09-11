@@ -95,7 +95,7 @@ precomp-coherence-square-maps top leeft right bottom H X =
   htpy-precomp H X
 ```
 
-### Commutativity of pasting squares and transposing by precomposition
+### Distributivity of pasting squares and transposing by precomposition
 
 Given two commuting squares which can be composed horizontally (vertically), we
 know that composing them and then transposing them by precomposition gives the
@@ -137,7 +137,7 @@ module _
   ( W : UU l7)
   where
 
-  commutative-precomp-pasting-coherence-square-maps :
+  distributive-precomp-pasting-horizontal-coherence-square-maps :
     ( top-left : A → B) (top-right : B → C)
     ( left : A → X) (middle : B → Y) (right : C → Z)
     ( bottom-left : X → Y) (bottom-right : Y → Z) →
@@ -181,7 +181,7 @@ module _
         ( bottom-left)
         ( H)
         ( W))
-  commutative-precomp-pasting-coherence-square-maps
+  distributive-precomp-pasting-horizontal-coherence-square-maps
     ( top-left)
     ( top-right)
     ( left)
@@ -226,7 +226,7 @@ module _
             ( top-left)
             ( h ·l K))
 
-  commutative-precomp-pasting-coherence-square-maps' :
+  distributive-precomp-pasting-vertical-coherence-square-maps :
     ( top : A → X) (left-top : A → B) (right-top : X → Y) (middle : B → Y) →
     ( left-bottom : B → C) (right-bottom : Y → Z) (bottom : C → Z) →
     ( H : coherence-square-maps top left-top right-top middle) →
@@ -269,7 +269,7 @@ module _
         ( middle)
         ( H)
         ( W))
-  commutative-precomp-pasting-coherence-square-maps'
+  distributive-precomp-pasting-vertical-coherence-square-maps
     ( top)
     ( left-top)
     ( right-top)
