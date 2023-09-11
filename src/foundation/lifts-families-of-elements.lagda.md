@@ -105,12 +105,12 @@ module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   ( P : X → UU l4)
   where
-  
+
   TRIANGLE-PRECOMPOSE-LIFTS :
     {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   TRIANGLE-PRECOMPOSE-LIFTS {f} {g} H =
     (h : B → X) →
-    coherence-triangle-maps' 
+    coherence-triangle-maps'
       ( precompose-lifts P g h)
       ( tr (λ u → (x : A) → P (u x)) (eq-htpy (h ·l H)))
       -- ( tr (lift-family-of-elements A P) (eq-htpy (h ·l H)))
