@@ -63,19 +63,19 @@ module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where
 
-  tr-inv : x ＝ y → B y → B x
-  tr-inv p = tr B (inv p)
+  inv-tr : x ＝ y → B y → B x
+  inv-tr p = tr B (inv p)
 
-  is-section-tr : (p : x ＝ y) → (tr-inv p ∘ tr B p) ~ id
+  is-section-tr : (p : x ＝ y) → (inv-tr p ∘ tr B p) ~ id
   is-section-tr refl b = refl
 
-  is-retraction-tr : (p : x ＝ y) → (tr B p ∘ tr-inv p) ~ id
+  is-retraction-tr : (p : x ＝ y) → (tr B p ∘ inv-tr p) ~ id
   is-retraction-tr refl b = refl
 
   is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
   is-equiv-tr p =
     is-equiv-is-invertible
-      ( tr-inv p)
+      ( inv-tr p)
       ( is-retraction-tr p)
       ( is-section-tr p)
 

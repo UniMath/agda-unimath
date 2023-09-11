@@ -460,7 +460,7 @@ module _
             ( reflects-map-reflecting-map-Equivalence-Relation R q
               ( map-inv-equiv
                 ( compute-P (pr1 v))
-                ( tr-inv (type-Prop ∘ P) (pr2 v) p))) ∙
+                ( inv-tr (type-Prop ∘ P) (pr2 v) p))) ∙
             ( pr2 v)))
     is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
     is-contr-total-P = pair center-total-P contraction-total-P
