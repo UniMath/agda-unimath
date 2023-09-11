@@ -19,7 +19,7 @@ open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import univalent-combinatorics.standard-finite-types

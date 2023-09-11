@@ -10,7 +10,7 @@ module type-theories.sections-dependent-type-theories where
 
 ```agda
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import type-theories.dependent-type-theories

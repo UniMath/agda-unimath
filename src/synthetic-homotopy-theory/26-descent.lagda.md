@@ -30,7 +30,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels

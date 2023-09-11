@@ -18,7 +18,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.retractions
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
