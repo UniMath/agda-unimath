@@ -18,7 +18,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
-open import foundation.action-on-equivalences-subuniverses
+open import foundation.action-on-equivalences-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types

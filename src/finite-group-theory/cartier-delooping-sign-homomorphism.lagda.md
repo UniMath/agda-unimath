@@ -17,7 +17,7 @@ open import finite-group-theory.finite-type-groups
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
-open import foundation.action-on-equivalences-subuniverses
+open import foundation.action-on-equivalences-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

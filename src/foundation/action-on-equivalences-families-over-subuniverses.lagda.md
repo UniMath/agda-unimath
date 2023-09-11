@@ -1,7 +1,7 @@
-# Action on equivalences in subuniverses
+# Action on equivalences in type families over subuniverses
 
 ```agda
-module foundation.action-on-equivalences-subuniverses where
+module foundation.action-on-equivalences-families-over-subuniverses where
 ```
 
 <details><summary>Imports</summary>

@@ -94,23 +94,37 @@ compute-ap-equiv-id-equiv :
 compute-ap-equiv-id-equiv f A = ap equiv-eq (compute-eq-ap-equiv-id-equiv f A)
 ```
 
+### The action on equivalences of a constant map is constant
+
+```agda
+compute-eq-ap-equiv-const :
+  {l1 l2 : Level} {B : UU l2} (b : B) {X Y : UU l1}
+  (e : X ≃ Y) → (eq-ap-equiv (const (UU l1) B b) e) ＝ refl
+compute-eq-ap-equiv-const b {X} {Y} e = ap-const b (eq-equiv X Y e)
+
+compute-ap-equiv-const :
+  {l1 l2 : Level} (B : UU l2) {X Y : UU l1}
+  (e : X ≃ Y) → (ap-equiv (const (UU l1) (UU l2) B) e) ＝ id-equiv
+compute-ap-equiv-const B {X} {Y} e = ap equiv-eq (compute-eq-ap-equiv-const B e)
+```
+
 ### The action on equivalences of any map preserves composition of equivalences
 
 ```agda
-distributive-eq-ap-equiv-equiv-comp :
+distributive-eq-ap-equiv-comp-equiv :
   {l1 l2 : Level} {B : UU l2} (f : UU l1 → B) {X Y Z : UU l1} →
   (e : X ≃ Y) (e' : Y ≃ Z) →
   eq-ap-equiv f (e' ∘e e) ＝ (eq-ap-equiv f e ∙ eq-ap-equiv f e')
-distributive-eq-ap-equiv-equiv-comp f {X} {Y} {Z} e e' =
+distributive-eq-ap-equiv-comp-equiv f {X} {Y} {Z} e e' =
     ( ap (ap f) (inv (compute-eq-equiv-equiv-comp X Y Z e e'))) ∙
     ( ap-concat f (eq-equiv X Y e) (eq-equiv Y Z e'))
 
-distributive-ap-equiv-equiv-comp :
+distributive-ap-equiv-comp-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y Z : UU l1} →
   (e : X ≃ Y) (e' : Y ≃ Z) →
   ap-equiv f (e' ∘e e) ＝ (ap-equiv f e' ∘e ap-equiv f e)
-distributive-ap-equiv-equiv-comp f {X} {Y} {Z} e e' =
-  ( ap equiv-eq (distributive-eq-ap-equiv-equiv-comp f e e')) ∙
+distributive-ap-equiv-comp-equiv f {X} {Y} {Z} e e' =
+  ( ap equiv-eq (distributive-eq-ap-equiv-comp-equiv f e e')) ∙
   ( inv (compute-equiv-eq-concat (eq-ap-equiv f e) (eq-ap-equiv f e')))
 ```
 
@@ -130,18 +144,4 @@ compute-ap-equiv-inv-equiv :
 compute-ap-equiv-inv-equiv f {X} {Y} e =
   ( ap equiv-eq (compute-eq-ap-equiv-inv-equiv f e)) ∙
   ( inv (commutativity-inv-equiv-eq (f X) (f Y) (eq-ap-equiv f e)))
-```
-
-### The action on equivalences of a constant map is constant
-
-```agda
-compute-eq-ap-equiv-const :
-  {l1 l2 : Level} {B : UU l2} (b : B) {X Y : UU l1}
-  (e : X ≃ Y) → (eq-ap-equiv (const (UU l1) B b) e) ＝ refl
-compute-eq-ap-equiv-const b {X} {Y} e = ap-const b (eq-equiv X Y e)
-
-compute-ap-equiv-const :
-  {l1 l2 : Level} (B : UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → (ap-equiv (const (UU l1) (UU l2) B) e) ＝ id-equiv
-compute-ap-equiv-const B {X} {Y} e = ap equiv-eq (compute-eq-ap-equiv-const B e)
 ```
