@@ -25,13 +25,18 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The **symmetric core** of a [binary relation](foundation.binary-relations.md) `R : A → A → 𝒰` on a type `A` is a [symmetric binary relation](foundation.symmetric-binary-relations.md) `core R` equipped with a counit
+The **symmetric core** of a [binary relation](foundation.binary-relations.md)
+`R : A → A → 𝒰` on a type `A` is a
+[symmetric binary relation](foundation.symmetric-binary-relations.md) `core R`
+equipped with a counit
 
 ```text
   (x y : A) → core R {x , y} → R x y
 ```
 
-that satisfyies the universal property of the symmetric core, i.e., it satisfies the property that for any symmetric relation `S : unordered-pair A → 𝒰` such that the precomposition function
+that satisfyies the universal property of the symmetric core, i.e., it satisfies
+the property that for any symmetric relation `S : unordered-pair A → 𝒰` such
+that the precomposition function
 
 ```text
   hom-Symmetric-Relation S (core R) → hom-Relation (rel S) R
@@ -106,4 +111,3 @@ module _
               ( λ i →
                 {! !})))
 ```
-
