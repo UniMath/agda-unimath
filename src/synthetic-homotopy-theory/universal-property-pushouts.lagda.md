@@ -450,3 +450,102 @@ universal-property-pushout-rectangle-universal-property-pushout-right
             ( up-d)
             ( W))))
 ```
+
+### The vertical pushout pasting lemma
+
+If in the following diagram both squares are pushouts, then the outer square is
+a pushout as well.
+
+```text
+     g
+ A -----> X
+ |        |
+f|        |
+ v        v
+ B -----> Y
+ |        |
+k|        |
+ v        v
+ C -----> Z
+```
+
+```agda
+universal-property-pushout-rectangle-universal-property-pushout-top :
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  ( f : A → B) (g : A → X) (k : B → C) →
+  ( c : cocone f g Y) (d : cocone k (horizontal-map-cocone f g c) Z) →
+  ( up-c : {l : Level} → universal-property-pushout l f g c) →
+  ( up-d :
+    {l : Level} →
+    universal-property-pushout l k (horizontal-map-cocone f g c) d) →
+  ( {l : Level} →
+    universal-property-pushout l (k ∘ f) g (cocone-comp-vertical f g k c d))
+universal-property-pushout-rectangle-universal-property-pushout-top
+  ( f)
+  ( g)
+  ( k)
+  ( c)
+  ( d)
+  ( up-c)
+  ( up-d)
+  { l} =
+  universal-property-pushout-pullback-property-pushout l (k ∘ f) g
+    ( cocone-comp-vertical f g k c d)
+    ( λ W →
+      tr
+        ( is-pullback (precomp (k ∘ f) W) (precomp g W))
+        ( inv
+          ( eq-htpy-cone
+            ( precomp (k ∘ f) W)
+            ( precomp g W)
+            ( cone-pullback-property-pushout
+              ( k ∘ f)
+              ( g)
+              ( cocone-comp-vertical f g k c d)
+              ( W))
+            ( pasting-horizontal-cone
+              ( precomp k W)
+              ( precomp f W)
+              ( precomp g W)
+              ( cone-pullback-property-pushout f g c W)
+              ( cone-pullback-property-pushout
+                ( k)
+                ( horizontal-map-cocone f g c)
+                ( d)
+                ( W)))
+            ( refl-htpy ,
+              refl-htpy ,
+              λ h →
+                right-unit ∙
+                distributive-precomp-pasting-vertical-coherence-square-maps
+                  ( W)
+                  ( g)
+                  ( f)
+                  ( vertical-map-cocone f g c)
+                  ( horizontal-map-cocone f g c)
+                  ( k)
+                  ( vertical-map-cocone k (horizontal-map-cocone f g c) d)
+                  ( horizontal-map-cocone k (horizontal-map-cocone f g c) d)
+                  ( coherence-square-cocone f g c)
+                  ( coherence-square-cocone k (horizontal-map-cocone f g c) d)
+                  ( h))))
+        ( is-pullback-rectangle-is-pullback-left-square
+          ( precomp k W)
+          ( precomp f W)
+          ( precomp g W)
+          ( cone-pullback-property-pushout f g c W)
+          ( cone-pullback-property-pushout
+            ( k)
+            ( horizontal-map-cocone f g c)
+            ( d)
+            ( W))
+          ( pullback-property-pushout-universal-property-pushout l f g c up-c W)
+          ( pullback-property-pushout-universal-property-pushout
+            ( l)
+            ( k)
+            ( horizontal-map-cocone f g c)
+            ( d)
+            ( up-d)
+            ( W))))
+```
