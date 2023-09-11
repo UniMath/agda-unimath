@@ -673,7 +673,7 @@ module _
     Fin (n +ℕ 2) ≃ raise l (Fin (n +ℕ 2))
   sign-comp-aut-succ-succ-Fin n = _∘e compute-raise l (Fin (n +ℕ 2))
 
-  not-ap-equiv-subuniverse-transposition :
+  not-action-equiv-family-on-subuniverse-transposition :
     ( n : ℕ) →
     ( Y : 2-Element-Decidable-Subtype l
       ( raise-Fin l (n +ℕ 2))) →
@@ -683,7 +683,7 @@ module _
           unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2))))
       ( sign-comp-aut-succ-succ-Fin n (transposition Y))
       ( map-equiv
-        ( ap-equiv-subuniverse
+        ( action-equiv-family-on-subuniverse
           ( mere-equiv-Prop (Fin (n +ℕ 2)))
           ( λ X → Fin (n +ℕ 2) ≃ pr1 X)
           ( raise l (Fin (n +ℕ 2)) ,
@@ -692,7 +692,7 @@ module _
             unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2)))
           ( transposition Y))
         ( sign-comp-aut-succ-succ-Fin n (transposition Y))))
-  not-ap-equiv-subuniverse-transposition n =
+  not-action-equiv-family-on-subuniverse-transposition n =
     tr
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
@@ -716,14 +716,14 @@ module _
           simpson-comp-equiv (n +ℕ 2) ,
           preserves-id-equiv-simpson-comp-equiv (n +ℕ 2)}
         { y =
-          ( ap-equiv-subuniverse
+          ( action-equiv-family-on-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X) ,
-            ( preserves-id-equiv-ap-equiv-subuniverse
+            ( preserves-id-equiv-action-equiv-family-on-subuniverse
               ( mere-equiv-Prop (Fin (n +ℕ 2)))
               ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X)))}
         ( eq-is-contr
-          ( is-contr-preserves-id-ap-equiv-subuniverse
+          ( is-contr-preserves-id-action-equiv-family-on-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X)
             ( λ X →
@@ -743,7 +743,7 @@ module _
       ( λ n _ → is-decidable-sign-comp-Equivalence-Relation n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
-      ( not-ap-equiv-subuniverse-transposition)
+      ( not-action-equiv-family-on-subuniverse-transposition)
 
   eq-simpson-delooping-sign-homomorphism :
     (n : ℕ) →
@@ -779,7 +779,7 @@ module _
             ( λ n H → is-decidable-sign-comp-Equivalence-Relation n)
             ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
             ( sign-comp-aut-succ-succ-Fin)
-            ( not-ap-equiv-subuniverse-transposition)
+            ( not-action-equiv-family-on-subuniverse-transposition)
             ( n))
           ( sign-homomorphism
             ( n +ℕ 2)
@@ -795,7 +795,7 @@ module _
       ( λ n _ → is-decidable-sign-comp-Equivalence-Relation n)
       ( equiv-fin-2-quotient-sign-comp-equiv-Fin)
       ( sign-comp-aut-succ-succ-Fin)
-      ( not-ap-equiv-subuniverse-transposition)
+      ( not-action-equiv-family-on-subuniverse-transposition)
 ```
 
 ## References

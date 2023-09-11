@@ -129,7 +129,7 @@ module _
           unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
       ( quotient-aut-succ-succ-Fin n (transposition Y))
       ( map-equiv
-        ( ap-equiv-subuniverse
+        ( action-equiv-family-on-subuniverse
           ( mere-equiv-Prop (Fin (n +ℕ 2)))
           ( D (n +ℕ 2))
           ( raise l1 (Fin (n +ℕ 2)) ,
@@ -165,13 +165,13 @@ module _
       (n : ℕ) (X X' : UU-Fin l1 n) →
       type-UU-Fin n X ≃ type-UU-Fin n X' → D n X ≃ D n X'
     invertible-action-D-equiv n =
-      ap-equiv-subuniverse (mere-equiv-Prop (Fin n)) (D n)
+      action-equiv-family-on-subuniverse (mere-equiv-Prop (Fin n)) (D n)
 
     preserves-id-equiv-invertible-action-D-equiv :
       (n : ℕ) (X : UU-Fin l1 n) →
       Id (invertible-action-D-equiv n X X id-equiv) id-equiv
     preserves-id-equiv-invertible-action-D-equiv n =
-      preserves-id-equiv-ap-equiv-subuniverse (mere-equiv-Prop (Fin n)) (D n)
+      preserves-id-equiv-action-equiv-family-on-subuniverse (mere-equiv-Prop (Fin n)) (D n)
 
     preserves-R-invertible-action-D-equiv :
       ( n : ℕ) →
@@ -184,7 +184,7 @@ module _
           ( map-equiv (invertible-action-D-equiv n X X' e) a)
           ( map-equiv (invertible-action-D-equiv n X X' e) a'))
     preserves-R-invertible-action-D-equiv n X X' =
-      Ind-ap-equiv-subuniverse (mere-equiv-Prop (Fin n)) (D n) X
+      Ind-action-equiv-family-on-subuniverse (mere-equiv-Prop (Fin n)) (D n) X
         ( λ Y f →
           ( a a' : D n X) →
           ( sim-Equivalence-Relation (R n X) a a' ↔
@@ -1488,7 +1488,7 @@ module _
             unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))) →
     ¬ ( x ＝
         ( map-equiv
-          ( ap-equiv-subuniverse
+          ( action-equiv-family-on-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( type-UU-Fin 2 ∘ Q (n +ℕ 2))
             ( raise l1 (Fin (n +ℕ 2)) ,
