@@ -130,7 +130,7 @@ module _
     ( ap
       ( inv)
       ( inv
-        ( compute-eq-equiv-equiv-comp
+        ( compute-eq-equiv-comp-equiv
           ( type-Set X) (type-Set X) (type-Set X) g f))) ∙
       ( distributive-inv-concat
         ( eq-equiv (type-Set X) (type-Set X) g)

@@ -148,10 +148,10 @@ compute-equiv-eq-concat :
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
 compute-equiv-eq-concat refl refl = eq-equiv-eq-map-equiv refl
 
-compute-eq-equiv-equiv-comp :
+compute-eq-equiv-comp-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
-compute-eq-equiv-equiv-comp A B C f g =
+compute-eq-equiv-comp-equiv A B C f g =
   is-injective-map-equiv
     ( equiv-univalence)
     ( ( inv ( compute-equiv-eq-concat (eq-equiv A B f) (eq-equiv B C g))) ∙

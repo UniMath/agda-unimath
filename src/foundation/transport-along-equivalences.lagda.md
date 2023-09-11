@@ -88,7 +88,7 @@ distributive-map-tr-equiv-equiv-comp :
   {X Y Z : UU l1} (e : X ≃ Y) (e' : Y ≃ Z) →
   map-tr-equiv f (e' ∘e e) ~ (map-tr-equiv f e' ∘ map-tr-equiv f e)
 distributive-map-tr-equiv-equiv-comp f {X} {Y} {Z} e e' x =
-  ( ap (λ p → tr f p x) (inv (compute-eq-equiv-equiv-comp X Y Z e e'))) ∙
+  ( ap (λ p → tr f p x) (inv (compute-eq-equiv-comp-equiv X Y Z e e'))) ∙
   ( tr-concat (eq-equiv X Y e) (eq-equiv Y Z e') x)
 
 distributive-tr-equiv-equiv-comp :

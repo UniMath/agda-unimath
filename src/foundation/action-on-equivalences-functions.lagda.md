@@ -116,7 +116,7 @@ distributive-eq-ap-equiv-comp-equiv :
   (e : X ≃ Y) (e' : Y ≃ Z) →
   eq-ap-equiv f (e' ∘e e) ＝ (eq-ap-equiv f e ∙ eq-ap-equiv f e')
 distributive-eq-ap-equiv-comp-equiv f {X} {Y} {Z} e e' =
-    ( ap (ap f) (inv (compute-eq-equiv-equiv-comp X Y Z e e'))) ∙
+    ( ap (ap f) (inv (compute-eq-equiv-comp-equiv X Y Z e e'))) ∙
     ( ap-concat f (eq-equiv X Y e) (eq-equiv Y Z e'))
 
 distributive-ap-equiv-comp-equiv :
