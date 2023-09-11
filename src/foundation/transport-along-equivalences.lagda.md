@@ -8,6 +8,7 @@ module foundation.transport-along-equivalences where
 
 ```agda
 open import foundation.action-on-equivalences-functions
+open import foundation.action-on-equivalences-type-families
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality

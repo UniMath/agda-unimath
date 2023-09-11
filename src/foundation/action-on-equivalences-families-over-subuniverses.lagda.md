@@ -8,7 +8,10 @@ module foundation.action-on-equivalences-families-over-subuniverses where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
+open import foundation.equivalence-induction
+open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.sets
 open import foundation.subuniverses
@@ -34,7 +37,33 @@ indexed by types of `P` has an
 [action on equivalences](foundation.action-on-equivalences-functions.md)
 obtained by using the [univalence axiom](foundation.univalence.md).
 
-## Definition
+## Definitions
+
+### The action on equivalences of a family of types over a subuniverse
+
+```agda
+module _
+  { l1 l2 l3 : Level}
+  ( P : subuniverse l1 l2) (B : type-subuniverse P → UU l3)
+  where
+
+  unique-action-on-equivalences-family-of-types-subuniverse :
+    (X : type-subuniverse P) →
+    is-contr (fiber (ev-id-equiv-subuniverse P X {λ Y e → B X ≃ B Y}) id-equiv)
+  unique-action-on-equivalences-family-of-types-subuniverse X =
+    is-contr-map-ev-id-equiv-subuniverse P X (λ Y e → B X ≃ B Y) id-equiv
+
+  action-on-equivalences-family-of-types-subuniverse :
+    (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y
+  action-on-equivalences-family-of-types-subuniverse X =
+    pr1 (center (unique-action-on-equivalences-family-of-types-subuniverse X))
+
+  compute-id-equiv-action-on-equivalences-family-of-types-subuniverse :
+    (X : type-subuniverse P) →
+    action-on-equivalences-family-of-types-subuniverse X X id-equiv ＝ id-equiv
+  compute-id-equiv-action-on-equivalences-family-of-types-subuniverse X =
+    pr2 (center (unique-action-on-equivalences-family-of-types-subuniverse X))
+```
 
 ```agda
 module _
@@ -50,10 +79,46 @@ module _
 
 ## Properties
 
+### The action on equivalences of a family of types over a subuniverse fits in a commuting square with `equiv-eq`
+
+We claim that the square
+
+```text
+                   ap B
+        (X ＝ Y) --------> (B X ＝ B Y)
+           |                    |
+  equiv-eq |                    | equiv-eq
+           V                    V
+        (X ≃ Y) ---------> (B X ≃ B Y).
+                     B
+```
+
+commutes for any two types `X Y : type-subuniverse P` and any family of types
+`B` over the subuniverse `P`.
+
 ```agda
+coherence-square-action-on-equivalences-family-of-types-subuniverse :
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (B : type-subuniverse P → UU l3) →
+  (X Y : type-subuniverse P) →
+  coherence-square-maps
+    ( ap B {X} {Y})
+    ( equiv-eq-subuniverse P X Y)
+    ( equiv-eq)
+    ( action-on-equivalences-family-of-types-subuniverse P B X Y)
+coherence-square-action-on-equivalences-family-of-types-subuniverse
+  P B X .X refl =
+  compute-id-equiv-action-on-equivalences-family-of-types-subuniverse P B X
+```
+
+```agda
+module _
+  { l1 l2 l3 : Level}
+  ( P : subuniverse l1 l2) (B : type-subuniverse P → UU l3)
+  where
+
   preserves-id-equiv-action-equiv-family-on-subuniverse :
     (X : type-subuniverse P) →
-    action-equiv-family-on-subuniverse X X id-equiv ＝ id-equiv
+    action-equiv-family-on-subuniverse P B X X id-equiv ＝ id-equiv
   preserves-id-equiv-action-equiv-family-on-subuniverse X =
     ( ap (equiv-tr B)
       ( is-injective-map-equiv
@@ -77,7 +142,7 @@ module _
     ( X : type-subuniverse P)
     ( F : (Y : type-subuniverse P) → B X ≃ B Y → UU l4) →
     F X id-equiv → (Y : type-subuniverse P) (e : pr1 X ≃ pr1 Y) →
-    F Y (action-equiv-family-on-subuniverse X Y e)
+    F Y (action-equiv-family-on-subuniverse P B X Y e)
   Ind-action-equiv-family-on-subuniverse X F p Y e =
     Ind-path-action-equiv-family-on-subuniverse X F p Y
       ( eq-equiv-subuniverse P e)
@@ -89,13 +154,13 @@ module _
         ( (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y)
         ( λ D → (X : type-subuniverse P) → D X X id-equiv ＝ id-equiv))
   pr1 (pr1 (is-contr-preserves-id-action-equiv-family-on-subuniverse H)) =
-    action-equiv-family-on-subuniverse
+    action-equiv-family-on-subuniverse P B
   pr2 (pr1 (is-contr-preserves-id-action-equiv-family-on-subuniverse H)) =
     preserves-id-equiv-action-equiv-family-on-subuniverse
   pr2 (is-contr-preserves-id-action-equiv-family-on-subuniverse H) (D , p) =
     eq-pair-Σ
       ( eq-htpy (λ X → eq-htpy (λ Y → eq-htpy (λ e →
-        lemma2 action-equiv-family-on-subuniverse D
+        lemma2 (action-equiv-family-on-subuniverse P B) D
           ( λ X →
             preserves-id-equiv-action-equiv-family-on-subuniverse X ∙ inv (p X))
           X Y e))))
