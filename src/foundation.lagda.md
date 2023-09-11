@@ -251,7 +251,6 @@ open import foundation.subtypes public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
 open import foundation.symmetric-binary-relations public
-open import foundation.symmetric-cores-binary-relations public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
