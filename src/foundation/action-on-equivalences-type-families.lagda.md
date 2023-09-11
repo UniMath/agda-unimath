@@ -127,6 +127,16 @@ compute-action-equiv-family-id {l} {X} {Y} e =
   (ap equiv-eq (ap-id (eq-equiv X Y e))) ∙ (is-section-eq-equiv e)
 ```
 
+### The action on equivalences of a constant map is constant
+
+```agda
+compute-action-equiv-family-const :
+  {l1 l2 : Level} (B : UU l2) {X Y : UU l1}
+  (e : X ≃ Y) → (action-equiv-family (const (UU l1) (UU l2) B) e) ＝ id-equiv
+compute-action-equiv-family-const B {X} {Y} e =
+  ap equiv-eq (compute-action-equiv-function-const B e)
+```
+
 ### The action on equivalences of a composite function is the composite of the actions
 
 ```agda
@@ -146,16 +156,6 @@ distributive-action-equiv-family-comp :
   action-equiv-family g ∘ action-equiv-family f
 distributive-action-equiv-family-comp g f {X} {Y} e =
   ap equiv-eq (distributive-action-equiv-function-comp g f {X} {Y} e)
-```
-
-### The action on equivalences of a constant map is constant
-
-```agda
-compute-action-equiv-family-const :
-  {l1 l2 : Level} (B : UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → (action-equiv-family (const (UU l1) (UU l2) B) e) ＝ id-equiv
-compute-action-equiv-family-const B {X} {Y} e =
-  ap equiv-eq (compute-action-equiv-function-const B e)
 ```
 
 ### The action on equivalences of any map preserves composition of equivalences
