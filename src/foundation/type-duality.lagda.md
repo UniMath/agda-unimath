@@ -26,6 +26,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -116,18 +117,18 @@ is-emb-map-type-duality
             ≃ ( (a : A) →
                 Σ X (λ x → type-is-small (H (f x) a)) ≃
                 Σ Y (λ y → type-is-small (H (g y) a)))
-              by equiv-map-Π (λ a → equiv-univalence)
+              by equiv-Π-equiv-family (λ a → equiv-univalence)
             ≃ ( (a : A) →
                 fiber f a ≃ Σ Y (λ y → type-is-small (H (g y) a)))
               by
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ a →
                   equiv-precomp-equiv
                     ( equiv-tot (λ x → equiv-is-small (H (f x) a)))
                     ( Σ Y (λ y → type-is-small (H (g y) a))))
             ≃ ( (a : A) → fiber f a ≃ fiber g a)
               by
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ a →
                   equiv-postcomp-equiv
                     ( equiv-tot (λ y → inv-equiv (equiv-is-small (H (g y) a))))
@@ -225,7 +226,7 @@ module _
   is-equiv-map-type-duality :
     is-equiv (map-type-duality (is-locally-small-is-small H))
   is-equiv-map-type-duality =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-type-duality
       is-section-map-inv-type-duality
       is-retraction-map-inv-type-duality
@@ -290,7 +291,7 @@ is-retraction-Pr1 {A = A} (pair X f) =
 is-equiv-Fiber :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fiber {l1 ⊔ l2} A)
 is-equiv-Fiber l2 A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( Pr1 A)
     ( is-section-Pr1 {l2 = l2})
     ( is-retraction-Pr1 {l2 = l2})
@@ -303,7 +304,7 @@ pr2 (equiv-Fiber l2 A) = is-equiv-Fiber l2 A
 is-equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
 is-equiv-Pr1 {l1} l2 A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( Fiber A)
     ( is-retraction-Pr1 {l2 = l2})
     ( is-section-Pr1 {l2 = l2})

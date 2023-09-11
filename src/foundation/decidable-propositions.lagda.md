@@ -16,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
@@ -29,7 +30,6 @@ open import foundation-core.coproduct-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
@@ -106,7 +106,7 @@ module _
   is-equiv-map-equiv-bool-Decidable-Prop' :
     is-equiv map-equiv-bool-Decidable-Prop'
   is-equiv-map-equiv-bool-Decidable-Prop' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-bool-Decidable-Prop'
       is-section-map-inv-equiv-bool-Decidable-Prop'
       is-retraction-map-inv-equiv-bool-Decidable-Prop'
@@ -170,6 +170,10 @@ pr2 (iff-universes-Decidable-Prop l l' P) p =
 is-set-Decidable-Prop : {l : Level} → is-set (Decidable-Prop l)
 is-set-Decidable-Prop {l} =
   is-set-equiv bool equiv-bool-Decidable-Prop is-set-bool
+
+Decidable-Prop-Set : (l : Level) → Set (lsuc l)
+pr1 (Decidable-Prop-Set l) = Decidable-Prop l
+pr2 (Decidable-Prop-Set l) = is-set-Decidable-Prop
 ```
 
 ### Extensionality of decidable propositions
@@ -230,6 +234,13 @@ abstract
     is-decidable (type-Prop P) → is-finite (type-Prop P)
   is-finite-is-decidable-Prop P x =
     is-finite-count (count-is-decidable-Prop P x)
+
+is-finite-type-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) → is-finite (type-Decidable-Prop P)
+is-finite-type-Decidable-Prop P =
+  is-finite-is-decidable-Prop
+    ( prop-Decidable-Prop P)
+    ( is-decidable-Decidable-Prop P)
 ```
 
 ### The type of decidable propositions of any universe level is finite

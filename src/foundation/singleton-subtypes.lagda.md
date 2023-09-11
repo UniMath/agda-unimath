@@ -12,12 +12,12 @@ open import foundation.dependent-pair-types
 open import foundation.inhabited-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.subtypes
 ```
 
 </details>

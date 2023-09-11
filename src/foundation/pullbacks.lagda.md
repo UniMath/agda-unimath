@@ -112,7 +112,7 @@ abstract
     is-equiv-right-factor-htpy
       ( cone-map f g c)
       ( map-canonical-pullback-exponent f g T)
-      ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
+      ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
       ( triangle-map-canonical-pullback-exponent T f g c)
       ( is-equiv-map-canonical-pullback-exponent f g T)
       ( universal-property-pullback-is-pullback f g c is-pb-c T)
@@ -170,7 +170,7 @@ abstract
     {l : Level} {A : UU l} (x y : A) →
     is-pullback (const unit A x) (const unit A y) (cone-Id x y)
   is-pullback-cone-Id x y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-gap-cone-Id x y)
       ( is-section-inv-gap-cone-Id x y)
       ( is-retraction-inv-gap-cone-Id x y)
@@ -209,7 +209,7 @@ abstract
     {l : Level} {A : UU l} (t : A × A) →
     is-pullback (const unit (A × A) t) (diagonal A) (cone-Id' t)
   is-pullback-cone-Id' t =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-gap-cone-Id' t)
       ( is-section-inv-gap-cone-Id' t)
       ( is-retraction-inv-gap-cone-Id' t)
@@ -656,7 +656,7 @@ abstract
     (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
     is-equiv (map-canonical-pullback-Π f g)
   is-equiv-map-canonical-pullback-Π f g =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-map-canonical-pullback-Π f g)
       ( is-section-inv-map-canonical-pullback-Π f g)
       ( is-retraction-inv-map-canonical-pullback-Π f g)
@@ -692,7 +692,7 @@ abstract
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))
       ( triangle-map-canonical-pullback-Π f g c)
       ( is-equiv-map-canonical-pullback-Π f g)
-      ( is-equiv-map-Π _ is-pb-c)
+      ( is-equiv-map-equiv-Π-equiv-family _ is-pb-c)
 ```
 
 ```agda

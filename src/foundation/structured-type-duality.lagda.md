@@ -42,7 +42,7 @@ equiv-Fiber-structure {l1} {l3} l P B =
     ( equiv-Σ
       ( λ C → (b : B) → P (C b))
       ( equiv-Fiber l B)
-      ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
+      ( λ f → equiv-Π-equiv-family (λ b → id-equiv)))) ∘e
   ( inv-associative-Σ
     ( UU (l1 ⊔ l))
     ( λ A → A → B)

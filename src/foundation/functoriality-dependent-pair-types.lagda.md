@@ -9,14 +9,14 @@ open import foundation-core.functoriality-dependent-pair-types public
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.dependent-identifications
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies

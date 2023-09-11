@@ -165,7 +165,7 @@ module _
     is-equiv-map-compute-fiber-tot :
       (t : Σ A C) → is-equiv (map-compute-fiber-tot t)
     is-equiv-map-compute-fiber-tot t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-compute-fiber-tot t)
         ( is-section-map-inv-compute-fiber-tot t)
         ( is-retraction-map-inv-compute-fiber-tot t)
@@ -178,7 +178,7 @@ module _
     is-equiv-map-inv-compute-fiber-tot :
       (t : Σ A C) → is-equiv (map-inv-compute-fiber-tot t)
     is-equiv-map-inv-compute-fiber-tot t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-compute-fiber-tot t)
         ( is-retraction-map-inv-compute-fiber-tot t)
         ( is-section-map-inv-compute-fiber-tot t)
@@ -270,7 +270,7 @@ module _
     is-equiv-fiber-map-Σ-map-base-fiber :
       (t : Σ B C) → is-equiv (fiber-map-Σ-map-base-fiber t)
     is-equiv-fiber-map-Σ-map-base-fiber t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fiber-fiber-map-Σ-map-base t)
         ( is-section-fiber-fiber-map-Σ-map-base t)
         ( is-retraction-fiber-fiber-map-Σ-map-base t)

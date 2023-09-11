@@ -71,7 +71,7 @@ module _
     is-equiv-eq-pair :
       (s t : A × B) → is-equiv (eq-pair' {s} {t})
     is-equiv-eq-pair s t =
-      is-equiv-has-inverse pair-eq is-section-pair-eq is-retraction-pair-eq
+      is-equiv-is-invertible pair-eq is-section-pair-eq is-retraction-pair-eq
 
   equiv-eq-pair :
     (s t : A × B) → Eq-prod s t ≃ (s ＝ t)
@@ -82,7 +82,7 @@ module _
     is-equiv-pair-eq :
       (s t : A × B) → is-equiv (pair-eq {s} {t})
     is-equiv-pair-eq s t =
-      is-equiv-has-inverse eq-pair' is-retraction-pair-eq is-section-pair-eq
+      is-equiv-is-invertible eq-pair' is-retraction-pair-eq is-section-pair-eq
 
   equiv-pair-eq :
     (s t : A × B) → (s ＝ t) ≃ Eq-prod s t

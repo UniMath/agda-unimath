@@ -91,9 +91,9 @@ module _
 
 ### The `is-pullback` property
 
-The proposition is-pullback is the assertion that the gap map is an equivalence.
-Note that this proposition is small, whereas the universal property is a large
-proposition.
+The proposition `is-pullback` is the assertion that the gap map is an
+equivalence. Note that this proposition is small, whereas the universal property
+is a large proposition.
 
 ```agda
 module _
@@ -120,6 +120,14 @@ module _
   pr1 (pr2 (map-canonical-pullback (hA , hB , _) (a' , b' , _))) = hB b'
   pr2 (pr2 (map-canonical-pullback (hA , hB , hX , HA , HB) (a' , b' , p'))) =
     (HA a') ∙ ((ap hX p') ∙ (inv (HB b')))
+
+  map-is-pullback :
+    {l4 l4' : Level} {C : UU l4} {C' : UU l4'} →
+    (c : cone f g C) (c' : cone f' g' C') →
+    is-pullback f g c → is-pullback f' g' c' →
+    hom-cospan f' g' f g → C' → C
+  map-is-pullback c c' is-pb-c is-pb-c' h x =
+    map-inv-is-equiv is-pb-c (map-canonical-pullback h (gap f' g' c' x))
 ```
 
 ## Properties
@@ -284,7 +292,7 @@ module _
     is-pullback-cone-canonical-pullback-Σ :
       is-pullback f (pr1 {B = Q}) cone-canonical-pullback-Σ
     is-pullback-cone-canonical-pullback-Σ =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         inv-gap-cone-canonical-pullback-Σ
         is-section-inv-gap-cone-canonical-pullback-Σ
         is-retraction-inv-gap-cone-canonical-pullback-Σ
@@ -318,7 +326,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) → is-equiv (map-commutative-canonical-pullback f g)
   is-equiv-map-commutative-canonical-pullback f g =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-commutative-canonical-pullback g f)
       ( inv-inv-map-commutative-canonical-pullback f g)
       ( inv-inv-map-commutative-canonical-pullback g f)
@@ -454,7 +462,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
     (f : A → X) (g : B → X) → is-equiv (map-fold-cone f g)
   is-equiv-map-fold-cone f g =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( inv-map-fold-cone f g)
       ( is-section-inv-map-fold-cone f g)
       ( is-retraction-inv-map-fold-cone f g)
