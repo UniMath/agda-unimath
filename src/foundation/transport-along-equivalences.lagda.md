@@ -110,7 +110,7 @@ is-section-map-tr-equiv f {X} {Y} e x =
   ( ap
     ( λ p → tr f p (map-tr-equiv f e x))
     ( inv (commutativity-inv-eq-equiv X Y e))) ∙
-  ( is-section-tr f (eq-equiv X Y e) x)
+  ( is-retraction-inv-tr f (eq-equiv X Y e) x)
 
 is-retraction-map-tr-equiv :
   {l1 l2 : Level} (f : UU l1 → UU l2)
@@ -120,7 +120,7 @@ is-retraction-map-tr-equiv f {X} {Y} e x =
   ( ap
     ( map-tr-equiv f e ∘ (λ p → tr f p x))
     ( inv (commutativity-inv-eq-equiv X Y e))) ∙
-  ( is-retraction-tr f (eq-equiv X Y e) x)
+  ( is-section-inv-tr f (eq-equiv X Y e) x)
 ```
 
 ### Transposing transport along the inverse of an equivalence
