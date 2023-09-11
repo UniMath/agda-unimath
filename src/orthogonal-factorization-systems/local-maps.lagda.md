@@ -23,7 +23,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-function-types
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type

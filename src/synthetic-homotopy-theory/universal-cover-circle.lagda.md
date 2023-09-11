@@ -28,7 +28,8 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.transport
+open import foundation.structure-identity-principle
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels

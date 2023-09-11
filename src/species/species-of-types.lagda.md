@@ -9,7 +9,7 @@ module species.species-of-types where
 ```agda
 open import foundation.cartesian-product-types
 open import foundation.equivalences
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 ```

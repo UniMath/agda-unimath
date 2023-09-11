@@ -12,7 +12,7 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.pullbacks
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans

@@ -10,6 +10,8 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.action-on-equivalences-families-over-subuniverses public
+open import foundation.action-on-equivalences-functions public
 open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
@@ -256,7 +258,8 @@ open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
-open import foundation.transport public
+open import foundation.transport-along-equivalences public
+open import foundation.transport-along-identifications public
 open import foundation.trivial-relaxed-sigma-decompositions public
 open import foundation.trivial-sigma-decompositions public
 open import foundation.truncated-equality public
@@ -286,7 +289,6 @@ open import foundation.uniqueness-truncation public
 open import foundation.unit-type public
 open import foundation.unital-binary-operations public
 open import foundation.univalence public
-open import foundation.univalence-action-on-equivalences public
 open import foundation.univalence-implies-function-extensionality public
 open import foundation.univalent-type-families public
 open import foundation.universal-property-booleans public

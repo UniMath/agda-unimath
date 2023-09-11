@@ -11,7 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.symmetric-operations
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 open import foundation.unordered-pairs-of-types
