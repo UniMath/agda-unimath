@@ -96,11 +96,11 @@ equiv-tr-refl B = refl
 ### Substitution law for transport
 
 ```agda
-substitution-tr :
+substitution-law-tr :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
   {x y : X} (p : x ＝ y) {x' : B (f x)} →
   tr B (ap f p) x' ＝ tr (B ∘ f) p x'
-substitution-tr B f refl = refl
+substitution-law-tr B f refl = refl
 ```
 
 ### Coherences and algebraic identities for `tr²`

@@ -149,12 +149,12 @@ substitution-map-tr-equiv :
   (e : X ≃ Y) → map-tr-equiv g (ap-equiv f e) ~ map-tr-equiv (g ∘ f) e
 substitution-map-tr-equiv g f {X} {Y} e X' =
   ( ap (λ p → tr g p X') (is-retraction-eq-equiv (eq-ap-equiv f e))) ∙
-  ( substitution-tr g f (eq-equiv X Y e))
+  ( substitution-law-tr g f (eq-equiv X Y e))
 
-substitution-tr-equiv :
+substitution-law-tr-equiv :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
   (e : X ≃ Y) → tr-equiv g (ap-equiv f e) ＝ tr-equiv (g ∘ f) e
-substitution-tr-equiv g f e = eq-htpy-equiv (substitution-map-tr-equiv g f e)
+substitution-law-tr-equiv g f e = eq-htpy-equiv (substitution-map-tr-equiv g f e)
 ```
 
 ### Transporting along the action on equivalences of a function
