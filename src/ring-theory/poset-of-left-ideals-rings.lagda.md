@@ -7,6 +7,7 @@ module ring-theory.poset-of-left-ideals-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -65,7 +66,7 @@ module _
       ( subset-left-ideal-Ring R J)
 
   refl-leq-left-ideal-Ring :
-    {l2 : Level} (I : left-ideal-Ring l2 R) → leq-left-ideal-Ring I I
+    {l2 : Level} → is-reflexive (leq-left-ideal-Ring {l2})
   refl-leq-left-ideal-Ring I =
     refl-leq-subtype (subset-left-ideal-Ring R I)
 
@@ -74,7 +75,9 @@ module _
     (I : left-ideal-Ring l2 R)
     (J : left-ideal-Ring l3 R)
     (K : left-ideal-Ring l4 R) →
-    leq-left-ideal-Ring J K → leq-left-ideal-Ring I J → leq-left-ideal-Ring I K
+    leq-left-ideal-Ring J K →
+    leq-left-ideal-Ring I J →
+    leq-left-ideal-Ring I K
   transitive-leq-left-ideal-Ring I J K =
     transitive-leq-subtype
       ( subset-left-ideal-Ring R I)
@@ -82,8 +85,7 @@ module _
       ( subset-left-ideal-Ring R K)
 
   antisymmetric-leq-left-ideal-Ring :
-    {l2 : Level} (I J : left-ideal-Ring l2 R) →
-    leq-left-ideal-Ring I J → leq-left-ideal-Ring J I → I ＝ J
+    {l2 : Level} → is-antisymmetric (leq-left-ideal-Ring {l2})
   antisymmetric-leq-left-ideal-Ring I J U V =
     eq-has-same-elements-left-ideal-Ring R I J (λ x → U x , V x)
 ```

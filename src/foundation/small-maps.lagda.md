@@ -28,7 +28,7 @@ A map is said to be small if its fibers are small.
 is-small-map :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (A → B) → UU (lsuc l ⊔ l1 ⊔ l2)
-is-small-map l {B = B} f = (b : B) → is-small l (fib f b)
+is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
 ```
 
 ## Properties
@@ -37,10 +37,10 @@ is-small-map l {B = B} f = (b : B) → is-small l (fib f b)
 
 ```agda
 abstract
-  is-small-fib :
+  is-small-fiber :
     (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-    is-small l A → is-small l B → (b : B) → is-small l (fib f b)
-  is-small-fib l f H K b =
+    is-small l A → is-small l B → (b : B) → is-small l (fiber f b)
+  is-small-fiber l f H K b =
     is-small-Σ H (λ a → is-locally-small-is-small K (f a) b)
 ```
 
@@ -52,7 +52,7 @@ abstract
     (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-prop (is-small-map l f)
   is-prop-is-small-map l f =
-    is-prop-Π (λ x → is-prop-is-small l (fib f x))
+    is-prop-Π (λ x → is-prop-is-small l (fiber f x))
 
 is-small-map-Prop :
   (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →

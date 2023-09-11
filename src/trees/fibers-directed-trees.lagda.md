@@ -28,7 +28,7 @@ open import trees.directed-trees
 open import trees.morphisms-directed-trees
 ```
 
-<details>
+</details>
 
 ## Idea
 

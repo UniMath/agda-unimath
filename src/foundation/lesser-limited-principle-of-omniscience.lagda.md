@@ -31,7 +31,7 @@ or `f n ＝ 0` for all odd `n`.
 ```agda
 LLPO : UU lzero
 LLPO =
-  (f : ℕ → Fin 2) → is-prop (fib f (one-Fin 1)) →
+  (f : ℕ → Fin 2) → is-prop (fiber f (one-Fin 1)) →
   type-disj-Prop
     ( Π-Prop ℕ
       ( λ n →

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Run this script:
+# $ ./scripts/max_line_length_conventions.py fileName.md
+
+# * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
 import collections
 import os
@@ -9,7 +13,7 @@ import utils
 named_module = r'^module\s\S+\swhere$'
 open_import = r'^\s*open import '
 # Forgives lines like this `( ( {{ my-very.long-token.that-is-too-long}})) =`
-irreducible_line1 = r'^\s*([({] ?)*[^\s;{}()@"]+[)}]*( ?[;:=→])?$'
+irreducible_line1 = r'^\s*([({⦃] ?)*[^\s;{}()@"]+[)}⦄]*( ?[^a-zA-Z\d\s"_({⦃][^\s"_.;(){}⦃@]?)?$'
 
 forgive_patterns = (named_module, open_import, irreducible_line1)
 

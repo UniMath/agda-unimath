@@ -167,7 +167,7 @@ module _
             ( equiv-precomp-Π e (type-trunc-Set ∘ B))
             ( type-trunc-Set ((x : A) → B x)))
           ( λ f →
-            equiv-map-Π
+            equiv-Π-equiv-family
               ( λ h →
                 ( ( inv-equiv equiv-funext) ∘e
                   ( equiv-precomp-Π e

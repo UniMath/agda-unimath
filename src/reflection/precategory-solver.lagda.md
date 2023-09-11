@@ -30,20 +30,20 @@ open import reflection.type-checking-monad
 
 ## Idea
 
-This module defines a macro, `solve-Precat!` that solves any equation between
-morphisms of a precategory, as long as it's derivable from the axioms of
+This module defines a macro, `solve-Precategory!` that solves any equation
+between morphisms of a precategory, as long as it's derivable from the axioms of
 precategories.
 
-To do this, we introduce the type `Precat-Expr`, which is a syntactic
+To do this, we introduce the type `Precategory-Expr`, which is a syntactic
 representation of a morphism. Then, noting that every morphism is represented by
-an expression (through `in-Precat-Expr`), it will be sufficient to prove an
+an expression (through `in-Precategory-Expr`), it will be sufficient to prove an
 equality of expresions to prove an equality of morphisms. However, if two
 morphisms are equal, then their normalized expressions are equal by reflexivity,
-so that the problem is reduced to finding which `Precat-Expr` represents a given
-morphism.
+so that the problem is reduced to finding which `Precategory-Expr` represents a
+given morphism.
 
-This last problem, as well as the application of the `solve-Precat-Expr` lemma,
-is what the macro automates.
+This last problem, as well as the application of the `solve-Precategory-Expr`
+lemma, is what the macro automates.
 
 ## Definition
 
@@ -167,11 +167,11 @@ module _
 
 ```agda
 private
-  infixr 10 _∷_
+  infixr 11 _∷_
   pattern _∷_ x xs = cons x xs
   _++_ : {l : Level} {A : UU l} → list A → list A → list A
   _++_ = concat-list
-  infixr 5 _++_
+  infixr 10 _++_
 
   pattern apply-pr1 xs =
     def (quote pr1)

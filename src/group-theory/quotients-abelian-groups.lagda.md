@@ -172,7 +172,7 @@ module _
       ( eq-rel-congruence-Subgroup-Ab A H)
 
   reflecting-map-quotient-hom-Ab :
-    reflecting-map-Eq-Rel
+    reflecting-map-Equivalence-Relation
       ( eq-rel-congruence-Subgroup-Ab A H)
       ( type-quotient-Ab)
   reflecting-map-quotient-hom-Ab =
@@ -197,7 +197,7 @@ module _
   zero-quotient-Ab = map-quotient-hom-Ab (zero-Ab A)
 
   binary-hom-add-quotient-Ab :
-    binary-hom-Eq-Rel
+    binary-hom-Equivalence-Relation
       ( eq-rel-congruence-Subgroup-Ab A H)
       ( eq-rel-congruence-Subgroup-Ab A H)
       ( eq-rel-congruence-Subgroup-Ab A H)
@@ -228,7 +228,7 @@ module _
       ( normal-subgroup-Subgroup-Ab A H)
 
   hom-neg-quotient-Ab :
-    hom-Eq-Rel
+    hom-Equivalence-Relation
       ( eq-rel-congruence-Subgroup-Ab A H)
       ( eq-rel-congruence-Subgroup-Ab A H)
   hom-neg-quotient-Ab =

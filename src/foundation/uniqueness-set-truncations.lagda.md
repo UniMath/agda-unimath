@@ -45,7 +45,7 @@ module _
       is-equiv h
     is-equiv-is-set-truncation-is-set-truncation Sf Sg =
       is-equiv-is-set-quotient-is-set-quotient
-        ( mere-eq-Eq-Rel A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( C)
@@ -61,7 +61,7 @@ module _
     is-set-truncation-is-equiv-is-set-truncation Sg Eh =
       is-set-truncation-is-set-quotient B f
         ( is-set-quotient-is-equiv-is-set-quotient
-          ( mere-eq-Eq-Rel A)
+          ( mere-eq-Equivalence-Relation A)
           ( B)
           ( reflecting-map-mere-eq B f)
           ( C)
@@ -77,7 +77,7 @@ module _
     is-set-truncation-is-set-truncation-is-equiv Eh Sf =
       is-set-truncation-is-set-quotient C g
         ( is-set-quotient-is-set-quotient-is-equiv
-          ( mere-eq-Eq-Rel A)
+          ( mere-eq-Equivalence-Relation A)
           ( B)
           ( reflecting-map-mere-eq B f)
           ( C)
@@ -102,7 +102,7 @@ module _
       is-contr (Σ (type-Set B ≃ type-Set C) (λ e → (map-equiv e ∘ f) ~ g))
     uniqueness-set-truncation =
       uniqueness-set-quotient
-        ( mere-eq-Eq-Rel A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( is-set-quotient-is-set-truncation B f Sf)

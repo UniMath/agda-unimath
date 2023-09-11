@@ -45,7 +45,7 @@ of vectors and show that they are equivalent.
 ### The type of listed vectors
 
 ```agda
-infixr 5 _∷_
+infixr 10 _∷_
 
 data vec {l : Level} (A : UU l) : ℕ → UU l where
   empty-vec : vec A zero-ℕ
@@ -78,6 +78,7 @@ module _
   component-vec (succ-ℕ n) (a ∷ v) (inl k) = component-vec n v k
   component-vec (succ-ℕ n) (a ∷ v) (inr k) = a
 
+  infix 6 _∈-vec_
   data _∈-vec_ : {n : ℕ} → A → vec A n → UU l where
     is-head : {n : ℕ} (a : A) (l : vec A n) → a ∈-vec (a ∷ l)
     is-in-tail : {n : ℕ} (a x : A) (l : vec A n) → a ∈-vec l → a ∈-vec (x ∷ l)
@@ -196,7 +197,7 @@ module _
   is-equiv-Eq-eq-vec :
     (n : ℕ) → (u v : vec A n) → is-equiv (Eq-eq-vec n u v)
   is-equiv-Eq-eq-vec n u v =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( eq-Eq-vec n u v)
       ( is-section-eq-Eq-vec n u v)
       ( is-retraction-eq-Eq-vec n u v)
@@ -243,7 +244,7 @@ module _
   is-equiv-listed-vec-functional-vec :
     (n : ℕ) → is-equiv (listed-vec-functional-vec n)
   is-equiv-listed-vec-functional-vec n =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( functional-vec-vec n)
       ( is-section-functional-vec-vec n)
       ( is-retraction-functional-vec-vec n)
@@ -251,7 +252,7 @@ module _
   is-equiv-functional-vec-vec :
     (n : ℕ) → is-equiv (functional-vec-vec n)
   is-equiv-functional-vec-vec n =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( listed-vec-functional-vec n)
       ( is-retraction-functional-vec-vec n)
       ( is-section-functional-vec-vec n)
@@ -270,7 +271,7 @@ module _
   is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-head .x l) =
     (inr star) , refl
   is-in-functional-vec-is-in-vec (succ-ℕ n) (y ∷ l) x (is-in-tail .x x₁ l I) =
-    inl (pr1 (is-in-functional-vec-is-in-vec n l x I)),
+    inl (pr1 (is-in-functional-vec-is-in-vec n l x I)) ,
     pr2 (is-in-functional-vec-is-in-vec n l x I)
 
   is-in-vec-is-in-functional-vec :

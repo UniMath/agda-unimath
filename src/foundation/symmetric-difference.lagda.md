@@ -96,7 +96,7 @@ module _
     right-cases-equiv-symmetric-difference P Q x q
       ( is-decidable-Decidable-Prop (P x))
   pr2 (equiv-symmetric-difference P Q) =
-    is-equiv-has-inverse i r s
+    is-equiv-is-invertible i r s
     where
     i :
       ( type-decidable-subtype (symmetric-difference-decidable-subtype P Q)) +

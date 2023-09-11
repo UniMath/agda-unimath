@@ -172,7 +172,7 @@ module _
   pr1 equiv-coproduct-Σ-extension-species-subuniverse =
     map-coproduct-Σ-extension-species-subuniverse
   pr2 equiv-coproduct-Σ-extension-species-subuniverse =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-coproduct-Σ-extension-species-subuniverse
       is-section-map-inv-coproduct-Σ-extension-species-subuniverse
       is-retraction-map-inv-coproduct-Σ-extension-species-subuniverse

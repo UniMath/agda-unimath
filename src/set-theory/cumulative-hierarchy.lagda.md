@@ -621,9 +621,9 @@ needed.
   pair-cumulative-hierarchy x y =
     set-pseudo-cumulative-hierarchy V bool-map
     where
-      bool-map : raise-bool l1 → type-pseudo-cumulative-hierarchy V
-      bool-map (map-raise true) = x
-      bool-map (map-raise false) = y
+    bool-map : raise-bool l1 → type-pseudo-cumulative-hierarchy V
+    bool-map (map-raise true) = x
+    bool-map (map-raise false) = y
 
   pair-axiom-cumulative-hierarchy :
     ( x y v : type-pseudo-cumulative-hierarchy V) →
@@ -661,12 +661,12 @@ needed.
   infinity-cumulative-hierarchy =
     set-pseudo-cumulative-hierarchy V ℕ-map
     where
-      ℕ-map : raise l1 ℕ → type-pseudo-cumulative-hierarchy V
-      ℕ-map (map-raise zero-ℕ) = empty-set-cumulative-hierarchy
-      ℕ-map (map-raise (succ-ℕ x)) =
-        pair-cumulative-hierarchy
-          ( ℕ-map (map-raise x))
-          ( singleton-cumulative-hierarchy (ℕ-map (map-raise x)))
+    ℕ-map : raise l1 ℕ → type-pseudo-cumulative-hierarchy V
+    ℕ-map (map-raise zero-ℕ) = empty-set-cumulative-hierarchy
+    ℕ-map (map-raise (succ-ℕ x)) =
+      pair-cumulative-hierarchy
+        ( ℕ-map (map-raise x))
+        ( singleton-cumulative-hierarchy (ℕ-map (map-raise x)))
 
   infinity-axiom-cumulative-hierarchy :
     ( ∈-cumulative-hierarchy
@@ -757,9 +757,10 @@ needed.
 
 ## References
 
-1. Institute for Advanced Study. Homotopy Type Theory: Univalent Foundations of
-   Mathematics.
-
-1. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg
+1. Univalent Foundations Project, _Homotopy Type Theory – Univalent Foundations
+   of Mathematics_ (2013) ([website](https://homotopytypetheory.org/book/),
+   [arXiv:1308.0729](https://arxiv.org/abs/1308.0729),
+   [DOI:10.48550](https://doi.org/10.48550/arXiv.1308.0729))
+2. Tom de Jong, in collaboration with Nicolai Kraus, Fredrik Nordvall Forsberg
    and Chuangjie Xu.
    <https://www.cs.bham.ac.uk/~mhe/agda/UF.CumulativeHierarchy.html>

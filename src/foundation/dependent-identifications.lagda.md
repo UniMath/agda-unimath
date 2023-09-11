@@ -10,13 +10,13 @@ open import foundation-core.dependent-identifications public
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.transport
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 ```
 
 </details>
@@ -81,7 +81,7 @@ module _
     (q' : dependent-identification B q x' y') →
     is-equiv (map-compute-dependent-identification² α p' q')
   is-equiv-map-compute-dependent-identification² α p' q' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-compute-dependent-identification² α p' q')
       ( is-section-map-inv-compute-dependent-identification² α p' q')
       ( is-retraction-map-inv-compute-dependent-identification² α p' q')

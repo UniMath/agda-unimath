@@ -9,6 +9,7 @@ module univalent-combinatorics.partitions where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalence-extensionality
@@ -33,18 +34,24 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A partition of a finite type `X` can be defined in several equivalent ways:
+A **partition** of a [finite type](univalent-combinatorics.finite-types.md) `X`
+can be defined in several equivalent ways:
 
-- A partition is a subset `P` of the powerset of `X` such that each `U ⊆ X` in
-  `P` is inhabited and each element `x : X` is in exactly one subset `U ⊆ X` in
-  `P`.
-- A partition is an equivalence relation on `X`
+- A partition is a [subset](foundation.subtypes.md) `P` of the
+  [powerset](foundation.powersets.md) of `X` such that each `U ⊆ X` in `P` is
+  [inhabited](foundation.inhabited-types.md) and each element `x : X` is in
+  exactly one subset `U ⊆ X` in `P`.
+- A partition is an
+  [equivalence relation](foundation-core.equivalence-relations.md) on `X`
 - A partition is a decomposition of `X` into a type of the form `Σ A B` where
   `A` is finite and `B` is a family of inhabited finite types, i.e., it consists
-  of such `A` and `B` and an equivalence `X ≃ Σ A B`.
+  of such `A` and `B` and an [equivalence](foundation-core.equivalences.md)
+  `X ≃ Σ A B`.
 
-Note that the last description is subtly different from the notion of unlabeled
-partition (i.e., Ferrers diagram), because it only uses mere equivalences.
+Note that the last description is subtly different from the notion of
+[unlabeled partition](univalent-combinatorics.ferrers-diagrams.md) (i.e.,
+Ferrers diagram), because it only uses
+[mere equivalences](foundation.mere-equivalences.md).
 
 ## Definition
 
@@ -117,24 +124,20 @@ module _
   is-prop-rel-partition-𝔽 : (x y : type-𝔽 X) → is-prop (rel-partition-𝔽 x y)
   is-prop-rel-partition-𝔽 x y = is-prop-type-Prop (rel-partition-𝔽-Prop x y)
 
-  refl-rel-partition-𝔽 : (x : type-𝔽 X) → rel-partition-𝔽 x x
+  refl-rel-partition-𝔽 : is-reflexive rel-partition-𝔽
   refl-rel-partition-𝔽 x = refl
 
-  symmetric-rel-partition-𝔽 :
-    (x y : type-𝔽 X) → rel-partition-𝔽 x y → rel-partition-𝔽 y x
-  symmetric-rel-partition-𝔽 x y r = inv r
+  symmetric-rel-partition-𝔽 : is-symmetric rel-partition-𝔽
+  symmetric-rel-partition-𝔽 x y = inv
 
-  transitive-rel-partition-𝔽 :
-    (x y z : type-𝔽 X) →
-    rel-partition-𝔽 x y → rel-partition-𝔽 y z → rel-partition-𝔽 x z
-  transitive-rel-partition-𝔽 x y z r s = r ∙ s
+  transitive-rel-partition-𝔽 : is-transitive rel-partition-𝔽
+  transitive-rel-partition-𝔽 x y z r s = s ∙ r
 
-  eq-rel-partition-𝔽 : Eq-Rel l2 (type-𝔽 X)
+  eq-rel-partition-𝔽 : Equivalence-Relation l2 (type-𝔽 X)
   pr1 eq-rel-partition-𝔽 = rel-partition-𝔽-Prop
-  pr1 (pr2 eq-rel-partition-𝔽) {x} = refl-rel-partition-𝔽 x
-  pr1 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} = symmetric-rel-partition-𝔽 x y
-  pr2 (pr2 (pr2 eq-rel-partition-𝔽)) {x} {y} {z} =
-    transitive-rel-partition-𝔽 x y z
+  pr1 (pr2 eq-rel-partition-𝔽) = refl-rel-partition-𝔽
+  pr1 (pr2 (pr2 eq-rel-partition-𝔽)) = symmetric-rel-partition-𝔽
+  pr2 (pr2 (pr2 eq-rel-partition-𝔽)) = transitive-rel-partition-𝔽
 ```
 
 ### Equivalences of partitions
@@ -199,19 +202,24 @@ extensionality-partition-𝔽 X P =
 ### The type of finite partitions of a finite type `X` is equivalent to the type of decidable partitions of `X` in the usual sense
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The type of finite partitions of a finite type `X` is equivalent to the type of equivalence relations on `X`
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The type of finite partitions of a finite type is finite
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The number of elements of the type of finite partitions of a finite type is a Stirling number of the second kind
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)
 
 ### The type of finite partitions of a contractible type is contractible
 
 This remains to be shown.
+[#747](https://github.com/UniMath/agda-unimath/issues/747)

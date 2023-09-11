@@ -73,23 +73,23 @@ hom-algebra-Hatcher-Acyclic-Type
   (A , a1 , a2 , r1 , r2) (B , b1 , b2 , s1 , s2) =
   Σ ( A →∗ B)
     ( λ f →
-      Σ ( map-Ω A B f a1 ＝ b1)
+      Σ ( map-Ω f a1 ＝ b1)
         ( λ u →
-          Σ ( map-Ω A B f a2 ＝ b2)
+          Σ ( map-Ω f a2 ＝ b2)
             ( λ v →
               ( coherence-square-identifications
-                ( map-power-nat-Ω 5 A B f a1 ∙ ap (power-nat-Ω 5 B) u)
+                ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
                 ( s1)
-                ( ap (map-Ω A B f) r1)
-                ( map-power-nat-Ω 3 A B f a2 ∙ ap (power-nat-Ω 3 B) v)) ×
+                ( ap (map-Ω f) r1)
+                ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)) ×
               coherence-square-identifications
-                ( map-power-nat-Ω 3 A B f a2 ∙ ap (power-nat-Ω 3 B) v)
+                ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
                 ( s2)
-                ( ap (map-Ω A B f) r2)
-                ( ( map-power-nat-Ω 2 A B f (a1 ∙ a2)) ∙
+                ( ap (map-Ω f) r2)
+                ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
                   ( ap
                     ( power-nat-Ω 2 B)
-                    ( ( preserves-mul-map-Ω A B f a1 a2) ∙
+                    ( ( preserves-mul-map-Ω f a1 a2) ∙
                       ( ap-binary _∙_ u v)))))))
 ```
 

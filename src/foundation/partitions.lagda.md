@@ -15,7 +15,6 @@ open import foundation.equivalences
 open import foundation.existential-quantification
 open import foundation.fiber-inclusions
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.identity-types
 open import foundation.inhabited-subtypes
 open import foundation.inhabited-types
 open import foundation.locally-small-types
@@ -36,6 +35,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 ```
@@ -165,7 +165,7 @@ reduce the universe level of this type. Therefore we call this type of blocks
   is-surjective-large-block-element-partition B =
     apply-universal-property-trunc-Prop
       ( is-inhabited-subtype-block-partition-Large-Type B)
-      ( trunc-Prop (fib large-block-element-partition B))
+      ( trunc-Prop (fiber large-block-element-partition B))
       ( λ (a , u) →
         unit-trunc-Prop
           ( pair a
@@ -630,7 +630,7 @@ module _
                 ( unit-trunc-Prop (pair a refl)))))
       ( ( equiv-tot
           ( λ Q →
-            ( ( ( equiv-map-Π
+            ( ( ( equiv-Π-equiv-family
                   ( λ x →
                     inv-equiv
                       ( equiv-equiv-iff

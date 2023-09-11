@@ -78,13 +78,13 @@ cong-nat-mod-succ-ℕ :
   (k x : ℕ) → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
 cong-nat-mod-succ-ℕ k zero-ℕ = cong-is-zero-nat-zero-Fin
 cong-nat-mod-succ-ℕ k (succ-ℕ x) =
-  trans-cong-ℕ
+  transitive-cong-ℕ
     ( succ-ℕ k)
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))
     ( succ-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)))
     ( succ-ℕ x)
-    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( cong-nat-mod-succ-ℕ k x)
+    ( cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
 ```
 
 ### If the congruence classes of `x` and `y` modulo `k + 1` are equal, then `x` and `y` are congruent modulo `k + 1`
@@ -94,7 +94,7 @@ cong-eq-mod-succ-ℕ :
   (k x y : ℕ) → mod-succ-ℕ k x ＝ mod-succ-ℕ k y → cong-ℕ (succ-ℕ k) x y
 cong-eq-mod-succ-ℕ k x y p =
   concatenate-cong-eq-cong-ℕ {succ-ℕ k} {x}
-    ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
+    ( symmetric-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
       ( cong-nat-mod-succ-ℕ k x))
     ( ap (nat-Fin (succ-ℕ k)) p)
     ( cong-nat-mod-succ-ℕ k y)
@@ -110,15 +110,15 @@ eq-mod-succ-cong-ℕ k x y H =
     ( succ-ℕ k)
     ( mod-succ-ℕ k x)
     ( mod-succ-ℕ k y)
-    ( trans-cong-ℕ
+    ( transitive-cong-ℕ
       ( succ-ℕ k)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( x)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
-      ( cong-nat-mod-succ-ℕ k x)
-      ( trans-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) H
-        ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
-          ( cong-nat-mod-succ-ℕ k y))))
+      ( transitive-cong-ℕ (succ-ℕ k) x y (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
+        ( symmetric-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
+          ( cong-nat-mod-succ-ℕ k y)) H)
+      ( cong-nat-mod-succ-ℕ k x))
 ```
 
 ### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
@@ -209,32 +209,33 @@ cong-add-ℕ :
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ y)
 cong-add-ℕ {k} x y =
-  trans-cong-ℕ (succ-ℕ k)
+  transitive-cong-ℕ
+    ( succ-ℕ k)
     ( add-ℕ
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
     ( x +ℕ y)
-    ( translation-invariant-cong-ℕ'
-      ( succ-ℕ k)
-      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
-      ( x)
-      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
-      ( cong-nat-mod-succ-ℕ k x))
     ( translation-invariant-cong-ℕ
       ( succ-ℕ k)
       ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
       ( y)
       ( x)
       ( cong-nat-mod-succ-ℕ k y))
+    ( translation-invariant-cong-ℕ'
+      ( succ-ℕ k)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+      ( x)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
+      ( cong-nat-mod-succ-ℕ k x))
 
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y')
 congruence-add-ℕ k {x} {y} {x'} {y'} H K =
-  trans-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
-    ( translation-invariant-cong-ℕ k y y' x K)
+  transitive-cong-ℕ k (x +ℕ y) (x +ℕ y') (x' +ℕ y')
     ( translation-invariant-cong-ℕ' k x x' y' H)
+    ( translation-invariant-cong-ℕ k y y' x K)
 
 mod-succ-add-ℕ :
   (k x y : ℕ) →
@@ -252,9 +253,9 @@ mod-succ-add-ℕ k x y =
       { y}
       { nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)}
       { nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)}
-      ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
+      ( symmetric-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
         ( cong-nat-mod-succ-ℕ k x))
-      ( symm-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
+      ( symmetric-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
         ( cong-nat-mod-succ-ℕ k y)))
 ```
 
@@ -377,7 +378,7 @@ associative-add-Fin (succ-ℕ k) x y z =
         { x' = nat-Fin (succ-ℕ k) x}
         { y' = nat-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) y z)}
         ( refl-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) x))
-        ( symm-cong-ℕ
+        ( symmetric-cong-ℕ
           ( succ-ℕ k)
           ( nat-Fin (succ-ℕ k) (add-Fin (succ-ℕ k) y z))
           ( (nat-Fin (succ-ℕ k) y) +ℕ (nat-Fin (succ-ℕ k) z))
@@ -517,7 +518,7 @@ associative-mul-Fin (succ-ℕ k) x y z =
         ( nat-Fin (succ-ℕ k) x)
         ( nat-Fin (succ-ℕ k) y)
         ( nat-Fin (succ-ℕ k) z))
-      ( symm-cong-ℕ
+      ( symmetric-cong-ℕ
         ( succ-ℕ k)
         ( ( nat-Fin (succ-ℕ k) x) *ℕ
           ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) y z)))
@@ -620,7 +621,7 @@ left-distributive-mul-add-Fin (succ-ℕ k) x y z =
         ( nat-Fin (succ-ℕ k) x)
         ( nat-Fin (succ-ℕ k) y)
         ( nat-Fin (succ-ℕ k) z))
-      ( symm-cong-ℕ (succ-ℕ k)
+      ( symmetric-cong-ℕ (succ-ℕ k)
         ( add-ℕ
           ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x y))
           ( nat-Fin (succ-ℕ k) (mul-Fin (succ-ℕ k) x z)))

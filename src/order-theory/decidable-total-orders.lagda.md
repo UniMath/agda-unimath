@@ -7,6 +7,7 @@ module order-theory.decidable-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
@@ -107,14 +108,11 @@ module _
   concatenate-leq-eq-Decidable-Total-Order =
     concatenate-leq-eq-Poset poset-Decidable-Total-Order
 
-  refl-leq-Decidable-Total-Order :
-    (x : type-Decidable-Total-Order) → leq-Decidable-Total-Order x x
+  refl-leq-Decidable-Total-Order : is-reflexive leq-Decidable-Total-Order
   refl-leq-Decidable-Total-Order =
     refl-leq-Poset poset-Decidable-Total-Order
 
-  transitive-leq-Decidable-Total-Order :
-    (x y z : type-Decidable-Total-Order) → leq-Decidable-Total-Order y z →
-    leq-Decidable-Total-Order x y → leq-Decidable-Total-Order x z
+  transitive-leq-Decidable-Total-Order : is-transitive leq-Decidable-Total-Order
   transitive-leq-Decidable-Total-Order =
     transitive-leq-Poset poset-Decidable-Total-Order
 

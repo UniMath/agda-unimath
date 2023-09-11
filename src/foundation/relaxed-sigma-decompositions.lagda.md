@@ -682,7 +682,7 @@ module _
   matching-correspondence-inv-displayed-fibered-Relaxed-Σ-Decomposition =
     equivalence-reasoning
     A ≃ Σ M N by s
-      ≃ Σ M (λ m → Σ (P m) (Q m))by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
+      ≃ Σ M (λ m → Σ (P m) (Q m)) by equiv-Σ (λ m → Σ (P m) (Q m)) id-equiv t
       ≃ Σ (Σ M P) (λ (m , p) → Q m p)
       by inv-associative-Σ
         ( M)
@@ -824,7 +824,7 @@ is-equiv-map-displayed-fibered-Relaxed-Σ-Decomposition :
   is-equiv
     ( map-displayed-fibered-Relaxed-Σ-Decomposition {l1} {l} {l} {l} {l} {A})
 is-equiv-map-displayed-fibered-Relaxed-Σ-Decomposition =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-inv-displayed-fibered-Relaxed-Σ-Decomposition)
     ( is-section-map-inv-displayed-fibered-Relaxed-Σ-Decomposition)
     ( is-retraction-map-inv-displayed-fibered-Relaxed-Σ-Decomposition)

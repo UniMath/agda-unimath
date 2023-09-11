@@ -16,7 +16,12 @@ def get_files_recursive(startpath):
 
 def get_subdirectories_recursive(startpath):
     for root, dirs, files in os.walk(startpath):
-        yield from dirs
+        for d in dirs:
+            try:
+                os.listdir(os.path.join(startpath, d))
+            except FileNotFoundError:
+                continue
+            yield d
 
 
 def find_index(s: str, t: str) -> List[int]:
@@ -122,7 +127,7 @@ agda_comment_regex = re.compile(
 
 def split_agda_line_comment_and_get_block_comment_delta(line):
     """
-    Splits a line of agda code at a line comment, and also returns deltas in block comment level
+    Splits a line of agda code at a line comment, and also returns deltas on block comment level
     """
     in_pragma = 0
     block_comment_delta_pos = 0
@@ -145,6 +150,32 @@ def split_agda_line_comment_and_get_block_comment_delta(line):
             block_comment_delta_neg += 1
 
     return line, '', block_comment_delta_pos, block_comment_delta_neg
+
+
+def get_block_comment_delta(line):
+    """
+    Returns deltas on block comment level
+    """
+    in_pragma = 0
+    block_comment_delta_pos = 0
+    block_comment_delta_neg = 0
+
+    for match in agda_comment_regex.finditer(line):
+        # Double dash
+        if not in_pragma and\
+            not block_comment_delta_pos - block_comment_delta_neg\
+                and match.group(1):
+            return block_comment_delta_pos, block_comment_delta_neg
+        elif match.group(2):  # Pragma start
+            in_pragma += 1
+        elif match.group(3):  # Pragma end
+            in_pragma -= 1
+        elif match.group(4):  # Block comment start
+            block_comment_delta_pos += 1
+        elif match.group(5):  # Block comment end
+            block_comment_delta_neg += 1
+
+    return block_comment_delta_pos, block_comment_delta_neg
 
 
 agda_block_tag_regex = re.compile(r'^```(agda)?((?=\s)|$)')

@@ -8,9 +8,9 @@ module foundation-core.retractions where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
@@ -34,6 +34,13 @@ module _
 
   retraction : (f : A → B) → UU (l1 ⊔ l2)
   retraction f = Σ (B → A) (λ r → (r ∘ f) ~ id)
+
+  map-retraction : (f : A → B) → retraction f → B → A
+  map-retraction f = pr1
+
+  is-retraction-map-retraction :
+    (f : A → B) (r : retraction f) → (map-retraction f r ∘ f) ~ id
+  is-retraction-map-retraction f = pr2
 
 _retract-of_ :
   {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)

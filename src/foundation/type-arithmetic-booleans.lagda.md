@@ -53,7 +53,7 @@ module _
 
   is-equiv-map-Σ-bool-coprod : is-equiv map-Σ-bool-coprod
   is-equiv-map-Σ-bool-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-Σ-bool-coprod
       is-section-map-inv-Σ-bool-coprod
       is-retraction-map-inv-Σ-bool-coprod
@@ -64,7 +64,7 @@ module _
 
   is-equiv-map-inv-Σ-bool-coprod : is-equiv map-inv-Σ-bool-coprod
   is-equiv-map-inv-Σ-bool-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-Σ-bool-coprod
       is-retraction-map-inv-Σ-bool-coprod
       is-section-map-inv-Σ-bool-coprod

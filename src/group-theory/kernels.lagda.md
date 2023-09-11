@@ -56,9 +56,9 @@ module _
     is-in-kernel-hom-Group (unit-Group G)
   contains-unit-subtype-kernel-hom-Group = preserves-unit-hom-Group G H f
 
-  is-closed-under-mul-subtype-kernel-hom-Group :
-    is-closed-under-mul-subset-Group G subtype-kernel-hom-Group
-  is-closed-under-mul-subtype-kernel-hom-Group x y p q =
+  is-closed-under-multiplication-subtype-kernel-hom-Group :
+    is-closed-under-multiplication-subset-Group G subtype-kernel-hom-Group
+  is-closed-under-multiplication-subtype-kernel-hom-Group x y p q =
     ( preserves-mul-hom-Group G H f x y) ∙
     ( ( ap (λ (x , y) → mul-Group H x y) (eq-pair p q)) ∙
       ( left-unit-law-mul-Group H _))
@@ -73,7 +73,7 @@ module _
   pr1 subgroup-kernel-hom-Group = subtype-kernel-hom-Group
   pr1 (pr2 subgroup-kernel-hom-Group) = contains-unit-subtype-kernel-hom-Group
   pr1 (pr2 (pr2 subgroup-kernel-hom-Group)) =
-    is-closed-under-mul-subtype-kernel-hom-Group
+    is-closed-under-multiplication-subtype-kernel-hom-Group
   pr2 (pr2 (pr2 subgroup-kernel-hom-Group)) =
     is-closed-under-inv-subtype-kernel-hom-Group
 
@@ -122,6 +122,8 @@ module _
   pr2 kernel-hom-Group = is-normal-kernel-hom-Group
 ```
 
+### Kernels of group homomorphisms between abelian groups
+
 ```agda
 module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
@@ -143,7 +145,7 @@ module _
   is-closed-under-add-subtype-kernel-hom-Ab :
     is-closed-under-add-subset-Ab A subtype-kernel-hom-Ab
   is-closed-under-add-subtype-kernel-hom-Ab =
-    is-closed-under-mul-subtype-kernel-hom-Group
+    is-closed-under-multiplication-subtype-kernel-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)

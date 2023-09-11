@@ -46,6 +46,6 @@ module _
 
 ```agda
 trivial-Endo : {l : Level} → Endo l
-pr1 (trivial-Endo {l})= raise-unit l
+pr1 (trivial-Endo {l}) = raise-unit l
 pr2 trivial-Endo = id
 ```

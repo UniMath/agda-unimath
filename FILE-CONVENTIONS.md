@@ -35,6 +35,10 @@ Every file should begin with a header in the following format:
 # The title of the file
 ```
 
+Note that the title of the file and other markdown headers must be on one line,
+even if it contains more than 80 characters. Headers that exceed the 80
+character limit are not considered violations of the 80 character rule.
+
 Directly after the header, include an Agda code block containing
 
 - any option pragmas,
@@ -111,6 +115,10 @@ relation
 holds for every two elements `x : P` and `y : Q`.
 ````
 
+Note that section and subsection headers must be on one line, even if they
+contain more than 80 characters. Headers that exceed the 80 character limit are
+not considered violations of the 80 character rule.
+
 ### Subsections
 
 Use `###` headings for subsections within the main sections. If a code block
@@ -144,7 +152,7 @@ contents of the file.
 - For a template file see [`TEMPLATE.lagda.md`](TEMPLATE.lagda.md).
 
 - An instructive example of a file with the expected structure is
-  [`foundation.cantor-schroder-bernstein-escardo`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/foundation/cantor-schroder-bernstein-escardo.lagda.md).
+  [`order-theory.galois-connections`](https://raw.githubusercontent.com/UniMath/agda-unimath/master/src/order-theory/galois-connections.lagda.md).
 
 ## Note
 

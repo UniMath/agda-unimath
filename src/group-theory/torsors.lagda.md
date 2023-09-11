@@ -583,7 +583,7 @@ module _
               ( principal-Torsor-Abstract-Group G)
               ( X)
               ( e))
-            ( is-equiv-has-inverse
+            ( is-equiv-is-invertible
                 equiv-Eq-Torsor-Abstract-Group
                 is-section-equiv-Eq-Torsor-Abstract-Group
                 is-retraction-equiv-Eq-Torsor-Abstract-Group))

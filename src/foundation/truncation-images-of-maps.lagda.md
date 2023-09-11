@@ -26,7 +26,7 @@ that fits in the (`k`-connected,`k`-truncated) factorization of `f`. It is
 defined as the type
 
 ```text
-  trunc-im k f := Σ (y : B), type-trunc k (fib f y)
+  trunc-im k f := Σ (y : B), type-trunc k (fiber f y)
 ```
 
 ## Definition
@@ -37,7 +37,7 @@ module _
   where
 
   trunc-im : UU (l1 ⊔ l2)
-  trunc-im = Σ B (λ y → type-trunc k (fib f y))
+  trunc-im = Σ B (λ y → type-trunc k (fiber f y))
 
   unit-trunc-im : A → trunc-im
   pr1 (unit-trunc-im x) = f x

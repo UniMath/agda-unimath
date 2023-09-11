@@ -42,8 +42,6 @@ module _
   hom-equiv-∞-Group : equiv-∞-Group → hom-∞-Group G H
   hom-equiv-∞-Group =
     pointed-map-pointed-equiv
-      ( classifying-pointed-type-∞-Group G)
-      ( classifying-pointed-type-∞-Group H)
 
   map-equiv-∞-Group : equiv-∞-Group → type-∞-Group G → type-∞-Group H
   map-equiv-∞-Group = map-hom-∞-Group G H ∘ hom-equiv-∞-Group
@@ -54,7 +52,7 @@ module _
 ```agda
 id-equiv-∞-Group :
   {l1 : Level} (G : ∞-Group l1) → equiv-∞-Group G G
-id-equiv-∞-Group G = id-pointed-equiv (classifying-pointed-type-∞-Group G)
+id-equiv-∞-Group G = id-pointed-equiv
 ```
 
 ### Isomorphisms of ∞-groups
@@ -65,10 +63,7 @@ module _
   where
 
   is-iso-hom-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-∞-Group =
-    is-iso-pointed-map
-      ( classifying-pointed-type-∞-Group G)
-      ( classifying-pointed-type-∞-Group H)
+  is-iso-hom-∞-Group = is-iso-pointed-map
 ```
 
 ## Properties
@@ -83,7 +78,7 @@ is-contr-total-equiv-∞-Group G =
     ( is-contr-total-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
     ( λ X → is-prop-is-0-connected (type-Pointed-Type X))
     ( classifying-pointed-type-∞-Group G)
-    ( id-pointed-equiv (classifying-pointed-type-∞-Group G))
+    ( id-pointed-equiv)
     ( is-0-connected-classifying-type-∞-Group G)
 
 equiv-eq-∞-Group :

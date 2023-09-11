@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Run this script:
-# $ python3 scripts/generate_main_index_file.py
+# $ ./scripts/generate_main_index_file.py
 
 import os
 import sys
@@ -64,10 +64,11 @@ def generate_namespace_entry_list(namespace):
 def generate_index(root, header):
     status = 0
     entry_lists = []
-    for namespace in sorted(utils.get_subdirectories_recursive(root)):
+    namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
+
+    for namespace in namespaces:
         if namespace == 'temp':
             continue
-
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s
@@ -96,6 +97,7 @@ summary_template = """
     - [Structuring your file](FILE-CONVENTIONS.md)
         - [File template](TEMPLATE.lagda.md)
     - [The library coding style](CODINGSTYLE.md)
+    - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
     - [Citing the library](CITE-THIS-LIBRARY.md)
 
 {module_index}

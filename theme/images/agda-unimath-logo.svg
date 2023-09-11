@@ -43,7 +43,7 @@
     </g>
    </g>
   </g>
-  <text transform="matrix(1.61974 0 0 1.61974 -3108.15 -984.759)" xml:space="preserve" text-anchor="start" font-family="'Noto Sans Mono'" font-size="260" id="svg_1" y="1611.86434" x="3980.84999" stroke-width="0" class="fg">UniMath</text>
+  <text transform="matrix(1.61974 0 0 1.61974 -3108.15 -984.759)" xml:space="preserve" text-anchor="start" font-family="'Noto Sans Mono'" font-size="260" id="svg_1" y="1611.86434" x="3980.84999" stroke-width="0" class="fg">unimath</text>
   <path id="svg_3" d="m686.27364,1384.6193l0.56913,0l0.17587,-0.54067l0.17587,0.54067l0.56913,0l-0.46044,0.33415l0.17588,0.54067l-0.46044,-0.33416l-0.46044,0.33416l0.17588,-0.54067l-0.46044,-0.33415z" stroke-width="0" class="fg"/>
  </g>
 </svg>

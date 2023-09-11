@@ -7,7 +7,9 @@ module order-theory.dependent-products-large-suplattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -74,9 +76,10 @@ module _
     is-set-type-Large-Suplattice Π-Large-Suplattice
 
   leq-Π-Large-Suplattice-Prop :
-    {l2 l3 : Level}
-    (x : type-Π-Large-Suplattice l2) (y : type-Π-Large-Suplattice l3) →
-    Prop (β l2 l3 ⊔ l1)
+    Large-Relation-Prop
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Suplattice)
   leq-Π-Large-Suplattice-Prop =
     leq-Large-Suplattice-Prop Π-Large-Suplattice
 
@@ -88,32 +91,22 @@ module _
     leq-Large-Suplattice Π-Large-Suplattice
 
   is-prop-leq-Π-Large-Suplattice :
-    {l2 l3 : Level}
-    (x : type-Π-Large-Suplattice l2) (y : type-Π-Large-Suplattice l3) →
-    is-prop (leq-Π-Large-Suplattice x y)
+    is-prop-Large-Relation type-Π-Large-Suplattice leq-Π-Large-Suplattice
   is-prop-leq-Π-Large-Suplattice =
     is-prop-leq-Large-Suplattice Π-Large-Suplattice
 
   refl-leq-Π-Large-Suplattice :
-    {l2 : Level} (x : type-Π-Large-Suplattice l2) →
-    leq-Π-Large-Suplattice x x
+    is-large-reflexive type-Π-Large-Suplattice leq-Π-Large-Suplattice
   refl-leq-Π-Large-Suplattice =
     refl-leq-Large-Suplattice Π-Large-Suplattice
 
   antisymmetric-leq-Π-Large-Suplattice :
-    {l2 : Level}
-    (x : type-Π-Large-Suplattice l2) (y : type-Π-Large-Suplattice l2) →
-    leq-Π-Large-Suplattice x y → leq-Π-Large-Suplattice y x → x ＝ y
+    is-large-antisymmetric type-Π-Large-Suplattice leq-Π-Large-Suplattice
   antisymmetric-leq-Π-Large-Suplattice =
     antisymmetric-leq-Large-Suplattice Π-Large-Suplattice
 
   transitive-leq-Π-Large-Suplattice :
-    {l2 l3 l4 : Level}
-    (x : type-Π-Large-Suplattice l2)
-    (y : type-Π-Large-Suplattice l3)
-    (z : type-Π-Large-Suplattice l4) →
-    leq-Π-Large-Suplattice y z → leq-Π-Large-Suplattice x y →
-    leq-Π-Large-Suplattice x z
+    is-large-transitive type-Π-Large-Suplattice leq-Π-Large-Suplattice
   transitive-leq-Π-Large-Suplattice =
     transitive-leq-Large-Suplattice Π-Large-Suplattice
 

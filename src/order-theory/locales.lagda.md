@@ -7,6 +7,7 @@ module order-theory.locales where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -68,15 +69,13 @@ module _
   is-prop-leq-Locale : (x y : type-Locale) → is-prop (leq-Locale x y)
   is-prop-leq-Locale = is-prop-leq-Frame L
 
-  refl-leq-Locale : (x : type-Locale) → leq-Locale x x
+  refl-leq-Locale : is-reflexive leq-Locale
   refl-leq-Locale = refl-leq-Frame L
 
-  antisymmetric-leq-Locale :
-    (x y : type-Locale) → leq-Locale x y → leq-Locale y x → x ＝ y
+  antisymmetric-leq-Locale : is-antisymmetric leq-Locale
   antisymmetric-leq-Locale = antisymmetric-leq-Frame L
 
-  transitive-leq-Locale :
-    (x y z : type-Locale) → leq-Locale y z → leq-Locale x y → leq-Locale x z
+  transitive-leq-Locale : is-transitive leq-Locale
   transitive-leq-Locale = transitive-leq-Frame L
 
   meet-Locale : type-Locale → type-Locale → type-Locale

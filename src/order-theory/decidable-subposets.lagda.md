@@ -7,6 +7,7 @@ module order-theory.decidable-subposets where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.decidable-subtypes
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -59,15 +60,11 @@ module _
   is-prop-leq-Decidable-Subposet =
     is-prop-leq-Subposet P (subtype-decidable-subtype S)
 
-  refl-leq-Decidable-Subposet :
-    (x : type-Decidable-Subposet) → leq-Decidable-Subposet x x
+  refl-leq-Decidable-Subposet : is-reflexive leq-Decidable-Subposet
   refl-leq-Decidable-Subposet =
     refl-leq-Subposet P (subtype-decidable-subtype S)
 
-  transitive-leq-Decidable-Subposet :
-    (x y z : type-Decidable-Subposet) →
-    leq-Decidable-Subposet y z → leq-Decidable-Subposet x y →
-    leq-Decidable-Subposet x z
+  transitive-leq-Decidable-Subposet : is-transitive leq-Decidable-Subposet
   transitive-leq-Decidable-Subposet =
     transitive-leq-Subposet P (subtype-decidable-subtype S)
 

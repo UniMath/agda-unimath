@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
 open import synthetic-homotopy-theory.induction-principle-pushouts
 ```
 
-</summary>
+</details>
 
 ## Idea
 
@@ -70,7 +70,7 @@ abstract
             htpy-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
   uniqueness-dependent-universal-property-pushout f g c dup-c P h =
     is-contr-is-equiv'
-      ( fib (dependent-cocone-map f g c P) h)
+      ( fiber (dependent-cocone-map f g c P) h)
       ( tot
         ( λ k →
           htpy-eq-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
@@ -132,7 +132,7 @@ dependent-universal-property-pushout-induction-principle-pushout :
   ((l : Level) → dependent-universal-property-pushout l f g c)
 dependent-universal-property-pushout-induction-principle-pushout
   f g c ind-c l P =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( ind-induction-principle-pushout f g c (ind-c l) P)
     ( pr2 (ind-c l P))
     ( λ h →

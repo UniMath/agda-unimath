@@ -66,7 +66,7 @@ module _
 
   unique-action-on-equivalences-family-of-types-subuniverse :
     (X : type-subuniverse P) →
-    is-contr (fib (ev-id-equiv-subuniverse P X {λ Y e → B X ≃ B Y}) id-equiv)
+    is-contr (fiber (ev-id-equiv-subuniverse P X {λ Y e → B X ≃ B Y}) id-equiv)
   unique-action-on-equivalences-family-of-types-subuniverse X =
     is-contr-map-ev-id-equiv-subuniverse P X (λ Y e → B X ≃ B Y) id-equiv
 
@@ -91,7 +91,7 @@ module _
 
   unique-action-on-equivalences-family-of-types-universe :
     {X : UU l1} →
-    is-contr (fib (ev-id-equiv (λ Y e → B X ≃ B Y)) id-equiv)
+    is-contr (fiber (ev-id-equiv (λ Y e → B X ≃ B Y)) id-equiv)
   unique-action-on-equivalences-family-of-types-universe =
     is-contr-map-ev-id-equiv (λ Y e → B _ ≃ B Y) id-equiv
 

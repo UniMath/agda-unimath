@@ -82,7 +82,7 @@ pr1 (pr2 (euclidean-division-ℕ zero-ℕ x)) = refl-cong-ℕ zero-ℕ x
 pr2 (pr2 (euclidean-division-ℕ zero-ℕ x)) f = ex-falso (f refl)
 pr1 (euclidean-division-ℕ (succ-ℕ k) x) = nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)
 pr1 (pr2 (euclidean-division-ℕ (succ-ℕ k) x)) =
-  symm-cong-ℕ
+  symmetric-cong-ℕ
     ( succ-ℕ k)
     ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
     ( x)

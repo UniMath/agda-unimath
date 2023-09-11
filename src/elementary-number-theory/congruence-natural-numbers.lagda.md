@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -68,8 +69,7 @@ pr1 (cong-zero-ℕ k) = 1
 pr2 (cong-zero-ℕ k) =
   (left-unit-law-mul-ℕ k) ∙ (inv (right-unit-law-dist-ℕ k))
 
-refl-cong-ℕ :
-  (k x : ℕ) → cong-ℕ k x x
+refl-cong-ℕ : (k : ℕ) → is-reflexive (cong-ℕ k)
 pr1 (refl-cong-ℕ k x) = zero-ℕ
 pr2 (refl-cong-ℕ k x) =
   (left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl))
@@ -78,26 +78,22 @@ cong-identification-ℕ :
   (k : ℕ) {x y : ℕ} → x ＝ y → cong-ℕ k x y
 cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
-symm-cong-ℕ :
-  (k x y : ℕ) → cong-ℕ k x y → cong-ℕ k y x
-pr1 (symm-cong-ℕ k x y (pair d p)) = d
-pr2 (symm-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
+symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
+pr1 (symmetric-cong-ℕ k x y (pair d p)) = d
+pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (symmetric-dist-ℕ x y)
 
-cong-zero-ℕ' :
-  (k : ℕ) → cong-ℕ k zero-ℕ k
+cong-zero-ℕ' : (k : ℕ) → cong-ℕ k zero-ℕ k
 cong-zero-ℕ' k =
-  symm-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
+  symmetric-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
 
-trans-cong-ℕ :
-  (k x y z : ℕ) →
-  cong-ℕ k x y → cong-ℕ k y z → cong-ℕ k x z
-trans-cong-ℕ k x y z d e with is-total-dist-ℕ x y z
-trans-cong-ℕ k x y z d e | inl α =
+transitive-cong-ℕ : (k : ℕ) → is-transitive (cong-ℕ k)
+transitive-cong-ℕ k x y z e d with is-total-dist-ℕ x y z
+transitive-cong-ℕ k x y z e d | inl α =
   concatenate-div-eq-ℕ (div-add-ℕ k (dist-ℕ x y) (dist-ℕ y z) d e) α
-trans-cong-ℕ k x y z d e | inr (inl α) =
+transitive-cong-ℕ k x y z e d | inr (inl α) =
   div-right-summand-ℕ k (dist-ℕ y z) (dist-ℕ x z) e
     ( concatenate-div-eq-ℕ d (inv α))
-trans-cong-ℕ k x y z d e | inr (inr α) =
+transitive-cong-ℕ k x y z e d | inr (inr α) =
   div-left-summand-ℕ k (dist-ℕ x z) (dist-ℕ x y) d
     ( concatenate-div-eq-ℕ e (inv α))
 
@@ -105,7 +101,7 @@ concatenate-cong-eq-cong-ℕ :
   {k x1 x2 x3 x4 : ℕ} →
   cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
 concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
-  trans-cong-ℕ k x y z H K
+  transitive-cong-ℕ k x y z K H
 
 concatenate-eq-cong-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
@@ -113,7 +109,7 @@ concatenate-eq-cong-eq-cong-eq-ℕ :
   cong-ℕ k x4 x5 → x5 ＝ x6 → cong-ℕ k x1 x6
 concatenate-eq-cong-eq-cong-eq-ℕ k
   {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
-  trans-cong-ℕ k x y z H K
+  transitive-cong-ℕ k x y z K H
 ```
 
 ```agda
@@ -185,9 +181,9 @@ congruence-mul-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x *ℕ y) (x' *ℕ y')
 congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
-  trans-cong-ℕ k (x *ℕ y) (x *ℕ y') (x' *ℕ y')
-    ( scalar-invariant-cong-ℕ k y y' x K)
+  transitive-cong-ℕ k (x *ℕ y) (x *ℕ y') (x' *ℕ y')
     ( scalar-invariant-cong-ℕ' k x x' y' H)
+    ( scalar-invariant-cong-ℕ k y y' x K)
 ```
 
 ### The congruence is translation invariant

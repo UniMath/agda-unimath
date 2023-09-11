@@ -7,6 +7,7 @@ module order-theory.meet-suplattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -83,20 +84,14 @@ module _
     (x y : type-Meet-Suplattice) → is-prop (leq-Meet-Suplattice x y)
   is-prop-leq-Meet-Suplattice = is-prop-leq-Poset poset-Meet-Suplattice
 
-  refl-leq-Meet-Suplattice :
-    (x : type-Meet-Suplattice) → leq-Meet-Suplattice x x
+  refl-leq-Meet-Suplattice : is-reflexive leq-Meet-Suplattice
   refl-leq-Meet-Suplattice = refl-leq-Poset poset-Meet-Suplattice
 
-  antisymmetric-leq-Meet-Suplattice :
-    (x y : type-Meet-Suplattice) →
-    leq-Meet-Suplattice x y → leq-Meet-Suplattice y x → x ＝ y
+  antisymmetric-leq-Meet-Suplattice : is-antisymmetric leq-Meet-Suplattice
   antisymmetric-leq-Meet-Suplattice =
     antisymmetric-leq-Poset poset-Meet-Suplattice
 
-  transitive-leq-Meet-Suplattice :
-    (x y z : type-Meet-Suplattice) →
-    leq-Meet-Suplattice y z → leq-Meet-Suplattice x y →
-    leq-Meet-Suplattice x z
+  transitive-leq-Meet-Suplattice : is-transitive leq-Meet-Suplattice
   transitive-leq-Meet-Suplattice = transitive-leq-Poset poset-Meet-Suplattice
 
   is-set-type-Meet-Suplattice : is-set type-Meet-Suplattice

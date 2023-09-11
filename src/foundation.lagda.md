@@ -149,6 +149,7 @@ open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.intersections-subtypes public
+open import foundation.invertible-maps public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
@@ -156,6 +157,7 @@ open import foundation.iterated-cartesian-product-types public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
+open import foundation.large-binary-relations public
 open import foundation.large-dependent-pair-types public
 open import foundation.large-homotopies public
 open import foundation.large-identity-types public
@@ -226,6 +228,7 @@ open import foundation.set-quotients public
 open import foundation.set-truncations public
 open import foundation.sets public
 open import foundation.shifting-sequences public
+open import foundation.sigma-closed-subuniverses public
 open import foundation.sigma-decomposition-subuniverse public
 open import foundation.sigma-decompositions public
 open import foundation.singleton-induction public

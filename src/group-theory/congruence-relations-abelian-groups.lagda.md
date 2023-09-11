@@ -31,7 +31,9 @@ underlying group of `A`.
 
 ```agda
 is-congruence-Ab :
-  {l1 l2 : Level} (A : Ab l1) → Eq-Rel l2 (type-Ab A) → UU (l1 ⊔ l2)
+  {l1 l2 : Level} (A : Ab l1) →
+  Equivalence-Relation l2 (type-Ab A) →
+  UU (l1 ⊔ l2)
 is-congruence-Ab A = is-congruence-Group (group-Ab A)
 
 congruence-Ab : {l : Level} (l2 : Level) (A : Ab l) → UU (l ⊔ lsuc l2)
@@ -41,10 +43,10 @@ module _
   {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A)
   where
 
-  eq-rel-congruence-Ab : Eq-Rel l2 (type-Ab A)
+  eq-rel-congruence-Ab : Equivalence-Relation l2 (type-Ab A)
   eq-rel-congruence-Ab = eq-rel-congruence-Group (group-Ab A) R
 
-  prop-congruence-Ab : Rel-Prop l2 (type-Ab A)
+  prop-congruence-Ab : Relation-Prop l2 (type-Ab A)
   prop-congruence-Ab = prop-congruence-Group (group-Ab A) R
 
   sim-congruence-Ab : (x y : type-Ab A) → UU l2
@@ -74,21 +76,21 @@ module _
   concatenate-eq-sim-eq-congruence-Ab =
     concatenate-eq-sim-eq-congruence-Group (group-Ab A) R
 
-  refl-congruence-Ab : is-reflexive-Rel-Prop prop-congruence-Ab
+  refl-congruence-Ab : is-reflexive sim-congruence-Ab
   refl-congruence-Ab = refl-congruence-Group (group-Ab A) R
 
-  symm-congruence-Ab : is-symmetric-Rel-Prop prop-congruence-Ab
-  symm-congruence-Ab = symm-congruence-Group (group-Ab A) R
+  symmetric-congruence-Ab : is-symmetric sim-congruence-Ab
+  symmetric-congruence-Ab = symmetric-congruence-Group (group-Ab A) R
 
-  equiv-symm-congruence-Ab :
+  equiv-symmetric-congruence-Ab :
     (x y : type-Ab A) →
     sim-congruence-Ab x y ≃ sim-congruence-Ab y x
-  equiv-symm-congruence-Ab =
-    equiv-symm-congruence-Group (group-Ab A) R
+  equiv-symmetric-congruence-Ab =
+    equiv-symmetric-congruence-Group (group-Ab A) R
 
-  trans-congruence-Ab :
-    is-transitive-Rel-Prop prop-congruence-Ab
-  trans-congruence-Ab = trans-congruence-Group (group-Ab A) R
+  transitive-congruence-Ab :
+    is-transitive sim-congruence-Ab
+  transitive-congruence-Ab = transitive-congruence-Group (group-Ab A) R
 
   add-congruence-Ab : is-congruence-Ab A eq-rel-congruence-Ab
   add-congruence-Ab = mul-congruence-Group (group-Ab A) R

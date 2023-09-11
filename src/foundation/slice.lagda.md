@@ -7,6 +7,7 @@ module foundation.slice where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -67,7 +68,7 @@ module _
 
   triangle-hom-slice :
     (f : A → X) (g : B → X) (h : hom-slice f g) →
-    f ~ (g ∘ (map-hom-slice f g h))
+    f ~ g ∘ map-hom-slice f g h
   triangle-hom-slice f g h = pr2 h
 ```
 
@@ -81,12 +82,20 @@ module _
   (f : A → X) (g : B → X)
   where
 
+  coherence-htpy-hom-slice :
+    (h h' : hom-slice f g) →
+    map-hom-slice f g h ~ map-hom-slice f g h' →
+    UU (l1 ⊔ l2)
+  coherence-htpy-hom-slice h h' H =
+      coherence-triangle-homotopies'
+        ( triangle-hom-slice f g h')
+        ( g ·l H)
+        ( triangle-hom-slice f g h)
+
   htpy-hom-slice : (h h' : hom-slice f g) → UU (l1 ⊔ l2 ⊔ l3)
   htpy-hom-slice h h' =
     Σ ( map-hom-slice f g h ~ map-hom-slice f g h')
-      ( λ K →
-        ( (triangle-hom-slice f g h) ∙h (g ·l K)) ~
-        ( triangle-hom-slice f g h'))
+      ( coherence-htpy-hom-slice h h')
 
   extensionality-hom-slice :
     (h h' : hom-slice f g) → (h ＝ h') ≃ htpy-hom-slice h h'
@@ -132,7 +141,7 @@ module _
   where
 
   fiberwise-hom : (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
-  fiberwise-hom f g = (x : X) → fib f x → fib g x
+  fiberwise-hom f g = (x : X) → fiber f x → fiber g x
 
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
@@ -140,7 +149,7 @@ module _
   where
 
   fiberwise-hom-hom-slice : hom-slice f g → fiberwise-hom f g
-  fiberwise-hom-hom-slice (pair h H) = fib-triangle f g h H
+  fiberwise-hom-hom-slice (pair h H) = fiber-triangle f g h H
 
   hom-slice-fiberwise-hom : fiberwise-hom f g → hom-slice f g
   pr1 (hom-slice-fiberwise-hom α) a = pr1 (α (f a) (pair a refl))
@@ -165,7 +174,7 @@ module _
   abstract
     is-equiv-fiberwise-hom-hom-slice : is-equiv (fiberwise-hom-hom-slice)
     is-equiv-fiberwise-hom-hom-slice =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( hom-slice-fiberwise-hom)
         ( is-section-hom-slice-fiberwise-hom)
         ( is-retraction-hom-slice-fiberwise-hom)
@@ -177,7 +186,7 @@ module _
   abstract
     is-equiv-hom-slice-fiberwise-hom : is-equiv hom-slice-fiberwise-hom
     is-equiv-hom-slice-fiberwise-hom =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( fiberwise-hom-hom-slice)
         ( is-retraction-hom-slice-fiberwise-hom)
         ( is-section-hom-slice-fiberwise-hom)
@@ -225,33 +234,33 @@ module _
       is-equiv-triangle-is-fiberwise-equiv f g h H
 
   equiv-fiberwise-equiv-equiv-slice :
-    equiv-slice f g ≃ fiberwise-equiv (fib f) (fib g)
+    equiv-slice f g ≃ fiberwise-equiv (fiber f) (fiber g)
   equiv-fiberwise-equiv-equiv-slice =
     equiv-Σ is-fiberwise-equiv (equiv-fiberwise-hom-hom-slice f g) α ∘e
     equiv-right-swap-Σ
     where
-      α :
-        (h : hom-slice f g) →
-        is-equiv (pr1 h) ≃
-        is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
-      α h = equiv-prop
-        ( is-property-is-equiv _)
-        ( is-prop-Π (λ _ → is-property-is-equiv _))
-        ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice h)
-        ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice h)
+    α :
+      (h : hom-slice f g) →
+      is-equiv (pr1 h) ≃
+      is-fiberwise-equiv (map-equiv (equiv-fiberwise-hom-hom-slice f g) h)
+    α h = equiv-prop
+      ( is-property-is-equiv _)
+      ( is-prop-Π (λ _ → is-property-is-equiv _))
+      ( is-fiberwise-equiv-fiberwise-equiv-equiv-slice h)
+      ( is-equiv-hom-slice-is-fiberwise-equiv-fiberwise-hom-hom-slice h)
 
   equiv-equiv-slice-fiberwise-equiv :
-    fiberwise-equiv (fib f) (fib g) ≃ equiv-slice f g
+    fiberwise-equiv (fiber f) (fiber g) ≃ equiv-slice f g
   equiv-equiv-slice-fiberwise-equiv =
     inv-equiv equiv-fiberwise-equiv-equiv-slice
 
   fiberwise-equiv-equiv-slice :
-    equiv-slice f g → fiberwise-equiv (fib f) (fib g)
+    equiv-slice f g → fiberwise-equiv (fiber f) (fiber g)
   fiberwise-equiv-equiv-slice =
     map-equiv equiv-fiberwise-equiv-equiv-slice
 
   equiv-fam-equiv-equiv-slice :
-    equiv-slice f g ≃ ((x : X) → fib f x ≃ fib g x) -- fam-equiv (fib f) (fib g)
+    equiv-slice f g ≃ ((x : X) → fiber f x ≃ fiber g x) -- fam-equiv (fiber f) (fiber g)
   equiv-fam-equiv-equiv-slice =
     inv-distributive-Π-Σ ∘e equiv-fiberwise-equiv-equiv-slice
 ```
@@ -279,7 +288,7 @@ module _
       hom-slice (map-emb g) (map-emb f) →
       is-equiv-hom-slice (map-emb f) (map-emb g) h
     is-equiv-hom-slice-emb f g h i =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-hom-slice (map-emb g) (map-emb f) i)
         ( λ y →
           is-injective-emb g

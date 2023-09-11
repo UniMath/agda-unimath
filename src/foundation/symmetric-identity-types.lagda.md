@@ -122,7 +122,7 @@ module _
     is-equiv-map-compute-symmetric-Id :
       is-equiv (map-compute-symmetric-Id)
     is-equiv-map-compute-symmetric-Id =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( map-inv-compute-symmetric-Id)
         ( is-section-map-inv-compute-symmetric-Id)
         ( is-retraction-map-inv-compute-symmetric-Id)
@@ -168,7 +168,8 @@ module _
         (x : type-unordered-pair a) →
         b ＝ map-equiv e (element-unordered-pair a x))
       ( e)
-      ( λ x → equiv-map-Π (λ i → equiv-ap e x (element-unordered-pair a i)))
+      ( λ x →
+        equiv-Π-equiv-family (λ i → equiv-ap e x (element-unordered-pair a i)))
 
   map-equiv-symmetric-Id :
     (e : A ≃ B) (a : unordered-pair A) →
@@ -216,7 +217,7 @@ module _
   refl-Eq-unordered-pair-tr-symmetric-Id :
     (p : unordered-pair A) →
     tr-symmetric-Id p p id-equiv refl-htpy ~ id
-  refl-Eq-unordered-pair-tr-symmetric-Id p (a , K)=
+  refl-Eq-unordered-pair-tr-symmetric-Id p (a , K) =
     eq-pair-Σ refl
       ( eq-htpy
         ( ( compute-pr2-tr-symmetric-Id p p id-equiv refl-htpy K) ∙h

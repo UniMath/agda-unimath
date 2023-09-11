@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -44,7 +45,8 @@ module _
 
   sim-Large-Poset :
     {l1 l2 : Level}
-    (x : type-Large-Poset P l1) (y : type-Large-Poset P l2) →
+    (x : type-Large-Poset P l1)
+    (y : type-Large-Poset P l2) →
     UU (β l1 l2 ⊔ β l2 l1)
   sim-Large-Poset = sim-Large-Preorder (large-preorder-Large-Poset P)
 
@@ -66,7 +68,7 @@ module _
   where
 
   refl-sim-Large-Poset :
-    {l1 : Level} (x : type-Large-Poset P l1) → sim-Large-Poset P x x
+    is-large-reflexive (type-Large-Poset P) (sim-Large-Poset P)
   refl-sim-Large-Poset = refl-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
 
@@ -78,12 +80,7 @@ module _
   where
 
   transitive-sim-Large-Poset :
-    {l1 l2 l3 : Level}
-    {x : type-Large-Poset P l1}
-    {y : type-Large-Poset P l2}
-    {z : type-Large-Poset P l3} →
-    sim-Large-Poset P y z → sim-Large-Poset P x y →
-    sim-Large-Poset P x z
+    is-large-transitive (type-Large-Poset P) (sim-Large-Poset P)
   transitive-sim-Large-Poset =
     transitive-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
@@ -96,10 +93,7 @@ module _
   where
 
   symmetric-sim-Large-Poset :
-    {l1 l2 : Level}
-    {x : type-Large-Poset P l1}
-    {y : type-Large-Poset P l2} →
-    sim-Large-Poset P x y → sim-Large-Poset P y x
+    is-large-symmetric (type-Large-Poset P) (sim-Large-Poset P)
   symmetric-sim-Large-Poset =
     symmetric-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```

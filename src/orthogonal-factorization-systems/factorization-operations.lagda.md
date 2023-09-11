@@ -17,7 +17,8 @@ open import orthogonal-factorization-systems.factorizations-of-maps
 ## Idea
 
 A **factorization operation** on a function type `A → B` is a choice of
-factorization for every map `f` in `A → B`.
+[factorization](orthogonal-factorization-systems.factorizations-of-maps.md) for
+every map `f` in `A → B`.
 
 ```text
        ∙

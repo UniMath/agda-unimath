@@ -150,13 +150,13 @@ module _
         ( ring-Commutative-Ring B)
         ( f)
 
-    preserves-unit-hom-Commutative-Ring :
+    preserves-one-hom-Commutative-Ring :
       preserves-unit-hom-Ab
         ( ring-Commutative-Ring A)
         ( ring-Commutative-Ring B)
         ( hom-ab-hom-Commutative-Ring)
-    preserves-unit-hom-Commutative-Ring =
-      preserves-unit-hom-Ring
+    preserves-one-hom-Commutative-Ring =
+      preserves-one-hom-Ring
         ( ring-Commutative-Ring A)
         ( ring-Commutative-Ring B)
         ( f)

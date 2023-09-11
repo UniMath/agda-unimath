@@ -109,7 +109,7 @@ module _
     Apartness-Relation l2 type-Type-With-Apartness
   apartness-relation-Type-With-Apartness = pr2 A
 
-  rel-apart-Type-With-Apartness : Rel-Prop l2 type-Type-With-Apartness
+  rel-apart-Type-With-Apartness : Relation-Prop l2 type-Type-With-Apartness
   rel-apart-Type-With-Apartness =
     rel-Apartness-Relation apartness-relation-Type-With-Apartness
 
@@ -147,12 +147,12 @@ module _
   where
 
   rel-apart-function-into-Type-With-Apartness :
-    Rel-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
+    Relation-Prop (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
   rel-apart-function-into-Type-With-Apartness f g =
     ∃-Prop X (λ x → apart-Type-With-Apartness Y (f x) (g x))
 
   apart-function-into-Type-With-Apartness :
-    Rel (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
+    Relation (l1 ⊔ l3) (X → type-Type-With-Apartness Y)
   apart-function-into-Type-With-Apartness f g =
     type-Prop (rel-apart-function-into-Type-With-Apartness f g)
 

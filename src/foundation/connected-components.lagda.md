@@ -27,8 +27,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-The connected component of a type `A` at an element `a : A` is the type of all
-`x : A` that are merely equal to `a`.
+The **connected component** of a type `A` at an element `a : A` is the type of
+all `x : A` that are [merely equal](foundation.mere-equality.md) to `a`.
 
 ## Definition
 

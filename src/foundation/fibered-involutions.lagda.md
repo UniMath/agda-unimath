@@ -9,13 +9,13 @@ module foundation.fibered-involutions where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fibered-maps
+open import foundation.involutions
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.involutions
 ```
 
 </details>
@@ -103,7 +103,7 @@ module _
   is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution :
     is-equiv (map-Σ-is-fibered-involution-fibered-map-fibered-involution)
   is-equiv-map-Σ-is-fibered-involution-fibered-map-fibered-involution =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-fibered-involution-Σ-is-fibered-involution-fibered-map)
       ( refl-htpy)
       ( refl-htpy)
@@ -119,7 +119,7 @@ module _
   is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map :
     is-equiv (map-fibered-involution-Σ-is-fibered-involution-fibered-map)
   is-equiv-map-fibered-involution-Σ-is-fibered-involution-fibered-map =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-Σ-is-fibered-involution-fibered-map-fibered-involution)
       ( refl-htpy)
       ( refl-htpy)

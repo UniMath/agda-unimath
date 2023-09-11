@@ -17,7 +17,6 @@ open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -33,6 +32,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.transport
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -85,7 +85,7 @@ pr1 (equiv-coproduct-Decomposition-full-subuniverse X) d =
   ( right-summand-binary-coproduct-Decomposition d , star) ,
   ( matching-correspondence-binary-coproduct-Decomposition d)
 pr2 (equiv-coproduct-Decomposition-full-subuniverse X) =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( λ d →
       type-left-summand-binary-coproduct-Decomposition-subuniverse
         ( λ _ → unit-Prop)
@@ -242,18 +242,18 @@ module _
     where
 
     matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
-      (X ≃ ((fib f (inl (inr star))) + (fib f (inr star))))
+      (X ≃ ((fiber f (inl (inr star))) + (fiber f (inr star))))
     matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ =
       ( ( equiv-coprod
           ( left-unit-law-Σ-is-contr ( is-contr-Fin-one-ℕ) ( inr star))
           ( left-unit-law-Σ-is-contr is-contr-unit star)) ∘e
-        ( ( right-distributive-Σ-coprod ( Fin 1) unit (λ x → fib f x) ∘e
-            ( inv-equiv-total-fib f))))
+        ( ( right-distributive-Σ-coprod ( Fin 1) unit (λ x → fiber f x) ∘e
+            ( inv-equiv-total-fiber f))))
 
     compute-left-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
       (x : X) →
       (inl (inr star) ＝ f x) →
-      Σ ( Σ ( fib f (inl (inr star)))
+      Σ ( Σ ( fiber f (inl (inr star)))
             ( λ y →
               inl y ＝
               ( map-equiv
@@ -264,7 +264,7 @@ module _
       x p =
       tr
         ( λ a →
-          Σ ( Σ ( fib f (inl (inr star)))
+          Σ ( Σ ( fiber f (inl (inr star)))
               ( λ y →
                 inl y ＝
                 ( map-coprod
@@ -275,7 +275,7 @@ module _
                 ( map-right-distributive-Σ-coprod
                   ( Fin 1)
                   ( unit)
-                  ( λ x → fib f x)
+                  ( λ x → fiber f x)
                   ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
         ( eq-pair-Σ p ( tr-Id-right p (inv p) ∙ left-inv p))
@@ -289,7 +289,7 @@ module _
           refl)
 
     compute-left-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ :
-      (y : fib f (inl (inr star))) →
+      (y : fiber f (inl (inr star))) →
       pr1 y ＝
       map-inv-equiv
         ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)
@@ -316,7 +316,7 @@ module _
     compute-right-matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
       (x : X) →
       (inr star ＝ f x) →
-      Σ ( Σ ( fib f (inr star))
+      Σ ( Σ ( fiber f (inr star))
             ( λ y →
               inr y ＝
               ( map-equiv
@@ -327,7 +327,7 @@ module _
       x p =
       tr
         ( λ a →
-          Σ ( Σ ( fib f (inr star))
+          Σ ( Σ ( fiber f (inr star))
                 ( λ y →
                   inr y ＝
                   ( map-coprod
@@ -338,7 +338,7 @@ module _
                   ( map-right-distributive-Σ-coprod
                     ( Fin 1)
                     ( unit)
-                    ( λ x → fib f x)
+                    ( λ x → fiber f x)
                     ( pr1 a , x , pr2 a))))
             ( λ z → pr1 (pr1 z) ＝ x))
         ( eq-pair-Σ p ( tr-Id-right p (inv p) ∙ left-inv p))
@@ -348,11 +348,11 @@ module _
               ( inv
                   ( inv-map-eq-transpose-equiv
                     ( left-unit-law-Σ-is-contr is-contr-unit star)
-                    ( refl))))),
+                    ( refl))))) ,
           refl)
 
     compute-right-inv-matching-correspondence-binary-coporducd-Decomposition-map-into-Fin-Two-ℕ :
-      (y : fib f (inr star)) →
+      (y : fiber f (inr star)) →
       pr1 y ＝
       map-inv-equiv
         ( matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)
@@ -379,9 +379,9 @@ module _
     map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
       binary-coproduct-Decomposition l1 l1 X
     pr1 (map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ) =
-      fib f (inl (inr star))
+      fiber f (inl (inr star))
     pr1 (pr2 (map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)) =
-      fib f (inr star)
+      fiber f (inr star)
     pr2 (pr2 (map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)) =
       matching-correspondence-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
 
@@ -681,7 +681,7 @@ module _
               ( compute-right-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
                 ( d)
                 ( x)
-                ( inv p))),
+                ( inv p))) ,
             refl)}
         ( inv
           ( pr2
@@ -868,7 +868,7 @@ module _
   is-equiv-map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ :
     is-equiv map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
   is-equiv-map-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ
       ( is-section-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)
       ( is-retraction-map-inv-equiv-binary-coproduct-Decomposition-map-into-Fin-Two-ℕ)

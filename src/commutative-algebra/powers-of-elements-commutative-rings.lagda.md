@@ -67,13 +67,14 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  power-add-Commutative-Ring :
+  distributive-power-add-Commutative-Ring :
     (m n : ℕ) {x : type-Commutative-Ring A} →
     power-Commutative-Ring A (m +ℕ n) x ＝
     mul-Commutative-Ring A
       ( power-Commutative-Ring A m x)
       ( power-Commutative-Ring A n x)
-  power-add-Commutative-Ring = power-add-Ring (ring-Commutative-Ring A)
+  distributive-power-add-Commutative-Ring =
+    distributive-power-add-Ring (ring-Commutative-Ring A)
 ```
 
 ### Powers by products of natural numbers are iterated powers

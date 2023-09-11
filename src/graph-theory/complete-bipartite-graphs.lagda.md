@@ -33,14 +33,14 @@ pr2 (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
   prod-𝔽
     ( Σ-𝔽 X
       ( λ x →
-        fib-𝔽
+        fiber-𝔽
           ( finite-type-2-Element-Type (pr1 p))
           ( coprod-𝔽 X Y)
           ( element-unordered-pair p)
           ( inl x)))
     ( Σ-𝔽 Y
       ( λ y →
-        fib-𝔽
+        fiber-𝔽
           ( finite-type-2-Element-Type (pr1 p))
           ( coprod-𝔽 X Y)
           ( element-unordered-pair p)

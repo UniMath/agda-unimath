@@ -96,8 +96,8 @@ is-relatively-prime-div-ℕ a b c d H K L =
   is-one-is-common-divisor-is-relatively-prime-ℕ a b
     ( gcd-ℕ c d)
     ( L)
-    ( transitive-div-ℕ (gcd-ℕ c d) c a (div-left-factor-gcd-ℕ c d) H ,
-      transitive-div-ℕ (gcd-ℕ c d) d b (div-right-factor-gcd-ℕ c d) K)
+    ( transitive-div-ℕ (gcd-ℕ c d) c a H (div-left-factor-gcd-ℕ c d) ,
+      transitive-div-ℕ (gcd-ℕ c d) d b K (div-right-factor-gcd-ℕ c d))
 ```
 
 ### For any two natural numbers `a` and `b` such that `a + b ≠ 0`, the numbers `a/gcd(a,b)` and `b/gcd(a,b)` are relatively prime

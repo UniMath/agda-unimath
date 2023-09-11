@@ -111,10 +111,10 @@ module _
                     ( inclusion-subuniverse
                       ( subuniverse-global-subuniverse Q l4)
                       ( T B))) × (X → H (pr1 F)))))
-    pr1 reassociate (F , ((A , B , e) , x) , y) = (A , B , (F , e), x , y)
+    pr1 reassociate (F , ((A , B , e) , x) , y) = (A , B , (F , e) , x , y)
     pr2 reassociate =
-      is-equiv-has-inverse
-        ( λ (A , B , (F , e), x , y) → (F , ((A , B , e) , x) , y))
+      is-equiv-is-invertible
+        ( λ (A , B , (F , e) , x , y) → (F , ((A , B , e) , x) , y))
         ( refl-htpy)
         ( refl-htpy)
 
@@ -134,7 +134,7 @@ module _
     pr1 reassociate' (A , B , (s , t) , (fs , ft)) =
       ((A , (s , fs)) , (B , (t , ft)))
     pr2 reassociate' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ ((A , (s , fs)) , (B , (t , ft))) →
           (A , B , (s , t) , (fs , ft)))
         ( refl-htpy)
@@ -171,7 +171,7 @@ module _
                 ( ( inclusion-subuniverse P A × inclusion-subuniverse P B ,
                     C1
                       ( is-in-subuniverse-inclusion-subuniverse P A)
-                      ( is-in-subuniverse-inclusion-subuniverse P B)),
+                      ( is-in-subuniverse-inclusion-subuniverse P B)) ,
                   id-equiv)))) ∘e
       ( reassociate))
 ```

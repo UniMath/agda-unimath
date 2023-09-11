@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.inhabited-types
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
 open import foundation.type-arithmetic-cartesian-product-types
@@ -195,7 +196,7 @@ module _
 
   small-cauchy-composition-species-Inhabited-𝔽 :
     species-Inhabited-𝔽 l1 (l1 ⊔ l2) →
-    species-Inhabited-𝔽 l1 (l1 ⊔ l2)→
+    species-Inhabited-𝔽 l1 (l1 ⊔ l2) →
     species-Inhabited-𝔽 l1 (l1 ⊔ l2)
   small-cauchy-composition-species-Inhabited-𝔽 =
     small-cauchy-composition-species-subuniverse

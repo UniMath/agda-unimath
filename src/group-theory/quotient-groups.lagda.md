@@ -153,7 +153,7 @@ module _
       ( eq-rel-congruence-Normal-Subgroup G H)
 
   reflecting-map-quotient-hom-Group :
-    reflecting-map-Eq-Rel
+    reflecting-map-Equivalence-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( type-quotient-Group)
   reflecting-map-quotient-hom-Group =
@@ -178,7 +178,7 @@ module _
   unit-quotient-Group = map-quotient-hom-Group (unit-Group G)
 
   binary-hom-mul-quotient-Group :
-    binary-hom-Eq-Rel
+    binary-hom-Equivalence-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
@@ -213,7 +213,7 @@ module _
       ( binary-hom-mul-quotient-Group)
 
   hom-inv-quotient-Group :
-    hom-Eq-Rel
+    hom-Equivalence-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
       ( eq-rel-congruence-Normal-Subgroup G H)
   pr1 hom-inv-quotient-Group = inv-Group G
@@ -349,4 +349,63 @@ module _
     left-inverse-law-mul-quotient-Group
   pr2 (pr2 (pr2 (pr2 quotient-Group))) =
     right-inverse-law-mul-quotient-Group
+```
+
+### The quotient homomorphism into the quotient group
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  preserves-mul-quotient-hom-Group :
+    (x y : type-Group G) →
+    map-quotient-hom-Group G N (mul-Group G x y) ＝
+    mul-quotient-Group G N
+      ( map-quotient-hom-Group G N x)
+      ( map-quotient-hom-Group G N y)
+  preserves-mul-quotient-hom-Group x y =
+    inv (compute-mul-quotient-Group G N x y)
+
+  preserves-unit-quotient-hom-Group :
+    map-quotient-hom-Group G N (unit-Group G) ＝ unit-quotient-Group G N
+  preserves-unit-quotient-hom-Group = refl
+
+  preserves-inv-quotient-hom-Group :
+    (x : type-Group G) →
+    map-quotient-hom-Group G N (inv-Group G x) ＝
+    inv-quotient-Group G N (map-quotient-hom-Group G N x)
+  preserves-inv-quotient-hom-Group x =
+    inv (compute-inv-quotient-Group G N x)
+
+  quotient-hom-Group : type-hom-Group G (quotient-Group G N)
+  pr1 quotient-hom-Group = map-quotient-hom-Group G N
+  pr2 quotient-hom-Group = preserves-mul-quotient-hom-Group
+```
+
+## Properties
+
+### An element is in a normal subgroup `N` if and only if it is in the kernel of the quotient group homomorphism `G → G/N`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  abstract
+    is-in-kernel-quotient-hom-is-in-Normal-Subgroup :
+      {x : type-Group G} → is-in-Normal-Subgroup G N x →
+      is-in-kernel-hom-Group G (quotient-Group G N) (quotient-hom-Group G N) x
+    is-in-kernel-quotient-hom-is-in-Normal-Subgroup n =
+      apply-effectiveness-map-quotient-hom-Group' G N
+        ( unit-congruence-Normal-Subgroup' G N n)
+
+  abstract
+    is-in-normal-subgroup-is-in-kernel-quotient-hom-Group :
+      {x : type-Group G} →
+      is-in-kernel-hom-Group G (quotient-Group G N) (quotient-hom-Group G N) x →
+      is-in-Normal-Subgroup G N x
+    is-in-normal-subgroup-is-in-kernel-quotient-hom-Group {x} H =
+      unit-congruence-Normal-Subgroup G N
+        ( apply-effectiveness-map-quotient-hom-Group G N H)
 ```

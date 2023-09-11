@@ -1,6 +1,6 @@
 /* Base styles and content styles */
 
-@import "variables.css";
+@import 'variables.css';
 
 :root {
   /* Browser default font-size is 16px, this way 1 rem = 10px */
@@ -8,7 +8,7 @@
 }
 
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: var(--fg);
   background-color: var(--bg);
   text-size-adjust: none;
@@ -85,7 +85,7 @@ h4:target::before,
 h5:target::before,
 h6:target::before {
   display: inline-block;
-  content: "»";
+  content: '»';
   margin-left: -30px;
   width: 30px;
 }

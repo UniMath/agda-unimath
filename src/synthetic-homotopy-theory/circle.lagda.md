@@ -160,7 +160,7 @@ mere-eq-𝕊¹ =
     ( λ x → (y : 𝕊¹) → mere-eq x y)
     ( function-apply-dependent-universal-property-𝕊¹
       ( mere-eq base-𝕊¹)
-      ( refl-mere-eq)
+      ( refl-mere-eq base-𝕊¹)
       ( eq-is-prop is-prop-type-trunc-Prop))
     ( eq-is-prop (is-prop-Π (λ y → is-prop-type-trunc-Prop)))
 

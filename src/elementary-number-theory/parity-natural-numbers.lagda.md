@@ -153,6 +153,6 @@ has-odd-expansion-is-odd (succ-ℕ zero-ℕ) p = 0 , refl
 has-odd-expansion-is-odd (succ-ℕ (succ-ℕ n)) p =
   ( succ-ℕ (pr1 s)) , ap (succ-ℕ ∘ succ-ℕ) (pr2 s)
   where
-    s : has-odd-expansion n
-    s = has-odd-expansion-is-odd n (is-odd-is-odd-succ-succ-ℕ n p)
+  s : has-odd-expansion n
+  s = has-odd-expansion-is-odd n (is-odd-is-odd-succ-succ-ℕ n p)
 ```

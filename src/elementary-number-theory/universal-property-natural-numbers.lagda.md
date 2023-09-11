@@ -92,11 +92,14 @@ module _
     map-inv-is-equiv (is-equiv-htpy-eq-structure-preserving-map-ℕ h k)
 
   center-structure-preserving-map-ℕ : structure-preserving-map-ℕ
-  center-structure-preserving-map-ℕ = triple h refl refl-htpy
+  pr1 center-structure-preserving-map-ℕ =
+    h
     where
     h : ℕ → X
     h zero-ℕ = x
     h (succ-ℕ n) = f (h n)
+  pr1 (pr2 center-structure-preserving-map-ℕ) = refl
+  pr2 (pr2 center-structure-preserving-map-ℕ) = refl-htpy
 
   contraction-structure-preserving-map-ℕ :
     (h : structure-preserving-map-ℕ) → center-structure-preserving-map-ℕ ＝ h

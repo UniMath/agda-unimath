@@ -27,7 +27,7 @@ homomorphisms.
 ### The large precategory of abelian groups
 
 ```agda
-ab-Precategory : Large-Precategory lsuc (λ l1 l2 → l1 ⊔ l2)
+ab-Precategory : Large-Precategory lsuc (_⊔_)
 Large-Precategory.obj-Large-Precategory ab-Precategory = Ab
 Large-Precategory.hom-Large-Precategory ab-Precategory = hom-Ab
 Large-Precategory.comp-hom-Large-Precategory ab-Precategory

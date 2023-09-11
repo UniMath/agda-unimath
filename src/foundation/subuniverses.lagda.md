@@ -61,8 +61,8 @@ module _
   inclusion-subuniverse = inclusion-subtype P
 
   is-in-subuniverse-inclusion-subuniverse :
-    (x : type-subuniverse) → is-in-subuniverse (inclusion-subuniverse x)
-  is-in-subuniverse-inclusion-subuniverse x = pr2 x
+    (X : type-subuniverse) → is-in-subuniverse (inclusion-subuniverse X)
+  is-in-subuniverse-inclusion-subuniverse = pr2
 
   is-emb-inclusion-subuniverse : is-emb inclusion-subuniverse
   is-emb-inclusion-subuniverse = is-emb-inclusion-subtype P
@@ -97,27 +97,6 @@ module _
     {l : Level} → UU l → UU (α l)
   is-in-global-subuniverse X =
     is-in-subuniverse (subuniverse-global-subuniverse P _) X
-```
-
-### The predicate that a subuniverse is closed under Σ
-
-We state a general form involving three universes, and a more traditional form
-using a single universe
-
-```agda
-is-closed-under-Σ-subuniverses :
-  {l1 l2 l3 l4 l5 : Level}
-  (P : subuniverse l1 l2) (Q : subuniverse l3 l4)
-  (R : subuniverse (l1 ⊔ l3) l5) → UU (lsuc l1 ⊔ l2 ⊔ lsuc l3 ⊔ l4 ⊔ l5)
-is-closed-under-Σ-subuniverses P Q R =
-  (X : type-subuniverse P)
-  (Y : inclusion-subuniverse P X → type-subuniverse Q) →
-  is-in-subuniverse R
-    ( Σ (inclusion-subuniverse P X) (λ x → inclusion-subuniverse Q (Y x)))
-
-is-closed-under-Σ-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) → UU (lsuc l1 ⊔ l2)
-is-closed-under-Σ-subuniverse P = is-closed-under-Σ-subuniverses P P P
 ```
 
 ## Properties
@@ -242,3 +221,7 @@ module _
   eq-equiv-fam-subuniverse Y Z =
     map-inv-is-equiv (is-equiv-equiv-eq-fam-subuniverse Y Z)
 ```
+
+## See also
+
+- [Σ-closed subuniverses](foundation.sigma-closed-subuniverses.md)

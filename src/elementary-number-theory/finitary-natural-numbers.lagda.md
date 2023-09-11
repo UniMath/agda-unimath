@@ -136,7 +136,7 @@ is-injective-convert-based-ℕ
         { unary-op-ℕ (succ-ℕ k) x (convert-based-ℕ (succ-ℕ k) n)}
         { unary-op-ℕ (succ-ℕ k) y (convert-based-ℕ (succ-ℕ k) m)}
         { nat-Fin (succ-ℕ k) y}
-        ( symm-cong-ℕ
+        ( symmetric-cong-ℕ
           ( succ-ℕ k)
           ( unary-op-ℕ (succ-ℕ k) x (convert-based-ℕ (succ-ℕ k) n))
           ( nat-Fin (succ-ℕ k) x)

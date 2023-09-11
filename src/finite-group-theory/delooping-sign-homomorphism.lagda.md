@@ -109,10 +109,10 @@ delooping of the sign homomorphism.
 module _
   { l1 l2 l3 : Level}
   ( D : (n : ℕ) (X : UU-Fin l1 n) → UU l2)
-  ( R : (n : ℕ) (X : UU-Fin l1 n) → Eq-Rel l3 (D n X))
+  ( R : (n : ℕ) (X : UU-Fin l1 n) → Equivalence-Relation l3 (D n X))
   ( is-decidable-R :
     (n : ℕ) → leq-ℕ 2 n → (X : UU-Fin l1 n)
-    (a b : D n X) → is-decidable (sim-Eq-Rel (R n X) a b))
+    (a b : D n X) → is-decidable (sim-Equivalence-Relation (R n X) a b))
   ( equiv-D/R-fin-2-equiv :
     (n : ℕ) (X : UU-Fin l1 n) →
     leq-ℕ 2 n → Fin n ≃ type-UU-Fin n X →
@@ -120,12 +120,12 @@ module _
   ( quotient-aut-succ-succ-Fin : (n : ℕ) →
     ( raise-Fin l1 (n +ℕ 2) ≃ raise-Fin l1 (n +ℕ 2)) →
     D ( n +ℕ 2)
-      ( raise-Fin l1 (n +ℕ 2),
+      ( raise-Fin l1 (n +ℕ 2) ,
         unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
   ( not-R-transposition-fin-succ-succ :
     (n : ℕ) →
     ( Y : 2-Element-Decidable-Subtype l1 (raise-Fin l1 (n +ℕ 2))) →
-    ¬ ( sim-Eq-Rel
+    ¬ ( sim-Equivalence-Relation
       ( R
         ( n +ℕ 2)
         ( raise-Fin l1 (n +ℕ 2) ,
@@ -185,8 +185,8 @@ module _
       ( X X' : UU-Fin l1 n)
       ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
       ( a a' : D n X) →
-      ( sim-Eq-Rel (R n X) a a' ↔
-        sim-Eq-Rel
+      ( sim-Equivalence-Relation (R n X) a a' ↔
+        sim-Equivalence-Relation
           ( R n X')
           ( map-equiv (invertible-action-D-equiv n X X' e) a)
           ( map-equiv (invertible-action-D-equiv n X X' e) a'))
@@ -196,15 +196,15 @@ module _
         ( X)
         ( λ Y f →
           ( a a' : D n X) →
-          ( sim-Eq-Rel (R n X) a a' ↔
-            sim-Eq-Rel
+          ( sim-Equivalence-Relation (R n X) a a' ↔
+            sim-Equivalence-Relation
               ( R n Y)
               ( map-equiv (invertible-action-D-equiv n X Y f) a)
               ( map-equiv (invertible-action-D-equiv n X Y f) a')))
         ( λ a a' →
           ( iff-equiv
             ( equiv-binary-tr
-              ( sim-Eq-Rel (R n X))
+              ( sim-Equivalence-Relation (R n X))
               ( inv
                 ( ap
                   ( λ g → map-equiv g a)
@@ -259,7 +259,7 @@ module _
 
     quotient-reflecting-map-quotient-Fin :
       (n : ℕ) →
-      reflecting-map-Eq-Rel
+      reflecting-map-Equivalence-Relation
         ( R n (raise-UU-Fin-Fin n))
         ( type-Set (quotient-set-Fin n))
     quotient-reflecting-map-quotient-Fin n =
@@ -426,7 +426,7 @@ module _
               coherence-square-maps
                 ( map-quotient-loop-Fin n p)
                 ( quotient-map-quotient-Fin (n +ℕ 2))
-                ( map-reflecting-map-Eq-Rel
+                ( map-reflecting-map-Equivalence-Relation
                   ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
                   ( quotient-reflecting-map-quotient-Fin (n +ℕ 2)))
                 ( map-equiv h')))
@@ -480,7 +480,7 @@ module _
     ( n : ℕ) →
     ( h : type-Group (symmetric-Group (raise-Fin-Set l1 (n +ℕ 2)))) →
     ( is-decidable
-      ( sim-Eq-Rel
+      ( sim-Equivalence-Relation
         ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
         ( quotient-aut-succ-succ-Fin n h)
         ( map-equiv
@@ -538,7 +538,7 @@ module _
       { y = inr (not-R-transposition-fin-succ-succ n Y)}
       ( eq-is-prop
         ( is-prop-is-decidable
-          ( is-prop-sim-Eq-Rel
+          ( is-prop-sim-Equivalence-Relation
             ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
             ( quotient-aut-succ-succ-Fin n (transposition Y))
             ( map-equiv
@@ -566,7 +566,7 @@ module _
     ( n : ℕ)
     ( p : type-Group (loop-group-Set (raise-Fin-Set l1 (n +ℕ 2))))
     ( D : is-decidable
-      ( sim-Eq-Rel
+      ( sim-Equivalence-Relation
         ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
         ( this-third-thing n p)
         ( map-quotient-loop-Fin n p (this-third-thing n p)))) →
@@ -594,7 +594,7 @@ module _
       ( quotient-map-quotient-Fin (n +ℕ 2)
         ( map-quotient-loop-Fin n p (this-third-thing n p)))
   cases-eq-map-quotient-aut-Fin n p (inl D) k k' q r =
-    reflects-map-reflecting-map-Eq-Rel
+    reflects-map-reflecting-map-Equivalence-Relation
       ( R (n +ℕ 2) (raise-UU-Fin-Fin (n +ℕ 2)))
       ( quotient-reflecting-map-quotient-Fin (n +ℕ 2))
       ( D)
@@ -1525,26 +1525,29 @@ module _
     equiv-Q-equivalence-class :
       (n : ℕ) (X : UU-Fin l1 n) →
       type-UU-Fin 2 (Q n X) ≃
-      equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+      equivalence-class (Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
     equiv-Q-equivalence-class n X =
       equiv-uniqueness-set-quotient
-        ( Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+        ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
         ( set-UU-Fin 2 (Q n X))
-        ( id-reflecting-map-Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
-        ( is-set-quotient-id-Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
-        ( equivalence-class-Set (Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
+        ( id-reflecting-map-Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+        ( is-set-quotient-id-Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
+        ( equivalence-class-Set
+          ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X))))
         ( quotient-reflecting-map-equivalence-class
-          ( Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
+          ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X))))
         ( is-set-quotient-equivalence-class
-          ( Id-Eq-Rel (set-UU-Fin 2 (Q n X))))
+          ( Id-Equivalence-Relation (set-UU-Fin 2 (Q n X))))
 
     equiv-fin-2-equivalence-class :
       (n : ℕ) (X : UU-Fin l1 n) → leq-ℕ 2 n →
       Fin n ≃ type-UU-Fin n X →
-      Fin 2 ≃ equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+      Fin 2 ≃ equivalence-class (Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
     equiv-fin-2-equivalence-class n X H h =
       tr
-        ( λ Y → Fin 2 ≃ equivalence-class (Id-Eq-Rel (set-UU-Fin 2 (Q n Y))))
+        ( λ Y →
+          Fin 2 ≃
+          equivalence-class (Id-Equivalence-Relation (set-UU-Fin 2 (Q n Y))))
         ( eq-pair-Σ
           ( eq-equiv (raise l1 (Fin n)) (type-UU-Fin n X)
             ( h ∘e inv-equiv (compute-raise-Fin l1 n)))
@@ -1558,7 +1561,7 @@ module _
   delooping-sign =
     quotient-delooping-sign
       ( λ n X → type-UU-Fin 2 (Q n X))
-      ( λ n X → Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+      ( λ n X → Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
       ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → map-equiv (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
@@ -1596,7 +1599,7 @@ module _
           ( abstract-group-Concrete-Group (UU-Fin-Group (lsuc l2) 2))
           ( symmetric-abstract-UU-fin-group-quotient-hom
             ( λ n X → type-UU-Fin 2 (Q n X))
-            ( λ n X → Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+            ( λ n X → Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
             ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
             ( equiv-fin-2-equivalence-class)
             ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))
@@ -1614,7 +1617,7 @@ module _
   eq-delooping-sign-homomorphism =
     eq-quotient-delooping-sign-homomorphism
       ( λ n X → type-UU-Fin 2 (Q n X))
-      ( λ n X → Id-Eq-Rel (set-UU-Fin 2 (Q n X)))
+      ( λ n X → Id-Equivalence-Relation (set-UU-Fin 2 (Q n X)))
       ( λ n _ X → has-decidable-equality-has-cardinality 2 (pr2 (Q n X)))
       ( equiv-fin-2-equivalence-class)
       ( λ n _ → pr1 (equiv-Q-fin-fin-2 (n +ℕ 2) star) (zero-Fin 1))

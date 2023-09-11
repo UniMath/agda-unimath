@@ -40,8 +40,8 @@ div-factorial-ℕ (succ-ℕ n) x l H with
   transitive-div-ℕ x
     ( factorial-ℕ n)
     ( factorial-ℕ (succ-ℕ n))
-    ( div-factorial-ℕ n x l' H)
     ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (factorial-ℕ n)))
+    ( div-factorial-ℕ n x l' H)
 ... | inr refl = pair (factorial-ℕ n) refl
 ```
 

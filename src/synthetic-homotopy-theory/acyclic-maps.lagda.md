@@ -28,7 +28,7 @@ module _
   where
 
   is-acyclic-map-Prop : (A → B) → Prop (l1 ⊔ l2)
-  is-acyclic-map-Prop f = Π-Prop B (λ b → is-acyclic-Prop (fib f b))
+  is-acyclic-map-Prop f = Π-Prop B (λ b → is-acyclic-Prop (fiber f b))
 
   is-acyclic-map : (A → B) → UU (l1 ⊔ l2)
   is-acyclic-map f = type-Prop (is-acyclic-map-Prop f)

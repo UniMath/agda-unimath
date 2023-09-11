@@ -5,17 +5,17 @@ at formalizing mathematics from a univalent point of view using the dependently
 typed programming language [Agda](https://github.com/agda/agda).
 
 <a href="https://github.com/unimath/agda-unimath">
-<img align="right" width="300" alt="Agda-UniMath" src="agda-unimath-logo.svg" />
+<img align="right" width="300" alt="agda-unimath" src="agda-unimath-logo.svg" />
 </a>
 
 The library project was created by Elisabeth Bonnevier, Jonathan Prieto-Cubides,
-and Egbert Rijke, and is currently also being maintained by Fredrik Bakke. Our
-goal is to create an online encyclopedia of formalized mathematics containing an
-extensive curriculum of topics from a univalent point of view. We think
-libraries of formalized mathematics have the potential to be useful, and
-informative resources for both working and learning mathematicians. Our library
-is designed to work towards this goal, and we welcome contributions to the
-library within any topic in mathematics.
+and Egbert Rijke, and is also maintained by Fredrik Bakke. Our goal is to create
+an online encyclopedia of formalized mathematics containing an extensive
+curriculum of topics from a univalent point of view. We think libraries of
+formalized mathematics have the potential to be useful, and informative
+resources for both working and learning mathematicians. Our library is designed
+to work towards this goal, and we welcome contributions to the library within
+any topic in mathematics.
 
 The `agda-unimath` library is compatible with Agda 2.6.3 and can be compiled by
 running `make check` from the root directory of the repository. Learn more about

@@ -23,6 +23,16 @@
     "*.lagda.md": "${capture}.agdai, ${capture}.agda~"
   },
 
+  // Declutter explorer view
+  "files.exclude": {
+    "MAlonzo/": true,
+    "**/MAlonzo/": true,
+    "_build/": true,
+    "**/_build/": true,
+    "agdaFiles": true,
+    "src/temp/": true
+  },
+
   // Snippet setup
   "editor.inlineSuggest.enabled": true,
   "editor.acceptSuggestionOnEnter": "off",
@@ -30,23 +40,26 @@
   "editor.wordBasedSuggestions": false,
   "javascript.suggest.names": false,
 
-  // Autoformatting and file type specific settings
+  // Autoformatting
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc.json",
   "editor.formatOnType": true,
   "editor.formatOnSave": true,
 
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
 
-  // File specific
+  "editor.tabSize": 2,
+
+  // File type specific
   "files.associations": {
-    "*.agda": "agda",
-    "*.lagda.md": "literate agda markdown"
+    "*.lock": "json"
   },
 
   "[agda]": {
-    "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
       "other": "on"
@@ -59,13 +72,11 @@
       "other": true
     },
     "editor.suggest.insertMode": "replace",
-    "gitlens.codeLens.scopes": ["document"],
-    "editor.tabSize": 2
+    "gitlens.codeLens.scopes": ["document"]
   },
 
   "[javascript]": {
-    "editor.maxTokenizationLineLength": 2500,
-    "editor.tabSize": 2
+    "editor.maxTokenizationLineLength": 2500
   },
 
   "[json][jsonc]": {
@@ -77,7 +88,6 @@
   },
 
   "[literate agda markdown]": {
-    "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
       "other": "on"
@@ -86,7 +96,6 @@
   },
 
   "[markdown]": {
-    "editor.tabSize": 2,
     "editor.rulers": [80],
     "editor.quickSuggestions": {
       "other": "on"

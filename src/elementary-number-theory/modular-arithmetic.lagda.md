@@ -618,27 +618,11 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
           ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x)))))
       ( int-ℕ (k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
       ( inl x)
-      ( cong-int-cong-ℕ
-        ( succ-ℕ k)
-        ( nat-Fin
-          ( succ-ℕ k)
-          ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
-        ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
-        ( cong-mul-Fin (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
       ( transitive-cong-ℤ
         ( int-ℕ (succ-ℕ k))
         ( int-ℕ (k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x)))))
         ( int-ℕ (k *ℕ (succ-ℕ x)))
         ( inl x)
-        ( cong-int-cong-ℕ
-          ( succ-ℕ k)
-          ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
-          ( k *ℕ (succ-ℕ x))
-          ( congruence-mul-ℕ
-            ( succ-ℕ k)
-            {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
-            ( refl-cong-ℕ (succ-ℕ k) k)
-            ( cong-nat-mod-succ-ℕ k (succ-ℕ x))))
         ( pair
           ( inr (inr x))
           ( ( commutative-mul-ℤ (inr (inr x)) (inr (inr k))) ∙
@@ -648,7 +632,23 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
               ( ( right-distributive-mul-add-ℤ (int-ℕ k) one-ℤ (inr (inr x))) ∙
                 ( ap-add-ℤ
                   ( mul-int-ℕ k (succ-ℕ x))
-                  ( left-unit-law-mul-ℤ (inr (inr x))))))))))
+                  ( left-unit-law-mul-ℤ (inr (inr x))))))))
+        ( cong-int-cong-ℕ
+          ( succ-ℕ k)
+          ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
+          ( k *ℕ (succ-ℕ x))
+          ( congruence-mul-ℕ
+            ( succ-ℕ k)
+            {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
+            ( refl-cong-ℕ (succ-ℕ k) k)
+            ( cong-nat-mod-succ-ℕ k (succ-ℕ x)))))
+      ( cong-int-cong-ℕ
+        ( succ-ℕ k)
+        ( nat-Fin
+          ( succ-ℕ k)
+          ( mul-Fin (succ-ℕ k) (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x))))
+        ( k *ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))))
+        ( cong-mul-Fin (neg-one-Fin k) (mod-succ-ℕ k (succ-ℕ x)))))
 cong-int-mod-ℤ (succ-ℕ k) (inr (inl star)) =
   cong-int-cong-ℕ
     ( succ-ℕ k)

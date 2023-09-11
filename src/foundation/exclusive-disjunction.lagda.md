@@ -179,7 +179,7 @@ module _
     ( equiv-coprod
       ( equiv-tot
         ( λ p →
-          ( ( equiv-map-Π
+          ( ( equiv-Π-equiv-family
               ( λ q → compute-eq-coprod-inl-inr p q)) ∘e
             ( left-unit-law-prod-is-contr
               ( is-contr-Π
@@ -191,7 +191,7 @@ module _
           ( equiv-dependent-universal-property-coprod (λ x → inl p ＝ x))))
       ( equiv-tot
         ( λ q →
-          ( ( equiv-map-Π
+          ( ( equiv-Π-equiv-family
               ( λ p → compute-eq-coprod-inr-inl q p)) ∘e
             ( right-unit-law-prod-is-contr
               ( is-contr-Π

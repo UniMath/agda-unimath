@@ -41,9 +41,9 @@ module _
 
   triangle-descent-Σ :
     (i : I) (a : A i) →
-    ( map-fib-cone (f i) h (c i) a) ~
-    ( ( map-fib-cone (ind-Σ f) h cone-descent-Σ (pair i a)) ∘
-      ( map-inv-compute-fib-tot (λ i → (pr1 (c i))) (pair i a)))
+    ( map-fiber-cone (f i) h (c i) a) ~
+    ( ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a)) ∘
+      ( map-inv-compute-fiber-tot (λ i → (pr1 (c i))) (pair i a)))
   triangle-descent-Σ i .(pr1 (c i) a') (pair a' refl) = refl
 
   abstract
@@ -51,33 +51,33 @@ module _
       ((i : I) → is-pullback (f i) h (c i)) →
       is-pullback (ind-Σ f) h cone-descent-Σ
     descent-Σ is-pb-c =
-      is-pullback-is-fiberwise-equiv-map-fib-cone
+      is-pullback-is-fiberwise-equiv-map-fiber-cone
         ( ind-Σ f)
         ( h)
         ( cone-descent-Σ)
         ( ind-Σ
           ( λ i a → is-equiv-left-factor-htpy
-            ( map-fib-cone (f i) h (c i) a)
-            ( map-fib-cone (ind-Σ f) h cone-descent-Σ (pair i a))
-            ( map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))
+            ( map-fiber-cone (f i) h (c i) a)
+            ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a))
+            ( map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
             ( triangle-descent-Σ i a)
-            ( is-fiberwise-equiv-map-fib-cone-is-pullback
+            ( is-fiberwise-equiv-map-fiber-cone-is-pullback
               (f i) h (c i) (is-pb-c i) a)
-            ( is-equiv-map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))))
+            ( is-equiv-map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))))
 
   abstract
     descent-Σ' :
       is-pullback (ind-Σ f) h cone-descent-Σ →
       ((i : I) → is-pullback (f i) h (c i))
     descent-Σ' is-pb-dsq i =
-      is-pullback-is-fiberwise-equiv-map-fib-cone (f i) h (c i)
+      is-pullback-is-fiberwise-equiv-map-fiber-cone (f i) h (c i)
         ( λ a → is-equiv-comp-htpy
-          ( map-fib-cone (f i) h (c i) a)
-          ( map-fib-cone (ind-Σ f) h cone-descent-Σ (pair i a))
-          ( map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))
+          ( map-fiber-cone (f i) h (c i) a)
+          ( map-fiber-cone (ind-Σ f) h cone-descent-Σ (pair i a))
+          ( map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
           ( triangle-descent-Σ i a)
-          ( is-equiv-map-inv-compute-fib-tot (λ i → pr1 (c i)) (pair i a))
-          ( is-fiberwise-equiv-map-fib-cone-is-pullback
+          ( is-equiv-map-inv-compute-fiber-tot (λ i → pr1 (c i)) (pair i a))
+          ( is-fiberwise-equiv-map-fiber-cone-is-pullback
             ( ind-Σ f)
             ( h)
             ( cone-descent-Σ)

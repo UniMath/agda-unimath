@@ -66,7 +66,7 @@ module _
     pr1 reassociate (F , ((U , V , e) , s , fs) , ft) =
       (U , V , (F , e) , s , fs , ft)
     pr2 reassociate =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ (U , V , (F , e) , s , fs , ft) →
           (F , ((U , V , e) , s , fs) , ft))
         ( refl-htpy)

@@ -7,7 +7,9 @@ module order-theory.dependent-products-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -68,35 +70,33 @@ module _
   is-set-type-Π-Large-Locale = is-set-type-Π-Large-Frame L
 
   leq-Π-Large-Locale-Prop :
-    {l2 l3 : Level} → type-Π-Large-Locale l2 → type-Π-Large-Locale l3 →
-    Prop (β l2 l3 ⊔ l1)
+    Large-Relation-Prop
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Locale)
   leq-Π-Large-Locale-Prop = leq-Π-Large-Frame-Prop L
 
   leq-Π-Large-Locale :
-    {l2 l3 : Level} →
-    type-Π-Large-Locale l2 → type-Π-Large-Locale l3 → UU (β l2 l3 ⊔ l1)
+    Large-Relation
+      ( λ l2 → α l2 ⊔ l1)
+      ( λ l2 l3 → β l2 l3 ⊔ l1)
+      ( type-Π-Large-Locale)
   leq-Π-Large-Locale = leq-Π-Large-Frame L
 
   is-prop-leq-Π-Large-Locale :
-    {l2 l3 : Level} (x : type-Π-Large-Locale l2) (y : type-Π-Large-Locale l3) →
-    is-prop (leq-Π-Large-Locale x y)
+    is-prop-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   is-prop-leq-Π-Large-Locale = is-prop-leq-Π-Large-Frame L
 
   refl-leq-Π-Large-Locale :
-    {l2 : Level} (x : type-Π-Large-Locale l2) → leq-Π-Large-Locale x x
+    is-large-reflexive type-Π-Large-Locale leq-Π-Large-Locale
   refl-leq-Π-Large-Locale = refl-leq-Π-Large-Frame L
 
   antisymmetric-leq-Π-Large-Locale :
-    {l2 : Level} (x y : type-Π-Large-Locale l2) →
-    leq-Π-Large-Locale x y → leq-Π-Large-Locale y x → x ＝ y
+    is-large-antisymmetric type-Π-Large-Locale leq-Π-Large-Locale
   antisymmetric-leq-Π-Large-Locale = antisymmetric-leq-Π-Large-Frame L
 
   transitive-leq-Π-Large-Locale :
-    {l2 l3 l4 : Level}
-    (x : type-Π-Large-Locale l2)
-    (y : type-Π-Large-Locale l3)
-    (z : type-Π-Large-Locale l4) →
-    leq-Π-Large-Locale y z → leq-Π-Large-Locale x y → leq-Π-Large-Locale x z
+    is-large-transitive type-Π-Large-Locale leq-Π-Large-Locale
   transitive-leq-Π-Large-Locale = transitive-leq-Π-Large-Frame L
 
   meet-Π-Large-Locale :

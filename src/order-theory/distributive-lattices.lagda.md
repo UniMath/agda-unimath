@@ -7,6 +7,7 @@ module order-theory.distributive-lattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -82,21 +83,16 @@ module _
   is-prop-leq-Distributive-Lattice =
     is-prop-leq-Lattice lattice-Distributive-Lattice
 
-  refl-leq-Distributive-Lattice :
-    (x : type-Distributive-Lattice) → leq-Distributive-Lattice x x
+  refl-leq-Distributive-Lattice : is-reflexive leq-Distributive-Lattice
   refl-leq-Distributive-Lattice =
     refl-leq-Lattice lattice-Distributive-Lattice
 
   antisymmetric-leq-Distributive-Lattice :
-    (x y : type-Distributive-Lattice) →
-    leq-Distributive-Lattice x y → leq-Distributive-Lattice y x → x ＝ y
+    is-antisymmetric leq-Distributive-Lattice
   antisymmetric-leq-Distributive-Lattice =
     antisymmetric-leq-Lattice lattice-Distributive-Lattice
 
-  transitive-leq-Distributive-Lattice :
-    (x y z : type-Distributive-Lattice) →
-    leq-Distributive-Lattice y z →
-    leq-Distributive-Lattice x y → leq-Distributive-Lattice x z
+  transitive-leq-Distributive-Lattice : is-transitive leq-Distributive-Lattice
   transitive-leq-Distributive-Lattice =
     transitive-leq-Lattice lattice-Distributive-Lattice
 

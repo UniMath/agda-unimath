@@ -45,7 +45,8 @@ le-ℕ n m = type-Prop (le-ℕ-Prop n m)
 is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
 is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
 
-_<_ = le-ℕ
+infix 30 _<-ℕ_
+_<-ℕ_ = le-ℕ
 ```
 
 ## Properties
@@ -113,7 +114,7 @@ contradiction-le-one-ℕ (succ-ℕ n) ()
 ### The strict ordering of the natural numbers is anti-reflexive
 
 ```agda
-anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n < n)
+anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
 anti-reflexive-le-ℕ zero-ℕ ()
 anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
 ```
@@ -129,9 +130,9 @@ neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p
 ### Strict inequality is antisymmetric
 
 ```agda
-anti-symmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
-anti-symmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
-  ap succ-ℕ (anti-symmetric-le-ℕ m n p q)
+antisymmetric-le-ℕ : (m n : ℕ) → le-ℕ m n → le-ℕ n m → m ＝ n
+antisymmetric-le-ℕ (succ-ℕ m) (succ-ℕ n) p q =
+  ap succ-ℕ (antisymmetric-le-ℕ m n p q)
 ```
 
 ### The strict ordering of the natural numbers is transitive

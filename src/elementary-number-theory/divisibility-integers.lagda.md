@@ -16,6 +16,7 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-types
@@ -137,14 +138,13 @@ is-prop-div-ℤ d x f = is-prop-map-is-emb (is-emb-right-mul-ℤ d f) x
 Note that the divisibility relation on the integers is not antisymmetric.
 
 ```agda
-refl-div-ℤ : (x : ℤ) → div-ℤ x x
+refl-div-ℤ : is-reflexive div-ℤ
 pr1 (refl-div-ℤ x) = one-ℤ
 pr2 (refl-div-ℤ x) = left-unit-law-mul-ℤ x
 
-trans-div-ℤ :
-  (x y z : ℤ) → div-ℤ x y → div-ℤ y z → div-ℤ x z
-pr1 (trans-div-ℤ x y z (pair d p) (pair e q)) = e *ℤ d
-pr2 (trans-div-ℤ x y z (pair d p) (pair e q)) =
+transitive-div-ℤ : is-transitive div-ℤ
+pr1 (transitive-div-ℤ x y z (pair e q) (pair d p)) = e *ℤ d
+pr2 (transitive-div-ℤ x y z (pair e q) (pair d p)) =
   ( associative-mul-ℤ e d x) ∙
     ( ( ap (e *ℤ_) p) ∙
       ( q))
@@ -211,8 +211,7 @@ pr2 (div-add-ℤ x y z (pair d p) (pair e q)) =
 ```agda
 div-mul-ℤ :
   (k x y : ℤ) → div-ℤ x y → div-ℤ x (k *ℤ y)
-div-mul-ℤ k x y H =
-  trans-div-ℤ x y (k *ℤ y) H (pair k refl)
+div-mul-ℤ k x y = transitive-div-ℤ x y (k *ℤ y) (k , refl)
 ```
 
 ### If `x` divides `y` then it divides `-y`
@@ -494,11 +493,11 @@ is-zero-sim-unit-ℤ {x} {y} H p =
 ### The relations `presim-unit-ℤ` and `sim-unit-ℤ` are equivalence relations
 
 ```agda
-refl-presim-unit-ℤ : (x : ℤ) → presim-unit-ℤ x x
+refl-presim-unit-ℤ : is-reflexive presim-unit-ℤ
 pr1 (refl-presim-unit-ℤ x) = one-unit-ℤ
 pr2 (refl-presim-unit-ℤ x) = left-unit-law-mul-ℤ x
 
-refl-sim-unit-ℤ : (x : ℤ) → sim-unit-ℤ x x
+refl-sim-unit-ℤ : is-reflexive sim-unit-ℤ
 refl-sim-unit-ℤ x f = refl-presim-unit-ℤ x
 
 presim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → presim-unit-ℤ x y
@@ -507,8 +506,8 @@ presim-unit-eq-ℤ {x} refl = refl-presim-unit-ℤ x
 sim-unit-eq-ℤ : {x y : ℤ} → x ＝ y → sim-unit-ℤ x y
 sim-unit-eq-ℤ {x} refl = refl-sim-unit-ℤ x
 
-symm-presim-unit-ℤ : {x y : ℤ} → presim-unit-ℤ x y → presim-unit-ℤ y x
-symm-presim-unit-ℤ {x} {y} (pair (pair u H) p) =
+symmetric-presim-unit-ℤ : is-symmetric presim-unit-ℤ
+symmetric-presim-unit-ℤ x y (pair (pair u H) p) =
   f (is-one-or-neg-one-is-unit-ℤ u H)
   where
   f : is-one-or-neg-one-ℤ u → presim-unit-ℤ y x
@@ -517,21 +516,21 @@ symm-presim-unit-ℤ {x} {y} (pair (pair u H) p) =
   pr1 (f (inr refl)) = neg-one-unit-ℤ
   pr2 (f (inr refl)) = inv (inv (neg-neg-ℤ x) ∙ ap (neg-one-ℤ *ℤ_) p)
 
-symm-sim-unit-ℤ : {x y : ℤ} → sim-unit-ℤ x y → sim-unit-ℤ y x
-symm-sim-unit-ℤ {x} {y} H f =
-  symm-presim-unit-ℤ (H (λ p → f (pair (pr2 p) (pr1 p))))
+symmetric-sim-unit-ℤ : is-symmetric sim-unit-ℤ
+symmetric-sim-unit-ℤ x y H f =
+  symmetric-presim-unit-ℤ x y (H (λ p → f (pair (pr2 p) (pr1 p))))
 
 is-nonzero-sim-unit-ℤ' :
   {x y : ℤ} → sim-unit-ℤ x y → is-nonzero-ℤ y → is-nonzero-ℤ x
-is-nonzero-sim-unit-ℤ' H = is-nonzero-sim-unit-ℤ (symm-sim-unit-ℤ H)
+is-nonzero-sim-unit-ℤ' {x} {y} H =
+  is-nonzero-sim-unit-ℤ (symmetric-sim-unit-ℤ x y H)
 
 is-zero-sim-unit-ℤ' :
   {x y : ℤ} → sim-unit-ℤ x y → is-zero-ℤ y → is-zero-ℤ x
-is-zero-sim-unit-ℤ' H = is-zero-sim-unit-ℤ (symm-sim-unit-ℤ H)
+is-zero-sim-unit-ℤ' {x} {y} H = is-zero-sim-unit-ℤ (symmetric-sim-unit-ℤ x y H)
 
-trans-presim-unit-ℤ :
-  (x y z : ℤ) → presim-unit-ℤ x y → presim-unit-ℤ y z → presim-unit-ℤ x z
-trans-presim-unit-ℤ x y z (pair (pair u H) p) (pair (pair v K) q) =
+transitive-presim-unit-ℤ : is-transitive presim-unit-ℤ
+transitive-presim-unit-ℤ x y z (pair (pair v K) q) (pair (pair u H) p) =
   f (is-one-or-neg-one-is-unit-ℤ u H) (is-one-or-neg-one-is-unit-ℤ v K)
   where
   f : is-one-or-neg-one-ℤ u → is-one-or-neg-one-ℤ v → presim-unit-ℤ x z
@@ -544,12 +543,11 @@ trans-presim-unit-ℤ x y z (pair (pair u H) p) (pair (pair v K) q) =
   pr1 (f (inr refl) (inr refl)) = one-unit-ℤ
   pr2 (f (inr refl) (inr refl)) = inv (neg-neg-ℤ x) ∙ (ap neg-ℤ p ∙ q)
 
-trans-sim-unit-ℤ :
-  (x y z : ℤ) → sim-unit-ℤ x y → sim-unit-ℤ y z → sim-unit-ℤ x z
-trans-sim-unit-ℤ x y z H K f =
-  trans-presim-unit-ℤ x y z
-    ( H (λ {(pair p q) → f (pair p (is-zero-sim-unit-ℤ K q))}))
-    ( K (λ {(pair p q) → f (pair (is-zero-sim-unit-ℤ' H p) q)}))
+transitive-sim-unit-ℤ : is-transitive sim-unit-ℤ
+transitive-sim-unit-ℤ x y z K H f =
+  transitive-presim-unit-ℤ x y z
+    ( K (λ {(p , q) → f (is-zero-sim-unit-ℤ' H p , q)}))
+    ( H (λ {(p , q) → f (p , is-zero-sim-unit-ℤ K q)}))
 ```
 
 ### `sim-unit-ℤ x y` holds if and only if `x|y` and `y|x`
@@ -610,7 +608,9 @@ div-sim-unit-ℤ {x} {y} {x'} {y'} H K =
 div-int-abs-div-ℤ :
   {x y : ℤ} → div-ℤ x y → div-ℤ (int-abs-ℤ x) y
 div-int-abs-div-ℤ {x} {y} =
-  div-sim-unit-ℤ (symm-sim-unit-ℤ (sim-unit-abs-ℤ x)) (refl-sim-unit-ℤ y)
+  div-sim-unit-ℤ
+    ( symmetric-sim-unit-ℤ (int-abs-ℤ x) x (sim-unit-abs-ℤ x))
+    ( refl-sim-unit-ℤ y)
 
 div-div-int-abs-ℤ :
   {x y : ℤ} → div-ℤ (int-abs-ℤ x) y → div-ℤ x y

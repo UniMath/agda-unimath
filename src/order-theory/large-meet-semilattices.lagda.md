@@ -8,12 +8,17 @@ module order-theory.large-meet-semilattices where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
+open import foundation.binary-relations
+open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
 open import order-theory.large-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
 open import order-theory.top-elements-large-posets
 ```
 
@@ -145,33 +150,24 @@ module _
   is-set-type-Large-Meet-Semilattice =
     is-set-type-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
-  leq-Large-Meet-Semilattice :
-    {l1 l2 : Level} →
-    type-Large-Meet-Semilattice l1 → type-Large-Meet-Semilattice l2 →
-    UU (β l1 l2)
+  leq-Large-Meet-Semilattice : Large-Relation α β type-Large-Meet-Semilattice
   leq-Large-Meet-Semilattice =
     leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
   refl-leq-Large-Meet-Semilattice :
-    {l1 : Level} →
-    (x : type-Large-Meet-Semilattice l1) → leq-Large-Meet-Semilattice x x
+    is-large-reflexive type-Large-Meet-Semilattice leq-Large-Meet-Semilattice
   refl-leq-Large-Meet-Semilattice =
     refl-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
   antisymmetric-leq-Large-Meet-Semilattice :
-    {l1 : Level} →
-    (x y : type-Large-Meet-Semilattice l1) →
-    leq-Large-Meet-Semilattice x y → leq-Large-Meet-Semilattice y x → x ＝ y
+    is-large-antisymmetric
+      ( type-Large-Meet-Semilattice)
+      ( leq-Large-Meet-Semilattice)
   antisymmetric-leq-Large-Meet-Semilattice =
     antisymmetric-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
   transitive-leq-Large-Meet-Semilattice :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Meet-Semilattice l1)
-    (y : type-Large-Meet-Semilattice l2)
-    (z : type-Large-Meet-Semilattice l3) →
-    leq-Large-Meet-Semilattice y z → leq-Large-Meet-Semilattice x y →
-    leq-Large-Meet-Semilattice x z
+    is-large-transitive type-Large-Meet-Semilattice leq-Large-Meet-Semilattice
   transitive-leq-Large-Meet-Semilattice =
     transitive-leq-Large-Poset (large-poset-Large-Meet-Semilattice L)
 
@@ -234,4 +230,37 @@ module _
     is-top-element-top-is-large-meet-semilattice-Large-Poset
       ( large-poset-Large-Meet-Semilattice L)
       ( is-large-meet-semilattice-Large-Meet-Semilattice L)
+```
+
+### Small meet semilattices from large meet semilattices
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (L : Large-Meet-Semilattice α β)
+  where
+
+  poset-Large-Meet-Semilattice : (l : Level) → Poset (α l) (β l l)
+  poset-Large-Meet-Semilattice =
+    poset-Large-Poset (large-poset-Large-Meet-Semilattice L)
+
+  is-meet-semilattice-poset-Large-Meet-Semilattice :
+    {l : Level} → is-meet-semilattice-Poset (poset-Large-Meet-Semilattice l)
+  pr1 (is-meet-semilattice-poset-Large-Meet-Semilattice x y) =
+    meet-Large-Meet-Semilattice L x y
+  pr2 (is-meet-semilattice-poset-Large-Meet-Semilattice x y) =
+    is-greatest-binary-lower-bound-meet-Large-Meet-Semilattice L x y
+
+  order-theoretic-meet-semilattice-Large-Meet-Semilattice :
+    (l : Level) → Order-Theoretic-Meet-Semilattice (α l) (β l l)
+  pr1 (order-theoretic-meet-semilattice-Large-Meet-Semilattice l) =
+    poset-Large-Meet-Semilattice l
+  pr2 (order-theoretic-meet-semilattice-Large-Meet-Semilattice l) =
+    is-meet-semilattice-poset-Large-Meet-Semilattice
+
+  meet-semilattice-Large-Meet-Semilattice :
+    (l : Level) → Meet-Semilattice (α l)
+  meet-semilattice-Large-Meet-Semilattice l =
+    meet-semilattice-Order-Theoretic-Meet-Semilattice
+      ( order-theoretic-meet-semilattice-Large-Meet-Semilattice l)
 ```

@@ -7,7 +7,9 @@ module order-theory.large-locales where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -19,6 +21,10 @@ open import order-theory.large-posets
 open import order-theory.large-preorders
 open import order-theory.large-suplattices
 open import order-theory.least-upper-bounds-large-posets
+open import order-theory.meet-semilattices
+open import order-theory.posets
+open import order-theory.preorders
+open import order-theory.suplattices
 open import order-theory.top-elements-large-posets
 open import order-theory.upper-bounds-large-posets
 ```
@@ -27,8 +33,9 @@ open import order-theory.upper-bounds-large-posets
 
 ## Idea
 
-A **large locale** is a large meet-suplattice satisfying the distributive law
-for meets over suprema.
+A **large locale** is a large
+[meet-suplattice](order-theory.meet-suplattices.md) satisfying the distributive
+law for meets over suprema.
 
 ## Definitions
 
@@ -60,18 +67,14 @@ module _
   is-set-type-Large-Locale : {l : Level} → is-set (type-Large-Locale l)
   is-set-type-Large-Locale = is-set-type-Large-Frame L
 
-  leq-Large-Locale-Prop :
-    {l1 l2 : Level} →
-    type-Large-Locale l1 → type-Large-Locale l2 → Prop (β l1 l2)
+  leq-Large-Locale-Prop : Large-Relation-Prop α β type-Large-Locale
   leq-Large-Locale-Prop = leq-Large-Frame-Prop L
 
-  leq-Large-Locale :
-    {l1 l2 : Level} → type-Large-Locale l1 → type-Large-Locale l2 → UU (β l1 l2)
+  leq-Large-Locale : Large-Relation α β type-Large-Locale
   leq-Large-Locale = leq-Large-Frame L
 
   is-prop-leq-Large-Locale :
-    {l1 l2 : Level} (x : type-Large-Locale l1) (y : type-Large-Locale l2) →
-    is-prop (leq-Large-Locale x y)
+    is-prop-Large-Relation type-Large-Locale leq-Large-Locale
   is-prop-leq-Large-Locale = is-prop-leq-Large-Frame L
 
   leq-eq-Large-Locale :
@@ -80,20 +83,16 @@ module _
   leq-eq-Large-Locale = leq-eq-Large-Frame L
 
   refl-leq-Large-Locale :
-    {l1 : Level} (x : type-Large-Locale l1) → leq-Large-Locale x x
+    is-large-reflexive type-Large-Locale leq-Large-Locale
   refl-leq-Large-Locale = refl-leq-Large-Frame L
 
   antisymmetric-leq-Large-Locale :
-    {l1 : Level} (x y : type-Large-Locale l1) →
-    leq-Large-Locale x y → leq-Large-Locale y x → x ＝ y
+    is-large-antisymmetric type-Large-Locale leq-Large-Locale
   antisymmetric-leq-Large-Locale =
     antisymmetric-leq-Large-Frame L
 
   transitive-leq-Large-Locale :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Locale l1) (y : type-Large-Locale l2)
-    (z : type-Large-Locale l3) →
-    leq-Large-Locale y z → leq-Large-Locale x y → leq-Large-Locale x z
+    is-large-transitive type-Large-Locale leq-Large-Locale
   transitive-leq-Large-Locale =
     transitive-leq-Large-Frame L
 
@@ -184,4 +183,43 @@ module _
     sup-Large-Locale (λ i → meet-Large-Locale x (y i))
   distributive-meet-sup-Large-Locale =
     distributive-meet-sup-Large-Frame L
+```
+
+## Properties
+
+### Small constructions from large locales
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (L : Large-Locale α β γ)
+  where
+
+  preorder-Large-Locale : (l : Level) → Preorder (α l) (β l l)
+  preorder-Large-Locale = preorder-Large-Frame L
+
+  poset-Large-Locale : (l : Level) → Poset (α l) (β l l)
+  poset-Large-Locale = poset-Large-Frame L
+
+  is-suplattice-poset-Large-Locale :
+    (l1 l2 : Level) → is-suplattice-Poset l1 (poset-Large-Locale (γ ⊔ l1 ⊔ l2))
+  is-suplattice-poset-Large-Locale = is-suplattice-poset-Large-Frame L
+
+  suplattice-Large-Locale :
+    (l1 l2 : Level) →
+    Suplattice (α (γ ⊔ l1 ⊔ l2)) (β (γ ⊔ l1 ⊔ l2) (γ ⊔ l1 ⊔ l2)) l1
+  suplattice-Large-Locale = suplattice-Large-Frame L
+
+  is-meet-semilattice-poset-Large-Locale :
+    (l : Level) → is-meet-semilattice-Poset (poset-Large-Locale l)
+  is-meet-semilattice-poset-Large-Locale =
+    is-meet-semilattice-poset-Large-Frame L
+
+  order-theoretic-meet-semilattice-Large-Locale :
+    (l : Level) → Order-Theoretic-Meet-Semilattice (α l) (β l l)
+  order-theoretic-meet-semilattice-Large-Locale =
+    order-theoretic-meet-semilattice-Large-Frame L
+
+  meet-semilattice-Large-Locale : (l : Level) → Meet-Semilattice (α l)
+  meet-semilattice-Large-Locale = meet-semilattice-Large-Frame L
 ```

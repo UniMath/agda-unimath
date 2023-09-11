@@ -7,9 +7,11 @@ module order-theory.large-subframes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -28,7 +30,7 @@ open import order-theory.least-upper-bounds-large-posets
 open import order-theory.top-elements-large-posets
 ```
 
-</detail>
+</details>
 
 ## Idea
 
@@ -41,8 +43,8 @@ contains the top element, and is closed under suprema.
 ```agda
 record
   Large-Subframe
-    {α : Level → Level} {β : Level → Level → Level} {γ : Level}
-    (δ : Level → Level) (F : Large-Frame α β γ) :
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level}
+  (δ : Level → Level) (F : Large-Frame α β γ) :
   UUω
   where
   field
@@ -101,62 +103,42 @@ module _
       ( large-subposet-Large-Subframe S)
 
   leq-Large-Subframe-Prop :
-    {l1 l2 : Level} →
-    type-Large-Subframe l1 →
-    type-Large-Subframe l2 →
-    Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Subframe
   leq-Large-Subframe-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   leq-Large-Subframe :
-    {l1 l2 : Level} →
-    type-Large-Subframe l1 →
-    type-Large-Subframe l2 →
-    UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ δ l) β type-Large-Subframe
   leq-Large-Subframe =
     leq-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   is-prop-leq-Large-Subframe :
-    {l1 l2 : Level} →
-    (x : type-Large-Subframe l1)
-    (y : type-Large-Subframe l2) →
-    is-prop (leq-Large-Subframe x y)
+    is-prop-Large-Relation type-Large-Subframe leq-Large-Subframe
   is-prop-leq-Large-Subframe =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   refl-leq-Large-Subframe :
-    {l1 : Level} (x : type-Large-Subframe l1) →
-    leq-Large-Subframe x x
+    is-large-reflexive type-Large-Subframe leq-Large-Subframe
   refl-leq-Large-Subframe =
     refl-leq-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   transitive-leq-Large-Subframe :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Subframe l1)
-    (y : type-Large-Subframe l2)
-    (z : type-Large-Subframe l3) →
-    leq-Large-Subframe y z → leq-Large-Subframe x y →
-    leq-Large-Subframe x z
+    is-large-transitive type-Large-Subframe leq-Large-Subframe
   transitive-leq-Large-Subframe =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   antisymmetric-leq-Large-Subframe :
-    {l1 : Level}
-    (x : type-Large-Subframe l1)
-    (y : type-Large-Subframe l1) →
-    leq-Large-Subframe x y →
-    leq-Large-Subframe y x →
-    x ＝ y
+    is-large-antisymmetric type-Large-Subframe leq-Large-Subframe
   antisymmetric-leq-Large-Subframe =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Frame F)

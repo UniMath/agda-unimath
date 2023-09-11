@@ -7,8 +7,9 @@ module foundation.sorial-type-families where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.equivalences
 open import foundation.universe-levels
+
+open import foundation-core.equivalences
 
 open import structured-types.pointed-types
 ```

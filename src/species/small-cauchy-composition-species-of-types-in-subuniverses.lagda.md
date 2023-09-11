@@ -18,6 +18,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.relaxed-sigma-decompositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.small-types
 open import foundation.subuniverses
@@ -193,7 +194,7 @@ module _
         ( C5 X)
         ( pr2 S)
     pr2 (equiv-Σ-extension-small-cauchy-composition-unit-subuniverse X) =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ S →
           ( tr
               ( is-in-subuniverse P)
@@ -203,7 +204,7 @@ module _
                   ( ( inv-equiv
                         ( terminal-map , is-equiv-terminal-map-is-contr S)) ∘e
                     inv-equiv (compute-raise-unit l1)))
-              ( C4),
+              ( C4) ,
             map-equiv-is-small (C5 X) S))
         ( λ x → eq-is-prop is-property-is-contr)
         ( λ x →
@@ -381,7 +382,7 @@ module _
   associative-small-cauchy-composition-species-subuniverse :
     (S : species-subuniverse P Q)
     (T : species-subuniverse P Q)
-    (U : species-subuniverse P Q)→
+    (U : species-subuniverse P Q) →
     small-cauchy-composition-species-subuniverse
       ( S)
       ( small-cauchy-composition-species-subuniverse T U) ＝

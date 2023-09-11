@@ -37,7 +37,7 @@ map-cantor X f x = neg-Prop (f x x)
 abstract
   not-in-image-map-cantor :
     {l1 l2 : Level} (X : UU l1) (f : X → (X → Prop l2)) →
-    ( t : fib f (map-cantor X f)) → empty
+    ( t : fiber f (map-cantor X f)) → empty
   not-in-image-map-cantor X f (pair x α) =
     no-fixed-points-neg-Prop (f x x) (iff-eq (htpy-eq α x))
 

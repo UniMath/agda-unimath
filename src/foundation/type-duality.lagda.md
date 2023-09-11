@@ -26,6 +26,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
@@ -116,22 +117,22 @@ is-emb-map-type-duality
             ≃ ( (a : A) →
                 Σ X (λ x → type-is-small (H (f x) a)) ≃
                 Σ Y (λ y → type-is-small (H (g y) a)))
-              by equiv-map-Π (λ a → equiv-univalence)
+              by equiv-Π-equiv-family (λ a → equiv-univalence)
             ≃ ( (a : A) →
-                fib f a ≃ Σ Y (λ y → type-is-small (H (g y) a)))
+                fiber f a ≃ Σ Y (λ y → type-is-small (H (g y) a)))
               by
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ a →
                   equiv-precomp-equiv
                     ( equiv-tot (λ x → equiv-is-small (H (f x) a)))
                     ( Σ Y (λ y → type-is-small (H (g y) a))))
-            ≃ ( (a : A) → fib f a ≃ fib g a)
+            ≃ ( (a : A) → fiber f a ≃ fiber g a)
               by
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ a →
                   equiv-postcomp-equiv
                     ( equiv-tot (λ y → inv-equiv (equiv-is-small (H (g y) a))))
-                    ( fib f a))
+                    ( fiber f a))
             ≃ equiv-slice f g
               by inv-equiv (equiv-fam-equiv-equiv-slice f g)
             ≃ ( (X , f) ＝ (Y , g))
@@ -179,7 +180,7 @@ module _
             ( is-locally-small-is-small H)
             ( map-inv-type-duality B)
             ( a)
-          ≃ fib
+          ≃ fiber
             ( ( pr1 {B = B}) ∘
               ( map-inv-equiv
                 ( equiv-is-small
@@ -192,15 +193,15 @@ module _
                     ( is-locally-small-is-small H
                       ( pr2 (map-inv-type-duality B) x)
                       ( a))))
-          ≃ Σ ( fib (pr1 {B = B}) a)
+          ≃ Σ ( fiber (pr1 {B = B}) a)
               ( λ b →
-                fib
+                fiber
                   ( map-inv-equiv
                     ( equiv-is-small
                       ( is-small-Σ H (λ a → is-small' {l} {B a}))))
                   ( pr1 b))
-            by equiv-compute-fib-comp pr1 _ a
-          ≃ fib (pr1 {B = B}) a
+            by equiv-compute-fiber-comp pr1 _ a
+          ≃ fiber (pr1 {B = B}) a
             by
             right-unit-law-Σ-is-contr
               ( λ b →
@@ -211,7 +212,7 @@ module _
                   ( pr1 b))
           ≃ B a
             by
-            equiv-fib-pr1 B a)
+            equiv-fiber-pr1 B a)
 
   is-retraction-map-inv-type-duality :
     ( map-inv-type-duality ∘ map-type-duality (is-locally-small-is-small H)) ~
@@ -225,7 +226,7 @@ module _
   is-equiv-map-type-duality :
     is-equiv (map-type-duality (is-locally-small-is-small H))
   is-equiv-map-type-duality =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-type-duality
       is-section-map-inv-type-duality
       is-retraction-map-inv-type-duality
@@ -268,43 +269,43 @@ module _
 ### Type duality formulated using `l1 ⊔ l2`
 
 ```agda
-Fib : {l l1 : Level} (A : UU l1) → Slice l A → A → UU (l1 ⊔ l)
-Fib A f = fib (pr2 f)
+Fiber : {l l1 : Level} (A : UU l1) → Slice l A → A → UU (l1 ⊔ l)
+Fiber A f = fiber (pr2 f)
 
 Pr1 : {l l1 : Level} (A : UU l1) → (A → UU l) → Slice (l1 ⊔ l) A
 pr1 (Pr1 A B) = Σ A B
 pr2 (Pr1 A B) = pr1
 
 is-section-Pr1 :
-  {l1 l2 : Level} {A : UU l1} → (Fib {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
-is-section-Pr1 B = eq-equiv-fam (equiv-fib-pr1 B)
+  {l1 l2 : Level} {A : UU l1} → (Fiber {l1 ⊔ l2} A ∘ Pr1 {l1 ⊔ l2} A) ~ id
+is-section-Pr1 B = eq-equiv-fam (equiv-fiber-pr1 B)
 
 is-retraction-Pr1 :
-  {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fib {l1 ⊔ l2} A) ~ id
+  {l1 l2 : Level} {A : UU l1} → (Pr1 {l1 ⊔ l2} A ∘ Fiber {l1 ⊔ l2} A) ~ id
 is-retraction-Pr1 {A = A} (pair X f) =
   eq-equiv-slice
-    ( Pr1 A (Fib A (pair X f)))
+    ( Pr1 A (Fiber A (pair X f)))
     ( pair X f)
-    ( pair (equiv-total-fib f) (triangle-map-equiv-total-fib f))
+    ( pair (equiv-total-fiber f) (triangle-map-equiv-total-fiber f))
 
-is-equiv-Fib :
-  {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fib {l1 ⊔ l2} A)
-is-equiv-Fib l2 A =
-  is-equiv-has-inverse
+is-equiv-Fiber :
+  {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Fiber {l1 ⊔ l2} A)
+is-equiv-Fiber l2 A =
+  is-equiv-is-invertible
     ( Pr1 A)
     ( is-section-Pr1 {l2 = l2})
     ( is-retraction-Pr1 {l2 = l2})
 
-equiv-Fib :
+equiv-Fiber :
   {l1 : Level} (l2 : Level) (A : UU l1) → Slice (l1 ⊔ l2) A ≃ (A → UU (l1 ⊔ l2))
-pr1 (equiv-Fib l2 A) = Fib A
-pr2 (equiv-Fib l2 A) = is-equiv-Fib l2 A
+pr1 (equiv-Fiber l2 A) = Fiber A
+pr2 (equiv-Fiber l2 A) = is-equiv-Fiber l2 A
 
 is-equiv-Pr1 :
   {l1 : Level} (l2 : Level) (A : UU l1) → is-equiv (Pr1 {l1 ⊔ l2} A)
 is-equiv-Pr1 {l1} l2 A =
-  is-equiv-has-inverse
-    ( Fib A)
+  is-equiv-is-invertible
+    ( Fiber A)
     ( is-retraction-Pr1 {l2 = l2})
     ( is-section-Pr1 {l2 = l2})
 
@@ -318,16 +319,16 @@ The type of all function from `A → B` is equivalent to the type of function
 `Y : B → 𝒰` with an equivalence `A ≃ Σ B Y `
 
 ```agda
-fib-Σ :
+fiber-Σ :
   {l1 l2 : Level} (X : UU l1) (A : UU l2) →
   (X → A) ≃
     Σ (A → UU (l2 ⊔ l1)) (λ Y → X ≃ Σ A Y)
-fib-Σ {l1} {l2} X A =
+fiber-Σ {l1} {l2} X A =
   ( ( equiv-Σ
       ( λ Z → X ≃ Σ A Z)
-      ( equiv-Fib l1 A)
+      ( equiv-Fiber l1 A)
       ( λ s →
-        inv-equiv ( equiv-postcomp-equiv (equiv-total-fib (pr2 s)) X))) ∘e
+        inv-equiv ( equiv-postcomp-equiv (equiv-total-fiber (pr2 s)) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
           ( is-contr-is-small-lmax l2 X)

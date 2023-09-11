@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.strict-inequality-natural-numbers
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
@@ -118,15 +119,14 @@ is-prop-div-ℕ k x f = is-prop-map-is-emb (is-emb-right-mul-ℕ k f) x
 ### The divisibility relation is a partial order on the natural numbers
 
 ```agda
-refl-div-ℕ : (x : ℕ) → div-ℕ x x
+refl-div-ℕ : is-reflexive div-ℕ
 pr1 (refl-div-ℕ x) = 1
 pr2 (refl-div-ℕ x) = left-unit-law-mul-ℕ x
 
 div-eq-ℕ : (x y : ℕ) → x ＝ y → div-ℕ x y
 div-eq-ℕ x .x refl = refl-div-ℕ x
 
-antisymmetric-div-ℕ :
-  (x y : ℕ) → div-ℕ x y → div-ℕ y x → x ＝ y
+antisymmetric-div-ℕ : is-antisymmetric div-ℕ
 antisymmetric-div-ℕ zero-ℕ zero-ℕ H K = refl
 antisymmetric-div-ℕ zero-ℕ (succ-ℕ y) (pair k p) K =
   inv (right-zero-law-mul-ℕ k) ∙ p
@@ -143,10 +143,9 @@ antisymmetric-div-ℕ (succ-ℕ x) (succ-ℕ y) (pair k p) (pair l q) =
               ( ap (l *ℕ_) p ∙ q)))))) ∙
     ( p))
 
-transitive-div-ℕ :
-  (x y z : ℕ) → div-ℕ x y → div-ℕ y z → div-ℕ x z
-pr1 (transitive-div-ℕ x y z (pair k p) (pair l q)) = l *ℕ k
-pr2 (transitive-div-ℕ x y z (pair k p) (pair l q)) =
+transitive-div-ℕ : is-transitive div-ℕ
+pr1 (transitive-div-ℕ x y z (pair l q) (pair k p)) = l *ℕ k
+pr2 (transitive-div-ℕ x y z (pair l q) (pair k p)) =
   associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
 ```
 
@@ -266,7 +265,7 @@ is-zero-div-ℕ d (succ-ℕ x) H (pair (succ-ℕ k) p) =
 div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
 div-mul-ℕ k x y H =
-  transitive-div-ℕ x y (k *ℕ y) H (pair k refl)
+  transitive-div-ℕ x y (k *ℕ y) (pair k refl) H
 
 div-mul-ℕ' :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)

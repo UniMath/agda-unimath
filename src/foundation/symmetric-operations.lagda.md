@@ -295,7 +295,7 @@ module _
   is-equiv-map-compute-symmetric-operation-Set :
     is-equiv map-compute-symmetric-operation-Set
   is-equiv-map-compute-symmetric-operation-Set =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-symmetric-operation-Set
       is-section-map-inv-compute-symmetric-operation-Set
       is-retraction-map-inv-compute-symmetric-operation-Set

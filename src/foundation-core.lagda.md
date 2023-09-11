@@ -17,7 +17,6 @@ open import foundation-core.contractible-types public
 open import foundation-core.coproduct-types public
 open import foundation-core.decidable-propositions public
 open import foundation-core.dependent-identifications public
-open import foundation-core.dependent-pair-types public
 open import foundation-core.diagonal-maps-of-types public
 open import foundation-core.discrete-types public
 open import foundation-core.embeddings public
@@ -35,8 +34,7 @@ open import foundation-core.functoriality-function-types public
 open import foundation-core.homotopies public
 open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
-open import foundation-core.involutions public
-open import foundation-core.logical-equivalences public
+open import foundation-core.invertible-maps public
 open import foundation-core.negation public
 open import foundation-core.path-split-maps public
 open import foundation-core.propositional-maps public

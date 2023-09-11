@@ -121,10 +121,11 @@ strategic endeavour to ensure the longevity, vitality, and success of the
 
   ```agda
   statement : Statement
-  statement = proof
+  statement =
+    some-possibly-long-proof a
     where
-    proof : Proof
-    proof = some-very-long-proof
+    a : type-of-a
+    a = construction-of-a
   ```
 
 ## Code comments
@@ -385,6 +386,12 @@ the story. Here's how we handle indentation and line breaks in the
 
   Sometimes, however, `equation-n` is a short proof term that fits on the same
   line as `by` within the 80 character limit. In that case it is ok to do so.
+
+- Expressions involving mixfix operators are appropriately parenthesized when
+  the particular association bears relevance, or if there is any chance of
+  confusion from omitting the parentheses. A reader of the code should not be
+  expected to know the precedence levels or associativity of particular
+  operators.
 
 ## Coding practices we tend to avoid
 

@@ -25,14 +25,15 @@ open import order-theory.posets
 
 ## Idea
 
-A **Galois connection** between posets `P` and `Q` is a pair of order preserving
-maps `f : P → Q` and `g : Q → P` such that the logical equivalence
+A **Galois connection** between [posets](order-theory.posets.md) `P` and `Q` is
+a pair of order preserving maps `f : P → Q` and `g : Q → P` such that the
+[logical equivalence](foundation.logical-equivalences.md)
 
 ```text
   (f x ≤ y) ↔ (x ≤ g y)
 ```
 
-holds for any `x : P` and `y : Q`
+holds for any `x : P` and `y : Q`.
 
 ## Definitions
 
@@ -544,5 +545,5 @@ module _
 
 ## References
 
-- Erné, Koslowski, Melton, Strecker. A primer on Galois connections. Annals New
-  York Academy of Sciences 704 (1993)
+- Erné, Koslowski, Melton, Strecker. _A primer on Galois connections_. Annals
+  New York Academy of Sciences 704 (1993)

@@ -7,6 +7,7 @@ module order-theory.subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -55,12 +56,10 @@ module _
   is-prop-leq-Subpreorder x y =
     is-prop-type-Prop (leq-Subpreorder-Prop x y)
 
-  refl-leq-Subpreorder : (x : type-Subpreorder) → leq-Subpreorder x x
+  refl-leq-Subpreorder : is-reflexive leq-Subpreorder
   refl-leq-Subpreorder x = refl-leq-Preorder P (pr1 x)
 
-  transitive-leq-Subpreorder :
-    (x y z : type-Subpreorder) →
-    leq-Subpreorder y z → leq-Subpreorder x y → leq-Subpreorder x z
+  transitive-leq-Subpreorder : is-transitive leq-Subpreorder
   transitive-leq-Subpreorder x y z =
     transitive-leq-Preorder P (pr1 x) (pr1 y) (pr1 z)
 
@@ -95,15 +94,15 @@ module _
       is-prop-type-Prop inclusion-Subpreorder-Prop
 
   refl-inclusion-Subpreorder :
-    {l3 : Level} (S : type-Preorder P → Prop l3) →
-    inclusion-Subpreorder S S
+    {l3 : Level} → is-reflexive (inclusion-Subpreorder {l3})
   refl-inclusion-Subpreorder S x = id
 
   transitive-inclusion-Subpreorder :
     {l3 l4 l5 : Level} (S : type-Preorder P → Prop l3)
     (T : type-Preorder P → Prop l4)
     (U : type-Preorder P → Prop l5) →
-    inclusion-Subpreorder T U → inclusion-Subpreorder S T →
+    inclusion-Subpreorder T U →
+    inclusion-Subpreorder S T →
     inclusion-Subpreorder S U
   transitive-inclusion-Subpreorder S T U g f x = (g x) ∘ (f x)
 

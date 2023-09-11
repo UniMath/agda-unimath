@@ -13,6 +13,7 @@ open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
@@ -53,12 +54,12 @@ module _
 
   is-closed-under-add-subset-Ab : UU (l1 ⊔ l2)
   is-closed-under-add-subset-Ab =
-    is-closed-under-mul-subset-Group (group-Ab A) P
+    is-closed-under-multiplication-subset-Group (group-Ab A) P
 
   is-prop-is-closed-under-add-subset-Ab :
     is-prop is-closed-under-add-subset-Ab
   is-prop-is-closed-under-add-subset-Ab =
-    is-prop-is-closed-under-mul-subset-Group (group-Ab A) P
+    is-prop-is-closed-under-multiplication-subset-Group (group-Ab A) P
 
   is-closed-under-neg-subset-Ab : UU (l1 ⊔ l2)
   is-closed-under-neg-subset-Ab =
@@ -140,7 +141,7 @@ module _
   is-closed-under-add-Subgroup-Ab :
     is-closed-under-add-subset-Ab A subset-Subgroup-Ab
   is-closed-under-add-Subgroup-Ab =
-    is-closed-under-mul-Subgroup (group-Ab A) B
+    is-closed-under-multiplication-Subgroup (group-Ab A) B
 
   is-closed-under-neg-Subgroup-Ab :
     is-closed-under-neg-subset-Ab A subset-Subgroup-Ab
@@ -338,21 +339,18 @@ leq-Subgroup-Ab :
 leq-Subgroup-Ab A = leq-Subgroup (group-Ab A)
 
 refl-leq-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A) →
-  leq-Subgroup-Ab A B B
+  {l1 : Level} (A : Ab l1) →
+  is-large-reflexive (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 refl-leq-Subgroup-Ab A = refl-leq-Subgroup (group-Ab A)
 
 transitive-leq-Subgroup-Ab :
-  {l1 l2 l3 l4 : Level} (A : Ab l1) (B : Subgroup-Ab l2 A)
-  (C : Subgroup-Ab l3 A) (D : Subgroup-Ab l4 A) →
-  leq-Subgroup-Ab A C D → leq-Subgroup-Ab A B C →
-  leq-Subgroup-Ab A B D
-transitive-leq-Subgroup-Ab A =
-  transitive-leq-Subgroup (group-Ab A)
+  {l1 : Level} (A : Ab l1) →
+  is-large-transitive (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
+transitive-leq-Subgroup-Ab A = transitive-leq-Subgroup (group-Ab A)
 
 antisymmetric-leq-Subgroup-Ab :
-  {l1 l2 : Level} (A : Ab l1) (B C : Subgroup-Ab l2 A) →
-  leq-Subgroup-Ab A B C → leq-Subgroup-Ab A C B → B ＝ C
+  {l1 : Level} (A : Ab l1) →
+  is-large-antisymmetric (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 antisymmetric-leq-Subgroup-Ab A =
   antisymmetric-leq-Subgroup (group-Ab A)
 
@@ -463,7 +461,7 @@ module _
 
 ```agda
   left-eq-rel-congruence-Subgroup-Ab :
-    Eq-Rel l2 (type-Ab A)
+    Equivalence-Relation l2 (type-Ab A)
   left-eq-rel-congruence-Subgroup-Ab =
     left-eq-rel-congruence-Normal-Subgroup
       ( group-Ab A)
@@ -503,34 +501,34 @@ module _
 
 ```agda
   refl-congruence-Subgroup-Ab :
-    is-reflexive-Rel-Prop prop-congruence-Subgroup-Ab
+    is-reflexive sim-congruence-Subgroup-Ab
   refl-congruence-Subgroup-Ab =
     refl-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  symm-congruence-Subgroup-Ab :
-    is-symmetric-Rel-Prop prop-congruence-Subgroup-Ab
-  symm-congruence-Subgroup-Ab =
-    symm-congruence-Normal-Subgroup
+  symmetric-congruence-Subgroup-Ab :
+    is-symmetric sim-congruence-Subgroup-Ab
+  symmetric-congruence-Subgroup-Ab =
+    symmetric-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  trans-congruence-Subgroup-Ab :
-    is-transitive-Rel-Prop prop-congruence-Subgroup-Ab
-  trans-congruence-Subgroup-Ab =
-    trans-congruence-Normal-Subgroup
+  transitive-congruence-Subgroup-Ab :
+    is-transitive sim-congruence-Subgroup-Ab
+  transitive-congruence-Subgroup-Ab =
+    transitive-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
-  eq-rel-congruence-Subgroup-Ab : Eq-Rel l2 (type-Ab A)
+  eq-rel-congruence-Subgroup-Ab : Equivalence-Relation l2 (type-Ab A)
   eq-rel-congruence-Subgroup-Ab =
     eq-rel-congruence-Normal-Subgroup
       ( group-Ab A)
       ( normal-subgroup-Subgroup-Ab A B)
 
   relate-same-elements-left-sim-congruence-Subgroup-Ab :
-    relate-same-elements-Eq-Rel
+    relate-same-elements-Equivalence-Relation
       ( eq-rel-congruence-Subgroup-Ab)
       ( left-eq-rel-congruence-Subgroup-Ab)
   relate-same-elements-left-sim-congruence-Subgroup-Ab =
@@ -583,7 +581,7 @@ module _
   is-closed-under-add-subset-congruence-Ab :
     is-closed-under-add-subset-Ab A subset-congruence-Ab
   is-closed-under-add-subset-congruence-Ab =
-    is-closed-under-mul-subset-congruence-Group (group-Ab A) R
+    is-closed-under-multiplication-subset-congruence-Group (group-Ab A) R
 
   is-closed-under-neg-subset-congruence-Ab :
     is-closed-under-neg-subset-Ab A subset-congruence-Ab
@@ -664,7 +662,7 @@ module _
   is-equiv-congruence-Subgroup-Ab :
     is-equiv (congruence-Subgroup-Ab {l1} {l2} A)
   is-equiv-congruence-Subgroup-Ab =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( subgroup-congruence-Ab A)
       ( is-section-subgroup-congruence-Ab A)
       ( is-retraction-subgroup-congruence-Ab A)
@@ -679,7 +677,7 @@ module _
   is-equiv-subgroup-congruence-Ab :
     is-equiv (subgroup-congruence-Ab {l1} {l2} A)
   is-equiv-subgroup-congruence-Ab =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( congruence-Subgroup-Ab A)
       ( is-retraction-subgroup-congruence-Ab A)
       ( is-section-subgroup-congruence-Ab A)

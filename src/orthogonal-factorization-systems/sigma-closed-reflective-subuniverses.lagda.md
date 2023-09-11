@@ -10,6 +10,7 @@ module orthogonal-factorization-systems.sigma-closed-reflective-subuniverses whe
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.propositions
+open import foundation.sigma-closed-subuniverses
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators
@@ -20,39 +21,24 @@ open import orthogonal-factorization-systems.reflective-subuniverses
 
 ## Idea
 
-A reflective subuniverse is **Σ-closed**, or **dependent-pair-closed**, if its
-modal types are closed under the formation of dependent pair types.
+A
+[reflective subuniverse](orthogonal-factorization-systems.reflective-subuniverses.md)
+is **Σ-closed** if it is closed under the formation of
+[Σ-types](foundation.dependent-pair-types.md).
 
 ## Definition
 
-### Σ-closed modal operators
-
-We say a modal operator `○` is Σ-closed if for every type `X` such that for
-every term of `○ X` and for every type family `P` over `X` there is a section of
-`○ ∘ P`, then there is also a term of `○ (Σ X P)`.
-
-**Note**: this is not well-established terminology.
-
 ```agda
-is-Σ-closed-operator-modality :
-  {l1 l2 : Level} → operator-modality l1 l2 → UU (lsuc l1 ⊔ l2)
-is-Σ-closed-operator-modality {l1} ○ =
-  (X : UU l1) → ○ X → (P : X → UU l1) → ((x : X) → ○ (P x)) → ○ (Σ X P)
-```
+is-closed-under-Σ-reflective-subuniverse :
+  {l lP : Level} → reflective-subuniverse l lP → UU (lsuc l ⊔ lP)
+is-closed-under-Σ-reflective-subuniverse (P , _) =
+  is-closed-under-Σ-subuniverse P
 
-### Σ-closed reflective subuniverses
-
-```agda
-is-Σ-closed-reflective-subuniverse :
-  {l lM : Level} (U : reflective-subuniverse l lM) → UU (lsuc l ⊔ lM)
-is-Σ-closed-reflective-subuniverse (○ , unit-○ , is-modal' , _) =
-  is-Σ-closed-operator-modality (type-Prop ∘ is-modal')
-
-Σ-closed-reflective-subuniverse :
-  (l lM : Level) → UU (lsuc l ⊔ lsuc lM)
-Σ-closed-reflective-subuniverse l lM =
-  Σ ( reflective-subuniverse l lM)
-    ( is-Σ-closed-reflective-subuniverse)
+closed-under-Σ-reflective-subuniverse :
+  (l lP : Level) → UU (lsuc l ⊔ lsuc lP)
+closed-under-Σ-reflective-subuniverse l lP =
+  Σ ( reflective-subuniverse l lP)
+    ( is-closed-under-Σ-reflective-subuniverse)
 ```
 
 ## See also
@@ -62,6 +48,7 @@ The equivalent notions of
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
 - [Uniquely eliminating modalities](orthogonal-factorization-systems.uniquely-eliminating-modalities.md)
 - [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
+- [Σ-closed reflective modalities](orthogonal-factorization-systems.sigma-closed-reflective-modalities.md)
 
 ## References
 

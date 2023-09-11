@@ -29,7 +29,10 @@ open import orthogonal-factorization-systems.modal-operators
 ## Idea
 
 A **uniquely eliminating modality** is a _higher mode of logic_ defined in terms
-of a monadic modal operator `○` satisfying a certain locality condition.
+of a monadic
+[modal operator](orthogonal-factorization-systems.modal-operators.md) `○`
+satisfying a certain [locality](orthogonal-factorization-systems.local-types.md)
+condition.
 
 ## Definition
 
@@ -38,7 +41,7 @@ is-uniquely-eliminating-modality :
   {l1 l2 : Level} {○ : operator-modality l1 l2} →
   unit-modality ○ → UU (lsuc l1 ⊔ l2)
 is-uniquely-eliminating-modality {l1} {l2} {○} unit-○ =
-  (X : UU l1) (P : ○ X → UU l1) → is-local-family (unit-○) (○ ∘ P)
+  (X : UU l1) (P : ○ X → UU l1) → is-local-dependent-type (unit-○) (○ ∘ P)
 
 uniquely-eliminating-modality : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 uniquely-eliminating-modality l1 l2 =
@@ -96,7 +99,10 @@ module _
   is-prop-is-uniquely-eliminating-modality :
     is-prop (is-uniquely-eliminating-modality unit-○)
   is-prop-is-uniquely-eliminating-modality =
-    is-prop-Π λ X → is-prop-Π λ P → is-property-is-local-family unit-○ (○ ∘ P)
+    is-prop-Π
+      ( λ X →
+        is-prop-Π
+          ( λ P → is-property-is-local-dependent-type unit-○ (○ ∘ P)))
 
   is-uniquely-eliminating-modality-Prop : Prop (lsuc l1 ⊔ l2)
   pr1 is-uniquely-eliminating-modality-Prop =
@@ -141,7 +147,7 @@ module _
 
   is-modal-uniquely-eliminating-modality : is-modal unit-○ (○ X)
   is-modal-uniquely-eliminating-modality =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-unit-uniquely-eliminating-modality
       is-retraction-unit-uniquely-eliminating-modality
       is-section-unit-uniquely-eliminating-modality
@@ -188,6 +194,7 @@ equivalence.
 The equivalent notions of
 
 - [Higher modalities](orthogonal-factorization-systems.higher-modalities.md)
+- [Σ-closed reflective modalities](orthogonal-factorization-systems.sigma-closed-reflective-modalities.md)
 - [Σ-closed reflective subuniverses](orthogonal-factorization-systems.sigma-closed-reflective-subuniverses.md)
 - [Stable orthogonal factorization systems](orthogonal-factorization-systems.stable-orthogonal-factorization-systems.md)
 

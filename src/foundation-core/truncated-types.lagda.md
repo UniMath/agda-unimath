@@ -93,7 +93,7 @@ abstract
   is-trunc-Id :
     {l : Level} {k : 𝕋} {A : UU l} →
     is-trunc k A → (x y : A) → is-trunc k (x ＝ y)
-  is-trunc-Id {l} {k}= is-trunc-succ-is-trunc k
+  is-trunc-Id {l} {k} = is-trunc-succ-is-trunc k
 
 Id-Truncated-Type :
   {l : Level} {k : 𝕋} (A : Truncated-Type l (succ-𝕋 k)) →
@@ -204,12 +204,12 @@ pr2 (Σ-Truncated-Type A B) =
     ( is-trunc-type-Truncated-Type A)
     ( λ a → is-trunc-type-Truncated-Type (B a))
 
-fib-Truncated-Type :
+fiber-Truncated-Type :
   {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k)
   (B : Truncated-Type l2 k)
   (f : type-Truncated-Type A → type-Truncated-Type B) →
   type-Truncated-Type B → Truncated-Type (l1 ⊔ l2) k
-fib-Truncated-Type A B f b =
+fiber-Truncated-Type A B f b =
   Σ-Truncated-Type A (λ a → Id-Truncated-Type' B (f a) b)
 ```
 

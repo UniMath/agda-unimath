@@ -7,7 +7,9 @@ module order-theory.large-subsuplattices where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-relations
 open import foundation.identity-types
+open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -83,55 +85,42 @@ module _
       ( large-subposet-Large-Subsuplattice S)
 
   leq-Large-Subsuplattice-Prop :
-    {l1 l2 : Level} →
-    type-Large-Subsuplattice l1 → type-Large-Subsuplattice l2 → Prop (β l1 l2)
+    Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subsuplattice
   leq-Large-Subsuplattice-Prop =
     leq-Large-Subposet-Prop
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   leq-Large-Subsuplattice :
-    {l1 l2 : Level} →
-    type-Large-Subsuplattice l1 → type-Large-Subsuplattice l2 → UU (β l1 l2)
+    Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subsuplattice
   leq-Large-Subsuplattice =
     leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   is-prop-leq-Large-Subsuplattice :
-    {l1 l2 : Level} →
-    (x : type-Large-Subsuplattice l1) (y : type-Large-Subsuplattice l2) →
-    is-prop (leq-Large-Subsuplattice x y)
+    is-prop-Large-Relation type-Large-Subsuplattice leq-Large-Subsuplattice
   is-prop-leq-Large-Subsuplattice =
     is-prop-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   refl-leq-Large-Subsuplattice :
-    {l1 : Level} (x : type-Large-Subsuplattice l1) →
-    leq-Large-Subsuplattice x x
+    is-large-reflexive type-Large-Subsuplattice leq-Large-Subsuplattice
   refl-leq-Large-Subsuplattice =
     refl-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   transitive-leq-Large-Subsuplattice :
-    {l1 l2 l3 : Level}
-    (x : type-Large-Subsuplattice l1)
-    (y : type-Large-Subsuplattice l2)
-    (z : type-Large-Subsuplattice l3) →
-    leq-Large-Subsuplattice y z → leq-Large-Subsuplattice x y →
-    leq-Large-Subsuplattice x z
+    is-large-transitive type-Large-Subsuplattice leq-Large-Subsuplattice
   transitive-leq-Large-Subsuplattice =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   antisymmetric-leq-Large-Subsuplattice :
-    {l1 : Level}
-    (x : type-Large-Subsuplattice l1)
-    (y : type-Large-Subsuplattice l1) →
-    leq-Large-Subsuplattice x y → leq-Large-Subsuplattice y x → x ＝ y
+    is-large-antisymmetric type-Large-Subsuplattice leq-Large-Subsuplattice
   antisymmetric-leq-Large-Subsuplattice =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)

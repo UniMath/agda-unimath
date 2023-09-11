@@ -60,7 +60,7 @@ module _
 
   not-even-difference-univalent-action-equiv :
     (n : ℕ) (Y : 2-Element-Decidable-Subtype l (raise-Fin l (n +ℕ 2))) →
-    ¬ ( sim-Eq-Rel
+    ¬ ( sim-Equivalence-Relation
       ( even-difference-orientation-Complete-Undirected-Graph
         ( n +ℕ 2)
         ( raise-Fin l (n +ℕ 2) ,
@@ -85,7 +85,7 @@ module _
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
           ( raise-Fin l (n +ℕ 2))) →
-            ¬ ( sim-Eq-Rel
+            ¬ ( sim-Equivalence-Relation
               ( even-difference-orientation-Complete-Undirected-Graph
                 ( n +ℕ 2)
                 ( raise-Fin l (n +ℕ 2) ,

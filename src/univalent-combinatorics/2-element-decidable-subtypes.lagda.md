@@ -343,7 +343,9 @@ pr1 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
   P ∘ (map-equiv e)
 pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
   transitive-mere-equiv
-    ( H)
+    ( Fin 2)
+    ( type-subtype (prop-Decidable-Prop ∘ P))
+    ( type-subtype (prop-Decidable-Prop ∘ (P ∘ pr1 e)))
     ( unit-trunc-Prop
       ( equiv-subtype-equiv
         ( inv-equiv e)
@@ -357,6 +359,7 @@ pr2 (precomp-equiv-2-Element-Decidable-Subtype e (pair P H)) =
                 ( type-Decidable-Prop (P (map-equiv g x))))
               ( inv (right-inverse-law-equiv e))
               ( id-equiv)))))
+    ( H)
 
 preserves-comp-precomp-equiv-2-Element-Decidable-Subtype :
   { l1 l2 l3 l4 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3} (e : X ≃ Y) →

@@ -1,4 +1,5 @@
 fail_fast: false
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
@@ -25,13 +26,13 @@ repos:
         types_or: [markdown, text]
 
       - id: blank-line-conventions
+        # Depends on `markdown-conventions`
         name: Blank line conventions in literate Agda Markdown files
         entry: scripts/blank_line_conventions.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
-        #depends_on: markdown-conventions #TODO: find the correct way to express this
 
       - id: fix-imports
         name: Format imports of Agda files
@@ -58,15 +59,16 @@ repos:
         types_or: [markdown, text]
         require_serial: true
 
-      - id: simply-wrappable-long-lines
-        name: Fix simply wrappable long lines in Agda blocks
-        entry: scripts/simply_wrappable_long_lines.py
+      - id: wrap-long-lines-simple
+        name: Wrap simple to fix long lines of Agda code
+        entry: scripts/wrap_long_lines_simple.py
         language: python
         always_run: true
         files: ^src\/.+\.lagda\.md$
         types_or: [markdown, text]
 
       - id: max-line-length-conventions
+        # Should run after `wrap-long-lines-simple`
         name: Check the maximum line length conventions
         entry: scripts/max_line_length_conventions.py
         language: python
@@ -91,13 +93,13 @@ repos:
         require_serial: true
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: "v2.0.2"
+    rev: 'v2.0.2'
     hooks:
       - id: autopep8
         name: Python scripts formatting
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v3.0.0-alpha.6"
+    rev: 'v3.0.0-alpha.6'
     hooks:
       - id: prettier
         name: CSS, JS, YAML and Markdown (no codeblocks) formatting

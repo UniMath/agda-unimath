@@ -1,18 +1,18 @@
 {
-  //? Remember to update `HOWTO-INSTALL.md` if you make additions or changes to this file
+  // * Remember to update `HOWTO-INSTALL.md` when making additions or changes
+  "Diagonal lift (⧄)": {
+    "body": ["⧄"],
+    "description": "Diagonal lift",
+    "prefix": ["diagonal", "lifting"]
+  },
   "Full width equals sign (＝)": {
-    "prefix": ["Id", "equals"],
     "body": ["＝"],
-    "description": "Full width equals sign"
+    "description": "Full width equals sign",
+    "prefix": ["Id", "equals"]
   },
   "Yoneda embedding (ょ)": {
-    "prefix": ["yoneda"],
     "body": ["ょ"],
-    "description": "Yoneda embedding"
-  },
-  "Diagonal lift (⧄)": {
-    "prefix": ["diagonal", "lifting"],
-    "body": ["⧄"],
-    "description": "Diagonal lift"
+    "description": "Yoneda embedding",
+    "prefix": ["yoneda"]
   }
 }

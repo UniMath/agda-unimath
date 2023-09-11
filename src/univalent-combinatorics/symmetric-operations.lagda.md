@@ -2,13 +2,13 @@
 
 ```agda
 module univalent-combinatorics.symmetric-operations where
+
+open import foundation.symmetric-operations public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.symmetric-operations public
-
 open import foundation.universe-levels
 
 open import univalent-combinatorics.dependent-function-types
@@ -17,6 +17,8 @@ open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.function-types
 ```
+
+</details>
 
 ## Idea
 

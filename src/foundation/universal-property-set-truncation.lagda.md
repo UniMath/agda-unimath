@@ -8,7 +8,6 @@ module foundation.universal-property-set-truncation where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.mere-equality
 open import foundation.reflecting-maps-equivalence-relations
@@ -20,8 +19,10 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -189,13 +190,16 @@ abstract
   is-set-truncation-is-set-quotient :
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     ( {l : Level} →
-      is-set-quotient l (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)) →
+      is-set-quotient l
+        ( mere-eq-Equivalence-Relation A)
+        ( B)
+        ( reflecting-map-mere-eq B f)) →
     is-set-truncation l3 B f
   is-set-truncation-is-set-quotient {A = A} B f H X =
     is-equiv-comp
       ( pr1)
       ( precomp-Set-Quotient
-        ( mere-eq-Eq-Rel A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
@@ -203,7 +207,8 @@ abstract
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Eq-Rel (mere-eq-Eq-Rel A) X h)
+            ( is-prop-reflects-Equivalence-Relation
+              ( mere-eq-Equivalence-Relation A) X h)
             ( reflects-mere-eq X h)))
 ```
 
@@ -214,19 +219,23 @@ abstract
   is-set-quotient-is-set-truncation :
     {l1 l2 l3 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     ( {l : Level} → is-set-truncation l B f) →
-    is-set-quotient l3 (mere-eq-Eq-Rel A) B (reflecting-map-mere-eq B f)
+    is-set-quotient l3
+      ( mere-eq-Equivalence-Relation A)
+      ( B)
+      ( reflecting-map-mere-eq B f)
   is-set-quotient-is-set-truncation {A = A} B f H X =
     is-equiv-right-factor
       ( pr1)
       ( precomp-Set-Quotient
-        ( mere-eq-Eq-Rel A)
+        ( mere-eq-Equivalence-Relation A)
         ( B)
         ( reflecting-map-mere-eq B f)
         ( X))
       ( is-equiv-pr1-is-contr
         ( λ h →
           is-proof-irrelevant-is-prop
-            ( is-prop-reflects-Eq-Rel (mere-eq-Eq-Rel A) X h)
+            ( is-prop-reflects-Equivalence-Relation
+              ( mere-eq-Equivalence-Relation A) X h)
             ( reflects-mere-eq X h)))
       ( H X)
 ```
