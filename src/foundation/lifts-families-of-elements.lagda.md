@@ -20,7 +20,7 @@ open import foundation.universe-levels
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -118,8 +118,8 @@ module _
 
   triangle-precompose-lifts-refl-htpy :
     (f : A → B) → TRIANGLE-PRECOMPOSE-LIFTS (refl-htpy' f)
-  triangle-precompose-lifts-refl-htpy f h h' =
-    base-case-compute-tr-lift-family-of-elements P h (h' ∘ f)
+  triangle-precompose-lifts-refl-htpy f h h' = ?
+    -- base-case-compute-tr-lift-family-of-elements P h (h' ∘ f)
 
 triangle-precompose-lifts :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -171,10 +171,10 @@ COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS :
   {f g : A → B} (H : f ~ g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
 COHERENCE-TRIANGLE-PRECOMPOSE-LIFTS {A = A} {B} {X} P {f} {g} H =
   (h : B → X) →
-    ( triangle-precompose-lifts P H h) ~
-    ( ( ( compute-tr-lift-family-of-elements P h H) ·r
-        ( precompose-lifts P f h)) ∙h
-      ( triangle-precompose-lifts' P H h))
+  ( triangle-precompose-lifts P H h) ~
+  ( ( ( compute-tr-lift-family-of-elements P h H) ·r
+      ( precompose-lifts P f h)) ∙h
+    ( triangle-precompose-lifts' P H h))
 
 coherence-triangle-precompose-lifts-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (P : X → UU l4)

@@ -13,7 +13,7 @@ open import foundation.homotopies
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
