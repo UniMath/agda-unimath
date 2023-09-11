@@ -400,7 +400,7 @@ module _
                 ( T (B , pB))))
     pr1 reassociate (pX , ((A , pA) , (B , pB) , e) , s , t) =
       (A , B , e) , ((pA , pB) , pX) , (s , t)
-    pr2 reassociate = is-equiv-has-inverse
+    pr2 reassociate = is-equiv-is-invertible
       ( λ ((A , B , e) , ((pA , pB) , pX) , (s , t)) →
         ( pX , ((A , pA) , (B , pB) , e) , s , t))
       ( refl-htpy)
@@ -421,7 +421,7 @@ module _
     pr1 reassociate' (d , (pA , pB) , s , t) =
       d , (pA , s) , (pB , t)
     pr2 reassociate' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ ( d , (pA , s) , (pB , t)) → (d , (pA , pB) , s , t))
         ( refl-htpy)
         ( refl-htpy)

@@ -107,7 +107,7 @@ is-set-type-Prop : {l : Level} → is-set (Prop l)
 is-set-type-Prop {l} P Q =
   is-prop-equiv
     ( propositional-extensionality P Q)
-    ( is-prop-logical-equivalence P Q)
+    ( is-prop-iff-Prop P Q)
 
 Prop-Set : (l : Level) → Set (lsuc l)
 pr1 (Prop-Set l) = Prop l

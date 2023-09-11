@@ -141,7 +141,7 @@ is-equiv-vector-multivariable-input :
   (A : UU l) →
   is-equiv (vector-multivariable-input n A)
 is-equiv-vector-multivariable-input n A =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( multivariable-input-vector n A)
     ( is-section-multivariable-input-vector n A)
     ( is-retraction-multivariable-input-vector n A)

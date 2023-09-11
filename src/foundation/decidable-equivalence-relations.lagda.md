@@ -22,6 +22,7 @@ open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.images
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
@@ -42,7 +43,6 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.subtypes
 open import foundation-core.transport
@@ -149,7 +149,7 @@ pr1 equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation R =
   ( equivalence-relation-Decidable-Equivalence-Relation R ,
     is-decidable-sim-Decidable-Equivalence-Relation R)
 pr2 equiv-equivalence-relation-is-decidable-Dec-Equivalence-Relation =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( λ (R , d) →
       ( map-inv-equiv
           ( equiv-relation-is-decidable-Decidable-Relation)

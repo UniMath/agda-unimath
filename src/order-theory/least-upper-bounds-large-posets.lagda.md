@@ -158,7 +158,7 @@ module _
               ( y))
       ↔ leq-Π-Large-Poset P x y
         by
-        iff-Π (λ i → H i (y i))
+        iff-Π-iff-family (λ i → H i (y i))
 ```
 
 ### Least upper bounds in small posets from least upper bounds in large posets

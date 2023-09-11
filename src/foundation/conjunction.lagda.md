@@ -9,12 +9,12 @@ module foundation.conjunction where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
 open import foundation-core.equivalences
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 ```
 

@@ -162,7 +162,7 @@ module _
     pr1 reassociate (pX , ((U , pU) , V , e) , s) =
       ((U , ((λ u → pr1 (V u)) , e)) , ((pU , (λ u → pr2 (V u))) , pX) , s)
     pr2 reassociate =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ ((U , V , e) , ( ((pU , pV) , pX) , s)) →
           ( pX , ((U , pU) , (λ u → V u , pV u) , e) , s))
         ( refl-htpy)
@@ -187,7 +187,7 @@ module _
         ( inclusion-subuniverse P X)
     pr1 reassociate' (d , pV , s) = d , ( λ u → (pV u) , (s u))
     pr2 reassociate' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ (d , f) → (d , pr1 ∘ f , pr2 ∘ f))
         ( refl-htpy)
         ( refl-htpy)

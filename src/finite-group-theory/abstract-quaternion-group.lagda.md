@@ -912,7 +912,7 @@ is-retraction-map-inv-equiv-count-Q8 (inr star) = refl
 
 is-equiv-map-equiv-count-Q8 : is-equiv map-equiv-count-Q8
 is-equiv-map-equiv-count-Q8 =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     map-inv-equiv-count-Q8
     is-section-map-inv-equiv-count-Q8
     is-retraction-map-inv-equiv-count-Q8

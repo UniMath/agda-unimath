@@ -105,7 +105,7 @@ module _
   pr1 (pr1 (equiv-iso-Abstract-Group-Action f)) =
     map-iso-Abstract-Group-Action f
   pr2 (pr1 (equiv-iso-Abstract-Group-Action f)) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-hom-inv-iso-Abstract-Group-Action f)
       ( htpy-eq-hom-Abstract-Group-Action G Y Y
         ( comp-hom-Abstract-Group-Action G Y X Y

@@ -264,7 +264,7 @@ module _
       (f : type-hom-Semigroup G H) →
       is-iso-hom-Semigroup G H f → is-equiv-hom-Semigroup G H f
     is-equiv-is-iso-hom-Semigroup (f , μ-f) ((g , μ-g) , S , R) =
-      is-equiv-has-inverse g
+      is-equiv-is-invertible g
         ( htpy-eq (ap pr1 S))
         ( htpy-eq (ap pr1 R))
 

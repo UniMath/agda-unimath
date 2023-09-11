@@ -8,13 +8,14 @@ module foundation.universal-property-empty-type where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.empty-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.functoriality-function-types
 ```
 
 </details>

@@ -8,6 +8,7 @@ module ring-theory where
 open import ring-theory.algebras-rings public
 open import ring-theory.binomial-theorem-rings public
 open import ring-theory.binomial-theorem-semirings public
+open import ring-theory.category-of-rings public
 open import ring-theory.central-elements-rings public
 open import ring-theory.central-elements-semirings public
 open import ring-theory.commuting-elements-rings public

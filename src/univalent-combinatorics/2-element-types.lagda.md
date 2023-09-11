@@ -255,7 +255,7 @@ abstract
 abstract
   is-equiv-ev-zero-aut-Fin-two-ℕ : is-equiv ev-zero-aut-Fin-two-ℕ
   is-equiv-ev-zero-aut-Fin-two-ℕ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       aut-point-Fin-two-ℕ
       is-section-aut-point-Fin-two-ℕ
       is-retraction-aut-point-Fin-two-ℕ
@@ -288,7 +288,7 @@ module _
               ( ev-zero-equiv-Fin-two-ℕ)
               ( is-equiv-ev-zero-aut-Fin-two-ℕ)
               ( is-equiv-map-equiv α))
-            ( is-equiv-comp-equiv α (Fin 2)))
+            ( is-equiv-postcomp-equiv-equiv α (Fin 2)))
 
   equiv-ev-zero-equiv-Fin-two-ℕ :
     (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X
