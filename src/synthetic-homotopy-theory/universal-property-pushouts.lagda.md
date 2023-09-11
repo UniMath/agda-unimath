@@ -451,7 +451,7 @@ universal-property-pushout-rectangle-universal-property-pushout-right
             ( W))))
 ```
 
-### Vertical composition of pushouts
+### The vertical pushout pasting lemma
 
 If in the following diagram both squares are pushouts, then the outer square is
 a pushout as well.
