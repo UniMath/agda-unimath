@@ -1,8 +1,6 @@
 # Symmetric operations
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.symmetric-operations where
 ```
 
