@@ -178,11 +178,12 @@ equiv-section-unit-induction-principle-modality :
 equiv-section-unit-induction-principle-modality unit-○ =
   ( ( equiv-tot
       ( λ I →
-        equiv-Π-equiv-fam
+        equiv-Π-equiv-family
         ( λ X →
-          equiv-Π-equiv-fam (λ P → equiv-Π-equiv-fam (λ _ → equiv-funext))))) ∘e
+          equiv-Π-equiv-family
+            ( λ P → equiv-Π-equiv-family (λ _ → equiv-funext))))) ∘e
     ( distributive-Π-Σ)) ∘e
-  ( equiv-Π-equiv-fam (λ _ → distributive-Π-Σ))
+  ( equiv-Π-equiv-family (λ _ → distributive-Π-Σ))
 
 equiv-section-unit-recursion-principle-modality :
   { l1 l2 : Level}
@@ -193,11 +194,12 @@ equiv-section-unit-recursion-principle-modality :
 equiv-section-unit-recursion-principle-modality unit-○ =
   ( ( equiv-tot
       ( λ I →
-        equiv-Π-equiv-fam
+        equiv-Π-equiv-family
         ( λ X →
-          equiv-Π-equiv-fam (λ P → equiv-Π-equiv-fam (λ _ → equiv-funext))))) ∘e
+          equiv-Π-equiv-family
+            ( λ P → equiv-Π-equiv-family (λ _ → equiv-funext))))) ∘e
     ( distributive-Π-Σ)) ∘e
-  ( equiv-Π-equiv-fam (λ _ → distributive-Π-Σ))
+  ( equiv-Π-equiv-family (λ _ → distributive-Π-Σ))
 ```
 
 ### The modal operator's action on maps

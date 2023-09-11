@@ -26,8 +26,10 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types
 
 ## Idea
 
-The **wedge** or **wedge sum** of two pointed types `a : A` and `b : B` is
-defined by the following pointed pushout:
+The **wedge** or **wedge sum** of two
+[pointed types](structured-types.pointed-types.md) `a : A` and `b : B` is
+defined by the following
+[pointed pushout](synthetic-homotopy-theory.pushouts-of-pointed-types.md):
 
 ```text
   unit ------> A
@@ -50,21 +52,26 @@ wedge-Pointed-Type A B =
     ( inclusion-point-Pointed-Type A)
     ( inclusion-point-Pointed-Type B)
 
+infixr 10 _∨∗_
 _∨∗_ = wedge-Pointed-Type
+
+indexed-wedge-Pointed-Type :
+  {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
+pr1 (indexed-wedge-Pointed-Type I A) =
+  cofiber (λ i → (i , point-Pointed-Type (A i)))
+pr2 (indexed-wedge-Pointed-Type I A) =
+  point-cofiber (λ i → (i , point-Pointed-Type (A i)))
+
+⋁∗ = indexed-wedge-Pointed-Type
 ```
 
 **Note**: the symbols used for the wedge sum `_∨∗_` are the
 [logical or](https://codepoints.net/U+2228) `∨` (agda-input: `\vee` `\or`) and
 the [asterisk operator](https://codepoints.net/U+2217) `∗` (agda-input: `\ast`),
 not the [latin small letter v](https://codepoints.net/U+0076) `v` or the
-[asterisk](https://codepoints.net/U+002A) `*`.
-
-```agda
-indexed-wedge :
-  {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
-pr1 (indexed-wedge I A) = cofiber (λ i → i , point-Pointed-Type (A i))
-pr2 (indexed-wedge I A) = point-cofiber (λ i → i , point-Pointed-Type (A i))
-```
+[asterisk](https://codepoints.net/U+002A) `*`. The `⋁` symbol used for the
+indexed wedge sum, `⋁∗`, is the
+[N-ary logical or](https://codepoints.net/U+22C1) (agda-input: `\bigvee`).
 
 ## Properties
 

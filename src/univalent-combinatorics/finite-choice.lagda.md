@@ -106,14 +106,14 @@ abstract
 abstract
   ε-operator-emb-count :
     {l1 l2 : Level} {A : UU l1} (e : count A) {B : UU l2} →
-    (f : B ↪d A) → ε-operator-Hilbert B
+    (f : B ↪ᵈ A) → ε-operator-Hilbert B
   ε-operator-emb-count e f t =
-    map-equiv-total-fib
+    map-equiv-total-fiber
       ( map-decidable-emb f)
       ( ε-operator-decidable-subtype-count e
         ( decidable-subtype-decidable-emb f)
         ( map-trunc-Prop
-          ( map-inv-equiv-total-fib (map-decidable-emb f))
+          ( map-inv-equiv-total-fiber (map-decidable-emb f))
           ( t)))
 ```
 

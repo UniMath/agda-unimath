@@ -34,15 +34,15 @@ Slice-structure :
   UU (l1 ⊔ l2 ⊔ lsuc l)
 Slice-structure l P B = Σ (UU l) (λ A → hom-structure P A B)
 
-equiv-Fib-structure :
+equiv-Fiber-structure :
   {l1 l2 : Level} (l : Level) (P : UU (l1 ⊔ l) → UU l2) (B : UU l1) →
   Slice-structure (l1 ⊔ l) P B ≃ fam-structure P B
-equiv-Fib-structure {l1} {l3} l P B =
+equiv-Fiber-structure {l1} {l3} l P B =
   ( ( inv-distributive-Π-Σ) ∘e
     ( equiv-Σ
       ( λ C → (b : B) → P (C b))
-      ( equiv-Fib l B)
-      ( λ f → equiv-map-Π (λ b → id-equiv)))) ∘e
+      ( equiv-Fiber l B)
+      ( λ f → equiv-Π-equiv-family (λ b → id-equiv)))) ∘e
   ( inv-associative-Σ
     ( UU (l1 ⊔ l))
     ( λ A → A → B)
@@ -57,9 +57,10 @@ equiv-fixed-Slice-structure :
 equiv-fixed-Slice-structure {l} P X A =
   ( ( equiv-Σ
       ( λ Y → X ≃ Σ A (pr1 ∘ Y))
-      ( equiv-Fib-structure l P A)
+      ( equiv-Fiber-structure l P A)
       ( λ s →
-        inv-equiv (equiv-postcomp-equiv (equiv-total-fib (pr1 (pr2 s))) X))) ∘e
+        inv-equiv
+          ( equiv-postcomp-equiv (equiv-total-fiber (pr1 (pr2 s))) X))) ∘e
     ( ( equiv-right-swap-Σ) ∘e
       ( ( inv-left-unit-law-Σ-is-contr
           ( is-contr-total-equiv X)

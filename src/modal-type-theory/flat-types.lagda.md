@@ -63,7 +63,7 @@ is-retraction-map-is-flat-empty (con-♭ ())
 
 is-flat-empty : is-flat empty
 is-flat-empty =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-is-flat-empty)
     ( is-section-map-is-flat-empty)
     ( is-retraction-map-is-flat-empty)
@@ -83,7 +83,7 @@ is-retraction-map-is-flat-unit (con-♭ _) = refl
 
 is-flat-unit : is-flat unit
 is-flat-unit =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-is-flat-unit)
     ( is-section-map-is-flat-unit)
     ( is-retraction-map-is-flat-unit)

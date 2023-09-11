@@ -168,7 +168,8 @@ module _
   preserves-join-lower-adjoint-galois-connection-Large-Poset x y H z =
     logical-equivalence-reasoning
       ((α : _) → f (x α) ≤-Q z)
-      ↔ ((α : _) → (x α) ≤-P g z) by iff-Π (λ α → adjoint-relation-G (x α) z)
+      ↔ ((α : _) → (x α) ≤-P g z)
+        by iff-Π-iff-family (λ α → adjoint-relation-G (x α) z)
       ↔ y ≤-P g z by H (g z)
       ↔ f y ≤-Q z by inv-iff (adjoint-relation-G y z)
 ```

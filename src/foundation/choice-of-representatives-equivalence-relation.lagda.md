@@ -11,6 +11,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
@@ -24,7 +25,6 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 ```
 
 </details>
@@ -61,7 +61,7 @@ module _
     is-surjective-class-representatives H (pair Q K) =
       apply-universal-property-trunc-Prop K
         ( trunc-Prop
-          ( fib (class-representatives H) (pair Q K)))
+          ( fiber (class-representatives H) (pair Q K)))
         ( λ (pair a φ) →
           unit-trunc-Prop
             ( pair

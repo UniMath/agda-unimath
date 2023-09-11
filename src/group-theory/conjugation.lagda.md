@@ -24,8 +24,8 @@ open import foundation.universe-levels
 open import group-theory.group-actions
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
+open import group-theory.integer-powers-of-elements-groups
 open import group-theory.isomorphisms-groups
-open import group-theory.powers-of-elements-groups
 open import group-theory.subsets-groups
 ```
 

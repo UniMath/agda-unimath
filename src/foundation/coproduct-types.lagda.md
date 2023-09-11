@@ -128,7 +128,7 @@ module _
   equiv-left-summand : (Σ (X + Y) is-left) ≃ X
   pr1 equiv-left-summand = map-equiv-left-summand
   pr2 equiv-left-summand =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-left-summand
       is-section-map-inv-equiv-left-summand
       is-retraction-map-inv-equiv-left-summand
@@ -160,7 +160,7 @@ module _
   equiv-right-summand : (Σ (X + Y) is-right) ≃ Y
   pr1 equiv-right-summand = map-equiv-right-summand
   pr2 equiv-right-summand =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-right-summand
       is-section-map-inv-equiv-right-summand
       is-retraction-map-inv-equiv-right-summand

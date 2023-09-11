@@ -118,7 +118,7 @@ abstract
       ( map-Π (λ x → map-raise))
       ( functor-free-dependent-loop l (λ x → map-raise))
       ( square-functor-free-dependent-loop l (λ x → map-raise))
-      ( is-equiv-map-Π _ (λ x → is-equiv-map-raise))
+      ( is-equiv-map-equiv-Π-equiv-family _ (λ x → is-equiv-map-raise))
       ( is-equiv-functor-free-dependent-loop-is-fiberwise-equiv l
         ( λ x → is-equiv-map-raise))
       ( dup-circle (λ x → raise l2 (P x)))
@@ -239,7 +239,7 @@ equiv-tr-contraction-total-space' :
   ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
   ( contraction-total-space' c x' e') ≃ (contraction-total-space' c x e)
 equiv-tr-contraction-total-space' c p f e e' H =
-  ( equiv-map-Π
+  ( equiv-Π-equiv-family
     ( λ y → equiv-concat' c (inv (segment-Σ p f e e' H y)))) ∘e
   ( equiv-precomp-Π f _)
 
@@ -321,7 +321,7 @@ map-dependent-identification-contraction-total-space'
           ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
           ( h))) ∙
       ( ( eq-htpy
-          ( con-inv-htpy h
+          ( right-transpose-htpy-concat h
             ( segment-Σ refl f e e' H)
             ( precomp-Π
               ( map-equiv f)
@@ -350,7 +350,7 @@ equiv-dependent-identification-contraction-total-space' :
 equiv-dependent-identification-contraction-total-space'
   c {x} {.x} refl f e e' H h h' =
   ( inv-equiv
-    ( equiv-con-inv-htpy h
+    ( equiv-right-transpose-htpy-concat h
       ( segment-Σ refl f e e' H)
       ( precomp-Π
         ( map-equiv f)

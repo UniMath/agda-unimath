@@ -30,6 +30,8 @@ open import orthogonal-factorization-systems.induction-modalities public
 open import orthogonal-factorization-systems.lifting-operations public
 open import orthogonal-factorization-systems.lifting-squares public
 open import orthogonal-factorization-systems.lifts-of-maps public
+open import orthogonal-factorization-systems.local-families public
+open import orthogonal-factorization-systems.local-maps public
 open import orthogonal-factorization-systems.local-types public
 open import orthogonal-factorization-systems.localizations-maps public
 open import orthogonal-factorization-systems.localizations-subuniverses public

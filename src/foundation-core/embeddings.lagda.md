@@ -37,6 +37,7 @@ module _
   is-emb : (A → B) → UU (l1 ⊔ l2)
   is-emb f = (x y : A) → is-equiv (ap f {x} {y})
 
+infix 5 _↪_
 _↪_ :
   {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↪ B = Σ (A → B) is-emb

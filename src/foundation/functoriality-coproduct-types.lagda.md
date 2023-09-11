@@ -110,68 +110,76 @@ module _
   (f : A' → A) (g : B' → B)
   where
 
-  fib-map-coprod-inl-fib : (x : A) → fib f x → fib (map-coprod f g) (inl x)
-  pr1 (fib-map-coprod-inl-fib x (pair a' p)) = inl a'
-  pr2 (fib-map-coprod-inl-fib x (pair a' p)) = ap inl p
+  fiber-map-coprod-inl-fiber :
+    (x : A) → fiber f x → fiber (map-coprod f g) (inl x)
+  pr1 (fiber-map-coprod-inl-fiber x (pair a' p)) = inl a'
+  pr2 (fiber-map-coprod-inl-fiber x (pair a' p)) = ap inl p
 
-  fib-fib-map-coprod-inl : (x : A) → fib (map-coprod f g) (inl x) → fib f x
-  fib-fib-map-coprod-inl x (pair (inl a') p) =
+  fiber-fiber-map-coprod-inl :
+    (x : A) → fiber (map-coprod f g) (inl x) → fiber f x
+  fiber-fiber-map-coprod-inl x (pair (inl a') p) =
     pair a' (map-compute-eq-coprod-inl-inl (f a') x p)
-  fib-fib-map-coprod-inl x (pair (inr b') p) =
+  fiber-fiber-map-coprod-inl x (pair (inr b') p) =
     ex-falso (is-empty-eq-coprod-inr-inl (g b') x p)
 
   abstract
-    is-section-fib-fib-map-coprod-inl :
-      (x : A) → (fib-map-coprod-inl-fib x ∘ fib-fib-map-coprod-inl x) ~ id
-    is-section-fib-fib-map-coprod-inl .(f a') (pair (inl a') refl) = refl
-    is-section-fib-fib-map-coprod-inl x (pair (inr b') p) =
+    is-section-fiber-fiber-map-coprod-inl :
+      (x : A) →
+      (fiber-map-coprod-inl-fiber x ∘ fiber-fiber-map-coprod-inl x) ~ id
+    is-section-fiber-fiber-map-coprod-inl .(f a') (pair (inl a') refl) = refl
+    is-section-fiber-fiber-map-coprod-inl x (pair (inr b') p) =
       ex-falso (is-empty-eq-coprod-inr-inl (g b') x p)
 
   abstract
-    is-retraction-fib-fib-map-coprod-inl :
-      (x : A) → (fib-fib-map-coprod-inl x ∘ fib-map-coprod-inl-fib x) ~ id
-    is-retraction-fib-fib-map-coprod-inl .(f a') (pair a' refl) = refl
+    is-retraction-fiber-fiber-map-coprod-inl :
+      (x : A) →
+      (fiber-fiber-map-coprod-inl x ∘ fiber-map-coprod-inl-fiber x) ~ id
+    is-retraction-fiber-fiber-map-coprod-inl .(f a') (pair a' refl) = refl
 
   abstract
-    is-equiv-fib-map-coprod-inl-fib :
-      (x : A) → is-equiv (fib-map-coprod-inl-fib x)
-    is-equiv-fib-map-coprod-inl-fib x =
-      is-equiv-has-inverse
-        ( fib-fib-map-coprod-inl x)
-        ( is-section-fib-fib-map-coprod-inl x)
-        ( is-retraction-fib-fib-map-coprod-inl x)
+    is-equiv-fiber-map-coprod-inl-fiber :
+      (x : A) → is-equiv (fiber-map-coprod-inl-fiber x)
+    is-equiv-fiber-map-coprod-inl-fiber x =
+      is-equiv-is-invertible
+        ( fiber-fiber-map-coprod-inl x)
+        ( is-section-fiber-fiber-map-coprod-inl x)
+        ( is-retraction-fiber-fiber-map-coprod-inl x)
 
-  fib-map-coprod-inr-fib : (y : B) → fib g y → fib (map-coprod f g) (inr y)
-  pr1 (fib-map-coprod-inr-fib y (pair b' p)) = inr b'
-  pr2 (fib-map-coprod-inr-fib y (pair b' p)) = ap inr p
+  fiber-map-coprod-inr-fiber :
+    (y : B) → fiber g y → fiber (map-coprod f g) (inr y)
+  pr1 (fiber-map-coprod-inr-fiber y (pair b' p)) = inr b'
+  pr2 (fiber-map-coprod-inr-fiber y (pair b' p)) = ap inr p
 
-  fib-fib-map-coprod-inr : (y : B) → fib (map-coprod f g) (inr y) → fib g y
-  fib-fib-map-coprod-inr y (pair (inl a') p) =
+  fiber-fiber-map-coprod-inr :
+    (y : B) → fiber (map-coprod f g) (inr y) → fiber g y
+  fiber-fiber-map-coprod-inr y (pair (inl a') p) =
     ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
-  pr1 (fib-fib-map-coprod-inr y (pair (inr b') p)) = b'
-  pr2 (fib-fib-map-coprod-inr y (pair (inr b') p)) =
+  pr1 (fiber-fiber-map-coprod-inr y (pair (inr b') p)) = b'
+  pr2 (fiber-fiber-map-coprod-inr y (pair (inr b') p)) =
     map-compute-eq-coprod-inr-inr (g b') y p
 
   abstract
-    is-section-fib-fib-map-coprod-inr :
-      (y : B) → (fib-map-coprod-inr-fib y ∘ fib-fib-map-coprod-inr y) ~ id
-    is-section-fib-fib-map-coprod-inr .(g b') (pair (inr b') refl) = refl
-    is-section-fib-fib-map-coprod-inr y (pair (inl a') p) =
+    is-section-fiber-fiber-map-coprod-inr :
+      (y : B) →
+      (fiber-map-coprod-inr-fiber y ∘ fiber-fiber-map-coprod-inr y) ~ id
+    is-section-fiber-fiber-map-coprod-inr .(g b') (pair (inr b') refl) = refl
+    is-section-fiber-fiber-map-coprod-inr y (pair (inl a') p) =
       ex-falso (is-empty-eq-coprod-inl-inr (f a') y p)
 
   abstract
-    is-retraction-fib-fib-map-coprod-inr :
-      (y : B) → (fib-fib-map-coprod-inr y ∘ fib-map-coprod-inr-fib y) ~ id
-    is-retraction-fib-fib-map-coprod-inr .(g b') (pair b' refl) = refl
+    is-retraction-fiber-fiber-map-coprod-inr :
+      (y : B) →
+      (fiber-fiber-map-coprod-inr y ∘ fiber-map-coprod-inr-fiber y) ~ id
+    is-retraction-fiber-fiber-map-coprod-inr .(g b') (pair b' refl) = refl
 
   abstract
-    is-equiv-fib-map-coprod-inr-fib :
-      (y : B) → is-equiv (fib-map-coprod-inr-fib y)
-    is-equiv-fib-map-coprod-inr-fib y =
-      is-equiv-has-inverse
-        ( fib-fib-map-coprod-inr y)
-        ( is-section-fib-fib-map-coprod-inr y)
-        ( is-retraction-fib-fib-map-coprod-inr y)
+    is-equiv-fiber-map-coprod-inr-fiber :
+      (y : B) → is-equiv (fiber-map-coprod-inr-fiber y)
+    is-equiv-fiber-map-coprod-inr-fiber y =
+      is-equiv-is-invertible
+        ( fiber-fiber-map-coprod-inr y)
+        ( is-section-fiber-fiber-map-coprod-inr y)
+        ( is-retraction-fiber-fiber-map-coprod-inr y)
 ```
 
 ### Functoriality of coproducts preserves equivalences
@@ -237,24 +245,24 @@ module _
       is-surjective (map-coprod f g)
     is-surjective-map-coprod s s' (inl x) =
       apply-universal-property-trunc-Prop (s x)
-        ( trunc-Prop (fib (map-coprod _ _) (inl x)))
+        ( trunc-Prop (fiber (map-coprod _ _) (inl x)))
         ( λ {(a , p) → unit-trunc-Prop (inl a , ap inl p)})
     is-surjective-map-coprod s s' (inr x) =
       apply-universal-property-trunc-Prop (s' x)
-        ( trunc-Prop (fib (map-coprod _ _) (inr x)))
+        ( trunc-Prop (fiber (map-coprod _ _) (inr x)))
         ( λ {(a , p) → unit-trunc-Prop (inr a , ap inr p)})
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`
 
 ```agda
-is-contr-fib-map-coprod :
+is-contr-fiber-map-coprod :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : C → D) →
   is-contr
-    ( fib ( λ (fg' : (A → B) × (C → D)) → map-coprod (pr1 fg') (pr2 fg'))
+    ( fiber ( λ (fg' : (A → B) × (C → D)) → map-coprod (pr1 fg') (pr2 fg'))
           ( map-coprod f g))
-is-contr-fib-map-coprod {A = A} {B} {C} {D} f g =
+is-contr-fiber-map-coprod {A = A} {B} {C} {D} f g =
   is-contr-equiv
     ( Σ ( (A → B) × (C → D))
         ( λ fg' →
@@ -262,9 +270,9 @@ is-contr-fib-map-coprod {A = A} {B} {C} {D} f g =
     ( equiv-tot
       ( λ fg' →
         ( ( equiv-prod
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ a → compute-eq-coprod-inl-inl (pr1 fg' a) (f a)))
-            ( equiv-map-Π
+            ( equiv-Π-equiv-family
               ( λ c → compute-eq-coprod-inr-inr (pr2 fg' c) (g c)))) ∘e
           ( equiv-dependent-universal-property-coprod
             ( λ x →
@@ -283,7 +291,7 @@ is-emb-map-coprod :
 is-emb-map-coprod (pair f g) =
   fundamental-theorem-id (pair f g)
     ( refl)
-    {! is-contr-fib-map-coprod f g!}
+    {! is-contr-fiber-map-coprod f g!}
     {!!}
 -}
 ```
@@ -393,7 +401,7 @@ module _
   pr1 (pr1 (retraction-equiv-coprod f g p)) x =
     cases-retraction-equiv-coprod f g p x (map-equiv f (inl x)) refl
   pr2 (pr1 (retraction-equiv-coprod f g p)) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ x →
         inv-cases-retraction-equiv-coprod f g p x
           ( map-inv-equiv f (inl x))
@@ -471,7 +479,7 @@ module _
     (e : (P + Q) ≃ (P' + Q')) (u : P + Q) → is-left u ≃ is-left (map-equiv e u)
   pr1 (equiv-left-to-left e u) = left-to-left ¬PQ' e u
   pr2 (equiv-left-to-left e u) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr is-left (is-retraction-map-inv-equiv e u) ∘
         left-to-left ¬P'Q (inv-equiv e) (map-equiv e u))
       ( λ _ → eq-is-prop (is-prop-is-left (map-equiv e u)))
@@ -482,7 +490,7 @@ module _
     is-right u ≃ is-right (map-equiv e u)
   pr1 (equiv-right-to-right e u) = right-to-right ¬P'Q e u
   pr2 (equiv-right-to-right e u) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr is-right (is-retraction-map-inv-equiv e u) ∘
         right-to-right ¬PQ' (inv-equiv e) (map-equiv e u))
       (λ _ → eq-is-prop (is-prop-is-right (map-equiv e u)))
@@ -527,7 +535,7 @@ module _
     ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))
   pr1 equiv-mutually-exclusive-coprod = map-mutually-exclusive-coprod
   pr2 equiv-mutually-exclusive-coprod =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-mutually-exclusive-coprod
       is-retraction-map-inv-mutually-exclusive-coprod
       is-section-map-inv-mutually-exclusive-coprod

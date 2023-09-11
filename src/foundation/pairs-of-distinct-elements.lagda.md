@@ -159,7 +159,7 @@ module _
   is-equiv-map-equiv-pair-of-distinct-elements :
     is-equiv map-equiv-pair-of-distinct-elements
   is-equiv-map-equiv-pair-of-distinct-elements =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-pair-of-distinct-elements
       is-section-map-inv-equiv-pair-of-distinct-elements
       is-retraction-map-inv-equiv-pair-of-distinct-elements

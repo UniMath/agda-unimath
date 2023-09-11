@@ -278,7 +278,7 @@ module _
   is-equiv-hom-binary-hom-Equivalence-Relation :
     is-equiv hom-binary-hom-Equivalence-Relation
   is-equiv-hom-binary-hom-Equivalence-Relation =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       binary-hom-hom-Equivalence-Relation
       is-section-binary-hom-hom-Equivalence-Relation
       is-retraction-binary-hom-hom-Equivalence-Relation
@@ -373,7 +373,7 @@ module _
                     S T)))) ∘e
           ( equiv-tot
             ( λ h →
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ x →
                   ( inv-equiv equiv-funext) ∘e
                   ( inv-equiv
@@ -396,7 +396,7 @@ module _
                         ( h
                           ( map-reflecting-map-Equivalence-Relation R qR x)
                           ( u)))) ∘e
-                    ( equiv-map-Π
+                    ( equiv-Π-equiv-family
                       ( λ y →
                         ( equiv-inv _ _) ∘e
                         ( equiv-concat'

@@ -17,6 +17,7 @@ open import foundation.fibers-of-maps
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
@@ -104,7 +105,7 @@ module _
     is-contr ( Σ (X → Y) (λ h → htpy-cocone f g (cocone-map f g c h) d))
   uniqueness-map-universal-property-pushout =
     is-contr-is-equiv'
-      ( fib (cocone-map f g c) d)
+      ( fiber (cocone-map f g c) d)
       ( tot (λ h → htpy-cocone-eq f g (cocone-map f g c h) d))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ h → is-equiv-htpy-cocone-eq f g (cocone-map f g c h) d))

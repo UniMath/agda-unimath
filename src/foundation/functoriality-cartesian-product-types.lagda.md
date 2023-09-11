@@ -114,7 +114,7 @@ module _
     (f : A → C) (g : B → D) →
     is-equiv f → is-equiv g → is-equiv (map-prod f g)
   is-equiv-map-prod f g H K =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-map-prod f g H K)
       ( is-section-map-inv-map-prod f g H K)
       ( is-retraction-map-inv-map-prod f g H K)
@@ -133,43 +133,49 @@ module _
   (f : A → C) (g : B → D)
   where
 
-  map-compute-fib-map-prod :
-    (t : C × D) → fib (map-prod f g) t → (fib f (pr1 t)) × (fib g (pr2 t))
-  pr1 (pr1 (map-compute-fib-map-prod ._ ((a , b) , refl))) = a
-  pr2 (pr1 (map-compute-fib-map-prod ._ ((a , b) , refl))) = refl
-  pr1 (pr2 (map-compute-fib-map-prod ._ ((a , b) , refl))) = b
-  pr2 (pr2 (map-compute-fib-map-prod ._ ((a , b) , refl))) = refl
+  map-compute-fiber-map-prod :
+    (t : C × D) → fiber (map-prod f g) t → (fiber f (pr1 t)) × (fiber g (pr2 t))
+  pr1 (pr1 (map-compute-fiber-map-prod ._ ((a , b) , refl))) = a
+  pr2 (pr1 (map-compute-fiber-map-prod ._ ((a , b) , refl))) = refl
+  pr1 (pr2 (map-compute-fiber-map-prod ._ ((a , b) , refl))) = b
+  pr2 (pr2 (map-compute-fiber-map-prod ._ ((a , b) , refl))) = refl
 
-  map-inv-compute-fib-map-prod :
-    (t : C × D) → (fib f (pr1 t)) × (fib g (pr2 t)) → fib (map-prod f g) t
-  pr1 (pr1 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl))) = x
-  pr2 (pr1 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl))) = y
-  pr2 (map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , y , refl)) = refl
-
-  is-section-map-inv-compute-fib-map-prod :
-    (t : C × D) →
-    ((map-compute-fib-map-prod t) ∘ (map-inv-compute-fib-map-prod t)) ~ id
-  is-section-map-inv-compute-fib-map-prod (._ , ._) ((x , refl) , (y , refl)) =
+  map-inv-compute-fiber-map-prod :
+    (t : C × D) → (fiber f (pr1 t)) × (fiber g (pr2 t)) → fiber (map-prod f g) t
+  pr1 (pr1 (map-inv-compute-fiber-map-prod (._ , ._) ((x , refl) , y , refl))) =
+    x
+  pr2 (pr1 (map-inv-compute-fiber-map-prod (._ , ._) ((x , refl) , y , refl))) =
+    y
+  pr2 (map-inv-compute-fiber-map-prod (._ , ._) ((x , refl) , y , refl)) =
     refl
 
-  is-retraction-map-inv-compute-fib-map-prod :
+  is-section-map-inv-compute-fiber-map-prod :
     (t : C × D) →
-    ((map-inv-compute-fib-map-prod t) ∘ (map-compute-fib-map-prod t)) ~ id
-  is-retraction-map-inv-compute-fib-map-prod ._ ((a , b) , refl) =
+    (map-compute-fiber-map-prod t ∘ map-inv-compute-fiber-map-prod t) ~ id
+  is-section-map-inv-compute-fiber-map-prod
+    ( ._ , ._)
+    ( (x , refl) , (y , refl)) =
     refl
 
-  is-equiv-map-compute-fib-map-prod :
-    (t : C × D) → is-equiv (map-compute-fib-map-prod t)
-  is-equiv-map-compute-fib-map-prod t =
-    is-equiv-has-inverse
-      ( map-inv-compute-fib-map-prod t)
-      ( is-section-map-inv-compute-fib-map-prod t)
-      ( is-retraction-map-inv-compute-fib-map-prod t)
+  is-retraction-map-inv-compute-fiber-map-prod :
+    (t : C × D) →
+    ((map-inv-compute-fiber-map-prod t) ∘ (map-compute-fiber-map-prod t)) ~ id
+  is-retraction-map-inv-compute-fiber-map-prod ._ ((a , b) , refl) =
+    refl
 
-  compute-fib-map-prod :
-    (t : C × D) → fib (map-prod f g) t ≃ ((fib f (pr1 t)) × (fib g (pr2 t)))
-  pr1 (compute-fib-map-prod t) = map-compute-fib-map-prod t
-  pr2 (compute-fib-map-prod t) = is-equiv-map-compute-fib-map-prod t
+  is-equiv-map-compute-fiber-map-prod :
+    (t : C × D) → is-equiv (map-compute-fiber-map-prod t)
+  is-equiv-map-compute-fiber-map-prod t =
+    is-equiv-is-invertible
+      ( map-inv-compute-fiber-map-prod t)
+      ( is-section-map-inv-compute-fiber-map-prod t)
+      ( is-retraction-map-inv-compute-fiber-map-prod t)
+
+  compute-fiber-map-prod :
+    (t : C × D) →
+    fiber (map-prod f g) t ≃ ((fiber f (pr1 t)) × (fiber g (pr2 t)))
+  pr1 (compute-fiber-map-prod t) = map-compute-fiber-map-prod t
+  pr2 (compute-fiber-map-prod t) = is-equiv-map-compute-fiber-map-prod t
 ```
 
 ### If `map-prod f g : A × B → C × D` is an equivalence, then we have `D → is-equiv f` and `C → is-equiv g`
@@ -182,12 +188,12 @@ is-equiv-left-factor-is-equiv-map-prod :
 is-equiv-left-factor-is-equiv-map-prod f g d is-equiv-fg =
   is-equiv-is-contr-map
     ( λ x → is-contr-left-factor-prod
-      ( fib f x)
-      ( fib g d)
+      ( fiber f x)
+      ( fiber g d)
       ( is-contr-is-equiv'
-        ( fib (map-prod f g) (x , d))
-        ( map-compute-fib-map-prod f g (x , d))
-        ( is-equiv-map-compute-fib-map-prod f g (x , d))
+        ( fiber (map-prod f g) (x , d))
+        ( map-compute-fiber-map-prod f g (x , d))
+        ( is-equiv-map-compute-fiber-map-prod f g (x , d))
         ( is-contr-map-is-equiv is-equiv-fg (x , d))))
 
 is-equiv-right-factor-is-equiv-map-prod :
@@ -197,12 +203,12 @@ is-equiv-right-factor-is-equiv-map-prod :
 is-equiv-right-factor-is-equiv-map-prod f g c is-equiv-fg =
   is-equiv-is-contr-map
     ( λ y → is-contr-right-factor-prod
-      ( fib f c)
-      ( fib g y)
+      ( fiber f c)
+      ( fiber g y)
       ( is-contr-is-equiv'
-        ( fib (map-prod f g) (c , y))
-        ( map-compute-fib-map-prod f g (c , y))
-        ( is-equiv-map-compute-fib-map-prod f g (c , y))
+        ( fiber (map-prod f g) (c , y))
+        ( map-compute-fiber-map-prod f g (c , y))
+        ( is-equiv-map-compute-fiber-map-prod f g (c , y))
         ( is-contr-map-is-equiv is-equiv-fg (c , y))))
 ```
 

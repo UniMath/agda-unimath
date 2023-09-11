@@ -36,7 +36,7 @@ add-ℚ (x , p) (y , q) = in-fraction-ℤ (add-fraction-ℤ x y)
 add-ℚ' : ℚ → ℚ → ℚ
 add-ℚ' x y = add-ℚ y x
 
-infix 30 _+ℚ_
+infixl 35 _+ℚ_
 _+ℚ_ = add-ℚ
 
 ap-add-ℚ :

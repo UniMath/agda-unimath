@@ -668,7 +668,7 @@ is-equiv-congruence-Normal-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
   is-equiv (congruence-Normal-Subgroup {l1} {l2} G)
 is-equiv-congruence-Normal-Subgroup G =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( normal-subgroup-congruence-Group G)
     ( is-section-normal-subgroup-congruence-Group G)
     ( is-retraction-normal-subgroup-congruence-Group G)
@@ -685,7 +685,7 @@ is-equiv-normal-subgroup-congruence-Group :
   {l1 l2 : Level} (G : Group l1) →
   is-equiv (normal-subgroup-congruence-Group {l1} {l2} G)
 is-equiv-normal-subgroup-congruence-Group G =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( congruence-Normal-Subgroup G)
     ( is-retraction-normal-subgroup-congruence-Group G)
     ( is-section-normal-subgroup-congruence-Group G)

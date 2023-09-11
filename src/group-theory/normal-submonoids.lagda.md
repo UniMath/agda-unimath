@@ -557,7 +557,7 @@ is-equiv-normal-submonoid-saturated-congruence-Monoid :
   {l1 : Level} (l2 : Level) (M : Monoid l1) →
   is-equiv (normal-submonoid-saturated-congruence-Monoid {l2 = l1 ⊔ l2} M)
 is-equiv-normal-submonoid-saturated-congruence-Monoid l2 M =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( saturated-congruence-Normal-Submonoid M)
     ( is-section-saturated-congruence-Normal-Submonoid l2 M)
     ( is-retraction-saturated-congruence-Normal-Submonoid l2 M)

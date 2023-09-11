@@ -46,71 +46,71 @@ The fibers of maps between finite types are finite.
 ### If `A` and `B` can be counted, then the fibers of a map `f : A → B` can be counted
 
 ```agda
-count-fib :
+count-fiber :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  count A → count B → (y : B) → count (fib f y)
-count-fib f count-A count-B =
+  count A → count B → (y : B) → count (fiber f y)
+count-fiber f count-A count-B =
   count-fiber-count-Σ-count-base
     ( count-B)
-    ( count-equiv' (equiv-total-fib f) count-A)
+    ( count-equiv' (equiv-total-fiber f) count-A)
 
 abstract
-  sum-number-of-elements-count-fib :
+  sum-number-of-elements-count-fiber :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     (count-A : count A) (count-B : count B) →
     Id
       ( sum-count-ℕ count-B
-        ( λ x → number-of-elements-count (count-fib f count-A count-B x)))
+        ( λ x → number-of-elements-count (count-fiber f count-A count-B x)))
       ( number-of-elements-count count-A)
-  sum-number-of-elements-count-fib f count-A count-B =
+  sum-number-of-elements-count-fiber f count-A count-B =
     sum-number-of-elements-count-fiber-count-Σ count-B
-      ( count-equiv' (equiv-total-fib f) count-A)
+      ( count-equiv' (equiv-total-fiber f) count-A)
 
 abstract
-  double-counting-fib :
+  double-counting-fiber :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (count-A : count A) →
-    (count-B : count B) (count-fib-f : (y : B) → count (fib f y)) (y : B) →
+    (count-B : count B) (count-fiber-f : (y : B) → count (fiber f y)) (y : B) →
     Id
-      ( number-of-elements-count (count-fib-f y))
-      ( number-of-elements-count (count-fib f count-A count-B y))
-  double-counting-fib f count-A count-B count-fib-f y =
-    double-counting (count-fib-f y) (count-fib f count-A count-B y)
+      ( number-of-elements-count (count-fiber-f y))
+      ( number-of-elements-count (count-fiber f count-A count-B y))
+  double-counting-fiber f count-A count-B count-fiber-f y =
+    double-counting (count-fiber-f y) (count-fiber f count-A count-B y)
 ```
 
 ### Fibers of maps between finite types are finite
 
 ```agda
 abstract
-  is-finite-fib :
+  is-finite-fiber :
     {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X → Y) →
-    is-finite X → is-finite Y → (y : Y) → is-finite (fib f y)
-  is-finite-fib f is-finite-X is-finite-Y y =
+    is-finite X → is-finite Y → (y : Y) → is-finite (fiber f y)
+  is-finite-fiber f is-finite-X is-finite-Y y =
     apply-universal-property-trunc-Prop
       ( is-finite-X)
-      ( is-finite-Prop (fib f y))
+      ( is-finite-Prop (fiber f y))
       ( λ H →
         apply-universal-property-trunc-Prop
           ( is-finite-Y)
-          ( is-finite-Prop (fib f y))
-          ( λ K → unit-trunc-Prop (count-fib f H K y)))
+          ( is-finite-Prop (fiber f y))
+          ( λ K → unit-trunc-Prop (count-fiber f H K y)))
 
-fib-𝔽 :
+fiber-𝔽 :
   {l1 l2 : Level} (X : 𝔽 l1) (Y : 𝔽 l2) (f : type-𝔽 X → type-𝔽 Y) →
   type-𝔽 Y → 𝔽 (l1 ⊔ l2)
-pr1 (fib-𝔽 X Y f y) = fib f y
-pr2 (fib-𝔽 X Y f y) =
-  is-finite-fib f (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y) y
+pr1 (fiber-𝔽 X Y f y) = fiber f y
+pr2 (fiber-𝔽 X Y f y) =
+  is-finite-fiber f (is-finite-type-𝔽 X) (is-finite-type-𝔽 Y) y
 ```
 
 ###
 
 ```agda
 abstract
-  is-finite-fib-map-section-family :
+  is-finite-fiber-map-section-family :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
     is-finite (Σ A B) → ((x : A) → is-finite (B x)) →
-    (t : Σ A B) → is-finite (fib (map-section-family b) t)
-  is-finite-fib-map-section-family {l1} {l2} {A} {B} b f g (pair y z) =
+    (t : Σ A B) → is-finite (fiber (map-section-family b) t)
+  is-finite-fiber-map-section-family {l1} {l2} {A} {B} b f g (pair y z) =
     is-finite-equiv'
       ( ( ( left-unit-law-Σ-is-contr
             ( is-contr-total-path' y)
@@ -125,32 +125,32 @@ abstract
 ### The fibers of maps between finite types are decidable
 
 ```agda
-is-decidable-fib-count :
+is-decidable-fiber-count :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  count A → count B → (y : B) → is-decidable (fib f y)
-is-decidable-fib-count f count-A count-B y =
-  is-decidable-count (count-fib f count-A count-B y)
+  count A → count B → (y : B) → is-decidable (fiber f y)
+is-decidable-fiber-count f count-A count-B y =
+  is-decidable-count (count-fiber f count-A count-B y)
 
-is-decidable-fib-Fin :
-  {k l : ℕ} (f : Fin k → Fin l) → (y : Fin l) → is-decidable (fib f y)
-is-decidable-fib-Fin {k} {l} f y =
-  is-decidable-fib-count f (count-Fin k) (count-Fin l) y
+is-decidable-fiber-Fin :
+  {k l : ℕ} (f : Fin k → Fin l) → (y : Fin l) → is-decidable (fiber f y)
+is-decidable-fiber-Fin {k} {l} f y =
+  is-decidable-fiber-count f (count-Fin k) (count-Fin l) y
 ```
 
 ### If `f : A → B` and `B` is finite, then `A` is finite if and only if the fibers of `f` are finite
 
 ```agda
-equiv-is-finite-domain-is-finite-fib :
+equiv-is-finite-domain-is-finite-fiber :
   {l1 l2 : Level} {A : UU l1} →
   (B : 𝔽 l2) (f : A → (type-𝔽 B)) →
-  ((b : type-𝔽 B) → is-finite (fib f b)) ≃ is-finite A
-equiv-is-finite-domain-is-finite-fib {A = A} B f =
+  ((b : type-𝔽 B) → is-finite (fiber f b)) ≃ is-finite A
+equiv-is-finite-domain-is-finite-fiber {A = A} B f =
   equiv-prop
-    ( is-prop-Π (λ b → is-prop-is-finite (fib f b)))
+    ( is-prop-Π (λ b → is-prop-is-finite (fiber f b)))
     ( is-prop-is-finite A)
     ( λ P →
       is-finite-equiv
-        ( equiv-total-fib f)
+        ( equiv-total-fiber f)
         ( is-finite-Σ (is-finite-type-𝔽 B) P))
-    ( λ P → is-finite-fib f P ( is-finite-type-𝔽 B))
+    ( λ P → is-finite-fiber f P ( is-finite-type-𝔽 B))
 ```

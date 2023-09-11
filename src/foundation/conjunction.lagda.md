@@ -9,12 +9,12 @@ module foundation.conjunction where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.decidable-propositions
 open import foundation-core.equivalences
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 ```
 
@@ -30,6 +30,7 @@ and `Q` is the proposition that both `P` and `Q` hold.
 ```agda
 conj-Prop = prod-Prop
 
+infixr 15 _∧_
 _∧_ = conj-Prop
 ```
 

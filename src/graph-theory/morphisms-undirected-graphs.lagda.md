@@ -161,9 +161,9 @@ module _
                 Id (edge-hom-Undirected-Graph G H f p e) (gE p e)))
           ( equiv-tot
             ( λ gE →
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ p →
-                  equiv-map-Π
+                  equiv-Π-equiv-family
                     ( λ e →
                       equiv-concat
                         ( pr2 (refl-htpy-hom-Undirected-Graph f) p e)

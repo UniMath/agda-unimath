@@ -149,7 +149,7 @@ module _
       ({l : Level} → induction-principle-circle l α) →
       ({l : Level} → dependent-universal-property-circle l α)
     dependent-universal-property-induction-principle-circle ind-circle P =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( function-induction-principle-circle α ind-circle P)
         ( compute-induction-principle-circle α ind-circle P)
         ( is-retraction-ind-circle ind-circle P)
@@ -169,7 +169,7 @@ module _
       is-contr (Σ (X → Y) (λ f → Eq-free-loop (ev-free-loop α Y f) α'))
     uniqueness-universal-property-circle up-circle Y α' =
       is-contr-is-equiv'
-        ( fib (ev-free-loop α Y) α')
+        ( fiber (ev-free-loop α Y) α')
         ( tot (λ f → Eq-eq-free-loop (ev-free-loop α Y f) α'))
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ f → is-equiv-Eq-eq-free-loop (ev-free-loop α Y f) α'))
@@ -191,7 +191,7 @@ module _
           ( λ h → Eq-free-dependent-loop α P (ev-free-loop-Π α P h) k))
   uniqueness-dependent-universal-property-circle dup-circle {l2} {P} k =
     is-contr-is-equiv'
-      ( fib (ev-free-loop-Π α P) k)
+      ( fiber (ev-free-loop-Π α P) k)
       ( tot (λ h → Eq-free-dependent-loop-eq α P (ev-free-loop-Π α P h) k))
       ( is-equiv-tot-is-fiberwise-equiv
         (λ h → is-equiv-Eq-free-dependent-loop-eq α P (ev-free-loop-Π α P h) k))

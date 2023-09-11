@@ -662,7 +662,7 @@ module _
   is-equiv-congruence-Subgroup-Ab :
     is-equiv (congruence-Subgroup-Ab {l1} {l2} A)
   is-equiv-congruence-Subgroup-Ab =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( subgroup-congruence-Ab A)
       ( is-section-subgroup-congruence-Ab A)
       ( is-retraction-subgroup-congruence-Ab A)
@@ -677,7 +677,7 @@ module _
   is-equiv-subgroup-congruence-Ab :
     is-equiv (subgroup-congruence-Ab {l1} {l2} A)
   is-equiv-subgroup-congruence-Ab =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( congruence-Subgroup-Ab A)
       ( is-retraction-subgroup-congruence-Ab A)
       ( is-section-subgroup-congruence-Ab A)

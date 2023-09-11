@@ -520,7 +520,7 @@ module _
     binary-tr
       ( sim-congruence-Ring R S)
       ( right-unit-law-add-Ring R x)
-      ( is-section-add-neg-Ring R x y)
+      ( is-section-left-subtraction-Ring R x y)
       ( left-add-congruence-Ring R S x H)
   pr2
     ( relate-same-elements-congruence-ideal-congruence-Ring x y) H =
@@ -548,7 +548,7 @@ module _
   is-equiv-congruence-ideal-Ring :
     is-equiv (congruence-ideal-Ring {l1} {l2} R)
   is-equiv-congruence-ideal-Ring =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( ideal-congruence-Ring R)
       ( is-section-ideal-congruence-Ring R)
       ( is-retraction-ideal-congruence-Ring R)
@@ -561,7 +561,7 @@ module _
   is-equiv-ideal-congruence-Ring :
     is-equiv (ideal-congruence-Ring {l1} {l2} R)
   is-equiv-ideal-congruence-Ring =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( congruence-ideal-Ring R)
       ( is-retraction-ideal-congruence-Ring R)
       ( is-section-ideal-congruence-Ring R)

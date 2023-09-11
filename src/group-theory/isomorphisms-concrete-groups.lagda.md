@@ -19,8 +19,9 @@ open import group-theory.precategory-of-concrete-groups
 
 ## Idea
 
-Isomorphisms of concrete groups are isomorphisms in the large precategory of
-concrete groups
+**Isomorphisms** of [concrete groups](group-theory.concrete-groups.md) are
+[isomorphisms](category-theory.isomorphisms-large-precategories.md) in the
+[large precategory of concrete groups](group-theory.precategory-of-concrete-groups.md).
 
 ## Definition
 
@@ -35,3 +36,4 @@ iso-Concrete-Group = iso-Large-Precategory Concrete-Group-Large-Precategory
 ### Equivalences of concrete groups are isomorphisms of concrete groups
 
 This remains to be shown.
+[#736](https://github.com/UniMath/agda-unimath/issues/736)

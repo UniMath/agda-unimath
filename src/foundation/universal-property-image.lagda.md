@@ -10,6 +10,7 @@ module foundation.universal-property-image where
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.images
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.slice
 open import foundation.surjective-maps
@@ -26,7 +27,6 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
@@ -124,7 +124,7 @@ module _
                 ( r)))
     universal-property-image =
       is-contr-equiv'
-        ( fib (precomp-emb f i q j) r)
+        ( fiber (precomp-emb f i q j) r)
         ( equiv-tot
           ( λ h →
             extensionality-hom-slice f (map-emb j) (precomp-emb f i q j h) r))
@@ -241,11 +241,11 @@ abstract
   fiberwise-map-is-image-im :
     {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3} (f : A → X) →
     (m : B ↪ X) (h : hom-slice f (map-emb m)) →
-    (x : X) → type-trunc-Prop (fib f x) → fib (map-emb m) x
+    (x : X) → type-trunc-Prop (fiber f x) → fiber (map-emb m) x
   fiberwise-map-is-image-im f m h x =
     map-universal-property-trunc-Prop
-      { A = (fib f x)}
-      ( fib-emb-Prop m x)
+      { A = (fiber f x)}
+      ( fiber-emb-Prop m x)
       ( λ t →
         pair
           ( map-hom-slice f (map-emb m) h (pr1 t))
@@ -287,10 +287,10 @@ abstract
     is-image f i q → is-surjective (map-hom-slice f (map-emb i) q)
   is-surjective-is-image {A = A} {B} {X} f i q up-i b =
     apply-universal-property-trunc-Prop β
-      ( trunc-Prop (fib (map-hom-slice f (map-emb i) q) b))
+      ( trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b))
       ( γ)
     where
-    g : type-subtype (trunc-Prop ∘ fib (map-hom-slice f (map-emb i) q)) → X
+    g : type-subtype (trunc-Prop ∘ fiber (map-hom-slice f (map-emb i) q)) → X
     g = map-emb i ∘ pr1
     is-emb-g : is-emb g
     is-emb-g = is-emb-comp (map-emb i) pr1
@@ -300,14 +300,14 @@ abstract
     α = map-inv-is-equiv
           ( up-i
             ( Σ B ( λ b →
-                    type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) b)))
+                    type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) b)))
             ( pair g is-emb-g))
           ( pair (map-unit-im (pr1 q)) (pr2 q))
-    β : type-trunc-Prop (fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
+    β : type-trunc-Prop (fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)))
     β = pr2 (pr1 α b)
     γ :
-      fib (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
-      type-Prop (trunc-Prop (fib (pr1 q) b))
+      fiber (map-hom-slice f (map-emb i) q) (pr1 (pr1 α b)) →
+      type-Prop (trunc-Prop (fiber (pr1 q) b))
     γ (pair a p) =
       unit-trunc-Prop
         ( pair a (p ∙ inv (is-injective-is-emb (is-emb-map-emb i) (pr2 α b))))
@@ -321,17 +321,18 @@ abstract
   is-image-is-surjective' f i q H B' m =
     map-equiv
       ( ( equiv-hom-slice-fiberwise-hom (map-emb i) (map-emb m)) ∘e
-        ( ( inv-equiv (reduce-Π-fib (map-emb i) (fib (map-emb m)))) ∘e
+        ( ( inv-equiv (reduce-Π-fiber (map-emb i) (fiber (map-emb m)))) ∘e
           ( inv-equiv
             ( equiv-dependent-universal-property-surj-is-surjective
               ( pr1 q)
               ( H)
               ( λ b →
                 pair
-                  ( fib (map-emb m) (pr1 i b))
+                  ( fiber (map-emb m) (pr1 i b))
                   ( is-prop-map-emb m (pr1 i b)))) ∘e
-            ( ( equiv-map-Π (λ a → equiv-tr (fib (map-emb m)) (pr2 q a))) ∘e
-              ( ( reduce-Π-fib f (fib (map-emb m))) ∘e
+            ( ( equiv-Π-equiv-family
+                ( λ a → equiv-tr (fiber (map-emb m)) (pr2 q a))) ∘e
+              ( ( reduce-Π-fiber f (fiber (map-emb m))) ∘e
                 ( equiv-fiberwise-hom-hom-slice f (map-emb m)))))))
 
 abstract

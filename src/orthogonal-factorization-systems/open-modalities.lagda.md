@@ -97,7 +97,7 @@ module _
       ( locally-small-operator-open-modality (l ⊔ lQ) Q)
       ( unit-open-modality Q)
   is-modal-identity-types-open-modality X x y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ z → eq-htpy (λ q → htpy-eq (z q) q))
       ( λ z →
         eq-htpy

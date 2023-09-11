@@ -15,7 +15,6 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.transport
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
@@ -60,6 +59,40 @@ module _
         ( map-equiv (f (map-inv-equiv e a))))) ∘
     ( precomp-Π (map-inv-equiv e) B')
 
+  abstract
+    is-equiv-map-equiv-Π : is-equiv map-equiv-Π
+    is-equiv-map-equiv-Π =
+      is-equiv-comp
+        ( map-Π
+          ( λ a →
+            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
+            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
+        ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
+        ( is-equiv-precomp-Π-is-equiv
+          ( map-inv-is-equiv (is-equiv-map-equiv e))
+          ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
+          ( B'))
+        ( is-equiv-map-equiv-Π-equiv-family
+          ( λ a →
+            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
+            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a))))
+          ( λ a →
+            is-equiv-comp
+              ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
+              ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
+              ( is-equiv-map-equiv
+                ( f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
+              ( is-equiv-tr B
+                ( is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
+
+  equiv-Π : ((a' : A') → B' a') ≃ ((a : A) → B a)
+  pr1 equiv-Π = map-equiv-Π
+  pr2 equiv-Π = is-equiv-map-equiv-Π
+```
+
+#### Computing `map-equiv-Π`
+
+```agda
   compute-map-equiv-Π :
     (h : (a' : A') → B' a') (a' : A') →
     map-equiv-Π h (map-equiv e a') ＝ map-equiv (f a') (h a')
@@ -86,61 +119,10 @@ module _
       tr (B ∘ map-equiv e) p (map-equiv (f x) (h x)) ＝ map-equiv (f a') (h a')
     α x refl = refl
 
-  abstract
-    is-equiv-map-equiv-Π : is-equiv map-equiv-Π
-    is-equiv-map-equiv-Π =
-      is-equiv-comp
-        ( map-Π
-          ( λ a →
-            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
-            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
-        ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
-        ( is-equiv-precomp-Π-is-equiv
-          ( map-inv-is-equiv (is-equiv-map-equiv e))
-          ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
-          ( B'))
-        ( is-equiv-map-Π _
-          ( λ a → is-equiv-comp
-            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
-            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
-            ( is-equiv-map-equiv
-              ( f (map-inv-is-equiv (is-equiv-map-equiv e) a)))
-            ( is-equiv-tr B
-              ( is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))))
-
-  equiv-Π : ((a' : A') → B' a') ≃ ((a : A) → B a)
-  pr1 equiv-Π = map-equiv-Π
-  pr2 equiv-Π = is-equiv-map-equiv-Π
-
-module _
-  { l2 l3 l4 : Level}
-  {A : UU l3} {B' : A → UU l2} {B : A → UU l4}
-  (f : (a : A) → B' a ≃ B a)
-  where
-
-  equiv-Π-equiv-fam : ((a : A) → B' a) ≃ ((a : A) → B a)
-  equiv-Π-equiv-fam = equiv-Π B id-equiv f
-```
-
-### The functorial action of dependent function types preserves identity morphisms
-
-```agda
 id-map-equiv-Π :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
   ( map-equiv-Π B (id-equiv {A = A}) (λ a → id-equiv {A = B a})) ~ id
-id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ a → id-equiv) h)
-```
-
-### The fibers of `map-Π'`
-
-```agda
-equiv-fib-map-Π' :
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
-  (h : (j : J) → B (α j)) →
-  ((j : J) → fib (f (α j)) (h j)) ≃ fib (map-Π' α f) h
-equiv-fib-map-Π' α f h =
-  equiv-tot (λ x → equiv-eq-htpy) ∘e distributive-Π-Σ
+id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equiv) h)
 ```
 
 ### Truncated families of maps induce truncated maps on dependent function types
@@ -153,8 +135,8 @@ abstract
     ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
   is-trunc-map-map-Π k {I = I} f H h =
     is-trunc-equiv' k
-      ( (i : I) → fib (f i) (h i))
-      ( equiv-fib-map-Π f h)
+      ( (i : I) → fiber (f i) (h i))
+      ( compute-fiber-map-Π f h)
       ( is-trunc-Π k (λ i → H i (h i)))
 
 abstract
@@ -183,8 +165,8 @@ is-trunc-map-map-Π-is-trunc-map' :
   ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π' α f)
 is-trunc-map-map-Π-is-trunc-map' k {J = J} α f H h =
   is-trunc-equiv' k
-    ( (j : J) → fib (f (α j)) (h j))
-    ( equiv-fib-map-Π' α f h)
+    ( (j : J) → fiber (f (α j)) (h j))
+    ( compute-fiber-map-Π' α f h)
     ( is-trunc-Π k (λ j → H (α j) (h j)))
 
 is-trunc-map-is-trunc-map-map-Π' :
@@ -194,7 +176,7 @@ is-trunc-map-is-trunc-map-map-Π' :
   (i : I) → is-trunc-map k (f i)
 is-trunc-map-is-trunc-map-map-Π' k {A = A} {B} f H i b =
   is-trunc-equiv' k
-    ( fib (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
+    ( fiber (map-Π (λ (x : unit) → f i)) (const unit (B i) b))
     ( equiv-Σ
       ( λ a → f i a ＝ b)
       ( equiv-universal-property-unit (A i))
@@ -280,7 +262,7 @@ abstract
   is-equiv-map-automorphism-Π {B = B} e f =
     is-equiv-comp _ _
       ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
-      ( is-equiv-map-Π _
+      ( is-equiv-map-equiv-Π-equiv-family _
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))
 
 automorphism-Π :
