@@ -10,6 +10,7 @@ open import foundation.0-images-of-maps public
 open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
+open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-identifications-binary-functions public
 open import foundation.action-on-identifications-dependent-functions public
 open import foundation.action-on-identifications-functions public
@@ -148,6 +149,7 @@ open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.intersections-subtypes public
+open import foundation.invertible-maps public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
@@ -248,6 +250,7 @@ open import foundation.subtype-identity-principle public
 open import foundation.subtypes public
 open import foundation.subuniverses public
 open import foundation.surjective-maps public
+open import foundation.symmetric-binary-relations public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
@@ -292,6 +295,7 @@ open import foundation.universal-property-coproduct-types public
 open import foundation.universal-property-dependent-pair-types public
 open import foundation.universal-property-empty-type public
 open import foundation.universal-property-fiber-products public
+open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public
 open import foundation.universal-property-maybe public

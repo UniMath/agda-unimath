@@ -101,7 +101,7 @@ module _
   map-distributive-Π-is-local-family B f-loc =
     is-equiv-map-equiv
       ( equiv-swap-Π ∘e
-        ( equiv-map-Π (λ a → precomp-Π f (B a) , (f-loc a)) ∘e
+        ( equiv-Π-equiv-family (λ a → precomp-Π f (B a) , (f-loc a)) ∘e
           equiv-swap-Π))
 ```
 
