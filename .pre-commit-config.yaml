@@ -12,8 +12,6 @@ repos:
       - id: check-yaml
       # - id: check-json # Doesn't accept json with comments
       # - id: requirements-txt-fixer # Can't handle comments
-      - id: check-case-conflict
-      - id: check-merge-conflict
 
   - repo: local
     hooks:
@@ -91,6 +89,12 @@ repos:
         always_run: true
         pass_filenames: false
         require_serial: true
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-merge-conflict
 
   - repo: https://github.com/pre-commit/mirrors-autopep8
     rev: 'v2.0.2'

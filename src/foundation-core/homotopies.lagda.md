@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import foundation-core.dependent-identifications
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -375,6 +375,47 @@ module _
     ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
   inv-htpy-right-whisk-inv-htpy H f =
     inv-htpy (right-whisk-inv-htpy H f)
+```
+
+### Distributivity of whiskering over composition of homotopies
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  distributive-left-whisk-concat-htpy :
+    { f g h : A → B} (k : B → C) →
+    ( H : f ~ g) (K : g ~ h) →
+    ( k ·l (H ∙h K)) ~ ((k ·l H) ∙h (k ·l K))
+  distributive-left-whisk-concat-htpy k H K a =
+    ap-concat k (H a) (K a)
+
+  distributive-right-whisk-concat-htpy :
+    ( k : A → B) {f g h : B → C} →
+    ( H : f ~ g) (K : g ~ h) →
+    ( (H ∙h K) ·r k) ~ ((H ·r k) ∙h (K ·r k))
+  distributive-right-whisk-concat-htpy k H K = refl-htpy
+```
+
+### Associativity of whiskering and function composition
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  associative-left-whisk-comp :
+    ( k : C → D) (h : B → C) {f g : A → B} →
+    ( H : f ~ g) →
+    ( k ·l (h ·l H)) ~ ((k ∘ h) ·l H)
+  associative-left-whisk-comp k h H x = inv (ap-comp k h (H x))
+
+  associative-right-whisk-comp :
+    { f g : C → D} (h : B → C) (k : A → B) →
+    ( H : f ~ g) →
+    ( (H ·r h) ·r k) ~ (H ·r (h ∘ k))
+  associative-right-whisk-comp h k H = refl-htpy
 ```
 
 ## Reasoning with homotopies

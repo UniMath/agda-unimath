@@ -1,9 +1,9 @@
-# Transport
+# Transport along identifications
 
 ```agda
-module foundation.transport where
+module foundation.transport-along-identifications where
 
-open import foundation-core.transport public
+open import foundation-core.transport-along-identifications public
 ```
 
 <details><summary>Imports</summary>
@@ -27,8 +27,9 @@ open import foundation-core.identity-types
 
 Given a type family `B` over `A`, an
 [identification](foundation-core.identity-types.md) `p : x ＝ y` in `A` and an
-element `b : B x`, we can [**transport**](foundation-core.transport.md) the
-element `b` along the identification `p` to obtain an element `tr B p b : B y`.
+element `b : B x`, we can
+[**transport**](foundation-core.transport-along-identifications.md) the element
+`b` along the identification `p` to obtain an element `tr B p b : B y`.
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in this file.
@@ -59,10 +60,10 @@ module _
   inv-tr : x ＝ y → B y → B x
   inv-tr p = tr B (inv p)
 
-  is-retraction-inv-tr : (p : x ＝ y) → ((inv-tr p) ∘ (tr B p)) ~ id
+  is-retraction-inv-tr : (p : x ＝ y) → (inv-tr p ∘ tr B p) ~ id
   is-retraction-inv-tr refl b = refl
 
-  is-section-inv-tr : (p : x ＝ y) → ((tr B p) ∘ (inv-tr p)) ~ id
+  is-section-inv-tr : (p : x ＝ y) → (tr B p ∘ inv-tr p) ~ id
   is-section-inv-tr refl b = refl
 
   is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
@@ -89,11 +90,11 @@ equiv-tr-refl B = refl
 ### Substitution law for transport
 
 ```agda
-tr-subst :
+substitution-law-tr :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
   {x y : X} (p : x ＝ y) {x' : B (f x)} →
   tr B (ap f p) x' ＝ tr (B ∘ f) p x'
-tr-subst B f refl = refl
+substitution-law-tr B f refl = refl
 ```
 
 ### Coherences and algebraic identities for `tr²`

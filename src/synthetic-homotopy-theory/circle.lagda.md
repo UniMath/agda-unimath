@@ -16,7 +16,7 @@ open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import structured-types.pointed-types

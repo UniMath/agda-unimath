@@ -35,7 +35,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
