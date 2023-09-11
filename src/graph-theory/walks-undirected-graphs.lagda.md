@@ -249,7 +249,7 @@ module _
     (y : vertex-Undirected-Graph G) →
     is-equiv (map-compute-total-walk-of-length-Undirected-Graph y)
   is-equiv-map-compute-total-walk-of-length-Undirected-Graph y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-compute-total-walk-of-length-Undirected-Graph y)
       ( is-section-map-inv-compute-total-walk-of-length-Undirected-Graph y)
       ( is-retraction-map-inv-compute-total-walk-of-length-Undirected-Graph y)

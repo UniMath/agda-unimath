@@ -131,43 +131,44 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : symmetric-binary-relation l2 A)
   where
 
-  rel-symmetric-binary-relation : Rel l2 A
-  rel-symmetric-binary-relation x y = R (standard-unordered-pair x y)
+  relation-symmetric-binary-relation : Relation l2 A
+  relation-symmetric-binary-relation x y = R (standard-unordered-pair x y)
 
-  equiv-symmetric-rel-symmetric-binary-relation :
+  equiv-symmetric-relation-symmetric-binary-relation :
     {x y : A} →
-    rel-symmetric-binary-relation x y ≃ rel-symmetric-binary-relation y x
-  equiv-symmetric-rel-symmetric-binary-relation {x} {y} =
+    relation-symmetric-binary-relation x y ≃ relation-symmetric-binary-relation y x
+  equiv-symmetric-relation-symmetric-binary-relation {x} {y} =
     equiv-tr-symmetric-binary-relation R
       ( standard-unordered-pair x y)
       ( standard-unordered-pair y x)
       ( swap-standard-unordered-pair x y)
 
-  symmetric-rel-symmetric-binary-relation :
+  symmetric-relation-symmetric-binary-relation :
     {x y : A} →
-    rel-symmetric-binary-relation x y → rel-symmetric-binary-relation y x
-  symmetric-rel-symmetric-binary-relation =
-    map-equiv equiv-symmetric-rel-symmetric-binary-relation
+    relation-symmetric-binary-relation x y →
+    relation-symmetric-binary-relation y x
+  symmetric-relation-symmetric-binary-relation =
+    map-equiv equiv-symmetric-relation-symmetric-binary-relation
 ```
 
 ### The forgetful functor from binary relations to symmetric binary relations
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  symmetric-binary-relation-Rel : symmetric-binary-relation l2 A
-  symmetric-binary-relation-Rel p =
+  symmetric-binary-relation-Relation : symmetric-binary-relation l2 A
+  symmetric-binary-relation-Relation p =
     Σ ( type-unordered-pair p)
       ( λ i →
         R (element-unordered-pair p i) (other-element-unordered-pair p i))
 
-  unit-symmetric-binary-relation-Rel :
-    (x y : A) →
-    R x y → rel-symmetric-binary-relation symmetric-binary-relation-Rel x y
-  pr1 (unit-symmetric-binary-relation-Rel x y r) = zero-Fin 1
-  pr2 (unit-symmetric-binary-relation-Rel x y r) =
+  unit-symmetric-binary-relation-Relation :
+    (x y : A) → R x y →
+    relation-symmetric-binary-relation symmetric-binary-relation-Relation x y
+  pr1 (unit-symmetric-binary-relation-Relation x y r) = zero-Fin 1
+  pr2 (unit-symmetric-binary-relation-Relation x y r) =
     tr
       ( R x)
       ( inv (compute-other-element-standard-unordered-pair x y (zero-Fin 1)))
@@ -178,18 +179,18 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (R : Rel l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  symmetric-core-Rel : symmetric-binary-relation l2 A
-  symmetric-core-Rel p =
+  symmetric-core-Relation : symmetric-binary-relation l2 A
+  symmetric-core-Relation p =
     (i : type-unordered-pair p) →
     R (element-unordered-pair p i) (other-element-unordered-pair p i)
 
-  counit-symmetric-core-Rel :
+  counit-symmetric-core-Relation :
     {x y : A} →
-    rel-symmetric-binary-relation symmetric-core-Rel x y → R x y
-  counit-symmetric-core-Rel {x} {y} r =
+    relation-symmetric-binary-relation symmetric-core-Relation x y → R x y
+  counit-symmetric-core-Relation {x} {y} r =
     tr
       ( R x)
       ( compute-other-element-standard-unordered-pair x y (zero-Fin 1))
@@ -209,13 +210,13 @@ module _
   hom-symmetric-binary-relation R S =
     (p : unordered-pair A) → R p → S p
 
-  hom-rel-hom-symmetric-binary-relation :
+  hom-relation-hom-symmetric-binary-relation :
     (R : symmetric-binary-relation l2 A) (S : symmetric-binary-relation l3 A) →
     hom-symmetric-binary-relation R S →
-    hom-Rel
-      ( rel-symmetric-binary-relation R)
-      ( rel-symmetric-binary-relation S)
-  hom-rel-hom-symmetric-binary-relation R S f x y =
+    hom-Relation
+      ( relation-symmetric-binary-relation R)
+      ( relation-symmetric-binary-relation S)
+  hom-relation-hom-symmetric-binary-relation R S f x y =
     f (standard-unordered-pair x y)
 ```
 
@@ -225,20 +226,20 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} (R : Rel l2 A)
+  {l1 l2 l3 : Level} {A : UU l1} (R : Relation l2 A)
   (S : symmetric-binary-relation l3 A)
   where
 
-  map-universal-property-symmetric-core-Rel :
-    hom-symmetric-binary-relation S (symmetric-core-Rel R) →
-    hom-Rel (rel-symmetric-binary-relation S) R
-  map-universal-property-symmetric-core-Rel f x y s =
-    counit-symmetric-core-Rel R (f (standard-unordered-pair x y) s)
+  map-universal-property-symmetric-core-Relation :
+    hom-symmetric-binary-relation S (symmetric-core-Relation R) →
+    hom-Relation (relation-symmetric-binary-relation S) R
+  map-universal-property-symmetric-core-Relation f x y s =
+    counit-symmetric-core-Relation R (f (standard-unordered-pair x y) s)
 
-  map-inv-universal-property-symmetric-core-Rel :
-    hom-Rel (rel-symmetric-binary-relation S) R →
-    hom-symmetric-binary-relation S (symmetric-core-Rel R)
-  map-inv-universal-property-symmetric-core-Rel f p s i =
+  map-inv-universal-property-symmetric-core-Relation :
+    hom-Relation (relation-symmetric-binary-relation S) R →
+    hom-symmetric-binary-relation S (symmetric-core-Relation R)
+  map-inv-universal-property-symmetric-core-Relation f p s i =
     f ( element-unordered-pair p i)
       ( other-element-unordered-pair p i)
       ( tr-inv-symmetric-binary-relation S
@@ -249,10 +250,10 @@ module _
         ( compute-standard-unordered-pair-element-unordered-pair p i)
         ( s))
 
-  is-section-map-inv-universal-property-symmetric-core-Rel :
-    ( map-universal-property-symmetric-core-Rel ∘
-      map-inv-universal-property-symmetric-core-Rel) ~ id
-  is-section-map-inv-universal-property-symmetric-core-Rel f =
+  is-section-map-inv-universal-property-symmetric-core-Relation :
+    ( map-universal-property-symmetric-core-Relation ∘
+      map-inv-universal-property-symmetric-core-Relation) ~ id
+  is-section-map-inv-universal-property-symmetric-core-Relation f =
     eq-htpy
       ( λ p →
         eq-htpy

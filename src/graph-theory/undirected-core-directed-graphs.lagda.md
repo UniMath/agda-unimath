@@ -46,7 +46,7 @@ module _
   edge-undirected-core-Directed-Graph :
     symmetric-binary-relation l2 vertex-undirected-core-Directed-Graph
   edge-undirected-core-Directed-Graph =
-    symmetric-core-Rel (edge-Directed-Graph G)
+    symmetric-core-Relation (edge-Directed-Graph G)
 
   undirected-core-Directed-Graph : Undirected-Graph l1 l2
   pr1 undirected-core-Directed-Graph = vertex-undirected-core-Directed-Graph
@@ -69,7 +69,7 @@ module _
     edge-graph-Undirected-Graph (undirected-core-Directed-Graph G) x y →
     edge-Directed-Graph G x y
   edge-counit-undirected-core-Directed-Graph =
-    counit-symmetric-core-Rel (edge-Directed-Graph G)
+    counit-symmetric-core-Relation (edge-Directed-Graph G)
 
   counit-undirected-core-Directed-Graph :
     hom-Directed-Graph
