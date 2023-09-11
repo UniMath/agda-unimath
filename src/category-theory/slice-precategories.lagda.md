@@ -432,7 +432,7 @@ module _
   pr1 equiv-pullback-product-Slice-Precategory =
     map-pullback-product-Slice-Precategory
   pr2 equiv-pullback-product-Slice-Precategory =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-pullback-product-Slice-Precategory
       is-section-map-inv-pullback-product-Slice-Precategory
       is-retraction-map-inv-pullback-product-Slice-Precategory

@@ -9,6 +9,7 @@ module foundation-core.subtypes where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.logical-equivalences
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
@@ -18,11 +19,10 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -98,6 +98,7 @@ module _
   leq-subtype-Prop P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
 
+  infix 5 _⊆_
   _⊆_ :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
   P ⊆ Q = type-Prop (leq-subtype-Prop P Q)
@@ -160,7 +161,7 @@ module _
       is-emb-is-prop-map
         ( λ x →
           is-prop-equiv
-            ( equiv-fib-pr1 (is-in-subtype B) x)
+            ( equiv-fiber-pr1 (is-in-subtype B) x)
             ( is-prop-is-in-subtype B x))
 
   emb-subtype : type-subtype B ↪ A
@@ -205,7 +206,7 @@ module _
   abstract
     is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
     is-subtype-is-emb-pr1 H x =
-      is-prop-equiv' (equiv-fib-pr1 B x) (is-prop-map-is-emb H x)
+      is-prop-equiv' (equiv-fiber-pr1 B x) (is-prop-map-is-emb H x)
 ```
 
 ### A subtype of a `k+1`-truncated type is `k+1`-truncated

@@ -20,7 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 

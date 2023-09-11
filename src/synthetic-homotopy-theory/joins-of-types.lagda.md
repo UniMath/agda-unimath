@@ -41,6 +41,7 @@ join :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 join A B = pushout (pr1 {A = A} {B = λ _ → B}) pr2
 
+infixr 15 _*_
 _*_ = join
 
 cocone-join :

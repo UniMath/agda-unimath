@@ -17,7 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -115,7 +115,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
     is-equiv (map-distributive-Π-Σ {A = A} {B = B} {C = C})
   is-equiv-map-distributive-Π-Σ {A = A} {B = B} {C = C} =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
@@ -131,7 +131,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3} →
     is-equiv (map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
   is-equiv-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C} =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-retraction-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
       ( is-section-map-inv-distributive-Π-Σ {A = A} {B = B} {C = C})
@@ -177,11 +177,17 @@ eq-Eq-Π-total-fam C f g = map-inv-equiv (extensionality-Π-total-fam C f g)
 mapping-into-Σ :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
   (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
-mapping-into-Σ {B = B} = map-distributive-Π-Σ {B = λ x → B}
+mapping-into-Σ {B = B} = map-distributive-Π-Σ {B = λ _ → B}
 
 abstract
   is-equiv-mapping-into-Σ :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
     {C : B → UU l3} → is-equiv (mapping-into-Σ {A = A} {C = C})
   is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
+
+equiv-mapping-into-Σ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3} →
+  (A → Σ B C) ≃ Σ (A → B) (λ f → (x : A) → C (f x))
+pr1 equiv-mapping-into-Σ = mapping-into-Σ
+pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
 ```

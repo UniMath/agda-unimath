@@ -16,7 +16,12 @@ def get_files_recursive(startpath):
 
 def get_subdirectories_recursive(startpath):
     for root, dirs, files in os.walk(startpath):
-        yield from dirs
+        for d in dirs:
+            try:
+                os.listdir(os.path.join(startpath, d))
+            except FileNotFoundError:
+                continue
+            yield d
 
 
 def find_index(s: str, t: str) -> List[int]:

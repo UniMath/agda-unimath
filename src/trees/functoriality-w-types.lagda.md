@@ -19,7 +19,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositional-maps
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.truncated-maps
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -58,29 +58,29 @@ map-𝕎 D f e = map-𝕎' D f (λ x → map-inv-equiv (e x))
 ### We compute the fibers of `map-𝕎`
 
 ```agda
-fib-map-𝕎 :
+fiber-map-𝕎 :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} (D : C → UU l4)
   (f : A → C) (e : (x : A) → B x ≃ D (f x)) →
   𝕎 C D → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-fib-map-𝕎 D f e (tree-𝕎 c γ) =
-  (fib f c) × ((d : D c) → fib (map-𝕎 D f e) (γ d))
+fiber-map-𝕎 D f e (tree-𝕎 c γ) =
+  (fiber f c) × ((d : D c) → fiber (map-𝕎 D f e) (γ d))
 
 abstract
-  equiv-fib-map-𝕎 :
+  equiv-fiber-map-𝕎 :
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3}
     (D : C → UU l4) (f : A → C) (e : (x : A) → B x ≃ D (f x)) →
-    (y : 𝕎 C D) → fib (map-𝕎 D f e) y ≃ fib-map-𝕎 D f e y
-  equiv-fib-map-𝕎 {A = A} {B} {C} D f e (tree-𝕎 c γ) =
+    (y : 𝕎 C D) → fiber (map-𝕎 D f e) y ≃ fiber-map-𝕎 D f e y
+  equiv-fiber-map-𝕎 {A = A} {B} {C} D f e (tree-𝕎 c γ) =
     ( ( ( inv-equiv
           ( associative-Σ A
             ( λ a → f a ＝ c)
-            ( λ t → (d : D c) → fib (map-𝕎 D f e) (γ d)))) ∘e
+            ( λ t → (d : D c) → fiber (map-𝕎 D f e) (γ d)))) ∘e
         ( equiv-tot
           ( λ a →
             ( ( equiv-tot
                 ( λ p →
                   ( ( equiv-Π
-                      ( λ (d : D c) → fib (map-𝕎 D f e) (γ d))
+                      ( λ (d : D c) → fiber (map-𝕎 D f e) (γ d))
                       ( (equiv-tr D p) ∘e (e a))
                       ( λ b → id-equiv)) ∘e
                     ( inv-distributive-Π-Σ)) ∘e
@@ -132,8 +132,8 @@ is-trunc-map-map-𝕎 :
   is-trunc-map k f → is-trunc-map k (map-𝕎 D f e)
 is-trunc-map-map-𝕎 k D f e H (tree-𝕎 c γ) =
   is-trunc-equiv k
-    ( fib-map-𝕎 D f e (tree-𝕎 c γ))
-    ( equiv-fib-map-𝕎 D f e (tree-𝕎 c γ))
+    ( fiber-map-𝕎 D f e (tree-𝕎 c γ))
+    ( equiv-fiber-map-𝕎 D f e (tree-𝕎 c γ))
     ( is-trunc-Σ
       ( H c)
       ( λ t → is-trunc-Π k (λ d → is-trunc-map-map-𝕎 k D f e H (γ d))))

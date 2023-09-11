@@ -8,8 +8,10 @@ module ring-theory where
 open import ring-theory.algebras-rings public
 open import ring-theory.binomial-theorem-rings public
 open import ring-theory.binomial-theorem-semirings public
+open import ring-theory.category-of-rings public
 open import ring-theory.central-elements-rings public
 open import ring-theory.central-elements-semirings public
+open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
 open import ring-theory.dependent-products-rings public
@@ -24,6 +26,7 @@ open import ring-theory.ideals-generated-by-subsets-rings public
 open import ring-theory.ideals-rings public
 open import ring-theory.ideals-semirings public
 open import ring-theory.idempotent-elements-rings public
+open import ring-theory.integer-multiples-of-elements-rings public
 open import ring-theory.intersections-ideals-rings public
 open import ring-theory.intersections-ideals-semirings public
 open import ring-theory.invariant-basis-property-rings public
@@ -38,6 +41,7 @@ open import ring-theory.local-rings public
 open import ring-theory.localizations-rings public
 open import ring-theory.maximal-ideals-rings public
 open import ring-theory.modules-rings public
+open import ring-theory.multiples-of-elements-rings public
 open import ring-theory.nil-ideals-rings public
 open import ring-theory.nilpotent-elements-rings public
 open import ring-theory.nilpotent-elements-semirings public
@@ -64,5 +68,6 @@ open import ring-theory.subsets-rings public
 open import ring-theory.subsets-semirings public
 open import ring-theory.sums-rings public
 open import ring-theory.sums-semirings public
+open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups public
 open import ring-theory.trivial-rings public
 ```

@@ -64,10 +64,10 @@ abstract
   all-elements-equal-image-is-weakly-constant-map :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     is-weakly-constant-map f →
-    all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fib f b)))
+    all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
   all-elements-equal-image-is-weakly-constant-map B f H (pair x s) (pair y t) =
     eq-type-subtype
-      ( λ b → trunc-Prop (fib f b))
+      ( λ b → trunc-Prop (fiber f b))
       ( apply-universal-property-trunc-Prop s
         ( Id-Prop B x y)
         ( λ u →
@@ -79,7 +79,7 @@ abstract
   is-prop-image-is-weakly-constant-map :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
     is-weakly-constant-map f →
-    is-prop (Σ (type-Set B) (λ b → type-trunc-Prop (fib f b)))
+    is-prop (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
   is-prop-image-is-weakly-constant-map B f H =
     is-prop-all-elements-equal
       ( all-elements-equal-image-is-weakly-constant-map B f H)
@@ -88,7 +88,7 @@ image-weakly-constant-map-Prop :
   {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
   is-weakly-constant-map f → Prop (l1 ⊔ l2)
 pr1 (image-weakly-constant-map-Prop B f H) =
-  Σ (type-Set B) (λ b → type-trunc-Prop (fib f b))
+  Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b))
 pr2 (image-weakly-constant-map-Prop B f H) =
   is-prop-image-is-weakly-constant-map B f H
 ```
@@ -158,7 +158,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (B : Set l2) →
     is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B)
   universal-property-set-quotient-trunc-Prop {A = A} B =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-universal-property-set-quotient-trunc-Prop' B)
       ( is-section-map-universal-property-set-quotient-trunc-Prop B)
       ( is-retraction-map-universal-property-set-quotient-trunc-Prop B)

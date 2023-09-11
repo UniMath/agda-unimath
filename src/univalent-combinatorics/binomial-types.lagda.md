@@ -65,7 +65,7 @@ merely equal to `B` into `A`.
 binomial-type-Level :
   (l : Level) {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (lsuc l ⊔ l1 ⊔ l2)
 binomial-type-Level l X Y =
-  Σ (component-UU-Level l Y) (λ Z → type-component-UU-Level Z ↪d X)
+  Σ (component-UU-Level l Y) (λ Z → type-component-UU-Level Z ↪ᵈ X)
 
 type-binomial-type-Level :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
@@ -81,7 +81,7 @@ abstract
 
 decidable-emb-binomial-type-Level :
   {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type-Level l3 X Y) →
-  type-binomial-type-Level Z ↪d X
+  type-binomial-type-Level Z ↪ᵈ X
 decidable-emb-binomial-type-Level Z = pr2 Z
 
 map-decidable-emb-binomial-type-Level :
@@ -119,7 +119,7 @@ abstract
 
 decidable-emb-binomial-type :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (Z : binomial-type X Y) →
-  type-binomial-type Z ↪d X
+  type-binomial-type Z ↪ᵈ X
 decidable-emb-binomial-type Z = pr2 Z
 
 map-decidable-emb-binomial-type :
@@ -151,17 +151,17 @@ compute-binomial-type-Level :
 compute-binomial-type-Level l {l1} {l2} A B =
   ( ( ( equiv-Σ
         ( λ P → mere-equiv B (Σ A (type-Decidable-Prop ∘ P)))
-        ( equiv-Fib-Decidable-Prop l A)
+        ( equiv-Fiber-Decidable-Prop l A)
         ( λ e →
           equiv-trunc-Prop
             ( equiv-postcomp-equiv
-              ( inv-equiv (equiv-total-fib (pr1 (pr2 e)))) B))) ∘e
+              ( inv-equiv (equiv-total-fiber (pr1 (pr2 e)))) B))) ∘e
       ( inv-associative-Σ
         ( UU (l1 ⊔ l))
-        ( λ X → X ↪d A)
+        ( λ X → X ↪ᵈ A)
         ( λ X → mere-equiv B (pr1 X)))) ∘e
     ( equiv-tot (λ X → commutative-prod))) ∘e
-  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪d A))
+  ( associative-Σ (UU (l1 ⊔ l)) (λ X → mere-equiv B X) (λ X → (pr1 X) ↪ᵈ A))
 
 binomial-type' :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc (l1 ⊔ l2))
@@ -182,14 +182,14 @@ Note that the universe level of `small-binomial-type` is lower.
 small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 small-binomial-type A B =
-  Σ (A → bool) (λ f → mere-equiv B (fib f true))
+  Σ (A → bool) (λ f → mere-equiv B (fiber f true))
 
 compute-small-binomial-type :
   {l1 l2 : Level} (A : UU l1) (B : UU l2) →
   binomial-type A B ≃ small-binomial-type A B
 compute-small-binomial-type A B =
   ( equiv-Σ
-    ( λ f → mere-equiv B (fib f true))
+    ( λ f → mere-equiv B (fiber f true))
     ( equiv-postcomp A equiv-bool-Decidable-Prop)
     ( λ P →
       equiv-trunc-Prop
@@ -205,12 +205,12 @@ abstract
     {l : Level} {X : UU l} → is-contr (binomial-type X empty)
   binomial-type-over-empty {l} {X} =
     is-contr-equiv
-      ( raise-empty l ↪d X)
+      ( raise-empty l ↪ᵈ X)
       ( left-unit-law-Σ-is-contr
         ( is-contr-component-UU-Level-empty l)
         ( Fin-UU-Fin l zero-ℕ))
       ( is-contr-equiv
-        ( empty ↪d X)
+        ( empty ↪ᵈ X)
         ( equiv-precomp-decidable-emb-equiv (compute-raise-empty l) X)
         ( is-contr-equiv
           ( is-decidable-emb ex-falso)
@@ -342,7 +342,7 @@ equiv-small-binomial-type :
   (A ≃ A') → (B ≃ B') → small-binomial-type A' B' ≃ small-binomial-type A B
 equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
   equiv-Σ
-    ( λ P → mere-equiv B (fib P true))
+    ( λ P → mere-equiv B (fiber P true))
     ( equiv-precomp e bool)
     ( λ P →
       equiv-trunc-Prop
@@ -351,8 +351,8 @@ equiv-small-binomial-type {l1} {l2} {l3} {l4} {A} {A'} {B} {B'} e f =
               ( ( right-unit-law-Σ-is-contr
                   ( λ u →
                     is-contr-map-is-equiv (is-equiv-map-equiv e) (pr1 u))) ∘e
-                ( equiv-compute-fib-comp P (map-equiv e) true))) B) ∘e
-          ( equiv-precomp-equiv f (fib P true))))
+                ( equiv-compute-fiber-comp P (map-equiv e) true))) B) ∘e
+          ( equiv-precomp-equiv f (fiber P true))))
 
 equiv-binomial-type :
   {l1 l2 l3 l4 : Level} {A : UU l1} {A' : UU l2} {B : UU l3} {B' : UU l4} →

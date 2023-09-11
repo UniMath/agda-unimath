@@ -48,7 +48,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -279,7 +279,7 @@ module _
           ( λ Y → ¬ (Id (d' Y) (d Y)))
       pr1 h' (pair Y np) = pair Y (λ p' → np (inv p'))
       pr2 h' =
-        is-equiv-has-inverse
+        is-equiv-is-invertible
           ( λ (pair Y np) → pair Y (λ p' → np (inv p')))
           ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
           ( λ (pair Y np) → eq-pair-Σ refl (eq-is-prop is-prop-neg))
@@ -474,7 +474,7 @@ module _
   pr1 (orientation-complete-undirected-graph-equiv X X' e) =
     map-orientation-complete-undirected-graph-equiv X X' e
   pr2 (orientation-complete-undirected-graph-equiv X X' e) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-orientation-complete-undirected-graph-equiv X' X (inv-equiv e))
       ( λ d →
         eq-htpy
@@ -614,7 +614,7 @@ module _
                     ( map-orientation-complete-undirected-graph-equiv
                         X X' e d' Y))))))
       pr2 equiv-subtype-pointwise-difference-equiv =
-        is-equiv-has-inverse
+        is-equiv-is-invertible
           ( λ (pair Y NQ) →
             pair
               ( precomp-equiv-2-Element-Decidable-Subtype (inv-equiv e) Y)
@@ -2801,7 +2801,7 @@ module _
             ( inv (ap pr1 q) ∙
               eq-orientation-two-elements-count i j np)))
   pr2 (equiv-fin-1-difference-orientation-two-elements-count i j np) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ x → inr star)
       ( λ T →
         eq-pair-Σ
@@ -3284,7 +3284,7 @@ module _
         ( pair X (unit-trunc-Prop (equiv-count eX))))
       ( transitive-canonical-orientation-count)
   pr2 equiv-fin-2-quotient-sign-count =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ T →
         inv-orientation
           ( T)

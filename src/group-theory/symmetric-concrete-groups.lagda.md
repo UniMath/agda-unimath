@@ -23,7 +23,8 @@ open import group-theory.concrete-groups
 
 ## Idea
 
-The symmetric concrete group of a set `X` is the connected component of the
+The **symmetric concrete group** of a [set](foundation-core.sets.md) `X` is the
+[connected component](foundation.connected-components-universes.md) of the
 universe of sets at `X`.
 
 ## Definition
@@ -101,3 +102,4 @@ module _
 ### Equivalent sets have isomorphic symmetric concrete groups
 
 This remains to be shown.
+[#737](https://github.com/UniMath/agda-unimath/issues/737)

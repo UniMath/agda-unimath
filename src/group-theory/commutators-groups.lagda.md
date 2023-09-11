@@ -10,6 +10,7 @@ module group-theory.commutators-groups where
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import group-theory.commuting-elements-groups
 open import group-theory.groups
 ```
 

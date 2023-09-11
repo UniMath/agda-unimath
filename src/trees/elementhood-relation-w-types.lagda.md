@@ -10,7 +10,7 @@ module trees.elementhood-relation-w-types where
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-coalgebras-polynomial-endofunctors
@@ -30,6 +30,8 @@ equipped with an element `y : B x` such that `α y = S`.
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
+
+  infix 6 _∈-𝕎_ _∉-𝕎_
 
   _∈-𝕎_ : 𝕎 A B → 𝕎 A B → UU (l1 ⊔ l2)
   x ∈-𝕎 y = x ∈ y in-coalgebra 𝕎-Coalg A B

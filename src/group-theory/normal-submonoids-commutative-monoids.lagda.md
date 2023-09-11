@@ -627,7 +627,7 @@ is-equiv-normal-submonoid-saturated-congruence-Commutative-Monoid :
   is-equiv
     ( normal-submonoid-saturated-congruence-Commutative-Monoid {l2 = l1 ⊔ l2} M)
 is-equiv-normal-submonoid-saturated-congruence-Commutative-Monoid l2 M =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( saturated-congruence-Normal-Commutative-Submonoid M)
     ( is-section-saturated-congruence-Normal-Commutative-Submonoid l2 M)
     ( is-retraction-saturated-congruence-Normal-Commutative-Submonoid l2 M)

@@ -22,7 +22,7 @@ open import foundation.relaxed-sigma-decompositions
 open import foundation.sigma-closed-subuniverses
 open import foundation.sigma-decomposition-subuniverse
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
@@ -229,7 +229,7 @@ module _
   is-equiv-map-equiv-Σ-extension-cauchy-composition-unit-subuniverse :
     is-equiv map-equiv-Σ-extension-cauchy-composition-unit-subuniverse
   is-equiv-map-equiv-Σ-extension-cauchy-composition-unit-subuniverse =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
       is-section-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
       is-retraction-map-inv-equiv-Σ-extension-cauchy-composition-unit-subuniverse
@@ -336,7 +336,7 @@ module _
           ( λ D →
             equiv-prod
               ( id-equiv)
-              ( equiv-map-Π
+              ( equiv-Π-equiv-family
                 ( λ x →
                   equiv-Σ-extension-cauchy-composition-unit-subuniverse
                     ( P)

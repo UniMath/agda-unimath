@@ -15,7 +15,7 @@ open import foundation.universe-levels
 open import foundation-core.dependent-identifications
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -81,6 +81,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
+  infix 6 _~_
   _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
   f ~ g = (x : A) → eq-value f g x
 ```
@@ -115,6 +116,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
+  infixl 15 _∙h_
   _∙h_ : {f g h : (x : A) → B x} → f ~ g → g ~ h → f ~ h
   (H ∙h K) x = (H x) ∙ (K x)
 
@@ -147,6 +149,7 @@ htpy-left-whisk :
   (h : B → C) {f g : A → B} → f ~ g → (h ∘ f) ~ (h ∘ g)
 htpy-left-whisk h H x = ap h (H x)
 
+infixr 15 _·l_
 _·l_ = htpy-left-whisk
 
 htpy-right-whisk :
@@ -154,6 +157,7 @@ htpy-right-whisk :
   {g h : (y : B) → C y} (H : g ~ h) (f : A → B) → (g ∘ f) ~ (h ∘ f)
 htpy-right-whisk H f x = H (f x)
 
+infixl 15 _·r_
 _·r_ = htpy-right-whisk
 ```
 
@@ -187,17 +191,19 @@ module _
   (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : (H ∙h K) ~ L)
   where
 
-  inv-con-htpy : K ~ ((inv-htpy H) ∙h L)
-  inv-con-htpy x = inv-con (H x) (K x) (L x) (M x)
+  left-transpose-htpy-concat : K ~ ((inv-htpy H) ∙h L)
+  left-transpose-htpy-concat x =
+    left-transpose-eq-concat (H x) (K x) (L x) (M x)
 
-  inv-htpy-inv-con-htpy : ((inv-htpy H) ∙h L) ~ K
-  inv-htpy-inv-con-htpy = inv-htpy inv-con-htpy
+  inv-htpy-left-transpose-htpy-concat : ((inv-htpy H) ∙h L) ~ K
+  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
 
-  con-inv-htpy : H ~ (L ∙h (inv-htpy K))
-  con-inv-htpy x = con-inv (H x) (K x) (L x) (M x)
+  right-transpose-htpy-concat : H ~ (L ∙h (inv-htpy K))
+  right-transpose-htpy-concat x =
+    right-transpose-eq-concat (H x) (K x) (L x) (M x)
 
-  inv-htpy-con-inv-htpy : (L ∙h (inv-htpy K)) ~ H
-  inv-htpy-con-inv-htpy = inv-htpy con-inv-htpy
+  inv-htpy-right-transpose-htpy-concat : (L ∙h (inv-htpy K)) ~ H
+  inv-htpy-right-transpose-htpy-concat = inv-htpy right-transpose-htpy-concat
 ```
 
 ### Associativity of concatenation of homotopies
@@ -369,6 +375,47 @@ module _
     ((inv-htpy H) ·r f) ~ (inv-htpy (H ·r f))
   inv-htpy-right-whisk-inv-htpy H f =
     inv-htpy (right-whisk-inv-htpy H f)
+```
+
+### Distributivity of whiskering over composition of homotopies
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  distributive-left-whisk-concat-htpy :
+    { f g h : A → B} (k : B → C) →
+    ( H : f ~ g) (K : g ~ h) →
+    ( k ·l (H ∙h K)) ~ ((k ·l H) ∙h (k ·l K))
+  distributive-left-whisk-concat-htpy k H K a =
+    ap-concat k (H a) (K a)
+
+  distributive-right-whisk-concat-htpy :
+    ( k : A → B) {f g h : B → C} →
+    ( H : f ~ g) (K : g ~ h) →
+    ( (H ∙h K) ·r k) ~ ((H ·r k) ∙h (K ·r k))
+  distributive-right-whisk-concat-htpy k H K = refl-htpy
+```
+
+### Associativity of whiskering and function composition
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  where
+
+  associative-left-whisk-comp :
+    ( k : C → D) (h : B → C) {f g : A → B} →
+    ( H : f ~ g) →
+    ( k ·l (h ·l H)) ~ ((k ∘ h) ·l H)
+  associative-left-whisk-comp k h H x = inv (ap-comp k h (H x))
+
+  associative-right-whisk-comp :
+    { f g : C → D} (h : B → C) (k : A → B) →
+    ( H : f ~ g) →
+    ( (H ·r h) ·r k) ~ (H ·r (h ∘ k))
+  associative-right-whisk-comp h k H = refl-htpy
 ```
 
 ## Reasoning with homotopies

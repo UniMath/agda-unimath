@@ -28,8 +28,10 @@ open import foundation-core.injective-maps
 
 ## Idea
 
-The univalence axiom characterizes the identity types of universes. It asserts
-that the map `Id A B → A ≃ B` is an equivalence.
+The univalence axiom characterizes the
+[identity types](foundation-core.identity-types.md) of universes. It asserts
+that the map `(A ＝ B) → (A ≃ B)` is an
+[equivalence](foundation-core.equivalences.md).
 
 In this file we postulate the univalence axiom. Its statement is defined in
 [`foundation-core.univalence`](foundation-core.univalence.md).
@@ -141,21 +143,21 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ### Computations with univalence
 
 ```agda
-compute-equiv-eq :
+compute-equiv-eq-concat :
   {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-compute-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
+compute-equiv-eq-concat refl refl = eq-equiv-eq-map-equiv refl
 
-compute-eq-equiv :
+compute-eq-equiv-comp-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
-compute-eq-equiv A B C f g =
+compute-eq-equiv-comp-equiv A B C f g =
   is-injective-map-equiv
     ( equiv-univalence)
-    ( ( inv ( compute-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
+    ( ( inv ( compute-equiv-eq-concat (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
-        ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
-        ( right-inverse-law-equiv equiv-univalence)) ∙
+          ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
+          ( right-inverse-law-equiv equiv-univalence)) ∙
         ( ( ap
             ( λ e → g ∘e map-equiv e f)
             ( right-inverse-law-equiv equiv-univalence)) ∙

@@ -174,4 +174,30 @@ is-radical-prime-ideal-Commutative-Ring R P x (succ-ℕ n) p =
       ( x)
       ( is-closed-under-eq-prime-ideal-Commutative-Ring R P p
         ( power-succ-Commutative-Ring R n x)))
+
+radical-ideal-prime-ideal-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l)
+  (P : prime-ideal-Commutative-Ring l R) →
+  radical-ideal-Commutative-Ring l R
+pr1 (radical-ideal-prime-ideal-Commutative-Ring R P) =
+  ideal-prime-ideal-Commutative-Ring R P
+pr2 (radical-ideal-prime-ideal-Commutative-Ring R P) =
+  is-radical-prime-ideal-Commutative-Ring R P
+
+is-prime-ideal-radical-ideal-prime-ideal-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l)
+  (P : prime-ideal-Commutative-Ring l R) →
+  is-prime-ideal-Commutative-Ring R
+    ( ideal-radical-ideal-Commutative-Ring R
+      ( radical-ideal-prime-ideal-Commutative-Ring R P))
+is-prime-ideal-radical-ideal-prime-ideal-Commutative-Ring R P = pr2 P
+
+is-in-prime-ideal-is-in-radical-ideal-Commutative-Ring :
+  {l : Level} (R : Commutative-Ring l)
+  (P : prime-ideal-Commutative-Ring l R) (x : type-Commutative-Ring R) →
+  is-in-radical-ideal-Commutative-Ring R
+    ( radical-ideal-prime-ideal-Commutative-Ring R P)
+    ( x) →
+  is-in-prime-ideal-Commutative-Ring R P x
+is-in-prime-ideal-is-in-radical-ideal-Commutative-Ring R P x p = p
 ```

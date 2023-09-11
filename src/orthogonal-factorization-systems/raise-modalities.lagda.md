@@ -47,12 +47,13 @@ is-uniquely-eliminating-modality-raise-modality :
   {l1 l2 : Level} →
   is-uniquely-eliminating-modality (unit-raise-modality {l1} {l2})
 is-uniquely-eliminating-modality-raise-modality {l1} {l2} _ P =
-  is-local-family-is-equiv
+  is-local-dependent-type-is-equiv
     ( unit-raise-modality)
     ( is-equiv-map-raise)
     ( operator-raise-modality l1 l2 ∘ P)
 ```
 
-### In the case that `l1 ⊔ l2 = l1` we recover the trivial modality
+### In the case that `l1 ⊔ l2 = l1` we recover the identity modality
 
 This remains to be made formal.
+[#739](https://github.com/UniMath/agda-unimath/issues/739)

@@ -145,7 +145,7 @@ module _
         ( mul-hom-left-module-Ring)
         ( one-Ring R))
       ( id-hom-Ab ab-left-module-Ring)
-      ( preserves-unit-hom-Ring R
+      ( preserves-one-hom-Ring R
         ( endomorphism-ring-ab-left-module-Ring)
         ( mul-hom-left-module-Ring))
 
@@ -394,7 +394,7 @@ module _
         ( mul-hom-right-module-Ring)
         ( one-Ring R))
       ( id-hom-Ab ab-right-module-Ring)
-      ( preserves-unit-hom-Ring R
+      ( preserves-one-hom-Ring R
         ( op-Ring endomorphism-ring-ab-right-module-Ring)
         ( mul-hom-right-module-Ring))
 

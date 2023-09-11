@@ -52,6 +52,6 @@ add-½ℤ (inl x) (inr y) = inl (x +ℤ y)
 add-½ℤ (inr x) (inl y) = inl (x +ℤ y)
 add-½ℤ (inr x) (inr y) = inr (x +ℤ y)
 
-infix 30 _+½ℤ_
+infixl 35 _+½ℤ_
 _+½ℤ_ = add-½ℤ
 ```

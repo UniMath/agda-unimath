@@ -56,7 +56,7 @@ module _
   where
 
   is-equiv-swap-Π : is-equiv (swap-Π {C = C})
-  is-equiv-swap-Π = is-equiv-has-inverse swap-Π refl-htpy refl-htpy
+  is-equiv-swap-Π = is-equiv-is-invertible swap-Π refl-htpy refl-htpy
 
   equiv-swap-Π : ((x : A) (y : B) → C x y) ≃ ((y : B) (x : A) → C x y)
   pr1 equiv-swap-Π = swap-Π

@@ -15,7 +15,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -70,7 +70,7 @@ module _
   abstract
     is-equiv-eq-pair-Σ : (s t : Σ A B) → is-equiv (eq-pair-Σ' {s} {t})
     is-equiv-eq-pair-Σ s t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( pair-eq-Σ)
         ( is-section-pair-eq-Σ s t)
         ( is-retraction-pair-eq-Σ s t)
@@ -81,7 +81,7 @@ module _
   abstract
     is-equiv-pair-eq-Σ : (s t : Σ A B) → is-equiv (pair-eq-Σ {s} {t})
     is-equiv-pair-eq-Σ s t =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( eq-pair-Σ')
         ( is-retraction-pair-eq-Σ s t)
         ( is-section-pair-eq-Σ s t)

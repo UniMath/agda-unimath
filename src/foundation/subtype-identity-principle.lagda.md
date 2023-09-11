@@ -23,16 +23,19 @@ open import foundation-core.propositions
 
 ## Idea
 
-The subtype identity principle allows us to efficiently characterize the
-identity type of a subtype, using a characterization of the identity type of the
-base type.
+The **subtype identity principle** allows us to efficiently characterize the
+[identity type](foundation-core.identity-types.md) of a
+[subtype](foundation-core.subtypes.md), using a characterization of the identity
+type of the base type.
 
 ## Lemma
 
 The following is a general construction that will help us show that the identity
 type of a subtype agrees with the identity type of the original type. We already
-know that the first projection of a family of propositions is an embedding, but
-the following lemma still has its uses.
+know that the first projection of a family of
+[propositions](foundation-core.propositions.md) is an
+[embedding](foundation-core.embeddings.md), but the following lemma still has
+its uses.
 
 ```agda
 module _

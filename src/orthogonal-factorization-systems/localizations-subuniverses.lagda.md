@@ -1,4 +1,4 @@
-# Localizations at a subuniverse
+# Localizations at subuniverses
 
 ```agda
 module orthogonal-factorization-systems.localizations-subuniverses where
@@ -7,25 +7,9 @@ module orthogonal-factorization-systems.localizations-subuniverses where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
-open import foundation.contractible-maps
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.empty-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
-open import foundation.propositions
-open import foundation.retractions
-open import foundation.sections
 open import foundation.subuniverses
-open import foundation.type-arithmetic-dependent-function-types
-open import foundation.type-arithmetic-unit-type
-open import foundation.unit-type
-open import foundation.universal-property-empty-type
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.local-types
@@ -125,6 +109,10 @@ module _
 ### There is at most one `P`-localization
 
 This is Proposition 5.1.2 in _Classifying Types_, and remains to be formalized.
+
+## See also
+
+- [Localizations at maps](orthogonal-factorization-systems.localizations-maps.md)
 
 ## References
 

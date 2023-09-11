@@ -37,7 +37,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -55,8 +55,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-2-element types are types that are merely equivalent to the standard 2-element
-type `Fin 2`.
+**`2`-element types** are types that are
+[merely equivalent](foundation.mere-equivalences.md) to the
+[standard 2-element type](univalent-combinatorics.standard-finite-types.md)
+`Fin 2`.
 
 ## Definition
 
@@ -73,7 +75,7 @@ is-prop-has-two-elements : {l : Level} {X : UU l} → is-prop (has-two-elements 
 is-prop-has-two-elements {l} {X} = is-prop-type-Prop (has-two-elements-Prop X)
 ```
 
-### The type of all 2-element types of universe level `l`
+### The type of all `2`-element types of universe level `l`
 
 ```agda
 2-Element-Type : (l : Level) → UU (lsuc l)
@@ -120,7 +122,7 @@ module _
     transitive-mere-equiv (Fin 2) Y X (unit-trunc-Prop (inv-equiv e)) H
 ```
 
-### Any 2-element type is inhabited
+### Any `2`-element type is inhabited
 
 ```agda
 is-inhabited-2-Element-Type :
@@ -132,7 +134,7 @@ is-inhabited-2-Element-Type X =
     ( λ e → unit-trunc-Prop (map-equiv e (zero-Fin 1)))
 ```
 
-### Any 2-element type is a set
+### Any `2`-element type is a set
 
 ```agda
 is-set-has-two-elements :
@@ -150,7 +152,7 @@ pr1 (set-2-Element-Type X) = type-2-Element-Type X
 pr2 (set-2-Element-Type X) = is-set-type-2-Element-Type X
 ```
 
-### Characterizing identifications between general 2-element types
+### Characterizing identifications between general `2`-element types
 
 ```agda
 equiv-2-Element-Type :
@@ -189,7 +191,7 @@ pr1 (extensionality-2-Element-Type X Y) = equiv-eq-2-Element-Type X Y
 pr2 (extensionality-2-Element-Type X Y) = is-equiv-equiv-eq-2-Element-Type X Y
 ```
 
-### Characterization the identifications of `Fin 2` with a 2-element type `X`
+### Characterization the identifications of `Fin 2` with a `2`-element type `X`
 
 #### Evaluating an equivalence and an automorphism at `0 : Fin 2`
 
@@ -253,7 +255,7 @@ abstract
 abstract
   is-equiv-ev-zero-aut-Fin-two-ℕ : is-equiv ev-zero-aut-Fin-two-ℕ
   is-equiv-ev-zero-aut-Fin-two-ℕ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       aut-point-Fin-two-ℕ
       is-section-aut-point-Fin-two-ℕ
       is-retraction-aut-point-Fin-two-ℕ
@@ -263,7 +265,7 @@ pr1 equiv-ev-zero-aut-Fin-two-ℕ = ev-zero-aut-Fin-two-ℕ
 pr2 equiv-ev-zero-aut-Fin-two-ℕ = is-equiv-ev-zero-aut-Fin-two-ℕ
 ```
 
-#### If `X` is a 2-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
+#### If `X` is a `2`-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
 
 ```agda
 module _
@@ -286,7 +288,7 @@ module _
               ( ev-zero-equiv-Fin-two-ℕ)
               ( is-equiv-ev-zero-aut-Fin-two-ℕ)
               ( is-equiv-map-equiv α))
-            ( is-equiv-comp-equiv α (Fin 2)))
+            ( is-equiv-postcomp-equiv-equiv α (Fin 2)))
 
   equiv-ev-zero-equiv-Fin-two-ℕ :
     (Fin 2 ≃ type-2-Element-Type X) ≃ type-2-Element-Type X
@@ -334,7 +336,7 @@ module _
     htpy-eq-equiv (is-retraction-map-inv-equiv equiv-ev-zero-equiv-Fin-two-ℕ e)
 ```
 
-#### The type of pointed 2-element types of any universe level is contractible
+#### The type of pointed `2`-element types of any universe level is contractible
 
 ```agda
 abstract
@@ -353,7 +355,7 @@ abstract
         ( standard-2-Element-Type l))
 ```
 
-#### Completing the characterization of the identity type of the type of 2-element types of arbitrary universe level
+#### Completing the characterization of the identity type of the type of `2`-element types of arbitrary universe level
 
 ```agda
 point-eq-UU-Fin-two-ℕ :
@@ -385,7 +387,7 @@ eq-point-UU-Fin-two-ℕ =
   map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
 ```
 
-### For any 2-element type `X`, the type of automorphisms on `X` is a 2-element type
+### For any `2`-element type `X`, the type of automorphisms on `X` is a `2`-element type
 
 ```agda
 module _
@@ -438,7 +440,7 @@ module _
           ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
           ( is-contr-total-htpy-equiv e)
           ( is-contr-equiv
-            ( fib (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
+            ( fiber (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
             ( equiv-tot
               ( λ e' →
                 equiv-inv
@@ -457,7 +459,7 @@ module _
     is-equiv-ev-zero-htpy-equiv-Fin-two-ℕ e e'
 ```
 
-### The canonical type family on the type of 2-element types has no section
+### The canonical type family on the type of `2`-element types has no section
 
 ```agda
 abstract
@@ -478,7 +480,7 @@ abstract
           ( standard-2-Element-Type l)))
 ```
 
-### There is no decidability procedure that proves that an arbitrary 2-element type is decidable
+### There is no decidability procedure that proves that an arbitrary `2`-element type is decidable
 
 ```agda
 abstract
@@ -548,7 +550,7 @@ module _
               ( is-section-map-inv-equiv h x)))))
 ```
 
-### The swapping equivalence on arbitrary 2-element types
+### The swapping equivalence on arbitrary `2`-element types
 
 ```agda
 module _
@@ -770,7 +772,7 @@ module _
           ( x ＝ map-equiv e (one-Fin 1)))
     is-contr-decide-value-equiv-Fin-two-ℕ e x =
       is-contr-equiv'
-        ( fib (map-equiv e) x)
+        ( fiber (map-equiv e) x)
         ( ( is-coprod-Σ-Fin-two-ℕ (λ y → x ＝ map-equiv e y)) ∘e
           ( equiv-tot (λ y → equiv-inv (map-equiv e y) x)))
         ( is-contr-map-is-equiv (is-equiv-map-equiv e) x)
@@ -782,7 +784,7 @@ module _
     center (is-contr-decide-value-equiv-Fin-two-ℕ e x)
 ```
 
-### There can't be three distinct elements in a 2-element type
+### There can't be three distinct elements in a `2`-element type
 
 ```agda
 module _
@@ -823,7 +825,7 @@ module _
       (inr refl) (inr refl) c3 = np refl
 ```
 
-### For any map between 2-element types, being an equivalence is decidable
+### For any map between `2`-element types, being an equivalence is decidable
 
 ```agda
 module _
@@ -839,17 +841,20 @@ module _
       ( is-finite-type-2-Element-Type Y)
 ```
 
-### A map between 2-element types is an equivalence if and only if its image is the full subtype of the codomain
+### A map between `2`-element types is an equivalence if and only if its image is the full subtype of the codomain
 
 This remains to be shown.
+[#743](https://github.com/UniMath/agda-unimath/issues/743)
 
-### A map between 2-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
-
-This remains to be shown.
-
-### Any map between 2-element types that is not an equivalence is constant
+### A map between `2`-element types is not an equivalence if and only if its image is a singleton subtype of the codomain
 
 This remains to be shown.
+[#743](https://github.com/UniMath/agda-unimath/issues/743)
+
+### Any map between `2`-element types that is not an equivalence is constant
+
+This remains to be shown.
+[#743](https://github.com/UniMath/agda-unimath/issues/743)
 
 ```agda
 {-
@@ -862,11 +867,12 @@ This remains to be shown.
   -}
 ```
 
-### Any map between 2-element types is either an equivalence or it is constant
+### Any map between `2`-element types is either an equivalence or it is constant
 
 This remains to be shown.
+[#743](https://github.com/UniMath/agda-unimath/issues/743)
 
-### Coinhabited 2-element types are equivalent
+### Coinhabited `2`-element types are equivalent
 
 ```agda
 {-

@@ -18,7 +18,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.small-types
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -190,7 +190,7 @@ abstract
 is-equiv-resize-𝕍' :
   {l1 l2 : Level} → is-equiv (resize-𝕍' {l1} {l2})
 is-equiv-resize-𝕍' {l1} {l2} =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( resize-𝕍' {l2} {l1})
     ( resize-resize-𝕍')
     ( resize-resize-𝕍')

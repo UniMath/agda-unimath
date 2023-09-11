@@ -77,7 +77,7 @@ module _
   is-equiv-map-left-unit-law-Σ-is-contr :
     is-equiv map-left-unit-law-Σ-is-contr
   is-equiv-map-left-unit-law-Σ-is-contr =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-left-unit-law-Σ-is-contr
       is-section-map-inv-left-unit-law-Σ-is-contr
       is-retraction-map-inv-left-unit-law-Σ-is-contr
@@ -90,7 +90,7 @@ module _
     is-equiv-map-inv-left-unit-law-Σ-is-contr :
       is-equiv map-inv-left-unit-law-Σ-is-contr
     is-equiv-map-inv-left-unit-law-Σ-is-contr =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-left-unit-law-Σ-is-contr
         is-retraction-map-inv-left-unit-law-Σ-is-contr
         is-section-map-inv-left-unit-law-Σ-is-contr
@@ -113,7 +113,7 @@ module _
       is-equiv-is-contr-map
         ( λ x → is-contr-equiv
           ( B x)
-          ( equiv-fib-pr1 B x)
+          ( equiv-fiber-pr1 B x)
           ( is-contr-B x))
 
   equiv-pr1 : ((a : A) → is-contr (B a)) → (Σ A B) ≃ A
@@ -127,8 +127,8 @@ module _
     is-contr-is-equiv-pr1 : is-equiv (pr1 {B = B}) → ((a : A) → is-contr (B a))
     is-contr-is-equiv-pr1 is-equiv-pr1-B a =
       is-contr-equiv'
-        ( fib pr1 a)
-        ( equiv-fib-pr1 B a)
+        ( fiber pr1 a)
+        ( equiv-fiber-pr1 B a)
         ( is-contr-map-is-equiv is-equiv-pr1-B a)
 
   map-inv-right-unit-law-Σ-is-contr :
@@ -150,7 +150,7 @@ module _
     (H : (a : A) → is-contr (B a)) →
     is-equiv (map-inv-right-unit-law-Σ-is-contr H)
   is-equiv-map-inv-right-unit-law-Σ-is-contr H =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( pr1)
       ( is-retraction-map-inv-right-unit-law-Σ-is-contr H)
       ( is-section-map-inv-right-unit-law-Σ-is-contr H)
@@ -193,7 +193,7 @@ module _
   abstract
     is-equiv-map-associative-Σ : is-equiv map-associative-Σ
     is-equiv-map-associative-Σ =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-associative-Σ
         is-section-map-inv-associative-Σ
         is-retraction-map-inv-associative-Σ
@@ -205,7 +205,7 @@ module _
   inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (pair x y))) ≃ Σ (Σ A B) C
   pr1 inv-associative-Σ = map-inv-associative-Σ
   pr2 inv-associative-Σ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-associative-Σ
       is-retraction-map-inv-associative-Σ
       is-section-map-inv-associative-Σ
@@ -240,7 +240,7 @@ module _
 
   is-equiv-map-associative-Σ' : is-equiv map-associative-Σ'
   is-equiv-map-associative-Σ' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-associative-Σ'
       is-section-map-inv-associative-Σ'
       is-retraction-map-inv-associative-Σ'
@@ -254,7 +254,7 @@ module _
     Σ A (λ x → Σ (B x) (C x)) ≃ Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
   pr1 inv-associative-Σ' = map-inv-associative-Σ'
   pr2 inv-associative-Σ' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-associative-Σ'
       is-retraction-map-inv-associative-Σ'
       is-section-map-inv-associative-Σ'
@@ -295,7 +295,7 @@ module _
   abstract
     is-equiv-map-interchange-Σ-Σ : is-equiv map-interchange-Σ-Σ
     is-equiv-map-interchange-Σ-Σ =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-interchange-Σ-Σ
         is-section-map-inv-interchange-Σ-Σ
         is-retraction-map-inv-interchange-Σ-Σ
@@ -343,7 +343,7 @@ module _
   abstract
     is-equiv-map-left-swap-Σ : is-equiv map-left-swap-Σ
     is-equiv-map-left-swap-Σ =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-left-swap-Σ
         is-section-map-inv-left-swap-Σ
         is-retraction-map-inv-left-swap-Σ
@@ -380,7 +380,7 @@ module _
 
   is-equiv-map-right-swap-Σ : is-equiv map-right-swap-Σ
   is-equiv-map-right-swap-Σ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-right-swap-Σ
       is-section-map-inv-right-swap-Σ
       is-retraction-map-inv-right-swap-Σ

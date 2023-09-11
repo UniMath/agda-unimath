@@ -12,7 +12,7 @@ open import foundation.universe-levels
 
 open import foundation-core.function-types
 open import foundation-core.propositions
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.modal-operators
@@ -47,7 +47,7 @@ is-uniquely-eliminating-modality-double-negation-modality :
   {l : Level} →
   is-uniquely-eliminating-modality (unit-double-negation-modality {l})
 is-uniquely-eliminating-modality-double-negation-modality {l} A P =
-  is-local-family-is-prop
+  is-local-dependent-type-is-prop
     ( unit-double-negation-modality)
     ( operator-double-negation-modality l ∘ P)
     ( λ _ → is-prop-double-negation)

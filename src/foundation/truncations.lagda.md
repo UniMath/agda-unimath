@@ -142,7 +142,7 @@ module _
           ( λ h → (h ∘ unit-trunc) ~ f))
   unique-dependent-function-trunc B f =
     is-contr-equiv'
-      ( fib (precomp-Π-Truncated-Type unit-trunc B) f)
+      ( fiber (precomp-Π-Truncated-Type unit-trunc B) f)
       ( equiv-tot
         ( λ h → equiv-funext))
       ( is-contr-map-is-equiv
@@ -187,7 +187,7 @@ unique-truncated-fam-trunc {l1} {l2} {k} {A} B =
         ( λ C → (C ∘ unit-trunc) ~ B))
     ( equiv-tot
       ( λ C →
-        equiv-map-Π
+        equiv-Π-equiv-family
           ( λ x →
             ( extensionality-Truncated-Type (B x) (C (unit-trunc x))) ∘e
             ( equiv-inv (C (unit-trunc x)) (B x)))))
@@ -254,7 +254,7 @@ module _
               ( f x)))
         ( equiv-ev-pair)
         ( λ g →
-          equiv-map-Π
+          equiv-Π-equiv-family
             ( λ x →
               ( inv-equiv equiv-funext) ∘e
               ( equiv-Π
@@ -342,7 +342,7 @@ module _
 
   is-equiv-unit-trunc : is-equiv unit-trunc
   is-equiv-unit-trunc =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-unit-trunc
       is-section-map-inv-unit-trunc
       is-retraction-map-inv-unit-trunc
@@ -547,7 +547,7 @@ module _
       type-trunc k (Σ A B) ≃ type-trunc k (Σ A (λ x → type-trunc k (B x)))
   pr1 equiv-trunc-Σ = map-trunc-Σ
   pr2 equiv-trunc-Σ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-trunc-Σ
       is-section-map-inv-trunc-Σ
       is-retraction-map-inv-trunc-Σ
@@ -556,7 +556,7 @@ module _
     type-trunc k (Σ A (λ x → type-trunc k (B x))) ≃ type-trunc k (Σ A B)
   pr1 inv-equiv-trunc-Σ = map-inv-trunc-Σ
   pr2 inv-equiv-trunc-Σ =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-trunc-Σ
       is-retraction-map-inv-trunc-Σ
       is-section-map-inv-trunc-Σ

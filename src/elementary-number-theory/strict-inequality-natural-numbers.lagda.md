@@ -22,7 +22,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -45,7 +45,8 @@ le-ℕ n m = type-Prop (le-ℕ-Prop n m)
 is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
 is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
 
-_<_ = le-ℕ
+infix 30 _<-ℕ_
+_<-ℕ_ = le-ℕ
 ```
 
 ## Properties
@@ -113,7 +114,7 @@ contradiction-le-one-ℕ (succ-ℕ n) ()
 ### The strict ordering of the natural numbers is anti-reflexive
 
 ```agda
-anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n < n)
+anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
 anti-reflexive-le-ℕ zero-ℕ ()
 anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
 ```

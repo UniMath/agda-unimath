@@ -70,7 +70,7 @@ module _
     is-prop A → A ≃ (A × A)
   pr1 (equiv-diagonal-is-prop is-prop-A) = diagonal A
   pr2 (equiv-diagonal-is-prop is-prop-A) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( pr1)
       ( λ pair-a → eq-pair (eq-is-prop is-prop-A) (eq-is-prop is-prop-A))
       ( λ a → eq-is-prop is-prop-A)
@@ -83,26 +83,26 @@ module _
   {l : Level} (A : UU l)
   where
 
-  eq-fib-diagonal : (t : A × A) → fib (diagonal A) t → pr1 t ＝ pr2 t
-  eq-fib-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
+  eq-fiber-diagonal : (t : A × A) → fiber (diagonal A) t → pr1 t ＝ pr2 t
+  eq-fiber-diagonal (pair x y) (pair z α) = (inv (ap pr1 α)) ∙ (ap pr2 α)
 
-  fib-diagonal-eq : (t : A × A) → pr1 t ＝ pr2 t → fib (diagonal A) t
-  pr1 (fib-diagonal-eq (pair x y) β) = x
-  pr2 (fib-diagonal-eq (pair x y) β) = eq-pair refl β
+  fiber-diagonal-eq : (t : A × A) → pr1 t ＝ pr2 t → fiber (diagonal A) t
+  pr1 (fiber-diagonal-eq (pair x y) β) = x
+  pr2 (fiber-diagonal-eq (pair x y) β) = eq-pair refl β
 
-  is-section-fib-diagonal-eq :
-    (t : A × A) → ((eq-fib-diagonal t) ∘ (fib-diagonal-eq t)) ~ id
-  is-section-fib-diagonal-eq (pair x .x) refl = refl
+  is-section-fiber-diagonal-eq :
+    (t : A × A) → ((eq-fiber-diagonal t) ∘ (fiber-diagonal-eq t)) ~ id
+  is-section-fiber-diagonal-eq (pair x .x) refl = refl
 
-  is-retraction-fib-diagonal-eq :
-    (t : A × A) → ((fib-diagonal-eq t) ∘ (eq-fib-diagonal t)) ~ id
-  is-retraction-fib-diagonal-eq .(pair z z) (pair z refl) = refl
+  is-retraction-fiber-diagonal-eq :
+    (t : A × A) → ((fiber-diagonal-eq t) ∘ (eq-fiber-diagonal t)) ~ id
+  is-retraction-fiber-diagonal-eq .(pair z z) (pair z refl) = refl
 
   abstract
-    is-equiv-eq-fib-diagonal : (t : A × A) → is-equiv (eq-fib-diagonal t)
-    is-equiv-eq-fib-diagonal t =
-      is-equiv-has-inverse
-        ( fib-diagonal-eq t)
-        ( is-section-fib-diagonal-eq t)
-        ( is-retraction-fib-diagonal-eq t)
+    is-equiv-eq-fiber-diagonal : (t : A × A) → is-equiv (eq-fiber-diagonal t)
+    is-equiv-eq-fiber-diagonal t =
+      is-equiv-is-invertible
+        ( fiber-diagonal-eq t)
+        ( is-section-fiber-diagonal-eq t)
+        ( is-retraction-fiber-diagonal-eq t)
 ```

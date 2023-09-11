@@ -21,7 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -583,7 +583,7 @@ module _
               ( principal-Torsor-Abstract-Group G)
               ( X)
               ( e))
-            ( is-equiv-has-inverse
+            ( is-equiv-is-invertible
                 equiv-Eq-Torsor-Abstract-Group
                 is-section-equiv-Eq-Torsor-Abstract-Group
                 is-retraction-equiv-Eq-Torsor-Abstract-Group))

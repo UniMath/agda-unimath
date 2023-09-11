@@ -186,7 +186,7 @@ module _
                     ( power-Commutative-Ring A n x)
                     ( power-Commutative-Ring A m x)
                     ( H'))
-                  ( inv ( power-add-Commutative-Ring A n m))) ,
+                  ( inv ( distributive-power-add-Commutative-Ring A n m))) ,
                 ( is-closed-under-eq-ideal-Commutative-Ring A J
                   ( is-closed-under-left-multiplication-ideal-Commutative-Ring
                     ( A)
@@ -194,7 +194,7 @@ module _
                     ( power-Commutative-Ring A n x)
                     ( power-Commutative-Ring A m x)
                     ( K'))
-                  ( inv ( power-add-Commutative-Ring A n m))))))
+                  ( inv ( distributive-power-add-Commutative-Ring A n m))))))
 
   backward-inclusion-intersection-radical-of-ideal-Commutative-Ring :
     leq-ideal-Commutative-Ring A

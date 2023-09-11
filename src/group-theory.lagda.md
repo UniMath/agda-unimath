@@ -23,8 +23,12 @@ open import group-theory.centers-semigroups public
 open import group-theory.central-elements-groups public
 open import group-theory.central-elements-monoids public
 open import group-theory.central-elements-semigroups public
+open import group-theory.centralizer-subgroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutators-groups public
+open import group-theory.commuting-elements-groups public
+open import group-theory.commuting-elements-monoids public
+open import group-theory.commuting-elements-semigroups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.congruence-relations-abelian-groups public
@@ -62,6 +66,7 @@ open import group-theory.function-groups public
 open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
 open import group-theory.furstenberg-groups public
+open import group-theory.generating-elements-groups public
 open import group-theory.generating-sets-groups public
 open import group-theory.group-actions public
 open import group-theory.groups public
@@ -74,6 +79,9 @@ open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.images-of-group-homomorphisms public
+open import group-theory.integer-multiples-of-elements-abelian-groups public
+open import group-theory.integer-powers-of-elements-groups public
 open import group-theory.intersections-subgroups-abelian-groups public
 open import group-theory.intersections-subgroups-groups public
 open import group-theory.inverse-semigroups public
@@ -94,16 +102,22 @@ open import group-theory.monoid-actions public
 open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
+open import group-theory.multiples-of-elements-abelian-groups public
+open import group-theory.normal-closures-subgroups public
+open import group-theory.normal-cores-subgroups public
 open import group-theory.normal-subgroups public
 open import group-theory.normal-subgroups-concrete-groups public
 open import group-theory.normal-submonoids public
 open import group-theory.normal-submonoids-commutative-monoids public
+open import group-theory.normalizer-subgroups public
 open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.powers-of-elements-groups public
+open import group-theory.powers-of-elements-monoids public
 open import group-theory.precategory-of-abelian-groups public
 open import group-theory.precategory-of-commutative-monoids public
 open import group-theory.precategory-of-concrete-groups public
@@ -140,11 +154,13 @@ open import group-theory.subsets-groups public
 open import group-theory.subsets-monoids public
 open import group-theory.substitution-functor-concrete-group-actions public
 open import group-theory.substitution-functor-group-actions public
+open import group-theory.surjective-group-homomorphisms public
 open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public
+open import group-theory.trivial-group-homomorphisms public
 open import group-theory.trivial-subgroups public
 open import group-theory.unordered-tuples-of-elements-commutative-monoids public
 ```

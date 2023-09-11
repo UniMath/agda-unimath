@@ -161,7 +161,7 @@ module _
                         ( λ e → (map-equiv e ∘ succ-ℤ) ~ (succ-ℤ ∘ map-equiv e))
                         ( equiv-postcomp-equiv (equiv-left-add-ℤ (neg-ℤ x)) ℤ)
                         ( λ e →
-                          equiv-map-Π
+                          equiv-Π-equiv-family
                             ( λ k →
                               ( equiv-concat'
                                 ( (neg-ℤ x) +ℤ (map-equiv e (succ-ℤ k)))

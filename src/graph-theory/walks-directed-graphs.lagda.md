@@ -24,7 +24,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.raising-universe-levels
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -195,7 +195,7 @@ module _
     (x y : vertex-Directed-Graph G) →
     is-equiv (map-compute-total-walk-of-length-Directed-Graph x y)
   is-equiv-map-compute-total-walk-of-length-Directed-Graph x y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-compute-total-walk-of-length-Directed-Graph x y)
       ( is-section-map-inv-compute-total-walk-of-length-Directed-Graph x y)
       ( is-retraction-map-inv-compute-total-walk-of-length-Directed-Graph x y)
@@ -310,7 +310,7 @@ module _
     {x y : vertex-Directed-Graph G} →
     is-equiv (map-compute-walk-Directed-Graph {x} {y})
   is-equiv-map-compute-walk-Directed-Graph =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-compute-walk-Directed-Graph
       is-section-map-inv-compute-walk-Directed-Graph
       is-retraction-map-inv-compute-walk-Directed-Graph
@@ -378,7 +378,7 @@ module _
     (x y : vertex-Directed-Graph G) →
     is-equiv (map-compute-coproduct-walk-Directed-Graph x y)
   is-equiv-map-compute-coproduct-walk-Directed-Graph x y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-compute-coproduct-walk-Directed-Graph x y)
       ( is-section-map-inv-compute-coproduct-walk-Directed-Graph x y)
       ( is-retraction-map-inv-compute-coproduct-walk-Directed-Graph x y)

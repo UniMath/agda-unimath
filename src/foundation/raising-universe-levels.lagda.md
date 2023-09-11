@@ -57,7 +57,7 @@ module _
 
   is-equiv-map-raise : is-equiv (map-raise {l} {l1} {A})
   is-equiv-map-raise =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-raise
       is-section-map-inv-raise
       is-retraction-map-inv-raise
@@ -114,7 +114,7 @@ module _
 
   is-equiv-map-equiv-raise : is-equiv map-equiv-raise
   is-equiv-map-equiv-raise =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-raise
       is-section-map-inv-equiv-raise
       is-retraction-map-inv-equiv-raise

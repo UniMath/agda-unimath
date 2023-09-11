@@ -35,7 +35,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -90,12 +90,12 @@ module _
   is-decidable-map-const-is-isolated :
     is-isolated a → is-decidable-map (const unit A a)
   is-decidable-map-const-is-isolated d x =
-    is-decidable-equiv (fib-const a x) (d x)
+    is-decidable-equiv (fiber-const a x) (d x)
 
   is-isolated-is-decidable-map-const :
     is-decidable-map (const unit A a) → is-isolated a
   is-isolated-is-decidable-map-const d x =
-    is-decidable-equiv' (fib-const a x) (d x)
+    is-decidable-equiv' (fiber-const a x) (d x)
 
   cases-Eq-isolated-point :
     is-isolated a → (x : A) → is-decidable (a ＝ x) → UU lzero
@@ -241,7 +241,7 @@ is-set-isolated-point A =
   is-set-has-decidable-equality (has-decidable-equality-isolated-point A)
 
 decidable-emb-isolated-point :
-  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪d A
+  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪ᵈ A
 pr1 (decidable-emb-isolated-point {l1} {A} a) =
   const unit A (pr1 a)
 pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
@@ -317,7 +317,7 @@ is-equiv-map-maybe-structure-isolated-point :
   {l1 : Level} (X : UU l1) (x : isolated-point X) →
   is-equiv (map-maybe-structure-isolated-point X x)
 is-equiv-map-maybe-structure-isolated-point X x =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-inv-maybe-structure-isolated-point X x)
     ( is-section-map-inv-maybe-structure-isolated-point X x)
     ( is-retraction-map-inv-maybe-structure-isolated-point X x)

@@ -18,9 +18,17 @@ open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
+open import synthetic-homotopy-theory.dependent-suspension-structures public
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts public
+open import synthetic-homotopy-theory.dependent-universal-property-suspensions public
 open import synthetic-homotopy-theory.descent-circle public
+open import synthetic-homotopy-theory.descent-circle-constant-families public
+open import synthetic-homotopy-theory.descent-circle-dependent-pair-types public
+open import synthetic-homotopy-theory.descent-circle-equivalence-types public
+open import synthetic-homotopy-theory.descent-circle-function-types public
+open import synthetic-homotopy-theory.descent-circle-subtypes public
 open import synthetic-homotopy-theory.double-loop-spaces public
+open import synthetic-homotopy-theory.flattening-lemma-pushouts public
 open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
@@ -40,13 +48,18 @@ open import synthetic-homotopy-theory.prespectra public
 open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
+open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.spheres public
+open import synthetic-homotopy-theory.suspension-structures public
+open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public
 open import synthetic-homotopy-theory.universal-property-pushouts public
+open import synthetic-homotopy-theory.universal-property-suspensions public
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public
 ```

@@ -18,7 +18,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
@@ -155,7 +155,7 @@ module _
 
   subset-right-ideal-subset-Ring' : type-Ring R → UU (l1 ⊔ l2)
   subset-right-ideal-subset-Ring' x =
-    fib ev-right-formal-combination-subset-Ring x
+    fiber ev-right-formal-combination-subset-Ring x
 
   subset-right-ideal-subset-Ring : subset-Ring (l1 ⊔ l2) R
   subset-right-ideal-subset-Ring x =
@@ -459,7 +459,7 @@ module _
 
   generating-subset-right-ideal-family-of-elements-Ring : subset-Ring l1 R
   generating-subset-right-ideal-family-of-elements-Ring x =
-    trunc-Prop (fib a x)
+    trunc-Prop (fiber a x)
 
   right-ideal-family-of-elements-Ring : right-ideal-Ring l1 R
   right-ideal-family-of-elements-Ring =

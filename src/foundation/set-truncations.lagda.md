@@ -256,8 +256,8 @@ hom-slice-trunc-Set A =
 
 abstract
   is-image-trunc-Set :
-    {l1 l2 : Level} (A : UU l1) →
-    is-image l2
+    {l1 : Level} (A : UU l1) →
+    is-image
       ( mere-eq-Prop {A = A})
       ( emb-trunc-Set A)
       ( hom-slice-trunc-Set A)
@@ -519,7 +519,7 @@ module _
             ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
-              ( ( equiv-map-Π
+              ( ( equiv-Π-equiv-family
                   ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
                 ( ( equiv-ev-pair) ∘e
                   ( equiv-universal-property-trunc-Set

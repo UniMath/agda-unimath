@@ -25,7 +25,7 @@ open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.surjective-maps
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -125,7 +125,7 @@ module _
     ({l : Level} → universal-property-set-quotient l R B f)
   universal-property-set-quotient-is-set-quotient Q X g =
     is-contr-equiv'
-      ( fib (precomp-Set-Quotient R B f X) g)
+      ( fiber (precomp-Set-Quotient R B f X) g)
       ( equiv-tot
         ( λ h →
           extensionality-reflecting-map-Equivalence-Relation R X
@@ -188,7 +188,7 @@ module _
   is-effective-is-image :
     (i : type-Set B ↪ (A → Prop l2)) →
     (T : (prop-Equivalence-Relation R) ~ ((map-emb i) ∘ q)) →
-    ({l : Level} → is-image l (prop-Equivalence-Relation R) i (pair q T)) →
+    is-image (prop-Equivalence-Relation R) i (pair q T) →
     is-effective R q
   is-effective-is-image i T H x y =
     ( is-effective-class R x y) ∘e
@@ -199,7 +199,7 @@ module _
   is-surjective-and-effective-is-image :
     (i : type-Set B ↪ (A → Prop l2)) →
     (T : (prop-Equivalence-Relation R) ~ ((map-emb i) ∘ q)) →
-    ({l : Level} → is-image l (prop-Equivalence-Relation R) i (pair q T)) →
+    is-image (prop-Equivalence-Relation R) i (pair q T) →
     is-surjective-and-effective R q
   pr1 (is-surjective-and-effective-is-image i T H) =
     is-surjective-is-image (prop-Equivalence-Relation R) i (pair q T) H
@@ -218,7 +218,7 @@ module _
           ( is-small-Prop l2 (x ＝ y))
           ( α u))
     where
-    α : fib q x → fib q y → is-small l2 (x ＝ y)
+    α : fiber q x → fiber q y → is-small l2 (x ＝ y)
     pr1 (α (pair a refl) (pair b refl)) = sim-Equivalence-Relation R a b
     pr2 (α (pair a refl) (pair b refl)) = pr2 e a b
 
@@ -278,7 +278,7 @@ module _
       (p :
         ( map-emb-is-surjective-and-effective H x) ＝
         ( map-emb-is-surjective-and-effective H y)) →
-      fib q y →
+      fiber q y →
       type-Prop (Id-Prop B x y)
     α {x} p (pair a refl) =
       map-inv-equiv
@@ -316,7 +316,7 @@ module _
       (p :
         ( large-map-emb-is-surjective-and-effective e x) ＝
         ( large-map-emb-is-surjective-and-effective e y)) →
-      fib q y →
+      fiber q y →
       type-Prop (Id-Prop B x y)
     α p (pair a refl) = map-inv-equiv (equiv-eq (ap pr1 (htpy-eq p a))) refl
 
@@ -329,11 +329,10 @@ module _
 
   is-image-is-surjective-and-effective :
     ( H : is-surjective-and-effective R q) →
-    ( {l : Level} →
-      is-image l
-        ( prop-Equivalence-Relation R)
-        ( emb-is-surjective-and-effective H)
-        ( pair q (triangle-emb-is-surjective-and-effective H)))
+    is-image
+      ( prop-Equivalence-Relation R)
+      ( emb-is-surjective-and-effective H)
+      ( pair q (triangle-emb-is-surjective-and-effective H))
   is-image-is-surjective-and-effective H =
     is-image-is-surjective
       ( prop-Equivalence-Relation R)
@@ -356,7 +355,7 @@ module _
   is-surjective-is-set-quotient q Q b =
     tr
       ( λ y →
-        type-trunc-Prop (fib (map-reflecting-map-Equivalence-Relation R q) y))
+        type-trunc-Prop (fiber (map-reflecting-map-Equivalence-Relation R q) y))
       ( htpy-eq
         ( ap pr1
           ( eq-is-contr
@@ -427,11 +426,11 @@ module _
     α : Σ (A → Prop l2) (reflects-Equivalence-Relation R)
     α = pair
         ( prop-Equivalence-Relation R x)
-          ( λ r →
-            eq-iff
-              ( transitive-Equivalence-Relation R _ _ _ r)
-              ( transitive-Equivalence-Relation R _ _ _
-                ( symmetric-Equivalence-Relation R _ _ r)))
+        ( λ r →
+          eq-iff
+            ( transitive-Equivalence-Relation R _ _ _ r)
+            ( transitive-Equivalence-Relation R _ _ _
+              ( symmetric-Equivalence-Relation R _ _ r)))
     P : type-Set B → Prop l2
     P = map-inv-is-equiv (Q (Prop-Set l2)) α
     compute-P :
@@ -461,7 +460,7 @@ module _
             ( reflects-map-reflecting-map-Equivalence-Relation R q
               ( map-inv-equiv
                 ( compute-P (pr1 v))
-                ( inv-tr (λ b → type-Prop (P b)) (pr2 v) p))) ∙
+                ( inv-tr (type-Prop ∘ P) (pr2 v) p))) ∙
             ( pr2 v)))
     is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
     is-contr-total-P = pair center-total-P contraction-total-P

@@ -1,4 +1,4 @@
-# The functoriality of `fib`
+# The functoriality of `fiber`
 
 ```agda
 module foundation.functoriality-fibers-of-maps where
@@ -38,20 +38,20 @@ module _
   (f : A → X) (g : B → X) (c : cone f g C)
   where
 
-  map-fib-cone : (x : A) → fib (pr1 c) x → fib g (f x)
-  pr1 (map-fib-cone x t) = pr1 (pr2 c) (pr1 t)
-  pr2 (map-fib-cone x t) = (inv (pr2 (pr2 c) (pr1 t))) ∙ (ap f (pr2 t))
+  map-fiber-cone : (x : A) → fiber (pr1 c) x → fiber g (f x)
+  pr1 (map-fiber-cone x t) = pr1 (pr2 c) (pr1 t)
+  pr2 (map-fiber-cone x t) = (inv (pr2 (pr2 c) (pr1 t))) ∙ (ap f (pr2 t))
 
-map-fib-cone-id :
+map-fiber-cone-id :
   {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
-  map-fib-cone id g (triple g id refl-htpy) x ~ id
-map-fib-cone-id g .(g b) (pair b refl) =
+  map-fiber-cone id g (triple g id refl-htpy) x ~ id
+map-fiber-cone-id g .(g b) (pair b refl) =
   refl
 ```
 
 ## Properties
 
-### Computing `map-fib-cone` of a horizontal pasting of cones
+### Computing `map-fiber-cone` of a horizontal pasting of cones
 
 ```agda
 module _
@@ -60,11 +60,11 @@ module _
   (i : X → Y) (j : Y → Z) (h : C → Z)
   where
 
-  map-fib-pasting-horizontal-cone :
+  map-fiber-pasting-horizontal-cone :
     (c : cone j h B) (d : cone i (pr1 c) A) → (x : X) →
-    ( map-fib-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
-    ( (map-fib-cone j h c (i x)) ∘ (map-fib-cone i (pr1 c) d x))
-  map-fib-pasting-horizontal-cone
+    ( map-fiber-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
+    ( (map-fiber-cone j h c (i x)) ∘ (map-fiber-cone i (pr1 c) d x))
+  map-fiber-pasting-horizontal-cone
     (pair g (pair q K)) (pair f (pair p H)) .(f a) (pair a refl) =
     eq-pair-Σ
       ( refl)
@@ -78,7 +78,7 @@ module _
               ( inv (ap-concat j (inv (H a)) refl))))))
 ```
 
-### Computing `map-fib-cone` of a horizontal pasting of cones
+### Computing `map-fiber-cone` of a horizontal pasting of cones
 
 ```agda
 module _
@@ -87,16 +87,16 @@ module _
   (f : C → Z) (g : Y → Z) (h : X → Y)
   where
 
-  map-fib-pasting-vertical-cone :
+  map-fiber-pasting-vertical-cone :
     (c : cone f g B) (d : cone (pr1 (pr2 c)) h A) (x : C) →
-    ( ( map-fib-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
-      ( inv-map-compute-fib-comp (pr1 c) (pr1 d) x)) ~
-    ( ( inv-map-compute-fib-comp g h (f x)) ∘
+    ( ( map-fiber-cone f (g ∘ h) (pasting-vertical-cone f g h c d) x) ∘
+      ( inv-map-compute-fiber-comp (pr1 c) (pr1 d) x)) ~
+    ( ( inv-map-compute-fiber-comp g h (f x)) ∘
       ( map-Σ
-        ( λ t → fib h (pr1 t))
-        ( map-fib-cone f g c x)
-        ( λ t → map-fib-cone (pr1 (pr2 c)) h d (pr1 t))))
-  map-fib-pasting-vertical-cone
+        ( λ t → fiber h (pr1 t))
+        ( map-fiber-cone f g c x)
+        ( λ t → map-fiber-cone (pr1 (pr2 c)) h d (pr1 t))))
+  map-fiber-pasting-vertical-cone
     (pair p (pair q H)) (pair p' (pair q' H')) .(p (p' a))
     (pair (pair .(p' a) refl) (pair a refl)) =
     eq-pair-Σ refl
@@ -108,7 +108,7 @@ module _
             ( ap
               ( concat' (g (h (q' a)))
                 ( pr2
-                  ( map-fib-cone f g
+                  ( map-fiber-cone f g
                     ( triple p q H)
                     ( p (p' a))
                     ( pair (p' a) refl))))

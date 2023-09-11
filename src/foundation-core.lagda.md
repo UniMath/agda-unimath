@@ -35,8 +35,7 @@ open import foundation-core.functoriality-function-types public
 open import foundation-core.homotopies public
 open import foundation-core.identity-types public
 open import foundation-core.injective-maps public
-open import foundation-core.involutions public
-open import foundation-core.logical-equivalences public
+open import foundation-core.invertible-maps public
 open import foundation-core.negation public
 open import foundation-core.path-split-maps public
 open import foundation-core.propositional-maps public
@@ -48,7 +47,7 @@ open import foundation-core.sets public
 open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
-open import foundation-core.transport public
+open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public
 open import foundation-core.truncation-levels public

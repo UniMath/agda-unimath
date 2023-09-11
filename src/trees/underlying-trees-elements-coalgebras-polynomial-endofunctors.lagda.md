@@ -23,7 +23,7 @@ open import foundation.identity-types
 open import foundation.isolated-points
 open import foundation.negation
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
 
@@ -640,7 +640,7 @@ module _
     (x : node-element-coalgebra X w) →
     is-equiv (map-enrichment-element-coalgebra w x)
   is-equiv-map-enrichment-element-coalgebra w x =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-enrichment-directed-tree-element-coalgebra w x)
       ( is-section-map-inv-enrichment-directed-tree-element-coalgebra w x)
       ( is-retraction-map-inv-enrichment-directed-tree-element-coalgebra w x)
@@ -726,7 +726,7 @@ module _
   is-equiv-node-compute-directed-tree-element-coalgebra :
     is-equiv node-compute-directed-tree-element-coalgebra
   is-equiv-node-compute-directed-tree-element-coalgebra =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-node-compute-directed-tree-element-coalgebra
       is-section-map-inv-node-compute-directed-tree-element-coalgebra
       is-retraction-map-inv-node-compute-directed-tree-element-coalgebra
@@ -868,7 +868,7 @@ module _
     (x y : node-element-coalgebra X w) →
     is-equiv (edge-compute-directed-tree-element-coalgebra x y)
   is-equiv-edge-compute-directed-tree-element-coalgebra x y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-edge-compute-directed-tree-element-coalgebra x y)
       ( is-section-map-inv-edge-compute-directed-tree-element-coalgebra x y)
       ( is-retraction-map-inv-edge-compute-directed-tree-element-coalgebra x y)

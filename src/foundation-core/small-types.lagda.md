@@ -11,11 +11,11 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.univalence
@@ -25,7 +25,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.logical-equivalences
+open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
 

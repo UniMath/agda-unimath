@@ -74,7 +74,7 @@ pr1 equiv-relation-is-decidable-Decidable-Relation dec-R =
   ( relation-Decidable-Relation dec-R ,
     is-decidable-Decidable-Relation dec-R)
 pr2 equiv-relation-is-decidable-Decidable-Relation =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( map-inv-equiv-relation-is-decidable-Decidable-Relation)
     ( refl-htpy)
     ( refl-htpy)

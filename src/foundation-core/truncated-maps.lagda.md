@@ -39,7 +39,7 @@ module _
   where
 
   is-trunc-map : {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-  is-trunc-map f = (y : _) → is-trunc k (fib f y)
+  is-trunc-map f = (y : _) → is-trunc k (fiber f y)
 
   trunc-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
   trunc-map A B = Σ (A → B) is-trunc-map
@@ -103,8 +103,8 @@ module _
       ((x y : A) → is-trunc-map k (ap f {x} {y})) → is-trunc-map (succ-𝕋 k) f
     is-trunc-map-is-trunc-map-ap is-trunc-map-ap-f b (pair x p) (pair x' p') =
       is-trunc-equiv k
-        ( fib (ap f) (p ∙ (inv p')))
-        ( equiv-fib-ap-eq-fib f (pair x p) (pair x' p'))
+        ( fiber (ap f) (p ∙ (inv p')))
+        ( equiv-fiber-ap-eq-fiber f (pair x p) (pair x' p'))
         ( is-trunc-map-ap-f x x' (p ∙ (inv p')))
 
   abstract
@@ -113,8 +113,8 @@ module _
     is-trunc-map-ap-is-trunc-map is-trunc-map-f x y p =
       is-trunc-is-equiv' k
         ( pair x p ＝ pair y refl)
-        ( eq-fib-fib-ap f x y p)
-        ( is-equiv-eq-fib-fib-ap f x y p)
+        ( eq-fiber-fiber-ap f x y p)
+        ( is-equiv-eq-fiber-fiber-ap f x y p)
         ( is-trunc-map-f (f y) (pair x p) (pair y refl))
 ```
 
@@ -130,7 +130,7 @@ module _
       {B : A → UU l2} → ((x : A) → is-trunc k (B x)) →
       is-trunc-map k (pr1 {l1} {l2} {A} {B})
     is-trunc-map-pr1 {B} H x =
-      is-trunc-equiv k (B x) (equiv-fib-pr1 B x) (H x)
+      is-trunc-equiv k (B x) (equiv-fiber-pr1 B x) (H x)
 
   pr1-trunc-map :
     (B : A → Truncated-Type l2 k) → trunc-map k (Σ A (λ x → pr1 (B x))) A
@@ -140,9 +140,12 @@ module _
   abstract
     is-trunc-is-trunc-map-pr1 :
       (B : A → UU l2) → is-trunc-map k (pr1 {l1} {l2} {A} {B}) →
-      ((x : A) → is-trunc k (B x))
+      (x : A) → is-trunc k (B x)
     is-trunc-is-trunc-map-pr1 B is-trunc-map-pr1 x =
-      is-trunc-equiv k (fib pr1 x) (inv-equiv-fib-pr1 B x) (is-trunc-map-pr1 x)
+      is-trunc-equiv k
+        ( fiber pr1 x)
+        ( inv-equiv-fiber-pr1 B x)
+        ( is-trunc-map-pr1 x)
 ```
 
 ### Any map between `k`-truncated types is `k`-truncated
@@ -165,8 +168,8 @@ abstract
     is-trunc k A → is-trunc k (Σ A B) → (x : A) → is-trunc k (B x)
   is-trunc-fam-is-trunc-Σ k {B = B} is-trunc-A is-trunc-ΣAB x =
     is-trunc-equiv' k
-      ( fib pr1 x)
-      ( equiv-fib-pr1 B x)
+      ( fiber pr1 x)
+      ( equiv-fiber-pr1 B x)
       ( is-trunc-map-is-trunc-domain-codomain k is-trunc-ΣAB is-trunc-A x)
 ```
 
@@ -180,7 +183,7 @@ abstract
   is-trunc-map-htpy k {A} {B} {f} {g} H is-trunc-g b =
     is-trunc-is-equiv k
       ( Σ A (λ z → g z ＝ b))
-      ( fib-triangle f g id H b)
+      ( fiber-triangle f g id H b)
       ( is-fiberwise-equiv-is-equiv-triangle f g id H is-equiv-id b)
       ( is-trunc-g b)
 
@@ -205,9 +208,9 @@ abstract
     is-trunc-map k g → is-trunc-map k h → is-trunc-map k (g ∘ h)
   is-trunc-map-comp k g h is-trunc-g is-trunc-h x =
     is-trunc-is-equiv k
-        ( Σ (fib g x) (λ t → fib h (pr1 t)))
-        ( map-compute-fib-comp g h x)
-        ( is-equiv-map-compute-fib-comp g h x)
+        ( Σ (fiber g x) (λ t → fiber h (pr1 t)))
+        ( map-compute-fiber-comp g h x)
+        ( is-equiv-map-compute-fiber-comp g h x)
         ( is-trunc-Σ
           ( is-trunc-g x)
           ( λ t → is-trunc-h (pr1 t)))
@@ -259,8 +262,8 @@ abstract
       ( is-trunc-g (g b))
       ( is-trunc-is-equiv' k
         ( Σ A (λ z → g (h z) ＝ g b))
-        ( map-compute-fib-comp g h (g b))
-        ( is-equiv-map-compute-fib-comp g h (g b))
+        ( map-compute-fiber-comp g h (g b))
+        ( is-equiv-map-compute-fiber-comp g h (g b))
         ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
       ( pair b refl)
 
@@ -332,8 +335,8 @@ module _
     is-trunc-map-tot : ((x : A) → is-trunc-map k (f x)) → is-trunc-map k (tot f)
     is-trunc-map-tot H y =
       is-trunc-equiv k
-        ( fib (f (pr1 y)) (pr2 y))
-        ( compute-fib-tot f y)
+        ( fiber (f (pr1 y)) (pr2 y))
+        ( compute-fiber-tot f y)
         ( H (pr1 y) (pr2 y))
 
   abstract
@@ -341,8 +344,8 @@ module _
       is-trunc-map k (tot f) → ((x : A) → is-trunc-map k (f x))
     is-trunc-map-is-trunc-map-tot is-trunc-tot-f x z =
       is-trunc-equiv k
-        ( fib (tot f) (pair x z))
-        ( inv-compute-fib-tot f (pair x z))
+        ( fiber (tot f) (pair x z))
+        ( inv-compute-fiber-tot f (pair x z))
         ( is-trunc-tot-f (pair x z))
 
 module _
@@ -373,8 +376,8 @@ module _
     is-trunc-map k f → is-trunc-map k (map-Σ-map-base f C)
   is-trunc-map-map-Σ-map-base k {f} C H y =
     is-trunc-equiv' k
-      ( fib f (pr1 y))
-      ( equiv-fib-map-Σ-map-base-fib f C y)
+      ( fiber f (pr1 y))
+      ( equiv-fiber-map-Σ-map-base-fiber f C y)
       ( H (pr1 y))
 
   abstract

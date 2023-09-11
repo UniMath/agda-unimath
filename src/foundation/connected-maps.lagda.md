@@ -45,7 +45,7 @@ A map is said to be **`k`-connected** if its fibers are `k`-connected types.
 is-connected-map-Prop :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → Prop (l1 ⊔ l2)
 is-connected-map-Prop k {B = B} f =
-  Π-Prop B (λ b → is-connected-Prop k (fib f b))
+  Π-Prop B (λ b → is-connected-Prop k (fiber f b))
 
 is-connected-map :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
@@ -354,7 +354,9 @@ module _
 ### The type `Connected-Map-Into-Truncated-Type l2 k k A` is contractible
 
 This remains to be shown.
+[#733](https://github.com/UniMath/agda-unimath/issues/733)
 
-### The type `Connected-Map-Into-Truncated-Type l2 k l A` is `k - l - 2` truncated
+### The type `Connected-Map-Into-Truncated-Type l2 k l A` is `k - l - 2`-truncated
 
 This remains to be shown.
+[#733](https://github.com/UniMath/agda-unimath/issues/733)
