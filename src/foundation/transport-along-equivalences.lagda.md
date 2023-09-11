@@ -1,7 +1,7 @@
 # Transport along equivalences
 
 ```agda
-module foundation.transport-along-identifications-along-equivalences where
+module foundation.transport-along-equivalences where
 ```
 
 <details><summary>Imports</summary>
