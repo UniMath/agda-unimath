@@ -23,6 +23,7 @@ open import foundation.pullbacks
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-pullbacks
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import orthogonal-factorization-systems.lifting-squares
 ```

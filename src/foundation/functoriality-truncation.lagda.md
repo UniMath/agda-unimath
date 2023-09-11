@@ -19,6 +19,7 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

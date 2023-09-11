@@ -26,6 +26,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.embeddings-standard-finite-types

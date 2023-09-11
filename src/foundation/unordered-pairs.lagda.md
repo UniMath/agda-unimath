@@ -29,6 +29,7 @@ open import foundation-core.functoriality-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types

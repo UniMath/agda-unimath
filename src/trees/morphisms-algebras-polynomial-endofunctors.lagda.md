@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.polynomial-endofunctors

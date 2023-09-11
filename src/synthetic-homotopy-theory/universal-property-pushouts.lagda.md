@@ -26,6 +26,7 @@ open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
