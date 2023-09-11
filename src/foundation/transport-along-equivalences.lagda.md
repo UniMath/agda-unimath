@@ -186,7 +186,7 @@ eq-tr-equiv-action-equiv-family f {X} =
   ind-equiv
     ( λ Y e → tr-equiv f e ＝ action-equiv-family f e)
     ( compute-tr-equiv-id-equiv f ∙
-      inv (compute-action-equiv-family-id-equiv f X))
+      inv (compute-action-equiv-family-id-equiv f))
 
 eq-map-tr-equiv-map-action-equiv-family :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →

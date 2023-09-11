@@ -67,32 +67,25 @@ module _
   {l1 l2 : Level} (B : UU l1 → UU l2)
   where
 
-  unique-action-on-equivalences-family-of-types-universe :
+  unique-action-equiv-family :
     {X : UU l1} →
     is-contr (fiber (ev-id-equiv (λ Y e → B X ≃ B Y)) id-equiv)
-  unique-action-on-equivalences-family-of-types-universe =
+  unique-action-equiv-family =
     is-contr-map-ev-id-equiv (λ Y e → B _ ≃ B Y) id-equiv
 
-  action-on-equivalences-family-of-types-universe :
+  action-equiv-family :
     {X Y : UU l1} → (X ≃ Y) → B X ≃ B Y
-  action-on-equivalences-family-of-types-universe {X} {Y} =
-    pr1 (center (unique-action-on-equivalences-family-of-types-universe {X})) Y
+  action-equiv-family {X} {Y} =
+    equiv-eq ∘ action-equiv-function B
 
-  compute-id-equiv-action-on-equivalences-family-of-types-universe :
+  compute-action-equiv-family-id-equiv :
     {X : UU l1} →
-    action-on-equivalences-family-of-types-universe {X} {X} id-equiv ＝ id-equiv
-  compute-id-equiv-action-on-equivalences-family-of-types-universe {X} =
-    pr2 (center (unique-action-on-equivalences-family-of-types-universe {X}))
+    action-equiv-family {X} {X} id-equiv ＝ id-equiv
+  compute-action-equiv-family-id-equiv {X} =
+    ap equiv-eq (compute-action-equiv-function-id-equiv B X)
 
-action-equiv-family :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  X ≃ Y → f X ≃ f Y
-action-equiv-family f = equiv-eq ∘ action-equiv-function f
-
-map-action-equiv-family :
-  {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
-  X ≃ Y → f X → f Y
-map-action-equiv-family f = map-equiv ∘ action-equiv-family f
+  map-action-equiv-family : {X Y : UU l1} → X ≃ Y → B X → B Y
+  map-action-equiv-family = map-equiv ∘ action-equiv-family
 ```
 
 ## Properties
@@ -114,15 +107,15 @@ We claim that the square
 commutes for any two types `X Y : 𝒰` and any type family `B` over `𝒰`.
 
 ```agda
-coherence-square-action-on-equivalences-family-of-types-universe :
+coherence-square-action-equiv-family :
   {l1 l2 : Level} (B : UU l1 → UU l2) (X Y : UU l1) →
   coherence-square-maps
     ( ap B {X} {Y})
     ( equiv-eq)
     ( equiv-eq)
-    ( action-on-equivalences-family-of-types-universe B)
-coherence-square-action-on-equivalences-family-of-types-universe B X .X refl =
-  compute-id-equiv-action-on-equivalences-family-of-types-universe B
+    ( action-equiv-family B)
+coherence-square-action-equiv-family B X .X refl =
+  compute-action-equiv-family-id-equiv B
 ```
 
 ### The identity function acts trivially on equivalences
@@ -153,16 +146,6 @@ distributive-action-equiv-family-comp :
   action-equiv-family g ∘ action-equiv-family f
 distributive-action-equiv-family-comp g f {X} {Y} e =
   ap equiv-eq (distributive-action-equiv-function-comp g f {X} {Y} e)
-```
-
-### The action on equivalences of any map preserves `id-equiv`
-
-```agda
-compute-action-equiv-family-id-equiv :
-  {l1 l2 : Level} (f : UU l1 → UU l2) (A : UU l1) →
-  (action-equiv-family f id-equiv) ＝ id-equiv
-compute-action-equiv-family-id-equiv f A =
-  ap equiv-eq (compute-action-equiv-function-id-equiv f A)
 ```
 
 ### The action on equivalences of a constant map is constant

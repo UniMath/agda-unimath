@@ -13,6 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
 open import foundation.fibers-of-maps
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.sets
 open import foundation.subuniverses
 open import foundation.transport-along-identifications
@@ -55,28 +56,14 @@ module _
 
   action-equiv-family-over-subuniverse :
     (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y
-  action-equiv-family-over-subuniverse X =
-    pr1 (center (unique-action-equiv-family-over-subuniverse X))
+  action-equiv-family-over-subuniverse X Y =
+    equiv-eq ∘ ap B ∘ eq-equiv-subuniverse P
 
   compute-id-equiv-action-equiv-family-over-subuniverse :
     (X : type-subuniverse P) →
     action-equiv-family-over-subuniverse X X id-equiv ＝ id-equiv
   compute-id-equiv-action-equiv-family-over-subuniverse X =
-    pr2 (center (unique-action-equiv-family-over-subuniverse X))
-```
-
-```agda
-module _
-  { l1 l2 l3 : Level}
-  ( P : subuniverse l1 l2) (B : type-subuniverse P → UU l3)
-  where
-
-{-
-  action-equiv-family-on-subuniverse :
-    (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y
-  action-equiv-family-on-subuniverse X Y e =
-    equiv-tr B (eq-equiv-subuniverse P e)
-    -}
+    ap (equiv-eq ∘ ap B) (compute-eq-equiv-id-equiv-subuniverse P)
 ```
 
 ## Properties
