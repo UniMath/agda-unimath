@@ -13,7 +13,9 @@ open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.semigroups
 ```
 
 </details>
@@ -26,7 +28,9 @@ abelian groups distributes over addition from the left and from the right.
 
 ## Definition
 
-### Pointwise operations on morphisms between abelian groups
+### The abelian group of homomorphisms between two abelian groups
+
+#### Pointwise operations on morphisms between abelian groups
 
 ```agda
 module _
@@ -57,7 +61,7 @@ module _
     ( distributive-neg-add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B f y))
 ```
 
-### Associativity of pointwise addition of morphisms of abelian groups
+#### Associativity of pointwise addition of morphisms of abelian groups
 
 ```agda
 module _
@@ -66,9 +70,8 @@ module _
 
   associative-add-hom-Ab :
     (f g h : type-hom-Ab A B) →
-    Id
-      ( add-hom-Ab A B (add-hom-Ab A B f g) h)
-      ( add-hom-Ab A B f (add-hom-Ab A B g h))
+    add-hom-Ab A B (add-hom-Ab A B f g) h ＝
+    add-hom-Ab A B f (add-hom-Ab A B g h)
   associative-add-hom-Ab f g h =
     eq-htpy-hom-Ab A B
       ( λ x →
@@ -78,7 +81,7 @@ module _
           ( map-hom-Ab A B h x))
 ```
 
-### Commutativity of pointwise addition of morphisms of abelian groups
+#### Commutativity of pointwise addition of morphisms of abelian groups
 
 ```agda
 module _
@@ -86,13 +89,13 @@ module _
   where
 
   commutative-add-hom-Ab :
-    (f g : type-hom-Ab A B) → Id (add-hom-Ab A B f g) (add-hom-Ab A B g f)
+    (f g : type-hom-Ab A B) → add-hom-Ab A B f g ＝ add-hom-Ab A B g f
   commutative-add-hom-Ab f g =
     eq-htpy-hom-Ab A B
       ( λ x → commutative-add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B g x))
 ```
 
-### Unit laws for pointwise addition of morphisms of abelian groups
+#### Unit laws for pointwise addition of morphisms of abelian groups
 
 ```agda
 module _
@@ -100,17 +103,17 @@ module _
   where
 
   left-unit-law-add-hom-Ab :
-    (f : type-hom-Ab A B) → Id (add-hom-Ab A B (zero-hom-Ab A B) f) f
+    (f : type-hom-Ab A B) → add-hom-Ab A B (zero-hom-Ab A B) f ＝ f
   left-unit-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → left-unit-law-add-Ab B (map-hom-Ab A B f x))
 
   right-unit-law-add-hom-Ab :
-    (f : type-hom-Ab A B) → Id (add-hom-Ab A B f (zero-hom-Ab A B)) f
+    (f : type-hom-Ab A B) → add-hom-Ab A B f (zero-hom-Ab A B) ＝ f
   right-unit-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → right-unit-law-add-Ab B (map-hom-Ab A B f x))
 ```
 
-### Inverse laws for pointwise addition of morphisms of abelian groups
+#### Inverse laws for pointwise addition of morphisms of abelian groups
 
 ```agda
 module _
@@ -119,16 +122,44 @@ module _
 
   left-inverse-law-add-hom-Ab :
     (f : type-hom-Ab A B) →
-    Id (add-hom-Ab A B (neg-hom-Ab A B f) f) (zero-hom-Ab A B)
+    add-hom-Ab A B (neg-hom-Ab A B f) f ＝ zero-hom-Ab A B
   left-inverse-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → left-inverse-law-add-Ab B (map-hom-Ab A B f x))
 
   right-inverse-law-add-hom-Ab :
     (f : type-hom-Ab A B) →
-    Id (add-hom-Ab A B f (neg-hom-Ab A B f)) (zero-hom-Ab A B)
+    add-hom-Ab A B f (neg-hom-Ab A B f) ＝ zero-hom-Ab A B
   right-inverse-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → right-inverse-law-add-Ab B (map-hom-Ab A B f x))
 ```
+
+#### `hom G H` is an abelian group
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
+  where
+
+  semigroup-hom-Ab : Semigroup (l1 ⊔ l2)
+  pr1 semigroup-hom-Ab = hom-Ab A B
+  pr1 (pr2 semigroup-hom-Ab) = add-hom-Ab A B
+  pr2 (pr2 semigroup-hom-Ab) = associative-add-hom-Ab A B
+
+  group-hom-Ab : Group (l1 ⊔ l2)
+  pr1 group-hom-Ab = semigroup-hom-Ab
+  pr1 (pr1 (pr2 group-hom-Ab)) = zero-hom-Ab A B
+  pr1 (pr2 (pr1 (pr2 group-hom-Ab))) = left-unit-law-add-hom-Ab A B
+  pr2 (pr2 (pr1 (pr2 group-hom-Ab))) = right-unit-law-add-hom-Ab A B
+  pr1 (pr2 (pr2 group-hom-Ab)) = neg-hom-Ab A B
+  pr1 (pr2 (pr2 (pr2 group-hom-Ab))) = left-inverse-law-add-hom-Ab A B
+  pr2 (pr2 (pr2 (pr2 group-hom-Ab))) = right-inverse-law-add-hom-Ab A B
+
+  ab-hom-Ab : Ab (l1 ⊔ l2)
+  pr1 ab-hom-Ab = group-hom-Ab
+  pr2 ab-hom-Ab = commutative-add-hom-Ab A B
+```
+
+## Properties
 
 ### Distributivity of composition over pointwise addition of morphisms of abelian groups
 
@@ -139,9 +170,8 @@ module _
 
   left-distributive-comp-add-hom-Ab :
     (h : type-hom-Ab B C) (f g : type-hom-Ab A B) →
-    Id
-      ( comp-hom-Ab A B C h (add-hom-Ab A B f g))
-      ( add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g))
+    comp-hom-Ab A B C h (add-hom-Ab A B f g) ＝
+    add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g)
   left-distributive-comp-add-hom-Ab h f g =
     eq-htpy-hom-Ab A C
       ( λ x →
@@ -149,9 +179,29 @@ module _
 
   right-distributive-comp-add-hom-Ab :
     (g h : type-hom-Ab B C) (f : type-hom-Ab A B) →
-    Id
-      ( comp-hom-Ab A B C (add-hom-Ab B C g h) f)
-      ( add-hom-Ab A C (comp-hom-Ab A B C g f) (comp-hom-Ab A B C h f))
+    comp-hom-Ab A B C (add-hom-Ab B C g h) f ＝
+    add-hom-Ab A C (comp-hom-Ab A B C g f) (comp-hom-Ab A B C h f)
   right-distributive-comp-add-hom-Ab g h f =
     eq-htpy-hom-Ab A C (λ x → refl)
+```
+
+### Evaluation at an element is a group homomorphism `hom A B → A`
+
+```agda
+module _
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (a : type-Ab A)
+  where
+
+  ev-element-hom-Ab : type-hom-Ab A B → type-Ab B
+  ev-element-hom-Ab f = map-hom-Ab A B f a
+
+  preserves-add-ev-element-hom-Ab :
+    (f g : type-hom-Ab A B) →
+    ev-element-hom-Ab (add-hom-Ab A B f g) ＝
+    add-Ab B (ev-element-hom-Ab f) (ev-element-hom-Ab g)
+  preserves-add-ev-element-hom-Ab f g = refl
+
+  hom-ev-element-hom-Ab : type-hom-Ab (ab-hom-Ab A B) B
+  pr1 hom-ev-element-hom-Ab = ev-element-hom-Ab
+  pr2 hom-ev-element-hom-Ab = preserves-add-ev-element-hom-Ab
 ```

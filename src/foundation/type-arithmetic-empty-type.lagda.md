@@ -47,7 +47,7 @@ module _
 
   is-equiv-pr1-prod-empty : is-equiv (pr1 {A = empty} {B = λ t → X})
   is-equiv-pr1-prod-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       inv-pr1-prod-empty
       is-section-inv-pr1-prod-empty
       is-retraction-inv-pr1-prod-empty
@@ -70,7 +70,7 @@ module _
 
   is-equiv-pr1-prod-is-empty : is-equiv (pr1 {A = A} {B = λ a → B})
   is-equiv-pr1-prod-is-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       inv-pr1-prod-is-empty
       is-section-inv-pr1-prod-is-empty
       is-retraction-inv-pr1-prod-is-empty
@@ -98,7 +98,7 @@ module _
 
   is-equiv-pr2-prod-empty : is-equiv (pr2 {A = X} {B = λ x → empty})
   is-equiv-pr2-prod-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       inv-pr2-prod-empty
       is-section-inv-pr2-prod-empty
       is-retraction-inv-pr2-prod-empty
@@ -121,7 +121,7 @@ module _
 
   is-equiv-pr2-prod-is-empty : is-equiv (pr2 {A = A} {B = λ a → B})
   is-equiv-pr2-prod-is-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       inv-pr2-prod-is-empty
       is-section-inv-pr2-prod-is-empty
       is-retraction-inv-pr2-prod-is-empty
@@ -239,7 +239,7 @@ module _
   is-equiv-map-left-unit-law-coprod-is-empty :
     is-equiv map-left-unit-law-coprod-is-empty
   is-equiv-map-left-unit-law-coprod-is-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-left-unit-law-coprod-is-empty
       is-section-map-inv-left-unit-law-coprod-is-empty
       is-retraction-map-inv-left-unit-law-coprod-is-empty
@@ -251,7 +251,7 @@ module _
   is-equiv-inr-is-empty :
     is-equiv inr
   is-equiv-inr-is-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-left-unit-law-coprod-is-empty)
       ( is-retraction-map-inv-left-unit-law-coprod-is-empty)
       ( is-section-map-inv-left-unit-law-coprod-is-empty)
@@ -338,14 +338,14 @@ module _
   is-equiv-map-right-unit-law-coprod-is-empty :
     is-equiv map-right-unit-law-coprod-is-empty
   is-equiv-map-right-unit-law-coprod-is-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-right-unit-law-coprod-is-empty
       is-section-map-inv-right-unit-law-coprod-is-empty
       is-retraction-map-inv-right-unit-law-coprod-is-empty
 
   is-equiv-inl-is-empty : is-equiv (inl {l1} {l2} {A} {B})
   is-equiv-inl-is-empty =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-right-unit-law-coprod-is-empty)
       ( is-retraction-map-inv-right-unit-law-coprod-is-empty)
       ( is-section-map-inv-right-unit-law-coprod-is-empty)

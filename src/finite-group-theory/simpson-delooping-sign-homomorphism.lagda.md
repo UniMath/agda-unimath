@@ -304,7 +304,7 @@ module _
         ( X , unit-trunc-Prop (equiv-count eX)))
       ( equiv-count eX ∘e transposition-eX)
   pr2 equiv-Fin-2-quotient-sign-comp-count =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ T →
         inv-Fin-2-quotient-sign-comp-count T
           ( is-decidable-is-in-equivalence-class-is-decidable
@@ -597,7 +597,7 @@ module _
     (Fin n ≃ type-UU-Fin n X) ≃ (Fin n ≃ type-UU-Fin n X')
   pr1 (simpson-comp-equiv X X' e) = map-simpson-comp-equiv X X' e
   pr2 (simpson-comp-equiv X X' e) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-simpson-comp-equiv X' X (inv-equiv e))
       ( λ f →
         ( inv (associative-comp-equiv f (inv-equiv e) e)) ∙

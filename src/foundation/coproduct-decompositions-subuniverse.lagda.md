@@ -376,7 +376,7 @@ module _
     pr1 equiv-reassociate-left-iterated-coproduct-Decomposition-subuniverse =
       map-reassociate-left-iterated-coproduct-Decomposition-subuniverse
     pr2 equiv-reassociate-left-iterated-coproduct-Decomposition-subuniverse =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-reassociate-left-iterated-coproduct-Decomposition-subuniverse
         refl-htpy
         refl-htpy
@@ -452,7 +452,7 @@ module _
     pr1 equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse =
       map-reassociate-right-iterated-coproduct-Decomposition-subuniverse
     pr2 equiv-reassociate-right-iterated-coproduct-Decomposition-subuniverse =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         map-inv-reassociate-right-iterated-coproduct-Decomposition-subuniverse
         refl-htpy
         refl-htpy

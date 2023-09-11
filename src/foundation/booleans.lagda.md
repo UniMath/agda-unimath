@@ -163,7 +163,7 @@ abstract
 equiv-bool-Fin-two-ℕ : Fin 2 ≃ bool
 pr1 equiv-bool-Fin-two-ℕ = bool-Fin-two-ℕ
 pr2 equiv-bool-Fin-two-ℕ =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( Fin-two-ℕ-bool)
     ( is-section-Fin-two-ℕ-bool)
     ( is-retraction-Fin-two-ℕ-bool)

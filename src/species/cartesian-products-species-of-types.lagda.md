@@ -46,5 +46,5 @@ equiv-universal-property-exponents-species-types :
   hom-species-types (prod-species-types F G) H ≃
   hom-species-types F (function-species-types G H)
 equiv-universal-property-exponents-species-types F G H =
-  equiv-map-Π (λ X → equiv-ev-pair)
+  equiv-Π-equiv-family (λ X → equiv-ev-pair)
 ```

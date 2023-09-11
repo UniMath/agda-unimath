@@ -74,7 +74,7 @@ module _
 
   is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
   is-equiv-tr p =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( tr-inv p)
       ( is-retraction-tr p)
       ( is-section-tr p)

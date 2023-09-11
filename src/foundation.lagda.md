@@ -150,6 +150,7 @@ open import foundation.inhabited-types public
 open import foundation.injective-maps public
 open import foundation.interchange-law public
 open import foundation.intersections-subtypes public
+open import foundation.invertible-maps public
 open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public

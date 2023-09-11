@@ -18,7 +18,7 @@ open import foundation-core.truncation-levels
 ## Idea
 
 The 0-image of a map `f : A → B` is the type
-`0-im f := Σ (b : B), type-trunc-Set (fib f b)`. The map `A → 0-im f` is
+`0-im f := Σ (b : B), type-trunc-Set (fiber f b)`. The map `A → 0-im f` is
 0-connected and the map `0-im f → B` is `0`-truncated.
 
 ## Definition

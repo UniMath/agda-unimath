@@ -152,7 +152,7 @@ is-retraction-inv-map-equiv-Fin-one-ℕ (inr star) = refl
 
 is-equiv-map-equiv-Fin-one-ℕ : is-equiv map-equiv-Fin-one-ℕ
 is-equiv-map-equiv-Fin-one-ℕ =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     inv-map-equiv-Fin-one-ℕ
     is-section-inv-map-equiv-Fin-one-ℕ
     is-retraction-inv-map-equiv-Fin-one-ℕ

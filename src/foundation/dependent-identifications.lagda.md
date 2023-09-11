@@ -81,7 +81,7 @@ module _
     (q' : dependent-identification B q x' y') →
     is-equiv (map-compute-dependent-identification² α p' q')
   is-equiv-map-compute-dependent-identification² α p' q' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( map-inv-compute-dependent-identification² α p' q')
       ( is-section-map-inv-compute-dependent-identification² α p' q')
       ( is-retraction-map-inv-compute-dependent-identification² α p' q')

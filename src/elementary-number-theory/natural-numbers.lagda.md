@@ -220,7 +220,7 @@ is-section-map-inv-equiv-ℕ (inr n) = refl
 equiv-ℕ : ℕ ≃ (unit + ℕ)
 pr1 equiv-ℕ = map-equiv-ℕ
 pr2 equiv-ℕ =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     map-inv-equiv-ℕ
     is-section-map-inv-equiv-ℕ
     is-retraction-map-inv-equiv-ℕ

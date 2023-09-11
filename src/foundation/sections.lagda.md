@@ -10,6 +10,7 @@ open import foundation-core.sections public
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.structure-identity-principle
@@ -19,7 +20,6 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -61,8 +61,17 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
+  coherence-htpy-section :
+    (s t : section f) → (map-section f s ~ map-section f t) → UU l2
+  coherence-htpy-section s t H =
+    coherence-triangle-homotopies
+      ( is-section-map-section f s)
+      ( is-section-map-section f t)
+      ( f ·l H)
+
   htpy-section : (s t : section f) → UU (l1 ⊔ l2)
-  htpy-section s t = Σ (pr1 s ~ pr1 t) (λ H → pr2 s ~ ((f ·l H) ∙h pr2 t))
+  htpy-section s t =
+    Σ (map-section f s ~ map-section f t) (coherence-htpy-section s t)
 
   extensionality-section : (s t : section f) → (s ＝ t) ≃ htpy-section s t
   extensionality-section (s , H) =
@@ -75,7 +84,9 @@ module _
 
   eq-htpy-section :
     (s t : section f)
-    (H : (pr1 s) ~ (pr1 t)) (K : (pr2 s) ~ ((f ·l H) ∙h (pr2 t))) → s ＝ t
+    (H : map-section f s ~ map-section f t)
+    (K : coherence-htpy-section s t H) →
+    s ＝ t
   eq-htpy-section s t H K =
     map-inv-equiv (extensionality-section s t) (H , K)
 ```

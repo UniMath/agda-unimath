@@ -519,7 +519,7 @@ module _
             ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
-              ( ( equiv-map-Π
+              ( ( equiv-Π-equiv-family
                   ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
                 ( ( equiv-ev-pair) ∘e
                   ( equiv-universal-property-trunc-Set
