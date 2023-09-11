@@ -44,7 +44,8 @@ module _
 
   action-equiv-family-on-subuniverse :
     (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y
-  action-equiv-family-on-subuniverse X Y e = equiv-tr B (eq-equiv-subuniverse P e)
+  action-equiv-family-on-subuniverse X Y e =
+    equiv-tr B (eq-equiv-subuniverse P e)
 ```
 
 ## Properties
@@ -78,7 +79,8 @@ module _
     F X id-equiv → (Y : type-subuniverse P) (e : pr1 X ≃ pr1 Y) →
     F Y (action-equiv-family-on-subuniverse X Y e)
   Ind-action-equiv-family-on-subuniverse X F p Y e =
-    Ind-path-action-equiv-family-on-subuniverse X F p Y (eq-equiv-subuniverse P e)
+    Ind-path-action-equiv-family-on-subuniverse X F p Y
+      ( eq-equiv-subuniverse P e)
 
   is-contr-preserves-id-action-equiv-family-on-subuniverse :
     ( (X : type-subuniverse P) → is-set (B X)) →
@@ -94,7 +96,8 @@ module _
     eq-pair-Σ
       ( eq-htpy (λ X → eq-htpy (λ Y → eq-htpy (λ e →
         lemma2 action-equiv-family-on-subuniverse D
-          (λ X → preserves-id-equiv-action-equiv-family-on-subuniverse X ∙ inv (p X))
+          ( λ X →
+            preserves-id-equiv-action-equiv-family-on-subuniverse X ∙ inv (p X))
           X Y e))))
       ( eq-is-prop
         ( is-prop-Π

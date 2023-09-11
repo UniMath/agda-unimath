@@ -146,7 +146,8 @@ eq-transpose-map-tr-equiv' f e {u} p =
 ```agda
 substitution-map-tr-equiv :
   {l1 l2 l3 : Level} (g : UU l2 → UU l3) (f : UU l1 → UU l2) {X Y : UU l1}
-  (e : X ≃ Y) → map-tr-equiv g (action-equiv-family f e) ~ map-tr-equiv (g ∘ f) e
+  (e : X ≃ Y) →
+  map-tr-equiv g (action-equiv-family f e) ~ map-tr-equiv (g ∘ f) e
 substitution-map-tr-equiv g f {X} {Y} e X' =
   ( ap (λ p → tr g p X') (is-retraction-eq-equiv (action-equiv-function f e))) ∙
   ( substitution-law-tr g f (eq-equiv X Y e))
@@ -167,7 +168,9 @@ compute-map-tr-equiv-action-equiv-family :
   {X Y : UU l1} (e : X ≃ Y) (X' : B X) →
   map-tr-equiv D (action-equiv-family f e) (g X X') ＝ g Y (map-tr-equiv B e X')
 compute-map-tr-equiv-action-equiv-family {D = D} f g {X} {Y} e X' =
-  ( ap (λ p → tr D p (g X X')) (is-retraction-eq-equiv (action-equiv-function f e))) ∙
+  ( ap
+    ( λ p → tr D p (g X X'))
+    ( is-retraction-eq-equiv (action-equiv-function f e))) ∙
   ( tr-ap f g (eq-equiv X Y e) X')
 ```
 
@@ -180,10 +183,12 @@ eq-tr-equiv-action-equiv-family :
 eq-tr-equiv-action-equiv-family f {X} =
   ind-equiv X
     ( λ Y e → tr-equiv f e ＝ action-equiv-family f e)
-    ( compute-tr-equiv-id-equiv f ∙ inv (compute-action-equiv-family-id-equiv f X))
+    ( compute-tr-equiv-id-equiv f ∙
+      inv (compute-action-equiv-family-id-equiv f X))
 
 eq-map-tr-equiv-map-action-equiv-family :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
   (e : X ≃ Y) → map-tr-equiv f e ＝ map-action-equiv-family f e
-eq-map-tr-equiv-map-action-equiv-family f e = ap map-equiv (eq-tr-equiv-action-equiv-family f e)
+eq-map-tr-equiv-map-action-equiv-family f e =
+  ap map-equiv (eq-tr-equiv-action-equiv-family f e)
 ```
