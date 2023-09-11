@@ -8,6 +8,7 @@ module commutative-algebra where
 open import commutative-algebra.binomial-theorem-commutative-rings public
 open import commutative-algebra.binomial-theorem-commutative-semirings public
 open import commutative-algebra.boolean-rings public
+open import commutative-algebra.category-of-commutative-rings public
 open import commutative-algebra.commutative-rings public
 open import commutative-algebra.commutative-semirings public
 open import commutative-algebra.dependent-products-commutative-rings public

@@ -2,11 +2,13 @@
 
 ## Examples of categories and large categories
 
-| Category   | File                                                                            |
-| ---------- | ------------------------------------------------------------------------------- |
-| Groups     | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)         |
-| Semigroups | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md) |
-| Sets       | [`foundation.category-of-sets`](foundation.category-of-sets.md)                 |
+| Category          | File                                                                                                        |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| Commutative Rings | [`commutative-algebra.category-of-commutative-rings`](commutative-algebra.category-of-commutative-rings.md) |
+| Groups            | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)                                     |
+| Rings             | [`ring-theory.category-of-rings`](ring-theory.category-of-rings.md)                                         |
+| Semigroups        | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md)                             |
+| Sets              | [`foundation.category-of-sets`](foundation.category-of-sets.md)                                             |
 
 ## Examples of precategories and large precategories
 
