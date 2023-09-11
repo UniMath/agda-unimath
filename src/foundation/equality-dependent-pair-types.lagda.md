@@ -109,6 +109,18 @@ module _
   pr1-pair-eq-Σ-ap refl = refl
 ```
 
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {Y : UU l3} (f : Σ A B → Y)
+  where
+
+  ap-eq-pair-Σ :
+    { x y : A} (p : x ＝ y) {b : B x} {b' : B y} →
+    ( q : dependent-identification B p b b') →
+    ap f (eq-pair-Σ p q) ＝ (ap f (eq-pair-Σ p refl) ∙ ap (ev-pair f y) q)
+  ap-eq-pair-Σ refl refl = refl
+```
+
 ## See also
 
 - Equality proofs in cartesian product types are characterized in
