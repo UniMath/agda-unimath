@@ -14,7 +14,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.symmetric-binary-relations
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -63,14 +63,14 @@ module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  symmetric-core-Relation : symmetric-binary-relation l2 A
+  symmetric-core-Relation : Symmetric-Relation l2 A
   symmetric-core-Relation p =
     (i : type-unordered-pair p) →
     R (element-unordered-pair p i) (other-element-unordered-pair p i)
 
   counit-symmetric-core-Relation :
     {x y : A} →
-    relation-symmetric-binary-relation symmetric-core-Relation x y → R x y
+    relation-Symmetric-Relation symmetric-core-Relation x y → R x y
   counit-symmetric-core-Relation {x} {y} r =
     tr
       ( R x)
@@ -85,22 +85,22 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} (R : Relation l2 A)
-  (S : symmetric-binary-relation l3 A)
+  (S : Symmetric-Relation l3 A)
   where
 
   map-universal-property-symmetric-core-Relation :
-    hom-symmetric-binary-relation S (symmetric-core-Relation R) →
-    hom-Relation (relation-symmetric-binary-relation S) R
+    hom-Symmetric-Relation S (symmetric-core-Relation R) →
+    hom-Relation (relation-Symmetric-Relation S) R
   map-universal-property-symmetric-core-Relation f x y s =
     counit-symmetric-core-Relation R (f (standard-unordered-pair x y) s)
 
   map-inv-universal-property-symmetric-core-Relation :
-    hom-Relation (relation-symmetric-binary-relation S) R →
-    hom-symmetric-binary-relation S (symmetric-core-Relation R)
+    hom-Relation (relation-Symmetric-Relation S) R →
+    hom-Symmetric-Relation S (symmetric-core-Relation R)
   map-inv-universal-property-symmetric-core-Relation f p s i =
     f ( element-unordered-pair p i)
       ( other-element-unordered-pair p i)
-      ( tr-inv-symmetric-binary-relation S
+      ( tr-inv-Symmetric-Relation S
         ( standard-unordered-pair
           ( element-unordered-pair p i)
           ( other-element-unordered-pair p i))
