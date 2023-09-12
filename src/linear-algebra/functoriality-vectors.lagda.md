@@ -16,6 +16,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import linear-algebra.vectors
 ```

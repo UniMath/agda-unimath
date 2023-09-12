@@ -26,6 +26,7 @@ open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
@@ -356,18 +357,20 @@ universal-property-pushout-is-equiv' f g (i , j , H) is-equiv-g is-equiv-i {l} =
       ( is-equiv-precomp-is-equiv i is-equiv-i T))
 ```
 
-### Horizontal composition of pushouts
+### The pushout pasting lemmas
+
+#### The horizontal pushout pasting lemma
 
 If in the following diagram both squares are pushouts, then the outer square is
 a pushout as well.
 
 ```text
       g       k
-  A ----> B ----> C
-  |       |       |
- f|       |       |
-  v       v       v
-  X ----> Y ----> Z
+   A ----> B ----> C
+   |       |       |
+  f|       |       |
+   v       v       v
+   X ----> Y ----> Z
 ```
 
 ```agda
@@ -451,22 +454,22 @@ universal-property-pushout-rectangle-universal-property-pushout-right
             ( W))))
 ```
 
-### The vertical pushout pasting lemma
+#### The vertical pushout pasting lemma
 
 If in the following diagram both squares are pushouts, then the outer square is
 a pushout as well.
 
 ```text
-     g
- A -----> X
- |        |
-f|        |
- v        v
- B -----> Y
- |        |
-k|        |
- v        v
- C -----> Z
+       g
+   A -----> X
+   |        |
+  f|        |
+   v        v
+   B -----> Y
+   |        |
+  k|        |
+   v        v
+   C -----> Z
 ```
 
 ```agda
