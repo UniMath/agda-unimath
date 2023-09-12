@@ -176,6 +176,16 @@ explanations, allows readers to gain a conceptual understanding of the code's
 purpose, and contributes towards making `agda-unimath` an informative resource
 of formalized mathematics from a univalent point of view.
 
+Note that in the process of writing comments for code, the question may come up
+whether an anonymous module can extend across multiple code blocks and their
+comments in between. This is indeed possible. We recommend, however, that
+modules should not extend over markdown section headers of any level. The
+sections and subsections in markdown are typically used to focus on a specific
+definition, property, or example, and in this case it is good to start a new
+anonymous module to display the context for the topic of that section.
+Furthermore, it helps the maintainability of the library if modules don't extend
+across too many code blocks.
+
 Note that for consistency across the library, our convention is to use US
 English in comments and other explanatory or introductory texts.
 
