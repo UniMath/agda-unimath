@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import foundation-core.function-types
 open import foundation-core.functoriality-function-types

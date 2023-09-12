@@ -30,6 +30,7 @@ open import foundation-core.identity-types
 open import foundation-core.small-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
