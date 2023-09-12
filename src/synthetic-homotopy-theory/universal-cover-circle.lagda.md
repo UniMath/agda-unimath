@@ -12,7 +12,6 @@ open import elementary-number-theory.universal-property-integers
 
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
@@ -28,7 +27,6 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels

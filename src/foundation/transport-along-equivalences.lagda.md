@@ -8,12 +8,12 @@ module foundation.transport-along-equivalences where
 
 ```agda
 open import foundation.action-on-equivalences-functions
+open import foundation.action-on-equivalences-type-families
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
@@ -182,10 +182,10 @@ eq-tr-equiv-action-equiv-family :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →
   (e : X ≃ Y) → tr-equiv f e ＝ action-equiv-family f e
 eq-tr-equiv-action-equiv-family f {X} =
-  ind-equiv X
+  ind-equiv
     ( λ Y e → tr-equiv f e ＝ action-equiv-family f e)
     ( compute-tr-equiv-id-equiv f ∙
-      inv (compute-action-equiv-family-id-equiv f X))
+      inv (compute-action-equiv-family-id-equiv f))
 
 eq-map-tr-equiv-map-action-equiv-family :
   {l1 l2 : Level} (f : UU l1 → UU l2) {X Y : UU l1} →

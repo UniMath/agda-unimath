@@ -10,7 +10,6 @@ module ring-theory.category-of-rings where
 open import category-theory.categories
 open import category-theory.large-categories
 
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.universe-levels
 
 open import ring-theory.isomorphisms-rings
