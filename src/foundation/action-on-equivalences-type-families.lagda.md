@@ -27,16 +27,16 @@ open import foundation-core.equivalences
 
 ## Ideas
 
-Given a [subuniverse](foundation.subuniverses.md) `P`, any family of types `B`
-indexed by types of `P` has an **action on equivalences**
+Any family of types `B : 𝒰 → 𝒱` over a universe `𝒰` has an **action on
+equivalences**
 
 ```text
   (A ≃ B) → P A ≃ P B
 ```
 
 obtained by [equivalence induction](foundation.equivalence-induction.md). The
-acion on equivalences of a type family `B` on a subuniverse `P` of `𝒰` is such
-that `B id-equiv ＝ id-equiv`, and fits in a
+acion on equivalences of a type family `B` on a universe `𝒰` is uniquely
+determined by the identification `B id-equiv ＝ id-equiv`, and fits in a
 [commuting square](foundation.commuting-squares-of-maps.md)
 
 ```text
@@ -48,6 +48,12 @@ that `B id-equiv ＝ id-equiv`, and fits in a
         (X ≃ Y) ---------> (B X ≃ B Y).
                      B
 ```
+
+Note that in general -- in particular in our general constructions below -- we
+need the univalence axiom to construct the action on equivalences of a family of
+types. However, for many specific type families that are defined in terms of the
+basic type constructors, we can construct the action on equivalences directly
+without invoking the univalence axiom.
 
 ## Definitions
 

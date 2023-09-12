@@ -8,6 +8,9 @@ module foundation.action-on-equivalences-functions where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.equivalence-induction
 open import foundation.equivalences
 open import foundation.univalence
 open import foundation.universe-levels
@@ -35,23 +38,29 @@ luckily, these two notions coincide.
 ## Definition
 
 ```agda
-action-equiv-function :
-  {l1 l2 : Level} {B : UU l2} (f : UU l1 → B) {X Y : UU l1} →
-  X ≃ Y → f X ＝ f Y
-action-equiv-function f {X} {Y} e = ap f (eq-equiv X Y e)
+module _
+  {l1 l2 : Level} {B : UU l2} (f : UU l1 → B)
+  where
+
+  unique-action-equiv-function :
+    (X : UU l1) →
+    is-contr (Σ ((Y : UU l1) → X ≃ Y → f X ＝ f Y) (λ h → h X id-equiv ＝ refl))
+  unique-action-equiv-function X =
+    is-contr-map-ev-id-equiv
+      ( λ Y e → f X ＝ f Y)
+      ( refl)
+
+  action-equiv-function :
+    {X Y : UU l1} → X ≃ Y → f X ＝ f Y
+  action-equiv-function {X} {Y} e = ap f (eq-equiv X Y e)
+
+  compute-action-equiv-function-id-equiv :
+    (X : UU l1) → action-equiv-function id-equiv ＝ refl
+  compute-action-equiv-function-id-equiv X =
+    ap (ap f) (compute-eq-equiv-id-equiv X)
 ```
 
 ## Properties
-
-### The action on equivalences of any map preserves `id-equiv`
-
-```agda
-compute-action-equiv-function-id-equiv :
-  {l1 l2 : Level} {B : UU l2} (f : UU l1 → B) (A : UU l1) →
-  (action-equiv-function f id-equiv) ＝ refl
-compute-action-equiv-function-id-equiv f A =
-  ap (ap f) (compute-eq-equiv-id-equiv A)
-```
 
 ### The action on equivalences of a constant map is constant
 
