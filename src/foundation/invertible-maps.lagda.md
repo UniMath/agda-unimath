@@ -29,6 +29,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

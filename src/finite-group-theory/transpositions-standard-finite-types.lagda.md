@@ -28,6 +28,7 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import lists.functoriality-lists
 open import lists.lists
