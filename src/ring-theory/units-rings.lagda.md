@@ -1,6 +1,8 @@
 # Unit elements in rings
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module ring-theory.units-rings where
 ```
 
