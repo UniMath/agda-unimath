@@ -11,6 +11,7 @@ open import foundation.0-maps public
 open import foundation.1-types public
 open import foundation.2-types public
 open import foundation.action-on-equivalences-functions public
+open import foundation.action-on-equivalences-functions-out-of-subuniverses public
 open import foundation.action-on-equivalences-type-families public
 open import foundation.action-on-equivalences-type-families-over-subuniverses public
 open import foundation.action-on-identifications-binary-functions public
