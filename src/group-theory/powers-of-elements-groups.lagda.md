@@ -7,26 +7,17 @@ module group-theory.powers-of-elements-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.iterating-automorphisms
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.powers-of-elements-monoids
-
-open import structured-types.initial-pointed-type-equipped-with-automorphism
 ```
 
 </details>

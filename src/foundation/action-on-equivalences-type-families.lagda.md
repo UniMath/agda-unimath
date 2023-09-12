@@ -11,25 +11,16 @@ open import foundation.action-on-equivalences-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps
 open import foundation.constant-maps
-open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
 open import foundation.fibers-of-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.sets
-open import foundation.subuniverses
-open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
-open import foundation-core.injective-maps
-open import foundation-core.propositions
-open import foundation-core.subtypes
 ```
 
 </details>

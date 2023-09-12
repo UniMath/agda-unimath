@@ -14,7 +14,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels

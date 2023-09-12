@@ -7,10 +7,8 @@ module foundation.symmetric-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-equivalences-type-families
 open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
-open import foundation.binary-transport
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalences
