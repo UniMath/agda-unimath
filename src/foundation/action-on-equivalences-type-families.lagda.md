@@ -64,11 +64,12 @@ module _
   {l1 l2 : Level} (B : UU l1 → UU l2)
   where
 
-  unique-action-equiv-family :
-    {X : UU l1} →
-    is-contr (fiber (ev-id-equiv (λ Y e → B X ≃ B Y)) id-equiv)
-  unique-action-equiv-family =
-    is-contr-map-ev-id-equiv (λ Y e → B _ ≃ B Y) id-equiv
+  abstract
+    unique-action-equiv-family :
+      {X : UU l1} →
+      is-contr (fiber (ev-id-equiv (λ Y e → B X ≃ B Y)) id-equiv)
+    unique-action-equiv-family =
+      is-contr-map-ev-id-equiv (λ Y e → B _ ≃ B Y) id-equiv
 
   action-equiv-family :
     {X Y : UU l1} → (X ≃ Y) → B X ≃ B Y

@@ -41,11 +41,13 @@ module _
   ( P : subuniverse l1 l2) (B : type-subuniverse P → UU l3)
   where
 
-  unique-action-equiv-family-over-subuniverse :
-    (X : type-subuniverse P) →
-    is-contr (fiber (ev-id-equiv-subuniverse P X {λ Y e → B X ≃ B Y}) id-equiv)
-  unique-action-equiv-family-over-subuniverse X =
-    is-contr-map-ev-id-equiv-subuniverse P X (λ Y e → B X ≃ B Y) id-equiv
+  abstract
+    unique-action-equiv-family-over-subuniverse :
+      (X : type-subuniverse P) →
+      is-contr
+        ( fiber (ev-id-equiv-subuniverse P X {λ Y e → B X ≃ B Y}) id-equiv)
+    unique-action-equiv-family-over-subuniverse X =
+      is-contr-map-ev-id-equiv-subuniverse P X (λ Y e → B X ≃ B Y) id-equiv
 
   action-equiv-family-over-subuniverse :
     (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y

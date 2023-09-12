@@ -53,15 +53,16 @@ module _
   {B : UU l3} (f : type-subuniverse P → B)
   where
 
-  unique-action-equiv-function-subuniverse :
-    (X : type-subuniverse P) →
-    is-contr
-      ( Σ ( (Y : type-subuniverse P) → equiv-subuniverse P X Y → f X ＝ f Y)
-          ( λ h → h X id-equiv ＝ refl))
-  unique-action-equiv-function-subuniverse X =
-    is-contr-map-ev-id-equiv-subuniverse P X
-      ( λ Y e → f X ＝ f Y)
-      ( refl)
+  abstract
+    unique-action-equiv-function-subuniverse :
+      (X : type-subuniverse P) →
+      is-contr
+        ( Σ ( (Y : type-subuniverse P) → equiv-subuniverse P X Y → f X ＝ f Y)
+            ( λ h → h X id-equiv ＝ refl))
+    unique-action-equiv-function-subuniverse X =
+      is-contr-map-ev-id-equiv-subuniverse P X
+        ( λ Y e → f X ＝ f Y)
+        ( refl)
 
   action-equiv-function-subuniverse :
     (X Y : type-subuniverse P) → equiv-subuniverse P X Y → f X ＝ f Y

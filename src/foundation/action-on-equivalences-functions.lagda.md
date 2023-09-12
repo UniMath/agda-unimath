@@ -42,13 +42,15 @@ module _
   {l1 l2 : Level} {B : UU l2} (f : UU l1 → B)
   where
 
-  unique-action-equiv-function :
-    (X : UU l1) →
-    is-contr (Σ ((Y : UU l1) → X ≃ Y → f X ＝ f Y) (λ h → h X id-equiv ＝ refl))
-  unique-action-equiv-function X =
-    is-contr-map-ev-id-equiv
-      ( λ Y e → f X ＝ f Y)
-      ( refl)
+  abstract
+    unique-action-equiv-function :
+      (X : UU l1) →
+      is-contr
+        ( Σ ((Y : UU l1) → X ≃ Y → f X ＝ f Y) (λ h → h X id-equiv ＝ refl))
+    unique-action-equiv-function X =
+      is-contr-map-ev-id-equiv
+        ( λ Y e → f X ＝ f Y)
+        ( refl)
 
   action-equiv-function :
     {X Y : UU l1} → X ≃ Y → f X ＝ f Y
