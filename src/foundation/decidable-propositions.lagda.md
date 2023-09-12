@@ -170,6 +170,10 @@ pr2 (iff-universes-Decidable-Prop l l' P) p =
 is-set-Decidable-Prop : {l : Level} → is-set (Decidable-Prop l)
 is-set-Decidable-Prop {l} =
   is-set-equiv bool equiv-bool-Decidable-Prop is-set-bool
+
+Decidable-Prop-Set : (l : Level) → Set (lsuc l)
+pr1 (Decidable-Prop-Set l) = Decidable-Prop l
+pr2 (Decidable-Prop-Set l) = is-set-Decidable-Prop
 ```
 
 ### Extensionality of decidable propositions
@@ -230,6 +234,13 @@ abstract
     is-decidable (type-Prop P) → is-finite (type-Prop P)
   is-finite-is-decidable-Prop P x =
     is-finite-count (count-is-decidable-Prop P x)
+
+is-finite-type-Decidable-Prop :
+  {l : Level} (P : Decidable-Prop l) → is-finite (type-Decidable-Prop P)
+is-finite-type-Decidable-Prop P =
+  is-finite-is-decidable-Prop
+    ( prop-Decidable-Prop P)
+    ( is-decidable-Decidable-Prop P)
 ```
 
 ### The type of decidable propositions of any universe level is finite

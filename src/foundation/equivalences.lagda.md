@@ -15,7 +15,6 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.functoriality-fibers-of-maps
-open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.truncated-maps
 open import foundation.type-theoretic-principle-of-choice
@@ -261,37 +260,6 @@ module _
     is-equiv f ≃ is-equiv (f ∘ map-equiv e)
   equiv-is-equiv-right-factor e {f} =
     equiv-is-equiv-right-factor-htpy e (f ∘ map-equiv e) refl-htpy
-```
-
-### Homotopy induction for homotopies between equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    Ind-htpy-equiv :
-      {l3 : Level} (e : A ≃ B)
-      (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-      section
-        ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
-          h e (refl-htpy-equiv e))
-    Ind-htpy-equiv e =
-      Ind-identity-system e
-        ( refl-htpy-equiv e)
-        ( is-contr-total-htpy-equiv e)
-
-  ind-htpy-equiv :
-    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-    P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
-  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
-
-  compute-ind-htpy-equiv :
-    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
-    (p : P e (refl-htpy-equiv e)) →
-    ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
 ### The groupoid laws for equivalences

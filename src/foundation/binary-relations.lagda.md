@@ -124,6 +124,17 @@ module _
   is-antisymmetric-Relation-Prop = is-antisymmetric (type-Relation-Prop R)
 ```
 
+### Morphisms of binary relations
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  hom-Relation : Relation l2 A → Relation l3 A → UU (l1 ⊔ l2 ⊔ l3)
+  hom-Relation R S = (x y : A) → R x y → S x y
+```
+
 ## Properties
 
 ### Characterization of equality of binary relations

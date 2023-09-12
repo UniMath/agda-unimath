@@ -8,8 +8,6 @@ module group-theory.endomorphism-rings-abelian-groups where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositional-truncations
-open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
