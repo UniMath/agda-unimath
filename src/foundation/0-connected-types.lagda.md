@@ -93,7 +93,7 @@ is-surjective-point-is-0-connected :
 is-surjective-point-is-0-connected a H x =
   apply-universal-property-trunc-Prop
     ( mere-eq-is-0-connected H a x)
-    ( trunc-Prop (fib (point a) x))
+    ( trunc-Prop (fiber (point a) x))
     ( λ {refl → unit-trunc-Prop (pair star refl)})
 
 is-trunc-map-ev-point-is-connected :
@@ -134,7 +134,7 @@ abstract
   is-surjective-fiber-inclusion {B = B} C a (pair x b) =
     apply-universal-property-trunc-Prop
       ( mere-eq-is-0-connected C a x)
-      ( trunc-Prop (fib (fiber-inclusion B a) (pair x b)))
+      ( trunc-Prop (fiber (fiber-inclusion B a) (pair x b)))
       ( λ { refl → unit-trunc-Prop (pair b refl)})
 
 abstract

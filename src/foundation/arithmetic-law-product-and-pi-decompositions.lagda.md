@@ -25,7 +25,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -66,7 +66,7 @@ module _
                   ( λ U → Σ (pr1 U → UU l) (λ Y → X ≃ Π (pr1 U) Y))))
     pr1 reassociate ((U , V , f) , A , B , e) = (A , B , (U , e) , V , f)
     pr2 reassociate =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ (A , B , (U , e) , V , f) → ((U , V , f) , A , B , e))
         ( refl-htpy)
         ( refl-htpy)
@@ -91,7 +91,7 @@ module _
     pr1 reassociate' (A , B , (YA , YB) , (A' , eA) , (B' , eB) , e) =
       (A' , B' , e) , ((A , YA , eA) , B , YB , eB)
     pr2 reassociate' =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( λ ((A' , B' , e) , ((A , YA , eA) , B , YB , eB)) →
           (A , B , (YA , YB) , (A' , eA) , (B' , eB) , e))
         ( refl-htpy)

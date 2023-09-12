@@ -71,7 +71,7 @@ module _
 
   is-equiv-is-iso-Set : {f : type-hom-Set A B} → is-iso-Set f → is-equiv f
   is-equiv-is-iso-Set H =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( pr1 H)
       ( htpy-eq (pr1 (pr2 H)))
       ( htpy-eq (pr2 (pr2 H)))

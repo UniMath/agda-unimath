@@ -14,7 +14,7 @@ open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.higher-modalities
@@ -27,7 +27,8 @@ open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 
 ## Idea
 
-Given any proposition `Q`, the hom functor `Q →_` defines a
+Given any [proposition](foundation-core.propositions.md) `Q`, the hom functor
+`Q →_` defines a
 [higher modality](orthogonal-factorization-systems.higher-modalities.md). We
 call these the **open modalities**.
 
@@ -95,7 +96,7 @@ module _
       ( locally-small-operator-open-modality (l ⊔ lQ) Q)
       ( unit-open-modality Q)
   is-modal-identity-types-open-modality X x y =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ z → eq-htpy (λ q → htpy-eq (z q) q))
       ( λ z →
         eq-htpy

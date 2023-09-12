@@ -12,7 +12,7 @@ open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.faithful-maps
 open import foundation.fibers-of-maps
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -52,9 +52,9 @@ module _
   pr1 (fiber-inclusion x y) = x
   pr2 (fiber-inclusion x y) = y
 
-  fib-fiber-inclusion :
-    (a : A) (t : Σ A B) → fib (fiber-inclusion a) t ≃ (a ＝ pr1 t)
-  fib-fiber-inclusion a t =
+  fiber-fiber-inclusion :
+    (a : A) (t : Σ A B) → fiber (fiber-inclusion a) t ≃ (a ＝ pr1 t)
+  fiber-fiber-inclusion a t =
     ( ( right-unit-law-Σ-is-contr
         ( λ p → is-contr-map-is-equiv (is-equiv-tr B p) (pr2 t))) ∘e
       ( equiv-left-swap-Σ)) ∘e
@@ -75,8 +75,8 @@ module _
     is-trunc (succ-𝕋 k) A
   is-trunc-is-trunc-map-fiber-inclusion H x y =
     is-trunc-equiv' k
-      ( fib (fiber-inclusion B x) (pair y raise-star))
-      ( fib-fiber-inclusion B x (pair y raise-star))
+      ( fiber (fiber-inclusion B x) (pair y raise-star))
+      ( fiber-fiber-inclusion B x (pair y raise-star))
       ( H B x (pair y raise-star))
     where
     B : A → UU l2
@@ -88,7 +88,7 @@ module _
   is-trunc-map-fiber-inclusion-is-trunc B a H t =
     is-trunc-equiv k
       ( a ＝ pr1 t)
-      ( fib-fiber-inclusion B a t)
+      ( fiber-fiber-inclusion B a t)
       ( H a (pr1 t))
 
 module _
@@ -155,7 +155,7 @@ module _
     is-pullback-cone-fiber-fam =
       is-equiv-comp
         ( gap (pr1 {B = B}) (point a) (cone-fiber (pr1 {B = B}) a))
-        ( map-inv-fib-pr1 B a)
-        ( is-equiv-map-inv-fib-pr1 B a)
+        ( map-inv-fiber-pr1 B a)
+        ( is-equiv-map-inv-fiber-pr1 B a)
         ( is-pullback-cone-fiber pr1 a)
 ```

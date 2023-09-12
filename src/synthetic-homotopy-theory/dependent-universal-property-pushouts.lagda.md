@@ -20,7 +20,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.pullbacks
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -70,7 +70,7 @@ abstract
             htpy-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
   uniqueness-dependent-universal-property-pushout f g c dup-c P h =
     is-contr-is-equiv'
-      ( fib (dependent-cocone-map f g c P) h)
+      ( fiber (dependent-cocone-map f g c P) h)
       ( tot
         ( λ k →
           htpy-eq-dependent-cocone f g c P (dependent-cocone-map f g c P k) h))
@@ -132,7 +132,7 @@ dependent-universal-property-pushout-induction-principle-pushout :
   ((l : Level) → dependent-universal-property-pushout l f g c)
 dependent-universal-property-pushout-induction-principle-pushout
   f g c ind-c l P =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( ind-induction-principle-pushout f g c (ind-c l) P)
     ( pr2 (ind-c l P))
     ( λ h →

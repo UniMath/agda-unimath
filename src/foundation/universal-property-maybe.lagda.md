@@ -59,7 +59,7 @@ module _
     dependent-universal-property-Maybe :
       is-equiv ev-Maybe
     dependent-universal-property-Maybe =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ind-Maybe
         is-section-ind-Maybe
         is-retraction-ind-Maybe

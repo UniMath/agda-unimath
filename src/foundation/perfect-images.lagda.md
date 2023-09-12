@@ -28,7 +28,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -52,7 +52,7 @@ module _
 
   is-perfect-image : (a : A) → UU (l1 ⊔ l2)
   is-perfect-image a =
-    (a₀ : A) (n : ℕ) → (iterate n (g ∘ f)) a₀ ＝ a → fib g a₀
+    (a₀ : A) (n : ℕ) → (iterate n (g ∘ f)) a₀ ＝ a → fiber g a₀
 ```
 
 ## Properties
@@ -91,10 +91,10 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-perfect-image-is-fib :
+  is-perfect-image-is-fiber :
     {f : A → B} {g : B → A} → (a : A) →
-    is-perfect-image f g a → fib g a
-  is-perfect-image-is-fib a ρ = ρ a 0 refl
+    is-perfect-image f g a → fiber g a
+  is-perfect-image-is-fiber a ρ = ρ a 0 refl
 ```
 
 One can define a map from `A` to `B` restricting the domain to the perfect
@@ -109,13 +109,13 @@ module _
   inverse-of-perfect-image :
     (a : A) → (is-perfect-image f g a) → B
   inverse-of-perfect-image a ρ =
-    pr1 (is-perfect-image-is-fib a ρ)
+    pr1 (is-perfect-image-is-fiber a ρ)
 
   is-section-inverse-of-perfect-image :
     (a : A) (ρ : is-perfect-image f g a) →
     g (inverse-of-perfect-image a ρ) ＝ a
   is-section-inverse-of-perfect-image a ρ =
-    pr2 (is-perfect-image-is-fib a ρ)
+    pr2 (is-perfect-image-is-fiber a ρ)
 ```
 
 ```agda
@@ -181,7 +181,7 @@ module _
 
   is-not-perfect-image : (a : A) → UU (l1 ⊔ l2)
   is-not-perfect-image a =
-    Σ A (λ a₀ → (Σ ℕ (λ n → ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fib g a₀))))
+    Σ A (λ a₀ → (Σ ℕ (λ n → ((iterate n (g ∘ f)) a₀ ＝ a) × ¬ (fiber g a₀))))
 ```
 
 If we assume law of excluded middle and `g` is embedding, we can prove that if
@@ -202,7 +202,7 @@ module _
     ind-coprod _
       (id)
       (λ a₁ → ex-falso (nρ (pair a₀ (pair n (pair p a₁)))))
-      (lem (pair (fib g a₀) (is-prop-map-is-emb is-emb-g a₀)))
+      (lem (pair (fiber g a₀) (is-prop-map-is-emb is-emb-g a₀)))
 ```
 
 The following property states that if `g (b)` is not a perfect image, then `b`
@@ -220,7 +220,7 @@ module _
   not-perfect-image-has-not-perfect-fiber :
       (b : B) →
       ¬ (is-perfect-image f g (g b)) →
-      Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
+      Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
   not-perfect-image-has-not-perfect-fiber b nρ = v
       where
       i : ¬¬ (is-not-perfect-image {f = f} (g b))
@@ -228,7 +228,7 @@ module _
 
       ii :
         is-not-perfect-image (g b) →
-        Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
+        Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
       ii (pair x₀ (pair zero-ℕ u)) =
         ex-falso (pr2 u (pair b (inv (pr1 u))))
       ii (pair x₀ (pair (succ-ℕ n) u)) =
@@ -237,21 +237,21 @@ module _
         q : f ((iterate n (g ∘ f)) x₀) ＝ b
         q = is-injective-is-emb is-emb-g (pr1 u)
 
-        a : fib f b
+        a : fiber f b
         a = pair ((iterate n (g ∘ f)) x₀) q
 
         w : ¬ (is-perfect-image f g ((iterate n (g ∘ f)) x₀))
         w = λ s → pr2 u (s x₀ n refl)
 
-      iii : ¬¬ (Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s))))
+      iii : ¬¬ (Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s))))
       iii = λ t → i (λ s → t (ii s))
 
-      iv : is-prop (Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s))))
+      iv : is-prop (Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s))))
       iv =
         is-prop-Σ
           (is-prop-map-is-emb is-emb-f b)
           (λ s → is-prop-neg {A = is-perfect-image f g (pr1 s)})
 
-      v : Σ (fib f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
+      v : Σ (fiber f b) (λ s → ¬ (is-perfect-image f g (pr1 s)))
       v = double-negation-elim-is-decidable (lem (pair _ iv)) iii
 ```

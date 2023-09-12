@@ -73,7 +73,7 @@ pr2 (emb-retract-count e i R) = is-emb-retract-count e i R
 
 decidable-emb-retract-count :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : count B) (i : A → B) →
-  retraction i → A ↪d B
+  retraction i → A ↪ᵈ B
 pr1 (decidable-emb-retract-count e i R) = i
 pr1 (pr2 (decidable-emb-retract-count e i R)) = is-emb-retract-count e i R
 pr2 (pr2 (decidable-emb-retract-count e i R)) =
@@ -84,7 +84,7 @@ count-retract :
   A retract-of B → count B → count A
 count-retract (pair i R) e =
   count-equiv
-    ( equiv-total-fib i)
+    ( equiv-total-fiber i)
     ( count-decidable-subtype
       ( decidable-subtype-decidable-emb (decidable-emb-retract-count e i R))
       ( e))

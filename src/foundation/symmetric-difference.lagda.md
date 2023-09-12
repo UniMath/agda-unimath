@@ -21,7 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -96,7 +96,7 @@ module _
     right-cases-equiv-symmetric-difference P Q x q
       ( is-decidable-Decidable-Prop (P x))
   pr2 (equiv-symmetric-difference P Q) =
-    is-equiv-has-inverse i r s
+    is-equiv-is-invertible i r s
     where
     i :
       ( type-decidable-subtype (symmetric-difference-decidable-subtype P Q)) +

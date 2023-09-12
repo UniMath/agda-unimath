@@ -30,8 +30,8 @@ open import foundation-core.universal-property-pullbacks
 
 The fiberwise product of two families `P` and `Q` over a type `X` is the family
 of types `(P x) × (Q x)` over `X`. Similarly, the fiber product of two maps
-`f :A → X` and `g : B → X` is the type `Σ X (λ x → fib f x × fib g x)`, which
-fits in a pullback diagram on `f` and `g`.
+`f :A → X` and `g : B → X` is the type `Σ X (λ x → fiber f x × fiber g x)`,
+which fits in a pullback diagram on `f` and `g`.
 
 ```agda
 module _
@@ -75,7 +75,7 @@ map.
     is-pullback-fiberwise-prod :
       is-pullback (pr1 {B = P}) (pr1 {B = Q}) cone-fiberwise-prod
     is-pullback-fiberwise-prod =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         inv-gap-fiberwise-prod
         is-section-inv-gap-fiberwise-prod
         is-retraction-inv-gap-fiberwise-prod
@@ -97,17 +97,17 @@ module _
   (f : A → X) (g : B → X)
   where
 
-  cone-total-prod-fibers : cone f g (Σ X (λ x → (fib f x) × (fib g x)))
+  cone-total-prod-fibers : cone f g (Σ X (λ x → (fiber f x) × (fiber g x)))
   pr1 cone-total-prod-fibers (x , (a , p) , (b , q)) = a
   pr1 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = b
   pr2 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = p ∙ inv q
 
   gap-total-prod-fibers :
-    Σ X (λ x → (fib f x) × (fib g x)) → canonical-pullback f g
+    Σ X (λ x → (fiber f x) × (fiber g x)) → canonical-pullback f g
   gap-total-prod-fibers = gap f g cone-total-prod-fibers
 
   inv-gap-total-prod-fibers :
-    canonical-pullback f g → Σ X (λ x → (fib f x) × (fib g x))
+    canonical-pullback f g → Σ X (λ x → (fiber f x) × (fiber g x))
   pr1 (inv-gap-total-prod-fibers (a , b , p)) = g b
   pr1 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = a
   pr2 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = p
@@ -131,7 +131,7 @@ module _
     is-pullback-total-prod-fibers :
       is-pullback f g cone-total-prod-fibers
     is-pullback-total-prod-fibers =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         inv-gap-total-prod-fibers
         is-section-inv-gap-total-prod-fibers
         is-retraction-inv-gap-total-prod-fibers

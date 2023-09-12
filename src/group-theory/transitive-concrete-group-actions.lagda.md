@@ -21,7 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions

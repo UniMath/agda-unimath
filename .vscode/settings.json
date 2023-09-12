@@ -56,8 +56,6 @@
 
   // File type specific
   "files.associations": {
-    "*.agda": "agda",
-    "*.lagda.md": "literate agda markdown",
     "*.lock": "json"
   },
 

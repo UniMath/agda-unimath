@@ -690,7 +690,7 @@ is-linear-combination-power-add-Semiring R n m x y H =
                               ( commutative-add-ℕ
                                 ( dist-ℕ (nat-Fin n i) n)
                                 ( m)))) ∙
-                          ( ( power-add-Semiring R m
+                          ( ( distributive-power-add-Semiring R m
                               ( dist-ℕ (nat-Fin n i) n))))) ∙
                       ( ( inv
                           ( associative-mul-Semiring R
@@ -746,7 +746,8 @@ is-linear-combination-power-add-Semiring R n m x y H =
                       ( n +ℕ m)
                       ( n +ℕ (nat-Fin (succ-ℕ m) i))))
                   ( ap-mul-Semiring R
-                    ( power-add-Semiring R n (nat-Fin (succ-ℕ m) i))
+                    ( distributive-power-add-Semiring R n
+                      ( nat-Fin (succ-ℕ m) i))
                     ( ap
                       ( λ u → power-Semiring R u y)
                       ( translation-invariant-dist-ℕ

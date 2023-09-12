@@ -116,10 +116,10 @@ count-decidable-subtype P e =
 
 ```agda
 count-decidable-emb :
-  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪d Y) → count Y → count X
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f : X ↪ᵈ Y) → count Y → count X
 count-decidable-emb f e =
   count-equiv
-    ( equiv-total-fib (map-decidable-emb f))
+    ( equiv-total-fiber (map-decidable-emb f))
     ( count-decidable-subtype (decidable-subtype-decidable-emb f) e)
 ```
 
@@ -132,7 +132,7 @@ is-decidable-count-subtype :
 is-decidable-count-subtype P e f x =
   is-decidable-count
     ( count-equiv
-      ( equiv-fib-pr1 (type-Prop ∘ P) x)
+      ( equiv-fiber-pr1 (type-Prop ∘ P) x)
       ( count-decidable-subtype
         ( λ y →
           pair
@@ -169,10 +169,10 @@ count-domain-emb-is-finite-domain-emb :
   is-finite B → count B
 count-domain-emb-is-finite-domain-emb e f H =
   count-equiv
-    ( equiv-total-fib (map-emb f))
+    ( equiv-total-fiber (map-emb f))
     ( count-type-subtype-is-finite-type-subtype e
-      ( λ x → pair (fib (map-emb f) x) (is-prop-map-emb f x))
+      ( λ x → pair (fiber (map-emb f) x) (is-prop-map-emb f x))
       ( is-finite-equiv'
-        ( equiv-total-fib (map-emb f))
+        ( equiv-total-fiber (map-emb f))
         ( H)))
 ```

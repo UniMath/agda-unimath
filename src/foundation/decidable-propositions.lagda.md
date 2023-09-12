@@ -16,6 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
+open import foundation.logical-equivalences
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.raising-universe-levels
@@ -29,12 +30,11 @@ open import foundation-core.coproduct-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.logical-equivalences
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.small-types
 open import foundation-core.subtypes
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.finite-types
@@ -106,7 +106,7 @@ module _
   is-equiv-map-equiv-bool-Decidable-Prop' :
     is-equiv map-equiv-bool-Decidable-Prop'
   is-equiv-map-equiv-bool-Decidable-Prop' =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-equiv-bool-Decidable-Prop'
       is-section-map-inv-equiv-bool-Decidable-Prop'
       is-retraction-map-inv-equiv-bool-Decidable-Prop'

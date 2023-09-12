@@ -72,5 +72,5 @@ module _
           inv-iff
             ( logical-equivalence-is-binary-lower-bound-Π-Large-Poset P x y u)
         ↔ leq-Π-Large-Poset P u z
-          by iff-Π (λ i → H i (u i))
+          by iff-Π-iff-family (λ i → H i (u i))
 ```

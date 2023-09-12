@@ -19,7 +19,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -37,27 +37,27 @@ is the least reflexive relation.
 The following table lists files that are about identity types and operations on
 identifications in arbitrary types.
 
-| Concept                                          | File                                                                                                                      |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
-| Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
-| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
-| Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
-| Commuting squares of identifications             | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
-| Dependent identifications (foundation)           | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
-| Dependent identifications (foundation-core)      | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
-| The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
-| Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
-| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
-| The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
-| The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
-| Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
-| Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
-| Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
-| Torsorial type families                          | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
-| Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
-| Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
-| The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
+| Concept                                           | File                                                                                                                      |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Action on identifications of binary functions     | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
+| Action on identifications of dependent functions  | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
+| Action on identifications of functions            | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
+| Binary transport                                  | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
+| Commuting squares of identifications              | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
+| Dependent identifications (foundation)            | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
+| Dependent identifications (foundation-core)       | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
+| The fundamental theorem of identity types         | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
+| Hexagons of identifications                       | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
+| Identity systems                                  | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
+| The identity type (foundation)                    | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
+| The identity type (foundation-core)               | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
+| Large identity types                              | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
+| Path algebra                                      | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
+| Symmetric identity types                          | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Torsorial type families                           | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
+| Transport along identifications (foundation)      | [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md)                             |
+| Transport along identifications (foundation-core) | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                   |
+| The universal property of identity types          | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
 
 ## Properties
 
@@ -86,7 +86,7 @@ module _
 
   abstract
     is-equiv-inv : (x y : A) → is-equiv (λ (p : x ＝ y) → inv p)
-    is-equiv-inv x y = is-equiv-has-inverse inv inv-inv inv-inv
+    is-equiv-inv x y = is-equiv-is-invertible inv inv-inv inv-inv
 
   equiv-inv : (x y : A) → (x ＝ y) ≃ (y ＝ x)
   pr1 (equiv-inv x y) = inv
@@ -107,7 +107,7 @@ module _
     is-equiv-concat :
       {x y : A} (p : x ＝ y) (z : A) → is-equiv (concat p z)
     is-equiv-concat p z =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( inv-concat p z)
         ( is-section-inv-concat p z)
         ( is-retraction-inv-concat p z)
@@ -121,7 +121,7 @@ module _
     {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) ≃ (x' ＝ x)
   pr1 (equiv-concat-equiv {x}) e = map-equiv (e x) refl
   pr2 equiv-concat-equiv =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       equiv-concat
       (λ { refl → refl})
       (λ e → eq-htpy (λ y → eq-htpy-equiv (λ { refl → right-unit})))
@@ -141,7 +141,7 @@ module _
     is-equiv-concat' :
       (x : A) {y z : A} (q : y ＝ z) → is-equiv (concat' x q)
     is-equiv-concat' x q =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( inv-concat' x q)
         ( is-section-inv-concat' x q)
         ( is-retraction-inv-concat' x q)
@@ -215,31 +215,35 @@ module _
   where
 
   abstract
-    is-equiv-inv-con :
-      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (inv-con p q r)
-    is-equiv-inv-con refl q r = is-equiv-id
+    is-equiv-left-transpose-eq-concat :
+      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
+      is-equiv (left-transpose-eq-concat p q r)
+    is-equiv-left-transpose-eq-concat refl q r = is-equiv-id
 
-  equiv-inv-con :
+  equiv-left-transpose-eq-concat :
     (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
     ((p ∙ q) ＝ r) ≃ (q ＝ ((inv p) ∙ r))
-  pr1 (equiv-inv-con p q r) = inv-con p q r
-  pr2 (equiv-inv-con p q r) = is-equiv-inv-con p q r
+  pr1 (equiv-left-transpose-eq-concat p q r) = left-transpose-eq-concat p q r
+  pr2 (equiv-left-transpose-eq-concat p q r) =
+    is-equiv-left-transpose-eq-concat p q r
 
   abstract
-    is-equiv-con-inv :
-      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) → is-equiv (con-inv p q r)
-    is-equiv-con-inv p refl r =
+    is-equiv-right-transpose-eq-concat :
+      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
+      is-equiv (right-transpose-eq-concat p q r)
+    is-equiv-right-transpose-eq-concat p refl r =
       is-equiv-comp
         ( concat' p (inv right-unit))
         ( concat (inv right-unit) r)
         ( is-equiv-concat (inv right-unit) r)
         ( is-equiv-concat' p (inv right-unit))
 
-  equiv-con-inv :
+  equiv-right-transpose-eq-concat :
     (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
     ((p ∙ q) ＝ r) ≃ (p ＝ (r ∙ (inv q)))
-  pr1 (equiv-con-inv p q r) = con-inv p q r
-  pr2 (equiv-con-inv p q r) = is-equiv-con-inv p q r
+  pr1 (equiv-right-transpose-eq-concat p q r) = right-transpose-eq-concat p q r
+  pr2 (equiv-right-transpose-eq-concat p q r) =
+    is-equiv-right-transpose-eq-concat p q r
 ```
 
 ### Computing transport in the type family of identifications with a fixed target

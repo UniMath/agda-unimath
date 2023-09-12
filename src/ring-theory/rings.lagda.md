@@ -18,6 +18,8 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
@@ -143,30 +145,108 @@ module _
     (x y z : type-Ring R) →
     add-Ring x (add-Ring y z) ＝ add-Ring y (add-Ring x z)
   left-swap-add-Ring = left-swap-add-Ab (ab-Ring R)
+```
 
-  is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring x)
+### Addition in a ring is a binary equivalence
+
+#### Addition on the left is an equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
+  left-subtraction-Ring = left-subtraction-Ab (ab-Ring R)
+
+  ap-left-subtraction-Ring :
+    {x x' y y' : type-Ring R} → x ＝ x' → y ＝ y' →
+    left-subtraction-Ring x y ＝ left-subtraction-Ring x' y'
+  ap-left-subtraction-Ring =
+    ap-left-subtraction-Ab (ab-Ring R)
+
+  is-section-left-subtraction-Ring :
+    (x : type-Ring R) → (add-Ring R x ∘ left-subtraction-Ring x) ~ id
+  is-section-left-subtraction-Ring =
+    is-section-left-subtraction-Ab (ab-Ring R)
+
+  is-retraction-left-subtraction-Ring :
+    (x : type-Ring R) → (left-subtraction-Ring x ∘ add-Ring R x) ~ id
+  is-retraction-left-subtraction-Ring =
+    is-retraction-left-subtraction-Ab (ab-Ring R)
+
+  is-equiv-add-Ring : (x : type-Ring R) → is-equiv (add-Ring R x)
   is-equiv-add-Ring = is-equiv-add-Ab (ab-Ring R)
 
-  is-equiv-add-Ring' : (x : type-Ring R) → is-equiv (add-Ring' x)
+  equiv-add-Ring : type-Ring R → (type-Ring R ≃ type-Ring R)
+  equiv-add-Ring = equiv-add-Ab (ab-Ring R)
+```
+
+#### Addition on the right is an equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  right-subtraction-Ring : type-Ring R → type-Ring R → type-Ring R
+  right-subtraction-Ring = right-subtraction-Ab (ab-Ring R)
+
+  ap-right-subtraction-Ring :
+    {x x' y y' : type-Ring R} → x ＝ x' → y ＝ y' →
+    right-subtraction-Ring x y ＝ right-subtraction-Ring x' y'
+  ap-right-subtraction-Ring = ap-right-subtraction-Ab (ab-Ring R)
+
+  is-section-right-subtraction-Ring :
+    (x : type-Ring R) →
+    (add-Ring' R x ∘ (λ y → right-subtraction-Ring y x)) ~ id
+  is-section-right-subtraction-Ring =
+    is-section-right-subtraction-Ab (ab-Ring R)
+
+  is-retraction-right-subtraction-Ring :
+    (x : type-Ring R) →
+    ((λ y → right-subtraction-Ring y x) ∘ add-Ring' R x) ~ id
+  is-retraction-right-subtraction-Ring =
+    is-retraction-right-subtraction-Ab (ab-Ring R)
+
+  is-equiv-add-Ring' : (x : type-Ring R) → is-equiv (add-Ring' R x)
   is-equiv-add-Ring' = is-equiv-add-Ab' (ab-Ring R)
 
-  is-binary-equiv-add-Ring : is-binary-equiv add-Ring
-  pr1 is-binary-equiv-add-Ring = is-equiv-add-Ring'
-  pr2 is-binary-equiv-add-Ring = is-equiv-add-Ring
+  equiv-add-Ring' : type-Ring R → (type-Ring R ≃ type-Ring R)
+  equiv-add-Ring' = equiv-add-Ab' (ab-Ring R)
+```
 
-  is-binary-emb-add-Ring : is-binary-emb add-Ring
+#### Addition in a ring is a binary equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-binary-equiv-add-Ring : is-binary-equiv (add-Ring R)
+  is-binary-equiv-add-Ring = is-binary-equiv-add-Ab (ab-Ring R)
+```
+
+#### Addition in a ring is a binary embedding
+
+```agda
+  is-binary-emb-add-Ring : is-binary-emb (add-Ring R)
   is-binary-emb-add-Ring = is-binary-emb-add-Ab (ab-Ring R)
 
-  is-emb-add-Ring : (x : type-Ring R) → is-emb (add-Ring x)
+  is-emb-add-Ring : (x : type-Ring R) → is-emb (add-Ring R x)
   is-emb-add-Ring = is-emb-add-Ab (ab-Ring R)
 
-  is-emb-add-Ring' : (x : type-Ring R) → is-emb (add-Ring' x)
+  is-emb-add-Ring' : (x : type-Ring R) → is-emb (add-Ring' R x)
   is-emb-add-Ring' = is-emb-add-Ab' (ab-Ring R)
+```
 
-  is-injective-add-Ring : (x : type-Ring R) → is-injective (add-Ring x)
+#### Addition in a ring is pointwise injective from both sides
+
+```agda
+  is-injective-add-Ring : (x : type-Ring R) → is-injective (add-Ring R x)
   is-injective-add-Ring = is-injective-add-Ab (ab-Ring R)
 
-  is-injective-add-Ring' : (x : type-Ring R) → is-injective (add-Ring' x)
+  is-injective-add-Ring' : (x : type-Ring R) → is-injective (add-Ring' R x)
   is-injective-add-Ring' = is-injective-add-Ab' (ab-Ring R)
 ```
 
@@ -230,6 +310,30 @@ module _
     (x y : type-Ring R) →
     neg-Ring (add-Ring R x y) ＝ add-Ring R (neg-Ring x) (neg-Ring y)
   distributive-neg-add-Ring = distributive-neg-add-Ab (ab-Ring R)
+
+  neg-zero-Ring : neg-Ring (zero-Ring R) ＝ (zero-Ring R)
+  neg-zero-Ring = neg-zero-Ab (ab-Ring R)
+
+  add-and-subtract-Ring :
+    (x y z : type-Ring R) →
+    add-Ring R (add-Ring R x y) (add-Ring R (neg-Ring y) z) ＝ add-Ring R x z
+  add-and-subtract-Ring x y z =
+    equational-reasoning
+      add-Ring R (add-Ring R x y) (add-Ring R (neg-Ring y) z)
+      ＝ add-Ring R (add-Ring R y x) (add-Ring R (neg-Ring y) z)
+        by
+        ( ap
+          ( add-Ring' R (add-Ring R (neg-Ring y) z))
+          ( commutative-add-Ring R x y))
+      ＝ add-Ring R (add-Ring R y (neg-Ring y)) (add-Ring R x z)
+        by interchange-add-add-Ring R y x (neg-Ring y) z
+      ＝ add-Ring R (zero-Ring R) (add-Ring R x z)
+        by
+        ( ap
+          ( add-Ring' R (add-Ring R x z))
+          ( right-inverse-law-add-Ring y))
+      ＝ add-Ring R x z
+        by left-unit-law-add-Ring R (add-Ring R x z)
 ```
 
 ### Multiplication in a ring
@@ -440,7 +544,47 @@ module _
       ( neg-neg-Ring R (mul-Ring R x y)))
 ```
 
-### Bidistributivity for multiplication over addition
+### Distributivity of multiplication over subtraction
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  left-distributive-mul-left-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R x (left-subtraction-Ring R y z) ＝
+    left-subtraction-Ring R (mul-Ring R x y) (mul-Ring R x z)
+  left-distributive-mul-left-subtraction-Ring x y z =
+    ( left-distributive-mul-add-Ring R x (neg-Ring R y) z) ∙
+    ( ap (add-Ring' R _) (right-negative-law-mul-Ring R _ _))
+
+  right-distributive-mul-left-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R (left-subtraction-Ring R x y) z ＝
+    left-subtraction-Ring R (mul-Ring R x z) (mul-Ring R y z)
+  right-distributive-mul-left-subtraction-Ring x y z =
+    ( right-distributive-mul-add-Ring R (neg-Ring R x) y z) ∙
+    ( ap (add-Ring' R _) (left-negative-law-mul-Ring R _ _))
+
+  left-distributive-mul-right-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R x (right-subtraction-Ring R y z) ＝
+    right-subtraction-Ring R (mul-Ring R x y) (mul-Ring R x z)
+  left-distributive-mul-right-subtraction-Ring x y z =
+    ( left-distributive-mul-add-Ring R x y (neg-Ring R z)) ∙
+    ( ap (add-Ring R _) (right-negative-law-mul-Ring R _ _))
+
+  right-distributive-mul-right-subtraction-Ring :
+    (x y z : type-Ring R) →
+    mul-Ring R (right-subtraction-Ring R x y) z ＝
+    right-subtraction-Ring R (mul-Ring R x z) (mul-Ring R y z)
+  right-distributive-mul-right-subtraction-Ring x y z =
+    ( right-distributive-mul-add-Ring R x (neg-Ring R y) z) ∙
+    ( ap (add-Ring R _) (left-negative-law-mul-Ring R _ _))
+```
+
+### Bidistributivity of multiplication over addition
 
 ```agda
 module _

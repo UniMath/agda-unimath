@@ -15,10 +15,8 @@ open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
-open import foundation.propositional-maps
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
@@ -26,7 +24,9 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.injective-maps
+open import foundation-core.propositional-maps
 open import foundation-core.propositions
 ```
 
@@ -51,7 +51,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} (a : A)
     {B : (x : A) → a ＝ x → UU l2} → is-equiv (ev-refl a {B = B})
   is-equiv-ev-refl a =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( ind-Id a _)
       ( λ b → refl)
       ( λ f → eq-htpy
@@ -70,7 +70,8 @@ equiv-ev-refl' :
   {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → x ＝ a → UU l2} →
   ((x : A) (p : x ＝ a) → B x p) ≃ B a refl
 equiv-ev-refl' a {B} =
-  equiv-ev-refl a ∘e equiv-map-Π (λ x → equiv-precomp-Π (equiv-inv a x) (B x))
+  ( equiv-ev-refl a) ∘e
+  ( equiv-Π-equiv-family (λ x → equiv-precomp-Π (equiv-inv a x) (B x)))
 ```
 
 ### `Id : A → (A → 𝒰)` is an embedding
@@ -92,7 +93,7 @@ to show that this fiber is a proposition. We do this by constructing an
 embedding
 
 ```text
-  fib Id (Id a) ↪ Σ A (Id a).
+  fiber Id (Id a) ↪ Σ A (Id a).
 ```
 
 Since the codomain of this embedding is contractible, the claim follows. The
@@ -121,12 +122,12 @@ module _
         ( pair a refl)
         ( λ _ →
           is-injective-emb
-            ( emb-fib a)
+            ( emb-fiber a)
             ( eq-is-contr (is-contr-total-path a))))
       ( λ _ → ap Id)
     where
-    emb-fib : (a : A) → fib' Id (Id a) ↪ Σ A (Id a)
-    emb-fib a =
+    emb-fiber : (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
+    emb-fiber a =
       comp-emb
         ( comp-emb
           ( emb-equiv
@@ -144,7 +145,7 @@ module _
               comp-emb
                 ( emb-Π (λ y → emb-L L (Id x y) (Id a y)))
                 ( emb-equiv equiv-funext))))
-        ( emb-equiv (inv-equiv (equiv-fib Id (Id a))))
+        ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding
@@ -172,12 +173,13 @@ module _
       ( Σ A (λ b → (x : A) → (b ＝ x) ≃ (a ＝ x)))
       ( equiv-tot
         ( λ b →
-          equiv-map-Π
+          equiv-Π-equiv-family
             ( λ x → equiv-postcomp-equiv (inv-equiv (e x)) (b ＝ x))))
       ( is-contr-equiv'
-        ( fib Id (Id a))
+        ( fiber Id (Id a))
         ( equiv-tot
-          ( λ b → equiv-map-Π (λ x → equiv-univalence) ∘e equiv-funext))
+          ( λ b →
+            equiv-Π-equiv-family (λ x → equiv-univalence) ∘e equiv-funext))
         ( is-proof-irrelevant-is-prop
           ( is-prop-map-is-emb (is-emb-Id A) (Id a))
           ( a , refl)))

@@ -1,25 +1,125 @@
 # Installing the library
 
-To use the `agda-unimath` library, you will need to have Agda and a code editor
-set up. This guide provides instructions for installing Agda as well as specific
-setup instructions for the editors [Emacs](https://www.gnu.org/software/emacs/)
-and [Visual Studio Code](https://code.visualstudio.com/). By following these
-step-by-step directions, you will create a tailored working environment for
-using the library. Additionally, we provide instructions for setting up your
-environment for making contributions to the library.
+## Overview
 
-## Getting a copy of the library
+### Quick setup
 
-Get a copy of our library on your machine with `git` using
+To work or experiment with the `agda-unimath` library on your machine, you will
+need to have `agda` version 2.6.3 installed, and a suitable editor such as
+[Emacs](https://www.gnu.org/software/emacs/) or
+[Visual Studio Code](https://code.visualstudio.com/). The following instructions
+will help you on your way right away:
 
-```shell
-git clone git@github.com:UniMath/agda-unimath.git
+1. [Getting a copy of the library](#getting-a-copy)
+2. [Installing Agda](#installing-agda)
+3. [Setting up your editor](#editor-setup)
+
+### Setup for contributors
+
+In order to contribute to the `agda-unimath` library you will additionally need:
+
+1. `git`
+2. `make`
+3. `python` version 3.8 or newer
+4. `pre-commit` and `request`. Those two programs can be installed by running
+   ```shell
+   python3 -m pip install -r scripts/requirements.txt
+   ```
+5. `rust` version 1.68 or newer
+6. `mdbook` version 4.34 or newer, along with the `catppuccin`, `katex`,
+   `linkcheck`, and `pagetoc` plugins. These can be installed by running the
+   command
+   ```shell
+   make install-website-dev
+   ```
+
+All of these can also be installed in one go by using `nix`. In the section
+[Creating a setup for contributors](#contributor-setup) we will walk you through
+the steps of preparing your environment for contributing to the library with and
+without `nix`.
+
+Additionally, we added a [Troubleshooting](#troubleshooting) section at the end
+of this guide. If you experience any issues during the setup process, don't
+hesitate to reach out to us on the
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX). Our community is
+here to help and ensure you have a smooth experience.
+
+## Getting a copy of the library {#getting-a-copy}
+
+The way you install the library on your machine might depend on the way you plan
+to use it. If you plan to contribute to the library, then we suggest first
+creating a fork of the library, and then cloning your fork. If you don't intend
+to contribute the library, then you don't need to create your own fork, and you
+can proceed directly to clone the library.
+
+### Creating a fork of the library
+
+If your plan is to submit a contribution, or to do a project that eventually
+could lead to a contribution to the library, then it is best to begin by
+creating a fork of the library on GitHub:
+
+1. Navigate to the library's GitHub page at
+   [https://github.com/UniMath/agda-unimath](https://github.com/UniMath/agda-unimath).
+2. In the upper-right corner of the page, click the "Fork" button.
+3. Select your GitHub account to create the fork under.
+
+### Cloning your fork of the library
+
+After you have your own fork of the library, you can clone it to your machine
+with git using the following command in your terminal:
+
+```bash
+git clone --depth 1 git@github.com:[YourUsername]/agda-unimath.git
 ```
 
-or by going to the [GitHub page](https://github.com/UniMath/agda-unimath) and
-manually downloading it.
+Replace `[YourUsername]` with your actual GitHub username. This command will
+clone a shallow copy of the library, i.e., a copy of the library without its
+entire git history, which is a version of the library that is under 20MB in
+size.
 
-## Installing Agda
+If you prefer to clone the library with its history, simply omit `--depth 1` in
+the above command.
+
+### Cloning the library directly
+
+If you don't intend to contribute to the library, but still want to have a local
+copy of it on your machine, you can clone it directly with
+
+```bash
+git clone --depth 1 git@github.com:UniMath/agda-unimath.git
+```
+
+This is not our first recommendation, however, because if you later decide to
+use this clone for contributions, you will need some proficiency in using `git`
+to adjust the remote addresses of your clone.
+
+### Creating a branch within your clone of the library
+
+Once you've cloned the library, we highly recommend you to preserve the `master`
+branch in its original state and up to date with the official `agda-unimath`
+repository. This means you should avoid making changes directly to the `master`
+branch.
+
+Instead, whenever you're about to start a new piece of work (be it a new
+feature, bug fix, or any other modifications), create a new branch from
+`master`. This way, you can keep track of different lines of work, isolate them
+from each other, and prevent potential conflicts.
+
+Here's a basic example of how you can create a new branch:
+
+```bash
+git checkout -b my-feature
+```
+
+This command creates a new branch named `my-feature` and automatically checks it
+out, meaning your 'working directory' will switch to this branch.
+
+By maintaining the `master` branch untouched, you ensure a clean, up-to-date
+base that is aligned with the original library you forked from. This makes it
+easier to pull in updates from the original repository and merge them into your
+working branches when necessary.
+
+## Installing Agda {#installing-agda}
 
 The `agda-unimath` library is built and verified with Agda 2.6.3, and we provide
 two methods for installation: with or without the package manager
@@ -46,7 +146,7 @@ nix develop
 Once you've activated the shell, launch your editor from within it by running
 `code` or `emacs`. This ensures your editor recognizes the Agda installation.
 
-## Tutorials for Agda
+### Tutorials for Agda
 
 If you're new to Agda, there are several resources available to help you learn
 the basics and become proficient in using the language. We recommend starting
@@ -54,7 +154,7 @@ with the
 [list of tutorials](https://agda.readthedocs.io/en/latest/getting-started/tutorial-list.html)
 provided on the Agda documentation page.
 
-## Editor setup
+## Editor setup {#editor-setup}
 
 We recommend either [Emacs](https://www.gnu.org/software/emacs/) or
 [Visual Studio Code](https://code.visualstudio.com/) (VSCode) as your editor
@@ -194,7 +294,7 @@ repository's main folder. This requires the
 generates the `everything.lagda.md` file, which imports and verifies all files
 in the library.
 
-### Contributing
+## Creating a setup for contributors {#contributor-setup}
 
 We welcome and appreciate contributions from the community. If you're interested
 in contributing to the `agda-unimath` library, you can follow the instructions
@@ -202,7 +302,7 @@ below to ensure a smooth setup and workflow. Also, please make sure to follow
 our [coding style](CODINGSTYLE.md) and
 [design principles](DESIGN-PRINCIPLES.md).
 
-#### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
+### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
 
 The `agda-unimath` library includes [pre-commit](https://pre-commit.com/) hooks
 that enforce [basic formatting rules](CONTRIBUTING.md). These will inform you of
@@ -232,7 +332,7 @@ Keep in mind that `pre-commit` is also a part of the Continuous Integration
 (CI), so any PR that violates the enforced conventions will be automatically
 blocked from merging.
 
-#### <a name="build-website"></a>Building and viewing the website locally
+### <a name="build-website"></a>Building and viewing the website locally
 
 The build process for the website uses the
 [Rust language](https://www.rust-lang.org/)'s package manager `cargo`. To
@@ -271,3 +371,47 @@ website locally:
 You've now successfully set up the local environment for the website! As you
 make changes to the website's source files, you can repeat steps 2 and 3 to view
 the updates locally before pushing the changes to the repository.
+
+## Troubleshooting {#troubleshooting}
+
+If you encounter any issues during the installation process, don't hesitate to
+reach out to us on the
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX). Our community is
+here to help and ensure you have a smooth experience.
+
+### I have installed `make pre-commit` on my Debian-based system, but the `pre-commit` command isn't recognized. What should I do?
+
+This issue can arise if the `pre-commit` executable gets placed in the
+`~/.local/bin` directory, which might not be in your system's `PATH`.
+
+**To resolve this:**
+
+1. **Check the `~/.local/bin` directory**: Use the command
+   `ls ~/.local/bin | grep pre-commit` to see if the executable is present.
+
+2. **Update your `PATH`**:
+
+   - If you're using the bash terminal, open your `.bashrc` file with a text
+     editor like `nano`:
+
+     ```bash
+     nano ~/.bashrc
+     ```
+
+   - Add the following line to the end of the file:
+
+     ```bash
+     export PATH=$PATH:~/.local/bin
+     ```
+
+   - Save the file and close the editor.
+
+3. **Reload your `.bashrc`**:
+
+   - Run the following command to apply the changes:
+
+     ```bash
+     source ~/.bashrc
+     ```
+
+Now, try running the `pre-commit` command again. It should be recognized.

@@ -13,7 +13,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import structured-types.pointed-homotopies
@@ -77,7 +77,12 @@ dependent-identification-Mul-Π-𝕊¹ {x} refl q r H u =
   eq-htpy-pointed-map
     ( q)
     ( r)
-    ( pair H (con-inv (H base-𝕊¹) (pr2 r) (pr2 q) (inv (inv right-unit ∙ u))))
+    ( ( H) ,
+      (right-transpose-eq-concat
+        ( H base-𝕊¹)
+        ( pr2 r)
+        ( pr2 q)
+        ( inv (inv right-unit ∙ u))))
 
 eq-id-id-𝕊¹-Pointed-Type :
   Id (tr Mul-Π-𝕊¹ loop-𝕊¹ id-pointed-map) id-pointed-map

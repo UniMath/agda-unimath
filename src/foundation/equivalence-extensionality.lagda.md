@@ -38,6 +38,8 @@ module _
   htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
   htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
 
+  _~e_ = htpy-equiv
+
   extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
   extensionality-equiv f =
     extensionality-type-subtype
@@ -52,7 +54,7 @@ module _
       is-prop-is-contr
         ( is-contr-prod
           ( is-contr-equiv'
-            ( (b : B) → fib f b)
+            ( (b : B) → fiber f b)
             ( distributive-Π-Σ)
             ( is-contr-Π (is-contr-map-is-equiv H)))
           ( is-contr-is-equiv'

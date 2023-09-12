@@ -46,13 +46,13 @@ module _
     is-truncation l (Id-Truncated-Type B (f x) (f y)) (ap f {x} {y}))
   where
 
-  unique-extension-fib-is-truncation-is-truncation-ap :
+  unique-extension-fiber-is-truncation-is-truncation-ap :
     {l : Level} (C : Truncated-Type l (succ-𝕋 k))
     (g : A → type-Truncated-Type C) (y : type-Truncated-Type B) →
     is-contr
       ( Σ ( type-Truncated-Type C)
-          ( λ z → (t : fib f y) → Id (g (pr1 t)) z))
-  unique-extension-fib-is-truncation-is-truncation-ap C g =
+          ( λ z → (t : fiber f y) → Id (g (pr1 t)) z))
+  unique-extension-fiber-is-truncation-is-truncation-ap C g =
     apply-dependent-universal-property-surj-is-surjective f H
       ( λ y → is-contr-Prop _)
       ( λ x →
@@ -61,7 +61,7 @@ module _
           ( equiv-tot
             ( λ z →
               ( ( equiv-ev-refl' x) ∘e
-                ( equiv-map-Π
+                ( equiv-Π-equiv-family
                   ( λ x' →
                     equiv-is-truncation
                       ( Id-Truncated-Type B (f x') (f x))
@@ -79,18 +79,18 @@ module _
         is-contr-equiv'
           ( (y : type-Truncated-Type B) →
             Σ ( type-Truncated-Type C)
-              ( λ z → (t : fib f y) → (g (pr1 t) ＝ z)))
+              ( λ z → (t : fiber f y) → (g (pr1 t) ＝ z)))
           ( ( equiv-tot
               ( λ h →
                 ( ( ( inv-equiv (equiv-funext)) ∘e
-                    ( equiv-map-Π
+                    ( equiv-Π-equiv-family
                       ( λ x →
                         equiv-inv (g x) (h (f x)) ∘e equiv-ev-refl (f x)))) ∘e
                   ( equiv-swap-Π)) ∘e
-                ( equiv-map-Π (λ x → equiv-ev-pair)))) ∘e
+                ( equiv-Π-equiv-family (λ x → equiv-ev-pair)))) ∘e
             ( distributive-Π-Σ))
           ( is-contr-Π
-            ( unique-extension-fib-is-truncation-is-truncation-ap C g)))
+            ( unique-extension-fiber-is-truncation-is-truncation-ap C g)))
 
 module _
   {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 (succ-𝕋 k))
@@ -102,7 +102,7 @@ module _
   is-surjective-is-truncation H =
     map-inv-is-equiv
       ( dependent-universal-property-truncation-is-truncation B f H
-        ( λ y → truncated-type-trunc-Prop k (fib f y)))
+        ( λ y → truncated-type-trunc-Prop k (fiber f y)))
       ( λ x → unit-trunc-Prop (pair x refl))
 ```
 
@@ -570,7 +570,7 @@ module _
             ( precomp-Set (unit-trunc-Set ∘ tot (λ x → unit-trunc-Set)) C)
             ( is-equiv-ev-pair)
             ( is-equiv-htpy-equiv
-              ( ( equiv-map-Π
+              ( ( equiv-Π-equiv-family
                   ( λ x → equiv-universal-property-trunc-Set (B x) C)) ∘e
                 ( ( equiv-ev-pair) ∘e
                   ( equiv-universal-property-trunc-Set
@@ -788,7 +788,7 @@ module _
             ( equiv-precomp-Π e (type-trunc-Set ∘ B))
             ( type-trunc-Set ((x : A) → B x)))
           ( λ f →
-            equiv-map-Π
+            equiv-Π-equiv-family
               ( λ h →
                 ( ( inv-equiv equiv-funext) ∘e
                   ( equiv-precomp-Π e

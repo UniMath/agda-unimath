@@ -15,7 +15,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -150,7 +150,7 @@ abstract
   is-equiv-ev-𝕀 :
     {l : Level} (P : 𝕀 → UU l) → is-equiv (ev-𝕀 {P = P})
   is-equiv-ev-𝕀 P =
-    is-equiv-has-inverse inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
+    is-equiv-is-invertible inv-ev-𝕀 is-section-inv-ev-𝕀 is-retraction-inv-ev-𝕀
 
 tr-eq : {l : Level} {A : UU l} {x y : A} (p : Id x y) → Id (tr (Id x) p refl) p
 tr-eq refl = refl

@@ -7,11 +7,15 @@ module orthogonal-factorization-systems.function-classes where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.pullback-squares
+open import foundation.transport-along-identifications
+open import foundation.univalence
 open import foundation.universe-levels
 ```
 
@@ -22,7 +26,7 @@ open import foundation.universe-levels
 A **function class** is a [subtype](foundation.subtypes.md) of the type of all
 functions in a given universe.
 
-## Definition
+## Definitions
 
 ```agda
 function-class : (l1 l2 l3 : Level) → UU (lsuc l1 ⊔ lsuc l2 ⊔ lsuc l3)
@@ -164,4 +168,68 @@ pr1 (is-pullback-stable-function-class-Prop l F) =
   is-pullback-stable-function-class l F
 pr2 (is-pullback-stable-function-class-Prop l F) =
   is-prop-is-pullback-stable-function-class l F
+```
+
+### Having equivalences is equivalent to having identity maps
+
+This is a consequence of [univalence](foundation.univalence.md).
+
+```agda
+module _
+  {l1 l2 : Level} (F : function-class l1 l1 l2)
+  where
+
+  has-identity-maps-has-equivalences-function-class :
+    has-equivalences-function-class F → has-identity-maps-function-class F
+  has-identity-maps-has-equivalences-function-class has-equivs-F A =
+    has-equivs-F A A id is-equiv-id
+
+  htpy-has-identity-maps-function-class :
+    has-identity-maps-function-class F →
+    {X Y : UU l1} → (p : X ＝ Y) → type-Prop (F (map-eq p))
+  htpy-has-identity-maps-function-class has-ids-F {X} refl = has-ids-F X
+
+  has-equivalence-has-identity-maps-function-class :
+    has-identity-maps-function-class F →
+    {X Y : UU l1} (e : X ≃ Y) → type-Prop (F (map-equiv e))
+  has-equivalence-has-identity-maps-function-class has-ids-F {X} {Y} e =
+    tr
+      ( type-Prop ∘ F)
+      ( ap pr1 (is-section-eq-equiv e))
+      ( htpy-has-identity-maps-function-class has-ids-F (eq-equiv X Y e))
+
+  has-equivalences-has-identity-maps-function-class :
+    has-identity-maps-function-class F → has-equivalences-function-class F
+  has-equivalences-has-identity-maps-function-class has-ids-F A B f is-equiv-f =
+    has-equivalence-has-identity-maps-function-class has-ids-F (f , is-equiv-f)
+
+  is-equiv-has-identity-maps-has-equivalences-function-class :
+    is-equiv has-identity-maps-has-equivalences-function-class
+  is-equiv-has-identity-maps-has-equivalences-function-class =
+    is-equiv-is-prop
+      ( is-prop-has-equivalences-function-class F)
+      ( is-prop-has-identity-maps-function-class F)
+      ( has-equivalences-has-identity-maps-function-class)
+
+  equiv-has-identity-maps-has-equivalences-function-class :
+    has-equivalences-function-class F ≃ has-identity-maps-function-class F
+  pr1 equiv-has-identity-maps-has-equivalences-function-class =
+    has-identity-maps-has-equivalences-function-class
+  pr2 equiv-has-identity-maps-has-equivalences-function-class =
+    is-equiv-has-identity-maps-has-equivalences-function-class
+
+  is-equiv-has-equivalences-has-identity-maps-function-class :
+    is-equiv has-equivalences-has-identity-maps-function-class
+  is-equiv-has-equivalences-has-identity-maps-function-class =
+    is-equiv-is-prop
+      ( is-prop-has-identity-maps-function-class F)
+      ( is-prop-has-equivalences-function-class F)
+      ( has-identity-maps-has-equivalences-function-class)
+
+  equiv-has-equivalences-has-identity-maps-function-class :
+    has-identity-maps-function-class F ≃ has-equivalences-function-class F
+  pr1 equiv-has-equivalences-has-identity-maps-function-class =
+    has-equivalences-has-identity-maps-function-class
+  pr2 equiv-has-equivalences-has-identity-maps-function-class =
+    is-equiv-has-equivalences-has-identity-maps-function-class
 ```

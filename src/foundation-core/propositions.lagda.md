@@ -18,7 +18,7 @@ open import foundation-core.function-extensionality
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -133,7 +133,7 @@ module _
     is-equiv-is-prop :
       is-prop A → is-prop B → {f : A → B} → (B → A) → is-equiv f
     is-equiv-is-prop is-prop-A is-prop-B {f} g =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( g)
         ( λ y → eq-is-prop is-prop-B)
         ( λ x → eq-is-prop is-prop-A)
@@ -252,7 +252,7 @@ abstract
     is-prop-equiv
       ( pair
         ( λ f x → f {x})
-        ( is-equiv-has-inverse
+        ( is-equiv-is-invertible
           ( λ g {x} → g x)
           ( refl-htpy)
           ( refl-htpy)))

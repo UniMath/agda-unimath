@@ -122,7 +122,7 @@ module _
     is-equiv-map-compute-Eq-coprod-inl-inl :
       is-equiv map-compute-Eq-coprod-inl-inl
     is-equiv-map-compute-Eq-coprod-inl-inl =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( Eq-eq-coprod-inl)
         ( is-section-Eq-eq-coprod-inl)
         ( is-retraction-Eq-eq-coprod-inl)
@@ -202,7 +202,7 @@ module _
     is-equiv-map-compute-Eq-coprod-inr-inr :
       is-equiv map-compute-Eq-coprod-inr-inr
     is-equiv-map-compute-Eq-coprod-inr-inr =
-      is-equiv-has-inverse
+      is-equiv-is-invertible
         ( Eq-eq-coprod-inr)
         ( is-section-Eq-eq-coprod-inr)
         ( is-retraction-Eq-eq-coprod-inr)

@@ -7,12 +7,16 @@ module orthogonal-factorization-systems.lifting-squares where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.commuting-3-simplices-of-homotopies
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
+open import foundation.fibered-maps
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.extensions-of-maps
@@ -64,9 +68,9 @@ module _
   where
 
   is-lifting-square : (j : X → B) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-lifting-square j = Σ
-    ( is-extension f h j)
-    ( λ E → Σ (is-lift g i j) (λ L → (L ·r f) ~ (H ∙h (g ·l E))))
+  is-lifting-square j =
+    Σ ( is-extension f h j)
+      ( λ E → Σ (is-lift g i j) (λ L → (L ·r f) ~ (H ∙h (g ·l E))))
 
   lifting-square : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   lifting-square = Σ (X → B) (is-lifting-square)
@@ -169,9 +173,58 @@ module _
             Σ ( ( is-lift-lifting-square l') ~
                 ( is-lift-lifting-square l ∙h (g ·l K)))
               ( coherence-htpy-lifting-square l l' K E)))
+
+  refl-htpy-lifting-square :
+    (l : lifting-square h f g i H) → htpy-lifting-square l l
+  pr1 (refl-htpy-lifting-square l) = refl-htpy
+  pr1 (pr2 (refl-htpy-lifting-square l)) = inv-htpy-right-unit-htpy
+  pr1 (pr2 (pr2 (refl-htpy-lifting-square l))) = inv-htpy-right-unit-htpy
+  pr2 (pr2 (pr2 (refl-htpy-lifting-square l))) x =
+    ( inv (assoc (inv right-unit) (β) (α))) ∙
+    ( ( ap
+        ( _∙ α)
+        ( ( ap
+            ( inv right-unit ∙_)
+            ( ap-refl-concat (coherence-lifting-square l x))) ∙
+          ( is-section-left-concat-inv
+            ( right-unit)
+            ( coherence-lifting-square l x ∙ inv right-unit)))) ∙
+      ( ( assoc (coherence-lifting-square l x) (inv right-unit) (α)) ∙
+        ( ( ap
+            ( coherence-lifting-square l x ∙_)
+            ( ( ap
+                ( inv right-unit ∙_)
+                ( right-unit-law-assoc
+                  ( H x)
+                  ( ap g (is-extension-lifting-square l x)))) ∙
+              ( ( is-section-left-concat-inv
+                  ( right-unit)
+                  ( ap (H x ∙_) (inv right-unit))) ∙
+                ( inv
+                  ( is-section-right-concat-inv
+                    ( ap (H x ∙_) (inv right-unit))
+                    ( α)))))) ∙
+          ( ( inv
+              ( assoc
+                ( coherence-lifting-square l x)
+                ( ap (H x ∙_) (inv right-unit) ∙ inv α)
+                ( α))) ∙
+            ( ap
+              ( λ r →
+                ( coherence-lifting-square l x ∙ (ap (H x ∙_) r ∙ inv α)) ∙ α)
+              ( ap-concat-eq-inv-right-unit
+                ( g)
+                ( is-extension-lifting-square l x)))))))
+    where
+      α = assoc (H x) (ap g (is-extension-lifting-square l x)) refl
+      β = ap (_∙ refl) (coherence-lifting-square l x)
+
+  htpy-eq-lifting-square :
+    (l l' : lifting-square h f g i H) → l ＝ l' → htpy-lifting-square l l'
+  htpy-eq-lifting-square l .l refl = refl-htpy-lifting-square l
 ```
 
-It remans to show that `coherence-htpy-lifting-square` indeed is a
+It remains to show that `coherence-htpy-lifting-square` indeed is a
 characterization of identifications of lifting squares.
 
 ### Diagonal maps give lifting squares
@@ -211,4 +264,23 @@ module _
   pr1 (is-lifting-square-diagonal j) = refl-htpy
   pr1 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
   pr2 (pr2 (is-lifting-square-diagonal j)) = refl-htpy
+```
+
+### The lifting square associated to a fibered map
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (f : A → B) (g : X → Y)
+  where
+
+  lifting-square-fibered-map :
+    (h : fibered-map f g) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  lifting-square-fibered-map h =
+    lifting-square
+      ( map-total-fibered-map f g h)
+      ( f)
+      ( g)
+      ( map-base-fibered-map f g h)
+      ( is-map-over-map-total-fibered-map f g h)
 ```

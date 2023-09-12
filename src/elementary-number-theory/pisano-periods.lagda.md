@@ -92,7 +92,7 @@ is-retraction-inv-generating-map-fibonacci-pair-Fin k (pair x y) =
 is-equiv-generating-map-fibonacci-pair-Fin :
   (k : ℕ) → is-equiv (generating-map-fibonacci-pair-Fin k)
 is-equiv-generating-map-fibonacci-pair-Fin k =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( inv-generating-map-fibonacci-pair-Fin k)
     ( is-section-inv-generating-map-fibonacci-pair-Fin k)
     ( is-retraction-inv-generating-map-fibonacci-pair-Fin k)

@@ -161,7 +161,7 @@ pr1 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) D =
     ( λ x → is-finite-cotype-Σ-Decomposition-𝔽 A D x ,
             is-inhabited-cotype-Σ-Decomposition-𝔽 A D x)
 pr2 ( equiv-Relaxed-Σ-Decomposition-Σ-Decomposition-𝔽 A) =
-  is-equiv-has-inverse
+  is-equiv-is-invertible
     ( λ X →
       ( pr1 (pr1 X) , pr1 (pr2 X)) ,
       ( ( λ x →
@@ -249,7 +249,7 @@ module _
   pr1 (equiv-Σ-Decomposition-𝔽-is-finite-subtype) =
     map-Σ-Decomposition-𝔽-subtype-is-finite
   pr2 (equiv-Σ-Decomposition-𝔽-is-finite-subtype) =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       map-inv-Σ-Decomposition-𝔽-subtype-is-finite
       refl-htpy
       refl-htpy

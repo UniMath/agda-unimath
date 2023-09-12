@@ -74,7 +74,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-empty B → is-equiv f
   is-equiv-is-empty f H =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( ex-falso ∘ H)
       ( λ y → ex-falso (H y))
       ( λ x → ex-falso (H (f x)))

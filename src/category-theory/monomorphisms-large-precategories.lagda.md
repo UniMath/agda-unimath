@@ -66,7 +66,7 @@ module _
   is-mono-iso-Large-Precategory :
     is-mono-Large-Precategory C l3 X Y (hom-iso-Large-Precategory C X Y f)
   is-mono-iso-Large-Precategory Z g h =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( λ P →
         ( inv
           ( left-unit-law-comp-hom-Large-Precategory C g)) ∙

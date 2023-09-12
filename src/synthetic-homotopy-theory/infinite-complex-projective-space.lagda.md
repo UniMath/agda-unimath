@@ -19,7 +19,7 @@ open import synthetic-homotopy-theory.circle
 
 ## Definitions
 
-### ℂP∞ as the 1-connected component of the universe at the circle
+### `ℂP∞` as the `1`-connected component of the universe at the circle
 
 ```agda
 ℂP∞ : UU (lsuc lzero)
@@ -30,6 +30,7 @@ pr1 point-ℂP∞ = 𝕊¹
 pr2 point-ℂP∞ = unit-trunc-Set id-equiv
 ```
 
-### `ℂP∞` as the 2-truncation of the 2-sphere
+### `ℂP∞` as the `2`-truncation of the `2`-sphere
 
 This remains to be defined.
+[#742](https://github.com/UniMath/agda-unimath/issues/742)

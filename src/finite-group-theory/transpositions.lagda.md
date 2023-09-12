@@ -40,7 +40,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.univalence
@@ -152,7 +152,7 @@ module _
 
   is-transposition-permutation-Prop : X ≃ X → Prop (l1 ⊔ lsuc l2)
   is-transposition-permutation-Prop f =
-    trunc-Prop (fib (transposition {l2 = l2}) f)
+    trunc-Prop (fiber (transposition {l2 = l2}) f)
 
   is-transposition-permutation : X ≃ X → UU (l1 ⊔ lsuc l2)
   is-transposition-permutation f =
@@ -698,7 +698,7 @@ module _
                       ( P (map-equiv g (pr1 (map-equiv h x))))))
                 ( inv (left-inverse-law-equiv e))
                 ( map-raise (pr2 (map-equiv h x)))))
-          ( is-equiv-has-inverse
+          ( is-equiv-is-invertible
             ( λ (pair x p) →
               map-inv-equiv h ( pair (map-inv-equiv e x) (map-inv-raise p)))
             ( λ (pair x p) →
@@ -855,7 +855,7 @@ pr2 (Fin-succ-Fin-transposition n (pair P H)) =
         ( type-Decidable-Prop ∘ pr1 (Fin-succ-Fin-transposition n (pair P H)))))
     ( λ h →
       unit-trunc-Prop
-        ( ( pair f (is-equiv-has-inverse inv-f retraction-f section-f)) ∘e
+        ( ( pair f (is-equiv-is-invertible inv-f retraction-f section-f)) ∘e
           ( ( inv-right-unit-law-coprod-is-empty
               ( Σ
                 ( Fin n)

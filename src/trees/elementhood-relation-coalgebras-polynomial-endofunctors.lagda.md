@@ -33,14 +33,14 @@ directed graph.
 ## Definition
 
 ```agda
-infixl 0 is-element-of-coalgebra-polynomial-endofunctor
+infixl 6 is-element-of-coalgebra-polynomial-endofunctor
 
 is-element-of-coalgebra-polynomial-endofunctor :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   (X : coalgebra-polynomial-endofunctor l3 A B)
   (x y : type-coalgebra-polynomial-endofunctor X) → UU (l2 ⊔ l3)
 is-element-of-coalgebra-polynomial-endofunctor X x y =
-  fib (component-coalgebra-polynomial-endofunctor X y) x
+  fiber (component-coalgebra-polynomial-endofunctor X y) x
 
 syntax
   is-element-of-coalgebra-polynomial-endofunctor X x y = x ∈ y in-coalgebra X

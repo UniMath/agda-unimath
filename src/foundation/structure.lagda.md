@@ -14,7 +14,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -37,7 +37,7 @@ fam-structure P A = A → structure P
 structure-map :
   {l1 l2 l3 : Level} (P : UU (l1 ⊔ l2) → UU l3) {A : UU l1} {B : UU l2}
   (f : A → B) → UU (l2 ⊔ l3)
-structure-map P {A} {B} f = (b : B) → P (fib f b)
+structure-map P {A} {B} f = (b : B) → P (fiber f b)
 
 hom-structure :
   {l1 l2 l3 : Level} (P : UU (l1 ⊔ l2) → UU l3) →

@@ -33,7 +33,7 @@ module _
   where
 
   is-decidable-map : (A → B) → UU (l1 ⊔ l2)
-  is-decidable-map f = (y : B) → is-decidable (fib f y)
+  is-decidable-map f = (y : B) → is-decidable (fiber f y)
 ```
 
 ```agda
@@ -62,6 +62,6 @@ module _
   is-decidable-map-tot {f} H x =
     is-decidable-is-equiv
       ( is-equiv-map-equiv
-        ( compute-fib-tot f x))
+        ( compute-fiber-tot f x))
       ( H (pr1 x) (pr2 x))
 ```

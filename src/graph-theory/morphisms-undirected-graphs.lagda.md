@@ -19,7 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -161,9 +161,9 @@ module _
                 Id (edge-hom-Undirected-Graph G H f p e) (gE p e)))
           ( equiv-tot
             ( λ gE →
-              equiv-map-Π
+              equiv-Π-equiv-family
                 ( λ p →
-                  equiv-map-Π
+                  equiv-Π-equiv-family
                     ( λ e →
                       equiv-concat
                         ( pr2 (refl-htpy-hom-Undirected-Graph f) p e)

@@ -318,7 +318,7 @@ module _
     (H : is-iso-Precategory C f) (z : obj-Precategory C) →
     is-equiv (precomp-hom-Precategory C f z)
   is-equiv-precomp-is-iso-Precategory H z =
-    is-equiv-has-inverse
+    is-equiv-is-invertible
       ( precomp-hom-inv-is-iso-Precategory H z)
       ( is-section-precomp-hom-inv-is-iso-Precategory H z)
       ( is-retraction-precomp-hom-inv-is-iso-Precategory H z)

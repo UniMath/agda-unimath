@@ -28,7 +28,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.retractions
 open import foundation-core.sets
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -267,7 +267,7 @@ abstract
     (x : A) → has-decidable-equality (B x)
   has-decidable-equality-fiber-has-decidable-equality-Σ {B = B} dA dΣ x =
     has-decidable-equality-equiv'
-      ( equiv-fib-pr1 B x)
+      ( equiv-fiber-pr1 B x)
       ( has-decidable-equality-Σ dΣ
         ( λ t →
           has-decidable-equality-is-prop
@@ -284,13 +284,13 @@ abstract
     has-decidable-equality A
   has-decidable-equality-base-has-decidable-equality-Σ b dΣ dB =
     has-decidable-equality-equiv'
-      ( equiv-total-fib (map-section b))
+      ( equiv-total-fiber (map-section-family b))
       ( has-decidable-equality-Σ dΣ
         ( λ t →
           has-decidable-equality-is-prop
             ( is-prop-map-is-injective
               ( is-set-has-decidable-equality dΣ)
-              ( is-injective-map-section b)
+              ( is-injective-map-section-family b)
               ( t))))
 ```
 

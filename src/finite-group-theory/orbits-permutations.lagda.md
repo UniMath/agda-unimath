@@ -48,7 +48,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.repetitions-of-values
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -2079,7 +2079,7 @@ module _
       ( succ-ℕ (number-of-elements-count h))
       ( pair
         ( h' g P h)
-        ( is-equiv-has-inverse
+        ( is-equiv-is-invertible
           ( inv-h' g P h)
           ( λ T →
             retraction-h'
