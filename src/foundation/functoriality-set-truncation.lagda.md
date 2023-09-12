@@ -33,6 +33,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

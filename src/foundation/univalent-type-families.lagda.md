@@ -7,7 +7,7 @@ module foundation.univalent-type-families where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences

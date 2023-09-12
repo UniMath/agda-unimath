@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 ```
 
 </details>

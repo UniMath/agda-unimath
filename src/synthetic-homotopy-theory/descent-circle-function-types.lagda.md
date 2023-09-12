@@ -17,8 +17,9 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops

@@ -1,7 +1,7 @@
-# Univalent action on equivalences
+# Action on equivalences in type families over subuniverses
 
 ```agda
-module foundation.univalence-action-on-equivalences where
+module foundation.action-on-equivalences-families-over-subuniverses where
 ```
 
 <details><summary>Imports</summary>
@@ -12,7 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.sets
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -29,8 +29,10 @@ open import foundation-core.subtypes
 
 ## Ideas
 
-Given a subuniverse `P`, any family of types `B` indexed by types of `P` has an
-action on equivalences obtained by using the univalence axiom.
+Given a [subuniverse](foundation.subuniverses.md) `P`, any family of types `B`
+indexed by types of `P` has an
+[action on equivalences](foundation.action-on-equivalences-functions.md)
+obtained by using the [univalence axiom](foundation.univalence.md).
 
 ## Definition
 
@@ -40,18 +42,19 @@ module _
   ( P : subuniverse l1 l2) (B : type-subuniverse P → UU l3)
   where
 
-  univalent-action-equiv :
+  action-equiv-family-on-subuniverse :
     (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y
-  univalent-action-equiv X Y e = equiv-tr B (eq-equiv-subuniverse P e)
+  action-equiv-family-on-subuniverse X Y e =
+    equiv-tr B (eq-equiv-subuniverse P e)
 ```
 
 ## Properties
 
 ```agda
-  preserves-id-equiv-univalent-action-equiv :
+  preserves-id-equiv-action-equiv-family-on-subuniverse :
     (X : type-subuniverse P) →
-    univalent-action-equiv X X id-equiv ＝ id-equiv
-  preserves-id-equiv-univalent-action-equiv X =
+    action-equiv-family-on-subuniverse X X id-equiv ＝ id-equiv
+  preserves-id-equiv-action-equiv-family-on-subuniverse X =
     ( ap (equiv-tr B)
       ( is-injective-map-equiv
         ( extensionality-subuniverse P X X)
@@ -60,38 +63,41 @@ module _
           ( id-equiv)))) ∙
       ( equiv-tr-refl B)
 
-  Ind-univalent-action-path :
+  Ind-path-action-equiv-family-on-subuniverse :
     { l4 : Level}
     ( X : type-subuniverse P)
     ( F : (Y : type-subuniverse P) → B X ≃ B Y → UU l4) →
     F X id-equiv → ( Y : type-subuniverse P) (p : X ＝ Y) →
     F Y (equiv-tr B p)
-  Ind-univalent-action-path X F p .X refl =
+  Ind-path-action-equiv-family-on-subuniverse X F p .X refl =
     tr (F X) (inv (equiv-tr-refl B)) p
 
-  Ind-univalent-action-equiv :
+  Ind-action-equiv-family-on-subuniverse :
     { l4 : Level}
     ( X : type-subuniverse P)
     ( F : (Y : type-subuniverse P) → B X ≃ B Y → UU l4) →
     F X id-equiv → (Y : type-subuniverse P) (e : pr1 X ≃ pr1 Y) →
-    F Y (univalent-action-equiv X Y e)
-  Ind-univalent-action-equiv X F p Y e =
-    Ind-univalent-action-path X F p Y (eq-equiv-subuniverse P e)
+    F Y (action-equiv-family-on-subuniverse X Y e)
+  Ind-action-equiv-family-on-subuniverse X F p Y e =
+    Ind-path-action-equiv-family-on-subuniverse X F p Y
+      ( eq-equiv-subuniverse P e)
 
-  is-contr-preserves-id-action-equiv :
+  is-contr-preserves-id-action-equiv-family-on-subuniverse :
     ( (X : type-subuniverse P) → is-set (B X)) →
     is-contr
       ( Σ
         ( (X Y : type-subuniverse P) → pr1 X ≃ pr1 Y → B X ≃ B Y)
         ( λ D → (X : type-subuniverse P) → D X X id-equiv ＝ id-equiv))
-  pr1 (pr1 (is-contr-preserves-id-action-equiv H)) = univalent-action-equiv
-  pr2 (pr1 (is-contr-preserves-id-action-equiv H)) =
-    preserves-id-equiv-univalent-action-equiv
-  pr2 (is-contr-preserves-id-action-equiv H) (D , p) =
+  pr1 (pr1 (is-contr-preserves-id-action-equiv-family-on-subuniverse H)) =
+    action-equiv-family-on-subuniverse
+  pr2 (pr1 (is-contr-preserves-id-action-equiv-family-on-subuniverse H)) =
+    preserves-id-equiv-action-equiv-family-on-subuniverse
+  pr2 (is-contr-preserves-id-action-equiv-family-on-subuniverse H) (D , p) =
     eq-pair-Σ
       ( eq-htpy (λ X → eq-htpy (λ Y → eq-htpy (λ e →
-        lemma2 univalent-action-equiv D
-          (λ X → preserves-id-equiv-univalent-action-equiv X ∙ inv (p X))
+        lemma2 action-equiv-family-on-subuniverse D
+          ( λ X →
+            preserves-id-equiv-action-equiv-family-on-subuniverse X ∙ inv (p X))
           X Y e))))
       ( eq-is-prop
         ( is-prop-Π

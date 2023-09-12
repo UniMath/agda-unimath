@@ -22,7 +22,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.iterated-cartesian-product-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 

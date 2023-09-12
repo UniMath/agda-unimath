@@ -17,7 +17,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 

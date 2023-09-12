@@ -16,8 +16,9 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 ```
 
 </details>

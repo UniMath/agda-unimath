@@ -25,7 +25,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -121,8 +121,8 @@ module _
 ### Canonical descent data for a family over the circle
 
 A type family over the circle gives rise to its canonical descent data, obtained
-by evaluation at `base` and [transporting](foundation-core.transport.md) along
-`loop`.
+by evaluation at `base` and
+[transporting](foundation-core.transport-along-identifications.md) along `loop`.
 
 ```agda
 ev-descent-data-circle :

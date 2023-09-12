@@ -34,7 +34,7 @@ open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.univalence
 open import foundation.universe-levels
