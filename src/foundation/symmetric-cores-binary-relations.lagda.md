@@ -123,7 +123,7 @@ module _
     ( equiv-dependent-universal-property-identity-system-is-torsorial
         { a = Fin 2 , refl-mere-equiv (Fin 2)}
         ( zero-Fin 1)
-        ( is-contr-total-UU-Fin-two-ℕ)) ∘e
+        ( is-contr-pointed-2-Element-Type)) ∘e
     ( equiv-Π-equiv-family
       ( λ I →
         ( equiv-swap-Π) ∘e
