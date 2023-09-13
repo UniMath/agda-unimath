@@ -45,13 +45,13 @@ open import category-theory.epimorphisms-in-large-precategories public
 open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
-open import category-theory.exponential-objects-precategories public
+open import category-theory.exponential-objects-in-precategories public
 open import category-theory.functors-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
 open import category-theory.groupoids public
 open import category-theory.homotopies-natural-transformations-large-precategories public
-open import category-theory.initial-objects-precategories public
+open import category-theory.initial-objects-in-precategories public
 open import category-theory.isomorphisms-in-categories public
 open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
@@ -75,6 +75,6 @@ open import category-theory.pullbacks-in-precategories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.sieves-in-categories public
 open import category-theory.slice-precategories public
-open import category-theory.terminal-objects-precategories public
+open import category-theory.terminal-objects-in-precategories public
 open import category-theory.yoneda-lemma-precategories public
 ```

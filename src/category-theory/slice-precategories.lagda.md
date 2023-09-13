@@ -10,7 +10,7 @@ module category-theory.slice-precategories where
 open import category-theory.precategories
 open import category-theory.products-in-precategories
 open import category-theory.pullbacks-in-precategories
-open import category-theory.terminal-objects-precategories
+open import category-theory.terminal-objects-in-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types

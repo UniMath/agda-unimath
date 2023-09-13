@@ -1,7 +1,7 @@
 # Exponential objects in precategories
 
 ```agda
-module category-theory.exponential-objects-precategories where
+module category-theory.exponential-objects-in-precategories where
 ```
 
 <details><summary>Imports</summary>

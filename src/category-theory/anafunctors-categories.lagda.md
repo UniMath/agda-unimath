@@ -9,8 +9,8 @@ module category-theory.anafunctors-categories where
 ```agda
 open import category-theory.anafunctors-precategories
 open import category-theory.categories
-open import category-theory.functors-precategories
 open import category-theory.functors-categories
+open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -74,7 +74,9 @@ module _
   anafunctor-functor-Category :
     functor-Category C D → anafunctor-Category l4 C D
   anafunctor-functor-Category =
-    anafunctor-functor-Precategory (precategory-Category C) (precategory-Category D)
+    anafunctor-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
 ```
 
 ### The action on objects of an anafunctor between categories
