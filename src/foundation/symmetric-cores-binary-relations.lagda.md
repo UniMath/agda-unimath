@@ -107,8 +107,20 @@ module _
     hom-Symmetric-Relation S (symmetric-core-Relation R) ≃
     hom-Relation (relation-Symmetric-Relation S) R
   equiv-universal-property-symmetric-core-Relation' =
-    ( {!equiv-dependent-universal-property-Fin-two-ℕ ?!} ∘e
-      equiv-dependent-universal-property-identity-system-is-torsorial
+    ( equiv-Π-equiv-family
+      ( λ a →
+        equiv-Π-equiv-family
+          ( λ b →
+            {!equiv-postcomp-equiv ?!}))) ∘e
+    ( equiv-ev-pair) ∘e
+    ( equiv-precomp-Π
+      ( inv-equiv equiv-universal-property-Fin-two-ℕ)
+      ( λ x →
+        S ( (Fin 2 , refl-mere-equiv (Fin 2)) , x) →
+        R ( x (zero-Fin 1))
+          ( other-element-unordered-pair
+            ( (Fin 2 , refl-mere-equiv (Fin 2)) , x) (zero-Fin 1)))) ∘e
+    ( equiv-dependent-universal-property-identity-system-is-torsorial
         { a = Fin 2 , refl-mere-equiv (Fin 2)}
         ( zero-Fin 1)
         ( is-contr-total-UU-Fin-two-ℕ)) ∘e

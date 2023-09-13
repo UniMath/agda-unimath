@@ -63,10 +63,32 @@ equiv-dependent-universal-property-Fin (succ-ℕ (succ-ℕ n)) A =
     ( equiv-dependent-universal-property-Fin (succ-ℕ n) (A ∘ inl))
     ( id-equiv)) ∘e
   ( equiv-dependent-universal-property-Maybe A)
+```
 
+### The dependent universal property of the standard 2-element type
+
+```agda
 equiv-dependent-universal-property-Fin-two-ℕ :
   {l : Level} (A : Fin 2 → UU l) →
   ((i : Fin 2) → A i) ≃ (A (zero-Fin 1) × A (one-Fin 1))
 equiv-dependent-universal-property-Fin-two-ℕ =
   equiv-dependent-universal-property-Fin 2
+```
+
+### The universal property of the standard finite types
+
+```agda
+equiv-universal-property-Fin :
+  {l : Level} (n : ℕ) {X : UU l} →
+  (Fin n → X) ≃ iterated-prod n (λ _ → X)
+equiv-universal-property-Fin n =
+  equiv-dependent-universal-property-Fin n (λ _ → _)
+```
+
+### The universal property of the standard 2-element type
+
+```agda
+equiv-universal-property-Fin-two-ℕ :
+  {l : Level} {X : UU l} → (Fin 2 → X) ≃ X × X
+equiv-universal-property-Fin-two-ℕ = equiv-universal-property-Fin 2
 ```
