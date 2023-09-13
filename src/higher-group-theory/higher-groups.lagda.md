@@ -24,8 +24,10 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-An ∞-group is just a pointed connected type. Its underlying type is its loop
-space, and the classifying type is the pointed connected type itself.
+An **∞-group** is just a [pointed](structured-types.pointed-types.md)
+[connected](foundation.connected-types.md) type. Its underlying type is its
+[loop space](synthetic-homotopy-theory.loop-spaces.md), and the classifying type
+is the pointed connected type itself.
 
 ## Definition
 
@@ -117,7 +119,8 @@ module _
 
 ```agda
 trivial-∞-Group : {l : Level} → ∞-Group l
-trivial-∞-Group =
-  ( (raise-unit _) , raise-star) ,
-  is-0-connected-is-contr (raise-unit _) is-contr-raise-unit
+pr1 (pr1 (trivial-∞-Group {l})) = raise-unit l
+pr2 (pr1 trivial-∞-Group) = raise-star
+pr2 (trivial-∞-Group {l}) =
+  is-0-connected-is-contr (raise-unit l) is-contr-raise-unit
 ```

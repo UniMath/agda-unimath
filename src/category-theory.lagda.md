@@ -65,6 +65,7 @@ open import category-theory.natural-numbers-object-precategories public
 open import category-theory.natural-transformations-categories public
 open import category-theory.natural-transformations-large-precategories public
 open import category-theory.natural-transformations-precategories public
+open import category-theory.one-object-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-functors public

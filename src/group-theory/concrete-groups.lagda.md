@@ -196,8 +196,8 @@ module _
 
 ```agda
 trivial-Concrete-Group : {l : Level} → Concrete-Group l
-trivial-Concrete-Group =
-  trivial-∞-Group ,
+pr1 trivial-Concrete-Group = trivial-∞-Group
+pr2 trivial-Concrete-Group =
   is-trunc-is-contr
     (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
     is-contr-raise-unit

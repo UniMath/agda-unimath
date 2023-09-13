@@ -54,7 +54,8 @@ module _
   hom-action-representation-precategory-Monoid = pr2 ρ
 
   action-representation-precategory-Monoid :
-    type-Monoid M → type-endo-Precategory C obj-representation-precategory-Monoid
+    type-Monoid M →
+    type-endo-Precategory C obj-representation-precategory-Monoid
   action-representation-precategory-Monoid =
     map-hom-Monoid M
       ( monoid-endo-Precategory C obj-representation-precategory-Monoid)
