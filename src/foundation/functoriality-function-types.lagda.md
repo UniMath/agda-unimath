@@ -19,6 +19,7 @@ open import foundation-core.constant-maps
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
@@ -58,6 +59,32 @@ module _
   equiv-function-type : (A' → B') ≃ (A → B)
   pr1 equiv-function-type = map-equiv-function-type
   pr2 equiv-function-type = is-equiv-map-equiv-function-type
+```
+
+### Two maps being homotopic is equivalent to them being homotopic after pre- or postcomposition by an equivalence
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  equiv-htpy-precomp-htpy :
+    ( f g : B → C) (e : A ≃ B) →
+    ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
+    ( f ~ g)
+  equiv-htpy-precomp-htpy f g e =
+    equiv-Π
+      ( eq-value f g)
+      ( e)
+      ( λ a → id-equiv)
+
+  equiv-htpy-postcomp-htpy :
+    ( e : B ≃ C) (f g : A → B) →
+    ( f ~ g) ≃
+    ( (map-equiv e ∘ f) ~ (map-equiv e ∘ g))
+  equiv-htpy-postcomp-htpy e f g =
+    equiv-Π-equiv-family
+      ( λ a → equiv-ap e (f a) (g a))
 ```
 
 ### A map is truncated iff postcomposition by it is truncated
