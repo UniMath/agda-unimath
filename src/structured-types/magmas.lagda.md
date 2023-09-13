@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A magma is a type equipped with a binary operation.
+A **magma** is a type equipped with a binary operation.
 
 ## Definition
 

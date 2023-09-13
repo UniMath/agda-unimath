@@ -10,13 +10,14 @@ module foundation.reflecting-maps-equivalence-relations where
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalence-relations
 open import foundation-core.equivalences
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets

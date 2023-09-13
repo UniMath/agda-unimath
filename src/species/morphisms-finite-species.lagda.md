@@ -14,6 +14,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -41,7 +42,7 @@ type-hom-species-𝔽 :
 type-hom-species-𝔽 {l1} F G = (X : 𝔽 l1) → type-𝔽 (F X) → type-𝔽 (G X)
 ```
 
-### The identity momorphisms of finite species
+### The identity morphisms of finite species
 
 ```agda
 id-hom-species-𝔽 :

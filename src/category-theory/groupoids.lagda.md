@@ -9,8 +9,8 @@ module category-theory.groupoids where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-categories
-open import category-theory.isomorphisms-categories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 open import category-theory.pregroupoids
 

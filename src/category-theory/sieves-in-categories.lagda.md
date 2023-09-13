@@ -1,7 +1,7 @@
 # Sieves in categories
 
 ```agda
-module category-theory.sieves-categories where
+module category-theory.sieves-in-categories where
 ```
 
 <details><summary>Imports</summary>

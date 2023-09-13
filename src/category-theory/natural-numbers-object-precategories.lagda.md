@@ -8,7 +8,7 @@ module category-theory.natural-numbers-object-precategories where
 
 ```agda
 open import category-theory.precategories
-open import category-theory.terminal-objects-precategories
+open import category-theory.terminal-objects-in-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types

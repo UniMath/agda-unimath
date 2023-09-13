@@ -15,7 +15,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A pointed type is a type `A` equipped with an element `a : A`.
+A **pointed type** is a type `A` equipped with an element `a : A`.
 
 ## Definition
 

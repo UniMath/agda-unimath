@@ -12,10 +12,14 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.unit-type
 open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import group-theory.semigroups
+
+open import structured-types.h-spaces
+open import structured-types.wild-monoids
 ```
 
 </details>
@@ -128,4 +132,32 @@ abstract
 is-unital-Semigroup-Prop : {l : Level} (G : Semigroup l) → Prop l
 pr1 (is-unital-Semigroup-Prop G) = is-unital-Semigroup G
 pr2 (is-unital-Semigroup-Prop G) = is-prop-is-unital-Semigroup G
+```
+
+### Monoids are H-spaces
+
+```agda
+h-space-Monoid : {l : Level} (M : Monoid l) → H-Space l
+pr1 (pr1 (h-space-Monoid M)) = type-Monoid M
+pr2 (pr1 (h-space-Monoid M)) = unit-Monoid M
+pr1 (pr2 (h-space-Monoid M)) = mul-Monoid M
+pr1 (pr2 (pr2 (h-space-Monoid M))) = left-unit-law-mul-Monoid M
+pr1 (pr2 (pr2 (pr2 (h-space-Monoid M)))) = right-unit-law-mul-Monoid M
+pr2 (pr2 (pr2 (pr2 (h-space-Monoid M)))) =
+  eq-is-prop (is-set-type-Monoid M _ _)
+```
+
+### Monoids are wild monoids
+
+```agda
+wild-monoid-Monoid : {l : Level} (M : Monoid l) → Wild-Monoid l
+pr1 (wild-monoid-Monoid M) = h-space-Monoid M
+pr1 (pr2 (wild-monoid-Monoid M)) = associative-mul-Monoid M
+pr1 (pr2 (pr2 (wild-monoid-Monoid M))) y z =
+  eq-is-prop (is-set-type-Monoid M _ _)
+pr1 (pr2 (pr2 (pr2 (wild-monoid-Monoid M)))) x z =
+  eq-is-prop (is-set-type-Monoid M _ _)
+pr1 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) x y =
+  eq-is-prop (is-set-type-Monoid M _ _)
+pr2 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) = star
 ```

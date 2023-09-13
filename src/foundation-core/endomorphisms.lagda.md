@@ -64,4 +64,4 @@ pr2 (endo-Truncated-Type k A) = is-trunc-endo k (is-trunc-type-Truncated-Type A)
 ## See also
 
 - For endomorphisms in a category see
-  [`category-theory.endomorphisms-of-objects-categories`](category-theory.endomorphisms-of-objects-categories.md).
+  [`category-theory.endomorphisms-in-categories`](category-theory.endomorphisms-in-categories.md).

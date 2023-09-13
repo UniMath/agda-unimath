@@ -1,7 +1,7 @@
 # Equivalences between precategories
 
 ```agda
-module category-theory.equivalences-precategories where
+module category-theory.equivalences-of-precategories where
 ```
 
 <details><summary>Imports</summary>

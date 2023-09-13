@@ -17,12 +17,15 @@ open import structured-types.pointed-types
 
 ## Idea
 
-In [`structured-types.coherent-h-spaces`](structured-types.coherent-h-spaces.md)
-we saw that the type of coherent H-space structures on a pointed type `A` is
-equivalently described as the type of pointed sections of the pointed evaluation
-map `(A → A) →∗ A`. If the type `A` is connected, then the section maps to the
-connected component of `(A ≃ A)` at the identity equivalence. An evaluative
-H-space is a pointed type such that the map `ev_pt : (A ≃ A)_{(id)} → A` is an
+In [`structured-types.h-spaces`](structured-types.h-spaces.md) we saw that the
+type of H-space structures on a
+[pointed type](structured-types.pointed-types.md) `A` is equivalently described
+as the type of [pointed sections](structured-types.pointed-types.md) of the
+pointed evaluation map `(A → A) →∗ A`. If the type `A` is
+[connected](foundation.connected-types.md), then the section maps to the
+[connected component](foundation.connected-components.md) of `(A ≃ A)` at the
+identity [equivalence](foundation-core.equivalences.md). An **evaluative
+H-space** is a pointed type such that the map `ev_pt : (A ≃ A)_{(id)} → A` is an
 equivalence.
 
 ## Definition
@@ -35,3 +38,11 @@ is-central-h-space A =
     { A = type-Pointed-Type A → type-Pointed-Type A}
     ( ev-point-Pointed-Type A)
 ```
+
+## References
+
+- Ulrik Buchholtz, Daniel Christensen, Jarl G. Taxerås Flaten, Egbert Rijke,
+  _Central H-spaces and banded types_
+  ([arXiv:2301.02636](https://arxiv.org/abs/2301.02636))
+
+-
