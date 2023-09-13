@@ -9,13 +9,16 @@ module foundation.symmetric-cores-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-function-types
 open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.mere-equivalences
 open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
@@ -51,13 +54,18 @@ that the precomposition function
   hom-Symmetric-Relation S (core R) → hom-Relation (rel S) R
 ```
 
-is an [equivalence](foundation-core.equivalences.md). The symmetric core of a binary relation `R` is defined as the relation
+is an [equivalence](foundation-core.equivalences.md). The symmetric core of a
+binary relation `R` is defined as the relation
 
 ```text
   core R (I,a) := (i : I) → R (a i) (a -i)
 ```
 
-where `-i` is the element of the [2-element type](univalent-combinatorics.2-element-types.md) obtained by applying the swap [involution](foundation.involutions.md) to `i`. With this definition it is easy to see that the universal property of the adjunction should hold, since we have
+where `-i` is the element of the
+[2-element type](univalent-combinatorics.2-element-types.md) obtained by
+applying the swap [involution](foundation.involutions.md) to `i`. With this
+definition it is easy to see that the universal property of the adjunction
+should hold, since we have
 
 ```text
   ((I,a) → S (I,a) → core R (I,a)) ≃ ((x y : A) → S {x,y} → R x y).
@@ -103,57 +111,29 @@ module _
   map-universal-property-symmetric-core-Relation f x y s =
     counit-symmetric-core-Relation R (f (standard-unordered-pair x y) s)
 
-  equiv-universal-property-symmetric-core-Relation' :
+  equiv-universal-property-symmetric-core-Relation :
     hom-Symmetric-Relation S (symmetric-core-Relation R) ≃
     hom-Relation (relation-Symmetric-Relation S) R
-  equiv-universal-property-symmetric-core-Relation' =
+  equiv-universal-property-symmetric-core-Relation =
     ( equiv-Π-equiv-family
-      ( λ a →
-        equiv-Π-equiv-family
-          ( λ b →
-            {!equiv-postcomp-equiv ?!}))) ∘e
-    ( equiv-ev-pair) ∘e
-    ( equiv-precomp-Π
-      ( inv-equiv equiv-universal-property-Fin-two-ℕ)
       ( λ x →
-        S ( (Fin 2 , refl-mere-equiv (Fin 2)) , x) →
-        R ( x (zero-Fin 1))
-          ( other-element-unordered-pair
-            ( (Fin 2 , refl-mere-equiv (Fin 2)) , x) (zero-Fin 1)))) ∘e
-    ( equiv-dependent-universal-property-identity-system-is-torsorial
-        { a = Fin 2 , refl-mere-equiv (Fin 2)}
-        ( zero-Fin 1)
-        ( is-contr-pointed-2-Element-Type)) ∘e
-    ( equiv-Π-equiv-family
-      ( λ I →
-        ( equiv-swap-Π) ∘e
-        ( equiv-Π-equiv-family (λ a → equiv-swap-Π)))) ∘e
-    ( equiv-ev-pair)
+        equiv-Π-equiv-family
+          ( λ y →
+            equiv-postcomp
+              ( S (standard-unordered-pair x y))
+              ( equiv-tr
+                ( R _)
+                ( compute-other-element-standard-unordered-pair x y
+                  ( zero-Fin 1)))))) ∘e
+    ( equiv-dependent-universal-property-pointed-unordered-pairs
+      ( λ p i →
+        S p →
+        R (element-unordered-pair p i) (other-element-unordered-pair p i))) ∘e
+    ( equiv-Π-equiv-family (λ p → equiv-swap-Π))
 
-  map-inv-universal-property-symmetric-core-Relation :
-    hom-Relation (relation-Symmetric-Relation S) R →
-    hom-Symmetric-Relation S (symmetric-core-Relation R)
-  map-inv-universal-property-symmetric-core-Relation f p s i =
-    f ( element-unordered-pair p i)
-      ( other-element-unordered-pair p i)
-      ( tr-inv-Symmetric-Relation S
-        ( standard-unordered-pair
-          ( element-unordered-pair p i)
-          ( other-element-unordered-pair p i))
-        ( p)
-        ( compute-standard-unordered-pair-element-unordered-pair p i)
-        ( s))
-
-  is-section-map-inv-universal-property-symmetric-core-Relation :
-    map-universal-property-symmetric-core-Relation ∘
-    map-inv-universal-property-symmetric-core-Relation ~
-    id
-  is-section-map-inv-universal-property-symmetric-core-Relation f =
-    eq-htpy
-      ( λ p →
-        eq-htpy
-          ( λ s →
-            eq-htpy
-              ( λ i →
-                {!!})))
+  universal-property-symmetric-core-Relation :
+    is-equiv map-universal-property-symmetric-core-Relation
+  universal-property-symmetric-core-Relation =
+    is-equiv-map-equiv
+      ( equiv-universal-property-symmetric-core-Relation)
 ```

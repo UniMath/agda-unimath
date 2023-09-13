@@ -273,7 +273,6 @@ abstract
         ( λ h y → (h y) ∘ unit-trunc-Prop)
         ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
         ( is-equiv-map-equiv-Π-equiv-family
-          ( λ y p z → p)
           ( λ y →
             is-equiv-diagonal-is-contr
               ( is-proof-irrelevant-is-prop
@@ -281,7 +280,6 @@ abstract
                 ( is-surj-f y))
               ( type-Prop (P y))))
         ( is-equiv-map-equiv-Π-equiv-family
-          ( λ b g → g ∘ unit-trunc-Prop)
           ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
       ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
 

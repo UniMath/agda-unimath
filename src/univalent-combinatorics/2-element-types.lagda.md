@@ -27,6 +27,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
@@ -43,6 +44,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -102,6 +104,14 @@ standard-2-Element-Type l = Fin-UU-Fin l 2
 
 type-standard-2-Element-Type : (l : Level) → UU l
 type-standard-2-Element-Type l = type-2-Element-Type (standard-2-Element-Type l)
+
+zero-standard-2-Element-Type :
+  {l : Level} → type-standard-2-Element-Type l
+zero-standard-2-Element-Type = map-raise (zero-Fin 1)
+
+one-standard-2-Element-Type :
+  {l : Level} → type-standard-2-Element-Type l
+one-standard-2-Element-Type = map-raise (one-Fin 1)
 ```
 
 ## Properties
@@ -388,6 +398,22 @@ eq-point-2-Element-Type :
   type-2-Element-Type X → standard-2-Element-Type l ＝ X
 eq-point-2-Element-Type =
   map-inv-equiv equiv-point-eq-2-Element-Type
+
+is-identity-system-type-2-Element-Type :
+  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  is-identity-system l2 (type-2-Element-Type {l1}) X x
+is-identity-system-type-2-Element-Type X x =
+  is-identity-system-is-torsorial X x (is-contr-pointed-2-Element-Type)
+
+dependent-universal-property-identity-system-type-2-Element-Type :
+  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  dependent-universal-property-identity-system l2
+    { B = type-2-Element-Type {l1}}
+    { a = X}
+    ( x)
+dependent-universal-property-identity-system-type-2-Element-Type X x =
+  dependent-universal-property-identity-system-is-torsorial x
+    ( is-contr-pointed-2-Element-Type)
 ```
 
 ### For any `2`-element type `X`, the type of automorphisms on `X` is a `2`-element type
