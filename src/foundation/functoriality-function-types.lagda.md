@@ -61,7 +61,7 @@ module _
   pr2 equiv-function-type = is-equiv-map-equiv-function-type
 ```
 
-### Two maps being homotopic is equivalent to them being homotopic after pre- and postcomposition by an equivalence
+### Two maps being homotopic is equivalent to them being homotopic after pre- or postcomposition by an equivalence
 
 ```agda
 module _

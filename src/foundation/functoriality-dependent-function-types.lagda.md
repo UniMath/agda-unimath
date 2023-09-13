@@ -127,7 +127,7 @@ id-map-equiv-Π :
 id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equiv) h)
 ```
 
-### Two maps being homotopic is equivalent to them being homotopic after pre- and postcomposition by an equivalence
+### Two maps being homotopic is equivalent to them being homotopic after pre- or postcomposition by an equivalence
 
 ```agda
 module _
