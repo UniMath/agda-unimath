@@ -117,7 +117,7 @@ module _
 
   flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
-    {l : Level} →
+    { l : Level} →
     universal-property-pushout l
       ( map-Σ-map-base f (P ∘ horizontal-map-cocone f g c))
       ( map-Σ
