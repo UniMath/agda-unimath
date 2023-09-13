@@ -109,6 +109,8 @@ module _
   pr1-pair-eq-Σ-ap refl = refl
 ```
 
+### Computing action of functions on identifications of the form `eq-pair-Σ p q`
+
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {Y : UU l3} (f : Σ A B → Y)
