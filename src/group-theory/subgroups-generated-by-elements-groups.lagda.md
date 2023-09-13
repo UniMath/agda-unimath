@@ -9,15 +9,12 @@ module group-theory.subgroups-generated-by-elements-groups where
 ```agda
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.singleton-subtypes
 open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.free-groups-with-one-generator

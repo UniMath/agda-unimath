@@ -16,6 +16,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import structured-types.pointed-dependent-functions
 open import structured-types.pointed-families-of-types

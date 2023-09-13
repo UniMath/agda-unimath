@@ -10,16 +10,13 @@ module group-theory.free-groups-with-one-generator where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.iterating-automorphisms
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels

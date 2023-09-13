@@ -39,9 +39,9 @@ module _
   vertex-undirected-graph-Directed-Graph = vertex-Directed-Graph G
 
   edge-undirected-graph-Directed-Graph :
-    symmetric-binary-relation l2 vertex-undirected-graph-Directed-Graph
+    Symmetric-Relation l2 vertex-undirected-graph-Directed-Graph
   edge-undirected-graph-Directed-Graph =
-    symmetric-binary-relation-Relation (edge-Directed-Graph G)
+    symmetric-relation-Relation (edge-Directed-Graph G)
 
   undirected-graph-Graph : Undirected-Graph l1 l2
   pr1 undirected-graph-Graph = vertex-undirected-graph-Directed-Graph

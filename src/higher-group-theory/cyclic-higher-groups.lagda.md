@@ -14,9 +14,6 @@ open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
 open import higher-group-theory.homomorphisms-higher-groups
-
-open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.loop-spaces
 ```
 
 </details>

@@ -21,7 +21,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-types
 open import foundation.split-surjective-maps
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types

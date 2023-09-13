@@ -7,10 +7,8 @@ module foundation.universal-property-identity-systems where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-systems
 open import foundation.torsorial-type-families
 open import foundation.universal-property-dependent-pair-types
@@ -18,8 +16,6 @@ open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.sections
-open import foundation-core.transport
 ```
 
 </details>

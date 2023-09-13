@@ -10,7 +10,7 @@ module foundation-core.dependent-identifications where
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -26,10 +26,11 @@ identification
   tr B p u ＝ v,
 ```
 
-where `tr` is the [transport](foundation-core.transport.md) function. Dependent
-identifications also satisfy groupoid laws, which are formulated appropriately
-as dependent identifications. The groupoid laws for dependent identifications
-are proven in
+where `tr` is the
+[transport](foundation-core.transport-along-identifications.md) function.
+Dependent identifications also satisfy groupoid laws, which are formulated
+appropriately as dependent identifications. The groupoid laws for dependent
+identifications are proven in
 [`foundation.dependent-identifications`](foundation.dependent-identifications.md).
 
 ## Definition

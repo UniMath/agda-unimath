@@ -15,7 +15,7 @@ open import foundation.identity-types
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import trees.elementhood-relation-w-types

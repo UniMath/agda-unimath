@@ -13,19 +13,14 @@ open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.iterating-automorphisms
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.integer-powers-of-elements-groups
 open import group-theory.multiples-of-elements-abelian-groups
-
-open import structured-types.initial-pointed-type-equipped-with-automorphism
-open import structured-types.pointed-types-equipped-with-automorphisms
 ```
 
 </details>

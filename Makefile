@@ -33,10 +33,10 @@ METAFILES := \
 agdaFiles:
 	@rm -rf $@
 	@rm -rf ./src/everything.lagda.md
-	@find src -name temp -prune -o -type f \( -name "*.agda" -o -name "*.lagda" -o -name "*.lagda.md" \) -print > $@
+	@git ls-files src | grep '\.lagda.md$$' > $@
 	@sort -o $@ $@
 	@wc -l $@
-	@echo "$(shell (find src -name '*.lagda.md' -print0 | xargs -0 cat ) | wc -l) LOC"
+	@echo "$(shell (git ls-files src | grep '.lagda.md$$' | xargs cat) | wc -l) LOC"
 
 .PHONY: ./src/everything.lagda.md
 src/everything.lagda.md: agdaFiles

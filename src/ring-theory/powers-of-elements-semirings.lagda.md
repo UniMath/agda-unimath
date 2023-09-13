@@ -11,7 +11,6 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.universe-levels
 

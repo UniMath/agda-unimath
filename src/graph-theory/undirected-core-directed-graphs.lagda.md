@@ -10,6 +10,7 @@ module graph-theory.undirected-core-directed-graphs where
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.symmetric-binary-relations
+open import foundation.symmetric-cores-binary-relations
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -44,7 +45,7 @@ module _
   vertex-undirected-core-Directed-Graph = vertex-Directed-Graph G
 
   edge-undirected-core-Directed-Graph :
-    symmetric-binary-relation l2 vertex-undirected-core-Directed-Graph
+    Symmetric-Relation l2 vertex-undirected-core-Directed-Graph
   edge-undirected-core-Directed-Graph =
     symmetric-core-Relation (edge-Directed-Graph G)
 

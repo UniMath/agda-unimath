@@ -15,7 +15,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.symmetric-binary-relations
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
@@ -42,7 +42,7 @@ edges from a vertex to itself.
 
 ```agda
 Undirected-Graph : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Undirected-Graph l1 l2 = Σ (UU l1) (symmetric-binary-relation l2)
+Undirected-Graph l1 l2 = Σ (UU l1) (Symmetric-Relation l2)
 
 module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
@@ -64,7 +64,7 @@ module _
     type-unordered-pair-vertices-Undirected-Graph p → vertex-Undirected-Graph
   element-unordered-pair-vertices-Undirected-Graph p = element-unordered-pair p
 
-  edge-Undirected-Graph : symmetric-binary-relation l2 vertex-Undirected-Graph
+  edge-Undirected-Graph : Symmetric-Relation l2 vertex-Undirected-Graph
   edge-Undirected-Graph = pr2 G
 
   total-edge-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
@@ -76,13 +76,13 @@ module _
       (p q : unordered-pair-vertices-Undirected-Graph) →
       Eq-unordered-pair p q → edge-Undirected-Graph p ≃ edge-Undirected-Graph q
     equiv-tr-edge-Undirected-Graph =
-      equiv-tr-symmetric-binary-relation edge-Undirected-Graph
+      equiv-tr-Symmetric-Relation edge-Undirected-Graph
 
     compute-refl-equiv-tr-edge-Undirected-Graph :
       (p : unordered-pair-vertices-Undirected-Graph) →
       equiv-tr-edge-Undirected-Graph p p (refl-Eq-unordered-pair p) ＝ id-equiv
     compute-refl-equiv-tr-edge-Undirected-Graph =
-      compute-refl-equiv-tr-symmetric-binary-relation edge-Undirected-Graph
+      compute-refl-equiv-tr-Symmetric-Relation edge-Undirected-Graph
 
     htpy-compute-refl-equiv-tr-edge-Undirected-Graph :
       (p : unordered-pair-vertices-Undirected-Graph) →
@@ -90,24 +90,24 @@ module _
         ( equiv-tr-edge-Undirected-Graph p p (refl-Eq-unordered-pair p))
         ( id-equiv)
     htpy-compute-refl-equiv-tr-edge-Undirected-Graph =
-      htpy-compute-refl-equiv-tr-symmetric-binary-relation edge-Undirected-Graph
+      htpy-compute-refl-equiv-tr-Symmetric-Relation edge-Undirected-Graph
 
   abstract
     tr-edge-Undirected-Graph :
       (p q : unordered-pair-vertices-Undirected-Graph) →
       Eq-unordered-pair p q → edge-Undirected-Graph p → edge-Undirected-Graph q
     tr-edge-Undirected-Graph =
-      tr-symmetric-binary-relation edge-Undirected-Graph
+      tr-Symmetric-Relation edge-Undirected-Graph
 
     compute-refl-tr-edge-Undirected-Graph :
       (p : unordered-pair-vertices-Undirected-Graph) →
       tr-edge-Undirected-Graph p p (refl-Eq-unordered-pair p) ＝ id
     compute-refl-tr-edge-Undirected-Graph =
-      compute-refl-tr-symmetric-binary-relation edge-Undirected-Graph
+      compute-refl-tr-Symmetric-Relation edge-Undirected-Graph
 
     htpy-compute-refl-tr-edge-Undirected-Graph :
       (p : unordered-pair-vertices-Undirected-Graph) →
       tr-edge-Undirected-Graph p p (refl-Eq-unordered-pair p) ~ id
     htpy-compute-refl-tr-edge-Undirected-Graph =
-      htpy-compute-refl-tr-symmetric-binary-relation edge-Undirected-Graph
+      htpy-compute-refl-tr-Symmetric-Relation edge-Undirected-Graph
 ```

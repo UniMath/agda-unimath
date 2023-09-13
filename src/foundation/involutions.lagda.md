@@ -23,6 +23,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 
 open import structured-types.pointed-types
 ```

@@ -20,7 +20,6 @@ open import foundation.homotopies
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
-open import foundation.unit-type
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
@@ -33,6 +32,7 @@ open import foundation-core.functoriality-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types

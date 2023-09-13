@@ -35,7 +35,7 @@ open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type
 open import foundation.universe-levels

@@ -10,7 +10,6 @@ module ring-theory.isomorphisms-rings where
 open import category-theory.isomorphisms-large-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -21,7 +20,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -243,7 +241,7 @@ module _
 ```agda
 iso-eq-Ring :
   { l : Level} (R S : Ring l) → R ＝ S → iso-Ring R S
-iso-eq-Ring R .R refl = id-iso-Ring R
+iso-eq-Ring R S = iso-eq-Large-Precategory Ring-Large-Precategory R S
 ```
 
 ## Properties
