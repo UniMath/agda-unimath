@@ -22,10 +22,8 @@ open import foundation.universe-levels
 open import foundation-core.endomorphisms
 open import foundation-core.propositions
 
-open import group-theory.monoids
-
-open import structured-types.noncoherent-h-spaces
 open import structured-types.magmas
+open import structured-types.noncoherent-h-spaces
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
 ```
@@ -189,17 +187,4 @@ compute-pointed-section-ev-point-Pointed-Type (pair A a) =
     ( λ μp →
       Σ ( (x : A) → pr1 μp x a ＝ x)
         ( λ H → H a ＝ ( ( ap (λ h → h a) (pr2 μp) ∙ refl) ∙ refl))))
-```
-
-### Monoids are H-spaces
-
-```agda
-h-space-Monoid : {l : Level} (M : Monoid l) → H-Space l
-pr1 (pr1 (h-space-Monoid M)) = type-Monoid M
-pr2 (pr1 (h-space-Monoid M)) = unit-Monoid M
-pr1 (pr2 (h-space-Monoid M)) = mul-Monoid M
-pr1 (pr2 (pr2 (h-space-Monoid M))) = left-unit-law-mul-Monoid M
-pr1 (pr2 (pr2 (pr2 (h-space-Monoid M)))) = right-unit-law-mul-Monoid M
-pr2 (pr2 (pr2 (pr2 (h-space-Monoid M)))) =
-  eq-is-prop (is-set-type-Monoid M _ _)
 ```

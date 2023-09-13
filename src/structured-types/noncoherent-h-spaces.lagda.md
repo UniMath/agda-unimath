@@ -54,7 +54,7 @@ noncoherent-h-space-structure A =
     ( λ μ → unit-laws μ (point-Pointed-Type A))
 
 Noncoherent-H-Space : (l : Level) → UU (lsuc l)
-Noncoherent-H-Space l = Σ (Pointed-Type l) h-space-structure
+Noncoherent-H-Space l = Σ (Pointed-Type l) (noncoherent-h-space-structure)
 
 module _
   {l : Level} (A : Noncoherent-H-Space l)

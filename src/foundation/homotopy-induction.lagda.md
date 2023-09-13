@@ -25,7 +25,8 @@ open import foundation-core.sections
 
 ## Idea
 
-The principle of **homotopy induction** asserts that homotopies form an [identity system](foundation.identity-systems.md) on dependent function types.
+The principle of **homotopy induction** asserts that homotopies form an
+[identity system](foundation.identity-systems.md) on dependent function types.
 
 ## Statement
 

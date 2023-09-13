@@ -14,9 +14,6 @@ open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-semigroups
-open import group-theory.monoids
-
 open import structured-types.h-spaces
 open import structured-types.morphisms-h-spaces
 open import structured-types.pointed-maps
@@ -221,21 +218,4 @@ module _
         ( ap (mul-Wild-Monoid x) (right-unit-law-mul-Wild-Monoid y)))
       ( right-unit-law-mul-Wild-Monoid (mul-Wild-Monoid x y))
   unit-law-110-associative-Wild-Monoid = pr1 (pr2 (pr2 (pr2 (pr2 M))))
-```
-
-## Properties
-
-### Monoids are wild monoids
-
-```agda
-wild-monoid-Monoid : {l : Level} (M : Monoid l) → Wild-Monoid l
-pr1 (wild-monoid-Monoid M) = h-space-Monoid M
-pr1 (pr2 (wild-monoid-Monoid M)) = associative-mul-Monoid M
-pr1 (pr2 (pr2 (wild-monoid-Monoid M))) y z =
-  eq-is-prop (is-set-type-Monoid M _ _)
-pr1 (pr2 (pr2 (pr2 (wild-monoid-Monoid M)))) x z =
-  eq-is-prop (is-set-type-Monoid M _ _)
-pr1 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) x y =
-  eq-is-prop (is-set-type-Monoid M _ _)
-pr2 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) = star
 ```
