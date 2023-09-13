@@ -13,6 +13,7 @@ open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-maps-pointed-types public
 open import structured-types.contractible-pointed-types public
 open import structured-types.dependent-products-coherent-h-spaces public
+open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
 open import structured-types.faithful-pointed-maps public
