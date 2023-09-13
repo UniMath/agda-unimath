@@ -8,6 +8,7 @@ module category-theory.endomorphisms-of-objects-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.endomorphisms-of-objects-precategories
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
@@ -30,39 +31,38 @@ module _
   where
 
   endo-Category : UU l2
-  endo-Category = type-hom-Category C X X
+  endo-Category = endo-Precategory (precategory-Category C) X
 
   comp-endo-Category : endo-Category → endo-Category → endo-Category
-  comp-endo-Category g f = comp-hom-Category C g f
+  comp-endo-Category = comp-endo-Precategory (precategory-Category C) X
 
   id-endo-Category : endo-Category
-  id-endo-Category = id-hom-Category C
+  id-endo-Category = id-endo-Precategory (precategory-Category C) X
 
   associative-comp-endo-Category :
     (h g f : endo-Category) →
     ( comp-endo-Category (comp-endo-Category h g) f) ＝
     ( comp-endo-Category h (comp-endo-Category g f))
-  associative-comp-endo-Category = associative-comp-hom-Category C
+  associative-comp-endo-Category =
+    associative-comp-endo-Precategory (precategory-Category C) X
 
   left-unit-law-comp-endo-Category :
     (f : endo-Category) → comp-endo-Category id-endo-Category f ＝ f
-  left-unit-law-comp-endo-Category = left-unit-law-comp-hom-Category C
+  left-unit-law-comp-endo-Category =
+    left-unit-law-comp-endo-Precategory (precategory-Category C) X
 
   right-unit-law-comp-endo-Category :
     (f : endo-Category) → comp-endo-Category f id-endo-Category ＝ f
-  right-unit-law-comp-endo-Category = right-unit-law-comp-hom-Category C
+  right-unit-law-comp-endo-Category =
+    right-unit-law-comp-endo-Precategory (precategory-Category C) X
 
   set-endo-Category : Set l2
-  set-endo-Category = hom-Category C X X
+  set-endo-Category = set-endo-Precategory (precategory-Category C) X
 
   semigroup-endo-Category : Semigroup l2
-  pr1 semigroup-endo-Category = set-endo-Category
-  pr1 (pr2 semigroup-endo-Category) = comp-endo-Category
-  pr2 (pr2 semigroup-endo-Category) = associative-comp-endo-Category
+  semigroup-endo-Category =
+    semigroup-endo-Precategory (precategory-Category C) X
 
   monoid-endo-Category : Monoid l2
-  pr1 monoid-endo-Category = semigroup-endo-Category
-  pr1 (pr2 monoid-endo-Category) = id-endo-Category
-  pr1 (pr2 (pr2 monoid-endo-Category)) = left-unit-law-comp-endo-Category
-  pr2 (pr2 (pr2 monoid-endo-Category)) = right-unit-law-comp-endo-Category
+  monoid-endo-Category = monoid-endo-Precategory (precategory-Category C) X
 ```
