@@ -47,11 +47,12 @@ open import foundation-core.sets public
 open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
-open import foundation-core.transport public
+open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public
 open import foundation-core.truncation-levels public
 open import foundation-core.univalence public
 open import foundation-core.universal-property-pullbacks public
 open import foundation-core.universal-property-truncation public
+open import foundation-core.whiskering-homotopies public
 ```

@@ -11,7 +11,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.cocones-under-spans

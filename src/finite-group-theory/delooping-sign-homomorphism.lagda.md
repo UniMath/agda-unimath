@@ -18,7 +18,9 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-equivalences-type-families-over-subuniverses
 open import foundation.action-on-identifications-functions
+open import foundation.binary-transport
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -30,6 +32,7 @@ open import foundation.empty-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-extensionality
+open import foundation.equivalence-induction
 open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.function-extensionality
@@ -47,12 +50,11 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.uniqueness-set-quotients
 open import foundation.unit-type
 open import foundation.univalence
-open import foundation.univalence-action-on-equivalences
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -129,7 +131,7 @@ module _
           unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))
       ( quotient-aut-succ-succ-Fin n (transposition Y))
       ( map-equiv
-        ( univalent-action-equiv
+        ( action-equiv-family-over-subuniverse
           ( mere-equiv-Prop (Fin (n +ℕ 2)))
           ( D (n +ℕ 2))
           ( raise l1 (Fin (n +ℕ 2)) ,
@@ -146,9 +148,8 @@ module _
 
     eq-counting-equivalence-class-R :
       (n : ℕ) →
-      Id
-        ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
-        ( raise (l2 ⊔ lsuc l3) (Fin 2))
+      equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))) ＝
+      raise (l2 ⊔ lsuc l3) (Fin 2)
     eq-counting-equivalence-class-R n =
       eq-equiv
         ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
@@ -165,32 +166,57 @@ module _
       (n : ℕ) (X X' : UU-Fin l1 n) →
       type-UU-Fin n X ≃ type-UU-Fin n X' → D n X ≃ D n X'
     invertible-action-D-equiv n =
-      univalent-action-equiv (mere-equiv-Prop (Fin n)) (D n)
+      action-equiv-family-over-subuniverse (mere-equiv-Prop (Fin n)) (D n)
 
     preserves-id-equiv-invertible-action-D-equiv :
       (n : ℕ) (X : UU-Fin l1 n) →
       Id (invertible-action-D-equiv n X X id-equiv) id-equiv
     preserves-id-equiv-invertible-action-D-equiv n =
-      preserves-id-equiv-univalent-action-equiv (mere-equiv-Prop (Fin n)) (D n)
+      compute-id-equiv-action-equiv-family-over-subuniverse
+        ( mere-equiv-Prop (Fin n))
+        ( D n)
 
-    preserves-R-invertible-action-D-equiv :
-      ( n : ℕ) →
-      ( X X' : UU-Fin l1 n)
-      ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
-      ( a a' : D n X) →
-      ( sim-Equivalence-Relation (R n X) a a' ↔
-        sim-Equivalence-Relation
-          ( R n X')
-          ( map-equiv (invertible-action-D-equiv n X X' e) a)
-          ( map-equiv (invertible-action-D-equiv n X X' e) a'))
-    preserves-R-invertible-action-D-equiv n X X' =
-      Ind-univalent-action-equiv (mere-equiv-Prop (Fin n)) (D n) X
-        ( λ Y f →
-          ( a a' : D n X) →
-          ( sim-Equivalence-Relation (R n X) a a' ↔
-            sim-Equivalence-Relation (R n Y) (map-equiv f a) (map-equiv f a')))
-        ( λ a a' → id , id)
-        ( X')
+    abstract
+      preserves-R-invertible-action-D-equiv :
+        ( n : ℕ) →
+        ( X X' : UU-Fin l1 n)
+        ( e : type-UU-Fin n X ≃ type-UU-Fin n X') →
+        ( a a' : D n X) →
+        ( sim-Equivalence-Relation (R n X) a a' ↔
+          sim-Equivalence-Relation
+            ( R n X')
+            ( map-equiv (invertible-action-D-equiv n X X' e) a)
+            ( map-equiv (invertible-action-D-equiv n X X' e) a'))
+      preserves-R-invertible-action-D-equiv n X =
+        ind-equiv-subuniverse
+          ( mere-equiv-Prop (Fin n))
+          ( X)
+          ( λ Y f →
+            ( a a' : D n X) →
+            ( sim-Equivalence-Relation (R n X) a a' ↔
+              sim-Equivalence-Relation
+                ( R n Y)
+                ( map-equiv (invertible-action-D-equiv n X Y f) a)
+                ( map-equiv (invertible-action-D-equiv n X Y f) a')))
+          ( λ a a' →
+            ( binary-tr
+              ( sim-Equivalence-Relation (R n X))
+                ( inv
+                  ( htpy-eq-equiv
+                    ( preserves-id-equiv-invertible-action-D-equiv n X)
+                    ( a)))
+                ( inv
+                  ( htpy-eq-equiv
+                    ( preserves-id-equiv-invertible-action-D-equiv n X)
+                    ( a')))) ,
+            ( binary-tr
+              ( sim-Equivalence-Relation (R n X))
+                ( htpy-eq-equiv
+                  ( preserves-id-equiv-invertible-action-D-equiv n X)
+                  ( a))
+                ( htpy-eq-equiv
+                  ( preserves-id-equiv-invertible-action-D-equiv n X)
+                  ( a'))))
 
     raise-UU-Fin-Fin : (n : ℕ) → UU-Fin l1 n
     pr1 (raise-UU-Fin-Fin n) = raise l1 (Fin n)
@@ -1098,7 +1124,7 @@ module _
             ( λ r → eq-pair-Σ r (eq-is-prop is-prop-type-trunc-Prop))
             ( ap inv
               ( inv
-                ( compute-eq-equiv
+                ( compute-eq-equiv-comp-equiv
                   ( raise l4 (Fin 2))
                   ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                   ( raise l4 (Fin 2))
@@ -1113,7 +1139,7 @@ module _
                 ( ap
                   ( _∙ eq-counting-equivalence-class-R n)
                   ( inv
-                    ( compute-eq-equiv
+                    ( compute-eq-equiv-comp-equiv
                       ( raise l4 (Fin 2))
                       ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
                       ( equivalence-class (R (n +ℕ 2) (Fin-UU-Fin l1 (n +ℕ 2))))
@@ -1488,7 +1514,7 @@ module _
             unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))) →
     ¬ ( x ＝
         ( map-equiv
-          ( univalent-action-equiv
+          ( action-equiv-family-over-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( type-UU-Fin 2 ∘ Q (n +ℕ 2))
             ( raise l1 (Fin (n +ℕ 2)) ,

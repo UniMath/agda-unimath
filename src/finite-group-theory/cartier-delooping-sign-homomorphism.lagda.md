@@ -17,6 +17,7 @@ open import finite-group-theory.finite-type-groups
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
+open import foundation.action-on-equivalences-type-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -27,9 +28,9 @@ open import foundation.mere-equivalences
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
-open import foundation.transport
+open import foundation.transport-along-identifications
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
-open import foundation.univalence-action-on-equivalences
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -57,7 +58,7 @@ module _
   { l : Level}
   where
 
-  not-even-difference-univalent-action-equiv :
+  not-even-difference-action-equiv-family-on-subuniverse :
     (n : ℕ) (Y : 2-Element-Decidable-Subtype l (raise-Fin l (n +ℕ 2))) →
     ¬ ( sim-Equivalence-Relation
       ( even-difference-orientation-Complete-Undirected-Graph
@@ -69,7 +70,7 @@ module _
         ( star)
         ( transposition Y))
       ( map-equiv
-        ( univalent-action-equiv
+        ( action-equiv-family-over-subuniverse
           ( mere-equiv-Prop (Fin (n +ℕ 2)))
           ( orientation-Complete-Undirected-Graph (n +ℕ 2))
           ( raise l (Fin (n +ℕ 2)) ,
@@ -79,7 +80,7 @@ module _
           ( transposition Y))
         ( orientation-aut-count
           (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) star (transposition Y))))
-  not-even-difference-univalent-action-equiv n =
+  not-even-difference-action-equiv-family-on-subuniverse n =
     tr
       ( λ f →
         ( Y : 2-Element-Decidable-Subtype l
@@ -110,17 +111,19 @@ module _
           preserves-id-equiv-orientation-complete-undirected-graph-equiv
             ( n +ℕ 2)}
         { y =
-          ( univalent-action-equiv
+          ( action-equiv-family-over-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( orientation-Complete-Undirected-Graph (n +ℕ 2))) ,
-          ( preserves-id-equiv-univalent-action-equiv
+          ( compute-id-equiv-action-equiv-family-over-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( orientation-Complete-Undirected-Graph (n +ℕ 2)))}
         ( eq-is-contr
-          ( is-contr-preserves-id-action-equiv
-            ( mere-equiv-Prop (Fin (n +ℕ 2)))
-            ( orientation-Complete-Undirected-Graph (n +ℕ 2))
-            ( is-set-orientation-Complete-Undirected-Graph (n +ℕ 2)))))
+          ( is-contr-equiv' _
+            ( distributive-Π-Σ)
+            ( is-contr-Π
+              ( unique-action-equiv-family-over-subuniverse
+                ( mere-equiv-Prop (Fin (n +ℕ 2)))
+                ( orientation-Complete-Undirected-Graph (n +ℕ 2)))))))
       ( not-even-difference-orientation-aut-transposition-count
         (n +ℕ 2 , (compute-raise l (Fin (n +ℕ 2)))) (star))
 
@@ -135,7 +138,7 @@ module _
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
         orientation-aut-count (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) (star))
-      ( not-even-difference-univalent-action-equiv)
+      ( not-even-difference-action-equiv-family-on-subuniverse)
 
   eq-cartier-delooping-sign-homomorphism :
     (n : ℕ) →
@@ -176,7 +179,7 @@ module _
               orientation-aut-count
                 ( n +ℕ 2 , compute-raise l (Fin (n +ℕ 2)))
                 ( star))
-            ( not-even-difference-univalent-action-equiv)
+            ( not-even-difference-action-equiv-family-on-subuniverse)
             ( n))
           ( sign-homomorphism
             ( n +ℕ 2)
@@ -194,7 +197,7 @@ module _
       ( equiv-fin-2-quotient-sign-equiv-Fin)
       ( λ n →
         orientation-aut-count (n +ℕ 2 , compute-raise l (Fin (n +ℕ 2))) (star))
-      ( not-even-difference-univalent-action-equiv)
+      ( not-even-difference-action-equiv-family-on-subuniverse)
 ```
 
 ## References

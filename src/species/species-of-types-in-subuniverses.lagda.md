@@ -13,7 +13,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.propositions
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 

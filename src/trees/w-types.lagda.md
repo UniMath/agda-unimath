@@ -20,11 +20,12 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import trees.algebras-polynomial-endofunctors
 open import trees.coalgebras-polynomial-endofunctors

@@ -18,7 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 

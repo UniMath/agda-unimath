@@ -7,13 +7,11 @@ module group-theory.images-of-group-homomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 

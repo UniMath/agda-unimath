@@ -25,7 +25,7 @@ open import foundation.propositional-truncations
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.sets
 open import foundation.surjective-maps
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -45,6 +45,7 @@ open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
 open import foundation-core.univalence
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -426,11 +427,11 @@ module _
     α : Σ (A → Prop l2) (reflects-Equivalence-Relation R)
     α = pair
         ( prop-Equivalence-Relation R x)
-          ( λ r →
-            eq-iff
-              ( transitive-Equivalence-Relation R _ _ _ r)
-              ( transitive-Equivalence-Relation R _ _ _
-                ( symmetric-Equivalence-Relation R _ _ r)))
+        ( λ r →
+          eq-iff
+            ( transitive-Equivalence-Relation R _ _ _ r)
+            ( transitive-Equivalence-Relation R _ _ _
+              ( symmetric-Equivalence-Relation R _ _ r)))
     P : type-Set B → Prop l2
     P = map-inv-is-equiv (Q (Prop-Set l2)) α
     compute-P :
@@ -460,7 +461,7 @@ module _
             ( reflects-map-reflecting-map-Equivalence-Relation R q
               ( map-inv-equiv
                 ( compute-P (pr1 v))
-                ( inv-tr (λ b → type-Prop (P b)) (pr2 v) p))) ∙
+                ( inv-tr (type-Prop ∘ P) (pr2 v) p))) ∙
             ( pr2 v)))
     is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
     is-contr-total-P = pair center-total-P contraction-total-P

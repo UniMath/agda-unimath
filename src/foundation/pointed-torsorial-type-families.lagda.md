@@ -15,7 +15,7 @@ open import foundation.locally-small-types
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.sorial-type-families
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 

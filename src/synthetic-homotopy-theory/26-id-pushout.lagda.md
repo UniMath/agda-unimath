@@ -23,9 +23,10 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans

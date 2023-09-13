@@ -120,7 +120,7 @@ module _
     map-hom-symmetric-group-loop-group-Set X X
   pr2 hom-symmetric-group-loop-group-Set p q =
     ( ap equiv-eq (distributive-inv-concat p q)) ∙
-      ( inv (compute-equiv-eq (inv q) (inv p)))
+    ( inv (compute-equiv-eq-concat (inv q) (inv p)))
 
   hom-inv-symmetric-group-loop-group-Set :
     type-hom-Group (symmetric-Group X) (loop-group-Set X)
@@ -129,7 +129,9 @@ module _
   pr2 hom-inv-symmetric-group-loop-group-Set f g =
     ( ap
       ( inv)
-      ( inv (compute-eq-equiv (type-Set X) (type-Set X) (type-Set X) g f))) ∙
+      ( inv
+        ( compute-eq-equiv-comp-equiv
+          ( type-Set X) (type-Set X) (type-Set X) g f))) ∙
       ( distributive-inv-concat
         ( eq-equiv (type-Set X) (type-Set X) g)
         ( eq-equiv (type-Set X) (type-Set X) f))

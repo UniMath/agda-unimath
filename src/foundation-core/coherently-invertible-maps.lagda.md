@@ -18,6 +18,7 @@ open import foundation-core.identity-types
 open import foundation-core.invertible-maps
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

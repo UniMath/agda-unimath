@@ -21,7 +21,10 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.transport
+open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.sections
+open import foundation-core.transport-along-identifications
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
