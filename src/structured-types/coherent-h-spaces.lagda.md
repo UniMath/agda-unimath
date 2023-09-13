@@ -24,7 +24,7 @@ open import foundation-core.propositions
 
 open import group-theory.monoids
 
-open import structured-types.h-spaces
+open import structured-types.noncoherent-h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-sections
 open import structured-types.pointed-types
@@ -139,14 +139,14 @@ module _
 
 ## Properties
 
-### Every H-space can be upgraded to a coherent H-space
+### Every non-coherent H-space can be upgraded to a coherent H-space
 
 ```agda
-coherent-h-space-H-Space :
+coherent-h-space-Noncoherent-H-Space :
   {l : Level} → Noncoherent-H-Space l → Coherent-H-Space l
-pr1 (coherent-h-space-H-Space A) = pointed-type-Noncoherent-H-Space A
-pr1 (pr2 (coherent-h-space-H-Space A)) = mul-Noncoherent-H-Space A
-pr2 (pr2 (coherent-h-space-H-Space A)) =
+pr1 (coherent-h-space-Noncoherent-H-Space A) = pointed-type-Noncoherent-H-Space A
+pr1 (pr2 (coherent-h-space-Noncoherent-H-Space A)) = mul-Noncoherent-H-Space A
+pr2 (pr2 (coherent-h-space-Noncoherent-H-Space A)) =
   coherent-unit-laws-unit-laws (mul-Noncoherent-H-Space A) (unit-laws-mul-Noncoherent-H-Space A)
 ```
 
