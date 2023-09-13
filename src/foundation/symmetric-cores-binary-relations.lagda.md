@@ -10,15 +10,24 @@ module foundation.symmetric-cores-binary-relations where
 
 ```agda
 open import foundation.binary-relations
+open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
+open import foundation.mere-equivalences
 open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-function-types
+open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
+open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 </details>
@@ -93,6 +102,21 @@ module _
     hom-Relation (relation-Symmetric-Relation S) R
   map-universal-property-symmetric-core-Relation f x y s =
     counit-symmetric-core-Relation R (f (standard-unordered-pair x y) s)
+
+  equiv-universal-property-symmetric-core-Relation' :
+    hom-Symmetric-Relation S (symmetric-core-Relation R) ≃
+    hom-Relation (relation-Symmetric-Relation S) R
+  equiv-universal-property-symmetric-core-Relation' =
+    ( {!equiv-dependent-universal-property-Fin-two-ℕ ?!} ∘e
+      equiv-dependent-universal-property-identity-system-is-torsorial
+        { a = Fin 2 , refl-mere-equiv (Fin 2)}
+        ( zero-Fin 1)
+        ( is-contr-total-UU-Fin-two-ℕ)) ∘e
+    ( equiv-Π-equiv-family
+      ( λ I →
+        ( equiv-swap-Π) ∘e
+        ( equiv-Π-equiv-family (λ a → equiv-swap-Π)))) ∘e
+    ( equiv-ev-pair)
 
   map-inv-universal-property-symmetric-core-Relation :
     hom-Relation (relation-Symmetric-Relation S) R →
