@@ -23,6 +23,10 @@ open import foundation-core.sections
 
 </details>
 
+## Idea
+
+The principle of **homotopy induction** asserts that homotopies form an [identity system](foundation.identity-systems.md) on dependent function types.
+
 ## Statement
 
 ```agda
