@@ -14,6 +14,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
