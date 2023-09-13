@@ -30,29 +30,30 @@ module _
   {l1 l2 : Level} (C : Category l1 l2) (X : obj-Category C)
   where
 
-  endo-Category : UU l2
-  endo-Category = endo-Precategory (precategory-Category C) X
+  type-endo-Category : UU l2
+  type-endo-Category = type-endo-Precategory (precategory-Category C) X
 
-  comp-endo-Category : endo-Category → endo-Category → endo-Category
+  comp-endo-Category :
+    type-endo-Category → type-endo-Category → type-endo-Category
   comp-endo-Category = comp-endo-Precategory (precategory-Category C) X
 
-  id-endo-Category : endo-Category
+  id-endo-Category : type-endo-Category
   id-endo-Category = id-endo-Precategory (precategory-Category C) X
 
   associative-comp-endo-Category :
-    (h g f : endo-Category) →
+    (h g f : type-endo-Category) →
     ( comp-endo-Category (comp-endo-Category h g) f) ＝
     ( comp-endo-Category h (comp-endo-Category g f))
   associative-comp-endo-Category =
     associative-comp-endo-Precategory (precategory-Category C) X
 
   left-unit-law-comp-endo-Category :
-    (f : endo-Category) → comp-endo-Category id-endo-Category f ＝ f
+    (f : type-endo-Category) → comp-endo-Category id-endo-Category f ＝ f
   left-unit-law-comp-endo-Category =
     left-unit-law-comp-endo-Precategory (precategory-Category C) X
 
   right-unit-law-comp-endo-Category :
-    (f : endo-Category) → comp-endo-Category f id-endo-Category ＝ f
+    (f : type-endo-Category) → comp-endo-Category f id-endo-Category ＝ f
   right-unit-law-comp-endo-Category =
     right-unit-law-comp-endo-Precategory (precategory-Category C) X
 

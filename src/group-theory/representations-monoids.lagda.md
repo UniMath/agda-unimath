@@ -57,7 +57,7 @@ module _
   hom-action-representation-category-Monoid = pr2 ρ
 
   action-representation-category-Monoid :
-    type-Monoid M → endo-Category C obj-representation-category-Monoid
+    type-Monoid M → type-endo-Category C obj-representation-category-Monoid
   action-representation-category-Monoid =
     map-hom-Monoid M
       ( monoid-endo-Category C obj-representation-category-Monoid)
@@ -108,7 +108,7 @@ module _
   hom-action-wild-representation-type-Monoid = pr2 ρ
 
   -- action-wild-representation-type-Monoid :
-  --   type-Monoid M → endo-Category C obj-wild-representation-type-Monoid
+  --   type-Monoid M → type-endo-Category C obj-wild-representation-type-Monoid
   -- action-wild-representation-type-Monoid =
   --   map-hom-Monoid M
   --     ( monoid-endo-Category C obj-wild-representation-type-Monoid)
