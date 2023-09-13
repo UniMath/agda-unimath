@@ -27,7 +27,7 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-An endomorphism on a type `A` is a map `A → A`.
+An **endomorphism** on a type `A` is a map `A → A`.
 
 ## Properties
 

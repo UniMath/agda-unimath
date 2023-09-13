@@ -20,9 +20,9 @@ open import group-theory.semigroups
 
 ## Idea
 
-Given a monoid `M` and a type `X`, the function monoid `M^X` consists of
-functions from `X` to the underlying type of `M`. The multiplicative operation
-and the unit are given pointwise.
+Given a [monoid](group-theory.monoids.md) `M` and a type `X`, the **function
+monoid** `M^X` consists of functions from `X` to the underlying type of `M`. The
+multiplicative operation and the unit are given pointwise.
 
 ## Definition
 

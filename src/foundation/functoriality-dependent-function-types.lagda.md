@@ -12,8 +12,8 @@ open import foundation-core.functoriality-dependent-function-types public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
-open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.homotopy-induction
 open import foundation.transport
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -22,6 +22,7 @@ open import foundation.universe-levels
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
+open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types

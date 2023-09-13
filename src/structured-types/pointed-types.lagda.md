@@ -45,6 +45,15 @@ ev-point-Pointed-Type :
 ev-point-Pointed-Type A f = f (point-Pointed-Type A)
 ```
 
+### Dependent products of pointed types
+
+```agda
+Π-Pointed-Type :
+  {l1 l2 : Level} (I : UU l1) (P : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
+pr1 (Π-Pointed-Type I P) = (x : I) → type-Pointed-Type (P x)
+pr2 (Π-Pointed-Type I P) x = point-Pointed-Type (P x)
+```
+
 ## See also
 
 - The notion of _nonempty types_ is treated in

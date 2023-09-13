@@ -16,7 +16,7 @@ open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
@@ -31,6 +31,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation

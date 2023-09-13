@@ -20,6 +20,9 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import foundation-core.endomorphisms
+open import foundation-core.propositions
+
+open import group-theory.monoids
 
 open import structured-types.h-spaces
 open import structured-types.magmas
@@ -31,9 +34,9 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A coherent H-space is a "wild unital magma", i.e., it is a pointed type equipped
-with a binary operation for which the base point is a unit, with a coherence law
-between the left and the right unit laws.
+A **coherent H-space** is a "wild unital magma", i.e., it is a pointed type
+equipped with a binary operation for which the base point is a unit, with a
+coherence law between the left and the right unit laws.
 
 ## Definitions
 
@@ -117,6 +120,21 @@ module _
       ( right-unit-law-mul-Coherent-H-Space unit-Coherent-H-Space)
   coh-unit-laws-mul-Coherent-H-Space =
     pr2 (pr2 coherent-unit-laws-mul-Coherent-H-Space)
+
+  unit-laws-mul-Coherent-H-Space :
+    unit-laws mul-Coherent-H-Space unit-Coherent-H-Space
+  pr1 unit-laws-mul-Coherent-H-Space = left-unit-law-mul-Coherent-H-Space
+  pr2 unit-laws-mul-Coherent-H-Space = right-unit-law-mul-Coherent-H-Space
+
+  is-unital-mul-Coherent-H-Space : is-unital mul-Coherent-H-Space
+  pr1 is-unital-mul-Coherent-H-Space = unit-Coherent-H-Space
+  pr2 is-unital-mul-Coherent-H-Space = unit-laws-mul-Coherent-H-Space
+
+  is-coherently-unital-mul-Coherent-H-Space :
+    is-coherently-unital mul-Coherent-H-Space
+  pr1 is-coherently-unital-mul-Coherent-H-Space = unit-Coherent-H-Space
+  pr2 is-coherently-unital-mul-Coherent-H-Space =
+    coherent-unit-laws-mul-Coherent-H-Space
 ```
 
 ## Properties
@@ -170,4 +188,17 @@ compute-pointed-section-ev-point-Pointed-Type (pair A a) =
     ( λ μp →
       Σ ( (x : A) → pr1 μp x a ＝ x)
         ( λ H → H a ＝ ( ( ap (λ h → h a) (pr2 μp) ∙ refl) ∙ refl))))
+```
+
+### Monoids are coherent H-spaces
+
+```agda
+coherent-h-space-Monoid : {l : Level} (M : Monoid l) → Coherent-H-Space l
+pr1 (pr1 (coherent-h-space-Monoid M)) = type-Monoid M
+pr2 (pr1 (coherent-h-space-Monoid M)) = unit-Monoid M
+pr1 (pr2 (coherent-h-space-Monoid M)) = mul-Monoid M
+pr1 (pr2 (pr2 (coherent-h-space-Monoid M))) = left-unit-law-mul-Monoid M
+pr1 (pr2 (pr2 (pr2 (coherent-h-space-Monoid M)))) = right-unit-law-mul-Monoid M
+pr2 (pr2 (pr2 (pr2 (coherent-h-space-Monoid M)))) =
+  eq-is-prop (is-set-type-Monoid M _ _)
 ```

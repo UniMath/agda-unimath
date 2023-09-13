@@ -13,17 +13,14 @@ open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.identity-systems
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.sections
 open import foundation-core.transport
 ```
 
@@ -38,90 +35,6 @@ record some properties of homotopies that require function extensionality,
 equivalences, or other.
 
 ## Properties
-
-### The total space of homotopies is contractible
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
-  where
-
-  abstract
-    is-contr-total-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
-    is-contr-total-htpy =
-      is-contr-equiv'
-        ( Σ ((x : A) → B x) (Id f))
-        ( equiv-tot (λ g → equiv-funext))
-        ( is-contr-total-path f)
-
-  abstract
-    is-contr-total-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
-    is-contr-total-htpy' =
-      is-contr-equiv'
-        ( Σ ((x : A) → B x) (λ g → g ＝ f))
-        ( equiv-tot (λ g → equiv-funext))
-        ( is-contr-total-path' f)
-```
-
-### Homotopy induction is equivalent to function extensionality
-
-```agda
-ev-refl-htpy :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
-  ((g : (x : A) → B x) (H : f ~ g) → C g H) → C f refl-htpy
-ev-refl-htpy f C φ = φ f refl-htpy
-
-IND-HTPY :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → f ~ g → UU l3) → section (ev-refl-htpy f C)
-```
-
-```agda
-abstract
-  IND-HTPY-FUNEXT :
-    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    FUNEXT f → IND-HTPY {l3 = l3} f
-  IND-HTPY-FUNEXT {l3 = l3} {A = A} {B = B} f funext-f =
-    Ind-identity-system f
-      ( refl-htpy)
-      ( is-contr-total-htpy f)
-
-abstract
-  FUNEXT-IND-HTPY :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    ({l : Level} → IND-HTPY {l3 = l} f) → FUNEXT f
-  FUNEXT-IND-HTPY f ind-htpy-f =
-    fundamental-theorem-id-IND-identity-system f
-      ( refl-htpy)
-      ( ind-htpy-f)
-      ( λ g → htpy-eq)
-```
-
-### Homotopy induction
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  abstract
-    Ind-htpy :
-      (f : (x : A) → B x) → IND-HTPY {l3 = l3} f
-    Ind-htpy f = IND-HTPY-FUNEXT f (funext f)
-
-    ind-htpy :
-      (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
-      C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
-    ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
-
-    compute-ind-htpy :
-      (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
-      (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
-    compute-ind-htpy f C = pr2 (Ind-htpy f C)
-```
 
 ### Inverting homotopies is an equivalence
 
@@ -191,8 +104,8 @@ module _
       ( is-retraction-concat-inv-htpy')
 
   equiv-concat-htpy' : (f ~ g) ≃ (f ~ h)
-  equiv-concat-htpy' =
-    pair (concat-htpy' f K) is-equiv-concat-htpy'
+  pr1 equiv-concat-htpy' = concat-htpy' f K
+  pr2 equiv-concat-htpy' = is-equiv-concat-htpy'
 ```
 
 ### Transposing homotopies is an equivalence
@@ -210,8 +123,8 @@ module _
       ( λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
 
   equiv-left-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
-  equiv-left-transpose-htpy-concat =
-    pair (left-transpose-htpy-concat H K L) is-equiv-left-transpose-htpy-concat
+  pr1 equiv-left-transpose-htpy-concat = left-transpose-htpy-concat H K L
+  pr2 equiv-left-transpose-htpy-concat = is-equiv-left-transpose-htpy-concat
 
   is-equiv-right-transpose-htpy-concat :
     is-equiv (right-transpose-htpy-concat H K L)
@@ -340,6 +253,26 @@ eckmann-hilton-htpy H K x =
   ( inv (identification-left-whisk (H x) (ap-id (K x))) ∙
   ( htpy-swap-nat-right-htpy H K x)) ∙
   ( identification-right-whisk (ap-id (K x)) (H x))
+```
+
+### Action on identifications at `eq-htpy`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f : (x : A) → B x → C x}
+  {h k : (x : A) → B x}
+  where
+
+  compute-eq-htpy-ap :
+    (p : h ~ k) →
+    eq-htpy (λ i → ap (f i) (p i)) ＝ ap (map-Π f) (eq-htpy p)
+  compute-eq-htpy-ap =
+    ind-htpy
+      ( h)
+      ( λ k p → eq-htpy (λ i → ap (f i) (p i)) ＝ ap (map-Π f) (eq-htpy p))
+      ( eq-htpy-refl-htpy (map-Π f h) ∙
+        ap (ap (map-Π f)) (inv (eq-htpy-refl-htpy h)))
 ```
 
 ## See also

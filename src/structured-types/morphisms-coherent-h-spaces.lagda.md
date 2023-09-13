@@ -202,10 +202,10 @@ preserves-unital-mul M N f =
   lN = left-unit-law-mul-Coherent-H-Space N
   rN = right-unit-law-mul-Coherent-H-Space N
 
-hom-Coherent-H-Space :
+type-hom-Coherent-H-Space :
   {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
   UU (l1 ⊔ l2)
-hom-Coherent-H-Space M N =
+type-hom-Coherent-H-Space M N =
   Σ ( pointed-type-Coherent-H-Space M →∗ pointed-type-Coherent-H-Space N)
     ( preserves-unital-mul M N)
 ```
