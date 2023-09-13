@@ -7,6 +7,8 @@ module group-theory.monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.precategories
+
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -161,4 +163,94 @@ pr1 (pr2 (pr2 (pr2 (wild-monoid-Monoid M)))) x z =
 pr1 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) x y =
   eq-is-prop (is-set-type-Monoid M _ _)
 pr2 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) = star
+```
+
+### Monoids are one-object precategories
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  hom-one-object-precategory-Monoid :
+    unit → unit → Set l
+  hom-one-object-precategory-Monoid star star = set-Monoid M
+
+  type-hom-one-object-precategory-Monoid :
+    unit → unit → UU l
+  type-hom-one-object-precategory-Monoid x y =
+    type-Set (hom-one-object-precategory-Monoid x y)
+
+  comp-hom-one-object-precategory-Monoid :
+    {x y z : unit} →
+    type-hom-one-object-precategory-Monoid y z →
+    type-hom-one-object-precategory-Monoid x y →
+    type-hom-one-object-precategory-Monoid x z
+  comp-hom-one-object-precategory-Monoid {star} {star} {star} =
+    mul-Monoid M
+
+  associative-comp-hom-one-object-precategory-Monoid :
+    {x y z w : unit} →
+    (h : type-hom-one-object-precategory-Monoid z w)
+    (g : type-hom-one-object-precategory-Monoid y z)
+    (f : type-hom-one-object-precategory-Monoid x y) →
+    comp-hom-one-object-precategory-Monoid
+      ( comp-hom-one-object-precategory-Monoid h g)
+      ( f) ＝
+    comp-hom-one-object-precategory-Monoid
+      ( h)
+      ( comp-hom-one-object-precategory-Monoid g f)
+  associative-comp-hom-one-object-precategory-Monoid
+    {star} {star} {star} {star} =
+    associative-mul-Monoid M
+
+  associative-composition-structure-one-object-precategory-Monoid :
+    associative-composition-structure-Set
+      hom-one-object-precategory-Monoid
+  pr1 associative-composition-structure-one-object-precategory-Monoid =
+    comp-hom-one-object-precategory-Monoid
+  pr2 associative-composition-structure-one-object-precategory-Monoid =
+    associative-comp-hom-one-object-precategory-Monoid
+
+  id-hom-one-object-precategory-Monoid :
+    (x : unit) → type-hom-one-object-precategory-Monoid x x
+  id-hom-one-object-precategory-Monoid star = unit-Monoid M
+
+  left-unit-law-comp-hom-one-object-precategory-Monoid :
+    {x y : unit} (f : type-hom-one-object-precategory-Monoid x y) →
+    comp-hom-one-object-precategory-Monoid
+      ( id-hom-one-object-precategory-Monoid y)
+      ( f) ＝
+    f
+  left-unit-law-comp-hom-one-object-precategory-Monoid {star} {star} =
+    left-unit-law-mul-Monoid M
+
+  right-unit-law-comp-hom-one-object-precategory-Monoid :
+    {x y : unit} (f : type-hom-one-object-precategory-Monoid x y) →
+    comp-hom-one-object-precategory-Monoid
+      ( f)
+      ( id-hom-one-object-precategory-Monoid x) ＝
+    f
+  right-unit-law-comp-hom-one-object-precategory-Monoid {star} {star} =
+    right-unit-law-mul-Monoid M
+
+  is-unital-composition-structure-one-object-precategory-Monoid :
+    is-unital-composition-structure-Set
+      hom-one-object-precategory-Monoid
+      associative-composition-structure-one-object-precategory-Monoid
+  pr1 is-unital-composition-structure-one-object-precategory-Monoid =
+    id-hom-one-object-precategory-Monoid
+  pr1 (pr2 is-unital-composition-structure-one-object-precategory-Monoid) =
+    left-unit-law-comp-hom-one-object-precategory-Monoid
+  pr2 (pr2 is-unital-composition-structure-one-object-precategory-Monoid) =
+    right-unit-law-comp-hom-one-object-precategory-Monoid
+
+  one-object-precategory-Monoid : Precategory lzero l
+  pr1 one-object-precategory-Monoid = unit
+  pr1 (pr2 one-object-precategory-Monoid) =
+    hom-one-object-precategory-Monoid
+  pr1 (pr2 (pr2 one-object-precategory-Monoid)) =
+    associative-composition-structure-one-object-precategory-Monoid
+  pr2 (pr2 (pr2 one-object-precategory-Monoid)) =
+    is-unital-composition-structure-one-object-precategory-Monoid
 ```

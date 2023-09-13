@@ -262,6 +262,24 @@ module _
     equiv-is-equiv-right-factor-htpy e (f ∘ map-equiv e) refl-htpy
 ```
 
+### Being an equivalence is closed under homotopies
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  equiv-is-equiv-htpy :
+    { f g : A → B} → (f ~ g) →
+    is-equiv f ≃ is-equiv g
+  equiv-is-equiv-htpy {f} {g} H =
+    equiv-prop
+      ( is-property-is-equiv f)
+      ( is-property-is-equiv g)
+      ( is-equiv-htpy f (inv-htpy H))
+      ( is-equiv-htpy g H)
+```
+
 ### The groupoid laws for equivalences
 
 #### Composition of equivalences is associative
