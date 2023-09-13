@@ -146,6 +146,8 @@ abstract
 
 ### Hedberg's theorem
 
+Types with decidable equality are sets.
+
 ```agda
 module _
   {l : Level} {A : UU l}
