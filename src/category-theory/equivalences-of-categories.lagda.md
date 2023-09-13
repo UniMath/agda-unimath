@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A [functor](category-theory.functors-categories) `F : C → D` on
+A [functor](category-theory.functors-categories.md) `F : C → D` on
 [categories](category-theory.categories.md) is an **equivalence** if it is an
 [equivalence on the underlying precategories](category-theory.equivalences-of-precategories.md).
 

@@ -22,7 +22,7 @@ type of H-space structures on a
 [pointed type](structured-types.pointed-types.md) `A` is equivalently described
 as the type of [pointed sections](structured-types.pointed-types.md) of the
 pointed evaluation map `(A → A) →∗ A`. If the type `A` is
-[connected](foundation.connected.types.md), then the section maps to the
+[connected](foundation.connected-types.md), then the section maps to the
 [connected component](foundation.connected-components.md) of `(A ≃ A)` at the
 identity [equivalence](foundation-core.equivalences.md). An **evaluative
 H-space** is a pointed type such that the map `ev_pt : (A ≃ A)_{(id)} → A` is an
