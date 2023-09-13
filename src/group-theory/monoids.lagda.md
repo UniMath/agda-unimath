@@ -26,7 +26,8 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-Monoids are unital semigroups
+**Monoids** are [unital](foundation.unital-binary-operations.md)
+[semigroups](group-theory.semigroup.md).
 
 ## Definition
 

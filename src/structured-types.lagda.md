@@ -21,6 +21,7 @@ open import structured-types.finite-multiplication-magmas public
 open import structured-types.function-h-spaces public
 open import structured-types.function-magmas public
 open import structured-types.function-wild-monoids public
+open import structured-types.g-spaces public
 open import structured-types.h-spaces public
 open import structured-types.initial-pointed-type-equipped-with-automorphism public
 open import structured-types.involutive-type-of-h-space-structures public

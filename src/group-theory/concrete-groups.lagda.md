@@ -32,7 +32,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A concrete group is a pointed connected 1-type.
+A **concrete group** is a [pointed](structured-types.pointed-types.md)
+[connected](foundation.connected-types.md) [1-type](foundation-core.1-types.md).
 
 ## Definition
 
