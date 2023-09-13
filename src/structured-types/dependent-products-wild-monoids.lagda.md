@@ -17,8 +17,8 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.coherent-h-spaces
-open import structured-types.dependent-products-coherent-h-spaces
+open import structured-types.dependent-products-h-spaces
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 open import structured-types.wild-monoids
 ```
@@ -39,41 +39,41 @@ module _
   {l1 l2 : Level} (I : UU l1) (M : I → Wild-Monoid l2)
   where
 
-  coherent-h-space-Π-Wild-Monoid : Coherent-H-Space (l1 ⊔ l2)
-  coherent-h-space-Π-Wild-Monoid =
-    Π-Coherent-H-Space I (λ i → wild-unital-magma-Wild-Monoid (M i))
+  h-space-Π-Wild-Monoid : H-Space (l1 ⊔ l2)
+  h-space-Π-Wild-Monoid =
+    Π-H-Space I (λ i → h-space-Wild-Monoid (M i))
 
   pointed-type-Π-Wild-Monoid : Pointed-Type (l1 ⊔ l2)
   pointed-type-Π-Wild-Monoid =
-    pointed-type-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+    pointed-type-H-Space h-space-Π-Wild-Monoid
 
   type-Π-Wild-Monoid : UU (l1 ⊔ l2)
-  type-Π-Wild-Monoid = type-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+  type-Π-Wild-Monoid = type-H-Space h-space-Π-Wild-Monoid
 
   unit-Π-Wild-Monoid : type-Π-Wild-Monoid
-  unit-Π-Wild-Monoid = unit-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+  unit-Π-Wild-Monoid = unit-H-Space h-space-Π-Wild-Monoid
 
   mul-Π-Wild-Monoid :
     type-Π-Wild-Monoid → type-Π-Wild-Monoid → type-Π-Wild-Monoid
-  mul-Π-Wild-Monoid = mul-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+  mul-Π-Wild-Monoid = mul-H-Space h-space-Π-Wild-Monoid
 
   left-unit-law-mul-Π-Wild-Monoid :
     (f : type-Π-Wild-Monoid) → (mul-Π-Wild-Monoid (unit-Π-Wild-Monoid) f) ＝ f
   left-unit-law-mul-Π-Wild-Monoid =
-    left-unit-law-mul-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+    left-unit-law-mul-H-Space h-space-Π-Wild-Monoid
 
   right-unit-law-mul-Π-Wild-Monoid :
     (f : type-Π-Wild-Monoid) → (mul-Π-Wild-Monoid f (unit-Π-Wild-Monoid)) ＝ f
   right-unit-law-mul-Π-Wild-Monoid =
-    right-unit-law-mul-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+    right-unit-law-mul-H-Space h-space-Π-Wild-Monoid
 
   associator-Π-Wild-Monoid :
-    associator-Coherent-H-Space coherent-h-space-Π-Wild-Monoid
+    associator-H-Space h-space-Π-Wild-Monoid
   associator-Π-Wild-Monoid f g h =
     eq-htpy (λ i → associator-Wild-Monoid (M i) (f i) (g i) (h i))
 
   unital-associator-Π-Wild-Monoid :
-    unital-associator coherent-h-space-Π-Wild-Monoid
+    unital-associator h-space-Π-Wild-Monoid
   pr1 unital-associator-Π-Wild-Monoid = associator-Π-Wild-Monoid
   pr1 (pr2 unital-associator-Π-Wild-Monoid) g h =
     ( inv
@@ -131,6 +131,6 @@ module _
   pr2 (pr2 (pr2 (pr2 unital-associator-Π-Wild-Monoid))) = star
 
   Π-Wild-Monoid : Wild-Monoid (l1 ⊔ l2)
-  pr1 Π-Wild-Monoid = coherent-h-space-Π-Wild-Monoid
+  pr1 Π-Wild-Monoid = h-space-Π-Wild-Monoid
   pr2 Π-Wild-Monoid = unital-associator-Π-Wild-Monoid
 ```

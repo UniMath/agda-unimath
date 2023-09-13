@@ -50,7 +50,8 @@ abstract
 
 abstract
   funext-univalence :
-    {l : Level} {A : UU l} {B : A → UU l} (f : (x : A) → B x) → function-extensionality f
+    {l : Level} {A : UU l} {B : A → UU l} (f : (x : A) → B x) →
+    function-extensionality f
   funext-univalence {A = A} {B} f =
     funext-weak-funext (λ A B → weak-funext-univalence) A B f
 ```

@@ -61,9 +61,10 @@ weaker-function-extensionality A B =
 ```agda
 abstract
   weak-funext-funext :
-    {l1 l2 : Level} →
-    ((A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → function-extensionality f) →
-    ((A : UU l1) (B : A → UU l2) → weak-function-extensionality A B)
+    { l1 l2 : Level} →
+    ( (A : UU l1) (B : A → UU l2) (f : (x : A) → B x) →
+      function-extensionality f) →
+    ( (A : UU l1) (B : A → UU l2) → weak-function-extensionality A B)
   pr1 (weak-funext-funext funext A B is-contr-B) x =
     center (is-contr-B x)
   pr2 (weak-funext-funext funext A B is-contr-B) f =
@@ -73,9 +74,9 @@ abstract
 
 abstract
   funext-weak-funext :
-    {l1 l2 : Level} →
-    ((A : UU l1) (B : A → UU l2) → weak-function-extensionality A B) →
-    ((A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → function-extensionality f)
+    { l1 l2 : Level} →
+    ( (A : UU l1) (B : A → UU l2) → weak-function-extensionality A B) →
+    ( A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → function-extensionality f
   funext-weak-funext weak-funext A B f =
     fundamental-theorem-id
       ( is-contr-retract-of

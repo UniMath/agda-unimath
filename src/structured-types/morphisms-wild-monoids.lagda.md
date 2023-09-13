@@ -23,8 +23,8 @@ open import foundation.universe-levels
 open import group-theory.homomorphisms-semigroups
 open import group-theory.monoids
 
-open import structured-types.coherent-h-spaces
-open import structured-types.morphisms-coherent-h-spaces
+open import structured-types.h-spaces
+open import structured-types.morphisms-h-spaces
 open import structured-types.pointed-maps
 open import structured-types.wild-monoids
 ```
@@ -50,9 +50,9 @@ module _
 
   type-hom-Wild-Monoid : UU (l1 ⊔ l2)
   type-hom-Wild-Monoid =
-    type-hom-Coherent-H-Space
-      ( wild-unital-magma-Wild-Monoid M)
-      ( wild-unital-magma-Wild-Monoid N)
+    type-hom-H-Space
+      ( h-space-Wild-Monoid M)
+      ( h-space-Wild-Monoid N)
 
   pointed-map-hom-Wild-Monoid :
     type-hom-Wild-Monoid →
@@ -71,8 +71,8 @@ module _
   preserves-unital-mul-map-hom-Wild-Monoid :
     (f : type-hom-Wild-Monoid) →
     preserves-unital-mul
-      ( wild-unital-magma-Wild-Monoid M)
-      ( wild-unital-magma-Wild-Monoid N)
+      ( h-space-Wild-Monoid M)
+      ( h-space-Wild-Monoid N)
       ( pointed-map-hom-Wild-Monoid f)
   preserves-unital-mul-map-hom-Wild-Monoid f = pr2 f
 
@@ -113,8 +113,8 @@ module _
   preserves-coh-unit-laws-map-hom-Wild-Monoid :
     (f : type-hom-Wild-Monoid) →
     preserves-coh-unit-laws-mul
-      ( wild-unital-magma-Wild-Monoid M)
-      ( wild-unital-magma-Wild-Monoid N)
+      ( h-space-Wild-Monoid M)
+      ( h-space-Wild-Monoid N)
       ( pointed-map-hom-Wild-Monoid f)
       ( preserves-mul-map-hom-Wild-Monoid f)
       ( preserves-left-unit-law-mul-map-hom-Wild-Monoid f)

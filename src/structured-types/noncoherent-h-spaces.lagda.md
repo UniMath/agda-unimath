@@ -71,7 +71,9 @@ module _
     point-Pointed-Type pointed-type-Noncoherent-H-Space
 
   mul-Noncoherent-H-Space :
-    type-Noncoherent-H-Space → type-Noncoherent-H-Space → type-Noncoherent-H-Space
+    type-Noncoherent-H-Space →
+    type-Noncoherent-H-Space →
+    type-Noncoherent-H-Space
   mul-Noncoherent-H-Space = pr1 (pr2 A)
 
   unit-laws-mul-Noncoherent-H-Space :
@@ -79,10 +81,12 @@ module _
   unit-laws-mul-Noncoherent-H-Space = pr2 (pr2 A)
 
   left-unit-law-mul-Noncoherent-H-Space :
-    (x : type-Noncoherent-H-Space) → Id (mul-Noncoherent-H-Space point-Noncoherent-H-Space x) x
+    (x : type-Noncoherent-H-Space) →
+    mul-Noncoherent-H-Space point-Noncoherent-H-Space x ＝ x
   left-unit-law-mul-Noncoherent-H-Space = pr1 unit-laws-mul-Noncoherent-H-Space
 
   right-unit-law-mul-Noncoherent-H-Space :
-    (x : type-Noncoherent-H-Space) → Id (mul-Noncoherent-H-Space x point-Noncoherent-H-Space) x
+    (x : type-Noncoherent-H-Space) →
+    mul-Noncoherent-H-Space x point-Noncoherent-H-Space ＝ x
   right-unit-law-mul-Noncoherent-H-Space = pr2 unit-laws-mul-Noncoherent-H-Space
 ```

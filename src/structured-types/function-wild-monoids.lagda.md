@@ -17,9 +17,9 @@ open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.coherent-h-spaces
-open import structured-types.dependent-products-coherent-h-spaces
+open import structured-types.dependent-products-h-spaces
 open import structured-types.dependent-products-wild-monoids
+open import structured-types.h-spaces
 open import structured-types.pointed-types
 open import structured-types.wild-monoids
 ```
@@ -42,9 +42,9 @@ module _
   function-Wild-Monoid : Wild-Monoid (l1 ⊔ l2)
   function-Wild-Monoid = Π-Wild-Monoid I (λ _ → M)
 
-  coherent-h-space-function-Wild-Monoid : Coherent-H-Space (l1 ⊔ l2)
-  coherent-h-space-function-Wild-Monoid =
-      wild-unital-magma-Wild-Monoid function-Wild-Monoid
+  h-space-function-Wild-Monoid : H-Space (l1 ⊔ l2)
+  h-space-function-Wild-Monoid =
+      h-space-Wild-Monoid function-Wild-Monoid
 
   pointed-type-function-Wild-Monoid : Pointed-Type (l1 ⊔ l2)
   pointed-type-function-Wild-Monoid =
@@ -75,11 +75,11 @@ module _
     right-unit-law-mul-Wild-Monoid function-Wild-Monoid
 
   associator-function-Wild-Monoid :
-    associator-Coherent-H-Space coherent-h-space-function-Wild-Monoid
+    associator-H-Space h-space-function-Wild-Monoid
   associator-function-Wild-Monoid = associator-Wild-Monoid function-Wild-Monoid
 
   unital-associator-function-Wild-Monoid :
-    unital-associator (wild-unital-magma-Wild-Monoid function-Wild-Monoid)
+    unital-associator (h-space-Wild-Monoid function-Wild-Monoid)
   unital-associator-function-Wild-Monoid =
     unital-associator-Wild-Monoid function-Wild-Monoid
 ```

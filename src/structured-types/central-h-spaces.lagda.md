@@ -17,8 +17,8 @@ open import structured-types.pointed-types
 
 ## Idea
 
-In [`structured-types.coherent-h-spaces`](structured-types.coherent-h-spaces.md)
-we saw that the type of H-space structures on a
+In [`structured-types.h-spaces`](structured-types.h-spaces.md) we saw that the
+type of H-space structures on a
 [pointed type](structured-types.pointed-types.md) `A` is equivalently described
 as the type of [pointed sections](structured-types.pointed-types.md) of the
 pointed evaluation map `(A → A) →∗ A`. If the type `A` is
