@@ -12,6 +12,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -25,11 +26,11 @@ open import group-theory.powers-of-elements-commutative-monoids
 
 A **rational commutative monoid** is a
 [commutative monoid](group-theory.commutative-monoids.md) `(M,0,+)` in which the
-map `x ↦ nx` is invertible for every natural number `n`.
+map `x ↦ nx` is invertible for every natural number `n > 0`.
 
 Note: Since we usually write commutative monoids multiplicatively, the condition
 that a commutative monoid is rational is that the map `x ↦ xⁿ` is invertible for
-every natural number `n`. However, for rational commutative monoids we will
+every natural number `n > 0`. However, for rational commutative monoids we will
 write the binary operation additively.
 
 ## Definition
@@ -37,10 +38,29 @@ write the binary operation additively.
 ### The predicate of being a rational commutative monoid
 
 ```agda
-is-rational-Commutative-Monoid : {l : Level} → Commutative-Monoid l → UU l
-is-rational-Commutative-Monoid M =
-  (n : ℕ) → is-equiv (power-Commutative-Monoid M n)
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
 
+  is-rational-prop-Commutative-Monoid : Prop l
+  is-rational-prop-Commutative-Monoid =
+    Π-Prop ℕ
+      ( λ n →
+        is-equiv-Prop (power-Commutative-Monoid M (succ-ℕ n)))
+
+  is-rational-Commutative-Monoid : UU l
+  is-rational-Commutative-Monoid =
+    type-Prop is-rational-prop-Commutative-Monoid
+
+  is-prop-is-rational-Commutative-Monoid :
+    is-prop is-rational-Commutative-Monoid
+  is-prop-is-rational-Commutative-Monoid =
+    is-prop-type-Prop is-rational-prop-Commutative-Monoid
+```
+
+### Rational commutative monoids
+
+```agda
 Rational-Commutative-Monoid : (l : Level) → UU (lsuc l)
 Rational-Commutative-Monoid l =
   Σ (Commutative-Monoid l) is-rational-Commutative-Monoid
@@ -102,6 +122,7 @@ module _
     power-Commutative-Monoid commutative-monoid-Rational-Commutative-Monoid
 
   is-rational-Rational-Commutative-Monoid :
-    (n : ℕ) → is-equiv (multiple-Rational-Commutative-Monoid n)
+    is-rational-Commutative-Monoid
+      commutative-monoid-Rational-Commutative-Monoid
   is-rational-Rational-Commutative-Monoid = pr2 M
 ```
