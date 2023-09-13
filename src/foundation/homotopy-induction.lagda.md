@@ -32,11 +32,11 @@ ev-refl-htpy :
   ((g : (x : A) → B x) (H : f ~ g) → C g H) → C f refl-htpy
 ev-refl-htpy f C φ = φ f refl-htpy
 
-IND-HTPY :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+induction-principle-homotopies :
+  {l1 l2 : Level} (l3 : Level) {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → UU (l1 ⊔ l2 ⊔ lsuc l3)
-IND-HTPY {l1} {l2} {l3} {A} {B} f =
-  (C : (g : (x : A) → B x) → f ~ g → UU l3) → section (ev-refl-htpy f C)
+induction-principle-homotopies l3 f =
+  is-identity-system l3 (f ~_) f (refl-htpy)
 ```
 
 ## Propositions
@@ -69,23 +69,23 @@ module _
 
 ```agda
 abstract
-  IND-HTPY-FUNEXT :
-    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    FUNEXT f → IND-HTPY {l3 = l3} f
-  IND-HTPY-FUNEXT {l3 = l3} {A = A} {B = B} f funext-f =
+  induction-principle-homotopies-FUNEXT :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
+    FUNEXT f → (l3 : Level) → induction-principle-homotopies l3 f
+  induction-principle-homotopies-FUNEXT {A = A} {B} f funext-f l3 =
     is-identity-system-is-torsorial f
       ( refl-htpy)
       ( is-contr-total-htpy f)
 
 abstract
-  FUNEXT-IND-HTPY :
+  FUNEXT-induction-principle-homotopies :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    ({l : Level} → IND-HTPY {l3 = l} f) → FUNEXT f
-  FUNEXT-IND-HTPY f ind-htpy-f =
+    ({l3 : Level} → induction-principle-homotopies l3 f) → FUNEXT f
+  FUNEXT-induction-principle-homotopies f ind-htpy-f =
     fundamental-theorem-id-is-identity-system f
       ( refl-htpy)
       ( ind-htpy-f)
-      ( λ g → htpy-eq)
+      ( λ _ → htpy-eq)
 ```
 
 ### Homotopy induction
@@ -96,19 +96,20 @@ module _
   where
 
   abstract
-    Ind-htpy :
-      (f : (x : A) → B x) → IND-HTPY {l3 = l3} f
-    Ind-htpy f = IND-HTPY-FUNEXT f (funext f)
+    induction-principle-htpy :
+      (f : (x : A) → B x) → induction-principle-homotopies l3 f
+    induction-principle-htpy f =
+      induction-principle-homotopies-FUNEXT f (funext f) l3
 
     ind-htpy :
       (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
-    ind-htpy f C t {g} = pr1 (Ind-htpy f C) t g
+    ind-htpy f C t {g} = pr1 (induction-principle-htpy f C) t g
 
     compute-ind-htpy :
       (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
-    compute-ind-htpy f C = pr2 (Ind-htpy f C)
+    compute-ind-htpy f C = pr2 (induction-principle-htpy f C)
 ```
 
 ## See also
