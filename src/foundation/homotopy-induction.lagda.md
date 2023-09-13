@@ -73,7 +73,7 @@ abstract
     {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     FUNEXT f → IND-HTPY {l3 = l3} f
   IND-HTPY-FUNEXT {l3 = l3} {A = A} {B = B} f funext-f =
-    Ind-identity-system f
+    is-identity-system-is-torsorial f
       ( refl-htpy)
       ( is-contr-total-htpy f)
 
@@ -82,13 +82,13 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     ({l : Level} → IND-HTPY {l3 = l} f) → FUNEXT f
   FUNEXT-IND-HTPY f ind-htpy-f =
-    fundamental-theorem-id-IND-identity-system f
+    fundamental-theorem-id-is-identity-system f
       ( refl-htpy)
       ( ind-htpy-f)
       ( λ g → htpy-eq)
 ```
 
-## Definition
+### Homotopy induction
 
 ```agda
 module _
@@ -109,39 +109,6 @@ module _
       (f : (x : A) → B x) (C : (g : (x : A) → B x) → f ~ g → UU l3) →
       (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
     compute-ind-htpy f C = pr2 (Ind-htpy f C)
-```
-
-## Properties
-
-### Homotopy induction for homotopies between equivalences
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  abstract
-    Ind-htpy-equiv :
-      {l3 : Level} (e : A ≃ B)
-      (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-      section
-        ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
-          h e (refl-htpy-equiv e))
-    Ind-htpy-equiv e =
-      Ind-identity-system e
-        ( refl-htpy-equiv e)
-        ( is-contr-total-htpy-equiv e)
-
-  ind-htpy-equiv :
-    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
-    P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
-  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
-
-  compute-ind-htpy-equiv :
-    {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
-    (p : P e (refl-htpy-equiv e)) →
-    ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
 ```
 
 ## See also
