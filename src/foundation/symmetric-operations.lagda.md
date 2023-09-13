@@ -9,9 +9,17 @@ module foundation.symmetric-operations where
 ```agda
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
+open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-coproduct-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
+open import foundation.propositional-truncations
+open import foundation.propositions
+open import foundation.subtypes
 open import foundation.universal-property-propositional-truncation-into-sets
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -56,14 +64,27 @@ module _
 
   is-commutative : (A → A → B) → UU (l1 ⊔ l2)
   is-commutative f = (x y : A) → f x y ＝ f y x
+
+is-commutative-Prop :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+  (A → A → type-Set B) → Prop (l1 ⊔ l2)
+is-commutative-Prop B f =
+  Π-Prop _ (λ x → Π-Prop _ (λ y → Id-Prop B (f x y) (f y x)))
 ```
 
 ### Commutative operations
 
 ```agda
-symmetric-operation :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (lsuc lzero ⊔ l1 ⊔ l2)
-symmetric-operation A B = unordered-pair A → B
+module _
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
+  where
+
+  symmetric-operation : UU (lsuc lzero ⊔ l1 ⊔ l2)
+  symmetric-operation = unordered-pair A → B
+
+  map-symmetric-operation : symmetric-operation → A → A → B
+  map-symmetric-operation f x y =
+    f (standard-unordered-pair x y)
 ```
 
 ## Properties
@@ -142,4 +163,145 @@ module _
     where
     p : Fin 2 → A
     p = pr2 (standard-unordered-pair x y)
+```
+
+### Characterization of equality of symmetric operations into sets
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : Set l2)
+  (f : symmetric-operation A (type-Set B))
+  where
+
+  htpy-symmetric-operation-Set-Prop :
+    (g : symmetric-operation A (type-Set B)) → Prop (l1 ⊔ l2)
+  htpy-symmetric-operation-Set-Prop g =
+    Π-Prop A
+      ( λ x →
+        Π-Prop A
+          ( λ y →
+            Id-Prop B
+              ( map-symmetric-operation A (type-Set B) f x y)
+              ( map-symmetric-operation A (type-Set B) g x y)))
+
+  htpy-symmetric-operation-Set :
+    (g : symmetric-operation A (type-Set B)) → UU (l1 ⊔ l2)
+  htpy-symmetric-operation-Set g =
+    type-Prop (htpy-symmetric-operation-Set-Prop g)
+
+  center-total-htpy-symmetric-operation-Set :
+    Σ ( symmetric-operation A (type-Set B))
+      ( htpy-symmetric-operation-Set)
+  pr1 center-total-htpy-symmetric-operation-Set = f
+  pr2 center-total-htpy-symmetric-operation-Set x y = refl
+
+  contraction-total-htpy-symmetric-operation-Set :
+    ( t :
+      Σ ( symmetric-operation A (type-Set B))
+        ( htpy-symmetric-operation-Set)) →
+    center-total-htpy-symmetric-operation-Set ＝ t
+  contraction-total-htpy-symmetric-operation-Set (g , H) =
+    eq-type-subtype
+      htpy-symmetric-operation-Set-Prop
+      ( eq-htpy
+        ( λ p →
+          apply-universal-property-trunc-Prop
+            ( is-surjective-standard-unordered-pair p)
+            ( Id-Prop B (f p) (g p))
+            ( λ { (x , y , refl) → H x y})))
+
+  is-contr-total-htpy-symmetric-operation-Set :
+    is-contr
+      ( Σ ( symmetric-operation A (type-Set B))
+          ( htpy-symmetric-operation-Set))
+  pr1 is-contr-total-htpy-symmetric-operation-Set =
+    center-total-htpy-symmetric-operation-Set
+  pr2 is-contr-total-htpy-symmetric-operation-Set =
+    contraction-total-htpy-symmetric-operation-Set
+
+  htpy-eq-symmetric-operation-Set :
+    (g : symmetric-operation A (type-Set B)) →
+    (f ＝ g) → htpy-symmetric-operation-Set g
+  htpy-eq-symmetric-operation-Set g refl x y = refl
+
+  is-equiv-htpy-eq-symmetric-operation-Set :
+    (g : symmetric-operation A (type-Set B)) →
+    is-equiv (htpy-eq-symmetric-operation-Set g)
+  is-equiv-htpy-eq-symmetric-operation-Set =
+    fundamental-theorem-id
+      is-contr-total-htpy-symmetric-operation-Set
+      htpy-eq-symmetric-operation-Set
+
+  extensionality-symmetric-operation-Set :
+    (g : symmetric-operation A (type-Set B)) →
+    (f ＝ g) ≃ htpy-symmetric-operation-Set g
+  pr1 (extensionality-symmetric-operation-Set g) =
+    htpy-eq-symmetric-operation-Set g
+  pr2 (extensionality-symmetric-operation-Set g) =
+    is-equiv-htpy-eq-symmetric-operation-Set g
+
+  eq-htpy-symmetric-operation-Set :
+    (g : symmetric-operation A (type-Set B)) →
+    htpy-symmetric-operation-Set g → (f ＝ g)
+  eq-htpy-symmetric-operation-Set g =
+    map-inv-equiv (extensionality-symmetric-operation-Set g)
+```
+
+### The type of commutative operations into a set is equivalent to the type of symmetric operations
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (B : Set l2)
+  where
+
+  map-compute-symmetric-operation-Set :
+    symmetric-operation A (type-Set B) → Σ (A → A → type-Set B) is-commutative
+  pr1 (map-compute-symmetric-operation-Set f) =
+    map-symmetric-operation A (type-Set B) f
+  pr2 (map-compute-symmetric-operation-Set f) =
+    is-commutative-symmetric-operation f
+
+  map-inv-compute-symmetric-operation-Set :
+    Σ (A → A → type-Set B) is-commutative → symmetric-operation A (type-Set B)
+  map-inv-compute-symmetric-operation-Set (f , H) =
+    symmetric-operation-is-commutative B f H
+
+  is-section-map-inv-compute-symmetric-operation-Set :
+    ( map-compute-symmetric-operation-Set ∘
+      map-inv-compute-symmetric-operation-Set) ~ id
+  is-section-map-inv-compute-symmetric-operation-Set (f , H) =
+    eq-type-subtype
+      ( is-commutative-Prop B)
+      ( eq-htpy
+        ( λ x →
+          eq-htpy
+            ( λ y →
+              compute-symmetric-operation-is-commutative B f H x y)))
+
+  is-retraction-map-inv-compute-symmetric-operation-Set :
+    ( map-inv-compute-symmetric-operation-Set ∘
+      map-compute-symmetric-operation-Set) ~ id
+  is-retraction-map-inv-compute-symmetric-operation-Set g =
+    eq-htpy-symmetric-operation-Set A B
+      ( map-inv-compute-symmetric-operation-Set
+        ( map-compute-symmetric-operation-Set g))
+      ( g)
+      ( compute-symmetric-operation-is-commutative B
+        ( map-symmetric-operation A (type-Set B) g)
+        ( is-commutative-symmetric-operation g))
+
+  is-equiv-map-compute-symmetric-operation-Set :
+    is-equiv map-compute-symmetric-operation-Set
+  is-equiv-map-compute-symmetric-operation-Set =
+    is-equiv-is-invertible
+      map-inv-compute-symmetric-operation-Set
+      is-section-map-inv-compute-symmetric-operation-Set
+      is-retraction-map-inv-compute-symmetric-operation-Set
+
+  compute-symmetric-operation-Set :
+    symmetric-operation A (type-Set B) ≃ Σ (A → A → type-Set B) is-commutative
+  pr1 compute-symmetric-operation-Set =
+    map-compute-symmetric-operation-Set
+  pr2 compute-symmetric-operation-Set =
+    is-equiv-map-compute-symmetric-operation-Set
 ```

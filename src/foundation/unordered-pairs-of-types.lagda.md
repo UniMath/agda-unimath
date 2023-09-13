@@ -71,7 +71,7 @@ module _
 
 ## Properties
 
-### Univalence for unordered pairs of types
+### Extensionality of unordered pairs of types
 
 ```agda
 module _

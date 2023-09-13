@@ -12,6 +12,7 @@ open import foundation.universe-levels
 open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

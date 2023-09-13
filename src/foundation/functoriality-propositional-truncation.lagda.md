@@ -18,6 +18,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

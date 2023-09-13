@@ -16,7 +16,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-groups
