@@ -196,13 +196,11 @@ module _
       ( eq-pair-Σ
         ( refl)
         ( eq-htpy
-          ( λ s →
-            inv
-              ( compute-equiv-htpy-dependent-fuction-dependent-identification-function-type
-                ( Y)
-                ( coherence-square-cocone f g c)
-                ( h)
-                ( s)))))
+          ( inv-htpy
+            ( compute-equiv-htpy-dependent-fuction-dependent-identification-function-type
+              ( Y)
+              ( coherence-square-cocone f g c)
+              ( h)))))
 
   flattening-lemma-pushout :
     flattening-lemma-pushout-statement P f g c dup-pushout
