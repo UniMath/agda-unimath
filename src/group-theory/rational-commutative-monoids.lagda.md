@@ -1,0 +1,107 @@
+# Rational commutative monoids
+
+```agda
+module group-theory.rational-commutative-monoids where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.identity-types
+open import foundation.universe-levels
+
+open import group-theory.commutative-monoids
+open import group-theory.monoids
+open import group-theory.powers-of-elements-commutative-monoids
+```
+
+</details>
+
+## Idea
+
+A **rational commutative monoid** is a
+[commutative monoid](group-theory.commutative-monoids.md) `(M,0,+)` in which the
+map `x ↦ nx` is invertible for every natural number `n`.
+
+Note: Since we usually write commutative monoids multiplicatively, the condition
+that a commutative monoid is rational is that the map `x ↦ xⁿ` is invertible for
+every natural number `n`. However, for rational commutative monoids we will
+write the binary operation additively.
+
+## Definition
+
+### The predicate of being a rational commutative monoid
+
+```agda
+is-rational-Commutative-Monoid : {l : Level} → Commutative-Monoid l → UU l
+is-rational-Commutative-Monoid M =
+  (n : ℕ) → is-equiv (power-Commutative-Monoid M n)
+
+Rational-Commutative-Monoid : (l : Level) → UU (lsuc l)
+Rational-Commutative-Monoid l =
+  Σ (Commutative-Monoid l) is-rational-Commutative-Monoid
+
+module _
+  {l : Level} (M : Rational-Commutative-Monoid l)
+  where
+
+  commutative-monoid-Rational-Commutative-Monoid : Commutative-Monoid l
+  commutative-monoid-Rational-Commutative-Monoid = pr1 M
+
+  monoid-Rational-Commutative-Monoid : Monoid l
+  monoid-Rational-Commutative-Monoid =
+    monoid-Commutative-Monoid commutative-monoid-Rational-Commutative-Monoid
+
+  type-Rational-Commutative-Monoid : UU l
+  type-Rational-Commutative-Monoid =
+    type-Commutative-Monoid commutative-monoid-Rational-Commutative-Monoid
+
+  add-Rational-Commutative-Monoid :
+    (x y : type-Rational-Commutative-Monoid) →
+    type-Rational-Commutative-Monoid
+  add-Rational-Commutative-Monoid =
+    mul-Commutative-Monoid commutative-monoid-Rational-Commutative-Monoid
+
+  zero-Rational-Commutative-Monoid : type-Rational-Commutative-Monoid
+  zero-Rational-Commutative-Monoid =
+    unit-Commutative-Monoid commutative-monoid-Rational-Commutative-Monoid
+
+  associative-add-Rational-Commutative-Monoid :
+    (x y z : type-Rational-Commutative-Monoid) →
+    add-Rational-Commutative-Monoid
+      ( add-Rational-Commutative-Monoid x y)
+      ( z) ＝
+    add-Rational-Commutative-Monoid
+      ( x)
+      ( add-Rational-Commutative-Monoid y z)
+  associative-add-Rational-Commutative-Monoid =
+    associative-mul-Commutative-Monoid
+      commutative-monoid-Rational-Commutative-Monoid
+
+  left-unit-law-add-Rational-Commutative-Monoid :
+    (x : type-Rational-Commutative-Monoid) →
+    add-Rational-Commutative-Monoid zero-Rational-Commutative-Monoid x ＝ x
+  left-unit-law-add-Rational-Commutative-Monoid =
+    left-unit-law-mul-Commutative-Monoid
+      commutative-monoid-Rational-Commutative-Monoid
+
+  right-unit-law-add-Rational-Commutative-Monoid :
+    (x : type-Rational-Commutative-Monoid) →
+    add-Rational-Commutative-Monoid x zero-Rational-Commutative-Monoid ＝ x
+  right-unit-law-add-Rational-Commutative-Monoid =
+    right-unit-law-mul-Commutative-Monoid
+      commutative-monoid-Rational-Commutative-Monoid
+
+  multiple-Rational-Commutative-Monoid :
+    ℕ → type-Rational-Commutative-Monoid → type-Rational-Commutative-Monoid
+  multiple-Rational-Commutative-Monoid =
+    power-Commutative-Monoid commutative-monoid-Rational-Commutative-Monoid
+
+  is-rational-Rational-Commutative-Monoid :
+    (n : ℕ) → is-equiv (multiple-Rational-Commutative-Monoid n)
+  is-rational-Rational-Commutative-Monoid = pr2 M
+```

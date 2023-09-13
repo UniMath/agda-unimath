@@ -23,8 +23,9 @@ open import group-theory.monoids
 
 ## Idea
 
-The power operation on a monoid is the map `n x ↦ xⁿ`, which is defined by
-iteratively multiplying `x` with itself `n` times.
+The **power operation** on a [monoid](group-theory.monoids.md) is the map
+`n x ↦ xⁿ`, which is defined by [iteratively](foundation.iterating-functions.md)
+multiplying `x` with itself `n` times.
 
 ## Definition
 
