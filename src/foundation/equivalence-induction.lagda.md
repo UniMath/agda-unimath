@@ -65,9 +65,9 @@ module _
     ((B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
   ev-id-equiv P f = f A id-equiv
 
-  equivalence-induction :
+  induction-principle-equivalences :
     {l : Level} (P : (B : UU l1) (e : A ≃ B) → UU l) → UU (lsuc l1 ⊔ l)
-  equivalence-induction P = section (ev-id-equiv P)
+  induction-principle-equivalences P = section (ev-id-equiv P)
 
   triangle-ev-id-equiv :
     {l : Level}
@@ -95,7 +95,7 @@ module _
       is-contr (Σ (UU l1) (λ X → A ≃ X)) →
       {l : Level} →
       (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
-      equivalence-induction (λ B e → P (B , e))
+      induction-principle-equivalences (λ B e → P (B , e))
     is-identity-system-is-contr-total-equiv c P =
       section-left-factor
         ( ev-id-equiv (λ X e → P (X , e)))

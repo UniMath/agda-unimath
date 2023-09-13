@@ -1,7 +1,7 @@
-# Anafunctors
+# Anafunctors between precategories
 
 ```agda
-module category-theory.anafunctors where
+module category-theory.anafunctors-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,7 @@ module category-theory.anafunctors where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -24,11 +24,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-An anafunctor is a functor that is only defined up to isomorphism.
+An **anafunctor** is a [functor](category-theory.functors-precategories.md) that
+is only defined up to
+[isomorphism](category-theory.isomorphisms-in-precategories.md).
 
 ## Definition
-
-### Anafunctors between precategories
 
 ```agda
 anafunctor-Precategory :
@@ -72,39 +72,6 @@ module _
     (V : obj-Precategory D) (v : object-anafunctor-Precategory Y V) →
     type-hom-Precategory C X Y → type-hom-Precategory D U V
   hom-anafunctor-Precategory = pr1 (pr2 F)
-```
-
-### Anafunctors between categories
-
-```agda
-anafunctor-Category :
-  {l1 l2 l3 l4 : Level} (l : Level) →
-  Category l1 l2 → Category l3 l4 → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
-anafunctor-Category l C D =
-  anafunctor-Precategory l (precategory-Category C) (precategory-Category D)
-
-module _
-  {l1 l2 l3 l4 l5 : Level} (C : Category l1 l2) (D : Category l3 l4)
-  (F : anafunctor-Category l5 C D)
-  where
-
-  object-anafunctor-Category : obj-Category C → obj-Category D → UU l5
-  object-anafunctor-Category =
-    object-anafunctor-Precategory
-      ( precategory-Category C)
-      ( precategory-Category D)
-      ( F)
-
-  hom-anafunctor-Category :
-    (X Y : obj-Category C) (U : obj-Category D)
-    (u : object-anafunctor-Category X U)
-    (V : obj-Category D) (v : object-anafunctor-Category Y V) →
-    type-hom-Category C X Y → type-hom-Category D U V
-  hom-anafunctor-Category =
-    hom-anafunctor-Precategory
-      ( precategory-Category C)
-      ( precategory-Category D)
-      ( F)
 ```
 
 ## Properties
@@ -187,15 +154,4 @@ module _
         ( hom-iso-Precategory D v)
         ( hom-functor-Precategory C D F f))
       ( hom-inv-iso-Precategory D u))
-```
-
-### The action on objects
-
-```agda
-image-object-anafunctor-Category :
-  {l1 l2 l3 l4 l5 : Level} (C : Category l1 l2) (D : Category l3 l4) →
-  anafunctor-Category l5 C D → obj-Category C → UU (l3 ⊔ l5)
-image-object-anafunctor-Category C D F X =
-  Σ ( obj-Category D)
-    ( λ U → type-trunc-Prop (object-anafunctor-Category C D F X U))
 ```

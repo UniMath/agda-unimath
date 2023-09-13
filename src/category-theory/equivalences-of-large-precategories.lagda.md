@@ -1,7 +1,7 @@
 # Equivalences between large precategories
 
 ```agda
-module category-theory.equivalences-large-precategories where
+module category-theory.equivalences-of-large-precategories where
 ```
 
 <details><summary>Imports</summary>

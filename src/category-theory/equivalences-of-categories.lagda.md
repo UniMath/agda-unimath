@@ -1,14 +1,14 @@
 # Equivalences between categories
 
 ```agda
-module category-theory.equivalences-categories where
+module category-theory.equivalences-of-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import category-theory.categories
-open import category-theory.equivalences-precategories
+open import category-theory.equivalences-of-precategories
 open import category-theory.functors-categories
 
 open import foundation.universe-levels
@@ -18,8 +18,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor `F : C → D` on categories is an equivalence if it is an equivalence on
-the underlying precategories.
+A [functor](category-theory.functors-categories.md) `F : C → D` on
+[categories](category-theory.categories.md) is an **equivalence** if it is an
+[equivalence on the underlying precategories](category-theory.equivalences-of-precategories.md).
 
 ## Definition
 

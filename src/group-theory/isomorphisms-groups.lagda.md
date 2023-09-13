@@ -7,7 +7,7 @@ module group-theory.isomorphisms-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types

@@ -8,7 +8,7 @@ module category-theory.natural-isomorphisms-precategories where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 

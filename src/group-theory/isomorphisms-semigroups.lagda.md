@@ -7,7 +7,7 @@ module group-theory.isomorphisms-semigroups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types

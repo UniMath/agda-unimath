@@ -7,7 +7,7 @@ module commutative-algebra.isomorphisms-commutative-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings

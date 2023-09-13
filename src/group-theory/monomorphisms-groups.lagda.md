@@ -7,7 +7,7 @@ module group-theory.monomorphisms-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.monomorphisms-large-precategories
+open import category-theory.monomorphisms-in-large-precategories
 
 open import foundation.propositions
 open import foundation.universe-levels

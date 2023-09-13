@@ -8,8 +8,8 @@ module foundation.category-of-sets where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-large-precategories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-large-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
