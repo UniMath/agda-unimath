@@ -1,7 +1,7 @@
 # Pullbacks in precategories
 
 ```agda
-module category-theory.pullbacks-precategories where
+module category-theory.pullbacks-in-precategories where
 ```
 
 <details><summary>Imports</summary>

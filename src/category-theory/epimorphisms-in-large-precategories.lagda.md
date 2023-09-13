@@ -1,13 +1,13 @@
 # Epimorphism in large precategories
 
 ```agda
-module category-theory.epimorphisms-large-precategories where
+module category-theory.epimorphisms-in-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions

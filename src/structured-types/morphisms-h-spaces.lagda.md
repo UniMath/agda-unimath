@@ -1,7 +1,7 @@
-# Morphisms of coherent H-spaces
+# Morphisms of H-spaces
 
 ```agda
-module structured-types.morphisms-coherent-h-spaces where
+module structured-types.morphisms-h-spaces where
 ```
 
 <details><summary>Imports</summary>
@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
 
-open import structured-types.coherent-h-spaces
+open import structured-types.h-spaces
 open import structured-types.pointed-maps
 ```
 
@@ -26,12 +26,13 @@ open import structured-types.pointed-maps
 
 ## Idea
 
-Morphisms of wild unital magmas are pointed maps that preserve the unital binary
+Morphisms of [H-spaces](structured-types.h-spaces.md) are
+[pointed maps](structured-types.pointed-maps.md) that preserve the unital binary
 operation, including its laws.
 
 ## Definition
 
-### Morphisms of wild unital magmas
+### Morphisms of H-spaces
 
 ```agda
 preserves-left-unit-law-mul :
@@ -51,23 +52,23 @@ preserves-right-unit-law-mul {A = A} {B} μ {eA} rA ν {eB} rB f p μf =
   (x : A) → Id (ap f (rA x)) (μf x eA ∙ (ap (ν (f x)) p ∙ rB (f x)))
 
 preserves-coh-unit-laws-mul :
-  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
-  ( f : pointed-type-Coherent-H-Space M →∗ pointed-type-Coherent-H-Space N) →
+  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
+  ( f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
   ( μf :
-    preserves-mul (mul-Coherent-H-Space M) (mul-Coherent-H-Space N) (pr1 f)) →
+    preserves-mul (mul-H-Space M) (mul-H-Space N) (pr1 f)) →
   preserves-left-unit-law-mul
-    ( mul-Coherent-H-Space M)
-    ( left-unit-law-mul-Coherent-H-Space M)
-    ( mul-Coherent-H-Space N)
-    ( left-unit-law-mul-Coherent-H-Space N)
+    ( mul-H-Space M)
+    ( left-unit-law-mul-H-Space M)
+    ( mul-H-Space N)
+    ( left-unit-law-mul-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
   preserves-right-unit-law-mul
-    ( mul-Coherent-H-Space M)
-    ( right-unit-law-mul-Coherent-H-Space M)
-    ( mul-Coherent-H-Space N)
-    ( right-unit-law-mul-Coherent-H-Space N)
+    ( mul-H-Space M)
+    ( right-unit-law-mul-H-Space M)
+    ( mul-H-Space N)
+    ( right-unit-law-mul-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
@@ -77,8 +78,8 @@ preserves-coh-unit-laws-mul M
   (pair f refl) μf lf rf =
   Id (ap (ap f) cM ∙ rf eM) (lf eM ∙ ap (concat (μf eM eM) (f eM)) cN)
   where
-  eM = unit-Coherent-H-Space M
-  cM = coh-unit-laws-mul-Coherent-H-Space M
+  eM = unit-H-Space M
+  cM = coh-unit-laws-mul-H-Space M
   cN = pr2 (pr2 (pr2 μ))
 ```
 
@@ -86,23 +87,23 @@ preserves-coh-unit-laws-mul M
 
 ```agda
 preserves-coh-unit-laws-mul' :
-  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
-  ( f : pointed-type-Coherent-H-Space M →∗ pointed-type-Coherent-H-Space N) →
+  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
+  ( f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
   ( μf :
-    preserves-mul (mul-Coherent-H-Space M) (mul-Coherent-H-Space N) (pr1 f)) →
+    preserves-mul (mul-H-Space M) (mul-H-Space N) (pr1 f)) →
   preserves-left-unit-law-mul
-    ( mul-Coherent-H-Space M)
-    ( left-unit-law-mul-Coherent-H-Space M)
-    ( mul-Coherent-H-Space N)
-    ( left-unit-law-mul-Coherent-H-Space N)
+    ( mul-H-Space M)
+    ( left-unit-law-mul-H-Space M)
+    ( mul-H-Space N)
+    ( left-unit-law-mul-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
   preserves-right-unit-law-mul
-    ( mul-Coherent-H-Space M)
-    ( right-unit-law-mul-Coherent-H-Space M)
-    ( mul-Coherent-H-Space N)
-    ( right-unit-law-mul-Coherent-H-Space N)
+    ( mul-H-Space M)
+    ( right-unit-law-mul-H-Space M)
+    ( mul-H-Space N)
+    ( right-unit-law-mul-H-Space N)
     ( pr1 f)
     ( pr2 f)
     ( μf) →
@@ -117,25 +118,25 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
           ( inv
             ( assoc
               ( μf eM eM)
-              ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+              ( ap (mul-H-Space' N (pr1 f eM)) ef)
               ( lN (pr1 f eM))))) ∙
         ( ( assoc
-            ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+            ( μf eM eM ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
             ( lN (pr1 f eM))
             ( ap id ef)) ∙
           ( ( ap
-              ( ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef) ∙_)
+              ( ( μf eM eM ∙ ap (mul-H-Space' N (pr1 f eM)) ef) ∙_)
               ( nat-htpy lN ef)) ∙
             ( ( inv
                 ( assoc
-                  ( μf eM eM ∙ ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+                  ( μf eM eM ∙ ap (mul-H-Space' N (pr1 f eM)) ef)
                   ( ap (μN eN) ef)
                   ( lN eN))) ∙
               ( ( ap
                   ( λ t → t ∙ lN eN)
                   ( assoc
                     ( μf eM eM)
-                    ( ap (mul-Coherent-H-Space' N (pr1 f eM)) ef)
+                    ( ap (mul-H-Space' N (pr1 f eM)) ef)
                     ( ap (μN eN) ef))) ∙
                 ( horizontal-concat-Id²
                   ( ap
@@ -159,33 +160,33 @@ preserves-coh-unit-laws-mul' M N f μf lf rf =
               ( ( inv
                   ( assoc
                     ( μf eM eM ∙ ap (μN (pr1 f eM)) ef)
-                    ( ap (mul-Coherent-H-Space' N eN) ef)
+                    ( ap (mul-H-Space' N eN) ef)
                     ( rN eN))) ∙
                 ( ap
                   ( λ t → t ∙ rN eN)
                   ( ( assoc
                       ( μf eM eM)
                       ( ap (μN (pr1 f eM)) ef)
-                      ( ap (mul-Coherent-H-Space' N eN) ef)) ∙
+                      ( ap (mul-H-Space' N eN) ef)) ∙
                     ( ap
                       ( μf eM eM ∙_)
                       ( inv (triangle-ap-binary' μN ef ef)))))))))))
   where
-  eM = unit-Coherent-H-Space M
-  μM = mul-Coherent-H-Space M
-  lM = left-unit-law-mul-Coherent-H-Space M
-  rM = right-unit-law-mul-Coherent-H-Space M
-  cM = coh-unit-laws-mul-Coherent-H-Space M
-  eN = unit-Coherent-H-Space N
-  μN = mul-Coherent-H-Space N
-  lN = left-unit-law-mul-Coherent-H-Space N
-  rN = right-unit-law-mul-Coherent-H-Space N
-  cN = coh-unit-laws-mul-Coherent-H-Space N
+  eM = unit-H-Space M
+  μM = mul-H-Space M
+  lM = left-unit-law-mul-H-Space M
+  rM = right-unit-law-mul-H-Space M
+  cM = coh-unit-laws-mul-H-Space M
+  eN = unit-H-Space N
+  μN = mul-H-Space N
+  lN = left-unit-law-mul-H-Space N
+  rN = right-unit-law-mul-H-Space N
+  cN = coh-unit-laws-mul-H-Space N
   ef = pr2 f
 
 preserves-unital-mul :
-  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
-  (f : pointed-type-Coherent-H-Space M →∗ pointed-type-Coherent-H-Space N) →
+  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
+  (f : pointed-type-H-Space M →∗ pointed-type-H-Space N) →
   UU (l1 ⊔ l2)
 preserves-unital-mul M N f =
   Σ ( preserves-mul μM μN (pr1 f))
@@ -195,22 +196,22 @@ preserves-unital-mul M N f =
           Σ ( preserves-right-unit-law-mul μM rM μN rN (pr1 f) (pr2 f) μ11)
             ( λ μ10 → preserves-coh-unit-laws-mul M N f μ11 μ01 μ10)))
   where
-  μM = mul-Coherent-H-Space M
-  lM = left-unit-law-mul-Coherent-H-Space M
-  rM = right-unit-law-mul-Coherent-H-Space M
-  μN = mul-Coherent-H-Space N
-  lN = left-unit-law-mul-Coherent-H-Space N
-  rN = right-unit-law-mul-Coherent-H-Space N
+  μM = mul-H-Space M
+  lM = left-unit-law-mul-H-Space M
+  rM = right-unit-law-mul-H-Space M
+  μN = mul-H-Space N
+  lN = left-unit-law-mul-H-Space N
+  rN = right-unit-law-mul-H-Space N
 
-hom-Coherent-H-Space :
-  {l1 l2 : Level} (M : Coherent-H-Space l1) (N : Coherent-H-Space l2) →
+type-hom-H-Space :
+  {l1 l2 : Level} (M : H-Space l1) (N : H-Space l2) →
   UU (l1 ⊔ l2)
-hom-Coherent-H-Space M N =
-  Σ ( pointed-type-Coherent-H-Space M →∗ pointed-type-Coherent-H-Space N)
+type-hom-H-Space M N =
+  Σ ( pointed-type-H-Space M →∗ pointed-type-H-Space N)
     ( preserves-unital-mul M N)
 ```
 
-### Homotopies of morphisms of wild unital magmas
+### Homotopies of morphisms of H-spaces
 
 ```agda
 preserves-mul-htpy :

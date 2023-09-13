@@ -18,8 +18,9 @@ open import group-theory.homomorphisms-semigroups
 open import lists.concatenation-lists
 open import lists.lists
 
-open import structured-types.coherent-h-spaces
-open import structured-types.morphisms-coherent-h-spaces
+open import structured-types.h-spaces
+open import structured-types.morphisms-h-spaces
+open import structured-types.morphisms-wild-monoids
 open import structured-types.wild-monoids
 ```
 
@@ -32,12 +33,12 @@ map from `X` into it.
 
 ## Definition
 
-### The wild unital magma of lists of elements of `X`
+### The H-space of lists of elements of `X`
 
 ```agda
-list-Coherent-H-Space :
-  {l : Level} (X : UU l) → Coherent-H-Space l
-list-Coherent-H-Space X =
+list-H-Space :
+  {l : Level} (X : UU l) → H-Space l
+list-H-Space X =
   pair
     ( pair (list X) nil)
     ( pair
@@ -103,7 +104,7 @@ unit-law-110-associative-concat-list (cons a x) y =
 list-Wild-Monoid : {l : Level} → UU l → Wild-Monoid l
 list-Wild-Monoid X =
   pair
-    ( list-Coherent-H-Space X)
+    ( list-H-Space X)
     ( pair
       ( associative-concat-list)
       ( pair
@@ -263,8 +264,8 @@ preserves-coh-unit-laws-map-elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
   (f : X → type-Wild-Monoid M) →
   preserves-coh-unit-laws-mul
-    ( list-Coherent-H-Space X)
-    ( wild-unital-magma-Wild-Monoid M)
+    ( list-H-Space X)
+    ( h-space-Wild-Monoid M)
     ( pair (map-elim-list-Wild-Monoid M f) refl)
     ( preserves-mul-map-elim-list-Wild-Monoid M f)
     ( preserves-left-unit-law-map-elim-list-Wild-Monoid M f)
@@ -275,7 +276,7 @@ preserves-coh-unit-laws-map-elim-list-Wild-Monoid
 elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
   (f : X → type-Wild-Monoid M) →
-  hom-Wild-Monoid (list-Wild-Monoid X) M
+  type-hom-Wild-Monoid (list-Wild-Monoid X) M
 elim-list-Wild-Monoid M f =
   pair
     ( pair (map-elim-list-Wild-Monoid M f) refl)
@@ -292,7 +293,7 @@ elim-list-Wild-Monoid M f =
 ```agda
 -- htpy-elim-list-Wild-Monoid :
 --   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
---   (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
+--   (g h : type-hom-Wild-Monoid (list-Wild-Monoid X) M)
 --   ( H : ( map-hom-Wild-Monoid (list-Wild-Monoid X) M g ∘ unit-list) ~
 --         ( map-hom-Wild-Monoid (list-Wild-Monoid X) M h ∘ unit-list)) →
 --   htpy-hom-Wild-Monoid (list-Wild-Monoid X) M g h

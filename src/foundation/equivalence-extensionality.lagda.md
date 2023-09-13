@@ -99,13 +99,13 @@ module _
   where
 
   abstract
-    Ind-htpy-equiv :
+    induction-principle-htpy-equiv :
       {l3 : Level} (e : A ≃ B)
       (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
       section
         ( λ (h : (e' : A ≃ B) (H : htpy-equiv e e') → P e' H) →
           h e (refl-htpy-equiv e))
-    Ind-htpy-equiv e =
+    induction-principle-htpy-equiv e =
       is-identity-system-is-torsorial e
         ( refl-htpy-equiv e)
         ( is-contr-total-htpy-equiv e)
@@ -113,11 +113,11 @@ module _
   ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →
     P e (refl-htpy-equiv e) → (e' : A ≃ B) (H : htpy-equiv e e') → P e' H
-  ind-htpy-equiv e P = pr1 (Ind-htpy-equiv e P)
+  ind-htpy-equiv e P = pr1 (induction-principle-htpy-equiv e P)
 
   compute-ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3)
     (p : P e (refl-htpy-equiv e)) →
     ind-htpy-equiv e P p e (refl-htpy-equiv e) ＝ p
-  compute-ind-htpy-equiv e P = pr2 (Ind-htpy-equiv e P)
+  compute-ind-htpy-equiv e P = pr2 (induction-principle-htpy-equiv e P)
 ```

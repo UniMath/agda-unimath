@@ -8,7 +8,7 @@ module category-theory.natural-isomorphisms-large-precategories where
 
 ```agda
 open import category-theory.functors-large-precategories
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
 

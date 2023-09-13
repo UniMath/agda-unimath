@@ -15,7 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositional-maps
 open import foundation.structured-type-duality
@@ -35,6 +35,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
+open import foundation-core.homotopies
 open import foundation-core.propositions
 ```
 

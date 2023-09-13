@@ -1,7 +1,7 @@
 # Isomorphisms in precategories
 
 ```agda
-module category-theory.isomorphisms-precategories where
+module category-theory.isomorphisms-in-precategories where
 ```
 
 <details><summary>Imports</summary>

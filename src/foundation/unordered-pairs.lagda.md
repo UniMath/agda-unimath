@@ -16,7 +16,7 @@ open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
@@ -29,6 +29,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.functoriality-function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets

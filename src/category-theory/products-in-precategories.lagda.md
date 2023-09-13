@@ -1,7 +1,7 @@
 # Products in precategories
 
 ```agda
-module category-theory.products-precategories where
+module category-theory.products-in-precategories where
 ```
 
 <details><summary>Imports</summary>

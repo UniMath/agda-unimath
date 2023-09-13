@@ -1,13 +1,13 @@
 # Monomorphisms in large precategories
 
 ```agda
-module category-theory.monomorphisms-large-precategories where
+module category-theory.monomorphisms-in-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
