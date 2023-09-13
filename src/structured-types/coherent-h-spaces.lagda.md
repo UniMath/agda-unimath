@@ -143,11 +143,11 @@ module _
 
 ```agda
 coherent-h-space-H-Space :
-  {l : Level} → H-Space l → Coherent-H-Space l
-pr1 (coherent-h-space-H-Space A) = pointed-type-H-Space A
-pr1 (pr2 (coherent-h-space-H-Space A)) = mul-H-Space A
+  {l : Level} → Noncoherent-H-Space l → Coherent-H-Space l
+pr1 (coherent-h-space-H-Space A) = pointed-type-Noncoherent-H-Space A
+pr1 (pr2 (coherent-h-space-H-Space A)) = mul-Noncoherent-H-Space A
 pr2 (pr2 (coherent-h-space-H-Space A)) =
-  coherent-unit-laws-unit-laws (mul-H-Space A) (unit-laws-mul-H-Space A)
+  coherent-unit-laws-unit-laws (mul-Noncoherent-H-Space A) (unit-laws-mul-Noncoherent-H-Space A)
 ```
 
 ### The type of coherent H-space structures on `A` is equivalent to the type of sections of `ev-point : (A → A) →∗ A`

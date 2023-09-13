@@ -73,6 +73,8 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     function-extensionality f → (l3 : Level) → induction-principle-homotopies l3 f
   induction-principle-homotopies-function-extensionality {A = A} {B} f funext-f l3 =
+
+
     is-identity-system-is-torsorial f
       ( refl-htpy)
       ( is-contr-total-htpy f)
