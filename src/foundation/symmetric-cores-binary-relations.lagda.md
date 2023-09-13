@@ -42,13 +42,18 @@ that the precomposition function
   hom-Symmetric-Relation S (core R) → hom-Relation (rel S) R
 ```
 
-is an [equivalence](foundation-core.equivalences.md). The symmetric core of a binary relation `R` is defined as the relation
+is an [equivalence](foundation-core.equivalences.md). The symmetric core of a
+binary relation `R` is defined as the relation
 
 ```text
   core R (I,a) := (i : I) → R (a i) (a -i)
 ```
 
-where `-i` is the element of the [2-element type](univalent-combinatorics.2-element-types.md) obtained by applying the swap [involution](foundation.involutions.md) to `i`. With this definition it is easy to see that the universal property of the adjunction should hold, since we have
+where `-i` is the element of the
+[2-element type](univalent-combinatorics.2-element-types.md) obtained by
+applying the swap [involution](foundation.involutions.md) to `i`. With this
+definition it is easy to see that the universal property of the adjunction
+should hold, since we have
 
 ```text
   ((I,a) → S (I,a) → core R (I,a)) ≃ ((x y : A) → S {x,y} → R x y).
