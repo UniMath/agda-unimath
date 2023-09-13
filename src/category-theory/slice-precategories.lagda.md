@@ -8,8 +8,8 @@ module category-theory.slice-precategories where
 
 ```agda
 open import category-theory.precategories
-open import category-theory.products-precategories
-open import category-theory.pullbacks-precategories
+open import category-theory.products-in-precategories
+open import category-theory.pullbacks-in-precategories
 open import category-theory.terminal-objects-precategories
 
 open import foundation.action-on-identifications-functions

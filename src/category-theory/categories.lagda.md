@@ -7,7 +7,7 @@ module category-theory.categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-of-objects-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.1-types

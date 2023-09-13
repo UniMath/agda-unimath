@@ -1,7 +1,7 @@
-# Endomorphisms of objects in precategories
+# Endomorphisms in precategories
 
 ```agda
-module category-theory.endomorphisms-of-objects-precategories where
+module category-theory.endomorphisms-in-precategories where
 ```
 
 <details><summary>Imports</summary>

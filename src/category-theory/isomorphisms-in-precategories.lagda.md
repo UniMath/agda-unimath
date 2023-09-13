@@ -1,7 +1,7 @@
-# Isomorphisms of objects in precategories
+# Isomorphisms in precategories
 
 ```agda
-module category-theory.isomorphisms-of-objects-precategories where
+module category-theory.isomorphisms-in-precategories where
 ```
 
 <details><summary>Imports</summary>

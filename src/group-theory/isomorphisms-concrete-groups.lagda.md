@@ -7,7 +7,7 @@ module group-theory.isomorphisms-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-of-objects-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.universe-levels
 
@@ -20,8 +20,7 @@ open import group-theory.precategory-of-concrete-groups
 ## Idea
 
 **Isomorphisms** of [concrete groups](group-theory.concrete-groups.md) are
-[isomorphisms](category-theory.isomorphisms-of-objects-large-precategories.md)
-in the
+[isomorphisms](category-theory.isomorphisms-in-large-precategories.md) in the
 [large precategory of concrete groups](group-theory.precategory-of-concrete-groups.md).
 
 ## Definition

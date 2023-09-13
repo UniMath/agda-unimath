@@ -8,7 +8,7 @@ module group-theory.representations-monoids where
 
 ```agda
 open import category-theory.categories
-open import category-theory.endomorphisms-of-objects-categories
+open import category-theory.endomorphisms-in-categories
 
 open import foundation.dependent-pair-types
 open import foundation.endomorphisms
@@ -30,8 +30,8 @@ A **representation** of a [monoid](group-theory.monoids.md) `M` in a
 [category](category-theory.categories.md) `C` consist of an object `V` in `C`
 [equipped](foundation.structure.md) with a
 [monoid homomorphism](group-theory.homomorphisms-monoids.md) from `M` to the
-monoid of
-[endomorphisms](category-theory.endomorphisms-of-objects-categories.md) on `V`.
+monoid of [endomorphisms](category-theory.endomorphisms-in-categories.md) on
+`V`.
 
 ## Definition
 

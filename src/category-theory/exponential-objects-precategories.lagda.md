@@ -8,7 +8,7 @@ module category-theory.exponential-objects-precategories where
 
 ```agda
 open import category-theory.precategories
-open import category-theory.products-precategories
+open import category-theory.products-in-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types

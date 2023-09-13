@@ -1,7 +1,7 @@
 # Coproducts in precategories
 
 ```agda
-module category-theory.coproducts-precategories where
+module category-theory.coproducts-of-objects-precategories where
 ```
 
 <details><summary>Imports</summary>
