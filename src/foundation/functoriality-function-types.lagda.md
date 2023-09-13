@@ -61,19 +61,30 @@ module _
   pr2 equiv-function-type = is-equiv-map-equiv-function-type
 ```
 
-### Two maps being homotopic is equivalent to them being homotopic after precomposition by an equivalence
+### Two maps being homotopic is equivalent to them being homotopic after pre- and postcomposition by an equivalence
 
 ```agda
-equiv-htpy-precomp-htpy :
+module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  ( f g : B → C) (e : A ≃ B) →
-  ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
-  ( f ~ g)
-equiv-htpy-precomp-htpy {C = C} f g e =
-  equiv-Π
-    ( eq-value f g)
-    ( e)
-    ( λ a → id-equiv)
+  where
+
+  equiv-htpy-precomp-htpy :
+    ( f g : B → C) (e : A ≃ B) →
+    ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
+    ( f ~ g)
+  equiv-htpy-precomp-htpy f g e =
+    equiv-Π
+      ( eq-value f g)
+      ( e)
+      ( λ a → id-equiv)
+
+  equiv-htpy-postcomp-htpy :
+    ( e : B ≃ C) (f g : A → B) →
+    ( f ~ g) ≃
+    ( (map-equiv e ∘ f) ~ (map-equiv e ∘ g))
+  equiv-htpy-postcomp-htpy e f g =
+    equiv-Π-equiv-family
+      ( λ a → equiv-ap e (f a) (g a))
 ```
 
 ### A map is truncated iff postcomposition by it is truncated
