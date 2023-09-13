@@ -146,7 +146,9 @@ h-space-Noncoherent-H-Space :
 pr1 (h-space-Noncoherent-H-Space A) = pointed-type-Noncoherent-H-Space A
 pr1 (pr2 (h-space-Noncoherent-H-Space A)) = mul-Noncoherent-H-Space A
 pr2 (pr2 (h-space-Noncoherent-H-Space A)) =
-  coherent-unit-laws-unit-laws (mul-Noncoherent-H-Space A) (unit-laws-mul-Noncoherent-H-Space A)
+  coherent-unit-laws-unit-laws
+    ( mul-Noncoherent-H-Space A)
+    ( unit-laws-mul-Noncoherent-H-Space A)
 ```
 
 ### The type of H-space structures on `A` is equivalent to the type of sections of `ev-point : (A → A) →∗ A`
