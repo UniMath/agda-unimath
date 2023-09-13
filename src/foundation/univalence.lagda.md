@@ -165,6 +165,11 @@ compute-eq-equiv-comp-equiv A B C f g =
             ( λ e → map-equiv e (g ∘e f))
             ( inv (right-inverse-law-equiv equiv-univalence))))))
 
+compute-equiv-eq-ap-inv :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : x ＝ y) →
+  map-equiv (equiv-eq (ap B (inv p)) ∘e (equiv-eq (ap B p))) ~ id
+compute-equiv-eq-ap-inv refl = refl-htpy
+
 commutativity-inv-equiv-eq :
   {l : Level} (A B : UU l) (p : A ＝ B) →
   inv-equiv (equiv-eq p) ＝ equiv-eq (inv p)
