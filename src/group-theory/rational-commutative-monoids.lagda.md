@@ -26,7 +26,10 @@ open import group-theory.powers-of-elements-commutative-monoids
 
 A **rational commutative monoid** is a
 [commutative monoid](group-theory.commutative-monoids.md) `(M,0,+)` in which the
-map `x ↦ nx` is invertible for every natural number `n > 0`.
+map `x ↦ nx` is invertible for every
+[natural number](elementary-number-theory.natural-numbers.md) `n > 0`. This
+condition implies that we can invert the natural numbers in `M`, which are the
+elements of the form `n1` in `M`.
 
 Note: Since we usually write commutative monoids multiplicatively, the condition
 that a commutative monoid is rational is that the map `x ↦ xⁿ` is invertible for
