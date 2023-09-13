@@ -115,10 +115,7 @@ module _
   pr2 (pr2 cocone-flattening-pushout) =
     coherence-square-cocone-flattening-pushout
 
-  UωU : UUω₁
-  UωU = UUω
-
-  flattening-lemma-pushout-statement : UωU
+  flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
     {l : Level} →
     universal-property-pushout l
