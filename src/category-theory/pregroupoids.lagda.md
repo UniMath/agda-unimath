@@ -7,7 +7,7 @@ module category-theory.pregroupoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-of-objects-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types

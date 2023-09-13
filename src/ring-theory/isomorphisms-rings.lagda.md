@@ -7,7 +7,7 @@ module ring-theory.isomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-of-objects-large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types

@@ -51,9 +51,9 @@ open import category-theory.functors-precategories public
 open import category-theory.groupoids public
 open import category-theory.homotopies-natural-transformations-large-precategories public
 open import category-theory.initial-objects-precategories public
-open import category-theory.isomorphisms-categories public
-open import category-theory.isomorphisms-large-precategories public
-open import category-theory.isomorphisms-precategories public
+open import category-theory.isomorphisms-of-objects-categories public
+open import category-theory.isomorphisms-of-objects-large-precategories public
+open import category-theory.isomorphisms-of-objects-precategories public
 open import category-theory.large-categories public
 open import category-theory.large-precategories public
 open import category-theory.monomorphisms-large-precategories public

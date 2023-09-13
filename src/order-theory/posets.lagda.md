@@ -8,7 +8,7 @@ module order-theory.posets where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-of-objects-precategories
 open import category-theory.precategories
 
 open import foundation.binary-relations

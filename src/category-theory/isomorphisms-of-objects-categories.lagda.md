@@ -1,14 +1,14 @@
-# Isomorphisms in categories
+# Isomorphisms of objects in categories
 
 ```agda
-module category-theory.isomorphisms-categories where
+module category-theory.isomorphisms-of-objects-categories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-of-objects-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions

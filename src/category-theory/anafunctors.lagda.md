@@ -9,7 +9,7 @@ module category-theory.anafunctors where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-of-objects-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions

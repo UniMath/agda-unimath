@@ -1,13 +1,13 @@
-# Isomorphisms in large precategories
+# Isomorphisms of objects in large precategories
 
 ```agda
-module category-theory.isomorphisms-large-precategories where
+module category-theory.isomorphisms-of-objects-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-of-objects-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions

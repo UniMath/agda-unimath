@@ -7,7 +7,7 @@ module category-theory.epimorphisms-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-of-objects-large-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
