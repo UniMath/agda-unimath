@@ -57,7 +57,7 @@ module _
 ### Homomorphisms of cospans
 
 One notion of homomorphism of spans `c` and `d` with common domains is a map
-between their codomains so that the triangles on either side commute:
+between their domains so that the triangles on either side commute:
 
 ```text
   A ===== A
