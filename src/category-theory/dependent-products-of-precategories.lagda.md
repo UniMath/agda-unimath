@@ -169,6 +169,15 @@ module _
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (P i) (f i)))
       ( is-iso-Π-is-fiberwise-iso-Precategory f)
 
+  equiv-is-fiberwise-iso-is-iso-Π-Precategory :
+    (f : type-hom-Π-Precategory I P x y) →
+    ( is-iso-Precategory (Π-Precategory I P) f) ≃
+    ( (i : I) → is-iso-Precategory (P i) (f i))
+  pr1 (equiv-is-fiberwise-iso-is-iso-Π-Precategory f) =
+    is-fiberwise-iso-is-iso-Π-Precategory f
+  pr2 (equiv-is-fiberwise-iso-is-iso-Π-Precategory f) =
+    is-equiv-is-fiberwise-iso-is-iso-Π-Precategory f
+
   is-equiv-is-iso-Π-is-fiberwise-iso-Precategory :
     (f : type-hom-Π-Precategory I P x y) →
     is-equiv (is-iso-Π-is-fiberwise-iso-Precategory f)
@@ -177,6 +186,15 @@ module _
       ( is-prop-Π (λ i → is-prop-is-iso-Precategory (P i) (f i)))
       ( is-prop-is-iso-Precategory (Π-Precategory I P) f)
       ( is-fiberwise-iso-is-iso-Π-Precategory f)
+
+  equiv-is-iso-Π-is-fiberwise-iso-Precategory :
+    ( f : type-hom-Π-Precategory I P x y) →
+    ( (i : I) → is-iso-Precategory (P i) (f i)) ≃
+    ( is-iso-Precategory (Π-Precategory I P) f)
+  pr1 (equiv-is-iso-Π-is-fiberwise-iso-Precategory f) =
+    is-iso-Π-is-fiberwise-iso-Precategory f
+  pr2 (equiv-is-iso-Π-is-fiberwise-iso-Precategory f) =
+    is-equiv-is-iso-Π-is-fiberwise-iso-Precategory f
 
   is-equiv-fiberwise-iso-iso-Π-Precategory :
     is-equiv fiberwise-iso-iso-Π-Precategory
@@ -188,8 +206,22 @@ module _
       ( λ e →
         eq-type-subtype (is-iso-Precategory-Prop (Π-Precategory I P)) refl)
 
+  equiv-fiberwise-iso-iso-Π-Precategory :
+    ( iso-Precategory (Π-Precategory I P) x y) ≃
+    ( (i : I) → iso-Precategory (P i) (x i) (y i))
+  pr1 equiv-fiberwise-iso-iso-Π-Precategory = fiberwise-iso-iso-Π-Precategory
+  pr2 equiv-fiberwise-iso-iso-Π-Precategory =
+    is-equiv-fiberwise-iso-iso-Π-Precategory
+
   is-equiv-iso-Π-fiberwise-iso-Precategory :
     is-equiv iso-Π-fiberwise-iso-Precategory
   is-equiv-iso-Π-fiberwise-iso-Precategory =
     is-equiv-map-inv-is-equiv is-equiv-fiberwise-iso-iso-Π-Precategory
+
+  equiv-iso-Π-fiberwise-iso-Precategory :
+    ( (i : I) → iso-Precategory (P i) (x i) (y i)) ≃
+    ( iso-Precategory (Π-Precategory I P) x y)
+  pr1 equiv-iso-Π-fiberwise-iso-Precategory = iso-Π-fiberwise-iso-Precategory
+  pr2 equiv-iso-Π-fiberwise-iso-Precategory =
+    is-equiv-iso-Π-fiberwise-iso-Precategory
 ```
