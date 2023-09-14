@@ -47,6 +47,10 @@ def get_author_element_for_file(filename):
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
     """
+
+    # I wish there was a way to bulk these log commands into one,
+    # but alas I haven't found anything to that effect
+
     # Arguments mostly copied from the 1lab pipeline
     authors_git_output = subprocess.run([
         'git', 'shortlog',
