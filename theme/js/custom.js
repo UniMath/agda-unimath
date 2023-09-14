@@ -3,6 +3,7 @@ if (link) {
   // console.log(link);
   var filename = link.getAttribute('href');
   const fileList = [
+    'ART.md',
     'CITE-THIS-LIBRARY.md',
     'CODINGSTYLE.md',
     'CONTRIBUTING.md',

@@ -99,6 +99,7 @@ summary_template = """
     - [The library coding style](CODINGSTYLE.md)
     - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
     - [Citing the library](CITE-THIS-LIBRARY.md)
+  - [Art](ART.md)
 
 {module_index}
 """
