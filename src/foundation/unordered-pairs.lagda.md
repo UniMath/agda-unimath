@@ -359,7 +359,7 @@ module _
 We will construct an equivalence
 
 ```text
-  ((p : unordered-pair A) (i : type p) → B p i) ≃ ((x y : A) → B {x,y} 0
+  ((p : unordered-pair A) (i : type p) → B p i) ≃ ((x y : A) → B {x,y} 0)
 ```
 
 ```agda
@@ -380,17 +380,19 @@ module _
     dependent-universal-property-pointed-unordered-pairs =
       is-equiv-comp
         ( λ f x y →
-          f (Fin-UU-Fin' 2) (pr2 (standard-unordered-pair x y)) (zero-Fin 1))
+          f (Fin-UU-Fin' 2) (element-standard-unordered-pair x y) (zero-Fin 1))
         ( ev-pair)
         ( is-equiv-ev-pair)
         ( is-equiv-comp
           ( λ f x y →
-            f (Fin-UU-Fin' 2) (zero-Fin 1) (pr2 (standard-unordered-pair x y)))
+            f ( Fin-UU-Fin' 2)
+              ( zero-Fin 1)
+              ( element-standard-unordered-pair x y))
           ( map-Π (λ I → swap-Π))
           ( is-equiv-map-equiv-Π-equiv-family
             ( λ I → is-equiv-swap-Π))
           ( is-equiv-comp
-            ( λ f x y → f (pr2 (standard-unordered-pair x y)))
+            ( λ f x y → f (element-standard-unordered-pair x y))
             ( λ f → f (Fin-UU-Fin' 2) (zero-Fin 1))
             ( dependent-universal-property-identity-system-type-2-Element-Type
               ( Fin-UU-Fin' 2)
@@ -399,7 +401,7 @@ module _
             ( is-equiv-comp
               ( ev-pair)
               ( precomp-Π
-                ( λ xy → pr2 (standard-unordered-pair (pr1 xy) (pr2 xy)))
+                ( λ xy → element-standard-unordered-pair (pr1 xy) (pr2 xy))
                 ( λ g → B (Fin-UU-Fin' 2 , g) (zero-Fin 1)))
               ( is-equiv-precomp-Π-is-equiv
                 ( is-equiv-map-inv-dependent-universal-proeprty-Fin-two-ℕ
