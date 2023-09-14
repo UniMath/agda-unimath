@@ -13,11 +13,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.equivalence-induction
-open import foundation.equivalences
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types

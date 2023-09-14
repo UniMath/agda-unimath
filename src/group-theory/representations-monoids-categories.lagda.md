@@ -11,7 +11,6 @@ open import category-theory.categories
 open import category-theory.endomorphisms-in-categories
 
 open import foundation.dependent-pair-types
-open import foundation.endomorphisms
 open import foundation.identity-types
 open import foundation.universe-levels
 

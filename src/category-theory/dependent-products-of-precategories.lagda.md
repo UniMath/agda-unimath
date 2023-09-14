@@ -10,19 +10,13 @@ module category-theory.dependent-products-of-precategories where
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -32,8 +26,8 @@ open import foundation.universe-levels
 
 Given a family of [precategories](category-theory.precategories.md) `Pᵢ` indexed
 by `i : I`, the dependent product `Π(i : I), Pᵢ` is a precategory consisting of
-dependent functions taking `i : I` to an element of the underlying type of `Pᵢ`.
-Every component of the structure is given pointwise.
+dependent functions taking `i : I` to an object of `Pᵢ`. Every component of the
+structure is given pointwise.
 
 ## Definition
 
@@ -190,21 +184,9 @@ module _
     is-equiv-is-invertible
       ( iso-Π-fiberwise-iso-Precategory)
       ( λ e →
-        eq-htpy
-          ( λ i →
-            eq-pair-Σ
-              ( refl)
-              ( eq-is-prop
-                ( is-prop-is-iso-Precategory
-                  ( P i)
-                  ( hom-iso-Precategory (P i) (e i))))))
+        eq-htpy (λ i → eq-type-subtype (is-iso-Precategory-Prop (P i)) refl))
       ( λ e →
-        eq-pair-Σ
-          ( refl)
-          ( eq-is-prop
-            ( is-prop-is-iso-Precategory
-              ( Π-Precategory I P)
-              ( hom-iso-Precategory (Π-Precategory I P) e))))
+        eq-type-subtype (is-iso-Precategory-Prop (Π-Precategory I P)) refl)
 
   is-equiv-iso-Π-fiberwise-iso-Precategory :
     is-equiv iso-Π-fiberwise-iso-Precategory

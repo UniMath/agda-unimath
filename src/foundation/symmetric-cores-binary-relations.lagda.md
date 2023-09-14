@@ -9,28 +9,17 @@ module foundation.symmetric-cores-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.binary-relations
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.mere-equivalences
 open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-function-types
-open import foundation.universal-property-dependent-pair-types
-open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 open import foundation.unordered-pairs
 
-open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.standard-finite-types
-open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 </details>

@@ -13,7 +13,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
-open import foundation.homotopy-induction
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type

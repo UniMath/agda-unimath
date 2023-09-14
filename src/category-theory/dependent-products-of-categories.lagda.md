@@ -10,23 +10,15 @@ module category-theory.dependent-products-of-categories where
 open import category-theory.categories
 open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.subtypes
-open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
@@ -36,8 +28,8 @@ open import foundation.universe-levels
 
 Given a family of [categories](category-theory.categories.md) `Cᵢ` indexed by
 `i : I`, the dependent product type `Π(i : I), Cᵢ` is a category consisting of
-functions taking `i : I` to an element of the underlying type of `Cᵢ`. Every
-component of the structure is given pointwise.
+functions taking `i : I` to an object of `Cᵢ`. Every component of the structure
+is given pointwise.
 
 ## Definition
 

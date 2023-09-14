@@ -8,30 +8,15 @@ module group-theory.concrete-monoids where
 
 ```agda
 open import category-theory.categories
-open import category-theory.endomorphisms-in-precategories
-open import category-theory.precategories
 
 open import foundation.0-connected-types
 open import foundation.cartesian-product-types
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
-open import foundation.sets
-open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
-open import group-theory.concrete-groups
 open import group-theory.cores-monoids
 open import group-theory.monoids
-open import group-theory.semigroups
 open import group-theory.torsors
-
-open import structured-types.pointed-types
 ```
 
 </details>
@@ -84,23 +69,8 @@ module _
 
   obj-concrete-monoid-Monoid : UU (lsuc l)
   obj-concrete-monoid-Monoid = classifying-type-Group (group-core-Monoid M)
-
-  hom-concrete-monoid-Monoid :
-    obj-concrete-monoid-Monoid → obj-concrete-monoid-Monoid → Set {!   !}
-  hom-concrete-monoid-Monoid x y = {!   !}
-
-  precategory-concrete-monoid-Monoid : Precategory (lsuc l) {!   !}
-  pr1 precategory-concrete-monoid-Monoid = obj-concrete-monoid-Monoid
-  pr1 (pr2 precategory-concrete-monoid-Monoid) = hom-concrete-monoid-Monoid
-  pr2 (pr2 precategory-concrete-monoid-Monoid) = {!   !}
-
-  category-concrete-monoid-Monoid : Category (lsuc l) {!   !}
-  pr1 category-concrete-monoid-Monoid = precategory-concrete-monoid-Monoid
-  pr2 category-concrete-monoid-Monoid = {!   !}
-
-  concrete-monoid-Monoid : Concrete-Monoid (lsuc l) {!   !}
-  pr1 concrete-monoid-Monoid = category-concrete-monoid-Monoid
-  pr1 (pr2 concrete-monoid-Monoid) = shape-Group (group-core-Monoid M)
-  pr2 (pr2 concrete-monoid-Monoid) =
-    is-0-connected-classifying-type-Group (group-core-Monoid M)
 ```
+
+The remainder of the construction remains to be written down. We note that this
+is precisely the Rezk completion of the one object precategory associated to a
+monoid.

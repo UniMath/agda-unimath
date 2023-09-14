@@ -12,18 +12,12 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
 
 open import group-theory.monoids
-open import group-theory.semigroups
 ```
 
 </details>
