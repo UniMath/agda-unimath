@@ -447,7 +447,6 @@ module _
       ( λ j →
         is-emb-is-equiv
           ( is-equiv-map-equiv-Π-equiv-family
-            ( λ x → ap g)
             ( λ x → H (i x) (j (f x)))))
 ```
 

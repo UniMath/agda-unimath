@@ -194,7 +194,7 @@ module _
   is-local-dependent-type-is-equiv :
     is-equiv f → {l : Level} (A : X → UU l) → is-local-dependent-type f A
   is-local-dependent-type-is-equiv is-equiv-f =
-    is-equiv-precomp-Π-is-equiv f is-equiv-f
+    is-equiv-precomp-Π-is-equiv is-equiv-f
 
   is-local-is-equiv :
     is-equiv f → {l : Level} (A : UU l) → is-local f A
