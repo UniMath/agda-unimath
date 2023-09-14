@@ -114,8 +114,10 @@ module _
   postcomp-hom-Precategory f z = comp-hom-Precategory f
 
   associative-comp-hom-Precategory :
-    {x y z w : obj-Precategory} (h : type-hom-Precategory z w)
-    (g : type-hom-Precategory y z) (f : type-hom-Precategory x y) →
+    {x y z w : obj-Precategory}
+    (h : type-hom-Precategory z w)
+    (g : type-hom-Precategory y z)
+    (f : type-hom-Precategory x y) →
     ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory = pr2 associative-composition-Precategory

@@ -75,7 +75,8 @@ module _
   where
 
   coherence-hom-cospan :
-    (c d : cospan l A B) → (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l)
+    (c d : cospan l A B) →
+    (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l)
   coherence-hom-cospan c d h =
     ( coherence-triangle-maps (left-map-cospan d) h (left-map-cospan c)) ×
     ( coherence-triangle-maps (right-map-cospan d) h (right-map-cospan c))
