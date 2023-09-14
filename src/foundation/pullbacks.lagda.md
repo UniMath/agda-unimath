@@ -692,7 +692,7 @@ abstract
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))
       ( triangle-map-canonical-pullback-Π f g c)
       ( is-equiv-map-canonical-pullback-Π f g)
-      ( is-equiv-map-equiv-Π-equiv-family is-pb-c)
+      ( is-equiv-map-Π-is-fiberwise-equiv is-pb-c)
 ```
 
 ```agda

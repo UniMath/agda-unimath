@@ -389,7 +389,7 @@ module _
               ( zero-Fin 1)
               ( element-standard-unordered-pair x y))
           ( map-Π (λ I → swap-Π))
-          ( is-equiv-map-equiv-Π-equiv-family
+          ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ I → is-equiv-swap-Π))
           ( is-equiv-comp
             ( λ f x y → f (element-standard-unordered-pair x y))

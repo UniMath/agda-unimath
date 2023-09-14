@@ -62,7 +62,7 @@ module _
         ( is-equiv-comp
           ( iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C))
           ( map-Π (λ i → iso-eq-Category (C i)))
-          ( is-equiv-map-equiv-Π-equiv-family _
+          ( is-equiv-map-Π-is-fiberwise-equiv _
             ( λ i → is-category-Category (C i) (x i) (y i)))
           ( is-equiv-iso-Π-fiberwise-iso-Precategory
             ( I)
