@@ -44,13 +44,13 @@ module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : span l A B)
   where
 
-  type-span : UU l
-  type-span = pr1 c
+  domain-span : UU l
+  domain-span = pr1 c
 
-  left-map-span : type-span → A
+  left-map-span : domain-span → A
   left-map-span = pr1 (pr2 c)
 
-  right-map-span : type-span → B
+  right-map-span : domain-span → B
   right-map-span = pr2 (pr2 c)
 ```
 
@@ -75,13 +75,13 @@ module _
   where
 
   coherence-hom-span :
-    (c d : span l A B) → (type-span c → type-span d) → UU (l1 ⊔ l2 ⊔ l)
+    (c d : span l A B) → (domain-span c → domain-span d) → UU (l1 ⊔ l2 ⊔ l)
   coherence-hom-span c d h =
     ( coherence-triangle-maps (left-map-span c) (left-map-span d) h) ×
     ( coherence-triangle-maps (right-map-span c) (right-map-span d) h)
 
   hom-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-span c d = Σ (type-span c → type-span d) (coherence-hom-span c d)
+  hom-span c d = Σ (domain-span c → domain-span d) (coherence-hom-span c d)
 ```
 
 ### Characterizing equality of spans
@@ -93,7 +93,7 @@ module _
 
   htpy-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
   htpy-span c d =
-    Σ ( type-span c ≃ type-span d)
+    Σ ( domain-span c ≃ domain-span d)
       ( λ e → coherence-hom-span c d (map-equiv e))
 
   refl-htpy-span : (c : span l A B) → htpy-span c c
@@ -110,7 +110,7 @@ module _
     is-contr-total-Eq-structure
       ( λ X d e → coherence-hom-span c (X , d) (map-equiv e))
       ( is-contr-total-equiv (pr1 c))
-      ( type-span c , id-equiv)
+      ( domain-span c , id-equiv)
       ( is-contr-total-Eq-structure
         ( λ _ f a → coherence-triangle-maps (right-map-span c) f id)
         ( is-contr-total-htpy (left-map-span c))
@@ -130,3 +130,12 @@ module _
   eq-htpy-span : (c d : span l A B) → htpy-span c d → c ＝ d
   eq-htpy-span c d = map-inv-equiv (extensionality-span c d)
 ```
+
+### Spans are equivalent to binary relations
+
+This remains to be shown.
+[#767](https://github.com/UniMath/agda-unimath/issues/767)
+
+## See also
+
+- The formal dual of spans is [cospans](foundation.cospans.md).

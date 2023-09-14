@@ -44,13 +44,13 @@ module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2} (c : cospan l A B)
   where
 
-  type-cospan : UU l
-  type-cospan = pr1 c
+  codomain-cospan : UU l
+  codomain-cospan = pr1 c
 
-  left-map-cospan : A → type-cospan
+  left-map-cospan : A → codomain-cospan
   left-map-cospan = pr1 (pr2 c)
 
-  right-map-cospan : B → type-cospan
+  right-map-cospan : B → codomain-cospan
   right-map-cospan = pr2 (pr2 c)
 ```
 
@@ -75,13 +75,14 @@ module _
   where
 
   coherence-hom-cospan :
-    (c d : cospan l A B) → (type-cospan c → type-cospan d) → UU (l1 ⊔ l2 ⊔ l)
+    (c d : cospan l A B) → (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l)
   coherence-hom-cospan c d h =
     ( coherence-triangle-maps (left-map-cospan d) h (left-map-cospan c)) ×
     ( coherence-triangle-maps (right-map-cospan d) h (right-map-cospan c))
 
   hom-cospan : (c d : cospan l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-cospan c d = Σ (type-cospan c → type-cospan d) (coherence-hom-cospan c d)
+  hom-cospan c d =
+    Σ (codomain-cospan c → codomain-cospan d) (coherence-hom-cospan c d)
 ```
 
 ## Properties
@@ -95,7 +96,7 @@ module _
 
   htpy-cospan : (c d : cospan l A B) → UU (l1 ⊔ l2 ⊔ l)
   htpy-cospan c d =
-    Σ ( type-cospan c ≃ type-cospan d)
+    Σ ( codomain-cospan c ≃ codomain-cospan d)
       ( λ e → coherence-hom-cospan c d (map-equiv e))
 
   refl-htpy-cospan : (c : cospan l A B) → htpy-cospan c c
@@ -112,7 +113,7 @@ module _
     is-contr-total-Eq-structure
       ( λ X d e → coherence-hom-cospan c (X , d) (map-equiv e))
       ( is-contr-total-equiv (pr1 c))
-      ( type-cospan c , id-equiv)
+      ( codomain-cospan c , id-equiv)
       ( is-contr-total-Eq-structure
         ( λ x f a → coherence-triangle-maps f id (right-map-cospan c))
         ( is-contr-total-htpy' (left-map-cospan c))
@@ -132,3 +133,7 @@ module _
   eq-htpy-cospan : (c d : cospan l A B) → htpy-cospan c d → c ＝ d
   eq-htpy-cospan c d = map-inv-equiv (extensionality-cospan c d)
 ```
+
+## See also
+
+- The formal dual of cospans is [spans](foundation.spans.md).
