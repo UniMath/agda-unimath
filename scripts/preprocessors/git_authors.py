@@ -83,11 +83,12 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
     # but they may have different subentries
     # (e.g. "CONTRIBUTORS.md" at the time of writing)
     source_path = chapter['source_path']
+    was_visited = source_path in visited
+    visited.add(source_path)
     add_author_info_to_sections_rec_mut(roots, chapter['sub_items'], visited)
-    if source_path in visited:
+    if was_visited:
         return
 
-    visited.add(source_path)
     potential_source_file_name = module_source_path_from_md_name(
         roots, source_path)
     if potential_source_file_name is None:
