@@ -115,7 +115,8 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
 
     source_file_name = potential_source_file_name
 
-    header_info_element, footer_info_element = get_author_element_for_file(source_file_name)
+    header_info_element, footer_info_element = get_author_element_for_file(
+        source_file_name)
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].find('# ')
     chapter_heading_end = chapter['content'].find('\n', chapter_heading_start)
