@@ -346,6 +346,5 @@ abstract
         ( λ h a p' → h (f a) p')
         ( is-ptr-f (pair (type-hom-Prop P' Q) (is-prop-type-hom-Prop P' Q)))
         ( is-equiv-map-equiv-Π-equiv-family
-          ( λ a g a' → g (f' a'))
           ( λ a → is-ptr-f' Q)))
 ```

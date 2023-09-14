@@ -50,5 +50,5 @@ abstract
   no-global-decidability :
     {l : Level} → ¬ ((X : UU l) → is-decidable X)
   no-global-decidability {l} d =
-    is-not-decidable-type-UU-Fin-two-ℕ (λ X → d (pr1 X))
+    is-not-decidable-type-2-Element-Type (λ X → d (pr1 X))
 ```
