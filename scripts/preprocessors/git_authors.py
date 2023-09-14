@@ -12,6 +12,7 @@ import sys
 
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
+RECENT_CHANGES_COUNT = 5
 
 
 def does_support(backend):
@@ -63,12 +64,25 @@ def get_author_element_for_file(filename):
 
     file_log_output = subprocess.run([
         'git', 'log',
+        # Only print the date
         '--format=%as',
         'HEAD', '--', filename
     ], capture_output=True, text=True, check=True).stdout.splitlines()
     created_date = file_log_output[-1]
     modified_date = file_log_output[0]
-    return f'<p><i>Content created by {", ".join(author_names[:-1])}{(len(author_names) > 1) * " and "}{author_names[-1]}</i></p><p>Created: {created_date}; Modified: {modified_date}</p>'
+
+    recent_changes_output = subprocess.run([
+        'git', 'log',
+        # Show only last RECENT_CHANGES_COUNT commits
+        '-n', str(RECENT_CHANGES_COUNT),
+        # Format it like the markdown we want to include
+        '--format=- <i>%h</i> (%an) [%as] %s',
+        'HEAD', '--', filename
+    ], capture_output=True, text=True, check=True).stdout
+    return (
+        f'<p><i>Content created by {", ".join(author_names[:-1])}{(len(author_names) > 1) * " and "}{author_names[-1]}</i></p><p>Created: {created_date}; Modified: {modified_date}</p>',
+        f'### Recent changes\n{recent_changes_output}'
+    )
 
 
 def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
@@ -97,12 +111,13 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
 
     source_file_name = potential_source_file_name
 
-    author_element = get_author_element_for_file(source_file_name)
+    header_info_element, footer_info_element = get_author_element_for_file(source_file_name)
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].find('# ')
     chapter_heading_end = chapter['content'].find('\n', chapter_heading_start)
     # Insert the authors after the first heading
-    chapter['content'] = chapter['content'][:chapter_heading_end] + '\n' + author_element + chapter['content'][chapter_heading_end:]
+    chapter['content'] = chapter['content'][:chapter_heading_end] + '\n' + header_info_element + \
+        chapter['content'][chapter_heading_end:] + '\n' + footer_info_element
 
 
 def add_author_info_to_sections_rec_mut(roots, sections, visited):
