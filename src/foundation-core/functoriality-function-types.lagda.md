@@ -184,7 +184,7 @@ abstract
     (C : UU l3) → is-equiv (precomp f C)
   is-equiv-precomp-is-equiv f is-equiv-f =
     is-equiv-precomp-is-equiv-precomp-Π f
-      ( is-equiv-precomp-Π-is-equiv f is-equiv-f)
+      ( is-equiv-precomp-Π-is-equiv is-equiv-f)
 
   is-equiv-precomp-equiv :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ≃ B) →

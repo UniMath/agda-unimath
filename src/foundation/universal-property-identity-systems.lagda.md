@@ -64,6 +64,15 @@ module _
         ( λ u → P (pr1 u) (pr2 u)))
       ( is-equiv-ev-pair)
 
+  equiv-dependent-universal-property-identity-system-is-torsorial :
+    is-torsorial B →
+    {l : Level} {C : (x : A) → B x → UU l} →
+    ((x : A) (y : B x) → C x y) ≃ C a b
+  pr1 (equiv-dependent-universal-property-identity-system-is-torsorial H) =
+    ev-refl-identity-system b
+  pr2 (equiv-dependent-universal-property-identity-system-is-torsorial H) =
+    dependent-universal-property-identity-system-is-torsorial H _
+
   is-torsorial-dependent-universal-property-identity-system :
     ({l3 : Level} → dependent-universal-property-identity-system l3 {A} {B} b) →
     is-torsorial B

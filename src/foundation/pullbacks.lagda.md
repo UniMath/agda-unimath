@@ -442,7 +442,6 @@ htpy-eq-square-refl-htpy :
   tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c'
 htpy-eq-square-refl-htpy f g c c' =
   map-inv-is-equiv-precomp-Π-is-equiv
-    ( λ (p : Id c c') → (tr-tr-refl-htpy-cone f g c) ∙ p)
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
     ( htpy-eq-square f g c c')
@@ -455,7 +454,6 @@ comp-htpy-eq-square-refl-htpy :
   ( htpy-eq-square f g c c')
 comp-htpy-eq-square-refl-htpy f g c c' =
   is-section-map-inv-is-equiv-precomp-Π-is-equiv
-    ( λ (p : Id c c') → (tr-tr-refl-htpy-cone f g c) ∙ p)
     ( is-equiv-concat (tr-tr-refl-htpy-cone f g c) c')
     ( λ p → htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c c')
     ( htpy-eq-square f g c c')
@@ -694,7 +692,7 @@ abstract
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))
       ( triangle-map-canonical-pullback-Π f g c)
       ( is-equiv-map-canonical-pullback-Π f g)
-      ( is-equiv-map-equiv-Π-equiv-family _ is-pb-c)
+      ( is-equiv-map-equiv-Π-equiv-family is-pb-c)
 ```
 
 ```agda
