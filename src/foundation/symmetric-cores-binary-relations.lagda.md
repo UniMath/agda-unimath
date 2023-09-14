@@ -47,7 +47,7 @@ equipped with a counit
 ```
 
 that satisfies the universal property of the symmetric core, i.e., it satisfies
-the property that for any symmetric relation `S : unordered-pair A → 𝒰`, the 
+the property that for any symmetric relation `S : unordered-pair A → 𝒰`, the
 precomposition function
 
 ```text
