@@ -8,10 +8,13 @@ module group-theory.representations-monoids-precategories where
 
 ```agda
 open import category-theory.endomorphisms-in-precategories
+open import category-theory.functors-precategories
+open import category-theory.one-object-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
@@ -27,7 +30,9 @@ A **representation** of a [monoid](group-theory.monoids.md) `M` in a
 in `C` [equipped](foundation.structure.md) with a
 [monoid homomorphism](group-theory.homomorphisms-monoids.md) from `M` to the
 monoid of [endomorphisms](precategory-theory.endomorphisms-in-precategories.md)
-on `V`.
+on `V`. However, since
+[monoids are one-object precategories](category-theory.one-object-precategories.md),
+we can encode this as a functor of categories `M → C`.
 
 ## Definition
 
@@ -37,7 +42,7 @@ on `V`.
 representation-precategory-Monoid :
   {l1 l2 l3 : Level} (M : Monoid l1) (C : Precategory l2 l3) → UU (l1 ⊔ l2 ⊔ l3)
 representation-precategory-Monoid M C =
-  Σ (obj-Precategory C) (λ V → type-hom-Monoid M (monoid-endo-Precategory C V))
+  functor-Precategory (precategory-one-object-precategory-Monoid M) C
 
 module _
   {l1 l2 l3 : Level} (M : Monoid l1) (C : Precategory l2 l3)
@@ -45,20 +50,12 @@ module _
   where
 
   obj-representation-precategory-Monoid : obj-Precategory C
-  obj-representation-precategory-Monoid = pr1 ρ
-
-  hom-action-representation-precategory-Monoid :
-    type-hom-Monoid M
-      ( monoid-endo-Precategory C obj-representation-precategory-Monoid)
-  hom-action-representation-precategory-Monoid = pr2 ρ
+  obj-representation-precategory-Monoid = pr1 ρ star
 
   action-representation-precategory-Monoid :
     type-Monoid M →
     type-endo-Precategory C obj-representation-precategory-Monoid
-  action-representation-precategory-Monoid =
-    map-hom-Monoid M
-      ( monoid-endo-Precategory C obj-representation-precategory-Monoid)
-      ( hom-action-representation-precategory-Monoid)
+  action-representation-precategory-Monoid = pr1 (pr2 ρ)
 
   preserves-mul-action-representation-precategory-Monoid :
     ( x y : type-Monoid M) →
@@ -68,20 +65,18 @@ module _
       ( action-representation-precategory-Monoid x)
       ( action-representation-precategory-Monoid y))
   preserves-mul-action-representation-precategory-Monoid =
-    preserves-mul-hom-Monoid M
-      ( monoid-endo-Precategory C obj-representation-precategory-Monoid)
-      ( hom-action-representation-precategory-Monoid)
+    preserves-comp-functor-Precategory
+      ( precategory-one-object-precategory-Monoid M) C ρ
 
   preserves-unit-action-representation-precategory-Monoid :
     action-representation-precategory-Monoid (unit-Monoid M) ＝
     id-endo-Precategory C obj-representation-precategory-Monoid
   preserves-unit-action-representation-precategory-Monoid =
-    preserves-unit-hom-Monoid M
-      ( monoid-endo-Precategory C obj-representation-precategory-Monoid)
-      ( hom-action-representation-precategory-Monoid)
+    preserves-id-functor-Precategory
+      ( precategory-one-object-precategory-Monoid M) C ρ star
 ```
 
-### The type of representations of a monoid
+### The total type of representations of a monoid
 
 ```agda
 Representation-Precategory-Monoid :
@@ -106,16 +101,6 @@ module _
     obj-Precategory precategory-Representation-Precategory-Monoid
   obj-Representation-Precategory-Monoid =
     obj-representation-precategory-Monoid M
-      ( precategory-Representation-Precategory-Monoid)
-      ( representation-precategory-Representation-Precategory-Monoid)
-
-  hom-action-Representation-Precategory-Monoid :
-    type-hom-Monoid M
-      ( monoid-endo-Precategory
-        ( precategory-Representation-Precategory-Monoid)
-        ( obj-Representation-Precategory-Monoid))
-  hom-action-Representation-Precategory-Monoid =
-    hom-action-representation-precategory-Monoid M
       ( precategory-Representation-Precategory-Monoid)
       ( representation-precategory-Representation-Precategory-Monoid)
 
