@@ -25,7 +25,7 @@ open import synthetic-homotopy-theory.loop-spaces
 ## Idea
 
 An **∞-group** is just a [pointed](structured-types.pointed-types.md)
-[connected](foundation.connected-types.md) type. Its underlying type is its
+[connected](foundation.0-connected-types.md) type. Its underlying type is its
 [loop space](synthetic-homotopy-theory.loop-spaces.md), and the classifying type
 is the pointed connected type itself.
 

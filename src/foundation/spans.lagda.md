@@ -54,9 +54,9 @@ module _
   right-map-span = pr2 (pr2 c)
 ```
 
-### Homomorphisms of cospans
+### Homomorphisms between spans with fixed codomains
 
-One notion of homomorphism of spans `c` and `d` with common domains is a map
+One notion of homomorphism of spans `c` and `d` with common codomains is a map
 between their domains so that the triangles on either side commute:
 
 ```text

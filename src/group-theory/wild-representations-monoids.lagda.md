@@ -22,13 +22,13 @@ open import structured-types.morphisms-wild-monoids
 
 ## Idea
 
-A coherent action of a [monoid](group-theory.monoids.md) on a type `X` requires
+A coherent action of a [monoid](group-theory.monoids.md) `M` on a type `X` requires
 an infinite hierarchy of explicit coherences. Instead, as a first order
 approximation, we can consider **wild representations** of `M` on `X`,
 consisting of a
 [wild monoid homomorphism](structured-types.morphisms-wild-monoids.md) from `M`
 to the [wild monoid](structured-types.wild-monoids.md) of
-[endomorphisms](category-theory.endomorphisms-in-categories.md) on `X`.
+[endomorphisms](foundation.endomorphisms.md) on `X`.
 
 ## Definition
 

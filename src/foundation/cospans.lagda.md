@@ -54,7 +54,7 @@ module _
   right-map-cospan = pr2 (pr2 c)
 ```
 
-### Homomorphisms of cospans
+### Homomorphisms between cospans with fixed domains
 
 One notion of homomorphism of cospans `c` and `d` with common domains is a map
 between their codomains so that the triangles on either side commute:
