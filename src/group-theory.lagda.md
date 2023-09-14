@@ -90,7 +90,6 @@ open import group-theory.isomorphisms-abelian-groups public
 open import group-theory.isomorphisms-concrete-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
-open import group-theory.isomorphisms-monoids public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels public
