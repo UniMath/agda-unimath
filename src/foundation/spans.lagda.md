@@ -74,14 +74,15 @@ module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2}
   where
 
-  coherence-hom-span :
+  coherence-hom-domain-span :
     (c d : span l A B) → (domain-span c → domain-span d) → UU (l1 ⊔ l2 ⊔ l)
-  coherence-hom-span c d h =
+  coherence-hom-domain-span c d h =
     ( coherence-triangle-maps (left-map-span c) (left-map-span d) h) ×
     ( coherence-triangle-maps (right-map-span c) (right-map-span d) h)
 
-  hom-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-span c d = Σ (domain-span c → domain-span d) (coherence-hom-span c d)
+  hom-domain-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
+  hom-domain-span c d =
+    Σ (domain-span c → domain-span d) (coherence-hom-domain-span c d)
 ```
 
 ### Characterizing equality of spans
@@ -94,7 +95,7 @@ module _
   htpy-span : (c d : span l A B) → UU (l1 ⊔ l2 ⊔ l)
   htpy-span c d =
     Σ ( domain-span c ≃ domain-span d)
-      ( λ e → coherence-hom-span c d (map-equiv e))
+      ( λ e → coherence-hom-domain-span c d (map-equiv e))
 
   refl-htpy-span : (c : span l A B) → htpy-span c c
   pr1 (refl-htpy-span c) = id-equiv
@@ -108,7 +109,7 @@ module _
     (c : span l A B) → is-contr (Σ (span l A B) (htpy-span c))
   is-contr-total-htpy-span c =
     is-contr-total-Eq-structure
-      ( λ X d e → coherence-hom-span c (X , d) (map-equiv e))
+      ( λ X d e → coherence-hom-domain-span c (X , d) (map-equiv e))
       ( is-contr-total-equiv (pr1 c))
       ( domain-span c , id-equiv)
       ( is-contr-total-Eq-structure

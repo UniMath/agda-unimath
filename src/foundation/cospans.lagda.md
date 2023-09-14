@@ -74,16 +74,16 @@ module _
   {l1 l2 : Level} {l : Level} {A : UU l1} {B : UU l2}
   where
 
-  coherence-hom-cospan :
+  coherence-hom-codomain-cospan :
     (c d : cospan l A B) →
     (codomain-cospan c → codomain-cospan d) → UU (l1 ⊔ l2 ⊔ l)
-  coherence-hom-cospan c d h =
+  coherence-hom-codomain-cospan c d h =
     ( coherence-triangle-maps (left-map-cospan d) h (left-map-cospan c)) ×
     ( coherence-triangle-maps (right-map-cospan d) h (right-map-cospan c))
 
-  hom-cospan : (c d : cospan l A B) → UU (l1 ⊔ l2 ⊔ l)
-  hom-cospan c d =
-    Σ (codomain-cospan c → codomain-cospan d) (coherence-hom-cospan c d)
+  hom-codomain-cospan : (c d : cospan l A B) → UU (l1 ⊔ l2 ⊔ l)
+  hom-codomain-cospan c d =
+    Σ (codomain-cospan c → codomain-cospan d) (coherence-hom-codomain-cospan c d)
 ```
 
 ## Properties
@@ -98,7 +98,7 @@ module _
   htpy-cospan : (c d : cospan l A B) → UU (l1 ⊔ l2 ⊔ l)
   htpy-cospan c d =
     Σ ( codomain-cospan c ≃ codomain-cospan d)
-      ( λ e → coherence-hom-cospan c d (map-equiv e))
+      ( λ e → coherence-hom-codomain-cospan c d (map-equiv e))
 
   refl-htpy-cospan : (c : cospan l A B) → htpy-cospan c c
   pr1 (refl-htpy-cospan c) = id-equiv
@@ -112,7 +112,7 @@ module _
     (c : cospan l A B) → is-contr (Σ (cospan l A B) (htpy-cospan c))
   is-contr-total-htpy-cospan c =
     is-contr-total-Eq-structure
-      ( λ X d e → coherence-hom-cospan c (X , d) (map-equiv e))
+      ( λ X d e → coherence-hom-codomain-cospan c (X , d) (map-equiv e))
       ( is-contr-total-equiv (pr1 c))
       ( codomain-cospan c , id-equiv)
       ( is-contr-total-Eq-structure
