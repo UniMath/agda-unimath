@@ -91,7 +91,11 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
     source_file_name = potential_source_file_name
 
     author_element = get_author_element_for_file(source_file_name)
-    chapter['content'] += '\n' + author_element
+    # Assumption: The title is the first header in the file
+    chapter_heading_start = chapter['content'].find('# ')
+    chapter_heading_end = chapter['content'].find('\n', chapter_heading_start)
+    # Insert the authors after the first heading
+    chapter['content'] = chapter['content'][:chapter_heading_end] + '\n' + author_element + chapter['content'][chapter_heading_end:]
 
 
 def add_author_info_to_sections_rec_mut(roots, sections, visited):
