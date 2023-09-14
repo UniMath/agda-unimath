@@ -3,6 +3,7 @@ if (link) {
   // console.log(link);
   var filename = link.getAttribute('href');
   const fileList = [
+    'ART.md',
     'CITE-THIS-LIBRARY.md',
     'CODINGSTYLE.md',
     'CONTRIBUTING.md',
@@ -14,6 +15,7 @@ if (link) {
     'HOWTO-INSTALL.md',
     'LICENSE.md',
     'MAINTAINERS.md',
+    'MIXFIX-OPERATORS.md',
     'README.md',
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
