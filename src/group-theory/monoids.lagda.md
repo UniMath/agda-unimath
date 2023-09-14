@@ -27,7 +27,7 @@ open import structured-types.wild-monoids
 ## Idea
 
 **Monoids** are [unital](foundation.unital-binary-operations.md)
-[semigroups](group-theory.semigroup.md).
+[semigroups](group-theory.semigroups.md).
 
 ## Definition
 
@@ -169,5 +169,5 @@ pr2 (pr2 (pr2 (pr2 (pr2 (wild-monoid-Monoid M))))) = star
 
 ## See also
 
-- In [one object precategories](category-theory.one-object-precategories), we
+- In [one object precategories](category-theory.one-object-precategories.md), we
   show that monoids are precategories whose type of objects is contractible.

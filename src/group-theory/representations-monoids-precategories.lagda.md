@@ -26,11 +26,11 @@ open import group-theory.monoids
 ## Idea
 
 A **representation** of a [monoid](group-theory.monoids.md) `M` in a
-[precategory](precategory-theory.precategories.md) `C` consist of an object `V`
-in `C` [equipped](foundation.structure.md) with a
+[precategory](category-theory.precategories.md) `C` consist of an object `V` in
+`C` [equipped](foundation.structure.md) with a
 [monoid homomorphism](group-theory.homomorphisms-monoids.md) from `M` to the
-monoid of [endomorphisms](precategory-theory.endomorphisms-in-precategories.md)
-on `V`. However, since
+monoid of [endomorphisms](category-theory.endomorphisms-in-precategories.md) on
+`V`. However, since
 [monoids are one-object precategories](category-theory.one-object-precategories.md),
 we can encode this as a functor of categories `M → C`.
 
