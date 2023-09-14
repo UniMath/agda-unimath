@@ -15,7 +15,7 @@ if (link) {
     'HOWTO-INSTALL.md',
     'LICENSE.md',
     'MAINTAINERS.md',
-    'MIXFIX-OPERATORS.md',  
+    'MIXFIX-OPERATORS.md',
     'README.md',
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
