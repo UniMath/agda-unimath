@@ -1,7 +1,7 @@
 # Dependent products of precategories
 
 ```agda
-module category-theory.dependent-products-precategories where
+module category-theory.dependent-products-of-precategories where
 ```
 
 <details><summary>Imports</summary>
