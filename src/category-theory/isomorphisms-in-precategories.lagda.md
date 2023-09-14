@@ -46,8 +46,8 @@ module _
   is-iso-Precategory {x} {y} f =
     Σ ( type-hom-Precategory C y x)
       ( λ g →
-        (comp-hom-Precategory C f g ＝ id-hom-Precategory C) ×
-        (comp-hom-Precategory C g f ＝ id-hom-Precategory C))
+        ( comp-hom-Precategory C f g ＝ id-hom-Precategory C) ×
+        ( comp-hom-Precategory C g f ＝ id-hom-Precategory C))
 
   hom-inv-is-iso-Precategory :
     {x y : obj-Precategory C} {f : type-hom-Precategory C x y} →
@@ -74,9 +74,8 @@ module _
       is-proof-irrelevant (is-iso-Precategory f)
     pr1 (is-proof-irrelevant-is-iso-Precategory f H) = H
     pr2
-      ( is-proof-irrelevant-is-iso-Precategory {x} {y} f
-        ( pair g (pair p q)))
-        ( pair g' (pair p' q')) =
+      ( is-proof-irrelevant-is-iso-Precategory {x} {y} f (g , p , q))
+      ( g' , p' , q') =
       eq-type-subtype
         ( λ h →
           prod-Prop

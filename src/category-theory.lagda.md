@@ -38,6 +38,7 @@ open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.categories public
 open import category-theory.coproducts-in-precategories public
+open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-precategories public
 open import category-theory.discrete-categories public
 open import category-theory.endomorphisms-in-categories public

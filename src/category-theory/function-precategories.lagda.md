@@ -68,10 +68,10 @@ module _
   associative-comp-hom-function-Precategory =
     associative-comp-hom-Precategory function-Precategory
 
-  associative-composition-function-Precategory :
+  associative-composition-structure-function-Precategory :
     associative-composition-structure-Set hom-function-Precategory
-  associative-composition-function-Precategory =
-    associative-composition-Precategory function-Precategory
+  associative-composition-structure-function-Precategory =
+    associative-composition-structure-Precategory function-Precategory
 
   id-hom-function-Precategory :
     {x : obj-function-Precategory} → type-hom-function-Precategory x x
@@ -93,6 +93,7 @@ module _
   is-unital-function-Precategory :
     is-unital-composition-structure-Set
       hom-function-Precategory
-      associative-composition-function-Precategory
-  is-unital-function-Precategory = is-unital-Precategory function-Precategory
+      associative-composition-structure-function-Precategory
+  is-unital-function-Precategory =
+    is-unital-composition-structure-Precategory function-Precategory
 ```

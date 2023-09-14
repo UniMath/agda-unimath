@@ -7,15 +7,21 @@ module category-theory.dependent-products-of-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -62,10 +68,11 @@ module _
   associative-comp-hom-Π-Precategory h g f =
     eq-htpy (λ i → associative-comp-hom-Precategory (P i) (h i) (g i) (f i))
 
-  associative-composition-Π-Precategory :
+  associative-composition-structure-Π-Precategory :
     associative-composition-structure-Set hom-Π-Precategory
-  pr1 associative-composition-Π-Precategory = comp-hom-Π-Precategory
-  pr2 associative-composition-Π-Precategory = associative-comp-hom-Π-Precategory
+  pr1 associative-composition-structure-Π-Precategory = comp-hom-Π-Precategory
+  pr2 associative-composition-structure-Π-Precategory =
+    associative-comp-hom-Π-Precategory
 
   id-hom-Π-Precategory : {x : obj-Π-Precategory} → type-hom-Π-Precategory x x
   id-hom-Π-Precategory i = id-hom-Precategory (P i)
@@ -86,7 +93,7 @@ module _
   is-unital-Π-Precategory :
     is-unital-composition-structure-Set
       hom-Π-Precategory
-      associative-composition-Π-Precategory
+      associative-composition-structure-Π-Precategory
   pr1 is-unital-Π-Precategory x = id-hom-Π-Precategory
   pr1 (pr2 is-unital-Π-Precategory) = left-unit-law-comp-hom-Π-Precategory
   pr2 (pr2 is-unital-Π-Precategory) = right-unit-law-comp-hom-Π-Precategory
@@ -94,6 +101,113 @@ module _
   Π-Precategory : Precategory (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Precategory = obj-Π-Precategory
   pr1 (pr2 Π-Precategory) = hom-Π-Precategory
-  pr1 (pr2 (pr2 Π-Precategory)) = associative-composition-Π-Precategory
+  pr1 (pr2 (pr2 Π-Precategory)) =
+    associative-composition-structure-Π-Precategory
   pr2 (pr2 (pr2 Π-Precategory)) = is-unital-Π-Precategory
+```
+
+## Properties
+
+### Isomorphisms in the dependent product precategory are fiberwise isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 : Level} (I : UU l1) (P : I → Precategory l2 l3)
+    {x y : obj-Π-Precategory I P}
+  where
+
+  is-fiberwise-iso-is-iso-Π-Precategory :
+    (f : type-hom-Π-Precategory I P x y) →
+    is-iso-Precategory (Π-Precategory I P) f →
+    (i : I) → is-iso-Precategory (P i) (f i)
+  pr1 (is-fiberwise-iso-is-iso-Π-Precategory f is-iso-f i) =
+    hom-inv-is-iso-Precategory (Π-Precategory I P) is-iso-f i
+  pr1 (pr2 (is-fiberwise-iso-is-iso-Π-Precategory f is-iso-f i)) =
+    htpy-eq
+      ( is-section-hom-inv-is-iso-Precategory (Π-Precategory I P) is-iso-f)
+      ( i)
+  pr2 (pr2 (is-fiberwise-iso-is-iso-Π-Precategory f is-iso-f i)) =
+    htpy-eq
+      ( is-retraction-hom-inv-is-iso-Precategory (Π-Precategory I P) is-iso-f)
+      ( i)
+
+  fiberwise-iso-iso-Π-Precategory :
+    iso-Precategory (Π-Precategory I P) x y →
+    (i : I) → iso-Precategory (P i) (x i) (y i)
+  pr1 (fiberwise-iso-iso-Π-Precategory e i) =
+    hom-iso-Precategory (Π-Precategory I P) e i
+  pr2 (fiberwise-iso-iso-Π-Precategory e i) =
+    is-fiberwise-iso-is-iso-Π-Precategory
+      ( hom-iso-Precategory (Π-Precategory I P) e)
+      ( is-iso-hom-iso-Precategory (Π-Precategory I P) e)
+      ( i)
+
+  is-iso-Π-is-fiberwise-iso-Precategory :
+    (f : type-hom-Π-Precategory I P x y) →
+    ((i : I) → is-iso-Precategory (P i) (f i)) →
+    is-iso-Precategory (Π-Precategory I P) f
+  pr1 (is-iso-Π-is-fiberwise-iso-Precategory f is-fiberwise-iso-f) i =
+    hom-inv-is-iso-Precategory (P i) (is-fiberwise-iso-f i)
+  pr1 (pr2 (is-iso-Π-is-fiberwise-iso-Precategory f is-fiberwise-iso-f)) =
+    eq-htpy
+      ( λ i →
+        is-section-hom-inv-is-iso-Precategory (P i) (is-fiberwise-iso-f i))
+  pr2 (pr2 (is-iso-Π-is-fiberwise-iso-Precategory f is-fiberwise-iso-f)) =
+    eq-htpy
+      ( λ i →
+        is-retraction-hom-inv-is-iso-Precategory (P i) (is-fiberwise-iso-f i))
+
+  iso-Π-fiberwise-iso-Precategory :
+    ((i : I) → iso-Precategory (P i) (x i) (y i)) →
+    iso-Precategory (Π-Precategory I P) x y
+  pr1 (iso-Π-fiberwise-iso-Precategory e) i = hom-iso-Precategory (P i) (e i)
+  pr2 (iso-Π-fiberwise-iso-Precategory e) =
+    is-iso-Π-is-fiberwise-iso-Precategory
+      ( λ i → hom-iso-Precategory (P i) (e i))
+      ( λ i → is-iso-hom-iso-Precategory (P i) (e i))
+
+  is-equiv-is-fiberwise-iso-is-iso-Π-Precategory :
+    (f : type-hom-Π-Precategory I P x y) →
+    is-equiv (is-fiberwise-iso-is-iso-Π-Precategory f)
+  is-equiv-is-fiberwise-iso-is-iso-Π-Precategory f =
+    is-equiv-is-prop
+      ( is-prop-is-iso-Precategory (Π-Precategory I P) f)
+      ( is-prop-Π (λ i → is-prop-is-iso-Precategory (P i) (f i)))
+      ( is-iso-Π-is-fiberwise-iso-Precategory f)
+
+  is-equiv-is-iso-Π-is-fiberwise-iso-Precategory :
+    (f : type-hom-Π-Precategory I P x y) →
+    is-equiv (is-iso-Π-is-fiberwise-iso-Precategory f)
+  is-equiv-is-iso-Π-is-fiberwise-iso-Precategory f =
+    is-equiv-is-prop
+      ( is-prop-Π (λ i → is-prop-is-iso-Precategory (P i) (f i)))
+      ( is-prop-is-iso-Precategory (Π-Precategory I P) f)
+      ( is-fiberwise-iso-is-iso-Π-Precategory f)
+
+  is-equiv-fiberwise-iso-iso-Π-Precategory :
+    is-equiv fiberwise-iso-iso-Π-Precategory
+  is-equiv-fiberwise-iso-iso-Π-Precategory =
+    is-equiv-is-invertible
+      ( iso-Π-fiberwise-iso-Precategory)
+      ( λ e →
+        eq-htpy
+          ( λ i →
+            eq-pair-Σ
+              ( refl)
+              ( eq-is-prop
+                ( is-prop-is-iso-Precategory
+                  ( P i)
+                  ( hom-iso-Precategory (P i) (e i))))))
+      ( λ e →
+        eq-pair-Σ
+          ( refl)
+          ( eq-is-prop
+            ( is-prop-is-iso-Precategory
+              ( Π-Precategory I P)
+              ( hom-iso-Precategory (Π-Precategory I P) e))))
+
+  is-equiv-iso-Π-fiberwise-iso-Precategory :
+    is-equiv iso-Π-fiberwise-iso-Precategory
+  is-equiv-iso-Π-fiberwise-iso-Precategory =
+    is-equiv-map-inv-is-equiv is-equiv-fiberwise-iso-iso-Π-Precategory
 ```
