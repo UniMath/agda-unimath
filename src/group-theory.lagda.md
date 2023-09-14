@@ -136,7 +136,6 @@ open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
 open import group-theory.rational-commutative-monoids public
-open import group-theory.representations-monoids-categories public
 open import group-theory.representations-monoids-precategories public
 open import group-theory.saturated-congruence-relations-commutative-monoids public
 open import group-theory.saturated-congruence-relations-monoids public
