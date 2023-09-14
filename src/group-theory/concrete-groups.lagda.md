@@ -33,7 +33,8 @@ open import structured-types.pointed-types
 ## Idea
 
 A **concrete group** is a [pointed](structured-types.pointed-types.md)
-[connected](foundation.connected-types.md) [1-type](foundation-core.1-types.md).
+[connected](foundation.0-connected-types.md)
+[1-type](foundation-core.1-types.md).
 
 ## Definition
 
@@ -84,25 +85,26 @@ module _
   is-set-type-Concrete-Group = pr2 G
 
   set-Concrete-Group : Set l
-  set-Concrete-Group = pair type-Concrete-Group is-set-type-Concrete-Group
+  pr1 set-Concrete-Group = type-Concrete-Group
+  pr2 set-Concrete-Group = is-set-type-Concrete-Group
 
   is-1-type-classifying-type-Concrete-Group :
     is-trunc one-𝕋 classifying-type-Concrete-Group
   is-1-type-classifying-type-Concrete-Group X Y =
     apply-universal-property-trunc-Prop
       ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
-      ( is-set-Prop (Id X Y))
+      ( is-set-Prop (X ＝ Y))
       ( λ { refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
-              ( is-set-Prop (Id shape-Concrete-Group Y))
+              ( is-set-Prop (shape-Concrete-Group ＝ Y))
               ( λ { refl → is-set-type-Concrete-Group})})
 
   classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
-  classifying-1-type-Concrete-Group =
-    pair
-      classifying-type-Concrete-Group
-      is-1-type-classifying-type-Concrete-Group
+  pr1 classifying-1-type-Concrete-Group =
+    classifying-type-Concrete-Group
+  pr2 classifying-1-type-Concrete-Group =
+    is-1-type-classifying-type-Concrete-Group
 
   Id-BG-Set :
     (X Y : classifying-type-Concrete-Group) → Set l
@@ -119,26 +121,24 @@ module _
 
   associative-mul-Concrete-Group :
     (x y z : type-Concrete-Group) →
-    Id
-      ( mul-Concrete-Group (mul-Concrete-Group x y) z)
-      ( mul-Concrete-Group x (mul-Concrete-Group y z))
+    ( mul-Concrete-Group (mul-Concrete-Group x y) z) ＝
+    ( mul-Concrete-Group x (mul-Concrete-Group y z))
   associative-mul-Concrete-Group =
     associative-mul-∞-Group ∞-group-Concrete-Group
 
   left-unit-law-mul-Concrete-Group :
-    (x : type-Concrete-Group) → Id (mul-Concrete-Group unit-Concrete-Group x) x
+    (x : type-Concrete-Group) → mul-Concrete-Group unit-Concrete-Group x ＝ x
   left-unit-law-mul-Concrete-Group =
     left-unit-law-mul-∞-Group ∞-group-Concrete-Group
 
   right-unit-law-mul-Concrete-Group :
-    (y : type-Concrete-Group) → Id (mul-Concrete-Group y unit-Concrete-Group) y
+    (y : type-Concrete-Group) → mul-Concrete-Group y unit-Concrete-Group ＝ y
   right-unit-law-mul-Concrete-Group =
     right-unit-law-mul-∞-Group ∞-group-Concrete-Group
 
   coherence-unit-laws-mul-Concrete-Group :
-    Id
-      ( left-unit-law-mul-Concrete-Group unit-Concrete-Group)
-      ( right-unit-law-mul-Concrete-Group unit-Concrete-Group)
+    left-unit-law-mul-Concrete-Group unit-Concrete-Group ＝
+    right-unit-law-mul-Concrete-Group unit-Concrete-Group
   coherence-unit-laws-mul-Concrete-Group =
     coherence-unit-laws-mul-∞-Group ∞-group-Concrete-Group
 
@@ -147,13 +147,13 @@ module _
 
   left-inverse-law-mul-Concrete-Group :
     (x : type-Concrete-Group) →
-    Id (mul-Concrete-Group (inv-Concrete-Group x) x) unit-Concrete-Group
+    mul-Concrete-Group (inv-Concrete-Group x) x ＝ unit-Concrete-Group
   left-inverse-law-mul-Concrete-Group =
     left-inverse-law-mul-∞-Group ∞-group-Concrete-Group
 
   right-inverse-law-mul-Concrete-Group :
     (x : type-Concrete-Group) →
-    Id (mul-Concrete-Group x (inv-Concrete-Group x)) unit-Concrete-Group
+    mul-Concrete-Group x (inv-Concrete-Group x) ＝ unit-Concrete-Group
   right-inverse-law-mul-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-Concrete-Group
 
@@ -198,9 +198,5 @@ module _
 trivial-Concrete-Group : {l : Level} → Concrete-Group l
 pr1 trivial-Concrete-Group = trivial-∞-Group
 pr2 trivial-Concrete-Group =
-  is-trunc-is-contr
-    (succ-𝕋 (succ-𝕋 (succ-𝕋 neg-two-𝕋)))
-    is-contr-raise-unit
-    raise-star
-    raise-star
+  is-trunc-is-contr (one-𝕋) (is-contr-raise-unit) (raise-star) (raise-star)
 ```

@@ -658,6 +658,13 @@ module _
   classifying-type-Group : UU (lsuc l1)
   classifying-type-Group = classifying-type-Concrete-Group concrete-group-Group
 
+  shape-Group : classifying-type-Group
+  shape-Group = shape-Concrete-Group concrete-group-Group
+
+  is-0-connected-classifying-type-Group : is-0-connected classifying-type-Group
+  is-0-connected-classifying-type-Group =
+    is-0-connected-classifying-type-Concrete-Group concrete-group-Group
+
   abstract-group-concrete-group-Group :
     type-iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
   abstract-group-concrete-group-Group =

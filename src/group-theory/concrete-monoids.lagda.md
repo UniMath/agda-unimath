@@ -48,8 +48,7 @@ analogue of [monoids](group-theory.monoids.md). We define it as a
 
 ```agda
 is-concrete-monoid-Category : {l1 l2 : Level} → Category l1 l2 → UU l1
-is-concrete-monoid-Category C =
-  obj-Category C × is-0-connected (obj-Category C)
+is-concrete-monoid-Category C = obj-Category C × is-0-connected (obj-Category C)
 
 Concrete-Monoid : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Concrete-Monoid l1 l2 = Σ (Category l1 l2) (is-concrete-monoid-Category)
@@ -70,10 +69,13 @@ module _
 
 ### Concrete monoids from monoids
 
-From a monoid, we can define its associated concrete monoid. The type of objects
-is the classifying type of the core of the monoid. Moreover, we must take care
-in how we define the family of homomorphism sets. They cannot simply be the
-constant family.
+Given a monoid, we can define its associated concrete monoid. The type of
+objects is the [classifying type](group-theory.concrete-types.md) of the
+[core](group-theory.cores-monoids.md) of the monoid. Moreover, we must take care
+in how we define the family of homomorphisms. They cannot simply be the constant
+family, as [transporting](foundation.transport-along-identifications.md) along
+an [invertible element](group-theory.invertible-elements-monoids.md) should
+correspond to multiplying by the element in the family.
 
 ```agda
 module _
@@ -87,11 +89,18 @@ module _
     obj-concrete-monoid-Monoid → obj-concrete-monoid-Monoid → Set {!   !}
   hom-concrete-monoid-Monoid x y = {!   !}
 
-  precategory-concrete-monoid-Monoid : Precategory {!   !} {!   !}
-  pr1 precategory-concrete-monoid-Monoid = {!   !}
-  pr2 precategory-concrete-monoid-Monoid = {!   !}
+  precategory-concrete-monoid-Monoid : Precategory (lsuc l) {!   !}
+  pr1 precategory-concrete-monoid-Monoid = obj-concrete-monoid-Monoid
+  pr1 (pr2 precategory-concrete-monoid-Monoid) = hom-concrete-monoid-Monoid
+  pr2 (pr2 precategory-concrete-monoid-Monoid) = {!   !}
 
-  concrete-monoid-Monoid : Concrete-Monoid {!   !} {!   !}
-  pr1 concrete-monoid-Monoid = {!   !}
-  pr2 concrete-monoid-Monoid = {!   !}
+  category-concrete-monoid-Monoid : Category (lsuc l) {!   !}
+  pr1 category-concrete-monoid-Monoid = precategory-concrete-monoid-Monoid
+  pr2 category-concrete-monoid-Monoid = {!   !}
+
+  concrete-monoid-Monoid : Concrete-Monoid (lsuc l) {!   !}
+  pr1 concrete-monoid-Monoid = category-concrete-monoid-Monoid
+  pr1 (pr2 concrete-monoid-Monoid) = shape-Group (group-core-Monoid M)
+  pr2 (pr2 concrete-monoid-Monoid) =
+    is-0-connected-classifying-type-Group (group-core-Monoid M)
 ```
