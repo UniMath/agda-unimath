@@ -50,6 +50,9 @@ module _
   semigroup-Monoid : Semigroup l
   semigroup-Monoid = pr1 M
 
+  is-unital-semigroup-Monoid : is-unital-Semigroup semigroup-Monoid
+  is-unital-semigroup-Monoid = pr2 M
+
   type-Monoid : UU l
   type-Monoid = type-Semigroup semigroup-Monoid
 
@@ -117,9 +120,10 @@ module _
 abstract
   all-elements-equal-is-unital-Semigroup :
     {l : Level} (G : Semigroup l) → all-elements-equal (is-unital-Semigroup G)
-  all-elements-equal-is-unital-Semigroup (pair X (pair μ associative-μ))
-    (pair e (pair left-unit-e right-unit-e))
-    (pair e' (pair left-unit-e' right-unit-e')) =
+  all-elements-equal-is-unital-Semigroup
+    ( X , μ , associative-μ)
+    ( e , left-unit-e , right-unit-e)
+    ( e' , left-unit-e' , right-unit-e') =
     eq-type-subtype
       ( λ e →
         prod-Prop

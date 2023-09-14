@@ -655,6 +655,9 @@ module _
         ( principal-Torsor-Abstract-Group G))
       ( is-set-type-Group G)
 
+  classifying-type-Group : UU (lsuc l1)
+  classifying-type-Group = classifying-type-Concrete-Group concrete-group-Group
+
   abstract-group-concrete-group-Group :
     type-iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
   abstract-group-concrete-group-Group =
