@@ -83,7 +83,8 @@ module _
 
   hom-codomain-cospan : (c d : cospan l A B) → UU (l1 ⊔ l2 ⊔ l)
   hom-codomain-cospan c d =
-    Σ (codomain-cospan c → codomain-cospan d) (coherence-hom-codomain-cospan c d)
+    Σ ( codomain-cospan c → codomain-cospan d)
+      ( coherence-hom-codomain-cospan c d)
 ```
 
 ## Properties

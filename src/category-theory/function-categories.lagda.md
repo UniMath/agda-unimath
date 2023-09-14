@@ -7,8 +7,8 @@ module category-theory.function-categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.dependent-products-of-categories
 open import category-theory.categories
+open import category-theory.dependent-products-of-categories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -43,8 +43,10 @@ module _
   precategory-function-Category : Precategory (l1 ⊔ l2) (l1 ⊔ l3)
   precategory-function-Category = precategory-Category function-Category
 
-  is-category-precategory-function-Category : is-category-Precategory precategory-function-Category
-  is-category-precategory-function-Category = is-category-Category function-Category
+  is-category-precategory-function-Category :
+    is-category-Precategory precategory-function-Category
+  is-category-precategory-function-Category =
+    is-category-Category function-Category
 
   obj-function-Category : UU (l1 ⊔ l2)
   obj-function-Category = obj-Category function-Category
