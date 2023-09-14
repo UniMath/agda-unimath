@@ -82,7 +82,7 @@ website: website-prepare
 	@mdbook build
 
 .PHONY: serve-website
-serve-website:
+serve-website: website-prepare
 	@mdbook serve -p 8080 --open -d ./book/html
 
 .PHONY: graph
