@@ -1,7 +1,7 @@
 # Terminal object of a precategory
 
 ```agda
-module category-theory.terminal-objects-precategories where
+module category-theory.terminal-objects-in-precategories where
 ```
 
 <details><summary>Imports</summary>

@@ -8,7 +8,7 @@ module category-theory.large-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 open import category-theory.precategories
 

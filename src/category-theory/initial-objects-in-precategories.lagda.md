@@ -1,7 +1,7 @@
 # Initial objects of a precategory
 
 ```agda
-module category-theory.initial-objects-precategories where
+module category-theory.initial-objects-in-precategories where
 ```
 
 <details><summary>Imports</summary>

@@ -7,7 +7,7 @@ module group-theory.isomorphisms-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
