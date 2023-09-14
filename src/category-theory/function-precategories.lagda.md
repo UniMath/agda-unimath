@@ -27,8 +27,8 @@ open import foundation.universe-levels
 
 Given a [precategory](category-theory.precategories.md) `P` and any type `I`,
 the function type `I → P` is a precategory consisting of functions taking
-`i : I` to an element of the underlying type of `P`. Every component of the
-structure is given pointwise.
+`i : I` to an object of `P`. Every component of the structure is given
+pointwise.
 
 ## Definition
 

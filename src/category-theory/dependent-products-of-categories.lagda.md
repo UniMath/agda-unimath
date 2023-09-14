@@ -7,25 +7,25 @@ module category-theory.dependent-products-of-categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.dependent-products-of-precategories
 open import category-theory.categories
-open import category-theory.precategories
+open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.subtypes
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-function-types
 open import foundation.equality-dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
-open import foundation.function-types
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.sets
-open import foundation.equivalences
+open import foundation.subtypes
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
