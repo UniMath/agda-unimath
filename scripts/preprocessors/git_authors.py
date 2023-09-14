@@ -57,7 +57,10 @@ def get_author_element_for_file(filename):
         '--group=author', '--group=trailer:co-authored-by',
         # Limit to changes to the target file
         'HEAD', '--', filename
-    ], capture_output=True, text=True, check=True).stdout
+    ], capture_output=True, text=True, check=True).stdout.splitlines()
+    author_names = [line[line.find('\t')+1:]
+                    for line in authors_git_output]
+
     file_log_output = subprocess.run([
         'git', 'log',
         '--format=%as',
@@ -65,10 +68,6 @@ def get_author_element_for_file(filename):
     ], capture_output=True, text=True, check=True).stdout.splitlines()
     created_date = file_log_output[-1]
     modified_date = file_log_output[0]
-    author_names = [line[line.find('\t')+1:]
-                    for line in authors_git_output.splitlines()]
-    if len(author_names) == 0:
-        return ''
     return f'<p><i>Content created by {", ".join(author_names[:-1])}{(len(author_names) > 1) * " and "}{author_names[-1]}</i></p><p>Created: {created_date}; Modified: {modified_date}</p>'
 
 
