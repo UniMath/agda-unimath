@@ -17,6 +17,8 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.homomorphisms-monoids
+open import group-theory.isomorphisms-monoids
 open import group-theory.monoids
 ```
 
@@ -285,4 +287,37 @@ module _
     is-left-inverse-inv-is-invertible-element-Monoid M H
   pr2 (pr2 (is-invertible-element-inv-is-invertible-element-Monoid H)) =
     is-right-inverse-inv-is-invertible-element-Monoid M H
+```
+
+### Any homomorphism of monoids sends invertible elements to invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  (f : type-hom-Monoid M N)
+  where
+
+  is-invertible-value-hom-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid M x →
+    is-invertible-element-Monoid N (map-hom-Monoid M N f x)
+  pr1 (is-invertible-value-hom-Monoid (y , p , q)) =
+    map-hom-Monoid M N f y
+  pr1 (pr2 (is-invertible-value-hom-Monoid (y , p , q))) =
+    ( inv (preserves-mul-hom-Monoid M N f _ y)) ∙
+    ( ap (map-hom-Monoid M N f) p) ∙
+    ( preserves-unit-hom-Monoid M N f)
+  pr2 (pr2 (is-invertible-value-hom-Monoid (y , p , q))) =
+    ( inv (preserves-mul-hom-Monoid M N f y _)) ∙
+    ( ap (map-hom-Monoid M N f) q) ∙
+    ( preserves-unit-hom-Monoid M N f)
+```
+
+### Given an isomorphism `f : M ≅ N` of monoids, `x : M` is invertible if and only if `f x : N` is invertible
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  (f : type-iso-Monoid M N)
+  where
 ```
