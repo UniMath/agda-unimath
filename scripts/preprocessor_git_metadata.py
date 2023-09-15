@@ -11,28 +11,18 @@ import os
 import subprocess
 import sys
 import tomli
+from utils.contributors import parse_contributors_file, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
 
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
 RECENT_CHANGES_COUNT = 5
-CONTRIBUTORS_FILE = 'scripts/contributors_data.toml'
 
 # Lazily initialized
 contributors_data = None
 
 
-def get_real_author(raw_username):
-    return next((c for c in contributors_data if raw_username in c['usernames']), None)
-
-
 def does_support(backend):
     return backend == 'html'
-
-
-def print_skipping_contributor_warning(contributor):
-    print('Warning: not attributing changes to', contributor,
-          f'. If you want your work to be attributed to you, add yourself to {CONTRIBUTORS_FILE}',
-          file=sys.stderr)
 
 
 def module_source_path_from_md_name(roots, module_name):
@@ -81,16 +71,10 @@ def get_author_element_for_file(filename):
     ], capture_output=True, text=True, check=True).stdout.splitlines()
 
     # Collect authors and sort by number of commits
-    author_commits = defaultdict(int)
-    for raw_author_line in raw_authors_git_output:
-        commit_count_str, raw_author = raw_author_line.split('\t')
-        commit_count = int(commit_count_str.strip())
-        author = get_real_author(raw_author)
-        if author is None:
-            print_skipping_contributor_warning(raw_author)
-            continue
-        author_commits[author['displayName']] += commit_count
-    author_names = sorted(author_commits, key=author_commits.get, reverse=True)
+    author_names = [
+        author['displayName']
+        for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
+    ]
     attribution_text = ', '.join(
         author_names[:-1]) + (len(author_names) > 1) * ' and ' + author_names[-1]
 
@@ -114,11 +98,11 @@ def get_author_element_for_file(filename):
     recent_changes = '## Recent changes\n'
     for recent_changes_line in recent_changes_output:
         [sha, raw_author, date, message] = recent_changes_line.split('\t')
-        author = get_real_author(raw_author)
-        if author is None:
+        author_index = get_real_author_index(raw_author, contributors_data)
+        if author_index is None:
             print_skipping_contributor_warning(raw_author)
             continue
-        recent_changes += f'- <i>{sha}</i> ({author["displayName"]}) [{date}] - {message}\n'
+        recent_changes += f'- <i>{sha}</i> ({contributors_data[author_index]["displayName"]}) [{date}] - {message}\n'
 
     return (
         f'<p><i>Content created by {attribution_text}</i></p><p>Created: {created_date}; Last modified: {modified_date}</p>',
@@ -199,8 +183,7 @@ if __name__ == '__main__':
                 sys.exit(0)
 
     # Load the contributors data
-    with open(CONTRIBUTORS_FILE, 'rb') as f:
-        contributors_data = tomli.load(f)['contributors']
+    contributors_data = parse_contributors_file()
 
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
