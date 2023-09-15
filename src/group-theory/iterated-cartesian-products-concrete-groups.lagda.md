@@ -31,6 +31,7 @@ open import foundation.universe-levels
 open import group-theory.cartesian-products-concrete-groups
 open import group-theory.concrete-groups
 open import group-theory.groups
+open import group-theory.trivial-concrete-groups
 
 open import higher-group-theory.higher-groups
 
