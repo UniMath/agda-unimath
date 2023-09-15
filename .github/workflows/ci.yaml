@@ -71,6 +71,17 @@ jobs:
           path: master/_build
           key: '${{ steps.cache-agda-formalization.outputs.cache-primary-key }}'
 
+      # Install Python and friends for website generation only where needed
+      - uses: actions/setup-python@v4
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        with:
+          python-version: '3.8'
+          check-latest: true
+          cache: 'pip'
+
+      - run: python3 -m pip install -r master/scripts/requirements.txt
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+
       # We need to run the sources through Agda not only to get the highlighting
       # (which is irrelevant for checking links), but because it flattens the
       # directory structure to a format which is expected in the links we write.
