@@ -21,8 +21,10 @@ open import synthetic-homotopy-theory.circle
 
 ## Idea
 
-The higher group of integers is defined to be the circle. The loop space of the
-circle is ℤ.
+The **higher group of integers** is defined to be the
+[circle](synthetic-homotopy-theory.circle.md). The
+[loop space](synthetic-homotopy-theory.loop-spaces.md) of the circle is
+[`ℤ`](elementary-number-theory.integers.md).
 
 ## Definition
 

@@ -18,7 +18,8 @@ open import higher-group-theory.higher-groups
 
 ## Idea
 
-An action of a higher group `G` on a type is just a type family over `BG`.
+An **action of a [higher group](higher-group-theory.higher-groups.md)** `G` on a
+type is just a type family over `BG`.
 
 ## Definition
 
