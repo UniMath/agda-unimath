@@ -12,7 +12,6 @@ open import foundation.large-locale-of-propositions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.sets
 
 open import order-theory.greatest-lower-bounds-large-posets

@@ -7,23 +7,12 @@ module structured-types.morphisms-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
-open import group-theory.monoids
 
-open import structured-types.h-spaces
 open import structured-types.morphisms-h-spaces
 open import structured-types.pointed-maps
 open import structured-types.wild-monoids
