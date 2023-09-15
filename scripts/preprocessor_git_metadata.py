@@ -11,7 +11,7 @@ import os
 import subprocess
 import sys
 import tomli
-from utils.contributors import parse_contributors_file, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
+from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
 
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
@@ -48,6 +48,15 @@ def module_source_path_from_md_name(roots, module_name):
     return None
 
 
+def cleanup_author_part(raw_author):
+    stripped = raw_author.strip()
+    # Assumption: The user doesn't have a name containing '<'
+    email_start = raw_author.find('<')
+    if email_start > 0:
+        return stripped[:email_start - 1]
+    return stripped
+
+
 def get_author_element_for_file(filename):
     """
     Extracts git usernames of contributors to a particular file
@@ -75,8 +84,7 @@ def get_author_element_for_file(filename):
         author['displayName']
         for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
     ]
-    attribution_text = ', '.join(
-        author_names[:-1]) + (len(author_names) > 1) * ' and ' + author_names[-1]
+    attribution_text = format_multiple_authors_attribution(author_names)
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -91,18 +99,34 @@ def get_author_element_for_file(filename):
         'git', 'log',
         # Show only last RECENT_CHANGES_COUNT commits
         '-n', str(RECENT_CHANGES_COUNT),
-        # Get hash, author, date and message, separated by tabs
-        '--format=%h%x09%an%x09%as%x09%s',
+        # Get hash, date, message, author and coauthors, separated by tabs
+        # NB When there are no trailers, the line ends with a tab
+        # NB Coauthors usually have the format "name <email>" and there is
+        #    no way to tell git to strip the email, so it needs to be done
+        #    in post processing
+        '--format=%h%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
         'HEAD', '--', filename
     ], capture_output=True, text=True, check=True).stdout.splitlines()
     recent_changes = '## Recent changes\n'
     for recent_changes_line in recent_changes_output:
-        [sha, raw_author, date, message] = recent_changes_line.split('\t')
-        author_index = get_real_author_index(raw_author, contributors_data)
-        if author_index is None:
-            print_skipping_contributor_warning(raw_author)
+        [sha, date, message, *raw_authors] = recent_changes_line.split('\t')
+        author_indices = []
+        for raw_author in map(cleanup_author_part, raw_authors):
+            # Line ended with a tab
+            if raw_author == '':
+                continue
+            author_index = get_real_author_index(raw_author, contributors_data)
+            if author_index is None:
+                print_skipping_contributor_warning(raw_author)
+                continue
+            author_indices.append(author_index)
+        if len(author_indices) == 0:
             continue
-        recent_changes += f'- <i>{sha}</i> ({contributors_data[author_index]["displayName"]}) [{date}] - {message}\n'
+        formatted_authors = format_multiple_authors_attribution([
+            contributors_data[author_index]['displayName'] for author_index in author_indices
+        ])
+        # recent_changes += f'- <i>{sha}</i> ({formatted_authors}) [{date}] - {message}\n'
+        recent_changes += f'- {date}. {formatted_authors}. <i>{message}.</i> {sha}\n'
 
     return (
         f'<p><i>Content created by {attribution_text}</i></p><p>Created: {created_date}; Last modified: {modified_date}</p>',
