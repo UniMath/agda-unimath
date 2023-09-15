@@ -46,7 +46,7 @@ module _
   is-category-precategory-Π-Category x y =
     is-equiv-htpy-equiv
       ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
-        equiv-Π-equiv-family (λ i → equiv-iso-eq-Category (C i)) ∘e
+        equiv-Π-equiv-family (λ i → extensionality-obj-Category (C i)) ∘e
         equiv-funext)
       ( λ {refl → refl})
 
