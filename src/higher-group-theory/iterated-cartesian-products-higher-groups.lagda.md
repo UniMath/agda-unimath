@@ -26,6 +26,7 @@ open import foundation.universe-levels
 
 open import higher-group-theory.cartesian-products-higher-groups
 open import higher-group-theory.higher-groups
+open import higher-group-theory.trivial-higher-groups
 
 open import structured-types.pointed-types
 
