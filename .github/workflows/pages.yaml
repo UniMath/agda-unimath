@@ -41,10 +41,6 @@ jobs:
         with:
           path: master
 
-      - uses: r-lib/actions/setup-pandoc@v2
-        with:
-          pandoc-version: '3.0.1'
-
       - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
         with:
@@ -88,7 +84,7 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.11.1'
+          python-version: '3.8'
           check-latest: true
           cache: 'pip'
 
