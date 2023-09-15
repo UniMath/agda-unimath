@@ -68,7 +68,7 @@ module _
   where
 
   obj-concrete-monoid-Monoid : UU (lsuc l)
-  obj-concrete-monoid-Monoid = classifying-type-Group (group-core-Monoid M)
+  obj-concrete-monoid-Monoid = classifying-type-Group (core-Monoid M)
 ```
 
 The remainder of the construction remains to be written down. We note that this
