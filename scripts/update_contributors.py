@@ -10,7 +10,7 @@ s = requests.Session()
 s.trust_env = False
 
 repo = 'unimath/agda-unimath'
-url = f'https://api.github.com/repos/{repo}/contributors'
+url = f'https://api.github.com/repos/{repo}/contributors?per_page=100'
 
 response = s.get(url)
 

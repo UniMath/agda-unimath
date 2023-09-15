@@ -33,6 +33,7 @@ We are grateful to the following people for their contributions to the library.
 - [Nathan van Doorn](https://github.com/Taneb)
 - [Pierre Cagne](https://github.com/pierrecagne)
 - [Tom de Jong](https://github.com/tomdjong)
+- [louismntnu](https://github.com/louismntnu)
 
 Help us to improve the library by contributing to the project! Contributions
 come in many forms, please ask us if you are not sure how to help. We are happy
