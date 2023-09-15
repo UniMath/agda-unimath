@@ -9,10 +9,18 @@ module category-theory.function-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.dependent-products-of-categories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories
 
+open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-extensionality
+open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -98,4 +106,93 @@ module _
       associative-composition-structure-function-Category
   is-unital-function-Category =
     is-unital-composition-structure-Category function-Category
+
+  extensionality-obj-function-Category :
+    (x y : obj-Category function-Category) →
+    (x ＝ y) ≃ iso-Category function-Category x y
+  extensionality-obj-function-Category =
+    extensionality-obj-Category function-Category
+```
+
+### Isomorphisms in the function category are fiberwise isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 : Level} (I : UU l1) (C : Category l2 l3)
+  {x y : obj-function-Category I C}
+  where
+
+  is-fiberwise-iso-is-iso-function-Category :
+    (f : type-hom-function-Category I C x y) →
+    is-iso-Category (function-Category I C) f →
+    (i : I) → is-iso-Category C (f i)
+  is-fiberwise-iso-is-iso-function-Category =
+    is-fiberwise-iso-is-iso-Π-Category I (λ _ → C)
+
+  fiberwise-iso-iso-function-Category :
+    iso-Category (function-Category I C) x y →
+    (i : I) → iso-Category C (x i) (y i)
+  fiberwise-iso-iso-function-Category =
+    fiberwise-iso-iso-Π-Category I (λ _ → C)
+
+  is-iso-function-is-fiberwise-iso-Category :
+    (f : type-hom-function-Category I C x y) →
+    ((i : I) → is-iso-Category C (f i)) →
+    is-iso-Category (function-Category I C) f
+  is-iso-function-is-fiberwise-iso-Category =
+    is-iso-Π-is-fiberwise-iso-Category I (λ _ → C)
+
+  iso-function-fiberwise-iso-Category :
+    ((i : I) → iso-Category C (x i) (y i)) →
+    iso-Category (function-Category I C) x y
+  iso-function-fiberwise-iso-Category =
+    iso-Π-fiberwise-iso-Category I (λ _ → C)
+
+  is-equiv-is-fiberwise-iso-is-iso-function-Category :
+    (f : type-hom-function-Category I C x y) →
+    is-equiv (is-fiberwise-iso-is-iso-function-Category f)
+  is-equiv-is-fiberwise-iso-is-iso-function-Category =
+    is-equiv-is-fiberwise-iso-is-iso-Π-Category I (λ _ → C)
+
+  equiv-is-fiberwise-iso-is-iso-function-Category :
+    (f : type-hom-function-Category I C x y) →
+    ( is-iso-Category (function-Category I C) f) ≃
+    ( (i : I) → is-iso-Category C (f i))
+  equiv-is-fiberwise-iso-is-iso-function-Category =
+    equiv-is-fiberwise-iso-is-iso-Π-Category I (λ _ → C)
+
+  is-equiv-is-iso-function-is-fiberwise-iso-Category :
+    (f : type-hom-function-Category I C x y) →
+    is-equiv (is-iso-function-is-fiberwise-iso-Category f)
+  is-equiv-is-iso-function-is-fiberwise-iso-Category =
+    is-equiv-is-iso-Π-is-fiberwise-iso-Category I (λ _ → C)
+
+  equiv-is-iso-function-is-fiberwise-iso-Category :
+    ( f : type-hom-function-Category I C x y) →
+    ( (i : I) → is-iso-Category C (f i)) ≃
+    ( is-iso-Category (function-Category I C) f)
+  equiv-is-iso-function-is-fiberwise-iso-Category =
+    equiv-is-iso-Π-is-fiberwise-iso-Category I (λ _ → C)
+
+  is-equiv-fiberwise-iso-iso-function-Category :
+    is-equiv fiberwise-iso-iso-function-Category
+  is-equiv-fiberwise-iso-iso-function-Category =
+    is-equiv-fiberwise-iso-iso-Π-Category I (λ _ → C)
+
+  equiv-fiberwise-iso-iso-function-Category :
+    ( iso-Category (function-Category I C) x y) ≃
+    ( (i : I) → iso-Category C (x i) (y i))
+  equiv-fiberwise-iso-iso-function-Category =
+    equiv-fiberwise-iso-iso-Π-Category I (λ _ → C)
+
+  is-equiv-iso-function-fiberwise-iso-Category :
+    is-equiv iso-function-fiberwise-iso-Category
+  is-equiv-iso-function-fiberwise-iso-Category =
+    is-equiv-iso-Π-fiberwise-iso-Category I (λ _ → C)
+
+  equiv-iso-function-fiberwise-iso-Category :
+    ( (i : I) → iso-Category C (x i) (y i)) ≃
+    ( iso-Category (function-Category I C) x y)
+  equiv-iso-function-fiberwise-iso-Category =
+    equiv-iso-Π-fiberwise-iso-Category I (λ _ → C)
 ```
