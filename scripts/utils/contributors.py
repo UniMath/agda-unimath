@@ -4,6 +4,11 @@ import tomli
 CONTRIBUTORS_FILE = 'scripts/contributors_data.toml'
 
 
+def github_page_for_contributor(contributor):
+    github_username = contributor.get('github')
+    return github_username and f'https://github.com/{github_username}'
+
+
 def parse_contributors_file(path=CONTRIBUTORS_FILE):
     with open(path, 'rb') as f:
         return tomli.load(f)['contributors']

@@ -3,7 +3,7 @@
 # $ ./scripts/generate_contributors.py
 
 import subprocess
-from utils.contributors import CONTRIBUTORS_FILE, parse_contributors_file, sorted_authors_from_raw_shortlog_lines
+from utils.contributors import CONTRIBUTORS_FILE, github_page_for_contributor, parse_contributors_file, sorted_authors_from_raw_shortlog_lines
 
 
 template = """
@@ -24,15 +24,11 @@ how to help. We are happy to help you get started.
 """
 
 
-def github_page_for_username(username):
-    return f'https://github.com/{username}'
-
-
 def format_contributor(contributor):
     display_name = contributor['displayName']
-    github_username = contributor.get('github')
-    if github_username:
-        return f'- [{display_name}]({github_page_for_username(github_username)})'
+    github_page = github_page_for_contributor(contributor)
+    if github_page:
+        return f'- [{display_name}]({github_page})'
     return f'- {display_name}'
 
 
