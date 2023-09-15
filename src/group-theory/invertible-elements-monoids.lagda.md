@@ -15,6 +15,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
@@ -267,15 +268,16 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  is-left-invertible-unit-Monoid :
+  is-left-invertible-element-unit-Monoid :
     is-left-invertible-element-Monoid M (unit-Monoid M)
-  pr1 is-left-invertible-unit-Monoid = unit-Monoid M
-  pr2 is-left-invertible-unit-Monoid = left-unit-law-mul-Monoid M (unit-Monoid M)
+  pr1 is-left-invertible-element-unit-Monoid = unit-Monoid M
+  pr2 is-left-invertible-element-unit-Monoid =
+    left-unit-law-mul-Monoid M (unit-Monoid M)
 
-  is-right-invertible-unit-Monoid :
+  is-right-invertible-element-unit-Monoid :
     is-right-invertible-element-Monoid M (unit-Monoid M)
-  pr1 is-right-invertible-unit-Monoid = unit-Monoid M
-  pr2 is-right-invertible-unit-Monoid =
+  pr1 is-right-invertible-element-unit-Monoid = unit-Monoid M
+  pr2 is-right-invertible-element-unit-Monoid =
     left-unit-law-mul-Monoid M (unit-Monoid M)
 
   is-invertible-element-unit-Monoid :
@@ -286,56 +288,6 @@ module _
     left-unit-law-mul-Monoid M (unit-Monoid M)
   pr2 (pr2 is-invertible-element-unit-Monoid) =
     left-unit-law-mul-Monoid M (unit-Monoid M)
-```
-
-### The inverse of an invertible element is invertible
-
-```agda
-module _
-  {l : Level} (M : Monoid l)
-  where
-
-  is-invertible-element-inv-is-invertible-element-Monoid :
-    {x : type-Monoid M} (H : is-invertible-element-Monoid M x) →
-    is-invertible-element-Monoid M (inv-is-invertible-element-Monoid M H)
-  pr1 (is-invertible-element-inv-is-invertible-element-Monoid {x} H) = x
-  pr1 (pr2 (is-invertible-element-inv-is-invertible-element-Monoid H)) =
-    is-left-inverse-inv-is-invertible-element-Monoid M H
-  pr2 (pr2 (is-invertible-element-inv-is-invertible-element-Monoid H)) =
-    is-right-inverse-inv-is-invertible-element-Monoid M H
-```
-
-### Any homomorphism of monoids sends invertible elements to invertible elements
-
-```agda
-module _
-  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
-  (f : type-hom-Monoid M N)
-  where
-
-  is-invertible-value-hom-Monoid :
-    {x : type-Monoid M} →
-    is-invertible-element-Monoid M x →
-    is-invertible-element-Monoid N (map-hom-Monoid M N f x)
-  pr1 (is-invertible-value-hom-Monoid (y , p , q)) =
-    map-hom-Monoid M N f y
-  pr1 (pr2 (is-invertible-value-hom-Monoid (y , p , q))) =
-    ( inv (preserves-mul-hom-Monoid M N f _ y)) ∙
-    ( ap (map-hom-Monoid M N f) p) ∙
-    ( preserves-unit-hom-Monoid M N f)
-  pr2 (pr2 (is-invertible-value-hom-Monoid (y , p , q))) =
-    ( inv (preserves-mul-hom-Monoid M N f y _)) ∙
-    ( ap (map-hom-Monoid M N f) q) ∙
-    ( preserves-unit-hom-Monoid M N f)
-```
-
-### Given an isomorphism `f : M ≅ N` of monoids, `x : M` is invertible if and only if `f x : N` is invertible
-
-```agda
-module _
-  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
-  (f : iso-Monoid M N)
-  where
 ```
 
 ### Invertible elements are closed under multiplication
@@ -395,3 +347,77 @@ module _
         ( is-left-invertible-is-invertible-element-Monoid M x H)
         ( is-left-invertible-is-invertible-element-Monoid M y K))
 ```
+
+### The inverse of an invertible element is invertible
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-invertible-element-inv-is-invertible-element-Monoid :
+    {x : type-Monoid M} (H : is-invertible-element-Monoid M x) →
+    is-invertible-element-Monoid M (inv-is-invertible-element-Monoid M H)
+  pr1 (is-invertible-element-inv-is-invertible-element-Monoid {x} H) = x
+  pr1 (pr2 (is-invertible-element-inv-is-invertible-element-Monoid H)) =
+    is-left-inverse-inv-is-invertible-element-Monoid M H
+  pr2 (pr2 (is-invertible-element-inv-is-invertible-element-Monoid H)) =
+    is-right-inverse-inv-is-invertible-element-Monoid M H
+```
+
+### Any homomorphism of monoids sends invertible elements to invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  (f : type-hom-Monoid M N)
+  where
+
+  preserves-invertible-elements-hom-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid M x →
+    is-invertible-element-Monoid N (map-hom-Monoid M N f x)
+  pr1 (preserves-invertible-elements-hom-Monoid (y , p , q)) =
+    map-hom-Monoid M N f y
+  pr1 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
+    ( inv (preserves-mul-hom-Monoid M N f _ y)) ∙
+    ( ap (map-hom-Monoid M N f) p) ∙
+    ( preserves-unit-hom-Monoid M N f)
+  pr2 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
+    ( inv (preserves-mul-hom-Monoid M N f y _)) ∙
+    ( ap (map-hom-Monoid M N f) q) ∙
+    ( preserves-unit-hom-Monoid M N f)
+```
+
+### Given an isomorphism `f : M ≅ N` of monoids, `x : M` is invertible if and only if `f x : N` is invertible
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  (f : iso-Monoid M N)
+  where
+
+  preserves-invertible-elements-iso-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid M x →
+    is-invertible-element-Monoid N (map-iso-Monoid M N f x)
+  preserves-invertible-elements-iso-Monoid =
+    preserves-invertible-elements-hom-Monoid M N (hom-iso-Monoid M N f)
+
+  preserves-invertible-elements-inv-iso-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid N (map-iso-Monoid M N f x) →
+    is-invertible-element-Monoid M x
+  preserves-invertible-elements-inv-iso-Monoid H =
+    tr
+      ( is-invertible-element-Monoid M)
+      ( is-retraction-map-inv-iso-Monoid M N f _)
+      ( preserves-invertible-elements-hom-Monoid N M
+        ( hom-inv-iso-Monoid M N f)
+        ( H))
+```
+
+## See also
+
+- The core of a monoid is defined in
+  [`group-theory.cores-monoids`](group-theory.cores-monoids.md).

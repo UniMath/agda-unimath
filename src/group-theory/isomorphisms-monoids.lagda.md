@@ -9,6 +9,8 @@ module group-theory.isomorphisms-monoids where
 ```agda
 open import category-theory.isomorphisms-in-large-precategories
 
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -23,7 +25,8 @@ open import group-theory.precategory-of-monoids
 
 ## Idea
 
-An **isomorphism** of [monoids](group-theory.monoids.md) is an invertible [homomorphism of monoids](group-theory.homomorphisms-monoids.md).
+An **isomorphism** of [monoids](group-theory.monoids.md) is an invertible
+[homomorphism of monoids](group-theory.homomorphisms-monoids.md).
 
 ## Definitions
 
@@ -86,6 +89,17 @@ module _
   hom-iso-Monoid =
     hom-iso-Large-Precategory Monoid-Large-Precategory M N
 
+  map-iso-Monoid :
+    iso-Monoid → type-Monoid M → type-Monoid N
+  map-iso-Monoid f = map-hom-Monoid M N (hom-iso-Monoid f)
+
+  preserves-mul-iso-Monoid :
+    (f : iso-Monoid) (x y : type-Monoid M) →
+    map-iso-Monoid f (mul-Monoid M x y) ＝
+    mul-Monoid N (map-iso-Monoid f x) (map-iso-Monoid f y)
+  preserves-mul-iso-Monoid f =
+    preserves-mul-hom-Monoid M N (hom-iso-Monoid f)
+
   is-iso-iso-Monoid :
     (f : iso-Monoid) →
     is-iso-hom-Monoid M N (hom-iso-Monoid f)
@@ -97,23 +111,49 @@ module _
   hom-inv-iso-Monoid =
     hom-inv-iso-Large-Precategory Monoid-Large-Precategory M N
 
+  map-inv-iso-Monoid :
+    iso-Monoid → type-Monoid N → type-Monoid M
+  map-inv-iso-Monoid f =
+    map-hom-Monoid N M (hom-inv-iso-Monoid f)
+
+  preserves-mul-inv-iso-Monoid :
+    (f : iso-Monoid) (x y : type-Monoid N) →
+    map-inv-iso-Monoid f (mul-Monoid N x y) ＝
+    mul-Monoid M (map-inv-iso-Monoid f x) (map-inv-iso-Monoid f y)
+  preserves-mul-inv-iso-Monoid f =
+    preserves-mul-hom-Monoid N M (hom-inv-iso-Monoid f)
+
   is-section-hom-inv-iso-Monoid :
     (f : iso-Monoid) →
-    ( comp-hom-Monoid N M N
-      ( hom-iso-Monoid f)
-      ( hom-inv-iso-Monoid f)) ＝
-    ( id-hom-Monoid N)
+    comp-hom-Monoid N M N (hom-iso-Monoid f) (hom-inv-iso-Monoid f) ＝
+    id-hom-Monoid N
   is-section-hom-inv-iso-Monoid =
     is-section-hom-inv-iso-Large-Precategory Monoid-Large-Precategory M N
 
+  is-section-map-inv-iso-Monoid :
+    (f : iso-Monoid) →
+    map-iso-Monoid f ∘ map-inv-iso-Monoid f ~ id
+  is-section-map-inv-iso-Monoid f =
+    htpy-eq-hom-Monoid N N
+      ( comp-hom-Monoid N M N (hom-iso-Monoid f) (hom-inv-iso-Monoid f))
+      ( id-hom-Monoid N)
+      ( is-section-hom-inv-iso-Monoid f)
+
   is-retraction-hom-inv-iso-Monoid :
     (f : iso-Monoid) →
-    ( comp-hom-Monoid M N M
-      ( hom-inv-iso-Monoid f)
-      ( hom-iso-Monoid f)) ＝
-    ( id-hom-Monoid M)
+    comp-hom-Monoid M N M (hom-inv-iso-Monoid f) (hom-iso-Monoid f) ＝
+    id-hom-Monoid M
   is-retraction-hom-inv-iso-Monoid =
     is-retraction-hom-inv-iso-Large-Precategory Monoid-Large-Precategory M N
+
+  is-retraction-map-inv-iso-Monoid :
+    (f : iso-Monoid) →
+    map-inv-iso-Monoid f ∘ map-iso-Monoid f ~ id
+  is-retraction-map-inv-iso-Monoid f =
+    htpy-eq-hom-Monoid M M
+      ( comp-hom-Monoid M N M (hom-inv-iso-Monoid f) (hom-iso-Monoid f))
+      ( id-hom-Monoid M)
+      ( is-retraction-hom-inv-iso-Monoid f)
 ```
 
 ## Examples

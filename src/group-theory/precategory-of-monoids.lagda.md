@@ -7,8 +7,8 @@ module group-theory.precategory-of-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 

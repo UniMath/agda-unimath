@@ -7,16 +7,22 @@ module group-theory.cores-monoids where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-large-precategories
+
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
+open import group-theory.precategory-of-groups
+open import group-theory.precategory-of-monoids
 open import group-theory.semigroups
 open import group-theory.submonoids
 ```
@@ -143,9 +149,99 @@ module _
 
 ### The core of a monoid is a functorial construction
 
-This remains to be formalized.
+#### The functorial action of `core-Monoid`
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : type-hom-Monoid M N)
+  where
+
+  map-core-Monoid : type-core-Monoid M → type-core-Monoid N
+  pr1 (map-core-Monoid x) = map-hom-Monoid M N f (pr1 x)
+  pr2 (map-core-Monoid x) =
+    preserves-invertible-elements-hom-Monoid M N f (pr2 x)
+
+  preserves-mul-hom-core-Monoid :
+    (x y : type-core-Monoid M) →
+    map-core-Monoid (mul-core-Monoid M x y) ＝
+    mul-core-Monoid N (map-core-Monoid x) (map-core-Monoid y)
+  preserves-mul-hom-core-Monoid x y =
+    eq-type-subtype
+      ( subtype-core-Monoid N)
+      ( preserves-mul-hom-Monoid M N f (pr1 x) (pr1 y))
+
+  hom-core-Monoid : type-hom-Group (core-Monoid M) (core-Monoid N)
+  pr1 hom-core-Monoid = map-core-Monoid
+  pr2 hom-core-Monoid = preserves-mul-hom-core-Monoid
+
+  preserves-unit-hom-core-Monoid :
+    map-core-Monoid (unit-core-Monoid M) ＝ unit-core-Monoid N
+  preserves-unit-hom-core-Monoid =
+    preserves-unit-hom-Group (core-Monoid M) (core-Monoid N) hom-core-Monoid
+
+  preserves-inv-hom-core-Monoid :
+    (x : type-core-Monoid M) →
+    map-core-Monoid (inv-core-Monoid M x) ＝
+    inv-core-Monoid N (map-core-Monoid x)
+  preserves-inv-hom-core-Monoid =
+    preserves-inv-hom-Group (core-Monoid M) (core-Monoid N) hom-core-Monoid
+```
+
+#### The functorial laws of `core-Monoid`
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  preserves-id-hom-core-Monoid :
+    hom-core-Monoid M M (id-hom-Monoid M) ＝ id-hom-Group (core-Monoid M)
+  preserves-id-hom-core-Monoid =
+    eq-htpy-hom-Group
+      ( core-Monoid M)
+      ( core-Monoid M)
+      ( λ _ → eq-type-subtype (subtype-core-Monoid M) refl)
+
+module _
+  {l1 l2 l3 : Level} (M : Monoid l1) (N : Monoid l2) (K : Monoid l3)
+  where
+
+  preserves-comp-hom-core-Monoid :
+    (g : type-hom-Monoid N K) (f : type-hom-Monoid M N) →
+    hom-core-Monoid M K (comp-hom-Monoid M N K g f) ＝
+    comp-hom-Group
+      ( core-Monoid M)
+      ( core-Monoid N)
+      ( core-Monoid K)
+      ( hom-core-Monoid N K g)
+      ( hom-core-Monoid M N f)
+  preserves-comp-hom-core-Monoid g f =
+    eq-htpy-hom-Group
+      ( core-Monoid M)
+      ( core-Monoid K)
+      ( λ _ → eq-type-subtype (subtype-core-Monoid K) refl)
+```
+
+#### The functor `core-Monoid`
+
+```agda
+functor-core-Monoid :
+  functor-Large-Precategory Monoid-Large-Precategory Group-Large-Precategory id
+obj-functor-Large-Precategory
+  functor-core-Monoid =
+  core-Monoid
+hom-functor-Large-Precategory
+  functor-core-Monoid {X = M} {Y = N} =
+  hom-core-Monoid M N
+preserves-comp-functor-Large-Precategory
+  functor-core-Monoid {X = M} {Y = N} {Z = K} =
+  preserves-comp-hom-core-Monoid M N K
+preserves-id-functor-Large-Precategory
+  functor-core-Monoid {X = M} =
+  preserves-id-hom-core-Monoid M
+```
 
 ### The core functor is right adjoint to the forgetful functor from groups to monoids
 
-This remains to be formalized. This forgetful functor also has a
-left adjoint, corresponding to _groupification_ of the monoid.
+This remains to be formalized. This forgetful functor also has a left adjoint,
+corresponding to _groupification_ of the monoid.
