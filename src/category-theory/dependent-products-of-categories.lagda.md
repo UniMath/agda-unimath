@@ -47,18 +47,10 @@ module _
     is-equiv-htpy
       ( _)
       ( λ {refl → refl})
-      ( is-equiv-comp
-        ( _)
-        ( htpy-eq)
-        ( funext x y)
-        ( is-equiv-comp
-          ( iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C))
-          ( map-Π (λ i → iso-eq-Category (C i)))
-          ( is-equiv-map-Π-is-fiberwise-equiv
-            ( λ i → is-category-Category (C i) (x i) (y i)))
-          ( is-equiv-iso-Π-fiberwise-iso-Precategory
-            ( I)
-            ( precategory-Category ∘ C))))
+      ( is-equiv-map-equiv
+        ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
+          equiv-Π-equiv-family (λ i → equiv-iso-eq-Category (C i)) ∘e
+          equiv-funext))
 
   Π-Category : Category (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Category = Π-Precategory I (precategory-Category ∘ C)
