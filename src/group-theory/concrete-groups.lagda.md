@@ -88,13 +88,15 @@ module _
   pr1 set-Concrete-Group = type-Concrete-Group
   pr2 set-Concrete-Group = is-set-type-Concrete-Group
 
-  is-1-type-classifying-type-Concrete-Group :
-    is-trunc one-𝕋 classifying-type-Concrete-Group
-  is-1-type-classifying-type-Concrete-Group X Y =
-    apply-universal-property-trunc-Prop
-      ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
-      ( is-set-Prop (X ＝ Y))
-      ( λ { refl →
+  abstract
+    is-1-type-classifying-type-Concrete-Group :
+      is-trunc one-𝕋 classifying-type-Concrete-Group
+    is-1-type-classifying-type-Concrete-Group X Y =
+      apply-universal-property-trunc-Prop
+        ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
+        ( is-set-Prop (X ＝ Y))
+        ( λ
+          { refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
               ( is-set-Prop (shape-Concrete-Group ＝ Y))
@@ -188,15 +190,4 @@ module _
     right-inverse-law-mul-Concrete-Group
   pr2 (pr2 (pr2 (pr2 op-abstract-group-Concrete-Group))) =
     left-inverse-law-mul-Concrete-Group
-```
-
-## Example
-
-### The trivial concrete group
-
-```agda
-trivial-Concrete-Group : {l : Level} → Concrete-Group l
-pr1 trivial-Concrete-Group = trivial-∞-Group
-pr2 trivial-Concrete-Group =
-  is-trunc-is-contr (one-𝕋) (is-contr-raise-unit) (raise-star) (raise-star)
 ```

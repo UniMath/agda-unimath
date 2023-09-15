@@ -114,13 +114,3 @@ module _
   right-inverse-law-mul-∞-Group =
     right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
 ```
-
-### The trivial higher group
-
-```agda
-trivial-∞-Group : {l : Level} → ∞-Group l
-pr1 (pr1 (trivial-∞-Group {l})) = raise-unit l
-pr2 (pr1 trivial-∞-Group) = raise-star
-pr2 (trivial-∞-Group {l}) =
-  is-0-connected-is-contr (raise-unit l) is-contr-raise-unit
-```

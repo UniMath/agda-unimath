@@ -164,6 +164,7 @@ open import group-theory.symmetric-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public
+open import group-theory.trivial-concrete-groups public
 open import group-theory.trivial-group-homomorphisms public
 open import group-theory.trivial-subgroups public
 open import group-theory.unordered-tuples-of-elements-commutative-monoids public
