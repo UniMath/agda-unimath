@@ -30,13 +30,13 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  has-left-inverse-Commutative-Ring : type-Commutative-Ring A → UU l
-  has-left-inverse-Commutative-Ring =
-    has-left-inverse-Ring (ring-Commutative-Ring A)
+  is-left-invertible-element-Commutative-Ring : type-Commutative-Ring A → UU l
+  is-left-invertible-element-Commutative-Ring =
+    is-left-invertible-element-Ring (ring-Commutative-Ring A)
 
-  has-right-inverse-Commutative-Ring : type-Commutative-Ring A → UU l
-  has-right-inverse-Commutative-Ring =
-    has-right-inverse-Ring (ring-Commutative-Ring A)
+  is-right-invertible-element-Commutative-Ring : type-Commutative-Ring A → UU l
+  is-right-invertible-element-Commutative-Ring =
+    is-right-invertible-element-Ring (ring-Commutative-Ring A)
 
   has-two-sided-inverse-Commutative-Ring : type-Commutative-Ring A → UU l
   has-two-sided-inverse-Commutative-Ring =

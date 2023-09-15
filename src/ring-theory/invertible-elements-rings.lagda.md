@@ -27,24 +27,86 @@ a two-sided multiplicative inverse. Such elements are also called the
 **(multiplicative) units** of the ring. The [set](foundation.sets.md) of units
 of any ring forms a [group](group-theory.groups.md).
 
-## Definition
+## Definitions
+
+### Left invertible elements of rings
 
 ```agda
 module _
   {l : Level} (R : Ring l)
   where
 
-  has-left-inverse-Ring : type-Ring R → UU l
-  has-left-inverse-Ring x =
-    Σ (type-Ring R) (λ y → Id (mul-Ring R y x) (one-Ring R))
+  is-left-inverse-element-Ring : (x y : type-Ring R) → UU l
+  is-left-inverse-element-Ring =
+    is-left-inverse-element-Monoid (multiplicative-monoid-Ring R)
 
-  has-right-inverse-Ring : type-Ring R → UU l
-  has-right-inverse-Ring x =
-    Σ (type-Ring R) (λ y → Id (mul-Ring R x y) (one-Ring R))
+  is-left-invertible-element-Ring : type-Ring R → UU l
+  is-left-invertible-element-Ring =
+    is-left-invertible-element-Monoid (multiplicative-monoid-Ring R)
+
+module _
+  {l : Level} (R : Ring l) {x : type-Ring R}
+  where
+
+  retraction-is-left-invertible-element-Ring :
+    is-left-invertible-element-Ring R x → type-Ring R
+  retraction-is-left-invertible-element-Ring =
+    retraction-is-left-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-left-inverse-retraction-is-left-invertible-element-Ring :
+    (H : is-left-invertible-element-Ring R x) →
+    is-left-inverse-element-Ring R x
+      ( retraction-is-left-invertible-element-Ring H)
+  is-left-inverse-retraction-is-left-invertible-element-Ring =
+    is-left-inverse-retraction-is-left-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### Right invertible elements of rings
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-right-inverse-element-Ring : (x y : type-Ring R) → UU l
+  is-right-inverse-element-Ring =
+    is-right-inverse-element-Monoid (multiplicative-monoid-Ring R)
+
+  is-right-invertible-element-Ring : type-Ring R → UU l
+  is-right-invertible-element-Ring =
+    is-right-invertible-element-Monoid (multiplicative-monoid-Ring R)
+
+module _
+  {l : Level} (R : Ring l) {x : type-Ring R}
+  where
+
+  section-is-right-invertible-element-Ring :
+    is-right-invertible-element-Ring R x → type-Ring R
+  section-is-right-invertible-element-Ring =
+    section-is-right-invertible-element-Monoid (multiplicative-monoid-Ring R)
+
+  is-right-inverse-section-is-right-invertible-element-Ring :
+    (H : is-right-invertible-element-Ring R x) →
+    is-right-inverse-element-Ring R x
+      ( section-is-right-invertible-element-Ring H)
+  is-right-inverse-section-is-right-invertible-element-Ring =
+    is-right-inverse-section-is-right-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### Invertible elements of rings
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
 
   has-two-sided-inverse-Ring : type-Ring R → UU l
   has-two-sided-inverse-Ring x =
-    ( has-left-inverse-Ring x) × (has-right-inverse-Ring x)
+    ( is-left-invertible-element-Ring R x) ×
+    ( is-right-invertible-element-Ring R x)
 
   is-invertible-element-ring-Prop : type-Ring R → Prop l
   is-invertible-element-ring-Prop =
