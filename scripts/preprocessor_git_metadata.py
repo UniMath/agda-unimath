@@ -91,7 +91,8 @@ def get_author_element_for_file(filename):
             continue
         author_commits[author['displayName']] += commit_count
     author_names = sorted(author_commits, key=author_commits.get, reverse=True)
-    attribution_text = ', '.join(author_names[:-1]) + (len(author_names) > 1) * ' and ' + author_names[-1]
+    attribution_text = ', '.join(
+        author_names[:-1]) + (len(author_names) > 1) * ' and ' + author_names[-1]
 
     file_log_output = subprocess.run([
         'git', 'log',
