@@ -23,8 +23,10 @@ Contributions come in many forms, please ask us if you are not sure
 how to help. We are happy to help you get started.
 """
 
+
 def github_page_for_username(username):
     return f'https://github.com/{username}'
+
 
 def format_contributor(contributor):
     display_name = contributor['displayName']
@@ -32,6 +34,7 @@ def format_contributor(contributor):
     if github_username:
         return f'- [{display_name}]({github_page_for_username(github_username)})'
     return f'- {display_name}'
+
 
 if __name__ == '__main__':
     contributors_data = parse_contributors_file()
@@ -44,7 +47,8 @@ if __name__ == '__main__':
         'HEAD'
     ], capture_output=True, text=True, check=True).stdout.splitlines()
 
-    sorted_authors = sorted_authors_from_raw_shortlog_lines(git_log_output, contributors_data)
+    sorted_authors = sorted_authors_from_raw_shortlog_lines(
+        git_log_output, contributors_data)
     output = template.format(
         names='\n'.join((format_contributor(c) for c in sorted_authors)),
         CONTRIBUTORS_FILE=CONTRIBUTORS_FILE

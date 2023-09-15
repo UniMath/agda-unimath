@@ -3,17 +3,21 @@ import tomli
 
 CONTRIBUTORS_FILE = 'scripts/contributors_data.toml'
 
-def parse_contributors_file(path = CONTRIBUTORS_FILE):
+
+def parse_contributors_file(path=CONTRIBUTORS_FILE):
     with open(path, 'rb') as f:
         return tomli.load(f)['contributors']
+
 
 def print_skipping_contributor_warning(contributor):
     print('Warning: not attributing changes to', contributor,
           f'. If you want your work to be attributed to you, add yourself to {CONTRIBUTORS_FILE}',
           file=sys.stderr)
 
+
 def get_real_author_index(raw_username, contributors):
     return next((index for (index, c) in enumerate(contributors) if raw_username in c['usernames']), None)
+
 
 def sorted_authors_from_raw_shortlog_lines(shortlog, contributors):
     author_commits = defaultdict(int)
@@ -25,5 +29,6 @@ def sorted_authors_from_raw_shortlog_lines(shortlog, contributors):
             print_skipping_contributor_warning(raw_author)
             continue
         author_commits[author_index] += commit_count
-    sorted_author_indices = sorted(author_commits, key=author_commits.get, reverse=True)
+    sorted_author_indices = sorted(
+        author_commits, key=author_commits.get, reverse=True)
     return [contributors[author_index] for author_index in sorted_author_indices]
