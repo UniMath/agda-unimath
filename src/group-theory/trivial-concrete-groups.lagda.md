@@ -23,8 +23,8 @@ open import higher-group-theory.trivial-higher-groups
 
 ## Idea
 
-A [concrete group](higher-group-theory.concrete-groups.md) `G` is **trivial** if
-its classifying type is contractible.
+A [concrete group](group-theory.concrete-groups.md) `G` is **trivial** if its
+classifying type is contractible.
 
 ## Definitions
 
