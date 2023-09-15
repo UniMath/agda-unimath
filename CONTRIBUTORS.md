@@ -32,6 +32,7 @@ We are grateful to the following people for their contributions to the library.
 - [Matthias Hutzler](https://github.com/MatthiasHu)
 - [Nathan van Doorn](https://github.com/Taneb)
 - [Pierre Cagne](https://github.com/pierrecagne)
+- [Tom de Jong](https://github.com/tomdjong)
 
 Help us to improve the library by contributing to the project! Contributions
 come in many forms, please ask us if you are not sure how to help. We are happy
