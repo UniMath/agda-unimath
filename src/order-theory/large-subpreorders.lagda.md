@@ -7,7 +7,6 @@ module order-theory.large-subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
 open import foundation.propositions

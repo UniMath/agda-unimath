@@ -10,7 +10,6 @@ module category-theory.endomorphisms-in-categories where
 open import category-theory.categories
 open import category-theory.endomorphisms-in-precategories
 
-open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels

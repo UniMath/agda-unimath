@@ -7,21 +7,15 @@ module trees.fibers-directed-trees where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.raising-universe-levels
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
 open import graph-theory.fibers-directed-graphs
-open import graph-theory.walks-directed-graphs
 
 open import trees.bases-directed-trees
 open import trees.directed-trees

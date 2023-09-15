@@ -7,10 +7,7 @@ module order-theory.large-subsuplattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.large-posets
