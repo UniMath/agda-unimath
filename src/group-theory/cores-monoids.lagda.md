@@ -225,19 +225,19 @@ module _
 #### The functor `core-Monoid`
 
 ```agda
-functor-core-Monoid :
+core-monoid-functor-Large-Precategory :
   functor-Large-Precategory Monoid-Large-Precategory Group-Large-Precategory id
 obj-functor-Large-Precategory
-  functor-core-Monoid =
+  core-monoid-functor-Large-Precategory =
   core-Monoid
 hom-functor-Large-Precategory
-  functor-core-Monoid {X = M} {Y = N} =
+  core-monoid-functor-Large-Precategory {X = M} {Y = N} =
   hom-core-Monoid M N
 preserves-comp-functor-Large-Precategory
-  functor-core-Monoid {X = M} {Y = N} {Z = K} =
+  core-monoid-functor-Large-Precategory {X = M} {Y = N} {Z = K} =
   preserves-comp-hom-core-Monoid M N K
 preserves-id-functor-Large-Precategory
-  functor-core-Monoid {X = M} =
+  core-monoid-functor-Large-Precategory {X = M} =
   preserves-id-hom-core-Monoid M
 ```
 
