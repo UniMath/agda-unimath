@@ -116,12 +116,6 @@ module _
   is-category-Category :
     is-category-Precategory precategory-Category
   is-category-Category = pr2 C
-
-  extensionality-obj-Category :
-    {x y : obj-Category} → (x ＝ y) ≃ iso-Precategory precategory-Category x y
-  pr1 (extensionality-obj-Category {x} {y}) =
-    iso-eq-Precategory precategory-Category x y
-  pr2 (extensionality-obj-Category {x} {y}) = is-category-Category x y
 ```
 
 ## Properties
