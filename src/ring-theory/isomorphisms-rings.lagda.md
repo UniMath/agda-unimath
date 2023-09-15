@@ -29,7 +29,9 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-monoids
 open import group-theory.isomorphisms-abelian-groups
+open import group-theory.isomorphisms-monoids
 
 open import ring-theory.homomorphisms-rings
 open import ring-theory.precategory-of-rings
@@ -219,6 +221,38 @@ module _
       ( comp-hom-Ring R S R (hom-inv-iso-Ring f) (hom-iso-Ring f))
       ( id-hom-Ring R)
       ( is-retraction-hom-inv-iso-Ring f)
+
+  iso-multiplicative-monoid-iso-Ring :
+    (f : iso-Ring) →
+    iso-Monoid (multiplicative-monoid-Ring R) (multiplicative-monoid-Ring S)
+  pr1 (iso-multiplicative-monoid-iso-Ring f) =
+    hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f)
+  pr1 (pr2 (iso-multiplicative-monoid-iso-Ring f)) =
+    hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f)
+  pr1 (pr2 (pr2 (iso-multiplicative-monoid-iso-Ring f))) =
+    eq-htpy-hom-Monoid
+      ( multiplicative-monoid-Ring S)
+      ( multiplicative-monoid-Ring S)
+      ( comp-hom-Monoid
+        ( multiplicative-monoid-Ring S)
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f))
+        ( hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f)))
+      ( id-hom-Monoid (multiplicative-monoid-Ring S))
+      ( is-section-map-inv-iso-Ring f)
+  pr2 (pr2 (pr2 (iso-multiplicative-monoid-iso-Ring f))) =
+    eq-htpy-hom-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring R)
+      ( comp-hom-Monoid
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( multiplicative-monoid-Ring R)
+        ( hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f))
+        ( hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f)))
+      ( id-hom-Monoid (multiplicative-monoid-Ring R))
+      ( is-retraction-map-inv-iso-Ring f)
 ```
 
 ### The identity isomorphism of rings

@@ -8,13 +8,17 @@ module ring-theory.invertible-elements-rings where
 
 ```agda
 open import foundation.cartesian-product-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.invertible-elements-monoids
 
+open import ring-theory.homomorphisms-rings
+open import ring-theory.isomorphisms-rings
 open import ring-theory.rings
 ```
 
@@ -100,24 +104,267 @@ module _
 
 ```agda
 module _
+  {l : Level} (R : Ring l) (x : type-Ring R)
+  where
+
+  is-inverse-element-Ring : type-Ring R → UU l
+  is-inverse-element-Ring =
+    is-inverse-element-Monoid (multiplicative-monoid-Ring R) x
+
+  is-invertible-element-Ring : UU l
+  is-invertible-element-Ring =
+    is-invertible-element-Monoid (multiplicative-monoid-Ring R) x
+
+module _
+  {l : Level} (R : Ring l) {x : type-Ring R}
+  where
+
+  inv-is-invertible-element-Ring :
+    is-invertible-element-Ring R x → type-Ring R
+  inv-is-invertible-element-Ring =
+    inv-is-invertible-element-Monoid (multiplicative-monoid-Ring R)
+
+  is-right-inverse-inv-is-invertible-element-Ring :
+    (H : is-invertible-element-Ring R x) →
+    is-right-inverse-element-Ring R x (inv-is-invertible-element-Ring H)
+  is-right-inverse-inv-is-invertible-element-Ring =
+    is-right-inverse-inv-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-left-inverse-inv-is-invertible-element-Ring :
+    (H : is-invertible-element-Ring R x) →
+    is-left-inverse-element-Ring R x (inv-is-invertible-element-Ring H)
+  is-left-inverse-inv-is-invertible-element-Ring =
+    is-left-inverse-inv-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+## Properties
+
+### Being an invertible element is a property
+
+```agda
+module _
   {l : Level} (R : Ring l)
   where
 
-  has-two-sided-inverse-Ring : type-Ring R → UU l
-  has-two-sided-inverse-Ring x =
-    ( is-left-invertible-element-Ring R x) ×
-    ( is-right-invertible-element-Ring R x)
+  is-prop-is-invertible-element-Ring :
+    (x : type-Ring R) → is-prop (is-invertible-element-Ring R x)
+  is-prop-is-invertible-element-Ring =
+    is-prop-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
 
   is-invertible-element-ring-Prop : type-Ring R → Prop l
   is-invertible-element-ring-Prop =
-    is-invertible-element-monoid-Prop (multiplicative-monoid-Ring R)
-
-  is-invertible-element-Ring : type-Ring R → UU l
-  is-invertible-element-Ring x =
-    type-Prop (is-invertible-element-ring-Prop x)
-
-  is-prop-is-invertible-element-Ring :
-    (x : type-Ring R) → is-prop (is-invertible-element-Ring x)
-  is-prop-is-invertible-element-Ring x =
-    is-prop-type-Prop (is-invertible-element-ring-Prop x)
+    is-invertible-element-monoid-Prop
+      ( multiplicative-monoid-Ring R)
 ```
+
+### Inverses are left/right inverses
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-left-invertible-is-invertible-element-Ring :
+    (x : type-Ring R) →
+    is-invertible-element-Ring R x → is-left-invertible-element-Ring R x
+  is-left-invertible-is-invertible-element-Ring =
+    is-left-invertible-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-right-invertible-is-invertible-element-Ring :
+    (x : type-Ring R) →
+    is-invertible-element-Ring R x → is-right-invertible-element-Ring R x
+  is-right-invertible-is-invertible-element-Ring =
+    is-right-invertible-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### The inverse invertible element
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-right-invertible-left-inverse-Ring :
+    (x : type-Ring R) (lx : is-left-invertible-element-Ring R x) →
+    is-right-invertible-element-Ring R (pr1 lx)
+  is-right-invertible-left-inverse-Ring =
+    is-right-invertible-left-inverse-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-left-invertible-right-inverse-Ring :
+    (x : type-Ring R) (rx : is-right-invertible-element-Ring R x) →
+    is-left-invertible-element-Ring R (pr1 rx)
+  is-left-invertible-right-inverse-Ring =
+    is-left-invertible-right-inverse-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-invertible-element-inverse-Ring :
+    (x : type-Ring R) (x' : is-invertible-element-Ring R x) →
+    is-invertible-element-Ring R (pr1 x')
+  is-invertible-element-inverse-Ring =
+    is-invertible-element-inverse-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### Any invertible element of a monoid has a contractible type of right inverses
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-contr-is-right-invertible-element-Ring :
+    (x : type-Ring R) → is-invertible-element-Ring R x →
+    is-contr (is-right-invertible-element-Ring R x)
+  is-contr-is-right-invertible-element-Ring =
+    is-contr-is-right-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### Any invertible element of a monoid has a contractible type of left inverses
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-contr-is-left-invertible-Ring :
+    (x : type-Ring R) → is-invertible-element-Ring R x →
+    is-contr (is-left-invertible-element-Ring R x)
+  is-contr-is-left-invertible-Ring =
+    is-contr-is-left-invertible-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### The unit of a monoid is invertible
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-left-invertible-element-one-Ring :
+    is-left-invertible-element-Ring R (one-Ring R)
+  is-left-invertible-element-one-Ring =
+    is-left-invertible-element-unit-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-right-invertible-element-one-Ring :
+    is-right-invertible-element-Ring R (one-Ring R)
+  is-right-invertible-element-one-Ring =
+    is-right-invertible-element-unit-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-invertible-element-one-Ring :
+    is-invertible-element-Ring R (one-Ring R)
+  is-invertible-element-one-Ring =
+    is-invertible-element-unit-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### Invertible elements are closed under multiplication
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-left-invertible-element-mul-Ring :
+    (x y : type-Ring R) →
+    is-left-invertible-element-Ring R x →
+    is-left-invertible-element-Ring R y →
+    is-left-invertible-element-Ring R (mul-Ring R x y)
+  is-left-invertible-element-mul-Ring =
+    is-left-invertible-element-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-right-invertible-element-mul-Ring :
+    (x y : type-Ring R) →
+    is-right-invertible-element-Ring R x →
+    is-right-invertible-element-Ring R y →
+    is-right-invertible-element-Ring R (mul-Ring R x y)
+  is-right-invertible-element-mul-Ring =
+    is-right-invertible-element-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-invertible-element-mul-Ring :
+    (x y : type-Ring R) →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring R y →
+    is-invertible-element-Ring R (mul-Ring R x y)
+  is-invertible-element-mul-Ring =
+    is-invertible-element-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### The inverse of an invertible element is invertible
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-invertible-element-inv-is-invertible-element-Ring :
+    {x : type-Ring R} (H : is-invertible-element-Ring R x) →
+    is-invertible-element-Ring R (inv-is-invertible-element-Ring R H)
+  is-invertible-element-inv-is-invertible-element-Ring =
+    is-invertible-element-inv-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### Any homomorphism of monoids sends invertible elements to invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  (f : type-hom-Ring R S)
+  where
+
+  preserves-invertible-elements-hom-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring S (map-hom-Ring R S f x)
+  preserves-invertible-elements-hom-Ring =
+    preserves-invertible-elements-hom-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( hom-multiplicative-monoid-hom-Ring R S f)
+```
+
+### Given an isomorphism `f : R ≅ S` of monoids, `x : R` is invertible if and only if `f x : S` is invertible
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  (f : iso-Ring R S)
+  where
+
+  preserves-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring S (map-iso-Ring R S f x)
+  preserves-invertible-elements-iso-Ring =
+    preserves-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
+
+  preserves-invertible-elements-inv-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring S (map-iso-Ring R S f x) →
+    is-invertible-element-Ring R x
+  preserves-invertible-elements-inv-iso-Ring =
+    preserves-invertible-elements-inv-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
+```
+
+## See also
+
+- The core of a monoid is defined in [`group-theory.cores-monoids`](group-theory.cores-monoids.md).
