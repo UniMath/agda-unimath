@@ -4,19 +4,35 @@
 # and it adheres to the appropriate protocol; see
 # https://rust-lang.github.io/mdBook/for_developers/preprocessors.html#hooking-into-mdbook
 
+from collections import defaultdict
 import json
 from multiprocessing import Pool
 import os
 import subprocess
 import sys
+import tomli
 
 PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
 RECENT_CHANGES_COUNT = 5
+CONTRIBUTORS_FILE = 'scripts/contributors_data.toml'
+
+# Lazily initialized
+contributors_data = None
+
+
+def get_real_author(raw_username):
+    return next((c for c in contributors_data if raw_username in c['usernames']), None)
 
 
 def does_support(backend):
     return backend == 'html'
+
+
+def print_skipping_contributor_warning(contributor):
+    print('Warning: not attributing changes to', contributor,
+          f'. If you want your work to be attributed to you, add yourself to {CONTRIBUTORS_FILE}',
+          file=sys.stderr)
 
 
 def module_source_path_from_md_name(roots, module_name):
@@ -52,7 +68,7 @@ def get_author_element_for_file(filename):
     # but alas I haven't found anything to that effect
 
     # Arguments mostly copied from the 1lab pipeline
-    authors_git_output = subprocess.run([
+    raw_authors_git_output = subprocess.run([
         'git', 'shortlog',
         # Sort by number of commits and only print the contributor names
         '-ns',
@@ -63,8 +79,19 @@ def get_author_element_for_file(filename):
         # Limit to changes to the target file
         'HEAD', '--', filename
     ], capture_output=True, text=True, check=True).stdout.splitlines()
-    author_names = [line[line.find('\t')+1:]
-                    for line in authors_git_output]
+
+    # Collect authors and sort by number of commits
+    author_commits = defaultdict(int)
+    for raw_author_line in raw_authors_git_output:
+        commit_count_str, raw_author = raw_author_line.split('\t')
+        commit_count = int(commit_count_str.strip())
+        author = get_real_author(raw_author)
+        if author is None:
+            print_skipping_contributor_warning(raw_author)
+            continue
+        author_commits[author['displayName']] += commit_count
+    author_names = sorted(author_commits, key=author_commits.get, reverse=True)
+    attribution_text = ', '.join(author_names[:-1]) + (len(author_names) > 1) * ' and ' + author_names[-1]
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -79,13 +106,22 @@ def get_author_element_for_file(filename):
         'git', 'log',
         # Show only last RECENT_CHANGES_COUNT commits
         '-n', str(RECENT_CHANGES_COUNT),
-        # Format it like the markdown we want to include
-        '--format=- <i>%h</i> (%an) [%as] %s',
+        # Get hash, author, date and message, separated by tabs
+        '--format=%h%x09%an%x09%as%x09%s',
         'HEAD', '--', filename
-    ], capture_output=True, text=True, check=True).stdout
+    ], capture_output=True, text=True, check=True).stdout.splitlines()
+    recent_changes = '## Recent changes\n'
+    for recent_changes_line in recent_changes_output:
+        [sha, raw_author, date, message] = recent_changes_line.split('\t')
+        author = get_real_author(raw_author)
+        if author is None:
+            print_skipping_contributor_warning(raw_author)
+            continue
+        recent_changes += f'- <i>{sha}</i> ({author["displayName"]}) [{date}] - {message}\n'
+
     return (
-        f'<p><i>Content created by {", ".join(author_names[:-1])}{(len(author_names) > 1) * " and "}{author_names[-1]}</i></p><p>Created: {created_date}; Modified: {modified_date}</p>',
-        f'### Recent changes\n{recent_changes_output}'
+        f'<p><i>Content created by {attribution_text}</i></p><p>Created: {created_date}; Last modified: {modified_date}</p>',
+        recent_changes
     )
 
 
@@ -160,6 +196,10 @@ if __name__ == '__main__':
                 sys.exit(1)
             else:
                 sys.exit(0)
+
+    # Load the contributors data
+    with open(CONTRIBUTORS_FILE, 'rb') as f:
+        contributors_data = tomli.load(f)['contributors']
 
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
