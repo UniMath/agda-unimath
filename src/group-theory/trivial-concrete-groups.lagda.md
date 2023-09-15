@@ -31,8 +31,6 @@ its classifying type is contractible.
 
 ## Definitions
 
-## Definitions
-
 ### Trivial higher groups
 
 ```agda

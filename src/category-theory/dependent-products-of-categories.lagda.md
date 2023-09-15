@@ -18,7 +18,9 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -41,14 +43,16 @@ module _
   precategory-Π-Category : Precategory (l1 ⊔ l2) (l1 ⊔ l3)
   precategory-Π-Category = Π-Precategory I (precategory-Category ∘ C)
 
-  is-category-precategory-Π-Category :
-    is-category-Precategory precategory-Π-Category
-  is-category-precategory-Π-Category x y =
-    is-equiv-htpy-equiv
-      ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
-        equiv-Π-equiv-family (λ i → extensionality-obj-Category (C i)) ∘e
-        equiv-funext)
-      ( λ {refl → refl})
+  abstract
+    is-category-precategory-Π-Category :
+      is-category-Precategory precategory-Π-Category
+    is-category-precategory-Π-Category x y =
+      is-equiv-htpy-equiv
+        ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
+          equiv-Π-equiv-family
+            ( λ i → extensionality-obj-Category (C i) (x i) (y i)) ∘e
+          equiv-funext)
+        ( λ {refl → refl})
 
   Π-Category : Category (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Category = Π-Precategory I (precategory-Category ∘ C)
@@ -109,4 +113,93 @@ module _
       hom-Π-Category
       associative-composition-structure-Π-Category
   is-unital-Π-Category = is-unital-composition-structure-Category Π-Category
+
+  extensionality-obj-Π-Category :
+    (x y : obj-Category Π-Category) → (x ＝ y) ≃ iso-Category Π-Category x y
+  extensionality-obj-Π-Category = extensionality-obj-Category Π-Category
+```
+
+## Properties
+
+### Isomorphisms in the dependent product category are fiberwise isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 : Level} (I : UU l1) (C : I → Category l2 l3)
+  {x y : obj-Π-Category I C}
+  where
+
+  is-fiberwise-iso-is-iso-Π-Category :
+    (f : type-hom-Π-Category I C x y) →
+    is-iso-Category (Π-Category I C) f →
+    (i : I) → is-iso-Category (C i) (f i)
+  is-fiberwise-iso-is-iso-Π-Category =
+    is-fiberwise-iso-is-iso-Π-Precategory I (precategory-Category ∘ C)
+
+  fiberwise-iso-iso-Π-Category :
+    iso-Category (Π-Category I C) x y →
+    (i : I) → iso-Category (C i) (x i) (y i)
+  fiberwise-iso-iso-Π-Category =
+    fiberwise-iso-iso-Π-Precategory I (precategory-Category ∘ C)
+
+  is-iso-Π-is-fiberwise-iso-Category :
+    (f : type-hom-Π-Category I C x y) →
+    ((i : I) → is-iso-Category (C i) (f i)) →
+    is-iso-Category (Π-Category I C) f
+  is-iso-Π-is-fiberwise-iso-Category =
+    is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+
+  iso-Π-fiberwise-iso-Category :
+    ((i : I) → iso-Category (C i) (x i) (y i)) →
+    iso-Category (Π-Category I C) x y
+  iso-Π-fiberwise-iso-Category =
+    iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+
+  is-equiv-is-fiberwise-iso-is-iso-Π-Category :
+    (f : type-hom-Π-Category I C x y) →
+    is-equiv (is-fiberwise-iso-is-iso-Π-Category f)
+  is-equiv-is-fiberwise-iso-is-iso-Π-Category =
+    is-equiv-is-fiberwise-iso-is-iso-Π-Precategory I (precategory-Category ∘ C)
+
+  equiv-is-fiberwise-iso-is-iso-Π-Category :
+    (f : type-hom-Π-Category I C x y) →
+    ( is-iso-Category (Π-Category I C) f) ≃
+    ( (i : I) → is-iso-Category (C i) (f i))
+  equiv-is-fiberwise-iso-is-iso-Π-Category =
+    equiv-is-fiberwise-iso-is-iso-Π-Precategory I (precategory-Category ∘ C)
+
+  is-equiv-is-iso-Π-is-fiberwise-iso-Category :
+    (f : type-hom-Π-Category I C x y) →
+    is-equiv (is-iso-Π-is-fiberwise-iso-Category f)
+  is-equiv-is-iso-Π-is-fiberwise-iso-Category =
+    is-equiv-is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+
+  equiv-is-iso-Π-is-fiberwise-iso-Category :
+    ( f : type-hom-Π-Category I C x y) →
+    ( (i : I) → is-iso-Category (C i) (f i)) ≃
+    ( is-iso-Category (Π-Category I C) f)
+  equiv-is-iso-Π-is-fiberwise-iso-Category =
+    equiv-is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+
+  is-equiv-fiberwise-iso-iso-Π-Category :
+    is-equiv fiberwise-iso-iso-Π-Category
+  is-equiv-fiberwise-iso-iso-Π-Category =
+    is-equiv-fiberwise-iso-iso-Π-Precategory I (precategory-Category ∘ C)
+
+  equiv-fiberwise-iso-iso-Π-Category :
+    ( iso-Category (Π-Category I C) x y) ≃
+    ( (i : I) → iso-Category (C i) (x i) (y i))
+  equiv-fiberwise-iso-iso-Π-Category =
+    equiv-fiberwise-iso-iso-Π-Precategory I (precategory-Category ∘ C)
+
+  is-equiv-iso-Π-fiberwise-iso-Category :
+    is-equiv iso-Π-fiberwise-iso-Category
+  is-equiv-iso-Π-fiberwise-iso-Category =
+    is-equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+
+  equiv-iso-Π-fiberwise-iso-Category :
+    ( (i : I) → iso-Category (C i) (x i) (y i)) ≃
+    ( iso-Category (Π-Category I C) x y)
+  equiv-iso-Π-fiberwise-iso-Category =
+    equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
 ```

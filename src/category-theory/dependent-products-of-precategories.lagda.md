@@ -107,7 +107,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} (I : UU l1) (P : I → Precategory l2 l3)
-    {x y : obj-Π-Precategory I P}
+  {x y : obj-Π-Precategory I P}
   where
 
   is-fiberwise-iso-is-iso-Π-Precategory :
