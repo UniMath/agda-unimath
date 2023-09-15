@@ -24,7 +24,7 @@ macros = "theme/latex-macros.txt"
 assets_version = "0.2.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-authors]
-command = "./scripts/preprocessors/git_authors.py"
+command = "./scripts/preprocessor_git_metadata.py"
 
 [output.linkcheck]
 follow-web-links = false
