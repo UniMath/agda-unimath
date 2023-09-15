@@ -44,13 +44,11 @@ module _
   is-category-precategory-Π-Category :
     is-category-Precategory precategory-Π-Category
   is-category-precategory-Π-Category x y =
-    is-equiv-htpy
-      ( _)
+    is-equiv-htpy-equiv
+      ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
+        equiv-Π-equiv-family (λ i → equiv-iso-eq-Category (C i)) ∘e
+        equiv-funext)
       ( λ {refl → refl})
-      ( is-equiv-map-equiv
-        ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
-          equiv-Π-equiv-family (λ i → equiv-iso-eq-Category (C i)) ∘e
-          equiv-funext))
 
   Π-Category : Category (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Category = Π-Precategory I (precategory-Category ∘ C)
