@@ -71,8 +71,12 @@ agda-html: ./src/everything.lagda.md
 SUMMARY.md: ${AGDAFILES}
 	@python3 ./scripts/generate_main_index_file.py
 
+.PHONY: CONTRIBUTORS.md
+CONTRIBUTORS.md:
+	@python3 ./scripts/generate_contributors.py
+
 .PHONY: website-prepare
-website-prepare: agda-html ./SUMMARY.md
+website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md
 	@cp $(METAFILES) ./docs/
 	@cp ./theme/images/agda-unimath-logo.svg ./docs/
 	@cp ./theme/images/agda-unimath-black-and-gold.png ./docs/

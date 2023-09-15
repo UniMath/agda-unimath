@@ -419,10 +419,11 @@ node_modules/*
 .rvmrc
 package-lock.json
 
-# mdbook
+# mdbook, automatically generated files
 docs/
 html/
 book/
 src/temp/
 src/everything.lagda.md
 SUMMARY.md
+CONTRIBUTORS.md
