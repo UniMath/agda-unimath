@@ -17,7 +17,6 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
 ```
 

@@ -9,16 +9,13 @@ module group-theory.trivial-concrete-groups where
 ```agda
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositions
-open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
 
-open import higher-group-theory.higher-groups
 open import higher-group-theory.trivial-higher-groups
 ```
 

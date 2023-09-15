@@ -11,13 +11,9 @@ open import category-theory.dependent-products-of-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

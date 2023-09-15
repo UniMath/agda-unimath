@@ -10,7 +10,6 @@ module higher-group-theory.trivial-higher-groups where
 open import foundation.0-connected-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels

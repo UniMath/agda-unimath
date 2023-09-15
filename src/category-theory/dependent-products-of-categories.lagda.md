@@ -18,9 +18,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
