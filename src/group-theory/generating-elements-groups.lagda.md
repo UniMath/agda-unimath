@@ -10,10 +10,8 @@ module group-theory.generating-elements-groups where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -37,15 +35,12 @@ open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
 open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
-open import group-theory.images-of-group-homomorphisms
 open import group-theory.integer-multiples-of-elements-abelian-groups
 open import group-theory.integer-powers-of-elements-groups
 open import group-theory.isomorphisms-abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.quotient-groups
-open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-elements-groups
 open import group-theory.subsets-groups
 open import group-theory.trivial-group-homomorphisms

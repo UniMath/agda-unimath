@@ -17,7 +17,6 @@ open import foundation.universe-levels
 
 open import group-theory.conjugation
 open import group-theory.groups
-open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subsets-groups
 ```

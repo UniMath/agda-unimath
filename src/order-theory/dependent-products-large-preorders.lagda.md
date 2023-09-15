@@ -7,7 +7,6 @@ module order-theory.dependent-products-large-preorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.universe-levels
