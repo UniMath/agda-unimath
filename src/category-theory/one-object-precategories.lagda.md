@@ -12,6 +12,7 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.unit-type
@@ -25,8 +26,11 @@ open import group-theory.monoids
 ## Definition
 
 ```agda
+is-one-object-prop-Precategory : {l1 l2 : Level} → Precategory l1 l2 → Prop l1
+is-one-object-prop-Precategory P = is-contr-Prop (obj-Precategory P)
+
 is-one-object-Precategory : {l1 l2 : Level} → Precategory l1 l2 → UU l1
-is-one-object-Precategory P = is-contr (obj-Precategory P)
+is-one-object-Precategory P = type-Prop (is-one-object-prop-Precategory P)
 
 One-Object-Precategory : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 One-Object-Precategory l1 l2 = Σ (Precategory l1 l2) (is-one-object-Precategory)
@@ -47,6 +51,8 @@ module _
   object-One-Object-Precategory =
     center is-one-object-precategory-One-Object-Precategory
 ```
+
+## Properties
 
 ### Monoids are one-object precategories
 
