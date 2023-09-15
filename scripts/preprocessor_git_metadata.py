@@ -5,7 +5,7 @@
 # https://rust-lang.github.io/mdBook/for_developers/preprocessors.html#hooking-into-mdbook
 
 import json
-import multiprocessing
+from multiprocessing import Pool
 import os
 import subprocess
 import sys
@@ -118,8 +118,8 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
     header_info_element, footer_info_element = get_author_element_for_file(
         source_file_name)
     # Assumption: The title is the first header in the file
-    chapter_heading_start = chapter['content'].find('# ')
-    chapter_heading_end = chapter['content'].find('\n', chapter_heading_start)
+    chapter_heading_start = chapter['content'].index('# ')
+    chapter_heading_end = chapter['content'].index('\n', chapter_heading_start)
     # Insert the authors after the first heading
     chapter['content'] = chapter['content'][:chapter_heading_end] + '\n' + header_info_element + \
         chapter['content'][chapter_heading_end:] + '\n' + footer_info_element
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     context, book = json.load(sys.stdin)
 
     # Split the work between PROCESS_COUNT processes
-    with multiprocessing.Pool(PROCESS_COUNT) as p:
+    with Pool(PROCESS_COUNT) as p:
         book['sections'] = p.starmap(add_author_info_to_root_section, [
             (['src', ''], section, set())
             for section in book['sections']
