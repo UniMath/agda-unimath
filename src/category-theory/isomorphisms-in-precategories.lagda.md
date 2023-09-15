@@ -34,7 +34,7 @@ An isomorphism between objects `x y : A` in a precategory `C` is a morphism
 
 ## Definition
 
-### The property of being an isomorphism
+### The predicate of being an isomorphism
 
 ```agda
 module _
@@ -105,7 +105,7 @@ module _
   pr2 (is-iso-Precategory-Prop f) = is-prop-is-iso-Precategory f
 ```
 
-### The type of isomorphisms between two objects in a precategory
+### The type of isomorphisms between two objects
 
 ```agda
 module _
@@ -148,6 +148,14 @@ module _
     ( id-hom-Precategory C)
   is-retraction-hom-inv-iso-Precategory f =
     pr2 (pr2 (is-iso-hom-iso-Precategory f))
+
+  inv-iso-Precategory :
+    {x y : obj-Precategory C} → iso-Precategory x y → iso-Precategory y x
+  pr1 (inv-iso-Precategory f) = hom-inv-iso-Precategory f
+  pr1 (pr2 (inv-iso-Precategory f)) = hom-iso-Precategory f
+  pr1 (pr2 (pr2 (inv-iso-Precategory f))) =
+    is-retraction-hom-inv-iso-Precategory f
+  pr2 (pr2 (pr2 (inv-iso-Precategory f))) = is-section-hom-inv-iso-Precategory f
 ```
 
 ## Examples

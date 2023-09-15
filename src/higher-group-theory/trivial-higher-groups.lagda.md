@@ -7,13 +7,13 @@ module higher-group-theory.trivial-higher-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.0-connected-types
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.contractible-types
 open import foundation.propositions
-open import foundation.universe-levels
 open import foundation.unit-type
-open import foundation.0-connected-types
+open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
 ```
@@ -52,13 +52,17 @@ module _
   where
 
   has-contractible-classifying-type-prop-∞-Group : Prop l
-  has-contractible-classifying-type-prop-∞-Group = is-contr-Prop (classifying-type-∞-Group G)
+  has-contractible-classifying-type-prop-∞-Group =
+    is-contr-Prop (classifying-type-∞-Group G)
 
   has-contractible-classifying-type-∞-Group : UU l
-  has-contractible-classifying-type-∞-Group = type-Prop has-contractible-classifying-type-prop-∞-Group
+  has-contractible-classifying-type-∞-Group =
+    type-Prop has-contractible-classifying-type-prop-∞-Group
 
-  is-property-has-contractible-classifying-type-∞-Group : is-prop (has-contractible-classifying-type-∞-Group)
-  is-property-has-contractible-classifying-type-∞-Group = is-prop-type-Prop has-contractible-classifying-type-prop-∞-Group
+  is-property-has-contractible-classifying-type-∞-Group :
+    is-prop (has-contractible-classifying-type-∞-Group)
+  is-property-has-contractible-classifying-type-∞-Group =
+    is-prop-type-Prop has-contractible-classifying-type-prop-∞-Group
 ```
 
 ### The trivial higher group

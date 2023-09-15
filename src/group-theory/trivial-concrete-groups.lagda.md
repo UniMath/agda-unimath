@@ -7,18 +7,19 @@ module group-theory.trivial-concrete-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.truncated-types
 open import foundation.truncation-levels
-open import foundation.contractible-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
-open import higher-group-theory.trivial-higher-groups
+
 open import higher-group-theory.higher-groups
+open import higher-group-theory.trivial-higher-groups
 ```
 
 </details>
@@ -40,13 +41,15 @@ module _
   where
 
   is-trivial-prop-Concrete-Group : Prop l
-  is-trivial-prop-Concrete-Group = is-trivial-prop-∞-Group (∞-group-Concrete-Group G)
+  is-trivial-prop-Concrete-Group =
+    is-trivial-prop-∞-Group (∞-group-Concrete-Group G)
 
   is-trivial-Concrete-Group : UU l
   is-trivial-Concrete-Group = type-Prop is-trivial-prop-Concrete-Group
 
   is-property-is-trivial-Concrete-Group : is-prop (is-trivial-Concrete-Group)
-  is-property-is-trivial-Concrete-Group = is-prop-type-Prop is-trivial-prop-Concrete-Group
+  is-property-is-trivial-Concrete-Group =
+    is-prop-type-Prop is-trivial-prop-Concrete-Group
 ```
 
 ### Higher groups with contractible classifying type
@@ -57,13 +60,17 @@ module _
   where
 
   has-contractible-classifying-type-prop-Concrete-Group : Prop l
-  has-contractible-classifying-type-prop-Concrete-Group = has-contractible-classifying-type-prop-∞-Group (∞-group-Concrete-Group G)
+  has-contractible-classifying-type-prop-Concrete-Group =
+    has-contractible-classifying-type-prop-∞-Group (∞-group-Concrete-Group G)
 
   has-contractible-classifying-type-Concrete-Group : UU l
-  has-contractible-classifying-type-Concrete-Group = type-Prop has-contractible-classifying-type-prop-Concrete-Group
+  has-contractible-classifying-type-Concrete-Group =
+    type-Prop has-contractible-classifying-type-prop-Concrete-Group
 
-  is-property-has-contractible-classifying-type-Concrete-Group : is-prop (has-contractible-classifying-type-Concrete-Group)
-  is-property-has-contractible-classifying-type-Concrete-Group = is-prop-type-Prop has-contractible-classifying-type-prop-Concrete-Group
+  is-property-has-contractible-classifying-type-Concrete-Group :
+    is-prop (has-contractible-classifying-type-Concrete-Group)
+  is-property-has-contractible-classifying-type-Concrete-Group =
+    is-prop-type-Prop has-contractible-classifying-type-prop-Concrete-Group
 ```
 
 ### The trivial concrete group
