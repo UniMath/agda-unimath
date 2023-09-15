@@ -84,11 +84,11 @@ htpy-precomp-Π H C h x = apd h (H x)
 
 ```agda
 abstract
-  is-equiv-map-equiv-Π-equiv-family :
+  is-equiv-map-Π-is-fiberwise-equiv :
     {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
     {f : (i : I) → A i → B i} (is-equiv-f : is-fiberwise-equiv f) →
     is-equiv (map-Π f)
-  is-equiv-map-equiv-Π-equiv-family is-equiv-f =
+  is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
     is-equiv-is-contr-map
       ( λ g →
         is-contr-equiv' _
@@ -100,7 +100,7 @@ equiv-Π-equiv-family :
   (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
 pr1 (equiv-Π-equiv-family e) = map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
-  is-equiv-map-equiv-Π-equiv-family
+  is-equiv-map-Π-is-fiberwise-equiv
     ( λ i → is-equiv-map-equiv (e i))
 ```
 
@@ -120,7 +120,7 @@ is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
   is-equiv-comp
     ( map-reduce-Π-fiber f (λ b u → C b))
     ( map-Π (λ b u t → u))
-    ( is-equiv-map-equiv-Π-equiv-family H)
+    ( is-equiv-map-Π-is-fiberwise-equiv H)
     ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
 ```
 

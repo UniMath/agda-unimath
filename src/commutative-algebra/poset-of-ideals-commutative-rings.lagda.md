@@ -16,7 +16,6 @@ open import foundation.universe-levels
 
 open import order-theory.large-posets
 open import order-theory.large-preorders
-open import order-theory.similarity-of-elements-large-posets
 
 open import ring-theory.poset-of-ideals-rings
 ```

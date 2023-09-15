@@ -7,10 +7,8 @@ module order-theory.powers-of-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 

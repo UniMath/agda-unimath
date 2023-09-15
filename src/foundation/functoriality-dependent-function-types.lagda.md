@@ -13,7 +13,6 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
-open import foundation.homotopy-induction
 open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
@@ -73,7 +72,7 @@ module _
         ( is-equiv-precomp-Π-is-equiv
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
-        ( is-equiv-map-equiv-Π-equiv-family
+        ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ a →
             is-equiv-comp
               ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
@@ -288,7 +287,7 @@ abstract
   is-equiv-map-automorphism-Π {B = B} e f =
     is-equiv-comp _ _
       ( is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e) B)
-      ( is-equiv-map-equiv-Π-equiv-family
+      ( is-equiv-map-Π-is-fiberwise-equiv
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))
 
 automorphism-Π :

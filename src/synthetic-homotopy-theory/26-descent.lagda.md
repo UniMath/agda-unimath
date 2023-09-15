@@ -661,7 +661,7 @@ is-equiv-Fam-pushout-cocone-UU l {f = f} {g} =
     ( λ PA →
       is-equiv-tot-is-fiberwise-equiv
         ( λ PB →
-          is-equiv-map-equiv-Π-equiv-family
+          is-equiv-map-Π-is-fiberwise-equiv
             ( λ s → univalence (PA (f s)) (PB (g s)))))
 
 htpy-equiv-eq-ap-fam :

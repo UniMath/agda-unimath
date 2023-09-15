@@ -140,8 +140,7 @@ module _
 
   all-elements-equal-is-invertible-element-Monoid :
     (x : type-Monoid M) → all-elements-equal (is-invertible-element-Monoid M x)
-  all-elements-equal-is-invertible-element-Monoid x
-    (pair y (pair p q)) (pair y' (pair p' q')) =
+  all-elements-equal-is-invertible-element-Monoid x (y , p , q) (y' , p' , q') =
     eq-type-subtype
       ( λ z →
         prod-Prop
@@ -164,6 +163,57 @@ module _
     is-invertible-element-Monoid M x
   pr2 (is-invertible-element-monoid-Prop x) =
     is-prop-is-invertible-element-Monoid x
+```
+
+### Inverses are left/right inverses
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-left-invertible-is-invertible-element-Monoid :
+    (x : type-Monoid M) →
+    is-invertible-element-Monoid M x → is-left-invertible-element-Monoid M x
+  pr1 (is-left-invertible-is-invertible-element-Monoid x is-invertible-x) =
+    pr1 is-invertible-x
+  pr2 (is-left-invertible-is-invertible-element-Monoid x is-invertible-x) =
+    pr2 (pr2 is-invertible-x)
+
+  is-right-invertible-is-invertible-element-Monoid :
+    (x : type-Monoid M) →
+    is-invertible-element-Monoid M x → is-right-invertible-element-Monoid M x
+  pr1 (is-right-invertible-is-invertible-element-Monoid x is-invertible-x) =
+    pr1 is-invertible-x
+  pr2 (is-right-invertible-is-invertible-element-Monoid x is-invertible-x) =
+    pr1 (pr2 is-invertible-x)
+```
+
+### The inverse invertible element
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-right-invertible-left-inverse-Monoid :
+    (x : type-Monoid M) (lx : is-left-invertible-element-Monoid M x) →
+    is-right-invertible-element-Monoid M (pr1 lx)
+  pr1 (is-right-invertible-left-inverse-Monoid x lx) = x
+  pr2 (is-right-invertible-left-inverse-Monoid x lx) = pr2 lx
+
+  is-left-invertible-right-inverse-Monoid :
+    (x : type-Monoid M) (rx : is-right-invertible-element-Monoid M x) →
+    is-left-invertible-element-Monoid M (pr1 rx)
+  pr1 (is-left-invertible-right-inverse-Monoid x rx) = x
+  pr2 (is-left-invertible-right-inverse-Monoid x rx) = pr2 rx
+
+  is-invertible-element-inverse-Monoid :
+    (x : type-Monoid M) (x' : is-invertible-element-Monoid M x) →
+    is-invertible-element-Monoid M (pr1 x')
+  pr1 (is-invertible-element-inverse-Monoid x x') = x
+  pr1 (pr2 (is-invertible-element-inverse-Monoid x x')) = pr2 (pr2 x')
+  pr2 (pr2 (is-invertible-element-inverse-Monoid x x')) = pr1 (pr2 x')
 ```
 
 ### Any invertible element of a monoid has a contractible type of right inverses
@@ -195,12 +245,12 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  is-contr-has-left-inverse-Monoid :
+  is-contr-is-left-invertible-Monoid :
     (x : type-Monoid M) → is-invertible-element-Monoid M x →
     is-contr (is-left-invertible-element-Monoid M x)
-  pr1 (pr1 (is-contr-has-left-inverse-Monoid x (y , p , q))) = y
-  pr2 (pr1 (is-contr-has-left-inverse-Monoid x (y , p , q))) = q
-  pr2 (is-contr-has-left-inverse-Monoid x (y , p , q)) (y' , p') =
+  pr1 (pr1 (is-contr-is-left-invertible-Monoid x (y , p , q))) = y
+  pr2 (pr1 (is-contr-is-left-invertible-Monoid x (y , p , q))) = q
+  pr2 (is-contr-is-left-invertible-Monoid x (y , p , q)) (y' , p') =
     eq-type-subtype
       ( λ u → Id-Prop (set-Monoid M) (mul-Monoid M u x) (unit-Monoid M))
       ( ( inv (left-unit-law-mul-Monoid M y)) ∙
@@ -217,6 +267,17 @@ module _
   {l : Level} (M : Monoid l)
   where
 
+  is-left-invertible-unit-Monoid :
+    is-left-invertible-element-Monoid M (unit-Monoid M)
+  pr1 is-left-invertible-unit-Monoid = unit-Monoid M
+  pr2 is-left-invertible-unit-Monoid = left-unit-law-mul-Monoid M (unit-Monoid M)
+
+  is-right-invertible-unit-Monoid :
+    is-right-invertible-element-Monoid M (unit-Monoid M)
+  pr1 is-right-invertible-unit-Monoid = unit-Monoid M
+  pr2 is-right-invertible-unit-Monoid =
+    left-unit-law-mul-Monoid M (unit-Monoid M)
+
   is-invertible-element-unit-Monoid :
     is-invertible-element-Monoid M (unit-Monoid M)
   pr1 is-invertible-element-unit-Monoid =
@@ -225,51 +286,6 @@ module _
     left-unit-law-mul-Monoid M (unit-Monoid M)
   pr2 (pr2 is-invertible-element-unit-Monoid) =
     left-unit-law-mul-Monoid M (unit-Monoid M)
-```
-
-### The product of two invertible elements is invertible
-
-```agda
-module _
-  {l : Level} (M : Monoid l)
-  where
-
-  private
-    infix 45 _*_
-    _*_ = mul-Monoid M
-
-  is-invertible-element-mul-Monoid :
-    (x y : type-Monoid M) →
-    is-invertible-element-Monoid M x → is-invertible-element-Monoid M y →
-    is-invertible-element-Monoid M (mul-Monoid M x y)
-  pr1 (is-invertible-element-mul-Monoid x y (u , p , q) (v , r , s)) =
-    v * u
-  pr1 (pr2 (is-invertible-element-mul-Monoid x y (u , p , q) (v , r , s))) =
-    equational-reasoning
-      (x * y) * (v * u)
-      ＝ x * (y * (v * u))
-        by associative-mul-Monoid M x y (v * u)
-      ＝ x * ((y * v) * u)
-        by ap (x *_) (inv (associative-mul-Monoid M y v u))
-      ＝ x * (unit-Monoid M * u)
-        by ap (x *_) (ap (_* u) r)
-      ＝ x * u
-        by ap (x *_) (left-unit-law-mul-Monoid M u)
-      ＝ unit-Monoid M
-        by p
-  pr2 (pr2 (is-invertible-element-mul-Monoid x y (u , p , q) (v , r , s))) =
-    equational-reasoning
-      (v * u) * (x * y)
-      ＝ v * (u * (x * y))
-        by associative-mul-Monoid M v u (x * y)
-      ＝ v * ((u * x) * y)
-        by ap (v *_) (inv (associative-mul-Monoid M u x y))
-      ＝ v * (unit-Monoid M * y)
-        by ap (v *_) (ap (_* y) q)
-      ＝ v * y
-        by ap (v *_) (left-unit-law-mul-Monoid M y)
-      ＝ unit-Monoid M
-        by s
 ```
 
 ### The inverse of an invertible element is invertible
@@ -318,6 +334,64 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
-  (f : type-iso-Monoid M N)
+  (f : iso-Monoid M N)
   where
+```
+
+### Invertible elements are closed under multiplication
+
+```agda
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  is-left-invertible-element-mul-Monoid :
+    (x y : type-Monoid M) →
+    is-left-invertible-element-Monoid M x →
+    is-left-invertible-element-Monoid M y →
+    is-left-invertible-element-Monoid M (mul-Monoid M x y)
+  pr1 (is-left-invertible-element-mul-Monoid x y (lx , H) (ly , I)) =
+    mul-Monoid M ly lx
+  pr2 (is-left-invertible-element-mul-Monoid x y (lx , H) (ly , I)) =
+    ( associative-mul-Monoid M ly lx (mul-Monoid M x y)) ∙
+    ( ap
+      ( mul-Monoid M ly)
+      ( ( inv (associative-mul-Monoid M lx x y)) ∙
+        ( ap (λ z → mul-Monoid M z y) H) ∙
+        ( left-unit-law-mul-Monoid M y))) ∙
+    ( I)
+
+  is-right-invertible-element-mul-Monoid :
+    (x y : type-Monoid M) →
+    is-right-invertible-element-Monoid M x →
+    is-right-invertible-element-Monoid M y →
+    is-right-invertible-element-Monoid M (mul-Monoid M x y)
+  pr1 (is-right-invertible-element-mul-Monoid x y (rx , H) (ry , I)) =
+    mul-Monoid M ry rx
+  pr2 (is-right-invertible-element-mul-Monoid x y (rx , H) (ry , I)) =
+    ( associative-mul-Monoid M x y (mul-Monoid M ry rx)) ∙
+    ( ap
+      ( mul-Monoid M x)
+      ( ( inv (associative-mul-Monoid M y ry rx)) ∙
+        ( ap (λ z → mul-Monoid M z rx) I) ∙
+        ( left-unit-law-mul-Monoid M rx))) ∙
+    ( H)
+
+  is-invertible-element-mul-Monoid :
+    (x y : type-Monoid M) →
+    is-invertible-element-Monoid M x →
+    is-invertible-element-Monoid M y →
+    is-invertible-element-Monoid M (mul-Monoid M x y)
+  pr1 (is-invertible-element-mul-Monoid x y (x' , Lx , Rx) (y' , Ly , Ry)) =
+    mul-Monoid M y' x'
+  pr1 (pr2 (is-invertible-element-mul-Monoid x y H K)) =
+    pr2
+      ( is-right-invertible-element-mul-Monoid x y
+        ( is-right-invertible-is-invertible-element-Monoid M x H)
+        ( is-right-invertible-is-invertible-element-Monoid M y K))
+  pr2 (pr2 (is-invertible-element-mul-Monoid x y H K)) =
+    pr2
+      ( is-left-invertible-element-mul-Monoid x y
+        ( is-left-invertible-is-invertible-element-Monoid M x H)
+        ( is-left-invertible-is-invertible-element-Monoid M y K))
 ```

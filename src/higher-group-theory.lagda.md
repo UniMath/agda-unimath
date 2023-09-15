@@ -20,4 +20,5 @@ open import higher-group-theory.iterated-cartesian-products-higher-groups public
 open import higher-group-theory.orbits-higher-group-actions public
 open import higher-group-theory.subgroups-higher-groups public
 open import higher-group-theory.symmetric-higher-groups public
+open import higher-group-theory.trivial-higher-groups public
 ```
