@@ -11,6 +11,7 @@ import os
 import subprocess
 import sys
 import tomli
+from utils import github_page_for_commit
 from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
 
 PROCESS_COUNT = 4
@@ -104,7 +105,7 @@ def get_author_element_for_file(filename):
         # NB Coauthors usually have the format "name <email>" and there is
         #    no way to tell git to strip the email, so it needs to be done
         #    in post processing
-        '--format=%h%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
+        '--format=%H%x09%as%x09%s%x09%an%x09%(trailers:key=co-authored-by,valueonly=true,separator=%x09)',
         'HEAD', '--', filename
     ], capture_output=True, text=True, check=True).stdout.splitlines()
     recent_changes = '## Recent changes\n'
@@ -125,8 +126,7 @@ def get_author_element_for_file(filename):
         formatted_authors = format_multiple_authors_attribution([
             contributors_data[author_index]['displayName'] for author_index in author_indices
         ])
-        # recent_changes += f'- <i>{sha}</i> ({formatted_authors}) [{date}] - {message}\n'
-        recent_changes += f'- {date}. {formatted_authors}. <i>{message}.</i> {sha}\n'
+        recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
     return (
         f'<p><i>Content created by {attribution_text}</i></p><p>Created: {created_date}; Last modified: {modified_date}</p>',

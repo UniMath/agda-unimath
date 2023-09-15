@@ -2,7 +2,8 @@
 # Run this script:
 # $ ./scripts/generate_maintainers.py
 
-from utils.contributors import CONTRIBUTORS_FILE, github_page_for_contributor, parse_contributors_file
+from utils import github_page_for_contributor
+from utils.contributors import CONTRIBUTORS_FILE, parse_contributors_file
 
 template = """
 <!--

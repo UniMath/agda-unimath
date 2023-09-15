@@ -5,11 +5,6 @@ import tomli
 CONTRIBUTORS_FILE = 'scripts/contributors_data.toml'
 
 
-def github_page_for_contributor(contributor):
-    github_username = contributor.get('github')
-    return github_username and f'https://github.com/{github_username}'
-
-
 def format_multiple_authors_attribution(author_names):
     return ', '.join(
         author_names[:-1]) + (len(author_names) > 1) * ' and ' + author_names[-1]
