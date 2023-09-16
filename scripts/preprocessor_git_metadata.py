@@ -134,22 +134,13 @@ def get_author_element_for_file(filename):
     )
 
 
-def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
+def add_author_info_to_chapter_rec_mut(roots, chapter):
     """
     Modifies chapter's content to reflect its git contributors,
     and recurses to subchapters to do the same.
     """
-    # We still want to recurse to visited files, because
-    # "source file" does not necessarily correspond to index tree entry
-    # i.e. there can be two index tree entries pointing to the same file,
-    # but they may have different subentries
-    # (e.g. "CONTRIBUTORS.md" at the time of writing)
     source_path = chapter['source_path']
-    was_visited = source_path in visited
-    visited.add(source_path)
-    add_author_info_to_sections_rec_mut(roots, chapter['sub_items'], visited)
-    if was_visited:
-        return
+    add_author_info_to_sections_rec_mut(roots, chapter['sub_items'])
 
     potential_source_file_name = module_source_path_from_md_name(
         roots, source_path)
@@ -170,7 +161,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, visited):
         chapter['content'][chapter_heading_end:] + '\n' + footer_info_element
 
 
-def add_author_info_to_sections_rec_mut(roots, sections, visited):
+def add_author_info_to_sections_rec_mut(roots, sections):
     """
     Recursively modifies a list of book sections to make all
     included chapters contain information on their contributors.
@@ -180,17 +171,17 @@ def add_author_info_to_sections_rec_mut(roots, sections, visited):
         if chapter is None:
             continue
 
-        add_author_info_to_chapter_rec_mut(roots, chapter, visited)
+        add_author_info_to_chapter_rec_mut(roots, chapter)
 
 
-def add_author_info_to_root_section(roots, section, visited):
+def add_author_info_to_root_section(roots, section):
     """
     Recursively modifies a section to make all included chapters
     contain information on their contributors, then returns the section.
     """
     chapter = section.get('Chapter')
     if chapter is not None:
-        add_author_info_to_chapter_rec_mut(roots, chapter, visited)
+        add_author_info_to_chapter_rec_mut(roots, chapter)
 
     return section
 
@@ -215,7 +206,7 @@ if __name__ == '__main__':
     # Split the work between PROCESS_COUNT processes
     with Pool(PROCESS_COUNT) as p:
         book['sections'] = p.starmap(add_author_info_to_root_section, [
-            (['src', ''], section, set())
+            (['src', ''], section)
             for section in book['sections']
         ])
 
