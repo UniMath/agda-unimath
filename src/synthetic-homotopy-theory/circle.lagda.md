@@ -185,10 +185,10 @@ is-0-connected-𝕊¹ = is-0-connected-mere-eq base-𝕊¹ (mere-eq-𝕊¹ base-
 ### The circle is equivalent to the 1-sphere
 
 The [1-sphere](synthetic-homotopy-theory.spheres.md) is defined as the
-[suspension](synthetic-homotopy-theory.suspensions.md) of the
+[suspension](synthetic-homotopy-theory.suspensions-of-types.md) of the
 [0-sphere](synthetic-homotopy-theory.spheres.md). We may understand this as the
 1-sphere having two points `N` and `S` and two
-[identifications](foundation-core.identifications.md) (meridians) `e, w : N = S`
+[identifications](foundation-core.identity-types.md) (meridians) `e, w : N = S`
 between them. The following shows that the 1-sphere and the circle are
 [equivalent](foundation-core.equivalences.md).
 
