@@ -228,7 +228,7 @@ circle-sphere-1-circle : section circle-sphere-1
 pr1 circle-sphere-1-circle = sphere-1-circle
 pr2 circle-sphere-1-circle =
   function-apply-dependent-universal-property-𝕊¹
-    ( λ x → Id (circle-sphere-1 (sphere-1-circle x)) x)
+    ( λ x → (circle-sphere-1 (sphere-1-circle x)) ＝ x)
     ( circle-sphere-1-circle-base-𝕊¹)
     ( map-compute-dependent-identification-eq-value-comp-id
       ( circle-sphere-1)
@@ -243,17 +243,13 @@ pr2 circle-sphere-1-circle =
 
 ```agda
 sphere-1-circle-sphere-1-north-sphere-1 :
-  Id
-    ( sphere-1-circle (circle-sphere-1 (north-sphere 1)))
-    ( north-sphere 1)
+    ( sphere-1-circle (circle-sphere-1 (north-sphere 1))) ＝ ( north-sphere 1)
 sphere-1-circle-sphere-1-north-sphere-1 =
   ( ap sphere-1-circle circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
   ( sphere-1-circle-base-𝕊¹-eq-north-sphere-1)
 
 sphere-1-circle-sphere-1-south-sphere-1 :
-  Id
-    ( sphere-1-circle (circle-sphere-1 (south-sphere 1)))
-    ( south-sphere 1)
+    ( sphere-1-circle (circle-sphere-1 (south-sphere 1))) ＝ ( south-sphere 1)
 sphere-1-circle-sphere-1-south-sphere-1 =
   ( ap sphere-1-circle circle-sphere-1-south-sphere-1-eq-base-𝕊¹) ∙
   ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
@@ -267,7 +263,7 @@ apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 :
       ( sphere-1-circle)
       ( ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
         ( map-sphere-0-eq-base-𝕊¹ n)))
-    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1))
+    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
   ( inv
     ( assoc
@@ -318,7 +314,7 @@ apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 =
 map-sphere-1-circle-sphere-1-meridian :
   ( n : Fin 2) →
   ( dependent-identification
-    ( λ x → Id (sphere-1-circle (circle-sphere-1 x)) x)
+    ( λ x → (sphere-1-circle (circle-sphere-1 x)) ＝ x)
     ( meridian-suspension-structure
       ( suspension-structure-suspension (Fin 2)) n)
     ( sphere-1-circle-sphere-1-north-sphere-1)
@@ -372,20 +368,20 @@ map-sphere-1-circle-sphere-1-meridian (inr n) =
 
 dependent-suspension-structure-sphere-1-circle-sphere-1 :
   dependent-suspension-structure
-    ( λ x → Id (sphere-1-circle (circle-sphere-1 x)) x)
+    ( λ x → (sphere-1-circle (circle-sphere-1 x)) ＝ x)
     ( suspension-structure-suspension (Fin 2))
 pr1 dependent-suspension-structure-sphere-1-circle-sphere-1 =
   sphere-1-circle-sphere-1-north-sphere-1
 pr1 (pr2 dependent-suspension-structure-sphere-1-circle-sphere-1) =
   sphere-1-circle-sphere-1-south-sphere-1
-pr2 (pr2 dependent-suspension-structure-sphere-1-circle-sphere-1) =  
+pr2 (pr2 dependent-suspension-structure-sphere-1-circle-sphere-1) =
   map-sphere-1-circle-sphere-1-meridian
 
 sphere-1-circle-sphere-1 : retraction circle-sphere-1
 pr1 sphere-1-circle-sphere-1 = sphere-1-circle
 pr2 sphere-1-circle-sphere-1 =
   map-inv-dependent-up-suspension
-    ( λ x → Id (sphere-1-circle (circle-sphere-1 x)) x)
+    ( λ x → (sphere-1-circle (circle-sphere-1 x)) ＝ x)
     ( dependent-suspension-structure-sphere-1-circle-sphere-1)
 ```
 
