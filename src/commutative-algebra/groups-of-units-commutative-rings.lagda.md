@@ -25,7 +25,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
-open import group-theory.precategory-of-groups
+open import group-theory.precategory-of-abelian-groups
 open import group-theory.semigroups
 open import group-theory.submonoids
 
@@ -201,7 +201,7 @@ module _
 
 ## Properties
 
-### The group of units of a ring is a functor from rings to groups
+### The group of units of a commutative ring is a functor from commutative rings to abelian groups
 
 #### The functorial action of `group-of-units-Commutative-Ring`
 
@@ -309,11 +309,11 @@ module _
 group-of-units-commutative-ring-functor-Large-Precategory :
   functor-Large-Precategory
     ( Commutative-Ring-Large-Precategory)
-    ( Group-Large-Precategory)
+    ( Ab-Large-Precategory)
     ( id)
 obj-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory =
-  group-of-units-Commutative-Ring
+  abelian-group-of-units-Commutative-Ring
 hom-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory {X = A} {Y = B} =
   hom-group-of-units-hom-Commutative-Ring A B

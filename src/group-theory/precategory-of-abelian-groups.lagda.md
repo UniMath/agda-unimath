@@ -8,6 +8,7 @@ module group-theory.precategory-of-abelian-groups where
 
 ```agda
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 
@@ -27,22 +28,33 @@ homomorphisms.
 ### The large precategory of abelian groups
 
 ```agda
-ab-Precategory : Large-Precategory lsuc (_⊔_)
-Large-Precategory.obj-Large-Precategory ab-Precategory = Ab
-Large-Precategory.hom-Large-Precategory ab-Precategory = hom-Ab
-Large-Precategory.comp-hom-Large-Precategory ab-Precategory
-  {X = A} {B} {C} =
+Ab-Large-Precategory : Large-Precategory lsuc (_⊔_)
+Large-Precategory.obj-Large-Precategory
+  Ab-Large-Precategory =
+  Ab
+Large-Precategory.hom-Large-Precategory
+  Ab-Large-Precategory =
+  hom-Ab
+Large-Precategory.comp-hom-Large-Precategory
+  Ab-Large-Precategory {X = A} {B} {C} =
   comp-hom-Ab A B C
-Large-Precategory.id-hom-Large-Precategory ab-Precategory
-  {X = A} =
+Large-Precategory.id-hom-Large-Precategory
+  Ab-Large-Precategory {X = A} =
   id-hom-Ab A
-Large-Precategory.associative-comp-hom-Large-Precategory ab-Precategory
-  {X = A} {B} {C} {D} =
+Large-Precategory.associative-comp-hom-Large-Precategory
+  Ab-Large-Precategory {X = A} {B} {C} {D} =
   associative-comp-hom-Ab A B C D
-Large-Precategory.left-unit-law-comp-hom-Large-Precategory ab-Precategory
-  {X = A} {B} =
+Large-Precategory.left-unit-law-comp-hom-Large-Precategory
+  Ab-Large-Precategory {X = A} {B} =
   left-unit-law-comp-hom-Ab A B
-Large-Precategory.right-unit-law-comp-hom-Large-Precategory ab-Precategory
-  {X = A} {B} =
+Large-Precategory.right-unit-law-comp-hom-Large-Precategory
+  Ab-Large-Precategory {X = A} {B} =
   right-unit-law-comp-hom-Ab A B
+```
+
+### The small categories of abelian groups
+
+```agda
+Ab-Precategory : (l : Level) → Precategory (lsuc l) l
+Ab-Precategory = precategory-Large-Precategory Ab-Large-Precategory
 ```
