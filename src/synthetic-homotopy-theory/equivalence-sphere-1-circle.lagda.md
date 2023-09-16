@@ -159,16 +159,18 @@ apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle =
       ( circle-sphere-1)
       ( meridian-sphere 0 (zero-Fin 1))
       ( inv (meridian-suspension (one-Fin 1))))
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)) ∙
   ( assoc
     ( ap circle-sphere-1 (meridian-suspension (zero-Fin 1)))
     ( ap circle-sphere-1 (inv ( meridian-sphere 0 (one-Fin 1))))
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)) ∙
   ( identification-left-whisk
     ( ap circle-sphere-1 (meridian-suspension (zero-Fin 1)))
-    ( apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle) ∙
+    ( apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle)) ∙
   ( up-suspension-meridian-suspension
-    (sphere 0) 𝕊¹ suspension-structure-sphere-0-𝕊¹ (zero-Fin 1)))))
+    ( sphere 0)
+    ( 𝕊¹)
+    ( suspension-structure-sphere-0-𝕊¹ (zero-Fin 1)))
 
 circle-sphere-1-circle-loop-𝕊¹ :
   coherence-square-identifications
