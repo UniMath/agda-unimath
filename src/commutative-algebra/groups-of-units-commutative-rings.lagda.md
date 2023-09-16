@@ -39,7 +39,8 @@ open import ring-theory.rings
 
 ## Idea
 
-The **group of units** of a [commutative ring](commutative-algebra.commutative-rings.md) `A` is the
+The **group of units** of a
+[commutative ring](commutative-algebra.commutative-rings.md) `A` is the
 [abelian group](group-theory.abelian-groups.md) consisting of all the
 [invertible elements](ring-theory.invertible-elements-rings.md) in `R`.
 Equivalently, the group of units of `R` is the

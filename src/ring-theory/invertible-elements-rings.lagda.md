@@ -28,7 +28,9 @@ a two-sided multiplicative inverse. Such elements are also called the
 **(multiplicative) units** of the ring.
 
 The [set](foundation.sets.md) of units of any ring forms a
-[group](group-theory.groups.md), called the [group of units](ring-theory.groups-of-units-rings.md). The group of units of a ring is constructed in
+[group](group-theory.groups.md), called the
+[group of units](ring-theory.groups-of-units-rings.md). The group of units of a
+ring is constructed in
 [`ring-theory.groups-of-units-rings`](ring-theory.groups-of-units-rings.md).
 
 ## Definitions

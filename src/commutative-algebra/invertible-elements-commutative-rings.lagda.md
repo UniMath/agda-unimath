@@ -22,7 +22,13 @@ open import ring-theory.invertible-elements-rings
 
 ## Idea
 
-In a [commutative ring](commutative-algebra.commutative-rings.md) `A` an element is **invertible** as soon as it has either a left or a right inverse. The invertible elements of a commutative ring `A` are also called the **(multiplicative) units** of `A`. The [abelian group](group-theory.abelian-groups.md) of multiplicative units is constructed in [`commutative-algebra.groups-of-units-commutative-rings`](commutative-algebra.groups-of-units-commutative-rings.md).
+In a [commutative ring](commutative-algebra.commutative-rings.md) `A` an element
+is **invertible** as soon as it has either a left or a right inverse. The
+invertible elements of a commutative ring `A` are also called the
+**(multiplicative) units** of `A`. The
+[abelian group](group-theory.abelian-groups.md) of multiplicative units is
+constructed in
+[`commutative-algebra.groups-of-units-commutative-rings`](commutative-algebra.groups-of-units-commutative-rings.md).
 
 ## Definitions
 

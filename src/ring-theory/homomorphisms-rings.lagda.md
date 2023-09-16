@@ -415,4 +415,3 @@ module _
       ( multiplicative-monoid-Ring S)
       ( hom-multiplicative-monoid-hom-Ring R S f)
 ```
-
