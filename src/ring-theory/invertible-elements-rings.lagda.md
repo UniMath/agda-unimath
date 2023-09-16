@@ -28,8 +28,11 @@ open import ring-theory.rings
 
 **Invertible elements** in a [ring](ring-theory.rings.md) are elements that have
 a two-sided multiplicative inverse. Such elements are also called the
-**(multiplicative) units** of the ring. The [set](foundation.sets.md) of units
-of any ring forms a [group](group-theory.groups.md).
+**(multiplicative) units** of the ring.
+
+The [set](foundation.sets.md) of units of any ring forms a
+[group](group-theory.groups.md), called the [group of units](ring-theory.groups-of-units-rings.md). The group of units of a ring is constructed in
+[`ring-theory.groups-of-units-rings`](ring-theory.groups-of-units-rings.md).
 
 ## Definitions
 
@@ -190,22 +193,25 @@ module _
   where
 
   is-right-invertible-left-inverse-Ring :
-    (x : type-Ring R) (lx : is-left-invertible-element-Ring R x) →
-    is-right-invertible-element-Ring R (pr1 lx)
+    (x : type-Ring R) (H : is-left-invertible-element-Ring R x) →
+    is-right-invertible-element-Ring R
+      ( retraction-is-left-invertible-element-Ring R H)
   is-right-invertible-left-inverse-Ring =
     is-right-invertible-left-inverse-Monoid
       ( multiplicative-monoid-Ring R)
 
   is-left-invertible-right-inverse-Ring :
-    (x : type-Ring R) (rx : is-right-invertible-element-Ring R x) →
-    is-left-invertible-element-Ring R (pr1 rx)
+    (x : type-Ring R) (H : is-right-invertible-element-Ring R x) →
+    is-left-invertible-element-Ring R
+      ( section-is-right-invertible-element-Ring R H)
   is-left-invertible-right-inverse-Ring =
     is-left-invertible-right-inverse-Monoid
       ( multiplicative-monoid-Ring R)
 
   is-invertible-element-inverse-Ring :
-    (x : type-Ring R) (x' : is-invertible-element-Ring R x) →
-    is-invertible-element-Ring R (pr1 x')
+    (x : type-Ring R) (H : is-invertible-element-Ring R x) →
+    is-invertible-element-Ring R
+      ( inv-is-invertible-element-Ring R H)
   is-invertible-element-inverse-Ring =
     is-invertible-element-inverse-Monoid
       ( multiplicative-monoid-Ring R)
@@ -367,5 +373,5 @@ module _
 
 ## See also
 
-- The group of multiplicative units of a ring defined in
+- The group of multiplicative units of a ring is defined in
   [`ring-theory.groups-of-units-rings`](ring-theory.groups-of-units-rings.md).
