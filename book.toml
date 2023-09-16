@@ -42,8 +42,7 @@ git-repository-url = "https://github.com/UniMath/agda-unimath"
 git-repository-icon = "fa-github"
 
 [output.html.print]
-enable = true    # include support for printable output
-page-break = true # insert page-break after each chapter
+enable = false
 
 [output.html.fold]
 enable = true    # whether or not to enable section folding
