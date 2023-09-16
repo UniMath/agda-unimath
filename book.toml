@@ -24,8 +24,12 @@ macros = "theme/latex-macros.txt"
 [preprocessor.catppuccin]
 assets_version = "0.2.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
-[preprocessor.git-authors]
+[preprocessor.git-metadata]
 command = "./scripts/preprocessor_git_metadata.py"
+# Disable by default - it takes a non-trivial amount of time
+# Can be overriden by running
+# `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell
+enable = false
 
 [output.linkcheck]
 follow-web-links = false

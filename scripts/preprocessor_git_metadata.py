@@ -11,7 +11,7 @@ import os
 import subprocess
 import sys
 import tomli
-from utils import github_page_for_commit
+from utils import github_page_for_commit, eprint
 from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
 
 PROCESS_COUNT = 4
@@ -145,8 +145,8 @@ def add_author_info_to_chapter_rec_mut(roots, chapter):
     potential_source_file_name = module_source_path_from_md_name(
         roots, source_path)
     if potential_source_file_name is None:
-        print('No source filename found, skipping',
-              chapter['name'], source_path, file=sys.stderr)
+        eprint('No source filename found, skipping',
+              chapter['name'], source_path)
         return
 
     source_file_name = potential_source_file_name
@@ -203,12 +203,13 @@ if __name__ == '__main__':
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
 
-    # Split the work between PROCESS_COUNT processes
-    with Pool(PROCESS_COUNT) as p:
-        book['sections'] = p.starmap(add_author_info_to_root_section, [
-            (['src', ''], section)
-            for section in book['sections']
-        ])
+    if context['config']['preprocessor']['git-metadata'].get('enable') == True:
+      # Split the work between PROCESS_COUNT processes
+      with Pool(PROCESS_COUNT) as p:
+          book['sections'] = p.starmap(add_author_info_to_root_section, [
+              (['src', ''], section)
+              for section in book['sections']
+          ])
 
     # Pass the book back to mdbook
     json.dump(book, sys.stdout)

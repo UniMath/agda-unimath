@@ -91,6 +91,8 @@ jobs:
       - run: python3 -m pip install -r master/scripts/requirements.txt
 
       - name: Generate book
+        env:
+          MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE: 'true'
         run: |
           cd master
           make website
