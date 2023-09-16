@@ -10,6 +10,8 @@ module commutative-algebra.invertible-elements-commutative-rings where
 open import commutative-algebra.commutative-rings
 
 open import foundation.contractible-types
+open import foundation.dependent-pair-types
+open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -132,6 +134,28 @@ module _
   is-left-inverse-inv-is-invertible-element-Commutative-Ring =
     is-left-inverse-inv-is-invertible-element-Ring
       ( ring-Commutative-Ring A)
+
+  is-invertible-is-left-invertible-element-Commutative-Ring :
+    is-left-invertible-element-Commutative-Ring A x →
+    is-invertible-element-Commutative-Ring A x
+  pr1 (is-invertible-is-left-invertible-element-Commutative-Ring H) =
+    retraction-is-left-invertible-element-Commutative-Ring A H
+  pr1 (pr2 (is-invertible-is-left-invertible-element-Commutative-Ring H)) =
+    commutative-mul-Commutative-Ring A _ _ ∙
+    is-left-inverse-retraction-is-left-invertible-element-Commutative-Ring A H
+  pr2 (pr2 (is-invertible-is-left-invertible-element-Commutative-Ring H)) =
+    is-left-inverse-retraction-is-left-invertible-element-Commutative-Ring A H
+
+  is-invertible-is-right-invertible-element-Commutative-Ring :
+    is-right-invertible-element-Commutative-Ring A x →
+    is-invertible-element-Commutative-Ring A x
+  pr1 (is-invertible-is-right-invertible-element-Commutative-Ring H) =
+    section-is-right-invertible-element-Commutative-Ring A H
+  pr1 (pr2 (is-invertible-is-right-invertible-element-Commutative-Ring H)) =
+    is-right-inverse-section-is-right-invertible-element-Commutative-Ring A H
+  pr2 (pr2 (is-invertible-is-right-invertible-element-Commutative-Ring H)) =
+    commutative-mul-Commutative-Ring A _ _ ∙
+    is-right-inverse-section-is-right-invertible-element-Commutative-Ring A H
 ```
 
 ## Properties
@@ -147,13 +171,11 @@ module _
     (x : type-Commutative-Ring A) →
     is-prop (is-invertible-element-Commutative-Ring A x)
   is-prop-is-invertible-element-Commutative-Ring =
-    is-prop-is-invertible-element-Ring
-      ( ring-Commutative-Ring A)
+    is-prop-is-invertible-element-Ring (ring-Commutative-Ring A)
 
   is-invertible-element-commutative-ring-Prop : type-Commutative-Ring A → Prop l
   is-invertible-element-commutative-ring-Prop =
-    is-invertible-element-ring-Prop
-      ( ring-Commutative-Ring A)
+    is-invertible-element-ring-Prop (ring-Commutative-Ring A)
 ```
 
 ### Inverses are left/right inverses
@@ -168,16 +190,14 @@ module _
     is-invertible-element-Commutative-Ring A x →
     is-left-invertible-element-Commutative-Ring A x
   is-left-invertible-is-invertible-element-Commutative-Ring =
-    is-left-invertible-is-invertible-element-Ring
-      ( ring-Commutative-Ring A)
+    is-left-invertible-is-invertible-element-Ring (ring-Commutative-Ring A)
 
   is-right-invertible-is-invertible-element-Commutative-Ring :
     (x : type-Commutative-Ring A) →
     is-invertible-element-Commutative-Ring A x →
     is-right-invertible-element-Commutative-Ring A x
   is-right-invertible-is-invertible-element-Commutative-Ring =
-    is-right-invertible-is-invertible-element-Ring
-      ( ring-Commutative-Ring A)
+    is-right-invertible-is-invertible-element-Ring (ring-Commutative-Ring A)
 ```
 
 ### The inverse invertible element
@@ -193,8 +213,7 @@ module _
     is-right-invertible-element-Commutative-Ring A
       ( retraction-is-left-invertible-element-Commutative-Ring A H)
   is-right-invertible-left-inverse-Commutative-Ring =
-    is-right-invertible-left-inverse-Ring
-      ( ring-Commutative-Ring A)
+    is-right-invertible-left-inverse-Ring (ring-Commutative-Ring A)
 
   is-left-invertible-right-inverse-Commutative-Ring :
     (x : type-Commutative-Ring A)
@@ -202,8 +221,7 @@ module _
     is-left-invertible-element-Commutative-Ring A
       ( section-is-right-invertible-element-Commutative-Ring A H)
   is-left-invertible-right-inverse-Commutative-Ring =
-    is-left-invertible-right-inverse-Ring
-      ( ring-Commutative-Ring A)
+    is-left-invertible-right-inverse-Ring (ring-Commutative-Ring A)
 
   is-invertible-element-inverse-Commutative-Ring :
     (x : type-Commutative-Ring A)
@@ -211,8 +229,7 @@ module _
     is-invertible-element-Commutative-Ring A
       ( inv-is-invertible-element-Commutative-Ring A H)
   is-invertible-element-inverse-Commutative-Ring =
-    is-invertible-element-inverse-Ring
-      ( ring-Commutative-Ring A)
+    is-invertible-element-inverse-Ring (ring-Commutative-Ring A)
 ```
 
 ### Any invertible element of a monoid has a contractible type of right inverses
@@ -226,8 +243,7 @@ module _
     (x : type-Commutative-Ring A) → is-invertible-element-Commutative-Ring A x →
     is-contr (is-right-invertible-element-Commutative-Ring A x)
   is-contr-is-right-invertible-element-Commutative-Ring =
-    is-contr-is-right-invertible-element-Ring
-      ( ring-Commutative-Ring A)
+    is-contr-is-right-invertible-element-Ring (ring-Commutative-Ring A)
 ```
 
 ### Any invertible element of a monoid has a contractible type of left inverses
@@ -241,8 +257,7 @@ module _
     (x : type-Commutative-Ring A) → is-invertible-element-Commutative-Ring A x →
     is-contr (is-left-invertible-element-Commutative-Ring A x)
   is-contr-is-left-invertible-Commutative-Ring =
-    is-contr-is-left-invertible-Ring
-      ( ring-Commutative-Ring A)
+    is-contr-is-left-invertible-Ring (ring-Commutative-Ring A)
 ```
 
 ### The unit of a monoid is invertible
@@ -255,20 +270,17 @@ module _
   is-left-invertible-element-one-Commutative-Ring :
     is-left-invertible-element-Commutative-Ring A (one-Commutative-Ring A)
   is-left-invertible-element-one-Commutative-Ring =
-    is-left-invertible-element-one-Ring
-      ( ring-Commutative-Ring A)
+    is-left-invertible-element-one-Ring (ring-Commutative-Ring A)
 
   is-right-invertible-element-one-Commutative-Ring :
     is-right-invertible-element-Commutative-Ring A (one-Commutative-Ring A)
   is-right-invertible-element-one-Commutative-Ring =
-    is-right-invertible-element-one-Ring
-      ( ring-Commutative-Ring A)
+    is-right-invertible-element-one-Ring (ring-Commutative-Ring A)
 
   is-invertible-element-one-Commutative-Ring :
     is-invertible-element-Commutative-Ring A (one-Commutative-Ring A)
   is-invertible-element-one-Commutative-Ring =
-    is-invertible-element-one-Ring
-      ( ring-Commutative-Ring A)
+    is-invertible-element-one-Ring (ring-Commutative-Ring A)
 ```
 
 ### Invertible elements are closed under multiplication
@@ -284,8 +296,7 @@ module _
     is-left-invertible-element-Commutative-Ring A y →
     is-left-invertible-element-Commutative-Ring A (mul-Commutative-Ring A x y)
   is-left-invertible-element-mul-Commutative-Ring =
-    is-left-invertible-element-mul-Ring
-      ( ring-Commutative-Ring A)
+    is-left-invertible-element-mul-Ring (ring-Commutative-Ring A)
 
   is-right-invertible-element-mul-Commutative-Ring :
     (x y : type-Commutative-Ring A) →
@@ -293,8 +304,7 @@ module _
     is-right-invertible-element-Commutative-Ring A y →
     is-right-invertible-element-Commutative-Ring A (mul-Commutative-Ring A x y)
   is-right-invertible-element-mul-Commutative-Ring =
-    is-right-invertible-element-mul-Ring
-      ( ring-Commutative-Ring A)
+    is-right-invertible-element-mul-Ring (ring-Commutative-Ring A)
 
   is-invertible-element-mul-Commutative-Ring :
     (x y : type-Commutative-Ring A) →
@@ -302,8 +312,7 @@ module _
     is-invertible-element-Commutative-Ring A y →
     is-invertible-element-Commutative-Ring A (mul-Commutative-Ring A x y)
   is-invertible-element-mul-Commutative-Ring =
-    is-invertible-element-mul-Ring
-      ( ring-Commutative-Ring A)
+    is-invertible-element-mul-Ring (ring-Commutative-Ring A)
 ```
 
 ### The inverse of an invertible element is invertible
