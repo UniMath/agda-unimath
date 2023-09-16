@@ -38,10 +38,6 @@ module _
   is-right-invertible-element-Commutative-Ring =
     is-right-invertible-element-Ring (ring-Commutative-Ring A)
 
-  has-two-sided-inverse-Commutative-Ring : type-Commutative-Ring A → UU l
-  has-two-sided-inverse-Commutative-Ring =
-    has-two-sided-inverse-Ring (ring-Commutative-Ring A)
-
   is-invertible-element-commutative-ring-Prop :
     type-Commutative-Ring A → Prop l
   is-invertible-element-commutative-ring-Prop =

@@ -20,6 +20,7 @@ open import ring-theory.division-rings public
 open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
+open import ring-theory.groups-of-units-rings public
 open import ring-theory.homomorphisms-rings public
 open import ring-theory.homomorphisms-semirings public
 open import ring-theory.ideals-generated-by-subsets-rings public
@@ -70,5 +71,4 @@ open import ring-theory.sums-rings public
 open import ring-theory.sums-semirings public
 open import ring-theory.transporting-ring-structure-along-isomorphisms-abelian-groups public
 open import ring-theory.trivial-rings public
-open import ring-theory.units-rings public
 ```

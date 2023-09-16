@@ -367,4 +367,5 @@ module _
 
 ## See also
 
-- The core of a monoid is defined in [`group-theory.cores-monoids`](group-theory.cores-monoids.md).
+- The group of multiplicative units of a ring defined in
+  [`ring-theory.groups-of-units-rings`](ring-theory.groups-of-units-rings.md).
