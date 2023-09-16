@@ -8,7 +8,6 @@ module order-theory.large-meet-semilattices where
 
 ```agda
 open import foundation.action-on-identifications-binary-functions
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.large-binary-relations

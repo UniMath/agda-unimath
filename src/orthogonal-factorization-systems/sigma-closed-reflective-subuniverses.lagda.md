@@ -8,12 +8,9 @@ module orthogonal-factorization-systems.sigma-closed-reflective-subuniverses whe
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.function-types
-open import foundation.propositions
 open import foundation.sigma-closed-subuniverses
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.reflective-subuniverses
 ```
 

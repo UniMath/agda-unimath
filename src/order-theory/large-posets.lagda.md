@@ -7,16 +7,12 @@ module order-theory.large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.large-binary-relations
 open import foundation.propositions

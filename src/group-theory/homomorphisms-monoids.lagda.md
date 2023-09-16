@@ -28,8 +28,10 @@ open import group-theory.monoids
 
 ## Idea
 
-Homomorphisms between two monoids are homomorphisms between their underlying
-semigroups that preserve the unit element.
+**Homomorphisms** between two [monoids](group-theory.monoids.md) are
+[homomorphisms](group-theory.homomorphisms-semigroups.md) between their
+underlying [semigroups](group-theory.semigroups.md) that preserve the unit
+element.
 
 ## Definition
 

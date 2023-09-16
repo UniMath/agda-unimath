@@ -10,14 +10,8 @@ module category-theory.anafunctors-categories where
 open import category-theory.anafunctors-precategories
 open import category-theory.categories
 open import category-theory.functors-categories
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```

@@ -9,18 +9,18 @@ module foundation.action-on-equivalences-type-families where
 ```agda
 open import foundation.action-on-equivalences-functions
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-maps
-open import foundation.constant-maps
 open import foundation.equivalence-induction
-open import foundation.fibers-of-maps
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.commuting-squares-of-maps
+open import foundation-core.constant-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
 ```
 
 </details>

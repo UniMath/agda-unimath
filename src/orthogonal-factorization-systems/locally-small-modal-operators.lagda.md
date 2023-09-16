@@ -8,13 +8,7 @@ module orthogonal-factorization-systems.locally-small-modal-operators where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
 open import foundation.locally-small-types
-open import foundation.propositions
-open import foundation.sigma-closed-subuniverses
-open import foundation.small-types
-open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.modal-operators

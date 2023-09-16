@@ -7,11 +7,8 @@ module order-theory.dependent-products-large-posets where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.function-extensionality
-open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.dependent-products-large-preorders

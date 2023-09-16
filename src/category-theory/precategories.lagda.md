@@ -87,15 +87,15 @@ module _
     (x y : obj-Precategory) → is-set (type-hom-Precategory x y)
   is-set-type-hom-Precategory x y = is-set-type-Set (hom-Precategory x y)
 
-  associative-composition-Precategory :
+  associative-composition-structure-Precategory :
     associative-composition-structure-Set hom-Precategory
-  associative-composition-Precategory = pr1 (pr2 (pr2 C))
+  associative-composition-structure-Precategory = pr1 (pr2 (pr2 C))
 
   comp-hom-Precategory :
     {x y z : obj-Precategory} →
     type-hom-Precategory y z → type-hom-Precategory x y →
     type-hom-Precategory x z
-  comp-hom-Precategory = pr1 associative-composition-Precategory
+  comp-hom-Precategory = pr1 associative-composition-structure-Precategory
 
   comp-hom-Precategory' :
     {x y z : obj-Precategory} →
@@ -114,30 +114,35 @@ module _
   postcomp-hom-Precategory f z = comp-hom-Precategory f
 
   associative-comp-hom-Precategory :
-    {x y z w : obj-Precategory} (h : type-hom-Precategory z w)
-    (g : type-hom-Precategory y z) (f : type-hom-Precategory x y) →
+    {x y z w : obj-Precategory}
+    (h : type-hom-Precategory z w)
+    (g : type-hom-Precategory y z)
+    (f : type-hom-Precategory x y) →
     ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
-  associative-comp-hom-Precategory = pr2 associative-composition-Precategory
+  associative-comp-hom-Precategory =
+    pr2 associative-composition-structure-Precategory
 
-  is-unital-Precategory :
+  is-unital-composition-structure-Precategory :
     is-unital-composition-structure-Set
       hom-Precategory
-      associative-composition-Precategory
-  is-unital-Precategory = pr2 (pr2 (pr2 C))
+      associative-composition-structure-Precategory
+  is-unital-composition-structure-Precategory = pr2 (pr2 (pr2 C))
 
   id-hom-Precategory : {x : obj-Precategory} → type-hom-Precategory x x
-  id-hom-Precategory {x} = pr1 is-unital-Precategory x
+  id-hom-Precategory {x} = pr1 is-unital-composition-structure-Precategory x
 
   left-unit-law-comp-hom-Precategory :
     {x y : obj-Precategory} (f : type-hom-Precategory x y) →
     comp-hom-Precategory id-hom-Precategory f ＝ f
-  left-unit-law-comp-hom-Precategory = pr1 (pr2 is-unital-Precategory)
+  left-unit-law-comp-hom-Precategory =
+    pr1 (pr2 is-unital-composition-structure-Precategory)
 
   right-unit-law-comp-hom-Precategory :
     {x y : obj-Precategory} (f : type-hom-Precategory x y) →
     comp-hom-Precategory f id-hom-Precategory ＝ f
-  right-unit-law-comp-hom-Precategory = pr2 (pr2 is-unital-Precategory)
+  right-unit-law-comp-hom-Precategory =
+    pr2 (pr2 is-unital-composition-structure-Precategory)
 ```
 
 ## Properties
