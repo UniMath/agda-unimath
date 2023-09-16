@@ -406,6 +406,9 @@ ul#searchresults span.teaser em {
   right: 0;
   padding: 10px 10px;
 }
+.sidebar li.chapter-item a.toggle {
+  font-size: 1.8rem;
+}
 .sidebar .sidebar-resize-handle {
   position: absolute;
   cursor: col-resize;
