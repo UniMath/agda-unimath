@@ -249,3 +249,7 @@ kbd {
   overflow-x: overlay;
   background-color: var(--code-bg);
 }
+
+span.prefer-nobreak {
+    display: inline-block;
+}

@@ -58,6 +58,10 @@ def cleanup_author_part(raw_author):
     return stripped
 
 
+def nobreak_span(text):
+    return f'<span class="prefer-nobreak">{text}</span>'
+
+
 def get_author_element_for_file(filename):
     """
     Extracts git usernames of contributors to a particular file
@@ -129,7 +133,7 @@ def get_author_element_for_file(filename):
         recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
     return (
-        f'<p><i>Content created by {attribution_text}</i></p><p>Created: {created_date}; Last modified: {modified_date}</p>',
+        f'<p><i>Content created by {attribution_text}</i></p><p><i>{nobreak_span("Created: " + created_date)}; {nobreak_span("Last modified: " + modified_date)}</i></p>',
         recent_changes
     )
 
