@@ -260,14 +260,14 @@ sphere-1-circle-sphere-1-south-sphere-1 =
 
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 :
   ( n : Fin 2) →
-    ( coherence-square-identifications
-      ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
-      ( sphere-1-circle-sphere-1-south-sphere-1)
-      ( ap
-        ( sphere-1-circle)
-        ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹ ∙
-          map-sphere-0-eq-base-𝕊¹ n))
-      ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1))
+  coherence-square-identifications
+    ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
+    ( sphere-1-circle-sphere-1-south-sphere-1)
+    ( ap
+      ( sphere-1-circle)
+      ( ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
+        ( map-sphere-0-eq-base-𝕊¹ n)))
+    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1))
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
   ( inv
     ( assoc
