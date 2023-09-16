@@ -62,7 +62,9 @@ suspension-structure-sphere-0-𝕊¹ =
 circle-sphere-1 : sphere 1 → 𝕊¹
 circle-sphere-1 =
   map-inv-up-suspension
-    (sphere 0) 𝕊¹ suspension-structure-sphere-0-𝕊¹
+    ( sphere 0)
+    ( 𝕊¹)
+    ( suspension-structure-sphere-0-𝕊¹)
 
 circle-sphere-1-north-sphere-1-eq-base-𝕊¹ :
   Id (circle-sphere-1 (north-sphere 1)) base-𝕊¹
