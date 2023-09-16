@@ -10,6 +10,7 @@ from multiprocessing import Pool
 import os
 import subprocess
 import sys
+import time
 import tomli
 from utils import github_page_for_commit, eprint
 from utils.contributors import parse_contributors_file, format_multiple_authors_attribution, get_real_author_index, sorted_authors_from_raw_shortlog_lines, print_skipping_contributor_warning
@@ -207,6 +208,7 @@ if __name__ == '__main__':
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
 
+    start = time.time()
     if context['config']['preprocessor']['git-metadata'].get('enable') == True:
       # Split the work between PROCESS_COUNT processes
       with Pool(PROCESS_COUNT) as p:
@@ -214,6 +216,9 @@ if __name__ == '__main__':
               (['src', ''], section)
               for section in book['sections']
           ])
+
+    end = time.time()
+    eprint(end - start)
 
     # Pass the book back to mdbook
     json.dump(book, sys.stdout)
