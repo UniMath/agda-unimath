@@ -3,6 +3,7 @@
 ```agda
 module synthetic-homotopy-theory.equivalence-sphere-1-circle where
 ```
+
 <details><summary>Imports</summary>
 
 ```agda
@@ -25,9 +26,9 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.circle
 open import synthetic-homotopy-theory.dependent-suspension-structures
+open import synthetic-homotopy-theory.spheres
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.spheres
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -36,15 +37,15 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The first sphere is defined as having two points `N` and `S` and two identifications (meridians)
-`e, w : N = S` between them. The map from the circle to the first sphere is defined by mapping
-the basepoint to `N` and the loop to the composite of `e` and the inverse of `w`, while the map
-from the first sphere to the circle is defined by mapping both `N` and `S` to the basepoint,
-`e` to the loop and `w` to `refl` at the basepoint.
-Some care needs to be taken when proving these are inverse, as `S` is first mapped to the
-basepoint and then back to `N`. It needs to be further identified using one of the meridians and
-the correct choice turns out to be `w`.
-
+The first sphere is defined as having two points `N` and `S` and two
+identifications (meridians) `e, w : N = S` between them. The map from the circle
+to the first sphere is defined by mapping the basepoint to `N` and the loop to
+the composite of `e` and the inverse of `w`, while the map from the first sphere
+to the circle is defined by mapping both `N` and `S` to the basepoint, `e` to
+the loop and `w` to `refl` at the basepoint. Some care needs to be taken when
+proving these are inverse, as `S` is first mapped to the basepoint and then back
+to `N`. It needs to be further identified with `S` using one of the meridians
+and the correct choice turns out to be `w`.
 
 ### The map from the first sphere to the circle
 
