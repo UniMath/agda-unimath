@@ -284,7 +284,8 @@ apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
     ( up-suspension-meridian-suspension
       ( sphere 0)
       ( 𝕊¹)
-      ( suspension-structure-sphere-0-𝕊¹ n)))
+      ( suspension-structure-sphere-0-𝕊¹)
+      ( n)))
 
 apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 :
   coherence-square-identifications
@@ -318,7 +319,8 @@ map-sphere-1-circle-sphere-1-meridian :
   ( dependent-identification
     ( λ x → (sphere-1-circle (circle-sphere-1 x)) ＝ x)
     ( meridian-suspension-structure
-      ( suspension-structure-suspension (Fin 2)) n)
+      ( suspension-structure-suspension (Fin 2))
+      ( n))
     ( sphere-1-circle-sphere-1-north-sphere-1)
     ( sphere-1-circle-sphere-1-south-sphere-1))
 map-sphere-1-circle-sphere-1-meridian (inl (inr n)) =
