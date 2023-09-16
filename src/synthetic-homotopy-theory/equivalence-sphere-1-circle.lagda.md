@@ -103,8 +103,8 @@ sphere-1-circle-base-𝕊¹-eq-north-sphere-1 =
 sphere-1-circle-base-𝕊¹-eq-south-sphere-1 :
   Id (sphere-1-circle base-𝕊¹) (south-sphere 1)
 sphere-1-circle-base-𝕊¹-eq-south-sphere-1 =
-  sphere-1-circle-base-𝕊¹-eq-north-sphere-1 ∙
-  meridian-sphere 0 (one-Fin 1)
+  ( sphere-1-circle-base-𝕊¹-eq-north-sphere-1) ∙
+  ( meridian-sphere 0 (one-Fin 1))
 ```
 
 ### The map from the first first sphere to the circle has a section
