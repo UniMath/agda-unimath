@@ -151,7 +151,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter):
         roots, source_path)
     if potential_source_file_name is None:
         eprint('No source filename found, skipping',
-              chapter['name'], source_path)
+               chapter['name'], source_path)
         return
 
     source_file_name = potential_source_file_name
@@ -210,12 +210,12 @@ if __name__ == '__main__':
 
     start = time.time()
     if context['config']['preprocessor']['git-metadata'].get('enable') == True:
-      # Split the work between PROCESS_COUNT processes
-      with Pool(PROCESS_COUNT) as p:
-          book['sections'] = p.starmap(add_author_info_to_root_section, [
-              (['src', ''], section)
-              for section in book['sections']
-          ])
+        # Split the work between PROCESS_COUNT processes
+        with Pool(PROCESS_COUNT) as p:
+            book['sections'] = p.starmap(add_author_info_to_root_section, [
+                (['src', ''], section)
+                for section in book['sections']
+            ])
 
     end = time.time()
     eprint(end - start)

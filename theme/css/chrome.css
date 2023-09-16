@@ -569,9 +569,9 @@ ul#searchresults span.teaser em {
 
 .coal .invertible-image,
 .navy .invertible-image,
-.ayu  .invertible-image,
+.ayu .invertible-image,
 .frappe .invertible-image,
 .macchiato .invertible-image,
 .mocha .invertible-image {
-    filter: invert(0.8);
+  filter: invert(0.8);
 }
