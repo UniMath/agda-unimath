@@ -34,6 +34,7 @@ open import group-theory.isomorphisms-abelian-groups
 open import group-theory.isomorphisms-monoids
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.precategory-of-rings
 open import ring-theory.rings
 ```
@@ -540,4 +541,33 @@ module _
 
   eq-iso-Ring : (S : Ring l) → iso-Ring R S → R ＝ S
   eq-iso-Ring S = map-inv-is-equiv (is-equiv-iso-eq-Ring S)
+```
+
+### Any ring isomorphism preserves and reflects invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  (f : iso-Ring R S)
+  where
+
+  preserves-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring S (map-iso-Ring R S f x)
+  preserves-invertible-elements-iso-Ring =
+    preserves-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
+
+  reflects-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring S (map-iso-Ring R S f x) →
+    is-invertible-element-Ring R x
+  reflects-invertible-elements-iso-Ring =
+    reflects-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
 ```

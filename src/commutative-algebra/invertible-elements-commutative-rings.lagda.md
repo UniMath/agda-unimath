@@ -8,8 +8,6 @@ module commutative-algebra.invertible-elements-commutative-rings where
 
 ```agda
 open import commutative-algebra.commutative-rings
-open import commutative-algebra.homomorphisms-commutative-rings
-open import commutative-algebra.isomorphisms-commutative-rings
 
 open import foundation.contractible-types
 open import foundation.propositions
@@ -323,55 +321,6 @@ module _
   is-invertible-element-inv-is-invertible-element-Commutative-Ring =
     is-invertible-element-inv-is-invertible-element-Ring
       ( ring-Commutative-Ring A)
-```
-
-### Any homomorphism of monoids sends invertible elements to invertible elements
-
-```agda
-module _
-  {l1 l2 : Level} (A : Commutative-Ring l1) (S : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A S)
-  where
-
-  preserves-invertible-elements-hom-Commutative-Ring :
-    {x : type-Commutative-Ring A} →
-    is-invertible-element-Commutative-Ring A x →
-    is-invertible-element-Commutative-Ring S (map-hom-Commutative-Ring A S f x)
-  preserves-invertible-elements-hom-Commutative-Ring =
-    preserves-invertible-elements-hom-Ring
-      ( ring-Commutative-Ring A)
-      ( ring-Commutative-Ring S)
-      ( f)
-```
-
-### Given an isomorphism `f : A ≅ S` of monoids, `x : A` is invertible if and only if `f x : S` is invertible
-
-```agda
-module _
-  {l1 l2 : Level} (A : Commutative-Ring l1) (S : Commutative-Ring l2)
-  (f : iso-Commutative-Ring A S)
-  where
-
-  preserves-invertible-elements-iso-Commutative-Ring :
-    {x : type-Commutative-Ring A} →
-    is-invertible-element-Commutative-Ring A x →
-    is-invertible-element-Commutative-Ring S (map-iso-Commutative-Ring A S f x)
-  preserves-invertible-elements-iso-Commutative-Ring =
-    preserves-invertible-elements-iso-Ring
-      ( ring-Commutative-Ring A)
-      ( ring-Commutative-Ring S)
-      ( f)
-
-  preserves-invertible-elements-inv-iso-Commutative-Ring :
-    {x : type-Commutative-Ring A} →
-    is-invertible-element-Commutative-Ring S
-      ( map-iso-Commutative-Ring A S f x) →
-    is-invertible-element-Commutative-Ring A x
-  preserves-invertible-elements-inv-iso-Commutative-Ring =
-    preserves-invertible-elements-inv-iso-Ring
-      ( ring-Commutative-Ring A)
-      ( ring-Commutative-Ring S)
-      ( f)
 ```
 
 ## See also

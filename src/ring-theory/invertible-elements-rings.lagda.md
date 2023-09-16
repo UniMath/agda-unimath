@@ -12,13 +12,10 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.invertible-elements-monoids
 
-open import ring-theory.homomorphisms-rings
-open import ring-theory.isomorphisms-rings
 open import ring-theory.rings
 ```
 
@@ -321,54 +318,6 @@ module _
   is-invertible-element-inv-is-invertible-element-Ring =
     is-invertible-element-inv-is-invertible-element-Monoid
       ( multiplicative-monoid-Ring R)
-```
-
-### Any homomorphism of monoids sends invertible elements to invertible elements
-
-```agda
-module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
-  (f : type-hom-Ring R S)
-  where
-
-  preserves-invertible-elements-hom-Ring :
-    {x : type-Ring R} →
-    is-invertible-element-Ring R x →
-    is-invertible-element-Ring S (map-hom-Ring R S f x)
-  preserves-invertible-elements-hom-Ring =
-    preserves-invertible-elements-hom-Monoid
-      ( multiplicative-monoid-Ring R)
-      ( multiplicative-monoid-Ring S)
-      ( hom-multiplicative-monoid-hom-Ring R S f)
-```
-
-### Given an isomorphism `f : R ≅ S` of monoids, `x : R` is invertible if and only if `f x : S` is invertible
-
-```agda
-module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
-  (f : iso-Ring R S)
-  where
-
-  preserves-invertible-elements-iso-Ring :
-    {x : type-Ring R} →
-    is-invertible-element-Ring R x →
-    is-invertible-element-Ring S (map-iso-Ring R S f x)
-  preserves-invertible-elements-iso-Ring =
-    preserves-invertible-elements-iso-Monoid
-      ( multiplicative-monoid-Ring R)
-      ( multiplicative-monoid-Ring S)
-      ( iso-multiplicative-monoid-iso-Ring R S f)
-
-  preserves-invertible-elements-inv-iso-Ring :
-    {x : type-Ring R} →
-    is-invertible-element-Ring S (map-iso-Ring R S f x) →
-    is-invertible-element-Ring R x
-  preserves-invertible-elements-inv-iso-Ring =
-    preserves-invertible-elements-inv-iso-Monoid
-      ( multiplicative-monoid-Ring R)
-      ( multiplicative-monoid-Ring S)
-      ( iso-multiplicative-monoid-iso-Ring R S f)
 ```
 
 ## See also

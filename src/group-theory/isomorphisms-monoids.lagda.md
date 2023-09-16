@@ -14,9 +14,11 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-monoids
+open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
 open import group-theory.precategory-of-monoids
 ```
@@ -271,4 +273,32 @@ module _
 
   inv-iso-Monoid : iso-Monoid N M
   inv-iso-Monoid = inv-iso-Large-Precategory Monoid-Large-Precategory M N f
+```
+
+### Any isomorphism of monoids preserves and reflects invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  (f : iso-Monoid M N)
+  where
+
+  preserves-invertible-elements-iso-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid M x →
+    is-invertible-element-Monoid N (map-iso-Monoid M N f x)
+  preserves-invertible-elements-iso-Monoid =
+    preserves-invertible-elements-hom-Monoid M N (hom-iso-Monoid M N f)
+
+  reflects-invertible-elements-iso-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid N (map-iso-Monoid M N f x) →
+    is-invertible-element-Monoid M x
+  reflects-invertible-elements-iso-Monoid H =
+    tr
+      ( is-invertible-element-Monoid M)
+      ( is-retraction-map-inv-iso-Monoid M N f _)
+      ( preserves-invertible-elements-hom-Monoid N M
+        ( hom-inv-iso-Monoid M N f)
+        ( H))
 ```
