@@ -72,6 +72,14 @@ map-compute-dependent-identification-eq-value-id-id :
   dependent-identification (eq-value id id) p q r
 map-compute-dependent-identification-eq-value-id-id refl q r s =
   inv (s ∙ right-unit)
+
+map-compute-dependent-identification-eq-value-comp-id :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : B → A) (f : A → B) {a b : A}
+  (p : a ＝ b) (q : eq-value (g ∘ f) id a) (r : eq-value (g ∘ f) id b) →
+  coherence-square-identifications (ap g (ap f p)) r q p →
+  dependent-identification (eq-value (g ∘ f) id) p q r
+map-compute-dependent-identification-eq-value-comp-id g f refl q r s =
+  inv (s ∙ right-unit)
 ```
 
 ### Homotopies
