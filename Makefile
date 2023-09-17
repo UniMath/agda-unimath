@@ -69,13 +69,13 @@ agda-html: ./src/everything.lagda.md
 	@mkdir -p ./docs/
 	@${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md
 
-SUMMARY.md: ${AGDAFILES}
+SUMMARY.md: ${AGDAFILES} ./scripts/generate_main_index_file.py
 	@python3 ./scripts/generate_main_index_file.py
 
-MAINTAINERS.md: ${CONTRIBUTORS_FILE}
+MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./scripts/generate_maintainers.py
 	@python3 ./scripts/generate_maintainers.py
 
-CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE}
+CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./scripts/generate_contributors.py
 	@python3 ./scripts/generate_contributors.py
 
 .PHONY: website-prepare
