@@ -278,6 +278,17 @@ module _
   refl-htpy-hom-Ring f = refl-htpy
 ```
 
+### Evaluating ring homomorphisms at an element
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  where
+
+  ev-element-hom-Ring : type-Ring R → type-hom-Ring R S → type-Ring S
+  ev-element-hom-Ring x f = map-hom-Ring R S f x
+```
+
 ## Properties
 
 ### Homotopies characterize identifications of ring homomorphisms
