@@ -65,7 +65,7 @@ module _
             ( is-equiv-tot-is-fiberwise-equiv
               ( λ h → funext (h ∘ f) id))
             ( is-contr-map-is-equiv
-              (( is-equiv-precomp-Π-is-equiv f H) (λ y → A))
+              ( is-equiv-precomp-Π-is-equiv H (λ y → A))
               ( id))))
         ( H)
 

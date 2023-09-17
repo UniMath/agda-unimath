@@ -117,7 +117,7 @@ abstract
       ( map-Π (λ x → map-raise))
       ( functor-free-dependent-loop l (λ x → map-raise))
       ( square-functor-free-dependent-loop l (λ x → map-raise))
-      ( is-equiv-map-equiv-Π-equiv-family _ (λ x → is-equiv-map-raise))
+      ( is-equiv-map-Π-is-fiberwise-equiv (λ x → is-equiv-map-raise))
       ( is-equiv-functor-free-dependent-loop-is-fiberwise-equiv l
         ( λ x → is-equiv-map-raise))
       ( dup-circle (λ x → raise l2 (P x)))

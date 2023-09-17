@@ -38,6 +38,8 @@ open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.categories public
 open import category-theory.coproducts-in-precategories public
+open import category-theory.dependent-products-of-categories public
+open import category-theory.dependent-products-of-precategories public
 open import category-theory.discrete-categories public
 open import category-theory.endomorphisms-in-categories public
 open import category-theory.endomorphisms-in-precategories public
@@ -46,6 +48,8 @@ open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-in-precategories public
+open import category-theory.function-categories public
+open import category-theory.function-precategories public
 open import category-theory.functors-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
@@ -65,6 +69,7 @@ open import category-theory.natural-numbers-object-precategories public
 open import category-theory.natural-transformations-categories public
 open import category-theory.natural-transformations-large-precategories public
 open import category-theory.natural-transformations-precategories public
+open import category-theory.one-object-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-functors public
@@ -72,9 +77,11 @@ open import category-theory.pregroupoids public
 open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
 open import category-theory.pullbacks-in-precategories public
+open import category-theory.representable-functors-categories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.sieves-in-categories public
 open import category-theory.slice-precategories public
 open import category-theory.terminal-objects-in-precategories public
+open import category-theory.yoneda-lemma-categories public
 open import category-theory.yoneda-lemma-precategories public
 ```

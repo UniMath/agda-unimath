@@ -15,11 +15,13 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
@@ -39,6 +41,7 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 </details>
@@ -133,8 +136,8 @@ module _
   where
 
   element-standard-unordered-pair : Fin 2 → A
-  element-standard-unordered-pair (inl (inr star)) = x
-  element-standard-unordered-pair (inr star) = y
+  element-standard-unordered-pair =
+    map-inv-ev-zero-one-Fin-two-ℕ (λ _ → A) (x , y)
 
   standard-unordered-pair : unordered-pair A
   pr1 standard-unordered-pair = Fin-UU-Fin' 2
@@ -349,6 +352,70 @@ module _
       ( standard-unordered-pair x y)
       ( standard-unordered-pair y x)
       ( swap-standard-unordered-pair)
+```
+
+### Dependent universal property of pointed unordered pairs
+
+We will construct an equivalence
+
+```text
+  ((p : unordered-pair A) (i : type p) → B p i) ≃ ((x y : A) → B {x,y} 0)
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  (B : (p : unordered-pair A) → type-unordered-pair p → UU l2)
+  where
+
+  ev-pointed-unordered-pair :
+    ((p : unordered-pair A) (i : type-unordered-pair p) → B p i) →
+    ((x y : A) → B (standard-unordered-pair x y) (zero-Fin 1))
+  ev-pointed-unordered-pair f x y =
+    f (standard-unordered-pair x y) (zero-Fin 1)
+
+  abstract
+    dependent-universal-property-pointed-unordered-pairs :
+      is-equiv ev-pointed-unordered-pair
+    dependent-universal-property-pointed-unordered-pairs =
+      is-equiv-comp
+        ( λ f x y →
+          f (Fin-UU-Fin' 2) (element-standard-unordered-pair x y) (zero-Fin 1))
+        ( ev-pair)
+        ( is-equiv-ev-pair)
+        ( is-equiv-comp
+          ( λ f x y →
+            f ( Fin-UU-Fin' 2)
+              ( zero-Fin 1)
+              ( element-standard-unordered-pair x y))
+          ( map-Π (λ I → swap-Π))
+          ( is-equiv-map-Π-is-fiberwise-equiv
+            ( λ I → is-equiv-swap-Π))
+          ( is-equiv-comp
+            ( λ f x y → f (element-standard-unordered-pair x y))
+            ( λ f → f (Fin-UU-Fin' 2) (zero-Fin 1))
+            ( dependent-universal-property-identity-system-type-2-Element-Type
+              ( Fin-UU-Fin' 2)
+              ( zero-Fin 1)
+              ( λ I i → (a : type-2-Element-Type I → A) → B (I , a) i))
+            ( is-equiv-comp
+              ( ev-pair)
+              ( precomp-Π
+                ( λ xy → element-standard-unordered-pair (pr1 xy) (pr2 xy))
+                ( λ g → B (Fin-UU-Fin' 2 , g) (zero-Fin 1)))
+              ( is-equiv-precomp-Π-is-equiv
+                ( is-equiv-map-inv-dependent-universal-proeprty-Fin-two-ℕ
+                  ( λ _ → A))
+                ( λ g → B (Fin-UU-Fin' 2 , g) (zero-Fin 1)))
+              ( is-equiv-ev-pair))))
+
+  equiv-dependent-universal-property-pointed-unordered-pairs :
+    ((p : unordered-pair A) (i : type-unordered-pair p) → B p i) ≃
+    ((x y : A) → B (standard-unordered-pair x y) (zero-Fin 1))
+  pr1 equiv-dependent-universal-property-pointed-unordered-pairs =
+    ev-pointed-unordered-pair
+  pr2 equiv-dependent-universal-property-pointed-unordered-pairs =
+    dependent-universal-property-pointed-unordered-pairs
 ```
 
 ### Functoriality of unordered pairs

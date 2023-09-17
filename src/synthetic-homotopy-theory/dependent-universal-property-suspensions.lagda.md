@@ -55,9 +55,7 @@ module _
     (B : Y → UU l) → is-equiv (dependent-ev-suspension s B)
 ```
 
-#### Coherence between `dependent-ev-suspension` and
-
-`dependent-cocone-map`
+#### Coherence between `dependent-ev-suspension` and `dependent-cocone-map`
 
 ```agda
 module _

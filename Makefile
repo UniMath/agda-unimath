@@ -11,6 +11,7 @@ AGDA ?= agda $(AGDAVERBOSE)
 TIME ?= time
 
 METAFILES := \
+  ART.md \
   CITE-THIS-LIBRARY.md \
   CODINGSTYLE.md \
   CONTRIBUTING.md \
@@ -74,13 +75,14 @@ SUMMARY.md: ${AGDAFILES}
 website-prepare: agda-html ./SUMMARY.md
 	@cp $(METAFILES) ./docs/
 	@cp ./theme/images/agda-unimath-logo.svg ./docs/
+	@cp ./theme/images/agda-unimath-black-and-gold.png ./docs/
 
 .PHONY: website
 website: website-prepare
 	@mdbook build
 
 .PHONY: serve-website
-serve-website:
+serve-website: website-prepare
 	@mdbook serve -p 8080 --open -d ./book/html
 
 .PHONY: graph

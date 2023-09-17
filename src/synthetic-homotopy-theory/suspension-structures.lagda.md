@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.cocones-under-spans
 The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
 the span `unit <-- X --> unit`. A
 [cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
-is called a `suspension-cocone'. Explicitly, a suspension cocone with nadir `Y`
+is called a `suspension-cocone`. Explicitly, a suspension cocone with nadir `Y`
 consists of functions
 
 ```text

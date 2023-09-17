@@ -8,7 +8,6 @@ module order-theory.closure-operators-large-locales where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
