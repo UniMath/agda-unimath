@@ -9,6 +9,7 @@ module foundation.commuting-cubes-of-maps where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-hexagons-of-identifications
+open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
@@ -50,25 +51,32 @@ of type `coherence-cube-maps` is a homotopy filling the cube.
 ## Definition
 
 ```agda
-coherence-cube-maps :
+module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
   {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
   (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
   (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  UU (l4 ⊔ l1')
-coherence-cube-maps
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  (((h ·l back-left) ∙h (front-left ·r f')) ∙h (hD ·l top)) ~
-  ((bottom ·r hA) ∙h ((k ·l back-right) ∙h (front-right ·r g')))
+  where
+  
+  coherence-cube-maps :
+    (top : (h' ∘ f') ~ (k' ∘ g'))
+    (back-left : (f ∘ hA) ~ (hB ∘ f'))
+    (back-right : (g ∘ hA) ~ (hC ∘ g'))
+    (front-left : (h ∘ hB) ~ (hD ∘ h'))
+    (front-right : (k ∘ hC) ~ (hD ∘ k'))
+    (bottom : (h ∘ f) ~ (k ∘ g)) →
+    UU (l4 ⊔ l1')
+  coherence-cube-maps top back-left back-right front-left front-right bottom =
+    (a' : A') →
+    coherence-hexagon
+      ( ap h (back-left a'))
+      ( front-left (f' a'))
+      ( ap hD (top a'))
+      ( bottom (hA a'))
+      ( ap k (back-right a'))
+      ( front-right (g' a'))
 ```
 
 ### Symmetries of commuting cubes
@@ -93,12 +101,12 @@ module _
   {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
   (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
   (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g))
+  (top : coherence-square-maps g' f' k' h')
+  (back-left : coherence-square-maps f' hA hB f)
+  (back-right : coherence-square-maps g' hA hC g)
+  (front-left : coherence-square-maps h' hB hD h)
+  (front-right : coherence-square-maps k' hC hD k)
+  (bottom : coherence-square-maps g f k h)
   (c :
     coherence-cube-maps
       f g h k f' g' h' k' hA hB hC hD
@@ -222,248 +230,143 @@ module _
 ### Rectangles in commuting cubes
 
 ```agda
-rectangle-back-left-front-left-cube :
+module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
   {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
   (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
   (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((h ∘ f) ∘ hA) ~ (hD ∘ (h' ∘ f'))
-rectangle-back-left-front-left-cube f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  (h ·l back-left) ∙h (front-left ·r f')
+  (top : coherence-square-maps g' f' k' h')
+  (back-left : coherence-square-maps f' hA hB f)
+  (back-right : coherence-square-maps g' hA hC g)
+  (front-left : coherence-square-maps h' hB hD h)
+  (front-right : coherence-square-maps k' hC hD k)
+  (bottom : coherence-square-maps g f k h)
+  where
+  
+  rectangle-left-cube :
+    ((h ∘ f) ∘ hA) ~ (hD ∘ (h' ∘ f'))
+  rectangle-left-cube =
+    pasting-horizontal-coherence-square-maps
+      f' h' hA hB hD f h back-left front-left
 
-rectangle-back-right-front-right-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((k ∘ g) ∘ hA) ~ (hD ∘ (k' ∘ g'))
-rectangle-back-right-front-right-cube f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  (k ·l back-right) ∙h (front-right ·r g')
+  rectangle-right-cube :
+    ((k ∘ g) ∘ hA) ~ (hD ∘ (k' ∘ g'))
+  rectangle-right-cube =
+    pasting-horizontal-coherence-square-maps
+      g' k' hA hC hD g k back-right front-right
 
-coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g))
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-    top back-left back-right front-left front-right bottom) →
-  coherence-htpy-parallel-cone
-    ( bottom)
-    ( refl-htpy' hD)
-    ( ( hA) ,
-      ( h' ∘ f') ,
-      ( rectangle-back-left-front-left-cube
-        f g h k f' g' h' k' hA hB hC hD
-        top back-left back-right front-left front-right bottom))
-    ( ( hA) ,
-      ( k' ∘ g') ,
-      ( rectangle-back-right-front-right-cube
-        f g h k f' g' h' k' hA hB hC hD
-        top back-left back-right front-left front-right bottom))
-    ( refl-htpy' hA)
-    ( top)
-coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom c =
-  ( λ a' →
-    ( ap
-      ( concat
-        ( rectangle-back-left-front-left-cube
-          f g h k f' g' h' k' hA hB hC hD
-          top back-left back-right front-left front-right bottom a')
-        ( hD (k' (g' a'))))
-      ( right-unit))) ∙h
-  ( c)
+  coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube :
+    (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom) →
+    coherence-htpy-parallel-cone
+      ( bottom)
+      ( refl-htpy' hD)
+      ( hA , h' ∘ f' , rectangle-left-cube)
+      ( hA , k' ∘ g' , rectangle-right-cube)
+      ( refl-htpy' hA)
+      ( top)
+  coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube c =
+    ( λ a' →
+      ( ap
+        ( concat
+          ( rectangle-left-cube a')
+          ( hD (k' (g' a'))))
+        ( right-unit))) ∙h
+    ( c)
 
-rectangle-top-front-left-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((h ∘ hB) ∘ f') ~ ((hD ∘ k') ∘ g')
-rectangle-top-front-left-cube
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  (front-left ·r f') ∙h (hD ·l top)
+  rectangle-top-front-left-cube :
+    ((h ∘ hB) ∘ f') ~ ((hD ∘ k') ∘ g')
+  rectangle-top-front-left-cube =
+    ( front-left ·r f') ∙h (hD ·l top)
+    
+  rectangle-back-right-bottom-cube :
+    ((h ∘ f) ∘ hA) ~ ((k ∘ hC) ∘ g')
+  rectangle-back-right-bottom-cube =
+    ( bottom ·r hA) ∙h (k ·l back-right)
 
-rectangle-back-right-bottom-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((h ∘ f) ∘ hA) ~ ((k ∘ hC) ∘ g')
-rectangle-back-right-bottom-cube
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  ( bottom ·r hA) ∙h (k ·l back-right)
-
-{-
-coherence-htpy-square-rectangle-top-fl-rectangle-br-bot-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g))
-  (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-    top back-left back-right front-left front-right bottom) →
-  coherence-htpy-square
-    ( inv-htpy front-right)
-    ( refl-htpy' h)
-    ( pair g' (pair (hB ∘ f')
-      ( inv-htpy (rectangle-top-front-left-cube f g h k f' g' h' k' hA hB hC hD
-        top back-left back-right front-left front-right bottom))))
-    ( pair g' (pair (f ∘ hA)
-      ( inv-htpy
-        ( rectangle-back-right-bottom-cube f g h k f' g' h' k' hA hB hC hD
-          top back-left back-right front-left front-right bottom))))
-    ( refl-htpy' g')
-    ( inv-htpy back-left)
-coherence-htpy-square-rectangle-top-fl-rectangle-br-bot-cube = {!!}
--}
-
-rectangle-top-front-right-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((hD ∘ h') ∘ f') ~ ((k ∘ hC) ∘ g')
-rectangle-top-front-right-cube
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  (hD ·l top) ∙h (inv-htpy (front-right) ·r g')
-
-rectangle-back-left-bottom-cube :
-  {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
-  {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
-  (f : A → B) (g : A → C) (h : B → D) (k : C → D)
-  {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
-  (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
-  (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  ((h ∘ hB) ∘ f') ~ ((k ∘ g) ∘ hA)
-rectangle-back-left-bottom-cube
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom =
-  (h ·l (inv-htpy back-left)) ∙h (bottom ·r hA)
+  rectangle-top-front-right-cube :
+    ((hD ∘ h') ∘ f') ~ ((k ∘ hC) ∘ g')
+  rectangle-top-front-right-cube =
+    (hD ·l top) ∙h (inv-htpy (front-right) ·r g')
+  
+  rectangle-back-left-bottom-cube :
+    ((h ∘ hB) ∘ f') ~ ((k ∘ g) ∘ hA)
+  rectangle-back-left-bottom-cube =
+    (h ·l (inv-htpy back-left)) ∙h (bottom ·r hA)
 ```
 
-## Properties
+In analogy to the coherence `coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube` we also expect to be able to construct a coherence
+
+```text
+  coherence-htpy-parallel-cone-rectangle-top-fl-rectangle-br-bot-cube :
+    (c : coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      top back-left back-right front-left front-right bottom) →
+    coherence-htpy-parallel-cone
+      ( inv-htpy front-right)
+      ( refl-htpy' h)
+      ( g' , hB ∘ f' , inv-htpy (rectangle-top-front-left-cube))
+      ( g' , f ∘ hA , inv-htpy (rectangle-back-right-bottom-cube))
+      ( refl-htpy' g')
+      ( inv-htpy back-left)
+```
 
 ### Any coherence of commuting cubes induces a coherence of parallel cones
 
 ```agda
-coherence-htpy-parallel-cone-coherence-cube-maps :
+module _
   {l1 l2 l3 l4 l1' l2' l3' l4' : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
   (f : A → B) (g : A → C) (h : B → D) (k : C → D)
   {A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
   (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
   (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
-  (top : (h' ∘ f') ~ (k' ∘ g'))
-  (back-left : (f ∘ hA) ~ (hB ∘ f'))
-  (back-right : (g ∘ hA) ~ (hC ∘ g'))
-  (front-left : (h ∘ hB) ~ (hD ∘ h'))
-  (front-right : (k ∘ hC) ~ (hD ∘ k'))
-  (bottom : (h ∘ f) ~ (k ∘ g)) →
-  (c :
-    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
-    top back-left back-right front-left front-right bottom) →
-  coherence-htpy-parallel-cone
-    ( front-left)
-    ( refl-htpy' k)
-    ( ( f') ,
-      ( g ∘ hA) ,
-      ( rectangle-back-left-bottom-cube
+  (top : coherence-square-maps g' f' k' h')
+  (back-left : coherence-square-maps f' hA hB f)
+  (back-right : coherence-square-maps g' hA hC g)
+  (front-left : coherence-square-maps h' hB hD h)
+  (front-right : coherence-square-maps k' hC hD k)
+  (bottom : coherence-square-maps g f k h)
+  where
+
+  coherence-htpy-parallel-cone-coherence-cube-maps :
+    ( c :
+      coherence-cube-maps
         f g h k f' g' h' k' hA hB hC hD
-        top back-left back-right front-left front-right bottom))
-    ( ( f') ,
-      ( hC ∘ g') ,
-      ( rectangle-top-front-right-cube
-        f g h k f' g' h' k' hA hB hC hD
-        top back-left back-right front-left front-right bottom))
-    ( refl-htpy' f')
-    ( back-right)
-coherence-htpy-parallel-cone-coherence-cube-maps
-  f g h k f' g' h' k' hA hB hC hD
-  top back-left back-right front-left front-right bottom c =
-  ( assoc-htpy
-    ( h ·l (inv-htpy back-left))
-    ( bottom ·r hA)
-    ( (k ·l back-right) ∙h (refl-htpy' (k ∘ (hC ∘ g'))))) ∙h
-  ( ( ap-concat-htpy'
+        top back-left back-right front-left front-right bottom) →
+    coherence-htpy-parallel-cone
+      ( front-left)
+      ( refl-htpy' k)
+      ( ( f') ,
+        ( g ∘ hA) ,
+        ( rectangle-back-left-bottom-cube
+          f g h k f' g' h' k' hA hB hC hD
+          top back-left back-right front-left front-right bottom))
+      ( ( f') ,
+        ( hC ∘ g') ,
+        ( rectangle-top-front-right-cube
+          f g h k f' g' h' k' hA hB hC hD
+          top back-left back-right front-left front-right bottom))
+      ( refl-htpy' f')
+      ( back-right)
+  coherence-htpy-parallel-cone-coherence-cube-maps c =
+    ( assoc-htpy
       ( h ·l (inv-htpy back-left))
-      ( inv-htpy (h ·l back-left))
-      ( _)
-      ( left-whisk-inv-htpy h back-left)) ∙h
-    ( inv-htpy-left-transpose-htpy-concat (h ·l back-left) _ _
-      ( ( (inv-htpy-assoc-htpy (h ·l back-left) (front-left ·r f') _) ∙h
-          ( ( inv-htpy-assoc-htpy
-              ( (h ·l back-left) ∙h (front-left ·r f'))
-              ( hD ·l top)
-              ( (inv-htpy front-right) ·r g')) ∙h
-            ( inv-htpy-right-transpose-htpy-concat _ (front-right ·r g') _
-              ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy c))))) ∙h
-        ( ap-concat-htpy (bottom ·r hA) _ _ inv-htpy-right-unit-htpy))))
+      ( bottom ·r hA)
+      ( (k ·l back-right) ∙h (refl-htpy' (k ∘ (hC ∘ g'))))) ∙h
+    ( ( ap-concat-htpy'
+        ( h ·l (inv-htpy back-left))
+        ( inv-htpy (h ·l back-left))
+        ( _)
+        ( left-whisk-inv-htpy h back-left)) ∙h
+      ( inv-htpy-left-transpose-htpy-concat (h ·l back-left) _ _
+        ( ( (inv-htpy-assoc-htpy (h ·l back-left) (front-left ·r f') _) ∙h
+            ( ( inv-htpy-assoc-htpy
+                ( (h ·l back-left) ∙h (front-left ·r f'))
+                ( hD ·l top)
+                ( (inv-htpy front-right) ·r g')) ∙h
+              ( inv-htpy-right-transpose-htpy-concat _ (front-right ·r g') _
+                ( (assoc-htpy (bottom ·r hA) _ _) ∙h (inv-htpy c))))) ∙h
+          ( ap-concat-htpy (bottom ·r hA) _ _ inv-htpy-right-unit-htpy))))
 ```
