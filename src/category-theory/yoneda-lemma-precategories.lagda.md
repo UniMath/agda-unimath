@@ -120,6 +120,6 @@ module _
       ( Set-Precategory l1)
       ( rep-functor-Precategory C c) (F)) ≃
     ( type-Set (obj-functor-Precategory C (Set-Precategory l1) F c))
-  pr1 equiv-yoneda-lemma-Precategor = yoneda-evid-Precategory
+  pr1 equiv-yoneda-lemma-Precategory = yoneda-evid-Precategory
   pr2 equiv-yoneda-lemma-Precategory = yoneda-lemma-Precategory
 ```
