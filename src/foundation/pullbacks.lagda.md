@@ -731,17 +731,17 @@ is-pullback-back-left-is-pullback-back-right-cube
       -- ( hD)
       ( refl-htpy)
       { c = pair hA (pair (h' ∘ f')
-        ( rectangle-back-left-front-left-cube
+        ( rectangle-left-cube
           f g h k f' g' h' k' hA hB hC hD
           top back-left back-right front-left front-right bottom))}
       ( pair hA (pair (k' ∘ g')
-        ( rectangle-back-right-front-right-cube
+        ( rectangle-right-cube
           f g h k f' g' h' k' hA hB hC hD
           top back-left back-right front-left front-right bottom)))
       ( pair
         ( refl-htpy)
         ( pair top
-          ( coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube
+          ( coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube
             f g h k f' g' h' k' hA hB hC hD
             top back-left back-right front-left front-right bottom c)))
       ( is-pullback-rectangle-is-pullback-left-square g k hD
@@ -778,24 +778,22 @@ is-pullback-back-right-is-pullback-back-left-cube
     ( pair hA (pair g' back-right))
     ( is-pb-front-right)
     ( is-pullback-htpy'
-      -- ( h ∘ f)
       { f' = k ∘ g}
       ( bottom)
-      -- ( hD)
       { g' = hD}
       ( refl-htpy)
       ( pair hA (pair (h' ∘ f')
-        ( rectangle-back-left-front-left-cube
+        ( rectangle-left-cube
           f g h k f' g' h' k' hA hB hC hD
           top back-left back-right front-left front-right bottom)))
       { c' = pair hA (pair (k' ∘ g')
-        ( rectangle-back-right-front-right-cube
+        ( rectangle-right-cube
           f g h k f' g' h' k' hA hB hC hD
           top back-left back-right front-left front-right bottom))}
       ( pair
         ( refl-htpy)
         ( pair top
-          ( coherence-htpy-square-rectangle-bl-fl-rectangle-br-fr-cube
+          ( coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube
             f g h k f' g' h' k' hA hB hC hD
             top back-left back-right front-left front-right bottom c)))
       ( is-pullback-rectangle-is-pullback-left-square f h hD
