@@ -7,6 +7,7 @@ module synthetic-homotopy-theory.joins-of-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -82,6 +83,15 @@ module _
     {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
     ( cogap-join X c ∘ inr-join) ~ vertical-map-cocone pr1 pr2 c
   compute-inr-cogap-join = compute-inr-cogap pr1 pr2
+
+  compute-glue-cogap-join :
+    {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
+    ( ap (cogap-join X c) ∘ glue-join) ~
+    ( λ x →
+      ( compute-inl-cogap-join c (pr1 x)) ∙
+      ( coherence-square-cocone pr1 pr2 c x) ∙
+      ( inv (compute-inr-cogap-join c (pr2 x))))
+  compute-glue-cogap-join = compute-glue-cogap pr1 pr2
 ```
 
 ## Properties
