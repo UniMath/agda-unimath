@@ -31,6 +31,8 @@ An isomorphism in a category is an isomorphism in the underlying precategory.
 
 ## Definition
 
+### The predicate of being an isomorphism
+
 ```agda
 module _
   {l1 l2 : Level} (C : Category l1 l2)
@@ -40,21 +42,55 @@ module _
     {x y : obj-Category C} (f : type-hom-Category C x y) → UU l2
   is-iso-Category = is-iso-Precategory (precategory-Category C)
 
+  hom-inv-is-iso-Category :
+    {x y : obj-Category C} {f : type-hom-Category C x y} →
+    is-iso-Category f → type-hom-Category C y x
+  hom-inv-is-iso-Category = hom-inv-is-iso-Precategory (precategory-Category C)
+
+  is-section-hom-inv-is-iso-Category :
+    {x y : obj-Category C} {f : type-hom-Category C x y}
+    (H : is-iso-Category f) →
+    comp-hom-Category C f (hom-inv-is-iso-Category H) ＝
+    id-hom-Category C
+  is-section-hom-inv-is-iso-Category =
+    is-section-hom-inv-is-iso-Precategory (precategory-Category C)
+
+  is-retraction-hom-inv-is-iso-Category :
+    {x y : obj-Category C} {f : type-hom-Category C x y}
+    (H : is-iso-Category f) →
+    comp-hom-Category C (hom-inv-is-iso-Category H) f ＝
+    id-hom-Category C
+  is-retraction-hom-inv-is-iso-Category =
+    is-retraction-hom-inv-is-iso-Precategory (precategory-Category C)
+
+  is-prop-is-iso-Category :
+    {x y : obj-Category C} (f : type-hom-Category C x y) →
+    is-prop (is-iso-Category f)
+  is-prop-is-iso-Category = is-prop-is-iso-Precategory (precategory-Category C)
+
+  is-iso-Category-Prop :
+    {x y : obj-Category C} (f : type-hom-Category C x y) → Prop l2
+  is-iso-Category-Prop = is-iso-Precategory-Prop (precategory-Category C)
+```
+
+### The type of isomorphisms between two objects
+
+```agda
   iso-Category : (x y : obj-Category C) → UU l2
   iso-Category = iso-Precategory (precategory-Category C)
 
   hom-iso-Category :
     {x y : obj-Category C} → iso-Category x y → type-hom-Category C x y
-  hom-iso-Category f = pr1 f
+  hom-iso-Category = hom-iso-Precategory (precategory-Category C)
 
   is-iso-hom-iso-Category :
     {x y : obj-Category C} (f : iso-Category x y) →
     is-iso-Category (hom-iso-Category f)
-  is-iso-hom-iso-Category f = pr2 f
+  is-iso-hom-iso-Category = is-iso-hom-iso-Precategory (precategory-Category C)
 
   hom-inv-iso-Category :
     {x y : obj-Category C} → iso-Category x y → type-hom-Category C y x
-  hom-inv-iso-Category f = pr1 (is-iso-hom-iso-Category f)
+  hom-inv-iso-Category = hom-inv-iso-Precategory (precategory-Category C)
 
   is-section-hom-inv-iso-Category :
     { x y : obj-Category C}
@@ -63,27 +99,20 @@ module _
       ( hom-iso-Category f)
       ( hom-inv-iso-Category f)) ＝
     ( id-hom-Category C)
-  is-section-hom-inv-iso-Category f =
-    pr1 (pr2 (is-iso-hom-iso-Category f))
+  is-section-hom-inv-iso-Category =
+    is-section-hom-inv-iso-Precategory (precategory-Category C)
 
   is-retraction-hom-inv-iso-Category :
     { x y : obj-Category C}
     ( f : iso-Category x y) →
     ( comp-hom-Category C (hom-inv-iso-Category f) (hom-iso-Category f)) ＝
     ( id-hom-Category C)
-  is-retraction-hom-inv-iso-Category f =
-    pr2 (pr2 (is-iso-hom-iso-Category f))
+  is-retraction-hom-inv-iso-Category =
+    is-retraction-hom-inv-iso-Precategory (precategory-Category C)
 
   inv-iso-Category :
     {x y : obj-Category C} → iso-Category x y → iso-Category y x
-  inv-iso-Category f =
-    pair
-      ( hom-inv-iso-Category f)
-      ( pair
-        ( hom-iso-Category f)
-        ( pair
-          ( is-retraction-hom-inv-iso-Category f)
-          ( is-section-hom-inv-iso-Category f)))
+  inv-iso-Category = inv-iso-Precategory (precategory-Category C)
 ```
 
 ### Precomposing by isomorphisms
@@ -279,15 +308,6 @@ module _
 ```
 
 ## Properties
-
-### The property of being an isomorphism is a proposition
-
-```agda
-is-prop-is-iso-Category :
-  {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
-  (f : type-hom-Category C x y) → is-prop (is-iso-Category C f)
-is-prop-is-iso-Category C = is-prop-is-iso-Precategory (precategory-Category C)
-```
 
 ### Characterizing equality of isomorphisms
 

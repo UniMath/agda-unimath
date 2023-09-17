@@ -86,6 +86,11 @@ module _
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
+  associative-composition-structure-Category :
+    associative-composition-structure-Set hom-Category
+  associative-composition-structure-Category =
+    associative-composition-structure-Precategory precategory-Category
+
   id-hom-Category : {x : obj-Category} → type-hom-Category x x
   id-hom-Category = id-hom-Precategory precategory-Category
 
@@ -100,6 +105,13 @@ module _
     comp-hom-Category f id-hom-Category ＝ f
   right-unit-law-comp-hom-Category =
     right-unit-law-comp-hom-Precategory precategory-Category
+
+  is-unital-composition-structure-Category :
+    is-unital-composition-structure-Set
+      hom-Category
+      associative-composition-structure-Category
+  is-unital-composition-structure-Category =
+    is-unital-composition-structure-Precategory precategory-Category
 
   is-category-Category :
     is-category-Precategory precategory-Category

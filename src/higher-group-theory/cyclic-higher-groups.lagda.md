@@ -24,8 +24,9 @@ One may wonder if the notion of [cyclic group](group-theory.cyclic-groups.md)
 generalizes to [higher groups](higher-group-theory.higher-groups.md). A naive
 way of defining cyclic higher groups is to extend the universal property of
 cyclic groups to all higher groups. Following this idea, we say that a higher
-group `G` is cyclic if there [exists](foundation.existential-quantification.md)
-an element `g` of `G` such that the evaluation map
+group `G` is **cyclic** if there
+[exists](foundation.existential-quantification.md) an element `g` of `G` such
+that the evaluation map
 
 ```text
   hom-∞-Group G H → type-∞-Group H

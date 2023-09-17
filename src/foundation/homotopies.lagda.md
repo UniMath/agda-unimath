@@ -21,8 +21,6 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
@@ -122,7 +120,7 @@ module _
   is-equiv-left-transpose-htpy-concat :
     is-equiv (left-transpose-htpy-concat H K L)
   is-equiv-left-transpose-htpy-concat =
-    is-equiv-map-equiv-Π-equiv-family _
+    is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
 
   equiv-left-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
@@ -132,7 +130,7 @@ module _
   is-equiv-right-transpose-htpy-concat :
     is-equiv (right-transpose-htpy-concat H K L)
   is-equiv-right-transpose-htpy-concat =
-    is-equiv-map-equiv-Π-equiv-family _
+    is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-right-transpose-eq-concat (H x) (K x) (L x))
 
   equiv-right-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))

@@ -12,7 +12,6 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.mere-equality
 open import foundation.propositions
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
@@ -24,8 +23,10 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-An ∞-group is just a pointed connected type. Its underlying type is its loop
-space, and the classifying type is the pointed connected type itself.
+An **∞-group** is just a [pointed](structured-types.pointed-types.md)
+[connected](foundation.0-connected-types.md) type. Its underlying type is its
+[loop space](synthetic-homotopy-theory.loop-spaces.md), and the classifying type
+is the pointed connected type itself.
 
 ## Definition
 
@@ -111,13 +112,4 @@ module _
     (x : type-∞-Group) → Id (mul-∞-Group x (inv-∞-Group x)) unit-∞-Group
   right-inverse-law-mul-∞-Group =
     right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
-```
-
-### The trivial higher group
-
-```agda
-trivial-∞-Group : {l : Level} → ∞-Group l
-trivial-∞-Group =
-  ( (raise-unit _) , raise-star) ,
-  is-0-connected-is-contr (raise-unit _) is-contr-raise-unit
 ```

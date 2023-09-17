@@ -446,8 +446,7 @@ module _
       ( is-mono-is-emb g H B)
       ( λ j →
         is-emb-is-equiv
-          ( is-equiv-map-equiv-Π-equiv-family
-            ( λ x → ap g)
+          ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ x → H (i x) (j (f x)))))
 ```
 

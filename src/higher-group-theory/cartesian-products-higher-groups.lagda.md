@@ -29,7 +29,8 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-The Cartesian product of higher groups is also a higher group.
+The **cartesian product** of
+[higher groups](higher-group-theory.higher-groups.md) is also a higher group.
 
 ## Definition
 

@@ -658,10 +658,11 @@ is-equiv-Fam-pushout-cocone-UU :
   is-equiv (Fam-pushout-cocone-UU l {f = f} {g})
 is-equiv-Fam-pushout-cocone-UU l {f = f} {g} =
   is-equiv-tot-is-fiberwise-equiv
-    ( λ PA → is-equiv-tot-is-fiberwise-equiv
-      ( λ PB → is-equiv-map-equiv-Π-equiv-family
-        ( λ s → equiv-eq)
-        ( λ s → univalence (PA (f s)) (PB (g s)))))
+    ( λ PA →
+      is-equiv-tot-is-fiberwise-equiv
+        ( λ PB →
+          is-equiv-map-Π-is-fiberwise-equiv
+            ( λ s → univalence (PA (f s)) (PB (g s)))))
 
 htpy-equiv-eq-ap-fam :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : Id x y) →

@@ -7,11 +7,7 @@ module structured-types.dependent-products-pointed-types where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import structured-types.pointed-types

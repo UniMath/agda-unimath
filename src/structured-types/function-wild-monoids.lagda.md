@@ -7,17 +7,9 @@ module structured-types.function-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
-open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.sets
-open import foundation.unit-type
 open import foundation.universe-levels
 
-open import structured-types.dependent-products-h-spaces
 open import structured-types.dependent-products-wild-monoids
 open import structured-types.h-spaces
 open import structured-types.pointed-types
