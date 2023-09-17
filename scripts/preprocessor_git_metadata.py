@@ -74,25 +74,25 @@ def get_author_element_for_file(filename, include_contributors):
 
     attribution_text = ''
     if include_contributors:
-      # Arguments mostly copied from the 1lab pipeline
-      raw_authors_git_output = subprocess.run([
-          'git', 'shortlog',
-          # Sort by number of commits and only print the contributor names
-          '-ns',
-          # Skip chore commits
-          '--invert-grep', '--grep=^chore:',
-          # Include authors and co-authors
-          '--group=author', '--group=trailer:co-authored-by',
-          # Limit to changes to the target file
-          'HEAD', '--', filename
-      ], capture_output=True, text=True, check=True).stdout.splitlines()
+        # Arguments mostly copied from the 1lab pipeline
+        raw_authors_git_output = subprocess.run([
+            'git', 'shortlog',
+            # Sort by number of commits and only print the contributor names
+            '-ns',
+            # Skip chore commits
+            '--invert-grep', '--grep=^chore:',
+            # Include authors and co-authors
+            '--group=author', '--group=trailer:co-authored-by',
+            # Limit to changes to the target file
+            'HEAD', '--', filename
+        ], capture_output=True, text=True, check=True).stdout.splitlines()
 
-      # Collect authors and sort by number of commits
-      author_names = [
-          author['displayName']
-          for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
-      ]
-      attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}</i></p>'
+        # Collect authors and sort by number of commits
+        author_names = [
+            author['displayName']
+            for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
+        ]
+        attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -213,8 +213,10 @@ if __name__ == '__main__':
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
     metadata_config = context['config']['preprocessor']['git-metadata']
-    metadata_config['attribute_file_extensions'] = metadata_config.get('attribute_file_extensions', [])
-    metadata_config['suppress_processing'] = metadata_config.get('suppress_processing', [])
+    metadata_config['attribute_file_extensions'] = metadata_config.get(
+        'attribute_file_extensions', [])
+    metadata_config['suppress_processing'] = metadata_config.get(
+        'suppress_processing', [])
 
     start = time.time()
     if metadata_config.get('enable') == True:

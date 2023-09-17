@@ -26,7 +26,7 @@ CLASSES_MAP = defaultdict(list)
 # Aspects
 CLASSES_MAP['comment'].append('Comment')
 # CLASSES_MAP[''].append('Markup')
-CLASSES_MAP['keyword'].append('Keyword') # Maybe?
+CLASSES_MAP['keyword'].append('Keyword')
 CLASSES_MAP['string'].append('String')
 CLASSES_MAP['number'].append('Number')
 CLASSES_MAP['punctuation'].append('Symbol')
@@ -43,10 +43,11 @@ CLASSES_MAP['title.class_'].append('CoinductiveConstructor')
 CLASSES_MAP['type'].append('Datatype')
 CLASSES_MAP['property'].append('Field')
 CLASSES_MAP['title.function_'].append('Function')
-CLASSES_MAP['variable.constant_'].append('Module') # Maybe?
+CLASSES_MAP['variable.constant_'].append('Module')
 CLASSES_MAP['literal'].append('Postulate')
 CLASSES_MAP['literal'].append('Primitive')
-CLASSES_MAP['type'].append('Record')
+# Use the same color as modules
+CLASSES_MAP['title.function_'].append('Record')
 
 # OtherAspects
 # Keep the defaults, they should be legible on all themes
@@ -60,6 +61,7 @@ CLASSES_MAP['type'].append('Record')
 # CLASSES_MAP[''].append('Deadcode')
 # CLASSES_MAP[''].append('ShadowingInTelescope')
 
+
 def dump_block_for_themes(theme, classes, contents, outfile, is_selector_class=True):
     themes = [theme]
     if theme == 'mocha':
@@ -71,6 +73,7 @@ def dump_block_for_themes(theme, classes, contents, outfile, is_selector_class=T
                 file=outfile
             )
         pass
+
 
 if __name__ == '__main__':
     with open(CATPPUCCIN_HIGHLIGHT_FILE) as highlight_css:
