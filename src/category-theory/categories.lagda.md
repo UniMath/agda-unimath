@@ -118,6 +118,26 @@ module _
   is-category-Category = pr2 C
 ```
 
+### Precomposition by a morphism
+
+```agda
+precomp-hom-Category :
+  {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
+  (f : type-hom-Category C x y) (z : obj-Category C) →
+  type-hom-Category C y z → type-hom-Category C x z
+precomp-hom-Category C = precomp-hom-Precategory (precategory-Category C)
+```
+
+### Postcomposition by a morphism
+
+```agda
+postcomp-hom-Category :
+  {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
+  (f : type-hom-Category C x y) (z : obj-Category C) →
+  type-hom-Category C z x → type-hom-Category C z y
+postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
+```
+
 ## Properties
 
 ### The objects in a category form a 1-type
