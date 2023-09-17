@@ -78,8 +78,11 @@ MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./scripts/generate_maintainers.py
 CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./scripts/generate_contributors.py
 	@python3 ./scripts/generate_contributors.py
 
+website/css/Agda-highlight.css: ./scripts/generate_agda_css.py ./theme/catppuccin.css
+	@python3 ./scripts/generate_agda_css.py
+
 .PHONY: website-prepare
-website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md
+website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md ./website/css/Agda-highlight.css
 	@cp $(METAFILES) ./docs/
 	@mkdir -p ./docs/website
 	@cp -r -T ./website/images ./docs/website/images

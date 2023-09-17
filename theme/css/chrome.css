@@ -6,7 +6,7 @@ html {
   scrollbar-color: var(--scrollbar) var(--bg);
 }
 #searchresults a,
-.content a:link,
+.content :not(pre) > a:link,
 a:visited,
 a > .hljs {
   color: var(--links);
