@@ -31,8 +31,10 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-A subtype of a type `A` is a family of propositions over `A`. The underlying
-type of a subtype `P` of `A` is the total space `Σ A B`.
+A **subtype** of a type `A` is a family of
+[propositions](foundation-core.propositions.md) over `A`. The underlying type of
+a subtype `P` of `A` is the [total space](foundation.dependent-pair-types.md)
+`Σ A B`.
 
 ## Definitions
 
@@ -76,6 +78,10 @@ module _
   is-in-subtype-inclusion-subtype :
     (x : type-subtype) → is-in-subtype (inclusion-subtype x)
   is-in-subtype-inclusion-subtype = pr2
+
+  eq-is-in-subtype :
+    {x : A} {p q : is-in-subtype x} → p ＝ q
+  eq-is-in-subtype {x} = eq-is-prop (is-prop-is-in-subtype x)
 
   is-closed-under-eq-subtype :
     {x y : A} → is-in-subtype x → (x ＝ y) → is-in-subtype y
