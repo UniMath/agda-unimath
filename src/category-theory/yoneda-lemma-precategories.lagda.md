@@ -97,7 +97,7 @@ module _
     eq-type-subtype
       ( is-natural-transformation-Precategory-Prop
         ( C) (Set-Precategory l1) (rep-functor-Precategory C c) F)
-    ( eq-htpy
+      ( eq-htpy
         ( λ x →
           eq-htpy
             ( λ f →
