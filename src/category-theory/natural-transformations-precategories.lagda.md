@@ -220,13 +220,13 @@ module _
   {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
   where
 
-  eq-natural-transformation-Precategory :
+  extensionality-natural-transformation-Precategory :
     (F G : functor-Precategory C D)
     (α β : natural-transformation-Precategory C D F G) →
     ( components-natural-transformation-Precategory C D F G α ＝
       components-natural-transformation-Precategory C D F G β) →
     α ＝ β
-  eq-natural-transformation-Precategory F G α β =
+  extensionality-natural-transformation-Precategory F G α β =
     is-injective-is-emb
       ( components-natural-transformation-Precategory-is-emb C D F G)
 
@@ -236,7 +236,7 @@ module _
     comp-natural-transformation-Precategory C D F F G α
       ( id-natural-transformation-Precategory C D F) ＝ α
   right-unit-law-comp-natural-transformation-Precategory {F} {G} α =
-    eq-natural-transformation-Precategory F G
+    extensionality-natural-transformation-Precategory F G
       ( comp-natural-transformation-Precategory C D F F G α
         ( id-natural-transformation-Precategory C D F))
       ( α)
@@ -250,7 +250,7 @@ module _
     comp-natural-transformation-Precategory C D F G G
       ( id-natural-transformation-Precategory C D G) α ＝ α
   left-unit-law-comp-natural-transformation-Precategory {F} {G} α =
-    eq-natural-transformation-Precategory F G
+    extensionality-natural-transformation-Precategory F G
       ( comp-natural-transformation-Precategory C D F G G
         ( id-natural-transformation-Precategory C D G) α)
       ( α)
@@ -268,7 +268,7 @@ module _
     comp-natural-transformation-Precategory C D F H I γ
       ( comp-natural-transformation-Precategory C D F G H β α)
   associative-comp-natural-transformation-Precategory {F} {G} {H} {I} α β γ =
-    eq-natural-transformation-Precategory F I _ _
+    extensionality-natural-transformation-Precategory F I _ _
     ( eq-htpy λ x →
       associative-comp-hom-Precategory D
         ( components-natural-transformation-Precategory C D H I γ x)

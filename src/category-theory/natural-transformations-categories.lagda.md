@@ -177,14 +177,14 @@ module _
   {l1 l2 l3 l4 : Level} (C : Category l1 l2) (D : Category l3 l4)
   where
 
-  eq-natural-transformation-Category :
+  extensionality-natural-transformation-Category :
     (F G : functor-Category C D)
     (α β : natural-transformation-Category C D F G) →
     ( components-natural-transformation-Category C D F G α ＝
       components-natural-transformation-Category C D F G β) →
     α ＝ β
-  eq-natural-transformation-Category F G =
-    eq-natural-transformation-Precategory
+  extensionality-natural-transformation-Category F G =
+    extensionality-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
