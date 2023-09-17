@@ -59,7 +59,7 @@ module _
   (f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
   (hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
   where
-  
+
   coherence-cube-maps :
     (top : (h' ∘ f') ~ (k' ∘ g'))
     (back-left : (f ∘ hA) ~ (hB ∘ f'))
@@ -244,7 +244,7 @@ module _
   (front-right : coherence-square-maps k' hC hD k)
   (bottom : coherence-square-maps g f k h)
   where
-  
+
   rectangle-left-cube :
     ((h ∘ f) ∘ hA) ~ (hD ∘ (h' ∘ f'))
   rectangle-left-cube =
@@ -280,7 +280,7 @@ module _
     ((h ∘ hB) ∘ f') ~ ((hD ∘ k') ∘ g')
   rectangle-top-front-left-cube =
     ( front-left ·r f') ∙h (hD ·l top)
-    
+
   rectangle-back-right-bottom-cube :
     ((h ∘ f) ∘ hA) ~ ((k ∘ hC) ∘ g')
   rectangle-back-right-bottom-cube =
@@ -290,14 +290,16 @@ module _
     ((hD ∘ h') ∘ f') ~ ((k ∘ hC) ∘ g')
   rectangle-top-front-right-cube =
     (hD ·l top) ∙h (inv-htpy (front-right) ·r g')
-  
+
   rectangle-back-left-bottom-cube :
     ((h ∘ hB) ∘ f') ~ ((k ∘ g) ∘ hA)
   rectangle-back-left-bottom-cube =
     (h ·l (inv-htpy back-left)) ∙h (bottom ·r hA)
 ```
 
-In analogy to the coherence `coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube` we also expect to be able to construct a coherence
+In analogy to the coherence
+`coherence-htpy-parallel-cone-rectangle-left-rectangle-right-cube` we also
+expect to be able to construct a coherence
 
 ```text
   coherence-htpy-parallel-cone-rectangle-top-fl-rectangle-br-bot-cube :

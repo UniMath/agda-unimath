@@ -100,8 +100,8 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
 Next we characterize the identity type of the type of cones with a given vertex
 C. Note that in the definition of htpy-cone we do not use pattern matching on
 the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a
-Σ-type for any c and c', not just for c and c' of the form (p , q , H)
-and (p' , q' , H') respectively.
+Σ-type for any c and c', not just for c and c' of the form (p , q , H) and (p' ,
+q' , H') respectively.
 
 ```agda
 module _
