@@ -43,6 +43,7 @@ open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
+open import foundation.commuting-triangles-of-identifications public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
@@ -84,6 +85,7 @@ open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
+open import foundation.disequality public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public

@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.universal-property-pushouts
 
 ## Idea
 
-The join of `A` and `B` is the pushout of the span `A ← A × B → B`.
+The **join** of `A` and `B` is the pushout of the span `A ← A × B → B`.
 
 ## Definition
 
@@ -87,10 +87,10 @@ module _
   compute-glue-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
     ( ap (cogap-join X c) ∘ glue-join) ~
-    ( λ x →
-      ( compute-inl-cogap-join c (pr1 x)) ∙
-      ( coherence-square-cocone pr1 pr2 c x) ∙
-      ( inv (compute-inr-cogap-join c (pr2 x))))
+    ( λ (a , b) →
+      ( compute-inl-cogap-join c a) ∙
+      ( coherence-square-cocone pr1 pr2 c (a , b)) ∙
+      ( inv (compute-inr-cogap-join c b)))
   compute-glue-cogap-join = compute-glue-cogap pr1 pr2
 ```
 
@@ -192,7 +192,8 @@ left-zero-law-join X =
     ( is-contr-unit)
 
 is-equiv-inl-join-is-contr :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr A → is-equiv (inl-join {A = A} {B = B})
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+  is-contr A → is-equiv (inl-join {A = A} {B = B})
 is-equiv-inl-join-is-contr A B is-contr-A =
   is-equiv-universal-property-pushout'
     ( pr1)
@@ -232,7 +233,8 @@ right-zero-law-join X =
     ( is-contr-unit)
 
 is-equiv-inr-join-is-contr :
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) → is-contr B → is-equiv (inr-join {A = A} {B = B})
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) →
+  is-contr B → is-equiv (inr-join {A = A} {B = B})
 is-equiv-inr-join-is-contr A B is-contr-B =
   is-equiv-universal-property-pushout
     ( pr1)
