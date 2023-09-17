@@ -1,7 +1,7 @@
-# Hexagons of identifications
+# Commuting hexagons of identifications
 
 ```agda
-module foundation.hexagons-of-identifications where
+module foundation.commuting-hexagons-of-identifications where
 ```
 
 <details><summary>Imports</summary>
