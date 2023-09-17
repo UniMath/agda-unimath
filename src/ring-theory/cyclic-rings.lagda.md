@@ -8,12 +8,15 @@ module ring-theory.cyclic-rings where
 
 ```agda
 open import elementary-number-theory.integers
+open import elementary-number-theory.ring-of-integers
 
 open import foundation.dependent-pair-types
+open import foundation.fibers-of-maps
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -165,47 +168,61 @@ module _
     add-Cyclic-Ring (mul-Cyclic-Ring x z) (mul-Cyclic-Ring y z)
   right-distributive-mul-add-Cyclic-Ring =
     right-distributive-mul-add-Ring ring-Cyclic-Ring
+```
 
-  is-surjective-hom-element-one-Cyclic-Ring :
-    is-surjective-hom-element-Group group-Cyclic-Ring one-Cyclic-Ring
-  is-surjective-hom-element-one-Cyclic-Ring x =
+## Properties
+
+### If `R` is a cyclic ring, then any generator of its additive group is invertible
+
+### If `R` is a cyclic ring, then `1` is a generator of its additive group
+
+### `R` is a cylcic ring if and only if `initial-hom-Ring R` is surjective.
+
+```agda
+module _
+  {l : Level} (R : Cyclic-Ring l)
+  where
+  
+  is-surjective-initial-hom-Cyclic-Ring :
+    is-surjective (map-initial-hom-Ring (ring-Cyclic-Ring R))
+  is-surjective-initial-hom-Cyclic-Ring x =
     apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring)
+      ( is-cyclic-Cyclic-Ring R)
       ( trunc-Prop
-        ( Σ ℤ (λ k → integer-multiple-Cyclic-Ring k one-Cyclic-Ring ＝ x)))
+        ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
       ( λ (g , u) →
         apply-twice-universal-property-trunc-Prop
           ( is-surjective-hom-element-is-generating-element-Group
-            ( group-Cyclic-Ring)
+            ( group-Cyclic-Ring R)
             ( g)
             ( u)
-            ( one-Cyclic-Ring))
+            ( one-Cyclic-Ring R))
           ( is-surjective-hom-element-is-generating-element-Group
-            ( group-Cyclic-Ring)
+            ( group-Cyclic-Ring R)
             ( g)
             ( u)
             ( x))
           ( trunc-Prop
-            ( Σ ℤ (λ k → integer-multiple-Cyclic-Ring k one-Cyclic-Ring ＝ x)))
+            ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
           ( λ { (k , p) (l , refl) →
                 unit-trunc-Prop
                   {!!}}))
 
   is-generating-element-one-Cyclic-Ring :
-    is-generating-element-Group group-Cyclic-Ring one-Cyclic-Ring
+    is-generating-element-Group (group-Cyclic-Ring R) (one-Cyclic-Ring R)
   is-generating-element-one-Cyclic-Ring x =
     apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring)
+      ( is-cyclic-Cyclic-Ring R)
       ( trunc-Prop (Σ {!ℤ!} {!!}))
       {!!}
 
   commutative-mul-Cyclic-Ring :
-    (x y : type-Cyclic-Ring) →
-    mul-Cyclic-Ring x y ＝ mul-Cyclic-Ring y x
+    (x y : type-Cyclic-Ring R) →
+    mul-Cyclic-Ring R x y ＝ mul-Cyclic-Ring R y x
   commutative-mul-Cyclic-Ring x y =
     apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring)
-      ( Id-Prop set-Cyclic-Ring _ _)
+      ( is-cyclic-Cyclic-Ring R)
+      ( Id-Prop (set-Cyclic-Ring R) _ _)
       ( λ (g , u) →
         {!!})
 ```

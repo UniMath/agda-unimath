@@ -1,7 +1,7 @@
-# The commutative ring of integers
+# The ring of integers
 
 ```agda
-module elementary-number-theory.commutative-ring-of-integers where
+module elementary-number-theory.ring-of-integers where
 ```
 
 <details><summary>Imports</summary>
@@ -101,49 +101,49 @@ module _
   {l1 : Level} (R : Ring l1)
   where
 
-  hom-group-hom-ℤ-Ring : type-hom-Group ℤ-Group (group-Ring R)
-  hom-group-hom-ℤ-Ring = hom-element-Group (group-Ring R) (one-Ring R)
+  hom-group-initial-hom-Ring : type-hom-Group ℤ-Group (group-Ring R)
+  hom-group-initial-hom-Ring = hom-element-Group (group-Ring R) (one-Ring R)
 
-  map-hom-ℤ-Ring : ℤ → type-Ring R
-  map-hom-ℤ-Ring =
-    map-hom-Group ℤ-Group (group-Ring R) hom-group-hom-ℤ-Ring
+  map-initial-hom-Ring : ℤ → type-Ring R
+  map-initial-hom-Ring =
+    map-hom-Group ℤ-Group (group-Ring R) hom-group-initial-hom-Ring
 
-  preserves-add-hom-ℤ-Ring :
+  preserves-add-initial-hom-Ring :
     (k l : ℤ) →
-    map-hom-ℤ-Ring (add-ℤ k l) ＝
-    add-Ring R (map-hom-ℤ-Ring k) (map-hom-ℤ-Ring l)
-  preserves-add-hom-ℤ-Ring =
-    preserves-mul-hom-Group ℤ-Group (group-Ring R) hom-group-hom-ℤ-Ring
+    map-initial-hom-Ring (add-ℤ k l) ＝
+    add-Ring R (map-initial-hom-Ring k) (map-initial-hom-Ring l)
+  preserves-add-initial-hom-Ring =
+    preserves-mul-hom-Group ℤ-Group (group-Ring R) hom-group-initial-hom-Ring
 
-  preserves-one-hom-ℤ-Ring : map-hom-ℤ-Ring one-ℤ ＝ one-Ring R
-  preserves-one-hom-ℤ-Ring = integer-multiple-one-Ring R (one-Ring R)
+  preserves-one-initial-hom-Ring : map-initial-hom-Ring one-ℤ ＝ one-Ring R
+  preserves-one-initial-hom-Ring = integer-multiple-one-Ring R (one-Ring R)
 
-  preserves-mul-hom-ℤ-Ring :
+  preserves-mul-initial-hom-Ring :
     (k l : ℤ) →
-    map-hom-ℤ-Ring (mul-ℤ k l) ＝
-    mul-Ring R (map-hom-ℤ-Ring k) (map-hom-ℤ-Ring l)
-  preserves-mul-hom-ℤ-Ring k l =
-    ( ap map-hom-ℤ-Ring (commutative-mul-ℤ k l)) ∙
+    map-initial-hom-Ring (mul-ℤ k l) ＝
+    mul-Ring R (map-initial-hom-Ring k) (map-initial-hom-Ring l)
+  preserves-mul-initial-hom-Ring k l =
+    ( ap map-initial-hom-Ring (commutative-mul-ℤ k l)) ∙
     ( integer-multiple-mul-Ring R l k (one-Ring R)) ∙
     ( ap (integer-multiple-Ring R l) (inv (right-unit-law-mul-Ring R _))) ∙
     ( inv (right-integer-multiple-law-mul-Ring R l _ _))
 
-  hom-ℤ-Ring : type-hom-Ring ℤ-Ring R
-  pr1 hom-ℤ-Ring = hom-group-hom-ℤ-Ring
-  pr1 (pr2 hom-ℤ-Ring) = preserves-mul-hom-ℤ-Ring
-  pr2 (pr2 hom-ℤ-Ring) = preserves-one-hom-ℤ-Ring
+  initial-hom-Ring : type-hom-Ring ℤ-Ring R
+  pr1 initial-hom-Ring = hom-group-initial-hom-Ring
+  pr1 (pr2 initial-hom-Ring) = preserves-mul-initial-hom-Ring
+  pr2 (pr2 initial-hom-Ring) = preserves-one-initial-hom-Ring
 ```
 
-#### Any ring homomorphisms from `ℤ` to `R` is equal to the homomorphism `hom-ℤ-Ring`
+#### Any ring homomorphisms from `ℤ` to `R` is equal to the homomorphism `initial-hom-Ring`
 
 ```agda
 module _
   {l : Level} (R : Ring l)
   where
   
-  htpy-hom-ℤ-Ring :
-    (f : type-hom-Ring ℤ-Ring R) → htpy-hom-Ring ℤ-Ring R (hom-ℤ-Ring R) f
-  htpy-hom-ℤ-Ring f k =
+  htpy-initial-hom-Ring :
+    (f : type-hom-Ring ℤ-Ring R) → htpy-hom-Ring ℤ-Ring R (initial-hom-Ring R) f
+  htpy-initial-hom-Ring f k =
     ( inv
       ( ( preserves-integer-multiples-hom-Ring ℤ-Ring R f k one-ℤ) ∙
         ( ap
@@ -151,16 +151,16 @@ module _
           ( preserves-one-hom-Ring ℤ-Ring R f)))) ∙
     ( ap (map-hom-Ring ℤ-Ring R f) (is-integer-multiple-ℤ k))
 
-  contraction-hom-ℤ-Ring :
-    (f : type-hom-Ring ℤ-Ring R) → hom-ℤ-Ring R ＝ f
-  contraction-hom-ℤ-Ring f =
-    eq-htpy-hom-Ring ℤ-Ring R (hom-ℤ-Ring R) f (htpy-hom-ℤ-Ring f)
+  contraction-initial-hom-Ring :
+    (f : type-hom-Ring ℤ-Ring R) → initial-hom-Ring R ＝ f
+  contraction-initial-hom-Ring f =
+    eq-htpy-hom-Ring ℤ-Ring R (initial-hom-Ring R) f (htpy-initial-hom-Ring f)
 ```
 
 #### The ring of integers is the initial ring
 
 ```agda
 is-initial-ℤ-Ring : is-initial-Ring ℤ-Ring
-pr1 (is-initial-ℤ-Ring S) = hom-ℤ-Ring S
-pr2 (is-initial-ℤ-Ring S) f = contraction-hom-ℤ-Ring S f
+pr1 (is-initial-ℤ-Ring S) = initial-hom-Ring S
+pr2 (is-initial-ℤ-Ring S) f = contraction-initial-hom-Ring S f
 ```
