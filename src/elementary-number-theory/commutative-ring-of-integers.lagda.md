@@ -13,17 +13,21 @@ open import elementary-number-theory.addition-integers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
+open import elementary-number-theory.natural-numbers
 
+open import foundation.action-on-identifications-functions
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.homomorphisms-groups
 
-open import ring-theory.free-rings-with-one-generator
 open import ring-theory.homomorphisms-rings
+open import ring-theory.initial-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
 ```
@@ -54,38 +58,109 @@ pr2 ℤ-Commutative-Ring = commutative-mul-ℤ
 
 ## Properties
 
-### The ring of integers equipped with the integer `1` is the free ring with one generator
+### The integer multiples in `ℤ-Ring` coincide with multiplication in `ℤ`
 
-#### The homomorphism from `ℤ` to a ring equipped with an element
+```agda
+is-mul-integer-multiple-ℤ-Ring :
+  (k l : ℤ) → integer-multiple-Ring ℤ-Ring k l ＝ mul-ℤ k l
+is-mul-integer-multiple-ℤ-Ring (inl zero-ℕ) l =
+  ( integer-multiple-neg-one-Ring ℤ-Ring l) ∙
+  ( is-left-mul-neg-one-neg-ℤ l)
+is-mul-integer-multiple-ℤ-Ring (inl (succ-ℕ k)) l =
+  ( integer-multiple-pred-Ring ℤ-Ring (inl k) l) ∙
+  ( ap
+    ( λ t → right-subtraction-Ring ℤ-Ring t l)
+    ( is-mul-integer-multiple-ℤ-Ring (inl k) l)) ∙
+  ( commutative-add-ℤ (mul-ℤ (inl k) l) (neg-ℤ l)) ∙
+  ( inv (left-predecessor-law-mul-ℤ (inl k) l))
+is-mul-integer-multiple-ℤ-Ring (inr (inl star)) l =
+  ( integer-multiple-zero-Ring ℤ-Ring l) ∙
+  ( inv (left-zero-law-mul-ℤ l))
+is-mul-integer-multiple-ℤ-Ring (inr (inr zero-ℕ)) l =
+  ( integer-multiple-one-Ring ℤ-Ring l) ∙
+  ( inv (left-unit-law-mul-ℤ l))
+is-mul-integer-multiple-ℤ-Ring (inr (inr (succ-ℕ k))) l =
+  ( integer-multiple-succ-Ring ℤ-Ring (inr (inr k)) l) ∙
+  ( ap (add-ℤ' l) (is-mul-integer-multiple-ℤ-Ring (inr (inr k)) l)) ∙
+  ( commutative-add-ℤ _ l) ∙
+  ( inv (left-successor-law-mul-ℤ (inr (inr k)) l))
+
+is-integer-multiple-ℤ :
+  (k : ℤ) → integer-multiple-Ring ℤ-Ring k one-ℤ ＝ k
+is-integer-multiple-ℤ k =
+  ( is-mul-integer-multiple-ℤ-Ring k one-ℤ) ∙
+  ( right-unit-law-mul-ℤ k)
+```
+
+### The ring of integers is the initial ring
+
+#### The homomorphism from `ℤ` to a ring
 
 ```agda
 module _
-  {l1 : Level} (R : Ring l1) (x : type-Ring R)
+  {l1 : Level} (R : Ring l1)
   where
 
-  hom-group-hom-element-Ring : type-hom-Group ℤ-Group (group-Ring R)
-  hom-group-hom-element-Ring =
-    hom-element-Group (group-Ring R) x
+  hom-group-hom-ℤ-Ring : type-hom-Group ℤ-Group (group-Ring R)
+  hom-group-hom-ℤ-Ring = hom-element-Group (group-Ring R) (one-Ring R)
 
-  map-hom-element-Ring : ℤ → type-Ring R
-  map-hom-element-Ring =
-    map-hom-Group ℤ-Group (group-Ring R) hom-group-hom-element-Ring
+  map-hom-ℤ-Ring : ℤ → type-Ring R
+  map-hom-ℤ-Ring =
+    map-hom-Group ℤ-Group (group-Ring R) hom-group-hom-ℤ-Ring
 
-  preserves-add-hom-element-Ring :
+  preserves-add-hom-ℤ-Ring :
     (k l : ℤ) →
-    map-hom-element-Ring (add-ℤ k l) ＝
-    add-Ring R (map-hom-element-Ring k) (map-hom-element-Ring l)
-  preserves-add-hom-element-Ring =
-    preserves-mul-hom-Group ℤ-Group (group-Ring R) hom-group-hom-element-Ring
+    map-hom-ℤ-Ring (add-ℤ k l) ＝
+    add-Ring R (map-hom-ℤ-Ring k) (map-hom-ℤ-Ring l)
+  preserves-add-hom-ℤ-Ring =
+    preserves-mul-hom-Group ℤ-Group (group-Ring R) hom-group-hom-ℤ-Ring
 
-  hom-element-Ring : type-hom-Ring ℤ-Ring R
-  hom-element-Ring = {!!}
+  preserves-one-hom-ℤ-Ring : map-hom-ℤ-Ring one-ℤ ＝ one-Ring R
+  preserves-one-hom-ℤ-Ring = integer-multiple-one-Ring R (one-Ring R)
+
+  preserves-mul-hom-ℤ-Ring :
+    (k l : ℤ) →
+    map-hom-ℤ-Ring (mul-ℤ k l) ＝
+    mul-Ring R (map-hom-ℤ-Ring k) (map-hom-ℤ-Ring l)
+  preserves-mul-hom-ℤ-Ring k l =
+    ( ap map-hom-ℤ-Ring (commutative-mul-ℤ k l)) ∙
+    ( integer-multiple-mul-Ring R l k (one-Ring R)) ∙
+    ( ap (integer-multiple-Ring R l) (inv (right-unit-law-mul-Ring R _))) ∙
+    ( inv (right-integer-multiple-law-mul-Ring R l _ _))
+
+  hom-ℤ-Ring : type-hom-Ring ℤ-Ring R
+  pr1 hom-ℤ-Ring = hom-group-hom-ℤ-Ring
+  pr1 (pr2 hom-ℤ-Ring) = preserves-mul-hom-ℤ-Ring
+  pr2 (pr2 hom-ℤ-Ring) = preserves-one-hom-ℤ-Ring
 ```
 
-#### The ring of integers equipped with the integer `1` is the free ring with one generator
+#### Any ring homomorphisms from `ℤ` to `R` is equal to the homomorphism `hom-ℤ-Ring`
 
 ```agda
-is-free-ring-with-one-generator-ℤ-Ring :
-  is-free-ring-with-one-generator ℤ-Ring one-ℤ
-is-free-ring-with-one-generator-ℤ-Ring S = {!!}
+module _
+  {l : Level} (R : Ring l)
+  where
+  
+  htpy-hom-ℤ-Ring :
+    (f : type-hom-Ring ℤ-Ring R) → htpy-hom-Ring ℤ-Ring R (hom-ℤ-Ring R) f
+  htpy-hom-ℤ-Ring f k =
+    ( inv
+      ( ( preserves-integer-multiples-hom-Ring ℤ-Ring R f k one-ℤ) ∙
+        ( ap
+          ( integer-multiple-Ring R k)
+          ( preserves-one-hom-Ring ℤ-Ring R f)))) ∙
+    ( ap (map-hom-Ring ℤ-Ring R f) (is-integer-multiple-ℤ k))
+
+  contraction-hom-ℤ-Ring :
+    (f : type-hom-Ring ℤ-Ring R) → hom-ℤ-Ring R ＝ f
+  contraction-hom-ℤ-Ring f =
+    eq-htpy-hom-Ring ℤ-Ring R (hom-ℤ-Ring R) f (htpy-hom-ℤ-Ring f)
+```
+
+#### The ring of integers is the initial ring
+
+```agda
+is-initial-ℤ-Ring : is-initial-Ring ℤ-Ring
+pr1 (is-initial-ℤ-Ring S) = hom-ℤ-Ring S
+pr2 (is-initial-ℤ-Ring S) f = contraction-hom-ℤ-Ring S f
 ```

@@ -31,6 +31,4 @@ module _
   is-generating-element-prop-Ring : Prop l
   is-generating-element-prop-Ring =
     is-generating-element-prop-Group (group-Ring R) g
-
-  is-surjective-hom-element
 ```

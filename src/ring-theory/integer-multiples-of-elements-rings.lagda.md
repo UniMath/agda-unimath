@@ -456,3 +456,19 @@ module _
       ( hom-ab-hom-Ring R S f)
       ( hom-ab-hom-Ring R S g)
 ```
+
+### Ring homomorphisms preserve integer multiples of `1`
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  where
+
+  preserves-integer-multiple-one-hom-Ring :
+    (k : ℤ) →
+    map-hom-Ring R S f (integer-multiple-Ring R k (one-Ring R)) ＝
+    integer-multiple-Ring S k (one-Ring S)
+  preserves-integer-multiple-one-hom-Ring k =
+    ( preserves-integer-multiples-hom-Ring R S f k (one-Ring R)) ∙
+    ( ap (integer-multiple-Ring S k) (preserves-one-hom-Ring R S f))
+```
