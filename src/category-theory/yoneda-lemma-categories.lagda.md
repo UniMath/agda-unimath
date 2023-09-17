@@ -44,23 +44,23 @@ equivalence.
 
 ```agda
 module _
-  {l1 : Level} (C : Category l1 l1) (c : obj-Category C)
-  (F : functor-Category C (Set-Category l1))
+  {l1 l2 : Level} (C : Category l1 l2) (c : obj-Category C)
+  (F : functor-Category C (Set-Category l2))
   where
 
   yoneda-evid-Category :
     natural-transformation-Category
       ( C)
-      ( Set-Category l1)
+      ( Set-Category l2)
       ( rep-functor-Category C c)
       ( F) →
-    type-Set (obj-functor-Category C (Set-Category l1) F c)
+    type-Set (obj-functor-Category C (Set-Category l2) F c)
   yoneda-evid-Category = yoneda-evid-Precategory (precategory-Category C) c F
 
   yoneda-extension-Category :
-    type-Set (obj-functor-Category C (Set-Category l1) F c) →
+    type-Set (obj-functor-Category C (Set-Category l2) F c) →
     natural-transformation-Category
-      C (Set-Category l1) (rep-functor-Category C c) F
+      C (Set-Category l2) (rep-functor-Category C c) F
   yoneda-extension-Category =
     yoneda-extension-Precategory (precategory-Category C) c F
 
@@ -80,9 +80,9 @@ module _
   equiv-yoneda-lemma-Category :
     ( natural-transformation-Category
       ( C)
-      ( Set-Category l1)
+      ( Set-Category l2)
       ( rep-functor-Category C c) (F)) ≃
-    ( type-Set (obj-functor-Category C (Set-Category l1) F c))
+    ( type-Set (obj-functor-Category C (Set-Category l2) F c))
   pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
   pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category
 ```

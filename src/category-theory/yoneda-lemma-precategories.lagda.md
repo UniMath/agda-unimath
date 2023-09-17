@@ -49,21 +49,21 @@ equivalence.
 
 ```agda
 module _
-  {l1 : Level} (C : Precategory l1 l1) (c : obj-Precategory C)
-  (F : functor-Precategory C (Set-Precategory l1))
+  {l1 l2 : Level} (C : Precategory l1 l2) (c : obj-Precategory C)
+  (F : functor-Precategory C (Set-Precategory l2))
   where
 
   yoneda-evid-Precategory :
     natural-transformation-Precategory
       ( C)
-      ( Set-Precategory l1)
+      ( Set-Precategory l2)
       ( rep-functor-Precategory C c)
       ( F) →
-    type-Set (obj-functor-Precategory C (Set-Precategory l1) F c)
+    type-Set (obj-functor-Precategory C (Set-Precategory l2) F c)
   yoneda-evid-Precategory α =
     components-natural-transformation-Precategory
       ( C)
-      ( Set-Precategory l1)
+      ( Set-Precategory l2)
       ( rep-functor-Precategory C c)
       ( F)
       ( α)
@@ -71,24 +71,24 @@ module _
       ( id-hom-Precategory C)
 
   yoneda-extension-Precategory :
-    type-Set (obj-functor-Precategory C (Set-Precategory l1) F c) →
+    type-Set (obj-functor-Precategory C (Set-Precategory l2) F c) →
     natural-transformation-Precategory
-      C (Set-Precategory l1) (rep-functor-Precategory C c) F
+      C (Set-Precategory l2) (rep-functor-Precategory C c) F
   pr1 (yoneda-extension-Precategory u) x f =
-    hom-functor-Precategory C (Set-Precategory l1) F f u
+    hom-functor-Precategory C (Set-Precategory l2) F f u
   pr2 (yoneda-extension-Precategory u) g =
     eq-htpy
       ( λ f →
         htpy-eq
           ( inv
-            ( preserves-comp-functor-Precategory C (Set-Precategory l1) F g f))
+            ( preserves-comp-functor-Precategory C (Set-Precategory l2) F g f))
           ( u))
 
   section-yoneda-evid-Precategory :
     section yoneda-evid-Precategory
   pr1 section-yoneda-evid-Precategory = yoneda-extension-Precategory
   pr2 section-yoneda-evid-Precategory =
-    htpy-eq (preserves-id-functor-Precategory C (Set-Precategory l1) F c)
+    htpy-eq (preserves-id-functor-Precategory C (Set-Precategory l2) F c)
 
   retraction-yoneda-evid-Precategory :
     retraction yoneda-evid-Precategory
@@ -96,7 +96,7 @@ module _
   pr2 retraction-yoneda-evid-Precategory α =
     eq-type-subtype
       ( is-natural-transformation-Precategory-Prop
-        ( C) (Set-Precategory l1) (rep-functor-Precategory C c) F)
+        ( C) (Set-Precategory l2) (rep-functor-Precategory C c) F)
       ( eq-htpy
         ( λ x →
           eq-htpy
@@ -111,9 +111,9 @@ module _
   pr2 yoneda-lemma-Precategory = retraction-yoneda-evid-Precategory
 
   equiv-yoneda-lemma-Precategory :
-    ( natural-transformation-Precategory C (Set-Precategory l1)
+    ( natural-transformation-Precategory C (Set-Precategory l2)
       ( rep-functor-Precategory C c) (F)) ≃
-    ( type-Set (obj-functor-Precategory C (Set-Precategory l1) F c))
+    ( type-Set (obj-functor-Precategory C (Set-Precategory l2) F c))
   pr1 equiv-yoneda-lemma-Precategory = yoneda-evid-Precategory
   pr2 equiv-yoneda-lemma-Precategory = yoneda-lemma-Precategory
 ```
