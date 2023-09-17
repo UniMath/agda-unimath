@@ -23,6 +23,7 @@ open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -93,31 +94,24 @@ module _
     retraction yoneda-evid-Precategory
   pr1 retraction-yoneda-evid-Precategory = yoneda-extension-Precategory
   pr2 retraction-yoneda-evid-Precategory α =
-    eq-pair-Σ
-      ( eq-htpy
+    eq-type-subtype
+      ( is-natural-transformation-Precategory-Prop
+        ( C) (Set-Precategory l1) (rep-functor-Precategory C c) F)
+    ( eq-htpy
         ( λ x →
           eq-htpy
             ( λ f →
-              htpy-eq ((pr2 α) f) ((id-hom-Precategory C {c})) ∙
-              ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f))))
-      ( eq-is-prop'
-        ( is-prop-is-natural-transformation-Precategory
-          ( C)
-          ( Set-Precategory l1)
-          ( rep-functor-Precategory C c)
-          ( F)
-          ( pr1 α))
-        ( _)
-        ( pr2 α))
+              ( htpy-eq
+                ( (pr2 α) f)
+                ( (id-hom-Precategory C))) ∙
+              ( ap (pr1 α x) (right-unit-law-comp-hom-Precategory C f)))))
 
   yoneda-lemma-Precategory : is-equiv yoneda-evid-Precategory
   pr1 yoneda-lemma-Precategory = section-yoneda-evid-Precategory
   pr2 yoneda-lemma-Precategory = retraction-yoneda-evid-Precategory
 
   equiv-yoneda-lemma-Precategory :
-    ( natural-transformation-Precategory
-      ( C)
-      ( Set-Precategory l1)
+    ( natural-transformation-Precategory C (Set-Precategory l1)
       ( rep-functor-Precategory C c) (F)) ≃
     ( type-Set (obj-functor-Precategory C (Set-Precategory l1) F c))
   pr1 equiv-yoneda-lemma-Precategory = yoneda-evid-Precategory

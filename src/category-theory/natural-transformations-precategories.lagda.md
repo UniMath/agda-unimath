@@ -269,9 +269,10 @@ module _
       ( comp-natural-transformation-Precategory C D F G H β α)
   associative-comp-natural-transformation-Precategory {F} {G} {H} {I} α β γ =
     extensionality-natural-transformation-Precategory F I _ _
-    ( eq-htpy λ x →
-      associative-comp-hom-Precategory D
-        ( components-natural-transformation-Precategory C D H I γ x)
-        ( components-natural-transformation-Precategory C D G H β x)
-        ( components-natural-transformation-Precategory C D F G α x))
+    ( eq-htpy
+      ( λ x →
+        associative-comp-hom-Precategory D
+          ( components-natural-transformation-Precategory C D H I γ x)
+          ( components-natural-transformation-Precategory C D G H β x)
+          ( components-natural-transformation-Precategory C D F G α x)))
 ```
