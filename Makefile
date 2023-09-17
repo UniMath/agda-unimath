@@ -81,8 +81,10 @@ CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE}
 .PHONY: website-prepare
 website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md
 	@cp $(METAFILES) ./docs/
-	@cp ./theme/images/agda-unimath-logo.svg ./docs/
-	@cp ./theme/images/agda-unimath-black-and-gold.png ./docs/
+	@mkdir -p ./docs/website
+	@cp -r -T ./website/images ./docs/website/images
+	@cp -r -T ./website/css ./docs/website/css
+	@cp -r -T ./website/js ./docs/website/js
 
 .PHONY: website
 website: website-prepare
