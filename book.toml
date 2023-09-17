@@ -30,6 +30,10 @@ command = "./scripts/preprocessor_git_metadata.py"
 # Can be overriden by running
 # `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell
 enable = false
+# Only show "Content created by" on Agda source files
+attribute_file_extensions = [ ".lagda.md" ]
+# Don't add anything to the homepage
+suppress_processing = [ "HOME.md" ]
 
 [output.linkcheck]
 follow-web-links = false

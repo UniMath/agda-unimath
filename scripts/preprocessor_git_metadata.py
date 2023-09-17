@@ -63,7 +63,7 @@ def nobreak_span(text):
     return f'<span class="prefer-nobreak">{text}</span>'
 
 
-def get_author_element_for_file(filename):
+def get_author_element_for_file(filename, include_contributors):
     """
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
@@ -72,25 +72,27 @@ def get_author_element_for_file(filename):
     # I wish there was a way to bulk these log commands into one,
     # but alas I haven't found anything to that effect
 
-    # Arguments mostly copied from the 1lab pipeline
-    raw_authors_git_output = subprocess.run([
-        'git', 'shortlog',
-        # Sort by number of commits and only print the contributor names
-        '-ns',
-        # Skip chore commits
-        '--invert-grep', '--grep=^chore:',
-        # Include authors and co-authors
-        '--group=author', '--group=trailer:co-authored-by',
-        # Limit to changes to the target file
-        'HEAD', '--', filename
-    ], capture_output=True, text=True, check=True).stdout.splitlines()
+    attribution_text = ''
+    if include_contributors:
+      # Arguments mostly copied from the 1lab pipeline
+      raw_authors_git_output = subprocess.run([
+          'git', 'shortlog',
+          # Sort by number of commits and only print the contributor names
+          '-ns',
+          # Skip chore commits
+          '--invert-grep', '--grep=^chore:',
+          # Include authors and co-authors
+          '--group=author', '--group=trailer:co-authored-by',
+          # Limit to changes to the target file
+          'HEAD', '--', filename
+      ], capture_output=True, text=True, check=True).stdout.splitlines()
 
-    # Collect authors and sort by number of commits
-    author_names = [
-        author['displayName']
-        for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
-    ]
-    attribution_text = format_multiple_authors_attribution(author_names)
+      # Collect authors and sort by number of commits
+      author_names = [
+          author['displayName']
+          for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
+      ]
+      attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',
@@ -134,18 +136,18 @@ def get_author_element_for_file(filename):
         recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
     return (
-        f'<p><i>Content created by {attribution_text}</i></p><p><i>{nobreak_span("Created: " + created_date)}; {nobreak_span("Last modified: " + modified_date)}</i></p>',
+        f'{attribution_text}<p><i>{nobreak_span("Created: " + created_date)}; {nobreak_span("Last modified: " + modified_date)}</i></p>',
         recent_changes
     )
 
 
-def add_author_info_to_chapter_rec_mut(roots, chapter):
+def add_author_info_to_chapter_rec_mut(roots, chapter, config):
     """
     Modifies chapter's content to reflect its git contributors,
     and recurses to subchapters to do the same.
     """
     source_path = chapter['source_path']
-    add_author_info_to_sections_rec_mut(roots, chapter['sub_items'])
+    add_author_info_to_sections_rec_mut(roots, chapter['sub_items'], config)
 
     potential_source_file_name = module_source_path_from_md_name(
         roots, source_path)
@@ -156,8 +158,11 @@ def add_author_info_to_chapter_rec_mut(roots, chapter):
 
     source_file_name = potential_source_file_name
 
+    if source_file_name in config['suppress_processing']:
+        return
+
     header_info_element, footer_info_element = get_author_element_for_file(
-        source_file_name)
+        source_file_name, any((source_file_name.endswith(ext) for ext in config['attribute_file_extensions'])))
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
     chapter_heading_end = chapter['content'].index('\n', chapter_heading_start)
@@ -166,7 +171,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter):
         chapter['content'][chapter_heading_end:] + '\n' + footer_info_element
 
 
-def add_author_info_to_sections_rec_mut(roots, sections):
+def add_author_info_to_sections_rec_mut(roots, sections, config):
     """
     Recursively modifies a list of book sections to make all
     included chapters contain information on their contributors.
@@ -176,17 +181,17 @@ def add_author_info_to_sections_rec_mut(roots, sections):
         if chapter is None:
             continue
 
-        add_author_info_to_chapter_rec_mut(roots, chapter)
+        add_author_info_to_chapter_rec_mut(roots, chapter, config)
 
 
-def add_author_info_to_root_section(roots, section):
+def add_author_info_to_root_section(roots, section, config):
     """
     Recursively modifies a section to make all included chapters
     contain information on their contributors, then returns the section.
     """
     chapter = section.get('Chapter')
     if chapter is not None:
-        add_author_info_to_chapter_rec_mut(roots, chapter)
+        add_author_info_to_chapter_rec_mut(roots, chapter, config)
 
     return section
 
@@ -207,13 +212,16 @@ if __name__ == '__main__':
 
     # Load the book contents from standard input
     context, book = json.load(sys.stdin)
+    metadata_config = context['config']['preprocessor']['git-metadata']
+    metadata_config['attribute_file_extensions'] = metadata_config.get('attribute_file_extensions', [])
+    metadata_config['suppress_processing'] = metadata_config.get('suppress_processing', [])
 
     start = time.time()
-    if context['config']['preprocessor']['git-metadata'].get('enable') == True:
+    if metadata_config.get('enable') == True:
         # Split the work between PROCESS_COUNT processes
         with Pool(PROCESS_COUNT) as p:
             book['sections'] = p.starmap(add_author_info_to_root_section, [
-                (['src', ''], section)
+                (['src', ''], section, metadata_config)
                 for section in book['sections']
             ])
 
