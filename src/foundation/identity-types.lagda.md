@@ -11,6 +11,7 @@ open import foundation-core.identity-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
