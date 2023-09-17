@@ -34,7 +34,3 @@ Follow the instructions in our [installation guide](HOWTO-INSTALL.md) to set up
 the project. After you have completed your formalization, submit it via a pull
 request. We will review your contribution and work towards incorporating it into
 the `agda-unimath` library.
-
-{{#include SUMMARY.md}}
-
-{{#include CONTRIBUTORS.md}}

@@ -32,8 +32,18 @@ command = "./scripts/preprocessor_git_metadata.py"
 enable = false
 # Only show "Content created by" on Agda source files
 attribute_file_extensions = [ ".lagda.md" ]
-# Don't add anything to the homepage
-suppress_processing = [ "HOME.md" ]
+# Don't add anything to the "non-content" pages,
+# i.e. top-level markdown files which aren't guides
+suppress_processing = [
+  "HOME.md",
+  "MAINTAINERS.md",
+  "CONTRIBUTORS.md",
+  "STATEMENT-OF-INCLUSION",
+  "USERS.md",
+  "GRANT-ACKNOWLEDGEMENTS.md",
+  "SUMMARY.md",
+  "ART.md"
+]
 
 [output.linkcheck]
 follow-web-links = false

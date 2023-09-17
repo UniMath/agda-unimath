@@ -103,6 +103,7 @@ you need to change the template in ./scripts/generate_main_index_file.py
     - [The library coding style](CODINGSTYLE.md)
     - [Guidelines for mixfix operators](MIXFIX-OPERATORS.md)
     - [Citing the library](CITE-THIS-LIBRARY.md)
+  - [Library contents](SUMMARY.md)
   - [Art](ART.md)
 
 {module_index}
