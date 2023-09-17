@@ -1,4 +1,4 @@
-# The agda-unimath library
+# ![agda-unimath-star-trek-extra-bold-bt](https://github.com/UniMath/agda-unimath/assets/1252282/cbd9b67e-581c-41c7-bc1e-34862127bad2)
 
 [![CI](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/ci.yaml)
 [![agda-unimath website](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml/badge.svg)](https://github.com/UniMath/agda-unimath/actions/workflows/pages.yaml)
@@ -17,3 +17,4 @@ the library about any topic in mathematics.
 1. [agda-unimath webpage](https://unimath.github.io/agda-unimath/)
 2. [Discord](https://discord.gg/Zp2e8hYsuX)
 3. [Twitch](https://www.twitch.tv/agdaunimath)
+
