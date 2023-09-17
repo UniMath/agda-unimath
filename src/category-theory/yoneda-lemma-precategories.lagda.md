@@ -30,10 +30,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [precategory](category-theory.precategories) `C`, an object `c`, and a
-[functor](category-theory.functors-precategories.md) `F` from `C` to the
+Given a [precategory](category-theory.precategories.md) `C`, an object `c`, and
+a [functor](category-theory.functors-precategories.md) `F` from `C` to the
 [precategory of Sets](foundation.category-of-sets.md), there is an
-[equivalence](foundation-core.equivalenes.md) between the
+[equivalence](foundation-core.equivalences.md) between the
 [set of natural transformations](category-theory.natural-transformations-precategories.md)
 from the functor
 [represented](category-theory.representable-functors-precategories.md) by `c` to
@@ -113,4 +113,13 @@ module _
   yoneda-lemma-Precategory : is-equiv yoneda-evid-Precategory
   pr1 yoneda-lemma-Precategory = section-yoneda-evid-Precategory
   pr2 yoneda-lemma-Precategory = retraction-yoneda-evid-Precategory
+
+  equiv-yoneda-lemma-Precategory :
+    ( natural-transformation-Category
+      ( C)
+      ( Set-Category l1)
+      ( rep-functor-Category C c) (F)) ≃
+    ( type-Set (obj-functor-Category C (Set-Category l1) F c))
+  pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
+  pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category
 ```

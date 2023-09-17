@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 A **natural transformation** between
 [functors on categories](category-theory.functors-categories.md) is a
-[natural transformation](category-theory.natural-transformations-precategories)
+[natural transformation](category-theory.natural-transformations-precategories.md)
 between the [functors](category-theory.functors-precategories.md) on the
 underlying [precategories](category-theory.precategories.md).
 

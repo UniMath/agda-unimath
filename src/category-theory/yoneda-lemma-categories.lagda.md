@@ -15,6 +15,7 @@ open import category-theory.yoneda-lemma-precategories
 
 open import foundation.category-of-sets
 open import foundation.equivalences
+open import foundation.dependent-pair-types
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
@@ -25,10 +26,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [category](category-theory.categories) `C`, an object `c`, and a
+Given a [category](category-theory.categories.md) `C`, an object `c`, and a
 [functor](category-theory.functors-categories.md) `F` from `C` to the
 [category of sets](foundation.category-of-sets.md), there is an
-[equivalence](foundation-core.equivalenes.md) between the
+[equivalence](foundation-core.equivalences.md) between the
 [set of natural transformations](category-theory.natural-transformations-categories.md)
 from the functor
 [represented](category-theory.representable-functors-categories.md) by `c` to
@@ -75,4 +76,13 @@ module _
 
   yoneda-lemma-Category : is-equiv yoneda-evid-Category
   yoneda-lemma-Category = yoneda-lemma-Precategory (precategory-Category C) c F
+
+  equiv-yoneda-lemma-Category :
+    ( natural-transformation-Category
+      ( C)
+      ( Set-Category l1)
+      ( rep-functor-Category C c) (F)) ≃
+    ( type-Set (obj-functor-Category C (Set-Category l1) F c))
+  pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
+  pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category
 ```
