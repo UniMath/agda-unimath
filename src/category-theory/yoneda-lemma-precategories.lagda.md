@@ -115,11 +115,11 @@ module _
   pr2 yoneda-lemma-Precategory = retraction-yoneda-evid-Precategory
 
   equiv-yoneda-lemma-Precategory :
-    ( natural-transformation-Category
+    ( natural-transformation-Precategory
       ( C)
-      ( Set-Category l1)
-      ( rep-functor-Category C c) (F)) ≃
-    ( type-Set (obj-functor-Category C (Set-Category l1) F c))
-  pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
-  pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category
+      ( Set-Precategory l1)
+      ( rep-functor-Precategory C c) (F)) ≃
+    ( type-Set (obj-functor-Precategory C (Set-Precategory l1) F c))
+  pr1 equiv-yoneda-lemma-Precategor = yoneda-evid-Precategory
+  pr2 equiv-yoneda-lemma-Precategory = yoneda-lemma-Precategory
 ```
