@@ -30,13 +30,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a precategory `C`, an object `c`, and a functor `F` from `C` to the
-precategory of Sets, there is an equivalence between the set of natural
-transformations from the functor represented by `c` to `F` and the set `F c`.
+Given a [precategory](category-theory.precategories) `C`, an object `c`, and a
+[functor](category-theory.functors-precategories.md) `F` from `C` to the
+[precategory of Sets](foundation.category-of-sets.md), there is an
+[equivalence](foundation-core.equivalenes.md) between the
+[set of natural transformations](category-theory.natural-transformations-precategories.md)
+from the functor
+[represented](category-theory.representable-functors-precategories.md) by `c` to
+`F` and the [set](foundation-core.sets.md) `F c`.
 
-More precisely, the Yoneda lemma asserts that the map from the type of natural
-transformations to the type `F c` defined by evaluating the component of the
-natural transformation at the object `c` at the identity arrow on `c` is an
+More precisely, the **Yoneda lemma** asserts that the map from the type of
+natural transformations to the type `F c` defined by evaluating the component of
+the natural transformation at the object `c` at the identity arrow on `c` is an
 equivalence.
 
 ## Definition

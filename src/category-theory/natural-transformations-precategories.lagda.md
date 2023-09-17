@@ -27,7 +27,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given precategories `C` and `D`, a natural transformation from a functor
+Given [precategories](category-theory.precategories.md) `C` and `D`, a **natural
+transformation** from a [functor](category-theory.functors-precategories.md)
 `F : C → D` to `G : C → D` consists of :
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
@@ -38,7 +39,9 @@ Given precategories `C` and `D`, a natural transformation from a functor
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
   (F G : functor-Precategory C D)
   where
 
@@ -79,7 +82,9 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
   where
 
   id-natural-transformation-Precategory :
@@ -145,68 +150,67 @@ module _
 This follows from the fact that the hom-types are sets.
 
 ```agda
-is-prop-is-natural-transformation-Precategory :
-  { l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
-  ( F G : functor-Precategory C D) →
-  ( γ :
-    (x : obj-Precategory C) →
-    type-hom-Precategory D
-      ( obj-functor-Precategory C D F x)
-      ( obj-functor-Precategory C D G x)) →
-  is-prop (is-natural-transformation-Precategory C D F G γ)
-is-prop-is-natural-transformation-Precategory C D F G γ =
-  is-prop-Π'
-    ( λ x →
-      is-prop-Π'
-        ( λ y →
-          is-prop-Π
-            ( λ f →
-              is-set-type-hom-Precategory D
-                ( obj-functor-Precategory C D F x)
-                ( obj-functor-Precategory C D G y)
-                ( comp-hom-Precategory D
-                  ( hom-functor-Precategory C D G f)
-                  ( γ x))
-                ( comp-hom-Precategory D
-                  ( γ y)
-                  ( hom-functor-Precategory C D F f)))))
-
-is-natural-transformation-Precategory-Prop :
-  { l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
-  ( F G : functor-Precategory C D) →
-  ( γ :
-    (x : obj-Precategory C) →
-    type-hom-Precategory D
-      ( obj-functor-Precategory C D F x)
-      ( obj-functor-Precategory C D G x)) →
-  Prop (l1 ⊔ l2 ⊔ l4)
-is-natural-transformation-Precategory-Prop C D F G α =
-  is-natural-transformation-Precategory C D F G α ,
-  is-prop-is-natural-transformation-Precategory C D F G α
-
-components-natural-transformation-Precategory-is-emb :
-  { l1 l2 l3 l4 : Level} (C : Precategory l1 l2) (D : Precategory l3 l4)
-  ( F G : functor-Precategory C D) →
-  is-emb (components-natural-transformation-Precategory C D F G)
-components-natural-transformation-Precategory-is-emb C D F G =
-  is-emb-inclusion-subtype (is-natural-transformation-Precategory-Prop C D F G)
-
-natural-transformation-Precategory-Set :
+module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  (F G : functor-Precategory C D) →
-  Set (l1 ⊔ l2 ⊔ l4)
-natural-transformation-Precategory-Set C D F G =
-  natural-transformation-Precategory C D F G ,
-  is-set-Σ
-    ( is-set-Π
+  (F G : functor-Precategory C D)
+  where
+
+  is-prop-is-natural-transformation-Precategory :
+    ( γ :
+      (x : obj-Precategory C) →
+      type-hom-Precategory D
+        ( obj-functor-Precategory C D F x)
+        ( obj-functor-Precategory C D G x)) →
+    is-prop (is-natural-transformation-Precategory C D F G γ)
+  is-prop-is-natural-transformation-Precategory γ =
+    is-prop-Π'
       ( λ x →
-        is-set-type-hom-Precategory D
-          ( obj-functor-Precategory C D F x)
-          ( obj-functor-Precategory C D G x)))
-    ( λ α →
-      pr2 (set-Prop (is-natural-transformation-Precategory-Prop C D F G α)))
+        is-prop-Π'
+          ( λ y →
+            is-prop-Π
+              ( λ f →
+                is-set-type-hom-Precategory D
+                  ( obj-functor-Precategory C D F x)
+                  ( obj-functor-Precategory C D G y)
+                  ( comp-hom-Precategory D
+                    ( hom-functor-Precategory C D G f)
+                    ( γ x))
+                  ( comp-hom-Precategory D
+                    ( γ y)
+                    ( hom-functor-Precategory C D F f)))))
+
+  is-natural-transformation-Precategory-Prop :
+    ( γ :
+      (x : obj-Precategory C) →
+      type-hom-Precategory D
+        ( obj-functor-Precategory C D F x)
+        ( obj-functor-Precategory C D G x)) →
+    Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 (is-natural-transformation-Precategory-Prop α) =
+    is-natural-transformation-Precategory C D F G α
+  pr2 (is-natural-transformation-Precategory-Prop α) =
+    is-prop-is-natural-transformation-Precategory α
+
+  components-natural-transformation-Precategory-is-emb :
+    is-emb (components-natural-transformation-Precategory C D F G)
+  components-natural-transformation-Precategory-is-emb =
+    is-emb-inclusion-subtype is-natural-transformation-Precategory-Prop
+
+  natural-transformation-Precategory-Set :
+    Set (l1 ⊔ l2 ⊔ l4)
+  pr1 (natural-transformation-Precategory-Set) =
+    natural-transformation-Precategory C D F G
+  pr2 (natural-transformation-Precategory-Set) =
+    is-set-Σ
+      ( is-set-Π
+        ( λ x →
+          is-set-type-hom-Precategory D
+            ( obj-functor-Precategory C D F x)
+            ( obj-functor-Precategory C D G x)))
+      ( λ α →
+        pr2 (set-Prop (is-natural-transformation-Precategory-Prop α)))
 ```
 
 ### Category laws for natural transformations
