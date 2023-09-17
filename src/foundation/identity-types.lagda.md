@@ -43,6 +43,7 @@ identifications in arbitrary types.
 | Action on identifications of dependent functions  | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
 | Action on identifications of functions            | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
 | Binary transport                                  | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
+| Commuting hexagons of identifications             | [`foundation.commuting-hexagons-of-identifications`](foundation.commuting-hexagons-of-identifications.lagda.md)           |
 | Commuting squares of identifications              | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
 | Dependent identifications (foundation)            | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
 | Dependent identifications (foundation-core)       | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
