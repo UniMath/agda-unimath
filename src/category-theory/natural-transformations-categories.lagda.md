@@ -22,8 +22,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **natural transformation** between [functors on categories is a natural
-transformation between the functors on the underlying precategories.
+A **natural transformation** between
+[functors on categories](category-theory.functors-categories.md) is a
+[natural transformation](category-theory.natural-transformations-precategories)
+between the [functors](category-theory.functors-precategories.md) on the
+underlying [precategories](category-theory.precategories.md).
 
 ## Definition
 
@@ -109,7 +112,8 @@ module _
 
 ### That a family of morphisms is a natural transformation is a proposition
 
-This follows from the fact that the hom-types are sets.
+This follows from the fact that the hom-types are
+[sets](foundation-core.sets.md).
 
 ```agda
 module _

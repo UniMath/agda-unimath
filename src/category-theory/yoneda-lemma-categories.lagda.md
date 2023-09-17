@@ -7,20 +7,14 @@ module category-theory.yoneda-lemma-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.functors-categories
 open import category-theory.natural-transformations-categories
-open import category-theory.categories
 open import category-theory.representable-functors-categories
 open import category-theory.yoneda-lemma-precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.category-of-sets
-open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.identity-types
-open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.sets
@@ -33,7 +27,7 @@ open import foundation.universe-levels
 
 Given a [category](category-theory.categories) `C`, an object `c`, and a
 [functor](category-theory.functors-categories.md) `F` from `C` to the
-[category of Sets](foundation.category-of-sets.md), there is an
+[category of sets](foundation.category-of-sets.md), there is an
 [equivalence](foundation-core.equivalenes.md) between the
 [set of natural transformations](category-theory.natural-transformations-categories.md)
 from the functor

@@ -7,9 +7,10 @@ module category-theory.representable-functors-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.functors-categories
 open import category-theory.natural-transformations-categories
-open import category-theory.categories
+open import category-theory.representable-functors-precategories
 
 open import foundation.category-of-sets
 open import foundation.dependent-pair-types
@@ -24,7 +25,7 @@ open import foundation.universe-levels
 
 Given a [category](category-theory.categories.md) `C` and an object `c`, there
 is a [functor](category-theory.functors-categories.md) from `C` to the
-[category of Sets](foundation.category-of-sets.md) **represented** by `c` that:
+[category of sets](foundation.category-of-sets.md) **represented** by `c` that:
 
 - sends an object `x` of `C` to the [set](foundation-core.sets.md) `hom c x` and
 - sends a morphism `g : hom x y` of `C` to the function `hom c x → hom c y`
@@ -40,12 +41,7 @@ associativity and the left unit law for the category `C`.
 rep-functor-Category :
   {l1 l2 : Level} (C : Category l1 l2) (c : obj-Category C) →
   functor-Category C (Set-Category l2)
-pr1 (rep-functor-Category C c) = hom-Category C c
-pr1 (pr2 (rep-functor-Category C c)) g = postcomp-hom-Category C g c
-pr1 (pr2 (pr2 (rep-functor-Category C c))) h g =
-  eq-htpy (associative-comp-hom-Category C h g)
-pr2 (pr2 (pr2 (rep-functor-Category C c))) _ =
-  eq-htpy (left-unit-law-comp-hom-Category C)
+rep-functor-Category C c = rep-functor-Precategory (precategory-Category C) c
 ```
 
 ## Natural transformations between representable functors
@@ -64,8 +60,6 @@ rep-natural-transformation-Category :
     ( Set-Category l2)
     ( rep-functor-Category C c)
     ( rep-functor-Category C b)
-pr1 (rep-natural-transformation-Category C b c f) =
-  precomp-hom-Category C f
-pr2 (rep-natural-transformation-Category C b c f) h =
-  eq-htpy (inv-htpy (λ g → associative-comp-hom-Category C h g f))
+rep-natural-transformation-Category C =
+  rep-natural-transformation-Precategory (precategory-Category C)
 ```
