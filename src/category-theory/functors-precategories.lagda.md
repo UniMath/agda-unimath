@@ -22,7 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor from a precategory `C` to a precategory `D` consists of:
+A **functor** from a [precategory](category-theory.precategories.md) `C` to a
+precategory `D` consists of:
 
 - a map `F₀ : C → D` on objects,
 - a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms, such that the following

@@ -19,8 +19,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor between two categories is a functor between the underlying
-precategories.
+A **functor** between two categories is a
+[functor](category-theory.functors-categories.md) between the underlying
+[categories](category-theory.categories.md).
 
 ## Definition
 
