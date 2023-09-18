@@ -36,21 +36,21 @@ module _
   functor-Category =
     functor-Precategory (precategory-Category C) (precategory-Category D)
 
-  obj-functor-Category : functor-Category → obj-Category C → obj-Category D
-  obj-functor-Category = pr1
+  map-obj-functor-Category : functor-Category → obj-Category C → obj-Category D
+  map-obj-functor-Category = pr1
 
-  hom-functor-Category :
+  map-hom-functor-Category :
     (F : functor-Category) →
     {x y : obj-Category C} →
     (f : type-hom-Category C x y) →
-    type-hom-Category D (obj-functor-Category F x) (obj-functor-Category F y)
-  hom-functor-Category F = pr1 (pr2 F)
+    type-hom-Category D (map-obj-functor-Category F x) (map-obj-functor-Category F y)
+  map-hom-functor-Category F = pr1 (pr2 F)
 
   preserves-comp-functor-Category :
     ( F : functor-Category) {x y z : obj-Category C}
     ( g : type-hom-Category C y z) (f : type-hom-Category C x y) →
-    ( hom-functor-Category F (comp-hom-Category C g f)) ＝
-    ( comp-hom-Category D (hom-functor-Category F g) (hom-functor-Category F f))
+    ( map-hom-functor-Category F (comp-hom-Category C g f)) ＝
+    ( comp-hom-Category D (map-hom-functor-Category F g) (map-hom-functor-Category F f))
   preserves-comp-functor-Category F =
     preserves-comp-functor-Precategory
       ( precategory-Category C)
@@ -58,8 +58,8 @@ module _
 
   preserves-id-functor-Category :
     (F : functor-Category) (x : obj-Category C) →
-    hom-functor-Category F (id-hom-Category C {x}) ＝
-    id-hom-Category D {obj-functor-Category F x}
+    map-hom-functor-Category F (id-hom-Category C {x}) ＝
+    id-hom-Category D {map-obj-functor-Category F x}
   preserves-id-functor-Category F =
     preserves-id-functor-Precategory
       ( precategory-Category C)

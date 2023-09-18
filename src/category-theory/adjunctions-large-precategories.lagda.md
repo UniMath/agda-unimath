@@ -59,8 +59,8 @@ module _
       equiv-is-adjoint-pair-Large-Precategory :
         {l1 l2 : Level} (X : obj-Large-Precategory C l1)
         (Y : obj-Large-Precategory D l2) →
-        ( type-hom-Large-Precategory C X (obj-functor-Large-Precategory G Y)) ≃
-        ( type-hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y)
+        ( type-hom-Large-Precategory C X (map-obj-functor-Large-Precategory G Y)) ≃
+        ( type-hom-Large-Precategory D (map-obj-functor-Large-Precategory F X) Y)
       naturality-equiv-is-adjoint-pair-Large-Precategory :
         { l1 l2 l3 l4 : Level}
         { X1 : obj-Large-Precategory C l1} {X2 : obj-Large-Precategory C l2}
@@ -72,12 +72,12 @@ module _
           ( λ h →
             comp-hom-Large-Precategory C
               ( comp-hom-Large-Precategory C
-                ( hom-functor-Large-Precategory G g) h)
+                ( map-hom-functor-Large-Precategory G g) h)
               ( f))
           ( λ h →
             comp-hom-Large-Precategory D
               ( comp-hom-Large-Precategory D g h)
-              ( hom-functor-Large-Precategory F f))
+              ( map-hom-functor-Large-Precategory F f))
           ( map-equiv (equiv-is-adjoint-pair-Large-Precategory X2 Y2))
 
   open is-adjoint-pair-Large-Precategory public
@@ -85,24 +85,24 @@ module _
   map-equiv-is-adjoint-pair-Large-Precategory :
     (H : is-adjoint-pair-Large-Precategory) {l1 l2 : Level}
     (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory D l2) →
-    ( type-hom-Large-Precategory C X (obj-functor-Large-Precategory G Y)) →
-    ( type-hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y)
+    ( type-hom-Large-Precategory C X (map-obj-functor-Large-Precategory G Y)) →
+    ( type-hom-Large-Precategory D (map-obj-functor-Large-Precategory F X) Y)
   map-equiv-is-adjoint-pair-Large-Precategory H X Y =
     map-equiv (equiv-is-adjoint-pair-Large-Precategory H X Y)
 
   inv-equiv-is-adjoint-pair-Large-Precategory :
     (H : is-adjoint-pair-Large-Precategory) {l1 l2 : Level}
     (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory D l2) →
-    ( type-hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y) ≃
-    ( type-hom-Large-Precategory C X (obj-functor-Large-Precategory G Y))
+    ( type-hom-Large-Precategory D (map-obj-functor-Large-Precategory F X) Y) ≃
+    ( type-hom-Large-Precategory C X (map-obj-functor-Large-Precategory G Y))
   inv-equiv-is-adjoint-pair-Large-Precategory H X Y =
     inv-equiv (equiv-is-adjoint-pair-Large-Precategory H X Y)
 
   map-inv-equiv-is-adjoint-pair-Large-Precategory :
     (H : is-adjoint-pair-Large-Precategory) {l1 l2 : Level}
     (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory D l2) →
-    ( type-hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y) →
-    ( type-hom-Large-Precategory C X (obj-functor-Large-Precategory G Y))
+    ( type-hom-Large-Precategory D (map-obj-functor-Large-Precategory F X) Y) →
+    ( type-hom-Large-Precategory C X (map-obj-functor-Large-Precategory G Y))
   map-inv-equiv-is-adjoint-pair-Large-Precategory H X Y =
     map-inv-equiv (equiv-is-adjoint-pair-Large-Precategory H X Y)
 
@@ -118,10 +118,10 @@ module _
       ( λ h →
         comp-hom-Large-Precategory D
           ( comp-hom-Large-Precategory D g h)
-          ( hom-functor-Large-Precategory F f))
+          ( map-hom-functor-Large-Precategory F f))
       ( λ h →
         comp-hom-Large-Precategory C
-          ( comp-hom-Large-Precategory C (hom-functor-Large-Precategory G g) h)
+          ( comp-hom-Large-Precategory C (map-hom-functor-Large-Precategory G g) h)
           ( f))
       ( map-inv-equiv-is-adjoint-pair-Large-Precategory H X2 Y2)
   naturality-inv-equiv-is-adjoint-pair-Large-Precategory
@@ -130,12 +130,12 @@ module _
       ( equiv-is-adjoint-pair-Large-Precategory H X1 Y1)
       ( λ h →
         comp-hom-Large-Precategory C
-          ( comp-hom-Large-Precategory C (hom-functor-Large-Precategory G g) h)
+          ( comp-hom-Large-Precategory C (map-hom-functor-Large-Precategory G g) h)
           ( f))
       ( λ h →
         comp-hom-Large-Precategory D
           ( comp-hom-Large-Precategory D g h)
-          ( hom-functor-Large-Precategory F f))
+          ( map-hom-functor-Large-Precategory F f))
       ( equiv-is-adjoint-pair-Large-Precategory H X2 Y2)
       ( naturality-equiv-is-adjoint-pair-Large-Precategory H f g)
 
@@ -186,7 +186,7 @@ module _
     obj-Large-Precategory C l →
     obj-Large-Precategory D (level-left-adjoint-Adjunction FG l)
   obj-left-adjoint-Adjunction FG =
-    obj-functor-Large-Precategory (left-adjoint-Adjunction FG)
+    map-obj-functor-Large-Precategory (left-adjoint-Adjunction FG)
 
   hom-left-adjoint-Adjunction :
     (FG : Adjunction) {l1 l2 : Level}
@@ -196,7 +196,7 @@ module _
       ( obj-left-adjoint-Adjunction FG X)
       ( obj-left-adjoint-Adjunction FG Y)
   hom-left-adjoint-Adjunction FG =
-    hom-functor-Large-Precategory (left-adjoint-Adjunction FG)
+    map-hom-functor-Large-Precategory (left-adjoint-Adjunction FG)
 
   preserves-id-left-adjoint-Adjunction :
     (FG : Adjunction) {l1 : Level} (X : obj-Large-Precategory C l1) →
@@ -210,7 +210,7 @@ module _
     obj-Large-Precategory D l1 →
     obj-Large-Precategory C (level-right-adjoint-Adjunction FG l1)
   obj-right-adjoint-Adjunction FG =
-    obj-functor-Large-Precategory (right-adjoint-Adjunction FG)
+    map-obj-functor-Large-Precategory (right-adjoint-Adjunction FG)
 
   hom-right-adjoint-Adjunction :
     (FG : Adjunction) {l1 l2 : Level} {X : obj-Large-Precategory D l1}
@@ -220,7 +220,7 @@ module _
       ( obj-right-adjoint-Adjunction FG X)
       ( obj-right-adjoint-Adjunction FG Y)
   hom-right-adjoint-Adjunction FG =
-    hom-functor-Large-Precategory (right-adjoint-Adjunction FG)
+    map-hom-functor-Large-Precategory (right-adjoint-Adjunction FG)
 
   preserves-id-right-adjoint-Adjunction :
     (FG : Adjunction) {l : Level} (Y : obj-Large-Precategory D l) →

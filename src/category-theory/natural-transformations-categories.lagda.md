@@ -42,8 +42,8 @@ module _
   is-natural-transformation-Category :
     ( ( x : obj-Category C) →
       type-hom-Category D
-        ( obj-functor-Category C D F x)
-        ( obj-functor-Category C D G x)) →
+        ( map-obj-functor-Category C D F x)
+        ( map-obj-functor-Category C D G x)) →
     UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Category =
     is-natural-transformation-Precategory
@@ -63,8 +63,8 @@ module _
   components-natural-transformation-Category :
     natural-transformation-Category → (x : obj-Category C) →
     type-hom-Category D
-      ( obj-functor-Category C D F x)
-      ( obj-functor-Category C D G x)
+      ( map-obj-functor-Category C D F x)
+      ( map-obj-functor-Category C D G x)
   components-natural-transformation-Category =
     components-natural-transformation-Precategory
       ( precategory-Category C)
@@ -128,8 +128,8 @@ module _
     ( γ :
       (x : obj-Category C) →
       type-hom-Category D
-        ( obj-functor-Category C D F x)
-        ( obj-functor-Category C D G x)) →
+        ( map-obj-functor-Category C D F x)
+        ( map-obj-functor-Category C D G x)) →
     is-prop (is-natural-transformation-Category C D F G γ)
   is-prop-is-natural-transformation-Category =
     is-prop-is-natural-transformation-Precategory
@@ -142,8 +142,8 @@ module _
     ( γ :
       (x : obj-Category C) →
       type-hom-Category D
-        ( obj-functor-Category C D F x)
-        ( obj-functor-Category C D G x)) →
+        ( map-obj-functor-Category C D F x)
+        ( map-obj-functor-Category C D G x)) →
     Prop (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Category-Prop =
     is-natural-transformation-Precategory-Prop

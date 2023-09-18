@@ -40,8 +40,8 @@ module _
       obj-natural-isomorphism-Large-Precategory :
         { l1 : Level} (X : obj-Large-Precategory C l1) →
         iso-Large-Precategory D
-          ( obj-functor-Large-Precategory F X)
-          ( obj-functor-Large-Precategory G X)
+          ( map-obj-functor-Large-Precategory F X)
+          ( map-obj-functor-Large-Precategory G X)
       coherence-square-natural-isomorphism-Large-Precategory :
         { l1 l2 : Level}
         { X : obj-Large-Precategory C l1}
@@ -49,14 +49,14 @@ module _
         ( f : type-hom-Large-Precategory C X Y) →
         square-Large-Precategory D
           ( hom-iso-Large-Precategory D
-            ( obj-functor-Large-Precategory F X)
-            ( obj-functor-Large-Precategory G X)
+            ( map-obj-functor-Large-Precategory F X)
+            ( map-obj-functor-Large-Precategory G X)
             ( obj-natural-isomorphism-Large-Precategory X))
-          ( hom-functor-Large-Precategory F f)
-          ( hom-functor-Large-Precategory G f)
+          ( map-hom-functor-Large-Precategory F f)
+          ( map-hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
-            ( obj-functor-Large-Precategory F Y)
-            ( obj-functor-Large-Precategory G Y)
+            ( map-obj-functor-Large-Precategory F Y)
+            ( map-obj-functor-Large-Precategory G Y)
             ( obj-natural-isomorphism-Large-Precategory Y))
 
   open natural-isomorphism-Large-Precategory public
@@ -67,8 +67,8 @@ module _
   obj-natural-transformation-Large-Precategory
     ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
     hom-iso-Large-Precategory D
-      ( obj-functor-Large-Precategory F X)
-      ( obj-functor-Large-Precategory G X)
+      ( map-obj-functor-Large-Precategory F X)
+      ( map-obj-functor-Large-Precategory G X)
       ( obj-natural-isomorphism-Large-Precategory γ X)
   coherence-square-natural-transformation-Large-Precategory
     (natural-transformation-natural-isomorphism-Large-Precategory γ) =

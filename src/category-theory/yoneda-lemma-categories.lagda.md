@@ -54,11 +54,11 @@ module _
       ( Set-Category l2)
       ( rep-functor-Category C c)
       ( F) →
-    type-Set (obj-functor-Category C (Set-Category l2) F c)
+    type-Set (map-obj-functor-Category C (Set-Category l2) F c)
   yoneda-evid-Category = yoneda-evid-Precategory (precategory-Category C) c F
 
   yoneda-extension-Category :
-    type-Set (obj-functor-Category C (Set-Category l2) F c) →
+    type-Set (map-obj-functor-Category C (Set-Category l2) F c) →
     natural-transformation-Category
       C (Set-Category l2) (rep-functor-Category C c) F
   yoneda-extension-Category =
@@ -82,7 +82,7 @@ module _
       ( C)
       ( Set-Category l2)
       ( rep-functor-Category C c) (F)) ≃
-    ( type-Set (obj-functor-Category C (Set-Category l2) F c))
+    ( type-Set (map-obj-functor-Category C (Set-Category l2) F c))
   pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
   pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category
 ```
