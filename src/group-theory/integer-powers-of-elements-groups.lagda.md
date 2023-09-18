@@ -14,8 +14,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-groups
@@ -50,7 +52,7 @@ module _
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g)
 ```
 
-### Powers by integers of group elements
+### Integer powers of group elements
 
 ```agda
 module _
@@ -60,6 +62,34 @@ module _
   integer-power-Group : ℤ → type-Group G → type-Group G
   integer-power-Group k g =
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g) (unit-Group G)
+```
+
+### The predicate of being an integer power of an element in a group
+
+We say that an element `y` **is an integer power** of an element `x` if there
+[exists](foundation.existential-quantification) an integer `k` such that
+`xᵏ ＝ y`.
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-integer-power-of-element-prop-Group :
+    (x y : type-Group G) → Prop l
+  is-integer-power-of-element-prop-Group x y =
+    ∃-Prop ℤ (λ k → integer-power-Group G k x ＝ y)
+
+  is-integer-power-of-element-Group :
+    (x y : type-Group G) → UU l
+  is-integer-power-of-element-Group x y =
+    type-Prop (is-integer-power-of-element-prop-Group x y)
+
+  is-prop-is-integer-power-of-element-Group :
+    (x y : type-Group G) →
+    is-prop (is-integer-power-of-element-Group x y)
+  is-prop-is-integer-power-of-element-Group x y =
+    is-prop-type-Prop (is-integer-power-of-element-prop-Group x y)
 ```
 
 ## Properties

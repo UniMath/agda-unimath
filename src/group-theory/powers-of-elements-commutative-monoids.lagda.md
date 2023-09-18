@@ -12,6 +12,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -25,7 +26,9 @@ The **power operation** on a [monoid](group-theory.monoids.md) is the map
 `n x ↦ xⁿ`, which is defined by [iteratively](foundation.iterating-functions.md)
 multiplying `x` with itself `n` times.
 
-## Definition
+## Definitions
+
+### Powers of elements in commutative monoids
 
 ```agda
 module _
@@ -35,6 +38,34 @@ module _
   power-Commutative-Monoid :
     ℕ → type-Commutative-Monoid M → type-Commutative-Monoid M
   power-Commutative-Monoid = power-Monoid (monoid-Commutative-Monoid M)
+```
+
+### The predicate of being a power of an element in a commutative monoid
+
+We say that an element `y` **is a power** of an element `x` if there
+[exists](foundation.existential-quantification) a number `n` such that
+`xⁿ ＝ y`.
+
+```agda
+module _
+  {l : Level} (M : Commutative-Monoid l)
+  where
+
+  is-power-of-element-prop-Commutative-Monoid :
+    (x y : type-Commutative-Monoid M) → Prop l
+  is-power-of-element-prop-Commutative-Monoid =
+    is-power-of-element-prop-Monoid (monoid-Commutative-Monoid M)
+
+  is-power-of-element-Commutative-Monoid :
+    (x y : type-Commutative-Monoid M) → UU l
+  is-power-of-element-Commutative-Monoid =
+    is-power-of-element-Monoid (monoid-Commutative-Monoid M)
+
+  is-prop-is-power-of-element-Commutative-Monoid :
+    (x y : type-Commutative-Monoid M) →
+    is-prop (is-power-of-element-Commutative-Monoid x y)
+  is-prop-is-power-of-element-Commutative-Monoid =
+    is-prop-is-power-of-element-Monoid (monoid-Commutative-Monoid M)
 ```
 
 ## Properties

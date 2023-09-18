@@ -12,6 +12,7 @@ open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.multiples-of-elements-abelian-groups
@@ -39,6 +40,34 @@ module _
 
   multiple-Ring : ℕ → type-Ring R → type-Ring R
   multiple-Ring = multiple-Ab (ab-Ring R)
+```
+
+### The predicate of being a natural multiple of an element in an ring
+
+We say that an element `y` **is a multiple** of an element `x` if there
+[exists](foundation.existential-quantification) a number `n` such that
+`nx ＝ y`.
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-multiple-of-element-prop-Ring :
+    (x y : type-Ring R) → Prop l
+  is-multiple-of-element-prop-Ring =
+    is-multiple-of-element-prop-Ab (ab-Ring R)
+
+  is-multiple-of-element-Ring :
+    (x y : type-Ring R) → UU l
+  is-multiple-of-element-Ring =
+    is-multiple-of-element-Ab (ab-Ring R)
+
+  is-prop-is-multiple-of-element-Ring :
+    (x y : type-Ring R) →
+    is-prop (is-multiple-of-element-Ring x y)
+  is-prop-is-multiple-of-element-Ring =
+    is-prop-is-multiple-of-element-Ab (ab-Ring R)
 ```
 
 ## Properties

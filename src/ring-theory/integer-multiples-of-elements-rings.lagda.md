@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -60,6 +61,34 @@ module _
 
   integer-multiple-Ring : ℤ → type-Ring R → type-Ring R
   integer-multiple-Ring = integer-multiple-Ab (ab-Ring R)
+```
+
+### The predicate of being a natural multiple of an element in an ring
+
+We say that an element `y` **is an integer multiple** of an element `x` if there
+[exists](foundation.existential-quantification) an integer `k` such that
+`kx ＝ y`.
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-integer-multiple-of-element-prop-Ring :
+    (x y : type-Ring R) → Prop l
+  is-integer-multiple-of-element-prop-Ring =
+    is-integer-multiple-of-element-prop-Ab (ab-Ring R)
+
+  is-integer-multiple-of-element-Ring :
+    (x y : type-Ring R) → UU l
+  is-integer-multiple-of-element-Ring =
+    is-integer-multiple-of-element-Ab (ab-Ring R)
+
+  is-prop-is-integer-multiple-of-element-Ring :
+    (x y : type-Ring R) →
+    is-prop (is-integer-multiple-of-element-Ring x y)
+  is-prop-is-integer-multiple-of-element-Ring =
+    is-prop-is-integer-multiple-of-element-Ab (ab-Ring R)
 ```
 
 ## Properties

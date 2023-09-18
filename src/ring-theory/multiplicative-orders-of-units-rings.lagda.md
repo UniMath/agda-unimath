@@ -1,7 +1,7 @@
 # Multiplicative orders of elements of rings
 
 ```agda
-module ring-theory.multiplicative-orders-of-elements-rings where
+module ring-theory.multiplicative-orders-of-units-rings where
 ```
 
 <details><summary>Imports</summary>
