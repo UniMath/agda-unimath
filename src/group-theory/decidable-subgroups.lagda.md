@@ -63,8 +63,8 @@ module _
   {l1 l2 : Level} (G : Group l1) (P : decidable-subset-Group l2 G)
   where
 
-  contains-unit-decidable-subset-group-Prop : Prop l2
-  contains-unit-decidable-subset-group-Prop =
+  contains-unit-prop-decidable-subset-Group : Prop l2
+  contains-unit-prop-decidable-subset-Group =
     contains-unit-subset-group-Prop G (subset-decidable-subset-Group G P)
 
   contains-unit-decidable-subset-Group : UU l2
@@ -76,8 +76,8 @@ module _
   is-prop-contains-unit-decidable-subset-Group =
     is-prop-contains-unit-subset-Group G (subset-decidable-subset-Group G P)
 
-  is-closed-under-multiplication-decidable-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-multiplication-decidable-subset-group-Prop =
+  is-closed-under-multiplication-prop-decidable-subset-Group : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-decidable-subset-Group =
     is-closed-under-multiplication-subset-group-Prop G
       ( subset-decidable-subset-Group G P)
 
@@ -92,23 +92,23 @@ module _
     is-prop-is-closed-under-multiplication-subset-Group G
       ( subset-decidable-subset-Group G P)
 
-  is-closed-under-inv-decidable-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-inv-decidable-subset-group-Prop =
-    is-closed-under-inv-subset-group-Prop G
+  is-closed-under-inverses-prop-decidable-subset-Group : Prop (l1 ⊔ l2)
+  is-closed-under-inverses-prop-decidable-subset-Group =
+    is-closed-under-inverses-subset-group-Prop G
       ( subset-decidable-subset-Group G P)
 
-  is-closed-under-inv-decidable-subset-Group : UU (l1 ⊔ l2)
-  is-closed-under-inv-decidable-subset-Group =
-    is-closed-under-inv-subset-Group G (subset-decidable-subset-Group G P)
+  is-closed-under-inverses-decidable-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-inverses-decidable-subset-Group =
+    is-closed-under-inverses-subset-Group G (subset-decidable-subset-Group G P)
 
-  is-prop-is-closed-under-inv-decidable-subset-Group :
-    is-prop is-closed-under-inv-decidable-subset-Group
-  is-prop-is-closed-under-inv-decidable-subset-Group =
-    is-prop-is-closed-under-inv-subset-Group G
+  is-prop-is-closed-under-inverses-decidable-subset-Group :
+    is-prop is-closed-under-inverses-decidable-subset-Group
+  is-prop-is-closed-under-inverses-decidable-subset-Group =
+    is-prop-is-closed-under-inverses-subset-Group G
       ( subset-decidable-subset-Group G P)
 
-  is-subgroup-decidable-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-subgroup-decidable-subset-group-Prop =
+  is-subgroup-prop-decidable-subset-Group : Prop (l1 ⊔ l2)
+  is-subgroup-prop-decidable-subset-Group =
     is-subgroup-subset-group-Prop G (subset-decidable-subset-Group G P)
 
   is-subgroup-decidable-subset-Group : UU (l1 ⊔ l2)
@@ -123,7 +123,7 @@ module _
 Decidable-Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
 Decidable-Subgroup l G =
-  type-subtype (is-subgroup-decidable-subset-group-Prop {l2 = l} G)
+  type-subtype (is-subgroup-prop-decidable-subset-Group {l2 = l} G)
 
 module _
   {l1 l2 : Level} (G : Group l1) (H : Decidable-Subgroup l2 G)
@@ -131,7 +131,7 @@ module _
 
   decidable-subset-Decidable-Subgroup : decidable-subset-Group l2 G
   decidable-subset-Decidable-Subgroup =
-    inclusion-subtype (is-subgroup-decidable-subset-group-Prop G) H
+    inclusion-subtype (is-subgroup-prop-decidable-subset-Group G) H
 
   subset-Decidable-Subgroup : subset-Group l2 G
   subset-Decidable-Subgroup =
@@ -192,17 +192,17 @@ module _
   is-closed-under-multiplication-Decidable-Subgroup =
     is-closed-under-multiplication-Subgroup G subgroup-Decidable-Subgroup
 
-  is-closed-under-inv-Decidable-Subgroup :
-    is-closed-under-inv-decidable-subset-Group G
+  is-closed-under-inverses-Decidable-Subgroup :
+    is-closed-under-inverses-decidable-subset-Group G
       decidable-subset-Decidable-Subgroup
-  is-closed-under-inv-Decidable-Subgroup =
-    is-closed-under-inv-Subgroup G subgroup-Decidable-Subgroup
+  is-closed-under-inverses-Decidable-Subgroup =
+    is-closed-under-inverses-Subgroup G subgroup-Decidable-Subgroup
 
 is-emb-decidable-subset-Decidable-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
     is-emb (decidable-subset-Decidable-Subgroup {l2 = l2} G)
 is-emb-decidable-subset-Decidable-Subgroup G =
-  is-emb-inclusion-subtype (is-subgroup-decidable-subset-group-Prop G)
+  is-emb-inclusion-subtype (is-subgroup-prop-decidable-subset-Group G)
 ```
 
 ### The underlying group of a decidable subgroup
@@ -347,7 +347,7 @@ module _
     (H ＝ K) ≃ has-same-elements-Decidable-Subgroup K
   extensionality-Decidable-Subgroup =
     extensionality-type-subtype
-      ( is-subgroup-decidable-subset-group-Prop G)
+      ( is-subgroup-prop-decidable-subset-Group G)
       ( is-subgroup-Decidable-Subgroup G H)
       ( λ x → pair id id)
       ( extensionality-decidable-subtype

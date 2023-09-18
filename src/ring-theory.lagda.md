@@ -11,6 +11,7 @@ open import ring-theory.binomial-theorem-semirings public
 open import ring-theory.category-of-rings public
 open import ring-theory.central-elements-rings public
 open import ring-theory.central-elements-semirings public
+open import ring-theory.characteristics-rings public
 open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
@@ -40,6 +41,7 @@ open import ring-theory.isomorphisms-rings public
 open import ring-theory.joins-ideals-rings public
 open import ring-theory.joins-left-ideals-rings public
 open import ring-theory.joins-right-ideals-rings public
+open import ring-theory.kernels-of-ring-homomorphisms public
 open import ring-theory.left-ideals-generated-by-subsets-rings public
 open import ring-theory.left-ideals-rings public
 open import ring-theory.local-rings public

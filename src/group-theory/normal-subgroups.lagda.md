@@ -170,19 +170,19 @@ module _
     type-Normal-Subgroup → type-Normal-Subgroup → type-Normal-Subgroup
   mul-Normal-Subgroup = mul-Subgroup G subgroup-Normal-Subgroup
 
-  is-closed-under-inv-Normal-Subgroup :
-    is-closed-under-inv-subset-Group G subset-Normal-Subgroup
-  is-closed-under-inv-Normal-Subgroup =
-    is-closed-under-inv-Subgroup G subgroup-Normal-Subgroup
+  is-closed-under-inverses-Normal-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-Normal-Subgroup
+  is-closed-under-inverses-Normal-Subgroup =
+    is-closed-under-inverses-Subgroup G subgroup-Normal-Subgroup
 
   inv-Normal-Subgroup : type-Normal-Subgroup → type-Normal-Subgroup
   inv-Normal-Subgroup = inv-Subgroup G subgroup-Normal-Subgroup
 
-  is-closed-under-inv-Normal-Subgroup' :
+  is-closed-under-inverses-Normal-Subgroup' :
     (x : type-Group G) →
     is-in-Normal-Subgroup (inv-Group G x) → is-in-Normal-Subgroup x
-  is-closed-under-inv-Normal-Subgroup' =
-    is-closed-under-inv-Subgroup' G subgroup-Normal-Subgroup
+  is-closed-under-inverses-Normal-Subgroup' =
+    is-closed-under-inverses-Subgroup' G subgroup-Normal-Subgroup
 
   is-in-normal-subgroup-left-factor-Normal-Subgroup :
     (x y : type-Group G) →
@@ -433,7 +433,7 @@ module _
     is-closed-under-eq-Normal-Subgroup G N
       ( is-normal-Normal-Subgroup G N y
         ( inv-Group G (left-div-Group G x y))
-        ( is-closed-under-inv-Normal-Subgroup G N
+        ( is-closed-under-inverses-Normal-Subgroup G N
           ( left-div-Group G x y)
           ( H)))
       ( ( ap (conjugation-Group G y) (inv-left-div-Group G x y) ∙
@@ -447,7 +447,7 @@ module _
     is-closed-under-eq-Normal-Subgroup G N
       ( is-normal-Normal-Subgroup' G N x
         ( inv-Group G (right-div-Group G x y))
-        ( is-closed-under-inv-Normal-Subgroup G N
+        ( is-closed-under-inverses-Normal-Subgroup G N
           ( right-div-Group G x y)
           ( H)))
       ( ( ap (conjugation-Group' G x) (inv-right-div-Group G x y)) ∙
@@ -523,7 +523,7 @@ module _
     sim-congruence-Normal-Subgroup x (unit-Group G) →
     is-in-Normal-Subgroup G N x
   unit-congruence-Normal-Subgroup {x} H =
-    is-closed-under-inv-Normal-Subgroup' G N x
+    is-closed-under-inverses-Normal-Subgroup' G N x
       ( is-closed-under-eq-Normal-Subgroup G N H
         ( right-unit-law-mul-Group G (inv-Group G x)))
 
@@ -533,7 +533,7 @@ module _
     sim-congruence-Normal-Subgroup x (unit-Group G)
   unit-congruence-Normal-Subgroup' {x} H =
     is-closed-under-eq-Normal-Subgroup' G N
-      ( is-closed-under-inv-Normal-Subgroup G N x H)
+      ( is-closed-under-inverses-Normal-Subgroup G N x H)
       ( right-unit-law-mul-Group G (inv-Group G x))
 ```
 
@@ -562,9 +562,9 @@ module _
       ( inv (left-unit-law-mul-Group G (unit-Group G)))
       ( mul-congruence-Group G R H K)
 
-  is-closed-under-inv-subset-congruence-Group :
-    is-closed-under-inv-subset-Group G subset-congruence-Group
-  is-closed-under-inv-subset-congruence-Group x H =
+  is-closed-under-inverses-subset-congruence-Group :
+    is-closed-under-inverses-subset-Group G subset-congruence-Group
+  is-closed-under-inverses-subset-congruence-Group x H =
     concatenate-eq-sim-congruence-Group G R
       ( inv (inv-unit-Group G))
       ( inv-congruence-Group G R H)
@@ -576,7 +576,7 @@ module _
   pr1 (pr2 (pr2 subgroup-congruence-Group)) =
     is-closed-under-multiplication-subset-congruence-Group
   pr2 (pr2 (pr2 subgroup-congruence-Group)) =
-    is-closed-under-inv-subset-congruence-Group
+    is-closed-under-inverses-subset-congruence-Group
 
   is-normal-subgroup-congruence-Group :
     is-normal-Subgroup G subgroup-congruence-Group

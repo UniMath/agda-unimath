@@ -52,23 +52,23 @@ module _
   is-prop-contains-zero-subset-Ab =
     is-prop-contains-unit-subset-Group (group-Ab A) P
 
-  is-closed-under-add-subset-Ab : UU (l1 ⊔ l2)
-  is-closed-under-add-subset-Ab =
+  is-closed-under-addition-subset-Ab : UU (l1 ⊔ l2)
+  is-closed-under-addition-subset-Ab =
     is-closed-under-multiplication-subset-Group (group-Ab A) P
 
-  is-prop-is-closed-under-add-subset-Ab :
-    is-prop is-closed-under-add-subset-Ab
-  is-prop-is-closed-under-add-subset-Ab =
+  is-prop-is-closed-under-addition-subset-Ab :
+    is-prop is-closed-under-addition-subset-Ab
+  is-prop-is-closed-under-addition-subset-Ab =
     is-prop-is-closed-under-multiplication-subset-Group (group-Ab A) P
 
-  is-closed-under-neg-subset-Ab : UU (l1 ⊔ l2)
-  is-closed-under-neg-subset-Ab =
-    is-closed-under-inv-subset-Group (group-Ab A) P
+  is-closed-under-negatives-subset-Ab : UU (l1 ⊔ l2)
+  is-closed-under-negatives-subset-Ab =
+    is-closed-under-inverses-subset-Group (group-Ab A) P
 
   is-prop-closed-under-neg-subset-Ab :
-    is-prop is-closed-under-neg-subset-Ab
+    is-prop is-closed-under-negatives-subset-Ab
   is-prop-closed-under-neg-subset-Ab =
-    is-prop-is-closed-under-inv-subset-Group (group-Ab A) P
+    is-prop-is-closed-under-inverses-subset-Group (group-Ab A) P
 
   is-subgroup-Ab : UU (l1 ⊔ l2)
   is-subgroup-Ab = is-subgroup-subset-Group (group-Ab A) P
@@ -138,15 +138,15 @@ module _
     contains-zero-subset-Ab A subset-Subgroup-Ab
   contains-zero-Subgroup-Ab = contains-unit-Subgroup (group-Ab A) B
 
-  is-closed-under-add-Subgroup-Ab :
-    is-closed-under-add-subset-Ab A subset-Subgroup-Ab
-  is-closed-under-add-Subgroup-Ab =
+  is-closed-under-addition-Subgroup-Ab :
+    is-closed-under-addition-subset-Ab A subset-Subgroup-Ab
+  is-closed-under-addition-Subgroup-Ab =
     is-closed-under-multiplication-Subgroup (group-Ab A) B
 
-  is-closed-under-neg-Subgroup-Ab :
-    is-closed-under-neg-subset-Ab A subset-Subgroup-Ab
-  is-closed-under-neg-Subgroup-Ab =
-    is-closed-under-inv-Subgroup (group-Ab A) B
+  is-closed-under-negatives-Subgroup-Ab :
+    is-closed-under-negatives-subset-Ab A subset-Subgroup-Ab
+  is-closed-under-negatives-Subgroup-Ab =
+    is-closed-under-inverses-Subgroup (group-Ab A) B
 
   is-in-subgroup-left-summand-Subgroup-Ab :
     (x y : type-Ab A) →
@@ -578,15 +578,15 @@ module _
   contains-zero-subset-congruence-Ab =
     contains-unit-subset-congruence-Group (group-Ab A) R
 
-  is-closed-under-add-subset-congruence-Ab :
-    is-closed-under-add-subset-Ab A subset-congruence-Ab
-  is-closed-under-add-subset-congruence-Ab =
+  is-closed-under-addition-subset-congruence-Ab :
+    is-closed-under-addition-subset-Ab A subset-congruence-Ab
+  is-closed-under-addition-subset-congruence-Ab =
     is-closed-under-multiplication-subset-congruence-Group (group-Ab A) R
 
-  is-closed-under-neg-subset-congruence-Ab :
-    is-closed-under-neg-subset-Ab A subset-congruence-Ab
-  is-closed-under-neg-subset-congruence-Ab =
-    is-closed-under-inv-subset-congruence-Group (group-Ab A) R
+  is-closed-under-negatives-subset-congruence-Ab :
+    is-closed-under-negatives-subset-Ab A subset-congruence-Ab
+  is-closed-under-negatives-subset-congruence-Ab =
+    is-closed-under-inverses-subset-congruence-Group (group-Ab A) R
 
   subgroup-congruence-Ab : Subgroup-Ab l2 A
   subgroup-congruence-Ab = subgroup-congruence-Group (group-Ab A) R

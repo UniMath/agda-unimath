@@ -21,6 +21,7 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 
 open import ring-theory.homomorphisms-semirings
@@ -136,6 +137,9 @@ module _
 
     hom-ab-hom-Ring : type-hom-Ab (ab-Ring R) (ab-Ring S)
     hom-ab-hom-Ring = pr1 f
+
+    hom-group-hom-Ring : type-hom-Group (group-Ring R) (group-Ring S)
+    hom-group-hom-Ring = hom-ab-hom-Ring
 
     hom-commutative-monoid-hom-Ring :
       type-hom-Commutative-Monoid

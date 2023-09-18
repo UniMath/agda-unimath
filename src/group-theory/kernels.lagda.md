@@ -63,9 +63,9 @@ module _
     ( ( ap (λ (x , y) → mul-Group H x y) (eq-pair p q)) ∙
       ( left-unit-law-mul-Group H _))
 
-  is-closed-under-inv-subtype-kernel-hom-Group :
-    is-closed-under-inv-subset-Group G subtype-kernel-hom-Group
-  is-closed-under-inv-subtype-kernel-hom-Group x p =
+  is-closed-under-inverses-subtype-kernel-hom-Group :
+    is-closed-under-inverses-subset-Group G subtype-kernel-hom-Group
+  is-closed-under-inverses-subtype-kernel-hom-Group x p =
     ( preserves-inv-hom-Group G H f x) ∙
     ( ap (inv-Group H) p ∙ inv-unit-Group H)
 
@@ -75,7 +75,7 @@ module _
   pr1 (pr2 (pr2 subgroup-kernel-hom-Group)) =
     is-closed-under-multiplication-subtype-kernel-hom-Group
   pr2 (pr2 (pr2 subgroup-kernel-hom-Group)) =
-    is-closed-under-inv-subtype-kernel-hom-Group
+    is-closed-under-inverses-subtype-kernel-hom-Group
 
   group-kernel-hom-Group : Group (l ⊔ k)
   group-kernel-hom-Group = group-Subgroup G subgroup-kernel-hom-Group
@@ -142,18 +142,18 @@ module _
   contains-zero-subtype-kernel-hom-Ab =
     contains-unit-subtype-kernel-hom-Group (group-Ab A) (group-Ab B) f
 
-  is-closed-under-add-subtype-kernel-hom-Ab :
-    is-closed-under-add-subset-Ab A subtype-kernel-hom-Ab
-  is-closed-under-add-subtype-kernel-hom-Ab =
+  is-closed-under-addition-subtype-kernel-hom-Ab :
+    is-closed-under-addition-subset-Ab A subtype-kernel-hom-Ab
+  is-closed-under-addition-subtype-kernel-hom-Ab =
     is-closed-under-multiplication-subtype-kernel-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)
 
-  is-closed-under-neg-subtype-kernel-hom-Ab :
-    is-closed-under-neg-subset-Ab A subtype-kernel-hom-Ab
-  is-closed-under-neg-subtype-kernel-hom-Ab =
-    is-closed-under-inv-subtype-kernel-hom-Group
+  is-closed-under-negatives-subtype-kernel-hom-Ab :
+    is-closed-under-negatives-subset-Ab A subtype-kernel-hom-Ab
+  is-closed-under-negatives-subtype-kernel-hom-Ab =
+    is-closed-under-inverses-subtype-kernel-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)

@@ -22,7 +22,6 @@ open import foundation.identity-types
 open import foundation.unit-type
 open import foundation.universe-levels
 
-open import group-theory.abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.homomorphisms-groups
 
@@ -37,10 +36,6 @@ open import ring-theory.rings
 ## Definition
 
 ```agda
-ℤ-Ab : Ab lzero
-pr1 ℤ-Ab = ℤ-Group
-pr2 ℤ-Ab = commutative-add-ℤ
-
 ℤ-Ring : Ring lzero
 pr1 ℤ-Ring = ℤ-Ab
 pr1 (pr1 (pr2 ℤ-Ring)) = mul-ℤ

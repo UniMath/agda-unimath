@@ -67,10 +67,10 @@ is-closed-under-multiplication-full-Subgroup :
 is-closed-under-multiplication-full-Subgroup G x y _ _ =
   is-in-full-subtype (mul-Group G x y)
 
-is-closed-under-inv-full-Subgroup :
+is-closed-under-inverses-full-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
-  is-closed-under-inv-subset-Group G (subset-full-Subgroup l2 G)
-is-closed-under-inv-full-Subgroup G x _ =
+  is-closed-under-inverses-subset-Group G (subset-full-Subgroup l2 G)
+is-closed-under-inverses-full-Subgroup G x _ =
   is-in-full-subtype (inv-Group G x)
 
 full-Subgroup : {l1 : Level} (l2 : Level) (G : Group l1) → Subgroup l2 G
@@ -78,7 +78,7 @@ pr1 (full-Subgroup l2 G) = subset-full-Subgroup l2 G
 pr1 (pr2 (full-Subgroup l2 G)) = contains-unit-full-Subgroup G
 pr1 (pr2 (pr2 (full-Subgroup l2 G))) =
   is-closed-under-multiplication-full-Subgroup G
-pr2 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-inv-full-Subgroup G
+pr2 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-inverses-full-Subgroup G
 
 module _
   {l1 l2 : Level} (G : Group l1)

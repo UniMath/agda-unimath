@@ -84,20 +84,20 @@ module _
   is-prop-is-closed-under-multiplication-subset-Group =
     is-prop-type-Prop is-closed-under-multiplication-subset-group-Prop
 
-  is-closed-under-inv-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-inv-subset-group-Prop =
+  is-closed-under-inverses-subset-group-Prop : Prop (l1 ⊔ l2)
+  is-closed-under-inverses-subset-group-Prop =
     Π-Prop
       ( type-Group G)
       ( λ x → hom-Prop (P x) (P (inv-Group G x)))
 
-  is-closed-under-inv-subset-Group : UU (l1 ⊔ l2)
-  is-closed-under-inv-subset-Group =
-    type-Prop is-closed-under-inv-subset-group-Prop
+  is-closed-under-inverses-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-inverses-subset-Group =
+    type-Prop is-closed-under-inverses-subset-group-Prop
 
-  is-prop-is-closed-under-inv-subset-Group :
-    is-prop is-closed-under-inv-subset-Group
-  is-prop-is-closed-under-inv-subset-Group =
-    is-prop-type-Prop is-closed-under-inv-subset-group-Prop
+  is-prop-is-closed-under-inverses-subset-Group :
+    is-prop is-closed-under-inverses-subset-Group
+  is-prop-is-closed-under-inverses-subset-Group =
+    is-prop-type-Prop is-closed-under-inverses-subset-group-Prop
 
   is-subgroup-subset-group-Prop : Prop (l1 ⊔ l2)
   is-subgroup-subset-group-Prop =
@@ -105,7 +105,7 @@ module _
       ( contains-unit-subset-group-Prop)
       ( prod-Prop
         ( is-closed-under-multiplication-subset-group-Prop)
-        ( is-closed-under-inv-subset-group-Prop))
+        ( is-closed-under-inverses-subset-group-Prop))
 
   is-subgroup-subset-Group : UU (l1 ⊔ l2)
   is-subgroup-subset-Group = type-Prop is-subgroup-subset-group-Prop
@@ -176,16 +176,16 @@ module _
     is-closed-under-multiplication-subset-Group G subset-Subgroup
   is-closed-under-multiplication-Subgroup = pr1 (pr2 is-subgroup-Subgroup)
 
-  is-closed-under-inv-Subgroup :
-    is-closed-under-inv-subset-Group G subset-Subgroup
-  is-closed-under-inv-Subgroup = pr2 (pr2 is-subgroup-Subgroup)
+  is-closed-under-inverses-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-Subgroup
+  is-closed-under-inverses-Subgroup = pr2 (pr2 is-subgroup-Subgroup)
 
-  is-closed-under-inv-Subgroup' :
+  is-closed-under-inverses-Subgroup' :
     (x : type-Group G) →
     is-in-Subgroup (inv-Group G x) → is-in-Subgroup x
-  is-closed-under-inv-Subgroup' x p =
+  is-closed-under-inverses-Subgroup' x p =
     is-closed-under-eq-Subgroup
-      ( is-closed-under-inv-Subgroup (inv-Group G x) p)
+      ( is-closed-under-inverses-Subgroup (inv-Group G x) p)
       ( inv-inv-Group G x)
 
   is-in-subgroup-left-factor-Subgroup :
@@ -198,7 +198,7 @@ module _
         ( mul-Group G x y)
         ( inv-Group G y)
         ( p)
-        ( is-closed-under-inv-Subgroup y q))
+        ( is-closed-under-inverses-Subgroup y q))
       ( is-retraction-right-div-Group G y x)
 
   is-in-subgroup-right-factor-Subgroup :
@@ -210,7 +210,7 @@ module _
       ( is-closed-under-multiplication-Subgroup
         ( inv-Group G x)
         ( mul-Group G x y)
-        ( is-closed-under-inv-Subgroup x q)
+        ( is-closed-under-inverses-Subgroup x q)
         ( p))
       ( is-retraction-left-div-Group G x y)
 
@@ -219,13 +219,13 @@ module _
     is-in-Subgroup x → is-in-Subgroup (integer-power-Group G k x)
   is-closed-under-powers-int-Subgroup (inl zero-ℕ) x H =
     is-closed-under-eq-Subgroup'
-      ( is-closed-under-inv-Subgroup x H)
+      ( is-closed-under-inverses-Subgroup x H)
       ( right-unit-law-mul-Group G (inv-Group G x))
   is-closed-under-powers-int-Subgroup (inl (succ-ℕ k)) x H =
     is-closed-under-multiplication-Subgroup
       ( inv-Group G x)
       ( integer-power-Group G (inl k) x)
-      ( is-closed-under-inv-Subgroup x H)
+      ( is-closed-under-inverses-Subgroup x H)
       ( is-closed-under-powers-int-Subgroup (inl k) x H)
   is-closed-under-powers-int-Subgroup (inr (inl star)) x H =
     contains-unit-Subgroup
@@ -299,7 +299,7 @@ module _
   inv-Subgroup : type-group-Subgroup → type-group-Subgroup
   pr1 (inv-Subgroup x) = inv-Group G (pr1 x)
   pr2 (inv-Subgroup x) =
-    is-closed-under-inv-Subgroup G H (pr1 x) (pr2 x)
+    is-closed-under-inverses-Subgroup G H (pr1 x) (pr2 x)
 
   left-inverse-law-mul-Subgroup :
     ( x : type-group-Subgroup) →
@@ -526,7 +526,7 @@ module _
     tr
       ( is-in-Subgroup G H)
       ( inv-left-div-Group G x y)
-      ( is-closed-under-inv-Subgroup G H
+      ( is-closed-under-inverses-Subgroup G H
         ( left-div-Group G x y)
         ( p))
 
@@ -580,7 +580,7 @@ module _
     tr
       ( is-in-Subgroup G H)
       ( inv-right-div-Group G x y)
-      ( is-closed-under-inv-Subgroup G H
+      ( is-closed-under-inverses-Subgroup G H
         ( right-div-Group G x y)
         ( p))
 

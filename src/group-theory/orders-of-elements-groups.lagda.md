@@ -43,6 +43,17 @@ order-Group : (l : Level) → UU (lsuc l)
 order-Group l = Normal-Subgroup l ℤ-Group
 ```
 
+### Divisibility of orders of elements in groups
+
+We say that an order `k` divides an order `l` if the subgroup `l` of `ℤ` is
+contained in the subgroup `k`.
+
+```agda
+div-order-Group :
+  {l1 l2 : Level} → order-Group l1 → order-Group l2 → UU (l1 ⊔ l2)
+div-order-Group k l = leq-Normal-Subgroup ℤ-Group l k
+```
+
 ### The order of an element in a group
 
 ```agda

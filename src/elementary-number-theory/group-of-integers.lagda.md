@@ -13,6 +13,7 @@ open import elementary-number-theory.integers
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
+open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.semigroups
 ```
@@ -40,4 +41,8 @@ pr2 (pr2 (pr1 (pr2 ℤ-Group))) = right-unit-law-add-ℤ
 pr1 (pr2 (pr2 ℤ-Group)) = neg-ℤ
 pr1 (pr2 (pr2 (pr2 ℤ-Group))) = left-inverse-law-add-ℤ
 pr2 (pr2 (pr2 (pr2 ℤ-Group))) = right-inverse-law-add-ℤ
+
+ℤ-Ab : Ab lzero
+pr1 ℤ-Ab = ℤ-Group
+pr2 ℤ-Ab = commutative-add-ℤ
 ```
