@@ -66,7 +66,8 @@ module _
       is-natural-transformation-Precategory
 
   components-natural-transformation-Precategory :
-    natural-transformation-Precategory → (x : obj-Precategory C) →
+    natural-transformation-Precategory →
+    (x : obj-Precategory C) →
     type-hom-Precategory D
       ( obj-functor-Precategory C D F x)
       ( obj-functor-Precategory C D G x)
@@ -92,8 +93,9 @@ module _
     (F : functor-Precategory C D) → natural-transformation-Precategory C D F F
   pr1 (id-natural-transformation-Precategory F) x = id-hom-Precategory D
   pr2 (id-natural-transformation-Precategory F) f =
-    right-unit-law-comp-hom-Precategory D _ ∙
-    inv (left-unit-law-comp-hom-Precategory D _)
+    ( right-unit-law-comp-hom-Precategory D (hom-functor-Precategory C D F f)) ∙
+    ( inv
+      ( left-unit-law-comp-hom-Precategory D (hom-functor-Precategory C D F f)))
 
   comp-natural-transformation-Precategory :
     (F G H : functor-Precategory C D) →

@@ -23,7 +23,8 @@ open import foundation.universe-levels
 [precategories](category-theory.precategories.md) and
 [natural transformations](category-theory.natural-transformations-precategories.md)
 between them introduce a new precategory whose identity map and composition
-structure are inherited pointwise from the codomain precategory.
+structure are inherited pointwise from the codomain precategory. This is called
+the **precategory of functors**.
 
 ## Definition
 
@@ -35,8 +36,8 @@ module _
   functor-precategory-Precategory :
     Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
   pr1 functor-precategory-Precategory = functor-Precategory C D
-  pr1 (pr2 functor-precategory-Precategory) F G =
-    natural-transformation-Precategory-Set C D F G
+  pr1 (pr2 functor-precategory-Precategory) =
+    natural-transformation-Precategory-Set C D
   pr1 (pr2 (pr2 functor-precategory-Precategory)) =
     ( λ {F} {G} {H} → comp-natural-transformation-Precategory C D F G H) ,
     ( λ {F} {G} {H} {I} h g f →
