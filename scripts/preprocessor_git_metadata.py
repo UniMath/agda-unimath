@@ -136,7 +136,7 @@ def get_author_element_for_file(filename, include_contributors):
         recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
     return (
-        f'{attribution_text}<p><i>{nobreak_span("Created: " + created_date)}; {nobreak_span("Last modified: " + modified_date)}</i></p>',
+        f'{attribution_text}<p><i>{nobreak_span("Created on " + created_date)}.</i><br><i>{nobreak_span("Last modified on " + modified_date)}.</i></p>',
         recent_changes
     )
 
