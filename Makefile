@@ -85,9 +85,9 @@ website/css/Agda-highlight.css: ./scripts/generate_agda_css.py ./theme/catppucci
 website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md ./website/css/Agda-highlight.css
 	@cp $(METAFILES) ./docs/
 	@mkdir -p ./docs/website
-	@cp -r -T ./website/images ./docs/website/images
-	@cp -r -T ./website/css ./docs/website/css
-	@cp -r -T ./website/js ./docs/website/js
+	@cp -r ./website/images ./docs/website/
+	@cp -r ./website/css ./docs/website/
+	@cp -r ./website/js ./docs/website/
 
 .PHONY: website
 website: website-prepare
