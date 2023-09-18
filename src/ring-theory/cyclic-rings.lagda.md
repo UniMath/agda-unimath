@@ -8,8 +8,10 @@ module ring-theory.cyclic-rings where
 
 ```agda
 open import elementary-number-theory.integers
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.ring-of-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.fibers-of-maps
 open import foundation.identity-types
@@ -21,10 +23,12 @@ open import foundation.universe-levels
 
 open import group-theory.abelian-groups
 open import group-theory.cyclic-groups
+open import group-theory.free-groups-with-one-generator
 open import group-theory.generating-elements-groups
 open import group-theory.groups
 
 open import ring-theory.integer-multiples-of-elements-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -173,6 +177,91 @@ module _
 ## Properties
 
 ### If `R` is a cyclic ring, then any generator of its additive group is invertible
+
+```agda
+module _
+  {l : Level} (R : Ring l) (g : type-Ring R)
+  (H : is-generating-element-Group (group-Ring R) g)
+  where
+
+  is-invertible-is-generating-element-group-Ring :
+    is-invertible-element-Ring R g
+  is-invertible-is-generating-element-group-Ring =
+    apply-universal-property-trunc-Prop
+      ( is-surjective-hom-element-is-generating-element-Group
+        ( group-Ring R)
+        ( g)
+        ( H)
+        ( one-Ring R))
+      ( is-invertible-element-prop-Ring R g)
+      ( λ (k , p) →
+        ( map-initial-hom-Ring R k) ,
+        ( ( right-integer-multiple-law-mul-Ring R k g (one-Ring R)) ∙
+          ( ap (integer-multiple-Ring R k) (right-unit-law-mul-Ring R g)) ∙
+          ( p)) ,
+        ( ( left-integer-multiple-law-mul-Ring R k (one-Ring R) g) ∙
+          ( ap (integer-multiple-Ring R k) (left-unit-law-mul-Ring R g)) ∙
+          ( p)))
+```
+
+### If `R` is a cyclic ring, then any invertible element is a generator of its additive group
+
+```agda
+module _
+  {l : Level} (R : Cyclic-Ring l)
+  where
+
+  is-generating-element-group-is-invertible-element-Cyclic-Ring :
+    (x : type-Cyclic-Ring R) →
+    is-invertible-element-Ring (ring-Cyclic-Ring R) x →
+    is-generating-element-Group (group-Cyclic-Ring R) x
+  is-generating-element-group-is-invertible-element-Cyclic-Ring x H =
+    apply-universal-property-trunc-Prop
+      ( is-cyclic-Cyclic-Ring R)
+      ( is-generating-element-prop-Group (group-Cyclic-Ring R) x)
+      ( λ (g , G) →
+        apply-twice-universal-property-trunc-Prop
+          ( is-surjective-hom-element-is-generating-element-Group
+            ( group-Cyclic-Ring R)
+            ( g)
+            ( G)
+            ( x))
+          ( is-surjective-hom-element-is-generating-element-Group
+            ( group-Cyclic-Ring R)
+            ( g)
+            ( G)
+            ( pr1 H))
+          ( is-generating-element-prop-Group (group-Cyclic-Ring R) x)
+          ( λ { (k , refl) (k' , p') →
+                is-generating-element-is-surjective-hom-element-Group
+                  ( group-Cyclic-Ring R)
+                  ( _)
+                  ( λ y →
+                    apply-universal-property-trunc-Prop
+                      ( is-surjective-hom-element-is-generating-element-Group
+                        ( group-Cyclic-Ring R)
+                        ( g)
+                        ( G)
+                        ( y))
+                      ( trunc-Prop
+                        ( fiber
+                          ( map-hom-element-Group (group-Cyclic-Ring R) _)
+                          ( y)))
+                      ( λ { (l , refl) →
+                            unit-trunc-Prop
+                              ( ( mul-ℤ l (neg-ℤ k)) ,
+                                ( integer-multiple-mul-Ring
+                                  ( ring-Cyclic-Ring R)
+                                  ( l)
+                                  ( neg-ℤ k)
+                                  ( _) ∙
+                                ( ap
+                                  ( integer-multiple-Ring
+                                    ( ring-Cyclic-Ring R)
+                                    ( l))
+                                  {!!}) ∙
+                                ( {!!})))}))}))
+```
 
 ### If `R` is a cyclic ring, then `1` is a generator of its additive group
 
