@@ -1,4 +1,4 @@
-# Initial objects of large categories
+# Initial objects of large precategories
 
 ```agda
 module category-theory.initial-objects-large-precategories where
@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-An **initial object** in a [large category](category-theory.large-categories.md) `C` is an object `X` such that `hom X Y` is contractible for any object `Y`.
+An **initial object** in a [large category](category-theory.large-categories.md)
+`C` is an object `X` such that `hom X Y` is contractible for any object `Y`.
 
 ## Definitions
 

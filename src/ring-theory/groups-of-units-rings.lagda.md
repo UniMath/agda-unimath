@@ -48,7 +48,7 @@ module _
   where
 
   subtype-group-of-units-Ring : type-Ring R → Prop l
-  subtype-group-of-units-Ring = is-invertible-element-ring-Prop R
+  subtype-group-of-units-Ring = is-invertible-element-prop-Ring R
 
   submonoid-group-of-units-Ring : Submonoid l (multiplicative-monoid-Ring R)
   submonoid-group-of-units-Ring =

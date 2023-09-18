@@ -11,5 +11,3 @@ module elementary-number-theory.multiplicative-units-modular-arithmetic where
 ```
 
 </details>
-
-## Idea

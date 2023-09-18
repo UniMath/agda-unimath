@@ -24,7 +24,6 @@ open import elementary-number-theory.catalan-numbers public
 open import elementary-number-theory.cofibonacci public
 open import elementary-number-theory.collatz-bijection public
 open import elementary-number-theory.collatz-conjecture public
-open import elementary-number-theory.commutative-ring-of-integers public
 open import elementary-number-theory.commutative-semiring-of-natural-numbers public
 open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
@@ -102,6 +101,7 @@ open import elementary-number-theory.relatively-prime-integers public
 open import elementary-number-theory.relatively-prime-natural-numbers public
 open import elementary-number-theory.repeating-element-standard-finite-type public
 open import elementary-number-theory.retracts-of-natural-numbers public
+open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.rings-of-modular-arithmetic public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public

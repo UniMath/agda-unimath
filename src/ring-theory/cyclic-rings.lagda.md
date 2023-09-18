@@ -1,6 +1,8 @@
 # Cyclic rings
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module ring-theory.cyclic-rings where
 ```
 
@@ -36,11 +38,21 @@ open import ring-theory.rings
 
 ## Idea
 
-A [ring](ring-theory.rings.md) is said to be **cyclic** if its underlying additive [group](group-theory.groups.md) is a [cyclic group](group-theory.cyclic-groups.md).
+A [ring](ring-theory.rings.md) is said to be **cyclic** if its underlying
+additive [group](group-theory.groups.md) is a
+[cyclic group](group-theory.cyclic-groups.md).
 
-Since rings in the agda-unimath library are assumed to be unital by default, it follows that cyclic rings come equipped with a [generating element](group-theory.generating-elements-groups.md). Indeed, the unit element is a generating element of any cyclic ring.
+Since rings in the agda-unimath library are assumed to be unital by default, it
+follows that cyclic rings come equipped with a
+[generating element](group-theory.generating-elements-groups.md). Indeed, the
+unit element is a generating element of any cyclic ring.
 
-Note that the classification of cyclic unital rings is somewhat different from the nonunital cyclic rings: Cyclic unital rings are [quotients](ring-theory.quotient-rings.md) of the [ring `ℤ` of integers](elementary-number-theory.ring-of-integers.md), whereas cyclic nonunital rings are isomorphic to [ideals](ring-theory.ideals-rings.md) of quotients of the ring `ℤ` \[1\].
+Note that the classification of cyclic unital rings is somewhat different from
+the nonunital cyclic rings: Cyclic unital rings are
+[quotients](ring-theory.quotient-rings.md) of the
+[ring `ℤ` of integers](elementary-number-theory.ring-of-integers.md), whereas
+cyclic nonunital rings are isomorphic to [ideals](ring-theory.ideals-rings.md)
+of quotients of the ring `ℤ` \[1\].
 
 ## Definitions
 
@@ -180,7 +192,10 @@ module _
 
 ### If `R` is a cyclic ring, then any generator of its additive group is invertible
 
-**Proof:** Let `g` be a generator of the additive group `(R,0,+,-)`. Then there is an integer `k` such that `kg ＝ 1`. Then we obtain that `(k1)g ＝ k(1g) ＝ kg ＝ 1` and that `g(k1) ＝ k(g1) ＝ kg ＝ 1`. It follows that the element `k1` is the multiplicative inverse of `g`.
+**Proof:** Let `g` be a generator of the additive group `(R,0,+,-)`. Then there
+is an integer `k` such that `kg ＝ 1`. Then we obtain that
+`(k1)g ＝ k(1g) ＝ kg ＝ 1` and that `g(k1) ＝ k(g1) ＝ kg ＝ 1`. It follows
+that the element `k1` is the multiplicative inverse of `g`.
 
 ```agda
 module _
@@ -210,7 +225,10 @@ module _
 
 ### If `R` is a cyclic ring, then any invertible element is a generator of its additive group
 
-Let `x` be an invertible element of `R` and let `g` be a generating element of the additive group `(R,0,+,-)`. Then there exist integers `k` and `l` such that `kg ＝ x` and `lg ＝ x⁻¹`. Now we see that `lx ＝ lkg ＝ klg ＝ kx⁻¹. Therefore we obtain that `lk1 ＝ lk(xx⁻1) ＝ lxkx⁻¹
+Let `x` be an invertible element of `R` and let `g` be a generating element of
+the additive group `(R,0,+,-)`. Then there exist integers `k` and `l` such that
+`kg ＝ x` and `lg ＝ x⁻¹`. Now we see that
+`lx ＝ lkg ＝ klg ＝ kx⁻¹. Therefore we obtain that `lk1 ＝ lk(xx⁻1) ＝ lxkx⁻¹
 
 ```agda
 module _
@@ -261,13 +279,15 @@ module _
 
 ### If `R` is a cyclic ring, then `1` is a generator of its additive group
 
-### `R` is a cylcic ring if and only if `initial-hom-Ring R` is surjective.
+To do
+
+### `R` is a cylcic ring if and only if `initial-hom-Ring R` is surjective
 
 ```agda
 module _
   {l : Level} (R : Cyclic-Ring l)
   where
-  
+
   is-surjective-initial-hom-Cyclic-Ring :
     is-surjective (map-initial-hom-Ring (ring-Cyclic-Ring R))
   is-surjective-initial-hom-Cyclic-Ring x =
@@ -314,4 +334,5 @@ module _
 
 ## References
 
-- \[1\] Maria Balintne-Szendrei, Gabor Czedli, and Agnes Szendrei. _Absztrakt algebrai feladatok (Exercises in Abstract Algebra)_. Polygon, Szeged, 2005.
+- \[1\] Maria Balintne-Szendrei, Gabor Czedli, and Agnes Szendrei. _Absztrakt
+  algebrai feladatok (Exercises in Abstract Algebra)_. Polygon, Szeged, 2005.

@@ -179,9 +179,9 @@ module _
   is-prop-is-invertible-element-Commutative-Ring =
     is-prop-is-invertible-element-Ring (ring-Commutative-Ring A)
 
-  is-invertible-element-commutative-ring-Prop : type-Commutative-Ring A → Prop l
-  is-invertible-element-commutative-ring-Prop =
-    is-invertible-element-ring-Prop (ring-Commutative-Ring A)
+  is-invertible-element-prop-Commutative-Ring : type-Commutative-Ring A → Prop l
+  is-invertible-element-prop-Commutative-Ring =
+    is-invertible-element-prop-Ring (ring-Commutative-Ring A)
 ```
 
 ### Inverses are left/right inverses

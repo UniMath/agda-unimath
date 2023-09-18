@@ -15,9 +15,15 @@ open import group-theory.generating-elements-groups
 open import ring-theory.rings
 ```
 
+</details>
+
 ## Idea
 
-A **generating element** of a [ring](ring-theory.rings.md) `R` is an element `g` which is a [generating element](group-theory.generating-elements-groups.md) of the underlying additive [group](group-theory.groups.md) of `R`. That is, `g` is a generating element of a ring `R` if for every element `x : R` there exists an integer `k` such that `kg ＝ x`.
+A **generating element** of a [ring](ring-theory.rings.md) `R` is an element `g`
+which is a [generating element](group-theory.generating-elements-groups.md) of
+the underlying additive [group](group-theory.groups.md) of `R`. That is, `g` is
+a generating element of a ring `R` if for every element `x : R` there exists an
+integer `k` such that `kg ＝ x`.
 
 ## Definitions
 

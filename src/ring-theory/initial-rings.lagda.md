@@ -19,15 +19,19 @@ open import ring-theory.rings
 
 ## Idea
 
-The **initial ring** is a [ring](ring-theory.rings.md) `R` that satisfies the universal property that for any ring `S`, the type
+The **initial ring** is a [ring](ring-theory.rings.md) `R` that satisfies the
+universal property that for any ring `S`, the type
 
 ```text
   type-hom-Ring R S
 ```
 
-of [ring homomorphisms](ring-theory.homomorphisms-rings.md) from `R` to `S` is contractible.
+of [ring homomorphisms](ring-theory.homomorphisms-rings.md) from `R` to `S` is
+contractible.
 
-In [`elementary-number-theory.commutative-ring-of-integers`](elementary-number-theory.commutative-ring-of-integers.md) we will show that `ℤ` is the initial ring.
+In
+[`elementary-number-theory.commutative-ring-of-integers`](elementary-number-theory.commutative-ring-of-integers.md)
+we will show that `ℤ` is the initial ring.
 
 ## Definitions
 

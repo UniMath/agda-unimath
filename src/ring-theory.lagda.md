@@ -14,12 +14,15 @@ open import ring-theory.central-elements-semirings public
 open import ring-theory.commuting-elements-rings public
 open import ring-theory.congruence-relations-rings public
 open import ring-theory.congruence-relations-semirings public
+open import ring-theory.cyclic-rings public
 open import ring-theory.dependent-products-rings public
 open import ring-theory.dependent-products-semirings public
 open import ring-theory.division-rings public
+open import ring-theory.free-rings-with-one-generator public
 open import ring-theory.full-ideals-rings public
 open import ring-theory.function-rings public
 open import ring-theory.function-semirings public
+open import ring-theory.generating-elements-rings public
 open import ring-theory.groups-of-units-rings public
 open import ring-theory.homomorphisms-rings public
 open import ring-theory.homomorphisms-semirings public
@@ -27,6 +30,7 @@ open import ring-theory.ideals-generated-by-subsets-rings public
 open import ring-theory.ideals-rings public
 open import ring-theory.ideals-semirings public
 open import ring-theory.idempotent-elements-rings public
+open import ring-theory.initial-rings public
 open import ring-theory.integer-multiples-of-elements-rings public
 open import ring-theory.intersections-ideals-rings public
 open import ring-theory.intersections-ideals-semirings public

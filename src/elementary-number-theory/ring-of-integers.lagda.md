@@ -140,7 +140,7 @@ module _
 module _
   {l : Level} (R : Ring l)
   where
-  
+
   htpy-initial-hom-Ring :
     (f : type-hom-Ring ℤ-Ring R) → htpy-hom-Ring ℤ-Ring R (initial-hom-Ring R) f
   htpy-initial-hom-Ring f k =
