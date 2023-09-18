@@ -12,6 +12,7 @@ open import category-theory.functors-categories
 open import category-theory.natural-transformations-precategories
 
 open import foundation.embeddings
+open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -150,11 +151,15 @@ module _
       ( precategory-Category D)
       ( F)
       ( G)
+```
 
-  components-natural-transformation-Category-is-emb :
+### The set of natural transformations
+
+```agda
+  is-emb-components-natural-transformation-Category :
     is-emb (components-natural-transformation-Category C D F G)
-  components-natural-transformation-Category-is-emb =
-    components-natural-transformation-Precategory-is-emb
+  is-emb-components-natural-transformation-Category =
+    is-emb-components-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -168,27 +173,38 @@ module _
       ( precategory-Category D)
       ( F)
       ( G)
-```
-
-### Category laws for natural transformations
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} (C : Category l1 l2) (D : Category l3 l4)
-  where
 
   extensionality-natural-transformation-Category :
-    (F G : functor-Category C D)
     (α β : natural-transformation-Category C D F G) →
+    ( α ＝ β) ≃
     ( components-natural-transformation-Category C D F G α ＝
-      components-natural-transformation-Category C D F G β) →
-    α ＝ β
-  extensionality-natural-transformation-Category F G =
+      components-natural-transformation-Category C D F G β)
+  extensionality-natural-transformation-Category =
     extensionality-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
       ( G)
+
+  eq-eq-components-natural-transformation-Category :
+    (α β : natural-transformation-Category C D F G) →
+    ( components-natural-transformation-Category C D F G α ＝
+      components-natural-transformation-Category C D F G β) →
+    α ＝ β
+  eq-eq-components-natural-transformation-Category =
+    eq-eq-components-natural-transformation-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
+```
+
+### Categorical laws for natural transformations
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (C : Category l1 l2) (D : Category l3 l4)
+  where
 
   right-unit-law-comp-natural-transformation-Category :
     {F G : functor-Category C D}

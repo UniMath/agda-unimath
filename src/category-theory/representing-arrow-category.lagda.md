@@ -7,28 +7,28 @@ module category-theory.representing-arrow-category where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
-open import category-theory.precategories
 open import category-theory.categories
+open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.yoneda-lemma-precategories
+open import category-theory.precategories
 open import category-theory.yoneda-lemma-categories
+open import category-theory.yoneda-lemma-precategories
 
 open import foundation.action-on-identifications-functions
+open import foundation.booleans
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.empty-types
 open import foundation.equivalences
-open import foundation.contractible-types
-open import foundation.unit-type
 open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.empty-types
-open import foundation.booleans
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.unit-type
 open import foundation.universe-levels
 ```
 
