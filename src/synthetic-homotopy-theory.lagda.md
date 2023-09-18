@@ -14,7 +14,9 @@ open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
+open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
+open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
@@ -58,6 +60,7 @@ open import synthetic-homotopy-theory.suspensions-of-types public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public
+open import synthetic-homotopy-theory.universal-property-coequalizers public
 open import synthetic-homotopy-theory.universal-property-pushouts public
 open import synthetic-homotopy-theory.universal-property-suspensions public
 open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types public
