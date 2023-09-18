@@ -133,9 +133,11 @@
 }
 
 .Agda a[href]:hover {
-  background-color: #b4eeb4;
+  /* background-color: #b4eeb4; */
+  background-color: var(--theme-hover);
 }
 
 .Agda [href].hover-highlight {
-  background-color: #b4eeb4;
+  /* background-color: #b4eeb4; */
+  background-color: var(--theme-hover);
 }

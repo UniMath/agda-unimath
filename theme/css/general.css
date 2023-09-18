@@ -30,6 +30,7 @@ code {
 /* make long words/inline code not x overflow */
 main {
   overflow-wrap: break-word;
+  font-size: 1.6rem;
 }
 
 /* make wide tables scroll if they overflow */
@@ -115,7 +116,6 @@ h6:target::before {
 .content {
   overflow-y: auto;
   padding: 0 20px;
-  width: 80%;
 }
 .content main {
   margin-left: 2%;
@@ -247,4 +247,8 @@ kbd {
   padding: 0.5em;
   overflow-x: overlay;
   background-color: var(--code-bg);
+}
+
+span.prefer-nobreak {
+  display: inline-block;
 }
