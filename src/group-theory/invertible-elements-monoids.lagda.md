@@ -11,7 +11,11 @@ open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
@@ -360,6 +364,175 @@ module _
     is-left-inverse-inv-is-invertible-element-Monoid M H
   pr2 (pr2 (is-invertible-element-inv-is-invertible-element-Monoid H)) =
     is-right-inverse-inv-is-invertible-element-Monoid M H
+```
+
+### An element is invertible if and only if multiplying by it is an equivalence
+
+**Proof:** Suppose that the map `z ↦ xz` is an equivalence. Then there is a
+unique element `y` such that `xy ＝ 1`. Thus we have a right inverse of `x`. To
+see that `y` is also a left inverse of `x`, note that the map `z ↦ xz` is
+injective by the assumption that it is an equivalence. Therefore it suffices to
+show that `x(yx) ＝ x1`. This follows from the following calculation:
+
+```text
+  x(yx) ＝ (xy)x ＝ 1x ＝ x ＝ x1.
+```
+
+This completes the proof that if `z ↦ xz` is an equivalence, then `x` is
+invertible. The converse is straightfoward.
+
+In the following code we give the above proof, as well as the analogous proof
+that `x` is invertible if `z ↦ zx` is an equivalence, and the converse of both
+statements.
+
+#### An element `x` is invertible if and only if `z ↦ xz` is an equivalence
+
+```agda
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  inv-is-invertible-element-is-equiv-mul-Monoid :
+    is-equiv (mul-Monoid M x) → type-Monoid M
+  inv-is-invertible-element-is-equiv-mul-Monoid H =
+    map-inv-is-equiv H (unit-Monoid M)
+
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid :
+    (H : is-equiv (mul-Monoid M x)) →
+    mul-Monoid M x (inv-is-invertible-element-is-equiv-mul-Monoid H) ＝
+    unit-Monoid M
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H =
+    is-section-map-inv-is-equiv H (unit-Monoid M)
+
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid :
+    (H : is-equiv (mul-Monoid M x)) →
+    mul-Monoid M (inv-is-invertible-element-is-equiv-mul-Monoid H) x ＝
+    unit-Monoid M
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H =
+    is-injective-is-equiv H
+      ( ( inv (associative-mul-Monoid M _ _ _)) ∙
+        ( ap
+          ( mul-Monoid' M x)
+          ( is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H)) ∙
+        ( left-unit-law-mul-Monoid M x) ∙
+        ( inv (right-unit-law-mul-Monoid M x)))
+
+  is-invertible-element-is-equiv-mul-Monoid :
+    is-equiv (mul-Monoid M x) → is-invertible-element-Monoid M x
+  pr1 (is-invertible-element-is-equiv-mul-Monoid H) =
+    inv-is-invertible-element-is-equiv-mul-Monoid H
+  pr1 (pr2 (is-invertible-element-is-equiv-mul-Monoid H)) =
+    is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H
+  pr2 (pr2 (is-invertible-element-is-equiv-mul-Monoid H)) =
+    is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H
+
+  left-div-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → type-Monoid M → type-Monoid M
+  left-div-is-invertible-element-Monoid H =
+    mul-Monoid M (inv-is-invertible-element-Monoid M H)
+
+  is-section-left-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    mul-Monoid M x ∘ left-div-is-invertible-element-Monoid H ~ id
+  is-section-left-div-is-invertible-element-Monoid H y =
+    ( inv (associative-mul-Monoid M _ _ _)) ∙
+    ( ap
+      ( mul-Monoid' M y)
+      ( is-right-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( left-unit-law-mul-Monoid M y)
+
+  is-retraction-left-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    left-div-is-invertible-element-Monoid H ∘ mul-Monoid M x ~ id
+  is-retraction-left-div-is-invertible-element-Monoid H y =
+    ( inv (associative-mul-Monoid M _ _ _)) ∙
+    ( ap
+      ( mul-Monoid' M y)
+      ( is-left-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( left-unit-law-mul-Monoid M y)
+
+  is-equiv-mul-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → is-equiv (mul-Monoid M x)
+  is-equiv-mul-is-invertible-element-Monoid H =
+    is-equiv-is-invertible
+      ( left-div-is-invertible-element-Monoid H)
+      ( is-section-left-div-is-invertible-element-Monoid H)
+      ( is-retraction-left-div-is-invertible-element-Monoid H)
+```
+
+#### An element `x` is invertible if and only if `z ↦ zx` is an equivalence
+
+```agda
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  inv-is-invertible-element-is-equiv-mul-Monoid' :
+    is-equiv (mul-Monoid' M x) → type-Monoid M
+  inv-is-invertible-element-is-equiv-mul-Monoid' H =
+    map-inv-is-equiv H (unit-Monoid M)
+
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' :
+    (H : is-equiv (mul-Monoid' M x)) →
+    mul-Monoid M (inv-is-invertible-element-is-equiv-mul-Monoid' H) x ＝
+    unit-Monoid M
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H =
+    is-section-map-inv-is-equiv H (unit-Monoid M)
+
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' :
+    (H : is-equiv (mul-Monoid' M x)) →
+    mul-Monoid M x (inv-is-invertible-element-is-equiv-mul-Monoid' H) ＝
+    unit-Monoid M
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H =
+    is-injective-is-equiv H
+      ( ( associative-mul-Monoid M _ _ _) ∙
+        ( ap
+          ( mul-Monoid M x)
+          ( is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H)) ∙
+        ( right-unit-law-mul-Monoid M x) ∙
+        ( inv (left-unit-law-mul-Monoid M x)))
+
+  is-invertible-element-is-equiv-mul-Monoid' :
+    is-equiv (mul-Monoid' M x) → is-invertible-element-Monoid M x
+  pr1 (is-invertible-element-is-equiv-mul-Monoid' H) =
+    inv-is-invertible-element-is-equiv-mul-Monoid' H
+  pr1 (pr2 (is-invertible-element-is-equiv-mul-Monoid' H)) =
+    is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H
+  pr2 (pr2 (is-invertible-element-is-equiv-mul-Monoid' H)) =
+    is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H
+
+  right-div-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → type-Monoid M → type-Monoid M
+  right-div-is-invertible-element-Monoid H =
+    mul-Monoid' M (inv-is-invertible-element-Monoid M H)
+
+  is-section-right-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    mul-Monoid' M x ∘ right-div-is-invertible-element-Monoid H ~ id
+  is-section-right-div-is-invertible-element-Monoid H y =
+    ( associative-mul-Monoid M _ _ _) ∙
+    ( ap
+      ( mul-Monoid M y)
+      ( is-left-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( right-unit-law-mul-Monoid M y)
+
+  is-retraction-right-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    right-div-is-invertible-element-Monoid H ∘ mul-Monoid' M x ~ id
+  is-retraction-right-div-is-invertible-element-Monoid H y =
+    ( associative-mul-Monoid M _ _ _) ∙
+    ( ap
+      ( mul-Monoid M y)
+      ( is-right-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( right-unit-law-mul-Monoid M y)
+
+  is-equiv-mul-is-invertible-element-Monoid' :
+    is-invertible-element-Monoid M x → is-equiv (mul-Monoid' M x)
+  is-equiv-mul-is-invertible-element-Monoid' H =
+    is-equiv-is-invertible
+      ( right-div-is-invertible-element-Monoid H)
+      ( is-section-right-div-is-invertible-element-Monoid H)
+      ( is-retraction-right-div-is-invertible-element-Monoid H)
 ```
 
 ## See also

@@ -10,6 +10,9 @@ module ring-theory.invertible-elements-rings where
 open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -319,6 +322,132 @@ module _
     is-invertible-element-Ring R (inv-is-invertible-element-Ring R H)
   is-invertible-element-inv-is-invertible-element-Ring =
     is-invertible-element-inv-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+### An element is invertible if and only if multiplying by it is an equivalence
+
+#### An element `x` is invertible if and only if `z ↦ xz` is an equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l) {x : type-Ring R}
+  where
+
+  inv-is-invertible-element-is-equiv-mul-Ring :
+    is-equiv (mul-Ring R x) → type-Ring R
+  inv-is-invertible-element-is-equiv-mul-Ring =
+    inv-is-invertible-element-is-equiv-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Ring :
+    (H : is-equiv (mul-Ring R x)) →
+    mul-Ring R x (inv-is-invertible-element-is-equiv-mul-Ring H) ＝
+    one-Ring R
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Ring =
+    is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Ring :
+    (H : is-equiv (mul-Ring R x)) →
+    mul-Ring R (inv-is-invertible-element-is-equiv-mul-Ring H) x ＝
+    one-Ring R
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Ring =
+    is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-invertible-element-is-equiv-mul-Ring :
+    is-equiv (mul-Ring R x) → is-invertible-element-Ring R x
+  is-invertible-element-is-equiv-mul-Ring =
+    is-invertible-element-is-equiv-mul-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  left-div-is-invertible-element-Ring :
+    is-invertible-element-Ring R x → type-Ring R → type-Ring R
+  left-div-is-invertible-element-Ring =
+    left-div-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-section-left-div-is-invertible-element-Ring :
+    (H : is-invertible-element-Ring R x) →
+    mul-Ring R x ∘ left-div-is-invertible-element-Ring H ~ id
+  is-section-left-div-is-invertible-element-Ring =
+    is-section-left-div-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-retraction-left-div-is-invertible-element-Ring :
+    (H : is-invertible-element-Ring R x) →
+    left-div-is-invertible-element-Ring H ∘ mul-Ring R x ~ id
+  is-retraction-left-div-is-invertible-element-Ring =
+    is-retraction-left-div-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-equiv-mul-is-invertible-element-Ring :
+    is-invertible-element-Ring R x → is-equiv (mul-Ring R x)
+  is-equiv-mul-is-invertible-element-Ring =
+    is-equiv-mul-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+```
+
+#### An element `x` is invertible if and only if `z ↦ zx` is an equivalence
+
+```agda
+module _
+  {l : Level} (R : Ring l) {x : type-Ring R}
+  where
+
+  inv-is-invertible-element-is-equiv-mul-Ring' :
+    is-equiv (mul-Ring' R x) → type-Ring R
+  inv-is-invertible-element-is-equiv-mul-Ring' =
+    inv-is-invertible-element-is-equiv-mul-Monoid'
+      ( multiplicative-monoid-Ring R)
+
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Ring' :
+    (H : is-equiv (mul-Ring' R x)) →
+    mul-Ring R (inv-is-invertible-element-is-equiv-mul-Ring' H) x ＝
+    one-Ring R
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Ring' =
+    is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid'
+      ( multiplicative-monoid-Ring R)
+
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Ring' :
+    (H : is-equiv (mul-Ring' R x)) →
+    mul-Ring R x (inv-is-invertible-element-is-equiv-mul-Ring' H) ＝
+    one-Ring R
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Ring' =
+    is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid'
+      ( multiplicative-monoid-Ring R)
+
+  is-invertible-element-is-equiv-mul-Ring' :
+    is-equiv (mul-Ring' R x) → is-invertible-element-Ring R x
+  is-invertible-element-is-equiv-mul-Ring' =
+    is-invertible-element-is-equiv-mul-Monoid'
+      ( multiplicative-monoid-Ring R)
+
+  right-div-is-invertible-element-Ring :
+    is-invertible-element-Ring R x → type-Ring R → type-Ring R
+  right-div-is-invertible-element-Ring =
+    right-div-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-section-right-div-is-invertible-element-Ring :
+    (H : is-invertible-element-Ring R x) →
+    mul-Ring' R x ∘ right-div-is-invertible-element-Ring H ~ id
+  is-section-right-div-is-invertible-element-Ring =
+    is-section-right-div-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-retraction-right-div-is-invertible-element-Ring :
+    (H : is-invertible-element-Ring R x) →
+    right-div-is-invertible-element-Ring H ∘ mul-Ring' R x ~ id
+  is-retraction-right-div-is-invertible-element-Ring =
+    is-retraction-right-div-is-invertible-element-Monoid
+      ( multiplicative-monoid-Ring R)
+
+  is-equiv-mul-is-invertible-element-Ring' :
+    is-invertible-element-Ring R x → is-equiv (mul-Ring' R x)
+  is-equiv-mul-is-invertible-element-Ring' =
+    is-equiv-mul-is-invertible-element-Monoid'
       ( multiplicative-monoid-Ring R)
 ```
 
