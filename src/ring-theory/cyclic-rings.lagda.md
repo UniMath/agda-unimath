@@ -134,6 +134,9 @@ module _
   mul-Cyclic-Ring : (x y : type-Cyclic-Ring) → type-Cyclic-Ring
   mul-Cyclic-Ring = mul-Ring ring-Cyclic-Ring
 
+  mul-Cyclic-Ring' : (x y : type-Cyclic-Ring) → type-Cyclic-Ring
+  mul-Cyclic-Ring' = mul-Ring' ring-Cyclic-Ring
+
   integer-multiple-Cyclic-Ring : ℤ → type-Cyclic-Ring → type-Cyclic-Ring
   integer-multiple-Cyclic-Ring = integer-multiple-Ring ring-Cyclic-Ring
 
@@ -200,6 +203,27 @@ module _
     add-Cyclic-Ring (mul-Cyclic-Ring x z) (mul-Cyclic-Ring y z)
   right-distributive-mul-add-Cyclic-Ring =
     right-distributive-mul-add-Ring ring-Cyclic-Ring
+
+  swap-integer-multiple-Cyclic-Ring :
+    (k l : ℤ) (x : type-Cyclic-Ring) →
+    integer-multiple-Cyclic-Ring k (integer-multiple-Cyclic-Ring l x) ＝
+    integer-multiple-Cyclic-Ring l (integer-multiple-Cyclic-Ring k x)
+  swap-integer-multiple-Cyclic-Ring =
+    swap-integer-multiple-Ring ring-Cyclic-Ring
+
+  left-integer-multiple-law-mul-Cyclic-Ring :
+    (k : ℤ) (x y : type-Cyclic-Ring) →
+    mul-Cyclic-Ring (integer-multiple-Cyclic-Ring k x) y ＝
+    integer-multiple-Cyclic-Ring k (mul-Cyclic-Ring x y)
+  left-integer-multiple-law-mul-Cyclic-Ring =
+    left-integer-multiple-law-mul-Ring ring-Cyclic-Ring
+
+  right-integer-multiple-law-mul-Cyclic-Ring :
+    (k : ℤ) (x y : type-Cyclic-Ring) →
+    mul-Cyclic-Ring x (integer-multiple-Cyclic-Ring k y) ＝
+    integer-multiple-Cyclic-Ring k (mul-Cyclic-Ring x y)
+  right-integer-multiple-law-mul-Cyclic-Ring =
+    right-integer-multiple-law-mul-Ring ring-Cyclic-Ring
 ```
 
 ## Properties
@@ -207,9 +231,9 @@ module _
 ### If `R` is a cyclic ring, then any generator of its additive group is invertible
 
 **Proof:** Let `g` be a generator of the additive group `(R,0,+,-)`. Then there
-is an integer `k` such that `kg ＝ 1`. Then we obtain that
-`(k1)g ＝ k(1g) ＝ kg ＝ 1` and that `g(k1) ＝ k(g1) ＝ kg ＝ 1`. It follows
-that the element `k1` is the multiplicative inverse of `g`.
+is an integer `n` such that `ng ＝ 1`. Then we obtain that
+`(n1)g ＝ n(1g) ＝ ng ＝ 1` and that `g(n1) ＝ n(g1) ＝ ng ＝ 1`. It follows
+that the element `n1` is the multiplicative inverse of `g`.
 
 ```agda
 module _
@@ -228,21 +252,21 @@ module _
           ( H)
           ( one-Ring R))
         ( is-invertible-element-prop-Ring R g)
-        ( λ (k , p) →
-          ( map-initial-hom-Ring R k) ,
-          ( ( right-integer-multiple-law-mul-Ring R k g (one-Ring R)) ∙
-            ( ap (integer-multiple-Ring R k) (right-unit-law-mul-Ring R g)) ∙
+        ( λ (n , p) →
+          ( integer-multiple-Ring R n (one-Ring R)) ,
+          ( ( right-integer-multiple-law-mul-Ring R n g
+              ( one-Ring R)) ∙
+            ( ap
+              ( integer-multiple-Ring R n)
+              ( right-unit-law-mul-Ring R g)) ∙
             ( p)) ,
-          ( ( left-integer-multiple-law-mul-Ring R k (one-Ring R) g) ∙
-            ( ap (integer-multiple-Ring R k) (left-unit-law-mul-Ring R g)) ∙
+          ( ( left-integer-multiple-law-mul-Ring R n
+              ( one-Ring R)
+              ( g)) ∙
+            ( ap
+              ( integer-multiple-Ring R n)
+              ( left-unit-law-mul-Ring R g)) ∙
             ( p)))
-
-  abstract
-    is-equiv-integer-multiple-is-integer-multiple-generating-element-one-Ring :
-      (n : ℤ) → integer-multiple-Ring R n g ＝ one-Ring R →
-      is-equiv (integer-multiple-Ring R n)
-    is-equiv-integer-multiple-is-integer-multiple-generating-element-one-Ring
-      n p = {!!}
 ```
 
 ### If `R` is a cyclic ring if and only if `1` is a generator of its additive group
@@ -250,18 +274,19 @@ module _
 Equivalently, we assert that `R` is cyclic if and only if `initial-hom-Ring R`
 is surjective.
 
-**Proof:** Consider a generating element `g` of the additive group `(R,0,+,-)`.
-Then there exists an integer `n` such that `ng ＝ 1`. We have already seen above
-that for any such integer `n`, the ring element `n·1` is the multiplicative
-inverse of `g`. This implies that multiplication by `n` is a bijection from the
-ring to itself. On the other hand, it maps any ring element to an integer
-multiple of `1`, because for any element `x ＝ k·g` we have
+**Proof:** Of course, if `1` is a generator of the additive group of `R`, then
+the additive group of `R` is cyclic. For the converse, consider a generating
+element `g` of the additive group `(R,0,+,-)`. Then there exists an integer `n`
+such that `ng ＝ 1`.
+
+Let `x` be an arbitrary element of the ring `R`. Then there exists an integer
+`k` such that `kg ＝ gx`. We claim that `k1 ＝ x`. To see this, we calculate:
 
 ```text
-  n·x ＝ n·(k·g) ＝ k·(n·g) ＝ k·1.
+  k1 ＝ k(ng) ＝ n(kg) ＝ n(gx) ＝ (ng)x ＝ 1x ＝ x.
 ```
 
-Therefore it follows that every element is an integer multiple of `1`, i.e, that
+This proves that every element is an integer multiple of `1`. We conclude that
 `1` generates the additive group `(R,0,+,-)`.
 
 ```agda
@@ -269,56 +294,67 @@ module _
   {l : Level} (R : Cyclic-Ring l)
   where
 
-  is-surjective-initial-hom-Cyclic-Ring :
-    is-surjective (map-initial-hom-Ring (ring-Cyclic-Ring R))
-  is-surjective-initial-hom-Cyclic-Ring x =
-    apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring R)
-      ( trunc-Prop
-        ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
-      ( λ (g , u) →
-        apply-twice-universal-property-trunc-Prop
-          ( is-surjective-hom-element-is-generating-element-Group
-            ( group-Cyclic-Ring R)
-            ( g)
-            ( u)
-            ( one-Cyclic-Ring R))
-          ( is-surjective-hom-element-is-generating-element-Group
-            ( group-Cyclic-Ring R)
-            ( g)
-            ( u)
-            ( x))
-          ( trunc-Prop
-            ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
-          ( λ { (k , p) (l , refl) →
-                unit-trunc-Prop
-                  {!!}}))
+  abstract
+    is-surjective-initial-hom-Cyclic-Ring :
+      is-surjective (map-initial-hom-Ring (ring-Cyclic-Ring R))
+    is-surjective-initial-hom-Cyclic-Ring x =
+      apply-universal-property-trunc-Prop
+        ( is-cyclic-Cyclic-Ring R)
+        ( trunc-Prop
+          ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
+        ( λ (g , u) →
+          apply-twice-universal-property-trunc-Prop
+            ( is-surjective-hom-element-is-generating-element-Group
+              ( group-Cyclic-Ring R)
+              ( g)
+              ( u)
+              ( one-Cyclic-Ring R))
+            ( is-surjective-hom-element-is-generating-element-Group
+              ( group-Cyclic-Ring R)
+              ( g)
+              ( u)
+              ( mul-Cyclic-Ring R g x))
+            ( trunc-Prop
+              ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
+            ( λ { (n , p) (k , q) →
+                  unit-trunc-Prop
+                    ( ( k) ,
+                      ( equational-reasoning
+                        integer-multiple-Cyclic-Ring R k
+                          ( one-Cyclic-Ring R)
+                        ＝ integer-multiple-Cyclic-Ring R k
+                            ( integer-multiple-Cyclic-Ring R n g)
+                          by
+                          ap
+                            ( integer-multiple-Cyclic-Ring R k)
+                            ( inv p)
+                        ＝ integer-multiple-Cyclic-Ring R n
+                            ( integer-multiple-Cyclic-Ring R k g)
+                          by
+                          swap-integer-multiple-Cyclic-Ring R k n g
+                        ＝ integer-multiple-Cyclic-Ring R n
+                            ( mul-Cyclic-Ring R g x)
+                          by
+                          ap (integer-multiple-Cyclic-Ring R n) q
+                        ＝ mul-Cyclic-Ring R
+                            ( integer-multiple-Cyclic-Ring R n g)
+                            ( x)
+                          by
+                          inv
+                            ( left-integer-multiple-law-mul-Cyclic-Ring R n g x)
+                        ＝ mul-Cyclic-Ring R (one-Cyclic-Ring R) x
+                          by ap (mul-Cyclic-Ring' R x) p
+                        ＝ x
+                          by left-unit-law-mul-Cyclic-Ring R x))}))
 
-  is-generating-element-one-Cyclic-Ring :
-    is-generating-element-Group (group-Cyclic-Ring R) (one-Cyclic-Ring R)
-  is-generating-element-one-Cyclic-Ring x =
-    apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring R)
-      ( trunc-Prop (Σ {!ℤ!} {!!}))
-      {!!}
-```
-
-### Any cyclic ring is commutative
-
-```agda
-module _
-  {l : Level} (R : Cyclic-Ring l)
-  where
-
-  commutative-mul-Cyclic-Ring :
-    (x y : type-Cyclic-Ring R) →
-    mul-Cyclic-Ring R x y ＝ mul-Cyclic-Ring R y x
-  commutative-mul-Cyclic-Ring x y =
-    apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring R)
-      ( Id-Prop (set-Cyclic-Ring R) _ _)
-      ( λ (g , u) →
-        {!!})
+  abstract
+    is-generating-element-one-Cyclic-Ring :
+      is-generating-element-Group (group-Cyclic-Ring R) (one-Cyclic-Ring R)
+    is-generating-element-one-Cyclic-Ring =
+      is-generating-element-is-surjective-hom-element-Group
+        ( group-Cyclic-Ring R)
+        ( one-Cyclic-Ring R)
+        ( is-surjective-initial-hom-Cyclic-Ring)
 ```
 
 ### If `R` is a cyclic ring, then any invertible element is a generator of its additive group
@@ -374,6 +410,21 @@ module _
                             unit-trunc-Prop
                               ( ( mul-ℤ n l) ,
                                 ( {!!}))}))}))
+```
+
+### Any cyclic ring is commutative
+
+```agda
+module _
+  {l : Level} (R : Cyclic-Ring l)
+  where
+
+  abstract
+    commutative-mul-Cyclic-Ring :
+      (x y : type-Cyclic-Ring R) →
+      mul-Cyclic-Ring R x y ＝ mul-Cyclic-Ring R y x
+    commutative-mul-Cyclic-Ring x y =
+      {!!}
 ```
 
 ## References
