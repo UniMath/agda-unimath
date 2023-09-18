@@ -62,7 +62,7 @@ module _
 ### The predicate of being an integer multiple of an element in an abelian group
 
 We say that an element `y` **is an integer multiple** of an element `x` if there
-[exists](foundation.existential-quantification) an integer `k` such that
+[exists](foundation.existential-quantification.md) an integer `k` such that
 `kx ＝ y`.
 
 ```agda

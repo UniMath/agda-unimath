@@ -46,7 +46,7 @@ module _
 ### The predicate of being a power of an element in a group
 
 We say that an element `y` **is a power** of an element `x` if there
-[exists](foundation.existential-quantification) a number `n` such that
+[exists](foundation.existential-quantification.md) a number `n` such that
 `xⁿ ＝ y`.
 
 ```agda

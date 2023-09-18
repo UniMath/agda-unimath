@@ -67,7 +67,7 @@ module _
 ### The predicate of being an integer power of an element in a group
 
 We say that an element `y` **is an integer power** of an element `x` if there
-[exists](foundation.existential-quantification) an integer `k` such that
+[exists](foundation.existential-quantification.md) an integer `k` such that
 `xᵏ ＝ y`.
 
 ```agda

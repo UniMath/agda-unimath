@@ -45,7 +45,7 @@ module _
 ### The predicate of being a natural multiple of an element in an ring
 
 We say that an element `y` **is a multiple** of an element `x` if there
-[exists](foundation.existential-quantification) a number `n` such that
+[exists](foundation.existential-quantification.md) a number `n` such that
 `nx ＝ y`.
 
 ```agda
