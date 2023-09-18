@@ -122,7 +122,8 @@ pr2 (pr2 (pr2 (comp-functor-Precategory C D E G F))) x =
   ( ap
     ( map-hom-functor-Precategory D E G)
     ( preserves-id-functor-Precategory C D F x)) ∙
-  ( preserves-id-functor-Precategory D E G (map-obj-functor-Precategory C D F x))
+  ( preserves-id-functor-Precategory D E G
+    ( map-obj-functor-Precategory C D F x))
 ```
 
 ## Properties

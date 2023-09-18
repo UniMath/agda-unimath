@@ -43,7 +43,9 @@ module _
     (F : functor-Category) →
     {x y : obj-Category C} →
     (f : type-hom-Category C x y) →
-    type-hom-Category D (map-obj-functor-Category F x) (map-obj-functor-Category F y)
+    type-hom-Category D
+      ( map-obj-functor-Category F x)
+      ( map-obj-functor-Category F y)
   map-hom-functor-Category F = pr1 (pr2 F)
 
   preserves-comp-functor-Category :

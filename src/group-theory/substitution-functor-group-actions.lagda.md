@@ -91,7 +91,7 @@ module _
       ( λ l → l)
   map-obj-functor-Large-Precategory subst-Abstract-Group-Action =
     obj-subst-Abstract-Group-Action
-  map-hom-functor-Large-Precategory subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
+  map-hom-functor-Large-Precategory subst-Abstract-Group-Action {X = X} {Y} =
     hom-subst-Abstract-Group-Action X Y
   preserves-comp-functor-Large-Precategory subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =

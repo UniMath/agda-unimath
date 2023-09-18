@@ -10,6 +10,8 @@ module category-theory.natural-transformations-large-precategories where
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -18,8 +20,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given large precategories `C` and `D`, a natural transformation from a functor
-`F : C → D` to `G : C → D` consists of :
+Given [large precategories](category-theory.large-precategories.md) `C` and `D`,
+a **natural transformation** from a
+[functor](category-theory.functors-large-precategories.md) `F : C → D` to
+`G : C → D` consists of :
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
   identity holds:
@@ -53,45 +57,49 @@ module _
     where
     constructor make-natural-transformation
     field
-      obj-natural-transformation-Large-Precategory :
+      components-natural-transformation-Large-Precategory :
         {l1 : Level} (X : obj-Large-Precategory C l1) →
         type-hom-Large-Precategory D
-          ( obj-functor-Large-Precategory F X)
-          ( obj-functor-Large-Precategory G X)
+          ( map-obj-functor-Large-Precategory F X)
+          ( map-obj-functor-Large-Precategory G X)
       coherence-square-natural-transformation-Large-Precategory :
         {l1 l2 : Level} {X : obj-Large-Precategory C l1}
         {Y : obj-Large-Precategory C l2}
         (f : type-hom-Large-Precategory C X Y) →
         square-Large-Precategory D
-          ( obj-natural-transformation-Large-Precategory X)
-          ( hom-functor-Large-Precategory F f)
-          ( hom-functor-Large-Precategory G f)
-          ( obj-natural-transformation-Large-Precategory Y)
+          ( components-natural-transformation-Large-Precategory X)
+          ( map-hom-functor-Large-Precategory F f)
+          ( map-hom-functor-Large-Precategory G f)
+          ( components-natural-transformation-Large-Precategory Y)
 
   open natural-transformation-Large-Precategory public
 ```
 
-## Examples
+## Properties
 
 ### The identity natural transformation
 
 Every functor comes equipped with an identity natural transformation.
 
 ```agda
-id-natural-transformation-Large-Precategory :
-  { αC αD γF γG : Level → Level}
-  { βC βD : Level → Level → Level} →
-  { C : Large-Precategory αC βC} {D : Large-Precategory αD βD} →
-  ( F : functor-Large-Precategory C D γF) →
-  natural-transformation-Large-Precategory F F
-obj-natural-transformation-Large-Precategory
-  ( id-natural-transformation-Large-Precategory {D = D} F) X =
-    id-hom-Large-Precategory D
-coherence-square-natural-transformation-Large-Precategory
-  ( id-natural-transformation-Large-Precategory {D = D} F) f =
-  ( left-unit-law-comp-hom-Large-Precategory D
-    ( hom-functor-Large-Precategory F f)) ∙
-  ( inv
-    ( right-unit-law-comp-hom-Large-Precategory D
-      ( hom-functor-Large-Precategory F f)))
+module _
+  { αC αD γF : Level → Level}
+  { βC βD : Level → Level → Level}
+  { C : Large-Precategory αC βC}
+  { D : Large-Precategory αD βD}
+  where
+
+  id-natural-transformation-Large-Precategory :
+    ( F : functor-Large-Precategory C D γF) →
+    natural-transformation-Large-Precategory F F
+  components-natural-transformation-Large-Precategory
+    ( id-natural-transformation-Large-Precategory F) X =
+      id-hom-Large-Precategory D
+  coherence-square-natural-transformation-Large-Precategory
+    ( id-natural-transformation-Large-Precategory F) f =
+    ( left-unit-law-comp-hom-Large-Precategory D
+      ( map-hom-functor-Large-Precategory F f)) ∙
+    ( inv
+      ( right-unit-law-comp-hom-Large-Precategory D
+        ( map-hom-functor-Large-Precategory F f)))
 ```

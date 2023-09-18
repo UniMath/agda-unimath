@@ -93,9 +93,11 @@ module _
     (F : functor-Precategory C D) → natural-transformation-Precategory C D F F
   pr1 (id-natural-transformation-Precategory F) x = id-hom-Precategory D
   pr2 (id-natural-transformation-Precategory F) f =
-    ( right-unit-law-comp-hom-Precategory D (map-hom-functor-Precategory C D F f)) ∙
+    ( right-unit-law-comp-hom-Precategory D
+      ( map-hom-functor-Precategory C D F f)) ∙
     ( inv
-      ( left-unit-law-comp-hom-Precategory D (map-hom-functor-Precategory C D F f)))
+      ( left-unit-law-comp-hom-Precategory D
+        ( map-hom-functor-Precategory C D F f)))
 
   comp-natural-transformation-Precategory :
     (F G H : functor-Precategory C D) →
@@ -200,7 +202,9 @@ module _
           is-set-type-hom-Precategory D
             ( map-obj-functor-Precategory C D F x)
             ( map-obj-functor-Precategory C D G x)))
-      ( λ α → is-set-type-Set (set-Prop (is-natural-transformation-Precategory-Prop α)))
+      ( λ α →
+        is-set-type-Set
+          ( set-Prop (is-natural-transformation-Precategory-Prop α)))
 
   natural-transformation-Precategory-Set :
     Set (l1 ⊔ l2 ⊔ l4)

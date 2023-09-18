@@ -57,13 +57,15 @@ module _
         { Z : obj-Large-Precategory C l3}
         ( g : type-hom-Large-Precategory C Y Z)
         ( f : type-hom-Large-Precategory C X Y) →
-        ( map-hom-functor-Large-Precategory (comp-hom-Large-Precategory C g f)) ＝
+        ( map-hom-functor-Large-Precategory
+          ( comp-hom-Large-Precategory C g f)) ＝
         ( comp-hom-Large-Precategory D
           ( map-hom-functor-Large-Precategory g)
           ( map-hom-functor-Large-Precategory f))
       preserves-id-functor-Large-Precategory :
         { l1 : Level} {X : obj-Large-Precategory C l1} →
-        ( map-hom-functor-Large-Precategory (id-hom-Large-Precategory C {X = X})) ＝
+        ( map-hom-functor-Large-Precategory
+          ( id-hom-Large-Precategory C {X = X})) ＝
         ( id-hom-Large-Precategory D {X = map-obj-functor-Large-Precategory X})
 
   open functor-Large-Precategory public

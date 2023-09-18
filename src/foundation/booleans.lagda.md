@@ -66,7 +66,7 @@ compute-raise-bool : (l : Level) → bool ≃ raise-bool l
 compute-raise-bool l = compute-raise l bool
 ```
 
-### The representing propositions of bool
+### The standard propositions associated to the constructors of bool
 
 ```agda
 prop-bool : bool → Prop lzero
