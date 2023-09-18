@@ -42,7 +42,8 @@ record
 
     comp-hom-Large-Precategory :
       {l1 l2 l3 : Level}
-      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      {X : obj-Large-Precategory l1}
+      {Y : obj-Large-Precategory l2}
       {Z : obj-Large-Precategory l3} →
       type-Set (hom-Large-Precategory Y Z) →
       type-Set (hom-Large-Precategory X Y) →

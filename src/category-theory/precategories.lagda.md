@@ -93,13 +93,15 @@ module _
 
   comp-hom-Precategory :
     {x y z : obj-Precategory} →
-    type-hom-Precategory y z → type-hom-Precategory x y →
+    type-hom-Precategory y z →
+    type-hom-Precategory x y →
     type-hom-Precategory x z
   comp-hom-Precategory = pr1 associative-composition-structure-Precategory
 
   comp-hom-Precategory' :
     {x y z : obj-Precategory} →
-    type-hom-Precategory x y → type-hom-Precategory y z →
+    type-hom-Precategory x y →
+    type-hom-Precategory y z →
     type-hom-Precategory x z
   comp-hom-Precategory' f g = comp-hom-Precategory g f
 

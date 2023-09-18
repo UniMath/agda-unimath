@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor from a large precategory `C` to a large precategory `D` consists of:
+A **functor** from a [large precategory](category-theory.large-precategories.md)
+`C` to a large precategory `D` consists of:
 
 - a map `F : C → D` on objects,
 - a map `Fmap : hom x y → hom (F x) (F y)` on morphisms, such that the following
