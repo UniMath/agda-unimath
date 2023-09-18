@@ -19,9 +19,6 @@ PROCESS_COUNT = 4
 SOURCE_EXTS = ['.md', '.lagda.md']
 RECENT_CHANGES_COUNT = 5
 
-# Lazily initialized
-contributors_data = None
-
 
 def does_support(backend):
     return backend == 'html'
@@ -63,7 +60,7 @@ def nobreak_span(text):
     return f'<span class="prefer-nobreak">{text}</span>'
 
 
-def get_author_element_for_file(filename, include_contributors):
+def get_author_element_for_file(filename, include_contributors, contributors):
     """
     Extracts git usernames of contributors to a particular file
     and formats it as an HTML element to be included on the page.
@@ -90,7 +87,7 @@ def get_author_element_for_file(filename, include_contributors):
         # Collect authors and sort by number of commits
         author_names = [
             author['displayName']
-            for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors_data)
+            for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
         ]
         attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}</i></p>'
 
@@ -123,7 +120,7 @@ def get_author_element_for_file(filename, include_contributors):
             # Line ended with a tab
             if raw_author == '':
                 continue
-            author_index = get_real_author_index(raw_author, contributors_data)
+            author_index = get_real_author_index(raw_author, contributors)
             if author_index is None:
                 print_skipping_contributor_warning(raw_author)
                 continue
@@ -131,7 +128,7 @@ def get_author_element_for_file(filename, include_contributors):
         if len(author_indices) == 0:
             continue
         formatted_authors = format_multiple_authors_attribution([
-            contributors_data[author_index]['displayName'] for author_index in author_indices
+            contributors[author_index]['displayName'] for author_index in author_indices
         ])
         recent_changes += f'- {date}. {formatted_authors}. <i><a target="_blank" href={github_page_for_commit(sha)}>{message}.</a></i>\n'
 
@@ -141,13 +138,14 @@ def get_author_element_for_file(filename, include_contributors):
     )
 
 
-def add_author_info_to_chapter_rec_mut(roots, chapter, config):
+def add_author_info_to_chapter_rec_mut(roots, chapter, contributors, config):
     """
     Modifies chapter's content to reflect its git contributors,
     and recurses to subchapters to do the same.
     """
     source_path = chapter['source_path']
-    add_author_info_to_sections_rec_mut(roots, chapter['sub_items'], config)
+    add_author_info_to_sections_rec_mut(
+        roots, chapter['sub_items'], contributors, config)
 
     potential_source_file_name = module_source_path_from_md_name(
         roots, source_path)
@@ -162,7 +160,10 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, config):
         return
 
     header_info_element, footer_info_element = get_author_element_for_file(
-        source_file_name, any((source_file_name.endswith(ext) for ext in config['attribute_file_extensions'])))
+        source_file_name,
+        any((source_file_name.endswith(ext)
+            for ext in config['attribute_file_extensions'])),
+        contributors)
     # Assumption: The title is the first header in the file
     chapter_heading_start = chapter['content'].index('# ')
     chapter_heading_end = chapter['content'].index('\n', chapter_heading_start)
@@ -171,7 +172,7 @@ def add_author_info_to_chapter_rec_mut(roots, chapter, config):
         chapter['content'][chapter_heading_end:] + '\n' + footer_info_element
 
 
-def add_author_info_to_sections_rec_mut(roots, sections, config):
+def add_author_info_to_sections_rec_mut(roots, sections, contributors, config):
     """
     Recursively modifies a list of book sections to make all
     included chapters contain information on their contributors.
@@ -181,17 +182,19 @@ def add_author_info_to_sections_rec_mut(roots, sections, config):
         if chapter is None:
             continue
 
-        add_author_info_to_chapter_rec_mut(roots, chapter, config)
+        add_author_info_to_chapter_rec_mut(
+            roots, chapter, contributors, config)
 
 
-def add_author_info_to_root_section(roots, section, config):
+def add_author_info_to_root_section(roots, section, contributors, config):
     """
     Recursively modifies a section to make all included chapters
     contain information on their contributors, then returns the section.
     """
     chapter = section.get('Chapter')
     if chapter is not None:
-        add_author_info_to_chapter_rec_mut(roots, chapter, config)
+        add_author_info_to_chapter_rec_mut(
+            roots, chapter, contributors, config)
 
     return section
 
@@ -219,13 +222,16 @@ if __name__ == '__main__':
         'suppress_processing', [])
 
     start = time.time()
-    if metadata_config.get('enable') == True:
+    if bool(metadata_config.get('enable')) == True:
         # Split the work between PROCESS_COUNT processes
         with Pool(PROCESS_COUNT) as p:
             book['sections'] = p.starmap(add_author_info_to_root_section, [
-                (['src', ''], section, metadata_config)
+                (['src', ''], section, contributors_data, metadata_config)
                 for section in book['sections']
             ])
+    else:
+        eprint('Skipping git metadata, enable option was',
+               metadata_config.get('enable'))
 
     end = time.time()
     eprint(end - start)
