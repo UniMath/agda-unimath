@@ -36,24 +36,6 @@ a consequence of the point of view that orders are normal subgroups of `ℤ`.
 
 ## Definitions
 
-### The type of orders of elements in groups
-
-```agda
-order-Group : (l : Level) → UU (lsuc l)
-order-Group l = Normal-Subgroup l ℤ-Group
-```
-
-### Divisibility of orders of elements in groups
-
-We say that an order `k` divides an order `l` if the subgroup `l` of `ℤ` is
-contained in the subgroup `k`.
-
-```agda
-div-order-Group :
-  {l1 l2 : Level} → order-Group l1 → order-Group l2 → UU (l1 ⊔ l2)
-div-order-Group k l = leq-Normal-Subgroup ℤ-Group l k
-```
-
 ### The order of an element in a group
 
 ```agda
@@ -61,7 +43,27 @@ module _
   {l : Level} (G : Group l)
   where
 
-  order-element-Group : type-Group G → order-Group l
+  order-element-Group : type-Group G → Normal-Subgroup l ℤ-Group
   order-element-Group g =
     kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+```
+
+### Divisibility of orders of elements of a group
+
+We say that the order of `x` divides the order of `y` if the normal subgroup
+`order-element-Group G y` is contained in the normal subgroup
+`order-elemetn-Group G x`. In other words, the order of `x` divides the order of
+`y` if for every integer `k` such that `yᵏ ＝ e` we have `xᵏ ＝ e`.
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  div-order-element-Group : (x y : type-Group G) → UU l
+  div-order-element-Group x y =
+    leq-Normal-Subgroup
+      ( ℤ-Group)
+      ( order-element-Group G y)
+      ( order-element-Group G x)
 ```
