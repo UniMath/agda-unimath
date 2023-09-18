@@ -25,11 +25,11 @@ macros = "website/latex-macros.txt"
 assets_version = "0.2.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
-command = "./scripts/preprocessor_git_metadata.py"
+command = "python3 ./scripts/preprocessor_git_metadata.py"
 # Disable by default - it takes a non-trivial amount of time
 # Can be overriden by running
 # `export MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE=true` in your shell
-enable = true
+enable = false
 # Only show "Content created by" on Agda source files
 attribute_file_extensions = [ ".lagda.md" ]
 # Don't add anything to the "non-content" pages,
