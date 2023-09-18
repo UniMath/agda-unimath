@@ -304,6 +304,15 @@ module _
   integer-multiple-mul-Ab k l x =
     ( ap (λ u → integer-multiple-Ab A u x) (commutative-mul-ℤ k l)) ∙
     ( integer-power-mul-Group (group-Ab A) l k x)
+
+  swap-integer-multiple-Ab :
+    (k l : ℤ) (x : type-Ab A) →
+    integer-multiple-Ab A k (integer-multiple-Ab A l x) ＝
+    integer-multiple-Ab A l (integer-multiple-Ab A k x)
+  swap-integer-multiple-Ab k l x =
+    ( inv (integer-multiple-mul-Ab k l x)) ∙
+    ( ap (λ t → integer-multiple-Ab A t x) (commutative-mul-ℤ k l)) ∙
+    ( integer-multiple-mul-Ab l k x)
 ```
 
 ### Abelian group homomorphisms preserve integer multiples

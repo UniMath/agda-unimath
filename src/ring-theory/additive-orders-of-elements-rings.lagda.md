@@ -1,8 +1,6 @@
 # Additive orders of elements of rings
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module ring-theory.additive-orders-of-elements-rings where
 ```
 
@@ -13,12 +11,16 @@ open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.identity-types
+open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import group-theory.normal-subgroups
 open import group-theory.orders-of-elements-groups
+open import group-theory.subgroups
+open import group-theory.subsets-groups
 
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
@@ -40,11 +42,36 @@ consisting of all [integers](elementary-number-theory.integers.md) `k` such that
 
 ```agda
 module _
+  {l : Level} (R : Ring l) (x : type-Ring R)
+  where
+
+  additive-order-element-Ring : Normal-Subgroup l ℤ-Group
+  additive-order-element-Ring = order-element-Group (group-Ring R) x
+
+  subgroup-additive-order-element-Ring : Subgroup l ℤ-Group
+  subgroup-additive-order-element-Ring =
+    subgroup-order-element-Group (group-Ring R) x
+
+  subset-additive-order-element-Ring : subset-Group l ℤ-Group
+  subset-additive-order-element-Ring =
+    subset-order-element-Group (group-Ring R) x
+
+  is-in-additive-order-element-Ring : ℤ → UU l
+  is-in-additive-order-element-Ring =
+    is-in-order-element-Group (group-Ring R) x
+```
+
+### Divisibility of additive orders of elements of rings
+
+```agda
+module _
   {l : Level} (R : Ring l)
   where
 
-  additive-order-element-Ring : type-Ring R → Normal-Subgroup l ℤ-Group
-  additive-order-element-Ring = order-element-Group (group-Ring R)
+  div-additive-order-element-Ring :
+    (x y : type-Ring R) → UU l
+  div-additive-order-element-Ring =
+    div-order-element-Group (group-Ring R)
 ```
 
 ## Properties
@@ -78,13 +105,35 @@ module _
 
 ### If there exists an integer `k` such that `k·x ＝ y` then the order of `y` divides the order of `x`
 
+**Proof:** Suppose that `k·x ＝ y` and `l·x ＝ 0`, then it follows that
+
+```text
+  l·y ＝ l·(k·x) ＝ k·(l·x) ＝ k·0 ＝ 0.
+```
+
 ```agda
 module _
   {l : Level} (R : Ring l)
   where
+
+  div-additive-order-element-is-integer-multiple-Ring :
+    (x y : type-Ring R) → is-integer-multiple-of-element-Ring R x y →
+    div-additive-order-element-Ring R y x
+  div-additive-order-element-is-integer-multiple-Ring x y H l p =
+    apply-universal-property-trunc-Prop H
+      ( subset-additive-order-element-Ring R y l)
+      ( λ (k , q) →
+        ( ap (integer-multiple-Ring R l) (inv q)) ∙
+        ( swap-integer-multiple-Ring R l k x) ∙
+        ( ap (integer-multiple-Ring R k) p) ∙
+        ( right-zero-law-integer-multiple-Ring R k))
 ```
 
 ### If there exists an integer `k` such that `k·x ＝ 1` then the order of `x` is the order of `1`
+
+In other words, if there exists an integer `k` such that `k·x ＝ 1`, then the
+additive order of `x` is the
+[characteristic](ring-theory.characteristics-rings.md) of the ring `R`.
 
 ```agda
 module _
@@ -93,10 +142,24 @@ module _
 
   has-same-elements-additive-order-element-additive-order-one-Ring :
     (x : type-Ring R) →
-    ∃ ℤ (λ k → integer-multiple-Ring R k x ＝ one-Ring R) →
+    is-integer-multiple-of-element-Ring R x (one-Ring R) →
     has-same-elements-Normal-Subgroup
       ( ℤ-Group)
       ( additive-order-element-Ring R x)
       ( additive-order-element-Ring R (one-Ring R))
-  has-same-elements-additive-order-element-additive-order-one-Ring x H = {!!}
+  pr1 (has-same-elements-additive-order-element-additive-order-one-Ring x H y) =
+    div-additive-order-element-is-integer-multiple-Ring R x (one-Ring R) H y
+  pr2 (has-same-elements-additive-order-element-additive-order-one-Ring x H y) =
+    div-additive-order-element-additive-order-one-Ring R x y
+
+  eq-additive-order-element-additive-order-one-Ring :
+    (x : type-Ring R) → is-integer-multiple-of-element-Ring R x (one-Ring R) →
+    additive-order-element-Ring R x ＝
+    additive-order-element-Ring R (one-Ring R)
+  eq-additive-order-element-additive-order-one-Ring x H =
+    eq-has-same-elements-Normal-Subgroup
+      ( ℤ-Group)
+      ( additive-order-element-Ring R x)
+      ( additive-order-element-Ring R (one-Ring R))
+      ( has-same-elements-additive-order-element-additive-order-one-Ring x H)
 ```

@@ -450,6 +450,13 @@ module _
     integer-multiple-Ring R k (integer-multiple-Ring R l x)
   integer-multiple-mul-Ring =
     integer-multiple-mul-Ab (ab-Ring R)
+
+  swap-integer-multiple-Ring :
+    (k l : ℤ) (x : type-Ring R) →
+    integer-multiple-Ring R k (integer-multiple-Ring R l x) ＝
+    integer-multiple-Ring R l (integer-multiple-Ring R k x)
+  swap-integer-multiple-Ring =
+    swap-integer-multiple-Ab (ab-Ring R)
 ```
 
 ### Ring homomorphisms preserve integer multiples

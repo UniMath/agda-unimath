@@ -8,6 +8,7 @@ module group-theory.orders-of-elements-groups where
 
 ```agda
 open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.integers
 
 open import foundation.universe-levels
 
@@ -15,6 +16,8 @@ open import group-theory.free-groups-with-one-generator
 open import group-theory.groups
 open import group-theory.kernels
 open import group-theory.normal-subgroups
+open import group-theory.subgroups
+open import group-theory.subsets-groups
 ```
 
 </details>
@@ -40,12 +43,24 @@ a consequence of the point of view that orders are normal subgroups of `ℤ`.
 
 ```agda
 module _
-  {l : Level} (G : Group l)
+  {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  order-element-Group : type-Group G → Normal-Subgroup l ℤ-Group
-  order-element-Group g =
+  order-element-Group : Normal-Subgroup l ℤ-Group
+  order-element-Group =
     kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+
+  subgroup-order-element-Group : Subgroup l ℤ-Group
+  subgroup-order-element-Group =
+    subgroup-kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+
+  subset-order-element-Group : subset-Group l ℤ-Group
+  subset-order-element-Group =
+    subset-kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+
+  is-in-order-element-Group : ℤ → UU l
+  is-in-order-element-Group =
+    is-in-kernel-hom-Group ℤ-Group G (hom-element-Group G g)
 ```
 
 ### Divisibility of orders of elements of a group

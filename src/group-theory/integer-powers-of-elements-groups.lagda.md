@@ -569,6 +569,15 @@ module _
       ＝ (x ^ k) ^ (succ-ℤ (in-pos l))
         by
         inv (integer-power-succ-Group' G (in-pos l) (x ^ k))
+
+  swap-integer-power-Group :
+    (k l : ℤ) (x : type-Group G) →
+    integer-power-Group G k (integer-power-Group G l x) ＝
+    integer-power-Group G l (integer-power-Group G k x)
+  swap-integer-power-Group k l x =
+    ( inv (integer-power-mul-Group l k x)) ∙
+    ( ap (λ t → integer-power-Group G t x) (commutative-mul-ℤ l k)) ∙
+    ( integer-power-mul-Group k l x)
 ```
 
 ### Group homomorphisms preserve integer powers
