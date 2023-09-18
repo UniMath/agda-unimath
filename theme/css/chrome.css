@@ -6,7 +6,7 @@ html {
   scrollbar-color: var(--scrollbar) var(--bg);
 }
 #searchresults a,
-.content a:link,
+.content :not(pre) > a:link,
 a:visited,
 a > .hljs {
   color: var(--links);
@@ -406,6 +406,9 @@ ul#searchresults span.teaser em {
   right: 0;
   padding: 10px 10px;
 }
+.sidebar li.chapter-item a.toggle {
+  font-size: 1.8rem;
+}
 .sidebar .sidebar-resize-handle {
   position: absolute;
   cursor: col-resize;
@@ -562,4 +565,13 @@ ul#searchresults span.teaser em {
   content: '✓';
   margin-left: -14px;
   width: 14px;
+}
+
+.coal .invertible-image,
+.navy .invertible-image,
+.ayu .invertible-image,
+.frappe .invertible-image,
+.macchiato .invertible-image,
+.mocha .invertible-image {
+  filter: invert(0.8);
 }
