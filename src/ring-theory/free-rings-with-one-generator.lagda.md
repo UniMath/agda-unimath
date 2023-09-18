@@ -32,8 +32,8 @@ words, the free ring with one generator is a representing object for the functor
 `S ↦ type-Ring S`.
 
 We will show that the polynomial ring `ℤ[x]` of polynomials with
-[integer](elementary-number-theory.commutative-ring-of-integers.md) coefficients
-satisfies the universal property of the free ring with one generator.
+[integer](elementary-number-theory.ring-of-integers.md) coefficients satisfies
+the universal property of the free ring with one generator.
 
 ## Definitions
 

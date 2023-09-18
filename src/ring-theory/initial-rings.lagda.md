@@ -30,7 +30,7 @@ of [ring homomorphisms](ring-theory.homomorphisms-rings.md) from `R` to `S` is
 contractible.
 
 In
-[`elementary-number-theory.commutative-ring-of-integers`](elementary-number-theory.commutative-ring-of-integers.md)
+[`elementary-number-theory.ring-of-integers`](elementary-number-theory.ring-of-integers.md)
 we will show that `ℤ` is the initial ring.
 
 ## Definitions

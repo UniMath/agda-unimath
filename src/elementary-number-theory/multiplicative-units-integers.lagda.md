@@ -16,5 +16,5 @@ module elementary-number-theory.multiplicative-units-integers where
 
 A **multiplicative unit** in the [ring](ring-theory.rings.md) `ℤ` of
 [integers](elementary-number-theory.integers.md) is an
-[invertible element](ring-theory.invertible-elements.md) in `ℤ`. The only two
-multiplicative units in `ℤ` are `1` and `-1`.
+[invertible element](ring-theory.invertible-elements-rings.md) in `ℤ`. The only
+two multiplicative units in `ℤ` are `1` and `-1`.
