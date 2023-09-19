@@ -42,6 +42,7 @@ module _
 ```
 
 ### Vertical and horizontal concatination operations on double loop
+
 spaces.
 
 ```agda
@@ -103,7 +104,6 @@ right-unit-law-identification-left-whisk-Ω² α =
 ```
 
 ### The interchange law for double loop spaces
-
 
 ```agda
 interchange-Ω² :

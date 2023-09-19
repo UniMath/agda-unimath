@@ -320,7 +320,6 @@ module _
     ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
 ```
 
-
 ### Unit laws for whiskering
 
 ```agda
@@ -330,7 +329,7 @@ module _
 
   left-unit-law-identification-left-whisk :
     {p p' : x ＝ y} (α : p ＝ p') →
-    identification-left-whisk refl  α ＝ α
+    identification-left-whisk refl α ＝ α
   left-unit-law-identification-left-whisk refl = refl
 
   right-unit-law-identification-right-whisk :
@@ -339,7 +338,6 @@ module _
     right-unit ∙ α ∙ inv right-unit
   right-unit-law-identification-right-whisk {p = refl} refl = refl
 ```
-
 
 ### The whiskering operations allow us to commute higher identifications
 

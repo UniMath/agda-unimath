@@ -40,25 +40,24 @@ module _
 ```
 
 ### Computing 2-dimensional transport in a family of identifications
+
 with a fixed source
 
 ```agda
 module _
   {l : Level} {A : UU l} {a b c : A} {q q' : b ＝ c}
   where
-  
+
   tr²-Id-right :
     (α : q ＝ q') (p : a ＝ b) →
     coherence-square-identifications
       ( tr² (Id a) α p)
       ( tr-Id-right q' p)
       ( tr-Id-right q p)
-      ( identification-left-whisk p α) 
+      ( identification-left-whisk p α)
   tr²-Id-right α p =
-    inv-nat-htpy (λ (t : b ＝ c) → tr-Id-right t p ) α
+    inv-nat-htpy (λ (t : b ＝ c) → tr-Id-right t p) α
 ```
-
-
 
 ### Coherences and algebraic identities for `tr²`
 
