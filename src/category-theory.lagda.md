@@ -59,6 +59,7 @@ open import category-theory.initial-objects-large-categories public
 open import category-theory.initial-objects-large-precategories public
 open import category-theory.initial-objects-precategories public
 open import category-theory.isomorphisms-in-categories public
+open import category-theory.isomorphisms-in-large-categories public
 open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
 open import category-theory.large-categories public

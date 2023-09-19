@@ -119,6 +119,26 @@ module _
     type-hom-Large-Precategory Y Z →
     type-hom-Large-Precategory X Z
   comp-hom-Large-Precategory' f g = comp-hom-Large-Precategory C g f
+
+  precomp-hom-Large-Precategory :
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Precategory C l1}
+    {Y : obj-Large-Precategory C l2}
+    (f : type-hom-Large-Precategory X Y) →
+    (Z : obj-Large-Precategory C l3) →
+    type-hom-Large-Precategory Y Z → type-hom-Large-Precategory X Z
+  precomp-hom-Large-Precategory f Z g =
+    comp-hom-Large-Precategory C g f
+
+  postcomp-hom-Large-Precategory :
+    {l1 l2 l3 : Level}
+    (X : obj-Large-Precategory C l1)
+    {Y : obj-Large-Precategory C l2}
+    {Z : obj-Large-Precategory C l3}
+    (f : type-hom-Large-Precategory Y Z) →
+    type-hom-Large-Precategory X Y → type-hom-Large-Precategory X Z
+  postcomp-hom-Large-Precategory X f g =
+    comp-hom-Large-Precategory C f g
 ```
 
 ### Precategories obtained from large precategories
