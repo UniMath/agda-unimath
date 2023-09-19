@@ -57,7 +57,7 @@ and a family of
 ```
 
 Dependent coforks are an analogue of
-[dependent cocones under spans](synthetic-homotopy-theory.dependent-cocones-under-spans)
+[dependent cocones under spans](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
 for parallel pairs.
 
 ## Definitions

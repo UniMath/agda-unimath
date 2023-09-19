@@ -37,7 +37,7 @@ The **coequalizer** of a parallel pair `f, g : A → B` is the colimiting
 The **canonical coequalizer** may be obtained as a pushout of the span
 
 ```text
-    ∇        [f,g]
+     ∇         [f,g]
 A <----- A + A -----> B
 ```
 

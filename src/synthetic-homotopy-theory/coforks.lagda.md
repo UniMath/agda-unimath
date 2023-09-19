@@ -47,9 +47,9 @@ A **cofork** of a parallel pair `f, g : A → B` with vertext `X` is a map
 which looks like a fork if you flip the arrows, hence a cofork.
 
 Coforks are an analogue of
-[cocones under spans](synthetic-homotopy-theory.cocones-under-spans) for
+[cocones under spans](synthetic-homotopy-theory.cocones-under-spans.md) for
 parallel pairs. The universal cofork of a pair is their
-[coequalizer](synthetic-homotopy-theory.coequalizers).
+[coequalizer](synthetic-homotopy-theory.coequalizers.md).
 
 ## Definitions
 
