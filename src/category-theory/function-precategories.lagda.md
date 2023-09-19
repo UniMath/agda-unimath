@@ -21,20 +21,20 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a [precategory](category-theory.precategories.md) `P` and any type `I`,
-the function type `I → P` is a precategory consisting of functions taking
-`i : I` to an object of `P`. Every component of the structure is given
+Given a [precategory](category-theory.precategories.md) `C` and any type `I`,
+the function type `I → C` is a precategory consisting of functions taking
+`i : I` to an object of `C`. Every component of the structure is given
 pointwise.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (I : UU l1) (P : Precategory l2 l3)
+  {l1 l2 l3 : Level} (I : UU l1) (C : Precategory l2 l3)
   where
 
   function-Precategory : Precategory (l1 ⊔ l2) (l1 ⊔ l3)
-  function-Precategory = Π-Precategory I (λ _ → P)
+  function-Precategory = Π-Precategory I (λ _ → C)
 
   obj-function-Precategory : UU (l1 ⊔ l2)
   obj-function-Precategory = obj-Precategory function-Precategory
