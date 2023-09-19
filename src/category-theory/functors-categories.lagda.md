@@ -120,7 +120,9 @@ module _
 
   map-obj-functor-Category : functor-Category → obj-Category C → obj-Category D
   map-obj-functor-Category =
-    map-obj-functor-Precategory (precategory-Category C) (precategory-Category D)
+    map-obj-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
 
   map-hom-functor-Category :
     (F : functor-Category) →

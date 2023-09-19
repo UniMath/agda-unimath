@@ -60,14 +60,10 @@ module _
         ( f : type-hom-Large-Precategory C X Y) →
         coherence-square-Large-Precategory D
           ( hom-iso-Large-Precategory D
-            ( map-obj-functor-Large-Precategory F X)
-            ( map-obj-functor-Large-Precategory G X)
             ( components-natural-isomorphism-Large-Precategory X))
-          ( map-hom-functor-Large-Precategory F f)
-          ( map-hom-functor-Large-Precategory G f)
+          ( hom-functor-Large-Precategory F f)
+          ( hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
-            ( map-obj-functor-Large-Precategory F Y)
-            ( map-obj-functor-Large-Precategory G Y)
             ( components-natural-isomorphism-Large-Precategory Y))
 
   open natural-isomorphism-Large-Precategory public
@@ -78,8 +74,6 @@ module _
   components-natural-transformation-Large-Precategory
     ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
     hom-iso-Large-Precategory D
-      ( map-obj-functor-Large-Precategory F X)
-      ( map-obj-functor-Large-Precategory G X)
       ( components-natural-isomorphism-Large-Precategory γ X)
   coherence-square-natural-transformation-Large-Precategory
     (natural-transformation-natural-isomorphism-Large-Precategory γ) =
