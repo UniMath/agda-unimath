@@ -58,7 +58,7 @@ module _
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2}
         ( f : type-hom-Large-Precategory C X Y) →
-        square-Large-Precategory D
+        coherence-square-Large-Precategory D
           ( hom-iso-Large-Precategory D
             ( map-obj-functor-Large-Precategory F X)
             ( map-obj-functor-Large-Precategory G X)

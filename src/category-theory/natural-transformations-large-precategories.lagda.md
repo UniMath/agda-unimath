@@ -32,25 +32,31 @@ a **natural transformation** from a
 ## Definition
 
 ```agda
-square-Large-Precategory :
-  {αC : Level → Level} {βC : Level → Level → Level} →
-  (C : Large-Precategory αC βC) →
-  {l1 l2 l3 l4 : Level} →
-  {A : obj-Large-Precategory C l1} {B : obj-Large-Precategory C l2} →
-  {X : obj-Large-Precategory C l3} {Y : obj-Large-Precategory C l4} →
+coherence-square-Large-Precategory :
+  {αC : Level → Level}
+  {βC : Level → Level → Level}
+  (C : Large-Precategory αC βC)
+  {l1 l2 l3 l4 : Level}
+  {A : obj-Large-Precategory C l1}
+  {B : obj-Large-Precategory C l2}
+  {X : obj-Large-Precategory C l3}
+  {Y : obj-Large-Precategory C l4}
   (top : type-hom-Large-Precategory C A B)
-  (left : type-hom-Large-Precategory C A X) →
+  (left : type-hom-Large-Precategory C A X)
   (right : type-hom-Large-Precategory C B Y)
   (bottom : type-hom-Large-Precategory C X Y) →
   UU (βC l1 l4)
-square-Large-Precategory C top left right bottom =
+coherence-square-Large-Precategory C top left right bottom =
   comp-hom-Large-Precategory C right top ＝
   comp-hom-Large-Precategory C bottom left
 
 module _
-  {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
-  {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF) (G : functor-Large-Precategory C D γG)
+  {αC αD γF γG : Level → Level}
+  {βC βD : Level → Level → Level}
+  {C : Large-Precategory αC βC}
+  {D : Large-Precategory αD βD}
+  (F : functor-Large-Precategory C D γF)
+  (G : functor-Large-Precategory C D γG)
   where
 
   hom-family-functor-Large-Precategory : UUω
@@ -70,7 +76,7 @@ module _
         {l1 l2 : Level} {X : obj-Large-Precategory C l1}
         {Y : obj-Large-Precategory C l2}
         (f : type-hom-Large-Precategory C X Y) →
-        square-Large-Precategory D
+        coherence-square-Large-Precategory D
           ( components-natural-transformation-Large-Precategory X)
           ( map-hom-functor-Large-Precategory F f)
           ( map-hom-functor-Large-Precategory G f)
@@ -112,26 +118,26 @@ module _
 
 ```agda
 module _
-  { αC αD γF γG γH : Level → Level}
-  { βC βD : Level → Level → Level}
-  { C : Large-Precategory αC βC}
-  { D : Large-Precategory αD βD}
+  {αC αD γF γG γH : Level → Level}
+  {βC βD : Level → Level → Level}
+  {C : Large-Precategory αC βC}
+  {D : Large-Precategory αD βD}
+  (F : functor-Large-Precategory C D γF)
+  (G : functor-Large-Precategory C D γG)
+  (H : functor-Large-Precategory C D γH)
   where
 
   comp-natural-transformation-Large-Precategory :
-    (F : functor-Large-Precategory C D γF) →
-    (G : functor-Large-Precategory C D γG) →
-    (H : functor-Large-Precategory C D γH) →
     natural-transformation-Large-Precategory G H →
     natural-transformation-Large-Precategory F G →
     natural-transformation-Large-Precategory F H
   components-natural-transformation-Large-Precategory
-    ( comp-natural-transformation-Large-Precategory F G H b a) X =
+    ( comp-natural-transformation-Large-Precategory b a) X =
       comp-hom-Large-Precategory D
         ( components-natural-transformation-Large-Precategory b X)
         ( components-natural-transformation-Large-Precategory a X)
   coherence-square-natural-transformation-Large-Precategory
-    ( comp-natural-transformation-Large-Precategory F G H b a) {X = X} {Y} f =
+    ( comp-natural-transformation-Large-Precategory b a) {X = X} {Y} f =
     ( inv
       ( associative-comp-hom-Large-Precategory D
         ( map-hom-functor-Large-Precategory H f)

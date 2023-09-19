@@ -176,10 +176,18 @@ module _
 ### The set of natural transformations
 
 ```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F G : functor-Precategory C D)
+  where
+
   is-emb-components-natural-transformation-Precategory :
     is-emb (components-natural-transformation-Precategory C D F G)
   is-emb-components-natural-transformation-Precategory =
-    is-emb-inclusion-subtype is-natural-transformation-Precategory-Prop
+    is-emb-inclusion-subtype
+      ( is-natural-transformation-Precategory-Prop C D F G)
 
   is-set-natural-transformation-Precategory :
     is-set (natural-transformation-Precategory C D F G)
@@ -192,7 +200,7 @@ module _
             ( map-obj-functor-Precategory C D G x)))
       ( λ α →
         is-set-type-Set
-          ( set-Prop (is-natural-transformation-Precategory-Prop α)))
+          ( set-Prop (is-natural-transformation-Precategory-Prop C D F G α)))
 
   natural-transformation-Precategory-Set :
     Set (l1 ⊔ l2 ⊔ l4)
