@@ -72,7 +72,7 @@ module _
       ( f)
 ```
 
-### Isomorphisms in a large precategory
+### Isomorphisms in a large category
 
 ```agda
 module _
