@@ -20,8 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two natural transformations `α β : F ⇒ G` are homotopic if for every object `x`
-there is an identity `Id (α x) (β x)`.
+Two [natural transformations](natural-transformations-large-precategories.md)
+`α β : F ⇒ G` are **homotopic** if for every object `x` there is an
+[identification](foundation-core.identity-types.md) `α x ＝ β x`.
 
 In `UUω` the usual identity type is not available. If it were, we would be able
 to characterize the identity type of natural transformations from `F` to `G` as
@@ -74,8 +75,7 @@ to form a homotopy from `α` to `γ`. The concatenation is associative.
     htpy-natural-transformation-Large-Precategory α β →
     htpy-natural-transformation-Large-Precategory β γ →
     htpy-natural-transformation-Large-Precategory α γ
-  concat-htpy-natural-transformation-Large-Precategory α β γ H K X =
-    H X ∙ K X
+  concat-htpy-natural-transformation-Large-Precategory α β γ H K = H ∙h K
 
   associative-concat-htpy-natural-transformation-Large-Precategory :
     (α β γ δ : natural-transformation-Large-Precategory F G)
@@ -92,6 +92,6 @@ to form a homotopy from `α` to `γ`. The concatenation is associative.
       ( concat-htpy-natural-transformation-Large-Precategory β γ δ K L)
       ( X))
   associative-concat-htpy-natural-transformation-Large-Precategory
-    α β γ δ H K L X =
-    assoc (H X) (K X) (L X)
+    α β γ δ H K L =
+    assoc-htpy H K L
 ```

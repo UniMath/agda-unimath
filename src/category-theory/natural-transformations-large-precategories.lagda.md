@@ -161,3 +161,7 @@ module _
         ( components-natural-transformation-Large-Precategory a Y)
         ( map-hom-functor-Large-Precategory F f)))
 ```
+
+## See also
+
+- [Homotopies of natural transformations in large precategories](category-theory.homotopies-natural-transformations-large-precategories.md)

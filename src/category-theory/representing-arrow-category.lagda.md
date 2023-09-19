@@ -136,7 +136,7 @@ is-category-representing-arrow true true =
     is-equiv-is-prop
     ( is-set-bool true true)
     ( is-prop-type-subtype
-      ( is-iso-Precategory-Prop representing-arrow-Precategory {true} {true})
+      ( is-iso-hom-Precategory-Prop representing-arrow-Precategory {true} {true})
       ( is-prop-unit))
     ( λ _ → refl)
 is-category-representing-arrow true false =
@@ -151,7 +151,7 @@ is-category-representing-arrow false false =
   is-equiv-is-prop
     ( is-set-bool false false)
     ( is-prop-type-subtype
-      ( is-iso-Precategory-Prop representing-arrow-Precategory {false} {false})
+      ( is-iso-hom-Precategory-Prop representing-arrow-Precategory {false} {false})
       ( is-prop-unit))
     ( λ _ → refl)
 

@@ -20,9 +20,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A large precategory is a precategory where we don't fix a universe for the type
-of objects or morphisms. (This cannot be done with Σ-types, we must use a record
-type.)
+A **large precategory** is a [precategory](category-theory.precategories.md)
+where we don't fix a universe for the type of objects or morphisms. (This cannot
+be done with Σ-types, we must use a record type.)
 
 ## Definition
 
@@ -37,7 +37,9 @@ record
       (l : Level) → UU (α l)
 
     hom-Large-Precategory :
-      {l1 l2 : Level} → obj-Large-Precategory l1 → obj-Large-Precategory l2 →
+      {l1 l2 : Level} →
+      obj-Large-Precategory l1 →
+      obj-Large-Precategory l2 →
       Set (β l1 l2)
 
     comp-hom-Large-Precategory :
@@ -50,13 +52,16 @@ record
       type-Set (hom-Large-Precategory X Z)
 
     id-hom-Large-Precategory :
-      {l1 : Level} {X : obj-Large-Precategory l1} →
+      {l1 : Level}
+      {X : obj-Large-Precategory l1} →
       type-Set (hom-Large-Precategory X X)
 
     associative-comp-hom-Large-Precategory :
       {l1 l2 l3 l4 : Level}
-      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
-      {Z : obj-Large-Precategory l3} {W : obj-Large-Precategory l4} →
+      {X : obj-Large-Precategory l1}
+      {Y : obj-Large-Precategory l2}
+      {Z : obj-Large-Precategory l3}
+      {W : obj-Large-Precategory l4} →
       (h : type-Set (hom-Large-Precategory Z W))
       (g : type-Set (hom-Large-Precategory Y Z))
       (f : type-Set (hom-Large-Precategory X Y)) →
@@ -65,13 +70,15 @@ record
 
     left-unit-law-comp-hom-Large-Precategory :
       {l1 l2 : Level}
-      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      {X : obj-Large-Precategory l1}
+      {Y : obj-Large-Precategory l2}
       (f : type-Set (hom-Large-Precategory X Y)) →
       ( comp-hom-Large-Precategory id-hom-Large-Precategory f) ＝ f
 
     right-unit-law-comp-hom-Large-Precategory :
       {l1 l2 : Level}
-      {X : obj-Large-Precategory l1} {Y : obj-Large-Precategory l2}
+      {X : obj-Large-Precategory l1}
+      {Y : obj-Large-Precategory l2}
       (f : type-Set (hom-Large-Precategory X Y)) →
       ( comp-hom-Large-Precategory f id-hom-Large-Precategory) ＝ f
 
@@ -120,7 +127,11 @@ module _
     type-hom-Large-Precategory Y Z →
     type-hom-Large-Precategory X Z
   comp-hom-Large-Precategory' f g = comp-hom-Large-Precategory C g f
+```
 
+### Precomposition by a morphism
+
+```agda
   precomp-hom-Large-Precategory :
     {l1 l2 l3 : Level}
     {X : obj-Large-Precategory C l1}
@@ -130,7 +141,11 @@ module _
     type-hom-Large-Precategory Y Z → type-hom-Large-Precategory X Z
   precomp-hom-Large-Precategory f Z g =
     comp-hom-Large-Precategory C g f
+```
 
+### Postcomposition by a morphism
+
+```agda
   postcomp-hom-Large-Precategory :
     {l1 l2 l3 : Level}
     (X : obj-Large-Precategory C l1)

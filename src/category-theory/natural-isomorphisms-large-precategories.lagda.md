@@ -61,8 +61,8 @@ module _
         coherence-square-Large-Precategory D
           ( hom-iso-Large-Precategory D
             ( components-natural-isomorphism-Large-Precategory X))
-          ( hom-functor-Large-Precategory F f)
-          ( hom-functor-Large-Precategory G f)
+          ( map-hom-functor-Large-Precategory F f)
+          ( map-hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
             ( components-natural-isomorphism-Large-Precategory Y))
 

@@ -51,7 +51,7 @@ module _
     natural-transformation-Precategory C D F G → UU (l1 ⊔ l4)
   is-natural-isomorphism-Precategory γ =
     (x : obj-Precategory C) →
-    is-iso-Precategory D
+    is-iso-hom-Precategory D
       ( components-natural-transformation-Precategory C D F G γ x)
 
   natural-isomorphism-Precategory : UU (l1 ⊔ l2 ⊔ l4)
@@ -76,6 +76,6 @@ is-prop-is-natural-isomorphism-Precategory :
   (γ : natural-transformation-Precategory C D F G) →
   is-prop (is-natural-isomorphism-Precategory C D F G γ)
 is-prop-is-natural-isomorphism-Precategory C D F G γ =
-  is-prop-Π (is-prop-is-iso-Precategory D ∘
+  is-prop-Π (is-prop-is-iso-hom-Precategory D ∘
   components-natural-transformation-Precategory C D F G γ)
 ```

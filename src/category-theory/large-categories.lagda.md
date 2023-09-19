@@ -77,13 +77,15 @@ module _
 
   type-hom-Large-Category :
     {l1 l2 : Level}
-    (X : obj-Large-Category l1) (Y : obj-Large-Category l2) →
+    (X : obj-Large-Category l1)
+    (Y : obj-Large-Category l2) →
     UU (β l1 l2)
   type-hom-Large-Category X Y = type-Set (hom-Large-Category X Y)
 
   is-set-type-hom-Large-Category :
     {l1 l2 : Level}
-    (X : obj-Large-Category l1) (Y : obj-Large-Category l2) →
+    (X : obj-Large-Category l1)
+    (Y : obj-Large-Category l2) →
     is-set (type-hom-Large-Category X Y)
   is-set-type-hom-Large-Category X Y =
     is-set-type-Set (hom-Large-Category X Y)
@@ -107,8 +109,10 @@ module _
 
   associative-comp-hom-Large-Category :
     {l1 l2 l3 l4 : Level}
-    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
-    {Z : obj-Large-Category l3} {W : obj-Large-Category l4} →
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3}
+    {W : obj-Large-Category l4} →
     (h : type-hom-Large-Category Z W)
     (g : type-hom-Large-Category Y Z)
     (f : type-hom-Large-Category X Y) →
@@ -119,7 +123,8 @@ module _
 
   left-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}
-    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
     (f : type-hom-Large-Category X Y) →
     ( comp-hom-Large-Category id-hom-Large-Category f) ＝ f
   left-unit-law-comp-hom-Large-Category =
@@ -128,7 +133,8 @@ module _
 
   right-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}
-    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
     (f : type-hom-Large-Category X Y) →
     ( comp-hom-Large-Category f id-hom-Large-Category) ＝ f
   right-unit-law-comp-hom-Large-Category =
@@ -196,7 +202,7 @@ module _
       ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
       ( compute-iso-eq-Large-Precategory
         ( large-precategory-Large-Category C) X Y)
-      (is-large-category-Large-Category C X Y)
+      ( is-large-category-Large-Category C X Y)
 
   category-Large-Category : (l : Level) → Category (α l) (β l l)
   pr1 (category-Large-Category l) = precategory-Large-Category l

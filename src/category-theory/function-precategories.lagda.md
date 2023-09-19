@@ -104,8 +104,8 @@ module _
 
   is-fiberwise-iso-is-iso-function-Precategory :
     (f : type-hom-function-Precategory I C x y) →
-    is-iso-Precategory (function-Precategory I C) f →
-    (i : I) → is-iso-Precategory C (f i)
+    is-iso-hom-Precategory (function-Precategory I C) f →
+    (i : I) → is-iso-hom-Precategory C (f i)
   is-fiberwise-iso-is-iso-function-Precategory =
     is-fiberwise-iso-is-iso-Π-Precategory I (λ _ → C)
 
@@ -117,8 +117,8 @@ module _
 
   is-iso-function-is-fiberwise-iso-Precategory :
     (f : type-hom-function-Precategory I C x y) →
-    ((i : I) → is-iso-Precategory C (f i)) →
-    is-iso-Precategory (function-Precategory I C) f
+    ((i : I) → is-iso-hom-Precategory C (f i)) →
+    is-iso-hom-Precategory (function-Precategory I C) f
   is-iso-function-is-fiberwise-iso-Precategory =
     is-iso-Π-is-fiberwise-iso-Precategory I (λ _ → C)
 
@@ -136,8 +136,8 @@ module _
 
   equiv-is-fiberwise-iso-is-iso-function-Precategory :
     (f : type-hom-function-Precategory I C x y) →
-    ( is-iso-Precategory (function-Precategory I C) f) ≃
-    ( (i : I) → is-iso-Precategory C (f i))
+    ( is-iso-hom-Precategory (function-Precategory I C) f) ≃
+    ( (i : I) → is-iso-hom-Precategory C (f i))
   equiv-is-fiberwise-iso-is-iso-function-Precategory =
     equiv-is-fiberwise-iso-is-iso-Π-Precategory I (λ _ → C)
 
@@ -149,8 +149,8 @@ module _
 
   equiv-is-iso-function-is-fiberwise-iso-Precategory :
     ( f : type-hom-function-Precategory I C x y) →
-    ( (i : I) → is-iso-Precategory C (f i)) ≃
-    ( is-iso-Precategory (function-Precategory I C) f)
+    ( (i : I) → is-iso-hom-Precategory C (f i)) ≃
+    ( is-iso-hom-Precategory (function-Precategory I C) f)
   equiv-is-iso-function-is-fiberwise-iso-Precategory =
     equiv-is-iso-Π-is-fiberwise-iso-Precategory I (λ _ → C)
 
