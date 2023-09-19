@@ -142,7 +142,7 @@ module _
 
   extensionality-type-subtype' :
     (a b : type-subtype P) → (a ＝ b) ≃ (pr1 a ＝ pr1 b)
-  extensionality-type-subtype' (pair a p) =
+  extensionality-type-subtype' (a , p) =
     extensionality-type-subtype P p refl (λ x → id-equiv)
 
   eq-type-subtype :

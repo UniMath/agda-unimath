@@ -12,9 +12,16 @@ open import category-theory.precategories
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.equivalences
 open import foundation.function-types
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.structure-identity-principle
+open import foundation.subtypes
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
 
@@ -33,6 +40,78 @@ precategory `D` consists of:
 
 ## Definition
 
+### Maps between precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  map-Precategory =
+    Σ ( obj-Precategory C → obj-Precategory D)
+      ( λ F₀ →
+        {x y : obj-Precategory C} →
+        type-hom-Precategory C x y →
+        type-hom-Precategory D (F₀ x) (F₀ y))
+
+  map-obj-map-Precategory :
+    (F : map-Precategory) → obj-Precategory C → obj-Precategory D
+  map-obj-map-Precategory = pr1
+
+  map-hom-map-Precategory :
+    (F : map-Precategory)
+    {x y : obj-Precategory C} →
+    type-hom-Precategory C x y →
+    type-hom-Precategory D
+      ( map-obj-map-Precategory F x)
+      ( map-obj-map-Precategory F y)
+  map-hom-map-Precategory = pr2
+```
+
+### The predicate of being a functor on maps between Precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : map-Precategory C D)
+  where
+
+  preserves-comp-hom-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-hom-map-Precategory =
+    {x y z : obj-Precategory C}
+    (g : type-hom-Precategory C y z) (f : type-hom-Precategory C x y) →
+    ( map-hom-map-Precategory C D F (comp-hom-Precategory C g f)) ＝
+    ( comp-hom-Precategory D
+      ( map-hom-map-Precategory C D F g)
+      ( map-hom-map-Precategory C D F f))
+
+  preserves-id-hom-map-Precategory : UU (l1 ⊔ l4)
+  preserves-id-hom-map-Precategory =
+    (x : obj-Precategory C) →
+    ( map-hom-map-Precategory C D F (id-hom-Precategory C {x})) ＝
+    ( id-hom-Precategory D {map-obj-map-Precategory C D F x})
+
+  is-functor-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
+  is-functor-map-Precategory =
+    preserves-comp-hom-map-Precategory ×
+    preserves-id-hom-map-Precategory
+
+  preserves-comp-hom-is-functor-map-Precategory :
+    is-functor-map-Precategory → preserves-comp-hom-map-Precategory
+  preserves-comp-hom-is-functor-map-Precategory = pr1
+
+  preserves-id-hom-is-functor-map-Precategory :
+    is-functor-map-Precategory → preserves-id-hom-map-Precategory
+  preserves-id-hom-is-functor-map-Precategory = pr2
+```
+
+### Functors between Precategories
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
@@ -44,15 +123,10 @@ module _
   functor-Precategory =
     Σ ( obj-Precategory C → obj-Precategory D)
       ( λ F₀ →
-        Σ ( {x y : obj-Precategory C} (f : type-hom-Precategory C x y) →
+        Σ ( {x y : obj-Precategory C}
+            (f : type-hom-Precategory C x y) →
             type-hom-Precategory D (F₀ x) (F₀ y))
-          ( λ F₁ →
-            ( {x y z : obj-Precategory C} (g : type-hom-Precategory C y z)
-              (f : type-hom-Precategory C x y) →
-              ( F₁ (comp-hom-Precategory C g f)) ＝
-              ( comp-hom-Precategory D (F₁ g) (F₁ f))) ×
-            ( (x : obj-Precategory C) →
-              F₁ (id-hom-Precategory C {x}) ＝ id-hom-Precategory D {F₀ x})))
+          ( λ F₁ → is-functor-map-Precategory C D (F₀ , F₁)))
 
   map-obj-functor-Precategory :
     functor-Precategory → obj-Precategory C → obj-Precategory D
@@ -66,6 +140,10 @@ module _
       ( map-obj-functor-Precategory F x)
       ( map-obj-functor-Precategory F y)
   map-hom-functor-Precategory F = pr1 (pr2 F)
+
+  map-functor-Precategory : functor-Precategory → map-Precategory C D
+  pr1 (map-functor-Precategory F) = map-obj-functor-Precategory F
+  pr2 (map-functor-Precategory F) = map-hom-functor-Precategory F
 
   preserves-comp-functor-Precategory :
     (F : functor-Precategory) {x y z : obj-Precategory C}
@@ -138,18 +216,12 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  (F : functor-Precategory C D)
+  (F : map-Precategory C D)
   where
 
-  is-prop-preserves-comp-hom-Precategory :
-    is-prop
-      ( {x y z : obj-Precategory C}
-        (g : type-hom-Precategory C y z) (f : type-hom-Precategory C x y) →
-        ( map-hom-functor-Precategory C D F (comp-hom-Precategory C g f)) ＝
-        ( comp-hom-Precategory D
-          ( map-hom-functor-Precategory C D F g)
-          ( map-hom-functor-Precategory C D F f)))
-  is-prop-preserves-comp-hom-Precategory =
+  is-prop-preserves-comp-hom-map-Precategory :
+    is-prop (preserves-comp-hom-map-Precategory C D F)
+  is-prop-preserves-comp-hom-map-Precategory =
     is-prop-Π'
       ( λ x →
         is-prop-Π'
@@ -161,25 +233,73 @@ module _
                     is-prop-Π
                       ( λ f →
                         is-set-type-hom-Precategory D
-                          ( map-obj-functor-Precategory C D F x)
-                          ( map-obj-functor-Precategory C D F z)
-                          ( map-hom-functor-Precategory C D F
+                          ( map-obj-map-Precategory C D F x)
+                          ( map-obj-map-Precategory C D F z)
+                          ( map-hom-map-Precategory C D F
                             ( comp-hom-Precategory C g f))
                           ( comp-hom-Precategory D
-                            ( map-hom-functor-Precategory C D F g)
-                            ( map-hom-functor-Precategory C D F f)))))))
+                            ( map-hom-map-Precategory C D F g)
+                            ( map-hom-map-Precategory C D F f)))))))
 
-  is-prop-preserves-id-hom-Precategory :
-    is-prop
-      ( (x : obj-Precategory C) →
-        ( map-hom-functor-Precategory C D F (id-hom-Precategory C {x})) ＝
-        ( id-hom-Precategory D {map-obj-functor-Precategory C D F x}))
-  is-prop-preserves-id-hom-Precategory =
+  preserves-comp-hom-map-Precategory-Prop : Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 preserves-comp-hom-map-Precategory-Prop =
+    preserves-comp-hom-map-Precategory C D F
+  pr2 preserves-comp-hom-map-Precategory-Prop =
+    is-prop-preserves-comp-hom-map-Precategory
+
+  is-prop-preserves-id-hom-map-Precategory :
+    is-prop (preserves-id-hom-map-Precategory C D F)
+  is-prop-preserves-id-hom-map-Precategory =
     is-prop-Π
       ( λ x →
         is-set-type-hom-Precategory D
-          ( map-obj-functor-Precategory C D F x)
-          ( map-obj-functor-Precategory C D F x)
-          ( map-hom-functor-Precategory C D F (id-hom-Precategory C {x}))
-          ( id-hom-Precategory D {map-obj-functor-Precategory C D F x}))
+          ( map-obj-map-Precategory C D F x)
+          ( map-obj-map-Precategory C D F x)
+          ( map-hom-map-Precategory C D F (id-hom-Precategory C {x}))
+          ( id-hom-Precategory D {map-obj-map-Precategory C D F x}))
+
+  preserves-id-hom-map-Precategory-Prop : Prop (l1 ⊔ l4)
+  pr1 preserves-id-hom-map-Precategory-Prop =
+    preserves-id-hom-map-Precategory C D F
+  pr2 preserves-id-hom-map-Precategory-Prop =
+    is-prop-preserves-id-hom-map-Precategory
+
+  is-prop-is-functor-map-Precategory :
+    is-prop (is-functor-map-Precategory C D F)
+  is-prop-is-functor-map-Precategory =
+    is-prop-prod
+      ( is-prop-preserves-comp-hom-map-Precategory)
+      ( is-prop-preserves-id-hom-map-Precategory)
+
+  is-functor-map-Precategory-Prop : Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 is-functor-map-Precategory-Prop = is-functor-map-Precategory C D F
+  pr2 is-functor-map-Precategory-Prop = is-prop-is-functor-map-Precategory
 ```
+
+### Extensionality of functors between precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  extensionality-functor-Precategory' :
+    (F G : functor-Precategory C D) →
+    (F ＝ G) ≃ (map-functor-Precategory C D F ＝ map-functor-Precategory C D G)
+  extensionality-functor-Precategory' F G =
+    equiv-ap-emb
+      ( comp-emb
+        ( emb-subtype (is-functor-map-Precategory-Prop C D))
+        ( emb-equiv
+          ( inv-associative-Σ
+            ( obj-Precategory C → obj-Precategory D)
+            ( λ F₀ →
+              { x y : obj-Precategory C} →
+              type-hom-Precategory C x y →
+              type-hom-Precategory D (F₀ x) (F₀ y))
+            ( pr1 ∘ is-functor-map-Precategory-Prop C D))))
+```
+
+It remains to characterize equality of maps between precategories.
