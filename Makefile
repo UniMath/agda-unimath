@@ -5,6 +5,7 @@ AGDAVERBOSE ?= -v1
 # use "$ export AGDAVERBOSE=20" if you want to see all
 AGDAFILES := $(shell find src -name temp -prune -o -type f \( -name "*.lagda.md" -not -name "everything.lagda.md" \) -print)
 AGDAMDFILES := $(subst src/,docs/,$(AGDAFILES:.lagda.md=.md))
+CONTRIBUTORS_FILE := ./scripts/contributors_data.toml
 
 AGDAHTMLFLAGS ?= --html --html-highlight=code --html-dir=docs --css=Agda.css --only-scope-checking
 AGDA ?= agda $(AGDAVERBOSE)
@@ -68,14 +69,25 @@ agda-html: ./src/everything.lagda.md
 	@mkdir -p ./docs/
 	@${AGDA} ${AGDAHTMLFLAGS} ./src/everything.lagda.md
 
-SUMMARY.md: ${AGDAFILES}
+SUMMARY.md: ${AGDAFILES} ./scripts/generate_main_index_file.py
 	@python3 ./scripts/generate_main_index_file.py
 
+MAINTAINERS.md: ${CONTRIBUTORS_FILE} ./scripts/generate_maintainers.py
+	@python3 ./scripts/generate_maintainers.py
+
+CONTRIBUTORS.md: ${AGDAFILES} ${CONTRIBUTORS_FILE} ./scripts/generate_contributors.py
+	@python3 ./scripts/generate_contributors.py
+
+website/css/Agda-highlight.css: ./scripts/generate_agda_css.py ./theme/catppuccin.css
+	@python3 ./scripts/generate_agda_css.py
+
 .PHONY: website-prepare
-website-prepare: agda-html ./SUMMARY.md
+website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md ./website/css/Agda-highlight.css
 	@cp $(METAFILES) ./docs/
-	@cp ./theme/images/agda-unimath-logo.svg ./docs/
-	@cp ./theme/images/agda-unimath-black-and-gold.png ./docs/
+	@mkdir -p ./docs/website
+	@cp -r ./website/images ./docs/website/
+	@cp -r ./website/css ./docs/website/
+	@cp -r ./website/js ./docs/website/
 
 .PHONY: website
 website: website-prepare

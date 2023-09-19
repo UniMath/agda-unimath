@@ -40,10 +40,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: master
-
-      - uses: r-lib/actions/setup-pandoc@v2
-        with:
-          pandoc-version: '3.0.1'
+          # We need the entire history for contributor information
+          fetch-depth: 0
 
       - name: Setup Agda
         uses: wenkokke/setup-agda@v2.0.0
@@ -88,13 +86,15 @@ jobs:
 
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.11.1'
+          python-version: '3.8'
           check-latest: true
           cache: 'pip'
 
       - run: python3 -m pip install -r master/scripts/requirements.txt
 
       - name: Generate book
+        env:
+          MDBOOK_PREPROCESSOR__GIT_METADATA__ENABLE: 'true'
         run: |
           cd master
           make website
