@@ -49,7 +49,7 @@ module _
 
   is-iso-prop-hom-Ring : Prop (l1 ⊔ l2)
   is-iso-prop-hom-Ring =
-    is-iso-prop-hom-Large-Precategory Ring-Large-Precategory R S f
+    is-iso-prop-hom-Large-Precategory Ring-Large-Precategory {X = R} {Y = S} f
 
   is-iso-hom-Ring : UU (l1 ⊔ l2)
   is-iso-hom-Ring =
@@ -57,7 +57,11 @@ module _
 
   is-prop-is-iso-hom-Ring : is-prop is-iso-hom-Ring
   is-prop-is-iso-hom-Ring =
-    is-prop-is-iso-hom-Large-Precategory Ring-Large-Precategory R S f
+    is-prop-is-iso-hom-Large-Precategory
+      ( Ring-Large-Precategory)
+      { X = R}
+      { Y = S}
+      ( f)
 
   hom-inv-is-iso-hom-Ring : is-iso-hom-Ring → type-hom-Ring S R
   hom-inv-is-iso-hom-Ring =
@@ -119,7 +123,8 @@ module _
   iso-Ring = iso-Large-Precategory Ring-Large-Precategory R S
 
   hom-iso-Ring : iso-Ring → type-hom-Ring R S
-  hom-iso-Ring = hom-iso-Large-Precategory Ring-Large-Precategory R S
+  hom-iso-Ring =
+    hom-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   map-iso-Ring : iso-Ring → type-Ring R → type-Ring S
   map-iso-Ring f = map-hom-Ring R S (hom-iso-Ring f)
@@ -153,11 +158,11 @@ module _
   is-iso-iso-Ring :
     (f : iso-Ring) → is-iso-hom-Ring R S (hom-iso-Ring f)
   is-iso-iso-Ring =
-    is-iso-iso-Large-Precategory Ring-Large-Precategory R S
+    is-iso-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   hom-inv-iso-Ring : iso-Ring → type-hom-Ring S R
   hom-inv-iso-Ring =
-    hom-inv-iso-Large-Precategory Ring-Large-Precategory R S
+    hom-inv-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   map-inv-iso-Ring : iso-Ring → type-Ring S → type-Ring R
   map-inv-iso-Ring f = map-hom-Ring S R (hom-inv-iso-Ring f)
@@ -196,7 +201,10 @@ module _
     (f : iso-Ring) →
     comp-hom-Ring S R S (hom-iso-Ring f) (hom-inv-iso-Ring f) ＝ id-hom-Ring S
   is-section-hom-inv-iso-Ring =
-    is-section-hom-inv-iso-Large-Precategory Ring-Large-Precategory R S
+    is-section-hom-inv-iso-Large-Precategory
+      ( Ring-Large-Precategory)
+      { X = R}
+      { Y = S}
 
   is-section-map-inv-iso-Ring :
     (f : iso-Ring) → map-iso-Ring f ∘ map-inv-iso-Ring f ~ id
@@ -210,7 +218,10 @@ module _
     (f : iso-Ring) →
     comp-hom-Ring R S R (hom-inv-iso-Ring f) (hom-iso-Ring f) ＝ id-hom-Ring R
   is-retraction-hom-inv-iso-Ring =
-    is-retraction-hom-inv-iso-Large-Precategory Ring-Large-Precategory R S
+    is-retraction-hom-inv-iso-Large-Precategory
+      ( Ring-Large-Precategory)
+      { X = R}
+      { Y = S}
 
   is-retraction-map-inv-iso-Ring :
     (f : iso-Ring) → map-inv-iso-Ring f ∘ map-iso-Ring f ~ id
