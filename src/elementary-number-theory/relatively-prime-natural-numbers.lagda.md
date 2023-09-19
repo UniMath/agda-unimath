@@ -30,7 +30,7 @@ open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import ring-theory
+open import ring-theory.invertible-elements-rings
 ```
 
 </details>
@@ -182,7 +182,7 @@ module _
       ( is-one-is-common-divisor-is-prime-ℕ)
 ```
 
-### Two natural numbers `a` and `b` are relatively prime if and only if `a` is a multiplicative unit module `b`
+### Two natural numbers `a` and `b > 0` are relatively prime if and only if `a` is a multiplicative unit module `b`
 
 ```agda
 is-relatively-prime-is-unit-ℤ-Mod :
