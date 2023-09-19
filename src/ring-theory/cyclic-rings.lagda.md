@@ -362,8 +362,9 @@ module _
 ### If `R` is a cyclic ring, then any invertible element is a generator of its additive group
 
 **Proof:** Let `x` be an invertible element of `R`. To show that `x` generates
-the abelian group `(R,0,+,1)` we need to show that for any element `y : R`
-there exists an integer `k` such that `kx ＝ y`. Let `n1 ＝ x⁻¹` and let `m1 ＝ y`. Then we calculate
+the abelian group `(R,0,+,1)` we need to show that for any element `y : R` there
+exists an integer `k` such that `kx ＝ y`. Let `n1 ＝ x⁻¹` and let `m1 ＝ y`.
+Then we calculate
 
 ```text
   (mn)x ＝ m(nx) ＝ m(x⁻¹x) ＝ m1 ＝ y.

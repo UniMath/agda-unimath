@@ -151,8 +151,8 @@ module _
   is-retraction-hom-inv-iso-Monoid =
     is-retraction-hom-inv-iso-Large-Precategory
       ( Monoid-Large-Precategory)
-       { X = M}
-       { Y = N}
+      { X = M}
+      { Y = N}
 
   is-retraction-map-inv-iso-Monoid :
     (f : iso-Monoid) →
