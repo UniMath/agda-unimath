@@ -54,7 +54,7 @@ horizontal-concat-Ω² :
 horizontal-concat-Ω² α β = horizontal-concat-Id² α β
 ```
 
-### Unit laws horizontal and vertical concatination
+### Unit laws horizontal, vertical concatination, and whiskering
 
 ```agda
 left-unit-law-vertical-concat-Ω² :
@@ -88,6 +88,18 @@ right-unit-law-horizontal-concat-Ω² :
   Id (horizontal-concat-Ω² α refl-Ω²) α
 right-unit-law-horizontal-concat-Ω² {α = α} =
   ( right-unit-law-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
+
+left-unit-law-identification-left-whisk-Ω² :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
+  identification-left-whisk (refl-Ω (pair A a)) α ＝ α
+left-unit-law-identification-left-whisk-Ω² α =
+  left-unit-law-identification-left-whisk α
+
+right-unit-law-identification-left-whisk-Ω² :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
+  identification-right-whisk α (refl-Ω (pair A a)) ＝ α
+right-unit-law-identification-left-whisk-Ω² α =
+  (right-unit-law-identification-right-whisk α) ∙ right-unit
 ```
 
 ### The interchange law for double loop spaces

@@ -15,11 +15,7 @@ open import foundation.identity-types
 open import foundation.path-algebra
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
-
-open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.identity-types
-open import foundation-core.whiskering-homotopies
+open import foundation.whiskering-homotopies
 ```
 
 </details>
@@ -152,4 +148,3 @@ module _
         ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
   tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
 ```
-

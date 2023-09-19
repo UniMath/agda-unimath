@@ -89,39 +89,89 @@ interchange-concat-Ω² =
 
 ### Constructing eckmann-hilton using the naturality condition the operation of whiskering a fixed 2-path by a 1-path
 
+#### The motivation
+
 Now we give the more homotopy theoretic construction of Eckmann-Hilton.
-Consider 2-loops `α β : Ω² (X , base)` and the type family
-`Id base : X → UU`. Consider the first 2-loop. It induces a homotpy
-`tr² (Id base) (α) : id {A = Ω (X , base)} ~ id`.
-The term `tr²-Id-right` characterizes this as essentially
-`[htpy-identification-left-whisk](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977)`.
-The latter homotpy has a naturality condition induced by paths in the
-loop space. In particular, for the 2-loop `β`, we have a naturality
-square
-
-TODO
-
-
-The more homotopy theoretic Eckmann-Hilton argument is often depicted
+Consider 2-loops `α β : Ω² (X , base)`. The more homotopy theoretic
+Eckmann-Hilton argument is often depicted
 as follows:
 
 
-|  a  |    | refl | a |    | b | refl|   | b |
-------- ＝  -----------  ＝ ----------  ＝ ----
-|  b  |    | b | refl |    | refl | a|   | a |
+|  α  |    | refl-Ω² |  α  |    |  β  | refl-Ω² |    | β |
+------- ＝  ----------------  ＝ ----------------  ＝ ----
+|  β  |    |  β  | refl-Ω² |    | refl-Ω² |  α  |    | α |
 
-The first picture represents the vertical concatination of `a` and `b`.
-The notation ` | a | b |` represents the horizontal concatination of
-`a` and `b`. Then `| refl | a |` is just `[identification-left-whisk](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697)`.
-
+The first picture represents the vertical concatination of `α` and `β`.
+The notation ` | α | β |` represents the horizontal concatination of
+`α` and `β`. Then `| refl | α |` is just
+`[identification-left-whisk refl-Ω² α ](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697)`.
 The first and last equality come from the unit laws of whiskering.
-The middle equality can be recognized as
+And the middle equality can be recognized as
 [path-swap-nat-identification-left-whisk](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
-which is the naturality condition of the operation
-`λ (p) . identification-left-whisk p α` applied to `β`.
+which is the naturality condition of
+`htpy-identification-left-whisk α` when applied to `β`.
+
+Since this construction of Eckmann-Hilton may seem more
+complicated than the algbraic construction, the reader is entitled to
+wonder why we bother giving this second version of the argument.
+
+This construction of Eckmann-Hilton makes more salient the connection
+between Eckmann-Hilton and the 2-D descent data of a fibration. For
+now, consider the family of based path spaces `Id base : X → UU`. A
+1-loop `l` induces an autoequivalence `Ω X ≃ Ω X` given by
+concatinating on the right by `l`. This is shown in `[tr-Id-right](https://unimath.github.io/agda-unimath/foundation.identity-types.html#11216)`.
+A 2-loop `s` induces a homotpy `id {A = Ω X} ~ id` given by
+`[htpy-identification-left-whisk](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977)`.
+This claim is shown in TODO (provide link). Thus, the 2-D descent data
+of `Id base` is (up to equivalence) exactly the homotopy at the heart
+of this construction of Eckmann-Hilton.
+
+Recall that homotpies of type `id ~ id` automatically commute with
+each other via `[eckmann-hilton-htpy](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218)`.
+This identification is constructed using the naturality condition of
+the two homotopies involved. Thus, in the case of `Id base`, we can
+see a very close correspondence between Eckmann-Hilton on 2-loops in
+the base type `X` and Eckmann-Hilton on the homotopies induced by said
+2-loops. 
+
+Of course `Id base` is a special type family. But this idea generalizes
+nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X`
+induce homotopies `tr² B α` and `tr² B β` of type
+`id {A = B base} ~ id`. Again, these homotpies  automatically commute
+with each other via their naturality conditions. Then, the naturality
+condition that makes `α` and `β` commute in `Ω² X` is sent by `tr³ B`
+to the naturality condition that makes the induced homotopies commute.
+This is recorded in `[tr³-htpy-swap-path-swap](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825)`.
+From this, it is easy to show that "transport preserves Eckmann-Hilton"
+by proving that additional coherence paths in the definition of
+`eckmann-hilton` and `eckmann-hilton-htpy` are compatible. We prove
+this in TODO
+
+This connection has important consequences, one of which being the
+connection between Eckmann-Hilton and the Hopf fibration.
+
+#### The construction
 
 ```agda
-
-
-
+module _
+  {l : Level} {A : Pointed-Type l}
+  where
+  
+  eckmann-hilton-Ω² :
+    (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
+  eckmann-hilton-Ω² α β = equational-reasoning_
+    (α ∙ β) ＝
+    ( identification-left-whisk refl α) ∙
+      ( identification-right-whisk β refl)
+    by ( inv
+      ( horizontal-concat-Id²
+         ( left-unit-law-identification-left-whisk-Ω² α)
+         ( right-unit-law-identification-left-whisk-Ω² β)))
+    ＝ ( identification-right-whisk β refl) ∙
+      ( identification-left-whisk refl α)
+    by ( path-swap-nat-identification-left-whisk α β)
+    ＝ β ∙ α
+    by ( horizontal-concat-Id²
+         ( right-unit-law-identification-left-whisk-Ω² β)
+         ( left-unit-law-identification-left-whisk-Ω² α))
 ```
