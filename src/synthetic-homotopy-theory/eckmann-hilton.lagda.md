@@ -17,11 +17,14 @@ open import foundation.universe-levels
 
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
+
 open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
 ```
+
+</details>
 
 ## Idea
 
@@ -50,7 +53,7 @@ The more algebraic method uses the interchange law
 `[interchange-Ω²](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#2449)`.
 The interchange law essentially expresses that
 `[horizontal-concat-Ω²](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#1106)`
-is a (higher) group homomorphism of
+is a group homomorphism of
 `[vertical-concat-Ω²](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#966)`
 in each variable.
 
@@ -86,7 +89,10 @@ interchange-concat-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
   ((α ∙ β) ∙ (γ ∙ δ)) ＝ ((α ∙ γ) ∙ (β ∙ δ))
 interchange-concat-Ω² =
-  interchange-law-commutative-and-associative _∙_ eckmann-hilton-interchange-Ω² assoc
+  interchange-law-commutative-and-associative
+    ( _∙_)
+    ( eckmann-hilton-interchange-Ω²)
+    ( assoc)
 ```
 
 ### Constructing eckmann-hilton using the naturality condition the operation of whiskering a fixed 2-path by a 1-path
@@ -164,13 +170,13 @@ module _
       ( identification-right-whisk β refl)
     by ( inv
       ( horizontal-concat-Id²
-         ( left-unit-law-identification-left-whisk-Ω² α)
-         ( right-unit-law-identification-left-whisk-Ω² β)))
+        ( left-unit-law-identification-left-whisk-Ω² α)
+        ( right-unit-law-identification-left-whisk-Ω² β)))
     ＝ ( identification-right-whisk β refl) ∙
       ( identification-left-whisk refl α)
     by ( path-swap-nat-identification-left-whisk α β)
     ＝ β ∙ α
     by ( horizontal-concat-Id²
-         ( right-unit-law-identification-left-whisk-Ω² β)
-         ( left-unit-law-identification-left-whisk-Ω² α))
+      ( right-unit-law-identification-left-whisk-Ω² β)
+      ( left-unit-law-identification-left-whisk-Ω² α))
 ```

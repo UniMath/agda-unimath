@@ -35,8 +35,6 @@ element `b : B x`, we can
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in this file.
 
-## Definitions
-
 ## Properties
 
 ### Transport is an equivalence

@@ -1,4 +1,4 @@
-# Transport along identifications
+# Higher transport along identifications
 
 ```agda
 module foundation.higher-transport-along-identifications where
@@ -39,9 +39,7 @@ module _
   tr³ B β b = ap (λ t → tr² B t b) β
 ```
 
-### Computing 2-dimensional transport in a family of identifications
-
-with a fixed source
+### Computing 2-dimensional transport in a family of identifications with a fixed source
 
 ```agda
 module _
