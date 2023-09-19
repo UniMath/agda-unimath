@@ -365,7 +365,7 @@ exists an integer `k` such that `kx ＝ y`. Let `n1 ＝ x⁻¹` and let `m1 ＝ 
 Then we calculate
 
 ```text
-  (mn)x ＝ m(nx) ＝ m(x⁻¹x) ＝ m1 ＝ y.
+  (mn)x ＝ m(nx) ＝ m(n(1x)) ＝ m((n1)x) ＝ m(x⁻¹x) ＝ m1 ＝ y.
 ```
 
 ```agda
