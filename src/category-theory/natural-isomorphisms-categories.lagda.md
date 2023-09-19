@@ -32,6 +32,14 @@ module _
   (F G : functor-Category C D)
   where
 
+  iso-family-functor-Category : UU (l1 ⊔ l4)
+  iso-family-functor-Category =
+    iso-family-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
+
   is-natural-isomorphism-Category :
     natural-transformation-Category C D F G → UU (l1 ⊔ l4)
   is-natural-isomorphism-Category =

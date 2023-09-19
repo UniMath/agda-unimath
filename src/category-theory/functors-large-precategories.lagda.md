@@ -45,7 +45,8 @@ module _
         obj-Large-Precategory C l1 → obj-Large-Precategory D (γ l1)
       map-hom-functor-Large-Precategory :
         { l1 l2 : Level}
-        { X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2} →
+        { X : obj-Large-Precategory C l1}
+        { Y : obj-Large-Precategory C l2} →
         type-hom-Large-Precategory C X Y →
         type-hom-Large-Precategory D
           ( map-obj-functor-Large-Precategory X)

@@ -44,8 +44,8 @@ square-Large-Precategory :
   (bottom : type-hom-Large-Precategory C X Y) →
   UU (βC l1 l4)
 square-Large-Precategory C top left right bottom =
-  comp-hom-Large-Precategory C bottom left ＝
-  comp-hom-Large-Precategory C right top
+  comp-hom-Large-Precategory C right top ＝
+  comp-hom-Large-Precategory C bottom left
 
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
@@ -53,15 +53,19 @@ module _
   (F : functor-Large-Precategory C D γF) (G : functor-Large-Precategory C D γG)
   where
 
+  hom-family-functor-Large-Precategory : UUω
+  hom-family-functor-Large-Precategory =
+    {l : Level} (X : obj-Large-Precategory C l) →
+    type-hom-Large-Precategory D
+      ( map-obj-functor-Large-Precategory F X)
+      ( map-obj-functor-Large-Precategory G X)
+
   record natural-transformation-Large-Precategory : UUω
     where
     constructor make-natural-transformation
     field
       components-natural-transformation-Large-Precategory :
-        {l1 : Level} (X : obj-Large-Precategory C l1) →
-        type-hom-Large-Precategory D
-          ( map-obj-functor-Large-Precategory F X)
-          ( map-obj-functor-Large-Precategory G X)
+        hom-family-functor-Large-Precategory
       coherence-square-natural-transformation-Large-Precategory :
         {l1 l2 : Level} {X : obj-Large-Precategory C l1}
         {Y : obj-Large-Precategory C l2}
@@ -97,9 +101,57 @@ module _
       id-hom-Large-Precategory D
   coherence-square-natural-transformation-Large-Precategory
     ( id-natural-transformation-Large-Precategory F) f =
-    ( left-unit-law-comp-hom-Large-Precategory D
-      ( map-hom-functor-Large-Precategory F f)) ∙
+        ( right-unit-law-comp-hom-Large-Precategory D
+          ( map-hom-functor-Large-Precategory F f)) ∙
+        ( inv
+          ( left-unit-law-comp-hom-Large-Precategory D
+            ( map-hom-functor-Large-Precategory F f)))
+```
+
+### Composition of natural transformations
+
+```agda
+module _
+  { αC αD γF γG γH : Level → Level}
+  { βC βD : Level → Level → Level}
+  { C : Large-Precategory αC βC}
+  { D : Large-Precategory αD βD}
+  where
+
+  comp-natural-transformation-Large-Precategory :
+    (F : functor-Large-Precategory C D γF) →
+    (G : functor-Large-Precategory C D γG) →
+    (H : functor-Large-Precategory C D γH) →
+    natural-transformation-Large-Precategory G H →
+    natural-transformation-Large-Precategory F G →
+    natural-transformation-Large-Precategory F H
+  components-natural-transformation-Large-Precategory
+    ( comp-natural-transformation-Large-Precategory F G H b a) X =
+      comp-hom-Large-Precategory D
+        ( components-natural-transformation-Large-Precategory b X)
+        ( components-natural-transformation-Large-Precategory a X)
+  coherence-square-natural-transformation-Large-Precategory
+    ( comp-natural-transformation-Large-Precategory F G H b a) {X = X} {Y} f =
     ( inv
-      ( right-unit-law-comp-hom-Large-Precategory D
+      ( associative-comp-hom-Large-Precategory D
+        ( map-hom-functor-Large-Precategory H f)
+        ( components-natural-transformation-Large-Precategory b X)
+        ( components-natural-transformation-Large-Precategory a X))) ∙
+    ( ap
+      ( comp-hom-Large-Precategory' D
+        ( components-natural-transformation-Large-Precategory a X))
+      ( coherence-square-natural-transformation-Large-Precategory b f)) ∙
+    ( associative-comp-hom-Large-Precategory D
+      ( components-natural-transformation-Large-Precategory b Y)
+      ( map-hom-functor-Large-Precategory G f)
+      ( components-natural-transformation-Large-Precategory a X)) ∙
+    ( ap
+      ( comp-hom-Large-Precategory D
+        ( components-natural-transformation-Large-Precategory b Y))
+      ( coherence-square-natural-transformation-Large-Precategory a f)) ∙
+    ( inv
+      ( associative-comp-hom-Large-Precategory D
+        ( components-natural-transformation-Large-Precategory b Y)
+        ( components-natural-transformation-Large-Precategory a Y)
         ( map-hom-functor-Large-Precategory F f)))
 ```

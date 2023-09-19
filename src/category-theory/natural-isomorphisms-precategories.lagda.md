@@ -22,9 +22,13 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural
-transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is
-an isomorphism, for every object `x` in `C`.
+A **natural isomorphism** `γ` from
+[functor](category-theory.functors-precategories.md) `F : C → D` to `G : C → D`
+is a
+[natural transformation](category-theory.natural-transformations-precategories.md)
+from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is an
+[isomorphism](category-theory.isomorphisms-in-precategories.md), for every
+object `x` in `C`.
 
 ## Definition
 
@@ -35,6 +39,13 @@ module _
   (D : Precategory l3 l4)
   (F G : functor-Precategory C D)
   where
+
+  iso-family-functor-Precategory : UU (l1 ⊔ l4)
+  iso-family-functor-Precategory =
+    (x : obj-Precategory C) →
+    iso-Precategory D
+      ( map-obj-functor-Precategory C D F x)
+      ( map-obj-functor-Precategory C D G x)
 
   is-natural-isomorphism-Precategory :
     natural-transformation-Precategory C D F G → UU (l1 ⊔ l4)

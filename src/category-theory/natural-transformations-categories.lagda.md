@@ -39,12 +39,16 @@ module _
   (F G : functor-Category C D)
   where
 
+  hom-family-functor-Category : UU (l1 ⊔ l4)
+  hom-family-functor-Category =
+    hom-family-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
+
   is-natural-transformation-Category :
-    ( ( x : obj-Category C) →
-      type-hom-Category D
-        ( map-obj-functor-Category C D F x)
-        ( map-obj-functor-Category C D G x)) →
-    UU (l1 ⊔ l2 ⊔ l4)
+    hom-family-functor-Category → UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Category =
     is-natural-transformation-Precategory
       ( precategory-Category C)
@@ -61,10 +65,7 @@ module _
       ( G)
 
   components-natural-transformation-Category :
-    natural-transformation-Category → (x : obj-Category C) →
-    type-hom-Category D
-      ( map-obj-functor-Category C D F x)
-      ( map-obj-functor-Category C D G x)
+    natural-transformation-Category → hom-family-functor-Category
   components-natural-transformation-Category =
     components-natural-transformation-Precategory
       ( precategory-Category C)
@@ -125,11 +126,7 @@ module _
   where
 
   is-prop-is-natural-transformation-Category :
-    ( γ :
-      (x : obj-Category C) →
-      type-hom-Category D
-        ( map-obj-functor-Category C D F x)
-        ( map-obj-functor-Category C D G x)) →
+    ( γ : hom-family-functor-Category C D F G) →
     is-prop (is-natural-transformation-Category C D F G γ)
   is-prop-is-natural-transformation-Category =
     is-prop-is-natural-transformation-Precategory
@@ -139,12 +136,7 @@ module _
       ( G)
 
   is-natural-transformation-Category-Prop :
-    ( γ :
-      (x : obj-Category C) →
-      type-hom-Category D
-        ( map-obj-functor-Category C D F x)
-        ( map-obj-functor-Category C D G x)) →
-    Prop (l1 ⊔ l2 ⊔ l4)
+    ( γ : hom-family-functor-Category C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Category-Prop =
     is-natural-transformation-Precategory-Prop
       ( precategory-Category C)
@@ -165,8 +157,7 @@ module _
       ( F)
       ( G)
 
-  natural-transformation-Category-Set :
-    Set (l1 ⊔ l2 ⊔ l4)
+  natural-transformation-Category-Set : Set (l1 ⊔ l2 ⊔ l4)
   natural-transformation-Category-Set =
     natural-transformation-Precategory-Set
       ( precategory-Category C)

@@ -52,7 +52,9 @@ module _
     ( F : functor-Category) {x y z : obj-Category C}
     ( g : type-hom-Category C y z) (f : type-hom-Category C x y) →
     ( map-hom-functor-Category F (comp-hom-Category C g f)) ＝
-    ( comp-hom-Category D (map-hom-functor-Category F g) (map-hom-functor-Category F f))
+    ( comp-hom-Category D
+      ( map-hom-functor-Category F g)
+      ( map-hom-functor-Category F f))
   preserves-comp-functor-Category F =
     preserves-comp-functor-Precategory
       ( precategory-Category C)

@@ -19,29 +19,40 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism `γ` from functor `F : C → D` to `G : C → D` is a natural
-transformation from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is
-an isomorphism, for every object `x` in `C`.
+A **natural isomorphism** `γ` from
+[functor](category-theory.functors-large-precategories.md) `F : C → D` to
+`G : C → D` is a
+[natural transformation](category-theory.natural-transformations-large-precategories.md)
+from `F` to `G` such that the morphism `γ x : hom (F x) (G x)` is an
+[isomorphism](category-theory.isomorphisms-in-precategories.md), for every
+object `x` in `C`.
 
 ## Definition
 
 ```agda
 module _
-  {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
-  {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
+  {αC αD γF γG : Level → Level}
+  {βC βD : Level → Level → Level}
+  {C : Large-Precategory αC βC}
+  {D : Large-Precategory αD βD}
   (F : functor-Large-Precategory C D γF)
   (G : functor-Large-Precategory C D γG)
   where
+
+  iso-family-functor-Large-Precategory : UUω
+  iso-family-functor-Large-Precategory =
+    { l : Level}
+    ( X : obj-Large-Precategory C l) →
+    iso-Large-Precategory D
+      ( map-obj-functor-Large-Precategory F X)
+      ( map-obj-functor-Large-Precategory G X)
 
   record natural-isomorphism-Large-Precategory : UUω
     where
     constructor make-natural-isomorphism
     field
-      obj-natural-isomorphism-Large-Precategory :
-        { l1 : Level} (X : obj-Large-Precategory C l1) →
-        iso-Large-Precategory D
-          ( map-obj-functor-Large-Precategory F X)
-          ( map-obj-functor-Large-Precategory G X)
+      components-natural-isomorphism-Large-Precategory :
+        iso-family-functor-Large-Precategory
       coherence-square-natural-isomorphism-Large-Precategory :
         { l1 l2 : Level}
         { X : obj-Large-Precategory C l1}
@@ -51,25 +62,25 @@ module _
           ( hom-iso-Large-Precategory D
             ( map-obj-functor-Large-Precategory F X)
             ( map-obj-functor-Large-Precategory G X)
-            ( obj-natural-isomorphism-Large-Precategory X))
+            ( components-natural-isomorphism-Large-Precategory X))
           ( map-hom-functor-Large-Precategory F f)
           ( map-hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
             ( map-obj-functor-Large-Precategory F Y)
             ( map-obj-functor-Large-Precategory G Y)
-            ( obj-natural-isomorphism-Large-Precategory Y))
+            ( components-natural-isomorphism-Large-Precategory Y))
 
   open natural-isomorphism-Large-Precategory public
 
   natural-transformation-natural-isomorphism-Large-Precategory :
     natural-isomorphism-Large-Precategory →
     natural-transformation-Large-Precategory F G
-  obj-natural-transformation-Large-Precategory
+  components-natural-transformation-Large-Precategory
     ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
     hom-iso-Large-Precategory D
       ( map-obj-functor-Large-Precategory F X)
       ( map-obj-functor-Large-Precategory G X)
-      ( obj-natural-isomorphism-Large-Precategory γ X)
+      ( components-natural-isomorphism-Large-Precategory γ X)
   coherence-square-natural-transformation-Large-Precategory
     (natural-transformation-natural-isomorphism-Large-Precategory γ) =
       coherence-square-natural-isomorphism-Large-Precategory γ
