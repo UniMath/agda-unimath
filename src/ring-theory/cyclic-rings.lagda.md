@@ -1,8 +1,6 @@
 # Cyclic rings
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module ring-theory.cyclic-rings where
 ```
 
@@ -376,15 +374,43 @@ module _
   (H : is-invertible-element-Ring (ring-Cyclic-Ring R) x)
   where
 
-  is-surjective-hom-element-is-invertible-element-Cyclic-Ring :
-    is-surjective-hom-element-Group (group-Cyclic-Ring R) x
-  is-surjective-hom-element-is-invertible-element-Cyclic-Ring =
-    {!!}
+  abstract
+    is-surjective-hom-element-is-invertible-element-Cyclic-Ring :
+      is-surjective-hom-element-Group (group-Cyclic-Ring R) x
+    is-surjective-hom-element-is-invertible-element-Cyclic-Ring y =
+      apply-twice-universal-property-trunc-Prop
+        ( is-surjective-initial-hom-Cyclic-Ring R
+          ( inv-is-invertible-element-Ring (ring-Cyclic-Ring R) H))
+        ( is-surjective-initial-hom-Cyclic-Ring R y)
+        ( trunc-Prop (fiber (map-hom-element-Group (group-Cyclic-Ring R) x) y))
+        ( λ (n , p) (m , q) →
+          unit-trunc-Prop
+            ( ( mul-ℤ m n) ,
+              ( ( integer-multiple-mul-Ring (ring-Cyclic-Ring R) m n x) ∙
+                ( ap
+                  ( integer-multiple-Cyclic-Ring R m)
+                  ( ( ap
+                      ( integer-multiple-Cyclic-Ring R n)
+                      ( inv (left-unit-law-mul-Cyclic-Ring R x))) ∙
+                    ( inv
+                      ( left-integer-multiple-law-mul-Ring
+                        ( ring-Cyclic-Ring R)
+                        ( n)
+                        ( one-Cyclic-Ring R)
+                        ( x))) ∙
+                    ( ap (mul-Cyclic-Ring' R x) p) ∙
+                    ( is-left-inverse-inv-is-invertible-element-Ring
+                      ( ring-Cyclic-Ring R)
+                      ( H)))) ∙
+                ( q))))
 
   is-generating-element-group-is-invertible-element-Cyclic-Ring :
     is-generating-element-Group (group-Cyclic-Ring R) x
   is-generating-element-group-is-invertible-element-Cyclic-Ring =
-    {!!}
+    is-generating-element-is-surjective-hom-element-Group
+      ( group-Cyclic-Ring R)
+      ( x)
+      ( is-surjective-hom-element-is-invertible-element-Cyclic-Ring)
 ```
 
 ### Any cyclic ring is commutative
