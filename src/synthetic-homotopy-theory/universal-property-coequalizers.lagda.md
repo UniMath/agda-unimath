@@ -24,7 +24,7 @@ open import synthetic-homotopy-theory.coforks
 
 Given a parallel pair `f, g : A → B`, consider a
 [cofork](synthetic-homotopy-theory.coforks.md) `e : B → X` with vertex X. The
-**universal property of the coequalizer** asserts that the cofork
+**universal property of coequalizers** is the statement that the cofork
 postcomposition map
 
 ```text
@@ -51,16 +51,15 @@ module _
   { l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( e : cofork f g X) {Y : UU l4}
   ( up-coequalizer : universal-property-coequalizer l4 f g e)
-  ( e' : cofork f g Y)
   where
 
-  map-universal-property-coequalizer : X → Y
-  map-universal-property-coequalizer = map-inv-is-equiv (up-coequalizer Y) e'
+  map-universal-property-coequalizer : cofork f g Y → (X → Y)
+  map-universal-property-coequalizer = map-inv-is-equiv (up-coequalizer Y)
 ```
 
 ## Properties
 
-### The cofork obtained by the universal property is unique
+### The mediating map obtained by the universal property is unique
 
 ```agda
 module _
@@ -82,13 +81,14 @@ module _
       ( e')
       ( is-section-map-inv-is-equiv (up-coequalizer Y) e')
 
-  uniqueness-map-universal-property-coequalizer :
-    is-contr (Σ (X → Y) (λ h → htpy-cofork f g (cofork-map f g e h) e'))
-  uniqueness-map-universal-property-coequalizer =
-    is-contr-is-equiv'
-      ( fiber (cofork-map f g e) e')
-      ( tot (λ h → htpy-cofork-eq f g (cofork-map f g e h) e'))
-      ( is-equiv-tot-is-fiberwise-equiv
-        ( λ h → is-equiv-htpy-cofork-eq f g (cofork-map f g e h) e'))
-      ( is-contr-map-is-equiv (up-coequalizer Y) e')
+  abstract
+    uniqueness-map-universal-property-coequalizer :
+      is-contr (Σ (X → Y) (λ h → htpy-cofork f g (cofork-map f g e h) e'))
+    uniqueness-map-universal-property-coequalizer =
+      is-contr-is-equiv'
+        ( fiber (cofork-map f g e) e')
+        ( tot (λ h → htpy-cofork-eq f g (cofork-map f g e h) e'))
+        ( is-equiv-tot-is-fiberwise-equiv
+          ( λ h → is-equiv-htpy-cofork-eq f g (cofork-map f g e h) e'))
+        ( is-contr-map-is-equiv (up-coequalizer Y) e')
 ```

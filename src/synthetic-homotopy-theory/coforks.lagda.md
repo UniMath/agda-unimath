@@ -8,19 +8,25 @@ module synthetic-homotopy-theory.coforks where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.codiagonal-maps-of-types
+open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.function-types
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+
+open import synthetic-homotopy-theory.cocones-under-spans
 ```
 
 </details>
@@ -29,7 +35,7 @@ open import foundation.whiskering-homotopies
 
 A **cofork** of a parallel pair `f, g : A → B` with vertext `X` is a map
 `e : B → X` together with a [homotopy](foundation.homotopies.md)
-`e ∘ f ~ e ∘ g`. The name comes from the diagram
+`H : e ∘ f ~ e ∘ g`. The name comes from the diagram
 
 ```text
      g
@@ -40,6 +46,10 @@ A **cofork** of a parallel pair `f, g : A → B` with vertext `X` is a map
 
 which looks like a fork if you flip the arrows, hence a cofork.
 
+Coforks are an analogue of
+[cocones under spans](synthetic-homotopy-theory.cocones-under-spans) for
+parallel pairs. The universal cofork of a pair is their
+[coequalizer](synthetic-homotopy-theory.coequalizers).
 
 ## Definitions
 
@@ -94,6 +104,13 @@ module _
 Given a cofork `e : B → X` and a map `h : X → Y`, we may compose the two to get
 a new cofork `h ∘ e`.
 
+```text
+     g
+   ----->     e        h
+ A -----> B -----> X -----> Y
+     f
+```
+
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
@@ -122,25 +139,26 @@ module _
     ( e e' : cofork f g X) → (e ＝ e') → htpy-cofork f g e e'
   htpy-cofork-eq e .e refl = reflexive-htpy-cofork e
 
-  is-contr-total-htpy-cofork :
-    ( e : cofork f g X) → is-contr (Σ (cofork f g X) (htpy-cofork f g e))
-  is-contr-total-htpy-cofork e =
-    is-contr-total-Eq-structure
-      ( ev-pair (coherence-htpy-cofork f g e))
-      ( is-contr-total-htpy (map-cofork f g e))
-      ( (map-cofork f g e) , refl-htpy)
-      ( is-contr-is-equiv'
-        ( Σ ( map-cofork f g e ∘ f ~ map-cofork f g e ∘ g)
-            ( λ K → coherence-cofork f g e ~ K))
-        ( tot (λ K M → right-unit-htpy ∙h M))
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ H → is-equiv-concat-htpy right-unit-htpy H))
-        ( is-contr-total-htpy (coherence-cofork f g e)))
+  abstract
+    is-contr-total-htpy-cofork :
+      ( e : cofork f g X) → is-contr (Σ (cofork f g X) (htpy-cofork f g e))
+    is-contr-total-htpy-cofork e =
+      is-contr-total-Eq-structure
+        ( ev-pair (coherence-htpy-cofork f g e))
+        ( is-contr-total-htpy (map-cofork f g e))
+        ( map-cofork f g e , refl-htpy)
+        ( is-contr-is-equiv'
+          ( Σ ( map-cofork f g e ∘ f ~ map-cofork f g e ∘ g)
+              ( λ K → coherence-cofork f g e ~ K))
+          ( tot (λ K M → right-unit-htpy ∙h M))
+          ( is-equiv-tot-is-fiberwise-equiv
+            ( is-equiv-concat-htpy right-unit-htpy))
+          ( is-contr-total-htpy (coherence-cofork f g e)))
 
-  is-equiv-htpy-cofork-eq :
-    ( e e' : cofork f g X) → is-equiv (htpy-cofork-eq e e')
-  is-equiv-htpy-cofork-eq e =
-    fundamental-theorem-id (is-contr-total-htpy-cofork e) (htpy-cofork-eq e)
+    is-equiv-htpy-cofork-eq :
+      ( e e' : cofork f g X) → is-equiv (htpy-cofork-eq e e')
+    is-equiv-htpy-cofork-eq e =
+      fundamental-theorem-id (is-contr-total-htpy-cofork e) (htpy-cofork-eq e)
 
   eq-htpy-cofork :
     ( e e' : cofork f g X) → htpy-cofork f g e e' → e ＝ e'
@@ -165,6 +183,13 @@ module _
 
 ### Postcomposing coforks distributes over function composition
 
+```text
+     g
+   ----->     e        h        k
+ A -----> B -----> X -----> Y -----> Z
+     f
+```
+
 ```agda
 module _
   { l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
@@ -180,4 +205,132 @@ module _
       ( cofork-map f g e (k ∘ h))
       ( cofork-map f g (cofork-map f g e h) k)
       ( refl-htpy , (right-unit-htpy ∙h (ap-comp k h ∘ coherence-cofork f g e)))
+```
+
+### Coforks are special cases of cocones under spans
+
+The type of coforks of parallel pairs is equivalent to the type of
+[cocones](synthetic-homotopy-theory.cocones-under-spans.md) under the span
+
+```text
+    ∇        [f,g]
+A <----- A + A -----> B.
+```
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
+  where
+
+  module _
+    { l3 : Level} {X : UU l3}
+    where
+
+    cofork-cocone-codiagonal :
+      cocone (∇ A) (ind-coprod (λ _ → B) f g) X →
+      cofork f g X
+    pr1 (cofork-cocone-codiagonal c) =
+      vertical-map-cocone (∇ A) (ind-coprod (λ _ → B) f g) c
+    pr2 (cofork-cocone-codiagonal c) =
+      ( ( inv-htpy
+          ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c)) ·r
+        ( inl)) ∙h
+      ( ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c) ·r inr)
+
+    cocone-codiagonal-cofork :
+      cofork f g X →
+      cocone (∇ A) (ind-coprod (λ _ → B) f g) X
+    pr1 (cocone-codiagonal-cofork e) = map-cofork f g e ∘ f
+    pr1 (pr2 (cocone-codiagonal-cofork e)) = map-cofork f g e
+    pr2 (pr2 (cocone-codiagonal-cofork e)) (inl a) = refl
+    pr2 (pr2 (cocone-codiagonal-cofork e)) (inr a) = coherence-cofork f g e a
+
+    abstract
+      is-section-cocone-codiagonal-cofork :
+        cofork-cocone-codiagonal ∘ cocone-codiagonal-cofork ~ id
+      is-section-cocone-codiagonal-cofork e =
+        eq-htpy-cofork f g
+          ( cofork-cocone-codiagonal (cocone-codiagonal-cofork e))
+          ( e)
+          ( refl-htpy , right-unit-htpy)
+
+      is-retraction-cocone-codiagonal-fork :
+        cocone-codiagonal-cofork ∘ cofork-cocone-codiagonal ~ id
+      is-retraction-cocone-codiagonal-fork c =
+        eq-htpy-cocone
+          ( ∇ A)
+          ( ind-coprod (λ _ → B) f g)
+          ( cocone-codiagonal-cofork (cofork-cocone-codiagonal c))
+          ( c)
+          ( ( ( inv-htpy
+                ( coherence-square-cocone
+                  ( ∇ A)
+                  ( ind-coprod (λ _ → B) f g)
+                  ( c))) ·r
+              ( inl)) ,
+            ( refl-htpy) ,
+            ( λ { (inl a) →
+                  inv
+                    ( left-inv
+                      ( coherence-square-cocone
+                        ( ∇ A)
+                        ( ind-coprod (λ _ → B) f g)
+                        ( c)
+                        ( inl a)))
+                ; (inr a) → right-unit}))
+
+    is-equiv-cofork-cocone-codiagonal :
+      is-equiv cofork-cocone-codiagonal
+    is-equiv-cofork-cocone-codiagonal =
+      is-equiv-is-invertible
+        ( cocone-codiagonal-cofork)
+        ( is-section-cocone-codiagonal-cofork)
+        ( is-retraction-cocone-codiagonal-fork)
+
+    equiv-cocone-codiagonal-cofork :
+      cocone (∇ A) (ind-coprod (λ _ → B) f g) X ≃
+      cofork f g X
+    pr1 equiv-cocone-codiagonal-cofork = cofork-cocone-codiagonal
+    pr2 equiv-cocone-codiagonal-cofork = is-equiv-cofork-cocone-codiagonal
+
+  triangle-cofork-cocone :
+    { l3 l4 : Level} {X : UU l3} {Y : UU l4} →
+    ( c : cocone (∇ A) (ind-coprod (λ _ → B) f g) X) →
+    coherence-triangle-maps
+      ( cofork-map f g (cofork-cocone-codiagonal c) {Y = Y})
+      ( cofork-cocone-codiagonal)
+      ( cocone-map (∇ A) (ind-coprod (λ _ → B) f g) c)
+  triangle-cofork-cocone c h =
+    eq-htpy-cofork f g
+      ( cofork-map f g (cofork-cocone-codiagonal c) h)
+      ( cofork-cocone-codiagonal
+        ( cocone-map (∇ A) (ind-coprod (λ _ → B) f g) c h))
+      ( refl-htpy ,
+        ( right-unit-htpy ∙h
+          ( λ a →
+            ( ap-concat h
+              ( inv
+                ( coherence-square-cocone
+                  ( ∇ A)
+                  ( ind-coprod (λ _ → B) f g)
+                  ( c)
+                  ( inl a)))
+              ( coherence-square-cocone
+                ( ∇ A)
+                ( ind-coprod (λ _ → B) f g)
+                ( c)
+                ( inr a))) ∙
+            ( identification-right-whisk
+              ( ap-inv h
+                ( coherence-square-cocone
+                  ( ∇ A)
+                  ( ind-coprod (λ _ → B) f g)
+                  ( c)
+                  ( inl a)))
+              ( ap h
+                ( coherence-square-cocone
+                  ( ∇ A)
+                  ( ind-coprod (λ _ → B) f g)
+                  ( c)
+                  ( inr a)))))))
 ```
