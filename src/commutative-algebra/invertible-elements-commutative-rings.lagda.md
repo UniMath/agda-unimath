@@ -22,17 +22,20 @@ open import ring-theory.invertible-elements-rings
 
 ## Idea
 
-In a [commutative ring](commutative-algebra.commutative-rings.md) `A` an element
-is **invertible** as soon as it has either a left or a right inverse. The
-invertible elements of a commutative ring `A` are also called the
-**(multiplicative) units** of `A`. The
-[abelian group](group-theory.abelian-groups.md) of multiplicative units is
+An element of a [commutative ring](commutative-algebra.commutative-rings.md)
+`A`is said to be **invertible** if it has a two-sided inverse. However, since
+multiplication in commutative rings is commutative, any element is already
+invertible as soon as it has either a left or a right inverse. The invertible
+elements of a commutative ring `A` are also called the **(multiplicative)
+units** of `A`.
+
+The [abelian group](group-theory.abelian-groups.md) of multiplicative units is
 constructed in
 [`commutative-algebra.groups-of-units-commutative-rings`](commutative-algebra.groups-of-units-commutative-rings.md).
 
 ## Definitions
 
-### Left invertible elements of rings
+### Left invertible elements of commutative rings
 
 ```agda
 module _
@@ -67,7 +70,7 @@ module _
       ( ring-Commutative-Ring A)
 ```
 
-### Aight invertible elements of rings
+### Aight invertible elements of commutative rings
 
 ```agda
 module _
@@ -101,7 +104,7 @@ module _
       ( ring-Commutative-Ring A)
 ```
 
-### Invertible elements of rings
+### Invertible elements of commutative rings
 
 ```agda
 module _

@@ -432,7 +432,7 @@ module _
       ( f)
 ```
 
-### Any homomorphism of monoids sends invertible elements to invertible elements
+### Any homomorphism of commutative rings sends invertible elements to invertible elements
 
 ```agda
 module _
