@@ -42,10 +42,10 @@ open import ring-theory.rings
 The **group of units** of a
 [commutative ring](commutative-algebra.commutative-rings.md) `A` is the
 [abelian group](group-theory.abelian-groups.md) consisting of all the
-[invertible elements](ring-theory.invertible-elements-rings.md) in `R`.
-Equivalently, the group of units of `R` is the
+[invertible elements](commutative-algebra.invertible-elements-commutative-rings.md)
+in `A`. Equivalently, the group of units of `A` is the
 [core](group-theory.cores-monoids.md) of the multiplicative
-[monoid](group-theory.monoids.md) of `R`.
+[monoid](group-theory.monoids.md) of `A`.
 
 ## Definitions
 

@@ -18,7 +18,8 @@ open import foundation.universe-levels
 ## Idea
 
 An **initial object** in a [large category](category-theory.large-categories.md)
-`C` is an object `X` such that `hom X Y` is contractible for any object `Y`.
+`C` is an object `X` such that `hom X Y` is
+[contractible](foundation.contractible-types.md) for any object `Y`.
 
 ## Definitions
 
