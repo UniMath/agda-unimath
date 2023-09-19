@@ -89,7 +89,7 @@ def get_author_element_for_file(filename, include_contributors, contributors):
             author['displayName']
             for author in sorted_authors_from_raw_shortlog_lines(raw_authors_git_output, contributors)
         ]
-        attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}</i></p>'
+        attribution_text = f'<p><i>Content created by {format_multiple_authors_attribution(author_names)}.</i></p>'
 
     file_log_output = subprocess.run([
         'git', 'log',
