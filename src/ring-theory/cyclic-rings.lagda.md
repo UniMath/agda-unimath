@@ -9,6 +9,8 @@ module ring-theory.cyclic-rings where
 <details><summary>Imports</summary>
 
 ```agda
+open import commutative-algebra.commutative-rings
+
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.ring-of-integers
@@ -359,57 +361,29 @@ module _
 
 ### If `R` is a cyclic ring, then any invertible element is a generator of its additive group
 
-**Proof:** Let `x` be an invertible element of `R` and let `k` be an integer
-such that `k·1 ＝ x`. Then the map `y ↦ k·y` is a bijection from `R` to `R`,
-since it is just the map `y ↦ xy`. On the other hand, for any `y ＝ l·1` we have
-`k·y ＝ k·(l·1) ＝ l·(k·1) ＝ l·x`. This shows that every element is an integer
-multiple of `x`, i.e., that `x` generates the additive group `(R,0,+,1)`.
+**Proof:** Let `x` be an invertible element of `R`. To show that `x` generates
+the abelian group `(R,0,+,1)` we need to show that for any element `y : R`
+there exists an integer `k` such that `kx ＝ y`. Let `n1 ＝ x⁻¹` and let `m1 ＝ y`. Then we calculate
+
+```text
+  (mn)x ＝ m(nx) ＝ m(x⁻¹x) ＝ m1 ＝ y.
+```
 
 ```agda
 module _
-  {l : Level} (R : Cyclic-Ring l)
+  {l : Level} (R : Cyclic-Ring l) {x : type-Cyclic-Ring R}
+  (H : is-invertible-element-Ring (ring-Cyclic-Ring R) x)
   where
 
+  is-surjective-hom-element-is-invertible-element-Cyclic-Ring :
+    is-surjective-hom-element-Group (group-Cyclic-Ring R) x
+  is-surjective-hom-element-is-invertible-element-Cyclic-Ring =
+    {!!}
+
   is-generating-element-group-is-invertible-element-Cyclic-Ring :
-    (x : type-Cyclic-Ring R) →
-    is-invertible-element-Ring (ring-Cyclic-Ring R) x →
     is-generating-element-Group (group-Cyclic-Ring R) x
-  is-generating-element-group-is-invertible-element-Cyclic-Ring x H =
-    apply-universal-property-trunc-Prop
-      ( is-cyclic-Cyclic-Ring R)
-      ( is-generating-element-prop-Group (group-Cyclic-Ring R) x)
-      ( λ (g , G) →
-        apply-twice-universal-property-trunc-Prop
-          ( is-surjective-hom-element-is-generating-element-Group
-            ( group-Cyclic-Ring R)
-            ( g)
-            ( G)
-            ( x))
-          ( is-surjective-hom-element-is-generating-element-Group
-            ( group-Cyclic-Ring R)
-            ( g)
-            ( G)
-            ( pr1 H))
-          ( is-generating-element-prop-Group (group-Cyclic-Ring R) x)
-          ( λ { (k , refl) (l , q) →
-                is-generating-element-is-surjective-hom-element-Group
-                  ( group-Cyclic-Ring R)
-                  ( _)
-                  ( λ y →
-                    apply-universal-property-trunc-Prop
-                      ( is-surjective-hom-element-is-generating-element-Group
-                        ( group-Cyclic-Ring R)
-                        ( g)
-                        ( G)
-                        ( y))
-                      ( trunc-Prop
-                        ( fiber
-                          ( map-hom-element-Group (group-Cyclic-Ring R) _)
-                          ( y)))
-                      ( λ { (n , refl) →
-                            unit-trunc-Prop
-                              ( ( mul-ℤ n l) ,
-                                ( {!!}))}))}))
+  is-generating-element-group-is-invertible-element-Cyclic-Ring =
+    {!!}
 ```
 
 ### Any cyclic ring is commutative
@@ -424,7 +398,16 @@ module _
       (x y : type-Cyclic-Ring R) →
       mul-Cyclic-Ring R x y ＝ mul-Cyclic-Ring R y x
     commutative-mul-Cyclic-Ring x y =
-      {!!}
+      apply-twice-universal-property-trunc-Prop
+        ( is-surjective-initial-hom-Cyclic-Ring R x)
+        ( is-surjective-initial-hom-Cyclic-Ring R y)
+        ( Id-Prop (set-Cyclic-Ring R) _ _)
+        ( λ { (n , refl) (m , refl) →
+              commute-integer-multiples-diagonal-Ring (ring-Cyclic-Ring R) n m})
+
+  commutative-ring-Cyclic-Ring : Commutative-Ring l
+  pr1 commutative-ring-Cyclic-Ring = ring-Cyclic-Ring R
+  pr2 commutative-ring-Cyclic-Ring = commutative-mul-Cyclic-Ring
 ```
 
 ## References
