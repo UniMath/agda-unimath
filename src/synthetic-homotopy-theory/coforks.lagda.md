@@ -29,13 +29,13 @@ open import foundation.whiskering-homotopies
 
 A **cofork** of a parallel pair `f, g : A → B` with vertext `X` is a map
 `e : B → X` together with a [homotopy](foundation.homotopies.md)
-`e ∘ g ~ e ∘ f`. The name comes from the diagram
+`e ∘ f ~ e ∘ g`. The name comes from the diagram
 
 ```text
-     f
+     g
    ----->     e
  A -----> B -----> X
-     g
+     f
 ```
 
 which looks like a fork if you flip the arrows, hence a cofork.
@@ -51,7 +51,7 @@ module _
   where
 
   cofork : UU l3 → UU (l1 ⊔ l2 ⊔ l3)
-  cofork X = Σ (B → X) (λ e → e ∘ g ~ e ∘ f)
+  cofork X = Σ (B → X) (λ e → e ∘ f ~ e ∘ g)
 
   module _
     { X : UU l3} (e : cofork X)
@@ -60,7 +60,7 @@ module _
     map-cofork : B → X
     map-cofork = pr1 e
 
-    coherence-cofork : map-cofork ∘ g ~ map-cofork ∘ f
+    coherence-cofork : map-cofork ∘ f ~ map-cofork ∘ g
     coherence-cofork = pr2 e
 ```
 
@@ -80,8 +80,8 @@ module _
     ( K : map-cofork f g e ~ map-cofork f g e') →
     UU (l1 ⊔ l3)
   coherence-htpy-cofork e e' K =
-    ( (coherence-cofork f g e) ∙h (K ·r f)) ~
-    ( (K ·r g) ∙h (coherence-cofork f g e'))
+    ( (coherence-cofork f g e) ∙h (K ·r g)) ~
+    ( (K ·r f) ∙h (coherence-cofork f g e'))
 
   htpy-cofork : cofork f g X → cofork f g X → UU (l1 ⊔ l2 ⊔ l3)
   htpy-cofork e e' =
@@ -130,7 +130,7 @@ module _
       ( is-contr-total-htpy (map-cofork f g e))
       ( (map-cofork f g e) , refl-htpy)
       ( is-contr-is-equiv'
-        ( Σ ( map-cofork f g e ∘ g ~ map-cofork f g e ∘ f)
+        ( Σ ( map-cofork f g e ∘ f ~ map-cofork f g e ∘ g)
             ( λ K → coherence-cofork f g e ~ K))
         ( tot (λ K M → right-unit-htpy ∙h M))
         ( is-equiv-tot-is-fiberwise-equiv

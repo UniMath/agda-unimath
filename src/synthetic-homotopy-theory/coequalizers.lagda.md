@@ -16,6 +16,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -69,17 +70,17 @@ module _
   pr2 (cofork-cocone-codiagonal c) =
       ( ( inv-htpy
           ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c)) ·r
-        ( inr)) ∙h
-      ( ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c) ·r inl)
+        ( inl)) ∙h
+      ( ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c) ·r inr)
 
   cocone-codiagonal-cofork :
     { l3 : Level} {X : UU l3} →
     cofork f g X →
     cocone (∇ A) (ind-coprod (λ _ → B) f g) X
-  pr1 (cocone-codiagonal-cofork e) = map-cofork f g e ∘ g
+  pr1 (cocone-codiagonal-cofork e) = map-cofork f g e ∘ f
   pr1 (pr2 (cocone-codiagonal-cofork e)) = map-cofork f g e
-  pr2 (pr2 (cocone-codiagonal-cofork e)) (inl a) = coherence-cofork f g e a
-  pr2 (pr2 (cocone-codiagonal-cofork e)) (inr a) = refl
+  pr2 (pr2 (cocone-codiagonal-cofork e)) (inl a) = refl
+  pr2 (pr2 (cocone-codiagonal-cofork e)) (inr a) = coherence-cofork f g e a
 
   is-equiv-cofork-cocone-codiagonal :
     { l3 : Level} {X : UU l3} →
@@ -98,22 +99,22 @@ module _
             ( ind-coprod (λ _ → B) f g)
             ( cocone-codiagonal-cofork (cofork-cocone-codiagonal c))
             ( c)
-            ( ( inv-htpy
-                ( ( coherence-square-cocone
+            ( ( ( inv-htpy
+                  ( coherence-square-cocone
                     ( ∇ A)
                     ( ind-coprod (λ _ → B) f g)
-                    ( c)) ·r
-                  ( inr))) ,
+                    ( c))) ·r
+                ( inl)) ,
               ( refl-htpy) ,
-              ( λ { (inl a) → right-unit
-                  ; (inr a) →
+              ( λ { (inl a) →
                     inv
                       ( left-inv
                         ( coherence-square-cocone
                           ( ∇ A)
                           ( ind-coprod (λ _ → B) f g)
                           ( c)
-                          ( inr a)))})))
+                          ( inl a)))
+                  ; (inr a) → right-unit })))
 
   triangle-cofork-cocone :
     { l3 l4 : Level} {X : UU l3} {Y : UU l4} →
@@ -128,7 +129,7 @@ module _
       ( cofork-cocone-codiagonal
         ( cocone-map (∇ A) (ind-coprod (λ _ → B) f g) c h))
       ( refl-htpy ,
-        right-unit-htpy ∙h
+        ( right-unit-htpy ∙h
           ( λ a →
             ( ap-concat h
               ( inv
@@ -136,26 +137,25 @@ module _
                   ( ∇ A)
                   ( ind-coprod (λ _ → B) f g)
                   ( c)
-                  ( inr a)))
+                  ( inl a)))
               ( coherence-square-cocone
                 ( ∇ A)
                 ( ind-coprod (λ _ → B) f g)
                 ( c)
-                ( inl a))) ∙
-            ( ap
-              ( _∙
-                ap h
-                  ( coherence-square-cocone
-                    ( ∇ A)
-                    ( ind-coprod (λ _ → B) f g)
-                    ( c)
-                    ( inl a)))
+                ( inr a))) ∙
+            ( identification-right-whisk
               ( ap-inv h
                 ( coherence-square-cocone
                   ( ∇ A)
                   ( ind-coprod (λ _ → B) f g)
                   ( c)
-                  ( inr a))))))
+                  ( inl a)))
+              ( ap h
+                ( coherence-square-cocone
+                  ( ∇ A)
+                  ( ind-coprod (λ _ → B) f g)
+                  ( c)
+                  ( inr a)))))))
 
   abstract
     canonical-coequalizer : UU (l1 ⊔ l2)
