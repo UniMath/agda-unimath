@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.flattening-lemma-coequalizers where
 <details><summary>Imports</summary>
 
 ```agda
--- open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-pair-types
@@ -24,8 +23,6 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-coforks
--- open import synthetic-homotopy-theory.cocones-under-spans
--- open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
 open import synthetic-homotopy-theory.universal-property-coequalizers
 ```
@@ -136,7 +133,7 @@ module _
   triangle-comparison-dependent-cofork-ind-Σ-cofork :
     { l : Level} (Y : UU l) →
     coherence-triangle-maps
-      ( dependent-cofork-map f g e { P = (λ x → P x → Y) })
+      ( dependent-cofork-map f g e {P = (λ x → P x → Y)})
       ( map-equiv (comparison-dependent-cofork-ind-Σ-cofork Y))
       ( map-equiv equiv-ev-pair² ∘ cofork-map-flattening-coequalizer Y ∘ ind-Σ)
   triangle-comparison-dependent-cofork-ind-Σ-cofork Y h =
