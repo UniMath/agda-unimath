@@ -28,7 +28,7 @@ open import synthetic-homotopy-theory.universal-property-coequalizers
 The **dependent universal property of coequalizers** is a property of
 [coequalizers](synthetic-homotopy-theory.coequalizers.md) of a parallel pair
 `f, g : A → B`, asserting that for any type family `P : X → 𝓤` over the
-coequalizer `e : B → X`, there is an equivalence between section of `P` and
+coequalizer `e : B → X`, there is an equivalence between sections of `P` and
 dependent cocones on `P` over `e`, given by the map
 
 ```text

@@ -34,16 +34,19 @@ The **coequalizer** of a parallel pair `f, g : A → B` is the colimiting
 
 ### All parallel pairs admit a coequalizer
 
-The **canonical coequalizer** may be obtained as a pushout of the span
+The **canonical coequalizer** may be obtained as a
+[pushout](synthetic-homotopy-theory.pushouts.md) of the span
 
 ```text
      ∇         [f,g]
 A <----- A + A -----> B
 ```
 
-where the left map is the codiagonal map, sending `inl(a)` and `inr(a)` to `a`,
-and the right map is defined by the universal property of coproducts to send
-`inl(a)` to `f(a)` and `inr(a)` to `g(a)`.
+where the left map is the
+[codiagonal map](foundation.codiagonal-maps-of-types.md), sending `inl(a)` and
+`inr(a)` to `a`, and the right map is defined by the universal property of
+[coproducts](foundation.coproduct-types.md) to send `inl(a)` to `f(a)` and
+`inr(a)` to `g(a)`.
 
 The pushout thus constructed will consist of a copy of `B`, a copy of `A`, and
 for every point `a` of `A` there will be a path from `f(a)` to `a` and to
