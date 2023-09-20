@@ -143,13 +143,13 @@ module _
       ( B)
       ( f)
 
-  is-iso-iso-transport-commutative-ring-structure-iso-Ab :
+  is-iso-hom-iso-transport-commutative-ring-structure-iso-Ab :
     is-iso-hom-Commutative-Ring
       ( A)
       ( transport-commutative-ring-structure-iso-Ab)
       ( hom-iso-transport-commutative-ring-structure-iso-Ab)
-  is-iso-iso-transport-commutative-ring-structure-iso-Ab =
-    is-iso-iso-transport-ring-structure-iso-Ab
+  is-iso-hom-iso-transport-commutative-ring-structure-iso-Ab =
+    is-iso-hom-iso-transport-ring-structure-iso-Ab
       ( ring-Commutative-Ring A)
       ( B)
       ( f)

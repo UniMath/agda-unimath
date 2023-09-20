@@ -138,10 +138,10 @@ module _
   preserves-mul-iso-Group =
     preserves-mul-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  is-iso-iso-Group :
+  is-iso-hom-iso-Group :
     (f : type-iso-Group) → is-iso-hom-Group G H (hom-iso-Group f)
-  is-iso-iso-Group =
-    is-iso-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
+  is-iso-hom-iso-Group =
+    is-iso-hom-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
   hom-inv-iso-Group =

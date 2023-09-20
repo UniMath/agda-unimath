@@ -200,11 +200,11 @@ module _
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
 
-  is-iso-iso-Commutative-Ring :
+  is-iso-hom-iso-Commutative-Ring :
     (f : iso-Commutative-Ring) →
     is-iso-hom-Commutative-Ring A B (hom-iso-Commutative-Ring f)
-  is-iso-iso-Commutative-Ring =
-    is-iso-iso-Ring
+  is-iso-hom-iso-Commutative-Ring =
+    is-iso-hom-iso-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
 

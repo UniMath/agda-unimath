@@ -26,9 +26,8 @@ open import foundation.universe-levels
 ## Idea
 
 An **isomorphism** in a [large category](category-theory.large-categories.md)
-`C` is a morphism `f : X → Y` in `C` for which there is an inverse, i.e., for
-which there exists a morphism `g : Y → X` such that `f ∘ g ＝ id` and
-`g ∘ f ＝ id`.
+`C` is a morphism `f : X → Y` in `C` for which there exists a morphism
+`g : Y → X` such that `f ∘ g ＝ id` and `g ∘ f ＝ id`.
 
 ## Definitions
 
@@ -96,10 +95,10 @@ module _
   hom-iso-Large-Category =
     hom-iso-Large-Precategory (large-precategory-Large-Category C) f
 
-  is-iso-iso-Large-Category :
+  is-iso-hom-iso-Large-Category :
     is-iso-hom-Large-Category C hom-iso-Large-Category
-  is-iso-iso-Large-Category =
-    is-iso-iso-Large-Precategory (large-precategory-Large-Category C) f
+  is-iso-hom-iso-Large-Category =
+    is-iso-hom-iso-Large-Precategory (large-precategory-Large-Category C) f
 
   hom-inv-iso-Large-Category : type-hom-Large-Category C Y X
   hom-inv-iso-Large-Category =
@@ -152,7 +151,7 @@ module _
 ### Equalities give rise to isomorphisms
 
 An equality between objects `X Y : A` gives rise to an isomorphism between them.
-This is because by the J-rule, it is enough to construct an isomorphism given
+This is because, by the J-rule, it is enough to construct an isomorphism given
 `refl : X ＝ X`, from `X` to itself. We take the identity morphism as such an
 isomorphism.
 
@@ -169,7 +168,7 @@ compute-iso-eq-Large-Category :
   {α : Level → Level} {β : Level → Level → Level} →
   (C : Large-Category α β) {l1 : Level}
   (X : obj-Large-Category C l1) (Y : obj-Large-Category C l1) →
-  iso-eq-Category (category-Large-Category C l1) {X} {Y} ~
+  iso-eq-Category (category-Large-Category C l1) X Y ~
   iso-eq-Large-Category C X Y
 compute-iso-eq-Large-Category C X .X refl = refl
 ```
@@ -242,15 +241,9 @@ module _
   is-set-iso-Large-Category =
     is-set-iso-Large-Precategory (large-precategory-Large-Category C)
 
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Category α β) {l1 l2 : Level}
-  (X : obj-Large-Category C l1) (Y : obj-Large-Category C l2)
-  where
-
   iso-set-Large-Category : Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   iso-set-Large-Category =
-    iso-set-Large-Precategory (large-precategory-Large-Category C) X Y
+    iso-set-Large-Precategory (large-precategory-Large-Category C) {X = X} {Y}
 ```
 
 ### Isomorphisms are closed under composition
@@ -391,7 +384,7 @@ module _
   pr1 (inv-iso-Large-Category f) = hom-inv-iso-Large-Category C f
   pr2 (inv-iso-Large-Category f) =
     is-iso-inv-is-iso-hom-Large-Category C
-      ( is-iso-iso-Large-Category C f)
+      ( is-iso-hom-iso-Large-Category C f)
 ```
 
 ### Composition of isomorphisms satisfies the unit laws

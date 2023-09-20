@@ -129,10 +129,10 @@ module _
   preserves-mul-iso-Semigroup f =
     preserves-mul-hom-Semigroup G H (hom-iso-Semigroup f)
 
-  is-iso-iso-Semigroup :
+  is-iso-hom-iso-Semigroup :
     (f : type-iso-Semigroup) → is-iso-hom-Semigroup G H (hom-iso-Semigroup f)
-  is-iso-iso-Semigroup =
-    is-iso-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
+  is-iso-hom-iso-Semigroup =
+    is-iso-hom-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
   hom-inv-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup H G
   hom-inv-iso-Semigroup =

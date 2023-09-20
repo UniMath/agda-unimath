@@ -155,10 +155,10 @@ module _
   preserves-mul-iso-Ring f =
     preserves-mul-hom-Ring R S (hom-iso-Ring f)
 
-  is-iso-iso-Ring :
+  is-iso-hom-iso-Ring :
     (f : iso-Ring) → is-iso-hom-Ring R S (hom-iso-Ring f)
-  is-iso-iso-Ring =
-    is-iso-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
+  is-iso-hom-iso-Ring =
+    is-iso-hom-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   hom-inv-iso-Ring : iso-Ring → type-hom-Ring S R
   hom-inv-iso-Ring =
@@ -404,7 +404,7 @@ module _
   pr2 (iso-ab-iso-Ring f) =
     is-iso-hom-ab-is-iso-hom-Ring
       ( hom-iso-Ring R S f)
-      ( is-iso-iso-Ring R S f)
+      ( is-iso-hom-iso-Ring R S f)
 
   equiv-iso-ab-iso-Ring : iso-Ring R S ≃ iso-ab-Ring
   equiv-iso-ab-iso-Ring =

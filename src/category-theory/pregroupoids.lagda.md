@@ -35,7 +35,7 @@ is-groupoid-Precategory-Prop C =
         ( λ y →
           Π-Prop
             ( type-hom-Precategory C x y)
-            ( λ f → is-iso-hom-Precategory-Prop C f)))
+            ( is-iso-prop-hom-Precategory C)))
 
 is-groupoid-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)

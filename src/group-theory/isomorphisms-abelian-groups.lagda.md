@@ -125,8 +125,8 @@ module _
   preserves-add-iso-Ab =
     preserves-mul-iso-Group (group-Ab A) (group-Ab B)
 
-  is-iso-iso-Ab : (f : type-iso-Ab) → is-iso-hom-Ab A B (hom-iso-Ab f)
-  is-iso-iso-Ab = is-iso-iso-Group (group-Ab A) (group-Ab B)
+  is-iso-hom-iso-Ab : (f : type-iso-Ab) → is-iso-hom-Ab A B (hom-iso-Ab f)
+  is-iso-hom-iso-Ab = is-iso-hom-iso-Group (group-Ab A) (group-Ab B)
 
   hom-inv-iso-Ab : type-iso-Ab → type-hom-Ab B A
   hom-inv-iso-Ab = hom-inv-iso-Group (group-Ab A) (group-Ab B)

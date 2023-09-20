@@ -117,7 +117,7 @@ module _
     is-equiv-is-prop
       ( is-set-type-Large-Poset x y)
       ( is-prop-iso-Precategory
-        ( precategory-Large-Poset l) x y (is-prop-leq-Large-Poset x y))
+        ( precategory-Large-Poset l) (is-prop-leq-Large-Poset x y))
       ( λ f →
         antisymmetric-leq-Large-Poset X x y
         ( hom-iso-Precategory (precategory-Large-Poset l) f)

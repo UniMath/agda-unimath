@@ -157,7 +157,7 @@ module _
       ( iso-Precategory (precategory-Category C) x y)
       ( iso-eq-Precategory (precategory-Category C) x y)
       ( is-category-Category C x y)
-      ( is-set-iso-Precategory (precategory-Category C) x y)
+      ( is-set-iso-Precategory (precategory-Category C))
 
   obj-Category-1-Type : 1-Type l1
   pr1 obj-Category-1-Type = obj-Category C
