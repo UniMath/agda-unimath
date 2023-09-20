@@ -33,6 +33,9 @@ open import ring-theory.rings
 The **standard cyclic rings** `ℤ/n` are the [rings](ring-theory.rings.md) of
 [modular arithmetic](elementary-number-theory.modular-arithmetic.md).
 
+The fact that the rings `ℤ/n` are [cyclic](ring-theory.cyclic-rings.md) remains
+to be shown.
+
 ## Definitions
 
 ```agda
