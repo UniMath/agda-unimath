@@ -425,12 +425,12 @@ leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
 refl-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-reflexive (λ l → Subgroup l G) (leq-Subgroup G)
+  is-reflexive-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
 refl-leq-Subgroup G H = refl-leq-subtype (subset-Subgroup G H)
 
 transitive-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-transitive (λ l → Subgroup l G) (leq-Subgroup G)
+  is-transitive-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
 transitive-leq-Subgroup G H K L =
   transitive-leq-subtype
     ( subset-Subgroup G H)
@@ -439,7 +439,7 @@ transitive-leq-Subgroup G H K L =
 
 antisymmetric-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-antisymmetric (λ l → Subgroup l G) (leq-Subgroup G)
+  is-antisymmetric-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
 antisymmetric-leq-Subgroup G H K α β =
   eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
 

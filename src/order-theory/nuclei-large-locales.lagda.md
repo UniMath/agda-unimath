@@ -235,7 +235,7 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   refl-leq-closed-element-nucleus-Large-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( closed-element-nucleus-Large-Locale)
       ( leq-closed-element-nucleus-Large-Locale)
   refl-leq-closed-element-nucleus-Large-Locale =
@@ -244,7 +244,7 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   antisymmetric-leq-closed-element-nucleus-Large-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( closed-element-nucleus-Large-Locale)
       ( leq-closed-element-nucleus-Large-Locale)
   antisymmetric-leq-closed-element-nucleus-Large-Locale =
@@ -253,7 +253,7 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   transitive-leq-closed-element-nucleus-Large-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( closed-element-nucleus-Large-Locale)
       ( leq-closed-element-nucleus-Large-Locale)
   transitive-leq-closed-element-nucleus-Large-Locale =

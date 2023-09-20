@@ -95,16 +95,16 @@ module _
     is-prop-leq-Large-Poset large-poset-Π-Large-Frame
 
   refl-leq-Π-Large-Frame :
-    is-large-reflexive type-Π-Large-Frame leq-Π-Large-Frame
+    is-reflexive-Large-Relation type-Π-Large-Frame leq-Π-Large-Frame
   refl-leq-Π-Large-Frame = refl-leq-Large-Poset large-poset-Π-Large-Frame
 
   antisymmetric-leq-Π-Large-Frame :
-    is-large-antisymmetric type-Π-Large-Frame leq-Π-Large-Frame
+    is-antisymmetric-Large-Relation type-Π-Large-Frame leq-Π-Large-Frame
   antisymmetric-leq-Π-Large-Frame =
     antisymmetric-leq-Large-Poset large-poset-Π-Large-Frame
 
   transitive-leq-Π-Large-Frame :
-    is-large-transitive type-Π-Large-Frame leq-Π-Large-Frame
+    is-transitive-Large-Relation type-Π-Large-Frame leq-Π-Large-Frame
   transitive-leq-Π-Large-Frame =
     transitive-leq-Large-Poset large-poset-Π-Large-Frame
 

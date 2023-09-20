@@ -69,7 +69,8 @@ the nonunital cyclic rings: Cyclic unital rings are
 cyclic nonunital rings are isomorphic to [ideals](ring-theory.ideals-rings.md)
 of quotients of the ring `ℤ` \[1\].
 
-Since cyclic rings are quotients of `ℤ`, it follows that quotients of cyclic rings are cyclic rings.
+Since cyclic rings are quotients of `ℤ`, it follows that quotients of cyclic
+rings are cyclic rings.
 
 ## Definitions
 

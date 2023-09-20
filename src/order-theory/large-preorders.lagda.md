@@ -29,7 +29,9 @@ generality therefore accommodates the inclusion relation on subtypes of
 different universe levels. Many [preorders](order-theory.preorders.md) in
 agda-unimath naturally arise as large preorders.
 
-## Definition
+## Definitions
+
+### Large preorders
 
 ```agda
 record
@@ -40,11 +42,11 @@ record
     type-Large-Preorder : (l : Level) → UU (α l)
     leq-Large-Preorder-Prop : Large-Relation-Prop α β type-Large-Preorder
     refl-leq-Large-Preorder :
-      is-large-reflexive-Large-Relation-Prop
+      is-reflexive-Large-Relation-Prop
         ( type-Large-Preorder)
         ( leq-Large-Preorder-Prop)
     transitive-leq-Large-Preorder :
-      is-large-transitive-Large-Relation-Prop
+      is-transitive-Large-Relation-Prop
         ( type-Large-Preorder)
         ( leq-Large-Preorder-Prop)
 
@@ -74,36 +76,79 @@ module _
   leq-eq-Large-Preorder {x = x} refl = refl-leq-Large-Preorder X x
 ```
 
+### The predicate on large precategories to be a large preorder
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  where
+
+  is-large-preorder-Large-Precategory : UUω
+  is-large-preorder-Large-Precategory =
+    {l1 l2 : Level}
+    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2) →
+    is-prop (type-hom-Large-Precategory C X Y)
+
+  large-preorder-Large-Precategory :
+    is-large-preorder-Large-Precategory → Large-Preorder α β
+  type-Large-Preorder
+    ( large-preorder-Large-Precategory H) =
+    obj-Large-Precategory C
+  pr1 (leq-Large-Preorder-Prop (large-preorder-Large-Precategory H) X Y) =
+    type-hom-Large-Precategory C X Y
+  pr2 (leq-Large-Preorder-Prop (large-preorder-Large-Precategory H) X Y) =
+    H X Y
+  refl-leq-Large-Preorder
+    ( large-preorder-Large-Precategory H)
+    ( X) =
+    id-hom-Large-Precategory C
+  transitive-leq-Large-Preorder
+    ( large-preorder-Large-Precategory H)
+    ( X)
+    ( Y)
+    ( Z) =
+    comp-hom-Large-Precategory C
+```
+
 ## Properties
 
 ### Small preorders from large preorders
 
 ```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Preorder α β)
+  where
+
   preorder-Large-Preorder : (l : Level) → Preorder (α l) (β l l)
-  pr1 (preorder-Large-Preorder l) = type-Large-Preorder X l
-  pr1 (pr2 (preorder-Large-Preorder l)) = leq-Large-Preorder-Prop X
-  pr1 (pr2 (pr2 (preorder-Large-Preorder l))) = refl-leq-Large-Preorder X
-  pr2 (pr2 (pr2 (preorder-Large-Preorder l))) = transitive-leq-Large-Preorder X
+  pr1 (preorder-Large-Preorder l) = type-Large-Preorder P l
+  pr1 (pr2 (preorder-Large-Preorder l)) = leq-Large-Preorder-Prop P
+  pr1 (pr2 (pr2 (preorder-Large-Preorder l))) = refl-leq-Large-Preorder P
+  pr2 (pr2 (pr2 (preorder-Large-Preorder l))) = transitive-leq-Large-Preorder P
 ```
 
 ### Large preorders are large precategories
 
 ```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} (P : Large-Preorder α β)
+  where
+
   large-precategory-Large-Preorder : Large-Precategory α β
-  obj-Large-Precategory large-precategory-Large-Preorder = type-Large-Preorder X
+  obj-Large-Precategory large-precategory-Large-Preorder = type-Large-Preorder P
   hom-Large-Precategory large-precategory-Large-Preorder x y =
-    set-Prop (leq-Large-Preorder-Prop X x y)
+    set-Prop (leq-Large-Preorder-Prop P x y)
   comp-hom-Large-Precategory large-precategory-Large-Preorder {X = x} {y} {z} =
-    transitive-leq-Large-Preorder X x y z
+    transitive-leq-Large-Preorder P x y z
   id-hom-Large-Precategory large-precategory-Large-Preorder {X = x} =
-    refl-leq-Large-Preorder X x
+    refl-leq-Large-Preorder P x
   associative-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {W = w} h g f =
-    eq-is-prop (is-prop-leq-Large-Preorder x w)
+    eq-is-prop (is-prop-leq-Large-Preorder P x w)
   left-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {y} f =
-    eq-is-prop (is-prop-leq-Large-Preorder x y)
+    eq-is-prop (is-prop-leq-Large-Preorder P x y)
   right-unit-law-comp-hom-Large-Precategory large-precategory-Large-Preorder
     {X = x} {y} f =
-    eq-is-prop (is-prop-leq-Large-Preorder x y)
+    eq-is-prop (is-prop-leq-Large-Preorder P x y)
 ```

@@ -16,6 +16,8 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 
+open import order-theory.large-posets
+
 open import ring-theory.cyclic-rings
 open import ring-theory.homomorphisms-cyclic-rings
 open import ring-theory.isomorphisms-rings
@@ -25,9 +27,16 @@ open import ring-theory.isomorphisms-rings
 
 ## Idea
 
-The **large category of cyclic rings** is the [large category](category-theory.large-categories.md) consisting of [cyclic rings](ring-theory.cyclic-rings.md) and [ring homomorphisms](ring-theory.homomorphisms-cyclic-rings.md).
+The **large category of cyclic rings** is the
+[large category](category-theory.large-categories.md) consisting of
+[cyclic rings](ring-theory.cyclic-rings.md) and
+[ring homomorphisms](ring-theory.homomorphisms-cyclic-rings.md).
 
-Note that we already showed that there is at most one ring homomorphism between any two cyclic rings, so it follows that the large category of cyclic rings is in fact a [large poset](order-theory.large-posets.md). The large poset of cyclic rings is constructed in the file [`ring-theory.poset-of-cyclic-rings`](ring-theory.poset-of-cyclic-rings.md).
+Note that we already showed that there is at most one ring homomorphism between
+any two cyclic rings, so it follows that the large category of cyclic rings is
+in fact a [large poset](order-theory.large-posets.md). The large poset of cyclic
+rings is constructed in the file
+[`ring-theory.poset-of-cyclic-rings`](ring-theory.poset-of-cyclic-rings.md).
 
 ## Definition
 
@@ -88,4 +97,15 @@ is-large-category-Large-Category
 ```agda
 Cyclic-Ring-Category : (l : Level) → Category (lsuc l) l
 Cyclic-Ring-Category = category-Large-Category Cyclic-Ring-Large-Category
+```
+
+## Properties
+
+### The large category of cyclic rings is a large poset
+
+```agda
+is-large-poset-Cyclic-Ring-Large-Category :
+  is-large-poset-Large-Category Cyclic-Ring-Large-Category
+is-large-poset-Cyclic-Ring-Large-Category =
+  is-prop-hom-Cyclic-Ring
 ```

@@ -86,15 +86,15 @@ module _
   is-prop-leq-Π-Large-Locale = is-prop-leq-Π-Large-Frame L
 
   refl-leq-Π-Large-Locale :
-    is-large-reflexive type-Π-Large-Locale leq-Π-Large-Locale
+    is-reflexive-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   refl-leq-Π-Large-Locale = refl-leq-Π-Large-Frame L
 
   antisymmetric-leq-Π-Large-Locale :
-    is-large-antisymmetric type-Π-Large-Locale leq-Π-Large-Locale
+    is-antisymmetric-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   antisymmetric-leq-Π-Large-Locale = antisymmetric-leq-Π-Large-Frame L
 
   transitive-leq-Π-Large-Locale :
-    is-large-transitive type-Π-Large-Locale leq-Π-Large-Locale
+    is-transitive-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   transitive-leq-Π-Large-Locale = transitive-leq-Π-Large-Frame L
 
   meet-Π-Large-Locale :

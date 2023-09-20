@@ -25,9 +25,14 @@ open import ring-theory.rings
 
 ## Idea
 
-A **homomorphism** of [cyclic rings](ring-theory.cyclic-rings.md) is simply a [ring homomorphism](ring-theory.homomorphisms-rings.md) between their underlying [rings](ring-theory.rings.md).
+A **homomorphism** of [cyclic rings](ring-theory.cyclic-rings.md) is simply a
+[ring homomorphism](ring-theory.homomorphisms-rings.md) between their underlying
+[rings](ring-theory.rings.md).
 
-For any cyclic ring `R` and any ring `S`, there exists at most one homomorphism from `R` to `S`. We will use this observation in [`ring-theory.poset-of-cyclic-rings`](ring-theory.poset-of-cyclic-rings.md) to construct the [large poset](order-theory.large-posets.md) of cyclic rings.
+For any cyclic ring `R` and any ring `S`, there exists at most one homomorphism
+from `R` to `S`. We will use this observation in
+[`ring-theory.poset-of-cyclic-rings`](ring-theory.poset-of-cyclic-rings.md) to
+construct the [large poset](order-theory.large-posets.md) of cyclic rings.
 
 ## Definitions
 
@@ -82,7 +87,10 @@ module _
 
 ### Given a cyclic ring `R` and a ring `S`, there is at most one ring homomorphism from `R` to `S`
 
-**Proof:** Consider two ring homomorphisms `f g : R → S`. To show that `f ＝ g` it suffices to show that `f x ＝ g x` for all `x : R`. However, by the assumption that `R` is cyclic implies that `x ＝ n1`. Furthermore, every ring homomorphism preserves integer multiplication, so it follows that
+**Proof:** Consider two ring homomorphisms `f g : R → S`. To show that `f ＝ g`
+it suffices to show that `f x ＝ g x` for all `x : R`. However, by the
+assumption that `R` is cyclic implies that `x ＝ n1`. Furthermore, every ring
+homomorphism preserves integer multiplication, so it follows that
 
 ```text
   f x ＝ f (n1) ＝ n (f 1) ＝ n 1 ＝ n (g 1) ＝ g (n1) ＝ g x.
@@ -146,7 +154,7 @@ module _
 module _
   {l1 l2 : Level} (R : Cyclic-Ring l1) (S : Cyclic-Ring l2)
   where
-  
+
   is-prop-hom-Cyclic-Ring :
     is-prop (type-hom-Cyclic-Ring R S)
   is-prop-hom-Cyclic-Ring =
@@ -182,7 +190,7 @@ module _
   (R : Cyclic-Ring l1) (S : Cyclic-Ring l2)
   (T : Cyclic-Ring l3) (U : Cyclic-Ring l4)
   where
-  
+
   associative-comp-hom-Cyclic-Ring :
     (h : type-hom-Cyclic-Ring T U)
     (g : type-hom-Cyclic-Ring S T)

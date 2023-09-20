@@ -118,21 +118,21 @@ module _
     is-prop-leq-Large-Subframe L Q
 
   refl-leq-Large-Quotient-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( type-Large-Quotient-Locale)
       ( leq-Large-Quotient-Locale)
   refl-leq-Large-Quotient-Locale =
     refl-leq-Large-Subframe L Q
 
   transitive-leq-Large-Quotient-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( type-Large-Quotient-Locale)
       ( leq-Large-Quotient-Locale)
   transitive-leq-Large-Quotient-Locale =
     transitive-leq-Large-Subframe L Q
 
   antisymmetric-leq-Large-Quotient-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( type-Large-Quotient-Locale)
       ( leq-Large-Quotient-Locale)
   antisymmetric-leq-Large-Quotient-Locale =

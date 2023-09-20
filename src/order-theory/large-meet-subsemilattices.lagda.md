@@ -170,7 +170,7 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   refl-leq-Large-Meet-Subsemilattice :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( type-Large-Meet-Subsemilattice)
       ( leq-Large-Meet-Subsemilattice)
   refl-leq-Large-Meet-Subsemilattice =
@@ -179,7 +179,7 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   transitive-leq-Large-Meet-Subsemilattice :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( type-Large-Meet-Subsemilattice)
       ( leq-Large-Meet-Subsemilattice)
   transitive-leq-Large-Meet-Subsemilattice =
@@ -188,7 +188,7 @@ module _
       ( large-subposet-Large-Meet-Subsemilattice S)
 
   antisymmetric-leq-Large-Meet-Subsemilattice :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( type-Large-Meet-Subsemilattice)
       ( leq-Large-Meet-Subsemilattice)
   antisymmetric-leq-Large-Meet-Subsemilattice =

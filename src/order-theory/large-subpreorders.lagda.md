@@ -74,11 +74,11 @@ module _
     is-prop-type-Prop (leq-Large-Subpreorder-Prop x y)
 
   refl-leq-Large-Subpreorder :
-    is-large-reflexive type-Large-Subpreorder leq-Large-Subpreorder
+    is-reflexive-Large-Relation type-Large-Subpreorder leq-Large-Subpreorder
   refl-leq-Large-Subpreorder (x , p) = refl-leq-Large-Preorder P x
 
   transitive-leq-Large-Subpreorder :
-    is-large-transitive type-Large-Subpreorder leq-Large-Subpreorder
+    is-transitive-Large-Relation type-Large-Subpreorder leq-Large-Subpreorder
   transitive-leq-Large-Subpreorder (x , p) (y , q) (z , r) =
     transitive-leq-Large-Preorder P x y z
 

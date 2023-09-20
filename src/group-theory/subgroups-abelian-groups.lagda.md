@@ -340,17 +340,17 @@ leq-Subgroup-Ab A = leq-Subgroup (group-Ab A)
 
 refl-leq-Subgroup-Ab :
   {l1 : Level} (A : Ab l1) →
-  is-large-reflexive (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
+  is-reflexive-Large-Relation (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 refl-leq-Subgroup-Ab A = refl-leq-Subgroup (group-Ab A)
 
 transitive-leq-Subgroup-Ab :
   {l1 : Level} (A : Ab l1) →
-  is-large-transitive (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
+  is-transitive-Large-Relation (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 transitive-leq-Subgroup-Ab A = transitive-leq-Subgroup (group-Ab A)
 
 antisymmetric-leq-Subgroup-Ab :
   {l1 : Level} (A : Ab l1) →
-  is-large-antisymmetric (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
+  is-antisymmetric-Large-Relation (λ l → Subgroup-Ab l A) (leq-Subgroup-Ab A)
 antisymmetric-leq-Subgroup-Ab A =
   antisymmetric-leq-Subgroup (group-Ab A)
 

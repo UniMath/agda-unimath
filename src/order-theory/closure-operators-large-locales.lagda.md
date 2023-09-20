@@ -214,7 +214,7 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   refl-leq-closed-element-closure-operator-Large-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( closed-element-closure-operator-Large-Locale)
       ( leq-closed-element-closure-operator-Large-Locale)
   refl-leq-closed-element-closure-operator-Large-Locale =
@@ -223,7 +223,7 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   antisymmetric-leq-closed-element-closure-operator-Large-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( closed-element-closure-operator-Large-Locale)
       ( leq-closed-element-closure-operator-Large-Locale)
   antisymmetric-leq-closed-element-closure-operator-Large-Locale =
@@ -232,7 +232,7 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   transitive-leq-closed-element-closure-operator-Large-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( closed-element-closure-operator-Large-Locale)
       ( leq-closed-element-closure-operator-Large-Locale)
   transitive-leq-closed-element-closure-operator-Large-Locale =

@@ -108,16 +108,17 @@ module _
   leq-eq-Large-Frame =
     leq-eq-Large-Poset (large-poset-Large-Frame L)
 
-  refl-leq-Large-Frame : is-large-reflexive type-Large-Frame leq-Large-Frame
+  refl-leq-Large-Frame :
+    is-reflexive-Large-Relation type-Large-Frame leq-Large-Frame
   refl-leq-Large-Frame = refl-leq-Large-Poset (large-poset-Large-Frame L)
 
   antisymmetric-leq-Large-Frame :
-    is-large-antisymmetric type-Large-Frame leq-Large-Frame
+    is-antisymmetric-Large-Relation type-Large-Frame leq-Large-Frame
   antisymmetric-leq-Large-Frame =
     antisymmetric-leq-Large-Poset (large-poset-Large-Frame L)
 
   transitive-leq-Large-Frame :
-    is-large-transitive type-Large-Frame leq-Large-Frame
+    is-transitive-Large-Relation type-Large-Frame leq-Large-Frame
   transitive-leq-Large-Frame =
     transitive-leq-Large-Poset (large-poset-Large-Frame L)
 

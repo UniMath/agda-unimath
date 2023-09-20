@@ -98,21 +98,21 @@ module _
     is-prop-leq-Large-Locale (powerset-Large-Locale A)
 
   refl-leq-powerset-Large-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( type-powerset-Large-Locale A)
       ( leq-powerset-Large-Locale)
   refl-leq-powerset-Large-Locale =
     refl-leq-Large-Locale (powerset-Large-Locale A)
 
   antisymmetric-leq-powerset-Large-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( type-powerset-Large-Locale A)
       ( leq-powerset-Large-Locale)
   antisymmetric-leq-powerset-Large-Locale =
     antisymmetric-leq-Large-Locale (powerset-Large-Locale A)
 
   transitive-leq-powerset-Large-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( type-powerset-Large-Locale A)
       ( leq-powerset-Large-Locale)
   transitive-leq-powerset-Large-Locale =

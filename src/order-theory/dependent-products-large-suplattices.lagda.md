@@ -93,17 +93,21 @@ module _
     is-prop-leq-Large-Suplattice Π-Large-Suplattice
 
   refl-leq-Π-Large-Suplattice :
-    is-large-reflexive type-Π-Large-Suplattice leq-Π-Large-Suplattice
+    is-reflexive-Large-Relation type-Π-Large-Suplattice leq-Π-Large-Suplattice
   refl-leq-Π-Large-Suplattice =
     refl-leq-Large-Suplattice Π-Large-Suplattice
 
   antisymmetric-leq-Π-Large-Suplattice :
-    is-large-antisymmetric type-Π-Large-Suplattice leq-Π-Large-Suplattice
+    is-antisymmetric-Large-Relation
+      ( type-Π-Large-Suplattice)
+      ( leq-Π-Large-Suplattice)
   antisymmetric-leq-Π-Large-Suplattice =
     antisymmetric-leq-Large-Suplattice Π-Large-Suplattice
 
   transitive-leq-Π-Large-Suplattice :
-    is-large-transitive type-Π-Large-Suplattice leq-Π-Large-Suplattice
+    is-transitive-Large-Relation
+      ( type-Π-Large-Suplattice)
+      ( leq-Π-Large-Suplattice)
   transitive-leq-Π-Large-Suplattice =
     transitive-leq-Large-Suplattice Π-Large-Suplattice
 

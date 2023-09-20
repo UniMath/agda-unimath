@@ -121,17 +121,17 @@ module _
     is-prop-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   refl-leq-Large-Suplattice :
-    is-large-reflexive type-Large-Suplattice leq-Large-Suplattice
+    is-reflexive-Large-Relation type-Large-Suplattice leq-Large-Suplattice
   refl-leq-Large-Suplattice =
     refl-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   antisymmetric-leq-Large-Suplattice :
-    is-large-antisymmetric type-Large-Suplattice leq-Large-Suplattice
+    is-antisymmetric-Large-Relation type-Large-Suplattice leq-Large-Suplattice
   antisymmetric-leq-Large-Suplattice =
     antisymmetric-leq-Large-Poset (large-poset-Large-Suplattice L)
 
   transitive-leq-Large-Suplattice :
-    is-large-transitive type-Large-Suplattice leq-Large-Suplattice
+    is-transitive-Large-Relation type-Large-Suplattice leq-Large-Suplattice
   transitive-leq-Large-Suplattice =
     transitive-leq-Large-Poset (large-poset-Large-Suplattice L)
 

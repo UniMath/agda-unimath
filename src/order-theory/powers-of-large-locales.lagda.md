@@ -81,17 +81,19 @@ module _
     is-prop-leq-Large-Locale power-Large-Locale
 
   refl-leq-power-Large-Locale :
-    is-large-reflexive type-power-Large-Locale leq-power-Large-Locale
+    is-reflexive-Large-Relation type-power-Large-Locale leq-power-Large-Locale
   refl-leq-power-Large-Locale =
     refl-leq-Large-Locale power-Large-Locale
 
   antisymmetric-leq-power-Large-Locale :
-    is-large-antisymmetric type-power-Large-Locale leq-power-Large-Locale
+    is-antisymmetric-Large-Relation
+      ( type-power-Large-Locale)
+      ( leq-power-Large-Locale)
   antisymmetric-leq-power-Large-Locale =
     antisymmetric-leq-Large-Locale power-Large-Locale
 
   transitive-leq-power-Large-Locale :
-    is-large-transitive type-power-Large-Locale leq-power-Large-Locale
+    is-transitive-Large-Relation type-power-Large-Locale leq-power-Large-Locale
   transitive-leq-power-Large-Locale =
     transitive-leq-Large-Locale power-Large-Locale
 

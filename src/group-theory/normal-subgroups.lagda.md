@@ -316,13 +316,17 @@ leq-Normal-Subgroup G H K =
 
 refl-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-reflexive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
+  is-reflexive-Large-Relation
+    ( λ l → Normal-Subgroup l G)
+    ( leq-Normal-Subgroup G)
 refl-leq-Normal-Subgroup G H =
   refl-leq-Subgroup G (subgroup-Normal-Subgroup G H)
 
 transitive-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-transitive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
+  is-transitive-Large-Relation
+    ( λ l → Normal-Subgroup l G)
+    ( leq-Normal-Subgroup G)
 transitive-leq-Normal-Subgroup G H K L =
   transitive-leq-Subgroup G
     ( subgroup-Normal-Subgroup G H)
@@ -331,7 +335,9 @@ transitive-leq-Normal-Subgroup G H K L =
 
 antisymmetric-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-antisymmetric (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
+  is-antisymmetric-Large-Relation
+    ( λ l → Normal-Subgroup l G)
+    ( leq-Normal-Subgroup G)
 antisymmetric-leq-Normal-Subgroup G H K α β =
   eq-has-same-elements-Normal-Subgroup G H K (λ x → (α x , β x))
 

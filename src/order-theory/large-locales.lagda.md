@@ -81,16 +81,16 @@ module _
   leq-eq-Large-Locale = leq-eq-Large-Frame L
 
   refl-leq-Large-Locale :
-    is-large-reflexive type-Large-Locale leq-Large-Locale
+    is-reflexive-Large-Relation type-Large-Locale leq-Large-Locale
   refl-leq-Large-Locale = refl-leq-Large-Frame L
 
   antisymmetric-leq-Large-Locale :
-    is-large-antisymmetric type-Large-Locale leq-Large-Locale
+    is-antisymmetric-Large-Relation type-Large-Locale leq-Large-Locale
   antisymmetric-leq-Large-Locale =
     antisymmetric-leq-Large-Frame L
 
   transitive-leq-Large-Locale :
-    is-large-transitive type-Large-Locale leq-Large-Locale
+    is-transitive-Large-Relation type-Large-Locale leq-Large-Locale
   transitive-leq-Large-Locale =
     transitive-leq-Large-Frame L
 
