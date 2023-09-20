@@ -1,8 +1,6 @@
 # Relatively prime natural numbers
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module elementary-number-theory.relatively-prime-natural-numbers where
 ```
 
@@ -180,15 +178,4 @@ module _
       ( a)
       ( b)
       ( is-one-is-common-divisor-is-prime-ℕ)
-```
-
-### Two natural numbers `a` and `b > 0` are relatively prime if and only if `a` is a multiplicative unit module `b`
-
-```agda
-is-relatively-prime-is-unit-ℤ-Mod :
-  (a n : ℕ) →
-  is-invertible-element-Ring (ℤ-Mod-Ring n) (mod-ℕ n a) →
-  is-relatively-prime-ℕ a n
-is-relatively-prime-is-unit-ℤ-Mod a zero-ℕ (d , p , q) = {!!}
-is-relatively-prime-is-unit-ℤ-Mod a (succ-ℕ n) (d , p , q) = {!!}
 ```

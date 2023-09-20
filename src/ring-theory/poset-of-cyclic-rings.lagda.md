@@ -22,6 +22,10 @@ The **large poset** of [cyclic rings](ring-theory.cyclic-rings.md) is just the
 [large category of cyclic rings](ring-theory.category-of-cyclic-rings.md), which
 happens to be a [large poset](order-theory.large-posets.md).
 
+The large poset of cyclic rings is dual to the large poset of
+[subgroups](group-theory.subgroups.md) of the
+[group of integers](elementary-number-theory.group-of-integers.md).
+
 ## Definition
 
 ### The large poset of cyclic rings

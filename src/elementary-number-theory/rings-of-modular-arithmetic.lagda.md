@@ -12,14 +12,26 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.ring-of-integers
 
+open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
+open import ring-theory.cyclic-rings
+open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
 ```
 
 </details>
+
+## Idea
+
+The **standard cyclic rings** `ℤ/n` are the [rings](ring-theory.rings.md) of
+[modular arithmetic](elementary-number-theory.modular-arithmetic.md).
 
 ## Definitions
 
