@@ -268,14 +268,14 @@ module _
 
     dependent-cofork-dependent-cocone-codiagonal :
       dependent-cocone
-        ( ∇ A)
+        ( codiagonal A)
         ( ind-coprod (λ _ → B) f g)
         ( cocone-codiagonal-cofork f g e)
         ( P) →
       dependent-cofork f g e P
     pr1 (dependent-cofork-dependent-cocone-codiagonal k) =
       vertical-map-dependent-cocone
-        ( ∇ A)
+        ( codiagonal A)
         ( ind-coprod (λ _ → B) f g)
         ( cocone-codiagonal-cofork f g e)
         ( P)
@@ -285,14 +285,14 @@ module _
         ( ap
           ( tr P (coherence-cofork f g e a))
           ( coherence-square-dependent-cocone
-            ( ∇ A)
+            ( codiagonal A)
             ( ind-coprod (λ _ → B) f g)
             ( cocone-codiagonal-cofork f g e)
             ( P)
             ( k)
             ( inl a))) ∙
       coherence-square-dependent-cocone
-        ( ∇ A)
+        ( codiagonal A)
         ( ind-coprod (λ _ → B) f g)
         ( cocone-codiagonal-cofork f g e)
         ( P)
@@ -302,7 +302,7 @@ module _
     dependent-cocone-codiagonal-dependent-cofork :
       dependent-cofork f g e P →
       dependent-cocone
-        ( ∇ A)
+        ( codiagonal A)
         ( ind-coprod (λ _ → B) f g)
         ( cocone-codiagonal-cofork f g e)
         ( P)
@@ -333,7 +333,7 @@ module _
         ( id)
       is-retraction-dependent-cocone-codiagonal-dependent-cofork d =
         eq-htpy-dependent-cocone
-          ( ∇ A)
+          ( codiagonal A)
           ( ind-coprod (λ _ → B) f g)
           ( cocone-codiagonal-cofork f g e)
           ( P)
@@ -342,7 +342,7 @@ module _
           ( d)
           ( inv-htpy
             ( ( coherence-square-dependent-cocone
-                ( ∇ A)
+                ( codiagonal A)
                 ( ind-coprod (λ _ → B) f g)
                 ( cocone-codiagonal-cofork f g e)
                 ( P)
@@ -356,7 +356,7 @@ module _
                     ( ( ap
                         ( _∙
                           coherence-square-dependent-cocone
-                            ( ∇ A)
+                            ( codiagonal A)
                             ( ind-coprod (λ _ → B) f g)
                             ( cocone-codiagonal-cofork f g e)
                             ( P)
@@ -365,7 +365,7 @@ module _
                         ( ap-id
                           ( inv
                             ( coherence-square-dependent-cocone
-                              ( ∇ A)
+                              ( codiagonal A)
                               ( ind-coprod (λ _ → B) f g)
                               ( cocone-codiagonal-cofork f g e)
                               ( P)
@@ -373,7 +373,7 @@ module _
                               ( inl a))))) ∙
                       ( left-inv
                         ( coherence-square-dependent-cocone
-                              ( ∇ A)
+                              ( codiagonal A)
                               ( ind-coprod (λ _ → B) f g)
                               ( cocone-codiagonal-cofork f g e)
                               ( P)
@@ -383,7 +383,7 @@ module _
                   ap
                     ( _∙
                       coherence-square-dependent-cocone
-                        ( ∇ A)
+                        ( codiagonal A)
                         ( ind-coprod (λ _ → B) f g)
                         ( cocone-codiagonal-cofork f g e)
                         ( P)
@@ -393,7 +393,7 @@ module _
                       ( ap-inv
                         ( tr P (coherence-cofork f g e a))
                         ( coherence-square-dependent-cocone
-                          ( ∇ A)
+                          ( codiagonal A)
                           ( ind-coprod (λ _ → B) f g)
                           ( cocone-codiagonal-cofork f g e)
                           ( P)
@@ -410,7 +410,7 @@ module _
 
     equiv-dependent-cofork-dependent-cocone-codiagonal :
       dependent-cocone
-        ( ∇ A)
+        ( codiagonal A)
         ( ind-coprod (λ _ → B) f g)
         ( cocone-codiagonal-cofork f g e)
         ( P) ≃
@@ -426,7 +426,7 @@ module _
       ( dependent-cofork-map f g e)
       ( dependent-cofork-dependent-cocone-codiagonal P)
       ( dependent-cocone-map
-        ( ∇ A)
+        ( codiagonal A)
         ( ind-coprod (λ _ → B) f g)
         ( cocone-codiagonal-cofork f g e)
         ( P))
@@ -435,7 +435,7 @@ module _
       ( dependent-cofork-map f g e h)
       ( dependent-cofork-dependent-cocone-codiagonal P
         ( dependent-cocone-map
-          ( ∇ A)
+          ( codiagonal A)
           ( ind-coprod (λ _ → B) f g)
           ( cocone-codiagonal-cofork f g e)
           ( P)

@@ -213,7 +213,7 @@ The type of coforks of parallel pairs is equivalent to the type of
 [cocones](synthetic-homotopy-theory.cocones-under-spans.md) under the span
 
 ```text
-    ∇        [f,g]
+     ∇         [f,g]
 A <----- A + A -----> B.
 ```
 
@@ -227,19 +227,26 @@ module _
     where
 
     cofork-cocone-codiagonal :
-      cocone (∇ A) (ind-coprod (λ _ → B) f g) X →
+      cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X →
       cofork f g X
     pr1 (cofork-cocone-codiagonal c) =
-      vertical-map-cocone (∇ A) (ind-coprod (λ _ → B) f g) c
+      vertical-map-cocone (codiagonal A) (ind-coprod (λ _ → B) f g) c
     pr2 (cofork-cocone-codiagonal c) =
       ( ( inv-htpy
-          ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c)) ·r
+          ( coherence-square-cocone
+            ( codiagonal A)
+            ( ind-coprod (λ _ → B) f g)
+            ( c))) ·r
         ( inl)) ∙h
-      ( ( coherence-square-cocone (∇ A) (ind-coprod (λ _ → B) f g) c) ·r inr)
+      ( ( coherence-square-cocone
+          ( codiagonal A)
+          ( ind-coprod (λ _ → B) f g)
+          ( c)) ·r
+        ( inr))
 
     cocone-codiagonal-cofork :
       cofork f g X →
-      cocone (∇ A) (ind-coprod (λ _ → B) f g) X
+      cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X
     pr1 (cocone-codiagonal-cofork e) = map-cofork f g e ∘ f
     pr1 (pr2 (cocone-codiagonal-cofork e)) = map-cofork f g e
     pr2 (pr2 (cocone-codiagonal-cofork e)) (inl a) = refl
@@ -258,13 +265,13 @@ module _
         cocone-codiagonal-cofork ∘ cofork-cocone-codiagonal ~ id
       is-retraction-cocone-codiagonal-fork c =
         eq-htpy-cocone
-          ( ∇ A)
+          ( codiagonal A)
           ( ind-coprod (λ _ → B) f g)
           ( cocone-codiagonal-cofork (cofork-cocone-codiagonal c))
           ( c)
           ( ( ( inv-htpy
                 ( coherence-square-cocone
-                  ( ∇ A)
+                  ( codiagonal A)
                   ( ind-coprod (λ _ → B) f g)
                   ( c))) ·r
               ( inl)) ,
@@ -273,7 +280,7 @@ module _
                   inv
                     ( left-inv
                       ( coherence-square-cocone
-                        ( ∇ A)
+                        ( codiagonal A)
                         ( ind-coprod (λ _ → B) f g)
                         ( c)
                         ( inl a)))
@@ -288,48 +295,48 @@ module _
         ( is-retraction-cocone-codiagonal-fork)
 
     equiv-cocone-codiagonal-cofork :
-      cocone (∇ A) (ind-coprod (λ _ → B) f g) X ≃
+      cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X ≃
       cofork f g X
     pr1 equiv-cocone-codiagonal-cofork = cofork-cocone-codiagonal
     pr2 equiv-cocone-codiagonal-cofork = is-equiv-cofork-cocone-codiagonal
 
   triangle-cofork-cocone :
     { l3 l4 : Level} {X : UU l3} {Y : UU l4} →
-    ( c : cocone (∇ A) (ind-coprod (λ _ → B) f g) X) →
+    ( c : cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X) →
     coherence-triangle-maps
       ( cofork-map f g (cofork-cocone-codiagonal c) {Y = Y})
       ( cofork-cocone-codiagonal)
-      ( cocone-map (∇ A) (ind-coprod (λ _ → B) f g) c)
+      ( cocone-map (codiagonal A) (ind-coprod (λ _ → B) f g) c)
   triangle-cofork-cocone c h =
     eq-htpy-cofork f g
       ( cofork-map f g (cofork-cocone-codiagonal c) h)
       ( cofork-cocone-codiagonal
-        ( cocone-map (∇ A) (ind-coprod (λ _ → B) f g) c h))
+        ( cocone-map (codiagonal A) (ind-coprod (λ _ → B) f g) c h))
       ( refl-htpy ,
         ( right-unit-htpy ∙h
           ( λ a →
             ( ap-concat h
               ( inv
                 ( coherence-square-cocone
-                  ( ∇ A)
+                  ( codiagonal A)
                   ( ind-coprod (λ _ → B) f g)
                   ( c)
                   ( inl a)))
               ( coherence-square-cocone
-                ( ∇ A)
+                ( codiagonal A)
                 ( ind-coprod (λ _ → B) f g)
                 ( c)
                 ( inr a))) ∙
             ( identification-right-whisk
               ( ap-inv h
                 ( coherence-square-cocone
-                  ( ∇ A)
+                  ( codiagonal A)
                   ( ind-coprod (λ _ → B) f g)
                   ( c)
                   ( inl a)))
               ( ap h
                 ( coherence-square-cocone
-                  ( ∇ A)
+                  ( codiagonal A)
                   ( ind-coprod (λ _ → B) f g)
                   ( c)
                   ( inr a)))))))

@@ -26,7 +26,7 @@ module _
   { l1 : Level} (A : UU l1)
   where
 
-  ∇ : A + A → A
-  ∇ (inl a) = a
-  ∇ (inr a) = a
+  codiagonal : A + A → A
+  codiagonal (inl a) = a
+  codiagonal (inr a) = a
 ```
