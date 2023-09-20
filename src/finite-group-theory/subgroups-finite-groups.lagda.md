@@ -73,8 +73,8 @@ module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (P : decidable-subset-Group-𝔽 l2 G)
   where
 
-  contains-unit-decidable-subset-finite-group-Prop : Prop l2
-  contains-unit-decidable-subset-finite-group-Prop =
+  contains-unit-prop-decidable-subset-Group-𝔽 : Prop l2
+  contains-unit-prop-decidable-subset-Group-𝔽 =
     contains-unit-prop-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
@@ -92,9 +92,8 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-multiplication-decidable-subset-finite-group-Prop :
-    Prop (l1 ⊔ l2)
-  is-closed-under-multiplication-decidable-subset-finite-group-Prop =
+  is-closed-under-multiplication-prop-decidable-subset-Group-𝔽 : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-decidable-subset-Group-𝔽 =
     is-closed-under-multiplication-prop-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
