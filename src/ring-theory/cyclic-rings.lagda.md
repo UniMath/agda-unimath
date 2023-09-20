@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.universe-levels
 
@@ -85,6 +86,27 @@ module _
 
   is-prop-is-cyclic-Ring : is-prop is-cyclic-Ring
   is-prop-is-cyclic-Ring = is-prop-is-cyclic-Group (group-Ring R)
+```
+
+### The predicate of the initial morphism being surjective
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-surjective-initial-hom-prop-Ring : Prop l
+  is-surjective-initial-hom-prop-Ring =
+    is-surjective-Prop (map-initial-hom-Ring R)
+
+  is-surjective-initial-hom-Ring : UU l
+  is-surjective-initial-hom-Ring =
+    type-Prop is-surjective-initial-hom-prop-Ring
+
+  is-prop-is-surjective-initial-hom-Ring :
+    is-prop is-surjective-initial-hom-Ring
+  is-prop-is-surjective-initial-hom-Ring =
+    is-prop-type-Prop is-surjective-initial-hom-prop-Ring
 ```
 
 ### Cyclic rings
@@ -296,7 +318,7 @@ module _
 
   abstract
     is-surjective-initial-hom-Cyclic-Ring :
-      is-surjective (map-initial-hom-Ring (ring-Cyclic-Ring R))
+      is-surjective-initial-hom-Ring (ring-Cyclic-Ring R)
     is-surjective-initial-hom-Cyclic-Ring x =
       apply-universal-property-trunc-Prop
         ( is-cyclic-Cyclic-Ring R)
@@ -355,6 +377,34 @@ module _
         ( group-Cyclic-Ring R)
         ( one-Cyclic-Ring R)
         ( is-surjective-initial-hom-Cyclic-Ring)
+```
+
+### The classification of cyclic rings
+
+```agda
+module _
+  {l : Level}
+  where
+
+  is-cyclic-is-surjective-initial-hom-Ring :
+    (R : Ring l) →
+    is-surjective-initial-hom-Ring R → is-cyclic-Ring R
+  is-cyclic-is-surjective-initial-hom-Ring R H =
+    unit-trunc-Prop
+      ( one-Ring R ,
+        is-generating-element-is-surjective-hom-element-Group
+          ( group-Ring R)
+          ( one-Ring R)
+          ( H))
+
+  classification-Cyclic-Ring :
+    Cyclic-Ring l ≃ Σ (Ring l) is-surjective-initial-hom-Ring
+  classification-Cyclic-Ring =
+    equiv-type-subtype
+      ( is-prop-is-cyclic-Ring)
+      ( is-prop-is-surjective-initial-hom-Ring)
+      ( λ R H → is-surjective-initial-hom-Cyclic-Ring (R , H))
+      ( is-cyclic-is-surjective-initial-hom-Ring)
 ```
 
 ### If `R` is a cyclic ring, then any invertible element is a generator of its additive group
