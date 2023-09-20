@@ -72,13 +72,13 @@ module _
   is-set-type-Π-Large-Suplattice =
     is-set-type-Large-Suplattice Π-Large-Suplattice
 
-  leq-Π-Large-Suplattice-Prop :
+  leq-prop-Π-Large-Suplattice :
     Large-Relation-Prop
       ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Suplattice)
-  leq-Π-Large-Suplattice-Prop =
-    leq-Large-Suplattice-Prop Π-Large-Suplattice
+  leq-prop-Π-Large-Suplattice =
+    leq-prop-Large-Suplattice Π-Large-Suplattice
 
   leq-Π-Large-Suplattice :
     {l2 l3 : Level}

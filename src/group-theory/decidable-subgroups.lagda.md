@@ -65,7 +65,7 @@ module _
 
   contains-unit-prop-decidable-subset-Group : Prop l2
   contains-unit-prop-decidable-subset-Group =
-    contains-unit-subset-group-Prop G (subset-decidable-subset-Group G P)
+    contains-unit-prop-subset-Group G (subset-decidable-subset-Group G P)
 
   contains-unit-decidable-subset-Group : UU l2
   contains-unit-decidable-subset-Group =
@@ -78,7 +78,7 @@ module _
 
   is-closed-under-multiplication-prop-decidable-subset-Group : Prop (l1 ⊔ l2)
   is-closed-under-multiplication-prop-decidable-subset-Group =
-    is-closed-under-multiplication-subset-group-Prop G
+    is-closed-under-multiplication-prop-subset-Group G
       ( subset-decidable-subset-Group G P)
 
   is-closed-under-multiplication-decidable-subset-Group : UU (l1 ⊔ l2)
@@ -94,7 +94,7 @@ module _
 
   is-closed-under-inverses-prop-decidable-subset-Group : Prop (l1 ⊔ l2)
   is-closed-under-inverses-prop-decidable-subset-Group =
-    is-closed-under-inverses-subset-group-Prop G
+    is-closed-under-inverses-prop-subset-Group G
       ( subset-decidable-subset-Group G P)
 
   is-closed-under-inverses-decidable-subset-Group : UU (l1 ⊔ l2)
@@ -109,7 +109,7 @@ module _
 
   is-subgroup-prop-decidable-subset-Group : Prop (l1 ⊔ l2)
   is-subgroup-prop-decidable-subset-Group =
-    is-subgroup-subset-group-Prop G (subset-decidable-subset-Group G P)
+    is-subgroup-prop-subset-Group G (subset-decidable-subset-Group G P)
 
   is-subgroup-decidable-subset-Group : UU (l1 ⊔ l2)
   is-subgroup-decidable-subset-Group =

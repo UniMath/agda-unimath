@@ -59,13 +59,13 @@ module _
   is-set-type-power-Large-Locale =
     is-set-type-Large-Locale power-Large-Locale
 
-  leq-power-Large-Locale-Prop :
+  leq-prop-power-Large-Locale :
     Large-Relation-Prop
       ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-power-Large-Locale)
-  leq-power-Large-Locale-Prop =
-    leq-Large-Locale-Prop power-Large-Locale
+  leq-prop-power-Large-Locale =
+    leq-prop-Large-Locale power-Large-Locale
 
   leq-power-Large-Locale :
     Large-Relation

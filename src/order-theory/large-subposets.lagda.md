@@ -86,10 +86,10 @@ module _
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
-  leq-Large-Subposet-Prop :
+  leq-prop-Large-Subposet :
     Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subposet
-  leq-Large-Subposet-Prop =
-    leq-Large-Subpreorder-Prop
+  leq-prop-Large-Subposet =
+    leq-prop-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 

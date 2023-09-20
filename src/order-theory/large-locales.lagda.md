@@ -65,8 +65,8 @@ module _
   is-set-type-Large-Locale : {l : Level} → is-set (type-Large-Locale l)
   is-set-type-Large-Locale = is-set-type-Large-Frame L
 
-  leq-Large-Locale-Prop : Large-Relation-Prop α β type-Large-Locale
-  leq-Large-Locale-Prop = leq-Large-Frame-Prop L
+  leq-prop-Large-Locale : Large-Relation-Prop α β type-Large-Locale
+  leq-prop-Large-Locale = leq-prop-Large-Frame L
 
   leq-Large-Locale : Large-Relation α β type-Large-Locale
   leq-Large-Locale = leq-Large-Frame L

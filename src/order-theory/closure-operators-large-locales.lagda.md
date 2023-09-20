@@ -190,10 +190,10 @@ module _
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
-  leq-closed-element-closure-operator-Large-Locale-Prop :
+  leq-prop-closed-element-closure-operator-Large-Locale :
     Large-Relation-Prop α β closed-element-closure-operator-Large-Locale
-  leq-closed-element-closure-operator-Large-Locale-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-closed-element-closure-operator-Large-Locale =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 

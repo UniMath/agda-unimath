@@ -40,13 +40,13 @@ module _
   type-Π-Large-Poset =
     type-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
-  leq-Π-Large-Poset-Prop :
+  leq-prop-Π-Large-Poset :
     Large-Relation-Prop
       ( λ l1 → α l1 ⊔ l)
       ( λ l1 l2 → β l1 l2 ⊔ l)
       ( type-Π-Large-Poset)
-  leq-Π-Large-Poset-Prop =
-    leq-Π-Large-Preorder-Prop (λ i → large-preorder-Large-Poset (P i))
+  leq-prop-Π-Large-Poset =
+    leq-prop-Π-Large-Preorder (λ i → large-preorder-Large-Poset (P i))
 
   leq-Π-Large-Poset :
     Large-Relation

@@ -40,15 +40,15 @@ record
     make-Large-Preorder
   field
     type-Large-Preorder : (l : Level) → UU (α l)
-    leq-Large-Preorder-Prop : Large-Relation-Prop α β type-Large-Preorder
+    leq-prop-Large-Preorder : Large-Relation-Prop α β type-Large-Preorder
     refl-leq-Large-Preorder :
       is-reflexive-Large-Relation-Prop
         ( type-Large-Preorder)
-        ( leq-Large-Preorder-Prop)
+        ( leq-prop-Large-Preorder)
     transitive-leq-Large-Preorder :
       is-transitive-Large-Relation-Prop
         ( type-Large-Preorder)
-        ( leq-Large-Preorder-Prop)
+        ( leq-prop-Large-Preorder)
 
 open Large-Preorder public
 
@@ -60,14 +60,14 @@ module _
   leq-Large-Preorder =
     type-Large-Relation-Prop
       ( type-Large-Preorder X)
-      ( leq-Large-Preorder-Prop X)
+      ( leq-prop-Large-Preorder X)
 
   is-prop-leq-Large-Preorder :
     is-prop-Large-Relation (type-Large-Preorder X) (leq-Large-Preorder)
   is-prop-leq-Large-Preorder =
     is-prop-type-Large-Relation-Prop
       ( type-Large-Preorder X)
-      ( leq-Large-Preorder-Prop X)
+      ( leq-prop-Large-Preorder X)
 
   leq-eq-Large-Preorder :
     {l1 : Level}
@@ -95,9 +95,9 @@ module _
   type-Large-Preorder
     ( large-preorder-Large-Precategory H) =
     obj-Large-Precategory C
-  pr1 (leq-Large-Preorder-Prop (large-preorder-Large-Precategory H) X Y) =
+  pr1 (leq-prop-Large-Preorder (large-preorder-Large-Precategory H) X Y) =
     type-hom-Large-Precategory C X Y
-  pr2 (leq-Large-Preorder-Prop (large-preorder-Large-Precategory H) X Y) =
+  pr2 (leq-prop-Large-Preorder (large-preorder-Large-Precategory H) X Y) =
     H X Y
   refl-leq-Large-Preorder
     ( large-preorder-Large-Precategory H)
@@ -122,7 +122,7 @@ module _
 
   preorder-Large-Preorder : (l : Level) → Preorder (α l) (β l l)
   pr1 (preorder-Large-Preorder l) = type-Large-Preorder P l
-  pr1 (pr2 (preorder-Large-Preorder l)) = leq-Large-Preorder-Prop P
+  pr1 (pr2 (preorder-Large-Preorder l)) = leq-prop-Large-Preorder P
   pr1 (pr2 (pr2 (preorder-Large-Preorder l))) = refl-leq-Large-Preorder P
   pr2 (pr2 (pr2 (preorder-Large-Preorder l))) = transitive-leq-Large-Preorder P
 ```
@@ -137,7 +137,7 @@ module _
   large-precategory-Large-Preorder : Large-Precategory α β
   obj-Large-Precategory large-precategory-Large-Preorder = type-Large-Preorder P
   hom-Large-Precategory large-precategory-Large-Preorder x y =
-    set-Prop (leq-Large-Preorder-Prop P x y)
+    set-Prop (leq-prop-Large-Preorder P x y)
   comp-hom-Large-Precategory large-precategory-Large-Preorder {X = x} {y} {z} =
     transitive-leq-Large-Preorder P x y z
   id-hom-Large-Precategory large-precategory-Large-Preorder {X = x} =

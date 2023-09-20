@@ -74,13 +74,13 @@ module _
   is-set-type-Π-Large-Frame =
     is-set-type-Large-Poset large-poset-Π-Large-Frame
 
-  leq-Π-Large-Frame-Prop :
+  leq-prop-Π-Large-Frame :
     Large-Relation-Prop
       ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Frame)
-  leq-Π-Large-Frame-Prop =
-    leq-Large-Poset-Prop large-poset-Π-Large-Frame
+  leq-prop-Π-Large-Frame =
+    leq-prop-Large-Poset large-poset-Π-Large-Frame
 
   leq-Π-Large-Frame :
     Large-Relation

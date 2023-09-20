@@ -298,11 +298,11 @@ module _
 ### The containment relation of normal subgroups
 
 ```agda
-leq-Normal-Subgroup-Prop :
+leq-prop-Normal-Subgroup :
   {l1 l2 l3 : Level} (G : Group l1) →
   Normal-Subgroup l2 G → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-leq-Normal-Subgroup-Prop G H K =
-  leq-Subgroup-Prop G
+leq-prop-Normal-Subgroup G H K =
+  leq-prop-Subgroup G
     ( subgroup-Normal-Subgroup G H)
     ( subgroup-Normal-Subgroup G K)
 
@@ -346,8 +346,8 @@ Normal-Subgroup-Large-Preorder :
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Normal-Subgroup-Large-Preorder G) l2 =
   Normal-Subgroup l2 G
-leq-Large-Preorder-Prop (Normal-Subgroup-Large-Preorder G) H K =
-  leq-Normal-Subgroup-Prop G H K
+leq-prop-Large-Preorder (Normal-Subgroup-Large-Preorder G) H K =
+  leq-prop-Normal-Subgroup G H K
 refl-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
   refl-leq-Normal-Subgroup G
 transitive-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =

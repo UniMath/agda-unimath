@@ -58,8 +58,8 @@ module _
   type-Large-Poset : (l : Level) → UU (α l)
   type-Large-Poset = type-Large-Preorder (large-preorder-Large-Poset X)
 
-  leq-Large-Poset-Prop : Large-Relation-Prop α β (type-Large-Poset)
-  leq-Large-Poset-Prop = leq-Large-Preorder-Prop (large-preorder-Large-Poset X)
+  leq-prop-Large-Poset : Large-Relation-Prop α β (type-Large-Poset)
+  leq-prop-Large-Poset = leq-prop-Large-Preorder (large-preorder-Large-Poset X)
 
   leq-Large-Poset : Large-Relation α β (type-Large-Poset)
   leq-Large-Poset = leq-Large-Preorder (large-preorder-Large-Poset X)

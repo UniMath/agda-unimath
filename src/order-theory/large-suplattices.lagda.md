@@ -106,10 +106,10 @@ module _
   is-set-type-Large-Suplattice =
     is-set-type-Large-Poset (large-poset-Large-Suplattice L)
 
-  leq-Large-Suplattice-Prop :
+  leq-prop-Large-Suplattice :
     Large-Relation-Prop α β type-Large-Suplattice
-  leq-Large-Suplattice-Prop =
-    leq-Large-Poset-Prop (large-poset-Large-Suplattice L)
+  leq-prop-Large-Suplattice =
+    leq-prop-Large-Poset (large-poset-Large-Suplattice L)
 
   leq-Large-Suplattice :
     Large-Relation α β type-Large-Suplattice

@@ -73,14 +73,13 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  leq-powerset-Large-Locale-Prop :
+  leq-prop-powerset-Large-Locale :
     Large-Relation-Prop
       ( λ l2 → l1 ⊔ lsuc l2)
       ( λ l2 l3 → l1 ⊔ l2 ⊔ l3)
       ( type-powerset-Large-Locale A)
-
-  leq-powerset-Large-Locale-Prop =
-    leq-Large-Locale-Prop (powerset-Large-Locale A)
+  leq-prop-powerset-Large-Locale =
+    leq-prop-Large-Locale (powerset-Large-Locale A)
 
   leq-powerset-Large-Locale :
     Large-Relation

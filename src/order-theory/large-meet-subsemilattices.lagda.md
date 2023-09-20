@@ -146,10 +146,10 @@ module _
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 
-  leq-Large-Meet-Subsemilattice-Prop :
+  leq-prop-Large-Meet-Subsemilattice :
     Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Meet-Subsemilattice
-  leq-Large-Meet-Subsemilattice-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-Large-Meet-Subsemilattice =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Meet-Semilattice L)
       ( large-subposet-Large-Meet-Subsemilattice S)
 

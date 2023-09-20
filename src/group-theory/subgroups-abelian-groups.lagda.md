@@ -328,10 +328,10 @@ module _
 ### The containment relation of subgroups of abelian groups
 
 ```agda
-leq-Subgroup-Ab-Prop :
+leq-prop-Subgroup-Ab :
   {l1 l2 l3 : Level} (A : Ab l1) →
   Subgroup-Ab l2 A → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-leq-Subgroup-Ab-Prop A = leq-Subgroup-Prop (group-Ab A)
+leq-prop-Subgroup-Ab A = leq-prop-Subgroup (group-Ab A)
 
 leq-Subgroup-Ab :
   {l1 l2 l3 : Level} (A : Ab l1) →

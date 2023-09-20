@@ -81,10 +81,10 @@ module _
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
-  leq-Large-Subsuplattice-Prop :
+  leq-prop-Large-Subsuplattice :
     Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subsuplattice
-  leq-Large-Subsuplattice-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-Large-Subsuplattice =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 

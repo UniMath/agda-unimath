@@ -211,10 +211,10 @@ module _
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
-  leq-closed-element-nucleus-Large-Locale-Prop :
+  leq-prop-closed-element-nucleus-Large-Locale :
     Large-Relation-Prop α β closed-element-nucleus-Large-Locale
-  leq-closed-element-nucleus-Large-Locale-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-closed-element-nucleus-Large-Locale =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
