@@ -69,7 +69,6 @@ module _
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { X : UU l4} (P : X → UU l5)
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( dup-pushout : {l : Level} → dependent-universal-property-pushout l f g c)
   where
 
   horizontal-map-cocone-flattening-pushout :
@@ -114,6 +113,7 @@ module _
 
   flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
+    ( { l : Level} → dependent-universal-property-pushout l f g c) →
     { l : Level} →
     universal-property-pushout l
       ( map-Σ-map-base f (P ∘ horizontal-map-cocone f g c))
@@ -137,7 +137,6 @@ module _
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   { X : UU l4} (P : X → UU l5)
   ( f : S → A) (g : S → B) (c : cocone f g X)
-  ( dup-pushout : {l : Level} → dependent-universal-property-pushout l f g c)
   where
 
   cocone-map-flattening-pushout :
@@ -157,7 +156,7 @@ module _
         ( P ∘ vertical-map-cocone f g c)
         ( g)
         ( λ s → tr P (coherence-square-cocone f g c s)))
-      ( cocone-flattening-pushout P f g c dup-pushout)
+      ( cocone-flattening-pushout P f g c)
 
   comparison-dependent-cocone-ind-Σ-cocone :
     { l : Level} (Y : UU l) →
@@ -200,8 +199,8 @@ module _
               ( h)))))
 
   flattening-lemma-pushout :
-    flattening-lemma-pushout-statement P f g c dup-pushout
-  flattening-lemma-pushout Y =
+    flattening-lemma-pushout-statement P f g c
+  flattening-lemma-pushout dup-pushout Y =
     is-equiv-left-factor
       ( cocone-map-flattening-pushout Y)
       ( ind-Σ)
