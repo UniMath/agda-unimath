@@ -116,7 +116,8 @@ module _
   type-iso-Semigroup = iso-Large-Precategory Semigroup-Large-Precategory G H
 
   hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
-  hom-iso-Semigroup = hom-iso-Large-Precategory Semigroup-Large-Precategory G H
+  hom-iso-Semigroup =
+    hom-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
   map-iso-Semigroup : type-iso-Semigroup → type-Semigroup G → type-Semigroup H
   map-iso-Semigroup f = map-hom-Semigroup G H (hom-iso-Semigroup f)
@@ -131,11 +132,11 @@ module _
   is-iso-iso-Semigroup :
     (f : type-iso-Semigroup) → is-iso-hom-Semigroup G H (hom-iso-Semigroup f)
   is-iso-iso-Semigroup =
-    is-iso-iso-Large-Precategory Semigroup-Large-Precategory G H
+    is-iso-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
   hom-inv-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup H G
   hom-inv-iso-Semigroup =
-    hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+    hom-inv-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
   map-inv-iso-Semigroup :
     type-iso-Semigroup → type-Semigroup H → type-Semigroup G
@@ -154,7 +155,10 @@ module _
     comp-hom-Semigroup H G H (hom-iso-Semigroup f) (hom-inv-iso-Semigroup f) ＝
     id-hom-Semigroup H
   is-section-hom-inv-iso-Semigroup =
-    is-section-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+    is-section-hom-inv-iso-Large-Precategory
+      ( Semigroup-Large-Precategory)
+      { X = G}
+      { Y = H}
 
   is-section-map-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
@@ -172,7 +176,10 @@ module _
     comp-hom-Semigroup G H G (hom-inv-iso-Semigroup f) (hom-iso-Semigroup f) ＝
     id-hom-Semigroup G
   is-retraction-hom-inv-iso-Semigroup =
-    is-retraction-hom-inv-iso-Large-Precategory Semigroup-Large-Precategory G H
+    is-retraction-hom-inv-iso-Large-Precategory
+      ( Semigroup-Large-Precategory)
+      { X = G}
+      { Y = H}
 
   is-retraction-map-inv-iso-Semigroup :
     (f : type-iso-Semigroup) →
@@ -199,12 +206,18 @@ module _
     is-prop-is-iso-hom-Semigroup :
       (f : type-hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup G H f)
     is-prop-is-iso-hom-Semigroup =
-      is-prop-is-iso-hom-Large-Precategory Semigroup-Large-Precategory G H
+      is-prop-is-iso-hom-Large-Precategory
+        ( Semigroup-Large-Precategory)
+        { X = G}
+        { Y = H}
 
   is-iso-prop-hom-Semigroup :
     type-hom-Semigroup G H → Prop (l1 ⊔ l2)
   is-iso-prop-hom-Semigroup =
-    is-iso-prop-hom-Large-Precategory Semigroup-Large-Precategory G H
+    is-iso-prop-hom-Large-Precategory
+      ( Semigroup-Large-Precategory)
+      { X = G}
+      { Y = H}
 ```
 
 ### The inverse of an equivalence of semigroups preserves the binary operation

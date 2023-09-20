@@ -255,7 +255,8 @@ module _
 
   comp-iso-Group :
     type-iso-Group H K → type-iso-Group G H → type-iso-Group G K
-  comp-iso-Group = comp-iso-Large-Precategory Group-Large-Precategory G H K
+  comp-iso-Group =
+    comp-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H} {Z = K}
 ```
 
 ### Group isomorphisms are stable by inversion
@@ -266,5 +267,6 @@ module _
   where
 
   inv-iso-Group : type-iso-Group G H → type-iso-Group H G
-  inv-iso-Group = inv-iso-Large-Precategory Group-Large-Precategory G H
+  inv-iso-Group =
+    inv-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H}
 ```

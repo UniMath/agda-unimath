@@ -103,16 +103,6 @@ module _
     type-hom-Precategory x z
   comp-hom-Precategory' f g = comp-hom-Precategory g f
 
-  precomp-hom-Precategory :
-    {x y : obj-Precategory} (f : type-hom-Precategory x y)
-    (z : obj-Precategory) → type-hom-Precategory y z → type-hom-Precategory x z
-  precomp-hom-Precategory f z g = comp-hom-Precategory g f
-
-  postcomp-hom-Precategory :
-    {x y : obj-Precategory} (f : type-hom-Precategory x y)
-    (z : obj-Precategory) → type-hom-Precategory z x → type-hom-Precategory z y
-  postcomp-hom-Precategory f z = comp-hom-Precategory f
-
   associative-comp-hom-Precategory :
     {x y z w : obj-Precategory}
     (h : type-hom-Precategory z w)
@@ -143,6 +133,26 @@ module _
     comp-hom-Precategory f id-hom-Precategory ＝ f
   right-unit-law-comp-hom-Precategory =
     pr2 (pr2 is-unital-composition-structure-Precategory)
+```
+
+### Precomposition by a morphism
+
+```agda
+precomp-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
+  (f : type-hom-Precategory C x y) (z : obj-Precategory C) →
+  type-hom-Precategory C y z → type-hom-Precategory C x z
+precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
+```
+
+### Postcomposition by a morphism
+
+```agda
+postcomp-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
+  (f : type-hom-Precategory C x y) (z : obj-Precategory C) →
+  type-hom-Precategory C z x → type-hom-Precategory C z y
+postcomp-hom-Precategory C f z = comp-hom-Precategory C f
 ```
 
 ## Properties
