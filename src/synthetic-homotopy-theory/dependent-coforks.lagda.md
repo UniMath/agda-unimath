@@ -350,8 +350,8 @@ module _
               ( inl)) ,
             ( refl-htpy) ,
             ( right-unit-htpy ∙h
-              ( λ
-                { (inl a) →
+              ( λ {
+                (inl a) →
                   inv
                     ( ( ap
                         ( _∙
@@ -378,8 +378,8 @@ module _
                               ( cocone-codiagonal-cofork f g e)
                               ( P)
                               ( d)
-                              ( inl a))))
-                ; (inr a) →
+                              ( inl a)))) ;
+                (inr a) →
                   ap
                     ( _∙
                       coherence-square-dependent-cocone
