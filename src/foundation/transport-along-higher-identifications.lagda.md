@@ -1,7 +1,7 @@
 # Higher transport along identifications
 
 ```agda
-module foundation.higher-transport-along-identifications where
+module foundation.transport-along-higher-identifications where
 ```
 
 <details><summary>Imports</summary>
