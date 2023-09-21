@@ -42,6 +42,7 @@ open import structured-types.types-equipped-with-endomorphisms
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import foundation.surjective-maps
 ```
 
 </details>
@@ -787,4 +788,12 @@ is-decidable-div-ℤ d x =
       ( abs-ℤ d)
       ( mod-ℤ (abs-ℤ d) x)
       ( zero-ℤ-Mod (abs-ℤ d)))
+```
+
+### `mod-ℤ` is surjective
+
+```agda
+is-surjective-mod-ℤ : (n : ℕ) → is-surjective (mod-ℤ n)
+is-surjective-mod-ℤ zero-ℕ = is-surjective-id
+is-surjective-mod-ℤ (succ-ℕ n) = is-surjective-left-factor (inr ∘ inr) λ x → {!   !}
 ```

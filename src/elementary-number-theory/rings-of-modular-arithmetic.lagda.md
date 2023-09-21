@@ -24,6 +24,9 @@ open import foundation.universe-levels
 open import ring-theory.cyclic-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
+open import foundation.existential-quantification
+open import group-theory.generating-elements-groups
+open import foundation.surjective-maps
 ```
 
 </details>
@@ -52,4 +55,37 @@ pr2 (pr2 (pr2 (pr2 (ℤ-Mod-Ring n)))) = right-distributive-mul-add-ℤ-Mod n
 ℤ-Mod-Commutative-Ring : ℕ → Commutative-Ring lzero
 pr1 (ℤ-Mod-Commutative-Ring n) = ℤ-Mod-Ring n
 pr2 (ℤ-Mod-Commutative-Ring n) = commutative-mul-ℤ-Mod n
+```
+
+## Properties
+
+### Rings of modular arithmetic are cyclic
+
+**Proof:**
+
+```agda
+compute-integer-multiple-one-ℤ-Mod :
+  ( n : ℕ) →
+  ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n)) ~
+  ( mod-ℤ n)
+compute-integer-multiple-one-ℤ-Mod = {!   !}
+
+is-surjective-hom-element-one-ℤ-Mod-Ring :
+  (n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
+is-surjective-hom-element-one-ℤ-Mod-Ring n = is-surjective-htpy (compute-integer-multiple-one-ℤ-Mod n) {!   !}
+
+is-generating-element-one-ℤ-Mod-Ring :
+  (n : ℕ) → is-generating-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
+is-generating-element-one-ℤ-Mod-Ring n =
+  is-generating-element-is-surjective-hom-element-Group
+    ( ℤ-Mod-Group n)
+    ( one-ℤ-Mod n)
+    ( is-surjective-hom-element-one-ℤ-Mod-Ring n)
+
+is-cyclic-ℤ-Mod-Ring :
+  (n : ℕ) → is-cyclic-Ring (ℤ-Mod-Ring n)
+is-cyclic-ℤ-Mod-Ring n =
+  intro-∃
+    ( one-ℤ-Mod n)
+    ( is-generating-element-one-ℤ-Mod-Ring n)
 ```
