@@ -39,11 +39,12 @@ module _
   obj-Π-Precategory : UU (l1 ⊔ l2)
   obj-Π-Precategory = (i : I) → obj-Precategory (C i)
 
-  hom-Π-Precategory : obj-Π-Precategory → obj-Π-Precategory → Set (l1 ⊔ l3)
-  hom-Π-Precategory x y = Π-Set' I (λ i → hom-set-Precategory (C i) (x i) (y i))
+  hom-set-Π-Precategory : obj-Π-Precategory → obj-Π-Precategory → Set (l1 ⊔ l3)
+  hom-set-Π-Precategory x y =
+    Π-Set' I (λ i → hom-set-Precategory (C i) (x i) (y i))
 
   hom-Π-Precategory : obj-Π-Precategory → obj-Π-Precategory → UU (l1 ⊔ l3)
-  hom-Π-Precategory x y = type-Set (hom-Π-Precategory x y)
+  hom-Π-Precategory x y = type-Set (hom-set-Π-Precategory x y)
 
   comp-hom-Π-Precategory :
     {x y z : obj-Π-Precategory} →
@@ -63,7 +64,7 @@ module _
     eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
 
   associative-composition-structure-Π-Precategory :
-    associative-composition-structure-Set hom-Π-Precategory
+    associative-composition-structure-Set hom-set-Π-Precategory
   pr1 associative-composition-structure-Π-Precategory = comp-hom-Π-Precategory
   pr2 associative-composition-structure-Π-Precategory =
     associative-comp-hom-Π-Precategory
@@ -86,7 +87,7 @@ module _
 
   is-unital-Π-Precategory :
     is-unital-composition-structure-Set
-      hom-Π-Precategory
+      hom-set-Π-Precategory
       associative-composition-structure-Π-Precategory
   pr1 is-unital-Π-Precategory x = id-hom-Π-Precategory
   pr1 (pr2 is-unital-Π-Precategory) = left-unit-law-comp-hom-Π-Precategory
@@ -94,7 +95,7 @@ module _
 
   Π-Precategory : Precategory (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Precategory = obj-Π-Precategory
-  pr1 (pr2 Π-Precategory) = hom-Π-Precategory
+  pr1 (pr2 Π-Precategory) = hom-set-Π-Precategory
   pr1 (pr2 (pr2 Π-Precategory)) =
     associative-composition-structure-Π-Precategory
   pr2 (pr2 (pr2 Π-Precategory)) = is-unital-Π-Precategory

@@ -39,9 +39,9 @@ module _
   obj-function-Precategory : UU (l1 ⊔ l2)
   obj-function-Precategory = obj-Precategory function-Precategory
 
-  hom-function-Precategory :
+  hom-set-function-Precategory :
     obj-function-Precategory → obj-function-Precategory → Set (l1 ⊔ l3)
-  hom-function-Precategory = hom-set-Precategory function-Precategory
+  hom-set-function-Precategory = hom-set-Precategory function-Precategory
 
   hom-function-Precategory :
     obj-function-Precategory → obj-function-Precategory → UU (l1 ⊔ l3)
@@ -65,7 +65,7 @@ module _
     associative-comp-hom-Precategory function-Precategory
 
   associative-composition-structure-function-Precategory :
-    associative-composition-structure-Set hom-function-Precategory
+    associative-composition-structure-Set hom-set-function-Precategory
   associative-composition-structure-function-Precategory =
     associative-composition-structure-Precategory function-Precategory
 
@@ -88,7 +88,7 @@ module _
 
   is-unital-function-Precategory :
     is-unital-composition-structure-Set
-      hom-function-Precategory
+      hom-set-function-Precategory
       associative-composition-structure-function-Precategory
   is-unital-function-Precategory =
     is-unital-composition-structure-Precategory function-Precategory

@@ -59,9 +59,9 @@ module _
   obj-Π-Category : UU (l1 ⊔ l2)
   obj-Π-Category = obj-Category Π-Category
 
-  hom-Π-Category :
+  hom-set-Π-Category :
     obj-Π-Category → obj-Π-Category → Set (l1 ⊔ l3)
-  hom-Π-Category = hom-set-Category Π-Category
+  hom-set-Π-Category = hom-set-Category Π-Category
 
   hom-Π-Category :
     obj-Π-Category → obj-Π-Category → UU (l1 ⊔ l3)
@@ -85,7 +85,7 @@ module _
     associative-comp-hom-Category Π-Category
 
   associative-composition-structure-Π-Category :
-    associative-composition-structure-Set hom-Π-Category
+    associative-composition-structure-Set hom-set-Π-Category
   associative-composition-structure-Π-Category =
     associative-composition-structure-Category Π-Category
 
@@ -108,7 +108,7 @@ module _
 
   is-unital-Π-Category :
     is-unital-composition-structure-Set
-      hom-Π-Category
+      hom-set-Π-Category
       associative-composition-structure-Π-Category
   is-unital-Π-Category = is-unital-composition-structure-Category Π-Category
 

@@ -47,9 +47,9 @@ module _
   obj-function-Category : UU (l1 ⊔ l2)
   obj-function-Category = obj-Category function-Category
 
-  hom-function-Category :
+  hom-set-function-Category :
     obj-function-Category → obj-function-Category → Set (l1 ⊔ l3)
-  hom-function-Category = hom-set-Category function-Category
+  hom-set-function-Category = hom-set-Category function-Category
 
   hom-function-Category :
     obj-function-Category → obj-function-Category → UU (l1 ⊔ l3)
@@ -73,7 +73,7 @@ module _
     associative-comp-hom-Category function-Category
 
   associative-composition-structure-function-Category :
-    associative-composition-structure-Set hom-function-Category
+    associative-composition-structure-Set hom-set-function-Category
   associative-composition-structure-function-Category =
     associative-composition-structure-Category function-Category
 
@@ -96,7 +96,7 @@ module _
 
   is-unital-function-Category :
     is-unital-composition-structure-Set
-      hom-function-Category
+      hom-set-function-Category
       associative-composition-structure-function-Category
   is-unital-function-Category =
     is-unital-composition-structure-Category function-Category
