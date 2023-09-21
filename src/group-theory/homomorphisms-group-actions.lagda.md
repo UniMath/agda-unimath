@@ -180,9 +180,9 @@ module _
   (Y : Abstract-Group-Action G l3)
   where
 
-  is-set-type-hom-Abstract-Group-Action :
+  is-set-hom-Abstract-Group-Action :
     is-set (type-hom-Abstract-Group-Action G X Y)
-  is-set-type-hom-Abstract-Group-Action f g =
+  is-set-hom-Abstract-Group-Action f g =
     is-prop-equiv
       ( extensionality-hom-Abstract-Group-Action G X Y f g)
       ( is-prop-Π
@@ -193,7 +193,7 @@ module _
 
   hom-set-Abstract-Group-Action : Set (l1 ⊔ l2 ⊔ l3)
   pr1 hom-set-Abstract-Group-Action = type-hom-Abstract-Group-Action G X Y
-  pr2 hom-set-Abstract-Group-Action = is-set-type-hom-Abstract-Group-Action
+  pr2 hom-set-Abstract-Group-Action = is-set-hom-Abstract-Group-Action
 ```
 
 ### Composition is associative

@@ -72,9 +72,9 @@ module _
   type-hom-Ring-𝔽 =
     type-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
 
-  is-set-type-hom-Ring-𝔽 : is-set type-hom-Ring-𝔽
-  is-set-type-hom-Ring-𝔽 =
-    is-set-type-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
+  is-set-hom-Ring-𝔽 : is-set type-hom-Ring-𝔽
+  is-set-hom-Ring-𝔽 =
+    is-set-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
 
   module _
     (f : type-hom-Ring-𝔽)

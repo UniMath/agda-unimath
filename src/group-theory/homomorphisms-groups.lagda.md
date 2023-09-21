@@ -132,13 +132,13 @@ module _
   eq-htpy-hom-Group =
     eq-htpy-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  is-set-type-hom-Group : is-set (type-hom-Group G H)
-  is-set-type-hom-Group =
-    is-set-type-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
+  is-set-hom-Group : is-set (type-hom-Group G H)
+  is-set-hom-Group =
+    is-set-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   hom-set-Group : Set (l1 ⊔ l2)
   pr1 hom-set-Group = type-hom-Group G H
-  pr2 hom-set-Group = is-set-type-hom-Group
+  pr2 hom-set-Group = is-set-hom-Group
 ```
 
 ### Associativity of composition of group homomorphisms

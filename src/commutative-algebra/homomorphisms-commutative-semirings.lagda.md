@@ -48,9 +48,9 @@ module _
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
 
-  is-set-type-hom-Commutative-Semiring : is-set type-hom-Commutative-Semiring
-  is-set-type-hom-Commutative-Semiring =
-    is-set-type-hom-Semiring
+  is-set-hom-Commutative-Semiring : is-set type-hom-Commutative-Semiring
+  is-set-hom-Commutative-Semiring =
+    is-set-hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
 

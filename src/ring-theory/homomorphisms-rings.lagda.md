@@ -128,8 +128,8 @@ module _
   type-hom-Ring : UU (l1 ⊔ l2)
   type-hom-Ring = type-Set hom-set-Ring
 
-  is-set-type-hom-Ring : is-set type-hom-Ring
-  is-set-type-hom-Ring = is-set-type-Set hom-set-Ring
+  is-set-hom-Ring : is-set type-hom-Ring
+  is-set-hom-Ring = is-set-type-Set hom-set-Ring
 
   module _
     (f : type-hom-Ring)

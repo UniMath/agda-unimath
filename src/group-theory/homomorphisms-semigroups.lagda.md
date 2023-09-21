@@ -147,8 +147,8 @@ module _
   eq-htpy-hom-Semigroup {f} {g} =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Semigroup f g)
 
-  is-set-type-hom-Semigroup : is-set type-hom-Semigroup
-  is-set-type-hom-Semigroup f g =
+  is-set-hom-Semigroup : is-set type-hom-Semigroup
+  is-set-hom-Semigroup f g =
     is-prop-is-equiv
       ( is-equiv-htpy-eq-hom-Semigroup f g)
       ( is-prop-Π
@@ -159,7 +159,7 @@ module _
 
   hom-set-Semigroup : Set (l1 ⊔ l2)
   pr1 hom-set-Semigroup = type-hom-Semigroup
-  pr2 hom-set-Semigroup = is-set-type-hom-Semigroup
+  pr2 hom-set-Semigroup = is-set-hom-Semigroup
 
 preserves-mul-id-Semigroup :
   {l : Level} (G : Semigroup l) → preserves-mul-Semigroup G G id

@@ -49,9 +49,9 @@ module _
   type-hom-Cyclic-Ring : UU (l1 ⊔ l2)
   type-hom-Cyclic-Ring = type-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
 
-  is-set-type-hom-Cyclic-Ring : is-set type-hom-Cyclic-Ring
-  is-set-type-hom-Cyclic-Ring =
-    is-set-type-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
+  is-set-hom-Cyclic-Ring : is-set type-hom-Cyclic-Ring
+  is-set-hom-Cyclic-Ring =
+    is-set-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
 ```
 
 ### The identity homomorphism of cyclic rings

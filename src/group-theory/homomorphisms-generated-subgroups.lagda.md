@@ -197,7 +197,7 @@ module _
             ( λ S → map-restriction-generating-subset-Subgroup g S)))
       ( λ p →
         eq-is-prop
-          ( is-set-type-hom-Group
+          ( is-set-hom-Group
             ( group-Subgroup G (subgroup-subset-Group G S))
             ( G')
             ( f)

@@ -68,8 +68,8 @@ module _
   type-hom-Meet-Semilattice : UU (l1 ⊔ l2)
   type-hom-Meet-Semilattice = type-Set hom-set-Meet-Semilattice
 
-  is-set-type-hom-Meet-Semilattice : is-set type-hom-Meet-Semilattice
-  is-set-type-hom-Meet-Semilattice = is-set-type-Set hom-set-Meet-Semilattice
+  is-set-hom-Meet-Semilattice : is-set type-hom-Meet-Semilattice
+  is-set-hom-Meet-Semilattice = is-set-type-Set hom-set-Meet-Semilattice
 
   module _
     (f : type-hom-Meet-Semilattice)

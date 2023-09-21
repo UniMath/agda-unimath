@@ -77,9 +77,9 @@ module _
   type-hom-Commutative-Ring =
     type-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
 
-  is-set-type-hom-Commutative-Ring : is-set type-hom-Commutative-Ring
-  is-set-type-hom-Commutative-Ring =
-    is-set-type-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
+  is-set-hom-Commutative-Ring : is-set type-hom-Commutative-Ring
+  is-set-hom-Commutative-Ring =
+    is-set-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
 
   module _
     (f : type-hom-Commutative-Ring)

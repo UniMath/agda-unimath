@@ -90,8 +90,8 @@ module _
   type-hom-Semiring : UU (l1 ⊔ l2)
   type-hom-Semiring = type-Set hom-set-Semiring
 
-  is-set-type-hom-Semiring : is-set type-hom-Semiring
-  is-set-type-hom-Semiring = is-set-type-Set hom-set-Semiring
+  is-set-hom-Semiring : is-set type-hom-Semiring
+  is-set-hom-Semiring = is-set-type-Set hom-set-Semiring
 
   module _
     (f : type-hom-Semiring)

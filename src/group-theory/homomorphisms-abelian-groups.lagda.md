@@ -111,7 +111,7 @@ module _
   eq-htpy-hom-Ab = eq-htpy-hom-Group (group-Ab A) (group-Ab B)
 
   is-set-hom-Ab : is-set (type-hom-Ab A B)
-  is-set-hom-Ab = is-set-type-hom-Group (group-Ab A) (group-Ab B)
+  is-set-hom-Ab = is-set-hom-Group (group-Ab A) (group-Ab B)
 ```
 
 ### The identity morphism of abelian groups
