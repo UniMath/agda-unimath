@@ -40,7 +40,7 @@ least subgroup of `H` that contains all the values of `f`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   (K : Subgroup l3 H)
   where
 
@@ -55,7 +55,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   subset-image-hom-Group : subset-Group (l1 ⊔ l2) H
@@ -132,7 +132,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   is-surjective-is-full-subgroup-image-hom-Group :

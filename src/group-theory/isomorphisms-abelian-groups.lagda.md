@@ -38,7 +38,7 @@ underlying [groups](group-theory.groups.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
   is-iso-hom-Ab : UU (l1 ⊔ l2)
@@ -51,7 +51,7 @@ module _
   is-iso-prop-hom-Ab : Prop (l1 ⊔ l2)
   is-iso-prop-hom-Ab = is-iso-prop-hom-Group (group-Ab A) (group-Ab B) f
 
-  hom-inv-is-iso-hom-Ab : is-iso-hom-Ab → type-hom-Ab B A
+  hom-inv-is-iso-hom-Ab : is-iso-hom-Ab → hom-Ab B A
   hom-inv-is-iso-hom-Ab = hom-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
 
   map-inv-is-iso-hom-Ab : is-iso-hom-Ab → type-Ab B → type-Ab A
@@ -95,7 +95,7 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
 
-  is-equiv-hom-Ab : type-hom-Ab A B → UU (l1 ⊔ l2)
+  is-equiv-hom-Ab : hom-Ab A B → UU (l1 ⊔ l2)
   is-equiv-hom-Ab =
     is-equiv-hom-Group (group-Ab A) (group-Ab B)
 
@@ -113,7 +113,7 @@ module _
   type-iso-Ab : UU (l1 ⊔ l2)
   type-iso-Ab = type-iso-Group (group-Ab A) (group-Ab B)
 
-  hom-iso-Ab : type-iso-Ab → type-hom-Ab A B
+  hom-iso-Ab : type-iso-Ab → hom-Ab A B
   hom-iso-Ab = hom-iso-Group (group-Ab A) (group-Ab B)
 
   map-iso-Ab : type-iso-Ab → type-Ab A → type-Ab B
@@ -128,7 +128,7 @@ module _
   is-iso-hom-iso-Ab : (f : type-iso-Ab) → is-iso-hom-Ab A B (hom-iso-Ab f)
   is-iso-hom-iso-Ab = is-iso-hom-iso-Group (group-Ab A) (group-Ab B)
 
-  hom-inv-iso-Ab : type-iso-Ab → type-hom-Ab B A
+  hom-inv-iso-Ab : type-iso-Ab → hom-Ab B A
   hom-inv-iso-Ab = hom-inv-iso-Group (group-Ab A) (group-Ab B)
 
   map-inv-iso-Ab : type-iso-Ab → type-Ab B → type-Ab A
@@ -217,11 +217,11 @@ module _
   where
 
   is-iso-is-equiv-hom-Ab :
-    (f : type-hom-Ab A B) → is-equiv-hom-Ab A B f → is-iso-hom-Ab A B f
+    (f : hom-Ab A B) → is-equiv-hom-Ab A B f → is-iso-hom-Ab A B f
   is-iso-is-equiv-hom-Ab = is-iso-is-equiv-hom-Group (group-Ab A) (group-Ab B)
 
   is-equiv-is-iso-hom-Ab :
-    (f : type-hom-Ab A B) → is-iso-hom-Ab A B f → is-equiv-hom-Ab A B f
+    (f : hom-Ab A B) → is-iso-hom-Ab A B f → is-equiv-hom-Ab A B f
   is-equiv-is-iso-hom-Ab = is-equiv-is-iso-hom-Group (group-Ab A) (group-Ab B)
 
   equiv-iso-equiv-Ab : equiv-Ab A B ≃ type-iso-Ab A B

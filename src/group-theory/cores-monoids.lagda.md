@@ -140,7 +140,7 @@ module _
     preserves-mul-inclusion-Submonoid M submonoid-core-Monoid
 
   hom-inclusion-core-Monoid :
-    type-hom-Monoid monoid-core-Monoid M
+    hom-Monoid monoid-core-Monoid M
   hom-inclusion-core-Monoid =
     hom-inclusion-Submonoid M submonoid-core-Monoid
 ```
@@ -153,7 +153,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : type-hom-Monoid M N)
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
   map-core-hom-Monoid : type-core-Monoid M → type-core-Monoid N
@@ -170,7 +170,7 @@ module _
       ( subtype-core-Monoid N)
       ( preserves-mul-hom-Monoid M N f (pr1 x) (pr1 y))
 
-  hom-core-hom-Monoid : type-hom-Group (core-Monoid M) (core-Monoid N)
+  hom-core-hom-Monoid : hom-Group (core-Monoid M) (core-Monoid N)
   pr1 hom-core-hom-Monoid = map-core-hom-Monoid
   pr2 hom-core-hom-Monoid = preserves-mul-hom-core-hom-Monoid
 
@@ -207,7 +207,7 @@ module _
   where
 
   preserves-comp-hom-core-hom-Monoid :
-    (g : type-hom-Monoid N K) (f : type-hom-Monoid M N) →
+    (g : hom-Monoid N K) (f : hom-Monoid M N) →
     hom-core-hom-Monoid M K (comp-hom-Monoid M N K g f) ＝
     comp-hom-Group
       ( core-Monoid M)

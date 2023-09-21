@@ -155,7 +155,7 @@ module _
         ( inv (is-retraction-map-inv-iso-Ab (ab-Ring R) A f y)))
 
   hom-iso-transport-ring-structure-iso-Ab :
-    type-hom-Ring R transport-ring-structure-iso-Ab
+    hom-Ring R transport-ring-structure-iso-Ab
   pr1 hom-iso-transport-ring-structure-iso-Ab =
     hom-iso-Ab (ab-Ring R) A f
   pr1 (pr2 hom-iso-transport-ring-structure-iso-Ab) =

@@ -362,7 +362,7 @@ module _
   preserves-inverses-inclusion-Subgroup x = refl
 
   hom-inclusion-Subgroup :
-    type-hom-Group (group-Subgroup G H) G
+    hom-Group (group-Subgroup G H) G
   pr1 hom-inclusion-Subgroup = inclusion-Subgroup G H
   pr2 hom-inclusion-Subgroup = preserves-mul-inclusion-Subgroup
 ```

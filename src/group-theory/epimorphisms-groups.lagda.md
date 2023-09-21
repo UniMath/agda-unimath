@@ -39,7 +39,7 @@ implies `g = h`.
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (G : Group l1)
-  (H : Group l2) (f : type-hom-Group G H)
+  (H : Group l2) (f : hom-Group G H)
   where
 
   is-epi-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)

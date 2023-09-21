@@ -285,7 +285,7 @@ module _
   {l : Level} (A : Ab l) (k : ℤ)
   where
 
-  hom-integer-multiple-Ab : type-hom-Ab A A
+  hom-integer-multiple-Ab : hom-Ab A A
   pr1 hom-integer-multiple-Ab = integer-multiple-Ab A k
   pr2 hom-integer-multiple-Ab = left-distributive-integer-multiple-add-Ab A k
 ```
@@ -319,7 +319,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
   preserves-integer-multiples-hom-Ab :
@@ -330,11 +330,11 @@ module _
     preserves-integer-powers-hom-Group (group-Ab A) (group-Ab B) f
 
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
   eq-integer-multiple-hom-Ab :
-    (g : type-hom-Ab A B) (k : ℤ) (x : type-Ab A) →
+    (g : hom-Ab A B) (k : ℤ) (x : type-Ab A) →
     ( map-hom-Ab A B f x ＝ map-hom-Ab A B g x) →
     ( map-hom-Ab A B f (integer-multiple-Ab A k x) ＝
       map-hom-Ab A B g (integer-multiple-Ab A k x))

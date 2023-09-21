@@ -104,7 +104,7 @@ module _
 
   hom-group-hom-Concrete-Group :
     hom-Concrete-Group →
-    type-hom-Group
+    hom-Group
       ( abstract-group-Concrete-Group G)
       ( abstract-group-Concrete-Group H)
   hom-group-hom-Concrete-Group f =

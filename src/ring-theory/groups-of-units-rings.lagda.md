@@ -144,7 +144,7 @@ module _
     preserves-mul-inclusion-core-Monoid (multiplicative-monoid-Ring R)
 
   hom-inclusion-group-of-units-Ring :
-    type-hom-Monoid monoid-group-of-units-Ring (multiplicative-monoid-Ring R)
+    hom-Monoid monoid-group-of-units-Ring (multiplicative-monoid-Ring R)
   hom-inclusion-group-of-units-Ring =
     hom-inclusion-core-Monoid (multiplicative-monoid-Ring R)
 ```
@@ -157,7 +157,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   map-group-of-units-hom-Ring :
@@ -181,7 +181,7 @@ module _
       ( hom-multiplicative-monoid-hom-Ring R S f)
 
   hom-group-of-units-hom-Ring :
-    type-hom-Group (group-of-units-Ring R) (group-of-units-Ring S)
+    hom-Group (group-of-units-Ring R) (group-of-units-Ring S)
   hom-group-of-units-hom-Ring =
     hom-core-hom-Monoid
       ( multiplicative-monoid-Ring R)
@@ -226,7 +226,7 @@ module _
   where
 
   preserves-comp-hom-group-of-units-hom-Ring :
-    (g : type-hom-Ring S T) (f : type-hom-Ring R S) →
+    (g : hom-Ring S T) (f : hom-Ring R S) →
     hom-group-of-units-hom-Ring R T (comp-hom-Ring R S T g f) ＝
     comp-hom-Group
       ( group-of-units-Ring R)

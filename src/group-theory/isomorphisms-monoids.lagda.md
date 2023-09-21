@@ -36,7 +36,7 @@ An **isomorphism** of [monoids](group-theory.monoids.md) is an invertible
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : type-hom-Monoid M N)
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
   is-iso-hom-Monoid : UU (l1 ⊔ l2)
@@ -44,7 +44,7 @@ module _
     is-iso-hom-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N} f
 
   hom-inv-is-iso-hom-Monoid :
-    is-iso-hom-Monoid → type-hom-Monoid N M
+    is-iso-hom-Monoid → hom-Monoid N M
   hom-inv-is-iso-hom-Monoid =
     hom-inv-is-iso-hom-Large-Precategory
       ( Monoid-Large-Precategory)
@@ -87,7 +87,7 @@ module _
     iso-Large-Precategory Monoid-Large-Precategory M N
 
   hom-iso-Monoid :
-    iso-Monoid → type-hom-Monoid M N
+    iso-Monoid → hom-Monoid M N
   hom-iso-Monoid =
     hom-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 
@@ -109,7 +109,7 @@ module _
     is-iso-hom-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 
   hom-inv-iso-Monoid :
-    iso-Monoid → type-hom-Monoid N M
+    iso-Monoid → hom-Monoid N M
   hom-inv-iso-Monoid =
     hom-inv-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 
@@ -215,7 +215,7 @@ module _
   where
 
   is-prop-is-iso-hom-Monoid :
-    (f : type-hom-Monoid M N) →
+    (f : hom-Monoid M N) →
     is-prop (is-iso-hom-Monoid M N f)
   is-prop-is-iso-hom-Monoid =
     is-prop-is-iso-hom-Large-Precategory
@@ -223,7 +223,7 @@ module _
       { X = M}
       { Y = N}
   is-iso-prop-hom-Monoid :
-    (f : type-hom-Monoid M N) → Prop (l1 ⊔ l2)
+    (f : hom-Monoid M N) → Prop (l1 ⊔ l2)
   is-iso-prop-hom-Monoid =
     is-iso-prop-hom-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 ```
@@ -255,7 +255,7 @@ module _
   (g : iso-Monoid N K) (f : iso-Monoid M N)
   where
 
-  hom-comp-iso-Monoid : type-hom-Monoid M K
+  hom-comp-iso-Monoid : hom-Monoid M K
   hom-comp-iso-Monoid =
     hom-comp-iso-Large-Precategory
       ( Monoid-Large-Precategory)

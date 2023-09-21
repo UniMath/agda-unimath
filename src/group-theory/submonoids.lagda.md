@@ -177,7 +177,7 @@ module _
   preserves-mul-inclusion-Submonoid x y = refl
 
   hom-inclusion-Submonoid :
-    type-hom-Monoid monoid-Submonoid M
+    hom-Monoid monoid-Submonoid M
   pr1 (pr1 hom-inclusion-Submonoid) = inclusion-Submonoid
   pr2 (pr1 hom-inclusion-Submonoid) = preserves-mul-inclusion-Submonoid
   pr2 hom-inclusion-Submonoid = preserves-unit-inclusion-Submonoid

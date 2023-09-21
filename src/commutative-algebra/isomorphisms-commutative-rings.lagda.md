@@ -46,7 +46,7 @@ commutative rings.
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A B)
+  (f : hom-Commutative-Ring A B)
   where
 
   is-iso-prop-hom-Commutative-Ring : Prop (l1 ⊔ l2)
@@ -71,7 +71,7 @@ module _
       ( f)
 
   hom-inv-is-iso-hom-Commutative-Ring :
-    is-iso-hom-Commutative-Ring → type-hom-Commutative-Ring B A
+    is-iso-hom-Commutative-Ring → hom-Commutative-Ring B A
   hom-inv-is-iso-hom-Commutative-Ring =
     hom-inv-is-iso-hom-Ring
       ( ring-Commutative-Ring A)
@@ -139,7 +139,7 @@ module _
       ( ring-Commutative-Ring B)
 
   hom-iso-Commutative-Ring :
-    iso-Commutative-Ring → type-hom-Commutative-Ring A B
+    iso-Commutative-Ring → hom-Commutative-Ring A B
   hom-iso-Commutative-Ring =
     hom-iso-Ring
       ( ring-Commutative-Ring A)
@@ -210,7 +210,7 @@ module _
       ( ring-Commutative-Ring B)
 
   hom-inv-iso-Commutative-Ring :
-    iso-Commutative-Ring → type-hom-Commutative-Ring B A
+    iso-Commutative-Ring → hom-Commutative-Ring B A
   hom-inv-iso-Commutative-Ring =
     hom-inv-iso-Ring
       ( ring-Commutative-Ring A)
@@ -360,14 +360,14 @@ module _
       ( ring-Commutative-Ring B)
 
   is-iso-hom-ab-hom-Commutative-Ring :
-    type-hom-Commutative-Ring A B → UU (l1 ⊔ l2)
+    hom-Commutative-Ring A B → UU (l1 ⊔ l2)
   is-iso-hom-ab-hom-Commutative-Ring =
     is-iso-hom-ab-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
 
   is-iso-hom-ab-is-iso-hom-Commutative-Ring :
-    (f : type-hom-Commutative-Ring A B) →
+    (f : hom-Commutative-Ring A B) →
     is-iso-hom-Commutative-Ring A B f → is-iso-hom-ab-hom-Commutative-Ring f
   is-iso-hom-ab-is-iso-hom-Commutative-Ring =
     is-iso-hom-ab-is-iso-hom-Ring

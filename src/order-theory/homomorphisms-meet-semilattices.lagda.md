@@ -65,14 +65,14 @@ module _
   hom-set-Meet-Semilattice =
     hom-set-Semigroup (semigroup-Meet-Semilattice A) (semigroup-Meet-Semilattice B)
 
-  type-hom-Meet-Semilattice : UU (l1 ⊔ l2)
-  type-hom-Meet-Semilattice = type-Set hom-set-Meet-Semilattice
+  hom-Meet-Semilattice : UU (l1 ⊔ l2)
+  hom-Meet-Semilattice = type-Set hom-set-Meet-Semilattice
 
-  is-set-hom-Meet-Semilattice : is-set type-hom-Meet-Semilattice
+  is-set-hom-Meet-Semilattice : is-set hom-Meet-Semilattice
   is-set-hom-Meet-Semilattice = is-set-type-Set hom-set-Meet-Semilattice
 
   module _
-    (f : type-hom-Meet-Semilattice)
+    (f : hom-Meet-Semilattice)
     where
 
     map-hom-Meet-Semilattice :
@@ -93,7 +93,7 @@ module _
       ( ap map-hom-Meet-Semilattice H)
 
     hom-poset-hom-Meet-Semilattice :
-      type-hom-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B)
+      hom-Poset (poset-Meet-Semilattice A) (poset-Meet-Semilattice B)
     pr1 hom-poset-hom-Meet-Semilattice = map-hom-Meet-Semilattice
     pr2 hom-poset-hom-Meet-Semilattice = preserves-order-hom-Meet-Semilattice
 ```
@@ -108,7 +108,7 @@ module _
   where
 
   preserves-meet-hom-Poset-Prop :
-    type-hom-Poset
+    hom-Poset
       ( poset-Order-Theoretic-Meet-Semilattice A)
       ( poset-Order-Theoretic-Meet-Semilattice B) → Prop (l1 ⊔ l3 ⊔ l4)
   preserves-meet-hom-Poset-Prop (f , H) =
@@ -125,7 +125,7 @@ module _
               ( f (meet-Order-Theoretic-Meet-Semilattice A x y))))
 
   preserves-meet-hom-Poset :
-    type-hom-Poset
+    hom-Poset
       ( poset-Order-Theoretic-Meet-Semilattice A)
       ( poset-Order-Theoretic-Meet-Semilattice B) → UU (l1 ⊔ l3 ⊔ l4)
   preserves-meet-hom-Poset f =
@@ -133,7 +133,7 @@ module _
 
   is-prop-preserves-meet-hom-Prop :
     ( f :
-      type-hom-Poset
+      hom-Poset
         ( poset-Order-Theoretic-Meet-Semilattice A)
         ( poset-Order-Theoretic-Meet-Semilattice B)) →
     is-prop (preserves-meet-hom-Poset f)
