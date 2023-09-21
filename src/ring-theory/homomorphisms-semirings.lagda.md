@@ -79,19 +79,19 @@ module _
   is-prop-is-homomorphism-semiring-hom-Commutative-Monoid f =
     is-prop-type-Prop (is-homomorphism-semiring-hom-Commutative-Monoid-Prop f)
 
-  hom-Semiring : Set (l1 ⊔ l2)
-  hom-Semiring =
+  hom-set-Semiring : Set (l1 ⊔ l2)
+  hom-set-Semiring =
     set-subset
-      ( hom-Commutative-Monoid
+      ( hom-set-Commutative-Monoid
         ( additive-commutative-monoid-Semiring R)
         ( additive-commutative-monoid-Semiring S))
       ( is-homomorphism-semiring-hom-Commutative-Monoid-Prop)
 
   type-hom-Semiring : UU (l1 ⊔ l2)
-  type-hom-Semiring = type-Set hom-Semiring
+  type-hom-Semiring = type-Set hom-set-Semiring
 
   is-set-type-hom-Semiring : is-set type-hom-Semiring
-  is-set-type-hom-Semiring = is-set-type-Set hom-Semiring
+  is-set-type-hom-Semiring = is-set-type-Set hom-set-Semiring
 
   module _
     (f : type-hom-Semiring)

@@ -353,7 +353,7 @@ module _
         ( H))
 
   ideal-subset-hom-large-poset-Ring :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( ideal-Ring-Large-Poset A)

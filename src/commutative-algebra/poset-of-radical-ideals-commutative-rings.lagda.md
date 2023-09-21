@@ -180,7 +180,7 @@ module _
   preserves-order-ideal-radical-ideal-Commutative-Ring I J H = H
 
   ideal-radical-ideal-hom-large-poset-Commutative-Ring :
-    hom-Large-Poset id
+    hom-set-Large-Poset id
       ( radical-ideal-Commutative-Ring-Large-Poset A)
       ( ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder

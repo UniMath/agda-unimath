@@ -10,14 +10,14 @@ module category-theory.maps-precategories where
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
+open import foundation.binary-relations
 open import foundation.cartesian-product-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.binary-relations
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
@@ -55,8 +55,8 @@ module _
     Σ ( obj-Precategory C → obj-Precategory D)
       ( λ F₀ →
         {x y : obj-Precategory C} →
-        type-hom-Precategory C x y →
-        type-hom-Precategory D (F₀ x) (F₀ y))
+        hom-Precategory C x y →
+        hom-Precategory D (F₀ x) (F₀ y))
 
   map-obj-map-Precategory :
     (F : map-Precategory) → obj-Precategory C → obj-Precategory D
@@ -65,8 +65,8 @@ module _
   map-hom-map-Precategory :
     (F : map-Precategory)
     {x y : obj-Precategory C} →
-    type-hom-Precategory C x y →
-    type-hom-Precategory D
+    hom-Precategory C x y →
+    hom-Precategory D
       ( map-obj-map-Precategory F x)
       ( map-obj-map-Precategory F y)
   map-hom-map-Precategory = pr2

@@ -41,7 +41,7 @@ associativity and the left unit law for the precategory `C`.
 representable-functor-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) (c : obj-Precategory C) →
   functor-Precategory C (Set-Precategory l2)
-pr1 (representable-functor-Precategory C c) = hom-Precategory C c
+pr1 (representable-functor-Precategory C c) = hom-set-Precategory C c
 pr1 (pr2 (representable-functor-Precategory C c)) g =
   postcomp-hom-Precategory C g c
 pr1 (pr2 (pr2 (representable-functor-Precategory C c))) h g =
@@ -60,7 +60,7 @@ components `hom c x → hom b x` are defined by precomposition with `f`.
 ```agda
 rep-natural-transformation-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) (b c : obj-Precategory C)
-  (f : type-hom-Precategory C b c) →
+  (f : hom-Precategory C b c) →
   natural-transformation-Precategory
     ( C)
     ( Set-Precategory l2)

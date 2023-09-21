@@ -41,24 +41,24 @@ module _
 
   hom-function-Precategory :
     obj-function-Precategory → obj-function-Precategory → Set (l1 ⊔ l3)
-  hom-function-Precategory = hom-Precategory function-Precategory
+  hom-function-Precategory = hom-set-Precategory function-Precategory
 
-  type-hom-function-Precategory :
+  hom-function-Precategory :
     obj-function-Precategory → obj-function-Precategory → UU (l1 ⊔ l3)
-  type-hom-function-Precategory = type-hom-Precategory function-Precategory
+  hom-function-Precategory = hom-Precategory function-Precategory
 
   comp-hom-function-Precategory :
     {x y z : obj-function-Precategory} →
-    type-hom-function-Precategory y z →
-    type-hom-function-Precategory x y →
-    type-hom-function-Precategory x z
+    hom-function-Precategory y z →
+    hom-function-Precategory x y →
+    hom-function-Precategory x z
   comp-hom-function-Precategory = comp-hom-Precategory function-Precategory
 
   associative-comp-hom-function-Precategory :
     {x y z w : obj-function-Precategory}
-    (h : type-hom-function-Precategory z w)
-    (g : type-hom-function-Precategory y z)
-    (f : type-hom-function-Precategory x y) →
+    (h : hom-function-Precategory z w)
+    (g : hom-function-Precategory y z)
+    (f : hom-function-Precategory x y) →
     ( comp-hom-function-Precategory (comp-hom-function-Precategory h g) f) ＝
     ( comp-hom-function-Precategory h (comp-hom-function-Precategory g f))
   associative-comp-hom-function-Precategory =
@@ -70,18 +70,18 @@ module _
     associative-composition-structure-Precategory function-Precategory
 
   id-hom-function-Precategory :
-    {x : obj-function-Precategory} → type-hom-function-Precategory x x
+    {x : obj-function-Precategory} → hom-function-Precategory x x
   id-hom-function-Precategory = id-hom-Precategory function-Precategory
 
   left-unit-law-comp-hom-function-Precategory :
     {x y : obj-function-Precategory}
-    (f : type-hom-function-Precategory x y) →
+    (f : hom-function-Precategory x y) →
     comp-hom-function-Precategory id-hom-function-Precategory f ＝ f
   left-unit-law-comp-hom-function-Precategory =
     left-unit-law-comp-hom-Precategory function-Precategory
 
   right-unit-law-comp-hom-function-Precategory :
-    {x y : obj-function-Precategory} (f : type-hom-function-Precategory x y) →
+    {x y : obj-function-Precategory} (f : hom-function-Precategory x y) →
     comp-hom-function-Precategory f id-hom-function-Precategory ＝ f
   right-unit-law-comp-hom-function-Precategory =
     right-unit-law-comp-hom-Precategory function-Precategory
@@ -103,7 +103,7 @@ module _
   where
 
   is-fiberwise-iso-is-iso-function-Precategory :
-    (f : type-hom-function-Precategory I C x y) →
+    (f : hom-function-Precategory I C x y) →
     is-iso-hom-Precategory (function-Precategory I C) f →
     (i : I) → is-iso-hom-Precategory C (f i)
   is-fiberwise-iso-is-iso-function-Precategory =
@@ -116,7 +116,7 @@ module _
     fiberwise-iso-iso-Π-Precategory I (λ _ → C)
 
   is-iso-function-is-fiberwise-iso-Precategory :
-    (f : type-hom-function-Precategory I C x y) →
+    (f : hom-function-Precategory I C x y) →
     ((i : I) → is-iso-hom-Precategory C (f i)) →
     is-iso-hom-Precategory (function-Precategory I C) f
   is-iso-function-is-fiberwise-iso-Precategory =
@@ -129,26 +129,26 @@ module _
     iso-Π-fiberwise-iso-Precategory I (λ _ → C)
 
   is-equiv-is-fiberwise-iso-is-iso-function-Precategory :
-    (f : type-hom-function-Precategory I C x y) →
+    (f : hom-function-Precategory I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-function-Precategory f)
   is-equiv-is-fiberwise-iso-is-iso-function-Precategory =
     is-equiv-is-fiberwise-iso-is-iso-Π-Precategory I (λ _ → C)
 
   equiv-is-fiberwise-iso-is-iso-function-Precategory :
-    (f : type-hom-function-Precategory I C x y) →
+    (f : hom-function-Precategory I C x y) →
     ( is-iso-hom-Precategory (function-Precategory I C) f) ≃
     ( (i : I) → is-iso-hom-Precategory C (f i))
   equiv-is-fiberwise-iso-is-iso-function-Precategory =
     equiv-is-fiberwise-iso-is-iso-Π-Precategory I (λ _ → C)
 
   is-equiv-is-iso-function-is-fiberwise-iso-Precategory :
-    (f : type-hom-function-Precategory I C x y) →
+    (f : hom-function-Precategory I C x y) →
     is-equiv (is-iso-function-is-fiberwise-iso-Precategory f)
   is-equiv-is-iso-function-is-fiberwise-iso-Precategory =
     is-equiv-is-iso-Π-is-fiberwise-iso-Precategory I (λ _ → C)
 
   equiv-is-iso-function-is-fiberwise-iso-Precategory :
-    ( f : type-hom-function-Precategory I C x y) →
+    ( f : hom-function-Precategory I C x y) →
     ( (i : I) → is-iso-hom-Precategory C (f i)) ≃
     ( is-iso-hom-Precategory (function-Precategory I C) f)
   equiv-is-iso-function-is-fiberwise-iso-Precategory =

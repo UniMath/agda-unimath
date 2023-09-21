@@ -39,7 +39,7 @@ module _
   is-initial-prop-obj-Precategory =
     Π-Prop
       ( obj-Precategory C)
-      ( λ y → is-contr-Prop (type-hom-Precategory C x y))
+      ( λ y → is-contr-Prop (hom-Precategory C x y))
 
   is-initial-obj-Precategory : UU (l1 ⊔ l2)
   is-initial-obj-Precategory = type-Prop is-initial-prop-obj-Precategory
@@ -56,12 +56,12 @@ module _
 
   hom-is-initial-obj-Precategory :
     (y : obj-Precategory C) →
-    type-hom-Precategory C x y
+    hom-Precategory C x y
   hom-is-initial-obj-Precategory = center ∘ t
 
   is-unique-hom-is-initial-obj-Precategory :
     (y : obj-Precategory C) →
-    (f : type-hom-Precategory C x y) →
+    (f : hom-Precategory C x y) →
     hom-is-initial-obj-Precategory y ＝ f
   is-unique-hom-is-initial-obj-Precategory = contraction ∘ t
 ```
@@ -89,7 +89,7 @@ module _
 
   hom-initial-obj-Precategory :
     (y : obj-Precategory C) →
-    type-hom-Precategory C obj-initial-obj-Precategory y
+    hom-Precategory C obj-initial-obj-Precategory y
   hom-initial-obj-Precategory =
     hom-is-initial-obj-Precategory C
       ( obj-initial-obj-Precategory)
@@ -97,7 +97,7 @@ module _
 
   is-unique-hom-initial-obj-Precategory :
     (y : obj-Precategory C) →
-    (f : type-hom-Precategory C obj-initial-obj-Precategory y) →
+    (f : hom-Precategory C obj-initial-obj-Precategory y) →
     hom-initial-obj-Precategory y ＝ f
   is-unique-hom-initial-obj-Precategory =
     is-unique-hom-is-initial-obj-Precategory C

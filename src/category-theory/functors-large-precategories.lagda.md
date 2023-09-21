@@ -47,8 +47,8 @@ module _
         { l1 l2 : Level}
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2} →
-        type-hom-Large-Precategory C X Y →
-        type-hom-Large-Precategory D
+        hom-Large-Precategory C X Y →
+        hom-Large-Precategory D
           ( map-obj-functor-Large-Precategory X)
           ( map-obj-functor-Large-Precategory Y)
       preserves-comp-functor-Large-Precategory :
@@ -56,8 +56,8 @@ module _
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2}
         { Z : obj-Large-Precategory C l3}
-        ( g : type-hom-Large-Precategory C Y Z)
-        ( f : type-hom-Large-Precategory C X Y) →
+        ( g : hom-Large-Precategory C Y Z)
+        ( f : hom-Large-Precategory C X Y) →
         ( map-hom-functor-Large-Precategory
           ( comp-hom-Large-Precategory C g f)) ＝
         ( comp-hom-Large-Precategory D

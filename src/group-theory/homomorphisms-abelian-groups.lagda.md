@@ -38,8 +38,8 @@ module _
   preserves-add-Ab : (type-Ab A → type-Ab B) → UU (l1 ⊔ l2)
   preserves-add-Ab = preserves-mul-Semigroup (semigroup-Ab A) (semigroup-Ab B)
 
-  hom-Ab : Set (l1 ⊔ l2)
-  hom-Ab = hom-Group (group-Ab A) (group-Ab B)
+  hom-set-Ab : Set (l1 ⊔ l2)
+  hom-set-Ab = hom-set-Group (group-Ab A) (group-Ab B)
 
   type-hom-Ab : UU (l1 ⊔ l2)
   type-hom-Ab = type-hom-Group (group-Ab A) (group-Ab B)

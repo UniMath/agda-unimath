@@ -61,24 +61,24 @@ module _
 
   hom-Π-Category :
     obj-Π-Category → obj-Π-Category → Set (l1 ⊔ l3)
-  hom-Π-Category = hom-Category Π-Category
+  hom-Π-Category = hom-set-Category Π-Category
 
-  type-hom-Π-Category :
+  hom-Π-Category :
     obj-Π-Category → obj-Π-Category → UU (l1 ⊔ l3)
-  type-hom-Π-Category = type-hom-Category Π-Category
+  hom-Π-Category = hom-Category Π-Category
 
   comp-hom-Π-Category :
     {x y z : obj-Π-Category} →
-    type-hom-Π-Category y z →
-    type-hom-Π-Category x y →
-    type-hom-Π-Category x z
+    hom-Π-Category y z →
+    hom-Π-Category x y →
+    hom-Π-Category x z
   comp-hom-Π-Category = comp-hom-Category Π-Category
 
   associative-comp-hom-Π-Category :
     {x y z w : obj-Π-Category}
-    (h : type-hom-Π-Category z w)
-    (g : type-hom-Π-Category y z)
-    (f : type-hom-Π-Category x y) →
+    (h : hom-Π-Category z w)
+    (g : hom-Π-Category y z)
+    (f : hom-Π-Category x y) →
     ( comp-hom-Π-Category (comp-hom-Π-Category h g) f) ＝
     ( comp-hom-Π-Category h (comp-hom-Π-Category g f))
   associative-comp-hom-Π-Category =
@@ -90,18 +90,18 @@ module _
     associative-composition-structure-Category Π-Category
 
   id-hom-Π-Category :
-    {x : obj-Π-Category} → type-hom-Π-Category x x
+    {x : obj-Π-Category} → hom-Π-Category x x
   id-hom-Π-Category = id-hom-Category Π-Category
 
   left-unit-law-comp-hom-Π-Category :
     {x y : obj-Π-Category}
-    (f : type-hom-Π-Category x y) →
+    (f : hom-Π-Category x y) →
     comp-hom-Π-Category id-hom-Π-Category f ＝ f
   left-unit-law-comp-hom-Π-Category =
     left-unit-law-comp-hom-Category Π-Category
 
   right-unit-law-comp-hom-Π-Category :
-    {x y : obj-Π-Category} (f : type-hom-Π-Category x y) →
+    {x y : obj-Π-Category} (f : hom-Π-Category x y) →
     comp-hom-Π-Category f id-hom-Π-Category ＝ f
   right-unit-law-comp-hom-Π-Category =
     right-unit-law-comp-hom-Category Π-Category
@@ -128,7 +128,7 @@ module _
   where
 
   is-fiberwise-iso-is-iso-Π-Category :
-    (f : type-hom-Π-Category I C x y) →
+    (f : hom-Π-Category I C x y) →
     is-iso-hom-Category (Π-Category I C) f →
     (i : I) → is-iso-hom-Category (C i) (f i)
   is-fiberwise-iso-is-iso-Π-Category =
@@ -141,7 +141,7 @@ module _
     fiberwise-iso-iso-Π-Precategory I (precategory-Category ∘ C)
 
   is-iso-Π-is-fiberwise-iso-Category :
-    (f : type-hom-Π-Category I C x y) →
+    (f : hom-Π-Category I C x y) →
     ((i : I) → is-iso-hom-Category (C i) (f i)) →
     is-iso-hom-Category (Π-Category I C) f
   is-iso-Π-is-fiberwise-iso-Category =
@@ -154,26 +154,26 @@ module _
     iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
 
   is-equiv-is-fiberwise-iso-is-iso-Π-Category :
-    (f : type-hom-Π-Category I C x y) →
+    (f : hom-Π-Category I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-Π-Category f)
   is-equiv-is-fiberwise-iso-is-iso-Π-Category =
     is-equiv-is-fiberwise-iso-is-iso-Π-Precategory I (precategory-Category ∘ C)
 
   equiv-is-fiberwise-iso-is-iso-Π-Category :
-    (f : type-hom-Π-Category I C x y) →
+    (f : hom-Π-Category I C x y) →
     ( is-iso-hom-Category (Π-Category I C) f) ≃
     ( (i : I) → is-iso-hom-Category (C i) (f i))
   equiv-is-fiberwise-iso-is-iso-Π-Category =
     equiv-is-fiberwise-iso-is-iso-Π-Precategory I (precategory-Category ∘ C)
 
   is-equiv-is-iso-Π-is-fiberwise-iso-Category :
-    (f : type-hom-Π-Category I C x y) →
+    (f : hom-Π-Category I C x y) →
     is-equiv (is-iso-Π-is-fiberwise-iso-Category f)
   is-equiv-is-iso-Π-is-fiberwise-iso-Category =
     is-equiv-is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
 
   equiv-is-iso-Π-is-fiberwise-iso-Category :
-    ( f : type-hom-Π-Category I C x y) →
+    ( f : hom-Π-Category I C x y) →
     ( (i : I) → is-iso-hom-Category (C i) (f i)) ≃
     ( is-iso-hom-Category (Π-Category I C) f)
   equiv-is-iso-Π-is-fiberwise-iso-Category =

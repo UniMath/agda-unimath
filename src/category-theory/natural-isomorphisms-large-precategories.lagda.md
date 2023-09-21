@@ -57,7 +57,7 @@ module _
         { l1 l2 : Level}
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2}
-        ( f : type-hom-Large-Precategory C X Y) →
+        ( f : hom-Large-Precategory C X Y) →
         coherence-square-Large-Precategory D
           ( hom-iso-Large-Precategory D
             ( components-natural-isomorphism-Large-Precategory X))

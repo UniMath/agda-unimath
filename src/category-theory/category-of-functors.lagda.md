@@ -48,21 +48,21 @@ module _
       ( precategory-Category C)
       ( precategory-Category D)
 
-  is-category-functor-category-Precategory :
-    is-category-Precategory functor-category-Precategory
-  is-category-functor-category-Precategory F G =
-    is-equiv-htpy-equiv
-      ( equiv-iso-functor-natural-isomorphism-Precategory
-        ( precategory-Category C)
-        ( precategory-Category D)
-        ( F)
-        ( G) ∘e
-        {!  !} ∘e
-        ( extensionality-functor-Category' C D F G))
-      {!   !}
+  -- is-category-functor-category-Precategory :
+  --   is-category-Precategory functor-category-Precategory
+  -- is-category-functor-category-Precategory F G =
+  --   is-equiv-htpy-equiv
+  --     ( equiv-iso-functor-natural-isomorphism-Precategory
+  --       ( precategory-Category C)
+  --       ( precategory-Category D)
+  --       ( F)
+  --       ( G) ∘e
+  --       {!  !} ∘e
+  --       ( extensionality-functor-Category' C D F G))
+  --     {!   !}
 
-  functor-category-Category :
-    Category (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
-  pr1 functor-category-Category = functor-category-Precategory
-  pr2 functor-category-Category = is-category-functor-category-Precategory
+  -- functor-category-Category :
+  --   Category (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
+  -- pr1 functor-category-Category = functor-category-Precategory
+  -- pr2 functor-category-Category = is-category-functor-category-Precategory
 ```

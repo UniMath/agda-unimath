@@ -63,37 +63,37 @@ module _
   obj-Groupoid : UU l1
   obj-Groupoid = obj-Category category-Groupoid
 
-  hom-Groupoid : obj-Groupoid → obj-Groupoid → Set l2
+  hom-set-Groupoid : obj-Groupoid → obj-Groupoid → Set l2
+  hom-set-Groupoid = hom-set-Category category-Groupoid
+
+  hom-Groupoid : obj-Groupoid → obj-Groupoid → UU l2
   hom-Groupoid = hom-Category category-Groupoid
 
-  type-hom-Groupoid : obj-Groupoid → obj-Groupoid → UU l2
-  type-hom-Groupoid = type-hom-Category category-Groupoid
-
   id-hom-Groupoid :
-    {x : obj-Groupoid} → type-hom-Groupoid x x
+    {x : obj-Groupoid} → hom-Groupoid x x
   id-hom-Groupoid = id-hom-Category category-Groupoid
 
   comp-hom-Groupoid :
-    {x y z : obj-Groupoid} → type-hom-Groupoid y z →
-    type-hom-Groupoid x y → type-hom-Groupoid x z
+    {x y z : obj-Groupoid} → hom-Groupoid y z →
+    hom-Groupoid x y → hom-Groupoid x z
   comp-hom-Groupoid = comp-hom-Category category-Groupoid
 
   associative-comp-hom-Groupoid :
-    {x y z w : obj-Groupoid} (h : type-hom-Groupoid z w)
-    (g : type-hom-Groupoid y z) (f : type-hom-Groupoid x y) →
+    {x y z w : obj-Groupoid} (h : hom-Groupoid z w)
+    (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
     ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
     ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
   associative-comp-hom-Groupoid =
     associative-comp-hom-Category category-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
-    {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
+    {x y : obj-Groupoid} (f : hom-Groupoid x y) →
     ( comp-hom-Groupoid id-hom-Groupoid f) ＝ f
   left-unit-law-comp-hom-Groupoid =
     left-unit-law-comp-hom-Category category-Groupoid
 
   right-unit-law-comp-hom-Groupoid :
-    {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
+    {x y : obj-Groupoid} (f : hom-Groupoid x y) →
     ( comp-hom-Groupoid f id-hom-Groupoid) ＝ f
   right-unit-law-comp-hom-Groupoid =
     right-unit-law-comp-hom-Category category-Groupoid

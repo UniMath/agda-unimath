@@ -50,8 +50,8 @@ module _
   map-hom-map-Category :
     (F : map-Category)
     {x y : obj-Category C} →
-    type-hom-Category C x y →
-    type-hom-Category D
+    hom-Category C x y →
+    hom-Category D
       ( map-obj-map-Category F x)
       ( map-obj-map-Category F y)
   map-hom-map-Category =
@@ -128,8 +128,8 @@ module _
   map-hom-functor-Category :
     (F : functor-Category) →
     {x y : obj-Category C} →
-    (f : type-hom-Category C x y) →
-    type-hom-Category D
+    (f : hom-Category C x y) →
+    hom-Category D
       ( map-obj-functor-Category F x)
       ( map-obj-functor-Category F y)
   map-hom-functor-Category =
@@ -143,7 +143,7 @@ module _
 
   preserves-comp-functor-Category :
     ( F : functor-Category) {x y z : obj-Category C}
-    ( g : type-hom-Category C y z) (f : type-hom-Category C x y) →
+    ( g : hom-Category C y z) (f : hom-Category C x y) →
     ( map-hom-functor-Category F (comp-hom-Category C g f)) ＝
     ( comp-hom-Category D
       ( map-hom-functor-Category F g)

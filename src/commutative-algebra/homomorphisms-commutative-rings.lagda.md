@@ -69,9 +69,9 @@ module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
   where
 
-  hom-Commutative-Ring : Set (l1 ⊔ l2)
-  hom-Commutative-Ring =
-    hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
+  hom-set-Commutative-Ring : Set (l1 ⊔ l2)
+  hom-set-Commutative-Ring =
+    hom-set-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
 
   type-hom-Commutative-Ring : UU (l1 ⊔ l2)
   type-hom-Commutative-Ring =

@@ -26,7 +26,7 @@ A [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` is an
 **epimorphism** if the precomposition function
 
 ```text
-  - ∘ f : hom-Group H K → hom-Group G K
+  - ∘ f : hom-set-Group H K → hom-set-Group G K
 ```
 
 is an [embedding](foundation.embeddings.md) for any

@@ -41,10 +41,10 @@ coherence-square-Large-Precategory :
   {B : obj-Large-Precategory C l2}
   {X : obj-Large-Precategory C l3}
   {Y : obj-Large-Precategory C l4}
-  (top : type-hom-Large-Precategory C A B)
-  (left : type-hom-Large-Precategory C A X)
-  (right : type-hom-Large-Precategory C B Y)
-  (bottom : type-hom-Large-Precategory C X Y) →
+  (top : hom-Large-Precategory C A B)
+  (left : hom-Large-Precategory C A X)
+  (right : hom-Large-Precategory C B Y)
+  (bottom : hom-Large-Precategory C X Y) →
   UU (βC l1 l4)
 coherence-square-Large-Precategory C top left right bottom =
   comp-hom-Large-Precategory C right top ＝
@@ -62,7 +62,7 @@ module _
   hom-family-functor-Large-Precategory : UUω
   hom-family-functor-Large-Precategory =
     {l : Level} (X : obj-Large-Precategory C l) →
-    type-hom-Large-Precategory D
+    hom-Large-Precategory D
       ( map-obj-functor-Large-Precategory F X)
       ( map-obj-functor-Large-Precategory G X)
 
@@ -75,7 +75,7 @@ module _
       coherence-square-natural-transformation-Large-Precategory :
         {l1 l2 : Level} {X : obj-Large-Precategory C l1}
         {Y : obj-Large-Precategory C l2}
-        (f : type-hom-Large-Precategory C X Y) →
+        (f : hom-Large-Precategory C X Y) →
         coherence-square-Large-Precategory D
           ( hom-family-natural-transformation-Large-Precategory X)
           ( map-hom-functor-Large-Precategory F f)

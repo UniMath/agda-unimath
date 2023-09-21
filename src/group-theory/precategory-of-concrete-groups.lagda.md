@@ -26,7 +26,7 @@ Concrete-Group-Large-Precategory : Large-Precategory lsuc (_⊔_)
 obj-Large-Precategory
   Concrete-Group-Large-Precategory =
   Concrete-Group
-hom-Large-Precategory
+hom-set-Large-Precategory
   Concrete-Group-Large-Precategory =
   hom-set-Concrete-Group
 comp-hom-Large-Precategory

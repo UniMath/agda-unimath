@@ -119,17 +119,17 @@ module _
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
   where
 
-  hom-Ring : Set (l1 ⊔ l2)
-  hom-Ring =
+  hom-set-Ring : Set (l1 ⊔ l2)
+  hom-set-Ring =
     set-subset
-      ( hom-Ab (ab-Ring R) (ab-Ring S))
+      ( hom-set-Ab (ab-Ring R) (ab-Ring S))
       ( is-ring-homomorphism-hom-Ab-Prop R S)
 
   type-hom-Ring : UU (l1 ⊔ l2)
-  type-hom-Ring = type-Set hom-Ring
+  type-hom-Ring = type-Set hom-set-Ring
 
   is-set-type-hom-Ring : is-set type-hom-Ring
-  is-set-type-hom-Ring = is-set-type-Set hom-Ring
+  is-set-type-hom-Ring = is-set-type-Set hom-set-Ring
 
   module _
     (f : type-hom-Ring)

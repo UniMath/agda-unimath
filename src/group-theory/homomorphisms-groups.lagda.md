@@ -136,9 +136,9 @@ module _
   is-set-type-hom-Group =
     is-set-type-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  hom-Group : Set (l1 ⊔ l2)
-  pr1 hom-Group = type-hom-Group G H
-  pr2 hom-Group = is-set-type-hom-Group
+  hom-set-Group : Set (l1 ⊔ l2)
+  pr1 hom-set-Group = type-hom-Group G H
+  pr2 hom-set-Group = is-set-type-hom-Group
 ```
 
 ### Associativity of composition of group homomorphisms

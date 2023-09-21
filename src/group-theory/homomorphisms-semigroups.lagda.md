@@ -157,9 +157,9 @@ module _
             ( map-hom-Semigroup f x)
             ( map-hom-Semigroup g x)))
 
-  hom-Semigroup : Set (l1 ⊔ l2)
-  pr1 hom-Semigroup = type-hom-Semigroup
-  pr2 hom-Semigroup = is-set-type-hom-Semigroup
+  hom-set-Semigroup : Set (l1 ⊔ l2)
+  pr1 hom-set-Semigroup = type-hom-Semigroup
+  pr2 hom-set-Semigroup = is-set-type-hom-Semigroup
 
 preserves-mul-id-Semigroup :
   {l : Level} (G : Semigroup l) → preserves-mul-Semigroup G G id

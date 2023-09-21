@@ -480,7 +480,7 @@ preserves-order-subset-Subgroup G H K = id
 
 subset-subgroup-hom-large-poset-Group :
   {l1 : Level} (G : Group l1) →
-  hom-Large-Poset
+  hom-set-Large-Poset
     ( id)
     ( Subgroup-Large-Poset G)
     ( powerset-Large-Poset (type-Group G))

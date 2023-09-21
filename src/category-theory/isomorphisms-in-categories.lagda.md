@@ -43,7 +43,7 @@ is-iso-hom-Category :
   {l1 l2 : Level}
   (C : Category l1 l2)
   {x y : obj-Category C}
-  (f : type-hom-Category C x y) →
+  (f : hom-Category C x y) →
   UU l2
 is-iso-hom-Category C = is-iso-hom-Precategory (precategory-Category C)
 
@@ -51,11 +51,11 @@ module _
   {l1 l2 : Level}
   (C : Category l1 l2)
   {x y : obj-Category C}
-  {f : type-hom-Category C x y}
+  {f : hom-Category C x y}
   where
 
   hom-inv-is-iso-hom-Category :
-    is-iso-hom-Category C f → type-hom-Category C y x
+    is-iso-hom-Category C f → hom-Category C y x
   hom-inv-is-iso-hom-Category =
     hom-inv-is-iso-hom-Precategory (precategory-Category C)
 
@@ -93,7 +93,7 @@ module _
   (f : iso-Category C x y)
   where
 
-  hom-iso-Category : type-hom-Category C x y
+  hom-iso-Category : hom-Category C x y
   hom-iso-Category = hom-iso-Precategory (precategory-Category C) f
 
   is-iso-hom-iso-Category :
@@ -101,7 +101,7 @@ module _
   is-iso-hom-iso-Category =
     is-iso-hom-iso-Precategory (precategory-Category C) f
 
-  hom-inv-iso-Category : type-hom-Category C y x
+  hom-inv-iso-Category : hom-Category C y x
   hom-inv-iso-Category = hom-inv-iso-Precategory (precategory-Category C) f
 
   is-section-hom-inv-iso-Category :
@@ -178,12 +178,12 @@ module _
   where
 
   is-prop-is-iso-hom-Category :
-    (f : type-hom-Category C x y) → is-prop (is-iso-hom-Category C f)
+    (f : hom-Category C x y) → is-prop (is-iso-hom-Category C f)
   is-prop-is-iso-hom-Category =
     is-prop-is-iso-hom-Precategory (precategory-Category C)
 
   is-iso-prop-hom-Category :
-    (f : type-hom-Category C x y) → Prop l2
+    (f : hom-Category C x y) → Prop l2
   is-iso-prop-hom-Category =
     is-iso-prop-hom-Precategory (precategory-Category C)
 ```
@@ -232,14 +232,14 @@ module _
   {l1 l2 : Level}
   (C : Category l1 l2)
   {x y z : obj-Category C}
-  {g : type-hom-Category C y z}
-  {f : type-hom-Category C x y}
+  {g : hom-Category C y z}
+  {f : hom-Category C x y}
   where
 
   hom-comp-is-iso-hom-Category :
     is-iso-hom-Category C g →
     is-iso-hom-Category C f →
-    type-hom-Category C z x
+    hom-Category C z x
   hom-comp-is-iso-hom-Category =
     hom-comp-is-iso-hom-Precategory (precategory-Category C)
 
@@ -281,7 +281,7 @@ module _
   (f : iso-Category C x y)
   where
 
-  hom-comp-iso-Category : type-hom-Category C x z
+  hom-comp-iso-Category : hom-Category C x z
   hom-comp-iso-Category = hom-comp-iso-Precategory (precategory-Category C) g f
 
   is-iso-comp-iso-Category :
@@ -292,7 +292,7 @@ module _
   comp-iso-Category : iso-Category C x z
   comp-iso-Category = comp-iso-Precategory (precategory-Category C) g f
 
-  hom-inv-comp-iso-Category : type-hom-Category C z x
+  hom-inv-comp-iso-Category : hom-Category C z x
   hom-inv-comp-iso-Category =
     hom-inv-comp-iso-Precategory (precategory-Category C) g f
 
@@ -320,7 +320,7 @@ module _
   {l1 l2 : Level}
   (C : Category l1 l2)
   {x y : obj-Category C}
-  {f : type-hom-Category C x y}
+  {f : hom-Category C x y}
   where
 
   is-iso-inv-is-iso-hom-Category :
@@ -443,11 +443,11 @@ module _
   {l1 l2 : Level}
   (C : Category l1 l2)
   {x y : obj-Category C}
-  {f : type-hom-Category C x y}
+  {f : hom-Category C x y}
   (H : (z : obj-Category C) → is-equiv (precomp-hom-Category C f z))
   where
 
-  hom-inv-is-iso-is-equiv-precomp-hom-Category : type-hom-Category C y x
+  hom-inv-is-iso-is-equiv-precomp-hom-Category : hom-Category C y x
   hom-inv-is-iso-is-equiv-precomp-hom-Category =
     hom-inv-is-iso-is-equiv-precomp-hom-Precategory (precategory-Category C) H
 
@@ -508,11 +508,11 @@ module _
   {l1 l2 : Level}
   (C : Category l1 l2)
   {x y : obj-Category C}
-  {f : type-hom-Category C x y}
+  {f : hom-Category C x y}
   (H : (z : obj-Category C) → is-equiv (postcomp-hom-Category C f z))
   where
 
-  hom-inv-is-iso-is-equiv-postcomp-hom-Category : type-hom-Category C y x
+  hom-inv-is-iso-is-equiv-postcomp-hom-Category : hom-Category C y x
   hom-inv-is-iso-is-equiv-postcomp-hom-Category =
     hom-inv-is-iso-is-equiv-postcomp-hom-Precategory (precategory-Category C) H
 
@@ -553,11 +553,11 @@ module _
   where
 
   is-prop-iso-Category :
-    is-prop (type-hom-Category C x y) → is-prop (iso-Category C x y)
+    is-prop (hom-Category C x y) → is-prop (iso-Category C x y)
   is-prop-iso-Category = is-prop-iso-Precategory (precategory-Category C)
 
   iso-prop-Category :
-    is-prop (type-hom-Category C x y) → Prop l2
+    is-prop (hom-Category C x y) → Prop l2
   iso-prop-Category = iso-prop-Precategory (precategory-Category C)
 ```
 
@@ -570,34 +570,34 @@ module _
   where
 
   is-iso-is-prop-hom-Category' :
-    is-prop (type-hom-Category C x x) →
-    is-prop (type-hom-Category C y y) →
-    (f : type-hom-Category C x y) →
-    type-hom-Category C y x →
+    is-prop (hom-Category C x x) →
+    is-prop (hom-Category C y y) →
+    (f : hom-Category C x y) →
+    hom-Category C y x →
     is-iso-hom-Category C f
   is-iso-is-prop-hom-Category' =
     is-iso-is-prop-hom-Precategory' (precategory-Category C)
 
   iso-is-prop-hom-Category' :
-    is-prop (type-hom-Category C x x) →
-    is-prop (type-hom-Category C y y) →
-    type-hom-Category C x y →
-    type-hom-Category C y x →
+    is-prop (hom-Category C x x) →
+    is-prop (hom-Category C y y) →
+    hom-Category C x y →
+    hom-Category C y x →
     iso-Category C x y
   iso-is-prop-hom-Category' =
     iso-is-prop-hom-Precategory' (precategory-Category C)
 
   is-iso-is-prop-hom-Category :
-    ((x' y' : obj-Category C) → is-prop (type-hom-Category C x' y')) →
-    (f : type-hom-Category C x y) → type-hom-Category C y x →
+    ((x' y' : obj-Category C) → is-prop (hom-Category C x' y')) →
+    (f : hom-Category C x y) → hom-Category C y x →
     is-iso-hom-Category C f
   is-iso-is-prop-hom-Category =
     is-iso-is-prop-hom-Precategory (precategory-Category C)
 
   iso-is-prop-hom-Category :
-    ((x' y' : obj-Category C) → is-prop (type-hom-Category C x' y')) →
-    type-hom-Category C x y →
-    type-hom-Category C y x →
+    ((x' y' : obj-Category C) → is-prop (hom-Category C x' y')) →
+    hom-Category C x y →
+    hom-Category C y x →
     iso-Category C x y
   iso-is-prop-hom-Category =
     iso-is-prop-hom-Precategory (precategory-Category C)

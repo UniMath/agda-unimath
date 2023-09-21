@@ -43,8 +43,8 @@ module _
   {l1 l2 : Level} (R : Cyclic-Ring l1) (S : Cyclic-Ring l2)
   where
 
-  hom-Cyclic-Ring : Set (l1 ⊔ l2)
-  hom-Cyclic-Ring = hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
+  hom-set-Cyclic-Ring : Set (l1 ⊔ l2)
+  hom-set-Cyclic-Ring = hom-set-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
 
   type-hom-Cyclic-Ring : UU (l1 ⊔ l2)
   type-hom-Cyclic-Ring = type-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)

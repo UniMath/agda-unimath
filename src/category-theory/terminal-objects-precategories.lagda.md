@@ -34,7 +34,7 @@ object.
 is-terminal-obj-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → obj-Precategory C → UU (l1 ⊔ l2)
 is-terminal-obj-Precategory C x =
-  (y : obj-Precategory C) → is-contr (type-hom-Precategory C y x)
+  (y : obj-Precategory C) → is-contr (hom-Precategory C y x)
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -44,12 +44,12 @@ module _
 
   hom-is-terminal-obj-Precategory :
     (y : obj-Precategory C) →
-    type-hom-Precategory C y x
+    hom-Precategory C y x
   hom-is-terminal-obj-Precategory = center ∘ t
 
   is-unique-hom-is-terminal-obj-Precategory :
     (y : obj-Precategory C) →
-    (f : type-hom-Precategory C y x) →
+    (f : hom-Precategory C y x) →
     hom-is-terminal-obj-Precategory y ＝ f
   is-unique-hom-is-terminal-obj-Precategory = contraction ∘ t
 ```
@@ -77,7 +77,7 @@ module _
 
   hom-terminal-obj-Precategory :
     (y : obj-Precategory C) →
-    type-hom-Precategory C y obj-terminal-obj-Precategory
+    hom-Precategory C y obj-terminal-obj-Precategory
   hom-terminal-obj-Precategory =
     hom-is-terminal-obj-Precategory C
       ( obj-terminal-obj-Precategory)
@@ -85,7 +85,7 @@ module _
 
   is-unique-hom-terminal-obj-Precategory :
     (y : obj-Precategory C) →
-    (f : type-hom-Precategory C y obj-terminal-obj-Precategory) →
+    (f : hom-Precategory C y obj-terminal-obj-Precategory) →
     hom-terminal-obj-Precategory y ＝ f
   is-unique-hom-terminal-obj-Precategory =
     is-unique-hom-is-terminal-obj-Precategory C

@@ -49,15 +49,15 @@ implication on the [booleans](foundation.booleans.md).
 obj-representing-arrow : UU lzero
 obj-representing-arrow = bool
 
-hom-representing-arrow :
+hom-set-representing-arrow :
   obj-representing-arrow → obj-representing-arrow → Set lzero
-hom-representing-arrow true true = unit-Set
-hom-representing-arrow true false = empty-Set
-hom-representing-arrow false _ = unit-Set
+hom-set-representing-arrow true true = unit-Set
+hom-set-representing-arrow true false = empty-Set
+hom-set-representing-arrow false _ = unit-Set
 
-type-hom-representing-arrow :
+hom-representing-arrow :
   obj-representing-arrow → obj-representing-arrow → UU lzero
-type-hom-representing-arrow x y = type-Set (hom-representing-arrow x y)
+hom-representing-arrow x y = type-Set (hom-set-representing-arrow x y)
 ```
 
 ### The precategory structure of the representing arrow
@@ -65,51 +65,51 @@ type-hom-representing-arrow x y = type-Set (hom-representing-arrow x y)
 ```agda
 comp-hom-representing-arrow :
   {x y z : obj-representing-arrow} →
-  type-hom-representing-arrow y z →
-  type-hom-representing-arrow x y →
-  type-hom-representing-arrow x z
+  hom-representing-arrow y z →
+  hom-representing-arrow x y →
+  hom-representing-arrow x z
 comp-hom-representing-arrow {true} {true} {true} _ _ = star
 comp-hom-representing-arrow {false} _ _ = star
 
 associative-comp-hom-representing-arrow :
   {x y z w : obj-representing-arrow} →
-  (h : type-hom-representing-arrow z w)
-  (g : type-hom-representing-arrow y z)
-  (f : type-hom-representing-arrow x y) →
+  (h : hom-representing-arrow z w)
+  (g : hom-representing-arrow y z)
+  (f : hom-representing-arrow x y) →
   comp-hom-representing-arrow {x} (comp-hom-representing-arrow {y} h g) f ＝
   comp-hom-representing-arrow {x} h (comp-hom-representing-arrow {x} g f)
 associative-comp-hom-representing-arrow {true} {true} {true} {true} h g f = refl
 associative-comp-hom-representing-arrow {false} h g f = refl
 
 associative-composition-structure-representing-arrow :
-  associative-composition-structure-Set hom-representing-arrow
+  associative-composition-structure-Set hom-set-representing-arrow
 pr1 associative-composition-structure-representing-arrow {x} =
   comp-hom-representing-arrow {x}
 pr2 associative-composition-structure-representing-arrow =
   associative-comp-hom-representing-arrow
 
 id-hom-representing-arrow :
-  {x : obj-representing-arrow} → type-hom-representing-arrow x x
+  {x : obj-representing-arrow} → hom-representing-arrow x x
 id-hom-representing-arrow {true} = star
 id-hom-representing-arrow {false} = star
 
 left-unit-law-comp-hom-representing-arrow :
   {x y : obj-representing-arrow} →
-  (f : type-hom-representing-arrow x y) →
+  (f : hom-representing-arrow x y) →
   comp-hom-representing-arrow {x} (id-hom-representing-arrow {y}) f ＝ f
 left-unit-law-comp-hom-representing-arrow {true} {true} f = refl
 left-unit-law-comp-hom-representing-arrow {false} f = refl
 
 right-unit-law-comp-hom-representing-arrow :
   {x y : obj-representing-arrow} →
-  (f : type-hom-representing-arrow x y) →
+  (f : hom-representing-arrow x y) →
   comp-hom-representing-arrow {x} f (id-hom-representing-arrow {x}) ＝ f
 right-unit-law-comp-hom-representing-arrow {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow {false} f = refl
 
 is-unital-composition-structure-representing-arrow :
   is-unital-composition-structure-Set
-    ( hom-representing-arrow)
+    ( hom-set-representing-arrow)
     ( associative-composition-structure-representing-arrow)
 pr1 is-unital-composition-structure-representing-arrow x =
   id-hom-representing-arrow {x}
@@ -120,7 +120,7 @@ pr2 (pr2 is-unital-composition-structure-representing-arrow) =
 
 representing-arrow-Precategory : Precategory lzero lzero
 pr1 representing-arrow-Precategory = obj-representing-arrow
-pr1 (pr2 representing-arrow-Precategory) = hom-representing-arrow
+pr1 (pr2 representing-arrow-Precategory) = hom-set-representing-arrow
 pr1 (pr2 (pr2 representing-arrow-Precategory)) =
   associative-composition-structure-representing-arrow
 pr2 (pr2 (pr2 representing-arrow-Precategory)) =

@@ -61,15 +61,15 @@ module _
       ( semigroup-Meet-Semilattice A)
       ( semigroup-Meet-Semilattice B)
 
-  hom-Meet-Semilattice : Set (l1 ⊔ l2)
-  hom-Meet-Semilattice =
-    hom-Semigroup (semigroup-Meet-Semilattice A) (semigroup-Meet-Semilattice B)
+  hom-set-Meet-Semilattice : Set (l1 ⊔ l2)
+  hom-set-Meet-Semilattice =
+    hom-set-Semigroup (semigroup-Meet-Semilattice A) (semigroup-Meet-Semilattice B)
 
   type-hom-Meet-Semilattice : UU (l1 ⊔ l2)
-  type-hom-Meet-Semilattice = type-Set hom-Meet-Semilattice
+  type-hom-Meet-Semilattice = type-Set hom-set-Meet-Semilattice
 
   is-set-type-hom-Meet-Semilattice : is-set type-hom-Meet-Semilattice
-  is-set-type-hom-Meet-Semilattice = is-set-type-Set hom-Meet-Semilattice
+  is-set-type-hom-Meet-Semilattice = is-set-type-Set hom-set-Meet-Semilattice
 
   module _
     (f : type-hom-Meet-Semilattice)
@@ -140,8 +140,8 @@ module _
   is-prop-preserves-meet-hom-Prop f =
     is-prop-type-Prop (preserves-meet-hom-Poset-Prop f)
 
-  hom-Order-Theoretic-Meet-Semilattice : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  hom-Order-Theoretic-Meet-Semilattice =
+  hom-set-Order-Theoretic-Meet-Semilattice : Set (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-set-Order-Theoretic-Meet-Semilattice =
     set-subset
       ( hom-set-Poset
         ( poset-Order-Theoretic-Meet-Semilattice A)

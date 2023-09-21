@@ -141,7 +141,7 @@ module _
   where
 
   semigroup-hom-Ab : Semigroup (l1 ⊔ l2)
-  pr1 semigroup-hom-Ab = hom-Ab A B
+  pr1 semigroup-hom-Ab = hom-set-Ab A B
   pr1 (pr2 semigroup-hom-Ab) = add-hom-Ab A B
   pr2 (pr2 semigroup-hom-Ab) = associative-add-hom-Ab A B
 

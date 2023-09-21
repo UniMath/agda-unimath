@@ -106,7 +106,7 @@ module _
     (f : iso-Monoid) →
     is-iso-hom-Monoid M N (hom-iso-Monoid f)
   is-iso-iso-Monoid =
-    is-iso-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
+    is-iso-hom-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 
   hom-inv-iso-Monoid :
     iso-Monoid → type-hom-Monoid N M
@@ -222,7 +222,6 @@ module _
       ( Monoid-Large-Precategory)
       { X = M}
       { Y = N}
-
   is-iso-prop-hom-Monoid :
     (f : type-hom-Monoid M N) → Prop (l1 ⊔ l2)
   is-iso-prop-hom-Monoid =
@@ -244,7 +243,8 @@ module _
     is-set-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 
   iso-set-Monoid : Set (l1 ⊔ l2)
-  iso-set-Monoid = iso-set-Large-Precategory Monoid-Large-Precategory M N
+  iso-set-Monoid =
+    iso-set-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 ```
 
 ### Isomorphisms are stable by composition

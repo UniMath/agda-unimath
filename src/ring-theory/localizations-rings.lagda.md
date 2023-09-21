@@ -192,9 +192,9 @@ htpy-universal-property-localization-Ring R S T x f H up-f h K =
 {-
 is-equiv-up-localization-up-localization-Ring :
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3) (x : type-Ring R)
-  (f : hom-Ring R S) (inverts-f : inverts-element-hom-Ring R S x f) →
-  (g : hom-Ring R T) (inverts-g : inverts-element-hom-Ring R T x g) →
-  (h : hom-Ring S T) (H : htpy-hom-Ring R T (comp-hom-Ring R S T h f) g) →
+  (f : hom-set-Ring R S) (inverts-f : inverts-element-hom-Ring R S x f) →
+  (g : hom-set-Ring R T) (inverts-g : inverts-element-hom-Ring R T x g) →
+  (h : hom-set-Ring S T) (H : htpy-hom-Ring R T (comp-hom-Ring R S T h f) g) →
   ({l : Level} → universal-property-localization-Ring l R S x f inverts-f) →
   ({l : Level} → universal-property-localization-Ring l R T x g inverts-g) →
   is-iso-hom-Ring S T h

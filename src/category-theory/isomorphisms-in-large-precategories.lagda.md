@@ -42,18 +42,18 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level}
   {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
-  (f : type-hom-Large-Precategory C X Y)
+  (f : hom-Large-Precategory C X Y)
   where
 
   is-iso-hom-Large-Precategory : UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   is-iso-hom-Large-Precategory =
-    Σ ( type-hom-Large-Precategory C Y X)
+    Σ ( hom-Large-Precategory C Y X)
       ( λ g →
         ( comp-hom-Large-Precategory C f g ＝ id-hom-Large-Precategory C) ×
         ( comp-hom-Large-Precategory C g f ＝ id-hom-Large-Precategory C))
 
   hom-inv-is-iso-hom-Large-Precategory :
-    is-iso-hom-Large-Precategory → type-hom-Large-Precategory C Y X
+    is-iso-hom-Large-Precategory → hom-Large-Precategory C Y X
   hom-inv-is-iso-hom-Large-Precategory = pr1
 
   is-section-hom-inv-is-iso-hom-Large-Precategory :
@@ -80,7 +80,7 @@ module _
 
   iso-Large-Precategory : UU (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   iso-Large-Precategory =
-    Σ (type-hom-Large-Precategory C X Y) (is-iso-hom-Large-Precategory C)
+    Σ (hom-Large-Precategory C X Y) (is-iso-hom-Large-Precategory C)
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
@@ -89,14 +89,14 @@ module _
   (f : iso-Large-Precategory C X Y)
   where
 
-  hom-iso-Large-Precategory : type-hom-Large-Precategory C X Y
+  hom-iso-Large-Precategory : hom-Large-Precategory C X Y
   hom-iso-Large-Precategory = pr1 f
 
   is-iso-hom-iso-Large-Precategory :
     is-iso-hom-Large-Precategory C hom-iso-Large-Precategory
   is-iso-hom-iso-Large-Precategory = pr2 f
 
-  hom-inv-iso-Large-Precategory : type-hom-Large-Precategory C Y X
+  hom-inv-iso-Large-Precategory : hom-Large-Precategory C Y X
   hom-inv-iso-Large-Precategory = pr1 (pr2 f)
 
   is-section-hom-inv-iso-Large-Precategory :
@@ -181,18 +181,18 @@ module _
   where
 
   all-elements-equal-is-iso-hom-Large-Precategory :
-    (f : type-hom-Large-Precategory C X Y)
+    (f : hom-Large-Precategory C X Y)
     (H K : is-iso-hom-Large-Precategory C f) → H ＝ K
   all-elements-equal-is-iso-hom-Large-Precategory f (g , p , q) (g' , p' , q') =
     eq-type-subtype
       ( λ g →
         prod-Prop
           ( Id-Prop
-            ( hom-Large-Precategory C Y Y)
+            ( hom-set-Large-Precategory C Y Y)
             ( comp-hom-Large-Precategory C f g)
             ( id-hom-Large-Precategory C))
           ( Id-Prop
-            ( hom-Large-Precategory C X X)
+            ( hom-set-Large-Precategory C X X)
             ( comp-hom-Large-Precategory C g f)
             ( id-hom-Large-Precategory C)))
       ( ( inv (right-unit-law-comp-hom-Large-Precategory C g)) ∙
@@ -202,14 +202,14 @@ module _
         ( left-unit-law-comp-hom-Large-Precategory C g'))
 
   is-prop-is-iso-hom-Large-Precategory :
-    (f : type-hom-Large-Precategory C X Y) →
+    (f : hom-Large-Precategory C X Y) →
     is-prop (is-iso-hom-Large-Precategory C f)
   is-prop-is-iso-hom-Large-Precategory f =
     is-prop-all-elements-equal
       ( all-elements-equal-is-iso-hom-Large-Precategory f)
 
   is-iso-prop-hom-Large-Precategory :
-    (f : type-hom-Large-Precategory C X Y) → Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
+    (f : hom-Large-Precategory C X Y) → Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   pr1 (is-iso-prop-hom-Large-Precategory f) =
     is-iso-hom-Large-Precategory C f
   pr2 (is-iso-prop-hom-Large-Precategory f) =
@@ -248,7 +248,7 @@ module _
   is-set-iso-Large-Precategory =
     is-set-type-subtype
       ( is-iso-prop-hom-Large-Precategory C)
-      ( is-set-type-hom-Large-Precategory C X Y)
+      ( is-set-hom-Large-Precategory C X Y)
 
   iso-set-Large-Precategory : Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   pr1 iso-set-Large-Precategory = iso-Large-Precategory C X Y
@@ -264,14 +264,14 @@ module _
   {X : obj-Large-Precategory C l1}
   {Y : obj-Large-Precategory C l2}
   {Z : obj-Large-Precategory C l3}
-  {g : type-hom-Large-Precategory C Y Z}
-  {f : type-hom-Large-Precategory C X Y}
+  {g : hom-Large-Precategory C Y Z}
+  {f : hom-Large-Precategory C X Y}
   where
 
   hom-comp-is-iso-hom-Large-Precategory :
     is-iso-hom-Large-Precategory C g →
     is-iso-hom-Large-Precategory C f →
-    type-hom-Large-Precategory C Z X
+    hom-Large-Precategory C Z X
   hom-comp-is-iso-hom-Large-Precategory q p =
     comp-hom-Large-Precategory C
       ( hom-inv-is-iso-hom-Large-Precategory C f p)
@@ -351,7 +351,7 @@ module _
   where
 
   hom-comp-iso-Large-Precategory :
-    type-hom-Large-Precategory C X Z
+    hom-Large-Precategory C X Z
   hom-comp-iso-Large-Precategory =
     comp-hom-Large-Precategory C
       ( hom-iso-Large-Precategory C g)
@@ -370,7 +370,7 @@ module _
   pr2 comp-iso-Large-Precategory = is-iso-comp-iso-Large-Precategory
 
   hom-inv-comp-iso-Large-Precategory :
-    type-hom-Large-Precategory C Z X
+    hom-Large-Precategory C Z X
   hom-inv-comp-iso-Large-Precategory =
     hom-inv-iso-Large-Precategory C comp-iso-Large-Precategory
 
@@ -398,7 +398,7 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level}
   {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
-  {f : type-hom-Large-Precategory C X Y}
+  {f : hom-Large-Precategory C X Y}
   where
 
   is-iso-inv-is-iso-hom-Large-Precategory :
@@ -548,14 +548,14 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level}
   {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
-  {f : type-hom-Large-Precategory C X Y}
+  {f : hom-Large-Precategory C X Y}
   (H :
     {l3 : Level} (Z : obj-Large-Precategory C l3) →
     is-equiv (precomp-hom-Large-Precategory C f Z))
   where
 
   hom-inv-is-iso-is-equiv-precomp-hom-Large-Precategory :
-    type-hom-Large-Precategory C Y X
+    hom-Large-Precategory C Y X
   hom-inv-is-iso-is-equiv-precomp-hom-Large-Precategory =
     map-inv-is-equiv (H X) (id-hom-Large-Precategory C)
 
@@ -629,14 +629,14 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level}
   {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
-  {f : type-hom-Large-Precategory C X Y}
+  {f : hom-Large-Precategory C X Y}
   (H :
     {l3 : Level} (Z : obj-Large-Precategory C l3) →
     is-equiv (postcomp-hom-Large-Precategory C Z f))
   where
 
   hom-inv-is-iso-is-equiv-postcomp-hom-Large-Precategory :
-    type-hom-Large-Precategory C Y X
+    hom-Large-Precategory C Y X
   hom-inv-is-iso-is-equiv-postcomp-hom-Large-Precategory =
     map-inv-is-equiv (H Y) (id-hom-Large-Precategory C)
 

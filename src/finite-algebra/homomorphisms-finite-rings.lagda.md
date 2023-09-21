@@ -64,9 +64,9 @@ module _
   {l1 l2 : Level} (A : Ring-𝔽 l1) (B : Ring-𝔽 l2)
   where
 
-  hom-Ring-𝔽 : Set (l1 ⊔ l2)
-  hom-Ring-𝔽 =
-    hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
+  hom-set-Ring-𝔽 : Set (l1 ⊔ l2)
+  hom-set-Ring-𝔽 =
+    hom-set-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
 
   type-hom-Ring-𝔽 : UU (l1 ⊔ l2)
   type-hom-Ring-𝔽 =

@@ -35,9 +35,9 @@ module _
   {l1 l2 : Level} (M1 : Commutative-Monoid l1) (M2 : Commutative-Monoid l2)
   where
 
-  hom-Commutative-Monoid : Set (l1 ⊔ l2)
-  hom-Commutative-Monoid =
-    hom-Monoid (monoid-Commutative-Monoid M1) (monoid-Commutative-Monoid M2)
+  hom-set-Commutative-Monoid : Set (l1 ⊔ l2)
+  hom-set-Commutative-Monoid =
+    hom-set-Monoid (monoid-Commutative-Monoid M1) (monoid-Commutative-Monoid M2)
 
   type-hom-Commutative-Monoid : UU (l1 ⊔ l2)
   type-hom-Commutative-Monoid =

@@ -311,10 +311,10 @@ group-of-units-commutative-ring-functor-Large-Precategory :
     ( Commutative-Ring-Large-Precategory)
     ( Ab-Large-Precategory)
     ( id)
-obj-functor-Large-Precategory
+map-obj-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory =
   abelian-group-of-units-Commutative-Ring
-hom-functor-Large-Precategory
+map-hom-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory {X = A} {Y = B} =
   hom-group-of-units-hom-Commutative-Ring A B
 preserves-comp-functor-Large-Precategory

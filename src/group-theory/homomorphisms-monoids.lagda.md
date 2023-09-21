@@ -66,14 +66,14 @@ module _
   is-prop-preserves-unit-hom-Semigroup f =
     is-prop-type-Prop (preserves-unit-hom-semigroup-Prop f)
 
-  hom-Monoid : Set (l1 ⊔ l2)
-  hom-Monoid =
+  hom-set-Monoid : Set (l1 ⊔ l2)
+  hom-set-Monoid =
     set-subset
-      ( hom-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2))
+      ( hom-set-Semigroup (semigroup-Monoid M1) (semigroup-Monoid M2))
       ( preserves-unit-hom-semigroup-Prop)
 
   type-hom-Monoid : UU (l1 ⊔ l2)
-  type-hom-Monoid = type-Set hom-Monoid
+  type-hom-Monoid = type-Set hom-set-Monoid
 
 module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : type-hom-Monoid M N)

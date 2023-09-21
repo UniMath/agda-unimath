@@ -49,24 +49,24 @@ module _
 
   hom-function-Category :
     obj-function-Category → obj-function-Category → Set (l1 ⊔ l3)
-  hom-function-Category = hom-Category function-Category
+  hom-function-Category = hom-set-Category function-Category
 
-  type-hom-function-Category :
+  hom-function-Category :
     obj-function-Category → obj-function-Category → UU (l1 ⊔ l3)
-  type-hom-function-Category = type-hom-Category function-Category
+  hom-function-Category = hom-Category function-Category
 
   comp-hom-function-Category :
     {x y z : obj-function-Category} →
-    type-hom-function-Category y z →
-    type-hom-function-Category x y →
-    type-hom-function-Category x z
+    hom-function-Category y z →
+    hom-function-Category x y →
+    hom-function-Category x z
   comp-hom-function-Category = comp-hom-Category function-Category
 
   associative-comp-hom-function-Category :
     {x y z w : obj-function-Category}
-    (h : type-hom-function-Category z w)
-    (g : type-hom-function-Category y z)
-    (f : type-hom-function-Category x y) →
+    (h : hom-function-Category z w)
+    (g : hom-function-Category y z)
+    (f : hom-function-Category x y) →
     ( comp-hom-function-Category (comp-hom-function-Category h g) f) ＝
     ( comp-hom-function-Category h (comp-hom-function-Category g f))
   associative-comp-hom-function-Category =
@@ -78,18 +78,18 @@ module _
     associative-composition-structure-Category function-Category
 
   id-hom-function-Category :
-    {x : obj-function-Category} → type-hom-function-Category x x
+    {x : obj-function-Category} → hom-function-Category x x
   id-hom-function-Category = id-hom-Category function-Category
 
   left-unit-law-comp-hom-function-Category :
     {x y : obj-function-Category}
-    (f : type-hom-function-Category x y) →
+    (f : hom-function-Category x y) →
     comp-hom-function-Category id-hom-function-Category f ＝ f
   left-unit-law-comp-hom-function-Category =
     left-unit-law-comp-hom-Category function-Category
 
   right-unit-law-comp-hom-function-Category :
-    {x y : obj-function-Category} (f : type-hom-function-Category x y) →
+    {x y : obj-function-Category} (f : hom-function-Category x y) →
     comp-hom-function-Category f id-hom-function-Category ＝ f
   right-unit-law-comp-hom-function-Category =
     right-unit-law-comp-hom-Category function-Category
@@ -117,7 +117,7 @@ module _
   where
 
   is-fiberwise-iso-is-iso-function-Category :
-    (f : type-hom-function-Category I C x y) →
+    (f : hom-function-Category I C x y) →
     is-iso-hom-Category (function-Category I C) f →
     (i : I) → is-iso-hom-Category C (f i)
   is-fiberwise-iso-is-iso-function-Category =
@@ -130,7 +130,7 @@ module _
     fiberwise-iso-iso-Π-Category I (λ _ → C)
 
   is-iso-function-is-fiberwise-iso-Category :
-    (f : type-hom-function-Category I C x y) →
+    (f : hom-function-Category I C x y) →
     ((i : I) → is-iso-hom-Category C (f i)) →
     is-iso-hom-Category (function-Category I C) f
   is-iso-function-is-fiberwise-iso-Category =
@@ -143,26 +143,26 @@ module _
     iso-Π-fiberwise-iso-Category I (λ _ → C)
 
   is-equiv-is-fiberwise-iso-is-iso-function-Category :
-    (f : type-hom-function-Category I C x y) →
+    (f : hom-function-Category I C x y) →
     is-equiv (is-fiberwise-iso-is-iso-function-Category f)
   is-equiv-is-fiberwise-iso-is-iso-function-Category =
     is-equiv-is-fiberwise-iso-is-iso-Π-Category I (λ _ → C)
 
   equiv-is-fiberwise-iso-is-iso-function-Category :
-    (f : type-hom-function-Category I C x y) →
+    (f : hom-function-Category I C x y) →
     ( is-iso-hom-Category (function-Category I C) f) ≃
     ( (i : I) → is-iso-hom-Category C (f i))
   equiv-is-fiberwise-iso-is-iso-function-Category =
     equiv-is-fiberwise-iso-is-iso-Π-Category I (λ _ → C)
 
   is-equiv-is-iso-function-is-fiberwise-iso-Category :
-    (f : type-hom-function-Category I C x y) →
+    (f : hom-function-Category I C x y) →
     is-equiv (is-iso-function-is-fiberwise-iso-Category f)
   is-equiv-is-iso-function-is-fiberwise-iso-Category =
     is-equiv-is-iso-Π-is-fiberwise-iso-Category I (λ _ → C)
 
   equiv-is-iso-function-is-fiberwise-iso-Category :
-    ( f : type-hom-function-Category I C x y) →
+    ( f : hom-function-Category I C x y) →
     ( (i : I) → is-iso-hom-Category C (f i)) ≃
     ( is-iso-hom-Category (function-Category I C) f)
   equiv-is-iso-function-is-fiberwise-iso-Category =

@@ -30,7 +30,7 @@ module _
 
   opposite-Precategory : Precategory l1 l2
   pr1 opposite-Precategory = obj-Precategory C
-  pr1 (pr2 opposite-Precategory) x y = hom-Precategory C y x
+  pr1 (pr2 opposite-Precategory) x y = hom-set-Precategory C y x
   pr1 (pr1 (pr2 (pr2 opposite-Precategory))) f g = comp-hom-Precategory C g f
   pr2 (pr1 (pr2 (pr2 opposite-Precategory))) f g h =
     inv (associative-comp-hom-Precategory C h g f)

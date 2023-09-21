@@ -191,9 +191,9 @@ module _
             ( map-hom-Abstract-Group-Action G X Y f x)
             ( map-hom-Abstract-Group-Action G X Y g x)))
 
-  hom-Abstract-Group-Action : Set (l1 ⊔ l2 ⊔ l3)
-  pr1 hom-Abstract-Group-Action = type-hom-Abstract-Group-Action G X Y
-  pr2 hom-Abstract-Group-Action = is-set-type-hom-Abstract-Group-Action
+  hom-set-Abstract-Group-Action : Set (l1 ⊔ l2 ⊔ l3)
+  pr1 hom-set-Abstract-Group-Action = type-hom-Abstract-Group-Action G X Y
+  pr2 hom-set-Abstract-Group-Action = is-set-type-hom-Abstract-Group-Action
 ```
 
 ### Composition is associative

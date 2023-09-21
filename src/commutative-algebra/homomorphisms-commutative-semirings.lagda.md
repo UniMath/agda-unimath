@@ -36,9 +36,9 @@ module _
   {l1 l2 : Level} (A : Commutative-Semiring l1) (B : Commutative-Semiring l2)
   where
 
-  hom-Commutative-Semiring : Set (l1 ⊔ l2)
-  hom-Commutative-Semiring =
-    hom-Semiring
+  hom-set-Commutative-Semiring : Set (l1 ⊔ l2)
+  hom-set-Commutative-Semiring =
+    hom-set-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
 

@@ -38,7 +38,7 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β) {l1 l2 : Level}
   {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
-  (f : type-hom-Large-Category C X Y)
+  (f : hom-Large-Category C X Y)
   where
 
   is-iso-hom-Large-Category : UU (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
@@ -46,7 +46,7 @@ module _
     is-iso-hom-Large-Precategory (large-precategory-Large-Category C) f
 
   hom-inv-is-iso-hom-Large-Category :
-    is-iso-hom-Large-Category → type-hom-Large-Category C Y X
+    is-iso-hom-Large-Category → hom-Large-Category C Y X
   hom-inv-is-iso-hom-Large-Category =
     hom-inv-is-iso-hom-Large-Precategory
       ( large-precategory-Large-Category C)
@@ -91,7 +91,7 @@ module _
   (f : iso-Large-Category C X Y)
   where
 
-  hom-iso-Large-Category : type-hom-Large-Category C X Y
+  hom-iso-Large-Category : hom-Large-Category C X Y
   hom-iso-Large-Category =
     hom-iso-Large-Precategory (large-precategory-Large-Category C) f
 
@@ -100,7 +100,7 @@ module _
   is-iso-hom-iso-Large-Category =
     is-iso-hom-iso-Large-Precategory (large-precategory-Large-Category C) f
 
-  hom-inv-iso-Large-Category : type-hom-Large-Category C Y X
+  hom-inv-iso-Large-Category : hom-Large-Category C Y X
   hom-inv-iso-Large-Category =
     hom-inv-iso-Large-Precategory (large-precategory-Large-Category C) f
 
@@ -195,21 +195,21 @@ module _
   where
 
   all-elements-equal-is-iso-hom-Large-Category :
-    (f : type-hom-Large-Category C X Y)
+    (f : hom-Large-Category C X Y)
     (H K : is-iso-hom-Large-Category C f) → H ＝ K
   all-elements-equal-is-iso-hom-Large-Category =
     all-elements-equal-is-iso-hom-Large-Precategory
       ( large-precategory-Large-Category C)
 
   is-prop-is-iso-hom-Large-Category :
-    (f : type-hom-Large-Category C X Y) →
+    (f : hom-Large-Category C X Y) →
     is-prop (is-iso-hom-Large-Category C f)
   is-prop-is-iso-hom-Large-Category f =
     is-prop-all-elements-equal
       ( all-elements-equal-is-iso-hom-Large-Category f)
 
   is-iso-prop-hom-Large-Category :
-    (f : type-hom-Large-Category C X Y) → Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
+    (f : hom-Large-Category C X Y) → Prop (β l1 l1 ⊔ β l2 l1 ⊔ β l2 l2)
   is-iso-prop-hom-Large-Category =
     is-iso-prop-hom-Large-Precategory (large-precategory-Large-Category C)
 ```
@@ -260,14 +260,14 @@ module _
   {X : obj-Large-Category C l1}
   {Y : obj-Large-Category C l2}
   {Z : obj-Large-Category C l3}
-  {g : type-hom-Large-Category C Y Z}
-  {f : type-hom-Large-Category C X Y}
+  {g : hom-Large-Category C Y Z}
+  {f : hom-Large-Category C X Y}
   where
 
   hom-comp-is-iso-hom-Large-Category :
     is-iso-hom-Large-Category C g →
     is-iso-hom-Large-Category C f →
-    type-hom-Large-Category C Z X
+    hom-Large-Category C Z X
   hom-comp-is-iso-hom-Large-Category =
     hom-comp-is-iso-hom-Large-Precategory (large-precategory-Large-Category C)
 
@@ -315,7 +315,7 @@ module _
   where
 
   hom-comp-iso-Large-Category :
-    type-hom-Large-Category C X Z
+    hom-Large-Category C X Z
   hom-comp-iso-Large-Category =
     hom-comp-iso-Large-Precategory (large-precategory-Large-Category C) g f
 
@@ -333,7 +333,7 @@ module _
     comp-iso-Large-Precategory (large-precategory-Large-Category C) g f
 
   hom-inv-comp-iso-Large-Category :
-    type-hom-Large-Category C Z X
+    hom-Large-Category C Z X
   hom-inv-comp-iso-Large-Category =
     hom-inv-iso-Large-Category C comp-iso-Large-Category
 
@@ -361,7 +361,7 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β) {l1 l2 : Level}
   {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
-  {f : type-hom-Large-Category C X Y}
+  {f : hom-Large-Category C X Y}
   where
 
   is-iso-inv-is-iso-hom-Large-Category :
@@ -504,14 +504,14 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β) {l1 l2 : Level}
   {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
-  {f : type-hom-Large-Category C X Y}
+  {f : hom-Large-Category C X Y}
   (H :
     {l3 : Level} (Z : obj-Large-Category C l3) →
     is-equiv (precomp-hom-Large-Category C f Z))
   where
 
   hom-inv-is-iso-is-equiv-precomp-hom-Large-Category :
-    type-hom-Large-Category C Y X
+    hom-Large-Category C Y X
   hom-inv-is-iso-is-equiv-precomp-hom-Large-Category =
     hom-inv-is-iso-is-equiv-precomp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
@@ -579,14 +579,14 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β) {l1 l2 : Level}
   {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
-  {f : type-hom-Large-Category C X Y}
+  {f : hom-Large-Category C X Y}
   (H :
     {l3 : Level} (Z : obj-Large-Category C l3) →
     is-equiv (postcomp-hom-Large-Category C Z f))
   where
 
   hom-inv-is-iso-is-equiv-postcomp-hom-Large-Category :
-    type-hom-Large-Category C Y X
+    hom-Large-Category C Y X
   hom-inv-is-iso-is-equiv-postcomp-hom-Large-Category =
     hom-inv-is-iso-is-equiv-postcomp-hom-Large-Precategory
       ( large-precategory-Large-Category C)
