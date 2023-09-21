@@ -13,7 +13,7 @@ therefore a logical name for the predicate that a ring homomorphism is an
 isomorphism.
 
 In our naming scheme we strive for a direct correspondence between a
-constructions's name and its type. Take, for example, the proof that the
+construction's name and its type. Take, for example, the proof that the
 successor function on integers is an equivalence. It has the type
 `is-equiv succ-ℤ`, so we name it `is-equiv-succ-ℤ`.
 
