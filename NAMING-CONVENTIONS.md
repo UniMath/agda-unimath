@@ -3,7 +3,10 @@
 A good naming convention is essential for being able to navigate and maintain
 the library, and for being able to make progress with your formalization
 project. Good names provide coincise descriptions of an entry's purpose, and
-help making the code in the library readable.
+help making the code in the library readable. On this page we provide general
+guidelines for naming entries that apply anywhere in the library.
+
+## Examples
 
 The library contains, for example, an entry `is-iso-hom-Ring` for the predicate
 that a ring homomorphism is an isomorphsim. The most significant aspect of this
@@ -24,6 +27,8 @@ of the construction. For instance, `is-equiv-is-contr-map` is a function of type
 term `is-equiv-is-contr-map H` places the descriptor `is-contr-map` right next
 to the variable `H` it refers to. Another advantage is that the name says
 immediately what it constructs.
+
+## The general scheme
 
 In general, our naming scheme follows the following pattern:
 
@@ -61,6 +66,8 @@ name adds no extra useful information. This situation is common in instances
 where we omit the `[name]` part of a name. For instance `[is-category-Category`
 and `is-ideal-ideal-Ring` follow the patterns `[type]-[Important-Concept]` and
 `[type]-[hypotheses]-[Important-Concept]`.
+
+## Abbreviations, and avoiding them
 
 We should also mention that, while abbreviations might seem like a good way to
 shorten names, we use them sparingly. They might save a couple of keystrokes for
@@ -132,3 +139,11 @@ certain thing.
   of cartesian products.
 
 - Names never reference variables.
+
+Finally, we should mention that the naming scheme of agda-unimath evolves as
+agda grows. Sometimes we find that old namings don't fit our ideas of a good
+naming scheme anymore, or we find other ways to improve on the naming. Some
+older code in the library might even not be updated yet to fit the current
+naming scheme. We should therefore remember that the naming scheme is not set in
+stone, and maintaining and improving it is part of the work of maintaining the
+agda-unimath library.
