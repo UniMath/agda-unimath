@@ -1,4 +1,4 @@
-# Representable functors between categories
+# Representable functors on categories
 
 ```agda
 module category-theory.representable-functors-categories where

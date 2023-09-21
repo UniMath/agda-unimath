@@ -1,4 +1,4 @@
-# Natural transformations between functors between categories
+# Natural transformations between functors on categories
 
 ```agda
 module category-theory.natural-transformations-categories where
@@ -13,6 +13,7 @@ open import category-theory.natural-transformations-precategories
 
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -64,10 +65,10 @@ module _
       ( F)
       ( G)
 
-  components-natural-transformation-Category :
+  hom-family-natural-transformation-Category :
     natural-transformation-Category → hom-family-functor-Category
-  components-natural-transformation-Category =
-    components-natural-transformation-Precategory
+  hom-family-natural-transformation-Category =
+    hom-family-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -76,7 +77,7 @@ module _
   coherence-square-natural-transformation-Category :
     (γ : natural-transformation-Category) →
     is-natural-transformation-Category
-      ( components-natural-transformation-Category γ)
+      ( hom-family-natural-transformation-Category γ)
   coherence-square-natural-transformation-Category =
     coherence-square-natural-transformation-Precategory
       ( precategory-Category C)
@@ -148,10 +149,10 @@ module _
 ### The set of natural transformations
 
 ```agda
-  is-emb-components-natural-transformation-Category :
-    is-emb (components-natural-transformation-Category C D F G)
-  is-emb-components-natural-transformation-Category =
-    is-emb-components-natural-transformation-Precategory
+  is-emb-hom-family-natural-transformation-Category :
+    is-emb (hom-family-natural-transformation-Category C D F G)
+  is-emb-hom-family-natural-transformation-Category =
+    is-emb-hom-family-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -168,8 +169,8 @@ module _
   extensionality-natural-transformation-Category :
     (α β : natural-transformation-Category C D F G) →
     ( α ＝ β) ≃
-    ( components-natural-transformation-Category C D F G α ＝
-      components-natural-transformation-Category C D F G β)
+    ( hom-family-natural-transformation-Category C D F G α ~
+      hom-family-natural-transformation-Category C D F G β)
   extensionality-natural-transformation-Category =
     extensionality-natural-transformation-Precategory
       ( precategory-Category C)
@@ -177,13 +178,13 @@ module _
       ( F)
       ( G)
 
-  eq-eq-components-natural-transformation-Category :
+  eq-htpy-hom-family-natural-transformation-Category :
     (α β : natural-transformation-Category C D F G) →
-    ( components-natural-transformation-Category C D F G α ＝
-      components-natural-transformation-Category C D F G β) →
+    ( hom-family-natural-transformation-Category C D F G α ~
+      hom-family-natural-transformation-Category C D F G β) →
     α ＝ β
-  eq-eq-components-natural-transformation-Category =
-    eq-eq-components-natural-transformation-Precategory
+  eq-htpy-hom-family-natural-transformation-Category =
+    eq-htpy-hom-family-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -206,8 +207,7 @@ module _
     right-unit-law-comp-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
-      { F}
-      { G}
+      F G
 
   left-unit-law-comp-natural-transformation-Category :
     {F G : functor-Category C D}
@@ -218,11 +218,10 @@ module _
     left-unit-law-comp-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
-      { F}
-      { G}
+      F G
 
   associative-comp-natural-transformation-Category :
-    {F G H I : functor-Category C D}
+    (F G H I : functor-Category C D)
     (α : natural-transformation-Category C D F G)
     (β : natural-transformation-Category C D G H)
     (γ : natural-transformation-Category C D H I) →
@@ -230,9 +229,8 @@ module _
       ( comp-natural-transformation-Category C D G H I γ β) α ＝
     comp-natural-transformation-Category C D F H I γ
       ( comp-natural-transformation-Category C D F G H β α)
-  associative-comp-natural-transformation-Category {F} {G} {H} {I} =
+  associative-comp-natural-transformation-Category =
     associative-comp-natural-transformation-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
-      { F} {G} {H} {I}
 ```

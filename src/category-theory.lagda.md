@@ -37,6 +37,7 @@ open import category-theory.adjunctions-large-precategories public
 open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.categories public
+open import category-theory.category-of-functors public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.dependent-products-of-categories public
 open import category-theory.dependent-products-of-precategories public

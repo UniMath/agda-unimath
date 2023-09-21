@@ -1,4 +1,4 @@
-# Functors between categories
+# Functors on categories
 
 ```agda
 module category-theory.functors-categories where
@@ -22,9 +22,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **functor** between two categories is a
-[functor](category-theory.functors-categories.md) between the underlying
-[categories](category-theory.categories.md).
+A **functor** between two [categories](category-theory.categories.md) is a
+[functor](category-theory.functors-precategories.md) between the underlying
+[precategories](category-theory.precategories.md).
 
 ## Definition
 
@@ -105,7 +105,7 @@ module _
       ( F)
 ```
 
-### Functors between categories
+### Functors on categories
 
 ```agda
 module _
@@ -251,7 +251,7 @@ module _
       ( F)
 ```
 
-### Extensionality of functors between precategories
+### Extensionality of functors on categories
 
 ```agda
 module _

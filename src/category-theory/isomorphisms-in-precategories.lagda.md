@@ -124,7 +124,7 @@ module _
 
 ## Examples
 
-### The identity morphisms are isomorphisms
+### The identity isomorphisms
 
 For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
 from `x` to `x` since `id_x ∘ id_x = id_x` (it is its own inverse).
@@ -338,7 +338,7 @@ module _
     is-retraction-comp-is-iso-hom-Precategory q p
 ```
 
-### Composition of isomorphisms
+### The composition operation on isomorphisms
 
 ```agda
 module _

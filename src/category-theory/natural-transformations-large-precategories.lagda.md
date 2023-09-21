@@ -1,4 +1,4 @@
-# Natural transformations between functors between large precategories
+# Natural transformations between functors on large precategories
 
 ```agda
 module category-theory.natural-transformations-large-precategories where
@@ -70,17 +70,17 @@ module _
     where
     constructor make-natural-transformation
     field
-      components-natural-transformation-Large-Precategory :
+      hom-family-natural-transformation-Large-Precategory :
         hom-family-functor-Large-Precategory
       coherence-square-natural-transformation-Large-Precategory :
         {l1 l2 : Level} {X : obj-Large-Precategory C l1}
         {Y : obj-Large-Precategory C l2}
         (f : type-hom-Large-Precategory C X Y) →
         coherence-square-Large-Precategory D
-          ( components-natural-transformation-Large-Precategory X)
+          ( hom-family-natural-transformation-Large-Precategory X)
           ( map-hom-functor-Large-Precategory F f)
           ( map-hom-functor-Large-Precategory G f)
-          ( components-natural-transformation-Large-Precategory Y)
+          ( hom-family-natural-transformation-Large-Precategory Y)
 
   open natural-transformation-Large-Precategory public
 ```
@@ -102,7 +102,7 @@ module _
   id-natural-transformation-Large-Precategory :
     ( F : functor-Large-Precategory C D γF) →
     natural-transformation-Large-Precategory F F
-  components-natural-transformation-Large-Precategory
+  hom-family-natural-transformation-Large-Precategory
     ( id-natural-transformation-Large-Precategory F) X =
       id-hom-Large-Precategory D
   coherence-square-natural-transformation-Large-Precategory
@@ -131,34 +131,34 @@ module _
     natural-transformation-Large-Precategory G H →
     natural-transformation-Large-Precategory F G →
     natural-transformation-Large-Precategory F H
-  components-natural-transformation-Large-Precategory
+  hom-family-natural-transformation-Large-Precategory
     ( comp-natural-transformation-Large-Precategory b a) X =
       comp-hom-Large-Precategory D
-        ( components-natural-transformation-Large-Precategory b X)
-        ( components-natural-transformation-Large-Precategory a X)
+        ( hom-family-natural-transformation-Large-Precategory b X)
+        ( hom-family-natural-transformation-Large-Precategory a X)
   coherence-square-natural-transformation-Large-Precategory
     ( comp-natural-transformation-Large-Precategory b a) {X = X} {Y} f =
     ( inv
       ( associative-comp-hom-Large-Precategory D
         ( map-hom-functor-Large-Precategory H f)
-        ( components-natural-transformation-Large-Precategory b X)
-        ( components-natural-transformation-Large-Precategory a X))) ∙
+        ( hom-family-natural-transformation-Large-Precategory b X)
+        ( hom-family-natural-transformation-Large-Precategory a X))) ∙
     ( ap
       ( comp-hom-Large-Precategory' D
-        ( components-natural-transformation-Large-Precategory a X))
+        ( hom-family-natural-transformation-Large-Precategory a X))
       ( coherence-square-natural-transformation-Large-Precategory b f)) ∙
     ( associative-comp-hom-Large-Precategory D
-      ( components-natural-transformation-Large-Precategory b Y)
+      ( hom-family-natural-transformation-Large-Precategory b Y)
       ( map-hom-functor-Large-Precategory G f)
-      ( components-natural-transformation-Large-Precategory a X)) ∙
+      ( hom-family-natural-transformation-Large-Precategory a X)) ∙
     ( ap
       ( comp-hom-Large-Precategory D
-        ( components-natural-transformation-Large-Precategory b Y))
+        ( hom-family-natural-transformation-Large-Precategory b Y))
       ( coherence-square-natural-transformation-Large-Precategory a f)) ∙
     ( inv
       ( associative-comp-hom-Large-Precategory D
-        ( components-natural-transformation-Large-Precategory b Y)
-        ( components-natural-transformation-Large-Precategory a Y)
+        ( hom-family-natural-transformation-Large-Precategory b Y)
+        ( hom-family-natural-transformation-Large-Precategory a Y)
         ( map-hom-functor-Large-Precategory F f)))
 ```
 

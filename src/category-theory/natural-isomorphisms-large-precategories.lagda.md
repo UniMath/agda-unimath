@@ -71,7 +71,7 @@ module _
   natural-transformation-natural-isomorphism-Large-Precategory :
     natural-isomorphism-Large-Precategory →
     natural-transformation-Large-Precategory F G
-  components-natural-transformation-Large-Precategory
+  hom-family-natural-transformation-Large-Precategory
     ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
     hom-iso-Large-Precategory D
       ( components-natural-isomorphism-Large-Precategory γ X)

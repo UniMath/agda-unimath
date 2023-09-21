@@ -415,7 +415,7 @@ module _
       ( comp-functor-Large-Precategory
         ( right-adjoint-Adjunction-Large-Precategory FG)
         ( left-adjoint-Adjunction-Large-Precategory FG))
-  components-natural-transformation-Large-Precategory
+  hom-family-natural-transformation-Large-Precategory
     ( unit-Adjunction-Large-Precategory FG)
     ( X) =
     map-inv-equiv-is-adjoint-pair-Adjunction-Large-Precategory C D FG X
@@ -493,7 +493,7 @@ module _
         ( obj-right-adjoint-Adjunction-Large-Precategory C D FG
           ( obj-left-adjoint-Adjunction-Large-Precategory C D FG X))
     η =
-      components-natural-transformation-Large-Precategory
+      hom-family-natural-transformation-Large-Precategory
         ( unit-Adjunction-Large-Precategory FG)
 ```
 
@@ -510,7 +510,7 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
         ( left-adjoint-Adjunction-Large-Precategory FG)
         ( right-adjoint-Adjunction-Large-Precategory FG))
       ( id-functor-Large-Precategory)
-  components-natural-transformation-Large-Precategory
+  hom-family-natural-transformation-Large-Precategory
     ( counit-Adjunction-Large-Precategory FG) Y =
     map-equiv-is-adjoint-pair-Adjunction-Large-Precategory C D FG
       ( obj-right-adjoint-Adjunction-Large-Precategory C D FG Y)
@@ -581,6 +581,6 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
           ( obj-right-adjoint-Adjunction-Large-Precategory C D FG Y))
         ( Y)
     ε =
-      components-natural-transformation-Large-Precategory
+      hom-family-natural-transformation-Large-Precategory
         ( counit-Adjunction-Large-Precategory FG)
 ```

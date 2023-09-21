@@ -61,7 +61,7 @@ module _
       ( F) →
     type-Set (map-obj-functor-Precategory C (Set-Precategory l2) F c)
   yoneda-evid-Precategory α =
-    components-natural-transformation-Precategory
+    hom-family-natural-transformation-Precategory
       ( C)
       ( Set-Precategory l2)
       ( rep-functor-Precategory C c)

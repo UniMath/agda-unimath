@@ -1,4 +1,4 @@
-# Natural isomorphisms between functors between categories
+# Natural isomorphisms between functors on categories
 
 ```agda
 module category-theory.natural-isomorphisms-categories where
@@ -19,8 +19,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism between functors on categories is a natural isomorphism
-between the functors on the underlying precategories.
+A **natural isomorphism** between
+[functors](category-theory.functors-categories.md) on
+[categories](category-theory.categories.md) is a
+[natural isomorphism](category-theory.natural-isomorphisms-precategories.md)
+between the [functors](category-theory.functors-precategories.md) on the
+underlying [precategories](category-theory.precategories.md).
 
 ## Definition
 

@@ -1,4 +1,4 @@
-# Functors between precategories
+# Functors on precategories
 
 ```agda
 module category-theory.functors-precategories where
@@ -110,7 +110,7 @@ module _
   preserves-id-hom-is-functor-map-Precategory = pr2
 ```
 
-### Functors between Precategories
+### Functors on Precategories
 
 ```agda
 module _
@@ -276,7 +276,7 @@ module _
   pr2 is-functor-map-Precategory-Prop = is-prop-is-functor-map-Precategory
 ```
 
-### Extensionality of functors between precategories
+### Extensionality of functors on precategories
 
 ```agda
 module _

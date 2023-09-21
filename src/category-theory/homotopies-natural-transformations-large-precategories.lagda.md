@@ -44,8 +44,8 @@ module _
     (α β : natural-transformation-Large-Precategory F G) → UUω
   htpy-natural-transformation-Large-Precategory α β =
     { l : Level} (X : obj-Large-Precategory C l) →
-    ( components-natural-transformation-Large-Precategory α X) ＝
-    ( components-natural-transformation-Large-Precategory β X)
+    ( hom-family-natural-transformation-Large-Precategory α X) ＝
+    ( hom-family-natural-transformation-Large-Precategory β X)
 ```
 
 ### The reflexivity homotopy
