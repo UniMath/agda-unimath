@@ -27,7 +27,7 @@ it exists, is an object with the universal property that there is a
 
 ## Definitions
 
-### The predicate of being a initial object in a precategory
+### The universal property of an initial object in a precategory
 
 ```agda
 is-initial-obj-Precategory :
@@ -54,7 +54,7 @@ module _
 
 ```
 
-### Terminal objects in precategories
+### Initial objects in precategories
 
 ```agda
 initial-obj-Precategory :

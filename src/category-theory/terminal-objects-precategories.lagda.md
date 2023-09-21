@@ -21,13 +21,14 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The **terminal object** of a [precategory](category-theory.precategories.md) (if
-it exists) is an object with the universal property that there is a unique
-morphism into it from any object.
+The **terminal object** of a [precategory](category-theory.precategories.md), if
+it exists, is an object with the universal property that there is a
+[unique](foundation-core.contractible-types.md) morphism into it from any
+object.
 
 ## Definition
 
-### The predicate of being a terminal object in a precategory
+### The universal property of a terminal object in a precategory
 
 ```agda
 is-terminal-obj-Precategory :
