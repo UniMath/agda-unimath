@@ -158,7 +158,7 @@ module _
   pr1 preorder-is-prop-hom-Precategory =
     obj-Precategory C
   pr1 (pr1 (pr2 preorder-is-prop-hom-Precategory) x y) =
-    type-Set (hom-Precategory C x y)
+    type-hom-Precategory C x y
   pr2 (pr1 (pr2 preorder-is-prop-hom-Precategory) x y) =
     is-prop-hom-C x y
   pr1 (pr2 (pr2 preorder-is-prop-hom-Precategory)) x =

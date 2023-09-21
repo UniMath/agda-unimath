@@ -7,6 +7,7 @@ module category-theory.functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.maps-of-categories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -39,37 +40,6 @@ precategory `D` consists of:
 - `F₁ (g ∘ f) = F₁ g ∘ F₁ f`.
 
 ## Definition
-
-### Maps between precategories
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (D : Precategory l3 l4)
-  where
-
-  map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  map-Precategory =
-    Σ ( obj-Precategory C → obj-Precategory D)
-      ( λ F₀ →
-        {x y : obj-Precategory C} →
-        type-hom-Precategory C x y →
-        type-hom-Precategory D (F₀ x) (F₀ y))
-
-  map-obj-map-Precategory :
-    (F : map-Precategory) → obj-Precategory C → obj-Precategory D
-  map-obj-map-Precategory = pr1
-
-  map-hom-map-Precategory :
-    (F : map-Precategory)
-    {x y : obj-Precategory C} →
-    type-hom-Precategory C x y →
-    type-hom-Precategory D
-      ( map-obj-map-Precategory F x)
-      ( map-obj-map-Precategory F y)
-  map-hom-map-Precategory = pr2
-```
 
 ### The predicate of being a functor on maps between Precategories
 

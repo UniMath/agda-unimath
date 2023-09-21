@@ -57,14 +57,14 @@ module _
     natural-transformation-Precategory
       ( C)
       ( Set-Precategory l2)
-      ( rep-functor-Precategory C c)
+      ( representable-functor-Precategory C c)
       ( F) →
     type-Set (map-obj-functor-Precategory C (Set-Precategory l2) F c)
   yoneda-evid-Precategory α =
     hom-family-natural-transformation-Precategory
       ( C)
       ( Set-Precategory l2)
-      ( rep-functor-Precategory C c)
+      ( representable-functor-Precategory C c)
       ( F)
       ( α)
       ( c)
@@ -73,7 +73,7 @@ module _
   yoneda-extension-Precategory :
     type-Set (map-obj-functor-Precategory C (Set-Precategory l2) F c) →
     natural-transformation-Precategory
-      C (Set-Precategory l2) (rep-functor-Precategory C c) F
+      C (Set-Precategory l2) (representable-functor-Precategory C c) F
   pr1 (yoneda-extension-Precategory u) x f =
     map-hom-functor-Precategory C (Set-Precategory l2) F f u
   pr2 (yoneda-extension-Precategory u) g =
@@ -96,7 +96,7 @@ module _
   pr2 retraction-yoneda-evid-Precategory α =
     eq-type-subtype
       ( is-natural-transformation-Precategory-Prop
-        ( C) (Set-Precategory l2) (rep-functor-Precategory C c) F)
+        ( C) (Set-Precategory l2) (representable-functor-Precategory C c) F)
       ( eq-htpy
         ( λ x →
           eq-htpy
@@ -112,7 +112,7 @@ module _
 
   equiv-yoneda-lemma-Precategory :
     ( natural-transformation-Precategory C (Set-Precategory l2)
-      ( rep-functor-Precategory C c) (F)) ≃
+      ( representable-functor-Precategory C c) (F)) ≃
     ( type-Set (map-obj-functor-Precategory C (Set-Precategory l2) F c))
   pr1 equiv-yoneda-lemma-Precategory = yoneda-evid-Precategory
   pr2 equiv-yoneda-lemma-Precategory = yoneda-lemma-Precategory
