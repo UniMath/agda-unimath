@@ -31,9 +31,9 @@ ring.
 ## Definition
 
 ```agda
-is-local-commutative-ring-Prop :
+is-local-prop-Commutative-Ring :
   {l : Level} (A : Commutative-Ring l) → Prop l
-is-local-commutative-ring-Prop A = is-local-ring-Prop (ring-Commutative-Ring A)
+is-local-prop-Commutative-Ring A = is-local-prop-Ring (ring-Commutative-Ring A)
 
 is-local-Commutative-Ring : {l : Level} → Commutative-Ring l → UU l
 is-local-Commutative-Ring A = is-local-Ring (ring-Commutative-Ring A)

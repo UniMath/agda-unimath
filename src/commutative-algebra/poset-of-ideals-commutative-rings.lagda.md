@@ -38,12 +38,12 @@ module _
   {l1 : Level} (A : Commutative-Ring l1)
   where
 
-  leq-ideal-Commutative-Ring-Prop :
+  leq-prop-ideal-Commutative-Ring :
     {l2 l3 : Level}
     (I : ideal-Commutative-Ring l2 A) (J : ideal-Commutative-Ring l3 A) →
     Prop (l1 ⊔ l2 ⊔ l3)
-  leq-ideal-Commutative-Ring-Prop =
-    leq-ideal-Ring-Prop (ring-Commutative-Ring A)
+  leq-prop-ideal-Commutative-Ring =
+    leq-prop-ideal-Ring (ring-Commutative-Ring A)
 
   leq-ideal-Commutative-Ring :
     {l2 l3 : Level}
@@ -94,8 +94,8 @@ module _
     Large-Preorder (λ l1 → l ⊔ lsuc l1) (λ l1 l2 → l ⊔ l1 ⊔ l2)
   type-Large-Preorder ideal-Commutative-Ring-Large-Preorder l1 =
     ideal-Commutative-Ring l1 A
-  leq-Large-Preorder-Prop ideal-Commutative-Ring-Large-Preorder =
-    leq-ideal-Commutative-Ring-Prop A
+  leq-prop-Large-Preorder ideal-Commutative-Ring-Large-Preorder =
+    leq-prop-ideal-Commutative-Ring A
   refl-leq-Large-Preorder ideal-Commutative-Ring-Large-Preorder =
     refl-leq-ideal-Commutative-Ring A
   transitive-leq-Large-Preorder ideal-Commutative-Ring-Large-Preorder =

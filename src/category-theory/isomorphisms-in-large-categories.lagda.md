@@ -156,21 +156,26 @@ This is because, by the J-rule, it is enough to construct an isomorphism given
 isomorphism.
 
 ```agda
-iso-eq-Large-Category :
-  {α : Level → Level} {β : Level → Level → Level} →
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β) {l1 : Level}
-  (X : obj-Large-Category C l1) (Y : obj-Large-Category C l1) →
-  X ＝ Y → iso-Large-Category C X Y
-iso-eq-Large-Category C =
-  iso-eq-Large-Precategory (large-precategory-Large-Category C)
+  (X Y : obj-Large-Category C l1)
+  where
 
-compute-iso-eq-Large-Category :
-  {α : Level → Level} {β : Level → Level → Level} →
-  (C : Large-Category α β) {l1 : Level}
-  (X : obj-Large-Category C l1) (Y : obj-Large-Category C l1) →
-  iso-eq-Category (category-Large-Category C l1) X Y ~
-  iso-eq-Large-Category C X Y
-compute-iso-eq-Large-Category C X .X refl = refl
+  iso-eq-Large-Category :
+    X ＝ Y → iso-Large-Category C X Y
+  iso-eq-Large-Category =
+    iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y
+
+  compute-iso-eq-Large-Category :
+    iso-eq-Category (category-Large-Category C l1) X Y ~
+    iso-eq-Large-Category
+  compute-iso-eq-Large-Category refl = refl
+
+  eq-iso-Large-Category :
+    iso-Large-Category C X Y → X ＝ Y
+  eq-iso-Large-Category =
+    map-inv-is-equiv (is-large-category-Large-Category C X Y)
 ```
 
 ## Properties

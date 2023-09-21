@@ -42,9 +42,9 @@ module _
   {l1 l2 : Level} (A : Commutative-Ring l1)
   where
 
-  is-radical-ideal-commutative-ring-Prop :
+  is-radical-ideal-prop-Commutative-Ring :
     (I : ideal-Commutative-Ring l2 A) → Prop (l1 ⊔ l2)
-  is-radical-ideal-commutative-ring-Prop I =
+  is-radical-ideal-prop-Commutative-Ring I =
     Π-Prop
       ( type-Commutative-Ring A)
       ( λ f →
@@ -57,13 +57,13 @@ module _
   is-radical-ideal-Commutative-Ring :
     (I : ideal-Commutative-Ring l2 A) → UU (l1 ⊔ l2)
   is-radical-ideal-Commutative-Ring I =
-    type-Prop (is-radical-ideal-commutative-ring-Prop I)
+    type-Prop (is-radical-ideal-prop-Commutative-Ring I)
 
   is-prop-is-radical-ideal-Commutative-Ring :
     (I : ideal-Commutative-Ring l2 A) →
     is-prop (is-radical-ideal-Commutative-Ring I)
   is-prop-is-radical-ideal-Commutative-Ring I =
-    is-prop-type-Prop (is-radical-ideal-commutative-ring-Prop I)
+    is-prop-type-Prop (is-radical-ideal-prop-Commutative-Ring I)
 ```
 
 ### Radical ideals

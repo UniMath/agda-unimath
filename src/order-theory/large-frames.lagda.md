@@ -91,8 +91,8 @@ module _
   is-set-type-Large-Frame =
     is-set-type-Large-Poset (large-poset-Large-Frame L)
 
-  leq-Large-Frame-Prop : Large-Relation-Prop α β type-Large-Frame
-  leq-Large-Frame-Prop = leq-Large-Poset-Prop (large-poset-Large-Frame L)
+  leq-prop-Large-Frame : Large-Relation-Prop α β type-Large-Frame
+  leq-prop-Large-Frame = leq-prop-Large-Poset (large-poset-Large-Frame L)
 
   leq-Large-Frame : Large-Relation α β type-Large-Frame
   leq-Large-Frame = leq-Large-Poset (large-poset-Large-Frame L)
@@ -108,16 +108,17 @@ module _
   leq-eq-Large-Frame =
     leq-eq-Large-Poset (large-poset-Large-Frame L)
 
-  refl-leq-Large-Frame : is-large-reflexive type-Large-Frame leq-Large-Frame
+  refl-leq-Large-Frame :
+    is-reflexive-Large-Relation type-Large-Frame leq-Large-Frame
   refl-leq-Large-Frame = refl-leq-Large-Poset (large-poset-Large-Frame L)
 
   antisymmetric-leq-Large-Frame :
-    is-large-antisymmetric type-Large-Frame leq-Large-Frame
+    is-antisymmetric-Large-Relation type-Large-Frame leq-Large-Frame
   antisymmetric-leq-Large-Frame =
     antisymmetric-leq-Large-Poset (large-poset-Large-Frame L)
 
   transitive-leq-Large-Frame :
-    is-large-transitive type-Large-Frame leq-Large-Frame
+    is-transitive-Large-Relation type-Large-Frame leq-Large-Frame
   transitive-leq-Large-Frame =
     transitive-leq-Large-Poset (large-poset-Large-Frame L)
 

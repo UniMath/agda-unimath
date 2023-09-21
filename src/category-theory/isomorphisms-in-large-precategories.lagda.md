@@ -183,8 +183,7 @@ module _
   all-elements-equal-is-iso-hom-Large-Precategory :
     (f : type-hom-Large-Precategory C X Y)
     (H K : is-iso-hom-Large-Precategory C f) → H ＝ K
-  all-elements-equal-is-iso-hom-Large-Precategory f
-    (pair g (pair p q)) (pair g' (pair p' q')) =
+  all-elements-equal-is-iso-hom-Large-Precategory f (g , p , q) (g' , p' , q') =
     eq-type-subtype
       ( λ g →
         prod-Prop

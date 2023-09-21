@@ -118,21 +118,21 @@ module _
     leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
   refl-leq-Π-Large-Meet-Semilattice :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( type-Π-Large-Meet-Semilattice)
       ( leq-Π-Large-Meet-Semilattice)
   refl-leq-Π-Large-Meet-Semilattice =
     refl-leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
   antisymmetric-leq-Π-Large-Meet-Semilattice :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( type-Π-Large-Meet-Semilattice)
       ( leq-Π-Large-Meet-Semilattice)
   antisymmetric-leq-Π-Large-Meet-Semilattice =
     antisymmetric-leq-Large-Meet-Semilattice Π-Large-Meet-Semilattice
 
   transitive-leq-Π-Large-Meet-Semilattice :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( type-Π-Large-Meet-Semilattice)
       ( leq-Π-Large-Meet-Semilattice)
   transitive-leq-Π-Large-Meet-Semilattice =

@@ -12,6 +12,7 @@ open import category-theory.precategories
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -30,10 +31,22 @@ it exists, is an object with the universal property that there is a
 ### The universal property of an initial object in a precategory
 
 ```agda
-is-initial-obj-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) → obj-Precategory C → UU (l1 ⊔ l2)
-is-initial-obj-Precategory C x =
-  (y : obj-Precategory C) → is-contr (type-hom-Precategory C x y)
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (x : obj-Precategory C)
+  where
+
+  is-initial-prop-obj-Precategory : Prop (l1 ⊔ l2)
+  is-initial-prop-obj-Precategory =
+    Π-Prop
+      ( obj-Precategory C)
+      ( λ y → is-contr-Prop (type-hom-Precategory C x y))
+
+  is-initial-obj-Precategory : UU (l1 ⊔ l2)
+  is-initial-obj-Precategory = type-Prop is-initial-prop-obj-Precategory
+
+  is-prop-is-initial-obj-Precategory : is-prop is-initial-obj-Precategory
+  is-prop-is-initial-obj-Precategory =
+    is-prop-type-Prop is-initial-prop-obj-Precategory
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -51,7 +64,6 @@ module _
     (f : type-hom-Precategory C x y) →
     hom-is-initial-obj-Precategory y ＝ f
   is-unique-hom-is-initial-obj-Precategory = contraction ∘ t
-
 ```
 
 ### Initial objects in precategories
@@ -62,7 +74,6 @@ initial-obj-Precategory :
 initial-obj-Precategory C =
   Σ (obj-Precategory C) (is-initial-obj-Precategory C)
 
-
 module _
   {l1 l2 : Level}
   (C : Precategory l1 l2)
@@ -72,7 +83,8 @@ module _
   obj-initial-obj-Precategory : obj-Precategory C
   obj-initial-obj-Precategory = pr1 t
 
-  is-initial-obj-initial-obj-Precategory : is-initial-obj-Precategory C obj-initial-obj-Precategory
+  is-initial-obj-initial-obj-Precategory :
+    is-initial-obj-Precategory C obj-initial-obj-Precategory
   is-initial-obj-initial-obj-Precategory = pr2 t
 
   hom-initial-obj-Precategory :

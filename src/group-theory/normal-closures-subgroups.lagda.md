@@ -131,10 +131,10 @@ module _
   is-closed-under-multiplication-normal-closure-Subgroup =
     is-closed-under-multiplication-Subgroup G subgroup-normal-closure-Subgroup
 
-  is-closed-under-inv-normal-closure-Subgroup :
-    is-closed-under-inv-subset-Group G subset-normal-closure-Subgroup
-  is-closed-under-inv-normal-closure-Subgroup =
-    is-closed-under-inv-Subgroup G subgroup-normal-closure-Subgroup
+  is-closed-under-inverses-normal-closure-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-normal-closure-Subgroup
+  is-closed-under-inverses-normal-closure-Subgroup =
+    is-closed-under-inverses-Subgroup G subgroup-normal-closure-Subgroup
 
   contains-generating-subset-normal-closure-Subgroup :
     generating-subset-normal-closure-Subgroup ⊆ subset-normal-closure-Subgroup

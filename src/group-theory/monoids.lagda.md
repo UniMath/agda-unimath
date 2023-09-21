@@ -47,8 +47,8 @@ module _
   semigroup-Monoid : Semigroup l
   semigroup-Monoid = pr1 M
 
-  is-unital-semigroup-Monoid : is-unital-Semigroup semigroup-Monoid
-  is-unital-semigroup-Monoid = pr2 M
+  is-unital-Monoid : is-unital-Semigroup semigroup-Monoid
+  is-unital-Monoid = pr2 M
 
   type-Monoid : UU l
   type-Monoid = type-Semigroup semigroup-Monoid

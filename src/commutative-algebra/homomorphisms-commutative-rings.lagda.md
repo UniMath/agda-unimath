@@ -9,6 +9,7 @@ module commutative-algebra.homomorphisms-commutative-rings where
 ```agda
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-semirings
+open import commutative-algebra.invertible-elements-commutative-rings
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -428,5 +429,24 @@ module _
     right-unit-law-comp-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
+      ( f)
+```
+
+### Any homomorphism of commutative rings sends invertible elements to invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1) (S : Commutative-Ring l2)
+  (f : type-hom-Commutative-Ring A S)
+  where
+
+  preserves-invertible-elements-hom-Commutative-Ring :
+    {x : type-Commutative-Ring A} →
+    is-invertible-element-Commutative-Ring A x →
+    is-invertible-element-Commutative-Ring S (map-hom-Commutative-Ring A S f x)
+  preserves-invertible-elements-hom-Commutative-Ring =
+    preserves-invertible-elements-hom-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring S)
       ( f)
 ```

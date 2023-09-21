@@ -21,9 +21,11 @@ open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-commutative-monoids
+open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 
 open import ring-theory.homomorphisms-semirings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.rings
 ```
 
@@ -135,6 +137,9 @@ module _
 
     hom-ab-hom-Ring : type-hom-Ab (ab-Ring R) (ab-Ring S)
     hom-ab-hom-Ring = pr1 f
+
+    hom-group-hom-Ring : type-hom-Group (group-Ring R) (group-Ring S)
+    hom-group-hom-Ring = hom-ab-hom-Ring
 
     hom-commutative-monoid-hom-Ring :
       type-hom-Commutative-Monoid
@@ -277,6 +282,17 @@ module _
   refl-htpy-hom-Ring f = refl-htpy
 ```
 
+### Evaluating ring homomorphisms at an element
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  where
+
+  ev-element-hom-Ring : type-Ring R → type-hom-Ring R S → type-Ring S
+  ev-element-hom-Ring x f = map-hom-Ring R S f x
+```
+
 ## Properties
 
 ### Homotopies characterize identifications of ring homomorphisms
@@ -394,4 +410,23 @@ comp-law-ab-Ring R S T g f =
     ( ab-Ring R)
     ( ab-Ring T)
     ( refl-htpy)
+```
+
+### Any ring homomorphism preserves invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  (f : type-hom-Ring R S)
+  where
+
+  preserves-invertible-elements-hom-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring S (map-hom-Ring R S f x)
+  preserves-invertible-elements-hom-Ring =
+    preserves-invertible-elements-hom-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( hom-multiplicative-monoid-hom-Ring R S f)
 ```

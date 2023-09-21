@@ -11,8 +11,8 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.universe-levels
 open import foundation.function-types
+open import foundation.universe-levels
 
 open import foundation-core.identity-types
 ```
@@ -52,7 +52,6 @@ module _
     (f : type-hom-Precategory C y x) →
     hom-is-terminal-obj-Precategory y ＝ f
   is-unique-hom-is-terminal-obj-Precategory = contraction ∘ t
-
 ```
 
 ### Terminal objects in precategories
@@ -63,7 +62,6 @@ terminal-obj-Precategory :
 terminal-obj-Precategory C =
   Σ (obj-Precategory C) (is-terminal-obj-Precategory C)
 
-
 module _
   {l1 l2 : Level}
   (C : Precategory l1 l2)
@@ -73,7 +71,8 @@ module _
   obj-terminal-obj-Precategory : obj-Precategory C
   obj-terminal-obj-Precategory = pr1 t
 
-  is-terminal-obj-terminal-obj-Precategory : is-terminal-obj-Precategory C obj-terminal-obj-Precategory
+  is-terminal-obj-terminal-obj-Precategory :
+    is-terminal-obj-Precategory C obj-terminal-obj-Precategory
   is-terminal-obj-terminal-obj-Precategory = pr2 t
 
   hom-terminal-obj-Precategory :
