@@ -63,8 +63,8 @@ module _
   hom-family-functor-Large-Precategory =
     {l : Level} (X : obj-Large-Precategory C l) →
     hom-Large-Precategory D
-      ( map-obj-functor-Large-Precategory F X)
-      ( map-obj-functor-Large-Precategory G X)
+      ( obj-functor-Large-Precategory F X)
+      ( obj-functor-Large-Precategory G X)
 
   record natural-transformation-Large-Precategory : UUω
     where
@@ -78,8 +78,8 @@ module _
         (f : hom-Large-Precategory C X Y) →
         coherence-square-Large-Precategory D
           ( hom-family-natural-transformation-Large-Precategory X)
-          ( map-hom-functor-Large-Precategory F f)
-          ( map-hom-functor-Large-Precategory G f)
+          ( hom-functor-Large-Precategory F f)
+          ( hom-functor-Large-Precategory G f)
           ( hom-family-natural-transformation-Large-Precategory Y)
 
   open natural-transformation-Large-Precategory public
@@ -108,10 +108,10 @@ module _
   coherence-square-natural-transformation-Large-Precategory
     ( id-natural-transformation-Large-Precategory F) f =
         ( right-unit-law-comp-hom-Large-Precategory D
-          ( map-hom-functor-Large-Precategory F f)) ∙
+          ( hom-functor-Large-Precategory F f)) ∙
         ( inv
           ( left-unit-law-comp-hom-Large-Precategory D
-            ( map-hom-functor-Large-Precategory F f)))
+            ( hom-functor-Large-Precategory F f)))
 ```
 
 ### Composition of natural transformations
@@ -140,7 +140,7 @@ module _
     ( comp-natural-transformation-Large-Precategory b a) {X = X} {Y} f =
     ( inv
       ( associative-comp-hom-Large-Precategory D
-        ( map-hom-functor-Large-Precategory H f)
+        ( hom-functor-Large-Precategory H f)
         ( hom-family-natural-transformation-Large-Precategory b X)
         ( hom-family-natural-transformation-Large-Precategory a X))) ∙
     ( ap
@@ -149,7 +149,7 @@ module _
       ( coherence-square-natural-transformation-Large-Precategory b f)) ∙
     ( associative-comp-hom-Large-Precategory D
       ( hom-family-natural-transformation-Large-Precategory b Y)
-      ( map-hom-functor-Large-Precategory G f)
+      ( hom-functor-Large-Precategory G f)
       ( hom-family-natural-transformation-Large-Precategory a X)) ∙
     ( ap
       ( comp-hom-Large-Precategory D
@@ -159,7 +159,7 @@ module _
       ( associative-comp-hom-Large-Precategory D
         ( hom-family-natural-transformation-Large-Precategory b Y)
         ( hom-family-natural-transformation-Large-Precategory a Y)
-        ( map-hom-functor-Large-Precategory F f)))
+        ( hom-functor-Large-Precategory F f)))
 ```
 
 ## See also

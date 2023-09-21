@@ -85,16 +85,16 @@ module _
   anafunctor-functor-Precategory :
     functor-Precategory C D → anafunctor-Precategory l4 C D
   pr1 (anafunctor-functor-Precategory F) X Y =
-    iso-Precategory D (map-obj-functor-Precategory C D F X) Y
+    iso-Precategory D (obj-functor-Precategory C D F X) Y
   pr1 (pr2 (anafunctor-functor-Precategory F)) X Y U u V v f =
     comp-hom-Precategory D
       ( comp-hom-Precategory D
         ( hom-iso-Precategory D v)
-        ( map-hom-functor-Precategory C D F f))
+        ( hom-functor-Precategory C D F f))
       ( hom-inv-iso-Precategory D u)
   pr1 (pr2 (pr2 (anafunctor-functor-Precategory F))) X =
     unit-trunc-Prop
-      ( pair (map-obj-functor-Precategory C D F X) (id-iso-Precategory D))
+      ( pair (obj-functor-Precategory C D F X) (id-iso-Precategory D))
   pr1 (pr2 (pr2 (pr2 (anafunctor-functor-Precategory F)))) X U u =
     ( ap
       ( comp-hom-Precategory' D (hom-inv-iso-Precategory D u))
@@ -113,44 +113,44 @@ module _
           ( ( inv
               ( associative-comp-hom-Precategory D
                 ( hom-iso-Precategory D w)
-                ( map-hom-functor-Precategory C D F g)
-                ( map-hom-functor-Precategory C D F f))) ∙
+                ( hom-functor-Precategory C D F g)
+                ( hom-functor-Precategory C D F f))) ∙
             ( ap
-              ( comp-hom-Precategory' D (map-hom-functor-Precategory C D F f))
+              ( comp-hom-Precategory' D (hom-functor-Precategory C D F f))
               ( ( inv
                   ( right-unit-law-comp-hom-Precategory D
                     ( comp-hom-Precategory D
                       ( hom-iso-Precategory D w)
-                      ( map-hom-functor-Precategory C D F g)))) ∙
+                      ( hom-functor-Precategory C D F g)))) ∙
                 ( ( ap
                     ( comp-hom-Precategory D
                       ( comp-hom-Precategory D
                         ( hom-iso-Precategory D w)
-                        ( map-hom-functor-Precategory C D F g)))
+                        ( hom-functor-Precategory C D F g)))
                       ( inv (is-retraction-hom-inv-iso-Precategory D v))) ∙
                   ( inv
                     ( associative-comp-hom-Precategory D
                       ( comp-hom-Precategory D
                         ( hom-iso-Precategory D w)
-                        ( map-hom-functor-Precategory C D F g))
+                        ( hom-functor-Precategory C D F g))
                       ( hom-inv-iso-Precategory D v)
                       ( hom-iso-Precategory D v)))))))) ∙
         ( associative-comp-hom-Precategory D
           ( comp-hom-Precategory D
             ( comp-hom-Precategory D
               ( hom-iso-Precategory D w)
-              ( map-hom-functor-Precategory C D F g))
+              ( hom-functor-Precategory C D F g))
             ( hom-inv-iso-Precategory D v))
           ( hom-iso-Precategory D v)
-          ( map-hom-functor-Precategory C D F f)))) ∙
+          ( hom-functor-Precategory C D F f)))) ∙
     ( associative-comp-hom-Precategory D
       ( comp-hom-Precategory D
         ( comp-hom-Precategory D
           ( hom-iso-Precategory D w)
-          ( map-hom-functor-Precategory C D F g))
+          ( hom-functor-Precategory C D F g))
         ( hom-inv-iso-Precategory D v))
       ( comp-hom-Precategory D
         ( hom-iso-Precategory D v)
-        ( map-hom-functor-Precategory C D F f))
+        ( hom-functor-Precategory C D F f))
       ( hom-inv-iso-Precategory D u))
 ```

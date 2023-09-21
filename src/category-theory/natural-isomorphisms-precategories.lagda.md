@@ -58,8 +58,8 @@ module _
   iso-family-functor-Precategory =
     (x : obj-Precategory C) →
     iso-Precategory D
-      ( map-obj-functor-Precategory C D F x)
-      ( map-obj-functor-Precategory C D G x)
+      ( obj-functor-Precategory C D F x)
+      ( obj-functor-Precategory C D G x)
 ```
 
 ### The predicate of being an isomorphism in a precategory
@@ -350,13 +350,13 @@ module _
     ( inv
       ( left-unit-law-comp-hom-Precategory D
         ( comp-hom-Precategory D
-          ( map-hom-functor-Precategory C D F g)
+          ( hom-functor-Precategory C D F g)
           ( hom-inv-family-is-natural-isomorphism-Precategory
               C D F G f is-iso-f x)))) ∙
     ( ap
       ( comp-hom-Precategory' D
         ( comp-hom-Precategory D
-          ( map-hom-functor-Precategory C D F g)
+          ( hom-functor-Precategory C D F g)
           ( hom-inv-family-is-natural-isomorphism-Precategory
               C D F G f is-iso-f x)))
       ( inv (is-retraction-hom-inv-is-iso-hom-Precategory D (is-iso-f y)))) ∙
@@ -364,7 +364,7 @@ module _
       ( hom-inv-family-is-natural-isomorphism-Precategory C D F G f is-iso-f y)
       ( hom-family-natural-transformation-Precategory C D F G f y)
       ( comp-hom-Precategory D
-        ( map-hom-functor-Precategory C D F g)
+        ( hom-functor-Precategory C D F g)
         ( hom-inv-family-is-natural-isomorphism-Precategory
             C D F G f is-iso-f x))) ∙
     ( ap
@@ -374,7 +374,7 @@ module _
       ( ( inv
           ( associative-comp-hom-Precategory D
             ( hom-family-natural-transformation-Precategory C D F G f y)
-            ( map-hom-functor-Precategory C D F g)
+            ( hom-functor-Precategory C D F g)
             ( hom-inv-family-is-natural-isomorphism-Precategory
                 C D F G f is-iso-f x))) ∙
         ( ap
@@ -383,14 +383,14 @@ module _
             ( coherence-square-natural-transformation-Precategory
                 C D F G f g))) ∙
         ( associative-comp-hom-Precategory D
-          ( map-hom-functor-Precategory C D G g)
+          ( hom-functor-Precategory C D G g)
           ( hom-family-natural-transformation-Precategory C D F G f x)
           ( hom-inv-is-iso-hom-Precategory D (is-iso-f x))) ∙
         ( ap
-          ( comp-hom-Precategory D (map-hom-functor-Precategory C D G g))
+          ( comp-hom-Precategory D (hom-functor-Precategory C D G g))
           ( is-section-hom-inv-is-iso-hom-Precategory D (is-iso-f x))) ∙
         ( right-unit-law-comp-hom-Precategory D
-          ( map-hom-functor-Precategory C D G g))))
+          ( hom-functor-Precategory C D G g))))
 
   is-section-natural-transformation-inv-is-natural-isomorphism-Precategory :
     (is-iso-f : is-natural-isomorphism-Precategory C D F G f) →

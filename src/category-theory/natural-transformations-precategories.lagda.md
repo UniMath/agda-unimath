@@ -51,15 +51,15 @@ module _
   hom-family-functor-Precategory =
     (x : obj-Precategory C) →
     hom-Precategory D
-      ( map-obj-functor-Precategory C D F x)
-      ( map-obj-functor-Precategory C D G x)
+      ( obj-functor-Precategory C D F x)
+      ( obj-functor-Precategory C D G x)
 
   is-natural-transformation-Precategory :
     hom-family-functor-Precategory → UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Precategory γ =
     {x y : obj-Precategory C} (f : hom-Precategory C x y) →
-    ( comp-hom-Precategory D (map-hom-functor-Precategory C D G f) (γ x)) ＝
-    ( comp-hom-Precategory D (γ y) (map-hom-functor-Precategory C D F f))
+    ( comp-hom-Precategory D (hom-functor-Precategory C D G f) (γ x)) ＝
+    ( comp-hom-Precategory D (γ y) (hom-functor-Precategory C D F f))
 
   natural-transformation-Precategory : UU (l1 ⊔ l2 ⊔ l4)
   natural-transformation-Precategory =
@@ -91,10 +91,10 @@ module _
   pr1 (id-natural-transformation-Precategory F) x = id-hom-Precategory D
   pr2 (id-natural-transformation-Precategory F) f =
     ( right-unit-law-comp-hom-Precategory D
-      ( map-hom-functor-Precategory C D F f)) ∙
+      ( hom-functor-Precategory C D F f)) ∙
     ( inv
       ( left-unit-law-comp-hom-Precategory D
-        ( map-hom-functor-Precategory C D F f)))
+        ( hom-functor-Precategory C D F f)))
 
   comp-natural-transformation-Precategory :
     (F G H : functor-Precategory C D) →
@@ -108,7 +108,7 @@ module _
   pr2 (comp-natural-transformation-Precategory F G H β α) {X} {Y} f =
     ( inv
       ( associative-comp-hom-Precategory D
-        ( map-hom-functor-Precategory C D H f)
+        ( hom-functor-Precategory C D H f)
         ( hom-family-natural-transformation-Precategory C D G H β X)
         ( hom-family-natural-transformation-Precategory C D F G α X))) ∙
     ( ap
@@ -117,7 +117,7 @@ module _
       ( coherence-square-natural-transformation-Precategory C D G H β f)) ∙
     ( associative-comp-hom-Precategory D
       ( hom-family-natural-transformation-Precategory C D G H β Y)
-      ( map-hom-functor-Precategory C D G f)
+      ( hom-functor-Precategory C D G f)
       ( hom-family-natural-transformation-Precategory C D F G α X)) ∙
     ( ap
       ( comp-hom-Precategory D
@@ -127,7 +127,7 @@ module _
       ( associative-comp-hom-Precategory D
         ( hom-family-natural-transformation-Precategory C D G H β Y)
         ( hom-family-natural-transformation-Precategory C D F G α Y)
-        ( map-hom-functor-Precategory C D F f)))
+        ( hom-functor-Precategory C D F f)))
 ```
 
 ## Properties
@@ -156,14 +156,14 @@ module _
             is-prop-Π
               ( λ f →
                 is-set-hom-Precategory D
-                  ( map-obj-functor-Precategory C D F x)
-                  ( map-obj-functor-Precategory C D G y)
+                  ( obj-functor-Precategory C D F x)
+                  ( obj-functor-Precategory C D G y)
                   ( comp-hom-Precategory D
-                    ( map-hom-functor-Precategory C D G f)
+                    ( hom-functor-Precategory C D G f)
                     ( γ x))
                   ( comp-hom-Precategory D
                     ( γ y)
-                    ( map-hom-functor-Precategory C D F f)))))
+                    ( hom-functor-Precategory C D F f)))))
 
   is-natural-transformation-Precategory-Prop :
     ( γ : hom-family-functor-Precategory C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
@@ -202,8 +202,8 @@ module _
       ( is-set-Π
         ( λ x →
           is-set-hom-Precategory D
-            ( map-obj-functor-Precategory C D F x)
-            ( map-obj-functor-Precategory C D G x)))
+            ( obj-functor-Precategory C D F x)
+            ( obj-functor-Precategory C D G x)))
       ( λ α →
         is-set-type-Set
           ( set-Prop (is-natural-transformation-Precategory-Prop C D F G α)))

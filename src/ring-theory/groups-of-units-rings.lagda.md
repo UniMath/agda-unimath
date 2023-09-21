@@ -248,10 +248,10 @@ module _
 ```agda
 group-of-units-ring-functor-Large-Precategory :
   functor-Large-Precategory Ring-Large-Precategory Group-Large-Precategory id
-map-obj-functor-Large-Precategory
+obj-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory =
   group-of-units-Ring
-map-hom-functor-Large-Precategory
+hom-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory {X = R} {Y = S} =
   hom-group-of-units-hom-Ring R S
 preserves-comp-functor-Large-Precategory

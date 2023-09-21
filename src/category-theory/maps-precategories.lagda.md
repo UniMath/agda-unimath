@@ -58,18 +58,18 @@ module _
         hom-Precategory C x y →
         hom-Precategory D (F₀ x) (F₀ y))
 
-  map-obj-map-Precategory :
+  obj-map-Precategory :
     (F : map-Precategory) → obj-Precategory C → obj-Precategory D
-  map-obj-map-Precategory = pr1
+  obj-map-Precategory = pr1
 
-  map-hom-map-Precategory :
+  hom-map-Precategory :
     (F : map-Precategory)
     {x y : obj-Precategory C} →
     hom-Precategory C x y →
     hom-Precategory D
-      ( map-obj-map-Precategory F x)
-      ( map-obj-map-Precategory F y)
-  map-hom-map-Precategory = pr2
+      ( obj-map-Precategory F x)
+      ( obj-map-Precategory F y)
+  hom-map-Precategory = pr2
 ```
 
 ## See also

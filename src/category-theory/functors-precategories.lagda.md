@@ -55,16 +55,16 @@ module _
   preserves-comp-hom-map-Precategory =
     {x y z : obj-Precategory C}
     (g : hom-Precategory C y z) (f : hom-Precategory C x y) →
-    ( map-hom-map-Precategory C D F (comp-hom-Precategory C g f)) ＝
+    ( hom-map-Precategory C D F (comp-hom-Precategory C g f)) ＝
     ( comp-hom-Precategory D
-      ( map-hom-map-Precategory C D F g)
-      ( map-hom-map-Precategory C D F f))
+      ( hom-map-Precategory C D F g)
+      ( hom-map-Precategory C D F f))
 
   preserves-id-hom-map-Precategory : UU (l1 ⊔ l4)
   preserves-id-hom-map-Precategory =
     (x : obj-Precategory C) →
-    ( map-hom-map-Precategory C D F (id-hom-Precategory C {x})) ＝
-    ( id-hom-Precategory D {map-obj-map-Precategory C D F x})
+    ( hom-map-Precategory C D F (id-hom-Precategory C {x})) ＝
+    ( id-hom-Precategory D {obj-map-Precategory C D F x})
 
   is-functor-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
   is-functor-map-Precategory =
@@ -98,36 +98,36 @@ module _
             hom-Precategory D (F₀ x) (F₀ y))
           ( λ F₁ → is-functor-map-Precategory C D (F₀ , F₁)))
 
-  map-obj-functor-Precategory :
+  obj-functor-Precategory :
     functor-Precategory → obj-Precategory C → obj-Precategory D
-  map-obj-functor-Precategory = pr1
+  obj-functor-Precategory = pr1
 
-  map-hom-functor-Precategory :
+  hom-functor-Precategory :
     (F : functor-Precategory) →
     {x y : obj-Precategory C} →
     (f : hom-Precategory C x y) →
     hom-Precategory D
-      ( map-obj-functor-Precategory F x)
-      ( map-obj-functor-Precategory F y)
-  map-hom-functor-Precategory F = pr1 (pr2 F)
+      ( obj-functor-Precategory F x)
+      ( obj-functor-Precategory F y)
+  hom-functor-Precategory F = pr1 (pr2 F)
 
   map-functor-Precategory : functor-Precategory → map-Precategory C D
-  pr1 (map-functor-Precategory F) = map-obj-functor-Precategory F
-  pr2 (map-functor-Precategory F) = map-hom-functor-Precategory F
+  pr1 (map-functor-Precategory F) = obj-functor-Precategory F
+  pr2 (map-functor-Precategory F) = hom-functor-Precategory F
 
   preserves-comp-functor-Precategory :
     (F : functor-Precategory) {x y z : obj-Precategory C}
     (g : hom-Precategory C y z) (f : hom-Precategory C x y) →
-    ( map-hom-functor-Precategory F (comp-hom-Precategory C g f)) ＝
+    ( hom-functor-Precategory F (comp-hom-Precategory C g f)) ＝
     ( comp-hom-Precategory D
-      ( map-hom-functor-Precategory F g)
-      ( map-hom-functor-Precategory F f))
+      ( hom-functor-Precategory F g)
+      ( hom-functor-Precategory F f))
   preserves-comp-functor-Precategory F = pr1 (pr2 (pr2 F))
 
   preserves-id-functor-Precategory :
     (F : functor-Precategory) (x : obj-Precategory C) →
-    ( map-hom-functor-Precategory F (id-hom-Precategory C {x})) ＝
-    ( id-hom-Precategory D {map-obj-functor-Precategory F x})
+    ( hom-functor-Precategory F (id-hom-Precategory C {x})) ＝
+    ( id-hom-Precategory D {obj-functor-Precategory F x})
   preserves-id-functor-Precategory F = pr2 (pr2 (pr2 F))
 ```
 
@@ -156,22 +156,22 @@ comp-functor-Precategory :
   (C : Precategory l1 l2) (D : Precategory l3 l4) (E : Precategory l5 l6) →
   functor-Precategory D E → functor-Precategory C D → functor-Precategory C E
 pr1 (comp-functor-Precategory C D E G F) =
-  map-obj-functor-Precategory D E G ∘ map-obj-functor-Precategory C D F
+  obj-functor-Precategory D E G ∘ obj-functor-Precategory C D F
 pr1 (pr2 (comp-functor-Precategory C D E G F)) =
-  map-hom-functor-Precategory D E G ∘ map-hom-functor-Precategory C D F
+  hom-functor-Precategory D E G ∘ hom-functor-Precategory C D F
 pr1 (pr2 (pr2 (comp-functor-Precategory C D E G F))) g f =
   ( ap
-    ( map-hom-functor-Precategory D E G)
+    ( hom-functor-Precategory D E G)
     ( preserves-comp-functor-Precategory C D F g f)) ∙
   ( preserves-comp-functor-Precategory D E G
-    ( map-hom-functor-Precategory C D F g)
-    ( map-hom-functor-Precategory C D F f))
+    ( hom-functor-Precategory C D F g)
+    ( hom-functor-Precategory C D F f))
 pr2 (pr2 (pr2 (comp-functor-Precategory C D E G F))) x =
   ( ap
-    ( map-hom-functor-Precategory D E G)
+    ( hom-functor-Precategory D E G)
     ( preserves-id-functor-Precategory C D F x)) ∙
   ( preserves-id-functor-Precategory D E G
-    ( map-obj-functor-Precategory C D F x))
+    ( obj-functor-Precategory C D F x))
 ```
 
 ## Properties
@@ -203,13 +203,13 @@ module _
                     is-prop-Π
                       ( λ f →
                         is-set-hom-Precategory D
-                          ( map-obj-map-Precategory C D F x)
-                          ( map-obj-map-Precategory C D F z)
-                          ( map-hom-map-Precategory C D F
+                          ( obj-map-Precategory C D F x)
+                          ( obj-map-Precategory C D F z)
+                          ( hom-map-Precategory C D F
                             ( comp-hom-Precategory C g f))
                           ( comp-hom-Precategory D
-                            ( map-hom-map-Precategory C D F g)
-                            ( map-hom-map-Precategory C D F f)))))))
+                            ( hom-map-Precategory C D F g)
+                            ( hom-map-Precategory C D F f)))))))
 
   preserves-comp-hom-map-Precategory-Prop : Prop (l1 ⊔ l2 ⊔ l4)
   pr1 preserves-comp-hom-map-Precategory-Prop =
@@ -223,10 +223,10 @@ module _
     is-prop-Π
       ( λ x →
         is-set-hom-Precategory D
-          ( map-obj-map-Precategory C D F x)
-          ( map-obj-map-Precategory C D F x)
-          ( map-hom-map-Precategory C D F (id-hom-Precategory C {x}))
-          ( id-hom-Precategory D {map-obj-map-Precategory C D F x}))
+          ( obj-map-Precategory C D F x)
+          ( obj-map-Precategory C D F x)
+          ( hom-map-Precategory C D F (id-hom-Precategory C {x}))
+          ( id-hom-Precategory D {obj-map-Precategory C D F x}))
 
   preserves-id-hom-map-Precategory-Prop : Prop (l1 ⊔ l4)
   pr1 preserves-id-hom-map-Precategory-Prop =

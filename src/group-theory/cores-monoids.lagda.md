@@ -227,10 +227,10 @@ module _
 ```agda
 core-monoid-functor-Large-Precategory :
   functor-Large-Precategory Monoid-Large-Precategory Group-Large-Precategory id
-map-obj-functor-Large-Precategory
+obj-functor-Large-Precategory
   core-monoid-functor-Large-Precategory =
   core-Monoid
-map-hom-functor-Large-Precategory
+hom-functor-Large-Precategory
   core-monoid-functor-Large-Precategory {X = M} {Y = N} =
   hom-core-hom-Monoid M N
 preserves-comp-functor-Large-Precategory

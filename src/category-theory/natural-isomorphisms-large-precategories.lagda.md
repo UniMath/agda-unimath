@@ -44,8 +44,8 @@ module _
     { l : Level}
     ( X : obj-Large-Precategory C l) →
     iso-Large-Precategory D
-      ( map-obj-functor-Large-Precategory F X)
-      ( map-obj-functor-Large-Precategory G X)
+      ( obj-functor-Large-Precategory F X)
+      ( obj-functor-Large-Precategory G X)
 
   record natural-isomorphism-Large-Precategory : UUω
     where
@@ -61,8 +61,8 @@ module _
         coherence-square-Large-Precategory D
           ( hom-iso-Large-Precategory D
             ( components-natural-isomorphism-Large-Precategory X))
-          ( map-hom-functor-Large-Precategory F f)
-          ( map-hom-functor-Large-Precategory G f)
+          ( hom-functor-Large-Precategory F f)
+          ( hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
             ( components-natural-isomorphism-Large-Precategory Y))
 
