@@ -8,7 +8,7 @@ module category-theory.natural-numbers-object-precategories where
 
 ```agda
 open import category-theory.precategories
-open import category-theory.terminal-objects-in-precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -33,7 +33,7 @@ unique `u : hom n x` such that:
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  ((t , _) : terminal-object-Precategory C)
+  ((t , _) : terminal-obj-Precategory C)
   where
 
   is-natural-numbers-object-Precategory :
@@ -58,7 +58,7 @@ module _
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  ((t , p) : terminal-object-Precategory C)
+  ((t , p) : terminal-obj-Precategory C)
   (nno : natural-numbers-object-Precategory C (t , p))
   where
 

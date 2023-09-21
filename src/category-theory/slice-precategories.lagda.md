@@ -10,7 +10,7 @@ module category-theory.slice-precategories where
 open import category-theory.precategories
 open import category-theory.products-in-precategories
 open import category-theory.pullbacks-in-precategories
-open import category-theory.terminal-objects-in-precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -188,10 +188,10 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2) (X : obj-Precategory C)
   where
 
-  terminal-object-Precategory-Slice-Precategory :
-    terminal-object-Precategory (Slice-Precategory C X)
-  pr1 terminal-object-Precategory-Slice-Precategory = (X , id-hom-Precategory C)
-  pr2 terminal-object-Precategory-Slice-Precategory (A , f) =
+  terminal-obj-Precategory-Slice-Precategory :
+    terminal-obj-Precategory (Slice-Precategory C X)
+  pr1 terminal-obj-Precategory-Slice-Precategory = (X , id-hom-Precategory C)
+  pr2 terminal-obj-Precategory-Slice-Precategory (A , f) =
     is-contr-equiv
       ( Σ (type-hom-Precategory C A X) (λ g → f ＝ g))
       ( equiv-tot
