@@ -88,7 +88,7 @@ module _
   is-large-preorder-Large-Precategory =
     {l1 l2 : Level}
     (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2) →
-    is-prop (type-hom-Large-Precategory C X Y)
+    is-prop (hom-Large-Precategory C X Y)
 
   large-preorder-Large-Precategory :
     is-large-preorder-Large-Precategory → Large-Preorder α β
@@ -96,7 +96,7 @@ module _
     ( large-preorder-Large-Precategory H) =
     obj-Large-Precategory C
   pr1 (leq-prop-Large-Preorder (large-preorder-Large-Precategory H) X Y) =
-    type-hom-Large-Precategory C X Y
+    hom-Large-Precategory C X Y
   pr2 (leq-prop-Large-Preorder (large-preorder-Large-Precategory H) X Y) =
     H X Y
   refl-leq-Large-Preorder
@@ -136,7 +136,7 @@ module _
 
   large-precategory-Large-Preorder : Large-Precategory α β
   obj-Large-Precategory large-precategory-Large-Preorder = type-Large-Preorder P
-  hom-Large-Precategory large-precategory-Large-Preorder x y =
+  hom-set-Large-Precategory large-precategory-Large-Preorder x y =
     set-Prop (leq-prop-Large-Preorder P x y)
   comp-hom-Large-Precategory large-precategory-Large-Preorder {X = x} {y} {z} =
     transitive-leq-Large-Preorder P x y z

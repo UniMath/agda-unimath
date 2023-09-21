@@ -43,7 +43,7 @@ Isomorphisms of semigroups are homomorphisms that have a two-sided inverse.
 ```agda
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
-  (f : type-hom-Semigroup G H)
+  (f : hom-Semigroup G H)
   where
 
   is-iso-hom-Semigroup : UU (l1 ⊔ l2)
@@ -51,7 +51,7 @@ module _
     is-iso-hom-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H} f
 
   hom-inv-is-iso-hom-Semigroup :
-    is-iso-hom-Semigroup → type-hom-Semigroup H G
+    is-iso-hom-Semigroup → hom-Semigroup H G
   hom-inv-is-iso-hom-Semigroup =
     hom-inv-is-iso-hom-Large-Precategory
       ( Semigroup-Large-Precategory)
@@ -115,7 +115,7 @@ module _
   type-iso-Semigroup : UU (l1 ⊔ l2)
   type-iso-Semigroup = iso-Large-Precategory Semigroup-Large-Precategory G H
 
-  hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
+  hom-iso-Semigroup : type-iso-Semigroup → hom-Semigroup G H
   hom-iso-Semigroup =
     hom-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
@@ -129,12 +129,12 @@ module _
   preserves-mul-iso-Semigroup f =
     preserves-mul-hom-Semigroup G H (hom-iso-Semigroup f)
 
-  is-iso-iso-Semigroup :
+  is-iso-hom-iso-Semigroup :
     (f : type-iso-Semigroup) → is-iso-hom-Semigroup G H (hom-iso-Semigroup f)
-  is-iso-iso-Semigroup =
-    is-iso-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
+  is-iso-hom-iso-Semigroup =
+    is-iso-hom-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
-  hom-inv-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup H G
+  hom-inv-iso-Semigroup : type-iso-Semigroup → hom-Semigroup H G
   hom-inv-iso-Semigroup =
     hom-inv-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
@@ -204,7 +204,7 @@ module _
 
   abstract
     is-prop-is-iso-hom-Semigroup :
-      (f : type-hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup G H f)
+      (f : hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup G H f)
     is-prop-is-iso-hom-Semigroup =
       is-prop-is-iso-hom-Large-Precategory
         ( Semigroup-Large-Precategory)
@@ -212,7 +212,7 @@ module _
         { Y = H}
 
   is-iso-prop-hom-Semigroup :
-    type-hom-Semigroup G H → Prop (l1 ⊔ l2)
+    hom-Semigroup G H → Prop (l1 ⊔ l2)
   is-iso-prop-hom-Semigroup =
     is-iso-prop-hom-Large-Precategory
       ( Semigroup-Large-Precategory)
@@ -229,7 +229,7 @@ module _
 
   abstract
     preserves-mul-map-inv-is-equiv-Semigroup :
-      ( f : type-hom-Semigroup G H)
+      ( f : hom-Semigroup G H)
       ( U : is-equiv (map-hom-Semigroup G H f)) →
       preserves-mul-Semigroup H G (map-inv-is-equiv U)
     preserves-mul-map-inv-is-equiv-Semigroup (f , μ-f) U x y =
@@ -261,7 +261,7 @@ module _
 
   abstract
     is-iso-is-equiv-hom-Semigroup :
-      (f : type-hom-Semigroup G H) →
+      (f : hom-Semigroup G H) →
       is-equiv-hom-Semigroup G H f → is-iso-hom-Semigroup G H f
     pr1 (pr1 (is-iso-is-equiv-hom-Semigroup (f , μ-f) U)) =
       map-inv-is-equiv U
@@ -274,7 +274,7 @@ module _
 
   abstract
     is-equiv-is-iso-hom-Semigroup :
-      (f : type-hom-Semigroup G H) →
+      (f : hom-Semigroup G H) →
       is-iso-hom-Semigroup G H f → is-equiv-hom-Semigroup G H f
     is-equiv-is-iso-hom-Semigroup (f , μ-f) ((g , μ-g) , S , R) =
       is-equiv-is-invertible g

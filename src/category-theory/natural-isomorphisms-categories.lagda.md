@@ -19,8 +19,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-A natural isomorphism between functors on categories is a natural isomorphism
-between the functors on the underlying precategories.
+A **natural isomorphism** between
+[functors](category-theory.functors-categories.md) on
+[categories](category-theory.categories.md) is a
+[natural isomorphism](category-theory.natural-isomorphisms-precategories.md)
+between the [functors](category-theory.functors-precategories.md) on the
+underlying [precategories](category-theory.precategories.md).
 
 ## Definition
 
@@ -31,6 +35,14 @@ module _
   (D : Category l3 l4)
   (F G : functor-Category C D)
   where
+
+  iso-family-functor-Category : UU (l1 ⊔ l4)
+  iso-family-functor-Category =
+    iso-family-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
 
   is-natural-isomorphism-Category :
     natural-transformation-Category C D F G → UU (l1 ⊔ l4)

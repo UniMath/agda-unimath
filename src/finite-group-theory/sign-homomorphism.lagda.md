@@ -371,7 +371,7 @@ module _
       ( sign-homomorphism-Fin-two n X g))
 
   sign-homomorphism :
-    type-hom-Group
+    hom-Group
       ( symmetric-Group (set-UU-Fin n X))
       ( symmetric-Group (Fin-Set 2))
   pr1 sign-homomorphism = map-sign-homomorphism

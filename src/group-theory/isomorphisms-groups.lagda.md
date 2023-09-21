@@ -36,7 +36,7 @@ open import group-theory.precategory-of-groups
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   is-iso-hom-Group : UU (l1 ⊔ l2)
@@ -52,7 +52,7 @@ module _
     is-iso-prop-hom-Semigroup (semigroup-Group G) (semigroup-Group H) f
 
   hom-inv-is-iso-hom-Group :
-    is-iso-hom-Group → type-hom-Group H G
+    is-iso-hom-Group → hom-Group H G
   hom-inv-is-iso-hom-Group =
     hom-inv-is-iso-hom-Semigroup (semigroup-Group G) (semigroup-Group H) f
 
@@ -107,7 +107,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
 
-  is-equiv-hom-Group : type-hom-Group G H → UU (l1 ⊔ l2)
+  is-equiv-hom-Group : hom-Group G H → UU (l1 ⊔ l2)
   is-equiv-hom-Group =
     is-equiv-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
@@ -125,7 +125,7 @@ module _
   type-iso-Group : UU (l1 ⊔ l2)
   type-iso-Group = type-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  hom-iso-Group : type-iso-Group → type-hom-Group G H
+  hom-iso-Group : type-iso-Group → hom-Group G H
   hom-iso-Group = hom-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   map-iso-Group : type-iso-Group → type-Group G → type-Group H
@@ -138,12 +138,12 @@ module _
   preserves-mul-iso-Group =
     preserves-mul-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  is-iso-iso-Group :
+  is-iso-hom-iso-Group :
     (f : type-iso-Group) → is-iso-hom-Group G H (hom-iso-Group f)
-  is-iso-iso-Group =
-    is-iso-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
+  is-iso-hom-iso-Group =
+    is-iso-hom-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
-  hom-inv-iso-Group : type-iso-Group → type-hom-Group H G
+  hom-inv-iso-Group : type-iso-Group → hom-Group H G
   hom-inv-iso-Group =
     hom-inv-iso-Semigroup (semigroup-Group G) (semigroup-Group H)
 
@@ -189,12 +189,12 @@ module _
       ( semigroup-Group H)
 
   is-iso-is-equiv-hom-Group :
-    (f : type-hom-Group G H) → is-equiv-hom-Group G H f → is-iso-hom-Group G H f
+    (f : hom-Group G H) → is-equiv-hom-Group G H f → is-iso-hom-Group G H f
   is-iso-is-equiv-hom-Group =
     is-iso-is-equiv-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 
   is-equiv-is-iso-hom-Group :
-    (f : type-hom-Group G H) → is-iso-hom-Group G H f → is-equiv-hom-Group G H f
+    (f : hom-Group G H) → is-iso-hom-Group G H f → is-equiv-hom-Group G H f
   is-equiv-is-iso-hom-Group =
     is-equiv-is-iso-hom-Semigroup (semigroup-Group G) (semigroup-Group H)
 

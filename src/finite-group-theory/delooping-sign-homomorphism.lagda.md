@@ -326,7 +326,7 @@ module _
 
   quotient-delooping-sign-loop :
     ( n : ℕ) →
-    type-hom-Group
+    hom-Group
       ( loop-group-Set (raise-Fin-Set l1 (n +ℕ 2)))
       ( loop-group-Set (quotient-set-Fin (n +ℕ 2)))
   pr1 (quotient-delooping-sign-loop n) = map-quotient-delooping-sign-loop-Fin n
@@ -1317,7 +1317,7 @@ module _
 
   symmetric-abstract-UU-fin-group-quotient-hom :
     (n : ℕ) →
-    type-hom-Group
+    hom-Group
       ( symmetric-Group (Fin-Set 2))
       ( abstract-group-Concrete-Group (UU-Fin-Group l4 2))
   symmetric-abstract-UU-fin-group-quotient-hom n =

@@ -47,7 +47,7 @@ open import ring-theory.rings
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   is-iso-prop-hom-Ring : Prop (l1 ⊔ l2)
@@ -66,7 +66,7 @@ module _
       { Y = S}
       ( f)
 
-  hom-inv-is-iso-hom-Ring : is-iso-hom-Ring → type-hom-Ring S R
+  hom-inv-is-iso-hom-Ring : is-iso-hom-Ring → hom-Ring S R
   hom-inv-is-iso-hom-Ring =
     hom-inv-is-iso-hom-Large-Precategory
       ( Ring-Large-Precategory)
@@ -125,7 +125,7 @@ module _
   iso-Ring : UU (l1 ⊔ l2)
   iso-Ring = iso-Large-Precategory Ring-Large-Precategory R S
 
-  hom-iso-Ring : iso-Ring → type-hom-Ring R S
+  hom-iso-Ring : iso-Ring → hom-Ring R S
   hom-iso-Ring =
     hom-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
@@ -158,12 +158,12 @@ module _
   preserves-mul-iso-Ring f =
     preserves-mul-hom-Ring R S (hom-iso-Ring f)
 
-  is-iso-iso-Ring :
+  is-iso-hom-iso-Ring :
     (f : iso-Ring) → is-iso-hom-Ring R S (hom-iso-Ring f)
-  is-iso-iso-Ring =
-    is-iso-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
+  is-iso-hom-iso-Ring =
+    is-iso-hom-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
-  hom-inv-iso-Ring : iso-Ring → type-hom-Ring S R
+  hom-inv-iso-Ring : iso-Ring → hom-Ring S R
   hom-inv-iso-Ring =
     hom-inv-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
@@ -311,12 +311,12 @@ module _
     iso-ab-Ring → type-iso-Ab (ab-Ring R) (ab-Ring S)
   iso-ab-iso-ab-Ring = pr1
 
-  is-iso-hom-ab-hom-Ring : type-hom-Ring R S → UU (l1 ⊔ l2)
+  is-iso-hom-ab-hom-Ring : hom-Ring R S → UU (l1 ⊔ l2)
   is-iso-hom-ab-hom-Ring f =
     is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f)
 
   is-iso-hom-ab-is-iso-hom-Ring :
-    (f : type-hom-Ring R S) →
+    (f : hom-Ring R S) →
     is-iso-hom-Ring R S f → is-iso-hom-ab-hom-Ring f
   pr1 (is-iso-hom-ab-is-iso-hom-Ring f U) =
     hom-ab-hom-Ring S R (hom-inv-is-iso-hom-Ring R S f U)
@@ -331,7 +331,7 @@ module _
 
   abstract
     preserves-mul-inv-is-iso-hom-Ab :
-      (f : type-hom-Ab (ab-Ring R) (ab-Ring S)) →
+      (f : hom-Ab (ab-Ring R) (ab-Ring S)) →
       (U : is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f) →
       preserves-mul-hom-Ab R S f →
       preserves-mul-hom-Ab S R
@@ -361,7 +361,7 @@ module _
           ( map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U y)))
 
   preserves-unit-inv-is-iso-hom-Ab :
-    (f : type-hom-Ab (ab-Ring R) (ab-Ring S)) →
+    (f : hom-Ab (ab-Ring R) (ab-Ring S)) →
     (U : is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f) →
     preserves-unit-hom-Ab R S f →
     preserves-unit-hom-Ab S R
@@ -371,7 +371,7 @@ module _
     ( is-retraction-map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U _)
 
   is-ring-homomorphism-inv-is-iso-hom-Ab :
-    (f : type-hom-Ab (ab-Ring R) (ab-Ring S)) →
+    (f : hom-Ab (ab-Ring R) (ab-Ring S)) →
     (U : is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f) →
     is-ring-homomorphism-hom-Ab R S f →
     is-ring-homomorphism-hom-Ab S R
@@ -382,9 +382,9 @@ module _
     preserves-unit-inv-is-iso-hom-Ab f U ν
 
   inv-hom-ring-is-iso-hom-Ab :
-    (f : type-hom-Ring R S) →
+    (f : hom-Ring R S) →
     is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) →
-    type-hom-Ring S R
+    hom-Ring S R
   pr1 (inv-hom-ring-is-iso-hom-Ab f U) =
     hom-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) U
   pr2 (inv-hom-ring-is-iso-hom-Ab f U) =
@@ -395,7 +395,7 @@ module _
 
   abstract
     is-iso-hom-ring-is-iso-hom-Ab :
-      (f : type-hom-Ring R S) →
+      (f : hom-Ring R S) →
       is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) →
       is-iso-hom-Ring R S f
     pr1 (is-iso-hom-ring-is-iso-hom-Ab f U) =
@@ -439,18 +439,18 @@ module _
   pr2 (iso-ab-iso-Ring f) =
     is-iso-hom-ab-is-iso-hom-Ring
       ( hom-iso-Ring R S f)
-      ( is-iso-iso-Ring R S f)
+      ( is-iso-hom-iso-Ring R S f)
 
   equiv-iso-ab-iso-Ring : iso-Ring R S ≃ iso-ab-Ring
   equiv-iso-ab-iso-Ring =
     ( inv-equiv
       ( associative-Σ
-        ( type-hom-Ab (ab-Ring R) (ab-Ring S))
+        ( hom-Ab (ab-Ring R) (ab-Ring S))
         ( is-iso-hom-Ab (ab-Ring R) (ab-Ring S))
         ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
     ( equiv-tot (λ f → commutative-prod)) ∘e
     ( associative-Σ
-      ( type-hom-Ab (ab-Ring R) (ab-Ring S))
+      ( hom-Ab (ab-Ring R) (ab-Ring S))
       ( is-ring-homomorphism-hom-Ab R S)
       ( λ f → is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
     ( equiv-type-subtype

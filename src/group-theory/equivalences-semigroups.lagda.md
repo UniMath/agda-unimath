@@ -62,7 +62,7 @@ module _
   equiv-Semigroup =
     Σ (type-Semigroup G ≃ type-Semigroup H) preserves-mul-equiv-Semigroup
 
-  is-equiv-hom-Semigroup : type-hom-Semigroup G H → UU (l1 ⊔ l2)
+  is-equiv-hom-Semigroup : hom-Semigroup G H → UU (l1 ⊔ l2)
   is-equiv-hom-Semigroup f = is-equiv (map-hom-Semigroup G H f)
 ```
 

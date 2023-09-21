@@ -155,7 +155,7 @@ module _
         ( inv (is-retraction-map-inv-iso-Ab (ab-Ring R) A f y)))
 
   hom-iso-transport-ring-structure-iso-Ab :
-    type-hom-Ring R transport-ring-structure-iso-Ab
+    hom-Ring R transport-ring-structure-iso-Ab
   pr1 hom-iso-transport-ring-structure-iso-Ab =
     hom-iso-Ab (ab-Ring R) A f
   pr1 (pr2 hom-iso-transport-ring-structure-iso-Ab) =
@@ -163,17 +163,17 @@ module _
   pr2 (pr2 hom-iso-transport-ring-structure-iso-Ab) =
     refl
 
-  is-iso-iso-transport-ring-structure-iso-Ab :
+  is-iso-hom-iso-transport-ring-structure-iso-Ab :
     is-iso-hom-Ring
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-transport-ring-structure-iso-Ab)
-  is-iso-iso-transport-ring-structure-iso-Ab =
+  is-iso-hom-iso-transport-ring-structure-iso-Ab =
     is-iso-hom-ring-is-iso-hom-Ab
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-transport-ring-structure-iso-Ab)
-      ( is-iso-iso-Ab (ab-Ring R) A f)
+      ( is-iso-hom-iso-Ab (ab-Ring R) A f)
 
   iso-transport-ring-structure-iso-Ab :
     iso-Ring R transport-ring-structure-iso-Ab
@@ -183,5 +183,5 @@ module _
   pr2 (pr2 (pr1 iso-transport-ring-structure-iso-Ab)) =
     refl
   pr2 iso-transport-ring-structure-iso-Ab =
-    is-iso-iso-transport-ring-structure-iso-Ab
+    is-iso-hom-iso-transport-ring-structure-iso-Ab
 ```

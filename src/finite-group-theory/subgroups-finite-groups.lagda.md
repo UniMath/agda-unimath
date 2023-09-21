@@ -354,7 +354,7 @@ module _
     preserves-inverses-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 
   inclusion-group-Subgroup-𝔽 :
-    type-hom-Group (group-Subgroup-𝔽 G H) (group-Group-𝔽 G)
+    hom-Group (group-Subgroup-𝔽 G H) (group-Group-𝔽 G)
   inclusion-group-Subgroup-𝔽 =
     hom-inclusion-Decidable-Subgroup (group-Group-𝔽 G) H
 ```

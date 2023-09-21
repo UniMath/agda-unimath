@@ -73,7 +73,7 @@ module _
     preserves-mul-inclusion-Submonoid M center-Monoid
 
   hom-inclusion-center-Monoid :
-    type-hom-Monoid monoid-center-Monoid M
+    hom-Monoid monoid-center-Monoid M
   hom-inclusion-center-Monoid =
     hom-inclusion-Submonoid M center-Monoid
 ```

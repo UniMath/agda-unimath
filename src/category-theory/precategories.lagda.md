@@ -77,37 +77,39 @@ module _
   obj-Precategory : UU l1
   obj-Precategory = pr1 C
 
-  hom-Precategory : (x y : obj-Precategory) → Set l2
-  hom-Precategory = pr1 (pr2 C)
+  hom-set-Precategory : (x y : obj-Precategory) → Set l2
+  hom-set-Precategory = pr1 (pr2 C)
 
-  type-hom-Precategory : (x y : obj-Precategory) → UU l2
-  type-hom-Precategory x y = type-Set (hom-Precategory x y)
+  hom-Precategory : (x y : obj-Precategory) → UU l2
+  hom-Precategory x y = type-Set (hom-set-Precategory x y)
 
-  is-set-type-hom-Precategory :
-    (x y : obj-Precategory) → is-set (type-hom-Precategory x y)
-  is-set-type-hom-Precategory x y = is-set-type-Set (hom-Precategory x y)
+  is-set-hom-Precategory :
+    (x y : obj-Precategory) → is-set (hom-Precategory x y)
+  is-set-hom-Precategory x y = is-set-type-Set (hom-set-Precategory x y)
 
   associative-composition-structure-Precategory :
-    associative-composition-structure-Set hom-Precategory
+    associative-composition-structure-Set hom-set-Precategory
   associative-composition-structure-Precategory = pr1 (pr2 (pr2 C))
 
   comp-hom-Precategory :
     {x y z : obj-Precategory} →
-    type-hom-Precategory y z → type-hom-Precategory x y →
-    type-hom-Precategory x z
+    hom-Precategory y z →
+    hom-Precategory x y →
+    hom-Precategory x z
   comp-hom-Precategory = pr1 associative-composition-structure-Precategory
 
   comp-hom-Precategory' :
     {x y z : obj-Precategory} →
-    type-hom-Precategory x y → type-hom-Precategory y z →
-    type-hom-Precategory x z
+    hom-Precategory x y →
+    hom-Precategory y z →
+    hom-Precategory x z
   comp-hom-Precategory' f g = comp-hom-Precategory g f
 
   associative-comp-hom-Precategory :
     {x y z w : obj-Precategory}
-    (h : type-hom-Precategory z w)
-    (g : type-hom-Precategory y z)
-    (f : type-hom-Precategory x y) →
+    (h : hom-Precategory z w)
+    (g : hom-Precategory y z)
+    (f : hom-Precategory x y) →
     ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory =
@@ -115,21 +117,21 @@ module _
 
   is-unital-composition-structure-Precategory :
     is-unital-composition-structure-Set
-      hom-Precategory
+      hom-set-Precategory
       associative-composition-structure-Precategory
   is-unital-composition-structure-Precategory = pr2 (pr2 (pr2 C))
 
-  id-hom-Precategory : {x : obj-Precategory} → type-hom-Precategory x x
+  id-hom-Precategory : {x : obj-Precategory} → hom-Precategory x x
   id-hom-Precategory {x} = pr1 is-unital-composition-structure-Precategory x
 
   left-unit-law-comp-hom-Precategory :
-    {x y : obj-Precategory} (f : type-hom-Precategory x y) →
+    {x y : obj-Precategory} (f : hom-Precategory x y) →
     comp-hom-Precategory id-hom-Precategory f ＝ f
   left-unit-law-comp-hom-Precategory =
     pr1 (pr2 is-unital-composition-structure-Precategory)
 
   right-unit-law-comp-hom-Precategory :
-    {x y : obj-Precategory} (f : type-hom-Precategory x y) →
+    {x y : obj-Precategory} (f : hom-Precategory x y) →
     comp-hom-Precategory f id-hom-Precategory ＝ f
   right-unit-law-comp-hom-Precategory =
     pr2 (pr2 is-unital-composition-structure-Precategory)
@@ -140,8 +142,8 @@ module _
 ```agda
 precomp-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : type-hom-Precategory C x y) (z : obj-Precategory C) →
-  type-hom-Precategory C y z → type-hom-Precategory C x z
+  (f : hom-Precategory C x y) (z : obj-Precategory C) →
+  hom-Precategory C y z → hom-Precategory C x z
 precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
 ```
 
@@ -150,8 +152,8 @@ precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
 ```agda
 postcomp-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : type-hom-Precategory C x y) (z : obj-Precategory C) →
-  type-hom-Precategory C z x → type-hom-Precategory C z y
+  (f : hom-Precategory C x y) (z : obj-Precategory C) →
+  hom-Precategory C z x → hom-Precategory C z y
 postcomp-hom-Precategory C f z = comp-hom-Precategory C f
 ```
 

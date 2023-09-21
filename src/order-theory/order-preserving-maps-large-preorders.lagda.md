@@ -35,7 +35,7 @@ module _
   (P : Large-Preorder αP βP) (Q : Large-Preorder αQ βQ)
   where
 
-  record hom-Large-Preorder : UUω
+  record hom-set-Large-Preorder : UUω
     where
     constructor
       make-hom-Large-Preorder
@@ -51,5 +51,5 @@ module _
           ( map-hom-Large-Preorder x)
           ( map-hom-Large-Preorder y)
 
-  open hom-Large-Preorder public
+  open hom-set-Large-Preorder public
 ```
