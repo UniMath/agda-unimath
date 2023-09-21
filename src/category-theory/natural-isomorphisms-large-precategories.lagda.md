@@ -1,4 +1,4 @@
-# Natural isomorphisms between functors on large precategories
+# Natural isomorphisms between functors between large precategories
 
 ```agda
 module category-theory.natural-isomorphisms-large-precategories where

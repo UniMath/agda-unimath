@@ -1,4 +1,4 @@
-# functors between categories
+# Functors between categories
 
 ```agda
 module category-theory.functors-categories where
