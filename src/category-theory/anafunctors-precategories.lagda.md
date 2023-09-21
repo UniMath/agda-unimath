@@ -1,4 +1,4 @@
-# Anafunctors on precategories
+# Anafunctors between precategories
 
 ```agda
 module category-theory.anafunctors-precategories where

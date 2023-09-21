@@ -1,4 +1,4 @@
-# Functors on categories
+# functors between categories
 
 ```agda
 module category-theory.functors-categories where
@@ -105,7 +105,7 @@ module _
       ( F)
 ```
 
-### Functors on categories
+### functors between categories
 
 ```agda
 module _
@@ -251,7 +251,7 @@ module _
       ( F)
 ```
 
-### Extensionality of functors on categories
+### Extensionality of functors between categories
 
 ```agda
 module _

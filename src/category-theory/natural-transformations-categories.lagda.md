@@ -1,4 +1,4 @@
-# Natural transformations between functors on categories
+# Natural transformations between functors between categories
 
 ```agda
 module category-theory.natural-transformations-categories where
@@ -25,7 +25,7 @@ open import foundation.universe-levels
 ## Idea
 
 A **natural transformation** between
-[functors on categories](category-theory.functors-categories.md) is a
+[functors between categories](category-theory.functors-categories.md) is a
 [natural transformation](category-theory.natural-transformations-precategories.md)
 between the [functors](category-theory.functors-precategories.md) on the
 underlying [precategories](category-theory.precategories.md).

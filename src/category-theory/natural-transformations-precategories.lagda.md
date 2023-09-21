@@ -1,4 +1,4 @@
-# Natural transformations between functors on precategories
+# Natural transformations between functors between precategories
 
 ```agda
 module category-theory.natural-transformations-precategories where
