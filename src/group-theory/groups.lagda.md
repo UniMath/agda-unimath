@@ -26,6 +26,7 @@ open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
 
+open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
 open import group-theory.products-of-elements-monoids
 open import group-theory.semigroups
@@ -165,6 +166,12 @@ module _
     (x : type-Group) → Id (mul-Group x (inv-Group x)) unit-Group
   right-inverse-law-mul-Group = pr2 (pr2 has-inverses-Group)
 
+  is-invertible-element-Group :
+    (x : type-Group) → is-invertible-element-Monoid monoid-Group x
+  pr1 (is-invertible-element-Group x) = inv-Group x
+  pr1 (pr2 (is-invertible-element-Group x)) = right-inverse-law-mul-Group x
+  pr2 (pr2 (is-invertible-element-Group x)) = left-inverse-law-mul-Group x
+
   inv-unit-Group :
     Id (inv-Group unit-Group) unit-Group
   inv-unit-Group =
@@ -203,7 +210,10 @@ module _
   where
 
   left-div-Group : type-Group G → type-Group G → type-Group G
-  left-div-Group x y = mul-Group G (inv-Group G x) y
+  left-div-Group x =
+    left-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
 
   ap-left-div-Group :
     {x x' y y' : type-Group G} → x ＝ x' → y ＝ y' →
@@ -212,24 +222,23 @@ module _
 
   is-section-left-div-Group :
     (x : type-Group G) → (mul-Group G x ∘ left-div-Group x) ~ id
-  is-section-left-div-Group x y =
-    ( inv (associative-mul-Group G _ _ _)) ∙
-    ( ( ap (mul-Group' G y) (right-inverse-law-mul-Group G x)) ∙
-      ( left-unit-law-mul-Group G y))
+  is-section-left-div-Group x =
+    is-section-left-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
 
   is-retraction-left-div-Group :
     (x : type-Group G) → (left-div-Group x ∘ mul-Group G x) ~ id
-  is-retraction-left-div-Group x y =
-    ( inv (associative-mul-Group G _ _ _)) ∙
-    ( ( ap (mul-Group' G y) (left-inverse-law-mul-Group G x)) ∙
-      ( left-unit-law-mul-Group G y))
+  is-retraction-left-div-Group x =
+    is-retraction-left-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
 
   is-equiv-mul-Group : (x : type-Group G) → is-equiv (mul-Group G x)
   is-equiv-mul-Group x =
-    is-equiv-is-invertible
-      ( left-div-Group x)
-      ( is-section-left-div-Group x)
-      ( is-retraction-left-div-Group x)
+    is-equiv-mul-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
 
   equiv-mul-Group : (x : type-Group G) → type-Group G ≃ type-Group G
   pr1 (equiv-mul-Group x) = mul-Group G x
@@ -251,7 +260,11 @@ module _
 
 ```agda
   right-div-Group : type-Group G → type-Group G → type-Group G
-  right-div-Group x y = mul-Group G x (inv-Group G y)
+  right-div-Group x y =
+    right-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G y)
+      ( x)
 
   ap-right-div-Group :
     {x x' y y' : type-Group G} → x ＝ x' → y ＝ y' →
@@ -260,17 +273,17 @@ module _
 
   is-section-right-div-Group :
     (x : type-Group G) → (mul-Group' G x ∘ (λ y → right-div-Group y x)) ~ id
-  is-section-right-div-Group x y =
-    ( associative-mul-Group G _ _ _) ∙
-    ( ( ap (mul-Group G y) (left-inverse-law-mul-Group G x)) ∙
-      ( right-unit-law-mul-Group G y))
+  is-section-right-div-Group x =
+    is-section-right-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
 
   is-retraction-right-div-Group :
     (x : type-Group G) → ((λ y → right-div-Group y x) ∘ mul-Group' G x) ~ id
-  is-retraction-right-div-Group x y =
-    ( associative-mul-Group G _ _ _) ∙
-    ( ( ap (mul-Group G y) (right-inverse-law-mul-Group G x)) ∙
-      ( right-unit-law-mul-Group G y))
+  is-retraction-right-div-Group x =
+    is-retraction-right-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
 
   is-equiv-mul-Group' : (x : type-Group G) → is-equiv (mul-Group' G x)
   is-equiv-mul-Group' x =

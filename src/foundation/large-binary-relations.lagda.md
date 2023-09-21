@@ -113,19 +113,20 @@ module _
   (R : Large-Relation α β A)
   where
 
-  is-large-reflexive : UUω
-  is-large-reflexive =
+  is-reflexive-Large-Relation : UUω
+  is-reflexive-Large-Relation =
     {l : Level} → is-reflexive (relation-Large-Relation A R l)
 
-  is-large-symmetric : UUω
-  is-large-symmetric = {l1 l2 : Level} (x : A l1) (y : A l2) → R x y → R y x
+  is-symmetric-Large-Relation : UUω
+  is-symmetric-Large-Relation =
+    {l1 l2 : Level} (x : A l1) (y : A l2) → R x y → R y x
 
-  is-large-transitive : UUω
-  is-large-transitive =
+  is-transitive-Large-Relation : UUω
+  is-transitive-Large-Relation =
     {l1 l2 l3 : Level} (x : A l1) (y : A l2) (z : A l3) → R y z → R x y → R x z
 
-  is-large-antisymmetric : UUω
-  is-large-antisymmetric =
+  is-antisymmetric-Large-Relation : UUω
+  is-antisymmetric-Large-Relation =
     {l : Level} → is-antisymmetric (relation-Large-Relation A R l)
 
 module _
@@ -134,21 +135,21 @@ module _
   (R : Large-Relation-Prop α β A)
   where
 
-  is-large-reflexive-Large-Relation-Prop : UUω
-  is-large-reflexive-Large-Relation-Prop =
-    is-large-reflexive A (type-Large-Relation-Prop A R)
+  is-reflexive-Large-Relation-Prop : UUω
+  is-reflexive-Large-Relation-Prop =
+    is-reflexive-Large-Relation A (type-Large-Relation-Prop A R)
 
   is-large-symmetric-Large-Relation-Prop : UUω
   is-large-symmetric-Large-Relation-Prop =
-    is-large-symmetric A (type-Large-Relation-Prop A R)
+    is-symmetric-Large-Relation A (type-Large-Relation-Prop A R)
 
-  is-large-transitive-Large-Relation-Prop : UUω
-  is-large-transitive-Large-Relation-Prop =
-    is-large-transitive A (type-Large-Relation-Prop A R)
+  is-transitive-Large-Relation-Prop : UUω
+  is-transitive-Large-Relation-Prop =
+    is-transitive-Large-Relation A (type-Large-Relation-Prop A R)
 
-  is-large-antisymmetric-Large-Relation-Prop : UUω
-  is-large-antisymmetric-Large-Relation-Prop =
-    is-large-antisymmetric A (type-Large-Relation-Prop A R)
+  is-antisymmetric-Large-Relation-Prop : UUω
+  is-antisymmetric-Large-Relation-Prop =
+    is-antisymmetric-Large-Relation A (type-Large-Relation-Prop A R)
 ```
 
 ## See also

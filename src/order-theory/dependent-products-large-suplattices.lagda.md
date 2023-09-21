@@ -72,13 +72,13 @@ module _
   is-set-type-Π-Large-Suplattice =
     is-set-type-Large-Suplattice Π-Large-Suplattice
 
-  leq-Π-Large-Suplattice-Prop :
+  leq-prop-Π-Large-Suplattice :
     Large-Relation-Prop
       ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Suplattice)
-  leq-Π-Large-Suplattice-Prop =
-    leq-Large-Suplattice-Prop Π-Large-Suplattice
+  leq-prop-Π-Large-Suplattice =
+    leq-prop-Large-Suplattice Π-Large-Suplattice
 
   leq-Π-Large-Suplattice :
     {l2 l3 : Level}
@@ -93,17 +93,21 @@ module _
     is-prop-leq-Large-Suplattice Π-Large-Suplattice
 
   refl-leq-Π-Large-Suplattice :
-    is-large-reflexive type-Π-Large-Suplattice leq-Π-Large-Suplattice
+    is-reflexive-Large-Relation type-Π-Large-Suplattice leq-Π-Large-Suplattice
   refl-leq-Π-Large-Suplattice =
     refl-leq-Large-Suplattice Π-Large-Suplattice
 
   antisymmetric-leq-Π-Large-Suplattice :
-    is-large-antisymmetric type-Π-Large-Suplattice leq-Π-Large-Suplattice
+    is-antisymmetric-Large-Relation
+      ( type-Π-Large-Suplattice)
+      ( leq-Π-Large-Suplattice)
   antisymmetric-leq-Π-Large-Suplattice =
     antisymmetric-leq-Large-Suplattice Π-Large-Suplattice
 
   transitive-leq-Π-Large-Suplattice :
-    is-large-transitive type-Π-Large-Suplattice leq-Π-Large-Suplattice
+    is-transitive-Large-Relation
+      ( type-Π-Large-Suplattice)
+      ( leq-Π-Large-Suplattice)
   transitive-leq-Π-Large-Suplattice =
     transitive-leq-Large-Suplattice Π-Large-Suplattice
 

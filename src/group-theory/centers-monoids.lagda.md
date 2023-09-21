@@ -22,7 +22,8 @@ open import group-theory.submonoids
 
 ## Idea
 
-The center of a monoid consists of those elements that are central.
+The **center** of a [monoid](group-theory.monoids.md) consists of those elements
+that are central.
 
 ## Definition
 

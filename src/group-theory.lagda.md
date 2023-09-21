@@ -59,6 +59,8 @@ open import group-theory.equivalences-concrete-group-actions public
 open import group-theory.equivalences-concrete-groups public
 open import group-theory.equivalences-group-actions public
 open import group-theory.equivalences-semigroups public
+open import group-theory.exponents-abelian-groups public
+open import group-theory.exponents-groups public
 open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.full-subgroups public
@@ -92,6 +94,7 @@ open import group-theory.isomorphisms-abelian-groups public
 open import group-theory.isomorphisms-concrete-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
+open import group-theory.isomorphisms-monoids public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels public

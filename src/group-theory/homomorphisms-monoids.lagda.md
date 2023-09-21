@@ -21,6 +21,7 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
+open import group-theory.invertible-elements-monoids
 open import group-theory.monoids
 ```
 
@@ -261,4 +262,28 @@ module _
       ( comp-hom-Monoid M M N f (id-hom-Monoid M))
       ( f)
       ( refl-htpy)
+```
+
+### Any homomorphism of monoids sends invertible elements to invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
+  (f : type-hom-Monoid M N)
+  where
+
+  preserves-invertible-elements-hom-Monoid :
+    {x : type-Monoid M} →
+    is-invertible-element-Monoid M x →
+    is-invertible-element-Monoid N (map-hom-Monoid M N f x)
+  pr1 (preserves-invertible-elements-hom-Monoid (y , p , q)) =
+    map-hom-Monoid M N f y
+  pr1 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
+    ( inv (preserves-mul-hom-Monoid M N f _ y)) ∙
+    ( ap (map-hom-Monoid M N f) p) ∙
+    ( preserves-unit-hom-Monoid M N f)
+  pr2 (pr2 (preserves-invertible-elements-hom-Monoid (y , p , q))) =
+    ( inv (preserves-mul-hom-Monoid M N f y _)) ∙
+    ( ap (map-hom-Monoid M N f) q) ∙
+    ( preserves-unit-hom-Monoid M N f)
 ```

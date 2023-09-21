@@ -11,6 +11,7 @@ open import category-theory.isomorphisms-in-large-precategories
 
 open import commutative-algebra.commutative-rings
 open import commutative-algebra.homomorphisms-commutative-rings
+open import commutative-algebra.invertible-elements-commutative-rings
 open import commutative-algebra.precategory-of-commutative-rings
 
 open import foundation.contractible-types
@@ -423,4 +424,34 @@ module _
     (B : Commutative-Ring l) → iso-Commutative-Ring A B → A ＝ B
   eq-iso-Commutative-Ring B =
     map-inv-is-equiv (is-equiv-iso-eq-Commutative-Ring B)
+```
+
+### Any isomorphism of commutative rings preserves and reflects invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (A : Commutative-Ring l1) (S : Commutative-Ring l2)
+  (f : iso-Commutative-Ring A S)
+  where
+
+  preserves-invertible-elements-iso-Commutative-Ring :
+    {x : type-Commutative-Ring A} →
+    is-invertible-element-Commutative-Ring A x →
+    is-invertible-element-Commutative-Ring S (map-iso-Commutative-Ring A S f x)
+  preserves-invertible-elements-iso-Commutative-Ring =
+    preserves-invertible-elements-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring S)
+      ( f)
+
+  reflects-invertible-elements-iso-Commutative-Ring :
+    {x : type-Commutative-Ring A} →
+    is-invertible-element-Commutative-Ring S
+      ( map-iso-Commutative-Ring A S f x) →
+    is-invertible-element-Commutative-Ring A x
+  reflects-invertible-elements-iso-Commutative-Ring =
+    reflects-invertible-elements-iso-Ring
+      ( ring-Commutative-Ring A)
+      ( ring-Commutative-Ring S)
+      ( f)
 ```

@@ -8,6 +8,7 @@ module group-theory.precategory-of-monoids where
 
 ```agda
 open import category-theory.large-precategories
+open import category-theory.precategories
 
 open import foundation.universe-levels
 
@@ -48,4 +49,11 @@ left-unit-law-comp-hom-Large-Precategory
 right-unit-law-comp-hom-Large-Precategory
   Monoid-Large-Precategory {X = M} {N} =
   right-unit-law-comp-hom-Monoid M N
+```
+
+### The precategory of small monoids
+
+```agda
+Monoid-Precategory : (l : Level) → Precategory (lsuc l) l
+Monoid-Precategory = precategory-Large-Precategory Monoid-Large-Precategory
 ```
