@@ -86,10 +86,10 @@ module _
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
-  leq-Large-Subposet-Prop :
+  leq-prop-Large-Subposet :
     Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subposet
-  leq-Large-Subposet-Prop =
-    leq-Large-Subpreorder-Prop
+  leq-prop-Large-Subposet =
+    leq-prop-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
@@ -108,21 +108,21 @@ module _
       ( large-subpreorder-Large-Subposet S)
 
   refl-leq-Large-Subposet :
-    is-large-reflexive type-Large-Subposet leq-Large-Subposet
+    is-reflexive-Large-Relation type-Large-Subposet leq-Large-Subposet
   refl-leq-Large-Subposet =
     refl-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   transitive-leq-Large-Subposet :
-    is-large-transitive type-Large-Subposet leq-Large-Subposet
+    is-transitive-Large-Relation type-Large-Subposet leq-Large-Subposet
   transitive-leq-Large-Subposet =
     transitive-leq-Large-Subpreorder
       ( large-preorder-Large-Poset P)
       ( large-subpreorder-Large-Subposet S)
 
   antisymmetric-leq-Large-Subposet :
-    is-large-antisymmetric type-Large-Subposet leq-Large-Subposet
+    is-antisymmetric-Large-Relation type-Large-Subposet leq-Large-Subposet
   antisymmetric-leq-Large-Subposet {l1} (x , p) (y , q) H K =
     eq-type-subtype
       ( large-subpreorder-Large-Subposet S {l1})

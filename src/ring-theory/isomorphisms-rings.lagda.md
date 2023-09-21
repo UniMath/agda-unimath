@@ -29,9 +29,12 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-monoids
 open import group-theory.isomorphisms-abelian-groups
+open import group-theory.isomorphisms-monoids
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.precategory-of-rings
 open import ring-theory.rings
 ```
@@ -230,6 +233,38 @@ module _
       ( comp-hom-Ring R S R (hom-inv-iso-Ring f) (hom-iso-Ring f))
       ( id-hom-Ring R)
       ( is-retraction-hom-inv-iso-Ring f)
+
+  iso-multiplicative-monoid-iso-Ring :
+    (f : iso-Ring) →
+    iso-Monoid (multiplicative-monoid-Ring R) (multiplicative-monoid-Ring S)
+  pr1 (iso-multiplicative-monoid-iso-Ring f) =
+    hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f)
+  pr1 (pr2 (iso-multiplicative-monoid-iso-Ring f)) =
+    hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f)
+  pr1 (pr2 (pr2 (iso-multiplicative-monoid-iso-Ring f))) =
+    eq-htpy-hom-Monoid
+      ( multiplicative-monoid-Ring S)
+      ( multiplicative-monoid-Ring S)
+      ( comp-hom-Monoid
+        ( multiplicative-monoid-Ring S)
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f))
+        ( hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f)))
+      ( id-hom-Monoid (multiplicative-monoid-Ring S))
+      ( is-section-map-inv-iso-Ring f)
+  pr2 (pr2 (pr2 (iso-multiplicative-monoid-iso-Ring f))) =
+    eq-htpy-hom-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring R)
+      ( comp-hom-Monoid
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( multiplicative-monoid-Ring R)
+        ( hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f))
+        ( hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f)))
+      ( id-hom-Monoid (multiplicative-monoid-Ring R))
+      ( is-retraction-map-inv-iso-Ring f)
 ```
 
 ### The identity isomorphism of rings
@@ -517,4 +552,33 @@ module _
 
   eq-iso-Ring : (S : Ring l) → iso-Ring R S → R ＝ S
   eq-iso-Ring S = map-inv-is-equiv (is-equiv-iso-eq-Ring S)
+```
+
+### Any ring isomorphism preserves and reflects invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  (f : iso-Ring R S)
+  where
+
+  preserves-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring S (map-iso-Ring R S f x)
+  preserves-invertible-elements-iso-Ring =
+    preserves-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
+
+  reflects-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring S (map-iso-Ring R S f x) →
+    is-invertible-element-Ring R x
+  reflects-invertible-elements-iso-Ring =
+    reflects-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
 ```

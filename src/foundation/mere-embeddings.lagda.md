@@ -56,7 +56,7 @@ transitive-mere-emb g f =
 
 mere-emb-Large-Preorder : Large-Preorder lsuc _⊔_
 type-Large-Preorder mere-emb-Large-Preorder l = UU l
-leq-Large-Preorder-Prop mere-emb-Large-Preorder = mere-emb-Prop
+leq-prop-Large-Preorder mere-emb-Large-Preorder = mere-emb-Prop
 refl-leq-Large-Preorder mere-emb-Large-Preorder = refl-mere-emb
 transitive-leq-Large-Preorder mere-emb-Large-Preorder X Y Z =
   transitive-mere-emb

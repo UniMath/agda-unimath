@@ -15,6 +15,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.identity-types
+open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -60,6 +61,34 @@ module _
 
   integer-multiple-Ring : ℤ → type-Ring R → type-Ring R
   integer-multiple-Ring = integer-multiple-Ab (ab-Ring R)
+```
+
+### The predicate of being a natural multiple of an element in an ring
+
+We say that an element `y` **is an integer multiple** of an element `x` if there
+[exists](foundation.existential-quantification.md) an integer `k` such that
+`kx ＝ y`.
+
+```agda
+module _
+  {l : Level} (R : Ring l)
+  where
+
+  is-integer-multiple-of-element-prop-Ring :
+    (x y : type-Ring R) → Prop l
+  is-integer-multiple-of-element-prop-Ring =
+    is-integer-multiple-of-element-prop-Ab (ab-Ring R)
+
+  is-integer-multiple-of-element-Ring :
+    (x y : type-Ring R) → UU l
+  is-integer-multiple-of-element-Ring =
+    is-integer-multiple-of-element-Ab (ab-Ring R)
+
+  is-prop-is-integer-multiple-of-element-Ring :
+    (x y : type-Ring R) →
+    is-prop (is-integer-multiple-of-element-Ring x y)
+  is-prop-is-integer-multiple-of-element-Ring =
+    is-prop-is-integer-multiple-of-element-Ab (ab-Ring R)
 ```
 
 ## Properties
@@ -421,6 +450,13 @@ module _
     integer-multiple-Ring R k (integer-multiple-Ring R l x)
   integer-multiple-mul-Ring =
     integer-multiple-mul-Ab (ab-Ring R)
+
+  swap-integer-multiple-Ring :
+    (k l : ℤ) (x : type-Ring R) →
+    integer-multiple-Ring R k (integer-multiple-Ring R l x) ＝
+    integer-multiple-Ring R l (integer-multiple-Ring R k x)
+  swap-integer-multiple-Ring =
+    swap-integer-multiple-Ab (ab-Ring R)
 ```
 
 ### Ring homomorphisms preserve integer multiples
@@ -455,4 +491,20 @@ module _
       ( ab-Ring S)
       ( hom-ab-hom-Ring R S f)
       ( hom-ab-hom-Ring R S g)
+```
+
+### Ring homomorphisms preserve integer multiples of `1`
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  where
+
+  preserves-integer-multiple-one-hom-Ring :
+    (k : ℤ) →
+    map-hom-Ring R S f (integer-multiple-Ring R k (one-Ring R)) ＝
+    integer-multiple-Ring S k (one-Ring S)
+  preserves-integer-multiple-one-hom-Ring k =
+    ( preserves-integer-multiples-hom-Ring R S f k (one-Ring R)) ∙
+    ( ap (integer-multiple-Ring S k) (preserves-one-hom-Ring R S f))
 ```
