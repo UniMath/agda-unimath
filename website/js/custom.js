@@ -16,6 +16,7 @@ if (link) {
     'LICENSE.md',
     'MAINTAINERS.md',
     'MIXFIX-OPERATORS.md',
+    'NAMING.md',
     'README.md',
     'STATEMENT-OF-INCLUSION.md',
     'SUMMARY.md',
