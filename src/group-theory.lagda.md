@@ -31,6 +31,7 @@ open import group-theory.commuting-elements-monoids public
 open import group-theory.commuting-elements-semigroups public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
+open import group-theory.concrete-monoids public
 open import group-theory.congruence-relations-abelian-groups public
 open import group-theory.congruence-relations-commutative-monoids public
 open import group-theory.congruence-relations-groups public
@@ -39,6 +40,7 @@ open import group-theory.congruence-relations-semigroups public
 open import group-theory.conjugation public
 open import group-theory.conjugation-concrete-groups public
 open import group-theory.contravariant-pushforward-concrete-group-actions public
+open import group-theory.cores-monoids public
 open import group-theory.cyclic-groups public
 open import group-theory.decidable-subgroups public
 open import group-theory.dependent-products-abelian-groups public
@@ -57,6 +59,8 @@ open import group-theory.equivalences-concrete-group-actions public
 open import group-theory.equivalences-concrete-groups public
 open import group-theory.equivalences-group-actions public
 open import group-theory.equivalences-semigroups public
+open import group-theory.exponents-abelian-groups public
+open import group-theory.exponents-groups public
 open import group-theory.free-concrete-group-actions public
 open import group-theory.free-groups-with-one-generator public
 open import group-theory.full-subgroups public
@@ -90,6 +94,7 @@ open import group-theory.isomorphisms-abelian-groups public
 open import group-theory.isomorphisms-concrete-groups public
 open import group-theory.isomorphisms-group-actions public
 open import group-theory.isomorphisms-groups public
+open import group-theory.isomorphisms-monoids public
 open import group-theory.isomorphisms-semigroups public
 open import group-theory.iterated-cartesian-products-concrete-groups public
 open import group-theory.kernels public
@@ -116,6 +121,7 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.powers-of-elements-commutative-monoids public
 open import group-theory.powers-of-elements-groups public
 open import group-theory.powers-of-elements-monoids public
 open import group-theory.precategory-of-abelian-groups public
@@ -132,7 +138,8 @@ open import group-theory.products-of-tuples-of-elements-commutative-monoids publ
 open import group-theory.quotient-groups public
 open import group-theory.quotient-groups-concrete-groups public
 open import group-theory.quotients-abelian-groups public
-open import group-theory.representations-monoids public
+open import group-theory.rational-commutative-monoids public
+open import group-theory.representations-monoids-precategories public
 open import group-theory.saturated-congruence-relations-commutative-monoids public
 open import group-theory.saturated-congruence-relations-monoids public
 open import group-theory.semigroups public
@@ -160,7 +167,9 @@ open import group-theory.symmetric-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public
+open import group-theory.trivial-concrete-groups public
 open import group-theory.trivial-group-homomorphisms public
 open import group-theory.trivial-subgroups public
 open import group-theory.unordered-tuples-of-elements-commutative-monoids public
+open import group-theory.wild-representations-monoids public
 ```

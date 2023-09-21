@@ -7,7 +7,7 @@ module group-theory.isomorphisms-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
@@ -45,7 +45,7 @@ module _
 
   hom-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
-  hom-iso-Abstract-Group-Action = hom-iso-Large-Precategory C X Y
+  hom-iso-Abstract-Group-Action = hom-iso-Large-Precategory C {X = X} {Y = Y}
 
   map-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -66,7 +66,8 @@ module _
 
   hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G Y X
-  hom-inv-iso-Abstract-Group-Action = hom-inv-iso-Large-Precategory C X Y
+  hom-inv-iso-Abstract-Group-Action =
+    hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   map-hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -83,7 +84,7 @@ module _
         ( hom-inv-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G Y)
   is-section-hom-inv-iso-Abstract-Group-Action =
-    is-section-hom-inv-iso-Large-Precategory C X Y
+    is-section-hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   is-retraction-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
@@ -93,12 +94,13 @@ module _
         ( hom-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G X)
   is-retraction-hom-inv-iso-Abstract-Group-Action =
-    is-retraction-hom-inv-iso-Large-Precategory C X Y
+    is-retraction-hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   is-iso-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
     is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
-  is-iso-iso-Abstract-Group-Action = is-iso-iso-Large-Precategory C X Y
+  is-iso-iso-Abstract-Group-Action =
+    is-iso-iso-Large-Precategory C {X = X} {Y = Y}
 
   equiv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y

@@ -27,6 +27,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.structure-identity-principle
@@ -34,6 +35,7 @@ open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts
@@ -656,10 +658,11 @@ is-equiv-Fam-pushout-cocone-UU :
   is-equiv (Fam-pushout-cocone-UU l {f = f} {g})
 is-equiv-Fam-pushout-cocone-UU l {f = f} {g} =
   is-equiv-tot-is-fiberwise-equiv
-    ( λ PA → is-equiv-tot-is-fiberwise-equiv
-      ( λ PB → is-equiv-map-equiv-Π-equiv-family
-        ( λ s → equiv-eq)
-        ( λ s → univalence (PA (f s)) (PB (g s)))))
+    ( λ PA →
+      is-equiv-tot-is-fiberwise-equiv
+        ( λ PB →
+          is-equiv-map-Π-is-fiberwise-equiv
+            ( λ s → univalence (PA (f s)) (PB (g s)))))
 
 htpy-equiv-eq-ap-fam :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A} (p : Id x y) →

@@ -42,10 +42,10 @@ module _
   {l1 : Level} (R : Ring l1)
   where
 
-  leq-ideal-Ring-Prop :
+  leq-prop-ideal-Ring :
     {l2 l3 : Level} → ideal-Ring l2 R → ideal-Ring l3 R → Prop (l1 ⊔ l2 ⊔ l3)
-  leq-ideal-Ring-Prop I J =
-    leq-subtype-Prop
+  leq-prop-ideal-Ring I J =
+    leq-prop-subtype
       ( subset-ideal-Ring R I)
       ( subset-ideal-Ring R J)
 
@@ -95,7 +95,7 @@ module _
   ideal-Ring-Large-Preorder :
     Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   type-Large-Preorder ideal-Ring-Large-Preorder l = ideal-Ring l R
-  leq-Large-Preorder-Prop ideal-Ring-Large-Preorder = leq-ideal-Ring-Prop R
+  leq-prop-Large-Preorder ideal-Ring-Large-Preorder = leq-prop-ideal-Ring R
   refl-leq-Large-Preorder ideal-Ring-Large-Preorder = refl-leq-ideal-Ring R
   transitive-leq-Large-Preorder ideal-Ring-Large-Preorder =
     transitive-leq-ideal-Ring R

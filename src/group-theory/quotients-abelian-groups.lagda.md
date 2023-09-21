@@ -51,10 +51,10 @@ module _
   {l1 l2 l3 : Level} (A : Ab l1) (B : Ab l2)
   where
 
-  nullifies-subgroup-hom-Ab-Prop :
+  nullifies-subgroup-prop-hom-Ab :
     type-hom-Ab A B → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-  nullifies-subgroup-hom-Ab-Prop f H =
-    nullifies-normal-subgroup-hom-Group-Prop
+  nullifies-subgroup-prop-hom-Ab f H =
+    nullifies-normal-subgroup-prop-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)

@@ -8,7 +8,7 @@ module category-theory.natural-isomorphisms-large-precategories where
 
 ```agda
 open import category-theory.functors-large-precategories
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
 
@@ -49,14 +49,10 @@ module _
         ( f : type-hom-Large-Precategory C X Y) →
         square-Large-Precategory D
           ( hom-iso-Large-Precategory D
-            ( obj-functor-Large-Precategory F X)
-            ( obj-functor-Large-Precategory G X)
             ( obj-natural-isomorphism-Large-Precategory X))
           ( hom-functor-Large-Precategory F f)
           ( hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
-            ( obj-functor-Large-Precategory F Y)
-            ( obj-functor-Large-Precategory G Y)
             ( obj-natural-isomorphism-Large-Precategory Y))
 
   open natural-isomorphism-Large-Precategory public
@@ -67,8 +63,6 @@ module _
   obj-natural-transformation-Large-Precategory
     ( natural-transformation-natural-isomorphism-Large-Precategory γ) X =
     hom-iso-Large-Precategory D
-      ( obj-functor-Large-Precategory F X)
-      ( obj-functor-Large-Precategory G X)
       ( obj-natural-isomorphism-Large-Precategory γ X)
   coherence-square-natural-transformation-Large-Precategory
     (natural-transformation-natural-isomorphism-Large-Precategory γ) =

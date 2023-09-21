@@ -8,7 +8,7 @@ module category-theory.large-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 open import category-theory.precategories
 
@@ -155,6 +155,26 @@ module _
     type-hom-Large-Category Y Z →
     type-hom-Large-Category X Z
   comp-hom-Large-Category' f g = comp-hom-Large-Category g f
+
+  precomp-hom-Large-Category :
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    (f : type-hom-Large-Category X Y) →
+    (Z : obj-Large-Category l3) →
+    type-hom-Large-Category Y Z → type-hom-Large-Category X Z
+  precomp-hom-Large-Category f Z g =
+    comp-hom-Large-Category g f
+
+  postcomp-hom-Large-Category :
+    {l1 l2 l3 : Level}
+    (X : obj-Large-Category l1)
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3}
+    (f : type-hom-Large-Category Y Z) →
+    type-hom-Large-Category X Y → type-hom-Large-Category X Z
+  postcomp-hom-Large-Category X f g =
+    comp-hom-Large-Category f g
 ```
 
 ### Categories obtained from large categories

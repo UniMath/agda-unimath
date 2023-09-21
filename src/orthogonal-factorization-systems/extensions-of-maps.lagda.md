@@ -21,6 +21,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.monomorphisms
 open import foundation.propositions
@@ -31,6 +32,7 @@ open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import orthogonal-factorization-systems.local-types
 ```
@@ -444,8 +446,7 @@ module _
       ( is-mono-is-emb g H B)
       ( λ j →
         is-emb-is-equiv
-          ( is-equiv-map-equiv-Π-equiv-family
-            ( λ x → ap g)
+          ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ x → H (i x) (j (f x)))))
 ```
 

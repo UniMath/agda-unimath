@@ -39,7 +39,7 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  postulate funext : (f : (x : A) → B x) → FUNEXT f
+  postulate funext : (f : (x : A) → B x) → function-extensionality f
 ```
 
 ### Components of `funext`
@@ -111,52 +111,6 @@ module _
       ＝ eq-htpy H ∙ eq-htpy K
         by
         is-retraction-eq-htpy (eq-htpy H ∙ eq-htpy K)
-```
-
-### Computation of function extensionality on whiskerings
-
-```agda
-module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  { f g : B → C} (h : A → B)
-  where
-
-  compute-eq-htpy-htpy-eq-right-whisk :
-    ( p : f ＝ g) →
-    eq-htpy ((htpy-eq p) ·r h) ＝ ap (precomp h C) p
-  compute-eq-htpy-htpy-eq-right-whisk refl =
-    eq-htpy-refl-htpy (f ∘ h)
-
-  compute-eq-htpy-right-whisk :
-    ( H : f ~ g) →
-    eq-htpy (H ·r h) ＝ ap (precomp h C) (eq-htpy H)
-  compute-eq-htpy-right-whisk H =
-    ( ap
-      ( λ K → eq-htpy (K ·r h))
-      ( inv (is-section-eq-htpy H))) ∙
-    ( compute-eq-htpy-htpy-eq-right-whisk (eq-htpy H))
-```
-
-```agda
-module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
-  { f g : A → B} (h : B → C)
-  where
-
-  compute-eq-htpy-htpy-eq-left-whisk :
-    ( p : f ＝ g) →
-    eq-htpy ( h ·l (htpy-eq p)) ＝ ap (postcomp A h) p
-  compute-eq-htpy-htpy-eq-left-whisk refl =
-    eq-htpy-refl-htpy (h ∘ f)
-
-  compute-eq-htpy-left-whisk :
-    (H : f ~ g) →
-    eq-htpy (h ·l H) ＝ ap (postcomp A h) (eq-htpy H)
-  compute-eq-htpy-left-whisk H =
-    ( ap
-      ( λ K → eq-htpy (h ·l K))
-      ( inv (is-section-eq-htpy H))) ∙
-    ( compute-eq-htpy-htpy-eq-left-whisk (eq-htpy H))
 ```
 
 ## See also

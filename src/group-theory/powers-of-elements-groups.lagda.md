@@ -7,26 +7,18 @@ module group-theory.powers-of-elements-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.iterating-automorphisms
-open import foundation.unit-type
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.powers-of-elements-monoids
-
-open import structured-types.initial-pointed-type-equipped-with-automorphism
 ```
 
 </details>
@@ -49,6 +41,34 @@ module _
 
   power-Group : ℕ → type-Group G → type-Group G
   power-Group = power-Monoid (monoid-Group G)
+```
+
+### The predicate of being a power of an element in a group
+
+We say that an element `y` **is a power** of an element `x` if there
+[exists](foundation.existential-quantification.md) a number `n` such that
+`xⁿ ＝ y`.
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-power-of-element-prop-Group :
+    (x y : type-Group G) → Prop l
+  is-power-of-element-prop-Group =
+    is-power-of-element-prop-Monoid (monoid-Group G)
+
+  is-power-of-element-Group :
+    (x y : type-Group G) → UU l
+  is-power-of-element-Group =
+    is-power-of-element-Monoid (monoid-Group G)
+
+  is-prop-is-power-of-element-Group :
+    (x y : type-Group G) →
+    is-prop (is-power-of-element-Group x y)
+  is-prop-is-power-of-element-Group =
+    is-prop-is-power-of-element-Monoid (monoid-Group G)
 ```
 
 ## Properties

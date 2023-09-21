@@ -12,7 +12,6 @@ open import foundation.subuniverses
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.propositions
 ```
 
 </details>

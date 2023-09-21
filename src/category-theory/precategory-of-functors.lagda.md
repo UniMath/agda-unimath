@@ -17,11 +17,15 @@ open import foundation.universe-levels
 
 </details>
 
-### Precategory of functors
+## Idea
 
-Functors between precategories and natural transformations between them
-introduce a new precategory whose identity map and composition structure are
-inherited pointwise from the codomain precategory.
+[Functors](category-theory.functors-precategories.md) between
+[precategories](category-theory.precategories.md) and
+[natural transformations](category-theory.natural-transformations-precategories.md)
+between them introduce a new precategory whose identity map and composition
+structure are inherited pointwise from the codomain precategory.
+
+## Definition
 
 ```agda
 module _

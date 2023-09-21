@@ -8,11 +8,16 @@ module elementary-number-theory.relatively-prime-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.divisibility-integers
 open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.greatest-common-divisor-natural-numbers
+open import elementary-number-theory.integers
+open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
+open import elementary-number-theory.rings-of-modular-arithmetic
 
 open import foundation.decidable-propositions
 open import foundation.decidable-types
@@ -22,6 +27,8 @@ open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import ring-theory.invertible-elements-rings
 ```
 
 </details>
@@ -64,6 +71,13 @@ pr1 (is-decidable-prop-is-relatively-prime-ℕ x y) =
   is-prop-is-relatively-prime-ℕ x y
 pr2 (is-decidable-prop-is-relatively-prime-ℕ x y) =
   is-decidable-is-relatively-prime-ℕ x y
+
+is-relatively-prime-ℕ-Decidable-Prop :
+  (x y : ℕ) → Decidable-Prop lzero
+pr1 (is-relatively-prime-ℕ-Decidable-Prop x y) =
+  is-relatively-prime-ℕ x y
+pr2 (is-relatively-prime-ℕ-Decidable-Prop x y) =
+  is-decidable-prop-is-relatively-prime-ℕ x y
 ```
 
 ### `a` and `b` are relatively prime if and only if any common divisor is equal to `1`

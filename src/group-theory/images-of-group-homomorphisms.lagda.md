@@ -7,13 +7,11 @@ module group-theory.images-of-group-homomorphisms where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.images
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
-open import foundation.surjective-maps
 open import foundation.universal-property-image
 open import foundation.universe-levels
 
@@ -85,9 +83,9 @@ module _
                 ( mul-Group G g h , preserves-mul-hom-Group G H f g h)})
 
   abstract
-    is-closed-under-inv-image-hom-Group :
-      is-closed-under-inv-subset-Group H subset-image-hom-Group
-    is-closed-under-inv-image-hom-Group x K =
+    is-closed-under-inverses-image-hom-Group :
+      is-closed-under-inverses-subset-Group H subset-image-hom-Group
+    is-closed-under-inverses-image-hom-Group x K =
       apply-universal-property-trunc-Prop K
         ( subset-image-hom-Group (inv-Group H x))
         ( λ { (g , refl) →
@@ -101,7 +99,7 @@ module _
   pr1 (pr2 is-subgroup-image-hom-Group) =
     is-closed-under-multiplication-image-hom-Group
   pr2 (pr2 is-subgroup-image-hom-Group) =
-    is-closed-under-inv-image-hom-Group
+    is-closed-under-inverses-image-hom-Group
 
   image-hom-Group : Subgroup (l1 ⊔ l2) H
   pr1 image-hom-Group = subset-image-hom-Group

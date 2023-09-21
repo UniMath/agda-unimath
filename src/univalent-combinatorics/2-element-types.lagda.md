@@ -27,6 +27,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
@@ -43,6 +44,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -102,6 +104,14 @@ standard-2-Element-Type l = Fin-UU-Fin l 2
 
 type-standard-2-Element-Type : (l : Level) → UU l
 type-standard-2-Element-Type l = type-2-Element-Type (standard-2-Element-Type l)
+
+zero-standard-2-Element-Type :
+  {l : Level} → type-standard-2-Element-Type l
+zero-standard-2-Element-Type = map-raise (zero-Fin 1)
+
+one-standard-2-Element-Type :
+  {l : Level} → type-standard-2-Element-Type l
+one-standard-2-Element-Type = map-raise (one-Fin 1)
 ```
 
 ## Properties
@@ -339,52 +349,71 @@ module _
 #### The type of pointed `2`-element types of any universe level is contractible
 
 ```agda
+Pointed-2-Element-Type : (l : Level) → UU (lsuc l)
+Pointed-2-Element-Type l = Σ (2-Element-Type l) type-2-Element-Type
+
 abstract
-  is-contr-total-UU-Fin-two-ℕ :
-    {l : Level} → is-contr (Σ (UU-Fin l 2) (type-UU-Fin 2))
-  is-contr-total-UU-Fin-two-ℕ {l} =
+  is-contr-pointed-2-Element-Type :
+    {l : Level} → is-contr (Pointed-2-Element-Type l)
+  is-contr-pointed-2-Element-Type {l} =
     is-contr-equiv'
-      ( Σ ( UU-Fin l 2)
-          ( λ X → raise-Fin l 2 ≃ type-UU-Fin 2 X))
+      ( Σ ( 2-Element-Type l)
+          ( equiv-2-Element-Type (standard-2-Element-Type l)))
       ( equiv-tot
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
           ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
       ( is-contr-total-equiv-subuniverse
-        ( mere-equiv-Prop (Fin 2))
+        ( has-cardinality-Prop 2)
         ( standard-2-Element-Type l))
 ```
 
 #### Completing the characterization of the identity type of the type of `2`-element types of arbitrary universe level
 
 ```agda
-point-eq-UU-Fin-two-ℕ :
-  {l : Level} {X : UU-Fin l 2} →
-  standard-2-Element-Type l ＝ X → type-UU-Fin 2 X
-point-eq-UU-Fin-two-ℕ refl = map-raise (zero-Fin 1)
+point-eq-2-Element-Type :
+  {l : Level} {X : 2-Element-Type l} →
+  standard-2-Element-Type l ＝ X → type-2-Element-Type X
+point-eq-2-Element-Type refl = map-raise (zero-Fin 1)
 
 abstract
-  is-equiv-point-eq-UU-Fin-two-ℕ :
-    {l : Level} (X : UU-Fin l 2) →
-    is-equiv (point-eq-UU-Fin-two-ℕ {l} {X})
-  is-equiv-point-eq-UU-Fin-two-ℕ {l} =
+  is-equiv-point-eq-2-Element-Type :
+    {l : Level} (X : 2-Element-Type l) →
+    is-equiv (point-eq-2-Element-Type {l} {X})
+  is-equiv-point-eq-2-Element-Type {l} =
     fundamental-theorem-id
-      ( is-contr-total-UU-Fin-two-ℕ)
-      ( λ X → point-eq-UU-Fin-two-ℕ {l} {X})
+      ( is-contr-pointed-2-Element-Type)
+      ( λ X → point-eq-2-Element-Type {l} {X})
 
-equiv-point-eq-UU-Fin-two-ℕ :
-  {l : Level} {X : UU-Fin l 2} →
-  (standard-2-Element-Type l ＝ X) ≃ type-UU-Fin 2 X
-pr1 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
-  point-eq-UU-Fin-two-ℕ
-pr2 (equiv-point-eq-UU-Fin-two-ℕ {l} {X}) =
-  is-equiv-point-eq-UU-Fin-two-ℕ X
+equiv-point-eq-2-Element-Type :
+  {l : Level} {X : 2-Element-Type l} →
+  (standard-2-Element-Type l ＝ X) ≃ type-2-Element-Type X
+pr1 (equiv-point-eq-2-Element-Type {l} {X}) =
+  point-eq-2-Element-Type
+pr2 (equiv-point-eq-2-Element-Type {l} {X}) =
+  is-equiv-point-eq-2-Element-Type X
 
-eq-point-UU-Fin-two-ℕ :
-  {l : Level} {X : UU-Fin l 2} →
-  type-UU-Fin 2 X → standard-2-Element-Type l ＝ X
-eq-point-UU-Fin-two-ℕ =
-  map-inv-equiv equiv-point-eq-UU-Fin-two-ℕ
+eq-point-2-Element-Type :
+  {l : Level} {X : 2-Element-Type l} →
+  type-2-Element-Type X → standard-2-Element-Type l ＝ X
+eq-point-2-Element-Type =
+  map-inv-equiv equiv-point-eq-2-Element-Type
+
+is-identity-system-type-2-Element-Type :
+  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  is-identity-system l2 (type-2-Element-Type {l1}) X x
+is-identity-system-type-2-Element-Type X x =
+  is-identity-system-is-torsorial X x (is-contr-pointed-2-Element-Type)
+
+dependent-universal-property-identity-system-type-2-Element-Type :
+  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  dependent-universal-property-identity-system l2
+    { B = type-2-Element-Type {l1}}
+    { a = X}
+    ( x)
+dependent-universal-property-identity-system-type-2-Element-Type X x =
+  dependent-universal-property-identity-system-is-torsorial x
+    ( is-contr-pointed-2-Element-Type)
 ```
 
 ### For any `2`-element type `X`, the type of automorphisms on `X` is a `2`-element type
@@ -463,19 +492,19 @@ module _
 
 ```agda
 abstract
-  no-section-type-UU-Fin-two-ℕ :
-    {l : Level} → ¬ ((X : UU-Fin l 2) → type-UU-Fin 2 X)
-  no-section-type-UU-Fin-two-ℕ {l} f =
+  no-section-type-2-Element-Type :
+    {l : Level} → ¬ ((X : 2-Element-Type l) → type-2-Element-Type X)
+  no-section-type-2-Element-Type {l} f =
     is-not-contractible-Fin 2
       ( Eq-eq-ℕ)
       ( is-contr-equiv
         ( standard-2-Element-Type l ＝ standard-2-Element-Type l)
-        ( ( inv-equiv equiv-point-eq-UU-Fin-two-ℕ) ∘e
+        ( ( inv-equiv equiv-point-eq-2-Element-Type) ∘e
           ( compute-raise-Fin l 2))
         ( is-prop-is-contr
           ( pair
             ( standard-2-Element-Type l)
-            ( λ X → eq-point-UU-Fin-two-ℕ (f X)))
+            ( λ X → eq-point-2-Element-Type (f X)))
           ( standard-2-Element-Type l)
           ( standard-2-Element-Type l)))
 ```
@@ -484,11 +513,11 @@ abstract
 
 ```agda
 abstract
-  is-not-decidable-type-UU-Fin-two-ℕ :
+  is-not-decidable-type-2-Element-Type :
     {l : Level} →
-    ¬ ((X : UU-Fin l 2) → is-decidable (type-UU-Fin 2 X))
-  is-not-decidable-type-UU-Fin-two-ℕ {l} d =
-    no-section-type-UU-Fin-two-ℕ
+    ¬ ((X : 2-Element-Type l) → is-decidable (type-2-Element-Type X))
+  is-not-decidable-type-2-Element-Type {l} d =
+    no-section-type-2-Element-Type
       ( λ X →
         map-right-unit-law-coprod-is-empty
           ( pr1 X)
@@ -539,7 +568,7 @@ module _
   is-involution-aut-2-element-type e x =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
-      ( Id-Prop (set-UU-Fin 2 X) (map-equiv (e ∘e e) x) x)
+      ( Id-Prop (set-2-Element-Type X) (map-equiv (e ∘e e) x) x)
       ( λ h →
         ( ap (map-equiv (e ∘e e)) (inv (is-section-map-inv-equiv h x))) ∙
         ( ( ap (map-equiv e) (inv (is-section-map-inv-equiv h _))) ∙

@@ -73,9 +73,9 @@ module _
   {l1 l2 : Level} (G : Group-𝔽 l1) (P : decidable-subset-Group-𝔽 l2 G)
   where
 
-  contains-unit-decidable-subset-finite-group-Prop : Prop l2
-  contains-unit-decidable-subset-finite-group-Prop =
-    contains-unit-decidable-subset-group-Prop
+  contains-unit-prop-decidable-subset-Group-𝔽 : Prop l2
+  contains-unit-prop-decidable-subset-Group-𝔽 =
+    contains-unit-prop-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
@@ -92,10 +92,9 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-multiplication-decidable-subset-finite-group-Prop :
-    Prop (l1 ⊔ l2)
-  is-closed-under-multiplication-decidable-subset-finite-group-Prop =
-    is-closed-under-multiplication-decidable-subset-group-Prop
+  is-closed-under-multiplication-prop-decidable-subset-Group-𝔽 : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-decidable-subset-Group-𝔽 =
+    is-closed-under-multiplication-prop-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
@@ -112,28 +111,28 @@ module _
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-inv-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-inv-decidable-subset-finite-group-Prop =
-    is-closed-under-inv-decidable-subset-group-Prop
+  is-closed-under-inverses-prop-decidable-subset-Group-𝔽 : Prop (l1 ⊔ l2)
+  is-closed-under-inverses-prop-decidable-subset-Group-𝔽 =
+    is-closed-under-inverses-prop-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
-  is-closed-under-inv-decidable-subset-Group-𝔽 : UU (l1 ⊔ l2)
-  is-closed-under-inv-decidable-subset-Group-𝔽 =
-    is-closed-under-inv-decidable-subset-Group
+  is-closed-under-inverses-decidable-subset-Group-𝔽 : UU (l1 ⊔ l2)
+  is-closed-under-inverses-decidable-subset-Group-𝔽 =
+    is-closed-under-inverses-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
-  is-prop-is-closed-under-inv-decidable-subset-Group-𝔽 :
-    is-prop is-closed-under-inv-decidable-subset-Group-𝔽
-  is-prop-is-closed-under-inv-decidable-subset-Group-𝔽 =
-    is-prop-is-closed-under-inv-decidable-subset-Group
+  is-prop-is-closed-under-inverses-decidable-subset-Group-𝔽 :
+    is-prop is-closed-under-inverses-decidable-subset-Group-𝔽
+  is-prop-is-closed-under-inverses-decidable-subset-Group-𝔽 =
+    is-prop-is-closed-under-inverses-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
-  is-subgroup-decidable-subset-finite-group-Prop : Prop (l1 ⊔ l2)
-  is-subgroup-decidable-subset-finite-group-Prop =
-    is-subgroup-decidable-subset-group-Prop
+  is-subgroup-prop-decidable-subset-Group-𝔽 : Prop (l1 ⊔ l2)
+  is-subgroup-prop-decidable-subset-Group-𝔽 =
+    is-subgroup-prop-decidable-subset-Group
       ( group-Group-𝔽 G)
       ( P)
 
@@ -220,10 +219,10 @@ module _
   is-closed-under-multiplication-Subgroup-𝔽 =
     is-closed-under-multiplication-Decidable-Subgroup (group-Group-𝔽 G) H
 
-  is-closed-under-inv-Subgroup-𝔽 :
-    is-closed-under-inv-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
-  is-closed-under-inv-Subgroup-𝔽 =
-    is-closed-under-inv-Decidable-Subgroup (group-Group-𝔽 G) H
+  is-closed-under-inverses-Subgroup-𝔽 :
+    is-closed-under-inverses-subset-Group (group-Group-𝔽 G) subset-Subgroup-𝔽
+  is-closed-under-inverses-Subgroup-𝔽 =
+    is-closed-under-inverses-Decidable-Subgroup (group-Group-𝔽 G) H
 
 is-emb-decidable-subset-Subgroup-𝔽 :
   {l1 l2 : Level} (G : Group-𝔽 l1) →

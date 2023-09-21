@@ -62,7 +62,7 @@ is-left-inverse-inv-inverts-element-hom-Ring :
       ( inv-inverts-element-hom-Ring R S x f H)
       ( map-hom-Ring R S f x))
     ( one-Ring S)
-is-left-inverse-inv-inverts-element-hom-Ring R S x f H = pr1 (pr2 H)
+is-left-inverse-inv-inverts-element-hom-Ring R S x f H = pr2 (pr2 H)
 
 is-right-inverse-inv-inverts-element-hom-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (x : type-Ring R)
@@ -72,7 +72,7 @@ is-right-inverse-inv-inverts-element-hom-Ring :
       ( map-hom-Ring R S f x)
       ( inv-inverts-element-hom-Ring R S x f H))
     ( one-Ring S)
-is-right-inverse-inv-inverts-element-hom-Ring R S x f H = pr2 (pr2 H)
+is-right-inverse-inv-inverts-element-hom-Ring R S x f H = pr1 (pr2 H)
 ```
 
 ```agda
@@ -87,19 +87,19 @@ inverts-element-comp-hom-Ring R S T x g f H =
     ( pair
       ( ( inv
           ( preserves-mul-hom-Ring S T g
-            ( inv-inverts-element-hom-Ring R S x f H)
-            ( map-hom-Ring R S f x))) ∙
-        ( ( ap
-            ( map-hom-Ring S T g)
-            ( is-left-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙
-          ( preserves-one-hom-Ring S T g)))
-      ( ( inv
-          ( preserves-mul-hom-Ring S T g
             ( map-hom-Ring R S f x)
             ( inv-inverts-element-hom-Ring R S x f H))) ∙
         ( ( ap
             ( map-hom-Ring S T g)
             ( is-right-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙
+          ( preserves-one-hom-Ring S T g)))
+      ( ( inv
+          ( preserves-mul-hom-Ring S T g
+            ( inv-inverts-element-hom-Ring R S x f H)
+            ( map-hom-Ring R S f x))) ∙
+        ( ( ap
+            ( map-hom-Ring S T g)
+            ( is-left-inverse-inv-inverts-element-hom-Ring R S x f H)) ∙
           ( preserves-one-hom-Ring S T g))))
 ```
 

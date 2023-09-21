@@ -55,7 +55,6 @@ module _
     is-equiv-i is-equiv-k is-pb-rectangle =
     is-pullback-is-fiberwise-equiv-map-fiber-cone j h c
       ( map-inv-is-equiv-precomp-Π-is-equiv
-        ( i)
         ( is-equiv-i)
         ( λ y → is-equiv (map-fiber-cone j h c y))
         ( λ x → is-equiv-left-factor-htpy

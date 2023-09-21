@@ -8,6 +8,7 @@ module group-theory.orders-of-elements-groups where
 
 ```agda
 open import elementary-number-theory.group-of-integers
+open import elementary-number-theory.integers
 
 open import foundation.universe-levels
 
@@ -15,6 +16,8 @@ open import group-theory.free-groups-with-one-generator
 open import group-theory.groups
 open import group-theory.kernels
 open import group-theory.normal-subgroups
+open import group-theory.subgroups
+open import group-theory.subsets-groups
 ```
 
 </details>
@@ -36,21 +39,46 @@ a consequence of the point of view that orders are normal subgroups of `ℤ`.
 
 ## Definitions
 
-### The type of orders of elements in groups
+### The order of an element in a group
 
 ```agda
-order-Group : (l : Level) → UU (lsuc l)
-order-Group l = Normal-Subgroup l ℤ-Group
+module _
+  {l : Level} (G : Group l) (g : type-Group G)
+  where
+
+  order-element-Group : Normal-Subgroup l ℤ-Group
+  order-element-Group =
+    kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+
+  subgroup-order-element-Group : Subgroup l ℤ-Group
+  subgroup-order-element-Group =
+    subgroup-kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+
+  subset-order-element-Group : subset-Group l ℤ-Group
+  subset-order-element-Group =
+    subset-kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+
+  is-in-order-element-Group : ℤ → UU l
+  is-in-order-element-Group =
+    is-in-kernel-hom-Group ℤ-Group G (hom-element-Group G g)
 ```
 
-### The order of an element in a group
+### Divisibility of orders of elements of a group
+
+We say that the order of `x` divides the order of `y` if the normal subgroup
+`order-element-Group G y` is contained in the normal subgroup
+`order-elemetn-Group G x`. In other words, the order of `x` divides the order of
+`y` if for every integer `k` such that `yᵏ ＝ e` we have `xᵏ ＝ e`.
 
 ```agda
 module _
   {l : Level} (G : Group l)
   where
 
-  order-element-Group : type-Group G → order-Group l
-  order-element-Group g =
-    kernel-hom-Group ℤ-Group G (hom-element-Group G g)
+  div-order-element-Group : (x y : type-Group G) → UU l
+  div-order-element-Group x y =
+    leq-Normal-Subgroup
+      ( ℤ-Group)
+      ( order-element-Group G y)
+      ( order-element-Group G x)
 ```

@@ -21,7 +21,7 @@ open import finite-group-theory.permutations
 open import finite-group-theory.sign-homomorphism
 open import finite-group-theory.transpositions
 
-open import foundation.action-on-equivalences-families-over-subuniverses
+open import foundation.action-on-equivalences-type-families-over-subuniverses
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -43,6 +43,7 @@ open import foundation.propositional-truncations
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.transport-along-identifications
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -683,7 +684,7 @@ module _
           unit-trunc-Prop (compute-raise-Fin l (n +ℕ 2))))
       ( sign-comp-aut-succ-succ-Fin n (transposition Y))
       ( map-equiv
-        ( action-equiv-family-on-subuniverse
+        ( action-equiv-family-over-subuniverse
           ( mere-equiv-Prop (Fin (n +ℕ 2)))
           ( λ X → Fin (n +ℕ 2) ≃ pr1 X)
           ( raise l (Fin (n +ℕ 2)) ,
@@ -716,20 +717,19 @@ module _
           simpson-comp-equiv (n +ℕ 2) ,
           preserves-id-equiv-simpson-comp-equiv (n +ℕ 2)}
         { y =
-          ( action-equiv-family-on-subuniverse
+          ( action-equiv-family-over-subuniverse
             ( mere-equiv-Prop (Fin (n +ℕ 2)))
             ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X) ,
-            ( preserves-id-equiv-action-equiv-family-on-subuniverse
+            ( compute-id-equiv-action-equiv-family-over-subuniverse
               ( mere-equiv-Prop (Fin (n +ℕ 2)))
               ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X)))}
         ( eq-is-contr
-          ( is-contr-preserves-id-action-equiv-family-on-subuniverse
-            ( mere-equiv-Prop (Fin (n +ℕ 2)))
-            ( λ X → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) X)
-            ( λ X →
-              is-set-equiv-is-set
-                ( is-set-Fin (n +ℕ 2))
-                ( is-set-type-UU-Fin (n +ℕ 2) X)))))
+          ( is-contr-equiv' _
+            ( distributive-Π-Σ)
+            ( is-contr-Π
+              ( unique-action-equiv-family-over-subuniverse
+                  ( mere-equiv-Prop (Fin (n +ℕ 2)))
+                  ( λ Y → Fin (n +ℕ 2) ≃ type-UU-Fin (n +ℕ 2) Y))))))
       ( not-sign-comp-transposition-count
         (n +ℕ 2 , (compute-raise l (Fin (n +ℕ 2)))) (star))
 

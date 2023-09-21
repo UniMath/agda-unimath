@@ -7,10 +7,9 @@ module ring-theory.isomorphisms-rings where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -19,9 +18,9 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
@@ -30,9 +29,12 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.homomorphisms-monoids
 open import group-theory.isomorphisms-abelian-groups
+open import group-theory.isomorphisms-monoids
 
 open import ring-theory.homomorphisms-rings
+open import ring-theory.invertible-elements-rings
 open import ring-theory.precategory-of-rings
 open import ring-theory.rings
 ```
@@ -50,7 +52,7 @@ module _
 
   is-iso-prop-hom-Ring : Prop (l1 ⊔ l2)
   is-iso-prop-hom-Ring =
-    is-iso-prop-hom-Large-Precategory Ring-Large-Precategory R S f
+    is-iso-prop-hom-Large-Precategory Ring-Large-Precategory {X = R} {Y = S} f
 
   is-iso-hom-Ring : UU (l1 ⊔ l2)
   is-iso-hom-Ring =
@@ -58,7 +60,11 @@ module _
 
   is-prop-is-iso-hom-Ring : is-prop is-iso-hom-Ring
   is-prop-is-iso-hom-Ring =
-    is-prop-is-iso-hom-Large-Precategory Ring-Large-Precategory R S f
+    is-prop-is-iso-hom-Large-Precategory
+      ( Ring-Large-Precategory)
+      { X = R}
+      { Y = S}
+      ( f)
 
   hom-inv-is-iso-hom-Ring : is-iso-hom-Ring → type-hom-Ring S R
   hom-inv-is-iso-hom-Ring =
@@ -120,7 +126,8 @@ module _
   iso-Ring = iso-Large-Precategory Ring-Large-Precategory R S
 
   hom-iso-Ring : iso-Ring → type-hom-Ring R S
-  hom-iso-Ring = hom-iso-Large-Precategory Ring-Large-Precategory R S
+  hom-iso-Ring =
+    hom-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   map-iso-Ring : iso-Ring → type-Ring R → type-Ring S
   map-iso-Ring f = map-hom-Ring R S (hom-iso-Ring f)
@@ -154,11 +161,11 @@ module _
   is-iso-iso-Ring :
     (f : iso-Ring) → is-iso-hom-Ring R S (hom-iso-Ring f)
   is-iso-iso-Ring =
-    is-iso-iso-Large-Precategory Ring-Large-Precategory R S
+    is-iso-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   hom-inv-iso-Ring : iso-Ring → type-hom-Ring S R
   hom-inv-iso-Ring =
-    hom-inv-iso-Large-Precategory Ring-Large-Precategory R S
+    hom-inv-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
   map-inv-iso-Ring : iso-Ring → type-Ring S → type-Ring R
   map-inv-iso-Ring f = map-hom-Ring S R (hom-inv-iso-Ring f)
@@ -197,7 +204,10 @@ module _
     (f : iso-Ring) →
     comp-hom-Ring S R S (hom-iso-Ring f) (hom-inv-iso-Ring f) ＝ id-hom-Ring S
   is-section-hom-inv-iso-Ring =
-    is-section-hom-inv-iso-Large-Precategory Ring-Large-Precategory R S
+    is-section-hom-inv-iso-Large-Precategory
+      ( Ring-Large-Precategory)
+      { X = R}
+      { Y = S}
 
   is-section-map-inv-iso-Ring :
     (f : iso-Ring) → map-iso-Ring f ∘ map-inv-iso-Ring f ~ id
@@ -211,7 +221,10 @@ module _
     (f : iso-Ring) →
     comp-hom-Ring R S R (hom-inv-iso-Ring f) (hom-iso-Ring f) ＝ id-hom-Ring R
   is-retraction-hom-inv-iso-Ring =
-    is-retraction-hom-inv-iso-Large-Precategory Ring-Large-Precategory R S
+    is-retraction-hom-inv-iso-Large-Precategory
+      ( Ring-Large-Precategory)
+      { X = R}
+      { Y = S}
 
   is-retraction-map-inv-iso-Ring :
     (f : iso-Ring) → map-inv-iso-Ring f ∘ map-iso-Ring f ~ id
@@ -220,6 +233,38 @@ module _
       ( comp-hom-Ring R S R (hom-inv-iso-Ring f) (hom-iso-Ring f))
       ( id-hom-Ring R)
       ( is-retraction-hom-inv-iso-Ring f)
+
+  iso-multiplicative-monoid-iso-Ring :
+    (f : iso-Ring) →
+    iso-Monoid (multiplicative-monoid-Ring R) (multiplicative-monoid-Ring S)
+  pr1 (iso-multiplicative-monoid-iso-Ring f) =
+    hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f)
+  pr1 (pr2 (iso-multiplicative-monoid-iso-Ring f)) =
+    hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f)
+  pr1 (pr2 (pr2 (iso-multiplicative-monoid-iso-Ring f))) =
+    eq-htpy-hom-Monoid
+      ( multiplicative-monoid-Ring S)
+      ( multiplicative-monoid-Ring S)
+      ( comp-hom-Monoid
+        ( multiplicative-monoid-Ring S)
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f))
+        ( hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f)))
+      ( id-hom-Monoid (multiplicative-monoid-Ring S))
+      ( is-section-map-inv-iso-Ring f)
+  pr2 (pr2 (pr2 (iso-multiplicative-monoid-iso-Ring f))) =
+    eq-htpy-hom-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring R)
+      ( comp-hom-Monoid
+        ( multiplicative-monoid-Ring R)
+        ( multiplicative-monoid-Ring S)
+        ( multiplicative-monoid-Ring R)
+        ( hom-multiplicative-monoid-hom-Ring S R (hom-inv-iso-Ring f))
+        ( hom-multiplicative-monoid-hom-Ring R S (hom-iso-Ring f)))
+      ( id-hom-Monoid (multiplicative-monoid-Ring R))
+      ( is-retraction-map-inv-iso-Ring f)
 ```
 
 ### The identity isomorphism of rings
@@ -507,4 +552,33 @@ module _
 
   eq-iso-Ring : (S : Ring l) → iso-Ring R S → R ＝ S
   eq-iso-Ring S = map-inv-is-equiv (is-equiv-iso-eq-Ring S)
+```
+
+### Any ring isomorphism preserves and reflects invertible elements
+
+```agda
+module _
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2)
+  (f : iso-Ring R S)
+  where
+
+  preserves-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring R x →
+    is-invertible-element-Ring S (map-iso-Ring R S f x)
+  preserves-invertible-elements-iso-Ring =
+    preserves-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
+
+  reflects-invertible-elements-iso-Ring :
+    {x : type-Ring R} →
+    is-invertible-element-Ring S (map-iso-Ring R S f x) →
+    is-invertible-element-Ring R x
+  reflects-invertible-elements-iso-Ring =
+    reflects-invertible-elements-iso-Monoid
+      ( multiplicative-monoid-Ring R)
+      ( multiplicative-monoid-Ring S)
+      ( iso-multiplicative-monoid-iso-Ring R S f)
 ```

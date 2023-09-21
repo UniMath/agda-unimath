@@ -7,7 +7,7 @@ module category-theory.categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.1-types
@@ -86,6 +86,11 @@ module _
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
+  associative-composition-structure-Category :
+    associative-composition-structure-Set hom-Category
+  associative-composition-structure-Category =
+    associative-composition-structure-Precategory precategory-Category
+
   id-hom-Category : {x : obj-Category} → type-hom-Category x x
   id-hom-Category = id-hom-Precategory precategory-Category
 
@@ -101,9 +106,36 @@ module _
   right-unit-law-comp-hom-Category =
     right-unit-law-comp-hom-Precategory precategory-Category
 
+  is-unital-composition-structure-Category :
+    is-unital-composition-structure-Set
+      hom-Category
+      associative-composition-structure-Category
+  is-unital-composition-structure-Category =
+    is-unital-composition-structure-Precategory precategory-Category
+
   is-category-Category :
     is-category-Precategory precategory-Category
   is-category-Category = pr2 C
+```
+
+### Precomposition by a morphism
+
+```agda
+precomp-hom-Category :
+  {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
+  (f : type-hom-Category C x y) (z : obj-Category C) →
+  type-hom-Category C y z → type-hom-Category C x z
+precomp-hom-Category C = precomp-hom-Precategory (precategory-Category C)
+```
+
+### Postcomposition by a morphism
+
+```agda
+postcomp-hom-Category :
+  {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
+  (f : type-hom-Category C x y) (z : obj-Category C) →
+  type-hom-Category C z x → type-hom-Category C z y
+postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
 ```
 
 ## Properties

@@ -26,6 +26,7 @@ open import foundation.pullbacks
 open import foundation.subtype-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pullback-property-pushouts
@@ -356,70 +357,68 @@ universal-property-pushout-is-equiv' f g (i , j , H) is-equiv-g is-equiv-i {l} =
       ( is-equiv-precomp-is-equiv i is-equiv-i T))
 ```
 
-### Horizontal composition of pushouts
+### The pushout pasting lemmas
 
-If in the following diagram both squares are pushouts, then the outer square is
-a pushout as well.
+#### The horizontal pushout pasting lemma
+
+If in the following diagram the left square is a pushout, then the outer
+rectangle is a pushout if and only if the right square is a pushout.
 
 ```text
       g       k
-  A ----> B ----> C
-  |       |       |
- f|       |       |
-  v       v       v
-  X ----> Y ----> Z
+   A ----> B ----> C
+   |       |       |
+  f|       |       |
+   v       v       v
+   X ----> Y ----> Z
 ```
 
 ```agda
-universal-property-pushout-rectangle-universal-property-pushout-right :
+module _
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( f : A → X) (g : A → B) (k : B → C) →
-  ( c : cocone f g Y) (d : cocone (vertical-map-cocone f g c) k Z) →
-  ( up-c : {l : Level} → universal-property-pushout l f g c) →
-  ( up-d :
-    {l : Level} →
-    universal-property-pushout l (vertical-map-cocone f g c) k d) →
-  ( {l : Level} →
-    universal-property-pushout l f (k ∘ g) (cocone-comp-horizontal f g k c d))
-universal-property-pushout-rectangle-universal-property-pushout-right
-  ( f)
-  ( g)
-  ( k)
-  ( c)
-  ( d)
-  ( up-c)
-  ( up-d)
-  { l} =
-  universal-property-pushout-pullback-property-pushout l f (k ∘ g)
-    ( cocone-comp-horizontal f g k c d)
-    ( λ W →
-      tr
-        ( is-pullback (precomp f W) (precomp (k ∘ g) W))
-        ( inv
-          ( eq-htpy-cone
-            ( precomp f W)
-            ( precomp (k ∘ g) W)
-            ( cone-pullback-property-pushout
-              ( f)
-              ( k ∘ g)
-              ( cocone-comp-horizontal f g k c d)
-              ( W))
-            ( pasting-vertical-cone
+  ( f : A → X) (g : A → B) (k : B → C)
+  ( c : cocone f g Y) (d : cocone (vertical-map-cocone f g c) k Z)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  where
+
+  universal-property-pushout-rectangle-universal-property-pushout-right :
+    ( {l : Level} →
+      universal-property-pushout l (vertical-map-cocone f g c) k d) →
+    ( {l : Level} →
+      universal-property-pushout l f (k ∘ g) (cocone-comp-horizontal f g k c d))
+  universal-property-pushout-rectangle-universal-property-pushout-right
+    ( up-d)
+    { l} =
+    universal-property-pushout-pullback-property-pushout l f
+      ( k ∘ g)
+      ( cocone-comp-horizontal f g k c d)
+      ( λ W →
+        tr
+          ( is-pullback (precomp f W) (precomp (k ∘ g) W))
+          ( inv
+            ( eq-htpy-cone
               ( precomp f W)
-              ( precomp g W)
-              ( precomp k W)
-              ( cone-pullback-property-pushout f g c W)
+              ( precomp (k ∘ g) W)
               ( cone-pullback-property-pushout
-                ( vertical-map-cocone f g c)
-                ( k)
-                ( d)
-                ( W)))
-            ( refl-htpy ,
-              refl-htpy ,
-              λ h →
-                right-unit ∙
-                distributive-precomp-pasting-horizontal-coherence-square-maps
+                ( f)
+                ( k ∘ g)
+                ( cocone-comp-horizontal f g k c d)
+                ( W))
+              ( pasting-vertical-cone
+                ( precomp f W)
+                ( precomp g W)
+                ( precomp k W)
+                ( cone-pullback-property-pushout f g c W)
+                ( cone-pullback-property-pushout
+                  ( vertical-map-cocone f g c)
+                  ( k)
+                  ( d)
+                  ( W)))
+              ( refl-htpy ,
+                refl-htpy ,
+                ( right-unit-htpy) ∙h
+                ( distributive-precomp-pasting-horizontal-coherence-square-maps
                   ( W)
                   ( g)
                   ( k)
@@ -429,97 +428,153 @@ universal-property-pushout-rectangle-universal-property-pushout-right
                   ( horizontal-map-cocone f g c)
                   ( horizontal-map-cocone (vertical-map-cocone f g c) k d)
                   ( coherence-square-cocone f g c)
-                  ( coherence-square-cocone (vertical-map-cocone f g c) k d)
-                  ( h))))
-        ( is-pullback-rectangle-is-pullback-top
+                  ( coherence-square-cocone (vertical-map-cocone f g c) k d)))))
+          ( is-pullback-rectangle-is-pullback-top
+            ( precomp f W)
+            ( precomp g W)
+            ( precomp k W)
+            ( cone-pullback-property-pushout f g c W)
+            ( cone-pullback-property-pushout (vertical-map-cocone f g c) k d W)
+            ( pullback-property-pushout-universal-property-pushout l f g c
+              ( up-c)
+              ( W))
+            ( pullback-property-pushout-universal-property-pushout l
+              ( vertical-map-cocone f g c)
+              ( k)
+              ( d)
+              ( up-d)
+              ( W))))
+
+  universal-property-pushout-right-universal-property-pushout-rectangle :
+    ( {l : Level} →
+      universal-property-pushout
+        ( l)
+        ( f)
+        ( k ∘ g)
+        ( cocone-comp-horizontal f g k c d)) →
+    ( {l : Level} →
+      universal-property-pushout l (vertical-map-cocone f g c) k d)
+  universal-property-pushout-right-universal-property-pushout-rectangle
+    ( up-r)
+    { l} =
+    universal-property-pushout-pullback-property-pushout l
+      ( vertical-map-cocone f g c)
+      ( k)
+      ( d)
+      ( λ W →
+        is-pullback-top-is-pullback-rectangle
           ( precomp f W)
           ( precomp g W)
           ( precomp k W)
           ( cone-pullback-property-pushout f g c W)
-          ( cone-pullback-property-pushout
-            ( vertical-map-cocone f g c)
-            ( k)
-            ( d)
+          ( cone-pullback-property-pushout (vertical-map-cocone f g c) k d W)
+          ( pullback-property-pushout-universal-property-pushout l f g c
+            ( up-c)
             ( W))
-          ( pullback-property-pushout-universal-property-pushout l f g c up-c W)
-          ( pullback-property-pushout-universal-property-pushout
-            ( l)
-            ( vertical-map-cocone f g c)
-            ( k)
-            ( d)
-            ( up-d)
-            ( W))))
+          ( tr
+            ( is-pullback (precomp f W) (precomp (k ∘ g) W))
+            ( eq-htpy-cone
+              ( precomp f W)
+              ( precomp (k ∘ g) W)
+              ( cone-pullback-property-pushout f
+                ( k ∘ g)
+                ( cocone-comp-horizontal f g k c d)
+                ( W))
+              ( pasting-vertical-cone
+                ( precomp f W)
+                ( precomp g W)
+                ( precomp k W)
+                ( cone-pullback-property-pushout f g c W)
+                ( cone-pullback-property-pushout
+                  ( vertical-map-cocone f g c)
+                  ( k)
+                  ( d)
+                  ( W)))
+              ( refl-htpy ,
+                refl-htpy ,
+                ( right-unit-htpy) ∙h
+                ( distributive-precomp-pasting-horizontal-coherence-square-maps
+                  ( W)
+                  ( g)
+                  ( k)
+                  ( f)
+                  ( vertical-map-cocone f g c)
+                  ( vertical-map-cocone (vertical-map-cocone f g c) k d)
+                  ( horizontal-map-cocone f g c)
+                  ( horizontal-map-cocone (vertical-map-cocone f g c) k d)
+                  ( coherence-square-cocone f g c)
+                  ( coherence-square-cocone (vertical-map-cocone f g c) k d))))
+            ( pullback-property-pushout-universal-property-pushout l f
+              ( k ∘ g)
+              ( cocone-comp-horizontal f g k c d)
+              ( up-r)
+              ( W))))
 ```
 
-### The vertical pushout pasting lemma
+#### The vertical pushout pasting lemma
 
-If in the following diagram both squares are pushouts, then the outer square is
-a pushout as well.
+If in the following diagram the top square is a pushout, then the outer
+rectangle is a pushout if and only if the bottom square is a pushout.
 
 ```text
-     g
- A -----> X
- |        |
-f|        |
- v        v
- B -----> Y
- |        |
-k|        |
- v        v
- C -----> Z
+       g
+   A -----> X
+   |        |
+  f|        |
+   v        v
+   B -----> Y
+   |        |
+  k|        |
+   v        v
+   C -----> Z
 ```
 
 ```agda
-universal-property-pushout-rectangle-universal-property-pushout-top :
+module _
   { l1 l2 l3 l4 l5 l6 : Level}
   { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
-  ( f : A → B) (g : A → X) (k : B → C) →
-  ( c : cocone f g Y) (d : cocone k (horizontal-map-cocone f g c) Z) →
-  ( up-c : {l : Level} → universal-property-pushout l f g c) →
-  ( up-d :
-    {l : Level} →
-    universal-property-pushout l k (horizontal-map-cocone f g c) d) →
-  ( {l : Level} →
-    universal-property-pushout l (k ∘ f) g (cocone-comp-vertical f g k c d))
-universal-property-pushout-rectangle-universal-property-pushout-top
-  ( f)
-  ( g)
-  ( k)
-  ( c)
-  ( d)
-  ( up-c)
-  ( up-d)
-  { l} =
-  universal-property-pushout-pullback-property-pushout l (k ∘ f) g
-    ( cocone-comp-vertical f g k c d)
-    ( λ W →
-      tr
-        ( is-pullback (precomp (k ∘ f) W) (precomp g W))
-        ( inv
-          ( eq-htpy-cone
-            ( precomp (k ∘ f) W)
-            ( precomp g W)
-            ( cone-pullback-property-pushout
-              ( k ∘ f)
-              ( g)
-              ( cocone-comp-vertical f g k c d)
-              ( W))
-            ( pasting-horizontal-cone
-              ( precomp k W)
-              ( precomp f W)
+  ( f : A → B) (g : A → X) (k : B → C)
+  ( c : cocone f g Y) (d : cocone k (horizontal-map-cocone f g c) Z)
+  ( up-c : {l : Level} → universal-property-pushout l f g c)
+  where
+
+  universal-property-pushout-rectangle-universal-property-pushout-top :
+    ( {l : Level} →
+      universal-property-pushout l k (horizontal-map-cocone f g c) d) →
+    ( {l : Level} →
+      universal-property-pushout l (k ∘ f) g (cocone-comp-vertical f g k c d))
+  universal-property-pushout-rectangle-universal-property-pushout-top
+    ( up-d)
+    { l} =
+    universal-property-pushout-pullback-property-pushout l
+      ( k ∘ f)
+      ( g)
+      ( cocone-comp-vertical f g k c d)
+      ( λ W →
+        tr
+          ( is-pullback (precomp (k ∘ f) W) (precomp g W))
+          ( inv
+            ( eq-htpy-cone
+              ( precomp (k ∘ f) W)
               ( precomp g W)
-              ( cone-pullback-property-pushout f g c W)
               ( cone-pullback-property-pushout
-                ( k)
-                ( horizontal-map-cocone f g c)
-                ( d)
-                ( W)))
-            ( refl-htpy ,
-              refl-htpy ,
-              λ h →
-                right-unit ∙
-                distributive-precomp-pasting-vertical-coherence-square-maps
-                  ( W)
+                ( k ∘ f)
+                ( g)
+                ( cocone-comp-vertical f g k c d)
+                ( W))
+              ( pasting-horizontal-cone
+                ( precomp k W)
+                ( precomp f W)
+                ( precomp g W)
+                ( cone-pullback-property-pushout f g c W)
+                ( cone-pullback-property-pushout k
+                  ( horizontal-map-cocone f g c)
+                  ( d)
+                  ( W)))
+              ( refl-htpy ,
+                refl-htpy ,
+                ( right-unit-htpy) ∙h
+                ( distributive-precomp-pasting-vertical-coherence-square-maps W
                   ( g)
                   ( f)
                   ( vertical-map-cocone f g c)
@@ -528,24 +583,86 @@ universal-property-pushout-rectangle-universal-property-pushout-top
                   ( vertical-map-cocone k (horizontal-map-cocone f g c) d)
                   ( horizontal-map-cocone k (horizontal-map-cocone f g c) d)
                   ( coherence-square-cocone f g c)
-                  ( coherence-square-cocone k (horizontal-map-cocone f g c) d)
-                  ( h))))
-        ( is-pullback-rectangle-is-pullback-left-square
+                  ( coherence-square-cocone k
+                    ( horizontal-map-cocone f g c)
+                    ( d))))))
+          ( is-pullback-rectangle-is-pullback-left-square
+            ( precomp k W)
+            ( precomp f W)
+            ( precomp g W)
+            ( cone-pullback-property-pushout f g c W)
+            ( cone-pullback-property-pushout k
+              ( horizontal-map-cocone f g c)
+              ( d)
+              ( W))
+            ( pullback-property-pushout-universal-property-pushout l f g c
+              ( up-c)
+              ( W))
+            ( pullback-property-pushout-universal-property-pushout l k
+              ( horizontal-map-cocone f g c)
+              ( d)
+              ( up-d)
+              ( W))))
+
+  universal-property-pushout-top-universal-property-pushout-rectangle :
+    ( {l : Level} →
+      universal-property-pushout l (k ∘ f) g (cocone-comp-vertical f g k c d)) →
+    ( {l : Level} →
+      universal-property-pushout l k (horizontal-map-cocone f g c) d)
+  universal-property-pushout-top-universal-property-pushout-rectangle
+    ( up-r)
+    { l} =
+    universal-property-pushout-pullback-property-pushout l k
+      ( horizontal-map-cocone f g c)
+      ( d)
+      ( λ W →
+        is-pullback-left-square-is-pullback-rectangle
           ( precomp k W)
           ( precomp f W)
           ( precomp g W)
           ( cone-pullback-property-pushout f g c W)
-          ( cone-pullback-property-pushout
-            ( k)
-            ( horizontal-map-cocone f g c)
-            ( d)
-            ( W))
+          ( cone-pullback-property-pushout k (horizontal-map-cocone f g c) d W)
           ( pullback-property-pushout-universal-property-pushout l f g c up-c W)
-          ( pullback-property-pushout-universal-property-pushout
-            ( l)
-            ( k)
-            ( horizontal-map-cocone f g c)
-            ( d)
-            ( up-d)
-            ( W))))
+          ( tr
+            ( is-pullback (precomp (k ∘ f) W) (precomp g W))
+            ( eq-htpy-cone
+              ( precomp (k ∘ f) W)
+              ( precomp g W)
+              ( cone-pullback-property-pushout
+                ( k ∘ f)
+                ( g)
+                ( cocone-comp-vertical f g k c d)
+                ( W))
+              ( pasting-horizontal-cone
+                ( precomp k W)
+                ( precomp f W)
+                ( precomp g W)
+                ( cone-pullback-property-pushout f g c W)
+                ( cone-pullback-property-pushout k
+                  ( horizontal-map-cocone f g c)
+                  ( d)
+                  ( W)))
+              ( refl-htpy ,
+                refl-htpy ,
+                ( right-unit-htpy) ∙h
+                ( distributive-precomp-pasting-vertical-coherence-square-maps W
+                  ( g)
+                  ( f)
+                  ( vertical-map-cocone f g c)
+                  ( horizontal-map-cocone f g c)
+                  ( k)
+                  ( vertical-map-cocone k
+                    ( horizontal-map-cocone f g c)
+                    ( d))
+                  ( horizontal-map-cocone k
+                    ( horizontal-map-cocone f g c)
+                    ( d))
+                  ( coherence-square-cocone f g c)
+                  ( coherence-square-cocone k
+                    ( horizontal-map-cocone f g c)
+                    ( d)))))
+            ( pullback-property-pushout-universal-property-pushout l (k ∘ f) g
+              ( cocone-comp-vertical f g k c d)
+              ( up-r)
+              ( W))))
 ```

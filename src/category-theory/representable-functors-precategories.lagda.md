@@ -22,15 +22,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a precategory `C` and an object `c`, there is a functor from `C` to the
-precategory of Sets represented by `c` that:
+Given a [precategory](category-theory.precategories.md) `C` and an object `c`,
+there is a [functor](category-theory.functors-precategories.md) from `C` to the
+[precategory of Sets](foundation.category-of-sets.md) **represented** by `c`
+that:
 
-- sends an object `x` of `C` to the set `hom c x` and
+- sends an object `x` of `C` to the [set](foundation-core.sets.md) `hom c x` and
 - sends a morphism `g : hom x y` of `C` to the function `hom c x → hom c y`
   defined by postcomposition with `g`.
 
-The functoriality axioms follow, by function extensionality, from associativity
-and the left unit law for the precategory `C`.
+The functoriality axioms follow, by
+[function extensionality](foundation.function-extensionality.md), from
+associativity and the left unit law for the precategory `C`.
 
 ## Definition
 
@@ -48,7 +51,8 @@ pr2 (pr2 (pr2 (rep-functor-Precategory C c))) _ =
 
 ## Natural transformations between representable functors
 
-A morphism `f : hom b c` in a precategory `C` defines a natural transformation
+A morphism `f : hom b c` in a precategory `C` defines a
+[natural transformation](category-theory.natural-transformations-precategories.md)
 from the functor represented by `c` to the functor represented by `b`. Its
 components `hom c x → hom b x` are defined by precomposition with `f`.
 

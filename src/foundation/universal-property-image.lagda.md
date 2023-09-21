@@ -31,6 +31,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.subtypes
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

@@ -11,6 +11,7 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
@@ -24,6 +25,29 @@ The initial object of a precategory (if it exists) is an object with the
 universal property that there is a unique morphism from it to any object.
 
 ## Definition
+
+### The universal property of initial objects in precategories
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) (X : obj-Precategory C)
+  where
+
+  is-initial-prop-obj-Precategory : Prop (l1 ⊔ l2)
+  is-initial-prop-obj-Precategory =
+    Π-Prop
+      ( obj-Precategory C)
+      ( λ Y → is-contr-Prop (type-hom-Precategory C X Y))
+
+  is-initial-obj-Precategory : UU (l1 ⊔ l2)
+  is-initial-obj-Precategory = type-Prop is-initial-prop-obj-Precategory
+
+  is-prop-is-initial-obj-Precategory : is-prop is-initial-obj-Precategory
+  is-prop-is-initial-obj-Precategory =
+    is-prop-type-Prop is-initial-prop-obj-Precategory
+```
+
+### The type of initial objects in a precategory
 
 ```agda
 initial-object-Precategory :

@@ -169,6 +169,12 @@ module _
     {s t : type-subuniverse P} → equiv-subuniverse s t → s ＝ t
   eq-equiv-subuniverse {s} {t} =
     map-inv-is-equiv (is-equiv-equiv-eq-subuniverse s t)
+
+  compute-eq-equiv-id-equiv-subuniverse :
+    {s : type-subuniverse P} →
+    eq-equiv-subuniverse {s} {s} (id-equiv {A = pr1 s}) ＝ refl
+  compute-eq-equiv-id-equiv-subuniverse =
+    is-retraction-map-inv-equiv (extensionality-subuniverse _ _) refl
 ```
 
 ### Equivalences of families of types in a subuniverse

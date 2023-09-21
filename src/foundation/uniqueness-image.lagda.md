@@ -22,6 +22,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
 open import foundation-core.sections
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>

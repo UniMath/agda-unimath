@@ -39,18 +39,18 @@ This principle is [equivalent](foundation-core.equivalences.md) to
 ### Weak function extensionality
 
 ```agda
-WEAK-FUNEXT :
+weak-function-extensionality :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
-WEAK-FUNEXT A B =
+weak-function-extensionality A B =
   ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
 ```
 
 ### Weaker function extensionality
 
 ```agda
-WEAKER-FUNEXT :
+weaker-function-extensionality :
   {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
-WEAKER-FUNEXT A B =
+weaker-function-extensionality A B =
   ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
 ```
 
@@ -61,9 +61,10 @@ WEAKER-FUNEXT A B =
 ```agda
 abstract
   weak-funext-funext :
-    {l1 l2 : Level} →
-    ((A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → FUNEXT f) →
-    ((A : UU l1) (B : A → UU l2) → WEAK-FUNEXT A B)
+    { l1 l2 : Level} →
+    ( (A : UU l1) (B : A → UU l2) (f : (x : A) → B x) →
+      function-extensionality f) →
+    ( (A : UU l1) (B : A → UU l2) → weak-function-extensionality A B)
   pr1 (weak-funext-funext funext A B is-contr-B) x =
     center (is-contr-B x)
   pr2 (weak-funext-funext funext A B is-contr-B) f =
@@ -73,9 +74,9 @@ abstract
 
 abstract
   funext-weak-funext :
-    {l1 l2 : Level} →
-    ((A : UU l1) (B : A → UU l2) → WEAK-FUNEXT A B) →
-    ((A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → FUNEXT f)
+    { l1 l2 : Level} →
+    ( (A : UU l1) (B : A → UU l2) → weak-function-extensionality A B) →
+    ( A : UU l1) (B : A → UU l2) (f : (x : A) → B x) → function-extensionality f
   funext-weak-funext weak-funext A B f =
     fundamental-theorem-id
       ( is-contr-retract-of
@@ -141,7 +142,7 @@ module _
 ```agda
 weak-funext-weaker-funext :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  WEAKER-FUNEXT A B → WEAK-FUNEXT A B
+  weaker-function-extensionality A B → weak-function-extensionality A B
 weak-funext-weaker-funext H C =
   is-proof-irrelevant-is-prop
     ( H (λ x → is-prop-is-contr (C x)))

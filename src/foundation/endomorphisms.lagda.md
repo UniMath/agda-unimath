@@ -27,7 +27,7 @@ open import structured-types.wild-monoids
 
 ## Idea
 
-An endomorphism on a type `A` is a map `A → A`.
+An **endomorphism** on a type `A` is a map `A → A`.
 
 ## Properties
 
@@ -61,4 +61,4 @@ pr2 (pr2 (pr2 (endo-Monoid A))) f = refl
 ## See also
 
 - For endomorphisms in a category see
-  [`category-theory.endomorphisms-of-objects-categories`](category-theory.endomorphisms-of-objects-categories.md).
+  [`category-theory.endomorphisms-in-categories`](category-theory.endomorphisms-in-categories.md).

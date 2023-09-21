@@ -8,7 +8,6 @@ module order-theory.nuclei-large-locales where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -212,10 +211,10 @@ module _
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
-  leq-closed-element-nucleus-Large-Locale-Prop :
+  leq-prop-closed-element-nucleus-Large-Locale :
     Large-Relation-Prop α β closed-element-nucleus-Large-Locale
-  leq-closed-element-nucleus-Large-Locale-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-closed-element-nucleus-Large-Locale =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-nucleus-Large-Locale)
 
@@ -236,7 +235,7 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   refl-leq-closed-element-nucleus-Large-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( closed-element-nucleus-Large-Locale)
       ( leq-closed-element-nucleus-Large-Locale)
   refl-leq-closed-element-nucleus-Large-Locale =
@@ -245,7 +244,7 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   antisymmetric-leq-closed-element-nucleus-Large-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( closed-element-nucleus-Large-Locale)
       ( leq-closed-element-nucleus-Large-Locale)
   antisymmetric-leq-closed-element-nucleus-Large-Locale =
@@ -254,7 +253,7 @@ module _
       ( large-subposet-nucleus-Large-Locale)
 
   transitive-leq-closed-element-nucleus-Large-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( closed-element-nucleus-Large-Locale)
       ( leq-closed-element-nucleus-Large-Locale)
   transitive-leq-closed-element-nucleus-Large-Locale =

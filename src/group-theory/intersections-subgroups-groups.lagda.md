@@ -64,13 +64,13 @@ module _
         x y (pH , pK) (qH , qK)) =
     is-closed-under-multiplication-Subgroup G K x y pK qK
 
-  is-closed-under-inv-intersection-Subgroup :
+  is-closed-under-inverses-intersection-Subgroup :
     (x : type-Group G) →
     is-in-intersection-Subgroup x → is-in-intersection-Subgroup (inv-Group G x)
-  pr1 (is-closed-under-inv-intersection-Subgroup x (pH , pK)) =
-    is-closed-under-inv-Subgroup G H x pH
-  pr2 (is-closed-under-inv-intersection-Subgroup x (pH , pK)) =
-    is-closed-under-inv-Subgroup G K x pK
+  pr1 (is-closed-under-inverses-intersection-Subgroup x (pH , pK)) =
+    is-closed-under-inverses-Subgroup G H x pH
+  pr2 (is-closed-under-inverses-intersection-Subgroup x (pH , pK)) =
+    is-closed-under-inverses-Subgroup G K x pK
 
   is-subgroup-intersection-Subgroup :
     is-subgroup-subset-Group G subset-intersection-Subgroup
@@ -79,11 +79,60 @@ module _
   pr1 (pr2 is-subgroup-intersection-Subgroup) =
     is-closed-under-multiplication-intersection-Subgroup
   pr2 (pr2 is-subgroup-intersection-Subgroup) =
-    is-closed-under-inv-intersection-Subgroup
+    is-closed-under-inverses-intersection-Subgroup
 
   intersection-Subgroup : Subgroup (l2 ⊔ l3) G
   pr1 intersection-Subgroup = subset-intersection-Subgroup
   pr2 intersection-Subgroup = is-subgroup-intersection-Subgroup
+```
+
+### The intersection of a family of subgroups
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) {I : UU l2} (H : I → Subgroup l3 G)
+  where
+
+  subset-intersection-family-of-subgroups-Group : subset-Group (l2 ⊔ l3) G
+  subset-intersection-family-of-subgroups-Group =
+    intersection-family-of-subtypes (λ i → subset-Subgroup G (H i))
+
+  is-in-intersection-family-of-subgroups-Group : type-Group G → UU (l2 ⊔ l3)
+  is-in-intersection-family-of-subgroups-Group =
+    is-in-subtype subset-intersection-family-of-subgroups-Group
+
+  contains-unit-intersection-family-of-subgroups-Group :
+    contains-unit-subset-Group G subset-intersection-family-of-subgroups-Group
+  contains-unit-intersection-family-of-subgroups-Group i =
+    contains-unit-Subgroup G (H i)
+
+  is-closed-under-multiplication-intersection-family-of-subgroups-Group :
+    is-closed-under-multiplication-subset-Group G
+      subset-intersection-family-of-subgroups-Group
+  is-closed-under-multiplication-intersection-family-of-subgroups-Group
+    x y p q i =
+    is-closed-under-multiplication-Subgroup G (H i) x y (p i) (q i)
+
+  is-closed-under-inverses-intersection-family-of-subgroups-Group :
+    is-closed-under-inverses-subset-Group G
+      subset-intersection-family-of-subgroups-Group
+  is-closed-under-inverses-intersection-family-of-subgroups-Group x p i =
+    is-closed-under-inverses-Subgroup G (H i) x (p i)
+
+  is-subgroup-intersection-family-of-subgroups-Group :
+    is-subgroup-subset-Group G subset-intersection-family-of-subgroups-Group
+  pr1 is-subgroup-intersection-family-of-subgroups-Group =
+    contains-unit-intersection-family-of-subgroups-Group
+  pr1 (pr2 is-subgroup-intersection-family-of-subgroups-Group) =
+    is-closed-under-multiplication-intersection-family-of-subgroups-Group
+  pr2 (pr2 is-subgroup-intersection-family-of-subgroups-Group) =
+    is-closed-under-inverses-intersection-family-of-subgroups-Group
+
+  intersection-family-of-subgroups-Group : Subgroup (l2 ⊔ l3) G
+  pr1 intersection-family-of-subgroups-Group =
+    subset-intersection-family-of-subgroups-Group
+  pr2 intersection-family-of-subgroups-Group =
+    is-subgroup-intersection-family-of-subgroups-Group
 ```
 
 ## Properties

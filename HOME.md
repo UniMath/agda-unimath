@@ -5,7 +5,7 @@ at formalizing mathematics from a univalent point of view using the dependently
 typed programming language [Agda](https://github.com/agda/agda).
 
 <a href="https://github.com/unimath/agda-unimath">
-<img align="right" width="300" alt="agda-unimath" src="agda-unimath-logo.svg" />
+<img class="invertible-image" align="right" width="300" alt="agda-unimath" src="website/images/agda-unimath-logo.svg" />
 </a>
 
 The library project was created by Elisabeth Bonnevier, Jonathan Prieto-Cubides,
@@ -34,7 +34,3 @@ Follow the instructions in our [installation guide](HOWTO-INSTALL.md) to set up
 the project. After you have completed your formalization, submit it via a pull
 request. We will review your contribution and work towards incorporating it into
 the `agda-unimath` library.
-
-{{#include SUMMARY.md}}
-
-{{#include CONTRIBUTORS.md}}
