@@ -44,7 +44,23 @@ guess what a construction named `hom-iso-Ring` should be about: It should be a
 construction that constructs the underlying homomorphism of an isomorphisms of
 rings. This name follows the pattern `[type]-[hypotheses]-[Important-Concept]`.
 
-There is also a common class of cases where we don't use the `[name]` part in the name of an entry: underlying objects. For example, the underlying set of a group is called `set-Group`, which uses the pattern `[type]-[Important-Concept]`. The construction of the underlying set of a group returns for each group a set, which is an element of type `Set`. Similarly, we have `type-Group]`, `semigroup-Group`, `type-Ring`, `set-Ring`, and so on. Another instance where this happens is in `hom-iso-Group`, which is the construction that returns the underlying group homomorphism of an isomorphism of group. The fact that a group isomorphism is an isomorphsim is called `is-iso-iso-Group`, which also uses the pattern `[type]-[Important-Concept]`. One could also consider calling it `is-iso-hom-iso-Group`, to emphasize that the underlying group homomorphism of the isomorphism is an isomorphism. However, this name does not fit our patterns in any way, and the addition of `hom` to the name adds no extra useful information. This situation is common in instances where we omit the `[name]` part of a name. For instance `[is-category-Category` and `is-ideal-ideal-Ring` follow the patterns `[type]-[Important-Concept]` and `[type]-[hypotheses]-[Important-Concept]`.
+There is also a common class of cases where we don't use the `[name]` part in
+the name of an entry: underlying objects. For example, the underlying set of a
+group is called `set-Group`, which uses the pattern
+`[type]-[Important-Concept]`. The construction of the underlying set of a group
+returns for each group a set, which is an element of type `Set`. Similarly, we
+have `type-Group]`, `semigroup-Group`, `type-Ring`, `set-Ring`, and so on.
+Another instance where this happens is in `hom-iso-Group`, which is the
+construction that returns the underlying group homomorphism of an isomorphism of
+group. The fact that a group isomorphism is an isomorphsim is called
+`is-iso-iso-Group`, which also uses the pattern `[type]-[Important-Concept]`.
+One could also consider calling it `is-iso-hom-iso-Group`, to emphasize that the
+underlying group homomorphism of the isomorphism is an isomorphism. However,
+this name does not fit our patterns in any way, and the addition of `hom` to the
+name adds no extra useful information. This situation is common in instances
+where we omit the `[name]` part of a name. For instance `[is-category-Category`
+and `is-ideal-ideal-Ring` follow the patterns `[type]-[Important-Concept]` and
+`[type]-[hypotheses]-[Important-Concept]`.
 
 We should also mention that, while abbreviations might seem like a good way to
 shorten names, we use them sparingly. They might save a couple of keystrokes for
