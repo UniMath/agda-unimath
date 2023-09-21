@@ -247,26 +247,55 @@ the `agda-unimath` library:
 
 ## Naming conventions
 
-One of the key strategies to make our library easy to navigate is our naming
-convention. We strive for a direct correspondence between a construction's name
-and its type. Take, for instance, the proof that the successor function on
-integers is an equivalence. It has the type `is-equiv succ-ℤ`, so we name it
-`is-equiv-succ-ℤ`. Note how we prefer lowercase and use hyphens to separate
-words.
+A good naming convention is essential for being able to navigate and maintain
+the library, and for being able to make progress with your formalization
+project. Good names provide coincise descriptions of an entry's purpose, and
+help making the code in the library readable.
 
-We also reflect the type of hypotheses used in the construction within the name.
-However, the crux of a name primarily describes the type of the constructed
-term; descriptions of the hypotheses follow this. For instance,
-`is-equiv-is-contr-map` is a function of type `is-contr-map f → is-equiv f`,
-where `f` is a given function. Notice how the term `is-equiv-is-contr-map H`
-places the descriptor `is-contr-map` right next to the variable `H` it refers
-to.
+The library contains, for example, an entry `is-iso-hom-Ring` for the predicate
+that a ring homomorphism is an isomorphsim. The most significant aspect of this
+predicate is the assertion that something is an isomorphism. Furthermore, we
+make this assertion about ring homomorphisms. The name `is-iso-hom-Ring` is
+therefore a logical name for the predicate that a ring homomorphism is an
+isomorphism.
 
-While abbreviations might seem like a good way to shorten names, we use them
-sparingly. They might save a couple of keystrokes for the author, but in the
-grand scheme of things, they will likely compromise readability and
-maintainability, especially for newcomers and maintainers. We aim for clarity,
-not brevity.
+In our naming scheme we strive for a direct correspondence between a
+constructions's name and its type. Take, for example, the proof that the
+successor function on integers is an equivalence. It has the type
+`is-equiv succ-ℤ`, so we name it `is-equiv-succ-ℤ`.
+
+We may also reflect the type of hypotheses used in the construction within the
+name. If we wish to do so, we name the hypotheses after we have named the type
+of the construction. For instance, `is-equiv-is-contr-map` is a function of type
+`is-contr-map f → is-equiv f`, where `f` is a given function. Notice how the
+term `is-equiv-is-contr-map H` places the descriptor `is-contr-map` right next
+to the variable `H` it refers to. Another advantage is that the name says
+immediately what it constructs.
+
+In general, our naming scheme follows the following pattern:
+
+```text
+  [name]-[type]-[hypotheses]-[Important-Concept]
+```
+
+In this naming scheme all parts are optional, but the order of the different
+parts of the name must be respected.
+
+We saw, for example, that the prediate `is-iso-hom-Ring` has the part `Ring`
+capitalized. This signifies that the predicate is about rings. This name follows
+the scheme `[name]-[hypotheses]-[Important-Concept]`. Note that there is also
+the entry `is-iso-prop-hom-Ring`. This is a predicate that returns for each ring
+homomorphism the _proposition_ that it is an isomorphism, and therefore it
+follows the scheme `[name]-[type]-[hypotheses]-[Important-Concept]`. Now we can
+guess what a construction named `hom-iso-Ring` should be about: It should be a
+construction that constructs the underlying homomorphism of an isomorphisms of
+rings. This name follows the pattern `[type]-[hypotheses]-[Important-Concept]`.
+
+We should also mention that, while abbreviations might seem like a good way to
+shorten names, we use them sparingly. They might save a couple of keystrokes for
+the author, but in the grand scheme of things, they will likely compromise
+readability and maintainability, especially for newcomers and maintainers. We
+aim for clarity, not brevity.
 
 Here is a list of our naming conventions:
 
@@ -276,7 +305,8 @@ Here is a list of our naming conventions:
 
 - We use US English spelling of words in names.
 
-- Important concepts can be capitalized. Usually, these are categories like
+- When an entry is predominantly about objects of an important concept, the
+  names of these concepts can be capitalized. Usually, these are categories like
   `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`,
   `Precategory`, `Category`, `Directed-Graph`, `Undirected-Graph`, and so on.
 
@@ -302,6 +332,10 @@ Here is a list of our naming conventions:
   variations of the same symbol. An important exception is the use of the
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
   as the standard equals sign is a reserved symbol in Agda.
+
+If you are unsure about what to name your entry, ask us on the Univalent Agda
+discord server. One of the most commonly asked questions is what to name a
+certain thing.
 
 ## <a name="formatting"></a>Formatting: Indentation, line breaks, and parentheses
 
