@@ -216,8 +216,8 @@ width equals sign `＝`. While you're at it, you can also add the key sequence
 #### 80-character limit
 
 The `agda-unimath` library maintains an 80-character limit on the length of most
-lines in the source code (see [CODINGSTYLE](CODINGSTYLE.md#character-limit) for
-a list of exceptions). This limit is to improve readability, both in your
+lines in the source code (see [CODING-STYLE](CODING-STYLE.md#character-limit)
+for a list of exceptions). This limit is to improve readability, both in your
 programming environment and on our website. To display a vertical ruler marking
 the 80th column in Emacs, add:
 
@@ -300,7 +300,7 @@ in the library.
 We welcome and appreciate contributions from the community. If you're interested
 in contributing to the `agda-unimath` library, you can follow the instructions
 below to ensure a smooth setup and workflow. Also, please make sure to follow
-our [coding style](CODINGSTYLE.md) and
+our [coding style](CODING-STYLE.md) and
 [design principles](DESIGN-PRINCIPLES.md).
 
 ### <a name="pre-commit-hooks"></a>Pre-commit hooks and Python dependencies
