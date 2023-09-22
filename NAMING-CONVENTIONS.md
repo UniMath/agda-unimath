@@ -31,13 +31,13 @@ the agda-unimath library.
 
 ## Examples
 
-Before we present a general scheme, let us first get a feel for the structure of names in agda-unimath by considering some examples.
-The library has an entry named `is-iso-hom-Ring` for the predicate
-that a ring homomorphism is an isomorphsim. The most significant aspect of this
-predicate is the assertion that something is an isomorphism. Furthermore, we
-make this assertion about ring homomorphisms. The name `is-iso-hom-Ring` is
-therefore a logical name for the predicate that a ring homomorphism is an
-isomorphism.
+Before we present a general scheme, let us first get a feel for the structure of
+names in agda-unimath by considering some examples. The library has an entry
+named `is-iso-hom-Ring` for the predicate that a ring homomorphism is an
+isomorphsim. The most significant aspect of this predicate is the assertion that
+something is an isomorphism. Furthermore, we make this assertion about ring
+homomorphisms. The name `is-iso-hom-Ring` is therefore a logical name for the
+predicate that a ring homomorphism is an isomorphism.
 
 In our naming scheme we strive for a direct correspondence between a
 construction's name and its type. Take, for example, the proof that the
@@ -49,11 +49,11 @@ when including hypotheses in the name, we mention them after the type of the
 main construction. Let's take the entry `is-equiv-is-contr-map` as an example.
 In this entry, we show that any
 [contractible map](foundation.contractible-maps.md) is an
-[equivalence](foundation-core.equivalences.md). The type of this entry is therefore
-`is-contr-map f → is-equiv f`, where `f` is an assumed function. In the term
-`is-equiv-is-contr-map H`, the descriptor `is-contr-map` is positioned adjacent
-to its corresponding variable, `H`. Furthermore, by beginning the name with the
-descriptor `is-equiv` we quickly see that this entry outputs proofs of
+[equivalence](foundation-core.equivalences.md). The type of this entry is
+therefore `is-contr-map f → is-equiv f`, where `f` is an assumed function. In
+the term `is-equiv-is-contr-map H`, the descriptor `is-contr-map` is positioned
+adjacent to its corresponding variable, `H`. Furthermore, by beginning the name
+with the descriptor `is-equiv` we quickly see that this entry outputs proofs of
 equivalence.
 
 By aligning names with types and incorporating hypotheses when relevant, the
