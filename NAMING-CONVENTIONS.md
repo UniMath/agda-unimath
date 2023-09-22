@@ -84,7 +84,7 @@ Given Agda's current lack of a namespace mechanism, we can't have named logical
 collections of definitions that span multiple files. Instead, we've incorporated
 what would typically be a namespace directly into the name. This convention is
 particularly applied to key mathematical concepts, such as groups, rings,
-categories, graphs, and trees, and so on.
+categories, graphs, trees, and so on.
 
 ### Naming mathematical structures
 
