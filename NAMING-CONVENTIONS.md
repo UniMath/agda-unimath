@@ -31,7 +31,8 @@ the agda-unimath library.
 
 ## Examples
 
-For example, the library has an entry named `is-iso-hom-Ring` for the predicate
+Before we present a general scheme, let us first get a feel for the structure of names in agda-unimath by considering some examples.
+The library has an entry named `is-iso-hom-Ring` for the predicate
 that a ring homomorphism is an isomorphsim. The most significant aspect of this
 predicate is the assertion that something is an isomorphism. Furthermore, we
 make this assertion about ring homomorphisms. The name `is-iso-hom-Ring` is
