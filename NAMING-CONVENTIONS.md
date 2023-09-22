@@ -58,19 +58,28 @@ naming scheme aims for clarity and predictability.
 
 ## The general scheme
 
-In general, our naming scheme follows the following pattern:
+In general, our naming scheme follows the pattern:
 
 ```text
   [name]-[type]-[hypotheses]-[Namespace]
 ```
 
-We note that Agda has, as of yet, no namespace mechanism. This means that in
-places where we wished to be able to use namespaces, we would append the name of
-an entry with the name that we would have given to that namespace. We use this
-naming convention for important mathematical concepts, such as groups, rings,
-categories, graphs, trees, and so on. Furthermore, we note that in the general
-naming scheme above all parts are optional, but the order of the different parts
-of the name must be respected.
+In this general pattern, all the components are optional. However, their order
+is fixed and should be maintained for consistency.
+
+The general naming pattern breaks down as follows:
+
+- **[name]:** This part is used to give a custom descriptive name for the entry.
+- **[type]:** This part of the name refers to the output type of the entry.
+- **[hypotheses]:** This part of the name consists of descriptors for the
+  hypotheses used in the type specification of the entry.
+- **[Namespace]:** This part of the name describes what important concept or
+  general category the entry is about.
+
+Given Agda's current lack of a namespace mechanism, we've incorporated what
+would typically be a namespace directly into the name. This convention is
+particularly applied to key mathematical concepts, such as groups, rings,
+categories, graphs, and trees.
 
 ### Naming mathematical structures
 
