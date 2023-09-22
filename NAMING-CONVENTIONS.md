@@ -81,7 +81,7 @@ The general naming pattern breaks down as follows:
   general category the entry is about.
 
 Given Agda's current lack of a namespace mechanism, we can't have named logical
-collection of definitions that span multiple files. Instead, we've incorporated
+collections of definitions that span multiple files. Instead, we've incorporated
 what would typically be a namespace directly into the name. This convention is
 particularly applied to key mathematical concepts, such as groups, rings,
 categories, graphs, and trees, and so on.
