@@ -167,6 +167,23 @@ library is `Ω`. Therefore, we record the function that transport computes to as
 `tr-Ω` and we record the [homotopy](foundation.homotopies.md) that transport is
 pointwise equal to `tr-Ω` as `compute-tr-Ω`.
 
+## List of common descriptors
+
+In the table below we list some common descriptors that are not directly tied to
+a type with that name.
+
+| Descriptor       | Purpose                                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
+| `coh`            | Used for proofs of coherence                                                                                   |
+| `coherence`      | Used to assert coherence                                                                                       |
+| `compute`        | Used for proofs of computation, which may be an identification or an element of any other identity system      |
+| `Eq`             | Used for identity systems on types of a particular form                                                        |
+| `eq`             | Used as a descriptor for the identity type                                                                     |
+| `extensionality` | Used for computations of identity types                                                                        |
+| `is-property`    | Used when `is-prop` is unavailable                                                                             |
+| `map`            | Used in two ways: as the functorial action of a type constructor, but also as the underlying map of a morphism |
+| `type`           | Used for the underlying type of an object                                                                      |
+
 ## Overview of our naming conventions
 
 - Names are unique; we steer clear of namespace overloading.
