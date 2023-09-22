@@ -29,7 +29,7 @@ the agda-unimath library.
 
 ## Examples
 
-The library contains, for example, an entry `is-iso-hom-Ring` for the predicate
+For example, the library has an entry named `is-iso-hom-Ring` for the predicate
 that a ring homomorphism is an isomorphsim. The most significant aspect of this
 predicate is the assertion that something is an isomorphism. Furthermore, we
 make this assertion about ring homomorphisms. The name `is-iso-hom-Ring` is
@@ -41,13 +41,20 @@ construction's name and its type. Take, for example, the proof that the
 successor function on integers is an equivalence. It has the type
 `is-equiv succ-ℤ`, so we name it `is-equiv-succ-ℤ`.
 
-We may also reflect the type of hypotheses used in the construction within the
-name. If we wish to do so, we name the hypotheses after we have named the type
-of the construction. For instance, `is-equiv-is-contr-map` is a function of type
-`is-contr-map f → is-equiv f`, where `f` is a given function. Notice how the
-term `is-equiv-is-contr-map H` places the descriptor `is-contr-map` right next
-to the variable `H` it refers to. Another advantage is that the name says
-immediately what it constructs.
+We also consider the type of hypotheses when naming a construction. Typically,
+when including hypotheses in the name, we mention them after the type of the
+main construction. Let's take the entry `is-equiv-is-contr-map` as an example.
+In this entry, we show that any
+[contractible map](foundation.contractible-maps.md) is an
+[equivalence](foundation.equivalences.md). The type of this entry is therefore
+`is-contr-map f → is-equiv f`, where `f` is an assumed function. In the term
+`is-equiv-is-contr-map H`, the descriptor `is-contr-map` is positioned adjacent
+to its corresponding variable, `H`. Furthermore, by beginning the name with the
+descriptor `is-equiv` we quickly see that this entry outputs proofs of
+equivalence.
+
+By aligning names with types and incorporating hypotheses when relevant, the
+naming scheme aims for clarity and predictability.
 
 ## The general scheme
 
