@@ -41,7 +41,7 @@ Eckmann-Hilton:
 
 `(α β : Ω² X) → α ∙ β = β ∙ α`
 
-In this file we will give two different constructions of this path, one that
+In this file we will give two different constructions of this identification, one that
 corresponds to the more algebraic phrasing and one that corresponds to the more
 homotopy theoretic phrasing.
 
@@ -95,7 +95,7 @@ interchange-concat-Ω² =
     ( assoc)
 ```
 
-### Constructing eckmann-hilton using the naturality condition the operation of whiskering a fixed 2-path by a 1-path
+### Constructing eckmann-hilton using the naturality condition of the operation of whiskering a fixed 2-path by a 1-path
 
 #### The motivation
 
@@ -103,8 +103,9 @@ Now we give the more homotopy theoretic construction of Eckmann-Hilton. Consider
 2-loops `α β : Ω² (X , base)`. The more homotopy theoretic Eckmann-Hilton
 argument is often depicted as follows:
 
-| α | | refl-Ω² | α | | β | refl-Ω² | | β | ------- ＝ ---------------- ＝
----------------- ＝ ---- | β | | β | refl-Ω² | | refl-Ω² | α | | α |
+ | α |      | refl-Ω² | α |     | β | refl-Ω² |    | β |
+ ------ ＝ ---------------- ＝ ---------------- ＝ ----
+ | β |      | β | refl-Ω² |     | refl-Ω² | α |    | α |
 
 The first picture represents the vertical concatination of `α` and `β`. The
 notation ` | α | β |` represents the horizontal concatination of `α` and `β`.
