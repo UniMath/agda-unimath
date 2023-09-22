@@ -49,7 +49,7 @@ when including hypotheses in the name, we mention them after the type of the
 main construction. Let's take the entry `is-equiv-is-contr-map` as an example.
 In this entry, we show that any
 [contractible map](foundation.contractible-maps.md) is an
-[equivalence](foundation.equivalences.md). The type of this entry is therefore
+[equivalence](foundation-core.equivalences.md). The type of this entry is therefore
 `is-contr-map f → is-equiv f`, where `f` is an assumed function. In the term
 `is-equiv-is-contr-map H`, the descriptor `is-contr-map` is positioned adjacent
 to its corresponding variable, `H`. Furthermore, by beginning the name with the
