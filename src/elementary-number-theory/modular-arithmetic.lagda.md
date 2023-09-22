@@ -46,9 +46,17 @@ open import univalent-combinatorics.standard-finite-types
 
 </details>
 
+## Idea
+
+**Modular arithmetic** is arithmetic of the integers modulo `n`. The integers
+modulo `n` have addition, negatives, and multiplication that satisfy many of the
+familiar properties of usual arithmetic of the
+[integers](elementary-number-theory.integers.md).
+
 Some modular arithmetic was already defined in
-`modular-arithmetic-standard-finite-types`. Here we package those results
-together in a more convenient package that also allows congruence modulo 0.
+`modular-arithmetic-standard-finite-types`. Here we collect those results in a
+more convenient format that also includes the integers modulo `0`, i.e., the
+integers.
 
 ```agda
 ℤ-Mod : ℕ → UU lzero
@@ -639,7 +647,10 @@ cong-int-mod-ℤ (succ-ℕ k) (inl x) =
           ( k *ℕ (succ-ℕ x))
           ( congruence-mul-ℕ
             ( succ-ℕ k)
-            {k} {nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))} {k} {succ-ℕ x}
+            { k}
+            { nat-Fin (succ-ℕ k) (mod-succ-ℕ k (succ-ℕ x))}
+            { k}
+            { succ-ℕ x}
             ( refl-cong-ℕ (succ-ℕ k) k)
             ( cong-nat-mod-succ-ℕ k (succ-ℕ x)))))
       ( cong-int-cong-ℕ

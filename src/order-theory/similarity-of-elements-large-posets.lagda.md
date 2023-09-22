@@ -68,7 +68,7 @@ module _
   where
 
   refl-sim-Large-Poset :
-    is-large-reflexive (type-Large-Poset P) (sim-Large-Poset P)
+    is-reflexive-Large-Relation (type-Large-Poset P) (sim-Large-Poset P)
   refl-sim-Large-Poset = refl-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
 
@@ -80,7 +80,7 @@ module _
   where
 
   transitive-sim-Large-Poset :
-    is-large-transitive (type-Large-Poset P) (sim-Large-Poset P)
+    is-transitive-Large-Relation (type-Large-Poset P) (sim-Large-Poset P)
   transitive-sim-Large-Poset =
     transitive-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```
@@ -93,7 +93,7 @@ module _
   where
 
   symmetric-sim-Large-Poset :
-    is-large-symmetric (type-Large-Poset P) (sim-Large-Poset P)
+    is-symmetric-Large-Relation (type-Large-Poset P) (sim-Large-Poset P)
   symmetric-sim-Large-Poset =
     symmetric-sim-Large-Preorder (large-preorder-Large-Poset P)
 ```

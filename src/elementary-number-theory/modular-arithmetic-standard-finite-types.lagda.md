@@ -27,6 +27,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -154,11 +155,24 @@ is-section-nat-Fin k x =
         ( mod-succ-ℕ k (nat-Fin (succ-ℕ k) x)))
       ( strict-upper-bound-nat-Fin (succ-ℕ k) x)
       ( cong-nat-mod-succ-ℕ k (nat-Fin (succ-ℕ k) x)))
+```
 
+### `mod-succ-ℕ` is split surjective
+
+```agda
 is-split-surjective-mod-succ-ℕ :
-  {k : ℕ} → is-split-surjective (mod-succ-ℕ k)
-pr1 (is-split-surjective-mod-succ-ℕ {k} x) = nat-Fin (succ-ℕ k) x
-pr2 (is-split-surjective-mod-succ-ℕ {k} x) = is-section-nat-Fin k x
+  (k : ℕ) → is-split-surjective (mod-succ-ℕ k)
+pr1 (is-split-surjective-mod-succ-ℕ k x) = nat-Fin (succ-ℕ k) x
+pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
+```
+
+### `mod-succ-ℕ` is surjective
+
+```agda
+is-surjective-mod-succ-ℕ :
+  (k : ℕ) → is-surjective (mod-succ-ℕ k)
+is-surjective-mod-succ-ℕ k =
+  is-surjective-is-split-surjective (is-split-surjective-mod-succ-ℕ k)
 ```
 
 ### The residue of `x` modulo `k + 1` is less than or equal to `x`

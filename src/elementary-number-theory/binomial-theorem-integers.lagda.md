@@ -10,12 +10,12 @@ module elementary-number-theory.binomial-theorem-integers where
 open import commutative-algebra.binomial-theorem-commutative-rings
 
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.commutative-ring-of-integers
 open import elementary-number-theory.distance-natural-numbers
 open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.powers-integers
+open import elementary-number-theory.ring-of-integers
 
 open import foundation.homotopies
 open import foundation.identity-types

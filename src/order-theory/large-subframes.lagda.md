@@ -100,10 +100,10 @@ module _
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
-  leq-Large-Subframe-Prop :
+  leq-prop-Large-Subframe :
     Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Subframe
-  leq-Large-Subframe-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-Large-Subframe =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
@@ -122,21 +122,21 @@ module _
       ( large-subposet-Large-Subframe S)
 
   refl-leq-Large-Subframe :
-    is-large-reflexive type-Large-Subframe leq-Large-Subframe
+    is-reflexive-Large-Relation type-Large-Subframe leq-Large-Subframe
   refl-leq-Large-Subframe =
     refl-leq-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   transitive-leq-Large-Subframe :
-    is-large-transitive type-Large-Subframe leq-Large-Subframe
+    is-transitive-Large-Relation type-Large-Subframe leq-Large-Subframe
   transitive-leq-Large-Subframe =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Frame F)
       ( large-subposet-Large-Subframe S)
 
   antisymmetric-leq-Large-Subframe :
-    is-large-antisymmetric type-Large-Subframe leq-Large-Subframe
+    is-antisymmetric-Large-Relation type-Large-Subframe leq-Large-Subframe
   antisymmetric-leq-Large-Subframe =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Frame F)

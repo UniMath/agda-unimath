@@ -50,19 +50,19 @@ module _
   {l1 l2 l3 : Level} (G : Group l1) (K : Group l2)
   where
 
-  nullifies-normal-subgroup-hom-Group-Prop :
+  nullifies-normal-subgroup-prop-hom-Group :
     type-hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-  nullifies-normal-subgroup-hom-Group-Prop f H =
-    leq-Normal-Subgroup-Prop G H (kernel-hom-Group G K f)
+  nullifies-normal-subgroup-prop-hom-Group f H =
+    leq-prop-Normal-Subgroup G H (kernel-hom-Group G K f)
 
   nullifies-normal-subgroup-hom-Group :
     type-hom-Group G K → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Group f H =
-    type-Prop (nullifies-normal-subgroup-hom-Group-Prop f H)
+    type-Prop (nullifies-normal-subgroup-prop-hom-Group f H)
 
   nullifying-hom-Group : Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   nullifying-hom-Group H =
-    type-subtype (λ f → nullifies-normal-subgroup-hom-Group-Prop f H)
+    type-subtype (λ f → nullifies-normal-subgroup-prop-hom-Group f H)
 
   hom-nullifying-hom-Group :
     (H : Normal-Subgroup l3 G) →
