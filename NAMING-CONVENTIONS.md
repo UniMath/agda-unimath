@@ -96,8 +96,10 @@ where we define a structured object from another structured object. For
 instance, the [kernel](group-theory.kernels.md) of a
 [group homomorphism](group-theory.homomorphisms-groups.md) is defined to be the
 [normal subgroup](group-theory.normal-subgroups.md) `kernel-hom-Group`. This
-name follows the scheme
-`[name]-[hypotheses]-[Namespace]`. When we want to define the underlying structure of the kernel of a group homomorphism, we follow the scheme `[type]-[hypotheses]-[Namespace]`. For instance, the underlying group of the kernel of a group homomorphism is called `group-kernel-hom-Group`.
+name follows the scheme `[name]-[hypotheses]-[Namespace]`. When we want to
+define the underlying structure of the kernel of a group homomorphism, we follow
+the scheme `[type]-[hypotheses]-[Namespace]`. For instance, the underlying group
+of the kernel of a group homomorphism is called `group-kernel-hom-Group`.
 
 ### Naming conventions for mathematical laws
 
