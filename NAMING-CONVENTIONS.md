@@ -179,7 +179,9 @@ descriptors in the table below.
 | `compute`        | Used for proofs of computation, which may be an identification or an element of any other identity system      |
 | `Eq`             | Used for identity systems on types of a particular form                                                        |
 | `eq`             | Used as a descriptor for the identity type                                                                     |
+| `equiv`          | Used for equivalences, and also for names of identity systems of universe-like types                           |
 | `extensionality` | Used for computations of identity types                                                                        |
+| `htpy`           | Used for constructions of homotopies, and also for names of identity systems of function-like types            |
 | `is-property`    | Used when `is-prop` is unavailable                                                                             |
 | `map`            | Used in two ways: as the functorial action of a type constructor, but also as the underlying map of a morphism |
 | `type`           | Used for the underlying type of an object                                                                      |
