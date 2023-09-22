@@ -169,7 +169,8 @@ pointwise equal to `tr-Ω` as `compute-tr-Ω`.
 
 ## List of common descriptors
 
-To give a sense of the kind of general descriptors we use, we list some common descriptors in the table below.
+To give a sense of the kind of general descriptors we use, we list some common
+descriptors in the table below.
 
 | Descriptor       | Purpose                                                                                                        |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
