@@ -110,10 +110,10 @@ argument is often depicted as follows:
 The first picture represents the vertical concatination of `α` and `β`. The
 notation ` | α | β |` represents the horizontal concatination of `α` and `β`.
 Then `| refl | α |` is just
-`[identification-left-whisk refl-Ω² α ](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697)`.
+[`identification-left-whisk refl-Ω² α`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7697).
 The first and last equality come from the unit laws of whiskering. And the
 middle equality can be recognized as
-[path-swap-nat-identification-left-whisk](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
+[`path-swap-nat-identification-left-whisk`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
 which is the naturality condition of `htpy-identification-left-whisk α` when
 applied to `β`.
 
@@ -126,16 +126,15 @@ Eckmann-Hilton and the 2-D descent data of a fibration. For now, consider the
 family of based path spaces `Id base : X → UU`. A 1-loop `l` induces an
 autoequivalence `Ω X ≃ Ω X` given by concatinating on the right by `l`. This is
 shown in
-`[tr-Id-right](https://unimath.github.io/agda-unimath/foundation.identity-types.html#11216)`.
+[`tr-Id-right`](https://unimath.github.io/agda-unimath/foundation.identity-types.html#11216).
 A 2-loop `s` induces a homotpy `id {A = Ω X} ~ id` given by
-`[htpy-identification-left-whisk](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977)`.
+[`htpy-identification-left-whisk`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977).
 This claim is shown in TODO (provide link). Thus, the 2-D descent data of
 `Id base` is (up to equivalence) exactly the homotopy at the heart of this
 construction of Eckmann-Hilton.
 
 Recall that homotpies of type `id ~ id` automatically commute with each other
-via
-`[eckmann-hilton-htpy](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218)`.
+via [`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218).
 This identification is constructed using the naturality condition of the two
 homotopies involved. Thus, in the case of `Id base`, we can see a very close
 correspondence between Eckmann-Hilton on 2-loops in the base type `X` and
@@ -148,7 +147,7 @@ homotpies automatically commute with each other via their naturality conditions.
 Then, the naturality condition that makes `α` and `β` commute in `Ω² X` is sent
 by `tr³ B` to the naturality condition that makes the induced homotopies
 commute. This is recorded in
-`[tr³-htpy-swap-path-swap](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825)`.
+[`tr³-htpy-swap-path-swap`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
 From this, it is easy to show that "transport preserves Eckmann-Hilton" by
 proving that additional coherence paths in the definition of `eckmann-hilton`
 and `eckmann-hilton-htpy` are compatible. We prove this in TODO
