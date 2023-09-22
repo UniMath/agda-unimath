@@ -88,7 +88,7 @@ pattern `[type]-[Namespace]`. One could also consider calling it
 the isomorphism is an isomorphism. However, this name does not fit our patterns
 in any way, and the addition of `hom` to the name adds no extra useful
 information. This situation is common in instances where we omit the `[name]`
-part of a name. For instance `[is-category-Category` and `is-ideal-ideal-Ring`
+part of a name. For instance `is-category-Category` and `is-ideal-ideal-Ring`
 follow the patterns `[type]-[Namespace]` and `[type]-[hypotheses]-[Namespace]`.
 
 Another class of entries where the naming scheme needs some explanation, is
@@ -138,14 +138,6 @@ library is `Ω`. Therefore, we record the function that transport computes to as
 `tr-Ω` and we record the [homotopy](foundation.homotopies.md) that transport is
 pointwise equal to `tr-Ω` as `compute-tr-Ω`.
 
-## Abbreviations, and avoiding them
-
-We should also mention that, while abbreviations might seem like a good way to
-shorten names, we use them sparingly. They might save a couple of keystrokes for
-the author, but in the grand scheme of things, they will likely compromise
-readability and maintainability, especially for newcomers and maintainers. We
-aim for clarity, not brevity.
-
 ## Overview of our naming conventions
 
 - Names are unique; we steer clear of namespace overloading.
@@ -186,9 +178,20 @@ certain thing.
 
 ## Naming conventions we try to avoid
 
-- Using Unicode characters in names is entirely permissible, but we recommend
-  restraint to maintain readability. Just a few well-placed symbols can often
-  express a lot.
+- Abbreviations might seem like a good way to shorten names, but we use them
+  sparingly. They might save a couple of keystrokes for the author, but in the
+  grand scheme of things, they will likely compromise readability and
+  maintainability, especially for newcomers and maintainers. We aim for clarity,
+  not brevity.
+
+- Using Unicode characters in names is permissible, but we recommend restraint
+  to maintain readability. Just a few well-placed symbols can often express a
+  lot. Often, when we introduce mixfix operators, we also introduce full names
+  for them. We then use the full names for these operators in the naming scheme,
+  and omit the symbolic notation for anything but the operation itself. For
+  example, the commutativity of cartesian products is called `commutative-prod`
+  and not `commutative-×`, and the unit of a modality is called `unit-modality`
+  and not `unit-○`.
 
 - To enhance conceptual clarity, we suggest names of constructions avoid
   referring to variable names. This makes code more understandable, even at a
