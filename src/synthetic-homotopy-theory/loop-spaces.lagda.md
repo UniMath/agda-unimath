@@ -24,13 +24,13 @@ open import structured-types.wild-quasigroups
 ## Idea
 
 The loop space of a pointed type `A` is the pointed type of self-identifications
-of the base point of `A`. The loop space comes equipped with a group
-structure induced by the groupoidal structure on identifications.
+of the base point of `A`. The loop space comes equipped with a group structure
+induced by the groupoidal structure on identifications.
 
 ## List of files directly related to loop spaces
 
-| Concept                                           | File                                                                                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Concept                      | File                                                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | Conjugation of loops         | [`synthetic-homotopy-theory.conjugation-loops`](synthetic-homotopy-theory.conjugation-loops.md)                   |
 | Double loop spaces           | [`synthetic-homotopy-theory.double-loop-spaces`](synthetic-homotopy-theory.double-loop-spaces.md)                 |
 | Eckmann-Hilton               | [`synthetic-homotopy-theory.eckmann-hilton`](sythetic-homotpy-theory-eckmann-hilton.md)                           |
@@ -40,7 +40,6 @@ structure induced by the groupoidal structure on identifications.
 | Iterated loop spaces         | [`synthetic-homotopy-theory.iterated-loop-spaces'](synthetic-homotopy-theory.iterated-loop-spaces.md)             |
 | Powers of loops              | [`synthetic-homotopy-theory.powers-of-loops`](synthetic-homotopy-theory.powers-of-loops.md)                       |
 | Triple loop spaces           | [`synthetic-homotopy-theory.triple-loop-spaces`](synthetic-homotopy-theory.triple-loop-spaces.md)                 |
-
 
 ## Definitions
 
