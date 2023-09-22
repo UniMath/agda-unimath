@@ -176,9 +176,10 @@ pointwise equal to `tr-Ω` as `compute-tr-Ω`.
 - We use US English spelling of words in names.
 
 - When an entry is predominantly about objects of an important concept, the
-  names of these concepts can be capitalized. Usually, these are categories in one way or another, like
-  `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`,
-  `Precategory`, `Category`, `Directed-Graph`, `Undirected-Graph`, `Truncated-Type`, `Spectrum` and so on.
+  names of these concepts can be capitalized. Usually, these are categories in
+  one way or another, like `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`,
+  `Preorder`, `Poset`, `Precategory`, `Category`, `Directed-Graph`,
+  `Undirected-Graph`, `Truncated-Type`, `Spectrum` and so on.
 
 - As a general rule of thumb, names should start out with an all lowercase
   portion with words separated by hyphens, and may have a capitalized portion at
