@@ -2,27 +2,30 @@
 
 A good naming convention is essential for being able to navigate and maintain
 the library, and for being able to make progress with your formalization
-project. Good names provide coincise descriptions of an entry's purpose, and
-help making the code in the library readable. On this page we provide general
+project. Good names provide concise descriptions of an entry's purpose, and help
+making the code in the library readable. On this page we provide general
 guidelines for naming entries that apply anywhere in the library.
 
-We also mention that the naming scheme of agda-unimath evolves as agda grows.
-Sometimes we find that old namings don't fit our ideas of a good naming scheme
-anymore, or we find other ways to improve on the naming. Some older code in the
-library might even not be updated yet to fit the current naming scheme. We
-should therefore remember that the naming scheme is not set in stone, and
-maintaining and improving it is part of the work of maintaining the agda-unimath
-library.
+Accurately naming entries in a large formalization project can be very
+difficult, especially when your formalization enters uncharted, or little
+written about territory. Giving good names to your entries requires a high level
+of conceptual understanding of your entries. The naming scheme should help
+reveal common patterns in names, which hopefully helps to find predictable
+namings for entries. On the other hand, we understand that this is not always
+possible. If you find yourself not knowing what to name something, give it your
+best shot to come up with a name, or reach out to us on the Univalent Agda
+discord to ask if we have any suggestions.
 
-Finally, we should note that accurately naming entries in a large formalization
-project can be very difficult, especially when your formalization enters
-unchartered, or little written about territory. Giving good names to your
-entries requires a high level of conceptual understanding of your entries. The
-naming scheme should help reveal common patterns in names, which hopefully helps
-to find predictable namings for entries. On the other hand, we understand that
-this is not always possible. If you find yourself not knowing what to name
-something, give it your best shot to come up with a name, or reach out to us on
-the Univalent Agda discord to ask if we have any suggestions.
+We also mention that the naming scheme of agda-unimath evolves as the library
+grows. This implies that there are necessarily some inconsistencies in the
+naming of our entries, even though we continually work to improve them.
+Sometimes we find that old namings don't fit our ideas of a good naming scheme
+anymore, or sometimes we gain a better understanding of what an entry is about
+and update its name accordingly. We should therefore remember that neither the
+naming scheme nor the names we use in the library are set in stone. If you find
+a particular entry where the naming seems off, for any reason, we would love to
+know about it. Maintaining and improving it is part of the work of maintaining
+the agda-unimath library.
 
 ## Examples
 
