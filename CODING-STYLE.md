@@ -355,6 +355,15 @@ the story. Here's how we handle indentation and line breaks in the
   maintainability of the code, and you may find that it violates some of our
   other conventions as well.
 
+- Using the projection functions `pr1` and `pr2`, particularly their
+  compositions, can lead to short code, but we recommend to avoid doing so. When
+  constructions contain a lot of projections throughout their definition, the
+  projections reveal little of what is going on in that part of the projections.
+  We therefore prefer naming the projections. When a type of the form `Σ A B` is
+  given a name, naming its projections too can enhance readability and will
+  provide more informative responses when jumping to the definition.
+  Furthermore, it makes it easier to change the definition later on.
+
 - The use of `where` blocks in definitions is perfectly fine but keeping them
   short and specific to the definition of the current object is beneficial. Note
   that definitions made in a `where` block in a definition cannot be reused

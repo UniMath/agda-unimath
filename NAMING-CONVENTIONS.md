@@ -13,8 +13,10 @@ of conceptual understanding of your entries. The naming scheme should help
 reveal common patterns in names, which hopefully helps to find predictable
 namings for entries. On the other hand, we understand that this is not always
 possible. If you find yourself not knowing what to name something, give it your
-best shot to come up with a name, or reach out to us on the Univalent Agda
-discord to ask if we have any suggestions.
+best shot to come up with a name, or reach out to us on the
+[Univalent Agda discord server](https://discord.gg/Zp2e8hYsuX) to ask if we have
+any suggestions. One of the most commonly asked questions is what to name a
+certain entry.
 
 We also mention that the naming scheme of agda-unimath evolves as the library
 grows. This implies that there are necessarily some inconsistencies in the
@@ -61,7 +63,7 @@ naming scheme aims for clarity and predictability.
 In general, our naming scheme follows the pattern:
 
 ```text
-  [name]-[type]-[hypotheses]-[Namespace]
+  [descriptor]-[output-type]-[input-types]-[Namespace]
 ```
 
 In this general pattern, all the components are optional. However, their order
@@ -69,56 +71,63 @@ is fixed and should be maintained for consistency.
 
 The general naming pattern breaks down as follows:
 
-- **[name]:** This part is used to give a custom descriptive name for the entry.
-- **[type]:** This part of the name refers to the output type of the entry.
-- **[hypotheses]:** This part of the name consists of descriptors for the
-  hypotheses used in the type specification of the entry.
+- **[descriptor]:** This part is used to give a custom descriptive name for the
+  entry.
+- **[output-type]:** This part of the name refers to the output type of the
+  entry.
+- **[input-types]:** This part of the name consists of references to the input
+  types used in the type specification of the entry.
 - **[Namespace]:** This part of the name describes what important concept or
   general category the entry is about.
 
-Given Agda's current lack of a namespace mechanism, we've incorporated what
-would typically be a namespace directly into the name. This convention is
+Given Agda's current lack of a namespace mechanism, we can't have named logical
+collection of definitions that span multiple files. Instead, we've incorporated
+what would typically be a namespace directly into the name. This convention is
 particularly applied to key mathematical concepts, such as groups, rings,
-categories, graphs, and trees.
+categories, graphs, and trees, and so on.
 
 ### Naming mathematical structures
 
 We saw, for example, that the prediate `is-iso-hom-Ring` has the part `Ring`
 capitalized. This signifies that the predicate is about rings. This name follows
-the scheme `[name]-[hypotheses]-[Namespace]`. Note that there is also the entry
-`is-iso-prop-hom-Ring`. This is a predicate that returns for each ring
+the scheme `[descriptor]-[input-types]-[Namespace]`. Note that there is also the
+entry `is-iso-prop-hom-Ring`. This is a predicate that returns for each ring
 homomorphism the _proposition_ that it is an isomorphism, and therefore it
-follows the scheme `[name]-[type]-[hypotheses]-[Namespace]`. Now we can guess
-what a construction named `hom-iso-Ring` should be about: It should be a
-construction that constructs the underlying homomorphism of an isomorphisms of
-rings. This name follows the pattern `[type]-[hypotheses]-[Namespace]`.
+follows the scheme `[descriptor]-[output-type]-[input-types]-[Namespace]`. Now
+we can guess what a construction named `hom-iso-Ring` should be about: It should
+be a construction that constructs the underlying homomorphism of an isomorphisms
+of rings. This name follows the pattern
+`[output-type]-[input-types]-[Namespace]`.
 
-There is also a common class of entries where we don't use the `[name]` part in
-the name of an entry: underlying objects. For example, the underlying set of a
-group is called `set-Group`, which uses the pattern `[type]-[Namespace]`. The
-construction of the underlying set of a group returns for each group a set,
-which is an element of type `Set`. Similarly, we have `type-Group]`,
-`semigroup-Group`, `type-Ring`, `set-Ring`, and so on. Another instance where
-this happens is in `hom-iso-Group`, which is the construction that returns the
-underlying group homomorphism of an isomorphism of group. The fact that a group
-isomorphism is an isomorphsim is called `is-iso-iso-Group`, which also uses the
-pattern `[type]-[Namespace]`. One could also consider calling it
-`is-iso-hom-iso-Group`, to emphasize that the underlying group homomorphism of
-the isomorphism is an isomorphism. However, this name does not fit our patterns
-in any way, and the addition of `hom` to the name adds no extra useful
-information. This situation is common in instances where we omit the `[name]`
-part of a name. For instance `is-category-Category` and `is-ideal-ideal-Ring`
-follow the patterns `[type]-[Namespace]` and `[type]-[hypotheses]-[Namespace]`.
+There is also a common class of entries where we don't use the `[descriptor]`
+part in the name of an entry: underlying objects. For example, the underlying
+set of a group is called `set-Group`, which uses the pattern
+`[output-type]-[Namespace]`. The construction of the underlying set of a group
+returns for each group a set, which is an element of type `Set`. Similarly, we
+have `type-Group`, `semigroup-Group`, `type-Ring`, `set-Ring`, and so on.
+Another instance where this happens is in `hom-iso-Group`, which is the
+construction that returns the underlying group homomorphism of an isomorphism of
+group. The fact that a group isomorphism is an isomorphsim is called
+`is-iso-iso-Group`, which also uses the pattern `[output-type]-[Namespace]`. One
+could also consider calling it `is-iso-hom-iso-Group`, to emphasize that the
+underlying group homomorphism of the isomorphism is an isomorphism. However,
+this name does not fit our patterns in any way, and the addition of `hom` to the
+name adds no extra useful information. This situation is common in instances
+where we omit the `[descriptor]` part of a name. For instance
+`is-category-Category` and `is-ideal-ideal-Ring` follow the patterns
+`[output-type]-[Namespace]` and `[output-type]-[input-types]-[Namespace]`,
+respectively.
 
 Another class of entries where the naming scheme needs some explanation, is
 where we define a structured object from another structured object. For
 instance, the [kernel](group-theory.kernels.md) of a
 [group homomorphism](group-theory.homomorphisms-groups.md) is defined to be the
 [normal subgroup](group-theory.normal-subgroups.md) `kernel-hom-Group`. This
-name follows the scheme `[name]-[hypotheses]-[Namespace]`. When we want to
-define the underlying structure of the kernel of a group homomorphism, we follow
-the scheme `[type]-[hypotheses]-[Namespace]`. For instance, the underlying group
-of the kernel of a group homomorphism is called `group-kernel-hom-Group`.
+name follows the scheme `[descriptor]-[input-types]-[Namespace]`. When we want
+to define the underlying structure of the kernel of a group homomorphism, we
+follow the scheme `[output-type]-[input-types]-[Namespace]`. For instance, the
+underlying group of the kernel of a group homomorphism is called
+`group-kernel-hom-Group`.
 
 ### Naming conventions for mathematical laws
 
@@ -129,8 +138,8 @@ stated as `left-unit-law` and `right-unit-law`. The fact that
 [multiplication on the integers](elementary-number-theory.multiplication-integers.md)
 satisfies the unit laws is then stated as `left-unit-law-mul-ℤ` and
 `right-unit-law-mul-ℤ`. In the general naming scheme, this naming follows the
-pattern `[type]-[Namespace]`, because it states the type of which an element is
-constructed, and we treat `ℤ` as a namespace.
+pattern `[output-type]-[Namespace]`, because it states the type of which an
+element is constructed, and we treat `ℤ` as a namespace.
 
 For a second example, `interchange-law` states what it means to satisfy the
 [interchange law](foundation.interchange-law.md). This interchange law requires
@@ -142,7 +151,7 @@ the same. For example, in the [integers](elementary-number-theory.integers.md)
 there is an interchange law for addition over addition, which states that
 `(a + b) + (c + d) ＝ (a + c) + (b + d)`. This law is called
 `interchange-law-add-add-ℤ`. Again, this naming follows the pattern
-`[type]-[Namespace]`, because it states the type of which an element is
+`[output-type]-[Namespace]`, because it states the type of which an element is
 constructed.
 
 ### Further naming conventions for operations on types
@@ -191,11 +200,7 @@ pointwise equal to `tr-Ω` as `compute-tr-Ω`.
   [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
   as the standard equals sign is a reserved symbol in Agda.
 
-If you are unsure about what to name your entry, ask us on the Univalent Agda
-discord server. One of the most commonly asked questions is what to name a
-certain thing.
-
-## Naming conventions we try to avoid
+## Naming practices we try to avoid
 
 - Abbreviations might seem like a good way to shorten names, but we use them
   sparingly. They might save a couple of keystrokes for the author, but in the
@@ -212,23 +217,12 @@ certain thing.
   and not `commutative-×`, and the unit of a modality is called `unit-modality`
   and not `unit-○`.
 
-- To enhance conceptual clarity, we suggest names of constructions avoid
+- To improve conceptual clarity, we suggest names of constructions avoid
   referring to variable names. This makes code more understandable, even at a
   glance, and easier to work with in subsequent code.
 
-- Using the projection functions `pr1` and `pr2`, particularly their
-  compositions, can lead to short code, but we recommend to avoid doing so. When
-  constructions contain a lot of projections throughout their definition, the
-  projections reveal little of what is going on in that part of the projections.
-  We therefore prefer naming the projections. When a type of the form `Σ A B` is
-  given a name, naming its projections too can enhance readability and will
-  provide more informative responses when jumping to the definition.
-  Furthermore, it makes it easier to change the definition later on.
-
-- Lastly, we recommend not naming constructions after infix notation of
-  operations included in them. Preferring primary prefix notation over infix
-  notation can help keep our code consistent. For example, it's preferred to use
-  `commutative-prod` instead of `commutative-×` for denoting the commutativity
-  of cartesian products.
-
-- Names never reference variables.
+- Names never reference variables. For example, `G`-sets are called
+  [group actions](group-theory.group-actions.md) in our library. The type of all
+  group actions on a given group `G` is called `Abstract-Group-Action`. This
+  name also contains the prefix `Abstract` in order to disambiguate from
+  [concrete group actions](group-theory.concrete-group-actions.md).
