@@ -206,7 +206,8 @@ module _
             ( obj-map-Precategory C D G x)))
       ( λ α →
         is-set-type-Set
-          ( set-Prop (is-natural-transformation-map-Precategory-Prop C D F G α)))
+          ( set-Prop
+            ( is-natural-transformation-map-Precategory-Prop C D F G α)))
 
   natural-transformation-map-Precategory-Set :
     Set (l1 ⊔ l2 ⊔ l4)

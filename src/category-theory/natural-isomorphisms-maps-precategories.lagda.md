@@ -7,10 +7,9 @@ module category-theory.natural-isomorphisms-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.maps-precategories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.maps-precategories
 open import category-theory.natural-transformations-maps-precategories
-open import category-theory.natural-isomorphisms-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -113,7 +112,8 @@ module _
     iso-family-map-Precategory C D F G
   pr1 (iso-family-is-natural-isomorphism-map-Precategory is-iso-f x) =
     hom-family-natural-transformation-map-Precategory C D F G f x
-  pr2 (iso-family-is-natural-isomorphism-map-Precategory is-iso-f x) = is-iso-f x
+  pr2 (iso-family-is-natural-isomorphism-map-Precategory is-iso-f x) =
+    is-iso-f x
 
   inv-iso-family-is-natural-isomorphism-map-Precategory :
     is-natural-isomorphism-map-Precategory C D F G f →
@@ -297,15 +297,19 @@ module _
       hom-family-natural-isomorphism-map-Precategory C D F G g)
   extensionality-natural-isomorphism-map-Precategory f g =
     ( extensionality-natural-transformation-map-Precategory C D F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G g)) ∘e
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G g)) ∘e
     ( equiv-ap-emb
       ( emb-subtype (is-natural-isomorphism-map-prop-hom-Precategory C D F G)))
 
   eq-eq-natural-transformation-map-natural-isomorphism-map-Precategory :
     (f g : natural-isomorphism-map-Precategory C D F G) →
-    ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f ＝
-      natural-transformation-map-natural-isomorphism-map-Precategory C D F G g) →
+    ( ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f) ＝
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G g)) →
     f ＝ g
   eq-eq-natural-transformation-map-natural-isomorphism-map-Precategory f g =
     eq-type-subtype (is-natural-isomorphism-map-prop-hom-Precategory C D F G)
@@ -318,8 +322,10 @@ module _
   eq-htpy-hom-family-natural-isomorphism-map-Precategory f g =
     eq-eq-natural-transformation-map-natural-isomorphism-map-Precategory f g ∘
     eq-htpy-hom-family-natural-transformation-map-Precategory C D F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G g)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G g)
 ```
 
 ### The type of natural isomorphisms form a set
@@ -365,10 +371,12 @@ module _
     is-natural-isomorphism-map-Precategory C D F G f →
     natural-transformation-map-Precategory C D G F
   pr1
-    ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory is-iso-f) =
+    ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
+      ( is-iso-f)) =
     hom-inv-is-iso-hom-Precategory D ∘ is-iso-f
   pr2
-    ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory is-iso-f)
+    ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
+      ( is-iso-f))
     { x} {y} g =
     ( inv
       ( left-unit-law-comp-hom-Precategory D
@@ -384,7 +392,8 @@ module _
               C D F G f is-iso-f x)))
       ( inv (is-retraction-hom-inv-is-iso-hom-Precategory D (is-iso-f y)))) ∙
     ( associative-comp-hom-Precategory D
-      ( hom-inv-family-is-natural-isomorphism-map-Precategory C D F G f is-iso-f y)
+      ( hom-inv-family-is-natural-isomorphism-map-Precategory
+          C D F G f is-iso-f y)
       ( hom-family-natural-transformation-map-Precategory C D F G f y)
       ( comp-hom-Precategory D
         ( hom-map-Precategory C D F g)
@@ -430,7 +439,8 @@ module _
   is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Precategory :
     (is-iso-f : is-natural-isomorphism-map-Precategory C D F G f) →
     comp-natural-transformation-map-Precategory C D F G F
-      ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory is-iso-f)
+      ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
+        ( is-iso-f))
       ( f) ＝
     id-natural-transformation-map-Precategory C D F
   is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
@@ -441,8 +451,10 @@ module _
   is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Precategory :
     (is-iso-f : is-natural-isomorphism-map-Precategory C D F G f) →
     is-natural-isomorphism-map-Precategory C D G F
-      ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory is-iso-f)
-  is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Precategory is-iso-f =
+      ( natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
+        ( is-iso-f))
+  is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Precategory
+    is-iso-f =
     is-iso-inv-is-iso-hom-Precategory D ∘ is-iso-f
 ```
 
@@ -460,39 +472,51 @@ module _
   natural-transformation-map-inv-natural-isomorphism-map-Precategory :
     natural-transformation-map-Precategory C D G F
   natural-transformation-map-inv-natural-isomorphism-map-Precategory =
-    natural-transformation-map-inv-is-natural-isomorphism-map-Precategory C D F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory C D F G f)
+    natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
+      C D F G
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory
+          C D F G f)
 
   is-section-natural-transformation-map-inv-natural-isomorphism-map-Precategory :
     ( comp-natural-transformation-map-Precategory C D G F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
       ( natural-transformation-map-inv-natural-isomorphism-map-Precategory)) ＝
     ( id-natural-transformation-map-Precategory C D G)
   is-section-natural-transformation-map-inv-natural-isomorphism-map-Precategory =
     is-section-natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
       C D F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory C D F G f)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory
+          C D F G f)
 
   is-retraction-natural-transformation-map-inv-natural-isomorphism-map-Precategory :
     ( comp-natural-transformation-map-Precategory C D F G F
       ( natural-transformation-map-inv-natural-isomorphism-map-Precategory)
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)) ＝
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)) ＝
     ( id-natural-transformation-map-Precategory C D F)
   is-retraction-natural-transformation-map-inv-natural-isomorphism-map-Precategory =
     is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Precategory
       C D F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory C D F G f)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory
+          C D F G f)
 
   is-natural-isomorphism-map-inv-natural-isomorphism-map-Precategory :
     is-natural-isomorphism-map-Precategory C D G F
       ( natural-transformation-map-inv-natural-isomorphism-map-Precategory)
   is-natural-isomorphism-map-inv-natural-isomorphism-map-Precategory =
-    is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Precategory C D F G
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory C D F G f)
+    is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Precategory
+      C D F G
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory
+          C D F G f)
 
   inv-natural-isomorphism-map-Precategory :
     natural-isomorphism-map-Precategory C D G F
@@ -521,7 +545,7 @@ module _
       ( comp-natural-transformation-map-Precategory C D F G H g f)
   is-natural-isomorphism-map-comp-is-natural-isomorphism-map-Precategory
     is-iso-g is-iso-f x =
-      is-iso-comp-is-iso-hom-Precategory D (is-iso-g x) (is-iso-f x)
+    is-iso-comp-is-iso-hom-Precategory D (is-iso-g x) (is-iso-f x)
 ```
 
 ### The composition operation on natural isomorphisms
@@ -540,20 +564,28 @@ module _
     natural-transformation-map-Precategory C D F H
   hom-comp-natural-isomorphism-map-Precategory =
     comp-natural-transformation-map-Precategory C D F G H
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D G H g)
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D G H g)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
 
   is-natural-isomorphism-map-comp-natural-isomorphism-map-Precategory :
     is-natural-isomorphism-map-Precategory C D F H
       ( hom-comp-natural-isomorphism-map-Precategory)
   is-natural-isomorphism-map-comp-natural-isomorphism-map-Precategory =
-    is-natural-isomorphism-map-comp-is-natural-isomorphism-map-Precategory C D F G H
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D G H g)
-      ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory C D G H g)
-      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory C D F G f)
+    is-natural-isomorphism-map-comp-is-natural-isomorphism-map-Precategory
+      C D F G H
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D G H g)
+      ( natural-transformation-map-natural-isomorphism-map-Precategory
+          C D F G f)
+      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory
+          C D G H g)
+      ( is-natural-isomorphism-map-natural-isomorphism-map-Precategory
+          C D F G f)
 
-  comp-natural-isomorphism-map-Precategory : natural-isomorphism-map-Precategory C D F H
+  comp-natural-isomorphism-map-Precategory :
+    natural-isomorphism-map-Precategory C D F H
   pr1 comp-natural-isomorphism-map-Precategory =
     hom-comp-natural-isomorphism-map-Precategory
   pr2 comp-natural-isomorphism-map-Precategory =
@@ -593,7 +625,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  {F G : map-Precategory C D}
+  (F G : map-Precategory C D)
   (f : natural-isomorphism-map-Precategory C D F G)
   where
 
@@ -608,7 +640,8 @@ module _
         ( id-natural-isomorphism-map-Precategory C D G) f)
       ( f)
       ( left-unit-law-comp-natural-transformation-map-Precategory C D F G
-        ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f))
+        ( natural-transformation-map-natural-isomorphism-map-Precategory
+            C D F G f))
 
   right-unit-law-comp-natural-isomorphism-map-Precategory :
     comp-natural-isomorphism-map-Precategory C D F F G f
@@ -620,7 +653,8 @@ module _
         ( id-natural-isomorphism-map-Precategory C D F))
       ( f)
       ( right-unit-law-comp-natural-transformation-map-Precategory C D F G
-        ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f))
+        ( natural-transformation-map-natural-isomorphism-map-Precategory
+            C D F G f))
 ```
 
 #### Composition of natural isomorphisms is associative
@@ -650,9 +684,12 @@ module _
       ( comp-natural-isomorphism-map-Precategory C D F H I h
         ( comp-natural-isomorphism-map-Precategory C D F G H g f))
       ( associative-comp-natural-transformation-map-Precategory C D F G H I
-        ( natural-transformation-map-natural-isomorphism-map-Precategory C D F G f)
-        ( natural-transformation-map-natural-isomorphism-map-Precategory C D G H g)
-        ( natural-transformation-map-natural-isomorphism-map-Precategory C D H I h))
+        ( natural-transformation-map-natural-isomorphism-map-Precategory
+            C D F G f)
+        ( natural-transformation-map-natural-isomorphism-map-Precategory
+            C D G H g)
+        ( natural-transformation-map-natural-isomorphism-map-Precategory
+            C D H I h))
 ```
 
 #### Composition of natural isomorphisms satisfies inverse laws
@@ -662,7 +699,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  {F G : map-Precategory C D}
+  (F G : map-Precategory C D)
   (f : natural-isomorphism-map-Precategory C D F G)
   where
 
@@ -705,17 +742,19 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  {F G : map-Precategory C D}
+  (F G : map-Precategory C D)
   where
 
   is-prop-natural-isomorphism-map-Precategory :
     is-prop (natural-transformation-map-Precategory C D F G) →
     is-prop (natural-isomorphism-map-Precategory C D F G)
   is-prop-natural-isomorphism-map-Precategory =
-    is-prop-type-subtype (is-natural-isomorphism-map-prop-hom-Precategory C D F G)
+    is-prop-type-subtype
+      ( is-natural-isomorphism-map-prop-hom-Precategory C D F G)
 
   natural-isomorphism-map-prop-Precategory :
-    is-prop (natural-transformation-map-Precategory C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
+    is-prop (natural-transformation-map-Precategory C D F G) →
+    Prop (l1 ⊔ l2 ⊔ l4)
   pr1 (natural-isomorphism-map-prop-Precategory _) =
     natural-isomorphism-map-Precategory C D F G
   pr2 (natural-isomorphism-map-prop-Precategory is-prop-hom-C-F-G) =
@@ -729,7 +768,7 @@ module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  {F G H : map-Precategory C D}
+  (F G H : map-Precategory C D)
   where
 
   preserves-concat-natural-isomorphism-map-eq-Precategory :
@@ -740,6 +779,6 @@ module _
       ( natural-isomorphism-map-eq-Precategory C D F G p)
   preserves-concat-natural-isomorphism-map-eq-Precategory refl q =
     inv
-      ( right-unit-law-comp-natural-isomorphism-map-Precategory C D {F} {H}
+      ( right-unit-law-comp-natural-isomorphism-map-Precategory C D F H
         ( natural-isomorphism-map-eq-Precategory C D G H q))
 ```
