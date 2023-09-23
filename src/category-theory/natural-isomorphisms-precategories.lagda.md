@@ -74,10 +74,10 @@ module _
 
   is-natural-isomorphism-Precategory :
     natural-transformation-Precategory C D F G → UU (l1 ⊔ l4)
-  is-natural-isomorphism-Precategory γ =
+  is-natural-isomorphism-Precategory f =
     (x : obj-Precategory C) →
     is-iso-hom-Precategory D
-      ( hom-family-natural-transformation-Precategory C D F G γ x)
+      ( hom-family-natural-transformation-Precategory C D F G f x)
 
 module _
   {l1 l2 l3 l4 : Level}
@@ -112,6 +112,20 @@ module _
     id-hom-Precategory D
   is-retraction-hom-inv-family-is-natural-isomorphism-Precategory is-iso-f =
     is-retraction-hom-inv-is-iso-hom-Precategory D ∘ is-iso-f
+
+  iso-family-is-natural-isomorphism-Precategory :
+    is-natural-isomorphism-Precategory C D F G f →
+    iso-family-functor-Precategory C D F G
+  pr1 (iso-family-is-natural-isomorphism-Precategory is-iso-f x) =
+    hom-family-natural-transformation-Precategory C D F G f x
+  pr2 (iso-family-is-natural-isomorphism-Precategory is-iso-f x) = is-iso-f x
+
+  inv-iso-family-is-natural-isomorphism-Precategory :
+    is-natural-isomorphism-Precategory C D F G f →
+    iso-family-functor-Precategory C D G F
+  inv-iso-family-is-natural-isomorphism-Precategory is-iso-f =
+    inv-iso-Precategory D ∘
+    iso-family-is-natural-isomorphism-Precategory is-iso-f
 ```
 
 ### Natural isomorphisms in a precategory
@@ -186,6 +200,20 @@ module _
     id-hom-Precategory D
   is-retraction-hom-inv-family-natural-isomorphism-Precategory =
     is-retraction-hom-inv-family-is-natural-isomorphism-Precategory C D F G
+      ( natural-transformation-natural-isomorphism-Precategory)
+      ( is-natural-isomorphism-natural-isomorphism-Precategory)
+
+  iso-family-natural-isomorphism-Precategory :
+    iso-family-functor-Precategory C D F G
+  iso-family-natural-isomorphism-Precategory =
+    iso-family-is-natural-isomorphism-Precategory C D F G
+      ( natural-transformation-natural-isomorphism-Precategory)
+      ( is-natural-isomorphism-natural-isomorphism-Precategory)
+
+  inv-iso-family-natural-isomorphism-Precategory :
+    iso-family-functor-Precategory C D G F
+  inv-iso-family-natural-isomorphism-Precategory =
+    inv-iso-family-is-natural-isomorphism-Precategory C D F G
       ( natural-transformation-natural-isomorphism-Precategory)
       ( is-natural-isomorphism-natural-isomorphism-Precategory)
 ```

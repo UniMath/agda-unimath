@@ -7,9 +7,11 @@ module category-theory.precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -137,6 +139,21 @@ module _
     pr2 (pr2 is-unital-composition-structure-Precategory)
 ```
 
+### The total hom-type of a Precategory
+
+```agda
+total-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
+total-hom-Precategory C =
+  Σ (obj-Precategory C) (λ x → Σ (obj-Precategory C) (hom-Precategory C x))
+
+obj-total-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) →
+  total-hom-Precategory C → obj-Precategory C × obj-Precategory C
+pr1 (obj-total-hom-Precategory C (x , y , f)) = x
+pr2 (obj-total-hom-Precategory C (x , y , f)) = y
+```
+
 ### Precomposition by a morphism
 
 ```agda
@@ -211,4 +228,21 @@ module _
     is-prop-is-unital-composition-structure-Set μ =
       is-prop-all-elements-equal
         ( all-elements-equal-is-unital-composition-structure-Set μ)
+```
+
+### Equalities give rise to homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  where
+
+  hom-eq-Precategory :
+    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C x y
+  hom-eq-Precategory x .x refl = id-hom-Precategory C
+
+  hom-inv-eq-Precategory :
+    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
+  hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
 ```

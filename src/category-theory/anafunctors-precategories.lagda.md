@@ -93,8 +93,7 @@ module _
         ( hom-functor-Precategory C D F f))
       ( hom-inv-iso-Precategory D u)
   pr1 (pr2 (pr2 (anafunctor-functor-Precategory F))) X =
-    unit-trunc-Prop
-      ( pair (obj-functor-Precategory C D F X) (id-iso-Precategory D))
+    unit-trunc-Prop (obj-functor-Precategory C D F X , id-iso-Precategory D)
   pr1 (pr2 (pr2 (pr2 (anafunctor-functor-Precategory F)))) X U u =
     ( ap
       ( comp-hom-Precategory' D (hom-inv-iso-Precategory D u))

@@ -77,6 +77,7 @@ open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
+open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
@@ -179,6 +180,7 @@ open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
