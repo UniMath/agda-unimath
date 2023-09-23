@@ -31,9 +31,10 @@ induced by the groupoidal structure on identifications.
 
 | Concept                      | File                                                                                                              |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Higher groups                | [`higher-group-theory.higher-groups`](higher-group-theory.higher-groups.md)                                       |
 | Conjugation of loops         | [`synthetic-homotopy-theory.conjugation-loops`](synthetic-homotopy-theory.conjugation-loops.md)                   |
 | Double loop spaces           | [`synthetic-homotopy-theory.double-loop-spaces`](synthetic-homotopy-theory.double-loop-spaces.md)                 |
-| Eckmann-Hilton               | [`synthetic-homotopy-theory.eckmann-hilton`](sythetic-homotpy-theory-eckmann-hilton.md)                           |
+| The Eckmann-Hilton argument  | [`synthetic-homotopy-theory.eckmann-hilton`](sythetic-homotpy-theory-eckmann-hilton-argument.md)                  |
 | Free loops                   | [`synthetic-homotopy-theory.free-loops`](synthetic-homotopy-theory.free-loops.md)                                 |
 | Functoriality of loop spaces | [`synthetic-homotopy-theory.functoriality-loop-spaces`](synthetic-homotopy-theory.functoriality-loop-spaces.md)   |
 | Groups of loops in 1-types   | [`synthetic-homotopy-theory.groups-of-loops-in-1-types`](synthetic-homotopy-theory.groups-of-loops-in-1-types.md) |

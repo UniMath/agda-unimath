@@ -1,4 +1,4 @@
-# Higher transport along identifications
+# Transport along higher identifications
 
 ```agda
 module foundation.transport-along-higher-identifications where
