@@ -120,7 +120,7 @@ interchange-Ω² α β γ δ = interchange-Id² α β γ δ
 
 ```agda
 module _
-  {l : Level} {A : Pointed-Type l} {x : type-Pointed-Type A}
+  {l : Level} (A : Pointed-Type l) {x : type-Pointed-Type A}
   (p : point-Pointed-Type A ＝ x)
   where
 

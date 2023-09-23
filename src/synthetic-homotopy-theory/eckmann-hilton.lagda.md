@@ -22,6 +22,7 @@ open import synthetic-homotopy-theory.double-loop-spaces
 open import synthetic-homotopy-theory.functoriality-loop-spaces
 open import synthetic-homotopy-theory.iterated-loop-spaces
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.triple-loop-spaces
 ```
 
 </details>
@@ -179,4 +180,21 @@ module _
     by ( horizontal-concat-Id²
       ( right-unit-law-identification-left-whisk-Ω² β)
       ( left-unit-law-identification-left-whisk-Ω² α))
+```
+
+## Properties
+
+### We can apply eckmann-hilton to a single 2-loop to obtain a 3-loop
+
+```agda
+module _
+  {l : Level} {A : UU l} {a : A} (s : type-Ω² a)
+  where
+
+  3-loop-eckmann-hilton-Ω² :
+    type-Ω³ a 
+  3-loop-eckmann-hilton-Ω² =
+    map-equiv-pointed-equiv
+      ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
+      ( eckmann-hilton-Ω² s s)
 ```
