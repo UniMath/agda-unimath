@@ -1,7 +1,7 @@
-# Eckmann-Hilton
+# The Eckmann-Hilton Argument
 
 ```agda
-module synthetic-homotopy-theory.eckmann-hilton where
+module synthetic-homotopy-theory.eckmann-hilton-argument where
 ```
 
 <details><summary>Imports</summary>
