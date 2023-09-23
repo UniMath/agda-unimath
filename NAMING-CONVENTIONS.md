@@ -72,13 +72,13 @@ is fixed and should be maintained for consistency.
 
 The general naming pattern breaks down as follows:
 
-- **[descriptor]:** This part is used to give a custom descriptive name for the
+- **\[descriptor\]:** This part is used to give a custom descriptive name for
+  the entry.
+- **\[output-type\]:** This part of the name refers to the output type of the
   entry.
-- **[output-type]:** This part of the name refers to the output type of the
-  entry.
-- **[input-types]:** This part of the name consists of references to the input
+- **\[input-types\]:** This part of the name consists of references to the input
   types used in the type specification of the entry.
-- **[Namespace]:** This part of the name describes what important concept or
+- **\[Namespace\]:** This part of the name describes what important concept or
   general category the entry is about.
 
 Given Agda's current lack of a namespace mechanism, we can't have named logical
