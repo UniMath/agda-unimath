@@ -216,3 +216,8 @@ github = "andrejbauer"
 displayName = "Matej Petković"
 usernames = [ "Matej Petković" ]
 github = "Petkomat"
+
+[[contributors]]
+displayName = "Gregor Perčič"
+usernames = [ "Gregor Perčič", "izak" ]
+github = "GregorPercic"
