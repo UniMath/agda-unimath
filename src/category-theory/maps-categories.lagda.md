@@ -22,8 +22,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **map** from a [precategory](category-theory.categories.md) `C` to a
-precategory `D` consists of:
+A **map** from a [category](category-theory.categories.md) `C` to a category `D`
+consists of:
 
 - a map `F₀ : C → D` on objects,
 - a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms

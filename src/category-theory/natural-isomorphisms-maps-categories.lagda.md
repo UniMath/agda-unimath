@@ -8,8 +8,8 @@ module category-theory.natural-isomorphisms-maps-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.maps-categories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.maps-categories
 open import category-theory.natural-isomorphisms-maps-precategories
 open import category-theory.natural-transformations-maps-categories
 
@@ -30,7 +30,7 @@ open import foundation.universe-levels
 
 A **natural isomorphism** `γ` from [map](category-theory.maps-categories.md)
 `F : C → D` to `G : C → D` is a
-[natural transformation](category-theory.natural-transformations-categories.md)
+[natural transformation](category-theory.natural-transformations-maps-categories.md)
 from `F` to `G` such that the morphism `γ F : hom (F x) (G x)` is an
 [isomorphism](category-theory.isomorphisms-in-categories.md), for every object
 `x` in `C`.
@@ -549,7 +549,8 @@ module _
       ( is-natural-isomorphism-map-natural-isomorphism-map-Category C D G H g)
       ( is-natural-isomorphism-map-natural-isomorphism-map-Category C D F G f)
 
-  comp-natural-isomorphism-map-Category : natural-isomorphism-map-Category C D F H
+  comp-natural-isomorphism-map-Category :
+    natural-isomorphism-map-Category C D F H
   pr1 comp-natural-isomorphism-map-Category =
     hom-comp-natural-isomorphism-map-Category
   pr2 comp-natural-isomorphism-map-Category =
