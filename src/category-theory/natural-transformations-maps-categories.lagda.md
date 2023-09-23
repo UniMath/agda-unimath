@@ -158,6 +158,15 @@ module _
       ( F)
       ( G)
 
+  is-set-natural-transformation-map-Category :
+    is-set (natural-transformation-map-Category C D F G)
+  is-set-natural-transformation-map-Category =
+    is-set-natural-transformation-map-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
+
   natural-transformation-map-Category-Set : Set (l1 ⊔ l2 ⊔ l4)
   natural-transformation-map-Category-Set =
     natural-transformation-map-Precategory-Set

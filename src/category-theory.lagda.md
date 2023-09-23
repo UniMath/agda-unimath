@@ -71,6 +71,7 @@ open import category-theory.maps-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.natural-isomorphisms-categories public
 open import category-theory.natural-isomorphisms-large-precategories public
+open import category-theory.natural-isomorphisms-maps-categories public
 open import category-theory.natural-isomorphisms-maps-precategories public
 open import category-theory.natural-isomorphisms-precategories public
 open import category-theory.natural-numbers-object-precategories public
