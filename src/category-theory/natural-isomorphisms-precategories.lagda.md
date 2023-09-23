@@ -13,21 +13,16 @@ open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 ```
 
 </details>
@@ -38,9 +33,9 @@ A **natural isomorphism** `γ` from
 [functor](category-theory.functors-precategories.md) `F : C → D` to `G : C → D`
 is a
 [natural transformation](category-theory.natural-transformations-precategories.md)
-from `F` to `G` such that the morphism `γ F : hom (F F) (G F)` is an
+from `F` to `G` such that the morphism `γ F : hom (F x) (G x)` is an
 [isomorphism](category-theory.isomorphisms-in-precategories.md), for every
-object `F` in `C`.
+object `x` in `C`.
 
 ## Definition
 
@@ -239,10 +234,10 @@ module _
 
 ### Equalities give rise to natural isomorphisms
 
-An equality between objects `F G : A` gives rise to an isomorphism between them.
-This is because, by the J-rule, it is enough to construct an isomorphism given
-`refl : F ＝ F`, from `F` to itself. We take the identity morphism as such an
-isomorphism.
+An equality between functors `F` and `G` gives rise to a natural isomorphism
+between them. This is because, by the J-rule, it is enough to construct a
+natural isomorphism given `refl : F ＝ F`, from `F` to itself. We take the
+identity natural transformation as such an isomorphism.
 
 ```agda
 natural-isomorphism-eq-Precategory :
@@ -329,9 +324,9 @@ module _
 
 ### The type of natural isomorphisms form a set
 
-The type of isomorphisms between objects `F G : A` is a
-[subtype](foundation-core.subtypes.md) of the [foundation-core.sets.md)
-`hom F G` since being an isomorphism is a proposition.
+The type of natural isomorphisms between functors `F` and `G` is a
+[subtype](foundation-core.subtypes.md) of the [set](foundation-core.sets.md)
+`natural-transformation F G` since being an isomorphism is a proposition.
 
 ```agda
 module _
@@ -701,9 +696,9 @@ module _
 
 ### When the type of natural transformations is a proposition, The type of natural isomorphisms is a proposition
 
-The type of isomorphisms between objects `F G : A` is a subtype of `hom F G`, so
-when this type is a proposition, then the type of isomorphisms from `F` to `G`
-form a proposition.
+The type of natural isomorphisms between functors `F` and `G` is a subtype of
+`natural-transformation F G`, so when this type is a proposition, then the type
+of natural isomorphisms from `F` to `G` form a proposition.
 
 ```agda
 module _

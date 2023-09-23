@@ -8,34 +8,20 @@ module category-theory.maps-precategories where
 
 ```agda
 open import category-theory.commuting-squares-of-morphisms-in-precategories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.binary-homotopies
-open import foundation.binary-relations
 open import foundation.binary-transport
-open import foundation.cartesian-product-types
 open import foundation.contractible-types
-open import foundation.dependent-binary-homotopies
-open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equality-dependent-function-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.fibered-maps
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.structure-identity-principle
-open import foundation.subtypes
-open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 ```
 

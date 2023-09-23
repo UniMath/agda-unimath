@@ -7,7 +7,6 @@ module category-theory.precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-transport
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality

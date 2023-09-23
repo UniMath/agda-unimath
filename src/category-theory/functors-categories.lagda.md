@@ -11,8 +11,6 @@ open import category-theory.categories
 open import category-theory.functors-precategories
 open import category-theory.maps-categories
 
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies

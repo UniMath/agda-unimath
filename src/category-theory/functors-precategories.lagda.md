@@ -16,11 +16,9 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.structure-identity-principle
 open import foundation.subtypes
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
