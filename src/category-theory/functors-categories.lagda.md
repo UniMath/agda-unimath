@@ -10,6 +10,7 @@ module category-theory.functors-categories where
 open import category-theory.categories
 open import category-theory.functors-precategories
 open import category-theory.maps-categories
+open import category-theory.precategories
 
 open import foundation.equivalences
 open import foundation.function-types
@@ -312,19 +313,4 @@ module _
     eq-htpy-map-functor-Category ∘ htpy-map-eq-functor-Category ~ id
   is-retraction-eq-htpy-map-functor-Category =
     is-retraction-map-inv-equiv equiv-htpy-map-eq-functor-Category
-```
-
-#### Equality of functors is natural isomorphism of functors
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (D : Category l3 l4)
-  (F G : functor-Precategory C (precategory-Category D))
-  where
-
-  extensionality-functor-precategory-Category :
-    (F ＝ G) ≃ natural-isomorphism-Precategory C (precategory-Category D) F G
-  extensionality-functor-precategory-Category = ?
 ```

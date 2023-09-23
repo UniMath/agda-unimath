@@ -468,7 +468,7 @@ module _
     ( comp-natural-transformation-Precategory C D G F G
       ( natural-transformation-natural-isomorphism-Precategory C D F G f)
       ( natural-transformation-inv-natural-isomorphism-Precategory)) ＝
-    ( id-natural-transformation-Precategory C D G
+    ( id-natural-transformation-Precategory C D G)
   is-section-natural-transformation-inv-natural-isomorphism-Precategory =
     is-section-natural-transformation-inv-is-natural-isomorphism-Precategory
       C D F G

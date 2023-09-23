@@ -124,24 +124,6 @@ module _
     eq-htpy-map-Precategory (precategory-Category C) (precategory-Category D)
 ```
 
-### Maps between categories are equal if and only if they are naturally isomorphic
-
-This remains to be formalized. As a consequence, we have a category of maps
-between two categories, in which the functor category lives as a full
-subcategory.
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Category l1 l2)
-  (D : Category l3 l4)
-  where
-
-  -- equiv-natural-isomorphism-htpy-map-Category :
-  --   (f g : map-Category C D) → (htpy-map-Category C D f g) ≃ {!   !}
-  -- equiv-natural-isomorphism-htpy-map-Category = {!   !}
-```
-
 ## See also
 
 - [Functors between categories](category-theory.functors-categories.md)

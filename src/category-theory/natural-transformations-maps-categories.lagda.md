@@ -25,10 +25,10 @@ open import foundation.universe-levels
 ## Idea
 
 A **natural transformation** between
-[functors between categories](category-theory.functors-categories.md) is a
-[natural transformation](category-theory.natural-transformations-precategories.md)
-between the [functors](category-theory.functors-precategories.md) on the
-underlying [precategories](category-theory.precategories.md).
+[maps between categories](category-theory.maps-categories.md) is a
+[natural transformation](category-theory.natural-transformations-maps-precategories.md)
+between the [maps](category-theory.maps-precategories.md) on the underlying
+[precategories](category-theory.precategories.md).
 
 ## Definition
 
