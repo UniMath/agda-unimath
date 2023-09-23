@@ -196,18 +196,16 @@ module _
           ( λ y →
             is-prop-Π'
               ( λ z →
-                is-prop-Π
-                  ( λ g →
-                    is-prop-Π
-                      ( λ f →
-                        is-set-hom-Precategory D
-                          ( obj-map-Precategory C D F x)
-                          ( obj-map-Precategory C D F z)
-                          ( hom-map-Precategory C D F
-                            ( comp-hom-Precategory C g f))
-                          ( comp-hom-Precategory D
-                            ( hom-map-Precategory C D F g)
-                            ( hom-map-Precategory C D F f)))))))
+                is-prop-Π²
+                  ( λ g f →
+                    is-set-hom-Precategory D
+                      ( obj-map-Precategory C D F x)
+                      ( obj-map-Precategory C D F z)
+                      ( hom-map-Precategory C D F
+                        ( comp-hom-Precategory C g f))
+                      ( comp-hom-Precategory D
+                        ( hom-map-Precategory C D F g)
+                        ( hom-map-Precategory C D F f))))))
 
   preserves-comp-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
   pr1 preserves-comp-hom-prop-map-Precategory =

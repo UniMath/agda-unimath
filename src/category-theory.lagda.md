@@ -50,6 +50,7 @@ open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
+open import category-theory.faithful-functors-precategories public
 open import category-theory.full-large-subprecategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public

@@ -273,8 +273,6 @@ pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 
 For convenience, we also record repeated applications of the above.
 
-<details><summary>Higher order products of families of propositions are propositions</summary>
-
 #### Higher order products of families of propositions are propositions
 
 ```agda
@@ -494,8 +492,6 @@ is-prop-Π¹⁰ :
       A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
 is-prop-Π¹⁰ H = is-prop-Π (is-prop-Π⁹ ∘ H)
 ```
-
-</details>
 
 ### The type of functions into a proposition is a proposition
 

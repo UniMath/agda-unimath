@@ -7,17 +7,17 @@ module category-theory.subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.precategories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
+open import category-theory.precategories
 
-open import foundation.subtypes
-open import foundation.universe-levels
+open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.cartesian-product-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
+open import foundation.universe-levels
 ```
 
 </details>
@@ -85,7 +85,6 @@ module _
   pr1 contains-comp-prop-subtype-Precategory = contains-comp-subtype-Precategory
   pr2 contains-comp-prop-subtype-Precategory =
     is-prop-contains-comp-subtype-Precategory
-
 ```
 
 ### The predicate of being a subprecategory
@@ -184,7 +183,7 @@ module _
   is-in-hom-Subprecategory x y = is-in-subtype (subtype-hom-Subprecategory x y)
 
   is-in-hom-inclusion-hom-Subprecategory :
-    (x y : obj-Subprecategory) (f : hom-Subprecategory x y)  →
+    (x y : obj-Subprecategory) (f : hom-Subprecategory x y) →
     is-in-hom-Subprecategory
       ( inclusion-obj-Subprecategory x)
       ( inclusion-obj-Subprecategory y)
@@ -194,7 +193,6 @@ module _
       ( subtype-hom-Subprecategory
         ( inclusion-obj-Subprecategory x)
         ( inclusion-obj-Subprecategory y))
-
 
   is-subprecategory-Subprecategory :
     is-subprecategory C subtype-obj-Subprecategory subtype-hom-Subprecategory
