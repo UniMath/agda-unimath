@@ -137,9 +137,9 @@ module _
   (D : Category l3 l4)
   where
 
-  equiv-natural-isomorphism-htpy-map-Category :
-    (f g : map-Category C D) → (htpy-map-Category C D f g) ≃ {!   !}
-  equiv-natural-isomorphism-htpy-map-Category = {!   !}
+  -- equiv-natural-isomorphism-htpy-map-Category :
+  --   (f g : map-Category C D) → (htpy-map-Category C D f g) ≃ {!   !}
+  -- equiv-natural-isomorphism-htpy-map-Category = {!   !}
 ```
 
 ## See also
