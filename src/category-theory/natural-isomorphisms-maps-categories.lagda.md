@@ -426,7 +426,8 @@ module _
   is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Category :
     (is-iso-f : is-natural-isomorphism-map-Category C D F G f) →
     comp-natural-transformation-map-Category C D F G F
-      ( natural-transformation-map-inv-is-natural-isomorphism-map-Category is-iso-f)
+      ( natural-transformation-map-inv-is-natural-isomorphism-map-Category
+        ( is-iso-f))
       ( f) ＝
     id-natural-transformation-map-Category C D F
   is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Category
@@ -437,7 +438,8 @@ module _
   is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Category :
     (is-iso-f : is-natural-isomorphism-map-Category C D F G f) →
     is-natural-isomorphism-map-Category C D G F
-      ( natural-transformation-map-inv-is-natural-isomorphism-map-Category is-iso-f)
+      ( natural-transformation-map-inv-is-natural-isomorphism-map-Category
+        ( is-iso-f))
   is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Category is-iso-f =
     is-iso-inv-is-iso-hom-Category D ∘ is-iso-f
 ```
@@ -474,7 +476,8 @@ module _
   is-retraction-natural-transformation-map-inv-natural-isomorphism-map-Category :
     ( comp-natural-transformation-map-Category C D F G F
       ( natural-transformation-map-inv-natural-isomorphism-map-Category)
-      ( natural-transformation-map-natural-isomorphism-map-Category C D F G f)) ＝
+      ( natural-transformation-map-natural-isomorphism-map-Category
+          C D F G f)) ＝
     ( id-natural-transformation-map-Category C D F)
   is-retraction-natural-transformation-map-inv-natural-isomorphism-map-Category =
     is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Category
@@ -543,7 +546,8 @@ module _
     is-natural-isomorphism-map-Category C D F H
       ( hom-comp-natural-isomorphism-map-Category)
   is-natural-isomorphism-map-comp-natural-isomorphism-map-Category =
-    is-natural-isomorphism-map-comp-is-natural-isomorphism-map-Category C D F G H
+    is-natural-isomorphism-map-comp-is-natural-isomorphism-map-Category
+      C D F G H
       ( natural-transformation-map-natural-isomorphism-map-Category C D G H g)
       ( natural-transformation-map-natural-isomorphism-map-Category C D F G f)
       ( is-natural-isomorphism-map-natural-isomorphism-map-Category C D G H g)

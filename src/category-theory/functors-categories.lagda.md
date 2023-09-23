@@ -39,16 +39,16 @@ module _
   (F : map-Category C D)
   where
 
-  preserves-comp-hom-map-Category : UU (l1 ⊔ l2 ⊔ l4)
-  preserves-comp-hom-map-Category =
-    preserves-comp-hom-map-Precategory
+  preserves-comp-map-Category : UU (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-map-Category =
+    preserves-comp-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
 
-  preserves-id-hom-map-Category : UU (l1 ⊔ l4)
-  preserves-id-hom-map-Category =
-    preserves-id-hom-map-Precategory
+  preserves-id-map-Category : UU (l1 ⊔ l4)
+  preserves-id-map-Category =
+    preserves-id-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -60,16 +60,16 @@ module _
       ( precategory-Category D)
       ( F)
 
-  preserves-comp-hom-is-functor-map-Category :
-    is-functor-map-Category → preserves-comp-hom-map-Category
-  preserves-comp-hom-is-functor-map-Category =
-    preserves-comp-hom-is-functor-map-Precategory
+  preserves-comp-is-functor-map-Category :
+    is-functor-map-Category → preserves-comp-map-Category
+  preserves-comp-is-functor-map-Category =
+    preserves-comp-is-functor-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
 
   preserves-id-hom-is-functor-map-Category :
-    is-functor-map-Category → preserves-id-hom-map-Category
+    is-functor-map-Category → preserves-id-map-Category
   preserves-id-hom-is-functor-map-Category =
     preserves-id-hom-is-functor-map-Precategory
       ( precategory-Category C)
@@ -177,10 +177,10 @@ module _
   (F : map-Category C D)
   where
 
-  is-prop-preserves-comp-hom-map-Category :
-    is-prop (preserves-comp-hom-map-Category C D F)
-  is-prop-preserves-comp-hom-map-Category =
-    is-prop-preserves-comp-hom-map-Precategory
+  is-prop-preserves-comp-map-Category :
+    is-prop (preserves-comp-map-Category C D F)
+  is-prop-preserves-comp-map-Category =
+    is-prop-preserves-comp-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -192,10 +192,10 @@ module _
       ( precategory-Category D)
       ( F)
 
-  is-prop-preserves-id-hom-map-Category :
-    is-prop (preserves-id-hom-map-Category C D F)
-  is-prop-preserves-id-hom-map-Category =
-    is-prop-preserves-id-hom-map-Precategory
+  is-prop-preserves-id-map-Category :
+    is-prop (preserves-id-map-Category C D F)
+  is-prop-preserves-id-map-Category =
+    is-prop-preserves-id-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

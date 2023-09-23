@@ -18,11 +18,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **full large subprecategory** of a [large precategory](category-theory.large-precategories.md) `C` consists of a family of [subtypes](foundation.subtypes.md) of the types `obj-Large-Precategory C l` for each universe level `l`.
+A **full large subprecategory** of a
+[large precategory](category-theory.large-precategories.md) `C` consists of a
+family of [subtypes](foundation.subtypes.md) of the types
+`obj-Large-Precategory C l` for each universe level `l`.
 
-Alternatively, we say that a [large subcategory](category-theory.large-subcategory.md) **is full** if for every two objects `X` and `Y` in the subcategory, the subtype of homomorphisms from `X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
+Alternatively, we say that a
+[large subcategory](category-theory.large-subcategory.md) **is full** if for
+every two objects `X` and `Y` in the subcategory, the subtype of homomorphisms
+from `X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
 
-Note that large full subprecategories are not assumed to be closed under isomorphisms.
+Note that large full subprecategories are not assumed to be closed under
+isomorphisms.
 
 ## Definitions
 

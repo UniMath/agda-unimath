@@ -50,6 +50,7 @@ open import category-theory.equivalences-of-categories public
 open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
+open import category-theory.full-large-subprecategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public
 open import category-theory.functors-categories public
@@ -66,6 +67,8 @@ open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
 open import category-theory.large-categories public
 open import category-theory.large-precategories public
+open import category-theory.large-subcategories public
+open import category-theory.large-subprecategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
@@ -94,6 +97,7 @@ open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
 open import category-theory.sieves-in-categories public
 open import category-theory.slice-precategories public
+open import category-theory.subprecategories public
 open import category-theory.terminal-objects-precategories public
 open import category-theory.yoneda-lemma-categories public
 open import category-theory.yoneda-lemma-precategories public
