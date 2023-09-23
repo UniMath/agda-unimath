@@ -8,9 +8,9 @@ module category-theory.commuting-squares-of-morphisms-in-precategories where
 
 ```agda
 open import category-theory.precategories
-open import foundation.universe-levels
 
 open import foundation.identity-types
+open import foundation.universe-levels
 ```
 
 </details>

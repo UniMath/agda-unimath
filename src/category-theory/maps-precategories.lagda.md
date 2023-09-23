@@ -64,7 +64,7 @@ module _
   map-Precategory =
     Σ ( obj-Precategory C → obj-Precategory D)
       ( λ F₀ →
-        (x y : obj-Precategory C) →
+        {x y : obj-Precategory C} →
         hom-Precategory C x y →
         hom-Precategory D (F₀ x) (F₀ y))
 
@@ -74,7 +74,7 @@ module _
 
   hom-map-Precategory :
     (F : map-Precategory)
-    (x y : obj-Precategory C) →
+    {x y : obj-Precategory C} →
     hom-Precategory C x y →
     hom-Precategory D
       ( obj-map-Precategory F x)
@@ -170,9 +170,9 @@ module _
     is-contr-total-Eq-structure _
       ( is-contr-total-htpy (obj-map-Precategory C D f))
       ( obj-map-Precategory C D f , refl-htpy)
-      ( is-contr-total-Eq-Π _
+      ( is-contr-total-Eq-Π' _
         ( λ x →
-          is-contr-total-Eq-Π _
+          is-contr-total-Eq-Π' _
             ( λ y →
               is-contr-equiv _
                 ( equiv-tot

@@ -7,13 +7,13 @@ module foundation.morphisms-binary-relations where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-homotopies
+open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtypes
 open import foundation.univalence
-open import foundation.binary-homotopies
-open import foundation.binary-relations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -61,11 +61,11 @@ module _
 
   htpy-eq-hom-Relation :
     (f g : hom-Relation R S) → (f ＝ g) → binary-htpy f g
-  htpy-eq-hom-Relation =  binary-htpy-eq
+  htpy-eq-hom-Relation = binary-htpy-eq
 
   eq-htpy-hom-Relation :
     (f g : hom-Relation R S) → binary-htpy f g → f ＝ g
-  eq-htpy-hom-Relation =  eq-binary-htpy
+  eq-htpy-hom-Relation = eq-binary-htpy
 ```
 
 ## See also

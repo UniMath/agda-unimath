@@ -7,11 +7,11 @@ module foundation.dependent-binary-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.binary-homotopies
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
 open import foundation-core.homotopies
-open import foundation.binary-homotopies
 ```
 
 </details>
