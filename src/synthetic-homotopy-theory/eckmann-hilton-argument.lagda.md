@@ -31,22 +31,21 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 
 There are two classical statements of the Eckmann-Hilton argument. The first
 states that a group object in the category of groups is abelian. The second
-states that `π₂ (X)` is abelian, for any space `X`.. The first statement
-can be thought of as a more algebraic phrasing, while the second can be
-thought of as a more homotopy theoretic phrasing.
+states that `π₂ (X)` is abelian, for any space `X`.. The first statement can be
+thought of as a more algebraic phrasing, while the second can be thought of as a
+more homotopy theoretic phrasing.
 
 Both these phrasing, however, are about set level structures. Since we have
 access to untruncated types, it is more natural to prove untruncated analogs of
-the above two statements. Thus, we will work with the following statement
-of the Eckmann-Hilton argument:
+the above two statements. Thus, we will work with the following statement of the
+Eckmann-Hilton argument:
 
 `(α β : Ω² X) → α ∙ β = β ∙ α`
 
-For fixed 2-loops, we will call the resulting identification
-"the Eckmann-Hilton term".
-In this file we will give two different constructions of this identification, one that
-corresponds to the more algebraic statement and one that corresponds to the more
-homotopy theoretic statement.
+For fixed 2-loops, we will call the resulting identification "the Eckmann-Hilton
+term". In this file we will give two different constructions of this
+identification, one that corresponds to the more algebraic statement and one
+that corresponds to the more homotopy theoretic statement.
 
 ## Definitions
 
@@ -102,13 +101,12 @@ interchange-concat-Ω² =
 
 #### The motivation
 
-Now we give the more homotopy theoretic version of the Eckmann-Hilton
-argument. Consider 2-loops `α β : Ω² (X , base)`. The more homotopy theoretic
+Now we give the more homotopy theoretic version of the Eckmann-Hilton argument.
+Consider 2-loops `α β : Ω² (X , base)`. The more homotopy theoretic
 Eckmann-Hilton argument is often depicted as follows:
 
- | α |      | refl-Ω² | α |       | β | refl-Ω² |      | β |
- -----  ＝  ----------------  ＝  ----------------  ＝  ----
- | β |      | β | refl-Ω² |       | refl-Ω² | α |      | α |
+| α | | refl-Ω² | α | | β | refl-Ω² | | β | ----- ＝ ---------------- ＝
+---------------- ＝ ---- | β | | β | refl-Ω² | | refl-Ω² | α | | α |
 
 The first picture represents the vertical concatination of `α` and `β`. The
 notation ` | γ | δ |` represents the horizontal concatination of 2-dimensional
@@ -117,18 +115,18 @@ identifications `γ` and `δ`. Then `| refl | α |` is just
 The first and last equality come from the unit laws of whiskering. And the
 middle equality can be recognized as
 [`path-swap-nat-identification-left-whisk`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#9823),
-which is the naturality condition of `htpy-identification-left-whisk α`
-applied to `β`.
+which is the naturality condition of `htpy-identification-left-whisk α` applied
+to `β`.
 
-Since this version of the Eckmann-Hilton argument may seem more complicated than the
-algbraic version, the reader is entitled to wonder why we bother giving
-this second version.
+Since this version of the Eckmann-Hilton argument may seem more complicated than
+the algbraic version, the reader is entitled to wonder why we bother giving this
+second version.
 
-This version of the Eckmann-Hilton argument makes more salient the connection between
-the Eckmann-Hilton argument and the 2-D descent data of a fibration. For now, consider the
-family of based path spaces `Id base : X → UU`. A 1-loop `l` induces an
-autoequivalence `Ω X ≃ Ω X` given by concatinating on the right by `l`. This is
-shown in
+This version of the Eckmann-Hilton argument makes more salient the connection
+between the Eckmann-Hilton argument and the 2-D descent data of a fibration. For
+now, consider the family of based path spaces `Id base : X → UU`. A 1-loop `l`
+induces an autoequivalence `Ω X ≃ Ω X` given by concatinating on the right by
+`l`. This is shown in
 [`tr-Id-right`](https://unimath.github.io/agda-unimath/foundation.identity-types.html#11216).
 A 2-loop `s` induces a homotpy `id {A = Ω X} ~ id` given by
 [`htpy-identification-left-whisk`](https://unimath.github.io/agda-unimath/foundation.path-algebra.html#7977).
@@ -137,11 +135,12 @@ This claim is shown in TODO (provide link). Thus, the 2-D descent data of
 version of the Eckmann-Hilton argument.
 
 Recall that homotpies of type `id ~ id` automatically commute with each other
-via [`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218).
+via
+[`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218).
 This identification is constructed using the naturality condition of the two
 homotopies involved. Thus, in the case of `Id base`, we can see a very close
-correspondence between the Eckmann-Hilton term of 2-loops in the base type `X` and
-the Eckmann-Hilton term of the homotopies induced by said 2-loops.
+correspondence between the Eckmann-Hilton term of 2-loops in the base type `X`
+and the Eckmann-Hilton term of the homotopies induced by said 2-loops.
 
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
@@ -151,9 +150,9 @@ Then, the naturality condition that makes `α` and `β` commute in `Ω² X` is s
 by `tr³ B` to the naturality condition that makes the induced homotopies
 commute. This is recorded in
 [`tr³-htpy-swap-path-swap`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
-From this, it is easy to show that "transport preserves the Eckmann-Hilton term" by
-proving that the additional coherence paths in the definition of `eckmann-hilton`
-and `eckmann-hilton-htpy` are compatible.
+From this, it is easy to show that "transport preserves the Eckmann-Hilton term"
+by proving that the additional coherence paths in the definition of
+`eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
 
 This connection has important consequences, one of which being the connection
 between the Eckmann-Hilton argument and the Hopf fibration.
@@ -194,7 +193,7 @@ module _
   where
 
   3-loop-eckmann-hilton-Ω² :
-    type-Ω³ a 
+    type-Ω³ a
   3-loop-eckmann-hilton-Ω² =
     map-equiv-pointed-equiv
       ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
