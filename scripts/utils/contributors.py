@@ -2,7 +2,7 @@ from collections import defaultdict
 import sys
 import tomli
 
-CONTRIBUTORS_FILE = 'scripts/contributors_data.toml'
+CONTRIBUTORS_FILE = 'CONTRIBUTORS.toml'
 
 
 def format_multiple_authors_attribution(author_names):
