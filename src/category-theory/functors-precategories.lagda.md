@@ -302,12 +302,12 @@ module _
   (F G : functor-Precategory C D)
   where
 
-  extensionality-functor-Precategory :
+  equiv-htpy-map-eq-functor-Precategory :
     (F ＝ G) ≃
     ( htpy-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G))
-  extensionality-functor-Precategory =
+  equiv-htpy-map-eq-functor-Precategory =
     ( extensionality-map-Precategory C D)
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G) ∘e
@@ -319,7 +319,7 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
   htpy-map-eq-functor-Precategory =
-    map-equiv extensionality-functor-Precategory
+    map-equiv equiv-htpy-map-eq-functor-Precategory
 
   eq-htpy-map-functor-Precategory :
     htpy-map-Precategory C D
@@ -327,15 +327,15 @@ module _
       ( map-functor-Precategory C D G) →
     ( F ＝ G)
   eq-htpy-map-functor-Precategory =
-    map-inv-equiv extensionality-functor-Precategory
+    map-inv-equiv equiv-htpy-map-eq-functor-Precategory
 
   is-section-eq-htpy-map-functor-Precategory :
     htpy-map-eq-functor-Precategory ∘ eq-htpy-map-functor-Precategory ~ id
   is-section-eq-htpy-map-functor-Precategory =
-    is-section-map-inv-equiv extensionality-functor-Precategory
+    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Precategory
 
   is-retraction-eq-htpy-map-functor-Precategory :
     eq-htpy-map-functor-Precategory ∘ htpy-map-eq-functor-Precategory ~ id
   is-retraction-eq-htpy-map-functor-Precategory =
-    is-retraction-map-inv-equiv extensionality-functor-Precategory
+    is-retraction-map-inv-equiv equiv-htpy-map-eq-functor-Precategory
 ```

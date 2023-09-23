@@ -275,13 +275,13 @@ module _
   (F G : functor-Category C D)
   where
 
-  extensionality-functor-Category :
+  equiv-htpy-map-eq-functor-Category :
     (F ＝ G) ≃
     ( htpy-map-Category C D
       ( map-functor-Category C D F)
       ( map-functor-Category C D G))
-  extensionality-functor-Category =
-    extensionality-functor-Precategory
+  equiv-htpy-map-eq-functor-Category =
+    equiv-htpy-map-eq-functor-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -293,7 +293,7 @@ module _
       ( map-functor-Category C D F)
       ( map-functor-Category C D G)
   htpy-map-eq-functor-Category =
-    map-equiv extensionality-functor-Category
+    map-equiv equiv-htpy-map-eq-functor-Category
 
   eq-htpy-map-functor-Category :
     htpy-map-Category C D
@@ -301,15 +301,30 @@ module _
       ( map-functor-Category C D G) →
     ( F ＝ G)
   eq-htpy-map-functor-Category =
-    map-inv-equiv extensionality-functor-Category
+    map-inv-equiv equiv-htpy-map-eq-functor-Category
 
   is-section-eq-htpy-map-functor-Category :
     htpy-map-eq-functor-Category ∘ eq-htpy-map-functor-Category ~ id
   is-section-eq-htpy-map-functor-Category =
-    is-section-map-inv-equiv extensionality-functor-Category
+    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Category
 
   is-retraction-eq-htpy-map-functor-Category :
     eq-htpy-map-functor-Category ∘ htpy-map-eq-functor-Category ~ id
   is-retraction-eq-htpy-map-functor-Category =
-    is-retraction-map-inv-equiv extensionality-functor-Category
+    is-retraction-map-inv-equiv equiv-htpy-map-eq-functor-Category
+```
+
+#### Equality of functors is natural isomorphism of functors
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Category l3 l4)
+  (F G : functor-Precategory C (precategory-Category D))
+  where
+
+  extensionality-functor-precategory-Category :
+    (F ＝ G) ≃ natural-isomorphism-Precategory C (precategory-Category D) F G
+  extensionality-functor-precategory-Category = ?
 ```

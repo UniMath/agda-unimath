@@ -53,7 +53,7 @@ module _
   --           ( λ i → extensionality-obj-Category D
   --             ( obj-functor-Category C D F i)
   --             ( obj-functor-Category C D G i))) ∘e
-  --       ( extensionality-functor-Category C D F G))
+  --       ( equiv-htpy-map-eq-functor-Category C D F G))
   --     {!   !}
 
   -- functor-category-Category :
