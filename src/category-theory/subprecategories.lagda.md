@@ -7,6 +7,7 @@ module category-theory.subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
@@ -380,4 +381,29 @@ module _
 
 ### The inclusion functor is faithful
 
-This remains to be defined.
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (P : Subprecategory l3 l4 C)
+  where
+
+  is-faithful-inclusion-map-Precategory :
+    is-faithful-map-Precategory
+      ( precategory-Subprecategory C P)
+      ( C)
+      ( inclusion-map-Subprecategory C P)
+  is-faithful-inclusion-map-Precategory x y =
+    is-emb-inclusion-subtype
+      ( subtype-hom-Subprecategory C P
+        ( inclusion-obj-Subprecategory C P x)
+        ( inclusion-obj-Subprecategory C P y))
+
+  is-faithful-inclusion-functor-Precategory :
+    is-faithful-functor-Precategory
+      ( precategory-Subprecategory C P)
+      ( C)
+      ( inclusion-functor-Subprecategory C P)
+  is-faithful-inclusion-functor-Precategory =
+    is-faithful-inclusion-map-Precategory
+```

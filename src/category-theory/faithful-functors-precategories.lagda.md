@@ -7,8 +7,8 @@ module category-theory.faithful-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.maps-precategories
 open import category-theory.functors-precategories
+open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -77,7 +77,8 @@ module _
   is-faithful-functor-Precategory =
     is-faithful-map-Precategory C D (map-functor-Precategory C D F)
 
-  is-prop-is-faithful-functor-Precategory : is-prop is-faithful-functor-Precategory
+  is-prop-is-faithful-functor-Precategory :
+    is-prop is-faithful-functor-Precategory
   is-prop-is-faithful-functor-Precategory =
     is-prop-is-faithful-map-Precategory C D (map-functor-Precategory C D F)
 
