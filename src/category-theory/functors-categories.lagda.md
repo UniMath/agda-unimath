@@ -10,7 +10,6 @@ module category-theory.functors-categories where
 open import category-theory.categories
 open import category-theory.functors-precategories
 open import category-theory.maps-categories
-open import category-theory.precategories
 
 open import foundation.equivalences
 open import foundation.function-types

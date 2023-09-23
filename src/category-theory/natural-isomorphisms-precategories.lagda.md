@@ -13,9 +13,7 @@ open import category-theory.natural-isomorphisms-maps-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
