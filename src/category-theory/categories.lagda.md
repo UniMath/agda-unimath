@@ -138,6 +138,23 @@ postcomp-hom-Category :
 postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
 ```
 
+### Equalities give rise to homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  where
+
+  hom-eq-Category :
+    (x y : obj-Category C) → x ＝ y → hom-Category C x y
+  hom-eq-Category = hom-eq-Precategory (precategory-Category C)
+
+  hom-inv-eq-Category :
+    (x y : obj-Category C) → x ＝ y → hom-Category C y x
+  hom-inv-eq-Category = hom-inv-eq-Precategory (precategory-Category C)
+```
+
 ## Properties
 
 ### The objects in a category form a 1-type

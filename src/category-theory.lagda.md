@@ -66,6 +66,7 @@ open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
 open import category-theory.large-categories public
 open import category-theory.large-precategories public
+open import category-theory.maps-categories public
 open import category-theory.maps-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.natural-isomorphisms-categories public

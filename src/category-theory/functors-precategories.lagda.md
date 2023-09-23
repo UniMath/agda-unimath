@@ -248,17 +248,19 @@ module _
 
 ### Extensionality of functors between precategories
 
+#### Equality of functors is equality of underlying maps
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
+  (F G : functor-Precategory C D)
   where
 
-  extensionality-functor-Precategory' :
-    (F G : functor-Precategory C D) →
+  equiv-eq-map-eq-functor-Precategory :
     (F ＝ G) ≃ (map-functor-Precategory C D F ＝ map-functor-Precategory C D G)
-  extensionality-functor-Precategory' F G =
+  equiv-eq-map-eq-functor-Precategory =
     equiv-ap-emb
       ( comp-emb
         ( emb-subtype (is-functor-map-Precategory-Prop C D))
@@ -270,6 +272,72 @@ module _
               hom-Precategory C x y →
               hom-Precategory D (F₀ x) (F₀ y))
             ( pr1 ∘ is-functor-map-Precategory-Prop C D))))
+
+  eq-map-eq-functor-Precategory :
+    (F ＝ G) → (map-functor-Precategory C D F ＝ map-functor-Precategory C D G)
+  eq-map-eq-functor-Precategory =
+    map-equiv equiv-eq-map-eq-functor-Precategory
+
+  eq-eq-map-functor-Precategory :
+    (map-functor-Precategory C D F ＝ map-functor-Precategory C D G) → (F ＝ G)
+  eq-eq-map-functor-Precategory =
+    map-inv-equiv equiv-eq-map-eq-functor-Precategory
+
+  is-section-eq-eq-map-functor-Precategory :
+    eq-map-eq-functor-Precategory ∘ eq-eq-map-functor-Precategory ~ id
+  is-section-eq-eq-map-functor-Precategory =
+    is-section-map-inv-equiv equiv-eq-map-eq-functor-Precategory
+
+  is-retraction-eq-eq-map-functor-Precategory :
+    eq-eq-map-functor-Precategory ∘ eq-map-eq-functor-Precategory ~ id
+  is-retraction-eq-eq-map-functor-Precategory =
+    is-retraction-map-inv-equiv equiv-eq-map-eq-functor-Precategory
 ```
 
-It remains to characterize equality of maps between precategories.
+#### Equality of functors is homotopy of underlying maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F G : functor-Precategory C D)
+  where
+
+  extensionality-functor-Precategory :
+    (F ＝ G) ≃
+    ( htpy-map-Precategory C D
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G))
+  extensionality-functor-Precategory =
+    ( extensionality-map-Precategory C D)
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G) ∘e
+    ( equiv-eq-map-eq-functor-Precategory C D F G)
+
+  htpy-map-eq-functor-Precategory :
+    (F ＝ G) →
+    htpy-map-Precategory C D
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G)
+  htpy-map-eq-functor-Precategory =
+    map-equiv extensionality-functor-Precategory
+
+  eq-htpy-map-functor-Precategory :
+    htpy-map-Precategory C D
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G) →
+    ( F ＝ G)
+  eq-htpy-map-functor-Precategory =
+    map-inv-equiv extensionality-functor-Precategory
+
+  is-section-eq-htpy-map-functor-Precategory :
+    htpy-map-eq-functor-Precategory ∘ eq-htpy-map-functor-Precategory ~ id
+  is-section-eq-htpy-map-functor-Precategory =
+    is-section-map-inv-equiv extensionality-functor-Precategory
+
+  is-retraction-eq-htpy-map-functor-Precategory :
+    eq-htpy-map-functor-Precategory ∘ htpy-map-eq-functor-Precategory ~ id
+  is-retraction-eq-htpy-map-functor-Precategory =
+    is-retraction-map-inv-equiv extensionality-functor-Precategory
+```

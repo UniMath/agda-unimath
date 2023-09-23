@@ -9,11 +9,13 @@ module category-theory.functors-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
-open import category-theory.maps-precategories
+open import category-theory.maps-categories
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.universe-levels
@@ -28,35 +30,6 @@ A **functor** between two [categories](category-theory.categories.md) is a
 [precategories](category-theory.precategories.md).
 
 ## Definition
-
-### Maps between categories
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Category l1 l2)
-  (D : Category l3 l4)
-  where
-
-  map-Category : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  map-Category =
-    map-Precategory (precategory-Category C) (precategory-Category D)
-
-  map-obj-map-Category :
-    (F : map-Category) → obj-Category C → obj-Category D
-  map-obj-map-Category =
-    obj-map-Precategory (precategory-Category C) (precategory-Category D)
-
-  map-hom-map-Category :
-    (F : map-Category)
-    {x y : obj-Category C} →
-    hom-Category C x y →
-    hom-Category D
-      ( map-obj-map-Category F x)
-      ( map-obj-map-Category F y)
-  map-hom-map-Category =
-    hom-map-Precategory (precategory-Category C) (precategory-Category D)
-```
 
 ### The predicate of being a functor on maps between Categories
 
@@ -254,20 +227,91 @@ module _
 
 ### Extensionality of functors between categories
 
+#### Equality of functors is equality of underlying maps
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Category l1 l2)
   (D : Category l3 l4)
+  (F G : functor-Category C D)
   where
 
-  extensionality-functor-Category' :
-    (F G : functor-Category C D) →
+  equiv-eq-map-eq-functor-Category :
     (F ＝ G) ≃ (map-functor-Category C D F ＝ map-functor-Category C D G)
-  extensionality-functor-Category' =
-    extensionality-functor-Precategory'
+  equiv-eq-map-eq-functor-Category =
+    equiv-eq-map-eq-functor-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
+      ( F)
+      ( G)
+
+  eq-map-eq-functor-Category :
+    (F ＝ G) → (map-functor-Category C D F ＝ map-functor-Category C D G)
+  eq-map-eq-functor-Category =
+    map-equiv equiv-eq-map-eq-functor-Category
+
+  eq-eq-map-functor-Category :
+    (map-functor-Category C D F ＝ map-functor-Category C D G) → (F ＝ G)
+  eq-eq-map-functor-Category =
+    map-inv-equiv equiv-eq-map-eq-functor-Category
+
+  is-section-eq-eq-map-functor-Category :
+    eq-map-eq-functor-Category ∘ eq-eq-map-functor-Category ~ id
+  is-section-eq-eq-map-functor-Category =
+    is-section-map-inv-equiv equiv-eq-map-eq-functor-Category
+
+  is-retraction-eq-eq-map-functor-Category :
+    eq-eq-map-functor-Category ∘ eq-map-eq-functor-Category ~ id
+  is-retraction-eq-eq-map-functor-Category =
+    is-retraction-map-inv-equiv equiv-eq-map-eq-functor-Category
 ```
 
-It remains to characterize equality of maps between categories.
+#### Equality of functors is homotopy of underlying maps
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (D : Category l3 l4)
+  (F G : functor-Category C D)
+  where
+
+  extensionality-functor-Category :
+    (F ＝ G) ≃
+    ( htpy-map-Category C D
+      ( map-functor-Category C D F)
+      ( map-functor-Category C D G))
+  extensionality-functor-Category =
+    extensionality-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
+
+  htpy-map-eq-functor-Category :
+    (F ＝ G) →
+    htpy-map-Category C D
+      ( map-functor-Category C D F)
+      ( map-functor-Category C D G)
+  htpy-map-eq-functor-Category =
+    map-equiv extensionality-functor-Category
+
+  eq-htpy-map-functor-Category :
+    htpy-map-Category C D
+      ( map-functor-Category C D F)
+      ( map-functor-Category C D G) →
+    ( F ＝ G)
+  eq-htpy-map-functor-Category =
+    map-inv-equiv extensionality-functor-Category
+
+  is-section-eq-htpy-map-functor-Category :
+    htpy-map-eq-functor-Category ∘ eq-htpy-map-functor-Category ~ id
+  is-section-eq-htpy-map-functor-Category =
+    is-section-map-inv-equiv extensionality-functor-Category
+
+  is-retraction-eq-htpy-map-functor-Category :
+    eq-htpy-map-functor-Category ∘ htpy-map-eq-functor-Category ~ id
+  is-retraction-eq-htpy-map-functor-Category =
+    is-retraction-map-inv-equiv extensionality-functor-Category
+```

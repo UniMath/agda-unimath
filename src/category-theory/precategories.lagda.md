@@ -174,6 +174,23 @@ postcomp-hom-Precategory :
 postcomp-hom-Precategory C f z = comp-hom-Precategory C f
 ```
 
+### Equalities give rise to homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  where
+
+  hom-eq-Precategory :
+    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C x y
+  hom-eq-Precategory x .x refl = id-hom-Precategory C
+
+  hom-inv-eq-Precategory :
+    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
+  hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
+```
+
 ## Properties
 
 ### The property of having identity morphisms is a proposition
@@ -228,21 +245,4 @@ module _
     is-prop-is-unital-composition-structure-Set μ =
       is-prop-all-elements-equal
         ( all-elements-equal-is-unital-composition-structure-Set μ)
-```
-
-### Equalities give rise to homomorphisms
-
-```agda
-module _
-  {l1 l2 : Level}
-  (C : Precategory l1 l2)
-  where
-
-  hom-eq-Precategory :
-    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C x y
-  hom-eq-Precategory x .x refl = id-hom-Precategory C
-
-  hom-inv-eq-Precategory :
-    (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
-  hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
 ```

@@ -130,15 +130,15 @@ module _
     (obj-map-Precategory C D f ~ obj-map-Precategory C D g) →
     UU (l1 ⊔ l2 ⊔ l4)
   coherence-htpy-map-Precategory f g H =
-    (x y : obj-Precategory C)
+    {x y : obj-Precategory C}
     (a : hom-Precategory C x y) →
     coherence-square-hom-Precategory D
       ( hom-eq-Precategory D
         ( obj-map-Precategory C D f x)
         ( obj-map-Precategory C D g x)
         ( H x))
-      ( hom-map-Precategory C D f x y a)
-      ( hom-map-Precategory C D g x y a)
+      ( hom-map-Precategory C D f a)
+      ( hom-map-Precategory C D g a)
       ( hom-eq-Precategory D
         ( obj-map-Precategory C D f y)
         ( obj-map-Precategory C D g y)
@@ -153,11 +153,11 @@ module _
   refl-htpy-map-Precategory :
     (f : map-Precategory C D) → htpy-map-Precategory f f
   pr1 (refl-htpy-map-Precategory f) = refl-htpy
-  pr2 (refl-htpy-map-Precategory f) x y a =
+  pr2 (refl-htpy-map-Precategory f) a =
     naturality-binary-tr-hom-Precategory D
       ( refl)
       ( refl)
-      ( hom-map-Precategory C D f x y a)
+      ( hom-map-Precategory C D f a)
 
   htpy-eq-map-Precategory :
     (f g : map-Precategory C D) → (f ＝ g) → htpy-map-Precategory f g
@@ -180,9 +180,9 @@ module _
                     equiv-binary-concat-htpy
                       ( inv-htpy
                         ( left-unit-law-comp-hom-Precategory D ∘
-                          hom-map-Precategory C D f x y))
+                          hom-map-Precategory C D f))
                       ( right-unit-law-comp-hom-Precategory D ∘ g₁)))
-                ( is-contr-total-htpy (hom-map-Precategory C D f x y)))))
+                ( is-contr-total-htpy (hom-map-Precategory C D f)))))
 
   is-equiv-htpy-eq-map-Precategory :
     (f g : map-Precategory C D) → is-equiv (htpy-eq-map-Precategory f g)
