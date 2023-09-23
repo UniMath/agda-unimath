@@ -19,6 +19,8 @@ our naming conventions:
 - Even with only minimal knowledge of our conventions, users can intuitively
   grasp an entry's purpose.
 - Our naming scheme works across mathematical fields and throughout the library.
+- For many common kinds of entries, our naming scheme offers a predictable
+  suggestion of what its name should be.
 - Ultimately, our goal is for these conventions to support clear and
   maintainable code.
 
