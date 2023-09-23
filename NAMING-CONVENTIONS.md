@@ -6,6 +6,22 @@ project. Good names provide concise descriptions of an entry's purpose, and help
 making the code in the library readable. On this page we provide general
 guidelines for naming entries that apply anywhere in the library.
 
+The naming conventions for the agda-unimath library are designed to be in line
+with the overall goals of the project, which is to be an informative resource of
+formalized mathematics. We therefore made the following list of priorities for
+our naming conventions:
+
+- Entry names aim to concisely describe their mathematical concept, using
+  well-known mathematical vocabulary.
+- While an entry's name reflects its concept, it avoids relying on the details
+  of its formalization. This way, a user is not required to know how something
+  is formalized in order to reference an entry.
+- Even with only minimal knowledge of our conventions, users can intuitively
+  grasp an entry's purpose.
+- Our naming scheme works across mathematical fields and throughout the library.
+- Ultimately, our goal is for these conventions to support clear and
+  maintainable code.
+
 Accurately naming entries in a large formalization project can be very
 difficult, especially when your formalization enters uncharted, or little
 written about territory. Giving good names to your entries requires a high level
@@ -227,7 +243,8 @@ descriptors in the table below.
   sparingly. They might save a couple of keystrokes for the author, but in the
   grand scheme of things, they will likely compromise readability and
   maintainability, especially for newcomers and maintainers. We aim for clarity,
-  not brevity.
+  not brevity. We always keep the possibility in mind that abbreviations might
+  be confusing for someone.
 
 - Using Unicode characters in names is permissible, but we recommend restraint
   to maintain readability. Just a few well-placed symbols can often express a
