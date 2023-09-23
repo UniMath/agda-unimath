@@ -136,10 +136,10 @@ module _
       ( F)
       ( G)
 
-  is-natural-transformation-map-Category-Prop :
+  is-natural-transformation-prop-map-Category :
     ( γ : hom-family-map-Category C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
-  is-natural-transformation-map-Category-Prop =
-    is-natural-transformation-map-Precategory-Prop
+  is-natural-transformation-prop-map-Category =
+    is-natural-transformation-prop-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -167,9 +167,9 @@ module _
       ( F)
       ( G)
 
-  natural-transformation-map-Category-Set : Set (l1 ⊔ l2 ⊔ l4)
-  natural-transformation-map-Category-Set =
-    natural-transformation-map-Precategory-Set
+  natural-transformation-map-set-Category : Set (l1 ⊔ l2 ⊔ l4)
+  natural-transformation-map-set-Category =
+    natural-transformation-map-set-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

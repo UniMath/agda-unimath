@@ -209,10 +209,10 @@ module _
                             ( hom-map-Precategory C D F g)
                             ( hom-map-Precategory C D F f)))))))
 
-  preserves-comp-hom-map-Precategory-Prop : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 preserves-comp-hom-map-Precategory-Prop =
+  preserves-comp-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 preserves-comp-hom-prop-map-Precategory =
     preserves-comp-hom-map-Precategory C D F
-  pr2 preserves-comp-hom-map-Precategory-Prop =
+  pr2 preserves-comp-hom-prop-map-Precategory =
     is-prop-preserves-comp-hom-map-Precategory
 
   is-prop-preserves-id-hom-map-Precategory :
@@ -226,10 +226,10 @@ module _
           ( hom-map-Precategory C D F (id-hom-Precategory C {x}))
           ( id-hom-Precategory D {obj-map-Precategory C D F x}))
 
-  preserves-id-hom-map-Precategory-Prop : Prop (l1 ⊔ l4)
-  pr1 preserves-id-hom-map-Precategory-Prop =
+  preserves-id-hom-prop-map-Precategory : Prop (l1 ⊔ l4)
+  pr1 preserves-id-hom-prop-map-Precategory =
     preserves-id-hom-map-Precategory C D F
-  pr2 preserves-id-hom-map-Precategory-Prop =
+  pr2 preserves-id-hom-prop-map-Precategory =
     is-prop-preserves-id-hom-map-Precategory
 
   is-prop-is-functor-map-Precategory :
@@ -239,9 +239,9 @@ module _
       ( is-prop-preserves-comp-hom-map-Precategory)
       ( is-prop-preserves-id-hom-map-Precategory)
 
-  is-functor-map-Precategory-Prop : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 is-functor-map-Precategory-Prop = is-functor-map-Precategory C D F
-  pr2 is-functor-map-Precategory-Prop = is-prop-is-functor-map-Precategory
+  is-functor-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  pr1 is-functor-prop-map-Precategory = is-functor-map-Precategory C D F
+  pr2 is-functor-prop-map-Precategory = is-prop-is-functor-map-Precategory
 ```
 
 ### Extensionality of functors between precategories
@@ -261,7 +261,7 @@ module _
   equiv-eq-map-eq-functor-Precategory =
     equiv-ap-emb
       ( comp-emb
-        ( emb-subtype (is-functor-map-Precategory-Prop C D))
+        ( emb-subtype (is-functor-prop-map-Precategory C D))
         ( emb-equiv
           ( inv-associative-Σ
             ( obj-Precategory C → obj-Precategory D)
@@ -269,7 +269,7 @@ module _
               { x y : obj-Precategory C} →
               hom-Precategory C x y →
               hom-Precategory D (F₀ x) (F₀ y))
-            ( pr1 ∘ is-functor-map-Precategory-Prop C D))))
+            ( pr1 ∘ is-functor-prop-map-Precategory C D))))
 
   eq-map-eq-functor-Precategory :
     (F ＝ G) → (map-functor-Precategory C D F ＝ map-functor-Precategory C D G)

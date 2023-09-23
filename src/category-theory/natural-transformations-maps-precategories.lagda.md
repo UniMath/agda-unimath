@@ -165,11 +165,11 @@ module _
                     ( γ y)
                     ( hom-map-Precategory C D F f)))))
 
-  is-natural-transformation-map-Precategory-Prop :
+  is-natural-transformation-prop-map-Precategory :
     ( γ : hom-family-map-Precategory C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 (is-natural-transformation-map-Precategory-Prop α) =
+  pr1 (is-natural-transformation-prop-map-Precategory α) =
     is-natural-transformation-map-Precategory C D F G α
-  pr2 (is-natural-transformation-map-Precategory-Prop α) =
+  pr2 (is-natural-transformation-prop-map-Precategory α) =
     is-prop-is-natural-transformation-map-Precategory α
 ```
 
@@ -187,13 +187,13 @@ module _
     is-emb (hom-family-natural-transformation-map-Precategory C D F G)
   is-emb-hom-family-natural-transformation-map-Precategory =
     is-emb-inclusion-subtype
-      ( is-natural-transformation-map-Precategory-Prop C D F G)
+      ( is-natural-transformation-prop-map-Precategory C D F G)
 
   emb-hom-family-natural-transformation-map-Precategory :
     natural-transformation-map-Precategory C D F G ↪
     hom-family-map-Precategory C D F G
   emb-hom-family-natural-transformation-map-Precategory =
-    emb-subtype (is-natural-transformation-map-Precategory-Prop C D F G)
+    emb-subtype (is-natural-transformation-prop-map-Precategory C D F G)
 
   is-set-natural-transformation-map-Precategory :
     is-set (natural-transformation-map-Precategory C D F G)
@@ -207,13 +207,13 @@ module _
       ( λ α →
         is-set-type-Set
           ( set-Prop
-            ( is-natural-transformation-map-Precategory-Prop C D F G α)))
+            ( is-natural-transformation-prop-map-Precategory C D F G α)))
 
-  natural-transformation-map-Precategory-Set :
+  natural-transformation-map-set-Precategory :
     Set (l1 ⊔ l2 ⊔ l4)
-  pr1 (natural-transformation-map-Precategory-Set) =
+  pr1 (natural-transformation-map-set-Precategory) =
     natural-transformation-map-Precategory C D F G
-  pr2 (natural-transformation-map-Precategory-Set) =
+  pr2 (natural-transformation-map-set-Precategory) =
     is-set-natural-transformation-map-Precategory
 
   extensionality-natural-transformation-map-Precategory :

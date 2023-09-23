@@ -68,7 +68,7 @@ module _
 
   associative-composition-structure-functor-precategory-Precategory :
     associative-composition-structure-Set
-      ( natural-transformation-Precategory-Set C D)
+      ( natural-transformation-set-Precategory C D)
   pr1 associative-composition-structure-functor-precategory-Precategory
     {F} {G} {H} =
     comp-hom-functor-precategory-Precategory {F} {G} {H}
@@ -101,7 +101,7 @@ module _
 
   is-unital-composition-structure-functor-precategory-Precategory :
     is-unital-composition-structure-Set
-      ( natural-transformation-Precategory-Set C D)
+      ( natural-transformation-set-Precategory C D)
       ( associative-composition-structure-functor-precategory-Precategory)
   pr1 is-unital-composition-structure-functor-precategory-Precategory =
     id-hom-functor-precategory-Precategory
@@ -118,7 +118,7 @@ module _
     Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
   pr1 functor-precategory-Precategory = functor-Precategory C D
   pr1 (pr2 functor-precategory-Precategory) =
-    natural-transformation-Precategory-Set C D
+    natural-transformation-set-Precategory C D
   pr1 (pr2 (pr2 functor-precategory-Precategory)) =
     associative-composition-structure-functor-precategory-Precategory
   pr2 (pr2 (pr2 functor-precategory-Precategory)) =

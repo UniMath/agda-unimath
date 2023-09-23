@@ -37,7 +37,7 @@ module _
 
   is-mono-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Group-Prop =
-    is-mono-Large-Precategory-Prop Group-Large-Precategory l3 G H f
+    is-mono-prop-Large-Precategory Group-Large-Precategory l3 G H f
 
   is-mono-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-mono-Group = type-Prop is-mono-Group-Prop

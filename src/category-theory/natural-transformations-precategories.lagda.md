@@ -132,7 +132,7 @@ module _
   is-natural-transformation-Precategory-Prop :
     (γ : hom-family-functor-Precategory C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-Precategory-Prop =
-    is-natural-transformation-map-Precategory-Prop C D
+    is-natural-transformation-prop-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 ```
@@ -169,11 +169,11 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 
-  natural-transformation-Precategory-Set :
+  natural-transformation-set-Precategory :
     Set (l1 ⊔ l2 ⊔ l4)
-  pr1 (natural-transformation-Precategory-Set) =
+  pr1 (natural-transformation-set-Precategory) =
     natural-transformation-Precategory C D F G
-  pr2 (natural-transformation-Precategory-Set) =
+  pr2 (natural-transformation-set-Precategory) =
     is-set-natural-transformation-Precategory
 
   extensionality-natural-transformation-Precategory :

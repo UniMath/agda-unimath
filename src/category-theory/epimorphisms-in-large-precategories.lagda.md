@@ -37,18 +37,18 @@ module _
   (f : hom-Large-Precategory C X Y)
   where
 
-  is-epi-Large-Precategory-Prop : Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
-  is-epi-Large-Precategory-Prop =
+  is-epi-Large-prop-Precategory : Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
+  is-epi-Large-prop-Precategory =
     Π-Prop
       ( obj-Large-Precategory C l3)
       ( λ Z → is-emb-Prop (λ g → comp-hom-Large-Precategory C {Z = Z} g f))
 
   is-epi-Large-Precategory : UU (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
-  is-epi-Large-Precategory = type-Prop is-epi-Large-Precategory-Prop
+  is-epi-Large-Precategory = type-Prop is-epi-prop-Large-Precategory
 
   is-prop-is-epi-Large-Precategory : is-prop is-epi-Large-Precategory
   is-prop-is-epi-Large-Precategory =
-    is-prop-type-Prop is-epi-Large-Precategory-Prop
+    is-prop-type-Prop is-epi-prop-Large-Precategory
 ```
 
 ## Properties

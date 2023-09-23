@@ -167,9 +167,9 @@ module _
       ( F)
       ( G)
 
-  natural-transformation-Category-Set : Set (l1 ⊔ l2 ⊔ l4)
-  natural-transformation-Category-Set =
-    natural-transformation-Precategory-Set
+  natural-transformation-set-Category : Set (l1 ⊔ l2 ⊔ l4)
+  natural-transformation-set-Category =
+    natural-transformation-set-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

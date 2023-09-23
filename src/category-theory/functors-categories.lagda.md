@@ -185,9 +185,9 @@ module _
       ( precategory-Category D)
       ( F)
 
-  preserves-comp-hom-map-Category-Prop : Prop (l1 ⊔ l2 ⊔ l4)
-  preserves-comp-hom-map-Category-Prop =
-    preserves-comp-hom-map-Precategory-Prop
+  preserves-comp-hom-prop-map-Category : Prop (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-hom-prop-map-Category =
+    preserves-comp-hom-prop-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -200,9 +200,9 @@ module _
       ( precategory-Category D)
       ( F)
 
-  preserves-id-hom-map-Category-Prop : Prop (l1 ⊔ l4)
-  preserves-id-hom-map-Category-Prop =
-    preserves-id-hom-map-Precategory-Prop
+  preserves-id-hom-prop-map-Category : Prop (l1 ⊔ l4)
+  preserves-id-hom-prop-map-Category =
+    preserves-id-hom-prop-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -215,9 +215,9 @@ module _
       ( precategory-Category D)
       ( F)
 
-  is-functor-map-Category-Prop : Prop (l1 ⊔ l2 ⊔ l4)
-  is-functor-map-Category-Prop =
-    is-functor-map-Precategory-Prop
+  is-functor-prop-map-Category : Prop (l1 ⊔ l2 ⊔ l4)
+  is-functor-prop-map-Category =
+    is-functor-prop-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

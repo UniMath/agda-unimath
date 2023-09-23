@@ -36,8 +36,8 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
-  is-category-Precategory-Prop : Prop (l1 ⊔ l2)
-  is-category-Precategory-Prop =
+  is-category-prop-Precategory : Prop (l1 ⊔ l2)
+  is-category-prop-Precategory =
     Π-Prop
       ( obj-Precategory C)
       ( λ x →
@@ -46,7 +46,7 @@ module _
           ( λ y → is-equiv-Prop (iso-eq-Precategory C x y)))
 
   is-category-Precategory : UU (l1 ⊔ l2)
-  is-category-Precategory = type-Prop is-category-Precategory-Prop
+  is-category-Precategory = type-Prop is-category-prop-Precategory
 
 Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Category l1 l2 = Σ (Precategory l1 l2) is-category-Precategory
