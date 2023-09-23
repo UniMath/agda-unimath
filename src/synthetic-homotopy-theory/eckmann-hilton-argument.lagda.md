@@ -105,9 +105,11 @@ Now we give the more homotopy theoretic version of the Eckmann-Hilton argument.
 Consider 2-loops `α β : Ω² (X , base)`. The more homotopy theoretic
 Eckmann-Hilton argument is often depicted as follows:
 
+```text
 | α |      | refl-Ω² | α |      | β | refl-Ω² |       | β |
 -----  ＝  ----------------  ＝  ----------------  ＝  ----
 | β |      | β | refl-Ω² |      | refl-Ω² | α |       | α |
+```
 
 The first picture represents the vertical concatination of `α` and `β`. The
 notation ` | γ | δ |` represents the horizontal concatination of 2-dimensional
