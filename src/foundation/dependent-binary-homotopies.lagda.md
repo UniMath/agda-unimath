@@ -11,7 +11,6 @@ open import foundation.binary-homotopies
 open import foundation.universe-levels
 
 open import foundation-core.dependent-identifications
-open import foundation-core.homotopies
 ```
 
 </details>

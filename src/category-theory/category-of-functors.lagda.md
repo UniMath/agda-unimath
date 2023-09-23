@@ -20,6 +20,8 @@ open import category-theory.precategory-of-functors
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -58,7 +60,12 @@ module _
   --       ( F)
   --       ( G) ∘e
   --       {!  !} ∘e
-  --       ( extensionality-functor-Category' C D F G))
+  --       equiv-Σ-equiv-base _
+  --         ( equiv-Π-equiv-family
+  --           ( λ i → extensionality-obj-Category D
+  --             ( obj-functor-Category C D F i)
+  --             ( obj-functor-Category C D G i))) ∘e
+  --       ( extensionality-functor-Category C D F G))
   --     {!   !}
 
   -- functor-category-Category :

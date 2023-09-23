@@ -63,7 +63,9 @@ module _
 
   hom-set-Meet-Semilattice : Set (l1 ⊔ l2)
   hom-set-Meet-Semilattice =
-    hom-set-Semigroup (semigroup-Meet-Semilattice A) (semigroup-Meet-Semilattice B)
+    hom-set-Semigroup
+      ( semigroup-Meet-Semilattice A)
+      ( semigroup-Meet-Semilattice B)
 
   hom-Meet-Semilattice : UU (l1 ⊔ l2)
   hom-Meet-Semilattice = type-Set hom-set-Meet-Semilattice

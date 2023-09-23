@@ -7,11 +7,11 @@ module category-theory.maps-categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-categories
 open import category-theory.categories
-open import category-theory.maps-precategories
 open import category-theory.commuting-squares-of-morphisms-in-precategories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -147,6 +147,12 @@ module _
   eq-htpy-map-Category =
     eq-htpy-map-Precategory (precategory-Category C) (precategory-Category D)
 ```
+
+### Maps between categories are equal if and only if they are naturally isomorphic
+
+This remains to be formalized. As a consequence, we have a category of maps
+between two categories, in which we find the functor category as a full
+subcategory.
 
 ## See also
 
