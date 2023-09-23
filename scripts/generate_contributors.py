@@ -19,6 +19,10 @@ the library.
 
 {names}
 
+If you contributed to the library and don't see yourself on this list,
+read the instructions on
+[adding yourself as a contributor](CONTRIBUTING.md#add-contributor).
+
 Help us to improve the library by contributing to the project!
 Contributions come in many forms, please ask us if you are not sure
 how to help. We are happy to help you get started.
