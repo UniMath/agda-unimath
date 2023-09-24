@@ -8,32 +8,20 @@ module category-theory.category-of-functors where
 
 ```agda
 open import category-theory.categories
-open import category-theory.category-of-maps-of-categories
-open import category-theory.commuting-squares-of-morphisms-in-precategories
-open import category-theory.functors-categories
-open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.natural-isomorphisms-maps-precategories
+open import category-theory.category-of-maps-of-categories
+open import category-theory.functors-precategories
+open import category-theory.functors-categories
 open import category-theory.natural-isomorphisms-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-isomorphisms-categories
 open import category-theory.precategories
+open import category-theory.maps-precategories
 open import category-theory.precategory-of-functors
 open import category-theory.precategory-of-maps-of-precategories
 
-open import foundation.action-on-identifications-binary-functions
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.subtypes
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
 ```
 
@@ -60,16 +48,25 @@ module _
   (is-category-D : is-category-Precategory D)
   where
 
-  extensionality-functor-is-category-Precategory :
-    (f g : functor-Precategory C D) →
-    ( f ＝ g) ≃
-    ( natural-isomorphism-Precategory C D f g)
-  extensionality-functor-is-category-Precategory f g =
-    ( equiv-natural-isomorphism-htpy-map-is-category-Precategory C D
+  equiv-natural-isomorphism-htpy-map-functor-is-category-Precategory :
+    (F G : functor-Precategory C D) →
+    ( htpy-map-Precategory C D
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G)) ≃
+    ( natural-isomorphism-Precategory C D F G)
+  equiv-natural-isomorphism-htpy-map-functor-is-category-Precategory F G =
+    equiv-natural-isomorphism-htpy-map-is-category-Precategory C D
       ( is-category-D)
-      ( map-functor-Precategory C D f)
-      ( map-functor-Precategory C D g)) ∘e
-    ( equiv-htpy-map-eq-functor-Precategory C D f g)
+      ( map-functor-Precategory C D F)
+      ( map-functor-Precategory C D G)
+
+  extensionality-functor-is-category-Precategory :
+    (F G : functor-Precategory C D) →
+    ( F ＝ G) ≃
+    ( natural-isomorphism-Precategory C D F G)
+  extensionality-functor-is-category-Precategory F G =
+    ( equiv-natural-isomorphism-htpy-map-functor-is-category-Precategory F G) ∘e
+    ( equiv-htpy-map-eq-functor-Precategory C D F G)
 ```
 
 ### When the codomain is a category the functor precategory is a category
@@ -92,12 +89,8 @@ module _
               C D is-category-D F G))
         ( λ
           { refl →
-            compute-iso-map-natural-isomorphism-map-eq-map-Precategory
-              ( C)
-              ( D)
-              ( map-functor-Precategory C D F)
-              ( map-functor-Precategory C D G)
-              ( refl)})
+            compute-iso-functor-natural-isomorphism-eq-Precategory
+              C D F G refl})
 ```
 
 ### The category of functors
@@ -119,4 +112,19 @@ module _
       ( precategory-Category C)
       ( precategory-Category D)
       ( is-category-Category D)
+
+  extensionality-functor-Category :
+    (F G : functor-Category C D) →
+    (F ＝ G) ≃ natural-isomorphism-Category C D F G
+  extensionality-functor-Category F G =
+    ( equiv-natural-isomorphism-iso-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D) F G) ∘e
+    ( extensionality-obj-Category functor-category-Category F G)
+
+  eq-natural-isomorphism-functor-Category :
+    (F G : functor-Category C D) →
+    natural-isomorphism-Category C D F G → F ＝ G
+  eq-natural-isomorphism-functor-Category F G =
+    map-inv-equiv (extensionality-functor-Category F G)
 ```

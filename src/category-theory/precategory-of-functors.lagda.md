@@ -12,16 +12,15 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.natural-isomorphisms-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
+open import category-theory.precategory-of-maps-of-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -248,4 +247,25 @@ module _
     natural-isomorphism-Precategory C D F G
   equiv-natural-isomorphism-iso-functor-Precategory =
     equiv-tot equiv-is-natural-isomorphism-is-iso-functor-Precategory
+```
+
+#### Computing with the equivalence that isomorphisms are natural isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F G : functor-Precategory C D)
+  where
+
+  compute-iso-functor-natural-isomorphism-eq-Precategory :
+    (p : F ＝ G) →
+    iso-eq-Precategory (functor-precategory-Precategory C D) F G p ＝
+    iso-functor-natural-isomorphism-Precategory C D F G
+      ( natural-isomorphism-eq-Precategory C D F G p)
+  compute-iso-functor-natural-isomorphism-eq-Precategory refl =
+    eq-iso-eq-hom-Precategory
+      ( functor-precategory-Precategory C D)
+      { F} {G} _ _ refl
 ```

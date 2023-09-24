@@ -9,20 +9,14 @@ module category-theory.isomorphisms-in-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
