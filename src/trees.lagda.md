@@ -6,6 +6,7 @@ module trees where
 open import trees.algebras-polynomial-endofunctors public
 open import trees.bases-directed-trees public
 open import trees.bases-enriched-directed-trees public
+open import trees.bounded-multisets public
 open import trees.coalgebra-of-directed-trees public
 open import trees.coalgebra-of-enriched-directed-trees public
 open import trees.coalgebras-polynomial-endofunctors public
@@ -14,6 +15,7 @@ open import trees.combinator-enriched-directed-trees public
 open import trees.directed-trees public
 open import trees.elementhood-relation-coalgebras-polynomial-endofunctors public
 open import trees.elementhood-relation-w-types public
+open import trees.empty-multisets public
 open import trees.enriched-directed-trees public
 open import trees.equivalences-directed-trees public
 open import trees.equivalences-enriched-directed-trees public
@@ -31,6 +33,7 @@ open import trees.morphisms-algebras-polynomial-endofunctors public
 open import trees.morphisms-coalgebras-polynomial-endofunctors public
 open import trees.morphisms-directed-trees public
 open import trees.morphisms-enriched-directed-trees public
+open import trees.multiset-indexed-dependent-products-of-types public
 open import trees.multisets public
 open import trees.planar-binary-trees public
 open import trees.polynomial-endofunctors public
