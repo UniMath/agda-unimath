@@ -1,4 +1,4 @@
-# The category of functors and natural transformations between two fixed categories
+# The category of functors and natural transformations between two categories
 
 ```agda
 module category-theory.category-of-functors where
@@ -32,15 +32,16 @@ module _
   {l1 l2 l3 l4 : Level} (C : Category l1 l2) (D : Category l3 l4)
   where
 
-  functor-category-Precategory : Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
-  functor-category-Precategory =
+  precategory-functor-category-Category :
+    Precategory (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
+  precategory-functor-category-Category =
     functor-precategory-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
 
-  -- is-category-functor-category-Precategory :
-  --   is-category-Precategory functor-category-Precategory
-  -- is-category-functor-category-Precategory F G =
+  -- is-category-precategory-functor-category-Category :
+  --   is-category-Precategory precategory-functor-category-Category
+  -- is-category-precategory-functor-category-Category F G =
   --   is-equiv-htpy-equiv
   --     ( equiv-iso-functor-natural-isomorphism-Precategory
   --       ( precategory-Category C)
@@ -58,6 +59,6 @@ module _
 
   -- functor-category-Category :
   --   Category (l1 ⊔ l2 ⊔ l3 ⊔ l4) (l1 ⊔ l2 ⊔ l4)
-  -- pr1 functor-category-Category = functor-category-Precategory
-  -- pr2 functor-category-Category = is-category-functor-category-Precategory
+  -- pr1 functor-category-Category = precategory-functor-category-Category
+  -- pr2 functor-category-Category = is-category-precategory-functor-category-Category
 ```

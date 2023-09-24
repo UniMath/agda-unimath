@@ -138,6 +138,18 @@ pr2 (equiv-Π-equiv-family e) =
     ( λ i → is-equiv-map-equiv (e i))
 ```
 
+We also record a version for dependent function types with implicit arguments.
+
+```agda
+equiv-implicit-Π-equiv-family :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
+equiv-implicit-Π-equiv-family e =
+  ( equiv-implicit-explicit-Π) ∘e
+  ( equiv-Π-equiv-family e) ∘e
+  ( equiv-explicit-implicit-Π)
+```
+
 ### Precomposition and equivalences
 
 #### For any map `f : A → B` and any family `C` over `B`, if `f` satisfies the property that `C b → (fiber f b → C b)` is an equivalence for every `b : B` then the precomposition function `((b : B) → C b) → ((a : A) → C (f a))` is an equivalence

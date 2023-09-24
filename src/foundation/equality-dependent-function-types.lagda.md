@@ -40,11 +40,11 @@ is-contr-total-Eq-Π {A = A} {B} C is-contr-total-C =
     ( distributive-Π-Σ)
     ( is-contr-Π is-contr-total-C)
 
-is-contr-total-Eq-Π' :
+is-contr-total-Eq-implicit-Π :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
   ( is-contr-total-C : (x : A) → is-contr (Σ (B x) (C x))) →
   is-contr (Σ ({x : A} → B x) (λ g → {x : A} → C x (g {x})))
-is-contr-total-Eq-Π' {A = A} {B} C is-contr-total-C =
+is-contr-total-Eq-implicit-Π {A = A} {B} C is-contr-total-C =
   is-contr-equiv
     ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
     ( equiv-Σ

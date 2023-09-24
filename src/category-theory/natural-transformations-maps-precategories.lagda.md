@@ -7,6 +7,7 @@ module category-theory.natural-transformations-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.commuting-squares-of-morphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
@@ -54,12 +55,21 @@ module _
       ( obj-map-Precategory C D F x)
       ( obj-map-Precategory C D G x)
 
+  coherence-square-hom-family-map-Precategory :
+    hom-family-map-Precategory →
+    {x y : obj-Precategory C} (f : hom-Precategory C x y) → UU l4
+  coherence-square-hom-family-map-Precategory γ {x} {y} f =
+    coherence-square-hom-Precategory D
+      ( hom-map-Precategory C D F f)
+      ( γ x)
+      ( γ y)
+      ( hom-map-Precategory C D G f)
+
   is-natural-transformation-map-Precategory :
     hom-family-map-Precategory → UU (l1 ⊔ l2 ⊔ l4)
   is-natural-transformation-map-Precategory γ =
     {x y : obj-Precategory C} (f : hom-Precategory C x y) →
-    ( comp-hom-Precategory D (hom-map-Precategory C D G f) (γ x)) ＝
-    ( comp-hom-Precategory D (γ y) (hom-map-Precategory C D F f))
+    coherence-square-hom-family-map-Precategory γ f
 
   natural-transformation-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
   natural-transformation-map-Precategory =

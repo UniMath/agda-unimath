@@ -158,6 +158,14 @@ module _
     (x y : obj-Category C) →
     x ＝ y → iso-Category C x y
   iso-eq-Category = iso-eq-Precategory (precategory-Category C)
+
+  compute-hom-iso-eq-Category :
+    {x y : obj-Category C} →
+    (p : x ＝ y) →
+    hom-eq-Category C x y p ＝
+    hom-iso-Category C (iso-eq-Category x y p)
+  compute-hom-iso-eq-Category =
+    compute-hom-iso-eq-Precategory (precategory-Category C)
 ```
 
 ## Properties

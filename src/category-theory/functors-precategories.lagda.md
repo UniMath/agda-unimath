@@ -306,7 +306,7 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G))
   equiv-htpy-map-eq-functor-Precategory =
-    ( extensionality-map-Precategory C D)
+    ( equiv-htpy-eq-map-Precategory C D)
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G) ∘e
     ( equiv-eq-map-eq-functor-Precategory C D F G)

@@ -111,10 +111,10 @@ module _
       ( precategory-Category C)
       ( precategory-Category D)
 
-  extensionality-map-Category :
+  equiv-htpy-eq-map-Category :
     (f g : map-Category C D) → (f ＝ g) ≃ htpy-map-Category f g
-  extensionality-map-Category =
-    extensionality-map-Precategory
+  equiv-htpy-eq-map-Category =
+    equiv-htpy-eq-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
 

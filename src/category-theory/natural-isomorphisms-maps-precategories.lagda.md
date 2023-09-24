@@ -240,14 +240,17 @@ isomorphism given `refl : F ＝ F`, from `F` to itself. We take the identity
 natural transformation as such an isomorphism.
 
 ```agda
-natural-isomorphism-map-eq-Precategory :
+module _
   {l1 l2 l3 l4 : Level}
   (C : Precategory l1 l2)
   (D : Precategory l3 l4)
-  (F G : map-Precategory C D) →
-  F ＝ G → natural-isomorphism-map-Precategory C D F G
-natural-isomorphism-map-eq-Precategory C D F .F refl =
-  id-natural-isomorphism-map-Precategory C D F
+  where
+
+  natural-isomorphism-map-eq-map-Precategory :
+    (F G : map-Precategory C D) →
+    F ＝ G → natural-isomorphism-map-Precategory C D F G
+  natural-isomorphism-map-eq-map-Precategory F .F refl =
+    id-natural-isomorphism-map-Precategory C D F
 ```
 
 ## Propositions
@@ -771,14 +774,14 @@ module _
   (F G H : map-Precategory C D)
   where
 
-  preserves-concat-natural-isomorphism-map-eq-Precategory :
+  preserves-concat-natural-isomorphism-map-eq-map-Precategory :
     (p : F ＝ G) (q : G ＝ H) →
-    natural-isomorphism-map-eq-Precategory C D F H (p ∙ q) ＝
+    natural-isomorphism-map-eq-map-Precategory C D F H (p ∙ q) ＝
     comp-natural-isomorphism-map-Precategory C D F G H
-      ( natural-isomorphism-map-eq-Precategory C D G H q)
-      ( natural-isomorphism-map-eq-Precategory C D F G p)
-  preserves-concat-natural-isomorphism-map-eq-Precategory refl q =
+      ( natural-isomorphism-map-eq-map-Precategory C D G H q)
+      ( natural-isomorphism-map-eq-map-Precategory C D F G p)
+  preserves-concat-natural-isomorphism-map-eq-map-Precategory refl q =
     inv
       ( right-unit-law-comp-natural-isomorphism-map-Precategory C D F H
-        ( natural-isomorphism-map-eq-Precategory C D G H q))
+        ( natural-isomorphism-map-eq-map-Precategory C D G H q))
 ```

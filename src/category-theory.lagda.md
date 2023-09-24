@@ -38,6 +38,7 @@ open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.categories public
 open import category-theory.category-of-functors public
+open import category-theory.category-of-maps-of-categories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.dependent-products-of-categories public
@@ -51,7 +52,6 @@ open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
-open import category-theory.full-large-subprecategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public
 open import category-theory.functors-categories public
@@ -68,8 +68,6 @@ open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
 open import category-theory.large-categories public
 open import category-theory.large-precategories public
-open import category-theory.large-subcategories public
-open import category-theory.large-subprecategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-precategories public
 open import category-theory.monomorphisms-in-large-precategories public

@@ -156,12 +156,22 @@ This is because, by the J-rule, it is enough to construct an isomorphism given
 isomorphism.
 
 ```agda
-iso-eq-Precategory :
-  {l1 l2 : Level} →
+module _
+  {l1 l2 : Level}
   (C : Precategory l1 l2)
-  (x y : obj-Precategory C) →
-  x ＝ y → iso-Precategory C x y
-iso-eq-Precategory C x .x refl = id-iso-Precategory C
+  where
+
+  iso-eq-Precategory :
+    (x y : obj-Precategory C) →
+    x ＝ y → iso-Precategory C x y
+  iso-eq-Precategory x .x refl = id-iso-Precategory C
+
+  compute-hom-iso-eq-Precategory :
+    {x y : obj-Precategory C} →
+    (p : x ＝ y) →
+    hom-eq-Precategory C x y p ＝
+    hom-iso-Precategory C (iso-eq-Precategory x y p)
+  compute-hom-iso-eq-Precategory refl = refl
 ```
 
 ## Properties

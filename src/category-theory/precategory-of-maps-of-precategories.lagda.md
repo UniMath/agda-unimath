@@ -1,4 +1,4 @@
-# The precategory of maps and natural transformations between two fixed precategories
+# The precategory of maps and natural transformations between two precategories
 
 ```agda
 module category-theory.precategory-of-maps-of-precategories where
@@ -248,4 +248,23 @@ module _
     natural-isomorphism-map-Precategory C D F G
   equiv-natural-isomorphism-map-iso-map-Precategory =
     equiv-tot equiv-is-natural-isomorphism-map-is-iso-map-Precategory
+```
+
+#### Computing with the equivalence that isomorphisms are natural isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F G : map-Precategory C D)
+  where
+
+  compute-iso-map-natural-isomorphism-map-eq-map-Precategory :
+    (p : F ＝ G) →
+    iso-eq-Precategory (map-precategory-Precategory C D) F G p ＝
+    iso-map-natural-isomorphism-map-Precategory C D F G
+      ( natural-isomorphism-map-eq-map-Precategory C D F G p)
+  compute-iso-map-natural-isomorphism-map-eq-map-Precategory refl =
+    eq-iso-eq-hom-Precategory (map-precategory-Precategory C D) _ _ refl
 ```

@@ -37,8 +37,8 @@ module _
   (f : hom-Large-Precategory C X Y)
   where
 
-  is-epi-Large-prop-Precategory : Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
-  is-epi-Large-prop-Precategory =
+  is-epi-prop-Large-Precategory : Prop (α l3 ⊔ β l1 l3 ⊔ β l2 l3)
+  is-epi-prop-Large-Precategory =
     Π-Prop
       ( obj-Large-Precategory C l3)
       ( λ Z → is-emb-Prop (λ g → comp-hom-Large-Precategory C {Z = Z} g f))

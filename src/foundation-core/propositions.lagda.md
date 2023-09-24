@@ -279,7 +279,8 @@ For convenience, we also record repeated applications of the above.
 is-prop-Π² :
   {l1 l2 l3 : Level}
   {A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) (x2 : A2 x1) → UU l3} →
-  ((x1 : A1) (x2 : A2 x1) → is-prop (A3 x1 x2)) → is-prop ((x1 : A1) (x2 : A2 x1) → A3 x1 x2)
+  ((x1 : A1) (x2 : A2 x1) → is-prop (A3 x1 x2)) →
+  is-prop ((x1 : A1) (x2 : A2 x1) → A3 x1 x2)
 is-prop-Π² H = is-prop-Π (is-prop-Π ∘ H)
 
 is-prop-Π³ :

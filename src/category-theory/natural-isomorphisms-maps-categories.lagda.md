@@ -273,13 +273,13 @@ isomorphism given `refl : F ＝ F`, from `F` to itself. We take the identity
 natural transformation as such an isomorphism.
 
 ```agda
-natural-isomorphism-map-eq-Category :
+natural-isomorphism-map-eq-map-Category :
   {l1 l2 l3 l4 : Level}
   (C : Category l1 l2)
   (D : Category l3 l4)
   (F G : map-Category C D) →
   F ＝ G → natural-isomorphism-map-Category C D F G
-natural-isomorphism-map-eq-Category C D F .F refl =
+natural-isomorphism-map-eq-map-Category C D F .F refl =
   id-natural-isomorphism-map-Category C D F
 ```
 
@@ -738,14 +738,14 @@ module _
   (F G H : map-Category C D)
   where
 
-  preserves-concat-natural-isomorphism-map-eq-Category :
+  preserves-concat-natural-isomorphism-map-eq-map-Category :
     (p : F ＝ G) (q : G ＝ H) →
-    natural-isomorphism-map-eq-Category C D F H (p ∙ q) ＝
+    natural-isomorphism-map-eq-map-Category C D F H (p ∙ q) ＝
     comp-natural-isomorphism-map-Category C D F G H
-      ( natural-isomorphism-map-eq-Category C D G H q)
-      ( natural-isomorphism-map-eq-Category C D F G p)
-  preserves-concat-natural-isomorphism-map-eq-Category refl q =
+      ( natural-isomorphism-map-eq-map-Category C D G H q)
+      ( natural-isomorphism-map-eq-map-Category C D F G p)
+  preserves-concat-natural-isomorphism-map-eq-map-Category refl q =
     inv
       ( right-unit-law-comp-natural-isomorphism-map-Category C D F H
-        ( natural-isomorphism-map-eq-Category C D G H q))
+        ( natural-isomorphism-map-eq-map-Category C D G H q))
 ```
