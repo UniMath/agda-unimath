@@ -35,7 +35,7 @@ square-ℤ : ℤ → ℤ
 square-ℤ a = mul-ℤ a a
 
 cube-ℤ : ℤ → ℤ
-cube-ℤ a = mul-ℕ (square-ℤ a) a
+cube-ℤ a = mul-ℤ (square-ℤ a) a
 
 is-square-ℤ : ℤ → UU lzero
 is-square-ℤ a = Σ ℤ (λ x → a ＝ square-ℤ x)
