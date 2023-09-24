@@ -47,5 +47,5 @@ legendre-symbol : Prime-ℕ → ℤ → ℤ
 legendre-symbol (p , _) a =
   int-is-square-ℤ-Mod
     ( has-decidable-equality-ℤ-Mod p (mod-ℤ p a) (zero-ℤ-Mod p))
-    ( is-decidable-square-ℤ-Mod p (mod-ℤ p a))
+    ( is-decidable-is-square-ℤ-Mod p (mod-ℤ p a))
 ```

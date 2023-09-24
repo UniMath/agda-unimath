@@ -45,10 +45,10 @@ square-root-ℤ-Mod {succ-ℕ p} _ (root , _) = root
 ### Squareness in ℤₚ is decidable
 
 ```agda
-is-decidable-square-ℤ-Mod :
+is-decidable-is-square-ℤ-Mod :
   (p : ℕ) (k : ℤ-Mod p) →
   is-decidable (is-square-ℤ-Mod p k)
-is-decidable-square-ℤ-Mod 0 k = is-decidable-square-ℤ k
-is-decidable-square-ℤ-Mod (succ-ℕ p) k =
+is-decidable-is-square-ℤ-Mod 0 k = is-decidable-is-square-ℤ k
+is-decidable-is-square-ℤ-Mod (succ-ℕ p) k =
   is-decidable-fiber-Fin {succ-ℕ p} {succ-ℕ p} (square-ℤ-Mod (succ-ℕ p)) k
 ```

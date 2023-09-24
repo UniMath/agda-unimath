@@ -147,8 +147,8 @@ is-decidable-big-root 1 = inl (1 , star , refl)
 is-decidable-big-root (succ-ℕ (succ-ℕ n)) =
   inr (λ H → greater-than-square-root-ℕ n (pr1 H) (pr2 H))
 
-is-decidable-square-ℕ : (n : ℕ) → is-decidable (is-square-ℕ n)
-is-decidable-square-ℕ n =
+is-decidable-is-square-ℕ : (n : ℕ) → is-decidable (is-square-ℕ n)
+is-decidable-is-square-ℕ n =
   is-decidable-Σ-ℕ n
     ( λ x → n ＝ square-ℕ x)
     ( λ x → has-decidable-equality-ℕ n (square-ℕ x))
