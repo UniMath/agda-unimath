@@ -221,3 +221,8 @@ github = "Petkomat"
 displayName = "Gregor Perčič"
 usernames = [ "Gregor Perčič", "izak" ]
 github = "GregorPercic"
+
+[[contributors]]
+displayName = "Alec Barreto"
+usernames = [ "Alec Barreto" ]
+github = "wrest64"

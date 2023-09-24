@@ -13,6 +13,7 @@ open import elementary-number-theory.divisibility-standard-finite-types
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
