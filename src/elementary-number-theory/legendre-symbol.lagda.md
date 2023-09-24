@@ -43,8 +43,8 @@ int-is-square-ℤ-Mod (inl _) _ = zero-ℤ
 int-is-square-ℤ-Mod (inr _) (inl _) = one-ℤ
 int-is-square-ℤ-Mod (inr _) (inr _) = neg-one-ℤ
 
-legendre : Prime-ℕ → ℤ → ℤ
-legendre (p , _) a =
+legendre-symbol : Prime-ℕ → ℤ → ℤ
+legendre-symbol (p , _) a =
   int-is-square-ℤ-Mod
     ( has-decidable-equality-ℤ-Mod p (mod-ℤ p a) (zero-ℤ-Mod p))
     ( is-decidable-square-ℤ-Mod p (mod-ℤ p a))
