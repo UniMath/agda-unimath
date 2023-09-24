@@ -47,6 +47,7 @@ open import trees.underlying-trees-elements-coalgebras-polynomial-endofunctors p
 open import trees.underlying-trees-of-elements-of-w-types public
 open import trees.undirected-trees public
 open import trees.universal-multiset public
+open import trees.universal-tree public
 open import trees.w-type-of-natural-numbers public
 open import trees.w-type-of-propositions public
 open import trees.w-types public
