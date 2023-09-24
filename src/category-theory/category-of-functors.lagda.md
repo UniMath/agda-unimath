@@ -17,7 +17,6 @@ open import category-theory.natural-isomorphisms-categories
 open import category-theory.natural-isomorphisms-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors
-open import category-theory.precategory-of-maps-of-precategories
 
 open import foundation.dependent-pair-types
 open import foundation.equivalences

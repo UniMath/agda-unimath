@@ -258,11 +258,11 @@ module _
   (F G : map-Precategory C D)
   where
 
-  compute-iso-map-natural-isomorphism-map-eq-map-Precategory :
+  compute-iso-map-natural-isomorphism-map-eq-Precategory :
     (p : F ＝ G) →
     iso-eq-Precategory (map-precategory-Precategory C D) F G p ＝
     iso-map-natural-isomorphism-map-Precategory C D F G
-      ( natural-isomorphism-map-eq-map-Precategory C D F G p)
-  compute-iso-map-natural-isomorphism-map-eq-map-Precategory refl =
+      ( natural-isomorphism-map-eq-Precategory C D F G p)
+  compute-iso-map-natural-isomorphism-map-eq-Precategory refl =
     eq-iso-eq-hom-Precategory (map-precategory-Precategory C D) _ _ refl
 ```

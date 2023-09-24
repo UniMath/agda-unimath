@@ -23,7 +23,6 @@ A square of morphisms
   x ------> y
   |         |
   |         |
-  |         |
   V         V
   z ------> w
 ```

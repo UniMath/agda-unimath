@@ -12,7 +12,6 @@ open import category-theory.isomorphisms-in-precategories
 open import category-theory.natural-isomorphisms-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.precategories
-open import category-theory.precategory-of-maps-of-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types

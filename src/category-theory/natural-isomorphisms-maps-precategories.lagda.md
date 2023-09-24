@@ -246,10 +246,10 @@ module _
   (D : Precategory l3 l4)
   where
 
-  natural-isomorphism-map-eq-map-Precategory :
+  natural-isomorphism-map-eq-Precategory :
     (F G : map-Precategory C D) →
     F ＝ G → natural-isomorphism-map-Precategory C D F G
-  natural-isomorphism-map-eq-map-Precategory F .F refl =
+  natural-isomorphism-map-eq-Precategory F .F refl =
     id-natural-isomorphism-map-Precategory C D F
 ```
 
@@ -774,14 +774,14 @@ module _
   (F G H : map-Precategory C D)
   where
 
-  preserves-concat-natural-isomorphism-map-eq-map-Precategory :
+  preserves-concat-natural-isomorphism-map-eq-Precategory :
     (p : F ＝ G) (q : G ＝ H) →
-    natural-isomorphism-map-eq-map-Precategory C D F H (p ∙ q) ＝
+    natural-isomorphism-map-eq-Precategory C D F H (p ∙ q) ＝
     comp-natural-isomorphism-map-Precategory C D F G H
-      ( natural-isomorphism-map-eq-map-Precategory C D G H q)
-      ( natural-isomorphism-map-eq-map-Precategory C D F G p)
-  preserves-concat-natural-isomorphism-map-eq-map-Precategory refl q =
+      ( natural-isomorphism-map-eq-Precategory C D G H q)
+      ( natural-isomorphism-map-eq-Precategory C D F G p)
+  preserves-concat-natural-isomorphism-map-eq-Precategory refl q =
     inv
       ( right-unit-law-comp-natural-isomorphism-map-Precategory C D F H
-        ( natural-isomorphism-map-eq-map-Precategory C D G H q))
+        ( natural-isomorphism-map-eq-Precategory C D G H q))
 ```

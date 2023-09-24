@@ -116,7 +116,7 @@ module _
           ( extensionality-map-is-category-Precategory C D is-category-D F G))
         ( λ
           { refl →
-            compute-iso-map-natural-isomorphism-map-eq-map-Precategory
+            compute-iso-map-natural-isomorphism-map-eq-Precategory
               C D F G refl})
 ```
 
