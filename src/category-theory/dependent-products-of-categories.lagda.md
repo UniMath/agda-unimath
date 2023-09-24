@@ -42,9 +42,9 @@ module _
   precategory-Π-Category = Π-Precategory I (precategory-Category ∘ C)
 
   abstract
-    is-category-precategory-Π-Category :
+    is-category-Π-Category :
       is-category-Precategory precategory-Π-Category
-    is-category-precategory-Π-Category x y =
+    is-category-Π-Category x y =
       is-equiv-htpy-equiv
         ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
           equiv-Π-equiv-family
@@ -54,7 +54,7 @@ module _
 
   Π-Category : Category (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Category = Π-Precategory I (precategory-Category ∘ C)
-  pr2 Π-Category = is-category-precategory-Π-Category
+  pr2 Π-Category = is-category-Π-Category
 
   obj-Π-Category : UU (l1 ⊔ l2)
   obj-Π-Category = obj-Category Π-Category
