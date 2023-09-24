@@ -50,12 +50,6 @@ double-ℕ x = 2 *ℕ x
 
 triple-ℕ : ℕ → ℕ
 triple-ℕ x = 3 *ℕ x
-
-square-ℕ : ℕ → ℕ
-square-ℕ x = x *ℕ x
-
-cube-ℕ : ℕ → ℕ
-cube-ℕ x = (square-ℕ x) *ℕ x
 ```
 
 ## Properties
@@ -95,13 +89,6 @@ abstract
     ( ( ap (λ t → succ-ℕ (t +ℕ y)) (right-successor-law-mul-ℕ x y)) ∙
       ( ap succ-ℕ (associative-add-ℕ x (x *ℕ y) y))) ∙
     ( inv (left-successor-law-add-ℕ x ((x *ℕ y) +ℕ y)))
-
-square-succ-ℕ :
-  (k : ℕ) →
-  square-ℕ (succ-ℕ k) ＝ succ-ℕ ((succ-ℕ (succ-ℕ k)) *ℕ k)
-square-succ-ℕ k =
-  ( right-successor-law-mul-ℕ (succ-ℕ k) k) ∙
-  ( commutative-add-ℕ (succ-ℕ k) ((succ-ℕ k) *ℕ k))
 
 abstract
   commutative-mul-ℕ :

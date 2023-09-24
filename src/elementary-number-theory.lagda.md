@@ -66,6 +66,7 @@ open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
 open import elementary-number-theory.kolakoski-sequence public
+open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
@@ -105,6 +106,9 @@ open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.rings-of-modular-arithmetic public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
+open import elementary-number-theory.squares-integers public
+open import elementary-number-theory.squares-modular-arithmetic public
+open import elementary-number-theory.squares-natural-numbers public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public
 open import elementary-number-theory.strict-inequality-natural-numbers public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public
