@@ -259,8 +259,8 @@ module _
               (Slice-Precategory C A) (p₂ , α₂) k ＝ (h₂ , β₂)))
       q k =
         is-prop-prod
-          ( is-set-type-Set (hom-set-Slice-Precategory C A _ _) _ _)
-          ( is-set-type-Set (hom-set-Slice-Precategory C A _ _) _ _)
+          ( is-set-hom-Slice-Precategory C A _ _ _ _)
+          ( is-set-hom-Slice-Precategory C A _ _ _ _)
 
       σ :
         ∀ k →
@@ -325,8 +325,8 @@ module _
           ( comp-hom-Precategory C p₂ k' ＝ p₂'))
       q k' =
         is-prop-prod
-          ( is-set-type-Set (hom-set-Precategory C _ _) _ _)
-          ( is-set-type-Set (hom-set-Precategory C _ _) _ _)
+          ( is-set-hom-Precategory C _ _ _ _)
+          ( is-set-hom-Precategory C _ _ _ _)
 
       σ :
         ( k' : hom-Precategory C W' W) →

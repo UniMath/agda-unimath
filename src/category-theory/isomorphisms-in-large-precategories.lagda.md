@@ -143,7 +143,7 @@ module _
 ### Equalities give rise to isomorphisms
 
 An equality between objects `X Y : A` gives rise to an isomorphism between them.
-This is because by the J-rule, it is enough to construct an isomorphism given
+This is because, by the J-rule, it is enough to construct an isomorphism given
 `refl : X ＝ X`, from `X` to itself. We take the identity morphism as such an
 isomorphism.
 

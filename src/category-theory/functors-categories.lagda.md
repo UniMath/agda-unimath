@@ -29,7 +29,7 @@ A **functor** between two [categories](category-theory.categories.md) is a
 
 ## Definition
 
-### The predicate of being a functor on maps between Categories
+### The predicate of being a functor on maps between categories
 
 ```agda
 module _

@@ -39,7 +39,7 @@ precategory `D` consists of:
 
 ## Definition
 
-### The predicate of being a functor on maps between Precategories
+### The predicate of being a functor on maps between precategories
 
 ```agda
 module _

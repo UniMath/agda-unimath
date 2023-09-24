@@ -734,7 +734,7 @@ module _
           C D F G f)
 ```
 
-### When the type of natural transformations is a proposition, The type of natural isomorphisms is a proposition
+### When the type of natural transformations is a proposition, the type of natural isomorphisms is a proposition
 
 The type of natural isomorphisms between maps `F` and `G` is a subtype of
 `natural-transformation F G`, so when this type is a proposition, then the type

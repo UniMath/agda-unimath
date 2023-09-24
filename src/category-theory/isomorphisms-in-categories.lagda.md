@@ -542,7 +542,7 @@ module _
       ( precategory-Category C) H
 ```
 
-### When `hom x y` is a proposition, The type of isomorphisms from `x` to `y` is a proposition
+### When `hom x y` is a proposition, the type of isomorphisms from `x` to `y` is a proposition
 
 The type of isomorphisms between objects `x y : A` is a subtype of `hom x y`, so
 when this type is a proposition, then the type of isomorphisms from `x` to `y`

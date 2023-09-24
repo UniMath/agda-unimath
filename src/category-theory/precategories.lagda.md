@@ -138,7 +138,7 @@ module _
     pr2 (pr2 is-unital-composition-structure-Precategory)
 ```
 
-### The total hom-type of a Precategory
+### The total hom-type of a precategory
 
 ```agda
 total-hom-Precategory :
