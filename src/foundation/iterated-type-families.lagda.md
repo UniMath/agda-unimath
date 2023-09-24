@@ -27,7 +27,7 @@ An **iterated type family** is a sequence of type families
 - a type family `A₁ : A₀ → 𝒰`,
 - a type family `A₂ : (x₀ : A₀) → A₁ x₀ → 𝒰`,
 - ...
-- a type family `An : (x0 : A₀) ... (x*(n-1) : A*(n-1) x₀ ... x\_(n-2)) → 𝒰.
+- a type family `An : (x0 : A₀) ... (x*(n-1) : A*(n-1) x₀ ... x\_(n-2)) → 𝒰`.
 
 We say that an iterated type family `(A₀,...,A_n)` has **depth** `n+1`. In other
 words, the depth of the iterated type family `(A₀,...,A_n)` is the length of the
