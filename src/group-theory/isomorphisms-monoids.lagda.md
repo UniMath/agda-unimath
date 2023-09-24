@@ -39,36 +39,36 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
-  is-iso-hom-Monoid : UU (l1 ⊔ l2)
-  is-iso-hom-Monoid =
-    is-iso-hom-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N} f
+  is-iso-Monoid : UU (l1 ⊔ l2)
+  is-iso-Monoid =
+    is-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N} f
 
-  hom-inv-is-iso-hom-Monoid :
-    is-iso-hom-Monoid → hom-Monoid N M
-  hom-inv-is-iso-hom-Monoid =
-    hom-inv-is-iso-hom-Large-Precategory
+  hom-inv-is-iso-Monoid :
+    is-iso-Monoid → hom-Monoid N M
+  hom-inv-is-iso-Monoid =
+    hom-inv-is-iso-Large-Precategory
       ( Monoid-Large-Precategory)
       { X = M}
       { Y = N}
       ( f)
 
-  is-section-hom-inv-is-iso-hom-Monoid :
-    (H : is-iso-hom-Monoid) →
-    comp-hom-Monoid N M N f (hom-inv-is-iso-hom-Monoid H) ＝
+  is-section-hom-inv-is-iso-Monoid :
+    (H : is-iso-Monoid) →
+    comp-hom-Monoid N M N f (hom-inv-is-iso-Monoid H) ＝
     id-hom-Monoid N
-  is-section-hom-inv-is-iso-hom-Monoid =
-    is-section-hom-inv-is-iso-hom-Large-Precategory
+  is-section-hom-inv-is-iso-Monoid =
+    is-section-hom-inv-is-iso-Large-Precategory
       ( Monoid-Large-Precategory)
       { X = M}
       { Y = N}
       ( f)
 
-  is-retraction-hom-inv-is-iso-hom-Monoid :
-    (H : is-iso-hom-Monoid) →
-    comp-hom-Monoid M N M (hom-inv-is-iso-hom-Monoid H) f ＝
+  is-retraction-hom-inv-is-iso-Monoid :
+    (H : is-iso-Monoid) →
+    comp-hom-Monoid M N M (hom-inv-is-iso-Monoid H) f ＝
     id-hom-Monoid M
-  is-retraction-hom-inv-is-iso-hom-Monoid =
-    is-retraction-hom-inv-is-iso-hom-Large-Precategory
+  is-retraction-hom-inv-is-iso-Monoid =
+    is-retraction-hom-inv-is-iso-Large-Precategory
       ( Monoid-Large-Precategory)
       { X = M}
       { Y = N}
@@ -104,9 +104,9 @@ module _
 
   is-iso-iso-Monoid :
     (f : iso-Monoid) →
-    is-iso-hom-Monoid M N (hom-iso-Monoid f)
+    is-iso-Monoid M N (hom-iso-Monoid f)
   is-iso-iso-Monoid =
-    is-iso-hom-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
+    is-iso-iso-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 
   hom-inv-iso-Monoid :
     iso-Monoid → hom-Monoid N M
@@ -174,7 +174,7 @@ module _
   where
 
   is-iso-id-hom-Monoid :
-    is-iso-hom-Monoid M M (id-hom-Monoid M)
+    is-iso-Monoid M M (id-hom-Monoid M)
   is-iso-id-hom-Monoid =
     is-iso-id-hom-Large-Precategory
       ( Monoid-Large-Precategory)
@@ -214,18 +214,18 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2)
   where
 
-  is-prop-is-iso-hom-Monoid :
+  is-prop-is-iso-Monoid :
     (f : hom-Monoid M N) →
-    is-prop (is-iso-hom-Monoid M N f)
-  is-prop-is-iso-hom-Monoid =
-    is-prop-is-iso-hom-Large-Precategory
+    is-prop (is-iso-Monoid M N f)
+  is-prop-is-iso-Monoid =
+    is-prop-is-iso-Large-Precategory
       ( Monoid-Large-Precategory)
       { X = M}
       { Y = N}
-  is-iso-prop-hom-Monoid :
+  is-iso-prop-Monoid :
     (f : hom-Monoid M N) → Prop (l1 ⊔ l2)
-  is-iso-prop-hom-Monoid =
-    is-iso-prop-hom-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
+  is-iso-prop-Monoid =
+    is-iso-prop-Large-Precategory Monoid-Large-Precategory {X = M} {Y = N}
 ```
 
 ### The type of isomorphisms form a set
@@ -266,7 +266,7 @@ module _
       ( f)
 
   is-iso-comp-iso-Monoid :
-    is-iso-hom-Monoid M K hom-comp-iso-Monoid
+    is-iso-Monoid M K hom-comp-iso-Monoid
   is-iso-comp-iso-Monoid =
     is-iso-comp-iso-Large-Precategory
       ( Monoid-Large-Precategory)
@@ -295,9 +295,9 @@ module _
   where
 
   is-iso-inv-iso-Monoid :
-    is-iso-hom-Monoid N M (hom-inv-iso-Monoid M N f)
+    is-iso-Monoid N M (hom-inv-iso-Monoid M N f)
   is-iso-inv-iso-Monoid =
-    is-iso-inv-is-iso-hom-Large-Precategory
+    is-iso-inv-is-iso-Large-Precategory
       ( Monoid-Large-Precategory)
       { X = M}
       { Y = N}

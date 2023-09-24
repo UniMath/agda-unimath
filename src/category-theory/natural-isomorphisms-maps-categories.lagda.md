@@ -99,7 +99,7 @@ module _
     (x : obj-Category C) →
     comp-hom-Category D
       ( hom-family-natural-transformation-map-Category C D F G f x)
-      ( hom-inv-is-iso-hom-Category D (is-iso-f x)) ＝
+      ( hom-inv-is-iso-Category D (is-iso-f x)) ＝
     id-hom-Category D
   is-section-hom-inv-family-is-natural-isomorphism-map-Category =
     is-section-hom-inv-family-is-natural-isomorphism-map-Precategory
@@ -113,7 +113,7 @@ module _
     (is-iso-f : is-natural-isomorphism-map-Category C D F G f) →
     (x : obj-Category C) →
     comp-hom-Category D
-      ( hom-inv-is-iso-hom-Category D (is-iso-f x))
+      ( hom-inv-is-iso-Category D (is-iso-f x))
       ( hom-family-natural-transformation-map-Category C D F G f x) ＝
     id-hom-Category D
   is-retraction-hom-inv-family-is-natural-isomorphism-map-Category =
@@ -421,7 +421,7 @@ module _
   is-section-natural-transformation-map-inv-is-natural-isomorphism-map-Category
     is-iso-f =
     eq-htpy-hom-family-natural-transformation-map-Category C D G G _ _
-      ( is-section-hom-inv-is-iso-hom-Category D ∘ is-iso-f)
+      ( is-section-hom-inv-is-iso-Category D ∘ is-iso-f)
 
   is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Category :
     (is-iso-f : is-natural-isomorphism-map-Category C D F G f) →
@@ -433,7 +433,7 @@ module _
   is-retraction-natural-transformation-map-inv-is-natural-isomorphism-map-Category
     is-iso-f =
     eq-htpy-hom-family-natural-transformation-map-Category C D F F _ _
-      ( is-retraction-hom-inv-is-iso-hom-Category D ∘ is-iso-f)
+      ( is-retraction-hom-inv-is-iso-Category D ∘ is-iso-f)
 
   is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Category :
     (is-iso-f : is-natural-isomorphism-map-Category C D F G f) →
@@ -441,7 +441,7 @@ module _
       ( natural-transformation-map-inv-is-natural-isomorphism-map-Category
         ( is-iso-f))
   is-natural-isomorphism-map-inv-is-natural-isomorphism-map-Category is-iso-f =
-    is-iso-inv-is-iso-hom-Category D ∘ is-iso-f
+    is-iso-inv-is-iso-Category D ∘ is-iso-f
 ```
 
 ### Inverses of natural isomorphisms
@@ -520,7 +520,7 @@ module _
       ( comp-natural-transformation-map-Category C D F G H g f)
   is-natural-isomorphism-map-comp-is-natural-isomorphism-map-Category
     is-iso-g is-iso-f x =
-      is-iso-comp-is-iso-hom-Category D (is-iso-g x) (is-iso-f x)
+      is-iso-comp-is-iso-Category D (is-iso-g x) (is-iso-f x)
 ```
 
 ### The composition operation on natural isomorphisms

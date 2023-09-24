@@ -578,8 +578,8 @@ module _
       ( is-emb-ev-element-Group-With-Generating-Element G
         ( group-Group-With-Generating-Element G))
 
-  is-iso-hom-ev-element-Group-With-Generating-Element :
-    is-iso-hom-Ab
+  is-iso-ev-element-Group-With-Generating-Element :
+    is-iso-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G))
@@ -588,7 +588,7 @@ module _
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G)
         ( element-Group-With-Generating-Element G))
-  is-iso-hom-ev-element-Group-With-Generating-Element =
+  is-iso-ev-element-Group-With-Generating-Element =
     is-iso-is-equiv-hom-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
@@ -612,7 +612,7 @@ module _
       ( abelian-group-Group-With-Generating-Element G)
       ( element-Group-With-Generating-Element G)
   pr2 iso-ev-element-Group-With-Generating-Element =
-    is-iso-hom-ev-element-Group-With-Generating-Element
+    is-iso-ev-element-Group-With-Generating-Element
 ```
 
 ### Groups equipped with generating elements are commutative rings

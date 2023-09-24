@@ -197,7 +197,7 @@ is-equiv-up-localization-up-localization-Ring :
   (h : hom-set-Ring S T) (H : htpy-hom-Ring R T (comp-hom-Ring R S T h f) g) →
   ({l : Level} → universal-property-localization-Ring l R S x f inverts-f) →
   ({l : Level} → universal-property-localization-Ring l R T x g inverts-g) →
-  is-iso-hom-Ring S T h
+  is-iso-Ring S T h
 is-equiv-up-localization-up-localization-Ring
   R S T x f inverts-f g inverts-g h H up-f up-g = {!is-iso-is-equiv-hom-Ring!}
 -}

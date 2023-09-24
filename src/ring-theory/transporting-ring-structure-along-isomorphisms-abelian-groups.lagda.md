@@ -163,17 +163,17 @@ module _
   pr2 (pr2 hom-iso-transport-ring-structure-iso-Ab) =
     refl
 
-  is-iso-hom-iso-transport-ring-structure-iso-Ab :
-    is-iso-hom-Ring
+  is-iso-iso-transport-ring-structure-iso-Ab :
+    is-iso-Ring
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-transport-ring-structure-iso-Ab)
-  is-iso-hom-iso-transport-ring-structure-iso-Ab =
-    is-iso-hom-ring-is-iso-hom-Ab
+  is-iso-iso-transport-ring-structure-iso-Ab =
+    is-iso-ring-is-iso-Ab
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-transport-ring-structure-iso-Ab)
-      ( is-iso-hom-iso-Ab (ab-Ring R) A f)
+      ( is-iso-iso-Ab (ab-Ring R) A f)
 
   iso-transport-ring-structure-iso-Ab :
     iso-Ring R transport-ring-structure-iso-Ab
@@ -183,5 +183,5 @@ module _
   pr2 (pr2 (pr1 iso-transport-ring-structure-iso-Ab)) =
     refl
   pr2 iso-transport-ring-structure-iso-Ab =
-    is-iso-hom-iso-transport-ring-structure-iso-Ab
+    is-iso-iso-transport-ring-structure-iso-Ab
 ```
