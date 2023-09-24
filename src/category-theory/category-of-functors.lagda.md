@@ -8,14 +8,14 @@ module category-theory.category-of-functors where
 
 ```agda
 open import category-theory.categories
-open import category-theory.isomorphisms-in-categories
 open import category-theory.category-of-maps-of-categories
-open import category-theory.functors-precategories
 open import category-theory.functors-categories
-open import category-theory.natural-isomorphisms-precategories
-open import category-theory.natural-isomorphisms-categories
-open import category-theory.precategories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.maps-precategories
+open import category-theory.natural-isomorphisms-categories
+open import category-theory.natural-isomorphisms-precategories
+open import category-theory.precategories
 open import category-theory.precategory-of-functors
 open import category-theory.precategory-of-maps-of-precategories
 

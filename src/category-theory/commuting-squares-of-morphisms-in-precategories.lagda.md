@@ -28,8 +28,9 @@ A square of morphisms
   z ------> w
 ```
 
-is said to **commute** in if there is an
-[identification](foundation-core.identity-types.md) between both composites.
+is said to **commute** in a [precategory](category-theory.precategories.md) `C`
+if there is an [identification](foundation-core.identity-types.md) between both
+composites.
 
 ## Definitions
 

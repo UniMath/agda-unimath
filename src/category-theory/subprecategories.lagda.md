@@ -15,6 +15,7 @@ open import category-theory.precategories
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.embeddings
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -62,8 +63,8 @@ module _
   pr2 contains-id-prop-subtype-Precategory =
     is-prop-contains-id-subtype-Precategory
 
-  contains-comp-subtype-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  contains-comp-subtype-Precategory =
+  is-closed-under-composition-subtype-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  is-closed-under-composition-subtype-Precategory =
     (x y z : obj-Precategory C) →
     (g : hom-Precategory C y z) →
     (f : hom-Precategory C x y) →
@@ -74,17 +75,19 @@ module _
     is-in-subtype (P₁ x y) f →
     is-in-subtype (P₁ x z) (comp-hom-Precategory C g f)
 
-  is-prop-contains-comp-subtype-Precategory :
-    is-prop contains-comp-subtype-Precategory
-  is-prop-contains-comp-subtype-Precategory =
+  is-prop-is-closed-under-composition-subtype-Precategory :
+    is-prop is-closed-under-composition-subtype-Precategory
+  is-prop-is-closed-under-composition-subtype-Precategory =
     is-prop-Π¹⁰
       ( λ x y z g f _ _ _ _ _ →
         is-prop-is-in-subtype (P₁ x z) (comp-hom-Precategory C g f))
 
-  contains-comp-prop-subtype-Precategory : Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  pr1 contains-comp-prop-subtype-Precategory = contains-comp-subtype-Precategory
-  pr2 contains-comp-prop-subtype-Precategory =
-    is-prop-contains-comp-subtype-Precategory
+  is-closed-under-composition-prop-subtype-Precategory :
+    Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  pr1 is-closed-under-composition-prop-subtype-Precategory =
+    is-closed-under-composition-subtype-Precategory
+  pr2 is-closed-under-composition-prop-subtype-Precategory =
+    is-prop-is-closed-under-composition-subtype-Precategory
 ```
 
 ### The predicate of being a subprecategory
@@ -101,7 +104,7 @@ module _
   is-subprecategory-Prop =
     prod-Prop
       ( contains-id-prop-subtype-Precategory C P₀ P₁)
-      ( contains-comp-prop-subtype-Precategory C P₀ P₁)
+      ( is-closed-under-composition-prop-subtype-Precategory C P₀ P₁)
 
   is-subprecategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-subprecategory = type-Prop is-subprecategory-Prop
@@ -113,9 +116,9 @@ module _
     is-subprecategory → contains-id-subtype-Precategory C P₀ P₁
   contains-id-is-subprecategory = pr1
 
-  contains-comp-is-subprecategory :
-    is-subprecategory → contains-comp-subtype-Precategory C P₀ P₁
-  contains-comp-is-subprecategory = pr2
+  is-closed-under-composition-is-subprecategory :
+    is-subprecategory → is-closed-under-composition-subtype-Precategory C P₀ P₁
+  is-closed-under-composition-is-subprecategory = pr2
 ```
 
 ### Subprecategories
@@ -208,12 +211,12 @@ module _
       ( subtype-hom-Subprecategory)
       ( is-subprecategory-Subprecategory)
 
-  contains-comp-Subprecategory :
-    contains-comp-subtype-Precategory C
+  is-closed-under-composition-Subprecategory :
+    is-closed-under-composition-subtype-Precategory C
       ( subtype-obj-Subprecategory)
       ( subtype-hom-Subprecategory)
-  contains-comp-Subprecategory =
-    contains-comp-is-subprecategory C
+  is-closed-under-composition-Subprecategory =
+    is-closed-under-composition-is-subprecategory C
       ( subtype-obj-Subprecategory)
       ( subtype-hom-Subprecategory)
       ( is-subprecategory-Subprecategory)
@@ -260,7 +263,7 @@ module _
       ( inclusion-hom-Subprecategory C P y z g)
       ( inclusion-hom-Subprecategory C P x y f)
   pr2 (comp-hom-Subprecategory {x} {y} {z} g f) =
-    contains-comp-Subprecategory C P
+    is-closed-under-composition-Subprecategory C P
       ( inclusion-obj-Subprecategory C P x)
       ( inclusion-obj-Subprecategory C P y)
       ( inclusion-obj-Subprecategory C P z)
@@ -378,7 +381,7 @@ module _
 
 ## Properties
 
-### The inclusion functor is faithful
+### The inclusion functor is faithful and an embedding on objects
 
 ```agda
 module _
@@ -405,4 +408,13 @@ module _
       ( inclusion-functor-Subprecategory C P)
   is-faithful-inclusion-functor-Precategory =
     is-faithful-inclusion-map-Precategory
+
+  is-emb-obj-inclusion-functor-Precategory :
+    is-emb
+      ( obj-functor-Precategory
+        ( precategory-Subprecategory C P)
+        ( C)
+        ( inclusion-functor-Subprecategory C P))
+  is-emb-obj-inclusion-functor-Precategory =
+    is-emb-inclusion-subtype (subtype-obj-Subprecategory C P)
 ```
