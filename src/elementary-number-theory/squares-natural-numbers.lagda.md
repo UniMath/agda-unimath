@@ -75,7 +75,6 @@ square-succ-succ-ℕ n =
       ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n} {2 *ℕ (n +ℕ 2)}
         ( refl)
         ( left-distributive-mul-add-ℕ 2 n 2))
-  
 ```
 
 ### `n > √n` for `n > 1`
