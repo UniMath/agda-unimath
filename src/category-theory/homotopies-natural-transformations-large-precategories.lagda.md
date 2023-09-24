@@ -20,7 +20,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Two [natural transformations](natural-transformations-large-precategories.md)
+Two
+[natural transformations](category-theory.natural-transformations-large-precategories.md)
 `α β : F ⇒ G` are **homotopic** if for every object `x` there is an
 [identification](foundation-core.identity-types.md) `α x ＝ β x`.
 

@@ -167,4 +167,4 @@ pr2 representing-arrow-Category = is-category-representing-arrow
 ### The representing arrow represents arrows in a category
 
 This is a consequence of the
-[Yoneda lemma](category-theory.yoneda-lemma-categories).
+[Yoneda lemma](category-theory.yoneda-lemma-categories.md).

@@ -30,7 +30,7 @@ open import foundation.universe-levels
 
 [Functors](category-theory.functors-categories.md) between
 [categories](category-theory.categories.md) and
-[natural transformations](category-theory.natural-transformations-functors-categories.md)
+[natural transformations](category-theory.natural-transformations-categories.md)
 between them assemble to a new category whose identity functor and composition
 structure are inherited pointwise from the codomain category. This is called the
 **category of functors**.

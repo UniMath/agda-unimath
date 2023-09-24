@@ -25,9 +25,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subprecategory** of a [precategory](category-theory.large-precategories.md)
-`C` consists of a subtype `P₀` of the objects of `C`, and a family of subtypes
-`P₁`
+A **subprecategory** of a [precategory](category-theory.precategories.md) `C`
+consists of a [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`,
+and a family of subtypes `P₁`
 
 ```text
   P₁ : (X Y : obj C) → P₀ X → P₀ Y → subtype (hom X Y)

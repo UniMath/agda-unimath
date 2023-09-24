@@ -31,7 +31,7 @@ open import foundation.universe-levels
 
 Given [precategories](category-theory.precategories.md) `C` and `D`, a **natural
 transformation** from a
-[map of precategories](category-theory.map-precategories.md) `F : C → D` to
+[map of precategories](category-theory.maps-precategories.md) `F : C → D` to
 `G : C → D` consists of :
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
