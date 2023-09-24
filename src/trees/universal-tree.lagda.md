@@ -18,7 +18,7 @@ open import foundation.universe-levels
 ## Idea
 
 The universal tree is the coinductive type associated to the
-[polynomial endofunctor](trees.polynomial-endofunctos.md)
+[polynomial endofunctor](trees.polynomial-endofunctors.md)
 
 ```text
   X ↦ Σ 𝒰 (λ T → Xᵀ).
