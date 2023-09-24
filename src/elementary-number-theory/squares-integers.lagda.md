@@ -1,4 +1,4 @@
-# Squares in the Integers
+# Squares in the integers
 
 ```agda
 module elementary-number-theory.squares-integers where
@@ -56,7 +56,7 @@ is-decidable-nonnegative-square-ℤ :
 is-decidable-nonnegative-square-ℤ _ (inl x) = is-nonnegative-mul-ℤ x x
 is-decidable-nonnegative-square-ℤ a (inr x) =
   tr
-    is-nonnegative-ℤ
+    ( is-nonnegative-ℤ)
     ( double-negative-law-mul-ℤ a a)
     ( is-nonnegative-mul-ℤ x x)
 
@@ -70,15 +70,13 @@ is-nonnegative-square-ℤ a =
 ```agda
 is-square-int-if-is-square-nat : {n : ℕ} → is-square-ℕ n → is-square-ℤ (int-ℕ n)
 is-square-int-if-is-square-nat (root , pf-square) =
-  ( pair
-    ( int-ℕ root)
+  ( ( int-ℕ root) ,
     ( ( ap int-ℕ pf-square) ∙
       ( inv (mul-int-ℕ root root))))
 
 is-square-nat-if-is-square-int : {a : ℤ} → is-square-ℤ a → is-square-ℕ (abs-ℤ a)
 is-square-nat-if-is-square-int (root , pf-square) =
-  ( pair
-    ( abs-ℤ root)
+  ( ( abs-ℤ root) ,
     ( ( ap abs-ℤ pf-square) ∙
       ( multiplicative-abs-ℤ root root)))
 
@@ -91,12 +89,10 @@ pr2 (is-nat-square-iff-is-int-square n) H =
 is-int-square-iff-nonneg-nat-square :
   (a : ℤ) → is-square-ℤ a ↔ is-nonnegative-ℤ a × is-square-ℕ (abs-ℤ a)
 pr1 (is-int-square-iff-nonneg-nat-square a) (root , pf-square) =
-  ( pair
-    ( tr is-nonnegative-ℤ (inv pf-square) (is-nonnegative-square-ℤ root))
+  ( ( tr is-nonnegative-ℤ (inv pf-square) (is-nonnegative-square-ℤ root)) ,
     ( is-square-nat-if-is-square-int (root , pf-square)))
 pr2 (is-int-square-iff-nonneg-nat-square a) (pf-nonneg , (root , pf-square)) =
-  ( pair
-    ( int-ℕ root)
+  ( ( int-ℕ root) ,
     ( ( inv (int-abs-is-nonnegative-ℤ a pf-nonneg)) ∙
       ( pr2 (is-square-int-if-is-square-nat (root , pf-square)))))
 ```

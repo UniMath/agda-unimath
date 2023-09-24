@@ -1,4 +1,4 @@
-# Squares in the Natural Numbers
+# Squares in the natural numbers
 
 ```agda
 module elementary-number-theory.squares-natural-numbers where
@@ -51,14 +51,34 @@ square-root-ℕ _ (root , _) = root
 
 ```agda
 square-succ-ℕ :
-  (k : ℕ) →
-  square-ℕ (succ-ℕ k) ＝ succ-ℕ ((succ-ℕ (succ-ℕ k)) *ℕ k)
-square-succ-ℕ k =
-  ( right-successor-law-mul-ℕ (succ-ℕ k) k) ∙
-  ( commutative-add-ℕ (succ-ℕ k) ((succ-ℕ k) *ℕ k))
+  (n : ℕ) →
+  square-ℕ (succ-ℕ n) ＝ succ-ℕ ((succ-ℕ (succ-ℕ n)) *ℕ n)
+square-succ-ℕ n =
+  ( right-successor-law-mul-ℕ (succ-ℕ n) n) ∙
+  ( commutative-add-ℕ (succ-ℕ n) ((succ-ℕ n) *ℕ n))
+
+square-succ-succ-ℕ :
+  (n : ℕ) →
+  square-ℕ (succ-ℕ (succ-ℕ n)) ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 2 *ℕ n +ℕ 4
+square-succ-succ-ℕ n =
+  equational-reasoning
+  square-ℕ (n +ℕ 2)
+  ＝ (n +ℕ 2) *ℕ n +ℕ (n +ℕ 2) *ℕ 2
+    by (left-distributive-mul-add-ℕ (n +ℕ 2) n 2)
+  ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 2 *ℕ (n +ℕ 2)
+    by
+      ( ap-add-ℕ {(n +ℕ 2) *ℕ n} {(n +ℕ 2) *ℕ 2}
+        ( right-distributive-mul-add-ℕ n 2 n)
+        ( commutative-mul-ℕ (n +ℕ 2) 2))
+  ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 2 *ℕ n +ℕ 4
+    by
+      ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n} {2 *ℕ (n +ℕ 2)}
+        ( refl)
+        ( left-distributive-mul-add-ℕ 2 n 2))
+  
 ```
 
-### n > √n for n > 1
+### `n > √n` for `n > 1`
 
 The idea is to assume `n = m + 2 ≤ sqrt(m + 2)` for some `m : ℕ` and derive a
 contradiction by squaring both sides of the inequality
@@ -69,71 +89,51 @@ greater-than-square-root-ℕ :
 greater-than-square-root-ℕ n root (pf-leq , pf-eq) =
   reflects-order-add-ℕ
     ( square-ℕ root)
-    ( n *ℕ (n +ℕ 2) +ℕ n +ℕ 2)
+    ( square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2)
     0
     ( tr
-      ( leq-ℕ (n *ℕ (n +ℕ 2) +ℕ n +ℕ 2 +ℕ square-ℕ root))
+      ( leq-ℕ (square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ square-ℕ root))
       ( inv (left-unit-law-add-ℕ (square-ℕ root)))
       ( concatenate-eq-leq-ℕ
         ( square-ℕ root)
         ( inv
-          ( helper ∙
-            ( ap
-              ( add-ℕ (n *ℕ (n +ℕ 2) +ℕ n +ℕ 2))
-              pf-eq)))
+          ( lemma ∙
+            ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2} {n +ℕ 2}
+              ( refl)
+              ( pf-eq))))
         ( preserves-leq-mul-ℕ (n +ℕ 2) root (n +ℕ 2) root pf-leq pf-leq)))
   where
-  helper : square-ℕ (n +ℕ 2) ＝ n *ℕ (n +ℕ 2) +ℕ n +ℕ 2 +ℕ n +ℕ 2
-  helper =
+  lemma : square-ℕ (n +ℕ 2) ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ n +ℕ 2
+  lemma =
     equational-reasoning
     square-ℕ (n +ℕ 2)
-    ＝ n *ℕ (n +ℕ 2) +ℕ (2 *ℕ (n +ℕ 2))
-      by (right-distributive-mul-add-ℕ n 2 (n +ℕ 2))
-    ＝ n *ℕ (n +ℕ 2) +ℕ 2 *ℕ n +ℕ 4
+    ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ 2 *ℕ n +ℕ 4
+      by (square-succ-succ-ℕ n)
+    ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ (n +ℕ 2 +ℕ n +ℕ 2)
       by
-        ( ap
-          ( add-ℕ (n *ℕ (n +ℕ 2)))
-          ( left-distributive-mul-add-ℕ 2 n 2))
-    ＝ n *ℕ (n +ℕ 2) +ℕ (n +ℕ 2 +ℕ (n +ℕ 2))
-      by
-        ( ap
-          ( add-ℕ (n *ℕ (n +ℕ 2)))
+        ( ap-add-ℕ {square-ℕ n +ℕ 2 *ℕ n} {2 *ℕ n +ℕ 4}
+          ( refl)
           ( equational-reasoning
             2 *ℕ n +ℕ 4
-            ＝ 4 +ℕ 2 *ℕ n
-              by (commutative-add-ℕ (2 *ℕ n) 4)
-            ＝ 2 +ℕ 2 +ℕ (n +ℕ n)
+            ＝ n +ℕ n +ℕ 2 +ℕ 2
               by
-                ( ap
-                  ( add-ℕ 4)
-                  ( left-two-law-mul-ℕ n))
-            ＝ (2 +ℕ 2 +ℕ n) +ℕ n
-              by
-                ( inv
-                  ( associative-add-ℕ 4 n n))
-            ＝ n +ℕ (2 +ℕ 2 +ℕ n)
-              by (commutative-add-ℕ (2 +ℕ 2 +ℕ n) n)
-            ＝ n +ℕ (2 +ℕ (2 +ℕ n))
-              by
-                ( ap
-                  ( add-ℕ n)
-                  ( associative-add-ℕ 2 2 n))
-            ＝ n +ℕ (2 +ℕ (n +ℕ 2))
-              by
-                ( ap-add-ℕ {n} {2 +ℕ (2 +ℕ n)}
-                  refl
-                  ( ap
-                    ( add-ℕ 2)
-                    ( commutative-add-ℕ 2 n)))
+                ( ap-add-ℕ {2 *ℕ n} {4}
+                  ( left-two-law-mul-ℕ n)
+                  ( refl))
+            ＝ n +ℕ 2 +ℕ 2 +ℕ n
+              by (commutative-add-ℕ n (n +ℕ 2 +ℕ 2))
+            ＝ n +ℕ 2 +ℕ (2 +ℕ n)
+              by (associative-add-ℕ (n +ℕ 2) 2 n)
             ＝ n +ℕ 2 +ℕ (n +ℕ 2)
               by
-                ( inv
-                  ( associative-add-ℕ n 2 (n +ℕ 2)))))
-    ＝ n *ℕ (n +ℕ 2) +ℕ n +ℕ 2 +ℕ (n +ℕ 2)
+                ( ap-add-ℕ {n +ℕ 2} {2 +ℕ n}
+                  ( refl)
+                  ( commutative-add-ℕ 2 n))))
+    ＝ square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ n +ℕ 2
       by
         ( inv
           ( associative-add-ℕ
-            ( n *ℕ (n +ℕ 2))
+            ( square-ℕ n +ℕ 2 *ℕ n)
             ( n +ℕ 2)
             ( n +ℕ 2)))
 ```
