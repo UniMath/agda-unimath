@@ -72,8 +72,15 @@ A **bounded multiset** is a multiset for which a natural bound
 [merely exists](foundation.existential-quantification.md)
 
 ```agda
-Bounded-𝕍 : (l : Level) → UU (lsuc l)
-Bounded-𝕍 l = Σ (𝕍 l) (λ X → ∃ ℕ (λ n → is-of-natural-height-𝕍 n X))
+data
+  Bounded-𝕍 (l : Level) : ℕ → UU (lsuc l)
+  where
+  empty-multiset-Bounded-𝕍 : Bounded-𝕍 l 0
+  tree-multiset-Bounded-𝕍 :
+    {n : ℕ} {X : UU l} (Y : X → Bounded-𝕍 l n) → Bounded-𝕍 l (succ-ℕ n)
+
+Bounded-𝕍' : (l : Level) → UU (lsuc l)
+Bounded-𝕍' l = Σ (𝕍 l) (λ X → ∃ ℕ (λ n → is-of-natural-height-𝕍 n X))
 ```
 
 ## Properties

@@ -9,6 +9,10 @@ module foundation.iterated-type-families where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.identity-types
+open import foundation.unit-type
 open import foundation.universe-levels
 
 open import lists.lists
@@ -49,4 +53,43 @@ tree.
 
 ### Iterated type families
 
-To be defined
+```agda
+data
+  Iterated-Type-Family : (l : Level) → ℕ → UUω
+  where
+  nil-Iterated-Type-Family : Iterated-Type-Family lzero 0
+  base-Iterated-Type-Family :
+    {l1 : Level} → UU l1 → Iterated-Type-Family l1 1
+  cons-Iterated-Type-Family :
+    {l1 l2 : Level} {n : ℕ} {X : UU l1} →
+    (X → Iterated-Type-Family l2 (succ-ℕ n)) →
+    Iterated-Type-Family (l1 ⊔ l2) (succ-ℕ (succ-ℕ n))
+```
+
+### Iterated dependent products of iterated type families
+
+```agda
+Π-Iterated-Type-Family :
+  {l : Level} {n : ℕ} → Iterated-Type-Family l n → UU l
+Π-Iterated-Type-Family nil-Iterated-Type-Family = unit
+Π-Iterated-Type-Family (base-Iterated-Type-Family A) = A
+Π-Iterated-Type-Family (cons-Iterated-Type-Family {X = X} A) =
+  (x : X) → Π-Iterated-Type-Family (A x)
+```
+
+### Testing iterated type families
+
+```agda
+module _
+  {l1 l2 l3 : Level}
+  {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
+  test :
+    Π-Iterated-Type-Family
+      ( cons-Iterated-Type-Family
+        ( λ x → cons-Iterated-Type-Family
+          ( λ y → base-Iterated-Type-Family (C x y)))) ＝
+    ( (x : A) (y : B x) → C x y)
+  test = refl 
+```
