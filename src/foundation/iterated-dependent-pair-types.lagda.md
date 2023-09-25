@@ -70,5 +70,6 @@ iterated-pair :
   {l : Level} {n : ℕ} {A : telescope l n} →
   iterated-element A → iterated-Σ A
 iterated-pair (base-iterated-element x) = x
-iterated-pair (cons-iterated-element x a) = x , iterated-pair a
+pr1 (iterated-pair (cons-iterated-element y a)) = y
+pr2 (iterated-pair (cons-iterated-element y a)) = iterated-pair a
 ```
