@@ -161,7 +161,6 @@ open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
 open import foundation.iterated-dependent-pair-types public
 open import foundation.iterated-dependent-product-types public
-open import foundation.iterated-type-families public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
 open import foundation.iterating-involutions public
@@ -264,6 +263,7 @@ open import foundation.symmetric-cores-binary-relations public
 open import foundation.symmetric-difference public
 open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
+open import foundation.telescopes public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.transport-along-equivalences public

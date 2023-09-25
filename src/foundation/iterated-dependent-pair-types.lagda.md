@@ -10,7 +10,7 @@ module foundation.iterated-dependent-pair-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.iterated-type-families
+open import foundation.telescopes
 open import foundation.universe-levels
 ```
 
@@ -18,10 +18,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given an [iterated family of types](foundation.iterated-type-families.md) `A`,
-the **iterated dependent pair types** of `A` is defined by iteratively taking
-the [dependent pair type](foundation.dependent-pair-types.md) of the types in
-`A`. For example, the iterated dependent pair type of the iterated type family
+**Iterated dependent pair types** are defined by iteratively applying the
+[dependent pair](foundation-core.dependent-pair-types.md) operator `Σ`. More
+formally, `iterated-Σ` is defined as an operation `telescope l n → UU l` from
+the type of [telescopes](foundation.telescopes.md) to the universe of types of
+universe level `l`. For example, the iterated dependent pair type of the
+iterated type family
 
 ```text
   A₀ : 𝒰 l₀
@@ -43,34 +45,29 @@ of universe level `l₀ ⊔ l₁ ⊔ l₂ ⊔ l₃`.
 ### Iterated dependent products of iterated type families
 
 ```agda
-iterated-Σ :
-  {l : Level} {n : ℕ} → iterated-type-family l n → UU l
-iterated-Σ (base-iterated-type-family A) =
-  A
-iterated-Σ (cons-iterated-type-family A) =
-  Σ _ (λ x → iterated-Σ (A x))
+iterated-Σ : {l : Level} {n : ℕ} → telescope l n → UU l
+iterated-Σ (base-telescope A) = A
+iterated-Σ (cons-telescope A) = Σ _ (λ x → iterated-Σ (A x))
 ```
 
 ### Iterated elements of iterated type families
 
 ```agda
 data
-  iterated-element : {l : Level} {n : ℕ} → iterated-type-family l n → UUω
+  iterated-element : {l : Level} {n : ℕ} → telescope l n → UUω
   where
   base-iterated-element :
-    {l1 : Level} {A : UU l1} →
-    A → iterated-element (base-iterated-type-family A)
+    {l1 : Level} {A : UU l1} → A → iterated-element (base-telescope A)
   cons-iterated-element :
-    {l1 l2 : Level} {n : ℕ} {X : UU l1} {Y : X → iterated-type-family l2 n} →
-    (x : X) → iterated-element (Y x) →
-    iterated-element (cons-iterated-type-family Y)
+    {l1 l2 : Level} {n : ℕ} {X : UU l1} {Y : X → telescope l2 n} →
+    (x : X) → iterated-element (Y x) → iterated-element (cons-telescope Y)
 ```
 
 ### Iterated pairing
 
 ```agda
 iterated-pair :
-  {l : Level} {n : ℕ} {A : iterated-type-family l n} →
+  {l : Level} {n : ℕ} {A : telescope l n} →
   iterated-element A → iterated-Σ A
 iterated-pair (base-iterated-element x) = x
 iterated-pair (cons-iterated-element x a) = x , iterated-pair a

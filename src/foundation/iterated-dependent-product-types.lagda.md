@@ -9,7 +9,7 @@ module foundation.iterated-dependent-product-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.iterated-type-families
+open import foundation.telescopes
 open import foundation.universe-levels
 ```
 
@@ -17,10 +17,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given an [iterated family of types](foundation.iterated-type-families.md) `A`,
-the **iterated dependent product** of `A` is defined by iteratively taking the
-dependent product of the types in `A`. For example, the iterated dependent
-product of the iterated type family
+**Iterated dependent products** are defined by iteratively applying the built in
+dependent function type operator. More formally, `iterated-Π` is defined as an
+operation `telescope l n → UU l` from the type of
+[telescopes](foundation.telescopes.md) to the universe of types of universe
+level `l`. For example, the iterated dependent product of the telescope
 
 ```text
   A₀ : 𝒰 l₀
@@ -43,33 +44,29 @@ of universe level `l₀ ⊔ l₁ ⊔ l₂ ⊔ l₃`.
 
 ```agda
 iterated-Π :
-  {l : Level} {n : ℕ} → iterated-type-family l n → UU l
-iterated-Π (base-iterated-type-family A) =
-  A
-iterated-Π (cons-iterated-type-family A) =
-  (x : _) → iterated-Π (A x)
+  {l : Level} {n : ℕ} → telescope l n → UU l
+iterated-Π (base-telescope A) = A
+iterated-Π (cons-telescope A) = (x : _) → iterated-Π (A x)
 ```
 
 ### Iterated sections of type families
 
 ```agda
 data
-  iterated-section : {l : Level} {n : ℕ} → iterated-type-family l n → UUω
+  iterated-section : {l : Level} {n : ℕ} → telescope l n → UUω
   where
   base-iterated-section :
-    {l1 : Level} {A : UU l1} →
-    A → iterated-section (base-iterated-type-family A)
+    {l1 : Level} {A : UU l1} → A → iterated-section (base-telescope A)
   cons-iterated-section :
-    {l1 l2 : Level} {n : ℕ} {X : UU l1} {Y : X → iterated-type-family l2 n} →
-    ((x : X) → iterated-section (Y x)) →
-    iterated-section (cons-iterated-type-family Y)
+    {l1 l2 : Level} {n : ℕ} {X : UU l1} {Y : X → telescope l2 n} →
+    ((x : X) → iterated-section (Y x)) → iterated-section (cons-telescope Y)
 ```
 
 ### Iterated λ-abstractions
 
 ```agda
 iterated-λ :
-  {l : Level} {n : ℕ} {A : iterated-type-family l n} →
+  {l : Level} {n : ℕ} {A : telescope l n} →
   iterated-section A → iterated-Π A
 iterated-λ (base-iterated-section a) = a
 iterated-λ (cons-iterated-section f) x = iterated-λ (f x)
