@@ -50,3 +50,28 @@ iterated-Σ (base-iterated-type-family A) =
 iterated-Σ (cons-iterated-type-family A) =
   Σ _ (λ x → iterated-Σ (A x))
 ```
+
+### Iterated elements of iterated type families
+
+```agda
+data
+  iterated-element : {l : Level} {n : ℕ} → iterated-type-family l n → UUω
+  where
+  base-iterated-element :
+    {l1 : Level} {A : UU l1} →
+    A → iterated-element (base-iterated-type-family A)
+  cons-iterated-element :
+    {l1 l2 : Level} {n : ℕ} {X : UU l1} {Y : X → iterated-type-family l2 n} →
+    (x : X) → iterated-element (Y x) →
+    iterated-element (cons-iterated-type-family Y)
+```
+
+### Iterated pairing
+
+```agda
+iterated-pair :
+  {l : Level} {n : ℕ} {A : iterated-type-family l n} →
+  iterated-element A → iterated-Σ A
+iterated-pair (base-iterated-element x) = x
+iterated-pair (cons-iterated-element x a) = x , iterated-pair a
+```
