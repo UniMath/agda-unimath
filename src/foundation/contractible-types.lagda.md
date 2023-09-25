@@ -9,18 +9,19 @@ open import foundation-core.contractible-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.iterated-dependent-pair-types
 open import foundation.subuniverses
 open import foundation.telescopes
-open import foundation.iterated-dependent-pair-types
 open import foundation.unit-type
-open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 
-open import foundation-core.constant-maps
 open import foundation-core.cartesian-product-types
+open import foundation-core.constant-maps
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -306,7 +307,6 @@ module _
 ### Contractiblity of iterated Σ-types
 
 ```agda
-
 is-contr-Σ-telescope : {l : Level} {n : ℕ} → telescope l n → UU l
 is-contr-Σ-telescope (base-telescope A) = is-contr A
 is-contr-Σ-telescope (cons-telescope A) =
@@ -314,9 +314,9 @@ is-contr-Σ-telescope (cons-telescope A) =
   where X = _
 
 is-contr-iterated-Σ :
-  {l : Level} {n : ℕ} {{A : telescope l n}} →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
   is-contr-Σ-telescope A → is-contr (iterated-Σ A)
-is-contr-iterated-Σ {{base-telescope A}} is-contr-A = is-contr-A
-is-contr-iterated-Σ {{cons-telescope A}} (is-contr-X , x , H) =
-  is-contr-Σ is-contr-X x (is-contr-iterated-Σ {{A x}} H)
+is-contr-iterated-Σ ._ {{base-telescope A}} is-contr-A = is-contr-A
+is-contr-iterated-Σ ._ {{cons-telescope A}} (is-contr-X , x , H) =
+  is-contr-Σ is-contr-X x (is-contr-iterated-Σ _ {{A x}} H)
 ```
