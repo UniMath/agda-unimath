@@ -13,6 +13,8 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels
 
+open import foundation-core.truncated-types
+open import foundation-core.truncation-levels
 open import foundation-core.contractible-types
 open import foundation-core.propositions
 ```
@@ -90,15 +92,29 @@ apply-codomain-iterated-Π P A = iterated-Π (apply-base-telescope P A)
 
 ## Properties
 
+### If a dependent product satisfies a property if its codomain does, then iterated dependent products satisfy that property if the codomain does
+
+```agda
+section-iterated-Π-section-Π-section-codomain :
+  (P : {l : Level} → UU l → UU l) →
+  ( {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → P (B x)) → P ((x : A) → B x)) →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π P A → P (iterated-Π A)
+section-iterated-Π-section-Π-section-codomain P f ._ {{base-telescope A}} H =
+  H
+section-iterated-Π-section-Π-section-codomain P f ._ {{cons-telescope A}} H =
+  f (λ x → section-iterated-Π-section-Π-section-codomain P f _ {{A x}} (H x))
+```
+
 ### Iterated products of contractible types is contractible
 
 ```agda
 is-contr-iterated-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π is-contr A → is-contr (iterated-Π A)
-is-contr-iterated-Π ._ {{base-telescope A}} H = H
-is-contr-iterated-Π ._ {{cons-telescope A}} H =
-  is-contr-Π (λ x → is-contr-iterated-Π _ {{A x}} (H x))
+is-contr-iterated-Π =
+  section-iterated-Π-section-Π-section-codomain is-contr is-contr-Π
 ```
 
 ### Iterated products of propositions are propositions
@@ -107,7 +123,16 @@ is-contr-iterated-Π ._ {{cons-telescope A}} H =
 is-prop-iterated-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
   apply-codomain-iterated-Π is-prop A → is-prop (iterated-Π A)
-is-prop-iterated-Π ._ {{base-telescope A}} H = H
-is-prop-iterated-Π ._ {{cons-telescope A}} H =
-  is-prop-Π (λ x → is-prop-iterated-Π _ {{A x}} (H x))
+is-prop-iterated-Π =
+  section-iterated-Π-section-Π-section-codomain is-prop is-prop-Π
+```
+
+### Iterated products of truncated types are truncated
+
+```agda
+is-trunc-iterated-Π :
+  {l : Level} (k : 𝕋) (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π (is-trunc k) A → is-trunc k (iterated-Π A)
+is-trunc-iterated-Π k =
+  section-iterated-Π-section-Π-section-codomain (is-trunc k) (is-trunc-Π k)
 ```
