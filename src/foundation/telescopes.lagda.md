@@ -65,6 +65,19 @@ data
 open telescope public
 ```
 
+### Transformations on telescopes
+
+Given an operation on universes, we can apply it at the base of the telescope.
+
+```agda
+apply-base-telescope :
+  {l1 : Level} {n : ℕ}
+  (P : {l : Level} → UU l → UU l) → telescope l1 n → telescope l1 n
+apply-base-telescope P (base-telescope A) = base-telescope (P A)
+apply-base-telescope P (cons-telescope A) =
+  cons-telescope (λ x → apply-base-telescope P (A x))
+```
+
 ### Inferring telescopes
 
 ```agda

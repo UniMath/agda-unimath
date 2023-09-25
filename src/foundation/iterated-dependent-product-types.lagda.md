@@ -78,16 +78,14 @@ iterated-λ (cons-iterated-section f) x = iterated-λ (f x)
 
 ### Transforming iterated products
 
-Given an operation on universes, we can apply it at the base of the iterated
+Given an operation on universes, we can apply it at the codomain of the iterated
 product.
 
 ```agda
-apply-base-iterated-Π :
+apply-codomain-iterated-Π :
   {l1 : Level} {n : ℕ}
   (P : {l : Level} → UU l → UU l) → telescope l1 n → UU l1
-apply-base-iterated-Π P (base-telescope A) = P A
-apply-base-iterated-Π P (cons-telescope A) =
-  (x : _) → apply-base-iterated-Π P (A x)
+apply-codomain-iterated-Π P A = iterated-Π (apply-base-telescope P A)
 ```
 
 ## Properties
@@ -97,7 +95,7 @@ apply-base-iterated-Π P (cons-telescope A) =
 ```agda
 is-contr-iterated-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
-  apply-base-iterated-Π is-contr A → is-contr (iterated-Π A)
+  apply-codomain-iterated-Π is-contr A → is-contr (iterated-Π A)
 is-contr-iterated-Π ._ {{base-telescope A}} H = H
 is-contr-iterated-Π ._ {{cons-telescope A}} H =
   is-contr-Π (λ x → is-contr-iterated-Π _ {{A x}} (H x))
@@ -108,7 +106,7 @@ is-contr-iterated-Π ._ {{cons-telescope A}} H =
 ```agda
 is-prop-iterated-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
-  apply-base-iterated-Π is-prop A → is-prop (iterated-Π A)
+  apply-codomain-iterated-Π is-prop A → is-prop (iterated-Π A)
 is-prop-iterated-Π ._ {{base-telescope A}} H = H
 is-prop-iterated-Π ._ {{cons-telescope A}} H =
   is-prop-Π (λ x → is-prop-iterated-Π _ {{A x}} (H x))
