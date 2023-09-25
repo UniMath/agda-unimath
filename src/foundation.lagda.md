@@ -159,6 +159,8 @@ open import foundation.involutions public
 open import foundation.isolated-points public
 open import foundation.isomorphisms-of-sets public
 open import foundation.iterated-cartesian-product-types public
+open import foundation.iterated-dependent-pair-types public
+open import foundation.iterated-dependent-product-types public
 open import foundation.iterated-type-families public
 open import foundation.iterating-automorphisms public
 open import foundation.iterating-functions public
