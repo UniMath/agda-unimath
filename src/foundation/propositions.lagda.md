@@ -50,7 +50,7 @@ module _
 ```agda
 is-prop-iterated-Π :
   {l : Level} (n : ℕ) {{A : telescope l n}} →
-  transform-iterated-Π is-prop A → is-prop (iterated-Π A)
+  apply-base-iterated-Π is-prop A → is-prop (iterated-Π A)
 is-prop-iterated-Π ._ {{base-telescope A}} H = H
 is-prop-iterated-Π ._ {{cons-telescope A}} H =
   is-prop-Π (λ x → is-prop-iterated-Π _ {{A x}} (H x))

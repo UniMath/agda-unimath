@@ -72,16 +72,16 @@ iterated-λ (base-iterated-section a) = a
 iterated-λ (cons-iterated-section f) x = iterated-λ (f x)
 ```
 
-### Iterated products with transforms
+### Transforming iterated products
 
-Given an operation on universes, we can define iterated products with a
-transform
+Given an operation on universes, we can apply it at the base of the iterated
+product.
 
 ```agda
-transform-iterated-Π :
+apply-base-iterated-Π :
   {l1 : Level} {n : ℕ}
   (P : {l : Level} → UU l → UU l) → telescope l1 n → UU l1
-transform-iterated-Π P (base-telescope A) = P A
-transform-iterated-Π P (cons-telescope A) =
-  (x : _) → transform-iterated-Π P (A x)
+apply-base-iterated-Π P (base-telescope A) = P A
+apply-base-iterated-Π P (cons-telescope A) =
+  (x : _) → apply-base-iterated-Π P (A x)
 ```
