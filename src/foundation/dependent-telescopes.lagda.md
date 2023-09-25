@@ -9,6 +9,7 @@ module foundation.dependent-telescopes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.dependent-pair-types
 open import foundation.telescopes
 open import foundation.universe-levels
 ```
@@ -51,4 +52,16 @@ data
     {l1 l2 k1 k2 : Level} {n : ℕ} {X : UU l1} {A : X → telescope l2 n}
     {Y : X → UU k1} (B : (x : X) → Y x → dependent-telescope k2 (A x)) →
     dependent-telescope (k1 ⊔ k2) (cons-telescope A)
+```
+
+### Expansion of telescopes
+
+```agda
+expand-telescope :
+  {l1 l2 : Level} {n : ℕ} {A : telescope l1 n} →
+  dependent-telescope l2 A → telescope (l1 ⊔ l2) n
+expand-telescope (base-dependent-telescope Y) =
+  base-telescope (Σ _ Y)
+expand-telescope (cons-dependent-telescope B) =
+  cons-telescope (λ x → expand-telescope (B (pr1 x) (pr2 x)))
 ```
