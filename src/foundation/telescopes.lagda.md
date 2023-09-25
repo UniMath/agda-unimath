@@ -84,8 +84,10 @@ instance
     cons-telescope (λ a → instance-telescope¹ {X = X a})
 
   instance-telescope³ :
-    {l1 l2 l3 lX : Level} {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3}
-    {X : (a : A) → (b : B a) → C a b → UU lX} → telescope (l1 ⊔ l2 ⊔ l3 ⊔ lX) 3
+    {l1 l2 l3 l4 : Level}
+    {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3}
+    {X : (a : A) → (b : B a) → C a b → UU l4} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4) 3
   instance-telescope³ {X = X} =
     cons-telescope (λ a → instance-telescope² {X = X a})
 
