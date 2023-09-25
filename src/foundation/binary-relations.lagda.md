@@ -103,7 +103,7 @@ module _
   is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
   is-prop-is-symmetric-Relation-Prop =
     is-prop-iterated-Π 3
-      ( infer-cons-telescope³)
+      ( infer-cons-telescope)
       ( λ x y r → is-prop-type-Relation-Prop R y x)
 
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
