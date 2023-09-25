@@ -12,12 +12,7 @@ module foundation.telescopes where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.identity-types
-open import foundation.unit-type
 open import foundation.universe-levels
-
-open import lists.lists
-
-open import trees.universal-tree
 ```
 
 </details>

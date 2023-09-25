@@ -13,15 +13,17 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.subuniverses
+open import foundation.truncated-types
+open import foundation.truncation-levels
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
-open import foundation-core.propositions
 ```
 
 </details>
@@ -116,6 +118,23 @@ abstract
   is-empty-type-trunc-Prop' :
     {l1 : Level} {X : UU l1} → is-empty (type-trunc-Prop X) → is-empty X
   is-empty-type-trunc-Prop' f = f ∘ unit-trunc-Prop
+```
+
+### The empty type is `k`-truncated for any `k ≥ 1`
+
+```agda
+abstract
+  is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
+  is-trunc-empty k ()
+
+empty-Truncated-Type : (k : 𝕋) → Truncated-Type lzero (succ-𝕋 k)
+pr1 (empty-Truncated-Type k) = empty
+pr2 (empty-Truncated-Type k) = is-trunc-empty k
+
+abstract
+  is-trunc-is-empty :
+    {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
+  is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
 ```
 
 ### Any inhabited type is nonempty

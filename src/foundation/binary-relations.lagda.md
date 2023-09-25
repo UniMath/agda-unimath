@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtypes
+open import foundation.telescopes
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -18,7 +19,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.propositions
+open import foundation.propositions
 ```
 
 </details>
@@ -101,10 +102,15 @@ module _
 
   is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
   is-prop-is-symmetric-Relation-Prop =
-    is-prop-Π
-      ( λ x →
-        is-prop-Π
-          ( λ y → is-prop-function-type (is-prop-type-Relation-Prop R y x)))
+    is-prop-iterated-Π 3
+      ( cons-telescope
+        ( λ x →
+          cons-telescope
+            ( λ y →
+              cons-telescope
+                ( λ r →
+                  base-telescope (type-Relation-Prop R y x)))))
+      ( λ x y r → is-prop-type-Relation-Prop R y x)
 
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
   is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
