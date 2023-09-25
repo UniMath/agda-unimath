@@ -69,26 +69,26 @@ open telescope public
 
 ```agda
 instance
-  infer-cons-telescope⁰ : {l : Level} {X : UU l} → telescope l 0
-  infer-cons-telescope⁰ {X = X} = base-telescope X
+  instance-telescope⁰ : {l : Level} {X : UU l} → telescope l 0
+  instance-telescope⁰ {X = X} = base-telescope X
 
-  infer-cons-telescope¹ :
+  instance-telescope¹ :
     {l1 lX : Level} {A : UU l1} {X : A → UU lX} → telescope (l1 ⊔ lX) 1
-  infer-cons-telescope¹ {X = X} =
-    cons-telescope (λ a → infer-cons-telescope⁰ {X = X a})
+  instance-telescope¹ {X = X} =
+    cons-telescope (λ a → instance-telescope⁰ {X = X a})
 
-  infer-cons-telescope² :
+  instance-telescope² :
     {l1 l2 lX : Level} {A : UU l1} {B : A → UU l2}
     {X : (a : A) → B a → UU lX} → telescope (l1 ⊔ l2 ⊔ lX) 2
-  infer-cons-telescope² {X = X} =
-    cons-telescope (λ a → infer-cons-telescope¹ {X = X a})
+  instance-telescope² {X = X} =
+    cons-telescope (λ a → instance-telescope¹ {X = X a})
 
-  infer-cons-telescope³ :
+  instance-telescope³ :
     {l1 l2 l3 lX : Level} {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3}
     {X : (a : A) → (b : B a) → C a b → UU lX} → telescope (l1 ⊔ l2 ⊔ l3 ⊔ lX) 3
-  infer-cons-telescope³ {X = X} =
-    cons-telescope (λ a → infer-cons-telescope² {X = X a})
+  instance-telescope³ {X = X} =
+    cons-telescope (λ a → instance-telescope² {X = X a})
 
-infer-cons-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
-infer-cons-telescope {{x}} = x
+instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
+instance-telescope {{x}} = x
 ```
