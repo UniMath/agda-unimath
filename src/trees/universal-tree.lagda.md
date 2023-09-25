@@ -52,9 +52,8 @@ module _
 ### The universal large tree
 
 The universal large tree carries extra level parameters with it. This is to
-ensure that it contains a tree of
-[iterated type families](foundation.iterated-type-families.md) of which each
-type family `A_i` is assigned its own universe level.
+ensure that it contains a tree of [telescopes](foundation.telescopes.md) of
+which each type family `A_i` is assigned its own universe level.
 
 ```agda
 record Universal-Large-Tree : UUω

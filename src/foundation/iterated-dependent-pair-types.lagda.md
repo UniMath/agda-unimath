@@ -19,7 +19,7 @@ open import foundation.universe-levels
 ## Idea
 
 **Iterated dependent pair types** are defined by iteratively applying the
-[dependent pair](foundation-core.dependent-pair-types.md) operator `Σ`. More
+[dependent pair](foundation.dependent-pair-types.md) operator `Σ`. More
 formally, `iterated-Σ` is defined as an operation `telescope l n → UU l` from
 the type of [telescopes](foundation.telescopes.md) to the universe of types of
 universe level `l`. For example, the iterated dependent pair type of the
