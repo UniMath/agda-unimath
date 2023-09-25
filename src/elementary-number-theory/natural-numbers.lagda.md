@@ -9,20 +9,20 @@ module elementary-number-theory.natural-numbers where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
-open import foundation.identity-types
 open import foundation.logical-equivalences
-open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.empty-types
+open import foundation-core.equivalences
+open import foundation-core.function-types
+open import foundation-core.homotopies
+open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.negation
 open import foundation-core.propositions
+open import foundation-core.sets
 ```
 
 </details>

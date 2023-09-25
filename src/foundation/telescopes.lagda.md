@@ -11,7 +11,6 @@ module foundation.telescopes where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.identity-types
 open import foundation.universe-levels
 ```
 
@@ -62,4 +61,34 @@ data
   cons-telescope :
     {l1 l2 : Level} {n : ℕ} {X : UU l1} →
     (X → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
+
+open telescope public
+```
+
+### Inferring telescopes
+
+```agda
+instance
+  instance-telescope⁰ : {l : Level} {X : UU l} → telescope l 0
+  instance-telescope⁰ {X = X} = base-telescope X
+
+  instance-telescope¹ :
+    {l1 lX : Level} {A : UU l1} {X : A → UU lX} → telescope (l1 ⊔ lX) 1
+  instance-telescope¹ {X = X} =
+    cons-telescope (λ a → instance-telescope⁰ {X = X a})
+
+  instance-telescope² :
+    {l1 l2 lX : Level} {A : UU l1} {B : A → UU l2}
+    {X : (a : A) → B a → UU lX} → telescope (l1 ⊔ l2 ⊔ lX) 2
+  instance-telescope² {X = X} =
+    cons-telescope (λ a → instance-telescope¹ {X = X a})
+
+  instance-telescope³ :
+    {l1 l2 l3 lX : Level} {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3}
+    {X : (a : A) → (b : B a) → C a b → UU lX} → telescope (l1 ⊔ l2 ⊔ l3 ⊔ lX) 3
+  instance-telescope³ {X = X} =
+    cons-telescope (λ a → instance-telescope² {X = X a})
+
+instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
+instance-telescope {{x}} = x
 ```

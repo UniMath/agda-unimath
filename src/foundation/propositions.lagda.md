@@ -54,9 +54,9 @@ is-prop-telescope (base-telescope A) = is-prop A
 is-prop-telescope (cons-telescope A) = (x : _) → is-prop-telescope (A x)
 
 is-prop-iterated-Π :
-  {l : Level} (n : ℕ) (A : telescope l n) →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
   is-prop-telescope A → is-prop (iterated-Π A)
-is-prop-iterated-Π ._ (base-telescope A) H = H
-is-prop-iterated-Π ._ (cons-telescope A) H =
-  is-prop-Π (λ x → is-prop-iterated-Π _ (A x) (H x))
+is-prop-iterated-Π ._ {{base-telescope A}} H = H
+is-prop-iterated-Π ._ {{cons-telescope A}} H =
+  is-prop-Π (λ x → is-prop-iterated-Π _ {{A x}} (H x))
 ```

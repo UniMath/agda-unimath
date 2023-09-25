@@ -7,8 +7,8 @@ module foundation.dependent-telescopes where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
+open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.telescopes
@@ -77,13 +77,9 @@ Given a telescope `A` of depth `n` and a dependent telescope `B` over it, we can
 define the **interleaved telescope** whose depth is `2n`.
 
 ```agda
-interleave-ℕ : ℕ → ℕ
-interleave-ℕ zero-ℕ = 1
-interleave-ℕ (succ-ℕ n) = succ-ℕ (succ-ℕ (interleave-ℕ n))
-
 interleave-telescope :
   {l1 l2 : Level} {n : ℕ} {A : telescope l1 n} →
-  dependent-telescope l2 A → telescope (l1 ⊔ l2) (interleave-ℕ n)
+  dependent-telescope l2 A → telescope (l1 ⊔ l2) (succ-ℕ (n *ℕ 2))
 interleave-telescope (base-dependent-telescope A) =
   cons-telescope (λ x → base-telescope (A x))
 interleave-telescope (cons-dependent-telescope B) =
