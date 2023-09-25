@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.iterated-dependent-product-types where
+
+open import foundation.telescopes public
 ```
 
 <details><summary>Imports</summary>
@@ -9,8 +11,10 @@ module foundation.iterated-dependent-product-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.telescopes
 open import foundation.universe-levels
+
+open import foundation-core.contractible-types
+open import foundation-core.propositions
 ```
 
 </details>
@@ -84,4 +88,28 @@ apply-base-iterated-Π :
 apply-base-iterated-Π P (base-telescope A) = P A
 apply-base-iterated-Π P (cons-telescope A) =
   (x : _) → apply-base-iterated-Π P (A x)
+```
+
+## Properties
+
+### Iterated products of contractible types is contractible
+
+```agda
+is-contr-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-base-iterated-Π is-contr A → is-contr (iterated-Π A)
+is-contr-iterated-Π ._ {{base-telescope A}} H = H
+is-contr-iterated-Π ._ {{cons-telescope A}} H =
+  is-contr-Π (λ x → is-contr-iterated-Π _ {{A x}} (H x))
+```
+
+### Iterated products of propositions are propositions
+
+```agda
+is-prop-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-base-iterated-Π is-prop A → is-prop (iterated-Π A)
+is-prop-iterated-Π ._ {{base-telescope A}} H = H
+is-prop-iterated-Π ._ {{cons-telescope A}} H =
+  is-prop-Π (λ x → is-prop-iterated-Π _ {{A x}} (H x))
 ```
