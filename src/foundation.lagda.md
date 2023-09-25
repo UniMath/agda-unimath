@@ -80,6 +80,7 @@ open import foundation.decidable-types public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
+open import foundation.dependent-telescopes public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
