@@ -9,19 +9,19 @@ open import foundation-core.contractible-types public
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
-open import foundation.iterated-dependent-pair-types
 open import foundation.subuniverses
 open import foundation.telescopes
+open import foundation.iterated-dependent-pair-types
+open import foundation.iterated-dependent-product-types
 open import foundation.unit-type
+open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 
-open import foundation-core.cartesian-product-types
 open import foundation-core.constant-maps
+open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-maps
 open import foundation-core.equivalences
 open import foundation-core.function-types
@@ -319,4 +319,15 @@ is-contr-iterated-Σ :
 is-contr-iterated-Σ ._ {{base-telescope A}} is-contr-A = is-contr-A
 is-contr-iterated-Σ ._ {{cons-telescope A}} (is-contr-X , x , H) =
   is-contr-Σ is-contr-X x (is-contr-iterated-Σ _ {{A x}} H)
+```
+
+### Iterated products of contractible types is contractible
+
+```agda
+is-contr-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-base-iterated-Π is-contr A → is-contr (iterated-Π A)
+is-contr-iterated-Π ._ {{base-telescope A}} H = H
+is-contr-iterated-Π ._ {{cons-telescope A}} H =
+  is-contr-Π (λ x → is-contr-iterated-Π _ {{A x}} (H x))
 ```
