@@ -8,12 +8,12 @@ module foundation-core.empty-types where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
@@ -128,5 +128,5 @@ pr2 (empty-Truncated-Type k) = is-trunc-empty k
 abstract
   is-trunc-is-empty :
     {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
-  is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
+  is-trunc-is-empty k f x = ex-falso (f x)
 ```
