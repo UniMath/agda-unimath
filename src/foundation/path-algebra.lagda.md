@@ -341,9 +341,9 @@ module _
 
 ### The whiskering operations allow us to commute higher identifications
 
-There are two natural ways to commute higher identifications, using
-whiskering on the left versus using whiskering on the right. They
-end up being inverses of eachother. 
+There are two natural ways to commute higher identifications, using whiskering
+on the left versus using whiskering on the right. They end up being inverses of
+eachother.
 
 ```agda
 module _

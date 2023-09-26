@@ -33,9 +33,10 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 
 There are two classical statements of the Eckmann-Hilton argument. The first
 states that a group object in the category of groups is abelian. The second
-states that `π₂ (X)` is abelian, for any space `X`. The former is an
-algebraic statement, while the later is a homotopy theoretic statment. As
-it turns out, the two are equivalent. See the following [wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
+states that `π₂ (X)` is abelian, for any space `X`. The former is an algebraic
+statement, while the later is a homotopy theoretic statment. As it turns out,
+the two are equivalent. See the following
+[wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
 
 Both these phrasing, however, are about set level structures. Since we have
 access to untruncated types, it is more natural to prove untruncated analogs of
@@ -47,8 +48,8 @@ Eckmann-Hilton argument:
 For fixed 2-loops, we will call the resulting identification "the Eckmann-Hilton
 term". In this file we will give two different constructions of this
 identification, one that corresponds to the more algebraic statement and one
-that corresponds to the more homotopy theoretic statement. We will call
-the constructions themselves "the Eckmann-Hilton argument".
+that corresponds to the more homotopy theoretic statement. We will call the
+constructions themselves "the Eckmann-Hilton argument".
 
 ## Definitions
 
@@ -189,17 +190,17 @@ module _
       ( left-unit-law-identification-left-whisk-Ω² α))
 ```
 
-There is another natural construction of an Eckmann-Hilton term along
-these lines. If we think of the first construction as "rotating clockwise",
-this alternate version "rotates counter-clockwise". In terms of braids,
-previous construction of Eckmann-Hilton braids `α` over `β`, while this new
-construction braids `α` under `β`. This difference shows up nicely in the type
-theory. The first version uses the naturality of the operation of whiskering on the left, while the
-second version uses the naturality of the operation of whiskering on the right. These
-two version of the Eckmann-Hilton term naturally "undo" each other, as
-we will subsequently prove. Thus, we will refer to this alternate construction
-of Eckmann-Hilton as "the inverse Eckmann-Hilton argument", and the corresponding term
-"the inverse Eckmann-Hilton term".
+There is another natural construction of an Eckmann-Hilton term along these
+lines. If we think of the first construction as "rotating clockwise", this
+alternate version "rotates counter-clockwise". In terms of braids, previous
+construction of Eckmann-Hilton braids `α` over `β`, while this new construction
+braids `α` under `β`. This difference shows up nicely in the type theory. The
+first version uses the naturality of the operation of whiskering on the left,
+while the second version uses the naturality of the operation of whiskering on
+the right. These two version of the Eckmann-Hilton term naturally "undo" each
+other, as we will subsequently prove. Thus, we will refer to this alternate
+construction of Eckmann-Hilton as "the inverse Eckmann-Hilton argument", and the
+corresponding term "the inverse Eckmann-Hilton term".
 
 ```agda
 module _
@@ -324,9 +325,6 @@ module _
           ( left-unit-law-identification-left-whisk-Ω² α)))
 ```
 
-
-
-
 ## Properties
 
 ### We can apply each `eckmann-hilton-Ω²` and `eckmann-hilton-inverse-Ω²` to a single 2-loop to obtain a 3-loop
@@ -357,7 +355,6 @@ module _
 module _
   {l : Level} {A : UU l} {a : A} (s : type-Ω² a)
   where
-
 
   Id-inv-3-loop-eckmann-hilton-inverse-Ω²-3-loop-eckmann-hilton-Ω² :
     inv (3-loop-eckmann-hilton-inverse-Ω² s) ＝ 3-loop-eckmann-hilton-Ω² s
