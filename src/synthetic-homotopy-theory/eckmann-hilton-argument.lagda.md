@@ -225,8 +225,8 @@ module _
 ```
 
 We now prove that this Eckmann-Hilton term "undoes" the previously constructed
-Eckmann-Hilton term. If we think of braiding `α` over `β`, then braiding
-`β` under `α`, we should end up with the trivial braid. Thus, we should have
+Eckmann-Hilton term. If we think of braiding `α` over `β`, then braiding `β`
+under `α`, we should end up with the trivial braid. Thus, we should have
 
 `eckmann-hilton-Ω² α β ∙ eckman-hilton-inverse-Ω² β α ＝ refl`
 
