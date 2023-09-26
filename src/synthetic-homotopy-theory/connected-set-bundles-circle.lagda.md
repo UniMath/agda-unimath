@@ -14,7 +14,7 @@ module synthetic-homotopy-theory.connected-set-bundles-circle where
 
 ## Idea
 
-A **connected set bundle** overt the
+A **connected set bundle** over the
 [circle](synthetic-homotopy-theory.circle.md) is a family of sets `X : 𝕊¹ → Set`
 such that the total space `Σ 𝕊¹ (type-Set ∘ X)` is
 [connected](foundation.connected-types.md). The connected set bundles over the
