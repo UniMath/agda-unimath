@@ -9,8 +9,10 @@ module synthetic-homotopy-theory.eckmann-hilton-argument where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.path-algebra
 open import foundation.universe-levels
@@ -31,9 +33,10 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 
 There are two classical statements of the Eckmann-Hilton argument. The first
 states that a group object in the category of groups is abelian. The second
-states that `π₂ (X)` is abelian, for any space `X`.. The first statement can be
-thought of as a more algebraic phrasing, while the second can be thought of as a
-more homotopy theoretic phrasing.
+states that `π₂ (X)` is abelian, for any space `X`. The former is an algebraic
+statement, while the latter is a homotopy theoretic statment. As it turns out,
+the two are equivalent. See the following
+[wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
 
 Both these phrasing, however, are about set level structures. Since we have
 access to untruncated types, it is more natural to prove untruncated analogs of
@@ -43,13 +46,14 @@ Eckmann-Hilton argument:
 `(α β : Ω² X) → α ∙ β = β ∙ α`
 
 For fixed 2-loops, we will call the resulting identification "the Eckmann-Hilton
-term". In this file we will give two different constructions of this
+identification". In this file we will give two different constructions of this
 identification, one that corresponds to the more algebraic statement and one
-that corresponds to the more homotopy theoretic statement.
+that corresponds to the more homotopy theoretic statement. We will call the
+constructions themselves "the Eckmann-Hilton argument".
 
 ## Definitions
 
-### Constructing the eckmann-hilton term from the interchange law
+### Constructing the Eckmann-Hilton identification from the interchange law
 
 The more algebraic argument uses the interchange law
 [`interchange-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#2449).
@@ -97,7 +101,7 @@ interchange-concat-Ω² =
     ( assoc)
 ```
 
-### Constructing the eckmann-hilton term using the naturality condition of the operation of whiskering a fixed 2-path by a 1-path
+### Constructing the Eckmann-Hilton identification using the naturality condition of the operation of whiskering a fixed 2-path by a 1-path
 
 #### The motivation
 
@@ -142,8 +146,9 @@ via
 [`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218).
 This identification is constructed using the naturality condition of the two
 homotopies involved. Thus, in the case of `Id base`, we can see a very close
-correspondence between the Eckmann-Hilton term of 2-loops in the base type `X`
-and the Eckmann-Hilton term of the homotopies induced by said 2-loops.
+correspondence between the Eckmann-Hilton identification of 2-loops in the base
+type `X` and the Eckmann-Hilton identification of the homotopies induced by said
+2-loops.
 
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
@@ -153,14 +158,14 @@ Then, the naturality condition that makes `α` and `β` commute in `Ω² X` is s
 by `tr³ B` to the naturality condition that makes the induced homotopies
 commute. This is recorded in
 [`tr³-htpy-swap-path-swap`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
-From this, it is easy to show that "transport preserves the Eckmann-Hilton term"
-by proving that the additional coherence paths in the definition of
-`eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
+From this, it is easy to show that "transport preserves the Eckmann-Hilton
+identification" by proving that the additional coherence paths in the definition
+of `eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
 
 This connection has important consequences, one of which being the connection
 between the Eckmann-Hilton argument and the Hopf fibration.
 
-#### The construction
+#### The construction, using left whiskering
 
 ```agda
 module _
@@ -176,19 +181,167 @@ module _
     by ( inv
       ( horizontal-concat-Id²
         ( left-unit-law-identification-left-whisk-Ω² α)
-        ( right-unit-law-identification-left-whisk-Ω² β)))
+        ( right-unit-law-identification-right-whisk-Ω² β)))
     ＝ ( identification-right-whisk β refl) ∙
       ( identification-left-whisk refl α)
     by ( path-swap-nat-identification-left-whisk α β)
     ＝ β ∙ α
     by ( horizontal-concat-Id²
-      ( right-unit-law-identification-left-whisk-Ω² β)
+      ( right-unit-law-identification-right-whisk-Ω² β)
       ( left-unit-law-identification-left-whisk-Ω² α))
+```
+
+#### Using right whiskering
+
+There is another natural construction of an Eckmann-Hilton identification along
+these lines. If we think of the first construction as "rotating clockwise", this
+alternate version "rotates counter-clockwise". In terms of braids, the previous
+construction of Eckmann-Hilton braids `α` over `β`, while this new construction
+braids `α` under `β`. This difference shows up nicely in the type theory. The
+first version uses the naturality of the operation of whiskering on the left,
+while the second version uses the naturality of the operation of whiskering on
+the right. Based on the intution of braiding, we should expect these two version
+of the Eckmann-Hilton identification to naturally "undo" each other, which the
+do. Thus, we will refer to this alternate construction of Eckmann-Hilton as "the
+inverse Eckmann-Hilton argument", and the corresponding identification "the
+inverse Eckmann-Hilton identification".
+
+```agda
+module _
+  {l : Level} {A : Pointed-Type l}
+  where
+
+  eckmann-hilton-inverse-Ω² :
+    (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
+  eckmann-hilton-inverse-Ω² α β = equational-reasoning_
+    (α ∙ β)
+    ＝ (identification-right-whisk α refl) ∙ (identification-left-whisk refl β)
+    by ( inv
+      ( horizontal-concat-Id²
+        ( right-unit-law-identification-right-whisk-Ω² α)
+        ( left-unit-law-identification-left-whisk-Ω² β)))
+    ＝ (identification-left-whisk refl β) ∙ (identification-right-whisk α refl)
+    by path-swap-nat-identification-right-whisk α β
+    ＝ β ∙ α
+    by ( horizontal-concat-Id²
+        ( left-unit-law-identification-left-whisk-Ω² β))
+        ( right-unit-law-identification-right-whisk-Ω² α)
+```
+
+We now prove that this Eckmann-Hilton identification "undoes" the previously
+constructed Eckmann-Hilton identification. If we think of braiding `α` over `β`,
+then braiding `β` under `α`, we should end up with the trivial braid. Thus, we
+should have
+
+`eckmann-hilton-Ω² α β ∙ eckman-hilton-inverse-Ω² β α ＝ refl`
+
+This is equivalent to,
+
+`inv eckman-hilton-inverse-Ω² β α ＝ eckmann-hilton-Ω² α β`
+
+which is what we prove. Note that the above property is distinct from syllepsis,
+since it concerns two different construction of the Eckmann-Hilton
+identification. Further, it works for all 2-loops, not just 3-loops.
+
+```agda
+module _
+  {l : Level} {A : Pointed-Type l}
+  where
+
+  eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² :
+    (α β : type-Ω² (point-Pointed-Type A)) →
+    inv (eckmann-hilton-inverse-Ω² β α) ＝ (eckmann-hilton-Ω² α β)
+  eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² α β = equational-reasoning_
+    ( inv (eckmann-hilton-inverse-Ω² β α))
+    ＝ concat
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-identification-left-whisk-Ω² α)
+            ( right-unit-law-identification-right-whisk-Ω² β)))
+      ( _)
+      ( inv
+        ( concat
+          ( inv
+            ( horizontal-concat-Id²
+              ( right-unit-law-identification-right-whisk-Ω² β)
+              ( left-unit-law-identification-left-whisk-Ω² α)))
+          ( _)
+          ( path-swap-nat-identification-right-whisk β α)))
+    by distributive-inv-concat
+      ( concat
+        ( inv
+          ( horizontal-concat-Id²
+            ( right-unit-law-identification-right-whisk-Ω² β)
+            ( left-unit-law-identification-left-whisk-Ω² α)))
+        ( _)
+        ( path-swap-nat-identification-right-whisk β α))
+      ( horizontal-concat-Id²
+        ( left-unit-law-identification-left-whisk-Ω² α)
+        ( right-unit-law-identification-right-whisk-Ω² β))
+    ＝ concat
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-identification-left-whisk-Ω² α)
+            ( right-unit-law-identification-right-whisk-Ω² β)))
+      ( _)
+      ( concat
+        ( inv (path-swap-nat-identification-right-whisk β α))
+        ( _)
+        ( inv
+          ( inv
+            ( horizontal-concat-Id²
+              ( right-unit-law-identification-right-whisk-Ω² β)
+              ( left-unit-law-identification-left-whisk-Ω² α)))))
+    by identification-left-whisk
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-identification-left-whisk-Ω² α)
+            ( right-unit-law-identification-right-whisk-Ω² β)))
+      ( distributive-inv-concat
+        ( inv
+          ( horizontal-concat-Id²
+            ( right-unit-law-identification-right-whisk-Ω² β)
+            ( left-unit-law-identification-left-whisk-Ω² α)))
+        ( path-swap-nat-identification-right-whisk β α))
+    ＝ concat
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-identification-left-whisk-Ω² α)
+            ( right-unit-law-identification-right-whisk-Ω² β)))
+      ( _)
+      ( concat
+        ( path-swap-nat-identification-left-whisk α β)
+        ( _)
+        ( horizontal-concat-Id²
+          ( right-unit-law-identification-right-whisk-Ω² β)
+          ( left-unit-law-identification-left-whisk-Ω² α)))
+    by identification-left-whisk
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-identification-left-whisk-Ω² α)
+            ( right-unit-law-identification-right-whisk-Ω² β)))
+      ( horizontal-concat-Id²
+        ( path-swap-right-undoes-path-swap-left α β)
+        ( inv-inv
+          ( horizontal-concat-Id²
+            ( right-unit-law-identification-right-whisk-Ω² β)
+            ( left-unit-law-identification-left-whisk-Ω² α))))
+    ＝ eckmann-hilton-Ω² α β
+    by inv (
+      assoc
+        ( inv
+          ( horizontal-concat-Id²
+            ( left-unit-law-identification-left-whisk-Ω² α)
+            ( right-unit-law-identification-right-whisk-Ω² β)))
+        ( path-swap-nat-identification-left-whisk α β)
+        ( horizontal-concat-Id²
+          ( right-unit-law-identification-right-whisk-Ω² β)
+          ( left-unit-law-identification-left-whisk-Ω² α)))
 ```
 
 ## Properties
 
-### We can apply eckmann-hilton to a single 2-loop to obtain a 3-loop
+### We can apply each `eckmann-hilton-Ω²` and `eckmann-hilton-inverse-Ω²` to a single 2-loop to obtain a 3-loop
 
 ```agda
 module _
@@ -201,4 +354,35 @@ module _
     map-equiv-pointed-equiv
       ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
       ( eckmann-hilton-Ω² s s)
+
+  3-loop-eckmann-hilton-inverse-Ω² :
+    type-Ω³ a
+  3-loop-eckmann-hilton-inverse-Ω² =
+    map-equiv-pointed-equiv
+      ( pointed-equiv-2-loop-pointed-identity (Ω (A , a)) (s ∙ s))
+      ( eckmann-hilton-inverse-Ω² s s)
+```
+
+### The above two 3-loops are inverses
+
+```agda
+module _
+  {l : Level} {A : UU l} {a : A} (s : type-Ω² a)
+  where
+
+  Id-inv-3-loop-eckmann-hilton-inverse-Ω²-3-loop-eckmann-hilton-Ω² :
+    inv (3-loop-eckmann-hilton-inverse-Ω² s) ＝ 3-loop-eckmann-hilton-Ω² s
+  Id-inv-3-loop-eckmann-hilton-inverse-Ω²-3-loop-eckmann-hilton-Ω² =
+    concat
+      ( inv
+        ( preserves-inv-map-Ω
+          ( pointed-map-pointed-equiv
+            ( pointed-equiv-loop-pointed-identity (Ω (A , a)) (s ∙ s)))
+          (eckmann-hilton-inverse-Ω² s s)))
+      ( _)
+      ( ap
+        ( map-Ω
+          ( pointed-map-pointed-equiv
+            ( pointed-equiv-loop-pointed-identity (Ω (A , a)) (s ∙ s))))
+        ( eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² s s))
 ```
