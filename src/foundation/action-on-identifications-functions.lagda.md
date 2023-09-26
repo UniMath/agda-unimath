@@ -27,7 +27,7 @@ identity types.
 
 ## Definition
 
-### The functorial action of functions on identity types
+### The functorial action of functions on identity type
 
 ```agda
 ap :
