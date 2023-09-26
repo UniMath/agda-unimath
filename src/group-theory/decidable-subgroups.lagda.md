@@ -321,7 +321,7 @@ module _
       ( subgroup-Decidable-Subgroup G H)
 
   hom-inclusion-Decidable-Subgroup :
-    type-hom-Group (group-Decidable-Subgroup G H) G
+    hom-Group (group-Decidable-Subgroup G H) G
   hom-inclusion-Decidable-Subgroup =
     hom-inclusion-Subgroup G (subgroup-Decidable-Subgroup G H)
 ```

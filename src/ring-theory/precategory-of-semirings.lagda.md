@@ -32,9 +32,9 @@ Semiring-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Semiring-Large-Precategory =
   Semiring
-hom-Large-Precategory
+hom-set-Large-Precategory
   Semiring-Large-Precategory =
-  hom-Semiring
+  hom-set-Semiring
 comp-hom-Large-Precategory
   Semiring-Large-Precategory {X = R} {S} {T} =
   comp-hom-Semiring R S T

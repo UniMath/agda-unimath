@@ -236,7 +236,7 @@ module _
         ( u))
 
   normal-closure-subgroup-hom-Large-Poset :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)

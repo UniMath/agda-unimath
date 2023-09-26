@@ -193,7 +193,7 @@ module _
       ( ring-Commutative-Ring A)
 
   hom-inclusion-group-of-units-Commutative-Ring :
-    type-hom-Monoid monoid-group-of-units-Commutative-Ring
+    hom-Monoid monoid-group-of-units-Commutative-Ring
       ( multiplicative-monoid-Commutative-Ring A)
   hom-inclusion-group-of-units-Commutative-Ring =
     hom-inclusion-group-of-units-Ring (ring-Commutative-Ring A)
@@ -208,7 +208,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A B)
+  (f : hom-Commutative-Ring A B)
   where
 
   map-group-of-units-hom-Commutative-Ring :
@@ -234,7 +234,7 @@ module _
       ( f)
 
   hom-group-of-units-hom-Commutative-Ring :
-    type-hom-Group
+    hom-Group
       ( group-of-units-Commutative-Ring A)
       ( group-of-units-Commutative-Ring B)
   hom-group-of-units-hom-Commutative-Ring =
@@ -285,7 +285,7 @@ module _
   where
 
   preserves-comp-hom-group-of-units-hom-Commutative-Ring :
-    (g : type-hom-Commutative-Ring B C) (f : type-hom-Commutative-Ring A B) →
+    (g : hom-Commutative-Ring B C) (f : hom-Commutative-Ring A B) →
     hom-group-of-units-hom-Commutative-Ring A C
       ( comp-hom-Commutative-Ring A B C g f) ＝
     comp-hom-Group

@@ -34,9 +34,9 @@ module _
   obj-Large-Precategory
     Abstract-Group-Action-Large-Precategory =
     Abstract-Group-Action G
-  hom-Large-Precategory
+  hom-set-Large-Precategory
     Abstract-Group-Action-Large-Precategory =
-    hom-Abstract-Group-Action G
+    hom-set-Abstract-Group-Action G
   comp-hom-Large-Precategory
     Abstract-Group-Action-Large-Precategory {X = X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
@@ -64,7 +64,8 @@ module _
   Abstract-Group-Action-Precategory :
     (l2 : Level) → Precategory (l1 ⊔ lsuc l2) (l1 ⊔ l2)
   pr1 (Abstract-Group-Action-Precategory l2) = Abstract-Group-Action G l2
-  pr1 (pr2 (Abstract-Group-Action-Precategory l2)) = hom-Abstract-Group-Action G
+  pr1 (pr2 (Abstract-Group-Action-Precategory l2)) =
+    hom-set-Abstract-Group-Action G
   pr1 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) {X} {Y} {Z} =
     comp-hom-Abstract-Group-Action G X Y Z
   pr2 (pr1 (pr2 (pr2 (Abstract-Group-Action-Precategory l2)))) {X} {Y} {Z} {W} =

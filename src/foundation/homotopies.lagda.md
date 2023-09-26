@@ -11,6 +11,7 @@ open import foundation-core.homotopies public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
@@ -107,6 +108,24 @@ module _
   equiv-concat-htpy' : (f ~ g) ≃ (f ~ h)
   pr1 equiv-concat-htpy' = concat-htpy' f K
   pr2 equiv-concat-htpy' = is-equiv-concat-htpy'
+```
+
+### Binary concatenation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g h k : (x : A) → B x}
+  where
+
+  is-binary-equiv-concat-htpy :
+    is-binary-equiv (λ (H : f ~ g) (K : g ~ h) → H ∙h K)
+  pr1 is-binary-equiv-concat-htpy K = is-equiv-concat-htpy' f K
+  pr2 is-binary-equiv-concat-htpy H = is-equiv-concat-htpy H h
+
+  equiv-binary-concat-htpy :
+    (H : f ~ g) (K : h ~ k) → (g ~ h) ≃ (f ~ k)
+  equiv-binary-concat-htpy H K = equiv-concat-htpy' f K ∘e equiv-concat-htpy H h
 ```
 
 ### Transposing homotopies is an equivalence

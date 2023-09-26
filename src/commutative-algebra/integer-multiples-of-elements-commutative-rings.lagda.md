@@ -293,7 +293,7 @@ module _
   where
 
   hom-ab-integer-multiple-Commutative-Ring :
-    type-hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring A)
+    hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring A)
   hom-ab-integer-multiple-Commutative-Ring =
     hom-ab-integer-multiple-Ring (ring-Commutative-Ring A) k
 ```
@@ -319,7 +319,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A B)
+  (f : hom-Commutative-Ring A B)
   where
 
   preserves-integer-multiples-hom-Commutative-Ring :
@@ -334,11 +334,11 @@ module _
 
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A B)
+  (f : hom-Commutative-Ring A B)
   where
 
   eq-integer-multiple-hom-Commutative-Ring :
-    (g : type-hom-Commutative-Ring A B) (k : ℤ) (x : type-Commutative-Ring A) →
+    (g : hom-Commutative-Ring A B) (k : ℤ) (x : type-Commutative-Ring A) →
     ( map-hom-Commutative-Ring A B f x ＝ map-hom-Commutative-Ring A B g x) →
     map-hom-Commutative-Ring A B f (integer-multiple-Commutative-Ring A k x) ＝
     map-hom-Commutative-Ring A B g (integer-multiple-Commutative-Ring A k x)

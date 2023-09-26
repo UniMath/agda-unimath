@@ -20,13 +20,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor `F : C → D` is an equivalence of categories if there is a functor
-`G : D → C` such that:
+A [functor](category-theory.functors-precategories.md) `F : C → D` is an
+**equivalence** of [precategories](category-theory.precategories.md) if there is
 
-- `G ∘ F` is naturally isomorphic to the identity functor on `C`,
-- `F ∘ G` is naturally isomorphic to the identity functor on `D`.
+1. a functor `G : D → C` such that `G ∘ F` is
+   [naturally isomorphic](category-theory.natural-isomorphisms-precategories.md)
+   to the identity functor on `C`,
+2. a functor `H : D → C` such that `F ∘ H` is naturally isomorphic to the
+   identity functor on `D`.
 
 ## Definition
+
+### The predicate of being an equivalence of precategories
 
 ```agda
 module _
@@ -48,7 +53,11 @@ module _
         ( natural-isomorphism-Precategory D D
           ( comp-functor-Precategory D C D F G)
           ( id-functor-Precategory D)))
+```
 
+### The type of equivalences of precategories
+
+```agda
   equiv-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   equiv-Precategory = Σ (functor-Precategory C D) is-equiv-functor-Precategory
 ```

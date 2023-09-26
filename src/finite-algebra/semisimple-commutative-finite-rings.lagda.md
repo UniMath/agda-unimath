@@ -47,7 +47,7 @@ is-semisimple-Commutative-Ring-𝔽 l2 R =
         ( Fin n → Field-𝔽 l2)
         ( λ A →
           trunc-Prop
-            ( type-hom-Commutative-Ring-𝔽
+            ( hom-Commutative-Ring-𝔽
               ( R)
               ( Π-Commutative-Ring-𝔽
                 ( Fin n , is-finite-Fin n)

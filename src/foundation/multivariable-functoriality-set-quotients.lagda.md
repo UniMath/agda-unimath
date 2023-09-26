@@ -35,7 +35,7 @@ equivalence relations extends uniquely to a multivariable operation from the
 
 ## Definition
 
-### n-ary hom of equivalence relation
+### `n`-ary hom of equivalence relation
 
 ```agda
 module _

@@ -61,9 +61,9 @@ module _
     where
     id-hom-Precategory-Expr :
       {x : obj-Precategory C} → Precategory-Expr x x
-    type-hom-Precategory-Expr :
+    hom-Precategory-Expr :
       {x y : obj-Precategory C} →
-      type-hom-Precategory C x y → Precategory-Expr x y
+      hom-Precategory C x y → Precategory-Expr x y
     comp-hom-Precategory-Expr :
       {x y z : obj-Precategory C} →
       Precategory-Expr y z → Precategory-Expr x y → Precategory-Expr x z
@@ -75,9 +75,9 @@ module _
   in-Precategory-Expr :
     {x y : obj-Precategory C} →
     Precategory-Expr x y →
-    type-hom-Precategory C x y
+    hom-Precategory C x y
   in-Precategory-Expr id-hom-Precategory-Expr = id-hom-Precategory C
-  in-Precategory-Expr (type-hom-Precategory-Expr f) = f
+  in-Precategory-Expr (hom-Precategory-Expr f) = f
   in-Precategory-Expr (comp-hom-Precategory-Expr f g) =
     comp-hom-Precategory C (in-Precategory-Expr f) (in-Precategory-Expr g)
 ```
@@ -88,10 +88,10 @@ module _
   eval-Precategory-Expr :
     {x y z : obj-Precategory C} →
     Precategory-Expr y z →
-    type-hom-Precategory C x y →
-    type-hom-Precategory C x z
+    hom-Precategory C x y →
+    hom-Precategory C x z
   eval-Precategory-Expr id-hom-Precategory-Expr f = f
-  eval-Precategory-Expr (type-hom-Precategory-Expr f) g =
+  eval-Precategory-Expr (hom-Precategory-Expr f) g =
     comp-hom-Precategory C f g
   eval-Precategory-Expr (comp-hom-Precategory-Expr f g) h =
     eval-Precategory-Expr f (eval-Precategory-Expr g h)
@@ -99,12 +99,12 @@ module _
   is-sound-eval-Precategory-Expr :
     {x y z : obj-Precategory C}
     (e : Precategory-Expr y z)
-    (f : type-hom-Precategory C x y) →
+    (f : hom-Precategory C x y) →
     ( eval-Precategory-Expr e f) ＝
     ( comp-hom-Precategory C (in-Precategory-Expr e) f)
   is-sound-eval-Precategory-Expr id-hom-Precategory-Expr f =
     inv (left-unit-law-comp-hom-Precategory C f)
-  is-sound-eval-Precategory-Expr (type-hom-Precategory-Expr f) g = refl
+  is-sound-eval-Precategory-Expr (hom-Precategory-Expr f) g = refl
   is-sound-eval-Precategory-Expr (comp-hom-Precategory-Expr f g) h =
     equational-reasoning
     eval-Precategory-Expr f (eval-Precategory-Expr g h)
@@ -131,7 +131,7 @@ module _
   normalize-Precategory-Expr :
     {x y : obj-Precategory C} →
     Precategory-Expr x y →
-    type-hom-Precategory C x y
+    hom-Precategory C x y
   normalize-Precategory-Expr e = eval-Precategory-Expr e (id-hom-Precategory C)
 
   is-sound-normalize-Precategory-Expr :
@@ -190,7 +190,7 @@ private
         xs)
 ```
 
-### Building a term of `Precategory-Expr C x y` from a term of type `type-hom-Precategory C x y`
+### Building a term of `Precategory-Expr C x y` from a term of type `hom-Precategory C x y`
 
 ```agda
 build-Precategory-Expr : Term → Term
@@ -225,7 +225,7 @@ build-Precategory-Expr
       visible-Arg (build-Precategory-Expr f) ∷
       nil)
 build-Precategory-Expr f =
-  con (quote type-hom-Precategory-Expr) (visible-Arg f ∷ nil)
+  con (quote hom-Precategory-Expr) (visible-Arg f ∷ nil)
 ```
 
 ### The application of the `solve-Precategory-Expr` lemma
@@ -268,7 +268,7 @@ module _
   private
     _ :
       {x y : obj-Precategory C}
-      {f : type-hom-Precategory C x y} →
+      {f : hom-Precategory C x y} →
       f ＝ f
     _ = solve-Precategory! C
 
@@ -279,26 +279,26 @@ module _
 
     _ :
       {a b c : obj-Precategory C}
-      {f : type-hom-Precategory C a b}
-      {g : type-hom-Precategory C b c} →
+      {f : hom-Precategory C a b}
+      {g : hom-Precategory C b c} →
       (comp-hom-Precategory C g f) ＝
       comp-hom-Precategory C g f
     _ = solve-Precategory! C
 
     _ :
       {a b c d : obj-Precategory C}
-      {f : type-hom-Precategory C a b}
-      {g : type-hom-Precategory C b c} →
-      {h : type-hom-Precategory C c d} →
+      {f : hom-Precategory C a b}
+      {g : hom-Precategory C b c} →
+      {h : hom-Precategory C c d} →
       comp-hom-Precategory C h (comp-hom-Precategory C g f) ＝
       comp-hom-Precategory C (comp-hom-Precategory C h g) f
     _ = solve-Precategory! C
 
     _ :
       {a b c d : obj-Precategory C}
-      {f : type-hom-Precategory C a b}
-      {g : type-hom-Precategory C b c} →
-      {h : type-hom-Precategory C c d} →
+      {f : hom-Precategory C a b}
+      {g : hom-Precategory C b c} →
+      {h : hom-Precategory C c d} →
       comp-hom-Precategory C
         ( comp-hom-Precategory C h (id-hom-Precategory C))
         ( comp-hom-Precategory C g f) ＝

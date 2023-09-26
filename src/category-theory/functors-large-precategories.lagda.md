@@ -19,7 +19,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-A functor from a large precategory `C` to a large precategory `D` consists of:
+A **functor** from a [large precategory](category-theory.large-precategories.md)
+`C` to a large precategory `D` consists of:
 
 - a map `F : C → D` on objects,
 - a map `Fmap : hom x y → hom (F x) (F y)` on morphisms, such that the following
@@ -44,9 +45,10 @@ module _
         obj-Large-Precategory C l1 → obj-Large-Precategory D (γ l1)
       hom-functor-Large-Precategory :
         { l1 l2 : Level}
-        { X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2} →
-        type-hom-Large-Precategory C X Y →
-        type-hom-Large-Precategory D
+        { X : obj-Large-Precategory C l1}
+        { Y : obj-Large-Precategory C l2} →
+        hom-Large-Precategory C X Y →
+        hom-Large-Precategory D
           ( obj-functor-Large-Precategory X)
           ( obj-functor-Large-Precategory Y)
       preserves-comp-functor-Large-Precategory :
@@ -54,15 +56,17 @@ module _
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2}
         { Z : obj-Large-Precategory C l3}
-        ( g : type-hom-Large-Precategory C Y Z)
-        ( f : type-hom-Large-Precategory C X Y) →
-        ( hom-functor-Large-Precategory (comp-hom-Large-Precategory C g f)) ＝
+        ( g : hom-Large-Precategory C Y Z)
+        ( f : hom-Large-Precategory C X Y) →
+        ( hom-functor-Large-Precategory
+          ( comp-hom-Large-Precategory C g f)) ＝
         ( comp-hom-Large-Precategory D
           ( hom-functor-Large-Precategory g)
           ( hom-functor-Large-Precategory f))
       preserves-id-functor-Large-Precategory :
         { l1 : Level} {X : obj-Large-Precategory C l1} →
-        ( hom-functor-Large-Precategory (id-hom-Large-Precategory C {X = X})) ＝
+        ( hom-functor-Large-Precategory
+          ( id-hom-Large-Precategory C {X = X})) ＝
         ( id-hom-Large-Precategory D {X = obj-functor-Large-Precategory X})
 
   open functor-Large-Precategory public

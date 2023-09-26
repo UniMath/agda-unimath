@@ -47,7 +47,7 @@ module _
   where
 
   is-equiv-hom-Abstract-Group-Action :
-    type-hom-Abstract-Group-Action G X Y → UU (l2 ⊔ l3)
+    hom-Abstract-Group-Action G X Y → UU (l2 ⊔ l3)
   is-equiv-hom-Abstract-Group-Action f =
     is-equiv (map-hom-Abstract-Group-Action G X Y f)
 
@@ -89,7 +89,7 @@ module _
   coherence-square-equiv-Abstract-Group-Action = pr2
 
   hom-equiv-Abstract-Group-Action :
-    equiv-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
+    equiv-Abstract-Group-Action → hom-Abstract-Group-Action G X Y
   pr1 (hom-equiv-Abstract-Group-Action e) =
     map-equiv-Abstract-Group-Action e
   pr2 (hom-equiv-Abstract-Group-Action e) =
@@ -132,7 +132,7 @@ module _
           ( htpy-equiv-Abstract-Group-Action))
   is-contr-total-htpy-equiv-Abstract-Group-Action =
     is-contr-equiv
-      ( Σ ( Σ ( type-hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
+      ( Σ ( Σ ( hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
           ( λ f →
             htpy-hom-Abstract-Group-Action G X Y
               ( hom-equiv-Abstract-Group-Action G X Y e)
@@ -241,7 +241,7 @@ module _
         ( is-contr-total-equiv-Set (pr1 X))
         ( pair (pr1 X) id-equiv)
         ( is-contr-equiv
-          ( Σ ( type-hom-Group G (symmetric-Group (pr1 X)))
+          ( Σ ( hom-Group G (symmetric-Group (pr1 X)))
               ( htpy-hom-Group G (symmetric-Group (pr1 X)) (pr2 X)))
           ( equiv-tot
             ( λ f →
