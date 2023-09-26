@@ -13,9 +13,11 @@ open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
 open import elementary-number-theory.squares-modular-arithmetic
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
+open import foundation.identity-types
 ```
 
 </details>
@@ -43,9 +45,18 @@ int-is-square-ℤ-Mod (inl _) _ = zero-ℤ
 int-is-square-ℤ-Mod (inr _) (inl _) = one-ℤ
 int-is-square-ℤ-Mod (inr _) (inr _) = neg-one-ℤ
 
-legendre-symbol : Prime-ℕ → ℤ → ℤ
-legendre-symbol (p , _) a =
+legendre-symbol-ℤ-Mod : (p : Prime-ℕ) → ℤ-Mod (nat-Prime-ℕ p) → ℤ
+legendre-symbol-ℤ-Mod (p , _) k =
   int-is-square-ℤ-Mod
-    ( has-decidable-equality-ℤ-Mod p (mod-ℤ p a) (zero-ℤ-Mod p))
-    ( is-decidable-is-square-ℤ-Mod p (mod-ℤ p a))
+    ( has-decidable-equality-ℤ-Mod p k (zero-ℤ-Mod p))
+    ( is-decidable-is-square-ℤ-Mod p k)
+
+legendre-symbol : Prime-ℕ → ℤ → ℤ
+legendre-symbol p a = legendre-symbol-ℤ-Mod p (mod-ℤ (nat-Prime-ℕ p) a)
+
+is-periodic-legendre-symbol :
+  (p : Prime-ℕ) (a b : ℤ) →
+  mod-ℤ (nat-Prime-ℕ p) a ＝ mod-ℤ (nat-Prime-ℕ p) b →
+  legendre-symbol p a ＝ legendre-symbol p b
+is-periodic-legendre-symbol p _ _ H = ap (legendre-symbol-ℤ-Mod p) H
 ```
