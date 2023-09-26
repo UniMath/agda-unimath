@@ -341,9 +341,9 @@ module _
 
 ### The whiskering operations allow us to commute higher identifications
 
-There are two natural ways to commute higher identifications, using whiskering
-on the left versus using whiskering on the right. They end up being inverses of
-eachother.
+There are two natural ways to commute higher identifications: using whiskering
+on the left versus using whiskering on the right. Thes two ways "undo"
+each other
 
 ```agda
 module _
@@ -370,11 +370,11 @@ module _
   path-swap-nat-identification-right-whisk α =
     nat-htpy (identification-right-whisk α)
 
-  Id-path-swaps-left-inv-path-swap-right :
+  path-swap-right-undoes-path-swap-left :
     {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
     inv (path-swap-nat-identification-right-whisk α β) ＝
     (path-swap-nat-identification-left-whisk β α)
-  Id-path-swaps-left-inv-path-swap-right refl refl = refl
+  path-swap-right-undoes-path-swap-left refl refl = refl
 ```
 
 ### Definition of horizontal inverse

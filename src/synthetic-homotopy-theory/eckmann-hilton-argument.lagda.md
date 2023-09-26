@@ -307,7 +307,7 @@ module _
           ( left-unit-law-identification-left-whisk-Ω² α)
             ( right-unit-law-identification-right-whisk-Ω² β)))
       ( horizontal-concat-Id²
-        ( Id-path-swaps-left-inv-path-swap-right α β)
+        ( path-swap-right-undoes-path-swap-left α β)
         ( inv-inv
           ( horizontal-concat-Id²
             ( right-unit-law-identification-right-whisk-Ω² β)
