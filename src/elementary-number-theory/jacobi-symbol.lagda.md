@@ -33,7 +33,7 @@ for [prime](elementary-number-theory.prime-numbers.md) `p`. Specifically,
 product of the [legendre symbols](elementary-number-theory.legendre-symbol.md)
 `legendre-symbol(p₁,a),legendre-symbol(p₂,a),...,legendre-symbol(pₖ,a)`, where
 `p₁,...,pₖ` are the prime factors of `n`, not necessarily distinct (i.e. it is
-possible that`pᵢ = pⱼ`).
+possible that `pᵢ = pⱼ`).
 
 ## Definition
 
