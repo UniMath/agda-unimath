@@ -49,10 +49,10 @@ module _
 
   equiv-natural-isomorphism-htpy-map-functor-is-category-Precategory :
     (F G : functor-Precategory C D) →
-    ( htpy-map-Precategory C D
+    htpy-map-Precategory C D
       ( map-functor-Precategory C D F)
-      ( map-functor-Precategory C D G)) ≃
-    ( natural-isomorphism-Precategory C D F G)
+      ( map-functor-Precategory C D G) ≃
+    natural-isomorphism-Precategory C D F G
   equiv-natural-isomorphism-htpy-map-functor-is-category-Precategory F G =
     equiv-natural-isomorphism-htpy-map-is-category-Precategory C D
       ( is-category-D)
