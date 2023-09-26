@@ -31,9 +31,9 @@ Commutative-Monoid-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Commutative-Monoid-Large-Precategory =
   Commutative-Monoid
-hom-Large-Precategory
+hom-set-Large-Precategory
   Commutative-Monoid-Large-Precategory =
-  hom-Commutative-Monoid
+  hom-set-Commutative-Monoid
 comp-hom-Large-Precategory
   Commutative-Monoid-Large-Precategory {X = K} {L} {M} =
   comp-hom-Commutative-Monoid K L M

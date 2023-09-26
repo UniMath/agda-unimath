@@ -63,7 +63,7 @@ module _
     where
 
     hom-large-poset-closure-operator-Large-Locale :
-      hom-Large-Poset id
+      hom-set-Large-Poset id
         ( large-poset-Large-Locale L)
         ( large-poset-Large-Locale L)
     hom-large-poset-closure-operator-Large-Locale =

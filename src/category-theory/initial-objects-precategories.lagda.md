@@ -1,4 +1,4 @@
-# Initial objects of a precategory
+# Initial objects in a precategory
 
 ```agda
 module category-theory.initial-objects-precategories where
@@ -11,6 +11,7 @@ open import category-theory.precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.propositions
 open import foundation.universe-levels
 
@@ -21,23 +22,24 @@ open import foundation-core.identity-types
 
 ## Idea
 
-The initial object of a precategory (if it exists) is an object with the
-universal property that there is a unique morphism from it to any object.
+The **initial object** of a [precategory](category-theory.precategories.md), if
+it exists, is an object with the universal property that there is a
+[unique](foundation-core.contractible-types.md) morphism from it to any object.
 
-## Definition
+## Definitions
 
-### The universal property of initial objects in precategories
+### The universal property of an initial object in a precategory
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Precategory l1 l2) (X : obj-Precategory C)
+  {l1 l2 : Level} (C : Precategory l1 l2) (x : obj-Precategory C)
   where
 
   is-initial-prop-obj-Precategory : Prop (l1 ⊔ l2)
   is-initial-prop-obj-Precategory =
     Π-Prop
       ( obj-Precategory C)
-      ( λ Y → is-contr-Prop (type-hom-Precategory C X Y))
+      ( λ y → is-contr-Prop (hom-Precategory C x y))
 
   is-initial-obj-Precategory : UU (l1 ⊔ l2)
   is-initial-obj-Precategory = type-Prop is-initial-prop-obj-Precategory
@@ -45,33 +47,60 @@ module _
   is-prop-is-initial-obj-Precategory : is-prop is-initial-obj-Precategory
   is-prop-is-initial-obj-Precategory =
     is-prop-type-Prop is-initial-prop-obj-Precategory
-```
-
-### The type of initial objects in a precategory
-
-```agda
-initial-object-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
-initial-object-Precategory C =
-  Σ (obj-Precategory C) λ i →
-    (x : obj-Precategory C) → is-contr (type-hom-Precategory C i x)
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  (i : initial-object-Precategory C)
+  (x : obj-Precategory C)
+  (t : is-initial-obj-Precategory C x)
   where
 
-  object-initial-object-Precategory : obj-Precategory C
-  object-initial-object-Precategory = pr1 i
+  hom-is-initial-obj-Precategory :
+    (y : obj-Precategory C) →
+    hom-Precategory C x y
+  hom-is-initial-obj-Precategory = center ∘ t
 
-  morphism-initial-object-Precategory :
-    (x : obj-Precategory C) →
-    type-hom-Precategory C object-initial-object-Precategory x
-  morphism-initial-object-Precategory x = pr1 (pr2 i x)
+  is-unique-hom-is-initial-obj-Precategory :
+    (y : obj-Precategory C) →
+    (f : hom-Precategory C x y) →
+    hom-is-initial-obj-Precategory y ＝ f
+  is-unique-hom-is-initial-obj-Precategory = contraction ∘ t
+```
 
-  is-unique-morphism-initial-object-Precategory :
-    (x : obj-Precategory C)
-    (f : type-hom-Precategory C object-initial-object-Precategory x) →
-    morphism-initial-object-Precategory x ＝ f
-  is-unique-morphism-initial-object-Precategory x = pr2 (pr2 i x)
+### Initial objects in precategories
+
+```agda
+initial-obj-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
+initial-obj-Precategory C =
+  Σ (obj-Precategory C) (is-initial-obj-Precategory C)
+
+module _
+  {l1 l2 : Level}
+  (C : Precategory l1 l2)
+  (t : initial-obj-Precategory C)
+  where
+
+  obj-initial-obj-Precategory : obj-Precategory C
+  obj-initial-obj-Precategory = pr1 t
+
+  is-initial-obj-initial-obj-Precategory :
+    is-initial-obj-Precategory C obj-initial-obj-Precategory
+  is-initial-obj-initial-obj-Precategory = pr2 t
+
+  hom-initial-obj-Precategory :
+    (y : obj-Precategory C) →
+    hom-Precategory C obj-initial-obj-Precategory y
+  hom-initial-obj-Precategory =
+    hom-is-initial-obj-Precategory C
+      ( obj-initial-obj-Precategory)
+      ( is-initial-obj-initial-obj-Precategory)
+
+  is-unique-hom-initial-obj-Precategory :
+    (y : obj-Precategory C) →
+    (f : hom-Precategory C obj-initial-obj-Precategory y) →
+    hom-initial-obj-Precategory y ＝ f
+  is-unique-hom-initial-obj-Precategory =
+    is-unique-hom-is-initial-obj-Precategory C
+      ( obj-initial-obj-Precategory)
+      ( is-initial-obj-initial-obj-Precategory)
 ```

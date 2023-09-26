@@ -185,7 +185,7 @@ is-locally-finite-equiv' :
 is-locally-finite-equiv' e = is-locally-finite-equiv (inv-equiv e)
 ```
 
-### types with decidable equality are locally finite
+### Types with decidable equality are locally finite
 
 ```agda
 is-locally-finite-has-decidable-equality :

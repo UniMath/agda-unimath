@@ -377,7 +377,7 @@ module _
   {l : Level} (G : Group l)
   where
 
-  conjugation-hom-Group : type-Group G → type-hom-Group G G
+  conjugation-hom-Group : type-Group G → hom-Group G G
   pr1 (conjugation-hom-Group x) = conjugation-Group G x
   pr2 (conjugation-hom-Group x) = distributive-conjugation-mul-Group G x
 

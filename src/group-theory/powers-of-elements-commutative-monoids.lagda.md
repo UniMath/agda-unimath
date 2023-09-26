@@ -173,7 +173,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Commutative-Monoid l1)
-  (N : Commutative-Monoid l2) (f : type-hom-Commutative-Monoid M N)
+  (N : Commutative-Monoid l2) (f : hom-Commutative-Monoid M N)
   where
 
   preserves-powers-hom-Commutative-Monoid :

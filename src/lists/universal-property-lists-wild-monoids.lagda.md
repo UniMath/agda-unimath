@@ -276,7 +276,7 @@ preserves-coh-unit-laws-map-elim-list-Wild-Monoid
 elim-list-Wild-Monoid :
   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
   (f : X → type-Wild-Monoid M) →
-  type-hom-Wild-Monoid (list-Wild-Monoid X) M
+  hom-Wild-Monoid (list-Wild-Monoid X) M
 elim-list-Wild-Monoid M f =
   pair
     ( pair (map-elim-list-Wild-Monoid M f) refl)
@@ -293,7 +293,7 @@ elim-list-Wild-Monoid M f =
 ```agda
 -- htpy-elim-list-Wild-Monoid :
 --   {l1 l2 : Level} {X : UU l1} (M : Wild-Monoid l2)
---   (g h : type-hom-Wild-Monoid (list-Wild-Monoid X) M)
+--   (g h : hom-Wild-Monoid (list-Wild-Monoid X) M)
 --   ( H : ( map-hom-Wild-Monoid (list-Wild-Monoid X) M g ∘ unit-list) ~
 --         ( map-hom-Wild-Monoid (list-Wild-Monoid X) M h ∘ unit-list)) →
 --   htpy-hom-Wild-Monoid (list-Wild-Monoid X) M g h

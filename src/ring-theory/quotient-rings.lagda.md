@@ -28,11 +28,11 @@ open import ring-theory.rings
 precomp-quotient-Ring :
   {l1 l2 l3 l4 : Level} (R : Ring l1) (I : ideal-Ring l2 R)
   (S : Ring l3) (T : Ring l4) →
-  (f : type-hom-Ring R S)
+  (f : hom-Ring R S)
   ( H : (x : type-Ring R) → is-in-ideal-Ring R I x →
         map-hom-Ring R S f x ＝ zero-Ring S) →
-  type-hom-Ring S T →
-  Σ ( type-hom-Ring R T)
+  hom-Ring S T →
+  Σ ( hom-Ring R T)
     ( λ g →
       (x : type-Ring R) →
       is-in-ideal-Ring R I x → map-hom-Ring R T g x ＝ zero-Ring T)
@@ -42,7 +42,7 @@ pr2 (precomp-quotient-Ring R I S T f H h) x K =
 
 universal-property-quotient-Ring :
   {l1 l2 l3 : Level} (l : Level) (R : Ring l1) (I : ideal-Ring l2 R)
-  (S : Ring l3) (f : type-hom-Ring R S)
+  (S : Ring l3) (f : hom-Ring R S)
   ( H : (x : type-Ring R) → is-in-ideal-Ring R I x →
         map-hom-Ring R S f x ＝ zero-Ring S) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ lsuc l)

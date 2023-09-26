@@ -22,8 +22,8 @@ open import order-theory.order-preserving-maps-large-posets
 A **galois connection** between [large posets](order-theory.large-posets.md) `P`
 and `Q` consists of
 [order preserving maps](order-theory.order-preserving-maps-large-posets.md)
-`f : hom-Large-Poset id P Q` and `hom-Large-Poset id Q P` such that the adjoint
-relation
+`f : hom-set-Large-Poset id P Q` and `hom-set-Large-Poset id Q P` such that the
+adjoint relation
 
 ```text
   (f x ≤ y) ↔ (x ≤ g y)
@@ -60,9 +60,9 @@ module _
       make-galois-connection-Large-Poset
     field
       lower-adjoint-galois-connection-Large-Poset :
-        hom-Large-Poset γ P Q
+        hom-set-Large-Poset γ P Q
       upper-adjoint-galois-connection-Large-Poset :
-        hom-Large-Poset δ Q P
+        hom-set-Large-Poset δ Q P
       adjoint-relation-galois-connection-Large-Poset :
         {l1 l2 : Level}
         (x : type-Large-Poset P l1) (y : type-Large-Poset Q l2) →
@@ -139,13 +139,13 @@ module _
       UU (βQ l1 l2)
     _≤-Q_ = leq-Large-Poset Q
 
-    hom-f : hom-Large-Poset _ P Q
+    hom-f : hom-set-Large-Poset _ P Q
     hom-f = lower-adjoint-galois-connection-Large-Poset G
 
     f : {l : Level} → type-Large-Poset P l → type-Large-Poset Q (γ l)
     f = map-hom-Large-Poset P Q hom-f
 
-    hom-g : hom-Large-Poset _ Q P
+    hom-g : hom-set-Large-Poset _ Q P
     hom-g = upper-adjoint-galois-connection-Large-Poset G
 
     g : {l : Level} → type-Large-Poset Q l → type-Large-Poset P (δ l)

@@ -47,72 +47,72 @@ open import ring-theory.rings
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
-  is-iso-prop-hom-Ring : Prop (l1 ⊔ l2)
-  is-iso-prop-hom-Ring =
-    is-iso-prop-hom-Large-Precategory Ring-Large-Precategory {X = R} {Y = S} f
+  is-iso-prop-Ring : Prop (l1 ⊔ l2)
+  is-iso-prop-Ring =
+    is-iso-prop-Large-Precategory Ring-Large-Precategory {X = R} {Y = S} f
 
-  is-iso-hom-Ring : UU (l1 ⊔ l2)
-  is-iso-hom-Ring =
-    is-iso-hom-Large-Precategory Ring-Large-Precategory {X = R} {Y = S} f
+  is-iso-Ring : UU (l1 ⊔ l2)
+  is-iso-Ring =
+    is-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S} f
 
-  is-prop-is-iso-hom-Ring : is-prop is-iso-hom-Ring
-  is-prop-is-iso-hom-Ring =
-    is-prop-is-iso-hom-Large-Precategory
+  is-prop-is-iso-Ring : is-prop is-iso-Ring
+  is-prop-is-iso-Ring =
+    is-prop-is-iso-Large-Precategory
       ( Ring-Large-Precategory)
       { X = R}
       { Y = S}
       ( f)
 
-  hom-inv-is-iso-hom-Ring : is-iso-hom-Ring → type-hom-Ring S R
-  hom-inv-is-iso-hom-Ring =
-    hom-inv-is-iso-hom-Large-Precategory
+  hom-inv-is-iso-Ring : is-iso-Ring → hom-Ring S R
+  hom-inv-is-iso-Ring =
+    hom-inv-is-iso-Large-Precategory
       ( Ring-Large-Precategory)
       { X = R}
       { Y = S}
       ( f)
 
-  is-section-hom-inv-is-iso-hom-Ring :
-    (U : is-iso-hom-Ring) →
-    comp-hom-Ring S R S f (hom-inv-is-iso-hom-Ring U) ＝ id-hom-Ring S
-  is-section-hom-inv-is-iso-hom-Ring =
-    is-section-hom-inv-is-iso-hom-Large-Precategory
+  is-section-hom-inv-is-iso-Ring :
+    (U : is-iso-Ring) →
+    comp-hom-Ring S R S f (hom-inv-is-iso-Ring U) ＝ id-hom-Ring S
+  is-section-hom-inv-is-iso-Ring =
+    is-section-hom-inv-is-iso-Large-Precategory
       ( Ring-Large-Precategory)
       { X = R}
       { Y = S}
       ( f)
 
-  is-retraction-hom-inv-is-iso-hom-Ring :
-    (U : is-iso-hom-Ring) →
-    comp-hom-Ring R S R (hom-inv-is-iso-hom-Ring U) f ＝ id-hom-Ring R
-  is-retraction-hom-inv-is-iso-hom-Ring =
-    is-retraction-hom-inv-is-iso-hom-Large-Precategory
+  is-retraction-hom-inv-is-iso-Ring :
+    (U : is-iso-Ring) →
+    comp-hom-Ring R S R (hom-inv-is-iso-Ring U) f ＝ id-hom-Ring R
+  is-retraction-hom-inv-is-iso-Ring =
+    is-retraction-hom-inv-is-iso-Large-Precategory
       ( Ring-Large-Precategory)
       { X = R}
       { Y = S}
       ( f)
 
-  map-inv-is-iso-hom-Ring : is-iso-hom-Ring → type-Ring S → type-Ring R
-  map-inv-is-iso-hom-Ring U =
-    map-hom-Ring S R (hom-inv-is-iso-hom-Ring U)
+  map-inv-is-iso-Ring : is-iso-Ring → type-Ring S → type-Ring R
+  map-inv-is-iso-Ring U =
+    map-hom-Ring S R (hom-inv-is-iso-Ring U)
 
-  is-section-map-inv-is-iso-hom-Ring :
-    (U : is-iso-hom-Ring) → map-hom-Ring R S f ∘ map-inv-is-iso-hom-Ring U ~ id
-  is-section-map-inv-is-iso-hom-Ring U =
+  is-section-map-inv-is-iso-Ring :
+    (U : is-iso-Ring) → map-hom-Ring R S f ∘ map-inv-is-iso-Ring U ~ id
+  is-section-map-inv-is-iso-Ring U =
     htpy-eq-hom-Ring S S
-      ( comp-hom-Ring S R S f (hom-inv-is-iso-hom-Ring U))
+      ( comp-hom-Ring S R S f (hom-inv-is-iso-Ring U))
       ( id-hom-Ring S)
-      ( is-section-hom-inv-is-iso-hom-Ring U)
+      ( is-section-hom-inv-is-iso-Ring U)
 
-  is-retraction-map-inv-is-iso-hom-Ring :
-    (U : is-iso-hom-Ring) → map-inv-is-iso-hom-Ring U ∘ map-hom-Ring R S f ~ id
-  is-retraction-map-inv-is-iso-hom-Ring U =
+  is-retraction-map-inv-is-iso-Ring :
+    (U : is-iso-Ring) → map-inv-is-iso-Ring U ∘ map-hom-Ring R S f ~ id
+  is-retraction-map-inv-is-iso-Ring U =
     htpy-eq-hom-Ring R R
-      ( comp-hom-Ring R S R (hom-inv-is-iso-hom-Ring U) f)
+      ( comp-hom-Ring R S R (hom-inv-is-iso-Ring U) f)
       ( id-hom-Ring R)
-      ( is-retraction-hom-inv-is-iso-hom-Ring U)
+      ( is-retraction-hom-inv-is-iso-Ring U)
 ```
 
 ### Isomorphisms of rings
@@ -125,7 +125,7 @@ module _
   iso-Ring : UU (l1 ⊔ l2)
   iso-Ring = iso-Large-Precategory Ring-Large-Precategory R S
 
-  hom-iso-Ring : iso-Ring → type-hom-Ring R S
+  hom-iso-Ring : iso-Ring → hom-Ring R S
   hom-iso-Ring =
     hom-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
@@ -159,11 +159,11 @@ module _
     preserves-mul-hom-Ring R S (hom-iso-Ring f)
 
   is-iso-iso-Ring :
-    (f : iso-Ring) → is-iso-hom-Ring R S (hom-iso-Ring f)
+    (f : iso-Ring) → is-iso-Ring R S (hom-iso-Ring f)
   is-iso-iso-Ring =
     is-iso-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
-  hom-inv-iso-Ring : iso-Ring → type-hom-Ring S R
+  hom-inv-iso-Ring : iso-Ring → hom-Ring S R
   hom-inv-iso-Ring =
     hom-inv-iso-Large-Precategory Ring-Large-Precategory {X = R} {Y = S}
 
@@ -274,7 +274,7 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  is-iso-id-hom-Ring : is-iso-hom-Ring R R (id-hom-Ring R)
+  is-iso-id-hom-Ring : is-iso-Ring R R (id-hom-Ring R)
   is-iso-id-hom-Ring =
     is-iso-id-hom-Large-Precategory Ring-Large-Precategory {X = R}
 
@@ -311,123 +311,123 @@ module _
     iso-ab-Ring → type-iso-Ab (ab-Ring R) (ab-Ring S)
   iso-ab-iso-ab-Ring = pr1
 
-  is-iso-hom-ab-hom-Ring : type-hom-Ring R S → UU (l1 ⊔ l2)
-  is-iso-hom-ab-hom-Ring f =
-    is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f)
+  is-iso-ab-hom-Ring : hom-Ring R S → UU (l1 ⊔ l2)
+  is-iso-ab-hom-Ring f =
+    is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f)
 
-  is-iso-hom-ab-is-iso-hom-Ring :
-    (f : type-hom-Ring R S) →
-    is-iso-hom-Ring R S f → is-iso-hom-ab-hom-Ring f
-  pr1 (is-iso-hom-ab-is-iso-hom-Ring f U) =
-    hom-ab-hom-Ring S R (hom-inv-is-iso-hom-Ring R S f U)
-  pr1 (pr2 (is-iso-hom-ab-is-iso-hom-Ring f U)) =
+  is-iso-ab-is-iso-Ring :
+    (f : hom-Ring R S) →
+    is-iso-Ring R S f → is-iso-ab-hom-Ring f
+  pr1 (is-iso-ab-is-iso-Ring f U) =
+    hom-ab-hom-Ring S R (hom-inv-is-iso-Ring R S f U)
+  pr1 (pr2 (is-iso-ab-is-iso-Ring f U)) =
     ap
       ( hom-ab-hom-Ring S S)
-      ( is-section-hom-inv-is-iso-hom-Ring R S f U)
-  pr2 (pr2 (is-iso-hom-ab-is-iso-hom-Ring f U)) =
+      ( is-section-hom-inv-is-iso-Ring R S f U)
+  pr2 (pr2 (is-iso-ab-is-iso-Ring f U)) =
     ap
       ( hom-ab-hom-Ring R R)
-      ( is-retraction-hom-inv-is-iso-hom-Ring R S f U)
+      ( is-retraction-hom-inv-is-iso-Ring R S f U)
 
   abstract
-    preserves-mul-inv-is-iso-hom-Ab :
-      (f : type-hom-Ab (ab-Ring R) (ab-Ring S)) →
-      (U : is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f) →
+    preserves-mul-inv-is-iso-Ab :
+      (f : hom-Ab (ab-Ring R) (ab-Ring S)) →
+      (U : is-iso-Ab (ab-Ring R) (ab-Ring S) f) →
       preserves-mul-hom-Ab R S f →
       preserves-mul-hom-Ab S R
-        ( hom-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U)
-    preserves-mul-inv-is-iso-hom-Ab f U μ x y =
+        ( hom-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U)
+    preserves-mul-inv-is-iso-Ab f U μ x y =
       ( inv
         ( ap
-          ( map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U)
+          ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U)
           ( ( μ
-              ( map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U x)
-              ( map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U y)) ∙
+              ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U x)
+              ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U y)) ∙
             ( ap-mul-Ring S
-              ( is-section-map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U x)
-              ( is-section-map-inv-is-iso-hom-Ab
+              ( is-section-map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U x)
+              ( is-section-map-inv-is-iso-Ab
                 ( ab-Ring R)
                 ( ab-Ring S)
                 ( f)
                 ( U)
                 ( y)))))) ∙
-      ( is-retraction-map-inv-is-iso-hom-Ab
+      ( is-retraction-map-inv-is-iso-Ab
         ( ab-Ring R)
         ( ab-Ring S)
         ( f)
         ( U)
         ( mul-Ring R
-          ( map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U x)
-          ( map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U y)))
+          ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U x)
+          ( map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U y)))
 
-  preserves-unit-inv-is-iso-hom-Ab :
-    (f : type-hom-Ab (ab-Ring R) (ab-Ring S)) →
-    (U : is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f) →
+  preserves-unit-inv-is-iso-Ab :
+    (f : hom-Ab (ab-Ring R) (ab-Ring S)) →
+    (U : is-iso-Ab (ab-Ring R) (ab-Ring S) f) →
     preserves-unit-hom-Ab R S f →
     preserves-unit-hom-Ab S R
-      ( hom-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U)
-  preserves-unit-inv-is-iso-hom-Ab f U ν =
-    ( inv (ap (map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U) ν)) ∙
-    ( is-retraction-map-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U _)
+      ( hom-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U)
+  preserves-unit-inv-is-iso-Ab f U ν =
+    ( inv (ap (map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U) ν)) ∙
+    ( is-retraction-map-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U _)
 
-  is-ring-homomorphism-inv-is-iso-hom-Ab :
-    (f : type-hom-Ab (ab-Ring R) (ab-Ring S)) →
-    (U : is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f) →
+  is-ring-homomorphism-inv-is-iso-Ab :
+    (f : hom-Ab (ab-Ring R) (ab-Ring S)) →
+    (U : is-iso-Ab (ab-Ring R) (ab-Ring S) f) →
     is-ring-homomorphism-hom-Ab R S f →
     is-ring-homomorphism-hom-Ab S R
-      ( hom-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) f U)
-  pr1 (is-ring-homomorphism-inv-is-iso-hom-Ab f U (μ , ν)) =
-    preserves-mul-inv-is-iso-hom-Ab f U μ
-  pr2 (is-ring-homomorphism-inv-is-iso-hom-Ab f U (μ , ν)) =
-    preserves-unit-inv-is-iso-hom-Ab f U ν
+      ( hom-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) f U)
+  pr1 (is-ring-homomorphism-inv-is-iso-Ab f U (μ , ν)) =
+    preserves-mul-inv-is-iso-Ab f U μ
+  pr2 (is-ring-homomorphism-inv-is-iso-Ab f U (μ , ν)) =
+    preserves-unit-inv-is-iso-Ab f U ν
 
-  inv-hom-ring-is-iso-hom-Ab :
-    (f : type-hom-Ring R S) →
-    is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) →
-    type-hom-Ring S R
-  pr1 (inv-hom-ring-is-iso-hom-Ab f U) =
-    hom-inv-is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) U
-  pr2 (inv-hom-ring-is-iso-hom-Ab f U) =
-    is-ring-homomorphism-inv-is-iso-hom-Ab
+  inv-hom-ring-is-iso-Ab :
+    (f : hom-Ring R S) →
+    is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) →
+    hom-Ring S R
+  pr1 (inv-hom-ring-is-iso-Ab f U) =
+    hom-inv-is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) U
+  pr2 (inv-hom-ring-is-iso-Ab f U) =
+    is-ring-homomorphism-inv-is-iso-Ab
       ( hom-ab-hom-Ring R S f)
       ( U)
       ( is-ring-homomorphism-hom-Ring R S f)
 
   abstract
-    is-iso-hom-ring-is-iso-hom-Ab :
-      (f : type-hom-Ring R S) →
-      is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) →
-      is-iso-hom-Ring R S f
-    pr1 (is-iso-hom-ring-is-iso-hom-Ab f U) =
-      inv-hom-ring-is-iso-hom-Ab f U
-    pr1 (pr2 (is-iso-hom-ring-is-iso-hom-Ab f U)) =
+    is-iso-ring-is-iso-Ab :
+      (f : hom-Ring R S) →
+      is-iso-Ab (ab-Ring R) (ab-Ring S) (hom-ab-hom-Ring R S f) →
+      is-iso-Ring R S f
+    pr1 (is-iso-ring-is-iso-Ab f U) =
+      inv-hom-ring-is-iso-Ab f U
+    pr1 (pr2 (is-iso-ring-is-iso-Ab f U)) =
       eq-htpy-hom-Ring S S
         ( comp-hom-Ring S R S f
-          ( inv-hom-ring-is-iso-hom-Ab f U))
+          ( inv-hom-ring-is-iso-Ab f U))
         ( id-hom-Ring S)
         ( htpy-eq-hom-Ab (ab-Ring S) (ab-Ring S)
           ( hom-ab-hom-Ring S S
             ( comp-hom-Ring S R S f
-              ( inv-hom-ring-is-iso-hom-Ab f U)))
+              ( inv-hom-ring-is-iso-Ab f U)))
           ( id-hom-Ab (ab-Ring S))
-          ( is-section-hom-inv-is-iso-hom-Ab
+          ( is-section-hom-inv-is-iso-Ab
             ( ab-Ring R)
             ( ab-Ring S)
             ( hom-ab-hom-Ring R S f)
             ( U)))
-    pr2 (pr2 (is-iso-hom-ring-is-iso-hom-Ab f U)) =
+    pr2 (pr2 (is-iso-ring-is-iso-Ab f U)) =
       eq-htpy-hom-Ring R R
         ( comp-hom-Ring R S R
-          ( inv-hom-ring-is-iso-hom-Ab f U)
+          ( inv-hom-ring-is-iso-Ab f U)
           ( f))
         ( id-hom-Ring R)
         ( htpy-eq-hom-Ab (ab-Ring R) (ab-Ring R)
           ( hom-ab-hom-Ring R R
             ( comp-hom-Ring R S R
-              ( inv-hom-ring-is-iso-hom-Ab f U)
+              ( inv-hom-ring-is-iso-Ab f U)
               ( f)))
           ( id-hom-Ab (ab-Ring R))
-          ( is-retraction-hom-inv-is-iso-hom-Ab
+          ( is-retraction-hom-inv-is-iso-Ab
             ( ab-Ring R)
             ( ab-Ring S)
             ( hom-ab-hom-Ring R S f)
@@ -437,7 +437,7 @@ module _
     iso-Ring R S → type-iso-Ab (ab-Ring R) (ab-Ring S)
   pr1 (iso-ab-iso-Ring f) = hom-ab-hom-Ring R S (hom-iso-Ring R S f)
   pr2 (iso-ab-iso-Ring f) =
-    is-iso-hom-ab-is-iso-hom-Ring
+    is-iso-ab-is-iso-Ring
       ( hom-iso-Ring R S f)
       ( is-iso-iso-Ring R S f)
 
@@ -445,23 +445,23 @@ module _
   equiv-iso-ab-iso-Ring =
     ( inv-equiv
       ( associative-Σ
-        ( type-hom-Ab (ab-Ring R) (ab-Ring S))
-        ( is-iso-hom-Ab (ab-Ring R) (ab-Ring S))
+        ( hom-Ab (ab-Ring R) (ab-Ring S))
+        ( is-iso-Ab (ab-Ring R) (ab-Ring S))
         ( λ f → is-ring-homomorphism-hom-Ab R S (pr1 f)))) ∘e
     ( equiv-tot (λ f → commutative-prod)) ∘e
     ( associative-Σ
-      ( type-hom-Ab (ab-Ring R) (ab-Ring S))
+      ( hom-Ab (ab-Ring R) (ab-Ring S))
       ( is-ring-homomorphism-hom-Ab R S)
-      ( λ f → is-iso-hom-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
+      ( λ f → is-iso-Ab (ab-Ring R) (ab-Ring S) (pr1 f))) ∘e
     ( equiv-type-subtype
-      ( is-prop-is-iso-hom-Ring R S)
+      ( is-prop-is-iso-Ring R S)
       ( λ f →
-        is-prop-is-iso-hom-Ab
+        is-prop-is-iso-Ab
           ( ab-Ring R)
           ( ab-Ring S)
           ( hom-ab-hom-Ring R S f))
-      ( is-iso-hom-ab-is-iso-hom-Ring)
-      ( is-iso-hom-ring-is-iso-hom-Ab))
+      ( is-iso-ab-is-iso-Ring)
+      ( is-iso-ring-is-iso-Ab))
 ```
 
 ### Characterizing identifications of rings

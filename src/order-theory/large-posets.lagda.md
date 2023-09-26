@@ -118,7 +118,7 @@ module _
     is-large-poset-Large-Category →
     is-antisymmetric-Large-Relation
       ( obj-Large-Category C)
-      ( type-hom-Large-Category C)
+      ( hom-Large-Category C)
   is-antisymmetric-is-large-poset-Large-Category H X Y f g =
     eq-iso-Large-Category C X Y
       ( f , g , eq-is-prop (H Y Y) , eq-is-prop (H X X))
@@ -175,7 +175,8 @@ module _
     is-equiv-is-prop
       ( is-set-type-Large-Poset P x y)
       ( is-prop-iso-Precategory
-        ( precategory-Large-Poset l) x y (is-prop-leq-Large-Poset P x y))
+        ( precategory-Large-Poset l)
+        ( is-prop-leq-Large-Poset P x y))
       ( λ f →
         antisymmetric-leq-Large-Poset P x y
         ( hom-iso-Precategory (precategory-Large-Poset l) f)

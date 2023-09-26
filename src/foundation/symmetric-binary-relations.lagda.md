@@ -16,6 +16,7 @@ open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.morphisms-binary-relations
 open import foundation.symmetric-operations
 open import foundation.transport-along-identifications
 open import foundation.universe-levels

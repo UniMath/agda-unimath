@@ -12,14 +12,11 @@ open import category-theory.isomorphisms-in-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtype-identity-principle
 open import foundation.universe-levels
 ```
 
@@ -27,289 +24,331 @@ open import foundation.universe-levels
 
 ## Idea
 
-An isomorphism in a category is an isomorphism in the underlying precategory.
+An **isomorphism** in a [category](category-theory.categories.md) `C` is a
+morphism `f : x → y` in `C` for which there exists a morphism `g : y → x` such
+that `f ∘ g ＝ id` and `g ∘ f ＝ id`.
 
-## Definition
+## Definitions
 
-### The predicate of being an isomorphism
+### The predicate of being an isomorphism in a category
 
 ```agda
+is-iso-Category :
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : hom-Category C x y) →
+  UU l2
+is-iso-Category C = is-iso-Precategory (precategory-Category C)
+
 module _
-  {l1 l2 : Level} (C : Category l1 l2)
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
   where
 
-  is-iso-Category :
-    {x y : obj-Category C} (f : type-hom-Category C x y) → UU l2
-  is-iso-Category = is-iso-Precategory (precategory-Category C)
-
   hom-inv-is-iso-Category :
-    {x y : obj-Category C} {f : type-hom-Category C x y} →
-    is-iso-Category f → type-hom-Category C y x
-  hom-inv-is-iso-Category = hom-inv-is-iso-Precategory (precategory-Category C)
+    is-iso-Category C f → hom-Category C y x
+  hom-inv-is-iso-Category =
+    hom-inv-is-iso-Precategory (precategory-Category C)
 
   is-section-hom-inv-is-iso-Category :
-    {x y : obj-Category C} {f : type-hom-Category C x y}
-    (H : is-iso-Category f) →
+    (H : is-iso-Category C f) →
     comp-hom-Category C f (hom-inv-is-iso-Category H) ＝
     id-hom-Category C
   is-section-hom-inv-is-iso-Category =
     is-section-hom-inv-is-iso-Precategory (precategory-Category C)
 
   is-retraction-hom-inv-is-iso-Category :
-    {x y : obj-Category C} {f : type-hom-Category C x y}
-    (H : is-iso-Category f) →
+    (H : is-iso-Category C f) →
     comp-hom-Category C (hom-inv-is-iso-Category H) f ＝
     id-hom-Category C
   is-retraction-hom-inv-is-iso-Category =
     is-retraction-hom-inv-is-iso-Precategory (precategory-Category C)
-
-  is-prop-is-iso-Category :
-    {x y : obj-Category C} (f : type-hom-Category C x y) →
-    is-prop (is-iso-Category f)
-  is-prop-is-iso-Category = is-prop-is-iso-Precategory (precategory-Category C)
-
-  is-iso-Category-Prop :
-    {x y : obj-Category C} (f : type-hom-Category C x y) → Prop l2
-  is-iso-Category-Prop = is-iso-Precategory-Prop (precategory-Category C)
 ```
 
-### The type of isomorphisms between two objects
+### Isomorphisms in a category
 
 ```agda
-  iso-Category : (x y : obj-Category C) → UU l2
-  iso-Category = iso-Precategory (precategory-Category C)
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  (x y : obj-Category C)
+  where
 
-  hom-iso-Category :
-    {x y : obj-Category C} → iso-Category x y → type-hom-Category C x y
-  hom-iso-Category = hom-iso-Precategory (precategory-Category C)
+  iso-Category : UU l2
+  iso-Category = iso-Precategory (precategory-Category C) x y
 
-  is-iso-hom-iso-Category :
-    {x y : obj-Category C} (f : iso-Category x y) →
-    is-iso-Category (hom-iso-Category f)
-  is-iso-hom-iso-Category = is-iso-hom-iso-Precategory (precategory-Category C)
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : iso-Category C x y)
+  where
 
-  hom-inv-iso-Category :
-    {x y : obj-Category C} → iso-Category x y → type-hom-Category C y x
-  hom-inv-iso-Category = hom-inv-iso-Precategory (precategory-Category C)
+  hom-iso-Category : hom-Category C x y
+  hom-iso-Category = hom-iso-Precategory (precategory-Category C) f
+
+  is-iso-iso-Category :
+    is-iso-Category C hom-iso-Category
+  is-iso-iso-Category =
+    is-iso-iso-Precategory (precategory-Category C) f
+
+  hom-inv-iso-Category : hom-Category C y x
+  hom-inv-iso-Category = hom-inv-iso-Precategory (precategory-Category C) f
 
   is-section-hom-inv-iso-Category :
-    { x y : obj-Category C}
-    ( f : iso-Category x y) →
     ( comp-hom-Category C
-      ( hom-iso-Category f)
-      ( hom-inv-iso-Category f)) ＝
+      ( hom-iso-Category)
+      ( hom-inv-iso-Category)) ＝
     ( id-hom-Category C)
   is-section-hom-inv-iso-Category =
-    is-section-hom-inv-iso-Precategory (precategory-Category C)
+    is-section-hom-inv-iso-Precategory (precategory-Category C) f
 
   is-retraction-hom-inv-iso-Category :
-    { x y : obj-Category C}
-    ( f : iso-Category x y) →
-    ( comp-hom-Category C (hom-inv-iso-Category f) (hom-iso-Category f)) ＝
+    ( comp-hom-Category C
+      ( hom-inv-iso-Category)
+      ( hom-iso-Category)) ＝
     ( id-hom-Category C)
   is-retraction-hom-inv-iso-Category =
-    is-retraction-hom-inv-iso-Precategory (precategory-Category C)
-
-  inv-iso-Category :
-    {x y : obj-Category C} → iso-Category x y → iso-Category y x
-  inv-iso-Category = inv-iso-Precategory (precategory-Category C)
-```
-
-### Precomposing by isomorphisms
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
-  precomp-iso-Category :
-    {x y z : obj-Category C} →
-    iso-Category C x y → type-hom-Category C y z → type-hom-Category C x z
-  precomp-iso-Category f g = comp-hom-Category C g (hom-iso-Category C f)
-```
-
-### Postcomposing by isomorphisms
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
-  postcomp-iso-Category :
-    {x y z : obj-Category C} →
-    iso-Category C y z → type-hom-Category C x y → type-hom-Category C x z
-  postcomp-iso-Category f g = comp-hom-Category C (hom-iso-Category C f) g
+    is-retraction-hom-inv-iso-Precategory (precategory-Category C) f
 ```
 
 ## Examples
 
-### The identity morphisms are isomorphisms
+### The identity isomorphisms
+
+For any object `x : A`, the identity morphism `id_x : hom x x` is an isomorphism
+from `x` to `x` since `id_x ∘ id_x = id_x` (it is its own inverse).
 
 ```agda
 module _
-  {l1 l2 : Level} (C : Category l1 l2)
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x : obj-Category C}
   where
 
-  is-iso-id-hom-Category :
-    {x : obj-Category C} → is-iso-Category C (id-hom-Category C {x})
+  is-iso-id-hom-Category : is-iso-Category C (id-hom-Category C {x})
   is-iso-id-hom-Category = is-iso-id-hom-Precategory (precategory-Category C)
 
-  id-iso-Category : {x : obj-Category C} → iso-Category C x x
+  id-iso-Category : iso-Category C x x
   id-iso-Category = id-iso-Precategory (precategory-Category C)
 ```
 
-### Compositions of isomorphisms are isomorphisms
+### Equalities give rise to isomorphisms
+
+An equality between objects `x y : A` gives rise to an isomorphism between them.
+This is because, by the J-rule, it is enough to construct an isomorphism given
+`refl : x ＝ x`, from `x` to itself. We take the identity morphism as such an
+isomorphism.
 
 ```agda
 module _
   {l1 l2 : Level} (C : Category l1 l2)
   where
 
-  hom-comp-iso-Category :
-    {x y z : obj-Category C} →
-    iso-Category C y z → iso-Category C x y → type-hom-Category C x z
-  hom-comp-iso-Category g f =
-    comp-hom-Category C (hom-iso-Category C g) (hom-iso-Category C f)
+  iso-eq-Category :
+    (x y : obj-Category C) →
+    x ＝ y → iso-Category C x y
+  iso-eq-Category = iso-eq-Precategory (precategory-Category C)
 
-  hom-inv-comp-iso-Category :
-    {x y z : obj-Category C} →
-    iso-Category C y z → iso-Category C x y → type-hom-Category C z x
-  hom-inv-comp-iso-Category g f =
-    comp-hom-Category C (hom-inv-iso-Category C f) (hom-inv-iso-Category C g)
-
-  is-section-hom-inv-comp-iso-Category :
-    { x y z : obj-Category C}
-    ( g : iso-Category C y z)
-    ( f : iso-Category C x y) →
-    ( comp-hom-Category C
-      ( hom-comp-iso-Category g f)
-      ( hom-inv-comp-iso-Category g f)) ＝
-    ( id-hom-Category C)
-  is-section-hom-inv-comp-iso-Category g f =
-    equational-reasoning
-      comp-hom-Category C
-        ( hom-comp-iso-Category g f)
-        ( hom-inv-comp-iso-Category g f)
-      ＝ comp-hom-Category C
-          ( hom-iso-Category C g)
-          ( comp-hom-Category C
-            ( hom-iso-Category C f)
-            ( hom-inv-comp-iso-Category g f))
-        by
-          associative-comp-hom-Category C
-            ( hom-iso-Category C g)
-            ( hom-iso-Category C f)
-            ( hom-inv-comp-iso-Category g f)
-      ＝ comp-hom-Category C
-          ( hom-iso-Category C g)
-          ( comp-hom-Category C
-            ( comp-hom-Category C
-              ( hom-iso-Category C f)
-              ( hom-inv-iso-Category C f))
-            ( hom-inv-iso-Category C g))
-        by
-          ap
-            ( comp-hom-Category C (hom-iso-Category C g))
-            ( inv
-              ( associative-comp-hom-Category C
-                ( hom-iso-Category C f)
-                ( hom-inv-iso-Category C f)
-                ( hom-inv-iso-Category C g)))
-      ＝ comp-hom-Category C
-          ( hom-iso-Category C g)
-          ( comp-hom-Category C
-            ( id-hom-Category C)
-            ( hom-inv-iso-Category C g))
-        by
-          ap
-            ( comp-hom-Category C (hom-iso-Category C g))
-            ( ap
-              ( λ h → comp-hom-Category C h (hom-inv-iso-Category C g))
-              ( is-section-hom-inv-iso-Category C f))
-      ＝ comp-hom-Category C (hom-iso-Category C g) (hom-inv-iso-Category C g)
-        by
-          ap
-            ( comp-hom-Category C (hom-iso-Category C g))
-            ( left-unit-law-comp-hom-Category C (hom-inv-iso-Category C g))
-      ＝ id-hom-Category C
-        by is-section-hom-inv-iso-Category C g
-
-  is-retraction-hom-inv-comp-iso-Category :
-    {x y z : obj-Category C} (g : iso-Category C y z) (f : iso-Category C x y) →
-    ( comp-hom-Category
-      ( C)
-      ( hom-inv-comp-iso-Category g f)
-      ( hom-comp-iso-Category g f)) ＝
-    ( id-hom-Category C)
-  is-retraction-hom-inv-comp-iso-Category g f =
-    equational-reasoning
-      comp-hom-Category C
-        ( hom-inv-comp-iso-Category g f)
-        ( hom-comp-iso-Category g f)
-      ＝ comp-hom-Category C
-          ( hom-inv-iso-Category C f)
-          ( comp-hom-Category C
-            ( hom-inv-iso-Category C g)
-            ( hom-comp-iso-Category g f))
-        by
-          associative-comp-hom-Category C
-            ( hom-inv-iso-Category C f)
-            ( hom-inv-iso-Category C g)
-            ( hom-comp-iso-Category g f)
-      ＝ comp-hom-Category C
-          ( hom-inv-iso-Category C f)
-          ( comp-hom-Category C
-            ( comp-hom-Category C
-              ( hom-inv-iso-Category C g)
-              ( hom-iso-Category C g))
-            ( hom-iso-Category C f))
-        by
-          ap
-            ( comp-hom-Category C (hom-inv-iso-Category C f))
-            ( inv
-              ( associative-comp-hom-Category C
-                ( hom-inv-iso-Category C g)
-                ( hom-iso-Category C g)
-                ( hom-iso-Category C f)))
-      ＝ comp-hom-Category C
-          ( hom-inv-iso-Category C f)
-          ( comp-hom-Category C
-            ( id-hom-Category C)
-            ( hom-iso-Category C f))
-        by
-          ap
-            ( comp-hom-Category C (hom-inv-iso-Category C f))
-            ( ap
-              ( λ h → comp-hom-Category C h (hom-iso-Category C f))
-              ( is-retraction-hom-inv-iso-Category C g))
-      ＝ comp-hom-Category C (hom-inv-iso-Category C f) (hom-iso-Category C f)
-        by
-          ap
-            ( comp-hom-Category C (hom-inv-iso-Category C f))
-            ( left-unit-law-comp-hom-Category C (hom-iso-Category C f))
-      ＝ id-hom-Category C
-        by is-retraction-hom-inv-iso-Category C f
-
-  is-iso-hom-comp-iso-Category :
-    {x y z : obj-Category C} (g : iso-Category C y z) (f : iso-Category C x y) →
-    is-iso-Category C (hom-comp-iso-Category g f)
-  pr1 (is-iso-hom-comp-iso-Category g f) =
-    hom-inv-comp-iso-Category g f
-  pr1 (pr2 (is-iso-hom-comp-iso-Category g f)) =
-    is-section-hom-inv-comp-iso-Category g f
-  pr2 (pr2 (is-iso-hom-comp-iso-Category g f)) =
-    is-retraction-hom-inv-comp-iso-Category g f
-
-  comp-iso-Category :
-    {x y z : obj-Category C} →
-    iso-Category C y z → iso-Category C x y → iso-Category C x z
-  pr1 (comp-iso-Category g f) = hom-comp-iso-Category g f
-  pr2 (comp-iso-Category g f) = is-iso-hom-comp-iso-Category g f
+  compute-hom-iso-eq-Category :
+    {x y : obj-Category C} →
+    (p : x ＝ y) →
+    hom-eq-Category C x y p ＝
+    hom-iso-Category C (iso-eq-Category x y p)
+  compute-hom-iso-eq-Category =
+    compute-hom-iso-eq-Precategory (precategory-Category C)
 ```
 
 ## Properties
 
-### Characterizing equality of isomorphisms
+### Being an isomorphism is a proposition
+
+Let `f : hom x y` and suppose `g g' : hom y x` are both two-sided inverses to
+`f`. It is enough to show that `g = g'` since the equalities are
+[propositions](foundation-core.propositions.md) (since the hom-types are sets).
+But we have the following chain of equalities:
+`g = g ∘ id_y = g ∘ (f ∘ g') = (g ∘ f) ∘ g' = id_x ∘ g' = g'`.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  where
+
+  is-prop-is-iso-Category :
+    (f : hom-Category C x y) → is-prop (is-iso-Category C f)
+  is-prop-is-iso-Category =
+    is-prop-is-iso-Precategory (precategory-Category C)
+
+  is-iso-prop-Category :
+    (f : hom-Category C x y) → Prop l2
+  is-iso-prop-Category =
+    is-iso-prop-Precategory (precategory-Category C)
+```
+
+### Equality of isomorphism is equality of their underlying morphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  where
+
+  eq-iso-eq-hom-Category :
+    (f g : iso-Category C x y) →
+    hom-iso-Category C f ＝ hom-iso-Category C g → f ＝ g
+  eq-iso-eq-hom-Category =
+    eq-iso-eq-hom-Precategory (precategory-Category C)
+```
+
+### The type of isomorphisms form a set
+
+The type of isomorphisms between objects `x y : A` is a
+[subtype](foundation-core.subtypes.md) of the [foundation-core.sets.md)
+`hom x y` since being an isomorphism is a proposition.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  where
+
+  is-set-iso-Category : is-set (iso-Category C x y)
+  is-set-iso-Category = is-set-iso-Precategory (precategory-Category C)
+
+  iso-set-Category : Set l2
+  pr1 iso-set-Category = iso-Category C x y
+  pr2 iso-set-Category = is-set-iso-Category
+```
+
+### Isomorphisms are closed under composition
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y z : obj-Category C}
+  {g : hom-Category C y z}
+  {f : hom-Category C x y}
+  where
+
+  hom-comp-is-iso-Category :
+    is-iso-Category C g →
+    is-iso-Category C f →
+    hom-Category C z x
+  hom-comp-is-iso-Category =
+    hom-comp-is-iso-Precategory (precategory-Category C)
+
+  is-section-comp-is-iso-Category :
+    (q : is-iso-Category C g)
+    (p : is-iso-Category C f) →
+    comp-hom-Category C
+      ( comp-hom-Category C g f)
+      ( hom-comp-is-iso-Category q p) ＝
+    id-hom-Category C
+  is-section-comp-is-iso-Category =
+    is-section-comp-is-iso-Precategory (precategory-Category C)
+
+  is-retraction-comp-is-iso-Category :
+    (q : is-iso-Category C g)
+    (p : is-iso-Category C f) →
+    ( comp-hom-Category C
+      ( hom-comp-is-iso-Category q p)
+      ( comp-hom-Category C g f)) ＝
+    ( id-hom-Category C)
+  is-retraction-comp-is-iso-Category =
+    is-retraction-comp-is-iso-Precategory (precategory-Category C)
+
+  is-iso-comp-is-iso-Category :
+    is-iso-Category C g → is-iso-Category C f →
+    is-iso-Category C (comp-hom-Category C g f)
+  is-iso-comp-is-iso-Category =
+    is-iso-comp-is-iso-Precategory (precategory-Category C)
+```
+
+### Composition of isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y z : obj-Category C}
+  (g : iso-Category C y z)
+  (f : iso-Category C x y)
+  where
+
+  hom-comp-iso-Category : hom-Category C x z
+  hom-comp-iso-Category = hom-comp-iso-Precategory (precategory-Category C) g f
+
+  is-iso-comp-iso-Category :
+    is-iso-Category C hom-comp-iso-Category
+  is-iso-comp-iso-Category =
+    is-iso-comp-iso-Precategory (precategory-Category C) g f
+
+  comp-iso-Category : iso-Category C x z
+  comp-iso-Category = comp-iso-Precategory (precategory-Category C) g f
+
+  hom-inv-comp-iso-Category : hom-Category C z x
+  hom-inv-comp-iso-Category =
+    hom-inv-comp-iso-Precategory (precategory-Category C) g f
+
+  is-section-inv-comp-iso-Category :
+    ( comp-hom-Category C
+      ( hom-comp-iso-Category)
+      ( hom-inv-comp-iso-Category)) ＝
+    ( id-hom-Category C)
+  is-section-inv-comp-iso-Category =
+    is-section-inv-comp-iso-Precategory (precategory-Category C) g f
+
+  is-retraction-inv-comp-iso-Category :
+    ( comp-hom-Category C
+      ( hom-inv-comp-iso-Category)
+      ( hom-comp-iso-Category)) ＝
+    ( id-hom-Category C)
+  is-retraction-inv-comp-iso-Category =
+    is-retraction-inv-comp-iso-Precategory (precategory-Category C) g f
+```
+
+### Inverses of isomorphisms are isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  where
+
+  is-iso-inv-is-iso-Category :
+    (p : is-iso-Category C f) →
+    is-iso-Category C (hom-inv-iso-Category C (f , p))
+  is-iso-inv-is-iso-Category =
+    is-iso-inv-is-iso-Precategory (precategory-Category C)
+```
+
+### Inverses of isomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  where
+
+  inv-iso-Category :
+    iso-Category C x y → iso-Category C y x
+  inv-iso-Category = inv-iso-Precategory (precategory-Category C)
+```
+
+### Groupoid laws of isomorphisms in categories
+
+#### Composition of isomorphisms satisfies the unit laws
 
 ```agda
 module _
@@ -319,138 +358,268 @@ module _
   (f : iso-Category C x y)
   where
 
-  Eq-iso-Category : iso-Category C x y → UU l2
-  Eq-iso-Category g = hom-iso-Category C f ＝ hom-iso-Category C g
-
-  refl-Eq-iso-Category : Eq-iso-Category f
-  refl-Eq-iso-Category = refl
-
-  is-contr-total-Eq-iso-Category :
-    is-contr (Σ (iso-Category C x y) Eq-iso-Category)
-  is-contr-total-Eq-iso-Category =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-path (hom-iso-Category C f))
-      ( is-prop-is-iso-Category C)
-      ( hom-iso-Category C f)
-      ( refl)
-      ( is-iso-hom-iso-Category C f)
-
-  Eq-eq-iso-Category :
-    (g : iso-Category C x y) → (f ＝ g) → Eq-iso-Category g
-  Eq-eq-iso-Category .f refl = refl-Eq-iso-Category
-
-  is-equiv-Eq-eq-iso-Category :
-    (g : iso-Category C x y) → is-equiv (Eq-eq-iso-Category g)
-  is-equiv-Eq-eq-iso-Category =
-    fundamental-theorem-id
-      is-contr-total-Eq-iso-Category
-      Eq-eq-iso-Category
-
-  extensionality-iso-Category :
-    (g : iso-Category C x y) → (f ＝ g) ≃ Eq-iso-Category g
-  pr1 (extensionality-iso-Category g) = Eq-eq-iso-Category g
-  pr2 (extensionality-iso-Category g) = is-equiv-Eq-eq-iso-Category g
-
-  eq-Eq-iso-Category :
-    (g : iso-Category C x y) → Eq-iso-Category g → (f ＝ g)
-  eq-Eq-iso-Category g = map-inv-equiv (extensionality-iso-Category g)
-```
-
-### Groupoid laws for composition of isomorphisms in a category
-
-#### Left unit law
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
   left-unit-law-comp-iso-Category :
-    {x y : obj-Category C} (f : iso-Category C x y) →
     comp-iso-Category C (id-iso-Category C) f ＝ f
-  left-unit-law-comp-iso-Category f =
-    eq-Eq-iso-Category C
-      (comp-iso-Category C (id-iso-Category C) f)
-      ( f)
-      ( left-unit-law-comp-hom-Category C (hom-iso-Category C f))
-```
+  left-unit-law-comp-iso-Category =
+    left-unit-law-comp-iso-Precategory (precategory-Category C) f
 
-#### Right unit law
-
-```agda
   right-unit-law-comp-iso-Category :
-    {x y : obj-Category C} (f : iso-Category C x y) →
     comp-iso-Category C f (id-iso-Category C) ＝ f
-  right-unit-law-comp-iso-Category f =
-    eq-Eq-iso-Category C
-      ( comp-iso-Category C f (id-iso-Category C))
-      ( f)
-      ( right-unit-law-comp-hom-Category C (hom-iso-Category C f))
+  right-unit-law-comp-iso-Category =
+    right-unit-law-comp-iso-Precategory (precategory-Category C) f
 ```
 
-#### Associatitivity
+#### Composition of isomorphisms is associative
 
 ```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y z w : obj-Category C}
+  (h : iso-Category C z w)
+  (g : iso-Category C y z)
+  (f : iso-Category C x y)
+  where
+
   associative-comp-iso-Category :
-    {x y z w : obj-Category C}
-    (h : iso-Category C z w) (g : iso-Category C y z) (f : iso-Category C x y) →
-    comp-iso-Category C (comp-iso-Category C h g) f ＝
-    comp-iso-Category C h (comp-iso-Category C g f)
-  associative-comp-iso-Category h g f =
-    eq-Eq-iso-Category C
-      ( comp-iso-Category C (comp-iso-Category C h g) f)
-      ( comp-iso-Category C h (comp-iso-Category C g f))
-      ( associative-comp-hom-Category C
-        ( hom-iso-Category C h)
-        ( hom-iso-Category C g)
-        ( hom-iso-Category C f))
+    ( comp-iso-Category C (comp-iso-Category C h g) f) ＝
+    ( comp-iso-Category C h (comp-iso-Category C g f))
+  associative-comp-iso-Category =
+    associative-comp-iso-Precategory (precategory-Category C) h g f
 ```
 
-#### Left inverse law
+#### Composition of isomorphisms satisfies inverse laws
 
 ```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  (f : iso-Category C x y)
+  where
+
   left-inverse-law-comp-iso-Category :
-    {x y : obj-Category C} (f : iso-Category C x y) →
-    comp-iso-Category C (inv-iso-Category C f) f ＝ id-iso-Category C
-  left-inverse-law-comp-iso-Category f =
-    eq-Eq-iso-Category C
-      ( comp-iso-Category C (inv-iso-Category C f) f)
-      ( id-iso-Category C)
-      ( is-retraction-hom-inv-iso-Category C f)
+    ( comp-iso-Category C (inv-iso-Category C f) f) ＝
+    ( id-iso-Category C)
+  left-inverse-law-comp-iso-Category =
+    left-inverse-law-comp-iso-Precategory (precategory-Category C) f
+
+  right-inverse-law-comp-iso-Category :
+    ( comp-iso-Category C f (inv-iso-Category C f)) ＝
+    ( id-iso-Category C)
+  right-inverse-law-comp-iso-Category =
+    right-inverse-law-comp-iso-Precategory (precategory-Category C) f
 ```
 
-#### Right inverse law
+### A morphism `f` is an isomorphism if and only if precomposition by `f` is an equivalence
+
+**Proof:** If `f` is an isomorphism with inverse `f⁻¹`, then precomposing with
+`f⁻¹` is an inverse of precomposing with `f`. The only interesting direction is
+therefore the converse.
+
+Suppose that precomposing with `f` is an equivalence, for any object `z`. Then
+
+```text
+  - ∘ f : hom y x → hom x x
+```
+
+is an equivalence. In particular, there is a unique morphism `g : y → x` such
+that `g ∘ f ＝ id`. Thus we have a retraction of `f`. To see that `g` is also a
+section, note that the map
+
+```text
+  - ∘ f : hom y y → hom x y
+```
+
+is an equivalence. In particular, it is injective. Therefore it suffices to show
+that `(f ∘ g) ∘ f ＝ id ∘ f`. To see this, we calculate
+
+```text
+  (f ∘ g) ∘ f ＝ f ∘ (g ∘ f) ＝ f ∘ id ＝ f ＝ id ∘ f.
+```
+
+This completes the proof.
 
 ```agda
-  right-inverse-law-comp-iso-Category :
-    {x y : obj-Category C} (f : iso-Category C x y) →
-    comp-iso-Category C f (inv-iso-Category C f) ＝ id-iso-Category C
-  right-inverse-law-comp-iso-Category f =
-    eq-Eq-iso-Category C
-      ( comp-iso-Category C f (inv-iso-Category C f))
-      ( id-iso-Category C)
-      ( is-section-hom-inv-iso-Category C f)
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  (H : (z : obj-Category C) → is-equiv (precomp-hom-Category C f z))
+  where
+
+  hom-inv-is-iso-is-equiv-precomp-hom-Category : hom-Category C y x
+  hom-inv-is-iso-is-equiv-precomp-hom-Category =
+    hom-inv-is-iso-is-equiv-precomp-hom-Precategory (precategory-Category C) H
+
+  is-retraction-hom-inv-is-iso-is-equiv-precomp-hom-Category :
+    ( comp-hom-Category C
+      ( hom-inv-is-iso-is-equiv-precomp-hom-Category)
+      ( f)) ＝
+    ( id-hom-Category C)
+  is-retraction-hom-inv-is-iso-is-equiv-precomp-hom-Category =
+    is-retraction-hom-inv-is-iso-is-equiv-precomp-hom-Precategory
+      ( precategory-Category C) H
+
+  is-section-hom-inv-is-iso-is-equiv-precomp-hom-Category :
+    ( comp-hom-Category C
+      ( f)
+      ( hom-inv-is-iso-is-equiv-precomp-hom-Category)) ＝
+    ( id-hom-Category C)
+  is-section-hom-inv-is-iso-is-equiv-precomp-hom-Category =
+    is-section-hom-inv-is-iso-is-equiv-precomp-hom-Precategory
+      ( precategory-Category C) H
+
+  is-iso-is-equiv-precomp-hom-Category : is-iso-Category C f
+  is-iso-is-equiv-precomp-hom-Category =
+    is-iso-is-equiv-precomp-hom-Precategory (precategory-Category C) H
 ```
 
-### Equalities give rise to isomorphisms
+### A morphism `f` is an isomorphism if and only if postcomposition by `f` is an equivalence
+
+**Proof:** If `f` is an isomorphism with inverse `f⁻¹`, then postcomposing with
+`f⁻¹` is an inverse of postcomposing with `f`. The only interesting direction is
+therefore the converse.
+
+Suppose that postcomposing with `f` is an equivalence, for any object `z`. Then
+
+```text
+  f ∘ - : hom y x → hom y y
+```
+
+is an equivalence. In particular, there is a unique morphism `g : y → x` such
+that `f ∘ g ＝ id`. Thus we have a section of `f`. To see that `g` is also a
+retraction, note that the map
+
+```text
+  f ∘ - : hom x x → hom x y
+```
+
+is an equivalence. In particular, it is injective. Therefore it suffices to show
+that `f ∘ (g ∘ f) ＝ f ∘ id`. To see this, we calculate
+
+```text
+  f ∘ (g ∘ f) ＝ (f ∘ g) ∘ f ＝ id ∘ f ＝ f ＝ f ∘ id.
+```
+
+This completes the proof.
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  {x y : obj-Category C}
+  {f : hom-Category C x y}
+  (H : (z : obj-Category C) → is-equiv (postcomp-hom-Category C f z))
+  where
+
+  hom-inv-is-iso-is-equiv-postcomp-hom-Category : hom-Category C y x
+  hom-inv-is-iso-is-equiv-postcomp-hom-Category =
+    hom-inv-is-iso-is-equiv-postcomp-hom-Precategory (precategory-Category C) H
+
+  is-section-hom-inv-is-iso-is-equiv-postcomp-hom-Category :
+    ( comp-hom-Category C
+      ( f)
+      ( hom-inv-is-iso-is-equiv-postcomp-hom-Category)) ＝
+    ( id-hom-Category C)
+  is-section-hom-inv-is-iso-is-equiv-postcomp-hom-Category =
+    is-section-hom-inv-is-iso-is-equiv-postcomp-hom-Precategory
+      ( precategory-Category C) H
+
+  is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Category :
+    ( comp-hom-Category C
+      ( hom-inv-is-iso-is-equiv-postcomp-hom-Category))
+      ( f) ＝
+    ( id-hom-Category C)
+  is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Category =
+    is-retraction-hom-inv-is-iso-is-equiv-postcomp-hom-Precategory
+      ( precategory-Category C) H
+
+  is-iso-is-equiv-postcomp-hom-Category : is-iso-Category C f
+  is-iso-is-equiv-postcomp-hom-Category =
+    is-iso-is-equiv-postcomp-hom-Precategory
+      ( precategory-Category C) H
+```
+
+### When `hom x y` is a proposition, the type of isomorphisms from `x` to `y` is a proposition
+
+The type of isomorphisms between objects `x y : A` is a subtype of `hom x y`, so
+when this type is a proposition, then the type of isomorphisms from `x` to `y`
+form a proposition.
 
 ```agda
 module _
   {l1 l2 : Level} (C : Category l1 l2)
+  {x y : obj-Category C}
   where
 
-  iso-eq-Category : {x y : obj-Category C} → x ＝ y → iso-Category C x y
-  iso-eq-Category {x} {y} = iso-eq-Precategory (precategory-Category C) x y
+  is-prop-iso-Category :
+    is-prop (hom-Category C x y) → is-prop (iso-Category C x y)
+  is-prop-iso-Category = is-prop-iso-Precategory (precategory-Category C)
+
+  iso-prop-Category :
+    is-prop (hom-Category C x y) → Prop l2
+  iso-prop-Category = iso-prop-Precategory (precategory-Category C)
+```
+
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  {x y : obj-Category C}
+  where
+
+  is-iso-is-prop-hom-Category' :
+    is-prop (hom-Category C x x) →
+    is-prop (hom-Category C y y) →
+    (f : hom-Category C x y) →
+    hom-Category C y x →
+    is-iso-Category C f
+  is-iso-is-prop-hom-Category' =
+    is-iso-is-prop-hom-Precategory' (precategory-Category C)
+
+  iso-is-prop-hom-Category' :
+    is-prop (hom-Category C x x) →
+    is-prop (hom-Category C y y) →
+    hom-Category C x y →
+    hom-Category C y x →
+    iso-Category C x y
+  iso-is-prop-hom-Category' =
+    iso-is-prop-hom-Precategory' (precategory-Category C)
+
+  is-iso-is-prop-hom-Category :
+    ((x' y' : obj-Category C) → is-prop (hom-Category C x' y')) →
+    (f : hom-Category C x y) → hom-Category C y x →
+    is-iso-Category C f
+  is-iso-is-prop-hom-Category =
+    is-iso-is-prop-hom-Precategory (precategory-Category C)
+
+  iso-is-prop-hom-Category :
+    ((x' y' : obj-Category C) → is-prop (hom-Category C x' y')) →
+    hom-Category C x y →
+    hom-Category C y x →
+    iso-Category C x y
+  iso-is-prop-hom-Category =
+    iso-is-prop-hom-Precategory (precategory-Category C)
+```
+
+### Functoriality of `iso-eq`
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  {x y z : obj-Category C}
+  where
 
   preserves-concat-iso-eq-Category :
-    {x y z : obj-Category C} (p : x ＝ y) (q : y ＝ z) →
-    iso-eq-Category (p ∙ q) ＝
-    comp-iso-Category C (iso-eq-Category q) (iso-eq-Category p)
-  preserves-concat-iso-eq-Category refl q =
-    inv (right-unit-law-comp-iso-Category C (iso-eq-Category q))
+    (p : x ＝ y) (q : y ＝ z) →
+    iso-eq-Category C x z (p ∙ q) ＝
+    comp-iso-Category C (iso-eq-Category C y z q) (iso-eq-Category C x y p)
+  preserves-concat-iso-eq-Category =
+    preserves-concat-iso-eq-Precategory (precategory-Category C)
 ```
-
-## Properties
 
 ### Extensionality of the type of objects in a category
 
@@ -461,7 +630,7 @@ module _
 
   extensionality-obj-Category :
     (x y : obj-Category C) → (x ＝ y) ≃ iso-Category C x y
-  pr1 (extensionality-obj-Category x y) = iso-eq-Category C
+  pr1 (extensionality-obj-Category x y) = iso-eq-Category C x y
   pr2 (extensionality-obj-Category x y) = is-category-Category C x y
 
   eq-iso-Category :
@@ -470,13 +639,13 @@ module _
 
   is-section-eq-iso-Category :
     {x y : obj-Category C} (f : iso-Category C x y) →
-    iso-eq-Category C (eq-iso-Category f) ＝ f
+    iso-eq-Category C x y (eq-iso-Category f) ＝ f
   is-section-eq-iso-Category {x} {y} =
     is-section-map-inv-equiv (extensionality-obj-Category x y)
 
   is-retraction-eq-iso-Category :
     {x y : obj-Category C} (p : x ＝ y) →
-    eq-iso-Category (iso-eq-Category C p) ＝ p
+    eq-iso-Category (iso-eq-Category C x y p) ＝ p
   is-retraction-eq-iso-Category {x} {y} =
     is-retraction-map-inv-equiv (extensionality-obj-Category x y)
 
@@ -485,14 +654,14 @@ module _
     ( g : iso-Category C y z)
     ( f : iso-Category C x y) →
     ( eq-iso-Category (comp-iso-Category C g f)) ＝
-    ( (eq-iso-Category f ∙ eq-iso-Category g))
-  preserves-comp-eq-iso-Category g f =
+    ( eq-iso-Category f ∙ eq-iso-Category g)
+  preserves-comp-eq-iso-Category {x} {y} {z} g f =
     equational-reasoning
       eq-iso-Category (comp-iso-Category C g f)
       ＝ eq-iso-Category
           ( comp-iso-Category C
-            ( iso-eq-Category C (eq-iso-Category g))
-            ( iso-eq-Category C (eq-iso-Category f)))
+            ( iso-eq-Category C y z (eq-iso-Category g))
+            ( iso-eq-Category C x y (eq-iso-Category f)))
         by
           ap eq-iso-Category
             ( ap-binary
@@ -500,7 +669,7 @@ module _
               ( inv (is-section-eq-iso-Category g))
               ( inv (is-section-eq-iso-Category f)))
       ＝ eq-iso-Category
-          ( iso-eq-Category C (eq-iso-Category f ∙ eq-iso-Category g))
+          ( iso-eq-Category C x z (eq-iso-Category f ∙ eq-iso-Category g))
         by
           ap eq-iso-Category
             ( inv
@@ -509,34 +678,4 @@ module _
                 ( eq-iso-Category g)))
       ＝ eq-iso-Category f ∙ eq-iso-Category g
         by is-retraction-eq-iso-Category (eq-iso-Category f ∙ eq-iso-Category g)
-```
-
-### The type of isomorphisms forms a set
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
-  is-set-iso-Category : (x y : obj-Category C) → is-set (iso-Category C x y)
-  is-set-iso-Category = is-set-iso-Precategory (precategory-Category C)
-
-  iso-Category-Set : (x y : obj-Category C) → Set l2
-  iso-Category-Set = iso-Precategory-Set (precategory-Category C)
-```
-
-### A morphism is an isomorphism if and only if precomposing by it is an equivalence
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  {x y : obj-Category C} (f : type-hom-Category C x y)
-  where
-
-{-
-  is-equiv-precomp-is-iso-hom-Category :
-    (H : is-iso-Category C f) →
-    (z : obj-Category C) → is-equiv (precomp-iso-Category C {z = z} (pair f H))
-  is-equiv-precomp-is-iso-hom-Category H z = {!!}
-  -}
 ```

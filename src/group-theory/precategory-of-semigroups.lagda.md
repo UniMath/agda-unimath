@@ -29,7 +29,7 @@ Semigroups and semigroup homomorphisms form a precategory.
 instance
   Semigroup-Large-Precategory : Large-Precategory lsuc (_⊔_)
   obj-Large-Precategory Semigroup-Large-Precategory = Semigroup
-  hom-Large-Precategory Semigroup-Large-Precategory = hom-Semigroup
+  hom-set-Large-Precategory Semigroup-Large-Precategory = hom-set-Semigroup
   comp-hom-Large-Precategory Semigroup-Large-Precategory
     {X = G} {H} {K} =
     comp-hom-Semigroup G H K

@@ -36,8 +36,8 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2)
   where
 
-  is-category-Precategory-Prop : Prop (l1 ⊔ l2)
-  is-category-Precategory-Prop =
+  is-category-prop-Precategory : Prop (l1 ⊔ l2)
+  is-category-prop-Precategory =
     Π-Prop
       ( obj-Precategory C)
       ( λ x →
@@ -46,7 +46,7 @@ module _
           ( λ y → is-equiv-Prop (iso-eq-Precategory C x y)))
 
   is-category-Precategory : UU (l1 ⊔ l2)
-  is-category-Precategory = type-Prop is-category-Precategory-Prop
+  is-category-Precategory = type-Prop is-category-prop-Precategory
 
 Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Category l1 l2 = Σ (Precategory l1 l2) is-category-Precategory
@@ -61,54 +61,54 @@ module _
   obj-Category : UU l1
   obj-Category = obj-Precategory precategory-Category
 
-  hom-Category : obj-Category → obj-Category → Set l2
+  hom-set-Category : obj-Category → obj-Category → Set l2
+  hom-set-Category = hom-set-Precategory precategory-Category
+
+  hom-Category : obj-Category → obj-Category → UU l2
   hom-Category = hom-Precategory precategory-Category
 
-  type-hom-Category : obj-Category → obj-Category → UU l2
-  type-hom-Category = type-hom-Precategory precategory-Category
-
-  is-set-type-hom-Category :
-    (x y : obj-Category) → is-set (type-hom-Category x y)
-  is-set-type-hom-Category = is-set-type-hom-Precategory precategory-Category
+  is-set-hom-Category :
+    (x y : obj-Category) → is-set (hom-Category x y)
+  is-set-hom-Category = is-set-hom-Precategory precategory-Category
 
   comp-hom-Category :
     {x y z : obj-Category} →
-    type-hom-Category y z → type-hom-Category x y → type-hom-Category x z
+    hom-Category y z → hom-Category x y → hom-Category x z
   comp-hom-Category = comp-hom-Precategory precategory-Category
 
   associative-comp-hom-Category :
     {x y z w : obj-Category}
-    (h : type-hom-Category z w)
-    (g : type-hom-Category y z)
-    (f : type-hom-Category x y) →
+    (h : hom-Category z w)
+    (g : hom-Category y z)
+    (f : hom-Category x y) →
     comp-hom-Category (comp-hom-Category h g) f ＝
     comp-hom-Category h (comp-hom-Category g f)
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
   associative-composition-structure-Category :
-    associative-composition-structure-Set hom-Category
+    associative-composition-structure-Set hom-set-Category
   associative-composition-structure-Category =
     associative-composition-structure-Precategory precategory-Category
 
-  id-hom-Category : {x : obj-Category} → type-hom-Category x x
+  id-hom-Category : {x : obj-Category} → hom-Category x x
   id-hom-Category = id-hom-Precategory precategory-Category
 
   left-unit-law-comp-hom-Category :
-    {x y : obj-Category} (f : type-hom-Category x y) →
+    {x y : obj-Category} (f : hom-Category x y) →
     comp-hom-Category id-hom-Category f ＝ f
   left-unit-law-comp-hom-Category =
     left-unit-law-comp-hom-Precategory precategory-Category
 
   right-unit-law-comp-hom-Category :
-    {x y : obj-Category} (f : type-hom-Category x y) →
+    {x y : obj-Category} (f : hom-Category x y) →
     comp-hom-Category f id-hom-Category ＝ f
   right-unit-law-comp-hom-Category =
     right-unit-law-comp-hom-Precategory precategory-Category
 
   is-unital-composition-structure-Category :
     is-unital-composition-structure-Set
-      hom-Category
+      hom-set-Category
       associative-composition-structure-Category
   is-unital-composition-structure-Category =
     is-unital-composition-structure-Precategory precategory-Category
@@ -123,8 +123,8 @@ module _
 ```agda
 precomp-hom-Category :
   {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
-  (f : type-hom-Category C x y) (z : obj-Category C) →
-  type-hom-Category C y z → type-hom-Category C x z
+  (f : hom-Category C x y) (z : obj-Category C) →
+  hom-Category C y z → hom-Category C x z
 precomp-hom-Category C = precomp-hom-Precategory (precategory-Category C)
 ```
 
@@ -133,9 +133,26 @@ precomp-hom-Category C = precomp-hom-Precategory (precategory-Category C)
 ```agda
 postcomp-hom-Category :
   {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
-  (f : type-hom-Category C x y) (z : obj-Category C) →
-  type-hom-Category C z x → type-hom-Category C z y
+  (f : hom-Category C x y) (z : obj-Category C) →
+  hom-Category C z x → hom-Category C z y
 postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
+```
+
+### Equalities give rise to homomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (C : Category l1 l2)
+  where
+
+  hom-eq-Category :
+    (x y : obj-Category C) → x ＝ y → hom-Category C x y
+  hom-eq-Category = hom-eq-Precategory (precategory-Category C)
+
+  hom-inv-eq-Category :
+    (x y : obj-Category C) → x ＝ y → hom-Category C y x
+  hom-inv-eq-Category = hom-inv-eq-Precategory (precategory-Category C)
 ```
 
 ## Properties
@@ -157,7 +174,7 @@ module _
       ( iso-Precategory (precategory-Category C) x y)
       ( iso-eq-Precategory (precategory-Category C) x y)
       ( is-category-Category C x y)
-      ( is-set-iso-Precategory (precategory-Category C) x y)
+      ( is-set-iso-Precategory (precategory-Category C))
 
   obj-Category-1-Type : 1-Type l1
   pr1 obj-Category-1-Type = obj-Category C

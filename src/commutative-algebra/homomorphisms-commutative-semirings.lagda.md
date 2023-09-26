@@ -36,30 +36,30 @@ module _
   {l1 l2 : Level} (A : Commutative-Semiring l1) (B : Commutative-Semiring l2)
   where
 
-  hom-Commutative-Semiring : Set (l1 ⊔ l2)
+  hom-set-Commutative-Semiring : Set (l1 ⊔ l2)
+  hom-set-Commutative-Semiring =
+    hom-set-Semiring
+      ( semiring-Commutative-Semiring A)
+      ( semiring-Commutative-Semiring B)
+
+  hom-Commutative-Semiring : UU (l1 ⊔ l2)
   hom-Commutative-Semiring =
     hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
 
-  type-hom-Commutative-Semiring : UU (l1 ⊔ l2)
-  type-hom-Commutative-Semiring =
-    type-hom-Semiring
-      ( semiring-Commutative-Semiring A)
-      ( semiring-Commutative-Semiring B)
-
-  is-set-type-hom-Commutative-Semiring : is-set type-hom-Commutative-Semiring
-  is-set-type-hom-Commutative-Semiring =
-    is-set-type-hom-Semiring
+  is-set-hom-Commutative-Semiring : is-set hom-Commutative-Semiring
+  is-set-hom-Commutative-Semiring =
+    is-set-hom-Semiring
       ( semiring-Commutative-Semiring A)
       ( semiring-Commutative-Semiring B)
 
   module _
-    (f : type-hom-Commutative-Semiring)
+    (f : hom-Commutative-Semiring)
     where
 
     hom-additive-commutative-monoid-hom-Commutative-Semiring :
-      type-hom-Commutative-Monoid
+      hom-Commutative-Monoid
         ( additive-commutative-monoid-Commutative-Semiring A)
         ( additive-commutative-monoid-Commutative-Semiring B)
     hom-additive-commutative-monoid-hom-Commutative-Semiring =
@@ -130,7 +130,7 @@ module _
         ( f)
 
     hom-multiplicative-monoid-hom-Commutative-Semiring :
-      type-hom-Monoid
+      hom-Monoid
         ( multiplicative-monoid-Commutative-Semiring A)
         ( multiplicative-monoid-Commutative-Semiring B)
     hom-multiplicative-monoid-hom-Commutative-Semiring =
@@ -148,7 +148,7 @@ module _
   where
 
   hom-additive-commutative-monoid-id-hom-Commutative-Semiring :
-    type-hom-Commutative-Monoid
+    hom-Commutative-Monoid
       ( additive-commutative-monoid-Commutative-Semiring A)
       ( additive-commutative-monoid-Commutative-Semiring A)
   hom-additive-commutative-monoid-id-hom-Commutative-Semiring =
@@ -166,7 +166,7 @@ module _
   preserves-unit-id-hom-Commutative-Semiring =
     preserves-unit-id-hom-Semiring (semiring-Commutative-Semiring A)
 
-  id-hom-Commutative-Semiring : type-hom-Commutative-Semiring A A
+  id-hom-Commutative-Semiring : hom-Commutative-Semiring A A
   id-hom-Commutative-Semiring =
     id-hom-Semiring (semiring-Commutative-Semiring A)
 ```
@@ -179,12 +179,12 @@ module _
   (A : Commutative-Semiring l1)
   (B : Commutative-Semiring l2)
   (C : Commutative-Semiring l3)
-  (g : type-hom-Commutative-Semiring B C)
-  (f : type-hom-Commutative-Semiring A B)
+  (g : hom-Commutative-Semiring B C)
+  (f : hom-Commutative-Semiring A B)
   where
 
   hom-additive-commutative-monoid-comp-hom-Commutative-Semiring :
-    type-hom-Commutative-Monoid
+    hom-Commutative-Monoid
       ( additive-commutative-monoid-Commutative-Semiring A)
       ( additive-commutative-monoid-Commutative-Semiring C)
   hom-additive-commutative-monoid-comp-hom-Commutative-Semiring =
@@ -196,7 +196,7 @@ module _
       ( f)
 
   hom-multiplicative-monoid-comp-hom-Commutative-Semiring :
-    type-hom-Monoid
+    hom-Monoid
       ( multiplicative-monoid-Commutative-Semiring A)
       ( multiplicative-monoid-Commutative-Semiring C)
   hom-multiplicative-monoid-comp-hom-Commutative-Semiring =
@@ -242,7 +242,7 @@ module _
       ( g)
       ( f)
 
-  comp-hom-Commutative-Semiring : type-hom-Commutative-Semiring A C
+  comp-hom-Commutative-Semiring : hom-Commutative-Semiring A C
   comp-hom-Commutative-Semiring =
     comp-hom-Semiring
       ( semiring-Commutative-Semiring A)
@@ -260,7 +260,7 @@ module _
   where
 
   htpy-hom-Commutative-Semiring :
-    (f g : type-hom-Commutative-Semiring R S) → UU (l1 ⊔ l2)
+    (f g : hom-Commutative-Semiring R S) → UU (l1 ⊔ l2)
   htpy-hom-Commutative-Semiring f g =
     htpy-hom-Commutative-Monoid
       ( additive-commutative-monoid-Commutative-Semiring R)
@@ -269,7 +269,7 @@ module _
       ( hom-additive-commutative-monoid-hom-Commutative-Semiring R S g)
 
   refl-htpy-hom-Commutative-Semiring :
-    (f : type-hom-Commutative-Semiring R S) → htpy-hom-Commutative-Semiring f f
+    (f : hom-Commutative-Semiring R S) → htpy-hom-Commutative-Semiring f f
   refl-htpy-hom-Commutative-Semiring f =
     refl-htpy-hom-Commutative-Monoid
       ( additive-commutative-monoid-Commutative-Semiring R)
@@ -284,12 +284,12 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Semiring l1) (B : Commutative-Semiring l2)
-  (f : type-hom-Commutative-Semiring A B)
+  (f : hom-Commutative-Semiring A B)
   where
 
   is-contr-total-htpy-hom-Commutative-Semiring :
     is-contr
-      ( Σ ( type-hom-Commutative-Semiring A B)
+      ( Σ ( hom-Commutative-Semiring A B)
           ( htpy-hom-Commutative-Semiring A B f))
   is-contr-total-htpy-hom-Commutative-Semiring =
     is-contr-total-htpy-hom-Semiring
@@ -298,7 +298,7 @@ module _
       ( f)
 
   htpy-eq-hom-Commutative-Semiring :
-    (g : type-hom-Commutative-Semiring A B) →
+    (g : hom-Commutative-Semiring A B) →
     (f ＝ g) → htpy-hom-Commutative-Semiring A B f g
   htpy-eq-hom-Commutative-Semiring =
     htpy-eq-hom-Semiring
@@ -307,7 +307,7 @@ module _
       ( f)
 
   is-equiv-htpy-eq-hom-Commutative-Semiring :
-    (g : type-hom-Commutative-Semiring A B) →
+    (g : hom-Commutative-Semiring A B) →
     is-equiv (htpy-eq-hom-Commutative-Semiring g)
   is-equiv-htpy-eq-hom-Commutative-Semiring =
     is-equiv-htpy-eq-hom-Semiring
@@ -316,7 +316,7 @@ module _
       ( f)
 
   extensionality-hom-Commutative-Semiring :
-    (g : type-hom-Commutative-Semiring A B) →
+    (g : hom-Commutative-Semiring A B) →
     (f ＝ g) ≃ htpy-hom-Commutative-Semiring A B f g
   extensionality-hom-Commutative-Semiring =
     extensionality-hom-Semiring
@@ -325,7 +325,7 @@ module _
       ( f)
 
   eq-htpy-hom-Commutative-Semiring :
-    (g : type-hom-Commutative-Semiring A B) →
+    (g : hom-Commutative-Semiring A B) →
     htpy-hom-Commutative-Semiring A B f g → f ＝ g
   eq-htpy-hom-Commutative-Semiring =
     eq-htpy-hom-Semiring
@@ -343,9 +343,9 @@ module _
   (B : Commutative-Semiring l2)
   (C : Commutative-Semiring l3)
   (D : Commutative-Semiring l4)
-  (h : type-hom-Commutative-Semiring C D)
-  (g : type-hom-Commutative-Semiring B C)
-  (f : type-hom-Commutative-Semiring A B)
+  (h : hom-Commutative-Semiring C D)
+  (g : hom-Commutative-Semiring B C)
+  (f : hom-Commutative-Semiring A B)
   where
 
   associative-comp-hom-Commutative-Semiring :
@@ -371,7 +371,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Semiring l1) (B : Commutative-Semiring l2)
-  (f : type-hom-Commutative-Semiring A B)
+  (f : hom-Commutative-Semiring A B)
   where
 
   left-unit-law-comp-hom-Commutative-Semiring :

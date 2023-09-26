@@ -39,7 +39,7 @@ anafunctor-Precategory l C D =
       Σ ( ( X Y : obj-Precategory C)
           ( U : obj-Precategory D) (u : F₀ X U) →
           ( V : obj-Precategory D) (v : F₀ Y V) →
-          ( f : type-hom-Precategory C X Y) → type-hom-Precategory D U V)
+          ( f : hom-Precategory C X Y) → hom-Precategory D U V)
         ( λ F₁ →
           ( ( X : obj-Precategory C) →
             type-trunc-Prop (Σ (obj-Precategory D) (F₀ X))) ×
@@ -50,8 +50,8 @@ anafunctor-Precategory l C D =
               ( U : obj-Precategory D) (u : F₀ X U)
               ( V : obj-Precategory D) (v : F₀ Y V)
               ( W : obj-Precategory D) (w : F₀ Z W) →
-              ( g : type-hom-Precategory C Y Z)
-              ( f : type-hom-Precategory C X Y) →
+              ( g : hom-Precategory C Y Z)
+              ( f : hom-Precategory C X Y) →
               ( F₁ X Z U u W w (comp-hom-Precategory C g f)) ＝
               ( comp-hom-Precategory D
                 ( F₁ Y Z V v W w g)
@@ -69,7 +69,7 @@ module _
     (X Y : obj-Precategory C)
     (U : obj-Precategory D) (u : object-anafunctor-Precategory X U)
     (V : obj-Precategory D) (v : object-anafunctor-Precategory Y V) →
-    type-hom-Precategory C X Y → type-hom-Precategory D U V
+    hom-Precategory C X Y → hom-Precategory D U V
   hom-anafunctor-Precategory = pr1 (pr2 F)
 ```
 
@@ -93,8 +93,7 @@ module _
         ( hom-functor-Precategory C D F f))
       ( hom-inv-iso-Precategory D u)
   pr1 (pr2 (pr2 (anafunctor-functor-Precategory F))) X =
-    unit-trunc-Prop
-      ( pair (obj-functor-Precategory C D F X) (id-iso-Precategory D))
+    unit-trunc-Prop (obj-functor-Precategory C D F X , id-iso-Precategory D)
   pr1 (pr2 (pr2 (pr2 (anafunctor-functor-Precategory F)))) X U u =
     ( ap
       ( comp-hom-Precategory' D (hom-inv-iso-Precategory D u))

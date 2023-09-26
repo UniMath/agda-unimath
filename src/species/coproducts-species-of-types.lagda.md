@@ -27,7 +27,7 @@ The coproduct of two species of types `F` and `G` is the pointwise coproduct.
 
 ## Definition
 
-### coproduct on objects
+### Coproduct on objects
 
 ```agda
 coproduct-species-types :

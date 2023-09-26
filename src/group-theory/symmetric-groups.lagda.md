@@ -85,7 +85,7 @@ module _
   where
 
   hom-symmetric-group-equiv-Set :
-    type-hom-Group (symmetric-Group X) (symmetric-Group Y)
+    hom-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 hom-symmetric-group-equiv-Set f = e ∘e (f ∘e inv-equiv e)
   pr2 hom-symmetric-group-equiv-Set f g =
     ( eq-equiv-eq-map-equiv refl) ∙
@@ -95,7 +95,7 @@ module _
         ( eq-equiv-eq-map-equiv refl))
 
   hom-inv-symmetric-group-equiv-Set :
-    type-hom-Group (symmetric-Group Y) (symmetric-Group X)
+    hom-Group (symmetric-Group Y) (symmetric-Group X)
   pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e (f ∘e e)
   pr2 hom-inv-symmetric-group-equiv-Set f g =
     ( eq-equiv-eq-map-equiv refl) ∙

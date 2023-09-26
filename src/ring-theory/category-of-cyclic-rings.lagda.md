@@ -47,9 +47,9 @@ Cyclic-Ring-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Cyclic-Ring-Large-Precategory =
   Cyclic-Ring
-hom-Large-Precategory
+hom-set-Large-Precategory
   Cyclic-Ring-Large-Precategory =
-  hom-Cyclic-Ring
+  hom-set-Cyclic-Ring
 comp-hom-Large-Precategory
   Cyclic-Ring-Large-Precategory {X = R} {Y = S} {Z = T} =
   comp-hom-Cyclic-Ring R S T
