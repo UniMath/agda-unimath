@@ -45,26 +45,18 @@ int-is-square-ℤ-Mod (inl _) _ = zero-ℤ
 int-is-square-ℤ-Mod (inr _) (inl _) = one-ℤ
 int-is-square-ℤ-Mod (inr _) (inr _) = neg-one-ℤ
 
-legendre-symbol' : ((p , _) : Prime-ℕ) → ℤ-Mod p → ℤ
-legendre-symbol' (p , _) k =
+legendre-symbol-ℤ-Mod : (p : Prime-ℕ) → ℤ-Mod (nat-Prime-ℕ p) → ℤ
+legendre-symbol-ℤ-Mod (p , _) k =
   int-is-square-ℤ-Mod
     ( has-decidable-equality-ℤ-Mod p k (zero-ℤ-Mod p))
     ( is-decidable-is-square-ℤ-Mod p k)
 
 legendre-symbol : Prime-ℕ → ℤ → ℤ
-legendre-symbol p a = legendre-symbol' p (mod-ℤ (pr1 p) a)
+legendre-symbol p a = legendre-symbol-ℤ-Mod p (mod-ℤ (nat-Prime-ℕ p) a)
 
-is-legendre-symbol-periodic :
+is-periodic-legendre-symbol :
   (p : Prime-ℕ) (a b : ℤ) →
-  mod-ℤ (pr1 p) a ＝ mod-ℤ (pr1 p) b →
+  mod-ℤ (nat-Prime-ℕ p) a ＝ mod-ℤ (nat-Prime-ℕ p) b →
   legendre-symbol p a ＝ legendre-symbol p b
-is-legendre-symbol-periodic p a b H =
-  equational-reasoning
-  legendre-symbol p a
-  ＝ legendre-symbol' p (mod-ℤ (pr1 p) a)
-    by refl
-  ＝ legendre-symbol' p (mod-ℤ (pr1 p) b)
-    by ap (legendre-symbol' p) H
-  ＝ legendre-symbol p b
-    by refl
+is-periodic-legendre-symbol p _ _ H = ap (legendre-symbol-ℤ-Mod p) H
 ```
