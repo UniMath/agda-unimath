@@ -46,14 +46,14 @@ Eckmann-Hilton argument:
 `(α β : Ω² X) → α ∙ β = β ∙ α`
 
 For fixed 2-loops, we will call the resulting identification "the Eckmann-Hilton
-term". In this file we will give two different constructions of this
+identification". In this file we will give two different constructions of this
 identification, one that corresponds to the more algebraic statement and one
 that corresponds to the more homotopy theoretic statement. We will call the
 constructions themselves "the Eckmann-Hilton argument".
 
 ## Definitions
 
-### Constructing the eckmann-hilton term from the interchange law
+### Constructing the Eckmann-Hilton identification from the interchange law
 
 The more algebraic argument uses the interchange law
 [`interchange-Ω²`](https://unimath.github.io/agda-unimath/synthetic-homotopy-theory.double-loop-spaces.html#2449).
@@ -101,7 +101,7 @@ interchange-concat-Ω² =
     ( assoc)
 ```
 
-### Constructing the eckmann-hilton term using the naturality condition of the operation of whiskering a fixed 2-path by a 1-path
+### Constructing the Eckmann-Hilton identification using the naturality condition of the operation of whiskering a fixed 2-path by a 1-path
 
 #### The motivation
 
@@ -146,8 +146,8 @@ via
 [`eckmann-hilton-htpy`](https://unimath.github.io/agda-unimath/foundation.homotopies.html#8218).
 This identification is constructed using the naturality condition of the two
 homotopies involved. Thus, in the case of `Id base`, we can see a very close
-correspondence between the Eckmann-Hilton term of 2-loops in the base type `X`
-and the Eckmann-Hilton term of the homotopies induced by said 2-loops.
+correspondence between the Eckmann-Hilton identification of 2-loops in the base type `X`
+and the Eckmann-Hilton identification of the homotopies induced by said 2-loops.
 
 Of course `Id base` is a special type family. But this idea generalizes
 nonetheless. Given a type family `B : X → UU`, any 2-loops `α β : Ω X` induce
@@ -157,14 +157,14 @@ Then, the naturality condition that makes `α` and `β` commute in `Ω² X` is s
 by `tr³ B` to the naturality condition that makes the induced homotopies
 commute. This is recorded in
 [`tr³-htpy-swap-path-swap`](https://unimath.github.io/agda-unimath/foundation.transport-along-identifications.html#3825).
-From this, it is easy to show that "transport preserves the Eckmann-Hilton term"
+From this, it is easy to show that "transport preserves the Eckmann-Hilton identification"
 by proving that the additional coherence paths in the definition of
 `eckmann-hilton` and `eckmann-hilton-htpy` are compatible.
 
 This connection has important consequences, one of which being the connection
 between the Eckmann-Hilton argument and the Hopf fibration.
 
-#### The construction
+#### The construction, using left whiskering
 
 ```agda
 module _
@@ -190,17 +190,19 @@ module _
       ( left-unit-law-identification-left-whisk-Ω² α))
 ```
 
-There is another natural construction of an Eckmann-Hilton term along these
+#### Using right whiskering
+
+There is another natural construction of an Eckmann-Hilton identification along these
 lines. If we think of the first construction as "rotating clockwise", this
 alternate version "rotates counter-clockwise". In terms of braids, the previous
 construction of Eckmann-Hilton braids `α` over `β`, while this new construction
 braids `α` under `β`. This difference shows up nicely in the type theory. The
 first version uses the naturality of the operation of whiskering on the left,
 while the second version uses the naturality of the operation of whiskering on
-the right. These two version of the Eckmann-Hilton term naturally "undo" each
-other, as we will subsequently prove. Thus, we will refer to this alternate
-construction of Eckmann-Hilton as "the inverse Eckmann-Hilton argument", and the
-corresponding term "the inverse Eckmann-Hilton term".
+the right. Based on the intution of braiding, we should expect these two version
+of the Eckmann-Hilton identification to naturally "undo" each other, which the do.
+Thus, we will refer to this alternate construction of Eckmann-Hilton as "the inverse
+Eckmann-Hilton argument", and the corresponding identification "the inverse Eckmann-Hilton identification".
 
 ```agda
 module _
@@ -224,8 +226,8 @@ module _
         ( right-unit-law-identification-right-whisk-Ω² α)
 ```
 
-We now prove that this Eckmann-Hilton term "undoes" the previously constructed
-Eckmann-Hilton term. If we think of braiding `α` over `β`, then braiding `β`
+We now prove that this Eckmann-Hilton identification "undoes" the previously constructed
+Eckmann-Hilton identification. If we think of braiding `α` over `β`, then braiding `β`
 under `α`, we should end up with the trivial braid. Thus, we should have
 
 `eckmann-hilton-Ω² α β ∙ eckman-hilton-inverse-Ω² β α ＝ refl`
@@ -235,7 +237,7 @@ This is equivalent to,
 `inv eckman-hilton-inverse-Ω² β α ＝ eckmann-hilton-Ω² α β`
 
 which is what we prove. Note that the above property is distinct from syllepsis,
-since it concerns two different construction of the Eckmann-Hilton term.
+since it concerns two different construction of the Eckmann-Hilton identification.
 Further, it works for all 2-loops, not just 3-loops.
 
 ```agda

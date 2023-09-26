@@ -342,8 +342,8 @@ module _
 ### The whiskering operations allow us to commute higher identifications
 
 There are two natural ways to commute higher identifications: using whiskering
-on the left versus using whiskering on the right. Thes two ways "undo" each
-other
+on the left versus using whiskering on the right. These two ways "undo" each
+other.
 
 ```agda
 module _
