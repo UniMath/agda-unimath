@@ -1,7 +1,7 @@
 # Modal type theory
 
 ```agda
-{-# OPTIONS --cohesion --flat-split --rewriting #-}
+{-# OPTIONS --cohesion --flat-split #-}
 ```
 
 ## Files in the modal type theory folder

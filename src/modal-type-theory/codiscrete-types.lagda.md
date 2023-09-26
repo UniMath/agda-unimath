@@ -1,7 +1,7 @@
 # Codiscrete types
 
 ```agda
-{-# OPTIONS --cohesion --flat-split --rewriting #-}
+{-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.codiscrete-types where
 ```
@@ -26,8 +26,8 @@ open import orthogonal-factorization-systems.higher-modalities
 ## Idea
 
 A type is said to be **codiscrete** if it is
-[sharp](modal-type-theory.sharp-modality) modal, i.e. if the sharp unit at that
-type is an [equivalence](foundation-core.equivalences).
+[sharp](modal-type-theory.sharp-modality) modal, i.e. if the sharp unit is an
+[equivalence](foundation-core.equivalences) at that type.
 
 ## Definition
 

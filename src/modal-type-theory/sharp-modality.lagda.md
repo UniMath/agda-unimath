@@ -1,7 +1,7 @@
 # The sharp modality
 
 ```agda
-{-# OPTIONS --cohesion --flat-split --rewriting #-}
+{-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.sharp-modality where
 ```
@@ -30,8 +30,6 @@ TODO
 ## Definition
 
 ```agda
--- {-# BUILTIN REWRITE _＝_ #-}
-
 postulate
   ♯ : {l : Level} (A : UU l) → UU l
 
@@ -82,8 +80,6 @@ compute-rec-♯ B = compute-ind-♯ (λ _ → B)
 ap-♯ : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
 ap-♯ {B = B} f = rec-♯ B (unit-♯ ∘ f)
 
--- {-# REWRITE compute-ind-♯ #-}
-
 -- judgemental version of "induced map ♭ A → ♭ (♯ A) is an equivalence"
 postulate
   crisp-elim-♯ :
@@ -92,8 +88,6 @@ postulate
     {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) → (crisp-elim-♯ (unit-♯ x)) ＝ x
   uniqueness-crisp-elim-♯ :
     {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) → unit-♯ (crisp-elim-♯ x) ＝ x
-
--- {-# REWRITE compute-crisp-elim-♯ #-}
 
 postulate
   -- coherence between computation and uniqueness rules for `crisp-elim-♯`

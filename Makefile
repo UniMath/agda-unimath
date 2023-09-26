@@ -1,5 +1,5 @@
 
-CHECKOPTS := --without-K --exact-split --guardedness --cohesion --flat-split --rewriting
+CHECKOPTS := --without-K --exact-split --guardedness --cohesion --flat-split
 everythingOpts := $(CHECKOPTS)
 AGDAVERBOSE ?= -v1
 # use "$ export AGDAVERBOSE=20" if you want to see all

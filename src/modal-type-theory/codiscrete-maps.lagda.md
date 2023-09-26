@@ -1,7 +1,7 @@
 # Codiscrete maps
 
 ```agda
-{-# OPTIONS --cohesion --flat-split --rewriting #-}
+{-# OPTIONS --cohesion --flat-split #-}
 
 module modal-type-theory.codiscrete-maps where
 ```
