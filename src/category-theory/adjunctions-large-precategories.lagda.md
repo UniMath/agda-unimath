@@ -341,12 +341,12 @@ module _
     {l1 l2 : Level}
     (X : obj-Large-Precategory C l1)
     (Y : obj-Large-Precategory D l2) →
-    ( hom-Large-Precategory D
+    hom-Large-Precategory D
       ( obj-left-adjoint-Adjunction-Large-Precategory FG X)
-      ( Y)) ≃
-    ( hom-Large-Precategory C
+      ( Y) ≃
+    hom-Large-Precategory C
       ( X)
-      ( obj-right-adjoint-Adjunction-Large-Precategory FG Y))
+      ( obj-right-adjoint-Adjunction-Large-Precategory FG Y)
   inv-equiv-is-adjoint-pair-Adjunction-Large-Precategory FG X Y =
     inv-equiv (equiv-is-adjoint-pair-Adjunction-Large-Precategory FG X Y)
 
