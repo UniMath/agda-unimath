@@ -191,9 +191,11 @@ module _
 
 There is another natural construction of an Eckmann-Hilton term along
 these lines. If we think of the first construction as "rotating clockwise",
-this alternate version "rotates counter-clockwise". In more precise terms,
-the first version uses the naturality of whiskering on the left, while the
-second version uses the naturality of whiskering on the right. These
+this alternate version "rotates counter-clockwise". In terms of braids,
+previous construction of Eckmann-Hilton braids `α` over `β`, while this new
+construction braids `α` under `β`. This difference shows up nicely in the type
+theory. The first version uses the naturality of the operation of whiskering on the left, while the
+second version uses the naturality of the operation of whiskering on the right. These
 two version of the Eckmann-Hilton term naturally "undo" each other, as
 we will subsequently prove. Thus, we will refer to this alternate construction
 of Eckmann-Hilton as "the inverse Eckmann-Hilton argument", and the corresponding term
