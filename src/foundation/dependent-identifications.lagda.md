@@ -9,8 +9,10 @@ open import foundation-core.dependent-identifications public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.transport
+open import foundation.transport-along-higher-identifications
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
@@ -117,6 +119,13 @@ module _
     dependent-identification B q y' z' →
     dependent-identification B (p ∙ q) x' z'
   concat-dependent-identification refl q refl q' = q'
+
+  compute-concat-dependent-identification-refl :
+    { y z : A} (q : y ＝ z) →
+    { x' y' : B y} {z' : B z} (p' : x' ＝ y') →
+    ( q' : dependent-identification B q y' z') →
+    ( concat-dependent-identification refl q p' q') ＝ ap (tr B q) p' ∙ q'
+  compute-concat-dependent-identification-refl refl refl q' = refl
 ```
 
 #### Inverses of dependent identifications

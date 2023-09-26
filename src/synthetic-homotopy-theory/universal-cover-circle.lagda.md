@@ -12,7 +12,6 @@ open import elementary-number-theory.universal-property-integers
 
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-identifications
@@ -28,7 +27,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.universe-levels
@@ -118,7 +117,7 @@ abstract
       ( map-Π (λ x → map-raise))
       ( functor-free-dependent-loop l (λ x → map-raise))
       ( square-functor-free-dependent-loop l (λ x → map-raise))
-      ( is-equiv-map-equiv-Π-equiv-family _ (λ x → is-equiv-map-raise))
+      ( is-equiv-map-Π-is-fiberwise-equiv (λ x → is-equiv-map-raise))
       ( is-equiv-functor-free-dependent-loop-is-fiberwise-equiv l
         ( λ x → is-equiv-map-raise))
       ( dup-circle (λ x → raise l2 (P x)))

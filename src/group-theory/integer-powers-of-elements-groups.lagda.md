@@ -14,9 +14,10 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
+open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.iterating-automorphisms
-open import foundation.unit-type
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-groups
@@ -51,7 +52,7 @@ module _
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g)
 ```
 
-### Powers by integers of group elements
+### Integer powers of group elements
 
 ```agda
 module _
@@ -61,6 +62,34 @@ module _
   integer-power-Group : ℤ → type-Group G → type-Group G
   integer-power-Group k g =
     map-iterate-automorphism-ℤ k (equiv-mul-Group G g) (unit-Group G)
+```
+
+### The predicate of being an integer power of an element in a group
+
+We say that an element `y` **is an integer power** of an element `x` if there
+[exists](foundation.existential-quantification.md) an integer `k` such that
+`xᵏ ＝ y`.
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-integer-power-of-element-prop-Group :
+    (x y : type-Group G) → Prop l
+  is-integer-power-of-element-prop-Group x y =
+    ∃-Prop ℤ (λ k → integer-power-Group G k x ＝ y)
+
+  is-integer-power-of-element-Group :
+    (x y : type-Group G) → UU l
+  is-integer-power-of-element-Group x y =
+    type-Prop (is-integer-power-of-element-prop-Group x y)
+
+  is-prop-is-integer-power-of-element-Group :
+    (x y : type-Group G) →
+    is-prop (is-integer-power-of-element-Group x y)
+  is-prop-is-integer-power-of-element-Group x y =
+    is-prop-type-Prop (is-integer-power-of-element-prop-Group x y)
 ```
 
 ## Properties
@@ -540,13 +569,22 @@ module _
       ＝ (x ^ k) ^ (succ-ℤ (in-pos l))
         by
         inv (integer-power-succ-Group' G (in-pos l) (x ^ k))
+
+  swap-integer-power-Group :
+    (k l : ℤ) (x : type-Group G) →
+    integer-power-Group G k (integer-power-Group G l x) ＝
+    integer-power-Group G l (integer-power-Group G k x)
+  swap-integer-power-Group k l x =
+    ( inv (integer-power-mul-Group l k x)) ∙
+    ( ap (λ t → integer-power-Group G t x) (commutative-mul-ℤ l k)) ∙
+    ( integer-power-mul-Group k l x)
 ```
 
 ### Group homomorphisms preserve integer powers
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   preserves-integer-powers-hom-Group :
@@ -577,11 +615,11 @@ module _
       ( preserves-integer-powers-hom-Group (inr (inr k)) x))
 
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   eq-integer-power-hom-Group :
-    (g : type-hom-Group G H) (k : ℤ) (x : type-Group G) →
+    (g : hom-Group G H) (k : ℤ) (x : type-Group G) →
     ( map-hom-Group G H f x ＝ map-hom-Group G H g x) →
     ( map-hom-Group G H f (integer-power-Group G k x) ＝
       map-hom-Group G H g (integer-power-Group G k x))

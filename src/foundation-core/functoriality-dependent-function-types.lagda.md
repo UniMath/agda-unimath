@@ -26,12 +26,46 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.path-split-maps
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
 
 ## Properties
+
+### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  implicit-explicit-Π : ((x : A) → B x) → {x : A} → B x
+  implicit-explicit-Π f {x} = f x
+
+  explicit-implicit-Π : ({x : A} → B x) → (x : A) → B x
+  explicit-implicit-Π f x = f {x}
+
+  is-equiv-implicit-explicit-Π : is-equiv implicit-explicit-Π
+  pr1 (pr1 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
+  pr2 (pr1 is-equiv-implicit-explicit-Π) = refl-htpy
+  pr1 (pr2 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
+  pr2 (pr2 is-equiv-implicit-explicit-Π) = refl-htpy
+
+  is-equiv-explicit-implicit-Π : is-equiv explicit-implicit-Π
+  pr1 (pr1 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
+  pr2 (pr1 is-equiv-explicit-implicit-Π) = refl-htpy
+  pr1 (pr2 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
+  pr2 (pr2 is-equiv-explicit-implicit-Π) = refl-htpy
+
+  equiv-implicit-explicit-Π : ((x : A) → B x) ≃ ({x : A} → B x)
+  pr1 equiv-implicit-explicit-Π = implicit-explicit-Π
+  pr2 equiv-implicit-explicit-Π = is-equiv-implicit-explicit-Π
+
+  equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
+  pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
+  pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
+```
 
 ### The operation `map-Π` preserves homotopies
 
@@ -84,15 +118,15 @@ htpy-precomp-Π H C h x = apd h (H x)
 
 ```agda
 abstract
-  is-equiv-map-equiv-Π-equiv-family :
+  is-equiv-map-Π-is-fiberwise-equiv :
     {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-    (f : (i : I) → A i → B i) (is-equiv-f : is-fiberwise-equiv f) →
+    {f : (i : I) → A i → B i} (is-equiv-f : is-fiberwise-equiv f) →
     is-equiv (map-Π f)
-  is-equiv-map-equiv-Π-equiv-family f is-equiv-f =
+  is-equiv-map-Π-is-fiberwise-equiv is-equiv-f =
     is-equiv-is-contr-map
       ( λ g →
         is-contr-equiv' _
-          ( compute-fiber-map-Π f g)
+          ( compute-fiber-map-Π _ g)
           ( is-contr-Π (λ i → is-contr-map-is-equiv (is-equiv-f i) (g i))))
 
 equiv-Π-equiv-family :
@@ -100,9 +134,20 @@ equiv-Π-equiv-family :
   (e : (i : I) → (A i) ≃ (B i)) → ((i : I) → A i) ≃ ((i : I) → B i)
 pr1 (equiv-Π-equiv-family e) = map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
-  is-equiv-map-equiv-Π-equiv-family
-    ( λ i → map-equiv (e i))
+  is-equiv-map-Π-is-fiberwise-equiv
     ( λ i → is-equiv-map-equiv (e i))
+```
+
+We also record a version for dependent function types with implicit arguments.
+
+```agda
+equiv-implicit-Π-equiv-family :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
+equiv-implicit-Π-equiv-family e =
+  ( equiv-implicit-explicit-Π) ∘e
+  ( equiv-Π-equiv-family e) ∘e
+  ( equiv-explicit-implicit-Π)
 ```
 
 ### Precomposition and equivalences
@@ -121,7 +166,7 @@ is-equiv-precomp-Π-fiber-condition {f = f} {C} H =
   is-equiv-comp
     ( map-reduce-Π-fiber f (λ b u → C b))
     ( map-Π (λ b u t → u))
-    ( is-equiv-map-equiv-Π-equiv-family (λ b u t → u) H)
+    ( is-equiv-map-Π-is-fiberwise-equiv H)
     ( is-equiv-map-reduce-Π-fiber f (λ b u → C b))
 ```
 
@@ -153,7 +198,7 @@ abstract
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   (H : is-equiv f) (C : B → UU l3)
   where
 
@@ -187,7 +232,7 @@ equiv-precomp-Π :
   (C : B → UU l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
 pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
 pr2 (equiv-precomp-Π e C) =
-  is-equiv-precomp-Π-is-equiv (map-equiv e) (is-equiv-map-equiv e) C
+  is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e) C
 ```
 
 ## See also

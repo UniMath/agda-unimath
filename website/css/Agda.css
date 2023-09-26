@@ -1,0 +1,143 @@
+/* Aspects. */
+.Agda .Comment {
+  color: #948e8e;
+}
+
+.Agda .Markup {
+  color: #000000;
+}
+
+.Agda .Keyword {
+  color: #cd6600;
+}
+
+.Agda .String {
+  color: #b22222;
+}
+
+.Agda .Number {
+  color: #a020f0;
+}
+
+.Agda .Symbol {
+  color: #404040;
+}
+
+.Agda .PrimitiveType {
+  color: #0000cd;
+}
+
+.Agda .Pragma {
+  color: black;
+}
+
+.Agda .Operator {
+}
+
+.Agda .Hole {
+  background: #b4eeb4;
+}
+
+/* NameKinds. */
+.Agda .Bound {
+  color: black;
+}
+
+.Agda .Generalizable {
+  color: black;
+}
+
+.Agda .InductiveConstructor {
+  color: #008b00;
+}
+
+.Agda .CoinductiveConstructor {
+  color: #8b7500;
+}
+
+.Agda .Datatype {
+  color: #0000cd;
+}
+
+.Agda .Field {
+  color: #ee1289;
+}
+
+.Agda .Function {
+  color: #0000cd;
+}
+
+.Agda .Module {
+  color: #a020f0;
+}
+
+.Agda .Postulate {
+  color: #0000cd;
+}
+
+.Agda .Primitive {
+  color: #0000cd;
+}
+
+.Agda .Record {
+  color: #0000cd;
+}
+
+/* OtherAspects. */
+.Agda .DottedPattern {
+}
+
+.Agda .UnsolvedMeta {
+  color: black;
+  background: yellow;
+}
+
+.Agda .UnsolvedConstraint {
+  color: black;
+  background: yellow;
+}
+
+.Agda .TerminationProblem {
+  color: black;
+  background: #ffa07a;
+}
+
+.Agda .IncompletePattern {
+  color: black;
+  background: #f5deb3;
+}
+
+.Agda .Error {
+  color: red;
+  text-decoration: underline;
+}
+
+.Agda .TypeChecks {
+  color: black;
+  background: #add8e6;
+}
+
+.Agda .Deadcode {
+  color: black;
+  background: #808080;
+}
+
+.Agda .ShadowingInTelescope {
+  color: black;
+  background: #808080;
+}
+
+/* Standard attributes. */
+.Agda a {
+  text-decoration: none;
+}
+
+.Agda a[href]:hover {
+  /* background-color: #b4eeb4; */
+  background-color: var(--theme-hover);
+}
+
+.Agda [href].hover-highlight {
+  /* background-color: #b4eeb4; */
+  background-color: var(--theme-hover);
+}

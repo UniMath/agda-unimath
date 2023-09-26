@@ -11,6 +11,7 @@ open import foundation-core.identity-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
@@ -19,7 +20,7 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -37,27 +38,29 @@ is the least reflexive relation.
 The following table lists files that are about identity types and operations on
 identifications in arbitrary types.
 
-| Concept                                          | File                                                                                                                      |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Action on identifications of binary functions    | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
-| Action on identifications of dependent functions | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
-| Action on identifications of functions           | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
-| Binary transport                                 | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
-| Commuting squares of identifications             | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
-| Dependent identifications (foundation)           | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
-| Dependent identifications (foundation-core)      | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
-| The fundamental theorem of identity types        | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
-| Hexagons of identifications                      | [`foundation.hexagons-of-identifications`](foundation.hexagons-of-identifications.md)                                     |
-| Identity systems                                 | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
-| The identity type (foundation)                   | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
-| The identity type (foundation-core)              | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
-| Large identity types                             | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
-| Path algebra                                     | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
-| Symmetric identity types                         | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
-| Torsorial type families                          | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
-| Transport (foundation)                           | [`foundation.transport`](foundation.transport.md)                                                                         |
-| Transport (foundation-core)                      | [`foundation-core.transport`](foundation-core.transport.md)                                                               |
-| The universal property of identity types         | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
+| Concept                                           | File                                                                                                                      |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Action on identifications of binary functions     | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
+| Action on identifications of dependent functions  | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
+| Action on identifications of functions            | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
+| Binary transport                                  | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
+| Commuting hexagons of identifications             | [`foundation.commuting-hexagons-of-identifications`](foundation.commuting-hexagons-of-identifications.md)                 |
+| Commuting squares of identifications              | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
+| Dependent identifications (foundation)            | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
+| Dependent identifications (foundation-core)       | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
+| The fundamental theorem of identity types         | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
+| Identity systems                                  | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
+| The identity type (foundation)                    | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
+| The identity type (foundation-core)               | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
+| Large identity types                              | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
+| Path algebra                                      | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
+| Symmetric identity types                          | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
+| Torsorial type families                           | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
+| Transport along higher identifications            | [`foundation.transport-along-higher-identifications`](foundation.transport-along-higher-identifications.md)               |
+| Transport along identifications (foundation)      | [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md)                             |
+| Transport along identifications (foundation-core) | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                   |
+| The universal property of identity systems        | [`foundation.universal-property-identity-systems`](foundation.universal-property-identity-systems.md)                     |
+| The universal property of identity types          | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
 
 ## Properties
 
@@ -154,8 +157,14 @@ module _
 is-binary-equiv-concat :
   {l : Level} {A : UU l} {x y z : A} →
   is-binary-equiv (λ (p : x ＝ y) (q : y ＝ z) → p ∙ q)
-is-binary-equiv-concat {l} {A} {x} {y} {z} =
-  pair (λ q → is-equiv-concat' x q) (λ p → is-equiv-concat p z)
+pr1 (is-binary-equiv-concat {x = x}) q = is-equiv-concat' x q
+pr2 (is-binary-equiv-concat {z = z}) p = is-equiv-concat p z
+
+equiv-binary-concat :
+  {l : Level} {A : UU l} {x y z w : A} → (p : x ＝ y) (q : z ＝ w) →
+  (y ＝ z) ≃ (x ＝ w)
+equiv-binary-concat {x = x} {z = z} p q =
+  (equiv-concat' x q) ∘e (equiv-concat p z)
 
 convert-eq-values :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)

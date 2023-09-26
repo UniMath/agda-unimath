@@ -17,7 +17,6 @@ open import foundation.embeddings
 open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
@@ -26,6 +25,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.embeddings-standard-finite-types

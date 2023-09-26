@@ -31,7 +31,7 @@ A **trivial group homomorphism** from `G` to `H` is a
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   is-trivial-prop-hom-Group : Prop (l1 ⊔ l2)
@@ -54,7 +54,7 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Group l2)
   where
 
-  trivial-hom-Group : type-hom-Group G H
+  trivial-hom-Group : hom-Group G H
   pr1 trivial-hom-Group x = unit-Group H
   pr2 trivial-hom-Group x y = inv (left-unit-law-mul-Group H (unit-Group H))
 ```

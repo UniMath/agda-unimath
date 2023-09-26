@@ -42,45 +42,45 @@ to `x` the proposition `f(x) = unit`.
 
 ```agda
 module _
-  {l k : Level} (G : Group l) (H : Group k) (f : type-hom-Group G H)
+  {l k : Level} (G : Group l) (H : Group k) (f : hom-Group G H)
   where
 
-  subtype-kernel-hom-Group : subset-Group k G
-  subtype-kernel-hom-Group x =
+  subset-kernel-hom-Group : subset-Group k G
+  subset-kernel-hom-Group x =
     Id-Prop (set-Group H) (map-hom-Group G H f x) (unit-Group H)
 
   is-in-kernel-hom-Group : type-Group G → UU k
-  is-in-kernel-hom-Group x = type-Prop (subtype-kernel-hom-Group x)
+  is-in-kernel-hom-Group x = type-Prop (subset-kernel-hom-Group x)
 
-  contains-unit-subtype-kernel-hom-Group :
+  contains-unit-subset-kernel-hom-Group :
     is-in-kernel-hom-Group (unit-Group G)
-  contains-unit-subtype-kernel-hom-Group = preserves-unit-hom-Group G H f
+  contains-unit-subset-kernel-hom-Group = preserves-unit-hom-Group G H f
 
-  is-closed-under-multiplication-subtype-kernel-hom-Group :
-    is-closed-under-multiplication-subset-Group G subtype-kernel-hom-Group
-  is-closed-under-multiplication-subtype-kernel-hom-Group x y p q =
+  is-closed-under-multiplication-subset-kernel-hom-Group :
+    is-closed-under-multiplication-subset-Group G subset-kernel-hom-Group
+  is-closed-under-multiplication-subset-kernel-hom-Group x y p q =
     ( preserves-mul-hom-Group G H f x y) ∙
     ( ( ap (λ (x , y) → mul-Group H x y) (eq-pair p q)) ∙
       ( left-unit-law-mul-Group H _))
 
-  is-closed-under-inv-subtype-kernel-hom-Group :
-    is-closed-under-inv-subset-Group G subtype-kernel-hom-Group
-  is-closed-under-inv-subtype-kernel-hom-Group x p =
+  is-closed-under-inverses-subset-kernel-hom-Group :
+    is-closed-under-inverses-subset-Group G subset-kernel-hom-Group
+  is-closed-under-inverses-subset-kernel-hom-Group x p =
     ( preserves-inv-hom-Group G H f x) ∙
     ( ap (inv-Group H) p ∙ inv-unit-Group H)
 
   subgroup-kernel-hom-Group : Subgroup k G
-  pr1 subgroup-kernel-hom-Group = subtype-kernel-hom-Group
-  pr1 (pr2 subgroup-kernel-hom-Group) = contains-unit-subtype-kernel-hom-Group
+  pr1 subgroup-kernel-hom-Group = subset-kernel-hom-Group
+  pr1 (pr2 subgroup-kernel-hom-Group) = contains-unit-subset-kernel-hom-Group
   pr1 (pr2 (pr2 subgroup-kernel-hom-Group)) =
-    is-closed-under-multiplication-subtype-kernel-hom-Group
+    is-closed-under-multiplication-subset-kernel-hom-Group
   pr2 (pr2 (pr2 subgroup-kernel-hom-Group)) =
-    is-closed-under-inv-subtype-kernel-hom-Group
+    is-closed-under-inverses-subset-kernel-hom-Group
 
   group-kernel-hom-Group : Group (l ⊔ k)
   group-kernel-hom-Group = group-Subgroup G subgroup-kernel-hom-Group
 
-  inclusion-kernel-hom-Group : type-hom-Group group-kernel-hom-Group G
+  inclusion-kernel-hom-Group : hom-Group group-kernel-hom-Group G
   inclusion-kernel-hom-Group =
     hom-inclusion-Subgroup G subgroup-kernel-hom-Group
 
@@ -100,7 +100,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   is-normal-kernel-hom-Group :
@@ -126,34 +126,34 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
-  subtype-kernel-hom-Ab : subset-Ab l2 A
-  subtype-kernel-hom-Ab =
-    subtype-kernel-hom-Group (group-Ab A) (group-Ab B) f
+  subset-kernel-hom-Ab : subset-Ab l2 A
+  subset-kernel-hom-Ab =
+    subset-kernel-hom-Group (group-Ab A) (group-Ab B) f
 
   is-in-kernel-hom-Ab : type-Ab A → UU l2
   is-in-kernel-hom-Ab =
     is-in-kernel-hom-Group (group-Ab A) (group-Ab B) f
 
-  contains-zero-subtype-kernel-hom-Ab :
+  contains-zero-subset-kernel-hom-Ab :
     is-in-kernel-hom-Ab (zero-Ab A)
-  contains-zero-subtype-kernel-hom-Ab =
-    contains-unit-subtype-kernel-hom-Group (group-Ab A) (group-Ab B) f
+  contains-zero-subset-kernel-hom-Ab =
+    contains-unit-subset-kernel-hom-Group (group-Ab A) (group-Ab B) f
 
-  is-closed-under-add-subtype-kernel-hom-Ab :
-    is-closed-under-add-subset-Ab A subtype-kernel-hom-Ab
-  is-closed-under-add-subtype-kernel-hom-Ab =
-    is-closed-under-multiplication-subtype-kernel-hom-Group
+  is-closed-under-addition-subset-kernel-hom-Ab :
+    is-closed-under-addition-subset-Ab A subset-kernel-hom-Ab
+  is-closed-under-addition-subset-kernel-hom-Ab =
+    is-closed-under-multiplication-subset-kernel-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)
 
-  is-closed-under-neg-subtype-kernel-hom-Ab :
-    is-closed-under-neg-subset-Ab A subtype-kernel-hom-Ab
-  is-closed-under-neg-subtype-kernel-hom-Ab =
-    is-closed-under-inv-subtype-kernel-hom-Group
+  is-closed-under-negatives-subset-kernel-hom-Ab :
+    is-closed-under-negatives-subset-Ab A subset-kernel-hom-Ab
+  is-closed-under-negatives-subset-kernel-hom-Ab =
+    is-closed-under-inverses-subset-kernel-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)
@@ -165,7 +165,7 @@ module _
   ab-kernel-hom-Ab : Ab (l1 ⊔ l2)
   ab-kernel-hom-Ab = ab-Subgroup-Ab A kernel-hom-Ab
 
-  inclusion-kernel-hom-Ab : type-hom-Ab ab-kernel-hom-Ab A
+  inclusion-kernel-hom-Ab : hom-Ab ab-kernel-hom-Ab A
   inclusion-kernel-hom-Ab =
     inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
 

@@ -8,7 +8,7 @@ module higher-group-theory.higher-group-actions where
 
 ```agda
 open import foundation.identity-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
@@ -18,7 +18,8 @@ open import higher-group-theory.higher-groups
 
 ## Idea
 
-An action of a higher group `G` on a type is just a type family over `BG`.
+An **action of a [higher group](higher-group-theory.higher-groups.md)** `G` on a
+type is just a type family over `BG`.
 
 ## Definition
 

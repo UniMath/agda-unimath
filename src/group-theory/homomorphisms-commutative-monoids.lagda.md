@@ -35,23 +35,23 @@ module _
   {l1 l2 : Level} (M1 : Commutative-Monoid l1) (M2 : Commutative-Monoid l2)
   where
 
-  hom-Commutative-Monoid : Set (l1 ⊔ l2)
-  hom-Commutative-Monoid =
-    hom-Monoid (monoid-Commutative-Monoid M1) (monoid-Commutative-Monoid M2)
+  hom-set-Commutative-Monoid : Set (l1 ⊔ l2)
+  hom-set-Commutative-Monoid =
+    hom-set-Monoid (monoid-Commutative-Monoid M1) (monoid-Commutative-Monoid M2)
 
-  type-hom-Commutative-Monoid : UU (l1 ⊔ l2)
-  type-hom-Commutative-Monoid =
-    type-hom-Monoid
+  hom-Commutative-Monoid : UU (l1 ⊔ l2)
+  hom-Commutative-Monoid =
+    hom-Monoid
       ( monoid-Commutative-Monoid M1)
       ( monoid-Commutative-Monoid M2)
 
 module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Commutative-Monoid l2)
-  (f : type-hom-Commutative-Monoid M N)
+  (f : hom-Commutative-Monoid M N)
   where
 
   hom-semigroup-hom-Commutative-Monoid :
-    type-hom-Semigroup
+    hom-Semigroup
       ( semigroup-Commutative-Monoid M)
       ( semigroup-Commutative-Monoid N)
   hom-semigroup-hom-Commutative-Monoid =
@@ -95,7 +95,7 @@ module _
 
 ```agda
 id-hom-Commutative-Monoid :
-  {l : Level} (M : Commutative-Monoid l) → type-hom-Commutative-Monoid M M
+  {l : Level} (M : Commutative-Monoid l) → hom-Commutative-Monoid M M
 id-hom-Commutative-Monoid M = id-hom-Monoid (monoid-Commutative-Monoid M)
 ```
 
@@ -110,8 +110,8 @@ module _
   where
 
   comp-hom-Commutative-Monoid :
-    type-hom-Commutative-Monoid L M → type-hom-Commutative-Monoid K L →
-    type-hom-Commutative-Monoid K M
+    hom-Commutative-Monoid L M → hom-Commutative-Monoid K L →
+    hom-Commutative-Monoid K M
   comp-hom-Commutative-Monoid =
     comp-hom-Monoid
       ( monoid-Commutative-Monoid K)
@@ -127,14 +127,14 @@ module _
   where
 
   htpy-hom-Commutative-Monoid :
-    (f g : type-hom-Commutative-Monoid M N) → UU (l1 ⊔ l2)
+    (f g : hom-Commutative-Monoid M N) → UU (l1 ⊔ l2)
   htpy-hom-Commutative-Monoid =
     htpy-hom-Monoid
       ( monoid-Commutative-Monoid M)
       ( monoid-Commutative-Monoid N)
 
   refl-htpy-hom-Commutative-Monoid :
-    (f : type-hom-Commutative-Monoid M N) → htpy-hom-Commutative-Monoid f f
+    (f : hom-Commutative-Monoid M N) → htpy-hom-Commutative-Monoid f f
   refl-htpy-hom-Commutative-Monoid =
     refl-htpy-hom-Monoid
       ( monoid-Commutative-Monoid M)
@@ -148,12 +148,12 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (M : Commutative-Monoid l1) (N : Commutative-Monoid l2)
-  (f : type-hom-Commutative-Monoid M N)
+  (f : hom-Commutative-Monoid M N)
   where
 
   is-contr-total-htpy-hom-Commutative-Monoid :
     is-contr
-      ( Σ ( type-hom-Commutative-Monoid M N)
+      ( Σ ( hom-Commutative-Monoid M N)
           ( htpy-hom-Commutative-Monoid M N f))
   is-contr-total-htpy-hom-Commutative-Monoid =
     is-contr-total-htpy-hom-Monoid
@@ -162,7 +162,7 @@ module _
       ( f)
 
   htpy-eq-hom-Commutative-Monoid :
-    (g : type-hom-Commutative-Monoid M N) →
+    (g : hom-Commutative-Monoid M N) →
     (f ＝ g) → htpy-hom-Commutative-Monoid M N f g
   htpy-eq-hom-Commutative-Monoid =
     htpy-eq-hom-Monoid
@@ -171,7 +171,7 @@ module _
       ( f)
 
   is-equiv-htpy-eq-hom-Commutative-Monoid :
-    (g : type-hom-Commutative-Monoid M N) →
+    (g : hom-Commutative-Monoid M N) →
     is-equiv (htpy-eq-hom-Commutative-Monoid g)
   is-equiv-htpy-eq-hom-Commutative-Monoid =
     is-equiv-htpy-eq-hom-Monoid
@@ -180,7 +180,7 @@ module _
       ( f)
 
   extensionality-hom-Commutative-Monoid :
-    (g : type-hom-Commutative-Monoid M N) →
+    (g : hom-Commutative-Monoid M N) →
     (f ＝ g) ≃ htpy-hom-Commutative-Monoid M N f g
   extensionality-hom-Commutative-Monoid =
     extensionality-hom-Monoid
@@ -189,7 +189,7 @@ module _
       ( f)
 
   eq-htpy-hom-Commutative-Monoid :
-    (g : type-hom-Commutative-Monoid M N) →
+    (g : hom-Commutative-Monoid M N) →
     htpy-hom-Commutative-Monoid M N f g → f ＝ g
   eq-htpy-hom-Commutative-Monoid =
     eq-htpy-hom-Monoid
@@ -210,9 +210,9 @@ module _
   where
 
   associative-comp-hom-Commutative-Monoid :
-    (h : type-hom-Commutative-Monoid M N)
-    (g : type-hom-Commutative-Monoid L M)
-    (f : type-hom-Commutative-Monoid K L) →
+    (h : hom-Commutative-Monoid M N)
+    (g : hom-Commutative-Monoid L M)
+    (f : hom-Commutative-Monoid K L) →
     ( comp-hom-Commutative-Monoid K L N
       ( comp-hom-Commutative-Monoid L M N h g)
       ( f)) ＝
@@ -235,7 +235,7 @@ module _
   where
 
   left-unit-law-comp-hom-Commutative-Monoid :
-    (f : type-hom-Commutative-Monoid M N) →
+    (f : hom-Commutative-Monoid M N) →
     comp-hom-Commutative-Monoid M N N (id-hom-Commutative-Monoid N) f ＝ f
   left-unit-law-comp-hom-Commutative-Monoid =
     left-unit-law-comp-hom-Monoid
@@ -243,7 +243,7 @@ module _
       ( monoid-Commutative-Monoid N)
 
   right-unit-law-comp-hom-Commutative-Monoid :
-    (f : type-hom-Commutative-Monoid M N) →
+    (f : hom-Commutative-Monoid M N) →
     comp-hom-Commutative-Monoid M M N f (id-hom-Commutative-Monoid M) ＝ f
   right-unit-law-comp-hom-Commutative-Monoid =
     right-unit-law-comp-hom-Monoid

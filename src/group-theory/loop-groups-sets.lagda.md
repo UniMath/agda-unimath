@@ -115,21 +115,23 @@ module _
   where
 
   hom-symmetric-group-loop-group-Set :
-    type-hom-Group (loop-group-Set X) (symmetric-Group X)
+    hom-Group (loop-group-Set X) (symmetric-Group X)
   pr1 hom-symmetric-group-loop-group-Set =
     map-hom-symmetric-group-loop-group-Set X X
   pr2 hom-symmetric-group-loop-group-Set p q =
     ( ap equiv-eq (distributive-inv-concat p q)) ∙
-      ( inv (compute-equiv-eq (inv q) (inv p)))
+    ( inv (compute-equiv-eq-concat (inv q) (inv p)))
 
   hom-inv-symmetric-group-loop-group-Set :
-    type-hom-Group (symmetric-Group X) (loop-group-Set X)
+    hom-Group (symmetric-Group X) (loop-group-Set X)
   pr1 hom-inv-symmetric-group-loop-group-Set =
     map-hom-inv-symmetric-group-loop-group-Set X X
   pr2 hom-inv-symmetric-group-loop-group-Set f g =
     ( ap
       ( inv)
-      ( inv (compute-eq-equiv (type-Set X) (type-Set X) (type-Set X) g f))) ∙
+      ( inv
+        ( compute-eq-equiv-comp-equiv
+          ( type-Set X) (type-Set X) (type-Set X) g f))) ∙
       ( distributive-inv-concat
         ( eq-equiv (type-Set X) (type-Set X) g)
         ( eq-equiv (type-Set X) (type-Set X) f))
@@ -201,7 +203,7 @@ module _
   where
 
   hom-abstract-automorphism-group-loop-group-Set :
-    type-hom-Group
+    hom-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
@@ -236,7 +238,7 @@ module _
           ( eq-is-prop is-prop-type-trunc-Prop)))
 
   hom-inv-abstract-automorphism-group-loop-group-Set :
-    type-hom-Group
+    hom-Group
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
       ( loop-group-Set X)

@@ -12,7 +12,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import structured-types.coherent-h-spaces
+open import structured-types.h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-types
@@ -24,8 +24,23 @@ open import structured-types.wild-quasigroups
 ## Idea
 
 The loop space of a pointed type `A` is the pointed type of self-identifications
-of the base point of `A`. The loop space comes equipped with a groupoidal
-structure.
+of the base point of `A`. The loop space comes equipped with a group structure
+induced by the groupoidal structure on identifications.
+
+## List of files directly related to loop spaces
+
+| Concept                      | File                                                                                                              |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Higher groups                | [`higher-group-theory.higher-groups`](higher-group-theory.higher-groups.md)                                       |
+| Conjugation of loops         | [`synthetic-homotopy-theory.conjugation-loops`](synthetic-homotopy-theory.conjugation-loops.md)                   |
+| Double loop spaces           | [`synthetic-homotopy-theory.double-loop-spaces`](synthetic-homotopy-theory.double-loop-spaces.md)                 |
+| The Eckmann-Hilton argument  | [`synthetic-homotopy-theory.eckmann-hilton-argument`](synthetic-homotopy-theory.eckmann-hilton-argument.md)       |
+| Free loops                   | [`synthetic-homotopy-theory.free-loops`](synthetic-homotopy-theory.free-loops.md)                                 |
+| Functoriality of loop spaces | [`synthetic-homotopy-theory.functoriality-loop-spaces`](synthetic-homotopy-theory.functoriality-loop-spaces.md)   |
+| Groups of loops in 1-types   | [`synthetic-homotopy-theory.groups-of-loops-in-1-types`](synthetic-homotopy-theory.groups-of-loops-in-1-types.md) |
+| Iterated loop spaces         | [`synthetic-homotopy-theory.iterated-loop-spaces'](synthetic-homotopy-theory.iterated-loop-spaces.md)             |
+| Powers of loops              | [`synthetic-homotopy-theory.powers-of-loops`](synthetic-homotopy-theory.powers-of-loops.md)                       |
+| Triple loop spaces           | [`synthetic-homotopy-theory.triple-loop-spaces`](synthetic-homotopy-theory.triple-loop-spaces.md)                 |
 
 ## Definitions
 
@@ -61,7 +76,7 @@ module _
   pr2 Ω-Magma = mul-Ω
 ```
 
-### The wild unital magma of loops on a pointed space
+### The H-space of loops on a pointed space
 
 ```agda
 module _
@@ -76,12 +91,12 @@ module _
     (x : type-Ω A) → Id (mul-Ω A x (refl-Ω A)) x
   right-unit-law-mul-Ω x = right-unit
 
-  Ω-Coherent-H-Space : Coherent-H-Space l
-  pr1 Ω-Coherent-H-Space = Ω A
-  pr1 (pr2 Ω-Coherent-H-Space) = mul-Ω A
-  pr1 (pr2 (pr2 Ω-Coherent-H-Space)) = left-unit-law-mul-Ω
-  pr1 (pr2 (pr2 (pr2 Ω-Coherent-H-Space))) = right-unit-law-mul-Ω
-  pr2 (pr2 (pr2 (pr2 Ω-Coherent-H-Space))) = refl
+  Ω-H-Space : H-Space l
+  pr1 Ω-H-Space = Ω A
+  pr1 (pr2 Ω-H-Space) = mul-Ω A
+  pr1 (pr2 (pr2 Ω-H-Space)) = left-unit-law-mul-Ω
+  pr1 (pr2 (pr2 (pr2 Ω-H-Space))) = right-unit-law-mul-Ω
+  pr2 (pr2 (pr2 (pr2 Ω-H-Space))) = refl
 ```
 
 ### The wild quasigroup of loops on a pointed space

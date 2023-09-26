@@ -12,7 +12,7 @@ open import foundation.universe-levels
 open import foundation-core.constant-maps
 open import foundation-core.function-types
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -46,7 +46,7 @@ ap-id :
 ap-id refl = refl
 ```
 
-### The action on identifications of a composite function is the composite of the actions on identifications
+### The action on identifications of a composite function is the composite of the actions
 
 ```agda
 ap-comp :
@@ -84,7 +84,7 @@ ap-concat-eq f p q .(p ∙ q) refl = ap-concat f p q
 ```agda
 ap-inv :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
-  (p : x ＝ y) → (ap f (inv p)) ＝ (inv (ap f p))
+  (p : x ＝ y) → ap f (inv p) ＝ inv (ap f p)
 ap-inv f refl = refl
 ```
 

@@ -10,16 +10,13 @@ module group-theory.free-groups-with-one-generator where
 open import elementary-number-theory.addition-integers
 open import elementary-number-theory.group-of-integers
 open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.contractible-maps
 open import foundation.contractible-types
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.iterating-automorphisms
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.universe-levels
@@ -39,7 +36,7 @@ A group `F` equipped with an element `x : F` is said to satisfy the universal
 property of the free group with one generator if for every group `G` the map
 
 ```text
-  type-hom-Group F G → type-Group G
+  hom-Group F G → type-Group G
 ```
 
 given by `h ↦ h x` is an equivalence. The group of integers is a free group with
@@ -50,7 +47,7 @@ one generator.
 ```agda
 ev-element-hom-Group :
   {l1 l2 : Level} (G : Group l1) (H : Group l2) (g : type-Group G) →
-  type-hom-Group G H → type-Group H
+  hom-Group G H → type-Group H
 ev-element-hom-Group G H g f = map-hom-Group G H f g
 
 is-free-group-with-one-generator :
@@ -82,12 +79,12 @@ module _
   preserves-mul-map-hom-element-Group =
     distributive-integer-power-add-Group G g
 
-  hom-element-Group : type-hom-Group ℤ-Group G
+  hom-element-Group : hom-Group ℤ-Group G
   pr1 hom-element-Group = map-hom-element-Group
   pr2 hom-element-Group = preserves-mul-map-hom-element-Group
 
   htpy-hom-element-Group :
-    (h : type-hom-Group ℤ-Group G) → map-hom-Group ℤ-Group G h one-ℤ ＝ g →
+    (h : hom-Group ℤ-Group G) → map-hom-Group ℤ-Group G h one-ℤ ＝ g →
     htpy-hom-Group ℤ-Group G hom-element-Group h
   htpy-hom-element-Group h p =
     htpy-map-ℤ-Pointed-Type-With-Aut
@@ -105,7 +102,7 @@ module _
 
   is-contr-total-hom-element-Group :
     is-contr
-      ( Σ ( type-hom-Group ℤ-Group G)
+      ( Σ ( hom-Group ℤ-Group G)
           ( λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g))
   pr1 (pr1 is-contr-total-hom-element-Group) =
     hom-element-Group

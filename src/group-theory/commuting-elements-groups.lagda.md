@@ -7,10 +7,8 @@ module group-theory.commuting-elements-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
 open import foundation.universe-levels
 
 open import group-theory.commuting-elements-monoids

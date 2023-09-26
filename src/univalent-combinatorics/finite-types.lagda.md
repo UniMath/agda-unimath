@@ -32,7 +32,7 @@ open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.subuniverses
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
 open import foundation.unit-type

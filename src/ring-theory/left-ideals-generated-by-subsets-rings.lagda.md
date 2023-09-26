@@ -18,7 +18,7 @@ open import foundation.powersets
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unions-subtypes
 open import foundation.universe-levels
 
@@ -309,7 +309,7 @@ module _
         ( H))
 
   left-ideal-subset-hom-large-poset-Ring :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Ring A))
       ( left-ideal-Ring-Large-Poset A)

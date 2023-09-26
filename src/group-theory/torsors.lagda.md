@@ -21,7 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -97,7 +97,7 @@ module _
 
   mul-hom-Torsor-Abstract-Group :
     {l : Level} (X : Torsor-Abstract-Group l) →
-    type-hom-Group G (symmetric-Group (set-Torsor-Abstract-Group X))
+    hom-Group G (symmetric-Group (set-Torsor-Abstract-Group X))
   mul-hom-Torsor-Abstract-Group X = pr2 (action-Torsor-Abstract-Group X)
 
   equiv-mul-Torsor-Abstract-Group :
@@ -655,6 +655,16 @@ module _
         ( principal-Torsor-Abstract-Group G))
       ( is-set-type-Group G)
 
+  classifying-type-Group : UU (lsuc l1)
+  classifying-type-Group = classifying-type-Concrete-Group concrete-group-Group
+
+  shape-Group : classifying-type-Group
+  shape-Group = shape-Concrete-Group concrete-group-Group
+
+  is-0-connected-classifying-type-Group : is-0-connected classifying-type-Group
+  is-0-connected-classifying-type-Group =
+    is-0-connected-classifying-type-Concrete-Group concrete-group-Group
+
   abstract-group-concrete-group-Group :
     type-iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
   abstract-group-concrete-group-Group =
@@ -672,7 +682,7 @@ module _
   where
 
   map-Torsor-Abstract-Group :
-    type-hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
+    hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
   pr1 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (map-Torsor-Abstract-Group f X) = {!!}

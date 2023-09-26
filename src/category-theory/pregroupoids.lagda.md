@@ -7,7 +7,7 @@ module category-theory.pregroupoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
@@ -34,8 +34,8 @@ is-groupoid-Precategory-Prop C =
         ( obj-Precategory C)
         ( λ y →
           Π-Prop
-            ( type-hom-Precategory C x y)
-            ( λ f → is-iso-Precategory-Prop C f)))
+            ( hom-Precategory C x y)
+            ( is-iso-prop-Precategory C)))
 
 is-groupoid-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)

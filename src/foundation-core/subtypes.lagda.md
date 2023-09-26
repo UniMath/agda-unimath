@@ -22,7 +22,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sets
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -99,20 +99,20 @@ module _
   {l1 : Level} {A : UU l1}
   where
 
-  leq-subtype-Prop :
+  leq-prop-subtype :
     {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-  leq-subtype-Prop P Q =
+  leq-prop-subtype P Q =
     Π-Prop A (λ x → hom-Prop (P x) (Q x))
 
   infix 5 _⊆_
   _⊆_ :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
-  P ⊆ Q = type-Prop (leq-subtype-Prop P Q)
+  P ⊆ Q = type-Prop (leq-prop-subtype P Q)
 
   is-prop-leq-subtype :
     {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
   is-prop-leq-subtype P Q =
-    is-prop-type-Prop (leq-subtype-Prop P Q)
+    is-prop-type-Prop (leq-prop-subtype P Q)
 ```
 
 ## Properties
@@ -146,7 +146,7 @@ module _
 
   extensionality-type-subtype' :
     (a b : type-subtype P) → (a ＝ b) ≃ (pr1 a ＝ pr1 b)
-  extensionality-type-subtype' (pair a p) =
+  extensionality-type-subtype' (a , p) =
     extensionality-type-subtype P p refl (λ x → id-equiv)
 
   eq-type-subtype :

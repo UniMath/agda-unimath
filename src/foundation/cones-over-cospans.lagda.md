@@ -9,7 +9,7 @@ module foundation.cones-over-cospans where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
@@ -17,8 +17,10 @@ open import foundation-core.commuting-squares-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -98,8 +100,8 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
 Next we characterize the identity type of the type of cones with a given vertex
 C. Note that in the definition of htpy-cone we do not use pattern matching on
 the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a
-Σ-type for any c and c', not just for c and c' of the form (pair p (pair q H))
-and (pair p' (pair q' H')) respectively.
+Σ-type for any c and c', not just for c and c' of the form (p , q , H) and (p' ,
+q' , H') respectively.
 
 ```agda
 module _
@@ -135,16 +137,16 @@ module _
     is-contr-total-Eq-structure
       ( λ p qH K →
         Σ ( horizontal-map-cone f g c ~ pr1 qH)
-          ( coherence-htpy-cone c (pair p qH) K))
+          ( coherence-htpy-cone c (p , qH) K))
       ( is-contr-total-htpy (vertical-map-cone f g c))
-      ( pair (vertical-map-cone f g c) refl-htpy)
+      ( vertical-map-cone f g c , refl-htpy)
       ( is-contr-total-Eq-structure
         ( λ q H →
           coherence-htpy-cone c
-            ( pair (vertical-map-cone f g c) (pair q H))
+            ( vertical-map-cone f g c , q , H)
             ( refl-htpy))
         ( is-contr-total-htpy (horizontal-map-cone f g c))
-        ( pair (horizontal-map-cone f g c) refl-htpy)
+        ( horizontal-map-cone f g c , refl-htpy)
         ( is-contr-total-htpy (coherence-square-cone f g c ∙h refl-htpy)))
 
   is-equiv-htpy-eq-cone : (c c' : cone f g C) → is-equiv (htpy-eq-cone c c')
@@ -186,10 +188,10 @@ module _
 
   pasting-horizontal-cone :
     (c : cone j h B) → cone i (vertical-map-cone j h c) A → cone (j ∘ i) h A
-  pr1 (pasting-horizontal-cone c (pair f (pair p H))) = f
-  pr1 (pr2 (pasting-horizontal-cone c (pair f (pair p H)))) =
+  pr1 (pasting-horizontal-cone c (f , p , H)) = f
+  pr1 (pr2 (pasting-horizontal-cone c (f , p , H))) =
     (horizontal-map-cone j h c) ∘ p
-  pr2 (pr2 (pasting-horizontal-cone c (pair f (pair p H)))) =
+  pr2 (pr2 (pasting-horizontal-cone c (f , p , H))) =
     pasting-horizontal-coherence-square-maps p
       ( horizontal-map-cone j h c)
       ( f)
@@ -212,10 +214,10 @@ module _
 
   pasting-vertical-cone :
     (c : cone f g B) → cone (horizontal-map-cone f g c) h A → cone f (g ∘ h) A
-  pr1 (pasting-vertical-cone c (pair p' (pair q' H'))) =
+  pr1 (pasting-vertical-cone c (p' , q' , H')) =
     ( vertical-map-cone f g c) ∘ p'
-  pr1 (pr2 (pasting-vertical-cone c (pair p' (pair q' H')))) = q'
-  pr2 (pr2 (pasting-vertical-cone c (pair p' (pair q' H')))) =
+  pr1 (pr2 (pasting-vertical-cone c (p' , q' , H'))) = q'
+  pr2 (pr2 (pasting-vertical-cone c (p' , q' , H'))) =
     pasting-vertical-coherence-square-maps q' p' h
       ( horizontal-map-cone f g c)
       ( vertical-map-cone f g c)

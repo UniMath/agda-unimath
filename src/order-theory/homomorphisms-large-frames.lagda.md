@@ -33,11 +33,11 @@ module _
   where
 
   record
-    hom-Large-Frame : UUω
+    hom-set-Large-Frame : UUω
     where
     field
       hom-large-meet-semilattice-hom-Large-Frame :
-        hom-Large-Meet-Semilattice
+        hom-set-Large-Meet-Semilattice
           ( large-meet-semilattice-Large-Frame K)
           ( large-meet-semilattice-Large-Frame L)
       preserves-sup-hom-Large-Frame :
@@ -47,10 +47,10 @@ module _
           ( hom-large-poset-hom-Large-Meet-Semilattice
             ( hom-large-meet-semilattice-hom-Large-Frame))
 
-  open hom-Large-Frame public
+  open hom-set-Large-Frame public
 
   module _
-    (f : hom-Large-Frame)
+    (f : hom-set-Large-Frame)
     where
 
     map-hom-Large-Frame :

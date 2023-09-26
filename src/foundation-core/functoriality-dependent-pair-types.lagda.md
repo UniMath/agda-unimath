@@ -18,7 +18,7 @@ open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -119,7 +119,7 @@ tot-id :
 tot-id B (pair x y) = refl
 ```
 
-### the map `tot` preserves composition
+### The map `tot` preserves composition
 
 ```agda
 preserves-comp-tot :

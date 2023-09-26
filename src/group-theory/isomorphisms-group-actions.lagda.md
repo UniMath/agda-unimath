@@ -7,7 +7,7 @@ module group-theory.isomorphisms-group-actions where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-large-precategories
+open import category-theory.isomorphisms-in-large-precategories
 
 open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
@@ -35,17 +35,17 @@ module _
   private
     C = Abstract-Group-Action-Large-Precategory G
 
-  is-iso-hom-Abstract-Group-Action :
-    (f : type-hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
-  is-iso-hom-Abstract-Group-Action =
-    is-iso-hom-Large-Precategory C {X = X} {Y = Y}
+  is-iso-Abstract-Group-Action :
+    (f : hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
+  is-iso-Abstract-Group-Action =
+    is-iso-Large-Precategory C {X = X} {Y = Y}
 
   type-iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
   type-iso-Abstract-Group-Action = iso-Large-Precategory C X Y
 
   hom-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
-  hom-iso-Abstract-Group-Action = hom-iso-Large-Precategory C X Y
+    type-iso-Abstract-Group-Action → hom-Abstract-Group-Action G X Y
+  hom-iso-Abstract-Group-Action = hom-iso-Large-Precategory C {X = X} {Y = Y}
 
   map-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -65,8 +65,9 @@ module _
       ( hom-iso-Abstract-Group-Action f)
 
   hom-inv-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G Y X
-  hom-inv-iso-Abstract-Group-Action = hom-inv-iso-Large-Precategory C X Y
+    type-iso-Abstract-Group-Action → hom-Abstract-Group-Action G Y X
+  hom-inv-iso-Abstract-Group-Action =
+    hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   map-hom-inv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action →
@@ -83,7 +84,7 @@ module _
         ( hom-inv-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G Y)
   is-section-hom-inv-iso-Abstract-Group-Action =
-    is-section-hom-inv-iso-Large-Precategory C X Y
+    is-section-hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   is-retraction-hom-inv-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
@@ -93,12 +94,13 @@ module _
         ( hom-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G X)
   is-retraction-hom-inv-iso-Abstract-Group-Action =
-    is-retraction-hom-inv-iso-Large-Precategory C X Y
+    is-retraction-hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   is-iso-iso-Abstract-Group-Action :
     (f : type-iso-Abstract-Group-Action) →
-    is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
-  is-iso-iso-Abstract-Group-Action = is-iso-iso-Large-Precategory C X Y
+    is-iso-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
+  is-iso-iso-Abstract-Group-Action =
+    is-iso-iso-Large-Precategory C {X = X} {Y = Y}
 
   equiv-iso-Abstract-Group-Action :
     type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y

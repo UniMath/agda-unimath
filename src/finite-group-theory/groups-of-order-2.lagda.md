@@ -165,7 +165,7 @@ module _
 
 ```agda
 --   specified-hom-Group-of-Order-2 :
---     type-hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
+--     hom-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
 --   specified-hom-Group-of-Order-2 = {!!}
 ```
 

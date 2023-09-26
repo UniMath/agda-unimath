@@ -7,10 +7,8 @@ module order-theory.dependent-products-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -69,12 +67,12 @@ module _
   is-set-type-Π-Large-Locale : {l : Level} → is-set (type-Π-Large-Locale l)
   is-set-type-Π-Large-Locale = is-set-type-Π-Large-Frame L
 
-  leq-Π-Large-Locale-Prop :
+  leq-prop-Π-Large-Locale :
     Large-Relation-Prop
       ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-Π-Large-Locale)
-  leq-Π-Large-Locale-Prop = leq-Π-Large-Frame-Prop L
+  leq-prop-Π-Large-Locale = leq-prop-Π-Large-Frame L
 
   leq-Π-Large-Locale :
     Large-Relation
@@ -88,15 +86,15 @@ module _
   is-prop-leq-Π-Large-Locale = is-prop-leq-Π-Large-Frame L
 
   refl-leq-Π-Large-Locale :
-    is-large-reflexive type-Π-Large-Locale leq-Π-Large-Locale
+    is-reflexive-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   refl-leq-Π-Large-Locale = refl-leq-Π-Large-Frame L
 
   antisymmetric-leq-Π-Large-Locale :
-    is-large-antisymmetric type-Π-Large-Locale leq-Π-Large-Locale
+    is-antisymmetric-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   antisymmetric-leq-Π-Large-Locale = antisymmetric-leq-Π-Large-Frame L
 
   transitive-leq-Π-Large-Locale :
-    is-large-transitive type-Π-Large-Locale leq-Π-Large-Locale
+    is-transitive-Large-Relation type-Π-Large-Locale leq-Π-Large-Locale
   transitive-leq-Π-Large-Locale = transitive-leq-Π-Large-Frame L
 
   meet-Π-Large-Locale :

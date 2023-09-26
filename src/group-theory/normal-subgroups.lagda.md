@@ -20,7 +20,7 @@ open import foundation.large-binary-relations
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-groups
@@ -170,19 +170,19 @@ module _
     type-Normal-Subgroup → type-Normal-Subgroup → type-Normal-Subgroup
   mul-Normal-Subgroup = mul-Subgroup G subgroup-Normal-Subgroup
 
-  is-closed-under-inv-Normal-Subgroup :
-    is-closed-under-inv-subset-Group G subset-Normal-Subgroup
-  is-closed-under-inv-Normal-Subgroup =
-    is-closed-under-inv-Subgroup G subgroup-Normal-Subgroup
+  is-closed-under-inverses-Normal-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-Normal-Subgroup
+  is-closed-under-inverses-Normal-Subgroup =
+    is-closed-under-inverses-Subgroup G subgroup-Normal-Subgroup
 
   inv-Normal-Subgroup : type-Normal-Subgroup → type-Normal-Subgroup
   inv-Normal-Subgroup = inv-Subgroup G subgroup-Normal-Subgroup
 
-  is-closed-under-inv-Normal-Subgroup' :
+  is-closed-under-inverses-Normal-Subgroup' :
     (x : type-Group G) →
     is-in-Normal-Subgroup (inv-Group G x) → is-in-Normal-Subgroup x
-  is-closed-under-inv-Normal-Subgroup' =
-    is-closed-under-inv-Subgroup' G subgroup-Normal-Subgroup
+  is-closed-under-inverses-Normal-Subgroup' =
+    is-closed-under-inverses-Subgroup' G subgroup-Normal-Subgroup
 
   is-in-normal-subgroup-left-factor-Normal-Subgroup :
     (x y : type-Group G) →
@@ -298,11 +298,11 @@ module _
 ### The containment relation of normal subgroups
 
 ```agda
-leq-Normal-Subgroup-Prop :
+leq-prop-Normal-Subgroup :
   {l1 l2 l3 : Level} (G : Group l1) →
   Normal-Subgroup l2 G → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-leq-Normal-Subgroup-Prop G H K =
-  leq-Subgroup-Prop G
+leq-prop-Normal-Subgroup G H K =
+  leq-prop-Subgroup G
     ( subgroup-Normal-Subgroup G H)
     ( subgroup-Normal-Subgroup G K)
 
@@ -316,13 +316,17 @@ leq-Normal-Subgroup G H K =
 
 refl-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-reflexive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
+  is-reflexive-Large-Relation
+    ( λ l → Normal-Subgroup l G)
+    ( leq-Normal-Subgroup G)
 refl-leq-Normal-Subgroup G H =
   refl-leq-Subgroup G (subgroup-Normal-Subgroup G H)
 
 transitive-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-transitive (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
+  is-transitive-Large-Relation
+    ( λ l → Normal-Subgroup l G)
+    ( leq-Normal-Subgroup G)
 transitive-leq-Normal-Subgroup G H K L =
   transitive-leq-Subgroup G
     ( subgroup-Normal-Subgroup G H)
@@ -331,7 +335,9 @@ transitive-leq-Normal-Subgroup G H K L =
 
 antisymmetric-leq-Normal-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-antisymmetric (λ l → Normal-Subgroup l G) (leq-Normal-Subgroup G)
+  is-antisymmetric-Large-Relation
+    ( λ l → Normal-Subgroup l G)
+    ( leq-Normal-Subgroup G)
 antisymmetric-leq-Normal-Subgroup G H K α β =
   eq-has-same-elements-Normal-Subgroup G H K (λ x → (α x , β x))
 
@@ -340,8 +346,8 @@ Normal-Subgroup-Large-Preorder :
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Normal-Subgroup-Large-Preorder G) l2 =
   Normal-Subgroup l2 G
-leq-Large-Preorder-Prop (Normal-Subgroup-Large-Preorder G) H K =
-  leq-Normal-Subgroup-Prop G H K
+leq-prop-Large-Preorder (Normal-Subgroup-Large-Preorder G) H K =
+  leq-prop-Normal-Subgroup G H K
 refl-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
   refl-leq-Normal-Subgroup G
 transitive-leq-Large-Preorder (Normal-Subgroup-Large-Preorder G) =
@@ -376,7 +382,9 @@ preserves-order-subgroup-Normal-Subgroup G N M = id
 
 subgroup-normal-subgroup-hom-Large-Poset :
   {l1 : Level} (G : Group l1) →
-  hom-Large-Poset id (Normal-Subgroup-Large-Poset G) (Subgroup-Large-Poset G)
+  hom-set-Large-Poset id
+    ( Normal-Subgroup-Large-Poset G)
+    ( Subgroup-Large-Poset G)
 subgroup-normal-subgroup-hom-Large-Poset G =
   make-hom-Large-Preorder
     ( subgroup-Normal-Subgroup G)
@@ -433,7 +441,7 @@ module _
     is-closed-under-eq-Normal-Subgroup G N
       ( is-normal-Normal-Subgroup G N y
         ( inv-Group G (left-div-Group G x y))
-        ( is-closed-under-inv-Normal-Subgroup G N
+        ( is-closed-under-inverses-Normal-Subgroup G N
           ( left-div-Group G x y)
           ( H)))
       ( ( ap (conjugation-Group G y) (inv-left-div-Group G x y) ∙
@@ -447,7 +455,7 @@ module _
     is-closed-under-eq-Normal-Subgroup G N
       ( is-normal-Normal-Subgroup' G N x
         ( inv-Group G (right-div-Group G x y))
-        ( is-closed-under-inv-Normal-Subgroup G N
+        ( is-closed-under-inverses-Normal-Subgroup G N
           ( right-div-Group G x y)
           ( H)))
       ( ( ap (conjugation-Group' G x) (inv-right-div-Group G x y)) ∙
@@ -523,7 +531,7 @@ module _
     sim-congruence-Normal-Subgroup x (unit-Group G) →
     is-in-Normal-Subgroup G N x
   unit-congruence-Normal-Subgroup {x} H =
-    is-closed-under-inv-Normal-Subgroup' G N x
+    is-closed-under-inverses-Normal-Subgroup' G N x
       ( is-closed-under-eq-Normal-Subgroup G N H
         ( right-unit-law-mul-Group G (inv-Group G x)))
 
@@ -533,7 +541,7 @@ module _
     sim-congruence-Normal-Subgroup x (unit-Group G)
   unit-congruence-Normal-Subgroup' {x} H =
     is-closed-under-eq-Normal-Subgroup' G N
-      ( is-closed-under-inv-Normal-Subgroup G N x H)
+      ( is-closed-under-inverses-Normal-Subgroup G N x H)
       ( right-unit-law-mul-Group G (inv-Group G x))
 ```
 
@@ -562,9 +570,9 @@ module _
       ( inv (left-unit-law-mul-Group G (unit-Group G)))
       ( mul-congruence-Group G R H K)
 
-  is-closed-under-inv-subset-congruence-Group :
-    is-closed-under-inv-subset-Group G subset-congruence-Group
-  is-closed-under-inv-subset-congruence-Group x H =
+  is-closed-under-inverses-subset-congruence-Group :
+    is-closed-under-inverses-subset-Group G subset-congruence-Group
+  is-closed-under-inverses-subset-congruence-Group x H =
     concatenate-eq-sim-congruence-Group G R
       ( inv (inv-unit-Group G))
       ( inv-congruence-Group G R H)
@@ -576,7 +584,7 @@ module _
   pr1 (pr2 (pr2 subgroup-congruence-Group)) =
     is-closed-under-multiplication-subset-congruence-Group
   pr2 (pr2 (pr2 subgroup-congruence-Group)) =
-    is-closed-under-inv-subset-congruence-Group
+    is-closed-under-inverses-subset-congruence-Group
 
   is-normal-subgroup-congruence-Group :
     is-normal-Subgroup G subgroup-congruence-Group

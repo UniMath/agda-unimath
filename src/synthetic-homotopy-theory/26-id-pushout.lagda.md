@@ -20,11 +20,13 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
@@ -207,7 +209,7 @@ is-equiv-hom-Fam-pushout-dependent-cocone :
 is-equiv-hom-Fam-pushout-dependent-cocone {f = f} {g} c P Q =
   is-equiv-tot-is-fiberwise-equiv (λ hA →
     is-equiv-tot-is-fiberwise-equiv (λ hB →
-      is-equiv-map-equiv-Π-equiv-family _
+      is-equiv-map-Π-is-fiberwise-equiv
         ( λ s → is-equiv-square-path-over-fam-maps
           ( pr2 (pr2 c) s)
           ( hA (f s))

@@ -18,9 +18,11 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
+open import foundation.whiskering-homotopies
 ```
 
 </details>
@@ -177,6 +179,15 @@ cocone-map-comp f g (i , j , H) h k =
 
 ### Horizontal composition of cocones
 
+```text
+      i       k
+  A ----> B ----> C
+  |       |       |
+ f|       |       |
+  v       v       v
+  X ----> Y ----> Z
+```
+
 ```agda
 cocone-comp-horizontal :
   { l1 l2 l3 l4 l5 l6 : Level}
@@ -189,7 +200,53 @@ pr1 (cocone-comp-horizontal f i k c d) =
 pr1 (pr2 (cocone-comp-horizontal f i k c d)) =
   vertical-map-cocone (vertical-map-cocone f i c) k d
 pr2 (pr2 (cocone-comp-horizontal f i k c d)) =
-  ( ( horizontal-map-cocone (vertical-map-cocone f i c) k d) ·l
-    ( coherence-square-cocone f i c)) ∙h
-  ( coherence-square-cocone (vertical-map-cocone f i c) k d ·r i)
+  pasting-horizontal-coherence-square-maps
+    ( i)
+    ( k)
+    ( f)
+    ( vertical-map-cocone f i c)
+    ( vertical-map-cocone (vertical-map-cocone f i c) k d)
+    ( horizontal-map-cocone f i c)
+    ( horizontal-map-cocone (vertical-map-cocone f i c) k d)
+    ( coherence-square-cocone f i c)
+    ( coherence-square-cocone (vertical-map-cocone f i c) k d)
+```
+
+### Vertical composition of cocones
+
+```text
+     i
+ A -----> X
+ |        |
+f|        |
+ v        v
+ B -----> Y
+ |        |
+k|        |
+ v        v
+ C -----> Z
+```
+
+```agda
+cocone-comp-vertical :
+  { l1 l2 l3 l4 l5 l6 : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  ( f : A → B) (i : A → X) (k : B → C) ( c : cocone f i Y) →
+  cocone k (horizontal-map-cocone f i c) Z → cocone (k ∘ f) i Z
+pr1 (cocone-comp-vertical f i k c d) =
+  horizontal-map-cocone k (horizontal-map-cocone f i c) d
+pr1 (pr2 (cocone-comp-vertical f i k c d)) =
+  vertical-map-cocone k (horizontal-map-cocone f i c) d ∘
+  vertical-map-cocone f i c
+pr2 (pr2 (cocone-comp-vertical f i k c d)) =
+  pasting-vertical-coherence-square-maps
+    ( i)
+    ( f)
+    ( vertical-map-cocone f i c)
+    ( horizontal-map-cocone f i c)
+    ( k)
+    ( vertical-map-cocone k (horizontal-map-cocone f i c) d)
+    ( horizontal-map-cocone k (horizontal-map-cocone f i c) d)
+    ( coherence-square-cocone f i c)
+    ( coherence-square-cocone k (horizontal-map-cocone f i c) d)
 ```

@@ -9,7 +9,7 @@ module group-theory.concrete-group-actions where
 ```agda
 open import foundation.function-types
 open import foundation.sets
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -19,9 +19,10 @@ open import group-theory.concrete-groups
 
 ## Idea
 
-Given a concrete group `G`, a concrete action of `G` on a type is defined to be
-a type family over `BG`. Given a type family `X` over `BG`, the type being acted
-on is the type `X *`, and the action of `G` on `X *` is given by transport.
+Given a [concrete group](group-theory.concrete-groups.md) `G`, a **concrete
+action of** `G` on a type is defined to be a type family over `BG`. Given a type
+family `X` over `BG`, the type being acted on is the type `X *`, and the action
+of `G` on `X *` is given by transport.
 
 ## Definition
 

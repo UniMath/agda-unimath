@@ -7,25 +7,16 @@ module group-theory.multiples-of-elements-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-integers
 open import elementary-number-theory.addition-natural-numbers
-open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
-open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.iterating-automorphisms
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
 open import group-theory.powers-of-elements-groups
-
-open import structured-types.initial-pointed-type-equipped-with-automorphism
 ```
 
 </details>
@@ -50,6 +41,34 @@ module _
 
   multiple-Ab : ℕ → type-Ab A → type-Ab A
   multiple-Ab = power-Group (group-Ab A)
+```
+
+### The predicate of being a natural multiple of an element in an abelian group
+
+We say that an element `y` **is a multiple** of an element `x` if there
+[exists](foundation.existential-quantification.md) a number `n` such that
+`nx ＝ y`.
+
+```agda
+module _
+  {l : Level} (A : Ab l)
+  where
+
+  is-multiple-of-element-prop-Ab :
+    (x y : type-Ab A) → Prop l
+  is-multiple-of-element-prop-Ab =
+    is-power-of-element-prop-Group (group-Ab A)
+
+  is-multiple-of-element-Ab :
+    (x y : type-Ab A) → UU l
+  is-multiple-of-element-Ab =
+    is-power-of-element-Group (group-Ab A)
+
+  is-prop-is-multiple-of-element-Ab :
+    (x y : type-Ab A) →
+    is-prop (is-multiple-of-element-Ab x y)
+  is-prop-is-multiple-of-element-Ab =
+    is-prop-is-power-of-element-Group (group-Ab A)
 ```
 
 ## Properties

@@ -23,7 +23,7 @@ open import group-theory.homomorphisms-groups
 instance
   Group-Large-Precategory : Large-Precategory lsuc (_⊔_)
   obj-Large-Precategory Group-Large-Precategory = Group
-  hom-Large-Precategory Group-Large-Precategory = hom-Group
+  hom-set-Large-Precategory Group-Large-Precategory = hom-set-Group
   comp-hom-Large-Precategory Group-Large-Precategory {X = G} {H} {K} =
     comp-hom-Group G H K
   id-hom-Large-Precategory Group-Large-Precategory {X = G} =

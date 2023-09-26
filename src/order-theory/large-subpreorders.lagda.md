@@ -7,7 +7,6 @@ module order-theory.large-subpreorders where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.large-binary-relations
 open import foundation.propositions
@@ -60,26 +59,26 @@ module _
   type-Large-Subpreorder : (l1 : Level) → UU (α l1 ⊔ γ l1)
   type-Large-Subpreorder l1 = type-subtype (S {l1})
 
-  leq-Large-Subpreorder-Prop :
+  leq-prop-Large-Subpreorder :
     Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subpreorder
-  leq-Large-Subpreorder-Prop x y =
-    leq-Large-Preorder-Prop P (pr1 x) (pr1 y)
+  leq-prop-Large-Subpreorder x y =
+    leq-prop-Large-Preorder P (pr1 x) (pr1 y)
 
   leq-Large-Subpreorder :
     Large-Relation (λ l → α l ⊔ γ l) β type-Large-Subpreorder
-  leq-Large-Subpreorder x y = type-Prop (leq-Large-Subpreorder-Prop x y)
+  leq-Large-Subpreorder x y = type-Prop (leq-prop-Large-Subpreorder x y)
 
   is-prop-leq-Large-Subpreorder :
     is-prop-Large-Relation type-Large-Subpreorder leq-Large-Subpreorder
   is-prop-leq-Large-Subpreorder x y =
-    is-prop-type-Prop (leq-Large-Subpreorder-Prop x y)
+    is-prop-type-Prop (leq-prop-Large-Subpreorder x y)
 
   refl-leq-Large-Subpreorder :
-    is-large-reflexive type-Large-Subpreorder leq-Large-Subpreorder
+    is-reflexive-Large-Relation type-Large-Subpreorder leq-Large-Subpreorder
   refl-leq-Large-Subpreorder (x , p) = refl-leq-Large-Preorder P x
 
   transitive-leq-Large-Subpreorder :
-    is-large-transitive type-Large-Subpreorder leq-Large-Subpreorder
+    is-transitive-Large-Relation type-Large-Subpreorder leq-Large-Subpreorder
   transitive-leq-Large-Subpreorder (x , p) (y , q) (z , r) =
     transitive-leq-Large-Preorder P x y z
 
@@ -88,9 +87,9 @@ module _
   type-Large-Preorder
     large-preorder-Large-Subpreorder =
     type-Large-Subpreorder
-  leq-Large-Preorder-Prop
+  leq-prop-Large-Preorder
     large-preorder-Large-Subpreorder =
-    leq-Large-Subpreorder-Prop
+    leq-prop-Large-Subpreorder
   refl-leq-Large-Preorder
     large-preorder-Large-Subpreorder =
     refl-leq-Large-Subpreorder

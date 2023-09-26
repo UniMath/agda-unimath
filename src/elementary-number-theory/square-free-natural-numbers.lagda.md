@@ -8,8 +8,8 @@ module elementary-number-theory.square-free-natural-numbers where
 
 ```agda
 open import elementary-number-theory.divisibility-natural-numbers
-open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.squares-natural-numbers
 
 open import foundation.universe-levels
 ```

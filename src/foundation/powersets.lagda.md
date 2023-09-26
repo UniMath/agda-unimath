@@ -59,7 +59,7 @@ module _
   powerset-Large-Preorder :
     Large-Preorder (λ l → l1 ⊔ lsuc l) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
   type-Large-Preorder powerset-Large-Preorder l = subtype l A
-  leq-Large-Preorder-Prop powerset-Large-Preorder = leq-subtype-Prop
+  leq-prop-Large-Preorder powerset-Large-Preorder = leq-prop-subtype
   refl-leq-Large-Preorder powerset-Large-Preorder = refl-leq-subtype
   transitive-leq-Large-Preorder powerset-Large-Preorder = transitive-leq-subtype
 ```

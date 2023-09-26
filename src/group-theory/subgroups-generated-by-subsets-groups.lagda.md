@@ -254,22 +254,22 @@ module _
               ( is-closed-under-multiplication-subgroup-subset-Group'
                   x y H' K')))
 
-  is-closed-under-inv-subgroup-subset-Group' :
+  is-closed-under-inverses-subgroup-subset-Group' :
     (x : type-Group G) →
     subset-subgroup-subset-Group' x →
     subset-subgroup-subset-Group' (inv-Group G x)
-  pr1 (is-closed-under-inv-subgroup-subset-Group' x (pair l p)) =
+  pr1 (is-closed-under-inverses-subgroup-subset-Group' x (pair l p)) =
     inv-formal-combination-subset-Group l
-  pr2 (is-closed-under-inv-subgroup-subset-Group' x (pair l p)) =
+  pr2 (is-closed-under-inverses-subgroup-subset-Group' x (pair l p)) =
     ( preserves-inv-ev-formal-combination-subset-Group l) ∙
       ( ap (inv-Group G) p)
 
-  is-closed-under-inv-subgroup-subset-Group :
-    is-closed-under-inv-subset-Group G subset-subgroup-subset-Group
-  is-closed-under-inv-subgroup-subset-Group x H =
+  is-closed-under-inverses-subgroup-subset-Group :
+    is-closed-under-inverses-subset-Group G subset-subgroup-subset-Group
+  is-closed-under-inverses-subgroup-subset-Group x H =
     apply-universal-property-trunc-Prop H
       ( subset-subgroup-subset-Group (inv-Group G x))
-      ( unit-trunc-Prop ∘ is-closed-under-inv-subgroup-subset-Group' x)
+      ( unit-trunc-Prop ∘ is-closed-under-inverses-subgroup-subset-Group' x)
 
   subgroup-subset-Group : Subgroup (l1 ⊔ l2) G
   pr1 subgroup-subset-Group = subset-subgroup-subset-Group
@@ -277,7 +277,7 @@ module _
   pr1 (pr2 (pr2 subgroup-subset-Group)) =
     is-closed-under-multiplication-subgroup-subset-Group
   pr2 (pr2 (pr2 subgroup-subset-Group)) =
-    is-closed-under-inv-subgroup-subset-Group
+    is-closed-under-inverses-subgroup-subset-Group
 
   contains-subset-subgroup-subset-Group :
     S ⊆ subset-subgroup-subset-Group
@@ -298,7 +298,7 @@ module _
     is-closed-under-multiplication-Subgroup G U
       ( inv-Group G (inclusion-subtype S (pair s K)))
       ( ev-formal-combination-subset-Group c)
-      ( is-closed-under-inv-Subgroup G U s (H s K))
+      ( is-closed-under-inverses-Subgroup G U s (H s K))
       ( contains-formal-combinations-Subgroup U H c)
   contains-formal-combinations-Subgroup
     ( U)
@@ -343,7 +343,7 @@ module _
         ( H))
 
   subgroup-subset-hom-large-poset-Group :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( powerset-Large-Poset (type-Group G))
       ( Subgroup-Large-Poset G)

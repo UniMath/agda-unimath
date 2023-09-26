@@ -15,9 +15,10 @@ open import foundation.embeddings
 open import foundation.equality-cartesian-product-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
+open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.split-surjective-maps
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.truncated-types
@@ -31,6 +32,7 @@ open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.homotopies
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
@@ -212,7 +214,18 @@ abstract
   is-surjective-has-section :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
     section f → is-surjective f
-  is-surjective-has-section (pair g G) b = unit-trunc-Prop (pair (g b) (G b))
+  is-surjective-has-section (g , G) b = unit-trunc-Prop (g b , G b)
+```
+
+### Any split surjective map is surjective
+
+```agda
+abstract
+  is-surjective-is-split-surjective :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-split-surjective f → is-surjective f
+  is-surjective-is-split-surjective H x =
+    unit-trunc-Prop (H x)
 ```
 
 ### Any equivalence is surjective
@@ -247,14 +260,14 @@ abstract
   is-surjective-dependent-universal-property-surj f dup-surj-f =
     map-inv-is-equiv
       ( dup-surj-f (λ b → trunc-Prop (fiber f b)))
-      ( λ x → unit-trunc-Prop (pair x refl))
+      ( λ x → unit-trunc-Prop (x , refl))
 
 abstract
   square-dependent-universal-property-surj :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     (P : B → Prop l3) →
     ( λ (h : (y : B) → type-Prop (P y)) x → h (f x)) ~
-    ( ( λ h x → h (f x) (pair x refl)) ∘
+    ( ( λ h x → h (f x) (x , refl)) ∘
       ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
         ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))))
   square-dependent-universal-property-surj f P = refl-htpy
@@ -265,22 +278,20 @@ abstract
     ({l : Level} → dependent-universal-property-surj l f)
   dependent-universal-property-surj-is-surjective f is-surj-f P =
     is-equiv-comp
-      ( λ h x → h (f x) (pair x refl))
+      ( λ h x → h (f x) (x , refl))
       ( ( λ h y → (h y) ∘ unit-trunc-Prop) ∘
         ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y)))
       ( is-equiv-comp
         ( λ h y → (h y) ∘ unit-trunc-Prop)
         ( λ h y → const (type-trunc-Prop (fiber f y)) (type-Prop (P y)) (h y))
-        ( is-equiv-map-equiv-Π-equiv-family
-          ( λ y p z → p)
+        ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ y →
             is-equiv-diagonal-is-contr
               ( is-proof-irrelevant-is-prop
                 ( is-prop-type-trunc-Prop)
                 ( is-surj-f y))
               ( type-Prop (P y))))
-        ( is-equiv-map-equiv-Π-equiv-family
-          ( λ b g → g ∘ unit-trunc-Prop)
+        ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ b → is-propositional-truncation-trunc-Prop (fiber f b) (P b))))
       ( is-equiv-map-reduce-Π-fiber f ( λ y z → type-Prop (P y)))
 
@@ -352,7 +363,7 @@ abstract
           ( is-prop-map-is-emb K y)
           ( apply-universal-property-trunc-Prop
             ( H y)
-            ( fiber-emb-Prop (pair f K) y)
+            ( fiber-emb-Prop (f , K) y)
             ( id)))
 ```
 
@@ -371,12 +382,12 @@ module _
       apply-universal-property-trunc-Prop
         ( is-surj-g x)
         ( trunc-Prop (fiber f x))
-        ( λ { (pair b refl) →
-          apply-universal-property-trunc-Prop
-            ( is-surj-h b)
-            ( trunc-Prop (fiber f (g b)))
-            ( λ { (pair a refl) →
-              unit-trunc-Prop (pair a (H a))})})
+        ( λ { (b , refl) →
+              apply-universal-property-trunc-Prop
+                ( is-surj-h b)
+                ( trunc-Prop (fiber f (g b)))
+                ( λ { (a , refl) →
+                      unit-trunc-Prop (a , H a)})})
 
   is-surjective-comp :
     {g : B → X} {h : A → B} →
@@ -401,10 +412,7 @@ module _
       ( s' d)
       ( trunc-Prop (fiber (map-prod f g) (c , d)))
       ( λ x y →
-        unit-trunc-Prop
-          ( pair
-            ( (pr1 x) , (pr1 y))
-            ( eq-pair (pr2 x) (pr2 y))))
+        unit-trunc-Prop ((pr1 x , pr1 y) , eq-pair (pr2 x) (pr2 y)))
 ```
 
 ### The composite of a surjective map with an equivalence is surjective
@@ -442,8 +450,8 @@ module _
       apply-universal-property-trunc-Prop
         ( is-surj-f x)
         ( trunc-Prop (fiber g x))
-        ( λ { (pair a refl) →
-          unit-trunc-Prop (pair (h a) (inv (H a)))})
+        ( λ { (a , refl) →
+              unit-trunc-Prop (h a , inv (H a))})
 
   is-surjective-left-factor :
     {g : B → X} (h : A → B) → is-surjective (g ∘ h) → is-surjective g
@@ -543,7 +551,7 @@ module _
     is-contr-total-Eq-structure
       ( λ Y g e → (map-equiv e ∘ map-Surjection f) ~ map-surjection g)
       ( is-contr-total-equiv (type-Surjection f))
-      ( pair (type-Surjection f) id-equiv)
+      ( type-Surjection f , id-equiv)
       ( is-contr-total-htpy-surjection (surjection-Surjection f))
 
   equiv-eq-Surjection :

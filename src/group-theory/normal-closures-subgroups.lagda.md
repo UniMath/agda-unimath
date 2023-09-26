@@ -131,10 +131,10 @@ module _
   is-closed-under-multiplication-normal-closure-Subgroup =
     is-closed-under-multiplication-Subgroup G subgroup-normal-closure-Subgroup
 
-  is-closed-under-inv-normal-closure-Subgroup :
-    is-closed-under-inv-subset-Group G subset-normal-closure-Subgroup
-  is-closed-under-inv-normal-closure-Subgroup =
-    is-closed-under-inv-Subgroup G subgroup-normal-closure-Subgroup
+  is-closed-under-inverses-normal-closure-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-normal-closure-Subgroup
+  is-closed-under-inverses-normal-closure-Subgroup =
+    is-closed-under-inverses-Subgroup G subgroup-normal-closure-Subgroup
 
   contains-generating-subset-normal-closure-Subgroup :
     generating-subset-normal-closure-Subgroup ⊆ subset-normal-closure-Subgroup
@@ -236,7 +236,7 @@ module _
         ( u))
 
   normal-closure-subgroup-hom-Large-Poset :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( λ l2 → l1 ⊔ l2)
       ( Subgroup-Large-Poset G)
       ( Normal-Subgroup-Large-Poset G)

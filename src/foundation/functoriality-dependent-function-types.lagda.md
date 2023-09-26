@@ -12,9 +12,8 @@ open import foundation-core.functoriality-dependent-function-types public
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
-open import foundation.equivalences
 open import foundation.function-extensionality
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universal-property-unit-type
 open import foundation.universe-levels
@@ -22,6 +21,7 @@ open import foundation.universe-levels
 open import foundation-core.commuting-squares-of-maps
 open import foundation-core.constant-maps
 open import foundation-core.embeddings
+open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -31,6 +31,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.truncated-maps
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
@@ -69,13 +70,9 @@ module _
             ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a)))))
         ( precomp-Π (map-inv-is-equiv (is-equiv-map-equiv e)) B')
         ( is-equiv-precomp-Π-is-equiv
-          ( map-inv-is-equiv (is-equiv-map-equiv e))
           ( is-equiv-map-inv-is-equiv (is-equiv-map-equiv e))
           ( B'))
-        ( is-equiv-map-equiv-Π-equiv-family
-          ( λ a →
-            ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a)) ∘
-            ( map-equiv (f (map-inv-is-equiv (is-equiv-map-equiv e) a))))
+        ( is-equiv-map-Π-is-fiberwise-equiv
           ( λ a →
             is-equiv-comp
               ( tr B (is-section-map-inv-is-equiv (is-equiv-map-equiv e) a))
@@ -123,6 +120,34 @@ id-map-equiv-Π :
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
   ( map-equiv-Π B (id-equiv {A = A}) (λ a → id-equiv {A = B a})) ~ id
 id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equiv) h)
+```
+
+### Two maps being homotopic is equivalent to them being homotopic after pre- or postcomposition by an equivalence
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  equiv-htpy-Π-precomp-htpy :
+    { B : UU l2} {C : B → UU l3} →
+    ( f g : (b : B) → C b) (e : A ≃ B) →
+    ( (f ∘ map-equiv e) ~ (g ∘ map-equiv e)) ≃
+    ( f ~ g)
+  equiv-htpy-Π-precomp-htpy f g e =
+    equiv-Π
+      ( eq-value f g)
+      ( e)
+      ( λ a → id-equiv)
+
+  equiv-htpy-Π-postcomp-htpy :
+    { B : A → UU l2} { C : UU l3} →
+    ( e : (a : A) → B a ≃ C) (f g : (a : A) → B a) →
+    ( f ~ g) ≃
+    ( (a : A) → ( map-equiv (e a) (f a) ＝ map-equiv (e a) (g a)))
+  equiv-htpy-Π-postcomp-htpy e f g =
+    equiv-Π-equiv-family
+      ( λ a → equiv-ap (e a) (f a) (g a))
 ```
 
 ### Truncated families of maps induce truncated maps on dependent function types
@@ -261,8 +286,8 @@ abstract
     is-equiv (map-automorphism-Π e f)
   is-equiv-map-automorphism-Π {B = B} e f =
     is-equiv-comp _ _
-      ( is-equiv-precomp-Π-is-equiv _ (is-equiv-map-equiv e) B)
-      ( is-equiv-map-equiv-Π-equiv-family _
+      ( is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e) B)
+      ( is-equiv-map-Π-is-fiberwise-equiv
         ( λ a → is-equiv-map-inv-is-equiv (is-equiv-map-equiv (f a))))
 
 automorphism-Π :

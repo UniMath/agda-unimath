@@ -10,10 +10,8 @@ module group-theory.generating-elements-groups where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.integers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -37,15 +35,12 @@ open import group-theory.endomorphism-rings-abelian-groups
 open import group-theory.free-groups-with-one-generator
 open import group-theory.full-subgroups
 open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
-open import group-theory.images-of-group-homomorphisms
 open import group-theory.integer-multiples-of-elements-abelian-groups
 open import group-theory.integer-powers-of-elements-groups
 open import group-theory.isomorphisms-abelian-groups
 open import group-theory.normal-subgroups
 open import group-theory.quotient-groups
-open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-elements-groups
 open import group-theory.subsets-groups
 open import group-theory.trivial-group-homomorphisms
@@ -227,7 +222,7 @@ module _
 
   ev-element-hom-Group-With-Generating-Element :
     (H : Group l) →
-    type-hom-Group group-Group-With-Generating-Element H → type-Group H
+    hom-Group group-Group-With-Generating-Element H → type-Group H
   ev-element-hom-Group-With-Generating-Element H =
     ev-element-hom-Group
       ( group-Group-With-Generating-Element)
@@ -385,7 +380,7 @@ module _
     H : Group l
     H = quotient-Group G N
 
-    q : type-hom-Group G H
+    q : hom-Group G H
     q = quotient-hom-Group G N
 
   abstract
@@ -583,8 +578,8 @@ module _
       ( is-emb-ev-element-Group-With-Generating-Element G
         ( group-Group-With-Generating-Element G))
 
-  is-iso-hom-ev-element-Group-With-Generating-Element :
-    is-iso-hom-Ab
+  is-iso-ev-element-Group-With-Generating-Element :
+    is-iso-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G))
@@ -593,7 +588,7 @@ module _
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G)
         ( element-Group-With-Generating-Element G))
-  is-iso-hom-ev-element-Group-With-Generating-Element =
+  is-iso-ev-element-Group-With-Generating-Element =
     is-iso-is-equiv-hom-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
@@ -617,7 +612,7 @@ module _
       ( abelian-group-Group-With-Generating-Element G)
       ( element-Group-With-Generating-Element G)
   pr2 iso-ev-element-Group-With-Generating-Element =
-    is-iso-hom-ev-element-Group-With-Generating-Element
+    is-iso-ev-element-Group-With-Generating-Element
 ```
 
 ### Groups equipped with generating elements are commutative rings

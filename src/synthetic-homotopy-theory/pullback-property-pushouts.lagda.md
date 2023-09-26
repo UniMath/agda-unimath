@@ -7,10 +7,10 @@ module synthetic-homotopy-theory.pullback-property-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-types
-open import foundation.functoriality-function-types
 open import foundation.pullbacks
 open import foundation.universe-levels
 
@@ -54,7 +54,13 @@ pr1 (cone-pullback-property-pushout f g c Y) =
 pr1 (pr2 (cone-pullback-property-pushout f g c Y)) =
   precomp (vertical-map-cocone f g c) Y
 pr2 (pr2 (cone-pullback-property-pushout f g c Y)) =
-  htpy-precomp (coherence-square-cocone f g c) Y
+  precomp-coherence-square-maps
+    ( g)
+    ( f)
+    ( vertical-map-cocone f g c)
+    ( horizontal-map-cocone f g c)
+    ( coherence-square-cocone f g c)
+    ( Y)
 
 pullback-property-pushout :
   {l1 l2 l3 l4 : Level} (l : Level) {S : UU l1} {A : UU l2} {B : UU l3}

@@ -10,13 +10,18 @@ open import foundation-core.function-types public
 
 ```agda
 open import foundation.action-on-identifications-dependent-functions
+open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.homotopy-induction
 open import foundation.universe-levels
 
+open import foundation-core.dependent-identifications
+open import foundation-core.equality-dependent-pair-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport
+open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -50,8 +55,7 @@ module _
     map-equiv (compute-dependent-identification-function-type p f g)
 ```
 
-Relation between`compute-dependent-identification-function-type` and
-`preserves-tr`
+### Relation between `compute-dependent-identification-function-type` and `preserves-tr`
 
 ```agda
 module _
@@ -66,4 +70,80 @@ module _
       ( apd f p) a ＝
     inv-htpy (preserves-tr f p) a
   preserves-tr-apd-function refl = refl-htpy
+```
+
+### Computation of dependent identifications of functions over homotopies
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level}
+  { S : UU l1} {X : UU l2} {P : X → UU l3} (Y : UU l4)
+  { i : S → X}
+  where
+
+  equiv-htpy-dependent-fuction-dependent-identification-function-type :
+    { j : S → X} (H : i ~ j) →
+    ( k : (s : S) → P (i s) → Y)
+    ( l : (s : S) → P (j s) → Y) →
+    ( s : S) →
+    ( k s ~ (l s ∘ tr P (H s))) ≃
+    ( dependent-identification
+      ( λ x → P x → Y)
+      ( H s)
+      ( k s)
+      ( l s))
+  equiv-htpy-dependent-fuction-dependent-identification-function-type =
+    ind-htpy i
+      ( λ j H →
+        ( k : (s : S) → P (i s) → Y) →
+        ( l : (s : S) → P (j s) → Y) →
+        ( s : S) →
+        ( k s ~ (l s ∘ tr P (H s))) ≃
+        ( dependent-identification
+          ( λ x → P x → Y)
+          ( H s)
+          ( k s)
+          ( l s)))
+      ( λ k l s → inv-equiv (equiv-funext))
+
+  compute-equiv-htpy-dependent-fuction-dependent-identification-function-type :
+    { j : S → X} (H : i ~ j) →
+    ( h : (x : X) → P x → Y) →
+    ( s : S) →
+    ( map-equiv
+      ( equiv-htpy-dependent-fuction-dependent-identification-function-type H
+        ( h ∘ i)
+        ( h ∘ j)
+        ( s))
+      ( λ t → ap (ind-Σ h) (eq-pair-Σ (H s) refl))) ＝
+    ( apd h (H s))
+  compute-equiv-htpy-dependent-fuction-dependent-identification-function-type =
+    ind-htpy i
+      ( λ j H →
+        ( h : (x : X) → P x → Y) →
+        ( s : S) →
+        ( map-equiv
+          ( equiv-htpy-dependent-fuction-dependent-identification-function-type
+            ( H)
+            ( h ∘ i)
+            ( h ∘ j)
+            ( s))
+          ( λ t → ap (ind-Σ h) (eq-pair-Σ (H s) refl))) ＝
+        ( apd h (H s)))
+      ( λ h s →
+        ( ap
+          ( λ f → map-equiv (f (h ∘ i) (h ∘ i) s) refl-htpy)
+          ( compute-ind-htpy i
+            ( λ j H →
+              ( k : (s : S) → P (i s) → Y) →
+              ( l : (s : S) → P (j s) → Y) →
+              ( s : S) →
+              ( k s ~ (l s ∘ tr P (H s))) ≃
+              ( dependent-identification
+                ( λ x → P x → Y)
+                ( H s)
+                ( k s)
+                ( l s)))
+            ( λ k l s → inv-equiv (equiv-funext)))) ∙
+        ( eq-htpy-refl-htpy (h (i s))))
 ```

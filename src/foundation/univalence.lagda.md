@@ -143,18 +143,18 @@ eq-equiv-fam {B = B} {C} = map-inv-is-equiv (is-equiv-equiv-eq-fam B C)
 ### Computations with univalence
 
 ```agda
-compute-equiv-eq :
+compute-equiv-eq-concat :
   {l : Level} {A B C : UU l} (p : A ＝ B) (q : B ＝ C) →
   ((equiv-eq q) ∘e (equiv-eq p)) ＝ equiv-eq (p ∙ q)
-compute-equiv-eq refl refl = eq-equiv-eq-map-equiv refl
+compute-equiv-eq-concat refl refl = eq-equiv-eq-map-equiv refl
 
-compute-eq-equiv :
+compute-eq-equiv-comp-equiv :
   {l : Level} (A B C : UU l) (f : A ≃ B) (g : B ≃ C) →
   ((eq-equiv A B f) ∙ (eq-equiv B C g)) ＝ eq-equiv A C (g ∘e f)
-compute-eq-equiv A B C f g =
+compute-eq-equiv-comp-equiv A B C f g =
   is-injective-map-equiv
     ( equiv-univalence)
-    ( ( inv ( compute-equiv-eq (eq-equiv A B f) (eq-equiv B C g))) ∙
+    ( ( inv ( compute-equiv-eq-concat (eq-equiv A B f) (eq-equiv B C g))) ∙
       ( ( ap
           ( λ e → (map-equiv e g) ∘e (equiv-eq (eq-equiv A B f)))
           ( right-inverse-law-equiv equiv-univalence)) ∙
@@ -164,6 +164,11 @@ compute-eq-equiv A B C f g =
           ( ap
             ( λ e → map-equiv e (g ∘e f))
             ( inv (right-inverse-law-equiv equiv-univalence))))))
+
+compute-equiv-eq-ap-inv :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {x y : A} (p : x ＝ y) →
+  map-equiv (equiv-eq (ap B (inv p)) ∘e (equiv-eq (ap B p))) ~ id
+compute-equiv-eq-ap-inv refl = refl-htpy
 
 commutativity-inv-equiv-eq :
   {l : Level} (A B : UU l) (p : A ＝ B) →
