@@ -370,7 +370,5 @@ module _
         ( map-Ω
           ( pointed-map-pointed-equiv
             ( pointed-equiv-loop-pointed-identity (Ω (A , a)) (s ∙ s))))
-        {x = (inv (eckmann-hilton-inverse-Ω² s s))}
-        {y = (eckmann-hilton-Ω² s s)}
         ( Id-inv-eckmann-hilton-Ω²-eckmann-hilton-Ω² s s))
 ```
