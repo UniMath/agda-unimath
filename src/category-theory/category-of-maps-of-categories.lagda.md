@@ -61,8 +61,8 @@ module _
     ( htpy-map-Precategory C D f g) ≃
     ( natural-isomorphism-map-Precategory C D f g)
   equiv-natural-isomorphism-htpy-map-is-category-Precategory f g =
-      equiv-right-swap-Σ ∘e
-      equiv-Σ
+      ( equiv-right-swap-Σ) ∘e
+      ( equiv-Σ
         ( is-natural-transformation-map-Precategory C D f g ∘ pr1)
         ( ( distributive-Π-Σ) ∘e
           ( equiv-Π-equiv-family
@@ -86,7 +86,7 @@ module _
                               ( q)
                               ( hom-map-Precategory C D g a))
                           ( compute-hom-iso-eq-Precategory D (K x))
-                          ( compute-hom-iso-eq-Precategory D (K y))))))))
+                          ( compute-hom-iso-eq-Precategory D (K y)))))))))
 
   extensionality-map-is-category-Precategory :
     (f g : map-Precategory C D) →
