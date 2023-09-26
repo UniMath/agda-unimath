@@ -341,6 +341,10 @@ module _
 
 ### The whiskering operations allow us to commute higher identifications
 
+There are two natural ways to commute higher identifications: using whiskering
+on the left versus using whiskering on the right. These two ways "undo" each
+other.
+
 ```agda
 module _
   {l : Level} {A : UU l} {x y z : A}
@@ -355,6 +359,22 @@ module _
       ( identification-left-whisk p' β)
   path-swap-nat-identification-left-whisk β =
     nat-htpy (htpy-identification-left-whisk β)
+
+  path-swap-nat-identification-right-whisk :
+    {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →
+    coherence-square-identifications
+      ( identification-right-whisk α q)
+      ( identification-left-whisk p' β)
+      ( identification-left-whisk p β)
+      ( identification-right-whisk α q')
+  path-swap-nat-identification-right-whisk α =
+    nat-htpy (identification-right-whisk α)
+
+  path-swap-right-undoes-path-swap-left :
+    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
+    inv (path-swap-nat-identification-right-whisk α β) ＝
+    (path-swap-nat-identification-left-whisk β α)
+  path-swap-right-undoes-path-swap-left refl refl = refl
 ```
 
 ### Definition of horizontal inverse
