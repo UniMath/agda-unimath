@@ -17,7 +17,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.small-types
-open import foundation.transport
+open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
 

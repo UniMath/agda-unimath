@@ -35,6 +35,8 @@ that type is an [equivalence](foundation-core.equivalences.md).
 ```agda
 is-flat : {@♭ l : Level} (@♭ A : UU l) → UU l
 is-flat {l} A = is-equiv (counit-♭ {l} {A})
+
+Flat :
 ```
 
 ## Properties
@@ -88,3 +90,7 @@ is-flat-unit =
     ( is-section-map-is-flat-unit)
     ( is-retraction-map-is-flat-unit)
 ```
+
+## See also
+
+- [Codiscrete types](modal-type-theory.codiscrete-types.md) for the dual notion.

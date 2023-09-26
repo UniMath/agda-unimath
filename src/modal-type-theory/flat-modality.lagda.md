@@ -23,9 +23,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-TODO
+The **flat modality** is an axiomatized comonadic modality we adjoin to our type
+theory by use of _crisp type theory_.
 
 ## Definition
+
+### The flat operator on types
 
 ```agda
 data ♭ {@♭ l : Level} (@♭ A : UU l) : UU l where
@@ -42,7 +45,7 @@ counit-♭ : {@♭ l : Level} {@♭ A : UU l} → ♭ A → A
 counit-♭ (con-♭ x) = counit-crisp x
 ```
 
-### Flat elimination
+### Flat dependent elimination
 
 ```agda
 ind-♭ :
@@ -144,7 +147,7 @@ module _
   inv-equiv-♭-counit-♭ = inv-equiv equiv-♭-counit-♭
 ```
 
-### Flat distributes over function types
+### Flat distributes over dependent function types
 
 ```agda
 module _
@@ -166,7 +169,7 @@ module _
     map-crisp-distributive-♭-function-types f x
 ```
 
-### Flat distributes over Sigma types
+### Flat distributes over Σ-types
 
 ```agda
 Σ♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
@@ -210,6 +213,13 @@ module _
   inv-equiv-distributive-♭-Σ : Σ♭ A B ≃ ♭ (Σ A B)
   inv-equiv-distributive-♭-Σ = inv-equiv equiv-distributive-♭-Σ
 ```
+
+## See also
+
+- In [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we
+  postulate that the flat modality is left adjoint to the
+  [sharp modality](modal-type-theory.sharp-modality.md).
+- [Flat types](modal-type-theory.flat-types.md) for types that are flat modal.
 
 ## References
 

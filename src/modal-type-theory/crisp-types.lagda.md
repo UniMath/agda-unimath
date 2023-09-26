@@ -17,7 +17,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-TODO: find out where to place the contents of this file
+We record here some basic facts about crisp types.
 
 ## Properties
 

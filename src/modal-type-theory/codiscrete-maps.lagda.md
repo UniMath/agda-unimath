@@ -20,7 +20,9 @@ open import modal-type-theory.codiscrete-types
 
 ## Idea
 
-A map is said to be **codiscrete** if its fibers are codiscrete.
+A map is said to be **codiscrete** if its
+[fibers](foundation-core.fibers-of-maps.md) are
+[codiscrete](modal-type-theory.codiscrete-types.md).
 
 ## Definition
 
@@ -42,6 +44,6 @@ module _
   is-codiscrete-map-Prop : Prop (l1 ⊔ l2)
   is-codiscrete-map-Prop = is-codiscrete-family-Prop (fiber f)
 
-  is-property-is-codiscrete-map : is-prop (is-codiscrete-map f)
-  is-property-is-codiscrete-map = is-prop-type-Prop is-codiscrete-map-Prop
+  is-prop-is-codiscrete-map : is-prop (is-codiscrete-map f)
+  is-prop-is-codiscrete-map = is-prop-type-Prop is-codiscrete-map-Prop
 ```

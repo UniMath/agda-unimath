@@ -25,7 +25,8 @@ open import orthogonal-factorization-systems.locally-small-modal-operators
 
 ## Idea
 
-TODO
+The **sharp modality** is an axiomatized monadic modality we postulate as a
+right adjoint to the [flat modality](modal-type-theory.flat-modality.md).
 
 ## Definition
 
@@ -79,22 +80,16 @@ compute-rec-♯ B = compute-ind-♯ (λ _ → B)
 ```agda
 ap-♯ : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → (♯ A → ♯ B)
 ap-♯ {B = B} f = rec-♯ B (unit-♯ ∘ f)
-
--- judgemental version of "induced map ♭ A → ♭ (♯ A) is an equivalence"
-postulate
-  crisp-elim-♯ :
-    {@♭ l : Level} {@♭ A : UU l} → @♭ ♯ A → A
-  compute-crisp-elim-♯ :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) → (crisp-elim-♯ (unit-♯ x)) ＝ x
-  uniqueness-crisp-elim-♯ :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : ♯ A) → unit-♯ (crisp-elim-♯ x) ＝ x
-
-postulate
-  -- coherence between computation and uniqueness rules for `crisp-elim-♯`
-  coherence-uniqueness-crisp-elim-♯ :
-    {@♭ l : Level} {@♭ A : UU l} (@♭ x : A) →
-    uniqueness-crisp-elim-♯ (unit-♯ x) ＝ ap unit-♯ (compute-crisp-elim-♯ x)
 ```
+
+## See also
+
+- In [codiscrete types](modal-type-theory.codiscrete-types.md), we postulate
+  that the sharp modality is a
+  [higher modality](orthogonal-factorization-systems.higher-modalities.md).
+- In [The flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we
+  postulate that the sharp modality is right adjoint to the
+  [flat modality](modal-type-theory.flat-modality.md).
 
 ## References
 

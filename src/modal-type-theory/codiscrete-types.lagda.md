@@ -53,7 +53,7 @@ postulate
     {l1 : Level} {A : UU l1} → (x y : ♯ A) → is-codiscrete (x ＝ y)
 ```
 
-### A `Π`-type is codiscrete if the codomain is
+### A `Π`-type is codiscrete if its codomain is
 
 ```agda
 postulate
@@ -102,6 +102,7 @@ module _
 module _
   (l : Level)
   where
+
   is-higher-modality-♯ :
     is-higher-modality (♯-locally-small-operator-modality l) (unit-♯)
   pr1 is-higher-modality-♯ = induction-principle-modality-♯ l
