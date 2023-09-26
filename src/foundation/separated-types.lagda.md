@@ -21,8 +21,9 @@ open import foundation.universe-levels
 
 Consider a [subuniverse](foundation.subuniverses.md) `P`. A type `A` is said to
 be **`P`-separated** if its [identity types](foundation-core.identity-types.md)
-are in `P`. Similarly, a type `A` is said to be **essentially
-`P`-separated** if its [identity types](foundation-core.identity-types.md) are [equivalent](foundation-core.equivalences.md) to types in `P`.
+are in `P`. Similarly, a type `A` is said to be **essentially `P`-separated** if
+its [identity types](foundation-core.identity-types.md) are
+[equivalent](foundation-core.equivalences.md) to types in `P`.
 
 ## Definitions
 
