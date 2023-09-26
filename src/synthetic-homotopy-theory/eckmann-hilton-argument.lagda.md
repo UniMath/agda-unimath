@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.triple-loop-spaces
 There are two classical statements of the Eckmann-Hilton argument. The first
 states that a group object in the category of groups is abelian. The second
 states that `π₂ (X)` is abelian, for any space `X`. The former is an algebraic
-statement, while the later is a homotopy theoretic statment. As it turns out,
+statement, while the latter is a homotopy theoretic statment. As it turns out,
 the two are equivalent. See the following
 [wikipedia article](https://en.wikipedia.org/wiki/Eckmann%E2%80%93Hilton_argument#Two-dimensional_proof).
 
