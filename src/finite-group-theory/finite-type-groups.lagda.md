@@ -55,7 +55,7 @@ module _
   where
 
   hom-loop-group-fin-UU-Fin-Group :
-    type-hom-Group
+    hom-Group
       ( abstract-group-Concrete-Group (UU-Fin-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 hom-loop-group-fin-UU-Fin-Group p = pr1 (pair-eq-Σ p)
@@ -63,7 +63,7 @@ module _
     pr1-interchange-concat-pair-eq-Σ p q
 
   hom-inv-loop-group-fin-UU-Fin-Group :
-    type-hom-Group
+    hom-Group
       ( loop-group-Set (raise-Set l (Fin-Set n)))
       ( abstract-group-Concrete-Group (UU-Fin-Group l n))
   pr1 hom-inv-loop-group-fin-UU-Fin-Group p =

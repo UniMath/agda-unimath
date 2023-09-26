@@ -23,7 +23,7 @@ The **initial ring** is a [ring](ring-theory.rings.md) `R` that satisfies the
 universal property that for any ring `S`, the type
 
 ```text
-  type-hom-Ring R S
+  hom-Ring R S
 ```
 
 of [ring homomorphisms](ring-theory.homomorphisms-rings.md) from `R` to `S` is

@@ -212,7 +212,7 @@ We specialize the above definitions to nonhomogenous homotopies.
   inv-htpy-section-system H = inv-htpy-section-system' refl refl H
 ```
 
-### total system of a fibered dependency system
+### Total system of a fibered dependency system
 
 ```agda
   total-system :

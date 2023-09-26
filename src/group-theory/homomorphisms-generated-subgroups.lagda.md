@@ -52,7 +52,7 @@ module _
   where
 
   distributivity-hom-group-ev-formal-combination :
-    ( f : type-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G') →
+    ( f : hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G') →
     ( l : formal-combination-subset-Group G S) →
     Id
       ( map-hom-Group
@@ -104,7 +104,7 @@ module _
           ( distributivity-hom-group-ev-formal-combination f l)))
 
   map-restriction-generating-subset-Subgroup :
-    type-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' →
+    hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' →
     type-subtype S → type-Group G'
   map-restriction-generating-subset-Subgroup f x =
     map-hom-Group
@@ -197,7 +197,7 @@ module _
             ( λ S → map-restriction-generating-subset-Subgroup g S)))
       ( λ p →
         eq-is-prop
-          ( is-set-type-hom-Group
+          ( is-set-hom-Group
             ( group-Subgroup G (subgroup-subset-Group G S))
             ( G')
             ( f)
@@ -300,7 +300,7 @@ module _
     lemma P (pair (inr star) x) = P x
 
   restriction-generating-subset-Subgroup :
-    type-hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' ↪
+    hom-Group (group-Subgroup G (subgroup-subset-Group G S)) G' ↪
       ( type-subtype S → type-Group G')
   pr1 restriction-generating-subset-Subgroup =
     map-restriction-generating-subset-Subgroup
@@ -314,7 +314,7 @@ module _
   where
 
   restriction-generating-subset-Group :
-    type-hom-Group G G' ↪ (type-subtype S → type-Group G')
+    hom-Group G G' ↪ (type-subtype S → type-Group G')
   restriction-generating-subset-Group =
     comp-emb
       ( restriction-generating-subset-Subgroup G S G')
@@ -333,7 +333,7 @@ module _
           ( G')))
 
   eq-map-restriction-generating-subset-Group :
-    ( f : type-hom-Group G G') (x : type-subtype S) →
+    ( f : hom-Group G G') (x : type-subtype S) →
     Id
       ( map-emb restriction-generating-subset-Group f x)
       ( map-hom-Group G G' f (pr1 x))

@@ -34,21 +34,21 @@ module _
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l1 l2 : Level} (l3 : Level)
   (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
-  (f : type-hom-Large-Precategory C X Y)
+  (f : hom-Large-Precategory C X Y)
   where
 
-  is-mono-Large-Precategory-Prop : Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
-  is-mono-Large-Precategory-Prop =
+  is-mono-prop-Large-Precategory : Prop (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
+  is-mono-prop-Large-Precategory =
     Π-Prop
       ( obj-Large-Precategory C l3)
       ( λ Z → is-emb-Prop (comp-hom-Large-Precategory C {X = Z} f))
 
   is-mono-Large-Precategory : UU (α l3 ⊔ β l3 l1 ⊔ β l3 l2)
-  is-mono-Large-Precategory = type-Prop is-mono-Large-Precategory-Prop
+  is-mono-Large-Precategory = type-Prop is-mono-prop-Large-Precategory
 
   is-prop-is-mono-Large-Precategory : is-prop is-mono-Large-Precategory
   is-prop-is-mono-Large-Precategory =
-    is-prop-type-Prop is-mono-Large-Precategory-Prop
+    is-prop-type-Prop is-mono-prop-Large-Precategory
 ```
 
 ## Properties
@@ -92,12 +92,12 @@ module _
                     ( left-unit-law-comp-hom-Large-Precategory C h)))))))
       ( λ p →
         eq-is-prop
-          ( is-set-type-hom-Large-Precategory C Z Y
+          ( is-set-hom-Large-Precategory C Z Y
             ( comp-hom-Large-Precategory C
               ( hom-iso-Large-Precategory C f)
               ( g))
             ( comp-hom-Large-Precategory C
               ( hom-iso-Large-Precategory C f)
               ( h))))
-      ( λ p → eq-is-prop (is-set-type-hom-Large-Precategory C Z X g h))
+      ( λ p → eq-is-prop (is-set-hom-Large-Precategory C Z X g h))
 ```

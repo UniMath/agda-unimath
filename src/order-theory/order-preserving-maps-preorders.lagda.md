@@ -62,15 +62,15 @@ module _
   is-prop-preserves-order-Preorder f =
     is-prop-type-Prop (preserves-order-Preorder-Prop f)
 
-  type-hom-Preorder : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  type-hom-Preorder =
+  hom-Preorder : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  hom-Preorder =
     Σ (type-Preorder P → type-Preorder Q) preserves-order-Preorder
 
-  map-hom-Preorder : type-hom-Preorder → type-Preorder P → type-Preorder Q
+  map-hom-Preorder : hom-Preorder → type-Preorder P → type-Preorder Q
   map-hom-Preorder = pr1
 
   preserves-order-map-hom-Preorder :
-    (f : type-hom-Preorder) → preserves-order-Preorder (map-hom-Preorder f)
+    (f : hom-Preorder) → preserves-order-Preorder (map-hom-Preorder f)
   preserves-order-map-hom-Preorder = pr2
 ```
 
@@ -81,19 +81,19 @@ module _
   {l1 l2 l3 l4 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
   where
 
-  htpy-hom-Preorder : (f g : type-hom-Preorder P Q) → UU (l1 ⊔ l3)
+  htpy-hom-Preorder : (f g : hom-Preorder P Q) → UU (l1 ⊔ l3)
   htpy-hom-Preorder f g = map-hom-Preorder P Q f ~ map-hom-Preorder P Q g
 
-  refl-htpy-hom-Preorder : (f : type-hom-Preorder P Q) → htpy-hom-Preorder f f
+  refl-htpy-hom-Preorder : (f : hom-Preorder P Q) → htpy-hom-Preorder f f
   refl-htpy-hom-Preorder f = refl-htpy
 
   htpy-eq-hom-Preorder :
-    (f g : type-hom-Preorder P Q) → Id f g → htpy-hom-Preorder f g
+    (f g : hom-Preorder P Q) → Id f g → htpy-hom-Preorder f g
   htpy-eq-hom-Preorder f .f refl = refl-htpy-hom-Preorder f
 
   is-contr-total-htpy-hom-Preorder :
-    (f : type-hom-Preorder P Q) →
-    is-contr (Σ (type-hom-Preorder P Q) (htpy-hom-Preorder f))
+    (f : hom-Preorder P Q) →
+    is-contr (Σ (hom-Preorder P Q) (htpy-hom-Preorder f))
   is-contr-total-htpy-hom-Preorder f =
     is-contr-total-Eq-subtype
       ( is-contr-total-htpy (map-hom-Preorder P Q f))
@@ -103,19 +103,19 @@ module _
       ( preserves-order-map-hom-Preorder P Q f)
 
   is-equiv-htpy-eq-hom-Preorder :
-    (f g : type-hom-Preorder P Q) → is-equiv (htpy-eq-hom-Preorder f g)
+    (f g : hom-Preorder P Q) → is-equiv (htpy-eq-hom-Preorder f g)
   is-equiv-htpy-eq-hom-Preorder f =
     fundamental-theorem-id
       ( is-contr-total-htpy-hom-Preorder f)
       ( htpy-eq-hom-Preorder f)
 
   extensionality-hom-Preorder :
-    (f g : type-hom-Preorder P Q) → Id f g ≃ htpy-hom-Preorder f g
+    (f g : hom-Preorder P Q) → Id f g ≃ htpy-hom-Preorder f g
   pr1 (extensionality-hom-Preorder f g) = htpy-eq-hom-Preorder f g
   pr2 (extensionality-hom-Preorder f g) = is-equiv-htpy-eq-hom-Preorder f g
 
   eq-htpy-hom-Preorder :
-    (f g : type-hom-Preorder P Q) → htpy-hom-Preorder f g → Id f g
+    (f g : hom-Preorder P Q) → htpy-hom-Preorder f g → Id f g
   eq-htpy-hom-Preorder f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Preorder f g)
 ```
@@ -131,7 +131,7 @@ module _
     preserves-order-Preorder P P (id {A = type-Preorder P})
   preserves-order-id-Preorder x y = id
 
-  id-hom-Preorder : type-hom-Preorder P P
+  id-hom-Preorder : hom-Preorder P P
   pr1 id-hom-Preorder = id
   pr2 id-hom-Preorder = preserves-order-id-Preorder
 ```
@@ -145,7 +145,7 @@ module _
   where
 
   preserves-order-comp-Preorder :
-    (g : type-hom-Preorder Q R) (f : type-hom-Preorder P Q) →
+    (g : hom-Preorder Q R) (f : hom-Preorder P Q) →
     preserves-order-Preorder P R
       ( map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f)
   preserves-order-comp-Preorder g f x y H =
@@ -155,8 +155,8 @@ module _
       ( preserves-order-map-hom-Preorder P Q f x y H)
 
   comp-hom-Preorder :
-    (g : type-hom-Preorder Q R) (f : type-hom-Preorder P Q) →
-    type-hom-Preorder P R
+    (g : hom-Preorder Q R) (f : hom-Preorder P Q) →
+    hom-Preorder P R
   pr1 (comp-hom-Preorder g f) =
     map-hom-Preorder Q R g ∘ map-hom-Preorder P Q f
   pr2 (comp-hom-Preorder g f) =
@@ -171,7 +171,7 @@ module _
   where
 
   left-unit-law-comp-hom-Preorder :
-    (f : type-hom-Preorder P Q) →
+    (f : hom-Preorder P Q) →
     Id ( comp-hom-Preorder P Q Q (id-hom-Preorder Q) f) f
   left-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
@@ -180,7 +180,7 @@ module _
       ( refl-htpy)
 
   right-unit-law-comp-hom-Preorder :
-    (f : type-hom-Preorder P Q) →
+    (f : hom-Preorder P Q) →
     Id (comp-hom-Preorder P P Q f (id-hom-Preorder P)) f
   right-unit-law-comp-hom-Preorder f =
     eq-htpy-hom-Preorder P Q
@@ -195,9 +195,9 @@ module _
 module _
   {l1 l2 l3 l4 l5 l6 l7 l8 : Level} (P : Preorder l1 l2) (Q : Preorder l3 l4)
   (R : Preorder l5 l6) (S : Preorder l7 l8)
-  (h : type-hom-Preorder R S)
-  (g : type-hom-Preorder Q R)
-  (f : type-hom-Preorder P Q)
+  (h : hom-Preorder R S)
+  (g : hom-Preorder Q R)
+  (f : hom-Preorder P Q)
   where
 
   associative-comp-hom-Preorder :

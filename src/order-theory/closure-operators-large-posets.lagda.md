@@ -47,7 +47,7 @@ module _
     where
     field
       hom-closure-operator-Large-Poset :
-        hom-Large-Poset id P P
+        hom-set-Large-Poset id P P
       is-inflationary-closure-operator-Large-Poset :
         {l1 : Level} (x : type-Large-Poset P l1) →
         leq-Large-Poset P x

@@ -31,9 +31,9 @@ Monoid-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Monoid-Large-Precategory =
   Monoid
-hom-Large-Precategory
+hom-set-Large-Precategory
   Monoid-Large-Precategory =
-  hom-Monoid
+  hom-set-Monoid
 comp-hom-Large-Precategory
   Monoid-Large-Precategory {X = K} {L} {M} =
   comp-hom-Monoid K L M

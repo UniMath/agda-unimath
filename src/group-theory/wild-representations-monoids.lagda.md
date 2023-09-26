@@ -39,7 +39,7 @@ wild-representation-type-Monoid :
   (l1 : Level) {l2 : Level} (M : Monoid l2) → UU (lsuc l1 ⊔ l2)
 wild-representation-type-Monoid l1 M =
   Σ ( UU l1)
-    ( λ X → type-hom-Wild-Monoid (wild-monoid-Monoid M) (endo-Wild-Monoid X))
+    ( λ X → hom-Wild-Monoid (wild-monoid-Monoid M) (endo-Wild-Monoid X))
 
 module _
   {l1 l2 : Level} (M : Monoid l1)
@@ -50,7 +50,7 @@ module _
   type-wild-representation-type-Monoid = pr1 ρ
 
   hom-action-wild-representation-type-Monoid :
-    type-hom-Wild-Monoid
+    hom-Wild-Monoid
       ( wild-monoid-Monoid M)
       ( endo-Wild-Monoid type-wild-representation-type-Monoid)
   hom-action-wild-representation-type-Monoid = pr2 ρ

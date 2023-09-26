@@ -157,8 +157,14 @@ module _
 is-binary-equiv-concat :
   {l : Level} {A : UU l} {x y z : A} →
   is-binary-equiv (λ (p : x ＝ y) (q : y ＝ z) → p ∙ q)
-is-binary-equiv-concat {l} {A} {x} {y} {z} =
-  pair (λ q → is-equiv-concat' x q) (λ p → is-equiv-concat p z)
+pr1 (is-binary-equiv-concat {x = x}) q = is-equiv-concat' x q
+pr2 (is-binary-equiv-concat {z = z}) p = is-equiv-concat p z
+
+equiv-binary-concat :
+  {l : Level} {A : UU l} {x y z w : A} → (p : x ＝ y) (q : z ＝ w) →
+  (y ＝ z) ≃ (x ＝ w)
+equiv-binary-concat {x = x} {z = z} p q =
+  (equiv-concat' x q) ∘e (equiv-concat p z)
 
 convert-eq-values :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)

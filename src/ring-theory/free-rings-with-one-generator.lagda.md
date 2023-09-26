@@ -23,7 +23,7 @@ The **free ring with one generator** is specified as a
 every ring `S` the map
 
 ```text
-  hom-Ring R S → type-Ring S
+  hom-set-Ring R S → type-Ring S
 ```
 
 given by evaluating at the element `g` is an equivalence. This property is also

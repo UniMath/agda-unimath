@@ -26,7 +26,7 @@ A [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` is an
 **epimorphism** if the precomposition function
 
 ```text
-  - ∘ f : hom-Group H K → hom-Group G K
+  - ∘ f : hom-set-Group H K → hom-set-Group G K
 ```
 
 is an [embedding](foundation.embeddings.md) for any
@@ -39,12 +39,12 @@ implies `g = h`.
 ```agda
 module _
   {l1 l2 : Level} (l3 : Level) (G : Group l1)
-  (H : Group l2) (f : type-hom-Group G H)
+  (H : Group l2) (f : hom-Group G H)
   where
 
   is-epi-Group-Prop : Prop (l1 ⊔ l2 ⊔ lsuc l3)
   is-epi-Group-Prop =
-    is-epi-Large-Precategory-Prop Group-Large-Precategory l3 G H f
+    is-epi-prop-Large-Precategory Group-Large-Precategory l3 G H f
 
   is-epi-Group : UU (l1 ⊔ l2 ⊔ lsuc l3)
   is-epi-Group = type-Prop is-epi-Group-Prop

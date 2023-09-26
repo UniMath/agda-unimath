@@ -51,12 +51,12 @@ module _
   where
 
   nullifies-normal-subgroup-prop-hom-Group :
-    type-hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+    hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-prop-hom-Group f H =
     leq-prop-Normal-Subgroup G H (kernel-hom-Group G K f)
 
   nullifies-normal-subgroup-hom-Group :
-    type-hom-Group G K → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
+    hom-Group G K → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Group f H =
     type-Prop (nullifies-normal-subgroup-prop-hom-Group f H)
 
@@ -66,7 +66,7 @@ module _
 
   hom-nullifying-hom-Group :
     (H : Normal-Subgroup l3 G) →
-    nullifying-hom-Group H → type-hom-Group G K
+    nullifying-hom-Group H → hom-Group G K
   hom-nullifying-hom-Group H = pr1
 
   nullifies-nullifying-hom-Group :
@@ -82,7 +82,7 @@ module _
 precomp-nullifying-hom-Group :
   {l1 l2 l3 l4 : Level} (G : Group l1) (H : Normal-Subgroup l2 G)
   (K : Group l3) (f : nullifying-hom-Group G K H)
-  (L : Group l4) → type-hom-Group K L → nullifying-hom-Group G L H
+  (L : Group l4) → hom-Group K L → nullifying-hom-Group G L H
 pr1 (precomp-nullifying-hom-Group G H K f L g) =
   comp-hom-Group G K L g (hom-nullifying-hom-Group G K H f)
 pr2 (precomp-nullifying-hom-Group G H K f L g) h p =
@@ -378,7 +378,7 @@ module _
   preserves-inv-quotient-hom-Group x =
     inv (compute-inv-quotient-Group G N x)
 
-  quotient-hom-Group : type-hom-Group G (quotient-Group G N)
+  quotient-hom-Group : hom-Group G (quotient-Group G N)
   pr1 quotient-hom-Group = map-quotient-hom-Group G N
   pr2 quotient-hom-Group = preserves-mul-quotient-hom-Group
 ```

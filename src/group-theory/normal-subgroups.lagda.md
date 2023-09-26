@@ -382,7 +382,9 @@ preserves-order-subgroup-Normal-Subgroup G N M = id
 
 subgroup-normal-subgroup-hom-Large-Poset :
   {l1 : Level} (G : Group l1) →
-  hom-Large-Poset id (Normal-Subgroup-Large-Poset G) (Subgroup-Large-Poset G)
+  hom-set-Large-Poset id
+    ( Normal-Subgroup-Large-Poset G)
+    ( Subgroup-Large-Poset G)
 subgroup-normal-subgroup-hom-Large-Poset G =
   make-hom-Large-Preorder
     ( subgroup-Normal-Subgroup G)

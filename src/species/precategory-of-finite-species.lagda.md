@@ -29,7 +29,7 @@ species-𝔽-Large-Precategory :
   (l1 : Level) →
   Large-Precategory (λ l → lsuc l1 ⊔ lsuc l) (λ l2 l3 → lsuc l1 ⊔ l2 ⊔ l3)
 obj-Large-Precategory (species-𝔽-Large-Precategory l1) = species-𝔽 l1
-hom-Large-Precategory (species-𝔽-Large-Precategory l1) = hom-species-𝔽
+hom-set-Large-Precategory (species-𝔽-Large-Precategory l1) = hom-set-species-𝔽
 comp-hom-Large-Precategory (species-𝔽-Large-Precategory l1) {X = F} {G} {H} =
   comp-hom-species-𝔽 F G H
 id-hom-Large-Precategory (species-𝔽-Large-Precategory l1) {X = F} =

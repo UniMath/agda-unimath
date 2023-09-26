@@ -155,7 +155,7 @@ module _
   is-category-precategory-Poset x y =
     is-equiv-is-prop
       ( is-set-type-Poset X x y)
-      ( is-prop-iso-Precategory precategory-Poset x y (is-prop-leq-Poset X x y))
+      ( is-prop-iso-Precategory precategory-Poset (is-prop-leq-Poset X x y))
       ( λ f →
         antisymmetric-leq-Poset X x y
           ( hom-iso-Precategory precategory-Poset f)
@@ -168,7 +168,7 @@ module _
 module _
   {l1 l2 : Level} (C : Category l1 l2)
   ( is-prop-hom-C :
-    (x y : obj-Category C) → is-prop (type-hom-Category C x y))
+    (x y : obj-Category C) → is-prop (hom-Category C x y))
   where
 
   preorder-is-prop-hom-Category : Preorder l1 l2
@@ -181,7 +181,7 @@ module _
     map-inv-is-equiv
       ( is-category-Category C x y)
       ( iso-is-prop-hom-Precategory
-        ( precategory-Category C) x y is-prop-hom-C f g)
+        ( precategory-Category C) is-prop-hom-C f g)
 ```
 
 It remains to show that these constructions form inverses to eachother.

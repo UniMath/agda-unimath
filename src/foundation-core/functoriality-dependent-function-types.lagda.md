@@ -33,6 +33,40 @@ open import foundation-core.transport-along-identifications
 
 ## Properties
 
+### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  implicit-explicit-Π : ((x : A) → B x) → {x : A} → B x
+  implicit-explicit-Π f {x} = f x
+
+  explicit-implicit-Π : ({x : A} → B x) → (x : A) → B x
+  explicit-implicit-Π f x = f {x}
+
+  is-equiv-implicit-explicit-Π : is-equiv implicit-explicit-Π
+  pr1 (pr1 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
+  pr2 (pr1 is-equiv-implicit-explicit-Π) = refl-htpy
+  pr1 (pr2 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
+  pr2 (pr2 is-equiv-implicit-explicit-Π) = refl-htpy
+
+  is-equiv-explicit-implicit-Π : is-equiv explicit-implicit-Π
+  pr1 (pr1 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
+  pr2 (pr1 is-equiv-explicit-implicit-Π) = refl-htpy
+  pr1 (pr2 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
+  pr2 (pr2 is-equiv-explicit-implicit-Π) = refl-htpy
+
+  equiv-implicit-explicit-Π : ((x : A) → B x) ≃ ({x : A} → B x)
+  pr1 equiv-implicit-explicit-Π = implicit-explicit-Π
+  pr2 equiv-implicit-explicit-Π = is-equiv-implicit-explicit-Π
+
+  equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
+  pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
+  pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
+```
+
 ### The operation `map-Π` preserves homotopies
 
 ```agda
@@ -102,6 +136,18 @@ pr1 (equiv-Π-equiv-family e) = map-Π (λ i → map-equiv (e i))
 pr2 (equiv-Π-equiv-family e) =
   is-equiv-map-Π-is-fiberwise-equiv
     ( λ i → is-equiv-map-equiv (e i))
+```
+
+We also record a version for dependent function types with implicit arguments.
+
+```agda
+equiv-implicit-Π-equiv-family :
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
+equiv-implicit-Π-equiv-family e =
+  ( equiv-implicit-explicit-Π) ∘e
+  ( equiv-Π-equiv-family e) ∘e
+  ( equiv-explicit-implicit-Π)
 ```
 
 ### Precomposition and equivalences

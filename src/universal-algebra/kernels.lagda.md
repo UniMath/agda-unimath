@@ -43,7 +43,7 @@ module _
   { l3 l4 : Level}
   ( Alg1 : Algebra Sg Th l3)
   ( Alg2 : Algebra Sg Th l4)
-  ( F : type-hom-Algebra Sg Th Alg1 Alg2)
+  ( F : hom-Algebra Sg Th Alg1 Alg2)
   where
 
   rel-prop-kernel-hom-Algebra :
