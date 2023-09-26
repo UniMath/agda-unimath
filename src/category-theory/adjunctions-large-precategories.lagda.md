@@ -271,9 +271,9 @@ module _
     (FG : Adjunction-Large-Precategory)
     {l : Level}
     (Y : obj-Large-Precategory D l) →
-    ( hom-right-adjoint-Adjunction-Large-Precategory FG
-      ( id-hom-Large-Precategory D {X = Y})) ＝
-    ( id-hom-Large-Precategory C)
+    hom-right-adjoint-Adjunction-Large-Precategory FG
+      ( id-hom-Large-Precategory D {X = Y}) ＝
+    id-hom-Large-Precategory C
   preserves-id-right-adjoint-Adjunction-Large-Precategory FG Y =
     preserves-id-functor-Large-Precategory
       ( right-adjoint-Adjunction-Large-Precategory FG)
