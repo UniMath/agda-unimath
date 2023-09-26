@@ -321,7 +321,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : type-hom-Monoid M N)
+  {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
   preserves-powers-hom-Monoid :

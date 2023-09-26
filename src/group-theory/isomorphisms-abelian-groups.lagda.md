@@ -38,51 +38,51 @@ underlying [groups](group-theory.groups.md).
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
-  is-iso-hom-Ab : UU (l1 ⊔ l2)
-  is-iso-hom-Ab = is-iso-hom-Group (group-Ab A) (group-Ab B) f
+  is-iso-Ab : UU (l1 ⊔ l2)
+  is-iso-Ab = is-iso-Group (group-Ab A) (group-Ab B) f
 
-  is-prop-is-iso-hom-Ab : is-prop is-iso-hom-Ab
-  is-prop-is-iso-hom-Ab =
-    is-prop-is-iso-hom-Group (group-Ab A) (group-Ab B) f
+  is-prop-is-iso-Ab : is-prop is-iso-Ab
+  is-prop-is-iso-Ab =
+    is-prop-is-iso-Group (group-Ab A) (group-Ab B) f
 
-  is-iso-prop-hom-Ab : Prop (l1 ⊔ l2)
-  is-iso-prop-hom-Ab = is-iso-prop-hom-Group (group-Ab A) (group-Ab B) f
+  is-iso-prop-Ab : Prop (l1 ⊔ l2)
+  is-iso-prop-Ab = is-iso-prop-Group (group-Ab A) (group-Ab B) f
 
-  hom-inv-is-iso-hom-Ab : is-iso-hom-Ab → type-hom-Ab B A
-  hom-inv-is-iso-hom-Ab = hom-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
+  hom-inv-is-iso-Ab : is-iso-Ab → hom-Ab B A
+  hom-inv-is-iso-Ab = hom-inv-is-iso-Group (group-Ab A) (group-Ab B) f
 
-  map-inv-is-iso-hom-Ab : is-iso-hom-Ab → type-Ab B → type-Ab A
-  map-inv-is-iso-hom-Ab =
-    map-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
+  map-inv-is-iso-Ab : is-iso-Ab → type-Ab B → type-Ab A
+  map-inv-is-iso-Ab =
+    map-inv-is-iso-Group (group-Ab A) (group-Ab B) f
 
-  is-section-hom-inv-is-iso-hom-Ab :
-    (H : is-iso-hom-Ab) →
-    comp-hom-Ab B A B f (hom-inv-is-iso-hom-Ab H) ＝ id-hom-Ab B
-  is-section-hom-inv-is-iso-hom-Ab =
-    is-section-hom-inv-is-iso-hom-Group (group-Ab A) (group-Ab B) f
+  is-section-hom-inv-is-iso-Ab :
+    (H : is-iso-Ab) →
+    comp-hom-Ab B A B f (hom-inv-is-iso-Ab H) ＝ id-hom-Ab B
+  is-section-hom-inv-is-iso-Ab =
+    is-section-hom-inv-is-iso-Group (group-Ab A) (group-Ab B) f
 
-  is-section-map-inv-is-iso-hom-Ab :
-    (H : is-iso-hom-Ab) →
-    ( map-hom-Ab A B f ∘ map-hom-Ab B A (hom-inv-is-iso-hom-Ab H)) ~ id
-  is-section-map-inv-is-iso-hom-Ab =
-    is-section-map-inv-is-iso-hom-Group
+  is-section-map-inv-is-iso-Ab :
+    (H : is-iso-Ab) →
+    ( map-hom-Ab A B f ∘ map-hom-Ab B A (hom-inv-is-iso-Ab H)) ~ id
+  is-section-map-inv-is-iso-Ab =
+    is-section-map-inv-is-iso-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)
 
-  is-retraction-hom-inv-is-iso-hom-Ab :
-    (H : is-iso-hom-Ab) →
-    comp-hom-Ab A B A (hom-inv-is-iso-hom-Ab H) f ＝ id-hom-Ab A
-  is-retraction-hom-inv-is-iso-hom-Ab H = pr2 (pr2 H)
+  is-retraction-hom-inv-is-iso-Ab :
+    (H : is-iso-Ab) →
+    comp-hom-Ab A B A (hom-inv-is-iso-Ab H) f ＝ id-hom-Ab A
+  is-retraction-hom-inv-is-iso-Ab H = pr2 (pr2 H)
 
-  is-retraction-map-inv-is-iso-hom-Ab :
-    (H : is-iso-hom-Ab) →
-    ( map-inv-is-iso-hom-Ab H ∘ map-hom-Ab A B f) ~ id
-  is-retraction-map-inv-is-iso-hom-Ab =
-    is-retraction-map-inv-is-iso-hom-Group
+  is-retraction-map-inv-is-iso-Ab :
+    (H : is-iso-Ab) →
+    ( map-inv-is-iso-Ab H ∘ map-hom-Ab A B f) ~ id
+  is-retraction-map-inv-is-iso-Ab =
+    is-retraction-map-inv-is-iso-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)
@@ -95,7 +95,7 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2)
   where
 
-  is-equiv-hom-Ab : type-hom-Ab A B → UU (l1 ⊔ l2)
+  is-equiv-hom-Ab : hom-Ab A B → UU (l1 ⊔ l2)
   is-equiv-hom-Ab =
     is-equiv-hom-Group (group-Ab A) (group-Ab B)
 
@@ -113,7 +113,7 @@ module _
   type-iso-Ab : UU (l1 ⊔ l2)
   type-iso-Ab = type-iso-Group (group-Ab A) (group-Ab B)
 
-  hom-iso-Ab : type-iso-Ab → type-hom-Ab A B
+  hom-iso-Ab : type-iso-Ab → hom-Ab A B
   hom-iso-Ab = hom-iso-Group (group-Ab A) (group-Ab B)
 
   map-iso-Ab : type-iso-Ab → type-Ab A → type-Ab B
@@ -125,10 +125,10 @@ module _
   preserves-add-iso-Ab =
     preserves-mul-iso-Group (group-Ab A) (group-Ab B)
 
-  is-iso-iso-Ab : (f : type-iso-Ab) → is-iso-hom-Ab A B (hom-iso-Ab f)
+  is-iso-iso-Ab : (f : type-iso-Ab) → is-iso-Ab A B (hom-iso-Ab f)
   is-iso-iso-Ab = is-iso-iso-Group (group-Ab A) (group-Ab B)
 
-  hom-inv-iso-Ab : type-iso-Ab → type-hom-Ab B A
+  hom-inv-iso-Ab : type-iso-Ab → hom-Ab B A
   hom-inv-iso-Ab = hom-inv-iso-Group (group-Ab A) (group-Ab B)
 
   map-inv-iso-Ab : type-iso-Ab → type-Ab B → type-Ab A
@@ -217,12 +217,12 @@ module _
   where
 
   is-iso-is-equiv-hom-Ab :
-    (f : type-hom-Ab A B) → is-equiv-hom-Ab A B f → is-iso-hom-Ab A B f
+    (f : hom-Ab A B) → is-equiv-hom-Ab A B f → is-iso-Ab A B f
   is-iso-is-equiv-hom-Ab = is-iso-is-equiv-hom-Group (group-Ab A) (group-Ab B)
 
-  is-equiv-is-iso-hom-Ab :
-    (f : type-hom-Ab A B) → is-iso-hom-Ab A B f → is-equiv-hom-Ab A B f
-  is-equiv-is-iso-hom-Ab = is-equiv-is-iso-hom-Group (group-Ab A) (group-Ab B)
+  is-equiv-is-iso-Ab :
+    (f : hom-Ab A B) → is-iso-Ab A B f → is-equiv-hom-Ab A B f
+  is-equiv-is-iso-Ab = is-equiv-is-iso-Group (group-Ab A) (group-Ab B)
 
   equiv-iso-equiv-Ab : equiv-Ab A B ≃ type-iso-Ab A B
   equiv-iso-equiv-Ab = equiv-iso-equiv-Group (group-Ab A) (group-Ab B)

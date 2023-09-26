@@ -37,21 +37,21 @@ module _
   where
 
   is-finite-ring-homomorphism-hom-Ab-Prop :
-    type-hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B) → Prop (l1 ⊔ l2)
+    hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B) → Prop (l1 ⊔ l2)
   is-finite-ring-homomorphism-hom-Ab-Prop =
     is-ring-homomorphism-hom-Ab-Prop
       ( ring-Ring-𝔽 A)
       ( ring-Ring-𝔽 B)
 
   is-finite-ring-homomorphism-hom-Ab :
-    type-hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B) → UU (l1 ⊔ l2)
+    hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B) → UU (l1 ⊔ l2)
   is-finite-ring-homomorphism-hom-Ab =
     is-ring-homomorphism-hom-Ab
       ( ring-Ring-𝔽 A)
       ( ring-Ring-𝔽 B)
 
   is-prop-is-finite-ring-homomorphism-hom-Ab :
-    (f : type-hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B)) →
+    (f : hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B)) →
     is-prop (is-finite-ring-homomorphism-hom-Ab f)
   is-prop-is-finite-ring-homomorphism-hom-Ab =
     is-prop-is-ring-homomorphism-hom-Ab
@@ -64,29 +64,29 @@ module _
   {l1 l2 : Level} (A : Ring-𝔽 l1) (B : Ring-𝔽 l2)
   where
 
-  hom-Ring-𝔽 : Set (l1 ⊔ l2)
+  hom-set-Ring-𝔽 : Set (l1 ⊔ l2)
+  hom-set-Ring-𝔽 =
+    hom-set-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
+
+  hom-Ring-𝔽 : UU (l1 ⊔ l2)
   hom-Ring-𝔽 =
     hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
 
-  type-hom-Ring-𝔽 : UU (l1 ⊔ l2)
-  type-hom-Ring-𝔽 =
-    type-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
-
-  is-set-type-hom-Ring-𝔽 : is-set type-hom-Ring-𝔽
-  is-set-type-hom-Ring-𝔽 =
-    is-set-type-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
+  is-set-hom-Ring-𝔽 : is-set hom-Ring-𝔽
+  is-set-hom-Ring-𝔽 =
+    is-set-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B)
 
   module _
-    (f : type-hom-Ring-𝔽)
+    (f : hom-Ring-𝔽)
     where
 
     hom-ab-hom-Ring-𝔽 :
-      type-hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B)
+      hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 B)
     hom-ab-hom-Ring-𝔽 =
       hom-ab-hom-Ring (ring-Ring-𝔽 A) (ring-Ring-𝔽 B) f
 
     hom-multiplicative-monoid-hom-Ring-𝔽 :
-      type-hom-Monoid
+      hom-Monoid
         ( multiplicative-monoid-Ring-𝔽 A)
         ( multiplicative-monoid-Ring-𝔽 B)
     hom-multiplicative-monoid-hom-Ring-𝔽 =
@@ -197,7 +197,7 @@ module _
   is-ring-homomorphism-id-hom-Ring-𝔽 =
     is-ring-homomorphism-id-hom-Ring (ring-Ring-𝔽 A)
 
-  id-hom-Ring-𝔽 : type-hom-Ring-𝔽 A A
+  id-hom-Ring-𝔽 : hom-Ring-𝔽 A A
   id-hom-Ring-𝔽 = id-hom-Ring (ring-Ring-𝔽 A)
 ```
 
@@ -207,11 +207,11 @@ module _
 module _
   {l1 l2 l3 : Level}
   (A : Ring-𝔽 l1) (B : Ring-𝔽 l2) (C : Ring-𝔽 l3)
-  (g : type-hom-Ring-𝔽 B C) (f : type-hom-Ring-𝔽 A B)
+  (g : hom-Ring-𝔽 B C) (f : hom-Ring-𝔽 A B)
   where
 
   hom-ab-comp-hom-Ring-𝔽 :
-    type-hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 C)
+    hom-Ab (ab-Ring-𝔽 A) (ab-Ring-𝔽 C)
   hom-ab-comp-hom-Ring-𝔽 =
     hom-ab-comp-hom-Ring
       ( ring-Ring-𝔽 A)
@@ -221,7 +221,7 @@ module _
       ( f)
 
   hom-multiplicative-monoid-comp-hom-Ring-𝔽 :
-    type-hom-Monoid
+    hom-Monoid
       ( multiplicative-monoid-Ring-𝔽 A)
       ( multiplicative-monoid-Ring-𝔽 C)
   hom-multiplicative-monoid-comp-hom-Ring-𝔽 =
@@ -269,7 +269,7 @@ module _
       ( g)
       ( f)
 
-  comp-hom-Ring-𝔽 : type-hom-Ring-𝔽 A C
+  comp-hom-Ring-𝔽 : hom-Ring-𝔽 A C
   comp-hom-Ring-𝔽 =
     comp-hom-Ring
       ( ring-Ring-𝔽 A)
@@ -287,14 +287,14 @@ module _
   where
 
   htpy-hom-Ring-𝔽 :
-    type-hom-Ring-𝔽 A B → type-hom-Ring-𝔽 A B → UU (l1 ⊔ l2)
+    hom-Ring-𝔽 A B → hom-Ring-𝔽 A B → UU (l1 ⊔ l2)
   htpy-hom-Ring-𝔽 =
     htpy-hom-Ring
       ( ring-Ring-𝔽 A)
       ( ring-Ring-𝔽 B)
 
   refl-htpy-hom-Ring-𝔽 :
-    (f : type-hom-Ring-𝔽 A B) → htpy-hom-Ring-𝔽 f f
+    (f : hom-Ring-𝔽 A B) → htpy-hom-Ring-𝔽 f f
   refl-htpy-hom-Ring-𝔽 =
     refl-htpy-hom-Ring
       ( ring-Ring-𝔽 A)
@@ -309,11 +309,11 @@ module _
 module _
   {l1 l2 : Level}
   (A : Ring-𝔽 l1) (B : Ring-𝔽 l2)
-  (f : type-hom-Ring-𝔽 A B)
+  (f : hom-Ring-𝔽 A B)
   where
 
   htpy-eq-hom-Ring-𝔽 :
-    (g : type-hom-Ring-𝔽 A B) →
+    (g : hom-Ring-𝔽 A B) →
     (f ＝ g) → htpy-hom-Ring-𝔽 A B f g
   htpy-eq-hom-Ring-𝔽 =
     htpy-eq-hom-Ring
@@ -323,7 +323,7 @@ module _
 
   is-contr-total-htpy-hom-Ring-𝔽 :
     is-contr
-      ( Σ (type-hom-Ring-𝔽 A B) (htpy-hom-Ring-𝔽 A B f))
+      ( Σ (hom-Ring-𝔽 A B) (htpy-hom-Ring-𝔽 A B f))
   is-contr-total-htpy-hom-Ring-𝔽 =
     is-contr-total-htpy-hom-Ring
       ( ring-Ring-𝔽 A)
@@ -331,7 +331,7 @@ module _
       ( f)
 
   is-equiv-htpy-eq-hom-Ring-𝔽 :
-    (g : type-hom-Ring-𝔽 A B) →
+    (g : hom-Ring-𝔽 A B) →
     is-equiv (htpy-eq-hom-Ring-𝔽 g)
   is-equiv-htpy-eq-hom-Ring-𝔽 =
     is-equiv-htpy-eq-hom-Ring
@@ -340,7 +340,7 @@ module _
       ( f)
 
   extensionality-hom-Ring-𝔽 :
-    (g : type-hom-Ring-𝔽 A B) →
+    (g : hom-Ring-𝔽 A B) →
     (f ＝ g) ≃ htpy-hom-Ring-𝔽 A B f g
   extensionality-hom-Ring-𝔽 =
     extensionality-hom-Ring
@@ -349,7 +349,7 @@ module _
       ( f)
 
   eq-htpy-hom-Ring-𝔽 :
-    (g : type-hom-Ring-𝔽 A B) →
+    (g : hom-Ring-𝔽 A B) →
     htpy-hom-Ring-𝔽 A B f g → f ＝ g
   eq-htpy-hom-Ring-𝔽 =
     eq-htpy-hom-Ring
@@ -367,9 +367,9 @@ module _
   (B : Ring-𝔽 l2)
   (C : Ring-𝔽 l3)
   (D : Ring-𝔽 l4)
-  (h : type-hom-Ring-𝔽 C D)
-  (g : type-hom-Ring-𝔽 B C)
-  (f : type-hom-Ring-𝔽 A B)
+  (h : hom-Ring-𝔽 C D)
+  (g : hom-Ring-𝔽 B C)
+  (f : hom-Ring-𝔽 A B)
   where
 
   associative-comp-hom-Ring-𝔽 :
@@ -397,7 +397,7 @@ module _
   {l1 l2 : Level}
   (A : Ring-𝔽 l1)
   (B : Ring-𝔽 l2)
-  (f : type-hom-Ring-𝔽 A B)
+  (f : hom-Ring-𝔽 A B)
   where
 
   left-unit-law-comp-hom-Ring-𝔽 :

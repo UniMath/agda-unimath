@@ -35,16 +35,16 @@ module _
   (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
   where
 
-  hom-Large-Poset : UUω
-  hom-Large-Poset =
-    hom-Large-Preorder γ
+  hom-set-Large-Poset : UUω
+  hom-set-Large-Poset =
+    hom-set-Large-Preorder γ
       ( large-preorder-Large-Poset P)
       ( large-preorder-Large-Poset Q)
 
 module _
   {αP αQ : Level → Level} {βP βQ : Level → Level → Level} {γ : Level → Level}
   (P : Large-Poset αP βP) (Q : Large-Poset αQ βQ)
-  (f : hom-Large-Poset γ P Q)
+  (f : hom-set-Large-Poset γ P Q)
   where
 
   map-hom-Large-Poset :

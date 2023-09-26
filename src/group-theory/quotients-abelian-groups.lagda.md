@@ -52,7 +52,7 @@ module _
   where
 
   nullifies-subgroup-prop-hom-Ab :
-    type-hom-Ab A B → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+    hom-Ab A B → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
   nullifies-subgroup-prop-hom-Ab f H =
     nullifies-normal-subgroup-prop-hom-Group
       ( group-Ab A)
@@ -61,7 +61,7 @@ module _
       ( normal-subgroup-Subgroup-Ab A H)
 
   nullifies-normal-subgroup-hom-Ab :
-    type-hom-Ab A B → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
+    hom-Ab A B → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Ab f H =
     nullifies-normal-subgroup-hom-Group
       ( group-Ab A)
@@ -77,7 +77,7 @@ module _
       ( normal-subgroup-Subgroup-Ab A H)
 
   hom-nullifying-hom-Ab :
-    (H : Subgroup-Ab l3 A) → nullifying-hom-Ab H → type-hom-Ab A B
+    (H : Subgroup-Ab l3 A) → nullifying-hom-Ab H → hom-Ab A B
   hom-nullifying-hom-Ab H =
     hom-nullifying-hom-Group
       ( group-Ab A)
@@ -101,7 +101,7 @@ module _
 precomp-nullifying-hom-Ab :
   {l1 l2 l3 l4 : Level} (A : Ab l1) (H : Subgroup-Ab l2 A)
   (B : Ab l3) (f : nullifying-hom-Ab A B H)
-  (C : Ab l4) → type-hom-Ab B C → nullifying-hom-Ab A C H
+  (C : Ab l4) → hom-Ab B C → nullifying-hom-Ab A C H
 precomp-nullifying-hom-Ab A H B f C =
   precomp-nullifying-hom-Group
     ( group-Ab A)
