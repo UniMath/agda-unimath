@@ -18,6 +18,7 @@ open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.conjugation-loops public
+open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-coforks public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public

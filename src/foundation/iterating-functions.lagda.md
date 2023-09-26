@@ -9,6 +9,7 @@ module foundation.iterating-functions where
 ```agda
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.exponentiation-natural-numbers
+open import elementary-number-theory.multiplicative-monoid-of-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
 open import elementary-number-theory.natural-numbers
 
