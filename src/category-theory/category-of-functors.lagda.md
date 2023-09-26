@@ -86,10 +86,9 @@ module _
         ( ( equiv-iso-functor-natural-isomorphism-Precategory C D F G) ∘e
           ( extensionality-functor-is-category-Precategory
               C D is-category-D F G))
-        ( λ
-          { refl →
-            compute-iso-functor-natural-isomorphism-eq-Precategory
-              C D F G refl})
+        ( λ { refl →
+              compute-iso-functor-natural-isomorphism-eq-Precategory
+                C D F G refl})
 ```
 
 ### The category of functors
