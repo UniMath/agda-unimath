@@ -32,9 +32,9 @@ Ab-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Large-Precategory.obj-Large-Precategory
   Ab-Large-Precategory =
   Ab
-Large-Precategory.hom-Large-Precategory
+Large-Precategory.hom-set-Large-Precategory
   Ab-Large-Precategory =
-  hom-Ab
+  hom-set-Ab
 Large-Precategory.comp-hom-Large-Precategory
   Ab-Large-Precategory {X = A} {B} {C} =
   comp-hom-Ab A B C

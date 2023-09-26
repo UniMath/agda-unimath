@@ -14,6 +14,8 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
+open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 ```
 
@@ -21,8 +23,9 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Given a family of types `B` over `A`, if we can characterize the identity types
-of each `B x`, then we can characterize the identity types of `(x : A) → B x`.
+Given a family of types `B` over `A`, if we can characterize the
+[identity types](foundation-core.identity-types.md) of each `B x`, then we can
+characterize the identity types of `(x : A) → B x`.
 
 ### Contractibility
 
@@ -36,6 +39,19 @@ is-contr-total-Eq-Π {A = A} {B} C is-contr-total-C =
     ( (x : A) → Σ (B x) (C x))
     ( distributive-Π-Σ)
     ( is-contr-Π is-contr-total-C)
+
+is-contr-total-Eq-implicit-Π :
+  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
+  ( is-contr-total-C : (x : A) → is-contr (Σ (B x) (C x))) →
+  is-contr (Σ ({x : A} → B x) (λ g → {x : A} → C x (g {x})))
+is-contr-total-Eq-implicit-Π {A = A} {B} C is-contr-total-C =
+  is-contr-equiv
+    ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
+    ( equiv-Σ
+      ( λ g → (x : A) → C x (g x))
+      ( equiv-explicit-implicit-Π)
+      ( λ _ → equiv-explicit-implicit-Π))
+    ( is-contr-total-Eq-Π C is-contr-total-C)
 ```
 
 ### Extensionality

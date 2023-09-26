@@ -10,7 +10,7 @@ module category-theory.slice-precategories where
 open import category-theory.precategories
 open import category-theory.products-in-precategories
 open import category-theory.pullbacks-in-precategories
-open import category-theory.terminal-objects-in-precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -46,48 +46,49 @@ module _
 
   obj-Slice-Precategory : UU (l1 ⊔ l2)
   obj-Slice-Precategory =
-    Σ (obj-Precategory C) (λ A → type-hom-Precategory C A X)
+    Σ (obj-Precategory C) (λ A → hom-Precategory C A X)
 
-  hom-Slice-Precategory : obj-Slice-Precategory → obj-Slice-Precategory → Set l2
-  hom-Slice-Precategory (A , f) (B , g) =
+  hom-set-Slice-Precategory :
+    obj-Slice-Precategory → obj-Slice-Precategory → Set l2
+  hom-set-Slice-Precategory (A , f) (B , g) =
     Σ-Set
-      ( hom-Precategory C A B)
+      ( hom-set-Precategory C A B)
       ( λ h →
         set-Prop
-          ( Id-Prop (hom-Precategory C A X) f (comp-hom-Precategory C g h)))
+          ( Id-Prop (hom-set-Precategory C A X) f (comp-hom-Precategory C g h)))
 
-  type-hom-Slice-Precategory :
+  hom-Slice-Precategory :
     obj-Slice-Precategory → obj-Slice-Precategory → UU l2
-  type-hom-Slice-Precategory A B = type-Set (hom-Slice-Precategory A B)
+  hom-Slice-Precategory A B = type-Set (hom-set-Slice-Precategory A B)
 
-  is-set-type-hom-Slice-Precategory :
-    (A B : obj-Slice-Precategory) → is-set (type-hom-Slice-Precategory A B)
-  is-set-type-hom-Slice-Precategory A B =
-    is-set-type-Set (hom-Slice-Precategory A B)
+  is-set-hom-Slice-Precategory :
+    (A B : obj-Slice-Precategory) → is-set (hom-Slice-Precategory A B)
+  is-set-hom-Slice-Precategory A B =
+    is-set-type-Set (hom-set-Slice-Precategory A B)
 
   Eq-hom-Slice-Precategory :
     {A B : obj-Slice-Precategory}
-    (f g : type-hom-Slice-Precategory A B) → UU l2
+    (f g : hom-Slice-Precategory A B) → UU l2
   Eq-hom-Slice-Precategory f g = (pr1 f ＝ pr1 g)
 
   refl-Eq-hom-Slice-Precategory :
-    {A B : obj-Slice-Precategory} (f : type-hom-Slice-Precategory A B) →
+    {A B : obj-Slice-Precategory} (f : hom-Slice-Precategory A B) →
     Eq-hom-Slice-Precategory f f
   refl-Eq-hom-Slice-Precategory f = refl
 
   extensionality-hom-Slice-Precategory :
-    {A B : obj-Slice-Precategory} (f g : type-hom-Slice-Precategory A B) →
+    {A B : obj-Slice-Precategory} (f g : hom-Slice-Precategory A B) →
     (f ＝ g) ≃ Eq-hom-Slice-Precategory f g
   extensionality-hom-Slice-Precategory {A} {B} =
     extensionality-type-subtype'
       ( λ h →
         Id-Prop
-          ( hom-Precategory C (pr1 A) X)
+          ( hom-set-Precategory C (pr1 A) X)
           ( pr2 A)
           ( comp-hom-Precategory C (pr2 B) h))
 
   eq-hom-Slice-Precategory :
-    {A B : obj-Slice-Precategory} (f g : type-hom-Slice-Precategory A B) →
+    {A B : obj-Slice-Precategory} (f g : hom-Slice-Precategory A B) →
     Eq-hom-Slice-Precategory f g → f ＝ g
   eq-hom-Slice-Precategory f g =
     map-inv-equiv (extensionality-hom-Slice-Precategory f g)
@@ -97,7 +98,7 @@ module _
 
 ```agda
   id-hom-Slice-Precategory :
-    (A : obj-Slice-Precategory) → type-hom-Slice-Precategory A A
+    (A : obj-Slice-Precategory) → hom-Slice-Precategory A A
   pr1 (id-hom-Slice-Precategory A) = id-hom-Precategory C
   pr2 (id-hom-Slice-Precategory A) =
     inv (right-unit-law-comp-hom-Precategory C (pr2 A))
@@ -108,8 +109,8 @@ module _
 ```agda
   comp-hom-Slice-Precategory :
     {A1 A2 A3 : obj-Slice-Precategory} →
-    type-hom-Slice-Precategory A2 A3 → type-hom-Slice-Precategory A1 A2 →
-    type-hom-Slice-Precategory A1 A3
+    hom-Slice-Precategory A2 A3 → hom-Slice-Precategory A1 A2 →
+    hom-Slice-Precategory A1 A3
   pr1 (comp-hom-Slice-Precategory g f) = comp-hom-Precategory C (pr1 g) (pr1 f)
   pr2 (comp-hom-Slice-Precategory g f) =
     ( pr2 f) ∙
@@ -122,9 +123,9 @@ module _
 ```agda
   associative-comp-hom-Slice-Precategory :
     {A1 A2 A3 A4 : obj-Slice-Precategory} →
-    (h : type-hom-Slice-Precategory A3 A4)
-    (g : type-hom-Slice-Precategory A2 A3)
-    (f : type-hom-Slice-Precategory A1 A2) →
+    (h : hom-Slice-Precategory A3 A4)
+    (g : hom-Slice-Precategory A2 A3)
+    (f : hom-Slice-Precategory A1 A2) →
     ( comp-hom-Slice-Precategory (comp-hom-Slice-Precategory h g) f) ＝
     ( comp-hom-Slice-Precategory h (comp-hom-Slice-Precategory g f))
   associative-comp-hom-Slice-Precategory h g f =
@@ -138,7 +139,7 @@ module _
 
 ```agda
   left-unit-law-comp-hom-Slice-Precategory :
-    {A B : obj-Slice-Precategory} (f : type-hom-Slice-Precategory A B) →
+    {A B : obj-Slice-Precategory} (f : hom-Slice-Precategory A B) →
     comp-hom-Slice-Precategory (id-hom-Slice-Precategory B) f ＝ f
   left-unit-law-comp-hom-Slice-Precategory f =
     eq-hom-Slice-Precategory
@@ -151,7 +152,7 @@ module _
 
 ```agda
   right-unit-law-comp-hom-Slice-Precategory :
-    {A B : obj-Slice-Precategory} (f : type-hom-Slice-Precategory A B) →
+    {A B : obj-Slice-Precategory} (f : hom-Slice-Precategory A B) →
     comp-hom-Slice-Precategory f (id-hom-Slice-Precategory A) ＝ f
   right-unit-law-comp-hom-Slice-Precategory f =
     eq-hom-Slice-Precategory
@@ -165,7 +166,7 @@ module _
 ```agda
   Slice-Precategory : Precategory (l1 ⊔ l2) l2
   pr1 Slice-Precategory = obj-Slice-Precategory
-  pr1 (pr2 Slice-Precategory) = hom-Slice-Precategory
+  pr1 (pr2 Slice-Precategory) = hom-set-Slice-Precategory
   pr1 (pr1 (pr2 (pr2 Slice-Precategory))) = comp-hom-Slice-Precategory
   pr2 (pr1 (pr2 (pr2 Slice-Precategory))) =
     associative-comp-hom-Slice-Precategory
@@ -188,12 +189,12 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2) (X : obj-Precategory C)
   where
 
-  terminal-object-Precategory-Slice-Precategory :
-    terminal-object-Precategory (Slice-Precategory C X)
-  pr1 terminal-object-Precategory-Slice-Precategory = (X , id-hom-Precategory C)
-  pr2 terminal-object-Precategory-Slice-Precategory (A , f) =
+  terminal-obj-Precategory-Slice-Precategory :
+    terminal-obj-Precategory (Slice-Precategory C X)
+  pr1 terminal-obj-Precategory-Slice-Precategory = (X , id-hom-Precategory C)
+  pr2 terminal-obj-Precategory-Slice-Precategory (A , f) =
     is-contr-equiv
-      ( Σ (type-hom-Precategory C A X) (λ g → f ＝ g))
+      ( Σ (hom-Precategory C A X) (λ g → f ＝ g))
       ( equiv-tot
         ( λ g → equiv-concat' f (left-unit-law-comp-hom-Precategory C g)))
       ( is-contr-total-path f)
@@ -204,13 +205,13 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2) {A X Y : obj-Precategory C}
-  (f : type-hom-Precategory C X A) (g : type-hom-Precategory C Y A)
+  (f : hom-Precategory C X A) (g : hom-Precategory C Y A)
   where
 
   module _
     {W : obj-Precategory C}
-    (p₁ : type-hom-Precategory C W X) (p₂ : type-hom-Precategory C W Y)
-    (p : type-hom-Precategory C W A)
+    (p₁ : hom-Precategory C W X) (p₂ : hom-Precategory C W Y)
+    (p : hom-Precategory C W A)
     (α₁ : p ＝ comp-hom-Precategory C f p₁)
     (α₂ : p ＝ comp-hom-Precategory C g p₂)
     (α : comp-hom-Precategory C f p₁ ＝ comp-hom-Precategory C g p₂)
@@ -225,7 +226,7 @@ module _
       is-contr-Σ-is-prop c d q σ
       where
       c :
-        type-hom-Precategory
+        hom-Precategory
           ( Slice-Precategory C A)
           ( Z , comp-hom-Precategory C f h₁)
           ( W , p)
@@ -258,8 +259,8 @@ module _
               (Slice-Precategory C A) (p₂ , α₂) k ＝ (h₂ , β₂)))
       q k =
         is-prop-prod
-          ( is-set-type-Set (hom-Slice-Precategory C A _ _) _ _)
-          ( is-set-type-Set (hom-Slice-Precategory C A _ _) _ _)
+          ( is-set-hom-Slice-Precategory C A _ _ _ _)
+          ( is-set-hom-Slice-Precategory C A _ _ _ _)
 
       σ :
         ∀ k →
@@ -285,7 +286,7 @@ module _
     map-inv-is-pullback-is-product-Slice-Precategory ψ W' p₁' p₂' α' =
       is-contr-Σ-is-prop k γ q σ
       where
-      k : type-hom-Precategory C W' W
+      k : hom-Precategory C W' W
       k =
         pr1
           ( pr1
@@ -324,11 +325,11 @@ module _
           ( comp-hom-Precategory C p₂ k' ＝ p₂'))
       q k' =
         is-prop-prod
-          ( is-set-type-Set (hom-Precategory C _ _) _ _)
-          ( is-set-type-Set (hom-Precategory C _ _) _ _)
+          ( is-set-hom-Precategory C _ _ _ _)
+          ( is-set-hom-Precategory C _ _ _ _)
 
       σ :
-        ( k' : type-hom-Precategory C W' W) →
+        ( k' : hom-Precategory C W' W) →
         ( γ' :
           ( comp-hom-Precategory C p₁ k' ＝ p₁') ×
           ( comp-hom-Precategory C p₂ k' ＝ p₂')) →

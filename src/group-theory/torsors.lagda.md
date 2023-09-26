@@ -97,7 +97,7 @@ module _
 
   mul-hom-Torsor-Abstract-Group :
     {l : Level} (X : Torsor-Abstract-Group l) →
-    type-hom-Group G (symmetric-Group (set-Torsor-Abstract-Group X))
+    hom-Group G (symmetric-Group (set-Torsor-Abstract-Group X))
   mul-hom-Torsor-Abstract-Group X = pr2 (action-Torsor-Abstract-Group X)
 
   equiv-mul-Torsor-Abstract-Group :
@@ -682,7 +682,7 @@ module _
   where
 
   map-Torsor-Abstract-Group :
-    type-hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
+    hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
   pr1 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (map-Torsor-Abstract-Group f X) = {!!}

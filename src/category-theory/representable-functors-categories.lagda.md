@@ -38,10 +38,11 @@ associativity and the left unit law for the category `C`.
 ## Definition
 
 ```agda
-rep-functor-Category :
+representable-functor-Category :
   {l1 l2 : Level} (C : Category l1 l2) (c : obj-Category C) →
   functor-Category C (Set-Category l2)
-rep-functor-Category C c = rep-functor-Precategory (precategory-Category C) c
+representable-functor-Category C c =
+  representable-functor-Precategory (precategory-Category C) c
 ```
 
 ## Natural transformations between representable functors
@@ -54,12 +55,12 @@ components `hom c x → hom b x` are defined by precomposition with `f`.
 ```agda
 rep-natural-transformation-Category :
   {l1 l2 : Level} (C : Category l1 l2) (b c : obj-Category C)
-  (f : type-hom-Category C b c) →
+  (f : hom-Category C b c) →
   natural-transformation-Category
     ( C)
     ( Set-Category l2)
-    ( rep-functor-Category C c)
-    ( rep-functor-Category C b)
+    ( representable-functor-Category C c)
+    ( representable-functor-Category C b)
 rep-natural-transformation-Category C =
   rep-natural-transformation-Precategory (precategory-Category C)
 ```

@@ -101,38 +101,21 @@ module _
 
   is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
   is-prop-is-symmetric-Relation-Prop =
-    is-prop-Π
-      ( λ x →
-        is-prop-Π
-          ( λ y → is-prop-function-type (is-prop-type-Relation-Prop R y x)))
+    is-prop-Π²
+      ( λ x y → is-prop-function-type (is-prop-type-Relation-Prop R y x))
 
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
   is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
 
   is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
   is-prop-is-transitive-Relation-Prop =
-    is-prop-Π
-      ( λ x →
-        is-prop-Π
-          ( λ y →
-            is-prop-Π
-              ( λ z →
-                is-prop-function-type
-                  ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))))
+    is-prop-Π³
+      ( λ x y z →
+        is-prop-function-type
+          ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))
 
   is-antisymmetric-Relation-Prop : UU (l1 ⊔ l2)
   is-antisymmetric-Relation-Prop = is-antisymmetric (type-Relation-Prop R)
-```
-
-### Morphisms of binary relations
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1}
-  where
-
-  hom-Relation : Relation l2 A → Relation l3 A → UU (l1 ⊔ l2 ⊔ l3)
-  hom-Relation R S = (x y : A) → R x y → S x y
 ```
 
 ## Properties

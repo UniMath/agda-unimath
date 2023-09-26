@@ -71,7 +71,7 @@ module _
     preserves-mul-inclusion-Subsemigroup G center-Semigroup
 
   hom-inclusion-center-Semigroup :
-    type-hom-Semigroup semigroup-center-Semigroup G
+    hom-Semigroup semigroup-center-Semigroup G
   hom-inclusion-center-Semigroup =
     hom-inclusion-Subsemigroup G center-Semigroup
 ```

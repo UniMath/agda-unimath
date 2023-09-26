@@ -39,7 +39,7 @@ module _
     Precategory (l1 ⊔ l3) (l2 ⊔ l4)
   pr1 prod-Precategory = obj-Precategory C × obj-Precategory D
   pr1 (pr2 prod-Precategory) (x , y) (x' , y') =
-    prod-Set (hom-Precategory C x x') (hom-Precategory D y y')
+    prod-Set (hom-set-Precategory C x x') (hom-set-Precategory D y y')
   pr1 (pr1 (pr1 (pr2 (pr2 prod-Precategory))) (f' , g') (f , g)) =
     comp-hom-Precategory C f' f
   pr2 (pr1 (pr1 (pr2 (pr2 prod-Precategory))) (f' , g') (f , g)) =

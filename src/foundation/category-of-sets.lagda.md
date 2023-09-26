@@ -39,7 +39,7 @@ sets for each universe level, and there is a large category of sets.
 ```agda
 Set-Large-Precategory : Large-Precategory lsuc (_⊔_)
 obj-Large-Precategory Set-Large-Precategory = Set
-hom-Large-Precategory Set-Large-Precategory = hom-Set
+hom-set-Large-Precategory Set-Large-Precategory = hom-Set
 comp-hom-Large-Precategory Set-Large-Precategory g f = g ∘ f
 id-hom-Large-Precategory Set-Large-Precategory = id
 associative-comp-hom-Large-Precategory Set-Large-Precategory h g f = refl

@@ -119,7 +119,7 @@ tot-id :
 tot-id B (pair x y) = refl
 ```
 
-### the map `tot` preserves composition
+### The map `tot` preserves composition
 
 ```agda
 preserves-comp-tot :

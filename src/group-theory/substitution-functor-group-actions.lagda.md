@@ -39,7 +39,7 @@ Given a group homomorphism `f : G → H` and an H-set `Y`, we obtain a G-actio o
 
 ```agda
 module _
-  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : type-hom-Group G H)
+  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : hom-Group G H)
   where
 
   obj-subst-Abstract-Group-Action :
@@ -54,8 +54,8 @@ module _
   hom-subst-Abstract-Group-Action :
     {l3 l4 : Level}
     (X : Abstract-Group-Action H l3) (Y : Abstract-Group-Action H l4) →
-    type-hom-Abstract-Group-Action H X Y →
-    type-hom-Abstract-Group-Action G
+    hom-Abstract-Group-Action H X Y →
+    hom-Abstract-Group-Action G
       ( obj-subst-Abstract-Group-Action X)
       ( obj-subst-Abstract-Group-Action Y)
   pr1 (hom-subst-Abstract-Group-Action X Y h) = pr1 h
@@ -71,8 +71,8 @@ module _
   preserves-comp-subst-Abstract-Group-Action :
     {l3 l4 l5 : Level} (X : Abstract-Group-Action H l3)
     (Y : Abstract-Group-Action H l4) (Z : Abstract-Group-Action H l5)
-    (g : type-hom-Abstract-Group-Action H Y Z)
-    (f : type-hom-Abstract-Group-Action H X Y) →
+    (g : hom-Abstract-Group-Action H Y Z)
+    (f : hom-Abstract-Group-Action H X Y) →
     Id
       ( hom-subst-Abstract-Group-Action X Z
         ( comp-hom-Abstract-Group-Action H X Y Z g f))
@@ -91,7 +91,7 @@ module _
       ( λ l → l)
   obj-functor-Large-Precategory subst-Abstract-Group-Action =
     obj-subst-Abstract-Group-Action
-  hom-functor-Large-Precategory subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
+  hom-functor-Large-Precategory subst-Abstract-Group-Action {X = X} {Y} =
     hom-subst-Abstract-Group-Action X Y
   preserves-comp-functor-Large-Precategory subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =
@@ -106,7 +106,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : type-hom-Group G H)
+  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : hom-Group G H)
   where
 
   preset-obj-left-adjoint-subst-Abstract-Group-Action :
