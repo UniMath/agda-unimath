@@ -192,7 +192,7 @@ module _
 
 There is another natural construction of an Eckmann-Hilton term along these
 lines. If we think of the first construction as "rotating clockwise", this
-alternate version "rotates counter-clockwise". In terms of braids, previous
+alternate version "rotates counter-clockwise". In terms of braids, the previous
 construction of Eckmann-Hilton braids `α` over `β`, while this new construction
 braids `α` under `β`. This difference shows up nicely in the type theory. The
 first version uses the naturality of the operation of whiskering on the left,
@@ -225,19 +225,28 @@ module _
 ```
 
 We now prove that this Eckmann-Hilton term "undoes" the previously constructed
-Eckmann-Hilton term. Note that the below property is distinct from syllepsis,
+Eckmann-Hilton term. If we think of braiding `α` over `β`, then braiding
+`β` under `α`, we should end up with the trivial braid. Thus, we should have
+
+`eckmann-hilton-Ω² α β ∙ eckman-hilton-inverse-Ω² β α ＝ refl`
+
+This is equivalent to,
+
+`inv eckman-hilton-inverse-Ω² β α ＝ eckmann-hilton-Ω² α β`
+
+which is what we prove. Note that the above property is distinct from syllepsis,
 since it concerns two different construction of the Eckmann-Hilton term.
-Further, the below works for all 2-loops, not just 3-loops.
+Further, it works for all 2-loops, not just 3-loops.
 
 ```agda
 module _
   {l : Level} {A : Pointed-Type l}
   where
 
-  Id-inv-eckmann-hilton-Ω²-eckmann-hilton-Ω² :
+  eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² :
     (α β : type-Ω² (point-Pointed-Type A)) →
     inv (eckmann-hilton-inverse-Ω² β α) ＝ (eckmann-hilton-Ω² α β)
-  Id-inv-eckmann-hilton-Ω²-eckmann-hilton-Ω² α β = equational-reasoning_
+  eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² α β = equational-reasoning_
     ( inv (eckmann-hilton-inverse-Ω² β α))
     ＝ concat
       ( inv
@@ -370,5 +379,5 @@ module _
         ( map-Ω
           ( pointed-map-pointed-equiv
             ( pointed-equiv-loop-pointed-identity (Ω (A , a)) (s ∙ s))))
-        ( Id-inv-eckmann-hilton-Ω²-eckmann-hilton-Ω² s s))
+        ( eckmann-hilton-inverse-Ω²-undoes-eckmann-hilton-Ω² s s))
 ```
