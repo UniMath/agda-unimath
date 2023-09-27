@@ -69,7 +69,8 @@ module _
       ( map-functor-Small-Large-Precategory C D G)
 
   hom-family-natural-transformation-Small-Large-Precategory :
-    natural-transformation-Small-Large-Precategory → hom-family-functor-Small-Large-Precategory
+    natural-transformation-Small-Large-Precategory →
+    hom-family-functor-Small-Large-Precategory
   hom-family-natural-transformation-Small-Large-Precategory =
     hom-family-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
@@ -95,7 +96,8 @@ module _
   where
 
   id-natural-transformation-Small-Large-Precategory :
-    {γF : Level} (F : functor-Small-Large-Precategory C D γF) → natural-transformation-Small-Large-Precategory C D F F
+    {γF : Level} (F : functor-Small-Large-Precategory C D γF) →
+    natural-transformation-Small-Large-Precategory C D F F
   id-natural-transformation-Small-Large-Precategory F =
     id-natural-transformation-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
@@ -140,7 +142,8 @@ module _
       ( map-functor-Small-Large-Precategory C D G)
 
   is-natural-transformation-prop-Small-Large-Precategory :
-    (γ : hom-family-functor-Small-Large-Precategory C D F G) → Prop (l1 ⊔ l2 ⊔ β γF γG)
+    (γ : hom-family-functor-Small-Large-Precategory C D F G) →
+    Prop (l1 ⊔ l2 ⊔ β γF γG)
   is-natural-transformation-prop-Small-Large-Precategory =
     is-natural-transformation-prop-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
