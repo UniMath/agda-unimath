@@ -175,6 +175,13 @@ module _
     iso-Large-Category C X Y → X ＝ Y
   eq-iso-Large-Category =
     map-inv-is-equiv (is-large-category-Large-Category C X Y)
+
+  extensionality-obj-Large-Category :
+    (X ＝ Y) ≃ iso-Large-Category C X Y
+  pr1 extensionality-obj-Large-Category =
+    iso-eq-Large-Category
+  pr2 extensionality-obj-Large-Category =
+    is-large-category-Large-Category C X Y
 ```
 
 ## Properties

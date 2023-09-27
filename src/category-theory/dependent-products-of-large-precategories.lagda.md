@@ -1,7 +1,7 @@
-# Large dependent function pre-categories
+# Dependent products of large precategories
 
 ```agda
-module category-theory.large-dependent-function-precategories where
+module category-theory.dependent-products-of-large-precategories where
 ```
 
 <details><summary>Imports</summary>
