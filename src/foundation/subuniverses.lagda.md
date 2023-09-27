@@ -1,8 +1,6 @@
 # Subuniverses
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module foundation.subuniverses where
 ```
 

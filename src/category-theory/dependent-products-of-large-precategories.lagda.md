@@ -24,10 +24,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a family of [precategories](category-theory.precategories.md) `Pᵢ` indexed
-by `i : I`, the dependent product `Π(i : I), Pᵢ` is a precategory consisting of
-dependent functions taking `i : I` to an object of `Pᵢ`. Every component of the
-structure is given pointwise.
+Given a family of [large precategories](category-theory.large-precategories.md)
+`Pᵢ` indexed by `i : I`, the dependent product `Π(i : I), Pᵢ` is a large
+precategory consisting of dependent functions taking `i : I` to an object of
+`Pᵢ`. Every component of the structure is given pointwise.
 
 ## Definition
 
@@ -126,7 +126,7 @@ module _
 
 ## Properties
 
-### Isomorphisms in the dependent product precategory are fiberwise isomorphisms
+### Isomorphisms in the large dependent product precategory are fiberwise isomorphisms
 
 ```agda
 module _

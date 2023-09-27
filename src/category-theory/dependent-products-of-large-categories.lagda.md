@@ -127,7 +127,7 @@ module _
 
 ## Properties
 
-### Isomorphisms in the dependent product category are fiberwise isomorphisms
+### Isomorphisms in the large dependent product category are fiberwise isomorphisms
 
 ```agda
 module _
