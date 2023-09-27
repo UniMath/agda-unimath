@@ -1,8 +1,6 @@
 # Modular arithmetic
 
 ```agda
--- temporary
-{-# OPTIONS --allow-unsolved-metas #-}
 module elementary-number-theory.modular-arithmetic where
 ```
 
@@ -36,8 +34,10 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+
 open import foundation-core.homotopies
 
 open import structured-types.types-equipped-with-endomorphisms
@@ -45,7 +45,6 @@ open import structured-types.types-equipped-with-endomorphisms
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
-open import foundation.surjective-maps
 ```
 
 </details>
@@ -796,16 +795,24 @@ is-decidable-div-ℤ d x =
 ### `mod-ℤ` is surjective
 
 ```agda
-mod-succ-succ-htpy-mod-succ+1 : (n : ℕ) →
+mod-succ-ℕ-comp-succ-ℕ-htpy-succ-Fin-mod-succ-ℕ : (n : ℕ) →
   ( (mod-succ-ℕ n) ∘ succ-ℕ) ~
-  ( ( λ x → (add-ℤ-Mod (succ-ℕ n)) x (one-ℤ-Mod (succ-ℕ n))) ∘
-    ( mod-succ-ℕ n))
-mod-succ-succ-htpy-mod-succ+1 = {!  Egbert's argument !}
+  ( (succ-Fin (succ-ℕ n)) ∘ (mod-succ-ℕ n))
+mod-succ-ℕ-comp-succ-ℕ-htpy-succ-Fin-mod-succ-ℕ n x = refl
+
+is-surjective-succ-Fin-comp-mod-succ-ℕ : (n : ℕ) →
+  is-surjective (succ-Fin (succ-ℕ n) ∘ mod-succ-ℕ n)
+is-surjective-succ-Fin-comp-mod-succ-ℕ n =
+  is-surjective-comp
+    ( is-surjective-is-equiv (is-equiv-succ-Fin (succ-ℕ n)))
+    ( is-surjective-mod-succ-ℕ n)
 
 is-surjective-mod-ℤ : (n : ℕ) → is-surjective (mod-ℤ n)
 is-surjective-mod-ℤ zero-ℕ = is-surjective-id
 is-surjective-mod-ℤ (succ-ℕ n) =
   is-surjective-left-factor
-  ( inr ∘ inr)
-  ( is-surjective-htpy (mod-succ-succ-htpy-mod-succ+1 n) {!  the fact that (─ + 1) is surjective !})
+    ( inr ∘ inr)
+    ( is-surjective-htpy
+      ( mod-succ-ℕ-comp-succ-ℕ-htpy-succ-Fin-mod-succ-ℕ n)
+      ( is-surjective-succ-Fin-comp-mod-succ-ℕ n))
 ```

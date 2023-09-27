@@ -1,6 +1,7 @@
 # Rings of modular arithmetic
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
 module elementary-number-theory.rings-of-modular-arithmetic where
 ```
 
@@ -16,17 +17,18 @@ open import elementary-number-theory.ring-of-integers
 
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.existential-quantification
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import group-theory.generating-elements-groups
 
 open import ring-theory.cyclic-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
-open import foundation.existential-quantification
-open import group-theory.generating-elements-groups
-open import foundation.surjective-maps
 ```
 
 </details>
@@ -72,7 +74,10 @@ compute-integer-multiple-one-ℤ-Mod = {!   !}
 
 is-surjective-hom-element-one-ℤ-Mod-Ring :
   (n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
-is-surjective-hom-element-one-ℤ-Mod-Ring n = is-surjective-htpy (compute-integer-multiple-one-ℤ-Mod n) (is-surjective-mod-ℤ n)
+is-surjective-hom-element-one-ℤ-Mod-Ring n =
+  is-surjective-htpy
+    ( compute-integer-multiple-one-ℤ-Mod n)
+    ( is-surjective-mod-ℤ n)
 
 is-generating-element-one-ℤ-Mod-Ring :
   (n : ℕ) → is-generating-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
