@@ -7,9 +7,9 @@ module synthetic-homotopy-theory.category-of-connected-set-bundles-circle where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.full-large-subcategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.full-large-subcategories
 
 open import foundation.category-of-families-of-sets
 open import foundation.universe-levels
