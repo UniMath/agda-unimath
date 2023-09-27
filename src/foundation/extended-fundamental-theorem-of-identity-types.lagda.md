@@ -28,4 +28,4 @@ the following are equivalent:
    ```
    is a family of `P`-maps.
 2. The [total space](foundation.dependent-pair-types.md) `Σ A B` is
-   `P`-separated.
+   [`P`-separated](foundation.separated-types.md).
