@@ -7,12 +7,12 @@ module category-theory.natural-transformations-maps-small-large-precategories wh
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.commuting-squares-of-morphisms-in-precategories
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories
+open import category-theory.commuting-squares-of-morphisms-in-precategories
+open import category-theory.large-precategories
 open import category-theory.maps-precategories
 open import category-theory.maps-small-large-precategories
 open import category-theory.precategories
-open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types

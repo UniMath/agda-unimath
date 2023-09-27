@@ -8,9 +8,9 @@ module category-theory.precategory-of-maps-small-large-precategories where
 
 ```agda
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.maps-small-large-precategories
-open import category-theory.maps-precategories
 open import category-theory.large-precategories
+open import category-theory.maps-precategories
+open import category-theory.maps-small-large-precategories
 open import category-theory.natural-isomorphisms-maps-precategories
 open import category-theory.natural-transformations-maps-small-large-precategories
 open import category-theory.precategories
@@ -120,11 +120,14 @@ module _
     comp-hom-map-large-precategory-Small-Large-Precategory
   id-hom-Large-Precategory map-large-precategory-Small-Large-Precategory =
     id-hom-map-large-precategory-Small-Large-Precategory
-  associative-comp-hom-Large-Precategory map-large-precategory-Small-Large-Precategory =
+  associative-comp-hom-Large-Precategory
+    map-large-precategory-Small-Large-Precategory =
     associative-comp-hom-map-large-precategory-Small-Large-Precategory
-  left-unit-law-comp-hom-Large-Precategory map-large-precategory-Small-Large-Precategory =
+  left-unit-law-comp-hom-Large-Precategory
+    map-large-precategory-Small-Large-Precategory =
     left-unit-law-comp-hom-map-large-precategory-Small-Large-Precategory
-  right-unit-law-comp-hom-Large-Precategory map-large-precategory-Small-Large-Precategory =
+  right-unit-law-comp-hom-Large-Precategory
+    map-large-precategory-Small-Large-Precategory =
     right-unit-law-comp-hom-map-large-precategory-Small-Large-Precategory
 ```
 
