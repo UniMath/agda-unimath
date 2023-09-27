@@ -1,7 +1,7 @@
 # The precategory of maps and natural transformations between two precategories
 
 ```agda
-module category-theory.precategory-of-maps-of-precategories where
+module category-theory.precategory-of-maps-precategories where
 ```
 
 <details><summary>Imports</summary>

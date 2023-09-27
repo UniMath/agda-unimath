@@ -191,6 +191,20 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  (is-large-category-C : is-large-category-Large-Precategory C)
+  where
+
+  is-category-is-large-category-Large-Precategory :
+    (l : Level) → is-category-Precategory (precategory-Large-Precategory C l)
+  is-category-is-large-category-Large-Precategory l X Y =
+    is-equiv-htpy
+      ( iso-eq-Large-Precategory C X Y)
+      ( compute-iso-eq-Large-Precategory C X Y)
+      ( is-large-category-C X Y)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β)
   where
 
@@ -200,12 +214,10 @@ module _
 
   is-category-Large-Category :
     (l : Level) → is-category-Precategory (precategory-Large-Category l)
-  is-category-Large-Category l X Y =
-    is-equiv-htpy
-      ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
-      ( compute-iso-eq-Large-Precategory
-        ( large-precategory-Large-Category C) X Y)
-      ( is-large-category-Large-Category C X Y)
+  is-category-Large-Category =
+    is-category-is-large-category-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-large-category-Large-Category C)
 
   category-Large-Category : (l : Level) → Category (α l) (β l l)
   pr1 (category-Large-Category l) = precategory-Large-Category l

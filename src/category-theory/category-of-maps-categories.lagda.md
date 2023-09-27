@@ -1,7 +1,7 @@
 # The category of maps and natural transformations between two categories
 
 ```agda
-module category-theory.category-of-maps-of-categories where
+module category-theory.category-of-maps-categories where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,7 @@ open import category-theory.natural-isomorphisms-maps-categories
 open import category-theory.natural-isomorphisms-maps-precategories
 open import category-theory.natural-transformations-maps-precategories
 open import category-theory.precategories
-open import category-theory.precategory-of-maps-of-precategories
+open import category-theory.precategory-of-maps-precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
@@ -57,19 +57,19 @@ module _
   where
 
   equiv-natural-isomorphism-htpy-map-is-category-Precategory :
-    (f g : map-Precategory C D) →
-    ( htpy-map-Precategory C D f g) ≃
-    ( natural-isomorphism-map-Precategory C D f g)
-  equiv-natural-isomorphism-htpy-map-is-category-Precategory f g =
+    (F G : map-Precategory C D) →
+    ( htpy-map-Precategory C D F G) ≃
+    ( natural-isomorphism-map-Precategory C D F G)
+  equiv-natural-isomorphism-htpy-map-is-category-Precategory F G =
       ( equiv-right-swap-Σ) ∘e
       ( equiv-Σ
-        ( is-natural-transformation-map-Precategory C D f g ∘ pr1)
+        ( is-natural-transformation-map-Precategory C D F G ∘ pr1)
         ( ( distributive-Π-Σ) ∘e
           ( equiv-Π-equiv-family
             ( λ x →
               extensionality-obj-Category (D , is-category-D)
-                ( obj-map-Precategory C D f x)
-                ( obj-map-Precategory C D g x))))
+                ( obj-map-Precategory C D F x)
+                ( obj-map-Precategory C D G x))))
         ( λ K →
           equiv-implicit-Π-equiv-family
             ( λ x →
@@ -81,20 +81,20 @@ module _
                         ( ap-binary
                           ( λ p q →
                             coherence-square-hom-Precategory D
-                              ( hom-map-Precategory C D f a)
+                              ( hom-map-Precategory C D F a)
                               ( p)
                               ( q)
-                              ( hom-map-Precategory C D g a))
+                              ( hom-map-Precategory C D G a))
                           ( compute-hom-iso-eq-Precategory D (K x))
                           ( compute-hom-iso-eq-Precategory D (K y)))))))))
 
   extensionality-map-is-category-Precategory :
-    (f g : map-Precategory C D) →
-    ( f ＝ g) ≃
-    ( natural-isomorphism-map-Precategory C D f g)
-  extensionality-map-is-category-Precategory f g =
-    ( equiv-natural-isomorphism-htpy-map-is-category-Precategory f g) ∘e
-    ( equiv-htpy-eq-map-Precategory C D f g)
+    (F G : map-Precategory C D) →
+    ( F ＝ G) ≃
+    ( natural-isomorphism-map-Precategory C D F G)
+  extensionality-map-is-category-Precategory F G =
+    ( equiv-natural-isomorphism-htpy-map-is-category-Precategory F G) ∘e
+    ( equiv-htpy-eq-map-Precategory C D F G)
 ```
 
 ### When the codomain is a category the map precategory is a category
@@ -108,9 +108,9 @@ module _
   where
 
   abstract
-    is-category-map-precategory-Precategory :
+    is-category-map-precategory-is-category-Precategory :
       is-category-Precategory (map-precategory-Precategory C D)
-    is-category-map-precategory-Precategory F G =
+    is-category-map-precategory-is-category-Precategory F G =
       is-equiv-htpy-equiv
         ( ( equiv-iso-map-natural-isomorphism-map-Precategory C D F G) ∘e
           ( extensionality-map-is-category-Precategory C D is-category-D F G))
@@ -137,7 +137,7 @@ module _
       ( precategory-Category C)
       ( precategory-Category D)
   pr2 map-category-Category =
-    is-category-map-precategory-Precategory
+    is-category-map-precategory-is-category-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( is-category-Category D)

@@ -44,7 +44,8 @@ This is called the **precategory of maps from a small to a large precategory**.
 ```agda
 module _
   {l1 l2 : Level} {α : Level → Level} {β : Level → Level → Level}
-  (C : Precategory l1 l2) (D : Large-Precategory α β)
+  (C : Precategory l1 l2)
+  (D : Large-Precategory α β)
   where
 
   comp-hom-map-large-precategory-Small-Large-Precategory :

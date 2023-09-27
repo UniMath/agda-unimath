@@ -38,7 +38,8 @@ open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
 open import category-theory.categories public
 open import category-theory.category-of-functors public
-open import category-theory.category-of-maps-of-categories public
+open import category-theory.category-of-maps-categories public
+open import category-theory.category-of-maps-small-large-categories public
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories public
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.coproducts-in-precategories public
@@ -92,7 +93,7 @@ open import category-theory.one-object-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-functors public
-open import category-theory.precategory-of-maps-of-precategories public
+open import category-theory.precategory-of-maps-precategories public
 open import category-theory.precategory-of-maps-small-large-precategories public
 open import category-theory.pregroupoids public
 open import category-theory.products-in-precategories public
