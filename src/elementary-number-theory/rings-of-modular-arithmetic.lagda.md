@@ -11,10 +11,12 @@ module elementary-number-theory.rings-of-modular-arithmetic where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.groups-of-modular-arithmetic
+open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ring-of-integers
 
+open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
@@ -23,6 +25,8 @@ open import foundation.identity-types
 open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.function-types
 
 open import group-theory.generating-elements-groups
 
@@ -66,14 +70,26 @@ pr2 (ℤ-Mod-Commutative-Ring n) = commutative-mul-ℤ-Mod n
 **Proof:**
 
 ```agda
+integer-multiple-one-ℤ-Ring : (k : ℤ) →
+  ( integer-multiple-Ring (ℤ-Mod-Ring zero-ℕ) k (one-ℤ-Mod zero-ℕ)) ＝
+  ( k)
+integer-multiple-one-ℤ-Ring (inl zero-ℕ) = refl
+integer-multiple-one-ℤ-Ring (inl (succ-ℕ n)) =
+  ap pred-ℤ (integer-multiple-one-ℤ-Ring (inl n))
+integer-multiple-one-ℤ-Ring (inr (inl star)) = refl
+integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
+integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
+  ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
+
 compute-integer-multiple-one-ℤ-Mod :
   ( n : ℕ) →
   ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n)) ~
   ( mod-ℤ n)
-compute-integer-multiple-one-ℤ-Mod = {!   !}
+compute-integer-multiple-one-ℤ-Mod zero-ℕ x = integer-multiple-one-ℤ-Ring x
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) x = {!   !}
 
 is-surjective-hom-element-one-ℤ-Mod-Ring :
-  (n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
+  ( n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
 is-surjective-hom-element-one-ℤ-Mod-Ring n =
   is-surjective-htpy
     ( compute-integer-multiple-one-ℤ-Mod n)
