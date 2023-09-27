@@ -27,7 +27,7 @@ A **full large subcategory** of a
 [large category](category-theory.large-categories.md) `C` consists of a
 [subtype](foundation.subtypes.md) of the type of objects of each universe level.
 
-### Large subprecategories
+### Full large subprecategories
 
 ```agda
 module _

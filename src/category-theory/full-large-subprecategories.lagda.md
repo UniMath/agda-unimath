@@ -35,12 +35,12 @@ Alternatively, we say that a
 every two objects `X` and `Y` in the subcategory, the subtype of homomorphisms
 from `X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
 
-Note that large full subprecategories are not assumed to be closed under
+Note that full large subprecategories are not assumed to be closed under
 isomorphisms.
 
 ## Definitions
 
-### Large subprecategories
+### Full large subprecategories
 
 ```agda
 module _
@@ -192,7 +192,7 @@ module _
 
 ## Properties
 
-### A large subprecategory of a large category is a large category
+### A full large subprecategory of a large category is a large category
 
 ```agda
 module _
