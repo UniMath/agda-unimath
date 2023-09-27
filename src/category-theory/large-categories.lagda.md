@@ -24,12 +24,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A large category in Homotopy Type Theory is a large precategory for which the
-identities between the objects are the isomorphisms. More specifically, an
-equality between objects gives rise to an isomorphism between them, by the
-J-rule. A large precategory is a large category if this function is an
-equivalence. Note that being a large category is a proposition since `is-equiv`
-is a proposition.
+A **large category** in Homotopy Type Theory is a
+[large precategory](category-theory.large-precategories.md) for which the
+[identities](foundation-core.identity-types.md) between the objects are the
+[isomorphisms](category-theory.isomorphisms-in-large-categories.md). More
+specifically, an equality between objects gives rise to an isomorphism between
+them, by the J-rule. A large precategory is a large category if this function is
+an equivalence. Note that being a large category is a
+[proposition](foundation-core.propositions.md) since `is-equiv` is a
+proposition.
 
 ## Definition
 

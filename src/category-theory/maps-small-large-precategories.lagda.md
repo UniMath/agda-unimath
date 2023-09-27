@@ -29,7 +29,7 @@ A **map** from a [(small) precategory](category-theory.precategories.md) `C` to
 a [large precategory](category-theory.large-precategories.md) `D` consists of:
 
 - a map `F₀ : C → D` on objects at a chosen universe level `γ`,
-- a map `F₁ : hom x y → hom (F x) (F y)` on morphisms.
+- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms.
 
 ## Definition
 

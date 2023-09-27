@@ -32,7 +32,7 @@ A **map** from a [(small) category](category-theory.categories.md) `C` to a
 [large category](category-theory.large-categories.md) `D` consists of:
 
 - a map `F₀ : C → D` on objects at a chosen universe level `γ`,
-- a map `F₁ : hom x y → hom (F x) (F y)` on morphisms.
+- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms.
 
 ## Definition
 
