@@ -36,13 +36,14 @@ module _
   (C : Large-Precategory αC βC) (D : Large-Precategory αD βD)
   where
 
-  record functor-Large-Precategory (γ : Level → Level) : UUω
+  record functor-Large-Precategory
+    ( γ : (l : Level) (x : obj-Large-Precategory C l) → Level) : UUω
     where
     constructor make-functor
     field
       obj-functor-Large-Precategory :
         { l1 : Level} →
-        obj-Large-Precategory C l1 → obj-Large-Precategory D (γ l1)
+        (x : obj-Large-Precategory C l1) → obj-Large-Precategory D (γ l1 x)
       hom-functor-Large-Precategory :
         { l1 l2 : Level}
         { X : obj-Large-Precategory C l1}
@@ -82,7 +83,7 @@ There is an identity functor on any large precategory.
 id-functor-Large-Precategory :
   {αC : Level → Level} {βC : Level → Level → Level} →
   {C : Large-Precategory αC βC} →
-  functor-Large-Precategory C C (λ l → l)
+  functor-Large-Precategory C C (λ l _ → l)
 obj-functor-Large-Precategory id-functor-Large-Precategory = id
 hom-functor-Large-Precategory id-functor-Large-Precategory = id
 preserves-comp-functor-Large-Precategory id-functor-Large-Precategory g f = refl
@@ -95,17 +96,21 @@ Any two compatible functors can be composed to a new functor.
 
 ```agda
 comp-functor-Large-Precategory :
-  {αC αD αE γG γF : Level → Level}
+  {αC αD αE : Level → Level}
   {βC βD βE : Level → Level → Level} →
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  {E : Large-Precategory αE βE} →
-  functor-Large-Precategory D E γG → functor-Large-Precategory C D γF →
-  functor-Large-Precategory C E (λ l → γG (γF l))
-obj-functor-Large-Precategory (comp-functor-Large-Precategory G F) =
-  obj-functor-Large-Precategory G ∘ obj-functor-Large-Precategory F
-hom-functor-Large-Precategory (comp-functor-Large-Precategory G F) =
-  hom-functor-Large-Precategory G ∘ hom-functor-Large-Precategory F
+  {E : Large-Precategory αE βE}
+  {γF : (l : Level) (x : obj-Large-Precategory C l) → Level}
+  {γG : (l : Level) (x : obj-Large-Precategory D l) → Level} →
+  functor-Large-Precategory D E γG →
+  (F : functor-Large-Precategory C D γF) →
+  functor-Large-Precategory C E
+    ( λ l x → γG (γF l x) (obj-functor-Large-Precategory F x))
+obj-functor-Large-Precategory (comp-functor-Large-Precategory G F) x =
+  obj-functor-Large-Precategory G (obj-functor-Large-Precategory F x)
+hom-functor-Large-Precategory (comp-functor-Large-Precategory G F) f =
+  hom-functor-Large-Precategory G (hom-functor-Large-Precategory F f)
 preserves-comp-functor-Large-Precategory
   ( comp-functor-Large-Precategory G F) g f =
   ( ap
