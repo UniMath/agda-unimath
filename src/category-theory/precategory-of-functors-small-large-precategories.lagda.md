@@ -10,11 +10,11 @@ module category-theory.precategory-of-functors-small-large-precategories where
 open import category-theory.functors-precategories
 open import category-theory.functors-small-large-precategories
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.large-precategories
 open import category-theory.natural-isomorphisms-precategories
 open import category-theory.natural-transformations-precategories
 open import category-theory.natural-transformations-small-large-precategories
 open import category-theory.precategories
-open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
@@ -81,7 +81,8 @@ module _
       C D F G H I f g h
 
   id-hom-functor-large-precategory-Small-Large-Precategory :
-    {γF : Level} {F : functor-Small-Large-Precategory C D γF} → natural-transformation-Small-Large-Precategory C D F F
+    {γF : Level} {F : functor-Small-Large-Precategory C D γF} →
+    natural-transformation-Small-Large-Precategory C D F F
   id-hom-functor-large-precategory-Small-Large-Precategory {F = F} =
     id-natural-transformation-Small-Large-Precategory C D F
 

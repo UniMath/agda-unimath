@@ -40,8 +40,8 @@ open import foundation.universe-levels
 [Maps](category-theory.maps-categories.md) between
 [categories](category-theory.categories.md) and
 [natural transformations](category-theory.natural-transformations-maps-categories.md)
-between them assemble to a new category whose identity map and composition
-structure are inherited pointwise from the codomain category. This is called the
+between them form another category whose identity map and composition structure
+are inherited pointwise from the codomain category. This is called the
 **category of maps between categories**.
 
 ## Lemmas
@@ -122,7 +122,7 @@ module _
 
 ## Definition
 
-### The category of maps of categories
+### The category of maps and natural transformations between categories
 
 ```agda
 module _

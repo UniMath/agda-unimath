@@ -284,43 +284,39 @@ module _
   (F G : functor-Category C D)
   where
 
-  equiv-htpy-map-eq-functor-Category :
-    (F ＝ G) ≃
-    ( htpy-map-Category C D
-      ( map-functor-Category C D F)
-      ( map-functor-Category C D G))
-  equiv-htpy-map-eq-functor-Category =
-    equiv-htpy-map-eq-functor-Precategory
+  htpy-functor-Category : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-functor-Category =
+    htpy-functor-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
       ( G)
 
-  htpy-map-eq-functor-Category :
-    (F ＝ G) →
-    htpy-map-Category C D
-      ( map-functor-Category C D F)
-      ( map-functor-Category C D G)
-  htpy-map-eq-functor-Category =
-    map-equiv equiv-htpy-map-eq-functor-Category
+  equiv-htpy-eq-functor-Category : (F ＝ G) ≃ htpy-functor-Category
+  equiv-htpy-eq-functor-Category =
+    equiv-htpy-eq-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+      ( G)
 
-  eq-htpy-map-functor-Category :
-    htpy-map-Category C D
-      ( map-functor-Category C D F)
-      ( map-functor-Category C D G) →
-    ( F ＝ G)
-  eq-htpy-map-functor-Category =
-    map-inv-equiv equiv-htpy-map-eq-functor-Category
+  htpy-eq-functor-Category : F ＝ G → htpy-functor-Category
+  htpy-eq-functor-Category =
+    map-equiv equiv-htpy-eq-functor-Category
 
-  is-section-eq-htpy-map-functor-Category :
-    htpy-map-eq-functor-Category ∘ eq-htpy-map-functor-Category ~ id
-  is-section-eq-htpy-map-functor-Category =
-    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Category
+  eq-htpy-functor-Category : htpy-functor-Category → F ＝ G
+  eq-htpy-functor-Category =
+    map-inv-equiv equiv-htpy-eq-functor-Category
 
-  is-retraction-eq-htpy-map-functor-Category :
-    eq-htpy-map-functor-Category ∘ htpy-map-eq-functor-Category ~ id
-  is-retraction-eq-htpy-map-functor-Category =
-    is-retraction-map-inv-equiv equiv-htpy-map-eq-functor-Category
+  is-section-eq-htpy-functor-Category :
+    htpy-eq-functor-Category ∘ eq-htpy-functor-Category ~ id
+  is-section-eq-htpy-functor-Category =
+    is-section-map-inv-equiv equiv-htpy-eq-functor-Category
+
+  is-retraction-eq-htpy-functor-Category :
+    eq-htpy-functor-Category ∘ htpy-eq-functor-Category ~ id
+  is-retraction-eq-htpy-functor-Category =
+    is-retraction-map-inv-equiv equiv-htpy-eq-functor-Category
 ```
 
 ### Functors preserve isomorphisms

@@ -312,42 +312,36 @@ module _
   (F G : functor-Precategory C D)
   where
 
-  equiv-htpy-map-eq-functor-Precategory :
-    (F ＝ G) ≃
-    ( htpy-map-Precategory C D
+  htpy-functor-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  htpy-functor-Precategory =
+    htpy-map-Precategory C D
       ( map-functor-Precategory C D F)
-      ( map-functor-Precategory C D G))
-  equiv-htpy-map-eq-functor-Precategory =
+      ( map-functor-Precategory C D G)
+
+  equiv-htpy-eq-functor-Precategory : (F ＝ G) ≃ htpy-functor-Precategory
+  equiv-htpy-eq-functor-Precategory =
     ( equiv-htpy-eq-map-Precategory C D)
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G) ∘e
     ( equiv-eq-map-eq-functor-Precategory C D F G)
 
-  htpy-map-eq-functor-Precategory :
-    (F ＝ G) →
-    htpy-map-Precategory C D
-      ( map-functor-Precategory C D F)
-      ( map-functor-Precategory C D G)
-  htpy-map-eq-functor-Precategory =
-    map-equiv equiv-htpy-map-eq-functor-Precategory
+  htpy-eq-functor-Precategory : F ＝ G → htpy-functor-Precategory
+  htpy-eq-functor-Precategory =
+    map-equiv equiv-htpy-eq-functor-Precategory
 
-  eq-htpy-map-functor-Precategory :
-    htpy-map-Precategory C D
-      ( map-functor-Precategory C D F)
-      ( map-functor-Precategory C D G) →
-    ( F ＝ G)
-  eq-htpy-map-functor-Precategory =
-    map-inv-equiv equiv-htpy-map-eq-functor-Precategory
+  eq-htpy-functor-Precategory : htpy-functor-Precategory → F ＝ G
+  eq-htpy-functor-Precategory =
+    map-inv-equiv equiv-htpy-eq-functor-Precategory
 
-  is-section-eq-htpy-map-functor-Precategory :
-    htpy-map-eq-functor-Precategory ∘ eq-htpy-map-functor-Precategory ~ id
-  is-section-eq-htpy-map-functor-Precategory =
-    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Precategory
+  is-section-eq-htpy-functor-Precategory :
+    htpy-eq-functor-Precategory ∘ eq-htpy-functor-Precategory ~ id
+  is-section-eq-htpy-functor-Precategory =
+    is-section-map-inv-equiv equiv-htpy-eq-functor-Precategory
 
-  is-retraction-eq-htpy-map-functor-Precategory :
-    eq-htpy-map-functor-Precategory ∘ htpy-map-eq-functor-Precategory ~ id
-  is-retraction-eq-htpy-map-functor-Precategory =
-    is-retraction-map-inv-equiv equiv-htpy-map-eq-functor-Precategory
+  is-retraction-eq-htpy-functor-Precategory :
+    eq-htpy-functor-Precategory ∘ htpy-eq-functor-Precategory ~ id
+  is-retraction-eq-htpy-functor-Precategory =
+    is-retraction-map-inv-equiv equiv-htpy-eq-functor-Precategory
 ```
 
 ### Functors preserve isomorphisms

@@ -233,46 +233,45 @@ module _
   (F G : functor-Small-Large-Category C D γ)
   where
 
-  equiv-htpy-map-eq-functor-Small-Large-Category :
-    (F ＝ G) ≃
-    ( htpy-map-Small-Large-Category C D
-      ( map-functor-Small-Large-Category C D F)
-      ( map-functor-Small-Large-Category C D G))
-  equiv-htpy-map-eq-functor-Small-Large-Category =
-    equiv-htpy-map-eq-functor-Small-Large-Precategory
+  htpy-functor-Small-Large-Category : UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
+  htpy-functor-Small-Large-Category =
+    htpy-functor-Small-Large-Precategory
       ( precategory-Category C)
       ( large-precategory-Large-Category D)
       ( F)
       ( G)
 
-  htpy-map-eq-functor-Small-Large-Category :
-    (F ＝ G) →
-    htpy-map-Small-Large-Category C D
-      ( map-functor-Small-Large-Category C D F)
-      ( map-functor-Small-Large-Category C D G)
-  htpy-map-eq-functor-Small-Large-Category =
-    map-equiv equiv-htpy-map-eq-functor-Small-Large-Category
+  equiv-htpy-eq-functor-Small-Large-Category :
+    (F ＝ G) ≃ htpy-functor-Small-Large-Category
+  equiv-htpy-eq-functor-Small-Large-Category =
+    equiv-htpy-eq-functor-Small-Large-Precategory
+      ( precategory-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
 
-  eq-htpy-map-functor-Small-Large-Category :
-    htpy-map-Small-Large-Category C D
-      ( map-functor-Small-Large-Category C D F)
-      ( map-functor-Small-Large-Category C D G) →
-    ( F ＝ G)
-  eq-htpy-map-functor-Small-Large-Category =
-    map-inv-equiv equiv-htpy-map-eq-functor-Small-Large-Category
+  htpy-eq-functor-Small-Large-Category :
+    (F ＝ G) → htpy-functor-Small-Large-Category
+  htpy-eq-functor-Small-Large-Category =
+    map-equiv equiv-htpy-eq-functor-Small-Large-Category
 
-  is-section-eq-htpy-map-functor-Small-Large-Category :
-    ( htpy-map-eq-functor-Small-Large-Category ∘
-      eq-htpy-map-functor-Small-Large-Category) ~
+  eq-htpy-functor-Small-Large-Category :
+    htpy-functor-Small-Large-Category → F ＝ G
+  eq-htpy-functor-Small-Large-Category =
+    map-inv-equiv equiv-htpy-eq-functor-Small-Large-Category
+
+  is-section-eq-htpy-functor-Small-Large-Category :
+    ( htpy-eq-functor-Small-Large-Category ∘
+      eq-htpy-functor-Small-Large-Category) ~
     id
-  is-section-eq-htpy-map-functor-Small-Large-Category =
-    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Small-Large-Category
+  is-section-eq-htpy-functor-Small-Large-Category =
+    is-section-map-inv-equiv equiv-htpy-eq-functor-Small-Large-Category
 
-  is-retraction-eq-htpy-map-functor-Small-Large-Category :
-    ( eq-htpy-map-functor-Small-Large-Category ∘
-      htpy-map-eq-functor-Small-Large-Category) ~
+  is-retraction-eq-htpy-functor-Small-Large-Category :
+    ( eq-htpy-functor-Small-Large-Category ∘
+      htpy-eq-functor-Small-Large-Category) ~
     id
-  is-retraction-eq-htpy-map-functor-Small-Large-Category =
+  is-retraction-eq-htpy-functor-Small-Large-Category =
     is-retraction-map-inv-equiv
-      equiv-htpy-map-eq-functor-Small-Large-Category
+      equiv-htpy-eq-functor-Small-Large-Category
 ```

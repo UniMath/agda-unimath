@@ -30,8 +30,8 @@ A **functor** from a [(small) precategory](category-theory.precategories.md) `C`
 to a [large precategory](category-theory.large-precategories.md) `D` consists
 of:
 
-- a map `C → D` on objects at some chosen universe level `γ`,
-- a map `hom x y → hom (F x) (F y)` on morphisms, such that the following
+- a map `F₀ : C → D` on objects at some chosen universe level `γ`,
+- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms, such that the following
   identities hold:
 - `F id_x = id_(F x)`,
 - `F (g ∘ f) = F g ∘ F f`.
@@ -203,43 +203,40 @@ module _
   (F G : functor-Small-Large-Precategory C D γ)
   where
 
-  equiv-htpy-map-eq-functor-Small-Large-Precategory :
-    (F ＝ G) ≃
-    ( htpy-map-Small-Large-Precategory C D
-      ( map-functor-Small-Large-Precategory C D F)
-      ( map-functor-Small-Large-Precategory C D G))
-  equiv-htpy-map-eq-functor-Small-Large-Precategory =
-    equiv-htpy-map-eq-functor-Precategory
-      C (precategory-Large-Precategory D γ) F G
-
-  htpy-map-eq-functor-Small-Large-Precategory :
-    (F ＝ G) →
+  htpy-functor-Small-Large-Precategory : UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
+  htpy-functor-Small-Large-Precategory =
     htpy-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory C D F)
       ( map-functor-Small-Large-Precategory C D G)
-  htpy-map-eq-functor-Small-Large-Precategory =
-    map-equiv equiv-htpy-map-eq-functor-Small-Large-Precategory
 
-  eq-htpy-map-functor-Small-Large-Precategory :
-    htpy-map-Small-Large-Precategory C D
-      ( map-functor-Small-Large-Precategory C D F)
-      ( map-functor-Small-Large-Precategory C D G) →
-    ( F ＝ G)
-  eq-htpy-map-functor-Small-Large-Precategory =
-    map-inv-equiv equiv-htpy-map-eq-functor-Small-Large-Precategory
+  equiv-htpy-eq-functor-Small-Large-Precategory :
+    (F ＝ G) ≃ htpy-functor-Small-Large-Precategory
+  equiv-htpy-eq-functor-Small-Large-Precategory =
+    equiv-htpy-eq-functor-Precategory
+      C (precategory-Large-Precategory D γ) F G
 
-  is-section-eq-htpy-map-functor-Small-Large-Precategory :
-    ( htpy-map-eq-functor-Small-Large-Precategory ∘
-      eq-htpy-map-functor-Small-Large-Precategory) ~
+  htpy-eq-functor-Small-Large-Precategory :
+    F ＝ G → htpy-functor-Small-Large-Precategory
+  htpy-eq-functor-Small-Large-Precategory =
+    map-equiv equiv-htpy-eq-functor-Small-Large-Precategory
+
+  eq-htpy-functor-Small-Large-Precategory :
+    htpy-functor-Small-Large-Precategory → F ＝ G
+  eq-htpy-functor-Small-Large-Precategory =
+    map-inv-equiv equiv-htpy-eq-functor-Small-Large-Precategory
+
+  is-section-eq-htpy-functor-Small-Large-Precategory :
+    ( htpy-eq-functor-Small-Large-Precategory ∘
+      eq-htpy-functor-Small-Large-Precategory) ~
     id
-  is-section-eq-htpy-map-functor-Small-Large-Precategory =
-    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Small-Large-Precategory
+  is-section-eq-htpy-functor-Small-Large-Precategory =
+    is-section-map-inv-equiv equiv-htpy-eq-functor-Small-Large-Precategory
 
-  is-retraction-eq-htpy-map-functor-Small-Large-Precategory :
-    ( eq-htpy-map-functor-Small-Large-Precategory ∘
-      htpy-map-eq-functor-Small-Large-Precategory) ~
+  is-retraction-eq-htpy-functor-Small-Large-Precategory :
+    ( eq-htpy-functor-Small-Large-Precategory ∘
+      htpy-eq-functor-Small-Large-Precategory) ~
     id
-  is-retraction-eq-htpy-map-functor-Small-Large-Precategory =
+  is-retraction-eq-htpy-functor-Small-Large-Precategory =
     is-retraction-map-inv-equiv
-      equiv-htpy-map-eq-functor-Small-Large-Precategory
+      equiv-htpy-eq-functor-Small-Large-Precategory
 ```
