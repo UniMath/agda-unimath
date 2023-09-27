@@ -161,9 +161,9 @@ module _
   is-prop-is-pullback-Precategory =
     is-prop-Π³ (λ w' p₁' p₂' → is-prop-function-type is-property-is-contr)
 
-  is-pullback-Precategory-Prop : Prop (l1 ⊔ l2)
-  pr1 is-pullback-Precategory-Prop =
+  is-pullback-prop-Precategory : Prop (l1 ⊔ l2)
+  pr1 is-pullback-prop-Precategory =
     is-pullback-Precategory C x y z f g w p₁ p₂ α
-  pr2 is-pullback-Precategory-Prop =
+  pr2 is-pullback-prop-Precategory =
     is-prop-is-pullback-Precategory
 ```

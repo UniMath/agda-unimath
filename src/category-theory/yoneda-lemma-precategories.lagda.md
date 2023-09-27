@@ -93,7 +93,7 @@ module _
   pr1 retraction-yoneda-evid-Precategory = yoneda-extension-Precategory
   pr2 retraction-yoneda-evid-Precategory α =
     eq-type-subtype
-      ( is-natural-transformation-Precategory-Prop
+      ( is-natural-transformation-prop-Precategory
         ( C) (Set-Precategory l2) (representable-functor-Precategory C c) F)
       ( eq-htpy
         ( λ x →

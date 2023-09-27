@@ -129,9 +129,9 @@ module _
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)
 
-  is-natural-transformation-Precategory-Prop :
+  is-natural-transformation-prop-Precategory :
     (γ : hom-family-functor-Precategory C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
-  is-natural-transformation-Precategory-Prop =
+  is-natural-transformation-prop-Precategory =
     is-natural-transformation-prop-map-Precategory C D
       ( map-functor-Precategory C D F)
       ( map-functor-Precategory C D G)

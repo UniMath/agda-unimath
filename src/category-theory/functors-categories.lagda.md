@@ -9,6 +9,7 @@ module category-theory.functors-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.maps-categories
 
 open import foundation.equivalences
@@ -39,16 +40,16 @@ module _
   (F : map-Category C D)
   where
 
-  preserves-comp-map-Category : UU (l1 ⊔ l2 ⊔ l4)
-  preserves-comp-map-Category =
-    preserves-comp-map-Precategory
+  preserves-comp-hom-map-Category : UU (l1 ⊔ l2 ⊔ l4)
+  preserves-comp-hom-map-Category =
+    preserves-comp-hom-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
 
-  preserves-id-map-Category : UU (l1 ⊔ l4)
-  preserves-id-map-Category =
-    preserves-id-map-Precategory
+  preserves-id-hom-map-Category : UU (l1 ⊔ l4)
+  preserves-id-hom-map-Category =
+    preserves-id-hom-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -61,17 +62,17 @@ module _
       ( F)
 
   preserves-comp-is-functor-map-Category :
-    is-functor-map-Category → preserves-comp-map-Category
+    is-functor-map-Category → preserves-comp-hom-map-Category
   preserves-comp-is-functor-map-Category =
     preserves-comp-is-functor-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
 
-  preserves-id-hom-is-functor-map-Category :
-    is-functor-map-Category → preserves-id-map-Category
-  preserves-id-hom-is-functor-map-Category =
-    preserves-id-hom-is-functor-map-Precategory
+  preserves-id-is-functor-map-Category :
+    is-functor-map-Category → preserves-id-hom-map-Category
+  preserves-id-is-functor-map-Category =
+    preserves-id-is-functor-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -111,6 +112,14 @@ module _
   map-functor-Category : functor-Category → map-Category C D
   map-functor-Category =
     map-functor-Precategory (precategory-Category C) (precategory-Category D)
+
+  is-functor-functor-Category :
+    (F : functor-Category) →
+    is-functor-map-Category C D (map-functor-Category F)
+  is-functor-functor-Category =
+    is-functor-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
 
   preserves-comp-functor-Category :
     ( F : functor-Category) {x y z : obj-Category C}
@@ -177,10 +186,10 @@ module _
   (F : map-Category C D)
   where
 
-  is-prop-preserves-comp-map-Category :
-    is-prop (preserves-comp-map-Category C D F)
-  is-prop-preserves-comp-map-Category =
-    is-prop-preserves-comp-map-Precategory
+  is-prop-preserves-comp-hom-map-Category :
+    is-prop (preserves-comp-hom-map-Category C D F)
+  is-prop-preserves-comp-hom-map-Category =
+    is-prop-preserves-comp-hom-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -192,10 +201,10 @@ module _
       ( precategory-Category D)
       ( F)
 
-  is-prop-preserves-id-map-Category :
-    is-prop (preserves-id-map-Category C D F)
-  is-prop-preserves-id-map-Category =
-    is-prop-preserves-id-map-Precategory
+  is-prop-preserves-id-hom-map-Category :
+    is-prop (preserves-id-hom-map-Category C D F)
+  is-prop-preserves-id-hom-map-Category =
+    is-prop-preserves-id-hom-map-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
@@ -312,4 +321,37 @@ module _
     eq-htpy-map-functor-Category ∘ htpy-map-eq-functor-Category ~ id
   is-retraction-eq-htpy-map-functor-Category =
     is-retraction-map-inv-equiv equiv-htpy-map-eq-functor-Category
+```
+
+### Functors preserve isomorphisms
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (D : Category l3 l4)
+  (F : functor-Category C D)
+  {x y : obj-Category C}
+  where
+
+  preserves-is-iso-functor-Category :
+    (f : hom-Category C x y) →
+    is-iso-Category C f →
+    is-iso-Category D (hom-functor-Category C D F f)
+  preserves-is-iso-functor-Category =
+    preserves-is-iso-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
+
+  preserves-iso-functor-Category :
+    iso-Category C x y →
+    iso-Category D
+      ( obj-functor-Category C D F x)
+      ( obj-functor-Category C D F y)
+  preserves-iso-functor-Category =
+    preserves-iso-functor-Precategory
+      ( precategory-Category C)
+      ( precategory-Category D)
+      ( F)
 ```

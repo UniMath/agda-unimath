@@ -57,6 +57,7 @@ open import category-theory.function-precategories public
 open import category-theory.functors-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
+open import category-theory.functors-small-large-precategories public
 open import category-theory.groupoids public
 open import category-theory.homotopies-natural-transformations-large-precategories public
 open import category-theory.initial-objects-large-categories public
@@ -70,6 +71,7 @@ open import category-theory.large-categories public
 open import category-theory.large-precategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-precategories public
+open import category-theory.maps-small-large-precategories public
 open import category-theory.monomorphisms-in-large-precategories public
 open import category-theory.natural-isomorphisms-categories public
 open import category-theory.natural-isomorphisms-large-precategories public
@@ -92,6 +94,7 @@ open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
 open import category-theory.pullbacks-in-precategories public
 open import category-theory.representable-functors-categories public
+open import category-theory.representable-functors-large-precategories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
 open import category-theory.sieves-in-categories public

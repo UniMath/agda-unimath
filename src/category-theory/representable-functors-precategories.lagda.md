@@ -58,7 +58,7 @@ from the functor represented by `c` to the functor represented by `b`. Its
 components `hom c x → hom b x` are defined by precomposition with `f`.
 
 ```agda
-rep-natural-transformation-Precategory :
+representable-natural-transformation-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) (b c : obj-Precategory C)
   (f : hom-Precategory C b c) →
   natural-transformation-Precategory
@@ -66,8 +66,8 @@ rep-natural-transformation-Precategory :
     ( Set-Precategory l2)
     ( representable-functor-Precategory C c)
     ( representable-functor-Precategory C b)
-pr1 (rep-natural-transformation-Precategory C b c f) =
+pr1 (representable-natural-transformation-Precategory C b c f) =
   precomp-hom-Precategory C f
-pr2 (rep-natural-transformation-Precategory C b c f) h =
+pr2 (representable-natural-transformation-Precategory C b c f) h =
   eq-htpy (inv-htpy (λ g → associative-comp-hom-Precategory C h g f))
 ```

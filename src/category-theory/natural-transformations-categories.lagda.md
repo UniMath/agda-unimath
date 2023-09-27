@@ -136,10 +136,10 @@ module _
       ( F)
       ( G)
 
-  is-natural-transformation-Category-Prop :
+  is-natural-transformation-prop-Category :
     ( γ : hom-family-functor-Category C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
-  is-natural-transformation-Category-Prop =
-    is-natural-transformation-Precategory-Prop
+  is-natural-transformation-prop-Category =
+    is-natural-transformation-prop-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)
