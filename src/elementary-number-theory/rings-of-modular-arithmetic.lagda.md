@@ -27,6 +27,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.function-types
+open import foundation-core.identity-types
 
 open import group-theory.generating-elements-groups
 
@@ -81,12 +82,28 @@ integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
 
+-- ∙
+
 compute-integer-multiple-one-ℤ-Mod :
   ( n : ℕ) →
   ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n)) ~
   ( mod-ℤ n)
 compute-integer-multiple-one-ℤ-Mod zero-ℕ x = integer-multiple-one-ℤ-Ring x
-compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) x = {!   !}
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl zero-ℕ) = {!   !}
+--
+--  ( integer-multiple-neg-one-Ring    (-1) · 1 = -1
+--    ( ℤ-Mod-Ring (succ-ℕ n))
+--    ( one-ℤ-Mod (succ-ℕ n))) ∙
+--  ( inv (mod-neg-one-ℤ (succ-ℕ n)))   -1 = [-1]
+--
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) = {!   !}
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
+  ( integer-multiple-one-Ring
+    ( ℤ-Mod-Ring (succ-ℕ n))
+    ( one-ℤ-Mod (succ-ℕ n))) ∙
+  ( inv (mod-one-ℤ (succ-ℕ n)))
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr (succ-ℕ x))) = {!  !}
 
 is-surjective-hom-element-one-ℤ-Mod-Ring :
   ( n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
