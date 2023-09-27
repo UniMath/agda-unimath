@@ -90,10 +90,11 @@ module _
   where
 
   abstract
-    is-large-category-map-large-precategory-Small-Large-Precategory :
+    is-large-category-map-large-precategory-is-large-category-Small-Large-Precategory :
       is-large-category-Large-Precategory
         ( map-large-precategory-Small-Large-Precategory C D)
-    is-large-category-map-large-precategory-Small-Large-Precategory {γ} F G =
+    is-large-category-map-large-precategory-is-large-category-Small-Large-Precategory
+      { γ} F G =
       is-equiv-htpy'
         ( iso-eq-Precategory
           ( map-precategory-Small-Large-Precategory C D γ)
@@ -132,7 +133,7 @@ module _
       ( precategory-Category C)
       ( large-precategory-Large-Category D)
   is-large-category-Large-Category map-large-category-Small-Large-Category =
-    is-large-category-map-large-precategory-Small-Large-Precategory
+    is-large-category-map-large-precategory-is-large-category-Small-Large-Precategory
       ( precategory-Category C)
       ( large-precategory-Large-Category D)
       ( is-large-category-Large-Category D)

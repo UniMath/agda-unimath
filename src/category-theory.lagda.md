@@ -99,6 +99,7 @@ open import category-theory.precategory-of-functors-small-large-precategories pu
 open import category-theory.precategory-of-maps-precategories public
 open import category-theory.precategory-of-maps-small-large-precategories public
 open import category-theory.pregroupoids public
+open import category-theory.presheaf-categories public
 open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
 open import category-theory.pullbacks-in-precategories public
