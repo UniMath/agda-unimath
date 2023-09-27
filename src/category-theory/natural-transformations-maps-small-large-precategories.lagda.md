@@ -250,11 +250,11 @@ module _
             ( is-natural-transformation-prop-map-Small-Large-Precategory
                 C D F G α)))
 
-  natural-transformation-map-set-Precategory :
+  natural-transformation-map-set-Small-Large-Precategory :
     Set (l1 ⊔ l2 ⊔ β γF γG)
-  pr1 (natural-transformation-map-set-Precategory) =
+  pr1 (natural-transformation-map-set-Small-Large-Precategory) =
     natural-transformation-map-Small-Large-Precategory C D F G
-  pr2 (natural-transformation-map-set-Precategory) =
+  pr2 (natural-transformation-map-set-Small-Large-Precategory) =
     is-set-natural-transformation-map-Small-Large-Precategory
 
   extensionality-natural-transformation-map-Small-Large-Precategory :
