@@ -20,8 +20,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-The **[large category](category-theory.large-categories.md) of families of [sets](foundation.sets.md) over a type** `A` is the [large function category](category-theory.large-function-categories.md) `A → Set`. 
-
+The **[large category](category-theory.large-categories.md) of families of
+[sets](foundation.sets.md) over a type** `A` is the
+[large function category](category-theory.large-function-categories.md)
+`A → Set`.
 
 ## Definition
 
@@ -41,7 +43,7 @@ Family-Of-Sets-Large-Precategory A =
 module _
   {l : Level} (A : UU l)
   where
-  
+
   Family-Of-Sets-Large-Category :
     Large-Category (λ l1 → l ⊔ lsuc l1) (λ l1 l2 → l ⊔ l1 ⊔ l2)
   Family-Of-Sets-Large-Category =

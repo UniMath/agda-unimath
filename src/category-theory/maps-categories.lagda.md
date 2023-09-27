@@ -127,3 +127,4 @@ module _
 ## See also
 
 - [Functors between categories](category-theory.functors-categories.md)
+- [The category of maps and natural transformations between categories](category-theory.category-of-maps-categories.md)

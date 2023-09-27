@@ -9,8 +9,8 @@ module category-theory.precategory-of-functors where
 ```agda
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.natural-isomorphisms-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-isomorphisms-functors-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -29,12 +29,14 @@ open import foundation.universe-levels
 
 [Functors](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) and
-[natural transformations](category-theory.natural-transformations-precategories.md)
+[natural transformations](category-theory.natural-transformations-functors-precategories.md)
 between them introduce a new precategory whose identity map and composition
 structure are inherited pointwise from the codomain precategory. This is called
 the **precategory of functors**.
 
-## Definition
+## Definitions
+
+### The precategory of functors and natural transformations between precategories
 
 ```agda
 module _
@@ -54,7 +56,7 @@ module _
     (h : natural-transformation-Precategory C D H I)
     (g : natural-transformation-Precategory C D G H)
     (f : natural-transformation-Precategory C D F G) →
-    (comp-natural-transformation-Precategory C D F G I
+    ( comp-natural-transformation-Precategory C D F G I
       ( comp-natural-transformation-Precategory C D G H I h g)
       ( f)) ＝
     ( comp-natural-transformation-Precategory C D F H I
@@ -82,18 +84,18 @@ module _
   left-unit-law-comp-hom-functor-precategory-Precategory :
     {F G : functor-Precategory C D}
     (α : natural-transformation-Precategory C D F G) →
-    ( comp-natural-transformation-Precategory C D F G G
-      ( id-natural-transformation-Precategory C D G) α) ＝
-    ( α)
+    comp-natural-transformation-Precategory C D F G G
+      ( id-natural-transformation-Precategory C D G) α ＝
+    α
   left-unit-law-comp-hom-functor-precategory-Precategory {F} {G} =
     left-unit-law-comp-natural-transformation-Precategory C D F G
 
   right-unit-law-comp-hom-functor-precategory-Precategory :
     {F G : functor-Precategory C D}
     (α : natural-transformation-Precategory C D F G) →
-    ( comp-natural-transformation-Precategory C D F F G
-        α (id-natural-transformation-Precategory C D F)) ＝
-    ( α)
+    comp-natural-transformation-Precategory C D F F G
+        α (id-natural-transformation-Precategory C D F) ＝
+    α
   right-unit-law-comp-hom-functor-precategory-Precategory {F} {G} =
     right-unit-law-comp-natural-transformation-Precategory C D F G
 

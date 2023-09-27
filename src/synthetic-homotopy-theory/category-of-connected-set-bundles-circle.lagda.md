@@ -9,6 +9,13 @@ module synthetic-homotopy-theory.category-of-connected-set-bundles-circle where
 ```agda
 open import category-theory.large-categories
 open import category-theory.large-precategories
+open import category-theory.full-large-subcategories
+
+open import foundation.category-of-families-of-sets
+open import foundation.universe-levels
+
+open import synthetic-homotopy-theory.circle
+open import synthetic-homotopy-theory.connected-set-bundles-circle
 ```
 
 </details>
@@ -23,16 +30,13 @@ category is the categorification of the [poset](order-theory.posets.md) of the
 
 ## Definitions
 
-### The precategory of conencted set bundles over the circle
-
-```agda
-connected-set-bundle-𝕊¹-Large-Precategory : Large-Precategory ? ?
-connected-set-bundle-𝕊¹-Large-Precategory = ?
-```
-
 ### The category of connected set bundles over the circle
 
 ```agda
-connected-set-bundle-𝕊¹-Large-Category : Large-Category {!!} {!!}
-connected-set-bundle-𝕊¹-Large-Category = {!!}
+connected-set-bundle-𝕊¹-Large-Category :
+  Large-Category (λ l → lzero ⊔ lsuc l) (λ l1 l2 → l1 ⊔ l2)
+connected-set-bundle-𝕊¹-Large-Category =
+  large-category-Full-Large-Subcategory
+    ( Family-Of-Sets-Large-Category 𝕊¹)
+    ( is-connected-prop-set-bundle-𝕊¹)
 ```

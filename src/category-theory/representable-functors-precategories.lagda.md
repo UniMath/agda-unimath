@@ -8,7 +8,7 @@ module category-theory.representable-functors-precategories where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 
 open import foundation.category-of-sets
@@ -24,7 +24,7 @@ open import foundation.universe-levels
 
 Given a [precategory](category-theory.precategories.md) `C` and an object `c`,
 there is a [functor](category-theory.functors-precategories.md) from `C` to the
-[precategory of Sets](foundation.category-of-sets.md) **represented** by `c`
+[precategory of sets](foundation.category-of-sets.md) **represented** by `c`
 that:
 
 - sends an object `x` of `C` to the [set](foundation-core.sets.md) `hom c x` and
@@ -53,12 +53,12 @@ pr2 (pr2 (pr2 (representable-functor-Precategory C c))) _ =
 ## Natural transformations between representable functors
 
 A morphism `f : hom b c` in a precategory `C` defines a
-[natural transformation](category-theory.natural-transformations-precategories.md)
+[natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from the functor represented by `c` to the functor represented by `b`. Its
 components `hom c x → hom b x` are defined by precomposition with `f`.
 
 ```agda
-rep-natural-transformation-Precategory :
+representable-natural-transformation-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) (b c : obj-Precategory C)
   (f : hom-Precategory C b c) →
   natural-transformation-Precategory
@@ -66,8 +66,8 @@ rep-natural-transformation-Precategory :
     ( Set-Precategory l2)
     ( representable-functor-Precategory C c)
     ( representable-functor-Precategory C b)
-pr1 (rep-natural-transformation-Precategory C b c f) =
+pr1 (representable-natural-transformation-Precategory C b c f) =
   precomp-hom-Precategory C f
-pr2 (rep-natural-transformation-Precategory C b c f) h =
+pr2 (representable-natural-transformation-Precategory C b c f) h =
   eq-htpy (inv-htpy (λ g → associative-comp-hom-Precategory C h g f))
 ```
