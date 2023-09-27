@@ -72,7 +72,7 @@ compute-integer-multiple-one-ℤ-Mod = {!   !}
 
 is-surjective-hom-element-one-ℤ-Mod-Ring :
   (n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
-is-surjective-hom-element-one-ℤ-Mod-Ring n = is-surjective-htpy (compute-integer-multiple-one-ℤ-Mod n) {!   !}
+is-surjective-hom-element-one-ℤ-Mod-Ring n = is-surjective-htpy (compute-integer-multiple-one-ℤ-Mod n) (is-surjective-mod-ℤ n)
 
 is-generating-element-one-ℤ-Mod-Ring :
   (n : ℕ) → is-generating-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
