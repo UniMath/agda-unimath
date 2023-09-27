@@ -25,18 +25,18 @@ A **map** from a [small precategory](category-theory.small-precategories.md) `C`
 to a [large precategory](category-theory.large-precategories.md) `D` consists
 of:
 
-- a map `F₀ : C → D` on objects,
+- a map `F₀ : C → D` on objects at a chosen universe level `γ`,
 - a map `F₁ : hom x y → hom (F x) (F y)` on morphisms.
 
 ## Definition
 
 ```agda
 module _
-  {l1 l2 : Level} {αD : Level → Level} {βD : Level → Level → Level}
-  (C : Precategory l1 l2) (D : Large-Precategory αD βD)
+  {l1 l2 : Level} {α : Level → Level} {β : Level → Level → Level}
+  (C : Precategory l1 l2) (D : Large-Precategory α β)
   where
 
-  map-Small-Large-Precategory : (γ : Level) → UU (l1 ⊔ l2 ⊔ αD γ ⊔ βD γ γ)
+  map-Small-Large-Precategory : (γ : Level) → UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
   map-Small-Large-Precategory γ =
     Σ ( obj-Precategory C → obj-Large-Precategory D γ)
       ( λ F₀ →

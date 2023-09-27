@@ -27,7 +27,7 @@ A **functor** from a [small precategory](category-theory.small-precategories.md)
 `C` to a [large precategory](category-theory.large-precategories.md) `D`
 consists of:
 
-- a map `C → D` on objects,
+- a map `C → D` on objects at some chosen universe level `γ`,
 - a map `hom x y → hom (F x) (F y)` on morphisms, such that the following
   identities hold:
 - `F id_x = id_(F x)`,
@@ -35,7 +35,7 @@ consists of:
 
 ## Definition
 
-### The predicate of being a functor on maps between precategories
+### The predicate of being a functor on maps from small to large precategories
 
 ```agda
 module _
