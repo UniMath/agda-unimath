@@ -7,10 +7,8 @@ module category-theory.natural-transformations-small-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
 open import category-theory.functors-small-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-maps-precategories
 open import category-theory.natural-transformations-maps-small-large-precategories
 open import category-theory.precategories
 

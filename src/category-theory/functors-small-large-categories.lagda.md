@@ -8,18 +8,10 @@ module category-theory.functors-small-large-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.functors-categories
-open import category-theory.functors-precategories
 open import category-theory.functors-small-large-precategories
 open import category-theory.large-categories
-open import category-theory.large-precategories
 open import category-theory.maps-small-large-categories
-open import category-theory.maps-small-large-precategories
-open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
-open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies

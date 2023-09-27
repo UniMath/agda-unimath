@@ -13,9 +13,6 @@ open import category-theory.natural-transformations-categories
 open import category-theory.representable-functors-precategories
 
 open import foundation.category-of-sets
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.universe-levels
 ```
 

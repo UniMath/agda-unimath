@@ -12,7 +12,6 @@ open import category-theory.large-precategories
 open import category-theory.maps-small-large-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences

@@ -9,35 +9,19 @@ module category-theory.category-of-maps-small-large-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.category-of-maps-categories
-open import category-theory.commuting-squares-of-morphisms-in-large-precategories
-open import category-theory.commuting-squares-of-morphisms-in-precategories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-large-categories
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.maps-categories
-open import category-theory.maps-precategories
 open import category-theory.maps-small-large-categories
 open import category-theory.maps-small-large-precategories
 open import category-theory.natural-isomorphisms-maps-categories
 open import category-theory.natural-isomorphisms-maps-precategories
-open import category-theory.natural-transformations-maps-small-large-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-maps-small-large-precategories
 
-open import foundation.action-on-identifications-binary-functions
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.functoriality-dependent-function-types
-open import foundation.functoriality-dependent-pair-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.type-arithmetic-dependent-pair-types
-open import foundation.type-theoretic-principle-of-choice
-open import foundation.univalence
 open import foundation.universe-levels
 ```
 
@@ -130,7 +114,7 @@ module _
           ( G))
 ```
 
-## Definition
+## Definitions
 
 ### The large category of maps and natural transformations from small to large categories
 

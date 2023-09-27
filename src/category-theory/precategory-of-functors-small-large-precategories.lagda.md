@@ -7,22 +7,12 @@ module category-theory.precategory-of-functors-small-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
 open import category-theory.functors-small-large-precategories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-isomorphisms-precategories
-open import category-theory.natural-transformations-precategories
 open import category-theory.natural-transformations-small-large-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.universe-levels
 ```
 
@@ -38,7 +28,7 @@ between them form a large precategory whose identity map and composition
 structure are inherited pointwise from the codomain precategory. This is called
 the **precategory of functors from small to large precategories**.
 
-## Definition
+## Definitions
 
 ### The large precategory of functors and natural transformations from a small to a large precategory
 

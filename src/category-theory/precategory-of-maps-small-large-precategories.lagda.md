@@ -7,21 +7,12 @@ module category-theory.precategory-of-maps-small-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-precategories
-open import category-theory.maps-precategories
 open import category-theory.maps-small-large-precategories
-open import category-theory.natural-isomorphisms-maps-precategories
 open import category-theory.natural-transformations-maps-small-large-precategories
 open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.universe-levels
 ```
 

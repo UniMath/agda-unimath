@@ -12,7 +12,6 @@ open import category-theory.category-of-maps-categories
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-categories
-open import category-theory.maps-precategories
 open import category-theory.natural-isomorphisms-categories
 open import category-theory.natural-isomorphisms-precategories
 open import category-theory.precategories
@@ -88,7 +87,9 @@ module _
                 C D F G refl})
 ```
 
-### The category of functors
+## Definitions
+
+### The category of functors and natural transformations between categories
 
 ```agda
 module _

@@ -12,7 +12,6 @@ open import category-theory.large-precategories
 open import category-theory.natural-transformations-large-precategories
 
 open import foundation.category-of-sets
-open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopies
 open import foundation.universe-levels

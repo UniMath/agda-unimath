@@ -34,7 +34,9 @@ between them introduce a new precategory whose identity map and composition
 structure are inherited pointwise from the codomain precategory. This is called
 the **precategory of maps**.
 
-## Definition
+## Definitions
+
+### The precategory of maps and natural transformations between precategories
 
 ```agda
 module _

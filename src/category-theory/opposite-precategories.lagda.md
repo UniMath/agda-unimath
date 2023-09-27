@@ -18,8 +18,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-Let `C` be a precategory, its opposite precategory `Cᵒᵖ` is given by reversing
-every morphism.
+Let `C` be a [precategory](category-theory.precategories.md), its **opposite
+precategory** `Cᵒᵖ` is given by reversing every morphism.
 
 ## Definition
 

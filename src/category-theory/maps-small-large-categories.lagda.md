@@ -9,17 +9,11 @@ module category-theory.maps-small-large-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.large-categories
-open import category-theory.large-precategories
-open import category-theory.maps-categories
 open import category-theory.maps-small-large-precategories
-open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
