@@ -7,13 +7,13 @@ module category-theory.functors-small-large-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.functors-categories
+open import category-theory.functors-precategories
 open import category-theory.functors-small-large-precategories
 open import category-theory.large-categories
-open import category-theory.maps-small-large-categories
-open import category-theory.categories
-open import category-theory.functors-precategories
 open import category-theory.large-precategories
+open import category-theory.maps-small-large-categories
 open import category-theory.maps-small-large-precategories
 open import category-theory.precategories
 

@@ -7,11 +7,11 @@ module category-theory.maps-small-large-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.maps-categories
 open import category-theory.maps-small-large-precategories
-open import category-theory.categories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
