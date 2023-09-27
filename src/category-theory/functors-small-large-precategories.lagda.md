@@ -144,7 +144,9 @@ module _
       ( is-functor-functor-Small-Large-Precategory)
 ```
 
-### Extensionality of functors between precategories
+## Properties
+
+### Characterizing equality of functors from small to large precategories
 
 #### Equality of functors is equality of underlying maps
 

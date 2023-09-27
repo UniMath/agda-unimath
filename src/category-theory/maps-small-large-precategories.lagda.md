@@ -63,7 +63,7 @@ module _
 
 ## Properties
 
-### Characterization of equality of maps between precategories
+### Characterization of equality of maps from small to large precategories
 
 ```agda
 module _
@@ -108,3 +108,7 @@ module _
   eq-htpy-map-Small-Large-Precategory =
     eq-htpy-map-Precategory C (precategory-Large-Precategory D γ)
 ```
+
+## See also
+
+- [Functors from small to large precategories](category-theory.functors-small-large-precategories.md)
