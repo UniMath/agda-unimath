@@ -21,7 +21,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a type `I` and a [large category](category-theory.large-categories.md) `C`, the **large function category** `Cᴵ` consists of `I`-indexed families of objects of `C` and `I`-indexed familis of morphisms between them.
+Given a type `I` and a [large category](category-theory.large-categories.md)
+`C`, the **large function category** `Cᴵ` consists of `I`-indexed families of
+objects of `C` and `I`-indexed familis of morphisms between them.
 
 ## Definition
 

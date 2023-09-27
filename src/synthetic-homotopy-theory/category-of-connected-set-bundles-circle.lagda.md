@@ -15,7 +15,11 @@ open import category-theory.large-precategories
 
 ## Idea
 
-The [connected set bundles over the circle](synthetic-homotopy-theory.connected-set-bundles-circle.md) form a [large category](category-theory.large-categories.md). This large category is the categorification of the [poset](order-theory.posets.md) of the [natural numbers ordered by divisibility](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
+The
+[connected set bundles over the circle](synthetic-homotopy-theory.connected-set-bundles-circle.md)
+form a [large category](category-theory.large-categories.md). This large
+category is the categorification of the [poset](order-theory.posets.md) of the
+[natural numbers ordered by divisibility](elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility.md).
 
 ## Definitions
 

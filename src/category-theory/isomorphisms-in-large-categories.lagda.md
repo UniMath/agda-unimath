@@ -11,8 +11,10 @@ open import category-theory.isomorphisms-in-categories
 open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
@@ -182,6 +184,20 @@ module _
     iso-eq-Large-Category
   pr2 extensionality-obj-Large-Category =
     is-large-category-Large-Category C X Y
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Category α β) {l1 : Level}
+  (X : obj-Large-Category C l1)
+  where
+
+  is-contr-total-iso-Large-Category :
+    is-contr (Σ (obj-Large-Category C l1) (iso-Large-Category C X))
+  is-contr-total-iso-Large-Category =
+    is-contr-equiv'
+      ( Σ (obj-Large-Category C l1) (λ Y → X ＝ Y))
+      ( equiv-tot (extensionality-obj-Large-Category C X))
+      ( is-contr-total-path X)
 ```
 
 ## Properties

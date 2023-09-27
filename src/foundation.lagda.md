@@ -38,6 +38,7 @@ open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
+open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public

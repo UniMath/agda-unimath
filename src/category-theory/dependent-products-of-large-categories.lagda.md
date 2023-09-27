@@ -25,10 +25,10 @@ open import foundation.universe-levels
 
 ## Idea
 
-Given a family of [large categories](category-theory.large-categories.md) `Cᵢ` indexed by
-`i : I`, the dependent product `Π(i : I), Cᵢ` is a large category consisting of
-functions taking `i : I` to an object of `Cᵢ`. Every component of the structure
-is given pointwise.
+Given a family of [large categories](category-theory.large-categories.md) `Cᵢ`
+indexed by `i : I`, the dependent product `Π(i : I), Cᵢ` is a large category
+consisting of functions taking `i : I` to an object of `Cᵢ`. Every component of
+the structure is given pointwise.
 
 ## Definition
 
@@ -119,9 +119,10 @@ module _
     right-unit-law-comp-hom-Large-Category Π-Large-Category
 
   extensionality-obj-Π-Large-Category :
-    {l2 : Level} (x y : obj-Π-Large-Category l2)→
+    {l2 : Level} (x y : obj-Π-Large-Category l2) →
     (x ＝ y) ≃ iso-Large-Category Π-Large-Category x y
-  extensionality-obj-Π-Large-Category = extensionality-obj-Large-Category Π-Large-Category
+  extensionality-obj-Π-Large-Category =
+    extensionality-obj-Large-Category Π-Large-Category
 ```
 
 ## Properties

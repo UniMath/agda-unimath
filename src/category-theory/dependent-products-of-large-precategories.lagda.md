@@ -59,7 +59,8 @@ module _
     hom-Π-Large-Precategory y z →
     hom-Π-Large-Precategory x y →
     hom-Π-Large-Precategory x z
-  comp-hom-Π-Large-Precategory f g i = comp-hom-Large-Precategory (C i) (f i) (g i)
+  comp-hom-Π-Large-Precategory f g i =
+    comp-hom-Large-Precategory (C i) (f i) (g i)
 
   associative-comp-hom-Π-Large-Precategory :
     {l2 l3 l4 l5 : Level}
@@ -73,7 +74,8 @@ module _
     ( comp-hom-Π-Large-Precategory (comp-hom-Π-Large-Precategory h g) f) ＝
     ( comp-hom-Π-Large-Precategory h (comp-hom-Π-Large-Precategory g f))
   associative-comp-hom-Π-Large-Precategory h g f =
-    eq-htpy (λ i → associative-comp-hom-Large-Precategory (C i) (h i) (g i) (f i))
+    eq-htpy
+      ( λ i → associative-comp-hom-Large-Precategory (C i) (h i) (g i) (f i))
 
   id-hom-Π-Large-Precategory :
     {l2 : Level} {x : obj-Π-Large-Precategory l2} → hom-Π-Large-Precategory x x
