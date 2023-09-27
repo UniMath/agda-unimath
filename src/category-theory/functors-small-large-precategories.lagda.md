@@ -7,6 +7,7 @@ module category-theory.functors-small-large-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.functors-precategories
 open import category-theory.large-precategories
 open import category-theory.maps-small-large-precategories
 open import category-theory.precategories
@@ -14,7 +15,9 @@ open import category-theory.precategories
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -83,24 +86,21 @@ module _
   (C : Precategory l1 l2) (D : Large-Precategory α β)
   where
 
-  functor-Small-Large-Precategory : (γ : Level) → UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
+  functor-Small-Large-Precategory :
+    (γ : Level) → UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
   functor-Small-Large-Precategory γ =
-    Σ ( obj-Precategory C → obj-Large-Precategory D γ)
-      ( λ F₀ →
-        Σ ( {x y : obj-Precategory C}
-            (f : hom-Precategory C x y) →
-            hom-Large-Precategory D (F₀ x) (F₀ y))
-          ( λ F₁ → is-functor-map-Small-Large-Precategory C D (F₀ , F₁)))
+    functor-Precategory C (precategory-Large-Precategory D γ)
 
 module _
-  {l1 l2 γ : Level} {α : Level → Level} {β : Level → Level → Level}
+  {l1 l2 : Level} {α : Level → Level} {β : Level → Level → Level}
   (C : Precategory l1 l2) (D : Large-Precategory α β)
-  (F : functor-Small-Large-Precategory C D γ)
+  {γ : Level} (F : functor-Small-Large-Precategory C D γ)
   where
 
   obj-functor-Small-Large-Precategory :
     obj-Precategory C → obj-Large-Precategory D γ
-  obj-functor-Small-Large-Precategory = pr1 F
+  obj-functor-Small-Large-Precategory =
+    obj-functor-Precategory C (precategory-Large-Precategory D γ) F
 
   hom-functor-Small-Large-Precategory :
     {x y : obj-Precategory C} →
@@ -108,16 +108,19 @@ module _
     hom-Large-Precategory D
       ( obj-functor-Small-Large-Precategory x)
       ( obj-functor-Small-Large-Precategory y)
-  hom-functor-Small-Large-Precategory = pr1 (pr2 F)
+  hom-functor-Small-Large-Precategory =
+    hom-functor-Precategory C (precategory-Large-Precategory D γ) F
 
-  map-functor-Small-Large-Precategory : map-Small-Large-Precategory C D γ
-  pr1 map-functor-Small-Large-Precategory = obj-functor-Small-Large-Precategory
-  pr2 map-functor-Small-Large-Precategory = hom-functor-Small-Large-Precategory
+  map-functor-Small-Large-Precategory :
+    map-Small-Large-Precategory C D γ
+  map-functor-Small-Large-Precategory =
+    map-functor-Precategory C (precategory-Large-Precategory D γ) F
 
   is-functor-functor-Small-Large-Precategory :
     is-functor-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory)
-  is-functor-functor-Small-Large-Precategory = pr2 (pr2 F)
+  is-functor-functor-Small-Large-Precategory =
+    is-functor-functor-Precategory C (precategory-Large-Precategory D γ) F
 
   preserves-comp-functor-Small-Large-Precategory :
     {x y z : obj-Precategory C}
@@ -139,4 +142,102 @@ module _
     preserves-id-is-functor-map-Small-Large-Precategory C D
       ( map-functor-Small-Large-Precategory)
       ( is-functor-functor-Small-Large-Precategory)
+```
+
+### Extensionality of functors between precategories
+
+#### Equality of functors is equality of underlying maps
+
+```agda
+module _
+  {l1 l2 γ : Level} {α : Level → Level} {β : Level → Level → Level}
+  (C : Precategory l1 l2) (D : Large-Precategory α β)
+  (F G : functor-Small-Large-Precategory C D γ)
+  where
+
+  equiv-eq-map-eq-functor-Small-Large-Precategory :
+    ( F ＝ G) ≃
+    ( map-functor-Small-Large-Precategory C D F ＝
+      map-functor-Small-Large-Precategory C D G)
+  equiv-eq-map-eq-functor-Small-Large-Precategory =
+    equiv-eq-map-eq-functor-Precategory
+      C (precategory-Large-Precategory D γ) F G
+
+  eq-map-eq-functor-Small-Large-Precategory :
+    (F ＝ G) →
+    ( map-functor-Small-Large-Precategory C D F ＝
+      map-functor-Small-Large-Precategory C D G)
+  eq-map-eq-functor-Small-Large-Precategory =
+    map-equiv equiv-eq-map-eq-functor-Small-Large-Precategory
+
+  eq-eq-map-functor-Small-Large-Precategory :
+    ( map-functor-Small-Large-Precategory C D F ＝
+      map-functor-Small-Large-Precategory C D G) →
+    ( F ＝ G)
+  eq-eq-map-functor-Small-Large-Precategory =
+    map-inv-equiv equiv-eq-map-eq-functor-Small-Large-Precategory
+
+  is-section-eq-eq-map-functor-Small-Large-Precategory :
+    ( eq-map-eq-functor-Small-Large-Precategory ∘
+      eq-eq-map-functor-Small-Large-Precategory) ~
+    id
+  is-section-eq-eq-map-functor-Small-Large-Precategory =
+    is-section-map-inv-equiv equiv-eq-map-eq-functor-Small-Large-Precategory
+
+  is-retraction-eq-eq-map-functor-Small-Large-Precategory :
+    ( eq-eq-map-functor-Small-Large-Precategory ∘
+      eq-map-eq-functor-Small-Large-Precategory) ~
+    id
+  is-retraction-eq-eq-map-functor-Small-Large-Precategory =
+    is-retraction-map-inv-equiv equiv-eq-map-eq-functor-Small-Large-Precategory
+```
+
+#### Equality of functors is homotopy of underlying maps
+
+```agda
+module _
+  {l1 l2 γ : Level} {α : Level → Level} {β : Level → Level → Level}
+  (C : Precategory l1 l2) (D : Large-Precategory α β)
+  (F G : functor-Small-Large-Precategory C D γ)
+  where
+
+  equiv-htpy-map-eq-functor-Small-Large-Precategory :
+    (F ＝ G) ≃
+    ( htpy-map-Small-Large-Precategory C D
+      ( map-functor-Small-Large-Precategory C D F)
+      ( map-functor-Small-Large-Precategory C D G))
+  equiv-htpy-map-eq-functor-Small-Large-Precategory =
+    equiv-htpy-map-eq-functor-Precategory
+      C (precategory-Large-Precategory D γ) F G
+
+  htpy-map-eq-functor-Small-Large-Precategory :
+    (F ＝ G) →
+    htpy-map-Small-Large-Precategory C D
+      ( map-functor-Small-Large-Precategory C D F)
+      ( map-functor-Small-Large-Precategory C D G)
+  htpy-map-eq-functor-Small-Large-Precategory =
+    map-equiv equiv-htpy-map-eq-functor-Small-Large-Precategory
+
+  eq-htpy-map-functor-Small-Large-Precategory :
+    htpy-map-Small-Large-Precategory C D
+      ( map-functor-Small-Large-Precategory C D F)
+      ( map-functor-Small-Large-Precategory C D G) →
+    ( F ＝ G)
+  eq-htpy-map-functor-Small-Large-Precategory =
+    map-inv-equiv equiv-htpy-map-eq-functor-Small-Large-Precategory
+
+  is-section-eq-htpy-map-functor-Small-Large-Precategory :
+    ( htpy-map-eq-functor-Small-Large-Precategory ∘
+      eq-htpy-map-functor-Small-Large-Precategory) ~
+    id
+  is-section-eq-htpy-map-functor-Small-Large-Precategory =
+    is-section-map-inv-equiv equiv-htpy-map-eq-functor-Small-Large-Precategory
+
+  is-retraction-eq-htpy-map-functor-Small-Large-Precategory :
+    ( eq-htpy-map-functor-Small-Large-Precategory ∘
+      htpy-map-eq-functor-Small-Large-Precategory) ~
+    id
+  is-retraction-eq-htpy-map-functor-Small-Large-Precategory =
+    is-retraction-map-inv-equiv
+      equiv-htpy-map-eq-functor-Small-Large-Precategory
 ```

@@ -8,11 +8,15 @@ module category-theory.maps-small-large-precategories where
 
 ```agda
 open import category-theory.large-precategories
+open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.universe-levels
 ```
@@ -37,15 +41,13 @@ module _
 
   map-Small-Large-Precategory : (γ : Level) → UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
   map-Small-Large-Precategory γ =
-    Σ ( obj-Precategory C → obj-Large-Precategory D γ)
-      ( λ F₀ →
-        { X Y : obj-Precategory C} →
-        hom-Precategory C X Y → hom-Large-Precategory D (F₀ X) (F₀ Y))
+    map-Precategory C (precategory-Large-Precategory D γ)
 
   obj-map-Small-Large-Precategory :
     {γ : Level} → map-Small-Large-Precategory γ →
     obj-Precategory C → obj-Large-Precategory D γ
-  obj-map-Small-Large-Precategory = pr1
+  obj-map-Small-Large-Precategory {γ} =
+    obj-map-Precategory C (precategory-Large-Precategory D γ)
 
   hom-map-Small-Large-Precategory :
     {γ : Level} →
@@ -55,5 +57,54 @@ module _
     hom-Large-Precategory D
       ( obj-map-Small-Large-Precategory F X)
       ( obj-map-Small-Large-Precategory F Y)
-  hom-map-Small-Large-Precategory = pr2
+  hom-map-Small-Large-Precategory {γ} =
+    hom-map-Precategory C (precategory-Large-Precategory D γ)
+```
+
+## Properties
+
+### Characterization of equality of maps between precategories
+
+```agda
+module _
+  {l1 l2 γ : Level} {α : Level → Level} {β : Level → Level → Level}
+  (C : Precategory l1 l2) (D : Large-Precategory α β)
+  where
+
+  htpy-map-Small-Large-Precategory :
+    (f g : map-Small-Large-Precategory C D γ) → UU (l1 ⊔ l2 ⊔ α γ ⊔ β γ γ)
+  htpy-map-Small-Large-Precategory =
+    htpy-map-Precategory C (precategory-Large-Precategory D γ)
+
+  htpy-eq-map-Small-Large-Precategory :
+    (f g : map-Small-Large-Precategory C D γ) →
+    (f ＝ g) → htpy-map-Small-Large-Precategory f g
+  htpy-eq-map-Small-Large-Precategory =
+    htpy-eq-map-Precategory C (precategory-Large-Precategory D γ)
+
+  is-contr-total-htpy-map-Small-Large-Precategory :
+    (f : map-Small-Large-Precategory C D γ) →
+    is-contr
+      ( Σ ( map-Small-Large-Precategory C D γ)
+          ( htpy-map-Small-Large-Precategory f))
+  is-contr-total-htpy-map-Small-Large-Precategory =
+    is-contr-total-htpy-map-Precategory C (precategory-Large-Precategory D γ)
+
+  is-equiv-htpy-eq-map-Small-Large-Precategory :
+    (f g : map-Small-Large-Precategory C D γ) →
+    is-equiv (htpy-eq-map-Small-Large-Precategory f g)
+  is-equiv-htpy-eq-map-Small-Large-Precategory =
+    is-equiv-htpy-eq-map-Precategory C (precategory-Large-Precategory D γ)
+
+  equiv-htpy-eq-map-Small-Large-Precategory :
+    (f g : map-Small-Large-Precategory C D γ) →
+    (f ＝ g) ≃ htpy-map-Small-Large-Precategory f g
+  equiv-htpy-eq-map-Small-Large-Precategory =
+    equiv-htpy-eq-map-Precategory C (precategory-Large-Precategory D γ)
+
+  eq-htpy-map-Small-Large-Precategory :
+    (f g : map-Small-Large-Precategory C D γ) →
+    htpy-map-Small-Large-Precategory f g → (f ＝ g)
+  eq-htpy-map-Small-Large-Precategory =
+    eq-htpy-map-Precategory C (precategory-Large-Precategory D γ)
 ```
