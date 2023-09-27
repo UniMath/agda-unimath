@@ -94,6 +94,7 @@ open import category-theory.one-object-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.precategories public
 open import category-theory.precategory-of-functors public
+open import category-theory.precategory-of-functors-small-large-precategories public
 open import category-theory.precategory-of-maps-precategories public
 open import category-theory.precategory-of-maps-small-large-precategories public
 open import category-theory.pregroupoids public
