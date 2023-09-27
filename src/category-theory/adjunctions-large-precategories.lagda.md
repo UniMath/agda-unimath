@@ -9,7 +9,7 @@ module category-theory.adjunctions-large-precategories where
 ```agda
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-large-precategories
+open import category-theory.natural-transformations-functors-large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-maps

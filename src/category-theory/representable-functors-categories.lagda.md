@@ -9,13 +9,10 @@ module category-theory.representable-functors-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-categories
-open import category-theory.natural-transformations-categories
+open import category-theory.natural-transformations-functors-categories
 open import category-theory.representable-functors-precategories
 
 open import foundation.category-of-sets
-open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.universe-levels
 ```
 
@@ -48,12 +45,12 @@ representable-functor-Category C c =
 ## Natural transformations between representable functors
 
 A morphism `f : hom b c` in a category `C` defines a
-[natural transformation](category-theory.natural-transformations-categories.md)
+[natural transformation](category-theory.natural-transformations-functors-categories.md)
 from the functor represented by `c` to the functor represented by `b`. Its
 components `hom c x → hom b x` are defined by precomposition with `f`.
 
 ```agda
-rep-natural-transformation-Category :
+representable-natural-transformation-Category :
   {l1 l2 : Level} (C : Category l1 l2) (b c : obj-Category C)
   (f : hom-Category C b c) →
   natural-transformation-Category
@@ -61,6 +58,6 @@ rep-natural-transformation-Category :
     ( Set-Category l2)
     ( representable-functor-Category C c)
     ( representable-functor-Category C b)
-rep-natural-transformation-Category C =
-  rep-natural-transformation-Precategory (precategory-Category C)
+representable-natural-transformation-Category C =
+  representable-natural-transformation-Precategory (precategory-Category C)
 ```

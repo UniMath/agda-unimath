@@ -56,7 +56,7 @@ module _
   is-emb-map-emb f = pr2 f
 
   equiv-ap-emb :
-    (e : A ↪ B) {x y : A} → (x ＝ y) ≃ ((map-emb e x) ＝ (map-emb e y))
+    (e : A ↪ B) {x y : A} → (x ＝ y) ≃ (map-emb e x ＝ map-emb e y)
   pr1 (equiv-ap-emb e {x} {y}) = ap (map-emb e)
   pr2 (equiv-ap-emb e {x} {y}) = is-emb-map-emb e x y
 ```

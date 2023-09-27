@@ -166,15 +166,15 @@ module _
   iso-eq-Large-Category =
     iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y
 
-  compute-iso-eq-Large-Category :
-    iso-eq-Category (category-Large-Category C l1) X Y ~
-    iso-eq-Large-Category
-  compute-iso-eq-Large-Category refl = refl
-
   eq-iso-Large-Category :
     iso-Large-Category C X Y → X ＝ Y
   eq-iso-Large-Category =
     map-inv-is-equiv (is-large-category-Large-Category C X Y)
+
+  compute-iso-eq-Large-Category :
+    iso-eq-Category (category-Large-Category C l1) X Y ~
+    iso-eq-Large-Category
+  compute-iso-eq-Large-Category refl = refl
 ```
 
 ## Properties

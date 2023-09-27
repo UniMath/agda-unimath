@@ -9,7 +9,7 @@ module category-theory.homotopies-natural-transformations-large-precategories wh
 ```agda
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-large-precategories
+open import category-theory.natural-transformations-functors-large-precategories
 
 open import foundation.homotopies
 open import foundation.identity-types
@@ -21,7 +21,7 @@ open import foundation.universe-levels
 ## Idea
 
 Two
-[natural transformations](category-theory.natural-transformations-large-precategories.md)
+[natural transformations](category-theory.natural-transformations-functors-large-precategories.md)
 `α β : F ⇒ G` are **homotopic** if for every object `x` there is an
 [identification](foundation-core.identity-types.md) `α x ＝ β x`.
 

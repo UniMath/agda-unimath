@@ -648,34 +648,34 @@ module _
     eq-iso-Category (iso-eq-Category C x y p) ＝ p
   is-retraction-eq-iso-Category {x} {y} =
     is-retraction-map-inv-equiv (extensionality-obj-Category x y)
+```
+
+### Functoriality of `eq-iso`
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
 
   preserves-comp-eq-iso-Category :
     { x y z : obj-Category C}
     ( g : iso-Category C y z)
     ( f : iso-Category C x y) →
-    ( eq-iso-Category (comp-iso-Category C g f)) ＝
-    ( eq-iso-Category f ∙ eq-iso-Category g)
-  preserves-comp-eq-iso-Category {x} {y} {z} g f =
-    equational-reasoning
-      eq-iso-Category (comp-iso-Category C g f)
-      ＝ eq-iso-Category
-          ( comp-iso-Category C
-            ( iso-eq-Category C y z (eq-iso-Category g))
-            ( iso-eq-Category C x y (eq-iso-Category f)))
-        by
-          ap eq-iso-Category
-            ( ap-binary
-              ( comp-iso-Category C)
-              ( inv (is-section-eq-iso-Category g))
-              ( inv (is-section-eq-iso-Category f)))
-      ＝ eq-iso-Category
-          ( iso-eq-Category C x z (eq-iso-Category f ∙ eq-iso-Category g))
-        by
-          ap eq-iso-Category
-            ( inv
-              ( preserves-concat-iso-eq-Category C
-                ( eq-iso-Category f)
-                ( eq-iso-Category g)))
-      ＝ eq-iso-Category f ∙ eq-iso-Category g
-        by is-retraction-eq-iso-Category (eq-iso-Category f ∙ eq-iso-Category g)
+    ( eq-iso-Category C (comp-iso-Category C g f)) ＝
+    ( eq-iso-Category C f ∙ eq-iso-Category C g)
+  preserves-comp-eq-iso-Category g f =
+    ( ap
+      ( eq-iso-Category C)
+      ( ap-binary
+        ( comp-iso-Category C)
+        ( inv (is-section-eq-iso-Category C g))
+        ( inv (is-section-eq-iso-Category C f)))) ∙
+    ( ap
+      ( eq-iso-Category C)
+      ( inv
+        ( preserves-concat-iso-eq-Category C
+          ( eq-iso-Category C f)
+          ( eq-iso-Category C g)))) ∙
+    ( is-retraction-eq-iso-Category C
+      ( eq-iso-Category C f ∙ eq-iso-Category C g))
 ```
