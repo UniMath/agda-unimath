@@ -8,7 +8,7 @@ module category-theory.representable-functors-precategories where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 
 open import foundation.category-of-sets
@@ -53,7 +53,7 @@ pr2 (pr2 (pr2 (representable-functor-Precategory C c))) _ =
 ## Natural transformations between representable functors
 
 A morphism `f : hom b c` in a precategory `C` defines a
-[natural transformation](category-theory.natural-transformations-precategories.md)
+[natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from the functor represented by `c` to the functor represented by `b`. Its
 components `hom c x → hom b x` are defined by precomposition with `f`.
 

@@ -9,8 +9,8 @@ module category-theory.precategory-of-functors where
 ```agda
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
-open import category-theory.natural-isomorphisms-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-isomorphisms-functors-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -29,7 +29,7 @@ open import foundation.universe-levels
 
 [Functors](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) and
-[natural transformations](category-theory.natural-transformations-precategories.md)
+[natural transformations](category-theory.natural-transformations-functors-precategories.md)
 between them introduce a new precategory whose identity map and composition
 structure are inherited pointwise from the codomain precategory. This is called
 the **precategory of functors**.

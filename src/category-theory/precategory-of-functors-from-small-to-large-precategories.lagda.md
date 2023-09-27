@@ -9,7 +9,7 @@ module category-theory.precategory-of-functors-from-small-to-large-precategories
 ```agda
 open import category-theory.functors-from-small-to-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-from-small-to-large-precategories
+open import category-theory.natural-transformations-functors-from-small-to-large-precategories
 open import category-theory.precategories
 
 open import foundation.identity-types
@@ -23,7 +23,7 @@ open import foundation.universe-levels
 [Functors](category-theory.functors-from-small-to-large-precategories.md) from a
 small [precategory](category-theory.precategories.md) `C` to a
 [large precategory](category-theory.large-precategories.md) `D` and
-[natural transformations](category-theory.natural-transformations-precategories.md)
+[natural transformations](category-theory.natural-transformations-functors-precategories.md)
 between them form a large precategory whose identity map and composition
 structure are inherited pointwise from the codomain precategory. This is called
 the **precategory of functors from small to large precategories**.

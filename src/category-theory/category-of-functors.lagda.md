@@ -12,8 +12,8 @@ open import category-theory.category-of-maps-categories
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-categories
-open import category-theory.natural-isomorphisms-categories
-open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-isomorphisms-functors-categories
+open import category-theory.natural-isomorphisms-functors-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors
 
@@ -29,7 +29,7 @@ open import foundation.universe-levels
 
 [Functors](category-theory.functors-categories.md) between
 [categories](category-theory.categories.md) and
-[natural transformations](category-theory.natural-transformations-categories.md)
+[natural transformations](category-theory.natural-transformations-functors-categories.md)
 between them assemble to a new category whose identity functor and composition
 structure are inherited pointwise from the codomain category. This is called the
 **category of functors**.

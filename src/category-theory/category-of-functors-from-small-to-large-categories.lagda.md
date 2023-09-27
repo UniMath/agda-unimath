@@ -15,8 +15,8 @@ open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.natural-isomorphisms-categories
-open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-isomorphisms-functors-categories
+open import category-theory.natural-isomorphisms-functors-precategories
 open import category-theory.precategories
 open import category-theory.precategory-of-functors-from-small-to-large-precategories
 
@@ -32,7 +32,7 @@ open import foundation.universe-levels
 [Functors](category-theory.functors-from-small-to-large-categories.md) from
 small [categories](category-theory.categories.md) to
 [large categories](category-theory.large-categories.md) and
-[natural transformations](category-theory.natural-transformations-functors-from-small-to-large-precategories.md)
+[natural transformations](category-theory.natural-transformations-functors-functors-from-small-to-large-precategories.md)
 between them form a large category whose identity map and composition structure
 are inherited pointwise from the codomain category. This is called the
 **category of functors from small to large categories**.

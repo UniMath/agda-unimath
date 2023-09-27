@@ -1,7 +1,7 @@
 # Natural transformations between functors between large precategories
 
 ```agda
-module category-theory.natural-transformations-large-precategories where
+module category-theory.natural-transformations-functors-large-precategories where
 ```
 
 <details><summary>Imports</summary>

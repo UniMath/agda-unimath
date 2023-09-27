@@ -1,7 +1,7 @@
 # Natural transformations between functors between precategories
 
 ```agda
-module category-theory.natural-transformations-precategories where
+module category-theory.natural-transformations-functors-precategories where
 ```
 
 <details><summary>Imports</summary>

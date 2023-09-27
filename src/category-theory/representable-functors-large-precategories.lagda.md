@@ -9,7 +9,7 @@ module category-theory.representable-functors-large-precategories where
 ```agda
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-large-precategories
+open import category-theory.natural-transformations-functors-large-precategories
 
 open import foundation.category-of-sets
 open import foundation.function-extensionality
@@ -57,7 +57,7 @@ preserves-id-functor-Large-Precategory
 ## Natural transformations between representable functors
 
 A morphism `f : hom b c` in a large precategory `C` defines a
-[natural transformation](category-theory.natural-transformations-large-precategories.md)
+[natural transformation](category-theory.natural-transformations-functors-large-precategories.md)
 from the functor represented by `c` to the functor represented by `b`. Its
 components `hom c x → hom b x` are defined by precomposition with `f`.
 
