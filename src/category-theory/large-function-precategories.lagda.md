@@ -196,4 +196,3 @@ module _
   equiv-iso-fiberwise-iso-Large-Function-Precategory =
     equiv-iso-fiberwise-iso-Π-Large-Precategory I (λ _ → C)
 ```
-
