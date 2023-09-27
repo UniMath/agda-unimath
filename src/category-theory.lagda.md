@@ -89,6 +89,7 @@ open import category-theory.natural-transformations-maps-categories public
 open import category-theory.natural-transformations-maps-precategories public
 open import category-theory.natural-transformations-maps-small-large-precategories public
 open import category-theory.natural-transformations-precategories public
+open import category-theory.natural-transformations-small-large-precategories public
 open import category-theory.one-object-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.precategories public

@@ -54,7 +54,7 @@ module _
     (h : natural-transformation-Precategory C D H I)
     (g : natural-transformation-Precategory C D G H)
     (f : natural-transformation-Precategory C D F G) →
-    (comp-natural-transformation-Precategory C D F G I
+    ( comp-natural-transformation-Precategory C D F G I
       ( comp-natural-transformation-Precategory C D G H I h g)
       ( f)) ＝
     ( comp-natural-transformation-Precategory C D F H I
@@ -82,18 +82,18 @@ module _
   left-unit-law-comp-hom-functor-precategory-Precategory :
     {F G : functor-Precategory C D}
     (α : natural-transformation-Precategory C D F G) →
-    ( comp-natural-transformation-Precategory C D F G G
-      ( id-natural-transformation-Precategory C D G) α) ＝
-    ( α)
+    comp-natural-transformation-Precategory C D F G G
+      ( id-natural-transformation-Precategory C D G) α ＝
+    α
   left-unit-law-comp-hom-functor-precategory-Precategory {F} {G} =
     left-unit-law-comp-natural-transformation-Precategory C D F G
 
   right-unit-law-comp-hom-functor-precategory-Precategory :
     {F G : functor-Precategory C D}
     (α : natural-transformation-Precategory C D F G) →
-    ( comp-natural-transformation-Precategory C D F F G
-        α (id-natural-transformation-Precategory C D F)) ＝
-    ( α)
+    comp-natural-transformation-Precategory C D F F G
+        α (id-natural-transformation-Precategory C D F) ＝
+    α
   right-unit-law-comp-hom-functor-precategory-Precategory {F} {G} =
     right-unit-law-comp-natural-transformation-Precategory C D F G
 
