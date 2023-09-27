@@ -239,3 +239,7 @@ module _
     is-retraction-map-inv-equiv
       equiv-htpy-eq-functor-Small-Large-Precategory
 ```
+
+## See also
+
+- [The precategory of functors and natural transformations from small to large precategories](category-theory.precategory-of-functors-from-small-to-large-precategories.md)

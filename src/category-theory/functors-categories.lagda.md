@@ -351,3 +351,7 @@ module _
       ( precategory-Category D)
       ( F)
 ```
+
+## See also
+
+- [The category of functors and natural transformations between categories](category-theory.category-of-functors.md)

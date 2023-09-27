@@ -127,3 +127,4 @@ module _
 ## See also
 
 - [Functors from small to large categories](category-theory.functors-from-small-to-large-categories.md)
+- [The category of maps and natural transformations from small to large categories](category-theory.category-of-maps-from-small-to-large-categories.md)

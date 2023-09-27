@@ -109,3 +109,4 @@ module _
 ## See also
 
 - [Functors from small to large precategories](category-theory.functors-from-small-to-large-precategories.md)
+- [The precategory of maps and natural transformations from small to large precategories](category-theory.precategory-of-maps-from-small-to-large-precategories.md)

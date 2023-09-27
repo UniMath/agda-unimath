@@ -209,3 +209,4 @@ module _
 ## See also
 
 - [Functors between precategories](category-theory.functors-precategories.md)
+- [The precategory of maps and natural transformations between precategories](category-theory.precategory-of-maps-precategories.md)

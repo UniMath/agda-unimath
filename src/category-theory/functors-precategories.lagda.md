@@ -392,3 +392,7 @@ module _
       ( hom-iso-Precategory C f)
       ( is-iso-iso-Precategory C f)
 ```
+
+## See also
+
+- [The precategory of functors and natural transformations between precategories](category-theory.precategory-of-functors.md)

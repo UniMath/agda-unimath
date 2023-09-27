@@ -267,3 +267,7 @@ module _
     is-retraction-map-inv-equiv
       equiv-htpy-eq-functor-Small-Large-Category
 ```
+
+## See also
+
+- [The category of functors and natural transformations from small to large categories](category-theory.category-of-functors-from-small-to-large-categories.md)

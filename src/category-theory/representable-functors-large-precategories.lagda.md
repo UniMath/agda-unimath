@@ -24,7 +24,7 @@ open import foundation.universe-levels
 Given a [large precategory](category-theory.large-precategories.md) `C` and an
 object `c`, there is a
 [functor](category-theory.functors-large-precategories.md) from `C` to the
-[precategory of Sets](foundation.category-of-sets.md) **represented** by `c`
+[precategory of sets](foundation.category-of-sets.md) **represented** by `c`
 that:
 
 - sends an object `x` of `C` to the [set](foundation-core.sets.md) `hom c x` and
