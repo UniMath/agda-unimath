@@ -7,12 +7,12 @@ module category-theory.presheaf-categories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.category-of-functors-small-large-categories
+open import category-theory.category-of-functors-from-small-to-large-categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
-open import category-theory.precategory-of-functors-small-large-precategories
+open import category-theory.precategory-of-functors-from-small-to-large-precategories
 
 open import foundation.category-of-sets
 open import foundation.universe-levels
@@ -25,9 +25,9 @@ open import foundation.universe-levels
 Given any [precategory](category-theory.precategories.md) `C`, we can form its
 **presheaf category** as the
 [large category](category-theory.large-categories.md) of
-[functors](category-theory.functors-small-large-precategories.md) from the
-[opposite precategory](category-theory.opposite-precategories.md) of `C`, into
-the [large category of sets](foundation.category-of-sets.md)
+[functors](category-theory.functors-from-small-to-large-precategories.md) from
+the [opposite precategory](category-theory.opposite-precategories.md) of `C`,
+into the [large category of sets](foundation.category-of-sets.md)
 
 ```text
   Cᵒᵖ → Set.

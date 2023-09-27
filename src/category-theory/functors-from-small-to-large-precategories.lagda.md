@@ -1,7 +1,7 @@
 # Functors from small to large precategories
 
 ```agda
-module category-theory.functors-small-large-precategories where
+module category-theory.functors-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,7 @@ module category-theory.functors-small-large-precategories where
 ```agda
 open import category-theory.functors-precategories
 open import category-theory.large-precategories
-open import category-theory.maps-small-large-precategories
+open import category-theory.maps-from-small-to-large-precategories
 open import category-theory.precategories
 
 open import foundation.cartesian-product-types

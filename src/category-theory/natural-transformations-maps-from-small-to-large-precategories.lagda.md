@@ -1,7 +1,7 @@
 # Natural transformations between maps from small to large precategories
 
 ```agda
-module category-theory.natural-transformations-maps-small-large-precategories where
+module category-theory.natural-transformations-maps-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,7 @@ module category-theory.natural-transformations-maps-small-large-precategories wh
 ```agda
 open import category-theory.commuting-squares-of-morphisms-in-large-precategories
 open import category-theory.large-precategories
-open import category-theory.maps-small-large-precategories
+open import category-theory.maps-from-small-to-large-precategories
 open import category-theory.precategories
 
 open import foundation.action-on-identifications-functions
@@ -33,7 +33,7 @@ open import foundation.universe-levels
 Given a small [precategory](category-theory.precategories.md) `C` and a
 [large precategory](category-theory.large-precategories.md) `D`, a **natural
 transformation** from a
-[map of precategories](category-theory.maps-small-large-precategories.md)
+[map of precategories](category-theory.maps-from-small-to-large-precategories.md)
 `F : C → D` to `G : C → D` consists of :
 
 - a family of morphisms `a : (x : C) → hom (F x) (G x)` such that the following

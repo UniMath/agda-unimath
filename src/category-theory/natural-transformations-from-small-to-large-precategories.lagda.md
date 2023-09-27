@@ -1,15 +1,15 @@
 # Natural transformations between functors from small to large precategories
 
 ```agda
-module category-theory.natural-transformations-small-large-precategories where
+module category-theory.natural-transformations-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-small-large-precategories
+open import category-theory.functors-from-small-to-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-maps-small-large-precategories
+open import category-theory.natural-transformations-maps-from-small-to-large-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
@@ -29,8 +29,8 @@ open import foundation.universe-levels
 Given a small [precategory](category-theory.precategories.md) `C` and a
 [large precategory](category-theory.large-precategories.md) `D`, a **natural
 transformation** from a
-[functor](category-theory.functors-small-large-precategories.md) `F : C → D` to
-`G : C → D` consists of :
+[functor](category-theory.functors-from-small-to-large-precategories.md)
+`F : C → D` to `G : C → D` consists of :
 
 - a family of morphisms `a : (x : C) → hom (F x) (G x)` such that the following
   identity holds:

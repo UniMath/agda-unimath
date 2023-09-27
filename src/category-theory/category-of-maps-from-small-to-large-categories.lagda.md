@@ -1,7 +1,7 @@
 # The category of maps and natural transformations from small to large categories
 
 ```agda
-module category-theory.category-of-maps-small-large-categories where
+module category-theory.category-of-maps-from-small-to-large-categories where
 ```
 
 <details><summary>Imports</summary>
@@ -13,12 +13,12 @@ open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
-open import category-theory.maps-small-large-categories
-open import category-theory.maps-small-large-precategories
+open import category-theory.maps-from-small-to-large-categories
+open import category-theory.maps-from-small-to-large-precategories
 open import category-theory.natural-isomorphisms-maps-categories
 open import category-theory.natural-isomorphisms-maps-precategories
 open import category-theory.precategories
-open import category-theory.precategory-of-maps-small-large-precategories
+open import category-theory.precategory-of-maps-from-small-to-large-precategories
 
 open import foundation.equivalences
 open import foundation.identity-types
@@ -29,17 +29,17 @@ open import foundation.universe-levels
 
 ## Idea
 
-[Maps](category-theory.maps-small-large-categories.md) from small
+[Maps](category-theory.maps-from-small-to-large-categories.md) from small
 [categories](category-theory.categories.md) to
 [large categories](category-theory.large-categories.md) and
-[natural transformations](category-theory.natural-transformations-maps-small-large-precategories.md)
+[natural transformations](category-theory.natural-transformations-maps-from-small-to-large-precategories.md)
 between them form a large category whose identity map and composition structure
 are inherited pointwise from the codomain category. This is called the
 **category of maps from small to large categories**.
 
 ## Lemmas
 
-### Extensionality of maps from small to large precategories when the codomain is a large category
+### Extensionality of maps from small precategories to large categories
 
 ```agda
 module _
@@ -49,14 +49,14 @@ module _
   (is-large-category-D : is-large-category-Large-Precategory D)
   where
 
-  equiv-natural-isomorphism-htpy-map-is-category-Small-Large-Precategory :
+  equiv-natural-isomorphism-htpy-map-is-large-category-Small-Large-Precategory :
     {γ : Level}
     (F G : map-Small-Large-Precategory C D γ) →
     ( htpy-map-Small-Large-Precategory C D F G) ≃
     ( natural-isomorphism-map-Precategory C (precategory-Large-Precategory D γ)
       ( F)
       ( G))
-  equiv-natural-isomorphism-htpy-map-is-category-Small-Large-Precategory
+  equiv-natural-isomorphism-htpy-map-is-large-category-Small-Large-Precategory
     { γ} F G =
     equiv-natural-isomorphism-htpy-map-is-category-Precategory
       ( C)
@@ -73,7 +73,7 @@ module _
       ( F)
       ( G))
   extensionality-map-is-category-Small-Large-Precategory F G =
-    ( equiv-natural-isomorphism-htpy-map-is-category-Small-Large-Precategory
+    ( equiv-natural-isomorphism-htpy-map-is-large-category-Small-Large-Precategory
       ( F)
       ( G)) ∘e
     ( equiv-htpy-eq-map-Small-Large-Precategory C D F G)

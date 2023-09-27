@@ -1,15 +1,15 @@
 # The precategory of maps and natural transformations from a small to a large precategory
 
 ```agda
-module category-theory.precategory-of-maps-small-large-precategories where
+module category-theory.precategory-of-maps-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import category-theory.large-precategories
-open import category-theory.maps-small-large-precategories
-open import category-theory.natural-transformations-maps-small-large-precategories
+open import category-theory.maps-from-small-to-large-precategories
+open import category-theory.natural-transformations-maps-from-small-to-large-precategories
 open import category-theory.precategories
 
 open import foundation.identity-types
@@ -20,7 +20,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-[Maps](category-theory.maps-small-large-precategories.md) from
+[Maps](category-theory.maps-from-small-to-large-precategories.md) from
 [(small) precategories](category-theory.precategories.md) to
 [large precategories](category-theory.large-precategories.md) and
 [natural transformations](category-theory.natural-transformations-maps-precategories.md)

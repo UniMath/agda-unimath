@@ -1,15 +1,15 @@
 # The precategory of functors and natural transformations from small to large precategories
 
 ```agda
-module category-theory.precategory-of-functors-small-large-precategories where
+module category-theory.precategory-of-functors-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-small-large-precategories
+open import category-theory.functors-from-small-to-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-transformations-small-large-precategories
+open import category-theory.natural-transformations-from-small-to-large-precategories
 open import category-theory.precategories
 
 open import foundation.identity-types
@@ -20,8 +20,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-[Functors](category-theory.functors-small-large-precategories.md) from a small
-[precategory](category-theory.precategories.md) `C` to a
+[Functors](category-theory.functors-from-small-to-large-precategories.md) from a
+small [precategory](category-theory.precategories.md) `C` to a
 [large precategory](category-theory.large-precategories.md) `D` and
 [natural transformations](category-theory.natural-transformations-precategories.md)
 between them form a large precategory whose identity map and composition

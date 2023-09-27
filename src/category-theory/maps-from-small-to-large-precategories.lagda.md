@@ -1,7 +1,7 @@
 # Maps from small to large precategories
 
 ```agda
-module category-theory.maps-small-large-precategories where
+module category-theory.maps-from-small-to-large-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -108,4 +108,4 @@ module _
 
 ## See also
 
-- [Functors from small to large precategories](category-theory.functors-small-large-precategories.md)
+- [Functors from small to large precategories](category-theory.functors-from-small-to-large-precategories.md)

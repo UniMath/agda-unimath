@@ -1,7 +1,7 @@
 # Maps from small to large categories
 
 ```agda
-module category-theory.maps-small-large-categories where
+module category-theory.maps-from-small-to-large-categories where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,7 @@ module category-theory.maps-small-large-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.large-categories
-open import category-theory.maps-small-large-precategories
+open import category-theory.maps-from-small-to-large-precategories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
@@ -126,4 +126,4 @@ module _
 
 ## See also
 
-- [Functors from small to large categories](category-theory.functors-small-large-categories.md)
+- [Functors from small to large categories](category-theory.functors-from-small-to-large-categories.md)
