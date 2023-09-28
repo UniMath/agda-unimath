@@ -134,4 +134,5 @@ module _
 
 ## See also
 
-- An extension of the fundamental theorem of identity types is formalized in [`foundation.regensburg-extension-fundamental-theorem-of-identity-types`](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md).
+- An extension of the fundamental theorem of identity types is formalized in
+  [`foundation.regensburg-extension-fundamental-theorem-of-identity-types`](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md).
