@@ -12,7 +12,6 @@ open import foundation-core.path-split-maps public
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.telescopes
 open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
