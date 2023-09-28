@@ -15,6 +15,7 @@ open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -81,20 +82,10 @@ integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
 
-one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod : (n : ℕ) →
-  (add-ℤ-Mod n (one-ℤ-Mod n) (neg-one-ℤ-Mod n)) ＝ (zero-ℤ-Mod n)
-one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod zero-ℕ = refl
-one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod (succ-ℕ n) = {!   !}
-
-is-equal-neg-Ring-ℤ-Mod-one-neg-one-ℤ-Mod : (n : ℕ) →
-  ( neg-Ring (ℤ-Mod-Ring n) (one-ℤ-Mod n)) ＝ (neg-one-ℤ-Mod n)
-is-equal-neg-Ring-ℤ-Mod-one-neg-one-ℤ-Mod n =
-  eq-is-unit-left-div-Ring
-    ( ℤ-Mod-Ring n)
-    ( ( ap
-        ( λ x → add-ℤ-Mod n x (neg-one-ℤ-Mod n))
-        ( neg-neg-Ring (ℤ-Mod-Ring n) (one-ℤ-Mod n))) ∙
-      ( one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod n))
+is-neg-one-neg-one-ℤ-Mod :
+  (n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
+is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
+is-neg-one-neg-one-ℤ-Mod (succ-ℕ n) = is-neg-one-neg-one-Fin n
 
 compute-integer-multiple-one-ℤ-Mod :
   ( n : ℕ) →
@@ -105,16 +96,22 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl zero-ℕ) =
   ( integer-multiple-neg-one-Ring
     ( ℤ-Mod-Ring (succ-ℕ n))
     ( one-ℤ-Mod (succ-ℕ n))) ∙
-  ( is-equal-neg-Ring-ℤ-Mod-one-neg-one-ℤ-Mod (succ-ℕ n)) ∙
+  ( is-neg-one-neg-one-ℤ-Mod (succ-ℕ n)) ∙
   ( inv (mod-neg-one-ℤ (succ-ℕ n)))
-compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) = {!   !}
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) =
+  {!   !}
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
   ( integer-multiple-one-Ring
     ( ℤ-Mod-Ring (succ-ℕ n))
     ( one-ℤ-Mod (succ-ℕ n))) ∙
   ( inv (mod-one-ℤ (succ-ℕ n)))
-compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr (succ-ℕ x))) = {!  !}
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr (succ-ℕ x))) =
+  {!   !} ∙
+  ( ap
+    ( succ-ℤ-Mod (succ-ℕ n))
+    ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr x)))) ∙
+  (inv (preserves-successor-mod-ℤ (succ-ℕ n) (inr (inr x))))
 
 is-surjective-hom-element-one-ℤ-Mod-Ring :
   ( n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
@@ -124,7 +121,7 @@ is-surjective-hom-element-one-ℤ-Mod-Ring n =
     ( is-surjective-mod-ℤ n)
 
 is-generating-element-one-ℤ-Mod-Ring :
-  (n : ℕ) → is-generating-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
+  ( n : ℕ) → is-generating-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
 is-generating-element-one-ℤ-Mod-Ring n =
   is-generating-element-is-surjective-hom-element-Group
     ( ℤ-Mod-Group n)
@@ -132,7 +129,7 @@ is-generating-element-one-ℤ-Mod-Ring n =
     ( is-surjective-hom-element-one-ℤ-Mod-Ring n)
 
 is-cyclic-ℤ-Mod-Ring :
-  (n : ℕ) → is-cyclic-Ring (ℤ-Mod-Ring n)
+  ( n : ℕ) → is-cyclic-Ring (ℤ-Mod-Ring n)
 is-cyclic-ℤ-Mod-Ring n =
   intro-∃
     ( one-ℤ-Mod n)
