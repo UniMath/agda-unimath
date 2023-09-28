@@ -45,9 +45,12 @@ asserts that for any [pointed](structured-types.pointed-types.md)
 `B` over `A`, the following are
 [logically equivalent](foundation.logical-equivalences.md):
 
-1. Every family of maps `f : (x : A) → (* ＝ x) → B x` is a family of `P`-maps.
+1. Every family of maps `f : (x : A) → (* ＝ x) → B x` is a family of `P`-maps,
+   i.e., a family of maps with [fibers](foundation-core.fibers-of-maps.md) in
+   `P`.
 2. The [total space](foundation.dependent-pair-types.md) `Σ A B` is
-   [`P`-separated](foundation.separated-types.md).
+   [`P`-separated](foundation.separated-types.md), i.e., its
+   [identity types](foundation-core.identity-types.md) are in `P`.
 
 In other words, the extended fundamental theorem of
 [identity types](foundation-core.identity-types.md) asserts that for any
