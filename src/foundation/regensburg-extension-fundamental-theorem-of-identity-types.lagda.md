@@ -1,7 +1,9 @@
 # The Regensburg extension of the fundamental theorem of identity types
 
 ```agda
-module foundation.extended-fundamental-theorem-of-identity-types where
+module
+  foundation.regensburg-extension-fundamental-theorem-of-identity-types
+  where
 ```
 
 <details><summary>Imports</summary>

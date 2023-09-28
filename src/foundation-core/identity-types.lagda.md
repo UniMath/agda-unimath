@@ -65,6 +65,7 @@ identifications in arbitrary types.
 | The identity type (foundation-core)               | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
 | Large identity types                              | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
 | Path algebra                                      | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
+| The Regensburg extension of the fundamental theorem of identity types | [`foundation.regensburg-extension-fundamental-theorem-of-identity-types`](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md) |
 | Symmetric identity types                          | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
 | Torsorial type families                           | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
 | Transport along higher identifications            | [`foundation.transport-along-higher-identifications`](foundation.transport-along-higher-identifications.md)               |
