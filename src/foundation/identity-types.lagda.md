@@ -11,16 +11,15 @@ open import foundation-core.identity-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
-open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.equivalence-extensionality
 open import foundation.function-extensionality
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
+open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
 open import foundation-core.homotopies
-open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -38,29 +37,30 @@ is the least reflexive relation.
 The following table lists files that are about identity types and operations on
 identifications in arbitrary types.
 
-| Concept                                           | File                                                                                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Action on identifications of binary functions     | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)       |
-| Action on identifications of dependent functions  | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md) |
-| Action on identifications of functions            | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                     |
-| Binary transport                                  | [`foundation.binary-transport`](foundation.binary-transport.md)                                                           |
-| Commuting hexagons of identifications             | [`foundation.commuting-hexagons-of-identifications`](foundation.commuting-hexagons-of-identifications.md)                 |
-| Commuting squares of identifications              | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                   |
-| Dependent identifications (foundation)            | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                         |
-| Dependent identifications (foundation-core)       | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                               |
-| The fundamental theorem of identity types         | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                 |
-| Identity systems                                  | [`foundation.identity-systems`](foundation.identity-systems.md)                                                           |
-| The identity type (foundation)                    | [`foundation.identity-types`](foundation.identity-types.md)                                                               |
-| The identity type (foundation-core)               | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                     |
-| Large identity types                              | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                   |
-| Path algebra                                      | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                   |
-| Symmetric identity types                          | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                           |
-| Torsorial type families                           | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                             |
-| Transport along higher identifications            | [`foundation.transport-along-higher-identifications`](foundation.transport-along-higher-identifications.md)               |
-| Transport along identifications (foundation)      | [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md)                             |
-| Transport along identifications (foundation-core) | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                   |
-| The universal property of identity systems        | [`foundation.universal-property-identity-systems`](foundation.universal-property-identity-systems.md)                     |
-| The universal property of identity types          | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                         |
+| Concept                                                               | File                                                                                                                                                |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Action on identifications of binary functions                         | [`foundation.action-on-identifications-binary-functions`](foundation.action-on-identifications-binary-functions.md)                                 |
+| Action on identifications of dependent functions                      | [`foundation.action-on-identifications-dependent-functions`](foundation.action-on-identifications-dependent-functions.md)                           |
+| Action on identifications of functions                                | [`foundation.action-on-identifications-functions`](foundation.action-on-identifications-functions.md)                                               |
+| Binary transport                                                      | [`foundation.binary-transport`](foundation.binary-transport.md)                                                                                     |
+| Commuting hexagons of identifications                                 | [`foundation.commuting-hexagons-of-identifications`](foundation.commuting-hexagons-of-identifications.md)                                           |
+| Commuting squares of identifications                                  | [`foundation.commuting-squares-of-identifications`](foundation.commuting-squares-of-identifications.md)                                             |
+| Dependent identifications (foundation)                                | [`foundation.dependent-identifications`](foundation.dependent-identifications.md)                                                                   |
+| Dependent identifications (foundation-core)                           | [`foundation-core.dependent-identifications`](foundation-core.dependent-identifications.md)                                                         |
+| The fundamental theorem of identity types                             | [`foundation.fundamental-theorem-of-identity-types`](foundation.fundamental-theorem-of-identity-types.md)                                           |
+| Identity systems                                                      | [`foundation.identity-systems`](foundation.identity-systems.md)                                                                                     |
+| The identity type (foundation)                                        | [`foundation.identity-types`](foundation.identity-types.md)                                                                                         |
+| The identity type (foundation-core)                                   | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                                               |
+| Large identity types                                                  | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                                             |
+| Path algebra                                                          | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                                             |
+| The Regensburg extension of the fundamental theorem of identity types | [`foundation.regensburg-extension-fundamental-theorem-of-identity-types`](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md) |
+| Symmetric identity types                                              | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                                                     |
+| Torsorial type families                                               | [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)                                                                       |
+| Transport along higher identifications                                | [`foundation.transport-along-higher-identifications`](foundation.transport-along-higher-identifications.md)                                         |
+| Transport along identifications (foundation)                          | [`foundation.transport-along-identifications`](foundation.transport-along-identifications.md)                                                       |
+| Transport along identifications (foundation-core)                     | [`foundation-core.transport-along-identifications`](foundation-core.transport-along-identifications.md)                                             |
+| The universal property of identity systems                            | [`foundation.universal-property-identity-systems`](foundation.universal-property-identity-systems.md)                                               |
+| The universal property of identity types                              | [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)                                                   |
 
 ## Properties
 
@@ -255,29 +255,49 @@ module _
     is-equiv-right-transpose-eq-concat p q r
 ```
 
-### Computing transport in the type family of identifications with a fixed target
+### Computation of fibers of families of maps out of the identity type
+
+We show that `fiber (f x) y ≃ ((* , f * refl) ＝ (x , y))` for every `x : A` and
+`y : B x`.
 
 ```agda
-tr-Id-left :
-  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
-  tr (_＝ a) q p ＝ ((inv q) ∙ p)
-tr-Id-left refl p = refl
-```
+module _
+  {l1 l2 : Level} {A : UU l1} {a : A} {B : A → UU l2}
+  (f : (x : A) → (a ＝ x) → B x) (x : A) (y : B x)
+  where
 
-### Computing transport in the type family of identifications with a fixed source
+  map-compute-fiber-map-out-of-identity-type :
+    fiber (f x) y → ((a , f a refl) ＝ (x , y))
+  map-compute-fiber-map-out-of-identity-type (refl , refl) = refl
 
-```agda
-tr-Id-right :
-  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
-  tr (a ＝_) q p ＝ (p ∙ q)
-tr-Id-right refl refl = refl
-```
+  map-inv-compute-fiber-map-out-of-identity-type :
+    ((a , f a refl) ＝ (x , y)) → fiber (f x) y
+  map-inv-compute-fiber-map-out-of-identity-type refl =
+    refl , refl
 
-### Computing transport of loops
+  is-section-map-inv-compute-fiber-map-out-of-identity-type :
+    map-compute-fiber-map-out-of-identity-type ∘
+    map-inv-compute-fiber-map-out-of-identity-type ~ id
+  is-section-map-inv-compute-fiber-map-out-of-identity-type refl = refl
 
-```agda
-tr-loop :
-  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
-  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
-tr-loop refl l = inv right-unit
+  is-retraction-map-inv-compute-fiber-map-out-of-identity-type :
+    map-inv-compute-fiber-map-out-of-identity-type ∘
+    map-compute-fiber-map-out-of-identity-type ~ id
+  is-retraction-map-inv-compute-fiber-map-out-of-identity-type (refl , refl) =
+    refl
+
+  is-equiv-map-compute-fiber-map-out-of-identity-type :
+    is-equiv map-compute-fiber-map-out-of-identity-type
+  is-equiv-map-compute-fiber-map-out-of-identity-type =
+    is-equiv-is-invertible
+      map-inv-compute-fiber-map-out-of-identity-type
+      is-section-map-inv-compute-fiber-map-out-of-identity-type
+      is-retraction-map-inv-compute-fiber-map-out-of-identity-type
+
+  compute-fiber-map-out-of-identity-type :
+    fiber (f x) y ≃ ((a , f a refl) ＝ (x , y))
+  pr1 compute-fiber-map-out-of-identity-type =
+    map-compute-fiber-map-out-of-identity-type
+  pr2 compute-fiber-map-out-of-identity-type =
+    is-equiv-map-compute-fiber-map-out-of-identity-type
 ```

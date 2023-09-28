@@ -19,6 +19,7 @@ open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
+open import foundation-core.fibers-of-maps
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
@@ -74,6 +75,15 @@ module _
 
   emb-inclusion-subuniverse : type-subuniverse ↪ UU l1
   emb-inclusion-subuniverse = emb-subtype P
+```
+
+### Maps in a subuniverse
+
+```agda
+is-in-subuniverse-map :
+  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3) {A : UU l1} {B : UU l2} →
+  (A → B) → UU (l2 ⊔ l3)
+is-in-subuniverse-map P f = (b : _) → is-in-subuniverse P (fiber f b)
 ```
 
 ### The predicate of essentially being in a subuniverse
