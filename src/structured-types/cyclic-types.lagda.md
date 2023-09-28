@@ -26,23 +26,27 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **cyclic type** consists of a type `A` equipped with an automorphism
-`e : A ≃ A` which is cyclic in the sense that
+A **cyclic set** consists of an [inhabited](foundation.inhabited-types.md)
+[set](foundation.sets.md) `A` equipped with an
+[automorphism](foundation.automorphisms.md) `e : A ≃ A` which is _cyclic_ in the
+sense that
 
 ```text
   ∀ (x y : A), ∃ (k : ℤ), eᵏ x ＝ y.
 ```
 
-Equivalently, a cyclic type is a
-[connected set bundle](synthetic-homotopy-theory.connected-set-bundles-circle.md)
-over the [circle](synthetic-homotopy-theory.circle.md).
+There are several equivalent ways of stating the concept of cyclic sets. Two
+further equivalent ways are:
 
-Equivalently, a cyclic set is a set which is a `C`-torsor for some cyclic group
-`C`.
+- A cyclic set is a
+  [connected set bundle](synthetic-homotopy-theory.connected-set-bundles-circle.md)
+  over the [circle](synthetic-homotopy-theory.circle.md).
+- A cyclic set is a set which is a [`C`-torsor](group-theory.torsors.md) for
+  some [cyclic group](group-theory.cyclic-groups.md) `C`.
 
 ## Definition
 
-### The predicate of being a cyclic type
+### The predicate of being a cyclic set
 
 ```agda
 module _

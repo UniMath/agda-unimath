@@ -23,6 +23,7 @@ open import foundation.functoriality-truncation
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.inhabited-types
+open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.separated-types
 open import foundation.subuniverses
@@ -83,8 +84,7 @@ module _
 
   abstract
     forward-implication-extended-fundamental-theorem-id :
-      ( (f : (x : A) → (a ＝ x) → B x) →
-        (x : A) (y : B x) → is-in-subuniverse P (fiber (f x) y)) →
+      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) →
       is-separated P (Σ A B)
     forward-implication-extended-fundamental-theorem-id K (x , y) (x' , y') =
       apply-universal-property-trunc-Prop
@@ -98,15 +98,33 @@ module _
                   ( y'))
                 ( K (ind-Id a (λ u v → B u) y) x' y')})
 
+module _
+  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
+  {A : UU l1} (a : A) {B : A → UU l2}
+  where
+
   abstract
     backward-implication-extended-fundamental-theorem-id :
       is-separated P (Σ A B) →
-      (f : (x : A) → (a ＝ x) → B x) (x : A) (y : B x) →
-      is-in-subuniverse P (fiber (f x) y)
+      (f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)
     backward-implication-extended-fundamental-theorem-id K f x y =
       is-in-subuniverse-equiv' P
         ( compute-fiber-map-out-of-identity-type f x y)
         ( K (a , f a refl) (x , y))
+
+module _
+  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
+  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
+  where
+
+  abstract
+    extended-fundamental-theorem-id :
+      ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) ↔
+      is-separated P (Σ A B)
+    pr1 extended-fundamental-theorem-id =
+      forward-implication-extended-fundamental-theorem-id P a H
+    pr2 extended-fundamental-theorem-id =
+      backward-implication-extended-fundamental-theorem-id P a
 ```
 
 ## Corollaries
@@ -137,8 +155,16 @@ module _
     backward-implication-extended-fundamental-theorem-id
       ( is-inhabited-Prop)
       ( a)
-      ( H)
       ( mere-eq-is-0-connected L)
+
+  extended-fundamental-theorem-id-surjective :
+    is-inhabited (B a) →
+    ( (f : (x : A) → (a ＝ x) → B x) → (x : A) → is-surjective (f x)) ↔
+    is-0-connected (Σ A B)
+  pr1 (extended-fundamental-theorem-id-surjective K) L =
+    forward-implication-extended-fundamental-theorem-id-surjective L K
+  pr2 ( extended-fundamental-theorem-id-surjective K) =
+    backward-implication-extended-fundamental-theorem-id-surjective
 ```
 
 ### Characterizing families of connected maps out of identity types
@@ -168,7 +194,6 @@ module _
     backward-implication-extended-fundamental-theorem-id
       ( is-connected-Prop k)
       ( a)
-      ( H)
       ( λ x y → is-connected-eq-is-connected K)
 ```
 
@@ -196,7 +221,6 @@ module _
     backward-implication-extended-fundamental-theorem-id
       ( is-trunc-Prop k)
       ( a)
-      ( H)
 ```
 
 ## References
