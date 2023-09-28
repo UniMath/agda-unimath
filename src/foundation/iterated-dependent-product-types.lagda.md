@@ -136,3 +136,8 @@ is-trunc-iterated-Π :
 is-trunc-iterated-Π k =
   section-iterated-Π-section-Π-section-codomain (is-trunc k) (is-trunc-Π k)
 ```
+
+## See also
+
+- [Iterated Σ-types](foundation.iterated-dependent-pair-types.md)
+- [Homotopies of iterated Π-types](foundation.homotopies-iterated-dependent-product-types.md)

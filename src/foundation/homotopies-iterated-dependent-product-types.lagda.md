@@ -77,3 +77,8 @@ equiv-iterated-funext .0 {{base-telescope A}} = id-equiv
 equiv-iterated-funext ._ {{cons-telescope A}} =
   equiv-Π-equiv-family (λ x → equiv-iterated-funext _ {{A x}}) ∘e equiv-funext
 ```
+
+## See also
+
+- [Binary homotopies](foundation.binary-homotopies.md) for once-iterated
+  homotopies.

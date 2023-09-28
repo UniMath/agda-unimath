@@ -867,3 +867,9 @@ instance
   instance-telescope¹⁸ {X = X} =
     cons-telescope (λ x → instance-telescope¹⁷ {X = X x})
 ```
+
+## See also
+
+- [Dependent telescopes](foundation.dependent-telescopes.md)
+- [Iterated Σ-types](foundation.iterated-dependent-pair-types.md)
+- [Iterated Π-types](foundation.iterated-dependent-product-types.md)

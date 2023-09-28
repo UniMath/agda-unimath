@@ -96,3 +96,7 @@ is-contr-iterated-Σ ._ {{base-telescope A}} is-contr-A = is-contr-A
 is-contr-iterated-Σ ._ {{cons-telescope A}} (is-contr-X , x , H) =
   is-contr-Σ is-contr-X x (is-contr-iterated-Σ _ {{A x}} H)
 ```
+
+## See also
+
+- [Iterated Π-types](foundation.iterated-dependent-product-types.md)
