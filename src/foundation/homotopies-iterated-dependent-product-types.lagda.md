@@ -16,10 +16,10 @@ open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
-open import foundation-core.equivalences
-open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.identity-types
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
+open import foundation-core.equivalences
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -68,7 +68,7 @@ eq-iterated-htpy :
   {f g : iterated-Π A} → htpy-iterated-Π {{A}} f g → f ＝ g
 eq-iterated-htpy .0 {{base-telescope A}} H = H
 eq-iterated-htpy ._ {{cons-telescope A}} H =
-  eq-iterated-htpy (λ x → eq-iterated-htpy _ {{A x}} (H x))
+  eq-htpy (λ x → eq-iterated-htpy _ {{A x}} (H x))
 
 equiv-iterated-funext :
   {l : Level} (n : ℕ) {{A : telescope l n}}
