@@ -41,7 +41,8 @@ The **Regensburg extension** of the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 asserts that for any [pointed](structured-types.pointed-types.md)
 [connected type](foundation.connected-types.md) `A` equipped with a type family
-`B` over `A`, the following are [logically equivalent](foundation.logical-equivalences.md):
+`B` over `A`, the following are
+[logically equivalent](foundation.logical-equivalences.md):
 
 1. Every family of maps `f : (x : A) → (* ＝ x) → B x` is a family of `P`-maps.
 2. The [total space](foundation.dependent-pair-types.md) `Σ A B` is
@@ -50,19 +51,21 @@ asserts that for any [pointed](structured-types.pointed-types.md)
 In other words, the extended fundamental theorem of
 [identity types](foundation-core.identity-types.md) asserts that for any
 [higher group](higher-group-theory.higher-groups.md) `BG` equipped with a
-[higher group action](higher-group-theory.higher-group-actions.md) `X`, every 
+[higher group action](higher-group-theory.higher-group-actions.md) `X`, every
 [homomorphism of higher group actions](higher-group-theory.homomorphisms-higher-group-actions.md)
 `f : (u : BG) → (* ＝ u) → X u` consists of a family of `P` maps if and only if
 the type of [orbits](higher-group-theory.orbits-higher-group-actions.md) of `X`
 is `P`-separated.
 
 **Proof:** Suppose that every family of maps `f : (x : A) → (* ＝ x) → B x` is a
-family of `P`-maps. The fiber of such `f x : (* ＝ x) → B x` at `y` is
-equivalent to the type `(* , f * refl) ＝ (x , y)`. Our assumption is therefore
-equivalent to the assumption that the type `(* , f * refl) ＝ (x , y)` is in `P`
-for every `f`, `x`, and `y`. By the universal property of identity types, this
-condition is equivalent to the condition that `(* , y') ＝ (x , y)` is in `P`
-for every `y'`, `x`, and `y`. Finally, since `A` is assumed to be connected,
+family of `P`-maps. The [fiber](foundation-core.fibers-of-maps.md) of such
+`f x : (* ＝ x) → B x` at `y` is [equivalent](foundation-core.equivalences.md)
+to the type `(* , f * refl) ＝ (x , y)`. Our assumption is therefore equivalent
+to the assumption that the type `(* , f * refl) ＝ (x , y)` is in `P` for every
+`f`, `x`, and `y`. By the
+[universal property of identity types](foundation.universal-property-identity-types.md),
+this condition is equivalent to the condition that `(* , y') ＝ (x , y)` is in
+`P` for every `y'`, `x`, and `y`. Finally, since `A` is assumed to be connected,
 this condition is equivalent to the condition that `Σ A B` is `P`-separated.
 
 This theorem was stated and proven for the first time during the
