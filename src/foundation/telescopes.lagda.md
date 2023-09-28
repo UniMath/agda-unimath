@@ -81,6 +81,9 @@ apply-base-telescope P (cons-telescope A) =
 ### Inferring telescopes
 
 ```agda
+instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
+instance-telescope {{x}} = x
+
 instance
   instance-telescope⁰ : {l : Level} {X : UU l} → telescope l 0
   instance-telescope⁰ {X = X} = base-telescope X
@@ -468,6 +471,392 @@ instance
   instance-telescope¹⁴ {X = X} =
     cons-telescope (λ x → instance-telescope¹³ {X = X x})
 
-instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
-instance-telescope {{x}} = x
+  instance-telescope¹⁵ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { A13 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l13}
+    { A14 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12) → UU l14}
+    { A15 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13) → UU l15}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14) → UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l13 ⊔
+        l14 ⊔ l15 ⊔ l)
+      ( 15)
+  instance-telescope¹⁵ {X = X} =
+    cons-telescope (λ x → instance-telescope¹⁴ {X = X x})
+
+  instance-telescope¹⁶ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l16 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { A13 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l13}
+    { A14 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12) → UU l14}
+    { A15 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13) → UU l15}
+    { A16 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14) → UU l16}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14)
+      (x16 : A16 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15) → UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l13 ⊔
+        l14 ⊔ l15 ⊔ l16 ⊔ l)
+      ( 16)
+  instance-telescope¹⁶ {X = X} =
+    cons-telescope (λ x → instance-telescope¹⁵ {X = X x})
+
+  instance-telescope¹⁷ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l16 l17 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { A13 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l13}
+    { A14 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12) → UU l14}
+    { A15 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13) → UU l15}
+    { A16 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14) → UU l16}
+    { A17 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14)
+      (x16 : A16 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15) → UU l17}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14)
+      (x16 : A16 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15)
+      (x17 : A17 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16) →
+      UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l13 ⊔
+        l14 ⊔ l15 ⊔ l16 ⊔ l17 ⊔ l)
+      ( 17)
+  instance-telescope¹⁷ {X = X} =
+    cons-telescope (λ x → instance-telescope¹⁶ {X = X x})
+
+  instance-telescope¹⁸ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l16 l17 l18 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { A13 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l13}
+    { A14 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12) → UU l14}
+    { A15 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13) → UU l15}
+    { A16 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14) → UU l16}
+    { A17 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14)
+      (x16 : A16 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15) → UU l17}
+    { A18 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14)
+      (x16 : A16 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15)
+      (x17 : A17 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16) →
+      UU l18}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13)
+      (x15 : A15 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14)
+      (x16 : A16 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15)
+      (x17 : A17 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16)
+      (x18 : A18 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17) →
+      UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l13 ⊔
+        l14 ⊔ l15 ⊔ l16 ⊔ l17 ⊔ l18 ⊔ l)
+      ( 18)
+  instance-telescope¹⁸ {X = X} =
+    cons-telescope (λ x → instance-telescope¹⁷ {X = X x})
 ```
