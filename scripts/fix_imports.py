@@ -73,11 +73,12 @@ def subdivide_namespaces_imports(imports):
         if k in namespaces[k]:
             namespaces[k] = {k}
 
-    for statement in namespaces['foundation']:
-        submodule_start = statement.find('.')
-        if submodule_start != -1:
-            namespaces['foundation-core'].discard(
-                'foundation-core' + statement[submodule_start:])
+    if 'foundation-core' in namespaces.keys() and 'foundation' in namespaces.keys():
+        for statement in namespaces['foundation']:
+            submodule_start = statement.find('.')
+            if submodule_start != -1:
+                namespaces['foundation-core'].discard(
+                    'foundation-core' + statement[submodule_start:])
 
     if 'foundation' in namespaces['foundation']:
         namespaces.pop('foundation-core')
