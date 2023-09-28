@@ -73,9 +73,8 @@ def check_wrap_line_definition_parameters(line):
     and if so add a line wrap after the first token.
     """
     tle = get_top_level_equality(line)
-
-    if tle and tle >= len(line) - 1:
-        m = re.fullmatch(r'((\s*)[^\s.;{}()@"]+)\s+([^.;()@"]+\s+=)\s*', line)
+    if tle and tle == len(line) - 1:
+        m = re.fullmatch(r'((\s*)[^\s.;{}()@"]+)\s+([^.;()@"]+\s+=)', line)
         if m:
             line = f'{m.group(1)}\n{m.group(2)}{INDENT}{m.group(3)}'
     return line
