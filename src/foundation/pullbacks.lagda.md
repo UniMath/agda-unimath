@@ -33,7 +33,6 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
-open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
 
