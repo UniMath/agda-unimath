@@ -46,12 +46,12 @@ module _
   where
 
   is-pullback-Large-Precategory :
-    (x : obj-Large-Precategory C l1) →
-    (y : obj-Large-Precategory C l2) →
-    (z : obj-Large-Precategory C l3) →
-    (f : hom-Large-Precategory C y x) →
+    {x : obj-Large-Precategory C l1}
+    {y : obj-Large-Precategory C l2}
+    {z : obj-Large-Precategory C l3}
+    {w : obj-Large-Precategory C l4}
+    (f : hom-Large-Precategory C y x)
     (g : hom-Large-Precategory C z x) →
-    (w : obj-Large-Precategory C l4) →
     (p₁ : hom-Large-Precategory C w y) →
     (p₂ : hom-Large-Precategory C w z) →
     comp-hom-Large-Precategory C f p₁ ＝ comp-hom-Large-Precategory C g p₂ →
