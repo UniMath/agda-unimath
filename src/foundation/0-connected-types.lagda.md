@@ -76,6 +76,15 @@ abstract
         ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
         ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
 
+abstract
+  is-0-connected-mere-eq-is-inhabited :
+    {l : Level} {A : UU l} →
+    is-inhabited A → ((x y : A) → mere-eq x y) → is-0-connected A
+  is-0-connected-mere-eq-is-inhabited H K =
+    apply-universal-property-trunc-Prop H
+      ( is-0-connected-Prop _)
+      ( λ a → is-0-connected-mere-eq a (K a))
+
 is-0-connected-is-surjective-point :
   {l1 : Level} {A : UU l1} (a : A) →
   is-surjective (point a) → is-0-connected A
