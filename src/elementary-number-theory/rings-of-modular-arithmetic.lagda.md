@@ -85,12 +85,23 @@ integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
 integer-multiplication-by-one-preserves-succ-ℤ : (n : ℕ) (x : ℤ) →
   integer-multiple-Ring (ℤ-Mod-Ring n) (succ-ℤ x) (one-ℤ-Mod n) ＝
   succ-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
-integer-multiplication-by-one-preserves-succ-ℤ = {!   !}
+integer-multiplication-by-one-preserves-succ-ℤ n x =
+  ( integer-multiple-succ-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n)) ∙
+  ( inv
+    ( is-left-add-one-succ-ℤ-Mod'
+      ( n)
+      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))))
 
 integer-multiplication-by-one-preserves-pred-ℤ : (n : ℕ) (x : ℤ) →
   integer-multiple-Ring (ℤ-Mod-Ring n) (pred-ℤ x) (one-ℤ-Mod n) ＝
   pred-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
-integer-multiplication-by-one-preserves-pred-ℤ = {!   !}
+integer-multiplication-by-one-preserves-pred-ℤ n x =
+  ( integer-multiple-pred-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n)) ∙
+  {!   !} ∙
+  ( inv
+    ( is-left-add-neg-one-pred-ℤ-Mod'
+      ( n)
+      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))))
 
 is-neg-one-neg-one-ℤ-Mod :
   (n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
