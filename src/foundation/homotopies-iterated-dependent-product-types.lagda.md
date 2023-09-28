@@ -11,15 +11,15 @@ open import foundation.telescopes public
 ```agda
 open import elementary-number-theory.natural-numbers
 
-open import foundation.universe-levels
-open import foundation.iterated-dependent-product-types
 open import foundation.function-extensionality
+open import foundation.iterated-dependent-product-types
+open import foundation.universe-levels
 
+open import foundation-core.contractible-types
+open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
-open import foundation-core.identity-types
-open import foundation-core.contractible-types
-open import foundation-core.propositions
 ```
 
 </details>

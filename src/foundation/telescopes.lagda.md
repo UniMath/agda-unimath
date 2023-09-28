@@ -86,23 +86,387 @@ instance
   instance-telescope⁰ {X = X} = base-telescope X
 
   instance-telescope¹ :
-    {l1 lX : Level} {A : UU l1} {X : A → UU lX} → telescope (l1 ⊔ lX) 1
+    { l1 l : Level} {A1 : UU l1} {X : A1 → UU l} → telescope (l1 ⊔ l) 1
   instance-telescope¹ {X = X} =
-    cons-telescope (λ a → instance-telescope⁰ {X = X a})
+    cons-telescope (λ x → instance-telescope⁰ {X = X x})
 
   instance-telescope² :
-    {l1 l2 lX : Level} {A : UU l1} {B : A → UU l2}
-    {X : (a : A) → B a → UU lX} → telescope (l1 ⊔ l2 ⊔ lX) 2
+    { l1 l2 l : Level} {A1 : UU l1} {A2 : A1 → UU l2}
+    { X : (x1 : A1) → A2 x1 → UU l} → telescope (l1 ⊔ l2 ⊔ l) 2
   instance-telescope² {X = X} =
-    cons-telescope (λ a → instance-telescope¹ {X = X a})
+    cons-telescope (λ x → instance-telescope¹ {X = X x})
 
   instance-telescope³ :
-    {l1 l2 l3 l4 : Level}
-    {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3}
-    {X : (a : A) → (b : B a) → C a b → UU l4} →
-    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4) 3
+    { l1 l2 l3 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { X : (x1 : A1) (x2 : A2 x1) (x2 : A3 x1 x2) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l) 3
   instance-telescope³ {X = X} =
-    cons-telescope (λ a → instance-telescope² {X = X a})
+    cons-telescope (λ x → instance-telescope² {X = X x})
+
+  instance-telescope⁴ :
+    { l1 l2 l3 l4 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { X : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l) 4
+  instance-telescope⁴ {X = X} =
+    cons-telescope (λ x → instance-telescope³ {X = X x})
+
+  instance-telescope⁵ :
+    { l1 l2 l3 l4 l5 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l) 5
+  instance-telescope⁵ {X = X} =
+    cons-telescope (λ x → instance-telescope⁴ {X = X x})
+
+  instance-telescope⁶ :
+    { l1 l2 l3 l4 l5 l6 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l) 6
+  instance-telescope⁶ {X = X} =
+    cons-telescope (λ x → instance-telescope⁵ {X = X x})
+
+  instance-telescope⁷ :
+    { l1 l2 l3 l4 l5 l6 l7 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l) 7
+  instance-telescope⁷ {X = X} =
+    cons-telescope (λ x → instance-telescope⁶ {X = X x})
+
+  instance-telescope⁸ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l) 8
+  instance-telescope⁸ {X = X} =
+    cons-telescope (λ x → instance-telescope⁷ {X = X x})
+
+  instance-telescope⁹ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l) 9
+  instance-telescope⁹ {X = X} =
+    cons-telescope (λ x → instance-telescope⁸ {X = X x})
+
+  instance-telescope¹⁰ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l) 10
+  instance-telescope¹⁰ {X = X} =
+    cons-telescope (λ x → instance-telescope⁹ {X = X x})
+
+  instance-telescope¹¹ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l) 11
+  instance-telescope¹¹ {X = X} =
+    cons-telescope (λ x → instance-telescope¹⁰ {X = X x})
+
+  instance-telescope¹² :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l)
+      ( 12)
+  instance-telescope¹² {X = X} =
+    cons-telescope (λ x → instance-telescope¹¹ {X = X x})
+
+  instance-telescope¹³ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { A13 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l13}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12) → UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l13 ⊔ l)
+      ( 13)
+  instance-telescope¹³ {X = X} =
+    cons-telescope (λ x → instance-telescope¹² {X = X x})
+
+  instance-telescope¹⁴ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { A9 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      UU l9}
+    { A10 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      UU l10}
+    { A11 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      UU l11}
+    { A12 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10) → UU l12}
+    { A13 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11) → UU l13}
+    { A14 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12) → UU l14}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+      (x11 : A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+      (x12 : A12 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11)
+      (x13 : A13 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12)
+      (x14 : A14 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13) → UU l} →
+    telescope
+      ( l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l9 ⊔ l10 ⊔ l11 ⊔ l12 ⊔ l13 ⊔
+        l14 ⊔ l)
+      ( 14)
+  instance-telescope¹⁴ {X = X} =
+    cons-telescope (λ x → instance-telescope¹³ {X = X x})
 
 instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
 instance-telescope {{x}} = x
