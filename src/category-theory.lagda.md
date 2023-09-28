@@ -2,13 +2,15 @@
 
 ## Examples of categories and large categories
 
-| Category          | File                                                                                                        |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| Commutative Rings | [`commutative-algebra.category-of-commutative-rings`](commutative-algebra.category-of-commutative-rings.md) |
-| Groups            | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)                                     |
-| Rings             | [`ring-theory.category-of-rings`](ring-theory.category-of-rings.md)                                         |
-| Semigroups        | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md)                             |
-| Sets              | [`foundation.category-of-sets`](foundation.category-of-sets.md)                                             |
+| Category                      | File                                                                                                                                          |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Commutative Rings             | [`commutative-algebra.category-of-commutative-rings`](commutative-algebra.category-of-commutative-rings.md)                                   |
+| Connected set bundles over 𝕊¹ | [`synthetic-homotopy-theory.category-of-connected-set-bundles-circle`](synthetic-homotopy-theory.category-of-connected-set-bundles-circle.md) |
+| Families of sets              | [`foundation.category-of-families-of-sets`](foundation.category-of-families-of-sets.md)                                                       |
+| Groups                        | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)                                                                       |
+| Rings                         | [`ring-theory.category-of-rings`](ring-theory.category-of-rings.md)                                                                           |
+| Semigroups                    | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md)                                                               |
+| Sets                          | [`foundation.category-of-sets`](foundation.category-of-sets.md)                                                                               |
 
 ## Examples of precategories and large precategories
 
@@ -45,6 +47,8 @@ open import category-theory.commuting-squares-of-morphisms-in-large-precategorie
 open import category-theory.commuting-squares-of-morphisms-in-precategories public
 open import category-theory.coproducts-in-precategories public
 open import category-theory.dependent-products-of-categories public
+open import category-theory.dependent-products-of-large-categories public
+open import category-theory.dependent-products-of-large-precategories public
 open import category-theory.dependent-products-of-precategories public
 open import category-theory.discrete-categories public
 open import category-theory.endomorphisms-in-categories public
@@ -55,6 +59,8 @@ open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
+open import category-theory.full-large-subcategories public
+open import category-theory.full-large-subprecategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public
 open import category-theory.functors-categories public
@@ -72,7 +78,11 @@ open import category-theory.isomorphisms-in-large-categories public
 open import category-theory.isomorphisms-in-large-precategories public
 open import category-theory.isomorphisms-in-precategories public
 open import category-theory.large-categories public
+open import category-theory.large-function-categories public
+open import category-theory.large-function-precategories public
 open import category-theory.large-precategories public
+open import category-theory.large-subcategories public
+open import category-theory.large-subprecategories public
 open import category-theory.maps-categories public
 open import category-theory.maps-from-small-to-large-categories public
 open import category-theory.maps-from-small-to-large-precategories public

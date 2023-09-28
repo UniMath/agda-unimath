@@ -120,13 +120,13 @@ module _
     ((i : I) → is-iso-Precategory C (f i)) →
     is-iso-Precategory (function-Precategory I C) f
   is-iso-function-is-fiberwise-iso-Precategory =
-    is-iso-Π-is-fiberwise-iso-Precategory I (λ _ → C)
+    is-iso-is-fiberwise-iso-Π-Precategory I (λ _ → C)
 
   iso-function-fiberwise-iso-Precategory :
     ((i : I) → iso-Precategory C (x i) (y i)) →
     iso-Precategory (function-Precategory I C) x y
   iso-function-fiberwise-iso-Precategory =
-    iso-Π-fiberwise-iso-Precategory I (λ _ → C)
+    iso-fiberwise-iso-Π-Precategory I (λ _ → C)
 
   is-equiv-is-fiberwise-iso-is-iso-function-Precategory :
     (f : hom-function-Precategory I C x y) →
@@ -145,14 +145,14 @@ module _
     (f : hom-function-Precategory I C x y) →
     is-equiv (is-iso-function-is-fiberwise-iso-Precategory f)
   is-equiv-is-iso-function-is-fiberwise-iso-Precategory =
-    is-equiv-is-iso-Π-is-fiberwise-iso-Precategory I (λ _ → C)
+    is-equiv-is-iso-is-fiberwise-iso-Π-Precategory I (λ _ → C)
 
   equiv-is-iso-function-is-fiberwise-iso-Precategory :
     ( f : hom-function-Precategory I C x y) →
     ( (i : I) → is-iso-Precategory C (f i)) ≃
     ( is-iso-Precategory (function-Precategory I C) f)
   equiv-is-iso-function-is-fiberwise-iso-Precategory =
-    equiv-is-iso-Π-is-fiberwise-iso-Precategory I (λ _ → C)
+    equiv-is-iso-is-fiberwise-iso-Π-Precategory I (λ _ → C)
 
   is-equiv-fiberwise-iso-iso-function-Precategory :
     is-equiv fiberwise-iso-iso-function-Precategory
@@ -168,11 +168,11 @@ module _
   is-equiv-iso-function-fiberwise-iso-Precategory :
     is-equiv iso-function-fiberwise-iso-Precategory
   is-equiv-iso-function-fiberwise-iso-Precategory =
-    is-equiv-iso-Π-fiberwise-iso-Precategory I (λ _ → C)
+    is-equiv-iso-fiberwise-iso-Π-Precategory I (λ _ → C)
 
   equiv-iso-function-fiberwise-iso-Precategory :
     ( (i : I) → iso-Precategory C (x i) (y i)) ≃
     ( iso-Precategory (function-Precategory I C) x y)
   equiv-iso-function-fiberwise-iso-Precategory =
-    equiv-iso-Π-fiberwise-iso-Precategory I (λ _ → C)
+    equiv-iso-fiberwise-iso-Π-Precategory I (λ _ → C)
 ```

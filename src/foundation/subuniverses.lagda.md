@@ -9,14 +9,16 @@ module foundation.subuniverses where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.subtype-identity-principle
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.embeddings
-open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
@@ -57,6 +59,9 @@ module _
   is-in-subuniverse : UU l1 → UU l2
   is-in-subuniverse = is-in-subtype P
 
+  is-prop-is-in-subuniverse : (X : UU l1) → is-prop (is-in-subuniverse X)
+  is-prop-is-in-subuniverse = is-prop-is-in-subtype P
+
   inclusion-subuniverse : type-subuniverse → UU l1
   inclusion-subuniverse = inclusion-subtype P
 
@@ -69,6 +74,41 @@ module _
 
   emb-inclusion-subuniverse : type-subuniverse ↪ UU l1
   emb-inclusion-subuniverse = emb-subtype P
+```
+
+### The predicate of essentially being in a subuniverse
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  where
+
+  is-essentially-in-subuniverse :
+    {l3 : Level} (X : UU l3) → UU (lsuc l1 ⊔ l2 ⊔ l3)
+  is-essentially-in-subuniverse X =
+    Σ (type-subuniverse P) (λ Y → inclusion-subuniverse P Y ≃ X)
+
+  is-prop-is-essentially-in-subuniverse :
+    {l3 : Level} (X : UU l3) → is-prop (is-essentially-in-subuniverse X)
+  is-prop-is-essentially-in-subuniverse X =
+    is-prop-is-proof-irrelevant
+      ( λ ((X' , p) , e) →
+        is-contr-total-Eq-subtype
+          ( is-contr-equiv'
+            ( Σ (UU _) (λ T → T ≃ X'))
+            ( equiv-tot (equiv-postcomp-equiv e))
+            ( is-contr-total-equiv' X'))
+          ( is-prop-is-in-subuniverse P)
+          ( X')
+          ( e)
+          ( p))
+
+  is-essentially-in-subuniverse-Prop :
+    {l3 : Level} (X : UU l3) → Prop (lsuc l1 ⊔ l2 ⊔ l3)
+  pr1 (is-essentially-in-subuniverse-Prop X) =
+    is-essentially-in-subuniverse X
+  pr2 (is-essentially-in-subuniverse-Prop X) =
+    is-prop-is-essentially-in-subuniverse X
 ```
 
 ### Global subuniverses

@@ -38,6 +38,7 @@ open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
+open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
@@ -117,6 +118,7 @@ open import foundation.equivalences-maybe public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
+open import foundation.extended-fundamental-theorem-of-identity-types public
 open import foundation.faithful-maps public
 open import foundation.fiber-inclusions public
 open import foundation.fibered-equivalences public
@@ -229,6 +231,7 @@ open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
 open import foundation.sections public
+open import foundation.separated-types public
 open import foundation.sequences public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
