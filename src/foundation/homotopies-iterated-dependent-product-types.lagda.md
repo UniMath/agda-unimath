@@ -40,11 +40,11 @@ homotopies** are [equivalent](foundation-core.equivalences.md) to
 ### Homotopies in iterated dependent products of iterated type families
 
 ```agda
-htpy-iterated-Π :
+iterated-htpy :
   {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-Π A) → UU l
-htpy-iterated-Π {{base-telescope A}} f g = f ＝ g
-htpy-iterated-Π {{cons-telescope A}} f g =
-  (x : _) → htpy-iterated-Π {{A x}} (f x) (g x)
+iterated-htpy {{base-telescope A}} f g = f ＝ g
+iterated-htpy {{cons-telescope A}} f g =
+  (x : _) → iterated-htpy {{A x}} (f x) (g x)
 ```
 
 ### Iterated function extensionality
@@ -52,27 +52,27 @@ htpy-iterated-Π {{cons-telescope A}} f g =
 ```agda
 refl-iterated-htpy :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f : iterated-Π A} → htpy-iterated-Π {{A}} f f
+  {f : iterated-Π A} → iterated-htpy {{A}} f f
 refl-iterated-htpy .0 {{base-telescope A}} = refl
 refl-iterated-htpy ._ {{cons-telescope A}} x = refl-iterated-htpy _ {{A x}}
 
 iterated-htpy-eq :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f g : iterated-Π A} → f ＝ g → htpy-iterated-Π {{A}} f g
+  {f g : iterated-Π A} → f ＝ g → iterated-htpy {{A}} f g
 iterated-htpy-eq .0 {{base-telescope A}} p = p
 iterated-htpy-eq ._ {{cons-telescope A}} p x =
   iterated-htpy-eq _ {{A x}} (htpy-eq p x)
 
 eq-iterated-htpy :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f g : iterated-Π A} → htpy-iterated-Π {{A}} f g → f ＝ g
+  {f g : iterated-Π A} → iterated-htpy {{A}} f g → f ＝ g
 eq-iterated-htpy .0 {{base-telescope A}} H = H
 eq-iterated-htpy ._ {{cons-telescope A}} H =
   eq-htpy (λ x → eq-iterated-htpy _ {{A x}} (H x))
 
 equiv-iterated-funext :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f g : iterated-Π A} → (f ＝ g) ≃ htpy-iterated-Π {{A}} f g
+  {f g : iterated-Π A} → (f ＝ g) ≃ iterated-htpy {{A}} f g
 equiv-iterated-funext .0 {{base-telescope A}} = id-equiv
 equiv-iterated-funext ._ {{cons-telescope A}} =
   equiv-Π-equiv-family (λ x → equiv-iterated-funext _ {{A x}}) ∘e equiv-funext
