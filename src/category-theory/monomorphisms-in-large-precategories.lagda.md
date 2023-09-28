@@ -11,6 +11,7 @@ open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-precategories
 
 open import foundation.action-on-identifications-functions
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
@@ -49,6 +50,33 @@ module _
   is-prop-is-mono-Large-Precategory : is-prop is-mono-Large-Precategory
   is-prop-is-mono-Large-Precategory =
     is-prop-type-Prop is-mono-prop-Large-Precategory
+```
+
+## The type of monomorphisms in a large precategory
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 : Level} (l3 : Level)
+  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l2)
+  where
+
+  mono-Large-Precategory : UU (α l3 ⊔ β l3 l1 ⊔ β l3 l2 ⊔ β l1 l2)
+  mono-Large-Precategory =
+    Σ
+      ( hom-Large-Precategory C X Y)
+      ( is-mono-Large-Precategory C l3 X Y)
+
+  module _
+    (f : mono-Large-Precategory)
+    where
+
+    hom-mono-Large-Precategory : hom-Large-Precategory C X Y
+    hom-mono-Large-Precategory = pr1 f
+
+    is-mono-mono-Large-Precategory :
+      is-mono-Large-Precategory C l3 X Y hom-mono-Large-Precategory
+    is-mono-mono-Large-Precategory = pr2 f
 ```
 
 ## Properties

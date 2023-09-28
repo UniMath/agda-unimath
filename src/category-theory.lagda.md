@@ -112,6 +112,7 @@ open import category-theory.pregroupoids public
 open import category-theory.presheaf-categories public
 open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
+open import category-theory.pullbacks-in-large-precategories public
 open import category-theory.pullbacks-in-precategories public
 open import category-theory.representable-functors-categories public
 open import category-theory.representable-functors-large-precategories public
@@ -119,6 +120,7 @@ open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
 open import category-theory.sieves-in-categories public
 open import category-theory.slice-precategories public
+open import category-theory.subobject-classifier-in-large-precategories public
 open import category-theory.subprecategories public
 open import category-theory.terminal-objects-precategories public
 open import category-theory.yoneda-lemma-categories public

@@ -76,8 +76,8 @@ module _
     Σ (comp-hom-Precategory C f p₁ ＝ comp-hom-Precategory C g p₂) λ α →
       is-pullback-Precategory x y z f g w p₁ p₂ α
 
-  has-all-pullback-Precategory : UU (l1 ⊔ l2)
-  has-all-pullback-Precategory =
+  has-all-pullbacks-Precategory : UU (l1 ⊔ l2)
+  has-all-pullbacks-Precategory =
     (x y z : obj-Precategory C) →
     (f : hom-Precategory C y x) →
     (g : hom-Precategory C z x) →
@@ -85,7 +85,7 @@ module _
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  (t : has-all-pullback-Precategory C)
+  (t : has-all-pullbacks-Precategory C)
   (x y z : obj-Precategory C)
   (f : hom-Precategory C y x)
   (g : hom-Precategory C z x)
@@ -119,20 +119,20 @@ module _
     morphism-into-pullback-Precategory =
       pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
 
-    morphism-into-pullback-comm-pr1 :
+    morphism-into-pullback-comm-pr1-Precategory :
       comp-hom-Precategory C
         pr1-pullback-Precategory
         morphism-into-pullback-Precategory ＝
       p₁'
-    morphism-into-pullback-comm-pr1 =
+    morphism-into-pullback-comm-pr1-Precategory =
       pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
-    morphism-into-pullback-comm-pr2 :
+    morphism-into-pullback-comm-pr2-Precategory :
       comp-hom-Precategory C
         pr2-pullback-Precategory
         morphism-into-pullback-Precategory ＝
       p₂'
-    morphism-into-pullback-comm-pr2 =
+    morphism-into-pullback-comm-pr2-Precategory =
       pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
 
     is-unique-morphism-into-pullback-Precategory :
