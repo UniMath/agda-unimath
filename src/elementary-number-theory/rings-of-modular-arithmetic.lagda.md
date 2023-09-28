@@ -27,13 +27,14 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.identity-types
 
 open import group-theory.generating-elements-groups
 
 open import ring-theory.cyclic-rings
 open import ring-theory.integer-multiples-of-elements-rings
 open import ring-theory.rings
+
+open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>
@@ -68,8 +69,6 @@ pr2 (ℤ-Mod-Commutative-Ring n) = commutative-mul-ℤ-Mod n
 
 ### Rings of modular arithmetic are cyclic
 
-**Proof:**
-
 ```agda
 integer-multiple-one-ℤ-Ring : (k : ℤ) →
   ( integer-multiple-Ring (ℤ-Mod-Ring zero-ℕ) k (one-ℤ-Mod zero-ℕ)) ＝
@@ -82,20 +81,32 @@ integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
 
--- ∙
+one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod : (n : ℕ) →
+  (add-ℤ-Mod n (one-ℤ-Mod n) (neg-one-ℤ-Mod n)) ＝ (zero-ℤ-Mod n)
+one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod zero-ℕ = refl
+one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod (succ-ℕ n) = {!   !}
+
+is-equal-neg-Ring-ℤ-Mod-one-neg-one-ℤ-Mod : (n : ℕ) →
+  ( neg-Ring (ℤ-Mod-Ring n) (one-ℤ-Mod n)) ＝ (neg-one-ℤ-Mod n)
+is-equal-neg-Ring-ℤ-Mod-one-neg-one-ℤ-Mod n =
+  eq-is-unit-left-div-Ring
+    ( ℤ-Mod-Ring n)
+    ( ( ap
+        ( λ x → add-ℤ-Mod n x (neg-one-ℤ-Mod n))
+        ( neg-neg-Ring (ℤ-Mod-Ring n) (one-ℤ-Mod n))) ∙
+      ( one-ℤ-Mod-plus-neg-one-ℤ-Mod-eq-zero-ℤ-Mod n))
 
 compute-integer-multiple-one-ℤ-Mod :
   ( n : ℕ) →
   ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n)) ~
   ( mod-ℤ n)
 compute-integer-multiple-one-ℤ-Mod zero-ℕ x = integer-multiple-one-ℤ-Ring x
-compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl zero-ℕ) = {!   !}
---
---  ( integer-multiple-neg-one-Ring    (-1) · 1 = -1
---    ( ℤ-Mod-Ring (succ-ℕ n))
---    ( one-ℤ-Mod (succ-ℕ n))) ∙
---  ( inv (mod-neg-one-ℤ (succ-ℕ n)))   -1 = [-1]
---
+compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl zero-ℕ) =
+  ( integer-multiple-neg-one-Ring
+    ( ℤ-Mod-Ring (succ-ℕ n))
+    ( one-ℤ-Mod (succ-ℕ n))) ∙
+  ( is-equal-neg-Ring-ℤ-Mod-one-neg-one-ℤ-Mod (succ-ℕ n)) ∙
+  ( inv (mod-neg-one-ℤ (succ-ℕ n)))
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) = {!   !}
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
