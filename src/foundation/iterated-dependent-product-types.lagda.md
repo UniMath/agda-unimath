@@ -53,6 +53,11 @@ iterated-Π :
   {l : Level} {n : ℕ} → telescope l n → UU l
 iterated-Π (base-telescope A) = A
 iterated-Π (cons-telescope A) = (x : _) → iterated-Π (A x)
+
+iterated-implicit-Π :
+  {l : Level} {n : ℕ} → telescope l n → UU l
+iterated-implicit-Π (base-telescope A) = A
+iterated-implicit-Π (cons-telescope A) = {x : _} → iterated-implicit-Π (A x)
 ```
 
 ### Iterated sections of type families
@@ -88,6 +93,12 @@ apply-codomain-iterated-Π :
   {l1 : Level} {n : ℕ}
   (P : {l : Level} → UU l → UU l) → telescope l1 n → UU l1
 apply-codomain-iterated-Π P A = iterated-Π (apply-base-telescope P A)
+
+apply-codomain-iterated-implicit-Π :
+  {l1 : Level} {n : ℕ}
+  (P : {l : Level} → UU l → UU l) → telescope l1 n → UU l1
+apply-codomain-iterated-implicit-Π P A =
+  iterated-implicit-Π (apply-base-telescope P A)
 ```
 
 ## Properties
