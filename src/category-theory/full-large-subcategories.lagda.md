@@ -52,16 +52,16 @@ module _
       ( large-precategory-Large-Category C)
       ( P)
 
-  is-in-Full-Large-Subcategory :
+  is-in-obj-Full-Large-Subcategory :
     {l : Level} (X : obj-Large-Category C l) → UU (γ l)
-  is-in-Full-Large-Subcategory =
-    is-in-Full-Large-Subprecategory (large-precategory-Large-Category C) P
+  is-in-obj-Full-Large-Subcategory =
+    is-in-obj-Full-Large-Subprecategory (large-precategory-Large-Category C) P
 
-  is-prop-is-in-Full-Large-Subcategory :
+  is-prop-is-in-obj-Full-Large-Subcategory :
     {l : Level} (X : obj-Large-Category C l) →
-    is-prop (is-in-Full-Large-Subcategory X)
-  is-prop-is-in-Full-Large-Subcategory =
-    is-prop-is-in-Full-Large-Subprecategory
+    is-prop (is-in-obj-Full-Large-Subcategory X)
+  is-prop-is-in-obj-Full-Large-Subcategory =
+    is-prop-is-in-obj-Full-Large-Subprecategory
       ( large-precategory-Large-Category C)
       ( P)
 

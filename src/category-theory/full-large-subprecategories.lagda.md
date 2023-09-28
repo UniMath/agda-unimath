@@ -58,14 +58,14 @@ module _
   (P : Full-Large-Subprecategory γ C)
   where
 
-  is-in-Full-Large-Subprecategory :
+  is-in-obj-Full-Large-Subprecategory :
     {l : Level} (X : obj-Large-Precategory C l) → UU (γ l)
-  is-in-Full-Large-Subprecategory X = is-in-subtype P X
+  is-in-obj-Full-Large-Subprecategory X = is-in-subtype P X
 
-  is-prop-is-in-Full-Large-Subprecategory :
+  is-prop-is-in-obj-Full-Large-Subprecategory :
     {l : Level} (X : obj-Large-Precategory C l) →
-    is-prop (is-in-Full-Large-Subprecategory X)
-  is-prop-is-in-Full-Large-Subprecategory =
+    is-prop (is-in-obj-Full-Large-Subprecategory X)
+  is-prop-is-in-obj-Full-Large-Subprecategory =
     is-prop-is-in-subtype P
 
   obj-Full-Large-Subprecategory : (l : Level) → UU (α l ⊔ γ l)
