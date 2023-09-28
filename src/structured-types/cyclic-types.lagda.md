@@ -37,7 +37,7 @@ Equivalently, a cyclic type is a
 [connected set bundle](synthetic-homotopy-theory.connected-set-bundles-circle.md)
 over the [circle](synthetic-homotopy-theory.circle.md).
 
-Equivalently, a cyclic set is a set which is a `C`-torsor for some cyclic group
+Equivalently, a cyclic set is a [set](foundation-core.sets.md) which is a [`C`-torsor](group-theory.torsors.md) for some [cyclic group](group-theory.cyclic-groups.md)
 `C`.
 
 ## Definition
