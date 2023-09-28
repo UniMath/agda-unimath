@@ -16,6 +16,8 @@ open import foundation.iterated-dependent-product-types
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
+open import foundation-core.equivalences
+open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.truncated-types
@@ -28,7 +30,10 @@ open import foundation-core.truncation-levels
 
 Given an
 [iterated dependent product](foundation.iterated-dependent-product-types.md) we
-can consider [homotopies](foundation-core.homotopies.md) of its elements.
+can consider [homotopies](foundation-core.homotopies.md) of its elements. By
+[function extensionality](foundation.function-extensionality.md), **iterated
+homotopies** are [equivalent](foundation-core.equivalences.md) to
+[identifications](foundation-core.identity-types.md).
 
 ## Definitions
 
@@ -36,7 +41,7 @@ can consider [homotopies](foundation-core.homotopies.md) of its elements.
 
 ```agda
 htpy-iterated-Π :
-  {l : Level} {n : ℕ} {{A : telescope l n}} → (f g : iterated-Π A) → UU l
+  {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-Π A) → UU l
 htpy-iterated-Π {{base-telescope A}} f g = f ＝ g
 htpy-iterated-Π {{cons-telescope A}} f g =
   (x : _) → htpy-iterated-Π {{A x}} (f x) (g x)
@@ -45,10 +50,30 @@ htpy-iterated-Π {{cons-telescope A}} f g =
 ### Iterated function extensionality
 
 ```agda
-iterated-eq-htpy :
+refl-iterated-htpy :
+  {l : Level} (n : ℕ) {{A : telescope l n}}
+  {f : iterated-Π A} → htpy-iterated-Π {{A}} f f
+refl-iterated-htpy .0 {{base-telescope A}} = refl
+refl-iterated-htpy ._ {{cons-telescope A}} x = refl-iterated-htpy _ {{A x}}
+
+iterated-htpy-eq :
+  {l : Level} (n : ℕ) {{A : telescope l n}}
+  {f g : iterated-Π A} → f ＝ g → htpy-iterated-Π {{A}} f g
+iterated-htpy-eq .0 {{base-telescope A}} p = p
+iterated-htpy-eq ._ {{cons-telescope A}} p x =
+  iterated-htpy-eq _ {{A x}} (htpy-eq p x)
+
+eq-iterated-htpy :
   {l : Level} (n : ℕ) {{A : telescope l n}}
   {f g : iterated-Π A} → htpy-iterated-Π {{A}} f g → f ＝ g
-iterated-eq-htpy .0 {{ base-telescope A}} H = H
-iterated-eq-htpy ._ {{cons-telescope A}} H =
-  eq-htpy (λ x → iterated-eq-htpy _ {{A x}} (H x))
+eq-iterated-htpy .0 {{base-telescope A}} H = H
+eq-iterated-htpy ._ {{cons-telescope A}} H =
+  eq-iterated-htpy (λ x → eq-iterated-htpy _ {{A x}} (H x))
+
+equiv-iterated-funext :
+  {l : Level} (n : ℕ) {{A : telescope l n}}
+  {f g : iterated-Π A} → (f ＝ g) ≃ htpy-iterated-Π {{A}} f g
+equiv-iterated-funext .0 {{base-telescope A}} = id-equiv
+equiv-iterated-funext ._ {{cons-telescope A}} =
+  equiv-Π-equiv-family (λ x → equiv-iterated-funext _ {{A x}}) ∘e equiv-funext
 ```
