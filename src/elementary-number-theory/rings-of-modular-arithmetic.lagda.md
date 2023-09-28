@@ -13,9 +13,9 @@ open import commutative-algebra.commutative-rings
 open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
+open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ring-of-integers
-open import elementary-number-theory.modular-arithmetic-standard-finite-types
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -82,6 +82,16 @@ integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
 
+integer-multiplication-by-one-preserves-succ-ℤ : (n : ℕ) (x : ℤ) →
+  integer-multiple-Ring (ℤ-Mod-Ring n) (succ-ℤ x) (one-ℤ-Mod n) ＝
+  succ-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+integer-multiplication-by-one-preserves-succ-ℤ = {!   !}
+
+integer-multiplication-by-one-preserves-pred-ℤ : (n : ℕ) (x : ℤ) →
+  integer-multiple-Ring (ℤ-Mod-Ring n) (pred-ℤ x) (one-ℤ-Mod n) ＝
+  pred-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+integer-multiplication-by-one-preserves-pred-ℤ = {!   !}
+
 is-neg-one-neg-one-ℤ-Mod :
   (n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
 is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
@@ -99,7 +109,13 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl zero-ℕ) =
   ( is-neg-one-neg-one-ℤ-Mod (succ-ℕ n)) ∙
   ( inv (mod-neg-one-ℤ (succ-ℕ n)))
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) =
-  {!   !}
+  ( integer-multiplication-by-one-preserves-pred-ℤ
+    ( succ-ℕ n)
+    ( inl x)) ∙
+  ( ap
+    ( pred-ℤ-Mod (succ-ℕ n))
+    ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl x))) ∙
+  (inv (preserves-predecessor-mod-ℤ (succ-ℕ n) (inl x)))
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
   ( integer-multiple-one-Ring
@@ -107,7 +123,9 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
     ( one-ℤ-Mod (succ-ℕ n))) ∙
   ( inv (mod-one-ℤ (succ-ℕ n)))
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr (succ-ℕ x))) =
-  {!   !} ∙
+  ( integer-multiplication-by-one-preserves-succ-ℤ
+    ( succ-ℕ n)
+    ( inr (inr x))) ∙
   ( ap
     ( succ-ℤ-Mod (succ-ℕ n))
     ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr x)))) ∙
