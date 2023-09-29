@@ -68,14 +68,14 @@ module _
     compute-ind-modality {l} (unit-open-modality Q) (ind-open-modality)
   compute-ind-open-modality X P f a =
     eq-htpy
-    ( λ q →
-      ap
-        ( λ p → tr P p (f a q))
-        ( ( ap
-            ( eq-htpy)
-            ( eq-htpy
-              ( λ _ → ap-const a (eq-is-prop (is-prop-type-Prop Q))))) ∙
-          ( eq-htpy-refl-htpy (λ _ → a))))
+      ( λ q →
+        ap
+          ( λ p → tr P p (f a q))
+          ( ( ap
+              ( eq-htpy)
+              ( eq-htpy
+                ( λ _ → ap-const a (eq-is-prop (is-prop-type-Prop Q))))) ∙
+            ( eq-htpy-refl-htpy (λ _ → a))))
 
   induction-principle-open-modality :
     induction-principle-modality {l} (unit-open-modality Q)
