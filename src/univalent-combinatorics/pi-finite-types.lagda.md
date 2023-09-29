@@ -572,7 +572,6 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
     ( is-inhabited-is-0-connected C)
     ( is-π-finite-Prop zero-ℕ (Σ A B))
     ( α)
-
   where
   α : A → is-π-finite zero-ℕ (Σ A B)
   α a =
@@ -588,7 +587,6 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
               ( type-trunc-Set (Σ A B))
               ( λ y → is-decidable-Prop (Id-Prop (trunc-Set (Σ A B)) x y))))
         ( β))
-
     where
     β : (x : Σ A B) (v : type-trunc-Set (Σ A B)) →
         is-decidable (Id (unit-trunc-Set x) v)
@@ -599,7 +597,6 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             ( is-decidable-Prop
               ( Id-Prop (trunc-Set (Σ A B)) (unit-trunc-Set (pair x y)) u)))
         ( γ)
-
       where
       γ : (v : Σ A B) →
           is-decidable (Id (unit-trunc-Set (pair x y)) (unit-trunc-Set v))
@@ -614,7 +611,6 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             ( is-decidable-Prop
               ( mere-eq-Prop (pair x y) (pair x' y')))
               ( δ))
-
         where
         δ : Id a x → is-decidable (mere-eq (pair x y) (pair x' y'))
         δ refl =
@@ -623,7 +619,6 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
             ( is-decidable-Prop
               ( mere-eq-Prop (pair a y) (pair x' y')))
             ( ε)
-
           where
           ε : Id a x' → is-decidable (mere-eq (pair x y) (pair x' y'))
           ε refl =
@@ -632,7 +627,6 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                 ( is-finite-Σ
                   ( pr2 H a a)
                   ( λ ω → is-finite-is-decidable-Prop (P ω) (d ω))))
-
             where
             ℙ : is-contr
                 ( Σ ( type-hom-Set (trunc-Set (Id a a)) (Prop-Set _))
