@@ -145,6 +145,17 @@ module _
       ( shape-∞-Group G)
       ( is-0-connected-classifying-type-∞-Group G)
       ( λ f u →
-        {!is-surjective-htpy!})
+        is-surjective-htpy
+          ( compute-map-out-of-identity-type f u)
+          ( is-surjective-tr-is-abstractly-transitive-action-∞-Group G X
+            ( H , K)
+            ( u)
+            ( f (shape-∞-Group G) refl)))
       ( H)
+
+  is-abstractly-transitive-is-transitive-action-∞-Group :
+    is-transitive-action-∞-Group G X →
+    is-abstractly-transitive-action-∞-Group G X
+  pr1 (is-abstractly-transitive-is-transitive-action-∞-Group H) = ?
+  pr2 (is-abstractly-transitive-is-transitive-action-∞-Group H) = ?
 ```
