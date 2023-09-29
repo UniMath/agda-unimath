@@ -11,9 +11,12 @@ open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.functoriality-dependent-function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
+open import foundation.sections-of-maps-of-maps
+open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.induction-modalities
@@ -39,6 +42,11 @@ module _
   (unit-○ : unit-modality ○)
   where
 
+  induction-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  induction-principle-subuniverse-modality =
+    (X : UU l1) (P : ○ X → UU l1) (is-modal-P : is-modal-family unit-○ P) →
+    section-Π (precomp-Π unit-○ P)
+
   ind-subuniverse-modality : UU (lsuc l1 ⊔ l2)
   ind-subuniverse-modality =
     (X : UU l1) (P : ○ X → UU l1) → is-modal-family unit-○ P →
@@ -50,9 +58,10 @@ module _
     (X : UU l1) (P : ○ X → UU l1) (is-modal-P : is-modal-family unit-○ P) →
     (f : (x : X) → P (unit-○ x)) → (ind-○ X P is-modal-P f ∘ unit-○) ~ f
 
-  induction-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
-  induction-principle-subuniverse-modality =
-    Σ ind-subuniverse-modality compute-ind-subuniverse-modality
+  ind-induction-principle-subuniverse-modality :
+    induction-principle-subuniverse-modality → ind-subuniverse-modality
+  ind-induction-principle-subuniverse-modality I X P is-modal-P =
+    map-section-Π (precomp-Π unit-○ P) (I X P is-modal-P)
 ```
 
 ### Subuniverse recursion
@@ -64,6 +73,10 @@ module _
   (unit-○ : unit-modality ○)
   where
 
+  recursion-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  recursion-principle-subuniverse-modality =
+    (X Y : UU l1) → is-modal unit-○ Y → section-Π (precomp {A = X} unit-○ Y)
+
   rec-subuniverse-modality : UU (lsuc l1 ⊔ l2)
   rec-subuniverse-modality =
     (X Y : UU l1) → is-modal unit-○ Y →
@@ -74,10 +87,6 @@ module _
   compute-rec-subuniverse-modality rec-○ =
     (X Y : UU l1) (is-modal-Y : is-modal unit-○ Y) →
     (f : X → Y) → (rec-○ X Y is-modal-Y f ∘ unit-○) ~ f
-
-  recursion-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
-  recursion-principle-subuniverse-modality =
-    Σ rec-subuniverse-modality compute-rec-subuniverse-modality
 ```
 
 ### Strong subuniverse induction
@@ -95,6 +104,12 @@ module _
   (unit-○ : unit-modality ○)
   where
 
+  strong-induction-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  strong-induction-principle-subuniverse-modality =
+    (X : UU l1) (P : ○ X → UU l1) →
+    ((x' : ○ X) → retraction (unit-○ {P x'})) →
+    section-Π (precomp-Π unit-○ P)
+
   strong-ind-subuniverse-modality : UU (lsuc l1 ⊔ l2)
   strong-ind-subuniverse-modality =
     (X : UU l1) (P : ○ X → UU l1) →
@@ -107,10 +122,6 @@ module _
     (X : UU l1) (P : ○ X → UU l1) →
     (is-premodal-P : (x' : ○ X) → retraction (unit-○ {P x'})) →
     (f : (x : X) → P (unit-○ x)) → (ind-○ X P is-premodal-P f ∘ unit-○) ~ f
-
-  strong-induction-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
-  strong-induction-principle-subuniverse-modality =
-    Σ strong-ind-subuniverse-modality compute-strong-ind-subuniverse-modality
 ```
 
 ### Strong subuniverse recursion
@@ -122,6 +133,11 @@ module _
   (unit-○ : unit-modality ○)
   where
 
+  strong-recursion-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
+  strong-recursion-principle-subuniverse-modality =
+    (X Y : UU l1) → retraction (unit-○ {Y}) →
+    section-Π (precomp {A = X} unit-○ Y)
+
   strong-rec-subuniverse-modality : UU (lsuc l1 ⊔ l2)
   strong-rec-subuniverse-modality =
     (X Y : UU l1) → retraction (unit-○ {Y}) →
@@ -132,10 +148,6 @@ module _
   compute-strong-rec-subuniverse-modality rec-○ =
     (X Y : UU l1) (is-premodal-Y : retraction (unit-○ {Y})) →
     (f : X → Y) → (rec-○ X Y is-premodal-Y f ∘ unit-○) ~ f
-
-  strong-recursion-principle-subuniverse-modality : UU (lsuc l1 ⊔ l2)
-  strong-recursion-principle-subuniverse-modality =
-    Σ strong-rec-subuniverse-modality compute-strong-rec-subuniverse-modality
 ```
 
 ## Properties
@@ -166,14 +178,8 @@ module _
   recursion-principle-induction-principle-subuniverse-modality :
     induction-principle-subuniverse-modality unit-○ →
     recursion-principle-subuniverse-modality unit-○
-  pr1
-    ( recursion-principle-induction-principle-subuniverse-modality
-      ( ind-○ , compute-ind-○)) =
-    rec-subuniverse-ind-subuniverse-modality ind-○
-  pr2
-    ( recursion-principle-induction-principle-subuniverse-modality
-      ( ind-○ , compute-ind-○)) =
-    compute-rec-subuniverse-compute-ind-subuniverse-modality ind-○ compute-ind-○
+  recursion-principle-induction-principle-subuniverse-modality
+    I X Y is-modal-Y = I X (λ _ → Y) (λ _ → is-modal-Y)
 ```
 
 ### Subuniverse induction from strong subuniverse induction
@@ -183,7 +189,6 @@ module _
   {l1 l2 : Level}
   {○ : operator-modality l1 l2}
   (unit-○ : unit-modality ○)
-
   where
 
   ind-subuniverse-strong-ind-subuniverse-modality :
@@ -203,14 +208,8 @@ module _
   induction-principle-strong-induction-principle-subuniverse-modality :
     strong-induction-principle-subuniverse-modality unit-○ →
     induction-principle-subuniverse-modality unit-○
-  pr1
-    ( induction-principle-strong-induction-principle-subuniverse-modality
-      ( ind-○ , compute-ind-○)) =
-    ind-subuniverse-strong-ind-subuniverse-modality ind-○
-  pr2
-    ( induction-principle-strong-induction-principle-subuniverse-modality
-      ( ind-○ , compute-ind-○)) =
-    compute-ind-subuniverse-strong-ind-subuniverse-modality ind-○ compute-ind-○
+  induction-principle-strong-induction-principle-subuniverse-modality
+    I X P is-modal-P = I X P (retraction-is-equiv ∘ is-modal-P)
 ```
 
 ### Subuniverse recursion from strong subuniverse recursion
@@ -239,14 +238,9 @@ module _
   recursion-principle-strong-recursion-principle-subuniverse-modality :
     strong-recursion-principle-subuniverse-modality unit-○ →
     recursion-principle-subuniverse-modality unit-○
-  pr1
-    ( recursion-principle-strong-recursion-principle-subuniverse-modality
-      ( rec-○ , compute-rec-○)) =
-    rec-subuniverse-strong-rec-subuniverse-modality rec-○
-  pr2
-    ( recursion-principle-strong-recursion-principle-subuniverse-modality
-      ( rec-○ , compute-rec-○)) =
-    compute-rec-subuniverse-strong-rec-subuniverse-modality rec-○ compute-rec-○
+  recursion-principle-strong-recursion-principle-subuniverse-modality
+    I X Y is-modal-Y =
+    I X Y (retraction-is-equiv is-modal-Y)
 ```
 
 ### Subuniverse induction from modal induction
@@ -280,12 +274,18 @@ module _
     strong-induction-principle-subuniverse-modality unit-○
   pr1
     ( strong-induction-principle-subuniverse-induction-principle-modality
-      ( ind-○ , compute-ind-○)) =
-    strong-ind-subuniverse-ind-modality ind-○
+      I X P is-modal-P) =
+    strong-ind-subuniverse-ind-modality
+      ( ind-induction-principle-modality unit-○ I) X P is-modal-P
   pr2
     ( strong-induction-principle-subuniverse-induction-principle-modality
-      ( ind-○ , compute-ind-○)) =
-    compute-strong-ind-subuniverse-ind-modality ind-○ compute-ind-○
+        I X P is-modal-P) =
+    compute-strong-ind-subuniverse-ind-modality
+    ( ind-induction-principle-modality unit-○ I)
+    ( compute-ind-induction-principle-modality unit-○ I)
+    ( X)
+    ( P)
+    ( is-modal-P)
 
   ind-subuniverse-ind-modality :
     ind-modality unit-○ → ind-subuniverse-modality unit-○
@@ -308,12 +308,21 @@ module _
     induction-principle-subuniverse-modality unit-○
   pr1
     ( induction-principle-subuniverse-induction-principle-modality
-      ( ind-○ , compute-ind-○)) =
-    ind-subuniverse-ind-modality ind-○
+        I X P is-modal-P) =
+    ind-subuniverse-ind-modality
+      ( ind-induction-principle-modality unit-○ I)
+      ( X)
+      ( P)
+      ( is-modal-P)
   pr2
     ( induction-principle-subuniverse-induction-principle-modality
-      ( ind-○ , compute-ind-○)) =
-    compute-ind-subuniverse-ind-modality ind-○ compute-ind-○
+        I X P is-modal-P) =
+    compute-ind-subuniverse-ind-modality
+      ( ind-induction-principle-modality unit-○ I)
+      ( compute-ind-induction-principle-modality unit-○ I)
+      ( X)
+      ( P)
+      ( is-modal-P)
 ```
 
 ### Subuniverse recursion from modal recursion
@@ -347,12 +356,21 @@ module _
     strong-recursion-principle-subuniverse-modality unit-○
   pr1
     ( strong-recursion-principle-subuniverse-recursion-principle-modality
-      ( rec-○ , compute-rec-○)) =
-    strong-rec-subuniverse-rec-modality rec-○
+        I X Y is-premodal-Y) =
+    strong-rec-subuniverse-rec-modality
+      ( rec-recursion-principle-modality unit-○ I)
+      ( X)
+      ( Y)
+      ( is-premodal-Y)
   pr2
     ( strong-recursion-principle-subuniverse-recursion-principle-modality
-      ( rec-○ , compute-rec-○)) =
-    compute-strong-rec-subuniverse-rec-modality rec-○ compute-rec-○
+        I X Y is-premodal-Y) =
+    compute-strong-rec-subuniverse-rec-modality
+      ( rec-recursion-principle-modality unit-○ I)
+      ( compute-rec-recursion-principle-modality unit-○ I)
+      ( X)
+      ( Y)
+      ( is-premodal-Y)
 
   rec-subuniverse-rec-modality :
     rec-modality unit-○ → rec-subuniverse-modality unit-○
@@ -374,12 +392,18 @@ module _
     recursion-principle-subuniverse-modality unit-○
   pr1
     ( recursion-principle-subuniverse-recursion-principle-modality
-      ( rec-○ , compute-rec-○)) =
-    rec-subuniverse-rec-modality rec-○
+        I X Y is-modal-Y) =
+    rec-subuniverse-rec-modality
+      ( rec-recursion-principle-modality unit-○ I) X Y is-modal-Y
   pr2
     ( recursion-principle-subuniverse-recursion-principle-modality
-      ( rec-○ , compute-rec-○)) =
-    compute-rec-subuniverse-rec-modality rec-○ compute-rec-○
+        I X Y is-modal-Y) =
+    compute-rec-subuniverse-rec-modality
+      ( rec-recursion-principle-modality unit-○ I)
+      ( compute-rec-recursion-principle-modality unit-○ I)
+      ( X)
+      ( Y)
+      ( is-modal-Y)
 ```
 
 ## See also

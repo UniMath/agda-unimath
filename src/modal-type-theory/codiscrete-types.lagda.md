@@ -121,3 +121,7 @@ is-codiscrete-♯ : {l : Level} (X : UU l) → is-codiscrete (♯ X)
 is-codiscrete-♯ {l} =
   is-modal-operator-type-higher-modality (♯-higher-modality l)
 ```
+
+### Subuniverse induction for ♯
+
+This remains to be defined

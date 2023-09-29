@@ -100,7 +100,6 @@ paradox-Russell {l} H =
   no-fixed-points-neg
     ( R ∈-𝕍 R)
     ( pair (map-equiv β) (map-inv-equiv β))
-
   where
 
   K : is-small-universe l l

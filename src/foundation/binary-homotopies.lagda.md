@@ -9,6 +9,7 @@ module foundation.binary-homotopies where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
+open import foundation.function-extensionality
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.universe-levels
@@ -69,4 +70,31 @@ module _
   eq-binary-htpy :
     (f g : (x : A) (y : B x) → C x y) → binary-htpy f g → f ＝ g
   eq-binary-htpy f g = map-inv-equiv (extensionality-binary-Π f g)
+```
+
+## Properties
+
+### Binary homotopy is equivalent to function homotopy
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  where
+
+  binary-htpy-htpy :
+    (f g : (x : A) (y : B x) → C x y) → (f ~ g) → binary-htpy f g
+  binary-htpy-htpy f g =
+    ind-htpy f (λ g H → binary-htpy f g) (refl-binary-htpy f)
+
+  equiv-binary-htpy-htpy :
+    (f g : (x : A) (y : B x) → C x y) → (f ~ g) ≃ binary-htpy f g
+  equiv-binary-htpy-htpy f g = extensionality-binary-Π f g ∘e equiv-eq-htpy
+
+  htpy-binary-htpy :
+    (f g : (x : A) (y : B x) → C x y) → binary-htpy f g → f ~ g
+  htpy-binary-htpy f g = map-inv-equiv (equiv-binary-htpy-htpy f g)
+
+  equiv-htpy-binary-htpy :
+    (f g : (x : A) (y : B x) → C x y) → binary-htpy f g ≃ (f ~ g)
+  equiv-htpy-binary-htpy f g = inv-equiv (equiv-binary-htpy-htpy f g)
 ```

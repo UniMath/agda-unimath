@@ -95,11 +95,17 @@ module _
   induction-principle-is-higher-modality = pr1 h
 
   ind-is-higher-modality : ind-modality unit-○
-  ind-is-higher-modality = pr1 induction-principle-is-higher-modality
+  ind-is-higher-modality =
+    ind-induction-principle-modality
+      ( unit-○)
+      ( induction-principle-is-higher-modality)
 
   compute-ind-is-higher-modality :
     compute-ind-modality unit-○ ind-is-higher-modality
-  compute-ind-is-higher-modality = pr2 induction-principle-is-higher-modality
+  compute-ind-is-higher-modality =
+    compute-ind-induction-principle-modality
+      ( unit-○)
+      ( induction-principle-is-higher-modality)
 
   recursion-principle-is-higher-modality : recursion-principle-modality unit-○
   recursion-principle-is-higher-modality =
@@ -108,11 +114,17 @@ module _
       ( induction-principle-is-higher-modality)
 
   rec-is-higher-modality : rec-modality unit-○
-  rec-is-higher-modality = pr1 recursion-principle-is-higher-modality
+  rec-is-higher-modality =
+    rec-recursion-principle-modality
+      ( unit-○)
+      ( recursion-principle-is-higher-modality)
 
   compute-rec-is-higher-modality :
     compute-rec-modality unit-○ rec-is-higher-modality
-  compute-rec-is-higher-modality = pr2 recursion-principle-is-higher-modality
+  compute-rec-is-higher-modality =
+    compute-rec-recursion-principle-modality
+      ( unit-○)
+      ( recursion-principle-is-higher-modality)
 
   is-modal-small-identity-types-is-higher-modality :
     is-modal-small-identity-types locally-small-○ unit-○
@@ -172,13 +184,19 @@ module _
 
   ind-higher-modality :
     ind-modality (unit-higher-modality)
-  ind-higher-modality = pr1 induction-principle-higher-modality
+  ind-higher-modality =
+    ind-induction-principle-modality
+      ( unit-higher-modality)
+      ( induction-principle-higher-modality)
 
   compute-ind-higher-modality :
     compute-ind-modality
       ( unit-higher-modality)
       ( ind-higher-modality)
-  compute-ind-higher-modality = pr2 induction-principle-higher-modality
+  compute-ind-higher-modality =
+    compute-ind-induction-principle-modality
+      ( unit-higher-modality)
+      ( induction-principle-higher-modality)
 
   recursion-principle-higher-modality :
     recursion-principle-modality (unit-higher-modality)
@@ -190,11 +208,17 @@ module _
 
   rec-higher-modality :
     rec-modality (unit-higher-modality)
-  rec-higher-modality = pr1 recursion-principle-higher-modality
+  rec-higher-modality =
+    rec-recursion-principle-modality
+      ( unit-higher-modality)
+      ( recursion-principle-higher-modality)
 
   compute-rec-higher-modality :
     compute-rec-modality (unit-higher-modality) (rec-higher-modality)
-  compute-rec-higher-modality = pr2 recursion-principle-higher-modality
+  compute-rec-higher-modality =
+    compute-rec-recursion-principle-modality
+      ( unit-higher-modality)
+      ( recursion-principle-higher-modality)
 
   is-modal-small-identity-type-higher-modality :
     is-modal-small-identity-types

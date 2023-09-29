@@ -92,7 +92,6 @@ open import foundation.discrete-reflexive-relations public
 open import foundation.discrete-relaxed-sigma-decompositions public
 open import foundation.discrete-sigma-decompositions public
 open import foundation.discrete-types public
-open import foundation.disequality public
 open import foundation.disjunction public
 open import foundation.double-negation public
 open import foundation.double-negation-modality public
@@ -190,6 +189,7 @@ open import foundation.multivariable-decidable-relations public
 open import foundation.multivariable-functoriality-set-quotients public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
+open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public
@@ -231,6 +231,7 @@ open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
 open import foundation.sections public
+open import foundation.sections-of-maps-of-maps public
 open import foundation.sequences public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public

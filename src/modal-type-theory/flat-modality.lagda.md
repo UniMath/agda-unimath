@@ -49,18 +49,29 @@ counit-♭ (con-♭ x) = counit-crisp x
 
 ```agda
 ind-♭ :
-  {@♭ l1 : Level} {@♭ A : UU l1}
-  {l2 : Level} (C : ♭ A → UU l2) →
+  {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level} (C : ♭ A → UU l2) →
   ((@♭ u : A) → C (con-♭ u)) →
   (x : ♭ A) → C x
 ind-♭ C f (con-♭ x) = f x
 
 crisp-ind-♭ :
-  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1}
-  (C : @♭ ♭ A → UU l2) →
-  ((@♭ u : A) → C (con-♭ u)) →
-  (@♭ x : ♭ A) → C x
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : @♭ ♭ A → UU l2) →
+  ((@♭ u : A) → C (con-♭ u)) → (@♭ x : ♭ A) → C x
 crisp-ind-♭ C f (con-♭ x) = f x
+```
+
+### Flat elimination
+
+```agda
+rec-♭ :
+  {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level} (C : UU l2) →
+  ((@♭ u : A) → C) → (x : ♭ A) → C
+rec-♭ C = ind-♭ (λ _ → C)
+
+crisp-rec-♭ :
+  {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : UU l2) →
+  ((@♭ u : A) → C) → (@♭ x : ♭ A) → C
+crisp-rec-♭ C = crisp-ind-♭ (λ _ → C)
 ```
 
 ### Flat action on maps
@@ -73,13 +84,13 @@ module _
   ap-♭ : @♭ (A → B) → (♭ A → ♭ B)
   ap-♭ f (con-♭ x) = con-♭ (f x)
 
-  ap-♭' : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  ap-♭' f (con-♭ x) = con-♭ (f x)
+  crisp-ap-♭ : @♭ (@♭ A → B) → (♭ A → ♭ B)
+  crisp-ap-♭ f (con-♭ x) = con-♭ (f x)
 
   coap-♭ : (♭ A → ♭ B) → (@♭ A → B)
   coap-♭ f x = counit-♭ (f (con-♭ x))
 
-  is-crisp-retraction-coap-♭ : (@♭ f : @♭ A → B) → coap-♭ (ap-♭' f) ＝ f
+  is-crisp-retraction-coap-♭ : (@♭ f : @♭ A → B) → coap-♭ (crisp-ap-♭ f) ＝ f
   is-crisp-retraction-coap-♭ _ = refl
 ```
 

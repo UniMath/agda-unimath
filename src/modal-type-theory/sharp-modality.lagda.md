@@ -54,10 +54,9 @@ module _
   pr1 ♯-locally-small-operator-modality = ♯ {l}
   pr2 ♯-locally-small-operator-modality A = is-locally-small' {l} {♯ A}
 
-  induction-principle-modality-♯ :
-    induction-principle-modality {l} unit-♯
-  pr1 induction-principle-modality-♯ X = ind-♯
-  pr2 induction-principle-modality-♯ X = compute-ind-♯
+  induction-principle-modality-♯ : induction-principle-modality {l} unit-♯
+  pr1 (induction-principle-modality-♯ X P) = ind-♯ P
+  pr2 (induction-principle-modality-♯ X P) = compute-ind-♯ P
 ```
 
 ### Sharp recursion
@@ -87,8 +86,8 @@ ap-♯ {B = B} f = rec-♯ B (unit-♯ ∘ f)
 - In [codiscrete types](modal-type-theory.codiscrete-types.md), we postulate
   that the sharp modality is a
   [higher modality](orthogonal-factorization-systems.higher-modalities.md).
-- In [The flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md) we
-  postulate that the sharp modality is right adjoint to the
+- and in [the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md)
+  we moreover postulate that the sharp modality is right adjoint to the
   [flat modality](modal-type-theory.flat-modality.md).
 
 ## References

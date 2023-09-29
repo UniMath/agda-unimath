@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.retractions
 open import foundation.sections
+open import foundation.sections-of-maps-of-maps
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -56,7 +57,17 @@ module _
 
   induction-principle-modality : UU (lsuc l1 ⊔ l2)
   induction-principle-modality =
-    Σ ind-modality compute-ind-modality
+    (X : UU l1) (P : ○ X → UU l1) → section-Π (precomp-Π unit-○ (○ ∘ P))
+
+  ind-induction-principle-modality : induction-principle-modality → ind-modality
+  ind-induction-principle-modality I X P =
+    map-section-Π (precomp-Π unit-○ (○ ∘ P)) (I X P)
+
+  compute-ind-induction-principle-modality :
+    (I : induction-principle-modality) →
+    compute-ind-modality (ind-induction-principle-modality I)
+  compute-ind-induction-principle-modality I X P f =
+    (is-section-Π-map-section-Π (precomp-Π unit-○ (○ ∘ P)) (I X P)) f
 ```
 
 ### Modal recursion
@@ -78,7 +89,18 @@ module _
     (x : X) → rec-○ X Y f (unit-○ x) ＝ f x
 
   recursion-principle-modality : UU (lsuc l1 ⊔ l2)
-  recursion-principle-modality = Σ rec-modality compute-rec-modality
+  recursion-principle-modality =
+    (X : UU l1) (Y : UU l1) → section-Π (precomp {A = X} unit-○ (○ Y))
+
+  rec-recursion-principle-modality : recursion-principle-modality → rec-modality
+  rec-recursion-principle-modality I X Y =
+    map-section-Π (precomp unit-○ (○ Y)) (I X Y)
+
+  compute-rec-recursion-principle-modality :
+    (I : recursion-principle-modality) →
+    compute-rec-modality (rec-recursion-principle-modality I)
+  compute-rec-recursion-principle-modality I X Y f =
+    (is-section-Π-map-section-Π (precomp unit-○ (○ Y)) (I X Y)) f
 ```
 
 ## Properties
@@ -104,14 +126,7 @@ module _
 
   recursion-principle-induction-principle-modality :
     induction-principle-modality unit-○ → recursion-principle-modality unit-○
-  pr1
-    ( recursion-principle-induction-principle-modality
-      ( ind-○ , compute-ind-○)) =
-    rec-ind-modality ind-○
-  pr2
-    ( recursion-principle-induction-principle-modality
-      ( ind-○ , compute-ind-○)) =
-    compute-rec-compute-ind-modality ind-○ compute-ind-○
+  recursion-principle-induction-principle-modality I X Y = I X (λ _ → Y)
 ```
 
 ### Modal induction gives an inverse to the unit
@@ -173,33 +188,24 @@ equiv-section-unit-induction-principle-modality :
   { l1 l2 : Level}
   { ○ : operator-modality l1 l2}
   ( unit-○ : unit-modality ○) →
-  ( (X : UU l1) (P : ○ X → UU l1) → section (precomp-Π unit-○ (○ ∘ P))) ≃
-  ( induction-principle-modality unit-○)
+  ( induction-principle-modality unit-○) ≃
+  Σ ( (X : UU l1) (P : ○ X → UU l1) →
+      ((x : X) → ○ (P (unit-○ x))) → (x' : ○ X) → ○ (P x'))
+    ( λ I →
+      (X : UU l1) (P : ○ X → UU l1) (f : (x : X) → ○ (P (unit-○ x))) →
+      I X P f ∘ unit-○ ~ f)
 equiv-section-unit-induction-principle-modality unit-○ =
-  ( ( equiv-tot
-      ( λ I →
-        equiv-Π-equiv-family
-        ( λ X →
-          equiv-Π-equiv-family
-            ( λ P → equiv-Π-equiv-family (λ _ → equiv-funext))))) ∘e
-    ( distributive-Π-Σ)) ∘e
-  ( equiv-Π-equiv-family (λ _ → distributive-Π-Σ))
+  distributive-Π-Σ ∘e equiv-Π-equiv-family (λ _ → distributive-Π-Σ)
 
 equiv-section-unit-recursion-principle-modality :
   { l1 l2 : Level}
   { ○ : operator-modality l1 l2}
   ( unit-○ : unit-modality ○) →
-  ( (X Y : UU l1) → section (precomp unit-○ (○ Y))) ≃
-  ( recursion-principle-modality unit-○)
+  ( recursion-principle-modality unit-○) ≃
+    Σ ( (X Y : UU l1) → (X → ○ Y) → ○ X → ○ Y)
+    ( λ I → (X Y : UU l1) (f : X → ○ Y) → I X Y f ∘ unit-○ ~ f)
 equiv-section-unit-recursion-principle-modality unit-○ =
-  ( ( equiv-tot
-      ( λ I →
-        equiv-Π-equiv-family
-        ( λ X →
-          equiv-Π-equiv-family
-            ( λ P → equiv-Π-equiv-family (λ _ → equiv-funext))))) ∘e
-    ( distributive-Π-Σ)) ∘e
-  ( equiv-Π-equiv-family (λ _ → distributive-Π-Σ))
+  distributive-Π-Σ ∘e equiv-Π-equiv-family (λ _ → distributive-Π-Σ)
 ```
 
 ### The modal operator's action on maps
