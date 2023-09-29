@@ -74,7 +74,7 @@ module _
     is-prop-type-Prop is-transitive-prop-action-∞-Group
 ```
 
-### The predicate of bein an abstractly transitive higher group action
+### The predicate of being an abstractly transitive higher group action
 
 ```agda
 module _
