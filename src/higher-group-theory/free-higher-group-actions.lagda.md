@@ -73,8 +73,8 @@ module _
   {l1 l2 : Level} (G : ∞-Group l1) (X : action-∞-Group l2 G)
   where
 
-  is-abstractly-free-action-∞-Group-Prop : Prop (l1 ⊔ l2)
-  is-abstractly-free-action-∞-Group-Prop =
+  is-abstractly-free-prop-action-∞-Group : Prop (l1 ⊔ l2)
+  is-abstractly-free-prop-action-∞-Group =
     Π-Prop
       ( type-action-∞-Group G X)
       ( λ x → is-emb-Prop (λ g → mul-action-∞-Group G X g x))
