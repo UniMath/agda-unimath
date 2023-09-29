@@ -91,8 +91,8 @@ iff-is-nonneg-square-nat-is-square-int :
 pr1 (iff-is-nonneg-square-nat-is-square-int a) (root , pf-square) =
   ( ( tr is-nonnegative-ℤ (inv pf-square) (is-nonnegative-square-ℤ root)) ,
     ( is-square-nat-is-square-int (root , pf-square)))
-pr2 (iff-is-nonneg-square-nat-is-square-int a)
-  ( pf-nonneg , (root , pf-square)) =
+pr2
+  ( iff-is-nonneg-square-nat-is-square-int a) (pf-nonneg , (root , pf-square)) =
   ( ( int-ℕ root) ,
     ( ( inv (int-abs-is-nonnegative-ℤ a pf-nonneg)) ∙
       ( pr2 (is-square-int-is-square-nat (root , pf-square)))))
@@ -104,11 +104,10 @@ pr2 (iff-is-nonneg-square-nat-is-square-int a)
 is-decidable-is-square-ℤ : (a : ℤ) → is-decidable (is-square-ℤ a)
 is-decidable-is-square-ℤ (inl n) =
   inr (map-neg (pr1 (iff-is-nonneg-square-nat-is-square-int (inl n))) pr1)
-is-decidable-is-square-ℤ (inr (inl n)) =
-  inl (zero-ℤ , refl)
+is-decidable-is-square-ℤ (inr (inl n)) = inl (zero-ℤ , refl)
 is-decidable-is-square-ℤ (inr (inr n)) =
   is-decidable-iff
-    is-square-int-is-square-nat
-    is-square-nat-is-square-int
+    ( is-square-int-is-square-nat)
+    ( is-square-nat-is-square-int)
     ( is-decidable-is-square-ℕ (succ-ℕ n))
 ```

@@ -12,12 +12,12 @@ open import foundation-core.transport-along-identifications public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.homotopies
 open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
@@ -82,4 +82,31 @@ substitution-law-tr :
   {x y : X} (p : x ＝ y) {x' : B (f x)} →
   tr B (ap f p) x' ＝ tr (B ∘ f) p x'
 substitution-law-tr B f refl = refl
+```
+
+### Computing transport in the type family of identifications with a fixed target
+
+```agda
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
+```
+
+### Computing transport in the type family of identifications with a fixed source
+
+```agda
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
+```
+
+### Computing transport of loops
+
+```agda
+tr-loop :
+  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
+  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
+tr-loop refl l = inv right-unit
 ```

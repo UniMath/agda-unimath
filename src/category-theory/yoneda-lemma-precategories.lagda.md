@@ -8,7 +8,7 @@ module category-theory.yoneda-lemma-precategories where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 open import category-theory.representable-functors-precategories
 
@@ -31,9 +31,9 @@ open import foundation.universe-levels
 
 Given a [precategory](category-theory.precategories.md) `C`, an object `c`, and
 a [functor](category-theory.functors-precategories.md) `F` from `C` to the
-[precategory of Sets](foundation.category-of-sets.md), there is an
+[precategory of sets](foundation.category-of-sets.md), there is an
 [equivalence](foundation-core.equivalences.md) between the
-[set of natural transformations](category-theory.natural-transformations-precategories.md)
+[set of natural transformations](category-theory.natural-transformations-functors-precategories.md)
 from the functor
 [represented](category-theory.representable-functors-precategories.md) by `c` to
 `F` and the [set](foundation-core.sets.md) `F c`.
@@ -93,7 +93,7 @@ module _
   pr1 retraction-yoneda-evid-Precategory = yoneda-extension-Precategory
   pr2 retraction-yoneda-evid-Precategory α =
     eq-type-subtype
-      ( is-natural-transformation-Precategory-Prop
+      ( is-natural-transformation-prop-Precategory
         ( C) (Set-Precategory l2) (representable-functor-Precategory C c) F)
       ( eq-htpy
         ( λ x →

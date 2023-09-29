@@ -37,10 +37,10 @@ A groupoid is a category in which every morphism is an isomorphism.
 ## Definition
 
 ```agda
-is-groupoid-Category-Prop :
+is-groupoid-prop-Category :
   {l1 l2 : Level} (C : Category l1 l2) → Prop (l1 ⊔ l2)
-is-groupoid-Category-Prop C =
-  is-groupoid-Precategory-Prop (precategory-Category C)
+is-groupoid-prop-Category C =
+  is-groupoid-prop-Precategory (precategory-Category C)
 
 is-groupoid-Category :
   {l1 l2 : Level} (C : Category l1 l2) → UU (l1 ⊔ l2)

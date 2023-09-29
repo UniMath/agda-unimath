@@ -1,7 +1,7 @@
 # Natural isomorphisms between functors between precategories
 
 ```agda
-module category-theory.natural-isomorphisms-precategories where
+module category-theory.natural-isomorphisms-functors-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -10,7 +10,7 @@ module category-theory.natural-isomorphisms-precategories where
 open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.natural-isomorphisms-maps-precategories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-transformations-functors-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
@@ -31,7 +31,7 @@ open import foundation.universe-levels
 A **natural isomorphism** `γ` from
 [functor](category-theory.functors-precategories.md) `F : C → D` to `G : C → D`
 is a
-[natural transformation](category-theory.natural-transformations-precategories.md)
+[natural transformation](category-theory.natural-transformations-functors-precategories.md)
 from `F` to `G` such that the morphism `γ F : hom (F x) (G x)` is an
 [isomorphism](category-theory.isomorphisms-in-precategories.md), for every
 object `x` in `C`.

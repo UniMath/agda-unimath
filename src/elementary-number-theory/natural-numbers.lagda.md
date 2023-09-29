@@ -9,7 +9,6 @@ module elementary-number-theory.natural-numbers where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
-open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
@@ -17,12 +16,13 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.negation
-open import foundation.propositions
-open import foundation.sets
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
+open import foundation-core.empty-types
+open import foundation-core.propositions
+open import foundation-core.sets
 ```
 
 </details>

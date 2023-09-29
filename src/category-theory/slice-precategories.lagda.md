@@ -403,7 +403,7 @@ module _
         ( refl)
         ( eq-type-subtype
           ( λ _ →
-            is-product-Precategory-Prop
+            is-product-prop-Precategory
               ( Slice-Precategory C A)
               ( X , f)
               ( Y , g)
@@ -424,7 +424,7 @@ module _
           ( eq-pair-Σ
               ( refl)
               ( eq-type-subtype
-                  (λ _ → is-pullback-Precategory-Prop C A X Y f g _ _ _ α)
+                  (λ _ → is-pullback-prop-Precategory C A X Y f g _ _ _ α)
                   ( refl))))
 
   equiv-pullback-product-Slice-Precategory :

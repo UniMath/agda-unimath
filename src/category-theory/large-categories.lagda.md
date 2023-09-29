@@ -24,12 +24,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A large category in Homotopy Type Theory is a large precategory for which the
-identities between the objects are the isomorphisms. More specifically, an
-equality between objects gives rise to an isomorphism between them, by the
-J-rule. A large precategory is a large category if this function is an
-equivalence. Note that being a large category is a proposition since `is-equiv`
-is a proposition.
+A **large category** in Homotopy Type Theory is a
+[large precategory](category-theory.large-precategories.md) for which the
+[identities](foundation-core.identity-types.md) between the objects are the
+[isomorphisms](category-theory.isomorphisms-in-large-categories.md). More
+specifically, an equality between objects gives rise to an isomorphism between
+them, by the J-rule. A large precategory is a large category if this function is
+an equivalence. Note that being a large category is a
+[proposition](foundation-core.propositions.md) since `is-equiv` is a
+proposition.
 
 ## Definition
 
@@ -188,6 +191,20 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  (is-large-category-C : is-large-category-Large-Precategory C)
+  where
+
+  is-category-is-large-category-Large-Precategory :
+    (l : Level) → is-category-Precategory (precategory-Large-Precategory C l)
+  is-category-is-large-category-Large-Precategory l X Y =
+    is-equiv-htpy
+      ( iso-eq-Large-Precategory C X Y)
+      ( compute-iso-eq-Large-Precategory C X Y)
+      ( is-large-category-C X Y)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β)
   where
 
@@ -197,12 +214,10 @@ module _
 
   is-category-Large-Category :
     (l : Level) → is-category-Precategory (precategory-Large-Category l)
-  is-category-Large-Category l X Y =
-    is-equiv-htpy
-      ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
-      ( compute-iso-eq-Large-Precategory
-        ( large-precategory-Large-Category C) X Y)
-      ( is-large-category-Large-Category C X Y)
+  is-category-Large-Category =
+    is-category-is-large-category-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-large-category-Large-Category C)
 
   category-Large-Category : (l : Level) → Category (α l) (β l l)
   pr1 (category-Large-Category l) = precategory-Large-Category l

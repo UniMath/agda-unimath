@@ -46,7 +46,7 @@ module _
       is-category-Precategory precategory-Π-Category
     is-category-Π-Category x y =
       is-equiv-htpy-equiv
-        ( equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C) ∘e
+        ( equiv-iso-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C) ∘e
           equiv-Π-equiv-family
             ( λ i → extensionality-obj-Category (C i) (x i) (y i)) ∘e
           equiv-funext)
@@ -140,18 +140,18 @@ module _
   fiberwise-iso-iso-Π-Category =
     fiberwise-iso-iso-Π-Precategory I (precategory-Category ∘ C)
 
-  is-iso-Π-is-fiberwise-iso-Category :
+  is-iso-is-fiberwise-iso-Π-Category :
     (f : hom-Π-Category I C x y) →
     ((i : I) → is-iso-Category (C i) (f i)) →
     is-iso-Category (Π-Category I C) f
-  is-iso-Π-is-fiberwise-iso-Category =
-    is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+  is-iso-is-fiberwise-iso-Π-Category =
+    is-iso-is-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C)
 
-  iso-Π-fiberwise-iso-Category :
+  iso-fiberwise-iso-Π-Category :
     ((i : I) → iso-Category (C i) (x i) (y i)) →
     iso-Category (Π-Category I C) x y
-  iso-Π-fiberwise-iso-Category =
-    iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+  iso-fiberwise-iso-Π-Category =
+    iso-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C)
 
   is-equiv-is-fiberwise-iso-is-iso-Π-Category :
     (f : hom-Π-Category I C x y) →
@@ -166,18 +166,18 @@ module _
   equiv-is-fiberwise-iso-is-iso-Π-Category =
     equiv-is-fiberwise-iso-is-iso-Π-Precategory I (precategory-Category ∘ C)
 
-  is-equiv-is-iso-Π-is-fiberwise-iso-Category :
+  is-equiv-is-iso-is-fiberwise-iso-Π-Category :
     (f : hom-Π-Category I C x y) →
-    is-equiv (is-iso-Π-is-fiberwise-iso-Category f)
-  is-equiv-is-iso-Π-is-fiberwise-iso-Category =
-    is-equiv-is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+    is-equiv (is-iso-is-fiberwise-iso-Π-Category f)
+  is-equiv-is-iso-is-fiberwise-iso-Π-Category =
+    is-equiv-is-iso-is-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C)
 
-  equiv-is-iso-Π-is-fiberwise-iso-Category :
+  equiv-is-iso-is-fiberwise-iso-Π-Category :
     ( f : hom-Π-Category I C x y) →
     ( (i : I) → is-iso-Category (C i) (f i)) ≃
     ( is-iso-Category (Π-Category I C) f)
-  equiv-is-iso-Π-is-fiberwise-iso-Category =
-    equiv-is-iso-Π-is-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+  equiv-is-iso-is-fiberwise-iso-Π-Category =
+    equiv-is-iso-is-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C)
 
   is-equiv-fiberwise-iso-iso-Π-Category :
     is-equiv fiberwise-iso-iso-Π-Category
@@ -190,14 +190,14 @@ module _
   equiv-fiberwise-iso-iso-Π-Category =
     equiv-fiberwise-iso-iso-Π-Precategory I (precategory-Category ∘ C)
 
-  is-equiv-iso-Π-fiberwise-iso-Category :
-    is-equiv iso-Π-fiberwise-iso-Category
-  is-equiv-iso-Π-fiberwise-iso-Category =
-    is-equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+  is-equiv-iso-fiberwise-iso-Π-Category :
+    is-equiv iso-fiberwise-iso-Π-Category
+  is-equiv-iso-fiberwise-iso-Π-Category =
+    is-equiv-iso-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C)
 
-  equiv-iso-Π-fiberwise-iso-Category :
+  equiv-iso-fiberwise-iso-Π-Category :
     ( (i : I) → iso-Category (C i) (x i) (y i)) ≃
     ( iso-Category (Π-Category I C) x y)
-  equiv-iso-Π-fiberwise-iso-Category =
-    equiv-iso-Π-fiberwise-iso-Precategory I (precategory-Category ∘ C)
+  equiv-iso-fiberwise-iso-Π-Category =
+    equiv-iso-fiberwise-iso-Π-Precategory I (precategory-Category ∘ C)
 ```

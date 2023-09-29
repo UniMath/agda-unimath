@@ -1,7 +1,7 @@
 # Natural transformations between functors between categories
 
 ```agda
-module category-theory.natural-transformations-categories where
+module category-theory.natural-transformations-functors-categories where
 ```
 
 <details><summary>Imports</summary>
@@ -9,7 +9,7 @@ module category-theory.natural-transformations-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-categories
-open import category-theory.natural-transformations-precategories
+open import category-theory.natural-transformations-functors-precategories
 
 open import foundation.embeddings
 open import foundation.equivalences
@@ -26,7 +26,7 @@ open import foundation.universe-levels
 
 A **natural transformation** between
 [functors between categories](category-theory.functors-categories.md) is a
-[natural transformation](category-theory.natural-transformations-precategories.md)
+[natural transformation](category-theory.natural-transformations-functors-precategories.md)
 between the [functors](category-theory.functors-precategories.md) on the
 underlying [precategories](category-theory.precategories.md).
 
@@ -136,10 +136,10 @@ module _
       ( F)
       ( G)
 
-  is-natural-transformation-Category-Prop :
+  is-natural-transformation-prop-Category :
     ( γ : hom-family-functor-Category C D F G) → Prop (l1 ⊔ l2 ⊔ l4)
-  is-natural-transformation-Category-Prop =
-    is-natural-transformation-Precategory-Prop
+  is-natural-transformation-prop-Category =
+    is-natural-transformation-prop-Precategory
       ( precategory-Category C)
       ( precategory-Category D)
       ( F)

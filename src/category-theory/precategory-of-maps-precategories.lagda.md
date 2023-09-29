@@ -1,7 +1,7 @@
 # The precategory of maps and natural transformations between two precategories
 
 ```agda
-module category-theory.precategory-of-maps-of-precategories where
+module category-theory.precategory-of-maps-precategories where
 ```
 
 <details><summary>Imports</summary>
@@ -29,12 +29,14 @@ open import foundation.universe-levels
 
 [Maps](category-theory.maps-precategories.md) between
 [precategories](category-theory.precategories.md) and
-[natural transformations](category-theory.natural-transformations-precategories.md)
+[natural transformations](category-theory.natural-transformations-maps-precategories.md)
 between them introduce a new precategory whose identity map and composition
 structure are inherited pointwise from the codomain precategory. This is called
 the **precategory of maps**.
 
-## Definition
+## Definitions
+
+### The precategory of maps and natural transformations between precategories
 
 ```agda
 module _

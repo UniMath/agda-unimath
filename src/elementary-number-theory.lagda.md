@@ -65,6 +65,7 @@ open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
 open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
@@ -82,6 +83,7 @@ open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-rational-numbers public
+open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-modular-arithmetic public
 open import elementary-number-theory.multiset-coefficients public
@@ -90,6 +92,7 @@ open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.pisano-periods public
+open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.prime-numbers public

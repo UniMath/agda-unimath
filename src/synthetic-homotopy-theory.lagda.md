@@ -10,6 +10,7 @@ open import synthetic-homotopy-theory.26-id-pushout public
 open import synthetic-homotopy-theory.27-sequences public
 open import synthetic-homotopy-theory.acyclic-maps public
 open import synthetic-homotopy-theory.acyclic-types public
+open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle public
 open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-under-spans public
@@ -18,6 +19,7 @@ open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.coforks public
 open import synthetic-homotopy-theory.conjugation-loops public
+open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-coforks public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public

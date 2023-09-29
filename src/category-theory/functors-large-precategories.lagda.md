@@ -22,11 +22,11 @@ open import foundation.universe-levels
 A **functor** from a [large precategory](category-theory.large-precategories.md)
 `C` to a large precategory `D` consists of:
 
-- a map `F : C → D` on objects,
-- a map `Fmap : hom x y → hom (F x) (F y)` on morphisms, such that the following
+- a map `F₀ : C → D` on objects,
+- a map `F₁ : hom x y → hom (F₀ x) (F₀ y)` on morphisms, such that the following
   identities hold:
-- `Fmap id_x = id_(F x)`,
-- `Fmap (g ∘ f) = F g ∘ F f`.
+- `F id_x = id_(F x)`,
+- `F (g ∘ f) = F g ∘ F f`.
 
 ## Definition
 
@@ -100,8 +100,9 @@ comp-functor-Large-Precategory :
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
   {E : Large-Precategory αE βE} →
-  functor-Large-Precategory D E γG → functor-Large-Precategory C D γF →
-  functor-Large-Precategory C E (λ l → γG (γF l))
+  functor-Large-Precategory D E γG →
+  functor-Large-Precategory C D γF →
+  functor-Large-Precategory C E (γG ∘ γF)
 obj-functor-Large-Precategory (comp-functor-Large-Precategory G F) =
   obj-functor-Large-Precategory G ∘ obj-functor-Large-Precategory F
 hom-functor-Large-Precategory (comp-functor-Large-Precategory G F) =

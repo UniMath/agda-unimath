@@ -11,6 +11,7 @@ open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-maps-pointed-types public
 open import structured-types.contractible-pointed-types public
+open import structured-types.cyclic-types public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public

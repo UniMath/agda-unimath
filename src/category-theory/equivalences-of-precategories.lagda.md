@@ -8,7 +8,7 @@ module category-theory.equivalences-of-precategories where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.natural-isomorphisms-precategories
+open import category-theory.natural-isomorphisms-functors-precategories
 open import category-theory.precategories
 
 open import foundation.cartesian-product-types
@@ -24,7 +24,7 @@ A [functor](category-theory.functors-precategories.md) `F : C → D` is an
 **equivalence** of [precategories](category-theory.precategories.md) if there is
 
 1. a functor `G : D → C` such that `G ∘ F` is
-   [naturally isomorphic](category-theory.natural-isomorphisms-precategories.md)
+   [naturally isomorphic](category-theory.natural-isomorphisms-functors-precategories.md)
    to the identity functor on `C`,
 2. a functor `H : D → C` such that `F ∘ H` is naturally isomorphic to the
    identity functor on `D`.
