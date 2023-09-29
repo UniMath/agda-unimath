@@ -131,3 +131,8 @@ module _
       is-fiberwise-equiv-i =
         fundamental-theorem-id-retraction a i retraction-i
 ```
+
+## See also
+
+- An extension of the fundamental theorem of identity types is formalized in
+  [`foundation.regensburg-extension-fundamental-theorem-of-identity-types`](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md).

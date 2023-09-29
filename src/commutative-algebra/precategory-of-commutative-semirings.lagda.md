@@ -32,9 +32,9 @@ Commutative-Semiring-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Commutative-Semiring-Large-Precategory =
   Commutative-Semiring
-hom-Large-Precategory
+hom-set-Large-Precategory
   Commutative-Semiring-Large-Precategory =
-  hom-Commutative-Semiring
+  hom-set-Commutative-Semiring
 comp-hom-Large-Precategory
   Commutative-Semiring-Large-Precategory {X = A} {B} {C} =
   comp-hom-Commutative-Semiring A B C

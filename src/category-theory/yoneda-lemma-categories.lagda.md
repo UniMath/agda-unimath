@@ -9,7 +9,7 @@ module category-theory.yoneda-lemma-categories where
 ```agda
 open import category-theory.categories
 open import category-theory.functors-categories
-open import category-theory.natural-transformations-categories
+open import category-theory.natural-transformations-functors-categories
 open import category-theory.representable-functors-categories
 open import category-theory.yoneda-lemma-precategories
 
@@ -30,7 +30,7 @@ Given a [category](category-theory.categories.md) `C`, an object `c`, and a
 [functor](category-theory.functors-categories.md) `F` from `C` to the
 [category of sets](foundation.category-of-sets.md), there is an
 [equivalence](foundation-core.equivalences.md) between the
-[set of natural transformations](category-theory.natural-transformations-categories.md)
+[set of natural transformations](category-theory.natural-transformations-functors-categories.md)
 from the functor
 [represented](category-theory.representable-functors-categories.md) by `c` to
 `F` and the [set](foundation-core.sets.md) `F c`.
@@ -52,7 +52,7 @@ module _
     natural-transformation-Category
       ( C)
       ( Set-Category l2)
-      ( rep-functor-Category C c)
+      ( representable-functor-Category C c)
       ( F) →
     type-Set (obj-functor-Category C (Set-Category l2) F c)
   yoneda-evid-Category = yoneda-evid-Precategory (precategory-Category C) c F
@@ -60,7 +60,7 @@ module _
   yoneda-extension-Category :
     type-Set (obj-functor-Category C (Set-Category l2) F c) →
     natural-transformation-Category
-      C (Set-Category l2) (rep-functor-Category C c) F
+      C (Set-Category l2) (representable-functor-Category C c) F
   yoneda-extension-Category =
     yoneda-extension-Precategory (precategory-Category C) c F
 
@@ -81,7 +81,7 @@ module _
     ( natural-transformation-Category
       ( C)
       ( Set-Category l2)
-      ( rep-functor-Category C c) (F)) ≃
+      ( representable-functor-Category C c) (F)) ≃
     ( type-Set (obj-functor-Category C (Set-Category l2) F c))
   pr1 equiv-yoneda-lemma-Category = yoneda-evid-Category
   pr2 equiv-yoneda-lemma-Category = yoneda-lemma-Category

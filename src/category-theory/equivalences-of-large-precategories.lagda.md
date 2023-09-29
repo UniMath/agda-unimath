@@ -9,7 +9,7 @@ module category-theory.equivalences-of-large-precategories where
 ```agda
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
-open import category-theory.natural-isomorphisms-large-precategories
+open import category-theory.natural-isomorphisms-functors-large-precategories
 
 open import foundation.universe-levels
 ```

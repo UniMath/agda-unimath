@@ -65,7 +65,9 @@ open import elementary-number-theory.initial-segments-natural-numbers public
 open import elementary-number-theory.integer-fractions public
 open import elementary-number-theory.integer-partitions public
 open import elementary-number-theory.integers public
+open import elementary-number-theory.jacobi-symbol public
 open import elementary-number-theory.kolakoski-sequence public
+open import elementary-number-theory.legendre-symbol public
 open import elementary-number-theory.lower-bounds-natural-numbers public
 open import elementary-number-theory.maximum-natural-numbers public
 open import elementary-number-theory.maximum-standard-finite-types public
@@ -81,6 +83,7 @@ open import elementary-number-theory.multiplication-integers public
 open import elementary-number-theory.multiplication-lists-of-natural-numbers public
 open import elementary-number-theory.multiplication-natural-numbers public
 open import elementary-number-theory.multiplication-rational-numbers public
+open import elementary-number-theory.multiplicative-monoid-of-natural-numbers public
 open import elementary-number-theory.multiplicative-units-integers public
 open import elementary-number-theory.multiplicative-units-modular-arithmetic public
 open import elementary-number-theory.multiset-coefficients public
@@ -89,6 +92,7 @@ open import elementary-number-theory.nonzero-natural-numbers public
 open import elementary-number-theory.ordinal-induction-natural-numbers public
 open import elementary-number-theory.parity-natural-numbers public
 open import elementary-number-theory.pisano-periods public
+open import elementary-number-theory.poset-of-natural-numbers-ordered-by-divisibility public
 open import elementary-number-theory.powers-integers public
 open import elementary-number-theory.powers-of-two public
 open import elementary-number-theory.prime-numbers public
@@ -105,6 +109,9 @@ open import elementary-number-theory.ring-of-integers public
 open import elementary-number-theory.rings-of-modular-arithmetic public
 open import elementary-number-theory.sieve-of-eratosthenes public
 open import elementary-number-theory.square-free-natural-numbers public
+open import elementary-number-theory.squares-integers public
+open import elementary-number-theory.squares-modular-arithmetic public
+open import elementary-number-theory.squares-natural-numbers public
 open import elementary-number-theory.stirling-numbers-of-the-second-kind public
 open import elementary-number-theory.strict-inequality-natural-numbers public
 open import elementary-number-theory.strictly-ordered-pairs-of-natural-numbers public

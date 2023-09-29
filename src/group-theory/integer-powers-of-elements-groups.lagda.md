@@ -584,7 +584,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   preserves-integer-powers-hom-Group :
@@ -615,11 +615,11 @@ module _
       ( preserves-integer-powers-hom-Group (inr (inr k)) x))
 
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   eq-integer-power-hom-Group :
-    (g : type-hom-Group G H) (k : ℤ) (x : type-Group G) →
+    (g : hom-Group G H) (k : ℤ) (x : type-Group G) →
     ( map-hom-Group G H f x ＝ map-hom-Group G H g x) →
     ( map-hom-Group G H f (integer-power-Group G k x) ＝
       map-hom-Group G H g (integer-power-Group G k x))

@@ -229,7 +229,7 @@ horizontal-concat-Id² :
 horizontal-concat-Id² α β = ap-binary (λ s t → s ∙ t) α β
 ```
 
-#### Identification whiskering
+### Definition of identification whiskering
 
 ```agda
 module _
@@ -279,16 +279,71 @@ right-unit-law-vertical-concat-Id² = right-unit
 
 left-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
-  horizontal-concat-Id² (refl {x = p}) γ ＝ ap (concat p z) γ
+  horizontal-concat-Id² (refl {x = p}) γ ＝
+  identification-left-whisk p γ
 left-unit-law-horizontal-concat-Id² γ = left-unit-ap-binary (λ s t → s ∙ t) γ
 
 right-unit-law-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
-  horizontal-concat-Id² α (refl {x = u}) ＝ ap (concat' x u) α
+  horizontal-concat-Id² α (refl {x = u}) ＝
+  identification-right-whisk α u
 right-unit-law-horizontal-concat-Id² α = right-unit-ap-binary (λ s t → s ∙ t) α
 ```
 
-#### The whiskering operations allow us to commute higher identifications
+Horizontal concatination satisfies an additional "2-dimensional" unit law (on
+both the left and right) induced by the unit laws on the boundary 1-paths.
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y} (α : p ＝ p')
+  where
+
+  nat-sq-right-unit-Id² :
+    coherence-square-identifications
+      ( right-unit)
+      ( α)
+      ( horizontal-concat-Id² α refl)
+      ( right-unit)
+  nat-sq-right-unit-Id² =
+    ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
+      ( nat-htpy htpy-right-unit α)) ∙
+    ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
+
+  nat-sq-left-unit-Id² :
+    coherence-square-identifications
+      ( left-unit)
+      ( α)
+      ( horizontal-concat-Id² (refl {x = refl}) α)
+      ( left-unit)
+  nat-sq-left-unit-Id² =
+    ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
+    ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
+```
+
+### Unit laws for whiskering
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y : A}
+  where
+
+  left-unit-law-identification-left-whisk :
+    {p p' : x ＝ y} (α : p ＝ p') →
+    identification-left-whisk refl α ＝ α
+  left-unit-law-identification-left-whisk refl = refl
+
+  right-unit-law-identification-right-whisk :
+    {p p' : x ＝ y} (α : p ＝ p') →
+    identification-right-whisk α refl ＝
+    right-unit ∙ α ∙ inv right-unit
+  right-unit-law-identification-right-whisk {p = refl} refl = refl
+```
+
+### The whiskering operations allow us to commute higher identifications
+
+There are two natural ways to commute higher identifications: using whiskering
+on the left versus using whiskering on the right. These two ways "undo" each
+other.
 
 ```agda
 module _
@@ -304,30 +359,22 @@ module _
       ( identification-left-whisk p' β)
   path-swap-nat-identification-left-whisk β =
     nat-htpy (htpy-identification-left-whisk β)
-```
 
-Horizontal concatination satisfies an additional "2-dimensional" unit law (on
-both the left and right) induced by the unit laws on the boundary 1-paths.
-
-```agda
-module _
-  {l : Level} {A : UU l} {x y : A} {p p' : x ＝ y} (α : p ＝ p')
-  where
-
-  nat-sq-right-unit-Id² :
+  path-swap-nat-identification-right-whisk :
+    {p p' : x ＝ y} (α : p ＝ p') {q q' : y ＝ z} (β : q ＝ q') →
     coherence-square-identifications
-      right-unit α (horizontal-concat-Id² α refl) right-unit
-  nat-sq-right-unit-Id² =
-    ( ( horizontal-concat-Id² refl (inv (ap-id α))) ∙
-      ( nat-htpy htpy-right-unit α)) ∙
-    ( horizontal-concat-Id² (inv (right-unit-law-horizontal-concat-Id² α)) refl)
+      ( identification-right-whisk α q)
+      ( identification-left-whisk p' β)
+      ( identification-left-whisk p β)
+      ( identification-right-whisk α q')
+  path-swap-nat-identification-right-whisk α =
+    nat-htpy (identification-right-whisk α)
 
-  nat-sq-left-unit-Id² :
-    coherence-square-identifications
-      left-unit α (horizontal-concat-Id² (refl {x = refl}) α) left-unit
-  nat-sq-left-unit-Id² =
-    ( ( (inv (ap-id α) ∙ (nat-htpy htpy-left-unit α)) ∙ right-unit) ∙
-    ( inv (left-unit-law-horizontal-concat-Id² α))) ∙ inv right-unit
+  path-swap-right-undoes-path-swap-left :
+    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') →
+    inv (path-swap-nat-identification-right-whisk α β) ＝
+    (path-swap-nat-identification-left-whisk β α)
+  path-swap-right-undoes-path-swap-left refl refl = refl
 ```
 
 ### Definition of horizontal inverse

@@ -4,24 +4,7 @@
 # and an abstract "identity", which can have associated attributes
 # such as a display name or a homepage.
 #
-# This data is then used when attributing your work, so if you want to
-# show the world that you work on agda-unimath, please add yourself!
-# On the other hand, if for whatever reason you don't want to be
-# mentioned on our webpage, simply leave yourself out of this file,
-# and your name should not appear in our materials. Beware that if you
-# did create commits which at any point got merged into the library,
-# they will be visible in the repository history.
-#
-# Both tables have the same schema; every entry should conform to the following
-# structure:
-#   - displayName: String      ; what name we should show on the website
-#   - extra: Option<String>    ; optional string to appear after your name
-#                                on your contributor page
-#   - usernames: Vec<String>   ; list of git names to associate to this identity
-#   - homepage: Option<String> ; optional link to one's homepage
-#   - github: Option<String>   ; optional github username
-#   - bio: Option<String>      ; optional text about a person, to be displayed on
-#                              ; their contributor page
+# For more information, see CONTRIBUTING.md
 
 
 [[contributors]]
@@ -233,3 +216,13 @@ github = "andrejbauer"
 displayName = "Matej Petković"
 usernames = [ "Matej Petković" ]
 github = "Petkomat"
+
+[[contributors]]
+displayName = "Gregor Perčič"
+usernames = [ "Gregor Perčič", "izak" ]
+github = "GregorPercic"
+
+[[contributors]]
+displayName = "Alec Barreto"
+usernames = [ "Alec Barreto" ]
+github = "wrest64"

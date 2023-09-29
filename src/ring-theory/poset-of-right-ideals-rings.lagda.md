@@ -162,7 +162,7 @@ module _
   preserves-order-subset-right-ideal-Ring I J H = H
 
   subset-right-ideal-hom-large-poset-Ring :
-    hom-Large-Poset
+    hom-set-Large-Poset
       ( id)
       ( right-ideal-Ring-Large-Poset R)
       ( powerset-Large-Poset (type-Ring R))

@@ -35,9 +35,9 @@ def categorize_imports(block):
             continue
         if l.startswith('module') or l.startswith('{-# OPTIONS'):
             print(
-                'Error: module decl./pragmas can not be in the details import block\n\
+                'Error: module declarations and pragmas cannot be in the details import block\n\
                 Please put it in the first Agda block after the first header:\n\t' + str(fpath), file=sys.stderr)
-            sys.exit(1)
+            sys.exit(8)
         elif 'open import' in l:
             if l.endswith('public'):
                 publicImports.add(l)
@@ -66,6 +66,7 @@ def subdivide_namespaces_imports(imports):
             namespace = module[:module.rindex('.')]
             namespaces[namespace].add(module)
         except ValueError:
+            # Fall back when there is no `.`
             namespaces[module].add(module)
 
     # If the entire namespace is imported, no further imports from that namespace are needed
@@ -73,16 +74,19 @@ def subdivide_namespaces_imports(imports):
         if k in namespaces[k]:
             namespaces[k] = {k}
 
-    for statement in namespaces['foundation']:
-        submodule_start = statement.find('.')
-        if submodule_start != -1:
-            namespaces['foundation-core'].discard(
-                'foundation-core' + statement[submodule_start:])
-
+    # If all of `foundation` is imported, no imports from `foundation-core` are needed
     if 'foundation' in namespaces['foundation']:
         namespaces.pop('foundation-core')
 
-    # Remove any namespaces that ended up being empty
+    # If a module is imported from `foundation` we don't need to import it from `foundation-core`
+    if 'foundation' in namespaces.keys() and 'foundation-core' in namespaces.keys():
+        for statement in namespaces['foundation']:
+            submodule_start = statement.find('.')
+            if submodule_start != -1:
+                namespaces['foundation-core'].discard(
+                    'foundation-core' + statement[submodule_start:])
+
+    # Remove any namespaces without further imports
     return dict(filter(lambda kv: len(kv[1]) > 0, namespaces.items()))
 
 

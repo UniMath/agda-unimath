@@ -433,7 +433,7 @@ module _
   {l : Level} (R : Ring l) (k : ℤ)
   where
 
-  hom-ab-integer-multiple-Ring : type-hom-Ab (ab-Ring R) (ab-Ring R)
+  hom-ab-integer-multiple-Ring : hom-Ab (ab-Ring R) (ab-Ring R)
   hom-ab-integer-multiple-Ring = hom-integer-multiple-Ab (ab-Ring R) k
 ```
 
@@ -463,7 +463,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   preserves-integer-multiples-hom-Ring :
@@ -477,11 +477,11 @@ module _
       ( hom-ab-hom-Ring R S f)
 
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   eq-integer-multiple-hom-Ring :
-    (g : type-hom-Ring R S) (k : ℤ) (x : type-Ring R) →
+    (g : hom-Ring R S) (k : ℤ) (x : type-Ring R) →
     ( map-hom-Ring R S f x ＝ map-hom-Ring R S g x) →
     map-hom-Ring R S f (integer-multiple-Ring R k x) ＝
     map-hom-Ring R S g (integer-multiple-Ring R k x)
@@ -497,7 +497,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   preserves-integer-multiple-one-hom-Ring :

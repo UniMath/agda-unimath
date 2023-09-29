@@ -42,21 +42,21 @@ module _
   where
 
   is-commutative-ring-homomorphism-hom-Ab-Prop :
-    type-hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B) → Prop (l1 ⊔ l2)
+    hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B) → Prop (l1 ⊔ l2)
   is-commutative-ring-homomorphism-hom-Ab-Prop =
     is-ring-homomorphism-hom-Ab-Prop
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
 
   is-commutative-ring-homomorphism-hom-Ab :
-    type-hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B) → UU (l1 ⊔ l2)
+    hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B) → UU (l1 ⊔ l2)
   is-commutative-ring-homomorphism-hom-Ab =
     is-ring-homomorphism-hom-Ab
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
 
   is-prop-is-commutative-ring-homomorphism-hom-Ab :
-    (f : type-hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)) →
+    (f : hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)) →
     is-prop (is-commutative-ring-homomorphism-hom-Ab f)
   is-prop-is-commutative-ring-homomorphism-hom-Ab =
     is-prop-is-ring-homomorphism-hom-Ab
@@ -69,29 +69,29 @@ module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (B : Commutative-Ring l2)
   where
 
-  hom-Commutative-Ring : Set (l1 ⊔ l2)
+  hom-set-Commutative-Ring : Set (l1 ⊔ l2)
+  hom-set-Commutative-Ring =
+    hom-set-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
+
+  hom-Commutative-Ring : UU (l1 ⊔ l2)
   hom-Commutative-Ring =
     hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
 
-  type-hom-Commutative-Ring : UU (l1 ⊔ l2)
-  type-hom-Commutative-Ring =
-    type-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
-
-  is-set-type-hom-Commutative-Ring : is-set type-hom-Commutative-Ring
-  is-set-type-hom-Commutative-Ring =
-    is-set-type-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
+  is-set-hom-Commutative-Ring : is-set hom-Commutative-Ring
+  is-set-hom-Commutative-Ring =
+    is-set-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B)
 
   module _
-    (f : type-hom-Commutative-Ring)
+    (f : hom-Commutative-Ring)
     where
 
     hom-ab-hom-Commutative-Ring :
-      type-hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+      hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
     hom-ab-hom-Commutative-Ring =
       hom-ab-hom-Ring (ring-Commutative-Ring A) (ring-Commutative-Ring B) f
 
     hom-multiplicative-monoid-hom-Commutative-Ring :
-      type-hom-Monoid
+      hom-Monoid
         ( multiplicative-monoid-Commutative-Ring A)
         ( multiplicative-monoid-Commutative-Ring B)
     hom-multiplicative-monoid-hom-Commutative-Ring =
@@ -171,7 +171,7 @@ module _
         ( f)
 
     hom-commutative-semiring-hom-Commutative-Ring :
-      type-hom-Commutative-Semiring
+      hom-Commutative-Semiring
         ( commutative-semiring-Commutative-Ring A)
         ( commutative-semiring-Commutative-Ring B)
     hom-commutative-semiring-hom-Commutative-Ring =
@@ -212,7 +212,7 @@ module _
   is-ring-homomorphism-id-hom-Commutative-Ring =
     is-ring-homomorphism-id-hom-Ring (ring-Commutative-Ring A)
 
-  id-hom-Commutative-Ring : type-hom-Commutative-Ring A A
+  id-hom-Commutative-Ring : hom-Commutative-Ring A A
   id-hom-Commutative-Ring = id-hom-Ring (ring-Commutative-Ring A)
 ```
 
@@ -222,11 +222,11 @@ module _
 module _
   {l1 l2 l3 : Level}
   (A : Commutative-Ring l1) (B : Commutative-Ring l2) (C : Commutative-Ring l3)
-  (g : type-hom-Commutative-Ring B C) (f : type-hom-Commutative-Ring A B)
+  (g : hom-Commutative-Ring B C) (f : hom-Commutative-Ring A B)
   where
 
   hom-ab-comp-hom-Commutative-Ring :
-    type-hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring C)
+    hom-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring C)
   hom-ab-comp-hom-Commutative-Ring =
     hom-ab-comp-hom-Ring
       ( ring-Commutative-Ring A)
@@ -236,7 +236,7 @@ module _
       ( f)
 
   hom-multiplicative-monoid-comp-hom-Commutative-Ring :
-    type-hom-Monoid
+    hom-Monoid
       ( multiplicative-monoid-Commutative-Ring A)
       ( multiplicative-monoid-Commutative-Ring C)
   hom-multiplicative-monoid-comp-hom-Commutative-Ring =
@@ -284,7 +284,7 @@ module _
       ( g)
       ( f)
 
-  comp-hom-Commutative-Ring : type-hom-Commutative-Ring A C
+  comp-hom-Commutative-Ring : hom-Commutative-Ring A C
   comp-hom-Commutative-Ring =
     comp-hom-Ring
       ( ring-Commutative-Ring A)
@@ -302,14 +302,14 @@ module _
   where
 
   htpy-hom-Commutative-Ring :
-    type-hom-Commutative-Ring A B → type-hom-Commutative-Ring A B → UU (l1 ⊔ l2)
+    hom-Commutative-Ring A B → hom-Commutative-Ring A B → UU (l1 ⊔ l2)
   htpy-hom-Commutative-Ring =
     htpy-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
 
   refl-htpy-hom-Commutative-Ring :
-    (f : type-hom-Commutative-Ring A B) → htpy-hom-Commutative-Ring f f
+    (f : hom-Commutative-Ring A B) → htpy-hom-Commutative-Ring f f
   refl-htpy-hom-Commutative-Ring =
     refl-htpy-hom-Ring
       ( ring-Commutative-Ring A)
@@ -324,11 +324,11 @@ module _
 module _
   {l1 l2 : Level}
   (A : Commutative-Ring l1) (B : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A B)
+  (f : hom-Commutative-Ring A B)
   where
 
   htpy-eq-hom-Commutative-Ring :
-    (g : type-hom-Commutative-Ring A B) →
+    (g : hom-Commutative-Ring A B) →
     (f ＝ g) → htpy-hom-Commutative-Ring A B f g
   htpy-eq-hom-Commutative-Ring =
     htpy-eq-hom-Ring
@@ -338,7 +338,7 @@ module _
 
   is-contr-total-htpy-hom-Commutative-Ring :
     is-contr
-      ( Σ (type-hom-Commutative-Ring A B) (htpy-hom-Commutative-Ring A B f))
+      ( Σ (hom-Commutative-Ring A B) (htpy-hom-Commutative-Ring A B f))
   is-contr-total-htpy-hom-Commutative-Ring =
     is-contr-total-htpy-hom-Ring
       ( ring-Commutative-Ring A)
@@ -346,7 +346,7 @@ module _
       ( f)
 
   is-equiv-htpy-eq-hom-Commutative-Ring :
-    (g : type-hom-Commutative-Ring A B) →
+    (g : hom-Commutative-Ring A B) →
     is-equiv (htpy-eq-hom-Commutative-Ring g)
   is-equiv-htpy-eq-hom-Commutative-Ring =
     is-equiv-htpy-eq-hom-Ring
@@ -355,7 +355,7 @@ module _
       ( f)
 
   extensionality-hom-Commutative-Ring :
-    (g : type-hom-Commutative-Ring A B) →
+    (g : hom-Commutative-Ring A B) →
     (f ＝ g) ≃ htpy-hom-Commutative-Ring A B f g
   extensionality-hom-Commutative-Ring =
     extensionality-hom-Ring
@@ -364,7 +364,7 @@ module _
       ( f)
 
   eq-htpy-hom-Commutative-Ring :
-    (g : type-hom-Commutative-Ring A B) →
+    (g : hom-Commutative-Ring A B) →
     htpy-hom-Commutative-Ring A B f g → f ＝ g
   eq-htpy-hom-Commutative-Ring =
     eq-htpy-hom-Ring
@@ -382,9 +382,9 @@ module _
   (B : Commutative-Ring l2)
   (C : Commutative-Ring l3)
   (D : Commutative-Ring l4)
-  (h : type-hom-Commutative-Ring C D)
-  (g : type-hom-Commutative-Ring B C)
-  (f : type-hom-Commutative-Ring A B)
+  (h : hom-Commutative-Ring C D)
+  (g : hom-Commutative-Ring B C)
+  (f : hom-Commutative-Ring A B)
   where
 
   associative-comp-hom-Commutative-Ring :
@@ -412,7 +412,7 @@ module _
   {l1 l2 : Level}
   (A : Commutative-Ring l1)
   (B : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A B)
+  (f : hom-Commutative-Ring A B)
   where
 
   left-unit-law-comp-hom-Commutative-Ring :
@@ -437,7 +437,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (A : Commutative-Ring l1) (S : Commutative-Ring l2)
-  (f : type-hom-Commutative-Ring A S)
+  (f : hom-Commutative-Ring A S)
   where
 
   preserves-invertible-elements-hom-Commutative-Ring :

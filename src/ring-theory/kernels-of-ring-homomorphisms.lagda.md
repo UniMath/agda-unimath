@@ -35,7 +35,7 @@ elements `x : R` equipped with an identification `f x ＝ 0`.
 
 ```agda
 module _
-  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : type-hom-Ring R S)
+  {l1 l2 : Level} (R : Ring l1) (S : Ring l2) (f : hom-Ring R S)
   where
 
   subgroup-kernel-hom-Ring : Subgroup-Ab l2 (ab-Ring R)

@@ -8,7 +8,7 @@ through their usage and help ensure your contributions meet our standards.
 The `make pre-commit` tool checks library conventions and performs basic tasks.
 Before you run it, ensure your new files have been added to the `git`
 repository. Installation instructions for the `make pre-commit` tool can be
-found [here](HOWTO-INSTALL.html#after-the-setup).
+found [here](HOWTO-INSTALL.md#after-the-setup).
 
 The `make pre-commit` tool can generate errors during the first run while
 correcting some of them automatically. If all goes well, the second run should
@@ -94,7 +94,50 @@ tool starts by running `make check` and then builds the website, reporting any
 broken internal links that may prevent the website build from completing.
 
 Installation instructions for the `make website` tool can be found
-[here](HOWTO-INSTALL.html#after-the-setup)
+[here](HOWTO-INSTALL.md#after-the-setup).
+
+## Adding yourself as a contributor {#add-contributor}
+
+When you submit changes to the library, you have every right to call yourself a
+contributor. We can attribute your work to you by listing your preferred name on
+our [list of contributors](CONTRIBUTORS.md), and by including your name on the
+source pages you helped create.
+
+This attribution process is automated, so all you need to do is add a section to
+the `CONTRIBUTORS.toml` file, where you can customize how you appear on the
+website. If you do not want to be mentioned on the website, simply leave
+yourself out of this file. For most contributors, the new section will look like
+the following:
+
+```toml
+[[contributors]]
+displayName = "Vojtěch Štěpančík"
+usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
+github = "VojtechStep"
+```
+
+The `displayName` field tells our tooling how to display your name - be it on
+the Contributors page, the source page headers, or in the list of recent
+changes. The `github` field is optional, and when included it makes you name on
+the Contributors page into a link to your GitHub profile.
+
+The `usernames` list is very important - that's how you tell the build process
+which commits belong to you. Because of some peculiarities with GitHub's
+handling of author and co-author information, this list will very often include
+two names: your local git username, which you can get by running
+`git config user.name` from the command-line in your local clone of the
+repository; and your GitHub _display name_, which you can get by navigating to
+your user profile on GitHub, where it's the one directly under your profile
+picture. If you change your GitHub display name, the old commits will still use
+the old name, but your new changes will use the new name, so if you keep
+contributing to the library, you'll need to add that new name to the list. If
+you have any doubts or questions, feel free to reach out on the
+[Discord server](https://discord.gg/Zp2e8hYsuX) or in the comments of your pull
+request.
+
+Additional fields you can add are all optional strings, and they are `extra`,
+`homepage` and `bio`. Currently they have no effect on how your information is
+displayed on the website.
 
 ## Submitting your pull request on GitHub
 

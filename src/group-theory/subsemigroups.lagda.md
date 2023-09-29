@@ -186,7 +186,7 @@ module _
   preserves-mul-inclusion-Subsemigroup x y = refl
 
   hom-inclusion-Subsemigroup :
-    type-hom-Semigroup semigroup-Subsemigroup G
+    hom-Semigroup semigroup-Subsemigroup G
   pr1 hom-inclusion-Subsemigroup = inclusion-Subsemigroup
   pr2 hom-inclusion-Subsemigroup = preserves-mul-inclusion-Subsemigroup
 ```

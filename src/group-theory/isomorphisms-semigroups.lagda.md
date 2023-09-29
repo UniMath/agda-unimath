@@ -43,66 +43,66 @@ Isomorphisms of semigroups are homomorphisms that have a two-sided inverse.
 ```agda
 module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
-  (f : type-hom-Semigroup G H)
+  (f : hom-Semigroup G H)
   where
 
-  is-iso-hom-Semigroup : UU (l1 ⊔ l2)
-  is-iso-hom-Semigroup =
-    is-iso-hom-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H} f
+  is-iso-Semigroup : UU (l1 ⊔ l2)
+  is-iso-Semigroup =
+    is-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H} f
 
-  hom-inv-is-iso-hom-Semigroup :
-    is-iso-hom-Semigroup → type-hom-Semigroup H G
-  hom-inv-is-iso-hom-Semigroup =
-    hom-inv-is-iso-hom-Large-Precategory
+  hom-inv-is-iso-Semigroup :
+    is-iso-Semigroup → hom-Semigroup H G
+  hom-inv-is-iso-Semigroup =
+    hom-inv-is-iso-Large-Precategory
       ( Semigroup-Large-Precategory)
       { X = G}
       { Y = H}
       ( f)
 
-  map-inv-is-iso-hom-Semigroup :
-    is-iso-hom-Semigroup → type-Semigroup H → type-Semigroup G
-  map-inv-is-iso-hom-Semigroup U =
-    map-hom-Semigroup H G (hom-inv-is-iso-hom-Semigroup U)
+  map-inv-is-iso-Semigroup :
+    is-iso-Semigroup → type-Semigroup H → type-Semigroup G
+  map-inv-is-iso-Semigroup U =
+    map-hom-Semigroup H G (hom-inv-is-iso-Semigroup U)
 
-  is-section-hom-inv-is-iso-hom-Semigroup :
-    (U : is-iso-hom-Semigroup) →
-    comp-hom-Semigroup H G H f (hom-inv-is-iso-hom-Semigroup U) ＝
+  is-section-hom-inv-is-iso-Semigroup :
+    (U : is-iso-Semigroup) →
+    comp-hom-Semigroup H G H f (hom-inv-is-iso-Semigroup U) ＝
     id-hom-Semigroup H
-  is-section-hom-inv-is-iso-hom-Semigroup =
-    is-section-hom-inv-is-iso-hom-Large-Precategory
+  is-section-hom-inv-is-iso-Semigroup =
+    is-section-hom-inv-is-iso-Large-Precategory
       ( Semigroup-Large-Precategory)
       { X = G}
       { Y = H}
       ( f)
 
-  is-section-map-inv-is-iso-hom-Semigroup :
-    (U : is-iso-hom-Semigroup) →
-    ( map-hom-Semigroup G H f ∘ map-inv-is-iso-hom-Semigroup U) ~ id
-  is-section-map-inv-is-iso-hom-Semigroup U =
+  is-section-map-inv-is-iso-Semigroup :
+    (U : is-iso-Semigroup) →
+    ( map-hom-Semigroup G H f ∘ map-inv-is-iso-Semigroup U) ~ id
+  is-section-map-inv-is-iso-Semigroup U =
     htpy-eq-hom-Semigroup H H
-      ( comp-hom-Semigroup H G H f (hom-inv-is-iso-hom-Semigroup U))
+      ( comp-hom-Semigroup H G H f (hom-inv-is-iso-Semigroup U))
       ( id-hom-Semigroup H)
-      ( is-section-hom-inv-is-iso-hom-Semigroup U)
+      ( is-section-hom-inv-is-iso-Semigroup U)
 
-  is-retraction-hom-inv-is-iso-hom-Semigroup :
-    (U : is-iso-hom-Semigroup) →
-    comp-hom-Semigroup G H G (hom-inv-is-iso-hom-Semigroup U) f ＝
+  is-retraction-hom-inv-is-iso-Semigroup :
+    (U : is-iso-Semigroup) →
+    comp-hom-Semigroup G H G (hom-inv-is-iso-Semigroup U) f ＝
     id-hom-Semigroup G
-  is-retraction-hom-inv-is-iso-hom-Semigroup =
-    is-retraction-hom-inv-is-iso-hom-Large-Precategory
+  is-retraction-hom-inv-is-iso-Semigroup =
+    is-retraction-hom-inv-is-iso-Large-Precategory
       ( Semigroup-Large-Precategory)
       { X = G}
       { Y = H}
       ( f)
 
-  is-retraction-map-inv-is-iso-hom-Semigroup :
-    (U : is-iso-hom-Semigroup) →
-    ( map-inv-is-iso-hom-Semigroup U ∘ map-hom-Semigroup G H f) ~ id
-  is-retraction-map-inv-is-iso-hom-Semigroup U =
+  is-retraction-map-inv-is-iso-Semigroup :
+    (U : is-iso-Semigroup) →
+    ( map-inv-is-iso-Semigroup U ∘ map-hom-Semigroup G H f) ~ id
+  is-retraction-map-inv-is-iso-Semigroup U =
     htpy-eq-hom-Semigroup G G
-      ( comp-hom-Semigroup G H G (hom-inv-is-iso-hom-Semigroup U) f)
+      ( comp-hom-Semigroup G H G (hom-inv-is-iso-Semigroup U) f)
       ( id-hom-Semigroup G)
-      ( is-retraction-hom-inv-is-iso-hom-Semigroup U)
+      ( is-retraction-hom-inv-is-iso-Semigroup U)
 ```
 
 ### Isomorphisms of semigroups
@@ -115,7 +115,7 @@ module _
   type-iso-Semigroup : UU (l1 ⊔ l2)
   type-iso-Semigroup = iso-Large-Precategory Semigroup-Large-Precategory G H
 
-  hom-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup G H
+  hom-iso-Semigroup : type-iso-Semigroup → hom-Semigroup G H
   hom-iso-Semigroup =
     hom-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
@@ -130,11 +130,11 @@ module _
     preserves-mul-hom-Semigroup G H (hom-iso-Semigroup f)
 
   is-iso-iso-Semigroup :
-    (f : type-iso-Semigroup) → is-iso-hom-Semigroup G H (hom-iso-Semigroup f)
+    (f : type-iso-Semigroup) → is-iso-Semigroup G H (hom-iso-Semigroup f)
   is-iso-iso-Semigroup =
     is-iso-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
-  hom-inv-iso-Semigroup : type-iso-Semigroup → type-hom-Semigroup H G
+  hom-inv-iso-Semigroup : type-iso-Semigroup → hom-Semigroup H G
   hom-inv-iso-Semigroup =
     hom-inv-iso-Large-Precategory Semigroup-Large-Precategory {X = G} {Y = H}
 
@@ -203,18 +203,18 @@ module _
   where
 
   abstract
-    is-prop-is-iso-hom-Semigroup :
-      (f : type-hom-Semigroup G H) → is-prop (is-iso-hom-Semigroup G H f)
-    is-prop-is-iso-hom-Semigroup =
-      is-prop-is-iso-hom-Large-Precategory
+    is-prop-is-iso-Semigroup :
+      (f : hom-Semigroup G H) → is-prop (is-iso-Semigroup G H f)
+    is-prop-is-iso-Semigroup =
+      is-prop-is-iso-Large-Precategory
         ( Semigroup-Large-Precategory)
         { X = G}
         { Y = H}
 
-  is-iso-prop-hom-Semigroup :
-    type-hom-Semigroup G H → Prop (l1 ⊔ l2)
-  is-iso-prop-hom-Semigroup =
-    is-iso-prop-hom-Large-Precategory
+  is-iso-prop-Semigroup :
+    hom-Semigroup G H → Prop (l1 ⊔ l2)
+  is-iso-prop-Semigroup =
+    is-iso-prop-Large-Precategory
       ( Semigroup-Large-Precategory)
       { X = G}
       { Y = H}
@@ -229,7 +229,7 @@ module _
 
   abstract
     preserves-mul-map-inv-is-equiv-Semigroup :
-      ( f : type-hom-Semigroup G H)
+      ( f : hom-Semigroup G H)
       ( U : is-equiv (map-hom-Semigroup G H f)) →
       preserves-mul-Semigroup H G (map-inv-is-equiv U)
     preserves-mul-map-inv-is-equiv-Semigroup (f , μ-f) U x y =
@@ -261,8 +261,8 @@ module _
 
   abstract
     is-iso-is-equiv-hom-Semigroup :
-      (f : type-hom-Semigroup G H) →
-      is-equiv-hom-Semigroup G H f → is-iso-hom-Semigroup G H f
+      (f : hom-Semigroup G H) →
+      is-equiv-hom-Semigroup G H f → is-iso-Semigroup G H f
     pr1 (pr1 (is-iso-is-equiv-hom-Semigroup (f , μ-f) U)) =
       map-inv-is-equiv U
     pr2 (pr1 (is-iso-is-equiv-hom-Semigroup (f , μ-f) U)) =
@@ -273,10 +273,10 @@ module _
       eq-htpy-hom-Semigroup G G (is-retraction-map-inv-is-equiv U)
 
   abstract
-    is-equiv-is-iso-hom-Semigroup :
-      (f : type-hom-Semigroup G H) →
-      is-iso-hom-Semigroup G H f → is-equiv-hom-Semigroup G H f
-    is-equiv-is-iso-hom-Semigroup (f , μ-f) ((g , μ-g) , S , R) =
+    is-equiv-is-iso-Semigroup :
+      (f : hom-Semigroup G H) →
+      is-iso-Semigroup G H f → is-equiv-hom-Semigroup G H f
+    is-equiv-is-iso-Semigroup (f , μ-f) ((g , μ-g) , S , R) =
       is-equiv-is-invertible g
         ( htpy-eq (ap pr1 S))
         ( htpy-eq (ap pr1 R))
@@ -285,9 +285,9 @@ module _
   equiv-iso-equiv-Semigroup =
     ( equiv-type-subtype
       ( λ f → is-property-is-equiv (map-hom-Semigroup G H f))
-      ( is-prop-is-iso-hom-Semigroup G H)
+      ( is-prop-is-iso-Semigroup G H)
       ( is-iso-is-equiv-hom-Semigroup)
-      ( is-equiv-is-iso-hom-Semigroup)) ∘e
+      ( is-equiv-is-iso-Semigroup)) ∘e
     ( equiv-right-swap-Σ)
 ```
 

@@ -48,7 +48,7 @@ module _
     (X Y : obj-Category C) (U : obj-Category D)
     (u : object-anafunctor-Category X U)
     (V : obj-Category D) (v : object-anafunctor-Category Y V) →
-    type-hom-Category C X Y → type-hom-Category D U V
+    hom-Category C X Y → hom-Category D U V
   hom-anafunctor-Category =
     hom-anafunctor-Precategory
       ( precategory-Category C)

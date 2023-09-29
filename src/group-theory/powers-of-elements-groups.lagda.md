@@ -177,7 +177,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   preserves-powers-hom-Group :

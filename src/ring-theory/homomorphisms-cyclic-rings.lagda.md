@@ -43,15 +43,15 @@ module _
   {l1 l2 : Level} (R : Cyclic-Ring l1) (S : Cyclic-Ring l2)
   where
 
-  hom-Cyclic-Ring : Set (l1 ⊔ l2)
+  hom-set-Cyclic-Ring : Set (l1 ⊔ l2)
+  hom-set-Cyclic-Ring = hom-set-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
+
+  hom-Cyclic-Ring : UU (l1 ⊔ l2)
   hom-Cyclic-Ring = hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
 
-  type-hom-Cyclic-Ring : UU (l1 ⊔ l2)
-  type-hom-Cyclic-Ring = type-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
-
-  is-set-type-hom-Cyclic-Ring : is-set type-hom-Cyclic-Ring
-  is-set-type-hom-Cyclic-Ring =
-    is-set-type-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
+  is-set-hom-Cyclic-Ring : is-set hom-Cyclic-Ring
+  is-set-hom-Cyclic-Ring =
+    is-set-hom-Ring (ring-Cyclic-Ring R) (ring-Cyclic-Ring S)
 ```
 
 ### The identity homomorphism of cyclic rings
@@ -61,7 +61,7 @@ module _
   {l1 : Level} (R : Cyclic-Ring l1)
   where
 
-  id-hom-Cyclic-Ring : type-hom-Cyclic-Ring R R
+  id-hom-Cyclic-Ring : hom-Cyclic-Ring R R
   id-hom-Cyclic-Ring = id-hom-Ring (ring-Cyclic-Ring R)
 ```
 
@@ -74,8 +74,8 @@ module _
   where
 
   comp-hom-Cyclic-Ring :
-    (g : type-hom-Cyclic-Ring S T) (f : type-hom-Cyclic-Ring R S) →
-    type-hom-Cyclic-Ring R T
+    (g : hom-Cyclic-Ring S T) (f : hom-Cyclic-Ring R S) →
+    hom-Cyclic-Ring R T
   comp-hom-Cyclic-Ring =
     comp-hom-Ring
       ( ring-Cyclic-Ring R)
@@ -105,7 +105,7 @@ module _
 
   abstract
     htpy-all-elements-equal-hom-Cyclic-Ring-Ring :
-      (f g : type-hom-Ring (ring-Cyclic-Ring R) S) →
+      (f g : hom-Ring (ring-Cyclic-Ring R) S) →
       htpy-hom-Ring (ring-Cyclic-Ring R) S f g
     htpy-all-elements-equal-hom-Cyclic-Ring-Ring f g x =
       apply-universal-property-trunc-Prop
@@ -137,7 +137,7 @@ module _
                   ( one-Cyclic-Ring R)))})
 
   all-elements-equal-hom-Cyclic-Ring-Ring :
-    all-elements-equal (type-hom-Ring (ring-Cyclic-Ring R) S)
+    all-elements-equal (hom-Ring (ring-Cyclic-Ring R) S)
   all-elements-equal-hom-Cyclic-Ring-Ring f g =
     eq-htpy-hom-Ring
       ( ring-Cyclic-Ring R)
@@ -147,7 +147,7 @@ module _
       ( htpy-all-elements-equal-hom-Cyclic-Ring-Ring f g)
 
   is-prop-hom-Cyclic-Ring-Ring :
-    is-prop (type-hom-Ring (ring-Cyclic-Ring R) S)
+    is-prop (hom-Ring (ring-Cyclic-Ring R) S)
   is-prop-hom-Cyclic-Ring-Ring =
     is-prop-all-elements-equal all-elements-equal-hom-Cyclic-Ring-Ring
 
@@ -156,7 +156,7 @@ module _
   where
 
   is-prop-hom-Cyclic-Ring :
-    is-prop (type-hom-Cyclic-Ring R S)
+    is-prop (hom-Cyclic-Ring R S)
   is-prop-hom-Cyclic-Ring =
     is-prop-hom-Cyclic-Ring-Ring R (ring-Cyclic-Ring S)
 ```
@@ -166,7 +166,7 @@ module _
 ```agda
 module _
   {l1 l2 : Level} (R : Cyclic-Ring l1) (S : Cyclic-Ring l2)
-  (f : type-hom-Cyclic-Ring R S)
+  (f : hom-Cyclic-Ring R S)
   where
 
   left-unit-law-comp-hom-Cyclic-Ring :
@@ -192,9 +192,9 @@ module _
   where
 
   associative-comp-hom-Cyclic-Ring :
-    (h : type-hom-Cyclic-Ring T U)
-    (g : type-hom-Cyclic-Ring S T)
-    (f : type-hom-Cyclic-Ring R S) →
+    (h : hom-Cyclic-Ring T U)
+    (g : hom-Cyclic-Ring S T)
+    (f : hom-Cyclic-Ring R S) →
     comp-hom-Cyclic-Ring R S U (comp-hom-Cyclic-Ring S T U h g) f ＝
     comp-hom-Cyclic-Ring R T U h (comp-hom-Cyclic-Ring R S T g f)
   associative-comp-hom-Cyclic-Ring =

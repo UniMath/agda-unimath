@@ -193,7 +193,7 @@ module _
     preserves-mul-inclusion-Submonoid (monoid-Commutative-Monoid M) P
 
   hom-inclusion-Commutative-Submonoid :
-    type-hom-Commutative-Monoid commutative-monoid-Commutative-Submonoid M
+    hom-Commutative-Monoid commutative-monoid-Commutative-Submonoid M
   hom-inclusion-Commutative-Submonoid =
     hom-inclusion-Submonoid (monoid-Commutative-Monoid M) P
 ```
