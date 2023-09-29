@@ -87,7 +87,8 @@ is-neg-one-neg-one-ℤ-Mod :
 is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
 is-neg-one-neg-one-ℤ-Mod (succ-ℕ n) = is-neg-one-neg-one-Fin n
 
-integer-multiplication-by-one-preserves-succ-ℤ : (n : ℕ) (x : ℤ) →
+integer-multiplication-by-one-preserves-succ-ℤ :
+  (n : ℕ) (x : ℤ) →
   integer-multiple-Ring (ℤ-Mod-Ring n) (succ-ℤ x) (one-ℤ-Mod n) ＝
   succ-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
 integer-multiplication-by-one-preserves-succ-ℤ n x =
