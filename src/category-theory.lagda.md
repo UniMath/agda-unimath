@@ -2,33 +2,11 @@
 
 ## Examples of categories and large categories
 
-| Category                      | File                                                                                                                                          |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Commutative Rings             | [`commutative-algebra.category-of-commutative-rings`](commutative-algebra.category-of-commutative-rings.md)                                   |
-| Connected set bundles over 𝕊¹ | [`synthetic-homotopy-theory.category-of-connected-set-bundles-circle`](synthetic-homotopy-theory.category-of-connected-set-bundles-circle.md) |
-| Families of sets              | [`foundation.category-of-families-of-sets`](foundation.category-of-families-of-sets.md)                                                       |
-| Groups                        | [`group-theory.category-of-groups`](group-theory.category-of-groups.md)                                                                       |
-| Rings                         | [`ring-theory.category-of-rings`](ring-theory.category-of-rings.md)                                                                           |
-| Semigroups                    | [`group-theory.category-of-semigroups`](group-theory.category-of-semigroups.md)                                                               |
-| Sets                          | [`foundation.category-of-sets`](foundation.category-of-sets.md)                                                                               |
+{{#include tables/categories.md}}
 
 ## Examples of precategories and large precategories
 
-| Precategory           | File                                                                                                                      |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Abelian groups        | [`group-theory.precategory-of-abelian-groups`](group-theory.precategory-of-abelian-groups.md)                             |
-| Commutative monoids   | [`group-theory.precategory-of-commutative-monoids`](group-theory.precategory-of-commutative-monoids.md)                   |
-| Commutative rings     | [`commutative-algebra.precategory-of-commutative-rings`](commutative-algebra.precategory-of-commutative-rings.md)         |
-| Commutative semirings | [`commutative-algebra.precategory-of-commutative-semirings`](commutative-algebra.precategory-of-commutative-semirings.md) |
-| Concrete groups       | [`group-theory.precategory-of-concrete-groups`](group-theory.precategory-of-concrete-groups.md)                           |
-| Finite species        | [`species.precategory-of-finite-species`](species.precategory-of-finite-species.md)                                       |
-| `G`-sets              | [`group-theory.precategory-of-group-actions`](group-theory.precategory-of-group-actions.md)                               |
-| Groups                | [`group-theory.precategory-of-groups`](group-theory.precategory-of-groups.md)                                             |
-| Monoids               | [`group-theory.precategory-of-monoids`](group-theory.precategory-of-monoids.md)                                           |
-| Rings                 | [`ring-theory.precategory-of-rings`](ring-theory.precategory-of-rings.md)                                                 |
-| Semigroups            | [`group-theory.precategory-of-semigroups`](group-theory.precategory-of-semigroups.md)                                     |
-| Semirings             | [`ring-theory.precategory-of-semirings`](ring-theory.precategory-of-semirings.md)                                         |
-| Sets                  | [`foundation.category-of-sets`](foundation.category-of-sets.md)                                                           |
+{{#include tables/precategories.md}}
 
 ## Files in the category theory folder
 
