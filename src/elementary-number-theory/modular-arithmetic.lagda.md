@@ -795,8 +795,8 @@ is-decidable-div-ℤ d x =
 ### `mod-ℤ` is surjective
 
 ```agda
-is-surjective-succ-Fin-comp-mod-succ-ℕ : (n : ℕ) →
-  is-surjective (succ-Fin (succ-ℕ n) ∘ mod-succ-ℕ n)
+is-surjective-succ-Fin-comp-mod-succ-ℕ :
+  (n : ℕ) → is-surjective (succ-Fin (succ-ℕ n) ∘ mod-succ-ℕ n)
 is-surjective-succ-Fin-comp-mod-succ-ℕ n =
   is-surjective-comp
     ( is-surjective-is-equiv (is-equiv-succ-Fin (succ-ℕ n)))
