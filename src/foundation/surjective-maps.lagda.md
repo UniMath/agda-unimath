@@ -257,17 +257,22 @@ module _
 
 ```agda
 module _
-  { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
+  { l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
     is-surjective-htpy :
-      f ~ g → is-surjective g → is-surjective f
-    is-surjective-htpy H K b =
+      {f g : A → B} → f ~ g → is-surjective g → is-surjective f
+    is-surjective-htpy {f} {g} H K b =
       apply-universal-property-trunc-Prop
         ( K b)
         ( trunc-Prop (fiber f b))
-        ( λ {(a , refl) → unit-trunc-Prop (a , H a)})
+        ( λ where (a , refl) → unit-trunc-Prop (a , H a))
+
+  abstract
+    is-surjective-htpy' :
+      {f g : A → B} → f ~ g → is-surjective f → is-surjective g
+    is-surjective-htpy' H = is-surjective-htpy (inv-htpy H)
 ```
 
 ### The dependent universal property of surjective maps

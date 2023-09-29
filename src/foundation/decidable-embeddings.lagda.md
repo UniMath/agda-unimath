@@ -260,7 +260,7 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
     f ~ g → is-decidable-emb g → is-decidable-emb f
   pr1 (is-decidable-emb-htpy {f = f} {g} H K) =
-    is-emb-htpy f g H (is-emb-is-decidable-emb K)
+    is-emb-htpy H (is-emb-is-decidable-emb K)
   pr2 (is-decidable-emb-htpy {f = f} {g} H K) b =
     is-decidable-equiv
       ( equiv-tot (λ a → equiv-concat (inv (H a)) b))

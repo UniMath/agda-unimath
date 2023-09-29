@@ -55,7 +55,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B) (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   where
 
   abstract
@@ -72,13 +72,13 @@ module _
         ( is-equiv-concat' (f x) (H y))
 
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B) (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   where
 
   abstract
     is-emb-htpy' : is-emb f → is-emb g
     is-emb-htpy' is-emb-f =
-      is-emb-htpy g f (inv-htpy H) is-emb-f
+      is-emb-htpy (inv-htpy H) is-emb-f
 ```
 
 ### Any map between propositions is an embedding
@@ -110,7 +110,7 @@ module _
       (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
       is-emb h → is-emb f
     is-emb-comp-htpy f g h H is-emb-g is-emb-h =
-      is-emb-htpy f (g ∘ h) H (is-emb-comp g h is-emb-g is-emb-h)
+      is-emb-htpy H (is-emb-comp g h is-emb-g is-emb-h)
 
   comp-emb :
     (B ↪ C) → (A ↪ B) → (A ↪ C)
@@ -147,7 +147,7 @@ module _
         ( ap h)
         ( ap-comp g h)
         ( is-emb-g (h x) (h y))
-        ( is-emb-htpy (g ∘ h) f (inv-htpy H) is-emb-f x y)
+        ( is-emb-htpy (inv-htpy H) is-emb-f x y)
 
   abstract
     is-emb-triangle-is-equiv :
@@ -323,8 +323,6 @@ module _
       ( top)
       ( is-emb-is-equiv L)
       ( is-emb-htpy'
-        ( bottom ∘ left)
-        ( right ∘ top)
         ( H)
         ( is-emb-comp bottom left M (is-emb-is-equiv K)))
 

@@ -78,3 +78,16 @@ preserves-tr :
   f j (tr A p x) ＝ tr B p (f i x)
 preserves-tr f refl x = refl
 ```
+
+### Computing maps out of identity types as transports
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
+  (f : (x : A) → (a ＝ x) → B x)
+  where
+
+  compute-map-out-of-identity-type :
+    (x : A) (p : a ＝ x) → f x p ＝ tr B p (f a refl)
+  compute-map-out-of-identity-type x refl = refl
+```
