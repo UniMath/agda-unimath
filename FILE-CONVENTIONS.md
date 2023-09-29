@@ -127,6 +127,22 @@ subsections further. Ensure that subsection headings concisely describe the
 content of the following code block. However, don't hesitate to include
 explanatory text within a section when necessary.
 
+### Tables
+
+If you want to include a table in your file, for example listing examples of a
+relevant construction or files with related concepts, add the table as its own
+Markdown file in the `tables` directory, using
+[Markdown syntax for tables](https://www.markdownguide.org/extended-syntax/#tables).
+The file should contain only the table and it should have a descriptive name. It
+can then be included with the mdbook `{{#include}}` directive, as in the
+following example:
+
+```md
+## Examples of categories and large categories
+
+{{#include tables/categories.md}}
+```
+
 ### See also and references
 
 At the end of the file you may add a `See also` or `References` subsection where
