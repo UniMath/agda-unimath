@@ -32,9 +32,9 @@ Ring-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Ring-Large-Precategory =
   Ring
-hom-Large-Precategory
+hom-set-Large-Precategory
   Ring-Large-Precategory =
-  hom-Ring
+  hom-set-Ring
 comp-hom-Large-Precategory
   Ring-Large-Precategory {X = R} {S} {T} =
   comp-hom-Ring R S T

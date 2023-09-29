@@ -8,7 +8,7 @@ module category-theory.natural-numbers-object-precategories where
 
 ```agda
 open import category-theory.precategories
-open import category-theory.terminal-objects-in-precategories
+open import category-theory.terminal-objects-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.cartesian-product-types
@@ -33,18 +33,18 @@ unique `u : hom n x` such that:
 ```agda
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  ((t , _) : terminal-object-Precategory C)
+  ((t , _) : terminal-obj-Precategory C)
   where
 
   is-natural-numbers-object-Precategory :
     (n : obj-Precategory C) →
-    type-hom-Precategory C t n → type-hom-Precategory C n n → UU (l1 ⊔ l2)
+    hom-Precategory C t n → hom-Precategory C n n → UU (l1 ⊔ l2)
   is-natural-numbers-object-Precategory n z s =
     (x : obj-Precategory C)
-    (q : type-hom-Precategory C t x)
-    (f : type-hom-Precategory C x x) →
+    (q : hom-Precategory C t x)
+    (f : hom-Precategory C x x) →
     ∃!
-      ( type-hom-Precategory C n x)
+      ( hom-Precategory C n x)
       ( λ u →
         ( comp-hom-Precategory C u z ＝ q) ×
         ( comp-hom-Precategory C u s ＝ comp-hom-Precategory C f u))
@@ -52,13 +52,13 @@ module _
   natural-numbers-object-Precategory : UU (l1 ⊔ l2)
   natural-numbers-object-Precategory =
     Σ (obj-Precategory C) λ n →
-    Σ (type-hom-Precategory C t n) λ z →
-    Σ (type-hom-Precategory C n n) λ s →
+    Σ (hom-Precategory C t n) λ z →
+    Σ (hom-Precategory C n n) λ s →
       is-natural-numbers-object-Precategory n z s
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  ((t , p) : terminal-object-Precategory C)
+  ((t , p) : terminal-obj-Precategory C)
   (nno : natural-numbers-object-Precategory C (t , p))
   where
 
@@ -66,23 +66,23 @@ module _
   object-natural-numbers-object-Precategory = pr1 nno
 
   zero-natural-numbers-object-Precategory :
-    type-hom-Precategory C t object-natural-numbers-object-Precategory
+    hom-Precategory C t object-natural-numbers-object-Precategory
   zero-natural-numbers-object-Precategory = pr1 (pr2 nno)
 
   succ-natural-numbers-object-Precategory :
-    type-hom-Precategory C
+    hom-Precategory C
       ( object-natural-numbers-object-Precategory)
       ( object-natural-numbers-object-Precategory)
   succ-natural-numbers-object-Precategory = pr1 (pr2 (pr2 nno))
 
   module _
     (x : obj-Precategory C)
-    (q : type-hom-Precategory C t x)
-    (f : type-hom-Precategory C x x)
+    (q : hom-Precategory C t x)
+    (f : hom-Precategory C x x)
     where
 
     morphism-natural-numbers-object-Precategory :
-      type-hom-Precategory C object-natural-numbers-object-Precategory x
+      hom-Precategory C object-natural-numbers-object-Precategory x
     morphism-natural-numbers-object-Precategory =
       pr1 (pr1 (pr2 (pr2 (pr2 nno)) x q f))
 
@@ -103,7 +103,7 @@ module _
 
     is-unique-morphism-natural-numbers-object-Precategory :
       ( u' :
-        type-hom-Precategory C object-natural-numbers-object-Precategory x) →
+        hom-Precategory C object-natural-numbers-object-Precategory x) →
       comp-hom-Precategory C u' zero-natural-numbers-object-Precategory ＝ q →
       comp-hom-Precategory C u' succ-natural-numbers-object-Precategory ＝
       comp-hom-Precategory C f u' →

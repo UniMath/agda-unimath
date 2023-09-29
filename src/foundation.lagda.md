@@ -38,6 +38,7 @@ open import foundation.cantor-schroder-bernstein-escardo public
 open import foundation.cantors-diagonal-argument public
 open import foundation.cartesian-product-types public
 open import foundation.cartesian-products-set-quotients public
+open import foundation.category-of-families-of-sets public
 open import foundation.category-of-sets public
 open import foundation.choice-of-representatives-equivalence-relation public
 open import foundation.codiagonal-maps-of-types public
@@ -77,6 +78,7 @@ open import foundation.decidable-propositions public
 open import foundation.decidable-relations public
 open import foundation.decidable-subtypes public
 open import foundation.decidable-types public
+open import foundation.dependent-binary-homotopies public
 open import foundation.dependent-binomial-theorem public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
@@ -183,6 +185,7 @@ open import foundation.mere-embeddings public
 open import foundation.mere-equality public
 open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
+open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
@@ -224,6 +227,7 @@ open import foundation.pullbacks public
 open import foundation.raising-universe-levels public
 open import foundation.reflecting-maps-equivalence-relations public
 open import foundation.reflexive-relations public
+open import foundation.regensburg-extension-fundamental-theorem-of-identity-types public
 open import foundation.relaxed-sigma-decompositions public
 open import foundation.repetitions-of-values public
 open import foundation.repetitions-sequences public
@@ -231,6 +235,7 @@ open import foundation.replacement public
 open import foundation.retractions public
 open import foundation.russells-paradox public
 open import foundation.sections public
+open import foundation.separated-types public
 open import foundation.sequences public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public

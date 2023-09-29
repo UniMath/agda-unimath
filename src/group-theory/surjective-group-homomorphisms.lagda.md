@@ -27,7 +27,7 @@ to be **surjective** if its underlying map is
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   is-surjective-prop-hom-Group : Prop (l1 ⊔ l2)

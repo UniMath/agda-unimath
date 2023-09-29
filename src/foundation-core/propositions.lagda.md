@@ -271,6 +271,229 @@ pr1 (Π-Prop' A P) = type-Π-Prop' A P
 pr2 (Π-Prop' A P) = is-prop-Π' (λ x → is-prop-type-Prop (P x))
 ```
 
+For convenience, we also record repeated applications of the above.
+
+#### Higher order products of families of propositions are propositions
+
+```agda
+is-prop-Π² :
+  {l1 l2 l3 : Level}
+  {A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) (x2 : A2 x1) → UU l3} →
+  ((x1 : A1) (x2 : A2 x1) → is-prop (A3 x1 x2)) →
+  is-prop ((x1 : A1) (x2 : A2 x1) → A3 x1 x2)
+is-prop-Π² H = is-prop-Π (is-prop-Π ∘ H)
+
+is-prop-Π³ :
+  {l1 l2 l3 l4 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4} →
+  ((x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → is-prop (A4 x1 x2 x3)) →
+  is-prop ((x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → A4 x1 x2 x3)
+is-prop-Π³ H = is-prop-Π (is-prop-Π² ∘ H)
+
+is-prop-Π⁴ :
+  {l1 l2 l3 l4 l5 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) →
+    is-prop (A5 x1 x2 x3 x4)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) →
+      A5 x1 x2 x3 x4)
+is-prop-Π⁴ H = is-prop-Π (is-prop-Π³ ∘ H)
+
+is-prop-Π⁵ :
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
+  {A6 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) →
+    UU l6} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) →
+    is-prop (A6 x1 x2 x3 x4 x5)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) →
+      A6 x1 x2 x3 x4 x5)
+is-prop-Π⁵ H = is-prop-Π (is-prop-Π⁴ ∘ H)
+
+is-prop-Π⁶ :
+  {l1 l2 l3 l4 l5 l6 l7 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
+  {A6 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) → UU l6} →
+  {A7 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) →
+    is-prop (A7 x1 x2 x3 x4 x5 x6)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) →
+      A7 x1 x2 x3 x4 x5 x6)
+is-prop-Π⁶ H = is-prop-Π (is-prop-Π⁵ ∘ H)
+
+is-prop-Π⁷ :
+  {l1 l2 l3 l4 l5 l6 l7 l8 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5} →
+  {A6 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) → UU l6} →
+  {A7 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7} →
+  {A8 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) →
+    is-prop (A8 x1 x2 x3 x4 x5 x6 x7)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) →
+      A8 x1 x2 x3 x4 x5 x6 x7)
+is-prop-Π⁷ H = is-prop-Π (is-prop-Π⁶ ∘ H)
+
+is-prop-Π⁸ :
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+  {A6 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) → UU l6} →
+  {A7 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+  {A8 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+  {A9 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l9} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+    is-prop (A9 x1 x2 x3 x4 x5 x6 x7 x8)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) →
+      A9 x1 x2 x3 x4 x5 x6 x7 x8)
+is-prop-Π⁸ H = is-prop-Π (is-prop-Π⁷ ∘ H)
+
+is-prop-Π⁹ :
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+  {A6 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) → UU l6} →
+  {A7 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+  {A8 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+  {A9 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l9} →
+  {A10 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) → UU l10} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+    is-prop (A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) →
+      A10 x1 x2 x3 x4 x5 x6 x7 x8 x9)
+is-prop-Π⁹ H = is-prop-Π (is-prop-Π⁸ ∘ H)
+
+is-prop-Π¹⁰ :
+  {l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 : Level}
+  {A1 : UU l1}
+  {A2 : A1 → UU l2}
+  {A3 : (x1 : A1) (x2 : A2 x1) → UU l3}
+  {A4 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) → UU l4}
+  {A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+  {A6 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) → UU l6} →
+  {A7 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+  {A8 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+  {A9 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l9} →
+  {A10 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) → UU l10}
+  {A11 :
+    (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+    UU l11} →
+  ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+    (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+    (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+    (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+    is-prop (A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)) →
+  is-prop
+    ( (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7)
+      (x9 : A9 x1 x2 x3 x4 x5 x6 x7 x8) (x10 : A10 x1 x2 x3 x4 x5 x6 x7 x8 x9) →
+      A11 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10)
+is-prop-Π¹⁰ H = is-prop-Π (is-prop-Π⁹ ∘ H)
+```
+
 ### The type of functions into a proposition is a proposition
 
 ```agda

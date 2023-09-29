@@ -24,12 +24,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A large category in Homotopy Type Theory is a large precategory for which the
-identities between the objects are the isomorphisms. More specifically, an
-equality between objects gives rise to an isomorphism between them, by the
-J-rule. A large precategory is a large category if this function is an
-equivalence. Note that being a large category is a proposition since `is-equiv`
-is a proposition.
+A **large category** in Homotopy Type Theory is a
+[large precategory](category-theory.large-precategories.md) for which the
+[identities](foundation-core.identity-types.md) between the objects are the
+[isomorphisms](category-theory.isomorphisms-in-large-categories.md). More
+specifically, an equality between objects gives rise to an isomorphism between
+them, by the J-rule. A large precategory is a large category if this function is
+an equivalence. Note that being a large category is a
+[proposition](foundation-core.propositions.md) since `is-equiv` is a
+proposition.
 
 ## Definition
 
@@ -67,51 +70,55 @@ module _
   obj-Large-Category =
     obj-Large-Precategory (large-precategory-Large-Category C)
 
-  hom-Large-Category :
+  hom-set-Large-Category :
     {l1 l2 : Level} →
     obj-Large-Category l1 →
     obj-Large-Category l2 →
     Set (β l1 l2)
-  hom-Large-Category =
-    hom-Large-Precategory (large-precategory-Large-Category C)
+  hom-set-Large-Category =
+    hom-set-Large-Precategory (large-precategory-Large-Category C)
 
-  type-hom-Large-Category :
+  hom-Large-Category :
     {l1 l2 : Level}
-    (X : obj-Large-Category l1) (Y : obj-Large-Category l2) →
+    (X : obj-Large-Category l1)
+    (Y : obj-Large-Category l2) →
     UU (β l1 l2)
-  type-hom-Large-Category X Y = type-Set (hom-Large-Category X Y)
+  hom-Large-Category X Y = type-Set (hom-set-Large-Category X Y)
 
-  is-set-type-hom-Large-Category :
+  is-set-hom-Large-Category :
     {l1 l2 : Level}
-    (X : obj-Large-Category l1) (Y : obj-Large-Category l2) →
-    is-set (type-hom-Large-Category X Y)
-  is-set-type-hom-Large-Category X Y =
-    is-set-type-Set (hom-Large-Category X Y)
+    (X : obj-Large-Category l1)
+    (Y : obj-Large-Category l2) →
+    is-set (hom-Large-Category X Y)
+  is-set-hom-Large-Category X Y =
+    is-set-type-Set (hom-set-Large-Category X Y)
 
   comp-hom-Large-Category :
     {l1 l2 l3 : Level}
     {X : obj-Large-Category l1}
     {Y : obj-Large-Category l2}
     {Z : obj-Large-Category l3} →
-    type-hom-Large-Category Y Z →
-    type-hom-Large-Category X Y →
-    type-hom-Large-Category X Z
+    hom-Large-Category Y Z →
+    hom-Large-Category X Y →
+    hom-Large-Category X Z
   comp-hom-Large-Category =
     comp-hom-Large-Precategory (large-precategory-Large-Category C)
 
   id-hom-Large-Category :
     {l1 : Level} {X : obj-Large-Category l1} →
-    type-hom-Large-Category X X
+    hom-Large-Category X X
   id-hom-Large-Category =
     id-hom-Large-Precategory (large-precategory-Large-Category C)
 
   associative-comp-hom-Large-Category :
     {l1 l2 l3 l4 : Level}
-    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
-    {Z : obj-Large-Category l3} {W : obj-Large-Category l4} →
-    (h : type-hom-Large-Category Z W)
-    (g : type-hom-Large-Category Y Z)
-    (f : type-hom-Large-Category X Y) →
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    {Z : obj-Large-Category l3}
+    {W : obj-Large-Category l4} →
+    (h : hom-Large-Category Z W)
+    (g : hom-Large-Category Y Z)
+    (f : hom-Large-Category X Y) →
     ( comp-hom-Large-Category (comp-hom-Large-Category h g) f) ＝
     ( comp-hom-Large-Category h (comp-hom-Large-Category g f))
   associative-comp-hom-Large-Category =
@@ -119,8 +126,9 @@ module _
 
   left-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}
-    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
-    (f : type-hom-Large-Category X Y) →
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    (f : hom-Large-Category X Y) →
     ( comp-hom-Large-Category id-hom-Large-Category f) ＝ f
   left-unit-law-comp-hom-Large-Category =
     left-unit-law-comp-hom-Large-Precategory
@@ -128,8 +136,9 @@ module _
 
   right-unit-law-comp-hom-Large-Category :
     {l1 l2 : Level}
-    {X : obj-Large-Category l1} {Y : obj-Large-Category l2}
-    (f : type-hom-Large-Category X Y) →
+    {X : obj-Large-Category l1}
+    {Y : obj-Large-Category l2}
+    (f : hom-Large-Category X Y) →
     ( comp-hom-Large-Category f id-hom-Large-Category) ＝ f
   right-unit-law-comp-hom-Large-Category =
     right-unit-law-comp-hom-Large-Precategory
@@ -140,8 +149,8 @@ module _
     {X : obj-Large-Category l1}
     {Y : obj-Large-Category l2}
     {Z : obj-Large-Category l3}
-    {g g' : type-hom-Large-Category Y Z} (p : g ＝ g')
-    {f f' : type-hom-Large-Category X Y} (q : f ＝ f') →
+    {g g' : hom-Large-Category Y Z} (p : g ＝ g')
+    {f f' : hom-Large-Category X Y} (q : f ＝ f') →
     comp-hom-Large-Category g f ＝ comp-hom-Large-Category g' f'
   ap-comp-hom-Large-Category p q =
     ap-binary comp-hom-Large-Category p q
@@ -151,18 +160,18 @@ module _
     {X : obj-Large-Category l1}
     {Y : obj-Large-Category l2}
     {Z : obj-Large-Category l3} →
-    type-hom-Large-Category X Y →
-    type-hom-Large-Category Y Z →
-    type-hom-Large-Category X Z
+    hom-Large-Category X Y →
+    hom-Large-Category Y Z →
+    hom-Large-Category X Z
   comp-hom-Large-Category' f g = comp-hom-Large-Category g f
 
   precomp-hom-Large-Category :
     {l1 l2 l3 : Level}
     {X : obj-Large-Category l1}
     {Y : obj-Large-Category l2}
-    (f : type-hom-Large-Category X Y) →
+    (f : hom-Large-Category X Y) →
     (Z : obj-Large-Category l3) →
-    type-hom-Large-Category Y Z → type-hom-Large-Category X Z
+    hom-Large-Category Y Z → hom-Large-Category X Z
   precomp-hom-Large-Category f Z g =
     comp-hom-Large-Category g f
 
@@ -171,8 +180,8 @@ module _
     (X : obj-Large-Category l1)
     {Y : obj-Large-Category l2}
     {Z : obj-Large-Category l3}
-    (f : type-hom-Large-Category Y Z) →
-    type-hom-Large-Category X Y → type-hom-Large-Category X Z
+    (f : hom-Large-Category Y Z) →
+    hom-Large-Category X Y → hom-Large-Category X Z
   postcomp-hom-Large-Category X f g =
     comp-hom-Large-Category f g
 ```
@@ -182,6 +191,20 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  (is-large-category-C : is-large-category-Large-Precategory C)
+  where
+
+  is-category-is-large-category-Large-Precategory :
+    (l : Level) → is-category-Precategory (precategory-Large-Precategory C l)
+  is-category-is-large-category-Large-Precategory l X Y =
+    is-equiv-htpy
+      ( iso-eq-Large-Precategory C X Y)
+      ( compute-iso-eq-Large-Precategory C X Y)
+      ( is-large-category-C X Y)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Category α β)
   where
 
@@ -189,16 +212,14 @@ module _
   precategory-Large-Category =
     precategory-Large-Precategory (large-precategory-Large-Category C)
 
-  is-category-precategory-Large-Category :
+  is-category-Large-Category :
     (l : Level) → is-category-Precategory (precategory-Large-Category l)
-  is-category-precategory-Large-Category l X Y =
-    is-equiv-htpy
-      ( iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y)
-      ( compute-iso-eq-Large-Precategory
-        ( large-precategory-Large-Category C) X Y)
-      (is-large-category-Large-Category C X Y)
+  is-category-Large-Category =
+    is-category-is-large-category-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( is-large-category-Large-Category C)
 
   category-Large-Category : (l : Level) → Category (α l) (β l l)
   pr1 (category-Large-Category l) = precategory-Large-Category l
-  pr2 (category-Large-Category l) = is-category-precategory-Large-Category l
+  pr2 (category-Large-Category l) = is-category-Large-Category l
 ```

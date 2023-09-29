@@ -62,8 +62,8 @@ module _
   {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
   where
 
-  is-iso-hom-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
-  is-iso-hom-∞-Group = is-iso-pointed-map
+  is-iso-∞-Group : hom-∞-Group G H → UU (l1 ⊔ l2)
+  is-iso-∞-Group = is-iso-pointed-map
 ```
 
 ## Properties

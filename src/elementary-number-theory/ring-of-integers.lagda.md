@@ -96,7 +96,7 @@ module _
   {l1 : Level} (R : Ring l1)
   where
 
-  hom-group-initial-hom-Ring : type-hom-Group ℤ-Group (group-Ring R)
+  hom-group-initial-hom-Ring : hom-Group ℤ-Group (group-Ring R)
   hom-group-initial-hom-Ring = hom-element-Group (group-Ring R) (one-Ring R)
 
   map-initial-hom-Ring : ℤ → type-Ring R
@@ -123,7 +123,7 @@ module _
     ( ap (integer-multiple-Ring R l) (inv (right-unit-law-mul-Ring R _))) ∙
     ( inv (right-integer-multiple-law-mul-Ring R l _ _))
 
-  initial-hom-Ring : type-hom-Ring ℤ-Ring R
+  initial-hom-Ring : hom-Ring ℤ-Ring R
   pr1 initial-hom-Ring = hom-group-initial-hom-Ring
   pr1 (pr2 initial-hom-Ring) = preserves-mul-initial-hom-Ring
   pr2 (pr2 initial-hom-Ring) = preserves-one-initial-hom-Ring
@@ -137,7 +137,7 @@ module _
   where
 
   htpy-initial-hom-Ring :
-    (f : type-hom-Ring ℤ-Ring R) → htpy-hom-Ring ℤ-Ring R (initial-hom-Ring R) f
+    (f : hom-Ring ℤ-Ring R) → htpy-hom-Ring ℤ-Ring R (initial-hom-Ring R) f
   htpy-initial-hom-Ring f k =
     ( inv
       ( ( preserves-integer-multiples-hom-Ring ℤ-Ring R f k one-ℤ) ∙
@@ -147,7 +147,7 @@ module _
     ( ap (map-hom-Ring ℤ-Ring R f) (is-integer-multiple-ℤ k))
 
   contraction-initial-hom-Ring :
-    (f : type-hom-Ring ℤ-Ring R) → initial-hom-Ring R ＝ f
+    (f : hom-Ring ℤ-Ring R) → initial-hom-Ring R ＝ f
   contraction-initial-hom-Ring f =
     eq-htpy-hom-Ring ℤ-Ring R (initial-hom-Ring R) f (htpy-initial-hom-Ring f)
 ```

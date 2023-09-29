@@ -38,7 +38,7 @@ module _
   where
 
   add-hom-Ab :
-    type-hom-Ab A B → type-hom-Ab A B → type-hom-Ab A B
+    hom-Ab A B → hom-Ab A B → hom-Ab A B
   pr1 (add-hom-Ab f g) x = add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B g x)
   pr2 (add-hom-Ab f g) x y =
     ( ap-add-Ab B
@@ -50,11 +50,11 @@ module _
       ( map-hom-Ab A B g x)
       ( map-hom-Ab A B g y))
 
-  zero-hom-Ab : type-hom-Ab A B
+  zero-hom-Ab : hom-Ab A B
   pr1 zero-hom-Ab x = zero-Ab B
   pr2 zero-hom-Ab x y = inv (left-unit-law-add-Ab B (zero-Ab B))
 
-  neg-hom-Ab : type-hom-Ab A B → type-hom-Ab A B
+  neg-hom-Ab : hom-Ab A B → hom-Ab A B
   pr1 (neg-hom-Ab f) x = neg-Ab B (map-hom-Ab A B f x)
   pr2 (neg-hom-Ab f) x y =
     ( ap (neg-Ab B) (preserves-add-hom-Ab A B f x y)) ∙
@@ -69,7 +69,7 @@ module _
   where
 
   associative-add-hom-Ab :
-    (f g h : type-hom-Ab A B) →
+    (f g h : hom-Ab A B) →
     add-hom-Ab A B (add-hom-Ab A B f g) h ＝
     add-hom-Ab A B f (add-hom-Ab A B g h)
   associative-add-hom-Ab f g h =
@@ -89,7 +89,7 @@ module _
   where
 
   commutative-add-hom-Ab :
-    (f g : type-hom-Ab A B) → add-hom-Ab A B f g ＝ add-hom-Ab A B g f
+    (f g : hom-Ab A B) → add-hom-Ab A B f g ＝ add-hom-Ab A B g f
   commutative-add-hom-Ab f g =
     eq-htpy-hom-Ab A B
       ( λ x → commutative-add-Ab B (map-hom-Ab A B f x) (map-hom-Ab A B g x))
@@ -103,12 +103,12 @@ module _
   where
 
   left-unit-law-add-hom-Ab :
-    (f : type-hom-Ab A B) → add-hom-Ab A B (zero-hom-Ab A B) f ＝ f
+    (f : hom-Ab A B) → add-hom-Ab A B (zero-hom-Ab A B) f ＝ f
   left-unit-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → left-unit-law-add-Ab B (map-hom-Ab A B f x))
 
   right-unit-law-add-hom-Ab :
-    (f : type-hom-Ab A B) → add-hom-Ab A B f (zero-hom-Ab A B) ＝ f
+    (f : hom-Ab A B) → add-hom-Ab A B f (zero-hom-Ab A B) ＝ f
   right-unit-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → right-unit-law-add-Ab B (map-hom-Ab A B f x))
 ```
@@ -121,13 +121,13 @@ module _
   where
 
   left-inverse-law-add-hom-Ab :
-    (f : type-hom-Ab A B) →
+    (f : hom-Ab A B) →
     add-hom-Ab A B (neg-hom-Ab A B f) f ＝ zero-hom-Ab A B
   left-inverse-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → left-inverse-law-add-Ab B (map-hom-Ab A B f x))
 
   right-inverse-law-add-hom-Ab :
-    (f : type-hom-Ab A B) →
+    (f : hom-Ab A B) →
     add-hom-Ab A B f (neg-hom-Ab A B f) ＝ zero-hom-Ab A B
   right-inverse-law-add-hom-Ab f =
     eq-htpy-hom-Ab A B (λ x → right-inverse-law-add-Ab B (map-hom-Ab A B f x))
@@ -141,7 +141,7 @@ module _
   where
 
   semigroup-hom-Ab : Semigroup (l1 ⊔ l2)
-  pr1 semigroup-hom-Ab = hom-Ab A B
+  pr1 semigroup-hom-Ab = hom-set-Ab A B
   pr1 (pr2 semigroup-hom-Ab) = add-hom-Ab A B
   pr2 (pr2 semigroup-hom-Ab) = associative-add-hom-Ab A B
 
@@ -169,7 +169,7 @@ module _
   where
 
   left-distributive-comp-add-hom-Ab :
-    (h : type-hom-Ab B C) (f g : type-hom-Ab A B) →
+    (h : hom-Ab B C) (f g : hom-Ab A B) →
     comp-hom-Ab A B C h (add-hom-Ab A B f g) ＝
     add-hom-Ab A C (comp-hom-Ab A B C h f) (comp-hom-Ab A B C h g)
   left-distributive-comp-add-hom-Ab h f g =
@@ -178,7 +178,7 @@ module _
         preserves-add-hom-Ab B C h (map-hom-Ab A B f x) (map-hom-Ab A B g x))
 
   right-distributive-comp-add-hom-Ab :
-    (g h : type-hom-Ab B C) (f : type-hom-Ab A B) →
+    (g h : hom-Ab B C) (f : hom-Ab A B) →
     comp-hom-Ab A B C (add-hom-Ab B C g h) f ＝
     add-hom-Ab A C (comp-hom-Ab A B C g f) (comp-hom-Ab A B C h f)
   right-distributive-comp-add-hom-Ab g h f =
@@ -192,16 +192,16 @@ module _
   {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (a : type-Ab A)
   where
 
-  ev-element-hom-Ab : type-hom-Ab A B → type-Ab B
+  ev-element-hom-Ab : hom-Ab A B → type-Ab B
   ev-element-hom-Ab f = map-hom-Ab A B f a
 
   preserves-add-ev-element-hom-Ab :
-    (f g : type-hom-Ab A B) →
+    (f g : hom-Ab A B) →
     ev-element-hom-Ab (add-hom-Ab A B f g) ＝
     add-Ab B (ev-element-hom-Ab f) (ev-element-hom-Ab g)
   preserves-add-ev-element-hom-Ab f g = refl
 
-  hom-ev-element-hom-Ab : type-hom-Ab (ab-hom-Ab A B) B
+  hom-ev-element-hom-Ab : hom-Ab (ab-hom-Ab A B) B
   pr1 hom-ev-element-hom-Ab = ev-element-hom-Ab
   pr2 hom-ev-element-hom-Ab = preserves-add-ev-element-hom-Ab
 ```

@@ -42,7 +42,7 @@ to `x` the proposition `f(x) = unit`.
 
 ```agda
 module _
-  {l k : Level} (G : Group l) (H : Group k) (f : type-hom-Group G H)
+  {l k : Level} (G : Group l) (H : Group k) (f : hom-Group G H)
   where
 
   subset-kernel-hom-Group : subset-Group k G
@@ -80,7 +80,7 @@ module _
   group-kernel-hom-Group : Group (l ⊔ k)
   group-kernel-hom-Group = group-Subgroup G subgroup-kernel-hom-Group
 
-  inclusion-kernel-hom-Group : type-hom-Group group-kernel-hom-Group G
+  inclusion-kernel-hom-Group : hom-Group group-kernel-hom-Group G
   inclusion-kernel-hom-Group =
     hom-inclusion-Subgroup G subgroup-kernel-hom-Group
 
@@ -100,7 +100,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : type-hom-Group G H)
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
   where
 
   is-normal-kernel-hom-Group :
@@ -126,7 +126,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : type-hom-Ab A B)
+  {l1 l2 : Level} (A : Ab l1) (B : Ab l2) (f : hom-Ab A B)
   where
 
   subset-kernel-hom-Ab : subset-Ab l2 A
@@ -165,7 +165,7 @@ module _
   ab-kernel-hom-Ab : Ab (l1 ⊔ l2)
   ab-kernel-hom-Ab = ab-Subgroup-Ab A kernel-hom-Ab
 
-  inclusion-kernel-hom-Ab : type-hom-Ab ab-kernel-hom-Ab A
+  inclusion-kernel-hom-Ab : hom-Ab ab-kernel-hom-Ab A
   inclusion-kernel-hom-Ab =
     inclusion-kernel-hom-Group (group-Ab A) (group-Ab B) f
 

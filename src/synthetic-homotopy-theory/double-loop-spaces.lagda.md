@@ -96,10 +96,10 @@ left-unit-law-identification-left-whisk-Ω² :
 left-unit-law-identification-left-whisk-Ω² α =
   left-unit-law-identification-left-whisk α
 
-right-unit-law-identification-left-whisk-Ω² :
+right-unit-law-identification-right-whisk-Ω² :
   {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
   identification-right-whisk α (refl-Ω (pair A a)) ＝ α
-right-unit-law-identification-left-whisk-Ω² α =
+right-unit-law-identification-right-whisk-Ω² α =
   (right-unit-law-identification-right-whisk α) ∙ right-unit
 ```
 

@@ -32,8 +32,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-The type of booleans is a 2-element type with elements `true false : bool`,
-which is used for reasoning with decidable propositions.
+The type of **booleans** is a
+[2-element type](univalent-combinatorics.2-element-types.md) with elements
+`true false : bool`, which is used for reasoning with
+[decidable propositions](foundation-core.decidable-propositions.md).
 
 ## Definition
 
@@ -62,6 +64,17 @@ raise-false l = map-raise false
 
 compute-raise-bool : (l : Level) → bool ≃ raise-bool l
 compute-raise-bool l = compute-raise l bool
+```
+
+### The standard propositions associated to the constructors of bool
+
+```agda
+prop-bool : bool → Prop lzero
+prop-bool true = unit-Prop
+prop-bool false = empty-Prop
+
+type-prop-bool : bool → UU lzero
+type-prop-bool = type-Prop ∘ prop-bool
 ```
 
 ### Equality on the booleans
@@ -100,17 +113,23 @@ neg-bool : bool → bool
 neg-bool true = false
 neg-bool false = true
 
-conjunction-bool : bool → (bool → bool)
+conjunction-bool : bool → bool → bool
 conjunction-bool true true = true
 conjunction-bool true false = false
 conjunction-bool false true = false
 conjunction-bool false false = false
 
-disjunction-bool : bool → (bool → bool)
+disjunction-bool : bool → bool → bool
 disjunction-bool true true = true
 disjunction-bool true false = true
 disjunction-bool false true = true
 disjunction-bool false false = false
+
+implication-bool : bool → bool → bool
+implication-bool true true = true
+implication-bool true false = false
+implication-bool false true = true
+implication-bool false false = true
 ```
 
 ## Properties

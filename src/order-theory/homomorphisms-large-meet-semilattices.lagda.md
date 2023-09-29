@@ -35,11 +35,11 @@ module _
   where
 
   record
-    hom-Large-Meet-Semilattice : UUω
+    hom-set-Large-Meet-Semilattice : UUω
     where
     field
       hom-large-poset-hom-Large-Meet-Semilattice :
-        hom-Large-Poset id
+        hom-set-Large-Poset id
           ( large-poset-Large-Meet-Semilattice K)
           ( large-poset-Large-Meet-Semilattice L)
       preserves-meets-hom-Large-Meet-Semilattice :
@@ -70,10 +70,10 @@ module _
           ( top-Large-Meet-Semilattice K) ＝
         top-Large-Meet-Semilattice L
 
-  open hom-Large-Meet-Semilattice public
+  open hom-set-Large-Meet-Semilattice public
 
   module _
-    (f : hom-Large-Meet-Semilattice)
+    (f : hom-set-Large-Meet-Semilattice)
     where
 
     map-hom-Large-Meet-Semilattice :

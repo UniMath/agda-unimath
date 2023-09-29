@@ -34,7 +34,9 @@ open import foundation-core.truncation-levels
 diagonal-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
   A → canonical-pullback f f
-diagonal-map f x = triple x x refl
+pr1 (diagonal-map f x) = x
+pr1 (pr2 (diagonal-map f x)) = x
+pr2 (pr2 (diagonal-map f x)) = refl
 ```
 
 ## Properties

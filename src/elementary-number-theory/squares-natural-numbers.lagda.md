@@ -89,7 +89,7 @@ greater-than-square-root-ℕ n root (pf-leq , pf-eq) =
   reflects-order-add-ℕ
     ( square-ℕ root)
     ( square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2)
-    0
+    ( 0)
     ( tr
       ( leq-ℕ (square-ℕ n +ℕ 2 *ℕ n +ℕ n +ℕ 2 +ℕ square-ℕ root))
       ( inv (left-unit-law-add-ℕ (square-ℕ root)))

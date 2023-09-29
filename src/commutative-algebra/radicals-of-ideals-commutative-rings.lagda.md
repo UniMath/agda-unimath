@@ -238,7 +238,7 @@ module _
         ( H))
 
   radical-of-ideal-hom-large-poset-Commutative-Ring :
-    hom-Large-Poset id
+    hom-set-Large-Poset id
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder

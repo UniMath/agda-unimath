@@ -139,17 +139,14 @@ module _
 
   equiv-Π-section-pr1 : section (pr1 {B = B}) ≃ ((x : A) → B x)
   equiv-Π-section-pr1 =
-    ( ( left-unit-law-Σ-is-contr
-        ( is-contr-equiv
-          ( Π-total-fam (λ x y → y ＝ x))
-          ( inv-distributive-Π-Σ)
-          ( is-contr-Π (λ x → is-contr-total-path' x)))
-        ( id , refl-htpy)) ∘e
-      ( equiv-right-swap-Σ)) ∘e
-    ( equiv-Σ
-      ( λ s → pr1 s ~ id)
-      ( distributive-Π-Σ)
-      ( λ s → id-equiv))
+    ( left-unit-law-Σ-is-contr
+      ( is-contr-equiv
+        ( Π-total-fam (λ x y → y ＝ x))
+        ( inv-distributive-Π-Σ)
+        ( is-contr-Π is-contr-total-path'))
+      ( id , refl-htpy)) ∘e
+    ( equiv-right-swap-Σ) ∘e
+    ( equiv-Σ-equiv-base ( λ s → pr1 s ~ id) ( distributive-Π-Σ))
 ```
 
 ### Any section of a type family is an equivalence if and only if each type in the family is contractible

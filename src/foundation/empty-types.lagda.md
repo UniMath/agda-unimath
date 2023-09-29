@@ -120,23 +120,6 @@ abstract
   is-empty-type-trunc-Prop' f = f ∘ unit-trunc-Prop
 ```
 
-### The empty type is `k`-truncated for any `k ≥ 1`
-
-```agda
-abstract
-  is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
-  is-trunc-empty k ()
-
-empty-Truncated-Type : (k : 𝕋) → Truncated-Type lzero (succ-𝕋 k)
-pr1 (empty-Truncated-Type k) = empty
-pr2 (empty-Truncated-Type k) = is-trunc-empty k
-
-abstract
-  is-trunc-is-empty :
-    {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
-  is-trunc-is-empty k f = is-trunc-is-prop k (λ x → ex-falso (f x))
-```
-
 ### Any inhabited type is nonempty
 
 ```agda

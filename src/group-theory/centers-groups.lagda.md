@@ -80,7 +80,7 @@ module _
     preserves-mul-inclusion-Subgroup G subgroup-center-Group
 
   hom-inclusion-center-Group :
-    type-hom-Group group-center-Group G
+    hom-Group group-center-Group G
   hom-inclusion-center-Group =
     hom-inclusion-Subgroup G subgroup-center-Group
 

@@ -279,7 +279,7 @@ module _
   preserves-negatives-inclusion-Subgroup-Ab =
     preserves-inverses-inclusion-Subgroup (group-Ab A) B
 
-  hom-inclusion-Subgroup-Ab : type-hom-Ab (ab-Subgroup-Ab A B) A
+  hom-inclusion-Subgroup-Ab : hom-Ab (ab-Subgroup-Ab A B) A
   hom-inclusion-Subgroup-Ab = hom-inclusion-Subgroup (group-Ab A) B
 ```
 

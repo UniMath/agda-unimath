@@ -23,7 +23,7 @@ open import foundation-core.truncation-levels
 
 ## Idea
 
-An empty type is a type with no elements. The (standard) empty type is
+An **empty type** is a type with no elements. The (standard) empty type is
 introduced as an inductive type with no constructors. With the standard empty
 type available, we will say that a type is empty if it maps into the standard
 empty type.
@@ -112,4 +112,21 @@ is-set-empty ()
 empty-Set : Set lzero
 pr1 empty-Set = empty
 pr2 empty-Set = is-set-empty
+```
+
+### The empty type is `k`-truncated for any `k ≥ 1`
+
+```agda
+abstract
+  is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
+  is-trunc-empty k ()
+
+empty-Truncated-Type : (k : 𝕋) → Truncated-Type lzero (succ-𝕋 k)
+pr1 (empty-Truncated-Type k) = empty
+pr2 (empty-Truncated-Type k) = is-trunc-empty k
+
+abstract
+  is-trunc-is-empty :
+    {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
+  is-trunc-is-empty k f x = ex-falso (f x)
 ```
