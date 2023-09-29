@@ -245,7 +245,8 @@ files:
 - In
   [`higher-group-theory.free-higher-group-actions.md`](higher-group-theory.free-higher-group-actions.md)
   it is used to show that a higher group action is free if and only its total
-  space is a set. \_ In
+  space is a set.
+- In
   [`higher-group-theory.transitive-higher-group-actions.md`](higher-group-theory.transitive-higher-group-actions.md)
   it is used to show that a higher group action is transitive if and only if its
   total space is connected.
