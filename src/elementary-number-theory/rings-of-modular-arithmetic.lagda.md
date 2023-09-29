@@ -71,7 +71,8 @@ pr2 (ℤ-Mod-Commutative-Ring n) = commutative-mul-ℤ-Mod n
 ### Rings of modular arithmetic are cyclic
 
 ```agda
-integer-multiple-one-ℤ-Ring : (k : ℤ) →
+integer-multiple-one-ℤ-Ring :
+  (k : ℤ) →
   ( integer-multiple-Ring (ℤ-Mod-Ring zero-ℕ) k (one-ℤ-Mod zero-ℕ)) ＝
   ( k)
 integer-multiple-one-ℤ-Ring (inl zero-ℕ) = refl
