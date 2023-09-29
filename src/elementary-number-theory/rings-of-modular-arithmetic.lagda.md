@@ -83,7 +83,7 @@ integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
 
 is-neg-one-neg-one-ℤ-Mod :
-  (n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
+  ( n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
 is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
 is-neg-one-neg-one-ℤ-Mod (succ-ℕ n) = is-neg-one-neg-one-Fin n
 

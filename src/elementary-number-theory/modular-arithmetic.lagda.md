@@ -795,11 +795,6 @@ is-decidable-div-ℤ d x =
 ### `mod-ℤ` is surjective
 
 ```agda
-mod-succ-ℕ-comp-succ-ℕ-htpy-succ-Fin-mod-succ-ℕ : (n : ℕ) →
-  ( (mod-succ-ℕ n) ∘ succ-ℕ) ~
-  ( (succ-Fin (succ-ℕ n)) ∘ (mod-succ-ℕ n))
-mod-succ-ℕ-comp-succ-ℕ-htpy-succ-Fin-mod-succ-ℕ n x = refl
-
 is-surjective-succ-Fin-comp-mod-succ-ℕ : (n : ℕ) →
   is-surjective (succ-Fin (succ-ℕ n) ∘ mod-succ-ℕ n)
 is-surjective-succ-Fin-comp-mod-succ-ℕ n =
@@ -813,6 +808,6 @@ is-surjective-mod-ℤ (succ-ℕ n) =
   is-surjective-left-factor
     ( inr ∘ inr)
     ( is-surjective-htpy
-      ( mod-succ-ℕ-comp-succ-ℕ-htpy-succ-Fin-mod-succ-ℕ n)
+      ( λ x → refl)
       ( is-surjective-succ-Fin-comp-mod-succ-ℕ n))
 ```
