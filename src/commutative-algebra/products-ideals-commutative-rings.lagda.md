@@ -188,18 +188,19 @@ module _
             ( ideal-subset-Commutative-Ring A S)
             ( ideal-subset-Commutative-Ring A T)
             ( x))
-          ( λ { (s , t , refl) →
-                contains-product-product-ideal-Commutative-Ring A
-                  ( ideal-subset-Commutative-Ring A S)
-                  ( ideal-subset-Commutative-Ring A T)
+          ( (λ where
+            (s , t , refl) →
+              contains-product-product-ideal-Commutative-Ring A
+                ( ideal-subset-Commutative-Ring A S)
+                ( ideal-subset-Commutative-Ring A T)
+                ( pr1 s)
+                ( pr1 t)
+                ( contains-subset-ideal-subset-Commutative-Ring A S
                   ( pr1 s)
+                  ( pr2 s))
+                ( contains-subset-ideal-subset-Commutative-Ring A T
                   ( pr1 t)
-                  ( contains-subset-ideal-subset-Commutative-Ring A S
-                    ( pr1 s)
-                    ( pr2 s))
-                  ( contains-subset-ideal-subset-Commutative-Ring A T
-                    ( pr1 t)
-                    ( pr2 t))}))
+                  ( pr2 t)))))
 
   left-backward-inclusion-preserves-product-ideal-subset-Commutative-Ring :
     {x s y : type-Commutative-Ring A} →
