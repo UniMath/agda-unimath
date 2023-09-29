@@ -142,7 +142,7 @@ should have a descriptive name. It can then be included with the mdbook
 ```md
 ## Examples of categories and large categories
 
-{{#include tables/categories.md}}
+\{{#include tables/categories.md}}
 ```
 
 All tables are formatted automatically by a pre-commit script, so you don't need
