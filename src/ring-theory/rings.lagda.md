@@ -335,7 +335,8 @@ module _
       ＝ add-Ring R x z
         by left-unit-law-add-Ring R (add-Ring R x z)
 
-  eq-is-unit-left-div-Ring : {x y : type-Ring R} →
+  eq-is-unit-left-div-Ring :
+    {x y : type-Ring R} →
     (is-zero-Ring R (add-Ring R (neg-Ring x) y)) → x ＝ y
   eq-is-unit-left-div-Ring {x} {y} H =
     eq-is-unit-left-div-Group (group-Ring R) H
