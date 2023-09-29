@@ -135,17 +135,24 @@ module _
     ( assoc
       ( ap
         ( ap-map-higher-modality m g)
-        ( compute-rec-higher-modality m X Y (pr1 (pr2 m) ∘ f) x))
-      ( ( compute-rec-higher-modality m Y Z (pr1 (pr2 m) ∘ g) (f x)) ∙
-        ( inv (compute-rec-higher-modality m X Z (pr1 (pr2 m) ∘ g ∘ f) x)))
-      ( compute-rec-higher-modality m X Z (pr1 (pr2 m) ∘ g ∘ f) x)) ∙
+        ( compute-rec-higher-modality m X Y (unit-higher-modality m ∘ f) x))
+      ( ( compute-rec-higher-modality m Y Z
+          ( unit-higher-modality m ∘ g)
+          ( f x)) ∙
+        ( inv
+          ( compute-rec-higher-modality m X Z
+            ( unit-higher-modality m ∘ g ∘ f)
+            ( x))))
+      ( compute-rec-higher-modality m X Z (unit-higher-modality m ∘ g ∘ f) x)) ∙
     ( ap
       ( ap
         ( ap-map-higher-modality m g)
-        ( compute-rec-higher-modality m X Y (pr1 (pr2 m) ∘ f) x) ∙_)
+        ( compute-rec-higher-modality m X Y (unit-higher-modality m ∘ f) x) ∙_)
       ( is-section-right-concat-inv
-        ( compute-rec-higher-modality m Y Z (pr1 (pr2 m) ∘ g) (f x))
-        ( compute-rec-higher-modality m X Z (pr1 (pr2 m) ∘ g ∘ f) x)))
+        ( compute-rec-higher-modality m Y Z (unit-higher-modality m ∘ g) (f x))
+        ( compute-rec-higher-modality m X Z
+          ( unit-higher-modality m ∘ g ∘ f)
+          ( x))))
 ```
 
 ## References
