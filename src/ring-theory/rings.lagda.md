@@ -341,7 +341,8 @@ module _
   eq-is-unit-left-div-Ring {x} {y} H =
     eq-is-unit-left-div-Group (group-Ring R) H
 
-  is-unit-left-div-eq-Ring : {x y : type-Ring R} →
+  is-unit-left-div-eq-Ring :
+    {x y : type-Ring R} →
     x ＝ y → (is-zero-Ring R (add-Ring R (neg-Ring x) y))
   is-unit-left-div-eq-Ring {x} {y} H =
     is-unit-left-div-eq-Group (group-Ring R) H
