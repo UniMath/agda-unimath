@@ -88,6 +88,7 @@ website-prepare: agda-html ./SUMMARY.md ./CONTRIBUTORS.md ./MAINTAINERS.md ./web
 	@cp -r ./website/images ./docs/website/
 	@cp -r ./website/css ./docs/website/
 	@cp -r ./website/js ./docs/website/
+	@cp -r ./tables ./docs
 
 .PHONY: website
 website: website-prepare
