@@ -267,7 +267,7 @@ module _
       apply-universal-property-trunc-Prop
         ( K b)
         ( trunc-Prop (fiber f b))
-        ( λ {(a , refl) → unit-trunc-Prop (a , H a)})
+        ( λ where (a , refl) → unit-trunc-Prop (a , H a))
 
   abstract
     is-surjective-htpy' :
