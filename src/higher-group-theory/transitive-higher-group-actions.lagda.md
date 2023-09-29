@@ -127,7 +127,7 @@ module _
       apply-universal-property-trunc-Prop
         ( mere-eq-classifying-type-∞-Group G (shape-∞-Group G) u)
         ( is-surjective-Prop _)
-        ( λ { refl → pr2 H x})
+        ( λ where refl → pr2 H x)
 ```
 
 ### An action is transitive if and only if it is abstractly transitive
