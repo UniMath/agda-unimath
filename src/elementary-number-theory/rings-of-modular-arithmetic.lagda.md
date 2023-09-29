@@ -98,7 +98,8 @@ integer-multiplication-by-one-preserves-succ-ℤ n x =
       ( n)
       ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))))
 
-integer-multiplication-by-one-preserves-pred-ℤ : (n : ℕ) (x : ℤ) →
+integer-multiplication-by-one-preserves-pred-ℤ :
+  (n : ℕ) (x : ℤ) →
   integer-multiple-Ring (ℤ-Mod-Ring n) (pred-ℤ x) (one-ℤ-Mod n) ＝
   pred-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
 integer-multiplication-by-one-preserves-pred-ℤ n x =
