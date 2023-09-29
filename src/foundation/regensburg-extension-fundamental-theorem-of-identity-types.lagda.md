@@ -82,14 +82,15 @@ formalization in agda-unimath.
 ```agda
 module _
   {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
+  {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   abstract
     forward-implication-extended-fundamental-theorem-id :
+      is-0-connected A →
       ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) →
       is-separated P (Σ A B)
-    forward-implication-extended-fundamental-theorem-id K (x , y) (x' , y') =
+    forward-implication-extended-fundamental-theorem-id H K (x , y) (x' , y') =
       apply-universal-property-trunc-Prop
         ( mere-eq-is-0-connected H a x)
         ( P _)
@@ -101,11 +102,6 @@ module _
                   ( y'))
                 ( K (ind-Id a (λ u v → B u) y) x' y')})
 
-module _
-  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
-  {A : UU l1} (a : A) {B : A → UU l2}
-  where
-
   abstract
     backward-implication-extended-fundamental-theorem-id :
       is-separated P (Σ A B) →
@@ -115,19 +111,15 @@ module _
         ( compute-fiber-map-out-of-identity-type f x y)
         ( K (a , f a refl) (x , y))
 
-module _
-  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
-  where
-
   abstract
     extended-fundamental-theorem-id :
+      is-0-connected A →
       ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-in-subuniverse-map P (f x)) ↔
       is-separated P (Σ A B)
-    pr1 extended-fundamental-theorem-id =
-      forward-implication-extended-fundamental-theorem-id P a H
-    pr2 extended-fundamental-theorem-id =
-      backward-implication-extended-fundamental-theorem-id P a
+    pr1 (extended-fundamental-theorem-id H) =
+      forward-implication-extended-fundamental-theorem-id H
+    pr2 (extended-fundamental-theorem-id H) =
+      backward-implication-extended-fundamental-theorem-id
 ```
 
 ## Corollaries
@@ -136,13 +128,14 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   forward-implication-extended-fundamental-theorem-id-surjective :
+    is-0-connected A →
     ( (f : (x : A) → (a ＝ x) → B x) → (x : A) → is-surjective (f x)) →
     is-inhabited (B a) → is-0-connected (Σ A B)
-  forward-implication-extended-fundamental-theorem-id-surjective K L =
+  forward-implication-extended-fundamental-theorem-id-surjective H K L =
     is-0-connected-mere-eq-is-inhabited
       ( map-trunc-Prop (fiber-inclusion B a) L)
       ( forward-implication-extended-fundamental-theorem-id
@@ -150,10 +143,6 @@ module _
         ( a)
         ( H)
         ( K))
-
-module _
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2}
-  where
 
   backward-implication-extended-fundamental-theorem-id-surjective :
     is-0-connected (Σ A B) →
@@ -164,18 +153,14 @@ module _
       ( a)
       ( mere-eq-is-0-connected L)
 
-module _
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
-  where
-
   extended-fundamental-theorem-id-surjective :
-    is-inhabited (B a) →
+    is-0-connected A → is-inhabited (B a) →
     ( (f : (x : A) → (a ＝ x) → B x) → (x : A) → is-surjective (f x)) ↔
     is-0-connected (Σ A B)
-  pr1 (extended-fundamental-theorem-id-surjective K) L =
-    forward-implication-extended-fundamental-theorem-id-surjective a H L K
-  pr2 ( extended-fundamental-theorem-id-surjective K) =
-    backward-implication-extended-fundamental-theorem-id-surjective a
+  pr1 (extended-fundamental-theorem-id-surjective H K) L =
+    forward-implication-extended-fundamental-theorem-id-surjective H L K
+  pr2 ( extended-fundamental-theorem-id-surjective H K) =
+    backward-implication-extended-fundamental-theorem-id-surjective
 ```
 
 ### Characterizing families of connected maps out of identity types
@@ -198,10 +183,6 @@ module _
         ( H)
         ( K))
 
-module _
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} (a : A) {B : A → UU l2}
-  where
-
   backward-implication-extended-fundamental-theorem-id-connected :
     is-connected (succ-𝕋 k) (Σ A B) →
     (f : (x : A) → (a ＝ x) → B x) (x : A) → is-connected-map k (f x)
@@ -211,41 +192,32 @@ module _
       ( a)
       ( λ x y → is-connected-eq-is-connected K)
 
-module _
-  {l1 l2 : Level} (k : 𝕋)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
-  where
-
   extended-fundamental-theorem-id-connected :
-    is-inhabited (B a) →
+    is-0-connected A → is-inhabited (B a) →
     ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-connected-map k (f x)) ↔
     is-connected (succ-𝕋 k) (Σ A B)
-  pr1 (extended-fundamental-theorem-id-connected K) L =
-    forward-implication-extended-fundamental-theorem-id-connected k a H L K
-  pr2 (extended-fundamental-theorem-id-connected K) L =
-    backward-implication-extended-fundamental-theorem-id-connected k a L
+  pr1 (extended-fundamental-theorem-id-connected H K) L =
+    forward-implication-extended-fundamental-theorem-id-connected L K
+  pr2 (extended-fundamental-theorem-id-connected H K) =
+    backward-implication-extended-fundamental-theorem-id-connected
 ```
 
 ### Characterizing families of truncated maps out of identity types
 
 ```agda
 module _
-  {l1 l2 : Level} (k : 𝕋)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   forward-implication-extended-fundamental-theorem-id-truncated :
+    is-0-connected A →
     ((f : (x : A) → (a ＝ x) → B x) → (x : A) → is-trunc-map k (f x)) →
     is-trunc (succ-𝕋 k) (Σ A B)
-  forward-implication-extended-fundamental-theorem-id-truncated =
+  forward-implication-extended-fundamental-theorem-id-truncated H =
     forward-implication-extended-fundamental-theorem-id
       ( is-trunc-Prop k)
       ( a)
       ( H)
-
-module _
-  {l1 l2 : Level} (k : 𝕋) {A : UU l1} (a : A) {B : A → UU l2}
-  where
 
   backward-implication-extended-fundamental-theorem-id-truncated :
     is-trunc (succ-𝕋 k) (Σ A B) →
@@ -255,19 +227,29 @@ module _
       ( is-trunc-Prop k)
       ( a)
 
-module _
-  {l1 l2 : Level} (k : 𝕋)
-  {A : UU l1} (a : A) {B : A → UU l2} (H : is-0-connected A)
-  where
-
   extended-fundamental-theorem-id-truncated :
+    is-0-connected A →
     ((f : (x : A) → (a ＝ x) → B x) (x : A) → is-trunc-map k (f x)) ↔
     is-trunc (succ-𝕋 k) (Σ A B)
-  pr1 extended-fundamental-theorem-id-truncated =
-    forward-implication-extended-fundamental-theorem-id-truncated k a H
-  pr2 extended-fundamental-theorem-id-truncated =
-    backward-implication-extended-fundamental-theorem-id-truncated k a
+  pr1 (extended-fundamental-theorem-id-truncated H) =
+    forward-implication-extended-fundamental-theorem-id-truncated H
+  pr2 (extended-fundamental-theorem-id-truncated H) =
+    backward-implication-extended-fundamental-theorem-id-truncated
 ```
+
+## See also
+
+The Regensburg extension of the fundamental theorem is used in the following
+files:
+
+- In
+  [`higher-group-theory.free-higher-group-actions.md`](higher-group-theory.free-higher-group-actions.md)
+  it is used to show that a higher group action is free if and only its total
+  space is a set.
+- In
+  [`higher-group-theory.transitive-higher-group-actions.md`](higher-group-theory.transitive-higher-group-actions.md)
+  it is used to show that a higher group action is transitive if and only if its
+  total space is connected.
 
 ## References
 
