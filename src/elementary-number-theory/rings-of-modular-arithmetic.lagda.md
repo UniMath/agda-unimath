@@ -1,7 +1,6 @@
 # Rings of modular arithmetic
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
 module elementary-number-theory.rings-of-modular-arithmetic where
 ```
 
@@ -10,6 +9,7 @@ module elementary-number-theory.rings-of-modular-arithmetic where
 ```agda
 open import commutative-algebra.commutative-rings
 
+open import elementary-number-theory.addition-integers
 open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
@@ -82,6 +82,11 @@ integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
 integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
   ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
 
+is-neg-one-neg-one-ℤ-Mod :
+  (n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
+is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
+is-neg-one-neg-one-ℤ-Mod (succ-ℕ n) = is-neg-one-neg-one-Fin n
+
 integer-multiplication-by-one-preserves-succ-ℤ : (n : ℕ) (x : ℤ) →
   integer-multiple-Ring (ℤ-Mod-Ring n) (succ-ℤ x) (one-ℤ-Mod n) ＝
   succ-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
@@ -96,17 +101,30 @@ integer-multiplication-by-one-preserves-pred-ℤ : (n : ℕ) (x : ℤ) →
   integer-multiple-Ring (ℤ-Mod-Ring n) (pred-ℤ x) (one-ℤ-Mod n) ＝
   pred-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
 integer-multiplication-by-one-preserves-pred-ℤ n x =
-  ( integer-multiple-pred-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n)) ∙
-  {!   !} ∙
-  ( inv
-    ( is-left-add-neg-one-pred-ℤ-Mod'
-      ( n)
-      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))))
-
-is-neg-one-neg-one-ℤ-Mod :
-  (n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
-is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
-is-neg-one-neg-one-ℤ-Mod (succ-ℕ n) = is-neg-one-neg-one-Fin n
+  ( ap
+    ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n))
+    ( is-right-add-neg-one-pred-ℤ x)) ∙
+  ( distributive-integer-multiple-add-Ring
+    ( ℤ-Mod-Ring n)
+    ( one-ℤ-Mod n)
+    ( x)
+    ( neg-one-ℤ)) ∙
+  ( ap
+    ( λ k →
+      add-ℤ-Mod n
+      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+      ( k))
+    ( integer-multiple-neg-one-Ring (ℤ-Mod-Ring n) (one-ℤ-Mod n))) ∙
+  ( ap
+    ( λ k →
+      add-ℤ-Mod n
+      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+      ( k))
+    ( is-neg-one-neg-one-ℤ-Mod n)) ∙
+    ( inv
+      ( is-left-add-neg-one-pred-ℤ-Mod'
+        ( n)
+        ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))))
 
 compute-integer-multiple-one-ℤ-Mod :
   ( n : ℕ) →
