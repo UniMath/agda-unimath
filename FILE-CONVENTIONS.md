@@ -139,12 +139,16 @@ maintaining the table separately. The file should contain only the table and it
 should have a descriptive name. It can then be included with the mdbook
 `{{#include}}` directive, as in the following example:
 
-
 ```md
 ## Examples of categories and large categories
 
 {{#include tables/categories.md}}
 ```
+
+All tables are formatted automatically by a pre-commit script, so you don't need
+to worry about properly aligning everything - as long as the Markdown parser
+recognizes it as a table, running `make pre-commit` will change it to its
+canonical text representation.
 
 ### See also and references
 
