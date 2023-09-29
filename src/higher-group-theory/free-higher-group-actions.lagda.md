@@ -56,14 +56,14 @@ module _
   {l1 l2 : Level} (G : ∞-Group l1) (X : action-∞-Group l2 G)
   where
 
-  is-free-action-∞-Group-Prop : Prop (l1 ⊔ l2)
-  is-free-action-∞-Group-Prop = is-set-Prop (orbit-action-∞-Group G X)
+  is-free-prop-action-∞-Group : Prop (l1 ⊔ l2)
+  is-free-prop-action-∞-Group = is-set-Prop (orbit-action-∞-Group G X)
 
   is-free-action-∞-Group : UU (l1 ⊔ l2)
-  is-free-action-∞-Group = type-Prop is-free-action-∞-Group-Prop
+  is-free-action-∞-Group = type-Prop is-free-prop-action-∞-Group
 
   is-prop-is-free-action-∞-Group : is-prop is-free-action-∞-Group
-  is-prop-is-free-action-∞-Group = is-prop-type-Prop is-free-action-∞-Group-Prop
+  is-prop-is-free-action-∞-Group = is-prop-type-Prop is-free-prop-action-∞-Group
 ```
 
 ### The predicate of being an abstractly free ∞-group action
@@ -81,7 +81,7 @@ module _
 
   is-abstractly-free-action-∞-Group : UU (l1 ⊔ l2)
   is-abstractly-free-action-∞-Group =
-    type-Prop is-abstractly-free-action-∞-Group-Prop
+    type-Prop is-abstractly-free-prop-action-∞-Group
 ```
 
 ### Free group actions
@@ -90,7 +90,7 @@ module _
 free-action-∞-Group :
   {l1 : Level} (l2 : Level) → ∞-Group l1 → UU (l1 ⊔ lsuc l2)
 free-action-∞-Group l2 G =
-  type-subtype (is-free-action-∞-Group-Prop {l2 = l2} G)
+  type-subtype (is-free-prop-action-∞-Group {l2 = l2} G)
 ```
 
 ## Property
