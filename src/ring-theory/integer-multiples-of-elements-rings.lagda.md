@@ -206,7 +206,7 @@ module _
     integer-multiple-neg-Ab (ab-Ring R)
 ```
 
-### `(k + 1)x = kx + x` and `(k+1)x = x + kx`
+### `(k + 1)x = kx + x` and `(k + 1)x = x + kx`
 
 ```agda
 module _
