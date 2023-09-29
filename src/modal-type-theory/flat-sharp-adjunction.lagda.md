@@ -132,8 +132,8 @@ module _
         ( λ _ → is-codiscrete-♯ (♭ A))
         ( λ x → unit-♯ (con-♭ x)))
 
-  is-section-sf2 : sf1 ∘ sf2 ~ id
-  is-section-sf2 = {!  ind-♯ ? ?!}
+  -- is-section-sf2 : sf1 ∘ sf2 ~ id
+  -- is-section-sf2 = {!  ind-♯ ? ?!}
 ```
 
 ## See also

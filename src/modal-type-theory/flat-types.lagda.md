@@ -35,8 +35,6 @@ that type is an [equivalence](foundation-core.equivalences.md).
 ```agda
 is-flat : {@♭ l : Level} (@♭ A : UU l) → UU l
 is-flat {l} A = is-equiv (counit-♭ {l} {A})
-
-Flat :
 ```
 
 ## Properties

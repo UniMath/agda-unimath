@@ -116,13 +116,13 @@ inv-unit-leq-cardinality :
   mere-emb (type-Set X) (type-Set Y)
 inv-unit-leq-cardinality X Y = pr1 (compute-leq-cardinality X Y)
 
-refl-leq-cardinality : is-large-reflexive cardinal leq-cardinality
+refl-leq-cardinality : is-reflexive-Large-Relation cardinal leq-cardinality
 refl-leq-cardinality {l} =
   apply-dependent-universal-property-trunc-Set'
     ( λ X → set-Prop (leq-cardinality-Prop X X))
     ( λ A → unit-leq-cardinality A A (refl-mere-emb (type-Set A)))
 
-transitive-leq-cardinality : is-large-transitive cardinal leq-cardinality
+transitive-leq-cardinality : is-transitive-Large-Relation cardinal leq-cardinality
 transitive-leq-cardinality X Y Z p q =
   apply-dependent-universal-property-trunc-Set'
   ( λ u →

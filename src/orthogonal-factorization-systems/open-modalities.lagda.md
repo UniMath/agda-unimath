@@ -79,13 +79,13 @@ module _
 
   induction-principle-open-modality :
     induction-principle-modality {l} (unit-open-modality Q)
-  pr1 induction-principle-open-modality = ind-open-modality
-  pr2 induction-principle-open-modality = compute-ind-open-modality
+  pr1 (induction-principle-open-modality X P) = ind-open-modality X P
+  pr2 (induction-principle-open-modality X P) = compute-ind-open-modality X P
 ```
 
 For local smallness with respect to the appropriate universe level, we must take
-the maximum of `l` and `lQ` as our domain. In practice, this allows `lQ` to be
-smaller than `l`.
+the maximum of `l` and `lQ` as our domain. In practice, this only allows `lQ` to
+be smaller than `l`.
 
 ```agda
 module _
