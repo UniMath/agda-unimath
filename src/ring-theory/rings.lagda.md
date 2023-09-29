@@ -334,6 +334,18 @@ module _
           ( right-inverse-law-add-Ring y))
       ＝ add-Ring R x z
         by left-unit-law-add-Ring R (add-Ring R x z)
+
+  eq-is-unit-left-div-Ring :
+    {x y : type-Ring R} →
+    (is-zero-Ring R (add-Ring R (neg-Ring x) y)) → x ＝ y
+  eq-is-unit-left-div-Ring {x} {y} H =
+    eq-is-unit-left-div-Group (group-Ring R) H
+
+  is-unit-left-div-eq-Ring :
+    {x y : type-Ring R} →
+    x ＝ y → (is-zero-Ring R (add-Ring R (neg-Ring x) y))
+  is-unit-left-div-eq-Ring {x} {y} H =
+    is-unit-left-div-eq-Group (group-Ring R) H
 ```
 
 ### Multiplication in a ring

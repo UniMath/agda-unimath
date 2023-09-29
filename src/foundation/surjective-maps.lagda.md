@@ -242,6 +242,34 @@ is-surjective-map-equiv :
 is-surjective-map-equiv e = is-surjective-is-equiv (is-equiv-map-equiv e)
 ```
 
+### The identity function is surjective
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-surjective-id : is-surjective (id {A = A})
+  is-surjective-id a = unit-trunc-Prop (a , refl)
+```
+
+### Maps which are homotopic to surjective maps are surjective
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B}
+  where
+
+  abstract
+    is-surjective-htpy :
+      f ~ g → is-surjective g → is-surjective f
+    is-surjective-htpy H K b =
+      apply-universal-property-trunc-Prop
+        ( K b)
+        ( trunc-Prop (fiber f b))
+        ( λ {(a , refl) → unit-trunc-Prop (a , H a)})
+```
+
 ### The dependent universal property of surjective maps
 
 ```agda

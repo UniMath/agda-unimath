@@ -34,8 +34,11 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negation
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.unit-type
 open import foundation.universe-levels
+
+open import foundation-core.homotopies
 
 open import structured-types.types-equipped-with-endomorphisms
 
@@ -787,4 +790,24 @@ is-decidable-div-ℤ d x =
       ( abs-ℤ d)
       ( mod-ℤ (abs-ℤ d) x)
       ( zero-ℤ-Mod (abs-ℤ d)))
+```
+
+### `mod-ℤ` is surjective
+
+```agda
+is-surjective-succ-Fin-comp-mod-succ-ℕ :
+  (n : ℕ) → is-surjective (succ-Fin (succ-ℕ n) ∘ mod-succ-ℕ n)
+is-surjective-succ-Fin-comp-mod-succ-ℕ n =
+  is-surjective-comp
+    ( is-surjective-is-equiv (is-equiv-succ-Fin (succ-ℕ n)))
+    ( is-surjective-mod-succ-ℕ n)
+
+is-surjective-mod-ℤ : (n : ℕ) → is-surjective (mod-ℤ n)
+is-surjective-mod-ℤ zero-ℕ = is-surjective-id
+is-surjective-mod-ℤ (succ-ℕ n) =
+  is-surjective-left-factor
+    ( inr ∘ inr)
+    ( is-surjective-htpy
+      ( λ x → refl)
+      ( is-surjective-succ-Fin-comp-mod-succ-ℕ n))
 ```
