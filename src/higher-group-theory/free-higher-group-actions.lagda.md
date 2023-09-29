@@ -112,7 +112,7 @@ module _
       apply-universal-property-trunc-Prop
         ( mere-eq-classifying-type-∞-Group G (shape-∞-Group G) u)
         ( is-emb-Prop _)
-        ( λ { refl → H x})
+        ( λ where refl → H x)
 ```
 
 ### A higher group action `X` is free if and only if it is abstractly free
