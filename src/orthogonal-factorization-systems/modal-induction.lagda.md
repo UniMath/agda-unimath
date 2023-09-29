@@ -1,7 +1,7 @@
-# Induction on modalities
+# Modal induction
 
 ```agda
-module orthogonal-factorization-systems.induction-modalities where
+module orthogonal-factorization-systems.modal-induction where
 ```
 
 <details><summary>Imports</summary>
@@ -30,7 +30,19 @@ open import orthogonal-factorization-systems.modal-operators
 
 ## Idea
 
-TODO
+Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
+`○` and a modal unit, a **modal induction principle** for the modality is a
+[section of maps of maps](foundation.sections-of-maps-of-maps.md):
+
+```text
+  section-Π (precomp-Π unit-○ (○ ∘ P))
+```
+
+for all families `P` over some `○ X`.
+
+Note that for such principles to coincide with
+[modal subuniverse induction](orthogonal-factorization-systems.modal-subuniverse-induction.md),
+the modality must be idempotent.
 
 ## Definition
 
@@ -290,3 +302,4 @@ module _
 ## See also
 
 - [Functoriality of higher modalities](orthogonal-factorization-systems.functoriality-higher-modalities.md)
+- [Modal subuniverse induction](orthogonal-factorization-systems.modal-subuniverse-induction.md)

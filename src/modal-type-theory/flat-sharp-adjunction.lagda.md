@@ -23,8 +23,8 @@ open import modal-type-theory.crisp-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.sharp-modality
 
-open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.locally-small-modal-operators
+open import orthogonal-factorization-systems.modal-induction
 ```
 
 </details>

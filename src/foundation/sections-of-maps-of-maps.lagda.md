@@ -24,15 +24,15 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-TODO
-
-A **section of a map of maps** is a map of maps that has a left inverse, i.e. a
-retraction. Thus, `s : (((y : C) → D y) → (x : A) → B x` is a section of
+A **section of a map of maps** is a map of maps that is a right inverse. Thus,
+`s : (((y : C) → D y) → (x : A) → B x` is a section of
 `f : ((x : A) → B x) → (y : C) → D y` if the composition `f ∘ s` is homotopic to
 the identity at `D y` in both variables.
 
-Sections of maps of maps are equivalent to usual sections, but we record this
-definition separately so we can circumvent applying function extensionality.
+Sections of maps of maps are equivalent to usual
+[sections](foundation-core.sections.md), but we record this definition
+separately so we can circumvent applying
+[function extensionality](foundation-core.function-extensionality.md).
 
 ## Definition
 

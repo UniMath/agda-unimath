@@ -17,8 +17,8 @@ open import foundation.identity-types
 open import foundation.locally-small-types
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.locally-small-modal-operators
+open import orthogonal-factorization-systems.modal-induction
 ```
 
 </details>

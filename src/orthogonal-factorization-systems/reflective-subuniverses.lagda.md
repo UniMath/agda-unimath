@@ -19,11 +19,11 @@ open import foundation.retractions
 open import foundation.subuniverses
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.local-types
 open import orthogonal-factorization-systems.localizations-subuniverses
+open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-operators
-open import orthogonal-factorization-systems.subuniverse-induction
+open import orthogonal-factorization-systems.modal-subuniverse-induction
 ```
 
 </details>

@@ -1,7 +1,7 @@
-# Subuniverse induction
+# Modal subuniverse induction
 
 ```agda
-module orthogonal-factorization-systems.subuniverse-induction where
+module orthogonal-factorization-systems.modal-subuniverse-induction where
 ```
 
 <details><summary>Imports</summary>
@@ -19,7 +19,7 @@ open import foundation.sections-of-maps-of-maps
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import orthogonal-factorization-systems.induction-modalities
+open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-operators
 ```
 
@@ -27,11 +27,24 @@ open import orthogonal-factorization-systems.modal-operators
 
 ## Idea
 
-TODO
+Given a [modal operator](orthogonal-factorization-systems.modal-operators.md)
+`○` and a modal unit, we can form the [subuniverse](foundation.subuniverses.md)
+of modal types as those types whose unit is an
+[equivalence](foundation-core.equivalences.md). A **modal subuniverse induction
+principle** for the modality is then a
+[section of maps of maps](foundation.sections-of-maps-of-maps.md):
+
+```text
+  section-Π (precomp-Π unit-○ P)
+```
+
+for all families of modal types `P` over some `○ X`.
+
+Note that for such principles to coincide with
+[modal induction](orthogonal-factorization-systems.modal-induction.md), the
+modality must be idempotent.
 
 ## Definition
-
-Nonstandard terminology
 
 ### Subuniverse induction
 
@@ -408,4 +421,5 @@ module _
 
 ## See also
 
+- [Modal induction](orthogonal-factorization-systems.modal-induction.md)
 - [Reflective subuniverses](orthogonal-factorization-systems.reflective-subuniverses.md)

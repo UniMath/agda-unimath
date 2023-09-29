@@ -18,8 +18,8 @@ open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import orthogonal-factorization-systems.higher-modalities
-open import orthogonal-factorization-systems.induction-modalities
 open import orthogonal-factorization-systems.locally-small-modal-operators
+open import orthogonal-factorization-systems.modal-induction
 open import orthogonal-factorization-systems.modal-operators
 open import orthogonal-factorization-systems.uniquely-eliminating-modalities
 ```
