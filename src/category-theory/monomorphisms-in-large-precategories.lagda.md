@@ -96,34 +96,34 @@ module _
       ( λ P →
         ( inv
           ( left-unit-law-comp-hom-Large-Precategory C g)) ∙
-          ( ( ap
+          ( ap
             ( λ h' → comp-hom-Large-Precategory C h' g)
             ( inv (is-retraction-hom-inv-iso-Large-Precategory C f))) ∙
-            ( ( associative-comp-hom-Large-Precategory C
+          ( associative-comp-hom-Large-Precategory C
+            ( hom-inv-iso-Large-Precategory C f)
+            ( hom-iso-Large-Precategory C f)
+            ( g)) ∙
+          ( ap
+            ( comp-hom-Large-Precategory C
+              ( hom-inv-iso-Large-Precategory C f))
+            ( P)) ∙
+          ( inv
+            ( associative-comp-hom-Large-Precategory C
               ( hom-inv-iso-Large-Precategory C f)
               ( hom-iso-Large-Precategory C f)
-              ( g)) ∙
-              ( ( ap
-                ( comp-hom-Large-Precategory C
-                  ( hom-inv-iso-Large-Precategory C f))
-                ( P)) ∙
-                ( ( inv
-                  ( associative-comp-hom-Large-Precategory C
-                    ( hom-inv-iso-Large-Precategory C f)
-                    ( hom-iso-Large-Precategory C f)
-                    ( h))) ∙
-                  ( ( ap
-                    ( λ h' → comp-hom-Large-Precategory C h' h)
-                    ( is-retraction-hom-inv-iso-Large-Precategory C f)) ∙
-                    ( left-unit-law-comp-hom-Large-Precategory C h)))))))
+              ( h))) ∙
+          ( ap
+            ( λ h' → comp-hom-Large-Precategory C h' h)
+            ( is-retraction-hom-inv-iso-Large-Precategory C f)) ∙
+          ( left-unit-law-comp-hom-Large-Precategory C h))
       ( λ p →
-        eq-is-prop
+        ( eq-is-prop
           ( is-set-hom-Large-Precategory C Z Y
             ( comp-hom-Large-Precategory C
               ( hom-iso-Large-Precategory C f)
               ( g))
             ( comp-hom-Large-Precategory C
               ( hom-iso-Large-Precategory C f)
-              ( h))))
+              ( h)))))
       ( λ p → eq-is-prop (is-set-hom-Large-Precategory C Z X g h))
 ```
