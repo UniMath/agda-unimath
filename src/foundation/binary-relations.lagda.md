@@ -10,9 +10,9 @@ module foundation.binary-relations where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.iterated-dependent-product-types
 open import foundation.propositions
 open import foundation.subtypes
-open import foundation.telescopes
 open import foundation.univalence
 open import foundation.universe-levels
 

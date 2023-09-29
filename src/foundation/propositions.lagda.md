@@ -9,11 +9,7 @@ open import foundation-core.propositions public
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.natural-numbers
-
 open import foundation.contractible-types
-open import foundation.iterated-dependent-product-types
-open import foundation.telescopes
 open import foundation.universe-levels
 
 open import foundation-core.retractions
@@ -43,20 +39,4 @@ module _
 
   is-prop-retract-of : A retract-of B → is-prop B → is-prop A
   is-prop-retract-of = is-trunc-retract-of
-```
-
-### Iterated products of propositions are propositions
-
-```agda
-is-prop-telescope :
-  {l : Level} {n : ℕ} → telescope l n → UU l
-is-prop-telescope (base-telescope A) = is-prop A
-is-prop-telescope (cons-telescope A) = (x : _) → is-prop-telescope (A x)
-
-is-prop-iterated-Π :
-  {l : Level} (n : ℕ) {{A : telescope l n}} →
-  is-prop-telescope A → is-prop (iterated-Π A)
-is-prop-iterated-Π ._ {{base-telescope A}} H = H
-is-prop-iterated-Π ._ {{cons-telescope A}} H =
-  is-prop-Π (λ x → is-prop-iterated-Π _ {{A x}} (H x))
 ```

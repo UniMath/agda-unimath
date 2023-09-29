@@ -2,6 +2,8 @@
 
 ```agda
 module foundation.iterated-dependent-pair-types where
+
+open import foundation.telescopes public
 ```
 
 <details><summary>Imports</summary>
@@ -10,8 +12,10 @@ module foundation.iterated-dependent-pair-types where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.telescopes
 open import foundation.universe-levels
+
+open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
 ```
 
 </details>
@@ -73,3 +77,26 @@ iterated-pair (base-iterated-element x) = x
 pr1 (iterated-pair (cons-iterated-element y a)) = y
 pr2 (iterated-pair (cons-iterated-element y a)) = iterated-pair a
 ```
+
+## Properties
+
+### Contractiblity of iterated Σ-types
+
+```agda
+is-contr-Σ-telescope : {l : Level} {n : ℕ} → telescope l n → UU l
+is-contr-Σ-telescope (base-telescope A) = is-contr A
+is-contr-Σ-telescope (cons-telescope A) =
+  (is-contr X) × (Σ X (λ x → is-contr-Σ-telescope (A x)))
+  where X = _
+
+is-contr-iterated-Σ :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  is-contr-Σ-telescope A → is-contr (iterated-Σ A)
+is-contr-iterated-Σ ._ {{base-telescope A}} is-contr-A = is-contr-A
+is-contr-iterated-Σ ._ {{cons-telescope A}} (is-contr-X , x , H) =
+  is-contr-Σ is-contr-X x (is-contr-iterated-Σ _ {{A x}} H)
+```
+
+## See also
+
+- [Iterated Π-types](foundation.iterated-dependent-product-types.md)
