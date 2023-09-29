@@ -29,8 +29,23 @@ open import higher-group-theory.orbits-higher-group-actions
 
 ## Idea
 
-A [higher group action](higher-group-theory.higher-group-action.md) is said to
-be **free** if its type of orbits is a set.
+Consider an [∞-group](higher-group-theory.higher-groups.md) `G` and an
+[∞-group action](higher-group-theory.higher-group-actions.md) of `G` on `X`. We
+say that `X` is **free** if its type of
+[orbits](higher-group-theory.orbits-higher-group-actions.md) is a
+[set](foundation.sets.md).
+
+[Equivalently](foundation.logical-equivalences.md), we say that `X` is
+**abstractly free** if for any element `x : X (sh G)` of the underlying type of
+`X` the action map
+
+```text
+  g ↦ mul-action-∞-Group G X g x
+```
+
+is an [embedding](foundation.embeddings.md). The equivalence of these two
+conditions is established via the
+[Regensburg extension of the fundamental theorem of identity types](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md).
 
 ## Definition
 
