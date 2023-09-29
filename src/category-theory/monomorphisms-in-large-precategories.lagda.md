@@ -67,16 +67,14 @@ module _
       ( hom-Large-Precategory C X Y)
       ( is-mono-Large-Precategory C l3 X Y)
 
-  module _
-    (f : mono-Large-Precategory)
-    where
+  hom-mono-Large-Precategory :
+    (f : mono-Large-Precategory) → hom-Large-Precategory C X Y
+  hom-mono-Large-Precategory f = pr1 f
 
-    hom-mono-Large-Precategory : hom-Large-Precategory C X Y
-    hom-mono-Large-Precategory = pr1 f
-
-    is-mono-mono-Large-Precategory :
-      is-mono-Large-Precategory C l3 X Y hom-mono-Large-Precategory
-    is-mono-mono-Large-Precategory = pr2 f
+  is-mono-mono-Large-Precategory :
+    (f : mono-Large-Precategory) →
+    is-mono-Large-Precategory C l3 X Y (hom-mono-Large-Precategory f)
+  is-mono-mono-Large-Precategory f = pr2 f
 ```
 
 ## Properties

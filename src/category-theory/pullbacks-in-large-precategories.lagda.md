@@ -27,12 +27,12 @@ A pullback of two morphisms `f : hom y x` and `g : hom z x` in a category `C`
 consists of:
 
 - an object `w`
-- morphisms `p₁ : hom w y` and `p₂ : hom w z` such that
-- `f ∘ p₁ = g ∘ p₂` together with the universal property that for every object
-  `w'` and pair of morphisms `p₁' : hom w' y` and `p₂' : hom w' z` such that
-  `f ∘ p₁' = g ∘ p₂'` there exists a unique morphism `h : hom w' w` such that
-- `p₁ ∘ h = p₁'`
-- `p₂ ∘ h = p₂'`.
+- morphisms `p : hom w y` and `q : hom w z` such that
+- `f ∘ p = g ∘ q` together with the universal property that for every object
+  `w'` and pair of morphisms `p' : hom w' y` and `q' : hom w' z` such that
+  `f ∘ p' = g ∘ q'` there exists a unique morphism `h : hom w' w` such that
+- `p ∘ h = p'`
+- `q ∘ h = q'`.
 
 We say that `C` has all pullbacks if there is a choice of a pullback for each
 object `x` and pair of morphisms into `x` in `C`.
@@ -46,26 +46,26 @@ module _
   where
 
   is-pullback-Large-Precategory :
-    {x : obj-Large-Precategory C l1}
-    {y : obj-Large-Precategory C l2}
-    {z : obj-Large-Precategory C l3}
-    {w : obj-Large-Precategory C l4}
+    (x : obj-Large-Precategory C l1)
+    (y : obj-Large-Precategory C l2)
+    (z : obj-Large-Precategory C l3)
     (f : hom-Large-Precategory C y x)
     (g : hom-Large-Precategory C z x) →
-    (p₁ : hom-Large-Precategory C w y) →
-    (p₂ : hom-Large-Precategory C w z) →
-    comp-hom-Large-Precategory C f p₁ ＝ comp-hom-Large-Precategory C g p₂ →
+    (w : obj-Large-Precategory C l4)
+    (p : hom-Large-Precategory C w y) →
+    (q : hom-Large-Precategory C w z) →
+    comp-hom-Large-Precategory C f p ＝ comp-hom-Large-Precategory C g q →
     UU (α l1 ⊔ β l1 l1 ⊔ β l1 l2 ⊔ β l1 l3 ⊔ β l1 l4)
-  is-pullback-Large-Precategory x y z f g w p₁ p₂ _ =
+  is-pullback-Large-Precategory x y z f g w p q _ =
     (w' : obj-Large-Precategory C l1) →
-    (p₁' : hom-Large-Precategory C w' y) →
-    (p₂' : hom-Large-Precategory C w' z) →
-    comp-hom-Large-Precategory C f p₁' ＝ comp-hom-Large-Precategory C g p₂' →
+    (p' : hom-Large-Precategory C w' y) →
+    (q' : hom-Large-Precategory C w' z) →
+    comp-hom-Large-Precategory C f p' ＝ comp-hom-Large-Precategory C g q' →
     ∃!
       ( hom-Large-Precategory C w' w)
       ( λ h →
-        ( comp-hom-Large-Precategory C p₁ h ＝ p₁') ×
-        ( comp-hom-Large-Precategory C p₂ h ＝ p₂'))
+        ( comp-hom-Large-Precategory C p h ＝ p') ×
+        ( comp-hom-Large-Precategory C q h ＝ q'))
 
   pullback-Large-Precategory :
     (x : obj-Large-Precategory C l1) →
@@ -77,11 +77,11 @@ module _
         β l1 l4 ⊔ β l4 l1 ⊔ β l4 l2 ⊔ β l4 l3)
   pullback-Large-Precategory x y z f g =
     Σ (obj-Large-Precategory C l4) λ w →
-    Σ (hom-Large-Precategory C w y) λ p₁ →
-    Σ (hom-Large-Precategory C w z) λ p₂ →
-    Σ (comp-hom-Large-Precategory C f p₁
-    ＝ comp-hom-Large-Precategory C g p₂) λ α →
-      is-pullback-Large-Precategory x y z f g w p₁ p₂ α
+    Σ (hom-Large-Precategory C w y) λ p →
+    Σ (hom-Large-Precategory C w z) λ q →
+    Σ (comp-hom-Large-Precategory C f p
+    ＝ comp-hom-Large-Precategory C g q) λ α →
+      is-pullback-Large-Precategory x y z f g w p q α
 
   has-all-pullbacks-Large-Precategory :
     UU (α l1 ⊔ α l2 ⊔ α l3 ⊔ α l4 ⊔ β l1 l1 ⊔ β l1 l2 ⊔ β l1 l3 ⊔
@@ -121,42 +121,42 @@ module _
 
   module _
     (w' : obj-Large-Precategory C l1)
-    (p₁' : hom-Large-Precategory C w' y)
-    (p₂' : hom-Large-Precategory C w' z)
-    (α : comp-hom-Large-Precategory C f p₁'
-      ＝ comp-hom-Large-Precategory C g p₂')
+    (p' : hom-Large-Precategory C w' y)
+    (q' : hom-Large-Precategory C w' z)
+    (ε : comp-hom-Large-Precategory C f p'
+      ＝ comp-hom-Large-Precategory C g q')
     where
 
     morphism-into-pullback-Large-Precategory :
       hom-Large-Precategory C w' object-pullback-Large-Precategory
     morphism-into-pullback-Large-Precategory =
-      pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α))
+      pr1 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p' q' ε))
 
     morphism-into-pullback-comm-pr1-Large-Precategory :
       comp-hom-Large-Precategory C
         pr1-pullback-Large-Precategory
         morphism-into-pullback-Large-Precategory ＝
-      p₁'
+      p'
     morphism-into-pullback-comm-pr1-Large-Precategory =
-      pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
+      pr1 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p' q' ε)))
 
     morphism-into-pullback-comm-pr2-Large-Precategory :
       comp-hom-Large-Precategory C
         pr2-pullback-Large-Precategory
         morphism-into-pullback-Large-Precategory ＝
-      p₂'
+      q'
     morphism-into-pullback-comm-pr2-Large-Precategory =
-      pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α)))
+      pr2 (pr2 (pr1 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p' q' ε)))
 
     is-unique-morphism-into-pullback-Large-Precategory :
       (h' : hom-Large-Precategory C w' object-pullback-Large-Precategory) →
-      comp-hom-Large-Precategory C pr1-pullback-Large-Precategory h' ＝ p₁' →
-      comp-hom-Large-Precategory C pr2-pullback-Large-Precategory h' ＝ p₂' →
+      comp-hom-Large-Precategory C pr1-pullback-Large-Precategory h' ＝ p' →
+      comp-hom-Large-Precategory C pr2-pullback-Large-Precategory h' ＝ q' →
       morphism-into-pullback-Large-Precategory ＝ h'
-    is-unique-morphism-into-pullback-Large-Precategory h' α₁ α₂ =
+    is-unique-morphism-into-pullback-Large-Precategory h' η θ =
       ap
         ( pr1)
-        ( pr2 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p₁' p₂' α) (h' , α₁ , α₂))
+        ( pr2 (pr2 (pr2 (pr2 (pr2 (t x y z f g)))) w' p' q' ε) (h' , η , θ))
 
 module _
   {α : Level → Level} {β : Level → Level → Level}
@@ -167,20 +167,20 @@ module _
   (f : hom-Large-Precategory C y x)
   (g : hom-Large-Precategory C z x)
   (w : obj-Large-Precategory C l4)
-  (p₁ : hom-Large-Precategory C w y)
-  (p₂ : hom-Large-Precategory C w z)
-  (α₁ : comp-hom-Large-Precategory C f p₁ ＝ comp-hom-Large-Precategory C g p₂)
+  (p : hom-Large-Precategory C w y)
+  (q : hom-Large-Precategory C w z)
+  (ε : comp-hom-Large-Precategory C f p ＝ comp-hom-Large-Precategory C g q)
   where
 
   is-prop-is-pullback-Large-Precategory :
-    is-prop (is-pullback-Large-Precategory C x y z f g w p₁ p₂ α₁)
+    is-prop (is-pullback-Large-Precategory C x y z f g w p q ε)
   is-prop-is-pullback-Large-Precategory =
-    is-prop-Π³ (λ w' p₁' p₂' → is-prop-function-type is-property-is-contr)
+    is-prop-Π³ (λ w' p' q' → is-prop-function-type is-property-is-contr)
 
   is-pullback-prop-Large-Precategory :
     Prop (α l1 ⊔ β l1 l1 ⊔ β l1 l2 ⊔ β l1 l3 ⊔ β l1 l4)
   pr1 is-pullback-prop-Large-Precategory =
-    is-pullback-Large-Precategory C x y z f g w p₁ p₂ α₁
+    is-pullback-Large-Precategory C x y z f g w p q ε
   pr2 is-pullback-prop-Large-Precategory =
     is-prop-is-pullback-Large-Precategory
 ```
