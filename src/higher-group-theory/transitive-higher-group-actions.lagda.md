@@ -18,8 +18,8 @@ open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import higher-group-theory.higher-groups
 open import higher-group-theory.higher-group-actions
+open import higher-group-theory.higher-groups
 open import higher-group-theory.orbits-higher-group-actions
 ```
 
@@ -50,8 +50,8 @@ Note that it is necessary to include the condition that `X` is inhabited in the
 condition that `G` acts transitively on `X`. A first reason is that this makes
 the condition of being abstractly transitive equivalent to the condition of
 being transitive. A second reason is that this way we will be able to recover
-the familiar property that a `G`-action `X` is a `G`-torsor if and only if it
-is both [free](higher-group-theory.free-higher-group-actions.md) and transitive.
+the familiar property that a `G`-action `X` is a `G`-torsor if and only if it is
+both [free](higher-group-theory.free-higher-group-actions.md) and transitive.
 
 ## Definitions
 
@@ -153,9 +153,27 @@ module _
             ( f (shape-∞-Group G) refl)))
       ( H)
 
+  is-inhabited-is-transitive-action-∞-Group :
+    is-transitive-action-∞-Group G X → is-inhabited (type-action-∞-Group G X)
+  is-inhabited-is-transitive-action-∞-Group H =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-is-0-connected H)
+      ( is-inhabited-Prop _)
+      ( λ (u , x) →
+        apply-universal-property-trunc-Prop
+          ( mere-eq-classifying-type-∞-Group G (shape-∞-Group G) u)
+          ( is-inhabited-Prop _)
+          ( λ where refl → unit-trunc-Prop x))
+
   is-abstractly-transitive-is-transitive-action-∞-Group :
     is-transitive-action-∞-Group G X →
     is-abstractly-transitive-action-∞-Group G X
-  pr1 (is-abstractly-transitive-is-transitive-action-∞-Group H) = ?
-  pr2 (is-abstractly-transitive-is-transitive-action-∞-Group H) = ?
+  pr1 (is-abstractly-transitive-is-transitive-action-∞-Group H) =
+    is-inhabited-is-transitive-action-∞-Group H
+  pr2 (is-abstractly-transitive-is-transitive-action-∞-Group H) x =
+    backward-implication-extended-fundamental-theorem-id-surjective
+      ( shape-∞-Group G)
+      ( H)
+      ( λ u p → tr X p x)
+      ( shape-∞-Group G)
 ```
