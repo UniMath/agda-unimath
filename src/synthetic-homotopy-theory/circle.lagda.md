@@ -27,6 +27,8 @@ open import foundation.sections
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
+open import higher-group-theory.higher-groups
+
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.dependent-suspension-structures
@@ -180,6 +182,14 @@ mere-eq-𝕊¹ =
 
 is-0-connected-𝕊¹ : is-0-connected 𝕊¹
 is-0-connected-𝕊¹ = is-0-connected-mere-eq base-𝕊¹ (mere-eq-𝕊¹ base-𝕊¹)
+```
+
+### The circle as a higher group
+
+```agda
+𝕊¹-∞-Group : ∞-Group lzero
+pr1 𝕊¹-∞-Group = 𝕊¹-Pointed-Type
+pr2 𝕊¹-∞-Group = is-0-connected-𝕊¹
 ```
 
 ### The circle is equivalent to the 1-sphere

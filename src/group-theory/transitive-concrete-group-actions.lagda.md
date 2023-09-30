@@ -21,6 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -165,6 +166,13 @@ module _
       ( ∞-group-Concrete-Group G)
       ( transitive-action-∞-group-transitive-action-Concrete-Group)
 
+  inhabited-type-transitive-action-Concrete-Group :
+    Inhabited-Type l2
+  inhabited-type-transitive-action-Concrete-Group =
+    inhabited-type-transitive-action-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( transitive-action-∞-group-transitive-action-Concrete-Group)
+
   mul-transitive-action-Concrete-Group :
     type-Concrete-Group G → type-transitive-action-Concrete-Group →
     type-transitive-action-Concrete-Group
@@ -176,6 +184,14 @@ module _
       ( action-transitive-action-Concrete-Group)
   is-abstractly-transitive-transitive-action-Concrete-Group =
     is-abstractly-transitive-transitive-action-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( transitive-action-∞-group-transitive-action-Concrete-Group)
+
+  is-surjective-mul-right-transitive-action-Concrete-Group :
+    (x : type-transitive-action-Concrete-Group) →
+    is-surjective (λ g → mul-transitive-action-Concrete-Group g x)
+  is-surjective-mul-right-transitive-action-Concrete-Group =
+    is-surjective-mul-right-transitive-action-∞-Group
       ( ∞-group-Concrete-Group G)
       ( transitive-action-∞-group-transitive-action-Concrete-Group)
 ```
@@ -238,8 +254,6 @@ module _
       ( X)
       ( Y))
 ```
-
-## Properties
 
 ### Two equivalences of transitive concrete group actions are homotopic if there exists a point on which they have the same value
 
@@ -313,9 +327,9 @@ module _
       ( is-transitive-action-Concrete-Group-Prop G)
       ( is-1-type-action-Concrete-Group G)
 
-  transitive-action-Concrete-Group-1-Type : 1-Type (l1 ⊔ lsuc l2)
-  pr1 transitive-action-Concrete-Group-1-Type =
+  transitive-action-1-type-Concrete-Group : 1-Type (l1 ⊔ lsuc l2)
+  pr1 transitive-action-1-type-Concrete-Group =
     transitive-action-Concrete-Group l2 G
-  pr2 transitive-action-Concrete-Group-1-Type =
+  pr2 transitive-action-1-type-Concrete-Group =
     is-1-type-transitive-action-Concrete-Group
 ```
