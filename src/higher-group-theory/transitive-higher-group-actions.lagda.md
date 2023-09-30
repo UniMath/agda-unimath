@@ -106,6 +106,40 @@ transitive-action-∞-Group :
   {l1 : Level} (l2 : Level) (G : ∞-Group l1) → UU (l1 ⊔ lsuc l2)
 transitive-action-∞-Group l2 G =
   Σ (action-∞-Group l2 G) (is-transitive-action-∞-Group G)
+
+module _
+  {l1 l2 : Level} (G : ∞-Group l1) (X : transitive-action-∞-Group l2 G)
+  where
+
+  action-transitive-action-∞-Group : action-∞-Group l2 G
+  action-transitive-action-∞-Group = pr1 X
+
+  is-transitive-transitive-action-∞-Group :
+    is-transitive-action-∞-Group G action-transitive-action-∞-Group
+  is-transitive-transitive-action-∞-Group = pr2 X
+
+  type-transitive-action-∞-Group : UU l2
+  type-transitive-action-∞-Group =
+    type-action-∞-Group G action-transitive-action-∞-Group
+
+  mul-transitive-action-∞-Group :
+    type-∞-Group G →
+    type-transitive-action-∞-Group → type-transitive-action-∞-Group
+  mul-transitive-action-∞-Group =
+    mul-action-∞-Group G action-transitive-action-∞-Group
+
+  associative-mul-transitive-action-∞-Group :
+    (g h : type-∞-Group G) (x : type-transitive-action-∞-Group) →
+    mul-transitive-action-∞-Group (mul-∞-Group G g h) x ＝
+    mul-transitive-action-∞-Group h (mul-transitive-action-∞-Group g x)
+  associative-mul-transitive-action-∞-Group =
+    associative-mul-action-∞-Group G action-transitive-action-∞-Group
+
+  unit-law-mul-transitive-action-∞-Group :
+    (x : type-transitive-action-∞-Group) →
+    mul-transitive-action-∞-Group (unit-∞-Group G) x ＝ x
+  unit-law-mul-transitive-action-∞-Group =
+    unit-law-mul-action-∞-Group G action-transitive-action-∞-Group
 ```
 
 ## Properties
@@ -176,4 +210,33 @@ module _
       ( H)
       ( λ u p → tr X p x)
       ( shape-∞-Group G)
+
+module _
+  {l1 l2 : Level} (G : ∞-Group l1) (X : transitive-action-∞-Group l2 G)
+  where
+
+  is-inhabited-transitive-action-∞-Group :
+    is-inhabited (type-transitive-action-∞-Group G X)
+  is-inhabited-transitive-action-∞-Group =
+    is-inhabited-is-transitive-action-∞-Group G
+      ( action-transitive-action-∞-Group G X)
+      ( is-transitive-transitive-action-∞-Group G X)
+
+  is-abstractly-transitive-transitive-action-∞-Group :
+    is-abstractly-transitive-action-∞-Group G
+      ( action-transitive-action-∞-Group G X)
+  is-abstractly-transitive-transitive-action-∞-Group =
+    is-abstractly-transitive-is-transitive-action-∞-Group G
+      ( action-transitive-action-∞-Group G X)
+      ( is-transitive-transitive-action-∞-Group G X)
+
+  is-surjective-tr-transitive-action-∞-Group :
+    (u : classifying-type-∞-Group G) (x : type-transitive-action-∞-Group G X) →
+    is-surjective
+      ( λ (p : shape-∞-Group G ＝ u) →
+        tr (action-transitive-action-∞-Group G X) p x)
+  is-surjective-tr-transitive-action-∞-Group =
+    is-surjective-tr-is-abstractly-transitive-action-∞-Group G
+      ( action-transitive-action-∞-Group G X)
+      ( is-abstractly-transitive-transitive-action-∞-Group)
 ```
