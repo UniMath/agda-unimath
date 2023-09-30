@@ -38,8 +38,7 @@ open import higher-group-theory.transitive-higher-group-actions
 
 Consider a [concrete group](group-theory.concrete-groups.md) `G` and a
 [concrete group action](group-theory.concrete-group-actions.md) of `G` on `X`.
-We
-say that `X` is **transitive** if its type of
+We say that `X` is **transitive** if its type of
 [orbits](group-theory.orbits-concrete-group-actions.md) is
 [connected](foundation.connected-types.md).
 
@@ -69,7 +68,7 @@ both [free](group-theory.free-concrete-group-actions.md) and transitive.
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
-  
+
   is-transitive-action-Concrete-Group-Prop : Prop (l1 ⊔ l2)
   is-transitive-action-Concrete-Group-Prop =
     is-transitive-prop-action-∞-Group

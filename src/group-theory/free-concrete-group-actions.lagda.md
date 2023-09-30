@@ -26,8 +26,7 @@ open import higher-group-theory.free-higher-group-actions
 
 Consider a [concrete group](group-theory.concrete-groups.md) `G` and a
 [concrete group action](group-theory.concrete-group-actions.md) of `G` on `X`.
-We
-say that `X` is **free** if its type of
+We say that `X` is **free** if its type of
 [orbits](group-theory.orbits-concrete-group-actions.md) is a
 [set](foundation.sets.md).
 
@@ -49,7 +48,7 @@ is an [embedding](foundation.embeddings.md).
 module _
   {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
   where
-  
+
   is-free-prop-action-Concrete-Group : Prop (l1 ⊔ l2)
   is-free-prop-action-Concrete-Group =
     is-free-prop-action-∞-Group (∞-group-Concrete-Group G) (type-Set ∘ X)
