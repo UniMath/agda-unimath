@@ -11,6 +11,7 @@ module modal-type-theory where
 
 open import modal-type-theory.codiscrete-maps public
 open import modal-type-theory.codiscrete-types public
+open import modal-type-theory.crisp-law-of-excluded-middle public
 open import modal-type-theory.crisp-types public
 open import modal-type-theory.flat-modality public
 open import modal-type-theory.flat-sharp-adjunction public
