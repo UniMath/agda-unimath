@@ -152,4 +152,4 @@ module _
 
 ### Connected set bundles over the circle are cyclic sets
 
-This remains to be shown
+This remains to be shown.
