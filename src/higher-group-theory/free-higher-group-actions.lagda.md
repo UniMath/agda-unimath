@@ -82,6 +82,11 @@ module _
   is-abstractly-free-action-∞-Group : UU (l1 ⊔ l2)
   is-abstractly-free-action-∞-Group =
     type-Prop is-abstractly-free-prop-action-∞-Group
+
+  is-prop-is-abstractly-free-action-∞-Group :
+    is-prop is-abstractly-free-action-∞-Group
+  is-prop-is-abstractly-free-action-∞-Group =
+    is-prop-type-Prop is-abstractly-free-prop-action-∞-Group
 ```
 
 ### Free group actions

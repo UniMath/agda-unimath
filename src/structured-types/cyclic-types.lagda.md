@@ -19,6 +19,7 @@ open import foundation.iterating-automorphisms
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
+open import foundation.surjective-maps
 open import foundation.universe-levels
 ```
 
@@ -29,14 +30,15 @@ open import foundation.universe-levels
 A **cyclic set** consists of an [inhabited](foundation.inhabited-types.md)
 [set](foundation.sets.md) `A` equipped with an
 [automorphism](foundation.automorphisms.md) `e : A ≃ A` which is _cyclic_ in the
-sense that
+sense that the map
 
 ```text
-  ∀ (x y : A), ∃ (k : ℤ), eᵏ x ＝ y.
+  k ↦ eᵏ x
 ```
 
-There are several equivalent ways of stating the concept of cyclic sets. Two
-further equivalent ways are:
+is [surjective](foundation.surjective-maps.md) for every `x : A`. There are
+several equivalent ways of stating the concept of cyclic sets. Two further
+equivalent ways are:
 
 - A cyclic set is a
   [connected set bundle](synthetic-homotopy-theory.connected-set-bundles-circle.md)
@@ -60,11 +62,7 @@ module _
       ( Π-Prop
         ( type-Set X)
         ( λ x →
-          Π-Prop
-            ( type-Set X)
-            ( λ y →
-              ∃-Prop ℤ
-                ( λ k → map-iterate-automorphism-ℤ k e x ＝ y))))
+          is-surjective-Prop (λ k → map-iterate-automorphism-ℤ k e x)))
 
   is-cyclic-Set : UU l
   is-cyclic-Set = type-Prop is-cyclic-prop-Set
