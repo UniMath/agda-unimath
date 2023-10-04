@@ -83,7 +83,7 @@ module _
   eq-descent-data-circle-function-type :
     equiv-descent-data-circle
       ( descent-data-circle-function-type l A B)
-      ( ev-fam-circle
+      ( descent-data-family-circle
         ( l)
         ( family-descent-data-circle-function-type l A B))
   pr1 eq-descent-data-circle-function-type =
@@ -113,7 +113,7 @@ module _
           ( family-family-with-descent-data-circle B) (loop-free-loop l))
         ( map-equiv-descent-data-circle
           ( descent-data-circle-function-type l A B)
-          ( ev-fam-circle
+          ( descent-data-family-circle
             ( l)
             ( family-descent-data-circle-function-type l A B))
           ( eq-descent-data-circle-function-type)
@@ -157,13 +157,13 @@ module _
         ( equiv-inv-htpy _ _) ∘e
         ( equiv-funext))
 
-  equiv-ev-fam-circle-function-type-hom :
+  equiv-descent-data-family-circle-function-type-hom :
     dependent-universal-property-circle (l2 ⊔ l3) l →
     ( (x : S) → family-descent-data-circle-function-type l A B x) ≃
     hom-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
       ( descent-data-family-with-descent-data-circle B)
-  equiv-ev-fam-circle-function-type-hom dup-circle =
+  equiv-descent-data-family-circle-function-type-hom dup-circle =
     equiv-fixpoint-descent-data-circle-function-type-hom ∘e
     ( equiv-ev-fixpoint-descent-data-circle
       ( l)

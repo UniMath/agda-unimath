@@ -56,7 +56,7 @@ module _
   eq-descent-data-circle-constant-type :
     equiv-descent-data-circle
       ( descent-data-circle-constant-type l X)
-      ( ev-fam-circle l
+      ( descent-data-family-circle l
         ( family-descent-data-circle-constant-type l X))
   pr1 eq-descent-data-circle-constant-type = id-equiv
   pr2 eq-descent-data-circle-constant-type x =

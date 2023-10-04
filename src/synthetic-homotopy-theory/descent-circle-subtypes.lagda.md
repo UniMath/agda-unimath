@@ -18,6 +18,7 @@ open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.dependent-descent-circle
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.descent-circle-dependent-pair-types
 open import synthetic-homotopy-theory.free-loops

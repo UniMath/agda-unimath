@@ -13,6 +13,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.dependent-descent-circle
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
 ```
@@ -70,7 +71,7 @@ module _
   eq-descent-data-circle-dependent-pair-type :
     equiv-descent-data-circle
       ( descent-data-circle-dependent-pair-type l A B)
-      ( ev-fam-circle l
+      ( descent-data-family-circle l
         ( family-descent-data-circle-dependent-pair-type l A B))
   pr1 eq-descent-data-circle-dependent-pair-type =
     equiv-Σ
