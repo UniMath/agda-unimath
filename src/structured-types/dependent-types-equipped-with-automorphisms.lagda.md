@@ -109,20 +109,19 @@ module _
   equiv-equiv-Dependent-Type-With-Automorphism = pr1 α
 
   map-equiv-Dependent-Type-With-Automorphism :
-    ( x : type-Type-With-Automorphism P) →
+    { x : type-Type-With-Automorphism P} →
     ( family-Dependent-Type-With-Automorphism P Q x) →
     ( family-Dependent-Type-With-Automorphism P T x)
-  map-equiv-Dependent-Type-With-Automorphism x =
+  map-equiv-Dependent-Type-With-Automorphism {x} =
     map-equiv (equiv-equiv-Dependent-Type-With-Automorphism x)
 
   coherence-square-equiv-Dependent-Type-With-Automorphism :
     ( x : type-Type-With-Automorphism P) →
     coherence-square-maps
-      ( map-equiv-Dependent-Type-With-Automorphism x)
+      ( map-equiv-Dependent-Type-With-Automorphism)
       ( map-Dependent-Type-With-Automorphism P Q)
       ( map-Dependent-Type-With-Automorphism P T)
-      ( map-equiv-Dependent-Type-With-Automorphism
-        ( map-Type-With-Automorphism P x))
+      ( map-equiv-Dependent-Type-With-Automorphism)
   coherence-square-equiv-Dependent-Type-With-Automorphism = pr2 α
 ```
 
