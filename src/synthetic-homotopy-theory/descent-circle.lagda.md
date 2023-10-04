@@ -30,6 +30,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import structured-types.morphisms-types-equipped-with-automorphisms
 open import structured-types.types-equipped-with-automorphisms
 
 open import synthetic-homotopy-theory.free-loops
@@ -68,7 +69,7 @@ module _
   type-descent-data-circle = type-Type-With-Automorphism P
 
   aut-descent-data-circle : Aut type-descent-data-circle
-  aut-descent-data-circle = aut-Type-With-Automorphism P
+  aut-descent-data-circle = automorphism-Type-With-Automorphism P
 
   map-descent-data-circle : type-descent-data-circle → type-descent-data-circle
   map-descent-data-circle = map-Type-With-Automorphism P
@@ -94,14 +95,7 @@ hom-descent-data-circle :
   { l1 l2 : Level}
   ( P : descent-data-circle l1) (Q : descent-data-circle l2) →
   UU (l1 ⊔ l2)
-hom-descent-data-circle P Q =
-  Σ ( (type-descent-data-circle P) → (type-descent-data-circle Q))
-    ( λ h →
-      coherence-square-maps
-        ( h)
-        ( map-descent-data-circle P)
-        ( map-descent-data-circle Q)
-        ( h))
+hom-descent-data-circle = hom-Type-With-Automorphism
 
 module _
   { l1 l2 : Level} (P : descent-data-circle l1) (Q : descent-data-circle l2)
@@ -110,15 +104,17 @@ module _
 
   map-hom-descent-data-circle :
     type-descent-data-circle P → type-descent-data-circle Q
-  map-hom-descent-data-circle = pr1 h
+  map-hom-descent-data-circle =
+    map-hom-Type-With-Automorphism P Q h
 
-  coherence-hom-descent-data-circle :
+  coherence-square-hom-descent-data-circle :
     coherence-square-maps
       ( map-hom-descent-data-circle)
       ( map-descent-data-circle P)
       ( map-descent-data-circle Q)
       ( map-hom-descent-data-circle)
-  coherence-hom-descent-data-circle = pr2 h
+  coherence-square-hom-descent-data-circle =
+    coherence-square-hom-Type-With-Automorphism P Q h
 ```
 
 ### Canonical descent data for a family over the circle

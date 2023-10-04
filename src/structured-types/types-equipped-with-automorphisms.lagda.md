@@ -37,12 +37,12 @@ module _
   type-Type-With-Automorphism : UU l
   type-Type-With-Automorphism = pr1 A
 
-  aut-Type-With-Automorphism : Aut type-Type-With-Automorphism
-  aut-Type-With-Automorphism = pr2 A
+  automorphism-Type-With-Automorphism : Aut type-Type-With-Automorphism
+  automorphism-Type-With-Automorphism = pr2 A
 
   map-Type-With-Automorphism :
     type-Type-With-Automorphism → type-Type-With-Automorphism
-  map-Type-With-Automorphism = map-equiv aut-Type-With-Automorphism
+  map-Type-With-Automorphism = map-equiv automorphism-Type-With-Automorphism
 
   type-with-endomorphism-Type-With-Automorphism : Type-With-Endomorphism l
   pr1 type-with-endomorphism-Type-With-Automorphism =
