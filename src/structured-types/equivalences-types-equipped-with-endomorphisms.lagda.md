@@ -32,6 +32,21 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ## Definition
 
+### The predicate of being an equivalence of types equipped with endomorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Type-With-Endomorphism l1)
+  (Y : Type-With-Endomorphism l2)
+  where
+
+  is-equiv-hom-Type-With-Endomorphism :
+    hom-Type-With-Endomorphism X Y → UU (l1 ⊔ l2)
+  is-equiv-hom-Type-With-Endomorphism h =
+    is-equiv (map-hom-Type-With-Endomorphism X Y h)
+```
+
 ### Equivalences of types equipped with endomorphisms
 
 ```agda
@@ -50,6 +65,15 @@ module _
           ( endomorphism-Type-With-Endomorphism X)
           ( endomorphism-Type-With-Endomorphism Y)
           ( map-equiv e))
+
+  equiv-Type-With-Endomorphism' : UU (l1 ⊔ l2)
+  equiv-Type-With-Endomorphism' =
+    Σ (hom-Type-With-Endomorphism X Y) (is-equiv-hom-Type-With-Endomorphism X Y)
+
+  compute-equiv-Type-With-Endomorphism :
+    equiv-Type-With-Endomorphism' ≃ equiv-Type-With-Endomorphism
+  compute-equiv-Type-With-Endomorphism =
+    equiv-right-swap-Σ
 
   equiv-equiv-Type-With-Endomorphism :
     equiv-Type-With-Endomorphism →
@@ -77,6 +101,12 @@ module _
     map-equiv-Type-With-Endomorphism e
   pr2 (hom-equiv-Type-With-Endomorphism e) =
     coherence-square-equiv-Type-With-Endomorphism e
+
+  is-equiv-equiv-Type-With-Endomorphism :
+    (e : equiv-Type-With-Endomorphism) →
+    is-equiv-hom-Type-With-Endomorphism X Y (hom-equiv-Type-With-Endomorphism e)
+  is-equiv-equiv-Type-With-Endomorphism e =
+    is-equiv-map-equiv (equiv-equiv-Type-With-Endomorphism e)
 ```
 
 ### The identity equivalence

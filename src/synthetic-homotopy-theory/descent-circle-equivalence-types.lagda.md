@@ -140,11 +140,11 @@ module _
           ( descent-data-circle-function-type l A B))
         ( λ x → is-equiv (pr1 x))
       by
-        equiv-section-descent-data-circle-subtype-fixpoint-in-subtype l
-          ( family-with-descent-data-circle-function-type l A B)
-          ( family-with-dependent-descent-data-circle-is-equiv l A B)
-          ( λ t f → is-property-is-equiv f)
-          ( dup-circle)
+      equiv-section-descent-data-circle-subtype-fixpoint-in-subtype l
+        ( family-with-descent-data-circle-function-type l A B)
+        ( family-with-dependent-descent-data-circle-is-equiv l A B)
+        ( λ t f → is-property-is-equiv f)
+        ( dup-circle)
     ≃ Σ ( hom-descent-data-circle
           ( descent-data-family-with-descent-data-circle A)
           ( descent-data-family-with-descent-data-circle B))
@@ -155,20 +155,19 @@ module _
               ( descent-data-family-with-descent-data-circle B)
               ( h)))
       by
-        equiv-Σ-equiv-base
-          ( λ h →
-            is-equiv
-              ( map-hom-descent-data-circle
-                ( descent-data-family-with-descent-data-circle A)
-                ( descent-data-family-with-descent-data-circle B)
-                ( h)))
-          ( equiv-fixpoint-descent-data-circle-function-type-hom l A B)
+      equiv-Σ-equiv-base
+        ( λ h →
+          is-equiv
+            ( map-hom-descent-data-circle
+              ( descent-data-family-with-descent-data-circle A)
+              ( descent-data-family-with-descent-data-circle B)
+              ( h)))
+        ( equiv-fixpoint-descent-data-circle-function-type-hom l A B)
     ≃ equiv-descent-data-circle
         ( descent-data-family-with-descent-data-circle A)
         ( descent-data-family-with-descent-data-circle B)
       by
-        inv-equiv
-          ( equiv-equiv-descent-data-circle-hom-is-equiv
-            ( descent-data-family-with-descent-data-circle A)
-            ( descent-data-family-with-descent-data-circle B))
+      compute-equiv-descent-data-circle
+        ( descent-data-family-with-descent-data-circle A)
+        ( descent-data-family-with-descent-data-circle B)
 ```

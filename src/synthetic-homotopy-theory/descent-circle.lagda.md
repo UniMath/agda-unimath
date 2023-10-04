@@ -568,44 +568,35 @@ module _
 ### Characterization of the identity type of descent data for the circle
 
 ```agda
-refl-equiv-descent-data-circle :
+id-equiv-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
   equiv-descent-data-circle P P
-refl-equiv-descent-data-circle P = id-equiv , refl-htpy
+id-equiv-descent-data-circle =
+  id-equiv-Type-With-Automorphism
 
-Eq-eq-descent-data-circle :
+equiv-eq-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →
   P ＝ Q → equiv-descent-data-circle P Q
-Eq-eq-descent-data-circle P .P refl = refl-equiv-descent-data-circle P
+equiv-eq-descent-data-circle =
+  equiv-eq-Type-With-Automorphism
 
 is-contr-total-equiv-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
   is-contr (Σ (descent-data-circle l1) (equiv-descent-data-circle P))
-is-contr-total-equiv-descent-data-circle P =
-  is-contr-total-Eq-structure
-    ( λ Y f h →
-      coherence-square-maps
-        ( map-equiv h)
-        ( map-descent-data-circle P)
-        ( map-equiv f)
-        ( map-equiv h))
-    ( is-contr-total-equiv (type-descent-data-circle P))
-    ( type-descent-data-circle P , id-equiv)
-  ( is-contr-total-htpy-equiv (aut-descent-data-circle P))
+is-contr-total-equiv-descent-data-circle =
+  is-contr-total-equiv-Type-With-Automorphism
 
-is-equiv-Eq-eq-descent-data-circle :
+is-equiv-equiv-eq-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →
-  is-equiv (Eq-eq-descent-data-circle P Q)
-is-equiv-Eq-eq-descent-data-circle P =
-  fundamental-theorem-id
-    ( is-contr-total-equiv-descent-data-circle P)
-    ( Eq-eq-descent-data-circle P)
+  is-equiv (equiv-eq-descent-data-circle P Q)
+is-equiv-equiv-eq-descent-data-circle =
+  is-equiv-equiv-eq-Type-With-Automorphism
 
 eq-equiv-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →
   equiv-descent-data-circle P Q → P ＝ Q
-eq-equiv-descent-data-circle P Q =
-  map-inv-is-equiv (is-equiv-Eq-eq-descent-data-circle P Q)
+eq-equiv-descent-data-circle =
+  eq-equiv-Type-With-Automorphism
 ```
 
 ### Alternative definition of equality of descent data as homomorphisms which are equivalences
@@ -618,13 +609,11 @@ module _
   where
 
   equiv-descent-data-circle' : UU (l1 ⊔ l2)
-  equiv-descent-data-circle' =
-    Σ ( hom-descent-data-circle P Q)
-      ( λ h → is-equiv (map-hom-descent-data-circle P Q h))
+  equiv-descent-data-circle' = equiv-Type-With-Automorphism' P Q
 
-  equiv-equiv-descent-data-circle-hom-is-equiv :
-    equiv-descent-data-circle P Q ≃ equiv-descent-data-circle'
-  equiv-equiv-descent-data-circle-hom-is-equiv = equiv-right-swap-Σ
+  compute-equiv-descent-data-circle :
+    equiv-descent-data-circle' ≃ equiv-descent-data-circle P Q
+  compute-equiv-descent-data-circle = compute-equiv-Type-With-Automorphism P Q
 ```
 
 ### Uniqueness of descent data characterizing a type family over the circle
@@ -687,13 +676,13 @@ module _
       ( fiber (ev-descent-data-circle l) Q)
       ( tot
         ( λ P →
-          Eq-eq-descent-data-circle Q (ev-descent-data-circle l P) ∘
+          equiv-eq-descent-data-circle Q (ev-descent-data-circle l P) ∘
           inv))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ P →
           is-equiv-comp _ _
             ( is-equiv-inv _ _)
-            ( is-equiv-Eq-eq-descent-data-circle
+            ( is-equiv-equiv-eq-descent-data-circle
               ( Q)
               ( ev-descent-data-circle l P))))
       ( is-contr-map-is-equiv

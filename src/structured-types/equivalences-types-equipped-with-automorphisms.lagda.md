@@ -34,6 +34,23 @@ open import structured-types.types-equipped-with-automorphisms
 
 ## Definition
 
+### The predicate of being an equivalence of types equipped with automorphisms
+
+```agda
+module _
+  {l1 l2 : Level}
+  (X : Type-With-Automorphism l1)
+  (Y : Type-With-Automorphism l2)
+  where
+
+  is-equiv-hom-Type-With-Automorphism :
+    (h : hom-Type-With-Automorphism X Y) → UU (l1 ⊔ l2)
+  is-equiv-hom-Type-With-Automorphism =
+    is-equiv-hom-Type-With-Endomorphism
+      ( type-with-endomorphism-Type-With-Automorphism X)
+      ( type-with-endomorphism-Type-With-Automorphism Y)
+```
+
 ### Equivalences of types equipped with automorphisms
 
 ```agda
@@ -46,6 +63,19 @@ module _
   equiv-Type-With-Automorphism : UU (l1 ⊔ l2)
   equiv-Type-With-Automorphism =
     equiv-Type-With-Endomorphism
+      ( type-with-endomorphism-Type-With-Automorphism X)
+      ( type-with-endomorphism-Type-With-Automorphism Y)
+
+  equiv-Type-With-Automorphism' : UU (l1 ⊔ l2)
+  equiv-Type-With-Automorphism' =
+    equiv-Type-With-Endomorphism'
+      ( type-with-endomorphism-Type-With-Automorphism X)
+      ( type-with-endomorphism-Type-With-Automorphism Y)
+
+  compute-equiv-Type-With-Automorphism :
+    equiv-Type-With-Automorphism' ≃ equiv-Type-With-Automorphism
+  compute-equiv-Type-With-Automorphism =
+    compute-equiv-Type-With-Endomorphism
       ( type-with-endomorphism-Type-With-Automorphism X)
       ( type-with-endomorphism-Type-With-Automorphism Y)
 
@@ -81,6 +111,14 @@ module _
     equiv-Type-With-Automorphism → hom-Type-With-Automorphism X Y
   hom-equiv-Type-With-Automorphism =
     hom-equiv-Type-With-Endomorphism
+      ( type-with-endomorphism-Type-With-Automorphism X)
+      ( type-with-endomorphism-Type-With-Automorphism Y)
+
+  is-equiv-equiv-Type-With-Automorphism :
+    (e : equiv-Type-With-Automorphism) →
+    is-equiv-hom-Type-With-Automorphism X Y (hom-equiv-Type-With-Automorphism e)
+  is-equiv-equiv-Type-With-Automorphism =
+    is-equiv-equiv-Type-With-Endomorphism
       ( type-with-endomorphism-Type-With-Automorphism X)
       ( type-with-endomorphism-Type-With-Automorphism Y)
 ```
