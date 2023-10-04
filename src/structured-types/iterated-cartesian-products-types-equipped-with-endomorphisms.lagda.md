@@ -28,11 +28,11 @@ endomorphism.
 ## Definitions
 
 ```agda
-iterated-product-Type-With-Endomorphism-list :
+iterated-product-list-Type-With-Endomorphism :
   {l : Level} → list (Type-With-Endomorphism l) → Type-With-Endomorphism l
-iterated-product-Type-With-Endomorphism-list nil =
+iterated-product-list-Type-With-Endomorphism nil =
   trivial-Type-With-Endomorphism
-iterated-product-Type-With-Endomorphism-list (cons A L) =
-  product-Type-With-Endomorphism A
-    ( iterated-product-Type-With-Endomorphism-list L)
+iterated-product-list-Type-With-Endomorphism (cons A L) =
+  prod-Type-With-Endomorphism A
+    ( iterated-product-list-Type-With-Endomorphism L)
 ```

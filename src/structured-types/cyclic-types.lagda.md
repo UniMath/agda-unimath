@@ -74,8 +74,9 @@ module _
             ( λ k →
               map-iterate-automorphism-ℤ k (aut-Set-With-Automorphism X) x)))
 
-  is-cyclic-Set : UU l
-  is-cyclic-Set = type-Prop is-cyclic-prop-Set-With-Automorphism
+  is-cyclic-Set-With-Automorphism : UU l
+  is-cyclic-Set-With-Automorphism =
+    type-Prop is-cyclic-prop-Set-With-Automorphism
 ```
 
 ### Cyclic sets
@@ -84,7 +85,7 @@ module _
 Cyclic-Set :
   (l : Level) → UU (lsuc l)
 Cyclic-Set l =
-  Σ (Set-With-Automorphism l) (λ X → is-cyclic-Set X)
+  Σ (Set-With-Automorphism l) (λ X → is-cyclic-Set-With-Automorphism X)
 
 module _
   {l : Level} (X : Cyclic-Set l)
