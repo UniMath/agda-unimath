@@ -15,6 +15,7 @@ open import structured-types.cyclic-types public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
+open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public

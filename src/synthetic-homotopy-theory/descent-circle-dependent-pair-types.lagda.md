@@ -68,7 +68,7 @@ module _
   where
 
   eq-descent-data-circle-dependent-pair-type :
-    Eq-descent-data-circle
+    equiv-descent-data-circle
       ( descent-data-circle-dependent-pair-type l A B)
       ( ev-descent-data-circle l
         ( family-descent-data-circle-dependent-pair-type l A B))

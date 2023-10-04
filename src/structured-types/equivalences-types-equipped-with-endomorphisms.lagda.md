@@ -293,6 +293,14 @@ module _
       is-contr-total-equiv-Type-With-Endomorphism
       equiv-eq-Type-With-Endomorphism
 
+  extensionality-Type-With-Endomorphism :
+    (Y : Type-With-Endomorphism l1) →
+    (X ＝ Y) ≃ equiv-Type-With-Endomorphism X Y
+  pr1 (extensionality-Type-With-Endomorphism Y) =
+    equiv-eq-Type-With-Endomorphism Y
+  pr2 (extensionality-Type-With-Endomorphism Y) =
+    is-equiv-equiv-eq-Type-With-Endomorphism Y
+
   eq-equiv-Type-With-Endomorphism :
     (Y : Type-With-Endomorphism l1) → equiv-Type-With-Endomorphism X Y → X ＝ Y
   eq-equiv-Type-With-Endomorphism Y =

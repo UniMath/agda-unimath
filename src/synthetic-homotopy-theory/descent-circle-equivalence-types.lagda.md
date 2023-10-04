@@ -123,15 +123,15 @@ module _
   ( B : family-with-descent-data-circle l l3)
   where
 
-  equiv-section-descent-data-circle-equiv-Eq-descent-data-circle :
+  equiv-section-descent-data-circle-equiv-equiv-descent-data-circle :
     dependent-universal-property-circle (l2 ⊔ l3) l →
     ( ( t : S) →
       ( family-family-with-descent-data-circle A t) ≃
       ( family-family-with-descent-data-circle B t)) ≃
-    ( Eq-descent-data-circle
+    ( equiv-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
       ( descent-data-family-with-descent-data-circle B))
-  equiv-section-descent-data-circle-equiv-Eq-descent-data-circle dup-circle =
+  equiv-section-descent-data-circle-equiv-equiv-descent-data-circle dup-circle =
     equivalence-reasoning
     ( ( t : S) →
         family-family-with-descent-data-circle A t ≃
@@ -163,12 +163,12 @@ module _
                 ( descent-data-family-with-descent-data-circle B)
                 ( h)))
           ( equiv-fixpoint-descent-data-circle-function-type-hom l A B)
-    ≃ Eq-descent-data-circle
+    ≃ equiv-descent-data-circle
         ( descent-data-family-with-descent-data-circle A)
         ( descent-data-family-with-descent-data-circle B)
       by
         inv-equiv
-          ( equiv-Eq-descent-data-circle-hom-is-equiv
+          ( equiv-equiv-descent-data-circle-hom-is-equiv
             ( descent-data-family-with-descent-data-circle A)
             ( descent-data-family-with-descent-data-circle B))
 ```

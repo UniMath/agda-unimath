@@ -54,7 +54,7 @@ module _
   where
 
   eq-descent-data-circle-constant-type :
-    Eq-descent-data-circle
+    equiv-descent-data-circle
       ( descent-data-circle-constant-type l X)
       ( ev-descent-data-circle l
         ( family-descent-data-circle-constant-type l X))

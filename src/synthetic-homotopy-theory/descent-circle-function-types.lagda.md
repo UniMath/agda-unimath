@@ -81,7 +81,7 @@ module _
   where
 
   eq-descent-data-circle-function-type :
-    Eq-descent-data-circle
+    equiv-descent-data-circle
       ( descent-data-circle-function-type l A B)
       ( ev-descent-data-circle
         ( l)
@@ -111,7 +111,7 @@ module _
       ( ( tr-function-type
           ( family-family-with-descent-data-circle A)
           ( family-family-with-descent-data-circle B) (loop-free-loop l))
-        ( map-Eq-descent-data-circle
+        ( map-equiv-descent-data-circle
           ( descent-data-circle-function-type l A B)
           ( ev-descent-data-circle
             ( l)
