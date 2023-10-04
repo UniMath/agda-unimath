@@ -166,9 +166,9 @@ succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 succ-ℤ-Mod zero-ℕ = succ-ℤ
 succ-ℤ-Mod (succ-ℕ k) = succ-Fin (succ-ℕ k)
 
-ℤ-Mod-Endo : (k : ℕ) → Endo lzero
-pr1 (ℤ-Mod-Endo k) = ℤ-Mod k
-pr2 (ℤ-Mod-Endo k) = succ-ℤ-Mod k
+ℤ-Mod-Type-With-Endomorphism : (k : ℕ) → Type-With-Endomorphism lzero
+pr1 (ℤ-Mod-Type-With-Endomorphism k) = ℤ-Mod k
+pr2 (ℤ-Mod-Type-With-Endomorphism k) = succ-ℤ-Mod k
 
 abstract
   is-equiv-succ-ℤ-Mod : (k : ℕ) → is-equiv (succ-ℤ-Mod k)

@@ -252,9 +252,9 @@ succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
 succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
 
-Fin-Endo : ℕ → Endo lzero
-pr1 (Fin-Endo k) = Fin k
-pr2 (Fin-Endo k) = succ-Fin k
+Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
+pr1 (Fin-Type-With-Endomorphism k) = Fin k
+pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
 ```
 
 ```agda

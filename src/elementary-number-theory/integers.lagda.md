@@ -132,9 +132,9 @@ pred-ℤ (inr (inl star)) = inl zero-ℕ
 pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
 
-ℤ-Endo : Endo lzero
-pr1 ℤ-Endo = ℤ
-pr2 ℤ-Endo = succ-ℤ
+ℤ-Type-With-Endomorphism : Type-With-Endomorphism lzero
+pr1 ℤ-Type-With-Endomorphism = ℤ
+pr2 ℤ-Type-With-Endomorphism = succ-ℤ
 ```
 
 ### The negative of an integer

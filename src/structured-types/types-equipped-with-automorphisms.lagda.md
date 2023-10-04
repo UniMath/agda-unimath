@@ -17,28 +17,50 @@ open import foundation.universe-levels
 
 ## Idea
 
-A type equipped with an automorphism is a pair consisting of a type `A` and an
-automorphism on `A`.
+A **type equipped with an automorphism** is a pair consisting of a type `A` and
+an [automorphism](foundation.automorphisms.md) on `e : A ≃ A`.
 
-## Definition
+## Definitions
 
-```agda
-Type-Aut : (l : Level) → UU (lsuc l)
-Type-Aut l = Σ (UU l) (Aut)
-
-type-Type-Aut : {l : Level} → Type-Aut l → UU l
-type-Type-Aut (X , e) = X
-
-aut-Type-Aut : {l : Level} (A : Type-Aut l) → Aut (type-Type-Aut A)
-aut-Type-Aut (X , e) = e
-```
-
-## Properties
-
-### Every type can be equipped with the identity automorpism
+### Types equipped with automorphisms
 
 ```agda
-id-Type-Aut : {l : Level} → UU l → Type-Aut l
-pr1 (id-Type-Aut X) = X
-pr2 (id-Type-Aut X) = id-equiv
+Type-With-Automorphism : (l : Level) → UU (lsuc l)
+Type-With-Automorphism l = Σ (UU l) (Aut)
+
+module _
+  {l : Level} (A : Type-With-Automorphism l)
+  where
+
+  type-Type-With-Automorphism : UU l
+  type-Type-With-Automorphism = pr1 A
+
+  aut-Type-With-Automorphism : Aut type-Type-With-Automorphism
+  aut-Type-With-Automorphism = pr2 A
+
+  map-Type-With-Automorphism :
+    type-Type-With-Automorphism → type-Type-With-Automorphism
+  map-Type-With-Automorphism = map-equiv aut-Type-With-Automorphism
 ```
+
+### Types equipped with the identity automorphism
+
+```agda
+trivial-Type-With-Automorphism : {l : Level} → UU l → Type-With-Automorphism l
+pr1 (trivial-Type-With-Automorphism X) = X
+pr2 (trivial-Type-With-Automorphism X) = id-equiv
+```
+
+## See also
+
+- Sets equipped with automorphisms are defined in
+  [`structured-types.sets-equipped-with-automorphisms.md`](structured-types.sets-equipped-with-automorphisms.md)
+- Cyclic types are
+  [sets equipped with automorphisms](structured-types.sets-equipped-with-automorphisms.md)
+  of which the automorphism acts transitively.
+- The
+  [descent property of the circle](synthetic-homotopy-theory.descent-property-circle.md)
+  shows that type families over the
+  [circle](synthetic-homotopy-theory.circle.md) are
+  [equivalently](foundation.equivalences.md) described as types equipped with
+  automorphisms.

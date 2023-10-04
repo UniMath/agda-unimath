@@ -30,6 +30,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import structured-types.types-equipped-with-automorphisms
+
 open import synthetic-homotopy-theory.free-loops
 open import synthetic-homotopy-theory.universal-property-circle
 ```
@@ -38,7 +40,8 @@ open import synthetic-homotopy-theory.universal-property-circle
 
 ## Idea
 
-The descent property uniquely characterizes type families over the circle.
+The **descent property** of the [circle](synthetic-homotopy-theory.circle.md)
+uniquely characterizes type families over the circle.
 
 ## Definitions
 
@@ -55,20 +58,20 @@ way made precise in further sections of this file. The pair `(X, e)` is called
 ```agda
 descent-data-circle :
   ( l1 : Level) → UU (lsuc l1)
-descent-data-circle l1 = Σ (UU l1) Aut
+descent-data-circle = Type-With-Automorphism
 
 module _
   { l1 : Level} (P : descent-data-circle l1)
   where
 
   type-descent-data-circle : UU l1
-  type-descent-data-circle = pr1 P
+  type-descent-data-circle = type-Type-With-Automorphism P
 
   aut-descent-data-circle : Aut type-descent-data-circle
-  aut-descent-data-circle = pr2 P
+  aut-descent-data-circle = aut-Type-With-Automorphism P
 
   map-descent-data-circle : type-descent-data-circle → type-descent-data-circle
-  map-descent-data-circle = map-equiv aut-descent-data-circle
+  map-descent-data-circle = map-Type-With-Automorphism P
 ```
 
 ### Homomorphisms between descent data for the circle
