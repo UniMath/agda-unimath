@@ -50,8 +50,8 @@ module _
 
   dependent-descent-data-circle-is-equiv :
     dependent-descent-data-circle
-      ( descent-data-circle-function-type l A B)
       ( l2 ⊔ l3)
+      ( descent-data-circle-function-type l A B)
   pr1 dependent-descent-data-circle-is-equiv = is-equiv
   pr2 dependent-descent-data-circle-is-equiv f =
     equiv-is-equiv-left-factor
@@ -72,10 +72,10 @@ module _
   where
 
   eq-dependent-descent-data-circle-is-equiv :
-    Eq-dependent-descent-data-circle
+    equiv-dependent-descent-data-circle
       ( descent-data-circle-function-type l A B)
       ( dependent-descent-data-circle-is-equiv l A B)
-      ( ev-dependent-descent-data-circle l
+      ( dependent-descent-data-double-family-circle l
         ( family-with-descent-data-circle-function-type l A B)
         ( family-dependent-descent-data-circle-is-equiv l A B))
   pr1 eq-dependent-descent-data-circle-is-equiv f =

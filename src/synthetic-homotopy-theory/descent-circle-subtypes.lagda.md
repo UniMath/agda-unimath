@@ -51,7 +51,7 @@ module _
   ( B : family-with-dependent-descent-data-circle l A l3)
   ( is-subtype-B :
     ( t : S) →
-    is-subtype (family-family-with-dependent-descent-data-circle A B t))
+    is-subtype (double-family-with-dependent-descent-data-circle A B t))
   where
 
   subtype-descent-data-circle-subtype :
@@ -84,7 +84,9 @@ module _
               map-Σ
                 ( type-family-with-dependent-descent-data-circle A B)
                 ( map-aut-family-with-descent-data-circle A)
-                ( map-pseudo-aut-family-with-dependent-descent-data-circle A B)
+                ( λ x →
+                  map-dependent-automorphism-family-with-dependent-descent-data-circle
+                    A B)
                 ( x , r) ＝
               ( x , r)))
       by
@@ -95,7 +97,9 @@ module _
             map-Σ
               ( type-family-with-dependent-descent-data-circle A B)
               ( map-aut-family-with-descent-data-circle A)
-              ( map-pseudo-aut-family-with-dependent-descent-data-circle A B)
+              ( λ x →
+                map-dependent-automorphism-family-with-dependent-descent-data-circle
+                  A B)
               ( u) ＝
             u)
     ≃ Σ ( type-family-with-descent-data-circle A)

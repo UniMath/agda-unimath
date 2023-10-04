@@ -49,12 +49,12 @@ module _
     equiv-Σ
       ( type-family-with-dependent-descent-data-circle A B)
       ( aut-family-with-descent-data-circle A)
-      ( pseudo-aut-family-with-dependent-descent-data-circle A B)
+      ( dependent-automorphism-family-with-dependent-descent-data-circle A B)
 
   family-descent-data-circle-dependent-pair-type : S → UU (l2 ⊔ l3)
   family-descent-data-circle-dependent-pair-type x =
     Σ ( family-family-with-descent-data-circle A x)
-      ( family-family-with-dependent-descent-data-circle A B x)
+      ( double-family-with-dependent-descent-data-circle A B x)
 ```
 
 ## Properties
@@ -75,16 +75,16 @@ module _
         ( family-descent-data-circle-dependent-pair-type l A B))
   pr1 eq-descent-data-circle-dependent-pair-type =
     equiv-Σ
-      ( family-family-with-dependent-descent-data-circle A B (base-free-loop l))
+      ( double-family-with-dependent-descent-data-circle A B (base-free-loop l))
       ( equiv-family-with-descent-data-circle A)
       ( equiv-family-with-dependent-descent-data-circle A B)
   pr2 eq-descent-data-circle-dependent-pair-type u =
     inv
       ( tr-Σ
-          ( family-family-with-dependent-descent-data-circle A B)
+          ( double-family-with-dependent-descent-data-circle A B)
           ( loop-free-loop l)
           ( map-Σ
-            ( family-family-with-dependent-descent-data-circle A B
+            ( double-family-with-dependent-descent-data-circle A B
               ( base-free-loop l))
             ( map-equiv-family-with-descent-data-circle A)
             ( map-equiv-family-with-dependent-descent-data-circle A B)
@@ -96,7 +96,7 @@ module _
               ( pr1 u)
               ( pr2 u) ∙
               tr-eq-pair-Σ
-                ( ind-Σ (family-family-with-dependent-descent-data-circle A B))
+                ( ind-Σ (double-family-with-dependent-descent-data-circle A B))
                 ( loop-free-loop l)
                 ( inv
                   ( coherence-square-family-with-descent-data-circle A (pr1 u)))
