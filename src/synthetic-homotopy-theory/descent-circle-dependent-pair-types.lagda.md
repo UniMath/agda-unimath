@@ -70,7 +70,7 @@ module _
   eq-descent-data-circle-dependent-pair-type :
     equiv-descent-data-circle
       ( descent-data-circle-dependent-pair-type l A B)
-      ( ev-descent-data-circle l
+      ( ev-fam-circle l
         ( family-descent-data-circle-dependent-pair-type l A B))
   pr1 eq-descent-data-circle-dependent-pair-type =
     equiv-Σ

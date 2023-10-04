@@ -125,11 +125,11 @@ by evaluation at `base` and
 [transporting](foundation-core.transport-along-identifications.md) along `loop`.
 
 ```agda
-ev-descent-data-circle :
+ev-fam-circle :
   { l1 l2 : Level} {S : UU l1} (l : free-loop S) →
   ( S → UU l2) → descent-data-circle l2
-pr1 (ev-descent-data-circle l A) = A (base-free-loop l)
-pr2 (ev-descent-data-circle l A) = equiv-tr A (loop-free-loop l)
+pr1 (ev-fam-circle l A) = A (base-free-loop l)
+pr2 (ev-fam-circle l A) = equiv-tr A (loop-free-loop l)
 ```
 
 ### The identity type of descent data for the circle
@@ -170,13 +170,13 @@ module _
 
 ### A family over the circle equipped with corresponding descent data
 
-A family for descent data `(X, e)` is a family over the circle, along with a
+A **family for descent data** `(X, e)` is a family over the circle, along with a
 proof that `(X, e)` is equivalent to the canonical descent data of the family.
 
-Descent data for a family `A : 𝕊¹ → U` is descent data with a proof that it's
+**Descent data for a family** `A : 𝕊¹ → U` is descent data with a proof that it's
 equivalent to the canonical descent data of `A`.
 
-A family with descent data is a family `A : 𝕊¹ → U` over the circle, equipped
+A **family with descent data** is a family `A : 𝕊¹ → U` over the circle, equipped
 with descent data `(X, e)`, and a proof of their equivalence. This can be
 described as a diagram
 
@@ -191,10 +191,10 @@ described as a diagram
 ```
 
 Ideally, every section characterizing descent data of a particular type family
-should include a term of type `family-with-descent-data-circle`, whose type
+should include an element of type `family-with-descent-data-circle`, whose type
 family is the one being described.
 
-Note on naming: a `-for-` in a name indicates that the particular term contains
+Note on naming: a `-for-` in a name indicates that the particular entry contains
 a proof that it's somehow equivalent to the structure it's "for".
 
 ```agda
@@ -209,7 +209,7 @@ module _
       ( λ A →
         equiv-descent-data-circle
           ( P)
-          ( ev-descent-data-circle l A))
+          ( ev-fam-circle l A))
 
   descent-data-circle-for-family :
     { l2 : Level} → (S → UU l2) → UU (lsuc l2)
@@ -218,7 +218,7 @@ module _
       ( λ P →
         equiv-descent-data-circle
           ( P)
-          ( ev-descent-data-circle l A))
+          ( ev-fam-circle l A))
 
   family-with-descent-data-circle :
     ( l2 : Level) → UU (l1 ⊔ lsuc l2)
@@ -258,7 +258,7 @@ module _
   eq-family-with-descent-data-circle :
     equiv-descent-data-circle
       ( descent-data-family-with-descent-data-circle)
-      ( ev-descent-data-circle l family-family-with-descent-data-circle)
+      ( ev-fam-circle l family-family-with-descent-data-circle)
   eq-family-with-descent-data-circle =
     pr2 descent-data-for-family-with-descent-data-circle
 
@@ -268,7 +268,7 @@ module _
   equiv-family-with-descent-data-circle =
     equiv-equiv-descent-data-circle
       ( descent-data-family-with-descent-data-circle)
-      ( ev-descent-data-circle l family-family-with-descent-data-circle)
+      ( ev-fam-circle l family-family-with-descent-data-circle)
       ( eq-family-with-descent-data-circle)
 
   map-equiv-family-with-descent-data-circle :
@@ -286,7 +286,7 @@ module _
   coherence-square-family-with-descent-data-circle =
     coherence-square-equiv-descent-data-circle
       ( descent-data-family-with-descent-data-circle)
-      ( ev-descent-data-circle l family-family-with-descent-data-circle)
+      ( ev-fam-circle l family-family-with-descent-data-circle)
       ( eq-family-with-descent-data-circle)
 
   family-for-family-with-descent-data-circle :
@@ -637,21 +637,21 @@ module _
 
   triangle-comparison-descent-data-circle :
     coherence-triangle-maps
-      ( ev-descent-data-circle l)
+      ( ev-fam-circle l)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))
   triangle-comparison-descent-data-circle A =
     eq-equiv-descent-data-circle
-      ( ev-descent-data-circle l A)
+      ( ev-fam-circle l A)
       ( comparison-descent-data-circle l2 (ev-free-loop l (UU l2) A))
       ( id-equiv , (htpy-eq (inv (compute-equiv-eq-ap (loop-free-loop l)))))
 
-  is-equiv-ev-descent-data-circle-universal-property-circle :
+  is-equiv-ev-fam-circle-universal-property-circle :
     ( up-circle : universal-property-circle (lsuc l2) l) →
-    is-equiv (ev-descent-data-circle l)
-  is-equiv-ev-descent-data-circle-universal-property-circle up-circle =
+    is-equiv (ev-fam-circle l)
+  is-equiv-ev-fam-circle-universal-property-circle up-circle =
     is-equiv-comp-htpy
-      ( ev-descent-data-circle l)
+      ( ev-fam-circle l)
       ( comparison-descent-data-circle l2)
       ( ev-free-loop l (UU l2))
       ( triangle-comparison-descent-data-circle)
@@ -673,10 +673,10 @@ module _
     unique-family-property-circle l2 l
   unique-family-property-universal-property-circle Q =
     is-contr-is-equiv'
-      ( fiber (ev-descent-data-circle l) Q)
+      ( fiber (ev-fam-circle l) Q)
       ( tot
         ( λ P →
-          equiv-eq-descent-data-circle Q (ev-descent-data-circle l P) ∘
+          equiv-eq-descent-data-circle Q (ev-fam-circle l P) ∘
           inv))
       ( is-equiv-tot-is-fiberwise-equiv
         ( λ P →
@@ -684,9 +684,9 @@ module _
             ( is-equiv-inv _ _)
             ( is-equiv-equiv-eq-descent-data-circle
               ( Q)
-              ( ev-descent-data-circle l P))))
+              ( ev-fam-circle l P))))
       ( is-contr-map-is-equiv
-        ( is-equiv-ev-descent-data-circle-universal-property-circle
+        ( is-equiv-ev-fam-circle-universal-property-circle
           ( l)
           ( up-circle))
         ( Q))
