@@ -1,7 +1,7 @@
 # Morphisms of types equipped with automorphisms
 
 ```agda
-module structured-types.morphisms-types-equipped-with-automorphisms
+module structured-types.morphisms-types-equipped-with-automorphisms where
 ```
 
 <details><summary>Imports</summary>

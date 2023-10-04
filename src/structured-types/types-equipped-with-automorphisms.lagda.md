@@ -11,6 +11,8 @@ open import foundation.automorphisms
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
+
+open import structured-types.types-equipped-with-endomorphisms
 ```
 
 </details>
@@ -41,6 +43,12 @@ module _
   map-Type-With-Automorphism :
     type-Type-With-Automorphism → type-Type-With-Automorphism
   map-Type-With-Automorphism = map-equiv aut-Type-With-Automorphism
+
+  type-with-endomorphism-Type-With-Automorphism : Type-With-Endomorphism l
+  pr1 type-with-endomorphism-Type-With-Automorphism =
+    type-Type-With-Automorphism
+  pr2 type-with-endomorphism-Type-With-Automorphism =
+    map-Type-With-Automorphism
 ```
 
 ### Types equipped with the identity automorphism

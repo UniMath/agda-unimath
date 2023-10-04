@@ -26,14 +26,26 @@ The **cartesian product** of two
 ## Definitions
 
 ```agda
-product-Type-With-Endomorphism :
-  {l1 l2 : Level} →
-  Type-With-Endomorphism l1 → Type-With-Endomorphism l2 →
-  Type-With-Endomorphism (l1 ⊔ l2)
-pr1 (product-Type-With-Endomorphism A B) =
-  type-Type-With-Endomorphism A × type-Type-With-Endomorphism B
-pr2 (product-Type-With-Endomorphism A B) =
-  map-prod
-    ( endomorphism-Type-With-Endomorphism A)
-    ( endomorphism-Type-With-Endomorphism B)
+module _
+  {l1 l2 : Level}
+  (A : Type-With-Endomorphism l1) (B : Type-With-Endomorphism l2)
+  where
+
+  type-prod-Type-With-Endomorphism : UU (l1 ⊔ l2)
+  type-prod-Type-With-Endomorphism =
+    type-Type-With-Endomorphism A × type-Type-With-Endomorphism B
+
+  endomorphism-prod-Type-With-Endomorphism :
+    type-prod-Type-With-Endomorphism → type-prod-Type-With-Endomorphism
+  endomorphism-prod-Type-With-Endomorphism =
+    map-prod
+      ( endomorphism-Type-With-Endomorphism A)
+      ( endomorphism-Type-With-Endomorphism B)
+
+  prod-Type-With-Endomorphism :
+    Type-With-Endomorphism (l1 ⊔ l2)
+  pr1 prod-Type-With-Endomorphism =
+    type-prod-Type-With-Endomorphism
+  pr2 prod-Type-With-Endomorphism =
+    endomorphism-prod-Type-With-Endomorphism
 ```

@@ -70,6 +70,13 @@ module _
       ( endomorphism-Type-With-Endomorphism Y)
       ( map-equiv-Type-With-Endomorphism e)
   coherence-square-equiv-Type-With-Endomorphism e = pr2 e
+
+  hom-equiv-Type-With-Endomorphism :
+    equiv-Type-With-Endomorphism → hom-Type-With-Endomorphism X Y
+  pr1 (hom-equiv-Type-With-Endomorphism e) =
+    map-equiv-Type-With-Endomorphism e
+  pr2 (hom-equiv-Type-With-Endomorphism e) =
+    coherence-square-equiv-Type-With-Endomorphism e
 ```
 
 ### The identity equivalence
@@ -137,26 +144,19 @@ module _
   (Y : Type-With-Endomorphism l2)
   where
 
-  hom-equiv-Type-With-Endomorphism :
-    equiv-Type-With-Endomorphism X Y → hom-Type-With-Endomorphism X Y
-  pr1 (hom-equiv-Type-With-Endomorphism e) =
-    map-equiv-Type-With-Endomorphism X Y e
-  pr2 (hom-equiv-Type-With-Endomorphism e) =
-    coherence-square-equiv-Type-With-Endomorphism X Y e
-
   htpy-equiv-Type-With-Endomorphism :
     (e f : equiv-Type-With-Endomorphism X Y) → UU (l1 ⊔ l2)
   htpy-equiv-Type-With-Endomorphism e f =
     htpy-hom-Type-With-Endomorphism X Y
-      ( hom-equiv-Type-With-Endomorphism e)
-      ( hom-equiv-Type-With-Endomorphism f)
+      ( hom-equiv-Type-With-Endomorphism X Y e)
+      ( hom-equiv-Type-With-Endomorphism X Y f)
 
   refl-htpy-equiv-Type-With-Endomorphism :
     ( e : equiv-Type-With-Endomorphism X Y) →
     htpy-equiv-Type-With-Endomorphism e e
   refl-htpy-equiv-Type-With-Endomorphism e =
     refl-htpy-hom-Type-With-Endomorphism X Y
-      ( hom-equiv-Type-With-Endomorphism e)
+      ( hom-equiv-Type-With-Endomorphism X Y e)
 
   htpy-eq-equiv-Type-With-Endomorphism :
     (e f : equiv-Type-With-Endomorphism X Y) →
@@ -175,22 +175,22 @@ module _
               ( λ f → is-equiv (map-hom-Type-With-Endomorphism X Y f)))
           ( λ f →
             htpy-hom-Type-With-Endomorphism X Y
-              ( hom-equiv-Type-With-Endomorphism e)
+              ( hom-equiv-Type-With-Endomorphism X Y e)
               ( pr1 f)))
       ( equiv-Σ
         ( λ f →
           htpy-hom-Type-With-Endomorphism X Y
-            ( hom-equiv-Type-With-Endomorphism e)
+            ( hom-equiv-Type-With-Endomorphism X Y e)
             ( pr1 f))
         ( equiv-right-swap-Σ)
         ( λ f → id-equiv))
       ( is-contr-total-Eq-subtype
         ( is-contr-total-htpy-hom-Type-With-Endomorphism X Y
-          ( hom-equiv-Type-With-Endomorphism e))
+          ( hom-equiv-Type-With-Endomorphism X Y e))
         ( λ f → is-property-is-equiv (pr1 f))
-        ( hom-equiv-Type-With-Endomorphism e)
+        ( hom-equiv-Type-With-Endomorphism X Y e)
         ( refl-htpy-hom-Type-With-Endomorphism X Y
-          ( hom-equiv-Type-With-Endomorphism e))
+          ( hom-equiv-Type-With-Endomorphism X Y e))
         ( pr2 (pr1 e)))
 
   is-equiv-htpy-eq-equiv-Type-With-Endomorphism :
