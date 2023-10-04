@@ -59,7 +59,7 @@ is-section-map-is-flat-empty : (counit-♭ ∘ map-is-flat-empty) ~ id
 is-section-map-is-flat-empty ()
 
 is-retraction-map-is-flat-empty : (map-is-flat-empty ∘ counit-♭) ~ id
-is-retraction-map-is-flat-empty (con-♭ ())
+is-retraction-map-is-flat-empty (cons-♭ ())
 
 is-flat-empty : is-flat empty
 is-flat-empty =
@@ -73,13 +73,13 @@ is-flat-empty =
 
 ```agda
 map-is-flat-unit : unit → ♭ unit
-map-is-flat-unit star = con-♭ star
+map-is-flat-unit star = cons-♭ star
 
 is-section-map-is-flat-unit : (counit-♭ ∘ map-is-flat-unit) ~ id
 is-section-map-is-flat-unit _ = refl
 
 is-retraction-map-is-flat-unit : (map-is-flat-unit ∘ counit-♭) ~ id
-is-retraction-map-is-flat-unit (con-♭ _) = refl
+is-retraction-map-is-flat-unit (cons-♭ _) = refl
 
 is-flat-unit : is-flat unit
 is-flat-unit =

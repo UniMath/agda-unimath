@@ -14,6 +14,8 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.embeddings
+open import foundation.transport-along-equivalences
 open import foundation.universe-levels
 
 open import modal-type-theory.sharp-modality
@@ -50,7 +52,15 @@ Codiscrete l = Σ (UU l) (is-codiscrete)
 ```agda
 postulate
   is-codiscrete-Id-♯ :
-    {l1 : Level} {A : UU l1} → (x y : ♯ A) → is-codiscrete (x ＝ y)
+    {l1 : Level} {A : UU l1} (x y : ♯ A) → is-codiscrete (x ＝ y)
+
+is-codiscrete-Id :
+  {l1 : Level} {A : UU l1} (x y : A) → is-codiscrete A → is-codiscrete (x ＝ y)
+is-codiscrete-Id x y is-codiscrete-A =
+  map-tr-equiv
+    ( is-codiscrete)
+    ( inv-equiv-ap-is-emb (is-emb-is-equiv is-codiscrete-A))
+    ( is-codiscrete-Id-♯ (unit-♯ x) (unit-♯ y))
 ```
 
 ### A `Π`-type is codiscrete if its codomain is
@@ -105,7 +115,7 @@ module _
 
   is-higher-modality-♯ :
     is-higher-modality (♯-locally-small-operator-modality l) (unit-♯)
-  pr1 is-higher-modality-♯ = induction-principle-modality-♯ l
+  pr1 is-higher-modality-♯ = induction-principle-♯
   pr2 is-higher-modality-♯ X = is-codiscrete-Id-♯
 
   ♯-higher-modality : higher-modality l l
@@ -121,7 +131,3 @@ is-codiscrete-♯ : {l : Level} (X : UU l) → is-codiscrete (♯ X)
 is-codiscrete-♯ {l} =
   is-modal-operator-type-higher-modality (♯-higher-modality l)
 ```
-
-### Subuniverse induction for ♯
-
-This remains to be defined

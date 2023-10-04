@@ -75,6 +75,13 @@ module _
     induction-principle-subuniverse-modality → ind-subuniverse-modality
   ind-induction-principle-subuniverse-modality I X P is-modal-P =
     map-section-Π (precomp-Π unit-○ P) (I X P is-modal-P)
+
+  compute-ind-induction-principle-subuniverse-modality :
+    (I : induction-principle-subuniverse-modality) →
+    compute-ind-subuniverse-modality
+      ( ind-induction-principle-subuniverse-modality I)
+  compute-ind-induction-principle-subuniverse-modality I X P is-modal-P =
+    is-section-Π-map-section-Π (precomp-Π unit-○ P) (I X P is-modal-P)
 ```
 
 ### Subuniverse recursion
@@ -100,6 +107,18 @@ module _
   compute-rec-subuniverse-modality rec-○ =
     (X Y : UU l1) (is-modal-Y : is-modal unit-○ Y) →
     (f : X → Y) → (rec-○ X Y is-modal-Y f ∘ unit-○) ~ f
+
+  rec-recursion-principle-subuniverse-modality :
+    recursion-principle-subuniverse-modality → rec-subuniverse-modality
+  rec-recursion-principle-subuniverse-modality I X Y is-modal-Y =
+    map-section-Π (precomp unit-○ Y) (I X Y is-modal-Y)
+
+  compute-rec-recursion-principle-subuniverse-modality :
+    (I : recursion-principle-subuniverse-modality) →
+    compute-rec-subuniverse-modality
+      ( rec-recursion-principle-subuniverse-modality I)
+  compute-rec-recursion-principle-subuniverse-modality I X Y is-modal-Y =
+    is-section-Π-map-section-Π (precomp unit-○ Y) (I X Y is-modal-Y)
 ```
 
 ### Strong subuniverse induction
@@ -135,6 +154,21 @@ module _
     (X : UU l1) (P : ○ X → UU l1) →
     (is-premodal-P : (x' : ○ X) → retraction (unit-○ {P x'})) →
     (f : (x : X) → P (unit-○ x)) → (ind-○ X P is-premodal-P f ∘ unit-○) ~ f
+
+  strong-ind-strong-induction-principle-subuniverse-modality :
+    strong-induction-principle-subuniverse-modality →
+    strong-ind-subuniverse-modality
+  strong-ind-strong-induction-principle-subuniverse-modality
+    I X P is-premodal-P =
+    map-section-Π (precomp-Π unit-○ P) (I X P is-premodal-P)
+
+  compute-strong-ind-strong-induction-principle-subuniverse-modality :
+    (I : strong-induction-principle-subuniverse-modality) →
+    compute-strong-ind-subuniverse-modality
+      ( strong-ind-strong-induction-principle-subuniverse-modality I)
+  compute-strong-ind-strong-induction-principle-subuniverse-modality
+    I X P is-premodal-P =
+    is-section-Π-map-section-Π (precomp-Π unit-○ P) (I X P is-premodal-P)
 ```
 
 ### Strong subuniverse recursion
@@ -161,6 +195,21 @@ module _
   compute-strong-rec-subuniverse-modality rec-○ =
     (X Y : UU l1) (is-premodal-Y : retraction (unit-○ {Y})) →
     (f : X → Y) → (rec-○ X Y is-premodal-Y f ∘ unit-○) ~ f
+
+  strong-rec-strong-recursion-principle-subuniverse-modality :
+    strong-recursion-principle-subuniverse-modality →
+    strong-rec-subuniverse-modality
+  strong-rec-strong-recursion-principle-subuniverse-modality
+    I X Y is-premodal-Y =
+    map-section-Π (precomp unit-○ Y) (I X Y is-premodal-Y)
+
+  compute-strong-rec-strong-recursion-principle-subuniverse-modality :
+    (I : strong-recursion-principle-subuniverse-modality) →
+    compute-strong-rec-subuniverse-modality
+      ( strong-rec-strong-recursion-principle-subuniverse-modality I)
+  compute-strong-rec-strong-recursion-principle-subuniverse-modality
+    I X Y is-premodal-Y =
+    is-section-Π-map-section-Π (precomp unit-○ Y) (I X Y is-premodal-Y)
 ```
 
 ## Properties

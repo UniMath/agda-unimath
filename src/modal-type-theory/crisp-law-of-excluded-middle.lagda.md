@@ -22,8 +22,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-The **crisp law of excluded middle** asserts that any crisp proposition `P` is
-decidable.
+The **crisp law of excluded middle** asserts that any crisp
+[proposition](foundation-core.propositions.md) `P` is
+[decidable](foundation.decidable-types.md).
 
 ## Definition
 
@@ -34,7 +35,7 @@ Crisp-LEM l = (@♭ P : Prop l) → is-decidable (type-Prop P)
 
 ## Properties
 
-### Given LEM, we obtain a map from crisp propositions to decidable propositions
+### Given crisp LEM, we obtain a map from crisp propositions to decidable propositions
 
 ```agda
 decidable-prop-Crisp-Prop :

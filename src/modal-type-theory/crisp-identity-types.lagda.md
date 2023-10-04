@@ -1,9 +1,9 @@
-# Crisp types
+# Crisp identity types
 
 ```agda
 {-# OPTIONS --cohesion --flat-split #-}
 
-module modal-type-theory.crisp-types where
+module modal-type-theory.crisp-identity-types where
 ```
 
 <details><summary>Imports</summary>
@@ -17,7 +17,8 @@ open import foundation.universe-levels
 
 ## Idea
 
-We record here some basic facts about crisp types.
+We record here some basic facts about
+[identity types](foundation-core.identity-types.md) in crisp contexts.
 
 ## Properties
 

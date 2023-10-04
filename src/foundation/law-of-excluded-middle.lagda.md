@@ -24,7 +24,7 @@ open import univalent-combinatorics.2-element-types
 
 The **law of excluded middle** asserts that any
 [proposition](foundation-core.propositions.md) `P` is
-[decidable](foundation-core.decidable-propositions.md).
+[decidable](foundation.decidable-types.md).
 
 ## Definition
 

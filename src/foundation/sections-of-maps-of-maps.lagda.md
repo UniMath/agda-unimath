@@ -38,7 +38,8 @@ separately so we can circumvent applying
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
   (f : ((x : A) → B x) → (y : C) → D y)
   where
 
@@ -60,10 +61,17 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
   (f : ((x : A) → B x) → (y : C) → D y)
   where
 
   equiv-section-section-Π : section-Π f ≃ section f
   equiv-section-section-Π = equiv-tot (λ s → equiv-htpy-binary-htpy (f ∘ s) id)
+
+  section-section-Π : section-Π f → section f
+  section-section-Π = map-equiv equiv-section-section-Π
+
+  section-Π-section : section f → section-Π f
+  section-Π-section = map-inv-equiv equiv-section-section-Π
 ```

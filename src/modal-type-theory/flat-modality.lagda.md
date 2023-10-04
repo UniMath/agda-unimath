@@ -32,7 +32,7 @@ theory by use of _crisp type theory_.
 
 ```agda
 data ♭ {@♭ l : Level} (@♭ A : UU l) : UU l where
-  con-♭ : @♭ A → ♭ A
+  cons-♭ : @♭ A → ♭ A
 ```
 
 ### The flat counit
@@ -42,7 +42,7 @@ counit-crisp : {@♭ l : Level} {@♭ A : UU l} → @♭ A → A
 counit-crisp x = x
 
 counit-♭ : {@♭ l : Level} {@♭ A : UU l} → ♭ A → A
-counit-♭ (con-♭ x) = counit-crisp x
+counit-♭ (cons-♭ x) = counit-crisp x
 ```
 
 ### Flat dependent elimination
@@ -50,14 +50,14 @@ counit-♭ (con-♭ x) = counit-crisp x
 ```agda
 ind-♭ :
   {@♭ l1 : Level} {@♭ A : UU l1} {l2 : Level} (C : ♭ A → UU l2) →
-  ((@♭ u : A) → C (con-♭ u)) →
+  ((@♭ u : A) → C (cons-♭ u)) →
   (x : ♭ A) → C x
-ind-♭ C f (con-♭ x) = f x
+ind-♭ C f (cons-♭ x) = f x
 
 crisp-ind-♭ :
   {@♭ l1 : Level} {l2 : Level} {@♭ A : UU l1} (C : @♭ ♭ A → UU l2) →
-  ((@♭ u : A) → C (con-♭ u)) → (@♭ x : ♭ A) → C x
-crisp-ind-♭ C f (con-♭ x) = f x
+  ((@♭ u : A) → C (cons-♭ u)) → (@♭ x : ♭ A) → C x
+crisp-ind-♭ C f (cons-♭ x) = f x
 ```
 
 ### Flat elimination
@@ -82,13 +82,13 @@ module _
   where
 
   ap-♭ : @♭ (A → B) → (♭ A → ♭ B)
-  ap-♭ f (con-♭ x) = con-♭ (f x)
+  ap-♭ f (cons-♭ x) = cons-♭ (f x)
 
   crisp-ap-♭ : @♭ (@♭ A → B) → (♭ A → ♭ B)
-  crisp-ap-♭ f (con-♭ x) = con-♭ (f x)
+  crisp-ap-♭ f (cons-♭ x) = cons-♭ (f x)
 
   coap-♭ : (♭ A → ♭ B) → (@♭ A → B)
-  coap-♭ f x = counit-♭ (f (con-♭ x))
+  coap-♭ f x = counit-♭ (f (cons-♭ x))
 
   is-crisp-retraction-coap-♭ : (@♭ f : @♭ A → B) → coap-♭ (crisp-ap-♭ f) ＝ f
   is-crisp-retraction-coap-♭ _ = refl
@@ -112,11 +112,11 @@ module _
   {@♭ l : Level} {@♭ A : UU l}
   where
 
-  is-crisp-section-con-♭ : (@♭ x : A) → counit-♭ (con-♭ x) ＝ x
-  is-crisp-section-con-♭ _ = refl
+  is-crisp-section-cons-♭ : (@♭ x : A) → counit-♭ (cons-♭ x) ＝ x
+  is-crisp-section-cons-♭ _ = refl
 
-  is-crisp-retraction-con-♭ : (@♭ x : ♭ A) → con-♭ (counit-♭ x) ＝ x
-  is-crisp-retraction-con-♭ (con-♭ _) = refl
+  is-crisp-retraction-cons-♭ : (@♭ x : ♭ A) → cons-♭ (counit-♭ x) ＝ x
+  is-crisp-retraction-cons-♭ (cons-♭ _) = refl
 ```
 
 ```agda
@@ -125,18 +125,18 @@ module _
   where
 
   map-♭-counit-♭ : ♭ (♭ A) → ♭ A
-  map-♭-counit-♭ (con-♭ x) = x
+  map-♭-counit-♭ (cons-♭ x) = x
 
   diag-♭ : ♭ A → ♭ (♭ A)
-  diag-♭ (con-♭ x) = con-♭ (con-♭ x)
+  diag-♭ (cons-♭ x) = cons-♭ (cons-♭ x)
 
   is-section-♭-counit-♭ :
     (diag-♭ ∘ map-♭-counit-♭) ~ id
-  is-section-♭-counit-♭ (con-♭ (con-♭ _)) = refl
+  is-section-♭-counit-♭ (cons-♭ (cons-♭ _)) = refl
 
   is-retraction-♭-counit-♭ :
     (map-♭-counit-♭ ∘ diag-♭) ~ id
-  is-retraction-♭-counit-♭ (con-♭ _) = refl
+  is-retraction-♭-counit-♭ (cons-♭ _) = refl
 
   section-♭-counit-♭ : section map-♭-counit-♭
   pr1 section-♭-counit-♭ = diag-♭
@@ -166,7 +166,7 @@ module _
   where
 
   map-crisp-distributive-♭-Π : ♭ ((x : A) → B x) → ((@♭ x : A) → ♭ (B x))
-  map-crisp-distributive-♭-Π (con-♭ f) x = con-♭ (f x)
+  map-crisp-distributive-♭-Π (cons-♭ f) x = cons-♭ (f x)
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : UU l2}
@@ -176,7 +176,7 @@ module _
   map-crisp-distributive-♭-function-types = map-crisp-distributive-♭-Π
 
   map-distributive-♭-function-types : ♭ (A → B) → (♭ A → ♭ B)
-  map-distributive-♭-function-types f (con-♭ x) =
+  map-distributive-♭-function-types f (cons-♭ x) =
     map-crisp-distributive-♭-function-types f x
 ```
 
@@ -184,26 +184,26 @@ module _
 
 ```agda
 Σ♭ : {@♭ l1 l2 : Level} (@♭ A : UU l1) (@♭ B : A → UU l2) → UU (l1 ⊔ l2)
-Σ♭ A B = Σ (♭ A) (λ {(con-♭ x) → ♭ (B x)})
+Σ♭ A B = Σ (♭ A) (λ {(cons-♭ x) → ♭ (B x)})
 
 module _
   {@♭ l1 l2 : Level} {@♭ A : UU l1} {@♭ B : A → UU l2}
   where
 
   map-distributive-♭-Σ : ♭ (Σ A B) → Σ♭ A B
-  pr1 (map-distributive-♭-Σ (con-♭ (x , y))) = con-♭ x
-  pr2 (map-distributive-♭-Σ (con-♭ (x , y))) = con-♭ y
+  pr1 (map-distributive-♭-Σ (cons-♭ (x , y))) = cons-♭ x
+  pr2 (map-distributive-♭-Σ (cons-♭ (x , y))) = cons-♭ y
 
   map-inv-distributive-♭-Σ : Σ♭ A B → ♭ (Σ A B)
-  map-inv-distributive-♭-Σ (con-♭ x , con-♭ y) = con-♭ (x , y)
+  map-inv-distributive-♭-Σ (cons-♭ x , cons-♭ y) = cons-♭ (x , y)
 
   is-section-distributive-♭-Σ :
     (map-inv-distributive-♭-Σ ∘ map-distributive-♭-Σ) ~ id
-  is-section-distributive-♭-Σ (con-♭ _) = refl
+  is-section-distributive-♭-Σ (cons-♭ _) = refl
 
   is-retraction-distributive-♭-Σ :
     (map-distributive-♭-Σ ∘ map-inv-distributive-♭-Σ) ~ id
-  is-retraction-distributive-♭-Σ (con-♭ _ , con-♭ _) = refl
+  is-retraction-distributive-♭-Σ (cons-♭ _ , cons-♭ _) = refl
 
   section-distributive-♭-Σ : section map-distributive-♭-Σ
   pr1 section-distributive-♭-Σ = map-inv-distributive-♭-Σ
