@@ -67,7 +67,7 @@ pr2 (trivial-Type-With-Automorphism X) = id-equiv
   [sets equipped with automorphisms](structured-types.sets-equipped-with-automorphisms.md)
   of which the automorphism acts transitively.
 - The
-  [descent property of the circle](synthetic-homotopy-theory.descent-property-circle.md)
+  [descent property of the circle](synthetic-homotopy-theory.descent-circle.md)
   shows that type families over the
   [circle](synthetic-homotopy-theory.circle.md) are
   [equivalently](foundation.equivalences.md) described as types equipped with

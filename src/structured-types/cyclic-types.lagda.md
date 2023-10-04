@@ -50,7 +50,7 @@ equivalent ways are:
 - A cyclic set is a set which is a [`C`-torsor](group-theory.torsors.md) for
   some [cyclic group](group-theory.cyclic-groups.md) `C`.
 
-Note that the [empty set](foundation.empty-type.md) equipped with the identity
+Note that the [empty set](foundation.empty-types.md) equipped with the identity
 automorphism is not considered to be a cyclic set, for reasons similar to those
 of not considering empty group actions to be transitive.
 
