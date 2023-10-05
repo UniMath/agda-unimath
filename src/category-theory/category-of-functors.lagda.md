@@ -84,8 +84,7 @@ module _
               C D is-category-D F G))
         ( λ where
           refl →
-            compute-iso-functor-natural-isomorphism-eq-Precategory
-              C D F G refl)
+            compute-iso-functor-natural-isomorphism-eq-Precategory C D F G refl)
 ```
 
 ## Definitions
