@@ -124,7 +124,7 @@ module _
     equiv-tot
       ( λ k →
         equiv-Π-equiv-family
-          ( equiv-htpy-dependent-fuction-dependent-identification-function-type
+          ( equiv-htpy-dependent-function-dependent-identification-function-type
             ( Y)
             ( coherence-cofork f g e)
             ( k ∘ f)
@@ -141,7 +141,7 @@ module _
       ( refl)
       ( eq-htpy
         ( inv-htpy
-          ( compute-equiv-htpy-dependent-fuction-dependent-identification-function-type
+          ( compute-equiv-htpy-dependent-function-dependent-identification-function-type
             ( Y)
             ( coherence-cofork f g e)
             ( h))))
