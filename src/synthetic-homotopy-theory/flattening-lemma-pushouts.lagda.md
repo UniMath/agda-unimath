@@ -22,6 +22,7 @@ open import foundation.transport-along-identifications
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.26-descent
 open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts
@@ -113,7 +114,7 @@ module _
 
   flattening-lemma-pushout-statement : UUω
   flattening-lemma-pushout-statement =
-    ( { l : Level} → dependent-universal-property-pushout l f g c) →
+    ( {l : Level} → dependent-universal-property-pushout l f g c) →
     { l : Level} →
     universal-property-pushout l
       ( map-Σ-map-base f (P ∘ horizontal-map-cocone f g c))
@@ -122,6 +123,67 @@ module _
         ( g)
         ( λ s → tr P (coherence-square-cocone f g c s)))
       ( cocone-flattening-pushout)
+```
+
+### The statement of the flattening lemma for pushouts, phrased using descent data
+
+In the above statement, bla bla
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  ( f : S → A) (g : S → B) (c : cocone f g X)
+  ( P : Fam-pushout l5 f g)
+  ( Q : X → UU l5)
+  ( e : equiv-Fam-pushout P (desc-fam c Q))
+  where
+
+  horizontal-map-cocone-flattening-descent-data-pushout :
+    Σ A (pr1 P) → Σ X Q
+  horizontal-map-cocone-flattening-descent-data-pushout =
+    map-Σ Q
+      ( horizontal-map-cocone f g c)
+      ( λ a → map-equiv (pr1 e a))
+
+  vertical-map-cocone-flattening-descent-data-pushout :
+    Σ B (pr1 (pr2 P)) → Σ X Q
+  vertical-map-cocone-flattening-descent-data-pushout =
+    map-Σ Q
+      ( vertical-map-cocone f g c)
+      ( λ b → map-equiv (pr1 (pr2 e) b))
+
+  coherence-square-cocone-flattening-descent-data-pushout :
+    coherence-square-maps
+      ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
+      ( map-Σ (pr1 P) f (λ s → id))
+      ( vertical-map-cocone-flattening-descent-data-pushout)
+      ( horizontal-map-cocone-flattening-descent-data-pushout)
+  coherence-square-cocone-flattening-descent-data-pushout =
+    htpy-map-Σ Q
+      ( coherence-square-cocone f g c)
+      ( λ s → map-equiv (pr1 e (f s)))
+      ( λ s → inv-htpy (pr2 (pr2 e) s))
+
+  cocone-flattening-descent-data-pushout :
+    cocone
+      ( map-Σ (pr1 P) f (λ s → id))
+      ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
+      ( Σ X Q)
+  pr1 cocone-flattening-descent-data-pushout =
+    horizontal-map-cocone-flattening-descent-data-pushout
+  pr1 (pr2 cocone-flattening-descent-data-pushout) =
+    vertical-map-cocone-flattening-descent-data-pushout
+  pr2 (pr2 cocone-flattening-descent-data-pushout) =
+    coherence-square-cocone-flattening-descent-data-pushout
+
+  flattening-lemma-descent-data-pushout-statement : UUω
+  flattening-lemma-descent-data-pushout-statement =
+    ( {l : Level} → dependent-universal-property-pushout l f g c) →
+    { l : Level} →
+    universal-property-pushout l
+      ( map-Σ (pr1 P) f (λ s → id))
+      ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
+      ( cocone-flattening-descent-data-pushout)
 ```
 
 ## Properties
