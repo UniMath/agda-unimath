@@ -39,7 +39,7 @@ condition
 ```
 
 holds for all elements `x : G`. This condition can be formulated in several
-equivalent ways:
+[equivalent](foundation.logical-equivalences.md) ways:
 
 1. `∀ (k : nonzero-ℤ), xᵏ ＝ 1 → x ＝ 1`.
 2. The [subset](group-theory.subsets-groups.md) of `G` of
