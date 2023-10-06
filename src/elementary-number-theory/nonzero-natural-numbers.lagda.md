@@ -18,6 +18,15 @@ open import foundation.universe-levels
 
 ## Idea
 
+A [natural number](elementary-number-theory.natural-numbers.md) `n` is said to
+be **nonzero** if the [proposition](foundation.propositions.md)
+
+```text
+  ¬ (n ＝ 0)
+```
+
+holds. This condition was already defined in the file
+[`elementary-number-theory.natural-numbers`](elementary-number-theory.natural-numbers.md).
 The type of nonzero natural numbers consists of natural numbers equipped with a
 proof that they are nonzero.
 
@@ -34,19 +43,33 @@ nat-nonzero-ℕ = pr1
 
 is-nonzero-nat-nonzero-ℕ : (n : nonzero-ℕ) → is-nonzero-ℕ (nat-nonzero-ℕ n)
 is-nonzero-nat-nonzero-ℕ = pr2
+```
 
+### The nonzero natural number `1`
+
+```agda
 one-nonzero-ℕ : nonzero-ℕ
 pr1 one-nonzero-ℕ = 1
 pr2 one-nonzero-ℕ = is-nonzero-one-ℕ
+```
 
+### The successor function on the nonzero natural numbers
+
+```agda
 succ-nonzero-ℕ : nonzero-ℕ → nonzero-ℕ
 pr1 (succ-nonzero-ℕ (pair x _)) = succ-ℕ x
 pr2 (succ-nonzero-ℕ (pair x _)) = is-nonzero-succ-ℕ x
+```
 
+### The successor function from the natural numbers to the nonzero natural numbers
+
+```agda
 succ-nonzero-ℕ' : ℕ → nonzero-ℕ
 pr1 (succ-nonzero-ℕ' n) = succ-ℕ n
 pr2 (succ-nonzero-ℕ' n) = is-nonzero-succ-ℕ n
 ```
+
+### The quotient of a nonzero natural number by a divisor
 
 ```agda
 quotient-div-nonzero-ℕ :
