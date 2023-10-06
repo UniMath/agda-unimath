@@ -245,64 +245,6 @@ the `agda-unimath` library:
   at the moment. All variables are declared either as parameters of an anonymous
   module or in the type specification of a construction.
 
-## Naming conventions
-
-One of the key strategies to make our library easy to navigate is our naming
-convention. We strive for a direct correspondence between a construction's name
-and its type. Take, for instance, the proof that the successor function on
-integers is an equivalence. It has the type `is-equiv succ-ℤ`, so we name it
-`is-equiv-succ-ℤ`. Note how we prefer lowercase and use hyphens to separate
-words.
-
-We also reflect the type of hypotheses used in the construction within the name.
-However, the crux of a name primarily describes the type of the constructed
-term; descriptions of the hypotheses follow this. For instance,
-`is-equiv-is-contr-map` is a function of type `is-contr-map f → is-equiv f`,
-where `f` is a given function. Notice how the term `is-equiv-is-contr-map H`
-places the descriptor `is-contr-map` right next to the variable `H` it refers
-to.
-
-While abbreviations might seem like a good way to shorten names, we use them
-sparingly. They might save a couple of keystrokes for the author, but in the
-grand scheme of things, they will likely compromise readability and
-maintainability, especially for newcomers and maintainers. We aim for clarity,
-not brevity.
-
-Here is a list of our naming conventions:
-
-- Names are unique; we steer clear of namespace overloading.
-
-- Names should accurately convey the concept of its construction.
-
-- We use US English spelling of words in names.
-
-- Important concepts can be capitalized. Usually, these are categories like
-  `Prop`, `Set`, `Semigroup`, `Monoid`, `Group`, `Preorder`, `Poset`,
-  `Precategory`, `Category`, `Directed-Graph`, `Undirected-Graph`, and so on.
-
-- As a general rule of thumb, names should start out with an all lowercase
-  portion with words separated by hyphens, and may have a capitalized portion at
-  the end that describes which larger mathematical framework the definition
-  takes place in -- for instance, if it is constructed internally to a certain
-  subuniverse or category of mathematical objects.
-
-- The start of a name describes the object that is being constructed. For some
-  theorems, the latter part of a name describes the hypotheses.
-
-- Names never reference variables.
-
-- We use Unicode symbols sparingly and only when they align with established
-  mathematical practice.
-
-- Just as we do with abbreviations, we use special symbols sparingly in names.
-
-- If a symbol is not available, we describe the concept concisely in words.
-
-- We prioritize the readability of the code and avoid subtly different
-  variations of the same symbol. An important exception is the use of the
-  [full width equals sign](https://codepoints.net/U+ff1d) for the identity type,
-  as the standard equals sign is a reserved symbol in Agda.
-
 ## <a name="formatting"></a>Formatting: Indentation, line breaks, and parentheses
 
 Code formatting is like punctuation in a novel - it helps readers make sense of
@@ -405,14 +347,6 @@ the story. Here's how we handle indentation and line breaks in the
 
 ## Coding practices we tend to avoid
 
-- Using Unicode characters in names is entirely permissible, but we recommend
-  restraint to maintain readability. Just a few well-placed symbols can often
-  express a lot.
-
-- To enhance conceptual clarity, we suggest names of constructions avoid
-  referring to variable names. This makes code more understandable, even at a
-  glance, and easier to work with in subsequent code.
-
 - We encourage limiting the depth increase of indentation levels to two spaces.
   This practice tends to keep our code reader-friendly, especially on smaller
   screens, by keeping more code on the left-hand side of the screen. In
@@ -420,6 +354,15 @@ the story. Here's how we handle indentation and line breaks in the
   aligning code to make it "neat". In our experience, this hurts the
   maintainability of the code, and you may find that it violates some of our
   other conventions as well.
+
+- Using the projection functions `pr1` and `pr2`, particularly their
+  compositions, can lead to short code, but we recommend to avoid doing so. When
+  constructions contain a lot of projections throughout their definition, the
+  projections reveal little of what is going on in that part of the projections.
+  We therefore prefer naming the projections. When a type of the form `Σ A B` is
+  given a name, naming its projections too can enhance readability and will
+  provide more informative responses when jumping to the definition.
+  Furthermore, it makes it easier to change the definition later on.
 
 - The use of `where` blocks in definitions is perfectly fine but keeping them
   short and specific to the definition of the current object is beneficial. Note
@@ -432,21 +375,6 @@ the story. Here's how we handle indentation and line breaks in the
   mostly because they make it more complex to characterize their identity type.
   However, when the identity type isn't as critical, feel free to use record
   types as they can be convenient.
-
-- Using the projection functions `pr1` and `pr2`, particularly their
-  compositions, can lead to short code, but we recommend to avoid doing so. When
-  constructions contain a lot of projections throughout their definition, the
-  projections reveal little of what is going on in that part of the projections.
-  We therefore prefer naming the projections. When a type of the form `Σ A B` is
-  given a name, naming its projections too can enhance readability and will
-  provide more informative responses when jumping to the definition.
-  Furthermore, it makes it easier to change the definition later on.
-
-- Lastly, we recommend not naming constructions after infix notation of
-  operations included in them. Preferring primary prefix notation over infix
-  notation can help keep our code consistent. For example, it's preferred to use
-  `commutative-prod` instead of `commutative-×` for denoting the commutativity
-  of cartesian products.
 
 These guidelines are here to make everyone's coding experience more enjoyable
 and productive. As always, your contributions to the `agda-unimath` library are
