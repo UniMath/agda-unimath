@@ -129,10 +129,8 @@ module _
   is-contr-total-equiv-Component-Type-With-Endomorphism :
     is-contr
       ( Σ ( Component-Type-With-Endomorphism X)
-          ( λ T →
-            equiv-Component-Type-With-Endomorphism
-              ( canonical-Component-Type-With-Endomorphism X)
-              ( T)))
+          ( equiv-Component-Type-With-Endomorphism
+              ( canonical-Component-Type-With-Endomorphism X)))
   is-contr-total-equiv-Component-Type-With-Endomorphism =
     is-contr-total-Eq-subtype
       ( is-contr-total-equiv-Type-With-Endomorphism X)
