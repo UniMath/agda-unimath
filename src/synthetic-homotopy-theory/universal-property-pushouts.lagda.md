@@ -793,7 +793,7 @@ module _
     universal-property-pushout-pullback-property-pushout l f g
       ( h , k , bottom)
       ( λ W →
-       is-pullback-top-is-pullback-bottom-cube-is-equiv
+        is-pullback-top-is-pullback-bottom-cube-is-equiv
           ( precomp h' W)
           ( precomp k' W)
           ( precomp f' W)

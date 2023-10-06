@@ -396,7 +396,6 @@ X -----> A -----> B
 and transposing it by precomposition results in the square
 
 ```text
-
 W^D -----> W^B
  |          |
  |   W^H    |
