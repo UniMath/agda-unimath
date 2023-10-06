@@ -323,7 +323,7 @@ module _
   where
 
   preserves-concat-equiv-eq-Type-With-Automorphism :
-    (p : Id X Y) (q : Id Y Z) →
+    (p : X ＝ Y) (q : Y ＝ Z) →
     ( equiv-eq-Type-With-Automorphism X Z (p ∙ q)) ＝
     ( comp-equiv-Type-With-Automorphism X Y Z
       ( equiv-eq-Type-With-Automorphism Y Z q)
