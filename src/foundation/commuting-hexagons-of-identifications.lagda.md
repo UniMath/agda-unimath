@@ -73,3 +73,21 @@ module _
     coherence-hexagon (inv γ) (inv β) (inv α) (inv ζ) (inv ε) (inv δ)
   hexagon-mirror-C refl refl refl refl refl .refl refl = refl
 ```
+
+### Inversion of a hexagon
+
+The definition of a hexagon has an explicit asymmetrical choice of association,
+so `inv` only gives the correct identification up to reassociation.
+
+```agda
+module _
+  { l : Level} {A : UU l} {x u u' v v' y : A}
+  where
+
+  inv-hexagon :
+    ( α : x ＝ u) (β : u ＝ u') (γ : u' ＝ y) →
+    ( δ : x ＝ v) (ε : v ＝ v') (ζ : v' ＝ y) →
+    coherence-hexagon α β γ δ ε ζ →
+    coherence-hexagon δ ε ζ α β γ
+  inv-hexagon refl refl refl refl refl .refl refl = refl
+```

@@ -73,6 +73,20 @@ compute-htpy-precomp-refl-htpy :
 compute-htpy-precomp-refl-htpy f C h = eq-htpy-refl-htpy (h ∘ f)
 ```
 
+### Precomposition preserves composition of homotopies
+
+```agda
+compute-comp-htpy-precomp :
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  { f g h : A → B} (H : f ~ g) (K : g ~ h) (C : UU l3) →
+  htpy-precomp (H ∙h K) C ~ (htpy-precomp H C ∙h htpy-precomp K C)
+compute-comp-htpy-precomp H K C k =
+  ( ap
+    ( eq-htpy)
+    ( eq-htpy (distributive-left-whisk-concat-htpy k H K))) ∙
+  ( eq-htpy-concat-htpy (k ·l H) (k ·l K))
+```
+
 ### Postcomposition and equivalences
 
 #### A map `f` is an equivalence if and only if postcomposing by `f` is an equivalence
