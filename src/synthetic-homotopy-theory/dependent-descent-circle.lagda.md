@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.free-loops
 ## Idea
 
 The **dependent descent property of the circle** asserts that a family over a
-family `P` over the circle is equivalently described by **dependent descent
+family `P` over the [circle](synthetic-homotopy-theory.circle.md) is [equivalently](foundation-core.equivalences.md) described by **dependent descent
 data** over the descent data of `P`, which is defined as a
 [dependent type with an automorphism](structured-types.dependent-types-equipped-with-automorphisms.md)
 
