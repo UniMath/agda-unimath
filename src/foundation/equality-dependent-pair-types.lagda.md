@@ -116,11 +116,25 @@ module _
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {Y : UU l3} (f : Σ A B → Y)
   where
 
-  ap-eq-pair-Σ :
+  compute-ap-eq-pair-Σ :
     { x y : A} (p : x ＝ y) {b : B x} {b' : B y} →
     ( q : dependent-identification B p b b') →
     ap f (eq-pair-Σ p q) ＝ (ap f (eq-pair-Σ p refl) ∙ ap (ev-pair f y) q)
-  ap-eq-pair-Σ refl refl = refl
+  compute-ap-eq-pair-Σ refl refl = refl
+```
+
+### Equality of dependent pair types consists of two orthogonal components
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  orthogonal-eq-pair-Σ :
+    { a a' : A} (p : a ＝ a') →
+    { b : B a} {b' : B a'} (q : dependent-identification B p b b') →
+    eq-pair-Σ p q ＝ (eq-pair-Σ p refl ∙ eq-pair-Σ refl q)
+  orthogonal-eq-pair-Σ refl q = refl
 ```
 
 ## See also

@@ -7,6 +7,8 @@ module synthetic-homotopy-theory.flattening-lemma-pushouts where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
@@ -155,7 +157,7 @@ module _
   coherence-square-cocone-flattening-descent-data-pushout :
     coherence-square-maps
       ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
-      ( map-Σ (pr1 P) f (λ s → id))
+      ( map-Σ-map-base f (pr1 P))
       ( vertical-map-cocone-flattening-descent-data-pushout)
       ( horizontal-map-cocone-flattening-descent-data-pushout)
   coherence-square-cocone-flattening-descent-data-pushout =
@@ -166,7 +168,7 @@ module _
 
   cocone-flattening-descent-data-pushout :
     cocone
-      ( map-Σ (pr1 P) f (λ s → id))
+      ( map-Σ-map-base f (pr1 P))
       ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
       ( Σ X Q)
   pr1 cocone-flattening-descent-data-pushout =
@@ -278,4 +280,122 @@ module _
           ( is-equiv-map-equiv (comparison-dependent-cocone-ind-Σ-cocone Y))
           ( dup-pushout (λ x → P x → Y))))
       ( is-equiv-ind-Σ)
+```
+
+### Proof of the descent data statement of the flattening lemma
+
+The proof is carried out by constructing a commuting cube, which has
+equivalences for vertical maps, the `cocone-flattening-pushout` square for the
+bottom, and the `cocone-flattening-descent-data-pushout` square for the top.
+
+The bottom is a pushout by the above flattening lemma, which implies that the
+top is also a pushout.
+
+The other parts of the cube are defined naturally, and come from the following
+map of spans:
+
+```text
+  Σ (a : A) (PA a) <------- Σ (s : S) (PA (f s)) -----> Σ (b : B) (PB b)
+         |                           |                         |
+         |                           |                         |
+         v                           v                         v
+Σ (a : A) (P (i a)) <---- Σ (s : S) (P (i (f s))) ---> Σ (b : B) (P (j b))
+```
+
+where the vertical maps are equivalences given fiberwise by the equivalence of
+descent data.
+
+```agda
+module _
+  { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
+  ( f : S → A) (g : S → B) (c : cocone f g X)
+  ( P : Fam-pushout l5 f g)
+  ( Q : X → UU l5)
+  ( e : equiv-Fam-pushout P (desc-fam c Q))
+  where
+
+  coherence-cube-flattening-lemma-descent-data-pushout :
+    coherence-cube-maps
+      ( map-Σ-map-base f (Q ∘ horizontal-map-cocone f g c))
+      ( map-Σ
+        ( Q ∘ vertical-map-cocone f g c)
+        ( g)
+        ( λ s → tr Q (coherence-square-cocone f g c s)))
+      ( horizontal-map-cocone-flattening-pushout Q f g c)
+      ( vertical-map-cocone-flattening-pushout Q f g c)
+      ( map-Σ-map-base f (pr1 P))
+      ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
+      ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
+      ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
+      ( tot (λ s → map-equiv (pr1 e (f s))))
+      ( tot (λ a → map-equiv (pr1 e a)))
+      ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
+      ( id)
+      ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
+      ( refl-htpy)
+      ( htpy-map-Σ
+        ( Q ∘ vertical-map-cocone f g c)
+        ( refl-htpy)
+        ( λ s →
+          tr Q (coherence-square-cocone f g c s) ∘ (map-equiv (pr1 e (f s))))
+        ( λ s → inv-htpy (pr2 (pr2 e) s)))
+      ( refl-htpy)
+      ( refl-htpy)
+      ( coherence-square-cocone-flattening-pushout Q f g c)
+  coherence-cube-flattening-lemma-descent-data-pushout (s , t) =
+    ( ap-id
+      ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e
+        ( s , t))) ∙
+    ( orthogonal-eq-pair-Σ Q
+      ( coherence-square-cocone f g c s)
+      ( inv (pr2 (pr2 e) s t))) ∙
+    ( ap
+      ( eq-pair-Σ (coherence-square-cocone f g c s) refl ∙_)
+      ( inv
+        ( ( right-unit) ∙
+          ( compute-ap-map-Σ-map-base-eq-pair-Σ
+            ( vertical-map-cocone f g c)
+            ( Q)
+            ( refl)
+            ( inv (pr2 (pr2 e) s t))))))
+
+  flattening-lemma-descent-data-pushout :
+    flattening-lemma-descent-data-pushout-statement f g c P Q e
+  flattening-lemma-descent-data-pushout dup-pushout =
+    universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
+      ( map-Σ-map-base f (Q ∘ horizontal-map-cocone f g c))
+      ( map-Σ
+        ( Q ∘ vertical-map-cocone f g c)
+        ( g)
+        ( λ s → tr Q (coherence-square-cocone f g c s)))
+      ( horizontal-map-cocone-flattening-pushout Q f g c)
+      ( vertical-map-cocone-flattening-pushout Q f g c)
+      ( map-Σ-map-base f (pr1 P))
+      ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
+      ( horizontal-map-cocone-flattening-descent-data-pushout f g c P Q e)
+      ( vertical-map-cocone-flattening-descent-data-pushout f g c P Q e)
+      ( tot (λ s → map-equiv (pr1 e (f s))))
+      ( tot (λ a → map-equiv (pr1 e a)))
+      ( tot (λ b → map-equiv (pr1 (pr2 e) b)))
+      ( id)
+      ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e)
+      ( refl-htpy)
+      ( htpy-map-Σ
+        ( Q ∘ vertical-map-cocone f g c)
+        ( refl-htpy)
+        ( λ s →
+          tr Q (coherence-square-cocone f g c s) ∘ (map-equiv (pr1 e (f s))))
+        ( λ s → inv-htpy (pr2 (pr2 e) s)))
+      ( refl-htpy)
+      ( refl-htpy)
+      ( coherence-square-cocone-flattening-pushout Q f g c)
+      ( coherence-cube-flattening-lemma-descent-data-pushout)
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ s → is-equiv-map-equiv (pr1 e (f s))))
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ a → is-equiv-map-equiv (pr1 e a)))
+      ( is-equiv-tot-is-fiberwise-equiv
+        ( λ b → is-equiv-map-equiv (pr1 (pr2 e) b)))
+      ( is-equiv-id)
+      ( flattening-lemma-pushout Q f g c dup-pushout)
 ```
