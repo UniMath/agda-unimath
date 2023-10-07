@@ -19,6 +19,7 @@ open import synthetic-homotopy-theory.descent-circle-dependent-pair-types
 open import synthetic-homotopy-theory.descent-circle-function-types
 open import synthetic-homotopy-theory.descent-circle-subtypes
 open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.morphisms-descent-data-circle
 open import synthetic-homotopy-theory.sections-descent-circle
 open import synthetic-homotopy-theory.universal-property-circle
 ```

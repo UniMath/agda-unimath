@@ -76,50 +76,6 @@ module _
   map-descent-data-circle = map-Type-With-Automorphism P
 ```
 
-### Morphisms of descent data for the circle
-
-A **morphism** `h` of descent data between `(X, e)` and `(Y, f)` is a map from
-`X` to `Y` such that the square
-
-```text
-      h
-  X -----> Y
-  |        |
- e|        |f
-  v        v
-  X -----> Y
-      h
-```
-
-[commutes](foundation.commuting-squares-of-maps.md).
-
-```agda
-hom-descent-data-circle :
-  { l1 l2 : Level}
-  ( P : descent-data-circle l1) (Q : descent-data-circle l2) →
-  UU (l1 ⊔ l2)
-hom-descent-data-circle = hom-Type-With-Automorphism
-
-module _
-  { l1 l2 : Level} (P : descent-data-circle l1) (Q : descent-data-circle l2)
-  ( h : hom-descent-data-circle P Q)
-  where
-
-  map-hom-descent-data-circle :
-    type-descent-data-circle P → type-descent-data-circle Q
-  map-hom-descent-data-circle =
-    map-hom-Type-With-Automorphism P Q h
-
-  coherence-square-hom-descent-data-circle :
-    coherence-square-maps
-      ( map-hom-descent-data-circle)
-      ( map-descent-data-circle P)
-      ( map-descent-data-circle Q)
-      ( map-hom-descent-data-circle)
-  coherence-square-hom-descent-data-circle =
-    coherence-square-hom-Type-With-Automorphism P Q h
-```
-
 ### Canonical descent data for a family over the circle
 
 A type family over the circle gives rise to its canonical descent data, obtained
