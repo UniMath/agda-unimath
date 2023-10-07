@@ -404,7 +404,7 @@ W^C -----> W^A -----> W^X
 ```
 
 This fact can be written as distribution of right whiskering over transposition:
-`W^(H ·r f) = W^f ·l W^H`
+`W^(H ·r f) = W^f ·l W^H`.
 
 ```agda
 module _
