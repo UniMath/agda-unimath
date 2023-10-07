@@ -87,8 +87,8 @@ module _
 
 ### A group is not a trivial group if and only if it satisfies the predicate of not being trivial
 
-**Proof:** The proposition `¬ (is-trivial-Group G)` holds if and only if `G` is not
-contractible, which holds if and only if `¬ ((x : G) → 1 ＝ x)`.
+**Proof:** The proposition `¬ (is-trivial-Group G)` holds if and only if `G` is
+not contractible, which holds if and only if `¬ ((x : G) → 1 ＝ x)`.
 
 ```agda
 module _
@@ -106,7 +106,7 @@ module _
 
 ### The map `subgroup-Prop G : Prop → Subgroup G` is an embedding for any nontrivial group
 
-Recall that the subgroup `subgroup-Prop G P` associated to a proposition `P` as
+Recall that the subgroup `subgroup-Prop G P` associated to a proposition `P` was
 defined in [`group-theory.subgroups`](group-theory.subgroups.md).
 
 **Proof:** Suppose that `G` is a nontrivial group and `x` is a group element
