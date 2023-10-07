@@ -27,7 +27,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        agda: ['2.6.3']
+        agda: ['2.6.4']
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
