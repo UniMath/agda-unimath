@@ -37,17 +37,12 @@ The **dependent descent property of the circle** asserts that a family over a
 family `P` over the [circle](synthetic-homotopy-theory.circle.md) is
 [equivalently](foundation-core.equivalences.md) described by **dependent descent
 data** over the descent data of `P`, which is defined as a
-[dependent type with an automorphism](structured-types.dependent-types-equipped-with-automorphisms.md)
+[dependent type with an automorphism](structured-types.dependent-types-equipped-with-automorphisms.md). More precisely, dependent descent data over descent data `(X,e)` for the circle consists of a type family `R : X → U` equipped
+with a family of equivalences `k : (x : X) → R(x) ≃ R(e(x))` *over* `e`.
+
+## Definitions
 
 ### Dependent descent data for the circle
-
-The equivalence extends to the dependent case, where given a type family `A`
-over the circle with descent data `(X, e)`, a type family
-`B : (t : 𝕊¹) → A t → U` is equivalent to a type family `R : X → U` equipped
-with a family of equivalences `k : (x : X) → R(x) ≃ R(e(x))`. The pair `(R, k)`
-is called **dependent descent data** for the circle over `A`. Intuitively, this
-states that the types over points of `X` belonging to the same connected
-component in the total space `Σ 𝕊¹ A` are equivalent.
 
 ```agda
 dependent-descent-data-circle :
@@ -152,12 +147,12 @@ module _
   ( A : family-with-descent-data-circle l l2)
   where
 
-  family-for-dependent-descent-data-circle :
+  double-family-for-dependent-descent-data-circle :
     { l3 : Level} →
     dependent-descent-data-circle l3
       ( descent-data-family-with-descent-data-circle A) →
     UU (l1 ⊔ l2 ⊔ lsuc l3)
-  family-for-dependent-descent-data-circle {l3} Q =
+  double-family-for-dependent-descent-data-circle {l3} Q =
     Σ ( (x : S) → (family-family-with-descent-data-circle A x) → UU l3)
       ( λ B →
         equiv-dependent-descent-data-circle
@@ -165,11 +160,11 @@ module _
           ( Q)
           ( dependent-descent-data-double-family-circle l A B))
 
-  dependent-descent-data-circle-for-family :
+  dependent-descent-data-circle-for-double-family :
     { l3 : Level} →
     ( (x : S) → (family-family-with-descent-data-circle A x) → UU l3) →
     UU (l2 ⊔ lsuc l3)
-  dependent-descent-data-circle-for-family {l3} B =
+  dependent-descent-data-circle-for-double-family {l3} B =
     Σ ( dependent-descent-data-circle l3
         ( descent-data-family-with-descent-data-circle A))
       ( λ Q →
@@ -182,7 +177,7 @@ module _
     ( l3 : Level) → UU (l1 ⊔ l2 ⊔ lsuc l3)
   family-with-dependent-descent-data-circle l3 =
     Σ ( (x : S) → (family-family-with-descent-data-circle A x) → UU l3)
-      dependent-descent-data-circle-for-family
+      dependent-descent-data-circle-for-double-family
 
 module _
   { l1 l2 l3 : Level} {S : UU l1} {l : free-loop S}
@@ -195,14 +190,14 @@ module _
   double-family-with-dependent-descent-data-circle = pr1 B
 
   dependent-descent-data-for-family-with-dependent-descent-data-circle :
-    dependent-descent-data-circle-for-family l A
+    dependent-descent-data-circle-for-double-family l A
       double-family-with-dependent-descent-data-circle
   dependent-descent-data-for-family-with-dependent-descent-data-circle = pr2 B
 
-  dependent-descent-data-family-with-dependent-descent-data-circle :
+  dependent-descent-data-double-family-with-dependent-descent-data-circle :
     dependent-descent-data-circle l3
       ( descent-data-family-with-descent-data-circle A)
-  dependent-descent-data-family-with-dependent-descent-data-circle =
+  dependent-descent-data-double-family-with-dependent-descent-data-circle =
     pr1 dependent-descent-data-for-family-with-dependent-descent-data-circle
 
   type-family-with-dependent-descent-data-circle :
@@ -210,7 +205,7 @@ module _
   type-family-with-dependent-descent-data-circle =
     type-dependent-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
-      ( dependent-descent-data-family-with-dependent-descent-data-circle)
+      ( dependent-descent-data-double-family-with-dependent-descent-data-circle)
 
   dependent-automorphism-family-with-dependent-descent-data-circle :
     equiv-fam
@@ -220,7 +215,7 @@ module _
   dependent-automorphism-family-with-dependent-descent-data-circle =
     dependent-automorphism-dependent-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
-      ( dependent-descent-data-family-with-dependent-descent-data-circle)
+      ( dependent-descent-data-double-family-with-dependent-descent-data-circle)
 
   map-dependent-automorphism-family-with-dependent-descent-data-circle :
     { x : type-family-with-descent-data-circle A} →
@@ -230,12 +225,12 @@ module _
   map-dependent-automorphism-family-with-dependent-descent-data-circle =
     map-dependent-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
-      ( dependent-descent-data-family-with-dependent-descent-data-circle)
+      ( dependent-descent-data-double-family-with-dependent-descent-data-circle)
 
   eq-family-with-dependent-descent-data-circle :
     equiv-dependent-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
-      ( dependent-descent-data-family-with-dependent-descent-data-circle)
+      ( dependent-descent-data-double-family-with-dependent-descent-data-circle)
       ( dependent-descent-data-double-family-circle l A
         ( double-family-with-dependent-descent-data-circle))
   eq-family-with-dependent-descent-data-circle =
@@ -250,7 +245,7 @@ module _
   equiv-family-with-dependent-descent-data-circle =
     equiv-equiv-dependent-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
-      ( dependent-descent-data-family-with-dependent-descent-data-circle)
+      ( dependent-descent-data-double-family-with-dependent-descent-data-circle)
       ( dependent-descent-data-double-family-circle l A
         ( double-family-with-dependent-descent-data-circle))
       ( eq-family-with-dependent-descent-data-circle)
@@ -264,7 +259,7 @@ module _
   map-equiv-family-with-dependent-descent-data-circle x =
     map-equiv (equiv-family-with-dependent-descent-data-circle x)
 
-  coherence-square-family-with-dependent-descent-data-circle :
+  coherence-square-double-family-with-dependent-descent-data-circle :
     ( x : type-family-with-descent-data-circle A) →
     coherence-square-maps
       ( map-equiv-family-with-dependent-descent-data-circle x)
@@ -276,20 +271,20 @@ module _
           ( inv (coherence-square-family-with-descent-data-circle A x))))
       ( map-equiv-family-with-dependent-descent-data-circle
         ( map-aut-family-with-descent-data-circle A x))
-  coherence-square-family-with-dependent-descent-data-circle =
+  coherence-square-double-family-with-dependent-descent-data-circle =
     coherence-square-equiv-dependent-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
-      ( dependent-descent-data-family-with-dependent-descent-data-circle)
+      ( dependent-descent-data-double-family-with-dependent-descent-data-circle)
       ( dependent-descent-data-double-family-circle l A
         ( double-family-with-dependent-descent-data-circle))
       ( eq-family-with-dependent-descent-data-circle)
 
-  family-for-family-with-dependent-descent-data-circle :
-    family-for-dependent-descent-data-circle l A
-      dependent-descent-data-family-with-dependent-descent-data-circle
-  pr1 family-for-family-with-dependent-descent-data-circle =
+  double-family-for-double-family-with-dependent-descent-data-circle :
+    double-family-for-dependent-descent-data-circle l A
+      dependent-descent-data-double-family-with-dependent-descent-data-circle
+  pr1 double-family-for-double-family-with-dependent-descent-data-circle =
     double-family-with-dependent-descent-data-circle
-  pr2 family-for-family-with-dependent-descent-data-circle =
+  pr2 double-family-for-double-family-with-dependent-descent-data-circle =
     eq-family-with-dependent-descent-data-circle
 ```
 
@@ -361,5 +356,5 @@ module _
     ( Q :
       dependent-descent-data-circle l3
         ( descent-data-family-with-descent-data-circle A)) →
-    is-contr (family-for-dependent-descent-data-circle l A Q)
+    is-contr (double-family-for-dependent-descent-data-circle l A Q)
 ```
