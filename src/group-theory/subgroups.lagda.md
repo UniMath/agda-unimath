@@ -376,6 +376,13 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
+  has-same-elements-prop-Subgroup :
+    {l3 : Level} → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-prop-Subgroup K =
+    has-same-elements-subtype-Prop
+      ( subset-Subgroup G H)
+      ( subset-Subgroup G K)
+
   has-same-elements-Subgroup :
     {l3 : Level} → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Subgroup K =
