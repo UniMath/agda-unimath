@@ -48,19 +48,20 @@ belong to `R`.
 module _
   { l1 l2 l3 : Level} {S : UU l1} (l : free-loop S)
   ( A : family-with-descent-data-circle l l2)
-  ( B : family-with-dependent-descent-data-circle l A l3)
+  ( B : double-family-with-dependent-descent-data-circle l A l3)
   ( is-subtype-B :
     ( t : S) →
-    is-subtype (double-family-with-dependent-descent-data-circle A B t))
+    is-subtype
+      ( double-family-double-family-with-dependent-descent-data-circle A B t))
   where
 
   subtype-descent-data-circle-subtype :
     subtype l3 (type-family-with-descent-data-circle A)
   pr1 (subtype-descent-data-circle-subtype x) =
-    type-family-with-dependent-descent-data-circle A B x
+    type-double-family-with-dependent-descent-data-circle A B x
   pr2 (subtype-descent-data-circle-subtype x) =
     is-prop-equiv
-      ( equiv-family-with-dependent-descent-data-circle A B x)
+      ( equiv-double-family-with-dependent-descent-data-circle A B x)
       ( is-subtype-B
         ( base-free-loop l)
         ( map-equiv-family-with-descent-data-circle A x))
@@ -79,27 +80,29 @@ module _
         ( family-with-descent-data-circle-dependent-pair-type l A B))
     ≃ Σ ( type-family-with-descent-data-circle A)
         ( λ x →
-          Σ ( type-family-with-dependent-descent-data-circle A B x)
+          Σ ( type-double-family-with-dependent-descent-data-circle A B x)
             ( λ r →
               map-Σ
-                ( type-family-with-dependent-descent-data-circle A B)
+                ( type-double-family-with-dependent-descent-data-circle A B)
                 ( map-aut-family-with-descent-data-circle A)
                 ( λ x →
-                  map-dependent-automorphism-family-with-dependent-descent-data-circle
-                    A B)
+                  map-dependent-automorphism-double-family-with-dependent-descent-data-circle
+                    ( A)
+                    ( B))
                 ( x , r) ＝
               ( x , r)))
       by
         associative-Σ
           ( type-family-with-descent-data-circle A)
-          ( type-family-with-dependent-descent-data-circle A B)
+          ( type-double-family-with-dependent-descent-data-circle A B)
           ( λ u →
             map-Σ
-              ( type-family-with-dependent-descent-data-circle A B)
+              ( type-double-family-with-dependent-descent-data-circle A B)
               ( map-aut-family-with-descent-data-circle A)
               ( λ x →
-                map-dependent-automorphism-family-with-dependent-descent-data-circle
-                  A B)
+                map-dependent-automorphism-double-family-with-dependent-descent-data-circle
+                  ( A)
+                  ( B))
               ( u) ＝
             u)
     ≃ Σ ( type-family-with-descent-data-circle A)

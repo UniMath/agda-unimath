@@ -88,7 +88,7 @@ module _
     center (is-property-is-equiv _ _ _)
 
   family-with-dependent-descent-data-circle-is-equiv :
-    family-with-dependent-descent-data-circle l
+    double-family-with-dependent-descent-data-circle l
       ( family-with-descent-data-circle-function-type l A B)
       ( l2 ⊔ l3)
   pr1 family-with-dependent-descent-data-circle-is-equiv =
