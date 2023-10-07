@@ -87,7 +87,7 @@ module _
 
 ### A group is not a trivial group if and only if it satisfies the predicate of not being trivial
 
-**Proof:** Note that `¬ (is-trivial-Group G)` holds if and only if `G` is not
+**Proof:** The proposition `¬ (is-trivial-Group G)` holds if and only if `G` is not
 contractible, which holds if and only if `¬ ((x : G) → 1 ＝ x)`.
 
 ```agda
