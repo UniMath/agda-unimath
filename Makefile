@@ -113,6 +113,7 @@ pre-commit:
 	@echo Typechecking library
 	@make check
 
+# Keep versions in sync with .github/workflows/pages.yaml
 install-website-dev:
 	@cargo install mdbook@0.4.34
 	@cargo install mdbook-linkcheck@0.7.7
