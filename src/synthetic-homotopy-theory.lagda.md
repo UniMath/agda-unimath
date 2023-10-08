@@ -22,6 +22,7 @@ open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-coforks public
+open import synthetic-homotopy-theory.dependent-descent-circle public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
 open import synthetic-homotopy-theory.dependent-suspension-structures public
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers public
@@ -49,6 +50,7 @@ open import synthetic-homotopy-theory.iterated-loop-spaces public
 open import synthetic-homotopy-theory.join-powers-of-types public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
+open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public

@@ -57,7 +57,7 @@ module _
   {l : Level} (X : Infinite-Cyclic-Type l)
   where
 
-  endo-Infinite-Cyclic-Type : Endo l
+  endo-Infinite-Cyclic-Type : Type-With-Endomorphism l
   endo-Infinite-Cyclic-Type = endo-Cyclic-Type zero-ℕ X
 
   type-Infinite-Cyclic-Type : UU l
@@ -68,7 +68,9 @@ module _
   endomorphism-Infinite-Cyclic-Type = endomorphism-Cyclic-Type zero-ℕ X
 
   mere-equiv-ℤ-Infinite-Cyclic-Type :
-    mere-equiv-Endo ℤ-Endo endo-Infinite-Cyclic-Type
+    mere-equiv-Type-With-Endomorphism
+      ( ℤ-Type-With-Endomorphism)
+      ( endo-Infinite-Cyclic-Type)
   mere-equiv-ℤ-Infinite-Cyclic-Type = pr2 X
 
 module _
@@ -120,7 +122,11 @@ module _
   map-left-factor-compute-Ω-Infinite-Cyclic-Type :
     equiv-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type → ℤ
   map-left-factor-compute-Ω-Infinite-Cyclic-Type e =
-    map-equiv-Endo ℤ-Endo ℤ-Endo e zero-ℤ
+    map-equiv-Type-With-Endomorphism
+      ( ℤ-Type-With-Endomorphism)
+      ( ℤ-Type-With-Endomorphism)
+      ( e)
+      ( zero-ℤ)
 
   abstract
     is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic-Type :
