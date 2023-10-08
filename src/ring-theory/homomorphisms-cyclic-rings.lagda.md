@@ -115,7 +115,7 @@ module _
           ( map-hom-Ring (ring-Cyclic-Ring R) S f x)
           ( map-hom-Ring (ring-Cyclic-Ring R) S g x))
         ( λ where
-          (n , refl) →
+          ( n , refl) →
             ( preserves-integer-multiples-hom-Ring
               ( ring-Cyclic-Ring R)
               ( S)

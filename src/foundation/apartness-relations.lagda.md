@@ -200,12 +200,12 @@ module _
             ( rel-apart-function-into-Type-With-Apartness X Y f h)
             ( rel-apart-function-into-Type-With-Apartness X Y g h))
           ( λ where
-            (inl b) →
+            ( inl b) →
               inl-disj-Prop
                 ( rel-apart-function-into-Type-With-Apartness X Y f h)
                 ( rel-apart-function-into-Type-With-Apartness X Y g h)
                 ( unit-trunc-Prop (x , b))
-            (inr b) →
+            ( inr b) →
               inr-disj-Prop
                 ( rel-apart-function-into-Type-With-Apartness X Y f h)
                 ( rel-apart-function-into-Type-With-Apartness X Y g h)

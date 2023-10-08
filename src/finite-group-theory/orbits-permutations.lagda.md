@@ -1126,7 +1126,7 @@ module _
         ( is-equiv-is-prop is-prop-type-trunc-Prop
           ( is-prop-type-Prop (coprod-sim-Equivalence-Relation-a-b-Prop g P x))
           ( λ where
-            (inl T) →
+            ( inl T) →
               apply-universal-property-trunc-Prop T
                 ( prop-Equivalence-Relation
                   ( same-orbits-permutation-count g) x a)
@@ -1135,7 +1135,7 @@ module _
                     ( lemma2
                       ( composition-transposition-a-b g)
                       ( pair (pr1 pa) (inl (pr2 pa)))))
-            (inr T) →
+            ( inr T) →
               apply-universal-property-trunc-Prop T
                 ( prop-Equivalence-Relation
                   ( same-orbits-permutation-count g) x a)

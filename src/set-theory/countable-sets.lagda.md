@@ -154,13 +154,13 @@ module _
               zero-ℕ → inr star
               (succ-ℕ n) → inl ((shift-ℕ a (pr1 P)) n)) ,
             ( λ where
-              (inl x) →
+              ( inl x) →
                 apply-universal-property-trunc-Prop (pr2 P x)
                   ( trunc-Prop (fiber _ (inl x)))
                   ( λ (n , p) →
                     unit-trunc-Prop
                       ( succ-ℕ (succ-ℕ n) , ap inl p))
-              (inr star) → unit-trunc-Prop (zero-ℕ , refl))))
+              ( inr star) → unit-trunc-Prop (zero-ℕ , refl))))
 ```
 
 ## Properties
@@ -340,8 +340,8 @@ is-countable-ℕ =
         zero-ℕ → inr star
         (succ-ℕ n) → inl n) ,
       ( λ where
-        (inl n) → unit-trunc-Prop (succ-ℕ n , refl)
-        (inr star) → unit-trunc-Prop (zero-ℕ , refl)))
+        ( inl n) → unit-trunc-Prop (succ-ℕ n , refl)
+        ( inr star) → unit-trunc-Prop (zero-ℕ , refl)))
 ```
 
 The empty set is countable.

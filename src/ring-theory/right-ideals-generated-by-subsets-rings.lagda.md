@@ -529,7 +529,7 @@ module _
     apply-universal-property-trunc-Prop H
       ( subset-right-ideal-Ring R I x)
       ( λ where
-        (l , refl) →
+        ( l , refl) →
           cases-forward-inclusion-idempotent-right-ideal-subset-Ring l)
 
   backward-inclusion-idempotent-right-ideal-subset-Ring :

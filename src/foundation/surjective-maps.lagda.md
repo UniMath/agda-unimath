@@ -416,7 +416,7 @@ module _
         ( is-surj-g x)
         ( trunc-Prop (fiber f x))
         ( λ where
-          (b , refl) →
+          ( b , refl) →
             apply-universal-property-trunc-Prop
               ( is-surj-h b)
               ( trunc-Prop (fiber f (g b)))

@@ -351,7 +351,7 @@ module _
             ( refl-htpy) ,
             ( right-unit-htpy ∙h
               ( λ where
-                (inl a) →
+                ( inl a) →
                   inv
                     ( ( ap
                         ( _∙
@@ -379,7 +379,7 @@ module _
                               ( P)
                               ( d)
                               ( inl a))))
-                (inr a) →
+                ( inr a) →
                   ap
                     ( _∙
                       coherence-square-dependent-cocone

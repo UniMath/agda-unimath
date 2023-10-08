@@ -220,7 +220,7 @@ module _
             ( is-surjective-unit-trunc-Set A x)
             ( trunc-Prop (fiber f b))
             ( λ where
-              (a , refl) →
+              ( a , refl) →
                 apply-universal-property-trunc-Prop
                   ( apply-effectiveness-unit-trunc-Set
                     ( inv (naturality-unit-trunc-Set f a) ∙ p))

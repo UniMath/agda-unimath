@@ -79,7 +79,7 @@ module _
       apply-twice-universal-property-trunc-Prop K L
         ( subset-image-hom-Group (mul-Group H x y))
         ( λ where
-          (g , refl) (h , refl) →
+          ( g , refl) (h , refl) →
             unit-trunc-Prop
               ( mul-Group G g h , preserves-mul-hom-Group G H f g h))
 
@@ -90,7 +90,7 @@ module _
       apply-universal-property-trunc-Prop K
         ( subset-image-hom-Group (inv-Group H x))
         ( λ where
-          (g , refl) →
+          ( g , refl) →
             unit-trunc-Prop
               ( inv-Group G g , preserves-inv-hom-Group G H f g))
 

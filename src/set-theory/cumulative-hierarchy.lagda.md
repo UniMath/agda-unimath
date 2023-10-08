@@ -731,7 +731,7 @@ needed.
     map-universal-property-trunc-Prop
       ( ∃-Prop (type-pseudo-cumulative-hierarchy V) _)
       ( λ where
-        (A , f , refl) →
+        ( A , f , refl) →
           unit-trunc-Prop
             ( ( set-pseudo-cumulative-hierarchy V (r ∘ f)) ,
               ( λ y →
@@ -739,7 +739,7 @@ needed.
                   ( λ H →
                     map-trunc-Prop
                       ( λ where
-                        (a , refl) →
+                        ( a , refl) →
                           (f a) ,
                           ( mere-preimage-∈-cumulative-hierarchy
                             ( unit-trunc-Prop (a , refl))) ,
@@ -750,7 +750,7 @@ needed.
                       ( map-universal-property-trunc-Prop
                         ( ∃-Prop A _)
                         ( λ where
-                          (z , K , refl) →
+                          ( z , K , refl) →
                             map-trunc-Prop
                               ( λ where (a , refl) → (a , refl))
                               ( ∈-cumulative-hierarchy-mere-preimage K))

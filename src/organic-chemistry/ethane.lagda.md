@@ -98,8 +98,8 @@ module _
       ( λ P →
         apply-universal-property-trunc-Prop (pr2 P) empty-Prop
           ( λ where
-            (inl (inr star) , is-one) → neq-inl-inr (inv is-zero ∙ is-one)
-            (inr star , is-one) → neq-inl-inr (inv is-zero' ∙ is-one)))
+            ( inl (inr star) , is-one) → neq-inl-inr (inv is-zero ∙ is-one)
+            ( inr star , is-one) → neq-inl-inr (inv is-zero' ∙ is-one)))
   ... | inl is-zero | inr is-one' =
     inl
       ( pair
@@ -115,8 +115,8 @@ module _
       ( λ P →
         apply-universal-property-trunc-Prop (pr1 P) empty-Prop
           ( λ where
-            (inl (inr star) , is-zero) → neq-inl-inr (inv is-zero ∙ is-one)
-            (inr star , is-zero) → neq-inl-inr (inv is-zero ∙ is-one')))
+            ( inl (inr star) , is-zero) → neq-inl-inr (inv is-zero ∙ is-one)
+            ( inr star , is-zero) → neq-inl-inr (inv is-zero ∙ is-one')))
 
   is-decidable-standard-edge-ethane :
     (c c' : vertex-ethane) → is-decidable (standard-edge-ethane c c')
@@ -162,8 +162,8 @@ module _
     ex-falso
       ( apply-universal-property-trunc-Prop (pr2 P) empty-Prop
         ( λ where
-          (inl (inr star) , is-one) → neq-inl-inr is-one
-          (inr star , is-one) → neq-inl-inr is-one))
+          ( inl (inr star) , is-one) → neq-inl-inr is-one
+          ( inr star , is-one) → neq-inl-inr is-one))
   pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inr star , P) =
     eq-pair-Σ refl
       ( eq-is-prop
@@ -183,8 +183,8 @@ module _
     ex-falso
       ( apply-universal-property-trunc-Prop (pr1 P) empty-Prop
         ( λ where
-          (inl (inr star) , is-zero) → neq-inr-inl is-zero
-          (inr star , is-zero) → neq-inr-inl is-zero))
+          ( inl (inr star) , is-zero) → neq-inr-inl is-zero
+          ( inr star , is-zero) → neq-inr-inl is-zero))
 
   abstract
     is-emb-bonding-ethane : (c : vertex-ethane) → is-emb (bonding-ethane c)
@@ -231,13 +231,13 @@ module _
   pr1 (pr2 (pr2 (pr2 ethane))) (inl (inr star)) P =
     apply-universal-property-trunc-Prop (pr2 P) empty-Prop
       ( λ where
-        (inl (inr star) , is-one) → neq-inl-inr is-one
-        (inr star , is-one) → neq-inl-inr is-one)
+        ( inl (inr star) , is-one) → neq-inl-inr is-one
+        ( inr star , is-one) → neq-inl-inr is-one)
   pr1 (pr2 (pr2 (pr2 ethane))) (inr star) P =
     apply-universal-property-trunc-Prop (pr1 P) empty-Prop
       ( λ where
-        (inl (inr star) , is-zero) → neq-inr-inl is-zero
-        (inr star , is-zero) → neq-inr-inl is-zero)
+        ( inl (inr star) , is-zero) → neq-inr-inl is-zero
+        ( inr star , is-zero) → neq-inr-inl is-zero)
   pr1 (pr2 (pr2 (pr2 (pr2 ethane)))) c c' =
     concatenate-eq-leq-ℕ 3
       ( inv

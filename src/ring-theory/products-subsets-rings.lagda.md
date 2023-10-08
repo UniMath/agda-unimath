@@ -60,7 +60,7 @@ module _
     apply-universal-property-trunc-Prop p
       ( union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) x)
       ( λ where
-        ((s , Hs) , (t , Ht) , refl) →
+        ( ( s , Hs) , (t , Ht) , refl) →
           apply-universal-property-trunc-Prop Ht
             ( union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) x)
             ( λ (i , Ht') →
@@ -77,7 +77,7 @@ module _
         apply-universal-property-trunc-Prop u
           ( product-subset-Ring A S (union-family-of-subtypes T) x)
           ( λ where
-            ((s , Hs) , (t , Ht) , refl) →
+            ( ( s , Hs) , (t , Ht) , refl) →
               unit-trunc-Prop
                 ( (s , Hs) , (t , unit-trunc-Prop (i , Ht)) , refl)))
 
@@ -149,7 +149,7 @@ module _
               ( T)
               ( _))
             ( λ where
-              ((s , Hs) , (t , Ht) , refl) →
+              ( ( s , Hs) , (t , Ht) , refl) →
                 unit-trunc-Prop
                   ( ( ( mul-Ring A r s) ,
                       ( unit-trunc-Prop ((r , Hr) , (s , Hs) , refl))) ,

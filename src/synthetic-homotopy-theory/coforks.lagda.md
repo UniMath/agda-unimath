@@ -277,7 +277,7 @@ module _
               ( inl)) ,
             ( refl-htpy) ,
             ( λ where
-              (inl a) →
+              ( inl a) →
                 inv
                   ( left-inv
                     ( coherence-square-cocone
@@ -285,7 +285,7 @@ module _
                       ( ind-coprod (λ _ → B) f g)
                       ( c)
                       ( inl a)))
-              (inr a) → right-unit))
+              ( inr a) → right-unit))
 
     is-equiv-cofork-cocone-codiagonal :
       is-equiv cofork-cocone-codiagonal

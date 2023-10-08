@@ -189,7 +189,7 @@ module _
             ( ideal-subset-Commutative-Ring A T)
             ( x))
           ( λ where
-            (s , t , refl) →
+            ( s , t , refl) →
               contains-product-product-ideal-Commutative-Ring A
                 ( ideal-subset-Commutative-Ring A S)
                 ( ideal-subset-Commutative-Ring A T)

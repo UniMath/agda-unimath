@@ -684,7 +684,7 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                     apply-universal-property-trunc-Prop t
                       ( trunc-Prop _)
                       ( ( λ where
-                          (ω , r) →
+                          ( ω , r) →
                             unit-trunc-Prop
                               ( ( unit-trunc-Set ω) ,
                                 ( map-inv-equiv
@@ -721,11 +721,11 @@ module _
         apply-universal-property-trunc-Prop u
           ( function-Prop _ empty-Prop)
           ( λ where
-            (x , refl) →
+            ( x , refl) →
               apply-universal-property-trunc-Prop v
                 ( function-Prop _ empty-Prop)
                 ( λ where
-                  (y , refl) r →
+                  ( y , refl) r →
                     is-empty-eq-coprod-inl-inr x y
                       ( is-injective-is-equiv
                         ( is-equiv-map-equiv e)
@@ -764,7 +764,7 @@ pr2 (is-contr-im B {f} a H) (x , u) =
     ( λ v → Id-Prop (im-Set B f) (map-unit-im f a) (x , v))
     ( u)
     ( λ where
-      (a' , refl) →
+      ( a' , refl) →
         eq-Eq-im f (map-unit-im f a) (map-unit-im f a') (inv (H a')))
 
 is-0-connected-im :
@@ -893,7 +893,7 @@ has-finite-connected-components-Σ {l1} {l2} {A} {B} H K =
     ( pr1 H)
     ( has-finite-connected-components-Prop (Σ A B))
     ( λ where
-      (k , e) →
+      ( k , e) →
         has-finite-connected-components-Σ' k e (λ x y → pr2 H x y) K)
 
 is-π-finite-Σ :

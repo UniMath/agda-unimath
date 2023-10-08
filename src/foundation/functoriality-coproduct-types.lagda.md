@@ -522,12 +522,12 @@ module _
   is-section-map-inv-mutually-exclusive-coprod e =
     eq-htpy-equiv (
       λ where
-      (inl p) →
+      ( inl p) →
         ap
           ( pr1)
           ( is-retraction-map-inv-equiv-left-summand
             ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star))
-      (inr q) →
+      ( inr q) →
         ap
           ( pr1)
           ( is-retraction-map-inv-equiv-right-summand

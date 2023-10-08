@@ -482,7 +482,7 @@ module _
         ( is-surjective-initial-hom-Cyclic-Ring R y)
         ( Id-Prop (set-Cyclic-Ring R) _ _)
         ( λ where
-          (n , refl) (m , refl) →
+          ( n , refl) (m , refl) →
             commute-integer-multiples-diagonal-Ring (ring-Cyclic-Ring R) n m)
 
   commutative-ring-Cyclic-Ring : Commutative-Ring l

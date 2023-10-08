@@ -365,7 +365,7 @@ module _
       apply-universal-property-trunc-Prop p
         ( subset-image-hom-element-Group G g (conjugation-Group G x y))
         ( λ where
-          (k , refl) →
+          ( k , refl) →
             is-closed-under-eq-image-hom-element-Group' G g
               ( unit-trunc-Prop (k , refl))
               ( ( preserves-integer-powers-conjugation-Group G k x g) ∙
@@ -425,7 +425,7 @@ module _
                   ( map-hom-Group G H h x)
                   ( map-hom-Group G H k x))
                 ( λ where
-                  (z , refl) →
+                  ( z , refl) →
                       eq-integer-power-hom-Group G H h k z g (p ∙ inv q)))))
 
   is-emb-ev-element-is-generating-element-Group :
@@ -468,7 +468,7 @@ module _
         ( U y)
         ( Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x))
         ( λ where
-          (k , refl) (l , refl) →
+          ( k , refl) (l , refl) →
               commute-integer-powers-Group G k l refl)
 
   commutative-mul-is-generating-element-Group :
@@ -565,7 +565,7 @@ module _
             ( group-Group-With-Generating-Element G))
           ( x))
         ( λ where
-          (k , refl) →
+          ( k , refl) →
             unit-trunc-Prop
               ( hom-integer-multiple-Ab
                   ( abelian-group-Group-With-Generating-Element G)
@@ -658,7 +658,7 @@ module _
       ( is-surjective-hom-element-Group-With-Generating-Element G y)
       ( Id-Prop (set-Group-With-Generating-Element G) _ _)
       ( λ where
-        (k , refl) (l , refl) →
+        ( k , refl) (l , refl) →
           commute-integer-multiples-diagonal-Ring
             ( ring-Group-With-Generating-Element)
             ( k)

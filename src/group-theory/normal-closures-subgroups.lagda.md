@@ -92,7 +92,7 @@ module _
     apply-universal-property-trunc-Prop s
       ( generating-subset-normal-closure-Subgroup (conjugation-Group G x y))
       ( λ where
-        (z , h , refl) →
+        ( z , h , refl) →
           unit-trunc-Prop
             ( mul-Group G x z ,
               h ,
@@ -194,7 +194,7 @@ module _
     apply-universal-property-trunc-Prop g
       ( subset-Normal-Subgroup G N x)
       ( λ where
-        (z , (y , h) , refl) → is-normal-Normal-Subgroup G N z y (u y h))
+        ( z , (y , h) , refl) → is-normal-Normal-Subgroup G N z y (u y h))
 
   backward-implication-is-normal-closure-normal-closure-Subgroup :
     {l : Level} (N : Normal-Subgroup l G) →
