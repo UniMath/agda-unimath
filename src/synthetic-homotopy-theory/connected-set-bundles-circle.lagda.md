@@ -106,7 +106,7 @@ module _
           apply-universal-property-trunc-Prop
             ( mere-eq-𝕊¹ base-𝕊¹ t)
             ( trunc-Prop type-connected-set-bundle-𝕊¹)
-            ( λ { refl → unit-trunc-Prop x}))
+            ( λ where refl → unit-trunc-Prop x))
 
   inhabited-type-connected-set-bundle-𝕊¹ : Inhabited-Type l
   pr1 inhabited-type-connected-set-bundle-𝕊¹ =

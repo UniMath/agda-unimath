@@ -251,7 +251,7 @@ pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
     ( is-emb-inclusion-isolated-point A)
     ( is-emb-is-injective
       ( is-set-isolated-point A)
-      ( λ { {star} {star} p → refl}))
+      ( λ where {star} {star} p → refl))
 pr2 (pr2 (decidable-emb-isolated-point {l1} {A} a)) x =
   is-decidable-prod is-decidable-unit (pr2 a x)
 ```

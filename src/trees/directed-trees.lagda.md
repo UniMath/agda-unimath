@@ -262,14 +262,15 @@ module _
   is-decidable-is-root-walk-Directed-Tree x
     ( cons-walk-Directed-Graph {.x} {y} e w) =
     inr
-      ( λ { refl →
-            neq-cons-refl-walk-Directed-Graph
-              ( graph-Directed-Tree T)
-              ( x)
-              ( y)
-              ( e)
-              ( w)
-              ( eq-is-contr (unique-walk-to-root-Directed-Tree T x))})
+      ( λ where
+        refl →
+          neq-cons-refl-walk-Directed-Graph
+            ( graph-Directed-Tree T)
+            ( x)
+            ( y)
+            ( e)
+            ( w)
+            ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
 
   is-isolated-root-Directed-Tree : is-isolated (root-Directed-Tree T)
   is-isolated-root-Directed-Tree x =
@@ -595,7 +596,7 @@ module _
     is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
   is-proof-irrelevant-direct-successor-Directed-Tree x (y , e) =
     unique-direct-successor-is-proper-node-Directed-Tree x
-      ( λ { refl → no-direct-successor-root-Directed-Tree T (y , e)})
+      ( λ where refl → no-direct-successor-root-Directed-Tree T (y , e))
 
   is-prop-direct-successor-Directed-Tree :
     (x : node-Directed-Tree T) →

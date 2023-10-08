@@ -143,7 +143,7 @@ module _
             ( hom-equiv-Abstract-Group-Action G X Y e)
             ( pr1 f))
         ( equiv-right-swap-Σ)
-        ( λ { (pair (pair f E) H) → id-equiv}))
+        ( λ ((f , E) , H) → id-equiv))
       ( is-contr-total-Eq-subtype
         ( is-contr-total-htpy-hom-Abstract-Group-Action G X Y
           ( hom-equiv-Abstract-Group-Action G X Y e))

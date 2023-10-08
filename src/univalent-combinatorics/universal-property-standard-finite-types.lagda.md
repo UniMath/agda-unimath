@@ -94,8 +94,7 @@ module _
     is-retraction-map-inv-ev-zero-one-Fin-two-ℕ :
       map-inv-ev-zero-one-Fin-two-ℕ ∘ ev-zero-one-Fin-two-ℕ ~ id
     is-retraction-map-inv-ev-zero-one-Fin-two-ℕ f =
-      eq-htpy
-        ( λ { (inl (inr star)) → refl ; (inr star) → refl})
+      eq-htpy (λ { (inl (inr star)) → refl ; (inr star) → refl})
 
   dependent-universal-property-Fin-two-ℕ :
     is-equiv ev-zero-one-Fin-two-ℕ

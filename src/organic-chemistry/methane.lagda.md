@@ -51,7 +51,7 @@ module _
         ( inv
           ( compute-number-of-elements-is-finite count-empty is-finite-empty))
         ( star)) ,
-    ( λ {star star → unit-trunc-Prop refl-walk-Undirected-Graph})
+    ( λ where star star → unit-trunc-Prop refl-walk-Undirected-Graph)
 
   is-alkane-methane : is-alkane-hydrocarbon methane
   is-alkane-methane c c' e e' = is-prop-empty e e'

@@ -94,13 +94,14 @@ module _
       apply-universal-property-trunc-Prop
         ( mere-eq-is-0-connected H a x)
         ( P _)
-        ( λ { refl →
-              is-in-subuniverse-equiv P
-                ( compute-fiber-map-out-of-identity-type
-                  ( ind-Id a (λ u v → B u) y)
-                  ( x')
-                  ( y'))
-                ( K (ind-Id a (λ u v → B u) y) x' y')})
+        ( λ where
+          refl →
+            is-in-subuniverse-equiv P
+              ( compute-fiber-map-out-of-identity-type
+                ( ind-Id a (λ u v → B u) y)
+                ( x')
+                ( y'))
+              ( K (ind-Id a (λ u v → B u) y) x' y'))
 
   abstract
     backward-implication-extended-fundamental-theorem-id :

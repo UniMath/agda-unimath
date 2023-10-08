@@ -78,9 +78,10 @@ module _
     is-closed-under-multiplication-image-hom-Group x y K L =
       apply-twice-universal-property-trunc-Prop K L
         ( subset-image-hom-Group (mul-Group H x y))
-        ( λ { (g , refl) (h , refl) →
-              unit-trunc-Prop
-                ( mul-Group G g h , preserves-mul-hom-Group G H f g h)})
+        ( λ where
+          (g , refl) (h , refl) →
+            unit-trunc-Prop
+              ( mul-Group G g h , preserves-mul-hom-Group G H f g h))
 
   abstract
     is-closed-under-inverses-image-hom-Group :
@@ -88,9 +89,10 @@ module _
     is-closed-under-inverses-image-hom-Group x K =
       apply-universal-property-trunc-Prop K
         ( subset-image-hom-Group (inv-Group H x))
-        ( λ { (g , refl) →
-              unit-trunc-Prop
-                ( inv-Group G g , preserves-inv-hom-Group G H f g)})
+        ( λ where
+          (g , refl) →
+            unit-trunc-Prop
+              ( inv-Group G g , preserves-inv-hom-Group G H f g))
 
   is-subgroup-image-hom-Group :
     is-subgroup-subset-Group H subset-image-hom-Group

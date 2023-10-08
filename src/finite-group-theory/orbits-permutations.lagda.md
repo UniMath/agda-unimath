@@ -463,12 +463,11 @@ module _
         apply-universal-property-trunc-Prop
           ( Q)
           ( pr1 same-orbits-permutation a c)
-          ( λ { (k2 , q) →
-                ( unit-trunc-Prop
-                  ( pair
-                    ( k2 +ℕ k1)
-                    ( (iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
-                      ( ap (iterate k2 (map-equiv f)) p ∙ q))))}))
+          ( λ (k2 , q) →
+            ( unit-trunc-Prop
+              ( ( k2 +ℕ k1) ,
+                ( (iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
+                  ( ap (iterate k2 (map-equiv f)) p ∙ q))))))
 
   abstract
     is-decidable-same-orbits-permutation :
@@ -1126,23 +1125,25 @@ module _
             (λ pa → lemma2 g (pair (pr1 pa) (inl (pr2 pa)))))
         ( is-equiv-is-prop is-prop-type-trunc-Prop
           ( is-prop-type-Prop (coprod-sim-Equivalence-Relation-a-b-Prop g P x))
-          ( λ {
+          ( λ where
             (inl T) →
-            apply-universal-property-trunc-Prop T
-              ( prop-Equivalence-Relation (same-orbits-permutation-count g) x a)
-              ( λ pa →
-                lemma3
-                  ( lemma2
-                    ( composition-transposition-a-b g)
-                    ( pair (pr1 pa) (inl (pr2 pa))))) ;
+              apply-universal-property-trunc-Prop T
+                ( prop-Equivalence-Relation
+                  ( same-orbits-permutation-count g) x a)
+                ( λ pa →
+                  lemma3
+                    ( lemma2
+                      ( composition-transposition-a-b g)
+                      ( pair (pr1 pa) (inl (pr2 pa)))))
             (inr T) →
-            apply-universal-property-trunc-Prop T
-              ( prop-Equivalence-Relation (same-orbits-permutation-count g) x a)
-              ( λ pa →
-                lemma3
-                  ( lemma2
-                    ( composition-transposition-a-b g)
-                    ( pair (pr1 pa) (inr (pr2 pa)))))}))
+              apply-universal-property-trunc-Prop T
+                ( prop-Equivalence-Relation
+                  ( same-orbits-permutation-count g) x a)
+                ( λ pa →
+                  lemma3
+                    ( lemma2
+                      ( composition-transposition-a-b g)
+                      ( (pr1 pa) , (inr (pr2 pa)))))))
       where
       minimal-element-iterate-2-a-b :
         ( g : X ≃ X) →
@@ -1170,17 +1171,18 @@ module _
       equal-iterate-transposition-same-orbits g pa k ineq =
         equal-iterate-transposition x g
           ( λ k' → le-ℕ k' (pr1 (minimal-element-iterate-2-a-b g pa)))
-          ( λ k' p → pair
-            ( λ q →
-              contradiction-le-ℕ k'
-                ( pr1 (minimal-element-iterate-2-a-b g pa))
-                ( p)
-                ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inl q)))
-            ( λ r →
-              contradiction-le-ℕ k'
-                ( pr1 (minimal-element-iterate-2-a-b g pa))
-                ( p)
-                ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inr r))))
+          ( λ k' p →
+            pair
+              ( λ q →
+                contradiction-le-ℕ k'
+                  ( pr1 (minimal-element-iterate-2-a-b g pa))
+                  ( p)
+                  ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inl q)))
+              ( λ r →
+                contradiction-le-ℕ k'
+                  ( pr1 (minimal-element-iterate-2-a-b g pa))
+                  ( p)
+                  ( pr2 (pr2 (minimal-element-iterate-2-a-b g pa)) k' (inr r))))
           ( λ k' ineq' _ →
             transitive-le-ℕ k'
               ( succ-ℕ k')

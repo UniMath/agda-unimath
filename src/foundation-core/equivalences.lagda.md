@@ -581,7 +581,7 @@ module _
                   ( inv (coherence-map-inv-is-equiv H x))
                   ( inv (ap-id p))) ∙
                 ( nat-htpy (is-section-map-inv-is-equiv H) p))))))
-      ( λ {refl → left-inv (is-retraction-map-inv-is-equiv H x)})
+      ( λ where refl → left-inv (is-retraction-map-inv-is-equiv H x))
 
   equiv-ap :
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)

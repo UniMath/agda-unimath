@@ -497,7 +497,7 @@ module _
       ( λ x p →
         apply-universal-property-trunc-Prop p
           ( subset-left-ideal-Ring R J x)
-          ( λ { (i , refl) → H i}))
+          ( λ where (i , refl) → H i))
 ```
 
 ## Properties
@@ -528,8 +528,9 @@ module _
   forward-inclusion-idempotent-left-ideal-subset-Ring x H =
     apply-universal-property-trunc-Prop H
       ( subset-left-ideal-Ring R I x)
-      ( λ { (l , refl) →
-            cases-forward-inclusion-idempotent-left-ideal-subset-Ring l})
+      ( λ where
+        (l , refl) →
+          cases-forward-inclusion-idempotent-left-ideal-subset-Ring l)
 
   backward-inclusion-idempotent-left-ideal-subset-Ring :
     leq-left-ideal-Ring R

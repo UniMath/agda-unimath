@@ -117,8 +117,9 @@ module _
         ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
         ( x , f)
         ( ( inv (f (zero-Fin 1))) ,
-          ( λ { ( inl (inr star)) → inv (left-inv (f (zero-Fin 1))) ;
-                ( inr star) → refl}))
+          ( λ where
+            ( inl (inr star)) → inv (left-inv (f (zero-Fin 1)))
+            ( inr star) → refl))
 
     is-equiv-map-compute-symmetric-Id :
       is-equiv (map-compute-symmetric-Id)

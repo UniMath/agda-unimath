@@ -314,7 +314,7 @@ is-nonzero-least-nontrivial-divisor-ℕ n H =
     ( nat-least-nontrivial-divisor-ℕ n H)
     ( n)
     ( div-least-nontrivial-divisor-ℕ n H)
-    ( λ { refl → H})
+    ( λ where refl → H)
 ```
 
 ### The least nontrivial divisor of a number `> 1` is prime

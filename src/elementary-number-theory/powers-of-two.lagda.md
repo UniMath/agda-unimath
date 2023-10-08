@@ -62,13 +62,13 @@ has-pair-expansion-is-even-or-odd n =
   ( λ m → (is-even-ℕ m + is-odd-ℕ m) → (pair-expansion m))
   ( λ x → (0 , 0) , refl)
   ( λ k f →
-    ( λ {
+    ( λ where
       ( inl x) →
         ( let s = has-odd-expansion-is-odd k (is-odd-is-even-succ-ℕ k x)
           in pair
             ( 0 , (succ-ℕ (pr1 s)))
             ( ( ap ((succ-ℕ ∘ succ-ℕ) ∘ succ-ℕ) (left-unit-law-add-ℕ _)) ∙
-            ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 s))))) ;
+              ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 s)))))
       ( inr x) →
         ( let e : is-even-ℕ k
               e = is-even-is-odd-succ-ℕ k x
@@ -96,7 +96,7 @@ has-pair-expansion-is-even-or-odd n =
                         ( ( ap
                             ( succ-ℕ ∘ succ-ℕ)
                             ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
-                            ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))}))
+                            ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))))
   ( n)
 
 has-pair-expansion : (n : ℕ) → pair-expansion n

@@ -271,7 +271,7 @@ pr1 (is-section-inv-precomp-vector-set-quotient n A R X) =
   inv-precomp-vector-set-quotient n A R X
 pr2 (is-section-inv-precomp-vector-set-quotient {l} {l1} {l2} zero-ℕ A R X) f =
   eq-pair-Σ
-    ( eq-htpy (λ {(map-raise star) → refl}))
+    ( eq-htpy (λ where (map-raise star) → refl))
     ( eq-is-prop
       ( is-prop-reflects-Equivalence-Relation
         ( raise-indiscrete-Equivalence-Relation l2 (raise-unit l1))
@@ -319,7 +319,7 @@ is-retraction-inv-precomp-vector-set-quotient :
 pr1 (is-retraction-inv-precomp-vector-set-quotient n A R X) =
   inv-precomp-vector-set-quotient n A R X
 pr2 (is-retraction-inv-precomp-vector-set-quotient zero-ℕ A R X) f =
-  eq-htpy (λ {(map-raise star) → refl})
+  eq-htpy (λ where (map-raise star) → refl)
 pr2 (is-retraction-inv-precomp-vector-set-quotient (succ-ℕ n) A R X) f =
   ap (_∘ set-quotient-vector-prod-set-quotient)
     is-inv-map-inv-equiv-f ∙ lemma-f

@@ -91,11 +91,12 @@ module _
   is-closed-under-conjugation-generating-subset-normal-closure-Subgroup x y s =
     apply-universal-property-trunc-Prop s
       ( generating-subset-normal-closure-Subgroup (conjugation-Group G x y))
-      ( λ { (z , h , refl) →
-            unit-trunc-Prop
-              ( mul-Group G x z ,
-                h ,
-                compute-conjugation-mul-Group G x z (pr1 h))})
+      ( λ where
+        (z , h , refl) →
+          unit-trunc-Prop
+            ( mul-Group G x z ,
+              h ,
+              compute-conjugation-mul-Group G x z (pr1 h)))
 
   subgroup-normal-closure-Subgroup : Subgroup (l1 ⊔ l2) G
   subgroup-normal-closure-Subgroup =
@@ -192,8 +193,8 @@ module _
   contains-generating-subset-normal-closure-Normal-Subgroup N u x g =
     apply-universal-property-trunc-Prop g
       ( subset-Normal-Subgroup G N x)
-      ( λ { (z , (y , h) , refl) →
-            is-normal-Normal-Subgroup G N z y (u y h)})
+      ( λ where
+        (z , (y , h) , refl) → is-normal-Normal-Subgroup G N z y (u y h))
 
   backward-implication-is-normal-closure-normal-closure-Subgroup :
     {l : Level} (N : Normal-Subgroup l G) →

@@ -45,7 +45,7 @@ finEq zero-Fin (succ-Fin b) = inr (λ ())
 finEq (succ-Fin a) zero-Fin = inr (λ ())
 finEq (succ-Fin a) (succ-Fin b) with finEq a b
 ... | inl eq = inl (ap succ-Fin eq)
-... | inr neq = inr (λ { refl → neq refl})
+... | inr neq = inr (λ where refl → neq refl)
 
 getVec : ∀ {n} {l} {A : UU l} → vec A n → Fin n → A
 getVec (x ∷ v) zero-Fin = x

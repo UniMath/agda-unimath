@@ -633,13 +633,15 @@ needed.
     pair
       ( λ H → map-universal-property-trunc-Prop
         ( trunc-Prop ((v ＝ x) + (v ＝ y)))
-        ( λ { ( map-raise true , p) → unit-trunc-Prop (inl (inv p)) ;
-              ( map-raise false , p) → unit-trunc-Prop (inr (inv p))})
+        ( λ where
+          ( map-raise true , p) → unit-trunc-Prop (inl (inv p))
+          ( map-raise false , p) → unit-trunc-Prop (inr (inv p)))
         ( ∈-cumulative-hierarchy-mere-preimage H))
       ( λ H → mere-preimage-∈-cumulative-hierarchy
         ( map-trunc-Prop
-          ( λ { ( inl p) → (map-raise true , inv p) ;
-                ( inr p) → (map-raise false , inv p)})
+          ( λ where
+            ( inl p) → (map-raise true , inv p)
+            ( inr p) → (map-raise false , inv p))
           ( H)))
 ```
 
@@ -685,8 +687,7 @@ needed.
         ( λ x H →
           mere-preimage-∈-cumulative-hierarchy
             ( map-trunc-Prop
-              ( λ {((map-raise n) , refl) →
-                map-raise (succ-ℕ n) , refl})
+              ( λ where ((map-raise n) , refl) → (map-raise (succ-ℕ n) , refl))
             ( ∈-cumulative-hierarchy-mere-preimage H)))
 ```
 
@@ -729,29 +730,31 @@ needed.
   replacement-cumulative-hierarchy x r =
     map-universal-property-trunc-Prop
       ( ∃-Prop (type-pseudo-cumulative-hierarchy V) _)
-      ( λ {(A , f , refl) →
-        unit-trunc-Prop
-          ( pair
-            ( set-pseudo-cumulative-hierarchy V (r ∘ f))
-            ( λ y →
-              ( pair
-                ( λ H →
-                  map-trunc-Prop
-                    ( λ {(a , refl) →
-                      pair (f a)
-                        ( pair
+      ( λ where
+        (A , f , refl) →
+          unit-trunc-Prop
+            ( ( set-pseudo-cumulative-hierarchy V (r ∘ f)) ,
+              ( λ y →
+                ( pair
+                  ( λ H →
+                    map-trunc-Prop
+                      ( λ where
+                        (a , refl) →
+                          (f a) ,
                           ( mere-preimage-∈-cumulative-hierarchy
-                            ( unit-trunc-Prop (a , refl)))
-                          ( refl))})
-                    ( ∈-cumulative-hierarchy-mere-preimage H))
-                ( λ H → mere-preimage-∈-cumulative-hierarchy
-                  ( map-universal-property-trunc-Prop
-                    ( ∃-Prop A _)
-                    ( λ {(z , K , refl) →
-                      ( map-trunc-Prop
-                        ( λ {(a , refl) → (a , refl)})
-                        ( ∈-cumulative-hierarchy-mere-preimage K))})
-                    ( H))))))})
+                            ( unit-trunc-Prop (a , refl))) ,
+                          ( refl))
+                      ( ∈-cumulative-hierarchy-mere-preimage H))
+                  ( λ H →
+                    mere-preimage-∈-cumulative-hierarchy
+                      ( map-universal-property-trunc-Prop
+                        ( ∃-Prop A _)
+                        ( λ where
+                          (z , K , refl) →
+                            map-trunc-Prop
+                              ( λ where (a , refl) → (a , refl))
+                              ( ∈-cumulative-hierarchy-mere-preimage K))
+                        ( H)))))))
       ( underlying-function-cumulative-hierarchy x)
 ```
 

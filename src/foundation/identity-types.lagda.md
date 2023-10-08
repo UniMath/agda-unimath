@@ -103,8 +103,8 @@ module _
   pr2 equiv-concat-equiv =
     is-equiv-is-invertible
       equiv-concat
-      (λ { refl → refl})
-      (λ e → eq-htpy (λ y → eq-htpy-equiv (λ { refl → right-unit})))
+      (λ where refl → refl)
+      (λ e → eq-htpy (λ y → eq-htpy-equiv (λ where refl → right-unit)))
 
   inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
   inv-concat' x q = concat' x (inv q)

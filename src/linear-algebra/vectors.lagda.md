@@ -235,11 +235,12 @@ module _
   is-retraction-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
   is-retraction-functional-vec-vec (succ-ℕ n) v =
     eq-htpy
-      ( λ { ( inl x) →
-            htpy-eq
-              ( is-retraction-functional-vec-vec n (tail-functional-vec n v))
-              ( x) ;
-            ( inr star) → refl})
+      ( λ where
+        ( inl x) →
+          htpy-eq
+            ( is-retraction-functional-vec-vec n (tail-functional-vec n v))
+            ( x)
+        ( inr star) → refl)
 
   is-equiv-listed-vec-functional-vec :
     (n : ℕ) → is-equiv (listed-vec-functional-vec n)

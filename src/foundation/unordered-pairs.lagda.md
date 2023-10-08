@@ -539,7 +539,9 @@ is-surjective-standard-unordered-pair (I , a) =
             ( standard-unordered-pair _ _)
             ( I , a)
             ( e)
-            ( λ { (inl (inr star)) → refl ; (inr star) → refl})))
+            ( λ where
+              (inl (inr star)) → refl
+              (inr star) → refl)))
 ```
 
 ### For every unordered pair `p` and every element `i` in its underlying type, `p` is equal to a standard unordered pair

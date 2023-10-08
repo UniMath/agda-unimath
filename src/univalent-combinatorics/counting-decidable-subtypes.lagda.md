@@ -97,7 +97,7 @@ count-decidable-subtype' P (succ-ℕ k) e
               ( λ x → is-in-decidable-subtype P (map-equiv e (inl x))))
           ( Σ ( unit)
               ( λ x → is-in-decidable-subtype P (map-equiv e (inr x))))
-          ( λ { (pair star p) → f p}))
+          ( λ where (star , p) → f p))
         ( count-decidable-subtype'
           ( λ x → P (map-equiv e (inl x)))
           ( k)

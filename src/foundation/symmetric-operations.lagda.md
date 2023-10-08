@@ -208,7 +208,7 @@ module _
           apply-universal-property-trunc-Prop
             ( is-surjective-standard-unordered-pair p)
             ( Id-Prop B (f p) (g p))
-            ( λ { (x , y , refl) → H x y})))
+            ( λ where (x , y , refl) → H x y)))
 
   is-contr-total-htpy-symmetric-operation-Set :
     is-contr

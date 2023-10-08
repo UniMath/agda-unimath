@@ -364,13 +364,14 @@ module _
     is-normal-image-hom-element-is-emb-ev-element-hom-Group x (y , p) =
       apply-universal-property-trunc-Prop p
         ( subset-image-hom-element-Group G g (conjugation-Group G x y))
-        ( λ { (k , refl) →
-              is-closed-under-eq-image-hom-element-Group' G g
-                ( unit-trunc-Prop (k , refl))
-                ( ( preserves-integer-powers-conjugation-Group G k x g) ∙
-                  ( ap
-                    ( integer-power-Group G k)
-                    ( compute-conjugation-is-emb-ev-element-hom-Group' x)))})
+        ( λ where
+          (k , refl) →
+            is-closed-under-eq-image-hom-element-Group' G g
+              ( unit-trunc-Prop (k , refl))
+              ( ( preserves-integer-powers-conjugation-Group G k x g) ∙
+                ( ap
+                  ( integer-power-Group G k)
+                  ( compute-conjugation-is-emb-ev-element-hom-Group' x))))
 
   private
     N : Normal-Subgroup l G
@@ -423,8 +424,9 @@ module _
                   ( set-Group H)
                   ( map-hom-Group G H h x)
                   ( map-hom-Group G H k x))
-                ( λ { (z , refl) →
-                      eq-integer-power-hom-Group G H h k z g (p ∙ inv q)}))))
+                ( λ where
+                  (z , refl) →
+                      eq-integer-power-hom-Group G H h k z g (p ∙ inv q)))))
 
   is-emb-ev-element-is-generating-element-Group :
     is-generating-element-Group G g → is-emb-ev-element-hom-Group G g
@@ -465,8 +467,9 @@ module _
         ( U x)
         ( U y)
         ( Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x))
-        ( λ { (k , refl) (l , refl) →
-              commute-integer-powers-Group G k l refl})
+        ( λ where
+          (k , refl) (l , refl) →
+              commute-integer-powers-Group G k l refl)
 
   commutative-mul-is-generating-element-Group :
     (U : is-generating-element-Group G g) →
@@ -561,12 +564,13 @@ module _
           ( ev-element-hom-Group-With-Generating-Element G
             ( group-Group-With-Generating-Element G))
           ( x))
-        ( λ { (k , refl) →
-              unit-trunc-Prop
-                ( hom-integer-multiple-Ab
-                    ( abelian-group-Group-With-Generating-Element G)
-                    ( k) ,
-                  refl)})
+        ( λ where
+          (k , refl) →
+            unit-trunc-Prop
+              ( hom-integer-multiple-Ab
+                  ( abelian-group-Group-With-Generating-Element G)
+                  ( k) ,
+                refl))
 
   is-equiv-ev-element-Group-With-Generating-Element :
     is-equiv
@@ -653,11 +657,12 @@ module _
       ( is-surjective-hom-element-Group-With-Generating-Element G x)
       ( is-surjective-hom-element-Group-With-Generating-Element G y)
       ( Id-Prop (set-Group-With-Generating-Element G) _ _)
-      ( λ { (k , refl) (l , refl) →
-            commute-integer-multiples-diagonal-Ring
-              ( ring-Group-With-Generating-Element)
-              ( k)
-              ( l)})
+      ( λ where
+        (k , refl) (l , refl) →
+          commute-integer-multiples-diagonal-Ring
+            ( ring-Group-With-Generating-Element)
+            ( k)
+            ( l))
 
   commutative-ring-Group-With-Generating-Element : Commutative-Ring l
   pr1 commutative-ring-Group-With-Generating-Element =

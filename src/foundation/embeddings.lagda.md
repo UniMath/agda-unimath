@@ -277,9 +277,10 @@ module _
     is-emb-equiv-refl-to-refl e p x y =
       is-equiv-htpy-equiv
         (inv-equiv (e x y))
-        λ { refl →
-              inv (is-retraction-map-inv-equiv (e x x) refl) ∙
-              ap (map-equiv (inv-equiv (e x x))) (p x)}
+        ( λ where
+          refl →
+            inv (is-retraction-map-inv-equiv (e x x) refl) ∙
+            ap (map-equiv (inv-equiv (e x x))) (p x))
 ```
 
 ### Embeddings are closed under pullback

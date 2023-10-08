@@ -142,7 +142,7 @@ module _
     apply-universal-property-trunc-Prop
       ( mere-eq-is-0-connected H (point-Pointed-Type B) x)
       ( is-small-Prop l2 (x ＝ y))
-      ( λ { refl → (E y , inv-equiv (T y))})
+      ( λ where refl → (E y , inv-equiv (T y)))
 ```
 
 ### The type of pointed torsorial type families of universe level `l` over a pointed connected type is equivalent to the proposition that `B` is locally `l`-small
