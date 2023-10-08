@@ -5,12 +5,12 @@ import re
 
 # In mdbook-catppuccin this is merged to catppuccin.css, so we'll need
 # to update this script accordingly
-CATPPUCCIN_HIGHLIGHT_FILE = 'theme/catppuccin-highlight.css'
+CATPPUCCIN_HIGHLIGHT_FILE = 'theme/catppuccin.css'
 AGDA_HIGHLIGHT_FILE = 'website/css/Agda-highlight.css'
 
 # First group -> theme name
 # Second group -> token class
-SELECTOR_HLJS_REGEX = re.compile(r'^\.(\w+) code \.hljs-(.+?) {')
+SELECTOR_HLJS_REGEX = re.compile(r'^\.(\w+) \.hljs-(.+?) {')
 
 # First group -> theme name
 SELECTOR_CODE_REGEX = re.compile(r'^\.(\w+) code {')

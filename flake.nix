@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     mdbook-catppuccin = {
-      url = "github:catppuccin/mdBook";
+      url = "github:catppuccin/mdBook/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
