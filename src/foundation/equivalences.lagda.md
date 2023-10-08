@@ -141,13 +141,18 @@ module _
 
 ### Equivalences have a contractible type of sections
 
-**Proof:** Since equivalences are [contractible maps](foundation.contractible-maps.md), and products of [contractible types](foundation-core.contractible-types.md) are contractible, it follows that the type
+**Proof:** Since equivalences are
+[contractible maps](foundation.contractible-maps.md), and products of
+[contractible types](foundation-core.contractible-types.md) are contractible, it
+follows that the type
 
 ```text
   (b : B) → fiber f b
 ```
 
-is contractible, for any equivalence `f`. However, by the [type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md) it follows that this type is equivalent to the type
+is contractible, for any equivalence `f`. However, by the
+[type theoretic principle of choice](foundation.type-theoretic-principle-of-choice.md)
+it follows that this type is equivalent to the type
 
 ```text
   Σ (B → A) (λ g → (b : B) → f (g b) ＝ b),
@@ -171,19 +176,25 @@ module _
 
 ### Equivalences have a contractible type of retractions
 
-**Proof:** Since precomposing by an equivalence is an equivalence, and equivalences are contractible maps, it follows that the [fiber](foundation-core.fibers-of-maps.md) of the map
+**Proof:** Since precomposing by an equivalence is an equivalence, and
+equivalences are contractible maps, it follows that the
+[fiber](foundation-core.fibers-of-maps.md) of the map
 
 ```text
   (B → A) → (A → A)
 ```
 
-at `id : A → A` is contractible, i.e., the type `Σ (B → A) (λ h → h ∘ f ＝ id)` is contractible. Furthermore, since fiberwise equivalences induce equivalences on total spaces, it follows from [function extensionality](foundation.function-extensionality.md)` that the type
+at `id : A → A` is contractible, i.e., the type `Σ (B → A) (λ h → h ∘ f ＝ id)`
+is contractible. Furthermore, since fiberwise equivalences induce equivalences
+on total spaces, it follows from
+[function extensionality](foundation.function-extensionality.md)` that the type
 
 ```text
   Σ (B → A) (λ h → h ∘ f ~ id)
 ```
 
-is contractible. In other words, the type of retractions of an equivalence is contractible.
+is contractible. In other words, the type of retractions of an equivalence is
+contractible.
 
 ```agda
 module _
