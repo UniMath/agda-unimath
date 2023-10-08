@@ -7,33 +7,21 @@ module modal-logic.modal-logic-syntax where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.double-negation
-open import foundation.contractible-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.sets
-open import foundation.booleans
 open import foundation.binary-relations
-open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.powersets
 open import foundation.universe-levels
-open import foundation.unit-type
-open import foundation.action-on-identifications-functions
-open import foundation.logical-equivalences
 open import foundation.inhabited-types
-
-open import foundation-core.transport-along-identifications
-open import foundation-core.coproduct-types
-open import foundation-core.empty-types
-open import foundation-core.propositions
-open import foundation-core.subtypes
-open import foundation-core.negation
-open import foundation-core.identity-types
-
-open import elementary-number-theory.natural-numbers
+open import foundation.coproduct-types
+open import foundation.function-types
+open import foundation.empty-types
+open import foundation.unit-type
+open import foundation.negation
+open import foundation.double-negation
+open import foundation.propositional-truncations
 ```
 
 </details>
@@ -46,24 +34,24 @@ TODO
 
 ```agda
 -- I'am not found in lib
-record Lift {a : Level} (l : Level) (A : UU a) : UU (a ⊔ l) where
-  constructor lift
-  field lower : A
-open Lift
+module _
+  {a : Level} (l : Level)
+  where
 
-is-decidable-type-prop-bool : (b : bool) → is-decidable (type-prop-bool b)
-is-decidable-type-prop-bool true = inl star
-is-decidable-type-prop-bool false = inr (λ ())
+  record Lift (A : UU a) : UU (a ⊔ l) where
+    constructor lift
+    field lower : A
+  open Lift public
+
+  Lift-Prop : Prop a → Prop (a ⊔ l)
+  Lift-Prop A =
+    Lift (type-Prop A) ,
+    is-prop-equiv'
+      (lift , is-equiv-is-invertible lower (λ _ → refl) (λ _ → refl))
+      (is-prop-type-Prop A)
 
 LEM : (l : Level) → UU (lsuc l)
 LEM l = (T : UU l) → is-decidable T
-
--- bool or type?
-in-subset : {l : Level} → UU l → UU l
-in-subset A = A → bool
-
--- in-subset : {l : Level} → UU l → UU (l ⊔ lsuc lzero)
--- in-subset A = A → UU lzero
 ```
 
 **Syntax**
@@ -122,104 +110,88 @@ module _
     field
       R : Relation l1 w
       frame-inhabited : is-inhabited w
-
   open kripke-frame public
 
-  module _
-    {l2 : Level}
-    (i : UU l2)
-    where
+module _
+  {l1 l2 : Level}
+  (w : UU l1) (i : UU l2)
+  (l3 : Level)
+  where
 
-    private
-      l = l1 ⊔ l2
+  record kripke-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3) where
+    constructor model
+    field
+      F : kripke-frame w
+      V : i → w → UU l3
+  open kripke-model public
 
-    record kripke-model : UU (lsuc l) where
-      constructor model
-      field
-        F : kripke-frame
-        V : i → in-subset w
 
-    open kripke-model public
+module _
+  {l1 l2 l3 : Level}
+  {w : UU l1} {i : UU l2}
+  where
 
-    _,_⊨_ : kripke-model → w → formula i → UU l
-    M , x ⊨ var n = Lift _ (type-prop-bool (V M n x))
-    M , x ⊨ ⊥ = Lift _ empty
-    M , x ⊨ (a ⇒ b) = ¬ (M , x ⊨ a) + M , x ⊨ b
-    M , x ⊨ (□ a) = ∀ y → R (F M) x y → M , y ⊨ a
+  private
+    l = l1 ⊔ l2 ⊔ l3
 
-    _,_⊭_ : kripke-model → w → formula i → UU l
-    M , x ⊭ a = ¬ (M , x ⊨ a)
+  _,_⊨_ : kripke-model w i l3 → w → formula i → UU l
+  M , x ⊨ var n = Lift l (V M n x)
+  M , x ⊨ ⊥ = Lift l empty
+  M , x ⊨ (a ⇒ b) = M , x ⊨ a → M , x ⊨ b
+  M , x ⊨ (□ a) = ∀ y → R (F M) x y → M , y ⊨ a
 
-    _⊨M_ : kripke-model → formula i → UU l
-    M ⊨M a = ∀ x → M , x ⊨ a
+  _,_⊭_ : kripke-model w i l3 → w → formula i → UU l
+  M , x ⊭ a = ¬ (M , x ⊨ a)
 
-    _⊭M_ : kripke-model → formula i → UU l
-    M ⊭M a = ¬ (M ⊨M a)
+  _⊨M_ : kripke-model w i l3 → formula i → UU l
+  M ⊨M a = ∀ x → M , x ⊨ a
 
-    _⊨F_ : kripke-frame → formula i → UU l
-    F ⊨F a = ∀ V → model F V ⊨M a
-
-    _⊭F_ : kripke-frame → formula i → UU l
-    F ⊭F a = ¬ (F ⊨F a)
-
-    _⊨C_ : in-subset kripke-frame → formula i → UU (lsuc l1 ⊔ l2)
-    C ⊨C a = ∀ F → type-prop-bool (C F) → F ⊨F a
-
-    _⊭C_ : in-subset kripke-frame → formula i → UU (lsuc l1 ⊔ l2)
-    C ⊭C a = ¬ (C ⊨C a)
+  _⊭M_ : kripke-model w i l3 → formula i → UU l
+  M ⊭M a = ¬ (M ⊨M a)
 ```
 
 **Soundness**
 
 ```agda
-    all-frames : in-subset kripke-frame
-    all-frames = λ _ → true
+  is-classical : kripke-model w i l3 → UU l
+  is-classical M = ∀ a x → is-decidable (M , x ⊨ a)
 
-    is-classical : kripke-model → UU l
-    is-classical M = ∀ a x → is-decidable (M , x ⊨ a)
+  soundness : {a : formula i}
+            → ⊢ a
+            → (M : kripke-model w i l3)
+            → is-classical M
+            → M ⊨M a
+  soundness ax-k M dec x = λ fa _ → fa
+  soundness ax-s M dec x = λ fabc fab fa → fabc fa (fab fa)
+  soundness {_ ⇒ a} ax-dn M dec x with dec a x
+  ... | inl fa = λ _ → fa
+  ... | inr nfa = λ fnna → ex-falso (lower (fnna (λ fa → lift (nfa fa))))
+  soundness ax-n M dec x = λ fab fa y r → fab y r (fa y r)
+  soundness (mp dab db) M dec x = soundness dab M dec x (soundness db M dec x)
+  soundness (nec d) M dec x y _ = soundness d M dec y
 
-    imp-force : {a b : formula i} {M : kripke-model} {x : w}
-              → M , x ⊨ (a ⇒ b)
-              → M , x ⊨ a
-              → M , x ⊨ b
-    imp-force (inl fab) fa = ex-falso (fab fa)
-    imp-force (inr fab) fa = fab
 
-    soundness : {a : formula i}
-              → ⊢ a
-              → (M : kripke-model)
-              → is-classical M
-              → M ⊨M a
-    soundness (mp dab da) M dec x with soundness dab M dec x
-    ... | inl f = ex-falso (f (soundness da M dec x))
-    ... | inr f = f
-    soundness {a ⇒ (b ⇒ a)} ax-k M dec x with dec a x
-    ... | inl fna = inr (inr fna)
-    ... | inr fa = inl fa
-    soundness {abc ⇒ (ab ⇒ ac)} ax-s M dec x with dec abc x
-    ... | inr fabc = inl fabc
-    ... | inl (inl fna) = inr (inr (inl fna))
-    ... | inl (inr (inr fc)) = inr (inr (inr fc))
-    ... | inl (inr (inl fnb)) with dec ab x
-    ...   | inr fab = inr (inl fab)
-    ...   | inl (inl fna) = inr (inr (inl fna))
-    ...   | inl (inr fb) = ex-falso (fnb fb)
-    soundness {((a ⇒ ⊥) ⇒ ⊥) ⇒ a} ax-dn M dec x with dec a x
-    ... | inl fa = inr fa
-    ... | inr fna with dec (~ (~ a)) x
-    ...   | inl (inl fnna) = ex-falso (fnna (inl fna))
-    ...   | inr fnnna = inl (fnnna)
-    soundness {ab ⇒ (a ⇒ b)} ax-n M dec x with dec ab x
-    ... | inr fab = inl fab
-    ... | inl fab with dec a x
-    ...   | inr fa = inr (inl fa)
-    ...   | inl fa = inr (inr (λ y r → imp-force (fab y r) (fa y r)))
-    soundness (nec d) M dec x y _ = soundness d M dec y
+double-negation-LEM : {l : Level} → ((A : UU l) → ¬¬ A → A) → LEM l
+double-negation-LEM dn A = dn _ λ ndec → ndec (inr (λ a → ndec (inl a)))
 
-    soundness-LEM : {a : formula i}
-                  → LEM l
-                  → ⊢ a
-                  → (M : kripke-model)
-                  → M ⊨M a
-    soundness-LEM lem d M = soundness d M (λ b x → lem _)
+lift-dn : {l1 l2 : Level} {A : UU l1} → ¬¬ A → (Lift l2 A → Lift l2 empty) → Lift l2 empty
+lift-dn dn nA = lift (dn (λ a → lower (nA (lift a))))
+
+required-LEM : ({l1 l2 l3 : Level} (i : UU l2) (a : formula i)
+                → ⊢ a
+                → (w : UU l1)
+                → (M : kripke-model w i l3)
+                → M ⊨M a)
+             → {l : Level} → LEM l
+required-LEM sound {l} =
+  double-negation-LEM λ A nnA → lower (sound unit b ax-dn unit (M A) star (lift-dn nnA))
+  where
+    a = var star
+    b = (~ (~ a)) ⇒ a
+
+    f : kripke-frame unit
+    f = frame (λ _ _ → empty) (unit-trunc-Prop star)
+
+    M : UU l → kripke-model unit unit l
+    M A = model f (λ _ _ → A)
 ```
