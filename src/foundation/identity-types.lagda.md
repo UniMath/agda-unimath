@@ -111,7 +111,8 @@ module _
       eq-htpy (λ y → eq-htpy-equiv (λ where refl → right-unit))
 
   abstract
-    is-equiv-map-concat-equiv : {x x' : A} → is-equiv (map-concat-equiv {x} {x'})
+    is-equiv-map-concat-equiv :
+      {x x' : A} → is-equiv (map-concat-equiv {x} {x'})
     is-equiv-map-concat-equiv =
       is-equiv-is-invertible
         ( equiv-concat)

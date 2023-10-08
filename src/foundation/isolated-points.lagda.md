@@ -42,8 +42,8 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-A point `a : A` is considered to be isolated if `Id a x` is decidable for any
-`x`.
+A point `a : A` is considered to be **isolated** if `a ＝ x` is
+[decidable](foundation.decidable-types.md) for any `x`.
 
 ## Definitions
 
@@ -240,21 +240,38 @@ is-set-isolated-point :
 is-set-isolated-point A =
   is-set-has-decidable-equality (has-decidable-equality-isolated-point A)
 
-abstract
-  decidable-emb-isolated-point :
-    {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪ᵈ A
-  pr1 (decidable-emb-isolated-point {l1} {A} a) =
-    const unit A (pr1 a)
-  pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
+module _
+  {l1 : Level} {A : UU l1} (a : isolated-point A)
+  where
+
+  is-emb-map-isolated-point : is-emb (const unit A (point-isolated-point a))
+  is-emb-map-isolated-point =
     is-emb-comp
       ( inclusion-isolated-point A)
       ( const unit (isolated-point A) a)
       ( is-emb-inclusion-isolated-point A)
       ( is-emb-is-injective
         ( is-set-isolated-point A)
-        ( λ where {star} {star} p → refl))
-  pr2 (pr2 (decidable-emb-isolated-point {l1} {A} a)) x =
-    is-decidable-prod is-decidable-unit (pr2 a x)
+        ( λ {star} {star} p → refl))
+
+  emb-isolated-point : unit ↪ A
+  pr1 emb-isolated-point = const unit A (point-isolated-point a)
+  pr2 emb-isolated-point = is-emb-map-isolated-point
+
+  is-decidable-map-isolated-point :
+    is-decidable-map (const unit A (point-isolated-point a))
+  is-decidable-map-isolated-point x =
+    is-decidable-prod is-decidable-unit (is-isolated-isolated-point a x)
+
+  is-decidable-emb-map-isolated-point :
+    is-decidable-emb (const unit A (point-isolated-point a))
+  pr1 is-decidable-emb-map-isolated-point = is-emb-map-isolated-point
+  pr2 is-decidable-emb-map-isolated-point = is-decidable-map-isolated-point
+
+  decidable-emb-isolated-point : unit ↪ᵈ A
+  pr1 decidable-emb-isolated-point =
+    const unit A (point-isolated-point a)
+  pr2 decidable-emb-isolated-point = is-decidable-emb-map-isolated-point
 ```
 
 ### Types with isolated points can be equipped with a Maybe-structure
