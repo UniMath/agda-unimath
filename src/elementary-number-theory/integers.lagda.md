@@ -66,9 +66,6 @@ zero-ℤ = inr (inl star)
 
 is-zero-ℤ : ℤ → UU lzero
 is-zero-ℤ x = (x ＝ zero-ℤ)
-
-is-nonzero-ℤ : ℤ → UU lzero
-is-nonzero-ℤ k = ¬ (is-zero-ℤ k)
 ```
 
 ### Inclusion of the positive integers
@@ -94,9 +91,6 @@ int-ℕ (succ-ℕ n) = in-pos n
 is-injective-int-ℕ : is-injective int-ℕ
 is-injective-int-ℕ {zero-ℕ} {zero-ℕ} refl = refl
 is-injective-int-ℕ {succ-ℕ x} {succ-ℕ y} refl = refl
-
-is-nonzero-int-ℕ : (n : ℕ) → is-nonzero-ℕ n → is-nonzero-ℤ (int-ℕ n)
-is-nonzero-int-ℕ zero-ℕ H p = H refl
 ```
 
 ### Induction principle on the type of integers
@@ -132,9 +126,9 @@ pred-ℤ (inr (inl star)) = inl zero-ℕ
 pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
 
-ℤ-Endo : Endo lzero
-pr1 ℤ-Endo = ℤ
-pr2 ℤ-Endo = succ-ℤ
+ℤ-Type-With-Endomorphism : Type-With-Endomorphism lzero
+pr1 ℤ-Type-With-Endomorphism = ℤ
+pr2 ℤ-Type-With-Endomorphism = succ-ℤ
 ```
 
 ### The negative of an integer
@@ -333,9 +327,6 @@ is-positive-int-positive-ℤ = pr2
 
 is-nonnegative-is-positive-ℤ : {x : ℤ} → is-positive-ℤ x → is-nonnegative-ℤ x
 is-nonnegative-is-positive-ℤ {inr (inr x)} H = H
-
-is-nonzero-is-positive-ℤ : (x : ℤ) → is-positive-ℤ x → is-nonzero-ℤ x
-is-nonzero-is-positive-ℤ (inr (inr x)) H ()
 
 is-positive-eq-ℤ : {x y : ℤ} → x ＝ y → is-positive-ℤ x → is-positive-ℤ y
 is-positive-eq-ℤ {x} refl = id

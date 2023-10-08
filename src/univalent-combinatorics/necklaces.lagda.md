@@ -47,7 +47,7 @@ module _
   cyclic-necklace : Cyclic-Type l m
   cyclic-necklace = pr1 N
 
-  endo-necklace : Endo l
+  endo-necklace : Type-With-Endomorphism l
   endo-necklace = endo-Cyclic-Type m cyclic-necklace
 
   type-necklace : UU l
@@ -56,7 +56,7 @@ module _
   endomorphism-necklace : type-necklace → type-necklace
   endomorphism-necklace = endomorphism-Cyclic-Type m cyclic-necklace
 
-  is-cyclic-endo-necklace : is-cyclic-Endo m endo-necklace
+  is-cyclic-endo-necklace : is-cyclic-Type-With-Endomorphism m endo-necklace
   is-cyclic-endo-necklace = mere-equiv-endo-Cyclic-Type m cyclic-necklace
 
   colouring-necklace : type-necklace → Fin n

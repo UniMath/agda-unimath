@@ -51,6 +51,7 @@ open import group-theory.dependent-products-semigroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
 open import group-theory.e8-lattice public
+open import group-theory.elements-of-finite-order-groups public
 open import group-theory.embeddings-abelian-groups public
 open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
@@ -108,6 +109,7 @@ open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.multiples-of-elements-abelian-groups public
+open import group-theory.nontrivial-groups public
 open import group-theory.normal-closures-subgroups public
 open import group-theory.normal-cores-subgroups public
 open import group-theory.normal-subgroups public
@@ -164,6 +166,8 @@ open import group-theory.substitution-functor-group-actions public
 open import group-theory.surjective-group-homomorphisms public
 open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
+open import group-theory.torsion-elements-groups public
+open import group-theory.torsion-free-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public

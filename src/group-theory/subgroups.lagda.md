@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -21,6 +22,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
 open import foundation.powersets
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -376,6 +378,13 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
+  has-same-elements-prop-Subgroup :
+    {l3 : Level} → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-prop-Subgroup K =
+    has-same-elements-subtype-Prop
+      ( subset-Subgroup G H)
+      ( subset-Subgroup G K)
+
   has-same-elements-Subgroup :
     {l3 : Level} → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Subgroup K =
@@ -492,6 +501,17 @@ preserves-order-hom-Large-Preorder
   preserves-order-subset-Subgroup G
 ```
 
+### The type of subgroups of a group is a set
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  is-set-Subgroup : {l2 : Level} → is-set (Subgroup l2 G)
+  is-set-Subgroup = is-set-type-Poset (Subgroup-Poset _ G)
+```
+
 ### Every subgroup induces two equivalence relations
 
 #### The equivalence relation where `x ~ y` if and only if `x⁻¹ y ∈ H`
@@ -600,4 +620,70 @@ module _
   pr1 (pr2 left-eq-rel-Subgroup) = refl-left-sim-Subgroup
   pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symmetric-left-sim-Subgroup
   pr2 (pr2 (pr2 left-eq-rel-Subgroup)) = transitive-left-sim-Subgroup
+```
+
+### Any proposition `P` induces a subgroup of any group `G`
+
+The subset consisting of elements `x : G` such that `(1 ＝ x) ∨ P` holds is
+always a subgroup of `G`. This subgroup consists only of the unit element if `P`
+is false, and it is the [full subgroup](group-theory.full-subgroups.md)`if`P` is
+true.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (P : Prop l2)
+  where
+
+  subset-subgroup-Prop : subset-Group (l1 ⊔ l2) G
+  subset-subgroup-Prop x =
+    disj-Prop (Id-Prop (set-Group G) (unit-Group G) x) P
+
+  contains-unit-subgroup-Prop :
+    contains-unit-subset-Group G subset-subgroup-Prop
+  contains-unit-subgroup-Prop =
+    inl-disj-Prop (Id-Prop (set-Group G) (unit-Group G) (unit-Group G)) P refl
+
+  is-closed-under-multiplication-subgroup-Prop' :
+    (x y : type-Group G) →
+    ((unit-Group G ＝ x) + type-Prop P) →
+    ((unit-Group G ＝ y) + type-Prop P) →
+    ((unit-Group G ＝ mul-Group G x y) + type-Prop P)
+  is-closed-under-multiplication-subgroup-Prop' ._ ._ (inl refl) (inl refl) =
+    inl (inv (left-unit-law-mul-Group G _))
+  is-closed-under-multiplication-subgroup-Prop' ._ y (inl refl) (inr q) =
+    inr q
+  is-closed-under-multiplication-subgroup-Prop' x y (inr p) (inl β) =
+    inr p
+  is-closed-under-multiplication-subgroup-Prop' x y (inr p) (inr q) =
+    inr p
+
+  is-closed-under-multiplication-subgroup-Prop :
+    is-closed-under-multiplication-subset-Group G subset-subgroup-Prop
+  is-closed-under-multiplication-subgroup-Prop x y H K =
+    apply-twice-universal-property-trunc-Prop H K
+      ( disj-Prop (Id-Prop (set-Group G) _ _) P)
+      ( λ H' K' →
+        unit-trunc-Prop
+          ( is-closed-under-multiplication-subgroup-Prop' x y H' K'))
+
+  is-closed-under-inverses-subgroup-Prop' :
+    (x : type-Group G) → ((unit-Group G ＝ x) + type-Prop P) →
+    ((unit-Group G ＝ inv-Group G x) + type-Prop P)
+  is-closed-under-inverses-subgroup-Prop' ._ (inl refl) =
+    inl (inv (inv-unit-Group G))
+  is-closed-under-inverses-subgroup-Prop' x (inr p) =
+    inr p
+
+  is-closed-under-inverses-subgroup-Prop :
+    is-closed-under-inverses-subset-Group G subset-subgroup-Prop
+  is-closed-under-inverses-subgroup-Prop x H =
+    apply-universal-property-trunc-Prop H
+      ( disj-Prop (Id-Prop (set-Group G) _ _) P)
+      ( unit-trunc-Prop ∘ is-closed-under-inverses-subgroup-Prop' x)
+
+  subgroup-Prop : Subgroup (l1 ⊔ l2) G
+  pr1 subgroup-Prop = subset-subgroup-Prop
+  pr1 (pr2 subgroup-Prop) = contains-unit-subgroup-Prop
+  pr1 (pr2 (pr2 subgroup-Prop)) = is-closed-under-multiplication-subgroup-Prop
+  pr2 (pr2 (pr2 subgroup-Prop)) = is-closed-under-inverses-subgroup-Prop
 ```
