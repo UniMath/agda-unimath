@@ -117,7 +117,7 @@ is-trunc-map-ev-point-is-connected k {A} {B} a H K =
       ( universal-property-contr-is-contr star is-contr-unit B))
     ( is-trunc-map-precomp-Π-is-surjective k
       ( is-surjective-point-is-0-connected a H)
-      ( λ _ → B , K))
+      ( λ _ → (B , K)))
 
 equiv-dependent-universal-property-is-0-connected :
   {l1 : Level} {A : UU l1} (a : A) → is-0-connected A →

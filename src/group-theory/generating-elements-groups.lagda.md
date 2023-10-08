@@ -469,7 +469,7 @@ module _
         ( Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x))
         ( λ where
           ( k , refl) (l , refl) →
-              commute-integer-powers-Group G k l refl)
+            commute-integer-powers-Group G k l refl)
 
   commutative-mul-is-generating-element-Group :
     (U : is-generating-element-Group G g) →
