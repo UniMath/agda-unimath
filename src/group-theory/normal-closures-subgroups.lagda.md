@@ -85,18 +85,20 @@ module _
     unit-trunc-Prop
       ( unit-Group G , (x , h) , compute-conjugation-unit-Group G x)
 
-  is-closed-under-conjugation-generating-subset-normal-closure-Subgroup :
-    is-closed-under-conjugation-subset-Group G
-      generating-subset-normal-closure-Subgroup
-  is-closed-under-conjugation-generating-subset-normal-closure-Subgroup x y s =
-    apply-universal-property-trunc-Prop s
-      ( generating-subset-normal-closure-Subgroup (conjugation-Group G x y))
-      ( λ where
-        ( z , h , refl) →
-          unit-trunc-Prop
-            ( mul-Group G x z ,
-              h ,
-              compute-conjugation-mul-Group G x z (pr1 h)))
+  abstract
+    is-closed-under-conjugation-generating-subset-normal-closure-Subgroup :
+      is-closed-under-conjugation-subset-Group G
+        generating-subset-normal-closure-Subgroup
+    is-closed-under-conjugation-generating-subset-normal-closure-Subgroup
+      x y s =
+      apply-universal-property-trunc-Prop s
+        ( generating-subset-normal-closure-Subgroup (conjugation-Group G x y))
+        ( λ where
+          ( z , h , refl) →
+            unit-trunc-Prop
+              ( mul-Group G x z ,
+                h ,
+                compute-conjugation-mul-Group G x z (pr1 h)))
 
   subgroup-normal-closure-Subgroup : Subgroup (l1 ⊔ l2) G
   subgroup-normal-closure-Subgroup =
@@ -186,15 +188,16 @@ module _
       ( u)
       ( contains-subgroup-normal-closure-Subgroup)
 
-  contains-generating-subset-normal-closure-Normal-Subgroup :
-    {l : Level} (N : Normal-Subgroup l G) →
-    leq-Subgroup G H (subgroup-Normal-Subgroup G N) →
-    generating-subset-normal-closure-Subgroup ⊆ subset-Normal-Subgroup G N
-  contains-generating-subset-normal-closure-Normal-Subgroup N u x g =
-    apply-universal-property-trunc-Prop g
-      ( subset-Normal-Subgroup G N x)
-      ( λ where
-        ( z , (y , h) , refl) → is-normal-Normal-Subgroup G N z y (u y h))
+  abstract
+    contains-generating-subset-normal-closure-Normal-Subgroup :
+      {l : Level} (N : Normal-Subgroup l G) →
+      leq-Subgroup G H (subgroup-Normal-Subgroup G N) →
+      generating-subset-normal-closure-Subgroup ⊆ subset-Normal-Subgroup G N
+    contains-generating-subset-normal-closure-Normal-Subgroup N u x g =
+      apply-universal-property-trunc-Prop g
+        ( subset-Normal-Subgroup G N x)
+        ( λ where
+          ( z , (y , h) , refl) → is-normal-Normal-Subgroup G N z y (u y h))
 
   backward-implication-is-normal-closure-normal-closure-Subgroup :
     {l : Level} (N : Normal-Subgroup l G) →

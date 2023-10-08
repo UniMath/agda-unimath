@@ -484,19 +484,20 @@ module _
       ( a i)
       ( unit-trunc-Prop (i , refl))
 
-  is-right-ideal-generated-by-family-of-elements-right-ideal-family-of-elements-Ring :
-    is-right-ideal-generated-by-family-of-elements-Ring R a
-      right-ideal-family-of-elements-Ring
-      contains-element-right-ideal-family-of-elements-Ring
-  is-right-ideal-generated-by-family-of-elements-right-ideal-family-of-elements-Ring
-    J H =
-    is-right-ideal-generated-by-subset-right-ideal-subset-Ring R
-      ( generating-subset-right-ideal-family-of-elements-Ring)
-      ( J)
-      ( λ x p →
-        apply-universal-property-trunc-Prop p
-          ( subset-right-ideal-Ring R J x)
-          ( λ where (i , refl) → H i))
+  abstract
+    is-right-ideal-generated-by-family-of-elements-right-ideal-family-of-elements-Ring :
+      is-right-ideal-generated-by-family-of-elements-Ring R a
+        right-ideal-family-of-elements-Ring
+        contains-element-right-ideal-family-of-elements-Ring
+    is-right-ideal-generated-by-family-of-elements-right-ideal-family-of-elements-Ring
+      J H =
+      is-right-ideal-generated-by-subset-right-ideal-subset-Ring R
+        ( generating-subset-right-ideal-family-of-elements-Ring)
+        ( J)
+        ( λ x p →
+          apply-universal-property-trunc-Prop p
+            ( subset-right-ideal-Ring R J x)
+            ( λ where (i , refl) → H i))
 ```
 
 ## Properties
@@ -521,16 +522,17 @@ module _
       ( is-closed-under-right-multiplication-right-ideal-Ring R I x y u)
       ( cases-forward-inclusion-idempotent-right-ideal-subset-Ring l)
 
-  forward-inclusion-idempotent-right-ideal-subset-Ring :
-    leq-right-ideal-Ring R
-      ( right-ideal-subset-Ring R (subset-right-ideal-Ring R I))
-      ( I)
-  forward-inclusion-idempotent-right-ideal-subset-Ring x H =
-    apply-universal-property-trunc-Prop H
-      ( subset-right-ideal-Ring R I x)
-      ( λ where
-        ( l , refl) →
-          cases-forward-inclusion-idempotent-right-ideal-subset-Ring l)
+  abstract
+    forward-inclusion-idempotent-right-ideal-subset-Ring :
+      leq-right-ideal-Ring R
+        ( right-ideal-subset-Ring R (subset-right-ideal-Ring R I))
+        ( I)
+    forward-inclusion-idempotent-right-ideal-subset-Ring x H =
+      apply-universal-property-trunc-Prop H
+        ( subset-right-ideal-Ring R I x)
+        ( λ where
+          ( l , refl) →
+            cases-forward-inclusion-idempotent-right-ideal-subset-Ring l)
 
   backward-inclusion-idempotent-right-ideal-subset-Ring :
     leq-right-ideal-Ring R

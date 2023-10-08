@@ -43,13 +43,10 @@ data group-ops : UU lzero where
   unit-group-op mul-group-op inv-group-op : group-ops
 
 group-signature : signature lzero
-group-signature =
-  pair
-    group-ops
-    ( λ where
-      unit-group-op → 0
-      mul-group-op → 2
-      inv-group-op → 1)
+pr1 group-signature = group-ops
+pr2 group-signature unit-group-op = 0
+pr2 group-signature mul-group-op = 2
+pr2 group-signature inv-group-op = 1
 
 data group-laws : UU lzero where
   associative-l-group-laws : group-laws
@@ -103,10 +100,7 @@ pr1 (pr2 (pr1 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) x y =
   models-A mul-group-op (x ∷ y ∷ empty-vec)
 pr2 (pr2 (pr1 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) x y z =
   satisfies-A associative-l-group-laws
-    ( λ where
-      zero-ℕ → x
-      ( succ-ℕ zero-ℕ) → y
-      ( succ-ℕ (succ-ℕ n)) → z)
+    ( λ { 0 → x ; 1 → y ; (succ-ℕ (succ-ℕ n)) → z})
 pr1 (pr1 (pr2 (group-Algebra-Group ((A-Set , models-A) , satisfies-A)))) =
   models-A unit-group-op empty-vec
 pr1 (pr2 (pr1 (pr2 (group-Algebra-Group (_ , satisfies-A))))) x =
@@ -131,7 +125,7 @@ Group-group-Algebra G =
       ( λ where
         unit-group-op v → unit-Group G
         mul-group-op (x ∷ y ∷ empty-vec) → mul-Group G x y
-        inv-group-op (x ∷ emptsy-vec) → inv-Group G x))
+        inv-group-op (x ∷ empty-vec) → inv-Group G x))
     ( λ where
       associative-l-group-laws assign →
         associative-mul-Group G (assign 0) (assign 1) (assign 2)
@@ -144,26 +138,27 @@ Group-group-Algebra G =
       idr-r-group-laws assign →
         right-unit-law-mul-Group G (assign 0))
 
-equiv-group-Algebra-Group :
-  {l : Level} →
-  Algebra group-signature group-Theory l ≃
-  Group l
-pr1 equiv-group-Algebra-Group = group-Algebra-Group
-pr1 (pr1 (pr2 equiv-group-Algebra-Group)) = Group-group-Algebra
-pr2 (pr1 (pr2 equiv-group-Algebra-Group)) G =
-  eq-pair-Σ refl (eq-is-prop (is-prop-is-group (semigroup-Group G)))
-pr1 (pr2 (pr2 equiv-group-Algebra-Group)) = Group-group-Algebra
-pr2 (pr2 (pr2 equiv-group-Algebra-Group)) A =
-  eq-pair-Σ
-    ( eq-pair-Σ
-      ( refl)
-      ( eq-htpy
-        ( λ where
-          unit-group-op → eq-htpy (λ where empty-vec → refl)
-          mul-group-op → eq-htpy (λ where (x ∷ y ∷ empty-vec) → refl)
-          inv-group-op → eq-htpy (λ where (x ∷ empty-vec) → refl))))
-    ( eq-is-prop
-      ( is-prop-is-algebra
-        ( group-signature) ( group-Theory)
-        ( model-Algebra group-signature group-Theory A)))
+abstract
+  equiv-group-Algebra-Group :
+    {l : Level} →
+    Algebra group-signature group-Theory l ≃
+    Group l
+  pr1 equiv-group-Algebra-Group = group-Algebra-Group
+  pr1 (pr1 (pr2 equiv-group-Algebra-Group)) = Group-group-Algebra
+  pr2 (pr1 (pr2 equiv-group-Algebra-Group)) G =
+    eq-pair-Σ refl (eq-is-prop (is-prop-is-group (semigroup-Group G)))
+  pr1 (pr2 (pr2 equiv-group-Algebra-Group)) = Group-group-Algebra
+  pr2 (pr2 (pr2 equiv-group-Algebra-Group)) A =
+    eq-pair-Σ
+      ( eq-pair-Σ
+        ( refl)
+        ( eq-htpy
+          ( λ where
+            unit-group-op → eq-htpy (λ where empty-vec → refl)
+            mul-group-op → eq-htpy (λ where (x ∷ y ∷ empty-vec) → refl)
+            inv-group-op → eq-htpy (λ where (x ∷ empty-vec) → refl))))
+      ( eq-is-prop
+        ( is-prop-is-algebra
+          ( group-signature) ( group-Theory)
+          ( model-Algebra group-signature group-Theory A)))
 ```

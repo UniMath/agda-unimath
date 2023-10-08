@@ -170,37 +170,39 @@ module _
   (S : subset-Commutative-Ring l2 A) (T : subset-Commutative-Ring l3 A)
   where
 
-  forward-inclusion-preserves-product-ideal-subset-Commutative-Ring :
-    leq-ideal-Commutative-Ring A
-      ( ideal-subset-Commutative-Ring A (product-subset-Commutative-Ring A S T))
-      ( product-ideal-Commutative-Ring A
-        ( ideal-subset-Commutative-Ring A S)
-        ( ideal-subset-Commutative-Ring A T))
-  forward-inclusion-preserves-product-ideal-subset-Commutative-Ring =
-    is-ideal-generated-by-subset-ideal-subset-Commutative-Ring A
-      ( product-subset-Commutative-Ring A S T)
-      ( product-ideal-Commutative-Ring A
-        ( ideal-subset-Commutative-Ring A S)
-        ( ideal-subset-Commutative-Ring A T))
-      ( λ x H →
-        apply-universal-property-trunc-Prop H
-          ( subset-product-ideal-Commutative-Ring A
-            ( ideal-subset-Commutative-Ring A S)
-            ( ideal-subset-Commutative-Ring A T)
-            ( x))
-          ( λ where
-            ( s , t , refl) →
-              contains-product-product-ideal-Commutative-Ring A
-                ( ideal-subset-Commutative-Ring A S)
-                ( ideal-subset-Commutative-Ring A T)
-                ( pr1 s)
-                ( pr1 t)
-                ( contains-subset-ideal-subset-Commutative-Ring A S
+  abstract
+    forward-inclusion-preserves-product-ideal-subset-Commutative-Ring :
+      leq-ideal-Commutative-Ring A
+        ( ideal-subset-Commutative-Ring A
+          ( product-subset-Commutative-Ring A S T))
+        ( product-ideal-Commutative-Ring A
+          ( ideal-subset-Commutative-Ring A S)
+          ( ideal-subset-Commutative-Ring A T))
+    forward-inclusion-preserves-product-ideal-subset-Commutative-Ring =
+      is-ideal-generated-by-subset-ideal-subset-Commutative-Ring A
+        ( product-subset-Commutative-Ring A S T)
+        ( product-ideal-Commutative-Ring A
+          ( ideal-subset-Commutative-Ring A S)
+          ( ideal-subset-Commutative-Ring A T))
+        ( λ x H →
+          apply-universal-property-trunc-Prop H
+            ( subset-product-ideal-Commutative-Ring A
+              ( ideal-subset-Commutative-Ring A S)
+              ( ideal-subset-Commutative-Ring A T)
+              ( x))
+            ( λ where
+              ( s , t , refl) →
+                contains-product-product-ideal-Commutative-Ring A
+                  ( ideal-subset-Commutative-Ring A S)
+                  ( ideal-subset-Commutative-Ring A T)
                   ( pr1 s)
-                  ( pr2 s))
-                ( contains-subset-ideal-subset-Commutative-Ring A T
                   ( pr1 t)
-                  ( pr2 t))))
+                  ( contains-subset-ideal-subset-Commutative-Ring A S
+                    ( pr1 s)
+                    ( pr2 s))
+                  ( contains-subset-ideal-subset-Commutative-Ring A T
+                    ( pr1 t)
+                    ( pr2 t))))
 
   left-backward-inclusion-preserves-product-ideal-subset-Commutative-Ring :
     {x s y : type-Commutative-Ring A} →

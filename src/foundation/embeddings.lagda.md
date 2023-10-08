@@ -276,7 +276,7 @@ module _
       is-emb f
     is-emb-equiv-refl-to-refl e p x y =
       is-equiv-htpy-equiv
-        (inv-equiv (e x y))
+        ( inv-equiv (e x y))
         ( λ where
           refl →
             inv (is-retraction-map-inv-equiv (e x x) refl) ∙

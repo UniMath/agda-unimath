@@ -97,14 +97,15 @@ module _
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
 
-  equiv-concat-equiv :
-    {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) ≃ (x' ＝ x)
-  pr1 (equiv-concat-equiv {x}) e = map-equiv (e x) refl
-  pr2 equiv-concat-equiv =
-    is-equiv-is-invertible
-      equiv-concat
-      ( λ where refl → refl)
-      ( λ e → eq-htpy (λ y → eq-htpy-equiv (λ where refl → right-unit)))
+  abstract
+    equiv-concat-equiv :
+      {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) ≃ (x' ＝ x)
+    pr1 (equiv-concat-equiv {x}) e = map-equiv (e x) refl
+    pr2 equiv-concat-equiv =
+      is-equiv-is-invertible
+        equiv-concat
+        ( λ where refl → refl)
+        ( λ e → eq-htpy (λ y → eq-htpy-equiv (λ where refl → right-unit)))
 
   inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
   inv-concat' x q = concat' x (inv q)

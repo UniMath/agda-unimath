@@ -195,20 +195,21 @@ module _
   pr1 center-total-htpy-symmetric-operation-Set = f
   pr2 center-total-htpy-symmetric-operation-Set x y = refl
 
-  contraction-total-htpy-symmetric-operation-Set :
-    ( t :
-      Σ ( symmetric-operation A (type-Set B))
-        ( htpy-symmetric-operation-Set)) →
-    center-total-htpy-symmetric-operation-Set ＝ t
-  contraction-total-htpy-symmetric-operation-Set (g , H) =
-    eq-type-subtype
-      htpy-symmetric-operation-Set-Prop
-      ( eq-htpy
-        ( λ p →
-          apply-universal-property-trunc-Prop
-            ( is-surjective-standard-unordered-pair p)
-            ( Id-Prop B (f p) (g p))
-            ( λ where (x , y , refl) → H x y)))
+  abstract
+    contraction-total-htpy-symmetric-operation-Set :
+      ( t :
+        Σ ( symmetric-operation A (type-Set B))
+          ( htpy-symmetric-operation-Set)) →
+      center-total-htpy-symmetric-operation-Set ＝ t
+    contraction-total-htpy-symmetric-operation-Set (g , H) =
+      eq-type-subtype
+        htpy-symmetric-operation-Set-Prop
+        ( eq-htpy
+          ( λ p →
+            apply-universal-property-trunc-Prop
+              ( is-surjective-standard-unordered-pair p)
+              ( Id-Prop B (f p) (g p))
+              ( λ where (x , y , refl) → H x y)))
 
   is-contr-total-htpy-symmetric-operation-Set :
     is-contr

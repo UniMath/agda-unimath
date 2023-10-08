@@ -30,7 +30,7 @@ open import univalent-combinatorics.finite-types
 </details>
 ## Idea
 
-**Methane** is the simpliest hydrocarbon, and the first alkane.
+**Methane** is the simplest hydrocarbon, and the first alkane.
 
 ## Definition
 
@@ -40,18 +40,19 @@ module _
   where
 
   methane : hydrocarbon lzero lzero
-  methane =
-    ( unit-𝔽 , (λ x → empty-𝔽)) ,
-    ( λ c → t) ,
-    ( λ c → (λ e → ex-falso (pr2 e)) , λ e _ → ex-falso (pr2 e)) ,
-    ( λ c x → x) ,
-    ( λ c c' →
-      concatenate-eq-leq-ℕ
-        ( 3)
-        ( inv
-          ( compute-number-of-elements-is-finite count-empty is-finite-empty))
-        ( star)) ,
-    ( λ where star star → unit-trunc-Prop refl-walk-Undirected-Graph)
+  pr1 (pr1 methane) = unit-𝔽
+  pr2 (pr1 methane) x = empty-𝔽
+  pr1 (pr2 methane) c = t
+  pr1 (pr1 (pr2 (pr2 methane)) c) e = ex-falso (pr2 e)
+  pr2 (pr1 (pr2 (pr2 methane)) c) e = ex-falso (pr2 e)
+  pr1 (pr2 (pr2 (pr2 methane))) c x = x
+  pr1 (pr2 (pr2 (pr2 (pr2 methane)))) c c' =
+    concatenate-eq-leq-ℕ
+      ( 3)
+      ( inv (compute-number-of-elements-is-finite count-empty is-finite-empty))
+      ( star)
+  pr2 (pr2 (pr2 (pr2 (pr2 methane)))) star star =
+    unit-trunc-Prop refl-walk-Undirected-Graph
 
   is-alkane-methane : is-alkane-hydrocarbon methane
   is-alkane-methane c c' e e' = is-prop-empty e e'

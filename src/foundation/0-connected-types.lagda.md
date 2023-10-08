@@ -96,14 +96,15 @@ is-0-connected-is-surjective-point a H =
         ( mere-eq-Prop a x)
         ( λ u → unit-trunc-Prop (pr2 u)))
 
-is-surjective-point-is-0-connected :
-  {l1 : Level} {A : UU l1} (a : A) →
-  is-0-connected A → is-surjective (point a)
-is-surjective-point-is-0-connected a H x =
-  apply-universal-property-trunc-Prop
-    ( mere-eq-is-0-connected H a x)
-    ( trunc-Prop (fiber (point a) x))
-    ( λ where refl → unit-trunc-Prop (star , refl))
+abstract
+  is-surjective-point-is-0-connected :
+    {l1 : Level} {A : UU l1} (a : A) →
+    is-0-connected A → is-surjective (point a)
+  is-surjective-point-is-0-connected a H x =
+    apply-universal-property-trunc-Prop
+      ( mere-eq-is-0-connected H a x)
+      ( trunc-Prop (fiber (point a) x))
+      ( λ where refl → unit-trunc-Prop (star , refl))
 
 is-trunc-map-ev-point-is-connected :
   {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →

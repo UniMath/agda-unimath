@@ -517,21 +517,22 @@ module _
       (eq-equiv-eq-map-equiv refl)
       (eq-equiv-eq-map-equiv refl)
 
-  is-section-map-inv-mutually-exclusive-coprod :
-    (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
-  is-section-map-inv-mutually-exclusive-coprod e =
-    eq-htpy-equiv (
-      λ where
-      ( inl p) →
-        ap
-          ( pr1)
-          ( is-retraction-map-inv-equiv-left-summand
-            ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star))
-      ( inr q) →
-        ap
-          ( pr1)
-          ( is-retraction-map-inv-equiv-right-summand
-            ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star)))
+  abstract
+    is-section-map-inv-mutually-exclusive-coprod :
+      (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
+    is-section-map-inv-mutually-exclusive-coprod e =
+      eq-htpy-equiv
+      ( λ where
+        ( inl p) →
+          ap
+            ( pr1)
+            ( is-retraction-map-inv-equiv-left-summand
+              ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star))
+        ( inr q) →
+          ap
+            ( pr1)
+            ( is-retraction-map-inv-equiv-right-summand
+              ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star)))
 
   equiv-mutually-exclusive-coprod :
     ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))

@@ -253,24 +253,25 @@ module _
   {l1 l2 : Level} (T : Directed-Tree l1 l2)
   where
 
-  is-decidable-is-root-walk-Directed-Tree :
-    (x : node-Directed-Tree T)
-    (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
-    is-decidable (is-root-Directed-Tree T x)
-  is-decidable-is-root-walk-Directed-Tree ._ refl-walk-Directed-Graph =
-    inl refl
-  is-decidable-is-root-walk-Directed-Tree x
-    ( cons-walk-Directed-Graph {.x} {y} e w) =
-    inr
-      ( λ where
-        refl →
-          neq-cons-refl-walk-Directed-Graph
-            ( graph-Directed-Tree T)
-            ( x)
-            ( y)
-            ( e)
-            ( w)
-            ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
+  abstract
+    is-decidable-is-root-walk-Directed-Tree :
+      (x : node-Directed-Tree T)
+      (w : walk-Directed-Tree T x (root-Directed-Tree T)) →
+      is-decidable (is-root-Directed-Tree T x)
+    is-decidable-is-root-walk-Directed-Tree ._ refl-walk-Directed-Graph =
+      inl refl
+    is-decidable-is-root-walk-Directed-Tree x
+      ( cons-walk-Directed-Graph {.x} {y} e w) =
+      inr
+        ( λ where
+          refl →
+            neq-cons-refl-walk-Directed-Graph
+              ( graph-Directed-Tree T)
+              ( x)
+              ( y)
+              ( e)
+              ( w)
+              ( eq-is-contr (unique-walk-to-root-Directed-Tree T x)))
 
   is-isolated-root-Directed-Tree : is-isolated (root-Directed-Tree T)
   is-isolated-root-Directed-Tree x =
@@ -591,12 +592,13 @@ module _
         ( f))
       ( unique-direct-successor-Directed-Tree x)
 
-  is-proof-irrelevant-direct-successor-Directed-Tree :
-    (x : node-Directed-Tree T) →
-    is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
-  is-proof-irrelevant-direct-successor-Directed-Tree x (y , e) =
-    unique-direct-successor-is-proper-node-Directed-Tree x
-      ( λ where refl → no-direct-successor-root-Directed-Tree T (y , e))
+  abstract
+    is-proof-irrelevant-direct-successor-Directed-Tree :
+      (x : node-Directed-Tree T) →
+      is-proof-irrelevant (Σ (node-Directed-Tree T) (edge-Directed-Tree T x))
+    is-proof-irrelevant-direct-successor-Directed-Tree x (y , e) =
+      unique-direct-successor-is-proper-node-Directed-Tree x
+        ( λ where refl → no-direct-successor-root-Directed-Tree T (y , e))
 
   is-prop-direct-successor-Directed-Tree :
     (x : node-Directed-Tree T) →

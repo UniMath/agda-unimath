@@ -240,20 +240,21 @@ is-set-isolated-point :
 is-set-isolated-point A =
   is-set-has-decidable-equality (has-decidable-equality-isolated-point A)
 
-decidable-emb-isolated-point :
-  {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪ᵈ A
-pr1 (decidable-emb-isolated-point {l1} {A} a) =
-  const unit A (pr1 a)
-pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
-  is-emb-comp
-    ( inclusion-isolated-point A)
-    ( const unit (isolated-point A) a)
-    ( is-emb-inclusion-isolated-point A)
-    ( is-emb-is-injective
-      ( is-set-isolated-point A)
-      ( λ where {star} {star} p → refl))
-pr2 (pr2 (decidable-emb-isolated-point {l1} {A} a)) x =
-  is-decidable-prod is-decidable-unit (pr2 a x)
+abstract
+  decidable-emb-isolated-point :
+    {l1 : Level} {A : UU l1} (a : isolated-point A) → unit ↪ᵈ A
+  pr1 (decidable-emb-isolated-point {l1} {A} a) =
+    const unit A (pr1 a)
+  pr1 (pr2 (decidable-emb-isolated-point {l1} {A} a)) =
+    is-emb-comp
+      ( inclusion-isolated-point A)
+      ( const unit (isolated-point A) a)
+      ( is-emb-inclusion-isolated-point A)
+      ( is-emb-is-injective
+        ( is-set-isolated-point A)
+        ( λ where {star} {star} p → refl))
+  pr2 (pr2 (decidable-emb-isolated-point {l1} {A} a)) x =
+    is-decidable-prod is-decidable-unit (pr2 a x)
 ```
 
 ### Types with isolated points can be equipped with a Maybe-structure

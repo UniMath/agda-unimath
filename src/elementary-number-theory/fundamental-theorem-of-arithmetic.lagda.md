@@ -307,14 +307,15 @@ is-minimal-least-nontrivial-divisor-ℕ n H x K d =
 ### The least nontrivial divisor of a number `> 1` is nonzero
 
 ```agda
-is-nonzero-least-nontrivial-divisor-ℕ :
-  (n : ℕ) (H : le-ℕ 1 n) → is-nonzero-ℕ (nat-least-nontrivial-divisor-ℕ n H)
-is-nonzero-least-nontrivial-divisor-ℕ n H =
-  is-nonzero-div-ℕ
-    ( nat-least-nontrivial-divisor-ℕ n H)
-    ( n)
-    ( div-least-nontrivial-divisor-ℕ n H)
-    ( λ where refl → H)
+abstract
+  is-nonzero-least-nontrivial-divisor-ℕ :
+    (n : ℕ) (H : le-ℕ 1 n) → is-nonzero-ℕ (nat-least-nontrivial-divisor-ℕ n H)
+  is-nonzero-least-nontrivial-divisor-ℕ n H =
+    is-nonzero-div-ℕ
+      ( nat-least-nontrivial-divisor-ℕ n H)
+      ( n)
+      ( div-least-nontrivial-divisor-ℕ n H)
+      ( λ where refl → H)
 ```
 
 ### The least nontrivial divisor of a number `> 1` is prime
