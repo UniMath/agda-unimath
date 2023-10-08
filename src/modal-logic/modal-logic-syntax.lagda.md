@@ -23,6 +23,7 @@ open import foundation.universe-levels
 open import foundation.unit-type
 open import foundation.action-on-identifications-functions
 open import foundation.logical-equivalences
+open import foundation.inhabited-types
 
 open import foundation-core.transport-along-identifications
 open import foundation-core.coproduct-types
@@ -120,6 +121,7 @@ module _
     constructor frame
     field
       R : Relation l1 w
+      frame-inhabited : is-inhabited w
 
   open kripke-frame public
 
