@@ -114,11 +114,11 @@ pre-commit:
 	@make check
 
 install-website-dev:
-	@cargo install mdbook
-	@cargo install mdbook-linkcheck
-	@cargo install mdbook-katex
-	@cargo install mdbook-pagetoc
-	@cargo install mdbook-catppuccin
+	@cargo install mdbook@0.4.34
+	@cargo install mdbook-linkcheck@0.7.7
+	@cargo install mdbook-katex@0.5.7
+	@cargo install mdbook-pagetoc@0.1.7
+	@cargo install mdbook-catppuccin@1.2.0
 
 .PHONY: unused-imports
 unused-imports:
