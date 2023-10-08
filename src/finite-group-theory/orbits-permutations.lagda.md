@@ -464,10 +464,10 @@ module _
           ( Q)
           ( pr1 same-orbits-permutation a c)
           ( λ (k2 , q) →
-            ( unit-trunc-Prop
+            unit-trunc-Prop
               ( ( k2 +ℕ k1) ,
-                ( (iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
-                  ( ap (iterate k2 (map-equiv f)) p ∙ q))))))
+                ( ( iterate-add-ℕ k2 k1 (map-equiv f) a) ∙
+                  ( ap (iterate k2 (map-equiv f)) p ∙ q)))))
 
   abstract
     is-decidable-same-orbits-permutation :
