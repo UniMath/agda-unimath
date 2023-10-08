@@ -205,11 +205,9 @@ module _
     is-contr-retraction-is-equiv :
       {f : A → B} → is-equiv f → is-contr (retraction f)
     is-contr-retraction-is-equiv {f} is-equiv-f =
-      is-contr-is-equiv'
-        ( Σ (B → A) (λ h → (h ∘ f) ＝ id))
-        ( tot (λ h → htpy-eq))
-        ( is-equiv-tot-is-fiberwise-equiv
-          ( λ h → funext (h ∘ f) id))
+      is-contr-equiv'
+        ( Σ (B → A) (λ h → h ∘ f ＝ id))
+        ( equiv-tot (λ h → equiv-funext))
         ( is-contr-map-is-equiv (is-equiv-precomp-is-equiv f is-equiv-f A) id)
 ```
 
