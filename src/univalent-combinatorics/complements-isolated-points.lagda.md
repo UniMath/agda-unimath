@@ -1,7 +1,7 @@
 # Complements of isolated points of finite types
 
 ```agda
-module univalent-combinatorics.complements-isolated-points where
+module univalent-combinatorics.complements-isolated-elements where
 ```
 
 <details><summary>Imports</summary>
@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.equivalences-maybe
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
 open import foundation.maybe
 open import foundation.propositional-truncations
 open import foundation.universe-levels

@@ -26,7 +26,7 @@ open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.whiskering-homotopies
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types

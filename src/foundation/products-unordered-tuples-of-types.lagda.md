@@ -19,7 +19,7 @@ open import foundation.unordered-tuples-of-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 ```
 
 </details>

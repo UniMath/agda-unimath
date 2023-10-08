@@ -19,7 +19,7 @@ open import foundation.set-truncations
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
