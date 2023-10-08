@@ -160,7 +160,7 @@ module _
 
   abstract
     is-prop-equiv : A ≃ B → is-prop B → is-prop A
-    is-prop-equiv (pair f is-equiv-f) = is-prop-is-equiv is-equiv-f
+    is-prop-equiv (f , is-equiv-f) = is-prop-is-equiv is-equiv-f
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -173,7 +173,7 @@ module _
 
   abstract
     is-prop-equiv' : A ≃ B → is-prop A → is-prop B
-    is-prop-equiv' (pair f is-equiv-f) = is-prop-is-equiv' is-equiv-f
+    is-prop-equiv' (f , is-equiv-f) = is-prop-is-equiv' is-equiv-f
 ```
 
 ### Propositions are closed under dependent pair types
@@ -250,8 +250,7 @@ abstract
     ((x : A) → is-prop (B x)) → is-prop ({x : A} → B x)
   is-prop-Π' {l1} {l2} {A} {B} H =
     is-prop-equiv
-      ( pair
-        ( λ f x → f {x})
+      ( ( λ f x → f {x}) ,
         ( is-equiv-is-invertible
           ( λ g {x} → g x)
           ( refl-htpy)

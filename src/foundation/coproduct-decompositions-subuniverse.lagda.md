@@ -511,7 +511,7 @@ module _
                       ( inclusion-subuniverse P (pr1 x))
                       ( equiv-is-empty is-empty-raise-empty ( pr2 x)))
                     ( eq-is-prop (is-prop-type-Prop (P _))))
-                  ( eq-is-prop is-prop-is-empty)))
+                  ( eq-is-prop is-property-is-empty)))
             ( ( raise-empty l1 , C1) , is-empty-raise-empty)) ∘e
           ( ( inv-associative-Σ _ _ _) ∘e
             ( ( equiv-tot (λ _ → commutative-prod)) ∘e
