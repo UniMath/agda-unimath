@@ -226,72 +226,69 @@ module _
       (inr star) (inr star) =
       star
 
-  abstract
-    ethane : hydrocarbon lzero lzero
-    pr1 ethane = finite-graph-ethane
-    pr1 (pr2 ethane) c = t
-    pr1 (pr2 (pr2 ethane)) = emb-bonding-ethane
-    pr1 (pr2 (pr2 (pr2 ethane))) (inl (inr star)) P =
-      apply-universal-property-trunc-Prop (pr2 P) empty-Prop
-        ( λ where
-          ( inl (inr star) , is-one) → neq-inl-inr is-one
-          ( inr star , is-one) → neq-inl-inr is-one)
-    pr1 (pr2 (pr2 (pr2 ethane))) (inr star) P =
-      apply-universal-property-trunc-Prop (pr1 P) empty-Prop
-        ( λ where
-          ( inl (inr star) , is-zero) → neq-inr-inl is-zero
-          ( inr star , is-zero) → neq-inr-inl is-zero)
-    pr1 (pr2 (pr2 (pr2 (pr2 ethane)))) c c' =
-      concatenate-eq-leq-ℕ 3
-        ( inv
-          ( compute-number-of-elements-is-finite
-            ( count-standard-edge-ethane c c')
-            ( is-finite-edge-ethane (standard-unordered-pair c c'))))
-        (number-of-elements-count-standard-edge-ethane-leq-3 c c')
-    pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr star)) (inl (inr star)) =
-      unit-trunc-Prop refl-walk-Undirected-Graph
-    pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr star)) (inr star) =
-      unit-trunc-Prop
-        ( tr
-          ( λ x →
-            walk-Undirected-Graph
-              ( undirected-graph-Undirected-Graph-𝔽 finite-graph-ethane)
-              ( zero-Fin 1)
-              ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
-          ( compute-swap-2-Element-Type
-            ( Fin-UU-Fin' 2)
+  ethane : hydrocarbon lzero lzero
+  pr1 ethane = finite-graph-ethane
+  pr1 (pr2 ethane) c = t
+  pr1 (pr2 (pr2 ethane)) = emb-bonding-ethane
+  pr1 (pr2 (pr2 (pr2 ethane))) (inl (inr star)) P =
+    apply-universal-property-trunc-Prop (pr2 P) empty-Prop
+      ( λ where
+        ( inl (inr star) , is-one) → neq-inl-inr is-one
+        ( inr star , is-one) → neq-inl-inr is-one)
+  pr1 (pr2 (pr2 (pr2 ethane))) (inr star) P =
+    apply-universal-property-trunc-Prop (pr1 P) empty-Prop
+      ( λ where
+        ( inl (inr star) , is-zero) → neq-inr-inl is-zero
+        ( inr star , is-zero) → neq-inr-inl is-zero)
+  pr1 (pr2 (pr2 (pr2 (pr2 ethane)))) c c' =
+    concatenate-eq-leq-ℕ 3
+      ( inv
+        ( compute-number-of-elements-is-finite
+          ( count-standard-edge-ethane c c')
+          ( is-finite-edge-ethane (standard-unordered-pair c c'))))
+      (number-of-elements-count-standard-edge-ethane-leq-3 c c')
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr star)) (inl (inr star)) =
+    unit-trunc-Prop refl-walk-Undirected-Graph
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr star)) (inr star) =
+    unit-trunc-Prop
+      ( tr
+        ( λ x →
+          walk-Undirected-Graph
+            ( undirected-graph-Undirected-Graph-𝔽 finite-graph-ethane)
             ( zero-Fin 1)
+            ( element-standard-unordered-pair (zero-Fin 1) (one-Fin 1) x))
+        ( compute-swap-2-Element-Type
+          ( Fin-UU-Fin' 2)
+          ( zero-Fin 1)
+          ( one-Fin 1)
+          ( neq-inl-inr))
+        ( cons-walk-Undirected-Graph
+          ( standard-unordered-pair (zero-Fin 1) (one-Fin 1))
+          ( ( unit-trunc-Prop (zero-Fin 1 , refl)) ,
+            ( unit-trunc-Prop (one-Fin 1 , refl)))
+          { zero-Fin 1}
+          ( refl-walk-Undirected-Graph)))
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr star) (inl (inr star)) =
+    unit-trunc-Prop
+      ( tr
+        ( λ x →
+          walk-Undirected-Graph
+            ( undirected-graph-Undirected-Graph-𝔽 finite-graph-ethane)
             ( one-Fin 1)
-            ( neq-inl-inr))
-          ( cons-walk-Undirected-Graph
-            ( standard-unordered-pair (zero-Fin 1) (one-Fin 1))
-            ( pair
-              ( unit-trunc-Prop (zero-Fin 1 , refl))
-              ( unit-trunc-Prop (one-Fin 1 , refl)))
-            { zero-Fin 1}
-            ( refl-walk-Undirected-Graph)))
-    pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr star) (inl (inr star)) =
-      unit-trunc-Prop
-        ( tr
-          ( λ x →
-            walk-Undirected-Graph
-              ( undirected-graph-Undirected-Graph-𝔽 finite-graph-ethane)
-              ( one-Fin 1)
-              ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
-          ( compute-swap-2-Element-Type
-            ( Fin-UU-Fin' 2)
-            ( zero-Fin 1)
-            ( one-Fin 1)
-            ( neq-inl-inr))
-          ( cons-walk-Undirected-Graph
-            ( standard-unordered-pair (one-Fin 1) (zero-Fin 1))
-            ( pair
-              ( unit-trunc-Prop (one-Fin 1 , refl))
-              ( unit-trunc-Prop (zero-Fin 1 , refl)))
-            { zero-Fin 1}
-            ( refl-walk-Undirected-Graph)))
-    pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr star) (inr star) =
-      unit-trunc-Prop refl-walk-Undirected-Graph
+            ( element-standard-unordered-pair (one-Fin 1) (zero-Fin 1) x))
+        ( compute-swap-2-Element-Type
+          ( Fin-UU-Fin' 2)
+          ( zero-Fin 1)
+          ( one-Fin 1)
+          ( neq-inl-inr))
+        ( cons-walk-Undirected-Graph
+          ( standard-unordered-pair (one-Fin 1) (zero-Fin 1))
+          ( ( unit-trunc-Prop (one-Fin 1 , refl)) ,
+            ( unit-trunc-Prop (zero-Fin 1 , refl)))
+          { zero-Fin 1}
+          ( refl-walk-Undirected-Graph)))
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr star) (inr star) =
+    unit-trunc-Prop refl-walk-Undirected-Graph
 
   is-alkane-ethane : is-alkane-hydrocarbon ethane
   is-alkane-ethane = is-prop-standard-edge-ethane
