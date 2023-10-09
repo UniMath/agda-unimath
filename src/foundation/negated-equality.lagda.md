@@ -37,7 +37,7 @@ _≠_ = nonequal
 
 ## Properties
 
-### Disequality is a property
+### Nonequality is a property
 
 ```agda
 module _
@@ -52,7 +52,7 @@ module _
   pr2 (nonequal-Prop x y) = is-prop-nonequal
 ```
 
-### Disequality is antireflexive
+### Nonequality is antireflexive
 
 ```agda
 module _
@@ -66,7 +66,7 @@ module _
   is-consistent-nonequal a b p d = d p
 ```
 
-### Disequality is symmetric
+### Nonequality is symmetric
 
 ```agda
 module _
