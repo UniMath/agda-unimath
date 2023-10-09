@@ -24,8 +24,11 @@ open import foundation-core.negation
 
 ## Idea
 
-An apartness relation `#` is said to be standard if the law of excluded middle
-implies that `#` is equivalent to negated equality.
+An [apartness relation](foundation.apartness-relations.md) `#` is said to be
+**standard** if the
+[law of excluded middle](foundation.law-of-excluded-middle.md) implies that `#`
+is [equivalent](foundation.logical-equivalences.md) to
+[negated equality](foundation.negated-equality.md).
 
 ## Definition
 

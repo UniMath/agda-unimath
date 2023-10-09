@@ -24,8 +24,8 @@ open import foundation-core.propositions
 
 ## Idea
 
-A relation `R` is said to be tight if for every `x y : A` we have
-`¬ (R x y) → (x ＝ y)`.
+A [relation](foundation.binary-relations.md) `R` is said to be **tight** if for
+every `x y : A` we have `¬ (R x y) → (x ＝ y)`.
 
 ## Definition
 
