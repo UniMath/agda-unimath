@@ -80,7 +80,7 @@ complement-isolated-element X x =
 
 ## Properties
 
-### A element is decidable if and only if the constant map pointing at it is decidable
+### An element is isolated if and only if the constant map pointing at it is decidable
 
 ```agda
 module _
