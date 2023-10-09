@@ -24,6 +24,7 @@ open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-coproduct-types
 open import foundation.maybe
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -177,8 +178,7 @@ module _
 
   decidable-subprojection-ℕ-enumeration :
     enumeration X → decidable-subprojection-ℕ X
-  pr1 (pr1 (decidable-subprojection-ℕ-enumeration (f , H)) n) =
-    ¬ ((f n) ＝ (inr star))
+  pr1 (pr1 (decidable-subprojection-ℕ-enumeration (f , H)) n) = f n ≠ inr star
   pr1 (pr2 (pr1 (decidable-subprojection-ℕ-enumeration (f , H)) n)) =
     is-prop-neg
   pr2 (pr2 (pr1 (decidable-subprojection-ℕ-enumeration (f , H)) n)) =

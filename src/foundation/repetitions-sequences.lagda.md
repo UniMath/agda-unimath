@@ -70,8 +70,7 @@ module _
       pair-of-distinct-elements-repetition-of-values-sequence
 
   distinction-repetition-of-values-sequence :
-    ¬ (first-repetition-of-values-sequence ＝
-    second-repetition-of-values-sequence)
+    first-repetition-of-values-sequence ≠ second-repetition-of-values-sequence
   distinction-repetition-of-values-sequence =
     distinction-pair-of-distinct-elements
       pair-of-distinct-elements-repetition-of-values-sequence

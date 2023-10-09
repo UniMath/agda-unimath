@@ -87,7 +87,7 @@ module _
 is-repeated-value :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (a : A) → UU (l1 ⊔ l2)
 is-repeated-value {l1} {l2} {A} {B} f a =
-  Σ (Σ A (λ x → ¬ (Id a x))) (λ x → f a ＝ f (pr1 x))
+  Σ (Σ A (a ≠_)) (λ x → f a ＝ f (pr1 x))
 ```
 
 ## Properties

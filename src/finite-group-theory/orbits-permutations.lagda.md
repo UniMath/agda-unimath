@@ -43,6 +43,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.iterating-functions
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -145,7 +146,7 @@ module _
       ( succ-ℕ (number-of-elements-count eX))
       ( pr1 (pr2 (pr1 repetition-iterate-automorphism-Fin)))
 
-  neq-points-iterate-ℕ : ¬ (Id point1-iterate-ℕ point2-iterate-ℕ)
+  neq-points-iterate-ℕ : point1-iterate-ℕ ≠ point2-iterate-ℕ
   neq-points-iterate-ℕ p =
     pr2
       ( pr2 (pr1 repetition-iterate-automorphism-Fin))
@@ -637,7 +638,7 @@ module _
 
 ```agda
 module _
-  {l1 : Level} (X : UU l1) (eX : count X) (a b : X) (np : ¬ (Id a b))
+  {l1 : Level} (X : UU l1) (eX : count X) (a b : X) (np : a ≠ b)
   where
 
   composition-transposition-a-b : (X ≃ X) → (X ≃ X)
@@ -874,7 +875,7 @@ module _
         ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b))
         ( k : ℕ) →
         ( is-nonzero-ℕ k × le-ℕ k (pr1 (minimal-element-iterate g a b pa))) →
-        ¬ (iterate k (map-equiv g) a ＝ a) × ¬ (iterate k (map-equiv g) a ＝ b)
+        ( iterate k (map-equiv g) a ≠ a) × (iterate k (map-equiv g) a ≠ b)
       pr1 (neq-iterate-nonzero-le-minimal-element pa k (pair nz ineq)) q =
         contradiction-le-ℕ
           ( pr1 pair-k2)
@@ -2425,7 +2426,7 @@ module _
           ( λ x →
             Σ ( X)
               ( λ y →
-                Σ ( ¬ (Id x y))
+                Σ ( x ≠ y)
                   ( λ np →
                     Id
                       ( standard-2-Element-Decidable-Subtype

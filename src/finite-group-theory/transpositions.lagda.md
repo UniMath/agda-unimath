@@ -63,7 +63,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Transpositions are permutations that swap two elements.
+**Transpositions** are [permutations](finite-group-theory.permutations.md) that
+swap two elements.
 
 ## Definitions
 
@@ -170,7 +171,7 @@ module _
 ```agda
 module _
   {l : Level} {X : UU l} (H : has-decidable-equality X)
-  {x y : X} (p : ¬ (Id x y))
+  {x y : X} (p : x ≠ y)
   where
 
   standard-transposition : Aut X
@@ -212,7 +213,7 @@ module _
 
   abstract
     is-fixed-point-standard-transposition :
-      (z : X) → ¬ (Id x z) → ¬ (Id y z) →
+      (z : X) → x ≠ z → y ≠ z →
       Id (map-standard-transposition z) z
     is-fixed-point-standard-transposition z q r
       with is-decidable-type-prop-standard-2-Element-Decidable-Subtype H p z
@@ -301,7 +302,7 @@ module _
       ( λ x →
         Σ ( X)
           ( λ y →
-            Σ ( ¬ (Id x y))
+            Σ ( x ≠ y)
               ( λ np →
                 Id
                   ( standard-2-Element-Decidable-Subtype
@@ -467,14 +468,14 @@ module _
     pr1 (pr2 two-elements-transposition)
 
   neq-elements-two-elements-transposition :
-    ¬ ( element-two-elements-transposition ＝
-        other-element-two-elements-transposition)
+    element-two-elements-transposition ≠
+    other-element-two-elements-transposition
   neq-elements-two-elements-transposition =
     pr1 (pr2 (pr2 two-elements-transposition))
 
   abstract
     cases-eq-two-elements-transposition :
-      (x y : X) (np : ¬ (Id x y)) →
+      (x y : X) (np : x ≠ y) →
       (type-Decidable-Prop (pr1 Y x)) →
       (type-Decidable-Prop (pr1 Y y)) →
       is-decidable (Id (pr1 two-elements-transposition) x) →
@@ -556,7 +557,7 @@ module _
           ( λ p → nq (pr1 (pair-eq-Σ p))))
 
     eq-two-elements-transposition :
-      (x y : X) (np : ¬ (Id x y)) →
+      (x y : X) (np : x ≠ y) →
       (type-Decidable-Prop (pr1 Y x)) →
       (type-Decidable-Prop (pr1 Y y)) →
       ( ( Id (pr1 two-elements-transposition) x) ×
@@ -590,7 +591,7 @@ module _
       ( λ x →
         Σ ( Fin n)
           ( λ y →
-            Σ ( ¬ (Id x y))
+            Σ ( x ≠ y)
               ( λ np →
                 Id
                   ( standard-2-Element-Decidable-Subtype
@@ -604,7 +605,7 @@ module _
           ( λ x →
             Σ ( Fin n)
               ( λ y →
-                Σ ( ¬ (Id x y))
+                Σ ( x ≠ y)
                   ( λ np →
                     Id
                       ( standard-2-Element-Decidable-Subtype
@@ -623,8 +624,8 @@ module _
     pr1 (pr2 two-elements-transposition-Fin)
 
   neq-elements-two-elements-transposition-Fin :
-    ¬ ( element-two-elements-transposition-Fin ＝
-        other-element-two-elements-transposition-Fin)
+    element-two-elements-transposition-Fin ≠
+    other-element-two-elements-transposition-Fin
   neq-elements-two-elements-transposition-Fin =
     pr1 (pr2 (pr2 two-elements-transposition-Fin))
 
@@ -971,7 +972,7 @@ correct-Fin-succ-Fin-transposition-list n (cons t l) x =
 ```agda
 eq-transposition-precomp-standard-2-Element-Decidable-Subtype :
   {l : Level} {X : UU l} (H : has-decidable-equality X) →
-  {x y : X} (np : ¬ (Id x y)) →
+  {x y : X} (np : x ≠ y) →
   Id
     ( precomp-equiv-2-Element-Decidable-Subtype
       ( standard-transposition H np)
@@ -1051,8 +1052,8 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype
 
 eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype :
   {l : Level} {X : UU l} (H : has-decidable-equality X) →
-  {x y z w : X} (np : ¬ (Id x y)) (np' : ¬ (Id z w)) →
-  ¬ (Id x z) → ¬ (Id x w) → ¬ (Id y z) → ¬ (Id y w) →
+  {x y z w : X} (np : x ≠ y) (np' : z ≠ w) →
+  x ≠ z → x ≠ w → y ≠ z → y ≠ w →
   Id
     ( precomp-equiv-2-Element-Decidable-Subtype
       ( standard-transposition H np)
@@ -1239,9 +1240,9 @@ module _
 
   cases-htpy-conjugate-transposition :
     (w : X) →
-    ((w ＝ x) + w ≠ x) →
-    ((w ＝ y) + w ≠ y) →
-    ((w ＝ z) + w ≠ z) →
+    ((w ＝ x) + (w ≠ x)) →
+    ((w ＝ y) + (w ≠ y)) →
+    ((w ＝ z) + (w ≠ z)) →
     Id
       ( map-equiv
         ( standard-transposition H npyz ∘e

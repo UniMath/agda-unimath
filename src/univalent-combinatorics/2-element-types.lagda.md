@@ -648,8 +648,7 @@ module _
   where
 
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
-    ¬ ( equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X) ＝
-        id-equiv)
+    equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X) ≠ id-equiv
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
@@ -690,7 +689,7 @@ module _
   where
 
   has-no-fixed-points-swap-2-Element-Type :
-    {x : type-2-Element-Type X} → ¬ (map-equiv (swap-2-Element-Type X) x ＝ x)
+    {x : type-2-Element-Type X} → map-equiv (swap-2-Element-Type X) x ≠ x
   has-no-fixed-points-swap-2-Element-Type {x} P =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)

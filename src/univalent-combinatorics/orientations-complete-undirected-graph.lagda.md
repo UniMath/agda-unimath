@@ -44,6 +44,7 @@ open import foundation.intersections-subtypes
 open import foundation.involutions
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -705,7 +706,7 @@ module _
     ( Y : 2-Element-Decidable-Subtype l X)
     ( two-elements : Σ X
       ( λ x → Σ X
-        ( λ y → Σ (¬ (Id x y))
+        ( λ y → Σ (x ≠ y)
           ( λ np →
             Id
               ( standard-2-Element-Decidable-Subtype
@@ -747,7 +748,7 @@ module _
     ( Y : 2-Element-Decidable-Subtype l X)
     ( two-elements : Σ X
       ( λ x → Σ X
-        ( λ y → Σ (¬ (Id x y))
+        ( λ y → Σ (x ≠ y)
           ( λ np' →
             Id
               ( standard-2-Element-Decidable-Subtype
@@ -772,7 +773,7 @@ module _
     pair x (tr (λ Z → type-Decidable-Prop (pr1 Z x)) P (inl refl))
 
   orientation-two-elements-count :
-    (i j : X) → ¬ (Id i j) →
+    (i j : X) → i ≠ j →
     orientation-Complete-Undirected-Graph
       ( number-of-elements-count eX)
       ( pair X (unit-trunc-Prop (equiv-count eX)))
@@ -807,7 +808,7 @@ module _
 
   abstract
     distinct-two-elements-count :
-      ¬ (Id first-element-count second-element-count)
+      first-element-count ≠ second-element-count
     distinct-two-elements-count p =
       pr2
         ( pr2
@@ -845,9 +846,9 @@ module _
 
   abstract
     cases-inward-edge-left-two-elements-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
       ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
@@ -915,11 +916,11 @@ module _
       ( r2)
 
     inward-edge-left-two-elements-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ( type-Decidable-Prop (pr1 Y x)) →
       ( type-Decidable-Prop (pr1 Y i)) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
@@ -928,9 +929,9 @@ module _
         ( eq-two-elements-transposition eX Y x i nq p1 p2)
 
     cases-inward-edge-left-transposition-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) i)) +
       ( ( Id (pr1 (two-elements-transposition eX Y)) i) ×
@@ -1100,11 +1101,11 @@ module _
         ( r2)
 
     inward-edge-left-transposition-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ( type-Decidable-Prop (pr1 Y x)) →
       ( type-Decidable-Prop (pr1 Y i)) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       Id
         ( pr1
           ( orientation-aut-count
@@ -1119,9 +1120,9 @@ module _
         ( eq-two-elements-transposition eX Y x i nq p1 p2)
 
     cases-inward-edge-right-two-elements-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
       ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
@@ -1215,11 +1216,11 @@ module _
           ( r2))
 
     inward-edge-right-two-elements-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ( type-Decidable-Prop (pr1 Y x)) →
       ( type-Decidable-Prop (pr1 Y j)) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       Id
         ( pr1 (orientation-two-elements-count i j np Y))
         ( x)
@@ -1228,9 +1229,9 @@ module _
         ( eq-two-elements-transposition eX Y x j nr p1 p2)
 
     cases-inward-edge-right-transposition-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       ( ( Id (pr1 (two-elements-transposition eX Y)) x) ×
         ( Id (pr1 (pr2 (two-elements-transposition eX Y))) j)) +
       ( ( Id (pr1 (two-elements-transposition eX Y)) j) ×
@@ -1399,11 +1400,11 @@ module _
         ( r2)
 
     inward-edge-right-transposition-orientation-count :
-      (i j : X) (np : ¬ (Id i j))
+      (i j : X) (np : i ≠ j)
       (Y : 2-Element-Decidable-Subtype l X) (x : X) →
       ( type-Decidable-Prop (pr1 Y x)) →
       ( type-Decidable-Prop (pr1 Y j)) →
-      ¬ (Id x i) → ¬ (Id x j) →
+      x ≠ i → x ≠ j →
       Id
         ( pr1
           ( orientation-aut-count
@@ -1419,10 +1420,10 @@ module _
 
     cases-eq-orientation-two-elements-count :
       ( i j : X)
-      ( np : ¬ (Id i j))
+      ( np : i ≠ j)
       ( two-elements : Σ X
         ( λ x → Σ X
-          ( λ y → Σ (¬ (Id x y))
+          ( λ y → Σ (x ≠ y)
             ( λ np' →
               Id
                 ( standard-2-Element-Decidable-Subtype
@@ -1501,7 +1502,7 @@ module _
           ( λ eq → nq (inv (pr1 (pair-eq-Σ eq)))))
 
     eq-orientation-two-elements-count :
-      (i j : X) (np : ¬ (Id i j)) →
+      (i j : X) (np : i ≠ j) →
       Id
         ( pr1
           ( orientation-two-elements-count i j np
@@ -1547,7 +1548,7 @@ module _
           ( j))
 
   cases-eq-orientation-aut-orientation-two-elements-count-left :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     ( Id
       ( pr1
         ( orientation-aut-count
@@ -1562,7 +1563,7 @@ module _
     ( Y : 2-Element-Decidable-Subtype l X) →
     ( two-elements : Σ X
       ( λ x → Σ X
-        ( λ y → Σ (¬ (Id x y))
+        ( λ y → Σ (x ≠ y)
           ( λ np' →
             Id
               ( standard-2-Element-Decidable-Subtype
@@ -1782,7 +1783,7 @@ module _
           ( inv R))
 
   cases-eq-orientation-aut-orientation-two-elements-count-right :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     ( Id
       ( pr1
         ( orientation-aut-count
@@ -1797,7 +1798,7 @@ module _
     ( Y : 2-Element-Decidable-Subtype l X) →
     ( two-elements : Σ X
       ( λ x → Σ X
-        ( λ y → Σ (¬ (Id x y))
+        ( λ y → Σ (x ≠ y)
           ( λ np' →
             Id
               ( standard-2-Element-Decidable-Subtype
@@ -2036,7 +2037,7 @@ module _
           ( inv R)))
 
   cases-eq-orientation-aut-orientation-two-elements-count :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     is-decidable
       ( Id
         ( pr1
@@ -2189,7 +2190,7 @@ module _
           ( λ r → nr (pr1 (pair-eq-Σ (inv r)))))
 
   eq-orientation-aut-orientation-two-elements-count :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     ( Id
       ( orientation-aut-count
         ( transposition
@@ -2219,12 +2220,12 @@ module _
         ( j))
 
   cases-eq-map-orientation-transposition-orientation-two-elements-count :
-    ( i j : X) (np : ¬ (Id i j))
+    ( i j : X) (np : i ≠ j)
     ( Y : 2-Element-Decidable-Subtype l X)
     ( two-elements :
       Σ X
         ( λ x → Σ X
-          ( λ y → Σ (¬ (Id x y))
+          ( λ y → Σ (x ≠ y)
             ( λ np' →
               Id
                 ( standard-2-Element-Decidable-Subtype
@@ -2724,7 +2725,7 @@ module _
             ( inv R))))
 
   eq-map-orientation-transposition-orientation-two-elements-count :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     Id
       ( map-orientation-complete-undirected-graph-equiv
         ( number-of-elements-count eX)
@@ -2769,7 +2770,7 @@ module _
                 ( pr1 (orientation-two-elements-count j i (np ∘ inv) Y))))))
 
   equiv-fin-1-difference-orientation-two-elements-count :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     Fin 1 ≃
     Σ ( 2-Element-Decidable-Subtype l X)
       ( λ Y → type-Decidable-Prop
@@ -2840,7 +2841,7 @@ module _
                 ( Y)))) →
       ( two-elements : Σ X
         ( λ x → Σ X
-          ( λ y → Σ (¬ (Id x y))
+          ( λ y → Σ (x ≠ y)
             ( λ np' →
               Id
                 ( standard-2-Element-Decidable-Subtype
@@ -3067,7 +3068,7 @@ module _
     section-fin-1-difference-orientation-two-elements-count (inr star) = refl
 
   eq-orientation-pointwise-difference-two-elements-count :
-    (i j : X) (np : ¬ (Id i j)) →
+    (i j : X) (np : i ≠ j) →
     Id
       ( 1)
       ( number-of-elements-is-finite
@@ -3092,7 +3093,7 @@ module _
             ( orientation-two-elements-count j i (np ∘ inv)))))
 
   cases-not-even-difference-orientation-aut-transposition-count :
-    ( i j : X) (np : ¬ (Id i j)) →
+    ( i j : X) (np : i ≠ j) →
     ( Id
       ( orientation-aut-count
         ( transposition

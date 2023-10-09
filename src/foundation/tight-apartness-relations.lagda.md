@@ -48,7 +48,7 @@ is-tight-Apartness-Relation R = is-tight (rel-Apartness-Relation R)
 Tight-Apartness-Relation :
   {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
 Tight-Apartness-Relation l2 A =
-  Σ (Apartness-Relation l2 A) (λ R → is-tight-Apartness-Relation R)
+  Σ (Apartness-Relation l2 A) (is-tight-Apartness-Relation)
 
 module _
   {l1 l2 : Level} {A : UU l1} (R : Tight-Apartness-Relation l2 A)

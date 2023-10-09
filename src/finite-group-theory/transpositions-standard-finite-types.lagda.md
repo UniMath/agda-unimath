@@ -215,8 +215,8 @@ map-adjacent-transposition-Fin n k = map-equiv (adjacent-transposition-Fin n k)
 cases-htpy-map-coprod-map-transposition-id-Fin :
   (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   (x : Fin (succ-ℕ n)) →
-  (x ＝ inl-Fin n k) + x ≠ inl-Fin n k →
-  (x ＝ inl-Fin n l) + x ≠ inl-Fin n l →
+  (x ＝ inl-Fin n k) + (x ≠ inl-Fin n k) →
+  (x ＝ inl-Fin n l) + (x ≠ inl-Fin n l) →
   map-coprod (map-transposition-Fin n k l neq) id x ＝
   map-transposition-Fin
     ( succ-ℕ n)
@@ -359,8 +359,8 @@ htpy-adjacent-transposition-Fin (succ-ℕ n) (inr star) =
 ```agda
 cases-htpy-transposition-Fin-transposition-swap-Fin :
   (n : ℕ) → (i j : Fin n) → (neq : i ≠ j) → (x : Fin n) →
-  (x ＝ i) + x ≠ i →
-  (x ＝ j) + x ≠ j →
+  (x ＝ i) + (x ≠ i) →
+  (x ＝ j) + (x ≠ j) →
   map-transposition-Fin n i j neq x ＝
   map-transposition-Fin n j i (neq ∘ inv) x
 cases-htpy-transposition-Fin-transposition-swap-Fin

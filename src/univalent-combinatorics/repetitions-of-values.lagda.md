@@ -16,6 +16,7 @@ open import foundation.cartesian-product-types
 open import foundation.decidable-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 
 open import univalent-combinatorics.decidable-dependent-function-types
@@ -70,7 +71,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
   y = pr1 v
   K : ¬ (Id (f x) (f y) → Id x y)
   K = pr2 v
-  w : Id (f x) (f y) × ¬ (Id x y)
+  w : (f x ＝ f y) × (x ≠ y)
   w = exists-not-not-forall-count
       ( λ _ → Id x y)
       ( λ _ →

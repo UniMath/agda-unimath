@@ -11,6 +11,7 @@ open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -89,12 +90,12 @@ decide-true-false true = inl refl
 decide-true-false false = inr refl
 
 eq-false :
-  (b : bool) → (¬ (Id b true)) → (Id b false)
+  (b : bool) → (b ≠ true) → (Id b false)
 eq-false true p = ind-empty (p refl)
 eq-false false p = refl
 
 eq-true :
-  (b : bool) → (¬ (Id b false)) → Id b true
+  (b : bool) → (b ≠ false) → Id b true
 eq-true true p = refl
 eq-true false p = ind-empty (p refl)
 
