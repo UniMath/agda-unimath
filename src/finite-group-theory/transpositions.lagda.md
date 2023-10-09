@@ -1240,9 +1240,9 @@ module _
 
   cases-htpy-conjugate-transposition :
     (w : X) →
-    ((w ＝ x) + (w ≠ x)) →
-    ((w ＝ y) + (w ≠ y)) →
-    ((w ＝ z) + (w ≠ z)) →
+    ( is-decidable (w ＝ x)) →
+    ( is-decidable (w ＝ y)) →
+    ( is-decidable (w ＝ z)) →
     Id
       ( map-equiv
         ( standard-transposition H npyz ∘e
