@@ -245,7 +245,7 @@ module _
 
 module _
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y z w : X}
-  (np : x ≠ y) (nq : z ≠ w) (r : Id x z) (s : Id y w)
+  (np : x ≠ y) (nq : z ≠ w) (r : x ＝ z) (s : y ＝ w)
   where
 
   eq-equal-elements-standard-2-Element-Decidable-Subtype :
