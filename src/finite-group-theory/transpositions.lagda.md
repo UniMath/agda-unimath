@@ -558,8 +558,8 @@ module _
 
     eq-two-elements-transposition :
       (x y : X) (np : x ≠ y) →
-      (type-Decidable-Prop (pr1 Y x)) →
-      (type-Decidable-Prop (pr1 Y y)) →
+      type-Decidable-Prop (pr1 Y x) →
+      type-Decidable-Prop (pr1 Y y) →
       ( ( Id (pr1 two-elements-transposition) x) ×
         ( Id (pr1 (pr2 two-elements-transposition)) y)) +
       ( ( Id (pr1 two-elements-transposition) y) ×
