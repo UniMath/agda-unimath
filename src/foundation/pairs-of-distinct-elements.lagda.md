@@ -187,7 +187,7 @@ module _
       ( e)
       ( λ x →
         emb-Σ
-          ( λ y map-emb e x ≠ y)
+          ( λ y → map-emb e x ≠ y)
           ( e)
           ( λ _ → emb-equiv (equiv-neg (equiv-ap-emb e))))
 

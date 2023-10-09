@@ -12,7 +12,6 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.images
 open import foundation.negated-equality
-open import foundation.function-types
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
@@ -57,7 +56,7 @@ module _
   support-locally-finite-multisubset :
     (U : Set l1) → locally-finite-multisubset U → UU l1
   support-locally-finite-multisubset U μ =
-    Σ (type-Set U) (λ {≠ → precomp μ UU (_≠ 0) ≠})
+    Σ (type-Set U) (λ x → μ x ≠ 0)
 
   is-finite-locally-finite-multisubset :
     (U : Set l1) → locally-finite-multisubset U → UU l1
