@@ -128,8 +128,12 @@ strategic endeavour to ensure the longevity, vitality, and success of the
     a = construction-of-a
   ```
 
-- **Lambda expressions**: When a lambda expression appears as the argument of a function, we always wrap it in parentheses. We do this even if it is the last argument of a function, and thus isn't strictly required to
-  be parenthesized. Note that in some rare cases, a lambda expression might appear at the top level. In this case we don't require the lambda expression to be parenthesized.
+- **Lambda expressions**: When a lambda expression appears as the argument of a
+  function, we always wrap it in parentheses. We do this even if it is the last
+  argument of a function, and thus isn't strictly required to be parenthesized.
+  Note that in some rare cases, a lambda expression might appear at the top
+  level. In this case we don't require the lambda expression to be
+  parenthesized.
 
   There are multiple syntaxes for writing lambda expressions in Agda. Generally,
   you have the following options:

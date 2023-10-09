@@ -213,8 +213,7 @@ is-prop-is-isolated :
   {l1 : Level} {A : UU l1} (a : A) → is-prop (is-isolated a)
 is-prop-is-isolated a =
   is-prop-is-inhabited
-    ( λ H →
-      is-prop-Π (λ x → is-prop-is-decidable (is-prop-eq-isolated-element a H x)))
+    ( λ H → is-prop-Π (is-prop-is-decidable ∘ is-prop-eq-isolated-element a H))
 
 is-isolated-Prop :
   {l1 : Level} {A : UU l1} (a : A) → Prop l1
@@ -327,7 +326,8 @@ is-retraction-map-inv-maybe-structure-isolated-element :
   {l1 : Level} (X : UU l1) (x : isolated-element X) →
   ( map-inv-maybe-structure-isolated-element X x ∘
     map-maybe-structure-isolated-element X x) ~ id
-is-retraction-map-inv-maybe-structure-isolated-element X (x , dx) (inl (y , f)) =
+is-retraction-map-inv-maybe-structure-isolated-element
+  X (x , dx) (inl (y , f)) =
   ap
     ( cases-map-inv-maybe-structure-isolated-element X (x , dx) y)
     ( eq-is-prop (is-prop-is-decidable (is-prop-eq-isolated-element x dx y)))
