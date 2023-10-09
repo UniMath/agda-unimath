@@ -706,7 +706,8 @@ module _
     ( Y : 2-Element-Decidable-Subtype l X)
     ( two-elements : Σ X
       ( λ x → Σ X
-        ( λ y → Σ (x ≠ y)
+        ( λ y →
+          Σ (x ≠ y)
           ( λ np →
             Id
               ( standard-2-Element-Decidable-Subtype
