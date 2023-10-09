@@ -1513,7 +1513,7 @@ module _
       ( Q ( n +ℕ 2)
           ( raise l1 (Fin (n +ℕ 2)) ,
             unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))) →
-    x ≠
+    ( x) ≠
     ( map-equiv
       ( action-equiv-family-over-subuniverse
         ( mere-equiv-Prop (Fin (n +ℕ 2)))
