@@ -190,12 +190,10 @@ module _
     is-decidable-Lift _ (dec-val n x)
   finite-is-classical (M , is-fin) dec-val dec-r ⊥ x =
     inr (λ ())
-  finite-is-classical (M , is-fin) dec-val dec-r (a ⇒ b) x
-    with finite-is-classical (M , is-fin) dec-val dec-r a x
-  ... | inr nfa = inl (λ fa → ex-falso (nfa fa))
-  ... | inl fa with finite-is-classical (M , is-fin) dec-val dec-r b x
-  ...   | inr nfb = inr (λ fab → nfb (fab fa))
-  ...   | inl fb = inl (λ _ → fb)
+  finite-is-classical (M , is-fin) dec-val dec-r (a ⇒ b) x =
+    is-decidable-function-type
+      (finite-is-classical (M , is-fin) dec-val dec-r a x)
+      (finite-is-classical (M , is-fin) dec-val dec-r b x)
   finite-is-classical (M , is-fin) dec-val dec-r (□ a) x =
     is-decidable-Π-is-finite is-fin
       (λ y →
