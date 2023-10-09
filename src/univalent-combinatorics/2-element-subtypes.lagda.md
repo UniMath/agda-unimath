@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -97,7 +98,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : Set l) {x y : type-Set X} (np : ¬ (x ＝ y))
+  {l : Level} (X : Set l) {x y : type-Set X} (np : x ≠ y)
   where
 
   type-prop-standard-2-Element-Subtype : type-Set X → UU l
@@ -196,7 +197,7 @@ module _
     map-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
 
   compute-swap-2-Element-Subtype :
-    (x y : type-2-Element-Subtype P) → ¬ (x ＝ y) →
+    (x y : type-2-Element-Subtype P) → x ≠ y →
     map-swap-2-Element-Subtype x ＝ y
   compute-swap-2-Element-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
@@ -231,8 +232,7 @@ module _
   where
 
   is-injective-map-Fin-two-ℕ :
-    (f : Fin 2 → A) →
-    ¬ (Id (f zero-Fin) (f one-Fin)) → is-injective f
+    (f : Fin 2 → A) → f zero-Fin ≠ f one-Fin → is-injective f
   is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inl (inr star)} p = refl
   is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inr star} p = ex-falso (H p)
   is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
@@ -259,7 +259,7 @@ module _
         {!!} {!!}
     two-elements-different-image :
       Σ ( type-2-Element-Type X)
-        ( λ x → Σ (type-2-Element-Type X) (λ y → ¬ (Id (f x) (f y))))
+        ( λ x → Σ (type-2-Element-Type X) (λ y → f x ≠ f y))
     two-elements-different-image = {!!}
 -}
 ```

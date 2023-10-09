@@ -32,6 +32,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.sets
 open import foundation.surjective-maps
@@ -768,12 +769,12 @@ is-one-is-fixed-point-succ-ℤ-Mod k x p =
                 ( ap (succ-ℤ-Mod k) (is-section-int-ℤ-Mod k x))))))))
 
 has-no-fixed-points-succ-ℤ-Mod :
-  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (succ-ℤ-Mod k x ＝ x)
+  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → succ-ℤ-Mod k x ≠ x
 has-no-fixed-points-succ-ℤ-Mod k x =
   map-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
 
 has-no-fixed-points-succ-Fin :
-  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → ¬ (succ-Fin k x ＝ x)
+  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → succ-Fin k x ≠ x
 has-no-fixed-points-succ-Fin {succ-ℕ k} x =
   has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
 ```

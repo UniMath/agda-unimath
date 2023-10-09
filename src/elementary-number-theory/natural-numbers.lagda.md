@@ -15,6 +15,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -113,14 +114,14 @@ is-nonzero-succ-ℕ : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
 is-nonzero-succ-ℕ x ()
 
 is-nonzero-is-successor-ℕ : {x : ℕ} → is-successor-ℕ x → is-nonzero-ℕ x
-is-nonzero-is-successor-ℕ (pair x refl) ()
+is-nonzero-is-successor-ℕ (x , refl) ()
 
 is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-ℕ x
 is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)
 pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
 pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
 
-has-no-fixed-points-succ-ℕ : (x : ℕ) → ¬ (succ-ℕ x ＝ x)
+has-no-fixed-points-succ-ℕ : (x : ℕ) → succ-ℕ x ≠ x
 has-no-fixed-points-succ-ℕ x ()
 ```
 

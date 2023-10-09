@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.double-negation
 open import foundation.iterating-functions
 open import foundation.law-of-excluded-middle
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.universe-levels
 
@@ -157,7 +158,7 @@ module _
 
   perfect-image-has-distinct-image :
     (a a₀ : A) → ¬ (is-perfect-image f g a) → (ρ : is-perfect-image f g a₀) →
-    ¬ (f a ＝ inverse-of-perfect-image a₀ ρ)
+    f a ≠ inverse-of-perfect-image a₀ ρ
   perfect-image-has-distinct-image a a₀ nρ ρ p =
     v ρ
     where

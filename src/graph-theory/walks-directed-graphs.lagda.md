@@ -22,7 +22,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.negation
+open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -420,7 +420,7 @@ module _
   neq-cons-refl-walk-Directed-Graph :
     (y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
     (w : walk-Directed-Graph G y x) →
-    ¬ (cons-walk-Directed-Graph e w ＝ refl-walk-Directed-Graph)
+    cons-walk-Directed-Graph e w ≠ refl-walk-Directed-Graph
   neq-cons-refl-walk-Directed-Graph y e w ()
 ```
 
