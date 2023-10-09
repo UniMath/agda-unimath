@@ -55,49 +55,51 @@ is-nonzero-pair-expansion u v =
     ( is-nonzero-exp-ℕ 2 u is-nonzero-two-ℕ)
     ( is-nonzero-succ-ℕ _)
 
-has-pair-expansion-is-even-or-odd :
-  (n : ℕ) → is-even-ℕ n + is-odd-ℕ n → pair-expansion n
-has-pair-expansion-is-even-or-odd n =
-  strong-ind-ℕ
-  ( λ m → (is-even-ℕ m + is-odd-ℕ m) → (pair-expansion m))
-  ( λ x → (0 , 0) , refl)
-  ( λ k f →
-    ( λ {
-      ( inl x) →
-        ( let s = has-odd-expansion-is-odd k (is-odd-is-even-succ-ℕ k x)
-          in pair
-            ( 0 , (succ-ℕ (pr1 s)))
-            ( ( ap ((succ-ℕ ∘ succ-ℕ) ∘ succ-ℕ) (left-unit-law-add-ℕ _)) ∙
-            ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 s))))) ;
-      ( inr x) →
-        ( let e : is-even-ℕ k
-              e = is-even-is-odd-succ-ℕ k x
+abstract
+  has-pair-expansion-is-even-or-odd :
+    (n : ℕ) → is-even-ℕ n + is-odd-ℕ n → pair-expansion n
+  has-pair-expansion-is-even-or-odd n =
+    strong-ind-ℕ
+    ( λ m → (is-even-ℕ m + is-odd-ℕ m) → (pair-expansion m))
+    ( λ x → (0 , 0) , refl)
+    ( λ k f →
+      ( λ where
+        ( inl x) →
+          ( let s = has-odd-expansion-is-odd k (is-odd-is-even-succ-ℕ k x)
+            in
+              pair
+                ( 0 , (succ-ℕ (pr1 s)))
+                ( ( ap ((succ-ℕ ∘ succ-ℕ) ∘ succ-ℕ) (left-unit-law-add-ℕ _)) ∙
+                  ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 s)))))
+        ( inr x) →
+          ( let e : is-even-ℕ k
+                e = is-even-is-odd-succ-ℕ k x
 
-              t : (pr1 e) ≤-ℕ k
-              t = leq-quotient-div-ℕ' 2 k is-nonzero-two-ℕ e
+                t : (pr1 e) ≤-ℕ k
+                t = leq-quotient-div-ℕ' 2 k is-nonzero-two-ℕ e
 
-              s : (pair-expansion (pr1 e))
-              s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
-          in
-            pair
-              ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
-              ( ( ap
-                  ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
-                  ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
-                ( ( associative-mul-ℕ 2
-                    ( exp-ℕ 2 (pr1 (pr1 s)))
-                    ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
-                  ( ( ap (2 *ℕ_) (pr2 s)) ∙
-                    ( ( ap succ-ℕ
-                        ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
-                      ( ( ap
-                          ( succ-ℕ ∘ succ-ℕ)
-                          ( ap (_+ℕ (pr1 e)) (left-unit-law-add-ℕ (pr1 e)))) ∙
+                s : (pair-expansion (pr1 e))
+                s = f (pr1 e) t (is-decidable-is-even-ℕ (pr1 e))
+            in
+              pair
+                ( succ-ℕ (pr1 (pr1 s)) , pr2 (pr1 s))
+                ( ( ap
+                    ( _*ℕ (succ-ℕ ((pr2 (pr1 s)) *ℕ 2)))
+                    ( commutative-mul-ℕ (exp-ℕ 2 (pr1 (pr1 s))) 2)) ∙
+                  ( ( associative-mul-ℕ 2
+                      ( exp-ℕ 2 (pr1 (pr1 s)))
+                      ( succ-ℕ ((pr2 (pr1 s)) *ℕ 2))) ∙
+                    ( ( ap (2 *ℕ_) (pr2 s)) ∙
+                      ( ( ap succ-ℕ
+                          ( left-successor-law-add-ℕ (0 +ℕ (pr1 e)) (pr1 e))) ∙
                         ( ( ap
                             ( succ-ℕ ∘ succ-ℕ)
-                            ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
-                            ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))}))
-  ( n)
+                            ( ap (_+ℕ (pr1 e)) (left-unit-law-add-ℕ (pr1 e)))) ∙
+                          ( ( ap
+                              ( succ-ℕ ∘ succ-ℕ)
+                              ( inv (right-two-law-mul-ℕ (pr1 e)))) ∙
+                              ( ( ap (succ-ℕ ∘ succ-ℕ) (pr2 e))))))))))))
+    ( n)
 
 has-pair-expansion : (n : ℕ) → pair-expansion n
 has-pair-expansion n =

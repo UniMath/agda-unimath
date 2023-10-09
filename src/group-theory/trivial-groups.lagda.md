@@ -54,19 +54,20 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  is-contr-subgroup-is-trivial-Group :
-    is-trivial-Group G → is-contr (Subgroup l1 G)
-  pr1 (is-contr-subgroup-is-trivial-Group H) =
-    trivial-Subgroup G
-  pr2 (is-contr-subgroup-is-trivial-Group H) K =
-    eq-has-same-elements-Subgroup G
-      ( trivial-Subgroup G)
-      ( K)
-      ( λ x →
-        ( λ where refl → contains-unit-Subgroup G K) ,
-        ( λ _ →
-          is-closed-under-eq-Subgroup G
-            ( trivial-Subgroup G)
-            ( contains-unit-Subgroup G (trivial-Subgroup G))
-            ( eq-is-contr H)))
+  abstract
+    is-contr-subgroup-is-trivial-Group :
+      is-trivial-Group G → is-contr (Subgroup l1 G)
+    pr1 (is-contr-subgroup-is-trivial-Group H) =
+      trivial-Subgroup G
+    pr2 (is-contr-subgroup-is-trivial-Group H) K =
+      eq-has-same-elements-Subgroup G
+        ( trivial-Subgroup G)
+        ( K)
+        ( λ x →
+          ( λ where refl → contains-unit-Subgroup G K) ,
+          ( λ _ →
+            is-closed-under-eq-Subgroup G
+              ( trivial-Subgroup G)
+              ( contains-unit-Subgroup G (trivial-Subgroup G))
+              ( eq-is-contr H)))
 ```

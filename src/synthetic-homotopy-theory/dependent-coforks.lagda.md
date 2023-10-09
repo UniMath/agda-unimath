@@ -350,8 +350,8 @@ module _
               ( inl)) ,
             ( refl-htpy) ,
             ( right-unit-htpy ∙h
-              ( λ {
-                (inl a) →
+              ( λ where
+                ( inl a) →
                   inv
                     ( ( ap
                         ( _∙
@@ -378,8 +378,8 @@ module _
                               ( cocone-codiagonal-cofork f g e)
                               ( P)
                               ( d)
-                              ( inl a)))) ;
-                (inr a) →
+                              ( inl a))))
+                ( inr a) →
                   ap
                     ( _∙
                       coherence-square-dependent-cocone
@@ -398,7 +398,7 @@ module _
                           ( cocone-codiagonal-cofork f g e)
                           ( P)
                           ( d)
-                          ( inl a))))})))
+                          ( inl a)))))))
 
     is-equiv-dependent-cofork-dependent-cocone-codiagonal :
       is-equiv dependent-cofork-dependent-cocone-codiagonal

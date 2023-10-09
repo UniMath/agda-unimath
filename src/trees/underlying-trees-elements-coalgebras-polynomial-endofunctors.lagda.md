@@ -20,7 +20,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -165,7 +165,7 @@ module _
       ( root-coalgebra w ＝
         root-coalgebra w)
   is-contr-loop-space-root-element-coalgebra w =
-    is-contr-loop-space-isolated-point
+    is-contr-loop-space-isolated-element
       ( root-coalgebra w)
       ( is-isolated-root-element-coalgebra w)
 ```

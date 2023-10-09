@@ -86,37 +86,38 @@ module _
     is-prop-standard-edge-ethane c c' =
       is-prop-type-Prop (standard-edge-ethane-Prop c c')
 
-  is-decidable-edge-ethane-eq-Fin-two :
-    (p : unordered-pair vertex-ethane) →
-    type-unordered-pair p ＝ Fin 2 →
-    is-decidable (edge-ethane p)
-  is-decidable-edge-ethane-eq-Fin-two p refl with
-    is-zero-or-one-Fin-two-ℕ (element-unordered-pair p (zero-Fin 1)) |
-    is-zero-or-one-Fin-two-ℕ (element-unordered-pair p (one-Fin 1))
-  ... | inl is-zero | inl is-zero' =
-    inr
-      ( λ P →
-        apply-universal-property-trunc-Prop (pr2 P) empty-Prop
-          ( λ where
-            (inl (inr star) , is-one) → neq-inl-inr (inv is-zero ∙ is-one)
-            (inr star , is-one) → neq-inl-inr (inv is-zero' ∙ is-one)))
-  ... | inl is-zero | inr is-one' =
-    inl
-      ( pair
-        ( unit-trunc-Prop (zero-Fin 1 , is-zero))
-        ( unit-trunc-Prop (one-Fin 1 , is-one')))
-  ... | inr is-one | inl is-zero' =
-    inl
-      ( pair
-        ( unit-trunc-Prop (one-Fin 1 , is-zero'))
-        ( unit-trunc-Prop (zero-Fin 1 , is-one)))
-  ... | inr is-one | inr is-one' =
-    inr
-      ( λ P →
-        apply-universal-property-trunc-Prop (pr1 P) empty-Prop
-          ( λ where
-            (inl (inr star) , is-zero) → neq-inl-inr (inv is-zero ∙ is-one)
-            (inr star , is-zero) → neq-inl-inr (inv is-zero ∙ is-one')))
+  abstract
+    is-decidable-edge-ethane-eq-Fin-two :
+      (p : unordered-pair vertex-ethane) →
+      type-unordered-pair p ＝ Fin 2 →
+      is-decidable (edge-ethane p)
+    is-decidable-edge-ethane-eq-Fin-two p refl with
+      is-zero-or-one-Fin-two-ℕ (element-unordered-pair p (zero-Fin 1)) |
+      is-zero-or-one-Fin-two-ℕ (element-unordered-pair p (one-Fin 1))
+    ... | inl is-zero | inl is-zero' =
+      inr
+        ( λ P →
+          apply-universal-property-trunc-Prop (pr2 P) empty-Prop
+            ( λ where
+              ( inl (inr star) , is-one) → neq-inl-inr (inv is-zero ∙ is-one)
+              ( inr star , is-one) → neq-inl-inr (inv is-zero' ∙ is-one)))
+    ... | inl is-zero | inr is-one' =
+      inl
+        ( pair
+          ( unit-trunc-Prop (zero-Fin 1 , is-zero))
+          ( unit-trunc-Prop (one-Fin 1 , is-one')))
+    ... | inr is-one | inl is-zero' =
+      inl
+        ( pair
+          ( unit-trunc-Prop (one-Fin 1 , is-zero'))
+          ( unit-trunc-Prop (zero-Fin 1 , is-one)))
+    ... | inr is-one | inr is-one' =
+      inr
+        ( λ P →
+          apply-universal-property-trunc-Prop (pr1 P) empty-Prop
+            ( λ where
+              ( inl (inr star) , is-zero) → neq-inl-inr (inv is-zero ∙ is-one)
+              ( inr star , is-zero) → neq-inl-inr (inv is-zero ∙ is-one')))
 
   is-decidable-standard-edge-ethane :
     (c c' : vertex-ethane) → is-decidable (standard-edge-ethane c c')
@@ -150,41 +151,42 @@ module _
     vertex-tetrahedron-in-3-space t
   bonding-ethane c e = v
 
-  is-contr-standard-edge-ethane :
-    (c : vertex-ethane) →
-    is-contr (Σ (vertex-ethane) (λ c' → standard-edge-ethane c c'))
-  pr1 (pr1 (is-contr-standard-edge-ethane (inl (inr star)))) = one-Fin 1
-  pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
-    unit-trunc-Prop (zero-Fin 1 , refl)
-  pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
-    unit-trunc-Prop (one-Fin 1 , refl)
-  pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inl (inr star) , P) =
-    ex-falso
-      ( apply-universal-property-trunc-Prop (pr2 P) empty-Prop
-        ( λ where
-          (inl (inr star) , is-one) → neq-inl-inr is-one
-          (inr star , is-one) → neq-inl-inr is-one))
-  pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inr star , P) =
-    eq-pair-Σ refl
-      ( eq-is-prop
-        ( is-prop-edge-ethane
-          ( standard-unordered-pair (inl (inr star)) (inr star))))
-  pr1 (pr1 (is-contr-standard-edge-ethane (inr star))) = zero-Fin 1
-  pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inr star)))) =
-    unit-trunc-Prop (one-Fin 1 , refl)
-  pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inr star)))) =
-    unit-trunc-Prop (zero-Fin 1 , refl)
-  pr2 (is-contr-standard-edge-ethane (inr star)) (inl (inr star) , P) =
-    eq-pair-Σ refl
-      ( eq-is-prop
-        ( is-prop-edge-ethane
-          ( standard-unordered-pair (inr star) (inl (inr star)))))
-  pr2 (is-contr-standard-edge-ethane (inr star)) (inr star , P) =
-    ex-falso
-      ( apply-universal-property-trunc-Prop (pr1 P) empty-Prop
-        ( λ where
-          (inl (inr star) , is-zero) → neq-inr-inl is-zero
-          (inr star , is-zero) → neq-inr-inl is-zero))
+  abstract
+    is-contr-standard-edge-ethane :
+      (c : vertex-ethane) →
+      is-contr (Σ (vertex-ethane) (λ c' → standard-edge-ethane c c'))
+    pr1 (pr1 (is-contr-standard-edge-ethane (inl (inr star)))) = one-Fin 1
+    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
+      unit-trunc-Prop (zero-Fin 1 , refl)
+    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
+      unit-trunc-Prop (one-Fin 1 , refl)
+    pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inl (inr star) , P) =
+      ex-falso
+        ( apply-universal-property-trunc-Prop (pr2 P) empty-Prop
+          ( λ where
+            ( inl (inr star) , is-one) → neq-inl-inr is-one
+            ( inr star , is-one) → neq-inl-inr is-one))
+    pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inr star , P) =
+      eq-pair-Σ refl
+        ( eq-is-prop
+          ( is-prop-edge-ethane
+            ( standard-unordered-pair (inl (inr star)) (inr star))))
+    pr1 (pr1 (is-contr-standard-edge-ethane (inr star))) = zero-Fin 1
+    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inr star)))) =
+      unit-trunc-Prop (one-Fin 1 , refl)
+    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inr star)))) =
+      unit-trunc-Prop (zero-Fin 1 , refl)
+    pr2 (is-contr-standard-edge-ethane (inr star)) (inl (inr star) , P) =
+      eq-pair-Σ refl
+        ( eq-is-prop
+          ( is-prop-edge-ethane
+            ( standard-unordered-pair (inr star) (inl (inr star)))))
+    pr2 (is-contr-standard-edge-ethane (inr star)) (inr star , P) =
+      ex-falso
+        ( apply-universal-property-trunc-Prop (pr1 P) empty-Prop
+          ( λ where
+            ( inl (inr star) , is-zero) → neq-inr-inl is-zero
+            ( inr star , is-zero) → neq-inr-inl is-zero))
 
   abstract
     is-emb-bonding-ethane : (c : vertex-ethane) → is-emb (bonding-ethane c)
@@ -231,13 +233,13 @@ module _
   pr1 (pr2 (pr2 (pr2 ethane))) (inl (inr star)) P =
     apply-universal-property-trunc-Prop (pr2 P) empty-Prop
       ( λ where
-        (inl (inr star) , is-one) → neq-inl-inr is-one
-        (inr star , is-one) → neq-inl-inr is-one)
+        ( inl (inr star) , is-one) → neq-inl-inr is-one
+        ( inr star , is-one) → neq-inl-inr is-one)
   pr1 (pr2 (pr2 (pr2 ethane))) (inr star) P =
     apply-universal-property-trunc-Prop (pr1 P) empty-Prop
       ( λ where
-        (inl (inr star) , is-zero) → neq-inr-inl is-zero
-        (inr star , is-zero) → neq-inr-inl is-zero)
+        ( inl (inr star) , is-zero) → neq-inr-inl is-zero
+        ( inr star , is-zero) → neq-inr-inl is-zero)
   pr1 (pr2 (pr2 (pr2 (pr2 ethane)))) c c' =
     concatenate-eq-leq-ℕ 3
       ( inv
@@ -262,8 +264,7 @@ module _
           ( neq-inl-inr))
         ( cons-walk-Undirected-Graph
           ( standard-unordered-pair (zero-Fin 1) (one-Fin 1))
-          ( pair
-            ( unit-trunc-Prop (zero-Fin 1 , refl))
+          ( ( unit-trunc-Prop (zero-Fin 1 , refl)) ,
             ( unit-trunc-Prop (one-Fin 1 , refl)))
           { zero-Fin 1}
           ( refl-walk-Undirected-Graph)))
@@ -282,8 +283,7 @@ module _
           ( neq-inl-inr))
         ( cons-walk-Undirected-Graph
           ( standard-unordered-pair (one-Fin 1) (zero-Fin 1))
-          ( pair
-            ( unit-trunc-Prop (one-Fin 1 , refl))
+          ( ( unit-trunc-Prop (one-Fin 1 , refl)) ,
             ( unit-trunc-Prop (zero-Fin 1 , refl)))
           { zero-Fin 1}
           ( refl-walk-Undirected-Graph)))

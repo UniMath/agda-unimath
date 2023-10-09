@@ -158,15 +158,14 @@ module _
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
         ( h' , x')
         ( h , x))
-      ( λ { (g , p , q) →
-            intro-∃
-              ( inv-Group G g)
-              ( pair
-                ( ( ap
-                    ( mul-Group' H h')
-                    ( preserves-inv-hom-Group G H f g)) ∙
-                  ( inv (transpose-eq-mul-Group' H p)))
-                ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
+      ( λ (g , p , q) →
+        intro-∃
+          ( inv-Group G g)
+          ( ( ( ap
+                ( mul-Group' H h')
+                ( preserves-inv-hom-Group G H f g)) ∙
+              ( inv (transpose-eq-mul-Group' H p))) ,
+            ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q))))
   pr2
     ( pr2
       ( pr2
@@ -177,28 +176,27 @@ module _
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
         ( h , x)
         ( h'' , x''))
-      ( λ { (g , p , q) →
-            apply-universal-property-trunc-Prop d
-              ( pr1
-                ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action
-                  ( X))
-                ( h , x)
-                ( h'' , x''))
-              ( λ { (g' , p' , q') →
-                    intro-∃
-                      ( mul-Group G g' g)
-                      ( pair
-                        ( ( ap
-                            ( mul-Group' H h)
-                            ( preserves-mul-hom-Group G H f g' g)) ∙
-                          ( ( associative-mul-Group H
-                              ( map-hom-Group G H f g')
-                              ( map-hom-Group G H f g)
-                              ( h)) ∙
-                            ( ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
-                              ( p'))))
-                        ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
-                          ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))})})
+      ( λ (g , p , q) →
+        apply-universal-property-trunc-Prop d
+          ( pr1
+            ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action
+              ( X))
+            ( h , x)
+            ( h'' , x''))
+          ( λ (g' , p' , q') →
+            intro-∃
+              ( mul-Group G g' g)
+              ( ( ( ap
+                    ( mul-Group' H h)
+                    ( preserves-mul-hom-Group G H f g' g)) ∙
+                  ( ( associative-mul-Group H
+                      ( map-hom-Group G H f g')
+                      ( map-hom-Group G H f g)
+                      ( h)) ∙
+                    ( ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
+                      ( p')))) ,
+                ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
+                  ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))))
 
   set-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} → Abstract-Group-Action G l3 →

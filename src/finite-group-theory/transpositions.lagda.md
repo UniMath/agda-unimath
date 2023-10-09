@@ -263,19 +263,19 @@ module _
       is-not-identity-swap-2-Element-Type
         ( 2-element-type-2-Element-Decidable-Subtype P)
         ( eq-htpy-equiv
-          ( λ { (pair x p) →
-                eq-pair-Σ
-                  ( ( ap
-                      ( map-transposition' P x)
-                      ( eq-is-prop
-                        ( is-prop-is-decidable
-                          ( is-prop-is-in-2-Element-Decidable-Subtype P x))
-                          { y =
-                            is-decidable-subtype-subtype-2-Element-Decidable-Subtype
-                              ( P)
-                              ( x)})) ∙
-                    ( htpy-eq f x))
-                  ( eq-is-in-2-Element-Decidable-Subtype P)}))
+          ( λ (x , p) →
+            eq-pair-Σ
+              ( ( ap
+                  ( map-transposition' P x)
+                  ( eq-is-prop
+                    ( is-prop-is-decidable
+                      ( is-prop-is-in-2-Element-Decidable-Subtype P x))
+                      { y =
+                        is-decidable-subtype-subtype-2-Element-Decidable-Subtype
+                          ( P)
+                          ( x)})) ∙
+                ( htpy-eq f x))
+              ( eq-is-in-2-Element-Decidable-Subtype P)))
 ```
 
 ### Any transposition on a type equipped with a counting is a standard transposition

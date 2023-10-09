@@ -50,7 +50,7 @@ module _
           equiv-Π-equiv-family
             ( λ i → extensionality-obj-Category (C i) (x i) (y i)) ∘e
           equiv-funext)
-        ( λ {refl → refl})
+        ( λ where refl → refl)
 
   Π-Category : Category (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 Π-Category = Π-Precategory I (precategory-Category ∘ C)

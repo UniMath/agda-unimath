@@ -101,6 +101,9 @@ abstract
 empty-Prop : Prop lzero
 pr1 empty-Prop = empty
 pr2 empty-Prop = is-prop-empty
+
+is-prop-is-empty : {l : Level} {A : UU l} → is-empty A → is-prop A
+is-prop-is-empty is-empty-A = ex-falso ∘ is-empty-A
 ```
 
 ### The empty type is a set

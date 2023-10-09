@@ -186,29 +186,31 @@ module _
         unit-trunc-Prop
           ( x , symmetric-apart-Type-With-Apartness Y (f x) (g x) a))
 
-  is-cotransitive-apart-function-into-Type-With-Apartness :
-    is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
-  is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
-    apply-universal-property-trunc-Prop H
-      ( disj-Prop
-        ( rel-apart-function-into-Type-With-Apartness X Y f h)
-        ( rel-apart-function-into-Type-With-Apartness X Y g h))
-      ( λ (x , a) →
-        apply-universal-property-trunc-Prop
-          ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
-          ( disj-Prop
-            ( rel-apart-function-into-Type-With-Apartness X Y f h)
-            ( rel-apart-function-into-Type-With-Apartness X Y g h))
-          ( λ { (inl b) →
+  abstract
+    is-cotransitive-apart-function-into-Type-With-Apartness :
+      is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
+    is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
+      apply-universal-property-trunc-Prop H
+        ( disj-Prop
+          ( rel-apart-function-into-Type-With-Apartness X Y f h)
+          ( rel-apart-function-into-Type-With-Apartness X Y g h))
+        ( λ (x , a) →
+          apply-universal-property-trunc-Prop
+            ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
+            ( disj-Prop
+              ( rel-apart-function-into-Type-With-Apartness X Y f h)
+              ( rel-apart-function-into-Type-With-Apartness X Y g h))
+            ( λ where
+              ( inl b) →
                 inl-disj-Prop
                   ( rel-apart-function-into-Type-With-Apartness X Y f h)
                   ( rel-apart-function-into-Type-With-Apartness X Y g h)
-                  ( unit-trunc-Prop (x , b)) ;
-                (inr b) →
+                  ( unit-trunc-Prop (x , b))
+              ( inr b) →
                 inr-disj-Prop
                   ( rel-apart-function-into-Type-With-Apartness X Y f h)
                   ( rel-apart-function-into-Type-With-Apartness X Y g h)
-                  ( unit-trunc-Prop (x , b))}))
+                  ( unit-trunc-Prop (x , b))))
 
   exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y

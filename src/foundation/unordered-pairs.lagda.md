@@ -522,24 +522,27 @@ unordered-distinct-pair A =
 ### Every unordered pair is merely equal to a standard unordered pair
 
 ```agda
-is-surjective-standard-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) →
-  type-trunc-Prop
-    ( Σ A (λ x → Σ A (λ y → standard-unordered-pair x y ＝ p)))
-is-surjective-standard-unordered-pair (I , a) =
-  apply-universal-property-trunc-Prop
-    ( has-two-elements-type-2-Element-Type I)
-    ( trunc-Prop
-      ( Σ _ (λ x → Σ _ (λ y → standard-unordered-pair x y ＝ (I , a)))))
-    ( λ e →
-      unit-trunc-Prop
-        ( a (map-equiv e (zero-Fin 1)) ,
-          a (map-equiv e (one-Fin 1)) ,
-          eq-Eq-unordered-pair
-            ( standard-unordered-pair _ _)
-            ( I , a)
-            ( e)
-            ( λ { (inl (inr star)) → refl ; (inr star) → refl})))
+abstract
+  is-surjective-standard-unordered-pair :
+    {l : Level} {A : UU l} (p : unordered-pair A) →
+    type-trunc-Prop
+      ( Σ A (λ x → Σ A (λ y → standard-unordered-pair x y ＝ p)))
+  is-surjective-standard-unordered-pair (I , a) =
+    apply-universal-property-trunc-Prop
+      ( has-two-elements-type-2-Element-Type I)
+      ( trunc-Prop
+        ( Σ _ (λ x → Σ _ (λ y → standard-unordered-pair x y ＝ (I , a)))))
+      ( λ e →
+        unit-trunc-Prop
+          ( a (map-equiv e (zero-Fin 1)) ,
+            a (map-equiv e (one-Fin 1)) ,
+            eq-Eq-unordered-pair
+              ( standard-unordered-pair _ _)
+              ( I , a)
+              ( e)
+              ( λ where
+                ( inl (inr star)) → refl
+                ( inr star) → refl)))
 ```
 
 ### For every unordered pair `p` and every element `i` in its underlying type, `p` is equal to a standard unordered pair

@@ -93,16 +93,16 @@ raise-ex-falso-emb l =
 ### Being empty is a proposition
 
 ```agda
-is-prop-is-empty : {l : Level} {A : UU l} → is-prop (is-empty A)
-is-prop-is-empty = is-prop-function-type is-prop-empty
+is-property-is-empty : {l : Level} {A : UU l} → is-prop (is-empty A)
+is-property-is-empty = is-prop-function-type is-prop-empty
 
 is-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-empty-Prop A) = is-empty A
-pr2 (is-empty-Prop A) = is-prop-is-empty
+pr2 (is-empty-Prop A) = is-property-is-empty
 
 is-nonempty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-nonempty-Prop A) = is-nonempty A
-pr2 (is-nonempty-Prop A) = is-prop-is-empty
+pr2 (is-nonempty-Prop A) = is-property-is-empty
 ```
 
 ```agda
@@ -163,5 +163,5 @@ pr2 (is-contr-type-is-empty l) x =
       ( equiv-is-empty
         is-empty-raise-empty
         ( is-in-subuniverse-inclusion-subuniverse is-empty-Prop x)))
-    ( eq-is-prop is-prop-is-empty)
+    ( eq-is-prop is-property-is-empty)
 ```

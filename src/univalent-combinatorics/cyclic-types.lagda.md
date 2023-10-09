@@ -493,17 +493,19 @@ is-retraction-equiv-Eq-Cyclic-Type k e =
         ( ℤ-Mod-Cyclic-Type k)
         ( e)))
 
-is-equiv-Eq-equiv-Cyclic-Type :
-  (k : ℕ) (X : Cyclic-Type lzero k) → is-equiv (Eq-equiv-Cyclic-Type k X)
-is-equiv-Eq-equiv-Cyclic-Type k X =
-  apply-universal-property-trunc-Prop
-    ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X)
-    ( is-equiv-Prop (Eq-equiv-Cyclic-Type k X))
-    ( λ { refl →
+abstract
+  is-equiv-Eq-equiv-Cyclic-Type :
+    (k : ℕ) (X : Cyclic-Type lzero k) → is-equiv (Eq-equiv-Cyclic-Type k X)
+  is-equiv-Eq-equiv-Cyclic-Type k X =
+    apply-universal-property-trunc-Prop
+      ( mere-eq-Cyclic-Type k (ℤ-Mod-Cyclic-Type k) X)
+      ( is-equiv-Prop (Eq-equiv-Cyclic-Type k X))
+      ( λ where
+        refl →
           is-equiv-is-invertible
             ( equiv-Eq-Cyclic-Type k)
             ( is-section-equiv-Eq-Cyclic-Type k)
-            ( is-retraction-equiv-Eq-Cyclic-Type k)})
+            ( is-retraction-equiv-Eq-Cyclic-Type k))
 
 equiv-compute-Ω-Cyclic-Type :
   (k : ℕ) → type-Ω (pair (Cyclic-Type lzero k) (ℤ-Mod-Cyclic-Type k)) ≃ ℤ-Mod k

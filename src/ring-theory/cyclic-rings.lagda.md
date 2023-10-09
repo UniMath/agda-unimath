@@ -341,36 +341,35 @@ module _
               ( mul-Cyclic-Ring R g x))
             ( trunc-Prop
               ( fiber (map-initial-hom-Ring (ring-Cyclic-Ring R)) x))
-            ( λ { (n , p) (k , q) →
-                  unit-trunc-Prop
-                    ( ( k) ,
-                      ( equational-reasoning
-                        integer-multiple-Cyclic-Ring R k
-                          ( one-Cyclic-Ring R)
-                        ＝ integer-multiple-Cyclic-Ring R k
-                            ( integer-multiple-Cyclic-Ring R n g)
-                          by
-                          ap
-                            ( integer-multiple-Cyclic-Ring R k)
-                            ( inv p)
-                        ＝ integer-multiple-Cyclic-Ring R n
-                            ( integer-multiple-Cyclic-Ring R k g)
-                          by
-                          swap-integer-multiple-Cyclic-Ring R k n g
-                        ＝ integer-multiple-Cyclic-Ring R n
-                            ( mul-Cyclic-Ring R g x)
-                          by
-                          ap (integer-multiple-Cyclic-Ring R n) q
-                        ＝ mul-Cyclic-Ring R
-                            ( integer-multiple-Cyclic-Ring R n g)
-                            ( x)
-                          by
-                          inv
-                            ( left-integer-multiple-law-mul-Cyclic-Ring R n g x)
-                        ＝ mul-Cyclic-Ring R (one-Cyclic-Ring R) x
-                          by ap (mul-Cyclic-Ring' R x) p
-                        ＝ x
-                          by left-unit-law-mul-Cyclic-Ring R x))}))
+            ( λ (n , p) (k , q) →
+              unit-trunc-Prop
+                ( ( k) ,
+                  ( equational-reasoning
+                    integer-multiple-Cyclic-Ring R k
+                      ( one-Cyclic-Ring R)
+                    ＝ integer-multiple-Cyclic-Ring R k
+                        ( integer-multiple-Cyclic-Ring R n g)
+                      by
+                      ap
+                        ( integer-multiple-Cyclic-Ring R k)
+                        ( inv p)
+                    ＝ integer-multiple-Cyclic-Ring R n
+                        ( integer-multiple-Cyclic-Ring R k g)
+                      by
+                      swap-integer-multiple-Cyclic-Ring R k n g
+                    ＝ integer-multiple-Cyclic-Ring R n
+                        ( mul-Cyclic-Ring R g x)
+                      by
+                      ap (integer-multiple-Cyclic-Ring R n) q
+                    ＝ mul-Cyclic-Ring R
+                        ( integer-multiple-Cyclic-Ring R n g)
+                        ( x)
+                      by
+                      inv (left-integer-multiple-law-mul-Cyclic-Ring R n g x)
+                    ＝ mul-Cyclic-Ring R (one-Cyclic-Ring R) x
+                      by ap (mul-Cyclic-Ring' R x) p
+                    ＝ x
+                      by left-unit-law-mul-Cyclic-Ring R x))))
 
   abstract
     is-generating-element-one-Cyclic-Ring :
@@ -482,8 +481,9 @@ module _
         ( is-surjective-initial-hom-Cyclic-Ring R x)
         ( is-surjective-initial-hom-Cyclic-Ring R y)
         ( Id-Prop (set-Cyclic-Ring R) _ _)
-        ( λ { (n , refl) (m , refl) →
-              commute-integer-multiples-diagonal-Ring (ring-Cyclic-Ring R) n m})
+        ( λ where
+          ( n , refl) (m , refl) →
+            commute-integer-multiples-diagonal-Ring (ring-Cyclic-Ring R) n m)
 
   commutative-ring-Cyclic-Ring : Commutative-Ring l
   pr1 commutative-ring-Cyclic-Ring = ring-Cyclic-Ring R

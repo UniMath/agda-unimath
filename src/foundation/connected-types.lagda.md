@@ -106,6 +106,6 @@ module _
                   ( trunc (succ-𝕋 k) A)
                   ( unit-trunc a)
                   ( unit-trunc x))
-                ( λ { refl → refl})
+                ( λ where refl → refl)
                 ( center (K a x)))))
 ```
