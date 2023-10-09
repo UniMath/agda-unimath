@@ -13,7 +13,7 @@ open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.empty-types
 open import foundation.identity-types
-open import foundation.negation
+open import foundation.negated-equality
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -32,7 +32,7 @@ repeat-Fin (succ-ℕ k) (inr star) (inr star) = inr star
 abstract
   is-almost-injective-repeat-Fin :
     (k : ℕ) (x : Fin k) {y z : Fin (succ-ℕ k)} →
-    ¬ (inl x ＝ y) → ¬ (inl x ＝ z) →
+    inl x ≠ y → inl x ≠ z →
     repeat-Fin k x y ＝ repeat-Fin k x z → y ＝ z
   is-almost-injective-repeat-Fin (succ-ℕ k) (inl x) {inl y} {inl z} f g p =
     ap

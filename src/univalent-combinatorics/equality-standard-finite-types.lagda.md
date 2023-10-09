@@ -21,6 +21,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.set-truncations
@@ -162,7 +163,7 @@ equiv-unit-trunc-Fin-Set k = equiv-unit-trunc-Set (Fin-Set k)
 
 ```agda
 two-distinct-elements-leq-2-Fin :
-  (n : ℕ) → leq-ℕ 2 n → Σ (Fin n) (λ x → Σ (Fin n) (λ y → ¬ (Id x y)))
+  (n : ℕ) → leq-ℕ 2 n → Σ (Fin n) (λ x → Σ (Fin n) (λ y → x ≠ y))
 pr1 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq) =
   inr star
 pr1 (pr2 (two-distinct-elements-leq-2-Fin (succ-ℕ (succ-ℕ n)) ineq)) =

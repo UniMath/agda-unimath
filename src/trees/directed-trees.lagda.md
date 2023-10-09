@@ -22,6 +22,7 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
 open import foundation.isolated-elements
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
@@ -412,7 +413,7 @@ module _
     (x : vertex-Directed-Graph G) →
     is-contr
       ( (r ＝ x) + Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x)) →
-    Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x) → ¬ (r ＝ x)
+    Σ (vertex-Directed-Graph G) (edge-Directed-Graph G x) → r ≠ x
   is-not-root-has-unique-direct-successor-Directed-Graph x H (y , e) =
     is-empty-left-summand-is-contr-coprod H (y , e)
 

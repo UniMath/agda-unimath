@@ -24,6 +24,7 @@ open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.homotopies
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.unit-type
@@ -53,7 +54,7 @@ This definition uses the `standard-transposition` in
 
 ```agda
 module _
-  (n : ℕ) (i j : Fin n) (neq : ¬ (i ＝ j))
+  (n : ℕ) (i j : Fin n) (neq : i ≠ j)
   where
 
   transposition-Fin : Permutation n
@@ -75,8 +76,8 @@ module _
 
   is-fixed-point-transposition-Fin :
     (z : Fin n) →
-    ¬ (i ＝ z) →
-    ¬ (j ＝ z) →
+    i ≠ z →
+    j ≠ z →
     map-standard-transposition (has-decidable-equality-Fin n) neq z ＝ z
   is-fixed-point-transposition-Fin =
     is-fixed-point-standard-transposition (has-decidable-equality-Fin n) neq
@@ -123,8 +124,8 @@ We show that this definiton is an instance of the previous one.
 ```agda
   cases-htpy-swap-two-last-elements-transposition-Fin :
     (x : Fin (succ-ℕ (succ-ℕ n))) →
-    (x ＝ neg-one-Fin (succ-ℕ n)) + (¬ (x ＝ neg-one-Fin (succ-ℕ n))) →
-    (x ＝ neg-two-Fin (succ-ℕ n)) + (¬ (x ＝ neg-two-Fin (succ-ℕ n))) →
+    (x ＝ neg-one-Fin (succ-ℕ n)) + (x ≠ neg-one-Fin (succ-ℕ n)) →
+    (x ＝ neg-two-Fin (succ-ℕ n)) + (x ≠ neg-two-Fin (succ-ℕ n)) →
     map-swap-two-last-elements-transposition-Fin x ＝
     map-transposition-Fin
       ( succ-ℕ (succ-ℕ n))
@@ -212,10 +213,10 @@ map-adjacent-transposition-Fin n k = map-equiv (adjacent-transposition-Fin n k)
 
 ```agda
 cases-htpy-map-coprod-map-transposition-id-Fin :
-  (n : ℕ) → (k l : Fin n) → (neq : ¬ (k ＝ l)) →
+  (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   (x : Fin (succ-ℕ n)) →
-  (x ＝ inl-Fin n k) + ¬ (x ＝ inl-Fin n k) →
-  (x ＝ inl-Fin n l) + ¬ (x ＝ inl-Fin n l) →
+  (x ＝ inl-Fin n k) + (x ≠ inl-Fin n k) →
+  (x ＝ inl-Fin n l) + (x ≠ inl-Fin n l) →
   map-coprod (map-transposition-Fin n k l neq) id x ＝
   map-transposition-Fin
     ( succ-ℕ n)
@@ -296,7 +297,7 @@ cases-htpy-map-coprod-map-transposition-id-Fin
       ( neql ∘ inv))
 
 htpy-map-coprod-map-transposition-id-Fin :
-  (n : ℕ) → (k l : Fin n) → (neq : ¬ (k ＝ l)) →
+  (n : ℕ) → (k l : Fin n) → (neq : k ≠ l) →
   htpy-equiv
     ( equiv-coprod (transposition-Fin n k l neq) id-equiv)
     ( transposition-Fin
@@ -315,7 +316,7 @@ htpy-map-coprod-map-transposition-id-Fin n k l neq x =
     ( has-decidable-equality-Fin (succ-ℕ n) x (inl-Fin n l))
 
 helper-htpy-same-transposition-Fin :
-  (n : ℕ) (k l : Fin n) (neq1 : ¬ (k ＝ l)) (neq2 : ¬ (k ＝ l)) →
+  (n : ℕ) (k l : Fin n) (neq1 : k ≠ l) (neq2 : k ≠ l) →
   (neq1 ＝ neq2) →
   htpy-equiv
     ( transposition-Fin n k l neq1)
@@ -323,7 +324,7 @@ helper-htpy-same-transposition-Fin :
 helper-htpy-same-transposition-Fin n k l neq1 .neq1 refl = refl-htpy
 
 htpy-same-transposition-Fin :
-  {n : ℕ} {k l : Fin n} {neq1 : ¬ (k ＝ l)} {neq2 : ¬ (k ＝ l)} →
+  {n : ℕ} {k l : Fin n} {neq1 : k ≠ l} {neq2 : k ≠ l} →
   htpy-equiv
     ( transposition-Fin n k l neq1)
     ( transposition-Fin n k l neq2)
@@ -357,9 +358,9 @@ htpy-adjacent-transposition-Fin (succ-ℕ n) (inr star) =
 
 ```agda
 cases-htpy-transposition-Fin-transposition-swap-Fin :
-  (n : ℕ) → (i j : Fin n) → (neq : ¬ (i ＝ j)) → (x : Fin n) →
-  (x ＝ i) + ¬ (x ＝ i) →
-  (x ＝ j) + ¬ (x ＝ j) →
+  (n : ℕ) → (i j : Fin n) → (neq : i ≠ j) → (x : Fin n) →
+  (x ＝ i) + (x ≠ i) →
+  (x ＝ j) + (x ≠ j) →
   map-transposition-Fin n i j neq x ＝
   map-transposition-Fin n j i (neq ∘ inv) x
 cases-htpy-transposition-Fin-transposition-swap-Fin
@@ -408,7 +409,7 @@ cases-htpy-transposition-Fin-transposition-swap-Fin
       ( neqi ∘ inv))
 
 htpy-transposition-Fin-transposition-swap-Fin :
-  (n : ℕ) → (i j : Fin n) → (neq : ¬ (i ＝ j)) →
+  (n : ℕ) → (i j : Fin n) → (neq : i ≠ j) →
   htpy-equiv
     ( transposition-Fin n i j neq)
     ( transposition-Fin n j i (neq ∘ inv))
@@ -428,9 +429,9 @@ htpy-transposition-Fin-transposition-swap-Fin n i j neq x =
 ```agda
 htpy-conjugate-transposition-Fin :
   (n : ℕ) (x y z : Fin n)
-  (neqxy : ¬ (x ＝ y))
-  (neqyz : ¬ (y ＝ z))
-  (neqxz : ¬ (x ＝ z)) →
+  (neqxy : x ≠ y)
+  (neqyz : y ≠ z)
+  (neqxz : x ≠ z) →
   htpy-equiv
     ( transposition-Fin n y z neqyz ∘e
       ( transposition-Fin n x y neqxy ∘e
@@ -456,7 +457,7 @@ private
   htpy-whisk f H x = ap f (H (f x))
 
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin :
-  (n : ℕ) (x : Fin (succ-ℕ n)) (neq : ¬ (x ＝ neg-one-Fin n)) →
+  (n : ℕ) (x : Fin (succ-ℕ n)) (neq : x ≠ neg-one-Fin n) →
   htpy-equiv
     ( swap-two-last-elements-transposition-Fin n ∘e
       ( transposition-Fin
@@ -488,7 +489,7 @@ htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin n x neq =
         ( neq-inl-inr))))
 
 htpy-conjugate-transposition-swap-two-last-elements-transposition-Fin' :
-  (n : ℕ) (x : Fin (succ-ℕ n)) (neq : ¬ (x ＝ neg-one-Fin n)) →
+  (n : ℕ) (x : Fin (succ-ℕ n)) (neq : x ≠ neg-one-Fin n) →
   htpy-equiv
     ( swap-two-last-elements-transposition-Fin n ∘e
       ( transposition-Fin
@@ -614,7 +615,7 @@ htpy-permutation-snoc-list-adjacent-transpositions n (cons y l) x =
   htpy-permutation-snoc-list-adjacent-transpositions n l x
 
 htpy-permutation-list-adjacent-transpositions-transposition-Fin :
-  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j)) →
+  (n : ℕ) (i j : Fin (succ-ℕ n)) (neq : i ≠ j) →
   htpy-equiv
     ( permutation-list-adjacent-transpositions
       ( n)

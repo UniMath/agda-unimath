@@ -28,6 +28,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -446,7 +447,7 @@ abstract
 ```agda
 permutation-list-standard-transpositions-Fin :
   (n : ℕ) →
-  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j))) →
+  list (Σ (Fin n × Fin n) (λ (i , j) → i ≠ j)) →
   Permutation n
 permutation-list-standard-transpositions-Fin n =
   fold-list
@@ -456,7 +457,7 @@ permutation-list-standard-transpositions-Fin n =
 
 list-standard-transpositions-permutation-Fin :
   (n : ℕ) (f : Permutation n) →
-  list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j)))
+  list (Σ (Fin n × Fin n) (λ (i , j) → i ≠ j))
 list-standard-transpositions-permutation-Fin n f =
   map-list
     ( λ P →

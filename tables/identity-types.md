@@ -13,6 +13,7 @@
 | The identity type (foundation)                                        | [`foundation.identity-types`](foundation.identity-types.md)                                                                                         |
 | The identity type (foundation-core)                                   | [`foundation-core.identity-types`](foundation-core.identity-types.md)                                                                               |
 | Large identity types                                                  | [`foundation.large-identity-types`](foundation.large-identity-types.md)                                                                             |
+| Negated equality                                                      | [`foundation.negated-equality`](foundation.negated-equality.md)                                                                                     |
 | Path algebra                                                          | [`foundation.path-algebra`](foundation.path-algebra.md)                                                                                             |
 | The Regensburg extension of the fundamental theorem of identity types | [`foundation.regensburg-extension-fundamental-theorem-of-identity-types`](foundation.regensburg-extension-fundamental-theorem-of-identity-types.md) |
 | Symmetric identity types                                              | [`foundation.symmetric-identity-types`](foundation.symmetric-identity-types.md)                                                                     |

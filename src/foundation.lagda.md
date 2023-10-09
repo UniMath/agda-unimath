@@ -189,6 +189,7 @@ open import foundation.multivariable-decidable-relations public
 open import foundation.multivariable-functoriality-set-quotients public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
+open import foundation.negated-equality public
 open import foundation.negation public
 open import foundation.noncontractible-types public
 open import foundation.pairs-of-distinct-elements public

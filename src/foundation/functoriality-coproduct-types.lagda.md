@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopy-induction
+open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
@@ -307,7 +308,7 @@ module _
   equiv-coproduct-induce-equiv-disjoint :
     (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y : B) → ¬ (map-equiv f (inl x) ＝ inr y)
+    (x : A) (y : B) → map-equiv f (inl x) ≠ inr y
   equiv-coproduct-induce-equiv-disjoint f g p x y q =
     neq-inr-inl
       ( is-injective-map-equiv f

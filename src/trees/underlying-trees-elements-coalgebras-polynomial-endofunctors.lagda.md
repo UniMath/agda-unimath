@@ -21,6 +21,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-elements
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -405,8 +406,7 @@ module _
     {v w : type-coalgebra-polynomial-endofunctor X}
     (H : v ∈ w in-coalgebra X)
     (x : node-element-coalgebra X v) →
-    ¬ ( root-coalgebra w ＝
-        node-inclusion-element-coalgebra H x)
+    root-coalgebra w ≠ node-inclusion-element-coalgebra H x
   is-empty-eq-root-node-inclusion-element-coalgebra
     H x ()
 

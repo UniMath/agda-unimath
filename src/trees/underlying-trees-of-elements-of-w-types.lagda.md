@@ -17,6 +17,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.isolated-elements
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -166,7 +167,7 @@ module _
 
   is-empty-eq-root-node-inclusion-element-𝕎 :
     {v w : 𝕎 A B} (H : v ∈-𝕎 w) (x : node-element-𝕎 v) →
-    ¬ (root-𝕎 w ＝ node-inclusion-element-𝕎 H x)
+    root-𝕎 w ≠ node-inclusion-element-𝕎 H x
   is-empty-eq-root-node-inclusion-element-𝕎 =
     is-empty-eq-root-node-inclusion-element-coalgebra (𝕎-Coalg A B)
 ```

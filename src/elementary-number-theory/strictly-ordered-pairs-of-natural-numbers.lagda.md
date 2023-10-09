@@ -16,7 +16,7 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
-open import foundation.negation
+open import foundation.negated-equality
 open import foundation.pairs-of-distinct-elements
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -65,7 +65,7 @@ pair-of-distinct-elements-strictly-ordered-pair-ℕ (a , b , H) =
 
 ```agda
 strictly-ordered-pair-pair-of-distinct-elements-ℕ' :
-  (a b : ℕ) → ¬ (a ＝ b) → strictly-ordered-pair-ℕ
+  (a b : ℕ) → a ≠ b → strictly-ordered-pair-ℕ
 strictly-ordered-pair-pair-of-distinct-elements-ℕ' zero-ℕ zero-ℕ H =
   ex-falso (H refl)
 strictly-ordered-pair-pair-of-distinct-elements-ℕ' zero-ℕ (succ-ℕ b) H =
