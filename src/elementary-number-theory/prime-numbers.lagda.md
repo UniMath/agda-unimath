@@ -96,7 +96,7 @@ is-nonzero-is-prime-ℕ n H p =
   is-not-one-two-ℕ
     ( pr1
       ( H 2)
-      ( tr (2 ≠_) (inv p) ( is-nonzero-two-ℕ) ,
+      ( tr (λ k → 2 ≠ k) (inv p) ( is-nonzero-two-ℕ) ,
         tr (div-ℕ 2) (inv p) (0 , refl)))
 ```
 

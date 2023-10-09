@@ -76,7 +76,7 @@ module _
 complement-isolated-element :
   {l1 : Level} (X : UU l1) → isolated-element X → UU l1
 complement-isolated-element X x =
-  Σ X (element-isolated-element x ≠_)
+  Σ X (λ y → element-isolated-element x ≠ y)
 ```
 
 ## Properties
@@ -371,7 +371,7 @@ equiv-complement-isolated-element :
   complement-isolated-element X x ≃ complement-isolated-element Y y
 equiv-complement-isolated-element e x y p =
   equiv-Σ
-    ( pr1 y ≠_)
+    ( λ z → pr1 y ≠ z)
     ( e)
     ( λ z →
       equiv-neg
