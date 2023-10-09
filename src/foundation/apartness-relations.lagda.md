@@ -29,9 +29,9 @@ open import foundation-core.propositions
 An **apartness relation** on a type `A` is a
 [relation](foundation.binary-relations.md) `R` which is
 
-- **Antireflexive**: For any `a : A` we have `¬ (R a a)`
-- **Symmetric**: For any `a b : A` we have `R a b → R b a`
-- **Cotransitive**: For any `a b c : A` we have `R a b → R a c ∨ R b c`.
+- **Antireflexive:** For any `a : A` we have `¬ (R a a)`
+- **Symmetric:** For any `a b : A` we have `R a b → R b a`
+- **Cotransitive:** For any `a b c : A` we have `R a b → R a c ∨ R b c`.
 
 The idea of an apartness relation `R` is that `R a b` holds if you can
 positively establish a difference between `a` and `b`. For example, two subsets
