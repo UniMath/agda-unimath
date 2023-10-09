@@ -23,6 +23,7 @@ open import foundation.decidable-propositions
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -156,7 +157,7 @@ module _
   (a b : ℕ)
   (pa : is-prime-ℕ a)
   (pb : is-prime-ℕ b)
-  (n : ¬ (a ＝ b))
+  (n : a ≠ b)
   where
 
   is-one-is-common-divisor-is-prime-ℕ :

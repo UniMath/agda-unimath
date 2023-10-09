@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.subtypes
@@ -27,7 +28,7 @@ An [integer](elementary-number-theory.integers.md) `k` is said to be **nonzero**
 if the [proposition](foundation.propositions.md)
 
 ```text
-  ¬ (k ＝ 0)
+  k ≠ 0
 ```
 
 holds.

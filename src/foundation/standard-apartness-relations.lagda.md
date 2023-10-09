@@ -12,6 +12,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.law-of-excluded-middle
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.tight-apartness-relations
 open import foundation.universe-levels
 
@@ -33,7 +34,7 @@ is-standard-Apartness-Relation :
   {l1 l2 : Level} (l3 : Level) {A : UU l1} (R : Apartness-Relation l2 A) →
   UU (l1 ⊔ l2 ⊔ lsuc l3)
 is-standard-Apartness-Relation {l1} {l2} l3 {A} R =
-  LEM l3 → (x y : A) → (¬ (x ＝ y)) ↔ apart-Apartness-Relation R x y
+  LEM l3 → (x y : A) → (x ≠ y) ↔ apart-Apartness-Relation R x y
 ```
 
 ## Properties

@@ -11,6 +11,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
@@ -34,7 +35,7 @@ Pairs of distinct elements in a type `A` consist of two elements `x` and `y` of
 ```agda
 pair-of-distinct-elements : {l : Level} → UU l → UU l
 pair-of-distinct-elements A =
-  Σ A (λ x → Σ A (λ y → ¬ (x ＝ y)))
+  Σ A (λ x → Σ A (λ y → x ≠ y))
 
 module _
   {l : Level} {A : UU l} (p : pair-of-distinct-elements A)
@@ -47,7 +48,7 @@ module _
   second-pair-of-distinct-elements = pr1 (pr2 p)
 
   distinction-pair-of-distinct-elements :
-    ¬ (first-pair-of-distinct-elements ＝ second-pair-of-distinct-elements)
+    first-pair-of-distinct-elements ≠ second-pair-of-distinct-elements
   distinction-pair-of-distinct-elements = pr2 (pr2 p)
 ```
 
@@ -182,13 +183,13 @@ module _
     pair-of-distinct-elements A ↪ pair-of-distinct-elements B
   emb-pair-of-distinct-elements =
     emb-Σ
-      ( λ x → Σ B (λ y → ¬ (x ＝ y)))
+      ( λ x → Σ B (λ y → x ≠ y))
       ( e)
       ( λ x →
         emb-Σ
-          ( λ y → ¬ (map-emb e x ＝ y))
+          ( map-emb e x ≠_)
           ( e)
-          ( λ y → emb-equiv (equiv-neg (equiv-ap-emb e))))
+          ( λ _ → emb-equiv (equiv-neg (equiv-ap-emb e))))
 
   map-emb-pair-of-distinct-elements :
     pair-of-distinct-elements A → pair-of-distinct-elements B

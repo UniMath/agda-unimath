@@ -11,6 +11,7 @@ open import elementary-number-theory.divisibility-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 ```
 
@@ -22,7 +23,7 @@ A [natural number](elementary-number-theory.natural-numbers.md) `n` is said to
 be **nonzero** if the [proposition](foundation.propositions.md)
 
 ```text
-  ¬ (n ＝ 0)
+  n ≠ 0
 ```
 
 holds. This condition was already defined in the file

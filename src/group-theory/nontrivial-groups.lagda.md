@@ -18,6 +18,7 @@ open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
@@ -50,7 +51,7 @@ module _
 
   is-nontrivial-prop-Group : Prop l1
   is-nontrivial-prop-Group =
-    ∃-Prop (type-Group G) (λ x → ¬ (unit-Group G ＝ x))
+    ∃-Prop (type-Group G) (unit-Group G ≠_)
 
   is-nontrivial-Group : UU l1
   is-nontrivial-Group =

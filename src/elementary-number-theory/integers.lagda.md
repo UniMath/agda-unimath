@@ -20,6 +20,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -201,7 +202,7 @@ is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
   inv (is-retraction-pred-ℤ x) ∙ (ap pred-ℤ p ∙ is-retraction-pred-ℤ y)
 
-has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (succ-ℤ x ＝ x)
+has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
 has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
 has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
 has-no-fixed-points-succ-ℤ (inr (inl star)) ()

@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -97,7 +98,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : Set l) {x y : type-Set X} (np : ¬ (x ＝ y))
+  {l : Level} (X : Set l) {x y : type-Set X} (np : x ≠ y)
   where
 
   type-prop-standard-2-Element-Subtype : type-Set X → UU l
@@ -196,7 +197,7 @@ module _
     map-swap-2-Element-Type (2-element-type-2-Element-Subtype P)
 
   compute-swap-2-Element-Subtype :
-    (x y : type-2-Element-Subtype P) → ¬ (x ＝ y) →
+    (x y : type-2-Element-Subtype P) → x ≠ y →
     map-swap-2-Element-Subtype x ＝ y
   compute-swap-2-Element-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Subtype P)

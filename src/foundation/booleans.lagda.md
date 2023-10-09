@@ -8,6 +8,7 @@ module foundation.booleans where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -100,7 +101,7 @@ eq-Eq-bool {true} {true} star = refl
 eq-Eq-bool {false} {false} star = refl
 
 neq-false-true-bool :
-  ¬ (false ＝ true)
+  false ≠ true
 neq-false-true-bool ()
 ```
 
@@ -202,7 +203,7 @@ pr2 bool-𝔽 = is-finite-bool
 ### Boolean negation has no fixed points
 
 ```agda
-neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)
+neq-neg-bool : (b : bool) → b ≠ neg-bool b
 neq-neg-bool true ()
 neq-neg-bool false ()
 ```

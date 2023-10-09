@@ -18,6 +18,7 @@ open import foundation.embeddings
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.maybe
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.type-arithmetic-unit-type
 open import foundation.unit-type
@@ -75,7 +76,7 @@ module _
 complement-isolated-element :
   {l1 : Level} (X : UU l1) → isolated-element X → UU l1
 complement-isolated-element X x =
-  Σ X (λ y → ¬ (element-isolated-element x ＝ y))
+  Σ X (element-isolated-element x ≠_)
 ```
 
 ## Properties
@@ -370,7 +371,7 @@ equiv-complement-isolated-element :
   complement-isolated-element X x ≃ complement-isolated-element Y y
 equiv-complement-isolated-element e x y p =
   equiv-Σ
-    ( λ z → ¬ (pr1 y ＝ z))
+    ( pr1 y ≠_)
     ( e)
     ( λ z →
       equiv-neg

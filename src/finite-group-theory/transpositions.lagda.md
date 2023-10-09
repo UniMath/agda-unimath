@@ -34,6 +34,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
@@ -1231,16 +1232,16 @@ module _
   {X : UU l1}
   (H : has-decidable-equality X)
   {x y z : X}
-  (npxy : ¬ (x ＝ y))
-  (npyz : ¬ (y ＝ z))
-  (npxz : ¬ (x ＝ z))
+  (npxy : x ≠ y)
+  (npyz : y ≠ z)
+  (npxz : x ≠ z)
   where
 
   cases-htpy-conjugate-transposition :
     (w : X) →
-    ((w ＝ x) + ¬ (w ＝ x)) →
-    ((w ＝ y) + ¬ (w ＝ y)) →
-    ((w ＝ z) + ¬ (w ＝ z)) →
+    ((w ＝ x) + w ≠ x) →
+    ((w ＝ y) + w ≠ y) →
+    ((w ＝ z) + w ≠ z) →
     Id
       ( map-equiv
         ( standard-transposition H npyz ∘e
