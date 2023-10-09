@@ -165,7 +165,7 @@ module _
       ( root-coalgebra w ＝
         root-coalgebra w)
   is-contr-loop-space-root-element-coalgebra w =
-    is-contr-loop-space-isolated-point
+    is-contr-loop-space-isolated-element
       ( root-coalgebra w)
       ( is-isolated-root-element-coalgebra w)
 ```

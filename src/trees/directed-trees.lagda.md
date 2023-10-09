@@ -280,7 +280,7 @@ module _
   is-prop-is-root-Directed-Tree :
     (x : node-Directed-Tree T) → is-prop (is-root-Directed-Tree T x)
   is-prop-is-root-Directed-Tree =
-    is-prop-eq-isolated-point
+    is-prop-eq-isolated-element
       ( root-Directed-Tree T)
       ( is-isolated-root-Directed-Tree)
 
@@ -292,7 +292,7 @@ module _
   is-contr-loop-space-root-Directed-Tree :
     is-contr (root-Directed-Tree T ＝ root-Directed-Tree T)
   is-contr-loop-space-root-Directed-Tree =
-    is-contr-loop-space-isolated-point
+    is-contr-loop-space-isolated-element
       ( root-Directed-Tree T)
       ( is-isolated-root-Directed-Tree)
 
@@ -405,7 +405,7 @@ module _
   is-contr-loop-space-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph → is-contr (r ＝ r)
   is-contr-loop-space-root-unique-direct-successor-Directed-Graph H =
-    is-contr-loop-space-isolated-point r
+    is-contr-loop-space-isolated-element r
       ( is-isolated-root-unique-direct-successor-Directed-Graph H)
 
   is-not-root-has-unique-direct-successor-Directed-Graph :
