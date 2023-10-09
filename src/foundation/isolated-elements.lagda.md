@@ -69,7 +69,7 @@ module _
   is-isolated-isolated-element = pr2 x
 ```
 
-### Complements of isolated points
+### Complements of isolated elements
 
 ```agda
 complement-isolated-element :
@@ -162,7 +162,8 @@ module _
 
     is-contr-total-Eq-isolated-element :
       (d : is-isolated a) → is-contr (Σ A (Eq-isolated-element d))
-    pr1 (is-contr-total-Eq-isolated-element d) = center-total-Eq-isolated-element d
+    pr1 (is-contr-total-Eq-isolated-element d) =
+      center-total-Eq-isolated-element d
     pr2 (is-contr-total-Eq-isolated-element d) =
       contraction-total-Eq-isolated-element d
 
@@ -280,7 +281,7 @@ module _
     is-decidable-emb-point-isolated-element
 ```
 
-### Types with isolated points can be equipped with a Maybe-structure
+### Types with isolated elements can be equipped with a Maybe-structure
 
 ```agda
 map-maybe-structure-isolated-element :

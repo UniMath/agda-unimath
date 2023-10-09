@@ -1,4 +1,4 @@
-# Complements of isolated points of finite types
+# Complements of isolated elements of finite types
 
 ```agda
 module univalent-combinatorics.complements-isolated-elements where
@@ -26,89 +26,89 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-For any point `x` in a [finite type](univalent-combinatorics.finite-types.md)
+For any element `x` in a [finite type](univalent-combinatorics.finite-types.md)
 `X` of [cardinality](set-theory.cardinalities.md) `n+1`, we can construct its
 **complement**, which is a type of cardinality `n`.
 
 ## Definition
 
-### The complement of a point in a k-element type of arbitrary universe level
+### The complement of a element in a `k`-element type of arbitrary universe level
 
 ```agda
-isolated-point-UU-Fin :
+isolated-element-UU-Fin :
   {l : Level} (k : ℕ) (X : UU-Fin l (succ-ℕ k)) →
   type-UU-Fin (succ-ℕ k) X →
-  isolated-point (type-UU-Fin (succ-ℕ k) X)
-pr1 (isolated-point-UU-Fin k X x) = x
-pr2 (isolated-point-UU-Fin k X x) =
+  isolated-element (type-UU-Fin (succ-ℕ k) X)
+pr1 (isolated-element-UU-Fin k X x) = x
+pr2 (isolated-element-UU-Fin k X x) =
   has-decidable-equality-has-cardinality
     ( succ-ℕ k)
     ( has-cardinality-type-UU-Fin (succ-ℕ k) X)
     ( x)
 
-type-complement-point-UU-Fin :
+type-complement-element-UU-Fin :
   {l1 : Level} (k : ℕ) →
   Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) → UU l1
-type-complement-point-UU-Fin k (X , x) =
-  complement-isolated-point
+type-complement-element-UU-Fin k (X , x) =
+  complement-isolated-element
     ( type-UU-Fin (succ-ℕ k) X)
-    ( isolated-point-UU-Fin k X x)
+    ( isolated-element-UU-Fin k X x)
 
-equiv-maybe-structure-point-UU-Fin :
+equiv-maybe-structure-element-UU-Fin :
   {l : Level} (k : ℕ) (X : UU-Fin l (succ-ℕ k)) →
   (x : type-UU-Fin (succ-ℕ k) X) →
-  Maybe (type-complement-point-UU-Fin k (pair X x)) ≃
+  Maybe (type-complement-element-UU-Fin k (pair X x)) ≃
   type-UU-Fin (succ-ℕ k) X
-equiv-maybe-structure-point-UU-Fin k X x =
-  equiv-maybe-structure-isolated-point
+equiv-maybe-structure-element-UU-Fin k X x =
+  equiv-maybe-structure-isolated-element
     ( type-UU-Fin (succ-ℕ k) X)
-    ( isolated-point-UU-Fin k X x)
+    ( isolated-element-UU-Fin k X x)
 
-has-cardinality-type-complement-point-UU-Fin :
+has-cardinality-type-complement-element-UU-Fin :
   {l1 : Level} (k : ℕ)
   (X : Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k))) →
-  has-cardinality k (type-complement-point-UU-Fin k X)
-has-cardinality-type-complement-point-UU-Fin k (pair (pair X H) x) =
+  has-cardinality k (type-complement-element-UU-Fin k X)
+has-cardinality-type-complement-element-UU-Fin k (pair (pair X H) x) =
   apply-universal-property-trunc-Prop H
     ( has-cardinality-Prop k
-      ( type-complement-point-UU-Fin k (pair (pair X H) x)))
+      ( type-complement-element-UU-Fin k (pair (pair X H) x)))
     ( λ e →
       unit-trunc-Prop
         ( equiv-equiv-Maybe
           ( ( inv-equiv
-              ( equiv-maybe-structure-point-UU-Fin k (pair X H) x)) ∘e
+              ( equiv-maybe-structure-element-UU-Fin k (pair X H) x)) ∘e
             ( e))))
 
-complement-point-UU-Fin :
+complement-element-UU-Fin :
   {l1 : Level} (k : ℕ) →
   Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k)) →
   UU-Fin l1 k
-pr1 (complement-point-UU-Fin k T) =
-  type-complement-point-UU-Fin k T
-pr2 (complement-point-UU-Fin k T) =
-  has-cardinality-type-complement-point-UU-Fin k T
+pr1 (complement-element-UU-Fin k T) =
+  type-complement-element-UU-Fin k T
+pr2 (complement-element-UU-Fin k T) =
+  has-cardinality-type-complement-element-UU-Fin k T
 
-inclusion-complement-point-UU-Fin :
+inclusion-complement-element-UU-Fin :
   {l1 : Level} (k : ℕ)
   (X : Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k))) →
-  type-complement-point-UU-Fin k X → type-UU-Fin (succ-ℕ k) (pr1 X)
-inclusion-complement-point-UU-Fin k X x = pr1 x
+  type-complement-element-UU-Fin k X → type-UU-Fin (succ-ℕ k) (pr1 X)
+inclusion-complement-element-UU-Fin k X x = pr1 x
 ```
 
 ### The action of equivalences on complements of isolated points
 
 ```agda
-equiv-complement-point-UU-Fin :
+equiv-complement-element-UU-Fin :
   {l1 : Level} (k : ℕ)
   (X Y : Σ (UU-Fin l1 (succ-ℕ k)) (type-UU-Fin (succ-ℕ k))) →
   (e : equiv-UU-Fin (succ-ℕ k) (pr1 X) (pr1 Y))
   (p : Id (map-equiv e (pr2 X)) (pr2 Y)) →
   equiv-UU-Fin k
-    ( complement-point-UU-Fin k X)
-    ( complement-point-UU-Fin k Y)
-equiv-complement-point-UU-Fin
+    ( complement-element-UU-Fin k X)
+    ( complement-element-UU-Fin k Y)
+equiv-complement-element-UU-Fin
   k S T e p =
-  equiv-complement-isolated-point e
+  equiv-complement-isolated-element e
     ( pair x (λ x' → has-decidable-equality-has-cardinality (succ-ℕ k) H x x'))
     ( pair y (λ y' → has-decidable-equality-has-cardinality (succ-ℕ k) K y y'))
     ( p)
@@ -121,7 +121,7 @@ equiv-complement-point-UU-Fin
 
 ## Properties
 
-### The map from a pointed `k+1`-element type to the complement of the point is an equivalence
+### The map from a pointed `k+1`-element type to the complement of the element is an equivalence
 
 This remains to be shown.
 [#744](https://github.com/UniMath/agda-unimath/issues/744)
