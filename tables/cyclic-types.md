@@ -22,5 +22,5 @@
 | Necklaces                                         | [`univalent-combinatorics.necklaces`](univalent-combinatorics.necklaces.md)                                                                     |
 | Polygons                                          | [`graph-theory.polygons`](graph-theory.polygons.md)                                                                                             |
 | The poset of cyclic rings                         | [`ring-theory.poset-of-cyclic-rings`](ring-theory.poset-of-cyclic-rings.md)                                                                     |
-| Standard cyclic groups                            | [`elementary-number-theory.standard-cyclic-groups`](elementary-number-theory.standard-cyclic-groups.md)                                         |
-| Standard cyclic rings                             | [`elementary-number-theory.standard-cyclic-rings`](elementary-number-theory.standard-cyclic-rings.md)                                           |
+| Standard cyclic groups (ℤ/k)                      | [`elementary-number-theory.standard-cyclic-groups`](elementary-number-theory.standard-cyclic-groups.md)                                         |
+| Standard cyclic rings (ℤ/k)                       | [`elementary-number-theory.standard-cyclic-rings`](elementary-number-theory.standard-cyclic-rings.md)                                           |
