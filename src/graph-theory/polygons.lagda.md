@@ -170,3 +170,9 @@ pr1 (is-simple-standard-polygon-Undirected-Graph k H) p (pair x (pair y α)) =
 pr2 (is-simple-standard-polygon-Undirected-Graph k H) p = {!!}
 -}
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -7,7 +7,7 @@ module group-theory.dihedral-groups where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.groups-of-modular-arithmetic
+open import elementary-number-theory.standard-cyclic-groups
 open import elementary-number-theory.natural-numbers
 
 open import foundation.universe-levels

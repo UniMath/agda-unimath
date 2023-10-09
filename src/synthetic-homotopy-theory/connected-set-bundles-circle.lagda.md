@@ -162,3 +162,9 @@ module _
 #### The set equipped with an automorphism obtained from a connected set bundle over the circle is a cyclic set
 
 This remains to be shown.
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

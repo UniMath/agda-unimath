@@ -1,18 +1,18 @@
-# Cyclic types
+# Cyclic finite types
 
 ```agda
-module univalent-combinatorics.cyclic-types where
+module univalent-combinatorics.cyclic-finite-types where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
+open import elementary-number-theory.standard-cyclic-groups
 
 open import foundation.0-connected-types
 open import foundation.action-on-identifications-functions
@@ -615,3 +615,9 @@ iso-Ω-Cyclic-Type-Group k =
     ( ℤ-Mod-Group k)
     ( equiv-Ω-Cyclic-Type-Group k)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

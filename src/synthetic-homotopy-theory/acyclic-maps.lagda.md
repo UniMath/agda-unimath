@@ -36,3 +36,9 @@ module _
   is-prop-is-acyclic-map : (f : A → B) → is-prop (is-acyclic-map f)
   is-prop-is-acyclic-map f = is-prop-type-Prop (is-acyclic-map-Prop f)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

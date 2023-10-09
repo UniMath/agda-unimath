@@ -51,3 +51,9 @@ is-acyclic-Undirected-Graph l G =
   is-geometric-realization-reflecting-map-Undirected-Graph l G
     ( terminal-reflecting-map-Undirected-Graph G)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

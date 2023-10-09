@@ -673,3 +673,9 @@ module _
   pr2 commutative-ring-Group-With-Generating-Element =
     commutative-mul-Group-With-Generating-Element
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

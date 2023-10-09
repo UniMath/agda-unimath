@@ -17,7 +17,7 @@ open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.multiplication-integers
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.prime-numbers
-open import elementary-number-theory.rings-of-modular-arithmetic
+open import elementary-number-theory.standard-cyclic-rings
 
 open import foundation.decidable-propositions
 open import foundation.decidable-types

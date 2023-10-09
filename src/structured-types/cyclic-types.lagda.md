@@ -110,3 +110,9 @@ module _
   map-Cyclic-Set : type-Cyclic-Set → type-Cyclic-Set
   map-Cyclic-Set = map-Set-With-Automorphism set-with-automorphism-Cyclic-Set
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

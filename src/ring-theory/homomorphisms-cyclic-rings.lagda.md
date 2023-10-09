@@ -205,3 +205,9 @@ module _
       ( ring-Cyclic-Ring T)
       ( ring-Cyclic-Ring U)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}
