@@ -97,23 +97,24 @@ module _
   pr1 (equiv-concat p z) = concat p z
   pr2 (equiv-concat p z) = is-equiv-concat p z
 
-  map-concat-equiv : {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) → (x' ＝ x)
-  map-concat-equiv {x} e = map-equiv (e x) refl
+  map-equiv-concat-equiv :
+    {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) → (x' ＝ x)
+  map-equiv-concat-equiv {x} e = map-equiv (e x) refl
 
   is-section-equiv-concat :
-    {x x' : A} → map-concat-equiv {x} {x'} ∘ equiv-concat ~ id
+    {x x' : A} → map-equiv-concat-equiv {x} {x'} ∘ equiv-concat ~ id
   is-section-equiv-concat refl = refl
 
   abstract
     is-retraction-equiv-concat :
-      {x x' : A} → equiv-concat ∘ map-concat-equiv {x} {x'} ~ id
+      {x x' : A} → equiv-concat ∘ map-equiv-concat-equiv {x} {x'} ~ id
     is-retraction-equiv-concat e =
       eq-htpy (λ y → eq-htpy-equiv (λ where refl → right-unit))
 
   abstract
-    is-equiv-map-concat-equiv :
-      {x x' : A} → is-equiv (map-concat-equiv {x} {x'})
-    is-equiv-map-concat-equiv =
+    is-equiv-map-equiv-concat-equiv :
+      {x x' : A} → is-equiv (map-equiv-concat-equiv {x} {x'})
+    is-equiv-map-equiv-concat-equiv =
       is-equiv-is-invertible
         ( equiv-concat)
         ( is-section-equiv-concat)
@@ -121,8 +122,8 @@ module _
 
   equiv-concat-equiv :
     {x x' : A} → ((y : A) → (x ＝ y) ≃ (x' ＝ y)) ≃ (x' ＝ x)
-  pr1 equiv-concat-equiv = map-concat-equiv
-  pr2 equiv-concat-equiv = is-equiv-map-concat-equiv
+  pr1 equiv-concat-equiv = map-equiv-concat-equiv
+  pr2 equiv-concat-equiv = is-equiv-map-equiv-concat-equiv
 
   inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
   inv-concat' x q = concat' x (inv q)
