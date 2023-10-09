@@ -232,8 +232,7 @@ module _
   where
 
   is-injective-map-Fin-two-ℕ :
-    (f : Fin 2 → A) →
-    ¬ (Id (f zero-Fin) (f one-Fin)) → is-injective f
+    (f : Fin 2 → A) → f zero-Fin ≠ f one-Fin → is-injective f
   is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inl (inr star)} p = refl
   is-injective-map-Fin-two-ℕ f H {inl (inr star)} {inr star} p = ex-falso (H p)
   is-injective-map-Fin-two-ℕ f H {inr star} {inl (inr star)} p =
@@ -260,7 +259,7 @@ module _
         {!!} {!!}
     two-elements-different-image :
       Σ ( type-2-Element-Type X)
-        ( λ x → Σ (type-2-Element-Type X) (λ y → ¬ (Id (f x) (f y))))
+        ( λ x → Σ (type-2-Element-Type X) (λ y → f x ≠ f y))
     two-elements-different-image = {!!}
 -}
 ```

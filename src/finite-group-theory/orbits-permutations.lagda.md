@@ -713,8 +713,8 @@ module _
       {l2 : Level} (x : X) (g : X ≃ X) (C : ℕ → UU l2)
       ( F :
         (k : ℕ) → C k →
-        ( ¬ (Id (iterate k (map-equiv g) x) a)) ×
-        ( ¬ (Id (iterate k (map-equiv g) x) b)))
+        ( iterate k (map-equiv g) x ≠ a) ×
+        ( iterate k (map-equiv g) x ≠ b))
       ( Ind :
         (n : ℕ) → C (succ-ℕ n) → is-nonzero-ℕ n → C n) →
       (k : ℕ) → (is-zero-ℕ k + C k) →
@@ -1012,7 +1012,7 @@ module _
           ( mult-lemma2 pa k))
       lemma3 :
         ( pa : Σ ℕ (λ k → Id (iterate k (map-equiv g) a) b)) (k : ℕ) →
-        ¬ (Id (iterate k (map-equiv (composition-transposition-a-b g)) a) b)
+        iterate k (map-equiv (composition-transposition-a-b g)) a ≠ b
       lemma3 pa k q =
         contradiction-le-ℕ
           ( r)
@@ -2186,8 +2186,7 @@ module _
       neq-iterate-nonzero-le-minimal-element :
         (k : ℕ) →
         is-nonzero-ℕ k × le-ℕ k (pr1 minimal-element-iterate-repeating) →
-        ¬ (Id (iterate k (map-equiv g) a) a) ×
-        ¬ (Id (iterate k (map-equiv g) a) b)
+        (iterate k (map-equiv g) a ≠ a) × (iterate k (map-equiv g) a ≠ b)
       pr1 (neq-iterate-nonzero-le-minimal-element k (pair nz ineq)) Q =
         contradiction-le-ℕ k (pr1 minimal-element-iterate-repeating) ineq
           (pr2 (pr2 minimal-element-iterate-repeating) k (pair nz Q))

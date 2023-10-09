@@ -58,9 +58,9 @@ repetition-of-values-is-not-injective-Fin k l f N =
       ( λ f → N (λ {x} {y} → f x y))
   x : Fin k
   x = pr1 u
-  H : ¬ ((y : Fin k) → Id (f x) (f y) → Id x y)
+  H : ¬ ((y : Fin k) → f x ＝ f y → x ＝ y)
   H = pr2 u
-  v : Σ (Fin k) (λ y → ¬ (Id (f x) (f y) → Id x y))
+  v : Σ (Fin k) (λ y → ¬ (f x ＝ f y → x ＝ y))
   v = exists-not-not-forall-Fin k
       ( λ y →
         is-decidable-function-type
@@ -69,7 +69,7 @@ repetition-of-values-is-not-injective-Fin k l f N =
       ( H)
   y : Fin k
   y = pr1 v
-  K : ¬ (Id (f x) (f y) → Id x y)
+  K : ¬ (f x ＝ f y → x ＝ y)
   K = pr2 v
   w : (f x ＝ f y) × (x ≠ y)
   w = exists-not-not-forall-count

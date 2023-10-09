@@ -289,7 +289,7 @@ module _
   where
 
   element-is-not-identity-map-transposition :
-    Σ X (λ x → ¬ (Id (map-transposition Y x) x))
+    Σ X (λ x → map-transposition Y x ≠ x)
   element-is-not-identity-map-transposition =
     exists-not-not-forall-count
       ( λ z → Id (map-transposition Y z) z)

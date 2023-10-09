@@ -90,7 +90,7 @@ module _
     orientation-Complete-Undirected-Graph →
     2-Element-Decidable-Subtype l (type-UU-Fin n X) → Decidable-Prop l
   pr1 (2-Element-Decidable-Subtype-subtype-pointwise-difference d d' Y) =
-    ¬ (Id (d Y) (d' Y))
+    d Y ≠ d' Y
   pr1 (pr2 (2-Element-Decidable-Subtype-subtype-pointwise-difference d d' Y)) =
     is-prop-neg
   pr2 (pr2 (2-Element-Decidable-Subtype-subtype-pointwise-difference d d' Y)) =
@@ -188,10 +188,10 @@ module _
             ( r))
       cases-g :
         (Y : 2-Element-Decidable-Subtype l (type-UU-Fin n X)) →
-        ¬ (Id (d1 Y) (d3 Y)) → (is-decidable (Id (d1 Y) (d2 Y))) →
-        is-decidable (Id (d2 Y) (d3 Y)) →
-        (¬ (Id (d1 Y) (d2 Y)) × ¬ (¬ (Id (d2 Y) (d3 Y)))) +
-        (¬ (Id (d2 Y) (d3 Y)) × ¬ (¬ (Id (d1 Y) (d2 Y))))
+        d1 Y ≠ d3 Y → (is-decidable (d1 Y ＝ d2 Y)) →
+        is-decidable (d2 Y ＝ d3 Y) →
+        ((d1 Y ≠ d2 Y) × ¬ (d2 Y ≠ d3 Y)) +
+        ((d2 Y ≠ d3 Y) × ¬ (d1 Y ≠ d2 Y))
       cases-g Y nr (inl p) (inl q) = ex-falso (nr (p ∙ q))
       cases-g Y nr (inl p) (inr nq) = inr (pair nq (λ f → f p))
       cases-g Y nr (inr np) (inl q) = inl (pair np (λ f → f q))
@@ -270,14 +270,14 @@ module _
         ( trunc-Prop
           ( ( Fin (pr1 has-finite-cardinality-d'-d)) ≃
             ( Σ ( 2-Element-Decidable-Subtype l (type-UU-Fin n X))
-                ( λ Y → ¬ (Id (d' Y) (d Y))))))
+                ( λ Y → d' Y ≠ d Y))))
         ( λ h → unit-trunc-Prop (h' ∘e h))
       where
       h' :
         Σ ( 2-Element-Decidable-Subtype l (type-UU-Fin n X))
-          ( λ Y → ¬ (Id (d Y) (d' Y))) ≃
+          ( λ Y → d Y ≠ d' Y) ≃
         Σ ( 2-Element-Decidable-Subtype l (type-UU-Fin n X))
-          ( λ Y → ¬ (Id (d' Y) (d Y)))
+          ( λ Y → d' Y ≠ d Y)
       pr1 h' (pair Y np) = pair Y (λ p' → np (inv p'))
       pr2 h' =
         is-equiv-is-invertible
