@@ -133,7 +133,7 @@ cogap :
 cogap f g {X} = map-inv-equiv (equiv-up-pushout f g X)
 ```
 
-### The `is-pushout` predicate
+### The predicate of being a pushout cocone
 
 ```agda
 is-pushout :
@@ -173,32 +173,37 @@ module _
   { X : UU l4} (c : cocone f g X)
   where
 
-  private
-    htpy-cc =
-      htpy-cocone-map-universal-property-pushout
-        ( f)
-        ( g)
-        ( cocone-pushout f g)
-        ( up-pushout f g)
-        ( c)
-
   compute-inl-cogap :
     ( a : A) → cogap f g c (inl-pushout f g a) ＝ horizontal-map-cocone f g c a
-  compute-inl-cogap = pr1 htpy-cc
+  compute-inl-cogap =
+    horizontal-htpy-cocone-map-universal-property-pushout
+      ( f)
+      ( g)
+      ( cocone-pushout f g)
+      ( up-pushout f g)
+      ( c)
 
   compute-inr-cogap :
     ( b : B) → cogap f g c (inr-pushout f g b) ＝ vertical-map-cocone f g c b
-  compute-inr-cogap = pr1 (pr2 htpy-cc)
+  compute-inr-cogap =
+    vertical-htpy-cocone-map-universal-property-pushout
+      ( f)
+      ( g)
+      ( cocone-pushout f g)
+      ( up-pushout f g)
+      ( c)
 
   compute-glue-cogap :
-    ( s : S) →
-    ( ap (cogap f g c) (glue-pushout f g s)) ＝
-    ( ( compute-inl-cogap (f s) ∙ coherence-square-cocone f g c s) ∙
-      ( inv (compute-inr-cogap (g s))))
-  compute-glue-cogap s =
-    right-transpose-eq-concat
-      ( ap (cogap f g c) (glue-pushout f g s))
-      ( compute-inr-cogap (g s))
-      ( compute-inl-cogap (f s) ∙ coherence-square-cocone f g c s)
-      ( pr2 (pr2 htpy-cc) s)
+    statement-coherence-htpy-cocone f g
+      ( cocone-map f g (cocone-pushout f g) (cogap f g c))
+      ( c)
+      ( compute-inl-cogap)
+      ( compute-inr-cogap)
+  compute-glue-cogap =
+    coherence-htpy-cocone-map-universal-property-pushout
+      ( f)
+      ( g)
+      ( cocone-pushout f g)
+      ( up-pushout f g)
+      ( c)
 ```

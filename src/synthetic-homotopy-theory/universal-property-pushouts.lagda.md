@@ -100,19 +100,57 @@ module _
   htpy-cocone-map-universal-property-pushout :
     htpy-cocone f g (cocone-map f g c map-universal-property-pushout) d
   htpy-cocone-map-universal-property-pushout =
-    htpy-cocone-eq f g
+    htpy-eq-cocone
+      ( f)
+      ( g)
       ( cocone-map f g c map-universal-property-pushout)
       ( d)
       ( is-section-map-inv-is-equiv (up-c Y) d)
+
+  horizontal-htpy-cocone-map-universal-property-pushout :
+    map-universal-property-pushout ∘ horizontal-map-cocone f g c ~
+    horizontal-map-cocone f g d
+  horizontal-htpy-cocone-map-universal-property-pushout =
+    horizontal-htpy-cocone
+      ( f)
+      ( g)
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( htpy-cocone-map-universal-property-pushout)
+
+  vertical-htpy-cocone-map-universal-property-pushout :
+    map-universal-property-pushout ∘ vertical-map-cocone f g c ~
+    vertical-map-cocone f g d
+  vertical-htpy-cocone-map-universal-property-pushout =
+    vertical-htpy-cocone
+      ( f)
+      ( g)
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( htpy-cocone-map-universal-property-pushout)
+
+  coherence-htpy-cocone-map-universal-property-pushout :
+    statement-coherence-htpy-cocone f g
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( horizontal-htpy-cocone-map-universal-property-pushout)
+      ( vertical-htpy-cocone-map-universal-property-pushout)
+  coherence-htpy-cocone-map-universal-property-pushout =
+    coherence-htpy-cocone
+      ( f)
+      ( g)
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( htpy-cocone-map-universal-property-pushout)
 
   uniqueness-map-universal-property-pushout :
     is-contr ( Σ (X → Y) (λ h → htpy-cocone f g (cocone-map f g c h) d))
   uniqueness-map-universal-property-pushout =
     is-contr-is-equiv'
       ( fiber (cocone-map f g c) d)
-      ( tot (λ h → htpy-cocone-eq f g (cocone-map f g c h) d))
+      ( tot (λ h → htpy-eq-cocone f g (cocone-map f g c h) d))
       ( is-equiv-tot-is-fiberwise-equiv
-        ( λ h → is-equiv-htpy-cocone-eq f g (cocone-map f g c h) d))
+        ( λ h → is-equiv-htpy-eq-cocone f g (cocone-map f g c h) d))
       ( is-contr-map-is-equiv (up-c Y) d)
 ```
 
