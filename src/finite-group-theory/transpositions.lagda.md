@@ -214,7 +214,7 @@ module _
   abstract
     is-fixed-point-standard-transposition :
       (z : X) → x ≠ z → y ≠ z →
-      Id (map-standard-transposition z) z
+      map-standard-transposition z ＝ z
     is-fixed-point-standard-transposition z q r
       with is-decidable-type-prop-standard-2-Element-Decidable-Subtype H p z
     ... | inl (inl h) = ex-falso (q h)
