@@ -300,40 +300,6 @@ module _
   ap-inv-htpy K x = ap inv (K x)
 ```
 
-### Concatenations of homotopic homotopies are homotopic
-
-```agda
-module _
-  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
-  where
-
-  ap-concat-htpies :
-    { H H' : f ~ g} → H ~ H' →
-    { K K' : g ~ h} → K ~ K' →
-    ( H ∙h K) ~ (H' ∙h K')
-  ap-concat-htpies α β x = ap-binary (_∙_) (α x) (β x)
-
-module _
-  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (a : A) → B a}
-  where
-
-  ap-concat-three-htpies :
-    { H H' : f ~ g} → H ~ H' →
-    { K K' : g ~ h} → K ~ K' →
-    { L L' : h ~ k} → L ~ L' →
-    ( H ∙h K ∙h L) ~ (H' ∙h K' ∙h L')
-  ap-concat-three-htpies α β γ x =
-    ap-binary (_∙_) (ap-concat-htpies α β x) (γ x)
-
-  ap-concat-three-htpies' :
-    { H H' : f ~ g} → H ~ H' →
-    { K K' : g ~ h} → K ~ K' →
-    { L L' : h ~ k} → L ~ L' →
-    ( H ∙h (K ∙h L)) ~ (H' ∙h (K' ∙h L'))
-  ap-concat-three-htpies' α β γ x =
-    ap-binary (_∙_) (α x) (ap-concat-htpies β γ x)
-```
-
 ## Reasoning with homotopies
 
 Homotopies can be constructed by equational reasoning in the following way:

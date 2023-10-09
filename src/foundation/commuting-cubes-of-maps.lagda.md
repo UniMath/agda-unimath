@@ -13,10 +13,10 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
+open import foundation.homotopies
 open import foundation.universe-levels
 
 open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
@@ -430,14 +430,16 @@ module _
         ( precomp-bottom-whisk-hA)
         by
         inv-htpy
-          ( ap-concat-three-htpies
-            ( distributive-precomp-right-whisk-coherence-square-maps W hB h' h
-              ( hD)
-              ( inv-htpy front-left)
-              ( f'))
-            ( distributive-precomp-left-whisk-coherence-square-maps W hA f' f hB
-              ( inv-htpy back-left)
-              ( h))
+          ( horizontal-concat-htpy
+            ( horizontal-concat-htpy
+              ( distributive-precomp-right-whisk-coherence-square-maps W hB h' h
+                ( hD)
+                ( inv-htpy front-left)
+                ( f'))
+              ( distributive-precomp-left-whisk-coherence-square-maps W hA f' f
+                ( hB)
+                ( inv-htpy back-left)
+                ( h)))
             ( distributive-precomp-right-whisk-coherence-square-maps W g f k h
               ( bottom)
               ( hA)))
@@ -509,16 +511,18 @@ module _
         ( ( (precomp g' W) ·l precomp-front-right-inv) ∙h
           ( precomp-back-right-inv ·r (precomp k W)))
         by
-        ap-concat-three-htpies'
+        horizontal-concat-htpy
           ( distributive-precomp-left-whisk-coherence-square-maps W g' f' k' h'
             ( top)
             ( hD))
-          ( distributive-precomp-right-whisk-coherence-square-maps W hC k' k hD
-            ( inv-htpy front-right)
-            ( g'))
-          ( distributive-precomp-left-whisk-coherence-square-maps W hA g' g hC
-            ( inv-htpy back-right)
-            ( k))
+          ( horizontal-concat-htpy
+            ( distributive-precomp-right-whisk-coherence-square-maps W hC k' k
+              ( hD)
+              ( inv-htpy front-right)
+              ( g'))
+            ( distributive-precomp-left-whisk-coherence-square-maps W hA g' g hC
+              ( inv-htpy back-right)
+              ( k)))
     where
     precomp-top :
       coherence-square-maps
