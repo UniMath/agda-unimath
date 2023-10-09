@@ -7,6 +7,7 @@ module modal-logic.modal-logic-syntax where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.cartesian-product-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
@@ -22,6 +23,10 @@ open import foundation.unit-type
 open import foundation.negation
 open import foundation.double-negation
 open import foundation.propositional-truncations
+
+open import univalent-combinatorics.finite-types
+open import univalent-combinatorics.decidable-dependent-function-types
+-- open import univalent-combinatorics.dependent-function-types
 ```
 
 </details>
@@ -44,11 +49,15 @@ module _
   open Lift public
 
   Lift-Prop : Prop a → Prop (a ⊔ l)
-  Lift-Prop A =
-    Lift (type-Prop A) ,
+  pr1 (Lift-Prop A) = Lift (type-Prop A)
+  pr2 (Lift-Prop A) =
     is-prop-equiv'
       (lift , is-equiv-is-invertible lower (λ _ → refl) (λ _ → refl))
       (is-prop-type-Prop A)
+
+  is-decidable-Lift : {A : UU a} → is-decidable A → is-decidable (Lift A)
+  is-decidable-Lift (inl a) = inl (lift a)
+  is-decidable-Lift (inr na) = inr (na ∘ lower)
 
 LEM : (l : Level) → UU (lsuc l)
 LEM l = (T : UU l) → is-decidable T
@@ -125,6 +134,9 @@ module _
       V : i → w → UU l3
   open kripke-model public
 
+  finite-model : UU (lsuc l1 ⊔ l2 ⊔ lsuc l3)
+  finite-model = kripke-model × is-finite w
+
 
 module _
   {l1 l2 l3 : Level}
@@ -169,6 +181,35 @@ module _
   soundness ax-n M dec x = λ fab fa y r → fab y r (fa y r)
   soundness (mp dab db) M dec x = soundness dab M dec x (soundness db M dec x)
   soundness (nec d) M dec x y _ = soundness d M dec y
+
+  finite-is-classical : ((M , _) : finite-model w i l3)
+                      → (∀ n x → is-decidable (V M n x))
+                      → (∀ x y → is-decidable (R (F M) x y))
+                      → is-classical M
+  finite-is-classical (M , is-fin) dec-val dec-r (var n) x =
+    is-decidable-Lift _ (dec-val n x)
+  finite-is-classical (M , is-fin) dec-val dec-r ⊥ x =
+    inr (λ ())
+  finite-is-classical (M , is-fin) dec-val dec-r (a ⇒ b) x
+    with finite-is-classical (M , is-fin) dec-val dec-r a x
+  ... | inr nfa = inl (λ fa → ex-falso (nfa fa))
+  ... | inl fa with finite-is-classical (M , is-fin) dec-val dec-r b x
+  ...   | inr nfb = inr (λ fab → nfb (fab fa))
+  ...   | inl fb = inl (λ _ → fb)
+  finite-is-classical (M , is-fin) dec-val dec-r (□ a) x =
+    is-decidable-Π-is-finite is-fin
+      (λ y →
+        is-decidable-function-type (dec-r x y)
+        ((finite-is-classical (M , is-fin) dec-val dec-r a y)))
+
+  finite-soundness : ((M , _) : finite-model w i l3)
+                   → (∀ n x → is-decidable (V M n x))
+                   → (∀ x y → is-decidable (R (F M) x y))
+                   → {a : formula i}
+                   → ⊢ a
+                   → M ⊨M a
+  finite-soundness (M , is-fin) dec-val dec-r d =
+    soundness d M (finite-is-classical ((M , is-fin)) dec-val dec-r)
 
 
 double-negation-LEM : {l : Level} → ((A : UU l) → ¬¬ A → A) → LEM l
