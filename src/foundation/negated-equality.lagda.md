@@ -14,7 +14,6 @@ open import foundation.negation
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.empty-types
 open import foundation-core.function-extensionality
 open import foundation-core.identity-types
 open import foundation-core.propositions

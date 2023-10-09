@@ -15,8 +15,6 @@ open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.fibers-of-maps
-open import foundation-core.identity-types
-open import foundation-core.negation
 open import foundation-core.sets
 
 open import univalent-combinatorics.finite-types

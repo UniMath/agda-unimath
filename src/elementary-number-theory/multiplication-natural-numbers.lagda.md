@@ -18,8 +18,6 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
 open import foundation.negated-equality
-open import foundation.negation
-open import foundation.universe-levels
 ```
 
 </details>

@@ -17,7 +17,6 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.negated-equality
-open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.unit-type
 open import foundation.universe-levels
