@@ -9,7 +9,7 @@ module finite-group-theory.groups-of-order-2 where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.groups-of-modular-arithmetic
+open import elementary-number-theory.standard-cyclic-groups
 
 open import finite-group-theory.finite-groups
 

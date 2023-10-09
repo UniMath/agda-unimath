@@ -573,3 +573,9 @@ equiv-sphere-1-circle : 𝕊¹ ≃ sphere 1
 pr1 equiv-sphere-1-circle = sphere-1-circle
 pr2 equiv-sphere-1-circle = is-equiv-sphere-1-circle
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -62,6 +62,10 @@ Some modular arithmetic was already defined in
 more convenient format that also includes the integers modulo `0`, i.e., the
 integers.
 
+The fact that `ℤ-Mod n` is a [ring](ring-theory.rings.md) for every `n : ℕ` is
+recorded in
+[`elementary-number-theory.standard-cyclic-rings`](elementary-number-theory.standard-cyclic-rings.md).
+
 ```agda
 ℤ-Mod : ℕ → UU lzero
 ℤ-Mod zero-ℕ = ℤ

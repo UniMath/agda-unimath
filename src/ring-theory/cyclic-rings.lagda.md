@@ -490,6 +490,12 @@ module _
   pr2 commutative-ring-Cyclic-Ring = commutative-mul-Cyclic-Ring
 ```
 
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}
+
 ## References
 
 - \[1\] Maria Balintne-Szendrei, Gabor Czedli, and Agnes Szendrei. _Absztrakt

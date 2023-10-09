@@ -71,6 +71,12 @@ module _
   is-prop-is-cyclic-∞-Group = is-prop-type-Prop is-cyclic-prop-∞-Group
 ```
 
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}
+
 ## References
 
 1. Haynes Miller. _The Sullivan Conjecture on Maps from Classifying Spaces_.

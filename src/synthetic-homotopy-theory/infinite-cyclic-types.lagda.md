@@ -38,7 +38,7 @@ open import structured-types.types-equipped-with-endomorphisms
 
 open import synthetic-homotopy-theory.loop-spaces
 
-open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.cyclic-finite-types
 ```
 
 </details>
@@ -210,3 +210,9 @@ module _
 -- pr2 (pr1 (Infinite-Cyclic-Type-𝕊¹ x)) = {!!}
 -- pr2 (Infinite-Cyclic-Type-𝕊¹ x) = {!!}
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}
