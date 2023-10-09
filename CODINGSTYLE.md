@@ -130,10 +130,9 @@ strategic endeavour to ensure the longevity, vitality, and success of the
 
 - **Lambda expressions**: When a lambda expression appears as the argument of a
   function, we always wrap it in parentheses. We do this even if it is the last
-  argument of a function, and thus isn't strictly required to be parenthesized.
-  Note that in some rare cases, a lambda expression might appear at the top
-  level. In this case we don't require the lambda expression to be
-  parenthesized.
+  argument and thus isn't strictly required to be parenthesized. Note that in
+  some rare cases, a lambda expression might appear at the top level. In this
+  case we don't require the lambda expression to be parenthesized.
 
   There are multiple syntaxes for writing lambda expressions in Agda. Generally,
   you have the following options:
@@ -167,10 +166,10 @@ strategic endeavour to ensure the longevity, vitality, and success of the
   All four syntaxes are in use in the library, although when possible we try to
   avoid general pattern matching lambdas, i.e. syntaxes 3 and 4. If need be, we
   prefer pattern matching using the `where` keyword over the `{...}` syntax.
-  Note that whenever syntax 3 or 4 appear in a definition, it should be marked
-  as `abstract`. If computation is necessary for a definition that has these
-  syntaxes in them, this suggests the relevant lambda expression(s) deserve to
-  be factored out as separate definitions.
+  Note that whenever syntax 3 or 4 appear in as part of a construction, the
+  definition should be marked as `abstract`. If computation is necessary for a
+  definition that has these syntaxes in them, this suggests the relevant lambda
+  expression(s) deserve to be factored out as separate definitions.
 
 ## Code comments
 
