@@ -129,7 +129,9 @@ module _
 
 ### The statement of the flattening lemma for pushouts, phrased using descent data
 
-In the above statement, bla bla
+The above statement of the flattening lemma works with a provided type family
+over the pushout. We can instead accept a definition of this family via descent
+data for the pushout.
 
 ```agda
 module _
@@ -183,7 +185,7 @@ module _
     ( {l : Level} → dependent-universal-property-pushout l f g c) →
     { l : Level} →
     universal-property-pushout l
-      ( map-Σ (pr1 P) f (λ s → id))
+      ( map-Σ-map-base f (pr1 P))
       ( map-Σ (pr1 (pr2 P)) g (λ s → map-equiv (pr2 (pr2 P) s)))
       ( cocone-flattening-descent-data-pushout)
 ```
