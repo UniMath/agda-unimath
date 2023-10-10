@@ -40,7 +40,8 @@ open import foundation.universe-levels
 
 The **Regensburg extension** of the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
-asserts that for any [pointed](structured-types.pointed-types.md)
+asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
+[pointed](structured-types.pointed-types.md)
 [connected type](foundation.connected-types.md) `A` equipped with a type family
 `B` over `A`, the following are
 [logically equivalent](foundation.logical-equivalences.md):
