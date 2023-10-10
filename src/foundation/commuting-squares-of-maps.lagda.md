@@ -32,22 +32,22 @@ open import foundation-core.identity-types
 Two commuting triangles
 
 ```text
-A        A ---> X
-| \       \  K  |
-|   \   L   \   |
-|  H  \       \ |
-v      v        v
-B ---> Y        Y
+  A        A ---> X
+  | \       \  K  |
+  |   \   L   \   |
+  |  H  \       \ |
+  v      v        v
+  B ---> Y        Y
 ```
 
 with a homotopic diagonal may be pasted into a commuting square
 
 ```text
-A -----> X
-|        |
-|        |
-v        v
-B -----> Y
+  A -----> X
+  |        |
+  |        |
+  v        v
+  B -----> Y.
 ```
 
 ```agda
@@ -384,23 +384,23 @@ module _
 Taking a square of the form
 
 ```text
-    f        top
-X -----> A -----> B
-         |        |
-    left |   H    | right
-         v        v
-         C -----> D
-           bottom
+      f        top
+  X -----> A -----> B
+           |        |
+      left |   H    | right
+           v        v
+           C -----> D
+             bottom
 ```
 
 and transposing it by precomposition results in the square
 
 ```text
-W^D -----> W^B
- |          |
- |   W^H    |
- v          v   -∘f
-W^C -----> W^A -----> W^X
+  W^D -----> W^B
+   |          |
+   |   W^H    |
+   v          v   -∘f
+  W^C -----> W^A -----> W^X
 ```
 
 This fact can be written as distribution of right whiskering over transposition:
@@ -448,7 +448,7 @@ formula `W^(f ·l H) = W^H ·r W^f`.
     ap eq-htpy (eq-htpy (λ a → inv (ap-comp g f (H a))))
 ```
 
-### The square of function spaces induces by a composition of triangles is homotopic to the composition of induced triangles of function spaces
+### The square of function spaces induced by a composition of triangles is homotopic to the composition of induced triangles of function spaces
 
 ```agda
 module _
