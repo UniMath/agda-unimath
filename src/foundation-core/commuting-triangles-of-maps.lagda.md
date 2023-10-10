@@ -10,6 +10,7 @@ module foundation-core.commuting-triangles-of-maps where
 open import foundation.universe-levels
 
 open import foundation-core.function-types
+open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.whiskering-homotopies
 ```
@@ -31,7 +32,7 @@ A triangle of maps
 is said to commute if there is a homotopy between the map on the left and the
 composite map.
 
-## Definition
+## Definitions
 
 ### Commuting triangles of maps
 
@@ -63,4 +64,31 @@ module _
     coherence-triangle-maps f h (j ∘ i)
   concat-coherence-triangle-maps H K =
     H ∙h (K ·r i)
+```
+
+### Any commuting triangle of maps induces a commuting triangle of function spaces
+
+```agda
+module _
+  { l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  ( left : A → X) (right : B → X) (top : A → B)
+  where
+
+  precomp-coherence-triangle-maps :
+    coherence-triangle-maps left right top →
+    ( W : UU l4) →
+    coherence-triangle-maps
+      ( precomp left W)
+      ( precomp top W)
+      ( precomp right W)
+  precomp-coherence-triangle-maps H W = htpy-precomp H W
+
+  precomp-coherence-triangle-maps' :
+    coherence-triangle-maps' left right top →
+    ( W : UU l4) →
+    coherence-triangle-maps'
+      ( precomp left W)
+      ( precomp top W)
+      ( precomp right W)
+  precomp-coherence-triangle-maps' H W = htpy-precomp H W
 ```
