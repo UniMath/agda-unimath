@@ -130,11 +130,11 @@ module _
   { l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  orthogonal-eq-pair-Σ :
+  triangle-eq-pair-Σ :
     { a a' : A} (p : a ＝ a') →
     { b : B a} {b' : B a'} (q : dependent-identification B p b b') →
     eq-pair-Σ p q ＝ (eq-pair-Σ p refl ∙ eq-pair-Σ refl q)
-  orthogonal-eq-pair-Σ refl q = refl
+  triangle-eq-pair-Σ refl q = refl
 ```
 
 ## See also

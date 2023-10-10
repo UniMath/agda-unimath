@@ -348,7 +348,7 @@ module _
     ( ap-id
       ( coherence-square-cocone-flattening-descent-data-pushout f g c P Q e
         ( s , t))) ∙
-    ( orthogonal-eq-pair-Σ Q
+    ( triangle-eq-pair-Σ Q
       ( coherence-square-cocone f g c s)
       ( inv (pr2 (pr2 e) s t))) ∙
     ( ap

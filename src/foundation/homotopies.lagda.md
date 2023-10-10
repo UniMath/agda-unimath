@@ -135,11 +135,11 @@ module _
   { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
   where
 
-  horizontal-concat-htpy :
+  horizontal-concat-htpy² :
     { H H' : f ~ g} → H ~ H' →
     { K K' : g ~ h} → K ~ K' →
     ( H ∙h K) ~ (H' ∙h K')
-  horizontal-concat-htpy α β x = horizontal-concat-Id² (α x) (β x)
+  horizontal-concat-htpy² α β x = horizontal-concat-Id² (α x) (β x)
 ```
 
 ### Transposing homotopies is an equivalence

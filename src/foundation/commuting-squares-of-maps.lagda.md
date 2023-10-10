@@ -490,10 +490,10 @@ module _
     ( H)
     ( K)
     ( h) =
-    ( compute-comp-htpy-precomp (H ∙h L) K W h) ∙
+    ( compute-concat-htpy-precomp (H ∙h L) K W h) ∙
     ( ap
       ( _∙ precomp-coherence-triangle-maps diagonal-right right top K W h)
-      ( compute-comp-htpy-precomp H L W h))
+      ( compute-concat-htpy-precomp H L W h))
 
   distributive-precomp-coherence-square-comp-htpy-coherence-triangle-maps' :
     { diagonal-left diagonal-right : A → Y} →
@@ -528,10 +528,10 @@ module _
     ( H)
     ( K)
     ( h) =
-    ( compute-comp-htpy-precomp H (L ∙h K) W h) ∙
+    ( compute-concat-htpy-precomp H (L ∙h K) W h) ∙
     ( ap
       ( precomp-coherence-triangle-maps' diagonal-left bottom left H W h ∙_)
-      ( compute-comp-htpy-precomp L K W h))
+      ( compute-concat-htpy-precomp L K W h))
 
   distributive-precomp-coherence-square-comp-coherence-triangles-maps :
     ( diagonal : A → Y) →
@@ -564,5 +564,5 @@ module _
     ( H)
     ( K)
     ( h) =
-    compute-comp-htpy-precomp H K W h
+    compute-concat-htpy-precomp H K W h
 ```
