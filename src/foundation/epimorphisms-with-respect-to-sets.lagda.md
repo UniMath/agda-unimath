@@ -97,3 +97,10 @@ abstract
     h : B → Prop (l1 ⊔ l2)
     h y = ∃-Prop A (λ x → f x ＝ y)
 ```
+
+## See also
+
+- [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
+- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
+- [Epimorphisms](foundation.epimorphisms.md)
+- [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)
