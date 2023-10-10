@@ -18,15 +18,13 @@ open import group-theory.groups
 
 ## Idea
 
-A commutator gives an indication of the extent to which a group multiplication
-fails to be commutative.
-
-The commutator of two elements, g and h, of a group G, is the element
+The **commutator** of two elements `g` and `h` of a
+[group](group-theory.groups.md) `G` is defined to be the element
 `[g, h] = (gh)(hg)⁻¹`.
 
-https://en.wikipedia.org/wiki/Commutator#Group_theory
-
 ## Definition
+
+### The commutator operation
 
 ```agda
 module _
@@ -39,7 +37,7 @@ module _
 
 ## Properties
 
-### The commutator of `x` and `y` is unit if and only `x` and `y` commutes
+### The commutator of `x` and `y` is the unit element if and only `x` and `y` commute
 
 ```agda
 module _
@@ -68,3 +66,7 @@ module _
   inv-commutator-Group x y =
     inv-right-div-Group G (mul-Group G x y) (mul-Group G y x)
 ```
+
+## External links
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Commutator#Group_theory)
