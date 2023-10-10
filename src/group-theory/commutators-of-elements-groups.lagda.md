@@ -1,7 +1,7 @@
 # Commutators of elements in groups
 
 ```agda
-module group-theory.commutators-groups where
+module group-theory.commutators-of-elements-groups where
 ```
 
 <details><summary>Imports</summary>
