@@ -20,7 +20,8 @@ open import group-theory.groups
 
 The **commutator** of two elements `g` and `h` of a
 [group](group-theory.groups.md) `G` is defined to be the element
-`[g, h] = (gh)(hg)⁻¹`.
+`[g, h] = (gh)(hg)⁻¹`. The commutator of two elements `g` and `h` is equal to
+the unit if and only if `g` and `h` commute.
 
 ## Definition
 
@@ -69,4 +70,6 @@ module _
 
 ## External links
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Commutator#Group_theory)
+- [Commutator](https://en.wikipedia.org/wiki/Commutator#Group_theory) at
+  Wikipedia
+- [Group commutator](https://ncatlab.org/nlab/show/group+commutator) at nlab
