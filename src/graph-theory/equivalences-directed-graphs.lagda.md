@@ -36,7 +36,11 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An **equivalence of directed graphs** from a [directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph `(V',E')` consists of an [equivalence](foundation-core.equivalences.md) `e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)` of edges indexed by `x y : V`.
+An **equivalence of directed graphs** from a
+[directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
+`(V',E')` consists of an [equivalence](foundation-core.equivalences.md)
+`e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)`
+of edges indexed by `x y : V`.
 
 ## Definitions
 

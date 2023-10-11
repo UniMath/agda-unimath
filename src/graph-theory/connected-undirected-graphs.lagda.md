@@ -19,7 +19,8 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-An [undirected graph](graph-theory.undirected-graphs.md) is said to be **connected** if any point can be reached from any point by a
+An [undirected graph](graph-theory.undirected-graphs.md) is said to be
+**connected** if any point can be reached from any point by a
 [walk](graph-theory.walks-undirected-graphs.md).
 
 ## Definition
@@ -48,6 +49,8 @@ module _
 
 ## External links
 
-- [Connectivity (graph theory)](https://en.wikipedia.org/wiki/Connectivity_(graph_theory)) on Wikipedia
-- [Connected graph](https://mathworld.wolfram.com/ConnectedGraph.html) at Wolfram Mathworld
+- [Connectivity (graph theory)](<https://en.wikipedia.org/wiki/Connectivity_(graph_theory)>)
+  on Wikipedia
+- [Connected graph](https://mathworld.wolfram.com/ConnectedGraph.html) at
+  Wolfram Mathworld
 - [Connected graph](https://ncatlab.org/nlab/show/connected+graph) at nlab

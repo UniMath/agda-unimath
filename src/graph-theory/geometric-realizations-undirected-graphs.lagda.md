@@ -21,8 +21,11 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-The **geometric realization** of an [undirected graph](graph-theory.undirected-graphs.md) `G` is the initial type `X`
-equipped with a [reflecting map](graph-theory.reflecting-maps-undirected-graphs.md) from `G` into `X`.
+The **geometric realization** of an
+[undirected graph](graph-theory.undirected-graphs.md) `G` is the initial type
+`X` equipped with a
+[reflecting map](graph-theory.reflecting-maps-undirected-graphs.md) from `G`
+into `X`.
 
 ## Definition
 
@@ -47,4 +50,5 @@ is-geometric-realization-reflecting-map-Undirected-Graph l G f =
 
 ## External links
 
-- [Geometric realization](https://ncatlab.org/nlab/show/geometric+realization) at nlab
+- [Geometric realization](https://ncatlab.org/nlab/show/geometric+realization)
+  at nlab

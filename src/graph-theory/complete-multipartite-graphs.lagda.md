@@ -24,9 +24,10 @@ open import univalent-combinatorics.function-types
 
 ## Idea
 
-A **complete multipartite graph** consists of a [list](lists.lists.md) of sets `V1,…,Vn`, and
-for each [unordered pair](foundation.unordered-pairs.md) of distinct elements `i,j≤n` and each `x : Vi` and
-`y : Vj` an edge between `x` and `y`.
+A **complete multipartite graph** consists of a [list](lists.lists.md) of sets
+`V1,…,Vn`, and for each [unordered pair](foundation.unordered-pairs.md) of
+distinct elements `i,j≤n` and each `x : Vi` and `y : Vj` an edge between `x` and
+`y`.
 
 ```agda
 complete-multipartite-Undirected-Graph-𝔽 :
@@ -46,5 +47,7 @@ pr2 (complete-multipartite-Undirected-Graph-𝔽 X Y) p =
 
 ## External links
 
-- [Multipartite graph](https://en.wikipedia.org/wiki/Multipartite_graph) on Wikipedia
-- [Complete multipartite graph](https://mathworld.wolfram.com/CompleteMultipartiteGraph.html) on Wolfram Mathworld
+- [Multipartite graph](https://en.wikipedia.org/wiki/Multipartite_graph) on
+  Wikipedia
+- [Complete multipartite graph](https://mathworld.wolfram.com/CompleteMultipartiteGraph.html)
+  on Wolfram Mathworld

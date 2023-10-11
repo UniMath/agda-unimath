@@ -29,10 +29,12 @@ open import trees.directed-trees
 
 ## Idea
 
-Consider a vertex `x` in a [directed graph](graph-theory.directed-graphs.md) `G`. The **fiber** of `G` at `x` is a
-[directed tree](trees.directed-trees.md) of which the type of nodes consists of vertices `y` equipped with
-a [walk](graph-theory.walks-directed-graphs.md) `w` from `y` to `x`, and the type of edges from `(y , w)` to `(z , v)`
-consist of an edge `e : y → z` such that `w ＝ cons e v`.
+Consider a vertex `x` in a [directed graph](graph-theory.directed-graphs.md)
+`G`. The **fiber** of `G` at `x` is a [directed tree](trees.directed-trees.md)
+of which the type of nodes consists of vertices `y` equipped with a
+[walk](graph-theory.walks-directed-graphs.md) `w` from `y` to `x`, and the type
+of edges from `(y , w)` to `(z , v)` consist of an edge `e : y → z` such that
+`w ＝ cons e v`.
 
 ## Definitions
 
