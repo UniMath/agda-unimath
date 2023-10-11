@@ -64,10 +64,20 @@ module _
   ( P : X → UU l4) (e : cofork f g X)
   where
 
+  bottom-map-cofork-flattening-lemma-coequalizer :
+    Σ A (P ∘ map-cofork f g e ∘ f) → Σ B (P ∘ map-cofork f g e)
+  bottom-map-cofork-flattening-lemma-coequalizer =
+    map-Σ-map-base f (P ∘ map-cofork f g e)
+
+  top-map-cofork-flattening-lemma-coequalizer :
+    Σ A (P ∘ map-cofork f g e ∘ f) → Σ B (P ∘ map-cofork f g e)
+  top-map-cofork-flattening-lemma-coequalizer =
+    map-Σ (P ∘ map-cofork f g e) g (λ a → tr P (coherence-cofork f g e a))
+
   cofork-flattening-lemma-coequalizer :
     cofork
-      ( map-Σ-map-base f (P ∘ map-cofork f g e))
-      ( map-Σ (P ∘ map-cofork f g e) g (λ a → tr P (coherence-cofork f g e a)))
+      ( bottom-map-cofork-flattening-lemma-coequalizer)
+      ( top-map-cofork-flattening-lemma-coequalizer)
       ( Σ X P)
   pr1 cofork-flattening-lemma-coequalizer = map-Σ-map-base (map-cofork f g e) P
   pr2 cofork-flattening-lemma-coequalizer =
@@ -81,8 +91,8 @@ module _
     ( {l : Level} → dependent-universal-property-coequalizer l f g e) →
     { l : Level} →
     universal-property-coequalizer l
-      ( map-Σ-map-base f (P ∘ map-cofork f g e))
-      ( map-Σ (P ∘ map-cofork f g e) g (λ a → tr P (coherence-cofork f g e a)))
+      ( bottom-map-cofork-flattening-lemma-coequalizer)
+      ( top-map-cofork-flattening-lemma-coequalizer)
       ( cofork-flattening-lemma-coequalizer)
 ```
 
@@ -103,13 +113,13 @@ module _
     { l : Level} (Y : UU l) →
     ( Σ X P → Y) →
     cofork
-      ( map-Σ-map-base f (P ∘ map-cofork f g e))
-      ( map-Σ (P ∘ map-cofork f g e) g (λ a → tr P (coherence-cofork f g e a)))
+      ( bottom-map-cofork-flattening-lemma-coequalizer f g P e)
+      ( top-map-cofork-flattening-lemma-coequalizer f g P e)
       ( Y)
   cofork-map-flattening-coequalizer Y =
     cofork-map
-      ( map-Σ-map-base f (P ∘ map-cofork f g e))
-      ( map-Σ (P ∘ map-cofork f g e) g (λ a → tr P (coherence-cofork f g e a)))
+      ( bottom-map-cofork-flattening-lemma-coequalizer f g P e)
+      ( top-map-cofork-flattening-lemma-coequalizer f g P e)
       ( cofork-flattening-lemma-coequalizer f g P e)
 
   comparison-dependent-cofork-ind-Σ-cofork :

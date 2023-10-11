@@ -64,12 +64,16 @@ module _
   abstract
     canonical-coequalizer : UU (l1 ⊔ l2)
     canonical-coequalizer =
-      pushout (codiagonal A) (ind-coprod (λ _ → B) f g)
+      pushout
+        ( vertical-map-span-cocone-cofork f g)
+        ( horizontal-map-span-cocone-cofork f g)
 
     cofork-canonical-coequalizer : cofork f g canonical-coequalizer
     cofork-canonical-coequalizer =
       cofork-cocone-codiagonal f g
-        ( cocone-pushout (codiagonal A) (ind-coprod (λ _ → B) f g))
+        ( cocone-pushout
+          ( vertical-map-span-cocone-cofork f g)
+          ( horizontal-map-span-cocone-cofork f g))
 
     dup-canonical-coequalizer :
       { l : Level} →
@@ -82,8 +86,8 @@ module _
           ( cofork-canonical-coequalizer)
           ( P))
         ( dependent-cocone-map
-          ( codiagonal A)
-          ( ind-coprod (λ _ → B) f g)
+          ( vertical-map-span-cocone-cofork f g)
+          ( horizontal-map-span-cocone-cofork f g)
           ( cocone-codiagonal-cofork f g cofork-canonical-coequalizer)
           ( P))
         ( triangle-dependent-cofork-dependent-cocone-codiagonal f g
@@ -93,17 +97,19 @@ module _
           ( λ c →
             is-equiv
               ( dependent-cocone-map
-                ( codiagonal A)
-                ( ind-coprod (λ _ → B) f g)
+                ( vertical-map-span-cocone-cofork f g)
+                ( horizontal-map-span-cocone-cofork f g)
                 ( c)
                 ( P)))
           ( inv
             ( is-retraction-map-inv-is-equiv
               ( is-equiv-cofork-cocone-codiagonal f g)
-              ( cocone-pushout (codiagonal A) (ind-coprod (λ _ → B) f g))))
+              ( cocone-pushout
+                ( vertical-map-span-cocone-cofork f g)
+                ( horizontal-map-span-cocone-cofork f g))))
           ( dependent-up-pushout
-            ( codiagonal A)
-            ( ind-coprod (λ _ → B) f g)
+            ( vertical-map-span-cocone-cofork f g)
+            ( horizontal-map-span-cocone-cofork f g)
             ( P)))
         ( is-equiv-dependent-cofork-dependent-cocone-codiagonal f g
           ( cofork-canonical-coequalizer)
