@@ -101,7 +101,7 @@ module _
 ### Proof of the flattening lemma for coequalizers
 
 To show that the cofork of total spaces is a coequalizer, it
-[suffices to show](synthetic-homotopy-theory.universal-property-coequalizer.md)
+[suffices to show](synthetic-homotopy-theory.universal-property-coequalizers.md)
 that the induced cocone is a pushout. This is accomplished by constructing a
 commuting cube where the bottom is this cocone, and the top is the cocone of
 total spaces for the cocone induced by the cofork.
