@@ -79,41 +79,30 @@ module _
       { l : Level} →
       dependent-universal-property-coequalizer l f g
         ( cofork-canonical-coequalizer)
-    dup-canonical-coequalizer P =
-      is-equiv-comp-htpy
-        ( dependent-cofork-map f g cofork-canonical-coequalizer)
-        ( dependent-cofork-dependent-cocone-codiagonal f g
-          ( cofork-canonical-coequalizer)
-          ( P))
-        ( dependent-cocone-map
-          ( vertical-map-span-cocone-cofork f g)
-          ( horizontal-map-span-cocone-cofork f g)
-          ( cocone-codiagonal-cofork f g cofork-canonical-coequalizer)
-          ( P))
-        ( triangle-dependent-cofork-dependent-cocone-codiagonal f g
-          ( cofork-canonical-coequalizer)
-          ( P))
-        ( tr
-          ( λ c →
-            is-equiv
-              ( dependent-cocone-map
-                ( vertical-map-span-cocone-cofork f g)
-                ( horizontal-map-span-cocone-cofork f g)
-                ( c)
-                ( P)))
-          ( inv
-            ( is-retraction-map-inv-is-equiv
-              ( is-equiv-cofork-cocone-codiagonal f g)
-              ( cocone-pushout
-                ( vertical-map-span-cocone-cofork f g)
-                ( horizontal-map-span-cocone-cofork f g))))
-          ( dependent-up-pushout
-            ( vertical-map-span-cocone-cofork f g)
-            ( horizontal-map-span-cocone-cofork f g)
-            ( P)))
-        ( is-equiv-dependent-cofork-dependent-cocone-codiagonal f g
-          ( cofork-canonical-coequalizer)
-          ( P))
+    dup-canonical-coequalizer =
+      dependent-universal-property-coequalizer-dependent-universal-property-pushout
+        ( f)
+        ( g)
+        ( cofork-canonical-coequalizer)
+        ( λ P →
+          tr
+            ( λ c →
+              is-equiv
+                ( dependent-cocone-map
+                  ( vertical-map-span-cocone-cofork f g)
+                  ( horizontal-map-span-cocone-cofork f g)
+                  ( c)
+                  ( P)))
+            ( inv
+              ( is-retraction-map-inv-is-equiv
+                ( is-equiv-cofork-cocone-codiagonal f g)
+                ( cocone-pushout
+                  ( vertical-map-span-cocone-cofork f g)
+                  ( horizontal-map-span-cocone-cofork f g))))
+            ( dependent-up-pushout
+              ( vertical-map-span-cocone-cofork f g)
+              ( horizontal-map-span-cocone-cofork f g)
+              ( P)))
 
     up-canonical-coequalizer :
       { l : Level} →
