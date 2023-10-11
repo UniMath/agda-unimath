@@ -7,8 +7,6 @@ module synthetic-homotopy-theory.coequalizers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.codiagonal-maps-of-types
-open import foundation.coproduct-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -16,7 +14,6 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-coforks
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-coequalizers
