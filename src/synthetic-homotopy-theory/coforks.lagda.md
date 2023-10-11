@@ -338,53 +338,23 @@ module _
 
   triangle-cofork-cocone :
     { l3 l4 : Level} {X : UU l3} {Y : UU l4} →
-    ( c :
-      cocone
-        ( vertical-map-span-cocone-cofork)
-        ( horizontal-map-span-cocone-cofork)
-        ( X)) →
+    ( e : cofork f g X) →
     coherence-triangle-maps
-      ( cofork-map f g (cofork-cocone-codiagonal c) {Y = Y})
+      ( cofork-map f g e {Y = Y})
       ( cofork-cocone-codiagonal)
       ( cocone-map
         ( vertical-map-span-cocone-cofork)
         ( horizontal-map-span-cocone-cofork)
-        ( c))
-  triangle-cofork-cocone c h =
+        ( cocone-codiagonal-cofork e))
+  triangle-cofork-cocone e h =
     eq-htpy-cofork f g
-      ( cofork-map f g (cofork-cocone-codiagonal c) h)
+      ( cofork-map f g e h)
       ( cofork-cocone-codiagonal
         ( cocone-map
           ( vertical-map-span-cocone-cofork)
           ( horizontal-map-span-cocone-cofork)
-          ( c)
+          ( cocone-codiagonal-cofork e)
           ( h)))
       ( refl-htpy ,
-        ( right-unit-htpy ∙h
-          ( λ a →
-            ( ap-concat h
-              ( inv
-                ( coherence-square-cocone
-                  ( vertical-map-span-cocone-cofork)
-                  ( horizontal-map-span-cocone-cofork)
-                  ( c)
-                  ( inl a)))
-              ( coherence-square-cocone
-                ( vertical-map-span-cocone-cofork)
-                ( horizontal-map-span-cocone-cofork)
-                ( c)
-                ( inr a))) ∙
-            ( identification-right-whisk
-              ( ap-inv h
-                ( coherence-square-cocone
-                  ( vertical-map-span-cocone-cofork)
-                  ( horizontal-map-span-cocone-cofork)
-                  ( c)
-                  ( inl a)))
-              ( ap h
-                ( coherence-square-cocone
-                  ( vertical-map-span-cocone-cofork)
-                  ( horizontal-map-span-cocone-cofork)
-                  ( c)
-                  ( inr a)))))))
+        right-unit-htpy)
 ```
