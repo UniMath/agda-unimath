@@ -21,8 +21,10 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A closed walk of length `k : ℕ` in an undirected graph `G` is a morphism of
-graphs from a `k`-gon into `G`.
+A **closed walk** of length `k : ℕ` in an
+[undirected graph](graph-theory.undirected-graphs.md) `G` is a
+[morphism](graph-theory.morphisms-undirected-graphs.md) of graphs from a
+[`k`-gon](graph-theory.polygons.md) into `G`.
 
 ## Definition
 
@@ -35,3 +37,12 @@ module _
   closed-walk-Undirected-Graph =
     Σ (Polygon k) (λ H → hom-Undirected-Graph (undirected-graph-Polygon k H) G)
 ```
+
+## External links
+
+- <a href="http://ul-fmf.github.io/MaGE/Q245595" id="closed-walk-undirected-graph">Cycle</a>
+  at Math Grand Exchange
+- <a href="https://en.wikipedia.org/wiki/Cycle_(graph_theory)">Cycle (Graph
+  Theory)</a> at Wikipedia
+- <a href="https://mathworld.wolfram.com/GraphCycle.html">Graph Cycle</a> at
+  Wolfram Mathworld
