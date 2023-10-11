@@ -63,8 +63,6 @@ is-acyclic-Undirected-Graph l G =
 
 ## External links
 
-- <a href="http://ul-fmf.github.io/MaGE/Q3115453" id="acyclic-undirected-graph">Acyclic
-  undirected graphs</a> at the Math Grand Exchange.
 - <a href="https://ncatlab.org/nlab/show/tree">Trees</a> at the nlab.
 - <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest">Forests</a>
   at Wikipedia

@@ -20,8 +20,7 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A faithful morphism of undirected graphs is a morphism `f : G → H` of undirected
-graphs such that for each unordered pair `p` of vertices in `G` the map
+A **faithful morphism of undirected graphs** is a [morphism](graph-theory.morphisms-undirected-graphs.md) `f : G → H` of [undirected graphs](graph-theory.undirected-graphs.md) such that for each [unordered pair](foundation.unordered-pairs.md) `p` of vertices in `G` the map
 
 ```text
   edge-hom-Undirected-Graph G H f p :
@@ -30,7 +29,7 @@ graphs such that for each unordered pair `p` of vertices in `G` the map
       ( unordered-pair-vertices-hom-Undirected-Graph G H f p)
 ```
 
-is an embedding.
+is an [embedding](foundation.embeddings.md).
 
 ## Definition
 
@@ -114,5 +113,5 @@ module _
 
 ## See also
 
-- Embeddings of undirected graphs
-- Totally faithful morphisms of undirected graphs
+- [Embeddings of undirected graphs](graph-theory.embeddings-undirected-graphs.md)
+- [Totally faithful morphisms of undirected graphs](graph-theory.totally-faithful-morphisms-undirected-graphs.md)

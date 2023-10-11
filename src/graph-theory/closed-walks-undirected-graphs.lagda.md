@@ -40,8 +40,6 @@ module _
 
 ## External links
 
-- <a href="http://ul-fmf.github.io/MaGE/Q245595" id="closed-walk-undirected-graph">Cycle</a>
-  at Math Grand Exchange
 - <a href="https://en.wikipedia.org/wiki/Cycle_(graph_theory)">Cycle (Graph
   Theory)</a> at Wikipedia
 - <a href="https://mathworld.wolfram.com/GraphCycle.html">Graph Cycle</a> at

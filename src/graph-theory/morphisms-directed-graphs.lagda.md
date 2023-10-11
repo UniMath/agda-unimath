@@ -26,6 +26,10 @@ open import graph-theory.directed-graphs
 
 </details>
 
+## Idea
+
+A **morphism of directed graphs** from `G` to `H` consists of a map `f` from the vertices of `G` to the vertices of `H`, and a family of maps from the edges `E_G x y` in G` to the edges `E_H (f x) (f y)` in `H`.
+
 ## Definitions
 
 ### Morphisms of directed graphs
@@ -216,3 +220,7 @@ module _
   eq-htpy-hom-Directed-Graph f g =
     map-inv-equiv (extensionality-hom-Directed-Graph f g)
 ```
+
+## External link
+
+- [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at Wikipedia

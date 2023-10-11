@@ -19,8 +19,8 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-Two undirected graphs are said to be merely equivalent if there merely exists an
-equivalence of undirected graphs between them.
+Two [undirected graphs](graph-theory.undirected-graphs.md) are said to be **merely equivalent** if there merely [exists](foundation.existential-quantification.md) an
+[equivalence of undirected graphs](graph-theory.equivalences-undirected-graphs.md) between them.
 
 ## Definition
 

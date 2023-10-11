@@ -20,8 +20,8 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-An embedding of directed graphs is a morphism `f : G → H` of directed graphs
-which is an embedding on vertices such that for each pair `(x , y)` of vertices
+An **embedding of directed graphs** is a [morphism](graph-theory.morphisms-directed-graphs.md) `f : G → H` of [directed graphs](graph-theory.directed-graphs.md)
+which is an [embedding](foundation.embeddings.md) on vertices such that for each pair `(x , y)` of vertices
 in `G` the map
 
 ```text
@@ -30,6 +30,8 @@ in `G` the map
 
 is also an embedding. Embeddings of directed graphs correspond to directed
 subgraphs.
+
+**Note:** Our notion of embeddings of directed graphs differs quite substantially from the graph theoretic notion of *graph embedding*, which usually refers to an embedding of a graph into the plane.
 
 ## Definition
 

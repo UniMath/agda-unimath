@@ -51,8 +51,6 @@ pr2 (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
 
 - <a href="https://d3gt.com/unit.html?complete-bipartite">Complete bipartite
   graphs</a> at D3 Graph Theory
-- <a href="http://ul-fmf.github.io/MaGE/Q913598" id="complete-bipartite-graph">Complete
-  bipartite graphs</a> at Math Grand Exchange
 - <a href="https://ncatlab.org/nlab/show/bipartite+graph">Bipartite graphs</a>
   at nlab
 - <a href="https://en.wikipedia.org/wiki/Complete_bipartite_graph">Complete

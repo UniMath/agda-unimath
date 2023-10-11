@@ -23,7 +23,7 @@ valued relation of edges. Alternatively, one can define a directed graph to
 consist of a type `V` of **vertices**, a type `E` of **edges**, and a map
 `E → V × V` determining the **source** and **target** of each edge.
 
-To see that these two definitions are equivalent, recall that $\Sigma$-types
+To see that these two definitions are [equivalent](foundation-core.equivalences.md), recall that [$\Sigma$-types](foundation.dependent-pair-types.md)
 preserve equivalences and a type family $A \to U$ is equivalent to
 $\sum_{(C : U)} C \to A$ by [type duality](foundation.type-duality.md). Using
 these two observations we make the following calculation:
@@ -130,3 +130,9 @@ module equiv {l1 l2 : Level} where
   pr2 (Directed-Graph'-to-Directed-Graph (V , E , st , tg)) x y =
     Σ E (λ e → (Id (st e) x) × (Id (tg e) y))
 ```
+
+## External links
+
+- [Directed graph](https://ncatlab.org/nlab/show/directed+graph) at nlab
+- [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
+- [Directed graph](https://mathworld.wolfram.com/DirectedGraph.html) at Wolfram Mathworld
