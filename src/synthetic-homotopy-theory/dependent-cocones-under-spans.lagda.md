@@ -99,10 +99,12 @@ dependent-cocone-map :
   { l1 l2 l3 l4 l5 : Level} {S : UU l1} {A : UU l2} {B : UU l3} {X : UU l4}
   ( f : S → A) (g : S → B) (c : cocone f g X) (P : X → UU l5) →
   ( (x : X) → P x) → dependent-cocone f g c P
-dependent-cocone-map f g c P h =
-  ( λ a → h (horizontal-map-cocone f g c a)) ,
-  ( λ b → h (vertical-map-cocone f g c b)) ,
-  ( λ s → apd h (coherence-square-cocone f g c s))
+pr1 (dependent-cocone-map f g c P h) a =
+  h (horizontal-map-cocone f g c a)
+pr1 (pr2 (dependent-cocone-map f g c P h)) b =
+  h (vertical-map-cocone f g c b)
+pr2 (pr2 (dependent-cocone-map f g c P h)) s =
+  apd h (coherence-square-cocone f g c s)
 ```
 
 ## Properties

@@ -108,7 +108,7 @@ module _
   where
 
   map-equiv-susp-loop-adj :
-    ((suspension-Pointed-Type X) →∗ Y) → (X →∗ Ω Y)
+    (suspension-Pointed-Type X →∗ Y) → (X →∗ Ω Y)
   map-equiv-susp-loop-adj f∗ =
     ((pointed-map-Ω f∗) ∘∗ (pointed-map-unit-susp-loop-adj X))
 ```
@@ -121,7 +121,7 @@ module _
   where
 
   map-inv-equiv-susp-loop-adj :
-    (X →∗ Ω Y) → ((suspension-Pointed-Type X) →∗ Y)
+    (X →∗ Ω Y) → (suspension-Pointed-Type X →∗ Y)
   pr1 (map-inv-equiv-susp-loop-adj f∗) =
     map-inv-up-suspension
       ( type-Pointed-Type X)
@@ -135,9 +135,9 @@ module _
       ( type-Pointed-Type X)
       ( type-Pointed-Type Y)
       ( suspension-structure-map-into-Ω
-      ( type-Pointed-Type X)
-      ( Y)
-      ( map-pointed-map f∗))
+        ( type-Pointed-Type X)
+        ( Y)
+        ( map-pointed-map f∗))
 ```
 
 We now show these maps are inverses of each other.
@@ -171,19 +171,19 @@ module _
               Σ ( Id (point-Pointed-Type Y) (pr1 z))
                 ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
           ( ( inv-equiv
-            ( right-unit-law-Σ-is-contr
-              ( λ ( z : Σ ( type-Pointed-Type Y)
-                ( λ y1 →
-                  type-Pointed-Type X →
-                  point-Pointed-Type Y ＝ y1)) →
-                    ( is-contr-total-path
-                      ( (pr2 z) (point-Pointed-Type X)))))) ∘e
+              ( right-unit-law-Σ-is-contr
+                ( λ ( z : Σ ( type-Pointed-Type Y)
+                  ( λ y1 →
+                    type-Pointed-Type X →
+                    point-Pointed-Type Y ＝ y1)) →
+                      ( is-contr-total-path
+                        ( pr2 z (point-Pointed-Type X)))))) ∘e
             ( ( left-unit-law-Σ-is-contr
                 ( is-contr-total-path' (point-Pointed-Type Y))
                 ( (point-Pointed-Type Y) , refl)) ∘e
               ( ( equiv-right-swap-Σ) ∘e
                 ( equiv-Σ-equiv-base
-                  ( λ c → (pr1 c) ＝ (point-Pointed-Type Y))
+                  ( λ c → pr1 c ＝ point-Pointed-Type Y)
                   ( equiv-up-suspension
                     ( type-Pointed-Type X)
                     ( type-Pointed-Type Y)))))))))
