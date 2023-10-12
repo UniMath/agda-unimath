@@ -33,7 +33,7 @@ which we call the **sphere prespectrum**.
 adjoint to the identity map, it is not in general a
 [spectrum](synthetic-homotopy-theory.spectra.md), as the transposing map of the
 [loop-suspension adjunction](synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types.md)
-does not in general send [equivalences](foundation-core.equivalences.md) to
+does not generally send [equivalences](foundation-core.equivalences.md) to
 equivalences.
 
 ## Definition
