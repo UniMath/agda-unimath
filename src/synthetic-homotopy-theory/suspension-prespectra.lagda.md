@@ -26,15 +26,16 @@ open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-
 ## Idea
 
 Given a [pointed type](structured-types.pointed-types.md) `A`, the
-[sequence](foundation.sequences.md) of iterated
-[suspensions](synthetic-homotopy-theory.suspensions-of-pointed-types.md) of `A`
+[sequence](foundation.sequences.md) of
+[iterated suspensions](synthetic-homotopy-theory.iterated-suspensions-of-pointed-types.md)
+of `A`
 
 ```text
-  A   Σ¹A   Σ² A   Σ³ A   ...
+  A   Σ¹A   Σ²A   Σ³A   ...
 ```
 
 defines a [prespectrum](synthetic-homotopy-theory.prespectra.md) `Σ^∞A` that we
-call the **suspension spectrum** of `A`.
+call the **suspension prespectrum** of `A`.
 
 ## Definition
 

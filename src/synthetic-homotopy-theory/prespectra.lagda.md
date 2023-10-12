@@ -25,7 +25,7 @@ open import synthetic-homotopy-theory.loop-spaces
 ## Idea
 
 A **prespectrum** is a [sequence](foundation.sequences.md) of
-[pointed types](structured-types.pointed-types.md) `A n`
+[pointed types](structured-types.pointed-types.md) `Aₙ`
 [equipped](foundation.structure.md) with
 [pointed maps](structured-types.pointed-maps.md)
 
@@ -33,7 +33,7 @@ A **prespectrum** is a [sequence](foundation.sequences.md) of
   ε : Aₙ →∗ ΩAₙ₊₁
 ```
 
-called the **structure maps** of the prespectrum.
+for each `n : ℕ`, called the **structure maps** of the prespectrum.
 
 By the
 [loop-suspension adjunction](synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types.md),

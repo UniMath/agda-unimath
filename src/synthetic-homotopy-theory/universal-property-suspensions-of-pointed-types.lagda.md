@@ -100,7 +100,7 @@ module _
       ( point-Pointed-Type X , point-Pointed-Type X , id)
 ```
 
-#### The transposing map of the adjunction
+#### The transposing maps of the adjunction
 
 ```agda
 module _
@@ -111,11 +111,7 @@ module _
     (suspension-Pointed-Type X →∗ Y) → (X →∗ Ω Y)
   transpose-suspension-loop-adjunction f∗ =
     pointed-map-Ω f∗ ∘∗ pointed-map-unit-suspension-loop-adjunction X
-```
 
-#### The inverse transposing map of the adjunction
-
-```agda
 module _
   {l1 l2 : Level} (X : Pointed-Type l1) (Y : Pointed-Type l2)
   where

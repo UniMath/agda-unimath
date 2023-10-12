@@ -21,8 +21,10 @@ open import synthetic-homotopy-theory.suspensions-of-pointed-types
 ## Idea
 
 Given a [pointed type](structured-types.pointed-types.md) `X` and a
-[natural number](elementary-number-theory.natural-numbers.md), we can form the
-`n`-**iterated suspension** of `X`.
+[natural number](elementary-number-theory.natural-numbers.md) `n`, we can form
+the `n`-**iterated suspension** of `X`.
+
+## Definitions
 
 ### The iterated suspension of a pointed type
 

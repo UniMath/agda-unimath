@@ -32,7 +32,7 @@ A **spectrum** is a [sequence](foundation.sequences.md) of
 [pointed types](structured-types.pointed-types.md) `A` such that
 
 ```text
-  Aₙ ≃∗ Ω Aₙ₊₁
+  Aₙ ≃∗ ΩAₙ₊₁
 ```
 
 for each `n : ℕ`.
