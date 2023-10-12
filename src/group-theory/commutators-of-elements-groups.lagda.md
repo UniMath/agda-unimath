@@ -22,8 +22,8 @@ open import group-theory.groups
 
 The **commutator** of two elements `x` and `y` of a
 [group](group-theory.groups.md) `G` is defined to be the element
-`[x,y] = (xy)(yx)⁻¹`. The commutator of two elements `x` and `y` is equal to
-the unit if and only if `x` and `y` commute.
+`[x,y] = (xy)(yx)⁻¹`. The commutator of two elements `x` and `y` is equal to the
+unit if and only if `x` and `y` commute.
 
 ## Definition
 
@@ -42,7 +42,8 @@ module _
 
 ### The commutator of `x` and `y` is the unit element if and only `x` and `y` commute
 
-**Proof:** By transposing identifications along the group operation, we have an [equivalence](foundation.equivalences.md) `(xy ＝ yx) ≃ ((xy)(yx)⁻¹ ＝ e)`.
+**Proof:** By transposing identifications along the group operation, we have an
+[equivalence](foundation.equivalences.md) `(xy ＝ yx) ≃ ((xy)(yx)⁻¹ ＝ e)`.
 
 ```agda
 module _
@@ -64,7 +65,8 @@ module _
 
 ### The inverse of the commutator `[x,y]` is `[y,x]`
 
-**Proof:** Since `(uv⁻¹)⁻¹ ＝ vu⁻¹` for any two elements `u,v : G` it follows that `((xy)(yx)⁻¹)⁻¹ ＝ (yx)(xy)⁻¹`.
+**Proof:** Since `(uv⁻¹)⁻¹ ＝ vu⁻¹` for any two elements `u,v : G` it follows
+that `((xy)(yx)⁻¹)⁻¹ ＝ (yx)(xy)⁻¹`.
 
 ```agda
   inv-commutator-Group :
@@ -76,7 +78,8 @@ module _
 
 ### Conjugation distributes over the commutator
 
-**Proof:** The proof is a simple computation, using the fact that conjugation distributes over multiplication and preserves inverses:
+**Proof:** The proof is a simple computation, using the fact that conjugation
+distributes over multiplication and preserves inverses:
 
 ```text
   u(xy)(yx)⁻¹u⁻¹
@@ -107,5 +110,6 @@ module _
 - [Commutator](https://www.wikidata.org/wiki/Q2989763) at Wikidata
 - [Commutator](https://en.wikipedia.org/wiki/Commutator#Group_theory) at
   Wikipedia
-- [Commutator](https://mathworld.wolfram.com/Commutator.html) at Wolfram Mathworld
+- [Commutator](https://mathworld.wolfram.com/Commutator.html) at Wolfram
+  Mathworld
 - [Group commutator](https://ncatlab.org/nlab/show/group+commutator) at nlab
