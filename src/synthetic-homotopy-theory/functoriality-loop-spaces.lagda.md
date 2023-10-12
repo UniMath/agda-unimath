@@ -30,7 +30,7 @@ open import synthetic-homotopy-theory.loop-spaces
 Any [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` induces a
 pointed map `pointed-map-Ω f : Ω A →∗ Ω B`. Furthermore, this operation respects
 the groupoidal operations on
-[loop spaces](sytnhetic-homotopy-theory.loop-spaces.md).
+[loop spaces](synthetic-homotopy-theory.loop-spaces.md).
 
 ## Definition
 

@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.iterated-suspensions-of-pointed-types where
 ```agda
 open import elementary-number-theory.natural-numbers
 
+open import foundation.iterating-functions
 open import foundation.universe-levels
 
 open import structured-types.pointed-types
@@ -22,7 +23,7 @@ open import synthetic-homotopy-theory.suspensions-of-pointed-types
 
 Given a [pointed type](structured-types.pointed-types.md) `X` and a
 [natural number](elementary-number-theory.natural-numbers.md) `n`, we can form
-the `n`-**iterated suspension** of `X`.
+the **`n`-iterated suspension** of `X`.
 
 ## Definitions
 
@@ -31,7 +32,5 @@ the `n`-**iterated suspension** of `X`.
 ```agda
 iterated-suspension-Pointed-Type :
   {l : Level} (n : ℕ) → Pointed-Type l → Pointed-Type l
-iterated-suspension-Pointed-Type 0 X = X
-iterated-suspension-Pointed-Type (succ-ℕ n) X =
-  suspension-Pointed-Type (iterated-suspension-Pointed-Type n X)
+iterated-suspension-Pointed-Type n = iterate n suspension-Pointed-Type
 ```

@@ -40,7 +40,7 @@ sphere-Prespectrum = suspension-Prespectrum (Fin 2 , zero-Fin 1)
 
 ### The sphere spectrum
 
-This remains to be defined. To define this, it would be practical to first have
-the lemma that the transposing map of the loop-suspension adjunction preserves
-and reflects equivalences. Then we can simply use the transpose of the identity
-function as our structure map.
+This definition remains to be formalized. To define this, it would be practical
+to first have the lemma that the transposing map of the loop-suspension
+adjunction preserves and reflects equivalences. Then we can simply use the
+transpose of the identity function as our structure map.

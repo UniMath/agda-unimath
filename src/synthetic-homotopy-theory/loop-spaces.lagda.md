@@ -25,9 +25,8 @@ open import structured-types.wild-quasigroups
 
 The **loop space** of a [pointed type](structured-types.pointed-types.md) `A` is
 the pointed type of self-[identifications](foundation-core.identity-types.md) of
-the base point of `A`. The loop space comes equipped with a
-[group](group-theory.groups.md) structure induced by the
-[groupoidal](category-theory.groupoids.md) structure on identifications.
+the base point of `A`. The loop space comes equipped with a group-like structure
+induced by the groupoidal-like structure on identifications.
 
 ## Table of files directly related to loop spaces
 

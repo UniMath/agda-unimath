@@ -27,7 +27,7 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The **spheres** are defined as
-[iterated suspensions](synthetic-homotopy-theory.iterated-suspensions-pointed-types.md)
+[iterated suspensions](synthetic-homotopy-theory.iterated-suspensions-of-pointed-types.md)
 of the
 [standard two-element type `Fin 2`](univalent-combinatorics.standard-finite-types.md).
 

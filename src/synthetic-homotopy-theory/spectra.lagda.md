@@ -29,7 +29,8 @@ open import synthetic-homotopy-theory.prespectra
 ## Idea
 
 A **spectrum** is a [sequence](foundation.sequences.md) of
-[pointed types](structured-types.pointed-types.md) `A` such that
+[pointed types](structured-types.pointed-types.md) `A` equipped with an
+equivalence
 
 ```text
   Aₙ ≃∗ ΩAₙ₊₁
