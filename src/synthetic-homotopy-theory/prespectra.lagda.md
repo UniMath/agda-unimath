@@ -37,11 +37,11 @@ for each `n : ℕ`, called the **structure maps** of the prespectrum.
 
 By the
 [loop-suspension adjunction](synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types.md),
-specifying structure maps `Aₙ →∗ ΩAₙ₊₁` is
+specifying structure maps `Aₙ →∗ Ω Aₙ₊₁` is
 [equivalent](foundation-core.equivalences.md) to specifying their adjoint maps
 
 ```text
-  ΣAₙ →∗ Aₙ₊₁.
+  ΣAₙ → Aₙ₊₁.
 ```
 
 ## Definition
