@@ -103,14 +103,16 @@ module _
 To show that the cofork of total spaces is a coequalizer, it
 [suffices to show](synthetic-homotopy-theory.universal-property-coequalizers.md)
 that the induced cocone is a pushout. This is accomplished by constructing a
-commuting cube where the bottom is this cocone, and the top is the cocone of
-total spaces for the cocone induced by the cofork.
+[commuting cube](foundation.commuting-cubes-of-maps.md) where the bottom is this
+cocone, and the top is the cocone of total spaces for the cocone induced by the
+cofork.
 
 Assuming that the given cofork is a coequalizer, we get that its induced cocone
 is a pushout, so by the
 [flattening lemma for pushouts](synthetic-homotopy-theory.flattening-lemma-pushouts.md),
 the top square is a pushout as well. The vertical maps of the cube are
-equivalences, so it follows that the bottom square is a pushout.
+[equivalences](foundation.equivalences.md), so it follows that the bottom square
+is a pushout.
 
 ```agda
 module _
