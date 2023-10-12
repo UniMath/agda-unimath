@@ -19,8 +19,9 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-A graph is said to be connected if any point can be reached from any point by a
-walk.
+An [undirected graph](graph-theory.undirected-graphs.md) is said to be
+**connected** if any point can be reached from any point by a
+[walk](graph-theory.walks-undirected-graphs.md).
 
 ## Definition
 
@@ -45,3 +46,12 @@ module _
   is-prop-is-connected-Undirected-Graph =
     is-prop-Π (λ _ → is-prop-Π (λ _ → is-prop-type-trunc-Prop))
 ```
+
+## External links
+
+- [Connected graph](https://ncatlab.org/nlab/show/connected+graph) at nlab
+- [Connected graph](https://www.wikidata.org/wiki/Q230655) on Wikidata
+- [Connectivity (graph theory)](<https://en.wikipedia.org/wiki/Connectivity_(graph_theory)>)
+  on Wikipedia
+- [Connected graph](https://mathworld.wolfram.com/ConnectedGraph.html) at
+  Wolfram Mathworld

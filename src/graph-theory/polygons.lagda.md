@@ -30,10 +30,13 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A polygon is an undirected graph that is merely equivalent to a graph with
-vertices `ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines
-for each `k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a
-concrete presentation of the dihedral group `D_k`.
+A **polygon** is an [undirected graph](graph-theory.undirected-graphs.md) that
+is [merely equivalent](graph-theory.mere-equivalences-undirected-graphs.md) to a
+graph with vertices the underlying type of the
+[standard cyclic group](elementary-number-theory.standard-cyclic-groups.md)
+`ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each
+`k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a concrete
+presentation of the [dihedral group](group-theory.dihedral-groups.md) `D_k`.
 
 ## Definition
 
@@ -115,12 +118,6 @@ module _
     has-decidable-equality-mere-equiv'
       ( mere-equiv-vertex-Polygon)
       ( has-decidable-equality-ℤ-Mod k)
-
-{-
-  is-prop-edge-Polygon :
-    (p : unordered-pair-vertices-Polygon) → is-prop (edge-Polygon p)
-  is-prop-edge-Polygon p = {!!}
--}
 ```
 
 ## Properties
@@ -135,44 +132,21 @@ is-set-vertex-standard-polygon-Undirected-Graph k = is-set-ℤ-Mod k
 
 ### Every edge is between distinct points
 
-```agda
-{-
-module _
-  (k : ℕ) (p : unordered-pair-vertices-standard-polygon-Undirected-Graph k)
-  where
-
-  is-emb-element-unordered-pair-edge-standard-polygon-Undirected-Graph :
-    edge-standard-polygon-Undirected-Graph k p →
-    is-emb (element-unordered-pair p)
-  is-emb-element-unordered-pair-edge-standard-polygon-Undirected-Graph e =
-    is-emb-is-injective
-      ( is-set-vertex-standard-polygon-Undirected-Graph k)
-      {!!}
-
-  is-prop-edge-standard-polygon-Undirected-Graph :
-    is-prop (edge-standard-polygon-Undirected-Graph k p)
-  is-prop-edge-standard-polygon-Undirected-Graph =
-    {!!}
--}
-```
+This remains to be formalized.
 
 ### Every polygon is a simple graph
 
-```agda
-{-
-is-simple-standard-polygon-Undirected-Graph :
-  (k : ℕ) → is-not-one-ℕ k →
-  is-simple-Undirected-Graph (standard-polygon-Undirected-Graph k)
-pr1 (is-simple-standard-polygon-Undirected-Graph k H) p (pair x (pair y α)) =
-  is-emb-is-injective
-    {!!}
-    {!!}
-pr2 (is-simple-standard-polygon-Undirected-Graph k H) p = {!!}
--}
-```
+This remains to be formalized.
 
 ## See also
 
 ### Table of files related to cyclic types, groups, and rings
 
 {{#include tables/cyclic-types.md}}
+
+## External links
+
+- [Cycle graph](https://www.wikidata.org/wiki/Q622506) on Wikidata
+- [Cycle graph](https://en.wikipedia.org/wiki/Cycle_graph) at Wikipedia
+- [Cycle graph](https://mathworld.wolfram.com/CycleGraph.html) at Wolfram
+  Mathworld

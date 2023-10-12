@@ -34,6 +34,14 @@ open import graph-theory.morphisms-directed-graphs
 
 </details>
 
+## Idea
+
+An **equivalence of directed graphs** from a
+[directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
+`(V',E')` consists of an [equivalence](foundation-core.equivalences.md)
+`e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)`
+of edges indexed by `x y : V`.
+
 ## Definitions
 
 ### Equivalences of directed graphs
@@ -530,3 +538,12 @@ module _
   pr2 is-retraction-inv-equiv-Directed-Graph =
     edge-is-retraction-inv-equiv-Directed-Graph
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/wiki/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab

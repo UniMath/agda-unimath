@@ -19,8 +19,9 @@ open import group-theory.groups
 
 ## Idea
 
-A voltage graph is a directed graph `G` equipped with a group `Π` (the voltage
-group) and a labelling of the edges of `G` by elements of `Π`.
+A **voltage graph** is a [directed graph](graph-theory.directed-graphs.md) `G`
+equipped with a [group](group-theory.groups.md) `Π`, which we call the **voltage
+group**, and a labelling of the edges of `G` by elements of `Π`.
 
 ## Definition
 
@@ -50,3 +51,7 @@ module _
     {x y : vertex-Voltage-Graph} → edge-Voltage-Graph x y → type-Group Π
   voltage-Voltage-Graph = pr2 G
 ```
+
+## External links
+
+- [Voltage graph](https://en.wikipedia.org/wiki/Voltage_graph) at Wikipedia

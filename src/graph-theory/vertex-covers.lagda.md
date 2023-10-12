@@ -25,8 +25,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A vertex cover on a undirect graph is a set of vertices that includes at least
-one extremity of each edge of the graph
+A **vertex cover** on a [undirect graph](graph-theory.undirected-graphs.md) is a
+set of vertices that includes at least one extremity of each edge of the graph.
 
 ## Definitions
 
@@ -42,3 +42,10 @@ vertex-cover G =
           ( Σ (vertex-Undirected-Graph G)
             ( λ x → is-in-unordered-pair p x × Id (c x) (inr star))))
 ```
+
+## External links
+
+- [Vertex cover](https://en.wikipedia.org/wiki/Vertex_cover) at Wikipedia
+- [Vertex cover](https://mathworld.wolfram.com/VertexCover.html) at Wolfram
+  Mathworld
+- [Vertex cover problem](https://www.wikidata.org/wiki/Q924362) on Wikidata

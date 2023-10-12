@@ -24,8 +24,14 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A finite undirected graph consists of a finite set of vertices and a family of
-finite types of edges indexed by unordered pairs of vertices.
+A **finite undirected graph** consists of a
+[finite set](univalent-combinatorics.finite-types.md) of vertices and a family
+of finite types of edges indexed by
+[unordered pairs](foundation.unordered-pairs.md) of vertices.
+
+**Note:** In our definition of finite graph, we allow for the possibility that
+there are multiple edges between the same two nodes. In discrete mathematics it
+is also common to call such graphs _multigraphs_.
 
 ## Definitions
 
@@ -93,3 +99,11 @@ incident-edges-vertex-Undirected-Graph-𝔽 G x =
   Σ ( unordered-pair (vertex-Undirected-Graph-𝔽 G))
     ( λ p → fiber (element-unordered-pair p) x)
 ```
+
+## External links
+
+- [Multigraph](https://ncatlab.org/nlab/show/multigraph) at nlab
+- [Multigraph](https://www.wikidata.org/wiki/Q2642629) on Wikidata
+- [Multigraph](https://en.wikipedia.org/wiki/Multigraph) at Wikipedia
+- [Multigraph](https://mathworld.wolfram.com/Multigraph.html) at Wolfram
+  mathworld
