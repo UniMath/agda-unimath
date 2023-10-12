@@ -23,10 +23,10 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
 open import synthetic-homotopy-theory.dependent-universal-property-suspensions
-open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.suspension-structures
 open import synthetic-homotopy-theory.universal-property-pushouts

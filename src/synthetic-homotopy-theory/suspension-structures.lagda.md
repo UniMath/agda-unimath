@@ -113,8 +113,6 @@ pr1 (cocone-suspension-structure X Y (N , S , merid)) = point N
 pr1 (pr2 (cocone-suspension-structure X Y (N , S , merid))) = point S
 pr2 (pr2 (cocone-suspension-structure X Y (N , S , merid))) = merid
 
-
-
 equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
   suspension-cocone X Z ≃ suspension-structure X Z

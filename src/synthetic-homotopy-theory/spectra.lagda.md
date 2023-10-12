@@ -16,9 +16,9 @@ open import foundation.universe-levels
 open import structured-types.pointed-equivalences
 open import structured-types.pointed-maps
 open import structured-types.pointed-types
-open import synthetic-homotopy-theory.prespectra
 
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.prespectra
 ```
 
 </details>
@@ -58,15 +58,16 @@ module _
     (n : ℕ) → pointed-type-Spectrum n ≃∗ Ω (pointed-type-Spectrum (succ-ℕ n))
   pointed-equiv-Spectrum = pr2 A
 
-  pointed-map-Spectrum :
+  pointed-structure-map-Spectrum :
     (n : ℕ) → pointed-type-Spectrum n →∗ Ω (pointed-type-Spectrum (succ-ℕ n))
-  pointed-map-Spectrum = pointed-map-pointed-equiv ∘ pointed-equiv-Spectrum
+  pointed-structure-map-Spectrum =
+    pointed-map-pointed-equiv ∘ pointed-equiv-Spectrum
 
   map-Spectrum :
     (n : ℕ) → type-Spectrum n → type-Ω (pointed-type-Spectrum (succ-ℕ n))
-  map-Spectrum = map-pointed-map ∘ pointed-map-Spectrum
+  map-Spectrum = map-pointed-map ∘ pointed-structure-map-Spectrum
 
   prespectrum-Spectrum : Prespectrum l
   pr1 prespectrum-Spectrum = pointed-type-Spectrum
-  pr2 prespectrum-Spectrum = pointed-map-Spectrum
+  pr2 prespectrum-Spectrum = pointed-structure-map-Spectrum
 ```
