@@ -29,7 +29,7 @@ open import synthetic-homotopy-theory.prespectra
 
 ## Idea
 
-A **map of presectra** `f : A → B` is a [sequence](foundation.sequences.md) of
+A **map of prespectra** `f : A → B` is a [sequence](foundation.sequences.md) of
 [pointed maps](structured-types.pointed-maps.md)
 
 ```text
