@@ -21,9 +21,12 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A circuit in an undirected graph `G` consists of a `k`-gon `H` equipped with a
-totally faithful morphism of graphs from `H` to `G`. In other words, a circuit
-is a closed walk with no repeated edges.
+A **circuit** in an [undirected graph](graph-theory.undirected-graphs.md) `G`
+consists of a [`k`-gon](graph-theory.polygons.md) `H` equipped with a
+[totally faithful](graph-theory.totally-faithful-morphisms-undirected-graphs.md)
+[morphism](graph-theory.morphisms-undirected-graphs.md) of undirected graphs
+from `H` to `G`. In other words, a circuit is a closed walk with no repeated
+edges.
 
 ## Definition
 
@@ -38,3 +41,11 @@ module _
       ( λ H →
         totally-faithful-hom-Undirected-Graph (undirected-graph-Polygon k H) G)
 ```
+
+## External links
+
+- [Cycle](https://www.wikidata.org/wiki/Q245595) at Wikidata
+- [Cycle (Graph Theory)](<https://en.wikipedia.org/wiki/Cycle_(graph_theory)>)
+  at Wikipedia
+- [Graph Cycle](https://mathworld.wolfram.com/GraphCycle.html) at Wolfram
+  Mathworld

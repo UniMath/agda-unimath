@@ -15,7 +15,9 @@ open import foundation.fibers-of-maps
 open import foundation.functoriality-dependent-pair-types
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.coforks
+open import synthetic-homotopy-theory.universal-property-pushouts
 ```
 
 </details>
@@ -91,4 +93,59 @@ module _
         ( is-equiv-tot-is-fiberwise-equiv
           ( λ h → is-equiv-htpy-cofork-eq f g (cofork-map f g e h) e'))
         ( is-contr-map-is-equiv (up-coequalizer Y) e')
+```
+
+### A cofork has the universal property of coequalizers if and only if the corresponding cocone has the universal property of pushouts
+
+As mentioned in [coforks](synthetic-homotopy-theory.coforks.md), coforks can be
+thought of as special cases of cocones under spans. This theorem makes it more
+precise, asserting that under this mapping,
+[coequalizers](synthetic-homotopy-theory.coequalizers.md) correspond to
+[pushouts](synthetic-homotopy-theory.pushouts.md).
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f g : A → B)
+  ( e : cofork f g X)
+  where
+
+  universal-property-coequalizer-universal-property-pushout :
+    ( {l : Level} →
+      universal-property-pushout l
+        ( vertical-map-span-cocone-cofork f g)
+        ( horizontal-map-span-cocone-cofork f g)
+        ( cocone-codiagonal-cofork f g e)) →
+    ( {l : Level} →
+      universal-property-coequalizer l f g e)
+  universal-property-coequalizer-universal-property-pushout up-pushout Y =
+    is-equiv-comp-htpy
+      ( cofork-map f g e)
+      ( cofork-cocone-codiagonal f g)
+      ( cocone-map
+        ( vertical-map-span-cocone-cofork f g)
+        ( horizontal-map-span-cocone-cofork f g)
+        ( cocone-codiagonal-cofork f g e))
+      ( triangle-cofork-cocone f g e)
+      ( up-pushout Y)
+      ( is-equiv-cofork-cocone-codiagonal f g)
+
+  universal-property-pushout-universal-property-coequalizer :
+    ( {l : Level} →
+      universal-property-coequalizer l f g e) →
+    ( {l : Level} →
+      universal-property-pushout l
+        ( vertical-map-span-cocone-cofork f g)
+        ( horizontal-map-span-cocone-cofork f g)
+        ( cocone-codiagonal-cofork f g e))
+  universal-property-pushout-universal-property-coequalizer up-coequalizer Y =
+    is-equiv-right-factor-htpy
+      ( cofork-map f g e)
+      ( cofork-cocone-codiagonal f g)
+      ( cocone-map
+        ( vertical-map-span-cocone-cofork f g)
+        ( horizontal-map-span-cocone-cofork f g)
+        ( cocone-codiagonal-cofork f g e))
+      ( triangle-cofork-cocone f g e)
+      ( is-equiv-cofork-cocone-codiagonal f g)
+      ( up-coequalizer Y)
 ```

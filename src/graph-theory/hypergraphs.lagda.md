@@ -18,8 +18,9 @@ open import foundation.unordered-tuples
 
 ## Idea
 
-A `k`-hypergraph consists of a type `V` of vertices and a family `E` of types
-indexed by the unordered `k`-tuples of vertices.
+A **`k`-hypergraph** consists of a type `V` of vertices and a family `E` of
+types indexed by the [unordered `k`-tuples](foundation.unordered-tuples.md) of
+vertices.
 
 ## Definition
 
@@ -40,3 +41,11 @@ module _
   simplex-Hypergraph : unordered-tuple-vertices-Hypergraph → UU l2
   simplex-Hypergraph = pr2 G
 ```
+
+## External links
+
+- [Hypergraph](https://ncatlab.org/nlab/show/hypergraph) at nlab
+- [Hypergraph](https://www.wikidata.org/wiki/Q840247) on Wikidata
+- [Hypergraph](https://en.wikipedia.org/wiki/Hypergraph) at Wikipedia
+- [Hypergraph](https://mathworld.wolfram.com/Hypergraph.html) at Wolfram
+  Mathworld

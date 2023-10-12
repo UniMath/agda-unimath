@@ -23,10 +23,13 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An Eulerian cicuit in an undirected graph `G` consists of a cicuit `T` in `G`
-such that every edge in `G` is in the image of `T`. In other words, an Eulerian
-circuit `T` consists of `k`-gon `H` equipped with a graph homomorphism
-`f : H → G` that induces an equivalence
+An **Eulerian circuit** in an
+[undirected graph](graph-theory.undirected-graphs.md) `G` consists of a
+[circuit](graph-theory.circuits-undirected-graphs.md) `T` in `G` such that every
+edge in `G` is in the image of `T`. In other words, an Eulerian circuit `T`
+consists of [`k`-gon](graph-theory.polygons.md) `H` equipped with a
+[graph homomorphism](graph-theory.morphisms-undirected-graphs.md) `f : H → G`
+that induces an [equivalence](foundation-core.equivalences.md)
 
 ```text
   Σ (unordered-pair-vertices-Polygon k H) (edge-Polygon k H) ≃
@@ -55,3 +58,12 @@ module _
                       ( G)
                       ( f))))))
 ```
+
+## External links
+
+- [Eulerian circuit](https://d3gt.com/unit.html?eulerian-circuit) on D3 Graph
+  theory
+- [Eulerian cycle](https://www.wikidata.org/wiki/Q11691793) on Wikidata
+- [Eulerian path](https://en.wikipedia.org/wiki/Eulerian_path) on Wikipedia
+- [Eulerian cycle](https://mathworld.wolfram.com/EulerianCycle.html) on Wolfram
+  mathworld

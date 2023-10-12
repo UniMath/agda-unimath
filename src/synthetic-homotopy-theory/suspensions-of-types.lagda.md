@@ -23,6 +23,7 @@ open import foundation.transport-along-identifications
 open import foundation.unit-type
 open import foundation.universe-levels
 
+open import synthetic-homotopy-theory.cocones-under-spans
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
 open import synthetic-homotopy-theory.dependent-suspension-structures
 open import synthetic-homotopy-theory.dependent-universal-property-suspensions
@@ -36,8 +37,9 @@ open import synthetic-homotopy-theory.universal-property-suspensions
 
 ## Idea
 
-The suspension of a type `X` is the
-[pushout](synthetic-homotopy-theory.pushouts.md) of the span
+The **suspension** of a type `X` is the
+[pushout](synthetic-homotopy-theory.pushouts.md) of the
+[span](foundation.spans.md)
 
 ```text
 unit <-- X --> unit
@@ -54,23 +56,23 @@ they star in the freudenthal suspension theorem and give us a definition of
 ```agda
 suspension :
   {l : Level} → UU l → UU l
-suspension X = pushout (const X unit star) (const X unit star)
+suspension X = pushout (terminal-map {A = X}) (terminal-map {A = X})
 
 north-suspension :
   {l : Level} {X : UU l} → suspension X
 north-suspension {X = X} =
-  inl-pushout (const X unit star) (const X unit star) star
+  inl-pushout terminal-map terminal-map star
 
 south-suspension :
   {l : Level} {X : UU l} → suspension X
 south-suspension {X = X} =
-  inr-pushout (const X unit star) (const X unit star) star
+  inr-pushout terminal-map terminal-map star
 
 meridian-suspension :
   {l : Level} {X : UU l} → X →
   Id (north-suspension {X = X}) (south-suspension {X = X})
 meridian-suspension {X = X} =
-  glue-pushout (const X unit star) (const X unit star)
+  glue-pushout terminal-map terminal-map
 
 suspension-structure-suspension :
   {l : Level} (X : UU l) → suspension-structure X (suspension X)
@@ -99,10 +101,11 @@ module _
       ( triangle-ev-suspension
         { X = X}
         { Y = suspension X}
-        ( suspension-structure-suspension X) Z)
+        ( suspension-structure-suspension X)
+        ( Z))
       ( is-equiv-map-equiv
         ( ( equiv-suspension-structure-suspension-cocone X Z) ∘e
-          ( equiv-up-pushout (const X unit star) (const X unit star) Z)))
+          ( equiv-up-pushout terminal-map terminal-map Z)))
 
   equiv-up-suspension :
     {l : Level} (Z : UU l) → (suspension X → Z) ≃ (suspension-structure X Z)
@@ -134,7 +137,7 @@ module _
     ( map-inv-up-suspension Z c north-suspension) ＝
     ( north-suspension-structure c)
   up-suspension-north-suspension Z c =
-    pr1 (htpy-eq-suspension-structure ((is-section-map-inv-up-suspension Z) c))
+    pr1 (htpy-eq-suspension-structure (is-section-map-inv-up-suspension Z c))
 
   up-suspension-south-suspension :
     {l : Level} (Z : UU l) (c : suspension-structure X Z) →
@@ -184,8 +187,8 @@ dependent-up-suspension l {X = X} B =
         ( suspension-structure-suspension X)
         ( B)) ∘
       ( dependent-cocone-map
-        ( const X unit star)
-        ( const X unit star)
+        ( terminal-map)
+        ( terminal-map)
         ( cocone-suspension-structure
           ( X)
           ( suspension X)
@@ -201,20 +204,20 @@ dependent-up-suspension l {X = X} B =
           ( suspension-structure-suspension X)
           ( B)))
       ( dependent-cocone-map
-        ( const X unit star)
-        ( const X unit star)
+        ( terminal-map)
+        ( terminal-map)
         ( cocone-suspension-structure X
           ( suspension X)
           ( suspension-structure-suspension X))
         ( B))
-      ( dependent-up-pushout (const X unit star) (const X unit star) B)
+      ( dependent-up-pushout terminal-map terminal-map B)
       ( is-equiv-map-equiv
         ( equiv-dependent-suspension-structure-suspension-cocone
           ( suspension-structure-suspension X)
           ( B))))
 
 equiv-dependent-up-suspension :
-    {l1 l2 : Level} {X : UU l1} (B : (suspension X) → UU l2) →
+    {l1 l2 : Level} {X : UU l1} (B : suspension X → UU l2) →
     ((x : suspension X) → B x) ≃
     ( dependent-suspension-structure B (suspension-structure-suspension X))
 pr1 (equiv-dependent-up-suspension {l2 = l2} {X = X} B) =
@@ -223,7 +226,7 @@ pr2 (equiv-dependent-up-suspension {l2 = l2} B) =
   dependent-up-suspension l2 B
 
 module _
-  {l1 l2 : Level} {X : UU l1} (B : (suspension X) → UU l2)
+  {l1 l2 : Level} {X : UU l1} (B : suspension X → UU l2)
   where
 
   map-inv-dependent-up-suspension :
@@ -248,8 +251,8 @@ module _
     (d : dependent-suspension-structure
       ( B)
       ( suspension-structure-suspension X)) →
-      ( map-inv-dependent-up-suspension d north-suspension) ＝
-      ( north-dependent-suspension-structure d)
+    ( map-inv-dependent-up-suspension d north-suspension) ＝
+    ( north-dependent-suspension-structure d)
   dependent-up-suspension-north-suspension d =
     north-htpy-dependent-suspension-structure
       ( B)
@@ -301,14 +304,14 @@ suspension
 ```agda
 module _
   {l1 l2 : Level} (X : UU l1) {Y : UU l2}
-  (f g : (suspension X) → Y)
+  (f g : suspension X → Y)
   where
 
   htpy-function-out-of-suspension : UU (l1 ⊔ l2)
   htpy-function-out-of-suspension =
-    Σ ( f (north-suspension) ＝ g (north-suspension))
+    Σ ( f north-suspension ＝ g north-suspension)
       ( λ p →
-        Σ ( f (south-suspension) ＝ g (south-suspension))
+        Σ ( f south-suspension ＝ g south-suspension)
           ( λ q →
             (x : X) →
             coherence-square-identifications
@@ -319,12 +322,12 @@ module _
 
   north-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension →
-    f (north-suspension) ＝ g (north-suspension)
+    f north-suspension ＝ g north-suspension
   north-htpy-function-out-of-suspension = pr1
 
   south-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension →
-    f (south-suspension) ＝ g (south-suspension)
+    f south-suspension ＝ g south-suspension
   south-htpy-function-out-of-suspension = pr1 ∘ pr2
 
   meridian-htpy-function-out-of-suspension :
@@ -377,9 +380,9 @@ module _
     map-equiv (equiv-htpy-function-out-of-suspension-htpy)
 
   htpy-htpy-function-out-of-suspension :
-      htpy-function-out-of-suspension → (f ~ g)
+    htpy-function-out-of-suspension → (f ~ g)
   htpy-htpy-function-out-of-suspension =
-      map-inv-equiv (equiv-htpy-function-out-of-suspension-htpy)
+    map-inv-equiv (equiv-htpy-function-out-of-suspension-htpy)
 
   equiv-htpy-htpy-function-out-of-suspension :
     htpy-function-out-of-suspension ≃ (f ~ g)
@@ -395,14 +398,14 @@ is-contr-suspension-is-contr :
 is-contr-suspension-is-contr {l} {X} is-contr-X =
   is-contr-is-equiv'
     ( unit)
-    ( pr1 (pr2 (cocone-pushout (const X unit star) (const X unit star))))
+    ( pr1 (pr2 (cocone-pushout terminal-map terminal-map)))
     ( is-equiv-universal-property-pushout
-      ( const X unit star)
-      ( const X unit star)
+      ( terminal-map)
+      ( terminal-map)
       ( cocone-pushout
-        ( const X unit star)
-        ( const X unit star))
-      ( is-equiv-is-contr (const X unit star) is-contr-X is-contr-unit)
-      ( up-pushout (const X unit star) (const X unit star)))
+        ( terminal-map)
+        ( terminal-map))
+      ( is-equiv-is-contr terminal-map is-contr-X is-contr-unit)
+      ( up-pushout terminal-map terminal-map))
     ( is-contr-unit)
 ```

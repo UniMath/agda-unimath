@@ -20,10 +20,12 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An edge-coloured undirected graph is an undirected graph equipped with a family
-of maps `E p → X` from the edges at unordered pairs `p` into a type `C` of
-colours, such that the induced map `incident-Undirected-Graph G x → C` is
-injective for each vertex `x`.
+An **edge-coloured undirected graph** is an
+[undirected graph](graph-theory.undirected-graphs.md) equipped with a family of
+maps `E p → X` from the edges at
+[unordered pairs](foundation.unordered-pairs.md) `p` into a type `C` of colours,
+such that the induced map `incident-Undirected-Graph G x → C` is
+[injective](foundation.injective-maps.md) for each vertex `x`.
 
 ## Definition
 
@@ -99,3 +101,10 @@ module _
   is-emb-colouring-Edge-Coloured-Undirected-Graph =
     pr2 (pr2 G)
 ```
+
+## External links
+
+- [Edge coloring](https://en.wikipedia.org/wiki/Edge_coloring) at Wikipedia
+- [Edge coloring](https://mathworld.wolfram.com/EdgeColoring.html) at Wolfram
+  Mathworld
+- [Graph coloring](https://www.wikidata.org/wiki/Q504843) on Wikidata
