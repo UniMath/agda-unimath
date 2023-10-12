@@ -19,12 +19,15 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-A complete undirected graph is a complete multipartite graph in which every
-block has exactly one vertex. In other words, it is an undirected graph in which
-every vertex is connected to every other vertex.
+A **complete undirected graph** is a
+[complete multipartite graph](graph-theory.complete-multipartite-graphs.md) in
+which every block has exactly one vertex. In other words, it is an
+[undirected graph](graph-theory.undirected-graphs.md) in which every vertex is
+connected to every other vertex.
 
 There are many ways of presenting complete undirected graphs. For example, the
-type of edges in a complete undirected graph is a 2-element subtype of the type
+type of edges in a complete undirected graph is a
+[2-element subtype](univalent-combinatorics.2-element-subtypes.md) of the type
 of its vertices.
 
 ## Definition
@@ -34,3 +37,11 @@ complete-Undirected-Graph-𝔽 : {l : Level} → 𝔽 l → Undirected-Graph-�
 complete-Undirected-Graph-𝔽 X =
   complete-multipartite-Undirected-Graph-𝔽 X (λ x → unit-𝔽)
 ```
+
+## External links
+
+- [Complete graph](https://d3gt.com/unit.html?complete-graph) at D3 Graph theory
+- [Complete graph](https://www.wikidata.org/wiki/Q45715) on Wikidata
+- [Complete graph](https://en.wikipedia.org/wiki/Complete_graph) on Wikipedia
+- [Complete graph](https://mathworld.wolfram.com/CompleteGraph.html) at Wolfram
+  Mathworld
