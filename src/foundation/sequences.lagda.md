@@ -18,7 +18,7 @@ open import foundation-core.function-types
 
 ## Idea
 
-A sequence of elements in a type `A` is a map `ℕ → A`.
+A **sequence** of elements in a type `A` is a map `ℕ → A`.
 
 ## Definition
 
