@@ -38,7 +38,7 @@ module _
     Σ (Polygon k) (λ H → emb-Undirected-Graph (undirected-graph-Polygon k H) G)
 ```
 
-## External references
+## External links
 
 - [Cycle (graph theory)](<https://en.wikipedia.org/wiki/Cycle_(graph_theory)>)
   at Wikipedia

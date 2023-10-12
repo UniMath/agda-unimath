@@ -23,8 +23,9 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-A trail in an undirected graph is a walk that passes through each edge at most
-once
+A **trail** in an [undirected graph](graph-theory.undirected-graphs.md) is a
+[walk](graph-theory.walks-undirected-graphs.md) that passes through each edge at
+most once.
 
 ## Definition
 
@@ -158,12 +159,10 @@ module _
   second-segment-trail-Undirected-Graph t =
     second-segment-walk-Undirected-Graph G
       ( walk-trail-Undirected-Graph G t)
-{-
-  is-trail-first-walk-decomposition-trail-Undirected-Graph :
-    {y : vertex-Undirected-Graph G} (t : trail-Undirected-Graph G x y)
-    (v : vertex-on-walk-Undirected-Graph G (walk-trail-Undirected-Graph G t)) →
-    is-trail-walk-Undirected-Graph G
-      ( first-segment-trail-Undirected-Graph t v)
-  is-trail-first-walk-decomposition-trail-Undirected-Graph = {!!}
-  -}
 ```
+
+## External links
+
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Trail](https://mathworld.wolfram.com/Trail.html) at Wolfram Mathworld

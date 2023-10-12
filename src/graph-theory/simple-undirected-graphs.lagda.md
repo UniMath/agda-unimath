@@ -23,8 +23,10 @@ open import univalent-combinatorics.finite-types
 
 ## Idea
 
-An undirected graph is said to be simple if it only contains edges between
-distinct points, and there is at most one edge between any two vertices.
+An [undirected graph](graph-theory.undirected-graphs.md) is said to be
+**simple** if it only contains edges between
+[distinct points](foundation.pairs-of-distinct-elements.md), and there is at
+most one edge between any two vertices.
 
 ## Definition
 
@@ -62,3 +64,11 @@ Simple-Undirected-Graph l1 l2 =
         ( λ E →
           (x : V) → ¬ (type-Prop (E (pair (Fin-UU-Fin' 2) (λ y → x))))))
 ```
+
+## External links
+
+- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
+  at Wikipedia
+- [Simple graph](https://mathworld.wolfram.com/SimpleGraph.html) at Wolfram
+  Mathworld

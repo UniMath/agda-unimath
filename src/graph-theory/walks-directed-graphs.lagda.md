@@ -36,10 +36,11 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges
-that connect `x` to `y`. Since every journey begins with a single step, we
-define the cons operation on walks in directed graphs with an edge from the
-source in the first argument, and a walk to the target in the second argument.
+A **walk** in a [directed graph](graph-theory.directed-graphs.md) from a vertex
+`x` to a vertex `y` is a [list](lists.lists.md) of edges that connect `x` to
+`y`. Since every journey begins with a single step, we define the `cons`
+operation on walks in directed graphs with an edge from the source in the first
+argument, and a walk to the target in the second argument.
 
 ## Definitions
 
@@ -779,3 +780,9 @@ module _
   walk-last-stage-walk-Directed-Graph e (cons-walk-Directed-Graph f w) =
     cons-walk-Directed-Graph e (walk-last-stage-walk-Directed-Graph f w)
 ```
+
+## External links
+
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld

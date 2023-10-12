@@ -41,3 +41,10 @@ module _
   source-edge-orientation-Undirected-Graph d (pair X p) e =
     p (d (pair X p) e)
 ```
+
+## External links
+
+- [Orientation (graph theory)](<https://en.wikipedia.org/wiki/Orientation_(graph_theory)>)
+  at Wikipedia
+- [Graph orientation](https://mathworld.wolfram.com/GraphOrientation.html) at
+  Wolfram Mathworld

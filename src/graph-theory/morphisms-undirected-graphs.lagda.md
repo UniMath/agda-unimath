@@ -195,3 +195,8 @@ module _
   eq-htpy-hom-Undirected-Graph f g =
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Undirected-Graph f g)
 ```
+
+## External link
+
+- [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
+  Wikipedia

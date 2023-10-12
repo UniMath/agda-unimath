@@ -19,8 +19,10 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-A regular undirected graph is a graph of which each vertex has the same number
-of incident edges
+A **regular undirected graph** is an
+[undirected graph](graph-theory.undirected-graphs.md) of which each vertex has
+the same number of
+[incident edges](graph-theory.neighbors-undirected-graphs.md).
 
 ## Definition
 
@@ -45,3 +47,10 @@ is-prop-is-regular-Undirected-Graph :
 is-prop-is-regular-Undirected-Graph X G =
   is-prop-type-Prop (is-regular-undirected-graph-Prop X G)
 ```
+
+## External links
+
+- [Regular graph](https://d3gt.com/unit.html?regular-graph) at D3 Graph Theory
+- [Regular graph](https://en.wikipedia.org/wiki/Regular_graph) at Wikipedia
+- [Regular graph](https://mathworld.wolfram.com/RegularGraph.html) at Wolfram
+  Mathworld

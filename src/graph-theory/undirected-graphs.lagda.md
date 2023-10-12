@@ -21,8 +21,8 @@ open import graph-theory.directed-graphs
 
 ## Idea
 
-An undirected graph consists of a type `V` of vertices and a family `E` of types
-over the unordered pairs of `V`.
+An **undirected graph** consists of a type `V` of vertices and a family `E` of
+types over the [unordered pairs](founation.unordered-pairs.md) of `V`.
 
 ## Definition
 
@@ -115,3 +115,10 @@ module _
   tr-edge-Undirected-Graph p q α =
     tr (edge-Undirected-Graph G) (eq-Eq-unordered-pair' p q α)
 ```
+
+## External links
+
+- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
+  at Wikipedia
+- [Graph](https://mathworld.wolfram.com/Graph.html) at Wolfram Mathworld
