@@ -18,6 +18,9 @@ open import structured-types.pointed-maps
 open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>
@@ -33,7 +36,7 @@ A **prespectrum** is a [sequence](foundation.sequences.md) of
   ε : Aₙ →∗ ΩAₙ₊₁
 ```
 
-for each `n : ℕ`, called the **structure maps** of the prespectrum.
+for each `n : ℕ`, called the **adjoint structure maps** of the prespectrum.
 
 By the
 [loop-suspension adjunction](synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types.md),
@@ -68,17 +71,44 @@ module _
   {l : Level} (A : Prespectrum l) (n : ℕ)
   where
 
-  pointed-structure-map-Prespectrum :
+  pointed-adjoint-structure-map-Prespectrum :
     pointed-type-Prespectrum A n →∗ Ω (pointed-type-Prespectrum A (succ-ℕ n))
-  pointed-structure-map-Prespectrum = pr2 A n
+  pointed-adjoint-structure-map-Prespectrum = pr2 A n
+
+  adjoint-structure-map-Prespectrum :
+    type-Prespectrum A n → type-Ω (pointed-type-Prespectrum A (succ-ℕ n))
+  adjoint-structure-map-Prespectrum =
+    map-pointed-map pointed-adjoint-structure-map-Prespectrum
+
+  preserves-point-adjoint-structure-map-Prespectrum :
+    adjoint-structure-map-Prespectrum (point-Prespectrum A n) ＝
+    refl-Ω (pointed-type-Prespectrum A (succ-ℕ n))
+  preserves-point-adjoint-structure-map-Prespectrum =
+    preserves-point-pointed-map pointed-adjoint-structure-map-Prespectrum
+```
+
+### The structure maps of a prespectrum
+
+```agda
+module _
+  {l : Level} (A : Prespectrum l) (n : ℕ)
+  where
+
+  pointed-structure-map-Prespectrum :
+    suspension-Pointed-Type (pointed-type-Prespectrum A n) →∗
+    pointed-type-Prespectrum A (succ-ℕ n)
+  pointed-structure-map-Prespectrum =
+    inv-transpose-suspension-loop-adjunction
+      ( pointed-type-Prespectrum A n)
+      ( pointed-type-Prespectrum A (succ-ℕ n))
+      ( pointed-adjoint-structure-map-Prespectrum A n)
 
   structure-map-Prespectrum :
-    type-Prespectrum A n → type-Ω (pointed-type-Prespectrum A (succ-ℕ n))
+    suspension (type-Prespectrum A n) → type-Prespectrum A (succ-ℕ n)
   structure-map-Prespectrum = map-pointed-map pointed-structure-map-Prespectrum
 
   preserves-point-structure-map-Prespectrum :
-    structure-map-Prespectrum (point-Prespectrum A n) ＝
-    refl-Ω (pointed-type-Prespectrum A (succ-ℕ n))
+    structure-map-Prespectrum north-suspension ＝ point-Prespectrum A (succ-ℕ n)
   preserves-point-structure-map-Prespectrum =
     preserves-point-pointed-map pointed-structure-map-Prespectrum
 ```

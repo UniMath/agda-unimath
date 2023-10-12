@@ -63,8 +63,8 @@ coherence-map-Prespectrum :
 coherence-map-Prespectrum n A B f =
   coherence-square-pointed-maps
     ( f n)
-    ( pointed-structure-map-Prespectrum A n)
-    ( pointed-structure-map-Prespectrum B n)
+    ( pointed-adjoint-structure-map-Prespectrum A n)
+    ( pointed-adjoint-structure-map-Prespectrum B n)
     ( pointed-map-Ω (f (succ-ℕ n)))
 
 map-Prespectrum :

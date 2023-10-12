@@ -22,6 +22,9 @@ open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.prespectra
+open import synthetic-homotopy-theory.suspensions-of-pointed-types
+open import synthetic-homotopy-theory.suspensions-of-types
+open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>
@@ -46,7 +49,8 @@ for each `n : ℕ`.
 is-spectrum-Prop : {l : Level} → Prespectrum l → Prop l
 is-spectrum-Prop A =
   Π-Prop ℕ
-    ( λ n → is-equiv-pointed-map-Prop (pointed-structure-map-Prespectrum A n))
+    ( λ n →
+      is-equiv-pointed-map-Prop (pointed-adjoint-structure-map-Prespectrum A n))
 
 is-spectrum : {l : Level} → Prespectrum l → UU l
 is-spectrum = type-Prop ∘ is-spectrum-Prop
@@ -77,36 +81,61 @@ module _
   point-Spectrum : (n : ℕ) → type-Spectrum n
   point-Spectrum = point-Prespectrum prespectrum-Spectrum
 
-  pointed-structure-map-Spectrum :
+  pointed-adjoint-structure-map-Spectrum :
     (n : ℕ) → pointed-type-Spectrum n →∗ Ω (pointed-type-Spectrum (succ-ℕ n))
-  pointed-structure-map-Spectrum =
-    pointed-structure-map-Prespectrum prespectrum-Spectrum
+  pointed-adjoint-structure-map-Spectrum =
+    pointed-adjoint-structure-map-Prespectrum prespectrum-Spectrum
 
-  structure-map-Spectrum :
+  adjoint-structure-map-Spectrum :
     (n : ℕ) → type-Spectrum n → type-Ω (pointed-type-Spectrum (succ-ℕ n))
-  structure-map-Spectrum = structure-map-Prespectrum prespectrum-Spectrum
+  adjoint-structure-map-Spectrum =
+    adjoint-structure-map-Prespectrum prespectrum-Spectrum
 
-  preserves-point-structure-map-Spectrum :
+  preserves-point-adjoint-structure-map-Spectrum :
     (n : ℕ) →
-    structure-map-Prespectrum (pr1 A) n (point-Prespectrum (pr1 A) n) ＝
+    adjoint-structure-map-Prespectrum (pr1 A) n (point-Prespectrum (pr1 A) n) ＝
     refl-Ω (pointed-type-Prespectrum (pr1 A) (succ-ℕ n))
-  preserves-point-structure-map-Spectrum =
-    preserves-point-structure-map-Prespectrum prespectrum-Spectrum
+  preserves-point-adjoint-structure-map-Spectrum =
+    preserves-point-adjoint-structure-map-Prespectrum prespectrum-Spectrum
 
-  is-equiv-pointed-structure-map-Spectrum :
-    (n : ℕ) → is-equiv-pointed-map (pointed-structure-map-Spectrum n)
-  is-equiv-pointed-structure-map-Spectrum = pr2 A
+  is-equiv-pointed-adjoint-structure-map-Spectrum :
+    (n : ℕ) → is-equiv-pointed-map (pointed-adjoint-structure-map-Spectrum n)
+  is-equiv-pointed-adjoint-structure-map-Spectrum = pr2 A
 
   structure-equiv-Spectrum :
     (n : ℕ) → type-Spectrum n ≃ type-Ω (pointed-type-Spectrum (succ-ℕ n))
-  pr1 (structure-equiv-Spectrum n) = structure-map-Spectrum n
-  pr2 (structure-equiv-Spectrum n) = is-equiv-pointed-structure-map-Spectrum n
+  pr1 (structure-equiv-Spectrum n) = adjoint-structure-map-Spectrum n
+  pr2 (structure-equiv-Spectrum n) =
+    is-equiv-pointed-adjoint-structure-map-Spectrum n
 
   pointed-structure-equiv-Spectrum :
     (n : ℕ) → pointed-type-Spectrum n ≃∗ Ω (pointed-type-Spectrum (succ-ℕ n))
   pr1 (pointed-structure-equiv-Spectrum n) = structure-equiv-Spectrum n
   pr2 (pointed-structure-equiv-Spectrum n) =
-    preserves-point-structure-map-Spectrum n
+    preserves-point-adjoint-structure-map-Spectrum n
+```
+
+### The structure maps of a spectrum
+
+```agda
+module _
+  {l : Level} (A : Spectrum l) (n : ℕ)
+  where
+
+  pointed-structure-map-Spectrum :
+    suspension-Pointed-Type (pointed-type-Spectrum A n) →∗
+    pointed-type-Spectrum A (succ-ℕ n)
+  pointed-structure-map-Spectrum =
+    pointed-structure-map-Prespectrum (prespectrum-Spectrum A) n
+
+  structure-map-Spectrum :
+    suspension (type-Spectrum A n) → type-Spectrum A (succ-ℕ n)
+  structure-map-Spectrum = map-pointed-map pointed-structure-map-Spectrum
+
+  preserves-point-structure-map-Spectrum :
+    structure-map-Spectrum north-suspension ＝ point-Spectrum A (succ-ℕ n)
+  preserves-point-structure-map-Spectrum =
+    preserves-point-pointed-map pointed-structure-map-Spectrum
 ```
 
 ## References
