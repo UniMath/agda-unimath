@@ -52,6 +52,7 @@ open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types publ
 open import synthetic-homotopy-theory.join-powers-of-types public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
+open import synthetic-homotopy-theory.maps-of-prespectra public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.plus-principle public
@@ -65,7 +66,6 @@ open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.sphere-spectrum public
 open import synthetic-homotopy-theory.spheres public
-open import synthetic-homotopy-theory.strict-maps-of-prespectra public
 open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public

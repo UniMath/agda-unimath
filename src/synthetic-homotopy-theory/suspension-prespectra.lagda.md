@@ -44,7 +44,8 @@ structure-map-suspension-Prespectrum :
   iterated-suspension-Pointed-Type n A →∗
   Ω (iterated-suspension-Pointed-Type (succ-ℕ n) A)
 structure-map-suspension-Prespectrum A n =
-  pointed-map-unit-suspension-loop-adjunction (iterated-suspension-Pointed-Type n A)
+  pointed-map-unit-suspension-loop-adjunction
+    ( iterated-suspension-Pointed-Type n A)
 
 suspension-Prespectrum : {l : Level} → Pointed-Type l → Prespectrum l
 pr1 (suspension-Prespectrum A) n = iterated-suspension-Pointed-Type n A

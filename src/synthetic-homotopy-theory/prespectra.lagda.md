@@ -30,7 +30,18 @@ A **prespectrum** is a [sequence](foundation.sequences.md) of
 [pointed maps](structured-types.pointed-maps.md)
 
 ```text
-  ε : Aₙ →∗ Ω Aₙ₊₁.
+  ε : Aₙ →∗ ΩAₙ₊₁
+```
+
+called the **structure maps** of the prespectrum.
+
+By the
+[loop-suspension adjunction](synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types.md),
+specifying structure maps `Aₙ →∗ Ω Aₙ₊₁` is
+[equivalent](foundation-core.equivalences.md) to specifying their adjoint maps
+
+```text
+  ΣAₙ → Aₙ₊₁.
 ```
 
 ## Definition
@@ -71,3 +82,8 @@ module _
   preserves-point-structure-map-Prespectrum =
     preserves-point-pointed-map pointed-structure-map-Prespectrum
 ```
+
+## References
+
+- J. P. May, _A Concise Course in Algebraic Topology_, 1999
+  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))

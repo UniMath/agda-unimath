@@ -1,0 +1,81 @@
+# Maps of prespectra
+
+```agda
+module synthetic-homotopy-theory.maps-of-prespectra where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.natural-numbers
+
+open import foundation.commuting-squares-of-maps
+open import foundation.dependent-pair-types
+open import foundation.identity-types
+open import foundation.transport-along-identifications
+open import foundation.universe-levels
+
+open import structured-types.commuting-squares-of-pointed-maps
+open import structured-types.pointed-maps
+open import structured-types.pointed-types
+
+open import synthetic-homotopy-theory.functoriality-loop-spaces
+open import synthetic-homotopy-theory.loop-spaces
+open import synthetic-homotopy-theory.prespectra
+```
+
+</details>
+
+## Idea
+
+A **map of presectra** `f : A → B` is a [sequence](foundation.sequences.md) of
+[pointed maps](structured-types.pointed-maps.md)
+
+```text
+  fₙ : Aₙ →∗ Bₙ
+```
+
+such that the squares
+
+```text
+        fₙ
+  Aₙ --------> Bₙ
+  |            |
+  |            |
+  |            |
+  v            v
+  ΩAₙ₊₁ -----> ΩBₙ₊₁
+        Ωfₙ₊₁
+```
+
+commute in the category of [pointed types](structured-types.pointed-types.md).
+
+## Definition
+
+```agda
+coherence-map-Prespectrum :
+  {l1 l2 : Level} (n : ℕ) (A : Prespectrum l1) (B : Prespectrum l2) →
+  ( (n : ℕ) →
+    pointed-type-Prespectrum A n →∗ pointed-type-Prespectrum B n) →
+  UU (l1 ⊔ l2)
+coherence-map-Prespectrum n A B f =
+  coherence-square-pointed-maps
+    ( f n)
+    ( pointed-structure-map-Prespectrum A n)
+    ( pointed-structure-map-Prespectrum B n)
+    ( pointed-map-Ω (f (succ-ℕ n)))
+
+map-Prespectrum :
+  {l1 l2 : Level} (A : Prespectrum l1) (B : Prespectrum l2) →
+  UU (l1 ⊔ l2)
+map-Prespectrum A B =
+  Σ ( (n : ℕ) →
+      pointed-type-Prespectrum A n →∗ pointed-type-Prespectrum B n)
+    ( λ f → (n : ℕ) → coherence-map-Prespectrum n A B f)
+```
+
+## References
+
+- J. P. May, _A Concise Course in Algebraic Topology_, 1999
+  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))

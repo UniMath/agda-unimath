@@ -107,3 +107,8 @@ module _
   pr2 (pointed-structure-equiv-Spectrum n) =
     preserves-point-structure-map-Spectrum n
 ```
+
+## References
+
+- J. P. May, _A Concise Course in Algebraic Topology_, 1999
+  ([pdf](https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf))

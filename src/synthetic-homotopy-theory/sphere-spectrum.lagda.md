@@ -24,14 +24,14 @@ The [spheres](synthetic-homotopy-theory.spheres.md) `Sⁿ` define a
 [spectrum](synthetic-homotopy-theory.spectra.md)
 
 ```text
-  Sⁿ ≃∗ ΩSⁿ⁺¹.
+  Sⁿ ≃∗ ΩSⁿ⁺¹
 ```
 
-We call this spectrum the the **sphere spectrum**.
+which we call the **sphere spectrum**.
 
 ## Definition
 
-### The sphere presecptrum
+### The sphere prespectrum
 
 ```agda
 sphere-Prespectrum : Prespectrum lzero
