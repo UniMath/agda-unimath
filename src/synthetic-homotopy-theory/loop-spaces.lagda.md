@@ -7,7 +7,6 @@ module synthetic-homotopy-theory.loop-spaces where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
@@ -16,8 +15,6 @@ open import foundation.universe-levels
 open import structured-types.h-spaces
 open import structured-types.magmas
 open import structured-types.pointed-equivalences
-open import structured-types.pointed-families-of-types
-open import structured-types.pointed-maps
 open import structured-types.pointed-types
 open import structured-types.wild-quasigroups
 ```
@@ -170,30 +167,6 @@ module _
     (p : Id x y) (q : type-Ω (pair A x)) →
     Id (tr-type-Ω p q) (inv p ∙ (q ∙ p))
   eq-tr-type-Ω refl q = inv right-unit
-```
-
-### The functorial action of `Ω`
-
-```agda
-module _
-  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  where
-
-  map-pointed-map-Ω : (A →∗ B) → type-Ω A → type-Ω B
-  map-pointed-map-Ω f p =
-    ( inv (preserves-point-pointed-map f)) ∙
-    ( ( ap (map-pointed-map f) p) ∙
-      ( preserves-point-pointed-map f))
-
-  pointed-map-Ω : (A →∗ B) → Ω A →∗ Ω B
-  pr1 (pointed-map-Ω f) = map-pointed-map-Ω f
-  pr2 (pointed-map-Ω f) =
-      ( ap
-        ( λ p →
-          ( inv (preserves-point-pointed-map f)) ∙
-          ( p ∙ (preserves-point-pointed-map f)))
-        ( ap-refl (map-pointed-map f) (point-Pointed-Type A))) ∙
-      ( left-inv (preserves-point-pointed-map f))
 ```
 
 ## Properties

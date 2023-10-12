@@ -63,6 +63,7 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
+open import synthetic-homotopy-theory.sphere-spectrum public
 open import synthetic-homotopy-theory.spheres public
 open import synthetic-homotopy-theory.strict-maps-of-prespectra public
 open import synthetic-homotopy-theory.suspension-prespectra public
