@@ -30,7 +30,7 @@ sequence : {l : Level} → UU l → UU l
 sequence A = dependent-sequence (λ _ → A)
 ```
 
-### Functoriality of sequences
+### Functorial action on maps of sequences
 
 ```agda
 map-sequence :
