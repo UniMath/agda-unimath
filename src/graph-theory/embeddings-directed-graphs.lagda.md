@@ -70,3 +70,9 @@ module _
     is-emb-hom-Directed-Graph (hom-emb-Directed-Graph f)
   is-emb-emb-Directed-Graph = pr2
 ```
+
+## External links
+
+- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
+- [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) on
+  Wikipedia

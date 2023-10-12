@@ -81,3 +81,9 @@ module _
 
 - [Embeddings of undirected graphs](graph-theory.embeddings-undirected-graphs.md)
 - [Faithful morphisms of undirected graphs](graph-theory.faithful-morphisms-undirected-graphs.md)
+
+## External links
+
+- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
+- [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
+  Wikipedia

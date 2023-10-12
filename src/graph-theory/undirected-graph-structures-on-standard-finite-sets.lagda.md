@@ -24,3 +24,11 @@ open import univalent-combinatorics.standard-finite-types
 Undirected-Graph-Fin : UU (lsuc lzero)
 Undirected-Graph-Fin = Σ ℕ (λ V → unordered-pair (Fin V) → ℕ)
 ```
+
+## External links
+
+- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph](https://www.wikidata.org/wiki/Q141488) on Wikidata
+- [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
+  at Wikipedia
+- [Graph](https://mathworld.wolfram.com/Graph.html) at Wolfram Mathworld

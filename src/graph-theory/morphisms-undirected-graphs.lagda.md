@@ -196,7 +196,8 @@ module _
     map-inv-is-equiv (is-equiv-htpy-eq-hom-Undirected-Graph f g)
 ```
 
-## External link
+## External links
 
+- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
 - [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
   Wikipedia

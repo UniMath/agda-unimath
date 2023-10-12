@@ -77,3 +77,8 @@ pr1 (pr2 (terminal-reflecting-map-Undirected-Graph G) p e) = star
 pr2 (pr2 (terminal-reflecting-map-Undirected-Graph G) p e) x =
   eq-is-contr is-contr-unit
 ```
+
+## External links
+
+- [Geometric realization](https://ncatlab.org/nlab/show/geometric+realization)
+  at nlab

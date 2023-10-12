@@ -107,3 +107,4 @@ module _
 - [Edge coloring](https://en.wikipedia.org/wiki/Edge_coloring) at Wikipedia
 - [Edge coloring](https://mathworld.wolfram.com/EdgeColoring.html) at Wolfram
   Mathworld
+- [Graph coloring](https://www.wikidata.org/wiki/Q504843) on Wikidata

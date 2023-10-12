@@ -40,7 +40,8 @@ module _
 
 ## External links
 
-- <a href="https://en.wikipedia.org/wiki/Cycle_(graph_theory)">Cycle (Graph
-  Theory)</a> at Wikipedia
-- <a href="https://mathworld.wolfram.com/GraphCycle.html">Graph Cycle</a> at
-  Wolfram Mathworld
+- [Cycle](https://www.wikidata.org/wiki/Q245595) at Wikidata
+- [Cycle (Graph Theory)](<https://en.wikipedia.org/wiki/Cycle_(graph_theory)>)
+  at Wikipedia
+- [Graph Cycle](https://mathworld.wolfram.com/GraphCycle.html) at Wolfram
+  Mathworld

@@ -103,6 +103,7 @@ incident-edges-vertex-Undirected-Graph-𝔽 G x =
 ## External links
 
 - [Multigraph](https://ncatlab.org/nlab/show/multigraph) at nlab
+- [Multigraph](https://www.wikidata.org/wiki/Q2642629) on Wikidata
 - [Multigraph](https://en.wikipedia.org/wiki/Multigraph) at Wikipedia
 - [Multigraph](https://mathworld.wolfram.com/Multigraph.html) at Wolfram
   mathworld

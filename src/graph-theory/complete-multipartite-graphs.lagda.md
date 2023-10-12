@@ -47,6 +47,7 @@ pr2 (complete-multipartite-Undirected-Graph-𝔽 X Y) p =
 
 ## External links
 
+- [Multipartite graph](https://www.wikidata.org/wiki/Q1718082) on Wikidata
 - [Multipartite graph](https://en.wikipedia.org/wiki/Multipartite_graph) on
   Wikipedia
 - [Complete multipartite graph](https://mathworld.wolfram.com/CompleteMultipartiteGraph.html)

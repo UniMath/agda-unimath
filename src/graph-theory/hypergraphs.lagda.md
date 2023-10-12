@@ -45,6 +45,7 @@ module _
 ## External links
 
 - [Hypergraph](https://ncatlab.org/nlab/show/hypergraph) at nlab
+- [Hypergraph](https://www.wikidata.org/wiki/Q840247) on Wikidata
 - [Hypergraph](https://en.wikipedia.org/wiki/Hypergraph) at Wikipedia
 - [Hypergraph](https://mathworld.wolfram.com/Hypergraph.html) at Wolfram
   Mathworld

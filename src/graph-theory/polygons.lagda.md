@@ -33,10 +33,10 @@ open import univalent-combinatorics.finite-types
 A **polygon** is an [undirected graph](graph-theory.undirected-graphs.md) that
 is [merely equivalent](graph-theory.mere-equivalences-undirected-graphs.md) to a
 graph with vertices the underlying type of the
-[standard cyclic group](elementary-theory.standard-cyclic-groups.md) `ℤ-Mod k`
-and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each `k ∈ ℕ` the
-type of all `k`-gons. The type of all `k`-gons is a concrete presentation of the
-[dihedral group](group-theory.dihedral-groups.md) `D_k`.
+[standard cyclic group](elementary-number-theory.standard-cyclic-groups.md)
+`ℤ-Mod k` and an edge from each `x ∈ ℤ-Mod k` to `x+1`. This defines for each
+`k ∈ ℕ` the type of all `k`-gons. The type of all `k`-gons is a concrete
+presentation of the [dihedral group](group-theory.dihedral-groups.md) `D_k`.
 
 ## Definition
 
@@ -146,6 +146,7 @@ This remains to be formalized.
 
 ## External links
 
+- [Cycle graph](https://www.wikidata.org/wiki/Q622506) on Wikidata
 - [Cycle graph](https://en.wikipedia.org/wiki/Cycle_graph) at Wikipedia
 - [Cycle graph](https://mathworld.wolfram.com/CycleGraph.html) at Wolfram
   Mathworld

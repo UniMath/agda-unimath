@@ -49,11 +49,11 @@ pr2 (complete-bipartite-Undirected-Graph-𝔽 X Y) p =
 
 ## External links
 
-- <a href="https://d3gt.com/unit.html?complete-bipartite">Complete bipartite
-  graphs</a> at D3 Graph Theory
-- <a href="https://ncatlab.org/nlab/show/bipartite+graph">Bipartite graphs</a>
-  at nlab
-- <a href="https://en.wikipedia.org/wiki/Complete_bipartite_graph">Complete
-  bipartite graphs</a> at Wikipedia
-- <a href="https://mathworld.wolfram.com/CompleteBipartiteGraph.html">Complete
-  bipartite graphs</a> at Wolfram Mathworld
+- [Complete bipartite graph](https://d3gt.com/unit.html?complete-bipartite) at
+  D3 Graph Theory
+- [Bipartite graphs](https://ncatlab.org/nlab/show/bipartite+graph) at nlab
+- [Complete bipartite graph](https://www.wikidata.org/wiki/Q913598) at Wikidata
+- [Complete bipartite graph](https://en.wikipedia.org/wiki/Complete_bipartite_graph)
+  at Wikipedia
+- [Complete bipartite graphs](https://mathworld.wolfram.com/CompleteBipartiteGraph.html)
+  at Wolfram Mathworld

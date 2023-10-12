@@ -195,3 +195,11 @@ module _
                 ( action-∞-group-vertex-Enriched-Undirected-Graph v) h
                 ( map-inv-equiv-neighbor-Enriched-Undirected-Graph v x))))))
 ```
+
+## External links
+
+- [Graph](https://ncatlab.org/nlab/show/graph) at nlab
+- [Graph](https://www.wikidata.org/wiki/Q141488) on Wikidata
+- [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
+  at Wikipedia
+- [Graph](https://mathworld.wolfram.com/Graph.html) at Wolfram Mathworld

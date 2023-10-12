@@ -41,6 +41,7 @@ complete-Undirected-Graph-𝔽 X =
 ## External links
 
 - [Complete graph](https://d3gt.com/unit.html?complete-graph) at D3 Graph theory
+- [Complete graph](https://www.wikidata.org/wiki/Q45715) on Wikidata
 - [Complete graph](https://en.wikipedia.org/wiki/Complete_graph) on Wikipedia
 - [Complete graph](https://mathworld.wolfram.com/CompleteGraph.html) at Wolfram
   Mathworld

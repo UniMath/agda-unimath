@@ -538,3 +538,12 @@ module _
   pr2 is-retraction-inv-equiv-Directed-Graph =
     edge-is-retraction-inv-equiv-Directed-Graph
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/wiki/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab

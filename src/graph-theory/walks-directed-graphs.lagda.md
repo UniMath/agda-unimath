@@ -783,6 +783,7 @@ module _
 
 ## External links
 
+- [Path](https://www.wikidata.org/wiki/Q917421) on Wikidata
 - [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
   Wikipedia
 - [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld

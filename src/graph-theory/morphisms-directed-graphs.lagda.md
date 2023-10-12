@@ -223,7 +223,8 @@ module _
     map-inv-equiv (extensionality-hom-Directed-Graph f g)
 ```
 
-## External link
+## External links
 
+- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
 - [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
   Wikipedia

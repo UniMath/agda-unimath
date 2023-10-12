@@ -70,5 +70,6 @@ Simple-Undirected-Graph l1 l2 =
 - [Graph](https://ncatlab.org/nlab/show/graph) at nlab
 - [Graph (discrete mathematics)](<https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)>)
   at Wikipedia
+- [Simple graph](https://www.wikidata.org/wiki/Q15838309) on Wikidata
 - [Simple graph](https://mathworld.wolfram.com/SimpleGraph.html) at Wolfram
   Mathworld

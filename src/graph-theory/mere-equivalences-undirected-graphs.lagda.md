@@ -57,3 +57,12 @@ module _
   refl-mere-equiv-Undirected-Graph =
     unit-trunc-Prop (id-equiv-Undirected-Graph G)
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/wiki/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab

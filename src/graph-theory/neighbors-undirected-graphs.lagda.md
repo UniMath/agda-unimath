@@ -83,6 +83,7 @@ neighbor-id-equiv-Undirected-Graph G x (pair y e) =
 
 ## External links
 
+- [Neighborhood](https://www.wikidata.org/wiki/Q1354987) on Wikidata
 - [Neighborhood (graph theory)](<https://en.wikipedia.org/wiki/Neighbourhood_(graph_theory)>)
   at Wikipedia
 - [Graph neighborhood](https://mathworld.wolfram.com/GraphNeighborhood.html) at
