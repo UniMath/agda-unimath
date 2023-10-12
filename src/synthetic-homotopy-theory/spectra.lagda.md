@@ -10,7 +10,10 @@ module synthetic-homotopy-theory.spectra where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.equivalences
 open import foundation.function-types
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.universe-levels
 
 open import structured-types.pointed-equivalences
@@ -36,38 +39,71 @@ for each `n : ℕ`.
 
 ## Definition
 
+### The predicate on prespectra of being a spectrum
+
+```agda
+is-spectrum-Prop : {l : Level} → Prespectrum l → Prop l
+is-spectrum-Prop A =
+  Π-Prop ℕ
+    ( λ n → is-equiv-pointed-map-Prop (pointed-structure-map-Prespectrum A n))
+
+is-spectrum : {l : Level} → Prespectrum l → UU l
+is-spectrum = type-Prop ∘ is-spectrum-Prop
+
+is-prop-is-spectrum : {l : Level} (A : Prespectrum l) → is-prop (is-spectrum A)
+is-prop-is-spectrum = is-prop-type-Prop ∘ is-spectrum-Prop
+```
+
+### The type of spectra
+
 ```agda
 Spectrum : (l : Level) → UU (lsuc l)
-Spectrum l =
-  Σ (ℕ → Pointed-Type l) (λ A → (n : ℕ) → A n ≃∗ Ω (A (succ-ℕ n)))
+Spectrum l = Σ (Prespectrum l) (is-spectrum)
 
 module _
   {l : Level} (A : Spectrum l)
   where
 
+  prespectrum-Spectrum : Prespectrum l
+  prespectrum-Spectrum = pr1 A
+
   pointed-type-Spectrum : ℕ → Pointed-Type l
-  pointed-type-Spectrum = pr1 A
+  pointed-type-Spectrum = pointed-type-Prespectrum prespectrum-Spectrum
 
   type-Spectrum : ℕ → UU l
-  type-Spectrum = type-Pointed-Type ∘ pointed-type-Spectrum
+  type-Spectrum = type-Prespectrum prespectrum-Spectrum
 
   point-Spectrum : (n : ℕ) → type-Spectrum n
-  point-Spectrum = point-Pointed-Type ∘ pointed-type-Spectrum
-
-  pointed-equiv-Spectrum :
-    (n : ℕ) → pointed-type-Spectrum n ≃∗ Ω (pointed-type-Spectrum (succ-ℕ n))
-  pointed-equiv-Spectrum = pr2 A
+  point-Spectrum = point-Prespectrum prespectrum-Spectrum
 
   pointed-structure-map-Spectrum :
     (n : ℕ) → pointed-type-Spectrum n →∗ Ω (pointed-type-Spectrum (succ-ℕ n))
   pointed-structure-map-Spectrum =
-    pointed-map-pointed-equiv ∘ pointed-equiv-Spectrum
+    pointed-structure-map-Prespectrum prespectrum-Spectrum
 
-  map-Spectrum :
+  structure-map-Spectrum :
     (n : ℕ) → type-Spectrum n → type-Ω (pointed-type-Spectrum (succ-ℕ n))
-  map-Spectrum = map-pointed-map ∘ pointed-structure-map-Spectrum
+  structure-map-Spectrum = structure-map-Prespectrum prespectrum-Spectrum
 
-  prespectrum-Spectrum : Prespectrum l
-  pr1 prespectrum-Spectrum = pointed-type-Spectrum
-  pr2 prespectrum-Spectrum = pointed-structure-map-Spectrum
+  preserves-point-structure-map-Spectrum :
+    (n : ℕ) →
+    structure-map-Prespectrum (pr1 A) n (point-Prespectrum (pr1 A) n) ＝
+    refl-Ω (pointed-type-Prespectrum (pr1 A) (succ-ℕ n))
+  preserves-point-structure-map-Spectrum =
+    preserves-point-structure-map-Prespectrum prespectrum-Spectrum
+
+  is-equiv-pointed-structure-map-Spectrum :
+    (n : ℕ) → is-equiv-pointed-map (pointed-structure-map-Spectrum n)
+  is-equiv-pointed-structure-map-Spectrum = pr2 A
+
+  structure-equiv-Spectrum :
+    (n : ℕ) → type-Spectrum n ≃ type-Ω (pointed-type-Spectrum (succ-ℕ n))
+  pr1 (structure-equiv-Spectrum n) = structure-map-Spectrum n
+  pr2 (structure-equiv-Spectrum n) = is-equiv-pointed-structure-map-Spectrum n
+
+  pointed-structure-equiv-Spectrum :
+    (n : ℕ) → pointed-type-Spectrum n ≃∗ Ω (pointed-type-Spectrum (succ-ℕ n))
+  pr1 (pointed-structure-equiv-Spectrum n) = structure-equiv-Spectrum n
+  pr2 (pointed-structure-equiv-Spectrum n) =
+    preserves-point-structure-map-Spectrum n
 ```

@@ -34,9 +34,10 @@ open import structured-types.pointed-types
 
 ## Idea
 
-A pointed equivalence is an equivalence in the category of pointed spaces.
-Equivalently, a pointed equivalence is a pointed map of which the underlying
-function is an equivalence.
+A **pointed equivalence** is an equivalence in the category of pointed spaces.
+Equivalently, a pointed equivalence is a
+[pointed map](structured-types.pointed-maps.md) of which the underlying function
+is an [equivalence](foundation-core.equivalences.md).
 
 ## Definitions
 
@@ -49,6 +50,12 @@ module _
 
   is-equiv-pointed-map : (A →∗ B) → UU (l1 ⊔ l2)
   is-equiv-pointed-map f = is-equiv (map-pointed-map f)
+
+  is-prop-is-equiv-pointed-map : (f : A →∗ B) → is-prop (is-equiv-pointed-map f)
+  is-prop-is-equiv-pointed-map = is-property-is-equiv ∘ map-pointed-map
+
+  is-equiv-pointed-map-Prop : (A →∗ B) → Prop (l1 ⊔ l2)
+  is-equiv-pointed-map-Prop = is-equiv-Prop ∘ map-pointed-map
 
 pointed-equiv :
   {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) → UU (l1 ⊔ l2)
