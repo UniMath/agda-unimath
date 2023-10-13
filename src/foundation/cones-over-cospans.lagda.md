@@ -27,9 +27,9 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A cone on a cospan `A --f--> X <--g-- B` with vertex `C` is a triple `(p,q,H)`
-consisting of a map `p : C → A`, a map `q : C → B`, and a homotopy `H`
-witnessing that the square
+A **cone** on a [cospan](foundation.cospans.md) `A --f--> X <--g-- B` with
+domain `C` is a triple `(p,q,H)` consisting of a map `p : C → A`, a map
+`q : C → B`, and a homotopy `H` witnessing that the square
 
 ```text
       q
@@ -46,10 +46,6 @@ commutes.
 ## Definitions
 
 ### Cones on cospans
-
-A cone on a cospan with a vertex C is a pair of functions from C into the
-domains of the maps in the cospan, equipped with a homotopy witnessing that the
-resulting square commutes.
 
 ```agda
 module _
@@ -97,12 +93,6 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
 
 ### Identifications of cones
 
-Next we characterize the identity type of the type of cones with a given vertex
-C. Note that in the definition of htpy-cone we do not use pattern matching on
-the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a
-Σ-type for any c and c', not just for c and c' of the form (p , q , H) and (p' ,
-q' , H') respectively.
-
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -110,7 +100,8 @@ module _
   where
 
   coherence-htpy-cone :
-    (c c' : cone f g C) (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
+    (c c' : cone f g C)
+    (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
     (L : horizontal-map-cone f g c ~ horizontal-map-cone f g c') → UU (l4 ⊔ l3)
   coherence-htpy-cone c c' K L =
     ( coherence-square-cone f g c ∙h (g ·l L)) ~
@@ -157,7 +148,7 @@ module _
   pr1 (extensionality-cone c c') = htpy-eq-cone c c'
   pr2 (extensionality-cone c c') = is-equiv-htpy-eq-cone c c'
 
-  eq-htpy-cone : (c c' : cone f g C) → htpy-cone c c' → (c ＝ c')
+  eq-htpy-cone : (c c' : cone f g C) → htpy-cone c c' → c ＝ c'
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
 ```
 

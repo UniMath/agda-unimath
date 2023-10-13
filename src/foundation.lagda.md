@@ -54,6 +54,7 @@ open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
 open import foundation.cones-over-cospans public
+open import foundation.cones-over-towers public
 open import foundation.conjunction public
 open import foundation.connected-components public
 open import foundation.connected-components-universes public
@@ -271,6 +272,7 @@ open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
+open import foundation.towers-of-types public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-identifications public
