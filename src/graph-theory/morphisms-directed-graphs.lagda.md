@@ -225,6 +225,6 @@ module _
 
 ## External links
 
-- [Graph homomorphism](https://www.wikidata.org/wiki/Q3385162) on Wikidata
+- [Graph homomorphism](https://www.wikidata.org/entity/Q3385162) on Wikidata
 - [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) at
   Wikipedia

@@ -541,7 +541,7 @@ module _
 
 ## External links
 
-- [Graph isomoprhism](https://www.wikidata.org/wiki/Q303100) at Wikidata
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
 - [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
   Wikipedia
 - [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
