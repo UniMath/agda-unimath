@@ -139,6 +139,7 @@ module _
 - [Commutator subgroup](https://ncatlab.org/nlab/show/commutator%20subgroup) at
   nlab
 - [Commutator subgroup](https://www.wikidata.org/wiki/Q522216) at Wikidata
-- [Commutator subgroup](https://en.wikipedia.org/wiki/Commutator_subgroup) at Wikipedia
+- [Commutator subgroup](https://en.wikipedia.org/wiki/Commutator_subgroup) at
+  Wikipedia
 - [Commutator subgroup](https://mathworld.wolfram.com/CommutatorSubgroup.html)
   at Wolfram Mathworld
