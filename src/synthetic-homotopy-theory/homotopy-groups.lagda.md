@@ -75,5 +75,5 @@ module _
   where
 
   concrete-homotopy-group : Concrete-Group l
-  concrete-homotopy-group = {!concrete-group-Pointed-Type!}
+  concrete-homotopy-group = {!concrete-group-∞-Group!}
 ```
