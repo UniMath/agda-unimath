@@ -64,8 +64,10 @@ is-acyclic-Undirected-Graph l G =
 ## External links
 
 - [Trees](https://ncatlab.org/nlab/show/tree) at nlab
-- [Acyclic graph](https://www.wikidata.org/wiki/Q3115453) at Wikidata
+- [Acyclic graph](https://www.wikidata.org/entity/Q3115453) at Wikidata
 - [Forests](<https://en.wikipedia.org/wiki/Tree_(graph_theory)#Forest>) at
   Wikipedia
 - [Acyclic graphs](https://mathworld.wolfram.com/AcyclicGraph.html) at Wolfram
   Mathworld.
+
+<concept id="https://www.wikidata.org/entity/Q3115453" />
