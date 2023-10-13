@@ -43,6 +43,7 @@ open import synthetic-homotopy-theory.free-loops public
 open import synthetic-homotopy-theory.functoriality-loop-spaces public
 open import synthetic-homotopy-theory.groups-of-loops-in-1-types public
 open import synthetic-homotopy-theory.hatchers-acyclic-type public
+open import synthetic-homotopy-theory.homotopy-groups public
 open import synthetic-homotopy-theory.induction-principle-pushouts public
 open import synthetic-homotopy-theory.infinite-complex-projective-space public
 open import synthetic-homotopy-theory.infinite-cyclic-types public

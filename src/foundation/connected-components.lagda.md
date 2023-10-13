@@ -45,9 +45,9 @@ module _
   pr1 point-connected-component = a
   pr2 point-connected-component = unit-trunc-Prop refl
 
-  connected-component-Pointed-Type : Pointed-Type l
-  pr1 connected-component-Pointed-Type = connected-component
-  pr2 connected-component-Pointed-Type = point-connected-component
+  connected-component-pointed-type : Pointed-Type l
+  pr1 connected-component-pointed-type = connected-component
+  pr2 connected-component-pointed-type = point-connected-component
 
   value-connected-component :
     connected-component → A
@@ -71,11 +71,11 @@ abstract
     is-0-connected (connected-component A a)
   is-0-connected-connected-component A a =
     is-0-connected-mere-eq
-      ( pair a (unit-trunc-Prop refl))
-      ( λ (pair x p) →
+      ( a , unit-trunc-Prop refl)
+      ( λ (x , p) →
         apply-universal-property-trunc-Prop
           ( p)
-          ( trunc-Prop (pair a (unit-trunc-Prop refl) ＝ pair x p))
+          ( trunc-Prop ((a , unit-trunc-Prop refl) ＝ (x , p)))
           ( λ p' →
             unit-trunc-Prop
               ( eq-pair-Σ
@@ -84,7 +84,7 @@ abstract
 
 connected-component-∞-Group :
   {l : Level} (A : UU l) (a : A) → ∞-Group l
-pr1 (connected-component-∞-Group A a) = connected-component-Pointed-Type A a
+pr1 (connected-component-∞-Group A a) = connected-component-pointed-type A a
 pr2 (connected-component-∞-Group A a) = is-0-connected-connected-component A a
 ```
 
