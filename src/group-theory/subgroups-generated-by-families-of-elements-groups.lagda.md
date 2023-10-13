@@ -70,9 +70,12 @@ module _
   {l1 l2 : Level} (G : Group l1) {I : UU l2} (x : I → type-Group G)
   where
 
+  generating-subset-subgroup-family-of-elements-Group : subset-Group (l1 ⊔ l2) G
+  generating-subset-subgroup-family-of-elements-Group = subtype-im x
+
   subgroup-family-of-elements-Group : Subgroup (l1 ⊔ l2) G
   subgroup-family-of-elements-Group =
-    subgroup-subset-Group G (subtype-im x)
+    subgroup-subset-Group G generating-subset-subgroup-family-of-elements-Group
 
   subset-subgroup-family-of-elements-Group : subset-Group (l1 ⊔ l2) G
   subset-subgroup-family-of-elements-Group =
@@ -119,7 +122,8 @@ module _
       H =
       logical-equivalence-reasoning
         leq-Subgroup G subgroup-family-of-elements-Group H
-        ↔ subtype-im x ⊆ subset-Subgroup G H
+        ↔ generating-subset-subgroup-family-of-elements-Group ⊆
+          subset-Subgroup G H
           by adjoint-relation-subgroup-subset-Group G (subtype-im x) H
         ↔ ((i : I) → is-in-Subgroup G H (x i))
           by is-image-subtype-subtype-im x (subset-Subgroup G H)
@@ -129,7 +133,7 @@ module _
       (i : I) → is-in-subgroup-family-of-elements-Group (x i)
     contains-element-subgroup-family-of-elements-Group i =
       contains-subset-subgroup-subset-Group G
-        ( subtype-im x)
+        ( generating-subset-subgroup-family-of-elements-Group)
         ( x i)
         ( unit-trunc-Prop (i , refl))
 
