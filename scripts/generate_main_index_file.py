@@ -67,7 +67,7 @@ def generate_index(root, header):
     namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
 
     for namespace in namespaces:
-        if namespace == 'temp' or 'MAlonzo' in namespace:
+        if namespace == 'temp':
             continue
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)

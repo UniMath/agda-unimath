@@ -45,7 +45,7 @@ if __name__ == '__main__':
     root = 'src'
 
     for namespace in utils.get_subdirectories_recursive(root):
-        if namespace == 'temp' or 'MAlonzo' in namespace:
+        if namespace == 'temp':
             continue
 
         namespace_filename = os.path.join(root, namespace) + '.lagda.md'
