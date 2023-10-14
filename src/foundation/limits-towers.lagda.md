@@ -19,7 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.maps-of-towers
 open import foundation.structure-identity-principle
-open import foundation.towers-of-types
+open import foundation.towers
 open import foundation.universal-property-limits-of-towers
 open import foundation.universe-levels
 

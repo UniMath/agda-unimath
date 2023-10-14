@@ -119,6 +119,7 @@ open import foundation.equivalence-induction public
 open import foundation.equivalence-relations public
 open import foundation.equivalences public
 open import foundation.equivalences-maybe public
+open import foundation.equivalences-towers public
 open import foundation.exclusive-disjunction public
 open import foundation.existential-quantification public
 open import foundation.exponents-set-quotients public
@@ -181,7 +182,7 @@ open import foundation.limited-principle-of-omniscience public
 open import foundation.limits-towers public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
-open import foundation.maps-of-towers public
+open import foundation.maps-towers public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -275,7 +276,7 @@ open import foundation.symmetric-identity-types public
 open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
-open import foundation.towers-of-types public
+open import foundation.towers public
 open import foundation.transfinite-composition-of-maps public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public

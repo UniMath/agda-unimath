@@ -1,14 +1,14 @@
-# Transfinite composition of maps
+# Transfinite cocomposition of maps
 
 ```agda
-module foundation.transfinite-composition-of-maps where
+module foundation.transfinite-cocomposition-of-maps where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
 open import foundation.limits-towers
-open import foundation.towers-of-types
+open import foundation.towers
 open import foundation.universe-levels
 ```
 
@@ -17,14 +17,14 @@ open import foundation.universe-levels
 ## Idea
 
 Given an infinite [sequence](foundation.dependent-sequences.md) of maps, i.e. a
-[tower](foundation.towers-of-types.md) `fₙ`:
+[tower](foundation.towers.md) `fₙ`:
 
 ```text
       ⋯         fₙ       ⋯       f₁       f₀
   ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀,
 ```
 
-then we can form the **transfinite composition** of `fₙ` by taking the canonical
+we can form the **transfinite cocomposition** of `fₙ` by taking the canonical
 map from the [standard limit of the tower](foundation.limits-towers.md) into
 `A₀`.
 
@@ -37,6 +37,6 @@ module _
   {l : Level} (f : Tower l)
   where
 
-  transfinite-comp : standard-limit-Tower f → type-Tower f 0
-  transfinite-comp x = sequence-standard-limit-Tower f x 0
+  transfinite-cocomp : standard-limit-Tower f → type-Tower f 0
+  transfinite-cocomp x = sequence-standard-limit-Tower f x 0
 ```

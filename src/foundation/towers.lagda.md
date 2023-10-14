@@ -1,7 +1,7 @@
 # Towers of types
 
 ```agda
-module foundation.towers-of-types where
+module foundation.towers where
 ```
 
 <details><summary>Imports</summary>
@@ -10,9 +10,17 @@ module foundation.towers-of-types where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equality-dependent-function-types
+open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopy-induction
+open import foundation.identity-types
 open import foundation.iterating-functions
+open import foundation.structure-identity-principle
 open import foundation.unit-type
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.function-types
@@ -129,12 +137,18 @@ form
 ```
 
 ```agda
+naturality-section-Dependent-Tower :
+  {l1 l2 : Level} (A : Tower l1) (B : Dependent-Tower l2 A)
+  (h : (n : ℕ) (x : type-Tower A n) → family-Dependent-Tower B n x) (n : ℕ) →
+  UU (l1 ⊔ l2)
+naturality-section-Dependent-Tower A B h n =
+  h n ∘ map-Tower A n ~ map-Dependent-Tower B n _ ∘ h (succ-ℕ n)
+
 section-Dependent-Tower :
   {l1 l2 : Level} (A : Tower l1) (B : Dependent-Tower l2 A) → UU (l1 ⊔ l2)
 section-Dependent-Tower A B =
   Σ ( (n : ℕ) (x : type-Tower A n) → family-Dependent-Tower B n x)
-    ( λ s →
-      (n : ℕ) → s n ∘ map-Tower A n ~ map-Dependent-Tower B n _ ∘ s (succ-ℕ n))
+    ( λ h → (n : ℕ) → naturality-section-Dependent-Tower A B h n)
 ```
 
 ## Operations

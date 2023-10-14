@@ -12,7 +12,7 @@ open import foundation.cones-over-towers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.subtype-identity-principle
-open import foundation.towers-of-types
+open import foundation.towers
 open import foundation.universe-levels
 
 open import foundation-core.contractible-maps
@@ -206,3 +206,8 @@ module _
           ( htpy-cone-map-universal-property-limit-Tower A c up-c c')
           up-c up-c')
 ```
+
+## See also
+
+- For sequential colimits, see
+  [`synthetic-homotopy-theory.27-sequences`](synthetic-homotopy-theory.27-sequences.md)
