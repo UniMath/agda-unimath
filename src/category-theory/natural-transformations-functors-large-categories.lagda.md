@@ -173,7 +173,3 @@ module _
       ( τ)
       ( σ)
 ```
-
-## See also
-
-- [Homotopies of natural transformations in large categories](category-theory.homotopies-natural-transformations-large-categories.md)
