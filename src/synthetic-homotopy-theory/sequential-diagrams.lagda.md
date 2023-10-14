@@ -41,9 +41,6 @@ module _
   map-sequential-diagram = pr2 A
 ```
 
-## Properties
-
-## See also
 
 ## References
 

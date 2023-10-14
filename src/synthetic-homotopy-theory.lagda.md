@@ -13,6 +13,7 @@ open import synthetic-homotopy-theory.acyclic-types public
 open import synthetic-homotopy-theory.category-of-connected-set-bundles-circle public
 open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
+open import synthetic-homotopy-theory.cocones-under-sequential-diagrams public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
 open import synthetic-homotopy-theory.codiagonals-of-maps public
@@ -64,6 +65,7 @@ open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushouts public
 open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public
+open import synthetic-homotopy-theory.sequential-diagrams public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
 open import synthetic-homotopy-theory.sphere-prespectrum public
