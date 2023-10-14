@@ -10,23 +10,19 @@ module foundation.cones-over-towers where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.binary-homotopies
-open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.structure-identity-principle
 open import foundation.towers-of-types
-open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import foundation-core.commuting-squares-of-maps
+open import foundation-core.commuting-triangles-of-maps
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
-open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
 

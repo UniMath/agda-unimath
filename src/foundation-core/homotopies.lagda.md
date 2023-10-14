@@ -7,7 +7,6 @@ module foundation-core.homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications

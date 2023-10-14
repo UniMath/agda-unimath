@@ -7,10 +7,8 @@ module foundation.commuting-squares-of-homotopies where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-binary-functions
 open import foundation.universe-levels
 
-open import foundation-core.function-types
 open import foundation-core.homotopies
 ```
 
@@ -27,7 +25,7 @@ A square of [homotopies](foundation-core.homotopies.md)
  left |         | right
       v         v
       z ------> i
-         bottom
+        bottom
 ```
 
 is said to **commute** if there is a homotopy `left ∙h bottom ~ top ∙h right`.

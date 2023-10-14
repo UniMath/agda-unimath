@@ -27,7 +27,6 @@ open import group-theory.groups
 open import group-theory.integer-powers-of-elements-groups
 open import group-theory.orders-of-elements-groups
 open import group-theory.subgroups
-open import group-theory.subgroups-generated-by-elements-groups
 open import group-theory.torsion-elements-groups
 ```
 
