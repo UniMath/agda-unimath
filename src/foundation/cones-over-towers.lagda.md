@@ -46,7 +46,7 @@ sequence of types of `A` such that the triangles
 
 ## Definitions
 
-### Cones on towers
+### Cones over towers
 
 ```agda
 module _
@@ -126,7 +126,7 @@ module _
   eq-htpy-cone-tower c c' = map-inv-equiv (extensionality-cone-tower c c')
 ```
 
-### Precomposition cones on towers
+### Precomposition cones over towers
 
 ```agda
 module _

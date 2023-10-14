@@ -78,7 +78,7 @@ module _
 ### The gap map into the standard sequential limit
 
 The **gap map** of a [cone over a tower](foundation.cones-over-towers.md) is the
-map from the domain of the cone into the standard limit of the tower.
+map from the domain of the cone into the standard sequential limit.
 
 ```agda
 module _
@@ -141,7 +141,7 @@ module _
 
 ## Properties
 
-### Characterization of the identity type of the standard sequential limit
+### Characterization equality in the standard sequential limit
 
 ```agda
 module _
@@ -235,7 +235,7 @@ module _
     is-retraction-gap-tower
 ```
 
-### A cone is equal to the value of cone-map at its own gap map
+### A cone over a tower is equal to the value of `cone-map-tower` at its own gap map
 
 ```agda
 module _

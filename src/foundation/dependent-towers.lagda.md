@@ -144,7 +144,7 @@ pr1 (right-shift-dependent-tower B) n = family-dependent-tower B (succ-ℕ n)
 pr2 (right-shift-dependent-tower B) n = map-dependent-tower B (succ-ℕ n)
 ```
 
-### Left shifting a tower
+### Left shifting a dependent tower
 
 We can **left shift** a dependent tower of types by padding it with the
 [terminal type](foundation.unit-type.md) `unit`.
