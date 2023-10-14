@@ -54,26 +54,26 @@ A **map of towers** `A → B` is a commuting diagram of the form
 ### Maps of towers
 
 ```agda
-naturality-hom-Tower :
-  {l1 l2 : Level} (A : Tower l1) (B : Tower l2)
-  (h : (n : ℕ) → type-Tower A n → type-Tower B n) (n : ℕ) → UU (l1 ⊔ l2)
-naturality-hom-Tower A B =
-  naturality-section-Dependent-Tower A (const-Dependent-Tower A B)
+naturality-hom-tower :
+  {l1 l2 : Level} (A : tower l1) (B : tower l2)
+  (h : (n : ℕ) → type-tower A n → type-tower B n) (n : ℕ) → UU (l1 ⊔ l2)
+naturality-hom-tower A B =
+  naturality-section-Dependent-tower A (const-Dependent-tower A B)
 
-hom-Tower : {l1 l2 : Level} (A : Tower l1) (B : Tower l2) → UU (l1 ⊔ l2)
-hom-Tower A B = section-Dependent-Tower A (const-Dependent-Tower A B)
+hom-tower : {l1 l2 : Level} (A : tower l1) (B : tower l2) → UU (l1 ⊔ l2)
+hom-tower A B = section-Dependent-tower A (const-Dependent-tower A B)
 ```
 
 ### Identity map on towers
 
 ```agda
-id-hom-Tower :
-  {l : Level} (A : Tower l) → hom-Tower A A
-pr1 (id-hom-Tower A) n = id
-pr2 (id-hom-Tower A) n = refl-htpy
+id-hom-tower :
+  {l : Level} (A : tower l) → hom-tower A A
+pr1 (id-hom-tower A) n = id
+pr2 (id-hom-tower A) n = refl-htpy
 
--- comp-hom-Tower :
---   {l : Level} (A : Tower l) → hom-Tower A A
--- pr1 (id-hom-Tower A) n = id
--- pr2 (id-hom-Tower A) n = refl-htpy
+-- comp-hom-tower :
+--   {l : Level} (A B C : tower l) → hom-tower B C → hom-tower A B → hom-tower A C
+-- pr1 (comp-hom-tower A B C g f) = {! map  !}
+-- pr2 (comp-hom-tower A B C g f) = {!   !}
 ```

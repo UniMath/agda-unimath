@@ -50,77 +50,77 @@ Giving an sequence of maps that extend infinitely to the left:
 ### Towers of types
 
 ```agda
-sequence-map-Tower : {l : Level} → (ℕ → UU l) → UU l
-sequence-map-Tower A = (n : ℕ) → A (succ-ℕ n) → A n
+sequence-map-tower : {l : Level} → (ℕ → UU l) → UU l
+sequence-map-tower A = (n : ℕ) → A (succ-ℕ n) → A n
 
-Tower : (l : Level) → UU (lsuc l)
-Tower l = Σ (ℕ → UU l) (sequence-map-Tower)
+tower : (l : Level) → UU (lsuc l)
+tower l = Σ (ℕ → UU l) (sequence-map-tower)
 
-type-Tower : {l : Level} → Tower l → ℕ → UU l
-type-Tower = pr1
+type-tower : {l : Level} → tower l → ℕ → UU l
+type-tower = pr1
 
-map-Tower :
-  {l : Level} (A : Tower l) (n : ℕ) → type-Tower A (succ-ℕ n) → type-Tower A n
-map-Tower = pr2
+map-tower :
+  {l : Level} (A : tower l) (n : ℕ) → type-tower A (succ-ℕ n) → type-tower A n
+map-tower = pr2
 ```
 
 ### Composites in towers
 
 ```agda
-comp-map-Tower :
-  {l : Level} (A : Tower l) (n r : ℕ) → type-Tower A (n +ℕ r) → type-Tower A n
-comp-map-Tower A n zero-ℕ = id
-comp-map-Tower A n (succ-ℕ r) = comp-map-Tower A n r ∘ map-Tower A (n +ℕ r)
+comp-map-tower :
+  {l : Level} (A : tower l) (n r : ℕ) → type-tower A (n +ℕ r) → type-tower A n
+comp-map-tower A n zero-ℕ = id
+comp-map-tower A n (succ-ℕ r) = comp-map-tower A n r ∘ map-tower A (n +ℕ r)
 ```
 
 ## Dependent towers of types
 
 ```agda
-sequence-map-Dependent-Tower :
-  {l1 l2 : Level} (A : Tower l1) →
-  ((n : ℕ) → type-Tower A n → UU l2) → UU (l1 ⊔ l2)
-sequence-map-Dependent-Tower A B =
-  (n : ℕ) (x : type-Tower A (succ-ℕ n)) → B (succ-ℕ n) x → B n (map-Tower A n x)
+sequence-map-Dependent-tower :
+  {l1 l2 : Level} (A : tower l1) →
+  ((n : ℕ) → type-tower A n → UU l2) → UU (l1 ⊔ l2)
+sequence-map-Dependent-tower A B =
+  (n : ℕ) (x : type-tower A (succ-ℕ n)) → B (succ-ℕ n) x → B n (map-tower A n x)
 
-Dependent-Tower : {l1 : Level} (l2 : Level) (A : Tower l1) → UU (l1 ⊔ lsuc l2)
-Dependent-Tower l2 A =
-  Σ ((n : ℕ) → type-Tower A n → UU l2) (sequence-map-Dependent-Tower A)
+Dependent-tower : {l1 : Level} (l2 : Level) (A : tower l1) → UU (l1 ⊔ lsuc l2)
+Dependent-tower l2 A =
+  Σ ((n : ℕ) → type-tower A n → UU l2) (sequence-map-Dependent-tower A)
 
-family-Dependent-Tower :
-  {l1 l2 : Level} {A : Tower l1} →
-  Dependent-Tower l2 A → ((n : ℕ) → type-Tower A n → UU l2)
-family-Dependent-Tower = pr1
+family-Dependent-tower :
+  {l1 l2 : Level} {A : tower l1} →
+  Dependent-tower l2 A → ((n : ℕ) → type-tower A n → UU l2)
+family-Dependent-tower = pr1
 
-map-Dependent-Tower :
-  {l1 l2 : Level} {A : Tower l1} (B : Dependent-Tower l2 A) →
-  (n : ℕ) (x : type-Tower A (succ-ℕ n)) →
-  family-Dependent-Tower B (succ-ℕ n) x →
-  family-Dependent-Tower B n (map-Tower A n x)
-map-Dependent-Tower = pr2
+map-Dependent-tower :
+  {l1 l2 : Level} {A : tower l1} (B : Dependent-tower l2 A) →
+  (n : ℕ) (x : type-tower A (succ-ℕ n)) →
+  family-Dependent-tower B (succ-ℕ n) x →
+  family-Dependent-tower B n (map-tower A n x)
+map-Dependent-tower = pr2
 ```
 
 ### Composites in dependent towers
 
 ```agda
-comp-map-Dependent-Tower :
-  {l1 l2 : Level} {A : Tower l1} (B : Dependent-Tower l2 A)
-  (n r : ℕ) (x : type-Tower A (n +ℕ r)) →
-  family-Dependent-Tower B (n +ℕ r) x →
-  family-Dependent-Tower B n (comp-map-Tower A n r x)
-comp-map-Dependent-Tower B n zero-ℕ x y = y
-comp-map-Dependent-Tower {A = A} B n (succ-ℕ r) x y =
-  comp-map-Dependent-Tower B n r
-    ( map-Tower A (n +ℕ r) x)
-    ( map-Dependent-Tower B (n +ℕ r) x y)
+comp-map-Dependent-tower :
+  {l1 l2 : Level} {A : tower l1} (B : Dependent-tower l2 A)
+  (n r : ℕ) (x : type-tower A (n +ℕ r)) →
+  family-Dependent-tower B (n +ℕ r) x →
+  family-Dependent-tower B n (comp-map-tower A n r x)
+comp-map-Dependent-tower B n zero-ℕ x y = y
+comp-map-Dependent-tower {A = A} B n (succ-ℕ r) x y =
+  comp-map-Dependent-tower B n r
+    ( map-tower A (n +ℕ r) x)
+    ( map-Dependent-tower B (n +ℕ r) x y)
 ```
 
 ### Constant dependent towers of types
 
 ```agda
-const-Dependent-Tower :
-    {l1 l2 : Level} (A : Tower l1) → Tower l2 → Dependent-Tower l2 A
-pr1 (const-Dependent-Tower A B) n _ = type-Tower B n
-pr2 (const-Dependent-Tower A B) n _ = map-Tower B n
+const-Dependent-tower :
+    {l1 l2 : Level} (A : tower l1) → tower l2 → Dependent-tower l2 A
+pr1 (const-Dependent-tower A B) n _ = type-tower B n
+pr2 (const-Dependent-tower A B) n _ = map-tower B n
 ```
 
 ### Sections of a dependent tower
@@ -137,18 +137,18 @@ form
 ```
 
 ```agda
-naturality-section-Dependent-Tower :
-  {l1 l2 : Level} (A : Tower l1) (B : Dependent-Tower l2 A)
-  (h : (n : ℕ) (x : type-Tower A n) → family-Dependent-Tower B n x) (n : ℕ) →
+naturality-section-Dependent-tower :
+  {l1 l2 : Level} (A : tower l1) (B : Dependent-tower l2 A)
+  (h : (n : ℕ) (x : type-tower A n) → family-Dependent-tower B n x) (n : ℕ) →
   UU (l1 ⊔ l2)
-naturality-section-Dependent-Tower A B h n =
-  h n ∘ map-Tower A n ~ map-Dependent-Tower B n _ ∘ h (succ-ℕ n)
+naturality-section-Dependent-tower A B h n =
+  h n ∘ map-tower A n ~ map-Dependent-tower B n _ ∘ h (succ-ℕ n)
 
-section-Dependent-Tower :
-  {l1 l2 : Level} (A : Tower l1) (B : Dependent-Tower l2 A) → UU (l1 ⊔ l2)
-section-Dependent-Tower A B =
-  Σ ( (n : ℕ) (x : type-Tower A n) → family-Dependent-Tower B n x)
-    ( λ h → (n : ℕ) → naturality-section-Dependent-Tower A B h n)
+section-Dependent-tower :
+  {l1 l2 : Level} (A : tower l1) (B : Dependent-tower l2 A) → UU (l1 ⊔ l2)
+section-Dependent-tower A B =
+  Σ ( (n : ℕ) (x : type-tower A n) → family-Dependent-tower B n x)
+    ( λ h → (n : ℕ) → naturality-section-Dependent-tower A B h n)
 ```
 
 ## Operations
@@ -158,12 +158,12 @@ section-Dependent-Tower A B =
 We can **right shift** a tower of types by forgetting the first terms.
 
 ```agda
-right-shift-Tower : {l : Level} → Tower l → Tower l
-pr1 (right-shift-Tower A) n = type-Tower A (succ-ℕ n)
-pr2 (right-shift-Tower A) n = map-Tower A (succ-ℕ n)
+right-shift-tower : {l : Level} → tower l → tower l
+pr1 (right-shift-tower A) n = type-tower A (succ-ℕ n)
+pr2 (right-shift-tower A) n = map-tower A (succ-ℕ n)
 
-iterated-right-shift-Tower : {l : Level} (n : ℕ) → Tower l → Tower l
-iterated-right-shift-Tower n = iterate n right-shift-Tower
+iterated-right-shift-tower : {l : Level} (n : ℕ) → tower l → tower l
+iterated-right-shift-tower n = iterate n right-shift-tower
 ```
 
 ### Left shifting a tower
@@ -172,12 +172,12 @@ We can **left shift** a tower of types by padding it with the
 [terminal type](foundation.unit-type.md) `unit`.
 
 ```agda
-left-shift-Tower : {l : Level} → Tower l → Tower l
-pr1 (left-shift-Tower {l} A) zero-ℕ = raise-unit l
-pr1 (left-shift-Tower A) (succ-ℕ n) = type-Tower A n
-pr2 (left-shift-Tower A) zero-ℕ = raise-terminal-map
-pr2 (left-shift-Tower A) (succ-ℕ n) = map-Tower A n
+left-shift-tower : {l : Level} → tower l → tower l
+pr1 (left-shift-tower {l} A) zero-ℕ = raise-unit l
+pr1 (left-shift-tower A) (succ-ℕ n) = type-tower A n
+pr2 (left-shift-tower A) zero-ℕ = raise-terminal-map
+pr2 (left-shift-tower A) (succ-ℕ n) = map-tower A n
 
-iterated-left-shift-Tower : {l : Level} (n : ℕ) → Tower l → Tower l
-iterated-left-shift-Tower n = iterate n left-shift-Tower
+iterated-left-shift-tower : {l : Level} (n : ℕ) → tower l → tower l
+iterated-left-shift-tower n = iterate n left-shift-tower
 ```

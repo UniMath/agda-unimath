@@ -55,17 +55,17 @@ where every vertical map is an [equivalence](foundation-core.equivalences.md).
 ## Definitions
 
 ```agda
-equiv-Tower :
-  {l1 l2 : Level} (A : Tower l1) (B : Tower l2) → UU (l1 ⊔ l2)
-equiv-Tower A B =
-  Σ ( (n : ℕ) → type-Tower A n ≃ type-Tower B n)
-    ( λ e → (n : ℕ) → naturality-hom-Tower A B (map-equiv ∘ e) n)
+equiv-tower :
+  {l1 l2 : Level} (A : tower l1) (B : tower l2) → UU (l1 ⊔ l2)
+equiv-tower A B =
+  Σ ( (n : ℕ) → type-tower A n ≃ type-tower B n)
+    ( λ e → (n : ℕ) → naturality-hom-tower A B (map-equiv ∘ e) n)
 
-hom-equiv-Tower :
-  {l1 l2 : Level} (A : Tower l1) (B : Tower l2) →
-  equiv-Tower A B → hom-Tower A B
-pr1 (hom-equiv-Tower A B e) n = pr1 (pr1 e n)
-pr2 (hom-equiv-Tower A B e) = pr2 e
+hom-equiv-tower :
+  {l1 l2 : Level} (A : tower l1) (B : tower l2) →
+  equiv-tower A B → hom-tower A B
+pr1 (hom-equiv-tower A B e) n = pr1 (pr1 e n)
+pr2 (hom-equiv-tower A B e) = pr2 e
 ```
 
 ## Properties
@@ -73,35 +73,35 @@ pr2 (hom-equiv-Tower A B e) = pr2 e
 ### Characterizing equality of towers
 
 ```agda
-refl-equiv-Tower :
-  {l : Level} (A : Tower l) → equiv-Tower A A
-pr1 (refl-equiv-Tower A) n = id-equiv
-pr2 (refl-equiv-Tower A) n = refl-htpy
+refl-equiv-tower :
+  {l : Level} (A : tower l) → equiv-tower A A
+pr1 (refl-equiv-tower A) n = id-equiv
+pr2 (refl-equiv-tower A) n = refl-htpy
 
-equiv-eq-Tower :
-  {l : Level} (A B : Tower l) → A ＝ B → equiv-Tower A B
-equiv-eq-Tower A .A refl = refl-equiv-Tower A
+equiv-eq-tower :
+  {l : Level} (A B : tower l) → A ＝ B → equiv-tower A B
+equiv-eq-tower A .A refl = refl-equiv-tower A
 
-is-contr-total-equiv-Tower :
-  {l : Level} (A : Tower l) →
-  is-contr (Σ (Tower l) (equiv-Tower A))
-is-contr-total-equiv-Tower A =
+is-contr-total-equiv-tower :
+  {l : Level} (A : tower l) →
+  is-contr (Σ (tower l) (equiv-tower A))
+is-contr-total-equiv-tower A =
   is-contr-total-Eq-structure _
     ( is-contr-total-Eq-Π
-      ( λ n → type-Tower A n ≃_)
-      ( λ n → is-contr-total-equiv (type-Tower A n)))
-    ( type-Tower A , λ n → id-equiv)
+      ( λ n → type-tower A n ≃_)
+      ( λ n → is-contr-total-equiv (type-tower A n)))
+    ( type-tower A , λ n → id-equiv)
     ( is-contr-total-Eq-Π _
-      ( λ n → is-contr-total-htpy (map-Tower A n)))
+      ( λ n → is-contr-total-htpy (map-tower A n)))
 
-is-equiv-equiv-eq-Tower :
-  {l : Level} (A B : Tower l) → is-equiv (equiv-eq-Tower A B)
-is-equiv-equiv-eq-Tower A =
+is-equiv-equiv-eq-tower :
+  {l : Level} (A B : tower l) → is-equiv (equiv-eq-tower A B)
+is-equiv-equiv-eq-tower A =
   fundamental-theorem-id
-    ( is-contr-total-equiv-Tower A)
-    ( equiv-eq-Tower A)
+    ( is-contr-total-equiv-tower A)
+    ( equiv-eq-tower A)
 
-eq-equiv-Tower :
-  {l : Level} {A B : Tower l} → equiv-Tower A B → A ＝ B
-eq-equiv-Tower {A = A} {B} = map-inv-is-equiv (is-equiv-equiv-eq-Tower A B)
+eq-equiv-tower :
+  {l : Level} {A B : tower l} → equiv-tower A B → A ＝ B
+eq-equiv-tower {A = A} {B} = map-inv-is-equiv (is-equiv-equiv-eq-tower A B)
 ```

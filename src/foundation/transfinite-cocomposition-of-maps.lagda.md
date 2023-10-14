@@ -34,9 +34,9 @@ map from the [standard limit of the tower](foundation.limits-towers.md) into
 
 ```agda
 module _
-  {l : Level} (f : Tower l)
+  {l : Level} (f : tower l)
   where
 
-  transfinite-cocomp : standard-limit-Tower f → type-Tower f 0
-  transfinite-cocomp x = sequence-standard-limit-Tower f x 0
+  transfinite-cocomp : standard-sequential-limit f → type-tower f 0
+  transfinite-cocomp x = sequence-standard-sequential-limit f x 0
 ```

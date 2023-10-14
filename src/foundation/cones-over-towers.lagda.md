@@ -50,90 +50,90 @@ sequence of types of `A` such that the triangles
 
 ```agda
 module _
-  {l1 : Level} (A : Tower l1)
+  {l1 : Level} (A : tower l1)
   where
 
-  cone-Tower : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
-  cone-Tower X =
-    Σ ( (n : ℕ) → X → type-Tower A n)
+  cone-tower : {l2 : Level} → UU l2 → UU (l1 ⊔ l2)
+  cone-tower X =
+    Σ ( (n : ℕ) → X → type-tower A n)
       ( λ f →
-        (n : ℕ) → coherence-triangle-maps (f n) (map-Tower A n) (f (succ-ℕ n)))
+        (n : ℕ) → coherence-triangle-maps (f n) (map-tower A n) (f (succ-ℕ n)))
 
-  map-cone-Tower :
-    {l2 : Level} {X : UU l2} → cone-Tower X → (n : ℕ) → X → type-Tower A n
-  map-cone-Tower = pr1
+  map-cone-tower :
+    {l2 : Level} {X : UU l2} → cone-tower X → (n : ℕ) → X → type-tower A n
+  map-cone-tower = pr1
 
-  coherence-cone-Tower :
-    {l2 : Level} {X : UU l2} (c : cone-Tower X) (n : ℕ) →
+  coherence-cone-tower :
+    {l2 : Level} {X : UU l2} (c : cone-tower X) (n : ℕ) →
     coherence-triangle-maps
-      ( map-cone-Tower c n)
-      ( map-Tower A n)
-      ( map-cone-Tower c (succ-ℕ n))
-  coherence-cone-Tower = pr2
+      ( map-cone-tower c n)
+      ( map-tower A n)
+      ( map-cone-tower c (succ-ℕ n))
+  coherence-cone-tower = pr2
 ```
 
 ### Identifications of cones over towers of types
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Tower l1) {X : UU l2}
+  {l1 l2 : Level} (A : tower l1) {X : UU l2}
   where
 
-  coherence-htpy-cone-Tower :
-    (c c' : cone-Tower A X) →
-    ((n : ℕ) → map-cone-Tower A c n ~ map-cone-Tower A c' n) → UU (l1 ⊔ l2)
-  coherence-htpy-cone-Tower c c' H =
+  coherence-htpy-cone-tower :
+    (c c' : cone-tower A X) →
+    ((n : ℕ) → map-cone-tower A c n ~ map-cone-tower A c' n) → UU (l1 ⊔ l2)
+  coherence-htpy-cone-tower c c' H =
     (n : ℕ) →
-    ( coherence-cone-Tower A c n ∙h (map-Tower A n ·l H (succ-ℕ n))) ~
-    ( H n ∙h coherence-cone-Tower A c' n)
+    ( coherence-cone-tower A c n ∙h (map-tower A n ·l H (succ-ℕ n))) ~
+    ( H n ∙h coherence-cone-tower A c' n)
 
-  htpy-cone-Tower : cone-Tower A X → cone-Tower A X → UU (l1 ⊔ l2)
-  htpy-cone-Tower c c' =
-    Σ ( (n : ℕ) → map-cone-Tower A c n ~ map-cone-Tower A c' n)
-      ( coherence-htpy-cone-Tower c c')
+  htpy-cone-tower : cone-tower A X → cone-tower A X → UU (l1 ⊔ l2)
+  htpy-cone-tower c c' =
+    Σ ( (n : ℕ) → map-cone-tower A c n ~ map-cone-tower A c' n)
+      ( coherence-htpy-cone-tower c c')
 
-  refl-htpy-cone-Tower : (c : cone-Tower A X) → htpy-cone-Tower c c
-  pr1 (refl-htpy-cone-Tower c) n = refl-htpy
-  pr2 (refl-htpy-cone-Tower c) n = right-unit-htpy
+  refl-htpy-cone-tower : (c : cone-tower A X) → htpy-cone-tower c c
+  pr1 (refl-htpy-cone-tower c) n = refl-htpy
+  pr2 (refl-htpy-cone-tower c) n = right-unit-htpy
 
-  htpy-eq-cone-Tower : (c c' : cone-Tower A X) → c ＝ c' → htpy-cone-Tower c c'
-  htpy-eq-cone-Tower c .c refl = refl-htpy-cone-Tower c
+  htpy-eq-cone-tower : (c c' : cone-tower A X) → c ＝ c' → htpy-cone-tower c c'
+  htpy-eq-cone-tower c .c refl = refl-htpy-cone-tower c
 
-  is-contr-total-htpy-cone-Tower :
-    (c : cone-Tower A X) → is-contr (Σ (cone-Tower A X) (htpy-cone-Tower c))
-  is-contr-total-htpy-cone-Tower c =
+  is-contr-total-htpy-cone-tower :
+    (c : cone-tower A X) → is-contr (Σ (cone-tower A X) (htpy-cone-tower c))
+  is-contr-total-htpy-cone-tower c =
     is-contr-total-Eq-structure
-      ( λ x z → coherence-htpy-cone-Tower c (x , z))
-      ( is-contr-total-binary-htpy (map-cone-Tower A c))
-      ( map-cone-Tower A c , (λ n → refl-htpy))
+      ( λ x z → coherence-htpy-cone-tower c (x , z))
+      ( is-contr-total-binary-htpy (map-cone-tower A c))
+      ( map-cone-tower A c , (λ n → refl-htpy))
       ( is-contr-total-Eq-Π
-        ( λ n → (coherence-cone-Tower A c n ∙h refl-htpy) ~_)
-        ( λ n → is-contr-total-htpy (coherence-cone-Tower A c n ∙h refl-htpy)))
+        ( λ n → (coherence-cone-tower A c n ∙h refl-htpy) ~_)
+        ( λ n → is-contr-total-htpy (coherence-cone-tower A c n ∙h refl-htpy)))
 
-  is-equiv-htpy-eq-cone-Tower :
-    (c c' : cone-Tower A X) → is-equiv (htpy-eq-cone-Tower c c')
-  is-equiv-htpy-eq-cone-Tower c =
+  is-equiv-htpy-eq-cone-tower :
+    (c c' : cone-tower A X) → is-equiv (htpy-eq-cone-tower c c')
+  is-equiv-htpy-eq-cone-tower c =
     fundamental-theorem-id
-      ( is-contr-total-htpy-cone-Tower c)
-      ( htpy-eq-cone-Tower c)
+      ( is-contr-total-htpy-cone-tower c)
+      ( htpy-eq-cone-tower c)
 
-  extensionality-cone-Tower :
-    (c c' : cone-Tower A X) → (c ＝ c') ≃ htpy-cone-Tower c c'
-  pr1 (extensionality-cone-Tower c c') = htpy-eq-cone-Tower c c'
-  pr2 (extensionality-cone-Tower c c') = is-equiv-htpy-eq-cone-Tower c c'
+  extensionality-cone-tower :
+    (c c' : cone-tower A X) → (c ＝ c') ≃ htpy-cone-tower c c'
+  pr1 (extensionality-cone-tower c c') = htpy-eq-cone-tower c c'
+  pr2 (extensionality-cone-tower c c') = is-equiv-htpy-eq-cone-tower c c'
 
-  eq-htpy-cone-Tower : (c c' : cone-Tower A X) → htpy-cone-Tower c c' → c ＝ c'
-  eq-htpy-cone-Tower c c' = map-inv-equiv (extensionality-cone-Tower c c')
+  eq-htpy-cone-tower : (c c' : cone-tower A X) → htpy-cone-tower c c' → c ＝ c'
+  eq-htpy-cone-tower c c' = map-inv-equiv (extensionality-cone-tower c c')
 ```
 
 ### Precomposition cones on towers
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Tower l1) {X : UU l2} {Y : UU l3}
+  {l1 l2 l3 : Level} (A : tower l1) {X : UU l2} {Y : UU l3}
   where
 
-  cone-map-Tower : cone-Tower A X → (Y → X) → cone-Tower A Y
-  pr1 (cone-map-Tower c f) n x = map-cone-Tower A c n (f x)
-  pr2 (cone-map-Tower c f) n x = coherence-cone-Tower A c n (f x)
+  cone-map-tower : cone-tower A X → (Y → X) → cone-tower A Y
+  pr1 (cone-map-tower c f) n x = map-cone-tower A c n (f x)
+  pr2 (cone-map-tower c f) n x = coherence-cone-tower A c n (f x)
 ```
