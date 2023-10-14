@@ -35,7 +35,7 @@ open import foundation-core.universal-property-pullbacks
 
 ## Definitions
 
-### The canonical pullback of a cospan
+### The standard pullback of a cospan
 
 ```agda
 module _
@@ -61,7 +61,7 @@ module _
   coherence-square-standard-pullback t = pr2 (pr2 t)
 ```
 
-### The cone at the canonical pullback
+### The cone at the standard pullback
 
 ```agda
 module _
@@ -74,10 +74,10 @@ module _
   pr2 (pr2 cone-standard-pullback) = coherence-square-standard-pullback
 ```
 
-### The gap-map into the canonical pullback
+### The gap map into the standard pullback
 
-The gap map of a square is the map fron the vertex of the cone into the
-canonical pullback.
+The **gap map** of a square is the map fron the vertex of the
+[cone](foundation.cones-over-cospans.md) into the standard pullback.
 
 ```agda
 module _
@@ -93,9 +93,11 @@ module _
 
 ### The `is-pullback` property
 
-The proposition `is-pullback` is the assertion that the gap map is an
-equivalence. Note that this proposition is small, whereas the universal property
-is a large proposition.
+The [proposition](foundation-core.propositions.md) `is-pullback` is the
+assertion that the gap map is an [equivalence](foundation-core.equivalences.md).
+Note that this proposition is [small](foundation-core.small-types.md), whereas
+[the universal property](foundation-core.universal-property-pullbacks.md) is a
+large proposition.
 
 ```agda
 module _
@@ -107,7 +109,7 @@ module _
   is-pullback c = is-equiv (gap f g c)
 ```
 
-### Functoriality of canonical pullbacks
+### Functoriality of standard pullbacks
 
 ```agda
 module _
@@ -134,7 +136,7 @@ module _
 
 ## Properties
 
-### Characterization of the identity type of the canonical pullback
+### Characterization of the identity type of the standard pullback
 
 ```agda
 module _
@@ -185,7 +187,7 @@ module _
       ( α , β , γ)
 ```
 
-### The canonical pullback satisfies the universal property of pullbacks
+### The standard pullback satisfies the universal property of pullbacks
 
 ```agda
 module _
@@ -408,8 +410,9 @@ inv-map-fold-cone :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) → (g : B → X) →
   standard-pullback (map-prod f g) (diagonal X) → standard-pullback f g
-inv-map-fold-cone f g ((a , b) , (x , α)) =
-  triple a b ((ap pr1 α) ∙ (inv (ap pr2 α)))
+pr1 (inv-map-fold-cone f g ((a , b) , x , α)) = a
+pr1 (pr2 (inv-map-fold-cone f g ((a , b) , x , α))) = b
+pr2 (pr2 (inv-map-fold-cone f g ((a , b) , x , α))) = ap pr1 α ∙ inv (ap pr2 α)
 
 abstract
   is-section-inv-map-fold-cone :
@@ -473,7 +476,7 @@ triangle-map-fold-cone :
   (f : A → X) (g : B → X) (c : cone f g C) →
   ( gap (map-prod f g) (diagonal X) (fold-cone f g c)) ~
   ( map-fold-cone f g ∘ gap f g c)
-triangle-map-fold-cone f g (p , q , H) z = refl
+triangle-map-fold-cone f g c z = refl
 
 abstract
   is-pullback-fold-cone-is-pullback :
@@ -545,7 +548,7 @@ triangle-map-prod-cone :
   (f' : A' → X') (g' : B' → X') (c' : cone f' g' C') →
   ( gap (map-prod f f') (map-prod g g') (prod-cone f g f' g' c c')) ~
   ( map-prod-cone f g f' g' ∘ map-prod (gap f g c) (gap f' g' c'))
-triangle-map-prod-cone {B' = B'} f g (p , q , H) f' g' (p' , q' , H') (z , z') =
+triangle-map-prod-cone f g c f' g' c' z =
   eq-pair-Σ-eq-pr2 (eq-pair-Σ-eq-pr2 right-unit)
 
 abstract
@@ -711,7 +714,7 @@ module _
   square-tot-map-fiber-cone :
     ( gap f g c ∘ map-equiv-total-fiber (pr1 c)) ~
     ( tot (λ a → tot (λ b → inv)) ∘ tot (map-fiber-cone f g c))
-  square-tot-map-fiber-cone (.(vertical-map-cone f g c x) , (x , refl)) =
+  square-tot-map-fiber-cone (.(vertical-map-cone f g c x) , x , refl) =
     eq-pair-Σ-eq-pr2
       ( eq-pair-Σ-eq-pr2
         ( inv (ap inv right-unit ∙ inv-inv (coherence-square-cone f g c x))))
