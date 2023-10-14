@@ -115,7 +115,7 @@ module _
   pr2 (is-sequential-limit-Prop c) = is-property-is-sequential-limit c
 ```
 
-### Functoriality of standard limits of towers
+### Functoriality of standard sequential limits
 
 ```agda
 module _

@@ -29,7 +29,7 @@ open import foundation-core.propositions
 
 ## Definition
 
-### The universal property of limits of towers
+### The universal property of sequential limits
 
 ```agda
 module _
@@ -115,7 +115,7 @@ module _
         ( is-equiv-postcomp-is-equiv h is-equiv-h D)
 ```
 
-### Uniqueness of maps obtained via the universal property of limits of towers
+### Uniqueness of maps obtained via the universal property of sequential limits
 
 ```agda
 module _
@@ -135,7 +135,7 @@ module _
         ( is-contr-map-is-equiv (up Y) c')
 ```
 
-### The universal property of limits of towers is a property
+### The universal property of sequential limits is a property
 
 ```agda
 module _
@@ -162,7 +162,7 @@ module _
     is-section-map-inv-is-equiv (up-c Y) c'
 ```
 
-### The homotopy of cones obtained from the universal property of limits of towers
+### The homotopy of cones obtained from the universal property of sequential limits
 
 ```agda
 module _
@@ -183,7 +183,7 @@ module _
       ( eq-map-universal-property-sequential-limit A c up c')
 ```
 
-### Unique uniqueness of limits of towers
+### Unique uniqueness of sequential limits
 
 ```agda
 module _

@@ -12,24 +12,24 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
 open import foundation.binary-homotopies
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.dependent-towers
 open import foundation.equality-dependent-function-types
-open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.structure-identity-principle
 open import foundation.towers
 open import foundation.unit-type
-open import foundation.univalence
 open import foundation.universe-levels
-open import foundation.whiskering-homotopies
 
+open import foundation-core.contractible-types
+open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
+open import foundation-core.identity-types
+open import foundation-core.univalence
+open import foundation-core.whiskering-homotopies
 ```
 
 </details>
