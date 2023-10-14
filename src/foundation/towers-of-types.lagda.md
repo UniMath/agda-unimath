@@ -10,10 +10,10 @@ module foundation.towers-of-types where
 open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
+open import foundation.constant-maps
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.homotopies
-open import foundation.constant-maps
 open import foundation.iterating-functions
 open import foundation.sequences
 open import foundation.unit-type
