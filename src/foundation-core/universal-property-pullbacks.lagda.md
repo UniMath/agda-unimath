@@ -37,7 +37,7 @@ module _
   universal-property-pullback :
     (c : cone f g C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
   universal-property-pullback c =
-    (C' : UU l) → is-equiv (cone-map f g {C' = C'} c)
+    (C' : UU l) → is-equiv (cone-map f g c {C'})
 ```
 
 ## Properties
@@ -52,16 +52,18 @@ module _
   (h : C' → C) (KLM : htpy-cone f g (cone-map f g c h) c')
   where
 
+  inv-triangle-cone-cone :
+    {l6 : Level} (D : UU l6) →
+    cone-map f g c ∘ postcomp D h ~ cone-map f g c'
+  inv-triangle-cone-cone D k =
+    ap
+      ( λ t → cone-map f g t k)
+      ( eq-htpy-cone f g (cone-map f g c h) c' KLM)
+
   triangle-cone-cone :
     {l6 : Level} (D : UU l6) →
-    (cone-map f g {C' = D} c') ~ ((cone-map f g c) ∘ (λ (k : D → C') → h ∘ k))
-  triangle-cone-cone D k =
-    inv
-      ( ap
-        ( λ t → cone-map f g {C' = D} t k)
-        { x = (cone-map f g c h)}
-        { y = c'}
-        ( eq-htpy-cone f g (cone-map f g c h) c' KLM))
+    cone-map f g c' ~ cone-map f g c ∘ postcomp D h
+  triangle-cone-cone D k = inv (inv-triangle-cone-cone D k)
 
   abstract
     is-equiv-up-pullback-up-pullback :
@@ -70,13 +72,14 @@ module _
       is-equiv h
     is-equiv-up-pullback-up-pullback up up' =
       is-equiv-is-equiv-postcomp h
-        ( λ D → is-equiv-right-factor-htpy
-          ( cone-map f g {C' = D} c')
-          ( cone-map f g c)
-          ( λ (k : D → C') → h ∘ k)
-          ( triangle-cone-cone D)
-          ( up D)
-          ( up' D))
+        ( λ D →
+          is-equiv-right-factor-htpy
+            ( cone-map f g c')
+            ( cone-map f g c)
+            ( postcomp D h)
+            ( triangle-cone-cone D)
+            ( up D)
+            ( up' D))
 
   abstract
     up-pullback-up-pullback-is-equiv :
@@ -87,7 +90,7 @@ module _
       is-equiv-comp-htpy
         ( cone-map f g c')
         ( cone-map f g c)
-        ( λ k → h ∘ k)
+        ( postcomp D h)
         ( triangle-cone-cone D)
         ( is-equiv-postcomp-is-equiv h is-equiv-h D)
         ( up D)
@@ -101,7 +104,7 @@ module _
       is-equiv-left-factor-htpy
         ( cone-map f g c')
         ( cone-map f g c)
-        ( λ k → h ∘ k)
+        ( postcomp D h)
         ( triangle-cone-cone D)
         ( up' D)
         ( is-equiv-postcomp-is-equiv h is-equiv-h D)
@@ -123,7 +126,6 @@ module _
     uniqueness-universal-property-pullback up C' c' =
       is-contr-equiv'
         ( Σ (C' → C) (λ h → cone-map f g c h ＝ c'))
-        ( equiv-tot
-          ( λ h → extensionality-cone f g (cone-map f g c h) c'))
+        ( equiv-tot (λ h → extensionality-cone f g (cone-map f g c h) c'))
         ( is-contr-map-is-equiv (up C') c')
 ```

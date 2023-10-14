@@ -22,15 +22,20 @@ open import foundation-core.whiskering-homotopies
 A triangle of maps
 
 ```text
- A ----> B
-  \     /
-   \   /
-    V V
-     X
+      top
+   A ----> B
+    \     /
+left \   / right
+      V V
+       X
 ```
 
 is said to commute if there is a homotopy between the map on the left and the
-composite map.
+composite map
+
+```text
+  left ~ right ∘ top.
+```
 
 ## Definitions
 
@@ -43,11 +48,11 @@ module _
 
   coherence-triangle-maps :
     (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  coherence-triangle-maps left right top = left ~ (right ∘ top)
+  coherence-triangle-maps left right top = left ~ right ∘ top
 
   coherence-triangle-maps' :
     (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
-  coherence-triangle-maps' left right top = (right ∘ top) ~ left
+  coherence-triangle-maps' left right top = right ∘ top ~ left
 ```
 
 ### Concatenation of commuting triangles of maps
@@ -91,4 +96,18 @@ module _
       ( precomp top W)
       ( precomp right W)
   precomp-coherence-triangle-maps' H W = htpy-precomp H W
+```
+
+### Coherences of commuting triangles of maps with fixed vertices
+
+```agda
+coherence-coherence-triangle-maps :
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (left : A → X) (right : B → X) (top : A → B)
+  (left' : A → X) (right' : B → X) (top' : A → B) →
+  coherence-triangle-maps left right top →
+  coherence-triangle-maps left' right' top' →
+  left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
+coherence-coherence-triangle-maps left right top left' right' top' c c' L R T =
+  c ∙h htpy-comp-horizontal T R ~ L ∙h c'
 ```

@@ -45,7 +45,7 @@ commutes.
 
 ## Definitions
 
-### Cones on cospans
+### Cones over cospans
 
 ```agda
 module _
@@ -72,7 +72,7 @@ module _
   coherence-square-cone = pr2 (pr2 c)
 ```
 
-### Dependent cones
+### Dependent cones over cospans
 
 ```agda
 cone-family :
@@ -91,7 +91,7 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Identifications of cones
+### Identifications of cones over cospans
 
 ```agda
 module _
@@ -152,17 +152,16 @@ module _
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
 ```
 
-### Precomposing cones
+### Precomposition cones over cospans
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X)
   where
 
   cone-map :
-    {l4 l5 : Level} {C : UU l4} {C' : UU l5} →
-    cone f g C → (C' → C) → cone f g C'
+    {C : UU l4} → cone f g C → {C' : UU l5} → (C' → C) → cone f g C'
   pr1 (cone-map c h) = vertical-map-cone f g c ∘ h
   pr1 (pr2 (cone-map c h)) = horizontal-map-cone f g c ∘ h
   pr2 (pr2 (cone-map c h)) = coherence-square-cone f g c ·r h
@@ -218,18 +217,19 @@ module _
       ( coherence-square-cone f g c)
 ```
 
-### The swapping function on cones
+### The swapping function on cones over cospans
 
 ```agda
 swap-cone :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) → cone f g C → cone g f C
 pr1 (swap-cone f g c) = horizontal-map-cone f g c
 pr1 (pr2 (swap-cone f g c)) = vertical-map-cone f g c
 pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 ```
 
-### Parallel cones
+### Parallel cones over cospans
 
 ```agda
 module _

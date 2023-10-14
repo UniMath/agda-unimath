@@ -89,7 +89,7 @@ abstract
 triangle-map-canonical-pullback-exponent :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
-  ( cone-map f g {C' = T} c) ~
+  ( cone-map f g c {T}) ~
   ( ( map-canonical-pullback-exponent f g T) ∘
     ( gap
       ( λ (h : T → A) → f ∘ h)

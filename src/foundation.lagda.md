@@ -316,6 +316,7 @@ open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public
+open import foundation.universal-property-limits-of-towers public
 open import foundation.universal-property-maybe public
 open import foundation.universal-property-propositional-truncation public
 open import foundation.universal-property-propositional-truncation-into-sets public
