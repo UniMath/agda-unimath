@@ -215,17 +215,17 @@ module _
   {l : Level} (R : Ring l)
   where
 
-  preserves-id-hom-group-of-units-hom-Ring :
+  preserves-identity-hom-group-of-units-hom-Ring :
     hom-group-of-units-hom-Ring R R (id-hom-Ring R) ＝
     id-hom-Group (group-of-units-Ring R)
-  preserves-id-hom-group-of-units-hom-Ring =
-    preserves-id-hom-core-hom-Monoid (multiplicative-monoid-Ring R)
+  preserves-identity-hom-group-of-units-hom-Ring =
+    preserves-identity-hom-core-hom-Monoid (multiplicative-monoid-Ring R)
 
 module _
   {l1 l2 l3 : Level} (R : Ring l1) (S : Ring l2) (T : Ring l3)
   where
 
-  preserves-comp-hom-group-of-units-hom-Ring :
+  preserves-composition-hom-group-of-units-hom-Ring :
     (g : hom-Ring S T) (f : hom-Ring R S) →
     hom-group-of-units-hom-Ring R T (comp-hom-Ring R S T g f) ＝
     comp-hom-Group
@@ -234,8 +234,8 @@ module _
       ( group-of-units-Ring T)
       ( hom-group-of-units-hom-Ring S T g)
       ( hom-group-of-units-hom-Ring R S f)
-  preserves-comp-hom-group-of-units-hom-Ring g f =
-    preserves-comp-hom-core-hom-Monoid
+  preserves-composition-hom-group-of-units-hom-Ring g f =
+    preserves-composition-hom-core-hom-Monoid
       ( multiplicative-monoid-Ring R)
       ( multiplicative-monoid-Ring S)
       ( multiplicative-monoid-Ring T)
@@ -247,17 +247,17 @@ module _
 
 ```agda
 group-of-units-ring-functor-Large-Precategory :
-  functor-Large-Precategory Ring-Large-Precategory Group-Large-Precategory id
+  functor-Large-Precategory id Ring-Large-Precategory Group-Large-Precategory
 obj-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory =
   group-of-units-Ring
 hom-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory {X = R} {Y = S} =
   hom-group-of-units-hom-Ring R S
-preserves-comp-functor-Large-Precategory
+preserves-composition-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory {X = R} {Y = S} {Z = T} =
-  preserves-comp-hom-group-of-units-hom-Ring R S T
-preserves-id-functor-Large-Precategory
+  preserves-composition-hom-group-of-units-hom-Ring R S T
+preserves-identity-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory {X = R} =
-  preserves-id-hom-group-of-units-hom-Ring R
+  preserves-identity-hom-group-of-units-hom-Ring R
 ```

@@ -9,6 +9,7 @@ module category-theory.natural-transformations-functors-large-categories where
 ```agda
 open import category-theory.functors-large-categories
 open import category-theory.large-categories
+open import category-theory.natural-transformations-functors-large-precategories
 
 open import foundation.action-on-identifications-functions
 open import foundation.identity-types
@@ -31,24 +32,6 @@ Given [large categories](category-theory.large-categories.md) `C` and `D`, a
 ## Definition
 
 ```agda
-coherence-square-Large-Category :
-  {αC : Level → Level}
-  {βC : Level → Level → Level}
-  (C : Large-Category αC βC)
-  {l1 l2 l3 l4 : Level}
-  {A : obj-Large-Category C l1}
-  {B : obj-Large-Category C l2}
-  {X : obj-Large-Category C l3}
-  {Y : obj-Large-Category C l4}
-  (top : hom-Large-Category C A B)
-  (left : hom-Large-Category C A X)
-  (right : hom-Large-Category C B Y)
-  (bottom : hom-Large-Category C X Y) →
-  UU (βC l1 l4)
-coherence-square-Large-Category C top left right bottom =
-  comp-hom-Large-Category C right top ＝
-  comp-hom-Large-Category C bottom left
-
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
@@ -58,30 +41,43 @@ module _
   (G : functor-Large-Category γG C D)
   where
 
-  hom-family-functor-Large-Category : UUω
-  hom-family-functor-Large-Category =
-    {l : Level} (X : obj-Large-Category C l) →
-    hom-Large-Category D
-      ( obj-functor-Large-Category C D F X)
-      ( obj-functor-Large-Category C D G X)
+  family-of-morphisms-functor-Large-Category : UUω
+  family-of-morphisms-functor-Large-Category =
+    family-of-morphisms-functor-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
 
-  record natural-transformation-Large-Category : UUω
-    where
-    constructor make-natural-transformation
-    field
-      hom-family-natural-transformation-Large-Category :
-        hom-family-functor-Large-Category
-      coherence-square-natural-transformation-Large-Category :
-        {l1 l2 : Level} {X : obj-Large-Category C l1}
-        {Y : obj-Large-Category C l2}
-        (f : hom-Large-Category C X Y) →
-        coherence-square-Large-Category D
-          ( hom-family-natural-transformation-Large-Category X)
-          ( hom-functor-Large-Category C D F f)
-          ( hom-functor-Large-Category C D G f)
-          ( hom-family-natural-transformation-Large-Category Y)
+  naturality-family-of-morphisms-functor-Large-Category :
+    family-of-morphisms-functor-Large-Category → UUω
+  naturality-family-of-morphisms-functor-Large-Category =
+    naturality-family-of-morphisms-functor-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
 
-  open natural-transformation-Large-Category public
+  natural-transformation-Large-Category : UUω
+  natural-transformation-Large-Category =
+    natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
+
+  hom-natural-transformation-Large-Category :
+    natural-transformation-Large-Category →
+    family-of-morphisms-functor-Large-Category
+  hom-natural-transformation-Large-Category =
+    hom-natural-transformation-Large-Precategory
+
+  naturality-natural-transformation-Large-Category :
+    (τ : natural-transformation-Large-Category) →
+    naturality-family-of-morphisms-functor-Large-Category
+      (hom-natural-transformation-Large-Category τ)
+  naturality-natural-transformation-Large-Category =
+    naturality-natural-transformation-Large-Precategory
 ```
 
 ## Properties
@@ -96,21 +92,33 @@ module _
   { βC βD : Level → Level → Level}
   ( C : Large-Category αC βC)
   ( D : Large-Category αD βD)
+  ( F : functor-Large-Category γF C D)
   where
 
+  hom-id-natural-transformation-Large-Category :
+    family-of-morphisms-functor-Large-Category C D F F
+  hom-id-natural-transformation-Large-Category =
+    hom-id-natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+
+  naturality-id-natural-transformation-Large-Category :
+    naturality-family-of-morphisms-functor-Large-Category C D F F
+      hom-id-natural-transformation-Large-Category
+  naturality-id-natural-transformation-Large-Category =
+    naturality-id-natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+
   id-natural-transformation-Large-Category :
-    ( F : functor-Large-Category γF C D) →
     natural-transformation-Large-Category C D F F
-  hom-family-natural-transformation-Large-Category
-    ( id-natural-transformation-Large-Category F) X =
-      id-hom-Large-Category D
-  coherence-square-natural-transformation-Large-Category
-    ( id-natural-transformation-Large-Category F) f =
-        ( right-unit-law-comp-hom-Large-Category D
-          ( hom-functor-Large-Category C D F f)) ∙
-        ( inv
-          ( left-unit-law-comp-hom-Large-Category D
-            ( hom-functor-Large-Category C D F f)))
+  id-natural-transformation-Large-Category =
+    id-natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
 ```
 
 ### Composition of natural transformations
@@ -124,41 +132,46 @@ module _
   (F : functor-Large-Category γF C D)
   (G : functor-Large-Category γG C D)
   (H : functor-Large-Category γH C D)
+  (τ : natural-transformation-Large-Category C D G H)
+  (σ : natural-transformation-Large-Category C D F G)
   where
 
+  hom-comp-natural-transformation-Large-Category :
+    family-of-morphisms-functor-Large-Category C D F H
+  hom-comp-natural-transformation-Large-Category =
+    hom-comp-natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
+      ( H)
+      ( τ)
+      ( σ)
+
+  naturality-comp-natural-transformation-Large-Category :
+    naturality-family-of-morphisms-functor-Large-Category C D F H
+      hom-comp-natural-transformation-Large-Category
+  naturality-comp-natural-transformation-Large-Category =
+    naturality-comp-natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
+      ( H)
+      ( τ)
+      ( σ)
+
   comp-natural-transformation-Large-Category :
-    natural-transformation-Large-Category C D G H →
-    natural-transformation-Large-Category C D F G →
     natural-transformation-Large-Category C D F H
-  hom-family-natural-transformation-Large-Category
-    ( comp-natural-transformation-Large-Category b a) X =
-      comp-hom-Large-Category D
-        ( hom-family-natural-transformation-Large-Category b X)
-        ( hom-family-natural-transformation-Large-Category a X)
-  coherence-square-natural-transformation-Large-Category
-    ( comp-natural-transformation-Large-Category b a) {X = X} {Y} f =
-    ( inv
-      ( associative-comp-hom-Large-Category D
-        ( hom-functor-Large-Category C D H f)
-        ( hom-family-natural-transformation-Large-Category b X)
-        ( hom-family-natural-transformation-Large-Category a X))) ∙
-    ( ap
-      ( comp-hom-Large-Category' D
-        ( hom-family-natural-transformation-Large-Category a X))
-      ( coherence-square-natural-transformation-Large-Category b f)) ∙
-    ( associative-comp-hom-Large-Category D
-      ( hom-family-natural-transformation-Large-Category b Y)
-      ( hom-functor-Large-Category C D G f)
-      ( hom-family-natural-transformation-Large-Category a X)) ∙
-    ( ap
-      ( comp-hom-Large-Category D
-        ( hom-family-natural-transformation-Large-Category b Y))
-      ( coherence-square-natural-transformation-Large-Category a f)) ∙
-    ( inv
-      ( associative-comp-hom-Large-Category D
-        ( hom-family-natural-transformation-Large-Category b Y)
-        ( hom-family-natural-transformation-Large-Category a Y)
-        ( hom-functor-Large-Category C D F f)))
+  comp-natural-transformation-Large-Category =
+    comp-natural-transformation-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
+      ( H)
+      ( τ)
+      ( σ)
 ```
 
 ## See also

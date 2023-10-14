@@ -34,13 +34,13 @@ Let `C` and `D` be two
   square commutes:
 
 ```text
-                       ϕ X₁ Y₁
-       hom X₁ (G Y₁) --------> hom (F X₁) Y₁
-            |                        |
-G g ∘ _ ∘ f |                        | g ∘ _ ∘ F f
-            |                        |
-            v                        v
-       hom X₂ (G Y₂) --------> hom (F X₂) Y₂
+                        ϕ X₁ Y₁
+         hom X₁ (G Y₁) --------> hom (F X₁) Y₁
+              |                        |
+  G g ∘ _ ∘ f |                        | g ∘ _ ∘ F f
+              |                        |
+              v                        v
+         hom X₂ (G Y₂) --------> hom (F X₂) Y₂
                        ϕ X₂ Y₂
 ```
 
@@ -55,41 +55,51 @@ adjoint** to `F` and write this as `F ⊣ G`.
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
-  {C : Large-Precategory αC βC}
-  {D : Large-Precategory αD βD}
+  (C : Large-Precategory αC βC)
+  (D : Large-Precategory αD βD)
   (F : functor-Large-Precategory γF C D)
   (G : functor-Large-Precategory γG D C)
   where
+
+  family-of-equivalences-adjoint-pair-Large-Precategory : UUω
+  family-of-equivalences-adjoint-pair-Large-Precategory =
+    {l1 l2 : Level} (X : obj-Large-Precategory C l1)
+    (Y : obj-Large-Precategory D l2) →
+    hom-Large-Precategory C X (obj-functor-Large-Precategory G Y) ≃
+    hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y
+
+  naturality-family-of-equivalences-adjoint-pair-Large-Precategory :
+    family-of-equivalences-adjoint-pair-Large-Precategory → UUω
+  naturality-family-of-equivalences-adjoint-pair-Large-Precategory e =
+    { l1 l2 l3 l4 : Level}
+    { X1 : obj-Large-Precategory C l1}
+    { X2 : obj-Large-Precategory C l2}
+    { Y1 : obj-Large-Precategory D l3}
+    { Y2 : obj-Large-Precategory D l4}
+    ( f : hom-Large-Precategory C X2 X1)
+    ( g : hom-Large-Precategory D Y1 Y2) →
+    coherence-square-maps
+      ( map-equiv (e X1 Y1))
+      ( λ h →
+        comp-hom-Large-Precategory C
+          ( comp-hom-Large-Precategory C
+            ( hom-functor-Large-Precategory G g)
+            ( h))
+          ( f))
+      ( λ h →
+        comp-hom-Large-Precategory D
+          ( comp-hom-Large-Precategory D g h)
+          ( hom-functor-Large-Precategory F f))
+      ( map-equiv (e X2 Y2))
 
   record is-adjoint-pair-Large-Precategory : UUω
     where
     field
       equiv-is-adjoint-pair-Large-Precategory :
-        {l1 l2 : Level} (X : obj-Large-Precategory C l1)
-        (Y : obj-Large-Precategory D l2) →
-        hom-Large-Precategory C X (obj-functor-Large-Precategory G Y) ≃
-        hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y
+        family-of-equivalences-adjoint-pair-Large-Precategory
       naturality-equiv-is-adjoint-pair-Large-Precategory :
-        { l1 l2 l3 l4 : Level}
-        { X1 : obj-Large-Precategory C l1}
-        { X2 : obj-Large-Precategory C l2}
-        { Y1 : obj-Large-Precategory D l3}
-        { Y2 : obj-Large-Precategory D l4}
-        ( f : hom-Large-Precategory C X2 X1)
-        ( g : hom-Large-Precategory D Y1 Y2) →
-        coherence-square-maps
-          ( map-equiv (equiv-is-adjoint-pair-Large-Precategory X1 Y1))
-          ( λ h →
-            comp-hom-Large-Precategory C
-              ( comp-hom-Large-Precategory C
-                ( hom-functor-Large-Precategory G g)
-                ( h))
-              ( f))
-          ( λ h →
-            comp-hom-Large-Precategory D
-              ( comp-hom-Large-Precategory D g h)
-              ( hom-functor-Large-Precategory F f))
-          ( map-equiv (equiv-is-adjoint-pair-Large-Precategory X2 Y2))
+        naturality-family-of-equivalences-adjoint-pair-Large-Precategory
+          equiv-is-adjoint-pair-Large-Precategory
 
   open is-adjoint-pair-Large-Precategory public
 
@@ -161,15 +171,15 @@ module _
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
-  {C : Large-Precategory αC βC}
-  {D : Large-Precategory αD βD}
+  (C : Large-Precategory αC βC)
+  (D : Large-Precategory αD βD)
   (G : functor-Large-Precategory γG D C)
   (F : functor-Large-Precategory γF C D)
   where
 
   is-left-adjoint-functor-Large-Precategory : UUω
   is-left-adjoint-functor-Large-Precategory =
-    is-adjoint-pair-Large-Precategory F G
+    is-adjoint-pair-Large-Precategory C D F G
 ```
 
 ### The predicate of being a right adjoint
@@ -178,15 +188,15 @@ module _
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
-  {C : Large-Precategory αC βC}
-  {D : Large-Precategory αD βD}
+  (C : Large-Precategory αC βC)
+  (D : Large-Precategory αD βD)
   (F : functor-Large-Precategory γF C D)
   (G : functor-Large-Precategory γG D C)
   where
 
   is-right-adjoint-functor-Large-Precategory : UUω
   is-right-adjoint-functor-Large-Precategory =
-    is-adjoint-pair-Large-Precategory F G
+    is-adjoint-pair-Large-Precategory C D F G
 ```
 
 ### Adjunctions of large precategories
@@ -217,7 +227,7 @@ module _
           ( D)
           ( C)
       is-adjoint-pair-Adjunction-Large-Precategory :
-        is-adjoint-pair-Large-Precategory
+        is-adjoint-pair-Large-Precategory C D
           left-adjoint-Adjunction-Large-Precategory
           right-adjoint-Adjunction-Large-Precategory
 
@@ -317,7 +327,7 @@ module _
       ( obj-left-adjoint-Adjunction-Large-Precategory FG X)
       ( Y)
   map-equiv-is-adjoint-pair-Adjunction-Large-Precategory FG =
-    map-equiv-is-adjoint-pair-Large-Precategory
+    map-equiv-is-adjoint-pair-Large-Precategory C D
       ( left-adjoint-Adjunction-Large-Precategory FG)
       ( right-adjoint-Adjunction-Large-Precategory FG)
       ( is-adjoint-pair-Adjunction-Large-Precategory FG)
@@ -399,7 +409,7 @@ module _
           ( f))
       ( map-inv-equiv-is-adjoint-pair-Adjunction-Large-Precategory FG X2 Y2)
   naturality-inv-equiv-is-adjoint-pair-Adjunction-Large-Precategory FG =
-    naturality-inv-equiv-is-adjoint-pair-Large-Precategory
+    naturality-inv-equiv-is-adjoint-pair-Large-Precategory C D
       ( left-adjoint-Adjunction-Large-Precategory FG)
       ( right-adjoint-Adjunction-Large-Precategory FG)
       ( is-adjoint-pair-Adjunction-Large-Precategory FG)

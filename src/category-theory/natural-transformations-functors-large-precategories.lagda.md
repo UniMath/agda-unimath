@@ -119,8 +119,8 @@ module _
 module _
   {αC αD γF γG γH : Level → Level}
   {βC βD : Level → Level → Level}
-  {C : Large-Precategory αC βC}
-  {D : Large-Precategory αD βD}
+  (C : Large-Precategory αC βC)
+  (D : Large-Precategory αD βD)
   (F : functor-Large-Precategory γF C D)
   (G : functor-Large-Precategory γG C D)
   (H : functor-Large-Precategory γH C D)
