@@ -7,6 +7,7 @@ module category-theory.natural-transformations-functors-large-precategories wher
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.commuting-squares-of-morphisms-in-large-precategories
 open import category-theory.functors-large-precategories
 open import category-theory.large-precategories
 
@@ -31,24 +32,6 @@ a **natural transformation** from a
 ## Definition
 
 ```agda
-coherence-square-Large-Precategory :
-  {αC : Level → Level}
-  {βC : Level → Level → Level}
-  (C : Large-Precategory αC βC)
-  {l1 l2 l3 l4 : Level}
-  {A : obj-Large-Precategory C l1}
-  {B : obj-Large-Precategory C l2}
-  {X : obj-Large-Precategory C l3}
-  {Y : obj-Large-Precategory C l4}
-  (top : hom-Large-Precategory C A B)
-  (left : hom-Large-Precategory C A X)
-  (right : hom-Large-Precategory C B Y)
-  (bottom : hom-Large-Precategory C X Y) →
-  UU (βC l1 l4)
-coherence-square-Large-Precategory C top left right bottom =
-  comp-hom-Large-Precategory C right top ＝
-  comp-hom-Large-Precategory C bottom left
-
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
@@ -75,7 +58,7 @@ module _
         {l1 l2 : Level} {X : obj-Large-Precategory C l1}
         {Y : obj-Large-Precategory C l2}
         (f : hom-Large-Precategory C X Y) →
-        coherence-square-Large-Precategory D
+        coherence-square-hom-Large-Precategory D
           ( hom-family-natural-transformation-Large-Precategory X)
           ( hom-functor-Large-Precategory F f)
           ( hom-functor-Large-Precategory G f)
@@ -106,11 +89,11 @@ module _
       id-hom-Large-Precategory D
   coherence-square-natural-transformation-Large-Precategory
     ( id-natural-transformation-Large-Precategory F) f =
-        ( right-unit-law-comp-hom-Large-Precategory D
-          ( hom-functor-Large-Precategory F f)) ∙
-        ( inv
-          ( left-unit-law-comp-hom-Large-Precategory D
-            ( hom-functor-Large-Precategory F f)))
+    ( left-unit-law-comp-hom-Large-Precategory D
+      ( hom-functor-Large-Precategory F f)) ∙
+    ( inv
+      ( right-unit-law-comp-hom-Large-Precategory D
+        ( hom-functor-Large-Precategory F f)))
 ```
 
 ### Composition of natural transformations
@@ -137,19 +120,10 @@ module _
         ( hom-family-natural-transformation-Large-Precategory a X)
   coherence-square-natural-transformation-Large-Precategory
     ( comp-natural-transformation-Large-Precategory b a) {X = X} {Y} f =
-    ( inv
-      ( associative-comp-hom-Large-Precategory D
-        ( hom-functor-Large-Precategory H f)
-        ( hom-family-natural-transformation-Large-Precategory b X)
-        ( hom-family-natural-transformation-Large-Precategory a X))) ∙
-    ( ap
-      ( comp-hom-Large-Precategory' D
-        ( hom-family-natural-transformation-Large-Precategory a X))
-      ( coherence-square-natural-transformation-Large-Precategory b f)) ∙
     ( associative-comp-hom-Large-Precategory D
-      ( hom-family-natural-transformation-Large-Precategory b Y)
-      ( hom-functor-Large-Precategory G f)
-      ( hom-family-natural-transformation-Large-Precategory a X)) ∙
+        ( hom-family-natural-transformation-Large-Precategory b Y)
+        ( hom-family-natural-transformation-Large-Precategory a Y)
+        ( hom-functor-Large-Precategory F f)) ∙
     ( ap
       ( comp-hom-Large-Precategory D
         ( hom-family-natural-transformation-Large-Precategory b Y))
@@ -157,8 +131,16 @@ module _
     ( inv
       ( associative-comp-hom-Large-Precategory D
         ( hom-family-natural-transformation-Large-Precategory b Y)
-        ( hom-family-natural-transformation-Large-Precategory a Y)
-        ( hom-functor-Large-Precategory F f)))
+        ( hom-functor-Large-Precategory G f)
+        ( hom-family-natural-transformation-Large-Precategory a X))) ∙
+    ( ap
+      ( comp-hom-Large-Precategory' D
+        ( hom-family-natural-transformation-Large-Precategory a X))
+      ( coherence-square-natural-transformation-Large-Precategory b f)) ∙
+    ( associative-comp-hom-Large-Precategory D
+      ( hom-functor-Large-Precategory H f)
+      ( hom-family-natural-transformation-Large-Precategory b X)
+      ( hom-family-natural-transformation-Large-Precategory a X))
 ```
 
 ## See also
