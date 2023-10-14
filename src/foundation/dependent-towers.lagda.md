@@ -12,8 +12,6 @@ open import elementary-number-theory.natural-numbers
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.unit-type
-open import foundation.towers
 open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
@@ -21,6 +19,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.iterating-functions
 open import foundation.structure-identity-principle
+open import foundation.towers
 open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
@@ -50,7 +49,7 @@ giving a sequential diagram of maps that extend infinitely to the left:
 
 ## Definitions
 
-## Dependent towers of types
+### Dependent towers of types
 
 ```agda
 sequence-map-dependent-tower :

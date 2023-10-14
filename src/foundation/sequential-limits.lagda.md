@@ -150,7 +150,8 @@ module _
 
   Eq-standard-sequential-limit : (s t : standard-sequential-limit A) → UU l
   Eq-standard-sequential-limit s t =
-    Σ ( sequence-standard-sequential-limit A s ~ sequence-standard-sequential-limit A t)
+    Σ ( sequence-standard-sequential-limit A s ~
+        sequence-standard-sequential-limit A t)
       ( λ H →
         coherence-square-homotopies
           ( coherence-standard-sequential-limit A s)
@@ -164,7 +165,8 @@ module _
   pr2 (refl-Eq-standard-sequential-limit s) = right-unit-htpy
 
   Eq-eq-standard-sequential-limit :
-    (s t : standard-sequential-limit A) → s ＝ t → Eq-standard-sequential-limit s t
+    (s t : standard-sequential-limit A) →
+    s ＝ t → Eq-standard-sequential-limit s t
   Eq-eq-standard-sequential-limit s .s refl =
     refl-Eq-standard-sequential-limit s
 
@@ -178,21 +180,24 @@ module _
       ( is-contr-total-Eq-Π _ (λ n → is-contr-total-path (pr2 s n ∙ refl)))
 
   is-equiv-Eq-eq-standard-sequential-limit :
-    (s t : standard-sequential-limit A) → is-equiv (Eq-eq-standard-sequential-limit s t)
+    (s t : standard-sequential-limit A) →
+    is-equiv (Eq-eq-standard-sequential-limit s t)
   is-equiv-Eq-eq-standard-sequential-limit s =
     fundamental-theorem-id
       ( is-contr-total-Eq-standard-sequential-limit s)
       ( Eq-eq-standard-sequential-limit s)
 
   extensionality-standard-sequential-limit :
-    (s t : standard-sequential-limit A) → (s ＝ t) ≃ Eq-standard-sequential-limit s t
+    (s t : standard-sequential-limit A) →
+    (s ＝ t) ≃ Eq-standard-sequential-limit s t
   pr1 (extensionality-standard-sequential-limit s t) =
     Eq-eq-standard-sequential-limit s t
   pr2 (extensionality-standard-sequential-limit s t) =
     is-equiv-Eq-eq-standard-sequential-limit s t
 
   eq-Eq-standard-sequential-limit :
-    (s t : standard-sequential-limit A) → Eq-standard-sequential-limit s t → s ＝ t
+    (s t : standard-sequential-limit A) →
+    Eq-standard-sequential-limit s t → s ＝ t
   eq-Eq-standard-sequential-limit s t =
     map-inv-equiv (extensionality-standard-sequential-limit s t)
 ```
@@ -255,7 +260,8 @@ module _
 
   is-sequential-limit-universal-property-sequential-limit :
     (c : cone-tower A X) →
-    ({l : Level} → universal-property-sequential-limit l A c) → is-sequential-limit A c
+    ({l : Level} → universal-property-sequential-limit l A c) →
+    is-sequential-limit A c
   is-sequential-limit-universal-property-sequential-limit c =
     is-equiv-universal-property-sequential-limit-universal-property-sequential-limit
       ( cone-standard-sequential-limit A)

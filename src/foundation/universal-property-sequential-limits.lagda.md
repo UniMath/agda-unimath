@@ -204,10 +204,13 @@ module _
         ( is-property-is-equiv)
         ( map-universal-property-sequential-limit A c up-c c')
         ( htpy-cone-map-universal-property-sequential-limit A c up-c c')
-        ( is-equiv-universal-property-sequential-limit-universal-property-sequential-limit c c'
+        ( is-equiv-universal-property-sequential-limit-universal-property-sequential-limit
+          ( c)
+          ( c')
           ( map-universal-property-sequential-limit A c up-c c')
           ( htpy-cone-map-universal-property-sequential-limit A c up-c c')
-          up-c up-c')
+          ( up-c)
+          ( up-c'))
 ```
 
 ## See also
