@@ -20,6 +20,8 @@ open import foundation.truncation-levels
 open import foundation.universe-levels
 
 open import group-theory.groups
+open import group-theory.monoids
+open import group-theory.semigroups
 
 open import higher-group-theory.higher-groups
 
@@ -157,21 +159,34 @@ module _
   right-inverse-law-mul-Concrete-Group =
     right-inverse-law-mul-∞-Group ∞-group-Concrete-Group
 
+  has-associative-mul-Concrete-Group :
+    has-associative-mul-Set set-Concrete-Group
+  pr1 has-associative-mul-Concrete-Group = mul-Concrete-Group
+  pr2 has-associative-mul-Concrete-Group = associative-mul-Concrete-Group
+
+  semigroup-Concrete-Group : Semigroup l
+  pr1 semigroup-Concrete-Group = set-Concrete-Group
+  pr2 semigroup-Concrete-Group = has-associative-mul-Concrete-Group
+
+  is-unital-Concrete-Group : is-unital-Semigroup semigroup-Concrete-Group
+  pr1 is-unital-Concrete-Group = unit-Concrete-Group
+  pr1 (pr2 is-unital-Concrete-Group) = left-unit-law-mul-Concrete-Group
+  pr2 (pr2 is-unital-Concrete-Group) = right-unit-law-mul-Concrete-Group
+
+  monoid-Concrete-Group : Monoid l
+  pr1 monoid-Concrete-Group = semigroup-Concrete-Group
+  pr2 monoid-Concrete-Group = is-unital-Concrete-Group
+
+  is-group-Concrete-Group :
+    is-group semigroup-Concrete-Group
+  pr1 is-group-Concrete-Group = is-unital-Concrete-Group
+  pr1 (pr2 is-group-Concrete-Group) = inv-Concrete-Group
+  pr1 (pr2 (pr2 is-group-Concrete-Group)) = left-inverse-law-mul-Concrete-Group
+  pr2 (pr2 (pr2 is-group-Concrete-Group)) = right-inverse-law-mul-Concrete-Group
+
   abstract-group-Concrete-Group : Group l
-  pr1 (pr1 abstract-group-Concrete-Group) = set-Concrete-Group
-  pr1 (pr2 (pr1 abstract-group-Concrete-Group)) = mul-Concrete-Group
-  pr2 (pr2 (pr1 abstract-group-Concrete-Group)) = associative-mul-Concrete-Group
-  pr1 (pr1 (pr2 abstract-group-Concrete-Group)) = unit-Concrete-Group
-  pr1 (pr2 (pr1 (pr2 abstract-group-Concrete-Group))) =
-    left-unit-law-mul-Concrete-Group
-  pr2 (pr2 (pr1 (pr2 abstract-group-Concrete-Group))) =
-    right-unit-law-mul-Concrete-Group
-  pr1 (pr2 (pr2 abstract-group-Concrete-Group)) =
-    inv-Concrete-Group
-  pr1 (pr2 (pr2 (pr2 abstract-group-Concrete-Group))) =
-    left-inverse-law-mul-Concrete-Group
-  pr2 (pr2 (pr2 (pr2 abstract-group-Concrete-Group))) =
-    right-inverse-law-mul-Concrete-Group
+  pr1 abstract-group-Concrete-Group = semigroup-Concrete-Group
+  pr2 abstract-group-Concrete-Group = is-group-Concrete-Group
 
   op-abstract-group-Concrete-Group : Group l
   pr1 (pr1 op-abstract-group-Concrete-Group) = set-Concrete-Group
