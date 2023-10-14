@@ -28,7 +28,7 @@ Directed-Graph-Fin = Σ ℕ (λ V → Fin V → Fin V → ℕ)
 
 - [Digraph](https://ncatlab.org/nlab/show/digraph) at nlab
 - [Directed graph](https://ncatlab.org/nlab/show/directed+graph) at nlab
-- [Directed graph](https://www.wikidata.org/wiki/Q1137726) on Wikdiata
+- [Directed graph](https://www.wikidata.org/entity/Q1137726) on Wikdiata
 - [Directed graph](https://en.wikipedia.org/wiki/Directed_graph) at Wikipedia
 - [Directed graph](https://mathworld.wolfram.com/DirectedGraph.html) at Wolfram
   Mathworld

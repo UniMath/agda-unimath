@@ -25,6 +25,7 @@ open import group-theory.central-elements-monoids public
 open import group-theory.central-elements-semigroups public
 open import group-theory.centralizer-subgroups public
 open import group-theory.commutative-monoids public
+open import group-theory.commutator-subgroups public
 open import group-theory.commutators-of-elements-groups public
 open import group-theory.commuting-elements-groups public
 open import group-theory.commuting-elements-monoids public
@@ -153,6 +154,7 @@ open import group-theory.subgroups public
 open import group-theory.subgroups-abelian-groups public
 open import group-theory.subgroups-concrete-groups public
 open import group-theory.subgroups-generated-by-elements-groups public
+open import group-theory.subgroups-generated-by-families-of-elements-groups public
 open import group-theory.subgroups-generated-by-subsets-groups public
 open import group-theory.submonoids public
 open import group-theory.submonoids-commutative-monoids public
