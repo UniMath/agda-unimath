@@ -141,7 +141,7 @@ module _
 
 ## Properties
 
-### Characterization equality in the standard sequential limit
+### Characterization of equality in the standard sequential limit
 
 ```agda
 module _
