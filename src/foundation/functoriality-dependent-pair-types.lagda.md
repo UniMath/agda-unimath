@@ -67,7 +67,11 @@ module _
 
   map-standard-pullback-tot-cone-cone-fam-right-factor :
     Σ ( standard-pullback f g)
-      ( λ t → standard-pullback ((tr PX (π₃ t)) ∘ (f' (π₁ t))) (g' (π₂ t))) →
+      ( λ t →
+        standard-pullback
+          ( tr PX (coherence-square-standard-pullback t) ∘
+            f' (vertical-map-standard-pullback t))
+          ( g' (horizontal-map-standard-pullback t))) →
     Σ ( Σ A PA)
       ( λ aa' → Σ (Σ B (λ b → Id (f (pr1 aa')) (g b)))
         ( λ bα → Σ (PB (pr1 bα))
@@ -95,12 +99,17 @@ module _
 
   map-standard-pullback-tot-cone-cone-family :
     Σ ( standard-pullback f g)
-      ( λ t → standard-pullback ((tr PX (π₃ t)) ∘ (f' (π₁ t))) (g' (π₂ t))) →
+      ( λ t →
+        standard-pullback
+          ( tr PX (coherence-square-standard-pullback t) ∘
+            f' (vertical-map-standard-pullback t))
+          ( g' (horizontal-map-standard-pullback t))) →
     standard-pullback (map-Σ PX f f') (map-Σ PX g g')
   map-standard-pullback-tot-cone-cone-family =
-    ( tot (λ aa' →
-      ( tot (λ bb' → eq-pair-Σ')) ∘
-      ( map-standard-pullback-tot-cone-cone-fam-left-factor aa'))) ∘
+    ( tot
+      (λ aa' →
+        ( tot (λ bb' → eq-pair-Σ')) ∘
+        ( map-standard-pullback-tot-cone-cone-fam-left-factor aa'))) ∘
     ( map-standard-pullback-tot-cone-cone-fam-right-factor)
 
   is-equiv-map-standard-pullback-tot-cone-cone-family :

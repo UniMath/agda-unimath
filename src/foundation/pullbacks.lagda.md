@@ -62,7 +62,7 @@ exponent-cone :
   {l1 l2 l3 l4 l5 : Level}
   {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} (T : UU l5)
   (f : A → X) (g : B → X) (c : cone f g C) →
-  cone (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) (T → C)
+  cone (postcomp T f) (postcomp T g) (T → C)
 pr1 (exponent-cone T f g c) h = vertical-map-cone f g c ∘ h
 pr1 (pr2 (exponent-cone T f g c)) h = horizontal-map-cone f g c ∘ h
 pr2 (pr2 (exponent-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
@@ -71,7 +71,7 @@ map-standard-pullback-exponent :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   (T : UU l4) →
-  standard-pullback (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) →
+  standard-pullback (postcomp T f) (postcomp T g) →
   cone f g T
 map-standard-pullback-exponent f g T =
   tot (λ p → tot (λ q → htpy-eq))
@@ -92,8 +92,8 @@ triangle-map-standard-pullback-exponent :
   ( cone-map f g c {T}) ~
   ( ( map-standard-pullback-exponent f g T) ∘
     ( gap
-      ( λ (h : T → A) → f ∘ h)
-      ( λ (h : T → B) → g ∘ h)
+      ( postcomp T f)
+      ( postcomp T g)
       ( exponent-cone T f g c)))
 triangle-map-standard-pullback-exponent
   {A = A} {B} T f g c h =
@@ -107,8 +107,8 @@ abstract
     (f : A → X) (g : B → X) (c : cone f g C) → is-pullback f g c →
     (T : UU l5) →
     is-pullback
-      ( λ (h : T → A) → f ∘ h)
-      ( λ (h : T → B) → g ∘ h)
+      ( postcomp T f)
+      ( postcomp T g)
       ( exponent-cone T f g c)
   is-pullback-exponent-is-pullback f g c is-pb-c T =
     is-equiv-right-factor-htpy
@@ -124,8 +124,8 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) (c : cone f g C) →
     ((l5 : Level) (T : UU l5) → is-pullback
-      ( λ (h : T → A) → f ∘ h)
-      ( λ (h : T → B) → g ∘ h)
+      ( postcomp T f)
+      ( postcomp T g)
       ( exponent-cone T f g c)) →
     is-pullback f g c
   is-pullback-is-pullback-exponent f g c is-pb-exp =
@@ -133,7 +133,7 @@ abstract
       ( λ T → is-equiv-comp-htpy
         ( cone-map f g c)
         ( map-standard-pullback-exponent f g T)
-        ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
+        ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
         ( triangle-map-standard-pullback-exponent T f g c)
         ( is-pb-exp _ T)
         ( is-equiv-map-standard-pullback-exponent f g T))
@@ -449,8 +449,8 @@ htpy-eq-square-refl-htpy f g c c' =
 comp-htpy-eq-square-refl-htpy :
   {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) (c c' : cone f g C) →
-  ( (htpy-eq-square-refl-htpy f g c c') ∘
-    (concat (tr-tr-refl-htpy-cone f g c) c')) ~
+  ( htpy-eq-square-refl-htpy f g c c' ∘
+    concat (tr-tr-refl-htpy-cone f g c) c') ~
   ( htpy-eq-square f g c c')
 comp-htpy-eq-square-refl-htpy f g c c' =
   is-section-map-inv-is-equiv-precomp-Π-is-equiv
@@ -463,8 +463,9 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) (c' : cone f g' C) →
-    let tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
-        tr-tr-c = tr (λ y → cone f y C) (eq-htpy Hg) tr-c
+    let
+      tr-c = tr (λ x → cone x g C) (eq-htpy (refl-htpy {f = f})) c
+      tr-tr-c = tr (λ y → cone f y C) (eq-htpy Hg) tr-c
     in
     tr-tr-c ＝ c' → htpy-parallel-cone (refl-htpy' f) Hg c c'
   htpy-parallel-cone-eq' {C = C} f {g} =
