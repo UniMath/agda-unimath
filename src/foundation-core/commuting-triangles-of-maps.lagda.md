@@ -101,13 +101,13 @@ module _
 ### Coherences of commuting triangles of maps with fixed vertices
 
 ```agda
-coherence-coherence-triangle-maps :
+coherence-htpy-triangle-maps :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   (left : A → X) (right : B → X) (top : A → B)
   (left' : A → X) (right' : B → X) (top' : A → B) →
   coherence-triangle-maps left right top →
   coherence-triangle-maps left' right' top' →
   left ~ left' → right ~ right' → top ~ top' → UU (l1 ⊔ l2)
-coherence-coherence-triangle-maps left right top left' right' top' c c' L R T =
+coherence-htpy-triangle-maps left right top left' right' top' c c' L R T =
   c ∙h htpy-comp-horizontal T R ~ L ∙h c'
 ```
