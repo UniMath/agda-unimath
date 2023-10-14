@@ -100,6 +100,9 @@ module _
 
 ### Coherences of commuting triangles of maps with fixed vertices
 
+This or its opposite should be the coherence in the characterization of
+identifications of commuting triangles of maps with fixed end vertices.
+
 ```agda
 coherence-htpy-triangle-maps :
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}

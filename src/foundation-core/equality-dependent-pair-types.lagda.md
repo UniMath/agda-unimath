@@ -70,7 +70,7 @@ module _
 
   eq-pair-Σ-eq-pr2 :
     {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
-  eq-pair-Σ-eq-pr2 {x} = ap {B = Σ A B} (x ,_)
+  eq-pair-Σ-eq-pr2 {x} = ap {B = Σ A B} (pair x)
 
   is-retraction-pair-eq-Σ :
     (s t : Σ A B) →
