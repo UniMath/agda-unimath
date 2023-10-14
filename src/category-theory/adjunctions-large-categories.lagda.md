@@ -7,6 +7,7 @@ module category-theory.adjunctions-large-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.adjunctions-large-precategories
 open import category-theory.functors-large-categories
 open import category-theory.large-categories
 open import category-theory.natural-transformations-functors-large-categories
@@ -53,65 +54,41 @@ adjoint** to `F` and write this as `F ⊣ G`.
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
-  {C : Large-Category αC βC}
-  {D : Large-Category αD βD}
-  (F : functor-Large-Category C D γF)
-  (G : functor-Large-Category D C γG)
+  (C : Large-Category αC βC)
+  (D : Large-Category αD βD)
+  (F : functor-Large-Category γF C D)
+  (G : functor-Large-Category γG D C)
   where
 
-  record is-adjoint-pair-Large-Category : UUω
-    where
-    field
-      equiv-is-adjoint-pair-Large-Category :
-        {l1 l2 : Level} (X : obj-Large-Category C l1)
-        (Y : obj-Large-Category D l2) →
-        hom-Large-Category C X (obj-functor-Large-Category G Y) ≃
-        hom-Large-Category D (obj-functor-Large-Category F X) Y
-      naturality-equiv-is-adjoint-pair-Large-Category :
-        { l1 l2 l3 l4 : Level}
-        { X1 : obj-Large-Category C l1}
-        { X2 : obj-Large-Category C l2}
-        { Y1 : obj-Large-Category D l3}
-        { Y2 : obj-Large-Category D l4}
-        ( f : hom-Large-Category C X2 X1)
-        ( g : hom-Large-Category D Y1 Y2) →
-        coherence-square-maps
-          ( map-equiv (equiv-is-adjoint-pair-Large-Category X1 Y1))
-          ( λ h →
-            comp-hom-Large-Category C
-              ( comp-hom-Large-Category C
-                ( hom-functor-Large-Category G g)
-                ( h))
-              ( f))
-          ( λ h →
-            comp-hom-Large-Category D
-              ( comp-hom-Large-Category D g h)
-              ( hom-functor-Large-Category F f))
-          ( map-equiv (equiv-is-adjoint-pair-Large-Category X2 Y2))
-
-  open is-adjoint-pair-Large-Category public
+  is-adjoint-pair-Large-Category : UUω
+  is-adjoint-pair-Large-Category =
+    is-adjoint-pair-Large-Precategory
+      ( large-precategory-Large-Category C)
+      ( large-precategory-Large-Category D)
+      ( F)
+      ( G)
 
   map-equiv-is-adjoint-pair-Large-Category :
     (H : is-adjoint-pair-Large-Category) {l1 l2 : Level}
     (X : obj-Large-Category C l1) (Y : obj-Large-Category D l2) →
-    hom-Large-Category C X (obj-functor-Large-Category G Y) →
-    hom-Large-Category D (obj-functor-Large-Category F X) Y
+    hom-Large-Category C X (obj-functor-Large-Category D C G Y) →
+    hom-Large-Category D (obj-functor-Large-Category C D F X) Y
   map-equiv-is-adjoint-pair-Large-Category H X Y =
     map-equiv (equiv-is-adjoint-pair-Large-Category H X Y)
 
   inv-equiv-is-adjoint-pair-Large-Category :
     (H : is-adjoint-pair-Large-Category) {l1 l2 : Level}
     (X : obj-Large-Category C l1) (Y : obj-Large-Category D l2) →
-    hom-Large-Category D (obj-functor-Large-Category F X) Y ≃
-    hom-Large-Category C X (obj-functor-Large-Category G Y)
+    hom-Large-Category D (obj-functor-Large-Category C D F X) Y ≃
+    hom-Large-Category C X (obj-functor-Large-Category D C G Y)
   inv-equiv-is-adjoint-pair-Large-Category H X Y =
     inv-equiv (equiv-is-adjoint-pair-Large-Category H X Y)
 
   map-inv-equiv-is-adjoint-pair-Large-Category :
     (H : is-adjoint-pair-Large-Category) {l1 l2 : Level}
     (X : obj-Large-Category C l1) (Y : obj-Large-Category D l2) →
-    hom-Large-Category D (obj-functor-Large-Category F X) Y →
-    hom-Large-Category C X (obj-functor-Large-Category G Y)
+    hom-Large-Category D (obj-functor-Large-Category C D F X) Y →
+    hom-Large-Category C X (obj-functor-Large-Category D C G Y)
   map-inv-equiv-is-adjoint-pair-Large-Category H X Y =
     map-inv-equiv (equiv-is-adjoint-pair-Large-Category H X Y)
 
@@ -129,10 +106,10 @@ module _
       ( λ h →
         comp-hom-Large-Category D
           ( comp-hom-Large-Category D g h)
-          ( hom-functor-Large-Category F f))
+          ( hom-functor-Large-Category C D F f))
       ( λ h →
         comp-hom-Large-Category C
-          ( comp-hom-Large-Category C (hom-functor-Large-Category G g) h)
+          ( comp-hom-Large-Category C (hom-functor-Large-Category D C G g) h)
           ( f))
       ( map-inv-equiv-is-adjoint-pair-Large-Category H X2 Y2)
   naturality-inv-equiv-is-adjoint-pair-Large-Category
@@ -142,13 +119,13 @@ module _
       ( λ h →
         comp-hom-Large-Category C
           ( comp-hom-Large-Category C
-            ( hom-functor-Large-Category G g)
+            ( hom-functor-Large-Category D C G g)
             ( h))
           ( f))
       ( λ h →
         comp-hom-Large-Category D
           ( comp-hom-Large-Category D g h)
-          ( hom-functor-Large-Category F f))
+          ( hom-functor-Large-Category C D F f))
       ( equiv-is-adjoint-pair-Large-Category H X2 Y2)
       ( naturality-equiv-is-adjoint-pair-Large-Category H f g)
 ```
@@ -161,13 +138,13 @@ module _
   {βC βD : Level → Level → Level}
   {C : Large-Category αC βC}
   {D : Large-Category αD βD}
-  (G : functor-Large-Category D C γG)
-  (F : functor-Large-Category C D γF)
+  (G : functor-Large-Category γG D C)
+  (F : functor-Large-Category γF C D)
   where
 
   is-left-adjoint-functor-Large-Category : UUω
   is-left-adjoint-functor-Large-Category =
-    is-adjoint-pair-Large-Category F G
+    is-adjoint-pair-Large-Category C D F G
 ```
 
 ### The predicate of being a right adjoint
@@ -178,13 +155,13 @@ module _
   {βC βD : Level → Level → Level}
   {C : Large-Category αC βC}
   {D : Large-Category αD βD}
-  (F : functor-Large-Category C D γF)
-  (G : functor-Large-Category D C γG)
+  (F : functor-Large-Category γF C D)
+  (G : functor-Large-Category γG D C)
   where
 
   is-right-adjoint-functor-Large-Category : UUω
   is-right-adjoint-functor-Large-Category =
-    is-adjoint-pair-Large-Category F G
+    is-adjoint-pair-Large-Category C D F G
 ```
 
 ### Adjunctions of large precategories
@@ -202,15 +179,19 @@ module _
       level-left-adjoint-Adjunction-Large-Category :
         Level → Level
       left-adjoint-Adjunction-Large-Category :
-        functor-Large-Category C D
-          level-left-adjoint-Adjunction-Large-Category
+        functor-Large-Category
+          ( level-left-adjoint-Adjunction-Large-Category)
+          ( C)
+          ( D)
       level-right-adjoint-Adjunction-Large-Category :
         Level → Level
       right-adjoint-Adjunction-Large-Category :
-        functor-Large-Category D C
-          level-right-adjoint-Adjunction-Large-Category
+        functor-Large-Category
+          ( level-right-adjoint-Adjunction-Large-Category)
+          ( D)
+          ( C)
       is-adjoint-pair-Adjunction-Large-Category :
-        is-adjoint-pair-Large-Category
+        is-adjoint-pair-Large-Category C D
           left-adjoint-Adjunction-Large-Category
           right-adjoint-Adjunction-Large-Category
 
@@ -222,7 +203,7 @@ module _
     obj-Large-Category D
       ( level-left-adjoint-Adjunction-Large-Category FG l)
   obj-left-adjoint-Adjunction-Large-Category FG =
-    obj-functor-Large-Category
+    obj-functor-Large-Category C D
       ( left-adjoint-Adjunction-Large-Category FG)
 
   hom-left-adjoint-Adjunction-Large-Category :
@@ -235,7 +216,7 @@ module _
       ( obj-left-adjoint-Adjunction-Large-Category FG X)
       ( obj-left-adjoint-Adjunction-Large-Category FG Y)
   hom-left-adjoint-Adjunction-Large-Category FG =
-    hom-functor-Large-Category
+    hom-functor-Large-Category C D
       ( left-adjoint-Adjunction-Large-Category FG)
 
   preserves-identity-left-adjoint-Adjunction-Large-Category :
@@ -246,7 +227,7 @@ module _
       ( id-hom-Large-Category C {X = X}) ＝
     id-hom-Large-Category D
   preserves-identity-left-adjoint-Adjunction-Large-Category FG X =
-    preserves-identity-functor-Large-Category
+    preserves-identity-functor-Large-Category C D
       ( left-adjoint-Adjunction-Large-Category FG)
 
   obj-right-adjoint-Adjunction-Large-Category :
@@ -256,7 +237,7 @@ module _
     obj-Large-Category C
       ( level-right-adjoint-Adjunction-Large-Category FG l1)
   obj-right-adjoint-Adjunction-Large-Category FG =
-    obj-functor-Large-Category
+    obj-functor-Large-Category D C
       ( right-adjoint-Adjunction-Large-Category FG)
 
   hom-right-adjoint-Adjunction-Large-Category :
@@ -269,7 +250,7 @@ module _
       ( obj-right-adjoint-Adjunction-Large-Category FG X)
       ( obj-right-adjoint-Adjunction-Large-Category FG Y)
   hom-right-adjoint-Adjunction-Large-Category FG =
-    hom-functor-Large-Category
+    hom-functor-Large-Category D C
       ( right-adjoint-Adjunction-Large-Category FG)
 
   preserves-identity-right-adjoint-Adjunction-Large-Category :
@@ -280,7 +261,7 @@ module _
       ( id-hom-Large-Category D {X = Y}) ＝
     id-hom-Large-Category C
   preserves-identity-right-adjoint-Adjunction-Large-Category FG Y =
-    preserves-identity-functor-Large-Category
+    preserves-identity-functor-Large-Category D C
       ( right-adjoint-Adjunction-Large-Category FG)
 
   equiv-is-adjoint-pair-Adjunction-Large-Category :
@@ -310,7 +291,7 @@ module _
       ( obj-left-adjoint-Adjunction-Large-Category FG X)
       ( Y)
   map-equiv-is-adjoint-pair-Adjunction-Large-Category FG =
-    map-equiv-is-adjoint-pair-Large-Category
+    map-equiv-is-adjoint-pair-Large-Category C D
       ( left-adjoint-Adjunction-Large-Category FG)
       ( right-adjoint-Adjunction-Large-Category FG)
       ( is-adjoint-pair-Adjunction-Large-Category FG)
@@ -392,7 +373,7 @@ module _
           ( f))
       ( map-inv-equiv-is-adjoint-pair-Adjunction-Large-Category FG X2 Y2)
   naturality-inv-equiv-is-adjoint-pair-Adjunction-Large-Category FG =
-    naturality-inv-equiv-is-adjoint-pair-Large-Category
+    naturality-inv-equiv-is-adjoint-pair-Large-Category C D
       ( left-adjoint-Adjunction-Large-Category FG)
       ( right-adjoint-Adjunction-Large-Category FG)
       ( is-adjoint-pair-Adjunction-Large-Category FG)
@@ -411,9 +392,9 @@ module _
 
   unit-Adjunction-Large-Category :
     (FG : Adjunction-Large-Category C D) →
-    natural-transformation-Large-Category
-      ( id-functor-Large-Category)
-      ( comp-functor-Large-Category
+    natural-transformation-Large-Category C C
+      ( id-functor-Large-Category C)
+      ( comp-functor-Large-Category C D C
         ( right-adjoint-Adjunction-Large-Category FG)
         ( left-adjoint-Adjunction-Large-Category FG))
   hom-family-natural-transformation-Large-Category
@@ -423,79 +404,7 @@ module _
       ( obj-left-adjoint-Adjunction-Large-Category C D FG X)
       ( id-hom-Large-Category D)
   coherence-square-natural-transformation-Large-Category
-    ( unit-Adjunction-Large-Category FG) {X = X} {Y} f =
-    inv
-      ( ( inv
-          ( left-unit-law-comp-hom-Large-Category C
-            ( comp-hom-Large-Category C (η Y) f))) ∙
-        ( ap
-          ( comp-hom-Large-Category' C
-            ( comp-hom-Large-Category C (η Y) f))
-          ( inv
-            ( preserves-identity-right-adjoint-Adjunction-Large-Category C D FG
-              ( obj-left-adjoint-Adjunction-Large-Category C D FG Y)))) ∙
-        ( inv
-          ( associative-comp-hom-Large-Category C
-            ( hom-right-adjoint-Adjunction-Large-Category C D FG
-              ( id-hom-Large-Category D))
-            ( map-inv-equiv-is-adjoint-pair-Adjunction-Large-Category
-              C D FG Y
-              ( obj-left-adjoint-Adjunction-Large-Category C D FG Y)
-              ( id-hom-Large-Category D))
-            ( f))) ∙
-        ( inv
-          ( naturality-inv-equiv-is-adjoint-pair-Adjunction-Large-Category
-            C D FG f
-            ( id-hom-Large-Category D)
-            ( id-hom-Large-Category D))) ∙
-        ( ap
-          ( map-inv-equiv-is-adjoint-pair-Adjunction-Large-Category C D FG X
-            ( obj-left-adjoint-Adjunction-Large-Category C D FG Y))
-          ( ( associative-comp-hom-Large-Category D
-              ( id-hom-Large-Category D)
-              ( id-hom-Large-Category D)
-              ( hom-left-adjoint-Adjunction-Large-Category C D FG f)) ∙
-            ( left-unit-law-comp-hom-Large-Category D
-              ( comp-hom-Large-Category D
-                ( id-hom-Large-Category D)
-                ( hom-left-adjoint-Adjunction-Large-Category C D FG f))) ∙
-            ( left-unit-law-comp-hom-Large-Category D
-                ( hom-left-adjoint-Adjunction-Large-Category C D FG f)) ∙
-            ( inv
-                ( right-unit-law-comp-hom-Large-Category D
-                  ( hom-left-adjoint-Adjunction-Large-Category C D FG f))) ∙
-            ( inv
-              ( right-unit-law-comp-hom-Large-Category D
-                ( comp-hom-Large-Category D
-                  ( hom-left-adjoint-Adjunction-Large-Category C D FG f)
-                  ( id-hom-Large-Category D)))) ∙
-            ( ap
-              ( comp-hom-Large-Category D
-                ( comp-hom-Large-Category D
-                  ( hom-left-adjoint-Adjunction-Large-Category C D FG f)
-                  ( id-hom-Large-Category D)))
-              ( inv
-                ( preserves-identity-left-adjoint-Adjunction-Large-Category
-                  C D FG X)))) ∙
-          ( naturality-inv-equiv-is-adjoint-pair-Adjunction-Large-Category
-            C D FG
-            ( id-hom-Large-Category C)
-            ( hom-left-adjoint-Adjunction-Large-Category C D FG f)
-            ( id-hom-Large-Category D)) ∙
-          ( right-unit-law-comp-hom-Large-Category C
-            ( comp-hom-Large-Category C
-              ( hom-right-adjoint-Adjunction-Large-Category C D FG
-                ( hom-left-adjoint-Adjunction-Large-Category C D FG f))
-              ( η X)))))
-    where
-    η :
-      {l : Level} (X : obj-Large-Category C l) →
-      hom-Large-Category C X
-        ( obj-right-adjoint-Adjunction-Large-Category C D FG
-          ( obj-left-adjoint-Adjunction-Large-Category C D FG X))
-    η =
-      hom-family-natural-transformation-Large-Category
-        ( unit-Adjunction-Large-Category FG)
+    ( unit-Adjunction-Large-Category FG) {X = X} {Y} f = {!!}
 ```
 
 ### The counit of an adjunction
@@ -506,11 +415,11 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
 ```agda
   counit-Adjunction-Large-Category :
     (FG : Adjunction-Large-Category C D) →
-    natural-transformation-Large-Category
-      ( comp-functor-Large-Category
+    natural-transformation-Large-Category D D
+      ( comp-functor-Large-Category D C D
         ( left-adjoint-Adjunction-Large-Category FG)
         ( right-adjoint-Adjunction-Large-Category FG))
-      ( id-functor-Large-Category)
+      ( id-functor-Large-Category D)
   hom-family-natural-transformation-Large-Category
     ( counit-Adjunction-Large-Category FG) Y =
     map-equiv-is-adjoint-pair-Adjunction-Large-Category C D FG
@@ -518,70 +427,5 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
       ( Y)
       ( id-hom-Large-Category C)
   coherence-square-natural-transformation-Large-Category
-    (counit-Adjunction-Large-Category FG) {X = X} {Y = Y} f =
-    inv
-      ( ( inv
-          ( left-unit-law-comp-hom-Large-Category D
-            ( comp-hom-Large-Category D
-              ( ε Y)
-              ( hom-left-adjoint-Adjunction-Large-Category C D FG
-                ( hom-right-adjoint-Adjunction-Large-Category C D FG f))))) ∙
-        ( inv
-          ( associative-comp-hom-Large-Category D
-            ( id-hom-Large-Category D)
-            ( map-equiv-is-adjoint-pair-Adjunction-Large-Category C D FG
-              ( obj-right-adjoint-Adjunction-Large-Category C D FG Y)
-              ( Y)
-              ( id-hom-Large-Category C))
-            ( hom-left-adjoint-Adjunction-Large-Category C D FG
-              ( hom-right-adjoint-Adjunction-Large-Category C D FG f)))) ∙
-        ( inv
-          ( naturality-equiv-is-adjoint-pair-Adjunction-Large-Category C D FG
-            ( hom-right-adjoint-Adjunction-Large-Category C D FG f)
-            ( id-hom-Large-Category D)
-            ( id-hom-Large-Category C))) ∙
-        ( ap
-          ( map-equiv-is-adjoint-pair-Adjunction-Large-Category C D FG
-            ( obj-right-adjoint-Adjunction-Large-Category C D FG X)
-            ( Y))
-          ( ( ap
-              ( comp-hom-Large-Category' C
-                ( hom-right-adjoint-Adjunction-Large-Category C D FG f))
-              ( ( right-unit-law-comp-hom-Large-Category C
-                  ( hom-right-adjoint-Adjunction-Large-Category C D FG
-                    ( id-hom-Large-Category D))) ∙
-                ( preserves-identity-right-adjoint-Adjunction-Large-Category
-                    C D FG Y))) ∙
-            ( left-unit-law-comp-hom-Large-Category C
-              ( hom-right-adjoint-Adjunction-Large-Category C D FG f)) ∙
-            ( ( inv
-                ( right-unit-law-comp-hom-Large-Category C
-                  ( hom-right-adjoint-Adjunction-Large-Category C D FG f))) ∙
-              ( inv
-                ( right-unit-law-comp-hom-Large-Category C
-                  ( comp-hom-Large-Category C
-                    ( hom-right-adjoint-Adjunction-Large-Category C D FG f)
-                    ( id-hom-Large-Category C)))))) ∙
-        ( naturality-equiv-is-adjoint-pair-Adjunction-Large-Category C D FG
-            ( id-hom-Large-Category C)
-            ( f)
-            ( id-hom-Large-Category C)) ∙
-          ( ap
-            ( comp-hom-Large-Category
-              ( D)
-              ( comp-hom-Large-Category D f (ε X)))
-            ( preserves-identity-left-adjoint-Adjunction-Large-Category C D FG
-              ( obj-right-adjoint-Adjunction-Large-Category C D FG X))) ∙
-          ( right-unit-law-comp-hom-Large-Category D
-            ( comp-hom-Large-Category D f (ε X)))))
-    where
-    ε :
-      {l : Level} (Y : obj-Large-Category D l) →
-      hom-Large-Category D
-        ( obj-left-adjoint-Adjunction-Large-Category C D FG
-          ( obj-right-adjoint-Adjunction-Large-Category C D FG Y))
-        ( Y)
-    ε =
-      hom-family-natural-transformation-Large-Category
-        ( counit-Adjunction-Large-Category FG)
+    (counit-Adjunction-Large-Category FG) {X = X} {Y = Y} f = {!!}
 ```

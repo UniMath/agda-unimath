@@ -48,7 +48,7 @@ module _
 
 module _
   {αC αD : Level → Level} {βC βD : Level → Level → Level} {γ : Level → Level}
-  {C : Large-Category αC βC} {D : Large-Category αD βD}
+  (C : Large-Category αC βC) (D : Large-Category αD βD)
   (F : functor-Large-Category γ C D)
   where
 
@@ -82,9 +82,10 @@ There is an identity functor on any large category.
 ```agda
 id-functor-Large-Category :
   {αC : Level → Level} {βC : Level → Level → Level} →
-  {C : Large-Category αC βC} →
+  (C : Large-Category αC βC) →
   functor-Large-Category id C C
-id-functor-Large-Category = id-functor-Large-Precategory
+id-functor-Large-Category C =
+  id-functor-Large-Precategory (large-precategory-Large-Category C)
 ```
 
 ### Composition of functors
@@ -95,11 +96,15 @@ Any two compatible functors can be composed to a new functor.
 comp-functor-Large-Category :
   {αC αD αE γG γF : Level → Level}
   {βC βD βE : Level → Level → Level} →
-  {C : Large-Category αC βC}
-  {D : Large-Category αD βD}
-  {E : Large-Category αE βE} →
+  (C : Large-Category αC βC)
+  (D : Large-Category αD βD)
+  (E : Large-Category αE βE) →
   functor-Large-Category γG D E →
   functor-Large-Category γF C D →
   functor-Large-Category (γG ∘ γF) C E
-comp-functor-Large-Category = comp-functor-Large-Precategory
+comp-functor-Large-Category C D E =
+  comp-functor-Large-Precategory
+    ( large-precategory-Large-Category C)
+    ( large-precategory-Large-Category D)
+    ( large-precategory-Large-Category E)
 ```

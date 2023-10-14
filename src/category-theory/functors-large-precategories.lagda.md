@@ -74,59 +74,95 @@ module _
 
 ### The identity functor
 
-There is an identity functor on any large precategory.
-
 ```agda
 id-functor-Large-Precategory :
   {αC : Level → Level} {βC : Level → Level → Level} →
-  {C : Large-Precategory αC βC} →
+  (C : Large-Precategory αC βC) →
   functor-Large-Precategory id C C
 obj-functor-Large-Precategory
-  id-functor-Large-Precategory =
+  ( id-functor-Large-Precategory C) =
   id
 hom-functor-Large-Precategory
-  id-functor-Large-Precategory =
+  ( id-functor-Large-Precategory C) =
   id
 preserves-composition-functor-Large-Precategory
-  id-functor-Large-Precategory g f =
+  ( id-functor-Large-Precategory C) g f =
   refl
 preserves-identity-functor-Large-Precategory
-  id-functor-Large-Precategory =
+  ( id-functor-Large-Precategory C) =
   refl
 ```
 
 ### Composition of functors
 
-Any two compatible functors can be composed to a new functor.
-
 ```agda
-comp-functor-Large-Precategory :
+module _
   {αC αD αE γG γF : Level → Level}
-  {βC βD βE : Level → Level → Level} →
-  {C : Large-Precategory αC βC}
-  {D : Large-Precategory αD βD}
-  {E : Large-Precategory αE βE} →
-  functor-Large-Precategory γG D E →
-  functor-Large-Precategory γF C D →
-  functor-Large-Precategory (γG ∘ γF) C E
-obj-functor-Large-Precategory
-  ( comp-functor-Large-Precategory G F) =
-  obj-functor-Large-Precategory G ∘ obj-functor-Large-Precategory F
-hom-functor-Large-Precategory
-  ( comp-functor-Large-Precategory G F) =
-  hom-functor-Large-Precategory G ∘ hom-functor-Large-Precategory F
-preserves-composition-functor-Large-Precategory
-  ( comp-functor-Large-Precategory G F) g f =
-  ( ap
-    ( hom-functor-Large-Precategory G)
-    ( preserves-composition-functor-Large-Precategory F g f)) ∙
-  ( preserves-composition-functor-Large-Precategory G
-    ( hom-functor-Large-Precategory F g)
-    ( hom-functor-Large-Precategory F f))
-preserves-identity-functor-Large-Precategory
-  ( comp-functor-Large-Precategory G F) =
-  ( ap
-    ( hom-functor-Large-Precategory G)
-    ( preserves-identity-functor-Large-Precategory F)) ∙
-  ( preserves-identity-functor-Large-Precategory G)
+  {βC βD βE : Level → Level → Level}
+  (C : Large-Precategory αC βC)
+  (D : Large-Precategory αD βD)
+  (E : Large-Precategory αE βE)
+  (G : functor-Large-Precategory γG D E)
+  (F : functor-Large-Precategory γF C D)
+  where
+
+  obj-comp-functor-Large-Precategory :
+    {l1 : Level} →
+    obj-Large-Precategory C l1 → obj-Large-Precategory E (γG (γF l1))
+  obj-comp-functor-Large-Precategory =
+    obj-functor-Large-Precategory G ∘ obj-functor-Large-Precategory F
+
+  hom-comp-functor-Large-Precategory :
+    {l1 l2 : Level}
+    {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2} →
+    hom-Large-Precategory C X Y →
+    hom-Large-Precategory E
+      ( obj-comp-functor-Large-Precategory X)
+      ( obj-comp-functor-Large-Precategory Y)
+  hom-comp-functor-Large-Precategory =
+    hom-functor-Large-Precategory G ∘ hom-functor-Large-Precategory F
+
+  preserves-composition-comp-functor-Large-Precategory :
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Precategory C l1}
+    {Y : obj-Large-Precategory C l2}
+    {Z : obj-Large-Precategory C l3}
+    (g : hom-Large-Precategory C Y Z) (f : hom-Large-Precategory C X Y) →
+    hom-comp-functor-Large-Precategory
+      ( comp-hom-Large-Precategory C g f) ＝
+    comp-hom-Large-Precategory E
+      ( hom-comp-functor-Large-Precategory g)
+      ( hom-comp-functor-Large-Precategory f)
+  preserves-composition-comp-functor-Large-Precategory g f =
+    ( ap
+      ( hom-functor-Large-Precategory G)
+      ( preserves-composition-functor-Large-Precategory F g f)) ∙
+    ( preserves-composition-functor-Large-Precategory G
+      ( hom-functor-Large-Precategory F g)
+      ( hom-functor-Large-Precategory F f))
+
+  preserves-identity-comp-functor-Large-Precategory :
+    {l1 : Level} {X : obj-Large-Precategory C l1} →
+    hom-comp-functor-Large-Precategory (id-hom-Large-Precategory C {X = X}) ＝
+    id-hom-Large-Precategory E
+  preserves-identity-comp-functor-Large-Precategory =
+    ( ap
+      ( hom-functor-Large-Precategory G)
+      ( preserves-identity-functor-Large-Precategory F)) ∙
+    ( preserves-identity-functor-Large-Precategory G)
+
+  comp-functor-Large-Precategory :
+    functor-Large-Precategory (γG ∘ γF) C E
+  obj-functor-Large-Precategory
+    comp-functor-Large-Precategory =
+    obj-comp-functor-Large-Precategory
+  hom-functor-Large-Precategory
+    comp-functor-Large-Precategory =
+    hom-comp-functor-Large-Precategory
+  preserves-composition-functor-Large-Precategory
+    comp-functor-Large-Precategory =
+    preserves-composition-comp-functor-Large-Precategory
+  preserves-identity-functor-Large-Precategory
+    comp-functor-Large-Precategory =
+    preserves-identity-comp-functor-Large-Precategory
 ```
