@@ -86,6 +86,7 @@ open import foundation.dependent-epimorphisms public
 open import foundation.dependent-identifications public
 open import foundation.dependent-pair-types public
 open import foundation.dependent-sequences public
+open import foundation.dependent-towers public
 open import foundation.descent-coproduct-types public
 open import foundation.descent-dependent-pair-types public
 open import foundation.descent-empty-types public
@@ -179,7 +180,6 @@ open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.limited-principle-of-omniscience public
-open import foundation.limits-towers public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
 open import foundation.maps-towers public
@@ -241,6 +241,7 @@ open import foundation.russells-paradox public
 open import foundation.sections public
 open import foundation.separated-types public
 open import foundation.sequences public
+open import foundation.sequential-limits public
 open import foundation.set-presented-types public
 open import foundation.set-quotients public
 open import foundation.set-truncations public
@@ -277,7 +278,7 @@ open import foundation.symmetric-operations public
 open import foundation.tight-apartness-relations public
 open import foundation.torsorial-type-families public
 open import foundation.towers public
-open import foundation.transfinite-composition-of-maps public
+open import foundation.transfinite-cocomposition-of-maps public
 open import foundation.transport-along-equivalences public
 open import foundation.transport-along-higher-identifications public
 open import foundation.transport-along-identifications public
@@ -321,11 +322,11 @@ open import foundation.universal-property-fiber-products public
 open import foundation.universal-property-identity-systems public
 open import foundation.universal-property-identity-types public
 open import foundation.universal-property-image public
-open import foundation.universal-property-sequential-limits public
 open import foundation.universal-property-maybe public
 open import foundation.universal-property-propositional-truncation public
 open import foundation.universal-property-propositional-truncation-into-sets public
 open import foundation.universal-property-pullbacks public
+open import foundation.universal-property-sequential-limits public
 open import foundation.universal-property-set-quotients public
 open import foundation.universal-property-set-truncation public
 open import foundation.universal-property-truncation public
