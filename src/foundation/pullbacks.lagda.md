@@ -67,35 +67,35 @@ pr1 (exponent-cone T f g c) h = vertical-map-cone f g c ∘ h
 pr1 (pr2 (exponent-cone T f g c)) h = horizontal-map-cone f g c ∘ h
 pr2 (pr2 (exponent-cone T f g c)) h = eq-htpy (coherence-square-cone f g c ·r h)
 
-map-canonical-pullback-exponent :
+map-standard-pullback-exponent :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   (T : UU l4) →
-  canonical-pullback (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) →
+  standard-pullback (λ (h : T → A) → f ∘ h) (λ (h : T → B) → g ∘ h) →
   cone f g T
-map-canonical-pullback-exponent f g T =
+map-standard-pullback-exponent f g T =
   tot (λ p → tot (λ q → htpy-eq))
 
 abstract
-  is-equiv-map-canonical-pullback-exponent :
+  is-equiv-map-standard-pullback-exponent :
     {l1 l2 l3 l4 : Level}
     {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-    (T : UU l4) → is-equiv (map-canonical-pullback-exponent f g T)
-  is-equiv-map-canonical-pullback-exponent f g T =
+    (T : UU l4) → is-equiv (map-standard-pullback-exponent f g T)
+  is-equiv-map-standard-pullback-exponent f g T =
     is-equiv-tot-is-fiberwise-equiv
       ( λ p → is-equiv-tot-is-fiberwise-equiv
         ( λ q → funext (f ∘ p) (g ∘ q)))
 
-triangle-map-canonical-pullback-exponent :
+triangle-map-standard-pullback-exponent :
   {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (T : UU l5) (f : A → X) (g : B → X) (c : cone f g C) →
   ( cone-map f g c {T}) ~
-  ( ( map-canonical-pullback-exponent f g T) ∘
+  ( ( map-standard-pullback-exponent f g T) ∘
     ( gap
       ( λ (h : T → A) → f ∘ h)
       ( λ (h : T → B) → g ∘ h)
       ( exponent-cone T f g c)))
-triangle-map-canonical-pullback-exponent
+triangle-map-standard-pullback-exponent
   {A = A} {B} T f g c h =
   eq-pair-Σ refl
     ( eq-pair-Σ refl
@@ -113,10 +113,10 @@ abstract
   is-pullback-exponent-is-pullback f g c is-pb-c T =
     is-equiv-right-factor-htpy
       ( cone-map f g c)
-      ( map-canonical-pullback-exponent f g T)
+      ( map-standard-pullback-exponent f g T)
       ( gap (f ∘_) (g ∘_) (exponent-cone T f g c))
-      ( triangle-map-canonical-pullback-exponent T f g c)
-      ( is-equiv-map-canonical-pullback-exponent f g T)
+      ( triangle-map-standard-pullback-exponent T f g c)
+      ( is-equiv-map-standard-pullback-exponent f g T)
       ( universal-property-pullback-is-pullback f g c is-pb-c T)
 
 abstract
@@ -132,11 +132,11 @@ abstract
     is-pullback-universal-property-pullback f g c
       ( λ T → is-equiv-comp-htpy
         ( cone-map f g c)
-        ( map-canonical-pullback-exponent f g T)
+        ( map-standard-pullback-exponent f g T)
         ( gap (_∘_ f) (_∘_ g) (exponent-cone T f g c))
-        ( triangle-map-canonical-pullback-exponent T f g c)
+        ( triangle-map-standard-pullback-exponent T f g c)
         ( is-pb-exp _ T)
-        ( is-equiv-map-canonical-pullback-exponent f g T))
+        ( is-equiv-map-standard-pullback-exponent f g T))
 ```
 
 ### Identity types can be presented as pullbacks
@@ -150,7 +150,7 @@ cone-Id x y =
 
 inv-gap-cone-Id :
   {l : Level} {A : UU l} (x y : A) →
-  canonical-pullback (const unit A x) (const unit A y) → x ＝ y
+  standard-pullback (const unit A x) (const unit A y) → x ＝ y
 inv-gap-cone-Id x y (pair star (pair star p)) = p
 
 abstract
@@ -188,7 +188,7 @@ cone-Id' {A = A} (pair x y) =
 
 inv-gap-cone-Id' :
   {l : Level} {A : UU l} (t : A × A) →
-  canonical-pullback (const unit (A × A) t) (diagonal A) → (pr1 t ＝ pr2 t)
+  standard-pullback (const unit (A × A) t) (diagonal A) → (pr1 t ＝ pr2 t)
 inv-gap-cone-Id' t (pair star (pair z p)) =
   (ap pr1 p) ∙ (inv (ap pr2 p))
 
@@ -225,16 +225,16 @@ module _
   {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g')
   where
 
-  map-equiv-canonical-pullback-htpy :
-    canonical-pullback f' g' → canonical-pullback f g
-  map-equiv-canonical-pullback-htpy =
+  map-equiv-standard-pullback-htpy :
+    standard-pullback f' g' → standard-pullback f g
+  map-equiv-standard-pullback-htpy =
     tot (λ a → tot (λ b →
       ( concat' (f a) (inv (Hg b))) ∘ (concat (Hf a) (g' b))))
 
   abstract
-    is-equiv-map-equiv-canonical-pullback-htpy :
-      is-equiv map-equiv-canonical-pullback-htpy
-    is-equiv-map-equiv-canonical-pullback-htpy =
+    is-equiv-map-equiv-standard-pullback-htpy :
+      is-equiv map-equiv-standard-pullback-htpy
+    is-equiv-map-equiv-standard-pullback-htpy =
       is-equiv-tot-is-fiberwise-equiv (λ a →
         is-equiv-tot-is-fiberwise-equiv (λ b →
           is-equiv-comp
@@ -243,10 +243,10 @@ module _
             ( is-equiv-concat (Hf a) (g' b))
             ( is-equiv-concat' (f a) (inv (Hg b)))))
 
-  equiv-canonical-pullback-htpy :
-    canonical-pullback f' g' ≃ canonical-pullback f g
-  pr1 equiv-canonical-pullback-htpy = map-equiv-canonical-pullback-htpy
-  pr2 equiv-canonical-pullback-htpy = is-equiv-map-equiv-canonical-pullback-htpy
+  equiv-standard-pullback-htpy :
+    standard-pullback f' g' ≃ standard-pullback f g
+  pr1 equiv-standard-pullback-htpy = map-equiv-standard-pullback-htpy
+  pr2 equiv-standard-pullback-htpy = is-equiv-map-equiv-standard-pullback-htpy
 ```
 
 ### Parallel pullback squares
@@ -260,10 +260,10 @@ module _
   triangle-is-pullback-htpy :
     {l4 : Level} {C : UU l4}
     {c : cone f g C} {c' : cone f' g' C} (Hc : htpy-parallel-cone Hf Hg c c') →
-    (gap f g c) ~ (map-equiv-canonical-pullback-htpy Hf Hg ∘ (gap f' g' c'))
+    (gap f g c) ~ (map-equiv-standard-pullback-htpy Hf Hg ∘ (gap f' g' c'))
   triangle-is-pullback-htpy
     {c = pair p (pair q H)} {pair p' (pair q' H')} (pair Hp (pair Hq HH)) z =
-    map-extensionality-canonical-pullback f g
+    map-extensionality-standard-pullback f g
       ( Hp z)
       ( Hq z)
       ( ( inv
@@ -290,12 +290,12 @@ module _
       (pair Hp (pair Hq HH)) is-pb-c' =
       is-equiv-comp-htpy
         ( gap f g (triple p q H))
-        ( map-equiv-canonical-pullback-htpy Hf Hg)
+        ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
         ( triangle-is-pullback-htpy
           {c = triple p q H} {triple p' q' H'} (triple Hp Hq HH))
         ( is-pb-c')
-        ( is-equiv-map-equiv-canonical-pullback-htpy Hf Hg)
+        ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
 
   abstract
     is-pullback-htpy' :
@@ -307,11 +307,11 @@ module _
       (pair Hp (pair Hq HH)) is-pb-c =
       is-equiv-right-factor-htpy
         ( gap f g (triple p q H))
-        ( map-equiv-canonical-pullback-htpy Hf Hg)
+        ( map-equiv-standard-pullback-htpy Hf Hg)
         ( gap f' g' (triple p' q' H'))
         ( triangle-is-pullback-htpy
           {c = triple p q H} {triple p' q' H'} (triple Hp Hq HH))
-        ( is-equiv-map-equiv-canonical-pullback-htpy Hf Hg)
+        ( is-equiv-map-equiv-standard-pullback-htpy Hf Hg)
         ( is-pb-c)
 ```
 
@@ -601,48 +601,48 @@ cone-Π f g c =
     ( map-Π (λ i → pr1 (pr2 (c i))))
     ( htpy-map-Π (λ i → pr2 (pr2 (c i))))
 
-map-canonical-pullback-Π :
+map-standard-pullback-Π :
   {l1 l2 l3 l4 : Level} {I : UU l1}
   {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
   (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
-  canonical-pullback (map-Π f) (map-Π g) →
-  (i : I) → canonical-pullback (f i) (g i)
-map-canonical-pullback-Π f g (pair α (pair β γ)) i =
+  standard-pullback (map-Π f) (map-Π g) →
+  (i : I) → standard-pullback (f i) (g i)
+map-standard-pullback-Π f g (pair α (pair β γ)) i =
   triple (α i) (β i) (htpy-eq γ i)
 
-inv-map-canonical-pullback-Π :
+inv-map-standard-pullback-Π :
   {l1 l2 l3 l4 : Level} {I : UU l1}
   {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
   (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
-  ((i : I) → canonical-pullback (f i) (g i)) →
-  canonical-pullback (map-Π f) (map-Π g)
-inv-map-canonical-pullback-Π f g h =
+  ((i : I) → standard-pullback (f i) (g i)) →
+  standard-pullback (map-Π f) (map-Π g)
+inv-map-standard-pullback-Π f g h =
   triple
     ( λ i → (pr1 (h i)))
     ( λ i → (pr1 (pr2 (h i))))
     ( eq-htpy (λ i → (pr2 (pr2 (h i)))))
 
 abstract
-  is-section-inv-map-canonical-pullback-Π :
+  is-section-inv-map-standard-pullback-Π :
     {l1 l2 l3 l4 : Level} {I : UU l1}
     {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
     (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
-    ((map-canonical-pullback-Π f g) ∘ (inv-map-canonical-pullback-Π f g)) ~ id
-  is-section-inv-map-canonical-pullback-Π f g h =
+    ((map-standard-pullback-Π f g) ∘ (inv-map-standard-pullback-Π f g)) ~ id
+  is-section-inv-map-standard-pullback-Π f g h =
     eq-htpy
-      ( λ i → map-extensionality-canonical-pullback (f i) (g i) refl refl
+      ( λ i → map-extensionality-standard-pullback (f i) (g i) refl refl
         ( inv
           ( ( right-unit) ∙
             ( htpy-eq (is-section-eq-htpy (λ i → (pr2 (pr2 (h i))))) i))))
 
 abstract
-  is-retraction-inv-map-canonical-pullback-Π :
+  is-retraction-inv-map-standard-pullback-Π :
     {l1 l2 l3 l4 : Level} {I : UU l1}
     {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
     (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
-    ((inv-map-canonical-pullback-Π f g) ∘ (map-canonical-pullback-Π f g)) ~ id
-  is-retraction-inv-map-canonical-pullback-Π f g (pair α (pair β γ)) =
-    map-extensionality-canonical-pullback
+    ((inv-map-standard-pullback-Π f g) ∘ (map-standard-pullback-Π f g)) ~ id
+  is-retraction-inv-map-standard-pullback-Π f g (pair α (pair β γ)) =
+    map-extensionality-standard-pullback
       ( map-Π f)
       ( map-Π g)
       refl
@@ -650,28 +650,28 @@ abstract
       ( inv (right-unit ∙ (is-retraction-eq-htpy γ)))
 
 abstract
-  is-equiv-map-canonical-pullback-Π :
+  is-equiv-map-standard-pullback-Π :
     {l1 l2 l3 l4 : Level} {I : UU l1}
     {A : I → UU l2} {B : I → UU l3} {X : I → UU l4}
     (f : (i : I) → A i → X i) (g : (i : I) → B i → X i) →
-    is-equiv (map-canonical-pullback-Π f g)
-  is-equiv-map-canonical-pullback-Π f g =
+    is-equiv (map-standard-pullback-Π f g)
+  is-equiv-map-standard-pullback-Π f g =
     is-equiv-is-invertible
-      ( inv-map-canonical-pullback-Π f g)
-      ( is-section-inv-map-canonical-pullback-Π f g)
-      ( is-retraction-inv-map-canonical-pullback-Π f g)
+      ( inv-map-standard-pullback-Π f g)
+      ( is-section-inv-map-standard-pullback-Π f g)
+      ( is-retraction-inv-map-standard-pullback-Π f g)
 
-triangle-map-canonical-pullback-Π :
+triangle-map-standard-pullback-Π :
   {l1 l2 l3 l4 l5 : Level} {I : UU l1}
   {A : I → UU l2} {B : I → UU l3} {X : I → UU l4} {C : I → UU l5}
   (f : (i : I) → A i → X i) (g : (i : I) → B i → X i)
   (c : (i : I) → cone (f i) (g i) (C i)) →
   ( map-Π (λ i → gap (f i) (g i) (c i))) ~
-  ( ( map-canonical-pullback-Π f g) ∘
+  ( ( map-standard-pullback-Π f g) ∘
     ( gap (map-Π f) (map-Π g) (cone-Π f g c)))
-triangle-map-canonical-pullback-Π f g c h =
+triangle-map-standard-pullback-Π f g c h =
   eq-htpy (λ i →
-    map-extensionality-canonical-pullback
+    map-extensionality-standard-pullback
       (f i)
       (g i)
       refl refl
@@ -688,10 +688,10 @@ abstract
   is-pullback-cone-Π f g c is-pb-c =
     is-equiv-right-factor-htpy
       ( map-Π (λ i → gap (f i) (g i) (c i)))
-      ( map-canonical-pullback-Π f g)
+      ( map-standard-pullback-Π f g)
       ( gap (map-Π f) (map-Π g) (cone-Π f g c))
-      ( triangle-map-canonical-pullback-Π f g c)
-      ( is-equiv-map-canonical-pullback-Π f g)
+      ( triangle-map-standard-pullback-Π f g c)
+      ( is-equiv-map-standard-pullback-Π f g)
       ( is-equiv-map-Π-is-fiberwise-equiv is-pb-c)
 ```
 

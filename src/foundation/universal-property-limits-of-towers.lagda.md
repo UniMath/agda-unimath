@@ -168,7 +168,8 @@ module _
   where
 
   htpy-cone-map-universal-property-limit-Tower :
-    (c : cone-Tower A X) (up : {l : Level} → universal-property-limit-Tower l A c) →
+    (c : cone-Tower A X)
+    (up : {l : Level} → universal-property-limit-Tower l A c) →
     {l3 : Level} {Y : UU l3} (c' : cone-Tower A Y) →
     htpy-cone-Tower A
       ( cone-map-Tower A c (map-universal-property-limit-Tower A c up c'))
