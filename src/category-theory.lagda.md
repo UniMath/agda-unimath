@@ -13,6 +13,7 @@
 ```agda
 module category-theory where
 
+open import category-theory.adjunctions-large-categories public
 open import category-theory.adjunctions-large-precategories public
 open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
@@ -44,6 +45,7 @@ open import category-theory.function-precategories public
 open import category-theory.functors-categories public
 open import category-theory.functors-from-small-to-large-categories public
 open import category-theory.functors-from-small-to-large-precategories public
+open import category-theory.functors-large-categories public
 open import category-theory.functors-large-precategories public
 open import category-theory.functors-precategories public
 open import category-theory.groupoids public

@@ -35,8 +35,8 @@ module _
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF)
-  (G : functor-Large-Precategory C D γG)
+  (F : functor-Large-Precategory γF C D)
+  (G : functor-Large-Precategory γG C D)
   where
 
   iso-family-functor-Large-Precategory : UUω

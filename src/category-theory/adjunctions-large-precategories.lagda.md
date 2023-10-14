@@ -49,14 +49,16 @@ adjoint** to `F` and write this as `F ⊣ G`.
 
 ## Definition
 
+### The predicate of being an adjoint pair of functors
+
 ```agda
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF)
-  (G : functor-Large-Precategory D C γG)
+  (F : functor-Large-Precategory γF C D)
+  (G : functor-Large-Precategory γG D C)
   where
 
   record is-adjoint-pair-Large-Precategory : UUω
@@ -65,12 +67,8 @@ module _
       equiv-is-adjoint-pair-Large-Precategory :
         {l1 l2 : Level} (X : obj-Large-Precategory C l1)
         (Y : obj-Large-Precategory D l2) →
-        ( hom-Large-Precategory C
-          ( X)
-          ( obj-functor-Large-Precategory G Y)) ≃
-        ( hom-Large-Precategory D
-          ( obj-functor-Large-Precategory F X)
-          ( Y))
+        hom-Large-Precategory C X (obj-functor-Large-Precategory G Y) ≃
+        hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y
       naturality-equiv-is-adjoint-pair-Large-Precategory :
         { l1 l2 l3 l4 : Level}
         { X1 : obj-Large-Precategory C l1}
@@ -98,16 +96,14 @@ module _
   map-equiv-is-adjoint-pair-Large-Precategory :
     (H : is-adjoint-pair-Large-Precategory) {l1 l2 : Level}
     (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory D l2) →
-    ( hom-Large-Precategory C X (obj-functor-Large-Precategory G Y)) →
-    ( hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y)
+    hom-Large-Precategory C X (obj-functor-Large-Precategory G Y) →
+    hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y
   map-equiv-is-adjoint-pair-Large-Precategory H X Y =
     map-equiv (equiv-is-adjoint-pair-Large-Precategory H X Y)
 
   inv-equiv-is-adjoint-pair-Large-Precategory :
-    (H : is-adjoint-pair-Large-Precategory)
-    {l1 l2 : Level}
-    (X : obj-Large-Precategory C l1)
-    (Y : obj-Large-Precategory D l2) →
+    (H : is-adjoint-pair-Large-Precategory) {l1 l2 : Level}
+    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory D l2) →
     hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y ≃
     hom-Large-Precategory C X (obj-functor-Large-Precategory G Y)
   inv-equiv-is-adjoint-pair-Large-Precategory H X Y =
@@ -115,8 +111,7 @@ module _
 
   map-inv-equiv-is-adjoint-pair-Large-Precategory :
     (H : is-adjoint-pair-Large-Precategory) {l1 l2 : Level}
-    (X : obj-Large-Precategory C l1)
-    (Y : obj-Large-Precategory D l2) →
+    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory D l2) →
     hom-Large-Precategory D (obj-functor-Large-Precategory F X) Y →
     hom-Large-Precategory C X (obj-functor-Large-Precategory G Y)
   map-inv-equiv-is-adjoint-pair-Large-Precategory H X Y =
@@ -158,33 +153,45 @@ module _
           ( hom-functor-Large-Precategory F f))
       ( equiv-is-adjoint-pair-Large-Precategory H X2 Y2)
       ( naturality-equiv-is-adjoint-pair-Large-Precategory H f g)
+```
 
+### The predicate of being a left adjoint
+
+```agda
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (G : functor-Large-Precategory D C γG)
-  (F : functor-Large-Precategory C D γF)
+  (G : functor-Large-Precategory γG D C)
+  (F : functor-Large-Precategory γF C D)
   where
 
   is-left-adjoint-functor-Large-Precategory : UUω
   is-left-adjoint-functor-Large-Precategory =
     is-adjoint-pair-Large-Precategory F G
+```
 
+### The predicate of being a right adjoint
+
+```agda
 module _
   {αC αD γF γG : Level → Level}
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF)
-  (G : functor-Large-Precategory D C γG)
+  (F : functor-Large-Precategory γF C D)
+  (G : functor-Large-Precategory γG D C)
   where
 
   is-right-adjoint-functor-Large-Precategory : UUω
   is-right-adjoint-functor-Large-Precategory =
     is-adjoint-pair-Large-Precategory F G
+```
 
+### Adjunctions of large precategories
+
+```agda
 module _
   {αC αD : Level → Level}
   {βC βD : Level → Level → Level}
@@ -197,13 +204,18 @@ module _
       level-left-adjoint-Adjunction-Large-Precategory :
         Level → Level
       left-adjoint-Adjunction-Large-Precategory :
-        functor-Large-Precategory C D
-          level-left-adjoint-Adjunction-Large-Precategory
+        functor-Large-Precategory
+          ( level-left-adjoint-Adjunction-Large-Precategory)
+          ( C)
+          ( D)
+
       level-right-adjoint-Adjunction-Large-Precategory :
         Level → Level
       right-adjoint-Adjunction-Large-Precategory :
-        functor-Large-Precategory D C
-          level-right-adjoint-Adjunction-Large-Precategory
+        functor-Large-Precategory
+          ( level-right-adjoint-Adjunction-Large-Precategory)
+          ( D)
+          ( C)
       is-adjoint-pair-Adjunction-Large-Precategory :
         is-adjoint-pair-Large-Precategory
           left-adjoint-Adjunction-Large-Precategory
@@ -233,15 +245,15 @@ module _
     hom-functor-Large-Precategory
       ( left-adjoint-Adjunction-Large-Precategory FG)
 
-  preserves-id-left-adjoint-Adjunction-Large-Precategory :
+  preserves-identity-left-adjoint-Adjunction-Large-Precategory :
     (FG : Adjunction-Large-Precategory)
     {l1 : Level}
     (X : obj-Large-Precategory C l1) →
     hom-left-adjoint-Adjunction-Large-Precategory FG
       ( id-hom-Large-Precategory C {X = X}) ＝
     id-hom-Large-Precategory D
-  preserves-id-left-adjoint-Adjunction-Large-Precategory FG X =
-    preserves-id-functor-Large-Precategory
+  preserves-identity-left-adjoint-Adjunction-Large-Precategory FG X =
+    preserves-identity-functor-Large-Precategory
       ( left-adjoint-Adjunction-Large-Precategory FG)
 
   obj-right-adjoint-Adjunction-Large-Precategory :
@@ -267,15 +279,15 @@ module _
     hom-functor-Large-Precategory
       ( right-adjoint-Adjunction-Large-Precategory FG)
 
-  preserves-id-right-adjoint-Adjunction-Large-Precategory :
+  preserves-identity-right-adjoint-Adjunction-Large-Precategory :
     (FG : Adjunction-Large-Precategory)
     {l : Level}
     (Y : obj-Large-Precategory D l) →
     hom-right-adjoint-Adjunction-Large-Precategory FG
       ( id-hom-Large-Precategory D {X = Y}) ＝
     id-hom-Large-Precategory C
-  preserves-id-right-adjoint-Adjunction-Large-Precategory FG Y =
-    preserves-id-functor-Large-Precategory
+  preserves-identity-right-adjoint-Adjunction-Large-Precategory FG Y =
+    preserves-identity-functor-Large-Precategory
       ( right-adjoint-Adjunction-Large-Precategory FG)
 
   equiv-is-adjoint-pair-Adjunction-Large-Precategory :
@@ -393,12 +405,10 @@ module _
       ( is-adjoint-pair-Adjunction-Large-Precategory FG)
 ```
 
-## Properties
-
-### Unit of adjunction
+### The unit of an adjunction
 
 Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
-`η : id → G ∘ F` called the unit of the adjunction.
+`η : id → G ∘ F` called the **unit** of the adjunction.
 
 ```agda
 module _
@@ -429,7 +439,10 @@ module _
           ( comp-hom-Large-Precategory' C
             ( comp-hom-Large-Precategory C (η Y) f))
           ( inv
-            ( preserves-id-right-adjoint-Adjunction-Large-Precategory C D FG
+            ( preserves-identity-right-adjoint-Adjunction-Large-Precategory
+              ( C)
+              ( D)
+              ( FG)
               ( obj-left-adjoint-Adjunction-Large-Precategory C D FG Y)))) ∙
         ( inv
           ( associative-comp-hom-Large-Precategory C
@@ -472,7 +485,7 @@ module _
                   ( hom-left-adjoint-Adjunction-Large-Precategory C D FG f)
                   ( id-hom-Large-Precategory D)))
               ( inv
-                ( preserves-id-left-adjoint-Adjunction-Large-Precategory
+                ( preserves-identity-left-adjoint-Adjunction-Large-Precategory
                   C D FG X)))) ∙
           ( naturality-inv-equiv-is-adjoint-pair-Adjunction-Large-Precategory
             C D FG
@@ -495,10 +508,10 @@ module _
         ( unit-Adjunction-Large-Precategory FG)
 ```
 
-### Counit of adjunction
+### The counit of an adjunction
 
 Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
-`ε : F ∘ G → id` called the counit of the adjunction.
+`ε : F ∘ G → id` called the **counit** of the adjunction.
 
 ```agda
   counit-Adjunction-Large-Precategory :
@@ -547,7 +560,7 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
               ( ( right-unit-law-comp-hom-Large-Precategory C
                   ( hom-right-adjoint-Adjunction-Large-Precategory C D FG
                     ( id-hom-Large-Precategory D))) ∙
-                ( preserves-id-right-adjoint-Adjunction-Large-Precategory
+                ( preserves-identity-right-adjoint-Adjunction-Large-Precategory
                     C D FG Y))) ∙
             ( left-unit-law-comp-hom-Large-Precategory C
               ( hom-right-adjoint-Adjunction-Large-Precategory C D FG f)) ∙
@@ -567,7 +580,10 @@ Given an adjoint pair `F ⊣ G`, we can construct a natural transformation
             ( comp-hom-Large-Precategory
               ( D)
               ( comp-hom-Large-Precategory D f (ε X)))
-            ( preserves-id-left-adjoint-Adjunction-Large-Precategory C D FG
+            ( preserves-identity-left-adjoint-Adjunction-Large-Precategory
+              ( C)
+              ( D)
+              ( FG)
               ( obj-right-adjoint-Adjunction-Large-Precategory C D FG X))) ∙
           ( right-unit-law-comp-hom-Large-Precategory D
             ( comp-hom-Large-Precategory D f (ε X)))))

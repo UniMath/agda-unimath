@@ -41,15 +41,15 @@ associativity and the left unit law for the precategory `C`.
 representable-functor-Large-Precategory :
   {α : Level → Level} {β : Level → Level → Level}
   (C : Large-Precategory α β) {l : Level} (c : obj-Large-Precategory C l) →
-  functor-Large-Precategory C (Set-Large-Precategory) (β l)
+  functor-Large-Precategory (β l) C (Set-Large-Precategory)
 obj-functor-Large-Precategory (representable-functor-Large-Precategory C c) =
   hom-set-Large-Precategory C c
 hom-functor-Large-Precategory (representable-functor-Large-Precategory C c) g =
   postcomp-hom-Large-Precategory C c g
-preserves-comp-functor-Large-Precategory
+preserves-composition-functor-Large-Precategory
   ( representable-functor-Large-Precategory C c) h g =
   eq-htpy (associative-comp-hom-Large-Precategory C h g)
-preserves-id-functor-Large-Precategory
+preserves-identity-functor-Large-Precategory
   ( representable-functor-Large-Precategory C c) =
   eq-htpy (left-unit-law-comp-hom-Large-Precategory C)
 ```

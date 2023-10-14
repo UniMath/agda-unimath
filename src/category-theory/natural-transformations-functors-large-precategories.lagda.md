@@ -54,8 +54,8 @@ module _
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF)
-  (G : functor-Large-Precategory C D γG)
+  (F : functor-Large-Precategory γF C D)
+  (G : functor-Large-Precategory γG C D)
   where
 
   hom-family-functor-Large-Precategory : UUω
@@ -99,7 +99,7 @@ module _
   where
 
   id-natural-transformation-Large-Precategory :
-    ( F : functor-Large-Precategory C D γF) →
+    ( F : functor-Large-Precategory γF C D) →
     natural-transformation-Large-Precategory F F
   hom-family-natural-transformation-Large-Precategory
     ( id-natural-transformation-Large-Precategory F) X =
@@ -121,9 +121,9 @@ module _
   {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC}
   {D : Large-Precategory αD βD}
-  (F : functor-Large-Precategory C D γF)
-  (G : functor-Large-Precategory C D γG)
-  (H : functor-Large-Precategory C D γH)
+  (F : functor-Large-Precategory γF C D)
+  (G : functor-Large-Precategory γG C D)
+  (H : functor-Large-Precategory γH C D)
   where
 
   comp-natural-transformation-Large-Precategory :

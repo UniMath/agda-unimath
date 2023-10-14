@@ -37,8 +37,8 @@ the type of homotopies of natural transformations.
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
-  {F : functor-Large-Precategory C D γF}
-  {G : functor-Large-Precategory C D γG}
+  {F : functor-Large-Precategory γF C D}
+  {G : functor-Large-Precategory γG C D}
   where
 
   htpy-natural-transformation-Large-Precategory :
@@ -55,8 +55,8 @@ module _
 module _
   {αC αD γF γG : Level → Level} {βC βD : Level → Level → Level}
   {C : Large-Precategory αC βC} {D : Large-Precategory αD βD}
-  {F : functor-Large-Precategory C D γF}
-  {G : functor-Large-Precategory C D γG}
+  {F : functor-Large-Precategory γF C D}
+  {G : functor-Large-Precategory γG C D}
   where
 
   refl-htpy-natural-transformation-Large-Precategory :
