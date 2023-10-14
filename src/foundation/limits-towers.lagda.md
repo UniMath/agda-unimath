@@ -93,8 +93,8 @@ module _
 The [proposition](foundation-core.propositions.md) `is-limit-Tower` is the
 assertion that the gap map is an [equivalence](foundation-core.equivalences.md).
 Note that this proposition is [small](foundation-core.small-types.md), whereas
-[the universal property](foundation-core.universal-property-limits-of-towers.md)
-is a large proposition.
+[the universal property](foundation.universal-property-limits-of-towers.md) is a
+large proposition.
 
 ```agda
 module _

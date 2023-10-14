@@ -155,7 +155,7 @@ iterated-right-shift-Tower n = iterate n right-shift-Tower
 ### Left shifting a tower
 
 We can **left shift** a tower of types by padding it with the
-[terminal type](foundation-core.unit-type.md) `unit`.
+[terminal type](foundation.unit-type.md) `unit`.
 
 ```agda
 left-shift-Tower : {l : Level} → Tower l → Tower l
