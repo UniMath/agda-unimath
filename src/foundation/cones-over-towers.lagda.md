@@ -34,9 +34,9 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **cone-Tower** over a [tower](foundation.towers-of-types.md) `A` with domain
-`X` is a [sequence](foundation.dependent-sequences.md) of functions from `X`
-into the sequence of types of `A` such that the triangles
+A **cone** over a [tower](foundation.towers-of-types.md) `A` with domain `X` is
+a [sequence](foundation.dependent-sequences.md) of functions from `X` into the
+sequence of types of `A` such that the triangles
 
 ```text
      X
@@ -46,7 +46,7 @@ into the sequence of types of `A` such that the triangles
  Aₙ₊₁ -> Aₙ
 ```
 
-commute for all `n : ℕ`.
+[commute](foundation-core.commuting-triangles-of-maps.md) for all `n : ℕ`.
 
 ## Definitions
 
@@ -76,7 +76,7 @@ module _
   coherence-cone-Tower = pr2
 ```
 
-### Identifications of cones over cospans
+### Identifications of cones over towers of types
 
 ```agda
 module _
@@ -85,8 +85,7 @@ module _
 
   coherence-htpy-cone-Tower :
     (c c' : cone-Tower A X) →
-    ((n : ℕ) → map-cone-Tower A c n ~ map-cone-Tower A c' n)
-    → UU (l1 ⊔ l2)
+    ((n : ℕ) → map-cone-Tower A c n ~ map-cone-Tower A c' n) → UU (l1 ⊔ l2)
   coherence-htpy-cone-Tower c c' H =
     (n : ℕ) →
     ( coherence-cone-Tower A c n ∙h (map-Tower A n ·l H (succ-ℕ n))) ~

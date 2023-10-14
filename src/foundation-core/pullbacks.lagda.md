@@ -42,7 +42,7 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
   where
 
-  standard-pullback : UU ((l1 ⊔ l2) ⊔ l3)
+  standard-pullback : UU (l1 ⊔ l2 ⊔ l3)
   standard-pullback = Σ A (λ x → Σ B (λ y → f x ＝ g y))
 
 module _
@@ -235,14 +235,13 @@ module _
     is-pullback-universal-property-pullback :
       (c : cone f g C) →
       ({l : Level} → universal-property-pullback l f g c) → is-pullback f g c
-    is-pullback-universal-property-pullback c up =
+    is-pullback-universal-property-pullback c =
       is-equiv-up-pullback-up-pullback
         ( cone-standard-pullback f g)
         ( c)
         ( gap f g c)
         ( htpy-cone-up-pullback-standard-pullback f g c)
         ( universal-property-pullback-standard-pullback f g)
-        ( up)
 
   abstract
     universal-property-pullback-is-pullback :
