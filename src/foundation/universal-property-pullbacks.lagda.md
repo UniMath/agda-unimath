@@ -105,13 +105,13 @@ module _
   where
 
   abstract
-    uniquely-unique-limit-Tower :
+    uniquely-unique-pullback :
       ( c' : cone f g C') (c : cone f g C) →
       ( up-c' : {l : Level} → universal-property-pullback l f g c') →
       ( up-c : {l : Level} → universal-property-pullback l f g c) →
       is-contr
         ( Σ (C' ≃ C) (λ e → htpy-cone f g (cone-map f g c (map-equiv e)) c'))
-    uniquely-unique-limit-Tower c' c up-c' up-c =
+    uniquely-unique-pullback c' c up-c' up-c =
       is-contr-total-Eq-subtype
         ( uniqueness-universal-property-pullback f g c up-c C' c')
         ( is-property-is-equiv)
