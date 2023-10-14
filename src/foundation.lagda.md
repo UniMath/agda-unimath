@@ -47,6 +47,7 @@ open import foundation.commuting-3-simplices-of-homotopies public
 open import foundation.commuting-3-simplices-of-maps public
 open import foundation.commuting-cubes-of-maps public
 open import foundation.commuting-hexagons-of-identifications public
+open import foundation.commuting-squares-of-homotopies public
 open import foundation.commuting-squares-of-identifications public
 open import foundation.commuting-squares-of-maps public
 open import foundation.commuting-triangles-of-homotopies public
@@ -177,8 +178,10 @@ open import foundation.law-of-excluded-middle public
 open import foundation.lawveres-fixed-point-theorem public
 open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.limited-principle-of-omniscience public
+open import foundation.limits-towers public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
+open import foundation.maps-of-towers public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public

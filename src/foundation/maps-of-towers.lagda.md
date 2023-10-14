@@ -7,10 +7,11 @@ module foundation.maps-of-towers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.natural-numbers
+
+open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
 open import foundation.towers-of-types
-open import foundation.commuting-squares-of-maps
-open import elementary-number-theory.natural-numbers
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
