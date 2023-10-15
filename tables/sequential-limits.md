@@ -9,4 +9,4 @@
 | The universal property of sequential limits | [`foundation.universal-property-sequential-limits`](foundation.universal-property-sequential-limits.md) |
 | Sequential limits                           | [`foundation.sequential-limits`](foundation.sequential-limits.md)                                       |
 | Functoriality sequential limits             | [`foundation.functoriality-sequential-limits`](foundation.functoriality-sequential-limits.md)           |
-| Transfinite cocomposition                   | [`foundation.transfinite-cocomposition`](foundation.transfinite-cocomposition.md)                       |
+| Transfinite cocomposition of maps           | [`foundation.transfinite-cocomposition-of-maps`](foundation.transfinite-cocomposition-of-maps.md)       |
