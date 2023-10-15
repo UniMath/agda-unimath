@@ -98,3 +98,10 @@ eq-equiv-tower :
   {l : Level} {A B : tower l} → equiv-tower A B → A ＝ B
 eq-equiv-tower {A = A} {B} = map-inv-is-equiv (is-equiv-equiv-eq-tower A B)
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

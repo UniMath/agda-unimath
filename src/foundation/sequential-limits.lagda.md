@@ -286,3 +286,10 @@ module _
       ( is-lim-c)
       ( universal-property-standard-sequential-limit A)
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

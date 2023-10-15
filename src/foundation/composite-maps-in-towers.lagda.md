@@ -53,3 +53,10 @@ comp-map-dependent-tower {A = A} B n (succ-ℕ r) x y =
     ( map-tower A (n +ℕ r) x)
     ( map-dependent-tower B (n +ℕ r) x y)
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

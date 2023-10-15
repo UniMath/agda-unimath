@@ -137,3 +137,10 @@ module _
   pr1 (cone-map-tower c f) n x = map-cone-tower A c n (f x)
   pr2 (cone-map-tower c f) n x = coherence-cone-tower A c n (f x)
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

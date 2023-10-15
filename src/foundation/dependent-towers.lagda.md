@@ -149,3 +149,10 @@ pr1 (left-shift-dependent-tower B) (succ-ℕ n) = family-dependent-tower B n
 pr2 (left-shift-dependent-tower B) zero-ℕ _ = raise-terminal-map
 pr2 (left-shift-dependent-tower B) (succ-ℕ n) = map-dependent-tower B n
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

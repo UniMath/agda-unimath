@@ -235,6 +235,13 @@ module _
           ( up-c'))
 ```
 
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}
+
 ## See also
 
 - For sequential colimits, see

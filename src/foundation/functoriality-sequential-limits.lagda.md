@@ -63,3 +63,10 @@ module _
       ( is-lim-c)
       ( map-hom-standard-sequential-limit h (gap-tower A' c' x))
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

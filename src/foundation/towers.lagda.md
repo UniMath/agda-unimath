@@ -85,3 +85,10 @@ pr2 (left-shift-tower A) (succ-ℕ n) = map-tower A n
 iterated-left-shift-tower : {l : Level} (n : ℕ) → tower l → tower l
 iterated-left-shift-tower n = iterate n left-shift-tower
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}

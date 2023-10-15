@@ -24,9 +24,9 @@ Given a [tower](foundation.towers.md) of maps, i.e. a certain infinite
   ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₁ ---> A₀,
 ```
 
-we can form the **transfinite cocomposition** of `fₙ` by taking the canonical
-map from the [standard sequential limit](foundation.sequential-limits.md) into
-`A₀`.
+we can form the **transfinite cocomposition** of `f` by taking the canonical map
+from the [standard sequential limit](foundation.sequential-limits.md) `limₙ Aₙ`
+into `A₀`.
 
 ## Definitions
 
@@ -40,3 +40,10 @@ module _
   transfinite-cocomp : standard-sequential-limit f → type-tower f 0
   transfinite-cocomp x = sequence-standard-sequential-limit f x 0
 ```
+
+## Table of files about sequential limits
+
+The following table lists files that are about sequential limits as a general
+concept.
+
+{{#include tables/sequential-limits.md}}
