@@ -7,22 +7,17 @@ module category-theory.augmented-simplex-category where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.categories
 open import category-theory.precategories
 
 open import elementary-number-theory.inequality-standard-finite-types
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 
 open import order-theory.order-preserving-maps-posets
-
-open import univalent-combinatorics.standard-finite-types
 ```
 
 </details>

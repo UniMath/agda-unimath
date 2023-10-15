@@ -8,7 +8,6 @@ module order-theory.decidable-total-orders where
 
 ```agda
 open import foundation.binary-relations
-open import foundation.cartesian-product-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.dependent-pair-types
