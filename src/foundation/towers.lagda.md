@@ -19,7 +19,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **tower** of types `f` is a [sequence](foundation.sequences.md) of types
+A **tower of types** `f` is a [sequence](foundation.sequences.md) of types
 together with maps between every two consecutive types
 
 ```text

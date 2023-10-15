@@ -30,7 +30,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **cone** over a [tower](foundation.towers.md) `A` with domain `X` is a
+A **cone over a [tower](foundation.towers.md) `A` with domain `X`** is a
 [sequence](foundation.dependent-sequences.md) of functions from `X` into the
 sequence of types of `A` such that the triangles
 

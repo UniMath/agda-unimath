@@ -34,9 +34,9 @@ An **equivalence of towers** `A ≃ B` is a commuting diagram of the form
 
 ```text
   ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀
-  |        |         |       |       |        |
+           |         |       |       |        |
   ⋯        |         |       ⋯       |        |
-  v        v         v       v       v        v
+           v         v       v       v        v
   ⋯ ----> Bₙ₊₁ ----> Bₙ ----> ⋯ ----> B₁ ----> B₀.
 ```
 

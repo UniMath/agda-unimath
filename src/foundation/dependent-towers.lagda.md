@@ -77,7 +77,7 @@ pr2 (const-dependent-tower A B) n _ = map-tower B n
 
 ### Sections of a dependent tower
 
-A **section of a dependent tower** `(B , g)` over `(A , f)` is a choice of
+A **section of a dependent tower `(B , g)` over `(A , f)`** is a choice of
 sections `hₙ` of each `Bₙ` that vary naturally over `A`, by which we mean that
 the diagrams
 
