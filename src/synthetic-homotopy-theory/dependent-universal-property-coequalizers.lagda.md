@@ -111,30 +111,6 @@ module _
         ( is-contr-map-is-equiv (dup-coequalizer P) k)
 ```
 
-### The dependent universal property of coequializers implies the universal property of coequalizers
-
-```agda
-module _
-  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
-  ( e : cofork f g X)
-  where
-
-  universal-property-dependent-universal-property-coequalizer :
-    ( {l : Level} → dependent-universal-property-coequalizer l f g e) →
-    ( {l : Level} → universal-property-coequalizer l f g e)
-  universal-property-dependent-universal-property-coequalizer
-    ( dup-coequalizer)
-    ( Y) =
-      is-equiv-comp-htpy
-        ( cofork-map f g e)
-        ( map-compute-dependent-cofork-constant-family f g e Y)
-        ( dependent-cofork-map f g e)
-        ( triangle-compute-dependent-cofork-constant-family f g e Y)
-        ( dup-coequalizer (λ _ → Y))
-        ( is-equiv-map-equiv
-          ( compute-dependent-cofork-constant-family f g e Y))
-```
-
 ### A cofork has the dependent universal property of coequalizers if and only if the corresponding cocone has the dependent universal property of pushouts
 
 As mentioned in [coforks](synthetic-homotopy-theory.coforks.md), coforks can be
@@ -196,13 +172,28 @@ module _
       ( dup-coequalizer P)
 ```
 
-### The universal property of coequalizers implies the dependent universal property of coequalizers
+### The universal property of coequalizers is equivalent to the dependent universal property of coequalizers
 
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f g : A → B) {X : UU l3}
   ( e : cofork f g X)
   where
+
+  universal-property-dependent-universal-property-coequalizer :
+    ( {l : Level} → dependent-universal-property-coequalizer l f g e) →
+    ( {l : Level} → universal-property-coequalizer l f g e)
+  universal-property-dependent-universal-property-coequalizer
+    ( dup-coequalizer)
+    ( Y) =
+      is-equiv-comp-htpy
+        ( cofork-map f g e)
+        ( map-compute-dependent-cofork-constant-family f g e Y)
+        ( dependent-cofork-map f g e)
+        ( triangle-compute-dependent-cofork-constant-family f g e Y)
+        ( dup-coequalizer (λ _ → Y))
+        ( is-equiv-map-equiv
+          ( compute-dependent-cofork-constant-family f g e Y))
 
   dependent-universal-property-universal-property-coequalizer :
     ( {l : Level} → universal-property-coequalizer l f g e) →
