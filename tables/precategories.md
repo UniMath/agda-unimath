@@ -9,6 +9,7 @@
 | `G`-sets              | [`group-theory.precategory-of-group-actions`](group-theory.precategory-of-group-actions.md)                               |
 | Groups                | [`group-theory.precategory-of-groups`](group-theory.precategory-of-groups.md)                                             |
 | Monoids               | [`group-theory.precategory-of-monoids`](group-theory.precategory-of-monoids.md)                                           |
+| Posets                | [`ring-theory.precategory-of-posets`](ring-theory.precategory-of-posets.md)                                               |
 | Rings                 | [`ring-theory.precategory-of-rings`](ring-theory.precategory-of-rings.md)                                                 |
 | Semigroups            | [`group-theory.precategory-of-semigroups`](group-theory.precategory-of-semigroups.md)                                     |
 | Semirings             | [`ring-theory.precategory-of-semirings`](ring-theory.precategory-of-semirings.md)                                         |

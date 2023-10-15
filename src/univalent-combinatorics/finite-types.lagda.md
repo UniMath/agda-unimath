@@ -99,7 +99,7 @@ has-cardinality :
 has-cardinality k X = mere-equiv (Fin k) X
 ```
 
-### The type of all types of cardinality k of a given universe leve l
+### The type of all types of cardinality `k` of a given universe level
 
 ```agda
 UU-Fin : (l : Level) → ℕ → UU (lsuc l)
