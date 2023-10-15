@@ -9,12 +9,12 @@ module order-theory.finite-total-orders where
 ```agda
 open import foundation.decidable-types
 open import foundation.dependent-pair-types
-open import foundation.propositions
 open import foundation.function-types
+open import foundation.propositions
 open import foundation.universe-levels
 
-open import order-theory.finite-preorders
 open import order-theory.finite-posets
+open import order-theory.finite-preorders
 open import order-theory.posets
 open import order-theory.total-orders
 
@@ -42,7 +42,8 @@ module _
   is-finite-Total-Order = is-finite-Preorder (preorder-Total-Order P)
 
   is-prop-is-finite-Total-Order : is-prop is-finite-Total-Order
-  is-prop-is-finite-Total-Order = is-prop-is-finite-Preorder (preorder-Total-Order P)
+  is-prop-is-finite-Total-Order =
+    is-prop-is-finite-Preorder (preorder-Total-Order P)
 
   is-finite-type-is-finite-Total-Order :
     is-finite-Total-Order → is-finite (type-Total-Order P)
@@ -50,7 +51,8 @@ module _
     is-finite-type-is-finite-Preorder (preorder-Total-Order P)
 
   is-decidable-leq-is-finite-Total-Order :
-    is-finite-Total-Order → (x y : type-Total-Order P) → is-decidable (leq-Total-Order P x y)
+    is-finite-Total-Order →
+    (x y : type-Total-Order P) → is-decidable (leq-Total-Order P x y)
   is-decidable-leq-is-finite-Total-Order =
     is-decidable-leq-is-finite-Preorder (preorder-Total-Order P)
 

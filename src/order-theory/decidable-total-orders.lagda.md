@@ -182,8 +182,3 @@ module _
   set-Decidable-Total-Order : Set l1
   set-Decidable-Total-Order = set-Poset poset-Decidable-Total-Order
 ```
-
-## See also
-
-- Decidable total orders generalize
-  [finite total orders](order-theory.finite-total-orders.md).

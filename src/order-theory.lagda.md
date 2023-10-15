@@ -80,7 +80,6 @@ open import order-theory.order-preserving-maps-preorders public
 open import order-theory.posets public
 open import order-theory.powers-of-large-locales public
 open import order-theory.precategory-of-decidable-total-orders public
-open import order-theory.precategory-of-finite-total-orders public
 open import order-theory.precategory-of-posets public
 open import order-theory.precategory-of-total-orders public
 open import order-theory.preorders public
