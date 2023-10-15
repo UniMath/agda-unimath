@@ -27,7 +27,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **cone on a [cospan](foundation.cospans.md)** `A -f-> X <-g- B` with domain
+A **cone over a [cospan](foundation.cospans.md)** `A -f-> X <-g- B` with domain
 `C` is a triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`,
 and a homotopy `H` witnessing that the square
 

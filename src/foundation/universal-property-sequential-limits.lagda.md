@@ -73,11 +73,11 @@ module _
   map-universal-property-sequential-limit up-c {Y} c' =
     map-inv-is-equiv (up-c Y) c'
 
-  eq-map-universal-property-sequential-limit :
+  compute-map-universal-property-sequential-limit :
     (up-c : {l : Level} → universal-property-sequential-limit l A c) →
     {Y : UU l3} (c' : cone-tower A Y) →
     cone-map-tower A c (map-universal-property-sequential-limit up-c c') ＝ c'
-  eq-map-universal-property-sequential-limit up-c {Y} c' =
+  compute-map-universal-property-sequential-limit up-c {Y} c' =
     is-section-map-inv-is-equiv (up-c Y) c'
 ```
 
@@ -206,7 +206,7 @@ module _
     htpy-eq-cone-tower A
       ( cone-map-tower A c (map-universal-property-sequential-limit A c up c'))
       ( c')
-      ( eq-map-universal-property-sequential-limit A c up c')
+      ( compute-map-universal-property-sequential-limit A c up c')
 ```
 
 ### Unique uniqueness of sequential limits

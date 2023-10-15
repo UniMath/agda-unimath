@@ -50,11 +50,11 @@ module _
   map-universal-property-pullback up-c {C'} c' =
     map-inv-is-equiv (up-c C') c'
 
-  eq-map-universal-property-pullback :
+  compute-map-universal-property-pullback :
     (up-c : {l : Level} → universal-property-pullback l f g c) →
     {C' : UU l5} (c' : cone f g C') →
     cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
-  eq-map-universal-property-pullback up-c {C'} c' =
+  compute-map-universal-property-pullback up-c {C'} c' =
     is-section-map-inv-is-equiv (up-c C') c'
 ```
 

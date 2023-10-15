@@ -80,7 +80,7 @@ module _
     htpy-eq-cone f g
       ( cone-map f g c (map-universal-property-pullback f g c up c'))
       ( c')
-      ( eq-map-universal-property-pullback f g c up c')
+      ( compute-map-universal-property-pullback f g c up c')
 ```
 
 ### Uniquely uniqueness of pullbacks
