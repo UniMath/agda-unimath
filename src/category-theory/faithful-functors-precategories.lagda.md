@@ -28,8 +28,8 @@ A [functor](category-theory.functors-precategories.md) between
 its an [embedding](foundation-core.embeddings.md) on hom-sets.
 
 Note that embeddings on [sets](foundation-core.sets.md) happen to coincide with
-[injections](foundation.injective-maps.md), but we define it in terms of the
-stronger notion, as this is the notion that generalizes.
+[injections](foundation.injective-maps.md), however, we define it in terms of
+the stronger notion as this is the notion that generalizes.
 
 ## Definition
 
@@ -109,7 +109,7 @@ module _
     is-prop-is-injective-hom-map-Precategory
 ```
 
-### The predicate of being faithful on functors between precategories
+### The predicate of being injective on hom-sets on functors between precategories
 
 ```agda
 module _

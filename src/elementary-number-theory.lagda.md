@@ -29,6 +29,7 @@ open import elementary-number-theory.congruence-integers public
 open import elementary-number-theory.congruence-natural-numbers public
 open import elementary-number-theory.decidable-dependent-function-types public
 open import elementary-number-theory.decidable-total-order-natural-numbers public
+open import elementary-number-theory.decidable-total-order-standard-finite-types public
 open import elementary-number-theory.decidable-types public
 open import elementary-number-theory.difference-integers public
 open import elementary-number-theory.dirichlet-convolution public
