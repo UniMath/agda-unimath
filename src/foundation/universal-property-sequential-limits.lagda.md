@@ -43,7 +43,11 @@ the **sequential limit** `limₙ Aₙ` is a universal type completing the diagra
   limₙ Aₙ ---> ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
 ```
 
-The universal property
+The **universal property of the sequential limit** states that `limₙ Aₙ` is the
+terminal such type, by which we mean that given any
+[cone](foundation.cones-over-towers.md) over `A` with domain `X`, there is a
+[unique](foundation-core.contractible-types.md) map `g : X → limₙ Aₙ` exhibiting
+that cone as a composite of `g` with the cone of `limₙ Aₙ` over `A`.
 
 ## Definition
 

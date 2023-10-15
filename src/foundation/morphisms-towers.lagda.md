@@ -65,12 +65,12 @@ module _
   where
 
   map-hom-tower : hom-tower A B → (n : ℕ) → type-tower A n → type-tower B n
-  map-hom-tower = map-section-dependent-tower (const-dependent-tower A B)
+  map-hom-tower = map-section-dependent-tower A (const-dependent-tower A B)
 
   naturality-map-hom-tower :
     (f : hom-tower A B) (n : ℕ) → naturality-hom-tower A B (map-hom-tower f) n
   naturality-map-hom-tower =
-    naturality-map-section-dependent-tower (const-dependent-tower A B)
+    naturality-map-section-dependent-tower A (const-dependent-tower A B)
 ```
 
 ### Identity map on towers
