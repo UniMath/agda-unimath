@@ -50,7 +50,7 @@ module _
       .right-unit-law-comp-hom-Large-Precategory {X = X} {Y} →
         right-unit-law-comp-hom-Poset X Y
 
-Poset-Large-Precategory : Large-Precategory (lsuc) (_⊔_)
+Poset-Large-Precategory : Large-Precategory lsuc (_⊔_)
 Poset-Large-Precategory =
   parametric-Poset-Large-Precategory (λ l → l) (λ l → l)
 ```

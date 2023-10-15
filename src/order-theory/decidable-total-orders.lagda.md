@@ -33,10 +33,27 @@ decidable.
 
 ## Definitions
 
+### The predicate on posets of being decidable total orders
+
+```agda
+is-decidable-total-prop-Poset : {l1 l2 : Level} → Poset l1 l2 → Prop (l1 ⊔ l2)
+is-decidable-total-prop-Poset P =
+  prod-Prop (is-total-Poset-Prop P) (is-decidable-leq-Poset-Prop P)
+
+is-decidable-total-Poset : {l1 l2 : Level} → Poset l1 l2 → UU (l1 ⊔ l2)
+is-decidable-total-Poset P = type-Prop (is-decidable-total-prop-Poset P)
+
+is-prop-is-decidable-total-Poset :
+  {l1 l2 : Level} (P : Poset l1 l2) → is-prop (is-decidable-total-Poset P)
+is-prop-is-decidable-total-Poset P =
+  is-prop-type-Prop (is-decidable-total-prop-Poset P)
+```
+
+### The type of decidable total orders
+
 ```agda
 Decidable-Total-Order : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Decidable-Total-Order l1 l2 =
-  Σ (Poset l1 l2) (λ P → is-total-Poset P × is-decidable-leq-Poset P)
+Decidable-Total-Order l1 l2 = Σ (Poset l1 l2) (is-decidable-total-Poset)
 
 module _
   {l1 l2 : Level} (P : Decidable-Total-Order l1 l2)
