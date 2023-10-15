@@ -98,6 +98,14 @@ module _
     is-closed-under-inverses-subgroup-family-of-elements-Group G
       family-of-commutators-Group
 
+  contains-commutator-commutator-subgroup-Group :
+    (x y : type-Group G) →
+    is-in-commutator-subgroup-Group (commutator-Group G x y)
+  contains-commutator-commutator-subgroup-Group x y =
+    contains-element-subgroup-family-of-elements-Group G
+      ( family-of-commutators-Group)
+      ( x , y)
+
   is-subgroup-generated-by-family-of-commutators-commutator-subgroup-Group :
     is-subgroup-generated-by-family-of-elements-Group G
       family-of-commutators-Group

@@ -283,7 +283,7 @@ dependent-universal-property-surj :
   UU ((lsuc l) ⊔ l1 ⊔ l2)
 dependent-universal-property-surj l {B = B} f =
   (P : B → Prop l) →
-    is-equiv (λ (h : (b : B) → type-Prop (P b)) x → h (f x))
+  is-equiv (λ (h : (b : B) → type-Prop (P b)) x → h (f x))
 
 abstract
   is-surjective-dependent-universal-property-surj :
