@@ -30,6 +30,7 @@ open import order-theory.distributive-lattices public
 open import order-theory.finite-coverings-locales public
 open import order-theory.finite-posets public
 open import order-theory.finite-preorders public
+open import order-theory.finite-total-orders public
 open import order-theory.finitely-graded-posets public
 open import order-theory.frames public
 open import order-theory.galois-connections public
@@ -79,6 +80,7 @@ open import order-theory.order-preserving-maps-preorders public
 open import order-theory.posets public
 open import order-theory.powers-of-large-locales public
 open import order-theory.precategory-of-decidable-total-orders public
+open import order-theory.precategory-of-finite-total-orders public
 open import order-theory.precategory-of-posets public
 open import order-theory.precategory-of-total-orders public
 open import order-theory.preorders public

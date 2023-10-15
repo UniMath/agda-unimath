@@ -7,18 +7,18 @@ module order-theory.precategory-of-decidable-total-orders where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.full-large-subprecategories
 open import category-theory.large-precategories
 open import category-theory.large-subprecategories
-open import category-theory.full-large-subprecategories
 open import category-theory.precategories
 
 open import foundation.universe-levels
 
+open import order-theory.decidable-total-orders
 open import order-theory.order-preserving-maps-posets
 open import order-theory.posets
-open import order-theory.total-orders
-open import order-theory.decidable-total-orders
 open import order-theory.precategory-of-posets
+open import order-theory.total-orders
 ```
 
 </details>

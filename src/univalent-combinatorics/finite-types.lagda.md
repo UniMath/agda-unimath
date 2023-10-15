@@ -47,7 +47,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is finite if it is merely equivalent to a standard finite type.
+A type is **finite** if it is
+[merely equivalent](foundation.mere-equivalences.md) to a
+[standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 ## Definition
 
