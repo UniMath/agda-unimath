@@ -126,7 +126,7 @@ module _
   eq-htpy-cone-tower c c' = map-inv-equiv (extensionality-cone-tower c c')
 ```
 
-### Precomposition cones over towers
+### Precomposing cones over towers with a map
 
 ```agda
 module _

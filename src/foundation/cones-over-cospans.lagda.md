@@ -152,7 +152,7 @@ module _
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
 ```
 
-### Precomposition cones over cospans
+### Precomposing cones over cospans with a map
 
 ```agda
 module _
