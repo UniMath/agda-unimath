@@ -22,7 +22,7 @@ open import order-theory.posets
 
 The **(large) precategory of posets** consists of
 [posets](order-theory.posets.md) and
-[order preserving maps](ring-theory.order-preserving-maps-posets.md).
+[order preserving maps](order-theory.order-preserving-maps-posets.md).
 
 ## Definitions
 
