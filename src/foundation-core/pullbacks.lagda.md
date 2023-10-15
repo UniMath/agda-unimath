@@ -91,7 +91,7 @@ module _
   pr2 (pr2 (gap c z)) = coherence-square-cone f g c z
 ```
 
-### The `is-pullback` property
+### The property of being a pullback
 
 The [proposition](foundation-core.propositions.md) `is-pullback` is the
 assertion that the gap map is an [equivalence](foundation-core.equivalences.md).

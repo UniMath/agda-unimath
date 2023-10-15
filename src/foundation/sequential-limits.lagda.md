@@ -118,7 +118,7 @@ module _
   pr2 (gap-tower c x) n = coherence-cone-tower A c n x
 ```
 
-### The `is-sequential-limit` property
+### The property of being a sequential limit
 
 The [proposition](foundation-core.propositions.md) `is-sequential-limit` is the
 assertion that the gap map is an [equivalence](foundation-core.equivalences.md).
