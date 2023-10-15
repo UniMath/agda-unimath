@@ -129,3 +129,9 @@ module _
         ( equiv-tot (λ h → extensionality-cone f g (cone-map f g c h) c'))
         ( is-contr-map-is-equiv (up C') c')
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

@@ -1059,3 +1059,9 @@ is-pullback-cone-ap f g (p , q , H) is-pb-c c1 c2 =
           ( is-contr-total-path (p c1))))
       ( c2))
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

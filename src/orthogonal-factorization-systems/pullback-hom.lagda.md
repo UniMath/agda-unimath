@@ -217,3 +217,9 @@ module _
     lifting-square-fibered-map f g h ≃ fiber (pullback-hom f g) h
   compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

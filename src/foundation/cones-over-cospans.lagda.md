@@ -262,3 +262,9 @@ module _
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f' g' c')
       ( fam-htpy-parallel-cone c c')
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

@@ -866,3 +866,9 @@ module _
             ( λ t → is-fiberwise-equiv-map-fiber-cone-is-pullback
               (horizontal-map-cone f g c) h d is-pb-d (pr1 t))))
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

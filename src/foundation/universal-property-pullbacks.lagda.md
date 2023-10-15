@@ -122,3 +122,9 @@ module _
           ( htpy-cone-map-universal-property-pullback f g c up-c c')
           up-c up-c')
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

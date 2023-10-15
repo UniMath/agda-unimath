@@ -65,3 +65,9 @@ module _
       ( is-pullback-fibered-map f g)
       ( is-pullback-fibered-map f' g')
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

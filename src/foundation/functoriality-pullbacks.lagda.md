@@ -65,3 +65,9 @@ module _
   map-is-pullback c c' is-pb-c is-pb-c' h x =
     map-inv-is-equiv is-pb-c (map-standard-pullback h (gap f' g' c' x))
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}
