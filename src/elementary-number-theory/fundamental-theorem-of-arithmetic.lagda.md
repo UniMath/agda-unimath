@@ -445,7 +445,7 @@ helper-compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ (succ-ℕ x) 
   refl
 
 compute-list-primes-fundamental-theorem-arithmetic-succ-ℕ :
-  (x : ℕ) → (H : 1 ≤-ℕ x) →
+  (x : ℕ) → (H : 1 ≤ℕ x) →
   list-primes-fundamental-theorem-arithmetic-ℕ (succ-ℕ x) star ＝
   cons
     ( least-prime-divisor-ℕ (succ-ℕ x) (le-succ-leq-ℕ 1 x H))

@@ -39,6 +39,10 @@ leq-Fin (succ-ℕ k) x (inr y) = unit
 leq-Fin (succ-ℕ k) (inl x) (inl y) = leq-Fin k x y
 leq-Fin (succ-ℕ k) (inr x) (inl y) = empty
 
+infix 30 _≤-Fin_
+_≤-Fin_ : {k : ℕ} → Fin k → Fin k → UU lzero
+_≤-Fin_ {k} = leq-Fin k
+
 abstract
   is-prop-leq-Fin :
     (k : ℕ) (x y : Fin k) → is-prop (leq-Fin k x y)

@@ -102,7 +102,7 @@ right-unit-law-dist-ℕ (succ-ℕ n) = refl
 
 ```agda
 triangle-inequality-dist-ℕ :
-  (m n k : ℕ) → (dist-ℕ m n) ≤-ℕ ((dist-ℕ m k) +ℕ (dist-ℕ k n))
+  (m n k : ℕ) → (dist-ℕ m n) ≤ℕ ((dist-ℕ m k) +ℕ (dist-ℕ k n))
 triangle-inequality-dist-ℕ zero-ℕ zero-ℕ zero-ℕ = star
 triangle-inequality-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ k) = star
 triangle-inequality-dist-ℕ zero-ℕ (succ-ℕ n) zero-ℕ =
@@ -148,7 +148,7 @@ triangle-inequality-dist-ℕ (succ-ℕ m) (succ-ℕ n) (succ-ℕ k) =
 
 ```agda
 is-additive-right-inverse-dist-ℕ :
-  (x y : ℕ) → x ≤-ℕ y → x +ℕ (dist-ℕ x y) ＝ y
+  (x y : ℕ) → x ≤ℕ y → x +ℕ (dist-ℕ x y) ＝ y
 is-additive-right-inverse-dist-ℕ zero-ℕ zero-ℕ H = refl
 is-additive-right-inverse-dist-ℕ zero-ℕ (succ-ℕ y) star =
   left-unit-law-add-ℕ (succ-ℕ y)
@@ -167,7 +167,7 @@ rewrite-left-add-dist-ℕ (succ-ℕ x) (succ-ℕ y) ._ refl =
   rewrite-left-add-dist-ℕ (succ-ℕ x) y ((succ-ℕ x) +ℕ y) refl
 
 rewrite-left-dist-add-ℕ :
-  (x y z : ℕ) → y ≤-ℕ z → x ＝ dist-ℕ y z → x +ℕ y ＝ z
+  (x y z : ℕ) → y ≤ℕ z → x ＝ dist-ℕ y z → x +ℕ y ＝ z
 rewrite-left-dist-add-ℕ .(dist-ℕ y z) y z H refl =
   ( commutative-add-ℕ (dist-ℕ y z) y) ∙
   ( is-additive-right-inverse-dist-ℕ y z H)
@@ -178,12 +178,12 @@ rewrite-right-add-dist-ℕ x y z p =
   rewrite-left-add-dist-ℕ y x z (commutative-add-ℕ y x ∙ p)
 
 rewrite-right-dist-add-ℕ :
-  (x y z : ℕ) → x ≤-ℕ z → y ＝ dist-ℕ x z → x +ℕ y ＝ z
+  (x y z : ℕ) → x ≤ℕ z → y ＝ dist-ℕ x z → x +ℕ y ＝ z
 rewrite-right-dist-add-ℕ x .(dist-ℕ x z) z H refl =
   is-additive-right-inverse-dist-ℕ x z H
 
 is-difference-dist-ℕ :
-  (x y : ℕ) → x ≤-ℕ y → x +ℕ (dist-ℕ x y) ＝ y
+  (x y : ℕ) → x ≤ℕ y → x +ℕ (dist-ℕ x y) ＝ y
 is-difference-dist-ℕ zero-ℕ zero-ℕ H = refl
 is-difference-dist-ℕ zero-ℕ (succ-ℕ y) H = left-unit-law-add-ℕ (succ-ℕ y)
 is-difference-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
@@ -191,7 +191,7 @@ is-difference-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
   ( ap succ-ℕ (is-difference-dist-ℕ x y H))
 
 is-difference-dist-ℕ' :
-  (x y : ℕ) → x ≤-ℕ y → (dist-ℕ x y) +ℕ x ＝ y
+  (x y : ℕ) → x ≤ℕ y → (dist-ℕ x y) +ℕ x ＝ y
 is-difference-dist-ℕ' x y H =
   ( commutative-add-ℕ (dist-ℕ x y) x) ∙
   ( is-difference-dist-ℕ x y H)
@@ -211,7 +211,7 @@ dist-add-ℕ' x y = symmetric-dist-ℕ (x +ℕ y) x ∙ dist-add-ℕ x y
 
 ```agda
 triangle-equality-dist-ℕ :
-  (x y z : ℕ) → (x ≤-ℕ y) → (y ≤-ℕ z) →
+  (x y z : ℕ) → (x ≤ℕ y) → (y ≤ℕ z) →
   (dist-ℕ x y) +ℕ (dist-ℕ y z) ＝ dist-ℕ x z
 triangle-equality-dist-ℕ zero-ℕ zero-ℕ zero-ℕ H1 H2 = refl
 triangle-equality-dist-ℕ zero-ℕ zero-ℕ (succ-ℕ z) star star =
@@ -270,7 +270,7 @@ is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =
 
 ```agda
 leq-dist-ℕ :
-  (x y : ℕ) → x ≤-ℕ y → dist-ℕ x y ≤-ℕ y
+  (x y : ℕ) → x ≤ℕ y → dist-ℕ x y ≤ℕ y
 leq-dist-ℕ zero-ℕ zero-ℕ H = refl-leq-ℕ zero-ℕ
 leq-dist-ℕ zero-ℕ (succ-ℕ y) H = refl-leq-ℕ y
 leq-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =

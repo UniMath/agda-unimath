@@ -84,7 +84,7 @@ is-multiple-of-cofibonacci-cofibonacci m =
 
 is-lower-bound-cofibonacci :
   (m x : ℕ) → is-multiple-of-cofibonacci m x →
-  cofibonacci m ≤-ℕ x
+  cofibonacci m ≤ℕ x
 is-lower-bound-cofibonacci m =
   pr2 (pr2 (least-multiple-of-cofibonacci m))
 ```
