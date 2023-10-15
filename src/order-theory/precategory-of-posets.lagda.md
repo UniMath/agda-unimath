@@ -33,11 +33,11 @@ module _
   (α β : Level → Level)
   where
 
-  parametrized-Poset-Large-Precategory :
+  parametric-Poset-Large-Precategory :
     Large-Precategory
       ( λ l → lsuc (α l) ⊔ lsuc (β l))
       ( λ l1 l2 → α l1 ⊔ β l1 ⊔ α l2 ⊔ β l2)
-  parametrized-Poset-Large-Precategory =
+  parametric-Poset-Large-Precategory =
     λ where
       .obj-Large-Precategory l → Poset (α l) (β l)
       .hom-set-Large-Precategory → hom-set-Poset
@@ -52,7 +52,7 @@ module _
 
 Poset-Large-Precategory : Large-Precategory (lsuc) (_⊔_)
 Poset-Large-Precategory =
-  parametrized-Poset-Large-Precategory (λ l → l) (λ l → l)
+  parametric-Poset-Large-Precategory (λ l → l) (λ l → l)
 ```
 
 ### The precategory or posets of universe level `l`
