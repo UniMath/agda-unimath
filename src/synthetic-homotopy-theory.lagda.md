@@ -26,6 +26,7 @@ open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-coforks public
 open import synthetic-homotopy-theory.dependent-descent-circle public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
+open import synthetic-homotopy-theory.dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.dependent-suspension-structures public
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers public
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts public

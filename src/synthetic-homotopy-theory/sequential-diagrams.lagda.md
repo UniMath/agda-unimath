@@ -18,9 +18,9 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **sequential diagram** `(A, a)` is a family of types `A : ℕ → 𝓤` over the
-natural numbers, equipped with a family of maps `aₙ : A n → A (n + 1)` for all
-`n`.
+A **sequential diagram** `(A, a)` is a [sequence](foundation.sequences.md) of
+types `A : ℕ → 𝓤` over the natural numbers, equipped with a family of maps
+`aₙ : A n → A (n + 1)` for all `n`.
 
 ## Definition
 
@@ -40,7 +40,6 @@ module _
     family-sequential-diagram n → family-sequential-diagram (succ-ℕ n)
   map-sequential-diagram = pr2 A
 ```
-
 
 ## References
 
