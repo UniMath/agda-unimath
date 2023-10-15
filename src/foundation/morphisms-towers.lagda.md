@@ -101,7 +101,6 @@ comp-hom-tower :
   {l : Level} (A B C : tower l) → hom-tower B C → hom-tower A B → hom-tower A C
 pr1 (comp-hom-tower A B C g f) = map-comp-hom-tower A B C g f
 pr2 (comp-hom-tower A B C g f) = naturality-comp-hom-tower A B C g f
-
 ```
 
 ## Properties

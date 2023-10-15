@@ -54,6 +54,7 @@ open import foundation.commuting-triangles-of-homotopies public
 open import foundation.commuting-triangles-of-maps public
 open import foundation.complements public
 open import foundation.complements-subtypes public
+open import foundation.composite-maps-in-towers public
 open import foundation.cones-over-cospans public
 open import foundation.cones-over-towers public
 open import foundation.conjunction public
@@ -182,7 +183,6 @@ open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
-open import foundation.morphisms-towers public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public
@@ -190,6 +190,7 @@ open import foundation.mere-equivalences public
 open import foundation.monomorphisms public
 open import foundation.morphisms-binary-relations public
 open import foundation.morphisms-cospans public
+open import foundation.morphisms-towers public
 open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public

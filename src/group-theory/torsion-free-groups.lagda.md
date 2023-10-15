@@ -118,7 +118,8 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group : Prop (lsuc l1)
+  is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group :
+    Prop (lsuc l1)
   is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group =
     is-equiv-Prop
       ( vertical-map-standard-pullback

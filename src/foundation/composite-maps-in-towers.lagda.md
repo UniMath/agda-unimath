@@ -11,8 +11,8 @@ open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
-open import foundation.iterating-functions
 open import foundation.dependent-towers
+open import foundation.iterating-functions
 open import foundation.towers
 open import foundation.unit-type
 open import foundation.universe-levels
