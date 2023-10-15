@@ -73,7 +73,7 @@ pr2 (id-equiv-tower A) n = refl-htpy
 
 equiv-eq-tower :
   {l : Level} (A B : tower l) → A ＝ B → equiv-tower A B
-equiv-eq-tower A .A refl = refl-equiv-tower A
+equiv-eq-tower A .A refl = id-equiv-tower A
 
 is-contr-total-equiv-tower :
   {l : Level} (A : tower l) →
