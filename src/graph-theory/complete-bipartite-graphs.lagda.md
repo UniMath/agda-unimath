@@ -17,7 +17,7 @@ open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.cartesian-product-types
 open import univalent-combinatorics.coproduct-types
 open import univalent-combinatorics.dependent-pair-types
-open import univalent-combinatorics.fibers-of-maps-finite-types
+open import univalent-combinatorics.fibers-of-maps
 open import univalent-combinatorics.finite-types
 ```
 

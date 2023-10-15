@@ -7,7 +7,6 @@ module foundation.morphisms-towers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
@@ -17,10 +16,8 @@ open import foundation.dependent-towers
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.iterating-functions
 open import foundation.structure-identity-principle
 open import foundation.towers
-open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -28,7 +25,6 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.univalence
 open import foundation-core.whiskering-homotopies
 ```
 

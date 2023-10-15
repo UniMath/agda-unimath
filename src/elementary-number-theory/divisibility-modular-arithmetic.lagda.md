@@ -18,7 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.universe-levels
 
-open import univalent-combinatorics.fibers-of-maps-finite-types
+open import univalent-combinatorics.fibers-of-maps
 ```
 
 </details>

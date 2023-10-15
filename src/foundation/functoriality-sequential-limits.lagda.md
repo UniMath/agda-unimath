@@ -10,25 +10,15 @@ module foundation.functoriality-sequential-limits where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-functions
-open import foundation.commuting-squares-of-homotopies
 open import foundation.cones-over-towers
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-function-types
 open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopy-induction
 open import foundation.morphisms-towers
 open import foundation.sequential-limits
-open import foundation.structure-identity-principle
 open import foundation.towers
-open import foundation.universal-property-sequential-limits
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
-open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
-open import foundation-core.propositions
 ```
 
 </details>

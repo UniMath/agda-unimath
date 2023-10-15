@@ -7,15 +7,12 @@ module foundation.towers where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.iterating-functions
 open import foundation.unit-type
 open import foundation.universe-levels
-
-open import foundation-core.function-types
 ```
 
 </details>

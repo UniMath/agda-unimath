@@ -1,7 +1,7 @@
 # Fibers of maps between finite types
 
 ```agda
-module univalent-combinatorics.fibers-of-maps-finite-types where
+module univalent-combinatorics.fibers-of-maps where
 
 open import foundation.fibers-of-maps public
 ```

@@ -17,7 +17,6 @@ open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.morphisms-towers
 open import foundation.structure-identity-principle
 open import foundation.towers
 open import foundation.universal-property-sequential-limits
