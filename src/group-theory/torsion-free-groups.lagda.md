@@ -118,8 +118,8 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  is-equiv-first-projection-pullback-subgroup-prop-prop-Group : Prop (lsuc l1)
-  is-equiv-first-projection-pullback-subgroup-prop-prop-Group =
+  is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group : Prop (lsuc l1)
+  is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group =
     is-equiv-Prop
       ( vertical-map-standard-pullback
         { f = subgroup-order-element-Group G}
@@ -127,13 +127,13 @@ module _
 
   is-equiv-first-projection-pullback-subgroup-prop-Group : UU (lsuc l1)
   is-equiv-first-projection-pullback-subgroup-prop-Group =
-    type-Prop is-equiv-first-projection-pullback-subgroup-prop-prop-Group
+    type-Prop is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group
 
   is-prop-is-equiv-first-projection-pullback-subgroup-prop-Group :
     is-prop is-equiv-first-projection-pullback-subgroup-prop-Group
   is-prop-is-equiv-first-projection-pullback-subgroup-prop-Group =
     is-prop-type-Prop
-      ( is-equiv-first-projection-pullback-subgroup-prop-prop-Group)
+      ( is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group)
 ```
 
 ## Properties

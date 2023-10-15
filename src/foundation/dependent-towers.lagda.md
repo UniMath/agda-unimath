@@ -23,19 +23,20 @@ open import foundation-core.homotopies
 
 ## Idea
 
-A **dependent tower** of types `B` over a base [tower](foundation.towers.md) `A`
-is a [sequence](foundation.sequences.md) of families over each `Aₙ` together
-with maps of fibers
+A **dependent tower** `B` over a base [tower](foundation.towers.md) `A` is a
+[sequence](foundation.sequences.md) of families over each `Aₙ` together with
+maps of fibers
 
 ```text
-  fₙ : Xₙ₊₁ → Xₙ
+  gₙ : (xₙ₊₁ : Aₙ₊₁) → Bₙ₊₁(xₙ₊₁) → Bₙ(fₙ(xₙ₊₁)),
 ```
 
-giving a sequential diagram of maps that extend infinitely to the left:
+where `f` is the sequence of maps of the base tower, giving a dependent
+sequential diagram of maps that extend infinitely to the left:
 
 ```text
-     f₃      f₂      f₁      f₀
-  ⋯ ---> X₃ ---> X₂ ---> X₁ ---> X₀.
+     g₃      g₂      g₁      g₀
+  ⋯ ---> B₃ ---> B₂ ---> B₁ ---> B₀.
 ```
 
 ## Definitions
@@ -66,21 +67,6 @@ map-dependent-tower :
 map-dependent-tower = pr2
 ```
 
-### Composites in dependent towers
-
-```agda
-comp-map-dependent-tower :
-  {l1 l2 : Level} {A : tower l1} (B : dependent-tower l2 A)
-  (n r : ℕ) (x : type-tower A (n +ℕ r)) →
-  family-dependent-tower B (n +ℕ r) x →
-  family-dependent-tower B n (comp-map-tower A n r x)
-comp-map-dependent-tower B n zero-ℕ x y = y
-comp-map-dependent-tower {A = A} B n (succ-ℕ r) x y =
-  comp-map-dependent-tower B n r
-    ( map-tower A (n +ℕ r) x)
-    ( map-dependent-tower B (n +ℕ r) x y)
-```
-
 ### Constant dependent towers of types
 
 ```agda
@@ -92,42 +78,47 @@ pr2 (const-dependent-tower A B) n _ = map-tower B n
 
 ### Sections of a dependent tower
 
-A **section of a dependent tower** `B` over `A` is a commuting diagram of the
-form
+A **section of a dependent tower** `(B , g)` over `(A , f)` is a choice of
+sections `hₙ` of each `Bₙ` that vary naturally over `A`, by which we mean that
+the diagrams
 
 ```text
-  ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀
-           |         |               |        |
-  ⋯        |         |       ⋯       |        |
-           v         v               v        v
-  ⋯ ----> Bₙ₊₁ ----> Bₙ ----> ⋯ ----> B₁ ----> B₀.
+          gₙ
+    Bₙ₊₁ ---> Bₙ
+    ^         ^
+hₙ₊₁|         | hₙ
+    |         |
+    Aₙ₊₁ ---> Aₙ
+          fₙ
 ```
 
+commute for each `n : ℕ`.
+
 ```agda
-naturality-section-dependent-tower :
+module _
   {l1 l2 : Level} (A : tower l1) (B : dependent-tower l2 A)
-  (h : (n : ℕ) (x : type-tower A n) → family-dependent-tower B n x) (n : ℕ) →
-  UU (l1 ⊔ l2)
-naturality-section-dependent-tower A B h n =
-  h n ∘ map-tower A n ~ map-dependent-tower B n _ ∘ h (succ-ℕ n)
+  where
 
-section-dependent-tower :
-  {l1 l2 : Level} (A : tower l1) (B : dependent-tower l2 A) → UU (l1 ⊔ l2)
-section-dependent-tower A B =
-  Σ ( (n : ℕ) (x : type-tower A n) → family-dependent-tower B n x)
-    ( λ h → (n : ℕ) → naturality-section-dependent-tower A B h n)
+  naturality-section-dependent-tower :
+    (h : (n : ℕ) (x : type-tower A n) → family-dependent-tower B n x)
+    (n : ℕ) → UU (l1 ⊔ l2)
+  naturality-section-dependent-tower h n =
+    h n ∘ map-tower A n ~ map-dependent-tower B n _ ∘ h (succ-ℕ n)
 
-map-section-dependent-tower :
-  {l1 l2 : Level} {A : tower l1} (B : dependent-tower l2 A) →
-  section-dependent-tower A B →
-  (n : ℕ) (x : type-tower A n) → family-dependent-tower B n x
-map-section-dependent-tower B = pr1
+  section-dependent-tower : UU (l1 ⊔ l2)
+  section-dependent-tower =
+    Σ ( (n : ℕ) (x : type-tower A n) → family-dependent-tower B n x)
+      ( λ h → (n : ℕ) → naturality-section-dependent-tower h n)
 
-naturality-map-section-dependent-tower :
-  {l1 l2 : Level} {A : tower l1} (B : dependent-tower l2 A)
-  (f : section-dependent-tower A B) (n : ℕ) →
-  naturality-section-dependent-tower A B (map-section-dependent-tower B f) n
-naturality-map-section-dependent-tower B = pr2
+  map-section-dependent-tower :
+    section-dependent-tower →
+    (n : ℕ) (x : type-tower A n) → family-dependent-tower B n x
+  map-section-dependent-tower = pr1
+
+  naturality-map-section-dependent-tower :
+    (f : section-dependent-tower) (n : ℕ) →
+    naturality-section-dependent-tower (map-section-dependent-tower f) n
+  naturality-map-section-dependent-tower = pr2
 ```
 
 ## Operations

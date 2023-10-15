@@ -27,6 +27,24 @@ open import foundation-core.propositions
 
 </details>
 
+## Idea
+
+Given a [tower of types](foundation.towers.md)
+
+```text
+               fₙ                     f₁      f₀
+  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀
+```
+
+the **sequential limit** `limₙ Aₙ` is a universal type completing the diagram
+
+```text
+                           fₙ                     f₁      f₀
+  limₙ Aₙ ---> ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
+```
+
+The universal property
+
 ## Definition
 
 ### The universal property of sequential limits

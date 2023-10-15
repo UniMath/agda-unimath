@@ -15,7 +15,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.iterating-functions
-open import foundation.maps-towers
+open import foundation.morphisms-towers
 open import foundation.structure-identity-principle
 open import foundation.towers
 open import foundation.unit-type
@@ -66,10 +66,10 @@ pr2 (hom-equiv-tower A B e) = pr2 e
 ### Characterizing equality of towers
 
 ```agda
-refl-equiv-tower :
+id-equiv-tower :
   {l : Level} (A : tower l) → equiv-tower A A
-pr1 (refl-equiv-tower A) n = id-equiv
-pr2 (refl-equiv-tower A) n = refl-htpy
+pr1 (id-equiv-tower A) n = id-equiv
+pr2 (id-equiv-tower A) n = refl-htpy
 
 equiv-eq-tower :
   {l : Level} (A B : tower l) → A ＝ B → equiv-tower A B

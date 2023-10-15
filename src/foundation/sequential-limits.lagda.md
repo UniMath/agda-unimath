@@ -17,7 +17,7 @@ open import foundation.equality-dependent-function-types
 open import foundation.equivalences
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
-open import foundation.maps-towers
+open import foundation.morphisms-towers
 open import foundation.structure-identity-principle
 open import foundation.towers
 open import foundation.universal-property-sequential-limits
@@ -31,6 +31,34 @@ open import foundation-core.propositions
 ```
 
 </details>
+
+## Idea
+
+Given a [tower of types](foundation.towers.md)
+
+```text
+               fₙ                     f₁      f₀
+  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀
+```
+
+we can form the **standard sequential limit** `limₙ Aₙ` satisfying
+[the universal property of the sequential limit](foundation.universal-property-sequential-limits.md)
+of `Aₙ` thus completing the diagram
+
+```text
+                           fₙ                     f₁      f₀
+  limₙ Aₙ ---> ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
+```
+
+The standard sequential limit consists of "points at infinity", which can be
+recorded as [sequences](foundation.dependent-sequences.md) of terms whose images
+under `f` agree:
+
+```text
+  ⋯  ↦   xₙ₊₁  ↦   xₙ  ↦   ⋯  ↦   x₂  ↦   x₁  ↦   x₀
+          ⫙        ⫙              ⫙       ⫙       ⫙
+  ⋯ ---> Aₙ₊₁ ---> Aₙ ---> ⋯ ---> A₂ ---> A₁ ---> A₀.
+```
 
 ## Definitions
 

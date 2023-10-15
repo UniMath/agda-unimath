@@ -182,7 +182,7 @@ open import foundation.lesser-limited-principle-of-omniscience public
 open import foundation.limited-principle-of-omniscience public
 open import foundation.locally-small-types public
 open import foundation.logical-equivalences public
-open import foundation.maps-towers public
+open import foundation.morphisms-towers public
 open import foundation.maybe public
 open import foundation.mere-embeddings public
 open import foundation.mere-equality public

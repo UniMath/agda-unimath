@@ -60,9 +60,9 @@ equiv-Seq A B =
     ( λ e → (n : ℕ) →
       naturality-hom-Seq A B (λ n → map-equiv (e n)) n)
 
-reflexive-equiv-Seq :
+id-equiv-Seq :
   { l1 : Level} (A : Sequence l1) → equiv-Seq A A
-reflexive-equiv-Seq A =
+id-equiv-Seq A =
   pair
     ( λ n → id-equiv)
     ( λ n → refl-htpy)

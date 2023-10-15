@@ -26,14 +26,14 @@ A **tower** of types `f` is a [sequence](foundation.sequences.md) of types
 together with maps between every two consecutive types
 
 ```text
-  fₙ : Xₙ₊₁ → Xₙ
+  fₙ : Aₙ₊₁ → Aₙ
 ```
 
 giving a sequential diagram of maps that extend infinitely to the left:
 
 ```text
      f₃      f₂      f₁      f₀
-  ⋯ ---> X₃ ---> X₂ ---> X₁ ---> X₀.
+  ⋯ ---> A₃ ---> A₂ ---> A₁ ---> A₀.
 ```
 
 ## Definitions

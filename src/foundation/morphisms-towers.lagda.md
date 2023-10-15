@@ -1,7 +1,7 @@
-# Maps of towers of types
+# Morphisms of towers of types
 
 ```agda
-module foundation.maps-towers where
+module foundation.morphisms-towers where
 ```
 
 <details><summary>Imports</summary>
@@ -36,7 +36,7 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A **map of towers** `A → B` is a commuting diagram of the form
+A **morphism of towers** `A → B` is a commuting diagram of the form
 
 ```text
   ⋯ ----> Aₙ₊₁ ----> Aₙ ----> ⋯ ----> A₁ ----> A₀
@@ -48,7 +48,7 @@ A **map of towers** `A → B` is a commuting diagram of the form
 
 ## Definitions
 
-### Maps of towers
+### Morphisms of towers
 
 ```agda
 naturality-hom-tower :
@@ -85,12 +85,23 @@ pr2 (id-hom-tower A) n = refl-htpy
 ### Composition of map of towers
 
 ```agda
-comp-hom-tower :
-  {l : Level} (A B C : tower l) → hom-tower B C → hom-tower A B → hom-tower A C
-pr1 (comp-hom-tower A B C g f) n = map-hom-tower B C g n ∘ map-hom-tower A B f n
-pr2 (comp-hom-tower A B C g f) n x =
+map-comp-hom-tower :
+  {l : Level} (A B C : tower l) → hom-tower B C → hom-tower A B →
+  (n : ℕ) → type-tower A n → type-tower C n
+map-comp-hom-tower A B C g f n = map-hom-tower B C g n ∘ map-hom-tower A B f n
+
+naturality-comp-hom-tower :
+  {l : Level} (A B C : tower l) (g : hom-tower B C) (f : hom-tower A B)
+  (n : ℕ) → naturality-hom-tower A C (map-comp-hom-tower A B C g f) n
+naturality-comp-hom-tower A B C g f n x =
   ( ap (map-hom-tower B C g n) (naturality-map-hom-tower A B f n x)) ∙
   ( naturality-map-hom-tower B C g n (map-hom-tower A B f (succ-ℕ n) x))
+
+comp-hom-tower :
+  {l : Level} (A B C : tower l) → hom-tower B C → hom-tower A B → hom-tower A C
+pr1 (comp-hom-tower A B C g f) = map-comp-hom-tower A B C g f
+pr2 (comp-hom-tower A B C g f) = naturality-comp-hom-tower A B C g f
+
 ```
 
 ## Properties
@@ -102,11 +113,11 @@ module _
   {l1 l2 : Level} (A : tower l1) (B : tower l2)
   where
 
-  coherence-hom-tower :
+  coherence-htpy-hom-tower :
     (f g : hom-tower A B) →
     ((n : ℕ) → map-hom-tower A B f n ~ map-hom-tower A B g n) →
     (n : ℕ) → UU (l1 ⊔ l2)
-  coherence-hom-tower f g H n =
+  coherence-htpy-hom-tower f g H n =
     ( naturality-map-hom-tower A B f n ∙h (map-tower B n ·l H (succ-ℕ n))) ~
     ( (H n ·r map-tower A n) ∙h naturality-map-hom-tower A B g n)
 
@@ -114,7 +125,7 @@ module _
     (f g : hom-tower A B) → UU (l1 ⊔ l2)
   htpy-hom-tower f g =
     Σ ( (n : ℕ) → map-hom-tower A B f n ~ map-hom-tower A B g n)
-      ( λ H → (n : ℕ) → coherence-hom-tower f g H n)
+      ( λ H → (n : ℕ) → coherence-htpy-hom-tower f g H n)
 
   refl-htpy-hom-tower : (f : hom-tower A B) → htpy-hom-tower f f
   pr1 (refl-htpy-hom-tower f) n = refl-htpy
