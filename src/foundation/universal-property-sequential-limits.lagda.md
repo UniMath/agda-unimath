@@ -62,6 +62,23 @@ module _
     (c : cone-tower A X) → UU (l1 ⊔ l2 ⊔ lsuc l)
   universal-property-sequential-limit c =
     (Y : UU l) → is-equiv (cone-map-tower A {Y = Y} c)
+
+module _
+  {l1 l2 l3 : Level} (A : tower l1) {X : UU l2} (c : cone-tower A X)
+  where
+
+  map-universal-property-sequential-limit :
+    ({l : Level} → universal-property-sequential-limit l A c) →
+    {Y : UU l3} (c' : cone-tower A Y) → Y → X
+  map-universal-property-sequential-limit up-c {Y} c' =
+    map-inv-is-equiv (up-c Y) c'
+
+  eq-map-universal-property-sequential-limit :
+    (up-c : {l : Level} → universal-property-sequential-limit l A c) →
+    {Y : UU l3} (c' : cone-tower A Y) →
+    cone-map-tower A c (map-universal-property-sequential-limit up-c c') ＝ c'
+  eq-map-universal-property-sequential-limit up-c {Y} c' =
+    is-section-map-inv-is-equiv (up-c Y) c'
 ```
 
 ## Properties
@@ -169,19 +186,6 @@ module _
       is-prop (universal-property-sequential-limit l3 A c)
     is-prop-universal-property-sequential-limit =
       is-prop-Π (λ Y → is-property-is-equiv (cone-map-tower A c))
-
-  map-universal-property-sequential-limit :
-    ({l : Level} → universal-property-sequential-limit l A c) →
-    {Y : UU l3} (c' : cone-tower A Y) → Y → X
-  map-universal-property-sequential-limit up-c {Y} c' =
-    map-inv-is-equiv (up-c Y) c'
-
-  eq-map-universal-property-sequential-limit :
-    (up-c : {l : Level} → universal-property-sequential-limit l A c) →
-    {Y : UU l3} (c' : cone-tower A Y) →
-    cone-map-tower A c (map-universal-property-sequential-limit up-c c') ＝ c'
-  eq-map-universal-property-sequential-limit up-c {Y} c' =
-    is-section-map-inv-is-equiv (up-c Y) c'
 ```
 
 ### The homotopy of cones obtained from the universal property of sequential limits

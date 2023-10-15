@@ -38,6 +38,24 @@ module _
     (c : cone f g C) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ lsuc l)
   universal-property-pullback c =
     (C' : UU l) → is-equiv (cone-map f g c {C'})
+
+module _
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (f : A → X) (g : B → X) {C : UU l4} (c : cone f g C)
+  where
+
+  map-universal-property-pullback :
+    ({l : Level} → universal-property-pullback l f g c) →
+    {C' : UU l5} (c' : cone f g C') → C' → C
+  map-universal-property-pullback up-c {C'} c' =
+    map-inv-is-equiv (up-c C') c'
+
+  eq-map-universal-property-pullback :
+    (up-c : {l : Level} → universal-property-pullback l f g c) →
+    {C' : UU l5} (c' : cone f g C') →
+    cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
+  eq-map-universal-property-pullback up-c {C'} c' =
+    is-section-map-inv-is-equiv (up-c C') c'
 ```
 
 ## Properties
