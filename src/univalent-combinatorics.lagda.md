@@ -57,7 +57,7 @@ open import univalent-combinatorics.equivalences public
 open import univalent-combinatorics.equivalences-cubes public
 open import univalent-combinatorics.equivalences-standard-finite-types public
 open import univalent-combinatorics.ferrers-diagrams public
-open import univalent-combinatorics.fibers-of-maps public
+open import univalent-combinatorics.fibers-of-maps-finite-types public
 open import univalent-combinatorics.finite-choice public
 open import univalent-combinatorics.finite-connected-components public
 open import univalent-combinatorics.finite-presentations public

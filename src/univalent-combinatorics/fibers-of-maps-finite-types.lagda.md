@@ -1,7 +1,7 @@
 # Fibers of maps between finite types
 
 ```agda
-module univalent-combinatorics.fibers-of-maps where
+module univalent-combinatorics.fibers-of-maps-finite-types where
 
 open import foundation.fibers-of-maps public
 ```
@@ -144,7 +144,7 @@ equiv-is-finite-domain-is-finite-fiber :
   {l1 l2 : Level} {A : UU l1} →
   (B : 𝔽 l2) (f : A → (type-𝔽 B)) →
   ((b : type-𝔽 B) → is-finite (fiber f b)) ≃ is-finite A
-equiv-is-finite-domain-is-finite-fiber {A = A} B f =
+equiv-is-finite-domain-is-finite-fiber B f =
   equiv-prop
     ( is-prop-Π (λ b → is-prop-is-finite (fiber f b)))
     ( is-prop-is-finite A)
@@ -152,5 +152,5 @@ equiv-is-finite-domain-is-finite-fiber {A = A} B f =
       is-finite-equiv
         ( equiv-total-fiber f)
         ( is-finite-Σ (is-finite-type-𝔽 B) P))
-    ( λ P → is-finite-fiber f P ( is-finite-type-𝔽 B))
+    ( λ P → is-finite-fiber f P (is-finite-type-𝔽 B))
 ```

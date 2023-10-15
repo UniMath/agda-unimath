@@ -114,7 +114,9 @@ module _
             ( ap (ap g) (inv right-unit)))))
 ```
 
-## See also
+## Table of files about fibers of maps
 
-- Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.md).
+The following table lists files that are about fibers of maps as a general
+concept.
+
+{{#include tables/fibers-of-maps.md}}

@@ -26,7 +26,7 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.universe-levels
 
-open import univalent-combinatorics.fibers-of-maps
+open import univalent-combinatorics.fibers-of-maps-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.inhabited-finite-types
 ```

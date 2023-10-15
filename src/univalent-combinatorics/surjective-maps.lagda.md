@@ -27,7 +27,7 @@ open import univalent-combinatorics.counting-decidable-subtypes
 open import univalent-combinatorics.counting-dependent-pair-types
 open import univalent-combinatorics.decidable-dependent-function-types
 open import univalent-combinatorics.embeddings
-open import univalent-combinatorics.fibers-of-maps
+open import univalent-combinatorics.fibers-of-maps-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
