@@ -51,14 +51,14 @@ injective.
 
 ```agda
 leq-emb-Fin :
-  (k l : ℕ) → Fin k ↪ Fin l → k ≤ℕ l
+  (k l : ℕ) → Fin k ↪ Fin l → k ≤-ℕ l
 leq-emb-Fin zero-ℕ zero-ℕ f = refl-leq-ℕ zero-ℕ
 leq-emb-Fin (succ-ℕ k) zero-ℕ f = ex-falso (map-emb f (inr star))
 leq-emb-Fin zero-ℕ (succ-ℕ l) f = leq-zero-ℕ (succ-ℕ l)
 leq-emb-Fin (succ-ℕ k) (succ-ℕ l) f = leq-emb-Fin k l (reduce-emb-Fin k l f)
 
 leq-is-emb-Fin :
-  (k l : ℕ) {f : Fin k → Fin l} → is-emb f → k ≤ℕ l
+  (k l : ℕ) {f : Fin k → Fin l} → is-emb f → k ≤-ℕ l
 leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (pair f H)
 ```
 
@@ -66,7 +66,7 @@ leq-is-emb-Fin k l {f = f} H = leq-emb-Fin k l (pair f H)
 
 ```agda
 leq-is-injective-Fin :
-  (k l : ℕ) {f : Fin k → Fin l} → is-injective f → k ≤ℕ l
+  (k l : ℕ) {f : Fin k → Fin l} → is-injective f → k ≤-ℕ l
 leq-is-injective-Fin k l H =
   leq-is-emb-Fin k l (is-emb-is-injective (is-set-Fin l) H)
 ```
@@ -167,7 +167,7 @@ module _
 
 ```agda
   leq-emb-count :
-    (A ↪ B) → (number-of-elements-count eA) ≤ℕ (number-of-elements-count eB)
+    (A ↪ B) → (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
   leq-emb-count f =
     leq-emb-Fin
       ( number-of-elements-count eA)
@@ -178,7 +178,7 @@ module _
 
   leq-is-emb-count :
     {f : A → B} → is-emb f →
-    (number-of-elements-count eA) ≤ℕ (number-of-elements-count eB)
+    (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
   leq-is-emb-count {f} H = leq-emb-count (pair f H)
 ```
 
@@ -187,7 +187,7 @@ module _
 ```agda
   leq-is-injective-count :
     {f : A → B} → is-injective f →
-    (number-of-elements-count eA) ≤ℕ (number-of-elements-count eB)
+    (number-of-elements-count eA) ≤-ℕ (number-of-elements-count eB)
   leq-is-injective-count H =
     leq-is-emb-count (is-emb-is-injective (is-set-count eB) H)
 ```
@@ -300,7 +300,7 @@ module _
 ```agda
   leq-emb-is-finite :
     (A ↪ B) →
-    (number-of-elements-is-finite H) ≤ℕ (number-of-elements-is-finite K)
+    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
   leq-emb-is-finite f =
     apply-universal-property-trunc-Prop H P
       ( λ eA →
@@ -318,7 +318,7 @@ module _
 
   leq-is-emb-is-finite :
     {f : A → B} → is-emb f →
-    (number-of-elements-is-finite H) ≤ℕ (number-of-elements-is-finite K)
+    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
   leq-is-emb-is-finite {f} H =
     leq-emb-is-finite (pair f H)
 ```
@@ -328,7 +328,7 @@ module _
 ```agda
   leq-is-injective-is-finite :
     {f : A → B} → is-injective f →
-    (number-of-elements-is-finite H) ≤ℕ (number-of-elements-is-finite K)
+    (number-of-elements-is-finite H) ≤-ℕ (number-of-elements-is-finite K)
   leq-is-injective-is-finite I =
     leq-is-emb-is-finite (is-emb-is-injective (is-set-is-finite K) I)
 ```

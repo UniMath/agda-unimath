@@ -60,7 +60,7 @@ max-Fin-ℕ (succ-ℕ n) f = max-ℕ (f (inr star)) (max-Fin-ℕ n (λ k → f (
 
 ```agda
 leq-max-ℕ :
-  (k m n : ℕ) → m ≤ℕ k → n ≤ℕ k → (max-ℕ m n) ≤ℕ k
+  (k m n : ℕ) → m ≤-ℕ k → n ≤-ℕ k → (max-ℕ m n) ≤-ℕ k
 leq-max-ℕ zero-ℕ zero-ℕ zero-ℕ H K = star
 leq-max-ℕ (succ-ℕ k) zero-ℕ zero-ℕ H K = star
 leq-max-ℕ (succ-ℕ k) zero-ℕ (succ-ℕ n) H K = K
@@ -68,7 +68,7 @@ leq-max-ℕ (succ-ℕ k) (succ-ℕ m) zero-ℕ H K = H
 leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H K = leq-max-ℕ k m n H K
 
 leq-left-leq-max-ℕ :
-  (k m n : ℕ) → (max-ℕ m n) ≤ℕ k → m ≤ℕ k
+  (k m n : ℕ) → (max-ℕ m n) ≤-ℕ k → m ≤-ℕ k
 leq-left-leq-max-ℕ k zero-ℕ zero-ℕ H = star
 leq-left-leq-max-ℕ k zero-ℕ (succ-ℕ n) H = star
 leq-left-leq-max-ℕ k (succ-ℕ m) zero-ℕ H = H
@@ -76,7 +76,7 @@ leq-left-leq-max-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
   leq-left-leq-max-ℕ k m n H
 
 leq-right-leq-max-ℕ :
-  (k m n : ℕ) → (max-ℕ m n) ≤ℕ k → n ≤ℕ k
+  (k m n : ℕ) → (max-ℕ m n) ≤-ℕ k → n ≤-ℕ k
 leq-right-leq-max-ℕ k zero-ℕ zero-ℕ H = star
 leq-right-leq-max-ℕ k zero-ℕ (succ-ℕ n) H = H
 leq-right-leq-max-ℕ k (succ-ℕ m) zero-ℕ H = star

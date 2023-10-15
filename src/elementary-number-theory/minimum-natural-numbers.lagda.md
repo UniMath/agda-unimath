@@ -52,7 +52,7 @@ min-Fin-ℕ (succ-ℕ n) f = min-ℕ (f (inr star)) (min-Fin-ℕ n (λ k → f (
 
 ```agda
 leq-min-ℕ :
-  (k m n : ℕ) → k ≤ℕ m → k ≤ℕ n → k ≤ℕ (min-ℕ m n)
+  (k m n : ℕ) → k ≤-ℕ m → k ≤-ℕ n → k ≤-ℕ (min-ℕ m n)
 leq-min-ℕ zero-ℕ zero-ℕ zero-ℕ H K = star
 leq-min-ℕ zero-ℕ zero-ℕ (succ-ℕ n) H K = star
 leq-min-ℕ zero-ℕ (succ-ℕ m) zero-ℕ H K = star
@@ -60,7 +60,7 @@ leq-min-ℕ zero-ℕ (succ-ℕ m) (succ-ℕ n) H K = star
 leq-min-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H K = leq-min-ℕ k m n H K
 
 leq-left-leq-min-ℕ :
-  (k m n : ℕ) → k ≤ℕ (min-ℕ m n) → k ≤ℕ m
+  (k m n : ℕ) → k ≤-ℕ (min-ℕ m n) → k ≤-ℕ m
 leq-left-leq-min-ℕ zero-ℕ zero-ℕ zero-ℕ H = star
 leq-left-leq-min-ℕ zero-ℕ zero-ℕ (succ-ℕ n) H = star
 leq-left-leq-min-ℕ zero-ℕ (succ-ℕ m) zero-ℕ H = star
@@ -69,7 +69,7 @@ leq-left-leq-min-ℕ (succ-ℕ k) (succ-ℕ m) (succ-ℕ n) H =
   leq-left-leq-min-ℕ k m n H
 
 leq-right-leq-min-ℕ :
-  (k m n : ℕ) → k ≤ℕ (min-ℕ m n) → k ≤ℕ n
+  (k m n : ℕ) → k ≤-ℕ (min-ℕ m n) → k ≤-ℕ n
 leq-right-leq-min-ℕ zero-ℕ zero-ℕ zero-ℕ H = star
 leq-right-leq-min-ℕ zero-ℕ zero-ℕ (succ-ℕ n) H = star
 leq-right-leq-min-ℕ zero-ℕ (succ-ℕ m) zero-ℕ H = star

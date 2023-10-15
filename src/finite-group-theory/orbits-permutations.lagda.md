@@ -153,8 +153,8 @@ module _
       ( is-injective-nat-Fin (succ-ℕ (number-of-elements-count eX)) p)
 
   two-points-iterate-ordered-ℕ :
-    ( point1-iterate-ℕ ≤ℕ point2-iterate-ℕ) +
-    ( point2-iterate-ℕ ≤ℕ point1-iterate-ℕ) →
+    ( point1-iterate-ℕ ≤-ℕ point2-iterate-ℕ) +
+    ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ) →
     Σ ( ℕ)
       ( λ n →
         Σ ( ℕ)
@@ -176,9 +176,9 @@ module _
 
   leq-greater-point-number-elements :
     ( p :
-      ( point1-iterate-ℕ ≤ℕ point2-iterate-ℕ) +
-      ( point2-iterate-ℕ ≤ℕ point1-iterate-ℕ)) →
-    pr1 (two-points-iterate-ordered-ℕ p) ≤ℕ number-of-elements-count eX
+      ( point1-iterate-ℕ ≤-ℕ point2-iterate-ℕ) +
+      ( point2-iterate-ℕ ≤-ℕ point1-iterate-ℕ)) →
+    pr1 (two-points-iterate-ordered-ℕ p) ≤-ℕ number-of-elements-count eX
   leq-greater-point-number-elements (inl p) =
     ( upper-bound-nat-Fin
       ( number-of-elements-count eX)
@@ -240,7 +240,7 @@ module _
     same-image-iterate-min-reporting = pr2 (pr2 (pr1 (pr2 min-repeating)))
 
   leq-first-point-min-reporting-succ-number-elements :
-    first-point-min-repeating ≤ℕ (number-of-elements-count eX)
+    first-point-min-repeating ≤-ℕ (number-of-elements-count eX)
   leq-first-point-min-reporting-succ-number-elements =
     transitive-leq-ℕ
       ( first-point-min-repeating)
@@ -364,18 +364,18 @@ module _
       ( has-decidable-equality-ℕ second-point-min-repeating zero-ℕ)
 
   leq-has-finite-orbits-permutation-number-elements :
-    ( pr1 has-finite-orbits-permutation) ≤ℕ (number-of-elements-count eX)
+    ( pr1 has-finite-orbits-permutation) ≤-ℕ (number-of-elements-count eX)
   leq-has-finite-orbits-permutation-number-elements =
     cases-second-point
       ( has-decidable-equality-ℕ second-point-min-repeating zero-ℕ)
     where
     cases-second-point :
       is-decidable (Id second-point-min-repeating zero-ℕ) →
-      (pr1 has-finite-orbits-permutation) ≤ℕ (number-of-elements-count eX)
+      (pr1 has-finite-orbits-permutation) ≤-ℕ (number-of-elements-count eX)
     cases-second-point (inl p) =
       tr
         ( λ x →
-          ( pr1 (has-finite-orbits-permutation' x)) ≤ℕ
+          ( pr1 (has-finite-orbits-permutation' x)) ≤-ℕ
           ( number-of-elements-count eX))
         { x = inl p}
         { y = has-decidable-equality-ℕ second-point-min-repeating zero-ℕ}
@@ -485,7 +485,7 @@ module _
             ( unit-trunc-Prop
               ( is-decidable-iterate-is-decidable-bounded h a b
                 ( is-decidable-bounded-Σ-ℕ n
-                  ( λ z → z ≤ℕ n)
+                  ( λ z → z ≤-ℕ n)
                   ( λ z → Id (iterate z (map-equiv f) a) b)
                   ( λ z → is-decidable-leq-ℕ z n)
                   ( λ z →
@@ -499,7 +499,7 @@ module _
       is-decidable-iterate-is-decidable-bounded :
         ( h : Fin n ≃ type-UU-Fin n X) (a b : type-UU-Fin n X) →
         is-decidable
-          ( Σ ℕ (λ m → (m ≤ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
+          ( Σ ℕ (λ m → (m ≤-ℕ n) × (Id (iterate m (map-equiv f) a) b))) →
         is-decidable (Σ ℕ (λ m → Id (iterate m (map-equiv f) a) b))
       is-decidable-iterate-is-decidable-bounded h a b (inl p) =
         inl (pair (pr1 p) (pr2 (pr2 p)))

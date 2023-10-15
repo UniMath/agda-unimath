@@ -46,8 +46,8 @@ le-ℕ n m = type-Prop (le-ℕ-Prop n m)
 is-prop-le-ℕ : (n : ℕ) → (m : ℕ) → is-prop (le-ℕ n m)
 is-prop-le-ℕ n m = is-prop-type-Prop (le-ℕ-Prop n m)
 
-infix 30 _<-ℕ_
-_<-ℕ_ = le-ℕ
+infix 30 _<ℕ_
+_<ℕ_ = le-ℕ
 ```
 
 ## Properties
@@ -115,7 +115,7 @@ contradiction-le-one-ℕ (succ-ℕ n) ()
 ### The strict ordering of the natural numbers is anti-reflexive
 
 ```agda
-anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
+anti-reflexive-le-ℕ : (n : ℕ) → ¬ (n <ℕ n)
 anti-reflexive-le-ℕ zero-ℕ ()
 anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
 ```
@@ -212,14 +212,14 @@ preserves-le-succ-ℕ m n H =
 
 ```agda
 concatenate-leq-le-ℕ :
-  {x y z : ℕ} → x ≤ℕ y → le-ℕ y z → le-ℕ x z
+  {x y z : ℕ} → x ≤-ℕ y → le-ℕ y z → le-ℕ x z
 concatenate-leq-le-ℕ {zero-ℕ} {zero-ℕ} {succ-ℕ z} H K = star
 concatenate-leq-le-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
 concatenate-leq-le-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
   concatenate-leq-le-ℕ {x} {y} {z} H K
 
 concatenate-le-leq-ℕ :
-  {x y z : ℕ} → le-ℕ x y → y ≤ℕ z → le-ℕ x z
+  {x y z : ℕ} → le-ℕ x y → y ≤-ℕ z → le-ℕ x z
 concatenate-le-leq-ℕ {zero-ℕ} {succ-ℕ y} {succ-ℕ z} H K = star
 concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
   concatenate-le-leq-ℕ {x} {y} {z} H K
@@ -228,7 +228,7 @@ concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
 ### If `m < n` then `n ≰ m`
 
 ```agda
-contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤ℕ m)
+contradiction-le-ℕ : (m n : ℕ) → le-ℕ m n → ¬ (n ≤-ℕ m)
 contradiction-le-ℕ zero-ℕ (succ-ℕ n) H K = K
 contradiction-le-ℕ (succ-ℕ m) (succ-ℕ n) H = contradiction-le-ℕ m n H
 ```
@@ -236,14 +236,14 @@ contradiction-le-ℕ (succ-ℕ m) (succ-ℕ n) H = contradiction-le-ℕ m n H
 ### If `n ≤ m` then `m ≮ n`
 
 ```agda
-contradiction-le-ℕ' : (m n : ℕ) → n ≤ℕ m → ¬ (le-ℕ m n)
+contradiction-le-ℕ' : (m n : ℕ) → n ≤-ℕ m → ¬ (le-ℕ m n)
 contradiction-le-ℕ' m n K H = contradiction-le-ℕ m n H K
 ```
 
 ### If `m ≮ n` then `n ≤ m`
 
 ```agda
-leq-not-le-ℕ : (m n : ℕ) → ¬ (le-ℕ m n) → n ≤ℕ m
+leq-not-le-ℕ : (m n : ℕ) → ¬ (le-ℕ m n) → n ≤-ℕ m
 leq-not-le-ℕ zero-ℕ zero-ℕ H = star
 leq-not-le-ℕ zero-ℕ (succ-ℕ n) H = ex-falso (H star)
 leq-not-le-ℕ (succ-ℕ m) zero-ℕ H = star
@@ -254,7 +254,7 @@ leq-not-le-ℕ (succ-ℕ m) (succ-ℕ n) H = leq-not-le-ℕ m n H
 
 ```agda
 leq-le-ℕ :
-  (x y : ℕ) → le-ℕ x y → x ≤ℕ y
+  (x y : ℕ) → le-ℕ x y → x ≤-ℕ y
 leq-le-ℕ zero-ℕ (succ-ℕ y) H = star
 leq-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-ℕ x y H
 ```
@@ -263,7 +263,7 @@ leq-le-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-ℕ x y H
 
 ```agda
 leq-le-succ-ℕ :
-  (x y : ℕ) → le-ℕ x (succ-ℕ y) → x ≤ℕ y
+  (x y : ℕ) → le-ℕ x (succ-ℕ y) → x ≤-ℕ y
 leq-le-succ-ℕ zero-ℕ y H = star
 leq-le-succ-ℕ (succ-ℕ x) (succ-ℕ y) H = leq-le-succ-ℕ x y H
 ```
@@ -310,7 +310,7 @@ leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
 ### If `x ≤ y` and `x ≠ y` then `x < y`
 
 ```agda
-le-leq-neq-ℕ : {x y : ℕ} → x ≤ℕ y → x ≠ y → le-ℕ x y
+le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
 le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
 le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =

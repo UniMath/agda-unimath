@@ -44,8 +44,8 @@ The following definition of the Kolakoski sequence is due to Léo Elouan.
 ```agda
 kolakoski-helper-inductive :
   (n : ℕ) →
-  ((i : ℕ) → i ≤ℕ n → bool × (bool × (Σ ℕ (λ j → j ≤ℕ i)))) →
-  bool × (bool × (Σ ℕ (λ j → j ≤ℕ (succ-ℕ n))))
+  ((i : ℕ) → i ≤-ℕ n → bool × (bool × (Σ ℕ (λ j → j ≤-ℕ i)))) →
+  bool × (bool × (Σ ℕ (λ j → j ≤-ℕ (succ-ℕ n))))
 kolakoski-helper-inductive n f with f n (refl-leq-ℕ n)
 ... | b , false , i , H = b , true , i , preserves-leq-succ-ℕ i n H
 ... | b , true , i , H with f i H
@@ -54,10 +54,10 @@ kolakoski-helper-inductive n f with f n (refl-leq-ℕ n)
 ... | false , true , j , K = neg-bool b , false , succ-ℕ i , H
 ... | false , false , j , K = neg-bool b , true , succ-ℕ i , H
 
-kolakoski-helper : (n : ℕ) → bool × (bool × Σ ℕ (λ i → i ≤ℕ n))
+kolakoski-helper : (n : ℕ) → bool × (bool × Σ ℕ (λ i → i ≤-ℕ n))
 kolakoski-helper =
   strong-ind-ℕ
-    ( λ n → bool × (bool × Σ ℕ (λ j → j ≤ℕ n)))
+    ( λ n → bool × (bool × Σ ℕ (λ j → j ≤-ℕ n)))
     ( false , true , 0 , refl-leq-ℕ 0)
     ( λ n f → kolakoski-helper-inductive n f)
 

@@ -37,8 +37,8 @@ leq-ℚ x y = type-Prop (leq-ℚ-Prop x y)
 is-prop-leq-ℚ : (x y : ℚ) → is-prop (leq-ℚ x y)
 is-prop-leq-ℚ x y = is-prop-type-Prop (leq-ℚ-Prop x y)
 
-infix 30 _≤ℚ_
-_≤ℚ_ = leq-ℚ
+infix 30 _≤-ℚ_
+_≤-ℚ_ = leq-ℚ
 ```
 
 ### Strict inequality on the rational numbers
