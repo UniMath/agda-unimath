@@ -55,15 +55,6 @@ map-tower :
 map-tower = pr2
 ```
 
-### Composites in towers
-
-```agda
-comp-map-tower :
-  {l : Level} (A : tower l) (n r : ℕ) → type-tower A (n +ℕ r) → type-tower A n
-comp-map-tower A n zero-ℕ = id
-comp-map-tower A n (succ-ℕ r) = comp-map-tower A n r ∘ map-tower A (n +ℕ r)
-```
-
 ## Operations
 
 ### Right shifting a tower
