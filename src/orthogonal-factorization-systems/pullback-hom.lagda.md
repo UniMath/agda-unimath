@@ -177,37 +177,6 @@ The symbol `⋔` is the [pitchfork](https://codepoints.net/U+22D4) (agda-input:
 
 ## Properties
 
-### Functoriality of the pullback-hom
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  {l1' l2' l3' l4' : Level}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
-  where
-
-  map-pullback-hom :
-    hom-cospan
-      ( precomp f' Y')
-      ( postcomp A' g')
-      ( precomp f Y)
-      ( postcomp A g) →
-    fibered-map f' g' → fibered-map f g
-  map-pullback-hom =
-    map-is-pullback
-      ( precomp f Y)
-      ( postcomp A g)
-      ( precomp f' Y')
-      ( postcomp A' g')
-      ( cone-pullback-hom f g)
-      ( cone-pullback-hom f' g')
-      ( is-pullback-fibered-map f g)
-      ( is-pullback-fibered-map f' g')
-```
-
 ### The fibers of the pullback-hom
 
 ```agda
@@ -217,7 +186,7 @@ module _
   where
 
   inv-compute-fiber-pullback-hom :
-    (fiber (pullback-hom f g) h) ≃ (lifting-square-fibered-map f g h)
+    fiber (pullback-hom f g) h ≃ lifting-square-fibered-map f g h
   inv-compute-fiber-pullback-hom =
     equiv-tot
       ( λ j →
@@ -245,6 +214,6 @@ module _
           ( extensionality-fibered-map f g (pullback-hom f g j) h)))
 
   compute-fiber-pullback-hom :
-    (lifting-square-fibered-map f g h) ≃ (fiber (pullback-hom f g) h)
+    lifting-square-fibered-map f g h ≃ fiber (pullback-hom f g) h
   compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
 ```

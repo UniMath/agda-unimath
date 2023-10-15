@@ -109,31 +109,6 @@ module _
   is-pullback c = is-equiv (gap f g c)
 ```
 
-### Functoriality of standard pullbacks
-
-```agda
-module _
-  {l1 l2 l3 l1' l2' l3' : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} (f : A → X) (g : B → X)
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} (f' : A' → X') (g' : B' → X')
-  where
-
-  map-standard-pullback :
-    hom-cospan f' g' f g → standard-pullback f' g' → standard-pullback f g
-  pr1 (map-standard-pullback (hA , _) (a' , _)) = hA a'
-  pr1 (pr2 (map-standard-pullback (hA , hB , _) (a' , b' , _))) = hB b'
-  pr2 (pr2 (map-standard-pullback (hA , hB , hX , HA , HB) (a' , b' , p'))) =
-    HA a' ∙ ap hX p' ∙ inv (HB b')
-
-  map-is-pullback :
-    {l4 l4' : Level} {C : UU l4} {C' : UU l4'} →
-    (c : cone f g C) (c' : cone f' g' C') →
-    is-pullback f g c → is-pullback f' g' c' →
-    hom-cospan f' g' f g → C' → C
-  map-is-pullback c c' is-pb-c is-pb-c' h x =
-    map-inv-is-equiv is-pb-c (map-standard-pullback h (gap f' g' c' x))
-```
-
 ## Properties
 
 ### Characterization of the identity type of the standard pullback

@@ -142,6 +142,8 @@ open import foundation.functoriality-dependent-pair-types public
 open import foundation.functoriality-fibers-of-maps public
 open import foundation.functoriality-function-types public
 open import foundation.functoriality-propositional-truncation public
+open import foundation.functoriality-pullbacks public
+open import foundation.functoriality-sequential-limits public
 open import foundation.functoriality-set-quotients public
 open import foundation.functoriality-set-truncation public
 open import foundation.functoriality-truncation public

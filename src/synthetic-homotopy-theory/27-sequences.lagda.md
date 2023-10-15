@@ -69,7 +69,7 @@ id-equiv-Seq A =
 
 equiv-eq-Seq :
   { l1 : Level} (A B : Sequence l1) → Id A B → equiv-Seq A B
-equiv-eq-Seq A .A refl = reflexive-equiv-Seq A
+equiv-eq-Seq A .A refl = id-equiv-Seq A
 
 is-contr-total-equiv-Seq :
   { l1 : Level} (A : Sequence l1) →
