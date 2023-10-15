@@ -157,7 +157,7 @@ module _
         ( is-contr-map-is-equiv (up Y) c')
 ```
 
-### The universal property of sequential limits is a property
+### The universal property of sequential limits at a universe level is a property
 
 ```agda
 module _

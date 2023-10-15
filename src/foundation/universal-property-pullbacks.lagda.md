@@ -47,7 +47,7 @@ A -----> X
 
 ## Properties
 
-### The universal property is a property
+### The universal property of pullbacks at a universe level is a property
 
 ```agda
 module _
