@@ -40,7 +40,7 @@ functor category
   C → Set.
 ```
 
-## Definition
+## Definitions
 
 ### The copresheaf category of a precategory
 

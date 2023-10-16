@@ -28,8 +28,9 @@ open import order-theory.total-orders
 
 ## Idea
 
-A **decidable total order** is a total order of which the inequality relation is
-decidable.
+A **decidable total order** is a [total order](order-theory.total-orders.md) of
+which the inequality [relation](foundation.binary-relations.md) is
+[decidable](foundation.decidable-relations.md).
 
 ## Definitions
 
