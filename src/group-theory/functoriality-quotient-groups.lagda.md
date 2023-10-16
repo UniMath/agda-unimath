@@ -19,7 +19,11 @@ open import group-theory.quotient-groups
 
 ## Idea
 
-Consider a [normal subgroup](group-theory.normal-subgroups.md) `N` of a [group](group-theory.groups.md) `G` and a normal subgroup `M` of a group `H`. Then any [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H` satisfying the property that `x ∈ N ⇒ f x ∈ M` induces a group homomorphism `g : G/N → H/M`, which is the unique group homomorphism such that the square
+Consider a [normal subgroup](group-theory.normal-subgroups.md) `N` of a
+[group](group-theory.groups.md) `G` and a normal subgroup `M` of a group `H`.
+Then any [group homomorphism](group-theory.homomorphisms-groups.md) `f : G → H`
+satisfying the property that `x ∈ N ⇒ f x ∈ M` induces a group homomorphism
+`g : G/N → H/M`, which is the unique group homomorphism such that the square
 
 ```text
          f
@@ -37,7 +41,8 @@ Consider a [normal subgroup](group-theory.normal-subgroups.md) `N` of a [group](
 
 ### The property of group homomorphisms of reflecting a normal subgroup
 
-We say that a group homomorphism `f : G → H` **reflects** a normal subgroup `N` of `G` into a normal subgroup `M` of `H` if the property
+We say that a group homomorphism `f : G → H` **reflects** a normal subgroup `N`
+of `G` into a normal subgroup `M` of `H` if the property
 
 ```text
   x ∈ N ⇒ f x ∈ M

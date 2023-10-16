@@ -203,9 +203,12 @@ level-left-adjoint-Adjunction-Large-Precategory
 left-adjoint-Adjunction-Large-Precategory
   abelianization-adjunction-Group =
   abelianization-functor-Group
-level-right-adjoint-Adjunction-Large-Precategory abelianization-adjunction-Group = {!!}
-right-adjoint-Adjunction-Large-Precategory abelianization-adjunction-Group = {!!}
-is-adjoint-pair-Adjunction-Large-Precategory abelianization-adjunction-Group = {!!}
+level-right-adjoint-Adjunction-Large-Precategory abelianization-adjunction-Group =
+  {!!}
+right-adjoint-Adjunction-Large-Precategory abelianization-adjunction-Group =
+  {!!}
+is-adjoint-pair-Adjunction-Large-Precategory abelianization-adjunction-Group =
+  {!!}
 ```
 
 ## External links

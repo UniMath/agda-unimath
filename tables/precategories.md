@@ -1,6 +1,6 @@
 | Precategory           | File                                                                                                                      |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Abelian groups        | [`group-theory.category-of-abelian-groups`](group-theory.category-of-abelian-groups.md)                             |
+| Abelian groups        | [`group-theory.category-of-abelian-groups`](group-theory.category-of-abelian-groups.md)                                   |
 | Commutative monoids   | [`group-theory.precategory-of-commutative-monoids`](group-theory.precategory-of-commutative-monoids.md)                   |
 | Commutative rings     | [`commutative-algebra.precategory-of-commutative-rings`](commutative-algebra.precategory-of-commutative-rings.md)         |
 | Commutative semirings | [`commutative-algebra.precategory-of-commutative-semirings`](commutative-algebra.precategory-of-commutative-semirings.md) |

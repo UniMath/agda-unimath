@@ -73,6 +73,7 @@ open import group-theory.function-commutative-monoids public
 open import group-theory.function-groups public
 open import group-theory.function-monoids public
 open import group-theory.function-semigroups public
+open import group-theory.functoriality-quotient-groups public
 open import group-theory.furstenberg-groups public
 open import group-theory.generating-elements-groups public
 open import group-theory.generating-sets-groups public

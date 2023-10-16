@@ -153,7 +153,7 @@ module _
     apply-effectiveness-map-quotient-hom-Group' =
       apply-effectiveness-quotient-map'
         ( eq-rel-congruence-Normal-Subgroup G H)
-        
+
   reflecting-map-quotient-hom-Group :
     reflecting-map-Equivalence-Relation
       ( eq-rel-congruence-Normal-Subgroup G H)
