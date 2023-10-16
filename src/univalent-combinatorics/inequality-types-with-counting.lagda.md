@@ -29,8 +29,7 @@ inequality relations from the standard finite types.
 ## Definition
 
 ```agda
-leq-count :
-  {l : Level} {X : UU l} → count X → X → X → UU lzero
+leq-count : {l : Level} {X : UU l} → count X → X → X → UU lzero
 leq-count e x y =
   leq-Fin
     ( number-of-elements-count e)
