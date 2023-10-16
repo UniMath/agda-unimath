@@ -1,4 +1,4 @@
-# Finite total-orders
+# Finite total orders
 
 ```agda
 module order-theory.finite-total-orders where
@@ -83,4 +83,8 @@ total-order-Total-Order-𝔽 :
   {l1 l2 : Level} → Total-Order-𝔽 l1 l2 → Total-Order l1 l2
 pr1 (total-order-Total-Order-𝔽 P) = poset-Total-Order-𝔽 P
 pr2 (total-order-Total-Order-𝔽 P) = is-total-Total-Order-𝔽 P
+
+type-Total-Order-𝔽 :
+  {l1 l2 : Level} → Total-Order-𝔽 l1 l2 → UU l1
+type-Total-Order-𝔽 = type-Poset ∘ poset-Total-Order-𝔽
 ```

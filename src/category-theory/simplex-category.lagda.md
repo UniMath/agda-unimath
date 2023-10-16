@@ -30,10 +30,10 @@ orders and
 we define it as the category whose objects are
 [natural numbers](elementary-number-theory.natural-numbers.md) and whose
 hom-[sets](foundation-core.sets.md) `hom n m` are order-preserving maps between
-the [standard finite sets](univalent-combinatorics.standard-finite-sets.md)
+the [standard finite types](univalent-combinatorics.standard-finite-types.md)
 `Fin (succ-ℕ n)` to `Fin (succ-ℕ m)` [equipped](foundation.structure.md) with
 the
-[standard ordering](elementary-number-theory.inequality-standard-finite-sets.md),
+[standard ordering](elementary-number-theory.inequality-standard-finite-types.md),
 and then show that it is
 [equivalent](category-theory.equivalences-of-precategories.md) to the former.
 

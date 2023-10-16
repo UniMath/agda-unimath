@@ -46,6 +46,7 @@ open import order-theory.homomorphisms-meet-semilattices public
 open import order-theory.homomorphisms-meet-sup-lattices public
 open import order-theory.homomorphisms-sup-lattices public
 open import order-theory.ideals-preorders public
+open import order-theory.inhabited-finite-total-orders public
 open import order-theory.interval-subposets public
 open import order-theory.join-semilattices public
 open import order-theory.large-frames public
@@ -82,6 +83,7 @@ open import order-theory.powers-of-large-locales public
 open import order-theory.precategory-of-decidable-total-orders public
 open import order-theory.precategory-of-finite-posets public
 open import order-theory.precategory-of-finite-total-orders public
+open import order-theory.precategory-of-inhabited-finite-total-orders public
 open import order-theory.precategory-of-posets public
 open import order-theory.precategory-of-total-orders public
 open import order-theory.preorders public
