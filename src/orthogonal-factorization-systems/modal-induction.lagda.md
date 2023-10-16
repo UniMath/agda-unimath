@@ -193,7 +193,7 @@ module _
     (compute-rec-○ X Y f ∘ map-section f s) ∙h is-section-map-section f s
 ```
 
-### `induction-principle-modality ≃ section precomp-Π unit-○ (○ ∘ P)`
+### A modal induction principle consists precisely of an induction rule and a computation rule
 
 ```agda
 equiv-section-unit-induction-principle-modality :
