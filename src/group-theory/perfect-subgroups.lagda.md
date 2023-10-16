@@ -11,17 +11,17 @@ open import foundation.propositions
 open import foundation.universe-levels
 
 open import group-theory.groups
-open import group-theory.subgroups
 open import group-theory.perfect-groups
+open import group-theory.subgroups
 ```
 
 </details>
 
 ## Idea
 
-A [subgroup](group-theory.subgroups.md) `H` of a [group](group-theory.groups.md) `G`
-is a **perfect subgroup** if it is a [perfect group](group-theory.perfect-groups.md)
-on its own.
+A [subgroup](group-theory.subgroups.md) `H` of a [group](group-theory.groups.md)
+`G` is a **perfect subgroup** if it is a
+[perfect group](group-theory.perfect-groups.md) on its own.
 
 ## Definitions
 

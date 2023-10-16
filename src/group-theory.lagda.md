@@ -85,6 +85,7 @@ open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
+open import group-theory.hypoabelian-groups public
 open import group-theory.images-of-group-homomorphisms public
 open import group-theory.integer-multiples-of-elements-abelian-groups public
 open import group-theory.integer-powers-of-elements-groups public
@@ -125,6 +126,7 @@ open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
 open import group-theory.perfect-groups public
+open import group-theory.perfect-subgroups public
 open import group-theory.powers-of-elements-commutative-monoids public
 open import group-theory.powers-of-elements-groups public
 open import group-theory.powers-of-elements-monoids public
