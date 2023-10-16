@@ -22,12 +22,12 @@ open import foundation.universe-levels
 
 ## Idea
 
-A precategory in Homotopy Type Theory consists of:
+A **precategory** in Homotopy Type Theory consists of:
 
 - a type `A` of objects,
-- for each pair of objects `x y : A`, a set of morphisms `hom x y : Set`,
-  together with a composition operation `_∘_ : hom y z → hom x y → hom x z` such
-  that:
+- for each pair of objects `x y : A`, a [set](foundation-core.sets.md) of
+  morphisms `hom x y : Set`, together with a composition operation
+  `_∘_ : hom y z → hom x y → hom x z` such that:
 - `(h ∘ g) ∘ f = h ∘ (g ∘ f)` for any morphisms `h : hom z w`, `g : hom y z` and
   `f : hom x y`,
 - for each object `x : A` there is a morphism `id_x : hom x x` such that
