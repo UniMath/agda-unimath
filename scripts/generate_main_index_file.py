@@ -18,10 +18,8 @@ entry_template = '- [{title}]({mdfile})'
 def generate_namespace_entry_list(namespace):
     status = 0
 
-    # Get list of Git-tracked files
     try:
-        git_output = subprocess.check_output(['git', 'ls-files'], text=True)
-        git_tracked_files = map(pathlib.Path, git_output.strip().split('\n'))
+        git_tracked_files = utils.get_git_tracked_files()
     except subprocess.CalledProcessError:
         print('Failed to get Git-tracked files', file=sys.stderr)
         sys.exit(STATUS_FLAG_GIT_ERROR)
@@ -80,8 +78,6 @@ def generate_index(root, header):
     namespaces = sorted(set(utils.get_subdirectories_recursive(root)))
 
     for namespace in namespaces:
-        if namespace == 'temp' or 'MAlonzo' in namespace:
-            continue
         entry_list, s = generate_namespace_entry_list(namespace)
         entry_lists.append(entry_list)
         status |= s

@@ -4,7 +4,6 @@
 
 # * Remember to update the script's entry in `CONTRIBUTING.md` on changes
 
-import os
 import pathlib
 import sys
 import utils
@@ -14,14 +13,13 @@ def generate_title(namespace):
     return '# ' + namespace.capitalize().replace('-', ' ') + '\n'
 
 
-def generate_imports(root, namespace):
-    namespace_path = os.path.join(root, namespace)
-    def agda_file_filter(f): return utils.is_agda_file(
-        pathlib.Path(os.path.join(namespace_path, f)))
-    namespace_files = filter(agda_file_filter, os.listdir(namespace_path))
+def generate_imports(root, namespace, git_tracked_files):
+    namespace_path = root.joinpath(namespace)
+    namespace_files = [
+        f.name for f in namespace_path.iterdir() if utils.is_agda_file(f) and f in git_tracked_files]
 
-    import_statements = (utils.get_import_statement(
-        namespace, module_file, public=True) for module_file in namespace_files)
+    import_statements = [utils.get_import_statement(
+        namespace, module_file, public=True) for module_file in namespace_files]
     return '\n'.join(sorted(set(import_statements)))
 
 
@@ -34,24 +32,26 @@ module {namespace} where
 '''
 
 
-def generate_agda_block(root, namespace):
-    return agda_block_template.format(namespace=namespace, imports=generate_imports(root, namespace))
+def generate_agda_block(root, namespace, git_tracked_files):
+    return agda_block_template.format(namespace=namespace, imports=generate_imports(root, namespace, git_tracked_files))
 
 
 if __name__ == '__main__':
     CHANGES_WERE_MADE_FLAG = 1
     MISPLACED_TITLE_FLAG = 2
     status = 0
-    root = 'src'
+    root = pathlib.Path('src')
+
+    git_tracked_files = set(utils.get_git_tracked_files())
 
     for namespace in utils.get_subdirectories_recursive(root):
         if namespace == 'temp' or 'MAlonzo' in namespace:
             continue
 
-        namespace_filename = os.path.join(root, namespace) + '.lagda.md'
+        namespace_filename = root.joinpath(namespace).with_suffix('.lagda.md')
 
-        if os.path.isfile(namespace_filename):
-            with open(namespace_filename, 'r+') as namespace_file:
+        if namespace_filename.is_file():
+            with namespace_filename.open('r+') as namespace_file:
                 contents = namespace_file.read()
         else:
             contents = ''
@@ -71,11 +71,13 @@ if __name__ == '__main__':
         if agda_block_start == -1:
             # Must add agda block
             # Add at the end of the file
-            contents += '\n' + generate_agda_block(root, namespace)
+            contents += '\n' + \
+                generate_agda_block(root, namespace, git_tracked_files)
         else:
             agda_block_end = contents.find(
                 '\n```\n', agda_block_start + len('```agda\n'))
-            generated_block = generate_agda_block(root, namespace)
+            generated_block = generate_agda_block(
+                root, namespace, git_tracked_files)
 
             if agda_block_end == -1:
                 # An agda block is opened but not closed.
@@ -90,7 +92,7 @@ if __name__ == '__main__':
 
         if oldcontents != contents:
             status |= CHANGES_WERE_MADE_FLAG
-            with open(namespace_filename, 'w') as f:
+            with namespace_filename.open('w') as f:
                 f.write(contents)
 
     sys.exit(status)
