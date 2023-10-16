@@ -57,6 +57,7 @@ open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
 open import synthetic-homotopy-theory.mere-spheres public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
+open import synthetic-homotopy-theory.morphisms-sequential-diagrams public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
