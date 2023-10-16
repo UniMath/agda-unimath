@@ -58,7 +58,7 @@ module _
     h' (map-reflecting-map-Equivalence-Relation R f y) ＝
     map-reflecting-map-Equivalence-Relation R f (h y)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inl (inr star)) (inl (inr star)) k'' p q r =
+    ( inl (inr _)) (inl (inr _)) k'' p q r =
     ( is-injective-map-equiv eA (q ∙ inv p)) ∙
       ( P ∙
         reflects-map-reflecting-map-Equivalence-Relation R f
@@ -71,7 +71,7 @@ module _
                   ( map-reflecting-map-Equivalence-Relation R f y))
                 ( is-injective-map-equiv eA (p ∙ inv q))))))
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inl (inr star)) (inr star) (inl (inr star)) p q r =
+    ( inl (inr _)) (inr _) (inl (inr _)) p q r =
     ex-falso
       ( neq-inl-inr
         ( inv p ∙
@@ -84,13 +84,13 @@ module _
                   ( inv P ∙ is-injective-map-equiv eA (p ∙ inv r)))))) ∙
             ( q))))
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inl (inr star)) (inr star) (inr star) p q r =
+    ( inl (inr _)) (inr _) (inr _) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inr star) (inl (inr star)) (inl (inr star)) p q r =
+    ( inr _) (inl (inr _)) (inl (inr _)) p q r =
     is-injective-map-equiv eA (q ∙ inv r)
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inr star) (inl (inr star)) (inr star) p q r =
+    ( inr _) (inl (inr _)) (inr _) p q r =
     ex-falso
       ( neq-inr-inl
         ( inv p ∙
@@ -103,7 +103,7 @@ module _
                   ( inv P ∙ is-injective-map-equiv eA (p ∙ inv r)))))) ∙
             ( q))))
   cases-coherence-square-maps-eq-one-value-emb-is-set-quotient H' y
-    ( inr star) (inr star) k'' p q r =
+    ( inr _) (inr _) k'' p q r =
     ( is-injective-map-equiv eA (q ∙ inv p)) ∙
       ( P ∙
         reflects-map-reflecting-map-Equivalence-Relation R f

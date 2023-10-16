@@ -50,7 +50,7 @@ binomial-coefficient-Fin n x = binomial-coefficient-ℕ n (nat-Fin (succ-ℕ n) 
 ```agda
 is-zero-binomial-coefficient-ℕ :
   (n k : ℕ) → le-ℕ n k → is-zero-ℕ (binomial-coefficient-ℕ n k)
-is-zero-binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) star = refl
+is-zero-binomial-coefficient-ℕ zero-ℕ (succ-ℕ k) _ = refl
 is-zero-binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) H =
   ap-add-ℕ
     ( is-zero-binomial-coefficient-ℕ n k H)

@@ -43,13 +43,13 @@ module _
 
   fam-coprod :
     Fin 2 → UU (l1 ⊔ l2)
-  fam-coprod (inl (inr star)) = raise l2 A
-  fam-coprod (inr star) = raise l1 B
+  fam-coprod (inl (inr _)) = raise l2 A
+  fam-coprod (inr _) = raise l1 B
 
   map-compute-total-fam-coprod :
     Σ (Fin 2) fam-coprod → A + B
-  map-compute-total-fam-coprod (pair (inl (inr star)) y) = inl (map-inv-raise y)
-  map-compute-total-fam-coprod (pair (inr star) y) = inr (map-inv-raise y)
+  map-compute-total-fam-coprod (pair (inl (inr _)) y) = inl (map-inv-raise y)
+  map-compute-total-fam-coprod (pair (inr _) y) = inr (map-inv-raise y)
 
   map-inv-compute-total-fam-coprod :
     A + B → Σ (Fin 2) fam-coprod
@@ -67,9 +67,9 @@ module _
 
   is-retraction-map-inv-compute-total-fam-coprod :
     (map-inv-compute-total-fam-coprod ∘ map-compute-total-fam-coprod) ~ id
-  is-retraction-map-inv-compute-total-fam-coprod (pair (inl (inr star)) y) =
+  is-retraction-map-inv-compute-total-fam-coprod (pair (inl (inr _)) y) =
     ap (pair (zero-Fin 1)) (is-section-map-inv-raise y)
-  is-retraction-map-inv-compute-total-fam-coprod (pair (inr star) y) =
+  is-retraction-map-inv-compute-total-fam-coprod (pair (inr _) y) =
     ap (pair (one-Fin 1)) (is-section-map-inv-raise y)
 
   is-equiv-map-compute-total-fam-coprod :

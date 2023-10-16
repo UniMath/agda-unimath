@@ -24,7 +24,6 @@ open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.prespectra
 open import synthetic-homotopy-theory.suspensions-of-pointed-types
 open import synthetic-homotopy-theory.suspensions-of-types
-open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types
 ```
 
 </details>

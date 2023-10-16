@@ -100,7 +100,7 @@ module _
     is-modal-type-is-small (unit-○) (x ＝ y) (is-locally-small-○ X x y)
 ```
 
-### The `is-higher-modality` predicate
+### The predicate of being a higher modality
 
 ```agda
   is-higher-modality : UU (lsuc l1 ⊔ l2)
@@ -108,7 +108,7 @@ module _
     dependent-universal-property-modality (unit-○) × is-modal-identity-types
 ```
 
-### Components of a `is-higher-modality` proof
+### Components of a higher modality proof
 
 ```agda
   ind-modality-is-higher-modality : is-higher-modality → ind-modality unit-○

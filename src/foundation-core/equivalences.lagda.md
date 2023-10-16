@@ -402,7 +402,7 @@ abstract
 abstract
   is-equiv-is-section :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
-    is-equiv f → (f ∘ g) ~ id → is-equiv g
+    is-equiv f → f ∘ g ~ id → is-equiv g
   is-equiv-is-section {B = B} {f = f} {g = g} is-equiv-f H =
     is-equiv-right-factor-htpy id f g (inv-htpy H) is-equiv-f is-equiv-id
 ```

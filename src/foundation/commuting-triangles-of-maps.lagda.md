@@ -33,16 +33,16 @@ A triangle of maps
      X
 ```
 
-is said to commute if there is a homotopy between the map on the left and the
-composite map.
+is said to **commute** if there is a [homotopy](foundation-core.homotopies.md)
+between the map on the left and the composite map.
 
 ## Properties
 
 ### Top map is an equivalence
 
-If the top map is an equivalence, then there is an equivalence between the
-coherence triangle with the map of the equivalence as with the inverse map of
-the equivalence.
+If the top map is an [equivalence](foundation-core.equivalences.md), then there
+is an equivalence between the coherence triangle with the map of the equivalence
+as with the inverse map of the equivalence.
 
 ```agda
 module _
