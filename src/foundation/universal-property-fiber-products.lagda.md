@@ -51,11 +51,11 @@ map.
 
 ```agda
   gap-fiberwise-prod :
-    Σ X (λ x → (P x) × (Q x)) → canonical-pullback (pr1 {B = P}) (pr1 {B = Q})
+    Σ X (λ x → (P x) × (Q x)) → standard-pullback (pr1 {B = P}) (pr1 {B = Q})
   gap-fiberwise-prod = gap pr1 pr1 cone-fiberwise-prod
 
   inv-gap-fiberwise-prod :
-    canonical-pullback (pr1 {B = P}) (pr1 {B = Q}) → Σ X (λ x → (P x) × (Q x))
+    standard-pullback (pr1 {B = P}) (pr1 {B = Q}) → Σ X (λ x → (P x) × (Q x))
   pr1 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl))) = x
   pr1 (pr2 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)))) = p
   pr2 (pr2 (inv-gap-fiberwise-prod ((x , p) , ((.x , q) , refl)))) = q
@@ -103,11 +103,11 @@ module _
   pr2 (pr2 cone-total-prod-fibers) (x , (a , p) , (b , q)) = p ∙ inv q
 
   gap-total-prod-fibers :
-    Σ X (λ x → (fiber f x) × (fiber g x)) → canonical-pullback f g
+    Σ X (λ x → (fiber f x) × (fiber g x)) → standard-pullback f g
   gap-total-prod-fibers = gap f g cone-total-prod-fibers
 
   inv-gap-total-prod-fibers :
-    canonical-pullback f g → Σ X (λ x → (fiber f x) × (fiber g x))
+    standard-pullback f g → Σ X (λ x → (fiber f x) × (fiber g x))
   pr1 (inv-gap-total-prod-fibers (a , b , p)) = g b
   pr1 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = a
   pr2 (pr1 (pr2 (inv-gap-total-prod-fibers (a , b , p)))) = p
@@ -118,7 +118,7 @@ module _
     is-section-inv-gap-total-prod-fibers :
       (gap-total-prod-fibers ∘ inv-gap-total-prod-fibers) ~ id
     is-section-inv-gap-total-prod-fibers (a , b , p) =
-      map-extensionality-canonical-pullback f g refl refl
+      map-extensionality-standard-pullback f g refl refl
         ( inv right-unit ∙ inv right-unit)
 
   abstract

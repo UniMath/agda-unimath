@@ -33,7 +33,7 @@ open import foundation-core.truncation-levels
 ```agda
 diagonal-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  A → canonical-pullback f f
+  A → standard-pullback f f
 pr1 (diagonal-map f x) = x
 pr1 (pr2 (diagonal-map f x)) = x
 pr2 (pr2 (diagonal-map f x)) = refl
@@ -46,14 +46,14 @@ pr2 (pr2 (diagonal-map f x)) = refl
 ```agda
 fiber-ap-fiber-diagonal-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (t : canonical-pullback f f) →
+  (t : standard-pullback f f) →
   (fiber (diagonal-map f) t) → (fiber (ap f) (pr2 (pr2 t)))
 pr1 (fiber-ap-fiber-diagonal-map f .(diagonal-map f z) (z , refl)) = refl
 pr2 (fiber-ap-fiber-diagonal-map f .(diagonal-map f z) (z , refl)) = refl
 
 fiber-diagonal-map-fiber-ap :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-  (t : canonical-pullback f f) →
+  (t : standard-pullback f f) →
   (fiber (ap f) (pr2 (pr2 t))) → (fiber (diagonal-map f) t)
 pr1 (fiber-diagonal-map-fiber-ap f (x , .x , .(ap f refl)) (refl , refl)) = x
 pr2 (fiber-diagonal-map-fiber-ap f (x , .x , .(ap f refl)) (refl , refl)) = refl
@@ -61,7 +61,7 @@ pr2 (fiber-diagonal-map-fiber-ap f (x , .x , .(ap f refl)) (refl , refl)) = refl
 abstract
   is-section-fiber-diagonal-map-fiber-ap :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (t : canonical-pullback f f) →
+    (t : standard-pullback f f) →
     ((fiber-ap-fiber-diagonal-map f t) ∘ (fiber-diagonal-map-fiber-ap f t)) ~ id
   is-section-fiber-diagonal-map-fiber-ap f (x , .x , .refl) (refl , refl) =
     refl
@@ -69,7 +69,7 @@ abstract
 abstract
   is-retraction-fiber-diagonal-map-fiber-ap :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (t : canonical-pullback f f) →
+    (t : standard-pullback f f) →
     ((fiber-diagonal-map-fiber-ap f t) ∘ (fiber-ap-fiber-diagonal-map f t)) ~ id
   is-retraction-fiber-diagonal-map-fiber-ap f .(x , x , refl) (x , refl) =
     refl
@@ -77,7 +77,7 @@ abstract
 abstract
   is-equiv-fiber-ap-fiber-diagonal-map :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
-    (t : canonical-pullback f f) →
+    (t : standard-pullback f f) →
     is-equiv (fiber-ap-fiber-diagonal-map f t)
   is-equiv-fiber-ap-fiber-diagonal-map f t =
     is-equiv-is-invertible
