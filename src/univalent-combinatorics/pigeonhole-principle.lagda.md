@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.pairs-of-distinct-elements
 open import foundation.propositional-truncations
@@ -136,7 +137,7 @@ module _
       pair-of-distinct-elements-repetition-of-values-le-Fin
 
   distinction-repetition-of-values-le-Fin :
-    ¬ (Id first-repetition-of-values-le-Fin second-repetition-of-values-le-Fin)
+    first-repetition-of-values-le-Fin ≠ second-repetition-of-values-le-Fin
   distinction-repetition-of-values-le-Fin =
     distinction-pair-of-distinct-elements
       pair-of-distinct-elements-repetition-of-values-le-Fin
@@ -273,8 +274,7 @@ module _
       pair-of-distinct-elements-repetition-of-values-le-count
 
   distinction-repetition-of-values-le-count :
-    ¬ ( first-repetition-of-values-le-count ＝
-        second-repetition-of-values-le-count)
+    first-repetition-of-values-le-count ≠ second-repetition-of-values-le-count
   distinction-repetition-of-values-le-count =
     distinction-pair-of-distinct-elements
       pair-of-distinct-elements-repetition-of-values-le-count

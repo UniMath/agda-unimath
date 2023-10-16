@@ -135,14 +135,15 @@ module _
   (T : is-pointed-torsorial-family-of-types B E)
   where
 
-  is-locally-small-is-pointed-torsorial-family-of-types :
-    is-0-connected (type-Pointed-Type B) →
-    is-locally-small l2 (type-Pointed-Type B)
-  is-locally-small-is-pointed-torsorial-family-of-types H x y =
-    apply-universal-property-trunc-Prop
-      ( mere-eq-is-0-connected H (point-Pointed-Type B) x)
-      ( is-small-Prop l2 (x ＝ y))
-      ( λ { refl → (E y , inv-equiv (T y))})
+  abstract
+    is-locally-small-is-pointed-torsorial-family-of-types :
+      is-0-connected (type-Pointed-Type B) →
+      is-locally-small l2 (type-Pointed-Type B)
+    is-locally-small-is-pointed-torsorial-family-of-types H x y =
+      apply-universal-property-trunc-Prop
+        ( mere-eq-is-0-connected H (point-Pointed-Type B) x)
+        ( is-small-Prop l2 (x ＝ y))
+        ( λ where refl → (E y , inv-equiv (T y)))
 ```
 
 ### The type of pointed torsorial type families of universe level `l` over a pointed connected type is equivalent to the proposition that `B` is locally `l`-small

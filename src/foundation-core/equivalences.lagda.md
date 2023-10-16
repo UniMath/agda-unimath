@@ -402,7 +402,7 @@ abstract
 abstract
   is-equiv-is-section :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
-    is-equiv f → (f ∘ g) ~ id → is-equiv g
+    is-equiv f → f ∘ g ~ id → is-equiv g
   is-equiv-is-section {B = B} {f = f} {g = g} is-equiv-f H =
     is-equiv-right-factor-htpy id f g (inv-htpy H) is-equiv-f is-equiv-id
 ```
@@ -548,40 +548,41 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-emb-is-equiv :
-    {f : A → B} → is-equiv f → (x y : A) → is-equiv (ap f {x} {y})
-  is-emb-is-equiv {f} H x y =
-    is-equiv-is-invertible
-      ( λ p →
-        ( inv (is-retraction-map-inv-is-equiv H x)) ∙
-        ( ( ap (map-inv-is-equiv H) p) ∙
-          ( is-retraction-map-inv-is-equiv H y)))
-      ( λ p →
-        ( ap-concat f
-          ( inv (is-retraction-map-inv-is-equiv H x))
-          ( ap (map-inv-is-equiv H) p ∙ is-retraction-map-inv-is-equiv H y)) ∙
-        ( ( ap-binary
-            ( λ u v → u ∙ v)
-            ( ap-inv f (is-retraction-map-inv-is-equiv H x))
-            ( ( ap-concat f
-                ( ap (map-inv-is-equiv H) p)
-                ( is-retraction-map-inv-is-equiv H y)) ∙
-              ( ap-binary
-                ( λ u v → u ∙ v)
-                ( inv (ap-comp f (map-inv-is-equiv H) p))
-                ( inv (coherence-map-inv-is-equiv H y))))) ∙
-          ( inv
-            ( left-transpose-eq-concat
-              ( ap f (is-retraction-map-inv-is-equiv H x))
-              ( p)
-              ( ( ap (f ∘ map-inv-is-equiv H) p) ∙
-                ( is-section-map-inv-is-equiv H (f y)))
-              ( ( ap-binary
+  abstract
+    is-emb-is-equiv :
+      {f : A → B} → is-equiv f → (x y : A) → is-equiv (ap f {x} {y})
+    is-emb-is-equiv {f} H x y =
+      is-equiv-is-invertible
+        ( λ p →
+          ( inv (is-retraction-map-inv-is-equiv H x)) ∙
+          ( ( ap (map-inv-is-equiv H) p) ∙
+            ( is-retraction-map-inv-is-equiv H y)))
+        ( λ p →
+          ( ap-concat f
+            ( inv (is-retraction-map-inv-is-equiv H x))
+            ( ap (map-inv-is-equiv H) p ∙ is-retraction-map-inv-is-equiv H y)) ∙
+          ( ( ap-binary
+              ( λ u v → u ∙ v)
+              ( ap-inv f (is-retraction-map-inv-is-equiv H x))
+              ( ( ap-concat f
+                  ( ap (map-inv-is-equiv H) p)
+                  ( is-retraction-map-inv-is-equiv H y)) ∙
+                ( ap-binary
                   ( λ u v → u ∙ v)
-                  ( inv (coherence-map-inv-is-equiv H x))
-                  ( inv (ap-id p))) ∙
-                ( nat-htpy (is-section-map-inv-is-equiv H) p))))))
-      ( λ {refl → left-inv (is-retraction-map-inv-is-equiv H x)})
+                  ( inv (ap-comp f (map-inv-is-equiv H) p))
+                  ( inv (coherence-map-inv-is-equiv H y))))) ∙
+            ( inv
+              ( left-transpose-eq-concat
+                ( ap f (is-retraction-map-inv-is-equiv H x))
+                ( p)
+                ( ( ap (f ∘ map-inv-is-equiv H) p) ∙
+                  ( is-section-map-inv-is-equiv H (f y)))
+                ( ( ap-binary
+                    ( λ u v → u ∙ v)
+                    ( inv (coherence-map-inv-is-equiv H x))
+                    ( inv (ap-id p))) ∙
+                  ( nat-htpy (is-section-map-inv-is-equiv H) p))))))
+        ( λ where refl → left-inv (is-retraction-map-inv-is-equiv H x))
 
   equiv-ap :
     (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)

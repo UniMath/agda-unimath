@@ -19,7 +19,7 @@ open import foundation.unordered-tuples-of-types
 open import foundation-core.cartesian-product-types
 open import foundation-core.equivalences
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 ```
 
 </details>
@@ -53,14 +53,14 @@ equiv-pr-product-unordered-tuple-types :
 equiv-pr-product-unordered-tuple-types n A i =
   ( equiv-Π
     ( element-unordered-tuple (succ-ℕ n) A)
-    ( equiv-maybe-structure-point-UU-Fin n
+    ( equiv-maybe-structure-element-UU-Fin n
       ( type-unordered-tuple-UU-Fin (succ-ℕ n) A) i)
     ( λ x → id-equiv)) ∘e
   ( inv-equiv
     ( equiv-dependent-universal-property-Maybe
       ( λ j →
         element-unordered-tuple (succ-ℕ n) A
-          ( map-equiv (equiv-maybe-structure-point-UU-Fin n
+          ( map-equiv (equiv-maybe-structure-element-UU-Fin n
             ( type-unordered-tuple-UU-Fin (succ-ℕ n) A) i)
             ( j)))))
 

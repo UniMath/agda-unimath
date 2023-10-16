@@ -35,7 +35,7 @@ open import lists.functoriality-lists
 open import lists.permutation-lists
 open import lists.sort-by-insertion-lists
 
-open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.cyclic-finite-types
 ```
 
 </details>

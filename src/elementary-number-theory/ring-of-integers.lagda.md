@@ -159,3 +159,34 @@ is-initial-ℤ-Ring : is-initial-Ring ℤ-Ring
 pr1 (is-initial-ℤ-Ring S) = initial-hom-Ring S
 pr2 (is-initial-ℤ-Ring S) f = contraction-initial-hom-Ring S f
 ```
+
+### Integer multiplication in the ring of integers coincides with multiplication of integers
+
+```agda
+integer-multiple-one-ℤ-Ring :
+  (k : ℤ) → integer-multiple-Ring ℤ-Ring k one-ℤ ＝ k
+integer-multiple-one-ℤ-Ring (inl zero-ℕ) = refl
+integer-multiple-one-ℤ-Ring (inl (succ-ℕ n)) =
+  ap pred-ℤ (integer-multiple-one-ℤ-Ring (inl n))
+integer-multiple-one-ℤ-Ring (inr (inl star)) = refl
+integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
+integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
+  ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
+
+compute-integer-multiple-ℤ-Ring :
+  (k l : ℤ) → integer-multiple-Ring ℤ-Ring k l ＝ mul-ℤ k l
+compute-integer-multiple-ℤ-Ring k l =
+  equational-reasoning
+    integer-multiple-Ring ℤ-Ring k l
+    ＝ integer-multiple-Ring ℤ-Ring k (integer-multiple-Ring ℤ-Ring l one-ℤ)
+      by
+      ap
+        ( integer-multiple-Ring ℤ-Ring k)
+        ( inv (integer-multiple-one-ℤ-Ring l))
+    ＝ integer-multiple-Ring ℤ-Ring (mul-ℤ k l) one-ℤ
+      by
+      inv (integer-multiple-mul-Ring ℤ-Ring k l one-ℤ)
+    ＝ mul-ℤ k l
+      by
+      integer-multiple-one-ℤ-Ring _
+```

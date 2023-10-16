@@ -22,7 +22,7 @@ inline-delimiter = {left = "$", right = "$"}
 macros = "website/latex-macros.txt"
 
 [preprocessor.catppuccin]
-assets_version = "0.2.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+assets_version = "1.2.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 
 [preprocessor.git-metadata]
 command = "python3 ./scripts/preprocessor_git_metadata.py"
@@ -57,7 +57,7 @@ additional-css = [
   "website/css/Agda-highlight.css",
   "website/css/agda-logo.css",
   "theme/catppuccin.css",
-  "theme/catppuccin-highlight.css",
+  "theme/catppuccin-admonish.css",
   "theme/pagetoc.css",
 ]
 additional-js = [

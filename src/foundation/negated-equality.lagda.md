@@ -8,19 +8,13 @@ module foundation.negated-equality where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.apartness-relations
 open import foundation.binary-relations
 open import foundation.dependent-pair-types
-open import foundation.disjunction
-open import foundation.existential-quantification
-open import foundation.function-extensionality
 open import foundation.negation
-open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
-open import foundation-core.coproduct-types
-open import foundation-core.empty-types
+open import foundation-core.function-extensionality
 open import foundation-core.identity-types
 open import foundation-core.propositions
 ```
@@ -29,7 +23,7 @@ open import foundation-core.propositions
 
 ## Idea
 
-Two terms `x` and `y` are **not equal** whenever `¬ (x ＝ y)` is inhabited.
+Two elements `x` and `y` are **not equal** whenever `¬ (x ＝ y)` is inhabited.
 
 ## Definition
 
@@ -37,13 +31,13 @@ Two terms `x` and `y` are **not equal** whenever `¬ (x ＝ y)` is inhabited.
 nonequal : {l : Level} {A : UU l} → A → A → UU l
 nonequal x y = ¬ (x ＝ y)
 
-infix 7 _≠_
+infix 6 _≠_
 _≠_ = nonequal
 ```
 
 ## Properties
 
-### Disequality is a property
+### Nonequality is a property
 
 ```agda
 module _
@@ -58,21 +52,21 @@ module _
   pr2 (nonequal-Prop x y) = is-prop-nonequal
 ```
 
-### Disequality is antireflexive
+### Nonequality is antireflexive
 
 ```agda
 module _
   {l : Level} {A : UU l}
   where
 
-  is-antireflexive-nonequal : is-antireflexive (nonequal-Prop {A = A})
+  is-antireflexive-nonequal : (a : A) → ¬ (a ≠ a)
   is-antireflexive-nonequal a d = d refl
 
-  is-consistent-nonequal : is-consistent (nonequal-Prop {A = A})
+  is-consistent-nonequal : (a b : A) → (a ＝ b) → ¬ (a ≠ b)
   is-consistent-nonequal a b p d = d p
 ```
 
-### Disequality is symmetric
+### Nonequality is symmetric
 
 ```agda
 module _

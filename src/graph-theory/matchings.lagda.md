@@ -25,7 +25,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A matching in a undirected graph is a set of edges without common vertices.
+A **matching** in a [undirected graph](graph-theory.undirected-graphs.md) is a
+type of edges without common vertices.
 
 ## Definitions
 
@@ -61,3 +62,10 @@ module _
         ( x : vertex-Undirected-Graph G) →
           is-contr (selected-edges-vertex-Undirected-Graph G c x))
 ```
+
+## External links
+
+- [Matching](https://www.wikidata.org/entity/Q1065144) on Wikidata
+- [Matching (graph theory)](<https://en.wikipedia.org/wiki/Matching_(graph_theory)>)
+  at Wikipedia
+- [Matching](https://mathworld.wolfram.com/Matching.html) at Wolfram Mathworld

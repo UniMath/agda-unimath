@@ -26,16 +26,17 @@ open import foundation-core.propositions
 
 ## Idea
 
-An apartness relation on a type `A` is a relation `R` which is
+An **apartness relation** on a type `A` is a
+[relation](foundation.binary-relations.md) `R` which is
 
-- Antireflexive: For any `a : A` we have `¬ (R a a)`
-- Symmetric: For any `a b : A` we have `R a b → R b a`
-- Cotransitive: For any `a b c : A` we have `R a b → R a c ∨ R b c`.
+- **Antireflexive:** For any `a : A` we have `¬ (R a a)`
+- **Symmetric:** For any `a b : A` we have `R a b → R b a`
+- **Cotransitive:** For any `a b c : A` we have `R a b → R a c ∨ R b c`.
 
 The idea of an apartness relation `R` is that `R a b` holds if you can
 positively establish a difference between `a` and `b`. For example, two subsets
 `A` and `B` of a type `X` are apart if we can find an element that is in the
-symmetric difference of `A` and `B`.
+[symmetric difference](foundation.symmetric-difference.md) of `A` and `B`.
 
 ## Definitions
 
@@ -59,12 +60,12 @@ module _
   is-apartness-relation : UU (l1 ⊔ l2)
   is-apartness-relation =
     ( is-antireflexive) ×
-    ( ( is-symmetric (λ x y → type-Prop (R x y))) ×
-      ( is-cotransitive))
+    ( is-symmetric (λ x y → type-Prop (R x y))) ×
+    ( is-cotransitive)
 
 Apartness-Relation : {l1 : Level} (l2 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2)
 Apartness-Relation l2 A =
-  Σ (A → A → Prop l2) is-apartness-relation
+  Σ (Relation-Prop l2 A) (is-apartness-relation)
 
 module _
   {l1 l2 : Level} {A : UU l1} (R : Apartness-Relation l2 A)
@@ -96,7 +97,7 @@ module _
 Type-With-Apartness :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Type-With-Apartness l1 l2 =
-  Σ (UU l1) (λ A → Apartness-Relation l2 A)
+  Σ (UU l1) (Apartness-Relation l2)
 
 module _
   {l1 l2 : Level} (A : Type-With-Apartness l1 l2)
@@ -186,29 +187,31 @@ module _
         unit-trunc-Prop
           ( x , symmetric-apart-Type-With-Apartness Y (f x) (g x) a))
 
-  is-cotransitive-apart-function-into-Type-With-Apartness :
-    is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
-  is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
-    apply-universal-property-trunc-Prop H
-      ( disj-Prop
-        ( rel-apart-function-into-Type-With-Apartness X Y f h)
-        ( rel-apart-function-into-Type-With-Apartness X Y g h))
-      ( λ (x , a) →
-        apply-universal-property-trunc-Prop
-          ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
-          ( disj-Prop
-            ( rel-apart-function-into-Type-With-Apartness X Y f h)
-            ( rel-apart-function-into-Type-With-Apartness X Y g h))
-          ( λ { (inl b) →
+  abstract
+    is-cotransitive-apart-function-into-Type-With-Apartness :
+      is-cotransitive (rel-apart-function-into-Type-With-Apartness X Y)
+    is-cotransitive-apart-function-into-Type-With-Apartness f g h H =
+      apply-universal-property-trunc-Prop H
+        ( disj-Prop
+          ( rel-apart-function-into-Type-With-Apartness X Y f h)
+          ( rel-apart-function-into-Type-With-Apartness X Y g h))
+        ( λ (x , a) →
+          apply-universal-property-trunc-Prop
+            ( cotransitive-apart-Type-With-Apartness Y (f x) (g x) (h x) a)
+            ( disj-Prop
+              ( rel-apart-function-into-Type-With-Apartness X Y f h)
+              ( rel-apart-function-into-Type-With-Apartness X Y g h))
+            ( λ where
+              ( inl b) →
                 inl-disj-Prop
                   ( rel-apart-function-into-Type-With-Apartness X Y f h)
                   ( rel-apart-function-into-Type-With-Apartness X Y g h)
-                  ( unit-trunc-Prop (x , b)) ;
-                (inr b) →
+                  ( unit-trunc-Prop (x , b))
+              ( inr b) →
                 inr-disj-Prop
                   ( rel-apart-function-into-Type-With-Apartness X Y f h)
                   ( rel-apart-function-into-Type-With-Apartness X Y g h)
-                  ( unit-trunc-Prop (x , b))}))
+                  ( unit-trunc-Prop (x , b))))
 
   exp-Type-With-Apartness : Type-With-Apartness (l1 ⊔ l2) (l1 ⊔ l3)
   pr1 exp-Type-With-Apartness = X → type-Type-With-Apartness Y

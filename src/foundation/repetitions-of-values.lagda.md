@@ -12,6 +12,7 @@ open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.pairs-of-distinct-elements
 open import foundation.universe-levels
 
@@ -69,7 +70,7 @@ module _
       pair-of-distinct-elements-repetition-of-values
 
   distinction-repetition-of-values :
-    ¬ (first-repetition-of-values ＝ second-repetition-of-values)
+    first-repetition-of-values ≠ second-repetition-of-values
   distinction-repetition-of-values =
     distinction-pair-of-distinct-elements
       pair-of-distinct-elements-repetition-of-values
@@ -86,7 +87,7 @@ module _
 is-repeated-value :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (a : A) → UU (l1 ⊔ l2)
 is-repeated-value {l1} {l2} {A} {B} f a =
-  Σ (Σ A (λ x → ¬ (Id a x))) (λ x → f a ＝ f (pr1 x))
+  Σ (Σ A (λ x → a ≠ x)) (λ x → f a ＝ f (pr1 x))
 ```
 
 ## Properties

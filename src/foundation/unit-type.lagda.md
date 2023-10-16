@@ -68,6 +68,9 @@ raise-unit l = raise l unit
 raise-star : {l : Level} → raise l unit
 raise-star = map-raise star
 
+raise-terminal-map : {l1 l2 : Level} {A : UU l1} → A → raise-unit l2
+raise-terminal-map {l2 = l2} = const _ (raise-unit l2) raise-star
+
 compute-raise-unit : (l : Level) → unit ≃ raise-unit l
 compute-raise-unit l = compute-raise l unit
 ```

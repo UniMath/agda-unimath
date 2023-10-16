@@ -118,3 +118,9 @@ pr2 (is-finitely-cyclic-succ-Fin {succ-ℕ k} x y) =
           ( ( ap (add-Fin (succ-ℕ k) y) (left-inverse-law-add-Fin k x)) ∙
             ( right-unit-law-add-Fin k y)))))
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

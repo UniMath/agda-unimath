@@ -58,3 +58,10 @@ module _
         ( cone-fiber)
         ( is-pullback-cone-fiber)
 ```
+
+## Table of files about fibers of maps
+
+The following table lists files that are about fibers of maps as a general
+concept.
+
+{{#include tables/fibers-of-maps.md}}

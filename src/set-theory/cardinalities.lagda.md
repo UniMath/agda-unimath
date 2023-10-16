@@ -81,11 +81,6 @@ leq-cardinality :
   {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
 leq-cardinality X Y = type-Prop (leq-cardinality-Prop X Y)
 
-infix 6 _≤-cardinality_
-_≤-cardinality_ :
-  {l1 l2 : Level} → cardinal l1 → cardinal l2 → UU (l1 ⊔ l2)
-_≤-cardinality_ = leq-cardinality
-
 is-prop-leq-cardinality :
   {l1 l2 : Level} {X : cardinal l1} {Y : cardinal l2} →
   is-prop (leq-cardinality X Y)
@@ -123,32 +118,38 @@ refl-leq-cardinality {l} =
     ( λ A → unit-leq-cardinality A A (refl-mere-emb (type-Set A)))
 
 transitive-leq-cardinality :
-  is-transitive-Large-Relation cardinal leq-cardinality
-transitive-leq-cardinality X Y Z p q =
+  {l1 l2 l3 : Level}
+  (X : cardinal l1)
+  (Y : cardinal l2)
+  (Z : cardinal l3) →
+  leq-cardinality X Y →
+  leq-cardinality Y Z →
+  leq-cardinality X Z
+transitive-leq-cardinality X Y Z =
   apply-dependent-universal-property-trunc-Set'
   ( λ u →
     set-Prop
-      ( function-Prop
-        ( leq-cardinality u Y)
-        ( function-Prop (leq-cardinality Y Z)
-          ( leq-cardinality-Prop u Z))))
-  ( λ a →
+      (function-Prop
+        (leq-cardinality u Y)
+        (function-Prop (leq-cardinality Y Z)
+          (leq-cardinality-Prop u Z))))
+  (λ a →
     apply-dependent-universal-property-trunc-Set'
     ( λ v →
       set-Prop
-        ( function-Prop
-          ( leq-cardinality (cardinality a) v)
-          ( function-Prop (leq-cardinality v Z)
-            ( leq-cardinality-Prop (cardinality a) Z))))
-    ( λ b →
+        (function-Prop
+          (leq-cardinality (cardinality a) v)
+          (function-Prop (leq-cardinality v Z)
+            (leq-cardinality-Prop (cardinality a) Z))))
+    (λ b →
       apply-dependent-universal-property-trunc-Set'
       ( λ w →
         set-Prop
-          ( function-Prop
-            ( leq-cardinality (cardinality a) (cardinality b))
-            ( function-Prop (leq-cardinality (cardinality b) w)
-              ( leq-cardinality-Prop (cardinality a) w))))
-      ( λ c a<b b<c →
+          (function-Prop
+            (leq-cardinality (cardinality a) (cardinality b))
+            (function-Prop (leq-cardinality (cardinality b) w)
+              (leq-cardinality-Prop (cardinality a) w))))
+      (λ c a<b b<c →
         unit-leq-cardinality
           ( a)
           ( c)
@@ -177,12 +178,12 @@ is-effective-cardinality X Y =
 
 ### Assuming excluded middle we can show that `leq-cardinality` is a partial order
 
-Using the previous result and assuming excluded middle, we can show
+Using the previous result and assuming excluded middle, we can conclude
 `leq-cardinality` is a partial order by showing that it is antisymmetric.
 
 ```agda
 antisymmetric-leq-cardinality :
-  {l1 : Level} (X Y : cardinal l1) → LEM l1 →
+  {l1 : Level} (X Y : cardinal l1) → (LEM l1) →
   leq-cardinality X Y → leq-cardinality Y X → X ＝ Y
 antisymmetric-leq-cardinality {l1} X Y lem =
   apply-dependent-universal-property-trunc-Set'
@@ -195,19 +196,18 @@ antisymmetric-leq-cardinality {l1} X Y lem =
           ( Id-Prop (cardinal-Set l1) u Y))))
   ( λ a →
     apply-dependent-universal-property-trunc-Set'
-      ( λ v →
-        set-Prop
+    ( λ v →
+      set-Prop
+        ( function-Prop
+          ( leq-cardinality (cardinality a) v)
           ( function-Prop
-            ( leq-cardinality (cardinality a) v)
-            ( function-Prop
-              ( leq-cardinality v (cardinality a))
-              ( Id-Prop (cardinal-Set l1) (cardinality a) v))))
+            ( leq-cardinality v (cardinality a))
+            ( Id-Prop (cardinal-Set l1) (cardinality a) v))))
     ( λ b a<b b<a →
-      map-inv-equiv
-        ( is-effective-cardinality a b)
-        ( antisymmetric-mere-emb lem
-          ( inv-unit-leq-cardinality _ _ a<b)
-          ( inv-unit-leq-cardinality _ _ b<a)))
+      map-inv-equiv (is-effective-cardinality a b)
+        (antisymmetric-mere-emb lem
+        (inv-unit-leq-cardinality _ _ a<b)
+        (inv-unit-leq-cardinality _ _ b<a)))
     ( Y))
   ( X)
 ```

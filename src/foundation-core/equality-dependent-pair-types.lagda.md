@@ -7,6 +7,7 @@ module foundation-core.equality-dependent-pair-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
@@ -51,12 +52,25 @@ module _
   pair-eq-Σ {s} refl = refl-Eq-Σ s
 
   eq-pair-Σ :
-    {s t : Σ A B} (α : pr1 s ＝ pr1 t) →
+    {s t : Σ A B}
+    (α : pr1 s ＝ pr1 t) →
     dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
-  eq-pair-Σ {pair x y} {pair .x .y} refl refl = refl
+  eq-pair-Σ refl refl = refl
 
   eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
+
+  eq-pair-Σ-eq-pr1 :
+    {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
+  eq-pair-Σ-eq-pr1 refl = refl
+
+  eq-pair-Σ-eq-pr1' :
+    {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
+  eq-pair-Σ-eq-pr1' refl = refl
+
+  eq-pair-Σ-eq-pr2 :
+    {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
+  eq-pair-Σ-eq-pr2 {x} = ap {B = Σ A B} (pair x)
 
   is-retraction-pair-eq-Σ :
     (s t : Σ A B) →

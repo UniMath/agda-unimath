@@ -27,8 +27,10 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-Any pointed map `f : A →∗ B` induces a map `map-Ω f : Ω A →∗ Ω B`. Furthermore,
-this operation respects the groupoidal operations on loop spaces.
+Any [pointed map](structured-types.pointed-maps.md) `f : A →∗ B` induces a
+pointed map `pointed-map-Ω f : Ω A →∗ Ω B`. Furthermore, this operation respects
+the groupoidal operations on
+[loop spaces](synthetic-homotopy-theory.loop-spaces.md).
 
 ## Definition
 
@@ -43,14 +45,15 @@ module _
       ( preserves-point-pointed-map f)
       ( ap (map-pointed-map f) p)
 
-  preserves-refl-map-Ω : Id (map-Ω refl) refl
+  preserves-refl-map-Ω : map-Ω refl ＝ refl
   preserves-refl-map-Ω = preserves-refl-tr-Ω (pr2 f)
 
   pointed-map-Ω : Ω A →∗ Ω B
-  pointed-map-Ω = pair map-Ω preserves-refl-map-Ω
+  pr1 pointed-map-Ω = map-Ω
+  pr2 pointed-map-Ω = preserves-refl-map-Ω
 
   preserves-mul-map-Ω :
-    (x y : type-Ω A) → Id (map-Ω (mul-Ω A x y)) (mul-Ω B (map-Ω x) (map-Ω y))
+    (x y : type-Ω A) → map-Ω (mul-Ω A x y) ＝ mul-Ω B (map-Ω x) (map-Ω y)
   preserves-mul-map-Ω x y =
     ( ap
       ( tr-type-Ω (preserves-point-pointed-map f))
@@ -61,7 +64,7 @@ module _
       ( ap (map-pointed-map f) y))
 
   preserves-inv-map-Ω :
-    (x : type-Ω A) → Id (map-Ω (inv-Ω A x)) (inv-Ω B (map-Ω x))
+    (x : type-Ω A) → map-Ω (inv-Ω A x) ＝ inv-Ω B (map-Ω x)
   preserves-inv-map-Ω x =
     ( ap
       ( tr-type-Ω (preserves-point-pointed-map f))
@@ -84,8 +87,7 @@ module _
     is-emb-comp
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap (map-pointed-map f))
-      ( is-emb-is-equiv
-        ( is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
+      ( is-emb-is-equiv (is-equiv-tr-type-Ω (preserves-point-pointed-map f)))
       ( H (point-Pointed-Type A) (point-Pointed-Type A))
 
   emb-Ω :
@@ -102,27 +104,24 @@ module _
 ```agda
 module _
   {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
-  (f : A →∗ B) (t : is-emb (map-pointed-map f))
+  (f : A →∗ B) (is-emb-f : is-emb (map-pointed-map f))
   where
 
-  is-equiv-map-Ω-emb :
-    is-equiv (map-Ω f)
-  is-equiv-map-Ω-emb =
+  is-equiv-map-Ω-is-emb : is-equiv (map-Ω f)
+  is-equiv-map-Ω-is-emb =
     is-equiv-comp
       ( tr-type-Ω (preserves-point-pointed-map f))
       ( ap (map-pointed-map f))
-      ( t (point-Pointed-Type A) (point-Pointed-Type A))
+      ( is-emb-f (point-Pointed-Type A) (point-Pointed-Type A))
       ( is-equiv-tr-type-Ω (preserves-point-pointed-map f))
 
-  equiv-map-Ω-emb :
-    type-Ω A ≃ type-Ω B
-  pr1 equiv-map-Ω-emb = map-Ω f
-  pr2 equiv-map-Ω-emb = is-equiv-map-Ω-emb
+  equiv-map-Ω-is-emb : type-Ω A ≃ type-Ω B
+  pr1 equiv-map-Ω-is-emb = map-Ω f
+  pr2 equiv-map-Ω-is-emb = is-equiv-map-Ω-is-emb
 
-  pointed-equiv-pointed-map-Ω-emb :
-    Ω A ≃∗ Ω B
-  pr1 pointed-equiv-pointed-map-Ω-emb = equiv-map-Ω-emb
-  pr2 pointed-equiv-pointed-map-Ω-emb = preserves-refl-map-Ω f
+  pointed-equiv-pointed-map-Ω-is-emb : Ω A ≃∗ Ω B
+  pr1 pointed-equiv-pointed-map-Ω-is-emb = equiv-map-Ω-is-emb
+  pr2 pointed-equiv-pointed-map-Ω-is-emb = preserves-refl-map-Ω f
 ```
 
 ### The operator `pointed-map-Ω` preserves equivalences
@@ -136,7 +135,7 @@ module _
   equiv-map-Ω-pointed-equiv :
     type-Ω A ≃ type-Ω B
   equiv-map-Ω-pointed-equiv =
-    equiv-map-Ω-emb
+    equiv-map-Ω-is-emb
       ( pointed-map-pointed-equiv e)
       ( is-emb-is-equiv (is-equiv-map-equiv-pointed-equiv e))
 ```

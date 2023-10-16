@@ -9,6 +9,7 @@ module synthetic-homotopy-theory.coforks where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.codiagonal-maps-of-types
+open import foundation.commuting-squares-of-maps
 open import foundation.commuting-triangles-of-maps
 open import foundation.contractible-types
 open import foundation.coproduct-types
@@ -21,7 +22,6 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
-open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -222,35 +222,66 @@ module _
   { l1 l2 : Level} {A : UU l1} {B : UU l2} (f g : A → B)
   where
 
+  vertical-map-span-cocone-cofork : A + A → A
+  vertical-map-span-cocone-cofork = codiagonal A
+
+  horizontal-map-span-cocone-cofork : A + A → B
+  horizontal-map-span-cocone-cofork (inl a) = f a
+  horizontal-map-span-cocone-cofork (inr a) = g a
+
   module _
     { l3 : Level} {X : UU l3}
     where
 
     cofork-cocone-codiagonal :
-      cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X →
+      cocone
+        ( vertical-map-span-cocone-cofork)
+        ( horizontal-map-span-cocone-cofork)
+        ( X) →
       cofork f g X
     pr1 (cofork-cocone-codiagonal c) =
-      vertical-map-cocone (codiagonal A) (ind-coprod (λ _ → B) f g) c
+      vertical-map-cocone
+        ( vertical-map-span-cocone-cofork)
+        ( horizontal-map-span-cocone-cofork)
+        ( c)
     pr2 (cofork-cocone-codiagonal c) =
       ( ( inv-htpy
           ( coherence-square-cocone
-            ( codiagonal A)
-            ( ind-coprod (λ _ → B) f g)
+            ( vertical-map-span-cocone-cofork)
+            ( horizontal-map-span-cocone-cofork)
             ( c))) ·r
         ( inl)) ∙h
       ( ( coherence-square-cocone
-          ( codiagonal A)
-          ( ind-coprod (λ _ → B) f g)
+          ( vertical-map-span-cocone-cofork)
+          ( horizontal-map-span-cocone-cofork)
           ( c)) ·r
         ( inr))
 
+    horizontal-map-cocone-cofork : cofork f g X → A → X
+    horizontal-map-cocone-cofork e = map-cofork f g e ∘ f
+
+    vertical-map-cocone-cofork : cofork f g X → B → X
+    vertical-map-cocone-cofork e = map-cofork f g e
+
+    coherence-square-cocone-cofork :
+      ( e : cofork f g X) →
+      coherence-square-maps
+        ( horizontal-map-span-cocone-cofork)
+        ( vertical-map-span-cocone-cofork)
+        ( vertical-map-cocone-cofork e)
+        ( horizontal-map-cocone-cofork e)
+    coherence-square-cocone-cofork e (inl a) = refl
+    coherence-square-cocone-cofork e (inr a) = coherence-cofork f g e a
+
     cocone-codiagonal-cofork :
       cofork f g X →
-      cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X
-    pr1 (cocone-codiagonal-cofork e) = map-cofork f g e ∘ f
-    pr1 (pr2 (cocone-codiagonal-cofork e)) = map-cofork f g e
-    pr2 (pr2 (cocone-codiagonal-cofork e)) (inl a) = refl
-    pr2 (pr2 (cocone-codiagonal-cofork e)) (inr a) = coherence-cofork f g e a
+      cocone
+        ( vertical-map-span-cocone-cofork)
+        ( horizontal-map-span-cocone-cofork)
+        ( X)
+    pr1 (cocone-codiagonal-cofork e) = horizontal-map-cocone-cofork e
+    pr1 (pr2 (cocone-codiagonal-cofork e)) = vertical-map-cocone-cofork e
+    pr2 (pr2 (cocone-codiagonal-cofork e)) = coherence-square-cocone-cofork e
 
     abstract
       is-section-cocone-codiagonal-cofork :
@@ -265,27 +296,27 @@ module _
         cocone-codiagonal-cofork ∘ cofork-cocone-codiagonal ~ id
       is-retraction-cocone-codiagonal-fork c =
         eq-htpy-cocone
-          ( codiagonal A)
-          ( ind-coprod (λ _ → B) f g)
+          ( vertical-map-span-cocone-cofork)
+          ( horizontal-map-span-cocone-cofork)
           ( cocone-codiagonal-cofork (cofork-cocone-codiagonal c))
           ( c)
           ( ( ( inv-htpy
                 ( coherence-square-cocone
-                  ( codiagonal A)
-                  ( ind-coprod (λ _ → B) f g)
+                  ( vertical-map-span-cocone-cofork)
+                  ( horizontal-map-span-cocone-cofork)
                   ( c))) ·r
               ( inl)) ,
             ( refl-htpy) ,
-            ( λ {
-              (inl a) →
+            ( λ where
+              ( inl a) →
                 inv
                   ( left-inv
                     ( coherence-square-cocone
-                      ( codiagonal A)
-                      ( ind-coprod (λ _ → B) f g)
+                      ( vertical-map-span-cocone-cofork)
+                      ( horizontal-map-span-cocone-cofork)
                       ( c)
-                      ( inl a))) ;
-              (inr a) → right-unit}))
+                      ( inl a)))
+              ( inr a) → right-unit))
 
     is-equiv-cofork-cocone-codiagonal :
       is-equiv cofork-cocone-codiagonal
@@ -296,49 +327,33 @@ module _
         ( is-retraction-cocone-codiagonal-fork)
 
     equiv-cocone-codiagonal-cofork :
-      cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X ≃
+      cocone
+        ( vertical-map-span-cocone-cofork)
+        ( horizontal-map-span-cocone-cofork)
+        ( X) ≃
       cofork f g X
     pr1 equiv-cocone-codiagonal-cofork = cofork-cocone-codiagonal
     pr2 equiv-cocone-codiagonal-cofork = is-equiv-cofork-cocone-codiagonal
 
   triangle-cofork-cocone :
     { l3 l4 : Level} {X : UU l3} {Y : UU l4} →
-    ( c : cocone (codiagonal A) (ind-coprod (λ _ → B) f g) X) →
+    ( e : cofork f g X) →
     coherence-triangle-maps
-      ( cofork-map f g (cofork-cocone-codiagonal c) {Y = Y})
+      ( cofork-map f g e {Y = Y})
       ( cofork-cocone-codiagonal)
-      ( cocone-map (codiagonal A) (ind-coprod (λ _ → B) f g) c)
-  triangle-cofork-cocone c h =
+      ( cocone-map
+        ( vertical-map-span-cocone-cofork)
+        ( horizontal-map-span-cocone-cofork)
+        ( cocone-codiagonal-cofork e))
+  triangle-cofork-cocone e h =
     eq-htpy-cofork f g
-      ( cofork-map f g (cofork-cocone-codiagonal c) h)
+      ( cofork-map f g e h)
       ( cofork-cocone-codiagonal
-        ( cocone-map (codiagonal A) (ind-coprod (λ _ → B) f g) c h))
+        ( cocone-map
+          ( vertical-map-span-cocone-cofork)
+          ( horizontal-map-span-cocone-cofork)
+          ( cocone-codiagonal-cofork e)
+          ( h)))
       ( refl-htpy ,
-        ( right-unit-htpy ∙h
-          ( λ a →
-            ( ap-concat h
-              ( inv
-                ( coherence-square-cocone
-                  ( codiagonal A)
-                  ( ind-coprod (λ _ → B) f g)
-                  ( c)
-                  ( inl a)))
-              ( coherence-square-cocone
-                ( codiagonal A)
-                ( ind-coprod (λ _ → B) f g)
-                ( c)
-                ( inr a))) ∙
-            ( identification-right-whisk
-              ( ap-inv h
-                ( coherence-square-cocone
-                  ( codiagonal A)
-                  ( ind-coprod (λ _ → B) f g)
-                  ( c)
-                  ( inl a)))
-              ( ap h
-                ( coherence-square-cocone
-                  ( codiagonal A)
-                  ( ind-coprod (λ _ → B) f g)
-                  ( c)
-                  ( inr a)))))))
+        right-unit-htpy)
 ```

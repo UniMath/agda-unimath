@@ -368,7 +368,7 @@ pr2 (Fin-π-Finite k n) = is-π-finite-Fin k n
 ```agda
 is-π-finite-count :
   {l : Level} (k : ℕ) {A : UU l} → count A → is-π-finite k A
-is-π-finite-count k (pair n e) =
+is-π-finite-count k (n , e) =
   is-π-finite-equiv' k e (is-π-finite-Fin k n)
 ```
 
@@ -411,14 +411,14 @@ pr2 (is-π-finite-UU-Fin (succ-ℕ k) n) x y =
     ( equiv-equiv-eq-UU-Fin n x y)
     ( is-π-finite-is-finite k
       ( is-finite-≃
-        ( is-finite-has-finite-cardinality (pair n (pr2 x)))
-        ( is-finite-has-finite-cardinality (pair n (pr2 y)))))
+        ( is-finite-has-finite-cardinality (n , (pr2 x)))
+        ( is-finite-has-finite-cardinality (n , (pr2 y)))))
 
 is-finite-has-finite-connected-components :
   {l : Level} {A : UU l} →
   is-set A → has-finite-connected-components A → is-finite A
 is-finite-has-finite-connected-components H =
-  is-finite-equiv' (equiv-unit-trunc-Set (pair _ H))
+  is-finite-equiv' (equiv-unit-trunc-Set (_ , H))
 
 has-finite-connected-components-is-π-finite :
   {l : Level} (k : ℕ) {A : UU l} →
@@ -449,7 +449,7 @@ is-finite-is-π-finite :
   is-π-finite k A → is-finite A
 is-finite-is-π-finite k H K =
   is-finite-equiv'
-    ( equiv-unit-trunc-Set (pair _ H))
+    ( equiv-unit-trunc-Set (_ , H))
     ( has-finite-connected-components-is-π-finite k K)
 
 is-truncated-π-finite-is-π-finite :
@@ -466,7 +466,7 @@ is-π-finite-is-truncated-π-finite :
   is-truncated-π-finite k A → is-π-finite k A
 is-π-finite-is-truncated-π-finite zero-ℕ H =
   is-finite-equiv
-    ( equiv-unit-trunc-Set (pair _ (is-set-is-finite H)))
+    ( equiv-unit-trunc-Set (_ , (is-set-is-finite H)))
     ( H)
 pr1 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) = pr1 H
 pr2 (is-π-finite-is-truncated-π-finite (succ-ℕ k) H) x y =
@@ -504,7 +504,7 @@ is-locally-finite-Π-Fin {l1} (succ-ℕ k) {B} f =
 is-locally-finite-Π-count :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → count A →
   ((x : A) → is-locally-finite (B x)) → is-locally-finite ((x : A) → B x)
-is-locally-finite-Π-count {l1} {l2} {A} {B} (pair k e) g =
+is-locally-finite-Π-count {l1} {l2} {A} {B} (k , e) g =
   is-locally-finite-equiv
     ( equiv-precomp-Π e B)
     ( is-locally-finite-Π-Fin k (λ x → g (map-equiv e x)))
@@ -553,9 +553,9 @@ is-locally-finite-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   is-locally-finite A → ((x : A) → is-locally-finite (B x)) →
   is-locally-finite (Σ A B)
-is-locally-finite-Σ {B = B} H K (pair x y) (pair x' y') =
+is-locally-finite-Σ {B = B} H K (x , y) (x' , y') =
   is-finite-equiv'
-    ( equiv-pair-eq-Σ (pair x y) (pair x' y'))
+    ( equiv-pair-eq-Σ (x , y) (x' , y'))
     ( is-finite-Σ (H x x') (λ p → K x' (tr B p y) y'))
 ```
 
@@ -590,37 +590,37 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
     where
     β : (x : Σ A B) (v : type-trunc-Set (Σ A B)) →
         is-decidable (Id (unit-trunc-Set x) v)
-    β (pair x y) =
+    β (x , y) =
       apply-dependent-universal-property-trunc-Set'
         ( λ u →
           set-Prop
             ( is-decidable-Prop
-              ( Id-Prop (trunc-Set (Σ A B)) (unit-trunc-Set (pair x y)) u)))
+              ( Id-Prop (trunc-Set (Σ A B)) (unit-trunc-Set (x , y)) u)))
         ( γ)
       where
       γ : (v : Σ A B) →
-          is-decidable (Id (unit-trunc-Set (pair x y)) (unit-trunc-Set v))
-      γ (pair x' y') =
+          is-decidable (Id (unit-trunc-Set (x , y)) (unit-trunc-Set v))
+      γ (x' , y') =
         is-decidable-equiv
           ( is-effective-unit-trunc-Set
             ( Σ A B)
-            ( pair x y)
-            ( pair x' y'))
+            ( x , y)
+            ( x' , y'))
           ( apply-universal-property-trunc-Prop
             ( mere-eq-is-0-connected C a x)
             ( is-decidable-Prop
-              ( mere-eq-Prop (pair x y) (pair x' y')))
+              ( mere-eq-Prop (x , y) (x' , y')))
               ( δ))
         where
-        δ : Id a x → is-decidable (mere-eq (pair x y) (pair x' y'))
+        δ : Id a x → is-decidable (mere-eq (x , y) (x' , y'))
         δ refl =
           apply-universal-property-trunc-Prop
             ( mere-eq-is-0-connected C a x')
             ( is-decidable-Prop
-              ( mere-eq-Prop (pair a y) (pair x' y')))
+              ( mere-eq-Prop (a , y) (x' , y')))
             ( ε)
           where
-          ε : Id a x' → is-decidable (mere-eq (pair x y) (pair x' y'))
+          ε : Id a x' → is-decidable (mere-eq (x , y) (x' , y'))
           ε refl =
             is-decidable-equiv e
               ( is-decidable-type-trunc-Prop-is-finite
@@ -658,38 +658,37 @@ has-finite-connected-components-Σ-is-0-connected {A = A} {B} C H K =
                         ( unit-trunc-Set y'))))
             f : type-hom-Prop
                 ( trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P)))
-                ( mere-eq-Prop {A = Σ A B} (pair a y) (pair a y'))
+                ( mere-eq-Prop {A = Σ A B} (a , y) (a , y'))
             f t = apply-universal-property-trunc-Prop t
-                    ( mere-eq-Prop (pair a y) (pair a y'))
-                      λ { (pair u v) →
-                          apply-dependent-universal-property-trunc-Set'
-                            ( λ u' →
-                              hom-Set
-                                ( set-Prop (P u'))
-                                ( set-Prop
-                                  ( mere-eq-Prop (pair a y) (pair a y'))))
-                            ( λ ω v' →
-                              apply-universal-property-trunc-Prop
-                                ( map-equiv (compute-P ω) v')
-                                ( mere-eq-Prop (pair a y) (pair a y'))
-                                ( λ p → unit-trunc-Prop (eq-pair-Σ ω p)))
-                            ( u)
-                            ( v)}
-            e : mere-eq {A = Σ A B} (pair a y) (pair a y') ≃
+                    ( mere-eq-Prop (a , y) (a , y'))
+                      λ (u , v) →
+                      apply-dependent-universal-property-trunc-Set'
+                        ( λ u' →
+                          hom-Set
+                            ( set-Prop (P u'))
+                            ( set-Prop
+                              ( mere-eq-Prop (a , y) (a , y'))))
+                        ( λ ω v' →
+                          apply-universal-property-trunc-Prop
+                            ( map-equiv (compute-P ω) v')
+                            ( mere-eq-Prop (a , y) (a , y'))
+                            ( λ p → unit-trunc-Prop (eq-pair-Σ ω p)))
+                        ( u)
+                        ( v)
+            e : mere-eq {A = Σ A B} (a , y) (a , y') ≃
                 type-trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P))
             e = equiv-iff
-                  ( mere-eq-Prop (pair a y) (pair a y'))
+                  ( mere-eq-Prop (a , y) (a , y'))
                   ( trunc-Prop (Σ (type-trunc-Set (Id a a)) (type-Prop ∘ P)))
                   ( λ t →
                     apply-universal-property-trunc-Prop t
                       ( trunc-Prop _)
-                      ( ( λ { (pair ω r) →
-                            unit-trunc-Prop
-                              ( pair
-                                ( unit-trunc-Set ω)
-                                ( map-inv-equiv
-                                  ( compute-P ω)
-                                  ( unit-trunc-Prop r)))}) ∘
+                      ( ( λ ( ω , r) →
+                          unit-trunc-Prop
+                            ( ( unit-trunc-Set ω) ,
+                              ( map-inv-equiv
+                                ( compute-P ω)
+                                ( unit-trunc-Prop r)))) ∘
                         ( pair-eq-Σ)))
                   ( f)
 ```
@@ -712,26 +711,27 @@ module _
   triangle-is-coprod-codomain (inl x) = refl
   triangle-is-coprod-codomain (inr x) = refl
 
-  is-emb-map-is-coprod-codomain : is-emb map-is-coprod-codomain
-  is-emb-map-is-coprod-codomain =
-    is-emb-coprod
-      ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
-      ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
-      ( λ { (pair b1 u) (pair b2 v) →
+  abstract
+    is-emb-map-is-coprod-codomain : is-emb map-is-coprod-codomain
+    is-emb-map-is-coprod-codomain =
+      is-emb-coprod
+        ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
+        ( is-emb-inclusion-subtype (λ b → trunc-Prop _))
+        ( λ (b1 , u) (b2 , v) →
           apply-universal-property-trunc-Prop u
             ( function-Prop _ empty-Prop)
-            ( λ
-              { (pair x refl) →
+            ( λ where
+              ( x , refl) →
                 apply-universal-property-trunc-Prop v
                   ( function-Prop _ empty-Prop)
-                  ( λ
-                    { (pair y refl) r →
+                  ( λ where
+                    ( y , refl) r →
                       is-empty-eq-coprod-inl-inr x y
                         ( is-injective-is-equiv
                           ( is-equiv-map-equiv e)
                           ( ( inv (H (inl x))) ∙
-                            ( ( ap unit-trunc-Set r) ∙
-                              ( H (inr y)))))})})})
+                            ( ap unit-trunc-Set r) ∙
+                            ( H (inr y)))))))
 
   is-surjective-map-is-coprod-codomain : is-surjective map-is-coprod-codomain
   is-surjective-map-is-coprod-codomain b =
@@ -741,8 +741,7 @@ module _
       ( trunc-Prop (fiber map-is-coprod-codomain b))
       ( λ p →
         unit-trunc-Prop
-          ( pair
-            ( map-coprod (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)) a)
+          ( ( map-coprod (map-unit-im (f ∘ inl)) (map-unit-im (f ∘ inr)) a) ,
             ( triangle-is-coprod-codomain a ∙ inv p)))
     where
     a = map-inv-equiv e (unit-trunc-Set b)
@@ -758,137 +757,137 @@ is-0-connected-unit : is-0-connected unit
 is-0-connected-unit =
   is-contr-equiv' unit equiv-unit-trunc-unit-Set is-contr-unit
 
-is-contr-im :
-  {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
-  (a : A) (H : f ~ const A (type-Set B) (f a)) → is-contr (im f)
-pr1 (is-contr-im B {f} a H) = map-unit-im f a
-pr2 (is-contr-im B {f} a H) (pair x u) =
-  apply-dependent-universal-property-trunc-Prop
-    ( λ v → Id-Prop (im-Set B f) (map-unit-im f a) (pair x v))
-    ( u)
-    ( λ { (pair a' refl) →
-          eq-Eq-im f (map-unit-im f a) (map-unit-im f a') (inv (H a'))})
+abstract
+  is-contr-im :
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) {f : A → type-Set B}
+    (a : A) (H : f ~ const A (type-Set B) (f a)) → is-contr (im f)
+  pr1 (is-contr-im B {f} a H) = map-unit-im f a
+  pr2 (is-contr-im B {f} a H) (x , u) =
+    apply-dependent-universal-property-trunc-Prop
+      ( λ v → Id-Prop (im-Set B f) (map-unit-im f a) (x , v))
+      ( u)
+      ( λ where
+        ( a' , refl) →
+          eq-Eq-im f (map-unit-im f a) (map-unit-im f a') (inv (H a')))
 
-is-0-connected-im :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-0-connected A → is-0-connected (im f)
-is-0-connected-im {l1} {l2} {A} {B} f C =
-  apply-universal-property-trunc-Prop
-    ( is-inhabited-is-0-connected C)
-    ( is-contr-Prop _)
-    ( λ a →
-      is-contr-equiv'
-        ( im (map-trunc-Set f))
-        ( equiv-trunc-im-Set f)
-        ( is-contr-im
-          ( trunc-Set B)
-          ( unit-trunc-Set a)
-          ( apply-dependent-universal-property-trunc-Set'
-            ( λ x →
-              set-Prop
-                ( Id-Prop
-                  ( trunc-Set B)
-                  ( map-trunc-Set f x)
-                  ( map-trunc-Set f (unit-trunc-Set a))))
-            ( λ a' →
-              apply-universal-property-trunc-Prop
-                ( mere-eq-is-0-connected C a' a)
-                ( Id-Prop
-                  ( trunc-Set B)
-                  ( map-trunc-Set f (unit-trunc-Set a'))
-                  ( map-trunc-Set f (unit-trunc-Set a)))
-                ( λ {refl → refl})))))
+abstract
+  is-0-connected-im :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-0-connected A → is-0-connected (im f)
+  is-0-connected-im {l1} {l2} {A} {B} f C =
+    apply-universal-property-trunc-Prop
+      ( is-inhabited-is-0-connected C)
+      ( is-contr-Prop _)
+      ( λ a →
+        is-contr-equiv'
+          ( im (map-trunc-Set f))
+          ( equiv-trunc-im-Set f)
+          ( is-contr-im
+            ( trunc-Set B)
+            ( unit-trunc-Set a)
+            ( apply-dependent-universal-property-trunc-Set'
+              ( λ x →
+                set-Prop
+                  ( Id-Prop
+                    ( trunc-Set B)
+                    ( map-trunc-Set f x)
+                    ( map-trunc-Set f (unit-trunc-Set a))))
+              ( λ a' →
+                apply-universal-property-trunc-Prop
+                  ( mere-eq-is-0-connected C a' a)
+                  ( Id-Prop
+                    ( trunc-Set B)
+                    ( map-trunc-Set f (unit-trunc-Set a'))
+                    ( map-trunc-Set f (unit-trunc-Set a)))
+                  ( λ where refl → refl)))))
 
 is-0-connected-im-unit :
   {l1 : Level} {A : UU l1} (f : unit → A) → is-0-connected (im f)
 is-0-connected-im-unit f =
   is-0-connected-im f is-0-connected-unit
 
-has-finite-connected-components-Σ' :
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-  (k : ℕ) → (Fin k ≃ (type-trunc-Set A)) →
-  ((x y : A) → has-finite-connected-components (Id x y)) →
-  ((x : A) → has-finite-connected-components (B x)) →
-  has-finite-connected-components (Σ A B)
-has-finite-connected-components-Σ' zero-ℕ e H K =
-  is-π-finite-is-empty zero-ℕ
-    ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
-has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
-  apply-universal-property-trunc-Prop
-    ( has-presentation-of-cardinality-has-cardinality-components
-      ( succ-ℕ k)
-      ( unit-trunc-Prop e))
-    ( has-finite-connected-components-Prop (Σ A B))
-    ( α)
-  where
-  α : Σ (Fin (succ-ℕ k) → A) (λ f → is-equiv (unit-trunc-Set ∘ f)) →
-      has-finite-connected-components (Σ A B)
-  α (pair f Eηf) =
-    is-finite-equiv
-      ( equiv-trunc-Set g)
-      ( is-finite-equiv'
-        ( equiv-distributive-trunc-coprod-Set
-          ( Σ (im (f ∘ inl)) (B ∘ pr1))
-          ( Σ (im (f ∘ inr)) (B ∘ pr1)))
-        ( is-finite-coprod
-          ( has-finite-connected-components-Σ' k
-            ( h)
-            ( λ x y →
-              is-finite-equiv'
-                ( equiv-trunc-Set
-                  ( equiv-ap-emb
-                    ( pair pr1
-                      ( is-emb-inclusion-subtype
-                        ( λ u → trunc-Prop _)))))
-                ( H (pr1 x) (pr1 y)))
-            ( λ x → K (pr1 x)))
-          ( has-finite-connected-components-Σ-is-0-connected
-            ( is-0-connected-im (f ∘ inr) is-0-connected-unit)
-            ( pair
-              ( is-finite-is-contr
-                ( is-0-connected-im (f ∘ inr) is-0-connected-unit))
-              ( λ x y →
-                is-π-finite-equiv zero-ℕ
-                  ( equiv-Eq-eq-im (f ∘ inr) x y)
-                  ( H (pr1 x) (pr1 y))))
-            ( λ x → K (pr1 x)))))
+abstract
+  has-finite-connected-components-Σ' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    (k : ℕ) → (Fin k ≃ (type-trunc-Set A)) →
+    ((x y : A) → has-finite-connected-components (Id x y)) →
+    ((x : A) → has-finite-connected-components (B x)) →
+    has-finite-connected-components (Σ A B)
+  has-finite-connected-components-Σ' zero-ℕ e H K =
+    is-π-finite-is-empty zero-ℕ
+      ( is-empty-is-empty-trunc-Set (map-inv-equiv e) ∘ pr1)
+  has-finite-connected-components-Σ' {l1} {l2} {A} {B} (succ-ℕ k) e H K =
+    apply-universal-property-trunc-Prop
+      ( has-presentation-of-cardinality-has-cardinality-components
+        ( succ-ℕ k)
+        ( unit-trunc-Prop e))
+      ( has-finite-connected-components-Prop (Σ A B))
+      ( α)
     where
-    g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃
-        Σ A B
-    g = ( equiv-Σ B
-          ( is-coprod-codomain f
-            ( pair (unit-trunc-Set ∘ f) Eηf)
-            ( refl-htpy))
-          ( λ { (inl x) → id-equiv ;
-                (inr x) → id-equiv})) ∘e
-        ( inv-equiv
-          ( right-distributive-Σ-coprod
-            ( im (f ∘ inl))
-            ( im (f ∘ inr))
-            ( ind-coprod (λ x → UU l2) (B ∘ pr1) (B ∘ pr1))))
-    i : Fin k → type-trunc-Set (im (f ∘ inl))
-    i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
-    is-surjective-i : is-surjective i
-    is-surjective-i =
-      is-surjective-comp
-        ( is-surjective-unit-trunc-Set (im (f ∘ inl)))
-        ( is-surjective-map-unit-im (f ∘ inl))
-    is-emb-i : is-emb i
-    is-emb-i =
-      is-emb-right-factor-htpy
-        ( (unit-trunc-Set ∘ f) ∘ inl)
-        ( inclusion-trunc-im-Set (f ∘ inl))
-        ( i)
-        ( ( inv-htpy (naturality-unit-trunc-Set (inclusion-im (f ∘ inl)))) ·r
-          ( map-unit-im (f ∘ inl)))
-        ( is-emb-inclusion-trunc-im-Set (f ∘ inl))
-        ( is-emb-comp
-          ( unit-trunc-Set ∘ f)
-          ( inl)
-          ( is-emb-is-equiv Eηf)
-          ( is-emb-inl (Fin k) unit))
-    h : Fin k ≃ type-trunc-Set (im (f ∘ inl))
-    h = pair i (is-equiv-is-emb-is-surjective is-surjective-i is-emb-i)
+    α : Σ (Fin (succ-ℕ k) → A) (λ f → is-equiv (unit-trunc-Set ∘ f)) →
+        has-finite-connected-components (Σ A B)
+    α (f , Eηf) =
+      is-finite-equiv
+        ( equiv-trunc-Set g)
+        ( is-finite-equiv'
+          ( equiv-distributive-trunc-coprod-Set
+            ( Σ (im (f ∘ inl)) (B ∘ pr1))
+            ( Σ (im (f ∘ inr)) (B ∘ pr1)))
+          ( is-finite-coprod
+            ( has-finite-connected-components-Σ' k
+              ( h)
+              ( λ x y →
+                is-finite-equiv'
+                  ( equiv-trunc-Set
+                    ( equiv-ap-emb
+                      ( pr1 , is-emb-inclusion-subtype ( λ u → trunc-Prop _))))
+                  ( H (pr1 x) (pr1 y)))
+              ( λ x → K (pr1 x)))
+            ( has-finite-connected-components-Σ-is-0-connected
+              ( is-0-connected-im (f ∘ inr) is-0-connected-unit)
+              ( ( is-finite-is-contr
+                  ( is-0-connected-im (f ∘ inr) is-0-connected-unit)) ,
+                ( λ x y →
+                  is-π-finite-equiv zero-ℕ
+                    ( equiv-Eq-eq-im (f ∘ inr) x y)
+                    ( H (pr1 x) (pr1 y))))
+              ( λ x → K (pr1 x)))))
+      where
+      g : ((Σ (im (f ∘ inl)) (B ∘ pr1)) + (Σ (im (f ∘ inr)) (B ∘ pr1))) ≃
+          Σ A B
+      g = ( equiv-Σ B
+            ( is-coprod-codomain f
+              ( unit-trunc-Set ∘ f , Eηf)
+              ( refl-htpy))
+            ( λ { (inl x) → id-equiv ; (inr x) → id-equiv})) ∘e
+          ( inv-equiv
+            ( right-distributive-Σ-coprod
+              ( im (f ∘ inl))
+              ( im (f ∘ inr))
+              ( ind-coprod (λ x → UU l2) (B ∘ pr1) (B ∘ pr1))))
+      i : Fin k → type-trunc-Set (im (f ∘ inl))
+      i = unit-trunc-Set ∘ map-unit-im (f ∘ inl)
+      is-surjective-i : is-surjective i
+      is-surjective-i =
+        is-surjective-comp
+          ( is-surjective-unit-trunc-Set (im (f ∘ inl)))
+          ( is-surjective-map-unit-im (f ∘ inl))
+      is-emb-i : is-emb i
+      is-emb-i =
+        is-emb-right-factor-htpy
+          ( (unit-trunc-Set ∘ f) ∘ inl)
+          ( inclusion-trunc-im-Set (f ∘ inl))
+          ( i)
+          ( ( inv-htpy (naturality-unit-trunc-Set (inclusion-im (f ∘ inl)))) ·r
+            ( map-unit-im (f ∘ inl)))
+          ( is-emb-inclusion-trunc-im-Set (f ∘ inl))
+          ( is-emb-comp
+            ( unit-trunc-Set ∘ f)
+            ( inl)
+            ( is-emb-is-equiv Eηf)
+            ( is-emb-inl (Fin k) unit))
+      h : Fin k ≃ type-trunc-Set (im (f ∘ inl))
+      h = i , (is-equiv-is-emb-is-surjective is-surjective-i is-emb-i)
 
 has-finite-connected-components-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → is-π-finite 1 A →
@@ -898,25 +897,25 @@ has-finite-connected-components-Σ {l1} {l2} {A} {B} H K =
   apply-universal-property-trunc-Prop
     ( pr1 H)
     ( has-finite-connected-components-Prop (Σ A B))
-    ( λ { (pair k e) →
-          has-finite-connected-components-Σ' k e (λ x y → pr2 H x y) K})
+    ( λ (k , e) → has-finite-connected-components-Σ' k e (λ x y → pr2 H x y) K)
 
-is-π-finite-Σ :
-  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
-  is-π-finite (succ-ℕ k) A → ((x : A) → is-π-finite k (B x)) →
-  is-π-finite k (Σ A B)
-is-π-finite-Σ zero-ℕ {A} {B} H K = has-finite-connected-components-Σ H K
-pr1 (is-π-finite-Σ (succ-ℕ k) H K) =
-  has-finite-connected-components-Σ
-    ( is-π-finite-one-is-π-finite-succ-ℕ (succ-ℕ k) H)
-    ( λ x →
-      has-finite-connected-components-is-π-finite (succ-ℕ k) (K x))
-pr2 (is-π-finite-Σ (succ-ℕ k) H K) (pair x u) (pair y v) =
-  is-π-finite-equiv k
-    ( equiv-pair-eq-Σ (pair x u) (pair y v))
-    ( is-π-finite-Σ k
-      ( pr2 H x y)
-      ( λ { refl → pr2 (K x) u v}))
+abstract
+  is-π-finite-Σ :
+    {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
+    is-π-finite (succ-ℕ k) A → ((x : A) → is-π-finite k (B x)) →
+    is-π-finite k (Σ A B)
+  is-π-finite-Σ zero-ℕ {A} {B} H K = has-finite-connected-components-Σ H K
+  pr1 (is-π-finite-Σ (succ-ℕ k) H K) =
+    has-finite-connected-components-Σ
+      ( is-π-finite-one-is-π-finite-succ-ℕ (succ-ℕ k) H)
+      ( λ x →
+        has-finite-connected-components-is-π-finite (succ-ℕ k) (K x))
+  pr2 (is-π-finite-Σ (succ-ℕ k) H K) (x , u) (y , v) =
+    is-π-finite-equiv k
+      ( equiv-pair-eq-Σ (x , u) (y , v))
+      ( is-π-finite-Σ k
+        ( pr2 H x y)
+        ( λ where refl → pr2 (K x) u v))
 
 π-Finite-Σ :
   {l1 l2 : Level} (k : ℕ) (A : π-Finite l1 (succ-ℕ k))

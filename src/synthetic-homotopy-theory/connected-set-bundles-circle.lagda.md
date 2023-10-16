@@ -20,8 +20,14 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.surjective-maps
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
+
+open import higher-group-theory.transitive-higher-group-actions
+
+open import structured-types.cyclic-types
+open import structured-types.sets-equipped-with-automorphisms
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -75,6 +81,13 @@ module _
   bundle-connected-set-bundle-𝕊¹ =
     type-Set ∘ set-bundle-connected-set-bundle-𝕊¹
 
+  set-connected-set-bundle-𝕊¹ : Set l
+  set-connected-set-bundle-𝕊¹ =
+    set-bundle-connected-set-bundle-𝕊¹ base-𝕊¹
+
+  type-connected-set-bundle-𝕊¹ : UU l
+  type-connected-set-bundle-𝕊¹ = type-Set set-connected-set-bundle-𝕊¹
+
   total-space-connected-set-bundle-𝕊¹ : UU l
   total-space-connected-set-bundle-𝕊¹ = Σ 𝕊¹ bundle-connected-set-bundle-𝕊¹
 
@@ -88,31 +101,43 @@ module _
   mere-eq-total-space-connected-set-bundle-𝕊¹ =
     mere-eq-is-0-connected is-connected-connected-set-bundle-𝕊¹
 
-  set-connected-set-bundle-𝕊¹ : Set l
-  set-connected-set-bundle-𝕊¹ =
-    set-bundle-connected-set-bundle-𝕊¹ base-𝕊¹
+  transitive-action-connected-set-bundle-𝕊¹ :
+    transitive-action-∞-Group l 𝕊¹-∞-Group
+  pr1 transitive-action-connected-set-bundle-𝕊¹ =
+    bundle-connected-set-bundle-𝕊¹
+  pr2 transitive-action-connected-set-bundle-𝕊¹ =
+    is-connected-connected-set-bundle-𝕊¹
 
-  type-connected-set-bundle-𝕊¹ : UU l
-  type-connected-set-bundle-𝕊¹ = type-Set set-connected-set-bundle-𝕊¹
+  is-abstractly-transitive-action-connected-set-bundle-𝕊¹ :
+    is-abstractly-transitive-action-∞-Group
+      ( 𝕊¹-∞-Group)
+      ( bundle-connected-set-bundle-𝕊¹)
+  is-abstractly-transitive-action-connected-set-bundle-𝕊¹ =
+    is-abstractly-transitive-transitive-action-∞-Group
+      ( 𝕊¹-∞-Group)
+      ( transitive-action-connected-set-bundle-𝕊¹)
 
-  abstract
-    is-inhabited-type-connected-set-bundle-𝕊¹ :
-      is-inhabited type-connected-set-bundle-𝕊¹
-    is-inhabited-type-connected-set-bundle-𝕊¹ =
-      apply-universal-property-trunc-Prop
-        ( is-inhabited-is-0-connected is-connected-connected-set-bundle-𝕊¹)
-        ( trunc-Prop type-connected-set-bundle-𝕊¹)
-        ( λ (t , x) →
-          apply-universal-property-trunc-Prop
-            ( mere-eq-𝕊¹ base-𝕊¹ t)
-            ( trunc-Prop type-connected-set-bundle-𝕊¹)
-            ( λ { refl → unit-trunc-Prop x}))
+  is-inhabited-connected-set-bundle-𝕊¹ :
+    is-inhabited type-connected-set-bundle-𝕊¹
+  is-inhabited-connected-set-bundle-𝕊¹ =
+    is-inhabited-transitive-action-∞-Group
+      ( 𝕊¹-∞-Group)
+      ( transitive-action-connected-set-bundle-𝕊¹)
+
+  is-surjective-tr-connected-set-bundle-𝕊¹ :
+    (t : 𝕊¹) (x : type-connected-set-bundle-𝕊¹) →
+    is-surjective (λ (p : base-𝕊¹ ＝ t) → tr bundle-connected-set-bundle-𝕊¹ p x)
+  is-surjective-tr-connected-set-bundle-𝕊¹ =
+    is-surjective-tr-is-abstractly-transitive-action-∞-Group
+      ( 𝕊¹-∞-Group)
+      ( bundle-connected-set-bundle-𝕊¹)
+      ( is-abstractly-transitive-action-connected-set-bundle-𝕊¹)
 
   inhabited-type-connected-set-bundle-𝕊¹ : Inhabited-Type l
-  pr1 inhabited-type-connected-set-bundle-𝕊¹ =
-    type-connected-set-bundle-𝕊¹
-  pr2 inhabited-type-connected-set-bundle-𝕊¹ =
-    is-inhabited-type-connected-set-bundle-𝕊¹
+  inhabited-type-connected-set-bundle-𝕊¹ =
+    inhabited-type-transitive-action-∞-Group
+      ( 𝕊¹-∞-Group)
+      ( transitive-action-connected-set-bundle-𝕊¹)
 
   aut-connected-set-bundle-𝕊¹ : Aut type-connected-set-bundle-𝕊¹
   aut-connected-set-bundle-𝕊¹ =
@@ -122,10 +147,24 @@ module _
     type-connected-set-bundle-𝕊¹ → type-connected-set-bundle-𝕊¹
   map-aut-connected-set-bundle-𝕊¹ =
     map-equiv aut-connected-set-bundle-𝕊¹
+
+  set-with-automorphism-connected-set-bundle-𝕊¹ : Set-With-Automorphism l
+  pr1 set-with-automorphism-connected-set-bundle-𝕊¹ =
+    set-connected-set-bundle-𝕊¹
+  pr2 set-with-automorphism-connected-set-bundle-𝕊¹ =
+    aut-connected-set-bundle-𝕊¹
 ```
 
 ## Properties
 
-### Connected set bundles over the circle are cyclic types
+### Connected set bundles over the circle are cyclic sets
 
-This remains to be formalized
+#### The set equipped with an automorphism obtained from a connected set bundle over the circle is a cyclic set
+
+This remains to be shown.
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

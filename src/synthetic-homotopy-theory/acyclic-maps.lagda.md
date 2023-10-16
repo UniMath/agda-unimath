@@ -18,9 +18,13 @@ open import synthetic-homotopy-theory.acyclic-types
 
 ## Idea
 
-A map `f : A → B` is said to be **acyclic** if its fibers are acyclic types.
+A map `f : A → B` is said to be **acyclic** if its
+[fibers](foundation-core.fibers-of-maps.md) are
+[acyclic types](synthetic-homotopy-theory.acyclic-types.md).
 
-## Definition
+## Definitions
+
+### The predicate of being an acyclic map
 
 ```agda
 module _
@@ -36,3 +40,14 @@ module _
   is-prop-is-acyclic-map : (f : A → B) → is-prop (is-acyclic-map f)
   is-prop-is-acyclic-map f = is-prop-type-Prop (is-acyclic-map-Prop f)
 ```
+
+## See also
+
+- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
+- [Epimorphisms](foundation.epimorphisms.md)
+- [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)
+- [Epimorphisms with respect to truncated types](foundation.epimorphisms-with-respect-to-truncated-types.md)
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -17,7 +17,7 @@ open import foundation.equivalences
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications

@@ -114,27 +114,28 @@ module _
           ( set-Ring S)
           ( map-hom-Ring (ring-Cyclic-Ring R) S f x)
           ( map-hom-Ring (ring-Cyclic-Ring R) S g x))
-        ( λ { (n , refl) →
+        ( λ where
+          ( n , refl) →
+            ( preserves-integer-multiples-hom-Ring
+              ( ring-Cyclic-Ring R)
+              ( S)
+              ( f)
+              ( n)
+              ( one-Cyclic-Ring R)) ∙
+            ( ap
+              ( integer-multiple-Ring S n)
+              ( preserves-one-hom-Ring (ring-Cyclic-Ring R) S f)) ∙
+            ( inv
+              ( ap
+                ( integer-multiple-Ring S n)
+                ( preserves-one-hom-Ring (ring-Cyclic-Ring R) S g))) ∙
+            ( inv
               ( preserves-integer-multiples-hom-Ring
                 ( ring-Cyclic-Ring R)
                 ( S)
-                ( f)
+                ( g)
                 ( n)
-                ( one-Cyclic-Ring R)) ∙
-              ( ap
-                ( integer-multiple-Ring S n)
-                ( preserves-one-hom-Ring (ring-Cyclic-Ring R) S f)) ∙
-              ( inv
-                ( ap
-                ( integer-multiple-Ring S n)
-                ( preserves-one-hom-Ring (ring-Cyclic-Ring R) S g))) ∙
-              ( inv
-                ( preserves-integer-multiples-hom-Ring
-                  ( ring-Cyclic-Ring R)
-                  ( S)
-                  ( g)
-                  ( n)
-                  ( one-Cyclic-Ring R)))})
+                ( one-Cyclic-Ring R))))
 
   all-elements-equal-hom-Cyclic-Ring-Ring :
     all-elements-equal (hom-Ring (ring-Cyclic-Ring R) S)
@@ -204,3 +205,9 @@ module _
       ( ring-Cyclic-Ring T)
       ( ring-Cyclic-Ring U)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

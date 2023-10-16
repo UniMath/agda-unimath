@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.function-extensionality
 open import foundation.functoriality-cartesian-product-types
 open import foundation.homotopy-induction
+open import foundation.negated-equality
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
 open import foundation.surjective-maps
@@ -247,11 +248,11 @@ module _
     is-surjective-map-coprod s s' (inl x) =
       apply-universal-property-trunc-Prop (s x)
         ( trunc-Prop (fiber (map-coprod _ _) (inl x)))
-        ( λ {(a , p) → unit-trunc-Prop (inl a , ap inl p)})
+        ( λ (a , p) → unit-trunc-Prop (inl a , ap inl p))
     is-surjective-map-coprod s s' (inr x) =
       apply-universal-property-trunc-Prop (s' x)
         ( trunc-Prop (fiber (map-coprod _ _) (inr x)))
-        ( λ {(a , p) → unit-trunc-Prop (inr a , ap inr p)})
+        ( λ (a , p) → unit-trunc-Prop (inr a , ap inr p))
 ```
 
 ### For any two maps `f : A → B` and `g : C → D`, there is at most one pair of maps `f' : A → B` and `g' : C → D` such that `f' + g' = f + g`
@@ -307,7 +308,7 @@ module _
   equiv-coproduct-induce-equiv-disjoint :
     (f : (A + B) ≃ (A + B)) (g : B ≃ B)
     (p : (b : B) → map-equiv f (inr b) ＝ inr (map-equiv g b))
-    (x : A) (y : B) → ¬ (map-equiv f (inl x) ＝ inr y)
+    (x : A) (y : B) → map-equiv f (inl x) ≠ inr y
   equiv-coproduct-induce-equiv-disjoint f g p x y q =
     neq-inr-inl
       ( is-injective-map-equiv f
@@ -517,20 +518,22 @@ module _
       (eq-equiv-eq-map-equiv refl)
       (eq-equiv-eq-map-equiv refl)
 
-  is-section-map-inv-mutually-exclusive-coprod :
-    (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
-  is-section-map-inv-mutually-exclusive-coprod e =
-    eq-htpy-equiv (
-      λ { (inl p) →
+  abstract
+    is-section-map-inv-mutually-exclusive-coprod :
+      (map-inv-mutually-exclusive-coprod ∘ map-mutually-exclusive-coprod) ~ id
+    is-section-map-inv-mutually-exclusive-coprod e =
+      eq-htpy-equiv
+      ( λ where
+        ( inl p) →
           ap
             ( pr1)
             ( is-retraction-map-inv-equiv-left-summand
-              ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star)) ;
-          (inr q) →
+              ( map-equiv e (inl p) , left-to-left ¬PQ' e (inl p) star))
+        ( inr q) →
           ap
             ( pr1)
             ( is-retraction-map-inv-equiv-right-summand
-              ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star))})
+              ( map-equiv e (inr q) , right-to-right ¬P'Q e (inr q) star)))
 
   equiv-mutually-exclusive-coprod :
     ((P + Q) ≃ (P' + Q')) ≃ ((P ≃ P') × (Q ≃ Q'))

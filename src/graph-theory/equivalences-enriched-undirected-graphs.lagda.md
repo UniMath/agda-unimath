@@ -30,9 +30,13 @@ open import graph-theory.neighbors-undirected-graphs
 
 ## Idea
 
-An equivalence of `(A,B)`-enriched undirected graphs from `G` to `H` consists of
-an equivalence `e` of the underlying graphs of `G` and `H` such that preserving
-the labeling and the equivalences on the neighbors
+An **equivalence of `(A,B)`-enriched undirected graphs** from an
+[`(A,B)`-enriched undirected graph](graph-theory.enriched-undirected-graphs.md)
+`G` to an `(A,B)`-enriched undirected graph `H` consists of an
+[equivalence](graph-theory.equivalences-undirected-graphs.md) `e` of the
+underlying graphs of `G` and `H` such that preserving the labeling and the
+[equivalences](foundation-core.equivalences.md) on the
+[neighbors](graph-theory.neighbors-undirected-graphs.md).
 
 ## Definition
 
@@ -293,3 +297,12 @@ module _
   eq-equiv-Enriched-Undirected-Graph H =
     map-inv-equiv (extensionality-Enriched-Undirected-Graph H)
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab

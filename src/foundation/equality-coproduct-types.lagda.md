@@ -10,6 +10,7 @@ module foundation.equality-coproduct-types where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
@@ -263,7 +264,7 @@ module _
   where
 
   is-emb-coprod :
-    is-emb f → is-emb g → ((a : A) (b : B) → ¬ (f a ＝ g b)) →
+    is-emb f → is-emb g → ((a : A) (b : B) → f a ≠ g b) →
     is-emb (ind-coprod (λ x → C) f g)
   is-emb-coprod H K L (inl a) (inl a') =
     is-equiv-left-factor-htpy

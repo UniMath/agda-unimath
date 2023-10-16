@@ -66,7 +66,8 @@ module _
         ( ( distributive-Π-Σ) ∘e
           ( equiv-Π-equiv-family
             ( λ x →
-              extensionality-obj-Category (D , is-category-D)
+              extensionality-obj-Category
+                ( D , is-category-D)
                 ( obj-map-Precategory C D F x)
                 ( obj-map-Precategory C D G x))))
         ( λ K →
@@ -113,10 +114,9 @@ module _
       is-equiv-htpy-equiv
         ( ( equiv-iso-map-natural-isomorphism-map-Precategory C D F G) ∘e
           ( extensionality-map-is-category-Precategory C D is-category-D F G))
-        ( λ
-          { refl →
-            compute-iso-map-natural-isomorphism-map-eq-Precategory
-              C D F G refl})
+        ( λ where
+          refl →
+            compute-iso-map-natural-isomorphism-map-eq-Precategory C D F G refl)
 ```
 
 ## Definitions

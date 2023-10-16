@@ -21,11 +21,17 @@ open import graph-theory.walks-undirected-graphs
 
 ## Idea
 
-A path in an undirected graph G is a walk `w` in G such that the inclusion of
-the type of vertices on `w` into the vertices of `G` is an injective function.
-Note that we don't expect this function to be an embedding, since the type of
-vertices on `w` is equivalent to `Fin (n + 1)` where `n` is the length of the
-walk, whereas the type of vertices of `G` does not need to be a set.
+A **path** in an [undirected graph](graph-theory.undirected-graphs.md) `G` is a
+[walk](graph-theory.walks-undirected-graphs.md) `w` in G such that the inclusion
+of the type of vertices on `w` into the vertices of `G` is an
+[injective](foundation.injective-maps.md) function.
+
+**Note:** It is too much to ask for for this function to be an
+[embedding](foundation-core.embeddings.md), since the type of vertices on `w` is
+equivalent to the
+[standard finite type](univalent-combinatorics.standard-finite-types.md)
+`Fin (n + 1)` where `n` is the length of the walk, whereas the type of vertices
+of `G` does not need to be a [set](foundation-core.sets.md).
 
 ## Definition
 
@@ -69,3 +75,11 @@ is-path-refl-walk-Undirected-Graph G x =
     ( vertex-vertex-on-walk-Undirected-Graph G refl-walk-Undirected-Graph)
     ( is-contr-vertex-on-walk-refl-walk-Undirected-Graph G x)
 ```
+
+## External links
+
+- [Path](https://www.wikidata.org/entity/Q1415372) on Wikidata
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Graph path](https://mathworld.wolfram.com/GraphPath.html) at Wolfram
+  Mathworld

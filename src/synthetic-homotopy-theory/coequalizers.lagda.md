@@ -7,8 +7,6 @@ module synthetic-homotopy-theory.coequalizers where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.codiagonal-maps-of-types
-open import foundation.coproduct-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.transport-along-identifications
@@ -16,7 +14,6 @@ open import foundation.universe-levels
 
 open import synthetic-homotopy-theory.coforks
 open import synthetic-homotopy-theory.dependent-cocones-under-spans
-open import synthetic-homotopy-theory.dependent-coforks
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers
 open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.universal-property-coequalizers
@@ -64,50 +61,45 @@ module _
   abstract
     canonical-coequalizer : UU (l1 ⊔ l2)
     canonical-coequalizer =
-      pushout (codiagonal A) (ind-coprod (λ _ → B) f g)
+      pushout
+        ( vertical-map-span-cocone-cofork f g)
+        ( horizontal-map-span-cocone-cofork f g)
 
     cofork-canonical-coequalizer : cofork f g canonical-coequalizer
     cofork-canonical-coequalizer =
       cofork-cocone-codiagonal f g
-        ( cocone-pushout (codiagonal A) (ind-coprod (λ _ → B) f g))
+        ( cocone-pushout
+          ( vertical-map-span-cocone-cofork f g)
+          ( horizontal-map-span-cocone-cofork f g))
 
     dup-canonical-coequalizer :
       { l : Level} →
       dependent-universal-property-coequalizer l f g
         ( cofork-canonical-coequalizer)
-    dup-canonical-coequalizer P =
-      is-equiv-comp-htpy
-        ( dependent-cofork-map f g cofork-canonical-coequalizer)
-        ( dependent-cofork-dependent-cocone-codiagonal f g
-          ( cofork-canonical-coequalizer)
-          ( P))
-        ( dependent-cocone-map
-          ( codiagonal A)
-          ( ind-coprod (λ _ → B) f g)
-          ( cocone-codiagonal-cofork f g cofork-canonical-coequalizer)
-          ( P))
-        ( triangle-dependent-cofork-dependent-cocone-codiagonal f g
-          ( cofork-canonical-coequalizer)
-          ( P))
-        ( tr
-          ( λ c →
-            is-equiv
-              ( dependent-cocone-map
-                ( codiagonal A)
-                ( ind-coprod (λ _ → B) f g)
-                ( c)
-                ( P)))
-          ( inv
-            ( is-retraction-map-inv-is-equiv
-              ( is-equiv-cofork-cocone-codiagonal f g)
-              ( cocone-pushout (codiagonal A) (ind-coprod (λ _ → B) f g))))
-          ( dependent-up-pushout
-            ( codiagonal A)
-            ( ind-coprod (λ _ → B) f g)
-            ( P)))
-        ( is-equiv-dependent-cofork-dependent-cocone-codiagonal f g
-          ( cofork-canonical-coequalizer)
-          ( P))
+    dup-canonical-coequalizer =
+      dependent-universal-property-coequalizer-dependent-universal-property-pushout
+        ( f)
+        ( g)
+        ( cofork-canonical-coequalizer)
+        ( λ P →
+          tr
+            ( λ c →
+              is-equiv
+                ( dependent-cocone-map
+                  ( vertical-map-span-cocone-cofork f g)
+                  ( horizontal-map-span-cocone-cofork f g)
+                  ( c)
+                  ( P)))
+            ( inv
+              ( is-retraction-map-inv-is-equiv
+                ( is-equiv-cofork-cocone-codiagonal f g)
+                ( cocone-pushout
+                  ( vertical-map-span-cocone-cofork f g)
+                  ( horizontal-map-span-cocone-cofork f g))))
+            ( dependent-up-pushout
+              ( vertical-map-span-cocone-cofork f g)
+              ( horizontal-map-span-cocone-cofork f g)
+              ( P)))
 
     up-canonical-coequalizer :
       { l : Level} →

@@ -204,7 +204,7 @@ eq-compute-succ-strong-ind-ℕ :
       cases-succ-strong-ind-ℕ P pS k z m₁ (cases-leq-succ-ℕ z₁))
     n m p) ＝
   ( strong-ind-ℕ P p0 pS m)
-eq-compute-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ star = refl
+eq-compute-succ-strong-ind-ℕ P p0 pS zero-ℕ zero-ℕ _ = refl
 eq-compute-succ-strong-ind-ℕ P p0 pS (succ-ℕ n) m p =
   cases-eq-compute-succ-strong-ind-ℕ P p0 pS n
     ( eq-compute-succ-strong-ind-ℕ P p0 pS n) m p

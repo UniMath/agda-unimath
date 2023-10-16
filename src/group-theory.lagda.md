@@ -25,7 +25,8 @@ open import group-theory.central-elements-monoids public
 open import group-theory.central-elements-semigroups public
 open import group-theory.centralizer-subgroups public
 open import group-theory.commutative-monoids public
-open import group-theory.commutators-groups public
+open import group-theory.commutator-subgroups public
+open import group-theory.commutators-of-elements-groups public
 open import group-theory.commuting-elements-groups public
 open import group-theory.commuting-elements-monoids public
 open import group-theory.commuting-elements-semigroups public
@@ -51,6 +52,7 @@ open import group-theory.dependent-products-semigroups public
 open import group-theory.dihedral-group-construction public
 open import group-theory.dihedral-groups public
 open import group-theory.e8-lattice public
+open import group-theory.elements-of-finite-order-groups public
 open import group-theory.embeddings-abelian-groups public
 open import group-theory.embeddings-groups public
 open import group-theory.endomorphism-rings-abelian-groups public
@@ -108,6 +110,7 @@ open import group-theory.monoids public
 open import group-theory.monomorphisms-concrete-groups public
 open import group-theory.monomorphisms-groups public
 open import group-theory.multiples-of-elements-abelian-groups public
+open import group-theory.nontrivial-groups public
 open import group-theory.normal-closures-subgroups public
 open import group-theory.normal-cores-subgroups public
 open import group-theory.normal-subgroups public
@@ -121,6 +124,9 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.perfect-cores public
+open import group-theory.perfect-groups public
+open import group-theory.perfect-subgroups public
 open import group-theory.powers-of-elements-commutative-monoids public
 open import group-theory.powers-of-elements-groups public
 open import group-theory.powers-of-elements-monoids public
@@ -151,6 +157,7 @@ open import group-theory.subgroups public
 open import group-theory.subgroups-abelian-groups public
 open import group-theory.subgroups-concrete-groups public
 open import group-theory.subgroups-generated-by-elements-groups public
+open import group-theory.subgroups-generated-by-families-of-elements-groups public
 open import group-theory.subgroups-generated-by-subsets-groups public
 open import group-theory.submonoids public
 open import group-theory.submonoids-commutative-monoids public
@@ -164,11 +171,14 @@ open import group-theory.substitution-functor-group-actions public
 open import group-theory.surjective-group-homomorphisms public
 open import group-theory.symmetric-concrete-groups public
 open import group-theory.symmetric-groups public
+open import group-theory.torsion-elements-groups public
+open import group-theory.torsion-free-groups public
 open import group-theory.torsors public
 open import group-theory.transitive-concrete-group-actions public
 open import group-theory.transitive-group-actions public
 open import group-theory.trivial-concrete-groups public
 open import group-theory.trivial-group-homomorphisms public
+open import group-theory.trivial-groups public
 open import group-theory.trivial-subgroups public
 open import group-theory.unordered-tuples-of-elements-commutative-monoids public
 open import group-theory.wild-representations-monoids public

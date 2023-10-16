@@ -11,6 +11,7 @@ open import foundation-core.coproduct-types public
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.negated-equality
 open import foundation.noncontractible-types
 open import foundation.subuniverses
 open import foundation.unit-type
@@ -95,10 +96,10 @@ module _
   is-injective-inr : is-injective {B = A + B} inr
   is-injective-inr refl = refl
 
-  neq-inl-inr : {x : A} {y : B} → ¬ (inl x ＝ inr y)
+  neq-inl-inr : {x : A} {y : B} → inl x ≠ inr y
   neq-inl-inr ()
 
-  neq-inr-inl : {x : B} {y : A} → ¬ (inr x ＝ inl y)
+  neq-inr-inl : {x : B} {y : A} → inr x ≠ inl y
   neq-inr-inl ()
 ```
 
