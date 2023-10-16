@@ -28,14 +28,14 @@ def generate_namespace_entry_list(namespace):
     namespace_path = root_path.joinpath(namespace)
 
     # Filter out the relevant files in the given namespace
-    relevant_files = filter(
-        lambda f: namespace_path in f.parents, git_tracked_files)
+    relevant_files = (
+        f for f in git_tracked_files if namespace_path in f.parents)
 
-    lagda_file_paths = filter(utils.is_agda_file, relevant_files)
-    modules = map(lambda p: p.name, lagda_file_paths)
-    module_titles = map(utils.get_lagda_md_file_title, lagda_file_paths)
-    module_mdfiles = map(
-        lambda m: utils.get_module_mdfile(namespace, m), modules)
+    lagda_file_paths = (f for f in relevant_files if utils.is_agda_file(f))
+    modules = (p.name for p in lagda_file_paths)
+    module_titles = (utils.get_lagda_md_file_title(f)
+                     for f in lagda_file_paths)
+    module_mdfiles = (utils.get_module_mdfile(namespace, m) for m in modules)
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):

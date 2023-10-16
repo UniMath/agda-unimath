@@ -15,11 +15,11 @@ def generate_title(namespace):
 
 def generate_imports(root, namespace, git_tracked_files):
     namespace_path = root.joinpath(namespace)
-    namespace_files = [
-        f.name for f in namespace_path.iterdir() if utils.is_agda_file(f) and f in git_tracked_files]
+    namespace_files = (f.name for f in namespace_path.iterdir(
+    ) if utils.is_agda_file(f) and f in git_tracked_files)
 
-    import_statements = [utils.get_import_statement(
-        namespace, module_file, public=True) for module_file in namespace_files]
+    import_statements = (utils.get_import_statement(
+        namespace, module_file, public=True) for module_file in namespace_files)
     return '\n'.join(sorted(set(import_statements)))
 
 
@@ -45,8 +45,6 @@ if __name__ == '__main__':
     git_tracked_files = set(utils.get_git_tracked_files())
 
     for namespace in utils.get_subdirectories_recursive(root):
-        if namespace == 'temp' or 'MAlonzo' in namespace:
-            continue
 
         namespace_filename = root.joinpath(namespace).with_suffix('.lagda.md')
 
