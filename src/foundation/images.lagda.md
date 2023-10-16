@@ -149,7 +149,7 @@ abstract
       ( α)
     where
     α : fiber f y → type-Prop (trunc-Prop (fiber (map-unit-im f) (y , z)))
-    α (x , p) = unit-trunc-Prop (x , (eq-type-subtype (trunc-Prop ∘ fiber f) p))
+    α (x , p) = unit-trunc-Prop (x , eq-type-subtype (trunc-Prop ∘ fiber f) p)
 ```
 
 ### The image of a map into a truncated type is truncated
