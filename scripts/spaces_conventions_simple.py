@@ -30,6 +30,14 @@ def no_whitespace_before_closing_curly_brace(line):
     return re.sub(r'(?![-!}])(\S)\s+\}', r'\1}', line)
 
 
+def no_whitespace_after_opening_parenthesis_inside_line(line):
+    return utils.recursive_sub(r'^(\s*[^\s({-][^\s({].*\()\s+', r'\1', line)
+
+
+def no_whitespace_after_opening_curly_brace_inside_line(line):
+    return utils.recursive_sub(r'^(\s*[^\s({-][^\s({].*\{)\s+', r'\1', line)
+
+
 if __name__ == '__main__':
 
     status = 0
@@ -60,6 +68,10 @@ if __name__ == '__main__':
                     line = space_before_special_symbols(line)
                     line = no_whitespace_before_closing_parenthesis(line)
                     line = no_whitespace_before_closing_curly_brace(line)
+                    line = no_whitespace_after_opening_parenthesis_inside_line(
+                        line)
+                    line = no_whitespace_after_opening_curly_brace_inside_line(
+                        line)
                     # line = space_after_opening_parenthesis_on_new_line(line)
 
                 block_comment_level -= block_comment_delta_neg
