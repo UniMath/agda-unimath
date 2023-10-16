@@ -445,7 +445,7 @@ compute-map-preserves-succ-map-ℤ-Mod' k f H (inl (succ-ℕ x)) =
       ( ( inv
           ( preserves-pred-preserves-succ-map-ℤ-Mod k f H (mod-ℤ k (inl x)))) ∙
         ( ap f (inv (preserves-predecessor-mod-ℤ k (inl x)))))))
-compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl star)) =
+compute-map-preserves-succ-map-ℤ-Mod' k f H (inr (inl _)) =
   ( ap (add-ℤ-Mod' k (f (zero-ℤ-Mod k))) (mod-zero-ℤ k)) ∙
   ( ( left-unit-law-add-ℤ-Mod k (f (zero-ℤ-Mod k))) ∙
     ( ap f (inv (mod-zero-ℤ k))))

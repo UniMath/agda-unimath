@@ -216,14 +216,14 @@ module _
 
   xor-symmetric-xor :
     symmetric-xor (standard-unordered-pair A B) → xor A B
-  xor-symmetric-xor (pair (inl (inr star)) (pair p nq)) =
+  xor-symmetric-xor (pair (inl (inr _)) (pair p nq)) =
     inl
       ( pair p
         ( tr
           ( λ t → ¬ (element-unordered-pair (standard-unordered-pair A B) t))
           ( compute-swap-Fin-two-ℕ (zero-Fin 1))
           ( nq)))
-  xor-symmetric-xor (pair (inr star) (pair q np)) =
+  xor-symmetric-xor (pair (inr _) (pair q np)) =
     inr
       ( pair
         ( q)
@@ -333,7 +333,7 @@ module _
     type-hom-Prop
       ( symmetric-xor-Prop (standard-unordered-pair P Q))
       ( xor-Prop P Q)
-  xor-symmetric-xor-Prop (pair (inl (inr star)) (pair p nq)) =
+  xor-symmetric-xor-Prop (pair (inl (inr _)) (pair p nq)) =
     inl
       ( pair p
         ( tr
@@ -342,7 +342,7 @@ module _
                 ( element-unordered-pair (standard-unordered-pair P Q) t)))
           ( compute-swap-Fin-two-ℕ (zero-Fin 1))
           ( nq)))
-  xor-symmetric-xor-Prop (pair (inr star) (pair q np)) =
+  xor-symmetric-xor-Prop (pair (inr _) (pair q np)) =
     inr
       ( pair q
         ( tr
