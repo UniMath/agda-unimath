@@ -6,9 +6,11 @@ import os
 import sys
 import utils
 import pathlib
+import subprocess
 
-STATUS_FLAG_NO_TITLE = 1
-STATUS_FLAG_DUPLICATE_TITLE = 2
+STATUS_FLAG_GIT_ERROR = 1
+STATUS_FLAG_NO_TITLE = 2
+STATUS_FLAG_DUPLICATE_TITLE = 4
 
 entry_template = '- [{title}]({mdfile})'
 
@@ -16,15 +18,26 @@ entry_template = '- [{title}]({mdfile})'
 def generate_namespace_entry_list(namespace):
     status = 0
 
-    file_names = sorted(os.listdir(os.path.join(root, namespace)))
-    file_paths = map(lambda m: pathlib.Path(
-        os.path.join(root, namespace, m)), file_names)
-    lagda_file_paths = tuple(filter(utils.is_agda_file, file_paths))
-    modules = tuple(map(lambda p: p.name, lagda_file_paths))
-    module_titles = tuple(map(utils.get_lagda_md_file_title, lagda_file_paths))
+    # Get list of Git-tracked files
+    try:
+        git_output = subprocess.check_output(['git', 'ls-files'], text=True)
+        git_tracked_files = map(pathlib.Path, git_output.strip().split('\n'))
+    except subprocess.CalledProcessError:
+        print('Failed to get Git-tracked files', file=sys.stderr)
+        sys.exit(STATUS_FLAG_GIT_ERROR)
 
-    module_mdfiles = tuple(
-        map(lambda m: utils.get_module_mdfile(namespace, m), modules))
+    root_path = pathlib.Path(root)
+    namespace_path = root_path.joinpath(namespace)
+
+    # Filter out the relevant files in the given namespace
+    relevant_files = filter(
+        lambda f: namespace_path in f.parents, git_tracked_files)
+
+    lagda_file_paths = filter(utils.is_agda_file, relevant_files)
+    modules = map(lambda p: p.name, lagda_file_paths)
+    module_titles = map(utils.get_lagda_md_file_title, lagda_file_paths)
+    module_mdfiles = map(
+        lambda m: utils.get_module_mdfile(namespace, m), modules)
 
     # Check for missing titles
     for title, module in zip(module_titles, modules):

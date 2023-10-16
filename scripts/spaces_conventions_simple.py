@@ -68,10 +68,10 @@ if __name__ == '__main__':
                     line = space_before_special_symbols(line)
                     line = no_whitespace_before_closing_parenthesis(line)
                     line = no_whitespace_before_closing_curly_brace(line)
-                    line = no_whitespace_after_opening_parenthesis_inside_line(
-                        line)
-                    line = no_whitespace_after_opening_curly_brace_inside_line(
-                        line)
+                    # line = no_whitespace_after_opening_parenthesis_inside_line(
+                    #     line)
+                    # line = no_whitespace_after_opening_curly_brace_inside_line(
+                    #     line)
                     # line = space_after_opening_parenthesis_on_new_line(line)
 
                 block_comment_level -= block_comment_delta_neg
