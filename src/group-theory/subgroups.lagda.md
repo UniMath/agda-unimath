@@ -229,7 +229,7 @@ module _
       ( integer-power-Group G (inl k) x)
       ( is-closed-under-inverses-Subgroup x H)
       ( is-closed-under-powers-int-Subgroup (inl k) x H)
-  is-closed-under-powers-int-Subgroup (inr (inl star)) x H =
+  is-closed-under-powers-int-Subgroup (inr (inl _)) x H =
     contains-unit-Subgroup
   is-closed-under-powers-int-Subgroup (inr (inr zero-ℕ)) x H =
     is-closed-under-eq-Subgroup' H (right-unit-law-mul-Group G x)

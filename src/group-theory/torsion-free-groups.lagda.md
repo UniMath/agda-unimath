@@ -27,7 +27,6 @@ open import group-theory.groups
 open import group-theory.integer-powers-of-elements-groups
 open import group-theory.orders-of-elements-groups
 open import group-theory.subgroups
-open import group-theory.subgroups-generated-by-elements-groups
 open import group-theory.torsion-elements-groups
 ```
 
@@ -119,22 +118,23 @@ module _
   {l1 : Level} (G : Group l1)
   where
 
-  is-equiv-first-projection-pullback-subgroup-prop-prop-Group :
+  is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group :
     Prop (lsuc l1)
-  is-equiv-first-projection-pullback-subgroup-prop-prop-Group =
+  is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group =
     is-equiv-Prop
-      ( π₁ {f = subgroup-order-element-Group G} {g = subgroup-Prop ℤ-Group})
+      ( vertical-map-standard-pullback
+        { f = subgroup-order-element-Group G}
+        { g = subgroup-Prop ℤ-Group})
 
-  is-equiv-first-projection-pullback-subgroup-prop-Group :
-    UU (lsuc l1)
+  is-equiv-first-projection-pullback-subgroup-prop-Group : UU (lsuc l1)
   is-equiv-first-projection-pullback-subgroup-prop-Group =
-    type-Prop is-equiv-first-projection-pullback-subgroup-prop-prop-Group
+    type-Prop is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group
 
   is-prop-is-equiv-first-projection-pullback-subgroup-prop-Group :
     is-prop is-equiv-first-projection-pullback-subgroup-prop-Group
   is-prop-is-equiv-first-projection-pullback-subgroup-prop-Group =
     is-prop-type-Prop
-      ( is-equiv-first-projection-pullback-subgroup-prop-prop-Group)
+      ( is-equiv-vertical-map-standard-pullback-subgroup-prop-prop-Group)
 ```
 
 ## Properties
