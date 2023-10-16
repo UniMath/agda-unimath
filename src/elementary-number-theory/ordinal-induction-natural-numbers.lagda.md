@@ -18,7 +18,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-The ordinal induction principle of the natural numbers is the well-founded
+The **ordinal induction principle of the natural numbers** is the well-founded
 induction principle of ℕ.
 
 ## To Do

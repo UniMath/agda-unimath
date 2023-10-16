@@ -290,7 +290,6 @@ module _
     ( pr2
       ( pr2
         ( relate-same-elements-eq-rel-partition-Equivalence-Relation x y) r)) =
-
     make-is-in-block-partition
       ( partition-Equivalence-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
@@ -301,7 +300,6 @@ module _
     ( pr2
       ( pr2
         ( relate-same-elements-eq-rel-partition-Equivalence-Relation x y) r)) =
-
     make-is-in-block-partition
       ( partition-Equivalence-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))

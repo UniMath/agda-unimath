@@ -16,6 +16,7 @@ module category-theory where
 open import category-theory.adjunctions-large-precategories public
 open import category-theory.anafunctors-categories public
 open import category-theory.anafunctors-precategories public
+open import category-theory.augmented-simplex-category public
 open import category-theory.categories public
 open import category-theory.category-of-functors public
 open import category-theory.category-of-functors-from-small-to-large-categories public
@@ -29,6 +30,8 @@ open import category-theory.dependent-products-of-large-categories public
 open import category-theory.dependent-products-of-large-precategories public
 open import category-theory.dependent-products-of-precategories public
 open import category-theory.discrete-categories public
+open import category-theory.embedding-maps-precategories public
+open import category-theory.embeddings-precategories public
 open import category-theory.endomorphisms-in-categories public
 open import category-theory.endomorphisms-in-precategories public
 open import category-theory.epimorphisms-in-large-precategories public
@@ -37,6 +40,7 @@ open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
+open import category-theory.faithful-maps-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
 open import category-theory.function-categories public
@@ -96,6 +100,7 @@ open import category-theory.representable-functors-large-precategories public
 open import category-theory.representable-functors-precategories public
 open import category-theory.representing-arrow-category public
 open import category-theory.sieves-in-categories public
+open import category-theory.simplex-category public
 open import category-theory.slice-precategories public
 open import category-theory.subprecategories public
 open import category-theory.terminal-objects-precategories public

@@ -23,9 +23,10 @@ open import order-theory.total-preorders
 
 ## Idea
 
-A **total order**, or a \*\*linear order, is a poset `P` such that for every two
-elements `x` and `y` in `P` the disjunction `(x ≤ y) ∨ (y ≤ x)` holds. In other
-words, total orders are totally ordered in the sense tat any two elements are
+A **total order**, or a **linear order**, is a [poset](order-theory.posets.md)
+`P` such that for every two elements `x` and `y` in `P` the
+[disjunction](foundation.disjunction.md) `(x ≤ y) ∨ (y ≤ x)` holds. In other
+words, total orders are totally ordered in the sense that any two elements are
 comparable.
 
 ## Definitions
@@ -57,7 +58,7 @@ module _
   is-prop-is-total-Poset = is-prop-is-total-Preorder (preorder-Poset X)
 ```
 
-### Type of total posets
+### The type of total orders
 
 ```agda
 Total-Order : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)

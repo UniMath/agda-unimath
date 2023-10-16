@@ -1,4 +1,4 @@
-# The functoriality of `fiber`
+# Functoriality of fibers of maps
 
 ```agda
 module foundation.functoriality-fibers-of-maps where
@@ -24,9 +24,8 @@ open import foundation-core.identity-types
 
 ## Idea
 
-Any commuting square
-
-induces a map between the fibers of the vertical maps
+Any [commuting square](foundation-core.commuting-squares-of-maps.md) induces a
+map between the fibers of the vertical maps.
 
 ## Definitions
 
@@ -44,8 +43,8 @@ module _
 
 map-fiber-cone-id :
   {l1 l2 : Level} {B : UU l1} {X : UU l2} (g : B → X) (x : X) →
-  map-fiber-cone id g (triple g id refl-htpy) x ~ id
-map-fiber-cone-id g .(g b) (pair b refl) =
+  map-fiber-cone id g (g , id , refl-htpy) x ~ id
+map-fiber-cone-id g .(g b) (b , refl) =
   refl
 ```
 
@@ -63,19 +62,18 @@ module _
   map-fiber-pasting-horizontal-cone :
     (c : cone j h B) (d : cone i (pr1 c) A) → (x : X) →
     ( map-fiber-cone (j ∘ i) h (pasting-horizontal-cone i j h c d) x) ~
-    ( (map-fiber-cone j h c (i x)) ∘ (map-fiber-cone i (pr1 c) d x))
+    ( map-fiber-cone j h c (i x) ∘ map-fiber-cone i (pr1 c) d x)
   map-fiber-pasting-horizontal-cone
-    (pair g (pair q K)) (pair f (pair p H)) .(f a) (pair a refl) =
-    eq-pair-Σ
-      ( refl)
+    (g , q , K) (f , p , H) .(f a) (a , refl) =
+    eq-pair-Σ-eq-pr2
       ( ( ap
           ( concat' (h (q (p a))) refl)
           ( distributive-inv-concat (ap j (H a)) (K (p a)))) ∙
-        ( ( assoc (inv (K (p a))) (inv (ap j (H a))) refl) ∙
-          ( ap
-            ( concat (inv (K (p a))) (j (i (f a))))
-            ( ( ap (concat' (j (g (p a))) refl) (inv (ap-inv j (H a)))) ∙
-              ( inv (ap-concat j (inv (H a)) refl))))))
+        ( assoc (inv (K (p a))) (inv (ap j (H a))) refl) ∙
+        ( ap
+          ( concat (inv (K (p a))) (j (i (f a))))
+          ( ( ap (concat' (j (g (p a))) refl) (inv (ap-inv j (H a)))) ∙
+            ( inv (ap-concat j (inv (H a)) refl)))))
 ```
 
 ### Computing `map-fiber-cone` of a horizontal pasting of cones
@@ -97,26 +95,28 @@ module _
         ( map-fiber-cone f g c x)
         ( λ t → map-fiber-cone (pr1 (pr2 c)) h d (pr1 t))))
   map-fiber-pasting-vertical-cone
-    (pair p (pair q H)) (pair p' (pair q' H')) .(p (p' a))
-    (pair (pair .(p' a) refl) (pair a refl)) =
-    eq-pair-Σ refl
+    (p , q , H) (p' , q' , H') .(p (p' a))
+    ((.(p' a) , refl) , (a , refl)) =
+    eq-pair-Σ-eq-pr2
       ( ( right-unit) ∙
-        ( ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
-          ( ( ap
-              ( concat (inv (ap g (H' a))) (f (p (p' a))))
-              ( inv right-unit)) ∙
-            ( ap
-              ( concat' (g (h (q' a)))
-                ( pr2
-                  ( map-fiber-cone f g
-                    ( triple p q H)
-                    ( p (p' a))
-                    ( pair (p' a) refl))))
-              ( ( inv (ap-inv g (H' a))) ∙
-                ( ap (ap g) (inv right-unit)))))))
+        ( distributive-inv-concat (H (p' a)) (ap g (H' a))) ∙
+        ( ap
+          ( concat (inv (ap g (H' a))) (f (p (p' a))))
+          ( inv right-unit)) ∙
+        ( ap
+          ( concat' (g (h (q' a)))
+            ( pr2
+              ( map-fiber-cone f g
+                ( p , q , H)
+                ( p (p' a))
+                ( p' a , refl))))
+          ( ( inv (ap-inv g (H' a))) ∙
+            ( ap (ap g) (inv right-unit)))))
 ```
 
-## See also
+## Table of files about fibers of maps
 
-- Equality proofs in the fiber of a map are characterized in
-  [`foundation.equality-fibers-of-maps`](foundation.equality-fibers-of-maps.md).
+The following table lists files that are about fibers of maps as a general
+concept.
+
+{{#include tables/fibers-of-maps.md}}

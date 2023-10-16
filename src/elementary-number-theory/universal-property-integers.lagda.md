@@ -48,7 +48,7 @@ abstract
     map-inv-is-equiv
       ( is-equiv-map-equiv (pS (inl (succ-ℕ x))))
       ( elim-ℤ P p0 pS (inl x))
-  elim-ℤ P p0 pS (inr (inl star)) = p0
+  elim-ℤ P p0 pS (inr (inl _)) = p0
   elim-ℤ P p0 pS (inr (inr zero-ℕ)) = map-equiv (pS zero-ℤ) p0
   elim-ℤ P p0 pS (inr (inr (succ-ℕ x))) =
     map-equiv
@@ -75,8 +75,8 @@ abstract
       ( is-section-map-inv-is-equiv
         ( is-equiv-map-equiv (pS (inl (succ-ℕ x))))
         ( elim-ℤ P p0 pS (succ-ℤ (inl (succ-ℕ x)))))
-  compute-succ-elim-ℤ P p0 pS (inr (inl star)) = refl
-  compute-succ-elim-ℤ P p0 pS (inr (inr x)) = refl
+  compute-succ-elim-ℤ P p0 pS (inr (inl _)) = refl
+  compute-succ-elim-ℤ P p0 pS (inr (inr _)) = refl
 
 ELIM-ℤ :
   { l1 : Level} (P : ℤ → UU l1)
