@@ -33,16 +33,13 @@ exhibited as a
 ### The large precategory of decidable total orders
 
 ```agda
-module _
-  (α β : Level → Level)
-  where
-
-  parametric-Decidable-Total-Order-Full-Large-Subprecategory :
-    Full-Large-Subprecategory
-      ( λ l → α l ⊔ β l)
-      ( parametric-Poset-Large-Precategory α β)
-  parametric-Decidable-Total-Order-Full-Large-Subprecategory =
-    is-decidable-total-prop-Poset
+parametric-Decidable-Total-Order-Full-Large-Subprecategory :
+  (α β : Level → Level) →
+  Full-Large-Subprecategory
+    ( λ l → α l ⊔ β l)
+    ( parametric-Poset-Large-Precategory α β)
+parametric-Decidable-Total-Order-Full-Large-Subprecategory α β =
+  is-decidable-total-prop-Poset
 
 Decidable-Total-Order-Large-Precategory :
   Large-Precategory lsuc (_⊔_)

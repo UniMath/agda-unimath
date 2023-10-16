@@ -36,25 +36,32 @@ module _
   where
 
   is-finite-Total-Order-Prop : Prop (l1 ⊔ l2)
-  is-finite-Total-Order-Prop = is-finite-Preorder-Prop (preorder-Total-Order P)
+  is-finite-Total-Order-Prop = is-finite-Poset-Prop (poset-Total-Order P)
 
   is-finite-Total-Order : UU (l1 ⊔ l2)
-  is-finite-Total-Order = is-finite-Preorder (preorder-Total-Order P)
+  is-finite-Total-Order = is-finite-Poset (poset-Total-Order P)
 
   is-prop-is-finite-Total-Order : is-prop is-finite-Total-Order
   is-prop-is-finite-Total-Order =
-    is-prop-is-finite-Preorder (preorder-Total-Order P)
+    is-prop-is-finite-Poset (poset-Total-Order P)
 
   is-finite-type-is-finite-Total-Order :
     is-finite-Total-Order → is-finite (type-Total-Order P)
   is-finite-type-is-finite-Total-Order =
-    is-finite-type-is-finite-Preorder (preorder-Total-Order P)
+    is-finite-type-is-finite-Poset (poset-Total-Order P)
 
   is-decidable-leq-is-finite-Total-Order :
     is-finite-Total-Order →
     (x y : type-Total-Order P) → is-decidable (leq-Total-Order P x y)
   is-decidable-leq-is-finite-Total-Order =
-    is-decidable-leq-is-finite-Preorder (preorder-Total-Order P)
+    is-decidable-leq-is-finite-Poset (poset-Total-Order P)
+
+is-finite-total-order-Poset-Prop :
+  {l1 l2 : Level} (P : Poset l1 l2) → Prop (l1 ⊔ l2)
+is-finite-total-order-Poset-Prop P =
+  prod-Prop
+    ( is-total-Poset-Prop P)
+    ( is-finite-Poset-Prop P)
 
 Total-Order-𝔽 : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Total-Order-𝔽 l1 l2 =

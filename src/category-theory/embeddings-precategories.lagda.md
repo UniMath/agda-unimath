@@ -80,3 +80,17 @@ module _
   is-prop-is-embedding-functor-Precategory =
     is-prop-type-Prop is-embedding-prop-functor-Precategory
 ```
+
+### The type of embeddings between precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  embedding-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  embedding-Precategory =
+    Σ (functor-Precategory C D) (is-embedding-functor-Precategory C D)
+```

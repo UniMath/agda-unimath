@@ -26,7 +26,15 @@ open import order-theory.order-preserving-maps-posets
 
 **The augmented simplex category** is the category consisting of
 [finite total orders](order-theory.finite-total-orders.md) and
-[order-preserving maps](order-theory.order-preserving-maps-posets.md).
+[order-preserving maps](order-theory.order-preserving-maps-posets.md). However,
+we define it as the category whose objects are
+[natural numbers](elementary-number-theory.natural-numbers.md) and whose
+hom-[sets](foundation-core.sets.md) `hom n m` are order-preserving maps between
+the [standard finite sets](univalent-combinatorics.standard-finite-sets.md)
+`Fin n` to `Fin m` [equipped](foundation.structure.md) with the
+[standard ordering](elementary-number-theory.inequality-standard-finite-sets.md),
+and then show that it is
+[equivalent](category-theory.equivalences-of-precategories.md) to the former.
 
 ## Definition
 
@@ -127,3 +135,9 @@ pr2 (pr2 (pr2 augmented-simplex-Precategory)) =
 ### The augmented simplex category
 
 It remains to be formalized that the augmented simplex category is univalent.
+
+## Properties
+
+### The augmented simplex category is equivalent to the category of finite total orders
+
+This remains to be formalized.

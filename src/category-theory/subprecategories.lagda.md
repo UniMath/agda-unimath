@@ -7,7 +7,9 @@ module category-theory.subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.embeddings-precategories
 open import category-theory.faithful-functors-precategories
+open import category-theory.faithful-maps-precategories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
@@ -381,7 +383,7 @@ module _
 
 ## Properties
 
-### The inclusion functor is faithful and an embedding on objects
+### The inclusion functor is an embedding
 
 ```agda
 module _
@@ -390,31 +392,46 @@ module _
   (P : Subprecategory l3 l4 C)
   where
 
-  is-faithful-inclusion-map-Precategory :
+  is-faithful-inclusion-map-Subprecategory :
     is-faithful-map-Precategory
       ( precategory-Subprecategory C P)
       ( C)
       ( inclusion-map-Subprecategory C P)
-  is-faithful-inclusion-map-Precategory x y =
+  is-faithful-inclusion-map-Subprecategory x y =
     is-emb-inclusion-subtype
       ( subtype-hom-Subprecategory C P
         ( inclusion-obj-Subprecategory C P x)
         ( inclusion-obj-Subprecategory C P y))
 
-  is-faithful-inclusion-functor-Precategory :
+  is-faithful-inclusion-functor-Subprecategory :
     is-faithful-functor-Precategory
       ( precategory-Subprecategory C P)
       ( C)
       ( inclusion-functor-Subprecategory C P)
-  is-faithful-inclusion-functor-Precategory =
-    is-faithful-inclusion-map-Precategory
+  is-faithful-inclusion-functor-Subprecategory =
+    is-faithful-inclusion-map-Subprecategory
 
-  is-emb-obj-inclusion-functor-Precategory :
+  is-emb-obj-inclusion-functor-Subprecategory :
     is-emb
       ( obj-functor-Precategory
         ( precategory-Subprecategory C P)
         ( C)
         ( inclusion-functor-Subprecategory C P))
-  is-emb-obj-inclusion-functor-Precategory =
+  is-emb-obj-inclusion-functor-Subprecategory =
     is-emb-inclusion-subtype (subtype-obj-Subprecategory C P)
+
+  is-embedding-inclusion-functor-Subprecategory :
+    is-embedding-functor-Precategory
+      ( precategory-Subprecategory C P)
+      ( C)
+      ( inclusion-functor-Subprecategory C P)
+  pr1 is-embedding-inclusion-functor-Subprecategory =
+    is-emb-obj-inclusion-functor-Subprecategory
+  pr2 is-embedding-inclusion-functor-Subprecategory =
+    is-faithful-inclusion-functor-Subprecategory
+
+  embedding-Subprecategory :
+    embedding-Precategory (precategory-Subprecategory C P) C
+  pr1 embedding-Subprecategory = inclusion-functor-Subprecategory C P
+  pr2 embedding-Subprecategory = is-embedding-inclusion-functor-Subprecategory
 ```

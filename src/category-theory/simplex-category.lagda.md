@@ -24,8 +24,18 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-**The simplex category** is the category consisting of finite ordinals and
-[order-preserving maps](order-theory.order-preserving-maps-posets.md).
+**The simplex category** is the category consisting of inhabited finite total
+orders and
+[order-preserving maps](order-theory.order-preserving-maps-posets.md). However,
+we define it as the category whose objects are
+[natural numbers](elementary-number-theory.natural-numbers.md) and whose
+hom-[sets](foundation-core.sets.md) `hom n m` are order-preserving maps between
+the [standard finite sets](univalent-combinatorics.standard-finite-sets.md)
+`Fin (succ-ℕ n)` to `Fin (succ-ℕ m)` [equipped](foundation.structure.md) with
+the
+[standard ordering](elementary-number-theory.inequality-standard-finite-sets.md),
+and then show that it is
+[equivalent](category-theory.equivalences-of-precategories.md) to the former.
 
 ## Definition
 
@@ -117,6 +127,10 @@ pr2 (pr2 (pr2 simplex-Precategory)) =
 It remains to be formalized that the simplex category is univalent.
 
 ## Properties
+
+### The simplex category is equivalent to the category of inhabited finite total orders
+
+This remains to be formalized.
 
 ### The simplex category has a face map and degeneracy unique factorization system
 
