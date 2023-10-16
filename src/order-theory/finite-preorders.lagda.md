@@ -35,8 +35,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-We say that a preorder `P` is **finite** if `P` has finitely many elements and
-the ordering relation on `P` is decidable.
+We say that a [preorder](order-theory.preorders.md) `P` is **finite** if `P` has
+[finitely many elements](univalent-combinatorics.finite-types.md) and the
+ordering relation on `P` is [decidable](foundation.decidable-relations.md).
 
 ```agda
 module _
