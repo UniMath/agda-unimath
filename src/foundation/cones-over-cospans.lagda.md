@@ -27,9 +27,9 @@ open import foundation-core.whiskering-homotopies
 
 ## Idea
 
-A cone on a cospan `A --f--> X <--g-- B` with vertex `C` is a triple `(p,q,H)`
-consisting of a map `p : C → A`, a map `q : C → B`, and a homotopy `H`
-witnessing that the square
+A **cone over a [cospan](foundation.cospans.md)** `A -f-> X <-g- B` with domain
+`C` is a triple `(p, q, H)` consisting of a map `p : C → A`, a map `q : C → B`,
+and a homotopy `H` witnessing that the square
 
 ```text
       q
@@ -45,11 +45,7 @@ commutes.
 
 ## Definitions
 
-### Cones on cospans
-
-A cone on a cospan with a vertex C is a pair of functions from C into the
-domains of the maps in the cospan, equipped with a homotopy witnessing that the
-resulting square commutes.
+### Cones over cospans
 
 ```agda
 module _
@@ -76,7 +72,7 @@ module _
   coherence-square-cone = pr2 (pr2 c)
 ```
 
-### Dependent cones
+### Dependent cones over cospans
 
 ```agda
 cone-family :
@@ -95,13 +91,7 @@ cone-family {C = C} PX {f = f} {g} f' g' c PC =
     ( PC x)
 ```
 
-### Identifications of cones
-
-Next we characterize the identity type of the type of cones with a given vertex
-C. Note that in the definition of htpy-cone we do not use pattern matching on
-the cones c and c'. This is to ensure that the type htpy-cone f g c c' is a
-Σ-type for any c and c', not just for c and c' of the form (p , q , H) and (p' ,
-q' , H') respectively.
+### Identifications of cones over cospans
 
 ```agda
 module _
@@ -110,7 +100,8 @@ module _
   where
 
   coherence-htpy-cone :
-    (c c' : cone f g C) (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
+    (c c' : cone f g C)
+    (K : vertical-map-cone f g c ~ vertical-map-cone f g c')
     (L : horizontal-map-cone f g c ~ horizontal-map-cone f g c') → UU (l4 ⊔ l3)
   coherence-htpy-cone c c' K L =
     ( coherence-square-cone f g c ∙h (g ·l L)) ~
@@ -157,21 +148,20 @@ module _
   pr1 (extensionality-cone c c') = htpy-eq-cone c c'
   pr2 (extensionality-cone c c') = is-equiv-htpy-eq-cone c c'
 
-  eq-htpy-cone : (c c' : cone f g C) → htpy-cone c c' → (c ＝ c')
+  eq-htpy-cone : (c c' : cone f g C) → htpy-cone c c' → c ＝ c'
   eq-htpy-cone c c' = map-inv-equiv (extensionality-cone c c')
 ```
 
-### Precomposing cones
+### Precomposing cones over cospans with a map
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  {l1 l2 l3 l4 l5 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X)
   where
 
   cone-map :
-    {l4 l5 : Level} {C : UU l4} {C' : UU l5} →
-    cone f g C → (C' → C) → cone f g C'
+    {C : UU l4} → cone f g C → {C' : UU l5} → (C' → C) → cone f g C'
   pr1 (cone-map c h) = vertical-map-cone f g c ∘ h
   pr1 (pr2 (cone-map c h)) = horizontal-map-cone f g c ∘ h
   pr2 (pr2 (cone-map c h)) = coherence-square-cone f g c ·r h
@@ -227,18 +217,19 @@ module _
       ( coherence-square-cone f g c)
 ```
 
-### The swapping function on cones
+### The swapping function on cones over cospans
 
 ```agda
 swap-cone :
-  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
   (f : A → X) (g : B → X) → cone f g C → cone g f C
 pr1 (swap-cone f g c) = horizontal-map-cone f g c
 pr1 (pr2 (swap-cone f g c)) = vertical-map-cone f g c
 pr2 (pr2 (swap-cone f g c)) = inv-htpy (coherence-square-cone f g c)
 ```
 
-### Parallel cones
+### Parallel cones over cospans
 
 ```agda
 module _
@@ -271,3 +262,9 @@ module _
     Σ ( vertical-map-cone f g c ~ vertical-map-cone f' g' c')
       ( fam-htpy-parallel-cone c c')
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

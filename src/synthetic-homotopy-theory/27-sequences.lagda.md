@@ -60,16 +60,16 @@ equiv-Seq A B =
     ( λ e → (n : ℕ) →
       naturality-hom-Seq A B (λ n → map-equiv (e n)) n)
 
-reflexive-equiv-Seq :
+id-equiv-Seq :
   { l1 : Level} (A : Sequence l1) → equiv-Seq A A
-reflexive-equiv-Seq A =
+id-equiv-Seq A =
   pair
     ( λ n → id-equiv)
     ( λ n → refl-htpy)
 
 equiv-eq-Seq :
   { l1 : Level} (A B : Sequence l1) → Id A B → equiv-Seq A B
-equiv-eq-Seq A .A refl = reflexive-equiv-Seq A
+equiv-eq-Seq A .A refl = id-equiv-Seq A
 
 is-contr-total-equiv-Seq :
   { l1 : Level} (A : Sequence l1) →

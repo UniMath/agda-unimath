@@ -152,5 +152,5 @@ equiv-is-finite-domain-is-finite-fiber {A = A} B f =
       is-finite-equiv
         ( equiv-total-fiber f)
         ( is-finite-Σ (is-finite-type-𝔽 B) P))
-    ( λ P → is-finite-fiber f P ( is-finite-type-𝔽 B))
+    ( λ P → is-finite-fiber f P (is-finite-type-𝔽 B))
 ```

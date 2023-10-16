@@ -143,7 +143,6 @@ module _
     symmetric-operation-is-commutative f H (standard-unordered-pair x y) ＝
     f x y
   compute-symmetric-operation-is-commutative f H x y =
-
     htpy-universal-property-set-quotient-trunc-Prop B
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
