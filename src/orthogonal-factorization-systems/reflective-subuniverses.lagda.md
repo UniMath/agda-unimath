@@ -32,7 +32,7 @@ precisely the types in the reflective subuniverse.
 
 ## Definitions
 
-### The `is-reflective-subuniverse` predicate on subuniverses
+### The predicate on subuniverses of being reflective
 
 ```agda
 is-reflective-subuniverse :

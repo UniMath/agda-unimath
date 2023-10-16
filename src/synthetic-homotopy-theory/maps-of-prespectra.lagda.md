@@ -7,21 +7,15 @@ module synthetic-homotopy-theory.maps-of-prespectra where
 <details><summary>Imports</summary>
 
 ```agda
-open import elementary-number-theory.addition-natural-numbers
 open import elementary-number-theory.natural-numbers
 
-open import foundation.commuting-squares-of-maps
 open import foundation.dependent-pair-types
-open import foundation.identity-types
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
 open import structured-types.commuting-squares-of-pointed-maps
 open import structured-types.pointed-maps
-open import structured-types.pointed-types
 
 open import synthetic-homotopy-theory.functoriality-loop-spaces
-open import synthetic-homotopy-theory.loop-spaces
 open import synthetic-homotopy-theory.prespectra
 ```
 

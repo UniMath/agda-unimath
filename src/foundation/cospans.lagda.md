@@ -139,3 +139,9 @@ module _
 ## See also
 
 - The formal dual of cospans is [spans](foundation.spans.md).
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}
