@@ -84,7 +84,7 @@ is-inl-Fin k x = Σ (Fin k) (λ y → inl y ＝ x)
 is-neg-one-is-not-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   ¬ (is-inl-Fin k x) → is-neg-one-Fin (succ-ℕ k) x
-is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (pair x refl))
+is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (x , refl))
 is-neg-one-is-not-inl-Fin k (inr star) H = refl
 
 inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
@@ -127,14 +127,14 @@ raise-Fin-Set l k = raise-Set l (Fin-Set k)
 ```agda
 is-decidable-is-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin k x)
-is-decidable-is-inl-Fin k (inl x) = inl (pair x refl)
+is-decidable-is-inl-Fin k (inl x) = inl (x , refl)
 is-decidable-is-inl-Fin k (inr star) = inr α
   where
   α : is-inl-Fin k (inr star) → empty
-  α (pair y ())
+  α (y , ())
 ```
 
-### Fin 1 is contractible
+### `Fin 1` is contractible
 
 ```agda
 map-equiv-Fin-one-ℕ : Fin 1 → unit
@@ -173,7 +173,7 @@ is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
 ```
 
-### The inclusion of Fin k into ℕ
+### The inclusion of `Fin k` into `ℕ`
 
 ```agda
 nat-Fin : (k : ℕ) → Fin k → ℕ
