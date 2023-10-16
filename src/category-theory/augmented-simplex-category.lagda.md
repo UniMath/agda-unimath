@@ -24,8 +24,8 @@ open import order-theory.order-preserving-maps-posets
 
 ## Idea
 
-**The augmented simplex category** is the category consisting of finite total
-orders and
+**The augmented simplex category** is the category consisting of
+[finite total orders](order-theory.finite-total-orders.md) and
 [order-preserving maps](order-theory.order-preserving-maps-posets.md).
 
 ## Definition
