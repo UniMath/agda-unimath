@@ -63,7 +63,7 @@ module _
     is-in-Normal-Subgroup H M (map-hom-Group G H f x)
 ```
 
-### The functoriality of quotient groups
+### The functoriality of the quotient groups
 
 ```agda
 module _

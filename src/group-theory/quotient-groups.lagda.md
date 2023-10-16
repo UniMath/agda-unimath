@@ -14,14 +14,18 @@ open import foundation.binary-functoriality-set-quotients
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-quotients
 open import foundation.identity-types
+open import foundation.logical-equivalences
 open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
 open import foundation.subtypes
 open import foundation.surjective-maps
+open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universal-property-set-quotients
 open import foundation.universe-levels
 
@@ -74,6 +78,25 @@ module _
     nullifies-normal-subgroup-hom-Group
       ( hom-nullifying-hom-Group H f) H
   nullifies-nullifying-hom-Group H = pr2
+
+  compute-nullifying-hom-Group :
+    (H : Normal-Subgroup l3 G) →
+    Σ ( reflecting-map-Equivalence-Relation
+        ( eq-rel-congruence-Normal-Subgroup G H)
+        ( type-Group K))
+      ( λ f → preserves-mul-Group G K (pr1 f)) ≃
+    nullifying-hom-Group H
+  compute-nullifying-hom-Group H =
+    ( equiv-tot
+      ( λ f →
+        equiv-iff
+          {!!}
+          ( Π-Prop
+            ( type-Group G)
+            ( λ x → {!!}))
+          {!!}
+          {!!})) ∘e
+    ( equiv-right-swap-Σ)
 ```
 
 ### The universal property of quotient groups
@@ -410,18 +433,43 @@ module _
 
 #### The universal property of the quotient group
 
+**Proof:** Let `G` and `H` be groups and let `N` be a normal subgroup of `G`. Our goal is to show that the precomposition function
+
+```text
+  hom-Group G/N H → nullifying-hom-Group G H N
+```
+
+is an equivalence. To see this, note that the above map is a composite of the maps
+
+```text
+  hom-Group G/N H → Σ (Σ (G → H) (λ f → is-nullifying f)) (λ u → is-hom (pr1 u))
+                  → Σ (hom-Group G H) (λ f → is-nullifying f)
+```
+
+The second map is an equivalence since it merely changes the order of the components in the dependent pair type. The first map is an equivalence by the universal property of set quotients, by which we have:
+
+```text
+  (G/N → H) ≃ Σ (G → H) (is-nullifying f).
+```
+
 ```agda
 module _
   {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
   where
 
-  is-quotient-group-quotient-Group :
-    {l : Level} →
-    universal-property-quotient-Group G N
-      ( quotient-Group G N)
-      ( nullifying-quotient-hom-Group G N)
-  is-quotient-group-quotient-Group =
-    {!!}
+  abstract
+    is-quotient-group-quotient-Group :
+      universal-property-quotient-Group G N
+        ( quotient-Group G N)
+        ( nullifying-quotient-hom-Group G N)
+    is-quotient-group-quotient-Group H =
+      is-equiv-comp-htpy
+        {!!}
+        ( map-right-swap-Σ)
+        {! map-Σ-map-base!}
+        {!!}
+        {!!}
+        ( is-equiv-map-right-swap-Σ)
 ```
 
 ## Properties
