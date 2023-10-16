@@ -42,4 +42,6 @@ module _
   is-prop-is-perfect-Subgroup = is-prop-type-Prop is-perfect-prop-Subgroup
 ```
 
+## External links
+
 A wikidata identifier was not available for this concept.
