@@ -415,12 +415,12 @@ module _
       apply-universal-property-trunc-Prop
         ( is-surj-g x)
         ( trunc-Prop (fiber f x))
-        ( λ { (b , refl) →
-              apply-universal-property-trunc-Prop
-                ( is-surj-h b)
-                ( trunc-Prop (fiber f (g b)))
-                ( λ { (a , refl) →
-                      unit-trunc-Prop (a , H a)})})
+        ( λ where
+          ( b , refl) →
+            apply-universal-property-trunc-Prop
+              ( is-surj-h b)
+              ( trunc-Prop (fiber f (g b)))
+              ( λ where (a , refl) → unit-trunc-Prop (a , H a)))
 
   is-surjective-comp :
     {g : B → X} {h : A → B} →
@@ -483,8 +483,7 @@ module _
       apply-universal-property-trunc-Prop
         ( is-surj-f x)
         ( trunc-Prop (fiber g x))
-        ( λ { (a , refl) →
-              unit-trunc-Prop (h a , inv (H a))})
+        ( λ where (a , refl) → unit-trunc-Prop (h a , inv (H a)))
 
   is-surjective-left-factor :
     {g : B → X} (h : A → B) → is-surjective (g ∘ h) → is-surjective g

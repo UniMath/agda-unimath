@@ -36,9 +36,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A walk in an undirected graph consists of a list of edges that connect the
-starting point with the end point. Walks may repeat edges and pass through the
-same vertex multiple times.
+A **walk** in an [undirected graph](graph-theory.undirected-graphs.md) consists
+of a [list](lists.lists.md) of edges that connect the starting point with the
+end point. Walks may repeat edges and pass through the same vertex multiple
+times.
 
 ## Definitions
 
@@ -512,3 +513,10 @@ module _
   eq-constant-walk-Undirected-Graph {y} =
     map-inv-is-equiv (is-equiv-constant-walk-eq-Undirected-Graph y)
 ```
+
+## External links
+
+- [Path](https://www.wikidata.org/entity/Q917421) on Wikidata
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld

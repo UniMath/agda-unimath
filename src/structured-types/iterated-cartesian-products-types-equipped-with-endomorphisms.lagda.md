@@ -1,7 +1,9 @@
 # Iterated cartesian products of types equipped with endomorphisms
 
 ```agda
-module structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms where
+module
+  structured-types.iterated-cartesian-products-types-equipped-with-endomorphisms
+  where
 ```
 
 <details><summary>Imports</summary>
@@ -26,9 +28,11 @@ endomorphism.
 ## Definitions
 
 ```agda
-iterated-product-Endo-list :
-  {l : Level} → list (Endo l) → Endo l
-iterated-product-Endo-list nil = trivial-Endo
-iterated-product-Endo-list (cons A L) =
-  product-Endo A (iterated-product-Endo-list L)
+iterated-product-list-Type-With-Endomorphism :
+  {l : Level} → list (Type-With-Endomorphism l) → Type-With-Endomorphism l
+iterated-product-list-Type-With-Endomorphism nil =
+  trivial-Type-With-Endomorphism
+iterated-product-list-Type-With-Endomorphism (cons A L) =
+  prod-Type-With-Endomorphism A
+    ( iterated-product-list-Type-With-Endomorphism L)
 ```

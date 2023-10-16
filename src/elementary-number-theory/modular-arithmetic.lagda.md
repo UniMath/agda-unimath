@@ -32,6 +32,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.sets
 open import foundation.surjective-maps
@@ -60,6 +61,10 @@ Some modular arithmetic was already defined in
 `modular-arithmetic-standard-finite-types`. Here we collect those results in a
 more convenient format that also includes the integers modulo `0`, i.e., the
 integers.
+
+The fact that `ℤ-Mod n` is a [ring](ring-theory.rings.md) for every `n : ℕ` is
+recorded in
+[`elementary-number-theory.standard-cyclic-rings`](elementary-number-theory.standard-cyclic-rings.md).
 
 ```agda
 ℤ-Mod : ℕ → UU lzero
@@ -166,9 +171,9 @@ succ-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
 succ-ℤ-Mod zero-ℕ = succ-ℤ
 succ-ℤ-Mod (succ-ℕ k) = succ-Fin (succ-ℕ k)
 
-ℤ-Mod-Endo : (k : ℕ) → Endo lzero
-pr1 (ℤ-Mod-Endo k) = ℤ-Mod k
-pr2 (ℤ-Mod-Endo k) = succ-ℤ-Mod k
+ℤ-Mod-Type-With-Endomorphism : (k : ℕ) → Type-With-Endomorphism lzero
+pr1 (ℤ-Mod-Type-With-Endomorphism k) = ℤ-Mod k
+pr2 (ℤ-Mod-Type-With-Endomorphism k) = succ-ℤ-Mod k
 
 abstract
   is-equiv-succ-ℤ-Mod : (k : ℕ) → is-equiv (succ-ℤ-Mod k)
@@ -768,12 +773,12 @@ is-one-is-fixed-point-succ-ℤ-Mod k x p =
                 ( ap (succ-ℤ-Mod k) (is-section-int-ℤ-Mod k x))))))))
 
 has-no-fixed-points-succ-ℤ-Mod :
-  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → ¬ (succ-ℤ-Mod k x ＝ x)
+  (k : ℕ) (x : ℤ-Mod k) → is-not-one-ℕ k → succ-ℤ-Mod k x ≠ x
 has-no-fixed-points-succ-ℤ-Mod k x =
   map-neg (is-one-is-fixed-point-succ-ℤ-Mod k x)
 
 has-no-fixed-points-succ-Fin :
-  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → ¬ (succ-Fin k x ＝ x)
+  {k : ℕ} (x : Fin k) → is-not-one-ℕ k → succ-Fin k x ≠ x
 has-no-fixed-points-succ-Fin {succ-ℕ k} x =
   has-no-fixed-points-succ-ℤ-Mod (succ-ℕ k) x
 ```

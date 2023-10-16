@@ -63,18 +63,18 @@ We construct the cone for two maps into the unit type.
 Cartesian products are a special case of pullbacks.
 
 ```agda
-  gap-prod : A × B → canonical-pullback (const A unit star) (const B unit star)
+  gap-prod : A × B → standard-pullback (const A unit star) (const B unit star)
   gap-prod = gap (const A unit star) (const B unit star) cone-prod
 
   inv-gap-prod :
-    canonical-pullback (const A unit star) (const B unit star) → A × B
+    standard-pullback (const A unit star) (const B unit star) → A × B
   pr1 (inv-gap-prod (pair a (pair b p))) = a
   pr2 (inv-gap-prod (pair a (pair b p))) = b
 
   abstract
     is-section-inv-gap-prod : (gap-prod ∘ inv-gap-prod) ~ id
     is-section-inv-gap-prod (pair a (pair b p)) =
-      map-extensionality-canonical-pullback
+      map-extensionality-standard-pullback
         ( const A unit star)
         ( const B unit star)
         ( refl)

@@ -25,6 +25,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.raising-universe-levels
@@ -91,13 +92,13 @@ inr-Fin (succ-ℕ k) (inl x) = inl (inr-Fin k x)
 inr-Fin (succ-ℕ k) (inr star) = inr star
 
 neq-inl-Fin-inr-Fin :
-  (n : ℕ) → (k : Fin n) → ¬ (inl-Fin n k ＝ inr-Fin n k)
+  (n : ℕ) → (k : Fin n) → inl-Fin n k ≠ inr-Fin n k
 neq-inl-Fin-inr-Fin (succ-ℕ n) (inl k) =
   neq-inl-Fin-inr-Fin n k ∘ is-injective-inl
 neq-inl-Fin-inr-Fin (succ-ℕ n) (inr star) = neq-inl-inr
 
 neq-inr-Fin-inl-Fin :
-  (n : ℕ) → (k : Fin n) → ¬ (inr-Fin n k ＝ inl-Fin n k)
+  (n : ℕ) → (k : Fin n) → inr-Fin n k ≠ inl-Fin n k
 neq-inr-Fin-inl-Fin (succ-ℕ n) (inl k) =
   neq-inr-Fin-inl-Fin n k ∘ is-injective-inl
 neq-inr-Fin-inl-Fin (succ-ℕ n) (inr k) = neq-inr-inl
@@ -252,9 +253,9 @@ succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
 succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
 
-Fin-Endo : ℕ → Endo lzero
-pr1 (Fin-Endo k) = Fin k
-pr2 (Fin-Endo k) = succ-Fin k
+Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
+pr1 (Fin-Type-With-Endomorphism k) = Fin k
+pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
 ```
 
 ```agda

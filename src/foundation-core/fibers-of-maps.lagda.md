@@ -23,9 +23,9 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Given a map `f : A → B` and a point `b : B`, the fiber of `f` at `b` is the
-preimage of `f` at `b`. In other words, it consists of the elements `a : A`
-equipped with an identification `Id (f a) b`.
+Given a map `f : A → B` and an element `b : B`, the **fiber** of `f` at `b` is
+the preimage of `f` at `b`. In other words, it consists of the elements `a : A`
+equipped with an [identification](foundation-core.identity-types.md) `f a ＝ b`.
 
 ## Definition
 
@@ -403,3 +403,10 @@ reduce-Π-fiber :
   (C : B → UU l3) → ((y : B) → fiber f y → C y) ≃ ((x : A) → C (f x))
 reduce-Π-fiber f C = reduce-Π-fiber' f (λ y z → C y)
 ```
+
+## Table of files about fibers of maps
+
+The following table lists files that are about fibers of maps as a general
+concept.
+
+{{#include tables/fibers-of-maps.md}}

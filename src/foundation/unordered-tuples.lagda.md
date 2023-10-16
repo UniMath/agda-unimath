@@ -26,7 +26,7 @@ open import foundation-core.identity-types
 open import foundation-core.sets
 open import foundation-core.whiskering-homotopies
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
@@ -84,7 +84,7 @@ module _
 
   type-complement-point-unordered-tuple-UU-Fin : UU-Fin lzero n
   type-complement-point-unordered-tuple-UU-Fin =
-    complement-point-UU-Fin n
+    complement-element-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
 
   type-complement-point-unordered-tuple : UU lzero
@@ -94,13 +94,13 @@ module _
   inclusion-complement-point-unordered-tuple :
     type-complement-point-unordered-tuple → type-unordered-tuple (succ-ℕ n) t
   inclusion-complement-point-unordered-tuple =
-    inclusion-complement-point-UU-Fin n
+    inclusion-complement-element-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
 
   unordered-tuple-complement-point-type-unordered-tuple :
     unordered-tuple n A
   pr1 unordered-tuple-complement-point-type-unordered-tuple =
-    complement-point-UU-Fin n
+    complement-element-UU-Fin n
       ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) t) i)
   pr2 unordered-tuple-complement-point-type-unordered-tuple =
     ( element-unordered-tuple (succ-ℕ n) t) ∘

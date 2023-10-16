@@ -1,7 +1,7 @@
-# Rings of modular arithmetic
+# The standard cyclic rings
 
 ```agda
-module elementary-number-theory.rings-of-modular-arithmetic where
+module elementary-number-theory.standard-cyclic-rings where
 ```
 
 <details><summary>Imports</summary>
@@ -10,12 +10,12 @@ module elementary-number-theory.rings-of-modular-arithmetic where
 open import commutative-algebra.commutative-rings
 
 open import elementary-number-theory.addition-integers
-open import elementary-number-theory.groups-of-modular-arithmetic
 open import elementary-number-theory.integers
 open import elementary-number-theory.modular-arithmetic
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 open import elementary-number-theory.ring-of-integers
+open import elementary-number-theory.standard-cyclic-groups
 
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
@@ -29,6 +29,7 @@ open import foundation.universe-levels
 
 open import foundation-core.function-types
 
+open import group-theory.cyclic-groups
 open import group-theory.generating-elements-groups
 
 open import ring-theory.cyclic-rings
@@ -43,12 +44,12 @@ open import univalent-combinatorics.standard-finite-types
 ## Idea
 
 The **standard cyclic rings** `ℤ/n` are the [rings](ring-theory.rings.md) of
-[modular arithmetic](elementary-number-theory.modular-arithmetic.md).
-
-The fact that the rings `ℤ/n` are [cyclic](ring-theory.cyclic-rings.md) remains
-to be shown.
+[integers](elementary-number-theory.integers.md)
+[modulo `n`](elementary-number-theory.modular-arithmetic.md).
 
 ## Definitions
+
+### The standard cyclic rings
 
 ```agda
 ℤ-Mod-Ring : ℕ → Ring lzero
@@ -66,32 +67,32 @@ pr1 (ℤ-Mod-Commutative-Ring n) = ℤ-Mod-Ring n
 pr2 (ℤ-Mod-Commutative-Ring n) = commutative-mul-ℤ-Mod n
 ```
 
-## Properties
-
-### Rings of modular arithmetic are cyclic
+### Integer multiplication in the standard cyclic rings
 
 ```agda
-integer-multiple-one-ℤ-Ring :
-  (k : ℤ) →
-  ( integer-multiple-Ring (ℤ-Mod-Ring zero-ℕ) k (one-ℤ-Mod zero-ℕ)) ＝
-  ( k)
-integer-multiple-one-ℤ-Ring (inl zero-ℕ) = refl
-integer-multiple-one-ℤ-Ring (inl (succ-ℕ n)) =
-  ap pred-ℤ (integer-multiple-one-ℤ-Ring (inl n))
-integer-multiple-one-ℤ-Ring (inr (inl star)) = refl
-integer-multiple-one-ℤ-Ring (inr (inr zero-ℕ)) = refl
-integer-multiple-one-ℤ-Ring (inr (inr (succ-ℕ n))) =
-  ap succ-ℤ (integer-multiple-one-ℤ-Ring (inr (inr n)))
+integer-multiple-ℤ-Mod :
+  (n : ℕ) → ℤ → ℤ-Mod n → ℤ-Mod n
+integer-multiple-ℤ-Mod n k x = integer-multiple-Ring (ℤ-Mod-Ring n) k x
+```
 
+## Properties
+
+### The negative-one element of the ring `ℤ/n` coincides with the element `neg-one-ℤ-Mod n`
+
+```agda
 is-neg-one-neg-one-ℤ-Mod :
-  ( n : ℕ) → (neg-one-Ring (ℤ-Mod-Ring n)) ＝ (neg-one-ℤ-Mod n)
+  ( n : ℕ) → neg-one-Ring (ℤ-Mod-Ring n) ＝ neg-one-ℤ-Mod n
 is-neg-one-neg-one-ℤ-Mod zero-ℕ = refl
 is-neg-one-neg-one-ℤ-Mod (succ-ℕ n) = is-neg-one-neg-one-Fin n
+```
 
+### The integer multiple `k · 1` is equal to `[k] : ℤ-Mod n`
+
+```agda
 integer-multiplication-by-one-preserves-succ-ℤ :
   (n : ℕ) (x : ℤ) →
-  integer-multiple-Ring (ℤ-Mod-Ring n) (succ-ℤ x) (one-ℤ-Mod n) ＝
-  succ-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+  integer-multiple-ℤ-Mod n (succ-ℤ x) (one-ℤ-Mod n) ＝
+  succ-ℤ-Mod n (integer-multiple-ℤ-Mod n x (one-ℤ-Mod n))
 integer-multiplication-by-one-preserves-succ-ℤ n x =
   ( integer-multiple-succ-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n)) ∙
   ( inv
@@ -101,11 +102,11 @@ integer-multiplication-by-one-preserves-succ-ℤ n x =
 
 integer-multiplication-by-one-preserves-pred-ℤ :
   (n : ℕ) (x : ℤ) →
-  integer-multiple-Ring (ℤ-Mod-Ring n) (pred-ℤ x) (one-ℤ-Mod n) ＝
-  pred-ℤ-Mod n (integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+  integer-multiple-ℤ-Mod n (pred-ℤ x) (one-ℤ-Mod n) ＝
+  pred-ℤ-Mod n (integer-multiple-ℤ-Mod n x (one-ℤ-Mod n))
 integer-multiplication-by-one-preserves-pred-ℤ n x =
   ( ap
-    ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n))
+    ( λ k → integer-multiple-ℤ-Mod n k (one-ℤ-Mod n))
     ( is-right-add-neg-one-pred-ℤ x)) ∙
   ( distributive-integer-multiple-add-Ring
     ( ℤ-Mod-Ring n)
@@ -115,24 +116,22 @@ integer-multiplication-by-one-preserves-pred-ℤ n x =
   ( ap
     ( λ k →
       add-ℤ-Mod n
-      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+      ( integer-multiple-ℤ-Mod n x (one-ℤ-Mod n))
       ( k))
     ( integer-multiple-neg-one-Ring (ℤ-Mod-Ring n) (one-ℤ-Mod n))) ∙
   ( ap
     ( λ k →
       add-ℤ-Mod n
-      ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))
+      ( integer-multiple-ℤ-Mod n x (one-ℤ-Mod n))
       ( k))
     ( is-neg-one-neg-one-ℤ-Mod n)) ∙
     ( inv
       ( is-left-add-neg-one-pred-ℤ-Mod'
         ( n)
-        ( integer-multiple-Ring (ℤ-Mod-Ring n) x (one-ℤ-Mod n))))
+        ( integer-multiple-ℤ-Mod n x (one-ℤ-Mod n))))
 
 compute-integer-multiple-one-ℤ-Mod :
-  ( n : ℕ) →
-  ( λ k → integer-multiple-Ring (ℤ-Mod-Ring n) k (one-ℤ-Mod n)) ~
-  ( mod-ℤ n)
+  ( n : ℕ) → (λ k → integer-multiple-ℤ-Mod n k (one-ℤ-Mod n)) ~ mod-ℤ n
 compute-integer-multiple-one-ℤ-Mod zero-ℕ x = integer-multiple-one-ℤ-Ring x
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl zero-ℕ) =
   ( integer-multiple-neg-one-Ring
@@ -147,7 +146,7 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl (succ-ℕ x)) =
   ( ap
     ( pred-ℤ-Mod (succ-ℕ n))
     ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inl x))) ∙
-  (inv (preserves-predecessor-mod-ℤ (succ-ℕ n) (inl x)))
+  ( inv (preserves-predecessor-mod-ℤ (succ-ℕ n) (inl x)))
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inl star)) = refl
 compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr zero-ℕ)) =
   ( integer-multiple-one-Ring
@@ -161,27 +160,42 @@ compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr (succ-ℕ x))) =
   ( ap
     ( succ-ℤ-Mod (succ-ℕ n))
     ( compute-integer-multiple-one-ℤ-Mod (succ-ℕ n) (inr (inr x)))) ∙
-  (inv (preserves-successor-mod-ℤ (succ-ℕ n) (inr (inr x))))
+  ( inv (preserves-successor-mod-ℤ (succ-ℕ n) (inr (inr x))))
+```
 
-is-surjective-hom-element-one-ℤ-Mod-Ring :
+### The standard cyclic rings are cyclic
+
+```agda
+is-surjective-hom-element-one-ℤ-Mod :
   ( n : ℕ) → is-surjective-hom-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
-is-surjective-hom-element-one-ℤ-Mod-Ring n =
+is-surjective-hom-element-one-ℤ-Mod n =
   is-surjective-htpy
     ( compute-integer-multiple-one-ℤ-Mod n)
     ( is-surjective-mod-ℤ n)
 
-is-generating-element-one-ℤ-Mod-Ring :
+is-generating-element-one-ℤ-Mod :
   ( n : ℕ) → is-generating-element-Group (ℤ-Mod-Group n) (one-ℤ-Mod n)
-is-generating-element-one-ℤ-Mod-Ring n =
+is-generating-element-one-ℤ-Mod n =
   is-generating-element-is-surjective-hom-element-Group
     ( ℤ-Mod-Group n)
     ( one-ℤ-Mod n)
-    ( is-surjective-hom-element-one-ℤ-Mod-Ring n)
+    ( is-surjective-hom-element-one-ℤ-Mod n)
+
+is-cyclic-ℤ-Mod-Group :
+  ( n : ℕ) → is-cyclic-Group (ℤ-Mod-Group n)
+is-cyclic-ℤ-Mod-Group n =
+  intro-∃
+    ( one-ℤ-Mod n)
+    ( is-generating-element-one-ℤ-Mod n)
 
 is-cyclic-ℤ-Mod-Ring :
   ( n : ℕ) → is-cyclic-Ring (ℤ-Mod-Ring n)
-is-cyclic-ℤ-Mod-Ring n =
-  intro-∃
-    ( one-ℤ-Mod n)
-    ( is-generating-element-one-ℤ-Mod-Ring n)
+is-cyclic-ℤ-Mod-Ring =
+  is-cyclic-ℤ-Mod-Group
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

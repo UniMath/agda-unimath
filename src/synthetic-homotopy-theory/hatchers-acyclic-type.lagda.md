@@ -245,3 +245,9 @@ module _
                       ( interchange-concat-Ω² a b a b)))))))))
         ( is-contr-total-path refl)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

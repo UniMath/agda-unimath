@@ -40,7 +40,7 @@ coherence-square-maps :
   (top : C → B) (left : C → A) (right : B → X) (bottom : A → X) →
   UU (l3 ⊔ l4)
 coherence-square-maps top left right bottom =
-  (bottom ∘ left) ~ (right ∘ top)
+  bottom ∘ left ~ right ∘ top
 ```
 
 ## Properties

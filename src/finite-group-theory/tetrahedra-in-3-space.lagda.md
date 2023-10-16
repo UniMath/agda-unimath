@@ -12,7 +12,7 @@ open import foundation.empty-types
 open import foundation.universe-levels
 
 open import univalent-combinatorics.2-element-decidable-subtypes
-open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.cyclic-finite-types
 open import univalent-combinatorics.finite-types
 ```
 

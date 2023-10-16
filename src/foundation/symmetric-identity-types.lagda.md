@@ -109,16 +109,18 @@ module _
       ( map-compute-symmetric-Id ∘ map-inv-compute-symmetric-Id) ~ id
     is-section-map-inv-compute-symmetric-Id refl = refl
 
-    is-retraction-map-inv-compute-symmetric-Id :
-      ( map-inv-compute-symmetric-Id ∘ map-compute-symmetric-Id) ~ id
-    is-retraction-map-inv-compute-symmetric-Id (x , f) =
-      eq-Eq-symmetric-Id
-        ( standard-unordered-pair a b)
-        ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
-        ( x , f)
-        ( ( inv (f (zero-Fin 1))) ,
-          ( λ { ( inl (inr star)) → inv (left-inv (f (zero-Fin 1))) ;
-                ( inr star) → refl}))
+    abstract
+      is-retraction-map-inv-compute-symmetric-Id :
+        ( map-inv-compute-symmetric-Id ∘ map-compute-symmetric-Id) ~ id
+      is-retraction-map-inv-compute-symmetric-Id (x , f) =
+        eq-Eq-symmetric-Id
+          ( standard-unordered-pair a b)
+          ( map-inv-compute-symmetric-Id (map-compute-symmetric-Id (x , f)))
+          ( x , f)
+          ( ( inv (f (zero-Fin 1))) ,
+            ( λ where
+              ( inl (inr star)) → inv (left-inv (f (zero-Fin 1)))
+              ( inr star) → refl))
 
     is-equiv-map-compute-symmetric-Id :
       is-equiv (map-compute-symmetric-Id)

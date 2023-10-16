@@ -117,22 +117,23 @@ module _
   leq-or-strict-greater-Decidable-Preorder x y =
     leq-Decidable-Total-Preorder x y + le-Decidable-Total-Preorder y x
 
-  helper-is-leq-or-strict-greater-Decidable-Total-Preorder :
-    (x y : type-Decidable-Total-Preorder) →
-    is-decidable (leq-Decidable-Total-Preorder x y) →
-    leq-or-strict-greater-Decidable-Preorder x y
-  helper-is-leq-or-strict-greater-Decidable-Total-Preorder x y (inl p) =
-    inl p
-  helper-is-leq-or-strict-greater-Decidable-Total-Preorder x y (inr p) =
-    inr
-      ( ( λ {refl → p (refl-leq-Decidable-Total-Preorder x)}) ,
-        ( apply-universal-property-trunc-Prop
-          ( is-total-Decidable-Total-Preorder y x)
-          ( leq-Decidable-Total-Preorder-Prop y x)
-          ( ind-coprod
-              ( λ _ → leq-Decidable-Total-Preorder y x)
-              ( id)
-              ( λ q → ex-falso (p q)))))
+  abstract
+    helper-is-leq-or-strict-greater-Decidable-Total-Preorder :
+      (x y : type-Decidable-Total-Preorder) →
+      is-decidable (leq-Decidable-Total-Preorder x y) →
+      leq-or-strict-greater-Decidable-Preorder x y
+    helper-is-leq-or-strict-greater-Decidable-Total-Preorder x y (inl p) =
+      inl p
+    helper-is-leq-or-strict-greater-Decidable-Total-Preorder x y (inr p) =
+      inr
+        ( ( λ where refl → p (refl-leq-Decidable-Total-Preorder x)) ,
+          ( apply-universal-property-trunc-Prop
+            ( is-total-Decidable-Total-Preorder y x)
+            ( leq-Decidable-Total-Preorder-Prop y x)
+            ( ind-coprod
+                ( λ _ → leq-Decidable-Total-Preorder y x)
+                ( id)
+                ( ex-falso ∘ p))))
 
   is-leq-or-strict-greater-Decidable-Total-Preorder :
     (x y : type-Decidable-Total-Preorder) →

@@ -30,6 +30,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -137,7 +138,7 @@ module _
 ```agda
 module _
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
-  (np : ¬ (Id x y))
+  (np : x ≠ y)
   where
 
   type-prop-standard-2-Element-Decidable-Subtype : X → UU l
@@ -207,7 +208,7 @@ module _
 
 module _
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
-  (np : ¬ (Id x y))
+  (np : x ≠ y)
   where
 
   is-commutative-standard-2-Element-Decidable-Subtype :
@@ -244,7 +245,7 @@ module _
 
 module _
   {l : Level} {X : UU l} (d : has-decidable-equality X) {x y z w : X}
-  (np : ¬ (Id x y)) (nq : ¬ (Id z w)) (r : Id x z) (s : Id y w)
+  (np : x ≠ y) (nq : z ≠ w) (r : x ＝ z) (s : y ＝ w)
   where
 
   eq-equal-elements-standard-2-Element-Decidable-Subtype :
@@ -295,7 +296,7 @@ module _
     map-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)
 
   compute-swap-2-Element-Decidable-Subtype :
-    (x y : type-2-Element-Decidable-Subtype P) → ¬ (Id x y) →
+    (x y : type-2-Element-Decidable-Subtype P) → x ≠ y →
     Id (map-swap-2-Element-Decidable-Subtype x) y
   compute-swap-2-Element-Decidable-Subtype =
     compute-swap-2-Element-Type (2-element-type-2-Element-Decidable-Subtype P)

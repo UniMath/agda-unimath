@@ -13,7 +13,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.universe-levels
 
-open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.cyclic-finite-types
 open import univalent-combinatorics.finite-types
 ```
 

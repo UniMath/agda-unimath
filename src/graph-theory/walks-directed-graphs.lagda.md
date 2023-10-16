@@ -22,7 +22,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.negation
+open import foundation.negated-equality
 open import foundation.raising-universe-levels
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -36,10 +36,11 @@ open import graph-theory.morphisms-directed-graphs
 
 ## Idea
 
-A walk in a directed graph from a vertex `x` to a vertex `y` is a list of edges
-that connect `x` to `y`. Since every journey begins with a single step, we
-define the cons operation on walks in directed graphs with an edge from the
-source in the first argument, and a walk to the target in the second argument.
+A **walk** in a [directed graph](graph-theory.directed-graphs.md) from a vertex
+`x` to a vertex `y` is a [list](lists.lists.md) of edges that connect `x` to
+`y`. Since every journey begins with a single step, we define the `cons`
+operation on walks in directed graphs with an edge from the source in the first
+argument, and a walk to the target in the second argument.
 
 ## Definitions
 
@@ -420,7 +421,7 @@ module _
   neq-cons-refl-walk-Directed-Graph :
     (y : vertex-Directed-Graph G) (e : edge-Directed-Graph G x y) →
     (w : walk-Directed-Graph G y x) →
-    ¬ (cons-walk-Directed-Graph e w ＝ refl-walk-Directed-Graph)
+    cons-walk-Directed-Graph e w ≠ refl-walk-Directed-Graph
   neq-cons-refl-walk-Directed-Graph y e w ()
 ```
 
@@ -779,3 +780,10 @@ module _
   walk-last-stage-walk-Directed-Graph e (cons-walk-Directed-Graph f w) =
     cons-walk-Directed-Graph e (walk-last-stage-walk-Directed-Graph f w)
 ```
+
+## External links
+
+- [Path](https://www.wikidata.org/entity/Q917421) on Wikidata
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld

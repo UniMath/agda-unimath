@@ -27,3 +27,9 @@ open import univalent-combinatorics.standard-finite-types
 bracelet : ℕ → ℕ → UU (lsuc lzero)
 bracelet m n = Σ (Polygon m) (λ X → vertex-Polygon m X → Fin n)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

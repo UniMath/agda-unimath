@@ -230,16 +230,18 @@ module _
   is-section-functional-vec-vec .(succ-ℕ _) (a ∷ v) =
     ap (λ u → a ∷ u) (is-section-functional-vec-vec _ v)
 
-  is-retraction-functional-vec-vec :
-    (n : ℕ) → (functional-vec-vec n ∘ listed-vec-functional-vec n) ~ id
-  is-retraction-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
-  is-retraction-functional-vec-vec (succ-ℕ n) v =
-    eq-htpy
-      ( λ { ( inl x) →
+  abstract
+    is-retraction-functional-vec-vec :
+      (n : ℕ) → (functional-vec-vec n ∘ listed-vec-functional-vec n) ~ id
+    is-retraction-functional-vec-vec zero-ℕ v = eq-htpy (λ ())
+    is-retraction-functional-vec-vec (succ-ℕ n) v =
+      eq-htpy
+        ( λ where
+          ( inl x) →
             htpy-eq
               ( is-retraction-functional-vec-vec n (tail-functional-vec n v))
-              ( x) ;
-            ( inr star) → refl})
+              ( x)
+          ( inr star) → refl)
 
   is-equiv-listed-vec-functional-vec :
     (n : ℕ) → is-equiv (listed-vec-functional-vec n)

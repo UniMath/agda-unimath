@@ -187,17 +187,18 @@ module _
             ( f (shape-∞-Group G) refl)))
       ( H)
 
-  is-inhabited-is-transitive-action-∞-Group :
-    is-transitive-action-∞-Group G X → is-inhabited (type-action-∞-Group G X)
-  is-inhabited-is-transitive-action-∞-Group H =
-    apply-universal-property-trunc-Prop
-      ( is-inhabited-is-0-connected H)
-      ( is-inhabited-Prop _)
-      ( λ (u , x) →
-        apply-universal-property-trunc-Prop
-          ( mere-eq-classifying-type-∞-Group G (shape-∞-Group G) u)
-          ( is-inhabited-Prop _)
-          ( λ where refl → unit-trunc-Prop x))
+  abstract
+    is-inhabited-is-transitive-action-∞-Group :
+      is-transitive-action-∞-Group G X → is-inhabited (type-action-∞-Group G X)
+    is-inhabited-is-transitive-action-∞-Group H =
+      apply-universal-property-trunc-Prop
+        ( is-inhabited-is-0-connected H)
+        ( is-inhabited-Prop _)
+        ( λ (u , x) →
+          apply-universal-property-trunc-Prop
+            ( mere-eq-classifying-type-∞-Group G (shape-∞-Group G) u)
+            ( is-inhabited-Prop _)
+            ( λ where refl → unit-trunc-Prop x))
 
   is-surjective-mul-right-is-transitive-action-∞-Group :
     is-transitive-action-∞-Group G X →

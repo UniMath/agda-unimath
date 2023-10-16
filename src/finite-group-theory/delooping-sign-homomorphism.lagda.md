@@ -44,6 +44,7 @@ open import foundation.injective-maps
 open import foundation.involutions
 open import foundation.logical-equivalences
 open import foundation.mere-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
@@ -1512,17 +1513,17 @@ module _
       ( Q ( n +ℕ 2)
           ( raise l1 (Fin (n +ℕ 2)) ,
             unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2))))) →
-    ¬ ( x ＝
-        ( map-equiv
-          ( action-equiv-family-over-subuniverse
-            ( mere-equiv-Prop (Fin (n +ℕ 2)))
-            ( type-UU-Fin 2 ∘ Q (n +ℕ 2))
-            ( raise l1 (Fin (n +ℕ 2)) ,
-              unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( raise l1 (Fin (n +ℕ 2)) ,
-              unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
-            ( transposition Y))
-          ( x))))
+    ( x) ≠
+    ( map-equiv
+      ( action-equiv-family-over-subuniverse
+        ( mere-equiv-Prop (Fin (n +ℕ 2)))
+        ( type-UU-Fin 2 ∘ Q (n +ℕ 2))
+        ( raise l1 (Fin (n +ℕ 2)) ,
+          unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
+        ( raise l1 (Fin (n +ℕ 2)) ,
+          unit-trunc-Prop (compute-raise-Fin l1 (n +ℕ 2)))
+        ( transposition Y))
+      ( x)))
   where
 
   private

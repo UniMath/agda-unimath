@@ -59,30 +59,35 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-check-${{ github.ref }}-${{ matrix.agda }}-
 
+      # Keep versions in sync with the Makefile
       - name: MDBook setup
         uses: peaceiris/actions-mdbook@v1
         with:
-          mdbook-version: 'latest'
+          mdbook-version: '0.4.34'
 
       - name: Install mdbook-pagetoc
         uses: baptiste0928/cargo-install@v2
         with:
           crate: mdbook-pagetoc
+          version: '0.1.7'
 
       - name: Install mdbook-katex
         uses: baptiste0928/cargo-install@v2
         with:
           crate: mdbook-katex
+          version: '0.5.7'
 
       - name: Install mdbook-linkcheck
         uses: baptiste0928/cargo-install@v2
         with:
           crate: mdbook-linkcheck
+          version: '0.7.7'
 
       - name: Install mdbook-catppuccin
         uses: baptiste0928/cargo-install@v2
         with:
           crate: mdbook-catppuccin
+          version: '1.2.0'
 
       - uses: actions/setup-python@v4
         with:

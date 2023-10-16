@@ -21,6 +21,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
@@ -291,7 +292,7 @@ module _
               ( permutation-list-adjacent-transpositions n l))))))
 
   invariant-transposition-fold-vec :
-    {n : ℕ} (v : vec A (succ-ℕ n)) (i j : Fin (succ-ℕ n)) (neq : ¬ (i ＝ j)) →
+    {n : ℕ} (v : vec A (succ-ℕ n)) (i j : Fin (succ-ℕ n)) (neq : i ≠ j) →
     fold-vec b μ v ＝
     fold-vec
       ( b)
@@ -318,7 +319,7 @@ module _
   invariant-list-transpositions-fold-vec :
     {n : ℕ}
     (v : vec A n)
-    (l : list (Σ (Fin n × Fin n) (λ (i , j) → ¬ (i ＝ j)))) →
+    (l : list (Σ (Fin n × Fin n) (λ (i , j) → i ≠ j))) →
     fold-vec b μ v ＝
     fold-vec
       ( b)

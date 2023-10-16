@@ -27,6 +27,7 @@ open import foundation.universe-levels
 open import higher-group-theory.transitive-higher-group-actions
 
 open import structured-types.cyclic-types
+open import structured-types.sets-equipped-with-automorphisms
 
 open import synthetic-homotopy-theory.circle
 ```
@@ -146,10 +147,24 @@ module _
     type-connected-set-bundle-𝕊¹ → type-connected-set-bundle-𝕊¹
   map-aut-connected-set-bundle-𝕊¹ =
     map-equiv aut-connected-set-bundle-𝕊¹
+
+  set-with-automorphism-connected-set-bundle-𝕊¹ : Set-With-Automorphism l
+  pr1 set-with-automorphism-connected-set-bundle-𝕊¹ =
+    set-connected-set-bundle-𝕊¹
+  pr2 set-with-automorphism-connected-set-bundle-𝕊¹ =
+    aut-connected-set-bundle-𝕊¹
 ```
 
 ## Properties
 
 ### Connected set bundles over the circle are cyclic sets
 
+#### The set equipped with an automorphism obtained from a connected set bundle over the circle is a cyclic set
+
 This remains to be shown.
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

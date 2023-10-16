@@ -19,7 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
 open import foundation.maybe
 open import foundation.negation
 open import foundation.propositions

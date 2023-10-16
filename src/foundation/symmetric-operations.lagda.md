@@ -143,7 +143,6 @@ module _
     symmetric-operation-is-commutative f H (standard-unordered-pair x y) ＝
     f x y
   compute-symmetric-operation-is-commutative f H x y =
-
     htpy-universal-property-set-quotient-trunc-Prop B
       ( λ e → f (p (map-equiv e (zero-Fin 1))) (p (map-equiv e (one-Fin 1))))
       ( λ e e' →
@@ -195,20 +194,21 @@ module _
   pr1 center-total-htpy-symmetric-operation-Set = f
   pr2 center-total-htpy-symmetric-operation-Set x y = refl
 
-  contraction-total-htpy-symmetric-operation-Set :
-    ( t :
-      Σ ( symmetric-operation A (type-Set B))
-        ( htpy-symmetric-operation-Set)) →
-    center-total-htpy-symmetric-operation-Set ＝ t
-  contraction-total-htpy-symmetric-operation-Set (g , H) =
-    eq-type-subtype
-      htpy-symmetric-operation-Set-Prop
-      ( eq-htpy
-        ( λ p →
-          apply-universal-property-trunc-Prop
-            ( is-surjective-standard-unordered-pair p)
-            ( Id-Prop B (f p) (g p))
-            ( λ { (x , y , refl) → H x y})))
+  abstract
+    contraction-total-htpy-symmetric-operation-Set :
+      ( t :
+        Σ ( symmetric-operation A (type-Set B))
+          ( htpy-symmetric-operation-Set)) →
+      center-total-htpy-symmetric-operation-Set ＝ t
+    contraction-total-htpy-symmetric-operation-Set (g , H) =
+      eq-type-subtype
+        htpy-symmetric-operation-Set-Prop
+        ( eq-htpy
+          ( λ p →
+            apply-universal-property-trunc-Prop
+              ( is-surjective-standard-unordered-pair p)
+              ( Id-Prop B (f p) (g p))
+              ( λ where (x , y , refl) → H x y)))
 
   is-contr-total-htpy-symmetric-operation-Set :
     is-contr

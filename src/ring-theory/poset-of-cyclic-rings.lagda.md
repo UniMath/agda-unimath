@@ -37,3 +37,9 @@ Cyclic-Ring-Large-Poset =
     ( Cyclic-Ring-Large-Category)
     ( is-large-poset-Cyclic-Ring-Large-Category)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -17,8 +17,7 @@ open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.negation
-open import foundation.universe-levels
+open import foundation.negated-equality
 ```
 
 </details>
@@ -230,7 +229,7 @@ is-one-left-is-one-mul-ℕ x y p =
   is-one-right-is-one-mul-ℕ y x (commutative-mul-ℕ y x ∙ p)
 
 neq-mul-ℕ :
-  (m n : ℕ) → ¬ (succ-ℕ m ＝ (succ-ℕ m) *ℕ (succ-ℕ (succ-ℕ n)))
+  (m n : ℕ) → succ-ℕ m ≠ (succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
 neq-mul-ℕ m n p =
   neq-add-ℕ
     ( succ-ℕ m)

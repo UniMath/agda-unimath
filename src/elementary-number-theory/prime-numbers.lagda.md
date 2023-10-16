@@ -26,6 +26,7 @@ open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -95,8 +96,8 @@ is-nonzero-is-prime-ℕ n H p =
   is-not-one-two-ℕ
     ( pr1
       ( H 2)
-      ( tr (λ n → ¬ (2 ＝ n)) (inv (p)) ( is-nonzero-two-ℕ) ,
-        tr (λ n → div-ℕ 2 n) (inv p) (0 , refl)))
+      ( tr (λ k → 2 ≠ k) (inv p) ( is-nonzero-two-ℕ) ,
+        tr (div-ℕ 2) (inv p) (0 , refl)))
 ```
 
 ### The number `1` is not a prime

@@ -274,7 +274,7 @@ equiv-subtype-equiv :
   ((x : A) → type-Prop (C x) ↔ type-Prop (D (map-equiv e x))) →
   type-subtype C ≃ type-subtype D
 equiv-subtype-equiv e C D H =
-  equiv-Σ (type-Prop ∘ D) (e) (λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
+  equiv-Σ (type-Prop ∘ D) e (λ x → equiv-iff' (C x) (D (map-equiv e x)) (H x))
 ```
 
 ```agda

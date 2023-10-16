@@ -27,7 +27,7 @@ An [integer](elementary-number-theory.integers.md) `k` is said to be **nonzero**
 if the [proposition](foundation.propositions.md)
 
 ```text
-  ¬ (k ＝ 0)
+  k ≠ 0
 ```
 
 holds.

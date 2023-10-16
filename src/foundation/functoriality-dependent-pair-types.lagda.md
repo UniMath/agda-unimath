@@ -9,8 +9,10 @@ open import foundation-core.functoriality-dependent-pair-types public
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -22,7 +24,6 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.pullbacks
-open import foundation-core.transport-along-identifications
 ```
 
 </details>
@@ -64,21 +65,25 @@ module _
           ( g' (horizontal-map-cone f g c z))
           ( c' z))
 
-  map-canonical-pullback-tot-cone-cone-fam-right-factor :
-    Σ ( canonical-pullback f g)
-      ( λ t → canonical-pullback ((tr PX (π₃ t)) ∘ (f' (π₁ t))) (g' (π₂ t))) →
+  map-standard-pullback-tot-cone-cone-fam-right-factor :
+    Σ ( standard-pullback f g)
+      ( λ t →
+        standard-pullback
+          ( tr PX (coherence-square-standard-pullback t) ∘
+            f' (vertical-map-standard-pullback t))
+          ( g' (horizontal-map-standard-pullback t))) →
     Σ ( Σ A PA)
       ( λ aa' → Σ (Σ B (λ b → Id (f (pr1 aa')) (g b)))
         ( λ bα → Σ (PB (pr1 bα))
           ( λ b' → Id
             ( tr PX (pr2 bα) (f' (pr1 aa') (pr2 aa')))
             ( g' (pr1 bα) b'))))
-  map-canonical-pullback-tot-cone-cone-fam-right-factor =
+  map-standard-pullback-tot-cone-cone-fam-right-factor =
     map-interchange-Σ-Σ
       ( λ a bα a' → Σ (PB (pr1 bα))
         ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b')))
 
-  map-canonical-pullback-tot-cone-cone-fam-left-factor :
+  map-standard-pullback-tot-cone-cone-fam-left-factor :
     (aa' : Σ A PA) →
     Σ (Σ B (λ b → Id (f (pr1 aa')) (g b)))
       ( λ bα → Σ (PB (pr1 bα))
@@ -88,49 +93,54 @@ module _
     Σ ( Σ B PB)
       ( λ bb' → Σ (Id (f (pr1 aa')) (g (pr1 bb')))
         ( λ α → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' (pr1 bb') (pr2 bb'))))
-  map-canonical-pullback-tot-cone-cone-fam-left-factor aa' =
+  map-standard-pullback-tot-cone-cone-fam-left-factor aa' =
     ( map-interchange-Σ-Σ
       ( λ b α b' → Id (tr PX α (f' (pr1 aa') (pr2 aa'))) (g' b b')))
 
-  map-canonical-pullback-tot-cone-cone-family :
-    Σ ( canonical-pullback f g)
-      ( λ t → canonical-pullback ((tr PX (π₃ t)) ∘ (f' (π₁ t))) (g' (π₂ t))) →
-    canonical-pullback (map-Σ PX f f') (map-Σ PX g g')
-  map-canonical-pullback-tot-cone-cone-family =
-    ( tot (λ aa' →
-      ( tot (λ bb' → eq-pair-Σ')) ∘
-      ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa'))) ∘
-    ( map-canonical-pullback-tot-cone-cone-fam-right-factor)
+  map-standard-pullback-tot-cone-cone-family :
+    Σ ( standard-pullback f g)
+      ( λ t →
+        standard-pullback
+          ( tr PX (coherence-square-standard-pullback t) ∘
+            f' (vertical-map-standard-pullback t))
+          ( g' (horizontal-map-standard-pullback t))) →
+    standard-pullback (map-Σ PX f f') (map-Σ PX g g')
+  map-standard-pullback-tot-cone-cone-family =
+    ( tot
+      (λ aa' →
+        ( tot (λ bb' → eq-pair-Σ')) ∘
+        ( map-standard-pullback-tot-cone-cone-fam-left-factor aa'))) ∘
+    ( map-standard-pullback-tot-cone-cone-fam-right-factor)
 
-  is-equiv-map-canonical-pullback-tot-cone-cone-family :
-    is-equiv map-canonical-pullback-tot-cone-cone-family
-  is-equiv-map-canonical-pullback-tot-cone-cone-family =
+  is-equiv-map-standard-pullback-tot-cone-cone-family :
+    is-equiv map-standard-pullback-tot-cone-cone-family
+  is-equiv-map-standard-pullback-tot-cone-cone-family =
     is-equiv-comp
       ( tot (λ aa' →
         ( tot (λ bb' → eq-pair-Σ')) ∘
-        ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')))
-      ( map-canonical-pullback-tot-cone-cone-fam-right-factor)
+        ( map-standard-pullback-tot-cone-cone-fam-left-factor aa')))
+      ( map-standard-pullback-tot-cone-cone-fam-right-factor)
       ( is-equiv-map-interchange-Σ-Σ
         ( λ a bα a' → Σ (PB (pr1 bα))
           ( λ b' → Id (tr PX (pr2 bα) (f' a a')) (g' (pr1 bα) b'))))
       ( is-equiv-tot-is-fiberwise-equiv (λ aa' → is-equiv-comp
         ( tot (λ bb' → eq-pair-Σ'))
-        ( map-canonical-pullback-tot-cone-cone-fam-left-factor aa')
+        ( map-standard-pullback-tot-cone-cone-fam-left-factor aa')
         ( is-equiv-map-interchange-Σ-Σ _)
         ( is-equiv-tot-is-fiberwise-equiv (λ bb' → is-equiv-eq-pair-Σ
           ( pair (f (pr1 aa')) (f' (pr1 aa') (pr2 aa')))
           ( pair (g (pr1 bb')) (g' (pr1 bb') (pr2 bb')))))))
 
-  triangle-canonical-pullback-tot-cone-cone-family :
+  triangle-standard-pullback-tot-cone-cone-family :
     ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family) ~
-    ( ( map-canonical-pullback-tot-cone-cone-family) ∘
+    ( ( map-standard-pullback-tot-cone-cone-family) ∘
       ( map-Σ _
         ( gap f g c)
         ( λ x → gap
           ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
           ( g' (pr1 (pr2 c) x))
           ( c' x))))
-  triangle-canonical-pullback-tot-cone-cone-family x =
+  triangle-standard-pullback-tot-cone-cone-family x =
     refl
 
   is-pullback-family-is-pullback-tot :
@@ -152,15 +162,15 @@ module _
       ( is-pb-c)
       ( is-equiv-right-factor-htpy
         ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
-        ( map-canonical-pullback-tot-cone-cone-family)
+        ( map-standard-pullback-tot-cone-cone-family)
         ( map-Σ _
           ( gap f g c)
           ( λ x → gap
             ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
             ( g' (pr1 (pr2 c) x))
             ( c' x)))
-        ( triangle-canonical-pullback-tot-cone-cone-family)
-        ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
+        ( triangle-standard-pullback-tot-cone-cone-family)
+        ( is-equiv-map-standard-pullback-tot-cone-cone-family)
         ( is-pb-tot))
 
   is-pullback-tot-is-pullback-family :
@@ -175,14 +185,14 @@ module _
   is-pullback-tot-is-pullback-family is-pb-c is-pb-c' =
     is-equiv-comp-htpy
       ( gap (map-Σ PX f f') (map-Σ PX g g') tot-cone-cone-family)
-      ( map-canonical-pullback-tot-cone-cone-family)
+      ( map-standard-pullback-tot-cone-cone-family)
       ( map-Σ _
         ( gap f g c)
         ( λ x → gap
           ( (tr PX (pr2 (pr2 c) x)) ∘ (f' (pr1 c x)))
           ( g' (pr1 (pr2 c) x))
           ( c' x)))
-      ( triangle-canonical-pullback-tot-cone-cone-family)
+      ( triangle-standard-pullback-tot-cone-cone-family)
       ( is-equiv-map-Σ _
         ( gap f g c)
         ( λ x → gap
@@ -191,7 +201,7 @@ module _
           ( c' x))
           ( is-pb-c)
           ( is-pb-c'))
-      ( is-equiv-map-canonical-pullback-tot-cone-cone-family)
+      ( is-equiv-map-standard-pullback-tot-cone-cone-family)
 ```
 
 ### Commuting squares of maps on total spaces
@@ -262,6 +272,21 @@ module _
       ( map-Σ-map-base right S)
       ( map-Σ-map-base bottom S)
   coherence-square-maps-map-Σ-map-base H (a , p) = eq-pair-Σ (H a) refl
+```
+
+### The action of `map-Σ-map-base` on identifications of the form `eq-pair-Σ` is given by the action on the base
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
+  where
+
+  compute-ap-map-Σ-map-base-eq-pair-Σ :
+    { s s' : A} (p : s ＝ s') {t : C (f s)} {t' : C (f s')}
+    ( q : tr (C ∘ f) p t ＝ t') →
+    ap (map-Σ-map-base f C) (eq-pair-Σ p q) ＝
+    eq-pair-Σ (ap f p) (substitution-law-tr C f p ∙ q)
+  compute-ap-map-Σ-map-base-eq-pair-Σ refl refl = refl
 ```
 
 ## See also

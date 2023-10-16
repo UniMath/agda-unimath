@@ -20,7 +20,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.negation
+open import foundation.negated-equality
 open import foundation.propositions
 open import foundation.sets
 open import foundation.unit-type
@@ -126,9 +126,9 @@ pred-ℤ (inr (inl star)) = inl zero-ℕ
 pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
 pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
 
-ℤ-Endo : Endo lzero
-pr1 ℤ-Endo = ℤ
-pr2 ℤ-Endo = succ-ℤ
+ℤ-Type-With-Endomorphism : Type-With-Endomorphism lzero
+pr1 ℤ-Type-With-Endomorphism = ℤ
+pr2 ℤ-Type-With-Endomorphism = succ-ℤ
 ```
 
 ### The negative of an integer
@@ -201,7 +201,7 @@ is-injective-succ-ℤ : is-injective succ-ℤ
 is-injective-succ-ℤ {x} {y} p =
   inv (is-retraction-pred-ℤ x) ∙ (ap pred-ℤ p ∙ is-retraction-pred-ℤ y)
 
-has-no-fixed-points-succ-ℤ : (x : ℤ) → ¬ (succ-ℤ x ＝ x)
+has-no-fixed-points-succ-ℤ : (x : ℤ) → succ-ℤ x ≠ x
 has-no-fixed-points-succ-ℤ (inl zero-ℕ) ()
 has-no-fixed-points-succ-ℤ (inl (succ-ℕ x)) ()
 has-no-fixed-points-succ-ℤ (inr (inl star)) ()

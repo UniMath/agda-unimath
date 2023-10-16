@@ -38,7 +38,7 @@ open import structured-types.types-equipped-with-endomorphisms
 
 open import synthetic-homotopy-theory.loop-spaces
 
-open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.cyclic-finite-types
 ```
 
 </details>
@@ -57,7 +57,7 @@ module _
   {l : Level} (X : Infinite-Cyclic-Type l)
   where
 
-  endo-Infinite-Cyclic-Type : Endo l
+  endo-Infinite-Cyclic-Type : Type-With-Endomorphism l
   endo-Infinite-Cyclic-Type = endo-Cyclic-Type zero-ℕ X
 
   type-Infinite-Cyclic-Type : UU l
@@ -68,7 +68,9 @@ module _
   endomorphism-Infinite-Cyclic-Type = endomorphism-Cyclic-Type zero-ℕ X
 
   mere-equiv-ℤ-Infinite-Cyclic-Type :
-    mere-equiv-Endo ℤ-Endo endo-Infinite-Cyclic-Type
+    mere-equiv-Type-With-Endomorphism
+      ( ℤ-Type-With-Endomorphism)
+      ( endo-Infinite-Cyclic-Type)
   mere-equiv-ℤ-Infinite-Cyclic-Type = pr2 X
 
 module _
@@ -120,7 +122,11 @@ module _
   map-left-factor-compute-Ω-Infinite-Cyclic-Type :
     equiv-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type ℤ-Infinite-Cyclic-Type → ℤ
   map-left-factor-compute-Ω-Infinite-Cyclic-Type e =
-    map-equiv-Endo ℤ-Endo ℤ-Endo e zero-ℤ
+    map-equiv-Type-With-Endomorphism
+      ( ℤ-Type-With-Endomorphism)
+      ( ℤ-Type-With-Endomorphism)
+      ( e)
+      ( zero-ℤ)
 
   abstract
     is-equiv-map-left-factor-compute-Ω-Infinite-Cyclic-Type :
@@ -204,3 +210,9 @@ module _
 -- pr2 (pr1 (Infinite-Cyclic-Type-𝕊¹ x)) = {!!}
 -- pr2 (Infinite-Cyclic-Type-𝕊¹ x) = {!!}
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}
