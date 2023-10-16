@@ -12,9 +12,9 @@ open import elementary-number-theory.natural-numbers
 open import foundation.action-on-identifications-functions
 open import foundation.coproduct-types
 open import foundation.empty-types
-open import foundation.unit-type
 open import foundation.identity-types
 open import foundation.negated-equality
+open import foundation.unit-type
 
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.standard-finite-types

@@ -15,7 +15,6 @@ open import foundation.contractible-types
 open import foundation.coproduct-types
 open import foundation.decidable-propositions
 open import foundation.decidable-types
-open import foundation.unit-type
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.empty-types
@@ -25,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
