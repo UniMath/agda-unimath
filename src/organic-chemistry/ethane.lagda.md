@@ -24,6 +24,7 @@ open import foundation.injective-maps
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.transport-along-identifications
+open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -99,8 +100,8 @@ module _
         ( λ P →
           apply-universal-property-trunc-Prop (pr2 P) empty-Prop
             ( λ where
-              ( inl (inr star) , is-one) → neq-inl-inr (inv is-zero ∙ is-one)
-              ( inr star , is-one) → neq-inl-inr (inv is-zero' ∙ is-one)))
+              ( inl (inr _) , is-one) → neq-inl-inr (inv is-zero ∙ is-one)
+              ( inr _ , is-one) → neq-inl-inr (inv is-zero' ∙ is-one)))
     ... | inl is-zero | inr is-one' =
       inl
         ( pair
@@ -116,8 +117,8 @@ module _
         ( λ P →
           apply-universal-property-trunc-Prop (pr1 P) empty-Prop
             ( λ where
-              ( inl (inr star) , is-zero) → neq-inl-inr (inv is-zero ∙ is-one)
-              ( inr star , is-zero) → neq-inl-inr (inv is-zero ∙ is-one')))
+              ( inl (inr _) , is-zero) → neq-inl-inr (inv is-zero ∙ is-one)
+              ( inr _ , is-zero) → neq-inl-inr (inv is-zero ∙ is-one')))
 
   is-decidable-standard-edge-ethane :
     (c c' : vertex-ethane) → is-decidable (standard-edge-ethane c c')
@@ -155,38 +156,38 @@ module _
     is-contr-standard-edge-ethane :
       (c : vertex-ethane) →
       is-contr (Σ (vertex-ethane) (λ c' → standard-edge-ethane c c'))
-    pr1 (pr1 (is-contr-standard-edge-ethane (inl (inr star)))) = one-Fin 1
-    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
+    pr1 (pr1 (is-contr-standard-edge-ethane (inl (inr _)))) = one-Fin 1
+    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr _))))) =
       unit-trunc-Prop (zero-Fin 1 , refl)
-    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr star))))) =
+    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inl (inr _))))) =
       unit-trunc-Prop (one-Fin 1 , refl)
-    pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inl (inr star) , P) =
+    pr2 (is-contr-standard-edge-ethane (inl (inr _))) (inl (inr _) , P) =
       ex-falso
         ( apply-universal-property-trunc-Prop (pr2 P) empty-Prop
           ( λ where
-            ( inl (inr star) , is-one) → neq-inl-inr is-one
-            ( inr star , is-one) → neq-inl-inr is-one))
-    pr2 (is-contr-standard-edge-ethane (inl (inr star))) (inr star , P) =
+            ( inl (inr _) , is-one) → neq-inl-inr is-one
+            ( inr _ , is-one) → neq-inl-inr is-one))
+    pr2 (is-contr-standard-edge-ethane (inl (inr _))) (inr _ , P) =
       eq-pair-Σ refl
         ( eq-is-prop
           ( is-prop-edge-ethane
-            ( standard-unordered-pair (inl (inr star)) (inr star))))
-    pr1 (pr1 (is-contr-standard-edge-ethane (inr star))) = zero-Fin 1
-    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inr star)))) =
+            ( standard-unordered-pair (inl (inr _)) (inr _))))
+    pr1 (pr1 (is-contr-standard-edge-ethane (inr _))) = zero-Fin 1
+    pr1 (pr2 (pr1 (is-contr-standard-edge-ethane (inr _)))) =
       unit-trunc-Prop (one-Fin 1 , refl)
-    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inr star)))) =
+    pr2 (pr2 (pr1 (is-contr-standard-edge-ethane (inr _)))) =
       unit-trunc-Prop (zero-Fin 1 , refl)
-    pr2 (is-contr-standard-edge-ethane (inr star)) (inl (inr star) , P) =
+    pr2 (is-contr-standard-edge-ethane (inr _)) (inl (inr _) , P) =
       eq-pair-Σ refl
         ( eq-is-prop
           ( is-prop-edge-ethane
             ( standard-unordered-pair (inr star) (inl (inr star)))))
-    pr2 (is-contr-standard-edge-ethane (inr star)) (inr star , P) =
+    pr2 (is-contr-standard-edge-ethane (inr _)) (inr _ , P) =
       ex-falso
         ( apply-universal-property-trunc-Prop (pr1 P) empty-Prop
           ( λ where
-            ( inl (inr star) , is-zero) → neq-inr-inl is-zero
-            ( inr star , is-zero) → neq-inr-inl is-zero))
+            ( inl (inr _) , is-zero) → neq-inr-inl is-zero
+            ( inr _ , is-zero) → neq-inr-inl is-zero))
 
   abstract
     is-emb-bonding-ethane : (c : vertex-ethane) → is-emb (bonding-ethane c)
@@ -214,32 +215,31 @@ module _
       (c c' : vertex-ethane) →
       number-of-elements-count (count-standard-edge-ethane c c') ≤-ℕ 3
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inl (inr star)) (inl (inr star)) =
+      (inl (inr _)) (inl (inr _)) =
       star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inl (inr star)) (inr star) =
+      (inl (inr _)) (inr _) =
       star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inr star) (inl (inr star)) =
+      (inr _) (inl (inr _)) =
       star
     number-of-elements-count-standard-edge-ethane-leq-3
-      (inr star) (inr star) =
-      star
+      (inr _) (inr _) = star
 
   ethane : hydrocarbon lzero lzero
   pr1 ethane = finite-graph-ethane
   pr1 (pr2 ethane) c = t
   pr1 (pr2 (pr2 ethane)) = emb-bonding-ethane
-  pr1 (pr2 (pr2 (pr2 ethane))) (inl (inr star)) P =
+  pr1 (pr2 (pr2 (pr2 ethane))) (inl (inr _)) P =
     apply-universal-property-trunc-Prop (pr2 P) empty-Prop
       ( λ where
-        ( inl (inr star) , is-one) → neq-inl-inr is-one
-        ( inr star , is-one) → neq-inl-inr is-one)
-  pr1 (pr2 (pr2 (pr2 ethane))) (inr star) P =
+        ( inl (inr _) , is-one) → neq-inl-inr is-one
+        ( inr _ , is-one) → neq-inl-inr is-one)
+  pr1 (pr2 (pr2 (pr2 ethane))) (inr _) P =
     apply-universal-property-trunc-Prop (pr1 P) empty-Prop
       ( λ where
-        ( inl (inr star) , is-zero) → neq-inr-inl is-zero
-        ( inr star , is-zero) → neq-inr-inl is-zero)
+        ( inl (inr _) , is-zero) → neq-inr-inl is-zero
+        ( inr _ , is-zero) → neq-inr-inl is-zero)
   pr1 (pr2 (pr2 (pr2 (pr2 ethane)))) c c' =
     concatenate-eq-leq-ℕ 3
       ( inv
@@ -247,9 +247,9 @@ module _
           ( count-standard-edge-ethane c c')
           ( is-finite-edge-ethane (standard-unordered-pair c c'))))
       (number-of-elements-count-standard-edge-ethane-leq-3 c c')
-  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr star)) (inl (inr star)) =
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr _)) (inl (inr _)) =
     unit-trunc-Prop refl-walk-Undirected-Graph
-  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr star)) (inr star) =
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inl (inr _)) (inr _) =
     unit-trunc-Prop
       ( tr
         ( λ x →
@@ -268,7 +268,7 @@ module _
             ( unit-trunc-Prop (one-Fin 1 , refl)))
           { zero-Fin 1}
           ( refl-walk-Undirected-Graph)))
-  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr star) (inl (inr star)) =
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr _) (inl (inr _)) =
     unit-trunc-Prop
       ( tr
         ( λ x →
@@ -287,7 +287,7 @@ module _
             ( unit-trunc-Prop (zero-Fin 1 , refl)))
           { zero-Fin 1}
           ( refl-walk-Undirected-Graph)))
-  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr star) (inr star) =
+  pr2 (pr2 (pr2 (pr2 (pr2 ethane)))) (inr _) (inr _) =
     unit-trunc-Prop refl-walk-Undirected-Graph
 
   is-alkane-ethane : is-alkane-hydrocarbon ethane
