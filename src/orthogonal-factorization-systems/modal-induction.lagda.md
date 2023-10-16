@@ -241,13 +241,15 @@ module _
 
 ### Naturality of the unit
 
+For every `f : X → Y` there is an associated naturality square
+
 ```text
          f
     X ------> Y
     |         |
     |         |
     v         v
-   ○ X ----> ○ Y
+   ○ X ----> ○ Y.
         ○ f
 ```
 
