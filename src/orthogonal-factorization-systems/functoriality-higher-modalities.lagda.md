@@ -74,13 +74,15 @@ module _
 
 ### Naturality of the unit of a higher modality
 
+For every map `f : X → Y` there is a naturality square
+
 ```text
          f
     X ------> Y
     |         |
     |         |
     v         v
-   ○ X ----> ○ Y
+   ○ X ----> ○ Y.
         ○ f
 ```
 
