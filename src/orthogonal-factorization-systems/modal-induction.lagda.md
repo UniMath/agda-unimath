@@ -286,7 +286,7 @@ module _
 
   naturality-unit-ind-modality :
     {X Y : UU l1} (f : X → Y) →
-    (ap-map-ind-modality unit-○ ind-○ f ∘ unit-○) ~ (unit-○ ∘ f)
+    ap-map-ind-modality unit-○ ind-○ f ∘ unit-○ ~ unit-○ ∘ f
   naturality-unit-ind-modality =
     naturality-unit-rec-modality unit-○
       ( rec-ind-modality unit-○ ind-○)
