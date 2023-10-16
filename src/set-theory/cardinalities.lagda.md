@@ -129,11 +129,11 @@ transitive-leq-cardinality X Y Z =
   apply-dependent-universal-property-trunc-Set'
   ( λ u →
     set-Prop
-      (function-Prop
-        (leq-cardinality u Y)
-        (function-Prop (leq-cardinality Y Z)
-          (leq-cardinality-Prop u Z))))
-  (λ a →
+      ( function-Prop
+        ( leq-cardinality u Y)
+        ( function-Prop (leq-cardinality Y Z)
+          ( leq-cardinality-Prop u Z))))
+  ( λ a →
     apply-dependent-universal-property-trunc-Set'
     ( λ v →
       set-Prop
@@ -141,7 +141,7 @@ transitive-leq-cardinality X Y Z =
           (leq-cardinality (cardinality a) v)
           (function-Prop (leq-cardinality v Z)
             (leq-cardinality-Prop (cardinality a) Z))))
-    (λ b →
+    ( λ b →
       apply-dependent-universal-property-trunc-Set'
       ( λ w →
         set-Prop
@@ -149,7 +149,7 @@ transitive-leq-cardinality X Y Z =
             (leq-cardinality (cardinality a) (cardinality b))
             (function-Prop (leq-cardinality (cardinality b) w)
               (leq-cardinality-Prop (cardinality a) w))))
-      (λ c a<b b<c →
+      ( λ c a<b b<c →
         unit-leq-cardinality
           ( a)
           ( c)
@@ -159,8 +159,6 @@ transitive-leq-cardinality X Y Z =
       ( Z))
     ( Y))
   ( X)
-  ( q)
-  ( p)
 ```
 
 ## Properties
