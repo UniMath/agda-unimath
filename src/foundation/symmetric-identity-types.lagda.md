@@ -102,8 +102,8 @@ module _
     map-inv-compute-symmetric-Id :
       a ＝ b → symmetric-Id (standard-unordered-pair a b)
     pr1 (map-inv-compute-symmetric-Id p) = a
-    pr2 (map-inv-compute-symmetric-Id p) (inl (inr star)) = refl
-    pr2 (map-inv-compute-symmetric-Id p) (inr star) = p
+    pr2 (map-inv-compute-symmetric-Id p) (inl (inr _)) = refl
+    pr2 (map-inv-compute-symmetric-Id p) (inr _) = p
 
     is-section-map-inv-compute-symmetric-Id :
       ( map-compute-symmetric-Id ∘ map-inv-compute-symmetric-Id) ~ id
@@ -119,8 +119,8 @@ module _
           ( x , f)
           ( ( inv (f (zero-Fin 1))) ,
             ( λ where
-              ( inl (inr star)) → inv (left-inv (f (zero-Fin 1)))
-              ( inr star) → refl))
+              ( inl (inr _)) → inv (left-inv (f (zero-Fin 1)))
+              ( inr _) → refl))
 
     is-equiv-map-compute-symmetric-Id :
       is-equiv (map-compute-symmetric-Id)
