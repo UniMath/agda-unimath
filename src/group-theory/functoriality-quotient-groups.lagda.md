@@ -69,5 +69,5 @@ module _
   where
 
   hom-quotient-Group : hom-Group (quotient-Group G N) (quotient-Group H M)
-  hom-quotient-Group = ?
+  hom-quotient-Group = {!!}
 ```
