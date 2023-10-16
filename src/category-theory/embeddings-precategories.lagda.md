@@ -1,4 +1,4 @@
-# Embedding functors between precategories
+# Embeddings between precategories
 
 ```agda
 module category-theory.embeddings-precategories where
@@ -27,8 +27,8 @@ open import foundation.universe-levels
 A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is an
 **embedding** if it's an embedding on objects and
-[faithful](category-theory.faithful-functors-precategories.md). Hence embedding
-functors are functors that are embeddings on objects and hom-sets.
+[faithful](category-theory.faithful-functors-precategories.md). Hence embeddings
+are functors that are embeddings on objects and hom-sets.
 
 ## Definition
 

@@ -26,8 +26,8 @@ open import foundation.universe-levels
 ## Idea
 
 A [map](category-theory.maps-precategories.md) between
-[precategories](category-theory.precategories.md) `C` and `D` is an
-**embedding** if it's an embedding on objects and
+[precategories](category-theory.precategories.md) `C` and `D` is an **embedding
+map** if it's an embedding on objects and
 [faithful](category-theory.faithful-maps-precategories.md). Hence embedding maps
 are maps that are embeddings on objects and hom-sets.
 
