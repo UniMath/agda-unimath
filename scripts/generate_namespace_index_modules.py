@@ -40,7 +40,7 @@ def generate_agda_block(root, namespace, git_tracked_files):
 if __name__ == '__main__':
     STATUS_FLAG_GIT_ERROR = 1
     CHANGES_WERE_MADE_FLAG = 2
-    MISPLACED_TITLE_FLAG = 3
+    MISPLACED_TITLE_FLAG = 4
     status = 0
     root = pathlib.Path('src')
 
