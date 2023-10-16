@@ -19,7 +19,7 @@ open import foundation.locally-small-types
 open import foundation.universe-levels
 
 open import modal-type-theory.codiscrete-types
-open import modal-type-theory.crisp-types
+open import modal-type-theory.crisp-identity-types
 open import modal-type-theory.flat-modality
 open import modal-type-theory.sharp-modality
 
@@ -85,12 +85,12 @@ module _
   ap-♭-unit-♯ = ap-♭ unit-♯
 
   is-section-ap-♭-unit-♯ : ap-♭-elim-♯ ∘ ap-♭-unit-♯ ~ id
-  is-section-ap-♭-unit-♯ (con-♭ x) =
-    crisp-ap con-♭ (compute-crisp-elim-♯ x)
+  is-section-ap-♭-unit-♯ (cons-♭ x) =
+    crisp-ap cons-♭ (compute-crisp-elim-♯ x)
 
   is-retraction-ap-♭-unit-♯ : ap-♭-unit-♯ ∘ ap-♭-elim-♯ ~ id
-  is-retraction-ap-♭-unit-♯ (con-♭ x) =
-    crisp-ap con-♭ (uniqueness-crisp-elim-♯ x)
+  is-retraction-ap-♭-unit-♯ (cons-♭ x) =
+    crisp-ap cons-♭ (uniqueness-crisp-elim-♯ x)
 
   is-equiv-ap-♭-elim-♯ : is-equiv ap-♭-elim-♯
   pr1 (pr1 is-equiv-ap-♭-elim-♯) = ap-♭-unit-♯
@@ -130,7 +130,7 @@ module _
       ( promote
         ( λ _ → ♯ (♭ A))
         ( λ _ → is-codiscrete-♯ (♭ A))
-        ( λ x → unit-♯ (con-♭ x)))
+        ( λ x → unit-♯ (cons-♭ x)))
 
   -- is-section-sf2 : sf1 ∘ sf2 ~ id
   -- is-section-sf2 = {!  ind-♯ ? ?!}

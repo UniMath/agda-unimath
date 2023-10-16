@@ -10,11 +10,11 @@ module modal-type-theory.codiscrete-types where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
-open import foundation.embeddings
 open import foundation.transport-along-equivalences
 open import foundation.universe-levels
 
@@ -30,6 +30,18 @@ open import orthogonal-factorization-systems.higher-modalities
 A type is said to be **codiscrete** if it is
 [sharp](modal-type-theory.sharp-modality) modal, i.e. if the sharp unit is an
 [equivalence](foundation-core.equivalences) at that type.
+
+We postulate that codiscrete types are closed under
+
+- the formation of identity types
+- the formation of dependent function types
+- the formation of the subuniverse of codiscrete types.
+
+Please note that there is some redundancy between the axioms that are assumed
+here and in the files on
+[the flat-sharp adjunction](modal-type-theory.flat-sharp-adjunction.md), and the
+file on the [sharp modality](modal-type-theory.sharp-modality.md), and they may
+be subject to change in the future.
 
 ## Definition
 
