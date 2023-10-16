@@ -7,9 +7,9 @@ module category-theory.faithful-functors-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.faithful-maps-precategories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
-open import category-theory.faithful-maps-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types

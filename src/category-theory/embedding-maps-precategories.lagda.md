@@ -7,13 +7,13 @@ module category-theory.embedding-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.faithful-maps-precategories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
-open import category-theory.faithful-maps-precategories
 open import category-theory.precategories
 
-open import foundation.dependent-pair-types
 open import foundation.cartesian-product-types
+open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.injective-maps
@@ -58,7 +58,8 @@ module _
   is-embedding-map-map-Precategory =
     type-Prop is-embedding-map-prop-map-Precategory
 
-  is-prop-is-embedding-map-map-Precategory : is-prop is-embedding-map-map-Precategory
+  is-prop-is-embedding-map-map-Precategory :
+    is-prop is-embedding-map-map-Precategory
   is-prop-is-embedding-map-map-Precategory =
     is-prop-type-Prop is-embedding-map-prop-map-Precategory
 ```

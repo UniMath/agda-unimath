@@ -30,6 +30,8 @@ open import category-theory.dependent-products-of-large-categories public
 open import category-theory.dependent-products-of-large-precategories public
 open import category-theory.dependent-products-of-precategories public
 open import category-theory.discrete-categories public
+open import category-theory.embedding-maps-precategories public
+open import category-theory.embeddings-precategories public
 open import category-theory.endomorphisms-in-categories public
 open import category-theory.endomorphisms-in-precategories public
 open import category-theory.epimorphisms-in-large-precategories public
@@ -38,6 +40,7 @@ open import category-theory.equivalences-of-large-precategories public
 open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
+open import category-theory.faithful-maps-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
 open import category-theory.function-categories public
