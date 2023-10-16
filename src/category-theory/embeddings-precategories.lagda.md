@@ -93,4 +93,13 @@ module _
   embedding-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   embedding-Precategory =
     Σ (functor-Precategory C D) (is-embedding-functor-Precategory C D)
+
+  functor-embedding-Precategory :
+    embedding-Precategory → functor-Precategory C D
+  functor-embedding-Precategory = pr1
+
+  is-embedding-embedding-Precategory :
+    (e : embedding-Precategory) →
+    is-embedding-functor-Precategory C D (functor-embedding-Precategory e)
+  is-embedding-embedding-Precategory = pr2
 ```
