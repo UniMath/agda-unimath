@@ -7,6 +7,7 @@
 import pathlib
 import sys
 import utils
+import subprocess
 
 
 def generate_title(namespace):
@@ -37,12 +38,17 @@ def generate_agda_block(root, namespace, git_tracked_files):
 
 
 if __name__ == '__main__':
-    CHANGES_WERE_MADE_FLAG = 1
-    MISPLACED_TITLE_FLAG = 2
+    STATUS_FLAG_GIT_ERROR = 1
+    CHANGES_WERE_MADE_FLAG = 2
+    MISPLACED_TITLE_FLAG = 3
     status = 0
     root = pathlib.Path('src')
 
-    git_tracked_files = set(utils.get_git_tracked_files())
+    try:
+        git_tracked_files = set(utils.get_git_tracked_files())
+    except subprocess.CalledProcessError:
+        print('Failed to get Git-tracked files', file=sys.stderr)
+        sys.exit(STATUS_FLAG_GIT_ERROR)
 
     for namespace in utils.get_subdirectories_recursive(root):
 
