@@ -16,6 +16,7 @@ open import foundation.empty-types
 open import foundation.equivalences
 open import foundation.function-types
 open import foundation.homotopies
+open import foundation.whiskering-homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.type-arithmetic-cartesian-product-types
@@ -86,11 +87,9 @@ module _
 
   compute-glue-cogap-join :
     {l3 : Level} {X : UU l3} (c : cocone pr1 pr2 X) →
-    ( ap (cogap-join X c) ∘ glue-join) ~
-    ( λ (a , b) →
-      ( compute-inl-cogap-join c a) ∙
-      ( coherence-square-cocone pr1 pr2 c (a , b)) ∙
-      ( inv (compute-inr-cogap-join c b)))
+    ( ( cogap-join X c ·l coherence-square-cocone pr1 pr2 cocone-join) ∙h
+      ( compute-inr-cogap-join c  ·r pr2)) ~
+    ( compute-inl-cogap-join c ·r pr1) ∙h coherence-square-cocone pr1 pr2 c
   compute-glue-cogap-join = compute-glue-cogap pr1 pr2
 ```
 
