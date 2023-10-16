@@ -124,6 +124,7 @@ open import group-theory.orbits-concrete-group-actions public
 open import group-theory.orbits-group-actions public
 open import group-theory.orbits-monoid-actions public
 open import group-theory.orders-of-elements-groups public
+open import group-theory.perfect-groups public
 open import group-theory.powers-of-elements-commutative-monoids public
 open import group-theory.powers-of-elements-groups public
 open import group-theory.powers-of-elements-monoids public

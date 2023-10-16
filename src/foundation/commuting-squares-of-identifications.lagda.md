@@ -18,7 +18,7 @@ open import foundation-core.identity-types
 
 ## Idea
 
-A square of identifications
+A square of [identifications](foundation-core.identity-types.md)
 
 ```text
           top

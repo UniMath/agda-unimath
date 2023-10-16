@@ -119,6 +119,13 @@ module _
         ( is-equiv-tr (fiber (ap f)) right-unit)
 ```
 
+## Table of files about fibers of maps
+
+The following table lists files that are about fibers of maps as a general
+concept.
+
+{{#include tables/fibers-of-maps.md}}
+
 ## See also
 
 - Equality proofs in dependent pair types are characterized in
