@@ -6,8 +6,7 @@ to it. This document aims to provide a clear and concise introduction.
 
 ## Postulates and assumptions
 
-The library assumes the `--without-K`, `--exact-split`, and `--level-universe`
-flags of Agda and makes use of several postulates.
+The library assumes the `--without-K` and `--exact-split` of Agda and makes use of several postulates.
 
 1. We make full use of Agda's `data` types for introducing inductive types.
 2. We make full use of Agda's universe levels, including `ω`. However, it should
