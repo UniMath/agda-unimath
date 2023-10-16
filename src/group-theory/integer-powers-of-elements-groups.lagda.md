@@ -122,7 +122,7 @@ module _
         ( iterative-multiplication-by-element-Group G g (inl x) h1)
         ( h2)))
   associative-iterative-multiplication-by-element-Group
-    ( inr (inl star)) h1 h2 =
+    ( inr (inl _)) h1 h2 =
     refl
   associative-iterative-multiplication-by-element-Group
     ( inr (inr zero-ℕ)) h1 h2 =
@@ -250,7 +250,7 @@ module _
     transpose-eq-inv-Group G
       ( ( ap (inv-Group G) (integer-power-in-pos-Group G k x)) ∙
         ( inv (integer-power-in-neg-Group G k x)))
-  integer-power-neg-Group (inr (inl star)) x =
+  integer-power-neg-Group (inr (inl _)) x =
     integer-power-zero-Group G x ∙ inv (inv-unit-Group G)
   integer-power-neg-Group (inr (inr k)) x =
     ( integer-power-in-neg-Group G k x) ∙
@@ -333,7 +333,7 @@ module _
   integer-power-unit-Group (inl (succ-ℕ k)) =
     ( ap-mul-Group G (inv-unit-Group G) (integer-power-unit-Group (inl k))) ∙
     ( left-unit-law-mul-Group G (unit-Group G))
-  integer-power-unit-Group (inr (inl star)) = refl
+  integer-power-unit-Group (inr (inl _)) = refl
   integer-power-unit-Group (inr (inr zero-ℕ)) =
     integer-power-one-Group G (unit-Group G)
   integer-power-unit-Group (inr (inr (succ-ℕ k))) =
@@ -374,7 +374,7 @@ module _
       ( integer-power-Group G (inl k) y)
       ( commute-inv-Group G x y H)
       ( commute-integer-powers-Group' (inl k) H)
-  commute-integer-powers-Group' (inr (inl star)) {x} {y} H =
+  commute-integer-powers-Group' (inr (inl _)) {x} {y} H =
     commute-unit-Group G x
   commute-integer-powers-Group' (inr (inr zero-ℕ)) {x} {y} H =
     ( ap (x *_) (integer-power-one-Group G y)) ∙
@@ -406,7 +406,7 @@ module _
         ( commute-inv-Group G (y ^ l) x
           ( inv (commute-integer-powers-Group' l H)))
         ( inv (commute-integer-powers-Group (inl k) l H)))
-  commute-integer-powers-Group (inr (inl star)) l {x} {y} H =
+  commute-integer-powers-Group (inr (inl _)) l {x} {y} H =
     inv (commute-unit-Group G (y ^ l))
   commute-integer-powers-Group (inr (inr zero-ℕ)) l {x} {y} H =
     ( ap (_* (y ^ l)) (integer-power-one-Group G x)) ∙
@@ -479,7 +479,7 @@ module _
         ap-mul-Group G
           ( inv (integer-power-pred-Group G (inl k) x))
           ( inv (integer-power-pred-Group G (inl k) y))
-  distributive-integer-power-mul-Group (inr (inl star)) x y H =
+  distributive-integer-power-mul-Group (inr (inl _)) x y H =
     inv (left-unit-law-mul-Group G (unit-Group G))
   distributive-integer-power-mul-Group (inr (inr zero-ℕ)) x y H =
     ( integer-power-one-Group G (x * y)) ∙
@@ -550,7 +550,7 @@ module _
         inv (distributive-integer-power-add-Group G (x ^ k) neg-one-ℤ (inl l))
       ＝ (x ^ k) ^ (inl (succ-ℕ l))
         by ap ((x ^ k) ^_) (is-left-add-neg-one-pred-ℤ (inl l))
-  integer-power-mul-Group k (inr (inl star)) x =
+  integer-power-mul-Group k (inr (inl _)) x =
     ap (x ^_) (right-zero-law-mul-ℤ k)
   integer-power-mul-Group k (inr (inr zero-ℕ)) x =
     ( ap (x ^_) (right-unit-law-mul-ℤ k)) ∙
@@ -603,7 +603,7 @@ module _
     ( ap-mul-Group H
       ( preserves-inv-hom-Group G H f x)
       ( preserves-integer-powers-hom-Group (inl k) x))
-  preserves-integer-powers-hom-Group (inr (inl star)) x =
+  preserves-integer-powers-hom-Group (inr (inl _)) x =
     preserves-unit-hom-Group G H f
   preserves-integer-powers-hom-Group (inr (inr zero-ℕ)) x =
     ( preserves-mul-hom-Group G H f x (unit-Group G)) ∙

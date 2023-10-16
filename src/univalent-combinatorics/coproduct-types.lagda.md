@@ -81,7 +81,7 @@ nat-coprod-Fin :
 nat-coprod-Fin n zero-ℕ (inl x) = refl
 nat-coprod-Fin n (succ-ℕ m) (inl x) = nat-coprod-Fin n m (inl x)
 nat-coprod-Fin n (succ-ℕ m) (inr (inl x)) = nat-coprod-Fin n m (inr x)
-nat-coprod-Fin n (succ-ℕ m) (inr (inr star)) = refl
+nat-coprod-Fin n (succ-ℕ m) (inr (inr _)) = refl
 
 nat-inl-coprod-Fin :
   (n m : ℕ) (i : Fin n) →
