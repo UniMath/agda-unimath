@@ -26,7 +26,7 @@ Given [large categories](category-theory.large-categories.md) `C` and `D`, a
 `G : C → D` consists of :
 
 - a family of morphisms `γ : (x : C) → hom (F x) (G x)` such that the following
-  identity holds:
+  **naturality condition** holds:
 - `(G f) ∘ (γ x) = (γ y) ∘ (F f)`, for all `f : hom x y`.
 
 ## Definition
