@@ -67,12 +67,12 @@ module _
   hom-functor-Large-Category =
     hom-functor-Large-Precategory F
 
-  preserves-identity-functor-Large-Category :
+  preserves-id-functor-Large-Category :
     {l1 : Level} {X : obj-Large-Category C l1} →
     hom-functor-Large-Category (id-hom-Large-Category C {X = X}) ＝
     id-hom-Large-Category D
-  preserves-identity-functor-Large-Category =
-    preserves-identity-functor-Large-Precategory F
+  preserves-id-functor-Large-Category =
+    preserves-id-functor-Large-Precategory F
 ```
 
 ### The identity functor

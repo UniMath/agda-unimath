@@ -250,13 +250,13 @@ module _
     hom-functor-Large-Precategory
       ( left-adjoint-Adjunction-Large-Precategory FG)
 
-  preserves-identity-left-adjoint-Adjunction-Large-Precategory :
+  preserves-id-left-adjoint-Adjunction-Large-Precategory :
     {l1 : Level} (X : obj-Large-Precategory C l1) →
     hom-left-adjoint-Adjunction-Large-Precategory
       ( id-hom-Large-Precategory C {X = X}) ＝
     id-hom-Large-Precategory D
-  preserves-identity-left-adjoint-Adjunction-Large-Precategory X =
-    preserves-identity-functor-Large-Precategory
+  preserves-id-left-adjoint-Adjunction-Large-Precategory X =
+    preserves-id-functor-Large-Precategory
       ( left-adjoint-Adjunction-Large-Precategory FG)
 
   obj-right-adjoint-Adjunction-Large-Precategory :
@@ -277,14 +277,14 @@ module _
     hom-functor-Large-Precategory
       ( right-adjoint-Adjunction-Large-Precategory FG)
 
-  preserves-identity-right-adjoint-Adjunction-Large-Precategory :
+  preserves-id-right-adjoint-Adjunction-Large-Precategory :
     {l : Level}
     (Y : obj-Large-Precategory D l) →
     hom-right-adjoint-Adjunction-Large-Precategory
       ( id-hom-Large-Precategory D {X = Y}) ＝
     id-hom-Large-Precategory C
-  preserves-identity-right-adjoint-Adjunction-Large-Precategory Y =
-    preserves-identity-functor-Large-Precategory
+  preserves-id-right-adjoint-Adjunction-Large-Precategory Y =
+    preserves-id-functor-Large-Precategory
       ( right-adjoint-Adjunction-Large-Precategory FG)
 
   equiv-is-adjoint-pair-Adjunction-Large-Precategory :
@@ -440,7 +440,7 @@ module _
             ( Y))
           ( f)))
       ( inv
-        ( preserves-identity-right-adjoint-Adjunction-Large-Precategory
+        ( preserves-id-right-adjoint-Adjunction-Large-Precategory
           ( C)
           ( D)
           ( FG)
@@ -486,7 +486,7 @@ module _
               ( hom-left-adjoint-Adjunction-Large-Precategory C D FG f)
               ( id-hom-Large-Precategory D)))
           ( inv
-            ( preserves-identity-left-adjoint-Adjunction-Large-Precategory
+            ( preserves-id-left-adjoint-Adjunction-Large-Precategory
               C D FG X)))) ∙
       ( naturality-inv-equiv-is-adjoint-pair-Adjunction-Large-Precategory C D FG
         ( id-hom-Large-Precategory C)
@@ -576,7 +576,7 @@ module _
           ( ( right-unit-law-comp-hom-Large-Precategory C
               ( hom-right-adjoint-Adjunction-Large-Precategory C D FG
                 ( id-hom-Large-Precategory D))) ∙
-            ( preserves-identity-right-adjoint-Adjunction-Large-Precategory
+            ( preserves-id-right-adjoint-Adjunction-Large-Precategory
               C D FG Y))) ∙
         ( left-unit-law-comp-hom-Large-Precategory C
           ( hom-right-adjoint-Adjunction-Large-Precategory C D FG f)) ∙
@@ -598,7 +598,7 @@ module _
           ( comp-hom-Large-Precategory D f
             ( hom-counit-Adjunction-Large-Precategory
               ( X))))
-        ( preserves-identity-left-adjoint-Adjunction-Large-Precategory
+        ( preserves-id-left-adjoint-Adjunction-Large-Precategory
           ( C)
           ( D)
           ( FG)

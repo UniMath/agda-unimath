@@ -261,14 +261,14 @@ module _
       ( large-precategory-Large-Category D)
       ( F)
 
-  preserves-identity-left-adjoint-Adjunction-Large-Category :
+  preserves-id-left-adjoint-Adjunction-Large-Category :
     {l1 : Level}
     (X : obj-Large-Category C l1) →
     hom-left-adjoint-Adjunction-Large-Category
       ( id-hom-Large-Category C {X = X}) ＝
     id-hom-Large-Category D
-  preserves-identity-left-adjoint-Adjunction-Large-Category =
-    preserves-identity-left-adjoint-Adjunction-Large-Precategory
+  preserves-id-left-adjoint-Adjunction-Large-Category =
+    preserves-id-left-adjoint-Adjunction-Large-Precategory
       ( large-precategory-Large-Category C)
       ( large-precategory-Large-Category D)
       ( F)
@@ -295,14 +295,14 @@ module _
       ( large-precategory-Large-Category D)
       ( F)
 
-  preserves-identity-right-adjoint-Adjunction-Large-Category :
+  preserves-id-right-adjoint-Adjunction-Large-Category :
     {l : Level}
     (Y : obj-Large-Category D l) →
     hom-right-adjoint-Adjunction-Large-Category
       ( id-hom-Large-Category D {X = Y}) ＝
     id-hom-Large-Category C
-  preserves-identity-right-adjoint-Adjunction-Large-Category =
-    preserves-identity-right-adjoint-Adjunction-Large-Precategory
+  preserves-id-right-adjoint-Adjunction-Large-Category =
+    preserves-id-right-adjoint-Adjunction-Large-Precategory
       ( large-precategory-Large-Category C)
       ( large-precategory-Large-Category D)
       ( F)

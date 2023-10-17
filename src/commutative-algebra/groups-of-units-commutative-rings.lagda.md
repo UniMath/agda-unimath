@@ -273,18 +273,18 @@ module _
   {l : Level} (A : Commutative-Ring l)
   where
 
-  preserves-identity-hom-group-of-units-hom-Commutative-Ring :
+  preserves-id-hom-group-of-units-hom-Commutative-Ring :
     hom-group-of-units-hom-Commutative-Ring A A (id-hom-Commutative-Ring A) ＝
     id-hom-Group (group-of-units-Commutative-Ring A)
-  preserves-identity-hom-group-of-units-hom-Commutative-Ring =
-    preserves-identity-hom-group-of-units-hom-Ring (ring-Commutative-Ring A)
+  preserves-id-hom-group-of-units-hom-Commutative-Ring =
+    preserves-id-hom-group-of-units-hom-Ring (ring-Commutative-Ring A)
 
 module _
   {l1 l2 l3 : Level}
   (A : Commutative-Ring l1) (B : Commutative-Ring l2) (C : Commutative-Ring l3)
   where
 
-  preserves-composition-hom-group-of-units-hom-Commutative-Ring :
+  preserves-comp-hom-group-of-units-hom-Commutative-Ring :
     (g : hom-Commutative-Ring B C) (f : hom-Commutative-Ring A B) →
     hom-group-of-units-hom-Commutative-Ring A C
       ( comp-hom-Commutative-Ring A B C g f) ＝
@@ -294,8 +294,8 @@ module _
       ( group-of-units-Commutative-Ring C)
       ( hom-group-of-units-hom-Commutative-Ring B C g)
       ( hom-group-of-units-hom-Commutative-Ring A B f)
-  preserves-composition-hom-group-of-units-hom-Commutative-Ring g f =
-    preserves-composition-hom-group-of-units-hom-Ring
+  preserves-comp-hom-group-of-units-hom-Commutative-Ring g f =
+    preserves-comp-hom-group-of-units-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
       ( ring-Commutative-Ring C)
@@ -316,13 +316,13 @@ obj-functor-Large-Precategory
 hom-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory {X = A} {Y = B} =
   hom-group-of-units-hom-Commutative-Ring A B
-preserves-composition-functor-Large-Precategory
+preserves-comp-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory
   {X = A}
   {Y = B}
   {Z = C} =
-  preserves-composition-hom-group-of-units-hom-Commutative-Ring A B C
-preserves-identity-functor-Large-Precategory
+  preserves-comp-hom-group-of-units-hom-Commutative-Ring A B C
+preserves-id-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory {X = A} =
-  preserves-identity-hom-group-of-units-hom-Commutative-Ring A
+  preserves-id-hom-group-of-units-hom-Commutative-Ring A
 ```
