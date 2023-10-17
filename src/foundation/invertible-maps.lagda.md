@@ -13,25 +13,23 @@ open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.equivalences
+open import foundation.full-subtypes
 open import foundation.function-extensionality
+open import foundation.function-types
 open import foundation.functoriality-cartesian-product-types
+open import foundation.functoriality-dependent-pair-types
+open import foundation.functoriality-function-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.homotopies
 open import foundation.homotopy-induction
+open import foundation.identity-types
+open import foundation.propositions
 open import foundation.retractions
 open import foundation.sections
 open import foundation.structure-identity-principle
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
-open import foundation.identity-types
-open import foundation.homotopies
 open import foundation.whiskering-homotopies
-open import foundation.function-types
-open import foundation.sections
-open import foundation.propositions
-open import foundation.full-subtypes
-open import foundation.functoriality-dependent-pair-types
-open import foundation.functoriality-function-types
-
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
@@ -302,8 +300,10 @@ abstract
 
 ### The type of invertible maps is equivalent to the type of looped equivalences
 
-## Definition
-A looped equivalence is an equivalence together with a loop at the underlying map
+#### Definition
+
+A looped equivalence is an equivalence together with a loop at the underlying
+map
 
 ```agda
 module _
@@ -324,18 +324,18 @@ module _
   loop-looped-equivalence = pr2
 ```
 
-## The type of invertible equivalences is equivalent to the type of invertible maps
+#### The type of invertible equivalences is equivalent to the type of invertible maps
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
-  
+
   tot-is-equiv-is-invertible : (invertible-map A B) → Prop (l1 ⊔ l2)
   tot-is-equiv-is-invertible f = is-equiv-Prop (map-invertible-map f)
 
-  is-full-subtype-tot-is-equiv-is-invertible : 
-    is-full-subtype λ f → tot-is-equiv-is-invertible f
+  is-full-subtype-tot-is-equiv-is-invertible :
+    is-full-subtype tot-is-equiv-is-invertible
   is-full-subtype-tot-is-equiv-is-invertible =
     λ f → is-equiv-is-invertible' (is-invertible-map-invertible-map f)
 
@@ -348,7 +348,7 @@ module _
     ( equiv-right-swap-Σ)
 ```
 
-## The type of looped equivalences is equivalent to the type of invertible equivalences
+#### The type of looped equivalences is equivalent to the type of invertible equivalences
 
 ```agda
   equiv-is-retraction-section-is-invertible :
@@ -388,7 +388,7 @@ module _
           ( map-equiv f)))))
 ```
 
-## The equivalence
+#### The equivalence
 
 ```agda
   equiv-looped-equivalence-invertible-map :
