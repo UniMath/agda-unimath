@@ -126,7 +126,7 @@ module _
       ( representable-functor-Large-Precategory C b)
       ( hom-representable-natural-transformation-Large-Precategory)
   naturality-representable-natural-transformation-Large-Precategory h =
-    eq-htpy (λ g → associative-comp-hom-Large-Precategory C h g f)
+    inv (eq-htpy (λ g → associative-comp-hom-Large-Precategory C h g f))
 
   representable-natural-transformation-Large-Precategory :
     natural-transformation-Large-Precategory C Set-Large-Precategory
