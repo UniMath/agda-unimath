@@ -59,7 +59,7 @@ module _
       ( τ X)
       ( τ Y)
       ( hom-functor-Large-Precategory G f)
-      
+
   record natural-transformation-Large-Precategory : UUω
     where
     constructor make-natural-transformation
@@ -102,7 +102,6 @@ module _
     ( inv
       ( left-unit-law-comp-hom-Large-Precategory D
         ( hom-functor-Large-Precategory F f)))
-    
 
   id-natural-transformation-Large-Precategory :
     natural-transformation-Large-Precategory C D F F

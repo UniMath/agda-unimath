@@ -66,7 +66,7 @@ module _
           ( hom-iso-Large-Precategory D
             ( iso-natural-isomorphism-Large-Precategory Y))
           ( hom-functor-Large-Precategory G f)
-          
+
   open natural-isomorphism-Large-Precategory public
 
   natural-transformation-natural-isomorphism-Large-Precategory :
