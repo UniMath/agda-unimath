@@ -12,6 +12,7 @@ open import foundation-core.invertible-maps public
 open import foundation.commuting-triangles-of-homotopies
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
+open import foundation.equivalence-extensionality
 open import foundation.equivalences
 open import foundation.full-subtypes
 open import foundation.function-extensionality
@@ -35,6 +36,8 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
+
+open import synthetic-homotopy-theory.free-loops
 ```
 
 </details>
@@ -298,31 +301,7 @@ abstract
       ( is-equiv-map-associative-Σ _ _ _)
 ```
 
-### The type of invertible maps is equivalent to the type of looped equivalences
-
-#### Definition
-
-A looped equivalence is an equivalence together with a loop at the underlying
-map
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2)
-  where
-
-  looped-equivalence : UU (l1 ⊔ l2)
-  looped-equivalence = Σ (A ≃ B) (λ f → map-equiv f ＝ map-equiv f)
-
-  equivalence-looped-equivalence :
-    looped-equivalence → A ≃ B
-  equivalence-looped-equivalence = pr1
-
-  loop-looped-equivalence :
-    ( f : looped-equivalence) →
-    map-equiv (equivalence-looped-equivalence f) ＝
-    map-equiv (equivalence-looped-equivalence f)
-  loop-looped-equivalence = pr2
-```
+### The type of invertible maps is equivalent to the type of free-loops on equivalences
 
 #### The type of invertible equivalences is equivalent to the type of invertible maps
 
@@ -348,9 +327,13 @@ module _
     ( equiv-right-swap-Σ)
 ```
 
-#### The type of looped equivalences is equivalent to the type of invertible equivalences
+#### The type of free loops on equivalences is equivalent to the type of invertible equivalences
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
   equiv-is-retraction-section-is-invertible :
     (f : A → B) →
     Σ (section f) (λ g → (map-section f g) ∘ f ~ id) ≃ is-invertible f
@@ -360,9 +343,9 @@ module _
       ( λ g → f ∘ g ~ id)
       ( λ g → (map-section f g) ∘ f ~ id)
 
-  equiv-looped-equivalence-invertible-equivalence :
-    looped-equivalence A B ≃ Σ (A ≃ B) (is-invertible ∘ map-equiv)
-  equiv-looped-equivalence-invertible-equivalence =
+  equiv-free-loop-equivalence-invertible-equivalence :
+    free-loop (A ≃ B) ≃ Σ (A ≃ B) (is-invertible ∘ map-equiv)
+  equiv-free-loop-equivalence-invertible-equivalence =
     ( equiv-tot
       ( equiv-is-retraction-section-is-invertible ∘ map-equiv)) ∘e
     ( equiv-tot
@@ -370,7 +353,7 @@ module _
         ( inv-left-unit-law-Σ-is-contr
           ( is-contr-section-is-equiv (is-equiv-map-equiv f))
           ( section-is-equiv (is-equiv-map-equiv f))) ∘e
-        ( equiv-funext ∘e
+        ( equiv-funext) ∘e
         ( inv-equiv
           ( equiv-ap
             ( equiv-postcomp A f)
@@ -385,17 +368,25 @@ module _
               ( map-equiv f)
               ( section-is-equiv (is-equiv-map-equiv f)) ·r
             ( map-equiv f)))
-          ( map-equiv f)))))
+          ( map-equiv f)))) ∘e
+    ( equiv-tot
+      ( λ f →
+        ( equiv-eq-htpy) ∘e
+        ( extensionality-equiv f f)))
 ```
 
 #### The equivalence
 
 ```agda
-  equiv-looped-equivalence-invertible-map :
-    looped-equivalence A B ≃ invertible-map A B
-  equiv-looped-equivalence-invertible-map =
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  equiv-free-loop-equivalence-invertible-map :
+    free-loop (A ≃ B) ≃ invertible-map A B
+  equiv-free-loop-equivalence-invertible-map =
     equiv-invertible-equivalence-invertible-map ∘e
-    equiv-looped-equivalence-invertible-equivalence
+    equiv-free-loop-equivalence-invertible-equivalence
 ```
 
 ## See also
