@@ -60,12 +60,12 @@ module _
         { Y : obj-Large-Precategory C l2}
         ( f : hom-Large-Precategory C X Y) →
         coherence-square-hom-Large-Precategory D
+          ( hom-functor-Large-Precategory F f)
           ( hom-iso-Large-Precategory D
             ( iso-natural-isomorphism-Large-Precategory X))
-          ( hom-functor-Large-Precategory F f)
-          ( hom-functor-Large-Precategory G f)
           ( hom-iso-Large-Precategory D
             ( iso-natural-isomorphism-Large-Precategory Y))
+          ( hom-functor-Large-Precategory G f)
 
   open natural-isomorphism-Large-Precategory public
 
