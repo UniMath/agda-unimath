@@ -101,7 +101,7 @@ comp-functor-Large-Category :
   (E : Large-Category αE βE) →
   functor-Large-Category γG D E →
   functor-Large-Category γF C D →
-  functor-Large-Category (γG ∘ γF) C E
+  functor-Large-Category (λ l → γG (γF l)) C E
 comp-functor-Large-Category C D E =
   comp-functor-Large-Precategory
     ( large-precategory-Large-Category C)
