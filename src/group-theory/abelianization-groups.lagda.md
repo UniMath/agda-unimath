@@ -1,6 +1,8 @@
 # Abelianization of abstract groups
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module group-theory.abelianization-groups where
 ```
 
@@ -197,15 +199,14 @@ abelianization-functor-Group = {!!}
 
 ```agda
 abelianization-adjunction-Group :
-  Adjunction-Large-Category Group-Large-Category Ab-Large-Category
-level-left-adjoint-Adjunction-Large-Precategory
-  abelianization-adjunction-Group = id
+  Adjunction-Large-Category
+    ( λ l → l)
+    ( λ l → l)
+    ( Group-Large-Category)
+    ( Ab-Large-Category)
 left-adjoint-Adjunction-Large-Precategory
   abelianization-adjunction-Group =
   abelianization-functor-Group
-level-right-adjoint-Adjunction-Large-Precategory
-  abelianization-adjunction-Group =
-  {!!}
 right-adjoint-Adjunction-Large-Precategory abelianization-adjunction-Group =
   {!!}
 is-adjoint-pair-Adjunction-Large-Precategory abelianization-adjunction-Group =

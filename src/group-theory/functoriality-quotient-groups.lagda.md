@@ -1,6 +1,8 @@
 # Functoriality of quotient groups
 
 ```agda
+{-# OPTIONS --allow-unsolved-metas #-}
+
 module group-theory.functoriality-quotient-groups where
 ```
 

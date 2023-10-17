@@ -51,7 +51,7 @@ module _
         hom-Large-Precategory D
           ( obj-functor-Large-Precategory X)
           ( obj-functor-Large-Precategory Y)
-      preserves-composition-functor-Large-Precategory :
+      preserves-comp-functor-Large-Precategory :
         { l1 l2 l3 : Level}
         { X : obj-Large-Precategory C l1}
         { Y : obj-Large-Precategory C l2}
@@ -63,7 +63,7 @@ module _
         ( comp-hom-Large-Precategory D
           ( hom-functor-Large-Precategory g)
           ( hom-functor-Large-Precategory f))
-      preserves-identity-functor-Large-Precategory :
+      preserves-id-functor-Large-Precategory :
         { l1 : Level} {X : obj-Large-Precategory C l1} →
         ( hom-functor-Large-Precategory
           ( id-hom-Large-Precategory C {X = X})) ＝
@@ -85,10 +85,10 @@ obj-functor-Large-Precategory
 hom-functor-Large-Precategory
   ( id-functor-Large-Precategory C) =
   id
-preserves-composition-functor-Large-Precategory
+preserves-comp-functor-Large-Precategory
   ( id-functor-Large-Precategory C) g f =
   refl
-preserves-identity-functor-Large-Precategory
+preserves-id-functor-Large-Precategory
   ( id-functor-Large-Precategory C) =
   refl
 ```
@@ -122,7 +122,7 @@ module _
   hom-comp-functor-Large-Precategory =
     hom-functor-Large-Precategory G ∘ hom-functor-Large-Precategory F
 
-  preserves-composition-comp-functor-Large-Precategory :
+  preserves-comp-comp-functor-Large-Precategory :
     {l1 l2 l3 : Level}
     {X : obj-Large-Precategory C l1}
     {Y : obj-Large-Precategory C l2}
@@ -133,23 +133,23 @@ module _
     comp-hom-Large-Precategory E
       ( hom-comp-functor-Large-Precategory g)
       ( hom-comp-functor-Large-Precategory f)
-  preserves-composition-comp-functor-Large-Precategory g f =
+  preserves-comp-comp-functor-Large-Precategory g f =
     ( ap
       ( hom-functor-Large-Precategory G)
-      ( preserves-composition-functor-Large-Precategory F g f)) ∙
-    ( preserves-composition-functor-Large-Precategory G
+      ( preserves-comp-functor-Large-Precategory F g f)) ∙
+    ( preserves-comp-functor-Large-Precategory G
       ( hom-functor-Large-Precategory F g)
       ( hom-functor-Large-Precategory F f))
 
-  preserves-identity-comp-functor-Large-Precategory :
+  preserves-id-comp-functor-Large-Precategory :
     {l1 : Level} {X : obj-Large-Precategory C l1} →
     hom-comp-functor-Large-Precategory (id-hom-Large-Precategory C {X = X}) ＝
     id-hom-Large-Precategory E
-  preserves-identity-comp-functor-Large-Precategory =
+  preserves-id-comp-functor-Large-Precategory =
     ( ap
       ( hom-functor-Large-Precategory G)
-      ( preserves-identity-functor-Large-Precategory F)) ∙
-    ( preserves-identity-functor-Large-Precategory G)
+      ( preserves-id-functor-Large-Precategory F)) ∙
+    ( preserves-id-functor-Large-Precategory G)
 
   comp-functor-Large-Precategory :
     functor-Large-Precategory (γG ∘ γF) C E
@@ -159,10 +159,10 @@ module _
   hom-functor-Large-Precategory
     comp-functor-Large-Precategory =
     hom-comp-functor-Large-Precategory
-  preserves-composition-functor-Large-Precategory
+  preserves-comp-functor-Large-Precategory
     comp-functor-Large-Precategory =
-    preserves-composition-comp-functor-Large-Precategory
-  preserves-identity-functor-Large-Precategory
+    preserves-comp-comp-functor-Large-Precategory
+  preserves-id-functor-Large-Precategory
     comp-functor-Large-Precategory =
-    preserves-identity-comp-functor-Large-Precategory
+    preserves-id-comp-functor-Large-Precategory
 ```

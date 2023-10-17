@@ -67,12 +67,24 @@ module _
   hom-functor-Large-Category =
     hom-functor-Large-Precategory F
 
-  preserves-identity-functor-Large-Category :
+  preserves-id-functor-Large-Category :
     {l1 : Level} {X : obj-Large-Category C l1} →
     hom-functor-Large-Category (id-hom-Large-Category C {X = X}) ＝
     id-hom-Large-Category D
-  preserves-identity-functor-Large-Category =
-    preserves-identity-functor-Large-Precategory F
+  preserves-id-functor-Large-Category =
+    preserves-id-functor-Large-Precategory F
+
+  preserves-comp-functor-Large-Category :
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Category C l1} {Y : obj-Large-Category C l2}
+    {Z : obj-Large-Category C l3}
+    (g : hom-Large-Category C Y Z) (f : hom-Large-Category C X Y) →
+    hom-functor-Large-Category (comp-hom-Large-Category C g f) ＝
+    comp-hom-Large-Category D
+      ( hom-functor-Large-Category g)
+      ( hom-functor-Large-Category f)
+  preserves-comp-functor-Large-Category =
+    preserves-comp-functor-Large-Precategory F
 ```
 
 ### The identity functor
@@ -101,7 +113,7 @@ comp-functor-Large-Category :
   (E : Large-Category αE βE) →
   functor-Large-Category γG D E →
   functor-Large-Category γF C D →
-  functor-Large-Category (γG ∘ γF) C E
+  functor-Large-Category (λ l → γG (γF l)) C E
 comp-functor-Large-Category C D E =
   comp-functor-Large-Precategory
     ( large-precategory-Large-Category C)

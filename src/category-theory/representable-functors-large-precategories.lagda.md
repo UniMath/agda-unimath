@@ -61,7 +61,7 @@ module _
   hom-representable-functor-Large-Precategory =
     postcomp-hom-Large-Precategory C c
 
-  preserves-composition-representable-functor-Large-Precategory :
+  preserves-comp-representable-functor-Large-Precategory :
     {l2 l3 l4 : Level}
     {X : obj-Large-Precategory C l2}
     {Y : obj-Large-Precategory C l3}
@@ -72,15 +72,15 @@ module _
       ( comp-hom-Large-Precategory C g f) ＝
     hom-representable-functor-Large-Precategory g ∘
     hom-representable-functor-Large-Precategory f
-  preserves-composition-representable-functor-Large-Precategory g f =
+  preserves-comp-representable-functor-Large-Precategory g f =
     eq-htpy (associative-comp-hom-Large-Precategory C g f)
 
-  preserves-identity-representable-functor-Large-Precategory :
+  preserves-id-representable-functor-Large-Precategory :
     {l2 : Level} {X : obj-Large-Precategory C l2} →
     hom-representable-functor-Large-Precategory
       ( id-hom-Large-Precategory C {X = X}) ＝
     id
-  preserves-identity-representable-functor-Large-Precategory =
+  preserves-id-representable-functor-Large-Precategory =
     eq-htpy (left-unit-law-comp-hom-Large-Precategory C)
 
   representable-functor-Large-Precategory :
@@ -89,12 +89,12 @@ module _
     obj-representable-functor-Large-Precategory
   hom-functor-Large-Precategory representable-functor-Large-Precategory =
     hom-representable-functor-Large-Precategory
-  preserves-composition-functor-Large-Precategory
+  preserves-comp-functor-Large-Precategory
     representable-functor-Large-Precategory =
-    preserves-composition-representable-functor-Large-Precategory
-  preserves-identity-functor-Large-Precategory
+    preserves-comp-representable-functor-Large-Precategory
+  preserves-id-functor-Large-Precategory
     representable-functor-Large-Precategory =
-    preserves-identity-representable-functor-Large-Precategory
+    preserves-id-representable-functor-Large-Precategory
 ```
 
 ## Natural transformations between representable functors

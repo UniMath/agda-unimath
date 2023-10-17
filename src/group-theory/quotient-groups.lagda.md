@@ -1,7 +1,7 @@
 # Quotient groups
 
 ```agda
-{-# OPTIONS --lossy-unification #-}
+{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
 
 module group-theory.quotient-groups where
 ```
