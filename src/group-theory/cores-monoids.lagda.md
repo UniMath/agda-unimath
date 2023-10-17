@@ -226,7 +226,7 @@ module _
 
 ```agda
 core-monoid-functor-Large-Precategory :
-  functor-Large-Precategory Monoid-Large-Precategory Group-Large-Precategory id
+  functor-Large-Precategory id Monoid-Large-Precategory Group-Large-Precategory
 obj-functor-Large-Precategory
   core-monoid-functor-Large-Precategory =
   core-Monoid

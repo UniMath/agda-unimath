@@ -18,10 +18,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-The large precategories `C` and `D` are equivalent if there are functors
-`F : C → D` and `G : D → C` such that
+Two [large precategories](category-theory.large-precategories.md) `C` and `D`
+are said to be **equivalent** if there are
+[functors](category-theory.functors-large-precategories.md) `F : C → D` and
+`G : D → C` such that
 
-- `G ∘ F` is naturally isomorphic to the identity functor on `C`,
+- `G ∘ F` is
+  [naturally isomorphic](category-theory.natural-isomorphisms-functors-large-precategories.md)
+  to the identity functor on `C`,
 - `F ∘ G` is naturally isomorphic to the identity functor on `D`.
 
 ## Definition
@@ -33,24 +37,24 @@ module _
   where
 
   record
-    equivalence-Large-Precategory (γ-there γ-back : Level → Level) : UUω where
+    equivalence-Large-Precategory (γ γ' : Level → Level) : UUω where
     constructor
       make-equivalence-Large-Precategory
     field
       functor-equivalence-Large-Precategory :
-        functor-Large-Precategory C D γ-there
+        functor-Large-Precategory γ C D
       functor-inv-equivalence-Large-Precategory :
-        functor-Large-Precategory D C γ-back
+        functor-Large-Precategory γ' D C
       is-section-functor-inv-equivalence-Large-Precategory :
         natural-isomorphism-Large-Precategory
-          ( comp-functor-Large-Precategory
+          ( comp-functor-Large-Precategory D C D
             functor-equivalence-Large-Precategory
             functor-inv-equivalence-Large-Precategory)
-          ( id-functor-Large-Precategory)
+          ( id-functor-Large-Precategory D)
       is-retraction-functor-inv-equivalence-Large-Precategory :
         natural-isomorphism-Large-Precategory
-          ( comp-functor-Large-Precategory
+          ( comp-functor-Large-Precategory C D C
             functor-inv-equivalence-Large-Precategory
             functor-equivalence-Large-Precategory)
-          ( id-functor-Large-Precategory)
+          ( id-functor-Large-Precategory C)
 ```
