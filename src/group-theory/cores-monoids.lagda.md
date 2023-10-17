@@ -194,9 +194,9 @@ module _
   {l : Level} (M : Monoid l)
   where
 
-  preserves-id-hom-core-hom-Monoid :
+  preserves-identity-hom-core-hom-Monoid :
     hom-core-hom-Monoid M M (id-hom-Monoid M) ＝ id-hom-Group (core-Monoid M)
-  preserves-id-hom-core-hom-Monoid =
+  preserves-identity-hom-core-hom-Monoid =
     eq-htpy-hom-Group
       ( core-Monoid M)
       ( core-Monoid M)
@@ -206,7 +206,7 @@ module _
   {l1 l2 l3 : Level} (M : Monoid l1) (N : Monoid l2) (K : Monoid l3)
   where
 
-  preserves-comp-hom-core-hom-Monoid :
+  preserves-composition-hom-core-hom-Monoid :
     (g : hom-Monoid N K) (f : hom-Monoid M N) →
     hom-core-hom-Monoid M K (comp-hom-Monoid M N K g f) ＝
     comp-hom-Group
@@ -215,7 +215,7 @@ module _
       ( core-Monoid K)
       ( hom-core-hom-Monoid N K g)
       ( hom-core-hom-Monoid M N f)
-  preserves-comp-hom-core-hom-Monoid g f =
+  preserves-composition-hom-core-hom-Monoid g f =
     eq-htpy-hom-Group
       ( core-Monoid M)
       ( core-Monoid K)
@@ -226,19 +226,19 @@ module _
 
 ```agda
 core-monoid-functor-Large-Precategory :
-  functor-Large-Precategory Monoid-Large-Precategory Group-Large-Precategory id
+  functor-Large-Precategory id Monoid-Large-Precategory Group-Large-Precategory
 obj-functor-Large-Precategory
   core-monoid-functor-Large-Precategory =
   core-Monoid
 hom-functor-Large-Precategory
   core-monoid-functor-Large-Precategory {X = M} {Y = N} =
   hom-core-hom-Monoid M N
-preserves-comp-functor-Large-Precategory
+preserves-composition-functor-Large-Precategory
   core-monoid-functor-Large-Precategory {X = M} {Y = N} {Z = K} =
-  preserves-comp-hom-core-hom-Monoid M N K
-preserves-id-functor-Large-Precategory
+  preserves-composition-hom-core-hom-Monoid M N K
+preserves-identity-functor-Large-Precategory
   core-monoid-functor-Large-Precategory {X = M} =
-  preserves-id-hom-core-hom-Monoid M
+  preserves-identity-hom-core-hom-Monoid M
 ```
 
 ### The core functor is right adjoint to the forgetful functor from groups to monoids

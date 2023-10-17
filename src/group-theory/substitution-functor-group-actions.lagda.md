@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -61,14 +62,14 @@ module _
   pr1 (hom-subst-Abstract-Group-Action X Y h) = pr1 h
   pr2 (hom-subst-Abstract-Group-Action X Y h) x = pr2 h (map-hom-Group G H f x)
 
-  preserves-id-subst-Abstract-Group-Action :
+  preserves-identity-subst-Abstract-Group-Action :
     {l3 : Level} (X : Abstract-Group-Action H l3) →
     Id
       ( hom-subst-Abstract-Group-Action X X (id-hom-Abstract-Group-Action H X))
       ( id-hom-Abstract-Group-Action G (obj-subst-Abstract-Group-Action X))
-  preserves-id-subst-Abstract-Group-Action X = refl
+  preserves-identity-subst-Abstract-Group-Action X = refl
 
-  preserves-comp-subst-Abstract-Group-Action :
+  preserves-composition-subst-Abstract-Group-Action :
     {l3 l4 l5 : Level} (X : Abstract-Group-Action H l3)
     (Y : Abstract-Group-Action H l4) (Z : Abstract-Group-Action H l5)
     (g : hom-Abstract-Group-Action H Y Z)
@@ -82,22 +83,22 @@ module _
         ( obj-subst-Abstract-Group-Action Z)
         ( hom-subst-Abstract-Group-Action Y Z g)
         ( hom-subst-Abstract-Group-Action X Y f))
-  preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
+  preserves-composition-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :
-    functor-Large-Precategory
+    functor-Large-Precategory id
       ( Abstract-Group-Action-Large-Precategory H)
       ( Abstract-Group-Action-Large-Precategory G)
-      ( λ l → l)
   obj-functor-Large-Precategory subst-Abstract-Group-Action =
     obj-subst-Abstract-Group-Action
   hom-functor-Large-Precategory subst-Abstract-Group-Action {X = X} {Y} =
     hom-subst-Abstract-Group-Action X Y
-  preserves-comp-functor-Large-Precategory subst-Abstract-Group-Action
+  preserves-composition-functor-Large-Precategory subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =
-    preserves-comp-subst-Abstract-Group-Action X Y Z
-  preserves-id-functor-Large-Precategory subst-Abstract-Group-Action {l1} {X} =
-    preserves-id-subst-Abstract-Group-Action X
+    preserves-composition-subst-Abstract-Group-Action X Y Z
+  preserves-identity-functor-Large-Precategory
+    subst-Abstract-Group-Action {l1} {X} =
+    preserves-identity-subst-Abstract-Group-Action X
 ```
 
 ## Properties
