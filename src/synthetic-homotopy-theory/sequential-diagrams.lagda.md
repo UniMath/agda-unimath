@@ -41,6 +41,12 @@ module _
   map-sequential-diagram = pr2 A
 ```
 
+## Properties
+
+The [identity type](foundation.identity-types.md) of sequential colimits is
+characterized in the file about
+[equivalences of sequential diagrams](synthetic-homotopy-theory.equivalences-sequential-diagrams.md).
+
 ## References
 
 1. Kristina Sojakova, Floris van Doorn, and Egbert Rijke. 2020. Sequential

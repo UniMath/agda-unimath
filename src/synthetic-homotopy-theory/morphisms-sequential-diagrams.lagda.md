@@ -40,6 +40,16 @@ module _
   { l1 l2 : Level} (A : sequential-diagram l1) (B : sequential-diagram l2)
   where
 
+  naturality-hom-sequential-diagram :
+    ( h :
+      ( n : ℕ) →
+      family-sequential-diagram A n → family-sequential-diagram B n) →
+    UU (l1 ⊔ l2)
+  naturality-hom-sequential-diagram h =
+    ( n : ℕ) →
+    ( map-sequential-diagram B n ∘ h n) ~
+    ( h (succ-ℕ n) ∘ map-sequential-diagram A n)
+
   hom-sequential-diagram : UU (l1 ⊔ l2)
   hom-sequential-diagram =
     section-dependent-sequential-diagram A
@@ -62,9 +72,7 @@ module _
       ( h)
 
   naturality-map-hom-sequential-diagram :
-    ( n : ℕ) →
-    ( map-sequential-diagram B n ∘ map-hom-sequential-diagram n) ~
-    ( map-hom-sequential-diagram (succ-ℕ n) ∘ map-sequential-diagram A n)
+    naturality-hom-sequential-diagram A B map-hom-sequential-diagram
   naturality-map-hom-sequential-diagram =
     naturality-map-section-dependent-sequential-diagram A
       ( constant-dependent-sequential-diagram A B)
@@ -202,16 +210,17 @@ module _
         ( is-torsorial-htpy-sequential-diagram f)
         ( htpy-eq-sequential-diagram f)
 
-  extensionality-sequential-diagram :
+  extensionality-hom-sequential-diagram :
     ( f f' : hom-sequential-diagram A B) →
     ( f ＝ f') ≃ htpy-hom-sequential-diagram B f f'
-  pr1 (extensionality-sequential-diagram f f') = htpy-eq-sequential-diagram f f'
-  pr2 (extensionality-sequential-diagram f f') =
+  pr1 (extensionality-hom-sequential-diagram f f') =
+    htpy-eq-sequential-diagram f f'
+  pr2 (extensionality-hom-sequential-diagram f f') =
     is-equiv-htpy-eq-sequential-diagram f f'
 
   eq-htpy-sequential-diagram :
     ( f f' : hom-sequential-diagram A B) →
     htpy-hom-sequential-diagram B f f' → (f ＝ f')
   eq-htpy-sequential-diagram f f' =
-    map-inv-equiv (extensionality-sequential-diagram f f')
+    map-inv-equiv (extensionality-hom-sequential-diagram f f')
 ```
