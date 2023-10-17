@@ -202,45 +202,33 @@ module _
 module _
   {αC αD : Level → Level}
   {βC βD : Level → Level → Level}
+  (γ δ : Level → Level)
   (C : Large-Category αC βC)
   (D : Large-Category αD βD)
   where
 
   Adjunction-Large-Category : UUω
   Adjunction-Large-Category =
-    Adjunction-Large-Precategory
+    Adjunction-Large-Precategory γ δ
       ( large-precategory-Large-Category C)
       ( large-precategory-Large-Category D)
 
 module _
   {αC αD : Level → Level}
   {βC βD : Level → Level → Level}
+  {γ δ : Level → Level}
   (C : Large-Category αC βC)
   (D : Large-Category αD βD)
-  (F : Adjunction-Large-Category C D)
+  (F : Adjunction-Large-Category γ δ C D)
   where
 
-  level-left-adjoint-Adjunction-Large-Category : Level → Level
-  level-left-adjoint-Adjunction-Large-Category =
-    level-left-adjoint-Adjunction-Large-Precategory F
-
   left-adjoint-Adjunction-Large-Category :
-    functor-Large-Category
-      ( level-left-adjoint-Adjunction-Large-Category)
-      ( C)
-      ( D)
+    functor-Large-Category γ C D
   left-adjoint-Adjunction-Large-Category =
     left-adjoint-Adjunction-Large-Precategory F
 
-  level-right-adjoint-Adjunction-Large-Category : Level → Level
-  level-right-adjoint-Adjunction-Large-Category =
-    level-right-adjoint-Adjunction-Large-Precategory F
-
   right-adjoint-Adjunction-Large-Category :
-    functor-Large-Category
-      ( level-right-adjoint-Adjunction-Large-Category)
-      ( D)
-      ( C)
+    functor-Large-Category δ D C
   right-adjoint-Adjunction-Large-Category =
     right-adjoint-Adjunction-Large-Precategory F
 
@@ -252,10 +240,7 @@ module _
     is-adjoint-pair-Adjunction-Large-Precategory F
 
   obj-left-adjoint-Adjunction-Large-Category :
-    {l : Level} →
-    obj-Large-Category C l →
-    obj-Large-Category D
-      ( level-left-adjoint-Adjunction-Large-Category l)
+    {l : Level} → obj-Large-Category C l → obj-Large-Category D (γ l)
   obj-left-adjoint-Adjunction-Large-Category =
     obj-left-adjoint-Adjunction-Large-Precategory
       ( large-precategory-Large-Category C)
@@ -289,10 +274,7 @@ module _
       ( F)
 
   obj-right-adjoint-Adjunction-Large-Category :
-    {l1 : Level} →
-    obj-Large-Category D l1 →
-    obj-Large-Category C
-      ( level-right-adjoint-Adjunction-Large-Category l1)
+    {l1 : Level} → obj-Large-Category D l1 → obj-Large-Category C (δ l1)
   obj-right-adjoint-Adjunction-Large-Category =
     obj-right-adjoint-Adjunction-Large-Precategory
       ( large-precategory-Large-Category C)
@@ -429,9 +411,9 @@ Given an adjoint pair `F ⊣ G`, we construct a natural transformation
 
 ```agda
 module _
-  {αC αD : Level → Level} {βC βD : Level → Level → Level}
+  {αC αD : Level → Level} {βC βD : Level → Level → Level} {γ δ : Level → Level}
   (C : Large-Category αC βC) (D : Large-Category αD βD)
-  (F : Adjunction-Large-Category C D)
+  (F : Adjunction-Large-Category γ δ C D)
   where
 
   hom-unit-Adjunction-Large-Category :
@@ -479,9 +461,9 @@ Given an adjoint pair `F ⊣ G`, we construct a natural transformation
 
 ```agda
 module _
-  {αC αD : Level → Level} {βC βD : Level → Level → Level}
+  {αC αD : Level → Level} {βC βD : Level → Level → Level} {γ δ : Level → Level}
   (C : Large-Category αC βC) (D : Large-Category αD βD)
-  (F : Adjunction-Large-Category C D)
+  (F : Adjunction-Large-Category γ δ C D)
   where
 
   hom-counit-Adjunction-Large-Category :
