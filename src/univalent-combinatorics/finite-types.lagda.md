@@ -47,7 +47,9 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A type is finite if it is merely equivalent to a standard finite type.
+A type is **finite** if it is
+[merely equivalent](foundation.mere-equivalences.md) to a
+[standard finite type](univalent-combinatorics.standard-finite-types.md).
 
 ## Definition
 
@@ -99,7 +101,7 @@ has-cardinality :
 has-cardinality k X = mere-equiv (Fin k) X
 ```
 
-### The type of all types of cardinality k of a given universe leve l
+### The type of all types of cardinality `k` of a given universe level
 
 ```agda
 UU-Fin : (l : Level) → ℕ → UU (lsuc l)

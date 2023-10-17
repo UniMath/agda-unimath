@@ -433,20 +433,24 @@ module _
 
 #### The universal property of the quotient group
 
-**Proof:** Let `G` and `H` be groups and let `N` be a normal subgroup of `G`. Our goal is to show that the precomposition function
+**Proof:** Let `G` and `H` be groups and let `N` be a normal subgroup of `G`.
+Our goal is to show that the precomposition function
 
 ```text
   hom-Group G/N H → nullifying-hom-Group G H N
 ```
 
-is an equivalence. To see this, note that the above map is a composite of the maps
+is an equivalence. To see this, note that the above map is a composite of the
+maps
 
 ```text
   hom-Group G/N H → Σ (Σ (G → H) (λ f → is-nullifying f)) (λ u → is-hom (pr1 u))
                   → Σ (hom-Group G H) (λ f → is-nullifying f)
 ```
 
-The second map is an equivalence since it merely changes the order of the components in the dependent pair type. The first map is an equivalence by the universal property of set quotients, by which we have:
+The second map is an equivalence since it merely changes the order of the
+components in the dependent pair type. The first map is an equivalence by the
+universal property of set quotients, by which we have:
 
 ```text
   (G/N → H) ≃ Σ (G → H) (is-nullifying f).
