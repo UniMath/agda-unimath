@@ -53,10 +53,12 @@ open import synthetic-homotopy-theory.join-powers-of-types public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
 open import synthetic-homotopy-theory.maps-of-prespectra public
+open import synthetic-homotopy-theory.mere-spheres public
 open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
+open import synthetic-homotopy-theory.premanifolds public
 open import synthetic-homotopy-theory.prespectra public
 open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushouts public
@@ -70,6 +72,7 @@ open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
+open import synthetic-homotopy-theory.tangent-spheres public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public
