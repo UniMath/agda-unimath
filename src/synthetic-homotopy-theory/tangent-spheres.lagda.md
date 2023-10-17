@@ -31,20 +31,25 @@ Consider a type `X` and a point `x : X`. We say that `x` **has a tangent
 - A [mere sphere](synthetic-homotopy-theory.mere-spheres.md) `T`, which we also
   refer to as the **tangent sphere** of `x`.
 - A type `C`, which we call the **complement** of `x`.
-- A map `d : T → C` including the tangent sphere into the complement.
-- A map `c : C → X` including the complement into the type `X`.
+- A map `j : T → C` including the tangent sphere into the complement.
+- A map `i : C → X` including the complement into the type `X`.
 - A [homotopy](foundation-core.homotopies.md) witnessing that the square
   ```text
-        d
+        j
     T -----> C
     |        |
-    |        | c
+    |        | i
     V        V
     1 -----> X
         x
   ```
   [commutes](foundation.commuting-squares-of-maps.md), and is a
   [pushout](synthetic-homotopy-theory.pushouts.md).
+
+In other words, a tangent `n`-sphere at a point `x` consistst of a mere sphere
+and a complement such that the space `X` can be reconstructed by attaching the
+point to the complement via the inclusion of the tangent sphere into the
+complement.
 
 ## Definitions
 
@@ -62,12 +67,12 @@ module _
         Σ ( UU l)
           ( λ C →
             Σ ( type-mere-sphere n T → C)
-              ( λ d →
+              ( λ j →
                 Σ ( C → X)
-                  ( λ c →
-                    Σ ( coherence-square-maps d terminal-map c (point x))
+                  ( λ i →
+                    Σ ( coherence-square-maps j terminal-map i (point x))
                       ( λ H →
-                        is-pushout terminal-map d (point x , c , H))))))
+                        is-pushout terminal-map j (point x , i , H))))))
 
 module _
   {l : Level} (n : ℕ) {X : UU l} {x : X} (T : has-tangent-sphere n x)
