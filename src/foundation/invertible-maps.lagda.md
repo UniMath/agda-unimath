@@ -353,26 +353,19 @@ module _
         ( inv-left-unit-law-Σ-is-contr
           ( is-contr-section-is-equiv (is-equiv-map-equiv f))
           ( section-is-equiv (is-equiv-map-equiv f))) ∘e
-        ( equiv-funext) ∘e
         ( inv-equiv
-          ( equiv-ap
-            ( equiv-postcomp A f)
+          ( equiv-htpy-postcomp-htpy
+            ( f)
             ( ( map-section
                 ( map-equiv f)
                 ( section-is-equiv (is-equiv-map-equiv f))) ∘
               ( map-equiv f))
             ( id))) ∘e
-        ( equiv-concat
-          ( eq-htpy
-            ( is-section-map-section
-              ( map-equiv f)
-              ( section-is-equiv (is-equiv-map-equiv f)) ·r
-            ( map-equiv f)))
+        ( equiv-concat-htpy
+          ( ( is-retraction-map-equiv f) ·r
+            ( map-equiv f))
           ( map-equiv f)))) ∘e
-    ( equiv-tot
-      ( λ f →
-        ( equiv-eq-htpy) ∘e
-        ( extensionality-equiv f f)))
+    ( equiv-tot (λ f → extensionality-equiv f f))
 ```
 
 #### The equivalence
