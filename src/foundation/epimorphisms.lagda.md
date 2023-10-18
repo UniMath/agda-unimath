@@ -82,11 +82,11 @@ module _
   equiv-fibers-of-precomp-cocone =
     equiv-comp
       ( equiv-Σ _
-          ( id-equiv)
-          ( λ g → equiv-Σ _ id-equiv (λ h → equiv-funext)))
+        ( id-equiv)
+        ( λ g → equiv-Σ _ id-equiv (λ h → equiv-funext)))
       ( equiv-Σ _
-          ( id-equiv)
-          ( λ g → equiv-fiber (precomp f X) (g ∘ f)))
+        ( id-equiv)
+        ( λ g → equiv-fiber (precomp f X) (g ∘ f)))
 
   diagonal-into-fibers-of-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
