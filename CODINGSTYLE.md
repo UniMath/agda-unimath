@@ -284,7 +284,7 @@ the `agda-unimath` library:
   need to sort them by hand.
 
 - The library doesn't use
-  [variables](https://agda.readthedocs.io/en/v2.6.4/language/generalization-of-declared-variables.html)
+  [variables](https://agda.readthedocs.io/en/latest/language/generalization-of-declared-variables.html)
   at the moment. All variables are declared either as parameters of an anonymous
   module or in the type specification of a construction.
 
