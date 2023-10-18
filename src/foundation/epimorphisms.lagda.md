@@ -44,21 +44,27 @@ is an [embedding](foundation-core.embeddings.md) for every type `X`.
 
 ## Definitions
 
+### Epimorphisms with respect to a specified universe
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-epimorphism-level : (l : Level) → (A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  is-epimorphism-level l f = (X : UU l) → is-emb (precomp f X)
+  is-epimorphism-Level : (l : Level) → (A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  is-epimorphism-Level l f = (X : UU l) → is-emb (precomp f X)
+```
 
+### Epimorphisms
+
+```agda
   is-epimorphism : (A → B) → UUω
-  is-epimorphism f = {l : Level} → is-epimorphism-level l f
+  is-epimorphism f = {l : Level} → is-epimorphism-Level l f
 ```
 
 ## Properties
 
-### Epimorphisms, pushouts and codiagonals
+### The codiagonal of an epimorphism is an equivalence
 
 If the map `f : A → B` is epi, then the commutative square
 
@@ -77,24 +83,20 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
-  equiv-fibers-of-precomp-cocone :
+  equiv-fibers-precomp-cocone :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
-  equiv-fibers-of-precomp-cocone =
-    equiv-comp
-      ( equiv-Σ _
-        ( id-equiv)
-        ( λ g → equiv-Σ _ id-equiv (λ h → equiv-funext)))
-      ( equiv-Σ _
-        ( id-equiv)
-        ( λ g → equiv-fiber (precomp f X) (g ∘ f)))
+  equiv-fibers-precomp-cocone =
+    equiv-tot ( λ g →
+                ( equiv-tot (λ h → equiv-funext) ∘e
+                ( equiv-fiber (precomp f X) (g ∘ f))))
 
-  diagonal-into-fibers-of-precomp :
+  diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
-  diagonal-into-fibers-of-precomp = map-section-family (λ g → g , refl)
+  diagonal-into-fibers-precomp = map-section-family (λ g → g , refl)
 
-  is-equiv-diagonal-into-fibers-of-precomp-is-epimorphism :
-    is-epimorphism f → is-equiv diagonal-into-fibers-of-precomp
-  is-equiv-diagonal-into-fibers-of-precomp-is-epimorphism e =
+  is-equiv-diagonal-into-fibers-precomp-is-epimorphism :
+    is-epimorphism f → is-equiv diagonal-into-fibers-precomp
+  is-equiv-diagonal-into-fibers-precomp-is-epimorphism e =
     is-equiv-map-section-family
       ( λ g → (g , refl))
       ( λ g →
@@ -106,25 +108,23 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-pushout-is-epimorphism :
+  universal-property-pushout-is-epimorphism :
     is-epimorphism f →
     {l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)
-  is-pushout-is-epimorphism e X =
-    is-equiv-comp-htpy
-      ( cocone-map f f (cocone-codiagonal-map f))
-      ( map-equiv (equiv-fibers-of-precomp-cocone f X))
-      ( diagonal-into-fibers-of-precomp f X)
-      ( refl-htpy)
-      ( is-equiv-diagonal-into-fibers-of-precomp-is-epimorphism f X e)
-      ( is-equiv-map-equiv (equiv-fibers-of-precomp-cocone f X))
+  universal-property-pushout-is-epimorphism e X =
+    is-equiv-comp
+      ( map-equiv (equiv-fibers-precomp-cocone f X))
+      ( diagonal-into-fibers-precomp f X)
+      ( is-equiv-diagonal-into-fibers-precomp-is-epimorphism f X e)
+      ( is-equiv-map-equiv (equiv-fibers-precomp-cocone f X))
 ```
 
 If the map `f : A → B` is epi, then its codiagonal is an equivalence.
 
 ```agda
-  codiagonal-is-equiv-is-epimorphism :
+  is-equiv-codiagonal-map-is-epimorphism :
     is-epimorphism f → is-equiv (codiagonal-map f)
-  codiagonal-is-equiv-is-epimorphism e =
+  is-equiv-codiagonal-map-is-epimorphism e =
     is-equiv-up-pushout-up-pushout f f
       ( cocone-pushout f f)
       ( cocone-codiagonal-map f)
@@ -133,7 +133,11 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
         compute-inr-codiagonal-map f ,
         compute-glue-codiagonal-map f)
       ( up-pushout f f)
-      ( is-pushout-is-epimorphism e)
+      ( universal-property-pushout-is-epimorphism e)
+
+  is-pushout-is-epimorphism :
+    is-epimorphism f → is-pushout f f (cocone-codiagonal-map f)
+  is-pushout-is-epimorphism = is-equiv-codiagonal-map-is-epimorphism
 ```
 
 ## See also
