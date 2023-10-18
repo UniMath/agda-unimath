@@ -30,7 +30,8 @@ open import foundation.universe-levels
 
 A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is **full** if
-it's [surjective](foundation-core.surjective-maps.md) on hom-sets.
+it's [surjective](foundation-core.surjective-maps.md) on
+hom-[sets](foundation-core.sets.md).
 
 ## Definition
 

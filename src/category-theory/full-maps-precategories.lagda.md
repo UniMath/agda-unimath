@@ -27,7 +27,8 @@ open import foundation.universe-levels
 
 A [map](category-theory.maps-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is **full** if
-it's a [surjection](foundation.surjective-maps.md) on hom-sets.
+it's a [surjection](foundation.surjective-maps.md) on
+hom-[sets](foundation-core.sets.md).
 
 ## Definition
 

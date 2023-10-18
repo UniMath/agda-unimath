@@ -59,11 +59,13 @@ module _
 
   ev-id-iso-Category :
     {l : Level} (P : (B : obj-Category C) → (iso-Category C A B) → UU l) →
-    ((B : obj-Category C) (e : iso-Category C A B) → P B e) → P A (id-iso-Category C)
+    ((B : obj-Category C) (e : iso-Category C A B) → P B e) →
+    P A (id-iso-Category C)
   ev-id-iso-Category P f = f A (id-iso-Category C)
 
   induction-principle-iso-Category :
-    {l : Level} (P : (B : obj-Category C) (e : iso-Category C A B) → UU l) → UU (l1 ⊔ l2 ⊔ l)
+    {l : Level} (P : (B : obj-Category C) (e : iso-Category C A B) → UU l) →
+    UU (l1 ⊔ l2 ⊔ l)
   induction-principle-iso-Category P = section (ev-id-iso-Category P)
 
   triangle-ev-id-iso-Category :

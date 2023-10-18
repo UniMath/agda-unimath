@@ -25,6 +25,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
@@ -378,25 +379,31 @@ module _
     ind-iso-Category C
       { inclusion-obj-Subcategory C P x}
       ( λ Y e →
-        (p : is-in-obj-Subcategory C P Y)
-        (q : is-in-hom-Subcategory C P (inclusion-obj-Subcategory C P x) Y (hom-iso-Category C e)) →
+        ( p : is-in-obj-Subcategory C P Y)
+        ( q :
+          is-in-hom-Subcategory C P
+            ( inclusion-obj-Subcategory C P x)
+            ( Y)
+            ( hom-iso-Category C e)) →
         is-iso-Subcategory C P {x} {Y , p} (hom-iso-Category C e , q))
-      ( λ p q →
-        ind-singleton-is-prop
-          ( contains-id-Subcategory C P (pr1 x) p)
+      ( ( ind-singleton-is-prop
+          ( contains-id-Subcategory C P
+            ( inclusion-obj-Subcategory C P x)
+            ( is-in-obj-inclusion-obj-Subcategory C P x))
           ( is-prop-is-in-hom-Subcategory C P
             ( inclusion-obj-Subcategory C P x)
-            ( pr1 x)
-            ( pr1 (id-iso-Category C)))
+            ( inclusion-obj-Subcategory C P x)
+            ( id-hom-Category C))
+          ( λ q → is-iso-Subcategory C P (id-hom-Category C , q))) ∘
+        ( ind-singleton-is-prop
+          ( is-in-obj-inclusion-obj-Subcategory C P x)
+          ( is-prop-is-in-obj-Subcategory C P
+            ( inclusion-obj-Subcategory C P x))
           ( _)
-          ( ind-singleton-is-prop
-            ( pr2 x)
-            ( is-prop-is-in-obj-Subcategory C P (pr1 x))
-            ( _)
-            ( is-iso-id-hom-Precategory (precategory-Subcategory C P) {x})
-            ( p))
-          ( q))
+          ( is-iso-id-hom-Precategory (precategory-Subcategory C P) {x})))
       ( inclusion-hom-Subcategory C P x y f , is-iso-f)
       ( is-in-obj-inclusion-obj-Subcategory C P y)
       ( is-in-hom-inclusion-hom-Subcategory C P x y f)
 ```
+
+It remains to show that subcategories indeed define categories.

@@ -154,6 +154,11 @@ module _
   is-in-obj-Subprecategory : (x : obj-Precategory C) → UU l3
   is-in-obj-Subprecategory = is-in-subtype subtype-obj-Subprecategory
 
+  is-prop-is-in-obj-Subprecategory :
+    (x : obj-Precategory C) → is-prop (is-in-obj-Subprecategory x)
+  is-prop-is-in-obj-Subprecategory =
+    is-prop-is-in-subtype subtype-obj-Subprecategory
+
   is-in-obj-inclusion-obj-Subprecategory :
     (x : obj-Subprecategory) →
     is-in-obj-Subprecategory (inclusion-obj-Subprecategory x)
@@ -186,6 +191,12 @@ module _
   is-in-hom-Subprecategory :
     (x y : obj-Precategory C) (f : hom-Precategory C x y) → UU l4
   is-in-hom-Subprecategory x y = is-in-subtype (subtype-hom-Subprecategory x y)
+
+  is-prop-is-in-hom-Subprecategory :
+    (x y : obj-Precategory C) (f : hom-Precategory C x y) →
+    is-prop (is-in-hom-Subprecategory x y f)
+  is-prop-is-in-hom-Subprecategory x y =
+    is-prop-is-in-subtype (subtype-hom-Subprecategory x y)
 
   is-in-hom-inclusion-hom-Subprecategory :
     (x y : obj-Subprecategory) (f : hom-Subprecategory x y) →
