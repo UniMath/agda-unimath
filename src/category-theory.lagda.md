@@ -41,8 +41,11 @@ open import category-theory.equivalences-of-precategories public
 open import category-theory.exponential-objects-precategories public
 open import category-theory.faithful-functors-precategories public
 open import category-theory.faithful-maps-precategories public
+open import category-theory.full-functors-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
+open import category-theory.full-maps-precategories public
+open import category-theory.fully-faithful-maps-precategories public
 open import category-theory.function-categories public
 open import category-theory.function-precategories public
 open import category-theory.functors-categories public
