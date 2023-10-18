@@ -195,9 +195,17 @@ module _
     is-contr (Σ (obj-Large-Category C l1) (iso-Large-Category C X))
   is-contr-total-iso-Large-Category =
     is-contr-equiv'
-      ( Σ (obj-Large-Category C l1) (λ Y → X ＝ Y))
+      ( Σ (obj-Large-Category C l1) (X ＝_))
       ( equiv-tot (extensionality-obj-Large-Category C X))
       ( is-contr-total-path X)
+
+  is-contr-total-iso-Large-Category' :
+    is-contr (Σ (obj-Large-Category C l1) (λ Y → iso-Large-Category C Y X))
+  is-contr-total-iso-Large-Category' =
+    is-contr-equiv'
+      ( Σ (obj-Large-Category C l1) (_＝ X))
+      ( equiv-tot (λ Y → extensionality-obj-Large-Category C Y X))
+      ( is-contr-total-path' X)
 ```
 
 ## Properties

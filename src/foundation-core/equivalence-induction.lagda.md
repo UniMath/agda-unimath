@@ -66,8 +66,9 @@ module _
           ( pair A id-equiv)
           ( pair
             ( pair A id-equiv)
-            ( λ t → ( inv (contraction c (pair A id-equiv))) ∙
-                    ( contraction c t)))
+            ( λ t →
+              ( inv (contraction c (pair A id-equiv))) ∙
+              ( contraction c t)))
           ( P))
 ```
 
