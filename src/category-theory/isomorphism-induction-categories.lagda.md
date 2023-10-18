@@ -32,14 +32,16 @@ open import foundation-core.singleton-induction
 
 ## Idea
 
-**Isomorphism induction** is the principle asserting that for any type family
+**Isomorphism induction** in a category `𝒞` is the principle asserting that for
+any type family
 
 ```text
   P : (B : 𝒞) (ϕ : A ≅ B) → 𝒰
 ```
 
-of types indexed by all [isomorphisms](foundation.equivalences.md) with domain
-`A`, there is a [section](foundation.sections.md) of the evaluation map
+of types indexed by all
+[isomorphisms](category-theory.isomorphisms-in-category.md) with domain `A`,
+there is a [section](foundation.sections.md) of the evaluation map
 
 ```text
   ((B : 𝒞) (ϕ : A ≅ B) → P B ϕ) → P A id-iso.
@@ -124,7 +126,7 @@ module _
           ( ind P))
 ```
 
-### Isomorphism induction in a universe
+### Isomorphism induction in a category
 
 ```agda
 module _

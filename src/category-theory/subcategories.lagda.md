@@ -12,21 +12,29 @@ open import category-theory.embeddings-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
+open import category-theory.isomorphism-induction-categories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-categories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 open import category-theory.subprecategories
 
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
+open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.singleton-induction
+open import foundation.structure-identity-principle
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 
@@ -34,16 +42,18 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subcategory** of a [category](category-theory.categories.md) `C` consists of
-a [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`, and a
-family of subtypes `P₁`
+A **subcategory** of a [category](category-theory.categories.md) `C` is simply a
+[subprecategory](category-theory.subprecategories.md). It consists of a
+[subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`, and a family
+of subtypes `P₁`
 
 ```text
   P₁ : (X Y : obj C) → P₀ X → P₀ Y → subtype (hom X Y)
 ```
 
 of the morphisms of `C`, such that `P₁` contains all identity morphisms of
-objects in `P₀` and is closed under composition.
+objects in `P₀` and is closed under composition. By univalence, it therefore
+contains the isomorphisms, and hence defines a category.
 
 ## Definitions
 
@@ -141,6 +151,10 @@ module _
   is-in-obj-Subcategory : (x : obj-Category C) → UU l3
   is-in-obj-Subcategory = is-in-subtype subtype-obj-Subcategory
 
+  is-prop-is-in-obj-Subcategory :
+    (x : obj-Category C) → is-prop (is-in-obj-Subcategory x)
+  is-prop-is-in-obj-Subcategory = is-prop-is-in-subtype subtype-obj-Subcategory
+
   is-in-obj-inclusion-obj-Subcategory :
     (x : obj-Subcategory) →
     is-in-obj-Subcategory (inclusion-obj-Subcategory x)
@@ -166,6 +180,12 @@ module _
   is-in-hom-Subcategory :
     (x y : obj-Category C) (f : hom-Category C x y) → UU l4
   is-in-hom-Subcategory x y = is-in-subtype (subtype-hom-Subcategory x y)
+
+  is-prop-is-in-hom-Subcategory :
+    (x y : obj-Category C) (f : hom-Category C x y) →
+    is-prop (is-in-hom-Subcategory x y f)
+  is-prop-is-in-hom-Subcategory x y =
+    is-prop-is-in-subtype (subtype-hom-Subcategory x y)
 
   is-in-hom-inclusion-hom-Subcategory :
     (x y : obj-Subcategory) (f : hom-Subcategory x y) →
@@ -293,6 +313,25 @@ module _
   inclusion-Subcategory = inclusion-Subprecategory (precategory-Category C) P
 ```
 
+### Isomorphisms in subcategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (P : Subcategory l3 l4 C)
+  where
+
+  is-iso-Subcategory :
+    {x y : obj-Subcategory C P} → hom-Subcategory C P x y → UU (l2 ⊔ l4)
+  is-iso-Subcategory {x} {y} =
+    is-iso-Precategory (precategory-Subcategory C P) {x} {y}
+
+  iso-Subcategory :
+    (x y : obj-Subcategory C P) → UU (l2 ⊔ l4)
+  iso-Subcategory = iso-Precategory (precategory-Subcategory C P)
+```
+
 ## Properties
 
 ### The inclusion functor is faithful and an embedding on objects
@@ -322,25 +361,42 @@ module _
     is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
 ```
 
-### Subcategories are preunivalent
+### Subcategories are categories
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
   (C : Category l1 l2)
   (P : Subcategory l3 l4 C)
+  {x y : obj-Subcategory C P}
+  (f : hom-Subcategory C P x y)
+  (is-iso-f : is-iso-Category C (inclusion-hom-Subcategory C P x y f))
   where
 
-  is-preunivalent-Subcategory :
-    is-preunivalent-Precategory (precategory-Subcategory C P)
-  is-preunivalent-Subcategory x y =
-    is-emb-htpy-emb
-      ( comp-emb
-        {!   !}
-        ( emb-equiv
-          ( ( extensionality-obj-Category C
-              ( inclusion-obj-Subcategory C P x)
-              ( inclusion-obj-Subcategory C P y)) ∘e
-            ( equiv-ap-inclusion-subtype (subtype-obj-Subcategory C P)))))
-      {!   !}
+  contains-is-iso-Subcategory : is-iso-Subcategory C P f
+  contains-is-iso-Subcategory =
+    ind-iso-Category C
+      { inclusion-obj-Subcategory C P x}
+      ( λ Y e →
+        (p : is-in-obj-Subcategory C P Y)
+        (q : is-in-hom-Subcategory C P (inclusion-obj-Subcategory C P x) Y (hom-iso-Category C e)) →
+        is-iso-Subcategory C P {x} {Y , p} (hom-iso-Category C e , q))
+      ( λ p q →
+        ind-singleton-is-prop
+          ( contains-id-Subcategory C P (pr1 x) p)
+          ( is-prop-is-in-hom-Subcategory C P
+            ( inclusion-obj-Subcategory C P x)
+            ( pr1 x)
+            ( pr1 (id-iso-Category C)))
+          ( _)
+          ( ind-singleton-is-prop
+            ( pr2 x)
+            ( is-prop-is-in-obj-Subcategory C P (pr1 x))
+            ( _)
+            ( is-iso-id-hom-Precategory (precategory-Subcategory C P) {x})
+            ( p))
+          ( q))
+      ( inclusion-hom-Subcategory C P x y f , is-iso-f)
+      ( is-in-obj-inclusion-obj-Subcategory C P y)
+      ( is-in-hom-inclusion-hom-Subcategory C P x y f)
 ```
