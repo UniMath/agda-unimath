@@ -8,13 +8,14 @@ module foundation.epimorphisms where
 
 ```agda
 open import foundation.dependent-pair-types
+open import foundation.embeddings
 open import foundation.function-extensionality
 open import foundation.propositional-maps
 open import foundation.sections
 open import foundation.universe-levels
 
 open import foundation-core.commuting-squares-of-maps
-open import foundation-core.embeddings
+open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
@@ -83,13 +84,18 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
+  equiv-fibers-precomp-cocone-fiberwise :
+    (g : B → X) →
+    fiber (precomp f X) (g ∘ f) ≃
+    Σ (B → X) (λ h → coherence-square-maps f f h g)
+  equiv-fibers-precomp-cocone-fiberwise g =
+    equiv-tot ( λ h → equiv-funext) ∘e
+    equiv-fiber (precomp f X) (g ∘ f)
+
   equiv-fibers-precomp-cocone :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
   equiv-fibers-precomp-cocone =
-    equiv-tot
-      ( λ g →
-        ( equiv-tot (λ h → equiv-funext) ∘e
-        ( equiv-fiber (precomp f X) (g ∘ f))))
+    equiv-tot equiv-fibers-precomp-cocone-fiberwise
 
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
@@ -147,13 +153,43 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
   is-epimorphism-universal-property-pushout-Level :
     {l : Level} →
     universal-property-pushout l f f (cocone-codiagonal-map f) →
-    is-epimorphism f
+    is-epimorphism-Level l f
   is-epimorphism-universal-property-pushout-Level up-c X =
-    is-emb-is-prop-map (λ g → {!!})
+    is-emb-is-contr-fibers-values
+      ( precomp f X)
+      ( λ g →
+        is-contr-equiv
+          ( Σ (B → X) (λ h → coherence-square-maps f f h g))
+          ( equiv-fibers-precomp-cocone-fiberwise f X g)
+          ( is-contr-fam-is-equiv-map-section-family
+              ( λ h →
+                ( vertical-map-cocone f f
+                  ( cocone-map f f (cocone-codiagonal-map f) h)) ,
+                ( coherence-square-cocone f f
+                  ( cocone-map f f (cocone-codiagonal-map f) h)))
+              ( up-c X)
+              ( g)))
+
+  is-epimorphism-universal-property-pushout :
+    ({l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)) →
+    is-epimorphism f
+  is-epimorphism-universal-property-pushout up-c =
+    is-epimorphism-universal-property-pushout-Level up-c
 
   is-epimorphism-is-equiv-codiagonal-map :
     is-equiv (codiagonal-map f) → is-epimorphism f
-  is-epimorphism-is-equiv-codiagonal-map = {!!}
+  is-epimorphism-is-equiv-codiagonal-map e =
+    is-epimorphism-universal-property-pushout
+      ( up-pushout-up-pushout-is-equiv f f
+        ( cocone-pushout f f)
+        ( cocone-codiagonal-map f)
+        ( codiagonal-map f)
+        ( htpy-cocone-map-universal-property-pushout f f
+          ( cocone-pushout f f)
+          ( up-pushout f f)
+          ( cocone-codiagonal-map f))
+        ( e)
+        ( up-pushout f f))
 ```
 
 ## See also
