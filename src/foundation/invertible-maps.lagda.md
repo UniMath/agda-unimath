@@ -305,43 +305,43 @@ abstract
 
 #### The type of invertible equivalences is equivalent to the type of invertible maps
 
-**Proof:** Since every invertible map is an equivalence, the Sigma type of
+**Proof:** Since every invertible map is an equivalence, the `Σ`-type of
 invertible maps which are equivalences forms a full subtype of the type of
-invertible maps. Swapping the order of Sigma types then shows that the Sigma
-type of invertible maps which are equivalences is equivalent to the Sigma type
-of equivalences which are invertible.
+invertible maps. Swapping the order of `Σ`-types then shows that the `Σ`-type of
+invertible maps which are equivalences is equivalent to the `Σ`-type of
+equivalences which are invertible.
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  tot-is-equiv-is-invertible : (invertible-map A B) → Prop (l1 ⊔ l2)
-  tot-is-equiv-is-invertible = is-equiv-Prop ∘ map-invertible-map
+  is-equiv-prop-is-invertible : (invertible-map A B) → Prop (l1 ⊔ l2)
+  is-equiv-prop-is-invertible = is-equiv-Prop ∘ map-invertible-map
 
-  is-full-subtype-tot-is-equiv-is-invertible :
-    is-full-subtype tot-is-equiv-is-invertible
-  is-full-subtype-tot-is-equiv-is-invertible =
+  is-full-subtype-is-equiv-prop-is-invertible :
+    is-full-subtype is-equiv-prop-is-invertible
+  is-full-subtype-is-equiv-prop-is-invertible =
     is-equiv-is-invertible' ∘ is-invertible-map-invertible-map
 
   equiv-invertible-equivalence-invertible-map :
     Σ (A ≃ B) (is-invertible ∘ map-equiv) ≃ invertible-map A B
   equiv-invertible-equivalence-invertible-map =
     ( equiv-inclusion-is-full-subtype
-      ( tot-is-equiv-is-invertible)
-      ( is-full-subtype-tot-is-equiv-is-invertible)) ∘e
+      ( is-equiv-prop-is-invertible)
+      ( is-full-subtype-is-equiv-prop-is-invertible)) ∘e
     ( equiv-right-swap-Σ)
 ```
 
 #### The type of free loops on equivalences is equivalent to the type of invertible equivalences
 
-**Proof:** Firstly, associating the order of Sigma types shows that a function
-being invertible is equivalent to it having a section, such that this section is
-also its retraction. Now, since equivalences have a contractible type of
-sections, a proof of invertibility of the underlying map `f` of an equivalence
-contracts to just a single homotopy `g ∘ f ~ id`, showing that a section `g` of
-`f` is also its retraction. As `g` is a section, composing on the left with `f`
-and canceling `f ∘ g` yields a loop `f ~ f`. By equivalence extensionality, this
+**Proof:** First, associating the order of `Σ`-types shows that a function being
+invertible is equivalent to it having a section, such that this section is also
+its retraction. Now, since equivalences have a contractible type of sections, a
+proof of invertibility of the underlying map `f` of an equivalence contracts to
+just a single homotopy `g ∘ f ~ id`, showing that a section `g` of `f` is also
+its retraction. As `g` is a section, composing on the left with `f` and
+canceling `f ∘ g` yields a loop `f ~ f`. By equivalence extensionality, this
 loop may be lifted to a loop on the entire equivalence.
 
 ```agda
