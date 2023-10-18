@@ -60,14 +60,17 @@ module _
 
 ### Epimorphisms, pushouts and codiagonals
 
+```text
 If the map `f : A → B` is epi, then the commutative square
 
       f
     A → B
-
-f ↓ ↓ id B → B id
+  f ↓   ↓ id
+    B → B
+      id
 
 is a pushout square.
+```
 
 ```agda
 module _
