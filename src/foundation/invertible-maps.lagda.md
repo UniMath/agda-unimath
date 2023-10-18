@@ -340,9 +340,9 @@ being invertible is equivalent to it having a section, such that this section is
 also its retraction. Now, since equivalences have a contractible type of
 sections, a proof of invertibility of the underlying map `f` of an equivalence
 contracts to just a single homotopy `g ∘ f ~ id`, showing that a section `g` of
-`f` is also its retraction. As `g` is a section, composing from the left with
-`f` and canceling `f ∘ g` yields a loop `f ~ f`. By equivalence extensionality,
-this loop may be lifted to a loop on the entire equivalence.
+`f` is also its retraction. As `g` is a section, composing on the left with `f`
+and canceling `f ∘ g` yields a loop `f ~ f`. By equivalence extensionality, this
+loop may be lifted to a loop on the entire equivalence.
 
 ```agda
 module _
@@ -371,14 +371,10 @@ module _
         ( inv-equiv
           ( equiv-htpy-postcomp-htpy
             ( f)
-            ( ( map-section
-                ( map-equiv f)
-                ( section-is-equiv (is-equiv-map-equiv f))) ∘
-              ( map-equiv f))
+            ( map-section-is-equiv (is-equiv-map-equiv f) ∘ map-equiv f)
             ( id))) ∘e
         ( equiv-concat-htpy
-          ( ( is-retraction-map-equiv f) ·r
-            ( map-equiv f))
+          ( is-retraction-map-equiv f ·r map-equiv f)
           ( map-equiv f)))) ∘e
     ( equiv-tot (λ f → extensionality-equiv f f))
 ```
