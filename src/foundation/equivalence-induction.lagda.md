@@ -116,6 +116,21 @@ module _
   where
 
   abstract
+    is-contr-total-equiv-induction-principle-equivalences :
+      ( {l : Level} (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
+        induction-principle-equivalences (λ B e → P (B , e))) →
+      is-contr (Σ (UU l1) (λ X → A ≃ X))
+    is-contr-total-equiv-induction-principle-equivalences ind =
+      is-contr-is-singleton
+        ( Σ (UU l1) (λ X → A ≃ X))
+        ( A , id-equiv)
+        ( λ P → section-comp
+          ( ev-id-equiv (λ X e → P (X , e)))
+          ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
+          ( ind-Σ , refl-htpy)
+          ( ind P))
+
+  abstract
     is-contr-total-is-identity-system-equiv :
       ( {l : Level} → is-identity-system l (λ X → A ≃ X) A id-equiv) →
       is-contr (Σ (UU l1) (λ X → A ≃ X))
