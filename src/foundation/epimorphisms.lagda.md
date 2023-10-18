@@ -190,6 +190,10 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
           ( cocone-codiagonal-map f))
         ( e)
         ( up-pushout f f))
+
+  is-epimorphism-is-pushout :
+    is-pushout f f (cocone-codiagonal-map f) → is-epimorphism f
+  is-epimorphism-is-pushout = is-epimorphism-is-equiv-codiagonal-map
 ```
 
 ## See also
