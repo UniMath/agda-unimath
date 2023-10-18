@@ -60,7 +60,6 @@ module _
 
 ### Epimorphisms, pushouts and codiagonals
 
-
 If the map `f : A → B` is epi, then the commutative square
 
 ```text
@@ -72,7 +71,6 @@ If the map `f : A → B` is epi, then the commutative square
 ```
 
 is a pushout square.
-
 
 ```agda
 module _
