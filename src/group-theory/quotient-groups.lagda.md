@@ -10,6 +10,8 @@ module group-theory.quotient-groups where
 open import foundation.action-on-identifications-functions
 open import foundation.binary-functoriality-set-quotients
 open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-maps
+open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
@@ -24,6 +26,7 @@ open import foundation.propositions
 open import foundation.reflecting-maps-equivalence-relations
 open import foundation.set-quotients
 open import foundation.sets
+open import foundation.subtype-identity-principle
 open import foundation.subtypes
 open import foundation.surjective-maps
 open import foundation.type-arithmetic-dependent-pair-types
@@ -625,6 +628,64 @@ module _
         ( triangle-is-quotient-group-quotient-Group H)
         ( is-equiv-top-triangle-is-quotient-group-quotient-Group H)
         ( is-equiv-map-equiv (compute-nullifying-hom-Group G H N))
+```
+
+### The unique mapping property of the quotient group
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  (H : Group l3)
+  where
+
+  abstract
+    unique-mapping-property-quotient-Group :
+      (f : nullifying-hom-Group G H N) →
+      is-contr
+        ( Σ ( hom-Group (quotient-Group G N) H)
+            ( λ g →
+              htpy-hom-Group G H
+                ( hom-nullifying-hom-Group G H N
+                  ( precomp-nullifying-hom-Group G N
+                    ( quotient-Group G N)
+                    ( nullifying-quotient-hom-Group G N)
+                    ( H)
+                    ( g)))
+                ( hom-nullifying-hom-Group G H N f)))
+    unique-mapping-property-quotient-Group f =
+      is-contr-equiv' _
+        ( equiv-tot
+          ( λ g →
+            ( extensionality-hom-Group G H _ _) ∘e
+            ( extensionality-type-subtype'
+              ( λ h → nullifies-normal-subgroup-prop-hom-Group G H h N)
+              ( _)
+              ( _))))
+        ( is-contr-map-is-equiv
+          ( is-quotient-group-quotient-Group G N H)
+          ( f))
+
+  abstract
+    hom-universal-property-quotient-Group :
+      (f : hom-Group G H)
+      (n : nullifies-normal-subgroup-hom-Group G H f N) →
+      hom-Group (quotient-Group G N) H
+    hom-universal-property-quotient-Group f n =
+      pr1 (center (unique-mapping-property-quotient-Group (f , n)))
+
+    compute-hom-universal-property-quotient-Group :
+      (f : hom-Group G H)
+      (n : nullifies-normal-subgroup-hom-Group G H f N) →
+      htpy-hom-Group G H
+        ( hom-nullifying-hom-Group G H N
+          ( precomp-nullifying-hom-Group G N
+            ( quotient-Group G N)
+            ( nullifying-quotient-hom-Group G N)
+            ( H)
+            ( hom-universal-property-quotient-Group f n)))
+        ( hom-nullifying-hom-Group G H N (f , n))
+    compute-hom-universal-property-quotient-Group f n =
+      pr2 (center (unique-mapping-property-quotient-Group (f , n)))
 ```
 
 ## Properties
