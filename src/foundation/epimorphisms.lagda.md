@@ -97,9 +97,10 @@ module _
   is-equiv-diagonal-into-fibers-of-precomp-is-epimorphism e =
     is-equiv-map-section-family
       ( λ g → (g , refl))
-      ( λ g → is-proof-irrelevant-is-prop
-                ( is-prop-map-is-emb (e X) (g ∘ f))
-                ( g , refl))
+      ( λ g →
+        is-proof-irrelevant-is-prop
+          ( is-prop-map-is-emb (e X) (g ∘ f))
+          ( g , refl))
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
