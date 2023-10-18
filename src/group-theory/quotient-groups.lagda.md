@@ -589,6 +589,27 @@ module _
       ( refl)
 
   abstract
+    is-equiv-top-triangle-is-quotient-group-quotient-Group :
+      {l : Level} (H : Group l) →
+      is-equiv (top-triangle-is-quotient-group-quotient-Group H)
+    is-equiv-top-triangle-is-quotient-group-quotient-Group H =
+      is-equiv-map-Σ
+        ( λ f → preserves-mul-Group G H (pr1 f))
+        ( is-set-quotient-set-quotient
+          ( eq-rel-congruence-Normal-Subgroup G N)
+          ( set-Group H))
+        ( λ f →
+          is-equiv-is-prop
+            ( is-prop-preserves-mul-Group (quotient-Group G N) H f)
+            ( is-prop-preserves-mul-Group G H
+              ( f ∘ map-quotient-hom-Group G N))
+            ( λ μ →
+              double-induction-quotient-Group G G N N
+                ( λ x y → Id-Prop (set-Group H) _ _)
+                ( λ x y →
+                  ap f (compute-mul-quotient-Group G N x y) ∙ μ x y)))
+
+  abstract
     is-quotient-group-quotient-Group :
       universal-property-quotient-Group G N
         ( quotient-Group G N)
@@ -602,21 +623,7 @@ module _
         ( map-equiv (compute-nullifying-hom-Group G H N))
         ( top-triangle-is-quotient-group-quotient-Group H)
         ( triangle-is-quotient-group-quotient-Group H)
-        ( is-equiv-map-Σ
-          ( λ f → preserves-mul-Group G H (pr1 f))
-          ( is-set-quotient-set-quotient
-            ( eq-rel-congruence-Normal-Subgroup G N)
-            ( set-Group H))
-          ( λ f →
-            is-equiv-is-prop
-              ( is-prop-preserves-mul-Group (quotient-Group G N) H f)
-              ( is-prop-preserves-mul-Group G H
-                ( f ∘ map-quotient-hom-Group G N))
-              ( λ μ →
-                double-induction-quotient-Group G G N N
-                  ( λ x y → Id-Prop (set-Group H) _ _)
-                  ( λ x y →
-                    ap f (compute-mul-quotient-Group G N x y) ∙ μ x y))))
+        ( is-equiv-top-triangle-is-quotient-group-quotient-Group H)
         ( is-equiv-map-equiv (compute-nullifying-hom-Group G H N))
 ```
 
