@@ -1,0 +1,122 @@
+# Full functors between precategories
+
+```agda
+module category-theory.full-functors-precategories where
+```
+
+<details><summary>Imports</summary>
+
+```agda
+open import category-theory.full-maps-precategories
+open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.maps-precategories
+open import category-theory.precategories
+
+open import foundation.dependent-pair-types
+open import foundation.embeddings
+open import foundation.function-types
+open import foundation.equivalences
+open import foundation.injective-maps
+open import foundation.identity-types
+open import foundation.action-on-identifications-functions
+open import foundation.propositions
+open import foundation.universe-levels
+```
+
+</details>
+
+## Idea
+
+A [functor](category-theory.functors-precategories.md) between
+[precategories](category-theory.precategories.md) `C` and `D` is **full** if
+it's [surjective](foundation-core.surjective-maps.md) on hom-sets.
+
+## Definition
+
+### The predicate of being full on functors between precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  where
+
+  is-full-functor-Precategory : UU (l1 ⊔ l2 ⊔ l4)
+  is-full-functor-Precategory =
+    is-full-map-Precategory C D (map-functor-Precategory C D F)
+
+  is-prop-is-full-functor-Precategory :
+    is-prop is-full-functor-Precategory
+  is-prop-is-full-functor-Precategory =
+    is-prop-is-full-map-Precategory C D (map-functor-Precategory C D F)
+
+  is-full-prop-functor-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  is-full-prop-functor-Precategory =
+    is-full-prop-map-Precategory C D (map-functor-Precategory C D F)
+```
+
+### The type of full functors between two precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  full-functor-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  full-functor-Precategory =
+    Σ (functor-Precategory C D) (is-full-functor-Precategory C D)
+
+  functor-full-functor-Precategory :
+    full-functor-Precategory → functor-Precategory C D
+  functor-full-functor-Precategory = pr1
+
+  is-full-full-functor-Precategory :
+    (F : full-functor-Precategory) →
+    is-full-functor-Precategory C D (functor-full-functor-Precategory F)
+  is-full-full-functor-Precategory = pr2
+
+  obj-full-functor-Precategory :
+    full-functor-Precategory → obj-Precategory C → obj-Precategory D
+  obj-full-functor-Precategory =
+    obj-functor-Precategory C D ∘ functor-full-functor-Precategory
+
+  hom-full-functor-Precategory :
+    (F : full-functor-Precategory) {x y : obj-Precategory C} →
+    hom-Precategory C x y →
+    hom-Precategory D
+      ( obj-full-functor-Precategory F x)
+      ( obj-full-functor-Precategory F y)
+  hom-full-functor-Precategory =
+    hom-functor-Precategory C D ∘ functor-full-functor-Precategory
+```
+
+### The predicate of being injective on hom-sets on functors between precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  (F : functor-Precategory C D)
+  where
+
+  is-injective-hom-functor-Precategory : UU (l1 ⊔ l2 ⊔ l4)
+  is-injective-hom-functor-Precategory =
+    is-injective-hom-map-Precategory C D (map-functor-Precategory C D F)
+
+  is-prop-is-injective-hom-functor-Precategory :
+    is-prop is-injective-hom-functor-Precategory
+  is-prop-is-injective-hom-functor-Precategory =
+    is-prop-is-injective-hom-map-Precategory C D
+      ( map-functor-Precategory C D F)
+
+  is-injective-hom-prop-functor-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
+  is-injective-hom-prop-functor-Precategory =
+    is-injective-hom-prop-map-Precategory C D
+      ( map-functor-Precategory C D F)
+```

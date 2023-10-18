@@ -320,9 +320,9 @@ module _
 
   equiv-htpy-eq-functor-Precategory : (F ＝ G) ≃ htpy-functor-Precategory
   equiv-htpy-eq-functor-Precategory =
-    ( equiv-htpy-eq-map-Precategory C D)
+    ( equiv-htpy-eq-map-Precategory C D
       ( map-functor-Precategory C D F)
-      ( map-functor-Precategory C D G) ∘e
+      ( map-functor-Precategory C D G)) ∘e
     ( equiv-eq-map-eq-functor-Precategory C D F G)
 
   htpy-eq-functor-Precategory : F ＝ G → htpy-functor-Precategory
@@ -355,13 +355,23 @@ module _
   {x y : obj-Precategory C}
   where
 
-  preserves-is-iso-functor-Precategory :
+  hom-inv-preserves-is-iso-functor-Precategory :
     (f : hom-Precategory C x y) →
     is-iso-Precategory C f →
-    is-iso-Precategory D (hom-functor-Precategory C D F f)
-  pr1 (preserves-is-iso-functor-Precategory f is-iso-f) =
+    hom-Precategory D
+      ( obj-functor-Precategory C D F y)
+      ( obj-functor-Precategory C D F x)
+  hom-inv-preserves-is-iso-functor-Precategory f is-iso-f =
     hom-functor-Precategory C D F (hom-inv-is-iso-Precategory C is-iso-f)
-  pr1 (pr2 (preserves-is-iso-functor-Precategory f is-iso-f)) =
+
+  is-right-inv-preserves-is-iso-functor-Precategory :
+    (f : hom-Precategory C x y) →
+    (is-iso-f : is-iso-Precategory C f) →
+    ( comp-hom-Precategory D
+      ( hom-functor-Precategory C D F f)
+      ( hom-functor-Precategory C D F (hom-inv-is-iso-Precategory C is-iso-f))) ＝
+    ( id-hom-Precategory D)
+  is-right-inv-preserves-is-iso-functor-Precategory f is-iso-f =
     ( inv
       ( preserves-comp-functor-Precategory C D F
         ( f)
@@ -370,7 +380,15 @@ module _
       ( hom-functor-Precategory C D F)
       ( is-section-hom-inv-is-iso-Precategory C is-iso-f)) ∙
     ( preserves-id-functor-Precategory C D F y)
-  pr2 (pr2 (preserves-is-iso-functor-Precategory f is-iso-f)) =
+
+  is-left-inv-preserves-is-iso-functor-Precategory :
+    (f : hom-Precategory C x y) →
+    (is-iso-f : is-iso-Precategory C f) →
+    ( comp-hom-Precategory D
+      ( hom-functor-Precategory C D F (hom-inv-is-iso-Precategory C is-iso-f))
+      ( hom-functor-Precategory C D F f)) ＝
+    ( id-hom-Precategory D)
+  is-left-inv-preserves-is-iso-functor-Precategory f is-iso-f =
     ( inv
       ( preserves-comp-functor-Precategory C D F
         ( hom-inv-is-iso-Precategory C is-iso-f)
@@ -379,6 +397,17 @@ module _
       ( hom-functor-Precategory C D F)
       ( is-retraction-hom-inv-is-iso-Precategory C is-iso-f)) ∙
     ( preserves-id-functor-Precategory C D F x)
+
+  preserves-is-iso-functor-Precategory :
+    (f : hom-Precategory C x y) →
+    is-iso-Precategory C f →
+    is-iso-Precategory D (hom-functor-Precategory C D F f)
+  pr1 (preserves-is-iso-functor-Precategory f is-iso-f) =
+    hom-inv-preserves-is-iso-functor-Precategory f is-iso-f
+  pr1 (pr2 (preserves-is-iso-functor-Precategory f is-iso-f)) =
+    is-right-inv-preserves-is-iso-functor-Precategory f is-iso-f
+  pr2 (pr2 (preserves-is-iso-functor-Precategory f is-iso-f)) =
+    is-left-inv-preserves-is-iso-functor-Precategory f is-iso-f
 
   preserves-iso-functor-Precategory :
     iso-Precategory C x y →

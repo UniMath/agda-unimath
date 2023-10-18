@@ -176,7 +176,7 @@ module _
       ( is-category-Category C x y)
       ( is-set-iso-Precategory (precategory-Category C))
 
-  obj-Category-1-Type : 1-Type l1
-  pr1 obj-Category-1-Type = obj-Category C
-  pr2 obj-Category-1-Type = is-1-type-obj-Category
+  obj-1-type-Category : 1-Type l1
+  pr1 obj-1-type-Category = obj-Category C
+  pr2 obj-1-type-Category = is-1-type-obj-Category
 ```

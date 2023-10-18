@@ -27,8 +27,9 @@ open import foundation.universe-levels
 A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is an
 **embedding** if it's an embedding on objects and
-[faithful](category-theory.faithful-functors-precategories.md). Hence embeddings
-are functors that are embeddings on objects and hom-sets.
+[fully faithful](category-theory.faithful-functors-precategories.md). Hence
+embeddings are functors that are embeddings on objects and equivalences on
+hom-sets.
 
 ## Definition
 

@@ -16,6 +16,7 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.injective-maps
 open import foundation.propositions
+open import foundation.function-types
 open import foundation.universe-levels
 ```
 
@@ -25,7 +26,7 @@ open import foundation.universe-levels
 
 A [map](category-theory.maps-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is **faithful** if
-its an [embedding](foundation-core.embeddings.md) on hom-sets.
+it's an [embedding](foundation-core.embeddings.md) on hom-sets.
 
 Note that embeddings on [sets](foundation-core.sets.md) happen to coincide with
 [injections](foundation.injective-maps.md), but we define it in terms of the
@@ -56,6 +57,43 @@ module _
   pr2 is-faithful-prop-map-Precategory = is-prop-is-faithful-map-Precategory
 ```
 
+### The type of faithful maps between two precategories
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Precategory l1 l2)
+  (D : Precategory l3 l4)
+  where
+
+  faithful-map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  faithful-map-Precategory =
+    Σ (map-Precategory C D) (is-faithful-map-Precategory C D)
+
+  map-faithful-map-Precategory :
+    faithful-map-Precategory → map-Precategory C D
+  map-faithful-map-Precategory = pr1
+
+  is-faithful-faithful-map-Precategory :
+    (F : faithful-map-Precategory) →
+    is-faithful-map-Precategory C D (map-faithful-map-Precategory F)
+  is-faithful-faithful-map-Precategory = pr2
+
+  obj-faithful-map-Precategory :
+    faithful-map-Precategory → obj-Precategory C → obj-Precategory D
+  obj-faithful-map-Precategory =
+    obj-map-Precategory C D ∘ map-faithful-map-Precategory
+
+  hom-faithful-map-Precategory :
+    (F : faithful-map-Precategory) {x y : obj-Precategory C} →
+    hom-Precategory C x y →
+    hom-Precategory D
+      ( obj-faithful-map-Precategory F x)
+      ( obj-faithful-map-Precategory F y)
+  hom-faithful-map-Precategory =
+    hom-map-Precategory C D ∘ map-faithful-map-Precategory
+```
+
 ### The predicate of being injective on hom-sets on maps between precategories
 
 ```agda
@@ -80,7 +118,8 @@ module _
           ( hom-map-Precategory C D F {x} {y}))
 
   is-injective-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 is-injective-hom-prop-map-Precategory = is-injective-hom-map-Precategory
+  pr1 is-injective-hom-prop-map-Precategory =
+    is-injective-hom-map-Precategory
   pr2 is-injective-hom-prop-map-Precategory =
     is-prop-is-injective-hom-map-Precategory
 ```
