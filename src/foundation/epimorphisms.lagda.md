@@ -49,28 +49,30 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-epimorphism-level : (A → B) → (l : Level) → UU (l1 ⊔ l2 ⊔ lsuc l)
-  is-epimorphism-level f l = (X : UU l) → is-emb (precomp f X)
+  is-epimorphism-level : (l : Level) → (A → B) → UU (l1 ⊔ l2 ⊔ lsuc l)
+  is-epimorphism-level l f = (X : UU l) → is-emb (precomp f X)
 
   is-epimorphism : (A → B) → UUω
-  is-epimorphism f = ∀ {l : Level} → is-epimorphism-level f l
+  is-epimorphism f = {l : Level} → is-epimorphism-level l f
 ```
 
 ## Properties
 
 ### Epimorphisms, pushouts and codiagonals
 
-```text
+
 If the map `f : A → B` is epi, then the commutative square
 
+```text
       f
     A → B
   f ↓   ↓ id
     B → B
       id
+```
 
 is a pushout square.
-```
+
 
 ```agda
 module _
@@ -86,9 +88,7 @@ module _
           ( λ g → equiv-Σ _ id-equiv (λ h → equiv-funext)))
       ( equiv-Σ _
           ( id-equiv)
-          ( λ g → inv-equiv
-                    ( inv-equiv
-                        ( equiv-fiber (precomp f X) (g ∘ f)))))
+          ( λ g → equiv-fiber (precomp f X) (g ∘ f)))
 
   diagonal-into-fibers-of-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
@@ -112,7 +112,7 @@ module _
     {l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)
   is-pushout-is-epimorphism e X =
     is-equiv-comp-htpy
-      (cocone-map f f (cocone-codiagonal-map f))
+      ( cocone-map f f (cocone-codiagonal-map f))
       ( map-equiv (equiv-fibers-of-precomp-cocone f X))
       ( diagonal-into-fibers-of-precomp f X)
       ( refl-htpy)
@@ -126,9 +126,7 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
   codiagonal-is-equiv-is-epimorphism :
     is-epimorphism f → is-equiv (codiagonal-map f)
   codiagonal-is-equiv-is-epimorphism e =
-    is-equiv-up-pushout-up-pushout
-      ( f)
-      ( f)
+    is-equiv-up-pushout-up-pushout f f
       ( cocone-pushout f f)
       ( cocone-codiagonal-map f)
       ( codiagonal-map f)
