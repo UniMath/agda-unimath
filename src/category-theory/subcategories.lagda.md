@@ -12,13 +12,17 @@ open import category-theory.embeddings-precategories
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-categories
 open import category-theory.functors-precategories
+open import category-theory.isomorphisms-in-categories
 open import category-theory.maps-categories
 open import category-theory.maps-precategories
 open import category-theory.precategories
+open import category-theory.preunivalent-categories
 open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
+open import foundation.equivalences
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -262,8 +266,6 @@ module _
     precategory-Subprecategory (precategory-Category C) P
 ```
 
-### The category structure of a subcategory
-
 ### The inclusion functor of a subcategory
 
 ```agda
@@ -318,16 +320,27 @@ module _
         ( inclusion-Subcategory C P))
   is-emb-obj-inclusion-Category =
     is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
+```
 
-  is-embedding-inclusion-Subcategory :
-    is-embedding-functor-Precategory
-      ( precategory-Subcategory C P)
-      ( precategory-Category C)
-      ( inclusion-Subcategory C P)
-  is-embedding-inclusion-Subcategory =
-    is-embedding-inclusion-Subprecategory (precategory-Category C) P
+### Subcategories are preunivalent
 
-  embedding-Subcategory :
-    embedding-Precategory (precategory-Subcategory C P) (precategory-Category C)
-  embedding-Subcategory = embedding-Subprecategory (precategory-Category C) P
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  (C : Category l1 l2)
+  (P : Subcategory l3 l4 C)
+  where
+
+  is-preunivalent-Subcategory :
+    is-preunivalent-Precategory (precategory-Subcategory C P)
+  is-preunivalent-Subcategory x y =
+    is-emb-htpy-emb
+      ( comp-emb
+        {!   !}
+        ( emb-equiv
+          ( ( extensionality-obj-Category C
+              ( inclusion-obj-Subcategory C P x)
+              ( inclusion-obj-Subcategory C P y)) ∘e
+            ( equiv-ap-inclusion-subtype (subtype-obj-Subcategory C P)))))
+      {!   !}
 ```

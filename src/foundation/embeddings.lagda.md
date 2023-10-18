@@ -114,14 +114,15 @@ module _
 
   abstract
     is-emb-comp-htpy :
-      (f : A → C) (g : B → C) (h : A → B) (H : f ~ (g ∘ h)) → is-emb g →
+      (f : A → C) (g : B → C) (h : A → B) (H : f ~ g ∘ h) → is-emb g →
       is-emb h → is-emb f
     is-emb-comp-htpy f g h H is-emb-g is-emb-h =
       is-emb-htpy H (is-emb-comp g h is-emb-g is-emb-h)
 
   comp-emb :
     (B ↪ C) → (A ↪ B) → (A ↪ C)
-  comp-emb (pair g H) (pair f K) = pair (g ∘ f) (is-emb-comp g f H K)
+  pr1 (comp-emb (g , H) (f , K)) = g ∘ f
+  pr2 (comp-emb (g , H) (f , K)) = is-emb-comp g f H K
 ```
 
 ### The right factor of a composed embedding is an embedding
