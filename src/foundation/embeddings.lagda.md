@@ -55,12 +55,12 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
-    is-emb-htpy : is-emb g → is-emb f
-    is-emb-htpy is-emb-g x y =
+    is-emb-htpy : {f g : A → B} (H : f ~ g) → is-emb g → is-emb f
+    is-emb-htpy {f} {g} H is-emb-g x y =
       is-equiv-top-is-equiv-left-square
         ( ap g)
         ( concat' (f x) (H y))
@@ -71,14 +71,21 @@ module _
         ( is-emb-g x y)
         ( is-equiv-concat' (f x) (H y))
 
+
+  is-emb-htpy-emb : {f : A → B} (e : A ↪ B) → f ~ map-emb e → is-emb f
+  is-emb-htpy-emb e H = is-emb-htpy H (is-emb-map-emb e)
+
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
-    is-emb-htpy' : is-emb f → is-emb g
-    is-emb-htpy' is-emb-f =
-      is-emb-htpy (inv-htpy H) is-emb-f
+    is-emb-htpy' : {f g : A → B} (H : f ~ g) → is-emb f → is-emb g
+    is-emb-htpy' H is-emb-f = is-emb-htpy (inv-htpy H) is-emb-f
+
+  is-emb-htpy-emb' : (e : A ↪ B) {g : A → B} → map-emb e ~ g → is-emb g
+  is-emb-htpy-emb' e H = is-emb-htpy' H (is-emb-map-emb e)
+
 ```
 
 ### Any map between propositions is an embedding
