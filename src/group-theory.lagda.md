@@ -32,6 +32,7 @@ open import group-theory.commutators-of-elements-groups public
 open import group-theory.commuting-elements-groups public
 open import group-theory.commuting-elements-monoids public
 open import group-theory.commuting-elements-semigroups public
+open import group-theory.commuting-squares-of-group-homomorphisms public
 open import group-theory.concrete-group-actions public
 open import group-theory.concrete-groups public
 open import group-theory.concrete-monoids public
