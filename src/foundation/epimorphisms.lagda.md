@@ -141,6 +141,21 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
   is-pushout-is-epimorphism = is-equiv-codiagonal-map-is-epimorphism
 ```
 
+### A map is an epimorphism if its codiagonal is an equivalence
+
+```agda
+  is-epimorphism-universal-property-pushout-Level :
+    {l : Level} →
+    universal-property-pushout l f f (cocone-codiagonal-map f) →
+    is-epimorphism f
+  is-epimorphism-universal-property-pushout-Level up-c X =
+    is-emb-is-prop-map (λ g → {!!})
+
+  is-epimorphism-is-equiv-codiagonal-map :
+    is-equiv (codiagonal-map f) → is-epimorphism f
+  is-epimorphism-is-equiv-codiagonal-map = {!!}
+```
+
 ## See also
 
 - [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
