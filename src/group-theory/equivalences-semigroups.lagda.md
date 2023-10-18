@@ -92,7 +92,7 @@ module _
     (pair (pair μ-G' associative-G') μ-id) =
     eq-type-subtype
       ( λ μ →
-        preserves-mul-semigroup-Prop G (pair (set-Semigroup G) μ) id)
+        preserves-mul-prop-Semigroup G (pair (set-Semigroup G) μ) id)
       ( eq-type-subtype
         ( λ μ →
           Π-Prop

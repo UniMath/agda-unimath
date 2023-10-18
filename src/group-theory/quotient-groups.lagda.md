@@ -1,8 +1,6 @@
 # Quotient groups
 
 ```agda
-{-# OPTIONS --lossy-unification --allow-unsolved-metas #-}
-
 module group-theory.quotient-groups where
 ```
 
@@ -11,12 +9,15 @@ module group-theory.quotient-groups where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.binary-functoriality-set-quotients
+open import foundation.commuting-triangles-of-maps
 open import foundation.dependent-pair-types
 open import foundation.effective-maps-equivalence-relations
 open import foundation.equivalences
+open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.functoriality-set-quotients
+open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.propositions
@@ -79,6 +80,30 @@ module _
       ( hom-nullifying-hom-Group H f) H
   nullifies-nullifying-hom-Group H = pr2
 
+  reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group :
+    (f : hom-Group G K) (H : Normal-Subgroup l3 G) →
+    nullifies-normal-subgroup-hom-Group f H →
+    reflects-Equivalence-Relation
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( map-hom-Group G K f)
+  reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group f H p α =
+    ( inv (right-unit-law-mul-Group K _)) ∙
+    ( inv-transpose-eq-mul-Group' K
+      ( ( inv (p (left-div-Group G _ _) α)) ∙
+        ( preserves-left-div-hom-Group G K f)))
+
+  nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group :
+    (f : hom-Group G K) (H : Normal-Subgroup l3 G) →
+    reflects-Equivalence-Relation
+      ( eq-rel-congruence-Normal-Subgroup G H)
+      ( map-hom-Group G K f) →
+    nullifies-normal-subgroup-hom-Group f H
+  nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f H p x q =
+    ( p ( is-closed-under-multiplication-Normal-Subgroup G H _ _
+          ( is-closed-under-inverses-Normal-Subgroup G H x q)
+          ( contains-unit-Normal-Subgroup G H))) ∙
+    ( preserves-unit-hom-Group G K f)
+
   compute-nullifying-hom-Group :
     (H : Normal-Subgroup l3 G) →
     Σ ( reflecting-map-Equivalence-Relation
@@ -87,15 +112,18 @@ module _
       ( λ f → preserves-mul-Group G K (pr1 f)) ≃
     nullifying-hom-Group H
   compute-nullifying-hom-Group H =
-    ( equiv-tot
+    ( equiv-type-subtype
       ( λ f →
-        equiv-iff
-          {!!}
-          ( Π-Prop
-            ( type-Group G)
-            ( λ x → {!!}))
-          {!!}
-          {!!})) ∘e
+        is-prop-reflects-Equivalence-Relation
+          ( eq-rel-congruence-Normal-Subgroup G H)
+          ( set-Group K)
+          ( pr1 f))
+      ( λ f → is-prop-leq-Normal-Subgroup G H (kernel-hom-Group G K f))
+      ( λ f →
+        nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f H)
+      ( λ f →
+        reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group
+          f H)) ∘e
     ( equiv-right-swap-Σ)
 ```
 
@@ -431,78 +459,7 @@ module _
     nullifies-normal-subgroup-quotient-hom-Group
 ```
 
-#### The universal property of the quotient group
-
-**Proof:** Let `G` and `H` be groups and let `N` be a normal subgroup of `G`.
-Our goal is to show that the precomposition function
-
-```text
-  hom-Group G/N H → nullifying-hom-Group G H N
-```
-
-is an equivalence. To see this, note that the above map is a composite of the
-maps
-
-```text
-  hom-Group G/N H → Σ (Σ (G → H) (λ f → is-nullifying f)) (λ u → is-hom (pr1 u))
-                  → Σ (hom-Group G H) (λ f → is-nullifying f)
-```
-
-The second map is an equivalence since it merely changes the order of the
-components in the dependent pair type. The first map is an equivalence by the
-universal property of set quotients, by which we have:
-
-```text
-  (G/N → H) ≃ Σ (G → H) (is-nullifying f).
-```
-
-```agda
-module _
-  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
-  where
-
-  abstract
-    is-quotient-group-quotient-Group :
-      universal-property-quotient-Group G N
-        ( quotient-Group G N)
-        ( nullifying-quotient-hom-Group G N)
-    is-quotient-group-quotient-Group H =
-      is-equiv-comp-htpy
-        {!!}
-        ( map-right-swap-Σ)
-        {! map-Σ-map-base!}
-        {!!}
-        {!!}
-        ( is-equiv-map-right-swap-Σ)
-```
-
-## Properties
-
-### An element is in a normal subgroup `N` if and only if it is in the kernel of the quotient group homomorphism `G → G/N`
-
-```agda
-module _
-  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
-  where
-
-  abstract
-    is-in-kernel-quotient-hom-is-in-Normal-Subgroup :
-      {x : type-Group G} → is-in-Normal-Subgroup G N x →
-      is-in-kernel-hom-Group G (quotient-Group G N) (quotient-hom-Group G N) x
-    is-in-kernel-quotient-hom-is-in-Normal-Subgroup =
-      nullifies-normal-subgroup-quotient-hom-Group G N _
-
-  abstract
-    is-in-normal-subgroup-is-in-kernel-quotient-hom-Group :
-      {x : type-Group G} →
-      is-in-kernel-hom-Group G (quotient-Group G N) (quotient-hom-Group G N) x →
-      is-in-Normal-Subgroup G N x
-    is-in-normal-subgroup-is-in-kernel-quotient-hom-Group {x} H =
-      unit-congruence-Normal-Subgroup G N
-        ( apply-effectiveness-map-quotient-hom-Group G N H)
-```
-
-### Induction on quotient groups
+#### Induction on quotient groups
 
 ```agda
 module _
@@ -528,7 +485,7 @@ module _
         ( P)
 ```
 
-### Double induction on quotient groups
+#### Double induction on quotient groups
 
 ```agda
 module _
@@ -562,4 +519,129 @@ module _
         ( eq-rel-congruence-Normal-Subgroup G N)
         ( eq-rel-congruence-Normal-Subgroup H M)
         ( P)
+```
+
+#### The universal property of the quotient group
+
+**Proof:** Let `G` and `H` be groups and let `N` be a normal subgroup of `G`.
+Our goal is to show that the precomposition function
+
+```text
+  hom-Group G/N H → nullifying-hom-Group G H N
+```
+
+is an equivalence. To see this, note that the above map is a composite of the
+maps
+
+```text
+  hom-Group G/N H → Σ (reflecting-map G H) (λ u → preserves-mul (pr1 u))
+                  ≃ Σ (hom-Group G H) (λ f → is-nullifying f)
+```
+
+The second map is the equivalence `compute-nullifying-hom-Group` constructed
+above. The first map is an equivalence by the universal property of set
+quotients, by which we have:
+
+```text
+  (G/N → H) ≃ reflecting-map G H.
+```
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  top-triangle-is-quotient-group-quotient-Group :
+    {l : Level} (H : Group l) →
+    hom-Group (quotient-Group G N) H →
+    Σ ( reflecting-map-Equivalence-Relation
+        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( type-Group H))
+      ( λ f → preserves-mul-Group G H (pr1 f))
+  top-triangle-is-quotient-group-quotient-Group H =
+    map-Σ
+      ( λ f → preserves-mul-Group G H (pr1 f))
+      ( precomp-Set-Quotient
+        ( eq-rel-congruence-Normal-Subgroup G N)
+        ( set-quotient-Group G N)
+        ( reflecting-map-quotient-map
+          ( eq-rel-congruence-Normal-Subgroup G N))
+        ( set-Group H))
+      ( λ f μ →
+        preserves-mul-comp-hom-Group G
+          ( quotient-Group G N)
+          ( H)
+          ( f , μ)
+          ( quotient-hom-Group G N))
+
+  triangle-is-quotient-group-quotient-Group :
+    {l : Level} (H : Group l) →
+    coherence-triangle-maps
+      ( precomp-nullifying-hom-Group G N
+        ( quotient-Group G N)
+        ( nullifying-quotient-hom-Group G N)
+        ( H))
+      ( map-equiv (compute-nullifying-hom-Group G H N))
+      ( top-triangle-is-quotient-group-quotient-Group H)
+  triangle-is-quotient-group-quotient-Group H x =
+    eq-type-subtype
+      ( λ f → nullifies-normal-subgroup-prop-hom-Group G H f N)
+      ( refl)
+
+  abstract
+    is-quotient-group-quotient-Group :
+      universal-property-quotient-Group G N
+        ( quotient-Group G N)
+        ( nullifying-quotient-hom-Group G N)
+    is-quotient-group-quotient-Group H =
+      is-equiv-comp-htpy
+        ( precomp-nullifying-hom-Group G N
+          ( quotient-Group G N)
+          ( nullifying-quotient-hom-Group G N)
+          ( H))
+        ( map-equiv (compute-nullifying-hom-Group G H N))
+        ( top-triangle-is-quotient-group-quotient-Group H)
+        ( triangle-is-quotient-group-quotient-Group H)
+        ( is-equiv-map-Σ
+          ( λ f → preserves-mul-Group G H (pr1 f))
+          ( is-set-quotient-set-quotient
+            ( eq-rel-congruence-Normal-Subgroup G N)
+            ( set-Group H))
+          ( λ f →
+            is-equiv-is-prop
+              ( is-prop-preserves-mul-Group (quotient-Group G N) H f)
+              ( is-prop-preserves-mul-Group G H
+                ( f ∘ map-quotient-hom-Group G N))
+              ( λ μ →
+                double-induction-quotient-Group G G N N
+                  ( λ x y → Id-Prop (set-Group H) _ _)
+                  ( λ x y →
+                    ap f (compute-mul-quotient-Group G N x y) ∙ μ x y))))
+        ( is-equiv-map-equiv (compute-nullifying-hom-Group G H N))
+```
+
+## Properties
+
+### An element is in a normal subgroup `N` if and only if it is in the kernel of the quotient group homomorphism `G → G/N`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  abstract
+    is-in-kernel-quotient-hom-is-in-Normal-Subgroup :
+      {x : type-Group G} → is-in-Normal-Subgroup G N x →
+      is-in-kernel-hom-Group G (quotient-Group G N) (quotient-hom-Group G N) x
+    is-in-kernel-quotient-hom-is-in-Normal-Subgroup =
+      nullifies-normal-subgroup-quotient-hom-Group G N _
+
+  abstract
+    is-in-normal-subgroup-is-in-kernel-quotient-hom-Group :
+      {x : type-Group G} →
+      is-in-kernel-hom-Group G (quotient-Group G N) (quotient-hom-Group G N) x →
+      is-in-Normal-Subgroup G N x
+    is-in-normal-subgroup-is-in-kernel-quotient-hom-Group {x} H =
+      unit-congruence-Normal-Subgroup G N
+        ( apply-effectiveness-map-quotient-hom-Group G N H)
 ```

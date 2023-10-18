@@ -330,24 +330,22 @@ module _
 
   abstract
     is-equiv-map-Σ :
-      (f : A → B) (g : (x : A) → C x → D (f x)) →
+      {f : A → B} {g : (x : A) → C x → D (f x)} →
       is-equiv f → is-fiberwise-equiv g → is-equiv (map-Σ D f g)
-    is-equiv-map-Σ f g is-equiv-f is-fiberwise-equiv-g =
+    is-equiv-map-Σ is-equiv-f is-fiberwise-equiv-g =
       is-equiv-comp-htpy
-        ( map-Σ D f g)
-        ( map-Σ-map-base f D)
-        ( tot g)
-        ( triangle-map-Σ D f g)
+        ( map-Σ D _ _)
+        ( map-Σ-map-base _ D)
+        ( tot _)
+        ( triangle-map-Σ D _ _)
         ( is-equiv-tot-is-fiberwise-equiv is-fiberwise-equiv-g)
-        ( is-equiv-map-Σ-map-base f D is-equiv-f)
+        ( is-equiv-map-Σ-map-base _ D is-equiv-f)
 
   equiv-Σ :
     (e : A ≃ B) (g : (x : A) → C x ≃ D (map-equiv e x)) → Σ A C ≃ Σ B D
   pr1 (equiv-Σ e g) = map-Σ D (map-equiv e) (λ x → map-equiv (g x))
   pr2 (equiv-Σ e g) =
     is-equiv-map-Σ
-      ( map-equiv e)
-      ( λ x → map-equiv (g x))
       ( is-equiv-map-equiv e)
       ( λ x → is-equiv-map-equiv (g x))
 
