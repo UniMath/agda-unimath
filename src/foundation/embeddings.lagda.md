@@ -357,7 +357,8 @@ module _
 ### A map is an embedding if and only if it has contractible fibers at values
 
 ```agda
-module _ {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
   is-emb-is-contr-fibers-values' :
