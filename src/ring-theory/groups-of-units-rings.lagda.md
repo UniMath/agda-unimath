@@ -247,7 +247,10 @@ module _
 
 ```agda
 group-of-units-ring-functor-Large-Precategory :
-  functor-Large-Precategory Ring-Large-Precategory Group-Large-Precategory id
+  functor-Large-Precategory
+    ( λ l → l)
+    ( Ring-Large-Precategory)
+    ( Group-Large-Precategory)
 obj-functor-Large-Precategory
   group-of-units-ring-functor-Large-Precategory =
   group-of-units-Ring
