@@ -86,9 +86,10 @@ module _
   equiv-fibers-precomp-cocone :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
   equiv-fibers-precomp-cocone =
-    equiv-tot ( λ g →
-                ( equiv-tot (λ h → equiv-funext) ∘e
-                ( equiv-fiber (precomp f X) (g ∘ f))))
+    equiv-tot
+      ( λ g →
+        ( equiv-tot (λ h → equiv-funext) ∘e
+        ( equiv-fiber (precomp f X) (g ∘ f))))
 
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
