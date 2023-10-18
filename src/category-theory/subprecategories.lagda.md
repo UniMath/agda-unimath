@@ -411,19 +411,4 @@ module _
         ( inclusion-Subprecategory C P))
   is-emb-obj-inclusion-Subprecategory =
     is-emb-inclusion-subtype (subtype-obj-Subprecategory C P)
-
-  is-embedding-inclusion-Subprecategory :
-    is-embedding-functor-Precategory
-      ( precategory-Subprecategory C P)
-      ( C)
-      ( inclusion-Subprecategory C P)
-  pr1 is-embedding-inclusion-Subprecategory =
-    is-emb-obj-inclusion-Subprecategory
-  pr2 is-embedding-inclusion-Subprecategory =
-    is-faithful-inclusion-Subprecategory
-
-  embedding-Subprecategory :
-    embedding-Precategory (precategory-Subprecategory C P) C
-  pr1 embedding-Subprecategory = inclusion-Subprecategory C P
-  pr2 embedding-Subprecategory = is-embedding-inclusion-Subprecategory
 ```

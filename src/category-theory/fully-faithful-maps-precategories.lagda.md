@@ -60,6 +60,35 @@ module _
   pr1 is-fully-faithful-prop-map-Precategory = is-fully-faithful-map-Precategory
   pr2 is-fully-faithful-prop-map-Precategory =
     is-prop-is-fully-faithful-map-Precategory
+
+  equiv-hom-is-fully-faithful-map-Precategory :
+    is-fully-faithful-map-Precategory → {x y : obj-Precategory C} →
+    hom-Precategory C x y ≃
+    hom-Precategory D
+      ( obj-map-Precategory C D F x)
+      ( obj-map-Precategory C D F y)
+  pr1 (equiv-hom-is-fully-faithful-map-Precategory is-ff-F) =
+    hom-map-Precategory C D F
+  pr2 (equiv-hom-is-fully-faithful-map-Precategory is-ff-F {x} {y}) =
+    is-ff-F x y
+
+  inv-equiv-hom-is-fully-faithful-map-Precategory :
+    is-fully-faithful-map-Precategory → {x y : obj-Precategory C} →
+    hom-Precategory D
+      ( obj-map-Precategory C D F x)
+      ( obj-map-Precategory C D F y) ≃
+    hom-Precategory C x y
+  inv-equiv-hom-is-fully-faithful-map-Precategory is-ff-F =
+    inv-equiv (equiv-hom-is-fully-faithful-map-Precategory is-ff-F)
+
+  map-inv-hom-is-fully-faithful-map-Precategory :
+    is-fully-faithful-map-Precategory → {x y : obj-Precategory C} →
+    hom-Precategory D
+      ( obj-map-Precategory C D F x)
+      ( obj-map-Precategory C D F y) →
+    hom-Precategory C x y
+  map-inv-hom-is-fully-faithful-map-Precategory is-ff-F =
+    map-equiv (inv-equiv-hom-is-fully-faithful-map-Precategory is-ff-F)
 ```
 
 ### The type of fully faithful maps between two precategories
@@ -104,10 +133,10 @@ module _
     hom-Precategory D
       ( obj-fully-faithful-map-Precategory F x)
       ( obj-fully-faithful-map-Precategory F y)
-  pr1 (equiv-hom-fully-faithful-map-Precategory F) =
-    hom-fully-faithful-map-Precategory F
-  pr2 (equiv-hom-fully-faithful-map-Precategory F {x} {y}) =
-    is-fully-faithful-fully-faithful-map-Precategory F x y
+  equiv-hom-fully-faithful-map-Precategory F =
+    equiv-hom-is-fully-faithful-map-Precategory C D
+      ( map-fully-faithful-map-Precategory F)
+      ( is-fully-faithful-fully-faithful-map-Precategory F)
 
   inv-equiv-hom-fully-faithful-map-Precategory :
     (F : fully-faithful-map-Precategory) {x y : obj-Precategory C} →
