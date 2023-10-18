@@ -71,7 +71,6 @@ module _
         ( is-emb-g x y)
         ( is-equiv-concat' (f x) (H y))
 
-
   is-emb-htpy-emb : {f : A → B} (e : A ↪ B) → f ~ map-emb e → is-emb f
   is-emb-htpy-emb e H = is-emb-htpy H (is-emb-map-emb e)
 
@@ -85,7 +84,6 @@ module _
 
   is-emb-htpy-emb' : (e : A ↪ B) {g : A → B} → map-emb e ~ g → is-emb g
   is-emb-htpy-emb' e H = is-emb-htpy' H (is-emb-map-emb e)
-
 ```
 
 ### Any map between propositions is an embedding

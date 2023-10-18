@@ -81,9 +81,7 @@ module _
 
 ## Properties
 
-### Equivalence induction is equivalent to the contractibility of the total space of equivalences
-
-#### Contractibility of the total space of equivalences implies equivalence induction
+### Contractibility of the total space of equivalences implies equivalence induction
 
 ```agda
 module _
@@ -91,12 +89,12 @@ module _
   where
 
   abstract
-    is-identity-system-is-contr-total-equiv :
+    induction-principle-equivalences-is-contr-total-equiv :
       is-contr (Σ (UU l1) (λ X → A ≃ X)) →
       {l : Level} →
       (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
       induction-principle-equivalences (λ B e → P (B , e))
-    is-identity-system-is-contr-total-equiv c P =
+    induction-principle-equivalences-is-contr-total-equiv c P =
       section-left-factor
         ( ev-id-equiv (λ X e → P (X , e)))
         ( ev-pair)
@@ -108,7 +106,7 @@ module _
           ( P))
 ```
 
-#### Equivalence induction implies contractibility of the total space of equivalences
+### Equivalence induction implies contractibility of the total space of equivalences
 
 ```agda
 module _
@@ -155,7 +153,7 @@ module _
   abstract
     is-identity-system-equiv : section (ev-id-equiv P)
     is-identity-system-equiv =
-      is-identity-system-is-contr-total-equiv
+      induction-principle-equivalences-is-contr-total-equiv
         ( is-contr-total-equiv _)
         ( λ t → P (pr1 t) (pr2 t))
 
