@@ -15,6 +15,7 @@ open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 ```
@@ -56,14 +57,15 @@ abstract
     {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
     (B : A → UU l2) → B a → (x : A) → B x
   ind-singleton-is-contr a is-contr-A B b x =
-    tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
+    tr B (inv (contraction is-contr-A a) ∙ contraction is-contr-A x) b
 
+abstract
   compute-ind-singleton-is-contr :
     {l1 l2 : Level} {A : UU l1}
     (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
-    ((ev-point a {B}) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
+    (ev-point a {B} ∘ ind-singleton-is-contr a is-contr-A B) ~ id
   compute-ind-singleton-is-contr a is-contr-A B b =
-    ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
+    ap (λ p → tr B p b) (left-inv (contraction is-contr-A a))
 
 is-singleton-is-contr :
   {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
@@ -83,7 +85,43 @@ abstract
   is-contr-is-singleton :
     {l1 : Level} (A : UU l1) (a : A) →
     ({l2 : Level} → is-singleton l2 A a) → is-contr A
-  is-contr-is-singleton A a S = is-contr-ind-singleton A a (λ P → pr1 (S P))
+  is-contr-is-singleton A a S = is-contr-ind-singleton A a (pr1 ∘ S)
+```
+
+### Singleton induction for propositions
+
+```agda
+abstract
+  ind-singleton-is-prop :
+    {l1 l2 : Level} {A : UU l1} (a : A) (is-prop-A : is-prop A)
+    (B : A → UU l2) → B a → (x : A) → B x
+  ind-singleton-is-prop a is-prop-A =
+    ind-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a)
+
+abstract
+  compute-ind-singleton-is-prop :
+    {l1 l2 : Level} {A : UU l1}
+    (a : A) (is-prop-A : is-prop A) (B : A → UU l2) →
+    (ev-point a {B} ∘ ind-singleton-is-prop a is-prop-A B) ~ id
+  compute-ind-singleton-is-prop a is-prop-A =
+    compute-ind-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a)
+
+is-singleton-is-prop :
+  {l1 l2 : Level} {A : UU l1} (a : A) → is-prop A → is-singleton l2 A a
+is-singleton-is-prop a is-prop-A =
+  is-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a)
+
+abstract
+  is-prop-ind-singleton :
+    {l1 : Level} (A : UU l1) (a : A) →
+    ({l2 : Level} (P : A → UU l2) → P a → (x : A) → P x) → is-prop A
+  is-prop-ind-singleton A a S = is-prop-is-contr (is-contr-ind-singleton A a S)
+
+abstract
+  is-prop-is-singleton :
+    {l1 : Level} (A : UU l1) (a : A) →
+    ({l2 : Level} → is-singleton l2 A a) → is-prop A
+  is-prop-is-singleton A a S = is-prop-ind-singleton A a (pr1 ∘ S)
 ```
 
 ## Examples
