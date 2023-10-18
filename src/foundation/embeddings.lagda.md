@@ -363,7 +363,7 @@ module _ {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   is-emb-is-contr-fibers-values' :
     ((a : A) → is-contr (fiber' f (f a))) → is-emb f
   is-emb-is-contr-fibers-values' c a =
-    fundamental-theorem-id (c a) (λ x → ap f)
+    fundamental-theorem-id (c a) (λ x → ap f {a} {x})
 
   is-emb-is-contr-fibers-values :
     ((a : A) → is-contr (fiber f (f a))) → is-emb f
@@ -378,7 +378,7 @@ module _ {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   is-contr-fibers-values-is-emb' :
     is-emb f → ((a : A) → is-contr (fiber' f (f a)))
   is-contr-fibers-values-is-emb' e a =
-    fundamental-theorem-id' (λ x → ap f {a} {x}) (λ x → e a x)
+    fundamental-theorem-id' (λ x → ap f {a} {x}) (e a)
 
   is-contr-fibers-values-is-emb :
     is-emb f → ((a : A) → is-contr (fiber f (f a)))
