@@ -363,22 +363,22 @@ module _
   pr2 inclusion-map-Subprecategory {x} {y} =
     inclusion-hom-Subprecategory C P x y
 
-  is-functor-inclusion-map-Subprecategory :
+  is-functor-inclusion-Subprecategory :
     is-functor-map-Precategory
       ( precategory-Subprecategory C P)
       ( C)
       ( inclusion-map-Subprecategory)
-  pr1 is-functor-inclusion-map-Subprecategory g f = refl
-  pr2 is-functor-inclusion-map-Subprecategory x = refl
+  pr1 is-functor-inclusion-Subprecategory g f = refl
+  pr2 is-functor-inclusion-Subprecategory x = refl
 
-  inclusion-functor-Subprecategory :
+  inclusion-Subprecategory :
     functor-Precategory (precategory-Subprecategory C P) C
-  pr1 inclusion-functor-Subprecategory =
+  pr1 inclusion-Subprecategory =
     inclusion-obj-Subprecategory C P
-  pr1 (pr2 inclusion-functor-Subprecategory) {x} {y} =
+  pr1 (pr2 inclusion-Subprecategory) {x} {y} =
     inclusion-hom-Subprecategory C P x y
-  pr2 (pr2 inclusion-functor-Subprecategory) =
-    is-functor-inclusion-map-Subprecategory
+  pr2 (pr2 inclusion-Subprecategory) =
+    is-functor-inclusion-Subprecategory
 ```
 
 ## Properties
@@ -392,46 +392,38 @@ module _
   (P : Subprecategory l3 l4 C)
   where
 
-  is-faithful-inclusion-map-Subprecategory :
-    is-faithful-map-Precategory
+  is-faithful-inclusion-Subprecategory :
+    is-faithful-functor-Precategory
       ( precategory-Subprecategory C P)
       ( C)
-      ( inclusion-map-Subprecategory C P)
-  is-faithful-inclusion-map-Subprecategory x y =
+      ( inclusion-Subprecategory C P)
+  is-faithful-inclusion-Subprecategory x y =
     is-emb-inclusion-subtype
       ( subtype-hom-Subprecategory C P
         ( inclusion-obj-Subprecategory C P x)
         ( inclusion-obj-Subprecategory C P y))
 
-  is-faithful-inclusion-functor-Subprecategory :
-    is-faithful-functor-Precategory
-      ( precategory-Subprecategory C P)
-      ( C)
-      ( inclusion-functor-Subprecategory C P)
-  is-faithful-inclusion-functor-Subprecategory =
-    is-faithful-inclusion-map-Subprecategory
-
-  is-emb-obj-inclusion-functor-Subprecategory :
+  is-emb-obj-inclusion-Subprecategory :
     is-emb
       ( obj-functor-Precategory
         ( precategory-Subprecategory C P)
         ( C)
-        ( inclusion-functor-Subprecategory C P))
-  is-emb-obj-inclusion-functor-Subprecategory =
+        ( inclusion-Subprecategory C P))
+  is-emb-obj-inclusion-Subprecategory =
     is-emb-inclusion-subtype (subtype-obj-Subprecategory C P)
 
-  is-embedding-inclusion-functor-Subprecategory :
+  is-embedding-inclusion-Subprecategory :
     is-embedding-functor-Precategory
       ( precategory-Subprecategory C P)
       ( C)
-      ( inclusion-functor-Subprecategory C P)
-  pr1 is-embedding-inclusion-functor-Subprecategory =
-    is-emb-obj-inclusion-functor-Subprecategory
-  pr2 is-embedding-inclusion-functor-Subprecategory =
-    is-faithful-inclusion-functor-Subprecategory
+      ( inclusion-Subprecategory C P)
+  pr1 is-embedding-inclusion-Subprecategory =
+    is-emb-obj-inclusion-Subprecategory
+  pr2 is-embedding-inclusion-Subprecategory =
+    is-faithful-inclusion-Subprecategory
 
   embedding-Subprecategory :
     embedding-Precategory (precategory-Subprecategory C P) C
-  pr1 embedding-Subprecategory = inclusion-functor-Subprecategory C P
-  pr2 embedding-Subprecategory = is-embedding-inclusion-functor-Subprecategory
+  pr1 embedding-Subprecategory = inclusion-Subprecategory C P
+  pr2 embedding-Subprecategory = is-embedding-inclusion-Subprecategory
 ```
