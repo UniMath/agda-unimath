@@ -94,29 +94,3 @@ module _
   hom-full-functor-Precategory =
     hom-functor-Precategory C D ∘ functor-full-functor-Precategory
 ```
-
-### The predicate of being injective on hom-sets on functors between precategories
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (D : Precategory l3 l4)
-  (F : functor-Precategory C D)
-  where
-
-  is-injective-hom-functor-Precategory : UU (l1 ⊔ l2 ⊔ l4)
-  is-injective-hom-functor-Precategory =
-    is-injective-hom-map-Precategory C D (map-functor-Precategory C D F)
-
-  is-prop-is-injective-hom-functor-Precategory :
-    is-prop is-injective-hom-functor-Precategory
-  is-prop-is-injective-hom-functor-Precategory =
-    is-prop-is-injective-hom-map-Precategory C D
-      ( map-functor-Precategory C D F)
-
-  is-injective-hom-prop-functor-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
-  is-injective-hom-prop-functor-Precategory =
-    is-injective-hom-prop-map-Precategory C D
-      ( map-functor-Precategory C D F)
-```

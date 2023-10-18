@@ -92,37 +92,3 @@ module _
   hom-full-map-Precategory =
     hom-map-Precategory C D ∘ map-full-map-Precategory
 ```
-
-### The predicate of being injective on hom-sets on maps between precategories
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Precategory l1 l2)
-  (D : Precategory l3 l4)
-  (F : map-Precategory C D)
-  where
-
-  is-injective-hom-map-Precategory : UU (l1 ⊔ l2 ⊔ l4)
-  is-injective-hom-map-Precategory =
-    (x y : obj-Precategory C) → is-injective (hom-map-Precategory C D F {x} {y})
-
-  is-prop-is-injective-hom-map-Precategory :
-    is-prop is-injective-hom-map-Precategory
-  is-prop-is-injective-hom-map-Precategory =
-    is-prop-Π²
-      ( λ x y →
-        is-prop-is-injective
-          ( is-set-hom-Precategory C x y)
-          ( hom-map-Precategory C D F {x} {y}))
-
-  is-injective-hom-prop-map-Precategory : Prop (l1 ⊔ l2 ⊔ l4)
-  pr1 is-injective-hom-prop-map-Precategory =
-    is-injective-hom-map-Precategory
-  pr2 is-injective-hom-prop-map-Precategory =
-    is-prop-is-injective-hom-map-Precategory
-```
-
-## See also
-
-- [Faithful maps between precategories](category-theory.faithful-maps-precategories.md)
