@@ -96,7 +96,7 @@ module _
     is-epimorphism f → is-equiv diagonal-into-fibers-of-precomp
   is-equiv-diagonal-into-fibers-of-precomp-is-epimorphism e =
     is-equiv-map-section-family
-      ( λ g → g , refl)
+      ( λ g → (g , refl))
       ( λ g → is-proof-irrelevant-is-prop
                 ( is-prop-map-is-emb (e X) (g ∘ f))
                 ( g , refl))
