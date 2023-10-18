@@ -14,10 +14,12 @@ open import category-theory.functors-precategories
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
+open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.surjective-maps
@@ -257,22 +259,30 @@ module _
   {x y : obj-Precategory C}
   where
 
-  -- hom-inv-reflects-is-iso-fully-faithful-functor-Precategory :
-  --   (f : hom-Precategory C x y) →
-  --   is-iso-Precategory D (hom-functor-Precategory C D F f) →
-  --   hom-Precategory C y x
-  -- hom-inv-reflects-is-iso-fully-faithful-functor-Precategory f is-iso-f =
-  --   map-inv-hom-fully-faithful-functor-Precategory C D F
-  --     ( hom-inv-is-iso-Precategory D is-iso-f)
+  hom-inv-reflects-is-iso-is-fully-faithful-functor-Precategory :
+    (f : hom-Precategory C x y) →
+    is-iso-Precategory D (hom-functor-Precategory C D F f) →
+    hom-Precategory C y x
+  hom-inv-reflects-is-iso-is-fully-faithful-functor-Precategory f is-iso-Ff =
+    map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F
+      ( hom-inv-is-iso-Precategory D is-iso-Ff)
 
-  -- is-right-inv-hom-inv-is-iso-fully-faithful-functor-Precategory :
-  --   (f : hom-Precategory C x y) →
-  --   is-iso-Precategory D (hom-fully-faithful-functor-Precategory C D F f) →
-  --   ( comp-hom-Precategory D
-  --     ( hom-functor-Precategory C D F f)
-  --     ( hom-functor-Precategory C D F (hom-inv-is-iso-Precategory C is-iso-f))) ＝
-  --   ( id-hom-Precategory D)
-  -- is-right-inv-hom-inv-is-iso-fully-faithful-functor-Precategory f is-iso-f = ?
+  is-right-inv-hom-inv-is-iso-fully-faithful-functor-Precategory :
+    (f : hom-Precategory C x y) →
+    (is-iso-Ff : is-iso-Precategory D (hom-functor-Precategory C D F f)) →
+    ( comp-hom-Precategory C
+      ( f)
+      ( map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F (hom-inv-is-iso-Precategory D is-iso-Ff))) ＝
+    ( id-hom-Precategory C)
+  is-right-inv-hom-inv-is-iso-fully-faithful-functor-Precategory f is-iso-Ff =
+    equational-reasoning
+      comp-hom-Precategory C f
+        ( map-inv-hom-is-fully-faithful-functor-Precategory C D F is-ff-F
+          ( hom-inv-is-iso-Precategory D is-iso-Ff))
+      ＝ {!   !} by {!   !}
+      ＝ {!   !} by {!   !}
+      ＝ {!   !} by {!   !}
+      ＝ id-hom-Precategory C by {!   !}
     -- ( inv
     --   ( preserves-comp-functor-Precategory C D F
     --     ( f)

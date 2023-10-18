@@ -96,6 +96,7 @@ open import category-theory.precategory-of-maps-from-small-to-large-precategorie
 open import category-theory.precategory-of-maps-precategories public
 open import category-theory.pregroupoids public
 open import category-theory.presheaf-categories public
+open import category-theory.preunivalent-categories public
 open import category-theory.products-in-precategories public
 open import category-theory.products-of-precategories public
 open import category-theory.pullbacks-in-precategories public

@@ -23,11 +23,15 @@ open import foundation.universe-levels
 
 ## Idea
 
-A category in Homotopy Type Theory is a precategory for which the identities
-between the objects are the isomorphisms. More specifically, an equality between
-objects gives rise to an isomorphism between them, by the J-rule. A precategory
-is a category if this function is an equivalence. Note: being a category is a
-proposition since `is-equiv` is a proposition.
+A **category** in Homotopy Type Theory is a
+[precategory](category-theory.precategories.md) for which the
+[identifications](foundation-core.identity-types.md) between the objects are the
+[isomorphisms](category-theory.isomorphisms-in-precategories.md). More
+specifically, an equality between objects gives rise to an isomorphism between
+them, by the J-rule. A precategory is a category if this function, called
+`iso-eq`, is an [equivalence](foundation-core.equivalences.md). In particular.
+being a category is a [proposition](foundation-core.propositions.md) since
+`is-equiv` is a proposition.
 
 ## Definition
 
