@@ -13,6 +13,7 @@ open import group-theory.cartesian-products-concrete-groups public
 open import group-theory.cartesian-products-groups public
 open import group-theory.cartesian-products-monoids public
 open import group-theory.cartesian-products-semigroups public
+open import group-theory.category-of-abelian-groups public
 open import group-theory.category-of-concrete-groups public
 open import group-theory.category-of-groups public
 open import group-theory.category-of-semigroups public
@@ -130,7 +131,6 @@ open import group-theory.perfect-subgroups public
 open import group-theory.powers-of-elements-commutative-monoids public
 open import group-theory.powers-of-elements-groups public
 open import group-theory.powers-of-elements-monoids public
-open import group-theory.precategory-of-abelian-groups public
 open import group-theory.precategory-of-commutative-monoids public
 open import group-theory.precategory-of-concrete-groups public
 open import group-theory.precategory-of-group-actions public

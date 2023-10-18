@@ -21,11 +21,11 @@ open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
+open import group-theory.category-of-abelian-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.homomorphisms-monoids
 open import group-theory.monoids
-open import group-theory.precategory-of-abelian-groups
 open import group-theory.semigroups
 open import group-theory.submonoids
 
@@ -307,10 +307,9 @@ module _
 
 ```agda
 group-of-units-commutative-ring-functor-Large-Precategory :
-  functor-Large-Precategory
+  functor-Large-Precategory id
     ( Commutative-Ring-Large-Precategory)
     ( Ab-Large-Precategory)
-    ( id)
 obj-functor-Large-Precategory
   group-of-units-commutative-ring-functor-Large-Precategory =
   abelian-group-of-units-Commutative-Ring
