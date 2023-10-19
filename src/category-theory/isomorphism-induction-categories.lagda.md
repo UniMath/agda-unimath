@@ -119,12 +119,12 @@ module _
   where
 
   abstract
-    induction-principle-iso-is-contr-total-iso-Category :
+    is-identity-system-iso-is-contr-total-iso-Category :
       is-contr (Σ (obj-Category C) (iso-Category C A)) →
       {l : Level} →
       (P : (Σ (obj-Category C) (iso-Category C A)) → UU l) →
       induction-principle-iso-Category C (λ B e → P (B , e))
-    induction-principle-iso-is-contr-total-iso-Category c P =
+    is-identity-system-iso-is-contr-total-iso-Category c P =
       section-left-factor
         ( ev-id-iso-Category C (λ X e → P (X , e)))
         ( ev-pair)
@@ -170,7 +170,7 @@ module _
   abstract
     is-identity-system-iso-Category : section (ev-id-iso-Category C P)
     is-identity-system-iso-Category =
-      induction-principle-iso-is-contr-total-iso-Category C
+      is-identity-system-iso-is-contr-total-iso-Category C
         ( is-contr-total-iso-Category C _)
         ( λ t → P (pr1 t) (pr2 t))
 
