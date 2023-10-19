@@ -84,6 +84,7 @@ open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public
 open import synthetic-homotopy-theory.universal-property-coequalizers public
 open import synthetic-homotopy-theory.universal-property-pushouts public
+open import synthetic-homotopy-theory.universal-property-sequential-colimits public
 open import synthetic-homotopy-theory.universal-property-suspensions public
 open import synthetic-homotopy-theory.universal-property-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.wedges-of-pointed-types public

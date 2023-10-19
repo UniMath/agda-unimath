@@ -288,17 +288,6 @@ module _
     { l2 : Level} {X : UU l2}
     where
 
-    cofork-cocone-sequential-diagram :
-      cocone-sequential-diagram A X →
-      cofork
-        ( bottom-map-cofork-cocone-sequential-diagram)
-        ( top-map-cofork-cocone-sequential-diagram)
-        ( X)
-    pr1 (cofork-cocone-sequential-diagram c) =
-      ind-Σ (map-cocone-sequential-diagram A c)
-    pr2 (cofork-cocone-sequential-diagram c) =
-      ind-Σ (coherence-triangle-cocone-sequential-diagram A c)
-
     cocone-sequential-diagram-cofork :
       cofork
         ( bottom-map-cofork-cocone-sequential-diagram)
@@ -318,20 +307,21 @@ module _
           ( top-map-cofork-cocone-sequential-diagram)
           ( e))
 
-    abstract
-      is-section-cofork-cocone-sequential-diagram :
-        cocone-sequential-diagram-cofork ∘ cofork-cocone-sequential-diagram ~ id
-      is-section-cofork-cocone-sequential-diagram c =
-        eq-htpy-cocone-sequential-diagram A
-          ( cocone-sequential-diagram-cofork
-            ( cofork-cocone-sequential-diagram c))
-          ( c)
-          ( ev-pair refl-htpy ,
-            ev-pair right-unit-htpy)
+    cofork-cocone-sequential-diagram :
+      cocone-sequential-diagram A X →
+      cofork
+        ( bottom-map-cofork-cocone-sequential-diagram)
+        ( top-map-cofork-cocone-sequential-diagram)
+        ( X)
+    pr1 (cofork-cocone-sequential-diagram c) =
+      ind-Σ (map-cocone-sequential-diagram A c)
+    pr2 (cofork-cocone-sequential-diagram c) =
+      ind-Σ (coherence-triangle-cocone-sequential-diagram A c)
 
-      is-retraction-cofork-cocone-sequential-diagram :
+    abstract
+      is-section-cocone-sequential-diagram-cofork :
         cofork-cocone-sequential-diagram ∘ cocone-sequential-diagram-cofork ~ id
-      is-retraction-cofork-cocone-sequential-diagram e =
+      is-section-cocone-sequential-diagram-cofork e =
         eq-htpy-cofork
           ( bottom-map-cofork-cocone-sequential-diagram)
           ( top-map-cofork-cocone-sequential-diagram)
@@ -340,24 +330,34 @@ module _
           ( e)
           ( refl-htpy , right-unit-htpy)
 
-    is-equiv-cofork-cocone-sequential-diagram :
-      is-equiv cofork-cocone-sequential-diagram
-    is-equiv-cofork-cocone-sequential-diagram =
-      is-equiv-is-invertible
-        ( cocone-sequential-diagram-cofork)
-        ( is-retraction-cofork-cocone-sequential-diagram)
-        ( is-section-cofork-cocone-sequential-diagram)
+      is-retraction-cocone-sequential-diagram-cofork :
+        cocone-sequential-diagram-cofork ∘ cofork-cocone-sequential-diagram ~ id
+      is-retraction-cocone-sequential-diagram-cofork c =
+        eq-htpy-cocone-sequential-diagram A
+          ( cocone-sequential-diagram-cofork
+            ( cofork-cocone-sequential-diagram c))
+          ( c)
+          ( ev-pair refl-htpy ,
+            ev-pair right-unit-htpy)
 
-    equiv-cofork-cocone-sequential-diagram :
-      cocone-sequential-diagram A X ≃
+    is-equiv-cocone-sequential-diagram-cofork :
+      is-equiv cocone-sequential-diagram-cofork
+    is-equiv-cocone-sequential-diagram-cofork =
+      is-equiv-is-invertible
+        ( cofork-cocone-sequential-diagram)
+        ( is-retraction-cocone-sequential-diagram-cofork)
+        ( is-section-cocone-sequential-diagram-cofork)
+
+    equiv-cocone-sequential-diagram-cofork :
       cofork
         ( bottom-map-cofork-cocone-sequential-diagram)
         ( top-map-cofork-cocone-sequential-diagram)
-        ( X)
-    pr1 equiv-cofork-cocone-sequential-diagram =
-      cofork-cocone-sequential-diagram
-    pr2 equiv-cofork-cocone-sequential-diagram =
-      is-equiv-cofork-cocone-sequential-diagram
+        ( X) ≃
+      cocone-sequential-diagram A X
+    pr1 equiv-cocone-sequential-diagram-cofork =
+      cocone-sequential-diagram-cofork
+    pr2 equiv-cocone-sequential-diagram-cofork =
+      is-equiv-cocone-sequential-diagram-cofork
 
   triangle-cocone-sequential-diagram-cofork :
     { l2 l3 : Level} {X : UU l2} {Y : UU l3} →
