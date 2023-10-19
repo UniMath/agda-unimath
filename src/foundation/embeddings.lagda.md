@@ -14,6 +14,7 @@ open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.dependent-pair-types
 open import foundation.equivalences
+open import foundation.fibers-of-maps
 open import foundation.functoriality-cartesian-product-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
@@ -21,6 +22,7 @@ open import foundation.truncated-maps
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
+open import foundation-core.contractible-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
@@ -356,4 +358,40 @@ module _
       ( is-equiv-map-inv-is-equiv K)
       ( is-equiv-map-inv-is-equiv L)
       ( M)
+```
+
+### A map is an embedding if and only if it has contractible fibers at values
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-emb-is-contr-fibers-values' :
+    ((a : A) → is-contr (fiber' f (f a))) → is-emb f
+  is-emb-is-contr-fibers-values' c a =
+    fundamental-theorem-id (c a) (λ x → ap f {a} {x})
+
+  is-emb-is-contr-fibers-values :
+    ((a : A) → is-contr (fiber f (f a))) → is-emb f
+  is-emb-is-contr-fibers-values c =
+    is-emb-is-contr-fibers-values'
+      ( λ a →
+        is-contr-equiv'
+          ( fiber f (f a))
+          ( equiv-fiber f (f a))
+          ( c a))
+
+  is-contr-fibers-values-is-emb' :
+    is-emb f → ((a : A) → is-contr (fiber' f (f a)))
+  is-contr-fibers-values-is-emb' e a =
+    fundamental-theorem-id' (λ x → ap f {a} {x}) (e a)
+
+  is-contr-fibers-values-is-emb :
+    is-emb f → ((a : A) → is-contr (fiber f (f a)))
+  is-contr-fibers-values-is-emb e a =
+    is-contr-equiv
+      ( fiber' f (f a))
+      ( equiv-fiber f (f a))
+      ( is-contr-fibers-values-is-emb' e a)
 ```
