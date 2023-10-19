@@ -126,7 +126,7 @@ module _
           ( id)))
 
   iso-loop-group-fin-UU-Fin-Group :
-    type-iso-Group
+    iso-Group
       ( abstract-group-Concrete-Group (UU-Fin-Group l n))
       ( loop-group-Set (raise-Set l (Fin-Set n)))
   pr1 iso-loop-group-fin-UU-Fin-Group =

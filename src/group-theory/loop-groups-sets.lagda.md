@@ -185,7 +185,7 @@ module _
           ( id)))
 
   iso-symmetric-group-loop-group-Set :
-    type-iso-Group (loop-group-Set X) (symmetric-Group X)
+    iso-Group (loop-group-Set X) (symmetric-Group X)
   pr1 iso-symmetric-group-loop-group-Set = hom-symmetric-group-loop-group-Set
   pr1 (pr2 iso-symmetric-group-loop-group-Set) =
     hom-inv-symmetric-group-loop-group-Set
@@ -325,7 +325,7 @@ module _
           ( id)))
 
   iso-abstract-automorphism-group-loop-group-Set :
-    type-iso-Group
+    iso-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
@@ -347,7 +347,7 @@ module _
   where
 
   iso-loop-group-equiv-Set :
-    type-iso-Group
+    iso-Group
       ( loop-group-Set X)
       ( loop-group-Set Y)
   iso-loop-group-equiv-Set =

@@ -162,7 +162,7 @@ module _
 
   subset-left-ideal-hom-large-poset-Ring :
     hom-set-Large-Poset
-      ( id)
+      ( λ l → l)
       ( left-ideal-Ring-Large-Poset R)
       ( powerset-Large-Poset (type-Ring R))
   map-hom-Large-Preorder subset-left-ideal-hom-large-poset-Ring =

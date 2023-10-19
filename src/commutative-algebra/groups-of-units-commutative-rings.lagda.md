@@ -307,7 +307,7 @@ module _
 
 ```agda
 group-of-units-commutative-ring-functor-Large-Precategory :
-  functor-Large-Precategory id
+  functor-Large-Precategory (λ l → l)
     ( Commutative-Ring-Large-Precategory)
     ( Ab-Large-Precategory)
 obj-functor-Large-Precategory

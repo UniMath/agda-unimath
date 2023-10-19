@@ -302,13 +302,13 @@ module _
 
   iso-ab-Ring : UU (l1 ⊔ l2)
   iso-ab-Ring =
-    Σ ( type-iso-Ab (ab-Ring R) (ab-Ring S))
+    Σ ( iso-Ab (ab-Ring R) (ab-Ring S))
       ( λ f →
         is-ring-homomorphism-hom-Ab R S
           ( hom-iso-Ab (ab-Ring R) (ab-Ring S) f))
 
   iso-ab-iso-ab-Ring :
-    iso-ab-Ring → type-iso-Ab (ab-Ring R) (ab-Ring S)
+    iso-ab-Ring → iso-Ab (ab-Ring R) (ab-Ring S)
   iso-ab-iso-ab-Ring = pr1
 
   is-iso-ab-hom-Ring : hom-Ring R S → UU (l1 ⊔ l2)
@@ -434,7 +434,7 @@ module _
             ( U)))
 
   iso-ab-iso-Ring :
-    iso-Ring R S → type-iso-Ab (ab-Ring R) (ab-Ring S)
+    iso-Ring R S → iso-Ab (ab-Ring R) (ab-Ring S)
   pr1 (iso-ab-iso-Ring f) = hom-ab-hom-Ring R S (hom-iso-Ring R S f)
   pr2 (iso-ab-iso-Ring f) =
     is-iso-ab-is-iso-Ring

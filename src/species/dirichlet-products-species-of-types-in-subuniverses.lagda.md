@@ -50,7 +50,8 @@ dirichlet product is also a species of subuniverse from `P` to `Q`
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   where
 
   type-dirichlet-product-species-subuniverse :
@@ -70,7 +71,7 @@ module _
 
 ```agda
 is-closed-under-dirichlet-product-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
   UUω
 is-closed-under-dirichlet-product-species-subuniverse {l1} {l2} P Q =
   {l3 l4 : Level}
@@ -86,7 +87,8 @@ is-closed-under-dirichlet-product-species-subuniverse {l1} {l2} P Q =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   where
 
@@ -106,7 +108,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 l5 : Level} (P : subuniverse l1 l2)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   ( C2 : is-closed-under-products-subuniverse P)
   where
@@ -274,7 +277,7 @@ module _
 module _
   {l1 l2 l3 l4 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   (S : species-subuniverse P ( subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P ( subuniverse-global-subuniverse Q l4))
@@ -318,7 +321,7 @@ unit-dirichlet-product-species-subuniverse P Q C X =
   is-contr (inclusion-subuniverse P X) , C X
 
 module _
-  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   (C2 : is-in-subuniverse P (raise-unit l1))
   (C3 :
@@ -403,7 +406,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-dirichlet-product-species-subuniverse P Q)
   ( C2 : is-closed-under-products-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
