@@ -35,8 +35,8 @@ open import order-theory.least-upper-bounds-large-posets
 ## Idea
 
 A **nucleus** on a [large locale](order-theory.large-locales.md) `L` is an order
-preserving map `j : hom-set-Large-Poset id L L` such that `j` preserves meets
-and is inflationary and idempotent.
+preserving map `j : hom-set-Large-Poset (λ l → l) L L` such that `j` preserves
+meets and is inflationary and idempotent.
 
 ## Definitions
 

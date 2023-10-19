@@ -34,7 +34,8 @@ stable by coproduct.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   where
 
   type-coproduct-species-subuniverse :
@@ -54,7 +55,7 @@ module _
 
 ```agda
 is-closed-under-coproduct-species-subuniverse :
-  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id) →
+  {l1 l2 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse (λ l → l)) →
   UUω
 is-closed-under-coproduct-species-subuniverse P Q =
   {l3 l4 : Level}
@@ -70,7 +71,8 @@ is-closed-under-coproduct-species-subuniverse P Q =
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  (Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-coproduct-species-subuniverse P Q)
   where
 
@@ -89,7 +91,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2) (Q : global-subuniverse id)
+  {l1 l2 l3 l4 : Level} (P : subuniverse l1 l2)
+  ( Q : global-subuniverse (λ l → l))
   ( C1 : is-closed-under-coproduct-species-subuniverse P Q)
   ( S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   ( T : species-subuniverse P (subuniverse-global-subuniverse Q l4))

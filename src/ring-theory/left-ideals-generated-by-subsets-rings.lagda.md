@@ -341,7 +341,7 @@ module _
 
   left-ideal-subset-galois-connection-Ring :
     galois-connection-Large-Poset
-      ( _⊔_ l1) id
+      ( l1 ⊔_) (λ l → l)
       ( powerset-Large-Poset (type-Ring A))
       ( left-ideal-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset
