@@ -198,12 +198,6 @@ pr2 (eval-smash-prod-Pointed-Type A B C f) =
     {!!}-}
 ```
 
-foundation-core.dependent-identifications.dependent-identification (λ x → x (pr2
-B) ＝ pr2 (constant-Pointed-Fam B C)) (eq-htpy (λ y → ap (pr1 f) (inv
-(glue-smash-prod-Pointed-Type (pr2 A) y)) ∙ pr2 f)) (pr2 (pr1
-(eval-smash-prod-Pointed-Type A B C f) (pr2 A))) (pr2 (constant-pointed-map B
-C))
-
 ## See also
 
 - [Wedges of pointed types](synthetic-homotopy-theory.wedges-of-pointed-types.md)
