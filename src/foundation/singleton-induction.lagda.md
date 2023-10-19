@@ -29,8 +29,8 @@ principle analogous to the induction principle of the
 [unit type](foundation.unit-type.md). A type satisfies singleton induction if
 and only if it is [contractible](foundation-core.contractible-types.md).
 
-Singelton induction states that given a type family `P` over `A`, to construct a
-section of `P` it suffices to construct a section over `a`.
+Singelton induction states that given a type family `B` over `A`, to construct a
+section of `B` it suffices to construct a section over `a`.
 
 ## Definition
 
@@ -87,7 +87,7 @@ pr2 (is-singleton-is-contr a is-contr-A B) =
 abstract
   is-contr-ind-singleton :
     {l1 : Level} (A : UU l1) (a : A) →
-    ({l2 : Level} (P : A → UU l2) → P a → (x : A) → P x) → is-contr A
+    ({l2 : Level} (B : A → UU l2) → B a → (x : A) → B x) → is-contr A
   pr1 (is-contr-ind-singleton A a S) = a
   pr2 (is-contr-ind-singleton A a S) = S (λ x → a ＝ x) refl
 

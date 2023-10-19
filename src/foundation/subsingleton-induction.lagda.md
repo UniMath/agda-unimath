@@ -32,8 +32,8 @@ Subsingleton induction uses the observation that a type equipped with an element
 is [contractible](foundation-core.contractible-types.md) if and only if it is a
 [proposition](foundation-core.propositions.md).
 
-Subsingelton induction states that given a type family `P` over `A`, to
-construct a section of `P` it suffices to provide a section over `a` for some
+Subsingelton induction states that given a type family `B` over `A`, to
+construct a section of `B` it suffices to provide a section over `a` for some
 `a : A`.
 
 ## Definition
@@ -89,7 +89,7 @@ is-subsingleton-is-prop is-prop-A a =
 abstract
   is-prop-ind-singleton :
     {l1 : Level} (A : UU l1) (a : A) →
-    ({l2 : Level} (P : A → UU l2) → P a → (x : A) → P x) → is-prop A
+    ({l2 : Level} (B : A → UU l2) → B a → (x : A) → B x) → is-prop A
   is-prop-ind-singleton A a S = is-prop-is-contr (is-contr-ind-singleton A a S)
 
 abstract
