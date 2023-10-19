@@ -84,18 +84,18 @@ module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
 
-  equiv-fibers-precomp-cocone-fiberwise :
+  compute-fiber-precomp :
     (g : B → X) →
     fiber (precomp f X) (g ∘ f) ≃
     Σ (B → X) (λ h → coherence-square-maps f f h g)
-  equiv-fibers-precomp-cocone-fiberwise g =
+  compute-fiber-precomp g =
     equiv-tot ( λ h → equiv-funext) ∘e
     equiv-fiber (precomp f X) (g ∘ f)
 
-  equiv-fibers-precomp-cocone :
+  compute-total-fiber-precomp :
     Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
-  equiv-fibers-precomp-cocone =
-    equiv-tot equiv-fibers-precomp-cocone-fiberwise
+  compute-total-fiber-precomp =
+    equiv-tot compute-fiber-precomp
 
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
@@ -120,10 +120,10 @@ module _
     {l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)
   universal-property-pushout-is-epimorphism e X =
     is-equiv-comp
-      ( map-equiv (equiv-fibers-precomp-cocone f X))
+      ( map-equiv (compute-total-fiber-precomp f X))
       ( diagonal-into-fibers-precomp f X)
       ( is-equiv-diagonal-into-fibers-precomp-is-epimorphism f X e)
-      ( is-equiv-map-equiv (equiv-fibers-precomp-cocone f X))
+      ( is-equiv-map-equiv (compute-total-fiber-precomp f X))
 ```
 
 If the map `f : A → B` is epi, then its codiagonal is an equivalence.
@@ -160,7 +160,7 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
       ( λ g →
         is-contr-equiv
           ( Σ (B → X) (λ h → coherence-square-maps f f h g))
-          ( equiv-fibers-precomp-cocone-fiberwise f X g)
+          ( compute-fiber-precomp f X g)
           ( is-contr-fam-is-equiv-map-section-family
             ( λ h →
               ( vertical-map-cocone f f
