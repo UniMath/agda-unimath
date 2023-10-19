@@ -53,7 +53,7 @@ module _
 
 ### The coproduct of two decidable subtypes is equivalent to their symmetric difference plus two times their intersection
 
-This is also known as the _inclusion-exclusion principle_.
+This is closely related to the _inclusion-exclusion principle_.
 
 ```agda
 module _
