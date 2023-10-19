@@ -28,11 +28,11 @@ for which the [identifications](foundation-core.identity-types.md) between the
 objects [embed](foundation-core.embeddings.md) into the
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). More
 specifically, an equality between objects gives rise to an isomorphism between
-them, by the J-rule. A precategory is a category if this function, called
-`iso-eq`, is an embedding. In particular. being preunivalent is a
+them, by the J-rule. A precategory is a preunivalent category if this function,
+called `iso-eq`, is an embedding. In particular. being preunivalent is a
 [proposition](foundation-core.propositions.md) since `is-emb` is a proposition.
 
-The idea of preunivalence is that it is a common generalization univalent
+The idea of preunivalence is that it is a common generalization of univalent
 mathematics and mathematics with Axiom K. Hence preunivalent categories
 generalize both [categories](category-theory.categories.md) in the sense we have
 defined them (as univalent categories), and strict categories, which are
