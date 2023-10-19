@@ -290,4 +290,11 @@ module _
     is-emb-obj-inclusion-Full-Subprecategory
   pr2 is-embedding-inclusion-Full-Subprecategory =
     is-fully-faithful-inclusion-Full-Subprecategory
+
+  embedding-Full-Subprecategory :
+    embedding-Precategory
+      ( precategory-Full-Subprecategory C P)
+      ( C)
+  pr1 embedding-Full-Subprecategory = inclusion-Full-Subprecategory C P
+  pr2 embedding-Full-Subprecategory = is-embedding-inclusion-Full-Subprecategory
 ```
