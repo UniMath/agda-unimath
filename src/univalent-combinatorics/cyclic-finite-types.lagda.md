@@ -608,7 +608,7 @@ pr2 (equiv-Ω-Cyclic-Type-Group k) =
   preserves-concat-equiv-compute-Ω-Cyclic-Type k
 
 iso-Ω-Cyclic-Type-Group :
-  (k : ℕ) → type-iso-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
+  (k : ℕ) → iso-Group (Ω-Cyclic-Type-Group k) (ℤ-Mod-Group k)
 iso-Ω-Cyclic-Type-Group k =
   iso-equiv-Group
     ( Ω-Cyclic-Type-Group k)

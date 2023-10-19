@@ -102,7 +102,7 @@ iso-Group-of-Order-2 :
   {l1 l2 : Level} (G : Group-of-Order-2 l1) (H : Group-of-Order-2 l2) →
   UU (l1 ⊔ l2)
 iso-Group-of-Order-2 G H =
-  type-iso-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
+  iso-Group (group-Group-of-Order-2 G) (group-Group-of-Order-2 H)
 
 module _
   {l : Level} (G : Group-of-Order-2 l)

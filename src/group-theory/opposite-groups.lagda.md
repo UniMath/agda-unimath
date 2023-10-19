@@ -50,6 +50,6 @@ module _
   pr1 equiv-inv-Group = equiv-equiv-inv-Group G
   pr2 equiv-inv-Group = distributive-inv-mul-Group G
 
-  iso-inv-Group : type-iso-Group G (op-Group G)
+  iso-inv-Group : iso-Group G (op-Group G)
   iso-inv-Group = iso-equiv-Group G (op-Group G) equiv-inv-Group
 ```

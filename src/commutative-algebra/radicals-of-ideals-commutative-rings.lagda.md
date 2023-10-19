@@ -238,7 +238,8 @@ module _
         ( H))
 
   radical-of-ideal-hom-large-poset-Commutative-Ring :
-    hom-set-Large-Poset id
+    hom-set-Large-Poset
+      ( λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder
@@ -276,7 +277,7 @@ module _
     is-radical-of-ideal-radical-of-ideal-Commutative-Ring A I J
 
   radical-of-ideal-galois-connection-Commutative-Ring :
-    galois-connection-Large-Poset id id
+    galois-connection-Large-Poset (λ l → l) (λ l → l)
       ( ideal-Commutative-Ring-Large-Poset A)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
   lower-adjoint-galois-connection-Large-Poset

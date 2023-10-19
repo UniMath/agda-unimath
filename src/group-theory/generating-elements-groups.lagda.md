@@ -607,7 +607,7 @@ module _
       ( is-equiv-ev-element-Group-With-Generating-Element)
 
   iso-ev-element-Group-With-Generating-Element :
-    type-iso-Ab
+    iso-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G))

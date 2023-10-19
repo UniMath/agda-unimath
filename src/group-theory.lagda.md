@@ -26,6 +26,7 @@ open import group-theory.central-elements-groups public
 open import group-theory.central-elements-monoids public
 open import group-theory.central-elements-semigroups public
 open import group-theory.centralizer-subgroups public
+open import group-theory.characteristic-subgroups public
 open import group-theory.commutative-monoids public
 open import group-theory.commutator-subgroups public
 open import group-theory.commutators-of-elements-groups public
