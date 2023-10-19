@@ -43,7 +43,7 @@ two objects `X` and `Y` in the subprecategory, the subtype of morphisms from
 
 ## Definition
 
-### Subprecategories
+### Full subprecategories
 
 ```agda
 Full-Subprecategory :
