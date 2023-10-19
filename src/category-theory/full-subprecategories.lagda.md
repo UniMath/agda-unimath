@@ -268,13 +268,6 @@ module _
   (P : Full-Subprecategory l3 C)
   where
 
-  is-faithful-inclusion-Full-Subprecategory :
-    is-faithful-functor-Precategory
-      ( precategory-Full-Subprecategory C P)
-      ( C)
-      ( inclusion-Full-Subprecategory C P)
-  is-faithful-inclusion-Full-Subprecategory x y = is-emb-id
-
   is-fully-faithful-inclusion-Full-Subprecategory :
     is-fully-faithful-functor-Precategory
       ( precategory-Full-Subprecategory C P)
