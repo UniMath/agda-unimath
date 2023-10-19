@@ -190,7 +190,7 @@ module _
 
 ## Properties
 
-### The objects in a category form a 1-type
+### The objects in a preunivalent category form a 1-type
 
 The type of identities between two objects in a preunivalent category embeds
 into the type of isomorphisms between them. But this type is a set, and thus the
