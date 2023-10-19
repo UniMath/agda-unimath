@@ -9,7 +9,7 @@ module foundation.epimorphisms where
 ```agda
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.function-extensionality
+open import foundation.functoriality-function-types
 open import foundation.propositional-maps
 open import foundation.sections
 open import foundation.universe-levels
@@ -19,7 +19,6 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
 open import foundation-core.function-types
-open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
@@ -83,19 +82,6 @@ is a pushout square.
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (X : UU l3)
   where
-
-  compute-fiber-precomp :
-    (g : B → X) →
-    fiber (precomp f X) (g ∘ f) ≃
-    Σ (B → X) (λ h → coherence-square-maps f f h g)
-  compute-fiber-precomp g =
-    equiv-tot ( λ h → equiv-funext) ∘e
-    equiv-fiber (precomp f X) (g ∘ f)
-
-  compute-total-fiber-precomp :
-    Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f)) ≃ cocone f f X
-  compute-total-fiber-precomp =
-    equiv-tot compute-fiber-precomp
 
   diagonal-into-fibers-precomp :
     (B → X) → Σ (B → X) (λ g → fiber (precomp f X) (g ∘ f))
