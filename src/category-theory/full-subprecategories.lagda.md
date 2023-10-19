@@ -41,7 +41,7 @@ Alternatively, we say that a
 two objects `X` and `Y` in the subprecategory, the subtype of morphisms from
 `X` to `Y` in the subprecategory is [full](foundation.full-subtypes.md).
 
-## Definition
+## Definitions
 
 ### Full subprecategories
 
