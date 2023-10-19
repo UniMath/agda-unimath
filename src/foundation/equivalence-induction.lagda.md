@@ -101,8 +101,7 @@ module _
         ( is-singleton-is-contr
           ( A , id-equiv)
           ( ( A , id-equiv) ,
-            ( λ t →
-              ( inv (contraction c (A , id-equiv))) ∙ (contraction c t)))
+            ( λ t → inv (contraction c (A , id-equiv)) ∙ contraction c t))
           ( P))
 ```
 

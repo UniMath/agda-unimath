@@ -475,14 +475,12 @@ module _
             ( inclusion-obj-Subprecategory C P x)
             ( inclusion-obj-Subprecategory C P x)
             ( id-hom-Precategory C))
-          ( λ q → is-iso-Subprecategory C P (id-hom-Precategory C , q))
           ( contains-id-Subprecategory C P
             ( inclusion-obj-Subprecategory C P x)
             ( is-in-obj-inclusion-obj-Subprecategory C P x))) ∘
         ( ind-subsingleton
           ( is-prop-is-in-obj-Subprecategory C P
             ( inclusion-obj-Subprecategory C P x))
-          ( _)
           ( is-in-obj-inclusion-obj-Subprecategory C P x)
           ( is-iso-id-hom-Precategory (precategory-Subprecategory C P) {x})))
       ( inclusion-hom-Subprecategory C P x y f , is-iso-f)
