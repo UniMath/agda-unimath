@@ -201,4 +201,3 @@ pr2 (eval-smash-prod-Pointed-Type A B C f) =
 ## See also
 
 - [Wedges of pointed types](synthetic-homotopy-theory.wedges-of-pointed-types.md)
-  (λ x → x (pr2 B) ＝ pr2 (constant-Pointed-Fam B C))
