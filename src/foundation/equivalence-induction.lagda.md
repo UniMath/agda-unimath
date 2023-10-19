@@ -89,12 +89,12 @@ module _
   where
 
   abstract
-    induction-principle-equivalences-is-contr-total-equiv :
+    is-identity-system-is-contr-total-equiv :
       is-contr (Σ (UU l1) (λ X → A ≃ X)) →
       {l : Level} →
       (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
       induction-principle-equivalences (λ B e → P (B , e))
-    induction-principle-equivalences-is-contr-total-equiv c P =
+    is-identity-system-is-contr-total-equiv c P =
       section-left-factor
         ( ev-id-equiv (λ X e → P (X , e)))
         ( ev-pair)
@@ -152,7 +152,7 @@ module _
   abstract
     is-identity-system-equiv : section (ev-id-equiv P)
     is-identity-system-equiv =
-      induction-principle-equivalences-is-contr-total-equiv
+      is-identity-system-is-contr-total-equiv
         ( is-contr-total-equiv _)
         ( λ t → P (pr1 t) (pr2 t))
 

@@ -8,6 +8,8 @@ module category-theory.isomorphism-induction-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.precategories
+open import category-theory.isomorphisms-in-precategories
 open import category-theory.isomorphisms-in-categories
 
 open import foundation.contractible-types
@@ -49,6 +51,36 @@ categories.
 
 ## Statement
 
+### For Precategories
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2) {A : obj-Precategory C}
+  where
+
+  ev-id-iso-Precategory :
+    {l : Level} (P : (B : obj-Precategory C) → (iso-Precategory C A B) → UU l) →
+    ((B : obj-Precategory C) (e : iso-Precategory C A B) → P B e) →
+    P A (id-iso-Precategory C)
+  ev-id-iso-Precategory P f = f A (id-iso-Precategory C)
+
+  induction-principle-iso-Precategory :
+    {l : Level} (P : (B : obj-Precategory C) (e : iso-Precategory C A B) → UU l) →
+    UU (l1 ⊔ l2 ⊔ l)
+  induction-principle-iso-Precategory P = section (ev-id-iso-Precategory P)
+
+  triangle-ev-id-iso-Precategory :
+    {l : Level}
+    (P : (B : obj-Precategory C) → iso-Precategory C A B → UU l) →
+    coherence-triangle-maps
+      ( ev-point (A , id-iso-Precategory C) {λ (X , e) → P X e})
+      ( ev-id-iso-Precategory P)
+      ( ev-pair {A = obj-Precategory C} {B = iso-Precategory C A} {C = λ (X , e) → P X e})
+  triangle-ev-id-iso-Precategory P f = refl
+```
+
+### For categories
+
 ```agda
 module _
   {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
@@ -58,21 +90,23 @@ module _
     {l : Level} (P : (B : obj-Category C) → (iso-Category C A B) → UU l) →
     ((B : obj-Category C) (e : iso-Category C A B) → P B e) →
     P A (id-iso-Category C)
-  ev-id-iso-Category P f = f A (id-iso-Category C)
+  ev-id-iso-Category = ev-id-iso-Precategory (precategory-Category C)
 
   induction-principle-iso-Category :
     {l : Level} (P : (B : obj-Category C) (e : iso-Category C A B) → UU l) →
     UU (l1 ⊔ l2 ⊔ l)
-  induction-principle-iso-Category P = section (ev-id-iso-Category P)
+  induction-principle-iso-Category =
+    induction-principle-iso-Precategory (precategory-Category C)
 
   triangle-ev-id-iso-Category :
     {l : Level}
-    (P : (Σ (obj-Category C) (iso-Category C A)) → UU l) →
+    (P : (B : obj-Category C) → iso-Category C A B → UU l) →
     coherence-triangle-maps
-      ( ev-point (A , id-iso-Category C) {P})
-      ( ev-id-iso-Category (λ X e → P (X , e)))
-      ( ev-pair {A = obj-Category C} {B = iso-Category C A} {C = P})
-  triangle-ev-id-iso-Category P f = refl
+      ( ev-point (A , id-iso-Category C) {λ (X , e) → P X e})
+      ( ev-id-iso-Category P)
+      ( ev-pair {A = obj-Category C} {B = iso-Category C A} {C = λ (X , e) → P X e})
+  triangle-ev-id-iso-Category =
+    triangle-ev-id-iso-Precategory (precategory-Category C)
 ```
 
 ## Properties
@@ -164,7 +198,7 @@ module _
       ( ev-point (A , id-iso-Category C))
       ( ev-id-iso-Category C P)
       ( ev-pair)
-      ( triangle-ev-id-iso-Category C (λ u → P (pr1 u) (pr2 u)))
+      ( triangle-ev-id-iso-Category C P)
       ( dependent-universal-property-contr-is-contr
         ( A , id-iso-Category C)
         ( is-contr-total-iso-Category C A)
