@@ -385,7 +385,7 @@ module _
   pr1 (conjugation-equiv-Group x) = equiv-conjugation-Group G x
   pr2 (conjugation-equiv-Group x) = distributive-conjugation-mul-Group G x
 
-  conjugation-iso-Group : type-Group G → type-iso-Group G G
+  conjugation-iso-Group : type-Group G → iso-Group G G
   conjugation-iso-Group x = iso-equiv-Group G G (conjugation-equiv-Group x)
 
   preserves-integer-powers-conjugation-Group :

@@ -666,7 +666,7 @@ module _
     is-0-connected-classifying-type-Concrete-Group concrete-group-Group
 
   abstract-group-concrete-group-Group :
-    type-iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
+    iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
   abstract-group-concrete-group-Group =
     iso-equiv-Group
       ( abstract-group-Concrete-Group concrete-group-Group)
