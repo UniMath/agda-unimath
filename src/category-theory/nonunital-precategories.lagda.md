@@ -289,3 +289,16 @@ module _
       ( hom-set-Nonunital-Precategory C)
       ( comp-hom-Nonunital-Precategory C)
 ```
+
+## Comments
+
+As discussed in [Semicategories](https://ncatlab.org/nlab/show/semicategory) at
+nlab, it seems that a nonunital precategory should be the underlying nonunital
+precategory of a [category](category-theory.categories.md) if and only if the
+projection map
+
+```text
+  pr1 : (Σ (a : A) Σ (f : hom a a) (is-unit f)) → A
+```
+
+is an [equivalence](foundation-core.equivalences.md).
