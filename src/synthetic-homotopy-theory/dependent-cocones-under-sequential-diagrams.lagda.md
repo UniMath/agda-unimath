@@ -17,8 +17,8 @@ open import foundation.constant-type-families
 open import foundation.contractible-types
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
-open import foundation.equivalences
 open import foundation.equality-dependent-function-types
+open import foundation.equivalences
 open import foundation.function-types
 open import foundation.functoriality-dependent-function-types
 open import foundation.functoriality-dependent-pair-types
@@ -268,4 +268,117 @@ module _
             ( inv
               ( apd-constant-type-family h
                 ( coherence-triangle-cocone-sequential-diagram A c n a)))))
+```
+
+### Dependent cocones under sequential diagram are special cases of dependent coforks
+
+```agda
+module _
+  { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
+  ( c : cocone-sequential-diagram A X)
+  where
+
+  module _
+    { l3 : Level} (P : X → UU l3)
+    where
+
+    dependent-cofork-dependent-cocone-sequential-diagram :
+      dependent-cocone-sequential-diagram A c P →
+      dependent-cofork
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram A c)
+        ( P)
+    pr1 (dependent-cofork-dependent-cocone-sequential-diagram d) =
+      ind-Σ (map-dependent-cocone-sequential-diagram A P d)
+    pr2 (dependent-cofork-dependent-cocone-sequential-diagram d) =
+      ind-Σ (coherence-triangle-dependent-cocone-sequential-diagram A P d)
+
+    dependent-cocone-dependent-cofork-sequential-diagram :
+      dependent-cofork
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram A c)
+        ( P) →
+      dependent-cocone-sequential-diagram A c P
+    pr1 (dependent-cocone-dependent-cofork-sequential-diagram e) =
+      ev-pair
+        ( map-dependent-cofork
+          ( bottom-map-cofork-cocone-sequential-diagram A)
+          ( top-map-cofork-cocone-sequential-diagram A)
+          ( P)
+          ( e))
+    pr2 (dependent-cocone-dependent-cofork-sequential-diagram e) =
+      ev-pair
+        ( coherence-dependent-cofork
+          ( bottom-map-cofork-cocone-sequential-diagram A)
+          ( top-map-cofork-cocone-sequential-diagram A)
+          ( P)
+          ( e))
+
+    abstract
+      is-section-dependent-cofork-dependent-cocone-sequential-diagram :
+        ( dependent-cocone-dependent-cofork-sequential-diagram ∘
+          dependent-cofork-dependent-cocone-sequential-diagram) ~
+        ( id)
+      is-section-dependent-cofork-dependent-cocone-sequential-diagram d =
+        eq-htpy-dependent-cocone-sequential-diagram A P
+          ( dependent-cocone-dependent-cofork-sequential-diagram
+            ( dependent-cofork-dependent-cocone-sequential-diagram d))
+          ( d)
+          ( ev-pair refl-htpy , ev-pair right-unit-htpy)
+
+      is-retraction-dependent-cofork-dependent-cocone-sequential-diagram :
+        ( dependent-cofork-dependent-cocone-sequential-diagram ∘
+          dependent-cocone-dependent-cofork-sequential-diagram) ~
+        ( id)
+      is-retraction-dependent-cofork-dependent-cocone-sequential-diagram e =
+        eq-htpy-dependent-cofork
+          ( bottom-map-cofork-cocone-sequential-diagram A)
+          ( top-map-cofork-cocone-sequential-diagram A)
+          ( P)
+          ( dependent-cofork-dependent-cocone-sequential-diagram
+            ( dependent-cocone-dependent-cofork-sequential-diagram e))
+          ( e)
+          ( refl-htpy , right-unit-htpy)
+
+    is-equiv-dependent-cofork-dependent-cocone-sequential-diagram :
+      is-equiv dependent-cofork-dependent-cocone-sequential-diagram
+    is-equiv-dependent-cofork-dependent-cocone-sequential-diagram =
+      is-equiv-is-invertible
+        ( dependent-cocone-dependent-cofork-sequential-diagram)
+        ( is-retraction-dependent-cofork-dependent-cocone-sequential-diagram)
+        ( is-section-dependent-cofork-dependent-cocone-sequential-diagram)
+
+    equiv-dependent-cofork-dependent-cocone-sequential-diagram :
+      dependent-cocone-sequential-diagram A c P ≃
+      dependent-cofork
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram A c)
+        ( P)
+    pr1 equiv-dependent-cofork-dependent-cocone-sequential-diagram =
+      dependent-cofork-dependent-cocone-sequential-diagram
+    pr2 equiv-dependent-cofork-dependent-cocone-sequential-diagram =
+      is-equiv-dependent-cofork-dependent-cocone-sequential-diagram
+
+  triangle-dependent-cocone-dependent-cofork-sequential-diagram :
+    { l3 : Level} (P : X → UU l3) →
+    coherence-triangle-maps
+      ( dependent-cocone-map-sequential-diagram A c P)
+      ( dependent-cocone-dependent-cofork-sequential-diagram P)
+      ( dependent-cofork-map
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram A c))
+  triangle-dependent-cocone-dependent-cofork-sequential-diagram P h =
+    eq-htpy-dependent-cocone-sequential-diagram A P
+      ( dependent-cocone-map-sequential-diagram A c P h)
+      ( dependent-cocone-dependent-cofork-sequential-diagram P
+        ( dependent-cofork-map
+          ( bottom-map-cofork-cocone-sequential-diagram A)
+          ( top-map-cofork-cocone-sequential-diagram A)
+          ( cofork-cocone-sequential-diagram A c)
+          ( h)))
+      ( ev-pair refl-htpy , ev-pair right-unit-htpy)
 ```
