@@ -23,7 +23,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.singleton-induction
+open import foundation.subsingleton-induction
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -366,7 +366,6 @@ module _
   contains-is-iso-Subcategory : is-iso-Subcategory C P f
   contains-is-iso-Subcategory =
     ind-iso-Category C
-      { inclusion-obj-Subcategory C P x}
       ( λ Y e →
         ( p : is-in-obj-Subcategory C P Y)
         ( q :
@@ -375,20 +374,20 @@ module _
             ( Y)
             ( hom-iso-Category C e)) →
         is-iso-Subcategory C P {x} {Y , p} (hom-iso-Category C e , q))
-      ( ( ind-singleton-is-prop
-          ( contains-id-Subcategory C P
-            ( inclusion-obj-Subcategory C P x)
-            ( is-in-obj-inclusion-obj-Subcategory C P x))
+      ( ( ind-subsingleton
           ( is-prop-is-in-hom-Subcategory C P
             ( inclusion-obj-Subcategory C P x)
             ( inclusion-obj-Subcategory C P x)
             ( id-hom-Category C))
-          ( λ q → is-iso-Subcategory C P (id-hom-Category C , q))) ∘
-        ( ind-singleton-is-prop
-          ( is-in-obj-inclusion-obj-Subcategory C P x)
+          ( λ q → is-iso-Subcategory C P (id-hom-Category C , q))
+          ( contains-id-Subcategory C P
+            ( inclusion-obj-Subcategory C P x)
+            ( is-in-obj-inclusion-obj-Subcategory C P x))) ∘
+        ( ind-subsingleton
           ( is-prop-is-in-obj-Subcategory C P
             ( inclusion-obj-Subcategory C P x))
           ( _)
+          ( is-in-obj-inclusion-obj-Subcategory C P x)
           ( is-iso-id-hom-Precategory (precategory-Subcategory C P) {x})))
       ( inclusion-hom-Subcategory C P x y f , is-iso-f)
       ( is-in-obj-inclusion-obj-Subcategory C P y)

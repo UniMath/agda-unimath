@@ -24,11 +24,14 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-Singleton induction on a type `A` equipped with a point `a : A` is a principle
-analogous to the induction principle of the unit type. A type satisfies
-singleton induction if and only if it is contractible.
+**Singleton induction** on a type `A` equipped with a point `a : A` is a
+principle analogous to the induction principle of the
+[unit type](foundation.unit-type.md). A type satisfies singleton induction if
+and only if it is [contractible](foundation-core.contractible-types.md).
 
 ## Definition
+
+### Singleton induction
 
 ```agda
 is-singleton :
@@ -49,30 +52,34 @@ compute-ind-is-singleton a H B = pr2 (H B)
 
 ## Properties
 
-### A type satisfies singleton induction if and only if it is contractible
+### Contractible types satisfy singleton induction
 
 ```agda
 abstract
-  ind-singleton-is-contr :
+  ind-singleton :
     {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
     (B : A → UU l2) → B a → (x : A) → B x
-  ind-singleton-is-contr a is-contr-A B b x =
+  ind-singleton a is-contr-A B b x =
     tr B (inv (contraction is-contr-A a) ∙ contraction is-contr-A x) b
 
 abstract
-  compute-ind-singleton-is-contr :
+  compute-ind-singleton :
     {l1 l2 : Level} {A : UU l1}
     (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
-    (ev-point a {B} ∘ ind-singleton-is-contr a is-contr-A B) ~ id
-  compute-ind-singleton-is-contr a is-contr-A B b =
+    (ev-point a {B} ∘ ind-singleton a is-contr-A B) ~ id
+  compute-ind-singleton a is-contr-A B b =
     ap (λ p → tr B p b) (left-inv (contraction is-contr-A a))
+```
 
+### A type satisfies singleton induction if and only if it is contractible
+
+```agda
 is-singleton-is-contr :
   {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
 pr1 (is-singleton-is-contr a is-contr-A B) =
-  ind-singleton-is-contr a is-contr-A B
+  ind-singleton a is-contr-A B
 pr2 (is-singleton-is-contr a is-contr-A B) =
-  compute-ind-singleton-is-contr a is-contr-A B
+  compute-ind-singleton a is-contr-A B
 
 abstract
   is-contr-ind-singleton :
@@ -88,42 +95,6 @@ abstract
   is-contr-is-singleton A a S = is-contr-ind-singleton A a (pr1 ∘ S)
 ```
 
-### Singleton induction for propositions
-
-```agda
-abstract
-  ind-singleton-is-prop :
-    {l1 l2 : Level} {A : UU l1} (a : A) (is-prop-A : is-prop A)
-    (B : A → UU l2) → B a → (x : A) → B x
-  ind-singleton-is-prop a is-prop-A =
-    ind-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a)
-
-abstract
-  compute-ind-singleton-is-prop :
-    {l1 l2 : Level} {A : UU l1}
-    (a : A) (is-prop-A : is-prop A) (B : A → UU l2) →
-    (ev-point a {B} ∘ ind-singleton-is-prop a is-prop-A B) ~ id
-  compute-ind-singleton-is-prop a is-prop-A =
-    compute-ind-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a)
-
-is-singleton-is-prop :
-  {l1 l2 : Level} {A : UU l1} (a : A) → is-prop A → is-singleton l2 A a
-is-singleton-is-prop a is-prop-A =
-  is-singleton-is-contr a (is-proof-irrelevant-is-prop is-prop-A a)
-
-abstract
-  is-prop-ind-singleton :
-    {l1 : Level} (A : UU l1) (a : A) →
-    ({l2 : Level} (P : A → UU l2) → P a → (x : A) → P x) → is-prop A
-  is-prop-ind-singleton A a S = is-prop-is-contr (is-contr-ind-singleton A a S)
-
-abstract
-  is-prop-is-singleton :
-    {l1 : Level} (A : UU l1) (a : A) →
-    ({l2 : Level} → is-singleton l2 A a) → is-prop A
-  is-prop-is-singleton A a S = is-prop-ind-singleton A a (pr1 ∘ S)
-```
-
 ## Examples
 
 ### The total space of an identity type satisfies singleton induction
@@ -132,7 +103,12 @@ abstract
 abstract
   is-singleton-total-path :
     {l1 l2 : Level} (A : UU l1) (a : A) →
-    is-singleton l2 (Σ A (λ x → a ＝ x)) (pair a refl)
-  pr1 (is-singleton-total-path A a B) = ind-Σ ∘ (ind-Id a _)
+    is-singleton l2 (Σ A (λ x → a ＝ x)) (a , refl)
+  pr1 (is-singleton-total-path A a B) = ind-Σ ∘ ind-Id a _
   pr2 (is-singleton-total-path A a B) = refl-htpy
 ```
+
+## See also
+
+- The equivalent principle of
+  [subsingleton induction](foundation.subsingleton-induction.md)
