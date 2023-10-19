@@ -55,6 +55,34 @@ wedge-Pointed-Type A B =
 infixr 10 _∨∗_
 _∨∗_ = wedge-Pointed-Type
 
+inl-wedge-Pointed-Type :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  A →∗ A ∨∗ B
+inl-wedge-Pointed-Type A B =
+  inl-pushout-Pointed-Type
+    ( inclusion-point-Pointed-Type A)
+    ( inclusion-point-Pointed-Type B)
+
+map-inl-wedge-Pointed-Type :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  type-Pointed-Type A → type-Pointed-Type (A ∨∗ B)
+map-inl-wedge-Pointed-Type A B =
+  map-pointed-map (inl-wedge-Pointed-Type A B)
+
+inr-wedge-Pointed-Type :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  B →∗ A ∨∗ B
+inr-wedge-Pointed-Type A B =
+  inr-pushout-Pointed-Type
+    ( inclusion-point-Pointed-Type A)
+    ( inclusion-point-Pointed-Type B)
+
+map-inr-wedge-Pointed-Type :
+  {l1 l2 : Level} (A : Pointed-Type l1) (B : Pointed-Type l2) →
+  type-Pointed-Type B → type-Pointed-Type (A ∨∗ B)
+map-inr-wedge-Pointed-Type A B =
+  map-pointed-map (inr-wedge-Pointed-Type A B)
+
 indexed-wedge-Pointed-Type :
   {l1 l2 : Level} (I : UU l1) (A : I → Pointed-Type l2) → Pointed-Type (l1 ⊔ l2)
 pr1 (indexed-wedge-Pointed-Type I A) =
