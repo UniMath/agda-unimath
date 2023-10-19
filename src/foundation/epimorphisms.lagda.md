@@ -162,13 +162,13 @@ If the map `f : A → B` is epi, then its codiagonal is an equivalence.
           ( Σ (B → X) (λ h → coherence-square-maps f f h g))
           ( equiv-fibers-precomp-cocone-fiberwise f X g)
           ( is-contr-fam-is-equiv-map-section-family
-              ( λ h →
-                ( vertical-map-cocone f f
-                  ( cocone-map f f (cocone-codiagonal-map f) h)) ,
-                ( coherence-square-cocone f f
-                  ( cocone-map f f (cocone-codiagonal-map f) h)))
-              ( up-c X)
-              ( g)))
+            ( λ h →
+              ( vertical-map-cocone f f
+                ( cocone-map f f (cocone-codiagonal-map f) h)) ,
+              ( coherence-square-cocone f f
+                ( cocone-map f f (cocone-codiagonal-map f) h)))
+            ( up-c X)
+            ( g)))
 
   is-epimorphism-universal-property-pushout :
     ({l : Level} → universal-property-pushout l f f (cocone-codiagonal-map f)) →
