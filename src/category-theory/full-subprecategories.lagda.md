@@ -33,13 +33,14 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **full subprecategory** of a [precategory](category-theory.precategories.md) `C`
-consists of a [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`.
+A **full subprecategory** of a [precategory](category-theory.precategories.md)
+`C` consists of a [subtype](foundation-core.subtypes.md) `P₀` of the objects of
+`C`.
 
 Alternatively, we say that a
 [subprecategory](category-theory.subprecategories.md) **is full** if for every
-two objects `X` and `Y` in the subprecategory, the subtype of morphisms from
-`X` to `Y` in the subprecategory is [full](foundation.full-subtypes.md).
+two objects `X` and `Y` in the subprecategory, the subtype of morphisms from `X`
+to `Y` in the subprecategory is [full](foundation.full-subtypes.md).
 
 ## Definitions
 
@@ -82,7 +83,7 @@ module _
     is-in-subtype-inclusion-subtype subtype-obj-Full-Subprecategory
 ```
 
-### The precategory structure of a full subprecategory
+### The underlying precategory of a full subprecategory
 
 ```agda
 module _
@@ -233,27 +234,24 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level}
-  (C : Category l1 l2)
-  (P : Full-Subprecategory l3 (precategory-Category C))
+  (C : Precategory l1 l2)
+  (P : Full-Subprecategory l3 C)
   where
 
-  is-category-precategory-Full-Subcategory :
-    is-category-Precategory
-      ( precategory-Full-Subprecategory
-        ( precategory-Category C)
-        ( P))
-  is-category-precategory-Full-Subcategory X =
+  is-category-precategory-is-category-Full-Subprecategory :
+    is-category-Precategory C →
+    is-category-Precategory (precategory-Full-Subprecategory C P)
+  is-category-precategory-is-category-Full-Subprecategory is-category-C X =
     fundamental-theorem-id
       ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Category C (inclusion-subtype P X))
+        ( is-contr-total-iso-Category
+          ( C , is-category-C)
+          ( inclusion-subtype P X))
         ( is-prop-is-in-subtype P)
         ( inclusion-subtype P X)
-        ( id-iso-Category C)
+        ( id-iso-Precategory C)
         ( is-in-subtype-inclusion-subtype P X))
-      ( iso-eq-Full-Subprecategory
-        ( precategory-Category C)
-        ( P)
-        ( X))
+      ( iso-eq-Full-Subprecategory C P X)
 ```
 
 ### The inclusion functor is an embedding

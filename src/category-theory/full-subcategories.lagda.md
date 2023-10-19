@@ -83,7 +83,7 @@ module _
     is-in-obj-inclusion-obj-Full-Subprecategory (precategory-Category C) P
 ```
 
-### The precategory structure of a full subcategory
+### The underlying precategory of a full subcategory
 
 ```agda
 module _
@@ -191,9 +191,7 @@ module _
     iso-eq-Full-Subprecategory (precategory-Category C) P
 ```
 
-## Properties
-
-### Full subcategories are categories
+### The underlying category of a full subcategory
 
 ```agda
 module _
@@ -202,10 +200,18 @@ module _
   (P : Full-Subcategory l3 C)
   where
 
+  is-category-precategory-Full-Subcategory :
+    is-category-Precategory (precategory-Full-Subcategory C P)
+  is-category-precategory-Full-Subcategory =
+    is-category-precategory-is-category-Full-Subprecategory
+      ( precategory-Category C) P (is-category-Category C)
+
   category-Full-Subcategory : Category (l1 ⊔ l3) l2
   pr1 category-Full-Subcategory = precategory-Full-Subcategory C P
-  pr2 category-Full-Subcategory = is-category-precategory-Full-Subcategory C P
+  pr2 category-Full-Subcategory = is-category-precategory-Full-Subcategory
 ```
+
+## Properties
 
 ### The inclusion functor is an embedding
 

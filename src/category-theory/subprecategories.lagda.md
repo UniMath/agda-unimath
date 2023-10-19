@@ -233,7 +233,7 @@ module _
       ( is-subprecategory-Subprecategory)
 ```
 
-### The precategory structure of a subprecategory
+### The underlying precategory of a subprecategory
 
 ```agda
 module _

@@ -176,18 +176,31 @@ module _
     iso-eq-Full-Large-Subprecategory
       ( large-precategory-Large-Category C)
       ( P)
+```
+
+### The underlying large category of a full large subcategory
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
+  (C : Large-Category α β)
+  (P : Full-Large-Subcategory γ C)
+  where
 
   is-large-category-Full-Large-Subcategory :
     is-large-category-Large-Precategory
-      ( large-precategory-Full-Large-Subcategory)
+      ( large-precategory-Full-Large-Subcategory C P)
   is-large-category-Full-Large-Subcategory =
-    is-large-category-large-precategory-Full-Large-Subcategory C P
+    is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory
+      ( large-precategory-Large-Category C)
+      ( P)
+      ( is-large-category-Large-Category C)
 
   large-category-Full-Large-Subcategory :
     Large-Category (λ l → α l ⊔ γ l) β
   large-precategory-Large-Category
     large-category-Full-Large-Subcategory =
-    large-precategory-Full-Large-Subcategory
+    large-precategory-Full-Large-Subcategory C P
   is-large-category-Large-Category
     large-category-Full-Large-Subcategory =
     is-large-category-Full-Large-Subcategory

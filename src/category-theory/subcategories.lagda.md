@@ -205,7 +205,7 @@ module _
     is-closed-under-composition-Subprecategory (precategory-Category C) P
 ```
 
-### The precategory structure of a subcategory
+### The underlying precategory of a subcategory
 
 ```agda
 module _
