@@ -32,7 +32,7 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subcategory** of a [precategory](category-theory.precategories.md) `C`
+A **full subcategory** of a [precategory](category-theory.precategories.md) `C`
 consists of a [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`.
 
 Alternatively, we say that a [subcategory](category-theory.subcategories.md)
