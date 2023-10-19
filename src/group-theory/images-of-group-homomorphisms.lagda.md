@@ -128,6 +128,8 @@ module _
     backward-implication (is-image-image-hom-Group K)
 ```
 
+### The image of a subgroup of a group homomorphism
+
 ## Properties
 
 ### A group homomorphism is surjective if and only if its image is the full subgroup
