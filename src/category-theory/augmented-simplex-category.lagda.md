@@ -112,15 +112,15 @@ right-unit-law-comp-hom-augmented-simplex-Category :
 right-unit-law-comp-hom-augmented-simplex-Category {n} {m} =
   right-unit-law-comp-hom-Poset (Fin-Poset n) (Fin-Poset m)
 
-is-unital-composition-structure-augmented-simplex-Category :
-  is-unital-composition-structure-Set
+is-unital-composition-operation-augmented-simplex-Category :
+  is-unital-composition-operation-Set
     ( hom-set-augmented-simplex-Category)
-    ( associative-composition-structure-augmented-simplex-Category)
-pr1 is-unital-composition-structure-augmented-simplex-Category =
+    ( λ {n} {m} {r} → comp-hom-augmented-simplex-Category {n} {m} {r})
+pr1 is-unital-composition-operation-augmented-simplex-Category =
   id-hom-augmented-simplex-Category
-pr1 (pr2 is-unital-composition-structure-augmented-simplex-Category) {n} {m} =
+pr1 (pr2 is-unital-composition-operation-augmented-simplex-Category) {n} {m} =
   left-unit-law-comp-hom-augmented-simplex-Category {n} {m}
-pr2 (pr2 is-unital-composition-structure-augmented-simplex-Category) {n} {m} =
+pr2 (pr2 is-unital-composition-operation-augmented-simplex-Category) {n} {m} =
   right-unit-law-comp-hom-augmented-simplex-Category {n} {m}
 
 augmented-simplex-Precategory : Precategory lzero lzero
@@ -129,7 +129,7 @@ pr1 (pr2 augmented-simplex-Precategory) = hom-set-augmented-simplex-Category
 pr1 (pr2 (pr2 augmented-simplex-Precategory)) =
   associative-composition-structure-augmented-simplex-Category
 pr2 (pr2 (pr2 augmented-simplex-Precategory)) =
-  is-unital-composition-structure-augmented-simplex-Category
+  is-unital-composition-operation-augmented-simplex-Category
 ```
 
 ### The augmented simplex category

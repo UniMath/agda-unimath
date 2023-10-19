@@ -93,6 +93,7 @@ open import category-theory.natural-transformations-functors-precategories publi
 open import category-theory.natural-transformations-maps-categories public
 open import category-theory.natural-transformations-maps-from-small-to-large-precategories public
 open import category-theory.natural-transformations-maps-precategories public
+open import category-theory.nonunital-precategories public
 open import category-theory.one-object-precategories public
 open import category-theory.opposite-precategories public
 open import category-theory.precategories public

@@ -336,15 +336,15 @@ module _
   pr2 associative-composition-structure-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Subprecategory {x} {y} {z} {w}
 
-  is-unital-composition-structure-Subprecategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Subprecategory :
+    is-unital-composition-operation-Set
       ( hom-set-Subprecategory)
-      ( associative-composition-structure-Subprecategory)
-  pr1 is-unital-composition-structure-Subprecategory x =
+      ( comp-hom-Subprecategory)
+  pr1 is-unital-composition-operation-Subprecategory x =
     id-hom-Subprecategory {x}
-  pr1 (pr2 is-unital-composition-structure-Subprecategory) {x} {y} =
+  pr1 (pr2 is-unital-composition-operation-Subprecategory) {x} {y} =
     left-unit-law-comp-hom-Subprecategory {x} {y}
-  pr2 (pr2 is-unital-composition-structure-Subprecategory) {x} {y} =
+  pr2 (pr2 is-unital-composition-operation-Subprecategory) {x} {y} =
     right-unit-law-comp-hom-Subprecategory {x} {y}
 
   precategory-Subprecategory : Precategory (l1 ⊔ l3) (l2 ⊔ l4)
@@ -353,7 +353,7 @@ module _
   pr1 (pr2 (pr2 precategory-Subprecategory)) =
     associative-composition-structure-Subprecategory
   pr2 (pr2 (pr2 precategory-Subprecategory)) =
-    is-unital-composition-structure-Subprecategory
+    is-unital-composition-operation-Subprecategory
 ```
 
 ### The inclusion functor of a subprecategory

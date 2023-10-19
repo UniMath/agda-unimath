@@ -126,12 +126,12 @@ module _
   right-unit-law-comp-hom-Preunivalent-Category =
     right-unit-law-comp-hom-Precategory precategory-Preunivalent-Category
 
-  is-unital-composition-structure-Preunivalent-Category :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Preunivalent-Category :
+    is-unital-composition-operation-Set
       hom-set-Preunivalent-Category
-      associative-composition-structure-Preunivalent-Category
-  is-unital-composition-structure-Preunivalent-Category =
-    is-unital-composition-structure-Precategory
+      comp-hom-Preunivalent-Category
+  is-unital-composition-operation-Preunivalent-Category =
+    is-unital-composition-operation-Precategory
       ( precategory-Preunivalent-Category)
 
   is-preunivalent-Preunivalent-Category :

@@ -95,11 +95,11 @@ module _
     right-unit-law-comp-hom-Category function-Category
 
   is-unital-function-Category :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-Set
       hom-set-function-Category
-      associative-composition-structure-function-Category
+      comp-hom-function-Category
   is-unital-function-Category =
-    is-unital-composition-structure-Category function-Category
+    is-unital-composition-operation-Category function-Category
 
   extensionality-obj-function-Category :
     (x y : obj-Category function-Category) →

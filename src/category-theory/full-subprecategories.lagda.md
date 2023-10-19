@@ -155,15 +155,15 @@ module _
   pr2 associative-composition-structure-Full-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Full-Subprecategory {x} {y} {z} {w}
 
-  is-unital-composition-structure-Full-Subprecategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Full-Subprecategory :
+    is-unital-composition-operation-Set
       ( hom-set-Full-Subprecategory)
-      ( associative-composition-structure-Full-Subprecategory)
-  pr1 is-unital-composition-structure-Full-Subprecategory x =
+      ( λ {x} {y} {z} → comp-hom-Full-Subprecategory {x} {y} {z})
+  pr1 is-unital-composition-operation-Full-Subprecategory x =
     id-hom-Full-Subprecategory {x}
-  pr1 (pr2 is-unital-composition-structure-Full-Subprecategory) {x} {y} =
+  pr1 (pr2 is-unital-composition-operation-Full-Subprecategory) {x} {y} =
     left-unit-law-comp-hom-Full-Subprecategory {x} {y}
-  pr2 (pr2 is-unital-composition-structure-Full-Subprecategory) {x} {y} =
+  pr2 (pr2 is-unital-composition-operation-Full-Subprecategory) {x} {y} =
     right-unit-law-comp-hom-Full-Subprecategory {x} {y}
 
   precategory-Full-Subprecategory : Precategory (l1 ⊔ l3) l2
@@ -172,7 +172,7 @@ module _
   pr1 (pr2 (pr2 precategory-Full-Subprecategory)) =
     associative-composition-structure-Full-Subprecategory
   pr2 (pr2 (pr2 precategory-Full-Subprecategory)) =
-    is-unital-composition-structure-Full-Subprecategory
+    is-unital-composition-operation-Full-Subprecategory
 ```
 
 ### Isomorphisms in full subprecategories

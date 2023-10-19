@@ -159,12 +159,12 @@ module _
       ( precategory-Category C)
       ( P)
 
-  is-unital-composition-structure-Full-Subcategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Full-Subcategory :
+    is-unital-composition-operation-Set
       ( hom-set-Full-Subcategory)
-      ( associative-composition-structure-Full-Subcategory)
-  is-unital-composition-structure-Full-Subcategory =
-    is-unital-composition-structure-Full-Subprecategory
+      ( λ {x} {y} {z} → comp-hom-Full-Subcategory {x} {y} {z})
+  is-unital-composition-operation-Full-Subcategory =
+    is-unital-composition-operation-Full-Subprecategory
       ( precategory-Category C)
       ( P)
 

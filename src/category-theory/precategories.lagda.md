@@ -2,11 +2,15 @@
 
 ```agda
 module category-theory.precategories where
+
+open import category-theory.nonunital-precategories public
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.nonunital-precategories
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
@@ -41,26 +45,6 @@ identities between the objects are exactly the isomorphisms.
 ## Definition
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
-  where
-
-  associative-composition-structure-Set : UU (l1 ⊔ l2)
-  associative-composition-structure-Set =
-    Σ ( {x y z : A} →
-        type-Set (hom y z) → type-Set (hom x y) → type-Set (hom x z))
-      ( λ μ →
-        {x y z w : A} (h : type-Set (hom z w)) (g : type-Set (hom y z))
-        (f : type-Set (hom x y)) → μ (μ h g) f ＝ μ h (μ g f))
-
-  is-unital-composition-structure-Set :
-    associative-composition-structure-Set → UU (l1 ⊔ l2)
-  is-unital-composition-structure-Set μ =
-    Σ ( (x : A) → type-Set (hom x x))
-      ( λ e →
-        ( {x y : A} (f : type-Set (hom x y)) → pr1 μ (e y) f ＝ f) ×
-        ( {x y : A} (f : type-Set (hom x y)) → pr1 μ f (e x) ＝ f))
-
 Precategory :
   (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Precategory l1 l2 =
@@ -69,7 +53,7 @@ Precategory l1 l2 =
       Σ ( A → A → Set l2)
         ( λ hom →
           Σ ( associative-composition-structure-Set hom)
-            ( is-unital-composition-structure-Set hom)))
+            ( λ μ → is-unital-composition-operation-Set hom (pr1 μ))))
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -116,26 +100,26 @@ module _
   associative-comp-hom-Precategory =
     pr2 associative-composition-structure-Precategory
 
-  is-unital-composition-structure-Precategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Precategory :
+    is-unital-composition-operation-Set
       hom-set-Precategory
-      associative-composition-structure-Precategory
-  is-unital-composition-structure-Precategory = pr2 (pr2 (pr2 C))
+      comp-hom-Precategory
+  is-unital-composition-operation-Precategory = pr2 (pr2 (pr2 C))
 
   id-hom-Precategory : {x : obj-Precategory} → hom-Precategory x x
-  id-hom-Precategory {x} = pr1 is-unital-composition-structure-Precategory x
+  id-hom-Precategory {x} = pr1 is-unital-composition-operation-Precategory x
 
   left-unit-law-comp-hom-Precategory :
     {x y : obj-Precategory} (f : hom-Precategory x y) →
     comp-hom-Precategory id-hom-Precategory f ＝ f
   left-unit-law-comp-hom-Precategory =
-    pr1 (pr2 is-unital-composition-structure-Precategory)
+    pr1 (pr2 is-unital-composition-operation-Precategory)
 
   right-unit-law-comp-hom-Precategory :
     {x y : obj-Precategory} (f : hom-Precategory x y) →
     comp-hom-Precategory f id-hom-Precategory ＝ f
   right-unit-law-comp-hom-Precategory =
-    pr2 (pr2 is-unital-composition-structure-Precategory)
+    pr2 (pr2 is-unital-composition-operation-Precategory)
 ```
 
 ### The total hom-type of a precategory
@@ -188,60 +172,4 @@ module _
   hom-inv-eq-Precategory :
     (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
   hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
-```
-
-## Properties
-
-### The property of having identity morphisms is a proposition
-
-Suppose `e e' : (x : A) → hom x x` are both right and left units with regard to
-composition. It is enough to show that `e = e'` since the right and left unit
-laws are propositions (because all hom-types are sets). By function
-extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by
-the unit laws we have the following chain of equalities:
-`e x = (e' x) ∘ (e x) = e' x.`
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (hom : A → A → Set l2)
-  where
-
-  abstract
-    all-elements-equal-is-unital-composition-structure-Set :
-      ( μ : associative-composition-structure-Set hom) →
-      all-elements-equal (is-unital-composition-structure-Set hom μ)
-    all-elements-equal-is-unital-composition-structure-Set
-      ( pair μ associative-μ)
-      ( pair e (pair left-unit-law-e right-unit-law-e))
-      ( pair e' (pair left-unit-law-e' right-unit-law-e')) =
-      eq-type-subtype
-        ( λ x →
-          prod-Prop
-            ( Π-Prop' A
-              ( λ a →
-                Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom a b))
-                      ( λ f' →
-                        Id-Prop (hom a b) (μ (x b) f') f'))))
-            ( Π-Prop' A
-              ( λ a →
-                Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom a b))
-                      ( λ f' →
-                        Id-Prop (hom a b) (μ f' (x a)) f')))))
-        ( eq-htpy
-          ( λ x →
-            ( inv (left-unit-law-e' (e x))) ∙
-            ( right-unit-law-e (e' x))))
-
-    is-prop-is-unital-composition-structure-Set :
-      ( μ : associative-composition-structure-Set hom) →
-      is-prop (is-unital-composition-structure-Set hom μ)
-    is-prop-is-unital-composition-structure-Set μ =
-      is-prop-all-elements-equal
-        ( all-elements-equal-is-unital-composition-structure-Set μ)
 ```
