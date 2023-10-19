@@ -8,23 +8,25 @@ module category-theory.isomorphism-induction-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.precategories
-open import category-theory.isomorphisms-in-precategories
+open import category-theory.isomorphism-induction-precategories
 open import category-theory.isomorphisms-in-categories
+open import category-theory.isomorphisms-in-precategories
+open import category-theory.precategories
 
+open import foundation.commuting-triangles-of-maps
+open import foundation.contractible-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.equivalences
+open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-systems
+open import foundation.identity-types
+open import foundation.sections
+open import foundation.singleton-induction
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
-
-open import foundation-core.commuting-triangles-of-maps
-open import foundation-core.contractible-maps
-open import foundation-core.equivalences
-open import foundation-core.function-types
-open import foundation-core.homotopies
-open import foundation-core.identity-types
-open import foundation-core.sections
-open import foundation-core.singleton-induction
 ```
 
 </details>
@@ -51,36 +53,6 @@ categories.
 
 ## Statement
 
-### For Precategories
-
-```agda
-module _
-  {l1 l2 : Level} (C : Precategory l1 l2) {A : obj-Precategory C}
-  where
-
-  ev-id-iso-Precategory :
-    {l : Level} (P : (B : obj-Precategory C) → (iso-Precategory C A B) → UU l) →
-    ((B : obj-Precategory C) (e : iso-Precategory C A B) → P B e) →
-    P A (id-iso-Precategory C)
-  ev-id-iso-Precategory P f = f A (id-iso-Precategory C)
-
-  induction-principle-iso-Precategory :
-    {l : Level} (P : (B : obj-Precategory C) (e : iso-Precategory C A B) → UU l) →
-    UU (l1 ⊔ l2 ⊔ l)
-  induction-principle-iso-Precategory P = section (ev-id-iso-Precategory P)
-
-  triangle-ev-id-iso-Precategory :
-    {l : Level}
-    (P : (B : obj-Precategory C) → iso-Precategory C A B → UU l) →
-    coherence-triangle-maps
-      ( ev-point (A , id-iso-Precategory C) {λ (X , e) → P X e})
-      ( ev-id-iso-Precategory P)
-      ( ev-pair {A = obj-Precategory C} {B = iso-Precategory C A} {C = λ (X , e) → P X e})
-  triangle-ev-id-iso-Precategory P f = refl
-```
-
-### For categories
-
 ```agda
 module _
   {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
@@ -102,9 +74,9 @@ module _
     {l : Level}
     (P : (B : obj-Category C) → iso-Category C A B → UU l) →
     coherence-triangle-maps
-      ( ev-point (A , id-iso-Category C) {λ (X , e) → P X e})
+      ( ev-point (A , id-iso-Category C))
       ( ev-id-iso-Category P)
-      ( ev-pair {A = obj-Category C} {B = iso-Category C A} {C = λ (X , e) → P X e})
+      ( ev-pair)
   triangle-ev-id-iso-Category =
     triangle-ev-id-iso-Precategory (precategory-Category C)
 ```
@@ -122,18 +94,10 @@ module _
     is-identity-system-iso-is-contr-total-iso-Category :
       is-contr (Σ (obj-Category C) (iso-Category C A)) →
       {l : Level} →
-      (P : (Σ (obj-Category C) (iso-Category C A)) → UU l) →
-      induction-principle-iso-Category C (λ B e → P (B , e))
-    is-identity-system-iso-is-contr-total-iso-Category c P =
-      section-left-factor
-        ( ev-id-iso-Category C (λ X e → P (X , e)))
-        ( ev-pair)
-        ( is-singleton-is-contr
-          ( A , id-iso-Category C)
-          ( ( A , id-iso-Category C) ,
-            ( λ t →
-              inv (contraction c (A , id-iso-Category C)) ∙ contraction c t))
-          ( P))
+      is-identity-system l (iso-Category C A) A (id-iso-Category C)
+    is-identity-system-iso-is-contr-total-iso-Category =
+      is-identity-system-iso-is-contr-total-iso-Precategory
+        ( precategory-Category C)
 ```
 
 ### Isomorphism induction implies contractibility of the total space of isomorphisms
@@ -143,20 +107,13 @@ module _
   {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
   where
 
-  abstract
-    is-contr-total-equiv-induction-principle-iso-Category :
-      ( {l : Level} (P : (Σ (obj-Category C) (iso-Category C A)) → UU l) →
-        induction-principle-iso-Category C (λ B e → P (B , e))) →
-      is-contr (Σ (obj-Category C) (iso-Category C A))
-    is-contr-total-equiv-induction-principle-iso-Category ind =
-      is-contr-is-singleton
-        ( Σ (obj-Category C) (iso-Category C A))
-        ( A , id-iso-Category C)
-        ( λ P → section-comp
-          ( ev-id-iso-Category C (λ X e → P (X , e)))
-          ( ev-pair {A = obj-Category C} {B = iso-Category C A} {C = P})
-          ( ind-Σ , refl-htpy)
-          ( ind P))
+  is-contr-total-equiv-induction-principle-iso-Category :
+    ( {l : Level} →
+      is-identity-system l (iso-Category C A) A (id-iso-Category C)) →
+    is-contr (Σ (obj-Category C) (iso-Category C A))
+  is-contr-total-equiv-induction-principle-iso-Category =
+    is-contr-total-equiv-induction-principle-iso-Precategory
+      ( precategory-Category C)
 ```
 
 ### Isomorphism induction in a category
@@ -171,8 +128,7 @@ module _
     is-identity-system-iso-Category : section (ev-id-iso-Category C P)
     is-identity-system-iso-Category =
       is-identity-system-iso-is-contr-total-iso-Category C
-        ( is-contr-total-iso-Category C _)
-        ( λ t → P (pr1 t) (pr2 t))
+        ( is-contr-total-iso-Category C A) P
 
   ind-iso-Category :
     P A (id-iso-Category C) →
@@ -194,16 +150,10 @@ module _
 
   is-equiv-ev-id-iso-Category : is-equiv (ev-id-iso-Category C P)
   is-equiv-ev-id-iso-Category =
-    is-equiv-left-factor-htpy
-      ( ev-point (A , id-iso-Category C))
-      ( ev-id-iso-Category C P)
-      ( ev-pair)
-      ( triangle-ev-id-iso-Category C P)
-      ( dependent-universal-property-contr-is-contr
-        ( A , id-iso-Category C)
-        ( is-contr-total-iso-Category C A)
-        ( λ u → P (pr1 u) (pr2 u)))
-      ( is-equiv-ev-pair)
+    dependent-universal-property-identity-system-is-torsorial
+      ( id-iso-Category C)
+      ( is-contr-total-iso-Category C A)
+      ( P)
 
   is-contr-map-ev-id-iso-Category :
     is-contr-map (ev-id-iso-Category C P)
