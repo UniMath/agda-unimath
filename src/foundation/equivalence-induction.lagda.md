@@ -90,10 +90,10 @@ module _
   where
 
   abstract
-    is-identity-system-is-contr-total-equiv :
+    is-identity-system-is-torsorial-equiv :
       is-contr (Σ (UU l1) (A ≃_)) →
       {l : Level} → is-identity-system l (A ≃_) A id-equiv
-    is-identity-system-is-contr-total-equiv =
+    is-identity-system-is-torsorial-equiv =
       is-identity-system-is-torsorial A id-equiv
 ```
 
@@ -105,11 +105,11 @@ module _
   where
 
   abstract
-    is-contr-total-equiv-induction-principle-equivalences :
+    is-torsorial-equiv-induction-principle-equivalences :
       ( {l : Level} (P : (Σ (UU l1) (A ≃_)) → UU l) →
         induction-principle-equivalences (λ B e → P (B , e))) →
       is-contr (Σ (UU l1) (A ≃_))
-    is-contr-total-equiv-induction-principle-equivalences ind =
+    is-torsorial-equiv-induction-principle-equivalences ind =
       is-contr-is-singleton
         ( Σ (UU l1) (A ≃_))
         ( A , id-equiv)
@@ -120,10 +120,10 @@ module _
           ( ind P))
 
   abstract
-    is-contr-total-is-identity-system-equiv :
+    is-torsorial-is-identity-system-equiv :
       ( {l : Level} → is-identity-system l (A ≃_) A id-equiv) →
       is-contr (Σ (UU l1) (A ≃_))
-    is-contr-total-is-identity-system-equiv =
+    is-torsorial-is-identity-system-equiv =
       is-torsorial-is-identity-system A id-equiv
 ```
 
@@ -137,7 +137,7 @@ module _
   abstract
     is-identity-system-equiv : section (ev-id-equiv P)
     is-identity-system-equiv =
-      is-identity-system-is-contr-total-equiv (is-contr-total-equiv A) P
+      is-identity-system-is-torsorial-equiv (is-contr-total-equiv A) P
 
   ind-equiv :
     P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
