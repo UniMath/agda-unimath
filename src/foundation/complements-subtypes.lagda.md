@@ -23,7 +23,7 @@ open import foundation-core.subtypes
 
 ## Idea
 
-The **complement** of a [subtypes](foundation-core.subtypes.md) `P` of `A`
+The **complement** of a [subtype](foundation-core.subtypes.md) `P` of `A`
 consists of the elements that are not in `P`.
 
 ## Definition
