@@ -40,7 +40,7 @@ Alternatively, we say that a [subcategory](category-theory.subcategories.md)
 of morphisms from `X` to `Y` in the subcategory is
 [full](foundation.full-subtypes.md).
 
-## Definition
+## Definitions
 
 ### Full subcategories
 
