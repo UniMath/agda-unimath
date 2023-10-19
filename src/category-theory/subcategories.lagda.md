@@ -35,7 +35,7 @@ open import foundation.universe-levels
 A **subcategory** of a [category](category-theory.categories.md) `C` is simply a
 [subprecategory](category-theory.subprecategories.md). It consists of a
 [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`, and a family
-of subtypes `P₁`
+of subtypes
 
 ```text
   P₁ : (X Y : obj C) → P₀ X → P₀ Y → subtype (hom X Y)
