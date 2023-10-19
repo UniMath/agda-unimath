@@ -10,6 +10,7 @@ module group-theory.images-of-group-homomorphisms where
 open import foundation.dependent-pair-types
 open import foundation.identity-types
 open import foundation.images
+open import foundation.images-subtypes
 open import foundation.logical-equivalences
 open import foundation.propositional-truncations
 open import foundation.universal-property-image
@@ -129,6 +130,56 @@ module _
 ```
 
 ### The image of a subgroup of a group homomorphism
+
+```agda
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  (K : Subgroup l3 G)
+  where
+
+  subset-im-hom-Subgroup : subset-Group (l1 ⊔ l2 ⊔ l3) H
+  subset-im-hom-Subgroup =
+    im-subtype (map-hom-Group G H f) (subset-Subgroup G K)
+
+  contains-unit-im-hom-Subgroup :
+    contains-unit-subset-Group H subset-im-hom-Subgroup
+  contains-unit-im-hom-Subgroup =
+    unit-trunc-Prop (unit-Subgroup G K , preserves-unit-hom-Group G H f)
+
+  abstract
+    is-closed-under-multiplication-im-hom-Subgroup :
+      is-closed-under-multiplication-subset-Group H subset-im-hom-Subgroup
+    is-closed-under-multiplication-im-hom-Subgroup x y u v =
+      apply-twice-universal-property-trunc-Prop u v
+        ( subset-im-hom-Subgroup (mul-Group H x y))
+        ( λ where
+          ((x' , k) , refl) ((y' , l) , refl) →
+            unit-trunc-Prop
+              ( ( mul-Subgroup G K (x' , k) (y' , l)) ,
+                ( preserves-mul-hom-Group G H f x' y')))
+
+  abstract
+    is-closed-under-inverses-im-hom-Subgroup :
+      is-closed-under-inverses-subset-Group H subset-im-hom-Subgroup
+    is-closed-under-inverses-im-hom-Subgroup x u =
+      apply-universal-property-trunc-Prop u
+        ( subset-im-hom-Subgroup (inv-Group H x))
+        ( λ where
+          ((x' , k) , refl) →
+            unit-trunc-Prop
+              ( ( inv-Subgroup G K (x' , k)) ,
+                ( preserves-inv-hom-Group G H f x')))
+
+  im-hom-Subgroup : Subgroup (l1 ⊔ l2 ⊔ l3) H
+  pr1 im-hom-Subgroup =
+    subset-im-hom-Subgroup
+  pr1 (pr2 im-hom-Subgroup) =
+    contains-unit-im-hom-Subgroup
+  pr1 (pr2 (pr2 im-hom-Subgroup)) =
+    is-closed-under-multiplication-im-hom-Subgroup
+  pr2 (pr2 (pr2 im-hom-Subgroup)) =
+    is-closed-under-inverses-im-hom-Subgroup
+```
 
 ## Properties
 

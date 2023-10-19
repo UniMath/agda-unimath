@@ -1,8 +1,6 @@
 # Characteristic subgroups
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module group-theory.characteristic-subgroups where
 ```
 
@@ -41,14 +39,31 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
-  is-characteristic-prop-Subgroup : Prop {!!}
+  is-characteristic-prop-Subgroup : Prop (l1 ⊔ l2)
   is-characteristic-prop-Subgroup =
     Π-Prop
       ( iso-Group G G)
       ( λ e →
         leq-prop-Subgroup G
-          {! image-hom-Group G G (hom-iso-Group G G e)!}
-          {!!})
+          ( im-hom-Subgroup G G (hom-iso-Group G G e) H)
+          ( H))
+```
+
+### The stronger predicate of being a characteristic subgroup
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
+  where
+
+  is-characteristic-prop-Subgroup' : Prop (l1 ⊔ l2)
+  is-characteristic-prop-Subgroup' =
+    Π-Prop
+      ( iso-Group G G)
+      ( λ e →
+        has-same-elements-prop-Subgroup G
+          ( im-hom-Subgroup G G (hom-iso-Group G G e) H)
+          ( H))
 ```
 
 ## See also
