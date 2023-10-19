@@ -29,8 +29,8 @@ open import foundation-core.singleton-induction
 
 ## Idea
 
-**Isomorphism induction** in a category `𝒞` is the principle asserting that for
-any type family
+**Isomorphism induction** in a category `𝒞` is the principle asserting that,
+given an object `A : 𝒞` and any type family
 
 ```text
   P : (B : 𝒞) (ϕ : A ≅ B) → 𝒰
