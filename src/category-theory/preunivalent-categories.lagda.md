@@ -38,7 +38,7 @@ generalize both [categories](category-theory.categories.md) in the sense we have
 defined them (as univalent categories), and strict categories, which are
 precategories whose objects form a [set](foundation-core.sets.md).
 
-## Definition
+## Definitions
 
 ```agda
 module _
