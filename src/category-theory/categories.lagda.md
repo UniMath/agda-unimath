@@ -9,6 +9,7 @@ module category-theory.categories where
 ```agda
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
+open import category-theory.preunivalent-categories
 
 open import foundation.1-types
 open import foundation.dependent-pair-types
@@ -144,8 +145,7 @@ postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
 
 ```agda
 module _
-  {l1 l2 : Level}
-  (C : Category l1 l2)
+  {l1 l2 : Level} (C : Category l1 l2)
   where
 
   hom-eq-Category :
@@ -155,6 +155,31 @@ module _
   hom-inv-eq-Category :
     (x y : obj-Category C) → x ＝ y → hom-Category C y x
   hom-inv-eq-Category = hom-inv-eq-Precategory (precategory-Category C)
+```
+
+### The underlying nonunital precategory of a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  nonunital-precategory-Category : Nonunital-Precategory l1 l2
+  nonunital-precategory-Category =
+    nonunital-precategory-Precategory (precategory-Category C)
+```
+
+### The underlying preunivalent category of a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  preunivalent-category-Category : Preunivalent-Category l1 l2
+  pr1 preunivalent-category-Category = precategory-Category C
+  pr2 preunivalent-category-Category x y =
+    is-emb-is-equiv (is-category-Category C x y)
 ```
 
 ## Properties
@@ -171,14 +196,10 @@ module _
   where
 
   is-1-type-obj-Category : is-1-type (obj-Category C)
-  is-1-type-obj-Category x y =
-    is-set-is-equiv
-      ( iso-Precategory (precategory-Category C) x y)
-      ( iso-eq-Precategory (precategory-Category C) x y)
-      ( is-category-Category C x y)
-      ( is-set-iso-Precategory (precategory-Category C))
+  is-1-type-obj-Category =
+    is-1-type-obj-Preunivalent-Category (preunivalent-category-Category C)
 
   obj-1-type-Category : 1-Type l1
-  pr1 obj-1-type-Category = obj-Category C
-  pr2 obj-1-type-Category = is-1-type-obj-Category
+  obj-1-type-Category =
+    obj-1-type-Preunivalent-Category (preunivalent-category-Category C)
 ```

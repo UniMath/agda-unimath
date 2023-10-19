@@ -122,19 +122,34 @@ module _
     pr2 (pr2 is-unital-composition-operation-Precategory)
 ```
 
+### The underlying nonunital precategory of a precategory
+
+```agda
+module _
+  {l1 l2 : Level} (C : Precategory l1 l2)
+  where
+
+  nonunital-precategory-Precategory : Nonunital-Precategory l1 l2
+  pr1 nonunital-precategory-Precategory = obj-Precategory C
+  pr1 (pr2 nonunital-precategory-Precategory) = hom-set-Precategory C
+  pr1 (pr2 (pr2 nonunital-precategory-Precategory)) = comp-hom-Precategory C
+  pr2 (pr2 (pr2 nonunital-precategory-Precategory)) =
+    associative-comp-hom-Precategory C
+```
+
 ### The total hom-type of a precategory
 
 ```agda
 total-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
 total-hom-Precategory C =
-  Σ (obj-Precategory C) (λ x → Σ (obj-Precategory C) (hom-Precategory C x))
+  total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
 
 obj-total-hom-Precategory :
   {l1 l2 : Level} (C : Precategory l1 l2) →
   total-hom-Precategory C → obj-Precategory C × obj-Precategory C
-pr1 (obj-total-hom-Precategory C (x , y , f)) = x
-pr2 (obj-total-hom-Precategory C (x , y , f)) = y
+obj-total-hom-Precategory C =
+  obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
 ```
 
 ### Precomposition by a morphism
