@@ -45,6 +45,7 @@ open import category-theory.full-functors-precategories public
 open import category-theory.full-large-subcategories public
 open import category-theory.full-large-subprecategories public
 open import category-theory.full-maps-precategories public
+open import category-theory.full-subprecategories public
 open import category-theory.fully-faithful-functors-precategories public
 open import category-theory.fully-faithful-maps-precategories public
 open import category-theory.function-categories public

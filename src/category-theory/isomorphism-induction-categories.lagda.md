@@ -40,7 +40,7 @@ any type family
 ```
 
 of types indexed by all
-[isomorphisms](category-theory.isomorphisms-in-category.md) with domain `A`,
+[isomorphisms](category-theory.isomorphisms-in-categories.md) with domain `A`,
 there is a [section](foundation.sections.md) of the evaluation map
 
 ```text

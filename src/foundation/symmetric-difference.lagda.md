@@ -169,4 +169,4 @@ module _
 
 ## See also
 
-- [Complements of subtypes](foundation.complements.subtypes.md)
+- [Complements of subtypes](foundation.complements-subtypes.md)
