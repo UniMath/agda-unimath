@@ -97,15 +97,15 @@ right-unit-law-comp-hom-representing-arrow :
 right-unit-law-comp-hom-representing-arrow {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow {false} f = refl
 
-is-unital-composition-structure-representing-arrow :
-  is-unital-composition-structure-Set
+is-unital-composition-operation-representing-arrow :
+  is-unital-composition-operation-Set
     ( hom-set-representing-arrow)
-    ( associative-composition-structure-representing-arrow)
-pr1 is-unital-composition-structure-representing-arrow x =
+    ( λ {x} {y} {z} → comp-hom-representing-arrow {x} {y} {z})
+pr1 is-unital-composition-operation-representing-arrow x =
   id-hom-representing-arrow {x}
-pr1 (pr2 is-unital-composition-structure-representing-arrow) =
+pr1 (pr2 is-unital-composition-operation-representing-arrow) =
   left-unit-law-comp-hom-representing-arrow
-pr2 (pr2 is-unital-composition-structure-representing-arrow) =
+pr2 (pr2 is-unital-composition-operation-representing-arrow) =
   right-unit-law-comp-hom-representing-arrow
 
 representing-arrow-Precategory : Precategory lzero lzero
@@ -114,7 +114,7 @@ pr1 (pr2 representing-arrow-Precategory) = hom-set-representing-arrow
 pr1 (pr2 (pr2 representing-arrow-Precategory)) =
   associative-composition-structure-representing-arrow
 pr2 (pr2 (pr2 representing-arrow-Precategory)) =
-  is-unital-composition-structure-representing-arrow
+  is-unital-composition-operation-representing-arrow
 ```
 
 ### The representing arrow category

@@ -110,12 +110,10 @@ module _
   right-unit-law-comp-hom-Category =
     right-unit-law-comp-hom-Precategory precategory-Category
 
-  is-unital-composition-structure-Category :
-    is-unital-composition-structure-Set
-      hom-set-Category
-      associative-composition-structure-Category
-  is-unital-composition-structure-Category =
-    is-unital-composition-structure-Precategory precategory-Category
+  is-unital-composition-operation-Category :
+    is-unital-composition-operation-Set hom-set-Category comp-hom-Category
+  is-unital-composition-operation-Category =
+    is-unital-composition-operation-Precategory precategory-Category
 
   is-category-Category :
     is-category-Precategory precategory-Category

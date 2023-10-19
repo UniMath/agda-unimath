@@ -264,12 +264,12 @@ module _
   associative-composition-structure-Subcategory =
     associative-composition-structure-Subprecategory (precategory-Category C) P
 
-  is-unital-composition-structure-Subcategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Subcategory :
+    is-unital-composition-operation-Set
       ( hom-set-Subcategory)
-      ( associative-composition-structure-Subcategory)
-  is-unital-composition-structure-Subcategory =
-    is-unital-composition-structure-Subprecategory (precategory-Category C) P
+      ( comp-hom-Subcategory)
+  is-unital-composition-operation-Subcategory =
+    is-unital-composition-operation-Subprecategory (precategory-Category C) P
 
   precategory-Subcategory : Precategory (l1 ⊔ l3) (l2 ⊔ l4)
   precategory-Subcategory =

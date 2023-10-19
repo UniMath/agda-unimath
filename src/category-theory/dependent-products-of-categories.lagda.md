@@ -107,10 +107,8 @@ module _
     right-unit-law-comp-hom-Category Π-Category
 
   is-unital-Π-Category :
-    is-unital-composition-structure-Set
-      hom-set-Π-Category
-      associative-composition-structure-Π-Category
-  is-unital-Π-Category = is-unital-composition-structure-Category Π-Category
+    is-unital-composition-operation-Set hom-set-Π-Category comp-hom-Π-Category
+  is-unital-Π-Category = is-unital-composition-operation-Category Π-Category
 
   extensionality-obj-Π-Category :
     (x y : obj-Category Π-Category) → (x ＝ y) ≃ iso-Category Π-Category x y

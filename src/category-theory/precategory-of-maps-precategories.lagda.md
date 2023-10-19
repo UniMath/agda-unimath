@@ -99,18 +99,18 @@ module _
   right-unit-law-comp-hom-map-precategory-Precategory {F} {G} =
     right-unit-law-comp-natural-transformation-map-Precategory C D F G
 
-  is-unital-composition-structure-map-precategory-Precategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-map-precategory-Precategory :
+    is-unital-composition-operation-Set
       ( natural-transformation-map-set-Precategory C D)
-      ( associative-composition-structure-map-precategory-Precategory)
-  pr1 is-unital-composition-structure-map-precategory-Precategory =
+      ( comp-hom-map-precategory-Precategory)
+  pr1 is-unital-composition-operation-map-precategory-Precategory =
     id-hom-map-precategory-Precategory
   pr1
-    ( pr2 is-unital-composition-structure-map-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-map-precategory-Precategory)
     { F} {G} =
     left-unit-law-comp-hom-map-precategory-Precategory {F} {G}
   pr2
-    ( pr2 is-unital-composition-structure-map-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-map-precategory-Precategory)
     { F} {G} =
     right-unit-law-comp-hom-map-precategory-Precategory {F} {G}
 
@@ -122,7 +122,7 @@ module _
   pr1 (pr2 (pr2 map-precategory-Precategory)) =
     associative-composition-structure-map-precategory-Precategory
   pr2 (pr2 (pr2 map-precategory-Precategory)) =
-    is-unital-composition-structure-map-precategory-Precategory
+    is-unital-composition-operation-map-precategory-Precategory
 ```
 
 ## Properties

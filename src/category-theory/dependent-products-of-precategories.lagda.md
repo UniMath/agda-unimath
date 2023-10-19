@@ -86,9 +86,9 @@ module _
     eq-htpy (λ i → right-unit-law-comp-hom-Precategory (C i) (f i))
 
   is-unital-Π-Precategory :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-Set
       hom-set-Π-Precategory
-      associative-composition-structure-Π-Precategory
+      comp-hom-Π-Precategory
   pr1 is-unital-Π-Precategory x = id-hom-Π-Precategory
   pr1 (pr2 is-unital-Π-Precategory) = left-unit-law-comp-hom-Π-Precategory
   pr2 (pr2 is-unital-Π-Precategory) = right-unit-law-comp-hom-Π-Precategory

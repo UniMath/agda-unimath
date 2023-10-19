@@ -103,14 +103,14 @@ right-unit-law-comp-hom-simplex-Category :
 right-unit-law-comp-hom-simplex-Category {n} {m} =
   right-unit-law-comp-hom-Poset (Fin-Poset (succ-ℕ n)) (Fin-Poset (succ-ℕ m))
 
-is-unital-composition-structure-simplex-Category :
-  is-unital-composition-structure-Set
+is-unital-composition-operation-simplex-Category :
+  is-unital-composition-operation-Set
     ( hom-set-simplex-Category)
-    ( associative-composition-structure-simplex-Category)
-pr1 is-unital-composition-structure-simplex-Category = id-hom-simplex-Category
-pr1 (pr2 is-unital-composition-structure-simplex-Category) {n} {m} =
+    ( comp-hom-simplex-Category)
+pr1 is-unital-composition-operation-simplex-Category = id-hom-simplex-Category
+pr1 (pr2 is-unital-composition-operation-simplex-Category) {n} {m} =
   left-unit-law-comp-hom-simplex-Category {n} {m}
-pr2 (pr2 is-unital-composition-structure-simplex-Category) {n} {m} =
+pr2 (pr2 is-unital-composition-operation-simplex-Category) {n} {m} =
   right-unit-law-comp-hom-simplex-Category {n} {m}
 
 simplex-Precategory : Precategory lzero lzero
@@ -119,7 +119,7 @@ pr1 (pr2 simplex-Precategory) = hom-set-simplex-Category
 pr1 (pr2 (pr2 simplex-Precategory)) =
   associative-composition-structure-simplex-Category
 pr2 (pr2 (pr2 simplex-Precategory)) =
-  is-unital-composition-structure-simplex-Category
+  is-unital-composition-operation-simplex-Category
 ```
 
 ### The simplex category

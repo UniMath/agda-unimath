@@ -87,11 +87,11 @@ module _
     right-unit-law-comp-hom-Precategory function-Precategory
 
   is-unital-function-Precategory :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-Set
       hom-set-function-Precategory
-      associative-composition-structure-function-Precategory
+      comp-hom-function-Precategory
   is-unital-function-Precategory =
-    is-unital-composition-structure-Precategory function-Precategory
+    is-unital-composition-operation-Precategory function-Precategory
 ```
 
 ### Isomorphisms in the function precategory are fiberwise isomorphisms

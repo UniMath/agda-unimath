@@ -99,18 +99,18 @@ module _
   right-unit-law-comp-hom-functor-precategory-Precategory {F} {G} =
     right-unit-law-comp-natural-transformation-Precategory C D F G
 
-  is-unital-composition-structure-functor-precategory-Precategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-functor-precategory-Precategory :
+    is-unital-composition-operation-Set
       ( natural-transformation-set-Precategory C D)
-      ( associative-composition-structure-functor-precategory-Precategory)
-  pr1 is-unital-composition-structure-functor-precategory-Precategory =
+      ( λ {F} {G} {H} → comp-hom-functor-precategory-Precategory {F} {G} {H})
+  pr1 is-unital-composition-operation-functor-precategory-Precategory =
     id-hom-functor-precategory-Precategory
   pr1
-    ( pr2 is-unital-composition-structure-functor-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-functor-precategory-Precategory)
     { F} {G} =
     left-unit-law-comp-hom-functor-precategory-Precategory {F} {G}
   pr2
-    ( pr2 is-unital-composition-structure-functor-precategory-Precategory)
+    ( pr2 is-unital-composition-operation-functor-precategory-Precategory)
     { F} {G} =
     right-unit-law-comp-hom-functor-precategory-Precategory {F} {G}
 
@@ -122,7 +122,7 @@ module _
   pr1 (pr2 (pr2 functor-precategory-Precategory)) =
     associative-composition-structure-functor-precategory-Precategory
   pr2 (pr2 (pr2 functor-precategory-Precategory)) =
-    is-unital-composition-structure-functor-precategory-Precategory
+    is-unital-composition-operation-functor-precategory-Precategory
 ```
 
 ## Properties
