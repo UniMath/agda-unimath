@@ -21,10 +21,10 @@ open import group-theory.subgroups
 ## Idea
 
 A **characteristic subgroup** of a [group](group-theory.groups.md) `G` is a
-[subgroup](group-theory.subgroups.md) `H` of `G` such that `e H ⊆ H` for every
-[isomorphism](group-theory.isomorphisms-groups.md) `e : G ≅ G`. The seemingly
-stronger condition, which asserts that `e H ＝ H` for every isomorphism
-`e : G ≅ G` is equivalent.
+[subgroup](group-theory.subgroups.md) `H` of `G` such that `f H ⊆ H` for every
+[isomorphism](group-theory.isomorphisms-groups.md) `f : G ≅ G`. The seemingly
+stronger condition, which asserts that `f H ＝ H` for every isomorphism
+`f : G ≅ G` is equivalent.
 
 Note that any characteristic subgroup is
 [normal](group-theory.normal-subgroups.md), since the condition of being
@@ -43,9 +43,9 @@ module _
   is-characteristic-prop-Subgroup =
     Π-Prop
       ( iso-Group G G)
-      ( λ e →
+      ( λ f →
         leq-prop-Subgroup G
-          ( im-hom-Subgroup G G (hom-iso-Group G G e) H)
+          ( im-hom-Subgroup G G (hom-iso-Group G G f) H)
           ( H))
 ```
 
@@ -60,9 +60,9 @@ module _
   is-characteristic-prop-Subgroup' =
     Π-Prop
       ( iso-Group G G)
-      ( λ e →
+      ( λ f →
         has-same-elements-prop-Subgroup G
-          ( im-hom-Subgroup G G (hom-iso-Group G G e) H)
+          ( im-hom-Subgroup G G (hom-iso-Group G G f) H)
           ( H))
 ```
 
