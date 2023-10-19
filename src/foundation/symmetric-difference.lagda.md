@@ -29,7 +29,7 @@ open import foundation-core.transport-along-identifications
 ## Idea
 
 The **symmetric difference** of two [subtypes](foundation-core.subtypes.md) `A`
-and `B` is the subtypes that contains the elements that are either in `A` or in
+and `B` is the subtype that contains the elements that are either in `A` or in
 `B` but not in both.
 
 ## Definition
