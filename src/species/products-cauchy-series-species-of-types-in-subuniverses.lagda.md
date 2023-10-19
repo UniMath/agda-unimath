@@ -35,7 +35,7 @@ The product of two Cauchy series is just the pointwise product.
 module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)
@@ -58,7 +58,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (X : UU l5)
@@ -99,7 +99,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (C1 : is-closed-under-cauchy-product-species-subuniverse P Q)
   (C2 : is-closed-under-coproducts-subuniverse P)
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))

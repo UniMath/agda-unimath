@@ -35,7 +35,8 @@ module _
   where
 
   preserves-sup-hom-Large-Poset :
-    hom-set-Large-Poset id
+    hom-set-Large-Poset
+      ( λ l → l)
       ( large-poset-Large-Suplattice K)
       ( large-poset-Large-Suplattice L) →
     UUω
@@ -59,7 +60,8 @@ module _
     where
     field
       hom-large-poset-hom-Large-Suplattice :
-        hom-set-Large-Poset id
+        hom-set-Large-Poset
+          ( λ l → l)
           ( large-poset-Large-Suplattice K)
           ( large-poset-Large-Suplattice L)
       preserves-sup-hom-Large-Suplattice :

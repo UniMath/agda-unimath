@@ -86,7 +86,7 @@ module _
   preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :
-    functor-Large-Precategory id
+    functor-Large-Precategory (λ l → l)
       ( Abstract-Group-Action-Large-Precategory H)
       ( Abstract-Group-Action-Large-Precategory G)
   obj-functor-Large-Precategory subst-Abstract-Group-Action =

@@ -290,7 +290,8 @@ is-equiv-is-equiv-precomp-Prop :
   ({l : Level} (R : Prop l) → is-equiv (precomp f (type-Prop R))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Prop P Q f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-prop) P Q f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse
+    ( λ l → l) (λ l → is-prop) P Q f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2)
@@ -298,7 +299,8 @@ is-equiv-is-equiv-precomp-Set :
   ({l : Level} (C : Set l) → is-equiv (precomp f (type-Set C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Set A B f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-set) A B f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse
+    ( λ l → l) (λ l → is-set) A B f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋)
@@ -307,7 +309,7 @@ is-equiv-is-equiv-precomp-Truncated-Type :
   ({l : Level} (C : Truncated-Type l k) → is-equiv (precomp f (pr1 C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Truncated-Type k A B f H =
-    is-equiv-is-equiv-precomp-subuniverse id (λ l → is-trunc k) A B f
+    is-equiv-is-equiv-precomp-subuniverse (λ l → l) (λ l → is-trunc k) A B f
       ( λ l → H {l})
 ```
 
