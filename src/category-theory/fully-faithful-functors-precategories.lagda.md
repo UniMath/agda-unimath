@@ -33,7 +33,7 @@ hom-sets, or equivalently, a
 [faithful](category-theory.faithful-functors-precategories.md) functor on
 precategories.
 
-## Definition
+## Definitions
 
 ### The predicate of being fully faithful on functors between precategories
 
