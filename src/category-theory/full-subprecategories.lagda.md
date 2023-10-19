@@ -38,7 +38,7 @@ consists of a [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C
 
 Alternatively, we say that a
 [subprecategory](category-theory.subprecategories.md) **is full** if for every
-two objects `X` and `Y` in the subprecategory, the subtype of homomorphisms from
+two objects `X` and `Y` in the subprecategory, the subtype of morphisms from
 `X` to `Y` in the subprecategory is [full](foundation.full-subtypes.md).
 
 ## Definition
