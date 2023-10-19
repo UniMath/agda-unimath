@@ -42,7 +42,7 @@ of homomorphisms from `X` to `Y` in the subcategory is
 
 ## Definition
 
-### Subprecategories
+### Full subcategories
 
 ```agda
 Full-Subcategory :
