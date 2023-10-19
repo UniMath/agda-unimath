@@ -8,15 +8,11 @@ module category-theory.embedding-maps-precategories where
 
 ```agda
 open import category-theory.fully-faithful-maps-precategories
-open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.universe-levels
 ```

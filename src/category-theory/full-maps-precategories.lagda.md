@@ -7,15 +7,11 @@ module category-theory.full-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.function-types
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels

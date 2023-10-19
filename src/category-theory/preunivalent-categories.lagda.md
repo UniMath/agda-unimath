@@ -13,7 +13,6 @@ open import category-theory.precategories
 open import foundation.1-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets

@@ -9,15 +9,12 @@ module category-theory.fully-faithful-maps-precategories where
 ```agda
 open import category-theory.faithful-maps-precategories
 open import category-theory.full-maps-precategories
-open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.surjective-maps
 open import foundation.universe-levels

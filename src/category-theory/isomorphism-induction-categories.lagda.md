@@ -12,9 +12,6 @@ open import category-theory.isomorphisms-in-categories
 
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.identity-systems
-open import foundation.subuniverses
-open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 

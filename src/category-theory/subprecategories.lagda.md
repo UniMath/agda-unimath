@@ -7,9 +7,7 @@ module category-theory.subprecategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.embeddings-precategories
 open import category-theory.faithful-functors-precategories
-open import category-theory.faithful-maps-precategories
 open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
