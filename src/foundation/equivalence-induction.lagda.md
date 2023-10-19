@@ -201,8 +201,8 @@ module _
 
   is-equiv-ev-id-equiv : is-equiv (ev-id-equiv P)
   is-equiv-ev-id-equiv =
-   dependent-universal-property-identity-system-is-torsorial
-    id-equiv (is-contr-total-equiv A) P
+    dependent-universal-property-identity-system-is-torsorial
+      ( id-equiv) (is-contr-total-equiv A) P
 
   is-contr-map-ev-id-equiv : is-contr-map (ev-id-equiv P)
   is-contr-map-ev-id-equiv = is-contr-map-is-equiv is-equiv-ev-id-equiv
