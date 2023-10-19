@@ -29,6 +29,9 @@ principle analogous to the induction principle of the
 [unit type](foundation.unit-type.md). A type satisfies singleton induction if
 and only if it is [contractible](foundation-core.contractible-types.md).
 
+Singelton induction states that given a type family `P` over `A`, to construct a
+section of `P` it suffices to construct a section over `a`.
+
 ## Definition
 
 ### Singleton induction

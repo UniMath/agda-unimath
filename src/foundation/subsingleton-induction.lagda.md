@@ -25,13 +25,16 @@ open import foundation-core.transport-along-identifications
 
 ## Idea
 
-**Subsingleton induction** on a type `A` equipped with an element `a : A` is a
-slight variant of [singleton induction](foundation.singleton-induction.md) which
-in turn is a principle analogous to induction for the
-[unit type](foundation.unit-type.md). Subsingleton induction uses the
-observation that a type equipped with an element is
-[contractible](foundation-core.contractible-types.md) if and only if it is a
+**Subsingleton induction** on a type `A` is a slight variant of
+[singleton induction](foundation.singleton-induction.md) which in turn is a
+principle analogous to induction for the [unit type](foundation.unit-type.md).
+Subsingleton induction uses the observation that a type equipped with an element
+is [contractible](foundation-core.contractible-types.md) if and only if it is a
 [proposition](foundation-core.propositions.md).
+
+Subsingelton induction states that given a type family `P` over `A`, to
+construct a section of `P` it suffices to provide a section over `a` for some
+`a : A`.
 
 ## Definition
 
