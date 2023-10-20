@@ -26,8 +26,10 @@ Given a type `A`, a **composition operation on a binary family of sets**
 `hom : A → A → Set ` is a map
 
 ```text
-  hom y z → hom x y → hom x z.
+  hom y z → hom x y → hom x z
 ```
+
+for every triple of elements `x y z : A`.
 
 For such operations, we can consider
 [properties](foundation-core.propositions.md) such as **associativity** and
@@ -132,8 +134,8 @@ module _
 ### Being unital is a property of composition operations in binary families of sets
 
 Suppose `e e' : (x : A) → hom-set x x` are both right and left units with regard
-to composition. It is enough to show that `e e'` since the right and left unit
-laws are propositions (because all hom-types are sets). By function
+to composition. It is enough to show that `e ＝ e'` since the right and left
+unit laws are propositions (because all hom-types are sets). By function
 extensionality, it is enough to show that `e x ＝ e' x` for all `x : A`. But by
 the unit laws we have the following chain of equalities:
 `e x ＝ (e' x) ∘ (e x) ＝ e' x.`
