@@ -27,6 +27,7 @@ open import synthetic-homotopy-theory.pushouts
 open import synthetic-homotopy-theory.flattening-lemma-pushouts
 open import synthetic-homotopy-theory.universal-property-pushouts
 open import synthetic-homotopy-theory.suspension-structures
+open import synthetic-homotopy-theory.universal-property-suspensions
 ```
 
 </details>
@@ -305,4 +306,24 @@ module _
       ( pushout-4)
       ( pushout-3)
 
+```
+
+```agda
+  suspension-cocone-fiber : suspension-cocone (fiber f b) (fiber (codiagonal-map f) b)
+  suspension-cocone-fiber = c''
+
+  suspension-structure-fiber : suspension-structure (fiber f b) (fiber (codiagonal-map f) b)
+  suspension-structure-fiber =
+    map-equiv
+     ( equiv-suspension-structure-suspension-cocone
+       ( fiber f b)
+       ( fiber (codiagonal-map f) b))
+     ( suspension-cocone-fiber)
+
+  universal-property-suspension-fiber :
+    {l : Level} →
+    is-suspension l (fiber f b) (fiber (codiagonal-map f) b)
+  universal-property-suspension-fiber =
+    suspension-structure-fiber ,
+    pushout-5
 ```
