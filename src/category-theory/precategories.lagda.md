@@ -43,6 +43,22 @@ identities between the objects are exactly the isomorphisms.
 
 ## Definitions
 
+### The predicate on a composition operation on a binary family of sets of defining a precategory
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  (hom-set : A → A → Set l2)
+  (comp-hom : composition-operation-Set hom-set)
+  where
+
+  is-precategory-prop-composition-operation-Set : Prop (l1 ⊔ l2)
+  is-precategory-prop-composition-operation-Set =
+    prod-Prop
+      ( is-associative-prop-composition-operation-Set hom-set comp-hom)
+      ( is-unital-prop-composition-operation-Set hom-set comp-hom)
+```
+
 ### The type of precategories
 
 ```agda
