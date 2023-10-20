@@ -36,7 +36,7 @@ open import foundation-core.propositions
 
 The **universal property of identity types** characterizes families of maps out
 of the [identity type](foundation-core.identity-types.md). This universal
-property is also known as the type theoretic Yoneda lemma.
+property is also known as the **type theoretic Yoneda lemma**.
 
 ## Theorem
 
