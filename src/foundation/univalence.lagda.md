@@ -39,7 +39,7 @@ In this file we postulate the univalence axiom. Its statement is defined in
 ## Postulate
 
 ```agda
-postulate univalence : {l : Level} (A B : UU l) → UNIVALENCE A B
+postulate univalence : {l : Level} → axiom-univalence-Level l
 ```
 
 ## Properties
@@ -86,7 +86,7 @@ module _
     is-contr-total-equiv :
       (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
     is-contr-total-equiv A =
-      is-contr-total-equiv-UNIVALENCE A (univalence A)
+      is-contr-total-equiv-based-univalence A (univalence A)
 
     is-contr-total-equiv' :
       (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))

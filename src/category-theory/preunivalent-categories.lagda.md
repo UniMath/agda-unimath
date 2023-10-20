@@ -30,7 +30,7 @@ objects [embed](foundation-core.embeddings.md) into the
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). More
 specifically, an equality between objects gives rise to an isomorphism between
 them, by the J-rule. A precategory is a preunivalent category if this function,
-called `iso-eq`, is an embedding. In particular. being preunivalent is a
+called `iso-eq`, is an embedding. In particular, being preunivalent is a
 [proposition](foundation-core.propositions.md) since `is-emb` is a proposition.
 
 The idea of preunivalence is that it is a common generalization of univalent
@@ -217,4 +217,4 @@ module _
 
 ## See also
 
-- [Axiom L](foundation.axiom-l.md)
+- [The preunivalence axiom](foundation.preunivalence.md)
