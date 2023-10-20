@@ -1,14 +1,13 @@
 # Functoriality of quotient groups
 
 ```agda
-{-# OPTIONS --allow-unsolved-metas #-}
-
 module group-theory.functoriality-quotient-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -56,14 +55,34 @@ holds for every `x : G`, i.e., if `f` maps elements in `N` to elements in `M`.
 module _
   {l1 l2 l3 l4 : Level} (G : Group l1) (H : Group l2)
   (N : Normal-Subgroup l3 G) (M : Normal-Subgroup l4 H)
-  (f : hom-Group G H)
   where
 
-  reflects-normal-subgroup-hom-Group : UU (l1 ⊔ l3 ⊔ l4)
-  reflects-normal-subgroup-hom-Group =
+  reflects-normal-subgroup-hom-Group : hom-Group G H → UU (l1 ⊔ l3 ⊔ l4)
+  reflects-normal-subgroup-hom-Group f =
     (x : type-Group G) → is-in-Normal-Subgroup G N x →
     is-in-Normal-Subgroup H M (map-hom-Group G H f x)
+
+  reflecting-hom-Group : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+  reflecting-hom-Group = Σ (hom-Group G H) reflects-normal-subgroup-hom-Group
+
+module _
+  {l1 l2 l3 l4 : Level} (G : Group l1) (H : Group l2)
+  (N : Normal-Subgroup l3 G) (M : Normal-Subgroup l4 H)
+  (f : reflecting-hom-Group G H N M)
+  where
+
+  hom-reflecting-hom-Group : hom-Group G H
+  hom-reflecting-hom-Group = pr1 f
+
+  reflects-normal-subgroup-reflecting-hom-Group :
+    reflects-normal-subgroup-hom-Group G H N M hom-reflecting-hom-Group
+  reflects-normal-subgroup-reflecting-hom-Group = pr2 f
+
+  map-reflecting-hom-Group : type-Group G → type-Group H
+  map-reflecting-hom-Group = ?
 ```
+
+### Composition of nullifying homomorphisms and reflecting homomorphisms
 
 ### The functoriality of the quotient groups
 
@@ -76,5 +95,5 @@ module _
   where
 
   hom-quotient-Group : hom-Group (quotient-Group G N) (quotient-Group H M)
-  hom-quotient-Group = {!!}
+  hom-quotient-Group = {! !}
 ```
