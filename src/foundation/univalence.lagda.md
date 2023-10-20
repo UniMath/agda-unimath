@@ -86,7 +86,7 @@ module _
     is-contr-total-equiv :
       (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
     is-contr-total-equiv A =
-      is-contr-total-equiv-univalence A (univalence A)
+      is-contr-total-equiv-based-univalence A (univalence A)
 
     is-contr-total-equiv' :
       (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))
