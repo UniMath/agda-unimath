@@ -133,7 +133,7 @@ postcomp-hom-Nonunital-Precategory C f z =
 
 ### The predicate on nonunital precategories of being unital
 
-To show that unitality is a proposition, suppose `e e' : (x : A) → hom-set x x`
+**Proof:** To show that unitality is a proposition, suppose `e e' : (x : A) → hom-set x x`
 are both right and left units with regard to composition. It is enough to show
 that `e ＝ e'` since the right and left unit laws are propositions (because all
 hom-types are sets). By function extensionality, it is enough to show that
