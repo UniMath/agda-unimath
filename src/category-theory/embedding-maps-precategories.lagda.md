@@ -7,16 +7,12 @@ module category-theory.embedding-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
-open import category-theory.faithful-maps-precategories
-open import category-theory.functors-precategories
+open import category-theory.fully-faithful-maps-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -27,9 +23,11 @@ open import foundation.universe-levels
 
 A [map](category-theory.maps-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is an **embedding
-map** if it's an embedding on objects and
-[faithful](category-theory.faithful-maps-precategories.md). Hence embedding maps
-are maps that are embeddings on objects and hom-sets.
+map** if it's an [embedding](foundation-core.embeddings.md) on objects and
+[fully faithful](category-theory.fully-faithful-maps-precategories.md). Hence
+embedding maps are maps that are embeddings on objects and
+[equivalences](foundation-core.equivalences.md) on
+hom-[sets](foundation-core.sets.md).
 
 Note that for a map of precategories to be called _an embedding_, it must also
 be a [functor](category-theory.functors-precategories.md). This notion is
@@ -52,7 +50,7 @@ module _
   is-embedding-map-prop-map-Precategory =
     prod-Prop
       ( is-emb-Prop (obj-map-Precategory C D F))
-      ( is-faithful-prop-map-Precategory C D F)
+      ( is-fully-faithful-prop-map-Precategory C D F)
 
   is-embedding-map-map-Precategory : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-embedding-map-map-Precategory =

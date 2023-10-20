@@ -13,6 +13,7 @@ open import foundation.identity-systems
 open import foundation.subuniverses
 open import foundation.univalence
 open import foundation.universal-property-dependent-pair-types
+open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 
 open import foundation-core.commuting-triangles-of-maps
@@ -71,19 +72,17 @@ module _
 
   triangle-ev-id-equiv :
     {l : Level}
-    (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
+    (P : (Σ (UU l1) (A ≃_)) → UU l) →
     coherence-triangle-maps
-      ( ev-point (A , id-equiv) {P})
+      ( ev-point (A , id-equiv))
       ( ev-id-equiv (λ X e → P (X , e)))
-      ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
+      ( ev-pair)
   triangle-ev-id-equiv P f = refl
 ```
 
 ## Properties
 
-### Equivalence induction is equivalent to the contractibility of the total space of equivalences
-
-#### Contractibility of the total space of equivalences implies equivalence induction
+### Contractibility of the total space of equivalences implies equivalence induction
 
 ```agda
 module _
@@ -91,24 +90,14 @@ module _
   where
 
   abstract
-    is-identity-system-is-contr-total-equiv :
-      is-contr (Σ (UU l1) (λ X → A ≃ X)) →
-      {l : Level} →
-      (P : (Σ (UU l1) (λ X → A ≃ X)) → UU l) →
-      induction-principle-equivalences (λ B e → P (B , e))
-    is-identity-system-is-contr-total-equiv c P =
-      section-left-factor
-        ( ev-id-equiv (λ X e → P (X , e)))
-        ( ev-pair)
-        ( is-singleton-is-contr
-          ( A , id-equiv)
-          ( ( A , id-equiv) ,
-            ( λ t →
-              ( inv (contraction c (A , id-equiv))) ∙ (contraction c t)))
-          ( P))
+    is-identity-system-is-torsorial-equiv :
+      is-contr (Σ (UU l1) (A ≃_)) →
+      {l : Level} → is-identity-system l (A ≃_) A id-equiv
+    is-identity-system-is-torsorial-equiv =
+      is-identity-system-is-torsorial A id-equiv
 ```
 
-#### Equivalence induction implies contractibility of the total space of equivalences
+### Equivalence induction implies contractibility of the total space of equivalences
 
 ```agda
 module _
@@ -116,18 +105,26 @@ module _
   where
 
   abstract
-    is-contr-total-is-identity-system-equiv :
-      ( {l : Level} → is-identity-system l (λ X → A ≃ X) A id-equiv) →
-      is-contr (Σ (UU l1) (λ X → A ≃ X))
-    is-contr-total-is-identity-system-equiv ind =
+    is-torsorial-equiv-induction-principle-equivalences :
+      ( {l : Level} (P : (Σ (UU l1) (A ≃_)) → UU l) →
+        induction-principle-equivalences (λ B e → P (B , e))) →
+      is-contr (Σ (UU l1) (A ≃_))
+    is-torsorial-equiv-induction-principle-equivalences ind =
       is-contr-is-singleton
-        ( Σ (UU l1) (λ X → A ≃ X))
+        ( Σ (UU l1) (A ≃_))
         ( A , id-equiv)
         ( λ P → section-comp
           ( ev-id-equiv (λ X e → P (X , e)))
-          ( ev-pair {A = UU l1} {B = λ X → A ≃ X} {C = P})
+          ( ev-pair)
           ( ind-Σ , refl-htpy)
-          ( ind (λ X e → P (X , e))))
+          ( ind P))
+
+  abstract
+    is-torsorial-is-identity-system-equiv :
+      ( {l : Level} → is-identity-system l (A ≃_) A id-equiv) →
+      is-contr (Σ (UU l1) (A ≃_))
+    is-torsorial-is-identity-system-equiv =
+      is-torsorial-is-identity-system A id-equiv
 ```
 
 ### Equivalence induction in a universe
@@ -140,9 +137,7 @@ module _
   abstract
     is-identity-system-equiv : section (ev-id-equiv P)
     is-identity-system-equiv =
-      is-identity-system-is-contr-total-equiv
-        ( is-contr-total-equiv _)
-        ( λ t → P (pr1 t) (pr2 t))
+      is-identity-system-is-torsorial-equiv (is-contr-total-equiv A) P
 
   ind-equiv :
     P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
@@ -206,16 +201,8 @@ module _
 
   is-equiv-ev-id-equiv : is-equiv (ev-id-equiv P)
   is-equiv-ev-id-equiv =
-    is-equiv-left-factor-htpy
-      ( ev-point (A , id-equiv))
-      ( ev-id-equiv P)
-      ( ev-pair)
-      ( triangle-ev-id-equiv (λ u → P (pr1 u) (pr2 u)))
-      ( dependent-universal-property-contr-is-contr
-        ( A , id-equiv)
-        ( is-contr-total-equiv A)
-        ( λ u → P (pr1 u) (pr2 u)))
-      ( is-equiv-ev-pair)
+    dependent-universal-property-identity-system-is-torsorial
+      ( id-equiv) (is-contr-total-equiv A) P
 
   is-contr-map-ev-id-equiv : is-contr-map (ev-id-equiv P)
   is-contr-map-ev-id-equiv = is-contr-map-is-equiv is-equiv-ev-id-equiv
@@ -232,16 +219,8 @@ module _
   is-equiv-ev-id-equiv-subuniverse :
     is-equiv (ev-id-equiv-subuniverse P X {F})
   is-equiv-ev-id-equiv-subuniverse =
-    is-equiv-left-factor-htpy
-      ( ev-point (X , id-equiv))
-      ( ev-id-equiv-subuniverse P X)
-      ( ev-pair)
-      ( triangle-ev-id-equiv-subuniverse P X F)
-      ( dependent-universal-property-contr-is-contr
-        ( X , id-equiv)
-        ( is-contr-total-equiv-subuniverse P X)
-        ( λ E → F (pr1 E) (pr2 E)))
-      ( is-equiv-ev-pair)
+    dependent-universal-property-identity-system-is-torsorial
+    ( id-equiv) (is-contr-total-equiv-subuniverse P X) F
 
   is-contr-map-ev-id-equiv-subuniverse :
     is-contr-map (ev-id-equiv-subuniverse P X {F})
@@ -261,6 +240,6 @@ abstract
   is-equiv-postcomp-univalence :
     {l1 l2 : Level} {X Y : UU l1} (A : UU l2) (e : X ≃ Y) →
     is-equiv (postcomp A (map-equiv e))
-  is-equiv-postcomp-univalence {X = X} A =
+  is-equiv-postcomp-univalence A =
     ind-equiv (λ Y e → is-equiv (postcomp A (map-equiv e))) is-equiv-id
 ```

@@ -12,10 +12,7 @@ open import category-theory.functors-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.embeddings
-open import foundation.equivalences
 open import foundation.propositions
 open import foundation.universe-levels
 ```
@@ -26,9 +23,11 @@ open import foundation.universe-levels
 
 A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is an
-**embedding** if it's an embedding on objects and
-[faithful](category-theory.faithful-functors-precategories.md). Hence embeddings
-are functors that are embeddings on objects and hom-sets.
+**embedding** if it's an [embedding](foundation-core.embeddings.md) on objects
+and [fully faithful](category-theory.fully-faithful-functors-precategories.md).
+Hence embeddings are functors that are embeddings on objects and
+[equivalences](foundation-core.equivalences.md) on
+hom-[sets](foundation-core.sets.md).
 
 ## Definition
 
