@@ -30,6 +30,7 @@ open import synthetic-homotopy-theory.dependent-sequential-diagrams public
 open import synthetic-homotopy-theory.dependent-suspension-structures public
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers public
 open import synthetic-homotopy-theory.dependent-universal-property-pushouts public
+open import synthetic-homotopy-theory.dependent-universal-property-sequential-colimits public
 open import synthetic-homotopy-theory.dependent-universal-property-suspensions public
 open import synthetic-homotopy-theory.descent-circle public
 open import synthetic-homotopy-theory.descent-circle-constant-families public
