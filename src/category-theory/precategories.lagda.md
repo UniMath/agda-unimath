@@ -49,14 +49,16 @@ identities between the objects are exactly the isomorphisms.
 module _
   {l1 l2 : Level} {A : UU l1}
   (hom-set : A → A → Set l2)
-  (comp-hom : composition-operation-Set hom-set)
+  (comp-hom : composition-operation-binary-family-Set hom-set)
   where
 
-  is-precategory-prop-composition-operation-Set : Prop (l1 ⊔ l2)
-  is-precategory-prop-composition-operation-Set =
+  is-precategory-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
+  is-precategory-prop-composition-operation-binary-family-Set =
     prod-Prop
-      ( is-associative-prop-composition-operation-Set hom-set comp-hom)
-      ( is-unital-prop-composition-operation-Set hom-set comp-hom)
+      ( is-associative-prop-composition-operation-binary-family-Set
+        ( hom-set)
+        ( comp-hom))
+      ( is-unital-prop-composition-operation-binary-family-Set hom-set comp-hom)
 ```
 
 ### The type of precategories
@@ -69,9 +71,11 @@ Precategory l1 l2 =
     ( λ A →
       Σ ( A → A → Set l2)
         ( λ hom-set →
-          Σ ( associative-composition-operation-Set hom-set)
+          Σ ( associative-composition-operation-binary-family-Set hom-set)
             ( λ (comp-hom , assoc-comp) →
-              is-unital-composition-operation-Set hom-set comp-hom)))
+              is-unital-composition-operation-binary-family-Set
+                ( hom-set)
+                ( comp-hom))))
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
@@ -91,7 +95,7 @@ module _
   is-set-hom-Precategory x y = is-set-type-Set (hom-set-Precategory x y)
 
   associative-composition-operation-Precategory :
-    associative-composition-operation-Set hom-set-Precategory
+    associative-composition-operation-binary-family-Set hom-set-Precategory
   associative-composition-operation-Precategory = pr1 (pr2 (pr2 C))
 
   comp-hom-Precategory :
@@ -119,7 +123,7 @@ module _
     pr2 associative-composition-operation-Precategory
 
   is-unital-composition-operation-Precategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Precategory
       comp-hom-Precategory
   is-unital-composition-operation-Precategory = pr2 (pr2 (pr2 C))

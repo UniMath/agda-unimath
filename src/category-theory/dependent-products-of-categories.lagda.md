@@ -86,7 +86,7 @@ module _
     associative-comp-hom-Category Π-Category
 
   associative-composition-operation-Π-Category :
-    associative-composition-operation-Set hom-set-Π-Category
+    associative-composition-operation-binary-family-Set hom-set-Π-Category
   associative-composition-operation-Π-Category =
     associative-composition-operation-Category Π-Category
 
@@ -108,7 +108,9 @@ module _
     right-unit-law-comp-hom-Category Π-Category
 
   is-unital-Π-Category :
-    is-unital-composition-operation-Set hom-set-Π-Category comp-hom-Π-Category
+    is-unital-composition-operation-binary-family-Set
+      hom-set-Π-Category
+      comp-hom-Π-Category
   is-unital-Π-Category = is-unital-composition-operation-Category Π-Category
 
   extensionality-obj-Π-Category :

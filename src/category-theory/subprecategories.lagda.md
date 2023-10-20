@@ -336,14 +336,14 @@ module _
         ( inclusion-hom-Subprecategory C P x y f))
 
   associative-composition-operation-Subprecategory :
-    associative-composition-operation-Set hom-set-Subprecategory
+    associative-composition-operation-binary-family-Set hom-set-Subprecategory
   pr1 associative-composition-operation-Subprecategory {x} {y} {z} =
     comp-hom-Subprecategory {x} {y} {z}
   pr2 associative-composition-operation-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Subprecategory {x} {y} {z} {w}
 
   is-unital-composition-operation-Subprecategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Subprecategory)
       ( comp-hom-Subprecategory)
   pr1 is-unital-composition-operation-Subprecategory x =

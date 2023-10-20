@@ -95,7 +95,7 @@ module _
     associative-mul-Monoid M
 
   associative-composition-operation-one-object-precategory-Monoid :
-    associative-composition-operation-Set
+    associative-composition-operation-binary-family-Set
       hom-set-one-object-precategory-Monoid
   pr1 associative-composition-operation-one-object-precategory-Monoid =
     comp-hom-one-object-precategory-Monoid
@@ -125,7 +125,7 @@ module _
     right-unit-law-mul-Monoid M
 
   is-unital-composition-operation-one-object-precategory-Monoid :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-one-object-precategory-Monoid
       comp-hom-one-object-precategory-Monoid
   pr1 is-unital-composition-operation-one-object-precategory-Monoid =

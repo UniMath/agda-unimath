@@ -68,7 +68,7 @@ module _
       C D F G H I f g h
 
   associative-composition-operation-map-precategory-Precategory :
-    associative-composition-operation-Set
+    associative-composition-operation-binary-family-Set
       ( natural-transformation-map-set-Precategory C D)
   pr1 associative-composition-operation-map-precategory-Precategory
     {F} {G} {H} =
@@ -101,7 +101,7 @@ module _
     right-unit-law-comp-natural-transformation-map-Precategory C D F G
 
   is-unital-composition-operation-map-precategory-Precategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       ( natural-transformation-map-set-Precategory C D)
       ( comp-hom-map-precategory-Precategory)
   pr1 is-unital-composition-operation-map-precategory-Precategory =

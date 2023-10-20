@@ -154,14 +154,14 @@ module _
       ( precategory-Category C) P {x} {y}
 
   associative-composition-operation-Full-Subcategory :
-    associative-composition-operation-Set hom-set-Full-Subcategory
+    associative-composition-operation-binary-family-Set hom-set-Full-Subcategory
   associative-composition-operation-Full-Subcategory =
     associative-composition-operation-Full-Subprecategory
       ( precategory-Category C)
       ( P)
 
   is-unital-composition-operation-Full-Subcategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Full-Subcategory)
       ( λ {x} {y} {z} → comp-hom-Full-Subcategory {x} {y} {z})
   is-unital-composition-operation-Full-Subcategory =

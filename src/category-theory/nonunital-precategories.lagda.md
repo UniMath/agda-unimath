@@ -41,7 +41,7 @@ Nonunital-Precategory l1 l2 =
   Σ ( UU l1)
     ( λ A →
       Σ ( A → A → Set l2)
-        ( associative-composition-operation-Set))
+        ( associative-composition-operation-binary-family-Set))
 
 module _
   {l1 l2 : Level} (C : Nonunital-Precategory l1 l2)
@@ -62,7 +62,8 @@ module _
     is-set-type-Set (hom-set-Nonunital-Precategory x y)
 
   associative-composition-operation-Nonunital-Precategory :
-    associative-composition-operation-Set hom-set-Nonunital-Precategory
+    associative-composition-operation-binary-family-Set
+      hom-set-Nonunital-Precategory
   associative-composition-operation-Nonunital-Precategory = pr2 (pr2 C)
 
   comp-hom-Nonunital-Precategory :
@@ -150,23 +151,23 @@ module _
 
   is-unital-Nonunital-Precategory : UU (l1 ⊔ l2)
   is-unital-Nonunital-Precategory =
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Nonunital-Precategory C)
       ( comp-hom-Nonunital-Precategory C)
 
   is-prop-is-unital-Nonunital-Precategory :
     is-prop
-      ( is-unital-composition-operation-Set
+      ( is-unital-composition-operation-binary-family-Set
         ( hom-set-Nonunital-Precategory C)
         ( comp-hom-Nonunital-Precategory C))
   is-prop-is-unital-Nonunital-Precategory =
-    is-prop-is-unital-composition-operation-Set
+    is-prop-is-unital-composition-operation-binary-family-Set
       ( hom-set-Nonunital-Precategory C)
       ( comp-hom-Nonunital-Precategory C)
 
   is-unital-prop-Nonunital-Precategory : Prop (l1 ⊔ l2)
   is-unital-prop-Nonunital-Precategory =
-    is-unital-prop-composition-operation-Set
+    is-unital-prop-composition-operation-binary-family-Set
       ( hom-set-Nonunital-Precategory C)
       ( comp-hom-Nonunital-Precategory C)
 ```
