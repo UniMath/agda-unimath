@@ -696,7 +696,7 @@ module _
     is-prop-iso-Precategory is-prop-hom-C-x-y
 ```
 
-### When `hom x y` and `hom y x` are propositions, it suffices to provide a homomorphism in each direction to construct an isomorphism
+### When `hom x y` and `hom y x` are propositions, it suffices to provide a morphism in each direction to construct an isomorphism
 
 ```agda
 module _
