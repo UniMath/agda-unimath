@@ -40,7 +40,7 @@ module _
   where
 
   postulate
-      funext : (f : (x : A) → B x) → function-extensionality f
+    funext : (f : (x : A) → B x) → function-extensionality f
 ```
 
 ### Components of `funext`
