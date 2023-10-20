@@ -34,7 +34,9 @@ form a [set](foundation-core.sets.md). In particular, being a strict category is
 a [proposition](foundation-core.propositions.md) since being a set is a
 proposition.
 
-## Definition
+## Definitions
+
+### The predicate on precategories of being a strict category
 
 ```agda
 module _
@@ -47,7 +49,11 @@ module _
 
   is-strict-category-Precategory : UU l1
   is-strict-category-Precategory = type-Prop is-strict-category-prop-Precategory
+```
 
+### The type of strict categories
+
+```agda
 Strict-Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Strict-Category l1 l2 = Σ (Precategory l1 l2) is-strict-category-Precategory
 
