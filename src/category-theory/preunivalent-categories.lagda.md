@@ -168,7 +168,7 @@ postcomp-hom-Preunivalent-Category C =
   postcomp-hom-Precategory (precategory-Preunivalent-Category C)
 ```
 
-### Equalities give rise to morphisms
+### Equalities induce morphisms
 
 ```agda
 module _
