@@ -30,6 +30,10 @@ Note that any characteristic subgroup is
 [normal](group-theory.normal-subgroups.md), since the condition of being
 characteristic implies that `conjugation x H ＝ H`.
 
+We also note that every subgroup which is defined for all groups, such as the
+commutator subgroup, is automatically characteristic as a consequence of the
+[univalence axiom](foundation.univalence.md), and therefore also normal.
+
 ## Definition
 
 ### The predicate of being a characteristic subgroup
