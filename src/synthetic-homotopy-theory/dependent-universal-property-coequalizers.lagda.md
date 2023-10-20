@@ -57,10 +57,10 @@ module _
   ( dup-coequalizer : dependent-universal-property-coequalizer l4 f g e)
   where
 
-  map-dependent-universal-property-coequalizers :
+  map-dependent-universal-property-coequalizer :
     dependent-cofork f g e P →
     (x : X) → P x
-  map-dependent-universal-property-coequalizers =
+  map-dependent-universal-property-coequalizer =
     map-inv-is-equiv (dup-coequalizer P)
 ```
 
@@ -76,28 +76,28 @@ module _
   ( k : dependent-cofork f g e P)
   where
 
-  htpy-dependent-cofork-map-dependent-universal-property-coequalizer :
+  htpy-dependent-cofork-dependent-universal-property-coequalizer :
     htpy-dependent-cofork f g P
       ( dependent-cofork-map f g e
-        ( map-dependent-universal-property-coequalizers f g e
+        ( map-dependent-universal-property-coequalizer f g e
           ( dup-coequalizer)
           ( k)))
       ( k)
-  htpy-dependent-cofork-map-dependent-universal-property-coequalizer =
+  htpy-dependent-cofork-dependent-universal-property-coequalizer =
     htpy-dependent-cofork-eq f g P
       ( dependent-cofork-map f g e
-        ( map-dependent-universal-property-coequalizers f g e
+        ( map-dependent-universal-property-coequalizer f g e
           ( dup-coequalizer)
           ( k)))
       ( k)
       ( is-section-map-inv-is-equiv (dup-coequalizer P) k)
 
   abstract
-    uniqueness-dependent-universal-property-coequalizers :
+    uniqueness-dependent-universal-property-coequalizer :
       is-contr
         ( Σ ((x : X) → P x)
           ( λ h → htpy-dependent-cofork f g P (dependent-cofork-map f g e h) k))
-    uniqueness-dependent-universal-property-coequalizers =
+    uniqueness-dependent-universal-property-coequalizer =
       is-contr-is-equiv'
         ( fiber (dependent-cofork-map f g e) k)
         ( tot

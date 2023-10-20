@@ -92,7 +92,7 @@ module _
   abstract
     uniqueness-map-universal-property-sequential-colimit :
       is-contr
-        ( Σ (X → Y)
+        ( Σ ( X → Y)
             ( λ h →
               htpy-cocone-sequential-diagram A
                 ( cocone-map-sequential-diagram A c h)
@@ -108,7 +108,11 @@ module _
         ( is-contr-map-is-equiv (up-sequential-colimit Y) c')
 ```
 
-### A cocone under a sequential diagram has the universal property of sequential colimits if and only if the corresponding cofork has the universal property of coequalizers
+### Correspondence between universal properties of sequential colimits and coequalizers
+
+A cocone under a sequential diagram has the universal property of sequential
+colimits if and only if the corresponding cofork has the universal property of
+coequalizers.
 
 ```agda
 module _
@@ -116,7 +120,7 @@ module _
   ( c : cocone-sequential-diagram A X)
   where
 
-  universal-property-cocone-sequential-colimit-universal-property-coequalizer :
+  universal-property-sequential-colimit-universal-property-coequalizer :
     ( {l : Level} →
       universal-property-coequalizer l
         ( bottom-map-cofork-cocone-sequential-diagram A)
@@ -124,7 +128,7 @@ module _
         ( cofork-cocone-sequential-diagram A c)) →
     ( {l : Level} →
       universal-property-sequential-colimit l A c)
-  universal-property-cocone-sequential-colimit-universal-property-coequalizer
+  universal-property-sequential-colimit-universal-property-coequalizer
     ( up-cofork)
     ( Y) =
     is-equiv-comp-htpy
