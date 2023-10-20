@@ -168,7 +168,7 @@ postcomp-hom-Category :
 postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
 ```
 
-### Equalities give rise to homomorphisms
+### Equalities induce morphisms
 
 ```agda
 module _

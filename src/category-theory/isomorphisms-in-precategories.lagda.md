@@ -148,7 +148,7 @@ module _
   pr2 id-iso-Precategory = is-iso-id-hom-Precategory
 ```
 
-### Equalities give rise to isomorphisms
+### Equalities induce isomorphisms
 
 An equality between objects `x y : A` gives rise to an isomorphism between them.
 This is because, by the J-rule, it is enough to construct an isomorphism given

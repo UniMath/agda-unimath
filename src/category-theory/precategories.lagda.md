@@ -174,7 +174,7 @@ postcomp-hom-Precategory :
 postcomp-hom-Precategory C f z = comp-hom-Precategory C f
 ```
 
-### Equalities give rise to homomorphisms
+### Equalities induce morphisms
 
 ```agda
 module _
