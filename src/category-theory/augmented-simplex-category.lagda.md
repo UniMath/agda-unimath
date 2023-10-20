@@ -81,12 +81,12 @@ associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset r)
     ( Fin-Poset s)
 
-associative-composition-structure-augmented-simplex-Category :
-  associative-composition-structure-Set hom-set-augmented-simplex-Category
-pr1 associative-composition-structure-augmented-simplex-Category {n} {m} {r} =
+associative-composition-operation-augmented-simplex-Category :
+  associative-composition-operation-Set hom-set-augmented-simplex-Category
+pr1 associative-composition-operation-augmented-simplex-Category {n} {m} {r} =
   comp-hom-augmented-simplex-Category {n} {m} {r}
 pr2
-  associative-composition-structure-augmented-simplex-Category {n} {m} {r} {s} =
+  associative-composition-operation-augmented-simplex-Category {n} {m} {r} {s} =
   associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s}
 
 id-hom-augmented-simplex-Category :
@@ -128,7 +128,7 @@ augmented-simplex-Precategory : Precategory lzero lzero
 pr1 augmented-simplex-Precategory = obj-augmented-simplex-Category
 pr1 (pr2 augmented-simplex-Precategory) = hom-set-augmented-simplex-Category
 pr1 (pr2 (pr2 augmented-simplex-Precategory)) =
-  associative-composition-structure-augmented-simplex-Category
+  associative-composition-operation-augmented-simplex-Category
 pr2 (pr2 (pr2 augmented-simplex-Precategory)) =
   is-unital-composition-operation-augmented-simplex-Category
 ```

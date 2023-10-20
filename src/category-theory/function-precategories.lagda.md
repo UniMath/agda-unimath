@@ -65,10 +65,10 @@ module _
   associative-comp-hom-function-Precategory =
     associative-comp-hom-Precategory function-Precategory
 
-  associative-composition-structure-function-Precategory :
-    associative-composition-structure-Set hom-set-function-Precategory
-  associative-composition-structure-function-Precategory =
-    associative-composition-structure-Precategory function-Precategory
+  associative-composition-operation-function-Precategory :
+    associative-composition-operation-Set hom-set-function-Precategory
+  associative-composition-operation-function-Precategory =
+    associative-composition-operation-Precategory function-Precategory
 
   id-hom-function-Precategory :
     {x : obj-function-Precategory} → hom-function-Precategory x x

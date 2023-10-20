@@ -93,10 +93,10 @@ module _
   associative-comp-hom-Category =
     associative-comp-hom-Precategory precategory-Category
 
-  associative-composition-structure-Category :
-    associative-composition-structure-Set hom-set-Category
-  associative-composition-structure-Category =
-    associative-composition-structure-Precategory precategory-Category
+  associative-composition-operation-Category :
+    associative-composition-operation-Set hom-set-Category
+  associative-composition-operation-Category =
+    associative-composition-operation-Precategory precategory-Category
 
   id-hom-Category : {x : obj-Category} → hom-Category x x
   id-hom-Category = id-hom-Precategory precategory-Category

@@ -64,10 +64,10 @@ module _
   associative-comp-hom-Π-Precategory h g f =
     eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
 
-  associative-composition-structure-Π-Precategory :
-    associative-composition-structure-Set hom-set-Π-Precategory
-  pr1 associative-composition-structure-Π-Precategory = comp-hom-Π-Precategory
-  pr2 associative-composition-structure-Π-Precategory =
+  associative-composition-operation-Π-Precategory :
+    associative-composition-operation-Set hom-set-Π-Precategory
+  pr1 associative-composition-operation-Π-Precategory = comp-hom-Π-Precategory
+  pr2 associative-composition-operation-Π-Precategory =
     associative-comp-hom-Π-Precategory
 
   id-hom-Π-Precategory : {x : obj-Π-Precategory} → hom-Π-Precategory x x
@@ -98,7 +98,7 @@ module _
   pr1 Π-Precategory = obj-Π-Precategory
   pr1 (pr2 Π-Precategory) = hom-set-Π-Precategory
   pr1 (pr2 (pr2 Π-Precategory)) =
-    associative-composition-structure-Π-Precategory
+    associative-composition-operation-Π-Precategory
   pr2 (pr2 (pr2 Π-Precategory)) = is-unital-Π-Precategory
 ```
 

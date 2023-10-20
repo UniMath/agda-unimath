@@ -86,10 +86,10 @@ module _
   associative-comp-hom-Strict-Category =
     associative-comp-hom-Precategory precategory-Strict-Category
 
-  associative-composition-structure-Strict-Category :
-    associative-composition-structure-Set hom-set-Strict-Category
-  associative-composition-structure-Strict-Category =
-    associative-composition-structure-Precategory precategory-Strict-Category
+  associative-composition-operation-Strict-Category :
+    associative-composition-operation-Set hom-set-Strict-Category
+  associative-composition-operation-Strict-Category =
+    associative-composition-operation-Precategory precategory-Strict-Category
 
   id-hom-Strict-Category : {x : obj-Strict-Category} → hom-Strict-Category x x
   id-hom-Strict-Category = id-hom-Precategory precategory-Strict-Category
@@ -152,7 +152,7 @@ postcomp-hom-Strict-Category C =
   postcomp-hom-Precategory (precategory-Strict-Category C)
 ```
 
-### Equalities give rise to homomorphisms
+### Equalities induce morphisms
 
 ```agda
 module _

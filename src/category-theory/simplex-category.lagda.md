@@ -82,11 +82,11 @@ associative-comp-hom-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset (succ-ℕ r))
     ( Fin-Poset (succ-ℕ s))
 
-associative-composition-structure-simplex-Category :
-  associative-composition-structure-Set hom-set-simplex-Category
-pr1 associative-composition-structure-simplex-Category {n} {m} {r} =
+associative-composition-operation-simplex-Category :
+  associative-composition-operation-Set hom-set-simplex-Category
+pr1 associative-composition-operation-simplex-Category {n} {m} {r} =
   comp-hom-simplex-Category {n} {m} {r}
-pr2 associative-composition-structure-simplex-Category {n} {m} {r} {s} =
+pr2 associative-composition-operation-simplex-Category {n} {m} {r} {s} =
   associative-comp-hom-simplex-Category {n} {m} {r} {s}
 
 id-hom-simplex-Category : (n : obj-simplex-Category) → hom-simplex-Category n n
@@ -118,7 +118,7 @@ simplex-Precategory : Precategory lzero lzero
 pr1 simplex-Precategory = obj-simplex-Category
 pr1 (pr2 simplex-Precategory) = hom-set-simplex-Category
 pr1 (pr2 (pr2 simplex-Precategory)) =
-  associative-composition-structure-simplex-Category
+  associative-composition-operation-simplex-Category
 pr2 (pr2 (pr2 simplex-Precategory)) =
   is-unital-composition-operation-simplex-Category
 ```

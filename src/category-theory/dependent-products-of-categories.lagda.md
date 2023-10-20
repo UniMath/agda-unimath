@@ -85,10 +85,10 @@ module _
   associative-comp-hom-Π-Category =
     associative-comp-hom-Category Π-Category
 
-  associative-composition-structure-Π-Category :
-    associative-composition-structure-Set hom-set-Π-Category
-  associative-composition-structure-Π-Category =
-    associative-composition-structure-Category Π-Category
+  associative-composition-operation-Π-Category :
+    associative-composition-operation-Set hom-set-Π-Category
+  associative-composition-operation-Π-Category =
+    associative-composition-operation-Category Π-Category
 
   id-hom-Π-Category :
     {x : obj-Π-Category} → hom-Π-Category x x

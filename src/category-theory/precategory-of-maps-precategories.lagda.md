@@ -67,13 +67,13 @@ module _
     associative-comp-natural-transformation-map-Precategory
       C D F G H I f g h
 
-  associative-composition-structure-map-precategory-Precategory :
-    associative-composition-structure-Set
+  associative-composition-operation-map-precategory-Precategory :
+    associative-composition-operation-Set
       ( natural-transformation-map-set-Precategory C D)
-  pr1 associative-composition-structure-map-precategory-Precategory
+  pr1 associative-composition-operation-map-precategory-Precategory
     {F} {G} {H} =
     comp-hom-map-precategory-Precategory {F} {G} {H}
-  pr2 associative-composition-structure-map-precategory-Precategory
+  pr2 associative-composition-operation-map-precategory-Precategory
     {F} {G} {H} {I} =
     associative-comp-hom-map-precategory-Precategory {F} {G} {H} {I}
 
@@ -121,7 +121,7 @@ module _
   pr1 (pr2 map-precategory-Precategory) =
     natural-transformation-map-set-Precategory C D
   pr1 (pr2 (pr2 map-precategory-Precategory)) =
-    associative-composition-structure-map-precategory-Precategory
+    associative-composition-operation-map-precategory-Precategory
   pr2 (pr2 (pr2 map-precategory-Precategory)) =
     is-unital-composition-operation-map-precategory-Precategory
 ```

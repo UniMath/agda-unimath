@@ -73,10 +73,10 @@ module _
   associative-comp-hom-function-Category =
     associative-comp-hom-Category function-Category
 
-  associative-composition-structure-function-Category :
-    associative-composition-structure-Set hom-set-function-Category
-  associative-composition-structure-function-Category =
-    associative-composition-structure-Category function-Category
+  associative-composition-operation-function-Category :
+    associative-composition-operation-Set hom-set-function-Category
+  associative-composition-operation-function-Category =
+    associative-composition-operation-Category function-Category
 
   id-hom-function-Category :
     {x : obj-function-Category} → hom-function-Category x x

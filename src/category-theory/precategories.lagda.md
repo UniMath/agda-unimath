@@ -53,7 +53,7 @@ Precategory l1 l2 =
     ( λ A →
       Σ ( A → A → Set l2)
         ( λ hom-set →
-          Σ ( associative-composition-structure-Set hom-set)
+          Σ ( associative-composition-operation-Set hom-set)
             ( λ (comp-hom , assoc-comp) →
               is-unital-composition-operation-Set hom-set comp-hom)))
 
@@ -74,16 +74,16 @@ module _
     (x y : obj-Precategory) → is-set (hom-Precategory x y)
   is-set-hom-Precategory x y = is-set-type-Set (hom-set-Precategory x y)
 
-  associative-composition-structure-Precategory :
-    associative-composition-structure-Set hom-set-Precategory
-  associative-composition-structure-Precategory = pr1 (pr2 (pr2 C))
+  associative-composition-operation-Precategory :
+    associative-composition-operation-Set hom-set-Precategory
+  associative-composition-operation-Precategory = pr1 (pr2 (pr2 C))
 
   comp-hom-Precategory :
     {x y z : obj-Precategory} →
     hom-Precategory y z →
     hom-Precategory x y →
     hom-Precategory x z
-  comp-hom-Precategory = pr1 associative-composition-structure-Precategory
+  comp-hom-Precategory = pr1 associative-composition-operation-Precategory
 
   comp-hom-Precategory' :
     {x y z : obj-Precategory} →
@@ -100,7 +100,7 @@ module _
     ( comp-hom-Precategory (comp-hom-Precategory h g) f) ＝
     ( comp-hom-Precategory h (comp-hom-Precategory g f))
   associative-comp-hom-Precategory =
-    pr2 associative-composition-structure-Precategory
+    pr2 associative-composition-operation-Precategory
 
   is-unital-composition-operation-Precategory :
     is-unital-composition-operation-Set

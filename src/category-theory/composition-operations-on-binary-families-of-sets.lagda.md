@@ -57,8 +57,8 @@ module _
     (f : type-Set (hom-set x y)) →
     comp-hom (comp-hom h g) f ＝ comp-hom h (comp-hom g f)
 
-  associative-composition-structure-Set : UU (l1 ⊔ l2)
-  associative-composition-structure-Set =
+  associative-composition-operation-Set : UU (l1 ⊔ l2)
+  associative-composition-operation-Set =
     Σ ( composition-operation-Set hom-set)
       ( is-associative-composition-operation-Set)
 ```

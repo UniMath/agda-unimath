@@ -104,10 +104,10 @@ module _
   associative-comp-hom-Preunivalent-Category =
     associative-comp-hom-Precategory precategory-Preunivalent-Category
 
-  associative-composition-structure-Preunivalent-Category :
-    associative-composition-structure-Set hom-set-Preunivalent-Category
-  associative-composition-structure-Preunivalent-Category =
-    associative-composition-structure-Precategory
+  associative-composition-operation-Preunivalent-Category :
+    associative-composition-operation-Set hom-set-Preunivalent-Category
+  associative-composition-operation-Preunivalent-Category =
+    associative-composition-operation-Precategory
       ( precategory-Preunivalent-Category)
 
   id-hom-Preunivalent-Category :
