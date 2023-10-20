@@ -38,7 +38,7 @@ being a category is a [proposition](foundation-core.propositions.md) since
 
 ## Definitions
 
-### The predicate of being a category on precategories
+### The predicate on precategories of being a category
 
 ```agda
 module _
