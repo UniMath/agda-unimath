@@ -12,12 +12,10 @@ open import category-theory.nonunital-precategories
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -43,7 +41,7 @@ identities between the objects are exactly the isomorphisms.
 
 ## Definitions
 
-### The predicate on a composition operation on a binary family of sets of defining a precategory
+### The predicate of being a precategory on composition operations on binary families of sets
 
 ```agda
 module _
@@ -55,10 +53,20 @@ module _
   is-precategory-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
   is-precategory-prop-composition-operation-binary-family-Set =
     prod-Prop
+      ( is-unital-prop-composition-operation-binary-family-Set hom-set comp-hom)
       ( is-associative-prop-composition-operation-binary-family-Set
         ( hom-set)
         ( comp-hom))
-      ( is-unital-prop-composition-operation-binary-family-Set hom-set comp-hom)
+
+  is-precategory-composition-operation-binary-family-Set : UU (l1 ⊔ l2)
+  is-precategory-composition-operation-binary-family-Set =
+    type-Prop is-precategory-prop-composition-operation-binary-family-Set
+
+  is-prop-is-precategory-composition-operation-binary-family-Set :
+    is-prop is-precategory-composition-operation-binary-family-Set
+  is-prop-is-precategory-composition-operation-binary-family-Set =
+    is-prop-type-Prop
+      is-precategory-prop-composition-operation-binary-family-Set
 ```
 
 ### The type of precategories
