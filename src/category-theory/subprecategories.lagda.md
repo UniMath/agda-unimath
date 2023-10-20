@@ -8,6 +8,7 @@ module category-theory.subprecategories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
 open import category-theory.isomorphism-induction-categories
@@ -334,31 +335,31 @@ module _
       ( right-unit-law-comp-hom-Precategory C
         ( inclusion-hom-Subprecategory C P x y f))
 
-  associative-composition-structure-Subprecategory :
-    associative-composition-structure-Set hom-set-Subprecategory
-  pr1 associative-composition-structure-Subprecategory {x} {y} {z} =
+  associative-composition-operation-Subprecategory :
+    associative-composition-operation-binary-family-Set hom-set-Subprecategory
+  pr1 associative-composition-operation-Subprecategory {x} {y} {z} =
     comp-hom-Subprecategory {x} {y} {z}
-  pr2 associative-composition-structure-Subprecategory {x} {y} {z} {w} =
+  pr2 associative-composition-operation-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Subprecategory {x} {y} {z} {w}
 
-  is-unital-composition-structure-Subprecategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Subprecategory :
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Subprecategory)
-      ( associative-composition-structure-Subprecategory)
-  pr1 is-unital-composition-structure-Subprecategory x =
+      ( comp-hom-Subprecategory)
+  pr1 is-unital-composition-operation-Subprecategory x =
     id-hom-Subprecategory {x}
-  pr1 (pr2 is-unital-composition-structure-Subprecategory) {x} {y} =
+  pr1 (pr2 is-unital-composition-operation-Subprecategory) {x} {y} =
     left-unit-law-comp-hom-Subprecategory {x} {y}
-  pr2 (pr2 is-unital-composition-structure-Subprecategory) {x} {y} =
+  pr2 (pr2 is-unital-composition-operation-Subprecategory) {x} {y} =
     right-unit-law-comp-hom-Subprecategory {x} {y}
 
   precategory-Subprecategory : Precategory (l1 ⊔ l3) (l2 ⊔ l4)
   pr1 precategory-Subprecategory = obj-Subprecategory C P
   pr1 (pr2 precategory-Subprecategory) = hom-set-Subprecategory
   pr1 (pr2 (pr2 precategory-Subprecategory)) =
-    associative-composition-structure-Subprecategory
+    associative-composition-operation-Subprecategory
   pr2 (pr2 (pr2 precategory-Subprecategory)) =
-    is-unital-composition-structure-Subprecategory
+    is-unital-composition-operation-Subprecategory
 ```
 
 ### The inclusion functor of a subprecategory

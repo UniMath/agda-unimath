@@ -7,6 +7,7 @@ module category-theory.preunivalent-categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -103,10 +104,11 @@ module _
   associative-comp-hom-Preunivalent-Category =
     associative-comp-hom-Precategory precategory-Preunivalent-Category
 
-  associative-composition-structure-Preunivalent-Category :
-    associative-composition-structure-Set hom-set-Preunivalent-Category
-  associative-composition-structure-Preunivalent-Category =
-    associative-composition-structure-Precategory
+  associative-composition-operation-Preunivalent-Category :
+    associative-composition-operation-binary-family-Set
+      hom-set-Preunivalent-Category
+  associative-composition-operation-Preunivalent-Category =
+    associative-composition-operation-Precategory
       ( precategory-Preunivalent-Category)
 
   id-hom-Preunivalent-Category :
@@ -126,12 +128,12 @@ module _
   right-unit-law-comp-hom-Preunivalent-Category =
     right-unit-law-comp-hom-Precategory precategory-Preunivalent-Category
 
-  is-unital-composition-structure-Preunivalent-Category :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Preunivalent-Category :
+    is-unital-composition-operation-binary-family-Set
       hom-set-Preunivalent-Category
-      associative-composition-structure-Preunivalent-Category
-  is-unital-composition-structure-Preunivalent-Category =
-    is-unital-composition-structure-Precategory
+      comp-hom-Preunivalent-Category
+  is-unital-composition-operation-Preunivalent-Category =
+    is-unital-composition-operation-Precategory
       ( precategory-Preunivalent-Category)
 
   is-preunivalent-Preunivalent-Category :
@@ -167,7 +169,7 @@ postcomp-hom-Preunivalent-Category C =
   postcomp-hom-Precategory (precategory-Preunivalent-Category C)
 ```
 
-### Equalities give rise to morphisms
+### Equalities induce morphisms
 
 ```agda
 module _

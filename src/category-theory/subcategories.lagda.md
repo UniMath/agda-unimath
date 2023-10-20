@@ -8,22 +8,18 @@ module category-theory.subcategories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
-open import category-theory.isomorphism-induction-categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subsingleton-induction
 open import foundation.subtypes
 open import foundation.universe-levels
 ```
@@ -259,17 +255,17 @@ module _
   right-unit-law-comp-hom-Subcategory =
     right-unit-law-comp-hom-Subprecategory (precategory-Category C) P
 
-  associative-composition-structure-Subcategory :
-    associative-composition-structure-Set hom-set-Subcategory
-  associative-composition-structure-Subcategory =
-    associative-composition-structure-Subprecategory (precategory-Category C) P
+  associative-composition-operation-Subcategory :
+    associative-composition-operation-binary-family-Set hom-set-Subcategory
+  associative-composition-operation-Subcategory =
+    associative-composition-operation-Subprecategory (precategory-Category C) P
 
-  is-unital-composition-structure-Subcategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Subcategory :
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Subcategory)
-      ( associative-composition-structure-Subcategory)
-  is-unital-composition-structure-Subcategory =
-    is-unital-composition-structure-Subprecategory (precategory-Category C) P
+      ( comp-hom-Subcategory)
+  is-unital-composition-operation-Subcategory =
+    is-unital-composition-operation-Subprecategory (precategory-Category C) P
 
   precategory-Subcategory : Precategory (l1 ⊔ l3) (l2 ⊔ l4)
   precategory-Subcategory =

@@ -8,6 +8,7 @@ module category-theory.representing-arrow-category where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -71,11 +72,11 @@ associative-comp-hom-representing-arrow :
 associative-comp-hom-representing-arrow {true} {true} {true} {true} h g f = refl
 associative-comp-hom-representing-arrow {false} h g f = refl
 
-associative-composition-structure-representing-arrow :
-  associative-composition-structure-Set hom-set-representing-arrow
-pr1 associative-composition-structure-representing-arrow {x} =
+associative-composition-operation-representing-arrow :
+  associative-composition-operation-binary-family-Set hom-set-representing-arrow
+pr1 associative-composition-operation-representing-arrow {x} =
   comp-hom-representing-arrow {x}
-pr2 associative-composition-structure-representing-arrow =
+pr2 associative-composition-operation-representing-arrow =
   associative-comp-hom-representing-arrow
 
 id-hom-representing-arrow :
@@ -97,24 +98,24 @@ right-unit-law-comp-hom-representing-arrow :
 right-unit-law-comp-hom-representing-arrow {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow {false} f = refl
 
-is-unital-composition-structure-representing-arrow :
-  is-unital-composition-structure-Set
+is-unital-composition-operation-representing-arrow :
+  is-unital-composition-operation-binary-family-Set
     ( hom-set-representing-arrow)
-    ( associative-composition-structure-representing-arrow)
-pr1 is-unital-composition-structure-representing-arrow x =
+    ( λ {x} {y} {z} → comp-hom-representing-arrow {x} {y} {z})
+pr1 is-unital-composition-operation-representing-arrow x =
   id-hom-representing-arrow {x}
-pr1 (pr2 is-unital-composition-structure-representing-arrow) =
+pr1 (pr2 is-unital-composition-operation-representing-arrow) =
   left-unit-law-comp-hom-representing-arrow
-pr2 (pr2 is-unital-composition-structure-representing-arrow) =
+pr2 (pr2 is-unital-composition-operation-representing-arrow) =
   right-unit-law-comp-hom-representing-arrow
 
 representing-arrow-Precategory : Precategory lzero lzero
 pr1 representing-arrow-Precategory = obj-representing-arrow
 pr1 (pr2 representing-arrow-Precategory) = hom-set-representing-arrow
 pr1 (pr2 (pr2 representing-arrow-Precategory)) =
-  associative-composition-structure-representing-arrow
+  associative-composition-operation-representing-arrow
 pr2 (pr2 (pr2 representing-arrow-Precategory)) =
-  is-unital-composition-structure-representing-arrow
+  is-unital-composition-operation-representing-arrow
 ```
 
 ### The representing arrow category

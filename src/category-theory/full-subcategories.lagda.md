@@ -8,19 +8,16 @@ module category-theory.full-subcategories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.embeddings-precategories
 open import category-theory.full-subprecategories
 open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-categories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
@@ -152,19 +149,19 @@ module _
     right-unit-law-comp-hom-Full-Subprecategory
       ( precategory-Category C) P {x} {y}
 
-  associative-composition-structure-Full-Subcategory :
-    associative-composition-structure-Set hom-set-Full-Subcategory
-  associative-composition-structure-Full-Subcategory =
-    associative-composition-structure-Full-Subprecategory
+  associative-composition-operation-Full-Subcategory :
+    associative-composition-operation-binary-family-Set hom-set-Full-Subcategory
+  associative-composition-operation-Full-Subcategory =
+    associative-composition-operation-Full-Subprecategory
       ( precategory-Category C)
       ( P)
 
-  is-unital-composition-structure-Full-Subcategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Full-Subcategory :
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Full-Subcategory)
-      ( associative-composition-structure-Full-Subcategory)
-  is-unital-composition-structure-Full-Subcategory =
-    is-unital-composition-structure-Full-Subprecategory
+      ( λ {x} {y} {z} → comp-hom-Full-Subcategory {x} {y} {z})
+  is-unital-composition-operation-Full-Subcategory =
+    is-unital-composition-operation-Full-Subprecategory
       ( precategory-Category C)
       ( P)
 

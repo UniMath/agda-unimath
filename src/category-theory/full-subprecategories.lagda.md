@@ -8,6 +8,7 @@ module category-theory.full-subprecategories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.embeddings-precategories
 open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-precategories
@@ -149,31 +150,32 @@ module _
   right-unit-law-comp-hom-Full-Subprecategory =
     right-unit-law-comp-hom-Precategory C
 
-  associative-composition-structure-Full-Subprecategory :
-    associative-composition-structure-Set hom-set-Full-Subprecategory
-  pr1 associative-composition-structure-Full-Subprecategory {x} {y} {z} =
+  associative-composition-operation-Full-Subprecategory :
+    associative-composition-operation-binary-family-Set
+      hom-set-Full-Subprecategory
+  pr1 associative-composition-operation-Full-Subprecategory {x} {y} {z} =
     comp-hom-Full-Subprecategory {x} {y} {z}
-  pr2 associative-composition-structure-Full-Subprecategory {x} {y} {z} {w} =
+  pr2 associative-composition-operation-Full-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Full-Subprecategory {x} {y} {z} {w}
 
-  is-unital-composition-structure-Full-Subprecategory :
-    is-unital-composition-structure-Set
+  is-unital-composition-operation-Full-Subprecategory :
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Full-Subprecategory)
-      ( associative-composition-structure-Full-Subprecategory)
-  pr1 is-unital-composition-structure-Full-Subprecategory x =
+      ( λ {x} {y} {z} → comp-hom-Full-Subprecategory {x} {y} {z})
+  pr1 is-unital-composition-operation-Full-Subprecategory x =
     id-hom-Full-Subprecategory {x}
-  pr1 (pr2 is-unital-composition-structure-Full-Subprecategory) {x} {y} =
+  pr1 (pr2 is-unital-composition-operation-Full-Subprecategory) {x} {y} =
     left-unit-law-comp-hom-Full-Subprecategory {x} {y}
-  pr2 (pr2 is-unital-composition-structure-Full-Subprecategory) {x} {y} =
+  pr2 (pr2 is-unital-composition-operation-Full-Subprecategory) {x} {y} =
     right-unit-law-comp-hom-Full-Subprecategory {x} {y}
 
   precategory-Full-Subprecategory : Precategory (l1 ⊔ l3) l2
   pr1 precategory-Full-Subprecategory = obj-Full-Subprecategory C P
   pr1 (pr2 precategory-Full-Subprecategory) = hom-set-Full-Subprecategory
   pr1 (pr2 (pr2 precategory-Full-Subprecategory)) =
-    associative-composition-structure-Full-Subprecategory
+    associative-composition-operation-Full-Subprecategory
   pr2 (pr2 (pr2 precategory-Full-Subprecategory)) =
-    is-unital-composition-structure-Full-Subprecategory
+    is-unital-composition-operation-Full-Subprecategory
 ```
 
 ### Isomorphisms in full subprecategories
