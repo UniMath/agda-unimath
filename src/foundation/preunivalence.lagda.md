@@ -40,12 +40,12 @@ axiom-preunivalence l = (X Y : UU l) → statement-preunivalence X Y
 
 emb-preunivalence :
   {l : Level} → axiom-preunivalence l → (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
-pr1 (emb-preunivalence preuniv X Y) = equiv-eq
-pr2 (emb-preunivalence preuniv X Y) = preuniv X Y
+pr1 (emb-preunivalence L X Y) = equiv-eq
+pr2 (emb-preunivalence L X Y) = L X Y
 
 emb-map-preunivalence :
   {l : Level} → axiom-preunivalence l → (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
-emb-map-preunivalence preuniv X Y =
+emb-map-preunivalence L X Y =
   comp-emb (emb-subtype is-equiv-Prop) (emb-preunivalence preuniv X Y)
 ```
 
