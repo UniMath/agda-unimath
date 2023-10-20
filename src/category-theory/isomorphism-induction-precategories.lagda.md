@@ -48,7 +48,8 @@ there is a [section](foundation.sections.md) of the evaluation map
 ```
 
 The principle of isomorphism induction is equivalent to the univalence axiom for
-categories.
+categories, hence this is one approach to proving that a precategory is a
+category.
 
 ## Statement
 
