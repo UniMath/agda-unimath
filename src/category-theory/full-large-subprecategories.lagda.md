@@ -12,7 +12,6 @@ open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
-open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
