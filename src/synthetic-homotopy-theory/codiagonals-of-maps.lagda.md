@@ -132,7 +132,7 @@ module _
      |            ≃                 |
      |                              |
      |                              | vs
-     |                              |
+     |                         ⌜    |
      v            ≃                 v
    unit     --------------> Σ B (λ y → P (inl y))
                   ψ
@@ -200,8 +200,6 @@ module _
         foo : (x : fiber f b) →
               ((hc ∘ ψ) ∘ terminal-map) x ＝ (hc ∘ vs) (ϕ x)
         foo x = ap hc (eq-is-prop (is-prop-is-contr is-contr-bottom-left))
-    c'' : cocone vs hs (Σ (pushout f f) P)
-    c'' = cocone-flattening-pushout P f f c
 
   pushout-3 : {l : Level} →
               universal-property-pushout l
@@ -212,278 +210,99 @@ module _
     universal-property-pushout-rectangle-universal-property-pushout-right
       ( terminal-map)
       ( ϕ)
-      ( horizontal-map-span-flattening-pushout P f f c)
+      ( hs)
       ( left-cocone)
       ( cocone-flattening-pushout P f f c)
       pushout-2
       pushout-1
 ```
 
-{-
-    S : UU (l1 ⊔ l2)
-    S = Σ A (λ a → P (inl-pushout f f (f a)))
-
-    U : UU l2
-    U = Σ B (λ y → P (inl-pushout f f y))
-
-    V : UU l2
-    V = Σ B (λ y → P (inr-pushout f f y))
-
-    W : UU (l1 ⊔ l2)
-    W = fiber (codiagonal-map f) b
-
-    vms : S → U
-    vms = vertical-map-span-flattening-pushout P f f c
-
-    hms : S → V
-    hms = horizontal-map-span-flattening-pushout P f f c
-
-    cl : U → W
-    cl = horizontal-map-cocone-flattening-pushout P f f c
-
-    cr : V → W
-    cr = vertical-map-cocone-flattening-pushout P f f c
-
-    compute-cl : ((y , p) : U) → (inl-pushout f f y , p) ＝ cl (y , p)
-    compute-cl (y , p) = refl
-
-    compute-cr : ((y , p) : V) → (inr-pushout f f y , p) ＝ cr (y , p)
-    compute-cr (y , p) = refl
-
-  pushout-1 : {l : Level} →
-                universal-property-pushout l
-                sl
-                sr
-                (cocone-flattening-pushout P f f c)
-  pushout-1 =
-    flattening-lemma-pushout P f f
-      ( c)
-      ( dependent-up-pushout f f)
-
-  private
-    S' : UU (l1 ⊔ l2)
-    S' = fiber f b
-
-
-
-  left-square : cocone {!!} {!!} {!!}
-  left-square = {!!}
--}
-{-
-
-       S
-sl    / \   sr
-     /   \
-    U     V
-     \   /
-cl    \ /  cr
-       W
-
--}
-
-{-
-  private
-    S' : UU (l1 ⊔ l2)
-    S' = fiber f b
-
-    U' : UU
-    U' = unit
-
-    V' : UU
-    V' = unit
-
-    W' : UU (l1 ⊔ l2)
-    W' = fiber (codiagonal-map f) b
-
-    sl' : S' → U'
-    sl' = terminal-map
-
-    sr' : S' → V'
-    sr' = terminal-map
-
-    cl' : U' → W'
-    cl' = point ((inl-pushout f f b) , (compute-inl-codiagonal-map f b)) -- point (cl (b , compute-inl-codiagonal-map f b))
-
-    cr' : V' → W'
-    cr' = point (cr (b , compute-inr-codiagonal-map f b))
-
-    hS : S → S'
-    hS (a , p) = a , concat (inv (compute-inl-codiagonal-map f (f a))) b p
-
-    hU : U → U'
-    hU = terminal-map
-
-    hV : V → V'
-    hV = terminal-map
-
-    hW : W → W'
-    hW = id
-
-    top : coherence-square-maps sr sl cr cl
-    top = coherence-square-cocone-flattening-pushout P f f c
-
-    back-left : coherence-square-maps sl hS hU sl'
-    back-left = refl-htpy
-
-    back-right : coherence-square-maps sr hS hV sr'
-    back-right = refl-htpy
-
-    front-left : coherence-square-maps cl hU hW cl'
-    front-left (y , p) = eq-Eq-fiber (codiagonal-map f) b {!!} {!!}
-     -- cl (b , ...) ＝ cl (y , p)
-
-    front-right : coherence-square-maps cr hV hW cr'
-    front-right (y , p) = {!!}
-
-    bottom : coherence-square-maps sr' sl' cr' cl'
-    bottom = {!!}
-
-  pushout-2 : {l : Level} →
-    universal-property-pushout l
-      terminal-map
-      terminal-map
-      {!!}
-  pushout-2 =
-    universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
-      sr'
-      sl'
-      cl'
-      cr'
-      sl
-      sr
-      cl
-      cr
-      hS
-      hU
-      hV
-      hW
-      top
-      back-left
-      back-right
-      front-left
-      front-right
-      bottom
-      {!!}
-      {!!}
-      {!!}
-      {!!}
-      {!!}
-      pushout-1
--}
-
-{-
-       S'
-sl'   / \   sr'
-     /   \
-    U'    V'
-     \   /
-cl'   \ /  cr'
-       W'
--}
-
-{-
-
-  note-1 : Σ A (P ∘ inl-pushout f f ∘ f) →
-           Σ B (P ∘ inr-pushout f f)
-  note-1 = horizontal-map-span-flattening-pushout P f f c
-
-  bottom-right : UU (l1 ⊔ l2)
-  bottom-right = fiber (codiagonal-map f) b
-
-  correct-cocone' : cocone (vertical-map-span-flattening-pushout P f f c) (horizontal-map-span-flattening-pushout P f f c) bottom-right
-  correct-cocone' = cocone-flattening-pushout P f f c
-
-  bottom-left : UU l2
-  bottom-left = Σ B (λ y → P (inl-pushout f f y))
-
-  top-right : UU l2
-  top-right = Σ B (λ y → P (inr-pushout f f y))
-
-  top-left : UU (l1 ⊔ l2)
-  top-left = Σ A (λ a → P (inl-pushout f f (f a)))
-
-  horizontal-span : top-left → top-right
-  horizontal-span = horizontal-map-span-flattening-pushout P f f c
-
-  horizontal-cocone : bottom-left → bottom-right
-  horizontal-cocone = horizontal-map-cocone-flattening-pushout P f f c
-
-  equiv-top-left : fiber f b ≃ top-left
-  equiv-top-left = equiv-tot (λ a → equiv-concat (compute-inl-codiagonal-map f (f a)) b)
-
-  equiv-top-right : unit ≃ top-right
-  equiv-top-right = (point (b , compute-inr-codiagonal-map f b)) , {!!}
-
-{- terminal-map , (is-equiv-terminal-map-is-contr (is-contr-equiv (Σ B (λ y → y ＝ b)) (equiv-tot (λ y → equiv-concat (compute-inr-codiagonal-map f y)) b) (is-contr-total-path' b))) -}
-
-  equiv-bottom-left : unit ≃ bottom-left
-  equiv-bottom-left = (point (b , compute-inl-codiagonal-map f b)) , {!!}
-  {- terminal-map , (is-equiv-terminal-map-is-contr (is-contr-equiv (Σ B (λ y → y ＝ b)) (equiv-tot (λ y → equiv-concat (inv (compute-inl-codiagonal-map f y)) b)) (is-contr-total-path' b))) -}
-
-  coh : fiber f b →
-        (inl-pushout f f b , compute-inl-codiagonal-map f b) ＝
-        (inr-pushout f f b , compute-inr-codiagonal-map f b)
-  coh (a , p) = {!!}
-
-  suspension-structure-fiber : suspension-structure (fiber f b) (Σ (pushout f f) P)
-  suspension-structure-fiber =
-    ((inl-pushout f f b , compute-inl-codiagonal-map f b) ,
-    (inr-pushout f f b , compute-inr-codiagonal-map f b) ,
-    {!!})
-
--}
-
---  bottom-right-equiv : bottom-right ≃
---  bottom-right-equiv = {!equiv-tot!}
+```text
+               hs ∘ ϕ
+  fiber f b -------------> Σ B (λ y → P (inr y))
+     |                              |
+     |                              |
+     |                              | vc
+     |                      ⌜       |
+     v                              v
+   unit     --------------> fiber codiagonal-map b ≡ Σ (pushout f f) P
+                hc ∘ ψ
 ```
 
-{-
+```text
+
+  fiber f b ------------------->  unit
+     |                              |
+     |                              |
+  id | ≃                          ≃ | χ
+     |                      ⌜       |
+     v                              v
+  fiber f b --------------> Σ B (λ y → P (inr y))
+                hs ∘ ϕ
+```
+
+```agda
   private
-    S' : UU (l1 ⊔ l2)
-    S' = fiber f b
+    is-contr-top-right : is-contr (Σ B (λ y → P (inr-pushout f f y)))
+    is-contr-top-right =
+      is-contr-equiv
+        ( Σ B (λ y → y ＝ b))
+        ( equiv-tot
+          ( λ y →
+            equiv-concat (inv (compute-inr-codiagonal-map f y)) b))
+        ( is-contr-total-path' b)
 
-    U' : UU l2
-    U' = Σ B (λ y → y ＝ b)
+    top-right-is-unit : Σ B (λ y → P (inr-pushout f f y)) ≃ unit
+    top-right-is-unit =
+      terminal-map , is-equiv-terminal-map-is-contr is-contr-top-right
 
-    V' : UU l2
-    V' = Σ B (λ y → y ＝ b)
+    χ : unit → Σ B (λ y → P (inr-pushout f f y))
+    χ = map-inv-equiv top-right-is-unit
 
-    W' : UU (l1 ⊔ l2)
-    W' = fiber (codiagonal-map f) b
+    is-equiv-χ : is-equiv χ
+    is-equiv-χ = is-equiv-map-inv-equiv top-right-is-unit
 
-    sl' : S' → U'
-    sl' (a , p) = (f a , p) -- terminal-map
+  top-cocone : cocone id terminal-map (Σ B (λ y → P (inr-pushout f f y)))
+  top-cocone = hs ∘ ϕ , χ , (λ _ → eq-is-prop (is-prop-is-contr is-contr-top-right))
+    {- χ , hs ,
+    ( λ _ → eq-is-prop (is-prop-is-contr is-contr-top-right)) -}
 
-    sr' : S' → V'
-    sr' (a , p) = (f a , p) -- terminal-map
+  pushout-4 : {l : Level} →
+              universal-property-pushout l
+                ( id)
+                ( terminal-map)
+                ( top-cocone)
+  pushout-4 =
+    universal-property-pushout-is-equiv
+      ( id)
+      ( terminal-map)
+      ( top-cocone)
+      ( is-equiv-id)
+      ( is-equiv-χ)
 
-    cl' : U' → W'
-    cl' (y , p) = (inl-pushout f f y , compute-inl-codiagonal-map f y ∙ p) -- point (inl-pushout f f b , compute-inl-codiagonal-map f b)
+  private
+    c'' : cocone terminal-map terminal-map (Σ (pushout f f) P)
+    c'' = hc ∘ ψ , vc ∘ χ ,
+      (λ x → equational-reasoning
+                hc (ψ (star))
+                  ＝ vc (hs (ϕ x)) by (coherence-square-cocone terminal-map (hs ∘ ϕ) c' x)
+                  ＝ vc (χ star) by (ap vc (eq-is-prop (is-prop-is-contr is-contr-top-right))))
+    -- hc ∘ ψ , vc ∘ χ , (λ x → {!!})
+-- ((hc ∘ ψ) ∘ terminal-map) x ＝ ((vc ∘ χ) ∘ terminal-map) x
 
-    cr' : V' → W'
-    cr' (y , p) = (inr-pushout f f y , compute-inr-codiagonal-map f y ∙ p) -- point (inr-pushout f f b , compute-inr-codiagonal-map f b)
+  pushout-5 : {l : Level} →
+              universal-property-pushout l
+                ( terminal-map)
+                ( terminal-map)
+                c''
+  pushout-5 =
+    universal-property-pushout-rectangle-universal-property-pushout-top
+      ( id)
+      ( terminal-map)
+      ( terminal-map)
+      ( top-cocone)
+      ( c')
+      ( pushout-4)
+      ( pushout-3)
 
-    hS : S → S'
-    hS (a , p) = a , concat (inv (compute-inl-codiagonal-map f (f a))) b p
-
-    hU : U → U'
-    hU (y , p) = y , concat (inv (compute-inl-codiagonal-map f y)) b p -- terminal-map
-
-    hV : V → V'
-    hV (y , p) = y , concat (inv (compute-inr-codiagonal-map f y)) b p -- terminal-map
-
-    hW : W → W'
-    hW = id
-
-    top : coherence-square-maps sr sl cr cl
-    top = coherence-square-cocone-flattening-pushout P f f c
-
-    back-left : coherence-square-maps sl hS hU sl'
-    back-left = {!!}
-
-    back-right : coherence-square-maps sr hS hV sr'
-    back-right = {!!}
-
-    front-left : coherence-square-maps cl hU hW cl'
-    front-left (y , p) = {!!}
--}
+```
