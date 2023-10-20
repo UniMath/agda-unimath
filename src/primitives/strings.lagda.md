@@ -30,7 +30,8 @@ manipulate them. Strings are written between double quotes, e.g.
 ## Definitions
 
 ```agda
-postulate String : UU lzero
+postulate
+  String : UU lzero
 {-# BUILTIN STRING String #-}
 
 primitive

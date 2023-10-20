@@ -28,7 +28,8 @@ manipulate them. Floats can be written as usual, using dots as separators, e.g.
 ## Definitions
 
 ```agda
-postulate Float : UU lzero
+postulate
+  Float : UU lzero
 {-# BUILTIN FLOAT Float #-}
 
 primitive

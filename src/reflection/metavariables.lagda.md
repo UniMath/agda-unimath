@@ -25,7 +25,9 @@ The `Meta` type represents metavariables in Agda.
 ## Definition
 
 ```agda
-postulate Meta : UU lzero
+postulate
+  Meta : UU lzero
+
 {-# BUILTIN AGDAMETA Meta #-}
 
 primitive

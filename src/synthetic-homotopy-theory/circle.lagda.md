@@ -46,11 +46,14 @@ open import univalent-combinatorics.standard-finite-types
 ## Postulates
 
 ```agda
-postulate 𝕊¹ : UU lzero
+postulate
+  𝕊¹ : UU lzero
 
-postulate base-𝕊¹ : 𝕊¹
+postulate
+  base-𝕊¹ : 𝕊¹
 
-postulate loop-𝕊¹ : Id base-𝕊¹ base-𝕊¹
+postulate
+  loop-𝕊¹ : Id base-𝕊¹ base-𝕊¹
 
 free-loop-𝕊¹ : free-loop 𝕊¹
 pr1 free-loop-𝕊¹ = base-𝕊¹
@@ -60,7 +63,8 @@ pr2 free-loop-𝕊¹ = loop-𝕊¹
 pr1 𝕊¹-Pointed-Type = 𝕊¹
 pr2 𝕊¹-Pointed-Type = base-𝕊¹
 
-postulate ind-𝕊¹ : {l : Level} → induction-principle-circle l free-loop-𝕊¹
+postulate
+  ind-𝕊¹ : {l : Level} → induction-principle-circle l free-loop-𝕊¹
 ```
 
 ## Properties

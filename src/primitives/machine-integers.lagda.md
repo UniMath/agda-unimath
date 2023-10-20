@@ -23,7 +23,8 @@ functions to manipulate them.
 ## Definitions
 
 ```agda
-postulate Word64 : UU lzero
+postulate
+  Word64 : UU lzero
 {-# BUILTIN WORD64 Word64 #-}
 
 primitive
