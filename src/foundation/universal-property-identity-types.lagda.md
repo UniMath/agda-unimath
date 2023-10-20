@@ -76,15 +76,16 @@ equiv-ev-refl' a {B} =
 
 ### `Id : A → (A → 𝒰)` is an embedding
 
-We first show that [axiom L](foundation.preunivalence.md) implies that the map
-`Id : A → (A → 𝒰)` is an [embedding](foundation.embeddings.md). Since the
-[univalence axiom](foundation.univalence.md) implies axiom L, it follows that
-`Id : A → (A → 𝒰)` is an embedding under the postulates of agda-unimath.
+We first show that [the preunivalence axiom](foundation.preunivalence.md)
+implies that the map `Id : A → (A → 𝒰)` is an
+[embedding](foundation.embeddings.md). Since the
+[univalence axiom](foundation.univalence.md) implies preunivalence, it follows
+that `Id : A → (A → 𝒰)` is an embedding under the postulates of agda-unimath.
 
-#### Axiom L implies that `Id : A → (A → 𝒰)` is an embedding
+#### Preunivalence implies that `Id : A → (A → 𝒰)` is an embedding
 
-The proof that axiom L implies that `Id : A → (A → 𝒰)` is an embedding proceeds
-via the
+The proof that preunivalence implies that `Id : A → (A → 𝒰)` is an embedding
+proceeds via the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
 by showing that the [fiber](foundation.fibers-of-maps.md) of `Id` at `Id a` is
 [contractible](foundation.contractible-types.md) for each `a : A`. To see this,
@@ -108,7 +109,7 @@ above embedding is constructed as the composite of the following embeddings
     ↪ Σ (x : A), a ＝ x.
 ```
 
-In this composite, we used axiom L at the second step.
+In this composite, we used preunivalence at the second step.
 
 ```agda
 module _

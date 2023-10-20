@@ -27,7 +27,7 @@ asserts that for any two types `X` and `Y` in a common universe, the map
 `X ＝ Y → X ≃ Y` is an [embedding](foundation-core.embeddings.md). This axiom is
 a common generalization of the [univalence axiom](foundation.univalence.md) and
 [axiom K](foundation-core.sets.md), in the sense that both univalence and axiom
-K imply axiom L.
+K imply preunivalence.
 
 ## Definition
 
