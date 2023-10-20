@@ -215,4 +215,4 @@ module _
 
 ## See also
 
-- [Axiom L](foundation.axiom-l.md)
+- [Axiom L](foundation.preunivalence.md)

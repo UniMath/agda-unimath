@@ -21,7 +21,6 @@ open import foundation.apartness-relations public
 open import foundation.arithmetic-law-coproduct-and-sigma-decompositions public
 open import foundation.arithmetic-law-product-and-pi-decompositions public
 open import foundation.automorphisms public
-open import foundation.axiom-l public
 open import foundation.axiom-of-choice public
 open import foundation.bands public
 open import foundation.binary-embeddings public
@@ -214,6 +213,7 @@ open import foundation.pointed-torsorial-type-families public
 open import foundation.powersets public
 open import foundation.preidempotent-maps public
 open import foundation.preimages-of-subtypes public
+open import foundation.preunivalence public
 open import foundation.principle-of-omniscience public
 open import foundation.product-decompositions public
 open import foundation.product-decompositions-subuniverse public

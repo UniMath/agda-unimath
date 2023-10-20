@@ -8,7 +8,6 @@ module foundation.universal-property-identity-types where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.axiom-l
 open import foundation.dependent-pair-types
 open import foundation.embeddings
 open import foundation.equivalences
@@ -17,6 +16,7 @@ open import foundation.function-extensionality
 open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.preunivalence
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
 open import foundation.universe-levels
@@ -34,9 +34,9 @@ open import foundation-core.propositions
 
 ## Idea
 
-The universal property of identity types characterizes families of maps out of
-the identity type. This universal property is also known as the type theoretic
-Yoneda lemma.
+The **universal property of identity types** characterizes families of maps out
+of the [identity type](foundation-core.identity-types.md). This universal
+property is also known as the type theoretic Yoneda lemma.
 
 ## Theorem
 
@@ -76,7 +76,7 @@ equiv-ev-refl' a {B} =
 
 ### `Id : A → (A → 𝒰)` is an embedding
 
-We first show that [axiom L](foundation.axiom-l.md) implies that the map
+We first show that [axiom L](foundation.preunivalence.md) implies that the map
 `Id : A → (A → 𝒰)` is an [embedding](foundation.embeddings.md). Since the
 [univalence axiom](foundation.univalence.md) implies axiom L, it follows that
 `Id : A → (A → 𝒰)` is an embedding under the postulates of agda-unimath.
@@ -112,14 +112,13 @@ In this composite, we used axiom L at the second step.
 
 ```agda
 module _
-  {l : Level} (L : axiom-L l) (A : UU l)
+  {l : Level} (L : axiom-preunivalence l) (A : UU l)
   where
 
-  is-emb-Id-axiom-L : is-emb (Id {A = A})
-  is-emb-Id-axiom-L a =
+  is-emb-Id-axiom-preunivalence : is-emb (Id {A = A})
+  is-emb-Id-axiom-preunivalence a =
     fundamental-theorem-id
-      ( pair
-        ( pair a refl)
+      ( ( a , refl) ,
         ( λ _ →
           is-injective-emb
             ( emb-fiber a)
@@ -143,7 +142,7 @@ module _
             ( id-emb)
             ( λ x →
               comp-emb
-                ( emb-Π (λ y → emb-L L (Id x y) (Id a y)))
+                ( emb-Π (λ y → emb-preunivalence L (Id x y) (Id a y)))
                 ( emb-equiv equiv-funext))))
         ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
 ```
@@ -156,7 +155,8 @@ module _
   where
 
   is-emb-Id : is-emb (Id {A = A})
-  is-emb-Id = is-emb-Id-axiom-L (axiom-L-univalence univalence) A
+  is-emb-Id =
+    is-emb-Id-axiom-preunivalence (preunivalence-univalence univalence) A
 ```
 
 #### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition
@@ -195,11 +195,12 @@ module _
 
 - In
   [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)
-  we will show that the fiber of `Id : A → (A → 𝒰)`at`B : A → 𝒰`is equivalent
-  to`is-contr (Σ A B)`.
+  we will show that the fiber of `Id : A → (A → 𝒰)` at `B : A → 𝒰` is equivalent
+  to `is-contr (Σ A B)`.
 
 ## References
 
-- The fact that axiom L is sufficient to prove that `Id : A → (A → 𝒰)` is an
-  embedding was first observed and formalized by Martín Escardó,
+- The fact that preunivalence, or axiom L, is sufficient to prove that
+  `Id : A → (A → 𝒰)` is an embedding was first observed and formalized by Martín
+  Escardó,
   [https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html](https://www.cs.bham.ac.uk//~mhe/TypeTopology/UF.IdEmbedding.html).

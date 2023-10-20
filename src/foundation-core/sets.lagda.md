@@ -55,24 +55,28 @@ module _
 ### A type is a set if and only if it satisfies Streicher's axiom K
 
 ```agda
-axiom-K : {l : Level} → UU l → UU l
-axiom-K A = (x : A) (p : x ＝ x) → refl ＝ p
+statement-axiom-K : {l : Level} → UU l → UU l
+statement-axiom-K A = (x : A) (p : x ＝ x) → refl ＝ p
+
+axiom-K : (l : Level) → UU (lsuc l)
+axiom-K l = (A : UU l) → statement-axiom-K A
 
 module _
   {l : Level} {A : UU l}
   where
 
   abstract
-    is-set-axiom-K' : axiom-K A → (x y : A) → all-elements-equal (x ＝ y)
+    is-set-axiom-K' :
+      statement-axiom-K A → (x y : A) → all-elements-equal (x ＝ y)
     is-set-axiom-K' K x .x refl q with K x q
     ... | refl = refl
 
   abstract
-    is-set-axiom-K : axiom-K A → is-set A
+    is-set-axiom-K : statement-axiom-K A → is-set A
     is-set-axiom-K H x y = is-prop-all-elements-equal (is-set-axiom-K' H x y)
 
   abstract
-    axiom-K-is-set : is-set A → axiom-K A
+    axiom-K-is-set : is-set A → statement-axiom-K A
     axiom-K-is-set H x p =
       ( inv (contraction (is-proof-irrelevant-is-prop (H x x) refl) refl)) ∙
       ( contraction (is-proof-irrelevant-is-prop (H x x) refl) p)
