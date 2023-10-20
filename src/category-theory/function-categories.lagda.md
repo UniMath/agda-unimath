@@ -8,6 +8,7 @@ module category-theory.function-categories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.dependent-products-of-categories
 open import category-theory.isomorphisms-in-categories
 open import category-theory.precategories

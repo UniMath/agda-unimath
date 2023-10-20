@@ -7,6 +7,7 @@ module category-theory.precategory-of-maps-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.natural-isomorphisms-maps-precategories

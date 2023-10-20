@@ -8,6 +8,7 @@ module category-theory.full-subprecategories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.embeddings-precategories
 open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-precategories

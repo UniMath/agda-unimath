@@ -7,7 +7,9 @@ module category-theory.categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
+open import category-theory.nonunital-precategories
 open import category-theory.precategories
 open import category-theory.preunivalent-categories
 
@@ -119,6 +121,31 @@ module _
   is-category-Category :
     is-category-Precategory precategory-Category
   is-category-Category = pr2 C
+```
+
+### The underlying nonunital precategory of a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  nonunital-precategory-Category : Nonunital-Precategory l1 l2
+  nonunital-precategory-Category =
+    nonunital-precategory-Precategory (precategory-Category C)
+```
+
+### The underlying preunivalent category of a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  preunivalent-category-Category : Preunivalent-Category l1 l2
+  pr1 preunivalent-category-Category = precategory-Category C
+  pr2 preunivalent-category-Category x y =
+    is-emb-is-equiv (is-category-Category C x y)
 ```
 
 ### Precomposition by a morphism

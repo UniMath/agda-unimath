@@ -9,6 +9,7 @@ open import category-theory.nonunital-precategories public
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.nonunital-precategories
 
 open import foundation.cartesian-product-types
@@ -51,9 +52,10 @@ Precategory l1 l2 =
   Σ ( UU l1)
     ( λ A →
       Σ ( A → A → Set l2)
-        ( λ hom →
-          Σ ( associative-composition-structure-Set hom)
-            ( λ μ → is-unital-composition-operation-Set hom (pr1 μ))))
+        ( λ hom-set →
+          Σ ( associative-composition-structure-Set hom-set)
+            ( λ (comp-hom , assoc-comp) →
+              is-unital-composition-operation-Set hom-set comp-hom)))
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
