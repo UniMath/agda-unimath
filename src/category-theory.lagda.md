@@ -116,6 +116,7 @@ open import category-theory.representing-arrow-category public
 open import category-theory.sieves-in-categories public
 open import category-theory.simplex-category public
 open import category-theory.slice-precategories public
+open import category-theory.strict-categories public
 open import category-theory.subcategories public
 open import category-theory.subprecategories public
 open import category-theory.terminal-objects-precategories public
