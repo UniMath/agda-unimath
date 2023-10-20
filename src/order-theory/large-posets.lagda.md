@@ -91,8 +91,8 @@ module _
 A [large category](category-theory.large-categories.md) is said to be a **large
 poset** if `hom X Y` is a proposition for every two objects `X` and `Y`.
 
-**Lemma**. _Any large category of which the hom-sets are propositions is a large
-poset._
+**Lemma**. _Any large category of which the hom-[sets](foundation-core.sets.md)
+are [propositions](foundation-core.propositions.md) is a large poset._
 
 **Proof:** The condition that `C` is a large poset immediately gives us a
 [large precategory](category-theory.large-precategories.md). The interesting

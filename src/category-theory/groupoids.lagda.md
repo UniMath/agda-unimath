@@ -186,7 +186,7 @@ module _
   where
 
   1-type-Groupoid : 1-Type l1
-  1-type-Groupoid = obj-Category-1-Type (category-Groupoid G)
+  1-type-Groupoid = obj-1-type-Category (category-Groupoid G)
 ```
 
 #### The groupoid obtained from the 1-type induced by a groupoid `G` is `G` itself

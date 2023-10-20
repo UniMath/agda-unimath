@@ -267,6 +267,7 @@ open import foundation.strongly-extensional-maps public
 open import foundation.structure public
 open import foundation.structure-identity-principle public
 open import foundation.structured-type-duality public
+open import foundation.subsingleton-induction public
 open import foundation.subterminal-types public
 open import foundation.subtype-duality public
 open import foundation.subtype-identity-principle public

@@ -39,7 +39,7 @@ ev-refl-identity-system :
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {a : A} (b : B a)
   {P : (x : A) (y : B x) → UU l3} →
   ((x : A) (y : B x) → P x y) → P a b
-ev-refl-identity-system b f = f _ b
+ev-refl-identity-system {a = a} b f = f a b
 
 module _
   {l1 l2 : Level} (l : Level) {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
@@ -75,7 +75,7 @@ module _
       ap
         ( λ t → tr (fam-Σ P) t p)
         ( eq-is-contr'
-          ( is-prop-is-contr H (pair a b) (pair a b))
+          ( is-prop-is-contr H (a , b) (a , b))
           ( eq-is-contr H)
           ( refl))
 
@@ -84,8 +84,8 @@ module _
       ({l : Level} → is-identity-system l B a b) → is-contr (Σ A B)
     pr1 (pr1 (is-torsorial-is-identity-system H)) = a
     pr2 (pr1 (is-torsorial-is-identity-system H)) = b
-    pr2 (is-torsorial-is-identity-system H) (pair x y) =
-      pr1 (H (λ x' y' → (pair a b) ＝ (pair x' y'))) refl x y
+    pr2 (is-torsorial-is-identity-system H) (x , y) =
+      pr1 (H (λ x' y' → (a , b) ＝ (x' , y'))) refl x y
 
   abstract
     fundamental-theorem-id-is-identity-system :

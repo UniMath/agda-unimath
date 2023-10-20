@@ -357,7 +357,7 @@ apply-twice-dependent-universal-property-surj-is-surjective f H C G s =
         ( f)
         ( H)
         ( λ b → C b (f y))
-        (λ x → G x y)
+        ( λ x → G x y)
         ( s))
 ```
 
