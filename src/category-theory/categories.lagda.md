@@ -32,7 +32,7 @@ A **category** in Homotopy Type Theory is a
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). More
 specifically, an equality between objects gives rise to an isomorphism between
 them, by the J-rule. A precategory is a category if this function, called
-`iso-eq`, is an [equivalence](foundation-core.equivalences.md). In particular.
+`iso-eq`, is an [equivalence](foundation-core.equivalences.md). In particular,
 being a category is a [proposition](foundation-core.propositions.md) since
 `is-equiv` is a proposition.
 
