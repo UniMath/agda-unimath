@@ -82,7 +82,8 @@ associative-comp-hom-augmented-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset s)
 
 associative-composition-operation-augmented-simplex-Category :
-  associative-composition-operation-Set hom-set-augmented-simplex-Category
+  associative-composition-operation-binary-family-Set
+    hom-set-augmented-simplex-Category
 pr1 associative-composition-operation-augmented-simplex-Category {n} {m} {r} =
   comp-hom-augmented-simplex-Category {n} {m} {r}
 pr2
@@ -114,7 +115,7 @@ right-unit-law-comp-hom-augmented-simplex-Category {n} {m} =
   right-unit-law-comp-hom-Poset (Fin-Poset n) (Fin-Poset m)
 
 is-unital-composition-operation-augmented-simplex-Category :
-  is-unital-composition-operation-Set
+  is-unital-composition-operation-binary-family-Set
     ( hom-set-augmented-simplex-Category)
     ( λ {n} {m} {r} → comp-hom-augmented-simplex-Category {n} {m} {r})
 pr1 is-unital-composition-operation-augmented-simplex-Category =

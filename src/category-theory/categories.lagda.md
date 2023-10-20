@@ -100,7 +100,7 @@ module _
     associative-comp-hom-Precategory precategory-Category
 
   associative-composition-operation-Category :
-    associative-composition-operation-Set hom-set-Category
+    associative-composition-operation-binary-family-Set hom-set-Category
   associative-composition-operation-Category =
     associative-composition-operation-Precategory precategory-Category
 
@@ -120,7 +120,9 @@ module _
     right-unit-law-comp-hom-Precategory precategory-Category
 
   is-unital-composition-operation-Category :
-    is-unital-composition-operation-Set hom-set-Category comp-hom-Category
+    is-unital-composition-operation-binary-family-Set
+      hom-set-Category
+      comp-hom-Category
   is-unital-composition-operation-Category =
     is-unital-composition-operation-Precategory precategory-Category
 

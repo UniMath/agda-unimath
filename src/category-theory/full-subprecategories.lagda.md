@@ -151,14 +151,15 @@ module _
     right-unit-law-comp-hom-Precategory C
 
   associative-composition-operation-Full-Subprecategory :
-    associative-composition-operation-Set hom-set-Full-Subprecategory
+    associative-composition-operation-binary-family-Set
+      hom-set-Full-Subprecategory
   pr1 associative-composition-operation-Full-Subprecategory {x} {y} {z} =
     comp-hom-Full-Subprecategory {x} {y} {z}
   pr2 associative-composition-operation-Full-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Full-Subprecategory {x} {y} {z} {w}
 
   is-unital-composition-operation-Full-Subprecategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Full-Subprecategory)
       ( λ {x} {y} {z} → comp-hom-Full-Subprecategory {x} {y} {z})
   pr1 is-unital-composition-operation-Full-Subprecategory x =

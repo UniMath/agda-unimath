@@ -73,7 +73,7 @@ associative-comp-hom-representing-arrow {true} {true} {true} {true} h g f = refl
 associative-comp-hom-representing-arrow {false} h g f = refl
 
 associative-composition-operation-representing-arrow :
-  associative-composition-operation-Set hom-set-representing-arrow
+  associative-composition-operation-binary-family-Set hom-set-representing-arrow
 pr1 associative-composition-operation-representing-arrow {x} =
   comp-hom-representing-arrow {x}
 pr2 associative-composition-operation-representing-arrow =
@@ -99,7 +99,7 @@ right-unit-law-comp-hom-representing-arrow {true} {true} f = refl
 right-unit-law-comp-hom-representing-arrow {false} f = refl
 
 is-unital-composition-operation-representing-arrow :
-  is-unital-composition-operation-Set
+  is-unital-composition-operation-binary-family-Set
     ( hom-set-representing-arrow)
     ( λ {x} {y} {z} → comp-hom-representing-arrow {x} {y} {z})
 pr1 is-unital-composition-operation-representing-arrow x =

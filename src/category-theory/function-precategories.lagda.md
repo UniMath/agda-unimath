@@ -66,7 +66,8 @@ module _
     associative-comp-hom-Precategory function-Precategory
 
   associative-composition-operation-function-Precategory :
-    associative-composition-operation-Set hom-set-function-Precategory
+    associative-composition-operation-binary-family-Set
+      hom-set-function-Precategory
   associative-composition-operation-function-Precategory =
     associative-composition-operation-Precategory function-Precategory
 
@@ -88,7 +89,7 @@ module _
     right-unit-law-comp-hom-Precategory function-Precategory
 
   is-unital-function-Precategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-function-Precategory
       comp-hom-function-Precategory
   is-unital-function-Precategory =

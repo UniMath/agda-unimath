@@ -261,12 +261,12 @@ module _
     right-unit-law-comp-hom-Subprecategory (precategory-Category C) P
 
   associative-composition-operation-Subcategory :
-    associative-composition-operation-Set hom-set-Subcategory
+    associative-composition-operation-binary-family-Set hom-set-Subcategory
   associative-composition-operation-Subcategory =
     associative-composition-operation-Subprecategory (precategory-Category C) P
 
   is-unital-composition-operation-Subcategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       ( hom-set-Subcategory)
       ( comp-hom-Subcategory)
   is-unital-composition-operation-Subcategory =

@@ -65,7 +65,7 @@ module _
     eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
 
   associative-composition-operation-Π-Precategory :
-    associative-composition-operation-Set hom-set-Π-Precategory
+    associative-composition-operation-binary-family-Set hom-set-Π-Precategory
   pr1 associative-composition-operation-Π-Precategory = comp-hom-Π-Precategory
   pr2 associative-composition-operation-Π-Precategory =
     associative-comp-hom-Π-Precategory
@@ -87,7 +87,7 @@ module _
     eq-htpy (λ i → right-unit-law-comp-hom-Precategory (C i) (f i))
 
   is-unital-Π-Precategory :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Π-Precategory
       comp-hom-Π-Precategory
   pr1 is-unital-Π-Precategory x = id-hom-Π-Precategory

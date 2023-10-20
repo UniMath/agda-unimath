@@ -105,7 +105,8 @@ module _
     associative-comp-hom-Precategory precategory-Preunivalent-Category
 
   associative-composition-operation-Preunivalent-Category :
-    associative-composition-operation-Set hom-set-Preunivalent-Category
+    associative-composition-operation-binary-family-Set
+      hom-set-Preunivalent-Category
   associative-composition-operation-Preunivalent-Category =
     associative-composition-operation-Precategory
       ( precategory-Preunivalent-Category)
@@ -128,7 +129,7 @@ module _
     right-unit-law-comp-hom-Precategory precategory-Preunivalent-Category
 
   is-unital-composition-operation-Preunivalent-Category :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Preunivalent-Category
       comp-hom-Preunivalent-Category
   is-unital-composition-operation-Preunivalent-Category =

@@ -74,7 +74,8 @@ module _
     associative-comp-hom-Category function-Category
 
   associative-composition-operation-function-Category :
-    associative-composition-operation-Set hom-set-function-Category
+    associative-composition-operation-binary-family-Set
+      hom-set-function-Category
   associative-composition-operation-function-Category =
     associative-composition-operation-Category function-Category
 
@@ -96,7 +97,7 @@ module _
     right-unit-law-comp-hom-Category function-Category
 
   is-unital-function-Category :
-    is-unital-composition-operation-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-function-Category
       comp-hom-function-Category
   is-unital-function-Category =

@@ -83,7 +83,7 @@ associative-comp-hom-simplex-Category {n} {m} {r} {s} =
     ( Fin-Poset (succ-ℕ s))
 
 associative-composition-operation-simplex-Category :
-  associative-composition-operation-Set hom-set-simplex-Category
+  associative-composition-operation-binary-family-Set hom-set-simplex-Category
 pr1 associative-composition-operation-simplex-Category {n} {m} {r} =
   comp-hom-simplex-Category {n} {m} {r}
 pr2 associative-composition-operation-simplex-Category {n} {m} {r} {s} =
@@ -105,7 +105,7 @@ right-unit-law-comp-hom-simplex-Category {n} {m} =
   right-unit-law-comp-hom-Poset (Fin-Poset (succ-ℕ n)) (Fin-Poset (succ-ℕ m))
 
 is-unital-composition-operation-simplex-Category :
-  is-unital-composition-operation-Set
+  is-unital-composition-operation-binary-family-Set
     ( hom-set-simplex-Category)
     ( comp-hom-simplex-Category)
 pr1 is-unital-composition-operation-simplex-Category = id-hom-simplex-Category
