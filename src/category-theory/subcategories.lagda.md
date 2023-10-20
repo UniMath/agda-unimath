@@ -8,6 +8,7 @@ module category-theory.subcategories where
 
 ```agda
 open import category-theory.categories
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
 open import category-theory.isomorphism-induction-categories

@@ -7,6 +7,7 @@ module category-theory.dependent-products-of-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 

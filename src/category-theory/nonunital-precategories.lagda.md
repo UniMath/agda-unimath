@@ -9,6 +9,8 @@ open import category-theory.composition-operations-on-binary-families-of-sets pu
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
+
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality

@@ -7,6 +7,7 @@ module category-theory.one-object-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.endomorphisms-in-precategories
 open import category-theory.precategories
 

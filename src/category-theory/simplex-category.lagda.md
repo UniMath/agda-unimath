@@ -7,6 +7,7 @@ module category-theory.simplex-category where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.precategories
 
 open import elementary-number-theory.inequality-standard-finite-types
