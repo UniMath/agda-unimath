@@ -32,17 +32,17 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **subcategory** of a [precategory](category-theory.precategories.md) `C`
+A **full subcategory** of a [precategory](category-theory.precategories.md) `C`
 consists of a [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`.
 
 Alternatively, we say that a [subcategory](category-theory.subcategories.md)
 **is full** if for every two objects `X` and `Y` in the subcategory, the subtype
-of homomorphisms from `X` to `Y` in the subcategory is
+of morphisms from `X` to `Y` in the subcategory is
 [full](foundation.full-subtypes.md).
 
-## Definition
+## Definitions
 
-### Subprecategories
+### Full subcategories
 
 ```agda
 Full-Subcategory :
@@ -83,7 +83,7 @@ module _
     is-in-obj-inclusion-obj-Full-Subprecategory (precategory-Category C) P
 ```
 
-### The precategory structure of a full subcategory
+### The underlying precategory of a full subcategory
 
 ```agda
 module _
@@ -191,9 +191,7 @@ module _
     iso-eq-Full-Subprecategory (precategory-Category C) P
 ```
 
-## Properties
-
-### Full subcategories are categories
+### The underlying category of a full subcategory
 
 ```agda
 module _
@@ -202,10 +200,18 @@ module _
   (P : Full-Subcategory l3 C)
   where
 
+  is-category-precategory-Full-Subcategory :
+    is-category-Precategory (precategory-Full-Subcategory C P)
+  is-category-precategory-Full-Subcategory =
+    is-category-precategory-is-category-Full-Subprecategory
+      ( precategory-Category C) P (is-category-Category C)
+
   category-Full-Subcategory : Category (l1 ⊔ l3) l2
   pr1 category-Full-Subcategory = precategory-Full-Subcategory C P
-  pr2 category-Full-Subcategory = is-category-precategory-Full-Subcategory C P
+  pr2 category-Full-Subcategory = is-category-precategory-Full-Subcategory
 ```
+
+## Properties
 
 ### The inclusion functor is an embedding
 

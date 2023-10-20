@@ -35,7 +35,7 @@ open import foundation.universe-levels
 A **subcategory** of a [category](category-theory.categories.md) `C` is simply a
 [subprecategory](category-theory.subprecategories.md). It consists of a
 [subtype](foundation-core.subtypes.md) `P₀` of the objects of `C`, and a family
-of subtypes `P₁`
+of subtypes
 
 ```text
   P₁ : (X Y : obj C) → P₀ X → P₀ Y → subtype (hom X Y)
@@ -205,7 +205,7 @@ module _
     is-closed-under-composition-Subprecategory (precategory-Category C) P
 ```
 
-### The precategory structure of a subcategory
+### The underlying precategory of a subcategory
 
 ```agda
 module _
@@ -276,6 +276,10 @@ module _
     precategory-Subprecategory (precategory-Category C) P
 ```
 
+### The underlying category of a subcategory
+
+It remains to show that subprecategories of categories are categories.
+
 ### The inclusion functor of a subcategory
 
 ```agda
@@ -315,11 +319,11 @@ module _
   is-iso-Subcategory :
     {x y : obj-Subcategory C P} → hom-Subcategory C P x y → UU (l2 ⊔ l4)
   is-iso-Subcategory {x} {y} =
-    is-iso-Precategory (precategory-Subcategory C P) {x} {y}
+    is-iso-Subprecategory (precategory-Category C) P {x} {y}
 
   iso-Subcategory :
     (x y : obj-Subcategory C P) → UU (l2 ⊔ l4)
-  iso-Subcategory = iso-Precategory (precategory-Subcategory C P)
+  iso-Subcategory = iso-Subprecategory (precategory-Category C) P
 ```
 
 ## Properties
@@ -350,48 +354,3 @@ module _
   is-emb-obj-inclusion-Category =
     is-emb-obj-inclusion-Subprecategory (precategory-Category C) P
 ```
-
-### Subcategories are categories
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  (C : Category l1 l2)
-  (P : Subcategory l3 l4 C)
-  {x y : obj-Subcategory C P}
-  (f : hom-Subcategory C P x y)
-  (is-iso-f : is-iso-Category C (inclusion-hom-Subcategory C P x y f))
-  where
-
-  contains-is-iso-Subcategory : is-iso-Subcategory C P f
-  contains-is-iso-Subcategory =
-    ind-iso-Category C
-      ( λ Y e →
-        ( p : is-in-obj-Subcategory C P Y)
-        ( q :
-          is-in-hom-Subcategory C P
-            ( inclusion-obj-Subcategory C P x)
-            ( Y)
-            ( hom-iso-Category C e)) →
-        is-iso-Subcategory C P {x} {Y , p} (hom-iso-Category C e , q))
-      ( ( ind-subsingleton
-          ( is-prop-is-in-hom-Subcategory C P
-            ( inclusion-obj-Subcategory C P x)
-            ( inclusion-obj-Subcategory C P x)
-            ( id-hom-Category C))
-          ( λ q → is-iso-Subcategory C P (id-hom-Category C , q))
-          ( contains-id-Subcategory C P
-            ( inclusion-obj-Subcategory C P x)
-            ( is-in-obj-inclusion-obj-Subcategory C P x))) ∘
-        ( ind-subsingleton
-          ( is-prop-is-in-obj-Subcategory C P
-            ( inclusion-obj-Subcategory C P x))
-          ( _)
-          ( is-in-obj-inclusion-obj-Subcategory C P x)
-          ( is-iso-id-hom-Precategory (precategory-Subcategory C P) {x})))
-      ( inclusion-hom-Subcategory C P x y f , is-iso-f)
-      ( is-in-obj-inclusion-obj-Subcategory C P y)
-      ( is-in-hom-inclusion-hom-Subcategory C P x y f)
-```
-
-It remains to show that subcategories indeed define categories.

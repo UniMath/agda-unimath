@@ -29,7 +29,7 @@ open import foundation-core.transport-along-identifications
 ## Idea
 
 The **symmetric difference** of two [subtypes](foundation-core.subtypes.md) `A`
-and `B` is the subtypes that contains the elements that are either in `A` or in
+and `B` is the subtype that contains the elements that are either in `A` or in
 `B` but not in both.
 
 ## Definition
@@ -53,7 +53,7 @@ module _
 
 ### The coproduct of two decidable subtypes is equivalent to their symmetric difference plus two times their intersection
 
-This is also known as the _inclusion-exclusion principle_.
+This is closely related to the _inclusion-exclusion principle_.
 
 ```agda
 module _

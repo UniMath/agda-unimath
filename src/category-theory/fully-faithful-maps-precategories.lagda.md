@@ -156,7 +156,7 @@ module _
 
 ## Properties
 
-### Fully faithful maps of precategories are full and faithful maps
+### Fully faithful maps are the same as full and faithful maps
 
 ```agda
 module _

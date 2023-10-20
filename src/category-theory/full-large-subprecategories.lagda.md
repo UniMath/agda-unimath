@@ -12,6 +12,7 @@ open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
+open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -197,25 +198,24 @@ module _
 ```agda
 module _
   {α : Level → Level} {β : Level → Level → Level} {γ : Level → Level}
-  (C : Large-Category α β)
-  (P : Full-Large-Subprecategory γ (large-precategory-Large-Category C))
+  (C : Large-Precategory α β)
+  (P : Full-Large-Subprecategory γ C)
   where
 
-  is-large-category-large-precategory-Full-Large-Subcategory :
+  is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory :
+    is-large-category-Large-Precategory C →
     is-large-category-Large-Precategory
-      ( large-precategory-Full-Large-Subprecategory
-        ( large-precategory-Large-Category C)
-        ( P))
-  is-large-category-large-precategory-Full-Large-Subcategory X =
+      ( large-precategory-Full-Large-Subprecategory C P)
+  is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory
+    is-large-category-C X =
     fundamental-theorem-id
       ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Large-Category C (inclusion-subtype P X))
+        ( is-contr-total-iso-Large-Category
+          ( make-Large-Category C is-large-category-C)
+          ( inclusion-subtype P X))
         ( is-prop-is-in-subtype P)
         ( inclusion-subtype P X)
-        ( id-iso-Large-Category C)
+        ( id-iso-Large-Precategory C)
         ( is-in-subtype-inclusion-subtype P X))
-      ( iso-eq-Full-Large-Subprecategory
-        ( large-precategory-Large-Category C)
-        ( P)
-        ( X))
+      ( iso-eq-Full-Large-Subprecategory C P X)
 ```

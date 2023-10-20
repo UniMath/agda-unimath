@@ -50,7 +50,7 @@ hom-representing-arrow :
 hom-representing-arrow x y = type-Set (hom-set-representing-arrow x y)
 ```
 
-### The precategory structure of the representing arrow
+### The underlying precategory of the representing arrow
 
 ```agda
 comp-hom-representing-arrow :

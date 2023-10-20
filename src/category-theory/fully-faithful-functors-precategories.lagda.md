@@ -28,12 +28,12 @@ open import foundation.universe-levels
 A [functor](category-theory.functors-precategories.md) between
 [precategories](category-theory.precategories.md) `C` and `D` is **fully
 faithful** if it's an [equivalence](foundation-core.equivalences.md) on
-hom-sets, or equivalently, a
+hom-[sets](foundation-core.sets.md), or equivalently, a
 [full](category-theory.full-functors-precategories.md) and
 [faithful](category-theory.faithful-functors-precategories.md) functor on
 precategories.
 
-## Definition
+## Definitions
 
 ### The predicate of being fully faithful on functors between precategories
 
@@ -164,7 +164,7 @@ module _
 
 ## Properties
 
-### Fully faithful functors of precategories are full and faithful functors
+### Fully faithful functors are the same as full and faithful functors
 
 ```agda
 module _
