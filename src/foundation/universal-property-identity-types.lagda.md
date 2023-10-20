@@ -113,11 +113,11 @@ In this composite, we used preunivalence at the second step.
 
 ```agda
 module _
-  {l : Level} (L : axiom-preunivalence l) (A : UU l)
+  {l : Level} (L : axiom-preunivalence-Level l) (A : UU l)
   where
 
-  is-emb-Id-axiom-preunivalence : is-emb (Id {A = A})
-  is-emb-Id-axiom-preunivalence a =
+  is-emb-Id-axiom-preunivalence-Level : is-emb (Id {A = A})
+  is-emb-Id-axiom-preunivalence-Level a =
     fundamental-theorem-id
       ( ( a , refl) ,
         ( λ _ →
@@ -157,7 +157,7 @@ module _
 
   is-emb-Id : is-emb (Id {A = A})
   is-emb-Id =
-    is-emb-Id-axiom-preunivalence (preunivalence-univalence univalence) A
+    is-emb-Id-axiom-preunivalence-Level (preunivalence-univalence univalence) A
 ```
 
 #### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition

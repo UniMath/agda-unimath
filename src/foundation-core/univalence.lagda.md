@@ -39,11 +39,17 @@ equiv-eq refl = id-equiv
 map-eq : {l : Level} {A : UU l} {B : UU l} → A ＝ B → A → B
 map-eq = map-equiv ∘ equiv-eq
 
-statement-univalence : {l : Level} (A B : UU l) → UU (lsuc l)
-statement-univalence A B = is-equiv (equiv-eq {A = A} {B = B})
+instance-univalence : {l : Level} (A B : UU l) → UU (lsuc l)
+instance-univalence A B = is-equiv (equiv-eq {A = A} {B = B})
 
-axiom-univalence : (l : Level) → UU (lsuc l)
-axiom-univalence l = (A B : UU l) → statement-univalence A B
+axiom-based-univalence : {l : Level} (A : UU l) → UU (lsuc l)
+axiom-based-univalence {l} A = (B : UU l) → instance-univalence A B
+
+axiom-univalence-Level : (l : Level) → UU (lsuc l)
+axiom-univalence-Level l = (A B : UU l) → instance-univalence A B
+
+axiom-univalence : UUω
+axiom-univalence = {l : Level} → axiom-univalence-Level l
 ```
 
 ## Properties
@@ -52,10 +58,10 @@ axiom-univalence l = (A B : UU l) → statement-univalence A B
 
 ```agda
 abstract
-  is-contr-total-equiv-univalence :
+  is-contr-total-equiv-based-univalence :
     {l : Level} (A : UU l) →
-    ((B : UU l) → statement-univalence A B) → is-contr (Σ (UU l) (A ≃_))
-  is-contr-total-equiv-univalence A UA =
+    axiom-based-univalence A → is-contr (Σ (UU l) (A ≃_))
+  is-contr-total-equiv-based-univalence A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
 
@@ -63,10 +69,10 @@ abstract
 
 ```agda
 abstract
-  univalence-is-contr-total-equiv :
+  based-univalence-is-contr-total-equiv :
     {l : Level} (A : UU l) →
-    is-contr (Σ (UU l) (A ≃_)) → (B : UU l) → statement-univalence A B
-  univalence-is-contr-total-equiv A c =
+    is-contr (Σ (UU l) (A ≃_)) → axiom-based-univalence A
+  based-univalence-is-contr-total-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
 ```
 

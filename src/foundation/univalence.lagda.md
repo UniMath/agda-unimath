@@ -39,7 +39,7 @@ In this file we postulate the univalence axiom. Its statement is defined in
 ## Postulate
 
 ```agda
-postulate univalence : {l : Level} → axiom-univalence l
+postulate univalence : {l : Level} → axiom-univalence-Level l
 ```
 
 ## Properties

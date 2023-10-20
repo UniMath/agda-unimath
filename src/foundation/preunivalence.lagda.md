@@ -32,21 +32,27 @@ K imply preunivalence.
 ## Definition
 
 ```agda
-statement-preunivalence : {l : Level} (X Y : UU l) → UU (lsuc l)
-statement-preunivalence X Y = is-emb (equiv-eq {A = X} {B = Y})
+instance-preunivalence : {l : Level} (X Y : UU l) → UU (lsuc l)
+instance-preunivalence X Y = is-emb (equiv-eq {A = X} {B = Y})
 
-axiom-preunivalence : (l : Level) → UU (lsuc l)
-axiom-preunivalence l = (X Y : UU l) → statement-preunivalence X Y
+axiom-based-preunivalence : {l : Level} (X : UU l) → UU (lsuc l)
+axiom-based-preunivalence {l} X = (Y : UU l) → instance-preunivalence X Y
+
+axiom-preunivalence-Level : (l : Level) → UU (lsuc l)
+axiom-preunivalence-Level l = (X Y : UU l) → instance-preunivalence X Y
+
+axiom-preunivalence : UUω
+axiom-preunivalence = {l : Level} → axiom-preunivalence-Level l
 
 emb-preunivalence :
-  {l : Level} → axiom-preunivalence l → (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
+  {l : Level} → axiom-preunivalence-Level l → (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
 pr1 (emb-preunivalence L X Y) = equiv-eq
 pr2 (emb-preunivalence L X Y) = L X Y
 
 emb-map-preunivalence :
-  {l : Level} → axiom-preunivalence l → (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
+  {l : Level} → axiom-preunivalence-Level l → (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
 emb-map-preunivalence L X Y =
-  comp-emb (emb-subtype is-equiv-Prop) (emb-preunivalence preuniv X Y)
+  comp-emb (emb-subtype is-equiv-Prop) (emb-preunivalence L X Y)
 ```
 
 ## Properties
@@ -55,7 +61,7 @@ emb-map-preunivalence L X Y =
 
 ```agda
 preunivalence-univalence :
-  {l : Level} → axiom-univalence l → axiom-preunivalence l
+  {l : Level} → axiom-univalence-Level l → axiom-preunivalence-Level l
 preunivalence-univalence ua A B = is-emb-is-equiv (ua A B)
 ```
 
@@ -66,7 +72,8 @@ types, and for the universe itself.
 
 ```agda
 preunivalence-axiom-K :
-  {l : Level} → axiom-K l → statement-axiom-K (UU l) → axiom-preunivalence l
+  {l : Level} →
+  axiom-K-Level l → instance-axiom-K (UU l) → axiom-preunivalence-Level l
 preunivalence-axiom-K K K-Type A B =
   is-emb-is-prop-is-set
     ( is-set-axiom-K K-Type A B)
