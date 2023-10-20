@@ -89,8 +89,8 @@ module _
   (hom-set : A → A → Set l2) (comp-hom : composition-operation-Set hom-set)
   where
 
-  associativity-prop-composition-operation-Set : Prop (l1 ⊔ l2)
-  associativity-prop-composition-operation-Set =
+  is-associative-prop-composition-operation-Set : Prop (l1 ⊔ l2)
+  is-associative-prop-composition-operation-Set =
     Π-Prop' A
     ( λ x →
       Π-Prop' A
@@ -116,7 +116,7 @@ module _
   is-prop-is-associative-composition-operation-Set :
     is-prop (is-associative-composition-operation-Set hom-set comp-hom)
   is-prop-is-associative-composition-operation-Set =
-    is-prop-type-Prop associativity-prop-composition-operation-Set
+    is-prop-type-Prop is-associative-prop-composition-operation-Set
 ```
 
 ### Being unital is a property of composition operations in sets
