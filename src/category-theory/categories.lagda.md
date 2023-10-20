@@ -121,6 +121,31 @@ module _
   is-category-Category = pr2 C
 ```
 
+### The underlying nonunital precategory of a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  nonunital-precategory-Category : Nonunital-Precategory l1 l2
+  nonunital-precategory-Category =
+    nonunital-precategory-Precategory (precategory-Category C)
+```
+
+### The underlying preunivalent category of a category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2)
+  where
+
+  preunivalent-category-Category : Preunivalent-Category l1 l2
+  pr1 preunivalent-category-Category = precategory-Category C
+  pr2 preunivalent-category-Category x y =
+    is-emb-is-equiv (is-category-Category C x y)
+```
+
 ### Precomposition by a morphism
 
 ```agda
@@ -155,31 +180,6 @@ module _
   hom-inv-eq-Category :
     (x y : obj-Category C) → x ＝ y → hom-Category C y x
   hom-inv-eq-Category = hom-inv-eq-Precategory (precategory-Category C)
-```
-
-### The underlying nonunital precategory of a category
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
-  nonunital-precategory-Category : Nonunital-Precategory l1 l2
-  nonunital-precategory-Category =
-    nonunital-precategory-Precategory (precategory-Category C)
-```
-
-### The underlying preunivalent category of a category
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
-  preunivalent-category-Category : Preunivalent-Category l1 l2
-  pr1 preunivalent-category-Category = precategory-Category C
-  pr2 preunivalent-category-Category x y =
-    is-emb-is-equiv (is-category-Category C x y)
 ```
 
 ## Properties
