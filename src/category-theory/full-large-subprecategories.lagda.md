@@ -12,7 +12,6 @@ open import category-theory.isomorphisms-in-large-precategories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
-open import foundation.dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
@@ -33,8 +32,8 @@ family of [subtypes](foundation.subtypes.md) of the types
 
 Alternatively, we say that a
 [large subcategory](category-theory.large-subcategories.md) **is full** if for
-every two objects `X` and `Y` in the subcategory, the subtype of homomorphisms
-from `X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
+every two objects `X` and `Y` in the subcategory, the subtype of morphisms from
+`X` to `Y` in the subcategory is [full](foundation.full-subtypes.md).
 
 Note that full large subprecategories are not assumed to be closed under
 isomorphisms.

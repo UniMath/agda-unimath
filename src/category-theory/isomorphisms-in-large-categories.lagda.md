@@ -149,7 +149,7 @@ module _
     id-iso-Large-Precategory (large-precategory-Large-Category C)
 ```
 
-### Equalities give rise to isomorphisms
+### Equalities induce isomorphisms
 
 An equality between objects `X Y : A` gives rise to an isomorphism between them.
 This is because, by the J-rule, it is enough to construct an isomorphism given

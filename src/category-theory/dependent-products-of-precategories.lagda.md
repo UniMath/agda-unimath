@@ -7,6 +7,7 @@ module category-theory.dependent-products-of-precategories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.precategories
 
@@ -63,10 +64,10 @@ module _
   associative-comp-hom-Π-Precategory h g f =
     eq-htpy (λ i → associative-comp-hom-Precategory (C i) (h i) (g i) (f i))
 
-  associative-composition-structure-Π-Precategory :
-    associative-composition-structure-Set hom-set-Π-Precategory
-  pr1 associative-composition-structure-Π-Precategory = comp-hom-Π-Precategory
-  pr2 associative-composition-structure-Π-Precategory =
+  associative-composition-operation-Π-Precategory :
+    associative-composition-operation-binary-family-Set hom-set-Π-Precategory
+  pr1 associative-composition-operation-Π-Precategory = comp-hom-Π-Precategory
+  pr2 associative-composition-operation-Π-Precategory =
     associative-comp-hom-Π-Precategory
 
   id-hom-Π-Precategory : {x : obj-Π-Precategory} → hom-Π-Precategory x x
@@ -86,9 +87,9 @@ module _
     eq-htpy (λ i → right-unit-law-comp-hom-Precategory (C i) (f i))
 
   is-unital-Π-Precategory :
-    is-unital-composition-structure-Set
+    is-unital-composition-operation-binary-family-Set
       hom-set-Π-Precategory
-      associative-composition-structure-Π-Precategory
+      comp-hom-Π-Precategory
   pr1 is-unital-Π-Precategory x = id-hom-Π-Precategory
   pr1 (pr2 is-unital-Π-Precategory) = left-unit-law-comp-hom-Π-Precategory
   pr2 (pr2 is-unital-Π-Precategory) = right-unit-law-comp-hom-Π-Precategory
@@ -97,7 +98,7 @@ module _
   pr1 Π-Precategory = obj-Π-Precategory
   pr1 (pr2 Π-Precategory) = hom-set-Π-Precategory
   pr1 (pr2 (pr2 Π-Precategory)) =
-    associative-composition-structure-Π-Precategory
+    associative-composition-operation-Π-Precategory
   pr2 (pr2 (pr2 Π-Precategory)) = is-unital-Π-Precategory
 ```
 
