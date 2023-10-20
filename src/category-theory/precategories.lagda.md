@@ -2,8 +2,6 @@
 
 ```agda
 module category-theory.precategories where
-
-open import category-theory.nonunital-precategories public
 ```
 
 <details><summary>Imports</summary>
