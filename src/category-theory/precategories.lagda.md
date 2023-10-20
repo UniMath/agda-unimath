@@ -43,7 +43,9 @@ The reason this is called a *pre*category and not a category in Homotopy Type
 Theory is that we want to reserve that name for precategories where the
 identities between the objects are exactly the isomorphisms.
 
-## Definition
+## Definitions
+
+### The type of precategories
 
 ```agda
 Precategory :

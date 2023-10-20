@@ -36,7 +36,9 @@ them, by the J-rule. A precategory is a category if this function, called
 being a category is a [proposition](foundation-core.propositions.md) since
 `is-equiv` is a proposition.
 
-## Definition
+## Definitions
+
+### The predicate of being a category on precategories
 
 ```agda
 module _
@@ -54,7 +56,11 @@ module _
 
   is-category-Precategory : UU (l1 ⊔ l2)
   is-category-Precategory = type-Prop is-category-prop-Precategory
+```
 
+### The type of categories
+
+```agda
 Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Category l1 l2 = Σ (Precategory l1 l2) is-category-Precategory
 
