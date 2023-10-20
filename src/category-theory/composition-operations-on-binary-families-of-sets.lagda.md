@@ -22,9 +22,16 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **nonunital precategory** is a [precategory](category-theory.precategories.md)
-that may not have identity maps. Such an object may also rightfully be called a
-_semiprecategory_.
+Given a type `A`, a **composition operation on a binary family of sets**
+`hom : A → A → Set ` is a map
+
+```text
+  hom y z → hom x y → hom x z.
+```
+
+For such operations, we can consider
+[properties](foundation-core.propositions.md) such as **associativity** and
+**unitality**.
 
 ## Definition
 
@@ -178,3 +185,10 @@ module _
     pr2 is-unital-prop-composition-operation-binary-family-Set =
       is-prop-is-unital-composition-operation-binary-family-Set
 ```
+
+## See also
+
+- [Precategories](category-theory.precategories.md) are associative unital
+  composition operations on binary families of sets.
+- [Nonunital precategories](category-theory.precategories.md) are associative
+  composition operations on binary families of sets.
