@@ -28,11 +28,11 @@ open import foundation.universe-levels
 
 ## Idea
 
-A **strict category** in Homotopy Type Theory is a
-[precategory](category-theory.precategories.md) for which the type of objects
-form a [set](foundation-core.sets.md). In particular, being a strict category is
-a [proposition](foundation-core.propositions.md) since being a set is a
-proposition.
+A **strict category** is a [precategory](category-theory.precategories.md) for
+which the type of objects form a [set](foundation-core.sets.md). Such categories
+are the set-theoretic analogue to (univalent)
+[categories](category-theory.categories.md), and have the defect that strict
+categorical constructions may generally fail to be invariant under isomorphisms.
 
 ## Definitions
 
@@ -202,3 +202,8 @@ module _
   hom-inv-eq-Strict-Category =
     hom-inv-eq-Precategory (precategory-Strict-Category C)
 ```
+
+## See also
+
+- [Preunivalent categories](category-theory.preunivalent-categories.md) for the
+  common generalization of (univalent) categories and strict categories.
