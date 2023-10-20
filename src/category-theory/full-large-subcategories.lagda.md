@@ -8,14 +8,12 @@ module category-theory.full-large-subcategories where
 
 ```agda
 open import category-theory.full-large-subprecategories
-open import category-theory.isomorphisms-in-large-categories
 open import category-theory.large-categories
 open import category-theory.large-precategories
 
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 

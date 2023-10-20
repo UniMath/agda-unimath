@@ -11,20 +11,15 @@ open import category-theory.categories
 open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.faithful-functors-precategories
 open import category-theory.functors-precategories
-open import category-theory.isomorphism-induction-categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-precategories
 open import category-theory.precategories
 open import category-theory.subprecategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subsingleton-induction
 open import foundation.subtypes
 open import foundation.universe-levels
 ```

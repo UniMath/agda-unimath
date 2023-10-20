@@ -13,15 +13,11 @@ open import category-theory.embeddings-precategories
 open import category-theory.full-subprecategories
 open import category-theory.fully-faithful-functors-precategories
 open import category-theory.functors-categories
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.maps-categories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
 open import foundation.embeddings
-open import foundation.equivalences
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
