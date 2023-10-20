@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.propositions
 open import foundation.sets
+open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -59,6 +60,9 @@ module _
 
   obj-Strict-Category : UU l1
   obj-Strict-Category = obj-Precategory precategory-Strict-Category
+
+  is-set-obj-Strict-Category : is-set obj-Strict-Category
+  is-set-obj-Strict-Category = pr2 C
 
   hom-set-Strict-Category : obj-Strict-Category → obj-Strict-Category → Set l2
   hom-set-Strict-Category = hom-set-Precategory precategory-Strict-Category
@@ -128,6 +132,30 @@ module _
   nonunital-precategory-Strict-Category : Nonunital-Precategory l1 l2
   nonunital-precategory-Strict-Category =
     nonunital-precategory-Precategory (precategory-Strict-Category C)
+```
+
+### The underlying preunivalent category of a strict category
+
+```agda
+module _
+  {l1 l2 : Level} (C : Strict-Category l1 l2)
+  where
+
+  abstract
+    is-preunivalent-Strict-Category :
+      is-preunivalent-Precategory (precategory-Strict-Category C)
+    is-preunivalent-Strict-Category x y =
+      is-emb-is-injective
+        ( is-set-type-subtype
+          ( is-iso-prop-Precategory (precategory-Strict-Category C))
+          ( is-set-hom-Strict-Category C x y))
+        ( λ where
+          {refl} {q} _ →
+            axiom-K-is-set (is-set-obj-Strict-Category C) x q)
+
+  preunivalent-category-Strict-Category : Preunivalent-Category l1 l2
+  pr1 preunivalent-category-Strict-Category = precategory-Strict-Category C
+  pr2 preunivalent-category-Strict-Category = is-preunivalent-Strict-Category
 ```
 
 ### Precomposition by a morphism
