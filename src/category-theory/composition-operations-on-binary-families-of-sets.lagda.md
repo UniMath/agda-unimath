@@ -35,7 +35,7 @@ For such operations, we can consider
 
 ## Definition
 
-### Composition operations
+### Composition operations in binary families of sets
 
 ```agda
 module _
@@ -48,7 +48,7 @@ module _
     type-Set (hom-set y z) → type-Set (hom-set x y) → type-Set (hom-set x z)
 ```
 
-### Associative composition operations
+### Associative composition operations in binary families of sets
 
 ```agda
 module _
@@ -70,7 +70,7 @@ module _
       ( is-associative-composition-operation-binary-family-Set)
 ```
 
-### Unital composition operations
+### Unital composition operations in binary families of sets
 
 ```agda
 module _
@@ -88,7 +88,7 @@ module _
 
 ## Properties
 
-### Being associative is a property of composition operations in sets
+### Being associative is a property of composition operations in binary families of sets
 
 ```agda
 module _
@@ -129,20 +129,20 @@ module _
       is-associative-prop-composition-operation-binary-family-Set
 ```
 
-### Being unital is a property of composition operations in sets
+### Being unital is a property of composition operations in binary families of sets
 
 Suppose `e e' : (x : A) → hom-set x x` are both right and left units with regard
-to composition. It is enough to show that `e = e'` since the right and left unit
+to composition. It is enough to show that `e e'` since the right and left unit
 laws are propositions (because all hom-types are sets). By function
-extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by
+extensionality, it is enough to show that `e x ＝ e' x` for all `x : A`. But by
 the unit laws we have the following chain of equalities:
-`e x = (e' x) ∘ (e x) = e' x.`
+`e x ＝ (e' x) ∘ (e x) ＝ e' x.`
 
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1}
   (hom-set : A → A → Set l2)
-  ( comp-hom : composition-operation-binary-family-Set hom-set)
+  (comp-hom : composition-operation-binary-family-Set hom-set)
   where
 
   abstract
@@ -158,20 +158,21 @@ module _
             ( Π-Prop' A
               ( λ a →
                 Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom-set a b))
-                      ( λ f' → Id-Prop (hom-set a b) (comp-hom (x b) f') f'))))
+                ( λ b →
+                  Π-Prop
+                    ( type-Set (hom-set a b))
+                    ( λ f' → Id-Prop (hom-set a b) (comp-hom (x b) f') f'))))
             ( Π-Prop' A
               ( λ a →
                 Π-Prop' A
-                  ( λ b →
-                    Π-Prop
-                      ( type-Set (hom-set a b))
-                      ( λ f' → Id-Prop (hom-set a b) (comp-hom f' (x a)) f')))))
+                ( λ b →
+                  Π-Prop
+                    ( type-Set (hom-set a b))
+                    ( λ f' → Id-Prop (hom-set a b) (comp-hom f' (x a)) f')))))
         ( eq-htpy
           ( λ x → inv (left-unit-law-e' (e x)) ∙ right-unit-law-e (e' x)))
 
+  abstract
     is-prop-is-unital-composition-operation-binary-family-Set :
       is-prop
         ( is-unital-composition-operation-binary-family-Set hom-set comp-hom)
@@ -179,16 +180,16 @@ module _
       is-prop-all-elements-equal
         all-elements-equal-is-unital-composition-operation-binary-family-Set
 
-    is-unital-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
-    pr1 is-unital-prop-composition-operation-binary-family-Set =
-      is-unital-composition-operation-binary-family-Set hom-set comp-hom
-    pr2 is-unital-prop-composition-operation-binary-family-Set =
-      is-prop-is-unital-composition-operation-binary-family-Set
+  is-unital-prop-composition-operation-binary-family-Set : Prop (l1 ⊔ l2)
+  pr1 is-unital-prop-composition-operation-binary-family-Set =
+    is-unital-composition-operation-binary-family-Set hom-set comp-hom
+  pr2 is-unital-prop-composition-operation-binary-family-Set =
+    is-prop-is-unital-composition-operation-binary-family-Set
 ```
 
 ## See also
 
-- [Precategories](category-theory.precategories.md) are associative unital
+- [Precategories](category-theory.precategories.md) are associative and unital
   composition operations on binary families of sets.
-- [Nonunital precategories](category-theory.precategories.md) are associative
-  composition operations on binary families of sets.
+- [Nonunital precategories](category-theory.nonunital-precategories.md) are
+  associative composition operations on binary families of sets.

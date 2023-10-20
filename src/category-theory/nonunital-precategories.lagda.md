@@ -2,8 +2,6 @@
 
 ```agda
 module category-theory.nonunital-precategories where
-
-open import category-theory.composition-operations-on-binary-families-of-sets public
 ```
 
 <details><summary>Imports</summary>
@@ -13,12 +11,9 @@ open import category-theory.composition-operations-on-binary-families-of-sets
 
 open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.function-extensionality
-open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
-open import foundation.subtypes
 open import foundation.universe-levels
 ```
 
@@ -27,12 +22,13 @@ open import foundation.universe-levels
 ## Idea
 
 A **nonunital precategory** is a [precategory](category-theory.precategories.md)
-that may not have identity maps. Such an object may also rightfully be called a
-_semiprecategory_.
+that may not have identity maps. In other words, it is an associative
+[composition operation on binary families of sets](category-theory.composition-operations-on-binary-families-of-sets.md).
+Such an object may also be called a **semiprecategory**.
 
 ## Definition
 
-### Nonunital precategories
+### The type of nonunital precategories
 
 ```agda
 Nonunital-Precategory :
@@ -137,12 +133,12 @@ postcomp-hom-Nonunital-Precategory C f z =
 
 ### The predicate of being unital on nonunital precategories
 
-Suppose `e e' : (x : A) → hom-set x x` are both right and left units with regard
-to composition. It is enough to show that `e = e'` since the right and left unit
-laws are propositions (because all hom-types are sets). By function
-extensionality, it is enough to show that `e x = e' x` for all `x : A`. But by
-the unit laws we have the following chain of equalities:
-`e x = (e' x) ∘ (e x) = e' x.`
+To show that unitality is a proposition, suppose `e e' : (x : A) → hom-set x x`
+are both right and left units with regard to composition. It is enough to show
+that `e ＝ e'` since the right and left unit laws are propositions (because all
+hom-types are sets). By function extensionality, it is enough to show that
+`e x ＝ e' x` for all `x : A`. But by the unit laws we have the following chain
+of equalities: `e x ＝ (e' x) ∘ (e x) ＝ e' x.`
 
 ```agda
 module _
@@ -185,5 +181,5 @@ projection map
 
 is an [equivalence](foundation-core.equivalences.md).
 
-We can also define a notion of "isomorphism" as those that induce equivalences
-of hom-sets by pre- and postcomposition.
+We can also define one notion of "isomorphism" as those morphisms that induce
+equivalences of hom-[sets](foundation-core.sets.md) by pre- and postcomposition.

@@ -7,6 +7,7 @@ module category-theory.categories where
 <details><summary>Imports</summary>
 
 ```agda
+open import category-theory.composition-operations-on-binary-families-of-sets
 open import category-theory.isomorphisms-in-precategories
 open import category-theory.nonunital-precategories
 open import category-theory.precategories
@@ -61,7 +62,7 @@ module _
 
 ```agda
 Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-Category l1 l2 = Σ (Precategory l1 l2) is-category-Precategory
+Category l1 l2 = Σ (Precategory l1 l2) (is-category-Precategory)
 
 module _
   {l1 l2 : Level} (C : Category l1 l2)
