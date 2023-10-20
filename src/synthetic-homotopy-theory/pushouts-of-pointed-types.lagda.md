@@ -127,31 +127,29 @@ module _
 
   compute-inl-cogap-Pointed-Type :
     ( x : type-Pointed-Type A) →
-      map-cogap-Pointed-Type
-        ( f)
-        ( g)
-        ( c)
-        ( map-pointed-map (inl-pushout-Pointed-Type f g) x) ＝
-      horizontal-map-cocone-Pointed-Type f g c x
-  compute-inl-cogap-Pointed-Type x =
+    ( map-cogap-Pointed-Type
+      ( f)
+      ( g)
+      ( c)
+      ( map-pointed-map (inl-pushout-Pointed-Type f g) x)) ＝
+    ( horizontal-map-cocone-Pointed-Type f g c x)
+  compute-inl-cogap-Pointed-Type =
     compute-inl-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
       ( cocone-type-cocone-Pointed-Type f g c)
-      ( x)
 
   compute-inr-cogap-Pointed-Type :
     ( y : type-Pointed-Type B) →
-      map-cogap-Pointed-Type
-        ( f)
-        ( g)
-        ( c)
-        ( map-pointed-map (inr-pushout-Pointed-Type f g) y) ＝
-      vertical-map-cocone-Pointed-Type f g c y
-  compute-inr-cogap-Pointed-Type y =
+    ( map-cogap-Pointed-Type
+      ( f)
+      ( g)
+      ( c)
+      ( map-pointed-map (inr-pushout-Pointed-Type f g) y)) ＝
+    ( vertical-map-cocone-Pointed-Type f g c y)
+  compute-inr-cogap-Pointed-Type =
     compute-inr-cogap
       ( map-pointed-map f)
       ( map-pointed-map g)
       ( cocone-type-cocone-Pointed-Type f g c)
-      ( y)
 ```
