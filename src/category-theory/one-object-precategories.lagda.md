@@ -94,12 +94,12 @@ module _
     {star} {star} {star} {star} =
     associative-mul-Monoid M
 
-  associative-composition-structure-one-object-precategory-Monoid :
-    associative-composition-structure-Set
+  associative-composition-operation-one-object-precategory-Monoid :
+    associative-composition-operation-Set
       hom-set-one-object-precategory-Monoid
-  pr1 associative-composition-structure-one-object-precategory-Monoid =
+  pr1 associative-composition-operation-one-object-precategory-Monoid =
     comp-hom-one-object-precategory-Monoid
-  pr2 associative-composition-structure-one-object-precategory-Monoid =
+  pr2 associative-composition-operation-one-object-precategory-Monoid =
     associative-comp-hom-one-object-precategory-Monoid
 
   id-hom-one-object-precategory-Monoid :
@@ -140,7 +140,7 @@ module _
   pr1 (pr2 precategory-one-object-precategory-Monoid) =
     hom-set-one-object-precategory-Monoid
   pr1 (pr2 (pr2 precategory-one-object-precategory-Monoid)) =
-    associative-composition-structure-one-object-precategory-Monoid
+    associative-composition-operation-one-object-precategory-Monoid
   pr2 (pr2 (pr2 precategory-one-object-precategory-Monoid)) =
     is-unital-composition-operation-one-object-precategory-Monoid
 

@@ -150,11 +150,11 @@ module _
   right-unit-law-comp-hom-Full-Subprecategory =
     right-unit-law-comp-hom-Precategory C
 
-  associative-composition-structure-Full-Subprecategory :
-    associative-composition-structure-Set hom-set-Full-Subprecategory
-  pr1 associative-composition-structure-Full-Subprecategory {x} {y} {z} =
+  associative-composition-operation-Full-Subprecategory :
+    associative-composition-operation-Set hom-set-Full-Subprecategory
+  pr1 associative-composition-operation-Full-Subprecategory {x} {y} {z} =
     comp-hom-Full-Subprecategory {x} {y} {z}
-  pr2 associative-composition-structure-Full-Subprecategory {x} {y} {z} {w} =
+  pr2 associative-composition-operation-Full-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Full-Subprecategory {x} {y} {z} {w}
 
   is-unital-composition-operation-Full-Subprecategory :
@@ -172,7 +172,7 @@ module _
   pr1 precategory-Full-Subprecategory = obj-Full-Subprecategory C P
   pr1 (pr2 precategory-Full-Subprecategory) = hom-set-Full-Subprecategory
   pr1 (pr2 (pr2 precategory-Full-Subprecategory)) =
-    associative-composition-structure-Full-Subprecategory
+    associative-composition-operation-Full-Subprecategory
   pr2 (pr2 (pr2 precategory-Full-Subprecategory)) =
     is-unital-composition-operation-Full-Subprecategory
 ```

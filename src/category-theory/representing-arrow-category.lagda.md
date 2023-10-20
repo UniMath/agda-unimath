@@ -72,11 +72,11 @@ associative-comp-hom-representing-arrow :
 associative-comp-hom-representing-arrow {true} {true} {true} {true} h g f = refl
 associative-comp-hom-representing-arrow {false} h g f = refl
 
-associative-composition-structure-representing-arrow :
-  associative-composition-structure-Set hom-set-representing-arrow
-pr1 associative-composition-structure-representing-arrow {x} =
+associative-composition-operation-representing-arrow :
+  associative-composition-operation-Set hom-set-representing-arrow
+pr1 associative-composition-operation-representing-arrow {x} =
   comp-hom-representing-arrow {x}
-pr2 associative-composition-structure-representing-arrow =
+pr2 associative-composition-operation-representing-arrow =
   associative-comp-hom-representing-arrow
 
 id-hom-representing-arrow :
@@ -113,7 +113,7 @@ representing-arrow-Precategory : Precategory lzero lzero
 pr1 representing-arrow-Precategory = obj-representing-arrow
 pr1 (pr2 representing-arrow-Precategory) = hom-set-representing-arrow
 pr1 (pr2 (pr2 representing-arrow-Precategory)) =
-  associative-composition-structure-representing-arrow
+  associative-composition-operation-representing-arrow
 pr2 (pr2 (pr2 representing-arrow-Precategory)) =
   is-unital-composition-operation-representing-arrow
 ```

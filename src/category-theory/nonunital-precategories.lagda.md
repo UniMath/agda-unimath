@@ -41,7 +41,7 @@ Nonunital-Precategory l1 l2 =
   Σ ( UU l1)
     ( λ A →
       Σ ( A → A → Set l2)
-        ( associative-composition-structure-Set))
+        ( associative-composition-operation-Set))
 
 module _
   {l1 l2 : Level} (C : Nonunital-Precategory l1 l2)
@@ -61,9 +61,9 @@ module _
   is-set-hom-Nonunital-Precategory x y =
     is-set-type-Set (hom-set-Nonunital-Precategory x y)
 
-  associative-composition-structure-Nonunital-Precategory :
-    associative-composition-structure-Set hom-set-Nonunital-Precategory
-  associative-composition-structure-Nonunital-Precategory = pr2 (pr2 C)
+  associative-composition-operation-Nonunital-Precategory :
+    associative-composition-operation-Set hom-set-Nonunital-Precategory
+  associative-composition-operation-Nonunital-Precategory = pr2 (pr2 C)
 
   comp-hom-Nonunital-Precategory :
     {x y z : obj-Nonunital-Precategory} →
@@ -71,7 +71,7 @@ module _
     hom-Nonunital-Precategory x y →
     hom-Nonunital-Precategory x z
   comp-hom-Nonunital-Precategory =
-    pr1 associative-composition-structure-Nonunital-Precategory
+    pr1 associative-composition-operation-Nonunital-Precategory
 
   comp-hom-Nonunital-Precategory' :
     {x y z : obj-Nonunital-Precategory} →
@@ -88,7 +88,7 @@ module _
     ( comp-hom-Nonunital-Precategory (comp-hom-Nonunital-Precategory h g) f) ＝
     ( comp-hom-Nonunital-Precategory h (comp-hom-Nonunital-Precategory g f))
   associative-comp-hom-Nonunital-Precategory =
-    pr2 associative-composition-structure-Nonunital-Precategory
+    pr2 associative-composition-operation-Nonunital-Precategory
 ```
 
 ### The total hom-type of a nonunital precategory

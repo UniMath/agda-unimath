@@ -153,10 +153,10 @@ module _
     right-unit-law-comp-hom-Full-Subprecategory
       ( precategory-Category C) P {x} {y}
 
-  associative-composition-structure-Full-Subcategory :
-    associative-composition-structure-Set hom-set-Full-Subcategory
-  associative-composition-structure-Full-Subcategory =
-    associative-composition-structure-Full-Subprecategory
+  associative-composition-operation-Full-Subcategory :
+    associative-composition-operation-Set hom-set-Full-Subcategory
+  associative-composition-operation-Full-Subcategory =
+    associative-composition-operation-Full-Subprecategory
       ( precategory-Category C)
       ( P)
 

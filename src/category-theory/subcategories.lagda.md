@@ -260,10 +260,10 @@ module _
   right-unit-law-comp-hom-Subcategory =
     right-unit-law-comp-hom-Subprecategory (precategory-Category C) P
 
-  associative-composition-structure-Subcategory :
-    associative-composition-structure-Set hom-set-Subcategory
-  associative-composition-structure-Subcategory =
-    associative-composition-structure-Subprecategory (precategory-Category C) P
+  associative-composition-operation-Subcategory :
+    associative-composition-operation-Set hom-set-Subcategory
+  associative-composition-operation-Subcategory =
+    associative-composition-operation-Subprecategory (precategory-Category C) P
 
   is-unital-composition-operation-Subcategory :
     is-unital-composition-operation-Set

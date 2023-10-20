@@ -335,11 +335,11 @@ module _
       ( right-unit-law-comp-hom-Precategory C
         ( inclusion-hom-Subprecategory C P x y f))
 
-  associative-composition-structure-Subprecategory :
-    associative-composition-structure-Set hom-set-Subprecategory
-  pr1 associative-composition-structure-Subprecategory {x} {y} {z} =
+  associative-composition-operation-Subprecategory :
+    associative-composition-operation-Set hom-set-Subprecategory
+  pr1 associative-composition-operation-Subprecategory {x} {y} {z} =
     comp-hom-Subprecategory {x} {y} {z}
-  pr2 associative-composition-structure-Subprecategory {x} {y} {z} {w} =
+  pr2 associative-composition-operation-Subprecategory {x} {y} {z} {w} =
     associative-comp-hom-Subprecategory {x} {y} {z} {w}
 
   is-unital-composition-operation-Subprecategory :
@@ -357,7 +357,7 @@ module _
   pr1 precategory-Subprecategory = obj-Subprecategory C P
   pr1 (pr2 precategory-Subprecategory) = hom-set-Subprecategory
   pr1 (pr2 (pr2 precategory-Subprecategory)) =
-    associative-composition-structure-Subprecategory
+    associative-composition-operation-Subprecategory
   pr2 (pr2 (pr2 precategory-Subprecategory)) =
     is-unital-composition-operation-Subprecategory
 ```
