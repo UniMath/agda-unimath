@@ -216,4 +216,4 @@ module _
 
 ## See also
 
-- [Axiom L](foundation.preunivalence.md)
+- [The preunivalence axiom](foundation.preunivalence.md)
