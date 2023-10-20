@@ -79,7 +79,7 @@ module _
   reflects-normal-subgroup-reflecting-hom-Group = pr2 f
 
   map-reflecting-hom-Group : type-Group G → type-Group H
-  map-reflecting-hom-Group = ?
+  map-reflecting-hom-Group = map-hom-Group G H hom-reflecting-hom-Group
 ```
 
 ### Composition of nullifying homomorphisms and reflecting homomorphisms
