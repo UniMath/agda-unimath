@@ -17,26 +17,36 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
 
 ## Idea
 
-The fundamental theorem of identity type provides a way to characterize identity
-types. It uses the fact that a family of maps `f : (x : A) → a ＝ x → B x` is a
-family of equivalences if and only if it induces an equivalence
-`Σ A (Id a) → Σ A B` on total spaces. Note that the total space `Σ A (Id a)` is
-contractible. Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and
-only if `Σ A B` is contractible.
+The _fundamental theorem of identity types_ provides a way to characterize
+[identity types](foundation-core.identity-types.md). It uses the fact that a
+family of maps `f : (x : A) → a ＝ x → B x` is a family of
+[equivalences](foundation-core.equivalences.md) if and only if it induces an
+equivalence `Σ A (Id a) → Σ A B` on
+[total spaces](foundation.dependent-pair-types.md). Note that the total space
+`Σ A (Id a)` is [contractible](foundation-core.contractible-types.md).
+Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and only if `Σ A B`
+is contractible. Type families `B` of which the total space `Σ A B` is
+contractible are also called
+[torsorial](foundation-core.torsorial-type-families.md). The statement of the
+fundamental theorem of identity types is therefore:
+
+**Fundamental theorem of identity types.** Consider a type family `B` over a
+type `A`, and consider an element `a : A`. Then the following are
+[logically equivalent](foundation.logical-equivalences.md):
+
+1. Any family of maps `f : (x : A) → a ＝ x → B x` is a family of equivalences.
+2. The type family `B` is torsorial.
 
 ## Theorem
 
-For any family of maps `f : (x : A) → a ＝ x → B x`, the following are
-equivalent:
-
-1. Each `f x` is an equivalence
-2. The total space `Σ A B` is contractible.
+### The fundamental theorem of identity types
 
 ```agda
 module _
@@ -45,14 +55,14 @@ module _
 
   abstract
     fundamental-theorem-id :
-      is-contr (Σ A B) → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
+      is-torsorial B → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
     fundamental-theorem-id is-contr-AB f =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr (tot f) (is-torsorial-path a) is-contr-AB)
 
   abstract
     fundamental-theorem-id' :
-      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f → is-contr (Σ A B)
+      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f → is-torsorial B
     fundamental-theorem-id' f is-fiberwise-equiv-f =
       is-contr-is-equiv'
         ( Σ A (Id a))
@@ -70,13 +80,13 @@ module _
 
   abstract
     fundamental-theorem-id-J :
-      is-contr (Σ A B) → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
+      is-torsorial B → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
     fundamental-theorem-id-J is-contr-AB =
       fundamental-theorem-id is-contr-AB (ind-Id a (λ x p → B x) b)
 
   abstract
     fundamental-theorem-id-J' :
-      (is-fiberwise-equiv (ind-Id a (λ x p → B x) b)) → is-contr (Σ A B)
+      (is-fiberwise-equiv (ind-Id a (λ x p → B x) b)) → is-torsorial B
     fundamental-theorem-id-J' H =
       is-contr-is-equiv'
         ( Σ A (Id a))

@@ -24,6 +24,7 @@ open import foundation.isolated-elements
 open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
@@ -243,9 +244,7 @@ module _
   is-torsorial-Eq-node-element-coalgebra :
     (w : type-coalgebra-polynomial-endofunctor X)
     (x : node-element-coalgebra X w) →
-    is-contr
-      ( Σ ( node-element-coalgebra X w)
-          ( Eq-node-element-coalgebra w x))
+    is-torsorial (Eq-node-element-coalgebra w x)
   pr1 (is-torsorial-Eq-node-element-coalgebra w x) =
     center-total-Eq-node-element-coalgebra x
   pr2 (is-torsorial-Eq-node-element-coalgebra w x) =

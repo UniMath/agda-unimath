@@ -23,6 +23,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -181,7 +182,7 @@ module _
   abstract
     is-torsorial-equiv-subuniverse :
       (s : type-subuniverse P) →
-      is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse s t))
+      is-torsorial (λ t → equiv-subuniverse s t)
     is-torsorial-equiv-subuniverse (pair X p) =
       is-torsorial-Eq-subtype
         ( is-torsorial-equiv X)
@@ -192,7 +193,7 @@ module _
 
     is-torsorial-equiv-subuniverse' :
       (s : type-subuniverse P) →
-      is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse t s))
+      is-torsorial (λ t → equiv-subuniverse t s)
     is-torsorial-equiv-subuniverse' (pair X p) =
       is-torsorial-Eq-subtype
         ( is-torsorial-equiv' X)
@@ -248,7 +249,7 @@ module _
 
   is-torsorial-equiv-fam-subuniverse :
     (Y : fam-subuniverse P X) →
-    is-contr (Σ (fam-subuniverse P X) (equiv-fam-subuniverse Y))
+    is-torsorial (equiv-fam-subuniverse Y)
   is-torsorial-equiv-fam-subuniverse Y =
     is-torsorial-Eq-Π
       ( λ x → equiv-subuniverse P (Y x))

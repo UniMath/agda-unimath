@@ -19,6 +19,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -157,7 +158,7 @@ module _
   equiv-eq-ferrers-diagram .D refl = id-equiv-ferrers-diagram
 
   is-torsorial-equiv-ferrers-diagram :
-    is-contr (Σ (ferrers-diagram l2 l3 A) (equiv-ferrers-diagram))
+    is-torsorial equiv-ferrers-diagram
   is-torsorial-equiv-ferrers-diagram =
     is-torsorial-Eq-structure
       ( λ X Y e →
@@ -213,7 +214,7 @@ module _
   equiv-eq-ferrers-diagram-𝔽 .D refl = id-equiv-ferrers-diagram-𝔽
 
   is-torsorial-equiv-ferrers-diagram-𝔽 :
-    is-contr (Σ (ferrers-diagram-𝔽 l2 l3 A) (equiv-ferrers-diagram-𝔽))
+    is-torsorial equiv-ferrers-diagram-𝔽
   is-torsorial-equiv-ferrers-diagram-𝔽 =
     is-torsorial-Eq-structure
       ( λ X Y e →

@@ -19,6 +19,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import graph-theory.directed-graphs
@@ -180,7 +181,7 @@ module _
 
   is-torsorial-htpy-hom-Directed-Graph :
     (f : hom-Directed-Graph G H) →
-    is-contr (Σ (hom-Directed-Graph G H) (htpy-hom-Directed-Graph f))
+    is-torsorial (htpy-hom-Directed-Graph f)
   is-torsorial-htpy-hom-Directed-Graph f =
     is-torsorial-Eq-structure
       ( λ gV gE α →

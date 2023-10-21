@@ -22,6 +22,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -162,8 +163,7 @@ module _
   htpy-eq-map-Precategory f .f refl = refl-htpy-map-Precategory f
 
   is-torsorial-htpy-map-Precategory :
-    (f : map-Precategory C D) →
-    is-contr (Σ (map-Precategory C D) (htpy-map-Precategory f))
+    (f : map-Precategory C D) → is-torsorial (htpy-map-Precategory f)
   is-torsorial-htpy-map-Precategory f =
     is-torsorial-Eq-structure _
       ( is-torsorial-htpy (obj-map-Precategory C D f))

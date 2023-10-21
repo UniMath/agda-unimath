@@ -39,6 +39,7 @@ open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -181,7 +182,7 @@ equiv-eq-2-Element-Type X Y = equiv-eq-component-UU-Level
 abstract
   is-torsorial-equiv-2-Element-Type :
     {l1 : Level} (X : 2-Element-Type l1) →
-    is-contr (Σ (2-Element-Type l1) (equiv-2-Element-Type X))
+    is-torsorial (λ (Y : 2-Element-Type l1) → equiv-2-Element-Type X Y)
   is-torsorial-equiv-2-Element-Type X =
     is-torsorial-equiv-component-UU-Level X
 
@@ -401,14 +402,14 @@ eq-point-2-Element-Type =
   map-inv-equiv equiv-point-eq-2-Element-Type
 
 is-identity-system-type-2-Element-Type :
-  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
-  is-identity-system l2 (type-2-Element-Type {l1}) X x
+  {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  is-identity-system (type-2-Element-Type {l1}) X x
 is-identity-system-type-2-Element-Type X x =
   is-identity-system-is-torsorial X x (is-contr-pointed-2-Element-Type)
 
 dependent-universal-property-identity-system-type-2-Element-Type :
-  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
-  dependent-universal-property-identity-system l2
+  {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  dependent-universal-property-identity-system
     { B = type-2-Element-Type {l1}}
     { a = X}
     ( x)

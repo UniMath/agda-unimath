@@ -15,6 +15,7 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import higher-group-theory.higher-groups
@@ -72,7 +73,8 @@ module _
 
 ```agda
 is-torsorial-equiv-∞-Group :
-  {l1 : Level} (G : ∞-Group l1) → is-contr (Σ (∞-Group l1) (equiv-∞-Group G))
+  {l1 : Level} (G : ∞-Group l1) →
+  is-torsorial (λ (H : ∞-Group l1) → equiv-∞-Group G H)
 is-torsorial-equiv-∞-Group G =
   is-torsorial-Eq-subtype
     ( is-torsorial-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))

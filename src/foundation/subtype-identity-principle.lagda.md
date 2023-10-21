@@ -17,6 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -45,9 +46,9 @@ module _
   abstract
     is-torsorial-Eq-subtype :
       {l3 : Level} {P : A → UU l3} →
-      is-contr (Σ A B) → ((x : A) → is-prop (P x)) →
+      is-torsorial B → ((x : A) → is-prop (P x)) →
       (a : A) (b : B a) (p : P a) →
-      is-contr (Σ (Σ A P) (B ∘ pr1))
+      is-torsorial (λ (t : Σ A P) → B (pr1 t))
     is-torsorial-Eq-subtype {l3} {P}
       is-contr-AB is-subtype-P a b p =
       is-contr-equiv

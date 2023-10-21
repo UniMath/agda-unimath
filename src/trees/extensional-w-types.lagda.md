@@ -23,6 +23,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.slice
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalent-type-families
@@ -92,8 +93,7 @@ module _
   refl-Eq-Eq-ext-𝕎 x y u z = refl-htpy
 
   is-torsorial-Eq-Eq-ext-𝕎 :
-    (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) →
-    is-contr (Σ (Eq-ext-𝕎 x y) (Eq-Eq-ext-𝕎 x y u))
+    (x y : 𝕎 A B) (u : Eq-ext-𝕎 x y) → is-torsorial (Eq-Eq-ext-𝕎 x y u)
   is-torsorial-Eq-Eq-ext-𝕎 x y u =
     is-torsorial-Eq-Π
       ( λ z e → map-equiv (u z) ~ map-equiv e)
@@ -158,7 +158,7 @@ module _
     H (tree-𝕎 b g) = id-equiv
 
   is-torsorial-Eq-ext-is-univalent-𝕎 :
-    is-univalent B → (x : 𝕎 A B) → is-contr (Σ (𝕎 A B) (Eq-ext-𝕎 x))
+    is-univalent B → (x : 𝕎 A B) → is-torsorial (Eq-ext-𝕎 x)
   is-torsorial-Eq-ext-is-univalent-𝕎 H (tree-𝕎 a f) =
     is-contr-equiv
       ( Σ A (λ x → B a ≃ B x))

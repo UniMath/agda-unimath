@@ -17,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
@@ -307,7 +308,7 @@ module _
   htpy-eq-hom-Ring .f refl = refl-htpy-hom-Ring R S f
 
   is-torsorial-htpy-hom-Ring :
-    is-contr (Σ (hom-Ring R S) (htpy-hom-Ring R S f))
+    is-torsorial (htpy-hom-Ring R S f)
   is-torsorial-htpy-hom-Ring =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy-hom-Ab

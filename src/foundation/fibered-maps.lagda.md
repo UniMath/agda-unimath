@@ -29,6 +29,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.small-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.whiskering-homotopies
@@ -136,7 +137,7 @@ module _
   htpy-eq-map-over m .m refl = refl-htpy-map-over m
 
   is-torsorial-htpy-map-over :
-    (m : map-over f g i) → is-contr (Σ (map-over f g i) (htpy-map-over m))
+    (m : map-over f g i) → is-torsorial (htpy-map-over m)
   is-torsorial-htpy-map-over m =
     is-torsorial-Eq-structure
       ( λ g G → coherence-htpy-map-over m (g , G))
@@ -193,7 +194,7 @@ module _
   htpy-eq-fibered-map m .m refl = refl-htpy-fibered-map m
 
   is-torsorial-htpy-fibered-map :
-    (m : fibered-map f g) → is-contr (Σ (fibered-map f g) (htpy-fibered-map m))
+    (m : fibered-map f g) → is-torsorial (htpy-fibered-map m)
   is-torsorial-htpy-fibered-map m =
     is-torsorial-Eq-structure
       ( λ i hH I →

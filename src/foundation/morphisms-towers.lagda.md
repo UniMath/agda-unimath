@@ -25,6 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -130,7 +131,7 @@ module _
   htpy-eq-hom-tower f .f refl = refl-htpy-hom-tower f
 
   is-torsorial-htpy-hom-tower :
-    (f : hom-tower A B) → is-contr (Σ (hom-tower A B) (htpy-hom-tower f))
+    (f : hom-tower A B) → is-torsorial (htpy-hom-tower f)
   is-torsorial-htpy-hom-tower f =
     is-torsorial-Eq-structure _
       ( is-torsorial-binary-htpy (map-hom-tower A B f))

@@ -155,35 +155,11 @@ module _
         ( is-set-type-subtype
           ( is-iso-prop-Precategory (precategory-Strict-Category C))
           ( is-set-hom-Strict-Category C x y))
-        ( λ where
-          {refl} {q} _ →
-            axiom-K-is-set (is-set-obj-Strict-Category C) x q)
+        ( λ _ → eq-is-prop (is-set-obj-Strict-Category C x y))
 
   preunivalent-category-Strict-Category : Preunivalent-Category l1 l2
   pr1 preunivalent-category-Strict-Category = precategory-Strict-Category C
   pr2 preunivalent-category-Strict-Category = is-preunivalent-Strict-Category
-```
-
-### Precomposition by a morphism
-
-```agda
-precomp-hom-Strict-Category :
-  {l1 l2 : Level} (C : Strict-Category l1 l2) {x y : obj-Strict-Category C}
-  (f : hom-Strict-Category C x y) (z : obj-Strict-Category C) →
-  hom-Strict-Category C y z → hom-Strict-Category C x z
-precomp-hom-Strict-Category C =
-  precomp-hom-Precategory (precategory-Strict-Category C)
-```
-
-### Postcomposition by a morphism
-
-```agda
-postcomp-hom-Strict-Category :
-  {l1 l2 : Level} (C : Strict-Category l1 l2) {x y : obj-Strict-Category C}
-  (f : hom-Strict-Category C x y) (z : obj-Strict-Category C) →
-  hom-Strict-Category C z x → hom-Strict-Category C z y
-postcomp-hom-Strict-Category C =
-  postcomp-hom-Precategory (precategory-Strict-Category C)
 ```
 
 ### Equalities induce morphisms
@@ -201,6 +177,24 @@ module _
     (x y : obj-Strict-Category C) → x ＝ y → hom-Strict-Category C y x
   hom-inv-eq-Strict-Category =
     hom-inv-eq-Precategory (precategory-Strict-Category C)
+```
+
+### Pre- and postcomposition by a morphism
+
+```agda
+precomp-hom-Strict-Category :
+  {l1 l2 : Level} (C : Strict-Category l1 l2) {x y : obj-Strict-Category C}
+  (f : hom-Strict-Category C x y) (z : obj-Strict-Category C) →
+  hom-Strict-Category C y z → hom-Strict-Category C x z
+precomp-hom-Strict-Category C =
+  precomp-hom-Precategory (precategory-Strict-Category C)
+
+postcomp-hom-Strict-Category :
+  {l1 l2 : Level} (C : Strict-Category l1 l2) {x y : obj-Strict-Category C}
+  (f : hom-Strict-Category C x y) (z : obj-Strict-Category C) →
+  hom-Strict-Category C z x → hom-Strict-Category C z y
+postcomp-hom-Strict-Category C =
+  postcomp-hom-Precategory (precategory-Strict-Category C)
 ```
 
 ## See also

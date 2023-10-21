@@ -26,6 +26,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -71,7 +72,7 @@ module _
 
   abstract
     is-torsorial-htpy-equiv :
-      (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
+      (e : A ≃ B) → is-torsorial (htpy-equiv e)
     is-torsorial-htpy-equiv e =
       fundamental-theorem-id'
         ( map-equiv ∘ extensionality-equiv e)

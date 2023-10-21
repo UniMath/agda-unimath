@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.group-actions
@@ -130,9 +131,7 @@ module _
     refl-htpy-hom-Abstract-Group-Action
 
   is-torsorial-htpy-hom-Abstract-Group-Action :
-    is-contr
-      ( Σ ( hom-Abstract-Group-Action G X Y)
-          ( htpy-hom-Abstract-Group-Action))
+    is-torsorial htpy-hom-Abstract-Group-Action
   is-torsorial-htpy-hom-Abstract-Group-Action =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (pr1 f))

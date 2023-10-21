@@ -44,6 +44,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.small-types
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.univalence
 open import foundation-core.whiskering-homotopies
 ```
@@ -463,7 +464,7 @@ module _
                 ( compute-P (pr1 v))
                 ( inv-tr (type-Prop ∘ P) (pr2 v) p))) ∙
             ( pr2 v)))
-    is-torsorial-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
+    is-torsorial-P : is-torsorial (λ b → type-Prop (P b))
     is-torsorial-P = pair center-total-P contraction-total-P
     β :
       (b : type-Set B) →

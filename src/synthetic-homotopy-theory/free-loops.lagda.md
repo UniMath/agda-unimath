@@ -16,6 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -90,7 +91,7 @@ module _
 
   abstract
     is-torsorial-Eq-free-loop :
-      (α : free-loop X) → is-contr (Σ (free-loop X) (Eq-free-loop α))
+      (α : free-loop X) → is-torsorial (Eq-free-loop α)
     is-torsorial-Eq-free-loop (pair x α) =
       is-torsorial-Eq-structure
         ( λ x α' p → Id (α ∙ p) (p ∙ α'))
@@ -138,8 +139,7 @@ module _
 
   abstract
     is-torsorial-Eq-free-dependent-loop :
-      ( p : free-dependent-loop α P) →
-      is-contr (Σ (free-dependent-loop α P) (Eq-free-dependent-loop p))
+      ( p : free-dependent-loop α P) → is-torsorial (Eq-free-dependent-loop p)
     is-torsorial-Eq-free-dependent-loop (pair y p) =
       is-torsorial-Eq-structure
         ( λ y' p' q → Id (p ∙ q) ((ap (tr P (loop-free-loop α)) q) ∙ p'))

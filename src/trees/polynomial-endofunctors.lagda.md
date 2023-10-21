@@ -20,6 +20,8 @@ open import foundation.structure-identity-principle
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -66,9 +68,7 @@ module _
 
   is-torsorial-Eq-type-polynomial-endofunctor :
     (x : type-polynomial-endofunctor A B X) →
-    is-contr
-      ( Σ ( type-polynomial-endofunctor A B X)
-          ( Eq-type-polynomial-endofunctor x))
+    is-torsorial (Eq-type-polynomial-endofunctor x)
   is-torsorial-Eq-type-polynomial-endofunctor (pair x α) =
     is-torsorial-Eq-structure
       ( ( λ (y : A) (β : B y → X) (p : x ＝ y) → α ~ (β ∘ tr B p)))

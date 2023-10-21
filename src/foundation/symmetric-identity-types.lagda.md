@@ -25,6 +25,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -63,7 +64,7 @@ module _
     pr2 (refl-Eq-symmetric-Id (x , H)) i = refl
 
     is-torsorial-Eq-symmetric-Id :
-      (p : symmetric-Id a) → is-contr (Σ (symmetric-Id a) (Eq-symmetric-Id p))
+      (p : symmetric-Id a) → is-torsorial (Eq-symmetric-Id p)
     is-torsorial-Eq-symmetric-Id (x , H) =
       is-torsorial-Eq-structure
         ( λ y K p → (i : type-unordered-pair a) → H i ＝ (p ∙ K i))

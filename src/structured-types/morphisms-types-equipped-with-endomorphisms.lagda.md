@@ -17,6 +17,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -112,8 +113,7 @@ module _
 
   is-torsorial-htpy-hom-Type-With-Endomorphism :
     (f : hom-Type-With-Endomorphism X Y) →
-    is-contr
-      ( Σ (hom-Type-With-Endomorphism X Y) (htpy-hom-Type-With-Endomorphism f))
+    is-torsorial (htpy-hom-Type-With-Endomorphism f)
   is-torsorial-htpy-hom-Type-With-Endomorphism f =
     is-torsorial-Eq-structure
       ( λ g G H →

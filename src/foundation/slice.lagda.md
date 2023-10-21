@@ -30,6 +30,7 @@ open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import trees.polynomial-endofunctors
@@ -344,7 +345,7 @@ module _
 
   abstract
     is-torsorial-equiv-slice' :
-      (f : Slice l2 A) → is-contr (Σ (Slice l2 A) (equiv-slice' f))
+      (f : Slice l2 A) → is-torsorial (equiv-slice' f)
     is-torsorial-equiv-slice' (pair X f) =
       is-torsorial-Eq-structure
         ( λ Y g e → f ~ (g ∘ map-equiv e))

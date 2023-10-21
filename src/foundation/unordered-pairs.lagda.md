@@ -35,6 +35,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
@@ -185,7 +186,7 @@ module _
 
   is-torsorial-Eq-unordered-pair :
     (p : unordered-pair A) →
-    is-contr (Σ (unordered-pair A) (Eq-unordered-pair p))
+    is-torsorial (Eq-unordered-pair p)
   is-torsorial-Eq-unordered-pair (pair X p) =
     is-torsorial-Eq-structure
       ( λ Y q e → p ~ (q ∘ map-equiv e))

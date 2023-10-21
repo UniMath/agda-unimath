@@ -26,6 +26,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 open import foundation-core.universal-property-truncation
 open import foundation-core.whiskering-homotopies
@@ -392,7 +393,7 @@ module _
     map-compute-Eq-trunc a (unit-trunc refl) ＝ refl-Eq-trunc
   refl-compute-Eq-trunc = refl
 
-  is-torsorial-Eq-trunc : is-contr (Σ (type-trunc (succ-𝕋 k) A) Eq-trunc)
+  is-torsorial-Eq-trunc : is-torsorial Eq-trunc
   pr1 (pr1 is-torsorial-Eq-trunc) = unit-trunc a
   pr2 (pr1 is-torsorial-Eq-trunc) = refl-Eq-trunc
   pr2 is-torsorial-Eq-trunc =

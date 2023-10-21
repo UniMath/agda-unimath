@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
@@ -127,10 +128,9 @@ module _
     id-equiv-Component-Type-With-Endomorphism T
 
   is-torsorial-equiv-Component-Type-With-Endomorphism :
-    is-contr
-      ( Σ ( Component-Type-With-Endomorphism X)
-          ( equiv-Component-Type-With-Endomorphism
-              ( canonical-Component-Type-With-Endomorphism X)))
+    is-torsorial
+      ( equiv-Component-Type-With-Endomorphism
+        ( canonical-Component-Type-With-Endomorphism X))
   is-torsorial-equiv-Component-Type-With-Endomorphism =
     is-torsorial-Eq-subtype
       ( is-torsorial-equiv-Type-With-Endomorphism X)

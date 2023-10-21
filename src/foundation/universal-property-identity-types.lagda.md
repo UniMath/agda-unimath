@@ -204,7 +204,7 @@ module _
 - In
   [`foundation.torsorial-type-families`](foundation.torsorial-type-families.md)
   we will show that the fiber of `Id : A → (A → 𝒰)` at `B : A → 𝒰` is equivalent
-  to `is-contr (Σ A B)`.
+  to `is-torsorial B`.
 
 ## References
 

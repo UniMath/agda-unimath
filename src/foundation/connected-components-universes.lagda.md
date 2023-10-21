@@ -24,6 +24,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -97,7 +98,7 @@ equiv-eq-component-UU-Level {X = X} refl =
 abstract
   is-torsorial-equiv-component-UU-Level :
     {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
-    is-contr (Σ (component-UU-Level l1 A) (equiv-component-UU-Level X))
+    is-torsorial (equiv-component-UU-Level X)
   is-torsorial-equiv-component-UU-Level X =
     is-torsorial-Eq-subtype
       ( is-torsorial-equiv (type-component-UU-Level X))
@@ -137,7 +138,7 @@ equiv-eq-component-UU p = equiv-eq-component-UU-Level p
 abstract
   is-torsorial-equiv-component-UU :
     {l1 : Level} {A : UU l1} (X : component-UU A) →
-    is-contr (Σ (component-UU A) (equiv-component-UU X))
+    is-torsorial (equiv-component-UU X)
   is-torsorial-equiv-component-UU X =
     is-torsorial-equiv-component-UU-Level X
 

@@ -34,6 +34,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -197,7 +198,7 @@ module _
 
   is-torsorial-has-same-elements-equivalence-class :
     (C : equivalence-class R) →
-    is-contr (Σ (equivalence-class R) (has-same-elements-equivalence-class C))
+    is-torsorial (has-same-elements-equivalence-class C)
   is-torsorial-has-same-elements-equivalence-class C =
     is-torsorial-Eq-subtype
       ( is-torsorial-has-same-elements-subtype
@@ -314,9 +315,7 @@ module _
       ( eq-class-equivalence-class R C H)
 
   is-torsorial-is-in-equivalence-class :
-    is-contr
-      ( Σ ( equivalence-class R)
-          ( λ P → is-in-equivalence-class R P a))
+    is-torsorial (λ P → is-in-equivalence-class R P a)
   pr1 is-torsorial-is-in-equivalence-class =
     center-total-is-in-equivalence-class
   pr2 is-torsorial-is-in-equivalence-class =

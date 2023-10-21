@@ -24,6 +24,7 @@ open import foundation.unit-type
 open import foundation.universe-levels
 
 open import foundation-core.decidable-propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -80,7 +81,7 @@ pr1 (map-total-Eq-ℕ m (pair n e)) = succ-ℕ n
 pr2 (map-total-Eq-ℕ m (pair n e)) = e
 
 is-torsorial-Eq-ℕ :
-  (m : ℕ) → is-contr (Σ ℕ (Eq-ℕ m))
+  (m : ℕ) → is-torsorial (Eq-ℕ m)
 pr1 (pr1 (is-torsorial-Eq-ℕ m)) = m
 pr2 (pr1 (is-torsorial-Eq-ℕ m)) = refl-Eq-ℕ m
 pr2 (is-torsorial-Eq-ℕ zero-ℕ) (pair zero-ℕ star) = refl

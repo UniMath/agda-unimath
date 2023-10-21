@@ -30,16 +30,24 @@ objects [embed](foundation-core.embeddings.md) into the
 [isomorphisms](category-theory.isomorphisms-in-precategories.md). More
 specifically, an equality between objects gives rise to an isomorphism between
 them, by the J-rule. A precategory is a preunivalent category if this function,
-called `iso-eq`, is an embedding. In particular, being preunivalent is a
-[proposition](foundation-core.propositions.md) since `is-emb` is a proposition.
+called `iso-eq`, is an embedding.
 
-The idea of preunivalence is that it is a common generalization of univalent
-mathematics and mathematics with Axiom K. Hence preunivalent categories
-generalize both [categories](category-theory.categories.md) in the sense we have
-defined them (as univalent categories), and strict categories, which are
+The idea of [preunivalence](foundation.preunivalence.md) is that it is a common
+generalization of univalent mathematics and mathematics with Axiom K. Hence
+preunivalent categories generalize both
+[(univalent) categories](category-theory.categories.md) and
+[strict categories](category-theory.strict-categories.md), which are
 precategories whose objects form a [set](foundation-core.sets.md).
 
+Summarized, the preunivalence condition on precategories states that the type of
+objects is a subgroupoid of the [groupoid](category-theory.groupoids.md) of
+isomorphisms. For univalent categories the groupoid of objects is equivalent to
+the groupoid of isomorphisms, while for strict categories the groupoid of
+objects is discrete.
+
 ## Definitions
+
+### The predicate on precategories of being a preunivalent category
 
 ```agda
 module _
@@ -57,7 +65,11 @@ module _
 
   is-preunivalent-Precategory : UU (l1 ⊔ l2)
   is-preunivalent-Precategory = type-Prop is-preunivalent-prop-Precategory
+```
 
+### The type of preunivalent categories
+
+```agda
 Preunivalent-Category : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 Preunivalent-Category l1 l2 =
   Σ (Precategory l1 l2) (is-preunivalent-Precategory)
@@ -141,34 +153,6 @@ module _
   is-preunivalent-Preunivalent-Category = pr2 C
 ```
 
-### Precomposition by a morphism
-
-```agda
-precomp-hom-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
-  {x y : obj-Preunivalent-Category C}
-  (f : hom-Preunivalent-Category C x y)
-  (z : obj-Preunivalent-Category C) →
-  hom-Preunivalent-Category C y z →
-  hom-Preunivalent-Category C x z
-precomp-hom-Preunivalent-Category C =
-  precomp-hom-Precategory (precategory-Preunivalent-Category C)
-```
-
-### Postcomposition by a morphism
-
-```agda
-postcomp-hom-Preunivalent-Category :
-  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
-  {x y : obj-Preunivalent-Category C}
-  (f : hom-Preunivalent-Category C x y)
-  (z : obj-Preunivalent-Category C) →
-  hom-Preunivalent-Category C z x →
-  hom-Preunivalent-Category C z y
-postcomp-hom-Preunivalent-Category C =
-  postcomp-hom-Precategory (precategory-Preunivalent-Category C)
-```
-
 ### Equalities induce morphisms
 
 ```agda
@@ -188,6 +172,30 @@ module _
     x ＝ y → hom-Preunivalent-Category C y x
   hom-inv-eq-Preunivalent-Category =
     hom-inv-eq-Precategory (precategory-Preunivalent-Category C)
+```
+
+### Pre- and postcomposition by a morphism
+
+```agda
+precomp-hom-Preunivalent-Category :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  {x y : obj-Preunivalent-Category C}
+  (f : hom-Preunivalent-Category C x y)
+  (z : obj-Preunivalent-Category C) →
+  hom-Preunivalent-Category C y z →
+  hom-Preunivalent-Category C x z
+precomp-hom-Preunivalent-Category C =
+  precomp-hom-Precategory (precategory-Preunivalent-Category C)
+
+postcomp-hom-Preunivalent-Category :
+  {l1 l2 : Level} (C : Preunivalent-Category l1 l2)
+  {x y : obj-Preunivalent-Category C}
+  (f : hom-Preunivalent-Category C x y)
+  (z : obj-Preunivalent-Category C) →
+  hom-Preunivalent-Category C z x →
+  hom-Preunivalent-Category C z y
+postcomp-hom-Preunivalent-Category C =
+  postcomp-hom-Precategory (precategory-Preunivalent-Category C)
 ```
 
 ## Properties

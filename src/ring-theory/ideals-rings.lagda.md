@@ -21,6 +21,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-abelian-groups
@@ -182,7 +183,7 @@ module _
     refl-has-same-elements-subtype (subset-ideal-Ring R I)
 
   is-torsorial-has-same-elements-ideal-Ring :
-    is-contr (Σ (ideal-Ring l2 R) (has-same-elements-ideal-Ring R I))
+    is-torsorial (has-same-elements-ideal-Ring R I)
   is-torsorial-has-same-elements-ideal-Ring =
     is-torsorial-Eq-subtype
       ( is-torsorial-has-same-elements-subtype (subset-ideal-Ring R I))

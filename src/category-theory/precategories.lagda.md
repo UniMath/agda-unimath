@@ -167,41 +167,6 @@ module _
     associative-comp-hom-Precategory C
 ```
 
-### The total hom-type of a precategory
-
-```agda
-total-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
-total-hom-Precategory C =
-  total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
-
-obj-total-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) →
-  total-hom-Precategory C → obj-Precategory C × obj-Precategory C
-obj-total-hom-Precategory C =
-  obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
-```
-
-### Precomposition by a morphism
-
-```agda
-precomp-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : hom-Precategory C x y) (z : obj-Precategory C) →
-  hom-Precategory C y z → hom-Precategory C x z
-precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
-```
-
-### Postcomposition by a morphism
-
-```agda
-postcomp-hom-Precategory :
-  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
-  (f : hom-Precategory C x y) (z : obj-Precategory C) →
-  hom-Precategory C z x → hom-Precategory C z y
-postcomp-hom-Precategory C f z = comp-hom-Precategory C f
-```
-
 ### Equalities induce morphisms
 
 ```agda
@@ -217,4 +182,35 @@ module _
   hom-inv-eq-Precategory :
     (x y : obj-Precategory C) → x ＝ y → hom-Precategory C y x
   hom-inv-eq-Precategory x y = hom-eq-Precategory y x ∘ inv
+```
+
+### The total hom-type of a precategory
+
+```agda
+total-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) → UU (l1 ⊔ l2)
+total-hom-Precategory C =
+  total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
+
+obj-total-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) →
+  total-hom-Precategory C → obj-Precategory C × obj-Precategory C
+obj-total-hom-Precategory C =
+  obj-total-hom-Nonunital-Precategory (nonunital-precategory-Precategory C)
+```
+
+### Pre- and postcomposition by a morphism
+
+```agda
+precomp-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
+  (f : hom-Precategory C x y) (z : obj-Precategory C) →
+  hom-Precategory C y z → hom-Precategory C x z
+precomp-hom-Precategory C f z g = comp-hom-Precategory C g f
+
+postcomp-hom-Precategory :
+  {l1 l2 : Level} (C : Precategory l1 l2) {x y : obj-Precategory C}
+  (f : hom-Precategory C x y) (z : obj-Precategory C) →
+  hom-Precategory C z x → hom-Precategory C z y
+postcomp-hom-Precategory C f z = comp-hom-Precategory C f
 ```

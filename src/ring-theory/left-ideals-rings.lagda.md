@@ -16,6 +16,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import ring-theory.rings
@@ -154,7 +155,7 @@ module _
     refl-has-same-elements-subtype (subset-left-ideal-Ring R I)
 
   is-torsorial-has-same-elements-left-ideal-Ring :
-    is-contr (Σ (left-ideal-Ring l2 R) (has-same-elements-left-ideal-Ring R I))
+    is-torsorial (has-same-elements-left-ideal-Ring R I)
   is-torsorial-has-same-elements-left-ideal-Ring =
     is-torsorial-Eq-subtype
       ( is-torsorial-has-same-elements-subtype (subset-left-ideal-Ring R I))

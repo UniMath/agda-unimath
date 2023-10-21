@@ -37,6 +37,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
@@ -531,7 +532,7 @@ module _
   refl-htpy-surjection : htpy-surjection f
   refl-htpy-surjection = refl-htpy
 
-  is-torsorial-htpy-surjection : is-contr (Σ (A ↠ B) htpy-surjection)
+  is-torsorial-htpy-surjection : is-torsorial htpy-surjection
   is-torsorial-htpy-surjection =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-surjection f))
@@ -578,7 +579,7 @@ module _
   pr2 id-equiv-Surjection = refl-htpy
 
   is-torsorial-equiv-Surjection :
-    is-contr (Σ (Surjection l2 A) (equiv-Surjection f))
+    is-torsorial (equiv-Surjection f)
   is-torsorial-equiv-Surjection =
     is-torsorial-Eq-structure
       ( λ Y g e → (map-equiv e ∘ map-Surjection f) ~ map-surjection g)
