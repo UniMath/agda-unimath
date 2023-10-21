@@ -79,7 +79,7 @@ apply-base-telescope P (cons-telescope A) =
 ### Inferring telescopes
 
 To get Agda to infer telescopes, we help it along a little using
-[instance arguments](https://agda.readthedocs.io/en/v2.6.3.20230914/language/instance-arguments.html).
+[instance arguments](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
 These are a special kind of implicit argument in Agda that are resolved by the
 instance resolution algorithm. We register building blocks for this algorithm to
 use below, i.e. _instances_. Then Agda will attempt to use those to construct
