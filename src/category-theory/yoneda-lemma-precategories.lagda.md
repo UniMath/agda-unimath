@@ -31,7 +31,7 @@ open import foundation.universe-levels
 
 Given a [precategory](category-theory.precategories.md) `C`, an object `c`, and
 a [functor](category-theory.functors-precategories.md) `F` from `C` to the
-[precategory of sets](foundation.category-of-sets.md), there is an
+[category of sets](foundation.category-of-sets.md), there is an
 [equivalence](foundation-core.equivalences.md) between the
 [set of natural transformations](category-theory.natural-transformations-functors-precategories.md)
 from the functor
