@@ -311,6 +311,6 @@ module _
 
 ## See also
 
-- We postulate that homotopies characterize identifications in (dependent)
-  function types in the file
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+- [Multivariable homotopies](foundation.multivariable-homotopies.md).
+- The [whiskering operations](foundation.whiskering-homotopies.md) on
+  homotopies.

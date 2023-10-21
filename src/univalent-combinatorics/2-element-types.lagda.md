@@ -7,6 +7,7 @@ module univalent-combinatorics.2-element-types where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.modular-arithmetic-standard-finite-types
 open import elementary-number-theory.natural-numbers
 

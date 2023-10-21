@@ -7,8 +7,8 @@ module elementary-number-theory.multiplicative-monoid-of-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.multiplication-natural-numbers
-open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
