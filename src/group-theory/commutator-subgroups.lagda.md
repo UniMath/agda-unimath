@@ -17,6 +17,7 @@ open import foundation.universe-levels
 open import group-theory.commutators-of-elements-groups
 open import group-theory.conjugation
 open import group-theory.groups
+open import group-theory.homomorphisms-groups
 open import group-theory.normal-subgroups
 open import group-theory.subgroups
 open import group-theory.subgroups-generated-by-families-of-elements-groups
@@ -140,6 +141,16 @@ module _
   commutator-normal-subgroup-Group : Normal-Subgroup l G
   pr1 commutator-normal-subgroup-Group = commutator-subgroup-Group
   pr2 commutator-normal-subgroup-Group = is-normal-commutator-subgroup-Group
+```
+
+## Properties
+
+### Every group homomorphism `f : G → H` maps `[G,G]` to `[H,H]`
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2) (f : hom-Group G H)
+  where
 ```
 
 ## External links

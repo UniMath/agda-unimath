@@ -25,6 +25,7 @@ open import group-theory.abelian-groups
 open import group-theory.category-of-abelian-groups
 open import group-theory.category-of-groups
 open import group-theory.commutator-subgroups
+open import group-theory.functoriality-quotient-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
 open import group-theory.homomorphisms-groups
@@ -188,7 +189,12 @@ module _
 
   abelianization-hom-Group :
     hom-Ab (abelianization-Group G) (abelianization-Group H)
-  abelianization-hom-Group = {!!}
+  abelianization-hom-Group =
+    hom-quotient-Group G H
+      ( commutator-normal-subgroup-Group G)
+      ( commutator-normal-subgroup-Group H)
+      ( f)
+      {!!}
 
 abelianization-functor-Group :
   functor-Large-Category id Group-Large-Category Ab-Large-Category

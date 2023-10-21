@@ -88,6 +88,7 @@ open import group-theory.homomorphisms-concrete-groups public
 open import group-theory.homomorphisms-generated-subgroups public
 open import group-theory.homomorphisms-group-actions public
 open import group-theory.homomorphisms-groups public
+open import group-theory.homomorphisms-groups-equipped-with-normal-subgroups public
 open import group-theory.homomorphisms-monoids public
 open import group-theory.homomorphisms-semigroups public
 open import group-theory.images-of-group-homomorphisms public
@@ -123,6 +124,7 @@ open import group-theory.normal-subgroups-concrete-groups public
 open import group-theory.normal-submonoids public
 open import group-theory.normal-submonoids-commutative-monoids public
 open import group-theory.normalizer-subgroups public
+open import group-theory.nullifying-group-homomorphisms public
 open import group-theory.opposite-groups public
 open import group-theory.orbit-stabilizer-theorem-concrete-groups public
 open import group-theory.orbits-concrete-group-actions public

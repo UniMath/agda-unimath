@@ -37,6 +37,7 @@ open import group-theory.groups
 open import group-theory.homomorphisms-groups
 open import group-theory.kernels
 open import group-theory.normal-subgroups
+open import group-theory.nullifying-group-homomorphisms
 open import group-theory.semigroups
 ```
 
@@ -51,85 +52,6 @@ along `q` to a group homomorphism `G/H → K`.
 
 ## Definitions
 
-### Group homomorphisms that nullify a normal subgroup, i.e., that contain a normal subgroup in their kernel
-
-```agda
-module _
-  {l1 l2 l3 : Level} (G : Group l1) (K : Group l2)
-  where
-
-  nullifies-normal-subgroup-prop-hom-Group :
-    hom-Group G K → Normal-Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-  nullifies-normal-subgroup-prop-hom-Group f H =
-    leq-prop-Normal-Subgroup G H (kernel-hom-Group G K f)
-
-  nullifies-normal-subgroup-hom-Group :
-    hom-Group G K → Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
-  nullifies-normal-subgroup-hom-Group f H =
-    type-Prop (nullifies-normal-subgroup-prop-hom-Group f H)
-
-  nullifying-hom-Group : Normal-Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
-  nullifying-hom-Group H =
-    type-subtype (λ f → nullifies-normal-subgroup-prop-hom-Group f H)
-
-  hom-nullifying-hom-Group :
-    (H : Normal-Subgroup l3 G) →
-    nullifying-hom-Group H → hom-Group G K
-  hom-nullifying-hom-Group H = pr1
-
-  nullifies-nullifying-hom-Group :
-    (H : Normal-Subgroup l3 G) (f : nullifying-hom-Group H) →
-    nullifies-normal-subgroup-hom-Group
-      ( hom-nullifying-hom-Group H f) H
-  nullifies-nullifying-hom-Group H = pr2
-
-  reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group :
-    (f : hom-Group G K) (H : Normal-Subgroup l3 G) →
-    nullifies-normal-subgroup-hom-Group f H →
-    reflects-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G H)
-      ( map-hom-Group G K f)
-  reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group f H p α =
-    ( inv (right-unit-law-mul-Group K _)) ∙
-    ( inv-transpose-eq-mul-Group' K
-      ( ( inv (p (left-div-Group G _ _) α)) ∙
-        ( preserves-left-div-hom-Group G K f)))
-
-  nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group :
-    (f : hom-Group G K) (H : Normal-Subgroup l3 G) →
-    reflects-Equivalence-Relation
-      ( eq-rel-congruence-Normal-Subgroup G H)
-      ( map-hom-Group G K f) →
-    nullifies-normal-subgroup-hom-Group f H
-  nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f H p x q =
-    ( p ( is-closed-under-multiplication-Normal-Subgroup G H _ _
-          ( is-closed-under-inverses-Normal-Subgroup G H x q)
-          ( contains-unit-Normal-Subgroup G H))) ∙
-    ( preserves-unit-hom-Group G K f)
-
-  compute-nullifying-hom-Group :
-    (H : Normal-Subgroup l3 G) →
-    Σ ( reflecting-map-Equivalence-Relation
-        ( eq-rel-congruence-Normal-Subgroup G H)
-        ( type-Group K))
-      ( λ f → preserves-mul-Group G K (pr1 f)) ≃
-    nullifying-hom-Group H
-  compute-nullifying-hom-Group H =
-    ( equiv-type-subtype
-      ( λ f →
-        is-prop-reflects-Equivalence-Relation
-          ( eq-rel-congruence-Normal-Subgroup G H)
-          ( set-Group K)
-          ( pr1 f))
-      ( λ f → is-prop-leq-Normal-Subgroup G H (kernel-hom-Group G K f))
-      ( λ f →
-        nullifies-normal-subgroup-reflects-equivalence-relation-hom-Group f H)
-      ( λ f →
-        reflects-equivalence-relation-nullifies-normal-subgroup-hom-Group
-          f H)) ∘e
-    ( equiv-right-swap-Σ)
-```
-
 ### The universal property of quotient groups
 
 ```agda
@@ -142,7 +64,7 @@ pr1 (precomp-nullifying-hom-Group G H K f L g) =
 pr2 (precomp-nullifying-hom-Group G H K f L g) h p =
   ( ap
     ( map-hom-Group K L g)
-    ( nullifies-nullifying-hom-Group G K H f h p)) ∙
+    ( nullifies-normal-subgroup-nullifying-hom-Group G K H f h p)) ∙
   ( preserves-unit-hom-Group K L g)
 
 universal-property-quotient-Group :
