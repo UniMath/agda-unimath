@@ -19,7 +19,7 @@ open import foundation-core.contractible-types
 
 A type family `B` over `A` is said to be **torsorial** if its
 [total space](foundation.dependent-pair-types.md) is
-[contractible](foundation-core.contractible-types.md)
+[contractible](foundation-core.contractible-types.md).
 
 ## Definition
 
