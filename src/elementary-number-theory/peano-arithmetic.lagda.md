@@ -77,8 +77,8 @@ peano-4-ℕ x y z = concat' x
 
 ### Peano's 5th axiom
 
-The 5th axiom of peano's arithmetic states that for every `a` and `b`, if
-`a ＝ b` and `b` is a natural number, then `a` is a natural number. This axiom
+The 5th axiom of peano's arithmetic states that for every `x` and `y`, if
+`x ＝ y` and `y` is a natural number, then `x` is a natural number. This axiom
 does not make sense in type theory, as every element by definition lives in a
 specified type.
 
