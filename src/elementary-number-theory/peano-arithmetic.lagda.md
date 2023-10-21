@@ -41,7 +41,7 @@ peano-1-ℕ = zero-ℕ
 
 ## Peano's 2nd axiom
 
-The identity relation is reflexive on the natural numbers.
+The identity relation on the natural numbers is reflexive.
 
 ```agda
 peano-axiom-2 : {l : Level} → UU l → UU l
