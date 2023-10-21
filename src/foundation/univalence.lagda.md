@@ -41,7 +41,7 @@ In this file we postulate the univalence axiom. Its statement is defined in
 
 ```agda
 postulate
-  univalence : axiom-univalence
+  univalence : univalence-axiom
 ```
 
 ## Properties
