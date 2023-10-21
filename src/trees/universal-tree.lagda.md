@@ -48,30 +48,3 @@ module _
 
   open Universal-Tree public
 ```
-
-### The universal large tree
-
-The universal large tree carries extra level parameters with it. This is to
-ensure that it contains a tree of [telescopes](foundation.telescopes.md) of
-which each type family `A_i` is assigned its own universe level.
-
-```agda
-record Universal-Large-Tree : UUω
-  where
-  coinductive
-  field
-    level-Universal-Large-Tree : Level
-    type-Universal-Large-Tree : UU level-Universal-Large-Tree
-    branch-Universal-large-Tree :
-      (x : type-Universal-Large-Tree) → Universal-Large-Tree
-
-open Universal-Large-Tree public
-
-point-Universal-Large-Tree : Universal-Large-Tree
-level-Universal-Large-Tree point-Universal-Large-Tree =
-  lzero
-type-Universal-Large-Tree point-Universal-Large-Tree =
-  unit
-branch-Universal-large-Tree point-Universal-Large-Tree x =
-  point-Universal-Large-Tree
-```
