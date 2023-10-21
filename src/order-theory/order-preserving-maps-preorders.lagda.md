@@ -17,6 +17,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import order-theory.preorders
@@ -92,8 +93,7 @@ module _
   htpy-eq-hom-Preorder f .f refl = refl-htpy-hom-Preorder f
 
   is-torsorial-htpy-hom-Preorder :
-    (f : hom-Preorder P Q) →
-    is-contr (Σ (hom-Preorder P Q) (htpy-hom-Preorder f))
+    (f : hom-Preorder P Q) → is-torsorial (htpy-hom-Preorder f)
   is-torsorial-htpy-hom-Preorder f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-hom-Preorder P Q f))

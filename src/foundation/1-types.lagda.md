@@ -18,6 +18,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -129,7 +130,8 @@ module _
   equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
 
   abstract
-    is-torsorial-equiv-1-Type : is-contr (Σ (1-Type l) type-equiv-1-Type)
+    is-torsorial-equiv-1-Type :
+      is-torsorial (λ (Y : 1-Type l) → type-equiv-1-Type Y)
     is-torsorial-equiv-1-Type =
       is-torsorial-equiv-subuniverse is-1-type-Prop X
 

@@ -24,6 +24,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.negated-equality
 open import foundation.raising-universe-levels
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -401,9 +402,7 @@ module _
   where
 
   is-torsorial-walk-of-length-zero-Directed-Graph :
-    is-contr
-      ( Σ ( vertex-Directed-Graph G)
-          ( λ y → walk-of-length-Directed-Graph G 0 x y))
+    is-torsorial (λ y → walk-of-length-Directed-Graph G 0 x y)
   is-torsorial-walk-of-length-zero-Directed-Graph =
     is-contr-equiv'
       ( Σ (vertex-Directed-Graph G) (λ y → y ＝ x))

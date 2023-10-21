@@ -23,6 +23,8 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
+
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -124,7 +126,7 @@ module _
   htpy-eq-cocone c .c refl = reflexive-htpy-cocone c
 
   is-torsorial-htpy-cocone :
-    (c : cocone f g X) → is-contr (Σ (cocone f g X) (htpy-cocone c))
+    (c : cocone f g X) → is-torsorial (htpy-cocone c)
   is-torsorial-htpy-cocone c =
     is-torsorial-Eq-structure
       ( λ i' jH' K →

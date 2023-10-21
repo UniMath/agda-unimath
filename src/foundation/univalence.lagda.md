@@ -22,6 +22,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -82,15 +83,27 @@ module _
     pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
 ```
 
+### The total space of all equivalences out of a type or into a type is contractible
+
+Type families of which the [total space](foundation.dependent-pair-types.md) is
+[contractible](foundation-core.contractible-types.md) are also called
+[torsorial](foundation-core.torsorial-type-families.md). This terminology
+originates from higher group theory, where a
+[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
+if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
+i.e., its total space, is contractible. Our claim that the total space of all
+equivalences out of a type `A` is contractible can therefore be stated more
+succinctly as the claim that the family of equivalences out of `A` is torsorial.
+
 ```agda
   abstract
     is-torsorial-equiv :
-      (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
+      (A : UU l) → is-torsorial (λ (X : UU l) → A ≃ X)
     is-torsorial-equiv A =
       is-torsorial-equiv-based-univalence A (univalence A)
 
     is-torsorial-equiv' :
-      (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))
+      (A : UU l) → is-torsorial (λ (X : UU l) → X ≃ A)
     is-torsorial-equiv' A =
       is-contr-equiv'
         ( Σ (UU l) (λ X → X ＝ A))
@@ -117,7 +130,7 @@ equiv-eq-fam B .B refl = id-equiv-fam B
 abstract
   is-torsorial-equiv-fam :
     {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-    is-contr (Σ (A → UU l2) (equiv-fam B))
+    is-torsorial (λ (C : A → UU l2) → equiv-fam B C)
   is-torsorial-equiv-fam B =
     is-torsorial-Eq-Π
       ( λ x X → (B x) ≃ X)

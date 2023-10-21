@@ -17,6 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -32,8 +33,8 @@ characterize the identity types of `(x : A) → B x`.
 ```agda
 is-torsorial-Eq-Π :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
-  ( is-torsorial-C : (x : A) → is-contr (Σ (B x) (C x))) →
-  is-contr (Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
+  ( is-torsorial-C : (x : A) → is-torsorial (C x)) →
+  is-torsorial (λ g → (x : A) → C x (g x))
 is-torsorial-Eq-Π {A = A} {B} C is-torsorial-C =
   is-contr-equiv'
     ( (x : A) → Σ (B x) (C x))
@@ -42,8 +43,8 @@ is-torsorial-Eq-Π {A = A} {B} C is-torsorial-C =
 
 is-torsorial-Eq-implicit-Π :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
-  ( is-torsorial-C : (x : A) → is-contr (Σ (B x) (C x))) →
-  is-contr (Σ ({x : A} → B x) (λ g → {x : A} → C x (g {x})))
+  ( is-torsorial-C : (x : A) → is-torsorial (C x)) →
+  is-torsorial (λ g → {x : A} → C x (g {x}))
 is-torsorial-Eq-implicit-Π {A = A} {B} C is-torsorial-C =
   is-contr-equiv
     ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))

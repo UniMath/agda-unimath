@@ -25,6 +25,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -295,8 +296,7 @@ module _
   pr2 (pr2 id-equiv-Relaxed-Σ-Decomposition) = refl-htpy
 
   is-torsorial-equiv-Relaxed-Σ-Decomposition :
-    is-contr
-      ( Σ ( Relaxed-Σ-Decomposition l2 l3 A) (equiv-Relaxed-Σ-Decomposition X))
+    is-torsorial (equiv-Relaxed-Σ-Decomposition X)
   is-torsorial-equiv-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ U Vf e →
@@ -434,9 +434,7 @@ module _
     Y = snd-fibered-Relaxed-Σ-Decomposition D
 
   is-torsorial-equiv-fibered-Relaxed-Σ-Decomposition :
-    is-contr
-      ( Σ ( fibered-Relaxed-Σ-Decomposition l2 l3 l4 l5 A)
-          ( equiv-fibered-Relaxed-Σ-Decomposition D))
+    is-torsorial (equiv-fibered-Relaxed-Σ-Decomposition D)
   is-torsorial-equiv-fibered-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' Y' e →
@@ -567,9 +565,7 @@ module _
     f-Y = snd-displayed-Relaxed-Σ-Decomposition disp-D
 
   is-torsorial-equiv-displayed-Relaxed-Σ-Decomposition :
-    is-contr
-      ( Σ ( displayed-Relaxed-Σ-Decomposition l2 l3 l4 l5 A)
-          ( equiv-displayed-Relaxed-Σ-Decomposition disp-D))
+    is-torsorial (equiv-displayed-Relaxed-Σ-Decomposition disp-D)
   is-torsorial-equiv-displayed-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' f-Y' e → equiv-snd-displayed-Relaxed-Σ-Decomposition

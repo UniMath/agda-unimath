@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -334,7 +335,7 @@ module _
   where
 
   is-torsorial-htpy-equiv-Directed-Tree :
-    is-contr (Σ (equiv-Directed-Tree S T) (htpy-equiv-Directed-Tree S T e))
+    is-torsorial (htpy-equiv-Directed-Tree S T e)
   is-torsorial-htpy-equiv-Directed-Tree =
     is-torsorial-htpy-equiv-Directed-Graph
       ( graph-Directed-Tree S)
@@ -437,7 +438,7 @@ module _
   eq-equiv-Directed-Tree S = map-inv-equiv (extensionality-Directed-Tree S)
 
   is-torsorial-equiv-Directed-Tree :
-    is-contr (Σ (Directed-Tree l1 l2) (equiv-Directed-Tree T))
+    is-torsorial (equiv-Directed-Tree T)
   is-torsorial-equiv-Directed-Tree =
     is-contr-equiv'
       ( Σ (Directed-Tree l1 l2) (λ S → T ＝ S))

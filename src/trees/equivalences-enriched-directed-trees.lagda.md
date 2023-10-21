@@ -20,6 +20,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -500,9 +501,7 @@ module _
     map-inv-equiv (extensionality-Enriched-Directed-Tree S)
 
   is-torsorial-equiv-Enriched-Directed-Tree :
-    is-contr
-      ( Σ ( Enriched-Directed-Tree l3 l4 A B)
-          ( equiv-Enriched-Directed-Tree A B T))
+    is-torsorial (equiv-Enriched-Directed-Tree A B T)
   is-torsorial-equiv-Enriched-Directed-Tree =
     is-contr-equiv'
       ( Σ (Enriched-Directed-Tree l3 l4 A B) (λ S → T ＝ S))

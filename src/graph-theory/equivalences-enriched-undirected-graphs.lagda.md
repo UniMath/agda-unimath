@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -189,9 +190,7 @@ module _
   where
 
   is-torsorial-equiv-Enriched-Undirected-Graph :
-    is-contr
-      ( Σ ( Enriched-Undirected-Graph l3 l4 A B)
-          ( equiv-Enriched-Undirected-Graph A B G))
+    is-torsorial (equiv-Enriched-Undirected-Graph A B G)
   is-torsorial-equiv-Enriched-Undirected-Graph =
     is-torsorial-Eq-structure
       ( λ H fn e →

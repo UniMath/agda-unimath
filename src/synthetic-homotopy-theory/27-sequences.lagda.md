@@ -19,6 +19,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
@@ -72,8 +73,7 @@ equiv-eq-Seq :
 equiv-eq-Seq A .A refl = id-equiv-Seq A
 
 is-torsorial-equiv-Seq :
-  { l1 : Level} (A : Sequence l1) →
-  is-contr (Σ (Sequence l1) (equiv-Seq A))
+  { l1 : Level} (A : Sequence l1) → is-torsorial (equiv-Seq A)
 is-torsorial-equiv-Seq A =
   is-torsorial-Eq-structure
     ( λ B g (e : (n : ℕ) → (type-seq A n) ≃ B n) →
@@ -157,7 +157,7 @@ htpy-cocone-sequence-eq A c .c refl =
 
 is-torsorial-htpy-cocone-sequence :
   { l1 l2 : Level} (A : Sequence l1) {X : UU l2} (c : cocone-sequence A X) →
-  is-contr (Σ (cocone-sequence A X) (htpy-cocone-sequence A c))
+  is-torsorial (htpy-cocone-sequence A c)
 is-torsorial-htpy-cocone-sequence A c =
   is-torsorial-Eq-structure
     ( λ j t H →

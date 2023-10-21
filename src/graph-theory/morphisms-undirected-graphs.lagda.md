@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 open import foundation.unordered-pairs
@@ -137,7 +138,7 @@ module _
   abstract
     is-torsorial-htpy-hom-Undirected-Graph :
       (f : hom-Undirected-Graph G H) →
-      is-contr (Σ (hom-Undirected-Graph G H) (htpy-hom-Undirected-Graph f))
+      is-torsorial (htpy-hom-Undirected-Graph f)
     is-torsorial-htpy-hom-Undirected-Graph f =
       is-torsorial-Eq-structure
         ( λ gV gE α →

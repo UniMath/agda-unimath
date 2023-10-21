@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -62,7 +63,7 @@ module _
 
   is-torsorial-htpy-structure-preserving-map-ℕ :
     (h : structure-preserving-map-ℕ) →
-    is-contr (Σ structure-preserving-map-ℕ (htpy-structure-preserving-map-ℕ h))
+    is-torsorial (htpy-structure-preserving-map-ℕ h)
   is-torsorial-htpy-structure-preserving-map-ℕ h =
     is-torsorial-Eq-structure
       ( λ g p (H : pr1 h ~ g) →

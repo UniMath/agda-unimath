@@ -34,6 +34,7 @@ open import foundation.whiskering-homotopies
 
 open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 
@@ -103,8 +104,7 @@ module _
   htpy-eq-is-invertible s .s refl = refl-htpy-is-invertible s
 
   is-torsorial-htpy-is-invertible :
-    (s : is-invertible f) →
-    is-contr (Σ (is-invertible f) (htpy-is-invertible s))
+    (s : is-invertible f) → is-torsorial (htpy-is-invertible s)
   is-torsorial-htpy-is-invertible s =
     is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-is-invertible s (x , z))
@@ -176,8 +176,7 @@ module _
   htpy-eq-invertible-map s .s refl = refl-htpy-invertible-map s
 
   is-torsorial-htpy-invertible-map :
-    (s : invertible-map A B) →
-    is-contr (Σ (invertible-map A B) (htpy-invertible-map s))
+    (s : invertible-map A B) → is-torsorial (htpy-invertible-map s)
   is-torsorial-htpy-invertible-map s =
     is-torsorial-Eq-structure
       ( λ x z H →

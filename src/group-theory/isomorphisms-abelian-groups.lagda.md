@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -190,7 +191,7 @@ abstract
 
 abstract
   is-torsorial-iso-Ab :
-    {l : Level} (A : Ab l) → is-contr (Σ (Ab l) (iso-Ab A))
+    {l : Level} (A : Ab l) → is-torsorial (λ (B : Ab l) → iso-Ab A B)
   is-torsorial-iso-Ab {l} A =
     is-contr-equiv'
       ( Σ (Ab l) (Id A))

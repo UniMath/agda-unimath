@@ -21,6 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -154,7 +155,7 @@ module _
     id-equiv-Torsor-Abstract-Group
 
   is-torsorial-equiv-Torsor-Abstract-Group :
-    is-contr (Σ (Torsor-Abstract-Group G l2) (equiv-Torsor-Abstract-Group))
+    is-torsorial equiv-Torsor-Abstract-Group
   is-torsorial-equiv-Torsor-Abstract-Group =
     is-torsorial-Eq-subtype
       ( is-torsorial-equiv-Abstract-Group-Action G
@@ -215,9 +216,7 @@ module _
     refl-htpy-equiv-Torsor-Abstract-Group
 
   is-torsorial-htpy-equiv-Torsor-Abstract-Group :
-    is-contr
-      ( Σ ( equiv-Torsor-Abstract-Group G X Y)
-          ( htpy-equiv-Torsor-Abstract-Group))
+    is-torsorial htpy-equiv-Torsor-Abstract-Group
   is-torsorial-htpy-equiv-Torsor-Abstract-Group =
     is-torsorial-htpy-equiv-Abstract-Group-Action G
       ( action-Torsor-Abstract-Group G X)

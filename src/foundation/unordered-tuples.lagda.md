@@ -24,6 +24,7 @@ open import foundation-core.functoriality-function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.complements-isolated-elements
@@ -142,8 +143,7 @@ module _
   Eq-eq-unordered-tuple x .x refl = refl-Eq-unordered-tuple x
 
   is-torsorial-Eq-unordered-tuple :
-    (x : unordered-tuple n A) →
-    is-contr (Σ (unordered-tuple n A) (Eq-unordered-tuple x))
+    (x : unordered-tuple n A) → is-torsorial (Eq-unordered-tuple x)
   is-torsorial-Eq-unordered-tuple x =
     is-torsorial-Eq-structure
       ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))

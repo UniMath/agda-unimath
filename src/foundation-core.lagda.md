@@ -45,6 +45,7 @@ open import foundation-core.sets public
 open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
+open import foundation-core.torsorial-type-families public
 open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public

@@ -18,6 +18,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
@@ -186,7 +187,7 @@ module _
   where
 
   is-torsorial-htpy-hom-Monoid :
-    is-contr (Σ (hom-Monoid M N) (htpy-hom-Monoid M N f))
+    is-torsorial (htpy-hom-Monoid M N f)
   is-torsorial-htpy-hom-Monoid =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy-hom-Semigroup

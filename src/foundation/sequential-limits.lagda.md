@@ -27,6 +27,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -175,7 +176,7 @@ module _
 
   is-torsorial-Eq-standard-sequential-limit :
     (s : standard-sequential-limit A) →
-    is-contr (Σ (standard-sequential-limit A) (Eq-standard-sequential-limit s))
+    is-torsorial (Eq-standard-sequential-limit s)
   is-torsorial-Eq-standard-sequential-limit s =
     is-torsorial-Eq-structure _
       ( is-torsorial-htpy (pr1 s))

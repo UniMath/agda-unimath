@@ -34,6 +34,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
+open import foundation-core.torsorial-type-families
+
 open import orthogonal-factorization-systems.local-types
 ```
 
@@ -259,8 +261,7 @@ module _
   htpy-eq-extension e .e refl = refl-htpy-extension e
 
   is-torsorial-htpy-extension :
-    (e : extension-dependent-type i P f) →
-    is-contr (Σ (extension-dependent-type i P f) (htpy-extension e))
+    (e : extension-dependent-type i P f) → is-torsorial (htpy-extension e)
   is-torsorial-htpy-extension e =
     is-torsorial-Eq-structure
       ( λ g G → coherence-htpy-extension e (g , G))

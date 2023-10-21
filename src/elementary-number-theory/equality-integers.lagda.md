@@ -26,6 +26,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.set-truncations
+open import foundation.torsorial-type-families
 open import foundation.unit-type
 open import foundation.universe-levels
 ```
@@ -131,7 +132,7 @@ contraction-total-Eq-ℤ (inr (inr x)) (pair (inr (inr y)) e) =
     ( eq-is-prop (is-prop-Eq-ℕ x y))
 
 is-torsorial-Eq-ℤ :
-  (x : ℤ) → is-contr (Σ ℤ (Eq-ℤ x))
+  (x : ℤ) → is-torsorial (Eq-ℤ x)
 is-torsorial-Eq-ℤ x =
   pair (pair x (refl-Eq-ℤ x)) (contraction-total-Eq-ℤ x)
 

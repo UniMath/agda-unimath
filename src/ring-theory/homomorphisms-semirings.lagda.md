@@ -17,6 +17,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-commutative-monoids
@@ -283,7 +284,7 @@ module _
   where
 
   is-torsorial-htpy-hom-Semiring :
-    is-contr (Σ (hom-Semiring R S) (htpy-hom-Semiring R S f))
+    is-torsorial (htpy-hom-Semiring R S f)
   is-torsorial-htpy-hom-Semiring =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy-hom-Commutative-Monoid

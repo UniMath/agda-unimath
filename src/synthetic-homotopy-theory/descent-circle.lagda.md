@@ -25,6 +25,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
@@ -275,7 +276,7 @@ equiv-eq-descent-data-circle =
 
 is-torsorial-equiv-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
-  is-contr (Σ (descent-data-circle l1) (equiv-descent-data-circle P))
+  is-torsorial (equiv-descent-data-circle P)
 is-torsorial-equiv-descent-data-circle =
   is-torsorial-equiv-Type-With-Automorphism
 

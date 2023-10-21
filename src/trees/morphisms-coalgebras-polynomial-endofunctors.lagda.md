@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -133,9 +134,7 @@ module _
     refl-htpy-hom-coalgebra-polynomial-endofunctor
 
   is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor :
-    is-contr
-      ( Σ ( hom-coalgebra-polynomial-endofunctor X Y)
-          ( htpy-hom-coalgebra-polynomial-endofunctor))
+    is-torsorial htpy-hom-coalgebra-polynomial-endofunctor
   is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor =
     is-torsorial-Eq-structure
       ( λ ( g :

@@ -39,6 +39,8 @@ open import foundation.unit-type
 open import foundation.univalence
 open import foundation.universe-levels
 
+open import foundation-core.torsorial-type-families
+
 open import univalent-combinatorics.counting
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -576,7 +578,7 @@ extensionality-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y ≃ equiv-𝔽 X
 extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
 
 is-torsorial-equiv-𝔽 :
-  {l : Level} → (X : 𝔽 l) → is-contr (Σ (𝔽 l) (equiv-𝔽 X))
+  {l : Level} → (X : 𝔽 l) → is-torsorial (λ (Y : 𝔽 l) → equiv-𝔽 X Y)
 is-torsorial-equiv-𝔽 {l} X =
   is-contr-equiv'
     ( Σ (𝔽 l) (Id X))
@@ -622,7 +624,7 @@ equiv-eq-UU-Fin k p = equiv-eq-component-UU-Level p
 abstract
   is-torsorial-equiv-UU-Fin :
     {l : Level} {k : ℕ} (X : UU-Fin l k) →
-    is-contr (Σ (UU-Fin l k) (equiv-UU-Fin k X))
+    is-torsorial (λ (Y : UU-Fin l k) → equiv-UU-Fin k X Y)
   is-torsorial-equiv-UU-Fin {l} {k} X =
     is-torsorial-equiv-component-UU-Level X
 

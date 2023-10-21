@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -141,7 +142,7 @@ module _
 
   abstract
     is-torsorial-htpy-cofork :
-      ( e : cofork f g X) → is-contr (Σ (cofork f g X) (htpy-cofork f g e))
+      ( e : cofork f g X) → is-torsorial (htpy-cofork f g e)
     is-torsorial-htpy-cofork e =
       is-torsorial-Eq-structure
         ( ev-pair (coherence-htpy-cofork f g e))
