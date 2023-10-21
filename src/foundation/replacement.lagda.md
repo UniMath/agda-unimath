@@ -33,7 +33,8 @@ Replacement l =
 ## Postulate
 
 ```agda
-postulate replacement : {l : Level} → Replacement l
+postulate
+  replacement : {l : Level} → Replacement l
 ```
 
 ```agda

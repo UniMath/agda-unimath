@@ -343,21 +343,21 @@ module _
   where
 
   abstract
-    is-contr-total-equiv-slice' :
+    is-torsorial-equiv-slice' :
       (f : Slice l2 A) → is-contr (Σ (Slice l2 A) (equiv-slice' f))
-    is-contr-total-equiv-slice' (pair X f) =
-      is-contr-total-Eq-structure
+    is-torsorial-equiv-slice' (pair X f) =
+      is-torsorial-Eq-structure
         ( λ Y g e → f ~ (g ∘ map-equiv e))
-        ( is-contr-total-equiv X)
+        ( is-torsorial-equiv X)
         ( pair X id-equiv)
-        ( is-contr-total-htpy f)
+        ( is-torsorial-htpy f)
 
   abstract
     is-equiv-equiv-eq-Slice :
       (f g : Slice l2 A) → is-equiv (equiv-eq-Slice f g)
     is-equiv-equiv-eq-Slice f =
       fundamental-theorem-id
-        ( is-contr-total-equiv-slice' f)
+        ( is-torsorial-equiv-slice' f)
         ( equiv-eq-Slice f)
 
   extensionality-Slice :

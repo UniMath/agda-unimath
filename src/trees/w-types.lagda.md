@@ -156,8 +156,8 @@ module _
       { y = λ y → pair (β y) (e y)}
       ( eq-htpy (λ y → contraction-total-Eq-𝕎 (α y) (pair (β y) (e y))))
 
-  is-contr-total-Eq-𝕎 : (w : 𝕎 A B) → is-contr (Σ (𝕎 A B) (Eq-𝕎 w))
-  is-contr-total-Eq-𝕎 w =
+  is-torsorial-Eq-𝕎 : (w : 𝕎 A B) → is-contr (Σ (𝕎 A B) (Eq-𝕎 w))
+  is-torsorial-Eq-𝕎 w =
     pair (center-total-Eq-𝕎 w) (contraction-total-Eq-𝕎 w)
 
   Eq-𝕎-eq : (v w : 𝕎 A B) → v ＝ w → Eq-𝕎 v w
@@ -166,7 +166,7 @@ module _
   is-equiv-Eq-𝕎-eq : (v w : 𝕎 A B) → is-equiv (Eq-𝕎-eq v w)
   is-equiv-Eq-𝕎-eq v =
     fundamental-theorem-id
-      ( is-contr-total-Eq-𝕎 v)
+      ( is-torsorial-Eq-𝕎 v)
       ( Eq-𝕎-eq v)
 
   eq-Eq-𝕎 : (v w : 𝕎 A B) → Eq-𝕎 v w → v ＝ w

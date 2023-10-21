@@ -152,14 +152,14 @@ module _
               Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
                 ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl))))
         ( is-contr-Σ
-          ( is-contr-total-path x)
+          ( is-torsorial-path x)
           ( x , refl)
           ( is-contr-Σ
             ( is-contr-equiv
               ( Σ (x ＝ x) (λ q → q ＝ refl))
               ( equiv-tot
                 ( λ q → equiv-concat (inv right-unit) refl))
-              ( is-contr-total-path' refl))
+              ( is-torsorial-path' refl))
             ( refl , refl)
             ( is-proof-irrelevant-is-prop
               ( is-1-type-type-1-Type X x x refl refl)

@@ -478,7 +478,7 @@ contraction-total-fundamental-cover-circle-data
         l dup-circle h p))
     x y
 
-is-contr-total-fundamental-cover-circle-data :
+is-torsorial-fundamental-cover-circle-data :
   { l1 : Level} {X : UU l1} (l : free-loop X) →
   ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
   ( h :
@@ -497,9 +497,9 @@ is-contr-total-fundamental-cover-circle-data :
       ( h)
       ( h)) →
   is-contr (Σ X (fundamental-cover-circle l dup-circle))
-pr1 (is-contr-total-fundamental-cover-circle-data l dup-circle h p) =
+pr1 (is-torsorial-fundamental-cover-circle-data l dup-circle h p) =
   center-total-fundamental-cover-circle l dup-circle
-pr2 (is-contr-total-fundamental-cover-circle-data l dup-circle h p) =
+pr2 (is-torsorial-fundamental-cover-circle-data l dup-circle h p) =
   contraction-total-fundamental-cover-circle-data l dup-circle h p
 ```
 
@@ -568,12 +568,12 @@ Contraction-fundamental-cover-circle l dup-circle =
       ( path-total-fundamental-cover-circle l dup-circle k))
 
 abstract
-  is-contr-total-fundamental-cover-circle :
+  is-torsorial-fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
     ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
     is-contr (Σ X (fundamental-cover-circle l dup-circle))
-  is-contr-total-fundamental-cover-circle l dup-circle =
-    is-contr-total-fundamental-cover-circle-data l dup-circle
+  is-torsorial-fundamental-cover-circle l dup-circle =
+    is-torsorial-fundamental-cover-circle-data l dup-circle
       ( pr1 (Contraction-fundamental-cover-circle l dup-circle))
       ( inv-htpy
         ( pr2 (pr2 (Contraction-fundamental-cover-circle l dup-circle))))
@@ -599,7 +599,7 @@ abstract
     ( x : X) → is-equiv (fundamental-cover-circle-eq l dup-circle x)
   is-equiv-fundamental-cover-circle-eq l dup-circle =
     fundamental-theorem-id
-      ( is-contr-total-fundamental-cover-circle l dup-circle)
+      ( is-torsorial-fundamental-cover-circle l dup-circle)
       ( fundamental-cover-circle-eq l dup-circle)
 
 equiv-fundamental-cover-circle :

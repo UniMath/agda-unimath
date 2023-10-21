@@ -321,11 +321,11 @@ module _
       ( ring-Ring-𝔽 B)
       ( f)
 
-  is-contr-total-htpy-hom-Ring-𝔽 :
+  is-torsorial-htpy-hom-Ring-𝔽 :
     is-contr
       ( Σ (hom-Ring-𝔽 A B) (htpy-hom-Ring-𝔽 A B f))
-  is-contr-total-htpy-hom-Ring-𝔽 =
-    is-contr-total-htpy-hom-Ring
+  is-torsorial-htpy-hom-Ring-𝔽 =
+    is-torsorial-htpy-hom-Ring
       ( ring-Ring-𝔽 A)
       ( ring-Ring-𝔽 B)
       ( f)

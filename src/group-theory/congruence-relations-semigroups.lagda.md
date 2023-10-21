@@ -137,14 +137,14 @@ refl-relate-same-elements-congruence-Semigroup G R =
   refl-relate-same-elements-Equivalence-Relation
     ( eq-rel-congruence-Semigroup G R)
 
-is-contr-total-relate-same-elements-congruence-Semigroup :
+is-torsorial-relate-same-elements-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G) →
   is-contr
     ( Σ ( congruence-Semigroup l2 G)
         ( relate-same-elements-congruence-Semigroup G R))
-is-contr-total-relate-same-elements-congruence-Semigroup G R =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-Equivalence-Relation
+is-torsorial-relate-same-elements-congruence-Semigroup G R =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-relate-same-elements-Equivalence-Relation
       ( eq-rel-congruence-Semigroup G R))
     ( is-prop-is-congruence-Semigroup G)
     ( eq-rel-congruence-Semigroup G R)
@@ -162,7 +162,7 @@ is-equiv-relate-same-elements-eq-congruence-Semigroup :
   is-equiv (relate-same-elements-eq-congruence-Semigroup G R S)
 is-equiv-relate-same-elements-eq-congruence-Semigroup G R =
   fundamental-theorem-id
-    ( is-contr-total-relate-same-elements-congruence-Semigroup G R)
+    ( is-torsorial-relate-same-elements-congruence-Semigroup G R)
     ( relate-same-elements-eq-congruence-Semigroup G R)
 
 extensionality-congruence-Semigroup :

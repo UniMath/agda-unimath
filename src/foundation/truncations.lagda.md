@@ -392,10 +392,10 @@ module _
     map-compute-Eq-trunc a (unit-trunc refl) ＝ refl-Eq-trunc
   refl-compute-Eq-trunc = refl
 
-  is-contr-total-Eq-trunc : is-contr (Σ (type-trunc (succ-𝕋 k) A) Eq-trunc)
-  pr1 (pr1 is-contr-total-Eq-trunc) = unit-trunc a
-  pr2 (pr1 is-contr-total-Eq-trunc) = refl-Eq-trunc
-  pr2 is-contr-total-Eq-trunc =
+  is-torsorial-Eq-trunc : is-contr (Σ (type-trunc (succ-𝕋 k) A) Eq-trunc)
+  pr1 (pr1 is-torsorial-Eq-trunc) = unit-trunc a
+  pr2 (pr1 is-torsorial-Eq-trunc) = refl-Eq-trunc
+  pr2 is-torsorial-Eq-trunc =
     function-dependent-universal-property-total-truncated-fam-trunc
       ( λ y → trunc k (a ＝ y))
       ( Id-Truncated-Type
@@ -433,7 +433,7 @@ module _
     (x : type-trunc (succ-𝕋 k) A) → is-equiv (Eq-eq-trunc x)
   is-equiv-Eq-eq-trunc =
     fundamental-theorem-id
-      ( is-contr-total-Eq-trunc)
+      ( is-torsorial-Eq-trunc)
       ( Eq-eq-trunc)
 
   extensionality-trunc :

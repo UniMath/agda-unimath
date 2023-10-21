@@ -89,13 +89,13 @@ module _
       ( precategory-Category C)
       ( large-precategory-Large-Category D)
 
-  is-contr-total-htpy-map-Small-Large-Category :
+  is-torsorial-htpy-map-Small-Large-Category :
     (f : map-Small-Large-Category C D γ) →
     is-contr
       ( Σ ( map-Small-Large-Category C D γ)
           ( htpy-map-Small-Large-Category f))
-  is-contr-total-htpy-map-Small-Large-Category =
-    is-contr-total-htpy-map-Small-Large-Precategory
+  is-torsorial-htpy-map-Small-Large-Category =
+    is-torsorial-htpy-map-Small-Large-Precategory
       ( precategory-Category C)
       ( large-precategory-Large-Category D)
 

@@ -102,29 +102,29 @@ module _
     (s t : is-invertible f) → s ＝ t → htpy-is-invertible s t
   htpy-eq-is-invertible s .s refl = refl-htpy-is-invertible s
 
-  is-contr-total-htpy-is-invertible :
+  is-torsorial-htpy-is-invertible :
     (s : is-invertible f) →
     is-contr (Σ (is-invertible f) (htpy-is-invertible s))
-  is-contr-total-htpy-is-invertible s =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-is-invertible s =
+    is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-is-invertible s (x , z))
-      ( is-contr-total-htpy (map-inv-is-invertible s))
+      ( is-torsorial-htpy (map-inv-is-invertible s))
       ( map-inv-is-invertible s , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ x z a →
           coherence-htpy-retraction
             ( retraction-is-invertible s)
             ( retraction-is-invertible (map-inv-is-invertible s , x , z))
             ( refl-htpy))
-        ( is-contr-total-htpy (is-retraction-is-invertible s))
+        ( is-torsorial-htpy (is-retraction-is-invertible s))
         ( is-retraction-is-invertible s , refl-htpy)
-        (is-contr-total-htpy (is-section-is-invertible s)))
+        (is-torsorial-htpy (is-section-is-invertible s)))
 
   is-equiv-htpy-eq-is-invertible :
     (s t : is-invertible f) → is-equiv (htpy-eq-is-invertible s t)
   is-equiv-htpy-eq-is-invertible s =
     fundamental-theorem-id
-      ( is-contr-total-htpy-is-invertible s)
+      ( is-torsorial-htpy-is-invertible s)
       ( htpy-eq-is-invertible s)
 
   extensionality-is-invertible :
@@ -175,37 +175,37 @@ module _
     (s t : invertible-map A B) → s ＝ t → htpy-invertible-map s t
   htpy-eq-invertible-map s .s refl = refl-htpy-invertible-map s
 
-  is-contr-total-htpy-invertible-map :
+  is-torsorial-htpy-invertible-map :
     (s : invertible-map A B) →
     is-contr (Σ (invertible-map A B) (htpy-invertible-map s))
-  is-contr-total-htpy-invertible-map s =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-invertible-map s =
+    is-torsorial-Eq-structure
       ( λ x z H →
         Σ ( map-inv-invertible-map s ~ map-inv-invertible-map (x , z))
           ( coherence-htpy-invertible-map s (x , z) H))
-      ( is-contr-total-htpy (map-invertible-map s))
+      ( is-torsorial-htpy (map-invertible-map s))
       ( map-invertible-map s , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ x z →
           coherence-htpy-invertible-map s
             ( map-invertible-map s , x , z)
             ( refl-htpy))
-        ( is-contr-total-htpy (map-inv-invertible-map s))
+        ( is-torsorial-htpy (map-inv-invertible-map s))
         ( map-inv-invertible-map s , refl-htpy)
-        ( is-contr-total-Eq-structure
+        ( is-torsorial-Eq-structure
           ( λ x z a →
             ( is-section-map-invertible-map s) ~
             ( is-section-map-invertible-map
               ( map-invertible-map s , map-inv-invertible-map s , x , z)))
-          ( is-contr-total-htpy (is-retraction-map-invertible-map s))
+          ( is-torsorial-htpy (is-retraction-map-invertible-map s))
           ( is-retraction-map-invertible-map s , refl-htpy)
-          ( is-contr-total-htpy (is-section-map-invertible-map s))))
+          ( is-torsorial-htpy (is-section-map-invertible-map s))))
 
   is-equiv-htpy-eq-invertible-map :
     (s t : invertible-map A B) → is-equiv (htpy-eq-invertible-map s t)
   is-equiv-htpy-eq-invertible-map s =
     fundamental-theorem-id
-      ( is-contr-total-htpy-invertible-map s)
+      ( is-torsorial-htpy-invertible-map s)
       ( htpy-eq-invertible-map s)
 
   extensionality-invertible-map :

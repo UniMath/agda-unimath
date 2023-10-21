@@ -126,11 +126,11 @@ module _
   htpy-eq-equiv-Abstract-Group-Action .e refl =
     refl-htpy-equiv-Abstract-Group-Action
 
-  is-contr-total-htpy-equiv-Abstract-Group-Action :
+  is-torsorial-htpy-equiv-Abstract-Group-Action :
     is-contr
       ( Σ ( equiv-Abstract-Group-Action G X Y)
           ( htpy-equiv-Abstract-Group-Action))
-  is-contr-total-htpy-equiv-Abstract-Group-Action =
+  is-torsorial-htpy-equiv-Abstract-Group-Action =
     is-contr-equiv
       ( Σ ( Σ ( hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
           ( λ f →
@@ -144,8 +144,8 @@ module _
             ( pr1 f))
         ( equiv-right-swap-Σ)
         ( λ ((f , E) , H) → id-equiv))
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-htpy-hom-Abstract-Group-Action G X Y
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-htpy-hom-Abstract-Group-Action G X Y
           ( hom-equiv-Abstract-Group-Action G X Y e))
         ( λ f → is-property-is-equiv (pr1 f))
         ( hom-equiv-Abstract-Group-Action G X Y e)
@@ -157,7 +157,7 @@ module _
     is-equiv (htpy-eq-equiv-Abstract-Group-Action f)
   is-equiv-htpy-eq-equiv-Abstract-Group-Action =
     fundamental-theorem-id
-      is-contr-total-htpy-equiv-Abstract-Group-Action
+      is-torsorial-htpy-equiv-Abstract-Group-Action
       htpy-eq-equiv-Abstract-Group-Action
 
   extensionality-equiv-Abstract-Group-Action :
@@ -227,18 +227,18 @@ module _
   equiv-eq-Abstract-Group-Action .X refl = id-equiv-Abstract-Group-Action
 
   abstract
-    is-contr-total-equiv-Abstract-Group-Action :
+    is-torsorial-equiv-Abstract-Group-Action :
       is-contr
         ( Σ ( Abstract-Group-Action G l2)
             ( equiv-Abstract-Group-Action G X))
-    is-contr-total-equiv-Abstract-Group-Action =
-      is-contr-total-Eq-structure
+    is-torsorial-equiv-Abstract-Group-Action =
+      is-torsorial-Eq-structure
         ( λ Y ν e →
           (g : type-Group G) →
           htpy-equiv
             ( e ∘e map-hom-Group G (symmetric-Group (pr1 X)) (pr2 X) g)
             ( map-hom-Group G (symmetric-Group Y) ν g ∘e e))
-        ( is-contr-total-equiv-Set (pr1 X))
+        ( is-torsorial-equiv-Set (pr1 X))
         ( pair (pr1 X) id-equiv)
         ( is-contr-equiv
           ( Σ ( hom-Group G (symmetric-Group (pr1 X)))
@@ -251,7 +251,7 @@ module _
                     ( extensionality-equiv
                       ( map-hom-Group G (symmetric-Group (pr1 X)) (pr2 X) g)
                       ( map-hom-Group G (symmetric-Group (pr1 X)) f g)))))
-          ( is-contr-total-htpy-hom-Group G
+          ( is-torsorial-htpy-hom-Group G
             ( symmetric-Group (pr1 X))
             ( pr2 X)))
 
@@ -261,7 +261,7 @@ module _
       is-equiv (equiv-eq-Abstract-Group-Action Y)
     is-equiv-equiv-eq-Abstract-Group-Action =
       fundamental-theorem-id
-        is-contr-total-equiv-Abstract-Group-Action
+        is-torsorial-equiv-Abstract-Group-Action
         equiv-eq-Abstract-Group-Action
 
   eq-equiv-Abstract-Group-Action :

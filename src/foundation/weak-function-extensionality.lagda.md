@@ -86,7 +86,7 @@ abstract
           ( λ t → eq-pair-Σ refl refl))
         ( weak-funext A
           ( λ x → Σ (B x) (λ b → f x ＝ b))
-          ( λ x → is-contr-total-path (f x))))
+          ( λ x → is-torsorial-path (f x))))
       ( λ g → htpy-eq {g = g})
 ```
 

@@ -103,11 +103,11 @@ module _
   is-prop-is-essentially-in-subuniverse X =
     is-prop-is-proof-irrelevant
       ( λ ((X' , p) , e) →
-        is-contr-total-Eq-subtype
+        is-torsorial-Eq-subtype
           ( is-contr-equiv'
             ( Σ (UU _) (λ T → T ≃ X'))
             ( equiv-tot (equiv-postcomp-equiv e))
-            ( is-contr-total-equiv' X'))
+            ( is-torsorial-equiv' X'))
           ( is-prop-is-in-subuniverse P)
           ( X')
           ( e)
@@ -179,23 +179,23 @@ module _
   equiv-eq-subuniverse (pair X p) .(pair X p) refl = id-equiv
 
   abstract
-    is-contr-total-equiv-subuniverse :
+    is-torsorial-equiv-subuniverse :
       (s : type-subuniverse P) →
       is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse s t))
-    is-contr-total-equiv-subuniverse (pair X p) =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-equiv X)
+    is-torsorial-equiv-subuniverse (pair X p) =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-equiv X)
         ( is-subtype-subuniverse P)
         ( X)
         ( id-equiv)
         ( p)
 
-    is-contr-total-equiv-subuniverse' :
+    is-torsorial-equiv-subuniverse' :
       (s : type-subuniverse P) →
       is-contr (Σ (type-subuniverse P) (λ t → equiv-subuniverse t s))
-    is-contr-total-equiv-subuniverse' (pair X p) =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-equiv' X)
+    is-torsorial-equiv-subuniverse' (pair X p) =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-equiv' X)
         ( is-subtype-subuniverse P)
         ( X)
         ( id-equiv)
@@ -206,7 +206,7 @@ module _
       (s t : type-subuniverse P) → is-equiv (equiv-eq-subuniverse s t)
     is-equiv-equiv-eq-subuniverse (pair X p) =
       fundamental-theorem-id
-        ( is-contr-total-equiv-subuniverse (pair X p))
+        ( is-torsorial-equiv-subuniverse (pair X p))
         ( equiv-eq-subuniverse (pair X p))
 
   extensionality-subuniverse :
@@ -246,13 +246,13 @@ module _
     (Y : fam-subuniverse P X) → equiv-fam-subuniverse Y Y
   id-equiv-fam-subuniverse Y x = id-equiv
 
-  is-contr-total-equiv-fam-subuniverse :
+  is-torsorial-equiv-fam-subuniverse :
     (Y : fam-subuniverse P X) →
     is-contr (Σ (fam-subuniverse P X) (equiv-fam-subuniverse Y))
-  is-contr-total-equiv-fam-subuniverse Y =
-    is-contr-total-Eq-Π
+  is-torsorial-equiv-fam-subuniverse Y =
+    is-torsorial-Eq-Π
       ( λ x → equiv-subuniverse P (Y x))
-      ( λ x → is-contr-total-equiv-subuniverse P (Y x))
+      ( λ x → is-torsorial-equiv-subuniverse P (Y x))
 
   equiv-eq-fam-subuniverse :
     (Y Z : fam-subuniverse P X) → Y ＝ Z → equiv-fam-subuniverse Y Z
@@ -262,7 +262,7 @@ module _
     (Y Z : fam-subuniverse P X) → is-equiv (equiv-eq-fam-subuniverse Y Z)
   is-equiv-equiv-eq-fam-subuniverse Y =
     fundamental-theorem-id
-      ( is-contr-total-equiv-fam-subuniverse Y)
+      ( is-torsorial-equiv-fam-subuniverse Y)
       ( equiv-eq-fam-subuniverse Y)
 
   extensionality-fam-subuniverse :

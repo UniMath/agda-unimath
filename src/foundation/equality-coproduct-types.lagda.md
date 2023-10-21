@@ -73,23 +73,23 @@ module _
   eq-Eq-coprod .(inl x) .(inl x) (Eq-eq-coprod-inl {x} {.x} refl) = refl
   eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
 
-  is-contr-total-Eq-coprod :
+  is-torsorial-Eq-coprod :
     (x : A + B) → is-contr (Σ (A + B) (Eq-coprod x))
-  pr1 (pr1 (is-contr-total-Eq-coprod (inl x))) = inl x
-  pr2 (pr1 (is-contr-total-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
+  pr1 (pr1 (is-torsorial-Eq-coprod (inl x))) = inl x
+  pr2 (pr1 (is-torsorial-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
   pr2
-    ( is-contr-total-Eq-coprod (inl x))
+    ( is-torsorial-Eq-coprod (inl x))
     ( pair (inl .x) (Eq-eq-coprod-inl refl)) = refl
-  pr1 (pr1 (is-contr-total-Eq-coprod (inr x))) = inr x
-  pr2 (pr1 (is-contr-total-Eq-coprod (inr x))) = Eq-eq-coprod-inr refl
+  pr1 (pr1 (is-torsorial-Eq-coprod (inr x))) = inr x
+  pr2 (pr1 (is-torsorial-Eq-coprod (inr x))) = Eq-eq-coprod-inr refl
   pr2
-    ( is-contr-total-Eq-coprod (inr x))
+    ( is-torsorial-Eq-coprod (inr x))
     ( pair .(inr x) (Eq-eq-coprod-inr refl)) = refl
 
   is-equiv-Eq-eq-coprod : (x y : A + B) → is-equiv (Eq-eq-coprod x y)
   is-equiv-Eq-eq-coprod x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-coprod x)
+      ( is-torsorial-Eq-coprod x)
       ( Eq-eq-coprod x)
 
   extensionality-coprod : (x y : A + B) → (x ＝ y) ≃ Eq-coprod x y
@@ -234,7 +234,7 @@ module _
         ( is-contr-equiv
           ( Σ A (Id x))
           ( equiv-tot (compute-eq-coprod-inl-inl x))
-          ( is-contr-total-path x))
+          ( is-torsorial-path x))
         ( λ y → ap inl)
 
   emb-inl : A ↪ (A + B)
@@ -248,7 +248,7 @@ module _
         ( is-contr-equiv
           ( Σ B (Id x))
           ( equiv-tot (compute-eq-coprod-inr-inr x))
-          ( is-contr-total-path x))
+          ( is-torsorial-path x))
         ( λ y → ap inr)
 
   emb-inr : B ↪ (A + B)

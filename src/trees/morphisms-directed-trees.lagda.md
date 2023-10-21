@@ -227,10 +227,10 @@ module _
   (f : hom-Directed-Tree S T)
   where
 
-  is-contr-total-htpy-hom-Directed-Tree :
+  is-torsorial-htpy-hom-Directed-Tree :
     is-contr (Σ (hom-Directed-Tree S T) (htpy-hom-Directed-Tree S T f))
-  is-contr-total-htpy-hom-Directed-Tree =
-    is-contr-total-htpy-hom-Directed-Graph
+  is-torsorial-htpy-hom-Directed-Tree =
+    is-torsorial-htpy-hom-Directed-Graph
       ( graph-Directed-Tree S)
       ( graph-Directed-Tree T)
       ( f)

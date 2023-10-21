@@ -210,13 +210,13 @@ module _
               ( Id-Prop B (f p) (g p))
               ( λ where (x , y , refl) → H x y)))
 
-  is-contr-total-htpy-symmetric-operation-Set :
+  is-torsorial-htpy-symmetric-operation-Set :
     is-contr
       ( Σ ( symmetric-operation A (type-Set B))
           ( htpy-symmetric-operation-Set))
-  pr1 is-contr-total-htpy-symmetric-operation-Set =
+  pr1 is-torsorial-htpy-symmetric-operation-Set =
     center-total-htpy-symmetric-operation-Set
-  pr2 is-contr-total-htpy-symmetric-operation-Set =
+  pr2 is-torsorial-htpy-symmetric-operation-Set =
     contraction-total-htpy-symmetric-operation-Set
 
   htpy-eq-symmetric-operation-Set :
@@ -229,7 +229,7 @@ module _
     is-equiv (htpy-eq-symmetric-operation-Set g)
   is-equiv-htpy-eq-symmetric-operation-Set =
     fundamental-theorem-id
-      is-contr-total-htpy-symmetric-operation-Set
+      is-torsorial-htpy-symmetric-operation-Set
       htpy-eq-symmetric-operation-Set
 
   extensionality-symmetric-operation-Set :

@@ -78,9 +78,9 @@ module _
   point-is-pointed-torsorial-family-of-types =
     map-inv-equiv (T (point-Pointed-Type B)) refl
 
-  is-contr-total-space-is-pointed-torsorial-family-of-types :
+  is-torsorial-space-is-pointed-torsorial-family-of-types :
     is-contr (Σ (type-Pointed-Type B) E)
-  is-contr-total-space-is-pointed-torsorial-family-of-types =
+  is-torsorial-space-is-pointed-torsorial-family-of-types =
     fundamental-theorem-id'
       ( λ x → map-inv-equiv (T x))
       ( λ x → is-equiv-map-inv-equiv (T x))
@@ -124,7 +124,7 @@ module _
   pr2
     ( point-and-contractible-total-space-is-pointed-torsorial-family-of-types H)
     =
-    is-contr-total-space-is-pointed-torsorial-family-of-types B H
+    is-torsorial-space-is-pointed-torsorial-family-of-types B H
 ```
 
 ### Pointed connected types equipped with a pointed torsorial family of types of universe level `l` are locally `l`-small

@@ -99,7 +99,7 @@ module _
       is-contr
         ( Σ (C' ≃ C) (λ e → htpy-cone f g (cone-map f g c (map-equiv e)) c'))
     uniquely-unique-pullback c' c up-c' up-c =
-      is-contr-total-Eq-subtype
+      is-torsorial-Eq-subtype
         ( uniqueness-universal-property-pullback f g c up-c C' c')
         ( is-property-is-equiv)
         ( map-universal-property-pullback f g c up-c c')

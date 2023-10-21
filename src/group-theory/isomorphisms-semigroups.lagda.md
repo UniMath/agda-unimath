@@ -298,13 +298,13 @@ module _
   {l : Level} (G : Semigroup l)
   where
 
-  is-contr-total-iso-Semigroup :
+  is-torsorial-iso-Semigroup :
     is-contr (Σ (Semigroup l) (iso-Semigroup G))
-  is-contr-total-iso-Semigroup =
+  is-torsorial-iso-Semigroup =
     is-contr-equiv'
       ( Σ (Semigroup l) (equiv-Semigroup G))
       ( equiv-tot (equiv-iso-equiv-Semigroup G))
-      ( is-contr-total-equiv-Semigroup G)
+      ( is-torsorial-equiv-Semigroup G)
 
   id-iso-Semigroup : iso-Semigroup G G
   id-iso-Semigroup =

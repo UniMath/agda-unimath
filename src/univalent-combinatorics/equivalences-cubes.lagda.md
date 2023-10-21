@@ -66,26 +66,26 @@ equiv-eq-cube :
   (k : ℕ) {X Y : cube k} → Id X Y → equiv-cube k X Y
 equiv-eq-cube k {X} refl = id-equiv-cube k X
 
-is-contr-total-equiv-cube :
+is-torsorial-equiv-cube :
   (k : ℕ) (X : cube k) → is-contr (Σ (cube k) (equiv-cube k X))
-is-contr-total-equiv-cube k X =
-  is-contr-total-Eq-structure
+is-torsorial-equiv-cube k X =
+  is-torsorial-Eq-structure
     ( λ D (A : type-UU-Fin k D → UU-Fin lzero 2)
           (e : equiv-UU-Fin k (dim-cube-UU-Fin k X) D) →
           (i : dim-cube k X) → axis-cube k X i ≃ pr1 (A (map-equiv e i)))
-    ( is-contr-total-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X))
+    ( is-torsorial-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X))
     ( pair
       ( dim-cube-UU-Fin k X)
       ( id-equiv-UU-Fin {k = k} (dim-cube-UU-Fin k X)))
-    ( is-contr-total-Eq-Π
+    ( is-torsorial-Eq-Π
       ( λ i (A : UU-Fin lzero 2) → equiv-UU-Fin 2 (axis-cube-UU-2 k X i) A)
-      ( λ i → is-contr-total-equiv-UU-Fin {k = 2} (axis-cube-UU-2 k X i)))
+      ( λ i → is-torsorial-equiv-UU-Fin {k = 2} (axis-cube-UU-2 k X i)))
 
 is-equiv-equiv-eq-cube :
   (k : ℕ) (X Y : cube k) → is-equiv (equiv-eq-cube k {X} {Y})
 is-equiv-equiv-eq-cube k X =
   fundamental-theorem-id
-    ( is-contr-total-equiv-cube k X)
+    ( is-torsorial-equiv-cube k X)
     ( λ Y → equiv-eq-cube k {X = X} {Y})
 
 eq-equiv-cube :
@@ -117,27 +117,27 @@ htpy-eq-equiv-cube :
   Id e f → htpy-equiv-cube k X Y e f
 htpy-eq-equiv-cube k X Y e .e refl = refl-htpy-equiv-cube k X Y e
 
-is-contr-total-htpy-equiv-cube :
+is-torsorial-htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e : equiv-cube k X Y) →
   is-contr (Σ (equiv-cube k X Y) (htpy-equiv-cube k X Y e))
-is-contr-total-htpy-equiv-cube k X Y e =
-  is-contr-total-Eq-structure
+is-torsorial-htpy-equiv-cube k X Y e =
+  is-torsorial-Eq-structure
     ( λ α β H →
       ( d : dim-cube k X) →
       ( tr (axis-cube k Y) (H d) ∘ map-axis-equiv-cube k X Y e d) ~
       ( map-equiv (β d)))
-    ( is-contr-total-htpy-equiv (dim-equiv-cube k X Y e))
+    ( is-torsorial-htpy-equiv (dim-equiv-cube k X Y e))
     ( pair (dim-equiv-cube k X Y e) refl-htpy)
-    ( is-contr-total-Eq-Π
+    ( is-torsorial-Eq-Π
       ( λ d β → htpy-equiv (axis-equiv-cube k X Y e d) β)
-      ( λ d → is-contr-total-htpy-equiv (axis-equiv-cube k X Y e d)))
+      ( λ d → is-torsorial-htpy-equiv (axis-equiv-cube k X Y e d)))
 
 is-equiv-htpy-eq-equiv-cube :
   (k : ℕ) (X Y : cube k) (e f : equiv-cube k X Y) →
   is-equiv (htpy-eq-equiv-cube k X Y e f)
 is-equiv-htpy-eq-equiv-cube k X Y e =
   fundamental-theorem-id
-    ( is-contr-total-htpy-equiv-cube k X Y e)
+    ( is-torsorial-htpy-equiv-cube k X Y e)
     ( htpy-eq-equiv-cube k X Y e)
 
 eq-htpy-equiv-cube :

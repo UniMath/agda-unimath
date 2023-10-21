@@ -230,13 +230,13 @@ refl-relate-same-elements-congruence-Ring :
 refl-relate-same-elements-congruence-Ring R =
   refl-relate-same-elements-congruence-Semiring (semiring-Ring R)
 
-is-contr-total-relate-same-elements-congruence-Ring :
+is-torsorial-relate-same-elements-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R) →
   is-contr
     ( Σ ( congruence-Ring l2 R)
         ( relate-same-elements-congruence-Ring R S))
-is-contr-total-relate-same-elements-congruence-Ring R =
-  is-contr-total-relate-same-elements-congruence-Semiring
+is-torsorial-relate-same-elements-congruence-Ring R =
+  is-torsorial-relate-same-elements-congruence-Semiring
     ( semiring-Ring R)
 
 relate-same-elements-eq-congruence-Ring :

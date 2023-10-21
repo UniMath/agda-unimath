@@ -255,7 +255,7 @@ abstract
                           ( equiv-is-contr is-contr-raise-unit is-contr-unit))
                         ( Maybe B)))) ∘e
                   ( left-unit-law-Σ-is-contr
-                    ( is-contr-total-true-Prop)
+                    ( is-torsorial-true-Prop)
                     ( pair (raise-unit-Prop _) raise-star)))
                 ( ( equiv-trunc-Prop
                     ( equiv-postcomp-equiv
@@ -265,7 +265,7 @@ abstract
                         ( is-empty-raise-empty))
                       ( Maybe B))) ∘e
                   ( left-unit-law-Σ-is-contr
-                    ( is-contr-total-false-Prop)
+                    ( is-torsorial-false-Prop)
                     ( pair (raise-empty-Prop _) map-inv-raise)))) ∘e
               ( right-distributive-Σ-coprod
                 ( Σ (Prop _) type-Prop)

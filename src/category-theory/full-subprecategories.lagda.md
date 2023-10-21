@@ -245,8 +245,8 @@ module _
     is-category-Precategory (precategory-Full-Subprecategory C P)
   is-category-precategory-is-category-Full-Subprecategory is-category-C X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Category
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Category
           ( C , is-category-C)
           ( inclusion-subtype P X))
         ( is-prop-is-in-subtype P)

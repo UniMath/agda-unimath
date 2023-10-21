@@ -185,11 +185,11 @@ module _
   {l1 l2 : Level} (M : Monoid l1) (N : Monoid l2) (f : hom-Monoid M N)
   where
 
-  is-contr-total-htpy-hom-Monoid :
+  is-torsorial-htpy-hom-Monoid :
     is-contr (Σ (hom-Monoid M N) (htpy-hom-Monoid M N f))
-  is-contr-total-htpy-hom-Monoid =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy-hom-Semigroup
+  is-torsorial-htpy-hom-Monoid =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy-hom-Semigroup
         ( semigroup-Monoid M)
         ( semigroup-Monoid N)
         ( hom-semigroup-hom-Monoid M N f))
@@ -205,7 +205,7 @@ module _
   is-equiv-htpy-eq-hom-Monoid :
     (g : hom-Monoid M N) → is-equiv (htpy-eq-hom-Monoid g)
   is-equiv-htpy-eq-hom-Monoid =
-    fundamental-theorem-id is-contr-total-htpy-hom-Monoid htpy-eq-hom-Monoid
+    fundamental-theorem-id is-torsorial-htpy-hom-Monoid htpy-eq-hom-Monoid
 
   extensionality-hom-Monoid :
     (g : hom-Monoid M N) → (f ＝ g) ≃ htpy-hom-Monoid M N f g

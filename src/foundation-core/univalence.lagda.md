@@ -58,10 +58,10 @@ axiom-univalence = {l : Level} → axiom-univalence-Level l
 
 ```agda
 abstract
-  is-contr-total-equiv-based-univalence :
+  is-torsorial-equiv-based-univalence :
     {l : Level} (A : UU l) →
     axiom-based-univalence A → is-contr (Σ (UU l) (A ≃_))
-  is-contr-total-equiv-based-univalence A UA =
+  is-torsorial-equiv-based-univalence A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
 
@@ -69,10 +69,10 @@ abstract
 
 ```agda
 abstract
-  based-univalence-is-contr-total-equiv :
+  based-univalence-is-torsorial-equiv :
     {l : Level} (A : UU l) →
     is-contr (Σ (UU l) (A ≃_)) → axiom-based-univalence A
-  based-univalence-is-contr-total-equiv A c =
+  based-univalence-is-torsorial-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
 ```
 

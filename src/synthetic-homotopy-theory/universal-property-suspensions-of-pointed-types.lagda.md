@@ -149,7 +149,7 @@ module _
     (suspension-Pointed-Type X →∗ Y) ≃ (X →∗ Ω Y)
   equiv-transpose-suspension-loop-adjunction =
     ( left-unit-law-Σ-is-contr
-      ( is-contr-total-path (point-Pointed-Type Y))
+      ( is-torsorial-path (point-Pointed-Type Y))
       ( point-Pointed-Type Y , refl)) ∘e
     ( inv-associative-Σ
       ( type-Pointed-Type Y)
@@ -165,9 +165,9 @@ module _
         Σ ( point-Pointed-Type Y ＝ pr1 z)
           ( λ x → pr2 z (point-Pointed-Type X) ＝ x))) ∘e
     ( inv-right-unit-law-Σ-is-contr
-      ( λ z → is-contr-total-path (pr2 z (point-Pointed-Type X)))) ∘e
+      ( λ z → is-torsorial-path (pr2 z (point-Pointed-Type X)))) ∘e
     ( left-unit-law-Σ-is-contr
-      ( is-contr-total-path' (point-Pointed-Type Y))
+      ( is-torsorial-path' (point-Pointed-Type Y))
       ( point-Pointed-Type Y , refl)) ∘e
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base

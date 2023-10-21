@@ -129,9 +129,9 @@ module _
   equiv-eq-1-Type = equiv-eq-subuniverse is-1-type-Prop X
 
   abstract
-    is-contr-total-equiv-1-Type : is-contr (Σ (1-Type l) type-equiv-1-Type)
-    is-contr-total-equiv-1-Type =
-      is-contr-total-equiv-subuniverse is-1-type-Prop X
+    is-torsorial-equiv-1-Type : is-contr (Σ (1-Type l) type-equiv-1-Type)
+    is-torsorial-equiv-1-Type =
+      is-torsorial-equiv-subuniverse is-1-type-Prop X
 
   abstract
     is-equiv-equiv-eq-1-Type : (Y : 1-Type l) → is-equiv (equiv-eq-1-Type Y)
