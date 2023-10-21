@@ -26,8 +26,7 @@ open import foundation-core.identity-types
 asserts that for any two types `X` and `Y` in a common universe, the map
 `X ＝ Y → X ≃ Y` is an [embedding](foundation-core.embeddings.md). This axiom is
 a common generalization of the [univalence axiom](foundation.univalence.md) and
-[axiom K](foundation-core.sets.md), in the sense that both univalence and axiom
-K imply preunivalence.
+[axiom K](foundation-core.sets.md).
 
 ## Definition
 
@@ -59,8 +58,8 @@ emb-map-preunivalence L X Y =
 
 ### Preunivalence generalizes axiom K
 
-To show that preunivalence generalizes axiom K, we assume axiom K both for
-types, and for the universe itself.
+To show that preunivalence generalizes axiom K, we assume axiom K for the types
+in question and for the universe itself.
 
 ```agda
 module _
@@ -100,5 +99,4 @@ preunivalence X Y = preunivalence-univalence X Y (univalence X Y)
 - Preunivalence is sufficient to prove that `Id : A → (A → 𝒰)` is an embedding.
   This fact is proven in
   [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)
-
 - [Preunivalent categories](category-theory.preunivalent-catgories.md)
