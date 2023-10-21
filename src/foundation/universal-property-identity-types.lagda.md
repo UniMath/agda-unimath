@@ -101,7 +101,7 @@ Since the codomain of this embedding is contractible, the claim follows. The
 above embedding is constructed as the composite of the following embeddings
 
 ```text
-  Σ (x : A), Id x ＝ Id a
+  Σ (x : A) (Id x ＝ Id a)
     ↪ Σ (x : A), (y : A) → (x ＝ y) ＝ (a ＝ y)
     ↪ Σ (x : A), (y : A) → (x ＝ y) ≃ (a ＝ y)
     ↪ Σ (x : A), Σ (e : (y : A) → (x ＝ y) → (a ＝ y)), (y : A) → is-equiv (e y)
@@ -113,39 +113,47 @@ In this composite, we used preunivalence at the second step.
 
 ```agda
 module _
-  {l : Level} (L : axiom-preunivalence-Level l) (A : UU l)
+  {l : Level} (A : UU l)
+  (L : (a x y : A) → instance-preunivalence (Id x y) (Id a y))
   where
 
-  is-emb-Id-axiom-preunivalence-Level : is-emb (Id {A = A})
-  is-emb-Id-axiom-preunivalence-Level a =
+  emb-fiber-Id-preunivalent-Id :
+    (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
+  emb-fiber-Id-preunivalent-Id a =
+    comp-emb
+      ( comp-emb
+        ( emb-equiv
+          ( equiv-tot
+            ( λ x →
+              ( equiv-ev-refl x) ∘e
+              ( equiv-inclusion-is-full-subtype
+                ( Π-Prop A ∘ (is-equiv-Prop ∘_))
+                ( fundamental-theorem-id (is-torsorial-path a))) ∘e
+              ( distributive-Π-Σ))))
+        ( emb-tot
+          ( λ x →
+            comp-emb
+              ( emb-Π (λ y → _ , L a x y))
+              ( emb-equiv equiv-funext))))
+      ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
+
+  is-emb-Id-preunivalent-Id : is-emb (Id {A = A})
+  is-emb-Id-preunivalent-Id a =
     fundamental-theorem-id
       ( ( a , refl) ,
         ( λ _ →
           is-injective-emb
-            ( emb-fiber a)
+            ( emb-fiber-Id-preunivalent-Id a)
             ( eq-is-contr (is-torsorial-path a))))
       ( λ _ → ap Id)
-    where
-    emb-fiber : (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
-    emb-fiber a =
-      comp-emb
-        ( comp-emb
-          ( emb-equiv
-            ( equiv-tot
-              ( λ x →
-                ( equiv-ev-refl x) ∘e
-                ( ( equiv-inclusion-is-full-subtype
-                    ( Π-Prop A ∘ (is-equiv-Prop ∘_))
-                    ( fundamental-theorem-id (is-torsorial-path a))) ∘e
-                  ( distributive-Π-Σ)))))
-          ( emb-Σ
-            ( λ x → (y : A) → Id x y ≃ Id a y)
-            ( id-emb)
-            ( λ x →
-              comp-emb
-                ( emb-Π (λ y → emb-preunivalence L (Id x y) (Id a y)))
-                ( emb-equiv equiv-funext))))
-        ( emb-equiv (inv-equiv (equiv-fiber Id (Id a))))
+
+module _
+  {l : Level} (L : axiom-preunivalence-Level l) (A : UU l)
+  where
+
+  is-emb-Id-axiom-preunivalence-Level : is-emb (Id {A = A})
+  is-emb-Id-axiom-preunivalence-Level =
+    is-emb-Id-preunivalent-Id A (λ a x y → L (Id x y) (Id a y))
 ```
 
 #### `Id : A → (A → 𝒰)` is an embedding
