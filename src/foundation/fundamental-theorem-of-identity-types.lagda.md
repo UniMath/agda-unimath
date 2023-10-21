@@ -24,14 +24,22 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The *fundamental theorem of identity types* provides a way to characterize
-[identity types](foundation-core.identity-types.md). It uses the fact that a family of maps `f : (x : A) → a ＝ x → B x` is a
-family of [equivalences](foundation-core.equivalences.md) if and only if it induces an equivalence
-`Σ A (Id a) → Σ A B` on [total spaces](foundation.dependent-pair-types.md). Note that the total space `Σ A (Id a)` is
-[contractible](foundation-core.contractible-types.md). Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and
-only if `Σ A B` is contractible. Type families `B` of which the total space `Σ A B` is contractible are also called [torsorial](foundation-core.torsorial-type-families.md). The statement of the fundamental theorem of identity types is therefore:
+The _fundamental theorem of identity types_ provides a way to characterize
+[identity types](foundation-core.identity-types.md). It uses the fact that a
+family of maps `f : (x : A) → a ＝ x → B x` is a family of
+[equivalences](foundation-core.equivalences.md) if and only if it induces an
+equivalence `Σ A (Id a) → Σ A B` on
+[total spaces](foundation.dependent-pair-types.md). Note that the total space
+`Σ A (Id a)` is [contractible](foundation-core.contractible-types.md).
+Therefore, any map `Σ A (Id a) → Σ A B` is an equivalence if and only if `Σ A B`
+is contractible. Type families `B` of which the total space `Σ A B` is
+contractible are also called
+[torsorial](foundation-core.torsorial-type-families.md). The statement of the
+fundamental theorem of identity types is therefore:
 
-**Fundamental theorem of identity types.** Consider a type family `B` over a type `A`, and consider an element `a : A`. Then the following are [logically equivalent](foundation-core.logical-equivalences.md):
+**Fundamental theorem of identity types.** Consider a type family `B` over a
+type `A`, and consider an element `a : A`. Then the following are
+[logically equivalent](foundation-core.logical-equivalences.md):
 
 1. Any family of maps `f : (x : A) → a ＝ x → B x` is a family of equivalences.
 2. The type family `B` is torsorial.
