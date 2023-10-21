@@ -83,6 +83,18 @@ module _
     pr2 (equiv-eq-equiv A B) = is-equiv-eq-equiv A B
 ```
 
+### The total space of all equivalences out of a type or into a type is contractible
+
+Type families of which the [total space](foundation.dependent-pair-types.md) is
+[contractible](foundation-core.contractible-types.md) are also called
+[torsorial](foundation-core.torsorial-type-families.md). This terminology
+originates from higher group theory, where a
+[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
+if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
+i.e., its total space, is contractible. Our claim that the total space of all
+equivalences out of a type `A` is contractible can therefore be stated more
+succinctly as the claim that the family of equivalences out of `A` is torsorial.
+
 ```agda
   abstract
     is-torsorial-equiv :

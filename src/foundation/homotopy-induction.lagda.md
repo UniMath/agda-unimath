@@ -46,6 +46,16 @@ induction-principle-homotopies f =
 
 ### The total space of homotopies is contractible
 
+Type families of which the [total space](foundation.dependent-pair-types.md) is
+[contractible](foundation-core.contractible-types.md) are also called
+[torsorial](foundation-core.torsorial-type-families.md). This terminology
+originates from higher group theory, where a
+[higher group action](higher-group-theory.higher-group-actions.md) is torsorial
+if its type of [orbits](higher-group-theory.orbits-higher-group-actions.md),
+i.e., its total space, is contractible. Our claim that the total space of all
+homotopies from a function `f` is contractible can therefore be stated more
+succinctly as the claim that the family of homotopies from `f` is torsorial.
+
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
