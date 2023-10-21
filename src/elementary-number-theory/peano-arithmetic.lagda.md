@@ -18,17 +18,24 @@ open import foundation.universe-levels
 
 </details>
 
+## Idea
+
 ## Axioms
+
+We state the Peano axioms in type theory, using the
+[identity type](foundation-core.identity-types.md) as equality, and prove that
+they hold for the
+[natural numbers `ℕ`](elementary-number-theory.natural-numbers.md).
 
 ### Peano's 1st axiom
 
 There is an element **zero** of the natural numbers.
 
 ```agda
-peano-1-axiom : {l : Level} → UU l → UU l
-peano-1-axiom N = N
+peano-axiom-1 : {l : Level} → UU l → UU l
+peano-axiom-1 N = N
 
-peano-1-ℕ : peano-1-axiom ℕ
+peano-1-ℕ : peano-axiom-1 ℕ
 peano-1-ℕ = zero-ℕ
 ```
 
@@ -37,10 +44,10 @@ peano-1-ℕ = zero-ℕ
 The identity relation is reflexive on the natural numbers.
 
 ```agda
-peano-2-axiom : {l : Level} → UU l → UU l
-peano-2-axiom N = (x : N) → x ＝ x
+peano-axiom-2 : {l : Level} → UU l → UU l
+peano-axiom-2 N = (x : N) → x ＝ x
 
-peano-2-ℕ : peano-2-axiom ℕ
+peano-2-ℕ : peano-axiom-2 ℕ
 peano-2-ℕ x = refl
 ```
 
@@ -49,10 +56,10 @@ peano-2-ℕ x = refl
 The identity relation on the natural numbers is symmetric.
 
 ```agda
-peano-3-axiom : {l : Level} → UU l → UU l
-peano-3-axiom N = (x y : N) → x ＝ y → y ＝ x
+peano-axiom-3 : {l : Level} → UU l → UU l
+peano-axiom-3 N = (x y : N) → x ＝ y → y ＝ x
 
-peano-3-ℕ : peano-3-axiom ℕ
+peano-3-ℕ : peano-axiom-3 ℕ
 peano-3-ℕ x y = inv
 ```
 
@@ -61,10 +68,10 @@ peano-3-ℕ x y = inv
 The identity relation on the natural numbers is transitive.
 
 ```agda
-peano-4-axiom : {l : Level} → UU l → UU l
-peano-4-axiom N = (x y z : N) → y ＝ z → x ＝ y → x ＝ z
+peano-axiom-4 : {l : Level} → UU l → UU l
+peano-axiom-4 N = (x y z : N) → y ＝ z → x ＝ y → x ＝ z
 
-peano-4-ℕ : peano-4-axiom ℕ
+peano-4-ℕ : peano-axiom-4 ℕ
 peano-4-ℕ x y z = concat' x
 ```
 
@@ -80,10 +87,10 @@ specified type.
 For every natural number, there is a **successor** natural number.
 
 ```agda
-peano-6-axiom : {l : Level} → UU l → UU l
-peano-6-axiom N = N → N
+peano-axiom-6 : {l : Level} → UU l → UU l
+peano-axiom-6 N = N → N
 
-peano-6-ℕ : peano-6-axiom ℕ
+peano-6-ℕ : peano-axiom-6 ℕ
 peano-6-ℕ = succ-ℕ
 ```
 
@@ -93,10 +100,10 @@ For two natural numbers `x` and `y`, if the successor of `x` is identified with
 the successor of `y`, then `x` is identified with `y`.
 
 ```agda
-peano-7-axiom : {l : Level} (N : UU l) → peano-6-axiom N → UU l
-peano-7-axiom N succ = (x y : N) → (x ＝ y) ↔ (succ x ＝ succ y)
+peano-axiom-7 : {l : Level} (N : UU l) → peano-axiom-6 N → UU l
+peano-axiom-7 N succ = (x y : N) → (x ＝ y) ↔ (succ x ＝ succ y)
 
-peano-7-ℕ : peano-7-axiom ℕ peano-6-ℕ
+peano-7-ℕ : peano-axiom-7 ℕ peano-6-ℕ
 pr1 (peano-7-ℕ x y) refl = refl
 pr2 (peano-7-ℕ x y) = is-injective-succ-ℕ
 ```
@@ -106,13 +113,39 @@ pr2 (peano-7-ℕ x y) = is-injective-succ-ℕ
 The zero natural number may not be identified with any successor natural number.
 
 ```agda
-peano-8-axiom :
-  {l : Level} (N : UU l) → peano-1-axiom N → peano-6-axiom N → UU l
-peano-8-axiom N zero succ = (x : N) → succ x ≠ zero
+peano-axiom-8 :
+  {l : Level} (N : UU l) → peano-axiom-1 N → peano-axiom-6 N → UU l
+peano-axiom-8 N zero succ = (x : N) → succ x ≠ zero
 
-peano-8-ℕ : peano-8-axiom ℕ peano-1-ℕ peano-6-ℕ
+peano-8-ℕ : peano-axiom-8 ℕ peano-1-ℕ peano-6-ℕ
 peano-8-ℕ = is-nonzero-succ-ℕ
 ```
+
+### Peano's 9th axiom
+
+The natural numbers satisfy the following
+[propositional](foundation-core.propositions.md) induction principle:
+
+Given a predicate on the natural numbers `P : N → Prop`, then if
+
+- `P zero` holds,
+
+and
+
+- if `P x` holds then `P (succ x)` holds,
+
+then `P x` holds for all natural numbers `x`.
+
+```agda
+peano-axiom-9 :
+  {l : Level} (N : UU l) → peano-axiom-1 N → peano-axiom-6 N → UU l
+peano-axiom-9 N zero succ = (x : N) → succ x ≠ zero
+
+peano-9-ℕ : peano-axiom-9 ℕ peano-1-ℕ peano-6-ℕ
+peano-9-ℕ = ?
+```
+
+## References
 
 ## External links
 
