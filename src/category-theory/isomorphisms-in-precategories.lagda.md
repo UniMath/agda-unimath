@@ -164,7 +164,8 @@ module _
   iso-eq-Precategory :
     (x y : obj-Precategory C) →
     x ＝ y → iso-Precategory C x y
-  iso-eq-Precategory x .x refl = id-iso-Precategory C
+  pr1 (iso-eq-Precategory x y p) = hom-eq-Precategory C x y p
+  pr2 (iso-eq-Precategory x .x refl) = is-iso-id-hom-Precategory C
 
   compute-hom-iso-eq-Precategory :
     {x y : obj-Precategory C} →
