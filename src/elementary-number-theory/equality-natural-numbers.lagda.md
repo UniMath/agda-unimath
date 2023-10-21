@@ -32,9 +32,9 @@ open import foundation-core.torsorial-type-families
 
 </details>
 
-## Properties
+## Definitions
 
-### The type of natural numbers is a set
+### Observational equality on the natural numbers
 
 ```agda
 Eq-ℕ : ℕ → ℕ → UU lzero
@@ -42,7 +42,13 @@ Eq-ℕ zero-ℕ zero-ℕ = unit
 Eq-ℕ zero-ℕ (succ-ℕ n) = empty
 Eq-ℕ (succ-ℕ m) zero-ℕ = empty
 Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
+```
 
+## Properties
+
+### The type of natural numbers is a set
+
+```agda
 abstract
   is-prop-Eq-ℕ :
     (n m : ℕ) → is-prop (Eq-ℕ n m)
