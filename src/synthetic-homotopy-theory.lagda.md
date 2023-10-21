@@ -15,6 +15,7 @@ open import synthetic-homotopy-theory.cavallos-trick public
 open import synthetic-homotopy-theory.circle public
 open import synthetic-homotopy-theory.cocones-under-spans public
 open import synthetic-homotopy-theory.cocones-under-spans-of-pointed-types public
+open import synthetic-homotopy-theory.codiagonals-of-maps public
 open import synthetic-homotopy-theory.coequalizers public
 open import synthetic-homotopy-theory.cofibers public
 open import synthetic-homotopy-theory.coforks public
@@ -22,6 +23,7 @@ open import synthetic-homotopy-theory.conjugation-loops public
 open import synthetic-homotopy-theory.connected-set-bundles-circle public
 open import synthetic-homotopy-theory.dependent-cocones-under-spans public
 open import synthetic-homotopy-theory.dependent-coforks public
+open import synthetic-homotopy-theory.dependent-descent-circle public
 open import synthetic-homotopy-theory.dependent-pullback-property-pushouts public
 open import synthetic-homotopy-theory.dependent-suspension-structures public
 open import synthetic-homotopy-theory.dependent-universal-property-coequalizers public
@@ -46,12 +48,17 @@ open import synthetic-homotopy-theory.infinite-complex-projective-space public
 open import synthetic-homotopy-theory.infinite-cyclic-types public
 open import synthetic-homotopy-theory.interval-type public
 open import synthetic-homotopy-theory.iterated-loop-spaces public
+open import synthetic-homotopy-theory.iterated-suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.join-powers-of-types public
 open import synthetic-homotopy-theory.joins-of-types public
 open import synthetic-homotopy-theory.loop-spaces public
+open import synthetic-homotopy-theory.maps-of-prespectra public
+open import synthetic-homotopy-theory.mere-spheres public
+open import synthetic-homotopy-theory.morphisms-descent-data-circle public
 open import synthetic-homotopy-theory.multiplication-circle public
 open import synthetic-homotopy-theory.plus-principle public
 open import synthetic-homotopy-theory.powers-of-loops public
+open import synthetic-homotopy-theory.premanifolds public
 open import synthetic-homotopy-theory.prespectra public
 open import synthetic-homotopy-theory.pullback-property-pushouts public
 open import synthetic-homotopy-theory.pushouts public
@@ -59,10 +66,13 @@ open import synthetic-homotopy-theory.pushouts-of-pointed-types public
 open import synthetic-homotopy-theory.sections-descent-circle public
 open import synthetic-homotopy-theory.smash-products-of-pointed-types public
 open import synthetic-homotopy-theory.spectra public
+open import synthetic-homotopy-theory.sphere-prespectrum public
 open import synthetic-homotopy-theory.spheres public
+open import synthetic-homotopy-theory.suspension-prespectra public
 open import synthetic-homotopy-theory.suspension-structures public
 open import synthetic-homotopy-theory.suspensions-of-pointed-types public
 open import synthetic-homotopy-theory.suspensions-of-types public
+open import synthetic-homotopy-theory.tangent-spheres public
 open import synthetic-homotopy-theory.triple-loop-spaces public
 open import synthetic-homotopy-theory.universal-cover-circle public
 open import synthetic-homotopy-theory.universal-property-circle public

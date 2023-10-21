@@ -27,8 +27,10 @@ open import order-theory.preorders
 
 ## Idea
 
-A **poset** is a set equipped with a reflexive, antisymmetric, transitive
-relation that takes values in propositions.
+A **poset** is a [set](foundation-core.sets.md)
+[equipped](foundation.structure.md) with a reflexive, antisymmetric, transitive
+[relation](foundation.binary-relations.md) that takes values in
+[propositions](foundation-core.propositions.md).
 
 ## Definition
 
@@ -93,7 +95,7 @@ module _
       ( λ x y → leq-Poset x y × leq-Poset y x)
       ( λ x y → is-prop-prod (is-prop-leq-Poset x y) (is-prop-leq-Poset y x))
       ( λ x → refl-leq-Poset x , refl-leq-Poset x)
-      ( λ {x y (H , K) → antisymmetric-leq-Poset x y H K})
+      ( λ x y (H , K) → antisymmetric-leq-Poset x y H K)
 
   set-Poset : Set l1
   pr1 set-Poset = type-Poset

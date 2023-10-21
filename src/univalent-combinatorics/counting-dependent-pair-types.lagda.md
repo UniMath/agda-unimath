@@ -149,7 +149,7 @@ count-fiber-map-section-family :
 count-fiber-map-section-family {l1} {l2} {A} {B} b e f (pair y z) =
   count-equiv'
     ( ( ( left-unit-law-Σ-is-contr
-            ( is-contr-total-path' y)
+            ( is-torsorial-path' y)
             ( pair y refl)) ∘e
         ( inv-associative-Σ A
           ( λ x → Id x y)

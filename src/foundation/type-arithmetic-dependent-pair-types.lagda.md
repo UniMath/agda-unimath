@@ -21,6 +21,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.singleton-induction
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -45,7 +46,7 @@ module _
   map-left-unit-law-Σ-is-contr : Σ A B → B a
   map-left-unit-law-Σ-is-contr =
     ind-Σ
-      ( ind-singleton-is-contr a C
+      ( ind-singleton a C
         ( λ x → B x → B a)
         ( id))
 
@@ -54,13 +55,13 @@ module _
   is-section-map-inv-left-unit-law-Σ-is-contr b =
     ap
       ( λ (f : B a → B a) → f b)
-      ( compute-ind-singleton-is-contr a C (λ x → B x → B a) id)
+      ( compute-ind-singleton a C (λ x → B x → B a) id)
 
   is-retraction-map-inv-left-unit-law-Σ-is-contr :
     ( map-inv-left-unit-law-Σ-is-contr ∘ map-left-unit-law-Σ-is-contr) ~ id
   is-retraction-map-inv-left-unit-law-Σ-is-contr =
     ind-Σ
-      ( ind-singleton-is-contr a C
+      ( ind-singleton a C
         ( λ x →
           ( y : B x) →
             Id
@@ -72,7 +73,7 @@ module _
           ( map-inv-left-unit-law-Σ-is-contr)
           ( ap
             ( λ f → f y)
-            ( compute-ind-singleton-is-contr a C (λ x → B x → B a) id))))
+            ( compute-ind-singleton a C (λ x → B x → B a) id))))
 
   is-equiv-map-left-unit-law-Σ-is-contr :
     is-equiv map-left-unit-law-Σ-is-contr
@@ -307,7 +308,7 @@ module _
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
 
   eq-interchange-Σ-Σ-is-contr :
-    {a : A} {b : B a} → is-contr (Σ (C a) (D a b)) →
+    {a : A} {b : B a} → is-torsorial (D a b) →
     {x y : Σ (C a) (D a b)} →
     map-equiv interchange-Σ-Σ ((a , b) , x) ＝
     map-equiv interchange-Σ-Σ ((a , b) , y)

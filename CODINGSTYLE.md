@@ -128,6 +128,49 @@ strategic endeavour to ensure the longevity, vitality, and success of the
     a = construction-of-a
   ```
 
+- **Lambda expressions**: When a lambda expression appears as the argument of a
+  function, we always wrap it in parentheses. We do this even if it is the last
+  argument and thus isn't strictly required to be parenthesized. Note that in
+  some rare cases, a lambda expression might appear at the top level. In this
+  case we don't require the lambda expression to be parenthesized.
+
+  There are multiple syntaxes for writing lambda expressions in Agda. Generally,
+  you have the following options:
+
+  1. Regular lambda expressions without pattern matching:
+
+     ```agda
+     λ x → x
+     ```
+
+  2. Pattern matching lambda expressions on record types:
+
+     ```agda
+     λ (x , y) → x
+     ```
+
+     This syntax only applies to record types with $η$-equality.
+
+  3. Pattern matching lambda expressions with `{...}`:
+
+     ```agda
+     λ { (inl x) → ... ; (inr y) → ...}
+     ```
+
+  4. Pattern matching lambda expressions using the `where` keyword:
+
+     ```agda
+     λ where refl → refl
+     ```
+
+  All four syntaxes are in use in the library, although when possible we try to
+  avoid general pattern matching lambdas, i.e. syntaxes 3 and 4. If need be, we
+  prefer pattern matching using the `where` keyword over the `{...}` syntax.
+  Note that whenever syntax 3 or 4 appear in as part of a construction, the
+  definition should be marked as `abstract`. If computation is necessary for a
+  definition that has these syntaxes in them, this suggests the relevant lambda
+  expression(s) deserve to be factored out as separate definitions.
+
 ## Code comments
 
 Given that the files in `agda-unimath` are literate Agda markdown files,
@@ -241,7 +284,7 @@ the `agda-unimath` library:
   need to sort them by hand.
 
 - The library doesn't use
-  [variables](https://agda.readthedocs.io/en/v2.6.3/language/generalization-of-declared-variables.html)
+  [variables](https://agda.readthedocs.io/en/latest/language/generalization-of-declared-variables.html)
   at the moment. All variables are declared either as parameters of an anonymous
   module or in the type specification of a construction.
 

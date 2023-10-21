@@ -10,6 +10,7 @@ module elementary-number-theory.natural-numbers where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.logical-equivalences
+open import foundation.negation
 open import foundation.unit-type
 open import foundation.universe-levels
 
@@ -20,7 +21,6 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
-open import foundation-core.negation
 open import foundation-core.propositions
 open import foundation-core.sets
 ```
@@ -113,7 +113,7 @@ is-nonzero-succ-ℕ : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
 is-nonzero-succ-ℕ x ()
 
 is-nonzero-is-successor-ℕ : {x : ℕ} → is-successor-ℕ x → is-nonzero-ℕ x
-is-nonzero-is-successor-ℕ (pair x refl) ()
+is-nonzero-is-successor-ℕ (x , refl) ()
 
 is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-ℕ x
 is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)

@@ -17,6 +17,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -113,14 +114,12 @@ module _
     Eq-classifying-type-Automorphism-∞-Group X X
   refl-Eq-classifying-type-Automorphism-∞-Group X = refl
 
-  is-contr-total-Eq-classifying-type-Automorphism-∞-Group :
+  is-torsorial-Eq-classifying-type-Automorphism-∞-Group :
     (X : classifying-type-Automorphism-∞-Group A a) →
-    is-contr
-      ( Σ ( classifying-type-Automorphism-∞-Group A a)
-          ( Eq-classifying-type-Automorphism-∞-Group X))
-  is-contr-total-Eq-classifying-type-Automorphism-∞-Group X =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-path (pr1 X))
+    is-torsorial (Eq-classifying-type-Automorphism-∞-Group X)
+  is-torsorial-Eq-classifying-type-Automorphism-∞-Group X =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-path (pr1 X))
       ( λ a → is-prop-type-trunc-Prop)
       ( pr1 X)
       ( refl)
@@ -137,7 +136,7 @@ module _
     is-equiv (Eq-eq-classifying-type-Automorphism-∞-Group X Y)
   is-equiv-Eq-eq-classifying-type-Automorphism-∞-Group X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-classifying-type-Automorphism-∞-Group X)
+      ( is-torsorial-Eq-classifying-type-Automorphism-∞-Group X)
       ( Eq-eq-classifying-type-Automorphism-∞-Group X)
 
   extensionality-classifying-type-Automorphism-∞-Group :
@@ -173,13 +172,11 @@ module _
   refl-Eq-classifying-type-Automorphism-Group =
     refl-Eq-classifying-type-Automorphism-∞-Group a
 
-  is-contr-total-Eq-classifying-type-Automorphism-Group :
+  is-torsorial-Eq-classifying-type-Automorphism-Group :
     (X : classifying-type-Automorphism-Group A a) →
-    is-contr
-      ( Σ ( classifying-type-Automorphism-Group A a)
-          ( Eq-classifying-type-Automorphism-Group X))
-  is-contr-total-Eq-classifying-type-Automorphism-Group =
-    is-contr-total-Eq-classifying-type-Automorphism-∞-Group a
+    is-torsorial (Eq-classifying-type-Automorphism-Group X)
+  is-torsorial-Eq-classifying-type-Automorphism-Group =
+    is-torsorial-Eq-classifying-type-Automorphism-∞-Group a
 
   Eq-eq-classifying-type-Automorphism-Group :
     (X Y : classifying-type-Automorphism-Group A a) →
@@ -192,7 +189,7 @@ module _
     is-equiv (Eq-eq-classifying-type-Automorphism-Group X Y)
   is-equiv-Eq-eq-classifying-type-Automorphism-Group X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-classifying-type-Automorphism-Group X)
+      ( is-torsorial-Eq-classifying-type-Automorphism-Group X)
       ( Eq-eq-classifying-type-Automorphism-Group X)
 
   extensionality-classifying-type-Automorphism-Group :

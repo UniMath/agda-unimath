@@ -18,6 +18,7 @@ open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.univalence
 open import foundation.universe-levels
 
@@ -109,26 +110,24 @@ module _
                         ( μ (μ x y) z) (μ x (μ y z))))))
         ( eq-htpy (λ x → eq-htpy (λ y → μ-id x y))))
 
-  is-contr-total-preserves-mul-id-Semigroup :
-    is-contr
-      ( Σ ( has-associative-mul (type-Semigroup G))
-          ( λ μ → preserves-mul (mul-Semigroup G) (pr1 μ) id))
-  pr1 is-contr-total-preserves-mul-id-Semigroup =
+  is-torsorial-preserves-mul-id-Semigroup :
+    is-torsorial (λ μ → preserves-mul (mul-Semigroup G) (pr1 μ) id)
+  pr1 is-torsorial-preserves-mul-id-Semigroup =
     center-total-preserves-mul-id-Semigroup
-  pr2 is-contr-total-preserves-mul-id-Semigroup =
+  pr2 is-torsorial-preserves-mul-id-Semigroup =
     contraction-total-preserves-mul-id-Semigroup
 
-  is-contr-total-equiv-Semigroup :
-    is-contr (Σ (Semigroup l) (equiv-Semigroup G))
-  is-contr-total-equiv-Semigroup =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Semigroup :
+    is-torsorial (equiv-Semigroup G)
+  is-torsorial-equiv-Semigroup =
+    is-torsorial-Eq-structure
       ( λ H μH → preserves-mul-equiv-Semigroup G (pair H μH))
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-equiv (type-Semigroup G))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-equiv (type-Semigroup G))
         ( is-prop-is-set)
         ( type-Semigroup G)
         ( id-equiv)
         ( is-set-type-Semigroup G))
       ( pair (set-Semigroup G) id-equiv)
-      ( is-contr-total-preserves-mul-id-Semigroup)
+      ( is-torsorial-preserves-mul-id-Semigroup)
 ```

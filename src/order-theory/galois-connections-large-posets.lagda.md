@@ -22,8 +22,8 @@ open import order-theory.order-preserving-maps-large-posets
 A **galois connection** between [large posets](order-theory.large-posets.md) `P`
 and `Q` consists of
 [order preserving maps](order-theory.order-preserving-maps-large-posets.md)
-`f : hom-set-Large-Poset id P Q` and `hom-set-Large-Poset id Q P` such that the
-adjoint relation
+`f : hom-set-Large-Poset (λ l → l) P Q` and `hom-set-Large-Poset id Q P` such
+that the adjoint relation
 
 ```text
   (f x ≤ y) ↔ (x ≤ g y)

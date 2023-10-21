@@ -17,6 +17,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -25,85 +26,133 @@ open import structured-types.types-equipped-with-endomorphisms
 
 </details>
 
+## Idea
+
+Consider two
+[types equipped with an endomorphism](structured-types.types-equipped-with-endomorphisms.md)
+`(X,f)` and `(Y,g)`. A **morphism** from `(X,f)` to `(Y,g)` consists of a map
+`h : X → Y` equipped with a [homotopy](foundation-core.homotopies.md) witnessing
+that the square
+
+```text
+      h
+  X -----> Y
+  |        |
+ f|        |g
+  V        V
+  X -----> Y
+      h
+```
+
+[commutes](foundation.commuting-squares-of-maps.md).
+
 ## Definition
 
 ### Morphisms of types equipped with endomorphisms
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Endo l1) (Y : Endo l2)
+  {l1 l2 : Level}
+  (X : Type-With-Endomorphism l1) (Y : Type-With-Endomorphism l2)
   where
 
-  hom-Endo : UU (l1 ⊔ l2)
-  hom-Endo =
-    Σ ( type-Endo X → type-Endo Y)
+  hom-Type-With-Endomorphism : UU (l1 ⊔ l2)
+  hom-Type-With-Endomorphism =
+    Σ ( type-Type-With-Endomorphism X → type-Type-With-Endomorphism Y)
       ( λ f →
-        coherence-square-maps f (endomorphism-Endo X) (endomorphism-Endo Y) f)
+        coherence-square-maps
+          ( f)
+          ( endomorphism-Type-With-Endomorphism X)
+          ( endomorphism-Type-With-Endomorphism Y)
+          ( f))
 
-  map-hom-Endo : hom-Endo → type-Endo X → type-Endo Y
-  map-hom-Endo = pr1
+  map-hom-Type-With-Endomorphism :
+    hom-Type-With-Endomorphism →
+    type-Type-With-Endomorphism X → type-Type-With-Endomorphism Y
+  map-hom-Type-With-Endomorphism = pr1
 
-  coherence-square-hom-Endo :
-    (f : hom-Endo) →
+  coherence-square-hom-Type-With-Endomorphism :
+    (f : hom-Type-With-Endomorphism) →
     coherence-square-maps
-      ( map-hom-Endo f)
-      ( endomorphism-Endo X)
-      ( endomorphism-Endo Y)
-      ( map-hom-Endo f)
-  coherence-square-hom-Endo = pr2
+      ( map-hom-Type-With-Endomorphism f)
+      ( endomorphism-Type-With-Endomorphism X)
+      ( endomorphism-Type-With-Endomorphism Y)
+      ( map-hom-Type-With-Endomorphism f)
+  coherence-square-hom-Type-With-Endomorphism = pr2
 ```
 
 ### Homotopies of morphisms of types equipped with endomorphisms
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Endo l1) (Y : Endo l2)
+  {l1 l2 : Level}
+  (X : Type-With-Endomorphism l1) (Y : Type-With-Endomorphism l2)
   where
 
-  htpy-hom-Endo : (f g : hom-Endo X Y) → UU (l1 ⊔ l2)
-  htpy-hom-Endo f g =
-    Σ ( map-hom-Endo X Y f ~ map-hom-Endo X Y g)
+  htpy-hom-Type-With-Endomorphism :
+    (f g : hom-Type-With-Endomorphism X Y) → UU (l1 ⊔ l2)
+  htpy-hom-Type-With-Endomorphism f g =
+    Σ ( map-hom-Type-With-Endomorphism X Y f ~
+        map-hom-Type-With-Endomorphism X Y g)
       ( λ H →
-        ( (H ·r endomorphism-Endo X) ∙h coherence-square-hom-Endo X Y g) ~
-        ( coherence-square-hom-Endo X Y f ∙h (endomorphism-Endo Y ·l H)))
+        ( ( H ·r endomorphism-Type-With-Endomorphism X) ∙h
+          ( coherence-square-hom-Type-With-Endomorphism X Y g)) ~
+        ( ( coherence-square-hom-Type-With-Endomorphism X Y f) ∙h
+          ( endomorphism-Type-With-Endomorphism Y ·l H)))
 
-  refl-htpy-hom-Endo : (f : hom-Endo X Y) → htpy-hom-Endo f f
-  pr1 (refl-htpy-hom-Endo f) = refl-htpy
-  pr2 (refl-htpy-hom-Endo f) = inv-htpy-right-unit-htpy
+  refl-htpy-hom-Type-With-Endomorphism :
+    (f : hom-Type-With-Endomorphism X Y) → htpy-hom-Type-With-Endomorphism f f
+  pr1 (refl-htpy-hom-Type-With-Endomorphism f) = refl-htpy
+  pr2 (refl-htpy-hom-Type-With-Endomorphism f) = inv-htpy-right-unit-htpy
 
-  htpy-eq-hom-Endo : (f g : hom-Endo X Y) → Id f g → htpy-hom-Endo f g
-  htpy-eq-hom-Endo f .f refl = refl-htpy-hom-Endo f
+  htpy-eq-hom-Type-With-Endomorphism :
+    (f g : hom-Type-With-Endomorphism X Y) →
+    f ＝ g → htpy-hom-Type-With-Endomorphism f g
+  htpy-eq-hom-Type-With-Endomorphism f .f refl =
+    refl-htpy-hom-Type-With-Endomorphism f
 
-  is-contr-total-htpy-hom-Endo :
-    (f : hom-Endo X Y) → is-contr (Σ (hom-Endo X Y) (htpy-hom-Endo f))
-  is-contr-total-htpy-hom-Endo f =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-hom-Type-With-Endomorphism :
+    (f : hom-Type-With-Endomorphism X Y) →
+    is-torsorial (htpy-hom-Type-With-Endomorphism f)
+  is-torsorial-htpy-hom-Type-With-Endomorphism f =
+    is-torsorial-Eq-structure
       ( λ g G H →
-        ( (H ·r endomorphism-Endo X) ∙h G) ~
-        ( coherence-square-hom-Endo X Y f ∙h (endomorphism-Endo Y ·l H)))
-      ( is-contr-total-htpy (map-hom-Endo X Y f))
-      ( pair (map-hom-Endo X Y f) refl-htpy)
+        ( ( H ·r endomorphism-Type-With-Endomorphism X) ∙h
+          ( G)) ~
+        ( ( coherence-square-hom-Type-With-Endomorphism X Y f) ∙h
+          ( endomorphism-Type-With-Endomorphism Y ·l H)))
+      ( is-torsorial-htpy (map-hom-Type-With-Endomorphism X Y f))
+      ( map-hom-Type-With-Endomorphism X Y f , refl-htpy)
       ( is-contr-equiv
         ( Σ ( coherence-square-maps
-              ( map-hom-Endo X Y f)
-              ( endomorphism-Endo X)
-              ( endomorphism-Endo Y)
-              ( map-hom-Endo X Y f))
-            ( λ H → H ~ coherence-square-hom-Endo X Y f))
+              ( map-hom-Type-With-Endomorphism X Y f)
+              ( endomorphism-Type-With-Endomorphism X)
+              ( endomorphism-Type-With-Endomorphism Y)
+              ( map-hom-Type-With-Endomorphism X Y f))
+            ( λ H → H ~ coherence-square-hom-Type-With-Endomorphism X Y f))
         ( equiv-tot (λ H → equiv-concat-htpy' H right-unit-htpy))
-        ( is-contr-total-htpy' (coherence-square-hom-Endo X Y f)))
+        ( is-torsorial-htpy'
+          ( coherence-square-hom-Type-With-Endomorphism X Y f)))
 
-  is-equiv-htpy-eq-hom-Endo :
-    (f g : hom-Endo X Y) → is-equiv (htpy-eq-hom-Endo f g)
-  is-equiv-htpy-eq-hom-Endo f =
+  is-equiv-htpy-eq-hom-Type-With-Endomorphism :
+    (f g : hom-Type-With-Endomorphism X Y) →
+    is-equiv (htpy-eq-hom-Type-With-Endomorphism f g)
+  is-equiv-htpy-eq-hom-Type-With-Endomorphism f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-Endo f)
-      ( htpy-eq-hom-Endo f)
+      ( is-torsorial-htpy-hom-Type-With-Endomorphism f)
+      ( htpy-eq-hom-Type-With-Endomorphism f)
 
-  extensionality-hom-Endo : (f g : hom-Endo X Y) → Id f g ≃ htpy-hom-Endo f g
-  pr1 (extensionality-hom-Endo f g) = htpy-eq-hom-Endo f g
-  pr2 (extensionality-hom-Endo f g) = is-equiv-htpy-eq-hom-Endo f g
+  extensionality-hom-Type-With-Endomorphism :
+    (f g : hom-Type-With-Endomorphism X Y) →
+    (f ＝ g) ≃ htpy-hom-Type-With-Endomorphism f g
+  pr1 (extensionality-hom-Type-With-Endomorphism f g) =
+    htpy-eq-hom-Type-With-Endomorphism f g
+  pr2 (extensionality-hom-Type-With-Endomorphism f g) =
+    is-equiv-htpy-eq-hom-Type-With-Endomorphism f g
 
-  eq-htpy-hom-Endo : (f g : hom-Endo X Y) → htpy-hom-Endo f g → Id f g
-  eq-htpy-hom-Endo f g = map-inv-equiv (extensionality-hom-Endo f g)
+  eq-htpy-hom-Type-With-Endomorphism :
+    ( f g : hom-Type-With-Endomorphism X Y) →
+    htpy-hom-Type-With-Endomorphism f g → f ＝ g
+  eq-htpy-hom-Type-With-Endomorphism f g =
+    map-inv-equiv (extensionality-hom-Type-With-Endomorphism f g)
 ```

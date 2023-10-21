@@ -2,7 +2,7 @@
 
 This document outlines our choices of conventions for setting precedence levels
 and associativity of
-[mixfix operators in Agda](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html),
+[mixfix operators in Agda](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html),
 and provides guidelines for this.
 
 ## Mixfix operators in Agda
@@ -16,7 +16,7 @@ and mixfix operators in Agda is to make the code more readable by using commonly
 accepted notation for widely used operators.
 
 Mixfix operators can each be assigned a
-[precedence level](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html#precedence).
+[precedence level](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html#precedence).
 This can in principle be any signed fractional value, although we prefer them to
 be non-negative integral values. The higher this value is, the higher precedence
 the operator has, meaning it is evaluated before operators with lower
@@ -32,7 +32,7 @@ is parsed as `x +ℕ (y *ℕ z)`.
 
 In addition to a precedence level, every mixfix operator can be defined to be
 either left or right
-[associative](https://agda.readthedocs.io/en/v2.6.3.20230805/language/mixfix-operators.html#associativity).
+[associative](https://agda.readthedocs.io/en/latest/language/mixfix-operators.html#associativity).
 It can be beneficial to define associativity of operators, to avoid excessively
 parenthesized expressions. The parenthization should, however, never be omitted
 when this can make the code more ambiguous or harder to read.
@@ -170,7 +170,7 @@ Below, we outline a list of general rules when assigning associativities.
 | 40               | Multiplicative arithmetic operators                                                                                                                                                                                                        |
 | 36               | Subtractive arithmetic operators                                                                                                                                                                                                           |
 | 35               | Additive arithmetic operators                                                                                                                                                                                                              |
-| 30               | Relational arithmetic operators, `_≤-ℕ_` and `_<-ℕ_`                                                                                                                                                                                       |
+| 30               | Relational arithmetic operators like`_≤-ℕ_` and `_<-ℕ_`                                                                                                                                                                                    |
 | 25               | Parametric unary operators. This class is currently empty                                                                                                                                                                                  |
 | 20               | Parametric exponentiative operators. This class is currently empty                                                                                                                                                                         |
 | 15               | Parametric multiplicative operators like `_×_`,`_×∗_`, `_∧_`, `_∧∗_`, function composition operators like `_∘_`,`_∘∗_`, `_∘e_`, and `_∘iff_`, identification concatenation and whiskering operators like `_∙_`, `_∙h_`, `_·l_`, and `_·r_` |

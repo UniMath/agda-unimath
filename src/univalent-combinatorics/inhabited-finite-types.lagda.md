@@ -31,9 +31,11 @@ open import univalent-combinatorics.finite-types
 
 An **inhabited finite type** is a
 [finite type](univalent-combinatorics.finite-types.md) that is
-[inhabited](foundation.inhabited-types.md), meaning it is a type that is merely
-equivalent to a standard finite type, and that comes equipped with a term of its
-propositional truncation.
+[inhabited](foundation.inhabited-types.md), meaning it is a type that is
+[merely equivalent](foundation.mere-equivalences.md) to a
+[standard finite type](univalent-combinatorics.standard-finite-types.md), and
+that comes equipped with a term of its
+[propositional truncation](foundation.propositional-truncations.md).
 
 ## Definitions
 
@@ -123,7 +125,7 @@ compute-Fam-Inhabited-𝔽 :
   {l1 l2 : Level} → (X : 𝔽 l1) →
   Fam-Inhabited-Types-𝔽 l2 X ≃
     Σ ( Fam-Inhabited-Types l2 (type-𝔽 X))
-      ( λ Y → ((x : (type-𝔽 X)) → is-finite (type-Inhabited-Type (Y x))))
+      ( λ Y → (x : type-𝔽 X) → is-finite (type-Inhabited-Type (Y x)))
 compute-Fam-Inhabited-𝔽 X =
   ( distributive-Π-Σ) ∘e
   ( equiv-Π
@@ -149,7 +151,7 @@ eq-equiv-Inhabited-𝔽 X Y e =
       ( e))
 ```
 
-### Every type in `UU-Fin (succ-ℕ n)` is a inhabited finite type
+### Every type in `UU-Fin (succ-ℕ n)` is an inhabited finite type
 
 ```agda
 is-finite-and-inhabited-type-UU-Fin-succ-ℕ :

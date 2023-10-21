@@ -81,7 +81,7 @@ module _
   { i : S → X}
   where
 
-  equiv-htpy-dependent-fuction-dependent-identification-function-type :
+  equiv-htpy-dependent-function-dependent-identification-function-type :
     { j : S → X} (H : i ~ j) →
     ( k : (s : S) → P (i s) → Y)
     ( l : (s : S) → P (j s) → Y) →
@@ -92,7 +92,7 @@ module _
       ( H s)
       ( k s)
       ( l s))
-  equiv-htpy-dependent-fuction-dependent-identification-function-type =
+  equiv-htpy-dependent-function-dependent-identification-function-type =
     ind-htpy i
       ( λ j H →
         ( k : (s : S) → P (i s) → Y) →
@@ -106,24 +106,24 @@ module _
           ( l s)))
       ( λ k l s → inv-equiv (equiv-funext))
 
-  compute-equiv-htpy-dependent-fuction-dependent-identification-function-type :
+  compute-equiv-htpy-dependent-function-dependent-identification-function-type :
     { j : S → X} (H : i ~ j) →
     ( h : (x : X) → P x → Y) →
     ( s : S) →
     ( map-equiv
-      ( equiv-htpy-dependent-fuction-dependent-identification-function-type H
+      ( equiv-htpy-dependent-function-dependent-identification-function-type H
         ( h ∘ i)
         ( h ∘ j)
         ( s))
       ( λ t → ap (ind-Σ h) (eq-pair-Σ (H s) refl))) ＝
     ( apd h (H s))
-  compute-equiv-htpy-dependent-fuction-dependent-identification-function-type =
+  compute-equiv-htpy-dependent-function-dependent-identification-function-type =
     ind-htpy i
       ( λ j H →
         ( h : (x : X) → P x → Y) →
         ( s : S) →
         ( map-equiv
-          ( equiv-htpy-dependent-fuction-dependent-identification-function-type
+          ( equiv-htpy-dependent-function-dependent-identification-function-type
             ( H)
             ( h ∘ i)
             ( h ∘ j)

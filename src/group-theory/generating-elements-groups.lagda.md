@@ -364,13 +364,14 @@ module _
     is-normal-image-hom-element-is-emb-ev-element-hom-Group x (y , p) =
       apply-universal-property-trunc-Prop p
         ( subset-image-hom-element-Group G g (conjugation-Group G x y))
-        ( λ { (k , refl) →
-              is-closed-under-eq-image-hom-element-Group' G g
-                ( unit-trunc-Prop (k , refl))
-                ( ( preserves-integer-powers-conjugation-Group G k x g) ∙
-                  ( ap
-                    ( integer-power-Group G k)
-                    ( compute-conjugation-is-emb-ev-element-hom-Group' x)))})
+        ( λ where
+          ( k , refl) →
+            is-closed-under-eq-image-hom-element-Group' G g
+              ( unit-trunc-Prop (k , refl))
+              ( ( preserves-integer-powers-conjugation-Group G k x g) ∙
+                ( ap
+                  ( integer-power-Group G k)
+                  ( compute-conjugation-is-emb-ev-element-hom-Group' x))))
 
   private
     N : Normal-Subgroup l G
@@ -408,23 +409,26 @@ module _
   {l : Level} (G : Group l) (g : type-Group G)
   where
 
-  is-prop-map-ev-element-is-generating-element-Group :
-    is-generating-element-Group G g → is-prop-map-ev-element-hom-Group G g
-  is-prop-map-ev-element-is-generating-element-Group U H y =
-    is-prop-all-elements-equal
-      ( λ (h , p) (k , q) →
-        eq-type-subtype
-          ( λ u → Id-Prop (set-Group H) (ev-element-hom-Group G H g u) y)
-          ( eq-htpy-hom-Group G H
-            ( λ x →
-              apply-universal-property-trunc-Prop
-                ( is-surjective-hom-element-is-generating-element-Group G g U x)
-                ( Id-Prop
-                  ( set-Group H)
-                  ( map-hom-Group G H h x)
-                  ( map-hom-Group G H k x))
-                ( λ { (z , refl) →
-                      eq-integer-power-hom-Group G H h k z g (p ∙ inv q)}))))
+  abstract
+    is-prop-map-ev-element-is-generating-element-Group :
+      is-generating-element-Group G g → is-prop-map-ev-element-hom-Group G g
+    is-prop-map-ev-element-is-generating-element-Group U H y =
+      is-prop-all-elements-equal
+        ( λ (h , p) (k , q) →
+          eq-type-subtype
+            ( λ u → Id-Prop (set-Group H) (ev-element-hom-Group G H g u) y)
+            ( eq-htpy-hom-Group G H
+              ( λ x →
+                apply-universal-property-trunc-Prop
+                  ( is-surjective-hom-element-is-generating-element-Group
+                    G g U x)
+                  ( Id-Prop
+                    ( set-Group H)
+                    ( map-hom-Group G H h x)
+                    ( map-hom-Group G H k x))
+                  ( λ where
+                    ( z , refl) →
+                        eq-integer-power-hom-Group G H h k z g (p ∙ inv q)))))
 
   is-emb-ev-element-is-generating-element-Group :
     is-generating-element-Group G g → is-emb-ev-element-hom-Group G g
@@ -465,8 +469,9 @@ module _
         ( U x)
         ( U y)
         ( Id-Prop (set-Group G) (mul-Group G x y) (mul-Group G y x))
-        ( λ { (k , refl) (l , refl) →
-              commute-integer-powers-Group G k l refl})
+        ( λ where
+          ( k , refl) (l , refl) →
+            commute-integer-powers-Group G k l refl)
 
   commutative-mul-is-generating-element-Group :
     (U : is-generating-element-Group G g) →
@@ -561,12 +566,13 @@ module _
           ( ev-element-hom-Group-With-Generating-Element G
             ( group-Group-With-Generating-Element G))
           ( x))
-        ( λ { (k , refl) →
-              unit-trunc-Prop
-                ( hom-integer-multiple-Ab
-                    ( abelian-group-Group-With-Generating-Element G)
-                    ( k) ,
-                  refl)})
+        ( λ where
+          ( k , refl) →
+            unit-trunc-Prop
+              ( hom-integer-multiple-Ab
+                  ( abelian-group-Group-With-Generating-Element G)
+                  ( k) ,
+                refl))
 
   is-equiv-ev-element-Group-With-Generating-Element :
     is-equiv
@@ -601,7 +607,7 @@ module _
       ( is-equiv-ev-element-Group-With-Generating-Element)
 
   iso-ev-element-Group-With-Generating-Element :
-    type-iso-Ab
+    iso-Ab
       ( ab-hom-Ab
         ( abelian-group-Group-With-Generating-Element G)
         ( abelian-group-Group-With-Generating-Element G))
@@ -644,20 +650,22 @@ module _
   mul-Group-With-Generating-Element =
     mul-Ring ring-Group-With-Generating-Element
 
-  commutative-mul-Group-With-Generating-Element :
-    (x y : type-Group-With-Generating-Element G) →
-    mul-Group-With-Generating-Element x y ＝
-    mul-Group-With-Generating-Element y x
-  commutative-mul-Group-With-Generating-Element x y =
-    apply-twice-universal-property-trunc-Prop
-      ( is-surjective-hom-element-Group-With-Generating-Element G x)
-      ( is-surjective-hom-element-Group-With-Generating-Element G y)
-      ( Id-Prop (set-Group-With-Generating-Element G) _ _)
-      ( λ { (k , refl) (l , refl) →
+  abstract
+    commutative-mul-Group-With-Generating-Element :
+      (x y : type-Group-With-Generating-Element G) →
+      mul-Group-With-Generating-Element x y ＝
+      mul-Group-With-Generating-Element y x
+    commutative-mul-Group-With-Generating-Element x y =
+      apply-twice-universal-property-trunc-Prop
+        ( is-surjective-hom-element-Group-With-Generating-Element G x)
+        ( is-surjective-hom-element-Group-With-Generating-Element G y)
+        ( Id-Prop (set-Group-With-Generating-Element G) _ _)
+        ( λ where
+          ( k , refl) (l , refl) →
             commute-integer-multiples-diagonal-Ring
               ( ring-Group-With-Generating-Element)
               ( k)
-              ( l)})
+              ( l))
 
   commutative-ring-Group-With-Generating-Element : Commutative-Ring l
   pr1 commutative-ring-Group-With-Generating-Element =
@@ -665,3 +673,9 @@ module _
   pr2 commutative-ring-Group-With-Generating-Element =
     commutative-mul-Group-With-Generating-Element
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

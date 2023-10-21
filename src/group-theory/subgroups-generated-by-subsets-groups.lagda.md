@@ -373,7 +373,7 @@ module _
   subgroup-subset-galois-connection-Group :
     galois-connection-Large-Poset
       ( λ l2 → l1 ⊔ l2)
-      ( id)
+      ( λ l → l)
       ( powerset-Large-Poset (type-Group G))
       ( Subgroup-Large-Poset G)
   lower-adjoint-galois-connection-Large-Poset

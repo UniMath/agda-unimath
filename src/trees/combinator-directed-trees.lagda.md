@@ -19,7 +19,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
 open import foundation.maybe
 open import foundation.negation
 open import foundation.propositions
@@ -432,7 +432,7 @@ module _
     node-combinator-Directed-Tree T
   map-compute-node-combinator-Directed-Tree (inl (i , x)) =
     node-inclusion-combinator-Directed-Tree i x
-  map-compute-node-combinator-Directed-Tree (inr star) =
+  map-compute-node-combinator-Directed-Tree (inr _) =
     root-combinator-Directed-Tree
 
   map-inv-compute-node-combinator-Directed-Tree :
@@ -459,7 +459,7 @@ module _
       map-compute-node-combinator-Directed-Tree) ~ id
   is-retraction-map-inv-compute-node-combinator-Directed-Tree (inl (i , x)) =
     refl
-  is-retraction-map-inv-compute-node-combinator-Directed-Tree (inr star) = refl
+  is-retraction-map-inv-compute-node-combinator-Directed-Tree (inr _) = refl
 
   is-equiv-map-compute-node-combinator-Directed-Tree :
     is-equiv map-compute-node-combinator-Directed-Tree

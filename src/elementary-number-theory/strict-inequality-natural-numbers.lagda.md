@@ -20,6 +20,7 @@ open import foundation.empty-types
 open import foundation.function-types
 open import foundation.functoriality-coproduct-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.transport-along-identifications
@@ -122,7 +123,7 @@ anti-reflexive-le-ℕ (succ-ℕ n) = anti-reflexive-le-ℕ n
 ### If `x < y` then `x ≠ y`
 
 ```agda
-neq-le-ℕ : {x y : ℕ} → le-ℕ x y → ¬ (x ＝ y)
+neq-le-ℕ : {x y : ℕ} → le-ℕ x y → x ≠ y
 neq-le-ℕ {zero-ℕ} {succ-ℕ y} H = is-nonzero-succ-ℕ y ∘ inv
 neq-le-ℕ {succ-ℕ x} {succ-ℕ y} H p = neq-le-ℕ H (is-injective-succ-ℕ p)
 ```
@@ -309,7 +310,7 @@ leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
 ### If `x ≤ y` and `x ≠ y` then `x < y`
 
 ```agda
-le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → ¬ (x ＝ y) → le-ℕ x y
+le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
 le-leq-neq-ℕ {zero-ℕ} {zero-ℕ} l f = ex-falso (f refl)
 le-leq-neq-ℕ {zero-ℕ} {succ-ℕ y} l f = star
 le-leq-neq-ℕ {succ-ℕ x} {succ-ℕ y} l f =

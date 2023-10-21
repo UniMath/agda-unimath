@@ -17,6 +17,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -43,12 +44,12 @@ module _
   where
 
   abstract
-    is-contr-total-Eq-subtype :
+    is-torsorial-Eq-subtype :
       {l3 : Level} {P : A → UU l3} →
-      is-contr (Σ A B) → ((x : A) → is-prop (P x)) →
+      is-torsorial B → ((x : A) → is-prop (P x)) →
       (a : A) (b : B a) (p : P a) →
-      is-contr (Σ (Σ A P) (B ∘ pr1))
-    is-contr-total-Eq-subtype {l3} {P}
+      is-torsorial (λ (t : Σ A P) → B (pr1 t))
+    is-torsorial-Eq-subtype {l3} {P}
       is-contr-AB is-subtype-P a b p =
       is-contr-equiv
         ( Σ (Σ A B) (P ∘ pr1))
@@ -79,7 +80,7 @@ module _
       ((x : A) → is-equiv (f x)) → (z : Σ A P) → is-equiv (h z)
     subtype-identity-principle {f} h H =
       fundamental-theorem-id
-        ( is-contr-total-Eq-subtype
+        ( is-torsorial-Eq-subtype
           ( fundamental-theorem-id' f H)
           ( is-prop-P)
           ( a)

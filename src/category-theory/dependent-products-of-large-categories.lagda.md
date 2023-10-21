@@ -53,7 +53,7 @@ module _
           ( equiv-Π-equiv-family
             ( λ i → extensionality-obj-Large-Category (C i) (x i) (y i))) ∘e
           ( equiv-funext))
-        ( λ {refl → refl})
+        ( λ where refl → refl)
 
   Π-Large-Category : Large-Category (λ l2 → l1 ⊔ α l2) (λ l2 l3 → l1 ⊔ β l2 l3)
   large-precategory-Large-Category

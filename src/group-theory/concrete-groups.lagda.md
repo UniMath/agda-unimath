@@ -93,12 +93,12 @@ module _
       apply-universal-property-trunc-Prop
         ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
         ( is-set-Prop (X ＝ Y))
-        ( λ
-          { refl →
+        ( λ where
+          refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
               ( is-set-Prop (shape-Concrete-Group ＝ Y))
-              ( λ { refl → is-set-type-Concrete-Group})})
+              ( λ where refl → is-set-type-Concrete-Group))
 
   classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
   pr1 classifying-1-type-Concrete-Group =

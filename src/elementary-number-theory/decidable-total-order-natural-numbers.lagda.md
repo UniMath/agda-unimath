@@ -1,4 +1,4 @@
-# Natural numbers are a total decidable poset
+# The decidable total order of natural numbers
 
 ```agda
 module elementary-number-theory.decidable-total-order-natural-numbers where
@@ -14,21 +14,30 @@ open import foundation.propositional-truncations
 open import foundation.universe-levels
 
 open import order-theory.decidable-total-orders
+open import order-theory.total-orders
 ```
 
 </details>
 
 ## Idea
 
-The type of natural numbers equipped with its standard ordering relation forms a
-total order.
+The type of [natural numbers](elementary-number-theory.natural-numbers.md)
+[equipped](foundation.structure.md) with its
+[standard ordering relation](elementary-number-theory.inequality-natural-numbers.md)
+forms a [decidable total order](order-theory.decidable-total-orders.md).
 
 ## Definition
 
 ```agda
-ℕ-Decidable-Total-Order :
-  Decidable-Total-Order lzero lzero
+is-total-leq-ℕ : is-total-Poset ℕ-Poset
+is-total-leq-ℕ n m = unit-trunc-Prop (linear-leq-ℕ n m)
+
+ℕ-Total-Order : Total-Order lzero lzero
+pr1 ℕ-Total-Order = ℕ-Poset
+pr2 ℕ-Total-Order = is-total-leq-ℕ
+
+ℕ-Decidable-Total-Order : Decidable-Total-Order lzero lzero
 pr1 ℕ-Decidable-Total-Order = ℕ-Poset
-pr1 (pr2 ℕ-Decidable-Total-Order) n m = unit-trunc-Prop (linear-leq-ℕ n m)
+pr1 (pr2 ℕ-Decidable-Total-Order) = is-total-leq-ℕ
 pr2 (pr2 ℕ-Decidable-Total-Order) = is-decidable-leq-ℕ
 ```

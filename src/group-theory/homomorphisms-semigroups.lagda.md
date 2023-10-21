@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.semigroups
@@ -123,12 +124,11 @@ module _
   htpy-eq-hom-Semigroup f .f refl = refl-htpy-hom-Semigroup f
 
   abstract
-    is-contr-total-htpy-hom-Semigroup :
-      (f : hom-Semigroup) →
-      is-contr (Σ hom-Semigroup (htpy-hom-Semigroup f))
-    is-contr-total-htpy-hom-Semigroup f =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-htpy (map-hom-Semigroup f))
+    is-torsorial-htpy-hom-Semigroup :
+      (f : hom-Semigroup) → is-torsorial (htpy-hom-Semigroup f)
+    is-torsorial-htpy-hom-Semigroup f =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-htpy (map-hom-Semigroup f))
         ( is-prop-preserves-mul-Semigroup)
         ( map-hom-Semigroup f)
         ( refl-htpy)
@@ -139,7 +139,7 @@ module _
       (f g : hom-Semigroup) → is-equiv (htpy-eq-hom-Semigroup f g)
     is-equiv-htpy-eq-hom-Semigroup f =
       fundamental-theorem-id
-        ( is-contr-total-htpy-hom-Semigroup f)
+        ( is-torsorial-htpy-hom-Semigroup f)
         ( htpy-eq-hom-Semigroup f)
 
   eq-htpy-hom-Semigroup :

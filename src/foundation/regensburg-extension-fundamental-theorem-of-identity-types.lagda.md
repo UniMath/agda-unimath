@@ -40,7 +40,8 @@ open import foundation.universe-levels
 
 The **Regensburg extension** of the
 [fundamental theorem of identity types](foundation.fundamental-theorem-of-identity-types.md)
-asserts that for any [pointed](structured-types.pointed-types.md)
+asserts that for any [subuniverse](foundation.subuniverses.md) `P`, and any
+[pointed](structured-types.pointed-types.md)
 [connected type](foundation.connected-types.md) `A` equipped with a type family
 `B` over `A`, the following are
 [logically equivalent](foundation.logical-equivalences.md):
@@ -94,13 +95,14 @@ module _
       apply-universal-property-trunc-Prop
         ( mere-eq-is-0-connected H a x)
         ( P _)
-        ( λ { refl →
-              is-in-subuniverse-equiv P
-                ( compute-fiber-map-out-of-identity-type
-                  ( ind-Id a (λ u v → B u) y)
-                  ( x')
-                  ( y'))
-                ( K (ind-Id a (λ u v → B u) y) x' y')})
+        ( λ where
+          refl →
+            is-in-subuniverse-equiv P
+              ( compute-fiber-map-out-of-identity-type
+                ( ind-Id a (λ u v → B u) y)
+                ( x')
+                ( y'))
+              ( K (ind-Id a (λ u v → B u) y) x' y'))
 
   abstract
     backward-implication-extended-fundamental-theorem-id :

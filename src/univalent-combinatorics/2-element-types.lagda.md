@@ -32,12 +32,14 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
 open import foundation.mere-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.raising-universe-levels
 open import foundation.sets
 open import foundation.subuniverses
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
@@ -178,11 +180,11 @@ equiv-eq-2-Element-Type :
 equiv-eq-2-Element-Type X Y = equiv-eq-component-UU-Level
 
 abstract
-  is-contr-total-equiv-2-Element-Type :
+  is-torsorial-equiv-2-Element-Type :
     {l1 : Level} (X : 2-Element-Type l1) →
-    is-contr (Σ (2-Element-Type l1) (equiv-2-Element-Type X))
-  is-contr-total-equiv-2-Element-Type X =
-    is-contr-total-equiv-component-UU-Level X
+    is-torsorial (λ (Y : 2-Element-Type l1) → equiv-2-Element-Type X Y)
+  is-torsorial-equiv-2-Element-Type X =
+    is-torsorial-equiv-component-UU-Level X
 
 abstract
   is-equiv-equiv-eq-2-Element-Type :
@@ -363,7 +365,7 @@ abstract
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
           ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
-      ( is-contr-total-equiv-subuniverse
+      ( is-torsorial-equiv-subuniverse
         ( has-cardinality-Prop 2)
         ( standard-2-Element-Type l))
 ```
@@ -400,14 +402,14 @@ eq-point-2-Element-Type =
   map-inv-equiv equiv-point-eq-2-Element-Type
 
 is-identity-system-type-2-Element-Type :
-  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
-  is-identity-system l2 (type-2-Element-Type {l1}) X x
+  {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  is-identity-system (type-2-Element-Type {l1}) X x
 is-identity-system-type-2-Element-Type X x =
   is-identity-system-is-torsorial X x (is-contr-pointed-2-Element-Type)
 
 dependent-universal-property-identity-system-type-2-Element-Type :
-  {l1 l2 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
-  dependent-universal-property-identity-system l2
+  {l1 : Level} (X : 2-Element-Type l1) (x : type-2-Element-Type X) →
+  dependent-universal-property-identity-system
     { B = type-2-Element-Type {l1}}
     { a = X}
     ( x)
@@ -467,7 +469,7 @@ module _
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr
           ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
-          ( is-contr-total-htpy-equiv e)
+          ( is-torsorial-htpy-equiv e)
           ( is-contr-equiv
             ( fiber (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
             ( equiv-tot
@@ -596,7 +598,7 @@ module _
   map-swap-2-Element-Type = map-equiv swap-2-Element-Type
 
   compute-swap-2-Element-Type' :
-    (x y : type-2-Element-Type X) → ¬ (x ＝ y) → (z : Fin 2) →
+    (x y : type-2-Element-Type X) → x ≠ y → (z : Fin 2) →
     map-inv-equiv-point-2-Element-Type X x y ＝ z →
     map-swap-2-Element-Type x ＝ y
   compute-swap-2-Element-Type' x y f (inl (inr star)) q =
@@ -610,7 +612,7 @@ module _
     ( is-section-map-inv-equiv-point-2-Element-Type X x y)
 
   compute-swap-2-Element-Type :
-    (x y : type-2-Element-Type X) → ¬ (x ＝ y) →
+    (x y : type-2-Element-Type X) → x ≠ y →
     map-swap-2-Element-Type x ＝ y
   compute-swap-2-Element-Type x y p =
     compute-swap-2-Element-Type' x y p
@@ -647,8 +649,7 @@ module _
   where
 
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin :
-    ¬ ( equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X) ＝
-        id-equiv)
+    equiv-precomp-equiv (equiv-succ-Fin 2) (type-2-Element-Type X) ≠ id-equiv
   is-not-identity-equiv-precomp-equiv-equiv-succ-Fin p' =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
@@ -658,7 +659,7 @@ module _
           ( is-injective-map-equiv f
             ( htpy-eq-equiv (htpy-eq-equiv p' f) (zero-Fin 1))))
 
-  is-not-identity-swap-2-Element-Type : ¬ (swap-2-Element-Type X ＝ id-equiv)
+  is-not-identity-swap-2-Element-Type : swap-2-Element-Type X ≠ id-equiv
   is-not-identity-swap-2-Element-Type p =
     is-not-identity-equiv-precomp-equiv-equiv-succ-Fin
       ( ( ( inv (left-unit-law-equiv equiv1)) ∙
@@ -689,7 +690,7 @@ module _
   where
 
   has-no-fixed-points-swap-2-Element-Type :
-    {x : type-2-Element-Type X} → ¬ (map-equiv (swap-2-Element-Type X) x ＝ x)
+    {x : type-2-Element-Type X} → map-equiv (swap-2-Element-Type X) x ≠ x
   has-no-fixed-points-swap-2-Element-Type {x} P =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)
@@ -822,7 +823,7 @@ module _
 
   contradiction-3-distinct-element-2-Element-Type :
     (x y z : type-2-Element-Type X) →
-    ¬ (x ＝ y) → ¬ (y ＝ z) → ¬ (x ＝ z) → empty
+    x ≠ y → y ≠ z → x ≠ z → empty
   contradiction-3-distinct-element-2-Element-Type x y z np nq nr =
     apply-universal-property-trunc-Prop
       ( has-two-elements-type-2-Element-Type X)

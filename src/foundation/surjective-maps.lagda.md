@@ -37,6 +37,7 @@ open import foundation-core.propositional-maps
 open import foundation-core.propositions
 open import foundation-core.sections
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 open import foundation-core.truncation-levels
 
@@ -357,7 +358,7 @@ apply-twice-dependent-universal-property-surj-is-surjective f H C G s =
         ( f)
         ( H)
         ( λ b → C b (f y))
-        (λ x → G x y)
+        ( λ x → G x y)
         ( s))
 ```
 
@@ -415,12 +416,12 @@ module _
       apply-universal-property-trunc-Prop
         ( is-surj-g x)
         ( trunc-Prop (fiber f x))
-        ( λ { (b , refl) →
-              apply-universal-property-trunc-Prop
-                ( is-surj-h b)
-                ( trunc-Prop (fiber f (g b)))
-                ( λ { (a , refl) →
-                      unit-trunc-Prop (a , H a)})})
+        ( λ where
+          ( b , refl) →
+            apply-universal-property-trunc-Prop
+              ( is-surj-h b)
+              ( trunc-Prop (fiber f (g b)))
+              ( λ where (a , refl) → unit-trunc-Prop (a , H a)))
 
   is-surjective-comp :
     {g : B → X} {h : A → B} →
@@ -483,8 +484,7 @@ module _
       apply-universal-property-trunc-Prop
         ( is-surj-f x)
         ( trunc-Prop (fiber g x))
-        ( λ { (a , refl) →
-              unit-trunc-Prop (h a , inv (H a))})
+        ( λ where (a , refl) → unit-trunc-Prop (h a , inv (H a)))
 
   is-surjective-left-factor :
     {g : B → X} (h : A → B) → is-surjective (g ∘ h) → is-surjective g
@@ -532,10 +532,10 @@ module _
   refl-htpy-surjection : htpy-surjection f
   refl-htpy-surjection = refl-htpy
 
-  is-contr-total-htpy-surjection : is-contr (Σ (A ↠ B) htpy-surjection)
-  is-contr-total-htpy-surjection =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (map-surjection f))
+  is-torsorial-htpy-surjection : is-torsorial htpy-surjection
+  is-torsorial-htpy-surjection =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-surjection f))
       ( is-prop-is-surjective)
       ( map-surjection f)
       ( refl-htpy)
@@ -548,7 +548,7 @@ module _
   is-equiv-htpy-eq-surjection :
     (g : A ↠ B) → is-equiv (htpy-eq-surjection g)
   is-equiv-htpy-eq-surjection =
-    fundamental-theorem-id is-contr-total-htpy-surjection htpy-eq-surjection
+    fundamental-theorem-id is-torsorial-htpy-surjection htpy-eq-surjection
 
   extensionality-surjection :
     (g : A ↠ B) → (f ＝ g) ≃ htpy-surjection g
@@ -578,14 +578,14 @@ module _
   pr1 id-equiv-Surjection = id-equiv
   pr2 id-equiv-Surjection = refl-htpy
 
-  is-contr-total-equiv-Surjection :
-    is-contr (Σ (Surjection l2 A) (equiv-Surjection f))
-  is-contr-total-equiv-Surjection =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Surjection :
+    is-torsorial (equiv-Surjection f)
+  is-torsorial-equiv-Surjection =
+    is-torsorial-Eq-structure
       ( λ Y g e → (map-equiv e ∘ map-Surjection f) ~ map-surjection g)
-      ( is-contr-total-equiv (type-Surjection f))
+      ( is-torsorial-equiv (type-Surjection f))
       ( type-Surjection f , id-equiv)
-      ( is-contr-total-htpy-surjection (surjection-Surjection f))
+      ( is-torsorial-htpy-surjection (surjection-Surjection f))
 
   equiv-eq-Surjection :
     (g : Surjection l2 A) → (f ＝ g) → equiv-Surjection f g
@@ -595,7 +595,7 @@ module _
     (g : Surjection l2 A) → is-equiv (equiv-eq-Surjection g)
   is-equiv-equiv-eq-Surjection =
     fundamental-theorem-id
-      is-contr-total-equiv-Surjection
+      is-torsorial-equiv-Surjection
       equiv-eq-Surjection
 
   extensionality-Surjection :

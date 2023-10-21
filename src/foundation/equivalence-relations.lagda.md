@@ -39,6 +39,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -66,14 +67,11 @@ module _
   refl-relate-same-elements-Equivalence-Relation =
     refl-relates-same-elements-Relation-Prop (prop-Equivalence-Relation R)
 
-  is-contr-total-relate-same-elements-Equivalence-Relation :
-    is-contr
-      ( Σ
-        ( Equivalence-Relation l2 A)
-        ( relate-same-elements-Equivalence-Relation R))
-  is-contr-total-relate-same-elements-Equivalence-Relation =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-relates-same-elements-Relation-Prop
+  is-torsorial-relate-same-elements-Equivalence-Relation :
+    is-torsorial (relate-same-elements-Equivalence-Relation R)
+  is-torsorial-relate-same-elements-Equivalence-Relation =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-relates-same-elements-Relation-Prop
         ( prop-Equivalence-Relation R))
       ( is-prop-is-equivalence-relation)
       ( prop-Equivalence-Relation R)
@@ -91,7 +89,7 @@ module _
     is-equiv (relate-same-elements-eq-Equivalence-Relation S)
   is-equiv-relate-same-elements-eq-Equivalence-Relation =
     fundamental-theorem-id
-      is-contr-total-relate-same-elements-Equivalence-Relation
+      is-torsorial-relate-same-elements-Equivalence-Relation
       relate-same-elements-eq-Equivalence-Relation
 
   extensionality-Equivalence-Relation :
@@ -141,7 +139,7 @@ module _
           ( equiv-right-swap-Σ)
           ( λ Q → id-equiv)))
       ( is-contr-Σ
-        ( is-contr-total-is-in-equivalence-class R x)
+        ( is-torsorial-is-in-equivalence-class R x)
         ( center-total-is-in-equivalence-class R x)
         ( is-proof-irrelevant-is-prop
           ( is-prop-type-trunc-Prop)
@@ -290,7 +288,6 @@ module _
     ( pr2
       ( pr2
         ( relate-same-elements-eq-rel-partition-Equivalence-Relation x y) r)) =
-
     make-is-in-block-partition
       ( partition-Equivalence-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))
@@ -301,7 +298,6 @@ module _
     ( pr2
       ( pr2
         ( relate-same-elements-eq-rel-partition-Equivalence-Relation x y) r)) =
-
     make-is-in-block-partition
       ( partition-Equivalence-Relation R)
       ( inhabited-subtype-equivalence-class R (class R x))

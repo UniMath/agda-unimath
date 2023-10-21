@@ -18,9 +18,10 @@ open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.universe-levels
 
+open import structured-types.cyclic-types
 open import structured-types.types-equipped-with-endomorphisms
 
-open import univalent-combinatorics.cyclic-types
+open import univalent-combinatorics.cyclic-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -29,8 +30,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A necklace is an arrangement of coloured beads. Two necklaces are considered the
-same if one can be obtained from the other by rotating.
+A **necklace** is an arrangement of coloured beads, i.e., it consists of a
+[cyclic finite type](univalent-combinatorics.cyclic-finite-types.md) equipped
+with a coloring of the elements. Two necklaces are considered the same if one
+can be obtained from the other by rotating.
 
 ## Definition
 
@@ -47,7 +50,7 @@ module _
   cyclic-necklace : Cyclic-Type l m
   cyclic-necklace = pr1 N
 
-  endo-necklace : Endo l
+  endo-necklace : Type-With-Endomorphism l
   endo-necklace = endo-Cyclic-Type m cyclic-necklace
 
   type-necklace : UU l
@@ -56,7 +59,7 @@ module _
   endomorphism-necklace : type-necklace → type-necklace
   endomorphism-necklace = endomorphism-Cyclic-Type m cyclic-necklace
 
-  is-cyclic-endo-necklace : is-cyclic-Endo m endo-necklace
+  is-cyclic-endo-necklace : is-cyclic-Type-With-Endomorphism m endo-necklace
   is-cyclic-endo-necklace = mere-equiv-endo-Cyclic-Type m cyclic-necklace
 
   colouring-necklace : type-necklace → Fin n
@@ -123,3 +126,9 @@ module _
     Id (map-equiv (extensionality-necklace N N) refl) (id-equiv-necklace m n N)
   refl-extensionality-necklace N = refl
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -67,7 +67,7 @@ is-large-category-Set-Large-Precategory {l} X =
     ( is-contr-equiv'
       ( Σ (Set l) (type-equiv-Set X))
       ( equiv-tot (equiv-iso-equiv-Set X))
-      ( is-contr-total-equiv-Set X))
+      ( is-torsorial-equiv-Set X))
     ( iso-eq-Set X)
 
 Set-Large-Category : Large-Category lsuc (_⊔_)

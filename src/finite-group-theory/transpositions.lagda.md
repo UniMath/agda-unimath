@@ -34,6 +34,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.involutions
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-extensionality
 open import foundation.propositional-truncations
@@ -62,7 +63,8 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-Transpositions are permutations that swap two elements.
+**Transpositions** are [permutations](finite-group-theory.permutations.md) that
+swap two elements.
 
 ## Definitions
 
@@ -169,7 +171,7 @@ module _
 ```agda
 module _
   {l : Level} {X : UU l} (H : has-decidable-equality X)
-  {x y : X} (p : ¬ (Id x y))
+  {x y : X} (p : x ≠ y)
   where
 
   standard-transposition : Aut X
@@ -211,8 +213,8 @@ module _
 
   abstract
     is-fixed-point-standard-transposition :
-      (z : X) → ¬ (Id x z) → ¬ (Id y z) →
-      Id (map-standard-transposition z) z
+      (z : X) → x ≠ z → y ≠ z →
+      map-standard-transposition z ＝ z
     is-fixed-point-standard-transposition z q r
       with is-decidable-type-prop-standard-2-Element-Decidable-Subtype H p z
     ... | inl (inl h) = ex-falso (q h)
@@ -263,19 +265,19 @@ module _
       is-not-identity-swap-2-Element-Type
         ( 2-element-type-2-Element-Decidable-Subtype P)
         ( eq-htpy-equiv
-          ( λ { (pair x p) →
-                eq-pair-Σ
-                  ( ( ap
-                      ( map-transposition' P x)
-                      ( eq-is-prop
-                        ( is-prop-is-decidable
-                          ( is-prop-is-in-2-Element-Decidable-Subtype P x))
-                          { y =
-                            is-decidable-subtype-subtype-2-Element-Decidable-Subtype
-                              ( P)
-                              ( x)})) ∙
-                    ( htpy-eq f x))
-                  ( eq-is-in-2-Element-Decidable-Subtype P)}))
+          ( λ (x , p) →
+            eq-pair-Σ
+              ( ( ap
+                  ( map-transposition' P x)
+                  ( eq-is-prop
+                    ( is-prop-is-decidable
+                      ( is-prop-is-in-2-Element-Decidable-Subtype P x))
+                      { y =
+                        is-decidable-subtype-subtype-2-Element-Decidable-Subtype
+                          ( P)
+                          ( x)})) ∙
+                ( htpy-eq f x))
+              ( eq-is-in-2-Element-Decidable-Subtype P)))
 ```
 
 ### Any transposition on a type equipped with a counting is a standard transposition
@@ -287,7 +289,7 @@ module _
   where
 
   element-is-not-identity-map-transposition :
-    Σ X (λ x → ¬ (Id (map-transposition Y x) x))
+    Σ X (λ x → map-transposition Y x ≠ x)
   element-is-not-identity-map-transposition =
     exists-not-not-forall-count
       ( λ z → Id (map-transposition Y z) z)
@@ -300,7 +302,7 @@ module _
       ( λ x →
         Σ ( X)
           ( λ y →
-            Σ ( ¬ (Id x y))
+            Σ ( x ≠ y)
               ( λ np →
                 Id
                   ( standard-2-Element-Decidable-Subtype
@@ -466,16 +468,16 @@ module _
     pr1 (pr2 two-elements-transposition)
 
   neq-elements-two-elements-transposition :
-    ¬ ( element-two-elements-transposition ＝
-        other-element-two-elements-transposition)
+    element-two-elements-transposition ≠
+    other-element-two-elements-transposition
   neq-elements-two-elements-transposition =
     pr1 (pr2 (pr2 two-elements-transposition))
 
   abstract
     cases-eq-two-elements-transposition :
-      (x y : X) (np : ¬ (Id x y)) →
-      (type-Decidable-Prop (pr1 Y x)) →
-      (type-Decidable-Prop (pr1 Y y)) →
+      (x y : X) (np : x ≠ y) →
+      type-Decidable-Prop (pr1 Y x) →
+      type-Decidable-Prop (pr1 Y y) →
       is-decidable (Id (pr1 two-elements-transposition) x) →
       is-decidable (Id (pr1 (pr2 two-elements-transposition)) x) →
       is-decidable (Id (pr1 two-elements-transposition) y) →
@@ -555,9 +557,9 @@ module _
           ( λ p → nq (pr1 (pair-eq-Σ p))))
 
     eq-two-elements-transposition :
-      (x y : X) (np : ¬ (Id x y)) →
-      (type-Decidable-Prop (pr1 Y x)) →
-      (type-Decidable-Prop (pr1 Y y)) →
+      (x y : X) (np : x ≠ y) →
+      type-Decidable-Prop (pr1 Y x) →
+      type-Decidable-Prop (pr1 Y y) →
       ( ( Id (pr1 two-elements-transposition) x) ×
         ( Id (pr1 (pr2 two-elements-transposition)) y)) +
       ( ( Id (pr1 two-elements-transposition) y) ×
@@ -589,7 +591,7 @@ module _
       ( λ x →
         Σ ( Fin n)
           ( λ y →
-            Σ ( ¬ (Id x y))
+            Σ ( x ≠ y)
               ( λ np →
                 Id
                   ( standard-2-Element-Decidable-Subtype
@@ -603,7 +605,7 @@ module _
           ( λ x →
             Σ ( Fin n)
               ( λ y →
-                Σ ( ¬ (Id x y))
+                Σ ( x ≠ y)
                   ( λ np →
                     Id
                       ( standard-2-Element-Decidable-Subtype
@@ -622,8 +624,8 @@ module _
     pr1 (pr2 two-elements-transposition-Fin)
 
   neq-elements-two-elements-transposition-Fin :
-    ¬ ( element-two-elements-transposition-Fin ＝
-        other-element-two-elements-transposition-Fin)
+    element-two-elements-transposition-Fin ≠
+    other-element-two-elements-transposition-Fin
   neq-elements-two-elements-transposition-Fin =
     pr1 (pr2 (pr2 two-elements-transposition-Fin))
 
@@ -970,7 +972,7 @@ correct-Fin-succ-Fin-transposition-list n (cons t l) x =
 ```agda
 eq-transposition-precomp-standard-2-Element-Decidable-Subtype :
   {l : Level} {X : UU l} (H : has-decidable-equality X) →
-  {x y : X} (np : ¬ (Id x y)) →
+  {x y : X} (np : x ≠ y) →
   Id
     ( precomp-equiv-2-Element-Decidable-Subtype
       ( standard-transposition H np)
@@ -1050,8 +1052,8 @@ eq-transposition-precomp-standard-2-Element-Decidable-Subtype
 
 eq-transposition-precomp-ineq-standard-2-Element-Decidable-Subtype :
   {l : Level} {X : UU l} (H : has-decidable-equality X) →
-  {x y z w : X} (np : ¬ (Id x y)) (np' : ¬ (Id z w)) →
-  ¬ (Id x z) → ¬ (Id x w) → ¬ (Id y z) → ¬ (Id y w) →
+  {x y z w : X} (np : x ≠ y) (np' : z ≠ w) →
+  x ≠ z → x ≠ w → y ≠ z → y ≠ w →
   Id
     ( precomp-equiv-2-Element-Decidable-Subtype
       ( standard-transposition H np)
@@ -1231,16 +1233,16 @@ module _
   {X : UU l1}
   (H : has-decidable-equality X)
   {x y z : X}
-  (npxy : ¬ (x ＝ y))
-  (npyz : ¬ (y ＝ z))
-  (npxz : ¬ (x ＝ z))
+  (npxy : x ≠ y)
+  (npyz : y ≠ z)
+  (npxz : x ≠ z)
   where
 
   cases-htpy-conjugate-transposition :
     (w : X) →
-    ((w ＝ x) + ¬ (w ＝ x)) →
-    ((w ＝ y) + ¬ (w ＝ y)) →
-    ((w ＝ z) + ¬ (w ＝ z)) →
+    ( is-decidable (w ＝ x)) →
+    ( is-decidable (w ＝ y)) →
+    ( is-decidable (w ＝ z)) →
     Id
       ( map-equiv
         ( standard-transposition H npyz ∘e

@@ -29,7 +29,7 @@ open import univalent-combinatorics.standard-finite-types
 **Euler's totient function** `φ : ℕ → ℕ` is the function that maps a
 [natural number](elementary-number-theory.natural-numbers.md) `n` to the number
 of
-[multiplicative units modulo `n`](elementary-number-theory.multiplicative-units-modular-arithmetic.md).
+[multiplicative units modulo `n`](elementary-number-theory.multiplicative-units-standard-cyclic-rings.md).
 In other words, the number `φ n` is the cardinality of the
 [group of units](ring-theory.groups-of-units-rings.md) of the
 [ring](ring-theory.rings.md) `ℤ-Mod n`.
@@ -58,3 +58,9 @@ eulers-totient-function-relatively-prime n =
     ( Fin-𝔽 n)
     ( λ x → is-relatively-prime-ℕ-Decidable-Prop (nat-Fin n x) n)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

@@ -11,7 +11,6 @@ import re
 open_tag_pattern = re.compile(r'^```\S+\n', flags=re.MULTILINE)
 close_tag_pattern = re.compile(r'\n```$', flags=re.MULTILINE)
 
-
 if __name__ == '__main__':
 
     status = 0
@@ -22,6 +21,10 @@ if __name__ == '__main__':
 
         output = re.sub(r'[ \t]+$', '', inputText, flags=re.MULTILINE)
         output = re.sub(r'\n(\s*\n){2,}', '\n\n', output)
+
+        # Remove blank lines before a `where`
+        output = re.sub(r'\n(\s*\n)+(\s+)where(\s|$)',
+                        r'\n\2where\3', output, flags=re.MULTILINE)
 
         # # Add blank line after `module ... where`
         # output = re.sub(r'(^([ \t]*)module[\s({][^\n]*\n(\2\s[^\n]*\n)*\2\s([^\n]*[\s)}])?where)\s*\n(?=\s*[^\n\s])', r'\1\n\n',

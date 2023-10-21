@@ -25,6 +25,7 @@ open import foundation.function-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.injective-maps
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.noncontractible-types
 open import foundation.raising-universe-levels
@@ -83,7 +84,7 @@ is-inl-Fin k x = Σ (Fin k) (λ y → inl y ＝ x)
 is-neg-one-is-not-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   ¬ (is-inl-Fin k x) → is-neg-one-Fin (succ-ℕ k) x
-is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (pair x refl))
+is-neg-one-is-not-inl-Fin k (inl x) H = ex-falso (H (x , refl))
 is-neg-one-is-not-inl-Fin k (inr star) H = refl
 
 inr-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
@@ -91,13 +92,13 @@ inr-Fin (succ-ℕ k) (inl x) = inl (inr-Fin k x)
 inr-Fin (succ-ℕ k) (inr star) = inr star
 
 neq-inl-Fin-inr-Fin :
-  (n : ℕ) → (k : Fin n) → ¬ (inl-Fin n k ＝ inr-Fin n k)
+  (n : ℕ) → (k : Fin n) → inl-Fin n k ≠ inr-Fin n k
 neq-inl-Fin-inr-Fin (succ-ℕ n) (inl k) =
   neq-inl-Fin-inr-Fin n k ∘ is-injective-inl
 neq-inl-Fin-inr-Fin (succ-ℕ n) (inr star) = neq-inl-inr
 
 neq-inr-Fin-inl-Fin :
-  (n : ℕ) → (k : Fin n) → ¬ (inr-Fin n k ＝ inl-Fin n k)
+  (n : ℕ) → (k : Fin n) → inr-Fin n k ≠ inl-Fin n k
 neq-inr-Fin-inl-Fin (succ-ℕ n) (inl k) =
   neq-inr-Fin-inl-Fin n k ∘ is-injective-inl
 neq-inr-Fin-inl-Fin (succ-ℕ n) (inr k) = neq-inr-inl
@@ -126,14 +127,14 @@ raise-Fin-Set l k = raise-Set l (Fin-Set k)
 ```agda
 is-decidable-is-inl-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → is-decidable (is-inl-Fin k x)
-is-decidable-is-inl-Fin k (inl x) = inl (pair x refl)
+is-decidable-is-inl-Fin k (inl x) = inl (x , refl)
 is-decidable-is-inl-Fin k (inr star) = inr α
   where
   α : is-inl-Fin k (inr star) → empty
-  α (pair y ())
+  α (y , ())
 ```
 
-### Fin 1 is contractible
+### `Fin 1` is contractible
 
 ```agda
 map-equiv-Fin-one-ℕ : Fin 1 → unit
@@ -172,7 +173,7 @@ is-not-contractible-Fin (succ-ℕ (succ-ℕ k)) f C =
   neq-inl-inr (eq-is-contr' C (neg-two-Fin (succ-ℕ k)) (neg-one-Fin (succ-ℕ k)))
 ```
 
-### The inclusion of Fin k into ℕ
+### The inclusion of `Fin k` into `ℕ`
 
 ```agda
 nat-Fin : (k : ℕ) → Fin k → ℕ
@@ -252,9 +253,9 @@ succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
 succ-Fin (succ-ℕ k) (inr star) = (zero-Fin k)
 
-Fin-Endo : ℕ → Endo lzero
-pr1 (Fin-Endo k) = Fin k
-pr2 (Fin-Endo k) = succ-Fin k
+Fin-Type-With-Endomorphism : ℕ → Type-With-Endomorphism lzero
+pr1 (Fin-Type-With-Endomorphism k) = Fin k
+pr2 (Fin-Type-With-Endomorphism k) = succ-Fin k
 ```
 
 ```agda

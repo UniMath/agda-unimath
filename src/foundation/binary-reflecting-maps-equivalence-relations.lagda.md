@@ -21,6 +21,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -112,16 +113,14 @@ module _
   htpy-eq-binary-reflecting-map-Equivalence-Relation .f refl =
     refl-htpy-binary-reflecting-map-Equivalence-Relation
 
-  is-contr-total-htpy-binary-reflecting-map-Equivalence-Relation :
-    is-contr
-      ( Σ ( binary-reflecting-map-Equivalence-Relation R S (type-Set C))
-          ( htpy-binary-reflecting-map-Equivalence-Relation))
-  is-contr-total-htpy-binary-reflecting-map-Equivalence-Relation =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-Eq-Π
+  is-torsorial-htpy-binary-reflecting-map-Equivalence-Relation :
+    is-torsorial (htpy-binary-reflecting-map-Equivalence-Relation)
+  is-torsorial-htpy-binary-reflecting-map-Equivalence-Relation =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-Eq-Π
         ( λ x g → map-binary-reflecting-map-Equivalence-Relation R S f x ~ g)
         ( λ x →
-          is-contr-total-htpy
+          is-torsorial-htpy
             ( map-binary-reflecting-map-Equivalence-Relation R S f x)))
       ( is-prop-binary-reflects-Equivalence-Relation R S C)
       ( map-binary-reflecting-map-Equivalence-Relation R S f)
@@ -133,7 +132,7 @@ module _
     is-equiv (htpy-eq-binary-reflecting-map-Equivalence-Relation g)
   is-equiv-htpy-eq-binary-reflecting-map-Equivalence-Relation =
     fundamental-theorem-id
-      is-contr-total-htpy-binary-reflecting-map-Equivalence-Relation
+      is-torsorial-htpy-binary-reflecting-map-Equivalence-Relation
       htpy-eq-binary-reflecting-map-Equivalence-Relation
 
   extensionality-binary-reflecting-map-Equivalence-Relation :

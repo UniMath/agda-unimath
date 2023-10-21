@@ -20,6 +20,7 @@ open import foundation.decidable-types
 open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.type-arithmetic-empty-type
@@ -35,7 +36,7 @@ divides `n`.
 
 ```agda
 is-proper-divisor-ℕ : ℕ → ℕ → UU lzero
-is-proper-divisor-ℕ n d = ¬ (d ＝ n) × div-ℕ d n
+is-proper-divisor-ℕ n d = (d ≠ n) × (div-ℕ d n)
 
 is-decidable-is-proper-divisor-ℕ :
   (n d : ℕ) → is-decidable (is-proper-divisor-ℕ n d)
@@ -83,7 +84,7 @@ pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
 ```agda
 le-one-quotient-div-is-proper-divisor-ℕ :
   (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
-  ¬ (d ＝ x) → le-ℕ 1 (quotient-div-ℕ d x H)
+  d ≠ x → le-ℕ 1 (quotient-div-ℕ d x H)
 le-one-quotient-div-is-proper-divisor-ℕ d x f H g =
   map-left-unit-law-coprod-is-empty
     ( is-one-ℕ (quotient-div-ℕ d x H))

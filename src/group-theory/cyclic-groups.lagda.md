@@ -153,3 +153,7 @@ module _
   endomorphism rings. Furthermore, the multiplicative structure of these rings
   is commutative, so that groups equipped with a generating element are also
   equipped with the structure of a commutative ring.
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

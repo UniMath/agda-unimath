@@ -199,11 +199,10 @@ module _
           apply-universal-property-trunc-Prop
             ( H b)
             ( trunc-Prop (fiber (map-trunc-Set f) (unit-trunc-Set b)))
-            ( λ { (pair a p) →
-                  unit-trunc-Prop
-                    ( pair
-                      ( unit-trunc-Set a)
-                      ( naturality-unit-trunc-Set f a ∙ ap unit-trunc-Set p))}))
+            ( λ (a , p) →
+              unit-trunc-Prop
+                ( ( unit-trunc-Set a) ,
+                  ( naturality-unit-trunc-Set f a ∙ ap unit-trunc-Set p))))
 ```
 
 ### If the set truncation of a map `f` is surjective, then `f` is surjective
@@ -216,16 +215,17 @@ module _
       apply-universal-property-trunc-Prop
         ( H (unit-trunc-Set b))
         ( trunc-Prop (fiber f b))
-        ( λ { (pair x p) →
-              apply-universal-property-trunc-Prop
-                ( is-surjective-unit-trunc-Set A x)
-                ( trunc-Prop (fiber f b))
-                ( λ { (pair a refl) →
-                      apply-universal-property-trunc-Prop
-                        ( apply-effectiveness-unit-trunc-Set
-                          ( inv (naturality-unit-trunc-Set f a) ∙ p))
-                        ( trunc-Prop (fiber f b))
-                        ( λ q → unit-trunc-Prop (pair a q))})})
+        ( λ (x , p) →
+          apply-universal-property-trunc-Prop
+            ( is-surjective-unit-trunc-Set A x)
+            ( trunc-Prop (fiber f b))
+            ( λ where
+              ( a , refl) →
+                apply-universal-property-trunc-Prop
+                  ( apply-effectiveness-unit-trunc-Set
+                    ( inv (naturality-unit-trunc-Set f a) ∙ p))
+                  ( trunc-Prop (fiber f b))
+                  ( λ q → unit-trunc-Prop (a , q))))
 ```
 
 ### Set truncation preserves the image of a map
@@ -248,7 +248,8 @@ module _
           ( is-injective-is-emb (is-emb-inclusion-im f)))
 
   emb-trunc-im-Set : type-trunc-Set (im f) ↪ type-trunc-Set B
-  emb-trunc-im-Set = pair inclusion-trunc-im-Set is-emb-inclusion-trunc-im-Set
+  pr1 emb-trunc-im-Set = inclusion-trunc-im-Set
+  pr2 emb-trunc-im-Set = is-emb-inclusion-trunc-im-Set
 
   abstract
     is-injective-inclusion-trunc-im-Set : is-injective inclusion-trunc-im-Set
@@ -265,8 +266,8 @@ module _
     ( preserves-comp-map-trunc-Set (inclusion-im f) (map-unit-im f))
 
   hom-slice-trunc-im-Set : hom-slice (map-trunc-Set f) inclusion-trunc-im-Set
-  hom-slice-trunc-im-Set =
-    pair map-hom-slice-trunc-im-Set triangle-hom-slice-trunc-im-Set
+  pr1 hom-slice-trunc-im-Set = map-hom-slice-trunc-im-Set
+  pr2 hom-slice-trunc-im-Set = triangle-hom-slice-trunc-im-Set
 
   abstract
     is-surjective-map-hom-slice-trunc-im-Set :
@@ -361,17 +362,15 @@ module _
 
   unit-im-map-trunc-Set :
     im f → im (map-trunc-Set f)
-  unit-im-map-trunc-Set x =
-    pair
-      ( unit-trunc-Set (pr1 x))
-      ( apply-universal-property-trunc-Prop (pr2 x)
-        ( trunc-Prop (fiber (map-trunc-Set f) (unit-trunc-Set (pr1 x))))
-        ( λ u →
-          unit-trunc-Prop
-            ( pair
-              ( unit-trunc-Set (pr1 u))
-              ( naturality-unit-trunc-Set f (pr1 u) ∙
-                ap unit-trunc-Set (pr2 u)))))
+  pr1 (unit-im-map-trunc-Set x) = unit-trunc-Set (pr1 x)
+  pr2 (unit-im-map-trunc-Set x) =
+    apply-universal-property-trunc-Prop (pr2 x)
+      ( trunc-Prop (fiber (map-trunc-Set f) (unit-trunc-Set (pr1 x))))
+      ( λ u →
+        unit-trunc-Prop
+          ( ( unit-trunc-Set (pr1 u)) ,
+            ( naturality-unit-trunc-Set f (pr1 u) ∙
+              ap unit-trunc-Set (pr2 u))))
 
   left-square-unit-im-map-trunc-Set :
     ( map-unit-im (map-trunc-Set f) ∘ unit-trunc-Set) ~

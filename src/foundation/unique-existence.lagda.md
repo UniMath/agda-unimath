@@ -10,7 +10,7 @@ module foundation.unique-existence where
 open import foundation.dependent-pair-types
 open import foundation.universe-levels
 
-open import foundation-core.contractible-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -23,5 +23,5 @@ Unique existence `∃! A B` is defined as `Σ A B` being contractible.
 
 ```agda
 ∃! : {l1 l2 : Level} → (A : UU l1) → (A → UU l2) → UU (l1 ⊔ l2)
-∃! A B = is-contr (Σ A B)
+∃! A B = is-torsorial B
 ```
