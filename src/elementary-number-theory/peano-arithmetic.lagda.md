@@ -10,15 +10,15 @@ module elementary-number-theory.peano-arithmetic where
 open import elementary-number-theory.natural-numbers
 
 open import foundation.dependent-pair-types
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
 open import foundation.negated-equality
+open import foundation.propositions
 open import foundation.universe-levels
 ```
 
 </details>
-
-## Idea
 
 ## Axioms
 
@@ -126,7 +126,7 @@ peano-8-ℕ = is-nonzero-succ-ℕ
 The natural numbers satisfy the following
 [propositional](foundation-core.propositions.md) induction principle:
 
-Given a predicate on the natural numbers `P : N → Prop`, then if
+Given a predicate on the natural numbers `P : N → Prop`, if
 
 - `P zero` holds,
 
@@ -138,11 +138,15 @@ then `P x` holds for all natural numbers `x`.
 
 ```agda
 peano-axiom-9 :
-  {l : Level} (N : UU l) → peano-axiom-1 N → peano-axiom-6 N → UU l
-peano-axiom-9 N zero succ = (x : N) → succ x ≠ zero
+  {l : Level} (N : UU l) → peano-axiom-1 N → peano-axiom-6 N → UUω
+peano-axiom-9 N zero succ =
+  {l' : Level} (P : N → Prop l') →
+  type-Prop (P zero) →
+  ((x : N) → type-Prop (P x) → type-Prop (P (succ x))) →
+  ((x : N) → type-Prop (P x))
 
 peano-9-ℕ : peano-axiom-9 ℕ peano-1-ℕ peano-6-ℕ
-peano-9-ℕ = ?
+peano-9-ℕ P = ind-ℕ {P = type-Prop ∘ P}
 ```
 
 ## References
