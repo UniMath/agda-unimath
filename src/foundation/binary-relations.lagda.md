@@ -10,6 +10,8 @@ module foundation.binary-relations where
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.iterated-dependent-product-types
+open import foundation.propositions
 open import foundation.subtypes
 open import foundation.univalence
 open import foundation.universe-levels
@@ -18,7 +20,6 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
-open import foundation-core.propositions
 open import foundation-core.torsorial-type-families
 ```
 
@@ -102,8 +103,8 @@ module _
 
   is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
   is-prop-is-symmetric-Relation-Prop =
-    is-prop-Π²
-      ( λ x y → is-prop-function-type (is-prop-type-Relation-Prop R y x))
+    is-prop-iterated-Π 3
+      ( λ x y r → is-prop-type-Relation-Prop R y x)
 
   is-transitive-Relation-Prop : UU (l1 ⊔ l2)
   is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
