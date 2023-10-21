@@ -153,7 +153,7 @@ htpy-hom-Pointed-Type-With-Aut-eq X Y h1 .h1 refl =
 is-torsorial-htpy-hom-Pointed-Type-With-Aut :
   {l1 l2 : Level} (X : Pointed-Type-With-Aut l1)
   (Y : Pointed-Type-With-Aut l2) (h1 : hom-Pointed-Type-With-Aut X Y) →
-  is-torsorial ( htpy-hom-Pointed-Type-With-Aut X Y h1)
+  is-torsorial (htpy-hom-Pointed-Type-With-Aut X Y h1)
 is-torsorial-htpy-hom-Pointed-Type-With-Aut X Y h1 =
   is-torsorial-Eq-structure
     ( λ ( map-h2 : type-Pointed-Type-With-Aut X → type-Pointed-Type-With-Aut Y)
