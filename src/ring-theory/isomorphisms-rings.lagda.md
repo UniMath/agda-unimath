@@ -472,22 +472,22 @@ module _
   where
 
   abstract
-    is-contr-total-iso-Ring : is-contr (Σ (Ring l) (iso-Ring R))
-    is-contr-total-iso-Ring =
+    is-torsorial-iso-Ring : is-contr (Σ (Ring l) (iso-Ring R))
+    is-torsorial-iso-Ring =
       is-contr-equiv
         ( Σ (Ring l) (iso-ab-Ring R))
         ( equiv-tot (equiv-iso-ab-iso-Ring R))
-        ( is-contr-total-Eq-structure
+        ( is-torsorial-Eq-structure
           ( λ A μ f →
             is-ring-homomorphism-hom-Ab R (A , μ) (hom-iso-Ab (ab-Ring R) A f))
-          ( is-contr-total-iso-Ab (ab-Ring R))
+          ( is-torsorial-iso-Ab (ab-Ring R))
           ( ab-Ring R , id-iso-Ab (ab-Ring R))
-          ( is-contr-total-Eq-structure
+          ( is-torsorial-Eq-structure
             ( λ μ H pres-mul → one-Ring R ＝ pr1 (pr1 H))
-            ( is-contr-total-Eq-subtype
-              ( is-contr-total-Eq-Π
+            ( is-torsorial-Eq-subtype
+              ( is-torsorial-Eq-Π
                 ( λ x m → (y : type-Ring R) → mul-Ring R x y ＝ m y)
-                ( λ x → is-contr-total-htpy (mul-Ring R x)))
+                ( λ x → is-torsorial-htpy (mul-Ring R x)))
               ( λ μ →
                 is-prop-Π
                   ( λ x →
@@ -500,9 +500,9 @@ module _
               ( λ x y → refl)
               ( associative-mul-Ring R))
             ( (mul-Ring R , associative-mul-Ring R) , λ x y → refl)
-            ( is-contr-total-Eq-subtype
-              ( is-contr-total-Eq-subtype
-                ( is-contr-total-path (one-Ring R))
+            ( is-torsorial-Eq-subtype
+              ( is-torsorial-Eq-subtype
+                ( is-torsorial-path (one-Ring R))
                 ( λ x →
                   is-prop-prod
                     ( is-prop-Π (λ y → is-set-type-Ring R (mul-Ring R x y) y))
@@ -543,7 +543,7 @@ module _
     (S : Ring l) → is-equiv (iso-eq-Ring R S)
   is-equiv-iso-eq-Ring =
     fundamental-theorem-id
-      ( is-contr-total-iso-Ring)
+      ( is-torsorial-iso-Ring)
       ( iso-eq-Ring R)
 
   extensionality-Ring : (S : Ring l) → (R ＝ S) ≃ iso-Ring R S

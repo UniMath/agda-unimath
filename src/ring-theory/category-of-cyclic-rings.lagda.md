@@ -75,8 +75,8 @@ abstract
     is-large-category-Large-Precategory Cyclic-Ring-Large-Precategory
   is-large-category-Cyclic-Ring-Large-Category R =
     fundamental-theorem-id
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Ring (ring-Cyclic-Ring R))
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Ring (ring-Cyclic-Ring R))
         ( is-prop-is-cyclic-Ring)
         ( ring-Cyclic-Ring R)
         ( id-iso-Ring (ring-Cyclic-Ring R))

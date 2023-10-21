@@ -195,12 +195,12 @@ module _
   refl-has-same-elements-equivalence-class C =
     refl-has-same-elements-subtype (subtype-equivalence-class R C)
 
-  is-contr-total-has-same-elements-equivalence-class :
+  is-torsorial-has-same-elements-equivalence-class :
     (C : equivalence-class R) →
     is-contr (Σ (equivalence-class R) (has-same-elements-equivalence-class C))
-  is-contr-total-has-same-elements-equivalence-class C =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-has-same-elements-subtype
+  is-torsorial-has-same-elements-equivalence-class C =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype
         ( subtype-equivalence-class R C))
       ( is-prop-is-equivalence-class R)
       ( subtype-equivalence-class R C)
@@ -218,7 +218,7 @@ module _
     is-equiv (has-same-elements-eq-equivalence-class C D)
   is-equiv-has-same-elements-eq-equivalence-class C =
     fundamental-theorem-id
-      ( is-contr-total-has-same-elements-equivalence-class C)
+      ( is-torsorial-has-same-elements-equivalence-class C)
       ( has-same-elements-eq-equivalence-class C)
 
   extensionality-equivalence-class :
@@ -313,13 +313,13 @@ module _
       ( λ D → is-in-equivalence-class-Prop R D a)
       ( eq-class-equivalence-class R C H)
 
-  is-contr-total-is-in-equivalence-class :
+  is-torsorial-is-in-equivalence-class :
     is-contr
       ( Σ ( equivalence-class R)
           ( λ P → is-in-equivalence-class R P a))
-  pr1 is-contr-total-is-in-equivalence-class =
+  pr1 is-torsorial-is-in-equivalence-class =
     center-total-is-in-equivalence-class
-  pr2 is-contr-total-is-in-equivalence-class =
+  pr2 is-torsorial-is-in-equivalence-class =
     contraction-total-is-in-equivalence-class
 
   is-in-equivalence-class-eq-equivalence-class :
@@ -334,7 +334,7 @@ module _
       is-equiv (is-in-equivalence-class-eq-equivalence-class q)
     is-equiv-is-in-equivalence-class-eq-equivalence-class =
       fundamental-theorem-id
-        ( is-contr-total-is-in-equivalence-class)
+        ( is-torsorial-is-in-equivalence-class)
         ( is-in-equivalence-class-eq-equivalence-class)
 ```
 

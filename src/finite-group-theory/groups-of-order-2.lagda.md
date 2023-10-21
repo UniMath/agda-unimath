@@ -116,11 +116,11 @@ module _
       ( group-Group-of-Order-2 H)
       ( ap pr1 p)
 
-  is-contr-total-iso-Group-of-Order-2 :
+  is-torsorial-iso-Group-of-Order-2 :
     is-contr (Σ (Group-of-Order-2 l) (iso-Group-of-Order-2 G))
-  is-contr-total-iso-Group-of-Order-2 =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-iso-Group (group-Group-of-Order-2 G))
+  is-torsorial-iso-Group-of-Order-2 =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-iso-Group (group-Group-of-Order-2 G))
       ( λ H → is-prop-type-trunc-Prop)
       ( group-Group-of-Order-2 G)
       ( id-iso-Group (group-Group-of-Order-2 G))
@@ -130,7 +130,7 @@ module _
     (H : Group-of-Order-2 l) → is-equiv (iso-eq-Group-of-Order-2 H)
   is-equiv-iso-eq-Group-of-Order-2 =
     fundamental-theorem-id
-      ( is-contr-total-iso-Group-of-Order-2)
+      ( is-torsorial-iso-Group-of-Order-2)
       ( iso-eq-Group-of-Order-2)
 
   eq-iso-Group-of-Order-2 :

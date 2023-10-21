@@ -122,27 +122,27 @@ module _
   htpy-eq-cone : (c c' : cone f g C) → c ＝ c' → htpy-cone c c'
   htpy-eq-cone c .c refl = refl-htpy-cone c
 
-  is-contr-total-htpy-cone :
+  is-torsorial-htpy-cone :
     (c : cone f g C) → is-contr (Σ (cone f g C) (htpy-cone c))
-  is-contr-total-htpy-cone c =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-cone c =
+    is-torsorial-Eq-structure
       ( λ p qH K →
         Σ ( horizontal-map-cone f g c ~ pr1 qH)
           ( coherence-htpy-cone c (p , qH) K))
-      ( is-contr-total-htpy (vertical-map-cone f g c))
+      ( is-torsorial-htpy (vertical-map-cone f g c))
       ( vertical-map-cone f g c , refl-htpy)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( λ q H →
           coherence-htpy-cone c
             ( vertical-map-cone f g c , q , H)
             ( refl-htpy))
-        ( is-contr-total-htpy (horizontal-map-cone f g c))
+        ( is-torsorial-htpy (horizontal-map-cone f g c))
         ( horizontal-map-cone f g c , refl-htpy)
-        ( is-contr-total-htpy (coherence-square-cone f g c ∙h refl-htpy)))
+        ( is-torsorial-htpy (coherence-square-cone f g c ∙h refl-htpy)))
 
   is-equiv-htpy-eq-cone : (c c' : cone f g C) → is-equiv (htpy-eq-cone c c')
   is-equiv-htpy-eq-cone c =
-    fundamental-theorem-id (is-contr-total-htpy-cone c) (htpy-eq-cone c)
+    fundamental-theorem-id (is-torsorial-htpy-cone c) (htpy-eq-cone c)
 
   extensionality-cone : (c c' : cone f g C) → (c ＝ c') ≃ htpy-cone c c'
   pr1 (extensionality-cone c c') = htpy-eq-cone c c'

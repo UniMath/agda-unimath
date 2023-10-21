@@ -236,24 +236,24 @@ module _
           P A X)
         ( x))
 
-  is-contr-total-equiv-binary-coproduct-Decomposition-subuniverse :
+  is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse :
     is-contr
       ( Σ ( binary-coproduct-Decomposition-subuniverse P A)
           ( equiv-binary-coproduct-Decomposition-subuniverse P A X))
-  is-contr-total-equiv-binary-coproduct-Decomposition-subuniverse =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse =
+    is-torsorial-Eq-structure
       ( _)
-      ( is-contr-total-equiv-subuniverse P
+      ( is-torsorial-equiv-subuniverse P
         ( left-summand-binary-coproduct-Decomposition-subuniverse P A X))
       ( left-summand-binary-coproduct-Decomposition-subuniverse P A X ,
         id-equiv)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( _)
-        ( is-contr-total-equiv-subuniverse P
+        ( is-torsorial-equiv-subuniverse P
           ( right-summand-binary-coproduct-Decomposition-subuniverse P A X))
         ( right-summand-binary-coproduct-Decomposition-subuniverse P A X ,
           id-equiv)
-        ( is-contr-total-htpy-equiv
+        ( is-torsorial-htpy-equiv
           ( equiv-coprod id-equiv id-equiv ∘e
             matching-correspondence-binary-coproduct-Decomposition-subuniverse
               P A X)))
@@ -269,7 +269,7 @@ module _
     is-equiv (equiv-eq-binary-coproduct-Decomposition-subuniverse Y)
   is-equiv-equiv-eq-binary-coproduct-Decomposition-subuniverse =
     fundamental-theorem-id
-      is-contr-total-equiv-binary-coproduct-Decomposition-subuniverse
+      is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse
       equiv-eq-binary-coproduct-Decomposition-subuniverse
 
   extensionality-binary-coproduct-Decomposition-subuniverse :
@@ -391,7 +391,7 @@ module _
             ( commutative-coprod _ _)
             ( inclusion-subuniverse P X)) ∘e
         ( ( left-unit-law-Σ-is-contr
-            ( is-contr-total-equiv-subuniverse' P
+            ( is-torsorial-equiv-subuniverse' P
               ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
                   inclusion-subuniverse P (pr2 (pr2 x))) ,
                 ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x)))))))
@@ -464,7 +464,7 @@ module _
     ( equiv-tot
       ( λ x →
         left-unit-law-Σ-is-contr
-          ( is-contr-total-equiv-subuniverse' P
+          ( is-torsorial-equiv-subuniverse' P
             ( ( inclusion-subuniverse P (pr1 (pr2 x)) +
                 inclusion-subuniverse P (pr2 (pr2 x))) ,
               ( C1 (pr2 (pr1 (pr2 x))) (pr2 (pr2 (pr2 x))))))

@@ -81,11 +81,11 @@ module _
   where
 
   abstract
-    is-identity-system-iso-is-contr-total-iso-Precategory :
+    is-identity-system-iso-is-torsorial-iso-Precategory :
       is-contr (Σ (obj-Precategory C) (iso-Precategory C A)) →
       {l : Level} →
       is-identity-system l (iso-Precategory C A) A (id-iso-Precategory C)
-    is-identity-system-iso-is-contr-total-iso-Precategory =
+    is-identity-system-iso-is-torsorial-iso-Precategory =
       is-identity-system-is-torsorial A (id-iso-Precategory C)
 ```
 
@@ -96,10 +96,10 @@ module _
   {l1 l2 : Level} (C : Precategory l1 l2) {A : obj-Precategory C}
   where
 
-  is-contr-total-equiv-induction-principle-iso-Precategory :
+  is-torsorial-equiv-induction-principle-iso-Precategory :
     ( {l : Level} →
       is-identity-system l (iso-Precategory C A) A (id-iso-Precategory C)) →
     is-contr (Σ (obj-Precategory C) (iso-Precategory C A))
-  is-contr-total-equiv-induction-principle-iso-Precategory =
+  is-torsorial-equiv-induction-principle-iso-Precategory =
     is-torsorial-is-identity-system A (id-iso-Precategory C)
 ```

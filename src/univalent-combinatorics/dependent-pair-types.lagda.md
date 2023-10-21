@@ -106,7 +106,7 @@ abstract
                       ( λ (x : A) → Id x (pr1 t))
                       ( λ s → Id (tr B (pr2 s) (b (pr1 s))) (pr2 t))) ∘e
                     ( inv-left-unit-law-Σ-is-contr
-                      ( is-contr-total-path' (pr1 t))
+                      ( is-torsorial-path' (pr1 t))
                       ( pair (pr1 t) refl))))))
             ( count-Σ e
               ( λ t →

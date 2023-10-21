@@ -30,28 +30,28 @@ characterize the identity types of `(x : A) → B x`.
 ### Contractibility
 
 ```agda
-is-contr-total-Eq-Π :
+is-torsorial-Eq-Π :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
-  ( is-contr-total-C : (x : A) → is-contr (Σ (B x) (C x))) →
+  ( is-torsorial-C : (x : A) → is-contr (Σ (B x) (C x))) →
   is-contr (Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
-is-contr-total-Eq-Π {A = A} {B} C is-contr-total-C =
+is-torsorial-Eq-Π {A = A} {B} C is-torsorial-C =
   is-contr-equiv'
     ( (x : A) → Σ (B x) (C x))
     ( distributive-Π-Σ)
-    ( is-contr-Π is-contr-total-C)
+    ( is-contr-Π is-torsorial-C)
 
-is-contr-total-Eq-implicit-Π :
+is-torsorial-Eq-implicit-Π :
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (C : (x : A) → B x → UU l3) →
-  ( is-contr-total-C : (x : A) → is-contr (Σ (B x) (C x))) →
+  ( is-torsorial-C : (x : A) → is-contr (Σ (B x) (C x))) →
   is-contr (Σ ({x : A} → B x) (λ g → {x : A} → C x (g {x})))
-is-contr-total-Eq-implicit-Π {A = A} {B} C is-contr-total-C =
+is-torsorial-Eq-implicit-Π {A = A} {B} C is-torsorial-C =
   is-contr-equiv
     ( Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
     ( equiv-Σ
       ( λ g → (x : A) → C x (g x))
       ( equiv-explicit-implicit-Π)
       ( λ _ → equiv-explicit-implicit-Π))
-    ( is-contr-total-Eq-Π C is-contr-total-C)
+    ( is-torsorial-Eq-Π C is-torsorial-C)
 ```
 
 ### Extensionality
@@ -74,7 +74,7 @@ module _
       (g : (x : A) → B x) → is-equiv (map-extensionality-Π e g)
     is-equiv-map-extensionality-Π e =
       fundamental-theorem-id
-        ( is-contr-total-Eq-Π Eq-B
+        ( is-torsorial-Eq-Π Eq-B
           ( λ x →
             fundamental-theorem-id'
               ( λ y → map-equiv (e x y))

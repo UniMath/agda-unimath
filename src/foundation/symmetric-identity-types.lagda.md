@@ -62,14 +62,14 @@ module _
     pr1 (refl-Eq-symmetric-Id (x , H)) = refl
     pr2 (refl-Eq-symmetric-Id (x , H)) i = refl
 
-    is-contr-total-Eq-symmetric-Id :
+    is-torsorial-Eq-symmetric-Id :
       (p : symmetric-Id a) → is-contr (Σ (symmetric-Id a) (Eq-symmetric-Id p))
-    is-contr-total-Eq-symmetric-Id (x , H) =
-      is-contr-total-Eq-structure
+    is-torsorial-Eq-symmetric-Id (x , H) =
+      is-torsorial-Eq-structure
         ( λ y K p → (i : type-unordered-pair a) → H i ＝ (p ∙ K i))
-        ( is-contr-total-path x)
+        ( is-torsorial-path x)
         ( x , refl)
-        ( is-contr-total-htpy H)
+        ( is-torsorial-htpy H)
 
     Eq-eq-symmetric-Id :
       (p q : symmetric-Id a) → (p ＝ q) → Eq-symmetric-Id p q
@@ -79,7 +79,7 @@ module _
       (p q : symmetric-Id a) → is-equiv (Eq-eq-symmetric-Id p q)
     is-equiv-Eq-eq-symmetric-Id p =
       fundamental-theorem-id
-        ( is-contr-total-Eq-symmetric-Id p)
+        ( is-torsorial-Eq-symmetric-Id p)
         ( Eq-eq-symmetric-Id p)
 
     extensionality-symmetric-Id :

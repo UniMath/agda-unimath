@@ -344,7 +344,7 @@ module _
     inclusion-subuniverse (subuniverse-global-subuniverse Q l3) (S X)
   equiv-right-unit-law-dirichlet-product-species-subuniverse X =
     ( ( left-unit-law-Σ-is-contr
-        ( is-contr-total-equiv-subuniverse P X)
+        ( is-torsorial-equiv-subuniverse P X)
         ( X , id-equiv)) ∘e
       ( ( equiv-Σ-equiv-base
           ( λ p →

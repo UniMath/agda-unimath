@@ -173,21 +173,21 @@ module _
   Eq-eq-standard-sequential-limit s .s refl =
     refl-Eq-standard-sequential-limit s
 
-  is-contr-total-Eq-standard-sequential-limit :
+  is-torsorial-Eq-standard-sequential-limit :
     (s : standard-sequential-limit A) →
     is-contr (Σ (standard-sequential-limit A) (Eq-standard-sequential-limit s))
-  is-contr-total-Eq-standard-sequential-limit s =
-    is-contr-total-Eq-structure _
-      ( is-contr-total-htpy (pr1 s))
+  is-torsorial-Eq-standard-sequential-limit s =
+    is-torsorial-Eq-structure _
+      ( is-torsorial-htpy (pr1 s))
       ( pr1 s , refl-htpy)
-      ( is-contr-total-Eq-Π _ (λ n → is-contr-total-path (pr2 s n ∙ refl)))
+      ( is-torsorial-Eq-Π _ (λ n → is-torsorial-path (pr2 s n ∙ refl)))
 
   is-equiv-Eq-eq-standard-sequential-limit :
     (s t : standard-sequential-limit A) →
     is-equiv (Eq-eq-standard-sequential-limit s t)
   is-equiv-Eq-eq-standard-sequential-limit s =
     fundamental-theorem-id
-      ( is-contr-total-Eq-standard-sequential-limit s)
+      ( is-torsorial-Eq-standard-sequential-limit s)
       ( Eq-eq-standard-sequential-limit s)
 
   extensionality-standard-sequential-limit :

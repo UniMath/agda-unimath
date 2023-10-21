@@ -79,19 +79,19 @@ map-total-Eq-ℕ :
 pr1 (map-total-Eq-ℕ m (pair n e)) = succ-ℕ n
 pr2 (map-total-Eq-ℕ m (pair n e)) = e
 
-is-contr-total-Eq-ℕ :
+is-torsorial-Eq-ℕ :
   (m : ℕ) → is-contr (Σ ℕ (Eq-ℕ m))
-pr1 (pr1 (is-contr-total-Eq-ℕ m)) = m
-pr2 (pr1 (is-contr-total-Eq-ℕ m)) = refl-Eq-ℕ m
-pr2 (is-contr-total-Eq-ℕ zero-ℕ) (pair zero-ℕ star) = refl
-pr2 (is-contr-total-Eq-ℕ (succ-ℕ m)) (pair (succ-ℕ n) e) =
-  ap (map-total-Eq-ℕ m) (pr2 (is-contr-total-Eq-ℕ m) (pair n e))
+pr1 (pr1 (is-torsorial-Eq-ℕ m)) = m
+pr2 (pr1 (is-torsorial-Eq-ℕ m)) = refl-Eq-ℕ m
+pr2 (is-torsorial-Eq-ℕ zero-ℕ) (pair zero-ℕ star) = refl
+pr2 (is-torsorial-Eq-ℕ (succ-ℕ m)) (pair (succ-ℕ n) e) =
+  ap (map-total-Eq-ℕ m) (pr2 (is-torsorial-Eq-ℕ m) (pair n e))
 
 is-equiv-Eq-eq-ℕ :
   {m n : ℕ} → is-equiv (Eq-eq-ℕ {m} {n})
 is-equiv-Eq-eq-ℕ {m} {n} =
   fundamental-theorem-id
-    ( is-contr-total-Eq-ℕ m)
+    ( is-torsorial-Eq-ℕ m)
     ( λ y → Eq-eq-ℕ {m} {y})
     ( n)
 ```

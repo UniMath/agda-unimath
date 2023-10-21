@@ -190,11 +190,11 @@ module _
     htpy-equiv-Undirected-Graph f g
   htpy-eq-equiv-Undirected-Graph f .f refl = refl-htpy-equiv-Undirected-Graph f
 
-  is-contr-total-htpy-equiv-Undirected-Graph :
+  is-torsorial-htpy-equiv-Undirected-Graph :
     (f : equiv-Undirected-Graph G H) →
     is-contr (Σ (equiv-Undirected-Graph G H) (htpy-equiv-Undirected-Graph f))
-  is-contr-total-htpy-equiv-Undirected-Graph f =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-equiv-Undirected-Graph f =
+    is-torsorial-Eq-structure
       ( λ gV gE α →
         ( p : unordered-pair-vertices-Undirected-Graph G) →
           ( e : edge-Undirected-Graph G p) →
@@ -204,7 +204,7 @@ module _
               ( htpy-unordered-pair α p)
               ( edge-equiv-Undirected-Graph G H f p e))
             ( map-equiv (gE p) e))
-      ( is-contr-total-htpy-equiv (equiv-vertex-equiv-Undirected-Graph G H f))
+      ( is-torsorial-htpy-equiv (equiv-vertex-equiv-Undirected-Graph G H f))
       ( pair (equiv-vertex-equiv-Undirected-Graph G H f) refl-htpy)
       ( is-contr-equiv'
         ( Σ ( (p : unordered-pair-vertices-Undirected-Graph G) →
@@ -224,13 +224,13 @@ module _
                     equiv-concat
                       ( pr2 (refl-htpy-equiv-Undirected-Graph f) p e)
                       ( map-equiv (gE p) e)))))
-        ( is-contr-total-Eq-Π
+        ( is-torsorial-Eq-Π
           ( λ p e →
             htpy-equiv
               ( equiv-edge-equiv-Undirected-Graph G H f p)
               ( e))
           ( λ p →
-            is-contr-total-htpy-equiv
+            is-torsorial-htpy-equiv
               ( equiv-edge-equiv-Undirected-Graph G H f p))))
 
   is-equiv-htpy-eq-equiv-Undirected-Graph :
@@ -238,7 +238,7 @@ module _
     is-equiv (htpy-eq-equiv-Undirected-Graph f g)
   is-equiv-htpy-eq-equiv-Undirected-Graph f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-equiv-Undirected-Graph f)
+      ( is-torsorial-htpy-equiv-Undirected-Graph f)
       ( htpy-eq-equiv-Undirected-Graph f)
 
   extensionality-equiv-Undirected-Graph :
@@ -267,24 +267,24 @@ module _
     (H : Undirected-Graph l1 l2) → Id G H → equiv-Undirected-Graph G H
   equiv-eq-Undirected-Graph .G refl = id-equiv-Undirected-Graph G
 
-  is-contr-total-equiv-Undirected-Graph :
+  is-torsorial-equiv-Undirected-Graph :
     is-contr (Σ (Undirected-Graph l1 l2) (equiv-Undirected-Graph G))
-  is-contr-total-equiv-Undirected-Graph =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Undirected-Graph =
+    is-torsorial-Eq-structure
       ( λ VH VE e →
         ( p : unordered-pair-vertices-Undirected-Graph G) →
         edge-Undirected-Graph G p ≃ VE (map-equiv-unordered-pair e p))
-      ( is-contr-total-equiv (vertex-Undirected-Graph G))
+      ( is-torsorial-equiv (vertex-Undirected-Graph G))
       ( pair (vertex-Undirected-Graph G) id-equiv)
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ p X → (edge-Undirected-Graph G p) ≃ X)
-        ( λ p → is-contr-total-equiv (edge-Undirected-Graph G p)))
+        ( λ p → is-torsorial-equiv (edge-Undirected-Graph G p)))
 
   is-equiv-equiv-eq-Undirected-Graph :
     (H : Undirected-Graph l1 l2) → is-equiv (equiv-eq-Undirected-Graph H)
   is-equiv-equiv-eq-Undirected-Graph =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Undirected-Graph)
+      ( is-torsorial-equiv-Undirected-Graph)
       ( equiv-eq-Undirected-Graph)
 
   extensionality-Undirected-Graph :

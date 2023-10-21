@@ -70,9 +70,9 @@ module _
         ( H)
 
   abstract
-    is-contr-total-htpy-equiv :
+    is-torsorial-htpy-equiv :
       (e : A ≃ B) → is-contr (Σ (A ≃ B) (htpy-equiv e))
-    is-contr-total-htpy-equiv e =
+    is-torsorial-htpy-equiv e =
       fundamental-theorem-id'
         ( map-equiv ∘ extensionality-equiv e)
         ( is-equiv-map-equiv ∘ extensionality-equiv e)
@@ -108,7 +108,7 @@ module _
     induction-principle-htpy-equiv e =
       is-identity-system-is-torsorial e
         ( refl-htpy-equiv e)
-        ( is-contr-total-htpy-equiv e)
+        ( is-torsorial-htpy-equiv e)
 
   ind-htpy-equiv :
     {l3 : Level} (e : A ≃ B) (P : (e' : A ≃ B) (H : htpy-equiv e e') → UU l3) →

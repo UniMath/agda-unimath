@@ -71,11 +71,11 @@ module _
 ### The total space of equivalences of higher groups is contractible
 
 ```agda
-is-contr-total-equiv-∞-Group :
+is-torsorial-equiv-∞-Group :
   {l1 : Level} (G : ∞-Group l1) → is-contr (Σ (∞-Group l1) (equiv-∞-Group G))
-is-contr-total-equiv-∞-Group G =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
+is-torsorial-equiv-∞-Group G =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-equiv-Pointed-Type (classifying-pointed-type-∞-Group G))
     ( λ X → is-prop-is-0-connected (type-Pointed-Type X))
     ( classifying-pointed-type-∞-Group G)
     ( id-pointed-equiv)
@@ -89,7 +89,7 @@ is-equiv-equiv-eq-∞-Group :
   {l1 : Level} (G H : ∞-Group l1) → is-equiv (equiv-eq-∞-Group G H)
 is-equiv-equiv-eq-∞-Group G =
   fundamental-theorem-id
-    ( is-contr-total-equiv-∞-Group G)
+    ( is-torsorial-equiv-∞-Group G)
     ( equiv-eq-∞-Group G)
 
 extensionality-∞-Group :

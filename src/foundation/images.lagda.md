@@ -85,11 +85,11 @@ module _
   Eq-eq-im x .x refl = refl-Eq-im x
 
   abstract
-    is-contr-total-Eq-im :
+    is-torsorial-Eq-im :
       (x : im f) → is-contr (Σ (im f) (Eq-im x))
-    is-contr-total-Eq-im x =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-path (pr1 x))
+    is-torsorial-Eq-im x =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-path (pr1 x))
         ( λ x → is-prop-type-trunc-Prop)
         ( pr1 x)
         ( refl)
@@ -99,7 +99,7 @@ module _
     is-equiv-Eq-eq-im : (x y : im f) → is-equiv (Eq-eq-im x y)
     is-equiv-Eq-eq-im x =
       fundamental-theorem-id
-        ( is-contr-total-Eq-im x)
+        ( is-torsorial-Eq-im x)
         ( Eq-eq-im x)
 
   equiv-Eq-eq-im : (x y : im f) → (x ＝ y) ≃ Eq-im x y

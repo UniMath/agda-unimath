@@ -132,12 +132,12 @@ module _
   htpy-eq-hom-coalgebra-polynomial-endofunctor .f refl =
     refl-htpy-hom-coalgebra-polynomial-endofunctor
 
-  is-contr-total-htpy-hom-coalgebra-polynomial-endofunctor :
+  is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor :
     is-contr
       ( Σ ( hom-coalgebra-polynomial-endofunctor X Y)
           ( htpy-hom-coalgebra-polynomial-endofunctor))
-  is-contr-total-htpy-hom-coalgebra-polynomial-endofunctor =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor =
+    is-torsorial-Eq-structure
       ( λ ( g :
             type-coalgebra-polynomial-endofunctor X →
             type-coalgebra-polynomial-endofunctor Y)
@@ -152,7 +152,7 @@ module _
           ( ( ( htpy-polynomial-endofunctor A B H) ·r
               ( structure-coalgebra-polynomial-endofunctor X)) ∙h
             ( G)))
-      ( is-contr-total-htpy (map-hom-coalgebra-polynomial-endofunctor X Y f))
+      ( is-torsorial-htpy (map-hom-coalgebra-polynomial-endofunctor X Y f))
       ( map-hom-coalgebra-polynomial-endofunctor X Y f , refl-htpy)
       ( is-contr-equiv'
         ( Σ ( coherence-square-maps
@@ -181,7 +181,7 @@ module _
                     ( coh-refl-htpy-polynomial-endofunctor A B
                       ( map-hom-coalgebra-polynomial-endofunctor X Y f)
                       ( structure-coalgebra-polynomial-endofunctor X x))))))
-        ( is-contr-total-htpy
+        ( is-torsorial-htpy
           ( ( structure-hom-coalgebra-polynomial-endofunctor X Y f) ∙h
             ( refl-htpy))))
 
@@ -190,7 +190,7 @@ module _
     is-equiv (htpy-eq-hom-coalgebra-polynomial-endofunctor g)
   is-equiv-htpy-eq-hom-coalgebra-polynomial-endofunctor =
     fundamental-theorem-id
-      ( is-contr-total-htpy-hom-coalgebra-polynomial-endofunctor)
+      ( is-torsorial-htpy-hom-coalgebra-polynomial-endofunctor)
       ( htpy-eq-hom-coalgebra-polynomial-endofunctor)
 
   extensionality-hom-coalgebra-polynomial-endofunctor :

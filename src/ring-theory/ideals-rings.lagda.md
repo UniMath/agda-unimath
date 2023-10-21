@@ -181,11 +181,11 @@ module _
   refl-has-same-elements-ideal-Ring =
     refl-has-same-elements-subtype (subset-ideal-Ring R I)
 
-  is-contr-total-has-same-elements-ideal-Ring :
+  is-torsorial-has-same-elements-ideal-Ring :
     is-contr (Σ (ideal-Ring l2 R) (has-same-elements-ideal-Ring R I))
-  is-contr-total-has-same-elements-ideal-Ring =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-has-same-elements-subtype (subset-ideal-Ring R I))
+  is-torsorial-has-same-elements-ideal-Ring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype (subset-ideal-Ring R I))
       ( is-prop-is-ideal-subset-Ring R)
       ( subset-ideal-Ring R I)
       ( refl-has-same-elements-ideal-Ring)
@@ -199,7 +199,7 @@ module _
     (J : ideal-Ring l2 R) → is-equiv (has-same-elements-eq-ideal-Ring J)
   is-equiv-has-same-elements-eq-ideal-Ring =
     fundamental-theorem-id
-      is-contr-total-has-same-elements-ideal-Ring
+      is-torsorial-has-same-elements-ideal-Ring
       has-same-elements-eq-ideal-Ring
 
   extensionality-ideal-Ring :

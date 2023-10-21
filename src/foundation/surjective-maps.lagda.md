@@ -531,10 +531,10 @@ module _
   refl-htpy-surjection : htpy-surjection f
   refl-htpy-surjection = refl-htpy
 
-  is-contr-total-htpy-surjection : is-contr (Σ (A ↠ B) htpy-surjection)
-  is-contr-total-htpy-surjection =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (map-surjection f))
+  is-torsorial-htpy-surjection : is-contr (Σ (A ↠ B) htpy-surjection)
+  is-torsorial-htpy-surjection =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-surjection f))
       ( is-prop-is-surjective)
       ( map-surjection f)
       ( refl-htpy)
@@ -547,7 +547,7 @@ module _
   is-equiv-htpy-eq-surjection :
     (g : A ↠ B) → is-equiv (htpy-eq-surjection g)
   is-equiv-htpy-eq-surjection =
-    fundamental-theorem-id is-contr-total-htpy-surjection htpy-eq-surjection
+    fundamental-theorem-id is-torsorial-htpy-surjection htpy-eq-surjection
 
   extensionality-surjection :
     (g : A ↠ B) → (f ＝ g) ≃ htpy-surjection g
@@ -577,14 +577,14 @@ module _
   pr1 id-equiv-Surjection = id-equiv
   pr2 id-equiv-Surjection = refl-htpy
 
-  is-contr-total-equiv-Surjection :
+  is-torsorial-equiv-Surjection :
     is-contr (Σ (Surjection l2 A) (equiv-Surjection f))
-  is-contr-total-equiv-Surjection =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Surjection =
+    is-torsorial-Eq-structure
       ( λ Y g e → (map-equiv e ∘ map-Surjection f) ~ map-surjection g)
-      ( is-contr-total-equiv (type-Surjection f))
+      ( is-torsorial-equiv (type-Surjection f))
       ( type-Surjection f , id-equiv)
-      ( is-contr-total-htpy-surjection (surjection-Surjection f))
+      ( is-torsorial-htpy-surjection (surjection-Surjection f))
 
   equiv-eq-Surjection :
     (g : Surjection l2 A) → (f ＝ g) → equiv-Surjection f g
@@ -594,7 +594,7 @@ module _
     (g : Surjection l2 A) → is-equiv (equiv-eq-Surjection g)
   is-equiv-equiv-eq-Surjection =
     fundamental-theorem-id
-      is-contr-total-equiv-Surjection
+      is-torsorial-equiv-Surjection
       equiv-eq-Surjection
 
   extensionality-Surjection :

@@ -126,14 +126,14 @@ module _
   equiv-eq-Component-Type-With-Endomorphism T .T refl =
     id-equiv-Component-Type-With-Endomorphism T
 
-  is-contr-total-equiv-Component-Type-With-Endomorphism :
+  is-torsorial-equiv-Component-Type-With-Endomorphism :
     is-contr
       ( Σ ( Component-Type-With-Endomorphism X)
           ( equiv-Component-Type-With-Endomorphism
               ( canonical-Component-Type-With-Endomorphism X)))
-  is-contr-total-equiv-Component-Type-With-Endomorphism =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv-Type-With-Endomorphism X)
+  is-torsorial-equiv-Component-Type-With-Endomorphism =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv-Type-With-Endomorphism X)
       ( λ Y → is-prop-type-trunc-Prop)
       ( X)
       ( id-equiv-Type-With-Endomorphism X)
@@ -147,7 +147,7 @@ module _
         ( T))
   is-equiv-equiv-eq-Component-Type-With-Endomorphism =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Component-Type-With-Endomorphism)
+      ( is-torsorial-equiv-Component-Type-With-Endomorphism)
       ( equiv-eq-Component-Type-With-Endomorphism
         ( canonical-Component-Type-With-Endomorphism X))
 ```
