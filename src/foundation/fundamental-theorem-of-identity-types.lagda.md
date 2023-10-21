@@ -39,7 +39,7 @@ fundamental theorem of identity types is therefore:
 
 **Fundamental theorem of identity types.** Consider a type family `B` over a
 type `A`, and consider an element `a : A`. Then the following are
-[logically equivalent](foundation-core.logical-equivalences.md):
+[logically equivalent](foundation.logical-equivalences.md):
 
 1. Any family of maps `f : (x : A) → a ＝ x → B x` is a family of equivalences.
 2. The type family `B` is torsorial.

@@ -82,10 +82,10 @@ module _
   where
 
   abstract
-    is-identity-system-iso-is-torsorial-iso-Precategory :
+    is-identity-system-is-torsorial-iso-Precategory :
       is-torsorial (iso-Precategory C A) →
       is-identity-system (iso-Precategory C A) A (id-iso-Precategory C)
-    is-identity-system-iso-is-torsorial-iso-Precategory =
+    is-identity-system-is-torsorial-iso-Precategory =
       is-identity-system-is-torsorial A (id-iso-Precategory C)
 ```
 
