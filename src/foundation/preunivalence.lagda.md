@@ -12,10 +12,10 @@ open import foundation.embeddings
 open import foundation.equivalences
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.identity-types
-open import foundation-core.univalence
 ```
 
 </details>
@@ -57,29 +57,42 @@ emb-map-preunivalence L X Y =
 
 ## Properties
 
-### Preunivalence generalizes univalence
-
-```agda
-preunivalence-univalence :
-  {l : Level} → axiom-univalence-Level l → axiom-preunivalence-Level l
-preunivalence-univalence ua A B = is-emb-is-equiv (ua A B)
-```
-
 ### Preunivalence generalizes axiom K
 
 To show that preunivalence generalizes axiom K, we assume axiom K both for
 types, and for the universe itself.
 
 ```agda
-preunivalence-axiom-K :
-  {l : Level} →
-  axiom-K-Level l → instance-axiom-K (UU l) → axiom-preunivalence-Level l
-preunivalence-axiom-K K K-Type A B =
-  is-emb-is-prop-is-set
-    ( is-set-axiom-K K-Type A B)
-    ( is-set-equiv-is-set
-      ( is-set-axiom-K (K A))
-      ( is-set-axiom-K (K B)))
+module _
+  {l : Level} (A B : UU l)
+  where
+
+  preunivalence-axiom-K :
+    instance-axiom-K (UU l) → instance-axiom-K A → instance-axiom-K B →
+    instance-preunivalence A B
+  preunivalence-axiom-K K-Type K-A K-B =
+    is-emb-is-prop-is-set
+      ( is-set-axiom-K K-Type A B)
+      ( is-set-equiv-is-set (is-set-axiom-K K-A) (is-set-axiom-K K-B))
+```
+
+### Preunivalence generalizes univalence
+
+```agda
+module _
+  {l : Level} (A B : UU l)
+  where
+
+  preunivalence-univalence :
+    instance-univalence A B → instance-preunivalence A B
+  preunivalence-univalence = is-emb-is-equiv
+```
+
+### Preunivalence holds in univalent foundations
+
+```agda
+preunivalence : axiom-preunivalence
+preunivalence X Y = preunivalence-univalence X Y (univalence X Y)
 ```
 
 ## See also
@@ -87,3 +100,5 @@ preunivalence-axiom-K K K-Type A B =
 - Preunivalence is sufficient to prove that `Id : A → (A → 𝒰)` is an embedding.
   This fact is proven in
   [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)
+
+- [Preunivalent categories](category-theory.preunivalent-catgories.md)
