@@ -536,7 +536,7 @@ module _
   emb-type-Finitely-Graded-Subposet :
     type-Finitely-Graded-Subposet ↪ type-Finitely-Graded-Poset X
   emb-type-Finitely-Graded-Subposet =
-    tot-emb emb-face-Finitely-Graded-Subposet
+    emb-tot emb-face-Finitely-Graded-Subposet
 
   map-emb-type-Finitely-Graded-Subposet :
     type-Finitely-Graded-Subposet → type-Finitely-Graded-Poset X
