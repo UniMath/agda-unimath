@@ -80,7 +80,11 @@ abstract
 ℕ-Set : Set lzero
 pr1 ℕ-Set = ℕ
 pr2 ℕ-Set = is-set-ℕ
+```
 
+### The property of being zero
+
+```agda
 is-prop-is-zero-ℕ : (n : ℕ) → is-prop (is-zero-ℕ n)
 is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
 
