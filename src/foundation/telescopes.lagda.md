@@ -1,8 +1,6 @@
 # Telescopes
 
 ```agda
-{-# OPTIONS --guardedness #-}
-
 module foundation.telescopes where
 ```
 

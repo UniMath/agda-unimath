@@ -151,4 +151,4 @@ is-trunc-iterated-Π k =
 ## See also
 
 - [Iterated Σ-types](foundation.iterated-dependent-pair-types.md)
-- [Homotopies of iterated Π-types](foundation.homotopies-iterated-dependent-product-types.md)
+- [Multivariable homotopies](foundation.multivariable-homotopies.md)
