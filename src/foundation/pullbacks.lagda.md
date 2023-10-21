@@ -388,7 +388,8 @@ abstract
     is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg c)
   is-torsorial-htpy-parallel-cone-refl-htpy {C = C} f {g} =
     ind-htpy g
-      ( λ g'' Hg' (c : cone f g C) →
+      ( λ g'' Hg' →
+        (c : cone f g C) →
         is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg' c))
       ( is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy f g)
 
