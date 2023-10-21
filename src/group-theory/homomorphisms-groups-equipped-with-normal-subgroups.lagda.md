@@ -133,7 +133,7 @@ module _
       ( ( reflects-normal-subgroup-reflecting-hom-Group H K M N g) ∘
         ( map-reflecting-hom-Group G H L M f))
       ( reflects-normal-subgroup-reflecting-hom-Group G H L M f)
-  
+
   comp-reflecting-hom-Group :
     reflecting-hom-Group H K M N →
     reflecting-hom-Group G H L M →
