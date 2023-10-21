@@ -390,7 +390,7 @@ module _
 
   is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph :
     unique-direct-successor-Directed-Graph →
-    is-torsorial (λ y → walk-Directed-Graph G r y)
+    is-torsorial (walk-Directed-Graph G r)
   pr1 (is-torsorial-walk-from-root-unique-direct-successor-Directed-Graph H) =
     ( r , refl-walk-Directed-Graph)
   pr2
