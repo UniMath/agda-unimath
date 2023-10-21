@@ -19,6 +19,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.semigroups
@@ -124,8 +125,7 @@ module _
 
   abstract
     is-torsorial-htpy-hom-Semigroup :
-      (f : hom-Semigroup) →
-      is-contr (Σ hom-Semigroup (htpy-hom-Semigroup f))
+      (f : hom-Semigroup) → is-torsorial (htpy-hom-Semigroup f)
     is-torsorial-htpy-hom-Semigroup f =
       is-torsorial-Eq-subtype
         ( is-torsorial-htpy (map-hom-Semigroup f))

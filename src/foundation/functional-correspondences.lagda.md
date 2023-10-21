@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -101,9 +102,7 @@ module _
   id-equiv-functional-correspondence x y = id-equiv
 
   is-torsorial-equiv-functional-correspondence :
-    is-contr
-      ( Σ ( functional-correspondence l3 A B)
-          ( equiv-functional-correspondence C))
+    is-torsorial (equiv-functional-correspondence C)
   is-torsorial-equiv-functional-correspondence =
     is-torsorial-Eq-subtype
       ( is-torsorial-Eq-Π

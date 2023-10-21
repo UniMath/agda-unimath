@@ -20,6 +20,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.symmetric-identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.constant-maps-pointed-types
@@ -121,7 +122,7 @@ module _
 
   is-torsorial-htpy-h-space-Involutive-Type :
     ( μ : h-space-Involutive-Type A X) →
-    is-contr (Σ (h-space-Involutive-Type A X) (htpy-h-space-Involutive-Type μ))
+    is-torsorial (htpy-h-space-Involutive-Type μ)
   is-torsorial-htpy-h-space-Involutive-Type (μ , ν , ρ) =
     is-torsorial-Eq-structure
       ( λ μ' νρ' H → _)

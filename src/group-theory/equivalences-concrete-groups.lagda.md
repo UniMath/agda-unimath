@@ -14,6 +14,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.concrete-groups
@@ -58,7 +59,7 @@ module _
   where
 
   is-torsorial-equiv-Concrete-Group :
-    is-contr (Σ (Concrete-Group l) (equiv-Concrete-Group G))
+    is-torsorial (equiv-Concrete-Group G)
   is-torsorial-equiv-Concrete-Group =
     is-torsorial-Eq-subtype
       ( is-torsorial-equiv-∞-Group (∞-group-Concrete-Group G))

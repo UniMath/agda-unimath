@@ -19,6 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -176,7 +177,8 @@ module _
   compute-iso-eq-Large-Category :
     iso-eq-Category (category-Large-Category C l1) X Y ~
     iso-eq-Large-Category
-  compute-iso-eq-Large-Category refl = refl
+  compute-iso-eq-Large-Category =
+    compute-iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y
 
   extensionality-obj-Large-Category :
     (X ＝ Y) ≃ iso-Large-Category C X Y
@@ -192,7 +194,7 @@ module _
   where
 
   is-torsorial-iso-Large-Category :
-    is-contr (Σ (obj-Large-Category C l1) (iso-Large-Category C X))
+    is-torsorial (iso-Large-Category C X)
   is-torsorial-iso-Large-Category =
     is-contr-equiv'
       ( Σ (obj-Large-Category C l1) (X ＝_))
@@ -200,7 +202,7 @@ module _
       ( is-torsorial-path X)
 
   is-torsorial-iso-Large-Category' :
-    is-contr (Σ (obj-Large-Category C l1) (λ Y → iso-Large-Category C Y X))
+    is-torsorial (λ Y → iso-Large-Category C Y X)
   is-torsorial-iso-Large-Category' =
     is-contr-equiv'
       ( Σ (obj-Large-Category C l1) (_＝ X))

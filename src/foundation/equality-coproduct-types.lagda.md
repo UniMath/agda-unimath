@@ -24,6 +24,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -74,7 +75,7 @@ module _
   eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
 
   is-torsorial-Eq-coprod :
-    (x : A + B) → is-contr (Σ (A + B) (Eq-coprod x))
+    (x : A + B) → is-torsorial (Eq-coprod x)
   pr1 (pr1 (is-torsorial-Eq-coprod (inl x))) = inl x
   pr2 (pr1 (is-torsorial-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
   pr2

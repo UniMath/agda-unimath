@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -110,7 +111,7 @@ module _
   htpy-eq-cospan c .c refl = refl-htpy-cospan c
 
   is-torsorial-htpy-cospan :
-    (c : cospan l A B) → is-contr (Σ (cospan l A B) (htpy-cospan c))
+    (c : cospan l A B) → is-torsorial (htpy-cospan c)
   is-torsorial-htpy-cospan c =
     is-torsorial-Eq-structure
       ( λ X d e → coherence-hom-codomain-cospan c (X , d) (map-equiv e))

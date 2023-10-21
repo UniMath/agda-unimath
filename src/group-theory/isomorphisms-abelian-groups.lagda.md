@@ -7,6 +7,7 @@ module group-theory.isomorphisms-abelian-groups where
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
@@ -17,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -167,8 +169,7 @@ module _
 ### The identity isomorphism of abelian groups
 
 ```agda
-id-iso-Ab :
-  {l : Level} (A : Ab l) → iso-Ab A A
+id-iso-Ab : {l : Level} (A : Ab l) → iso-Ab A A
 id-iso-Ab A = id-iso-Group (group-Ab A)
 ```
 
@@ -179,7 +180,7 @@ id-iso-Ab A = id-iso-Group (group-Ab A)
 ```agda
 iso-eq-Ab :
   {l : Level} (A B : Ab l) → Id A B → iso-Ab A B
-iso-eq-Ab A .A refl = id-iso-Ab A
+iso-eq-Ab A B p = iso-eq-Group (group-Ab A) (group-Ab B) (ap pr1 p)
 
 abstract
   equiv-iso-eq-Ab' :
@@ -190,7 +191,7 @@ abstract
 
 abstract
   is-torsorial-iso-Ab :
-    {l : Level} (A : Ab l) → is-contr (Σ (Ab l) (iso-Ab A))
+    {l : Level} (A : Ab l) → is-torsorial (λ (B : Ab l) → iso-Ab A B)
   is-torsorial-iso-Ab {l} A =
     is-contr-equiv'
       ( Σ (Ab l) (Id A))

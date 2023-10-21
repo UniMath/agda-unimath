@@ -27,6 +27,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.raising-universe-levels
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.truncated-types
 open import foundation.truncation-levels
@@ -496,7 +497,7 @@ is-torsorial-fundamental-cover-circle-data :
       ( compute-tr-fundamental-cover-circle l dup-circle)
       ( h)
       ( h)) →
-  is-contr (Σ X (fundamental-cover-circle l dup-circle))
+  is-torsorial (fundamental-cover-circle l dup-circle)
 pr1 (is-torsorial-fundamental-cover-circle-data l dup-circle h p) =
   center-total-fundamental-cover-circle l dup-circle
 pr2 (is-torsorial-fundamental-cover-circle-data l dup-circle h p) =
@@ -571,7 +572,7 @@ abstract
   is-torsorial-fundamental-cover-circle :
     { l1 : Level} {X : UU l1} (l : free-loop X) →
     ( dup-circle : {l2 : Level} → dependent-universal-property-circle l2 l) →
-    is-contr (Σ X (fundamental-cover-circle l dup-circle))
+    is-torsorial (fundamental-cover-circle l dup-circle)
   is-torsorial-fundamental-cover-circle l dup-circle =
     is-torsorial-fundamental-cover-circle-data l dup-circle
       ( pr1 (Contraction-fundamental-cover-circle l dup-circle))

@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -106,7 +107,7 @@ module _
   htpy-eq-span c .c refl = refl-htpy-span c
 
   is-torsorial-htpy-span :
-    (c : span l A B) → is-contr (Σ (span l A B) (htpy-span c))
+    (c : span l A B) → is-torsorial (htpy-span c)
   is-torsorial-htpy-span c =
     is-torsorial-Eq-structure
       ( λ X d e → coherence-hom-domain-span c (X , d) (map-equiv e))

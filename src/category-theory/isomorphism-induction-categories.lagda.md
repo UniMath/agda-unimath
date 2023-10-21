@@ -20,6 +20,7 @@ open import foundation.function-types
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.sections
+open import foundation.torsorial-type-families
 open import foundation.universal-property-identity-systems
 open import foundation.universe-levels
 ```
@@ -78,39 +79,6 @@ module _
 
 ## Properties
 
-### Contractibility of the total space of isomorphisms implies isomorphism induction
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
-  where
-
-  abstract
-    is-identity-system-iso-is-torsorial-iso-Category :
-      is-contr (Σ (obj-Category C) (iso-Category C A)) →
-      {l : Level} →
-      is-identity-system l (iso-Category C A) A (id-iso-Category C)
-    is-identity-system-iso-is-torsorial-iso-Category =
-      is-identity-system-iso-is-torsorial-iso-Precategory
-        ( precategory-Category C)
-```
-
-### Isomorphism induction implies contractibility of the total space of isomorphisms
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
-  where
-
-  is-torsorial-equiv-induction-principle-iso-Category :
-    ( {l : Level} →
-      is-identity-system l (iso-Category C A) A (id-iso-Category C)) →
-    is-contr (Σ (obj-Category C) (iso-Category C A))
-  is-torsorial-equiv-induction-principle-iso-Category =
-    is-torsorial-equiv-induction-principle-iso-Precategory
-      ( precategory-Category C)
-```
-
 ### Isomorphism induction in a category
 
 ```agda
@@ -122,8 +90,10 @@ module _
   abstract
     is-identity-system-iso-Category : section (ev-id-iso-Category C P)
     is-identity-system-iso-Category =
-      is-identity-system-iso-is-torsorial-iso-Category C
-        ( is-torsorial-iso-Category C A) P
+      is-identity-system-is-torsorial-iso-Precategory
+        ( precategory-Category C)
+        ( is-torsorial-iso-Category C A)
+        ( P)
 
   ind-iso-Category :
     P A (id-iso-Category C) →

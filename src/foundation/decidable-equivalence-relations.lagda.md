@@ -45,6 +45,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -299,11 +300,9 @@ module _
                   ( symmetric-Decidable-Equivalence-Relation R x a H))))
 
     is-torsorial-subtype-equivalence-class-Decidable-Equivalence-Relation :
-      is-contr
-        ( Σ ( equivalence-class-Decidable-Equivalence-Relation R)
-            ( λ P →
-              is-in-subtype-equivalence-class-Decidable-Equivalence-Relation
-                R P a))
+      is-torsorial
+        ( λ P →
+          is-in-subtype-equivalence-class-Decidable-Equivalence-Relation R P a)
     pr1
       is-torsorial-subtype-equivalence-class-Decidable-Equivalence-Relation =
       center-total-subtype-equivalence-class-Decidable-Equivalence-Relation

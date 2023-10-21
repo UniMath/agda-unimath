@@ -19,6 +19,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
@@ -123,7 +124,7 @@ module _
   htpy-eq-cone c .c refl = refl-htpy-cone c
 
   is-torsorial-htpy-cone :
-    (c : cone f g C) → is-contr (Σ (cone f g C) (htpy-cone c))
+    (c : cone f g C) → is-torsorial (htpy-cone c)
   is-torsorial-htpy-cone c =
     is-torsorial-Eq-structure
       ( λ p qH K →

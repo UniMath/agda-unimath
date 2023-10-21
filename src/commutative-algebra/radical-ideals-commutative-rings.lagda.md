@@ -21,6 +21,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -185,9 +186,8 @@ module _
 
   is-torsorial-has-same-elements-radical-ideal-Commutative-Ring :
     {l2 : Level} (I : radical-ideal-Commutative-Ring l2 A) →
-    is-contr
-      ( Σ ( radical-ideal-Commutative-Ring l2 A)
-          ( has-same-elements-radical-ideal-Commutative-Ring I))
+    is-torsorial
+      ( has-same-elements-radical-ideal-Commutative-Ring I)
   is-torsorial-has-same-elements-radical-ideal-Commutative-Ring I =
     is-torsorial-Eq-subtype
       ( is-torsorial-has-same-elements-ideal-Commutative-Ring A

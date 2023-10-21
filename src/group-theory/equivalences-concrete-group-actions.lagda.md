@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-function-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.concrete-group-actions
@@ -64,7 +65,7 @@ module _
     map-inv-equiv (extensionality-action-Concrete-Group Y)
 
   is-torsorial-equiv-action-Concrete-Group :
-    is-contr (Σ (action-Concrete-Group l2 G) equiv-action-Concrete-Group)
+    is-torsorial equiv-action-Concrete-Group
   is-torsorial-equiv-action-Concrete-Group =
     is-torsorial-Eq-Π
       ( λ u → type-equiv-Set (X u))

@@ -30,6 +30,7 @@ open import foundation.mere-equality
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -188,7 +189,7 @@ module _
 
 is-torsorial-equiv-Cyclic-Type :
   {l1 : Level} (k : ℕ) (X : Cyclic-Type l1 k) →
-  is-contr (Σ (Cyclic-Type l1 k) (equiv-Cyclic-Type k X))
+  is-torsorial (equiv-Cyclic-Type k X)
 is-torsorial-equiv-Cyclic-Type k X =
   is-torsorial-Eq-subtype
     ( is-torsorial-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
@@ -238,8 +239,7 @@ module _
   htpy-eq-equiv-Cyclic-Type e .e refl = refl-htpy-equiv-Cyclic-Type e
 
   is-torsorial-htpy-equiv-Cyclic-Type :
-    (e : equiv-Cyclic-Type k X Y) →
-    is-contr (Σ (equiv-Cyclic-Type k X Y) (htpy-equiv-Cyclic-Type e))
+    (e : equiv-Cyclic-Type k X Y) → is-torsorial (htpy-equiv-Cyclic-Type e)
   is-torsorial-htpy-equiv-Cyclic-Type e =
     is-contr-equiv'
       ( Σ ( equiv-Type-With-Endomorphism

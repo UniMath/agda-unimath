@@ -21,6 +21,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.singleton-induction
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -307,7 +308,7 @@ module _
   pr2 interchange-Σ-Σ = is-equiv-map-interchange-Σ-Σ
 
   eq-interchange-Σ-Σ-is-contr :
-    {a : A} {b : B a} → is-contr (Σ (C a) (D a b)) →
+    {a : A} {b : B a} → is-torsorial (D a b) →
     {x y : Σ (C a) (D a b)} →
     map-equiv interchange-Σ-Σ ((a , b) , x) ＝
     map-equiv interchange-Σ-Σ ((a , b) , y)

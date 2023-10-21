@@ -18,6 +18,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import ring-theory.ideals-rings
@@ -238,9 +239,7 @@ module _
     refl-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
 
   is-torsorial-has-same-elements-ideal-Commutative-Ring :
-    is-contr
-      ( Σ ( ideal-Commutative-Ring l2 R)
-          ( has-same-elements-ideal-Commutative-Ring R I))
+    is-torsorial (has-same-elements-ideal-Commutative-Ring R I)
   is-torsorial-has-same-elements-ideal-Commutative-Ring =
     is-torsorial-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
 

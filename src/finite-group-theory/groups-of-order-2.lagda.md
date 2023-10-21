@@ -23,6 +23,7 @@ open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -117,7 +118,7 @@ module _
       ( ap pr1 p)
 
   is-torsorial-iso-Group-of-Order-2 :
-    is-contr (Σ (Group-of-Order-2 l) (iso-Group-of-Order-2 G))
+    is-torsorial (iso-Group-of-Order-2 G)
   is-torsorial-iso-Group-of-Order-2 =
     is-torsorial-Eq-subtype
       ( is-torsorial-iso-Group (group-Group-of-Order-2 G))

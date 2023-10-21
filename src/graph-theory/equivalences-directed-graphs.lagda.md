@@ -23,6 +23,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -255,7 +256,7 @@ module _
   where
 
   is-torsorial-htpy-equiv-Directed-Graph :
-    is-contr (Σ (equiv-Directed-Graph G H) (htpy-equiv-Directed-Graph G H e))
+    is-torsorial (htpy-equiv-Directed-Graph G H e)
   is-torsorial-htpy-equiv-Directed-Graph =
     is-torsorial-Eq-structure
       ( λ α β γ →
@@ -343,7 +344,7 @@ module _
   eq-equiv-Directed-Graph H = map-inv-equiv (extensionality-Directed-Graph H)
 
   is-torsorial-equiv-Directed-Graph :
-    is-contr (Σ (Directed-Graph l1 l2) (equiv-Directed-Graph G))
+    is-torsorial (equiv-Directed-Graph G)
   is-torsorial-equiv-Directed-Graph =
     is-contr-equiv'
       ( Σ (Directed-Graph l1 l2) (λ H → G ＝ H))

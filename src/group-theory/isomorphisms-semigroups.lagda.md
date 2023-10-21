@@ -19,6 +19,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -299,7 +300,7 @@ module _
   where
 
   is-torsorial-iso-Semigroup :
-    is-contr (Σ (Semigroup l) (iso-Semigroup G))
+    is-torsorial (iso-Semigroup G)
   is-torsorial-iso-Semigroup =
     is-contr-equiv'
       ( Σ (Semigroup l) (equiv-Semigroup G))

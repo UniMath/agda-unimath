@@ -14,6 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -179,9 +180,7 @@ refl-relate-same-elements-congruence-Ab A =
 
 is-torsorial-relate-same-elements-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A) →
-  is-contr
-    ( Σ ( congruence-Ab l2 A)
-        ( relate-same-elements-congruence-Ab A R))
+  is-torsorial (relate-same-elements-congruence-Ab A R)
 is-torsorial-relate-same-elements-congruence-Ab A =
   is-torsorial-relate-same-elements-congruence-Group (group-Ab A)
 

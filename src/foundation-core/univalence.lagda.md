@@ -16,6 +16,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -60,7 +61,7 @@ axiom-univalence = {l : Level} → axiom-univalence-Level l
 abstract
   is-torsorial-equiv-based-univalence :
     {l : Level} (A : UU l) →
-    axiom-based-univalence A → is-contr (Σ (UU l) (A ≃_))
+    axiom-based-univalence A → is-torsorial (λ (B : UU l) → A ≃ B)
   is-torsorial-equiv-based-univalence A UA =
     fundamental-theorem-id' (λ B → equiv-eq) UA
 ```
@@ -71,7 +72,7 @@ abstract
 abstract
   based-univalence-is-torsorial-equiv :
     {l : Level} (A : UU l) →
-    is-contr (Σ (UU l) (A ≃_)) → axiom-based-univalence A
+    is-torsorial (λ (B : UU l) → A ≃ B) → axiom-based-univalence A
   based-univalence-is-torsorial-equiv A c =
     fundamental-theorem-id c (λ B → equiv-eq)
 ```

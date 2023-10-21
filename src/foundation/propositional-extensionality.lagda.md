@@ -29,6 +29,7 @@ open import foundation-core.functoriality-function-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -49,7 +50,7 @@ module _
 
   abstract
     is-torsorial-iff :
-      (P : Prop l1) → is-contr (Σ (Prop l1) (λ Q → P ⇔ Q))
+      (P : Prop l1) → is-torsorial (λ (Q : Prop l1) → P ⇔ Q)
     is-torsorial-iff P =
       is-contr-equiv
         ( Σ (Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
@@ -92,7 +93,7 @@ module _
 
   is-torsorial-equiv-Prop :
     (P : Prop l1) →
-    is-contr (Σ (Prop l1) (λ Q → type-Prop P ≃ type-Prop Q))
+    is-torsorial (λ Q → type-Prop P ≃ type-Prop Q)
   is-torsorial-equiv-Prop P =
     is-contr-equiv'
       ( Σ (Prop l1) (λ Q → P ⇔ Q))
@@ -129,7 +130,7 @@ is-univalent-type-Prop {l} P =
 ```agda
 abstract
   is-torsorial-true-Prop :
-    {l1 : Level} → is-contr (Σ (Prop l1) (λ P → type-Prop P))
+    {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop P)
   is-torsorial-true-Prop {l1} =
     is-contr-equiv
       ( Σ (Prop l1) (λ P → raise-unit-Prop l1 ⇔ P))
@@ -154,7 +155,7 @@ abstract
 ```agda
 abstract
   is-torsorial-false-Prop :
-    {l1 : Level} → is-contr (Σ (Prop l1) (λ P → type-Prop (neg-Prop P)))
+    {l1 : Level} → is-torsorial (λ (P : Prop l1) → type-Prop (neg-Prop P))
   is-torsorial-false-Prop {l1} =
     is-contr-equiv
       ( Σ (Prop l1) (λ P → raise-empty-Prop l1 ⇔ P))

@@ -19,6 +19,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.sets
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -101,9 +102,7 @@ module _
               ( ap ( mul-Group' G (map-hom-Group ℤ-Group G h x)) p)))))
 
   is-torsorial-hom-element-Group :
-    is-contr
-      ( Σ ( hom-Group ℤ-Group G)
-          ( λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g))
+    is-torsorial (λ h → map-hom-Group ℤ-Group G h one-ℤ ＝ g)
   pr1 (pr1 is-torsorial-hom-element-Group) =
     hom-element-Group
   pr2 (pr1 is-torsorial-hom-element-Group) =

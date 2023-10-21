@@ -33,6 +33,7 @@ open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -133,10 +134,7 @@ module _
 
   is-torsorial-binary-htpy-hom-Equivalence-Relation :
     (f : binary-hom-Equivalence-Relation R S T) →
-    is-contr
-      ( Σ
-        ( binary-hom-Equivalence-Relation R S T)
-        ( binary-htpy-hom-Equivalence-Relation f))
+    is-torsorial (binary-htpy-hom-Equivalence-Relation f)
   is-torsorial-binary-htpy-hom-Equivalence-Relation f =
     is-torsorial-Eq-subtype
       ( is-torsorial-binary-htpy

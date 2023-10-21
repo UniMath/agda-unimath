@@ -18,6 +18,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
@@ -180,7 +181,7 @@ module _
 
   is-torsorial-htpy-factorization-through :
     (F : factorization-through f X) →
-    is-contr (Σ (factorization-through f X) (htpy-factorization-through F))
+    is-torsorial (htpy-factorization-through F)
   is-torsorial-htpy-factorization-through F =
     is-torsorial-Eq-structure
       ( λ g hH R →

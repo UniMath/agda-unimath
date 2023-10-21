@@ -15,6 +15,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.groups
@@ -142,8 +143,7 @@ module _
 
   abstract
     is-torsorial-htpy-hom-Group :
-      ( f : hom-Group G H) →
-      is-contr (Σ (hom-Group G H) (htpy-hom-Group f))
+      ( f : hom-Group G H) → is-torsorial (htpy-hom-Group f)
     is-torsorial-htpy-hom-Group =
       is-torsorial-htpy-hom-Semigroup
         ( semigroup-Group G)

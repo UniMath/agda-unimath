@@ -24,6 +24,7 @@ open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -73,8 +74,7 @@ equiv-eq-tower :
 equiv-eq-tower A .A refl = id-equiv-tower A
 
 is-torsorial-equiv-tower :
-  {l : Level} (A : tower l) →
-  is-contr (Σ (tower l) (equiv-tower A))
+  {l : Level} (A : tower l) → is-torsorial (equiv-tower A)
 is-torsorial-equiv-tower A =
   is-torsorial-Eq-structure _
     ( is-torsorial-Eq-Π

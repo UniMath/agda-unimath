@@ -15,6 +15,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -91,9 +92,7 @@ module _
 
   is-torsorial-htpy-map-Small-Large-Category :
     (f : map-Small-Large-Category C D γ) →
-    is-contr
-      ( Σ ( map-Small-Large-Category C D γ)
-          ( htpy-map-Small-Large-Category f))
+    is-torsorial (htpy-map-Small-Large-Category f)
   is-torsorial-htpy-map-Small-Large-Category =
     is-torsorial-htpy-map-Small-Large-Precategory
       ( precategory-Category C)

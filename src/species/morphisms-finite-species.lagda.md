@@ -18,6 +18,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import species.species-of-finite-types
@@ -116,11 +117,10 @@ htpy-eq-hom-species-𝔽 :
   Id f g → htpy-hom-species-𝔽 F G f g
 htpy-eq-hom-species-𝔽 F G f g refl X y = refl
 
-is-contr-htpy-hom-species-𝔽 :
+is-torsorial-htpy-hom-species-𝔽 :
   {l1 l2 l3 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)
-  (f : hom-species-𝔽 F G) →
-  is-contr (Σ (hom-species-𝔽 F G) (htpy-hom-species-𝔽 F G f))
-is-contr-htpy-hom-species-𝔽 F G f =
+  (f : hom-species-𝔽 F G) → is-torsorial (htpy-hom-species-𝔽 F G f)
+is-torsorial-htpy-hom-species-𝔽 F G f =
   is-torsorial-Eq-Π (λ X h → f X ~ h) (λ X → is-torsorial-htpy (f X))
 
 is-equiv-htpy-eq-hom-species-𝔽 :
@@ -129,7 +129,7 @@ is-equiv-htpy-eq-hom-species-𝔽 :
     is-equiv (htpy-eq-hom-species-𝔽 F G f g)
 is-equiv-htpy-eq-hom-species-𝔽 F G f =
   fundamental-theorem-id
-    ( is-contr-htpy-hom-species-𝔽 F G f)
+    ( is-torsorial-htpy-hom-species-𝔽 F G f)
     ( λ g → htpy-eq-hom-species-𝔽 F G f g)
 
 extensionality-hom-species-𝔽 :

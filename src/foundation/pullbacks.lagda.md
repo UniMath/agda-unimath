@@ -33,6 +33,7 @@ open import foundation-core.equality-dependent-pair-types
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 ```
 
@@ -370,8 +371,7 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) (g : B → X) →
     (c : cone f g C) →
-    is-contr
-      ( Σ (cone f g C) (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c))
+    is-torsorial (htpy-parallel-cone (refl-htpy' f) (refl-htpy' g) c)
   is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy {C = C} f g c =
     is-contr-is-equiv'
       ( Σ (cone f g C) (htpy-cone f g c))
@@ -385,12 +385,12 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     (f : A → X) {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
-    is-contr (Σ (cone f g' C) (htpy-parallel-cone (refl-htpy' f) Hg c))
+    is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg c)
   is-torsorial-htpy-parallel-cone-refl-htpy {C = C} f {g} =
     ind-htpy g
       ( λ g'' Hg' →
-        ( c : cone f g C) →
-        is-contr (Σ (cone f g'' C) (htpy-parallel-cone (refl-htpy' f) Hg' c)))
+        (c : cone f g C) →
+        is-torsorial (htpy-parallel-cone (refl-htpy' f) Hg' c))
       ( is-torsorial-htpy-parallel-cone-refl-htpy-refl-htpy f g)
 
 abstract
@@ -398,7 +398,7 @@ abstract
     {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {C : UU l4}
     {f f' : A → X} (Hf : f ~ f') {g g' : B → X} (Hg : g ~ g') →
     (c : cone f g C) →
-    is-contr (Σ (cone f' g' C) (htpy-parallel-cone Hf Hg c))
+    is-torsorial (htpy-parallel-cone Hf Hg c)
   is-torsorial-htpy-parallel-cone
     {A = A} {B} {X} {C} {f} {f'} Hf {g} {g'} Hg =
     ind-htpy

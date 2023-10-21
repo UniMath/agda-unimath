@@ -20,6 +20,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.univalence
 open import foundation.universe-levels
@@ -192,7 +193,7 @@ module _
 
   is-torsorial-htpy-equiv-Undirected-Graph :
     (f : equiv-Undirected-Graph G H) →
-    is-contr (Σ (equiv-Undirected-Graph G H) (htpy-equiv-Undirected-Graph f))
+    is-torsorial (htpy-equiv-Undirected-Graph f)
   is-torsorial-htpy-equiv-Undirected-Graph f =
     is-torsorial-Eq-structure
       ( λ gV gE α →
@@ -268,7 +269,7 @@ module _
   equiv-eq-Undirected-Graph .G refl = id-equiv-Undirected-Graph G
 
   is-torsorial-equiv-Undirected-Graph :
-    is-contr (Σ (Undirected-Graph l1 l2) (equiv-Undirected-Graph G))
+    is-torsorial (equiv-Undirected-Graph G)
   is-torsorial-equiv-Undirected-Graph =
     is-torsorial-Eq-structure
       ( λ VH VE e →

@@ -21,6 +21,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -202,9 +203,7 @@ module _
 
   is-torsorial-htpy-equiv-Type-With-Automorphism :
     (e : equiv-Type-With-Automorphism X Y) →
-    is-contr
-      ( Σ ( equiv-Type-With-Automorphism X Y)
-          ( htpy-equiv-Type-With-Automorphism e))
+    is-torsorial (htpy-equiv-Type-With-Automorphism e)
   is-torsorial-htpy-equiv-Type-With-Automorphism =
     is-torsorial-htpy-equiv-Type-With-Endomorphism
       ( type-with-endomorphism-Type-With-Automorphism X)
@@ -281,7 +280,7 @@ module _
     id-equiv-Type-With-Automorphism X
 
   is-torsorial-equiv-Type-With-Automorphism :
-    is-contr (Σ (Type-With-Automorphism l1) (equiv-Type-With-Automorphism X))
+    is-torsorial (equiv-Type-With-Automorphism X)
   is-torsorial-equiv-Type-With-Automorphism =
     is-torsorial-Eq-structure
       ( λ Y e h →

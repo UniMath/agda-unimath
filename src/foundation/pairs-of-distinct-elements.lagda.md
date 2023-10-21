@@ -21,6 +21,7 @@ open import foundation-core.cartesian-product-types
 open import foundation-core.contractible-types
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -80,7 +81,7 @@ module _
 
   is-torsorial-Eq-pair-of-distinct-elements :
     (p : pair-of-distinct-elements A) →
-    is-contr (Σ (pair-of-distinct-elements A) (Eq-pair-of-distinct-elements p))
+    is-torsorial (Eq-pair-of-distinct-elements p)
   is-torsorial-Eq-pair-of-distinct-elements p =
     is-torsorial-Eq-structure
       ( λ x ynp α → second-pair-of-distinct-elements p ＝ pr1 ynp)

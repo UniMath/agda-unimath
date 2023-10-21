@@ -29,6 +29,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-maps
 ```
 
@@ -86,8 +87,7 @@ module _
   refl-htpy-connected-map f = refl-htpy
 
   is-torsorial-htpy-connected-map :
-    (f : connected-map k A B) →
-    is-contr (Σ (connected-map k A B) (htpy-connected-map f))
+    (f : connected-map k A B) → is-torsorial (htpy-connected-map f)
   is-torsorial-htpy-connected-map f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-connected-map f))
@@ -255,7 +255,7 @@ module _
   pr2 id-equiv-Connected-Map = refl-htpy
 
   is-torsorial-equiv-Connected-Map :
-    is-contr (Σ (Connected-Map l2 k A) (equiv-Connected-Map f))
+    is-torsorial (equiv-Connected-Map f)
   is-torsorial-equiv-Connected-Map =
     is-torsorial-Eq-structure
       ( λ Y g e → (map-equiv e ∘ map-Connected-Map f) ~ map-connected-map g)
@@ -309,9 +309,7 @@ module _
   pr2 id-equiv-Connected-Map-Into-Truncated-Type = refl-htpy
 
   is-torsorial-equiv-Connected-Map-Into-Truncated-Type :
-    is-contr
-      ( Σ ( Connected-Map-Into-Truncated-Type l2 k l A)
-          ( equiv-Connected-Map-Into-Truncated-Type f))
+    is-torsorial (equiv-Connected-Map-Into-Truncated-Type f)
   is-torsorial-equiv-Connected-Map-Into-Truncated-Type =
     is-torsorial-Eq-structure
       ( λ Y g e →

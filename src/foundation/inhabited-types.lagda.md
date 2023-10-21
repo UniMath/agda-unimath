@@ -20,6 +20,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -99,7 +100,7 @@ module _
   where
 
   is-torsorial-equiv-Inhabited-Type :
-    is-contr (Σ (Inhabited-Type l) (equiv-Inhabited-Type X))
+    is-torsorial (equiv-Inhabited-Type X)
   is-torsorial-equiv-Inhabited-Type =
     is-torsorial-Eq-subtype
       ( is-torsorial-equiv (type-Inhabited-Type X))
@@ -147,7 +148,7 @@ module _
   id-equiv-Fam-Inhabited-Types = id-equiv-fam (type-Fam-Inhabited-Types Y)
 
   is-torsorial-equiv-Fam-Inhabited-Types :
-    is-contr (Σ (Fam-Inhabited-Types l2 X) (equiv-Fam-Inhabited-Types Y))
+    is-torsorial (equiv-Fam-Inhabited-Types Y)
   is-torsorial-equiv-Fam-Inhabited-Types =
     is-torsorial-Eq-Π
       ( λ x → equiv-Inhabited-Type (Y x))
