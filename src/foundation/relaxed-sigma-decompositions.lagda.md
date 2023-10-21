@@ -565,7 +565,7 @@ module _
     f-Y = snd-displayed-Relaxed-Σ-Decomposition disp-D
 
   is-torsorial-equiv-displayed-Relaxed-Σ-Decomposition :
-    is-torsorial (quiv-displayed-Relaxed-Σ-Decomposition disp-D)
+    is-torsorial (equiv-displayed-Relaxed-Σ-Decomposition disp-D)
   is-torsorial-equiv-displayed-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' f-Y' e → equiv-snd-displayed-Relaxed-Σ-Decomposition
