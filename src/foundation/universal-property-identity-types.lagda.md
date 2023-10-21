@@ -148,11 +148,11 @@ module _
       ( λ _ → ap Id)
 
 module _
-  {l : Level} (L : axiom-preunivalence-Level l) (A : UU l)
+  (L : axiom-preunivalence) {l : Level} (A : UU l)
   where
 
-  is-emb-Id-axiom-preunivalence-Level : is-emb (Id {A = A})
-  is-emb-Id-axiom-preunivalence-Level =
+  is-emb-Id-axiom-preunivalence : is-emb (Id {A = A})
+  is-emb-Id-axiom-preunivalence =
     is-emb-Id-preunivalent-Id A (λ a x y → L (Id x y) (Id a y))
 ```
 
@@ -164,7 +164,7 @@ module _
   where
 
   is-emb-Id : is-emb (Id {A = A})
-  is-emb-Id = is-emb-Id-axiom-preunivalence-Level preunivalence A
+  is-emb-Id = is-emb-Id-axiom-preunivalence preunivalence A
 ```
 
 #### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition

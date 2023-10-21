@@ -44,12 +44,12 @@ axiom-preunivalence : UUω
 axiom-preunivalence = {l : Level} → axiom-preunivalence-Level l
 
 emb-preunivalence :
-  {l : Level} → axiom-preunivalence-Level l → (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
+  axiom-preunivalence → {l : Level} (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
 pr1 (emb-preunivalence L X Y) = equiv-eq
 pr2 (emb-preunivalence L X Y) = L X Y
 
 emb-map-preunivalence :
-  {l : Level} → axiom-preunivalence-Level l → (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
+  axiom-preunivalence → {l : Level} (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
 emb-map-preunivalence L X Y =
   comp-emb (emb-subtype is-equiv-Prop) (emb-preunivalence L X Y)
 ```
@@ -66,13 +66,17 @@ module _
   {l : Level} (A B : UU l)
   where
 
-  preunivalence-axiom-K :
+  instance-preunivalence-instance-axiom-K :
     instance-axiom-K (UU l) → instance-axiom-K A → instance-axiom-K B →
     instance-preunivalence A B
-  preunivalence-axiom-K K-Type K-A K-B =
+  instance-preunivalence-instance-axiom-K K-Type K-A K-B =
     is-emb-is-prop-is-set
       ( is-set-axiom-K K-Type A B)
       ( is-set-equiv-is-set (is-set-axiom-K K-A) (is-set-axiom-K K-B))
+
+axiom-preunivalence-axiom-K : axiom-K → axiom-preunivalence
+axiom-preunivalence-axiom-K K {l} X Y =
+  instance-preunivalence-instance-axiom-K X Y (K (UU l)) (K X) (K Y)
 ```
 
 ### Preunivalence generalizes univalence
@@ -82,16 +86,20 @@ module _
   {l : Level} (A B : UU l)
   where
 
-  preunivalence-univalence :
+  instance-preunivalence-instance-univalence :
     instance-univalence A B → instance-preunivalence A B
-  preunivalence-univalence = is-emb-is-equiv
+  instance-preunivalence-instance-univalence = is-emb-is-equiv
+
+axiom-preunivalence-axiom-univalence : axiom-univalence → axiom-preunivalence
+axiom-preunivalence-axiom-univalence UA X Y =
+  instance-preunivalence-instance-univalence X Y (UA X Y)
 ```
 
 ### Preunivalence holds in univalent foundations
 
 ```agda
 preunivalence : axiom-preunivalence
-preunivalence X Y = preunivalence-univalence X Y (univalence X Y)
+preunivalence = axiom-preunivalence-axiom-univalence univalence
 ```
 
 ## See also
