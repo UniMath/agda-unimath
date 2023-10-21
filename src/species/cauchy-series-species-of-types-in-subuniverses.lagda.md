@@ -79,7 +79,7 @@ module _
 module _
   {l1 l2 l3 l4 l5 : Level}
   (P : subuniverse l1 l2)
-  (Q : global-subuniverse id)
+  (Q : global-subuniverse (λ l → l))
   (S : species-subuniverse P (subuniverse-global-subuniverse Q l3))
   (T : species-subuniverse P (subuniverse-global-subuniverse Q l4))
   (f :

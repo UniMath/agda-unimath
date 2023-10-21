@@ -46,7 +46,7 @@ transported ring structure.
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (A : Ab l2)
-  (f : type-iso-Ab (ab-Ring R) A)
+  (f : iso-Ab (ab-Ring R) A)
   where
 
   one-transport-ring-structure-iso-Ab : type-Ab A

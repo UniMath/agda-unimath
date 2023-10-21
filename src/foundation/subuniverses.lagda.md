@@ -143,8 +143,7 @@ module _
   (α : Level → Level) (P : global-subuniverse α)
   where
 
-  is-in-global-subuniverse :
-    {l : Level} → UU l → UU (α l)
+  is-in-global-subuniverse : {l : Level} → UU l → UU (α l)
   is-in-global-subuniverse X =
     is-in-subuniverse (subuniverse-global-subuniverse P _) X
 ```

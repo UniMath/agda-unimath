@@ -39,7 +39,8 @@ module _
     where
     field
       hom-large-poset-hom-Large-Meet-Semilattice :
-        hom-set-Large-Poset id
+        hom-set-Large-Poset
+          ( λ l → l)
           ( large-poset-Large-Meet-Semilattice K)
           ( large-poset-Large-Meet-Semilattice L)
       preserves-meets-hom-Large-Meet-Semilattice :

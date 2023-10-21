@@ -39,7 +39,8 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  postulate funext : (f : (x : A) → B x) → function-extensionality f
+  postulate
+    funext : (f : (x : A) → B x) → function-extensionality f
 ```
 
 ### Components of `funext`

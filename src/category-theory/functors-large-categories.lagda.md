@@ -95,7 +95,7 @@ There is an identity functor on any large category.
 id-functor-Large-Category :
   {αC : Level → Level} {βC : Level → Level → Level} →
   (C : Large-Category αC βC) →
-  functor-Large-Category id C C
+  functor-Large-Category (λ l → l) C C
 id-functor-Large-Category C =
   id-functor-Large-Precategory (large-precategory-Large-Category C)
 ```

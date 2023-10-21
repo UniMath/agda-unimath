@@ -224,7 +224,7 @@ module _
 
   normal-core-subgroup-Galois-Connection :
     galois-connection-Large-Poset
-      ( id)
+      ( λ l → l)
       ( λ l2 → l1 ⊔ l2)
       ( Normal-Subgroup-Large-Poset G)
       ( Subgroup-Large-Poset G)

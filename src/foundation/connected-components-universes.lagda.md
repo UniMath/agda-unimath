@@ -179,7 +179,7 @@ abstract
     is-contr-component-UU-Level-empty lzero
 ```
 
-### The connected components of universes are 0 connected
+### The connected components of universes are `0`-connected
 
 ```agda
 abstract

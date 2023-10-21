@@ -353,7 +353,7 @@ module _
 
   iso-ab-iso-ab-Commutative-Ring :
     iso-ab-Commutative-Ring →
-    type-iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+    iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
   iso-ab-iso-ab-Commutative-Ring =
     iso-ab-iso-ab-Ring
       ( ring-Commutative-Ring A)
@@ -376,7 +376,7 @@ module _
 
   iso-ab-iso-Commutative-Ring :
     iso-Commutative-Ring A B →
-    type-iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
+    iso-Ab (ab-Commutative-Ring A) (ab-Commutative-Ring B)
   iso-ab-iso-Commutative-Ring =
     iso-ab-iso-Ring
       ( ring-Commutative-Ring A)

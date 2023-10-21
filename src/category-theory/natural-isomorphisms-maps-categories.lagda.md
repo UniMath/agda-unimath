@@ -265,7 +265,7 @@ module _
       ( precategory-Category D)
 ```
 
-### Equalities give rise to natural isomorphisms
+### Equalities induce natural isomorphisms
 
 An equality between maps `F` and `G` gives rise to a natural isomorphism between
 them. This is because, by the J-rule, it is enough to construct a natural
