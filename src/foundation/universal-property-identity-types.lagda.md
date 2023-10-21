@@ -156,8 +156,7 @@ module _
   where
 
   is-emb-Id : is-emb (Id {A = A})
-  is-emb-Id =
-    is-emb-Id-axiom-preunivalence-Level (preunivalence-univalence univalence) A
+  is-emb-Id = is-emb-Id-axiom-preunivalence-Level preunivalence A
 ```
 
 #### For any type family `B` over `A`, the type of pairs `(a , e)` consisting of `a : A` and a family of equivalences `e : (x : A) → (a ＝ x) ≃ B x` is a proposition
