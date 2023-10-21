@@ -282,11 +282,11 @@ module _
   (f : hom-Semiring R S)
   where
 
-  is-contr-total-htpy-hom-Semiring :
+  is-torsorial-htpy-hom-Semiring :
     is-contr (Σ (hom-Semiring R S) (htpy-hom-Semiring R S f))
-  is-contr-total-htpy-hom-Semiring =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy-hom-Commutative-Monoid
+  is-torsorial-htpy-hom-Semiring =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy-hom-Commutative-Monoid
         ( additive-commutative-monoid-Semiring R)
         ( additive-commutative-monoid-Semiring S)
         ( hom-additive-commutative-monoid-hom-Semiring R S f))
@@ -303,7 +303,7 @@ module _
     (g : hom-Semiring R S) → is-equiv (htpy-eq-hom-Semiring g)
   is-equiv-htpy-eq-hom-Semiring =
     fundamental-theorem-id
-      is-contr-total-htpy-hom-Semiring
+      is-torsorial-htpy-hom-Semiring
       htpy-eq-hom-Semiring
 
   extensionality-hom-Semiring :

@@ -205,9 +205,9 @@ module _
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-contr-total-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
-    is-contr-total-equiv-Set =
-      is-contr-total-equiv-subuniverse is-set-Prop X
+    is-torsorial-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
+    is-torsorial-equiv-Set =
+      is-torsorial-equiv-subuniverse is-set-Prop X
 
   abstract
     is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)

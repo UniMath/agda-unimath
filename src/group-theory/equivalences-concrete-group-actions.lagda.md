@@ -63,12 +63,12 @@ module _
   eq-equiv-action-Concrete-Group Y =
     map-inv-equiv (extensionality-action-Concrete-Group Y)
 
-  is-contr-total-equiv-action-Concrete-Group :
+  is-torsorial-equiv-action-Concrete-Group :
     is-contr (Σ (action-Concrete-Group l2 G) equiv-action-Concrete-Group)
-  is-contr-total-equiv-action-Concrete-Group =
-    is-contr-total-Eq-Π
+  is-torsorial-equiv-action-Concrete-Group =
+    is-torsorial-Eq-Π
       ( λ u → type-equiv-Set (X u))
-      ( λ u → is-contr-total-equiv-Set (X u))
+      ( λ u → is-torsorial-equiv-Set (X u))
 
 module _
   {l1 l2 l3 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)

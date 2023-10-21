@@ -51,20 +51,20 @@ module _
   where
 
   abstract
-    is-contr-total-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
-    is-contr-total-htpy =
+    is-torsorial-htpy : is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
+    is-torsorial-htpy =
       is-contr-equiv'
         ( Σ ((x : A) → B x) (Id f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-contr-total-path f)
+        ( is-torsorial-path f)
 
   abstract
-    is-contr-total-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
-    is-contr-total-htpy' =
+    is-torsorial-htpy' : is-contr (Σ ((x : A) → B x) (λ g → g ~ f))
+    is-torsorial-htpy' =
       is-contr-equiv'
         ( Σ ((x : A) → B x) (λ g → g ＝ f))
         ( equiv-tot (λ g → equiv-funext))
-        ( is-contr-total-path' f)
+        ( is-torsorial-path' f)
 ```
 
 ### Homotopy induction is equivalent to function extensionality
@@ -79,7 +79,7 @@ abstract
     {A = A} {B} f funext-f l3 =
     is-identity-system-is-torsorial f
       ( refl-htpy)
-      ( is-contr-total-htpy f)
+      ( is-torsorial-htpy f)
 
 abstract
   function-extensionality-induction-principle-homotopies :

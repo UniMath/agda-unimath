@@ -73,16 +73,16 @@ module _
   where
 
   abstract
-    is-contr-total-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-contr-total-path a)) = a
-    pr2 (pr1 (is-contr-total-path a)) = refl
-    pr2 (is-contr-total-path a) (pair .a refl) = refl
+    is-torsorial-path : (a : A) → is-contr (Σ A (λ x → a ＝ x))
+    pr1 (pr1 (is-torsorial-path a)) = a
+    pr2 (pr1 (is-torsorial-path a)) = refl
+    pr2 (is-torsorial-path a) (pair .a refl) = refl
 
   abstract
-    is-contr-total-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-contr-total-path' a)) = a
-    pr2 (pr1 (is-contr-total-path' a)) = refl
-    pr2 (is-contr-total-path' a) (pair .a refl) = refl
+    is-torsorial-path' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
+    pr1 (pr1 (is-torsorial-path' a)) = a
+    pr2 (pr1 (is-torsorial-path' a)) = refl
+    pr2 (is-torsorial-path' a) (pair .a refl) = refl
 ```
 
 ## Properties

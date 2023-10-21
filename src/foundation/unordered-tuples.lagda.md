@@ -141,21 +141,21 @@ module _
     (x y : unordered-tuple n A) → x ＝ y → Eq-unordered-tuple x y
   Eq-eq-unordered-tuple x .x refl = refl-Eq-unordered-tuple x
 
-  is-contr-total-Eq-unordered-tuple :
+  is-torsorial-Eq-unordered-tuple :
     (x : unordered-tuple n A) →
     is-contr (Σ (unordered-tuple n A) (Eq-unordered-tuple x))
-  is-contr-total-Eq-unordered-tuple x =
-    is-contr-total-Eq-structure
+  is-torsorial-Eq-unordered-tuple x =
+    is-torsorial-Eq-structure
       ( λ i f e → element-unordered-tuple n x ~ (f ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
+      ( is-torsorial-equiv-UU-Fin {k = n} (type-unordered-tuple-UU-Fin n x))
       ( pair (type-unordered-tuple-UU-Fin n x) id-equiv)
-      ( is-contr-total-htpy (element-unordered-tuple n x))
+      ( is-torsorial-htpy (element-unordered-tuple n x))
 
   is-equiv-Eq-eq-unordered-tuple :
     (x y : unordered-tuple n A) → is-equiv (Eq-eq-unordered-tuple x y)
   is-equiv-Eq-eq-unordered-tuple x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-unordered-tuple x)
+      ( is-torsorial-Eq-unordered-tuple x)
       ( Eq-eq-unordered-tuple x)
 
   extensionality-unordered-tuple :

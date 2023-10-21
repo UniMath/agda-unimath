@@ -153,11 +153,11 @@ module _
   equiv-eq-Torsor-Abstract-Group .X refl =
     id-equiv-Torsor-Abstract-Group
 
-  is-contr-total-equiv-Torsor-Abstract-Group :
+  is-torsorial-equiv-Torsor-Abstract-Group :
     is-contr (Σ (Torsor-Abstract-Group G l2) (equiv-Torsor-Abstract-Group))
-  is-contr-total-equiv-Torsor-Abstract-Group =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv-Abstract-Group-Action G
+  is-torsorial-equiv-Torsor-Abstract-Group =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv-Abstract-Group-Action G
         ( action-Torsor-Abstract-Group G X))
       ( is-prop-is-torsor-Abstract-Group G)
       ( action-Torsor-Abstract-Group G X)
@@ -169,7 +169,7 @@ module _
     is-equiv (equiv-eq-Torsor-Abstract-Group Y)
   is-equiv-equiv-eq-Torsor-Abstract-Group =
     fundamental-theorem-id
-      is-contr-total-equiv-Torsor-Abstract-Group
+      is-torsorial-equiv-Torsor-Abstract-Group
       equiv-eq-Torsor-Abstract-Group
 
   eq-equiv-Torsor-Abstract-Group :
@@ -214,12 +214,12 @@ module _
   htpy-eq-equiv-Torsor-Abstract-Group .e refl =
     refl-htpy-equiv-Torsor-Abstract-Group
 
-  is-contr-total-htpy-equiv-Torsor-Abstract-Group :
+  is-torsorial-htpy-equiv-Torsor-Abstract-Group :
     is-contr
       ( Σ ( equiv-Torsor-Abstract-Group G X Y)
           ( htpy-equiv-Torsor-Abstract-Group))
-  is-contr-total-htpy-equiv-Torsor-Abstract-Group =
-    is-contr-total-htpy-equiv-Abstract-Group-Action G
+  is-torsorial-htpy-equiv-Torsor-Abstract-Group =
+    is-torsorial-htpy-equiv-Abstract-Group-Action G
       ( action-Torsor-Abstract-Group G X)
       ( action-Torsor-Abstract-Group G Y)
       ( e)
@@ -229,7 +229,7 @@ module _
     is-equiv (htpy-eq-equiv-Torsor-Abstract-Group f)
   is-equiv-htpy-eq-equiv-Torsor-Abstract-Group =
     fundamental-theorem-id
-      is-contr-total-htpy-equiv-Torsor-Abstract-Group
+      is-torsorial-htpy-equiv-Torsor-Abstract-Group
       htpy-eq-equiv-Torsor-Abstract-Group
 
   extensionality-equiv-Torsor-Abstract-Group :

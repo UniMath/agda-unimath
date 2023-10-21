@@ -123,7 +123,7 @@ module _
         ( λ _ →
           is-injective-emb
             ( emb-fiber a)
-            ( eq-is-contr (is-contr-total-path a))))
+            ( eq-is-contr (is-torsorial-path a))))
       ( λ _ → ap Id)
     where
     emb-fiber : (a : A) → fiber' Id (Id a) ↪ Σ A (Id a)
@@ -136,7 +136,7 @@ module _
                 ( equiv-ev-refl x) ∘e
                 ( ( equiv-inclusion-is-full-subtype
                     ( Π-Prop A ∘ (is-equiv-Prop ∘_))
-                    ( fundamental-theorem-id (is-contr-total-path a))) ∘e
+                    ( fundamental-theorem-id (is-torsorial-path a))) ∘e
                   ( distributive-Π-Σ)))))
           ( emb-Σ
             ( λ x → (y : A) → Id x y ≃ Id a y)

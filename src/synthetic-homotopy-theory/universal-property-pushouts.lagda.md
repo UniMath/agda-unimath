@@ -231,7 +231,7 @@ uniquely-unique-pushout :
   is-contr
     ( Σ (X ≃ Y) (λ e → htpy-cocone f g (cocone-map f g c (map-equiv e)) d))
 uniquely-unique-pushout f g c d up-c up-d =
-  is-contr-total-Eq-subtype
+  is-torsorial-Eq-subtype
     ( uniqueness-map-universal-property-pushout f g c up-c d)
     ( is-property-is-equiv)
     ( map-universal-property-pushout f g c up-c d)

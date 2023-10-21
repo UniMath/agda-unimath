@@ -316,13 +316,13 @@ module _
   equiv-eq-dependent-descent-data-circle =
     equiv-eq-Dependent-Type-With-Automorphism P
 
-  is-contr-total-equiv-dependent-descent-data-circle :
+  is-torsorial-equiv-dependent-descent-data-circle :
     ( Q : dependent-descent-data-circle l2 P) →
     is-contr
       ( Σ ( dependent-descent-data-circle l2 P)
           ( equiv-dependent-descent-data-circle P Q))
-  is-contr-total-equiv-dependent-descent-data-circle =
-    is-contr-total-equiv-Dependent-Type-With-Automorphism P
+  is-torsorial-equiv-dependent-descent-data-circle =
+    is-torsorial-equiv-Dependent-Type-With-Automorphism P
 
   is-equiv-equiv-eq-dependent-descent-data-circle :
     ( Q T : dependent-descent-data-circle l2 P) →

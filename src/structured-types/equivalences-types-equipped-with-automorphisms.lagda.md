@@ -200,13 +200,13 @@ module _
       ( type-with-endomorphism-Type-With-Automorphism X)
       ( type-with-endomorphism-Type-With-Automorphism Y)
 
-  is-contr-total-htpy-equiv-Type-With-Automorphism :
+  is-torsorial-htpy-equiv-Type-With-Automorphism :
     (e : equiv-Type-With-Automorphism X Y) →
     is-contr
       ( Σ ( equiv-Type-With-Automorphism X Y)
           ( htpy-equiv-Type-With-Automorphism e))
-  is-contr-total-htpy-equiv-Type-With-Automorphism =
-    is-contr-total-htpy-equiv-Type-With-Endomorphism
+  is-torsorial-htpy-equiv-Type-With-Automorphism =
+    is-torsorial-htpy-equiv-Type-With-Endomorphism
       ( type-with-endomorphism-Type-With-Automorphism X)
       ( type-with-endomorphism-Type-With-Automorphism Y)
 
@@ -280,26 +280,26 @@ module _
   equiv-eq-Type-With-Automorphism .X refl =
     id-equiv-Type-With-Automorphism X
 
-  is-contr-total-equiv-Type-With-Automorphism :
+  is-torsorial-equiv-Type-With-Automorphism :
     is-contr (Σ (Type-With-Automorphism l1) (equiv-Type-With-Automorphism X))
-  is-contr-total-equiv-Type-With-Automorphism =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-Type-With-Automorphism =
+    is-torsorial-Eq-structure
       ( λ Y e h →
         coherence-square-maps
           ( map-equiv h)
           ( map-Type-With-Automorphism X)
           ( map-equiv e)
           ( map-equiv h))
-      ( is-contr-total-equiv (type-Type-With-Automorphism X))
+      ( is-torsorial-equiv (type-Type-With-Automorphism X))
       ( type-Type-With-Automorphism X , id-equiv)
-      ( is-contr-total-htpy-equiv (automorphism-Type-With-Automorphism X))
+      ( is-torsorial-htpy-equiv (automorphism-Type-With-Automorphism X))
 
   is-equiv-equiv-eq-Type-With-Automorphism :
     ( Y : Type-With-Automorphism l1) →
     is-equiv (equiv-eq-Type-With-Automorphism Y)
   is-equiv-equiv-eq-Type-With-Automorphism =
     fundamental-theorem-id
-      is-contr-total-equiv-Type-With-Automorphism
+      is-torsorial-equiv-Type-With-Automorphism
       equiv-eq-Type-With-Automorphism
 
   extensionality-Type-With-Automorphism :

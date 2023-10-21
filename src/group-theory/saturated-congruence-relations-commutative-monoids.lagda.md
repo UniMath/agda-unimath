@@ -192,16 +192,16 @@ refl-relate-same-elements-saturated-congruence-Commutative-Monoid M R =
   refl-relate-same-elements-congruence-Commutative-Monoid M
     ( congruence-saturated-congruence-Commutative-Monoid M R)
 
-is-contr-total-relate-same-elements-saturated-congruence-Commutative-Monoid :
+is-torsorial-relate-same-elements-saturated-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R : saturated-congruence-Commutative-Monoid l2 M) →
   is-contr
     ( Σ ( saturated-congruence-Commutative-Monoid l2 M)
         ( relate-same-elements-saturated-congruence-Commutative-Monoid M R))
-is-contr-total-relate-same-elements-saturated-congruence-Commutative-Monoid
+is-torsorial-relate-same-elements-saturated-congruence-Commutative-Monoid
   M R =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-relate-same-elements-congruence-Commutative-Monoid M
+  is-torsorial-Eq-subtype
+    ( is-torsorial-relate-same-elements-congruence-Commutative-Monoid M
       ( congruence-saturated-congruence-Commutative-Monoid M R))
     ( is-prop-is-saturated-congruence-Commutative-Monoid M)
     ( congruence-saturated-congruence-Commutative-Monoid M R)
@@ -223,7 +223,7 @@ is-equiv-relate-same-elements-eq-saturated-congruence-Commutative-Monoid :
     ( relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R S)
 is-equiv-relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R =
   fundamental-theorem-id
-    ( is-contr-total-relate-same-elements-saturated-congruence-Commutative-Monoid
+    ( is-torsorial-relate-same-elements-saturated-congruence-Commutative-Monoid
       ( M)
       ( R))
     ( relate-same-elements-eq-saturated-congruence-Commutative-Monoid M R)

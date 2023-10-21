@@ -190,19 +190,19 @@ module _
   htpy-eq-lift : (l l' : lift i f) → l ＝ l' → htpy-lift l l'
   htpy-eq-lift l .l refl = refl-htpy-lift l
 
-  is-contr-total-htpy-lift :
+  is-torsorial-htpy-lift :
     (l : lift i f) → is-contr (Σ (lift i f) (htpy-lift l))
-  is-contr-total-htpy-lift l =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-lift l =
+    is-torsorial-Eq-structure
       (λ g G → coherence-htpy-lift l (g , G))
-      (is-contr-total-htpy (map-lift i l))
+      (is-torsorial-htpy (map-lift i l))
       (map-lift i l , refl-htpy)
-      (is-contr-total-htpy (is-lift-map-lift i l ∙h refl-htpy))
+      (is-torsorial-htpy (is-lift-map-lift i l ∙h refl-htpy))
 
   is-equiv-htpy-eq-lift :
     (l l' : lift i f) → is-equiv (htpy-eq-lift l l')
   is-equiv-htpy-eq-lift l =
-    fundamental-theorem-id (is-contr-total-htpy-lift l) (htpy-eq-lift l)
+    fundamental-theorem-id (is-torsorial-htpy-lift l) (htpy-eq-lift l)
 
   extensionality-lift :
     (l l' : lift i f) → (l ＝ l') ≃ (htpy-lift l l')
@@ -222,7 +222,7 @@ module _
 
   inv-compute-total-lift : total-lift i X ≃ (X → A)
   inv-compute-total-lift =
-    ( right-unit-law-Σ-is-contr ( λ f → is-contr-total-htpy' (i ∘ f))) ∘e
+    ( right-unit-law-Σ-is-contr ( λ f → is-torsorial-htpy' (i ∘ f))) ∘e
     ( equiv-left-swap-Σ)
 
   compute-total-lift : (X → A) ≃ total-lift i X

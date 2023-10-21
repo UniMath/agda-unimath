@@ -118,12 +118,12 @@ module _
   refl-has-same-elements-inhabited-subtype =
     refl-has-same-elements-subtype (subtype-inhabited-subtype P)
 
-  is-contr-total-has-same-elements-inhabited-subtype :
+  is-torsorial-has-same-elements-inhabited-subtype :
     is-contr
       ( Σ (inhabited-subtype l2 A) (has-same-elements-inhabited-subtype P))
-  is-contr-total-has-same-elements-inhabited-subtype =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-has-same-elements-subtype
+  is-torsorial-has-same-elements-inhabited-subtype =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype
         ( subtype-inhabited-subtype P))
       ( λ Q → is-prop-type-trunc-Prop)
       ( subtype-inhabited-subtype P)

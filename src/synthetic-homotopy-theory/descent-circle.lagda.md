@@ -273,11 +273,11 @@ equiv-eq-descent-data-circle :
 equiv-eq-descent-data-circle =
   equiv-eq-Type-With-Automorphism
 
-is-contr-total-equiv-descent-data-circle :
+is-torsorial-equiv-descent-data-circle :
   { l1 : Level} (P : descent-data-circle l1) →
   is-contr (Σ (descent-data-circle l1) (equiv-descent-data-circle P))
-is-contr-total-equiv-descent-data-circle =
-  is-contr-total-equiv-Type-With-Automorphism
+is-torsorial-equiv-descent-data-circle =
+  is-torsorial-equiv-Type-With-Automorphism
 
 is-equiv-equiv-eq-descent-data-circle :
   { l1 : Level} (P Q : descent-data-circle l1) →

@@ -143,7 +143,7 @@ module _
       ( is-contr-equiv
         ( Π-total-fam (λ x y → y ＝ x))
         ( inv-distributive-Π-Σ)
-        ( is-contr-Π is-contr-total-path'))
+        ( is-contr-Π is-torsorial-path'))
       ( id , refl-htpy)) ∘e
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base ( λ s → pr1 s ~ id) ( distributive-Π-Σ))

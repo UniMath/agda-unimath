@@ -499,15 +499,15 @@ module _
   eq-equiv-Enriched-Directed-Tree S =
     map-inv-equiv (extensionality-Enriched-Directed-Tree S)
 
-  is-contr-total-equiv-Enriched-Directed-Tree :
+  is-torsorial-equiv-Enriched-Directed-Tree :
     is-contr
       ( Σ ( Enriched-Directed-Tree l3 l4 A B)
           ( equiv-Enriched-Directed-Tree A B T))
-  is-contr-total-equiv-Enriched-Directed-Tree =
+  is-torsorial-equiv-Enriched-Directed-Tree =
     is-contr-equiv'
       ( Σ (Enriched-Directed-Tree l3 l4 A B) (λ S → T ＝ S))
       ( equiv-tot extensionality-Enriched-Directed-Tree)
-      ( is-contr-total-path T)
+      ( is-torsorial-path T)
 ```
 
 ### A morphism of enriched directed trees is an equivalence if it is an equivalence on the nodes

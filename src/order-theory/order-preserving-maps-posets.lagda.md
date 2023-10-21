@@ -88,11 +88,11 @@ module _
     (f g : hom-Poset P Q) → Id f g → htpy-hom-Poset f g
   htpy-eq-hom-Poset = htpy-eq-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
-  is-contr-total-htpy-hom-Poset :
+  is-torsorial-htpy-hom-Poset :
     (f : hom-Poset P Q) →
     is-contr (Σ (hom-Poset P Q) (htpy-hom-Poset f))
-  is-contr-total-htpy-hom-Poset =
-    is-contr-total-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
+  is-torsorial-htpy-hom-Poset =
+    is-torsorial-htpy-hom-Preorder (preorder-Poset P) (preorder-Poset Q)
 
   is-equiv-htpy-eq-hom-Poset :
     (f g : hom-Poset P Q) → is-equiv (htpy-eq-hom-Poset f g)

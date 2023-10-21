@@ -147,14 +147,14 @@ refl-relate-same-elements-congruence-Commutative-Monoid :
 refl-relate-same-elements-congruence-Commutative-Monoid M =
   refl-relate-same-elements-congruence-Monoid (monoid-Commutative-Monoid M)
 
-is-contr-total-relate-same-elements-congruence-Commutative-Monoid :
+is-torsorial-relate-same-elements-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R : congruence-Commutative-Monoid l2 M) →
   is-contr
     ( Σ ( congruence-Commutative-Monoid l2 M)
         ( relate-same-elements-congruence-Commutative-Monoid M R))
-is-contr-total-relate-same-elements-congruence-Commutative-Monoid M =
-  is-contr-total-relate-same-elements-congruence-Monoid
+is-torsorial-relate-same-elements-congruence-Commutative-Monoid M =
+  is-torsorial-relate-same-elements-congruence-Monoid
     ( monoid-Commutative-Monoid M)
 
 relate-same-elements-eq-congruence-Commutative-Monoid :

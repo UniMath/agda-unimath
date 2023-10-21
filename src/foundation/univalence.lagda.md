@@ -84,18 +84,18 @@ module _
 
 ```agda
   abstract
-    is-contr-total-equiv :
+    is-torsorial-equiv :
       (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
-    is-contr-total-equiv A =
-      is-contr-total-equiv-based-univalence A (univalence A)
+    is-torsorial-equiv A =
+      is-torsorial-equiv-based-univalence A (univalence A)
 
-    is-contr-total-equiv' :
+    is-torsorial-equiv' :
       (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))
-    is-contr-total-equiv' A =
+    is-torsorial-equiv' A =
       is-contr-equiv'
         ( Σ (UU l) (λ X → X ＝ A))
         ( equiv-tot (λ X → equiv-univalence))
-        ( is-contr-total-path' A)
+        ( is-torsorial-path' A)
 ```
 
 ### Univalence for type families
@@ -115,20 +115,20 @@ equiv-eq-fam :
 equiv-eq-fam B .B refl = id-equiv-fam B
 
 abstract
-  is-contr-total-equiv-fam :
+  is-torsorial-equiv-fam :
     {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
     is-contr (Σ (A → UU l2) (equiv-fam B))
-  is-contr-total-equiv-fam B =
-    is-contr-total-Eq-Π
+  is-torsorial-equiv-fam B =
+    is-torsorial-Eq-Π
       ( λ x X → (B x) ≃ X)
-      ( λ x → is-contr-total-equiv (B x))
+      ( λ x → is-torsorial-equiv (B x))
 
 abstract
   is-equiv-equiv-eq-fam :
     {l1 l2 : Level} {A : UU l1} (B C : A → UU l2) → is-equiv (equiv-eq-fam B C)
   is-equiv-equiv-eq-fam B =
     fundamental-theorem-id
-      ( is-contr-total-equiv-fam B)
+      ( is-torsorial-equiv-fam B)
       ( equiv-eq-fam B)
 
 extensionality-fam :

@@ -186,12 +186,12 @@ module _
     (Y : Cyclic-Type l k) → Id X Y → equiv-Cyclic-Type k X Y
   equiv-eq-Cyclic-Type .X refl = id-equiv-Cyclic-Type
 
-is-contr-total-equiv-Cyclic-Type :
+is-torsorial-equiv-Cyclic-Type :
   {l1 : Level} (k : ℕ) (X : Cyclic-Type l1 k) →
   is-contr (Σ (Cyclic-Type l1 k) (equiv-Cyclic-Type k X))
-is-contr-total-equiv-Cyclic-Type k X =
-  is-contr-total-Eq-subtype
-    ( is-contr-total-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
+is-torsorial-equiv-Cyclic-Type k X =
+  is-torsorial-Eq-subtype
+    ( is-torsorial-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
     ( λ Y → is-prop-type-trunc-Prop)
     ( endo-Cyclic-Type k X)
     ( id-equiv-Type-With-Endomorphism (endo-Cyclic-Type k X))
@@ -205,7 +205,7 @@ module _
     (Y : Cyclic-Type l k) → is-equiv (equiv-eq-Cyclic-Type k X Y)
   is-equiv-equiv-eq-Cyclic-Type =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Cyclic-Type k X)
+      ( is-torsorial-equiv-Cyclic-Type k X)
       ( equiv-eq-Cyclic-Type k X)
 
   extensionality-Cyclic-Type :
@@ -237,10 +237,10 @@ module _
     (e f : equiv-Cyclic-Type k X Y) → Id e f → htpy-equiv-Cyclic-Type e f
   htpy-eq-equiv-Cyclic-Type e .e refl = refl-htpy-equiv-Cyclic-Type e
 
-  is-contr-total-htpy-equiv-Cyclic-Type :
+  is-torsorial-htpy-equiv-Cyclic-Type :
     (e : equiv-Cyclic-Type k X Y) →
     is-contr (Σ (equiv-Cyclic-Type k X Y) (htpy-equiv-Cyclic-Type e))
-  is-contr-total-htpy-equiv-Cyclic-Type e =
+  is-torsorial-htpy-equiv-Cyclic-Type e =
     is-contr-equiv'
       ( Σ ( equiv-Type-With-Endomorphism
             ( endo-Cyclic-Type k X)
@@ -264,7 +264,7 @@ module _
                     ( coherence-square-equiv-Cyclic-Type k X Y f x))
                   ( ( coherence-square-equiv-Cyclic-Type k X Y e x) ∙
                     ( ap (endomorphism-Cyclic-Type k Y) (H x)))))))
-      ( is-contr-total-htpy-equiv-Type-With-Endomorphism
+      ( is-torsorial-htpy-equiv-Type-With-Endomorphism
         ( endo-Cyclic-Type k X)
         ( endo-Cyclic-Type k Y)
         ( e))
@@ -273,7 +273,7 @@ module _
     (e f : equiv-Cyclic-Type k X Y) → is-equiv (htpy-eq-equiv-Cyclic-Type e f)
   is-equiv-htpy-eq-equiv-Cyclic-Type e =
     fundamental-theorem-id
-      ( is-contr-total-htpy-equiv-Cyclic-Type e)
+      ( is-torsorial-htpy-equiv-Cyclic-Type e)
       ( htpy-eq-equiv-Cyclic-Type e)
 
   extensionality-equiv-Cyclic-Type :

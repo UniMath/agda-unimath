@@ -107,12 +107,12 @@ module _
       ( type-with-endomorphism-Type-With-Automorphism X)
       ( type-with-endomorphism-Type-With-Automorphism Y)
 
-  is-contr-total-htpy-hom-Type-With-Automorphism :
+  is-torsorial-htpy-hom-Type-With-Automorphism :
     (f : hom-Type-With-Automorphism X Y) →
     is-contr
       ( Σ (hom-Type-With-Automorphism X Y) (htpy-hom-Type-With-Automorphism f))
-  is-contr-total-htpy-hom-Type-With-Automorphism =
-    is-contr-total-htpy-hom-Type-With-Endomorphism
+  is-torsorial-htpy-hom-Type-With-Automorphism =
+    is-torsorial-htpy-hom-Type-With-Endomorphism
       ( type-with-endomorphism-Type-With-Automorphism X)
       ( type-with-endomorphism-Type-With-Automorphism Y)
 

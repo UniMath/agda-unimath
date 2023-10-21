@@ -121,7 +121,7 @@ is-contr-htpy-hom-species-𝔽 :
   (f : hom-species-𝔽 F G) →
   is-contr (Σ (hom-species-𝔽 F G) (htpy-hom-species-𝔽 F G f))
 is-contr-htpy-hom-species-𝔽 F G f =
-  is-contr-total-Eq-Π (λ X h → f X ~ h) (λ X → is-contr-total-htpy (f X))
+  is-torsorial-Eq-Π (λ X h → f X ~ h) (λ X → is-torsorial-htpy (f X))
 
 is-equiv-htpy-eq-hom-species-𝔽 :
   {l1 l2 l3 : Level} (F : species-𝔽 l1 l2) (G : species-𝔽 l1 l3)

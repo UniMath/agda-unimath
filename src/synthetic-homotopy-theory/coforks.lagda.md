@@ -140,12 +140,12 @@ module _
   htpy-cofork-eq e .e refl = reflexive-htpy-cofork e
 
   abstract
-    is-contr-total-htpy-cofork :
+    is-torsorial-htpy-cofork :
       ( e : cofork f g X) → is-contr (Σ (cofork f g X) (htpy-cofork f g e))
-    is-contr-total-htpy-cofork e =
-      is-contr-total-Eq-structure
+    is-torsorial-htpy-cofork e =
+      is-torsorial-Eq-structure
         ( ev-pair (coherence-htpy-cofork f g e))
-        ( is-contr-total-htpy (map-cofork f g e))
+        ( is-torsorial-htpy (map-cofork f g e))
         ( map-cofork f g e , refl-htpy)
         ( is-contr-is-equiv'
           ( Σ ( map-cofork f g e ∘ f ~ map-cofork f g e ∘ g)
@@ -153,12 +153,12 @@ module _
           ( tot (λ K M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv
             ( is-equiv-concat-htpy right-unit-htpy))
-          ( is-contr-total-htpy (coherence-cofork f g e)))
+          ( is-torsorial-htpy (coherence-cofork f g e)))
 
     is-equiv-htpy-cofork-eq :
       ( e e' : cofork f g X) → is-equiv (htpy-cofork-eq e e')
     is-equiv-htpy-cofork-eq e =
-      fundamental-theorem-id (is-contr-total-htpy-cofork e) (htpy-cofork-eq e)
+      fundamental-theorem-id (is-torsorial-htpy-cofork e) (htpy-cofork-eq e)
 
   eq-htpy-cofork :
     ( e e' : cofork f g X) → htpy-cofork f g e e' → e ＝ e'
