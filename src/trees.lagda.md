@@ -1,6 +1,10 @@
 # Trees
 
 ```agda
+{-# OPTIONS --guardedness #-}
+```
+
+```agda
 module trees where
 
 open import trees.algebras-polynomial-endofunctors public
