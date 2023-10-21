@@ -151,7 +151,6 @@ open import foundation.fundamental-theorem-of-identity-types public
 open import foundation.global-choice public
 open import foundation.hilberts-epsilon-operators public
 open import foundation.homotopies public
-open import foundation.homotopies-iterated-dependent-product-types public
 open import foundation.homotopy-induction public
 open import foundation.identity-systems public
 open import foundation.identity-truncated-types public
@@ -200,6 +199,7 @@ open import foundation.multisubsets public
 open import foundation.multivariable-correspondences public
 open import foundation.multivariable-decidable-relations public
 open import foundation.multivariable-functoriality-set-quotients public
+open import foundation.multivariable-homotopies public
 open import foundation.multivariable-operations public
 open import foundation.multivariable-relations public
 open import foundation.negated-equality public

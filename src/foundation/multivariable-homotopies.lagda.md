@@ -1,7 +1,7 @@
-# Homotopies in iterated dependent product types
+# Multivariable homotopies
 
 ```agda
-module foundation.homotopies-iterated-dependent-product-types where
+module foundation.multivariable-homotopies where
 
 open import foundation.telescopes public
 ```
@@ -31,48 +31,49 @@ open import foundation-core.truncation-levels
 Given an
 [iterated dependent product](foundation.iterated-dependent-product-types.md) we
 can consider [homotopies](foundation-core.homotopies.md) of its elements. By
-[function extensionality](foundation.function-extensionality.md), **iterated
-homotopies** are [equivalent](foundation-core.equivalences.md) to
-[identifications](foundation-core.identity-types.md).
+[function extensionality](foundation.function-extensionality.md),
+**multivariable homotopies** are [equivalent](foundation-core.equivalences.md)
+to [identifications](foundation-core.identity-types.md).
 
 ## Definitions
 
-### Homotopies in iterated dependent products of iterated type families
+### Multivariable homotopies
 
 ```agda
-iterated-htpy :
+multivariable-htpy :
   {l : Level} {n : ℕ} {{A : telescope l n}} (f g : iterated-Π A) → UU l
-iterated-htpy {{base-telescope A}} f g = f ＝ g
-iterated-htpy {{cons-telescope A}} f g =
-  (x : _) → iterated-htpy {{A x}} (f x) (g x)
+multivariable-htpy {{base-telescope A}} f g = f ＝ g
+multivariable-htpy {{cons-telescope A}} f g =
+  (x : _) → multivariable-htpy {{A x}} (f x) (g x)
 ```
 
 ### Iterated function extensionality
 
 ```agda
-refl-iterated-htpy :
+refl-multivariable-htpy :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f : iterated-Π A} → iterated-htpy {{A}} f f
-refl-iterated-htpy .0 {{base-telescope A}} = refl
-refl-iterated-htpy ._ {{cons-telescope A}} x = refl-iterated-htpy _ {{A x}}
+  {f : iterated-Π A} → multivariable-htpy {{A}} f f
+refl-multivariable-htpy .0 {{base-telescope A}} = refl
+refl-multivariable-htpy ._ {{cons-telescope A}} x =
+  refl-multivariable-htpy _ {{A x}}
 
-iterated-htpy-eq :
+multivariable-htpy-eq :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f g : iterated-Π A} → f ＝ g → iterated-htpy {{A}} f g
-iterated-htpy-eq .0 {{base-telescope A}} p = p
-iterated-htpy-eq ._ {{cons-telescope A}} p x =
-  iterated-htpy-eq _ {{A x}} (htpy-eq p x)
+  {f g : iterated-Π A} → f ＝ g → multivariable-htpy {{A}} f g
+multivariable-htpy-eq .0 {{base-telescope A}} p = p
+multivariable-htpy-eq ._ {{cons-telescope A}} p x =
+  multivariable-htpy-eq _ {{A x}} (htpy-eq p x)
 
-eq-iterated-htpy :
+eq-multivariable-htpy :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f g : iterated-Π A} → iterated-htpy {{A}} f g → f ＝ g
-eq-iterated-htpy .0 {{base-telescope A}} H = H
-eq-iterated-htpy ._ {{cons-telescope A}} H =
-  eq-htpy (λ x → eq-iterated-htpy _ {{A x}} (H x))
+  {f g : iterated-Π A} → multivariable-htpy {{A}} f g → f ＝ g
+eq-multivariable-htpy .0 {{base-telescope A}} H = H
+eq-multivariable-htpy ._ {{cons-telescope A}} H =
+  eq-htpy (λ x → eq-multivariable-htpy _ {{A x}} (H x))
 
 equiv-iterated-funext :
   {l : Level} (n : ℕ) {{A : telescope l n}}
-  {f g : iterated-Π A} → (f ＝ g) ≃ iterated-htpy {{A}} f g
+  {f g : iterated-Π A} → (f ＝ g) ≃ multivariable-htpy {{A}} f g
 equiv-iterated-funext .0 {{base-telescope A}} = id-equiv
 equiv-iterated-funext ._ {{cons-telescope A}} =
   equiv-Π-equiv-family (λ x → equiv-iterated-funext _ {{A x}}) ∘e equiv-funext
