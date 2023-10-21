@@ -175,4 +175,4 @@ module _
 
 ## See also
 
-- [Homomorphisms of groups equipped with normal subgroups](group-theory.homomorphisms-groups-equipped-with-normal-subgroups)
+- [Homomorphisms of groups equipped with normal subgroups](group-theory.homomorphisms-groups-equipped-with-normal-subgroups.md)
