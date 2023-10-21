@@ -34,22 +34,22 @@ a common generalization of the [univalence axiom](foundation.univalence.md) and
 instance-preunivalence : {l : Level} (X Y : UU l) → UU (lsuc l)
 instance-preunivalence X Y = is-emb (equiv-eq {A = X} {B = Y})
 
-axiom-based-preunivalence : {l : Level} (X : UU l) → UU (lsuc l)
-axiom-based-preunivalence {l} X = (Y : UU l) → instance-preunivalence X Y
+based-preunivalence-axiom : {l : Level} (X : UU l) → UU (lsuc l)
+based-preunivalence-axiom {l} X = (Y : UU l) → instance-preunivalence X Y
 
-axiom-preunivalence-Level : (l : Level) → UU (lsuc l)
-axiom-preunivalence-Level l = (X Y : UU l) → instance-preunivalence X Y
+preunivalence-axiom-Level : (l : Level) → UU (lsuc l)
+preunivalence-axiom-Level l = (X Y : UU l) → instance-preunivalence X Y
 
-axiom-preunivalence : UUω
-axiom-preunivalence = {l : Level} → axiom-preunivalence-Level l
+preunivalence-axiom : UUω
+preunivalence-axiom = {l : Level} → preunivalence-axiom-Level l
 
 emb-preunivalence :
-  axiom-preunivalence → {l : Level} (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
+  preunivalence-axiom → {l : Level} (X Y : UU l) → (X ＝ Y) ↪ (X ≃ Y)
 pr1 (emb-preunivalence L X Y) = equiv-eq
 pr2 (emb-preunivalence L X Y) = L X Y
 
 emb-map-preunivalence :
-  axiom-preunivalence → {l : Level} (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
+  preunivalence-axiom → {l : Level} (X Y : UU l) → (X ＝ Y) ↪ (X → Y)
 emb-map-preunivalence L X Y =
   comp-emb (emb-subtype is-equiv-Prop) (emb-preunivalence L X Y)
 ```
@@ -74,8 +74,8 @@ module _
       ( is-set-axiom-K K-Type A B)
       ( is-set-equiv-is-set (is-set-axiom-K K-A) (is-set-axiom-K K-B))
 
-axiom-preunivalence-axiom-K : axiom-K → axiom-preunivalence
-axiom-preunivalence-axiom-K K {l} X Y =
+preunivalence-axiom-axiom-K : axiom-K → preunivalence-axiom
+preunivalence-axiom-axiom-K K {l} X Y =
   instance-preunivalence-instance-axiom-K X Y (K (UU l)) (K X) (K Y)
 ```
 
@@ -90,16 +90,16 @@ module _
     instance-univalence A B → instance-preunivalence A B
   instance-preunivalence-instance-univalence = is-emb-is-equiv
 
-axiom-preunivalence-axiom-univalence : axiom-univalence → axiom-preunivalence
-axiom-preunivalence-axiom-univalence UA X Y =
+preunivalence-axiom-univalence-axiom : univalence-axiom → preunivalence-axiom
+preunivalence-axiom-univalence-axiom UA X Y =
   instance-preunivalence-instance-univalence X Y (UA X Y)
 ```
 
 ### Preunivalence holds in univalent foundations
 
 ```agda
-preunivalence : axiom-preunivalence
-preunivalence = axiom-preunivalence-axiom-univalence univalence
+preunivalence : preunivalence-axiom
+preunivalence = preunivalence-axiom-univalence-axiom univalence
 ```
 
 ## See also

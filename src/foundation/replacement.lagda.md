@@ -32,19 +32,19 @@ instance-replacement :
 instance-replacement l {A = A} {B} f =
   is-small l A → is-locally-small l B → is-small l (im f)
 
-axiom-replacement-Level : (l l1 l2 : Level) → UU (lsuc l ⊔ lsuc l1 ⊔ lsuc l2)
-axiom-replacement-Level l l1 l2 =
+replacement-axiom-Level : (l l1 l2 : Level) → UU (lsuc l ⊔ lsuc l1 ⊔ lsuc l2)
+replacement-axiom-Level l l1 l2 =
   {A : UU l1} {B : UU l2} → (f : A → B) → instance-replacement l f
 
-axiom-replacement : UUω
-axiom-replacement = {l l1 l2 : Level} → axiom-replacement-Level l l1 l2
+replacement-axiom : UUω
+replacement-axiom = {l l1 l2 : Level} → replacement-axiom-Level l l1 l2
 ```
 
 ## Postulate
 
 ```agda
 postulate
-  replacement : axiom-replacement
+  replacement : replacement-axiom
 ```
 
 ```agda
