@@ -79,7 +79,7 @@ peano-4-ℕ x y z = concat' x
 
 The 5th axiom of peano's arithmetic states that for every `a` and `b`, if
 `a ＝ b` and `b` is a natural number, then `a` is a natural number. This axiom
-does not make sense in type theory, as every element by definition live in a
+does not make sense in type theory, as every element by definition lives in a
 specified type.
 
 ### Peano's 6th axiom
