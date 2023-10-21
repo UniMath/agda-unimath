@@ -195,9 +195,9 @@ module _
   is-emb-tot H =
     is-emb-is-prop-map (is-prop-map-tot (λ x → is-prop-map-is-emb (H x)))
 
-  tot-emb : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
-  pr1 (tot-emb f) = tot (λ x → map-emb (f x))
-  pr2 (tot-emb f) = is-emb-tot (λ x → is-emb-map-emb (f x))
+  emb-tot : ((x : A) → B x ↪ C x) → Σ A B ↪ Σ A C
+  pr1 (emb-tot f) = tot (λ x → map-emb (f x))
+  pr2 (emb-tot f) = is-emb-tot (λ x → is-emb-map-emb (f x))
 ```
 
 ### The functoriality of dependent pair types preserves embeddings
