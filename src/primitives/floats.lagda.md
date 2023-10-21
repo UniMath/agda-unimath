@@ -30,6 +30,7 @@ manipulate them. Floats can be written as usual, using dots as separators, e.g.
 ```agda
 postulate
   Float : UU lzero
+
 {-# BUILTIN FLOAT Float #-}
 
 primitive
