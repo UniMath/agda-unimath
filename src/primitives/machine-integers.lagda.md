@@ -25,6 +25,7 @@ functions to manipulate them.
 ```agda
 postulate
   Word64 : UU lzero
+
 {-# BUILTIN WORD64 Word64 #-}
 
 primitive
