@@ -43,7 +43,7 @@ equivalences
 ```
 
 indexed by `x : B`. Note that the type of such a **torsorial structure** on the
-type family `E` is [equivalent](foundation.equivalences.md) to the type
+type family `E` is [equivalent](foundation-core.equivalences.md) to the type
 
 ```text
   E pt × is-torsorial E

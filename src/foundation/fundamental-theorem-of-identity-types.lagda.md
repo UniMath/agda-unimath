@@ -46,7 +46,7 @@ type `A`, and consider an element `a : A`. Then the following are
 
 ## Theorem
 
-### The fundamental theorem of identityt types
+### The fundamental theorem of identity types
 
 ```agda
 module _

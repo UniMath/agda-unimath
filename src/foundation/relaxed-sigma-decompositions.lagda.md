@@ -434,7 +434,7 @@ module _
     Y = snd-fibered-Relaxed-Σ-Decomposition D
 
   is-torsorial-equiv-fibered-Relaxed-Σ-Decomposition :
-    is-torsorial ( equiv-fibered-Relaxed-Σ-Decomposition D)
+    is-torsorial (equiv-fibered-Relaxed-Σ-Decomposition D)
   is-torsorial-equiv-fibered-Relaxed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' Y' e →
