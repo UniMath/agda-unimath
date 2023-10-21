@@ -586,7 +586,7 @@ module _
     f-Y = snd-displayed-Π-Decomposition disp-D
 
   is-torsorial-equiv-displayed-Π-Decomposition :
-    is-torsorial ( equiv-displayed-Π-Decomposition disp-D)
+    is-torsorial (equiv-displayed-Π-Decomposition disp-D)
   is-torsorial-equiv-displayed-Π-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' f-Y' e → equiv-snd-displayed-Π-Decomposition

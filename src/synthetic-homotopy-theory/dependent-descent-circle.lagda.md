@@ -319,7 +319,7 @@ module _
 
   is-torsorial-equiv-dependent-descent-data-circle :
     ( Q : dependent-descent-data-circle l2 P) →
-    is-torsorial ( equiv-dependent-descent-data-circle P Q)
+    is-torsorial (equiv-dependent-descent-data-circle P Q)
   is-torsorial-equiv-dependent-descent-data-circle =
     is-torsorial-equiv-Dependent-Type-With-Automorphism P
 

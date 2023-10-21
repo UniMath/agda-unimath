@@ -289,7 +289,7 @@ module _
   where
 
   is-torsorial-htpy-hom-Commutative-Semiring :
-    is-torsorial ( htpy-hom-Commutative-Semiring A B f)
+    is-torsorial (htpy-hom-Commutative-Semiring A B f)
   is-torsorial-htpy-hom-Commutative-Semiring =
     is-torsorial-htpy-hom-Semiring
       ( semiring-Commutative-Semiring A)

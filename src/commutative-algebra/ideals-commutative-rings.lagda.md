@@ -239,7 +239,7 @@ module _
     refl-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
 
   is-torsorial-has-same-elements-ideal-Commutative-Ring :
-    is-torsorial ( has-same-elements-ideal-Commutative-Ring R I)
+    is-torsorial (has-same-elements-ideal-Commutative-Ring R I)
   is-torsorial-has-same-elements-ideal-Commutative-Ring =
     is-torsorial-has-same-elements-ideal-Ring (ring-Commutative-Ring R) I
 

@@ -504,7 +504,7 @@ module _
   pr2 (pr2 id-equiv-Set-Indexed-Σ-Decomposition) = refl-htpy
 
   is-torsorial-equiv-Set-Indexed-Σ-Decomposition :
-    is-torsorial ( equiv-Set-Indexed-Σ-Decomposition X)
+    is-torsorial (equiv-Set-Indexed-Σ-Decomposition X)
   is-torsorial-equiv-Set-Indexed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ U Vf e →
