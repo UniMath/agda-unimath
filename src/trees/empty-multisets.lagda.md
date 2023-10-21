@@ -37,7 +37,7 @@ module _
   is-empty-𝕍 (tree-𝕎 X Y) = is-empty X
 ```
 
-### The pradicate of being a multiset with no elements
+### The predicate of being a multiset with no elements
 
 However, note that this predicate returns a type of universe level `lsuc l`.
 
