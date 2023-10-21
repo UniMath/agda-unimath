@@ -8,6 +8,7 @@ module elementary-number-theory.based-strong-induction-natural-numbers where
 
 ```agda
 open import elementary-number-theory.based-induction-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.inequality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
