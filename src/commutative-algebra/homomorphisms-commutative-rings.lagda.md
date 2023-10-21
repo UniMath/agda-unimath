@@ -17,6 +17,7 @@ open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-abelian-groups
@@ -337,8 +338,7 @@ module _
       ( f)
 
   is-torsorial-htpy-hom-Commutative-Ring :
-    is-contr
-      ( Σ (hom-Commutative-Ring A B) (htpy-hom-Commutative-Ring A B f))
+    is-torsorial (htpy-hom-Commutative-Ring A B f)
   is-torsorial-htpy-hom-Commutative-Ring =
     is-torsorial-htpy-hom-Ring
       ( ring-Commutative-Ring A)

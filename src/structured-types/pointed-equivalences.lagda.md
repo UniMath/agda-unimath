@@ -21,6 +21,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -159,7 +160,7 @@ module _
   where
 
   is-torsorial-equiv-Pointed-Type :
-    is-contr (Σ (Pointed-Type l1) (λ B → A ≃∗ B))
+    is-torsorial (λ B → A ≃∗ B)
   is-torsorial-equiv-Pointed-Type =
     is-torsorial-Eq-structure
       ( λ X x e → map-equiv e (point-Pointed-Type A) ＝ x)

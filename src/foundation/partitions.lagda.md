@@ -38,6 +38,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -415,8 +416,7 @@ module _
       ( inhabited-subtype-block-partition P B)
 
   is-torsorial-has-same-elements-block-partition :
-    is-contr
-      ( Σ (block-partition P) has-same-elements-block-partition)
+    is-torsorial has-same-elements-block-partition
   is-torsorial-has-same-elements-block-partition =
     is-contr-equiv'
       ( Σ ( block-partition P)

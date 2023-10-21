@@ -26,6 +26,7 @@ open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -86,7 +87,7 @@ module _
 
   abstract
     is-torsorial-Eq-im :
-      (x : im f) → is-contr (Σ (im f) (Eq-im x))
+      (x : im f) → is-torsorial (Eq-im x)
     is-torsorial-Eq-im x =
       is-torsorial-Eq-subtype
         ( is-torsorial-path (pr1 x))

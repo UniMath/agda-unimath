@@ -28,6 +28,7 @@ open import foundation-core.coproduct-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.finite-types
@@ -211,9 +212,7 @@ module _
               ( λ where (x , y , refl) → H x y)))
 
   is-torsorial-htpy-symmetric-operation-Set :
-    is-contr
-      ( Σ ( symmetric-operation A (type-Set B))
-          ( htpy-symmetric-operation-Set))
+    is-torsorial (htpy-symmetric-operation-Set)
   pr1 is-torsorial-htpy-symmetric-operation-Set =
     center-total-htpy-symmetric-operation-Set
   pr2 is-torsorial-htpy-symmetric-operation-Set =

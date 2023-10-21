@@ -19,6 +19,7 @@ open import foundation.unordered-tuples
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.finite-types
 ```
@@ -92,7 +93,7 @@ module _
   equiv-eq-unordered-tuple-types .A refl = id-equiv-unordered-tuple-types
 
   is-torsorial-equiv-unordered-tuple-types :
-    is-contr (Σ (unordered-tuple-types l n) (equiv-unordered-tuple-types n A))
+    is-torsorial (equiv-unordered-tuple-types n A)
   is-torsorial-equiv-unordered-tuple-types =
     is-torsorial-Eq-structure
       ( λ I B e →

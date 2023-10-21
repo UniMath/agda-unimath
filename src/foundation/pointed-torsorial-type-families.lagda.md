@@ -25,6 +25,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.small-types
+open import foundation-core.torsorial-type-families
 
 open import structured-types.pointed-types
 ```
@@ -45,7 +46,7 @@ indexed by `x : B`. Note that the type of such a **torsorial structure** on the
 type family `E` is [equivalent](foundation.equivalences.md) to the type
 
 ```text
-  E pt × is-contr (Σ B E)
+  E pt × is-torsorial E
 ```
 
 Indeed, if `E` is pointed torsorial, then `refl : pt ＝ pt` induces an element
@@ -79,7 +80,7 @@ module _
     map-inv-equiv (T (point-Pointed-Type B)) refl
 
   is-torsorial-space-is-pointed-torsorial-family-of-types :
-    is-contr (Σ (type-Pointed-Type B) E)
+    is-torsorial E
   is-torsorial-space-is-pointed-torsorial-family-of-types =
     fundamental-theorem-id'
       ( λ x → map-inv-equiv (T x))

@@ -14,6 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-abelian-groups
@@ -232,9 +233,7 @@ refl-relate-same-elements-congruence-Ring R =
 
 is-torsorial-relate-same-elements-congruence-Ring :
   {l1 l2 : Level} (R : Ring l1) (S : congruence-Ring l2 R) →
-  is-contr
-    ( Σ ( congruence-Ring l2 R)
-        ( relate-same-elements-congruence-Ring R S))
+  is-torsorial (relate-same-elements-congruence-Ring R S)
 is-torsorial-relate-same-elements-congruence-Ring R =
   is-torsorial-relate-same-elements-congruence-Semiring
     ( semiring-Ring R)

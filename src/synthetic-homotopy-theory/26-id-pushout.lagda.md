@@ -23,6 +23,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universal-property-identity-types
 open import foundation.universe-levels
@@ -99,8 +100,7 @@ module hom-Fam-pushout
     reflexive-htpy-hom-Fam-pushout h
 
   is-torsorial-htpy-hom-Fam-pushout :
-    ( h : hom-Fam-pushout) →
-    is-contr (Σ (hom-Fam-pushout) (htpy-hom-Fam-pushout h))
+    ( h : hom-Fam-pushout) → is-torsorial (htpy-hom-Fam-pushout h)
   is-torsorial-htpy-hom-Fam-pushout h =
     is-torsorial-Eq-structure
       ( λ kA kB-ke (HA : (x : A) → (pr1 h x) ~ (kA x)) →

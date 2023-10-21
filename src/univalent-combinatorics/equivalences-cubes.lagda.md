@@ -19,6 +19,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -67,7 +68,7 @@ equiv-eq-cube :
 equiv-eq-cube k {X} refl = id-equiv-cube k X
 
 is-torsorial-equiv-cube :
-  (k : ℕ) (X : cube k) → is-contr (Σ (cube k) (equiv-cube k X))
+  (k : ℕ) (X : cube k) → is-torsorial (equiv-cube k X)
 is-torsorial-equiv-cube k X =
   is-torsorial-Eq-structure
     ( λ D (A : type-UU-Fin k D → UU-Fin lzero 2)
@@ -119,7 +120,7 @@ htpy-eq-equiv-cube k X Y e .e refl = refl-htpy-equiv-cube k X Y e
 
 is-torsorial-htpy-equiv-cube :
   (k : ℕ) (X Y : cube k) (e : equiv-cube k X Y) →
-  is-contr (Σ (equiv-cube k X Y) (htpy-equiv-cube k X Y e))
+  is-torsorial (htpy-equiv-cube k X Y e)
 is-torsorial-htpy-equiv-cube k X Y e =
   is-torsorial-Eq-structure
     ( λ α β H →

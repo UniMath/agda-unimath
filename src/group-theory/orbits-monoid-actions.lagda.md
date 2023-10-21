@@ -17,6 +17,7 @@ open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.monoid-actions
@@ -74,7 +75,7 @@ module _
 
   is-torsorial-htpy-hom-orbit-Monoid-Action :
     {x y : type-Monoid-Action M X} (f : hom-orbit-Monoid-Action x y) →
-    is-contr (Σ (hom-orbit-Monoid-Action x y) (htpy-hom-orbit-Monoid-Action f))
+    is-torsorial (htpy-hom-orbit-Monoid-Action f)
   is-torsorial-htpy-hom-orbit-Monoid-Action {x} {y} f =
     is-torsorial-Eq-subtype
       ( is-torsorial-path (element-hom-orbit-Monoid-Action f))

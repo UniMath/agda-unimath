@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -658,7 +659,7 @@ module _
   where
 
   is-torsorial-iso-Category :
-    is-contr (Σ (obj-Category C) (iso-Category C X))
+    is-torsorial (iso-Category C X)
   is-torsorial-iso-Category =
     is-contr-equiv'
       ( Σ (obj-Category C) (X ＝_))
@@ -666,7 +667,7 @@ module _
       ( is-torsorial-path X)
 
   is-torsorial-iso-Category' :
-    is-contr (Σ (obj-Category C) (λ Y → iso-Category C Y X))
+    is-torsorial (λ Y → iso-Category C Y X)
   is-torsorial-iso-Category' =
     is-contr-equiv'
       ( Σ (obj-Category C) (_＝ X))

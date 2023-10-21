@@ -31,6 +31,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.pullbacks
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -562,7 +563,7 @@ equiv-Fam-pushout-eq {P = P} {.P} refl =
 is-torsorial-equiv-Fam-pushout :
   {l1 l2 l3 l : Level} {S : UU l1} {A : UU l2} {B : UU l3}
   {f : S → A} {g : S → B} (P : Fam-pushout l f g) →
-  is-contr (Σ (Fam-pushout l f g) (equiv-Fam-pushout P))
+  is-torsorial (equiv-Fam-pushout P)
 is-torsorial-equiv-Fam-pushout {S = S} {A} {B} {f} {g} P =
   is-torsorial-Eq-structure
     ( λ PA' t eA →

@@ -33,6 +33,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -185,9 +186,7 @@ module _
         ( x))
 
   is-torsorial-equiv-binary-coproduct-Decomposition :
-    is-contr
-      ( Σ ( binary-coproduct-Decomposition l2 l3 A)
-          ( equiv-binary-coproduct-Decomposition X))
+    is-torsorial (equiv-binary-coproduct-Decomposition X)
   is-torsorial-equiv-binary-coproduct-Decomposition =
     is-torsorial-Eq-structure
       ( _)

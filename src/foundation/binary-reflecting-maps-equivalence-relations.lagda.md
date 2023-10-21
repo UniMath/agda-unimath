@@ -21,6 +21,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -113,9 +114,7 @@ module _
     refl-htpy-binary-reflecting-map-Equivalence-Relation
 
   is-torsorial-htpy-binary-reflecting-map-Equivalence-Relation :
-    is-contr
-      ( Σ ( binary-reflecting-map-Equivalence-Relation R S (type-Set C))
-          ( htpy-binary-reflecting-map-Equivalence-Relation))
+    is-torsorial (htpy-binary-reflecting-map-Equivalence-Relation)
   is-torsorial-htpy-binary-reflecting-map-Equivalence-Relation =
     is-torsorial-Eq-subtype
       ( is-torsorial-Eq-Π

@@ -22,6 +22,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -85,12 +86,12 @@ module _
 ```agda
   abstract
     is-torsorial-equiv :
-      (A : UU l) → is-contr (Σ (UU l) (λ X → A ≃ X))
+      (A : UU l) → is-torsorial (λ (X : UU l) → A ≃ X)
     is-torsorial-equiv A =
       is-torsorial-equiv-based-univalence A (univalence A)
 
     is-torsorial-equiv' :
-      (A : UU l) → is-contr (Σ (UU l) (λ X → X ≃ A))
+      (A : UU l) → is-torsorial (λ (X : UU l) → X ≃ A)
     is-torsorial-equiv' A =
       is-contr-equiv'
         ( Σ (UU l) (λ X → X ＝ A))
@@ -117,7 +118,7 @@ equiv-eq-fam B .B refl = id-equiv-fam B
 abstract
   is-torsorial-equiv-fam :
     {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-    is-contr (Σ (A → UU l2) (equiv-fam B))
+    is-torsorial (λ (C : A → UU l2) → equiv-fam B C)
   is-torsorial-equiv-fam B =
     is-torsorial-Eq-Π
       ( λ x X → (B x) ≃ X)

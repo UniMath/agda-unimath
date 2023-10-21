@@ -20,6 +20,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.univalence
 open import foundation.universe-levels
@@ -196,9 +197,7 @@ module _
 
   is-torsorial-htpy-equiv-Type-With-Endomorphism :
     (e : equiv-Type-With-Endomorphism X Y) →
-    is-contr
-      ( Σ ( equiv-Type-With-Endomorphism X Y)
-          ( htpy-equiv-Type-With-Endomorphism e))
+    is-torsorial (htpy-equiv-Type-With-Endomorphism e)
   is-torsorial-htpy-equiv-Type-With-Endomorphism e =
     is-contr-equiv
       ( Σ ( Σ ( hom-Type-With-Endomorphism X Y)
@@ -306,7 +305,7 @@ module _
     id-equiv-Type-With-Endomorphism X
 
   is-torsorial-equiv-Type-With-Endomorphism :
-    is-contr (Σ (Type-With-Endomorphism l1) (equiv-Type-With-Endomorphism X))
+    is-torsorial (equiv-Type-With-Endomorphism X)
   is-torsorial-equiv-Type-With-Endomorphism =
     is-torsorial-Eq-structure
       ( λ Y f e →

@@ -19,6 +19,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -136,7 +137,7 @@ module _
   id-equiv-Relation x y = id-equiv
 
   is-torsorial-equiv-Relation :
-    is-contr (Σ (Relation l2 A) (equiv-Relation R))
+    is-torsorial (equiv-Relation R)
   is-torsorial-equiv-Relation =
     is-torsorial-Eq-Π
       ( λ x P → (y : A) → R x y ≃ P y)
@@ -181,7 +182,7 @@ module _
     refl-has-same-elements-subtype (R x)
 
   is-torsorial-relates-same-elements-Relation-Prop :
-    is-contr (Σ (Relation-Prop l2 A) (relates-same-elements-Relation-Prop R))
+    is-torsorial (relates-same-elements-Relation-Prop R)
   is-torsorial-relates-same-elements-Relation-Prop =
     is-torsorial-Eq-Π
       ( λ x P → has-same-elements-subtype (R x) P)

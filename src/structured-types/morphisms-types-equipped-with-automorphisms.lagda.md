@@ -12,6 +12,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.morphisms-types-equipped-with-endomorphisms
@@ -109,8 +110,7 @@ module _
 
   is-torsorial-htpy-hom-Type-With-Automorphism :
     (f : hom-Type-With-Automorphism X Y) →
-    is-contr
-      ( Σ (hom-Type-With-Automorphism X Y) (htpy-hom-Type-With-Automorphism f))
+    is-torsorial (htpy-hom-Type-With-Automorphism f)
   is-torsorial-htpy-hom-Type-With-Automorphism =
     is-torsorial-htpy-hom-Type-With-Endomorphism
       ( type-with-endomorphism-Type-With-Automorphism X)

@@ -23,6 +23,7 @@ open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -149,7 +150,7 @@ abstract
   is-torsorial-Eq-ELIM-ℤ :
     { l1 : Level} (P : ℤ → UU l1) →
     ( p0 : P zero-ℤ) (pS : (k : ℤ) → (P k) ≃ (P (succ-ℤ k))) →
-    ( s : ELIM-ℤ P p0 pS) → is-contr (Σ (ELIM-ℤ P p0 pS) (Eq-ELIM-ℤ P p0 pS s))
+    ( s : ELIM-ℤ P p0 pS) → is-torsorial (Eq-ELIM-ℤ P p0 pS s)
   is-torsorial-Eq-ELIM-ℤ P p0 pS s =
     is-torsorial-Eq-structure
       ( λ f t H →

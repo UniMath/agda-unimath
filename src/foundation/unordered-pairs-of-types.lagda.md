@@ -17,6 +17,7 @@ open import foundation.unordered-pairs
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 
 open import univalent-combinatorics.2-element-types
 ```
@@ -87,7 +88,7 @@ module _
   equiv-eq-unordered-pair-types .A refl = id-equiv-unordered-pair-types
 
   is-torsorial-equiv-unordered-pair-types :
-    is-contr (Σ (unordered-pair-types l) (equiv-unordered-pair-types A))
+    is-torsorial (equiv-unordered-pair-types A)
   is-torsorial-equiv-unordered-pair-types =
     is-torsorial-Eq-structure
       ( λ I B e →

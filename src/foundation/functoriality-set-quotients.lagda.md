@@ -33,6 +33,7 @@ open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -322,8 +323,7 @@ module _
 
   is-torsorial-htpy-hom-Equivalence-Relation :
     (f : hom-Equivalence-Relation R S) →
-    is-contr
-      ( Σ (hom-Equivalence-Relation R S) (htpy-hom-Equivalence-Relation f))
+    is-torsorial (htpy-hom-Equivalence-Relation f)
   is-torsorial-htpy-hom-Equivalence-Relation f =
     is-torsorial-Eq-subtype
       ( is-torsorial-htpy (map-hom-Equivalence-Relation R S f))

@@ -13,6 +13,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.sets
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
@@ -97,7 +98,7 @@ module _
 
   abstract
     is-torsorial-htpy-hom-Ab :
-      (f : hom-Ab A B) → is-contr (Σ (hom-Ab A B) (htpy-hom-Ab f))
+      (f : hom-Ab A B) → is-torsorial (htpy-hom-Ab f)
     is-torsorial-htpy-hom-Ab f =
       is-torsorial-htpy-hom-Group (group-Ab A) (group-Ab B) f
 

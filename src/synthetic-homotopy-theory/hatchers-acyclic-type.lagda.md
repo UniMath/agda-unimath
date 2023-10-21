@@ -19,6 +19,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -134,9 +135,7 @@ module _
   pr2 (pr2 (pr2 refl-Eq-structure-Hatcher-Acyclic-Type)) = right-unit
 
   is-torsorial-Eq-structure-Hatcher-Acyclic-Type :
-    is-contr
-      ( Σ ( structure-Hatcher-Acyclic-Type A)
-          ( Eq-structure-Hatcher-Acyclic-Type))
+    is-torsorial Eq-structure-Hatcher-Acyclic-Type
   is-torsorial-Eq-structure-Hatcher-Acyclic-Type =
     is-torsorial-Eq-structure
       ( λ (ω : type-Ω A) u (p : pr1 s ＝ ω) →

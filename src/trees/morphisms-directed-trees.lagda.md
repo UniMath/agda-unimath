@@ -17,6 +17,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.negation
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-empty-type
 open import foundation.universe-levels
@@ -228,7 +229,7 @@ module _
   where
 
   is-torsorial-htpy-hom-Directed-Tree :
-    is-contr (Σ (hom-Directed-Tree S T) (htpy-hom-Directed-Tree S T f))
+    is-torsorial (htpy-hom-Directed-Tree S T f)
   is-torsorial-htpy-hom-Directed-Tree =
     is-torsorial-htpy-hom-Directed-Graph
       ( graph-Directed-Tree S)

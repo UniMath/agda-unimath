@@ -17,6 +17,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.retractions
 open import foundation-core.sections
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -45,14 +46,14 @@ module _
 
   abstract
     fundamental-theorem-id :
-      is-contr (Σ A B) → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
+      is-torsorial B → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
     fundamental-theorem-id is-contr-AB f =
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr (tot f) (is-torsorial-path a) is-contr-AB)
 
   abstract
     fundamental-theorem-id' :
-      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f → is-contr (Σ A B)
+      (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f → is-torsorial B
     fundamental-theorem-id' f is-fiberwise-equiv-f =
       is-contr-is-equiv'
         ( Σ A (Id a))
@@ -70,13 +71,13 @@ module _
 
   abstract
     fundamental-theorem-id-J :
-      is-contr (Σ A B) → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
+      is-torsorial B → is-fiberwise-equiv (ind-Id a (λ x p → B x) b)
     fundamental-theorem-id-J is-contr-AB =
       fundamental-theorem-id is-contr-AB (ind-Id a (λ x p → B x) b)
 
   abstract
     fundamental-theorem-id-J' :
-      (is-fiberwise-equiv (ind-Id a (λ x p → B x) b)) → is-contr (Σ A B)
+      (is-fiberwise-equiv (ind-Id a (λ x p → B x) b)) → is-torsorial B
     fundamental-theorem-id-J' H =
       is-contr-is-equiv'
         ( Σ A (Id a))

@@ -14,6 +14,7 @@ open import foundation.equivalence-relations
 open import foundation.equivalences
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.commutative-monoids
@@ -150,9 +151,7 @@ refl-relate-same-elements-congruence-Commutative-Monoid M =
 is-torsorial-relate-same-elements-congruence-Commutative-Monoid :
   {l1 l2 : Level} (M : Commutative-Monoid l1)
   (R : congruence-Commutative-Monoid l2 M) →
-  is-contr
-    ( Σ ( congruence-Commutative-Monoid l2 M)
-        ( relate-same-elements-congruence-Commutative-Monoid M R))
+  is-torsorial (relate-same-elements-congruence-Commutative-Monoid M R)
 is-torsorial-relate-same-elements-congruence-Commutative-Monoid M =
   is-torsorial-relate-same-elements-congruence-Monoid
     ( monoid-Commutative-Monoid M)

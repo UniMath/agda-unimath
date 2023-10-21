@@ -18,6 +18,7 @@ open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.category-of-semigroups
@@ -238,7 +239,7 @@ module _
       ( equiv-ap-inclusion-subtype is-group-Prop {s = G} {t = H})
 
   abstract
-    is-torsorial-iso-Group : is-contr (Σ (Group l) (iso-Group G))
+    is-torsorial-iso-Group : is-torsorial (λ (H : Group l) → iso-Group G H)
     is-torsorial-iso-Group =
       is-contr-equiv'
         ( Σ (Group l) (Id G))

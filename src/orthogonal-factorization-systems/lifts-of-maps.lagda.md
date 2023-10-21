@@ -20,6 +20,7 @@ open import foundation.propositions
 open import foundation.sets
 open import foundation.small-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.truncated-types
 open import foundation.truncation-levels
 open import foundation.type-arithmetic-dependent-pair-types
@@ -191,7 +192,7 @@ module _
   htpy-eq-lift l .l refl = refl-htpy-lift l
 
   is-torsorial-htpy-lift :
-    (l : lift i f) → is-contr (Σ (lift i f) (htpy-lift l))
+    (l : lift i f) → is-torsorial (htpy-lift l)
   is-torsorial-htpy-lift l =
     is-torsorial-Eq-structure
       (λ g G → coherence-htpy-lift l (g , G))

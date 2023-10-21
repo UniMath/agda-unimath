@@ -17,6 +17,7 @@ open import foundation.function-types
 open import foundation.identity-systems
 open import foundation.identity-types
 open import foundation.sections
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 ```
 
@@ -82,9 +83,8 @@ module _
 
   abstract
     is-identity-system-iso-is-torsorial-iso-Precategory :
-      is-contr (Σ (obj-Precategory C) (iso-Precategory C A)) →
-      {l : Level} →
-      is-identity-system l (iso-Precategory C A) A (id-iso-Precategory C)
+      is-torsorial (iso-Precategory C A) →
+      is-identity-system (iso-Precategory C A) A (id-iso-Precategory C)
     is-identity-system-iso-is-torsorial-iso-Precategory =
       is-identity-system-is-torsorial A (id-iso-Precategory C)
 ```
@@ -97,9 +97,8 @@ module _
   where
 
   is-torsorial-equiv-induction-principle-iso-Precategory :
-    ( {l : Level} →
-      is-identity-system l (iso-Precategory C A) A (id-iso-Precategory C)) →
-    is-contr (Σ (obj-Precategory C) (iso-Precategory C A))
+    is-identity-system (iso-Precategory C A) A (id-iso-Precategory C) →
+    is-torsorial (iso-Precategory C A)
   is-torsorial-equiv-induction-principle-iso-Precategory =
     is-torsorial-is-identity-system A (id-iso-Precategory C)
 ```

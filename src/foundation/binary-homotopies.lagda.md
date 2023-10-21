@@ -17,6 +17,7 @@ open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -48,7 +49,7 @@ module _
 
   is-torsorial-binary-htpy :
     (f : (x : A) (y : B x) → C x y) →
-    is-contr (Σ ((x : A) (y : B x) → C x y) (binary-htpy f))
+    is-torsorial (binary-htpy f)
   is-torsorial-binary-htpy f =
     is-torsorial-Eq-Π
       ( λ x g → f x ~ g)

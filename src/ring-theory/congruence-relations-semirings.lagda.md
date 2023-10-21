@@ -17,6 +17,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.congruence-relations-monoids
@@ -177,9 +178,7 @@ refl-relate-same-elements-congruence-Semiring R S =
 
 is-torsorial-relate-same-elements-congruence-Semiring :
   {l1 l2 : Level} (R : Semiring l1) (S : congruence-Semiring l2 R) →
-  is-contr
-    ( Σ ( congruence-Semiring l2 R)
-        ( relate-same-elements-congruence-Semiring R S))
+  is-torsorial (relate-same-elements-congruence-Semiring R S)
 is-torsorial-relate-same-elements-congruence-Semiring R S =
   is-torsorial-Eq-subtype
     ( is-torsorial-relate-same-elements-congruence-Monoid

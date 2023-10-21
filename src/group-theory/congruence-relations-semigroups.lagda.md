@@ -16,6 +16,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import group-theory.semigroups
@@ -139,9 +140,7 @@ refl-relate-same-elements-congruence-Semigroup G R =
 
 is-torsorial-relate-same-elements-congruence-Semigroup :
   {l1 l2 : Level} (G : Semigroup l1) (R : congruence-Semigroup l2 G) →
-  is-contr
-    ( Σ ( congruence-Semigroup l2 G)
-        ( relate-same-elements-congruence-Semigroup G R))
+  is-torsorial (relate-same-elements-congruence-Semigroup G R)
 is-torsorial-relate-same-elements-congruence-Semigroup G R =
   is-torsorial-Eq-subtype
     ( is-torsorial-relate-same-elements-Equivalence-Relation

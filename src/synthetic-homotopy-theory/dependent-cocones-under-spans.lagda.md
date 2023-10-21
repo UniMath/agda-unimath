@@ -20,6 +20,7 @@ open import foundation.homotopies
 open import foundation.homotopy-induction
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -180,7 +181,7 @@ module _
 
   abstract
     is-torsorial-htpy-dependent-cocone :
-      is-contr (Σ (dependent-cocone f g c P) htpy-dependent-cocone)
+      is-torsorial htpy-dependent-cocone
     is-torsorial-htpy-dependent-cocone =
       is-torsorial-Eq-structure
         ( λ α βγ K →

@@ -24,6 +24,7 @@ open import foundation.propositions
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
 open import foundation.subtypes
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
@@ -472,7 +473,7 @@ module _
   where
 
   abstract
-    is-torsorial-iso-Ring : is-contr (Σ (Ring l) (iso-Ring R))
+    is-torsorial-iso-Ring : is-torsorial (λ (S : Ring l) → iso-Ring R S)
     is-torsorial-iso-Ring =
       is-contr-equiv
         ( Σ (Ring l) (iso-ab-Ring R))

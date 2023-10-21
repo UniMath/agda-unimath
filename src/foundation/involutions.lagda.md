@@ -22,6 +22,7 @@ open import foundation-core.function-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 open import foundation-core.whiskering-homotopies
@@ -136,7 +137,7 @@ module _
   htpy-eq-involution s .s refl = refl-htpy-involution s
 
   is-torsorial-htpy-involution :
-    (s : involution A) → is-contr (Σ (involution A) (htpy-involution s))
+    (s : involution A) → is-torsorial (htpy-involution s)
   is-torsorial-htpy-involution s =
     is-torsorial-Eq-structure
       ( λ x z → coherence-htpy-involution s (x , z))

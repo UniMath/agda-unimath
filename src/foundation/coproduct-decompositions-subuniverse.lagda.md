@@ -31,6 +31,7 @@ open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -237,9 +238,7 @@ module _
         ( x))
 
   is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse :
-    is-contr
-      ( Σ ( binary-coproduct-Decomposition-subuniverse P A)
-          ( equiv-binary-coproduct-Decomposition-subuniverse P A X))
+    is-torsorial (equiv-binary-coproduct-Decomposition-subuniverse P A X)
   is-torsorial-equiv-binary-coproduct-Decomposition-subuniverse =
     is-torsorial-Eq-structure
       ( _)

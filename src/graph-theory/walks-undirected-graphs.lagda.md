@@ -22,6 +22,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -477,7 +478,7 @@ module _
   pr2 refl-constant-walk-Undirected-Graph = refl
 
   is-torsorial-constant-walk-Undirected-Graph :
-    is-contr (Σ (vertex-Undirected-Graph G) constant-walk-Undirected-Graph)
+    is-torsorial constant-walk-Undirected-Graph
   pr1 (pr1 is-torsorial-constant-walk-Undirected-Graph) = x
   pr2 (pr1 is-torsorial-constant-walk-Undirected-Graph) =
     refl-constant-walk-Undirected-Graph

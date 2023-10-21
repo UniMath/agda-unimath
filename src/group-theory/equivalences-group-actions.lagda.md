@@ -20,6 +20,7 @@ open import foundation.identity-types
 open import foundation.sets
 open import foundation.structure-identity-principle
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 
@@ -127,9 +128,7 @@ module _
     refl-htpy-equiv-Abstract-Group-Action
 
   is-torsorial-htpy-equiv-Abstract-Group-Action :
-    is-contr
-      ( Σ ( equiv-Abstract-Group-Action G X Y)
-          ( htpy-equiv-Abstract-Group-Action))
+    is-torsorial htpy-equiv-Abstract-Group-Action
   is-torsorial-htpy-equiv-Abstract-Group-Action =
     is-contr-equiv
       ( Σ ( Σ ( hom-Abstract-Group-Action G X Y) (λ f → is-equiv (pr1 f)))
@@ -228,9 +227,9 @@ module _
 
   abstract
     is-torsorial-equiv-Abstract-Group-Action :
-      is-contr
-        ( Σ ( Abstract-Group-Action G l2)
-            ( equiv-Abstract-Group-Action G X))
+      is-torsorial
+        ( λ (Y : Abstract-Group-Action G l2) →
+          equiv-Abstract-Group-Action G X Y)
     is-torsorial-equiv-Abstract-Group-Action =
       is-torsorial-Eq-structure
         ( λ Y ν e →

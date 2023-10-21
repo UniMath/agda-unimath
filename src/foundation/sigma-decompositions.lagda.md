@@ -28,6 +28,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -402,7 +403,7 @@ module _
   pr2 (pr2 id-equiv-Σ-Decomposition) = refl-htpy
 
   is-torsorial-equiv-Σ-Decomposition :
-    is-contr (Σ (Σ-Decomposition l2 l3 A) (equiv-Σ-Decomposition X))
+    is-torsorial (equiv-Σ-Decomposition X)
   is-torsorial-equiv-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ U Vf e →
@@ -503,9 +504,7 @@ module _
   pr2 (pr2 id-equiv-Set-Indexed-Σ-Decomposition) = refl-htpy
 
   is-torsorial-equiv-Set-Indexed-Σ-Decomposition :
-    is-contr
-      ( Σ ( Set-Indexed-Σ-Decomposition l2 l3 A)
-          ( equiv-Set-Indexed-Σ-Decomposition X))
+    is-torsorial ( equiv-Set-Indexed-Σ-Decomposition X)
   is-torsorial-equiv-Set-Indexed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ U Vf e →
@@ -621,9 +620,7 @@ module _
     Y = snd-fibered-Σ-Decomposition D
 
   is-torsorial-equiv-fibered-Σ-Decomposition :
-    is-contr
-      ( Σ ( fibered-Σ-Decomposition l2 l3 l4 l5 A)
-          ( equiv-fibered-Σ-Decomposition D))
+    is-torsorial (equiv-fibered-Σ-Decomposition D)
   is-torsorial-equiv-fibered-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' Y' e →
@@ -754,9 +751,7 @@ module _
     f-Y = snd-displayed-Σ-Decomposition disp-D
 
   is-torsorial-equiv-displayed-Σ-Decomposition :
-    is-contr
-      ( Σ ( displayed-Σ-Decomposition l2 l3 l4 l5 A)
-          ( equiv-displayed-Σ-Decomposition disp-D))
+    is-torsorial (equiv-displayed-Σ-Decomposition disp-D)
   is-torsorial-equiv-displayed-Σ-Decomposition =
     is-torsorial-Eq-structure
       ( λ X' f-Y' e → equiv-snd-displayed-Σ-Decomposition

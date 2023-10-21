@@ -15,6 +15,7 @@ open import foundation.universe-levels
 open import foundation-core.contractible-types
 open import foundation-core.equivalences
 open import foundation-core.identity-types
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -37,9 +38,9 @@ module _
 
   abstract
     is-torsorial-Eq-structure :
-      (is-contr-AC : is-contr (Σ A C)) (t : Σ A C) →
-      is-contr (Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) →
-      is-contr (Σ (Σ A B) (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t))))
+      (is-contr-AC : is-torsorial C) (t : Σ A C) →
+      is-torsorial (λ y → D (pr1 t) y (pr2 t)) →
+      is-torsorial (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
     is-torsorial-Eq-structure is-contr-AC t is-contr-BD =
       is-contr-equiv
         ( Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))))
