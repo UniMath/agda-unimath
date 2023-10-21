@@ -24,7 +24,7 @@ open import foundation-core.torsorial-type-families
 
 ## Idea
 
-The **fundamental theorem of identity types** provides a way to characterize
+The *fundamental theorem of identity types* provides a way to characterize
 [identity types](foundation-core.identity-types.md). It uses the fact that a family of maps `f : (x : A) → a ＝ x → B x` is a
 family of [equivalences](foundation-core.equivalences.md) if and only if it induces an equivalence
 `Σ A (Id a) → Σ A B` on [total spaces](foundation.dependent-pair-types.md). Note that the total space `Σ A (Id a)` is
