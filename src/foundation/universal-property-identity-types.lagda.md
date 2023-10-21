@@ -101,7 +101,7 @@ Since the codomain of this embedding is contractible, the claim follows. The
 above embedding is constructed as the composite of the following embeddings
 
 ```text
-  Σ (x : A) (Id x ＝ Id a)
+  Σ (x : A), Id x ＝ Id a
     ↪ Σ (x : A), (y : A) → (x ＝ y) ＝ (a ＝ y)
     ↪ Σ (x : A), (y : A) → (x ＝ y) ≃ (a ＝ y)
     ↪ Σ (x : A), Σ (e : (y : A) → (x ＝ y) → (a ＝ y)), (y : A) → is-equiv (e y)
