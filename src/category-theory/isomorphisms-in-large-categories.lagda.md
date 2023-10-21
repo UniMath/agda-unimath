@@ -176,7 +176,8 @@ module _
   compute-iso-eq-Large-Category :
     iso-eq-Category (category-Large-Category C l1) X Y ~
     iso-eq-Large-Category
-  compute-iso-eq-Large-Category refl = refl
+  compute-iso-eq-Large-Category =
+    compute-iso-eq-Large-Precategory (large-precategory-Large-Category C) X Y
 
   extensionality-obj-Large-Category :
     (X ＝ Y) ≃ iso-Large-Category C X Y

@@ -11,8 +11,9 @@ open import category-theory.precategories
 
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.function-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -27,7 +28,7 @@ be done with Σ-types, we must use a record type.)
 
 ## Definition
 
-### Large precategories
+### The large type of large precategories
 
 ```agda
 record
@@ -130,54 +131,6 @@ module _
   comp-hom-Large-Precategory' f g = comp-hom-Large-Precategory C g f
 ```
 
-### Precomposition by a morphism
-
-```agda
-  precomp-hom-Large-Precategory :
-    {l1 l2 l3 : Level}
-    {X : obj-Large-Precategory C l1}
-    {Y : obj-Large-Precategory C l2}
-    (f : hom-Large-Precategory X Y) →
-    (Z : obj-Large-Precategory C l3) →
-    hom-Large-Precategory Y Z → hom-Large-Precategory X Z
-  precomp-hom-Large-Precategory f Z g =
-    comp-hom-Large-Precategory C g f
-```
-
-### Postcomposition by a morphism
-
-```agda
-  postcomp-hom-Large-Precategory :
-    {l1 l2 l3 : Level}
-    (X : obj-Large-Precategory C l1)
-    {Y : obj-Large-Precategory C l2}
-    {Z : obj-Large-Precategory C l3}
-    (f : hom-Large-Precategory Y Z) →
-    hom-Large-Precategory X Y → hom-Large-Precategory X Z
-  postcomp-hom-Large-Precategory X f g =
-    comp-hom-Large-Precategory C f g
-```
-
-### Equalities induce morphisms
-
-```agda
-module _
-  {α : Level → Level} {β : Level → Level → Level}
-  (C : Large-Precategory α β)
-  {l1 : Level}
-  where
-
-  hom-eq-Large-Precategory :
-    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
-    X ＝ Y → hom-Large-Precategory C X Y
-  hom-eq-Large-Precategory X .X refl = id-hom-Large-Precategory C
-
-  hom-eq-Large-Precategory' :
-    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
-    X ＝ Y → hom-Large-Precategory C Y X
-  hom-eq-Large-Precategory' X Y = hom-eq-Large-Precategory Y X ∘ inv
-```
-
 ### Precategories obtained from large precategories
 
 ```agda
@@ -202,4 +155,57 @@ module _
     left-unit-law-comp-hom-Large-Precategory C
   pr2 (pr2 (pr2 (pr2 (pr2 (precategory-Large-Precategory l))))) =
     right-unit-law-comp-hom-Large-Precategory C
+```
+
+### Equalities induce morphisms
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  {l1 : Level}
+  where
+
+  hom-eq-Large-Precategory :
+    (X Y : obj-Large-Precategory C l1) → X ＝ Y → hom-Large-Precategory C X Y
+  hom-eq-Large-Precategory X .X refl = id-hom-Large-Precategory C
+
+  hom-inv-eq-Large-Precategory :
+    (X Y : obj-Large-Precategory C l1) → X ＝ Y → hom-Large-Precategory C Y X
+  hom-inv-eq-Large-Precategory X Y = hom-eq-Large-Precategory Y X ∘ inv
+
+  compute-hom-eq-Large-Precategory :
+    (X Y : obj-Large-Precategory C l1) →
+    hom-eq-Precategory (precategory-Large-Precategory C l1) X Y ~
+    hom-eq-Large-Precategory X Y
+  compute-hom-eq-Large-Precategory X .X refl = refl
+```
+
+### Pre- and postcomposition by a morphism
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  where
+
+  precomp-hom-Large-Precategory :
+    {l1 l2 l3 : Level}
+    {X : obj-Large-Precategory C l1}
+    {Y : obj-Large-Precategory C l2}
+    (f : hom-Large-Precategory C X Y) →
+    (Z : obj-Large-Precategory C l3) →
+    hom-Large-Precategory C Y Z → hom-Large-Precategory C X Z
+  precomp-hom-Large-Precategory f Z g =
+    comp-hom-Large-Precategory C g f
+
+  postcomp-hom-Large-Precategory :
+    {l1 l2 l3 : Level}
+    (X : obj-Large-Precategory C l1)
+    {Y : obj-Large-Precategory C l2}
+    {Z : obj-Large-Precategory C l3}
+    (f : hom-Large-Precategory C Y Z) →
+    hom-Large-Precategory C X Y → hom-Large-Precategory C X Z
+  postcomp-hom-Large-Precategory X f g =
+    comp-hom-Large-Precategory C f g
 ```
