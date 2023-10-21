@@ -25,6 +25,7 @@ manipulate them. Characters are written between single quotes, e.g. `'a'`.
 ```agda
 postulate
   Char : UU lzero
+
 {-# BUILTIN CHAR Char #-}
 
 primitive
