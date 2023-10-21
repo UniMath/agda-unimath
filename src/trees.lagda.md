@@ -1,6 +1,8 @@
 # Trees
 
 ```agda
+{-# OPTIONS --guardedness #-}
+
 module trees where
 
 open import trees.algebras-polynomial-endofunctors public
