@@ -149,8 +149,6 @@ peano-9-ℕ : peano-axiom-9 ℕ peano-1-ℕ peano-6-ℕ
 peano-9-ℕ P = ind-ℕ {P = type-Prop ∘ P}
 ```
 
-## References
-
 ## External links
 
 - [Peano arithmetic](https://ncatlab.org/nlab/show/Peano+arithmetic) at nlab
