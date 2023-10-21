@@ -140,30 +140,6 @@ module _
   pr2 id-iso-Large-Precategory = is-iso-id-hom-Large-Precategory
 ```
 
-### Equalities induce isomorphisms
-
-An equality between objects `X Y : A` gives rise to an isomorphism between them.
-This is because, by the J-rule, it is enough to construct an isomorphism given
-`refl : X ＝ X`, from `X` to itself. We take the identity morphism as such an
-isomorphism.
-
-```agda
-iso-eq-Large-Precategory :
-  {α : Level → Level} {β : Level → Level → Level} →
-  (C : Large-Precategory α β) {l1 : Level}
-  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
-  X ＝ Y → iso-Large-Precategory C X Y
-iso-eq-Large-Precategory C X .X refl = id-iso-Large-Precategory C
-
-compute-iso-eq-Large-Precategory :
-  {α : Level → Level} {β : Level → Level → Level} →
-  (C : Large-Precategory α β) {l1 : Level}
-  (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
-  iso-eq-Precategory (precategory-Large-Precategory C l1) X Y ~
-  iso-eq-Large-Precategory C X Y
-compute-iso-eq-Large-Precategory C X .X refl = refl
-```
-
 ## Properties
 
 ### Being an isomorphism is a proposition
@@ -253,6 +229,35 @@ module _
   iso-set-Large-Precategory : Set (β l1 l1 ⊔ β l1 l2 ⊔ β l2 l1 ⊔ β l2 l2)
   pr1 iso-set-Large-Precategory = iso-Large-Precategory C X Y
   pr2 iso-set-Large-Precategory = is-set-iso-Large-Precategory
+```
+
+### Equalities induce isomorphisms
+
+An equality between objects `X Y : A` gives rise to an isomorphism between them.
+This is because, by the J-rule, it is enough to construct an isomorphism given
+`refl : X ＝ X`, from `X` to itself. We take the identity morphism as such an
+isomorphism.
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 : Level}
+  where
+
+  iso-eq-Large-Precategory :
+    (X Y : obj-Large-Precategory C l1) → X ＝ Y → iso-Large-Precategory C X Y
+  pr1 (iso-eq-Large-Precategory X Y p) = hom-eq-Large-Precategory C X Y p
+  pr2 (iso-eq-Large-Precategory X .X refl) = is-iso-id-hom-Large-Precategory C
+
+  compute-iso-eq-Large-Precategory :
+    (X Y : obj-Large-Precategory C l1) →
+    iso-eq-Precategory (precategory-Large-Precategory C l1) X Y ~
+    iso-eq-Large-Precategory X Y
+  compute-iso-eq-Large-Precategory X Y p =
+    eq-iso-eq-hom-Large-Precategory C
+      ( iso-eq-Precategory (precategory-Large-Precategory C l1) X Y p)
+      ( iso-eq-Large-Precategory X Y p)
+      ( compute-hom-eq-Large-Precategory C X Y p)
 ```
 
 ### Isomorphisms are closed under composition

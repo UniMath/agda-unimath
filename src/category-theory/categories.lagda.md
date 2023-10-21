@@ -156,7 +156,21 @@ module _
     is-emb-is-equiv (is-category-Category C x y)
 ```
 
-### Precomposition by a morphism
+### Equalities induce morphisms
+
+```agda
+module _
+  {l1 l2 : Level} (C : Category l1 l2) (x y : obj-Category C)
+  where
+
+  hom-eq-Category : x ＝ y → hom-Category C x y
+  hom-eq-Category = hom-eq-Precategory (precategory-Category C) x y
+
+  hom-inv-eq-Category : x ＝ y → hom-Category C y x
+  hom-inv-eq-Category = hom-inv-eq-Precategory (precategory-Category C) x y
+```
+
+### Pre- and postcomposition by a morphism
 
 ```agda
 precomp-hom-Category :
@@ -164,32 +178,12 @@ precomp-hom-Category :
   (f : hom-Category C x y) (z : obj-Category C) →
   hom-Category C y z → hom-Category C x z
 precomp-hom-Category C = precomp-hom-Precategory (precategory-Category C)
-```
 
-### Postcomposition by a morphism
-
-```agda
 postcomp-hom-Category :
   {l1 l2 : Level} (C : Category l1 l2) {x y : obj-Category C}
   (f : hom-Category C x y) (z : obj-Category C) →
   hom-Category C z x → hom-Category C z y
 postcomp-hom-Category C = postcomp-hom-Precategory (precategory-Category C)
-```
-
-### Equalities induce morphisms
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2)
-  where
-
-  hom-eq-Category :
-    (x y : obj-Category C) → x ＝ y → hom-Category C x y
-  hom-eq-Category = hom-eq-Precategory (precategory-Category C)
-
-  hom-inv-eq-Category :
-    (x y : obj-Category C) → x ＝ y → hom-Category C y x
-  hom-inv-eq-Category = hom-inv-eq-Precategory (precategory-Category C)
 ```
 
 ## Properties
