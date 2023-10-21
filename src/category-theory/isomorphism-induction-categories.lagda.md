@@ -95,21 +95,6 @@ module _
         ( precategory-Category C)
 ```
 
-### Isomorphism induction implies contractibility of the total space of isomorphisms
-
-```agda
-module _
-  {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
-  where
-
-  is-torsorial-equiv-induction-principle-iso-Category :
-    is-identity-system (iso-Category C A) A (id-iso-Category C) →
-    is-torsorial (iso-Category C A)
-  is-torsorial-equiv-induction-principle-iso-Category =
-    is-torsorial-equiv-induction-principle-iso-Precategory
-      ( precategory-Category C)
-```
-
 ### Isomorphism induction in a category
 
 ```agda
