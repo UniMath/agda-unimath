@@ -91,7 +91,11 @@ is-prop-is-zero-ℕ n = is-set-ℕ n zero-ℕ
 is-zero-ℕ-Prop : ℕ → Prop lzero
 pr1 (is-zero-ℕ-Prop n) = is-zero-ℕ n
 pr2 (is-zero-ℕ-Prop n) = is-prop-is-zero-ℕ n
+```
 
+### The property of being one
+
+```agda
 is-prop-is-one-ℕ : (n : ℕ) → is-prop (is-one-ℕ n)
 is-prop-is-one-ℕ n = is-set-ℕ n 1
 
