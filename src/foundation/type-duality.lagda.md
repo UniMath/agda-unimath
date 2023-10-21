@@ -138,7 +138,7 @@ is-emb-map-type-duality
             ≃ ( (X , f) ＝ (Y , g))
               by
               inv-equiv (extensionality-Slice (X , f) (Y , g))))
-      ( is-contr-total-path (X , f)))
+      ( is-torsorial-path (X , f)))
     ( λ Y → ap (map-type-duality H))
 
 emb-type-duality :

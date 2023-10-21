@@ -336,11 +336,11 @@ module _
       ( ring-Commutative-Ring B)
       ( f)
 
-  is-contr-total-htpy-hom-Commutative-Ring :
+  is-torsorial-htpy-hom-Commutative-Ring :
     is-contr
       ( Σ (hom-Commutative-Ring A B) (htpy-hom-Commutative-Ring A B f))
-  is-contr-total-htpy-hom-Commutative-Ring =
-    is-contr-total-htpy-hom-Ring
+  is-torsorial-htpy-hom-Commutative-Ring =
+    is-torsorial-htpy-hom-Ring
       ( ring-Commutative-Ring A)
       ( ring-Commutative-Ring B)
       ( f)

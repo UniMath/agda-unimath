@@ -179,11 +179,11 @@ equiv-eq-2-Element-Type :
 equiv-eq-2-Element-Type X Y = equiv-eq-component-UU-Level
 
 abstract
-  is-contr-total-equiv-2-Element-Type :
+  is-torsorial-equiv-2-Element-Type :
     {l1 : Level} (X : 2-Element-Type l1) →
     is-contr (Σ (2-Element-Type l1) (equiv-2-Element-Type X))
-  is-contr-total-equiv-2-Element-Type X =
-    is-contr-total-equiv-component-UU-Level X
+  is-torsorial-equiv-2-Element-Type X =
+    is-torsorial-equiv-component-UU-Level X
 
 abstract
   is-equiv-equiv-eq-2-Element-Type :
@@ -364,7 +364,7 @@ abstract
         ( λ X →
           ( equiv-ev-zero-equiv-Fin-two-ℕ X) ∘e
           ( equiv-precomp-equiv (compute-raise-Fin l 2) (pr1 X))))
-      ( is-contr-total-equiv-subuniverse
+      ( is-torsorial-equiv-subuniverse
         ( has-cardinality-Prop 2)
         ( standard-2-Element-Type l))
 ```
@@ -468,7 +468,7 @@ module _
       is-fiberwise-equiv-is-equiv-tot
         ( is-equiv-is-contr
           ( tot (ev-zero-htpy-equiv-Fin-two-ℕ e))
-          ( is-contr-total-htpy-equiv e)
+          ( is-torsorial-htpy-equiv e)
           ( is-contr-equiv
             ( fiber (ev-zero-equiv-Fin-two-ℕ) (map-equiv e (zero-Fin 1)))
             ( equiv-tot

@@ -249,13 +249,13 @@ module _
   eq-htpy-rooted-hom-Directed-Tree g =
     map-inv-equiv (extensionality-rooted-hom-Directed-Tree g)
 
-  is-contr-total-htpy-rooted-hom-Directed-Tree :
+  is-torsorial-htpy-rooted-hom-Directed-Tree :
     is-contr
       ( Σ ( rooted-hom-Directed-Tree S T)
           ( htpy-rooted-hom-Directed-Tree S T f))
-  is-contr-total-htpy-rooted-hom-Directed-Tree =
+  is-torsorial-htpy-rooted-hom-Directed-Tree =
     is-contr-equiv'
       ( Σ (rooted-hom-Directed-Tree S T) (λ g → f ＝ g))
       ( equiv-tot extensionality-rooted-hom-Directed-Tree)
-      ( is-contr-total-path f)
+      ( is-torsorial-path f)
 ```

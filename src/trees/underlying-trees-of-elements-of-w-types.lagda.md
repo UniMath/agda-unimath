@@ -292,11 +292,11 @@ module _
     Eq-node-element-𝕎 w x x
   refl-Eq-node-element-𝕎 = refl-Eq-node-element-coalgebra (𝕎-Coalg A B)
 
-  is-contr-total-Eq-node-element-𝕎 :
+  is-torsorial-Eq-node-element-𝕎 :
     (w : 𝕎 A B) (x : node-element-𝕎 w) →
     is-contr (Σ (node-element-𝕎 w) (Eq-node-element-𝕎 w x))
-  is-contr-total-Eq-node-element-𝕎 =
-    is-contr-total-Eq-node-element-coalgebra (𝕎-Coalg A B)
+  is-torsorial-Eq-node-element-𝕎 =
+    is-torsorial-Eq-node-element-coalgebra (𝕎-Coalg A B)
 
   Eq-eq-node-element-𝕎 :
     (w : 𝕎 A B) {x y : node-element-𝕎 w} →

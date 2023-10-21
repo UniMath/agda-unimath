@@ -189,19 +189,19 @@ abstract
     ( equiv-ap-inclusion-subtype is-abelian-group-Prop {A} {B})
 
 abstract
-  is-contr-total-iso-Ab :
+  is-torsorial-iso-Ab :
     {l : Level} (A : Ab l) → is-contr (Σ (Ab l) (iso-Ab A))
-  is-contr-total-iso-Ab {l} A =
+  is-torsorial-iso-Ab {l} A =
     is-contr-equiv'
       ( Σ (Ab l) (Id A))
       ( equiv-tot (equiv-iso-eq-Ab' A))
-      ( is-contr-total-path A)
+      ( is-torsorial-path A)
 
 is-equiv-iso-eq-Ab :
   {l : Level} (A B : Ab l) → is-equiv (iso-eq-Ab A B)
 is-equiv-iso-eq-Ab A =
   fundamental-theorem-id
-    ( is-contr-total-iso-Ab A)
+    ( is-torsorial-iso-Ab A)
     ( iso-eq-Ab A)
 
 eq-iso-Ab :

@@ -398,11 +398,11 @@ module _
   where
 
   abstract
-    is-contr-total-iso-Commutative-Ring :
+    is-torsorial-iso-Commutative-Ring :
       is-contr (Σ (Commutative-Ring l) (iso-Commutative-Ring A))
-    is-contr-total-iso-Commutative-Ring =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Ring (ring-Commutative-Ring A))
+    is-torsorial-iso-Commutative-Ring =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Ring (ring-Commutative-Ring A))
         ( is-prop-is-commutative-Ring)
         ( ring-Commutative-Ring A)
         ( id-iso-Ring (ring-Commutative-Ring A))
@@ -412,7 +412,7 @@ module _
     (B : Commutative-Ring l) → is-equiv (iso-eq-Commutative-Ring A B)
   is-equiv-iso-eq-Commutative-Ring =
     fundamental-theorem-id
-      ( is-contr-total-iso-Commutative-Ring)
+      ( is-torsorial-iso-Commutative-Ring)
       ( iso-eq-Commutative-Ring A)
 
   extensionality-Commutative-Ring :

@@ -120,14 +120,14 @@ module _
   htpy-eq-reflecting-map-Equivalence-Relation .f refl =
     refl-htpy-reflecting-map-Equivalence-Relation
 
-  is-contr-total-htpy-reflecting-map-Equivalence-Relation :
+  is-torsorial-htpy-reflecting-map-Equivalence-Relation :
     is-contr
       ( Σ
         ( reflecting-map-Equivalence-Relation R (type-Set B))
         ( htpy-reflecting-map-Equivalence-Relation))
-  is-contr-total-htpy-reflecting-map-Equivalence-Relation =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-htpy (pr1 f))
+  is-torsorial-htpy-reflecting-map-Equivalence-Relation =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (pr1 f))
       ( is-prop-reflects-Equivalence-Relation R B)
       ( pr1 f)
       ( refl-htpy)
@@ -138,7 +138,7 @@ module _
     is-equiv (htpy-eq-reflecting-map-Equivalence-Relation g)
   is-equiv-htpy-eq-reflecting-map-Equivalence-Relation =
     fundamental-theorem-id
-      is-contr-total-htpy-reflecting-map-Equivalence-Relation
+      is-torsorial-htpy-reflecting-map-Equivalence-Relation
       htpy-eq-reflecting-map-Equivalence-Relation
 
   extensionality-reflecting-map-Equivalence-Relation :

@@ -463,14 +463,14 @@ module _
                 ( compute-P (pr1 v))
                 ( inv-tr (type-Prop ∘ P) (pr2 v) p))) ∙
             ( pr2 v)))
-    is-contr-total-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
-    is-contr-total-P = pair center-total-P contraction-total-P
+    is-torsorial-P : is-contr (Σ (type-Set B) (λ b → type-Prop (P b)))
+    is-torsorial-P = pair center-total-P contraction-total-P
     β :
       (b : type-Set B) →
       map-reflecting-map-Equivalence-Relation R q x ＝ b → type-Prop (P b)
     β .(map-reflecting-map-Equivalence-Relation R q x) refl = point-P
     γ : (b : type-Set B) → is-equiv (β b)
-    γ = fundamental-theorem-id is-contr-total-P β
+    γ = fundamental-theorem-id is-torsorial-P β
     δ :
       (b : type-Set B) →
       (map-reflecting-map-Equivalence-Relation R q x ＝ b) ≃ type-Prop (P b)

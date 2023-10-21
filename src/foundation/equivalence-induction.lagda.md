@@ -136,7 +136,7 @@ module _
   abstract
     is-identity-system-equiv : section (ev-id-equiv P)
     is-identity-system-equiv =
-      is-identity-system-is-torsorial-equiv (is-contr-total-equiv A) P
+      is-identity-system-is-torsorial-equiv (is-torsorial-equiv A) P
 
   ind-equiv :
     P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
@@ -174,7 +174,7 @@ module _
       section (ev-id-equiv-subuniverse {F})
     is-identity-system-equiv-subuniverse =
       is-identity-system-is-torsorial A id-equiv
-        ( is-contr-total-equiv-subuniverse P A)
+        ( is-torsorial-equiv-subuniverse P A)
 
   ind-equiv-subuniverse :
     (F : (B : type-subuniverse P) → equiv-subuniverse P A B → UU l3) →
@@ -201,7 +201,7 @@ module _
   is-equiv-ev-id-equiv : is-equiv (ev-id-equiv P)
   is-equiv-ev-id-equiv =
     dependent-universal-property-identity-system-is-torsorial
-      ( id-equiv) (is-contr-total-equiv A) P
+      ( id-equiv) (is-torsorial-equiv A) P
 
   is-contr-map-ev-id-equiv : is-contr-map (ev-id-equiv P)
   is-contr-map-ev-id-equiv = is-contr-map-is-equiv is-equiv-ev-id-equiv
@@ -219,7 +219,7 @@ module _
     is-equiv (ev-id-equiv-subuniverse P X {F})
   is-equiv-ev-id-equiv-subuniverse =
     dependent-universal-property-identity-system-is-torsorial
-    ( id-equiv) (is-contr-total-equiv-subuniverse P X) F
+    ( id-equiv) (is-torsorial-equiv-subuniverse P X) F
 
   is-contr-map-ev-id-equiv-subuniverse :
     is-contr-map (ev-id-equiv-subuniverse P X {F})

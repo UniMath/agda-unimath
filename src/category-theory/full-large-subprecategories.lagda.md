@@ -208,8 +208,8 @@ module _
   is-large-category-large-precategory-is-large-category-Full-Large-Subprecategory
     is-large-category-C X =
     fundamental-theorem-id
-      ( is-contr-total-Eq-subtype
-        ( is-contr-total-iso-Large-Category
+      ( is-torsorial-Eq-subtype
+        ( is-torsorial-iso-Large-Category
           ( make-Large-Category C is-large-category-C)
           ( inclusion-subtype P X))
         ( is-prop-is-in-subtype P)

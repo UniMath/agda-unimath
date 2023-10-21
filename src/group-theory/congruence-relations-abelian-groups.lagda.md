@@ -177,13 +177,13 @@ refl-relate-same-elements-congruence-Ab :
 refl-relate-same-elements-congruence-Ab A =
   refl-relate-same-elements-congruence-Group (group-Ab A)
 
-is-contr-total-relate-same-elements-congruence-Ab :
+is-torsorial-relate-same-elements-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) (R : congruence-Ab l2 A) →
   is-contr
     ( Σ ( congruence-Ab l2 A)
         ( relate-same-elements-congruence-Ab A R))
-is-contr-total-relate-same-elements-congruence-Ab A =
-  is-contr-total-relate-same-elements-congruence-Group (group-Ab A)
+is-torsorial-relate-same-elements-congruence-Ab A =
+  is-torsorial-relate-same-elements-congruence-Group (group-Ab A)
 
 relate-same-elements-eq-congruence-Ab :
   {l1 l2 : Level} (A : Ab l1) (R S : congruence-Ab l2 A) →

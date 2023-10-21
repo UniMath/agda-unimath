@@ -173,13 +173,13 @@ module _
   htpy-dependent-cofork-eq k .k refl = reflexive-htpy-dependent-cofork k
 
   abstract
-    is-contr-total-htpy-dependent-cofork :
+    is-torsorial-htpy-dependent-cofork :
       ( k : dependent-cofork f g e P) →
       is-contr (Σ (dependent-cofork f g e P) (htpy-dependent-cofork f g P k))
-    is-contr-total-htpy-dependent-cofork k =
-      is-contr-total-Eq-structure
+    is-torsorial-htpy-dependent-cofork k =
+      is-torsorial-Eq-structure
         ( ev-pair (coherence-htpy-dependent-cofork f g P k))
-        ( is-contr-total-htpy (map-dependent-cofork f g P k))
+        ( is-torsorial-htpy (map-dependent-cofork f g P k))
         ( map-dependent-cofork f g P k , refl-htpy)
         ( is-contr-is-equiv'
           ( Σ ( (a : A) →
@@ -191,14 +191,14 @@ module _
           ( tot (λ K M → right-unit-htpy ∙h M))
           ( is-equiv-tot-is-fiberwise-equiv
             ( is-equiv-concat-htpy right-unit-htpy))
-          ( is-contr-total-htpy (coherence-dependent-cofork f g P k)))
+          ( is-torsorial-htpy (coherence-dependent-cofork f g P k)))
 
     is-equiv-htpy-dependent-cofork-eq :
       ( k k' : dependent-cofork f g e P) →
       is-equiv (htpy-dependent-cofork-eq k k')
     is-equiv-htpy-dependent-cofork-eq k =
       fundamental-theorem-id
-        ( is-contr-total-htpy-dependent-cofork k)
+        ( is-torsorial-htpy-dependent-cofork k)
         ( htpy-dependent-cofork-eq k)
 
   eq-htpy-dependent-cofork :

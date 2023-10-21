@@ -161,16 +161,16 @@ module _
     (f g : map-Precategory C D) → (f ＝ g) → htpy-map-Precategory f g
   htpy-eq-map-Precategory f .f refl = refl-htpy-map-Precategory f
 
-  is-contr-total-htpy-map-Precategory :
+  is-torsorial-htpy-map-Precategory :
     (f : map-Precategory C D) →
     is-contr (Σ (map-Precategory C D) (htpy-map-Precategory f))
-  is-contr-total-htpy-map-Precategory f =
-    is-contr-total-Eq-structure _
-      ( is-contr-total-htpy (obj-map-Precategory C D f))
+  is-torsorial-htpy-map-Precategory f =
+    is-torsorial-Eq-structure _
+      ( is-torsorial-htpy (obj-map-Precategory C D f))
       ( obj-map-Precategory C D f , refl-htpy)
-      ( is-contr-total-Eq-implicit-Π _
+      ( is-torsorial-Eq-implicit-Π _
         ( λ x →
-          is-contr-total-Eq-implicit-Π _
+          is-torsorial-Eq-implicit-Π _
             ( λ y →
               is-contr-equiv
                 ( Σ
@@ -185,13 +185,13 @@ module _
                       ( inv-htpy (right-unit-law-comp-hom-Precategory D ∘ g₁))
                       ( left-unit-law-comp-hom-Precategory D ∘
                         hom-map-Precategory C D f)))
-                ( is-contr-total-htpy' (hom-map-Precategory C D f)))))
+                ( is-torsorial-htpy' (hom-map-Precategory C D f)))))
 
   is-equiv-htpy-eq-map-Precategory :
     (f g : map-Precategory C D) → is-equiv (htpy-eq-map-Precategory f g)
   is-equiv-htpy-eq-map-Precategory f =
     fundamental-theorem-id
-      ( is-contr-total-htpy-map-Precategory f)
+      ( is-torsorial-htpy-map-Precategory f)
       ( htpy-eq-map-Precategory f)
 
   equiv-htpy-eq-map-Precategory :

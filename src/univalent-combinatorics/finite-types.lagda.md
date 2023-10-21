@@ -575,13 +575,13 @@ id-equiv-𝔽 X = id-equiv
 extensionality-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y ≃ equiv-𝔽 X Y
 extensionality-𝔽 = extensionality-subuniverse is-finite-Prop
 
-is-contr-total-equiv-𝔽 :
+is-torsorial-equiv-𝔽 :
   {l : Level} → (X : 𝔽 l) → is-contr (Σ (𝔽 l) (equiv-𝔽 X))
-is-contr-total-equiv-𝔽 {l} X =
+is-torsorial-equiv-𝔽 {l} X =
   is-contr-equiv'
     ( Σ (𝔽 l) (Id X))
     ( equiv-tot (extensionality-𝔽 X))
-    ( is-contr-total-path X)
+    ( is-torsorial-path X)
 
 equiv-eq-𝔽 : {l : Level} → (X Y : 𝔽 l) → Id X Y → equiv-𝔽 X Y
 equiv-eq-𝔽 X Y = map-equiv (extensionality-𝔽 X Y)
@@ -620,11 +620,11 @@ equiv-eq-UU-Fin :
 equiv-eq-UU-Fin k p = equiv-eq-component-UU-Level p
 
 abstract
-  is-contr-total-equiv-UU-Fin :
+  is-torsorial-equiv-UU-Fin :
     {l : Level} {k : ℕ} (X : UU-Fin l k) →
     is-contr (Σ (UU-Fin l k) (equiv-UU-Fin k X))
-  is-contr-total-equiv-UU-Fin {l} {k} X =
-    is-contr-total-equiv-component-UU-Level X
+  is-torsorial-equiv-UU-Fin {l} {k} X =
+    is-torsorial-equiv-component-UU-Level X
 
 abstract
   is-equiv-equiv-eq-UU-Fin :

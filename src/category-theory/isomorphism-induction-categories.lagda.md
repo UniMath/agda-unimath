@@ -86,12 +86,12 @@ module _
   where
 
   abstract
-    is-identity-system-iso-is-contr-total-iso-Category :
+    is-identity-system-iso-is-torsorial-iso-Category :
       is-contr (Σ (obj-Category C) (iso-Category C A)) →
       {l : Level} →
       is-identity-system l (iso-Category C A) A (id-iso-Category C)
-    is-identity-system-iso-is-contr-total-iso-Category =
-      is-identity-system-iso-is-contr-total-iso-Precategory
+    is-identity-system-iso-is-torsorial-iso-Category =
+      is-identity-system-iso-is-torsorial-iso-Precategory
         ( precategory-Category C)
 ```
 
@@ -102,12 +102,12 @@ module _
   {l1 l2 : Level} (C : Category l1 l2) {A : obj-Category C}
   where
 
-  is-contr-total-equiv-induction-principle-iso-Category :
+  is-torsorial-equiv-induction-principle-iso-Category :
     ( {l : Level} →
       is-identity-system l (iso-Category C A) A (id-iso-Category C)) →
     is-contr (Σ (obj-Category C) (iso-Category C A))
-  is-contr-total-equiv-induction-principle-iso-Category =
-    is-contr-total-equiv-induction-principle-iso-Precategory
+  is-torsorial-equiv-induction-principle-iso-Category =
+    is-torsorial-equiv-induction-principle-iso-Precategory
       ( precategory-Category C)
 ```
 
@@ -122,8 +122,8 @@ module _
   abstract
     is-identity-system-iso-Category : section (ev-id-iso-Category C P)
     is-identity-system-iso-Category =
-      is-identity-system-iso-is-contr-total-iso-Category C
-        ( is-contr-total-iso-Category C A) P
+      is-identity-system-iso-is-torsorial-iso-Category C
+        ( is-torsorial-iso-Category C A) P
 
   ind-iso-Category :
     P A (id-iso-Category C) →
@@ -147,7 +147,7 @@ module _
   is-equiv-ev-id-iso-Category =
     dependent-universal-property-identity-system-is-torsorial
       ( id-iso-Category C)
-      ( is-contr-total-iso-Category C A)
+      ( is-torsorial-iso-Category C A)
       ( P)
 
   is-contr-map-ev-id-iso-Category :
