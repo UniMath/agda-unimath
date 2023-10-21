@@ -99,4 +99,4 @@ preunivalence X Y = preunivalence-univalence X Y (univalence X Y)
 - Preunivalence is sufficient to prove that `Id : A → (A → 𝒰)` is an embedding.
   This fact is proven in
   [`foundation.universal-property-identity-types`](foundation.universal-property-identity-types.md)
-- [Preunivalent categories](category-theory.preunivalent-catgories.md)
+- [Preunivalent categories](category-theory.preunivalent-categories.md)
