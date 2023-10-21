@@ -58,7 +58,7 @@ data
 ### Expansion of telescopes
 
 An **expansion** of a telescope `A` by a dependent telescope `B` over it is a
-new telescope of the same depth as `A`, constructed by taking
+new telescope of the same length as `A`, constructed by taking
 [dependent pairs](foundation.dependent-pair-types.md) componentwise.
 
 ```agda
@@ -73,8 +73,8 @@ expand-telescope (cons-dependent-telescope B) =
 
 ### Interleaving telescopes
 
-Given a telescope `A` of depth `n` and a dependent telescope `B` over it, we can
-define the **interleaved telescope** whose depth is `2n`.
+Given a telescope `A` of length `n` and a dependent telescope `B` over it, we
+can define the **interleaved telescope** whose length is `2n`.
 
 ```agda
 interleave-telescope :
