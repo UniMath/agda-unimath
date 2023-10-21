@@ -76,7 +76,7 @@ apply-base-telescope P (cons-telescope A) =
   cons-telescope (λ x → apply-base-telescope P (A x))
 ```
 
-### Inferring telescopes
+### Telescopes as instance arguments
 
 To get Agda to infer telescopes, we help it along a little using
 [instance arguments](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
