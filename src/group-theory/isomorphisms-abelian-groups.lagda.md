@@ -11,6 +11,7 @@ open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
+open import foundation.action-on-identifications-functions
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
@@ -167,8 +168,7 @@ module _
 ### The identity isomorphism of abelian groups
 
 ```agda
-id-iso-Ab :
-  {l : Level} (A : Ab l) → iso-Ab A A
+id-iso-Ab : {l : Level} (A : Ab l) → iso-Ab A A
 id-iso-Ab A = id-iso-Group (group-Ab A)
 ```
 
@@ -179,7 +179,7 @@ id-iso-Ab A = id-iso-Group (group-Ab A)
 ```agda
 iso-eq-Ab :
   {l : Level} (A B : Ab l) → Id A B → iso-Ab A B
-iso-eq-Ab A .A refl = id-iso-Ab A
+iso-eq-Ab A B p = iso-eq-Group (group-Ab A) (group-Ab B) (ap pr1 p)
 
 abstract
   equiv-iso-eq-Ab' :

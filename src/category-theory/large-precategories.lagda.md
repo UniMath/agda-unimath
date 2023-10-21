@@ -12,6 +12,7 @@ open import category-theory.precategories
 open import foundation.action-on-identifications-binary-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
+open import foundation.function-types
 open import foundation.sets
 open import foundation.universe-levels
 ```
@@ -155,6 +156,26 @@ module _
     hom-Large-Precategory X Y → hom-Large-Precategory X Z
   postcomp-hom-Large-Precategory X f g =
     comp-hom-Large-Precategory C f g
+```
+
+### Equalities induce morphisms
+
+```agda
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β)
+  {l1 : Level}
+  where
+
+  hom-eq-Large-Precategory :
+    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
+    X ＝ Y → hom-Large-Precategory C X Y
+  hom-eq-Large-Precategory X .X refl = id-hom-Large-Precategory C
+
+  hom-eq-Large-Precategory' :
+    (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
+    X ＝ Y → hom-Large-Precategory C Y X
+  hom-eq-Large-Precategory' X Y = hom-eq-Large-Precategory Y X ∘ inv
 ```
 
 ### Precategories obtained from large precategories

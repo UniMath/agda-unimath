@@ -153,7 +153,8 @@ iso-eq-Large-Precategory :
   (C : Large-Precategory α β) {l1 : Level}
   (X : obj-Large-Precategory C l1) (Y : obj-Large-Precategory C l1) →
   X ＝ Y → iso-Large-Precategory C X Y
-iso-eq-Large-Precategory C X .X refl = id-iso-Large-Precategory C
+pr1 (iso-eq-Large-Precategory C X Y p) = hom-eq-Large-Precategory C X Y p
+pr2 (iso-eq-Large-Precategory C X .X refl) = is-iso-id-hom-Large-Precategory C
 
 compute-iso-eq-Large-Precategory :
   {α : Level → Level} {β : Level → Level → Level} →
