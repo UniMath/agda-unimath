@@ -32,6 +32,7 @@ manipulate them. Strings are written between double quotes, e.g.
 ```agda
 postulate
   String : UU lzero
+
 {-# BUILTIN STRING String #-}
 
 primitive
