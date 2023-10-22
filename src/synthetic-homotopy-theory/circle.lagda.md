@@ -306,13 +306,13 @@ sphere-1-circle-sphere-1-south-sphere-1 =
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 :
   ( n : Fin 2) →
   coherence-square-identifications
-    ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
-    ( sphere-1-circle-sphere-1-south-sphere-1)
     ( ap
       ( sphere-1-circle)
       ( ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹) ∙
         ( map-sphere-0-eq-base-𝕊¹ n)))
+    ( ap sphere-1-circle (ap circle-sphere-1 (meridian-suspension n)))
     ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
+    ( sphere-1-circle-sphere-1-south-sphere-1)
 apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
   ( inv
     ( assoc
@@ -338,10 +338,10 @@ apply-up-suspension-meridian-suspension-sphere-1-circle-sphere-1 n =
 
 apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 :
   coherence-square-identifications
-    ( ap sphere-1-circle loop-𝕊¹)
-    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
     ( sphere-1-circle-base-𝕊¹-eq-north-sphere-1)
+    ( ap sphere-1-circle loop-𝕊¹)
     ( meridian-sphere 0 (zero-Fin 1))
+    ( sphere-1-circle-base-𝕊¹-eq-south-sphere-1)
 apply-loop-universal-property-𝕊¹-sphere-1-circle-sphere-1 =
   ( inv
     ( assoc
@@ -452,10 +452,10 @@ circle-sphere-1-circle-base-𝕊¹ =
 
 apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle :
   coherence-square-identifications
-    ( ap circle-sphere-1 (inv (meridian-sphere 0 (one-Fin 1))))
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
     ( refl)
+    ( ap circle-sphere-1 (inv (meridian-sphere 0 (one-Fin 1))))
     ( circle-sphere-1-south-sphere-1-eq-base-𝕊¹)
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
 apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle =
   ( identification-right-whisk
     ( ap-inv
@@ -483,10 +483,10 @@ apply-up-suspension-meridian-one-suspension-circle-sphere-1-circle =
 
 apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle :
   coherence-square-identifications
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
     ( ap (circle-sphere-1) (north-sphere-1-loop))
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
-    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
     ( loop-𝕊¹)
+    ( circle-sphere-1-north-sphere-1-eq-base-𝕊¹)
 apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle =
   ( identification-right-whisk
     ( ap-concat
@@ -509,10 +509,10 @@ apply-up-suspension-meridian-zero-suspension-circle-sphere-1-circle =
 
 circle-sphere-1-circle-loop-𝕊¹ :
   coherence-square-identifications
+    ( circle-sphere-1-circle-base-𝕊¹)
     ( ap circle-sphere-1 (ap sphere-1-circle loop-𝕊¹))
-    ( circle-sphere-1-circle-base-𝕊¹)
-    ( circle-sphere-1-circle-base-𝕊¹)
     ( loop-𝕊¹)
+    ( circle-sphere-1-circle-base-𝕊¹)
 circle-sphere-1-circle-loop-𝕊¹ =
   ( inv
     ( assoc
