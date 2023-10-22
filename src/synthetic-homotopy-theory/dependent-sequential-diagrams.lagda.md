@@ -24,11 +24,30 @@ open import synthetic-homotopy-theory.sequential-diagrams
 A **dependent sequential diagram** over a
 [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md) `(A, a)`
 is a [sequence](foundation.dependent-sequences.md) of families of types
-`B : (n : ℕ) → A n → 𝓤` over the types in the base sequential diagram, equipped
+`B : (n : ℕ) → Aₙ → 𝓤` over the types in the base sequential diagram, equipped
 with fiberwise maps
 
 ```text
-bₙ : (x : A n) → B n x → B (n + 1) (aₙ x).
+bₙ : (x : Aₙ) → Bₙ x → Bₙ₊₁ (aₙ x).
+```
+
+They can be thought of as a family of sequential diagrams
+
+```text
+       bₙ(x)           bₙ₊₁(aₙ(x))
+ Bₙ(x) ----> Bₙ₊₁(aₙ(x)) -------> Bₙ₊₂(aₙ₊₁(aₙ(x))) ----> ⋯,
+```
+
+one for each `x : Aₙ`, or as a sequence fibered over `(A, a)`, visualised as
+
+```text
+     b₀      b₁      b₂
+ B₀ ---> B₁ ---> B₂ ---> ⋯
+ |       |       |
+ V       V       V
+ V       V       V
+ A₀ ---> A₁ ---> A₂ ---> ⋯.
+     a₀      a₁      a₂
 ```
 
 ## Definitions
@@ -69,6 +88,9 @@ module _
 
 ### Constant dependent sequential diagrams
 
+Constant dependent sequential diagrams are dependent sequential diagrams where
+the dependent type family `B` is [constant](foundation.constant-maps.md).
+
 ```agda
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) (B : sequential-diagram l2)
@@ -80,6 +102,23 @@ module _
 ```
 
 ### Sections of dependent sequential diagrams
+
+A **section of a dependent sequential diagram** `(B, b)` is a
+[sequence](foundation.dependent-sequences.md) of sections
+`sₙ : (x : Aₙ) → Bₙ(x)` satisfying the naturality condition that all squares of
+the form
+
+```text
+          bₙ(x)
+  Bₙ(x) -------> Bₙ₊₁(aₙ(x))
+    ^                ^
+ sₙ |                | sₙ₊₁
+    |                |
+ (x : Aₙ) ---> (aₙ(x) : Aₙ₊₁)
+           aₙ
+```
+
+[commute](foundation.commuting-squares-of-maps.md).
 
 ```agda
 module _
