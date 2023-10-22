@@ -18,6 +18,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
@@ -38,9 +39,12 @@ open import synthetic-homotopy-theory.powers-of-loops
 
 ## Idea
 
-**Hatcher's** example of an acyclic type is a higher inductive type equipped
-with a point and two loops `a` and `b`, and identifications witnessing that
-`a⁵ ＝ b³` and `b³ = (ab)²`.
+**Hatcher's [acyclic type](synthetic-homotopy-theory.acyclic-types.md)** is a
+higher inductive type [equipped](foundation.structure.md) with a base point and
+two [loops](synthetic-homotopy-theory.loop-spaces.md) `a` and `b`, and
+[identifications](foundation.identity-types.md) witnessing that `a⁵ ＝ b³` and
+`b³ = (ab)²`. This type is acyclic, because the structure on Hatcher's acyclic
+type on any loop space is [contractible](foundation.contractible-types.md).
 
 ## Definitions
 
@@ -80,19 +84,19 @@ hom-algebra-Hatcher-Acyclic-Type
           Σ ( map-Ω f a2 ＝ b2)
             ( λ v →
               ( coherence-square-identifications
-                ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
-                ( s1)
                 ( ap (map-Ω f) r1)
-                ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)) ×
-              coherence-square-identifications
+                ( map-power-nat-Ω 5 f a1 ∙ ap (power-nat-Ω 5 B) u)
                 ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
-                ( s2)
+                ( s1)) ×
+              ( coherence-square-identifications
                 ( ap (map-Ω f) r2)
+                ( map-power-nat-Ω 3 f a2 ∙ ap (power-nat-Ω 3 B) v)
                 ( ( map-power-nat-Ω 2 f (a1 ∙ a2)) ∙
                   ( ap
                     ( power-nat-Ω 2 B)
                     ( ( preserves-mul-map-Ω f a1 a2) ∙
-                      ( ap-binary _∙_ u v)))))))
+                      ( horizontal-concat-Id² u v))))
+                ( s2)))))
 ```
 
 ### The Hatcher acyclic type is the initial Hatcher acyclic algebra

@@ -12,6 +12,7 @@ open import foundation-core.homotopies public
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
 open import foundation.binary-equivalences
+open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
@@ -234,7 +235,8 @@ module _
 
   compute-dependent-identification-eq-value-function :
     {a0 a1 : A} (p : a0 ＝ a1) (q : f a0 ＝ g a0) (q' : f a1 ＝ g a1) →
-    (((ap f p) ∙ q') ＝ (q ∙ (ap g p))) ≃ ((tr (eq-value f g) p q) ＝ q')
+    ( coherence-square-identifications q (ap f p) (ap g p) q') ≃
+    ( tr (eq-value f g) p q ＝ q')
   pr1 (compute-dependent-identification-eq-value-function p q q') =
     map-compute-dependent-identification-eq-value-function f g p q q'
   pr2 (compute-dependent-identification-eq-value-function p q q') =

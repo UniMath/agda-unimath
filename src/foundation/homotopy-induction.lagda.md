@@ -133,4 +133,4 @@ module _
 ## See also
 
 - [Homotopies](foundation.homotopies.md).
-- [Function extensionality](foundation-core.function-extensionality.md).
+- [Function extensionality](foundation.function-extensionality.md).

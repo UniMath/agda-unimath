@@ -18,7 +18,9 @@ open import synthetic-homotopy-theory.suspensions-of-types
 
 ## Idea
 
-A type `A` is said to be **acyclic** if its suspension is contractible.
+A type `A` is said to be **acyclic** if its
+[suspension](synthetic-homotopy-theory.suspensions-of-types.md) is
+[contractible](foundation.contractible-types.md).
 
 ## Definition
 
