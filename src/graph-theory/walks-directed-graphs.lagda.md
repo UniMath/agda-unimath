@@ -460,7 +460,7 @@ module _
         ( vertex-equiv-Directed-Graph G H e y))
       ( is-equiv-map-equiv
         ( equiv-tot
-          ( equiv-walk-of-length-equiv-Directed-Graph G H e)))
+          ( λ n → equiv-walk-of-length-equiv-Directed-Graph G H e n)))
 
   equiv-walk-equiv-Directed-Graph :
     {x y : vertex-Directed-Graph G} →
