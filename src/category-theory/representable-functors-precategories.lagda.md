@@ -8,12 +8,10 @@ module category-theory.representable-functors-precategories where
 
 ```agda
 open import category-theory.functors-precategories
-open import category-theory.maps-from-small-to-large-precategories
 open import category-theory.maps-precategories
 open import category-theory.natural-transformations-functors-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
-open import category-theory.precategory-of-functors
 open import category-theory.presheaf-categories
 
 open import foundation.category-of-sets
@@ -149,15 +147,14 @@ module _
   pr2 map-representable-functor-copresheaf-Precategory =
     representable-natural-transformation-Precategory C
 
-  functor-representable-functor-copresheaf-Precategory :
-    functor-Precategory
-      ( opposite-Precategory C)
-      ( copresheaf-precategory-Large-Precategory C l2)
-  pr1 functor-representable-functor-copresheaf-Precategory =
-    representable-functor-Precategory C
-  pr1 (pr2 functor-representable-functor-copresheaf-Precategory) =
-    representable-natural-transformation-Precategory C
-  pr1 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) =
-    {!   !}
-  pr2 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) = {!   !}
+  -- functor-representable-functor-copresheaf-Precategory :
+  --   functor-Precategory
+  --     ( opposite-Precategory C)
+  --     ( copresheaf-precategory-Large-Precategory C l2)
+  -- pr1 functor-representable-functor-copresheaf-Precategory =
+  --   representable-functor-Precategory C
+  -- pr1 (pr2 functor-representable-functor-copresheaf-Precategory) =
+  --   representable-natural-transformation-Precategory C
+  -- pr1 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) = {!   !}
+  -- pr2 (pr2 (pr2 functor-representable-functor-copresheaf-Precategory)) = {!   !}
 ```

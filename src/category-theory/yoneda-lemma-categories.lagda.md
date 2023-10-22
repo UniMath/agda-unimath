@@ -16,10 +16,7 @@ open import category-theory.representable-functors-categories
 open import category-theory.yoneda-lemma-precategories
 
 open import foundation.category-of-sets
-open import foundation.dependent-pair-types
 open import foundation.equivalences
-open import foundation.retractions
-open import foundation.sections
 open import foundation.sets
 open import foundation.universe-levels
 ```

@@ -8,25 +8,15 @@ module category-theory.opposite-categories where
 
 ```agda
 open import category-theory.categories
-open import category-theory.composition-operations-on-binary-families-of-sets
-open import category-theory.isomorphisms-in-categories
-open import category-theory.isomorphisms-in-precategories
 open import category-theory.opposite-precategories
 open import category-theory.precategories
 
 open import foundation.dependent-pair-types
-open import foundation.equality-dependent-pair-types
 open import foundation.equivalences
-open import foundation.function-extensionality
-open import foundation.function-types
-open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.involutions
-open import foundation.multivariable-homotopies
-open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
 

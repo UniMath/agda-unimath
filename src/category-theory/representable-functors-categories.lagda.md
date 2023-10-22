@@ -51,7 +51,7 @@ components `hom c x → hom b x` are defined by precomposition with `f`.
 
 ```agda
 representable-natural-transformation-Category :
-  {l1 l2 : Level} (C : Category l1 l2) (b c : obj-Category C)
+  {l1 l2 : Level} (C : Category l1 l2) {b c : obj-Category C}
   (f : hom-Category C b c) →
   natural-transformation-Category
     ( C)
