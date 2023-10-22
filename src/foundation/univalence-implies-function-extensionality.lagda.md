@@ -34,24 +34,19 @@ The [univalence axiom](foundation-core.univalence.md) implies
 
 ```agda
 abstract
-  weak-funext-univalence :
-    {l : Level} {A : UU l} {B : A → UU l} → weak-function-extensionality A B
-  weak-funext-univalence {A = A} {B} is-contr-B =
+  weak-funext-univalence : {l : Level} → weak-function-extensionality-Level l l
+  weak-funext-univalence A B is-contr-B =
     is-contr-retract-of
-      ( fiber (postcomp A (pr1 {B = B})) id)
-      ( pair
-        ( λ f → pair (λ x → pair x (f x)) refl)
-        ( pair
-          ( λ h x → tr B (htpy-eq (pr2 h) x) (pr2 (pr1 h x)))
-          ( refl-htpy)))
+      ( fiber (postcomp A pr1) id)
+      ( ( λ f → ((λ x → (x , f x)) , refl)) ,
+        ( λ h x → tr B (htpy-eq (pr2 h) x) (pr2 (pr1 h x))) ,
+        ( refl-htpy))
       ( is-contr-map-is-equiv
         ( is-equiv-postcomp-univalence A (equiv-pr1 is-contr-B))
         ( id))
 
 abstract
   funext-univalence :
-    {l : Level} {A : UU l} {B : A → UU l} (f : (x : A) → B x) →
-    function-extensionality f
-  funext-univalence {A = A} {B} f =
-    funext-weak-funext (λ A B → weak-funext-univalence) A B f
+    {l : Level} → function-extensionality-Level l l
+  funext-univalence f = funext-weak-funext weak-funext-univalence f
 ```
