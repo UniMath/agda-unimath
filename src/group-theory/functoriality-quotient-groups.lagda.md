@@ -1,14 +1,20 @@
 # Functoriality of quotient groups
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
+
 module group-theory.functoriality-quotient-groups where
 ```
 
 <details><summary>Imports</summary>
 
 ```agda
+open import foundation.action-on-identifications-functions
+open import foundation.commuting-squares-of-maps
 open import foundation.contractible-types
 open import foundation.dependent-pair-types
+open import foundation.homotopies
+open import foundation.identity-types
 open import foundation.universe-levels
 
 open import group-theory.commuting-squares-of-group-homomorphisms
@@ -46,14 +52,13 @@ satisfying the property that `x ∈ N ⇒ f x ∈ M` induces a group homomorphis
 
 ### The quotient functor on groups
 
-#### The functoriality of quotient groups
+#### The functorial action of the quotient group construction
 
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (G : Group l1) (H : Group l2)
   (N : Normal-Subgroup l3 G) (M : Normal-Subgroup l4 H)
-  (f : hom-Group G H)
-  (P : reflects-normal-subgroup-hom-Group G H N M f)
+  (f : reflecting-hom-Group G H N M)
   where
 
   abstract
@@ -63,7 +68,7 @@ module _
             ( coherence-square-hom-Group G H
               ( quotient-Group G N)
               ( quotient-Group H M)
-              ( f)
+              ( hom-reflecting-hom-Group G H N M f)
               ( quotient-hom-Group G N)
               ( quotient-hom-Group H M)))
     unique-hom-quotient-Group =
@@ -74,7 +79,7 @@ module _
           ( N)
           ( M)
           ( nullifying-quotient-hom-Group H M)
-          ( f , P))
+          ( f))
 
   abstract
     hom-quotient-Group : hom-Group (quotient-Group G N) (quotient-Group H M)
@@ -84,10 +89,98 @@ module _
       coherence-square-hom-Group G H
         ( quotient-Group G N)
         ( quotient-Group H M)
-        ( f)
+        ( hom-reflecting-hom-Group G H N M f)
         ( quotient-hom-Group G N)
         ( quotient-hom-Group H M)
         ( hom-quotient-Group)
     naturality-hom-quotient-Group =
       pr2 (center unique-hom-quotient-Group)
+
+  map-hom-quotient-Group : type-quotient-Group G N → type-quotient-Group H M
+  map-hom-quotient-Group =
+    map-hom-Group (quotient-Group G N) (quotient-Group H M) hom-quotient-Group
 ```
+
+#### The functorial action preserves the identity homomorphism
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (N : Normal-Subgroup l2 G)
+  where
+
+  abstract
+    preserves-id-hom-quotient-Group :
+      hom-quotient-Group G G N N (id-reflecting-hom-Group G N) ＝
+      id-hom-Group (quotient-Group G N)
+    preserves-id-hom-quotient-Group =
+      ap
+        ( pr1)
+        ( eq-is-contr'
+          ( unique-mapping-property-quotient-Group G N
+            ( quotient-Group G N)
+            ( nullifying-quotient-hom-Group G N))
+          ( hom-quotient-Group G G N N (id-reflecting-hom-Group G N) ,
+            naturality-hom-quotient-Group G G N N (id-reflecting-hom-Group G N))
+          ( id-hom-Group (quotient-Group G N) ,
+            refl-htpy))
+```
+
+#### The functorial action preserves composition
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  (G : Group l1) (H : Group l2) (K : Group l3)
+  (L : Normal-Subgroup l4 G)
+  (M : Normal-Subgroup l5 H)
+  (N : Normal-Subgroup l6 K)
+  where
+
+  abstract
+    preserves-comp-hom-quotient-Group :
+      (g : reflecting-hom-Group H K M N)
+      (f : reflecting-hom-Group G H L M) →
+      hom-quotient-Group G K L N (comp-reflecting-hom-Group G H K L M N g f) ＝
+      comp-hom-Group
+        ( quotient-Group G L)
+        ( quotient-Group H M)
+        ( quotient-Group K N)
+        ( hom-quotient-Group H K M N g)
+        ( hom-quotient-Group G H L M f)
+    preserves-comp-hom-quotient-Group g f =
+      ap
+        ( pr1)
+        ( eq-is-contr'
+          ( unique-mapping-property-quotient-Group G L
+            ( quotient-Group K N)
+            ( comp-nullifying-hom-reflecting-hom-Group G K
+              ( quotient-Group K N)
+              ( L)
+              ( N)
+              ( nullifying-quotient-hom-Group K N)
+              ( comp-reflecting-hom-Group G H K L M N g f)))
+          ( ( hom-quotient-Group G K L N
+              ( comp-reflecting-hom-Group G H K L M N g f)) ,
+            ( naturality-hom-quotient-Group G K L N
+              ( comp-reflecting-hom-Group G H K L M N g f)))
+          ( comp-hom-Group
+            ( quotient-Group G L)
+            ( quotient-Group H M)
+            ( quotient-Group K N)
+            ( hom-quotient-Group H K M N g)
+            ( hom-quotient-Group G H L M f) ,
+            ( pasting-horizontal-coherence-square-maps
+              ( map-reflecting-hom-Group G H L M f)
+              ( map-reflecting-hom-Group H K M N g)
+              ( map-quotient-hom-Group G L)
+              ( map-quotient-hom-Group H M)
+              ( map-quotient-hom-Group K N)
+              ( map-hom-quotient-Group G H L M f)
+              ( map-hom-quotient-Group H K M N g)
+              ( naturality-hom-quotient-Group G H L M f)
+              ( naturality-hom-quotient-Group H K M N g))))
+```
+
+#### The quotient group functor
+
+This functor remains to be formalized.
