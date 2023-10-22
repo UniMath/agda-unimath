@@ -47,9 +47,9 @@ module _
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
-  is-emb-hom-undirected-graph-Prop :
+  is-emb-prop-hom-Undirected-Graph :
     hom-Undirected-Graph G H → Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-emb-hom-undirected-graph-Prop f =
+  is-emb-prop-hom-Undirected-Graph f =
     prod-Prop
       ( is-emb-Prop (vertex-hom-Undirected-Graph G H f))
       ( Π-Prop
@@ -59,12 +59,12 @@ module _
 
   is-emb-hom-Undirected-Graph :
     hom-Undirected-Graph G H → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
-  is-emb-hom-Undirected-Graph f = type-Prop (is-emb-hom-undirected-graph-Prop f)
+  is-emb-hom-Undirected-Graph f = type-Prop (is-emb-prop-hom-Undirected-Graph f)
 
   is-prop-is-emb-hom-Undirected-Graph :
     (f : hom-Undirected-Graph G H) → is-prop (is-emb-hom-Undirected-Graph f)
   is-prop-is-emb-hom-Undirected-Graph f =
-    is-prop-type-Prop (is-emb-hom-undirected-graph-Prop f)
+    is-prop-type-Prop (is-emb-prop-hom-Undirected-Graph f)
 
   emb-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   emb-Undirected-Graph =

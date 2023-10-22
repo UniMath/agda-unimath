@@ -98,11 +98,11 @@ module _
   length-trail-Undirected-Graph t =
     length-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
 
-  is-constant-trail-Undirected-Graph-Prop :
+  is-constant-prop-trail-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} →
     trail-Undirected-Graph x y → Prop lzero
-  is-constant-trail-Undirected-Graph-Prop t =
-    is-constant-walk-Undirected-Graph-Prop G (walk-trail-Undirected-Graph t)
+  is-constant-prop-trail-Undirected-Graph t =
+    is-constant-prop-walk-Undirected-Graph G (walk-trail-Undirected-Graph t)
 
   is-constant-trail-Undirected-Graph :
     {x y : vertex-Undirected-Graph G} → trail-Undirected-Graph x y → UU lzero

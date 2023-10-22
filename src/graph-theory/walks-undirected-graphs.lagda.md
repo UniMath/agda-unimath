@@ -560,16 +560,16 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2) {x : vertex-Undirected-Graph G}
   where
 
-  is-constant-walk-Undirected-Graph-Prop :
+  is-constant-prop-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} →
     walk-Undirected-Graph G x y → Prop lzero
-  is-constant-walk-Undirected-Graph-Prop w =
+  is-constant-prop-walk-Undirected-Graph w =
     is-zero-ℕ-Prop (length-walk-Undirected-Graph G w)
 
   is-constant-walk-Undirected-Graph :
     {y : vertex-Undirected-Graph G} → walk-Undirected-Graph G x y → UU lzero
   is-constant-walk-Undirected-Graph w =
-    type-Prop (is-constant-walk-Undirected-Graph-Prop w)
+    type-Prop (is-constant-prop-walk-Undirected-Graph w)
 
   constant-walk-Undirected-Graph :
     (y : vertex-Undirected-Graph G) → UU (lsuc lzero ⊔ l1 ⊔ l2)

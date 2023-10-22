@@ -42,9 +42,9 @@ module _
   (G : Undirected-Graph l1 l2) (H : Undirected-Graph l3 l4)
   where
 
-  is-faithful-hom-undirected-graph-Prop :
+  is-faithful-prop-hom-Undirected-Graph :
     hom-Undirected-Graph G H → Prop (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l4)
-  is-faithful-hom-undirected-graph-Prop f =
+  is-faithful-prop-hom-Undirected-Graph f =
     Π-Prop
       ( unordered-pair-vertices-Undirected-Graph G)
       ( λ p → is-emb-Prop (edge-hom-Undirected-Graph G H f p))
@@ -52,13 +52,13 @@ module _
   is-faithful-hom-Undirected-Graph :
     hom-Undirected-Graph G H → UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l4)
   is-faithful-hom-Undirected-Graph f =
-    type-Prop (is-faithful-hom-undirected-graph-Prop f)
+    type-Prop (is-faithful-prop-hom-Undirected-Graph f)
 
   is-prop-is-faithful-hom-Undirected-Graph :
     (f : hom-Undirected-Graph G H) →
     is-prop (is-faithful-hom-Undirected-Graph f)
   is-prop-is-faithful-hom-Undirected-Graph f =
-    is-prop-type-Prop (is-faithful-hom-undirected-graph-Prop f)
+    is-prop-type-Prop (is-faithful-prop-hom-Undirected-Graph f)
 
   faithful-hom-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2 ⊔ l3 ⊔ l4)
   faithful-hom-Undirected-Graph =

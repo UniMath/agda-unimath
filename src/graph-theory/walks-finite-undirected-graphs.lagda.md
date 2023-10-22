@@ -445,7 +445,7 @@ module _
     {y : vertex-Undirected-Graph-𝔽 G} →
     walk-Undirected-Graph-𝔽 G x y → Prop lzero
   is-constant-walk-Undirected-Graph-𝔽-Prop =
-    is-constant-walk-Undirected-Graph-Prop
+    is-constant-prop-walk-Undirected-Graph
       ( undirected-graph-Undirected-Graph-𝔽 G)
 
   is-constant-walk-Undirected-Graph-𝔽 :

@@ -47,10 +47,10 @@ that for every vertex `x : G` the type of walks from `x` to `r` is contractible.
 ## Definition
 
 ```agda
-is-tree-Directed-Graph-Prop' :
+is-tree-prop-Directed-Graph' :
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
   Prop (l1 ⊔ l2)
-is-tree-Directed-Graph-Prop' G r =
+is-tree-prop-Directed-Graph' G r =
   Π-Prop
     ( vertex-Directed-Graph G)
     ( λ x → is-contr-Prop (walk-Directed-Graph G x r))
@@ -58,13 +58,13 @@ is-tree-Directed-Graph-Prop' G r =
 is-tree-Directed-Graph' :
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
   UU (l1 ⊔ l2)
-is-tree-Directed-Graph' G r = type-Prop (is-tree-Directed-Graph-Prop' G r)
+is-tree-Directed-Graph' G r = type-Prop (is-tree-prop-Directed-Graph' G r)
 
 is-prop-is-tree-Directed-Graph' :
   {l1 l2 : Level} (G : Directed-Graph l1 l2) (r : vertex-Directed-Graph G) →
   is-prop (is-tree-Directed-Graph' G r)
 is-prop-is-tree-Directed-Graph' G r =
-  is-prop-type-Prop (is-tree-Directed-Graph-Prop' G r)
+  is-prop-type-Prop (is-tree-prop-Directed-Graph' G r)
 
 is-tree-Directed-Graph :
   {l1 l2 : Level} → Directed-Graph l1 l2 → UU (l1 ⊔ l2)
@@ -231,12 +231,12 @@ module _
     is-prop-all-elements-equal
       ( λ H K →
         eq-type-subtype
-          ( is-tree-Directed-Graph-Prop' G)
+          ( is-tree-prop-Directed-Graph' G)
           ( uniqueness-root-is-tree-Directed-Graph H K))
 
-  is-tree-directed-graph-Prop : Prop (l1 ⊔ l2)
-  pr1 is-tree-directed-graph-Prop = is-tree-Directed-Graph G
-  pr2 is-tree-directed-graph-Prop = is-prop-is-tree-Directed-Graph
+  is-tree-prop-Directed-Graph : Prop (l1 ⊔ l2)
+  pr1 is-tree-prop-Directed-Graph = is-tree-Directed-Graph G
+  pr2 is-tree-prop-Directed-Graph = is-prop-is-tree-Directed-Graph
 
 uniqueness-root-Directed-Tree :
   {l1 l2 : Level} (T : Directed-Tree l1 l2)

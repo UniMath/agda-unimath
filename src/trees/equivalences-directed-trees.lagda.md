@@ -424,7 +424,7 @@ module _
     (S : Directed-Tree l1 l2) → (T ＝ S) ≃ equiv-Directed-Tree T S
   extensionality-Directed-Tree =
     extensionality-type-subtype
-      ( is-tree-directed-graph-Prop)
+      ( is-tree-prop-Directed-Graph)
       ( is-tree-Directed-Tree T)
       ( id-equiv-Directed-Graph (graph-Directed-Tree T))
       ( extensionality-Directed-Graph (graph-Directed-Tree T))

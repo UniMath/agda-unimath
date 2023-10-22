@@ -49,8 +49,8 @@ module _
   {l1 l2 : Level} (G : Undirected-Graph l1 l2)
   where
 
-  is-finite-Undirected-Graph-Prop : Prop (lsuc lzero ⊔ l1 ⊔ l2)
-  is-finite-Undirected-Graph-Prop =
+  is-finite-prop-Undirected-Graph : Prop (lsuc lzero ⊔ l1 ⊔ l2)
+  is-finite-prop-Undirected-Graph =
     prod-Prop
       ( is-finite-Prop (vertex-Undirected-Graph G))
       ( Π-Prop
@@ -59,12 +59,12 @@ module _
 
   is-finite-Undirected-Graph : UU (lsuc lzero ⊔ l1 ⊔ l2)
   is-finite-Undirected-Graph =
-    type-Prop is-finite-Undirected-Graph-Prop
+    type-Prop is-finite-prop-Undirected-Graph
 
   is-prop-is-finite-Undirected-Graph :
     is-prop is-finite-Undirected-Graph
   is-prop-is-finite-Undirected-Graph =
-    is-prop-type-Prop is-finite-Undirected-Graph-Prop
+    is-prop-type-Prop is-finite-prop-Undirected-Graph
 ```
 
 ### Finite undirected graphs
