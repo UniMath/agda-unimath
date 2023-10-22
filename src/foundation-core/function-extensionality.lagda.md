@@ -36,11 +36,24 @@ module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  htpy-eq : {f g : (x : A) → B x} → (f ＝ g) → (f ~ g)
+  htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
   htpy-eq refl = refl-htpy
 
-  function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
-  function-extensionality f = (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
+  instance-function-extensionality : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
+  instance-function-extensionality f g = is-equiv (htpy-eq {f} {g})
+
+  based-function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
+  based-function-extensionality f =
+    (g : (x : A) → B x) → is-equiv (htpy-eq {f} {g})
+
+function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+function-extensionality-Level l1 l2 =
+  {A : UU l1} {B : A → UU l2}
+  (f g : (x : A) → B x) →
+  instance-function-extensionality f g
+
+function-extensionality : UUω
+function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l2
 ```
 
 ## Properties

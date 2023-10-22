@@ -82,22 +82,22 @@ module _
 
 ```agda
 abstract
-  induction-principle-homotopies-function-extensionality :
+  induction-principle-homotopies-based-function-extensionality :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
-    function-extensionality f →
+    based-function-extensionality f →
     induction-principle-homotopies f
-  induction-principle-homotopies-function-extensionality
+  induction-principle-homotopies-based-function-extensionality
     {A = A} {B} f funext-f =
     is-identity-system-is-torsorial f
       ( refl-htpy)
       ( is-torsorial-htpy f)
 
 abstract
-  function-extensionality-induction-principle-homotopies :
+  based-function-extensionality-induction-principle-homotopies :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     induction-principle-homotopies f →
-    function-extensionality f
-  function-extensionality-induction-principle-homotopies f ind-htpy-f =
+    based-function-extensionality f
+  based-function-extensionality-induction-principle-homotopies f ind-htpy-f =
     fundamental-theorem-id-is-identity-system f
       ( refl-htpy)
       ( ind-htpy-f)
@@ -115,7 +115,7 @@ module _
     induction-principle-htpy :
       (f : (x : A) → B x) → induction-principle-homotopies f
     induction-principle-htpy f =
-      induction-principle-homotopies-function-extensionality f (funext f)
+      induction-principle-homotopies-based-function-extensionality f (funext f)
 
     ind-htpy :
       {l3 : Level} (f : (x : A) → B x)
