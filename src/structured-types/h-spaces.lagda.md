@@ -20,7 +20,6 @@ open import foundation.unital-binary-operations
 open import foundation.universe-levels
 
 open import foundation-core.endomorphisms
-open import foundation-core.propositions
 
 open import structured-types.magmas
 open import structured-types.noncoherent-h-spaces

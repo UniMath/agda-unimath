@@ -23,6 +23,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-theoretic-principle-of-choice
 open import foundation.univalence
@@ -33,6 +34,14 @@ open import graph-theory.morphisms-directed-graphs
 ```
 
 </details>
+
+## Idea
+
+An **equivalence of directed graphs** from a
+[directed graph](graph-theory.directed-graphs.md) `(V,E)` to a directed graph
+`(V',E')` consists of an [equivalence](foundation-core.equivalences.md)
+`e : V ≃ V'` of vertices, and a family of equivalences `E x y ≃ E' (e x) (e y)`
+of edges indexed by `x y : V`.
 
 ## Definitions
 
@@ -246,10 +255,10 @@ module _
   (e : equiv-Directed-Graph G H)
   where
 
-  is-contr-total-htpy-equiv-Directed-Graph :
-    is-contr (Σ (equiv-Directed-Graph G H) (htpy-equiv-Directed-Graph G H e))
-  is-contr-total-htpy-equiv-Directed-Graph =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-equiv-Directed-Graph :
+    is-torsorial (htpy-equiv-Directed-Graph G H e)
+  is-torsorial-htpy-equiv-Directed-Graph =
+    is-torsorial-Eq-structure
       ( λ α β γ →
         (x y : vertex-Directed-Graph G) (u : edge-Directed-Graph G x y) →
         ( binary-tr
@@ -258,19 +267,19 @@ module _
             ( γ y)
             ( edge-equiv-Directed-Graph G H e x y u)) ＝
         ( map-equiv (β x y) u))
-      ( is-contr-total-htpy-equiv (equiv-vertex-equiv-Directed-Graph G H e))
+      ( is-torsorial-htpy-equiv (equiv-vertex-equiv-Directed-Graph G H e))
       ( equiv-vertex-equiv-Directed-Graph G H e , refl-htpy)
-      ( is-contr-total-Eq-Π
+      ( is-torsorial-Eq-Π
         ( λ x β →
           (y : vertex-Directed-Graph G) (u : edge-Directed-Graph G x y) →
           edge-equiv-Directed-Graph G H e x y u ＝ map-equiv (β y) u)
         ( λ x →
-          is-contr-total-Eq-Π
+          is-torsorial-Eq-Π
             ( λ y β →
               (u : edge-Directed-Graph G x y) →
               edge-equiv-Directed-Graph G H e x y u ＝ map-equiv β u)
             ( λ y →
-              is-contr-total-htpy-equiv
+              is-torsorial-htpy-equiv
                 ( equiv-edge-equiv-Directed-Graph G H e x y))))
 
   htpy-eq-equiv-Directed-Graph :
@@ -282,7 +291,7 @@ module _
     is-equiv (htpy-eq-equiv-Directed-Graph f)
   is-equiv-htpy-eq-equiv-Directed-Graph =
     fundamental-theorem-id
-      is-contr-total-htpy-equiv-Directed-Graph
+      is-torsorial-htpy-equiv-Directed-Graph
       htpy-eq-equiv-Directed-Graph
 
   extensionality-equiv-Directed-Graph :
@@ -334,13 +343,13 @@ module _
     (H : Directed-Graph l1 l2) → equiv-Directed-Graph G H → (G ＝ H)
   eq-equiv-Directed-Graph H = map-inv-equiv (extensionality-Directed-Graph H)
 
-  is-contr-total-equiv-Directed-Graph :
-    is-contr (Σ (Directed-Graph l1 l2) (equiv-Directed-Graph G))
-  is-contr-total-equiv-Directed-Graph =
+  is-torsorial-equiv-Directed-Graph :
+    is-torsorial (equiv-Directed-Graph G)
+  is-torsorial-equiv-Directed-Graph =
     is-contr-equiv'
       ( Σ (Directed-Graph l1 l2) (λ H → G ＝ H))
       ( equiv-tot extensionality-Directed-Graph)
-      ( is-contr-total-path G)
+      ( is-torsorial-path G)
 ```
 
 ### The inverse of an equivalence of directed trees
@@ -530,3 +539,12 @@ module _
   pr2 is-retraction-inv-equiv-Directed-Graph =
     edge-is-retraction-inv-equiv-Directed-Graph
 ```
+
+## External links
+
+- [Graph isomoprhism](https://www.wikidata.org/entity/Q303100) at Wikidata
+- [Graph isomorphism](https://en.wikipedia.org/wiki/Graph_isomorphism) at
+  Wikipedia
+- [Graph isomorphism](https://mathworld.wolfram.com/GraphIsomorphism.html) at
+  Wolfram Mathworld
+- [Isomorphism](https://ncatlab.org/nlab/show/isomorphism) at nlab

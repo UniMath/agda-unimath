@@ -73,6 +73,20 @@ compute-htpy-precomp-refl-htpy :
 compute-htpy-precomp-refl-htpy f C h = eq-htpy-refl-htpy (h ∘ f)
 ```
 
+### Precomposition preserves concatenation of homotopies
+
+```agda
+compute-concat-htpy-precomp :
+  { l1 l2 l3 : Level} {A : UU l1} {B : UU l2}
+  { f g h : A → B} (H : f ~ g) (K : g ~ h) (C : UU l3) →
+  htpy-precomp (H ∙h K) C ~ (htpy-precomp H C ∙h htpy-precomp K C)
+compute-concat-htpy-precomp H K C k =
+  ( ap
+    ( eq-htpy)
+    ( eq-htpy (distributive-left-whisk-concat-htpy k H K))) ∙
+  ( eq-htpy-concat-htpy (k ·l H) (k ·l K))
+```
+
 ### Postcomposition and equivalences
 
 #### A map `f` is an equivalence if and only if postcomposing by `f` is an equivalence
@@ -184,7 +198,7 @@ abstract
     (C : UU l3) → is-equiv (precomp f C)
   is-equiv-precomp-is-equiv f is-equiv-f =
     is-equiv-precomp-is-equiv-precomp-Π f
-      ( is-equiv-precomp-Π-is-equiv f is-equiv-f)
+      ( is-equiv-precomp-Π-is-equiv is-equiv-f)
 
   is-equiv-precomp-equiv :
     {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A ≃ B) →
@@ -276,7 +290,8 @@ is-equiv-is-equiv-precomp-Prop :
   ({l : Level} (R : Prop l) → is-equiv (precomp f (type-Prop R))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Prop P Q f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-prop) P Q f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse
+    ( λ l → l) (λ l → is-prop) P Q f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2)
@@ -284,7 +299,8 @@ is-equiv-is-equiv-precomp-Set :
   ({l : Level} (C : Set l) → is-equiv (precomp f (type-Set C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Set A B f H =
-  is-equiv-is-equiv-precomp-subuniverse id (λ l → is-set) A B f (λ l → H {l})
+  is-equiv-is-equiv-precomp-subuniverse
+    ( λ l → l) (λ l → is-set) A B f (λ l → H {l})
 
 is-equiv-is-equiv-precomp-Truncated-Type :
   {l1 l2 : Level} (k : 𝕋)
@@ -293,7 +309,7 @@ is-equiv-is-equiv-precomp-Truncated-Type :
   ({l : Level} (C : Truncated-Type l k) → is-equiv (precomp f (pr1 C))) →
   is-equiv f
 is-equiv-is-equiv-precomp-Truncated-Type k A B f H =
-    is-equiv-is-equiv-precomp-subuniverse id (λ l → is-trunc k) A B f
+    is-equiv-is-equiv-precomp-subuniverse (λ l → l) (λ l → is-trunc k) A B f
       ( λ l → H {l})
 ```
 

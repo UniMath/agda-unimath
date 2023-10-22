@@ -8,14 +8,14 @@ module foundation.action-on-equivalences-functions where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
 open import foundation.equivalence-induction
-open import foundation.equivalences
 open import foundation.univalence
 open import foundation.universe-levels
 
 open import foundation-core.constant-maps
+open import foundation-core.contractible-types
+open import foundation-core.equivalences
 open import foundation-core.identity-types
 ```
 

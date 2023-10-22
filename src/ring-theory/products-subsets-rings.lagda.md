@@ -53,31 +53,37 @@ module _
   {I : UU l3} (T : I → subset-Ring l4 A)
   where
 
-  forward-inclusion-distributive-product-union-family-of-subsets-Ring :
-    product-subset-Ring A S (union-family-of-subtypes T) ⊆
-    union-family-of-subtypes (λ i → product-subset-Ring A S (T i))
-  forward-inclusion-distributive-product-union-family-of-subsets-Ring x p =
-    apply-universal-property-trunc-Prop p
-      ( union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) x)
-      ( λ { ((s , Hs) , (t , Ht) , refl) →
-        apply-universal-property-trunc-Prop Ht
-          ( union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) x)
-          ( λ (i , Ht') →
-            unit-trunc-Prop
-              ( i , unit-trunc-Prop ((s , Hs) , (t , Ht') , refl)))})
+  abstract
+    forward-inclusion-distributive-product-union-family-of-subsets-Ring :
+      product-subset-Ring A S (union-family-of-subtypes T) ⊆
+      union-family-of-subtypes (λ i → product-subset-Ring A S (T i))
+    forward-inclusion-distributive-product-union-family-of-subsets-Ring x p =
+      apply-universal-property-trunc-Prop p
+        ( union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) x)
+        ( λ where
+          ( ( s , Hs) , (t , Ht) , refl) →
+            apply-universal-property-trunc-Prop Ht
+              ( union-family-of-subtypes
+                ( λ i → product-subset-Ring A S (T i))
+                ( x))
+              ( λ (i , Ht') →
+                unit-trunc-Prop
+                  ( i , unit-trunc-Prop ((s , Hs) , (t , Ht') , refl))))
 
-  backward-inclusion-distributive-product-union-family-of-subsets-Ring :
-    union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) ⊆
-    product-subset-Ring A S (union-family-of-subtypes T)
-  backward-inclusion-distributive-product-union-family-of-subsets-Ring x p =
-    apply-universal-property-trunc-Prop p
-      ( product-subset-Ring A S (union-family-of-subtypes T) x)
-      ( λ (i , u) →
-        apply-universal-property-trunc-Prop u
-          ( product-subset-Ring A S (union-family-of-subtypes T) x)
-          ( λ {((s , Hs) , (t , Ht) , refl) →
-            unit-trunc-Prop
-              ( (s , Hs) , (t , unit-trunc-Prop (i , Ht)) , refl)}))
+  abstract
+    backward-inclusion-distributive-product-union-family-of-subsets-Ring :
+      union-family-of-subtypes (λ i → product-subset-Ring A S (T i)) ⊆
+      product-subset-Ring A S (union-family-of-subtypes T)
+    backward-inclusion-distributive-product-union-family-of-subsets-Ring x p =
+      apply-universal-property-trunc-Prop p
+        ( product-subset-Ring A S (union-family-of-subtypes T) x)
+        ( λ (i , u) →
+          apply-universal-property-trunc-Prop u
+            ( product-subset-Ring A S (union-family-of-subtypes T) x)
+            ( λ where
+              ( ( s , Hs) , (t , Ht) , refl) →
+                unit-trunc-Prop
+                  ( (s , Hs) , (t , unit-trunc-Prop (i , Ht)) , refl)))
 
   distributive-product-union-family-of-subsets-Ring :
     product-subset-Ring A S (union-family-of-subtypes T) ＝
@@ -100,57 +106,61 @@ module _
   (T : subset-Ring l4 A)
   where
 
-  forward-inclusion-associative-product-subset-Ring :
-    ( product-subset-Ring A
-      ( product-subset-Ring A R S)
-      ( T)) ⊆
-    ( product-subset-Ring A
-      ( R)
-      ( product-subset-Ring A S T))
-  forward-inclusion-associative-product-subset-Ring x H =
-    apply-universal-property-trunc-Prop H
-      ( product-subset-Ring A R
-        ( product-subset-Ring A S T)
-        ( x))
-      ( λ { ((u , K) , (t , Ht) , refl) →
+  abstract
+    forward-inclusion-associative-product-subset-Ring :
+      ( product-subset-Ring A
+        ( product-subset-Ring A R S)
+        ( T)) ⊆
+      ( product-subset-Ring A
+        ( R)
+        ( product-subset-Ring A S T))
+    forward-inclusion-associative-product-subset-Ring x H =
+      apply-universal-property-trunc-Prop H
+        ( product-subset-Ring A R
+          ( product-subset-Ring A S T)
+          ( x))
+        ( λ where
+          ( ( u , K) , (t , Ht) , refl) →
             apply-universal-property-trunc-Prop K
               ( product-subset-Ring A R
                 ( product-subset-Ring A S T)
                 ( _))
-              ( λ { ((r , Hr) , (s , Hs) , refl) →
-                    unit-trunc-Prop
-                      ( ( r , Hr) ,
-                        ( mul-Ring A s t ,
-                          unit-trunc-Prop
-                            ( (s , Hs) , (t , Ht) , refl)) ,
-                        ( associative-mul-Ring A r s t))})})
+              ( λ where
+                ( ( r , Hr) , (s , Hs) , refl) →
+                  unit-trunc-Prop
+                    ( ( r , Hr) ,
+                      ( ( mul-Ring A s t) ,
+                        ( unit-trunc-Prop ((s , Hs) , (t , Ht) , refl))) ,
+                      ( associative-mul-Ring A r s t))))
 
-  backward-inclusion-associative-product-subset-Ring :
-    ( product-subset-Ring A
-      ( R)
-      ( product-subset-Ring A S T)) ⊆
-    ( product-subset-Ring A
-      ( product-subset-Ring A R S)
-      ( T))
-  backward-inclusion-associative-product-subset-Ring x H =
-    apply-universal-property-trunc-Prop H
+  abstract
+    backward-inclusion-associative-product-subset-Ring :
+      ( product-subset-Ring A
+        ( R)
+        ( product-subset-Ring A S T)) ⊆
       ( product-subset-Ring A
         ( product-subset-Ring A R S)
-        ( T)
-        ( x))
-      ( λ { ((r , Hr) , (v , K) , refl) →
-        apply-universal-property-trunc-Prop K
-          ( product-subset-Ring A
-            ( product-subset-Ring A R S)
-            ( T)
-            ( _))
-          ( λ { ((s , Hs) , (t , Ht) , refl) →
-            unit-trunc-Prop
-              ( ( mul-Ring A r s ,
+        ( T))
+    backward-inclusion-associative-product-subset-Ring x H =
+      apply-universal-property-trunc-Prop H
+        ( product-subset-Ring A
+          ( product-subset-Ring A R S)
+          ( T)
+          ( x))
+        ( λ where
+          ( ( r , Hr) , (v , K) , refl) →
+            apply-universal-property-trunc-Prop K
+              ( product-subset-Ring A
+                ( product-subset-Ring A R S)
+                ( T)
+                ( _))
+              ( λ where
+                ( ( s , Hs) , (t , Ht) , refl) →
                   unit-trunc-Prop
-                    ( (r , Hr) , (s , Hs) , refl)) ,
-                ( t , Ht) ,
-                ( inv (associative-mul-Ring A r s t)))})})
+                    ( ( ( mul-Ring A r s) ,
+                        ( unit-trunc-Prop ((r , Hr) , (s , Hs) , refl))) ,
+                      ( t , Ht) ,
+                      ( inv (associative-mul-Ring A r s t)))))
 
   associative-product-subset-Ring :
     product-subset-Ring A

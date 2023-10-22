@@ -16,6 +16,7 @@ open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 ```
@@ -89,26 +90,26 @@ module _
   Eq-eq-free-loop α .α refl = refl-Eq-free-loop α
 
   abstract
-    is-contr-total-Eq-free-loop :
-      (α : free-loop X) → is-contr (Σ (free-loop X) (Eq-free-loop α))
-    is-contr-total-Eq-free-loop (pair x α) =
-      is-contr-total-Eq-structure
+    is-torsorial-Eq-free-loop :
+      (α : free-loop X) → is-torsorial (Eq-free-loop α)
+    is-torsorial-Eq-free-loop (pair x α) =
+      is-torsorial-Eq-structure
         ( λ x α' p → Id (α ∙ p) (p ∙ α'))
-        ( is-contr-total-path x)
+        ( is-torsorial-path x)
         ( pair x refl)
         ( is-contr-is-equiv'
           ( Σ (Id x x) (λ α' → Id α α'))
           ( tot (λ α' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ α' → is-equiv-concat right-unit α'))
-          ( is-contr-total-path α))
+          ( is-torsorial-path α))
 
   abstract
     is-equiv-Eq-eq-free-loop :
       (α α' : free-loop X) → is-equiv (Eq-eq-free-loop α α')
     is-equiv-Eq-eq-free-loop α =
       fundamental-theorem-id
-        ( is-contr-total-Eq-free-loop α)
+        ( is-torsorial-Eq-free-loop α)
         ( Eq-eq-free-loop α)
 ```
 
@@ -137,20 +138,19 @@ module _
   Eq-free-dependent-loop-eq p .p refl = refl-Eq-free-dependent-loop p
 
   abstract
-    is-contr-total-Eq-free-dependent-loop :
-      ( p : free-dependent-loop α P) →
-      is-contr (Σ (free-dependent-loop α P) (Eq-free-dependent-loop p))
-    is-contr-total-Eq-free-dependent-loop (pair y p) =
-      is-contr-total-Eq-structure
+    is-torsorial-Eq-free-dependent-loop :
+      ( p : free-dependent-loop α P) → is-torsorial (Eq-free-dependent-loop p)
+    is-torsorial-Eq-free-dependent-loop (pair y p) =
+      is-torsorial-Eq-structure
         ( λ y' p' q → Id (p ∙ q) ((ap (tr P (loop-free-loop α)) q) ∙ p'))
-        ( is-contr-total-path y)
+        ( is-torsorial-path y)
         ( pair y refl)
         ( is-contr-is-equiv'
           ( Σ (Id (tr P (loop-free-loop α) y) y) (λ p' → Id p p'))
           ( tot (λ p' α → right-unit ∙ α))
           ( is-equiv-tot-is-fiberwise-equiv
             ( λ p' → is-equiv-concat right-unit p'))
-          ( is-contr-total-path p))
+          ( is-torsorial-path p))
 
   abstract
     is-equiv-Eq-free-dependent-loop-eq :
@@ -158,7 +158,7 @@ module _
       is-equiv (Eq-free-dependent-loop-eq p p')
     is-equiv-Eq-free-dependent-loop-eq p =
       fundamental-theorem-id
-        ( is-contr-total-Eq-free-dependent-loop p)
+        ( is-torsorial-Eq-free-dependent-loop p)
         ( Eq-free-dependent-loop-eq p)
 
   eq-Eq-free-dependent-loop :

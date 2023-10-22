@@ -1,0 +1,233 @@
+# This file contains a table of contributors who helped create the library
+#
+# It exists to provide a translation table between `git log` output
+# and an abstract "identity", which can have associated attributes
+# such as a display name or a homepage.
+#
+# For more information, see CONTRIBUTING.md
+
+
+[[contributors]]
+displayName = "Egbert Rijke"
+maintainer = true
+extra = " (Lead developer)"
+usernames = [ "Egbert Rijke" ]
+homepage = "https://users.fmf.uni-lj.si/rijke/"
+github = "EgbertRijke"
+bio = '''
+Egbert Rijke is a postdoctoral researcher at the University of Ljubljana. His
+research is on homotopy type theory and general mathematics from a univalent
+point of view.
+'''
+
+[[contributors]]
+displayName = "Fredrik Bakke"
+maintainer = true
+usernames = [ "Fredrik Bakke" ]
+homepage = "https://www.ntnu.edu/employees/fredrik.bakke"
+github = "fredrik-bakke"
+bio = '''
+Fredrik is a PhD student at the Norwegian University of Science and Technology
+in Trondheim. His research is on homotopy theory and higher category theory.
+'''
+
+[[contributors]]
+displayName = "Elisabeth Bonnevier"
+maintainer = true
+usernames = [ "Elisabeth Bonnevier" ]
+homepage = "https://elisabeth.bonnevier.one"
+github = "elisabethbonnevier"
+bio = '''
+Elisabeth is a PhD student at the University of Bergen. Her research is on
+homotopy type theory.
+'''
+
+[[contributors]]
+displayName = "Jonathan Prieto-Cubides"
+maintainer = true
+usernames = [ "Jonathan Cubides", "Jonathan Prieto-Cubides" ]
+homepage = "https://jonaprieto.github.io"
+github = "jonaprieto"
+bio = '''
+Jonathan is a researcher and a compiler engineer at Heliax designing and
+implementing the functional programming language Juvix. His PhD research is on
+graph theory from a univalent point of view.
+'''
+
+[[contributors]]
+displayName = "Eléonore Mangel"
+usernames = [ "Eléonore Mangel", "EleonoreMangel", "Léo Mangel", "LeoMangel" ]
+github = "EleonoreMangel"
+
+[[contributors]]
+displayName = "Bryan Lu"
+usernames = [ "Bryan Lu" ]
+github = "blu-bird"
+
+[[contributors]]
+displayName = "Raymond Baker"
+usernames = [ "Raymond Baker" ]
+github = "morphismz"
+
+[[contributors]]
+displayName = "Elif Uskuplu"
+usernames = [ "ElifUskuplu" ]
+github = "ElifUskuplu"
+
+[[contributors]]
+displayName = "Victor Blanchi"
+usernames = [ "VictorBlanchi" ]
+github = "VictorBlanchi"
+
+[[contributors]]
+displayName = "Vojtěch Štěpančík"
+usernames = [ "Vojtěch Štěpančík", "VojtechStep" ]
+homepage = "https://vojtechstep.eu/"
+github = "VojtechStep"
+
+[[contributors]]
+displayName = "Fernando Chu"
+usernames = [ "Fernando Chu", "fernando" ]
+github = "FernandoChu"
+
+[[contributors]]
+displayName = "Ian Ray"
+usernames = [ "IanRay11", "Ian Ray" ]
+github = "IanRay11"
+
+[[contributors]]
+displayName = "Andreas Källberg"
+usernames = [ "Andreas Källberg", "anka-213"]
+github = "anka-213"
+
+[[contributors]]
+displayName = "malarbol"
+usernames = [ "malarbol" ]
+github = "malarbol"
+
+[[contributors]]
+displayName = "Amélia Liao"
+usernames = [ "Amélia Liao", "Amélia" ]
+github = "plt-amy"
+
+[[contributors]]
+displayName = "Ivan Kobe"
+usernames = [ "ivankobe", "Ivan Kobe" ]
+github = "ivankobe"
+
+[[contributors]]
+displayName = "Daniel Gratzer"
+usernames = [ "daniel gratzer", "Daniel Gratzer" ]
+github = "jozefg"
+
+[[contributors]]
+displayName = "Matej Jazbec"
+usernames = [ "Matej Jazbec", "MatejJazbec" ]
+github = "MatejJazbec"
+
+[[contributors]]
+displayName = "Maša Žaucer"
+usernames = [ "masazaucer", "Masa Zaucer" ]
+github = "masazaucer"
+
+[[contributors]]
+displayName = "Alice Laroche"
+usernames = [ "Alice Laroche" ]
+github = "Seiryn21"
+
+[[contributors]]
+displayName = "Julian KG"
+usernames = [ "Julian KG" ]
+
+[[contributors]]
+displayName = "favonia"
+usernames = [ "favonia" ]
+github = "favonia"
+
+[[contributors]]
+displayName = "fernabnor"
+usernames = [ "fernabnor" ]
+
+[[contributors]]
+displayName = "maybemabeline"
+usernames = [ "maybemabeline" ]
+github = "maybemabeline"
+
+[[contributors]]
+displayName = "Åsmund Kløvstad"
+usernames = [ "Aqissiaq" ]
+github = "Aqissiaq"
+
+[[contributors]]
+displayName = "Dylan Braithwaite"
+usernames = [ "Dylan Braithwaite" ]
+github = "dylanbraithwaite"
+
+[[contributors]]
+displayName = "Emily Riehl"
+usernames = [ "Emily Riehl", "emilyriehl" ]
+github = "emilyriehl"
+
+[[contributors]]
+displayName = "Erik Schnetter"
+usernames = [ "Erik Schnetter" ]
+github = "eschnett"
+
+[[contributors]]
+displayName = "Håkon Gylterud"
+usernames = [ "Håkon Gylterud" ]
+
+[[contributors]]
+displayName = "Matthias Hutzler"
+usernames = [ "Matthias Hutzler" ]
+github = "MatthiasHu"
+
+[[contributors]]
+displayName = "Nathan van Doorn"
+usernames = [ "Nathan van Doorn" ]
+github = "Taneb"
+
+[[contributors]]
+displayName = "Pierre Cagne"
+usernames = [ "Pierre Cagne" ]
+github = "pierrecagne"
+
+[[contributors]]
+displayName = "Szumi Xie"
+usernames = [ "Szumi Xie", "szumixie" ]
+github = "szumixie"
+
+[[contributors]]
+displayName = "Tom de Jong"
+usernames = [ "Tom de Jong" ]
+github = "tomdjong"
+
+[[contributors]]
+displayName = "louismntnu"
+usernames = [ "louismntnu" ]
+github = "louismntnu"
+
+[[contributors]]
+displayName = "Andrej Bauer"
+usernames = [ "Andrej Bauer" ]
+github = "andrejbauer"
+
+[[contributors]]
+displayName = "Matej Petković"
+usernames = [ "Matej Petković" ]
+github = "Petkomat"
+
+[[contributors]]
+displayName = "Gregor Perčič"
+usernames = [ "Gregor Perčič", "izak" ]
+github = "GregorPercic"
+
+[[contributors]]
+displayName = "Alec Barreto"
+usernames = [ "Alec Barreto" ]
+github = "wrest64"
+
+[[contributors]]
+displayName = "Ulrik Buchholtz"
+usernames = [ "Ulrik Buchholtz" ]
+github = "UlrikBuchholtz"

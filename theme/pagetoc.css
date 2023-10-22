@@ -1,4 +1,4 @@
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1080px) {
   .sidetoc {
     display: none;
   }
@@ -11,7 +11,7 @@ main {
 .sidetoc {
   margin-left: auto;
   margin-right: auto;
-  left: calc(100% + (var(--content-max-width)) / 4 - 140px);
+  left: calc(100% + (var(--content-max-width)) / 4 - 120px);
   position: absolute;
 }
 

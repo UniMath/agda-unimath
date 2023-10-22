@@ -19,7 +19,7 @@ open import foundation.set-truncations
 open import foundation.universe-levels
 open import foundation.unordered-tuples
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.decidable-subtypes
 open import univalent-combinatorics.dependent-function-types
 open import univalent-combinatorics.finite-types
@@ -122,7 +122,7 @@ is-π-finite-Main-Class-Latin-Hypercube-of-Order k n m =
                 is-finite-Π
                   ( is-finite-Π
                     ( is-finite-has-cardinality n
-                      ( has-cardinality-type-complement-point-UU-Fin n
+                      ( has-cardinality-type-complement-element-UU-Fin n
                         ( pair (type-unordered-tuple-UU-Fin (succ-ℕ n) A) i)))
                     ( λ j →
                       is-finite-type-UU-Fin m

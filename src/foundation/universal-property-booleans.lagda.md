@@ -11,6 +11,7 @@ open import foundation.booleans
 open import foundation.dependent-pair-types
 open import foundation.equality-cartesian-product-types
 open import foundation.function-extensionality
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.cartesian-product-types
@@ -70,7 +71,7 @@ ev-true f = f true
 
 triangle-ev-true :
   {l : Level} (A : UU l) →
-  (ev-true) ~ (pr1 ∘ (ev-true-false A))
+  ev-true ~ pr1 ∘ ev-true-false A
 triangle-ev-true A = refl-htpy
 
 {-
@@ -84,26 +85,26 @@ bool-aut-bool :
 bool-aut-bool e = map-equiv e true
 
 decide-true-false :
-  (b : bool) → coprod (Id b true) (Id b false)
+  (b : bool) → coprod (b ＝ true) (b ＝ false)
 decide-true-false true = inl refl
 decide-true-false false = inr refl
 
 eq-false :
-  (b : bool) → (¬ (Id b true)) → (Id b false)
+  (b : bool) → (b ≠ true) → (b ＝ false)
 eq-false true p = ind-empty (p refl)
 eq-false false p = refl
 
 eq-true :
-  (b : bool) → (¬ (Id b false)) → Id b true
+  (b : bool) → b ≠ false → b ＝ true
 eq-true true p = refl
 eq-true false p = ind-empty (p refl)
 
-Eq-𝟚-eq : (x y : bool) → Id x y → Eq-𝟚 x y
+Eq-𝟚-eq : (x y : bool) → x ＝ y → Eq-𝟚 x y
 Eq-𝟚-eq x .x refl = reflexive-Eq-𝟚 x
 
 eq-false-equiv' :
-  (e : bool ≃ bool) → Id (map-equiv e true) true →
-  is-decidable (Id (map-equiv e false) false) → Id (map-equiv e false) false
+  (e : bool ≃ bool) → map-equiv e true ＝ true →
+  is-decidable (map-equiv e false ＝ false) → map-equiv e false ＝ false
 eq-false-equiv' e p (inl q) = q
 eq-false-equiv' e p (inr x) =
   ind-empty

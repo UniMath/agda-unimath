@@ -43,7 +43,7 @@ module _
   where
 
   adjoint-relation-galois-connection-Prop :
-    type-hom-Poset P Q → type-hom-Poset Q P → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    hom-Poset P Q → hom-Poset Q P → Prop (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   adjoint-relation-galois-connection-Prop f g =
     Π-Prop
       ( type-Poset P)
@@ -56,24 +56,24 @@ module _
               ( leq-Poset-Prop P x (map-hom-Poset Q P g y))))
 
   is-lower-adjoint-Galois-Connection :
-    type-hom-Poset P Q → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    hom-Poset P Q → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-lower-adjoint-Galois-Connection f =
     type-subtype (adjoint-relation-galois-connection-Prop f)
 
   is-upper-adjoint-Galois-Connection :
-    type-hom-Poset Q P → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
+    hom-Poset Q P → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   is-upper-adjoint-Galois-Connection g =
     type-subtype (λ f → adjoint-relation-galois-connection-Prop f g)
 
   Galois-Connection : UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
   Galois-Connection =
-    Σ ( type-hom-Poset Q P) is-upper-adjoint-Galois-Connection
+    Σ ( hom-Poset Q P) is-upper-adjoint-Galois-Connection
 
   module _
     (G : Galois-Connection)
     where
 
-    upper-adjoint-Galois-Connection : type-hom-Poset Q P
+    upper-adjoint-Galois-Connection : hom-Poset Q P
     upper-adjoint-Galois-Connection = pr1 G
 
     map-upper-adjoint-Galois-Connection :
@@ -90,7 +90,7 @@ module _
       is-upper-adjoint-Galois-Connection upper-adjoint-Galois-Connection
     is-upper-adjoint-upper-adjoint-Galois-Connection = pr2 G
 
-    lower-adjoint-Galois-Connection : type-hom-Poset P Q
+    lower-adjoint-Galois-Connection : hom-Poset P Q
     lower-adjoint-Galois-Connection =
       pr1 is-upper-adjoint-upper-adjoint-Galois-Connection
 
@@ -140,7 +140,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
-  (f : type-hom-Poset P Q)
+  (f : hom-Poset P Q)
   where
 
   htpy-is-lower-adjoint-Galois-Connection :
@@ -209,7 +209,7 @@ module _
 ```agda
 module _
   {l1 l2 l3 l4 : Level} (P : Poset l1 l2) (Q : Poset l3 l4)
-  (g : type-hom-Poset Q P)
+  (g : hom-Poset Q P)
   where
 
   htpy-is-upper-adjoint-Galois-Connection :

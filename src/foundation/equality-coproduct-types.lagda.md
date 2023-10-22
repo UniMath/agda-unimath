@@ -9,13 +9,14 @@ module foundation.equality-coproduct-types where
 ```agda
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
+open import foundation.empty-types
 open import foundation.fundamental-theorem-of-identity-types
+open import foundation.negated-equality
 open import foundation.universe-levels
 
 open import foundation-core.contractible-types
 open import foundation-core.coproduct-types
 open import foundation-core.embeddings
-open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
@@ -23,6 +24,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.negation
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -72,23 +74,23 @@ module _
   eq-Eq-coprod .(inl x) .(inl x) (Eq-eq-coprod-inl {x} {.x} refl) = refl
   eq-Eq-coprod .(inr x) .(inr x) (Eq-eq-coprod-inr {x} {.x} refl) = refl
 
-  is-contr-total-Eq-coprod :
-    (x : A + B) → is-contr (Σ (A + B) (Eq-coprod x))
-  pr1 (pr1 (is-contr-total-Eq-coprod (inl x))) = inl x
-  pr2 (pr1 (is-contr-total-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
+  is-torsorial-Eq-coprod :
+    (x : A + B) → is-torsorial (Eq-coprod x)
+  pr1 (pr1 (is-torsorial-Eq-coprod (inl x))) = inl x
+  pr2 (pr1 (is-torsorial-Eq-coprod (inl x))) = Eq-eq-coprod-inl refl
   pr2
-    ( is-contr-total-Eq-coprod (inl x))
+    ( is-torsorial-Eq-coprod (inl x))
     ( pair (inl .x) (Eq-eq-coprod-inl refl)) = refl
-  pr1 (pr1 (is-contr-total-Eq-coprod (inr x))) = inr x
-  pr2 (pr1 (is-contr-total-Eq-coprod (inr x))) = Eq-eq-coprod-inr refl
+  pr1 (pr1 (is-torsorial-Eq-coprod (inr x))) = inr x
+  pr2 (pr1 (is-torsorial-Eq-coprod (inr x))) = Eq-eq-coprod-inr refl
   pr2
-    ( is-contr-total-Eq-coprod (inr x))
+    ( is-torsorial-Eq-coprod (inr x))
     ( pair .(inr x) (Eq-eq-coprod-inr refl)) = refl
 
   is-equiv-Eq-eq-coprod : (x y : A + B) → is-equiv (Eq-eq-coprod x y)
   is-equiv-Eq-eq-coprod x =
     fundamental-theorem-id
-      ( is-contr-total-Eq-coprod x)
+      ( is-torsorial-Eq-coprod x)
       ( Eq-eq-coprod x)
 
   extensionality-coprod : (x y : A + B) → (x ＝ y) ≃ Eq-coprod x y
@@ -233,7 +235,7 @@ module _
         ( is-contr-equiv
           ( Σ A (Id x))
           ( equiv-tot (compute-eq-coprod-inl-inl x))
-          ( is-contr-total-path x))
+          ( is-torsorial-path x))
         ( λ y → ap inl)
 
   emb-inl : A ↪ (A + B)
@@ -247,7 +249,7 @@ module _
         ( is-contr-equiv
           ( Σ B (Id x))
           ( equiv-tot (compute-eq-coprod-inr-inr x))
-          ( is-contr-total-path x))
+          ( is-torsorial-path x))
         ( λ y → ap inr)
 
   emb-inr : B ↪ (A + B)
@@ -263,7 +265,7 @@ module _
   where
 
   is-emb-coprod :
-    is-emb f → is-emb g → ((a : A) (b : B) → ¬ (f a ＝ g b)) →
+    is-emb f → is-emb g → ((a : A) (b : B) → f a ≠ g b) →
     is-emb (ind-coprod (λ x → C) f g)
   is-emb-coprod H K L (inl a) (inl a') =
     is-equiv-left-factor-htpy

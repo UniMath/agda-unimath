@@ -8,6 +8,7 @@ module elementary-number-theory.multiplication-natural-numbers where
 
 ```agda
 open import elementary-number-theory.addition-natural-numbers
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -17,11 +18,7 @@ open import foundation.embeddings
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.negation
-open import foundation.universe-levels
-
-open import group-theory.monoids
-open import group-theory.semigroups
+open import foundation.negated-equality
 ```
 
 </details>
@@ -50,12 +47,6 @@ double-ℕ x = 2 *ℕ x
 
 triple-ℕ : ℕ → ℕ
 triple-ℕ x = 3 *ℕ x
-
-square-ℕ : ℕ → ℕ
-square-ℕ x = x *ℕ x
-
-cube-ℕ : ℕ → ℕ
-cube-ℕ x = (square-ℕ x) *ℕ x
 ```
 
 ## Properties
@@ -95,13 +86,6 @@ abstract
     ( ( ap (λ t → succ-ℕ (t +ℕ y)) (right-successor-law-mul-ℕ x y)) ∙
       ( ap succ-ℕ (associative-add-ℕ x (x *ℕ y) y))) ∙
     ( inv (left-successor-law-add-ℕ x ((x *ℕ y) +ℕ y)))
-
-square-succ-ℕ :
-  (k : ℕ) →
-  square-ℕ (succ-ℕ k) ＝ succ-ℕ ((succ-ℕ (succ-ℕ k)) *ℕ k)
-square-succ-ℕ k =
-  ( right-successor-law-mul-ℕ (succ-ℕ k) k) ∙
-  ( commutative-add-ℕ (succ-ℕ k) ((succ-ℕ k) *ℕ k))
 
 abstract
   commutative-mul-ℕ :
@@ -246,7 +230,7 @@ is-one-left-is-one-mul-ℕ x y p =
   is-one-right-is-one-mul-ℕ y x (commutative-mul-ℕ y x ∙ p)
 
 neq-mul-ℕ :
-  (m n : ℕ) → ¬ (succ-ℕ m ＝ (succ-ℕ m) *ℕ (succ-ℕ (succ-ℕ n)))
+  (m n : ℕ) → succ-ℕ m ≠ (succ-ℕ m *ℕ (succ-ℕ (succ-ℕ n)))
 neq-mul-ℕ m n p =
   neq-add-ℕ
     ( succ-ℕ m)
@@ -254,19 +238,4 @@ neq-mul-ℕ m n p =
     ( ( p) ∙
       ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
         ( ap ((succ-ℕ m) +ℕ_) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
-```
-
-### The multiplicative monoid `ℕ*`
-
-```agda
-ℕ*-Semigroup : Semigroup lzero
-pr1 ℕ*-Semigroup = ℕ-Set
-pr1 (pr2 ℕ*-Semigroup) = mul-ℕ
-pr2 (pr2 ℕ*-Semigroup) = associative-mul-ℕ
-
-ℕ*-Monoid : Monoid lzero
-pr1 ℕ*-Monoid = ℕ*-Semigroup
-pr1 (pr2 ℕ*-Monoid) = 1
-pr1 (pr2 (pr2 ℕ*-Monoid)) = left-unit-law-mul-ℕ
-pr2 (pr2 (pr2 ℕ*-Monoid)) = right-unit-law-mul-ℕ
 ```

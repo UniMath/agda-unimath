@@ -7,10 +7,7 @@ module order-theory.large-subsuplattices where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
-open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.large-posets
@@ -84,10 +81,10 @@ module _
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
-  leq-Large-Subsuplattice-Prop :
+  leq-prop-Large-Subsuplattice :
     Large-Relation-Prop (λ l → α l ⊔ γ l) β type-Large-Subsuplattice
-  leq-Large-Subsuplattice-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-Large-Subsuplattice =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
@@ -106,21 +103,27 @@ module _
       ( large-subposet-Large-Subsuplattice S)
 
   refl-leq-Large-Subsuplattice :
-    is-large-reflexive type-Large-Subsuplattice leq-Large-Subsuplattice
+    is-reflexive-Large-Relation
+      ( type-Large-Subsuplattice)
+      ( leq-Large-Subsuplattice)
   refl-leq-Large-Subsuplattice =
     refl-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   transitive-leq-Large-Subsuplattice :
-    is-large-transitive type-Large-Subsuplattice leq-Large-Subsuplattice
+    is-transitive-Large-Relation
+      ( type-Large-Subsuplattice)
+      ( leq-Large-Subsuplattice)
   transitive-leq-Large-Subsuplattice =
     transitive-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)
       ( large-subposet-Large-Subsuplattice S)
 
   antisymmetric-leq-Large-Subsuplattice :
-    is-large-antisymmetric type-Large-Subsuplattice leq-Large-Subsuplattice
+    is-antisymmetric-Large-Relation
+      ( type-Large-Subsuplattice)
+      ( leq-Large-Subsuplattice)
   antisymmetric-leq-Large-Subsuplattice =
     antisymmetric-leq-Large-Subposet
       ( large-poset-Large-Suplattice P)

@@ -41,6 +41,6 @@ module _
     cases-iterate-involution :
       (k : Fin 2) →
       f (iterate (nat-Fin 2 k) f x) ＝ iterate (nat-Fin 2 (succ-Fin 2 k)) f x
-    cases-iterate-involution (inl (inr star)) = refl
-    cases-iterate-involution (inr star) = P x
+    cases-iterate-involution (inl (inr _)) = refl
+    cases-iterate-involution (inr _) = P x
 ```

@@ -35,26 +35,26 @@ module _
   private
     C = Abstract-Group-Action-Large-Precategory G
 
-  is-iso-hom-Abstract-Group-Action :
-    (f : type-hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
-  is-iso-hom-Abstract-Group-Action =
-    is-iso-hom-Large-Precategory C {X = X} {Y = Y}
+  is-iso-Abstract-Group-Action :
+    (f : hom-Abstract-Group-Action G X Y) → UU (l1 ⊔ l2 ⊔ l3)
+  is-iso-Abstract-Group-Action =
+    is-iso-Large-Precategory C {X = X} {Y = Y}
 
-  type-iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
-  type-iso-Abstract-Group-Action = iso-Large-Precategory C X Y
+  iso-Abstract-Group-Action : UU (l1 ⊔ l2 ⊔ l3)
+  iso-Abstract-Group-Action = iso-Large-Precategory C X Y
 
   hom-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G X Y
-  hom-iso-Abstract-Group-Action = hom-iso-Large-Precategory C X Y
+    iso-Abstract-Group-Action → hom-Abstract-Group-Action G X Y
+  hom-iso-Abstract-Group-Action = hom-iso-Large-Precategory C {X = X} {Y = Y}
 
   map-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action →
+    iso-Abstract-Group-Action →
     type-Abstract-Group-Action G X → type-Abstract-Group-Action G Y
   map-iso-Abstract-Group-Action f =
     map-hom-Abstract-Group-Action G X Y (hom-iso-Abstract-Group-Action f)
 
   coherence-square-iso-Abstract-Group-Action :
-    (f : type-iso-Abstract-Group-Action) (g : type-Group G) →
+    (f : iso-Abstract-Group-Action) (g : type-Group G) →
     coherence-square-maps
       ( map-iso-Abstract-Group-Action f)
       ( mul-Abstract-Group-Action G X g)
@@ -65,43 +65,45 @@ module _
       ( hom-iso-Abstract-Group-Action f)
 
   hom-inv-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action → type-hom-Abstract-Group-Action G Y X
-  hom-inv-iso-Abstract-Group-Action = hom-inv-iso-Large-Precategory C X Y
+    iso-Abstract-Group-Action → hom-Abstract-Group-Action G Y X
+  hom-inv-iso-Abstract-Group-Action =
+    hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   map-hom-inv-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action →
+    iso-Abstract-Group-Action →
     type-Abstract-Group-Action G Y → type-Abstract-Group-Action G X
   map-hom-inv-iso-Abstract-Group-Action f =
     map-hom-Abstract-Group-Action G Y X
       ( hom-inv-iso-Abstract-Group-Action f)
 
   is-section-hom-inv-iso-Abstract-Group-Action :
-    (f : type-iso-Abstract-Group-Action) →
+    (f : iso-Abstract-Group-Action) →
     Id
       ( comp-hom-Abstract-Group-Action G Y X Y
         ( hom-iso-Abstract-Group-Action f)
         ( hom-inv-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G Y)
   is-section-hom-inv-iso-Abstract-Group-Action =
-    is-section-hom-inv-iso-Large-Precategory C X Y
+    is-section-hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   is-retraction-hom-inv-iso-Abstract-Group-Action :
-    (f : type-iso-Abstract-Group-Action) →
+    (f : iso-Abstract-Group-Action) →
     Id
       ( comp-hom-Abstract-Group-Action G X Y X
         ( hom-inv-iso-Abstract-Group-Action f)
         ( hom-iso-Abstract-Group-Action f))
       ( id-hom-Abstract-Group-Action G X)
   is-retraction-hom-inv-iso-Abstract-Group-Action =
-    is-retraction-hom-inv-iso-Large-Precategory C X Y
+    is-retraction-hom-inv-iso-Large-Precategory C {X = X} {Y = Y}
 
   is-iso-iso-Abstract-Group-Action :
-    (f : type-iso-Abstract-Group-Action) →
-    is-iso-hom-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
-  is-iso-iso-Abstract-Group-Action = is-iso-iso-Large-Precategory C X Y
+    (f : iso-Abstract-Group-Action) →
+    is-iso-Abstract-Group-Action (hom-iso-Abstract-Group-Action f)
+  is-iso-iso-Abstract-Group-Action =
+    is-iso-iso-Large-Precategory C {X = X} {Y = Y}
 
   equiv-iso-Abstract-Group-Action :
-    type-iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y
+    iso-Abstract-Group-Action → equiv-Abstract-Group-Action G X Y
   pr1 (pr1 (equiv-iso-Abstract-Group-Action f)) =
     map-iso-Abstract-Group-Action f
   pr2 (pr1 (equiv-iso-Abstract-Group-Action f)) =

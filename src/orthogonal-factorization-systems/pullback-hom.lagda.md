@@ -68,13 +68,13 @@ vertical maps are `f` and `g`.
 ### The codomain of the pullback-hom
 
 ```agda
-type-canonical-pullback-hom :
+type-standard-pullback-hom :
   {l1 l2 l3 l4 : Level}
   {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
   (f : A → B) (g : X → Y) →
   UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
-type-canonical-pullback-hom {A = A} {Y = Y} f g =
-  canonical-pullback (precomp f Y) (postcomp A g)
+type-standard-pullback-hom {A = A} {Y = Y} f g =
+  standard-pullback (precomp f Y) (postcomp A g)
 ```
 
 #### The canonical pullback-hom type is equivalent to the type of fibered maps
@@ -86,35 +86,35 @@ module _
   (f : A → B) (g : X → Y)
   where
 
-  equiv-fibered-map-type-canonical-pullback-hom :
-    type-canonical-pullback-hom f g ≃ fibered-map f g
-  equiv-fibered-map-type-canonical-pullback-hom =
+  equiv-fibered-map-type-standard-pullback-hom :
+    type-standard-pullback-hom f g ≃ fibered-map f g
+  equiv-fibered-map-type-standard-pullback-hom =
     equiv-tot (λ _ → equiv-tot (λ _ → equiv-funext))
 
-  equiv-type-canonical-pullback-hom-fibered-map :
-    fibered-map f g ≃ type-canonical-pullback-hom f g
-  equiv-type-canonical-pullback-hom-fibered-map =
-    inv-equiv equiv-fibered-map-type-canonical-pullback-hom
+  equiv-type-standard-pullback-hom-fibered-map :
+    fibered-map f g ≃ type-standard-pullback-hom f g
+  equiv-type-standard-pullback-hom-fibered-map =
+    inv-equiv equiv-fibered-map-type-standard-pullback-hom
 
-  map-fibered-map-type-canonical-pullback-hom :
-    type-canonical-pullback-hom f g → fibered-map f g
-  map-fibered-map-type-canonical-pullback-hom =
-    map-equiv equiv-fibered-map-type-canonical-pullback-hom
+  map-fibered-map-type-standard-pullback-hom :
+    type-standard-pullback-hom f g → fibered-map f g
+  map-fibered-map-type-standard-pullback-hom =
+    map-equiv equiv-fibered-map-type-standard-pullback-hom
 
-  map-type-canonical-pullback-hom-fibered-map :
-    fibered-map f g → type-canonical-pullback-hom f g
-  map-type-canonical-pullback-hom-fibered-map =
-    map-equiv equiv-type-canonical-pullback-hom-fibered-map
+  map-type-standard-pullback-hom-fibered-map :
+    fibered-map f g → type-standard-pullback-hom f g
+  map-type-standard-pullback-hom-fibered-map =
+    map-equiv equiv-type-standard-pullback-hom-fibered-map
 ```
 
 Below are basic definitions related to the pullback property of the type of
 fibered maps.
 
 ```agda
-  cone-canonical-pullback-hom :
-    cone (precomp f Y) (postcomp A g) (type-canonical-pullback-hom f g)
-  cone-canonical-pullback-hom =
-    cone-canonical-pullback (precomp f Y) (postcomp A g)
+  cone-standard-pullback-hom :
+    cone (precomp f Y) (postcomp A g) (type-standard-pullback-hom f g)
+  cone-standard-pullback-hom =
+    cone-standard-pullback (precomp f Y) (postcomp A g)
 
   cone-pullback-hom :
     cone (precomp f Y) (postcomp A g) (fibered-map f g)
@@ -122,24 +122,24 @@ fibered maps.
     cone-map
       ( precomp f Y)
       ( postcomp A g)
-      ( cone-canonical-pullback (precomp f Y) (postcomp A g))
-      ( map-type-canonical-pullback-hom-fibered-map)
+      ( cone-standard-pullback (precomp f Y) (postcomp A g))
+      ( map-type-standard-pullback-hom-fibered-map)
 
-  gap-canonical-pullback-hom :
+  gap-standard-pullback-hom :
     {l : Level} {C : UU l} →
-    cone (precomp f Y) (postcomp A g) C → C → type-canonical-pullback-hom f g
-  gap-canonical-pullback-hom = gap (precomp f Y) (postcomp A g)
+    cone (precomp f Y) (postcomp A g) C → C → type-standard-pullback-hom f g
+  gap-standard-pullback-hom = gap (precomp f Y) (postcomp A g)
 
   gap-pullback-hom :
     {l : Level} {C : UU l} →
     cone (precomp f Y) (postcomp A g) C → C → fibered-map f g
   gap-pullback-hom c x =
-    map-fibered-map-type-canonical-pullback-hom (gap-canonical-pullback-hom c x)
+    map-fibered-map-type-standard-pullback-hom (gap-standard-pullback-hom c x)
 
   is-pullback-fibered-map :
     is-pullback (precomp f Y) (postcomp A g) (cone-pullback-hom)
   is-pullback-fibered-map =
-    is-equiv-map-equiv equiv-type-canonical-pullback-hom-fibered-map
+    is-equiv-map-equiv equiv-type-standard-pullback-hom-fibered-map
 
   universal-property-pullback-fibered-map :
     {l : Level} →
@@ -177,37 +177,6 @@ The symbol `⋔` is the [pitchfork](https://codepoints.net/U+22D4) (agda-input:
 
 ## Properties
 
-### Functoriality of the pullback-hom
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-  (f : A → B) (g : X → Y)
-  {l1' l2' l3' l4' : Level}
-  {A' : UU l1'} {B' : UU l2'} {X' : UU l3'} {Y' : UU l4'}
-  (f' : A' → B') (g' : X' → Y')
-  where
-
-  map-pullback-hom :
-    hom-cospan
-      ( precomp f' Y')
-      ( postcomp A' g')
-      ( precomp f Y)
-      ( postcomp A g) →
-    fibered-map f' g' → fibered-map f g
-  map-pullback-hom =
-    map-is-pullback
-      ( precomp f Y)
-      ( postcomp A g)
-      ( precomp f' Y')
-      ( postcomp A' g')
-      ( cone-pullback-hom f g)
-      ( cone-pullback-hom f' g')
-      ( is-pullback-fibered-map f g)
-      ( is-pullback-fibered-map f' g')
-```
-
 ### The fibers of the pullback-hom
 
 ```agda
@@ -217,7 +186,7 @@ module _
   where
 
   inv-compute-fiber-pullback-hom :
-    (fiber (pullback-hom f g) h) ≃ (lifting-square-fibered-map f g h)
+    fiber (pullback-hom f g) h ≃ lifting-square-fibered-map f g h
   inv-compute-fiber-pullback-hom =
     equiv-tot
       ( λ j →
@@ -245,6 +214,12 @@ module _
           ( extensionality-fibered-map f g (pullback-hom f g j) h)))
 
   compute-fiber-pullback-hom :
-    (lifting-square-fibered-map f g h) ≃ (fiber (pullback-hom f g) h)
+    lifting-square-fibered-map f g h ≃ fiber (pullback-hom f g) h
   compute-fiber-pullback-hom = inv-equiv inv-compute-fiber-pullback-hom
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

@@ -8,6 +8,7 @@ module synthetic-homotopy-theory.universal-property-pushouts where
 
 ```agda
 open import foundation.action-on-identifications-functions
+open import foundation.commuting-cubes-of-maps
 open import foundation.commuting-squares-of-maps
 open import foundation.cones-over-cospans
 open import foundation.contractible-maps
@@ -100,19 +101,57 @@ module _
   htpy-cocone-map-universal-property-pushout :
     htpy-cocone f g (cocone-map f g c map-universal-property-pushout) d
   htpy-cocone-map-universal-property-pushout =
-    htpy-cocone-eq f g
+    htpy-eq-cocone
+      ( f)
+      ( g)
       ( cocone-map f g c map-universal-property-pushout)
       ( d)
       ( is-section-map-inv-is-equiv (up-c Y) d)
+
+  horizontal-htpy-cocone-map-universal-property-pushout :
+    map-universal-property-pushout ∘ horizontal-map-cocone f g c ~
+    horizontal-map-cocone f g d
+  horizontal-htpy-cocone-map-universal-property-pushout =
+    horizontal-htpy-cocone
+      ( f)
+      ( g)
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( htpy-cocone-map-universal-property-pushout)
+
+  vertical-htpy-cocone-map-universal-property-pushout :
+    map-universal-property-pushout ∘ vertical-map-cocone f g c ~
+    vertical-map-cocone f g d
+  vertical-htpy-cocone-map-universal-property-pushout =
+    vertical-htpy-cocone
+      ( f)
+      ( g)
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( htpy-cocone-map-universal-property-pushout)
+
+  coherence-htpy-cocone-map-universal-property-pushout :
+    statement-coherence-htpy-cocone f g
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( horizontal-htpy-cocone-map-universal-property-pushout)
+      ( vertical-htpy-cocone-map-universal-property-pushout)
+  coherence-htpy-cocone-map-universal-property-pushout =
+    coherence-htpy-cocone
+      ( f)
+      ( g)
+      ( cocone-map f g c map-universal-property-pushout)
+      ( d)
+      ( htpy-cocone-map-universal-property-pushout)
 
   uniqueness-map-universal-property-pushout :
     is-contr ( Σ (X → Y) (λ h → htpy-cocone f g (cocone-map f g c h) d))
   uniqueness-map-universal-property-pushout =
     is-contr-is-equiv'
       ( fiber (cocone-map f g c) d)
-      ( tot (λ h → htpy-cocone-eq f g (cocone-map f g c h) d))
+      ( tot (λ h → htpy-eq-cocone f g (cocone-map f g c h) d))
       ( is-equiv-tot-is-fiberwise-equiv
-        ( λ h → is-equiv-htpy-cocone-eq f g (cocone-map f g c h) d))
+        ( λ h → is-equiv-htpy-eq-cocone f g (cocone-map f g c h) d))
       ( is-contr-map-is-equiv (up-c Y) d)
 ```
 
@@ -192,7 +231,7 @@ uniquely-unique-pushout :
   is-contr
     ( Σ (X ≃ Y) (λ e → htpy-cocone f g (cocone-map f g c (map-equiv e)) d))
 uniquely-unique-pushout f g c d up-c up-d =
-  is-contr-total-Eq-subtype
+  is-torsorial-Eq-subtype
     ( uniqueness-map-universal-property-pushout f g c up-c d)
     ( is-property-is-equiv)
     ( map-universal-property-pushout f g c up-c d)
@@ -665,4 +704,129 @@ module _
               ( cocone-comp-vertical f g k c d)
               ( up-r)
               ( W))))
+```
+
+### In a commuting cube where the vertical maps are equivalences, the bottom square is a pushout if and only if the top square is a pushout
+
+```agda
+module _
+  { l1 l2 l3 l4 l1' l2' l3' l4' : Level}
+  { A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  ( f : A → B) (g : A → C) (h : B → D) (k : C → D)
+  { A' : UU l1'} {B' : UU l2'} {C' : UU l3'} {D' : UU l4'}
+  ( f' : A' → B') (g' : A' → C') (h' : B' → D') (k' : C' → D')
+  ( hA : A' → A) (hB : B' → B) (hC : C' → C) (hD : D' → D)
+  ( top : coherence-square-maps g' f' k' h')
+  ( back-left : coherence-square-maps f' hA hB f)
+  ( back-right : coherence-square-maps g' hA hC g)
+  ( front-left : coherence-square-maps h' hB hD h)
+  ( front-right : coherence-square-maps k' hC hD k)
+  ( bottom : coherence-square-maps g f k h)
+  ( c :
+    coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+      ( top)
+      ( back-left)
+      ( back-right)
+      ( front-left)
+      ( front-right)
+      ( bottom))
+  ( is-equiv-hA : is-equiv hA) (is-equiv-hB : is-equiv hB)
+  ( is-equiv-hC : is-equiv hC) (is-equiv-hD : is-equiv hD)
+  where
+
+  universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv :
+    ( {l : Level} →
+      universal-property-pushout l f g (h , k , bottom)) →
+    ( {l : Level} →
+      universal-property-pushout l f' g' (h' , k' , top))
+  universal-property-pushout-top-universal-property-pushout-bottom-cube-is-equiv
+    ( up-bottom)
+    { l = l} =
+    universal-property-pushout-pullback-property-pushout l f' g'
+      ( h' , k' , top)
+      ( λ W →
+        is-pullback-bottom-is-pullback-top-cube-is-equiv
+          ( precomp h' W)
+          ( precomp k' W)
+          ( precomp f' W)
+          ( precomp g' W)
+          ( precomp h W)
+          ( precomp k W)
+          ( precomp f W)
+          ( precomp g W)
+          ( precomp hD W)
+          ( precomp hB W)
+          ( precomp hC W)
+          ( precomp hA W)
+          ( precomp-coherence-square-maps g f k h bottom W)
+          ( precomp-coherence-square-maps hB h' h hD (inv-htpy front-left) W)
+          ( precomp-coherence-square-maps hC k' k hD (inv-htpy front-right) W)
+          ( precomp-coherence-square-maps hA f' f hB (inv-htpy back-left) W)
+          ( precomp-coherence-square-maps hA g' g hC (inv-htpy back-right) W)
+          ( precomp-coherence-square-maps g' f' k' h' top W)
+          ( precomp-coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+            ( top)
+            ( back-left)
+            ( back-right)
+            ( front-left)
+            ( front-right)
+            ( bottom)
+            ( c)
+            ( W))
+          ( is-equiv-precomp-is-equiv hD is-equiv-hD W)
+          ( is-equiv-precomp-is-equiv hB is-equiv-hB W)
+          ( is-equiv-precomp-is-equiv hC is-equiv-hC W)
+          ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
+          ( pullback-property-pushout-universal-property-pushout l f g
+            ( h , k , bottom)
+            ( up-bottom)
+            ( W)))
+
+  universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv :
+    ( {l : Level} →
+      universal-property-pushout l f' g' (h' , k' , top)) →
+    ( {l : Level} →
+      universal-property-pushout l f g (h , k , bottom))
+  universal-property-pushout-bottom-universal-property-pushout-top-cube-is-equiv
+    ( up-top)
+    { l = l} =
+    universal-property-pushout-pullback-property-pushout l f g
+      ( h , k , bottom)
+      ( λ W →
+        is-pullback-top-is-pullback-bottom-cube-is-equiv
+          ( precomp h' W)
+          ( precomp k' W)
+          ( precomp f' W)
+          ( precomp g' W)
+          ( precomp h W)
+          ( precomp k W)
+          ( precomp f W)
+          ( precomp g W)
+          ( precomp hD W)
+          ( precomp hB W)
+          ( precomp hC W)
+          ( precomp hA W)
+          ( precomp-coherence-square-maps g f k h bottom W)
+          ( precomp-coherence-square-maps hB h' h hD (inv-htpy front-left) W)
+          ( precomp-coherence-square-maps hC k' k hD (inv-htpy front-right) W)
+          ( precomp-coherence-square-maps hA f' f hB (inv-htpy back-left) W)
+          ( precomp-coherence-square-maps hA g' g hC (inv-htpy back-right) W)
+          ( precomp-coherence-square-maps g' f' k' h' top W)
+          ( precomp-coherence-cube-maps f g h k f' g' h' k' hA hB hC hD
+            ( top)
+            ( back-left)
+            ( back-right)
+            ( front-left)
+            ( front-right)
+            ( bottom)
+            ( c)
+            ( W))
+          ( is-equiv-precomp-is-equiv hD is-equiv-hD W)
+          ( is-equiv-precomp-is-equiv hB is-equiv-hB W)
+          ( is-equiv-precomp-is-equiv hC is-equiv-hC W)
+          ( is-equiv-precomp-is-equiv hA is-equiv-hA W)
+          ( pullback-property-pushout-universal-property-pushout l f' g'
+            ( h' , k' , top)
+            ( up-top)
+            ( W)))
 ```

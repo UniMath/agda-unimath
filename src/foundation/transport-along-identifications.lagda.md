@@ -12,12 +12,12 @@ open import foundation-core.transport-along-identifications public
 open import foundation.action-on-identifications-functions
 open import foundation.commuting-squares-of-identifications
 open import foundation.dependent-pair-types
-open import foundation.homotopies
 open import foundation.path-algebra
 open import foundation.universe-levels
 
 open import foundation-core.equivalences
 open import foundation-core.function-types
+open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.whiskering-homotopies
 ```
@@ -34,27 +34,6 @@ element `b : B x`, we can
 
 The fact that `tr B p` is an [equivalence](foundation-core.equivalences.md) is
 recorded in this file.
-
-## Definitions
-
-### The action on identifications of transport
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' : x ＝ y}
-  where
-
-  tr² : (B : A → UU l2) (α : p ＝ p') (b : B x) → (tr B p b) ＝ (tr B p' b)
-  tr² B α b = ap (λ t → tr B t b) α
-
-module _
-  {l1 l2 : Level} {A : UU l1} {x y : A} {p p' : x ＝ y}
-  {α α' : p ＝ p'}
-  where
-
-  tr³ : (B : A → UU l2) (β : α ＝ α') (b : B x) → (tr² B α b) ＝ (tr² B α' b)
-  tr³ B β b = ap (λ t → tr² B t b) β
-```
 
 ## Properties
 
@@ -105,91 +84,29 @@ substitution-law-tr :
 substitution-law-tr B f refl = refl
 ```
 
-### Coherences and algebraic identities for `tr²`
+### Computing transport in the type family of identifications with a fixed target
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {x y : A}
-  {B : A → UU l2}
-  where
-
-  tr²-concat :
-    {p p' p'' : x ＝ y} (α : p ＝ p') (α' : p' ＝ p'') (b : B x) →
-    (tr² B (α ∙ α') b) ＝ (tr² B α b ∙ tr² B α' b)
-  tr²-concat α α' b = ap-concat (λ t → tr B t b) α α'
-
-module _
-  {l1 l2 : Level} {A : UU l1} {x y z : A}
-  {B : A → UU l2}
-  where
-
-  tr²-left-whisk :
-    (p : x ＝ y) {q q' : y ＝ z} (β : q ＝ q') (b : B x) →
-    coherence-square-identifications
-      ( tr² B (identification-left-whisk p β) b)
-      ( tr-concat p q' b)
-      ( tr-concat p q b)
-      ( htpy-right-whisk (tr² B β) (tr B p) b)
-  tr²-left-whisk refl refl b = refl
-
-  tr²-right-whisk :
-    {p p' : x ＝ y} (α : p ＝ p') (q : y ＝ z) (b : B x) →
-    coherence-square-identifications
-      ( tr² B (identification-right-whisk α q) b)
-      ( tr-concat p' q b)
-      ( tr-concat p q b)
-      ( htpy-left-whisk (tr B q) (tr² B α) b)
-  tr²-right-whisk refl refl b = inv right-unit
+tr-Id-left :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : b ＝ a) →
+  tr (_＝ a) q p ＝ ((inv q) ∙ p)
+tr-Id-left refl p = refl
 ```
 
-#### Coherences and algebraic identities for `tr³`
+### Computing transport in the type family of identifications with a fixed source
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {x y z : A}
-  {B : A → UU l2}
-  where
+tr-Id-right :
+  {l : Level} {A : UU l} {a b c : A} (q : b ＝ c) (p : a ＝ b) →
+  tr (a ＝_) q p ＝ (p ∙ q)
+tr-Id-right refl refl = refl
+```
 
-  tr³-htpy-swap-path-swap :
-    {q q' : y ＝ z} (β : q ＝ q') {p p' : x ＝ y} (α : p ＝ p') (b : B x) →
-    coherence-square-identifications
-      ( identification-right-whisk
-        ( tr³
-          ( B)
-          ( path-swap-nat-identification-left-whisk β α)
-          ( b))
-        ( tr-concat p' q' b))
-      ( ( identification-right-whisk
-          ( tr²-concat
-            ( identification-right-whisk α q)
-            ( identification-left-whisk p' β) b)
-          ( tr-concat p' q' b)) ∙
-      ( vertical-concat-square
-        ( tr² B (identification-right-whisk α q) b)
-        ( tr² B (identification-left-whisk p' β) b)
-        ( tr-concat p' q' b)
-        ( tr-concat p' q b)
-        ( tr-concat p q b)
-        ( htpy-left-whisk (tr B q) (tr² B α) b)
-        ( htpy-right-whisk (tr² B β) (tr B p') b)
-        ( tr²-right-whisk α q b)
-        ( tr²-left-whisk p' β b)))
-      ( ( identification-right-whisk
-          ( tr²-concat (identification-left-whisk p β)
-          ( identification-right-whisk α q') b)
-          ( tr-concat p' q' b)) ∙
-      ( vertical-concat-square
-        ( tr² B (identification-left-whisk p β) b)
-        ( tr² B (identification-right-whisk α q') b)
-        ( tr-concat p' q' b)
-        ( tr-concat p q' b)
-        ( tr-concat p q b)
-        ( htpy-right-whisk (tr² B β) (tr B p) b)
-        ( htpy-left-whisk (tr B q') (tr² B α) b)
-        ( tr²-left-whisk p β b)
-        ( tr²-right-whisk α q' b)))
-      ( identification-left-whisk
-        ( tr-concat p q b)
-        ( htpy-swap-nat-right-htpy (tr² B β) (tr² B α) b))
-  tr³-htpy-swap-path-swap {q = refl} refl {p = refl} refl b = refl
+### Computing transport of loops
+
+```agda
+tr-loop :
+  {l1 : Level} {A : UU l1} {a0 a1 : A} (p : a0 ＝ a1) (l : a0 ＝ a0) →
+  (tr (λ y → y ＝ y) p l) ＝ ((inv p ∙ l) ∙ p)
+tr-loop refl l = inv right-unit
 ```

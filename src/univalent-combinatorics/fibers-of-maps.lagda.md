@@ -113,7 +113,7 @@ abstract
   is-finite-fiber-map-section-family {l1} {l2} {A} {B} b f g (pair y z) =
     is-finite-equiv'
       ( ( ( left-unit-law-Σ-is-contr
-            ( is-contr-total-path' y)
+            ( is-torsorial-path' y)
             ( pair y refl)) ∘e
           ( inv-associative-Σ A
             ( λ x → Id x y)
@@ -152,5 +152,5 @@ equiv-is-finite-domain-is-finite-fiber {A = A} B f =
       is-finite-equiv
         ( equiv-total-fiber f)
         ( is-finite-Σ (is-finite-type-𝔽 B) P))
-    ( λ P → is-finite-fiber f P ( is-finite-type-𝔽 B))
+    ( λ P → is-finite-fiber f P (is-finite-type-𝔽 B))
 ```

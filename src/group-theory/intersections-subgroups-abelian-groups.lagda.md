@@ -47,15 +47,15 @@ module _
   contains-zero-intersection-Subgroup-Ab =
     contains-unit-intersection-Subgroup (group-Ab A) B C
 
-  is-closed-under-add-intersection-Subgroup-Ab :
-    is-closed-under-add-subset-Ab A subset-intersection-Subgroup-Ab
-  is-closed-under-add-intersection-Subgroup-Ab =
+  is-closed-under-addition-intersection-Subgroup-Ab :
+    is-closed-under-addition-subset-Ab A subset-intersection-Subgroup-Ab
+  is-closed-under-addition-intersection-Subgroup-Ab =
     is-closed-under-multiplication-intersection-Subgroup (group-Ab A) B C
 
-  is-closed-under-neg-intersection-Subgroup-Ab :
-    is-closed-under-neg-subset-Ab A subset-intersection-Subgroup-Ab
-  is-closed-under-neg-intersection-Subgroup-Ab =
-    is-closed-under-inv-intersection-Subgroup (group-Ab A) B C
+  is-closed-under-negatives-intersection-Subgroup-Ab :
+    is-closed-under-negatives-subset-Ab A subset-intersection-Subgroup-Ab
+  is-closed-under-negatives-intersection-Subgroup-Ab =
+    is-closed-under-inverses-intersection-Subgroup (group-Ab A) B C
 
   is-subgroup-intersection-Subgroup-Ab :
     is-subgroup-Ab A subset-intersection-Subgroup-Ab

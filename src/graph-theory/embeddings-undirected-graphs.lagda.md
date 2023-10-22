@@ -20,9 +20,11 @@ open import graph-theory.undirected-graphs
 
 ## Idea
 
-An embedding of undirected graphs is a morphism `f : G → H` of undirected graphs
-which is an embedding on vertices such that for each unordered pair `p` of
-vertices in `G` the map
+An **embedding of undirected graphs** is a
+[morphism](graph-theory.morphisms-undirected-graphs.md) `f : G → H` of
+[undirected graphs](graph-theory.undirected-graphs.md) which is an
+[embedding](foundation.embeddings.md) on vertices such that for each
+[unordered pair](foundation.unordered-pairs.md) `p` of vertices in `G` the map
 
 ```text
   edge-hom-Undirected-Graph G H :
@@ -32,6 +34,10 @@ vertices in `G` the map
 
 is also an embedding. Embeddings of undirected graphs correspond to undirected
 subgraphs.
+
+**Note:** Our notion of embeddings of directed graphs differs quite
+substantially from the graph theoretic notion of _graph embedding_, which
+usually refers to an embedding of a graph into the plane.
 
 ## Definition
 
@@ -119,5 +125,11 @@ module _
 
 ## See also
 
-- Faithful morphisms of undirected graphs
-- Totally faithful morphisms of undirected graphs
+- [Faithful morphisms of undirected graphs](graph-theory.faithful-morphisms-undirected-graphs.md)
+- [Totally faithful morphisms of undirected graphs](graph-theory.totally-faithful-morphisms-undirected-graphs.md)
+
+## External links
+
+- [Graph homomorphism](https://www.wikidata.org/entity/Q3385162) on Wikidata
+- [Graph homomorphism](https://en.wikipedia.org/wiki/Graph_homomorphism) on
+  Wikipedia

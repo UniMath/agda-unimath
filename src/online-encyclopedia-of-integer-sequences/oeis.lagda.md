@@ -46,7 +46,7 @@ A000002 = kolakoski
 
 ```agda
 A000010 : ℕ → ℕ
-A000010 = eulers-totient-function
+A000010 = eulers-totient-function-relatively-prime
 ```
 
 ### [A000040](https://oeis.org/A000040) The prime numbers

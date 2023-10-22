@@ -17,6 +17,7 @@ open import foundation.functoriality-coproduct-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.structure-identity-principle
+open import foundation.transport-along-identifications
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.type-arithmetic-empty-type
@@ -32,7 +33,7 @@ open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-pair-types
 open import foundation-core.homotopies
 open import foundation-core.propositions
-open import foundation-core.transport-along-identifications
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -184,20 +185,18 @@ module _
         ( matching-correspondence-binary-coproduct-Decomposition X)
         ( x))
 
-  is-contr-total-equiv-binary-coproduct-Decomposition :
-    is-contr
-      ( Σ ( binary-coproduct-Decomposition l2 l3 A)
-          ( equiv-binary-coproduct-Decomposition X))
-  is-contr-total-equiv-binary-coproduct-Decomposition =
-    is-contr-total-Eq-structure
+  is-torsorial-equiv-binary-coproduct-Decomposition :
+    is-torsorial (equiv-binary-coproduct-Decomposition X)
+  is-torsorial-equiv-binary-coproduct-Decomposition =
+    is-torsorial-Eq-structure
       ( _)
-      ( is-contr-total-equiv ( left-summand-binary-coproduct-Decomposition X))
+      ( is-torsorial-equiv ( left-summand-binary-coproduct-Decomposition X))
       ( left-summand-binary-coproduct-Decomposition X , id-equiv)
-      ( is-contr-total-Eq-structure
+      ( is-torsorial-Eq-structure
         ( _)
-        ( is-contr-total-equiv (right-summand-binary-coproduct-Decomposition X))
+        ( is-torsorial-equiv (right-summand-binary-coproduct-Decomposition X))
         ( right-summand-binary-coproduct-Decomposition X , id-equiv)
-        ( is-contr-total-htpy-equiv
+        ( is-torsorial-htpy-equiv
           ( equiv-coprod id-equiv id-equiv ∘e
             matching-correspondence-binary-coproduct-Decomposition X)))
 
@@ -212,7 +211,7 @@ module _
     is-equiv (equiv-eq-binary-coproduct-Decomposition Y)
   is-equiv-equiv-eq-binary-coproduct-Decomposition =
     fundamental-theorem-id
-      is-contr-total-equiv-binary-coproduct-Decomposition
+      is-torsorial-equiv-binary-coproduct-Decomposition
       equiv-eq-binary-coproduct-Decomposition
 
   extensionality-binary-coproduct-Decomposition :

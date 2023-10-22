@@ -27,6 +27,7 @@ open import foundation.universe-levels
 open import group-theory.abelian-groups
 open import group-theory.groups
 open import group-theory.homomorphisms-abelian-groups
+open import group-theory.nullifying-group-homomorphisms
 open import group-theory.quotient-groups
 open import group-theory.semigroups
 open import group-theory.subgroups-abelian-groups
@@ -51,17 +52,17 @@ module _
   {l1 l2 l3 : Level} (A : Ab l1) (B : Ab l2)
   where
 
-  nullifies-subgroup-hom-Ab-Prop :
-    type-hom-Ab A B → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-  nullifies-subgroup-hom-Ab-Prop f H =
-    nullifies-normal-subgroup-hom-Group-Prop
+  nullifies-subgroup-prop-hom-Ab :
+    hom-Ab A B → Subgroup-Ab l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+  nullifies-subgroup-prop-hom-Ab f H =
+    nullifies-normal-subgroup-prop-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( f)
       ( normal-subgroup-Subgroup-Ab A H)
 
   nullifies-normal-subgroup-hom-Ab :
-    type-hom-Ab A B → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
+    hom-Ab A B → Subgroup-Ab l3 A → UU (l1 ⊔ l2 ⊔ l3)
   nullifies-normal-subgroup-hom-Ab f H =
     nullifies-normal-subgroup-hom-Group
       ( group-Ab A)
@@ -77,19 +78,19 @@ module _
       ( normal-subgroup-Subgroup-Ab A H)
 
   hom-nullifying-hom-Ab :
-    (H : Subgroup-Ab l3 A) → nullifying-hom-Ab H → type-hom-Ab A B
+    (H : Subgroup-Ab l3 A) → nullifying-hom-Ab H → hom-Ab A B
   hom-nullifying-hom-Ab H =
     hom-nullifying-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( normal-subgroup-Subgroup-Ab A H)
 
-  nullifies-nullifying-hom-Ab :
+  nullifies-subgroup-nullifying-hom-Ab :
     (H : Subgroup-Ab l3 A) (f : nullifying-hom-Ab H) →
     nullifies-normal-subgroup-hom-Ab
       ( hom-nullifying-hom-Ab H f) H
-  nullifies-nullifying-hom-Ab H =
-    nullifies-nullifying-hom-Group
+  nullifies-subgroup-nullifying-hom-Ab H =
+    nullifies-normal-subgroup-nullifying-hom-Group
       ( group-Ab A)
       ( group-Ab B)
       ( normal-subgroup-Subgroup-Ab A H)
@@ -101,7 +102,7 @@ module _
 precomp-nullifying-hom-Ab :
   {l1 l2 l3 l4 : Level} (A : Ab l1) (H : Subgroup-Ab l2 A)
   (B : Ab l3) (f : nullifying-hom-Ab A B H)
-  (C : Ab l4) → type-hom-Ab B C → nullifying-hom-Ab A C H
+  (C : Ab l4) → hom-Ab B C → nullifying-hom-Ab A C H
 precomp-nullifying-hom-Ab A H B f C =
   precomp-nullifying-hom-Group
     ( group-Ab A)

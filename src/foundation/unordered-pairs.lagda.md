@@ -15,11 +15,13 @@ open import foundation.decidable-equality
 open import foundation.dependent-pair-types
 open import foundation.existential-quantification
 open import foundation.function-extensionality
+open import foundation.functoriality-dependent-function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopy-induction
 open import foundation.mere-equivalences
 open import foundation.propositional-truncations
 open import foundation.structure-identity-principle
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universal-property-dependent-pair-types
 open import foundation.universe-levels
 
@@ -33,12 +35,14 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.sets
+open import foundation-core.torsorial-type-families
 open import foundation-core.whiskering-homotopies
 
 open import univalent-combinatorics.2-element-types
 open import univalent-combinatorics.equality-standard-finite-types
 open import univalent-combinatorics.finite-types
 open import univalent-combinatorics.standard-finite-types
+open import univalent-combinatorics.universal-property-standard-finite-types
 ```
 
 </details>
@@ -133,25 +137,25 @@ module _
   where
 
   element-standard-unordered-pair : Fin 2 → A
-  element-standard-unordered-pair (inl (inr star)) = x
-  element-standard-unordered-pair (inr star) = y
+  element-standard-unordered-pair =
+    map-inv-ev-zero-one-Fin-two-ℕ (λ _ → A) (x , y)
 
   standard-unordered-pair : unordered-pair A
   pr1 standard-unordered-pair = Fin-UU-Fin' 2
   pr2 standard-unordered-pair = element-standard-unordered-pair
 
   other-element-standard-unordered-pair : Fin 2 → A
-  other-element-standard-unordered-pair (inl (inr star)) = y
-  other-element-standard-unordered-pair (inr star) = x
+  other-element-standard-unordered-pair (inl (inr _)) = y
+  other-element-standard-unordered-pair (inr _) = x
 
   compute-other-element-standard-unordered-pair :
     (u : Fin 2) →
     other-element-unordered-pair standard-unordered-pair u ＝
     other-element-standard-unordered-pair u
-  compute-other-element-standard-unordered-pair (inl (inr star)) =
-    ap element-standard-unordered-pair (compute-swap-Fin-two-ℕ (inl (inr star)))
-  compute-other-element-standard-unordered-pair (inr star) =
-    ap element-standard-unordered-pair (compute-swap-Fin-two-ℕ (inr star))
+  compute-other-element-standard-unordered-pair (inl (inr x)) =
+    ap element-standard-unordered-pair (compute-swap-Fin-two-ℕ (inl (inr x)))
+  compute-other-element-standard-unordered-pair (inr x) =
+    ap element-standard-unordered-pair (compute-swap-Fin-two-ℕ (inr x))
 ```
 
 ## Properties
@@ -180,21 +184,21 @@ module _
     (p q : unordered-pair A) → p ＝ q → Eq-unordered-pair p q
   Eq-eq-unordered-pair p .p refl = refl-Eq-unordered-pair p
 
-  is-contr-total-Eq-unordered-pair :
+  is-torsorial-Eq-unordered-pair :
     (p : unordered-pair A) →
-    is-contr (Σ (unordered-pair A) (Eq-unordered-pair p))
-  is-contr-total-Eq-unordered-pair (pair X p) =
-    is-contr-total-Eq-structure
+    is-torsorial (Eq-unordered-pair p)
+  is-torsorial-Eq-unordered-pair (pair X p) =
+    is-torsorial-Eq-structure
       ( λ Y q e → p ~ (q ∘ map-equiv e))
-      ( is-contr-total-equiv-UU-Fin {k = 2} X)
+      ( is-torsorial-equiv-UU-Fin {k = 2} X)
       ( pair X (id-equiv-UU-Fin {k = 2} X))
-      ( is-contr-total-htpy p)
+      ( is-torsorial-htpy p)
 
   is-equiv-Eq-eq-unordered-pair :
     (p q : unordered-pair A) → is-equiv (Eq-eq-unordered-pair p q)
   is-equiv-Eq-eq-unordered-pair p =
     fundamental-theorem-id
-      ( is-contr-total-Eq-unordered-pair p)
+      ( is-torsorial-Eq-unordered-pair p)
       ( Eq-eq-unordered-pair p)
 
   extensionality-unordered-pair :
@@ -261,7 +265,7 @@ module _
         ( triangle-ev-refl-Eq-unordered-pair)
         ( dependent-universal-property-contr-is-contr
           ( p , refl-Eq-unordered-pair p)
-          ( is-contr-total-Eq-unordered-pair p)
+          ( is-torsorial-Eq-unordered-pair p)
           ( λ u → B (pr1 u) (pr2 u)))
         ( is-equiv-ev-pair)
 
@@ -339,8 +343,8 @@ module _
       ( standard-unordered-pair x y)
       ( standard-unordered-pair y x)
   pr1 swap-standard-unordered-pair = equiv-succ-Fin 2
-  pr2 swap-standard-unordered-pair (inl (inr star)) = refl
-  pr2 swap-standard-unordered-pair (inr star) = refl
+  pr2 swap-standard-unordered-pair (inl (inr _)) = refl
+  pr2 swap-standard-unordered-pair (inr _) = refl
 
   is-commutative-standard-unordered-pair :
     standard-unordered-pair x y ＝ standard-unordered-pair y x
@@ -349,6 +353,70 @@ module _
       ( standard-unordered-pair x y)
       ( standard-unordered-pair y x)
       ( swap-standard-unordered-pair)
+```
+
+### Dependent universal property of pointed unordered pairs
+
+We will construct an equivalence
+
+```text
+  ((p : unordered-pair A) (i : type p) → B p i) ≃ ((x y : A) → B {x,y} 0)
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  (B : (p : unordered-pair A) → type-unordered-pair p → UU l2)
+  where
+
+  ev-pointed-unordered-pair :
+    ((p : unordered-pair A) (i : type-unordered-pair p) → B p i) →
+    ((x y : A) → B (standard-unordered-pair x y) (zero-Fin 1))
+  ev-pointed-unordered-pair f x y =
+    f (standard-unordered-pair x y) (zero-Fin 1)
+
+  abstract
+    dependent-universal-property-pointed-unordered-pairs :
+      is-equiv ev-pointed-unordered-pair
+    dependent-universal-property-pointed-unordered-pairs =
+      is-equiv-comp
+        ( λ f x y →
+          f (Fin-UU-Fin' 2) (element-standard-unordered-pair x y) (zero-Fin 1))
+        ( ev-pair)
+        ( is-equiv-ev-pair)
+        ( is-equiv-comp
+          ( λ f x y →
+            f ( Fin-UU-Fin' 2)
+              ( zero-Fin 1)
+              ( element-standard-unordered-pair x y))
+          ( map-Π (λ I → swap-Π))
+          ( is-equiv-map-Π-is-fiberwise-equiv
+            ( λ I → is-equiv-swap-Π))
+          ( is-equiv-comp
+            ( λ f x y → f (element-standard-unordered-pair x y))
+            ( λ f → f (Fin-UU-Fin' 2) (zero-Fin 1))
+            ( dependent-universal-property-identity-system-type-2-Element-Type
+              ( Fin-UU-Fin' 2)
+              ( zero-Fin 1)
+              ( λ I i → (a : type-2-Element-Type I → A) → B (I , a) i))
+            ( is-equiv-comp
+              ( ev-pair)
+              ( precomp-Π
+                ( λ xy → element-standard-unordered-pair (pr1 xy) (pr2 xy))
+                ( λ g → B (Fin-UU-Fin' 2 , g) (zero-Fin 1)))
+              ( is-equiv-precomp-Π-is-equiv
+                ( is-equiv-map-inv-dependent-universal-proeprty-Fin-two-ℕ
+                  ( λ _ → A))
+                ( λ g → B (Fin-UU-Fin' 2 , g) (zero-Fin 1)))
+              ( is-equiv-ev-pair))))
+
+  equiv-dependent-universal-property-pointed-unordered-pairs :
+    ((p : unordered-pair A) (i : type-unordered-pair p) → B p i) ≃
+    ((x y : A) → B (standard-unordered-pair x y) (zero-Fin 1))
+  pr1 equiv-dependent-universal-property-pointed-unordered-pairs =
+    ev-pointed-unordered-pair
+  pr2 equiv-dependent-universal-property-pointed-unordered-pairs =
+    dependent-universal-property-pointed-unordered-pairs
 ```
 
 ### Functoriality of unordered pairs
@@ -410,8 +478,8 @@ element-equiv-standard-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) (x y : A) →
   ( map-equiv e ∘ element-standard-unordered-pair x y) ~
   ( element-standard-unordered-pair (map-equiv e x) (map-equiv e y))
-element-equiv-standard-unordered-pair e x y (inl (inr star)) = refl
-element-equiv-standard-unordered-pair e x y (inr star) = refl
+element-equiv-standard-unordered-pair e x y (inl (inr _)) = refl
+element-equiv-standard-unordered-pair e x y (inr _) = refl
 
 equiv-standard-unordered-pair :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) (x y : A) →
@@ -431,8 +499,8 @@ id-equiv-unordered-pair = refl-htpy
 element-id-equiv-standard-unordered-pair :
   {l : Level} {A : UU l} (x y : A) →
   element-equiv-standard-unordered-pair (id-equiv {A = A}) x y ~ refl-htpy
-element-id-equiv-standard-unordered-pair x y (inl (inr star)) = refl
-element-id-equiv-standard-unordered-pair x y (inr star) = refl
+element-id-equiv-standard-unordered-pair x y (inl (inr _)) = refl
+element-id-equiv-standard-unordered-pair x y (inr _) = refl
 
 id-equiv-standard-unordered-pair :
   {l : Level} {A : UU l} (x y : A) →
@@ -455,24 +523,27 @@ unordered-distinct-pair A =
 ### Every unordered pair is merely equal to a standard unordered pair
 
 ```agda
-is-surjective-standard-unordered-pair :
-  {l : Level} {A : UU l} (p : unordered-pair A) →
-  type-trunc-Prop
-    ( Σ A (λ x → Σ A (λ y → standard-unordered-pair x y ＝ p)))
-is-surjective-standard-unordered-pair (I , a) =
-  apply-universal-property-trunc-Prop
-    ( has-two-elements-type-2-Element-Type I)
-    ( trunc-Prop
-      ( Σ _ (λ x → Σ _ (λ y → standard-unordered-pair x y ＝ (I , a)))))
-    ( λ e →
-      unit-trunc-Prop
-        ( a (map-equiv e (zero-Fin 1)) ,
-          a (map-equiv e (one-Fin 1)) ,
-          eq-Eq-unordered-pair
-            ( standard-unordered-pair _ _)
-            ( I , a)
-            ( e)
-            ( λ { (inl (inr star)) → refl ; (inr star) → refl})))
+abstract
+  is-surjective-standard-unordered-pair :
+    {l : Level} {A : UU l} (p : unordered-pair A) →
+    type-trunc-Prop
+      ( Σ A (λ x → Σ A (λ y → standard-unordered-pair x y ＝ p)))
+  is-surjective-standard-unordered-pair (I , a) =
+    apply-universal-property-trunc-Prop
+      ( has-two-elements-type-2-Element-Type I)
+      ( trunc-Prop
+        ( Σ _ (λ x → Σ _ (λ y → standard-unordered-pair x y ＝ (I , a)))))
+      ( λ e →
+        unit-trunc-Prop
+          ( a (map-equiv e (zero-Fin 1)) ,
+            a (map-equiv e (one-Fin 1)) ,
+            eq-Eq-unordered-pair
+              ( standard-unordered-pair _ _)
+              ( I , a)
+              ( e)
+              ( λ where
+                ( inl (inr _)) → refl
+                ( inr _) → refl)))
 ```
 
 ### For every unordered pair `p` and every element `i` in its underlying type, `p` is equal to a standard unordered pair
@@ -492,14 +563,14 @@ module _
     equiv-point-2-Element-Type
       ( 2-element-type-unordered-pair p)
       ( i)
-  pr2 compute-standard-unordered-pair-element-unordered-pair (inl (inr star)) =
+  pr2 compute-standard-unordered-pair-element-unordered-pair (inl (inr _)) =
     ap
       ( element-unordered-pair p)
       ( inv
         ( compute-map-equiv-point-2-Element-Type
           ( 2-element-type-unordered-pair p)
           ( i)))
-  pr2 compute-standard-unordered-pair-element-unordered-pair (inr star) =
+  pr2 compute-standard-unordered-pair-element-unordered-pair (inr _) =
     ap
       ( element-unordered-pair p)
       ( inv

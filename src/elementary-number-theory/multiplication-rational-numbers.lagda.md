@@ -10,10 +10,8 @@ module elementary-number-theory.multiplication-rational-numbers where
 
 ```agda
 open import elementary-number-theory.integer-fractions
-open import elementary-number-theory.integers
 open import elementary-number-theory.multiplication-integer-fractions
 open import elementary-number-theory.rational-numbers
-open import elementary-number-theory.reduced-integer-fractions
 
 open import foundation.dependent-pair-types
 open import foundation.identity-types

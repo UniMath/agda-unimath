@@ -27,6 +27,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.split-surjective-maps
+open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import univalent-combinatorics.equality-standard-finite-types
@@ -65,7 +66,7 @@ cong-nat-succ-Fin (succ-ℕ k) (inl x) =
     { nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))}
     { succ-ℕ (nat-Fin k x)}
     ( nat-succ-Fin k x)
-cong-nat-succ-Fin (succ-ℕ k) (inr star) =
+cong-nat-succ-Fin (succ-ℕ k) (inr _) =
   concatenate-eq-cong-ℕ
     ( succ-ℕ k)
     { nat-Fin (succ-ℕ k) (zero-Fin k)}
@@ -154,11 +155,24 @@ is-section-nat-Fin k x =
         ( mod-succ-ℕ k (nat-Fin (succ-ℕ k) x)))
       ( strict-upper-bound-nat-Fin (succ-ℕ k) x)
       ( cong-nat-mod-succ-ℕ k (nat-Fin (succ-ℕ k) x)))
+```
 
+### `mod-succ-ℕ` is split surjective
+
+```agda
 is-split-surjective-mod-succ-ℕ :
-  {k : ℕ} → is-split-surjective (mod-succ-ℕ k)
-pr1 (is-split-surjective-mod-succ-ℕ {k} x) = nat-Fin (succ-ℕ k) x
-pr2 (is-split-surjective-mod-succ-ℕ {k} x) = is-section-nat-Fin k x
+  (k : ℕ) → is-split-surjective (mod-succ-ℕ k)
+pr1 (is-split-surjective-mod-succ-ℕ k x) = nat-Fin (succ-ℕ k) x
+pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
+```
+
+### `mod-succ-ℕ` is surjective
+
+```agda
+is-surjective-mod-succ-ℕ :
+  (k : ℕ) → is-surjective (mod-succ-ℕ k)
+is-surjective-mod-succ-ℕ k =
+  is-surjective-is-split-surjective (is-split-surjective-mod-succ-ℕ k)
 ```
 
 ### The residue of `x` modulo `k + 1` is less than or equal to `x`
@@ -446,7 +460,7 @@ right-inverse-law-add-Fin k x =
 is-add-one-succ-Fin' :
   (k : ℕ) (x : Fin (succ-ℕ k)) →
   succ-Fin (succ-ℕ k) x ＝ add-Fin (succ-ℕ k) x (one-Fin k)
-is-add-one-succ-Fin' zero-ℕ (inr star) = refl
+is-add-one-succ-Fin' zero-ℕ (inr _) = refl
 is-add-one-succ-Fin' (succ-ℕ k) x =
   ( ap (succ-Fin (succ-ℕ (succ-ℕ k))) (inv (is-section-nat-Fin (succ-ℕ k) x))) ∙
   ( ap
@@ -543,7 +557,7 @@ commutative-mul-Fin (succ-ℕ k) x y =
 
 left-unit-law-mul-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → mul-Fin (succ-ℕ k) (one-Fin k) x ＝ x
-left-unit-law-mul-Fin zero-ℕ (inr star) = refl
+left-unit-law-mul-Fin zero-ℕ (inr _) = refl
 left-unit-law-mul-Fin (succ-ℕ k) x =
   ( eq-mod-succ-cong-ℕ (succ-ℕ k)
     ( ( nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k))) *ℕ

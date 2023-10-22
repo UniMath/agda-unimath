@@ -14,7 +14,9 @@ open import foundation.function-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
+open import foundation.propositions
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.universe-levels
 
 open import structured-types.equivalences-types-equipped-with-endomorphisms
@@ -29,88 +31,123 @@ open import structured-types.types-equipped-with-endomorphisms
 
 ```agda
 module _
-  {l1 l2 : Level} (X : Endo l1) (Y : Endo l2)
+  {l1 l2 : Level}
+  (X : Type-With-Endomorphism l1)
+  (Y : Type-With-Endomorphism l2)
   where
 
-  mere-equiv-Endo : UU (l1 ⊔ l2)
-  mere-equiv-Endo = type-trunc-Prop (equiv-Endo X Y)
+  mere-equiv-prop-Type-With-Endomorphism : Prop (l1 ⊔ l2)
+  mere-equiv-prop-Type-With-Endomorphism =
+    trunc-Prop (equiv-Type-With-Endomorphism X Y)
+
+  mere-equiv-Type-With-Endomorphism : UU (l1 ⊔ l2)
+  mere-equiv-Type-With-Endomorphism =
+    type-Prop mere-equiv-prop-Type-With-Endomorphism
+
+  is-prop-mere-equiv-Type-With-Endomorphism :
+    is-prop mere-equiv-Type-With-Endomorphism
+  is-prop-mere-equiv-Type-With-Endomorphism =
+    is-prop-type-Prop mere-equiv-prop-Type-With-Endomorphism
 ```
 
 ### Refleivity of mere equivalences of types equipped with endomorphisms
 
 ```agda
 module _
-  {l1 : Level} (X : Endo l1)
+  {l1 : Level} (X : Type-With-Endomorphism l1)
   where
 
-  refl-mere-equiv-Endo : mere-equiv-Endo X X
-  refl-mere-equiv-Endo = unit-trunc-Prop (id-equiv-Endo X)
+  refl-mere-equiv-Type-With-Endomorphism : mere-equiv-Type-With-Endomorphism X X
+  refl-mere-equiv-Type-With-Endomorphism =
+    unit-trunc-Prop (id-equiv-Type-With-Endomorphism X)
 ```
 
 ### Components of the universe of types equipped with endomorphisms
 
 ```agda
 module _
-  {l1 : Level} (X : Endo l1)
+  {l1 : Level} (X : Type-With-Endomorphism l1)
   where
 
-  Component-Endo : UU (lsuc l1)
-  Component-Endo = Σ (Endo l1) (mere-equiv-Endo X)
+  Component-Type-With-Endomorphism : UU (lsuc l1)
+  Component-Type-With-Endomorphism =
+    Σ (Type-With-Endomorphism l1) (mere-equiv-Type-With-Endomorphism X)
 
-  endo-Component-Endo : Component-Endo → Endo l1
-  endo-Component-Endo = pr1
+  endo-Component-Type-With-Endomorphism :
+    Component-Type-With-Endomorphism → Type-With-Endomorphism l1
+  endo-Component-Type-With-Endomorphism = pr1
 
-  type-Component-Endo : Component-Endo → UU l1
-  type-Component-Endo = pr1 ∘ endo-Component-Endo
+  type-Component-Type-With-Endomorphism :
+    Component-Type-With-Endomorphism → UU l1
+  type-Component-Type-With-Endomorphism =
+    pr1 ∘ endo-Component-Type-With-Endomorphism
 
-  endomorphism-Component-Endo :
-    (T : Component-Endo) → type-Component-Endo T → type-Component-Endo T
-  endomorphism-Component-Endo T = pr2 (endo-Component-Endo T)
+  endomorphism-Component-Type-With-Endomorphism :
+    (T : Component-Type-With-Endomorphism) →
+    type-Component-Type-With-Endomorphism T →
+    type-Component-Type-With-Endomorphism T
+  endomorphism-Component-Type-With-Endomorphism T =
+    pr2 (endo-Component-Type-With-Endomorphism T)
 
-  mere-equiv-Component-Endo :
-    (T : Component-Endo) → mere-equiv-Endo X (endo-Component-Endo T)
-  mere-equiv-Component-Endo T = pr2 T
+  mere-equiv-Component-Type-With-Endomorphism :
+    (T : Component-Type-With-Endomorphism) →
+    mere-equiv-Type-With-Endomorphism X
+      ( endo-Component-Type-With-Endomorphism T)
+  mere-equiv-Component-Type-With-Endomorphism T = pr2 T
 
-  canonical-Component-Endo : Component-Endo
-  pr1 canonical-Component-Endo = X
-  pr2 canonical-Component-Endo = refl-mere-equiv-Endo X
+  canonical-Component-Type-With-Endomorphism : Component-Type-With-Endomorphism
+  pr1 canonical-Component-Type-With-Endomorphism = X
+  pr2 canonical-Component-Type-With-Endomorphism =
+    refl-mere-equiv-Type-With-Endomorphism X
 ```
 
 ### Equivalences of types equipped with an endomorphism in a given component
 
 ```agda
 module _
-  {l1 : Level} (X : Endo l1)
+  {l1 : Level} (X : Type-With-Endomorphism l1)
   where
 
-  equiv-Component-Endo : (T S : Component-Endo X) → UU l1
-  equiv-Component-Endo T S =
-    equiv-Endo (endo-Component-Endo X T) (endo-Component-Endo X S)
+  equiv-Component-Type-With-Endomorphism :
+    (T S : Component-Type-With-Endomorphism X) → UU l1
+  equiv-Component-Type-With-Endomorphism T S =
+    equiv-Type-With-Endomorphism
+      ( endo-Component-Type-With-Endomorphism X T)
+      ( endo-Component-Type-With-Endomorphism X S)
 
-  id-equiv-Component-Endo : (T : Component-Endo X) → equiv-Component-Endo T T
-  id-equiv-Component-Endo T = id-equiv-Endo (endo-Component-Endo X T)
+  id-equiv-Component-Type-With-Endomorphism :
+    ( T : Component-Type-With-Endomorphism X) →
+    equiv-Component-Type-With-Endomorphism T T
+  id-equiv-Component-Type-With-Endomorphism T =
+    id-equiv-Type-With-Endomorphism (endo-Component-Type-With-Endomorphism X T)
 
-  equiv-eq-Component-Endo :
-    (T S : Component-Endo X) → Id T S → equiv-Component-Endo T S
-  equiv-eq-Component-Endo T .T refl = id-equiv-Component-Endo T
+  equiv-eq-Component-Type-With-Endomorphism :
+    (T S : Component-Type-With-Endomorphism X) →
+    T ＝ S → equiv-Component-Type-With-Endomorphism T S
+  equiv-eq-Component-Type-With-Endomorphism T .T refl =
+    id-equiv-Component-Type-With-Endomorphism T
 
-  is-contr-total-equiv-Component-Endo :
-    is-contr
-      ( Σ ( Component-Endo X)
-          ( λ T → equiv-Component-Endo (canonical-Component-Endo X) T))
-  is-contr-total-equiv-Component-Endo =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv-Endo X)
+  is-torsorial-equiv-Component-Type-With-Endomorphism :
+    is-torsorial
+      ( equiv-Component-Type-With-Endomorphism
+        ( canonical-Component-Type-With-Endomorphism X))
+  is-torsorial-equiv-Component-Type-With-Endomorphism =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv-Type-With-Endomorphism X)
       ( λ Y → is-prop-type-trunc-Prop)
       ( X)
-      ( id-equiv-Endo X)
-      ( refl-mere-equiv-Endo X)
+      ( id-equiv-Type-With-Endomorphism X)
+      ( refl-mere-equiv-Type-With-Endomorphism X)
 
-  is-equiv-equiv-eq-Component-Endo :
-    (T : Component-Endo X) →
-    is-equiv (equiv-eq-Component-Endo (canonical-Component-Endo X) T)
-  is-equiv-equiv-eq-Component-Endo =
+  is-equiv-equiv-eq-Component-Type-With-Endomorphism :
+    (T : Component-Type-With-Endomorphism X) →
+    is-equiv
+      ( equiv-eq-Component-Type-With-Endomorphism
+        ( canonical-Component-Type-With-Endomorphism X)
+        ( T))
+  is-equiv-equiv-eq-Component-Type-With-Endomorphism =
     fundamental-theorem-id
-      ( is-contr-total-equiv-Component-Endo)
-      ( equiv-eq-Component-Endo (canonical-Component-Endo X))
+      ( is-torsorial-equiv-Component-Type-With-Endomorphism)
+      ( equiv-eq-Component-Type-With-Endomorphism
+        ( canonical-Component-Type-With-Endomorphism X))
 ```

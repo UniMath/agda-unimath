@@ -67,10 +67,10 @@ is-closed-under-multiplication-full-Subgroup :
 is-closed-under-multiplication-full-Subgroup G x y _ _ =
   is-in-full-subtype (mul-Group G x y)
 
-is-closed-under-inv-full-Subgroup :
+is-closed-under-inverses-full-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
-  is-closed-under-inv-subset-Group G (subset-full-Subgroup l2 G)
-is-closed-under-inv-full-Subgroup G x _ =
+  is-closed-under-inverses-subset-Group G (subset-full-Subgroup l2 G)
+is-closed-under-inverses-full-Subgroup G x _ =
   is-in-full-subtype (inv-Group G x)
 
 full-Subgroup : {l1 : Level} (l2 : Level) (G : Group l1) → Subgroup l2 G
@@ -78,7 +78,7 @@ pr1 (full-Subgroup l2 G) = subset-full-Subgroup l2 G
 pr1 (pr2 (full-Subgroup l2 G)) = contains-unit-full-Subgroup G
 pr1 (pr2 (pr2 (full-Subgroup l2 G))) =
   is-closed-under-multiplication-full-Subgroup G
-pr2 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-inv-full-Subgroup G
+pr2 (pr2 (pr2 (full-Subgroup l2 G))) = is-closed-under-inverses-full-Subgroup G
 
 module _
   {l1 l2 : Level} (G : Group l1)
@@ -97,7 +97,7 @@ module _
   group-full-Subgroup : Group (l1 ⊔ l2)
   group-full-Subgroup = group-Subgroup G (full-Subgroup l2 G)
 
-  hom-inclusion-full-Subgroup : type-hom-Group group-full-Subgroup G
+  hom-inclusion-full-Subgroup : hom-Group group-full-Subgroup G
   hom-inclusion-full-Subgroup =
     hom-inclusion-Subgroup G (full-Subgroup l2 G)
 
@@ -111,12 +111,12 @@ module _
   pr2 equiv-group-inclusion-full-Subgroup =
     preserves-mul-inclusion-full-Subgroup
 
-  iso-full-Subgroup : type-iso-Group group-full-Subgroup G
+  iso-full-Subgroup : iso-Group group-full-Subgroup G
   iso-full-Subgroup =
     iso-equiv-Group group-full-Subgroup G equiv-group-inclusion-full-Subgroup
 
   inv-iso-full-Subgroup :
-    type-iso-Group G group-full-Subgroup
+    iso-Group G group-full-Subgroup
   inv-iso-full-Subgroup =
     inv-iso-Group group-full-Subgroup G iso-full-Subgroup
 ```
@@ -132,7 +132,7 @@ module _
 
   is-iso-inclusion-is-full-Subgroup :
     is-full-Subgroup G H →
-    is-iso-hom-Group (group-Subgroup G H) G (hom-inclusion-Subgroup G H)
+    is-iso-Group (group-Subgroup G H) G (hom-inclusion-Subgroup G H)
   is-iso-inclusion-is-full-Subgroup K =
     is-iso-is-equiv-hom-Group
       ( group-Subgroup G H)
@@ -141,17 +141,17 @@ module _
       ( is-equiv-inclusion-is-full-subtype (subset-Subgroup G H) K)
 
   iso-inclusion-is-full-Subgroup :
-    is-full-Subgroup G H → type-iso-Group (group-Subgroup G H) G
+    is-full-Subgroup G H → iso-Group (group-Subgroup G H) G
   pr1 (iso-inclusion-is-full-Subgroup K) = hom-inclusion-Subgroup G H
   pr2 (iso-inclusion-is-full-Subgroup K) = is-iso-inclusion-is-full-Subgroup K
 
   is-full-is-iso-inclusion-Subgroup :
-    is-iso-hom-Group (group-Subgroup G H) G (hom-inclusion-Subgroup G H) →
+    is-iso-Group (group-Subgroup G H) G (hom-inclusion-Subgroup G H) →
     is-full-Subgroup G H
   is-full-is-iso-inclusion-Subgroup K =
     is-full-is-equiv-inclusion-subtype
       ( subset-Subgroup G H)
-      ( is-equiv-is-iso-hom-Group
+      ( is-equiv-is-iso-Group
         ( group-Subgroup G H)
         ( G)
         ( hom-inclusion-Subgroup G H)

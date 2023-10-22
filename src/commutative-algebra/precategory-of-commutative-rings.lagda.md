@@ -32,9 +32,9 @@ Commutative-Ring-Large-Precategory : Large-Precategory lsuc _⊔_
 obj-Large-Precategory
   Commutative-Ring-Large-Precategory =
   Commutative-Ring
-hom-Large-Precategory
+hom-set-Large-Precategory
   Commutative-Ring-Large-Precategory =
-  hom-Commutative-Ring
+  hom-set-Commutative-Ring
 comp-hom-Large-Precategory
   Commutative-Ring-Large-Precategory {X = A} {B} {C} =
   comp-hom-Commutative-Ring A B C

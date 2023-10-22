@@ -13,6 +13,7 @@ open import elementary-number-theory.natural-numbers
 open import foundation.binary-relations
 open import foundation.coproduct-types
 open import foundation.dependent-pair-types
+open import foundation.disjunction
 open import foundation.embeddings
 open import foundation.equivalence-relations
 open import foundation.equivalences
@@ -21,6 +22,7 @@ open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.large-binary-relations
 open import foundation.powersets
+open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
@@ -53,20 +55,20 @@ module _
   {l1 l2 : Level} (G : Group l1) (P : subset-Group l2 G)
   where
 
-  contains-unit-subset-group-Prop : Prop l2
-  contains-unit-subset-group-Prop = P (unit-Group G)
+  contains-unit-prop-subset-Group : Prop l2
+  contains-unit-prop-subset-Group = P (unit-Group G)
 
   contains-unit-subset-Group : UU l2
   contains-unit-subset-Group =
-    type-Prop contains-unit-subset-group-Prop
+    type-Prop contains-unit-prop-subset-Group
 
   is-prop-contains-unit-subset-Group :
     is-prop contains-unit-subset-Group
   is-prop-contains-unit-subset-Group =
-    is-prop-type-Prop contains-unit-subset-group-Prop
+    is-prop-type-Prop contains-unit-prop-subset-Group
 
-  is-closed-under-multiplication-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-multiplication-subset-group-Prop =
+  is-closed-under-multiplication-prop-subset-Group : Prop (l1 ⊔ l2)
+  is-closed-under-multiplication-prop-subset-Group =
     Π-Prop
       ( type-Group G)
       ( λ x →
@@ -77,42 +79,42 @@ module _
 
   is-closed-under-multiplication-subset-Group : UU (l1 ⊔ l2)
   is-closed-under-multiplication-subset-Group =
-    type-Prop is-closed-under-multiplication-subset-group-Prop
+    type-Prop is-closed-under-multiplication-prop-subset-Group
 
   is-prop-is-closed-under-multiplication-subset-Group :
     is-prop is-closed-under-multiplication-subset-Group
   is-prop-is-closed-under-multiplication-subset-Group =
-    is-prop-type-Prop is-closed-under-multiplication-subset-group-Prop
+    is-prop-type-Prop is-closed-under-multiplication-prop-subset-Group
 
-  is-closed-under-inv-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-closed-under-inv-subset-group-Prop =
+  is-closed-under-inverses-prop-subset-Group : Prop (l1 ⊔ l2)
+  is-closed-under-inverses-prop-subset-Group =
     Π-Prop
       ( type-Group G)
       ( λ x → hom-Prop (P x) (P (inv-Group G x)))
 
-  is-closed-under-inv-subset-Group : UU (l1 ⊔ l2)
-  is-closed-under-inv-subset-Group =
-    type-Prop is-closed-under-inv-subset-group-Prop
+  is-closed-under-inverses-subset-Group : UU (l1 ⊔ l2)
+  is-closed-under-inverses-subset-Group =
+    type-Prop is-closed-under-inverses-prop-subset-Group
 
-  is-prop-is-closed-under-inv-subset-Group :
-    is-prop is-closed-under-inv-subset-Group
-  is-prop-is-closed-under-inv-subset-Group =
-    is-prop-type-Prop is-closed-under-inv-subset-group-Prop
+  is-prop-is-closed-under-inverses-subset-Group :
+    is-prop is-closed-under-inverses-subset-Group
+  is-prop-is-closed-under-inverses-subset-Group =
+    is-prop-type-Prop is-closed-under-inverses-prop-subset-Group
 
-  is-subgroup-subset-group-Prop : Prop (l1 ⊔ l2)
-  is-subgroup-subset-group-Prop =
+  is-subgroup-prop-subset-Group : Prop (l1 ⊔ l2)
+  is-subgroup-prop-subset-Group =
     prod-Prop
-      ( contains-unit-subset-group-Prop)
+      ( contains-unit-prop-subset-Group)
       ( prod-Prop
-        ( is-closed-under-multiplication-subset-group-Prop)
-        ( is-closed-under-inv-subset-group-Prop))
+        ( is-closed-under-multiplication-prop-subset-Group)
+        ( is-closed-under-inverses-prop-subset-Group))
 
   is-subgroup-subset-Group : UU (l1 ⊔ l2)
-  is-subgroup-subset-Group = type-Prop is-subgroup-subset-group-Prop
+  is-subgroup-subset-Group = type-Prop is-subgroup-prop-subset-Group
 
   is-prop-is-subgroup-subset-Group : is-prop is-subgroup-subset-Group
   is-prop-is-subgroup-subset-Group =
-    is-prop-type-Prop is-subgroup-subset-group-Prop
+    is-prop-type-Prop is-subgroup-prop-subset-Group
 ```
 
 ### The type of all subgroups of a group
@@ -120,7 +122,7 @@ module _
 ```agda
 Subgroup :
   (l : Level) {l1 : Level} (G : Group l1) → UU ((lsuc l) ⊔ l1)
-Subgroup l G = type-subtype (is-subgroup-subset-group-Prop {l2 = l} G)
+Subgroup l G = type-subtype (is-subgroup-prop-subset-Group {l2 = l} G)
 
 module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
@@ -128,7 +130,7 @@ module _
 
   subset-Subgroup : subset-Group l2 G
   subset-Subgroup =
-    inclusion-subtype (is-subgroup-subset-group-Prop G) H
+    inclusion-subtype (is-subgroup-prop-subset-Group G) H
 
   type-Subgroup : UU (l1 ⊔ l2)
   type-Subgroup = type-subtype subset-Subgroup
@@ -176,16 +178,16 @@ module _
     is-closed-under-multiplication-subset-Group G subset-Subgroup
   is-closed-under-multiplication-Subgroup = pr1 (pr2 is-subgroup-Subgroup)
 
-  is-closed-under-inv-Subgroup :
-    is-closed-under-inv-subset-Group G subset-Subgroup
-  is-closed-under-inv-Subgroup = pr2 (pr2 is-subgroup-Subgroup)
+  is-closed-under-inverses-Subgroup :
+    is-closed-under-inverses-subset-Group G subset-Subgroup
+  is-closed-under-inverses-Subgroup = pr2 (pr2 is-subgroup-Subgroup)
 
-  is-closed-under-inv-Subgroup' :
+  is-closed-under-inverses-Subgroup' :
     (x : type-Group G) →
     is-in-Subgroup (inv-Group G x) → is-in-Subgroup x
-  is-closed-under-inv-Subgroup' x p =
+  is-closed-under-inverses-Subgroup' x p =
     is-closed-under-eq-Subgroup
-      ( is-closed-under-inv-Subgroup (inv-Group G x) p)
+      ( is-closed-under-inverses-Subgroup (inv-Group G x) p)
       ( inv-inv-Group G x)
 
   is-in-subgroup-left-factor-Subgroup :
@@ -198,7 +200,7 @@ module _
         ( mul-Group G x y)
         ( inv-Group G y)
         ( p)
-        ( is-closed-under-inv-Subgroup y q))
+        ( is-closed-under-inverses-Subgroup y q))
       ( is-retraction-right-div-Group G y x)
 
   is-in-subgroup-right-factor-Subgroup :
@@ -210,7 +212,7 @@ module _
       ( is-closed-under-multiplication-Subgroup
         ( inv-Group G x)
         ( mul-Group G x y)
-        ( is-closed-under-inv-Subgroup x q)
+        ( is-closed-under-inverses-Subgroup x q)
         ( p))
       ( is-retraction-left-div-Group G x y)
 
@@ -219,15 +221,15 @@ module _
     is-in-Subgroup x → is-in-Subgroup (integer-power-Group G k x)
   is-closed-under-powers-int-Subgroup (inl zero-ℕ) x H =
     is-closed-under-eq-Subgroup'
-      ( is-closed-under-inv-Subgroup x H)
+      ( is-closed-under-inverses-Subgroup x H)
       ( right-unit-law-mul-Group G (inv-Group G x))
   is-closed-under-powers-int-Subgroup (inl (succ-ℕ k)) x H =
     is-closed-under-multiplication-Subgroup
       ( inv-Group G x)
       ( integer-power-Group G (inl k) x)
-      ( is-closed-under-inv-Subgroup x H)
+      ( is-closed-under-inverses-Subgroup x H)
       ( is-closed-under-powers-int-Subgroup (inl k) x H)
-  is-closed-under-powers-int-Subgroup (inr (inl star)) x H =
+  is-closed-under-powers-int-Subgroup (inr (inl _)) x H =
     contains-unit-Subgroup
   is-closed-under-powers-int-Subgroup (inr (inr zero-ℕ)) x H =
     is-closed-under-eq-Subgroup' H (right-unit-law-mul-Group G x)
@@ -242,7 +244,7 @@ is-emb-subset-Subgroup :
   {l1 l2 : Level} (G : Group l1) →
   is-emb (subset-Subgroup {l2 = l2} G)
 is-emb-subset-Subgroup G =
-  is-emb-inclusion-subtype (is-subgroup-subset-group-Prop G)
+  is-emb-inclusion-subtype (is-subgroup-prop-subset-Group G)
 ```
 
 ### The underlying group of a subgroup
@@ -299,7 +301,7 @@ module _
   inv-Subgroup : type-group-Subgroup → type-group-Subgroup
   pr1 (inv-Subgroup x) = inv-Group G (pr1 x)
   pr2 (inv-Subgroup x) =
-    is-closed-under-inv-Subgroup G H (pr1 x) (pr2 x)
+    is-closed-under-inverses-Subgroup G H (pr1 x) (pr2 x)
 
   left-inverse-law-mul-Subgroup :
     ( x : type-group-Subgroup) →
@@ -362,7 +364,7 @@ module _
   preserves-inverses-inclusion-Subgroup x = refl
 
   hom-inclusion-Subgroup :
-    type-hom-Group (group-Subgroup G H) G
+    hom-Group (group-Subgroup G H) G
   pr1 hom-inclusion-Subgroup = inclusion-Subgroup G H
   pr2 hom-inclusion-Subgroup = preserves-mul-inclusion-Subgroup
 ```
@@ -376,6 +378,13 @@ module _
   {l1 l2 : Level} (G : Group l1) (H : Subgroup l2 G)
   where
 
+  has-same-elements-prop-Subgroup :
+    {l3 : Level} → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-prop-Subgroup K =
+    has-same-elements-subtype-Prop
+      ( subset-Subgroup G H)
+      ( subset-Subgroup G K)
+
   has-same-elements-Subgroup :
     {l3 : Level} → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
   has-same-elements-Subgroup K =
@@ -387,7 +396,7 @@ module _
     (K : Subgroup l2 G) → (H ＝ K) ≃ has-same-elements-Subgroup K
   extensionality-Subgroup =
     extensionality-type-subtype
-      ( is-subgroup-subset-group-Prop G)
+      ( is-subgroup-prop-subset-Group G)
       ( is-subgroup-Subgroup G H)
       ( λ x → pair id id)
       ( extensionality-subtype (subset-Subgroup G H))
@@ -410,11 +419,11 @@ module _
 ### The containment relation of subgroups
 
 ```agda
-leq-Subgroup-Prop :
+leq-prop-Subgroup :
   {l1 l2 l3 : Level} (G : Group l1) →
   Subgroup l2 G → Subgroup l3 G → Prop (l1 ⊔ l2 ⊔ l3)
-leq-Subgroup-Prop G H K =
-  leq-subtype-Prop
+leq-prop-Subgroup G H K =
+  leq-prop-subtype
     ( subset-Subgroup G H)
     ( subset-Subgroup G K)
 
@@ -423,14 +432,21 @@ leq-Subgroup :
   Subgroup l2 G → Subgroup l3 G → UU (l1 ⊔ l2 ⊔ l3)
 leq-Subgroup G H K = subset-Subgroup G H ⊆ subset-Subgroup G K
 
+is-prop-leq-Subgroup :
+  {l1 l2 l3 : Level} (G : Group l1) →
+  (H : Subgroup l2 G) (K : Subgroup l3 G) →
+  is-prop (leq-Subgroup G H K)
+is-prop-leq-Subgroup G H K =
+  is-prop-leq-subtype (subset-Subgroup G H) (subset-Subgroup G K)
+
 refl-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-reflexive (λ l → Subgroup l G) (leq-Subgroup G)
+  is-reflexive-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
 refl-leq-Subgroup G H = refl-leq-subtype (subset-Subgroup G H)
 
 transitive-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-transitive (λ l → Subgroup l G) (leq-Subgroup G)
+  is-transitive-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
 transitive-leq-Subgroup G H K L =
   transitive-leq-subtype
     ( subset-Subgroup G H)
@@ -439,7 +455,7 @@ transitive-leq-Subgroup G H K L =
 
 antisymmetric-leq-Subgroup :
   {l1 : Level} (G : Group l1) →
-  is-large-antisymmetric (λ l → Subgroup l G) (leq-Subgroup G)
+  is-antisymmetric-Large-Relation (λ l → Subgroup l G) (leq-Subgroup G)
 antisymmetric-leq-Subgroup G H K α β =
   eq-has-same-elements-Subgroup G H K (λ x → (α x , β x))
 
@@ -447,8 +463,8 @@ Subgroup-Large-Preorder :
   {l1 : Level} (G : Group l1) →
   Large-Preorder (λ l2 → l1 ⊔ lsuc l2) (λ l2 l3 → l1 ⊔ l2 ⊔ l3)
 type-Large-Preorder (Subgroup-Large-Preorder G) l2 = Subgroup l2 G
-leq-Large-Preorder-Prop (Subgroup-Large-Preorder G) H K =
-  leq-Subgroup-Prop G H K
+leq-prop-Large-Preorder (Subgroup-Large-Preorder G) H K =
+  leq-prop-Subgroup G H K
 refl-leq-Large-Preorder (Subgroup-Large-Preorder G) =
   refl-leq-Subgroup G
 transitive-leq-Large-Preorder (Subgroup-Large-Preorder G) =
@@ -480,8 +496,8 @@ preserves-order-subset-Subgroup G H K = id
 
 subset-subgroup-hom-large-poset-Group :
   {l1 : Level} (G : Group l1) →
-  hom-Large-Poset
-    ( id)
+  hom-set-Large-Poset
+    ( λ l → l)
     ( Subgroup-Large-Poset G)
     ( powerset-Large-Poset (type-Group G))
 map-hom-Large-Preorder
@@ -490,6 +506,17 @@ map-hom-Large-Preorder
 preserves-order-hom-Large-Preorder
   ( subset-subgroup-hom-large-poset-Group G) =
   preserves-order-subset-Subgroup G
+```
+
+### The type of subgroups of a group is a set
+
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  is-set-Subgroup : {l2 : Level} → is-set (Subgroup l2 G)
+  is-set-Subgroup = is-set-type-Poset (Subgroup-Poset _ G)
 ```
 
 ### Every subgroup induces two equivalence relations
@@ -526,7 +553,7 @@ module _
     tr
       ( is-in-Subgroup G H)
       ( inv-left-div-Group G x y)
-      ( is-closed-under-inv-Subgroup G H
+      ( is-closed-under-inverses-Subgroup G H
         ( left-div-Group G x y)
         ( p))
 
@@ -580,7 +607,7 @@ module _
     tr
       ( is-in-Subgroup G H)
       ( inv-right-div-Group G x y)
-      ( is-closed-under-inv-Subgroup G H
+      ( is-closed-under-inverses-Subgroup G H
         ( right-div-Group G x y)
         ( p))
 
@@ -600,4 +627,70 @@ module _
   pr1 (pr2 left-eq-rel-Subgroup) = refl-left-sim-Subgroup
   pr1 (pr2 (pr2 left-eq-rel-Subgroup)) = symmetric-left-sim-Subgroup
   pr2 (pr2 (pr2 left-eq-rel-Subgroup)) = transitive-left-sim-Subgroup
+```
+
+### Any proposition `P` induces a subgroup of any group `G`
+
+The subset consisting of elements `x : G` such that `(1 ＝ x) ∨ P` holds is
+always a subgroup of `G`. This subgroup consists only of the unit element if `P`
+is false, and it is the [full subgroup](group-theory.full-subgroups.md)`if`P` is
+true.
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (P : Prop l2)
+  where
+
+  subset-subgroup-Prop : subset-Group (l1 ⊔ l2) G
+  subset-subgroup-Prop x =
+    disj-Prop (Id-Prop (set-Group G) (unit-Group G) x) P
+
+  contains-unit-subgroup-Prop :
+    contains-unit-subset-Group G subset-subgroup-Prop
+  contains-unit-subgroup-Prop =
+    inl-disj-Prop (Id-Prop (set-Group G) (unit-Group G) (unit-Group G)) P refl
+
+  is-closed-under-multiplication-subgroup-Prop' :
+    (x y : type-Group G) →
+    ((unit-Group G ＝ x) + type-Prop P) →
+    ((unit-Group G ＝ y) + type-Prop P) →
+    ((unit-Group G ＝ mul-Group G x y) + type-Prop P)
+  is-closed-under-multiplication-subgroup-Prop' ._ ._ (inl refl) (inl refl) =
+    inl (inv (left-unit-law-mul-Group G _))
+  is-closed-under-multiplication-subgroup-Prop' ._ y (inl refl) (inr q) =
+    inr q
+  is-closed-under-multiplication-subgroup-Prop' x y (inr p) (inl β) =
+    inr p
+  is-closed-under-multiplication-subgroup-Prop' x y (inr p) (inr q) =
+    inr p
+
+  is-closed-under-multiplication-subgroup-Prop :
+    is-closed-under-multiplication-subset-Group G subset-subgroup-Prop
+  is-closed-under-multiplication-subgroup-Prop x y H K =
+    apply-twice-universal-property-trunc-Prop H K
+      ( disj-Prop (Id-Prop (set-Group G) _ _) P)
+      ( λ H' K' →
+        unit-trunc-Prop
+          ( is-closed-under-multiplication-subgroup-Prop' x y H' K'))
+
+  is-closed-under-inverses-subgroup-Prop' :
+    (x : type-Group G) → ((unit-Group G ＝ x) + type-Prop P) →
+    ((unit-Group G ＝ inv-Group G x) + type-Prop P)
+  is-closed-under-inverses-subgroup-Prop' ._ (inl refl) =
+    inl (inv (inv-unit-Group G))
+  is-closed-under-inverses-subgroup-Prop' x (inr p) =
+    inr p
+
+  is-closed-under-inverses-subgroup-Prop :
+    is-closed-under-inverses-subset-Group G subset-subgroup-Prop
+  is-closed-under-inverses-subgroup-Prop x H =
+    apply-universal-property-trunc-Prop H
+      ( disj-Prop (Id-Prop (set-Group G) _ _) P)
+      ( unit-trunc-Prop ∘ is-closed-under-inverses-subgroup-Prop' x)
+
+  subgroup-Prop : Subgroup (l1 ⊔ l2) G
+  pr1 subgroup-Prop = subset-subgroup-Prop
+  pr1 (pr2 subgroup-Prop) = contains-unit-subgroup-Prop
+  pr1 (pr2 (pr2 subgroup-Prop)) = is-closed-under-multiplication-subgroup-Prop
+  pr2 (pr2 (pr2 subgroup-Prop)) = is-closed-under-inverses-subgroup-Prop
 ```

@@ -7,10 +7,8 @@ module order-theory.large-quotient-locales where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.universe-levels
 
 open import order-theory.greatest-lower-bounds-large-posets
@@ -104,10 +102,10 @@ module _
   type-Large-Quotient-Locale =
     type-Large-Subframe L Q
 
-  leq-Large-Quotient-Locale-Prop :
+  leq-prop-Large-Quotient-Locale :
     Large-Relation-Prop (λ l → α l ⊔ δ l) β type-Large-Quotient-Locale
-  leq-Large-Quotient-Locale-Prop =
-    leq-Large-Subframe-Prop L Q
+  leq-prop-Large-Quotient-Locale =
+    leq-prop-Large-Subframe L Q
 
   leq-Large-Quotient-Locale :
     Large-Relation (λ l → α l ⊔ δ l) β type-Large-Quotient-Locale
@@ -120,21 +118,21 @@ module _
     is-prop-leq-Large-Subframe L Q
 
   refl-leq-Large-Quotient-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( type-Large-Quotient-Locale)
       ( leq-Large-Quotient-Locale)
   refl-leq-Large-Quotient-Locale =
     refl-leq-Large-Subframe L Q
 
   transitive-leq-Large-Quotient-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( type-Large-Quotient-Locale)
       ( leq-Large-Quotient-Locale)
   transitive-leq-Large-Quotient-Locale =
     transitive-leq-Large-Subframe L Q
 
   antisymmetric-leq-Large-Quotient-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( type-Large-Quotient-Locale)
       ( leq-Large-Quotient-Locale)
   antisymmetric-leq-Large-Quotient-Locale =

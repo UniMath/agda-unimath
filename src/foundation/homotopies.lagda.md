@@ -11,6 +11,7 @@ open import foundation-core.homotopies public
 ```agda
 open import foundation.action-on-identifications-dependent-functions
 open import foundation.action-on-identifications-functions
+open import foundation.binary-equivalences
 open import foundation.dependent-pair-types
 open import foundation.function-extensionality
 open import foundation.homotopy-induction
@@ -21,8 +22,6 @@ open import foundation.universe-levels
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.functoriality-dependent-function-types
-open import foundation-core.functoriality-dependent-pair-types
-open import foundation-core.sections
 open import foundation-core.transport-along-identifications
 open import foundation-core.whiskering-homotopies
 ```
@@ -111,6 +110,38 @@ module _
   pr2 equiv-concat-htpy' = is-equiv-concat-htpy'
 ```
 
+### Binary concatenation
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g h k : (x : A) → B x}
+  where
+
+  is-binary-equiv-concat-htpy :
+    is-binary-equiv (λ (H : f ~ g) (K : g ~ h) → H ∙h K)
+  pr1 is-binary-equiv-concat-htpy K = is-equiv-concat-htpy' f K
+  pr2 is-binary-equiv-concat-htpy H = is-equiv-concat-htpy H h
+
+  equiv-binary-concat-htpy :
+    (H : f ~ g) (K : h ~ k) → (g ~ h) ≃ (f ~ k)
+  equiv-binary-concat-htpy H K = equiv-concat-htpy' f K ∘e equiv-concat-htpy H h
+```
+
+### Horizontal composition of homotopies
+
+```agda
+module _
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (a : A) → B a}
+  where
+
+  horizontal-concat-htpy² :
+    { H H' : f ~ g} → H ~ H' →
+    { K K' : g ~ h} → K ~ K' →
+    ( H ∙h K) ~ (H' ∙h K')
+  horizontal-concat-htpy² α β x = horizontal-concat-Id² (α x) (β x)
+```
+
 ### Transposing homotopies is an equivalence
 
 ```agda
@@ -122,7 +153,7 @@ module _
   is-equiv-left-transpose-htpy-concat :
     is-equiv (left-transpose-htpy-concat H K L)
   is-equiv-left-transpose-htpy-concat =
-    is-equiv-map-equiv-Π-equiv-family _
+    is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
 
   equiv-left-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (K ~ ((inv-htpy H) ∙h L))
@@ -132,7 +163,7 @@ module _
   is-equiv-right-transpose-htpy-concat :
     is-equiv (right-transpose-htpy-concat H K L)
   is-equiv-right-transpose-htpy-concat =
-    is-equiv-map-equiv-Π-equiv-family _
+    is-equiv-map-Π-is-fiberwise-equiv
       ( λ x → is-equiv-right-transpose-eq-concat (H x) (K x) (L x))
 
   equiv-right-transpose-htpy-concat : ((H ∙h K) ~ L) ≃ (H ~ (L ∙h (inv-htpy K)))
@@ -280,6 +311,6 @@ module _
 
 ## See also
 
-- We postulate that homotopies characterize identifications in (dependent)
-  function types in the file
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+- [Multivariable homotopies](foundation.multivariable-homotopies.md).
+- The [whiskering operations](foundation.whiskering-homotopies.md) on
+  homotopies.

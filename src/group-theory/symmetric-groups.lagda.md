@@ -85,7 +85,7 @@ module _
   where
 
   hom-symmetric-group-equiv-Set :
-    type-hom-Group (symmetric-Group X) (symmetric-Group Y)
+    hom-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 hom-symmetric-group-equiv-Set f = e ∘e (f ∘e inv-equiv e)
   pr2 hom-symmetric-group-equiv-Set f g =
     ( eq-equiv-eq-map-equiv refl) ∙
@@ -95,7 +95,7 @@ module _
         ( eq-equiv-eq-map-equiv refl))
 
   hom-inv-symmetric-group-equiv-Set :
-    type-hom-Group (symmetric-Group Y) (symmetric-Group X)
+    hom-Group (symmetric-Group Y) (symmetric-Group X)
   pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e (f ∘e e)
   pr2 hom-inv-symmetric-group-equiv-Set f g =
     ( eq-equiv-eq-map-equiv refl) ∙
@@ -149,7 +149,7 @@ module _
           ( id)))
 
   iso-symmetric-group-equiv-Set :
-    type-iso-Group (symmetric-Group X) (symmetric-Group Y)
+    iso-Group (symmetric-Group X) (symmetric-Group Y)
   pr1 iso-symmetric-group-equiv-Set = hom-symmetric-group-equiv-Set
   pr1 (pr2 iso-symmetric-group-equiv-Set) = hom-inv-symmetric-group-equiv-Set
   pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
@@ -200,7 +200,7 @@ module _
     preserves-mul-compute-symmetric-Concrete-Group
 
   compute-symmetric-Concrete-Group' :
-    type-iso-Group
+    iso-Group
       ( op-abstract-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group' =
@@ -210,7 +210,7 @@ module _
       ( equiv-group-compute-symmetric-Concrete-Group)
 
   compute-symmetric-Concrete-Group :
-    type-iso-Group
+    iso-Group
       ( abstract-group-Concrete-Group (symmetric-Concrete-Group A))
       ( symmetric-Group A)
   compute-symmetric-Concrete-Group =

@@ -636,7 +636,7 @@ module _
   compute-meet-order-theoretic-meet-semilattice-Meet-Semilattice x y = refl
 
   compute-order-theoretic-meet-semilattice-Meet-Semilattice :
-    type-iso-Semigroup
+    iso-Semigroup
       ( semigroup-Meet-Semilattice A)
       ( semigroup-Meet-Semilattice
         ( meet-semilattice-Order-Theoretic-Meet-Semilattice

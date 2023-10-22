@@ -100,7 +100,6 @@ paradox-Russell {l} H =
   no-fixed-points-neg
     ( R ∈-𝕍 R)
     ( pair (map-equiv β) (map-inv-equiv β))
-
   where
 
   K : is-small-universe l l
@@ -130,7 +129,7 @@ paradox-Russell {l} H =
     β = ( equiv-precomp α empty) ∘e
         ( ( left-unit-law-Σ-is-contr
             { B = λ t → (pr1 t) ∉-𝕍 (pr1 t)}
-            ( is-contr-total-path' R')
+            ( is-torsorial-path' R')
             ( pair R' refl)) ∘e
           ( ( inv-associative-Σ (𝕍 l) (_＝ R') (λ t → (pr1 t) ∉-𝕍 (pr1 t))) ∘e
             ( ( equiv-tot

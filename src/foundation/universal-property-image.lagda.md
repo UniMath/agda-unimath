@@ -200,7 +200,7 @@ module _
       {l : Level} (B : subtype l X) →
       ((a : A) → is-in-subtype B (f a)) → subtype-im f ⊆ B
     backward-implication-is-image-subtype-subtype-im B H x K =
-      apply-universal-property-trunc-Prop K (B x) (λ {(a , refl) → H a})
+      apply-universal-property-trunc-Prop K (B x) (λ where (a , refl) → H a)
 
     is-image-subtype-subtype-im : is-image-subtype f (subtype-im f)
     pr1 (is-image-subtype-subtype-im B) =

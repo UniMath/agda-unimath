@@ -23,7 +23,9 @@ open import group-theory.monoids
 
 ## Idea
 
-A monoid `M` can act on a type `A` by a monoid homomorphism `hom M (A → A)`.
+A [monoid](group-theory.monoids.md) `M` can **act** on a
+[set](foundation-core.sets.md) `A` by a
+[monoid homomorphism](group-theory.homomorphisms-monoids.md) `hom M (A → A)`.
 
 ## Definition
 
@@ -31,7 +33,7 @@ A monoid `M` can act on a type `A` by a monoid homomorphism `hom M (A → A)`.
 
 ```agda
 Monoid-Action : {l1 : Level} (l : Level) (M : Monoid l1) → UU (l1 ⊔ lsuc l)
-Monoid-Action l M = Σ (Set l) (λ X → type-hom-Monoid M (endo-Monoid X))
+Monoid-Action l M = Σ (Set l) (λ X → hom-Monoid M (endo-Monoid X))
 
 module _
   {l1 l2 : Level} (M : Monoid l1) (X : Monoid-Action l2 M)

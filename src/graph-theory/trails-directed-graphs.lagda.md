@@ -19,7 +19,9 @@ open import graph-theory.walks-directed-graphs
 
 ## Idea
 
-A trail in a directed graph is a walk that goes through each edge at most once.
+A **trail** in a [directed graph](graph-theory.directed-graphs.md) is a
+[walk](graph-theory.walks-directed-graphs.md) that goes through each edge at
+most once.
 
 ```agda
 module _
@@ -45,3 +47,10 @@ module _
     is-trail-walk-Directed-Graph (walk-trail-Directed-Graph t)
   is-trail-trail-Directed-Graph = pr2
 ```
+
+## External links
+
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Trail](https://www.wikidata.org/entity/Q17455228) on Wikidata
+- [Trail](https://mathworld.wolfram.com/Trail.html) at Wolfram Mathworld

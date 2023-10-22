@@ -88,12 +88,11 @@ module _
     mul-transitive-action-Concrete-Group G
       transitive-action-subgroup-Concrete-Group
 
-  is-transitive-mul-transitive-action-subgroup-Concrete-Group :
-    ( x y : type-coset-subgroup-Concrete-Group) →
-    ∃ ( type-Concrete-Group G)
-      ( λ g → mul-transitive-action-subgroup-Concrete-Group g x ＝ y)
-  is-transitive-mul-transitive-action-subgroup-Concrete-Group =
-    is-transitive-mul-transitive-action-Concrete-Group G
+  is-abstractly-transitive-transitive-action-subgroup-Concrete-Group :
+    is-abstractly-transitive-action-Concrete-Group G
+      action-subgroup-Concrete-Group
+  is-abstractly-transitive-transitive-action-subgroup-Concrete-Group =
+    is-abstractly-transitive-transitive-action-Concrete-Group G
       transitive-action-subgroup-Concrete-Group
 
   classifying-type-subgroup-Concrete-Group : UU (l1 ⊔ l2)

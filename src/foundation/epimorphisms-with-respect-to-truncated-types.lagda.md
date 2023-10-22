@@ -110,3 +110,10 @@ module _
       ( is-truncation-trunc X)
       ( H X)
 ```
+
+## See also
+
+- [Acyclic maps](synthetic-homotopy-theory.acyclic-maps.md)
+- [Dependent epimorphisms](foundation.dependent-epimorphisms.md)
+- [Epimorphisms](foundation.epimorphisms.md)
+- [Epimorphisms with respect to sets](foundation.epimorphisms-with-respect-to-sets.md)

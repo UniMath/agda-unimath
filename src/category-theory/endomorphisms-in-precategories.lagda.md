@@ -30,7 +30,7 @@ module _
   where
 
   type-endo-Precategory : UU l2
-  type-endo-Precategory = type-hom-Precategory C X X
+  type-endo-Precategory = hom-Precategory C X X
 
   comp-endo-Precategory :
     type-endo-Precategory → type-endo-Precategory → type-endo-Precategory
@@ -56,7 +56,7 @@ module _
   right-unit-law-comp-endo-Precategory = right-unit-law-comp-hom-Precategory C
 
   set-endo-Precategory : Set l2
-  set-endo-Precategory = hom-Precategory C X X
+  set-endo-Precategory = hom-set-Precategory C X X
 
   semigroup-endo-Precategory : Semigroup l2
   pr1 semigroup-endo-Precategory = set-endo-Precategory

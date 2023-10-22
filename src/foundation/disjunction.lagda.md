@@ -15,6 +15,7 @@ open import foundation.universe-levels
 
 open import foundation-core.coproduct-types
 open import foundation-core.decidable-propositions
+open import foundation-core.empty-types
 open import foundation-core.equivalences
 open import foundation-core.function-types
 open import foundation-core.propositions
@@ -111,4 +112,22 @@ abstract
       ( is-prop-type-Prop (hom-Prop (disj-Prop P Q) R))
       ( is-prop-type-Prop (conj-Prop (hom-Prop P R) (hom-Prop Q R)))
       ( elim-disj-Prop P Q R)
+```
+
+### The unit laws for disjunction
+
+```agda
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  map-left-unit-law-disj-is-empty-Prop :
+    is-empty (type-Prop P) → type-disj-Prop P Q → type-Prop Q
+  map-left-unit-law-disj-is-empty-Prop f =
+    elim-disj-Prop P Q Q (ex-falso ∘ f , id)
+
+  map-right-unit-law-disj-is-empty-Prop :
+    is-empty (type-Prop Q) → type-disj-Prop P Q → type-Prop P
+  map-right-unit-law-disj-is-empty-Prop f =
+    elim-disj-Prop P Q P (id , ex-falso ∘ f)
 ```

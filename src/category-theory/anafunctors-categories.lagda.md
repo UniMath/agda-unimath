@@ -10,14 +10,8 @@ module category-theory.anafunctors-categories where
 open import category-theory.anafunctors-precategories
 open import category-theory.categories
 open import category-theory.functors-categories
-open import category-theory.functors-precategories
-open import category-theory.isomorphisms-in-precategories
-open import category-theory.precategories
 
-open import foundation.action-on-identifications-functions
-open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
-open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.universe-levels
 ```
@@ -54,7 +48,7 @@ module _
     (X Y : obj-Category C) (U : obj-Category D)
     (u : object-anafunctor-Category X U)
     (V : obj-Category D) (v : object-anafunctor-Category Y V) →
-    type-hom-Category C X Y → type-hom-Category D U V
+    hom-Category C X Y → hom-Category D U V
   hom-anafunctor-Category =
     hom-anafunctor-Precategory
       ( precategory-Category C)

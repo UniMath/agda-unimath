@@ -7,6 +7,7 @@ module elementary-number-theory.addition-natural-numbers where
 <details><summary>Imports</summary>
 
 ```agda
+open import elementary-number-theory.equality-natural-numbers
 open import elementary-number-theory.natural-numbers
 
 open import foundation.action-on-identifications-binary-functions
@@ -19,7 +20,7 @@ open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
 open import foundation.interchange-law
-open import foundation.negation
+open import foundation.negated-equality
 ```
 
 </details>
@@ -181,7 +182,7 @@ is-zero-sum-is-zero-summand-ℕ .zero-ℕ .zero-ℕ (pair refl refl) = refl
 
 ```agda
 neq-add-ℕ :
-  (m n : ℕ) → ¬ (m ＝ m +ℕ (succ-ℕ n))
+  (m n : ℕ) → m ≠ m +ℕ (succ-ℕ n)
 neq-add-ℕ (succ-ℕ m) n p =
   neq-add-ℕ m n
     ( ( is-injective-succ-ℕ p) ∙

@@ -34,6 +34,8 @@ open import foundation.type-arithmetic-dependent-pair-types
 open import foundation.universe-levels
 open import foundation.whiskering-homotopies
 
+open import foundation-core.torsorial-type-families
+
 open import orthogonal-factorization-systems.local-types
 ```
 
@@ -258,21 +260,20 @@ module _
     (e e' : extension-dependent-type i P f) → e ＝ e' → htpy-extension e e'
   htpy-eq-extension e .e refl = refl-htpy-extension e
 
-  is-contr-total-htpy-extension :
-    (e : extension-dependent-type i P f) →
-    is-contr (Σ (extension-dependent-type i P f) (htpy-extension e))
-  is-contr-total-htpy-extension e =
-    is-contr-total-Eq-structure
+  is-torsorial-htpy-extension :
+    (e : extension-dependent-type i P f) → is-torsorial (htpy-extension e)
+  is-torsorial-htpy-extension e =
+    is-torsorial-Eq-structure
       ( λ g G → coherence-htpy-extension e (g , G))
-      ( is-contr-total-htpy (map-extension e))
+      ( is-torsorial-htpy (map-extension e))
       ( map-extension e , refl-htpy)
-      ( is-contr-total-htpy (is-extension-map-extension e ∙h refl-htpy))
+      ( is-torsorial-htpy (is-extension-map-extension e ∙h refl-htpy))
 
   is-equiv-htpy-eq-extension :
     (e e' : extension-dependent-type i P f) → is-equiv (htpy-eq-extension e e')
   is-equiv-htpy-eq-extension e =
     fundamental-theorem-id
-      ( is-contr-total-htpy-extension e)
+      ( is-torsorial-htpy-extension e)
       ( htpy-eq-extension e)
 
   extensionality-extension :
@@ -298,7 +299,7 @@ module _
   inv-compute-total-extension-dependent-type :
     {P : B → UU l3} → total-extension-dependent-type i P ≃ ((y : B) → P y)
   inv-compute-total-extension-dependent-type =
-    ( right-unit-law-Σ-is-contr (λ f → is-contr-total-htpy' (f ∘ i))) ∘e
+    ( right-unit-law-Σ-is-contr (λ f → is-torsorial-htpy' (f ∘ i))) ∘e
     ( equiv-left-swap-Σ)
 
   compute-total-extension-dependent-type :
@@ -446,8 +447,7 @@ module _
       ( is-mono-is-emb g H B)
       ( λ j →
         is-emb-is-equiv
-          ( is-equiv-map-equiv-Π-equiv-family
-            ( λ x → ap g)
+          ( is-equiv-map-Π-is-fiberwise-equiv
             ( λ x → H (i x) (j (f x)))))
 ```
 

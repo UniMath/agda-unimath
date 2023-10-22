@@ -150,8 +150,7 @@ is-π-finite-Semigroup-of-Order {l} k n =
             ( λ X →
               is-proof-irrelevant-is-prop
                 ( is-prop-is-set _)
-                ( is-set-is-finite
-                  ( is-finite-has-cardinality n (pr2 X))))) ∘e
+                ( is-set-is-finite (is-finite-has-cardinality n (pr2 X))))) ∘e
           ( equiv-right-swap-Σ))
         ( λ X → id-equiv)) ∘e
       ( equiv-right-swap-Σ

@@ -12,11 +12,11 @@ open import elementary-number-theory.natural-numbers
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.identity-types
-open import foundation.isolated-points
+open import foundation.isolated-elements
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
-open import univalent-combinatorics.complements-isolated-points
+open import univalent-combinatorics.complements-isolated-elements
 open import univalent-combinatorics.cubes
 open import univalent-combinatorics.equality-finite-types
 open import univalent-combinatorics.equivalences-cubes
@@ -37,7 +37,7 @@ equiv-face-cube :
       ( map-axis-equiv-cube (succ-ℕ k) X Y e d a))
 equiv-face-cube k X Y e d a =
   pair
-    ( equiv-complement-point-UU-Fin k
+    ( equiv-complement-element-UU-Fin k
       ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d)
       ( pair
         ( dim-cube-UU-Fin (succ-ℕ k) Y)
@@ -48,7 +48,7 @@ equiv-face-cube k X Y e d a =
       ( equiv-tr
         ( axis-cube (succ-ℕ k) Y)
         ( inv
-          ( natural-inclusion-equiv-complement-isolated-point
+          ( natural-inclusion-equiv-complement-isolated-element
             ( dim-equiv-cube (succ-ℕ k) X Y e)
             ( pair d
               ( λ z →
@@ -68,7 +68,7 @@ equiv-face-cube k X Y e d a =
             ( refl)
             ( d')))) ∘e
       ( axis-equiv-cube (succ-ℕ k) X Y e
-        ( inclusion-complement-point-UU-Fin k
+        ( inclusion-complement-element-UU-Fin k
           ( pair (dim-cube-UU-Fin (succ-ℕ k) X) d) d')))
 
 cube-with-labeled-faces :

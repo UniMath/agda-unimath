@@ -11,9 +11,12 @@ open import structured-types.commuting-squares-of-pointed-maps public
 open import structured-types.conjugation-pointed-types public
 open import structured-types.constant-maps-pointed-types public
 open import structured-types.contractible-pointed-types public
+open import structured-types.cyclic-types public
 open import structured-types.dependent-products-h-spaces public
 open import structured-types.dependent-products-pointed-types public
 open import structured-types.dependent-products-wild-monoids public
+open import structured-types.dependent-types-equipped-with-automorphisms public
+open import structured-types.equivalences-types-equipped-with-automorphisms public
 open import structured-types.equivalences-types-equipped-with-endomorphisms public
 open import structured-types.faithful-pointed-maps public
 open import structured-types.fibers-of-pointed-maps public
@@ -31,6 +34,7 @@ open import structured-types.magmas public
 open import structured-types.mere-equivalences-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-h-spaces public
 open import structured-types.morphisms-magmas public
+open import structured-types.morphisms-types-equipped-with-automorphisms public
 open import structured-types.morphisms-types-equipped-with-endomorphisms public
 open import structured-types.morphisms-wild-monoids public
 open import structured-types.noncoherent-h-spaces public
@@ -45,6 +49,7 @@ open import structured-types.pointed-sections public
 open import structured-types.pointed-types public
 open import structured-types.pointed-types-equipped-with-automorphisms public
 open import structured-types.pointed-unit-type public
+open import structured-types.sets-equipped-with-automorphisms public
 open import structured-types.symmetric-elements-involutive-types public
 open import structured-types.symmetric-h-spaces public
 open import structured-types.types-equipped-with-automorphisms public

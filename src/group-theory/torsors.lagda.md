@@ -21,6 +21,7 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtype-identity-principle
+open import foundation.torsorial-type-families
 open import foundation.transport-along-identifications
 open import foundation.universe-levels
 
@@ -97,7 +98,7 @@ module _
 
   mul-hom-Torsor-Abstract-Group :
     {l : Level} (X : Torsor-Abstract-Group l) →
-    type-hom-Group G (symmetric-Group (set-Torsor-Abstract-Group X))
+    hom-Group G (symmetric-Group (set-Torsor-Abstract-Group X))
   mul-hom-Torsor-Abstract-Group X = pr2 (action-Torsor-Abstract-Group X)
 
   equiv-mul-Torsor-Abstract-Group :
@@ -153,11 +154,11 @@ module _
   equiv-eq-Torsor-Abstract-Group .X refl =
     id-equiv-Torsor-Abstract-Group
 
-  is-contr-total-equiv-Torsor-Abstract-Group :
-    is-contr (Σ (Torsor-Abstract-Group G l2) (equiv-Torsor-Abstract-Group))
-  is-contr-total-equiv-Torsor-Abstract-Group =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-equiv-Abstract-Group-Action G
+  is-torsorial-equiv-Torsor-Abstract-Group :
+    is-torsorial equiv-Torsor-Abstract-Group
+  is-torsorial-equiv-Torsor-Abstract-Group =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv-Abstract-Group-Action G
         ( action-Torsor-Abstract-Group G X))
       ( is-prop-is-torsor-Abstract-Group G)
       ( action-Torsor-Abstract-Group G X)
@@ -169,7 +170,7 @@ module _
     is-equiv (equiv-eq-Torsor-Abstract-Group Y)
   is-equiv-equiv-eq-Torsor-Abstract-Group =
     fundamental-theorem-id
-      is-contr-total-equiv-Torsor-Abstract-Group
+      is-torsorial-equiv-Torsor-Abstract-Group
       equiv-eq-Torsor-Abstract-Group
 
   eq-equiv-Torsor-Abstract-Group :
@@ -214,12 +215,10 @@ module _
   htpy-eq-equiv-Torsor-Abstract-Group .e refl =
     refl-htpy-equiv-Torsor-Abstract-Group
 
-  is-contr-total-htpy-equiv-Torsor-Abstract-Group :
-    is-contr
-      ( Σ ( equiv-Torsor-Abstract-Group G X Y)
-          ( htpy-equiv-Torsor-Abstract-Group))
-  is-contr-total-htpy-equiv-Torsor-Abstract-Group =
-    is-contr-total-htpy-equiv-Abstract-Group-Action G
+  is-torsorial-htpy-equiv-Torsor-Abstract-Group :
+    is-torsorial htpy-equiv-Torsor-Abstract-Group
+  is-torsorial-htpy-equiv-Torsor-Abstract-Group =
+    is-torsorial-htpy-equiv-Abstract-Group-Action G
       ( action-Torsor-Abstract-Group G X)
       ( action-Torsor-Abstract-Group G Y)
       ( e)
@@ -229,7 +228,7 @@ module _
     is-equiv (htpy-eq-equiv-Torsor-Abstract-Group f)
   is-equiv-htpy-eq-equiv-Torsor-Abstract-Group =
     fundamental-theorem-id
-      is-contr-total-htpy-equiv-Torsor-Abstract-Group
+      is-torsorial-htpy-equiv-Torsor-Abstract-Group
       htpy-eq-equiv-Torsor-Abstract-Group
 
   extensionality-equiv-Torsor-Abstract-Group :
@@ -655,8 +654,18 @@ module _
         ( principal-Torsor-Abstract-Group G))
       ( is-set-type-Group G)
 
+  classifying-type-Group : UU (lsuc l1)
+  classifying-type-Group = classifying-type-Concrete-Group concrete-group-Group
+
+  shape-Group : classifying-type-Group
+  shape-Group = shape-Concrete-Group concrete-group-Group
+
+  is-0-connected-classifying-type-Group : is-0-connected classifying-type-Group
+  is-0-connected-classifying-type-Group =
+    is-0-connected-classifying-type-Concrete-Group concrete-group-Group
+
   abstract-group-concrete-group-Group :
-    type-iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
+    iso-Group (abstract-group-Concrete-Group concrete-group-Group) G
   abstract-group-concrete-group-Group =
     iso-equiv-Group
       ( abstract-group-Concrete-Group concrete-group-Group)
@@ -672,7 +681,7 @@ module _
   where
 
   map-Torsor-Abstract-Group :
-    type-hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
+    hom-Group G H → Torsor-Abstract-Group G l1 → Torsor-Abstract-Group H l2
   pr1 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (pr1 (map-Torsor-Abstract-Group f X)) = {!!}
   pr2 (map-Torsor-Abstract-Group f X) = {!!}

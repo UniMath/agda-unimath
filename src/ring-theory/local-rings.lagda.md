@@ -29,8 +29,8 @@ ring of which the non-invertible elements form an ideal is a local ring.
 ## Definition
 
 ```agda
-is-local-ring-Prop : {l : Level} (R : Ring l) → Prop l
-is-local-ring-Prop R =
+is-local-prop-Ring : {l : Level} (R : Ring l) → Prop l
+is-local-prop-Ring R =
   Π-Prop
     ( type-Ring R)
     ( λ a →
@@ -40,14 +40,14 @@ is-local-ring-Prop R =
           function-Prop
             ( is-invertible-element-Ring R (add-Ring R a b))
             ( disj-Prop
-              ( is-invertible-element-ring-Prop R a)
-              ( is-invertible-element-ring-Prop R b))))
+              ( is-invertible-element-prop-Ring R a)
+              ( is-invertible-element-prop-Ring R b))))
 
 is-local-Ring : {l : Level} → Ring l → UU l
-is-local-Ring R = type-Prop (is-local-ring-Prop R)
+is-local-Ring R = type-Prop (is-local-prop-Ring R)
 
 is-prop-is-local-Ring : {l : Level} (R : Ring l) → is-prop (is-local-Ring R)
-is-prop-is-local-Ring R = is-prop-type-Prop (is-local-ring-Prop R)
+is-prop-is-local-Ring R = is-prop-type-Prop (is-local-prop-Ring R)
 
 Local-Ring : (l : Level) → UU (lsuc l)
 Local-Ring l = Σ (Ring l) is-local-Ring

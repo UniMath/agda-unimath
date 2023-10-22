@@ -53,7 +53,7 @@ homomorphism `R → opposite-Ring (endomorphism-ring-Ab M)`.
 left-module-Ring :
   {l1 : Level} (l2 : Level) (R : Ring l1) → UU (l1 ⊔ lsuc l2)
 left-module-Ring l2 R =
-  Σ (Ab l2) (λ A → type-hom-Ring R (endomorphism-ring-Ab A))
+  Σ (Ab l2) (λ A → hom-Ring R (endomorphism-ring-Ab A))
 
 module _
   {l1 l2 : Level} (R : Ring l1) (M : left-module-Ring l2 R)
@@ -119,7 +119,7 @@ module _
     endomorphism-ring-Ab ab-left-module-Ring
 
   mul-hom-left-module-Ring :
-    type-hom-Ring R endomorphism-ring-ab-left-module-Ring
+    hom-Ring R endomorphism-ring-ab-left-module-Ring
   mul-hom-left-module-Ring = pr2 M
 
   mul-left-module-Ring :
@@ -302,7 +302,7 @@ module _
 right-module-Ring :
   {l1 : Level} (l2 : Level) (R : Ring l1) → UU (l1 ⊔ lsuc l2)
 right-module-Ring l2 R =
-  Σ (Ab l2) (λ A → type-hom-Ring R (op-Ring (endomorphism-ring-Ab A)))
+  Σ (Ab l2) (λ A → hom-Ring R (op-Ring (endomorphism-ring-Ab A)))
 
 module _
   {l1 l2 : Level} (R : Ring l1) (M : right-module-Ring l2 R)
@@ -368,7 +368,7 @@ module _
     endomorphism-ring-Ab ab-right-module-Ring
 
   mul-hom-right-module-Ring :
-    type-hom-Ring R (op-Ring endomorphism-ring-ab-right-module-Ring)
+    hom-Ring R (op-Ring endomorphism-ring-ab-right-module-Ring)
   mul-hom-right-module-Ring = pr2 M
 
   mul-right-module-Ring :

@@ -7,10 +7,8 @@ module order-theory.powers-of-large-locales where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.binary-relations
 open import foundation.identity-types
 open import foundation.large-binary-relations
-open import foundation.propositions
 open import foundation.sets
 open import foundation.universe-levels
 
@@ -61,13 +59,13 @@ module _
   is-set-type-power-Large-Locale =
     is-set-type-Large-Locale power-Large-Locale
 
-  leq-power-Large-Locale-Prop :
+  leq-prop-power-Large-Locale :
     Large-Relation-Prop
       ( λ l2 → α l2 ⊔ l1)
       ( λ l2 l3 → β l2 l3 ⊔ l1)
       ( type-power-Large-Locale)
-  leq-power-Large-Locale-Prop =
-    leq-Large-Locale-Prop power-Large-Locale
+  leq-prop-power-Large-Locale =
+    leq-prop-Large-Locale power-Large-Locale
 
   leq-power-Large-Locale :
     Large-Relation
@@ -83,17 +81,19 @@ module _
     is-prop-leq-Large-Locale power-Large-Locale
 
   refl-leq-power-Large-Locale :
-    is-large-reflexive type-power-Large-Locale leq-power-Large-Locale
+    is-reflexive-Large-Relation type-power-Large-Locale leq-power-Large-Locale
   refl-leq-power-Large-Locale =
     refl-leq-Large-Locale power-Large-Locale
 
   antisymmetric-leq-power-Large-Locale :
-    is-large-antisymmetric type-power-Large-Locale leq-power-Large-Locale
+    is-antisymmetric-Large-Relation
+      ( type-power-Large-Locale)
+      ( leq-power-Large-Locale)
   antisymmetric-leq-power-Large-Locale =
     antisymmetric-leq-Large-Locale power-Large-Locale
 
   transitive-leq-power-Large-Locale :
-    is-large-transitive type-power-Large-Locale leq-power-Large-Locale
+    is-transitive-Large-Relation type-power-Large-Locale leq-power-Large-Locale
   transitive-leq-power-Large-Locale =
     transitive-leq-Large-Locale power-Large-Locale
 

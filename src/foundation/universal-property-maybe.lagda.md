@@ -42,7 +42,7 @@ module _
   ind-Maybe :
     ((x : A) → B (unit-Maybe x)) × (B exception-Maybe) → (x : Maybe A) → B x
   ind-Maybe (pair h b) (inl x) = h x
-  ind-Maybe (pair h b) (inr star) = b
+  ind-Maybe (pair h b) (inr _) = b
 
   abstract
     is-section-ind-Maybe : (ev-Maybe ∘ ind-Maybe) ~ id
@@ -51,7 +51,7 @@ module _
     is-retraction-ind-Maybe' :
       (h : (x : Maybe A) → B x) → (ind-Maybe (ev-Maybe h)) ~ h
     is-retraction-ind-Maybe' h (inl x) = refl
-    is-retraction-ind-Maybe' h (inr star) = refl
+    is-retraction-ind-Maybe' h (inr _) = refl
 
     is-retraction-ind-Maybe : (ind-Maybe ∘ ev-Maybe) ~ id
     is-retraction-ind-Maybe h = eq-htpy (is-retraction-ind-Maybe' h)

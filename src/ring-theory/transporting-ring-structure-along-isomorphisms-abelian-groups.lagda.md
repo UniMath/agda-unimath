@@ -46,7 +46,7 @@ transported ring structure.
 ```agda
 module _
   {l1 l2 : Level} (R : Ring l1) (A : Ab l2)
-  (f : type-iso-Ab (ab-Ring R) A)
+  (f : iso-Ab (ab-Ring R) A)
   where
 
   one-transport-ring-structure-iso-Ab : type-Ab A
@@ -155,7 +155,7 @@ module _
         ( inv (is-retraction-map-inv-iso-Ab (ab-Ring R) A f y)))
 
   hom-iso-transport-ring-structure-iso-Ab :
-    type-hom-Ring R transport-ring-structure-iso-Ab
+    hom-Ring R transport-ring-structure-iso-Ab
   pr1 hom-iso-transport-ring-structure-iso-Ab =
     hom-iso-Ab (ab-Ring R) A f
   pr1 (pr2 hom-iso-transport-ring-structure-iso-Ab) =
@@ -164,12 +164,12 @@ module _
     refl
 
   is-iso-iso-transport-ring-structure-iso-Ab :
-    is-iso-hom-Ring
+    is-iso-Ring
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-transport-ring-structure-iso-Ab)
   is-iso-iso-transport-ring-structure-iso-Ab =
-    is-iso-hom-ring-is-iso-hom-Ab
+    is-iso-ring-is-iso-Ab
       ( R)
       ( transport-ring-structure-iso-Ab)
       ( hom-iso-transport-ring-structure-iso-Ab)

@@ -8,7 +8,6 @@ module group-theory.cyclic-groups where
 
 ```agda
 open import foundation.dependent-pair-types
-open import foundation.embeddings
 open import foundation.existential-quantification
 open import foundation.identity-types
 open import foundation.inhabited-subtypes
@@ -16,18 +15,11 @@ open import foundation.propositional-truncations
 open import foundation.propositions
 open import foundation.sets
 open import foundation.subtypes
-open import foundation.surjective-maps
 open import foundation.universe-levels
 
 open import group-theory.abelian-groups
-open import group-theory.addition-homomorphisms-abelian-groups
-open import group-theory.free-groups-with-one-generator
-open import group-theory.full-subgroups
 open import group-theory.generating-elements-groups
 open import group-theory.groups
-open import group-theory.homomorphisms-abelian-groups
-open import group-theory.homomorphisms-groups
-open import group-theory.subgroups-generated-by-elements-groups
 ```
 
 </details>
@@ -161,3 +153,7 @@ module _
   endomorphism rings. Furthermore, the multiplicative structure of these rings
   is commutative, so that groups equipped with a generating element are also
   equipped with the structure of a commutative ring.
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

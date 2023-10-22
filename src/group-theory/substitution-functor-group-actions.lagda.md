@@ -15,6 +15,7 @@ open import foundation.dependent-pair-types
 open import foundation.equivalence-classes
 open import foundation.equivalence-relations
 open import foundation.existential-quantification
+open import foundation.function-types
 open import foundation.identity-types
 open import foundation.propositional-truncations
 open import foundation.sets
@@ -39,7 +40,7 @@ Given a group homomorphism `f : G → H` and an H-set `Y`, we obtain a G-actio o
 
 ```agda
 module _
-  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : type-hom-Group G H)
+  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : hom-Group G H)
   where
 
   obj-subst-Abstract-Group-Action :
@@ -54,8 +55,8 @@ module _
   hom-subst-Abstract-Group-Action :
     {l3 l4 : Level}
     (X : Abstract-Group-Action H l3) (Y : Abstract-Group-Action H l4) →
-    type-hom-Abstract-Group-Action H X Y →
-    type-hom-Abstract-Group-Action G
+    hom-Abstract-Group-Action H X Y →
+    hom-Abstract-Group-Action G
       ( obj-subst-Abstract-Group-Action X)
       ( obj-subst-Abstract-Group-Action Y)
   pr1 (hom-subst-Abstract-Group-Action X Y h) = pr1 h
@@ -71,8 +72,8 @@ module _
   preserves-comp-subst-Abstract-Group-Action :
     {l3 l4 l5 : Level} (X : Abstract-Group-Action H l3)
     (Y : Abstract-Group-Action H l4) (Z : Abstract-Group-Action H l5)
-    (g : type-hom-Abstract-Group-Action H Y Z)
-    (f : type-hom-Abstract-Group-Action H X Y) →
+    (g : hom-Abstract-Group-Action H Y Z)
+    (f : hom-Abstract-Group-Action H X Y) →
     Id
       ( hom-subst-Abstract-Group-Action X Z
         ( comp-hom-Abstract-Group-Action H X Y Z g f))
@@ -85,18 +86,18 @@ module _
   preserves-comp-subst-Abstract-Group-Action X Y Z g f = refl
 
   subst-Abstract-Group-Action :
-    functor-Large-Precategory
+    functor-Large-Precategory (λ l → l)
       ( Abstract-Group-Action-Large-Precategory H)
       ( Abstract-Group-Action-Large-Precategory G)
-      ( λ l → l)
   obj-functor-Large-Precategory subst-Abstract-Group-Action =
     obj-subst-Abstract-Group-Action
-  hom-functor-Large-Precategory subst-Abstract-Group-Action {l1} {l2} {X} {Y} =
+  hom-functor-Large-Precategory subst-Abstract-Group-Action {X = X} {Y} =
     hom-subst-Abstract-Group-Action X Y
   preserves-comp-functor-Large-Precategory subst-Abstract-Group-Action
     {l1} {l2} {l3} {X} {Y} {Z} =
     preserves-comp-subst-Abstract-Group-Action X Y Z
-  preserves-id-functor-Large-Precategory subst-Abstract-Group-Action {l1} {X} =
+  preserves-id-functor-Large-Precategory
+    subst-Abstract-Group-Action {l1} {X} =
     preserves-id-subst-Abstract-Group-Action X
 ```
 
@@ -106,7 +107,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : type-hom-Group G H)
+  {l1 l2 : Level} {G : Group l1} {H : Group l2} (f : hom-Group G H)
   where
 
   preset-obj-left-adjoint-subst-Abstract-Group-Action :
@@ -158,15 +159,14 @@ module _
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
         ( h' , x')
         ( h , x))
-      ( λ { (g , p , q) →
-            intro-∃
-              ( inv-Group G g)
-              ( pair
-                ( ( ap
-                    ( mul-Group' H h')
-                    ( preserves-inv-hom-Group G H f g)) ∙
-                  ( inv (transpose-eq-mul-Group' H p)))
-                ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q)))})
+      ( λ (g , p , q) →
+        intro-∃
+          ( inv-Group G g)
+          ( ( ( ap
+                ( mul-Group' H h')
+                ( preserves-inv-hom-Group G H f g)) ∙
+              ( inv (transpose-eq-mul-Group' H p))) ,
+            ( inv (transpose-eq-mul-Abstract-Group-Action G X g x x' q))))
   pr2
     ( pr2
       ( pr2
@@ -177,28 +177,27 @@ module _
         ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action X)
         ( h , x)
         ( h'' , x''))
-      ( λ { (g , p , q) →
-            apply-universal-property-trunc-Prop d
-              ( pr1
-                ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action
-                  ( X))
-                ( h , x)
-                ( h'' , x''))
-              ( λ { (g' , p' , q') →
-                    intro-∃
-                      ( mul-Group G g' g)
-                      ( pair
-                        ( ( ap
-                            ( mul-Group' H h)
-                            ( preserves-mul-hom-Group G H f g' g)) ∙
-                          ( ( associative-mul-Group H
-                              ( map-hom-Group G H f g')
-                              ( map-hom-Group G H f g)
-                              ( h)) ∙
-                            ( ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
-                              ( p'))))
-                        ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
-                          ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))})})
+      ( λ (g , p , q) →
+        apply-universal-property-trunc-Prop d
+          ( pr1
+            ( Equivalence-Relation-obj-left-adjoint-subst-Abstract-Group-Action
+              ( X))
+            ( h , x)
+            ( h'' , x''))
+          ( λ (g' , p' , q') →
+            intro-∃
+              ( mul-Group G g' g)
+              ( ( ( ap
+                    ( mul-Group' H h)
+                    ( preserves-mul-hom-Group G H f g' g)) ∙
+                  ( ( associative-mul-Group H
+                      ( map-hom-Group G H f g')
+                      ( map-hom-Group G H f g)
+                      ( h)) ∙
+                    ( ( ap (mul-Group H (map-hom-Group G H f g')) p) ∙
+                      ( p')))) ,
+                ( ( preserves-mul-Abstract-Group-Action G X g' g x) ∙
+                  ( ap (mul-Abstract-Group-Action G X g') q ∙ q')))))
 
   set-left-adjoint-subst-Abstract-Group-Action :
     {l3 : Level} → Abstract-Group-Action G l3 →

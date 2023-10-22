@@ -24,6 +24,7 @@ open import foundation.fundamental-theorem-of-identity-types
 open import foundation.homotopies
 open import foundation.identity-types
 open import foundation.propositions
+open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-coproduct-types
 open import foundation.unit-type
 open import foundation.universe-levels
@@ -38,9 +39,10 @@ open import univalent-combinatorics.standard-finite-types
 
 ## Idea
 
-A walk in an undirected graph consists of a list of edges that connect the
-starting point with the end point. Walks may repeat edges and pass through the
-same vertex multiple times.
+A **walk** in an [undirected graph](graph-theory.undirected-graphs.md) consists
+of a [list](lists.lists.md) of edges that connect the starting point with the
+end point. Walks may repeat edges and pass through the same vertex multiple
+times.
 
 ## Definitions
 
@@ -277,7 +279,7 @@ module _
     is-contr
       ( vertex-on-walk-Undirected-Graph G (refl-walk-Undirected-Graph {x = x}))
   is-contr-vertex-on-walk-refl-walk-Undirected-Graph =
-    is-contr-total-path x
+    is-torsorial-path x
 ```
 
 ### The type of vertices on a walk is equivalent to `Fin (n + 1)` where `n` is the length of the walk
@@ -300,7 +302,7 @@ module _
     ( equiv-coprod
       ( compute-vertex-on-walk-Undirected-Graph w)
       ( equiv-is-contr
-        ( is-contr-total-path (other-element-unordered-pair p y))
+        ( is-torsorial-path (other-element-unordered-pair p y))
         ( is-contr-unit))) ∘e
     ( left-distributive-Σ-coprod
       ( vertex-Undirected-Graph G)
@@ -339,7 +341,7 @@ module _
     ( equiv-coprod
       ( compute-edge-on-walk-Undirected-Graph w)
       ( equiv-is-contr
-        ( is-contr-total-path (pair p e))
+        ( is-torsorial-path (pair p e))
         ( is-contr-unit))) ∘e
     ( left-distributive-Σ-coprod
       ( total-edge-Undirected-Graph G)
@@ -585,15 +587,15 @@ module _
   pr1 refl-constant-walk-Undirected-Graph = refl-walk-Undirected-Graph
   pr2 refl-constant-walk-Undirected-Graph = refl
 
-  is-contr-total-constant-walk-Undirected-Graph :
-    is-contr (Σ (vertex-Undirected-Graph G) constant-walk-Undirected-Graph)
-  pr1 (pr1 is-contr-total-constant-walk-Undirected-Graph) = x
-  pr2 (pr1 is-contr-total-constant-walk-Undirected-Graph) =
+  is-torsorial-constant-walk-Undirected-Graph :
+    is-torsorial constant-walk-Undirected-Graph
+  pr1 (pr1 is-torsorial-constant-walk-Undirected-Graph) = x
+  pr2 (pr1 is-torsorial-constant-walk-Undirected-Graph) =
     refl-constant-walk-Undirected-Graph
-  pr2 is-contr-total-constant-walk-Undirected-Graph
+  pr2 is-torsorial-constant-walk-Undirected-Graph
     (v , refl-walk-Undirected-Graph , refl) =
     refl
-  pr2 is-contr-total-constant-walk-Undirected-Graph
+  pr2 is-torsorial-constant-walk-Undirected-Graph
     (.(other-element-unordered-pair p _) ,
       cons-walk-Undirected-Graph p e w , ())
 
@@ -606,7 +608,7 @@ module _
     is-equiv (constant-walk-eq-Undirected-Graph y)
   is-equiv-constant-walk-eq-Undirected-Graph =
     fundamental-theorem-id
-      ( is-contr-total-constant-walk-Undirected-Graph)
+      ( is-torsorial-constant-walk-Undirected-Graph)
       ( constant-walk-eq-Undirected-Graph)
 
   equiv-constant-walk-eq-Undirected-Graph :
@@ -622,3 +624,10 @@ module _
   eq-constant-walk-Undirected-Graph {y} =
     map-inv-is-equiv (is-equiv-constant-walk-eq-Undirected-Graph y)
 ```
+
+## External links
+
+- [Path](https://www.wikidata.org/entity/Q917421) on Wikidata
+- [Path (graph theory)](<https://en.wikipedia.org/wiki/Path_(graph_theory)>) at
+  Wikipedia
+- [Walk](https://mathworld.wolfram.com/Walk.html) at Wolfram Mathworld

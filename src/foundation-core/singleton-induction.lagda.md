@@ -51,25 +51,25 @@ compute-ind-is-singleton a H B = pr2 (H B)
 ### A type satisfies singleton induction if and only if it is contractible
 
 ```agda
-ind-singleton-is-contr :
+ind-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
   (B : A → UU l2) → B a → (x : A) → B x
-ind-singleton-is-contr a is-contr-A B b x =
+ind-singleton a is-contr-A B b x =
   tr B ((inv (contraction is-contr-A a)) ∙ (contraction is-contr-A x)) b
 
-compute-ind-singleton-is-contr :
+compute-ind-singleton :
   {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
   (B : A → UU l2) →
-  ((ev-point a {B}) ∘ (ind-singleton-is-contr a is-contr-A B)) ~ id
-compute-ind-singleton-is-contr a is-contr-A B b =
+  ((ev-point a {B}) ∘ (ind-singleton a is-contr-A B)) ~ id
+compute-ind-singleton a is-contr-A B b =
   ap (λ ω → tr B ω b) (left-inv (contraction is-contr-A a))
 
 is-singleton-is-contr :
   {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
 pr1 (is-singleton-is-contr a is-contr-A B) =
-  ind-singleton-is-contr a is-contr-A B
+  ind-singleton a is-contr-A B
 pr2 (is-singleton-is-contr a is-contr-A B) =
-  compute-ind-singleton-is-contr a is-contr-A B
+  compute-ind-singleton a is-contr-A B
 
 abstract
   is-contr-ind-singleton :

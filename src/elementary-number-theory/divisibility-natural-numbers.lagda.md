@@ -20,6 +20,7 @@ open import foundation.dependent-pair-types
 open import foundation.empty-types
 open import foundation.identity-types
 open import foundation.logical-equivalences
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositional-maps
 open import foundation.propositions
@@ -178,10 +179,10 @@ leq-quotient-div-ℕ' d (succ-ℕ x) f H =
 
 ```agda
 le-div-succ-ℕ :
-  (d x : ℕ) → div-ℕ d (succ-ℕ x) → ¬ (d ＝ succ-ℕ x) → le-ℕ d (succ-ℕ x)
+  (d x : ℕ) → div-ℕ d (succ-ℕ x) → d ≠ succ-ℕ x → le-ℕ d (succ-ℕ x)
 le-div-succ-ℕ d x H f = le-leq-neq-ℕ (leq-div-succ-ℕ d x H) f
 
-le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → ¬ (d ＝ x) → le-ℕ d x
+le-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → d ≠ x → le-ℕ d x
 le-div-ℕ d x H K f = le-leq-neq-ℕ (leq-div-ℕ d x H K) f
 ```
 

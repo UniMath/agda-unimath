@@ -115,7 +115,7 @@ module _
   where
 
   hom-symmetric-group-loop-group-Set :
-    type-hom-Group (loop-group-Set X) (symmetric-Group X)
+    hom-Group (loop-group-Set X) (symmetric-Group X)
   pr1 hom-symmetric-group-loop-group-Set =
     map-hom-symmetric-group-loop-group-Set X X
   pr2 hom-symmetric-group-loop-group-Set p q =
@@ -123,7 +123,7 @@ module _
     ( inv (compute-equiv-eq-concat (inv q) (inv p)))
 
   hom-inv-symmetric-group-loop-group-Set :
-    type-hom-Group (symmetric-Group X) (loop-group-Set X)
+    hom-Group (symmetric-Group X) (loop-group-Set X)
   pr1 hom-inv-symmetric-group-loop-group-Set =
     map-hom-inv-symmetric-group-loop-group-Set X X
   pr2 hom-inv-symmetric-group-loop-group-Set f g =
@@ -185,7 +185,7 @@ module _
           ( id)))
 
   iso-symmetric-group-loop-group-Set :
-    type-iso-Group (loop-group-Set X) (symmetric-Group X)
+    iso-Group (loop-group-Set X) (symmetric-Group X)
   pr1 iso-symmetric-group-loop-group-Set = hom-symmetric-group-loop-group-Set
   pr1 (pr2 iso-symmetric-group-loop-group-Set) =
     hom-inv-symmetric-group-loop-group-Set
@@ -203,7 +203,7 @@ module _
   where
 
   hom-abstract-automorphism-group-loop-group-Set :
-    type-hom-Group
+    hom-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
@@ -238,7 +238,7 @@ module _
           ( eq-is-prop is-prop-type-trunc-Prop)))
 
   hom-inv-abstract-automorphism-group-loop-group-Set :
-    type-hom-Group
+    hom-Group
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
       ( loop-group-Set X)
@@ -325,7 +325,7 @@ module _
           ( id)))
 
   iso-abstract-automorphism-group-loop-group-Set :
-    type-iso-Group
+    iso-Group
       ( loop-group-Set X)
       ( abstract-group-Concrete-Group
         ( Automorphism-Group (Set-1-Type l) X))
@@ -347,7 +347,7 @@ module _
   where
 
   iso-loop-group-equiv-Set :
-    type-iso-Group
+    iso-Group
       ( loop-group-Set X)
       ( loop-group-Set Y)
   iso-loop-group-equiv-Set =

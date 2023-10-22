@@ -36,21 +36,21 @@ module _
   {l1 l2 : Level} {I : UU l1} (x : I → type-Large-Poset P l2)
   where
 
-  is-upper-bound-family-of-elements-Large-Poset-Prop :
+  is-upper-bound-prop-family-of-elements-Large-Poset :
     {l3 : Level} (y : type-Large-Poset P l3) → Prop (β l2 l3 ⊔ l1)
-  is-upper-bound-family-of-elements-Large-Poset-Prop y =
-    Π-Prop I (λ i → leq-Large-Poset-Prop P (x i) y)
+  is-upper-bound-prop-family-of-elements-Large-Poset y =
+    Π-Prop I (λ i → leq-prop-Large-Poset P (x i) y)
 
   is-upper-bound-family-of-elements-Large-Poset :
     {l3 : Level} (y : type-Large-Poset P l3) → UU (β l2 l3 ⊔ l1)
   is-upper-bound-family-of-elements-Large-Poset y =
-    type-Prop (is-upper-bound-family-of-elements-Large-Poset-Prop y)
+    type-Prop (is-upper-bound-prop-family-of-elements-Large-Poset y)
 
   is-prop-is-upper-bound-family-of-elements-Large-Poset :
     {l3 : Level} (y : type-Large-Poset P l3) →
     is-prop (is-upper-bound-family-of-elements-Large-Poset y)
   is-prop-is-upper-bound-family-of-elements-Large-Poset y =
-    is-prop-type-Prop (is-upper-bound-family-of-elements-Large-Poset-Prop y)
+    is-prop-type-Prop (is-upper-bound-prop-family-of-elements-Large-Poset y)
 ```
 
 ## Properties

@@ -19,7 +19,7 @@ open import foundation.equivalences
 open import foundation.function-types
 open import foundation.identity-types
 open import foundation.injective-maps
-open import foundation.negation
+open import foundation.negated-equality
 open import foundation.pairs-of-distinct-elements
 open import foundation.repetitions-of-values
 open import foundation.repetitions-sequences
@@ -68,8 +68,8 @@ second-repetition-of-values-sequence-Fin k f =
 
 distinction-repetition-of-values-sequence-Fin :
   (k : ℕ) (f : sequence (Fin k)) →
-  ¬ ( first-repetition-of-values-sequence-Fin k f ＝
-      second-repetition-of-values-sequence-Fin k f)
+  first-repetition-of-values-sequence-Fin k f ≠
+  second-repetition-of-values-sequence-Fin k f
 distinction-repetition-of-values-sequence-Fin k f =
   distinction-repetition-of-values f (repetition-of-values-sequence-Fin k f)
 

@@ -22,6 +22,7 @@ open import foundation.function-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.iterated-dependent-pair-types
 open import foundation.propositions
 open import foundation.sets
 open import foundation.type-arithmetic-dependent-pair-types
@@ -37,10 +38,10 @@ A groupoid is a category in which every morphism is an isomorphism.
 ## Definition
 
 ```agda
-is-groupoid-Category-Prop :
+is-groupoid-prop-Category :
   {l1 l2 : Level} (C : Category l1 l2) → Prop (l1 ⊔ l2)
-is-groupoid-Category-Prop C =
-  is-groupoid-Precategory-Prop (precategory-Category C)
+is-groupoid-prop-Category C =
+  is-groupoid-prop-Precategory (precategory-Category C)
 
 is-groupoid-Category :
   {l1 l2 : Level} (C : Category l1 l2) → UU (l1 ⊔ l2)
@@ -63,37 +64,37 @@ module _
   obj-Groupoid : UU l1
   obj-Groupoid = obj-Category category-Groupoid
 
-  hom-Groupoid : obj-Groupoid → obj-Groupoid → Set l2
+  hom-set-Groupoid : obj-Groupoid → obj-Groupoid → Set l2
+  hom-set-Groupoid = hom-set-Category category-Groupoid
+
+  hom-Groupoid : obj-Groupoid → obj-Groupoid → UU l2
   hom-Groupoid = hom-Category category-Groupoid
 
-  type-hom-Groupoid : obj-Groupoid → obj-Groupoid → UU l2
-  type-hom-Groupoid = type-hom-Category category-Groupoid
-
   id-hom-Groupoid :
-    {x : obj-Groupoid} → type-hom-Groupoid x x
+    {x : obj-Groupoid} → hom-Groupoid x x
   id-hom-Groupoid = id-hom-Category category-Groupoid
 
   comp-hom-Groupoid :
-    {x y z : obj-Groupoid} → type-hom-Groupoid y z →
-    type-hom-Groupoid x y → type-hom-Groupoid x z
+    {x y z : obj-Groupoid} → hom-Groupoid y z →
+    hom-Groupoid x y → hom-Groupoid x z
   comp-hom-Groupoid = comp-hom-Category category-Groupoid
 
   associative-comp-hom-Groupoid :
-    {x y z w : obj-Groupoid} (h : type-hom-Groupoid z w)
-    (g : type-hom-Groupoid y z) (f : type-hom-Groupoid x y) →
+    {x y z w : obj-Groupoid} (h : hom-Groupoid z w)
+    (g : hom-Groupoid y z) (f : hom-Groupoid x y) →
     ( comp-hom-Groupoid (comp-hom-Groupoid h g) f) ＝
     ( comp-hom-Groupoid h (comp-hom-Groupoid g f))
   associative-comp-hom-Groupoid =
     associative-comp-hom-Category category-Groupoid
 
   left-unit-law-comp-hom-Groupoid :
-    {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
+    {x y : obj-Groupoid} (f : hom-Groupoid x y) →
     ( comp-hom-Groupoid id-hom-Groupoid f) ＝ f
   left-unit-law-comp-hom-Groupoid =
     left-unit-law-comp-hom-Category category-Groupoid
 
   right-unit-law-comp-hom-Groupoid :
-    {x y : obj-Groupoid} (f : type-hom-Groupoid x y) →
+    {x y : obj-Groupoid} (f : hom-Groupoid x y) →
     ( comp-hom-Groupoid f id-hom-Groupoid) ＝ f
   right-unit-law-comp-hom-Groupoid =
     right-unit-law-comp-hom-Category category-Groupoid
@@ -151,16 +152,15 @@ module _
             ( λ yp →
               Σ ( Σ (pr1 yp ＝ x) (λ q → (q ∙ pr2 yp) ＝ refl))
                 ( λ ql → (pr2 yp ∙ pr1 ql) ＝ refl))))
-        ( is-contr-Σ
-          ( is-contr-total-path x)
-          ( x , refl)
-          ( is-contr-Σ
+        ( is-contr-iterated-Σ 2
+          ( is-torsorial-path x ,
+            ( x , refl) ,
             ( is-contr-equiv
               ( Σ (x ＝ x) (λ q → q ＝ refl))
               ( equiv-tot
                 ( λ q → equiv-concat (inv right-unit) refl))
-              ( is-contr-total-path' refl))
-            ( refl , refl)
+              ( is-torsorial-path' refl)) ,
+            ( refl , refl) ,
             ( is-proof-irrelevant-is-prop
               ( is-1-type-type-1-Type X x x refl refl)
               ( refl)))))
@@ -186,7 +186,7 @@ module _
   where
 
   1-type-Groupoid : 1-Type l1
-  1-type-Groupoid = obj-Category-1-Type (category-Groupoid G)
+  1-type-Groupoid = obj-1-type-Category (category-Groupoid G)
 ```
 
 #### The groupoid obtained from the 1-type induced by a groupoid `G` is `G` itself

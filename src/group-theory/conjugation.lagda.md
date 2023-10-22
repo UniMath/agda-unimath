@@ -377,7 +377,7 @@ module _
   {l : Level} (G : Group l)
   where
 
-  conjugation-hom-Group : type-Group G → type-hom-Group G G
+  conjugation-hom-Group : type-Group G → hom-Group G G
   pr1 (conjugation-hom-Group x) = conjugation-Group G x
   pr2 (conjugation-hom-Group x) = distributive-conjugation-mul-Group G x
 
@@ -385,7 +385,7 @@ module _
   pr1 (conjugation-equiv-Group x) = equiv-conjugation-Group G x
   pr2 (conjugation-equiv-Group x) = distributive-conjugation-mul-Group G x
 
-  conjugation-iso-Group : type-Group G → type-iso-Group G G
+  conjugation-iso-Group : type-Group G → iso-Group G G
   conjugation-iso-Group x = iso-equiv-Group G G (conjugation-equiv-Group x)
 
   preserves-integer-powers-conjugation-Group :

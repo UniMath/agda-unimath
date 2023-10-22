@@ -20,12 +20,14 @@ open import graph-theory.equivalences-undirected-graphs
 
 ## Idea
 
-A stereoisomerism between two `(A,B)`-enriched undirected graphs is an
-equivalence between their underlying undirected graphs preserving the shape of
-the vertices. This concept is derived from the concept of stereoisomerism of
-chemical compounds.
+A **stereoisomerism** between two
+[`(A,B)`-enriched undirected graphs](graph-theory.enriched-undirected-graphs.md)
+is an [equivalence](graph-theory.equivalences-undirected-graphs.md) between
+their underlying [undirected graphs](graph-theory.undirected-graphs.md)
+preserving the shape of the vertices. This concept is derived from the concept
+of stereoisomerism of chemical compounds.
 
-Note: It could be that we only want the shapes to be merely preserved.
+**Note:** It could be that we only want the shapes to be merely preserved.
 
 ## Definition
 
@@ -50,3 +52,8 @@ module _
             ( undirected-graph-Enriched-Undirected-Graph A B H)
             ( e))))
 ```
+
+## External links
+
+- [Stereoisomerism](https://www.wikidata.org/entity/Q47455153) on Wikidata
+- [Stereoisomerism](https://en.wikipedia.org/wiki/Stereoisomerism) at Wikipedia

@@ -21,13 +21,12 @@ open import foundation-core.contractible-types
 open import foundation-core.embeddings
 open import foundation-core.equivalences
 open import foundation-core.fibers-of-maps
-open import foundation-core.function-types
-open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.injective-maps
 open import foundation-core.propositions
 open import foundation-core.sets
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncated-types
 open import foundation-core.truncation-levels
 ```
@@ -87,11 +86,11 @@ module _
   Eq-eq-im x .x refl = refl-Eq-im x
 
   abstract
-    is-contr-total-Eq-im :
-      (x : im f) → is-contr (Σ (im f) (Eq-im x))
-    is-contr-total-Eq-im x =
-      is-contr-total-Eq-subtype
-        ( is-contr-total-path (pr1 x))
+    is-torsorial-Eq-im :
+      (x : im f) → is-torsorial (Eq-im x)
+    is-torsorial-Eq-im x =
+      is-torsorial-Eq-subtype
+        ( is-torsorial-path (pr1 x))
         ( λ x → is-prop-type-trunc-Prop)
         ( pr1 x)
         ( refl)
@@ -101,7 +100,7 @@ module _
     is-equiv-Eq-eq-im : (x y : im f) → is-equiv (Eq-eq-im x y)
     is-equiv-Eq-eq-im x =
       fundamental-theorem-id
-        ( is-contr-total-Eq-im x)
+        ( is-torsorial-Eq-im x)
         ( Eq-eq-im x)
 
   equiv-Eq-eq-im : (x y : im f) → (x ＝ y) ≃ Eq-im x y

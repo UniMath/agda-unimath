@@ -23,6 +23,7 @@ open import foundation-core.function-types
 open import foundation-core.identity-types
 open import foundation-core.propositional-maps
 open import foundation-core.propositions
+open import foundation-core.torsorial-type-families
 open import foundation-core.truncation-levels
 ```
 
@@ -156,15 +157,15 @@ type-hom-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → UU (l1 ⊔ l2)
 type-hom-Set A B = type-Set A → type-Set B
 
-is-set-type-hom-Set :
+is-set-hom-Set :
   {l1 l2 : Level} (A : Set l1) (B : Set l2) →
   is-set (type-hom-Set A B)
-is-set-type-hom-Set A B = is-set-function-type (is-set-type-Set B)
+is-set-hom-Set A B = is-set-function-type (is-set-type-Set B)
 
 hom-Set :
   {l1 l2 : Level} → Set l1 → Set l2 → Set (l1 ⊔ l2)
 pr1 (hom-Set A B) = type-hom-Set A B
-pr2 (hom-Set A B) = is-set-type-hom-Set A B
+pr2 (hom-Set A B) = is-set-hom-Set A B
 
 precomp-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →
@@ -205,9 +206,9 @@ module _
   equiv-eq-Set = equiv-eq-subuniverse is-set-Prop X
 
   abstract
-    is-contr-total-equiv-Set : is-contr (Σ (Set l) (type-equiv-Set X))
-    is-contr-total-equiv-Set =
-      is-contr-total-equiv-subuniverse is-set-Prop X
+    is-torsorial-equiv-Set : is-torsorial (λ (Y : Set l) → type-equiv-Set X Y)
+    is-torsorial-equiv-Set =
+      is-torsorial-equiv-subuniverse is-set-Prop X
 
   abstract
     is-equiv-equiv-eq-Set : (Y : Set l) → is-equiv (equiv-eq-Set Y)

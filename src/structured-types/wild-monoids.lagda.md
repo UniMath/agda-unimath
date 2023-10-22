@@ -10,13 +10,10 @@ module structured-types.wild-monoids where
 open import foundation.action-on-identifications-functions
 open import foundation.dependent-pair-types
 open import foundation.identity-types
-open import foundation.propositions
 open import foundation.unit-type
 open import foundation.universe-levels
 
 open import structured-types.h-spaces
-open import structured-types.morphisms-h-spaces
-open import structured-types.pointed-maps
 open import structured-types.pointed-types
 ```
 

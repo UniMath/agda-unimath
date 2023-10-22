@@ -3,7 +3,7 @@
 :root {
   --sidebar-width: 250px;
   --page-padding: 5px;
-  --content-max-width: 85%;
+  --content-max-width: 75%;
   --menu-bar-height: 40px;
   --mono-font: Menlo, Source Code Pro, Consolas, Monaco, Lucida Console,
     Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
@@ -12,11 +12,11 @@
   --pagetoc-fontsize: 0.85em;
 }
 
-/* @media only screen and (max-width:1439px) {
+@media only screen and (max-width: 1080px) {
   :root {
-    --content-max-width: 78%;
+    --content-max-width: 90%;
   }
-} */
+}
 
 /* Themes */
 

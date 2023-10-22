@@ -35,10 +35,10 @@ also follows for identity systems.
 
 ```agda
 dependent-universal-property-identity-system :
-  {l1 l2 : Level} (l3 : Level) {A : UU l1} {B : A → UU l2} {a : A} (b : B a) →
-  UU (l1 ⊔ l2 ⊔ lsuc l3)
-dependent-universal-property-identity-system l3 {A} {B} b =
-  (P : (x : A) (y : B x) → UU l3) → is-equiv (ev-refl-identity-system b {P})
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A} (b : B a) → UUω
+dependent-universal-property-identity-system {A = A} {B} b =
+  {l3 : Level} (P : (x : A) (y : B x) → UU l3) →
+  is-equiv (ev-refl-identity-system b {P})
 ```
 
 ## Properties
@@ -52,7 +52,7 @@ module _
 
   dependent-universal-property-identity-system-is-torsorial :
     is-torsorial B →
-    {l3 : Level} → dependent-universal-property-identity-system l3 {A} {B} b
+    dependent-universal-property-identity-system {B = B} b
   dependent-universal-property-identity-system-is-torsorial
     H P =
     is-equiv-left-factor
@@ -64,8 +64,17 @@ module _
         ( λ u → P (pr1 u) (pr2 u)))
       ( is-equiv-ev-pair)
 
+  equiv-dependent-universal-property-identity-system-is-torsorial :
+    is-torsorial B →
+    {l : Level} {C : (x : A) → B x → UU l} →
+    ((x : A) (y : B x) → C x y) ≃ C a b
+  pr1 (equiv-dependent-universal-property-identity-system-is-torsorial H) =
+    ev-refl-identity-system b
+  pr2 (equiv-dependent-universal-property-identity-system-is-torsorial H) =
+    dependent-universal-property-identity-system-is-torsorial H _
+
   is-torsorial-dependent-universal-property-identity-system :
-    ({l3 : Level} → dependent-universal-property-identity-system l3 {A} {B} b) →
+    dependent-universal-property-identity-system {B = B} b →
     is-torsorial B
   pr1 (is-torsorial-dependent-universal-property-identity-system H) = (a , b)
   pr2 (is-torsorial-dependent-universal-property-identity-system H) u =
@@ -84,15 +93,15 @@ module _
   where
 
   dependent-universal-property-identity-system-is-identity-system :
-    ({l : Level} → is-identity-system l {A} B a b) →
-    ({l : Level} → dependent-universal-property-identity-system l {A} {B} b)
+    is-identity-system B a b →
+    dependent-universal-property-identity-system {B = B} b
   dependent-universal-property-identity-system-is-identity-system H =
     dependent-universal-property-identity-system-is-torsorial b
       ( is-torsorial-is-identity-system a b H)
 
   is-identity-system-dependent-universal-property-identity-system :
-    ({l : Level} → dependent-universal-property-identity-system l {A} {B} b) →
-    ({l : Level} → is-identity-system l {A} B a b)
+    dependent-universal-property-identity-system {B = B} b →
+    is-identity-system B a b
   is-identity-system-dependent-universal-property-identity-system H P =
     section-is-equiv (H P)
 ```

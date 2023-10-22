@@ -47,7 +47,7 @@ A -----> X
 
 ## Properties
 
-### The universal property is a property
+### The universal property of pullbacks at a universe level is a property
 
 ```agda
 module _
@@ -60,19 +60,6 @@ module _
       is-prop (universal-property-pullback l5 f g c)
     is-prop-universal-property-pullback =
       is-prop-Π (λ C' → is-property-is-equiv (cone-map f g c))
-
-  map-universal-property-pullback :
-    ({l : Level} → universal-property-pullback l f g c) →
-    {C' : UU l5} (c' : cone f g C') → C' → C
-  map-universal-property-pullback up-c {C'} c' =
-    map-inv-is-equiv (up-c C') c'
-
-  eq-map-universal-property-pullback :
-    (up-c : {l : Level} → universal-property-pullback l f g c) →
-    {C' : UU l5} (c' : cone f g C') →
-    cone-map f g c (map-universal-property-pullback up-c c') ＝ c'
-  eq-map-universal-property-pullback up-c {C'} c' =
-    is-section-map-inv-is-equiv (up-c C') c'
 ```
 
 ### The homotopy of cones obtained from the universal property of pullbacks
@@ -93,7 +80,7 @@ module _
     htpy-eq-cone f g
       ( cone-map f g c (map-universal-property-pullback f g c up c'))
       ( c')
-      ( eq-map-universal-property-pullback f g c up c')
+      ( compute-map-universal-property-pullback f g c up c')
 ```
 
 ### Uniquely uniqueness of pullbacks
@@ -112,7 +99,7 @@ module _
       is-contr
         ( Σ (C' ≃ C) (λ e → htpy-cone f g (cone-map f g c (map-equiv e)) c'))
     uniquely-unique-pullback c' c up-c' up-c =
-      is-contr-total-Eq-subtype
+      is-torsorial-Eq-subtype
         ( uniqueness-universal-property-pullback f g c up-c C' c')
         ( is-property-is-equiv)
         ( map-universal-property-pullback f g c up-c c')
@@ -122,3 +109,9 @@ module _
           ( htpy-cone-map-universal-property-pullback f g c up-c c')
           up-c up-c')
 ```
+
+## Table of files about pullbacks
+
+The following table lists files that are about pullbacks as a general concept.
+
+{{#include tables/pullbacks.md}}

@@ -8,7 +8,6 @@ module foundation-core where
 open import foundation-core.1-types public
 open import foundation-core.cartesian-product-types public
 open import foundation-core.coherently-invertible-maps public
-open import foundation-core.commuting-cubes-of-maps public
 open import foundation-core.commuting-squares-of-maps public
 open import foundation-core.commuting-triangles-of-maps public
 open import foundation-core.constant-maps public
@@ -46,6 +45,7 @@ open import foundation-core.sets public
 open import foundation-core.singleton-induction public
 open import foundation-core.small-types public
 open import foundation-core.subtypes public
+open import foundation-core.torsorial-type-families public
 open import foundation-core.transport-along-identifications public
 open import foundation-core.truncated-maps public
 open import foundation-core.truncated-types public

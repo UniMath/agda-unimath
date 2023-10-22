@@ -10,9 +10,7 @@ module orthogonal-factorization-systems.modal-operators where
 open import foundation.dependent-pair-types
 open import foundation.equivalences
 open import foundation.function-types
-open import foundation.locally-small-types
 open import foundation.propositions
-open import foundation.sigma-closed-subuniverses
 open import foundation.small-types
 open import foundation.subuniverses
 open import foundation.universe-levels

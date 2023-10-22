@@ -21,6 +21,7 @@ open import foundation-core.equivalences
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 ```
 
 </details>
@@ -100,19 +101,17 @@ module _
     equiv-functional-correspondence C C
   id-equiv-functional-correspondence x y = id-equiv
 
-  is-contr-total-equiv-functional-correspondence :
-    is-contr
-      ( Σ ( functional-correspondence l3 A B)
-          ( equiv-functional-correspondence C))
-  is-contr-total-equiv-functional-correspondence =
-    is-contr-total-Eq-subtype
-      ( is-contr-total-Eq-Π
+  is-torsorial-equiv-functional-correspondence :
+    is-torsorial (equiv-functional-correspondence C)
+  is-torsorial-equiv-functional-correspondence =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-Eq-Π
         ( λ x D →
           (y : B x) →
           correspondence-functional-correspondence C x y ≃
           D y)
         ( λ x →
-          is-contr-total-equiv-fam
+          is-torsorial-equiv-fam
             ( correspondence-functional-correspondence
               C x)))
       ( is-prop-is-functional-correspondence)
@@ -131,7 +130,7 @@ module _
     is-equiv (equiv-eq-functional-correspondence D)
   is-equiv-equiv-eq-functional-correspondence =
     fundamental-theorem-id
-      is-contr-total-equiv-functional-correspondence
+      is-torsorial-equiv-functional-correspondence
       equiv-eq-functional-correspondence
 
   extensionality-functional-correspondence :
@@ -160,7 +159,7 @@ module _
     ((x : A) → B x) → functional-correspondence l2 A B
   pr1 (functional-correspondence-function f) x y = f x ＝ y
   pr2 (functional-correspondence-function f) x =
-    is-contr-total-path (f x)
+    is-torsorial-path (f x)
 
   function-functional-correspondence :
     {l3 : Level} → functional-correspondence l3 A B → ((x : A) → B x)

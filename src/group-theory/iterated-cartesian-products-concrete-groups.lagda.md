@@ -31,6 +31,7 @@ open import foundation.universe-levels
 open import group-theory.cartesian-products-concrete-groups
 open import group-theory.concrete-groups
 open import group-theory.groups
+open import group-theory.trivial-concrete-groups
 
 open import higher-group-theory.higher-groups
 
@@ -112,21 +113,23 @@ module _
     type-iterated-product-Concrete-Group ,
     is-set-type-iterated-product-Concrete-Group
 
-  is-1-type-classifying-type-iterated-product-Concrete-Group :
-    is-trunc one-𝕋 classifying-type-iterated-product-Concrete-Group
-  is-1-type-classifying-type-iterated-product-Concrete-Group X Y =
-    apply-universal-property-trunc-Prop
-      ( mere-eq-classifying-type-iterated-product-Concrete-Group
-          shape-iterated-product-Concrete-Group
-          X)
-      ( is-set-Prop (Id X Y))
-      ( λ { refl →
+  abstract
+    is-1-type-classifying-type-iterated-product-Concrete-Group :
+      is-trunc one-𝕋 classifying-type-iterated-product-Concrete-Group
+    is-1-type-classifying-type-iterated-product-Concrete-Group X Y =
+      apply-universal-property-trunc-Prop
+        ( mere-eq-classifying-type-iterated-product-Concrete-Group
+            shape-iterated-product-Concrete-Group
+            X)
+        ( is-set-Prop (Id X Y))
+        ( λ where
+          refl →
             apply-universal-property-trunc-Prop
               ( mere-eq-classifying-type-iterated-product-Concrete-Group
                   shape-iterated-product-Concrete-Group
                   Y)
               ( is-set-Prop (Id shape-iterated-product-Concrete-Group Y))
-              ( λ { refl → is-set-type-iterated-product-Concrete-Group})})
+              ( λ where refl → is-set-type-iterated-product-Concrete-Group))
 
   classifying-1-type-iterated-product-Concrete-Group : Truncated-Type l one-𝕋
   classifying-1-type-iterated-product-Concrete-Group =

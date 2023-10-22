@@ -32,3 +32,9 @@ is-acyclic A = type-Prop (is-acyclic-Prop A)
 is-prop-is-acyclic : {l : Level} (A : UU l) → is-prop (is-acyclic A)
 is-prop-is-acyclic A = is-prop-type-Prop (is-acyclic-Prop A)
 ```
+
+## See also
+
+### Table of files related to cyclic types, groups, and rings
+
+{{#include tables/cyclic-types.md}}

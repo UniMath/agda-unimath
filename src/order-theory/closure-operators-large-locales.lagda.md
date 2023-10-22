@@ -8,7 +8,6 @@ module order-theory.closure-operators-large-locales where
 
 ```agda
 open import foundation.action-on-identifications-functions
-open import foundation.binary-relations
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
@@ -64,7 +63,8 @@ module _
     where
 
     hom-large-poset-closure-operator-Large-Locale :
-      hom-Large-Poset id
+      hom-set-Large-Poset
+        ( λ l → l)
         ( large-poset-Large-Locale L)
         ( large-poset-Large-Locale L)
     hom-large-poset-closure-operator-Large-Locale =
@@ -191,10 +191,10 @@ module _
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
-  leq-closed-element-closure-operator-Large-Locale-Prop :
+  leq-prop-closed-element-closure-operator-Large-Locale :
     Large-Relation-Prop α β closed-element-closure-operator-Large-Locale
-  leq-closed-element-closure-operator-Large-Locale-Prop =
-    leq-Large-Subposet-Prop
+  leq-prop-closed-element-closure-operator-Large-Locale =
+    leq-prop-Large-Subposet
       ( large-poset-Large-Locale L)
       ( large-subposet-closure-operator-Large-Locale)
 
@@ -215,7 +215,7 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   refl-leq-closed-element-closure-operator-Large-Locale :
-    is-large-reflexive
+    is-reflexive-Large-Relation
       ( closed-element-closure-operator-Large-Locale)
       ( leq-closed-element-closure-operator-Large-Locale)
   refl-leq-closed-element-closure-operator-Large-Locale =
@@ -224,7 +224,7 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   antisymmetric-leq-closed-element-closure-operator-Large-Locale :
-    is-large-antisymmetric
+    is-antisymmetric-Large-Relation
       ( closed-element-closure-operator-Large-Locale)
       ( leq-closed-element-closure-operator-Large-Locale)
   antisymmetric-leq-closed-element-closure-operator-Large-Locale =
@@ -233,7 +233,7 @@ module _
       ( large-subposet-closure-operator-Large-Locale)
 
   transitive-leq-closed-element-closure-operator-Large-Locale :
-    is-large-transitive
+    is-transitive-Large-Relation
       ( closed-element-closure-operator-Large-Locale)
       ( leq-closed-element-closure-operator-Large-Locale)
   transitive-leq-closed-element-closure-operator-Large-Locale =

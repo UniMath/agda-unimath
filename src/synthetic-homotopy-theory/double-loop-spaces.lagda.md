@@ -41,6 +41,10 @@ module _
   refl-Ω² = refl
 ```
 
+### Vertical and horizontal concatination operations on double loop
+
+spaces.
+
 ```agda
 vertical-concat-Ω² :
   {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
@@ -49,7 +53,11 @@ vertical-concat-Ω² α β = vertical-concat-Id² α β
 horizontal-concat-Ω² :
   {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
 horizontal-concat-Ω² α β = horizontal-concat-Id² α β
+```
 
+### Unit laws horizontal, vertical concatination, and whiskering
+
+```agda
 left-unit-law-vertical-concat-Ω² :
   {l : Level} {A : UU l} {a : A} {α : type-Ω² a} →
   Id (vertical-concat-Ω² refl-Ω² α) α
@@ -82,52 +90,37 @@ right-unit-law-horizontal-concat-Ω² :
 right-unit-law-horizontal-concat-Ω² {α = α} =
   ( right-unit-law-horizontal-concat-Id² α) ∙ (naturality-right-unit-Ω² α)
 
+left-unit-law-identification-left-whisk-Ω² :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
+  identification-left-whisk (refl-Ω (pair A a)) α ＝ α
+left-unit-law-identification-left-whisk-Ω² α =
+  left-unit-law-identification-left-whisk α
+
+right-unit-law-identification-right-whisk-Ω² :
+  {l : Level} {A : UU l} {a : A} (α : type-Ω² a) →
+  identification-right-whisk α (refl-Ω (pair A a)) ＝ α
+right-unit-law-identification-right-whisk-Ω² α =
+  (right-unit-law-identification-right-whisk α) ∙ right-unit
+```
+
+### The interchange law for double loop spaces
+
+```agda
 interchange-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
   Id
     ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
     ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
 interchange-Ω² α β γ δ = interchange-Id² α β γ δ
-
-outer-eckmann-hilton-connection-Ω² :
-  {l : Level} {A : UU l} {a : A} (α δ : type-Ω² a) →
-  Id (horizontal-concat-Ω² α δ) (vertical-concat-Ω² α δ)
-outer-eckmann-hilton-connection-Ω² α δ =
-  ( z-concat-Id³ (inv right-unit) (inv left-unit)) ∙
-  ( ( interchange-Ω² α refl refl δ) ∙
-    ( y-concat-Id³
-      ( right-unit-law-horizontal-concat-Ω² {α = α})
-      ( left-unit-law-horizontal-concat-Ω² {α = δ})))
-
-inner-eckmann-hilton-connection-Ω² :
-  {l : Level} {A : UU l} {a : A} (β γ : type-Ω² a) →
-  Id ( horizontal-concat-Ω² β γ) (vertical-concat-Ω² γ β)
-inner-eckmann-hilton-connection-Ω² β γ =
-  ( z-concat-Id³ (inv left-unit) (inv right-unit)) ∙
-  ( ( interchange-Ω² refl β γ refl) ∙
-    ( y-concat-Id³
-      ( left-unit-law-horizontal-concat-Ω² {α = γ})
-      ( right-unit-law-horizontal-concat-Ω² {α = β})))
-
-eckmann-hilton-Ω² :
-  {l : Level} {A : UU l} {a : A} (α β : type-Ω² a) →
-  Id (α ∙ β) (β ∙ α)
-eckmann-hilton-Ω² α β =
-  ( inv (outer-eckmann-hilton-connection-Ω² α β)) ∙
-  ( inner-eckmann-hilton-connection-Ω² α β)
-
-interchange-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
-  ((α ∙ β) ∙ (γ ∙ δ)) ＝ ((α ∙ γ) ∙ (β ∙ δ))
-interchange-concat-Ω² =
-  interchange-law-commutative-and-associative _∙_ eckmann-hilton-Ω² assoc
 ```
+
+## Properties
 
 ### The loop space of a pointed type is equivalent to a double loop space
 
 ```agda
 module _
-  {l : Level} {A : Pointed-Type l} {x : type-Pointed-Type A}
+  {l : Level} (A : Pointed-Type l) {x : type-Pointed-Type A}
   (p : point-Pointed-Type A ＝ x)
   where
 

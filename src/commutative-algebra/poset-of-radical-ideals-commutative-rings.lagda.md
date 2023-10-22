@@ -42,12 +42,12 @@ module _
   {l1 : Level} (A : Commutative-Ring l1)
   where
 
-  leq-radical-ideal-Commutative-Ring-Prop :
+  leq-prop-radical-ideal-Commutative-Ring :
     {l2 l3 : Level} →
     radical-ideal-Commutative-Ring l2 A →
     radical-ideal-Commutative-Ring l3 A → Prop (l1 ⊔ l2 ⊔ l3)
-  leq-radical-ideal-Commutative-Ring-Prop I J =
-    leq-ideal-Commutative-Ring-Prop A
+  leq-prop-radical-ideal-Commutative-Ring I J =
+    leq-prop-ideal-Commutative-Ring A
       ( ideal-radical-ideal-Commutative-Ring A I)
       ( ideal-radical-ideal-Commutative-Ring A J)
 
@@ -97,7 +97,7 @@ module _
     leq-radical-ideal-Commutative-Ring J I → I ＝ J
   antisymmetric-leq-radical-ideal-Commutative-Ring I J H K =
     eq-type-subtype
-      ( is-radical-ideal-commutative-ring-Prop A)
+      ( is-radical-ideal-prop-Commutative-Ring A)
       ( antisymmetric-leq-ideal-Commutative-Ring A
         ( ideal-radical-ideal-Commutative-Ring A I)
         ( ideal-radical-ideal-Commutative-Ring A J)
@@ -116,8 +116,8 @@ module _
     Large-Preorder (λ l1 → l ⊔ lsuc l1) (λ l1 l2 → l ⊔ l1 ⊔ l2)
   type-Large-Preorder radical-ideal-Commutative-Ring-Large-Preorder l1 =
     radical-ideal-Commutative-Ring l1 A
-  leq-Large-Preorder-Prop radical-ideal-Commutative-Ring-Large-Preorder =
-    leq-radical-ideal-Commutative-Ring-Prop A
+  leq-prop-Large-Preorder radical-ideal-Commutative-Ring-Large-Preorder =
+    leq-prop-radical-ideal-Commutative-Ring A
   refl-leq-Large-Preorder radical-ideal-Commutative-Ring-Large-Preorder =
     refl-leq-radical-ideal-Commutative-Ring A
   transitive-leq-Large-Preorder radical-ideal-Commutative-Ring-Large-Preorder =
@@ -180,7 +180,8 @@ module _
   preserves-order-ideal-radical-ideal-Commutative-Ring I J H = H
 
   ideal-radical-ideal-hom-large-poset-Commutative-Ring :
-    hom-Large-Poset id
+    hom-set-Large-Poset
+      ( λ l → l)
       ( radical-ideal-Commutative-Ring-Large-Poset A)
       ( ideal-Commutative-Ring-Large-Poset A)
   map-hom-Large-Preorder

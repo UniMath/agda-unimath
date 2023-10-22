@@ -12,11 +12,17 @@ module foundation.symmetric-cores-binary-relations where
 open import foundation.binary-relations
 open import foundation.function-extensionality
 open import foundation.function-types
-open import foundation.homotopies
+open import foundation.functoriality-dependent-function-types
+open import foundation.functoriality-function-types
+open import foundation.morphisms-binary-relations
 open import foundation.symmetric-binary-relations
 open import foundation.transport-along-identifications
+open import foundation.type-arithmetic-dependent-function-types
 open import foundation.universe-levels
 open import foundation.unordered-pairs
+
+open import foundation-core.equivalences
+open import foundation-core.homotopies
 
 open import univalent-combinatorics.standard-finite-types
 ```
@@ -125,4 +131,30 @@ module _
             eq-htpy
               ( λ i →
                 {!!})))
+
+  equiv-universal-property-symmetric-core-Relation :
+    hom-Symmetric-Relation S (symmetric-core-Relation R) ≃
+    hom-Relation (relation-Symmetric-Relation S) R
+  equiv-universal-property-symmetric-core-Relation =
+    ( equiv-Π-equiv-family
+      ( λ x →
+        equiv-Π-equiv-family
+          ( λ y →
+            equiv-postcomp
+              ( S (standard-unordered-pair x y))
+              ( equiv-tr
+                ( R _)
+                ( compute-other-element-standard-unordered-pair x y
+                  ( zero-Fin 1)))))) ∘e
+    ( equiv-dependent-universal-property-pointed-unordered-pairs
+      ( λ p i →
+        S p →
+        R (element-unordered-pair p i) (other-element-unordered-pair p i))) ∘e
+    ( equiv-Π-equiv-family (λ p → equiv-swap-Π))
+
+  universal-property-symmetric-core-Relation :
+    is-equiv map-universal-property-symmetric-core-Relation
+  universal-property-symmetric-core-Relation =
+    is-equiv-map-equiv
+      ( equiv-universal-property-symmetric-core-Relation)
 ```

@@ -34,7 +34,7 @@ open import synthetic-homotopy-theory.cocones-under-spans
 The suspension of `X` is the [pushout](synthetic-homotopy-theory.pushouts.md) of
 the span `unit <-- X --> unit`. A
 [cocone under such a span](synthetic-homotopy-theory.dependent-cocones-under-spans.md)
-is called a `suspension-cocone'. Explicitly, a suspension cocone with nadir `Y`
+is called a `suspension-cocone`. Explicitly, a suspension cocone with nadir `Y`
 consists of functions
 
 ```text
@@ -109,12 +109,9 @@ module _
 cocone-suspension-structure :
   {l1 l2 : Level} (X : UU l1) (Y : UU l2) →
   suspension-structure X Y → suspension-cocone X Y
-cocone-suspension-structure X Y (pair N (pair S merid)) =
-  pair
-    ( const unit Y N)
-    ( pair
-      ( const unit Y S)
-      ( merid))
+pr1 (cocone-suspension-structure X Y (N , S , merid)) = point N
+pr1 (pr2 (cocone-suspension-structure X Y (N , S , merid))) = point S
+pr2 (pr2 (cocone-suspension-structure X Y (N , S , merid))) = merid
 
 equiv-suspension-structure-suspension-cocone :
   {l1 l2 : Level} (X : UU l1) (Z : UU l2) →
@@ -221,7 +218,9 @@ module _
   where
 
   refl-htpy-suspension-structure : htpy-suspension-structure c c
-  refl-htpy-suspension-structure = refl , (refl , right-unit-htpy)
+  pr1 refl-htpy-suspension-structure = refl
+  pr1 (pr2 refl-htpy-suspension-structure) = refl
+  pr2 (pr2 refl-htpy-suspension-structure) = right-unit-htpy
 
   is-refl-refl-htpy-suspension-structure :
     refl-htpy-suspension-structure ＝ htpy-eq-suspension-structure refl
@@ -238,9 +237,9 @@ module _
       ( htpy-suspension-structure c c') →
       UU l) →
     ( P c refl-htpy-suspension-structure) →
-    ( ( c' : suspension-structure X Z)
-      ( H : htpy-suspension-structure c c') →
-      P c' H)
+    ( c' : suspension-structure X Z)
+    ( H : htpy-suspension-structure c c') →
+    P c' H
   ind-htpy-suspension-structure P =
     pr1
       ( is-identity-system-is-torsorial
@@ -250,7 +249,7 @@ module _
           ( Σ (suspension-structure X Z) (λ c' → c ＝ c'))
           ( inv-equiv
             ( equiv-tot (extensionality-suspension-structure c)))
-          ( is-contr-total-path c))
+          ( is-torsorial-path c))
         ( P))
 ```
 

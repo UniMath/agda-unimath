@@ -23,6 +23,7 @@ open import foundation.whiskering-homotopies
 
 open import synthetic-homotopy-theory.descent-circle
 open import synthetic-homotopy-theory.free-loops
+open import synthetic-homotopy-theory.morphisms-descent-data-circle
 open import synthetic-homotopy-theory.sections-descent-circle
 open import synthetic-homotopy-theory.universal-property-circle
 ```
@@ -81,9 +82,9 @@ module _
   where
 
   eq-descent-data-circle-function-type :
-    Eq-descent-data-circle
+    equiv-descent-data-circle
       ( descent-data-circle-function-type l A B)
-      ( ev-descent-data-circle
+      ( descent-data-family-circle
         ( l)
         ( family-descent-data-circle-function-type l A B))
   pr1 eq-descent-data-circle-function-type =
@@ -111,9 +112,9 @@ module _
       ( ( tr-function-type
           ( family-family-with-descent-data-circle A)
           ( family-family-with-descent-data-circle B) (loop-free-loop l))
-        ( map-Eq-descent-data-circle
+        ( map-equiv-descent-data-circle
           ( descent-data-circle-function-type l A B)
-          ( ev-descent-data-circle
+          ( descent-data-family-circle
             ( l)
             ( family-descent-data-circle-function-type l A B))
           ( eq-descent-data-circle-function-type)
@@ -157,13 +158,13 @@ module _
         ( equiv-inv-htpy _ _) ∘e
         ( equiv-funext))
 
-  equiv-ev-descent-data-circle-function-type-hom :
+  equiv-descent-data-family-circle-function-type-hom :
     dependent-universal-property-circle (l2 ⊔ l3) l →
     ( (x : S) → family-descent-data-circle-function-type l A B x) ≃
     hom-descent-data-circle
       ( descent-data-family-with-descent-data-circle A)
       ( descent-data-family-with-descent-data-circle B)
-  equiv-ev-descent-data-circle-function-type-hom dup-circle =
+  equiv-descent-data-family-circle-function-type-hom dup-circle =
     equiv-fixpoint-descent-data-circle-function-type-hom ∘e
     ( equiv-ev-fixpoint-descent-data-circle
       ( l)

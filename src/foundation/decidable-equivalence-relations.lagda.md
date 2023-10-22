@@ -45,6 +45,7 @@ open import foundation-core.homotopies
 open import foundation-core.identity-types
 open import foundation-core.propositions
 open import foundation-core.subtypes
+open import foundation-core.torsorial-type-families
 open import foundation-core.transport-along-identifications
 ```
 
@@ -298,17 +299,15 @@ module _
                 ( λ K → transitive-Decidable-Equivalence-Relation R a x y K
                   ( symmetric-Decidable-Equivalence-Relation R x a H))))
 
-    is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation :
-      is-contr
-        ( Σ ( equivalence-class-Decidable-Equivalence-Relation R)
-            ( λ P →
-              is-in-subtype-equivalence-class-Decidable-Equivalence-Relation
-                R P a))
+    is-torsorial-subtype-equivalence-class-Decidable-Equivalence-Relation :
+      is-torsorial
+        ( λ P →
+          is-in-subtype-equivalence-class-Decidable-Equivalence-Relation R P a)
     pr1
-      is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation =
+      is-torsorial-subtype-equivalence-class-Decidable-Equivalence-Relation =
       center-total-subtype-equivalence-class-Decidable-Equivalence-Relation
     pr2
-      is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation =
+      is-torsorial-subtype-equivalence-class-Decidable-Equivalence-Relation =
       contraction-total-subtype-equivalence-class-Decidable-Equivalence-Relation
 
   related-eq-quotient-Decidable-Equivalence-Relation :
@@ -325,7 +324,7 @@ module _
       is-equiv (related-eq-quotient-Decidable-Equivalence-Relation q)
     is-equiv-related-eq-quotient-Decidable-Equivalence-Relation =
       fundamental-theorem-id
-        ( is-contr-total-subtype-equivalence-class-Decidable-Equivalence-Relation)
+        ( is-torsorial-subtype-equivalence-class-Decidable-Equivalence-Relation)
         ( related-eq-quotient-Decidable-Equivalence-Relation)
 
   abstract

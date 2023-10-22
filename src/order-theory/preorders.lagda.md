@@ -14,6 +14,7 @@ open import foundation.cartesian-product-types
 open import foundation.dependent-pair-types
 open import foundation.function-types
 open import foundation.identity-types
+open import foundation.negated-equality
 open import foundation.negation
 open import foundation.propositions
 open import foundation.sets
@@ -65,7 +66,7 @@ module _
 
   le-Preorder-Prop : Relation-Prop (l1 ⊔ l2) type-Preorder
   le-Preorder-Prop x y =
-    prod-Prop (¬ (x ＝ y) , is-prop-neg) (leq-Preorder-Prop x y)
+    prod-Prop (x ≠ y , is-prop-neg) (leq-Preorder-Prop x y)
 
   le-Preorder : Relation (l1 ⊔ l2) type-Preorder
   le-Preorder x y = type-Prop (le-Preorder-Prop x y)
@@ -150,15 +151,14 @@ module _
 
 module _
   {l1 l2 : Level} (C : Precategory l1 l2)
-  ( is-prop-hom-C :
-    (x y : obj-Precategory C) → is-prop (type-hom-Precategory C x y))
+  ( is-prop-hom-C : (x y : obj-Precategory C) → is-prop (hom-Precategory C x y))
   where
 
   preorder-is-prop-hom-Precategory : Preorder l1 l2
   pr1 preorder-is-prop-hom-Precategory =
     obj-Precategory C
   pr1 (pr1 (pr2 preorder-is-prop-hom-Precategory) x y) =
-    type-Set (hom-Precategory C x y)
+    hom-Precategory C x y
   pr2 (pr1 (pr2 preorder-is-prop-hom-Precategory) x y) =
     is-prop-hom-C x y
   pr1 (pr2 (pr2 preorder-is-prop-hom-Precategory)) x =

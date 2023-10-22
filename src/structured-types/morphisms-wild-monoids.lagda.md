@@ -7,23 +7,12 @@ module structured-types.morphisms-wild-monoids where
 <details><summary>Imports</summary>
 
 ```agda
-open import foundation.action-on-identifications-functions
-open import foundation.contractible-types
 open import foundation.dependent-pair-types
-open import foundation.equivalences
-open import foundation.fundamental-theorem-of-identity-types
-open import foundation.homotopies
 open import foundation.identity-types
-open import foundation.propositions
-open import foundation.sets
-open import foundation.subtype-identity-principle
-open import foundation.subtypes
 open import foundation.universe-levels
 
 open import group-theory.homomorphisms-semigroups
-open import group-theory.monoids
 
-open import structured-types.h-spaces
 open import structured-types.morphisms-h-spaces
 open import structured-types.pointed-maps
 open import structured-types.wild-monoids
@@ -48,28 +37,28 @@ module _
   {l1 l2 : Level} (M : Wild-Monoid l1) (N : Wild-Monoid l2)
   where
 
-  type-hom-Wild-Monoid : UU (l1 ⊔ l2)
-  type-hom-Wild-Monoid =
-    type-hom-H-Space
+  hom-Wild-Monoid : UU (l1 ⊔ l2)
+  hom-Wild-Monoid =
+    hom-H-Space
       ( h-space-Wild-Monoid M)
       ( h-space-Wild-Monoid N)
 
   pointed-map-hom-Wild-Monoid :
-    type-hom-Wild-Monoid →
+    hom-Wild-Monoid →
     pointed-type-Wild-Monoid M →∗ pointed-type-Wild-Monoid N
   pointed-map-hom-Wild-Monoid f = pr1 f
 
   map-hom-Wild-Monoid :
-    type-hom-Wild-Monoid → type-Wild-Monoid M → type-Wild-Monoid N
+    hom-Wild-Monoid → type-Wild-Monoid M → type-Wild-Monoid N
   map-hom-Wild-Monoid f = pr1 (pr1 f)
 
   preserves-unit-map-hom-Wild-Monoid :
-    (f : type-hom-Wild-Monoid) →
+    (f : hom-Wild-Monoid) →
     (map-hom-Wild-Monoid f (unit-Wild-Monoid M)) ＝ (unit-Wild-Monoid N)
   preserves-unit-map-hom-Wild-Monoid f = pr2 (pr1 f)
 
   preserves-unital-mul-map-hom-Wild-Monoid :
-    (f : type-hom-Wild-Monoid) →
+    (f : hom-Wild-Monoid) →
     preserves-unital-mul
       ( h-space-Wild-Monoid M)
       ( h-space-Wild-Monoid N)
@@ -77,7 +66,7 @@ module _
   preserves-unital-mul-map-hom-Wild-Monoid f = pr2 f
 
   preserves-mul-map-hom-Wild-Monoid :
-    (f : type-hom-Wild-Monoid) →
+    (f : hom-Wild-Monoid) →
     preserves-mul
       ( mul-Wild-Monoid M)
       ( mul-Wild-Monoid N)
@@ -85,7 +74,7 @@ module _
   preserves-mul-map-hom-Wild-Monoid f = pr1 (pr2 f)
 
   preserves-left-unit-law-mul-map-hom-Wild-Monoid :
-    ( f : type-hom-Wild-Monoid) →
+    ( f : hom-Wild-Monoid) →
     preserves-left-unit-law-mul
       ( mul-Wild-Monoid M)
       ( left-unit-law-mul-Wild-Monoid M)
@@ -98,7 +87,7 @@ module _
     pr1 (pr2 (pr2 f))
 
   preserves-right-unit-law-mul-map-hom-Wild-Monoid :
-    (f : type-hom-Wild-Monoid) →
+    (f : hom-Wild-Monoid) →
     preserves-right-unit-law-mul
       ( mul-Wild-Monoid M)
       ( right-unit-law-mul-Wild-Monoid M)
@@ -111,7 +100,7 @@ module _
     pr1 (pr2 (pr2 (pr2 f)))
 
   preserves-coh-unit-laws-map-hom-Wild-Monoid :
-    (f : type-hom-Wild-Monoid) →
+    (f : hom-Wild-Monoid) →
     preserves-coh-unit-laws-mul
       ( h-space-Wild-Monoid M)
       ( h-space-Wild-Monoid N)
