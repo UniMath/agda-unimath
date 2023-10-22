@@ -15,6 +15,7 @@ open import foundation.binary-homotopies
 open import foundation.commuting-triangles-of-maps
 open import foundation.constant-type-families
 open import foundation.contractible-types
+open import foundation.dependent-homotopies
 open import foundation.dependent-identifications
 open import foundation.dependent-pair-types
 open import foundation.equality-dependent-function-types
@@ -37,6 +38,21 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 </details>
 
+## Idea
+
+Given a [sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)
+`(A, a)`, a
+[cocone](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md) `c`
+with vertex `X` under it, and a type family `P : X → 𝓤`, we may construct
+_dependent_ cocones on `P` over `c`.
+
+A **dependent cocone under a
+[sequential diagram](synthetic-homotopy-theory.sequential-diagrams.md)** on `P`
+over `c ≐ (X, i, H)` consists of a [sequence](foundation.dependent-sequences.md)
+of dependent maps `i'ₙ : (x : Aₙ) → P (iₙ x)` and a sequence of
+[dependent homotopies](foundation.dependent-homotopies.md)
+`H'ₙ : i'ₙ ~ i'ₙ₊₁ ∘ aₙ` over `H`.
+
 ## Definitions
 
 ### Dependent cocones under sequential diagrams
@@ -52,11 +68,11 @@ module _
     Σ ( ( n : ℕ) (a : family-sequential-diagram A n) →
         P (map-cocone-sequential-diagram A c n a))
       ( λ i →
-        ( n : ℕ) → (a : family-sequential-diagram A n) →
-        dependent-identification P
-          ( coherence-triangle-cocone-sequential-diagram A c n a)
-          ( i n a)
-          ( i (succ-ℕ n) (map-sequential-diagram A n a)))
+        ( n : ℕ) →
+        dependent-homotopy (λ _ → P)
+          ( coherence-triangle-cocone-sequential-diagram A c n)
+          ( i n)
+          ( i (succ-ℕ n) ∘ map-sequential-diagram A n))
 ```
 
 ### Components of dependent cocones under sequential diagrams
@@ -85,6 +101,10 @@ module _
 ```
 
 ### Homotopies of dependent cocones under sequential diagrams
+
+A **homotopy** of dependent cocones `(P, i', H')` and `(P, j', L')` consists of
+a sequence of [homotopies](foundation.homotopies.md) `Kₙ : i'ₙ ~ j'ₙ` and a
+coherence datum.
 
 ```agda
 module _
@@ -142,6 +162,9 @@ module _
 
 ### Obtaining dependent cocones under sequential diagrams by postcomposing cocones under sequential diagrams with dependent maps
 
+Given a cocone `c` with vertex `X`, and a dependent map `h : (x : X) → P x`, we
+may extend `c` to a dependent cocone on `P` over `c`.
+
 ```agda
 module _
   { l1 l2 : Level} (A : sequential-diagram l1) {X : UU l2}
@@ -159,7 +182,10 @@ module _
 
 ## Properties
 
-### Characterization of identity types of cocones under sequential diagrams
+### Characterization of identity types of dependent cocones under sequential diagrams
+
+[Equality](foundation.identity-types.md) of dependent cocones is captured by a
+homotopy between them.
 
 ```agda
 module _
@@ -271,6 +297,11 @@ module _
 ```
 
 ### Dependent cocones under sequential diagram are special cases of dependent coforks
+
+Just like with the regular
+[cocones under sequential diagrams](synthetic-homotopy-theory.cocones-under-sequential-diagrams.md),
+we have an analogous correspondence between dependent cocones over a cocone `c`
+and dependent coforks over the cofork corresponding to `c`.
 
 ```agda
 module _
