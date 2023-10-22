@@ -30,7 +30,7 @@ open import synthetic-homotopy-theory.loop-spaces
 
 ## Idea
 
-The **`n`-th power** of a [loop](synthetic-homotopy-theory.loop-spaces.md) `ω`
+The **`n`-th power of a [loop](synthetic-homotopy-theory.loop-spaces.md)** `ω`
 in a type `A` is defined by [iterated](foundation.iterating-functions.md)
 [concatenation](foundation.identity-types.md) of `ω` with itself.
 
