@@ -193,7 +193,6 @@ module _
     hom-quotient-Group G H
       ( commutator-normal-subgroup-Group G)
       ( commutator-normal-subgroup-Group H)
-      ( f)
       {!!}
 
 abelianization-functor-Group :
