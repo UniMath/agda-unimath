@@ -335,7 +335,7 @@ syntax step-homotopy-reasoning p h q = p ~ h by q
 
 - We postulate that homotopies characterize identifications of (dependent)
   functions in the file
-  [`foundation-core.function-extensionality`](foundation-core.function-extensionality.md).
+  [`foundation.function-extensionality`](foundation-core.function-extensionality.md).
 - [Multivariable homotopies](foundation.multivariable-homotopies.md).
 - The [whiskering operations](foundation.whiskering-homotopies.md) on
   homotopies.
