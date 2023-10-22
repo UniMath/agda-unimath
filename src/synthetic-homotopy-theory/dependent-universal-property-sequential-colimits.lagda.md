@@ -147,14 +147,36 @@ module _
     ( P) =
     is-equiv-comp-htpy
       ( dependent-cocone-map-sequential-diagram A c P)
-      ( dependent-cocone-dependent-cofork-sequential-diagram A c P)
+      ( dependent-cocone-sequential-diagram-dependent-cofork A c P)
       ( dependent-cofork-map
         ( bottom-map-cofork-cocone-sequential-diagram A)
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
-      ( triangle-dependent-cocone-dependent-cofork-sequential-diagram A c P)
+      ( triangle-dependent-cocone-sequential-diagram-dependent-cofork A c P)
       ( dup-coequalizer P)
-      ( is-equiv-dependent-cocone-dependent-cofork-sequential-diagram A c P)
+      ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork A c P)
+
+  dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit :
+    ( {l : Level} →
+      dependent-universal-property-sequential-colimit l A c) →
+    ( {l : Level} →
+      dependent-universal-property-coequalizer l
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram A c))
+  dependent-universal-property-coequalizer-dependent-universal-property-sequential-colimit
+    ( dup-sequential-colimit)
+    ( P) =
+    is-equiv-right-factor-htpy
+      ( dependent-cocone-map-sequential-diagram A c P)
+      ( dependent-cocone-sequential-diagram-dependent-cofork A c P)
+      ( dependent-cofork-map
+        ( bottom-map-cofork-cocone-sequential-diagram A)
+        ( top-map-cofork-cocone-sequential-diagram A)
+        ( cofork-cocone-sequential-diagram A c))
+      ( triangle-dependent-cocone-sequential-diagram-dependent-cofork A c P)
+      ( is-equiv-dependent-cocone-sequential-diagram-dependent-cofork A c P)
+      ( dup-sequential-colimit P)
 ```
 
 ### The non-dependent and dependent universal properties of sequential colimits are logically equivalent
@@ -173,13 +195,13 @@ module _
     ( Y) =
     is-equiv-comp-htpy
       ( cocone-map-sequential-diagram A c)
-      ( map-compute-dependent-cocone-constant-family-sequential-diagram A c Y)
+      ( map-compute-dependent-cocone-sequential-diagram-constant-family A c Y)
       ( dependent-cocone-map-sequential-diagram A c (λ _ → Y))
-      ( triangle-compute-dependent-cocone-constant-family-sequential-diagram A c
+      ( triangle-compute-dependent-cocone-sequential-diagram-constant-family A c
         ( Y))
       ( dup-sequential-colimit (λ _ → Y))
       ( is-equiv-map-equiv
-        ( compute-dependent-cocone-constant-family-sequential-diagram A c Y))
+        ( compute-dependent-cocone-sequential-diagram-constant-family A c Y))
 
   dependent-universal-property-universal-property-sequential-colimit :
     ( {l : Level} → universal-property-sequential-colimit l A c) →
@@ -193,7 +215,7 @@ module _
         ( bottom-map-cofork-cocone-sequential-diagram A)
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c)
-        ( universal-property-coequalizer-universal-property-cocone-sequential-colimit
+        ( universal-property-coequalizer-universal-property-sequential-colimit
           ( A)
           ( c)
           ( up-sequential-diagram)))

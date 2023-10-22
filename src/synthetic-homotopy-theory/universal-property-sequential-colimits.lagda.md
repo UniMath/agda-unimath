@@ -168,7 +168,7 @@ module _
       ( up-cofork Y)
       ( is-equiv-cocone-sequential-diagram-cofork A)
 
-  universal-property-coequalizer-universal-property-cocone-sequential-colimit :
+  universal-property-coequalizer-universal-property-sequential-colimit :
     ( {l : Level} →
       universal-property-sequential-colimit l A c) →
     ( {l : Level} →
@@ -176,7 +176,7 @@ module _
         ( bottom-map-cofork-cocone-sequential-diagram A)
         ( top-map-cofork-cocone-sequential-diagram A)
         ( cofork-cocone-sequential-diagram A c))
-  universal-property-coequalizer-universal-property-cocone-sequential-colimit
+  universal-property-coequalizer-universal-property-sequential-colimit
     ( up-sequential-colimit)
     ( Y) =
     is-equiv-right-factor-htpy
