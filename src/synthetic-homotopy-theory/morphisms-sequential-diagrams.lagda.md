@@ -31,6 +31,25 @@ open import synthetic-homotopy-theory.sequential-diagrams
 
 </details>
 
+## Idea
+
+A **morphism between
+[sequential diagrams](synthetic-homotopy-theory.sequential-diagrams.md)**
+`f : (A, a) → (B, b)` is a [sequence](foundation.dependent-sequences.md) of maps
+`fₙ : Aₙ → Bₙ` satisfying the naturality condition that all squares of the form
+
+```text
+        aₙ
+    Aₙ ---> Aₙ₊₁
+    |       |
+ fₙ |       | fₙ₊₁
+    v       v
+    Bₙ ---> Bₙ₊₁
+        bₙ
+```
+
+[commute](foundation.commuting-squares-of-maps.md).
+
 ## Definitions
 
 ### Morphisms of sequential diagrams
@@ -81,6 +100,9 @@ module _
 
 ### The identity morphism of sequential diagrams
 
+All sequential diagrams have an **identity morphism** constructed from the
+identity function on the underlying types.
+
 ```agda
 module _
   { l1 : Level} (A : sequential-diagram l1)
@@ -92,6 +114,9 @@ module _
 ```
 
 ### Composition of morphisms of sequential diagrams
+
+**Composition of morphisms** is induced by composition of the underlying maps
+and by pasting diagrams.
 
 ```agda
 module _
@@ -119,6 +144,23 @@ module _
 ```
 
 ### Homotopies between morphisms of sequential diagrams
+
+A **homotopy** between morphisms `f, g : (A, a) → (B, b)` consists of a
+[sequence](foundation.dependent-sequences.md) of
+[homotopies](foundation.homotopies.md) `Hₙ : fₙ ~ gₙ` and a coherence datum
+filling the cylinders
+
+```text
+              aₙ
+      Aₙ ----------> Aₙ₊₁
+      / \            / \
+     / Hₙ\          /Hₙ₊₁\
+ fₙ |  => | gₙ fₙ₊₁ |  => | gₙ₊₁
+     \   /          \   /
+      \ /            \ /
+      Bₙ ----------> Bₙ₊₁.
+              bₙ
+```
 
 ```agda
 module _
@@ -171,6 +213,9 @@ module _
 ## Properties
 
 ### Characterization of equality of morphisms of sequential diagrams
+
+[Equality](foundation.identity-types.md) of morphisms of sequential diagrams is
+captured by a homotopy between them.
 
 ```agda
 module _
