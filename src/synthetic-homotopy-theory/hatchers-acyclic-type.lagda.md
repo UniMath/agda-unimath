@@ -18,6 +18,7 @@ open import foundation.functoriality-cartesian-product-types
 open import foundation.functoriality-dependent-pair-types
 open import foundation.fundamental-theorem-of-identity-types
 open import foundation.identity-types
+open import foundation.path-algebra
 open import foundation.structure-identity-principle
 open import foundation.torsorial-type-families
 open import foundation.type-arithmetic-cartesian-product-types
@@ -94,7 +95,7 @@ hom-algebra-Hatcher-Acyclic-Type
                   ( ap
                     ( power-nat-Ω 2 B)
                     ( ( preserves-mul-map-Ω f a1 a2) ∙
-                      ( ap-binary _∙_ u v))))
+                      ( horizontal-concat-Id² u v))))
                 ( s2)))))
 ```
 
