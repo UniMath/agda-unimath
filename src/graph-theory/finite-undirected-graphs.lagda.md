@@ -1,4 +1,4 @@
-# Finite graphs
+# Finite undirected graphs
 
 ```agda
 module graph-theory.finite-undirected-graphs where
